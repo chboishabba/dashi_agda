@@ -1,5 +1,7 @@
 module MonsterOntologyContracts where
 
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
 open import MonsterOntos
 open import GodelLattice
 open import HeckeScan

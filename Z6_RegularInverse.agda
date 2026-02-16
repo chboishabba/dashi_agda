@@ -1,8 +1,9 @@
 module Z6_RegularInverse where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin using (Fin; zero; suc; toℕ)
-open import Data.Nat using (Nat)
+open import Data.Product.Base using (Σ; _,_)
 open import Data.Nat.Properties as NatP using ()
 open import Relation.Binary.PropositionalEquality as Eq using (cong)
 

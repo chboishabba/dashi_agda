@@ -3,7 +3,8 @@ module UFTC_Lattice where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality as Eq using (sym; trans; cong)
-open import Data.Nat.Properties as NatP using (≤-refl; ≤-trans; ≤-antisym)
+open import Data.Nat.Properties as NatP using (≤-refl; ≤-trans; ≤-antisym;
+  ⊔-idem; ⊔-comm; ⊔-assoc; ⊔-mono-≤; ⊔-monoˡ-≤; ⊔-monoʳ-≤)
 open import Data.Nat using (_≤_; _⊔_)
 
 ------------------------------------------------------------------------
@@ -36,11 +37,11 @@ _⊔s_ = _⊔_
 
 ⊔s-monoˡ : ∀ {a a' b} → a ⊑ a' → (a ⊔s b) ⊑ (a' ⊔s b)
 ⊔s-monoˡ {a} {a'} {b} a≤a' =
-  NatP.⊔-monoˡ b a≤a'
+  NatP.⊔-monoˡ-≤ b a≤a'
 
 ⊔s-monoʳ : ∀ {a b b'} → b ⊑ b' → (a ⊔s b) ⊑ (a ⊔s b')
 ⊔s-monoʳ {a} {b} {b'} b≤b' =
-  NatP.⊔-monoʳ a b≤b'
+  NatP.⊔-monoʳ-≤ a b≤b'
 
 ------------------------------------------------------------------------
 -- A minimal “code” model: normal trit + special codes with severity.
@@ -71,7 +72,7 @@ Monotone₂ f =
 
 C_XOR-monotone : Monotone₂ C_XOR
 C_XOR-monotone x x' y y' sx sy =
-  NatP.⊔-mono sx sy
+  NatP.⊔-mono-≤ sx sy
 
 -- Rotation monotonicity (trivial in this stub; replace with your real ROT):
 C_ROT-monotone :

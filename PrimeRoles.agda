@@ -1,6 +1,7 @@
 module PrimeRoles where
 
 open import Agda.Builtin.Nat      using (Nat)
+open import Data.Nat.Base         using (_<_ )
 open import Agda.Builtin.Bool     using (Bool; true; false)
 open import MonsterOntos
 

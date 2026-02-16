@@ -1,9 +1,11 @@
 module HGSA_Fixpoints where
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _<_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_<_ )
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Verification.Prelude using (⊥; ⊤; tt; Σ; _,_; _×_; ¬_)
 open import Relation.Binary.PropositionalEquality as Eq using (trans; cong)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
 ------------------------------------------------------------------------
 -- Abstract state machine for HGSA
@@ -47,6 +49,7 @@ postulate
   decideSafe : ∀ s → (Safe s ⊎ ¬ Safe s)
   decideAsc  : ∀ s → (Ascend s ⊎ ¬ Ascend s)
 
+{-# NON_TERMINATING #-}
 AES-theorem : ∀ s → AES s
 AES-theorem s with decideSafe s | decideAsc s
 ... | inj₁ safeNow | _          = now (inj₁ safeNow)
