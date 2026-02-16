@@ -1,12 +1,8 @@
 module CICADA71 where
 
-open import Agda.Builtin.Nat      using (Nat; _+_; _*_; suc)
+open import Agda.Builtin.Nat      using (Nat; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Nat.Base         using (NonZero; nonZero)
-open import Data.Nat.DivMod       using (_%_)
-
-nonZero71 : NonZero 71
-nonZero71 = nonZero 70
+open import Data.Nat.Base         using (_%_)
 
 ------------------------------------------------------------------------
 -- Bucket index in {0..70}

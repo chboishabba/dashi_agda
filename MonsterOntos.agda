@@ -4,6 +4,7 @@ open import Agda.Builtin.Nat      using (Nat; zero; suc)
 open import Agda.Builtin.Bool     using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Nullary.Decidable.Core using (Dec; yes; no)
 open import Data.Nat.Properties renaming (_≟_ to nat≟)
 
 ------------------------------------------------------------------------
@@ -45,15 +46,6 @@ toNat p41 = 41
 toNat p47 = 47
 toNat p59 = 59
 toNat p71 = 71
-
-------------------------------------------------------------------------
--- Decidable equality (hand-rolled; keeps you stdlib-light)
-
-data ⊥ : Set where
-
-data Dec (A : Set) : Set where
-  yes : A → Dec A
-  no  : (A → ⊥) → Dec A
 
 ------------------------------------------------------------------------
 -- toNat is injective because each prime maps to a unique Nat
