@@ -24,7 +24,6 @@ record CICADA71System : Set₁ where
 
     -- Prime roles mapping is fixed
     roles : SSP → Role
-    roles = roleOf
 
     -- Optional restoration layer
     restoration : Restoration

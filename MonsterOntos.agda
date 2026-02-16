@@ -3,6 +3,8 @@ module MonsterOntos where
 open import Agda.Builtin.Nat      using (Nat; zero; suc)
 open import Agda.Builtin.Bool     using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
+open import Data.Nat.Properties renaming (_≟_ to nat≟)
 
 ------------------------------------------------------------------------
 -- Ontos: the 15 supersingular primes used as the base carrier.
@@ -47,26 +49,36 @@ toNat p71 = 71
 ------------------------------------------------------------------------
 -- Decidable equality (hand-rolled; keeps you stdlib-light)
 
+data ⊥ : Set where
+
 data Dec (A : Set) : Set where
   yes : A → Dec A
   no  : (A → ⊥) → Dec A
 
-data ⊥ : Set where
+------------------------------------------------------------------------
+-- toNat is injective because each prime maps to a unique Nat
+
+toNat-injective : ∀ {p q} → toNat p ≡ toNat q → p ≡ q
+toNat-injective {p = p2}  {q = p2}  refl = refl
+toNat-injective {p = p3}  {q = p3}  refl = refl
+toNat-injective {p = p5}  {q = p5}  refl = refl
+toNat-injective {p = p7}  {q = p7}  refl = refl
+toNat-injective {p = p11} {q = p11} refl = refl
+toNat-injective {p = p13} {q = p13} refl = refl
+toNat-injective {p = p17} {q = p17} refl = refl
+toNat-injective {p = p19} {q = p19} refl = refl
+toNat-injective {p = p23} {q = p23} refl = refl
+toNat-injective {p = p29} {q = p29} refl = refl
+toNat-injective {p = p31} {q = p31} refl = refl
+toNat-injective {p = p41} {q = p41} refl = refl
+toNat-injective {p = p47} {q = p47} refl = refl
+toNat-injective {p = p59} {q = p59} refl = refl
+toNat-injective {p = p71} {q = p71} refl = refl
+
+------------------------------------------------------------------------
+-- Decide equality by comparing the embedded Nat values
 
 _≟_ : (p q : SSP) → Dec (p ≡ q)
-p2  ≟ p2  = yes refl
-p3  ≟ p3  = yes refl
-p5  ≟ p5  = yes refl
-p7  ≟ p7  = yes refl
-p11 ≟ p11 = yes refl
-p13 ≟ p13 = yes refl
-p17 ≟ p17 = yes refl
-p19 ≟ p19 = yes refl
-p23 ≟ p23 = yes refl
-p29 ≟ p29 = yes refl
-p31 ≟ p31 = yes refl
-p41 ≟ p41 = yes refl
-p47 ≟ p47 = yes refl
-p59 ≟ p59 = yes refl
-p71 ≟ p71 = yes refl
-_   ≟ _   = no (λ ())
+_≟_ p q with nat≟ (toNat p) (toNat q)
+... | yes eq   = yes (toNat-injective eq)
+... | no contra = no (λ eq → contra (cong toNat eq))
