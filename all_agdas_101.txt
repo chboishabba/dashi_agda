@@ -1520,6 +1520,101 @@ record Preorder (A : Set) : Set₁ where
 record LensMonotone {S A : Set} (P : Preorder A) (L : Lens S A) (K : S → S) : Set where
   open Preorder P
   field mono : ∀ x → Lens.observe L (K x) ⊑ Lens.observe L x
+module DASHI.String.StringCompatibility where
+
+open import DASHI.String.Unitary
+open import DASHI.String.LieAlgebra
+open import DASHI.String.Compatibility
+
+record StringCompatible : Set₁ where
+  field
+    admitsUnitary :
+      ∃ λ H → Unitary H
+
+    admitsLie :
+      CentralExtension
+
+    noForcedContraction :
+      ⊤
+module DASHI.String.Compatibility where
+
+open import Agda.Builtin.Equality
+open import Agda.Builtin.Nat
+open import Relation.Nullary
+
+open import DASHI.String.Unitary
+open import DASHI.String.HilbertToy
+
+postulate
+  Metric : Set → Set₁
+  d      : ∀ {S} → Metric S → S → S → Nat
+
+record Invertible {S : Set} (F : S → S) : Set where
+  field
+    inv : S → S
+    leftInv  : ∀ x → inv (F x) ≡ x
+    rightInv : ∀ x → F (inv x) ≡ x
+
+postulate
+  StrictContractive :
+    ∀ {S} →
+    Metric S →
+    (S → S) →
+    Set
+
+unitary-not-strictly-contractive :
+  ∀ {H}
+  (Urec : Unitary H)
+  (M : Metric (InnerProductSpace.V H)) →
+  ¬ StrictContractive M (Unitary.U Urec)
+unitary-not-strictly-contractive Urec M = λ sc → ?
+module DASHI.String.LieAlgebra where
+
+open import Agda.Builtin.Equality
+
+record LieAlgebra : Set₁ where
+  field
+    Carrier : Set
+    [_ , _] : Carrier → Carrier → Carrier
+
+    antisym :
+      ∀ x y →
+      [ x , y ] ≡ [ y , x ] → ⊥
+
+    jacobi :
+      ∀ x y z →
+      [ x , [ y , z ] ]
+      ≡
+      [ [ x , y ] , z ]
+module DASHI.String.Unitary where
+
+open import Agda.Builtin.Equality
+open import DASHI.String.HilbertToy
+
+record Unitary (H : InnerProductSpace) : Set where
+  open InnerProductSpace H
+
+  field
+    U  : V → V
+    U⁻¹ : V → V
+
+    leftInv  : ∀ x → U⁻¹ (U x) ≡ x
+    rightInv : ∀ x → U (U⁻¹ x) ≡ x
+
+    preservesIP :
+      ∀ x y → ⟨ U x , U y ⟩ ≡ ⟨ x , y ⟩
+module DASHI.String.HilbertToy where
+
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
+
+record InnerProductSpace : Set₁ where
+  field
+    V      : Set
+    _+_    : V → V → V
+    zero   : V
+    scalar : Nat → V → V
+    ⟨_,_⟩  : V → V → Nat
 module DASHI.Confluence where
 
 open import DASHI.Prelude
