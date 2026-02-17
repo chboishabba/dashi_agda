@@ -1,15 +1,15 @@
 module DASHI.Entropy where
 
 open import DASHI.Prelude
-open import Data.Nat using (Nat)
-open import Data.Nat.Properties using (z≤n)
-open import Data.Nat using (_≤_)
 
 record Entropy (S : Set) : Set₁ where
   field H : S → Nat
 
+zero≤ : ∀ n → zero ≤ n
+zero≤ _ = z≤n
+
 entropy-nonneg : ∀ {S} (E : Entropy S) (x : S) → 0 ≤ Entropy.H E x
-entropy-nonneg E x = z≤n
+entropy-nonneg E x = zero≤ (Entropy.H E x)
 
 record Involution (S : Set) : Set₁ where
   field ι : S → S

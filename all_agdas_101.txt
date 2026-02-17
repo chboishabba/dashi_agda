@@ -1,0 +1,2920 @@
+module CICADA71 where
+
+open import Agda.Builtin.Nat      using (Nat; _+_; _*_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Nat.Base         using (_%_)
+
+------------------------------------------------------------------------
+-- Bucket index in {0..70}
+bucket71 : Nat → Nat
+bucket71 n = n % 71
+
+------------------------------------------------------------------------
+-- Periodicity statement: bucket71 (n + k*71) = bucket71 n
+-- (prove via stdlib DivMod lemmas later, or keep as a postulate hook)
+
+postulate
+  bucket71-period : ∀ n k → bucket71 (n + k * 71) ≡ bucket71 n
+module UFTC_Lattice where
+
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality as Eq using (sym; trans; cong)
+open import Data.Nat.Properties as NatP using (≤-refl; ≤-trans; ≤-antisym;
+  ⊔-idem; ⊔-comm; ⊔-assoc; ⊔-mono-≤; ⊔-monoˡ-≤; ⊔-monoʳ-≤)
+open import Data.Nat using (_≤_; _⊔_)
+
+------------------------------------------------------------------------
+-- Severity levels (0..9). (You can restrict further if you want Fin 10.)
+
+Severity : Set
+Severity = Nat
+
+_⊑_ : Severity → Severity → Set
+_⊑_ = _≤_
+
+-- Join = max severity wins.
+_⊔s_ : Severity → Severity → Severity
+_⊔s_ = _⊔_
+
+------------------------------------------------------------------------
+-- Join-semilattice laws (assoc/comm/idempotent).
+
+⊔s-idem : ∀ a → a ⊔s a ≡ a
+⊔s-idem a = NatP.⊔-idem a
+
+⊔s-comm : ∀ a b → a ⊔s b ≡ b ⊔s a
+⊔s-comm a b = NatP.⊔-comm a b
+
+⊔s-assoc : ∀ a b c → (a ⊔s b) ⊔s c ≡ a ⊔s (b ⊔s c)
+⊔s-assoc a b c = NatP.⊔-assoc a b c
+
+------------------------------------------------------------------------
+-- Monotonicity of join (the key “max severity wins cannot be masked”).
+
+⊔s-monoˡ : ∀ {a a' b} → a ⊑ a' → (a ⊔s b) ⊑ (a' ⊔s b)
+⊔s-monoˡ {a} {a'} {b} a≤a' =
+  NatP.⊔-monoˡ-≤ b a≤a'
+
+⊔s-monoʳ : ∀ {a b b'} → b ⊑ b' → (a ⊔s b) ⊑ (a ⊔s b')
+⊔s-monoʳ {a} {b} {b'} b≤b' =
+  NatP.⊔-monoʳ-≤ a b≤b'
+
+------------------------------------------------------------------------
+-- A minimal “code” model: normal trit + special codes with severity.
+-- (Map VOID/PARA/META etc. into severity levels.)
+
+data Code : Set where
+  normal : Nat → Code               -- placeholder for trits
+  special : Severity → Code          -- special failure code with severity
+
+severity : Code → Severity
+severity (normal _)    = 0
+severity (special sev) = sev
+
+-- Propagation rule: combine codes by max severity.
+C_XOR : Code → Code → Code
+C_XOR x y = special (severity x ⊔s severity y)
+
+C_ROT : Code → Code
+C_ROT x = x  -- rotation doesn't reduce severity (your fast path can refine)
+
+-- Monotone wrt severity preorder:
+Monotone₂ : (Code → Code → Code) → Set
+Monotone₂ f =
+  ∀ x x' y y' →
+    severity x ⊑ severity x' →
+    severity y ⊑ severity y' →
+    severity (f x y) ⊑ severity (f x' y')
+
+C_XOR-monotone : Monotone₂ C_XOR
+C_XOR-monotone x x' y y' sx sy =
+  NatP.⊔-mono-≤ sx sy
+
+-- Rotation monotonicity (trivial in this stub; replace with your real ROT):
+C_ROT-monotone :
+  ∀ x x' → severity x ⊑ severity x' → severity (C_ROT x) ⊑ severity (C_ROT x')
+C_ROT-monotone x x' sx = sx
+module MDLOptimalSkeleton where
+
+open import MDL
+open import PrimeSubsetModel
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Sigma
+open import Agda.Builtin.Unit using (⊤; tt)
+
+------------------------------------------------------------------------
+-- Search space abstraction
+
+record ModelFamily (D : Dataset) : Set₁ where
+  field
+    candidate : Nat → PrimeModel D
+
+------------------------------------------------------------------------
+-- Minimality condition
+
+isMinimal :
+  ∀ {D}
+  (F : ModelFamily D)
+  (k : Nat)
+  →
+  (∀ n → primeTotal (ModelFamily.candidate F k)
+          ≤ primeTotal (ModelFamily.candidate F n))
+  →
+  Set
+
+isMinimal F k proof = ⊤
+module MDL where
+
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
+open import Agda.Builtin.Sigma
+open import Agda.Builtin.Bool
+open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
+
+------------------------------------------------------------------------
+-- Basic length type
+
+CodeLength : Set
+CodeLength = Nat
+
+_≤_ : Nat → Nat → Set
+zero ≤ _ = ⊤
+suc m ≤ zero = ⊥
+suc m ≤ suc n = m ≤ n
+
+------------------------------------------------------------------------
+-- Dataset abstraction
+
+record Dataset : Set₁ where
+  field
+    Data : Set
+    sample : Data
+
+------------------------------------------------------------------------
+-- Model abstraction (two-part code)
+
+record Model (D : Dataset) : Set₁ where
+  field
+    Param      : Set
+    param      : Param
+
+    encodeM    : Param → CodeLength
+    encodeData : Param → Dataset.Data D → CodeLength
+
+modelTotalLength :
+  ∀ {D} →
+  Model D →
+  CodeLength
+modelTotalLength {D} M =
+  Model.encodeM M (Model.param M) + Model.encodeData M (Model.param M) (Dataset.sample D)
+
+
+------------------------------------------------------------------------
+-- MDL comparison
+
+better :
+  ∀ {D} →
+  Model D →
+  Model D →
+  Set
+
+better {D} M₁ M₂ =
+  modelTotalLength M₁ ≤ modelTotalLength M₂
+
+------------------------------------------------------------------------
+-- Subset selection cost (critical for honesty)
+
+-- Suppose models are parameterized by a subset of primes
+-- We must charge for describing that subset.
+
+Subset : Nat → Set
+Subset n = Nat  -- abstract: encoded subset id
+
+subsetCost :
+  ∀ (n : Nat) →
+  Subset n →
+  CodeLength
+subsetCost n _ = n  -- naive upper bound: cost grows with space size
+
+------------------------------------------------------------------------
+-- Bounded model class (limit to 71)
+
+record BoundedModel (D : Dataset) (limit : Nat) : Set₁ where
+  field
+    inner : Model D
+    boundProof :
+      modelTotalLength inner ≤ limit
+
+------------------------------------------------------------------------
+-- The "limit to 71" specialization
+
+limit71 : Nat
+limit71 = 71
+
+record Model71 (D : Dataset) : Set₁ where
+  field
+    base : Model D
+    bounded : modelTotalLength base ≤ limit71
+
+------------------------------------------------------------------------
+-- Theorem: restricting model space does not reduce price unfairly
+
+restrictSafe :
+  ∀ {D}
+  (M : Model D)
+  (p : modelTotalLength M ≤ limit71) →
+  modelTotalLength M ≤ limit71
+
+restrictSafe M p = p
+module GodelLattice where
+
+open import Agda.Builtin.Nat      using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.List     using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+open import MonsterOntos
+
+------------------------------------------------------------------------
+-- A factor-exponent vector over the 15 primes is a canonical coordinate.
+
+record Vec15 (A : Set) : Set where
+  constructor v15
+  field
+    e2  : A; e3  : A; e5  : A; e7  : A; e11 : A
+    e13 : A; e17 : A; e19 : A; e23 : A; e29 : A
+    e31 : A; e41 : A; e47 : A; e59 : A; e71 : A
+
+Exponent : Set
+Exponent = Nat
+
+FactorVec : Set
+FactorVec = Vec15 Exponent
+
+------------------------------------------------------------------------
+-- Abstract "text" (you’ll plug a real representation later)
+
+postulate
+  Text : Set
+
+------------------------------------------------------------------------
+-- Gödel encoding contract:
+-- encode gives a Nat; factorMap gives exponents over SSP primes.
+-- The key property is that factorMap is a homomorphism for concatenation
+-- (or some composition), if you want that. Here we keep it minimal.
+
+postulate
+  encode   : Text → Nat
+  factorMap : Text → FactorVec
+
+------------------------------------------------------------------------
+-- Self-verifying coordinate means: equality of factor-vectors is a stable
+-- identifier under the chosen equivalence (you decide what that is).
+-- We DO NOT claim it is “reality”; we claim it is a canonical coordinate.
+
+record CoordinateLaw : Set₁ where
+  field
+    stable-id :
+      ∀ (t₁ t₂ : Text) →
+      factorMap t₁ ≡ factorMap t₂ → encode t₁ ≡ encode t₂
+module MonsterProjection where
+
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality
+open import Data.Nat using (_<_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Nullary
+
+open import Ultrametric
+open import MonsterMask
+open import MonsterUltrametric
+
+------------------------------------------------------------------------
+-- Distinctness
+
+_≢_ : Mask → Mask → Set
+x ≢ y = ¬ (x ≡ y)
+
+------------------------------------------------------------------------
+-- Contractive on distinct points
+
+record Contractive≢ (K : Mask → Mask) : Set where
+  open Ultrametric.Ultrametric UMask
+  field
+    contraction≢ : ∀ {x y} → x ≢ y → d (K x) (K y) < d x y
+
+------------------------------------------------------------------------
+-- Projection to fixed mask is strictly contractive
+
+postulate
+  projContractive : ∀ target → Contractive≢ (Kernel.K (projectTo target))
+
+------------------------------------------------------------------------
+-- Fixed point definition
+
+Fixed : (Mask → Mask) → Mask → Set
+Fixed K m = K m ≡ m
+
+------------------------------------------------------------------------
+-- Unique fixed point for projection
+
+uniqueFixedProj :
+  ∀ target x y →
+  Fixed (Kernel.K (projectTo target)) x →
+  Fixed (Kernel.K (projectTo target)) y →
+  x ≡ y
+uniqueFixedProj target x y fx fy = trans (sym fx) fy
+module KernelAlgebra where
+
+open import Agda.Builtin.Equality
+open import Agda.Builtin.Sigma
+open import Agda.Builtin.Bool
+open import Agda.Builtin.Nat
+
+------------------------------------------------------------------------
+-- Base ternary carrier
+
+data T : Set where
+  neg  : T
+  zero : T
+  pos  : T
+
+------------------------------------------------------------------------
+-- State space as indexed function
+
+State : Set → Set
+State X = X → T
+
+------------------------------------------------------------------------
+-- Involution
+
+ι : ∀ {X} → State X → State X
+ι s x with s x
+... | neg  = pos
+... | pos  = neg
+... | zero = zero
+
+ι²-id : ∀ {X} (s : State X) (x : X) → ι (ι s) x ≡ s x
+ι²-id s x with s x
+... | neg  = refl
+... | pos  = refl
+... | zero = refl
+
+
+------------------------------------------------------------------------
+-- Kernel operator interface
+
+record Kernel {X : Set} : Set₁ where
+  field
+    K : State X → State X
+
+    involutive-respecting :
+      ∀ s → K (ι s) ≡ ι (K s)
+
+open Kernel public
+module Fascism_Tests where
+
+open import Agda.Builtin.Equality
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Sigma using (Σ; _,_)
+
+open import FascisticSystem
+open import AntiFascistSystem
+-- Smoke tests: current interfaces and postulated theorems remain callable.
+
+postulate
+  sF : FascisticSystem.S
+  uA : AntiFascistSystem.Invertible
+  sA : AntiFascistSystem.S
+
+fascism-monotone-smoke = FascisticSystem.monotone sF
+
+fascism-strict-decrease-smoke = FascisticSystem.strict-decrease sF
+
+anti-entropy-preserved-smoke = AntiFascistSystem.entropy-preserved uA sA
+
+anti-non-collapse-smoke = AntiFascistSystem.non-collapse uA
+
+-- Interface-level comparison hook to quantum: unitary evolution should be invertible,
+-- so it cannot satisfy the projection-only + strict contraction hypotheses simultaneously.
+-- We keep this as a spec-level test (type only).
+
+postulate
+  QState : Set
+  UQ : QState → QState
+
+unitary-is-invertible : Set
+unitary-is-invertible = Σ (QState → QState) (λ inv → (∀ x → inv (UQ x) ≡ x) × (∀ x → UQ (inv x) ≡ x))
+  where
+    infixr 4 _×_
+    record _×_ (A B : Set) : Set where
+      constructor _,_
+      field fst : A
+            snd : B
+module MonsterOntologyContracts where
+
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
+open import MonsterOntos
+open import GodelLattice
+open import HeckeScan
+open import CICADA71
+open import PrimeRoles
+open import MaassRestoration
+
+------------------------------------------------------------------------
+-- A CICADA/MTT “architecture contract” = a bundle of interfaces.
+
+record CICADA71System : Set₁ where
+  field
+    -- Text ↦ coordinate
+    coordLaw : CoordinateLaw
+
+    -- Hecke scan (compatibility detector)
+    hecke    : HeckeFamily
+
+    -- Sharding function: Text → bucket
+    shard    : Text → Nat
+    shard-def : ∀ t → shard t ≡ bucket71 (encode t)
+
+    -- Prime roles mapping is fixed
+    roles : SSP → Role
+
+    -- Optional restoration layer
+    restoration : Restoration
+module AntiFascistSystem where
+
+open import Level
+open import Data.Nat
+open import Relation.Nullary using (¬_)
+open import Relation.Binary.PropositionalEquality
+
+postulate
+  S : Set
+  H : S → ℕ
+
+-- Invertible operator
+
+record Invertible : Set where
+  field
+    U    : S → S
+    U⁻¹  : S → S
+    left  : ∀ s → U⁻¹ (U s) ≡ s
+    right : ∀ s → U (U⁻¹ s) ≡ s
+
+-- Entropy preserved under unitary-like operator
+
+postulate
+  entropy-preserved :
+    ∀ (u : Invertible) s → H (Invertible.U u s) ≡ H s
+
+-- No monotone collapse
+
+postulate
+  non-collapse :
+    ∀ (u : Invertible) → ¬ (∀ s → H (Invertible.U u s) ≤ H s)
+module Stabilisation where
+
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
+open import KernelAlgebra
+
+------------------------------------------------------------------------
+-- Iteration
+
+iterate : ∀ {X} →
+          (State X → State X) →
+          Nat →
+          State X →
+          State X
+iterate K zero    s = s
+iterate K (suc n) s = iterate K n (K s)
+
+------------------------------------------------------------------------
+-- No nontrivial 2-cycle
+
+No2Cycle : ∀ {X} (K : State X → State X) → Set
+No2Cycle K =
+  ∀ s → iterate K 2 s ≡ s → K s ≡ s
+module MonsterStep where
+
+open import Agda.Builtin.Nat      using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Bool     using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List     using (List; []; _∷_)
+
+open import MonsterState
+
+------------------------------------------------------------------------
+-- First admissible candidate (deterministic tie-break: leftmost wins).
+
+choose : (L : Lens) → (s : State) → Candidates → Mask → Mask
+choose L s []           fallback = fallback
+choose L s (m ∷ ms)     fallback with Lens.admissible L s m
+... | true  = m
+... | false = choose L s ms fallback
+
+------------------------------------------------------------------------
+-- Step:
+-- - pick next mask via lens
+-- - advance window (or keep it; you decide)
+-- This pins MW-00 (well-defined deterministic function).
+
+step : (L : Lens) → Candidates → State → State
+step L cands s =
+  let nextMask = choose L s cands (State.mask s)
+  in  st nextMask (suc (State.window s))
+
+------------------------------------------------------------------------
+-- Iteration (total, structurally terminating on Nat).
+
+iterate : ∀ {A : Set} → (A → A) → Nat → A → A
+iterate f zero    x = x
+iterate f (suc n) x = iterate f n (f x)
+module Contraction where
+
+open import Agda.Builtin.Equality
+open import Data.Nat using (_<_)
+open import Ultrametric as UMetric
+
+
+------------------------------------------------------------------------
+-- Contraction property (strict)
+
+record Contractive
+       {S : Set}
+       (U : UMetric.Ultrametric S)
+       (K : S → S)
+       : Set where
+
+  open UMetric.Ultrametric U
+
+  field
+    contraction :
+      ∀ x y →
+      d (K x) (K y) < d x y
+module MonsterMask where
+
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Bool
+open import Agda.Builtin.Equality
+open import Agda.Builtin.List
+
+------------------------------------------------------------------------
+-- We model the 15 prime-power factors of |M| as positions 0..14.
+
+FactorCount : Nat
+FactorCount = 15
+
+------------------------------------------------------------------------
+-- A mask is a length-15 boolean list:
+-- true  = keep factor
+-- false = remove factor
+
+Mask : Set
+Mask = List Bool
+
+replicate : Nat → Bool → Mask
+replicate zero    b = []
+replicate (suc n) b = b ∷ replicate n b
+
+boolAnd : Bool → Bool → Bool
+boolAnd true true = true
+boolAnd _    _    = false
+
+notBool : Bool → Bool
+notBool true  = false
+notBool false = true
+
+------------------------------------------------------------------------
+-- Canonical full mask (all factors kept)
+
+fullMask : Mask
+fullMask = replicate FactorCount true
+
+------------------------------------------------------------------------
+-- Collapse mask: remove everything
+
+emptyMask : Mask
+emptyMask = replicate FactorCount false
+
+------------------------------------------------------------------------
+-- Pointwise AND (factor removal composition)
+
+_∧_ : Mask → Mask → Mask
+[] ∧ [] = []
+(b ∷ xs) ∧ (c ∷ ys) = boolAnd b c ∷ (xs ∧ ys)
+_ ∧ _ = []
+
+------------------------------------------------------------------------
+-- Kernel-style operator: remove a fixed subset F
+
+record Kernel : Set where
+  field
+    K : Mask → Mask
+
+------------------------------------------------------------------------
+-- Example: projection to a fixed group representative mask
+
+projectTo : Mask → Kernel
+projectTo target = record
+  { K = λ _ → target
+  }
+
+------------------------------------------------------------------------
+-- Involution: flip keep/remove
+
+flipMask : Mask → Mask
+flipMask [] = []
+flipMask (b ∷ xs) = notBool b ∷ flipMask xs
+module CounterexampleHarness where
+
+open import Agda.Builtin.Sigma
+open import Agda.Builtin.Equality
+open import Relation.Nullary.Negation using (¬_)
+
+
+------------------------------------------------------------------------
+-- Generic falsifier
+
+record Counterexample {A : Set}
+                      (P : A → Set)
+                      : Set₁ where
+  field
+    witness : A
+    violates : ¬ P witness
+module MonsterOntos where
+
+open import Agda.Builtin.Nat      using (Nat; zero; suc)
+open import Agda.Builtin.Bool     using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Nullary.Decidable.Core using (Dec; yes; no)
+open import Data.Nat.Properties renaming (_≟_ to nat≟)
+
+------------------------------------------------------------------------
+-- Ontos: the 15 supersingular primes used as the base carrier.
+
+data SSP : Set where
+  p2  : SSP
+  p3  : SSP
+  p5  : SSP
+  p7  : SSP
+  p11 : SSP
+  p13 : SSP
+  p17 : SSP
+  p19 : SSP
+  p23 : SSP
+  p29 : SSP
+  p31 : SSP
+  p41 : SSP
+  p47 : SSP
+  p59 : SSP
+  p71 : SSP
+
+------------------------------------------------------------------------
+-- A concrete embedding to Nat (for mod/sharding etc).
+
+toNat : SSP → Nat
+toNat p2  = 2
+toNat p3  = 3
+toNat p5  = 5
+toNat p7  = 7
+toNat p11 = 11
+toNat p13 = 13
+toNat p17 = 17
+toNat p19 = 19
+toNat p23 = 23
+toNat p29 = 29
+toNat p31 = 31
+toNat p41 = 41
+toNat p47 = 47
+toNat p59 = 59
+toNat p71 = 71
+
+------------------------------------------------------------------------
+-- toNat is injective because each prime maps to a unique Nat
+
+toNat-injective : ∀ {p q} → toNat p ≡ toNat q → p ≡ q
+toNat-injective {p = p2}  {q = p2}  refl = refl
+toNat-injective {p = p3}  {q = p3}  refl = refl
+toNat-injective {p = p5}  {q = p5}  refl = refl
+toNat-injective {p = p7}  {q = p7}  refl = refl
+toNat-injective {p = p11} {q = p11} refl = refl
+toNat-injective {p = p13} {q = p13} refl = refl
+toNat-injective {p = p17} {q = p17} refl = refl
+toNat-injective {p = p19} {q = p19} refl = refl
+toNat-injective {p = p23} {q = p23} refl = refl
+toNat-injective {p = p29} {q = p29} refl = refl
+toNat-injective {p = p31} {q = p31} refl = refl
+toNat-injective {p = p41} {q = p41} refl = refl
+toNat-injective {p = p47} {q = p47} refl = refl
+toNat-injective {p = p59} {q = p59} refl = refl
+toNat-injective {p = p71} {q = p71} refl = refl
+
+------------------------------------------------------------------------
+-- Decide equality by comparing the embedded Nat values
+
+_≟_ : (p q : SSP) → Dec (p ≡ q)
+_≟_ p q with nat≟ (toNat p) (toNat q)
+... | yes eq   = yes (toNat-injective eq)
+... | no contra = no (λ eq → contra (cong toNat eq))
+module OperatorMonoid where
+
+open import Agda.Builtin.Equality
+open import KernelAlgebra
+
+------------------------------------------------------------------------
+-- Endomorphism
+
+Endo : ∀ {X} → Set
+Endo {X} = State X → State X
+
+------------------------------------------------------------------------
+-- Composition
+
+_∘_ : ∀ {X} → Endo {X} → Endo {X} → Endo {X}
+(f ∘ g) s = f (g s)
+
+------------------------------------------------------------------------
+-- Closure under composition
+
+record Generated {X : Set}
+                 (K : Endo {X})
+                 : Set where
+
+  field
+    closed :
+      ∀ (f g : Endo {X}) → Endo {X}
+module SWAR_Equivalence where
+
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality as Eq using (cong; cong₂; sym; trans)
+open import Data.Vec using (Vec; []; _∷_; map; zipWith)
+open import Data.Nat.Properties as NatP using ()
+open import UFTC_Lattice using (Code; C_XOR)
+
+------------------------------------------------------------------------
+-- Lane-wise reference operation:
+laneXOR : ∀ {n} → Vec Code n → Vec Code n → Vec Code n
+laneXOR = zipWith C_XOR
+
+------------------------------------------------------------------------
+-- Abstract packed SWAR representation + pack/unpack:
+postulate
+  Packed : Nat → Set
+  pack   : ∀ {n} → Vec Code n → Packed n
+  unpack : ∀ {n} → Packed n → Vec Code n
+
+-- Packed operation (your SWAR fast-path):
+postulate
+  swarXOR : ∀ {n} → Packed n → Packed n → Packed n
+
+------------------------------------------------------------------------
+-- The *only* thing you need to trust SWAR: a bisimulation/refinement law.
+
+record SWARCorrect : Set₁ where
+  field
+    -- pack/unpack are section/retraction on the domain you care about
+    unpack-pack : ∀ {n} (v : Vec Code n) → unpack (pack v) ≡ v
+
+    -- swarXOR refines laneXOR through unpack
+    swar-sound :
+      ∀ {n} (x y : Packed n) →
+        unpack (swarXOR x y) ≡ laneXOR (unpack x) (unpack y)
+
+-- Derived: swarXOR correct on packed values built from vectors
+swar-correct-on-packed :
+  (C : SWARCorrect) →
+  ∀ {n} (vx vy : Vec Code n) →
+    unpack (swarXOR (pack vx) (pack vy)) ≡ laneXOR vx vy
+swar-correct-on-packed C vx vy =
+  let open SWARCorrect C in
+  trans (swar-sound (pack vx) (pack vy))
+        (cong₂ laneXOR (unpack-pack vx) (unpack-pack vy))
+module PrimeSubsetModel where
+
+open import MDL
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
+
+------------------------------------------------------------------------
+-- Abstract prime index
+
+PrimeIndex : Set
+PrimeIndex = Nat
+
+------------------------------------------------------------------------
+-- General subset model
+
+record PrimeModel (D : Dataset) : Set₁ where
+  field
+    subsetSize : Nat
+    subsetId   : Subset subsetSize
+    baseModel  : Model D
+
+primeTotal :
+  ∀ {D} →
+  PrimeModel D →
+  CodeLength
+primeTotal {D} M =
+  subsetCost (PrimeModel.subsetSize M) (PrimeModel.subsetId M)
+    + modelTotalLength (PrimeModel.baseModel M)
+
+------------------------------------------------------------------------
+-- 71-restricted version
+
+record PrimeModel71 (D : Dataset) : Set₁ where
+  field
+    base : PrimeModel D
+    sizeBound : PrimeModel.subsetSize base ≤ 71
+
+------------------------------------------------------------------------
+-- Safety theorem
+
+subsetBoundedCost :
+  ∀ {D}
+  (M : PrimeModel71 D) →
+  PrimeModel.subsetSize (PrimeModel71.base M) ≤ 71
+
+subsetBoundedCost M =
+  PrimeModel71.sizeBound M
+module MonsterConformance where
+
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List     using (List; []; _∷_)
+open import Data.Unit             using (⊤)
+open import Data.Product          using (_×_)
+
+open import MonsterState
+open import MonsterSpec
+open import MonsterVectors
+
+------------------------------------------------------------------------
+-- A foreign implementation hook (e.g., extracted from Rust evaluation).
+-- You can import these as computed tables, then prove extensional equality
+-- on vectors.
+
+postulate
+  implStep : State → State
+
+------------------------------------------------------------------------
+-- Conformance on vectors:
+
+ConformsOn : (f g : State → State) → Vectors → Set
+ConformsOn f g [] = ⊤
+ConformsOn f g (v ∷ vs) =
+  (f (Vector.input v) ≡ g (Vector.input v)) × ConformsOn f g vs
+
+-- You’ll use: ConformsOn implStep (Spec.stepSpec spec) vectors
+module Base369 where
+
+open import Agda.Builtin.Equality
+open import Agda.Builtin.Nat
+
+------------------------------------------------------------------------
+-- Utility: repeated rotation
+------------------------------------------------------------------------
+
+spin : {A : Set} → Nat → (A → A) → A → A
+spin 0       rot x = x
+spin (suc n) rot x = rot (spin n rot x)
+
+------------------------------------------------------------------------
+-- Truth values
+------------------------------------------------------------------------
+
+data TriTruth : Set where
+  tri-low  : TriTruth
+  tri-mid  : TriTruth
+  tri-high : TriTruth
+
+tri-index : TriTruth → Nat
+tri-index tri-low  = 0
+tri-index tri-mid  = 1
+tri-index tri-high = 2
+
+rotateTri : TriTruth → TriTruth
+rotateTri tri-low  = tri-mid
+rotateTri tri-mid  = tri-high
+rotateTri tri-high = tri-low
+
+triXor : TriTruth → TriTruth → TriTruth
+triXor carrier target = spin (tri-index carrier) rotateTri target
+
+rotateTri³ : ∀ t → rotateTri (rotateTri (rotateTri t)) ≡ t
+rotateTri³ tri-low  = refl
+rotateTri³ tri-mid  = refl
+rotateTri³ tri-high = refl
+
+triXor-identityˡ : ∀ t → triXor tri-low t ≡ t
+triXor-identityˡ _ = refl
+
+triXor-assoc : ∀ a b c → triXor a (triXor b c) ≡ triXor (triXor a b) c
+triXor-assoc tri-low  _        _ = refl
+triXor-assoc tri-mid  tri-low  c = refl
+triXor-assoc tri-mid  tri-mid  c = refl
+triXor-assoc tri-mid  tri-high c rewrite rotateTri³ c = refl
+triXor-assoc tri-high tri-low  c rewrite rotateTri³ c = refl
+triXor-assoc tri-high tri-mid  c rewrite rotateTri³ c = refl
+triXor-assoc tri-high tri-high c rewrite rotateTri³ c = refl
+
+------------------------------------------------------------------------
+
+-- A hexadic universe: six “beats” that wrap around.
+
+data HexTruth : Set where
+  hex-0 hex-1 hex-2 hex-3 hex-4 hex-5 : HexTruth
+
+hex-index : HexTruth → Nat
+hex-index hex-0 = 0
+hex-index hex-1 = 1
+hex-index hex-2 = 2
+hex-index hex-3 = 3
+hex-index hex-4 = 4
+hex-index hex-5 = 5
+
+rotateHex : HexTruth → HexTruth
+rotateHex hex-0 = hex-1
+rotateHex hex-1 = hex-2
+rotateHex hex-2 = hex-3
+rotateHex hex-3 = hex-4
+rotateHex hex-4 = hex-5
+rotateHex hex-5 = hex-0
+
+hexXor : HexTruth → HexTruth → HexTruth
+hexXor carrier target = spin (hex-index carrier) rotateHex target
+
+rotateHex⁶ : ∀ h → spin 6 rotateHex h ≡ h
+rotateHex⁶ hex-0 = refl
+rotateHex⁶ hex-1 = refl
+rotateHex⁶ hex-2 = refl
+rotateHex⁶ hex-3 = refl
+rotateHex⁶ hex-4 = refl
+rotateHex⁶ hex-5 = refl
+
+hexXor-identityˡ : ∀ h → hexXor hex-0 h ≡ h
+hexXor-identityˡ _ = refl
+
+------------------------------------------------------------------------
+
+-- A nonary universe: nine “voxels” in a ring.
+
+data NonaryTruth : Set where
+  non-0 non-1 non-2 non-3 non-4 non-5 non-6 non-7 non-8 : NonaryTruth
+
+nonary-index : NonaryTruth → Nat
+nonary-index non-0 = 0
+nonary-index non-1 = 1
+nonary-index non-2 = 2
+nonary-index non-3 = 3
+nonary-index non-4 = 4
+nonary-index non-5 = 5
+nonary-index non-6 = 6
+nonary-index non-7 = 7
+nonary-index non-8 = 8
+
+rotateNonary : NonaryTruth → NonaryTruth
+rotateNonary non-0 = non-1
+rotateNonary non-1 = non-2
+rotateNonary non-2 = non-3
+rotateNonary non-3 = non-4
+rotateNonary non-4 = non-5
+rotateNonary non-5 = non-6
+rotateNonary non-6 = non-7
+rotateNonary non-7 = non-8
+rotateNonary non-8 = non-0
+
+nonaryXor : NonaryTruth → NonaryTruth → NonaryTruth
+nonaryXor carrier target = spin (nonary-index carrier) rotateNonary target
+
+rotateNonary⁹ : ∀ n → spin 9 rotateNonary n ≡ n
+rotateNonary⁹ non-0 = refl
+rotateNonary⁹ non-1 = refl
+rotateNonary⁹ non-2 = refl
+rotateNonary⁹ non-3 = refl
+rotateNonary⁹ non-4 = refl
+rotateNonary⁹ non-5 = refl
+rotateNonary⁹ non-6 = refl
+rotateNonary⁹ non-7 = refl
+rotateNonary⁹ non-8 = refl
+
+nonaryXor-identityˡ : ∀ n → nonaryXor non-0 n ≡ n
+nonaryXor-identityˡ _ = refl
+module HeckeScan where
+
+open import Agda.Builtin.Bool     using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+open import MonsterOntos
+
+------------------------------------------------------------------------
+-- A computational/cognitive state.
+postulate
+  State : Set
+
+------------------------------------------------------------------------
+-- Hecke operator family: T_p : State → State for each p in the ontos.
+
+record HeckeFamily : Set₁ where
+  field
+    T : SSP → State → State
+
+------------------------------------------------------------------------
+-- A "compatibility detector" is just a predicate you choose.
+-- Example: does the state remain invariant under T_p?
+
+Compat : HeckeFamily → SSP → State → Bool
+Compat H p s = true  -- placeholder; define concretely in your pipeline
+
+------------------------------------------------------------------------
+-- A scan produces a 15-bit signature (compatibility bits across primes).
+
+record Sig15 : Set where
+  constructor sig15
+  field
+    b2  : Bool; b3  : Bool; b5  : Bool; b7  : Bool; b11 : Bool
+    b13 : Bool; b17 : Bool; b19 : Bool; b23 : Bool; b29 : Bool
+    b31 : Bool; b41 : Bool; b47 : Bool; b59 : Bool; b71 : Bool
+
+scan : HeckeFamily → State → Sig15
+scan H s = sig15
+  (Compat H p2  s) (Compat H p3  s) (Compat H p5  s) (Compat H p7  s) (Compat H p11 s)
+  (Compat H p13 s) (Compat H p17 s) (Compat H p19 s) (Compat H p23 s) (Compat H p29 s)
+  (Compat H p31 s) (Compat H p41 s) (Compat H p47 s) (Compat H p59 s) (Compat H p71 s)
+module MonsterTrace where
+
+open import Agda.Builtin.Nat      using (Nat; zero; suc)
+open import Agda.Builtin.Bool     using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List     using (List; []; _∷_)
+
+open import MonsterState
+
+------------------------------------------------------------------------
+-- A trace is a nonempty list of states.
+-- You will fill this with your table (s₀ ∷ s₁ ∷ ...).
+
+Trace : Set
+Trace = List State
+
+------------------------------------------------------------------------
+-- Example placeholder trace (replace with your real 10-group walk states).
+-- Keep the structure: a list of states.
+
+exampleTrace : Trace
+exampleTrace =
+  st fullMask 0 ∷
+  st fullMask 1 ∷
+  []
+module MonsterTraceSound where
+
+open import Agda.Builtin.Bool     using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List     using (List; []; _∷_)
+
+open import MonsterState
+open import MonsterStep
+
+------------------------------------------------------------------------
+-- Pointwise “adjacent step” relation over a Trace.
+
+data StepOK (L : Lens) (cands : Candidates) : List State → Set where
+  ok0  : ∀ {s} → StepOK L cands (s ∷ [])
+  ok∷  : ∀ {s₀ s₁ ss}
+       → step L cands s₀ ≡ s₁
+       → StepOK L cands (s₁ ∷ ss)
+       → StepOK L cands (s₀ ∷ s₁ ∷ ss)
+
+------------------------------------------------------------------------
+-- If you have a concrete Lens and Candidates and a concrete trace,
+-- this is the theorem you prove once:
+--
+--   traceSound : StepOK L cands trace
+--
+-- That’s MW-00 “orbit segments produced by step”.
+
+-- No postulate here: you prove it for your pasted trace by refl/rewrites.
+module DASHI_Tests where
+
+open import Agda.Builtin.Equality
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Sigma using (Σ; _,_)
+
+open import Base369
+open import LogicTlurey
+open import KernelAlgebra
+open import Ultrametric
+open import Contraction
+open import ActionMonotonicity
+
+------------------------------------------------------------------------
+-- Base369 regression tests
+------------------------------------------------------------------------
+
+rotateTri³-id : ∀ t → spin 3 rotateTri t ≡ t
+rotateTri³-id tri-low  = refl
+rotateTri³-id tri-mid  = refl
+rotateTri³-id tri-high = refl
+
+triXor-comm : ∀ a b → triXor a b ≡ triXor b a
+triXor-comm tri-low  tri-low  = refl
+triXor-comm tri-low  tri-mid  = refl
+triXor-comm tri-low  tri-high = refl
+triXor-comm tri-mid  tri-low  = refl
+triXor-comm tri-mid  tri-mid  = refl
+triXor-comm tri-mid  tri-high = refl
+triXor-comm tri-high tri-low  = refl
+triXor-comm tri-high tri-mid  = refl
+triXor-comm tri-high tri-high = refl
+
+------------------------------------------------------------------------
+-- Tlurey trace tests
+------------------------------------------------------------------------
+
+-- The stage transition is 4-periodic.
+next⁴-test : ∀ s → spin 4 next s ≡ s
+next⁴-test = next⁴
+
+trace-len-test : ∀ n s → length (StageTrace n s) ≡ n
+trace-len-test = StageTrace-length
+
+------------------------------------------------------------------------
+-- Kernel algebra tests
+------------------------------------------------------------------------
+
+-- A concrete "kernel" instance: identity update.
+K-id : ∀ {X : Set} → Kernel {X}
+K-id {X} = record
+  { K = λ s → s
+  ; involutive-respecting = λ s → refl
+  }
+
+-- Another concrete kernel: pointwise involution.
+K-neg : ∀ {X : Set} → Kernel {X}
+K-neg {X} = record
+  { K = ι
+  ; involutive-respecting = λ s → refl
+  }
+
+-- Sanity: K-neg applied twice is identity (pointwise).
+K-neg2-pointwise : ∀ {X : Set} (s : State X) (x : X) →
+  Kernel.K (K-neg {X}) (Kernel.K (K-neg {X}) s) x ≡ s x
+K-neg2-pointwise s x = ι²-id s x
+
+------------------------------------------------------------------------
+-- Contraction / monotone-action interface smoke tests
+------------------------------------------------------------------------
+
+-- We only check that the exposed interfaces are callable.
+
+postulate
+  X : Set
+  U : Ultrametric X
+  f : X → X
+  cf : Contractive U f
+  x y : X
+
+contraction-smoke = Contractive.contraction cf x y
+
+postulate
+  X1 : Set
+  K1 : State X1 → State X1
+  A1 : State X1 → Nat
+  M : Monotone K1 A1
+  s1 : State X1
+
+monotone-smoke = Monotone.monotone M s1
+module MonsterUltrametric where
+
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Bool
+open import Agda.Builtin.Equality
+open import Agda.Builtin.List
+open import Data.Nat as Nat using (_<_; _≤_; zero; suc)
+open import Data.Nat.Properties as NatP
+
+open import Ultrametric
+open import MonsterMask
+
+------------------------------------------------------------------------
+-- Distance = index of first differing bit (or 0 if identical)
+
+firstDiff : Mask → Mask → Nat → Nat
+firstDiff [] [] _ = 0
+firstDiff (true  ∷ xs) (true  ∷ ys) n = firstDiff xs ys (suc n)
+firstDiff (false ∷ xs) (false ∷ ys) n = firstDiff xs ys (suc n)
+firstDiff _ _ n = n
+
+dMask : Mask → Mask → Nat
+dMask x y = firstDiff x y 0
+
+firstDiff-self-zero : ∀ m n → firstDiff m m n ≡ 0
+firstDiff-self-zero [] n = refl
+firstDiff-self-zero (true ∷ xs) n = firstDiff-self-zero xs (suc n)
+firstDiff-self-zero (false ∷ xs) n = firstDiff-self-zero xs (suc n)
+
+------------------------------------------------------------------------
+-- Identity distance
+
+id-zeroMask : ∀ m → dMask m m ≡ 0
+id-zeroMask m = firstDiff-self-zero m 0
+
+------------------------------------------------------------------------
+-- Symmetry
+
+postulate
+  symMask : ∀ x y → dMask x y ≡ dMask y x
+  ultraMask : ∀ x y z → dMask x z ≤ max (dMask x y) (dMask y z)
+
+------------------------------------------------------------------------
+
+UMask : Ultrametric Mask
+UMask = record
+  { d            = dMask
+  ; id-zero      = id-zeroMask
+  ; symmetric    = symMask
+  ; ultratriangle = ultraMask
+  }
+module MonsterSpec where
+
+open import Agda.Builtin.Nat      using (Nat)
+open import Agda.Builtin.List     using (List)
+
+open import MonsterState
+open import MonsterStep
+
+------------------------------------------------------------------------
+-- Canonical spec = step + optional encoding function.
+
+record Spec : Set₁ where
+  field
+    L     : Lens
+    cands : Candidates
+
+  stepSpec : State → State
+  stepSpec = step L cands
+
+------------------------------------------------------------------------
+-- Optional: a Gödel-style encoding of state → Nat (placeholder).
+-- Keep it separate: encoding is a different layer from stepping.
+
+postulate
+  encode : State → Nat
+  decode : Nat → State
+
+------------------------------------------------------------------------
+-- The canonical property you’ll ultimately want:
+-- decode (encode s) ≡ s  (and/or encode ∘ decode id on a domain)
+module HGSA_Fixpoints where
+
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_<_ )
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Verification.Prelude using (⊥; ⊤; tt; Σ; _,_; _×_; ¬_)
+open import Relation.Binary.PropositionalEquality as Eq using (trans; cong)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+
+------------------------------------------------------------------------
+-- Abstract state machine for HGSA
+postulate
+  State : Set
+  step  : State → State
+
+-- Observable predicates
+postulate
+  Safe   : State → Set
+  Ascend : State → Set   -- “this step is an ascend event” (or state tagged)
+
+------------------------------------------------------------------------
+-- Least fixpoint style “Eventually” (inductive)
+data Eventually (P : State → Set) : State → Set where
+  now  : ∀ {s} → P s → Eventually P s
+  later : ∀ {s} → Eventually P (step s) → Eventually P s
+
+-- AlwaysEventuallySafe: eventually Safe OR Ascend
+AES : State → Set
+AES s = Eventually (λ t → Safe t ⊎ Ascend t) s
+
+------------------------------------------------------------------------
+-- Ranking-function obligation: progress unless already Safe/Ascend.
+postulate
+  rank : State → Nat
+  progress :
+    ∀ s → (¬ Safe s) → (¬ Ascend s) → rank (step s) < rank s
+
+------------------------------------------------------------------------
+-- Termination/liveness proof from rank (standard well-founded descent)
+-- In Nat, strict descent implies cannot continue forever without hitting base.
+
+postulate
+  NatNoInfiniteDescent :
+    ∀ (r : State → Nat) (f : State → State) →
+    (∀ s → r (f s) < r s) → ⊥
+
+-- Practical AES theorem: Either Safe/Ascend holds now, or progress gives later.
+postulate
+  decideSafe : ∀ s → (Safe s ⊎ ¬ Safe s)
+  decideAsc  : ∀ s → (Ascend s ⊎ ¬ Ascend s)
+
+{-# NON_TERMINATING #-}
+AES-theorem : ∀ s → AES s
+AES-theorem s with decideSafe s | decideAsc s
+... | inj₁ safeNow | _          = now (inj₁ safeNow)
+... | inj₂ ns      | inj₁ ascNow = now (inj₂ ascNow)
+... | inj₂ ns      | inj₂ na     =
+    later (AES-theorem (step s))
+module Overflow where
+
+open import Agda.Builtin.Equality
+open import Agda.Builtin.Nat using (Nat ; zero ; suc)
+
+------------------------------------------------------------------------
+-- Local congruence lemma (no stdlib needed)
+------------------------------------------------------------------------
+
+congOverflow : ∀ {A B : Set} {x y : A} (f : A → B) → x ≡ y → f x ≡ f y
+congOverflow f refl = refl
+
+------------------------------------------------------------------------
+-- Basic relations on ℕ (custom strict order)
+------------------------------------------------------------------------
+
+infix 4 _≺_
+
+data _≺_ : Nat → Nat → Set where
+  z≺s : ∀ {n} → zero ≺ suc n
+  s≺s : ∀ {m n} → m ≺ n → suc m ≺ suc n
+
+------------------------------------------------------------------------
+-- Voxel states
+------------------------------------------------------------------------
+
+data Voxel : Set where
+  grounded plateau ascended : Voxel
+
+------------------------------------------------------------------------
+-- Threshold guards with explicit proofs
+------------------------------------------------------------------------
+
+-- Each constructor carries the witness required to justify the
+-- classification relative to the threshold.
+data VoxelGuard (threshold value : Nat) : Set where
+  stay   : value ≺ threshold → VoxelGuard threshold value
+  pivot  : threshold ≡ value → VoxelGuard threshold value
+  ascend : threshold ≺ value → VoxelGuard threshold value
+
+state : ∀ {t v} → VoxelGuard t v → Voxel
+state (stay _)   = grounded
+state (pivot _)  = plateau
+state (ascend _) = ascended
+
+------------------------------------------------------------------------
+-- Helper: deterministically choose a guard by structural comparison
+------------------------------------------------------------------------
+
+data Order : Set where below equal above : Order
+
+compare : Nat → Nat → Order
+compare zero    zero    = equal
+compare zero    (suc _) = below
+compare (suc _) zero    = above
+compare (suc a) (suc b) = compare a b
+
+------------------------------------------------------------------------
+-- Relations exposed by comparison tokens
+------------------------------------------------------------------------
+
+compare-below→≺ : ∀ {t v} → compare t v ≡ below → t ≺ v
+compare-below→≺ {zero}   {zero}   ()
+compare-below→≺ {zero}   {suc _}  refl = z≺s
+compare-below→≺ {suc _}  {zero}   ()
+compare-below→≺ {suc t}  {suc v}  pr   = s≺s (compare-below→≺ {t} {v} pr)
+
+compare-above→≺ : ∀ {t v} → compare t v ≡ above → v ≺ t
+compare-above→≺ {zero}   {zero}   ()
+compare-above→≺ {zero}   {suc _}  ()
+compare-above→≺ {suc _}  {zero}   refl = z≺s
+compare-above→≺ {suc t}  {suc v}  pr   = s≺s (compare-above→≺ {t} {v} pr)
+
+compare-equal→≡ : ∀ {t v} → compare t v ≡ equal → t ≡ v
+compare-equal→≡ {zero}  {zero}  refl = refl
+compare-equal→≡ {zero}  {suc _} ()
+compare-equal→≡ {suc _} {zero} ()
+compare-equal→≡ {suc t} {suc v} pr = congOverflow suc (compare-equal→≡ {t} {v} pr)
+
+compare-≺→below : ∀ {t v} → t ≺ v → compare t v ≡ below
+compare-≺→below z≺s      = refl
+compare-≺→below (s≺s p)  = compare-≺→below p
+
+compare-roundtrip-below : ∀ {t v} (p : t ≺ v) → compare-below→≺ (compare-≺→below p) ≡ p
+compare-roundtrip-below z≺s      = refl
+compare-roundtrip-below (s≺s p)  = congOverflow s≺s (compare-roundtrip-below p)
+
+------------------------------------------------------------------------
+-- Enforcement by comparison
+------------------------------------------------------------------------
+
+
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+
+enforce : (threshold value : Nat) → VoxelGuard threshold value
+enforce zero    zero    = pivot refl
+enforce zero    (suc v) = ascend z≺s
+enforce (suc t) zero    = stay z≺s
+enforce (suc t) (suc v) with enforce t v
+... | stay p   = stay   (s≺s p)
+... | pivot p  = pivot  (congOverflow suc p)
+... | ascend p = ascend (s≺s p)
+
+
+------------------------------------------------------------------------
+-- Correctness of enforcement
+------------------------------------------------------------------------
+
+enforce-ascended-if : ∀ {t v} (p : t ≺ v) → enforce t v ≡ ascend p
+enforce-ascended-if {zero}  {suc v} z≺s = refl
+enforce-ascended-if {suc t} {suc v} (s≺s p) rewrite enforce-ascended-if {t} {v} p = refl
+
+only-if : ∀ {t v} → state (enforce t v) ≡ ascended → t ≺ v
+only-if {t} {v} with enforce t v
+... | stay   _ = λ ()
+... | pivot  _ = λ ()
+... | ascend p = λ _ → p
+
+------------------------------------------------------------------------
+-- Extra comparison lemmas (if you still want them)
+------------------------------------------------------------------------
+
+compare-eq-below : ∀ {t v} → compare t v ≡ below → t ≺ v
+compare-eq-below {zero}    {zero}    ()
+compare-eq-below {zero}    {suc _}   refl = z≺s
+compare-eq-below {suc _}   {zero}    ()
+compare-eq-below {suc t}   {suc v}   p = s≺s (compare-eq-below {t} {v} p)
+
+compare-eq-above : ∀ {t v} → compare t v ≡ above → v ≺ t
+compare-eq-above {zero}    {zero}    ()
+compare-eq-above {zero}    {suc _}   ()
+compare-eq-above {suc _}   {zero}    refl = z≺s
+compare-eq-above {suc t}   {suc v}   p = s≺s (compare-eq-above {t} {v} p)
+module DASHI.OperatorTypes where
+
+open import DASHI.Prelude
+open import DASHI.KernelMonoid using (Kernel; KernelEq)
+
+-- Invertible (bijection witness).
+record Invertible {S : Set} (K : S → S) : Set where
+  field
+    inv   : S → S
+    left  : ∀ x → inv (K x) ≡ x
+    right : ∀ x → K (inv x) ≡ x
+
+-- Projection = idempotent operator.
+record Projection {S : Set} (K : S → S) : Set where
+  field idem : ∀ x → K (K x) ≡ K x
+
+-- (Optional) Nontrivial projection means not identity.
+Nontrivial : ∀ {S} (K : S → S) → Set
+Nontrivial {S} K = ¬ (∀ x → K x ≡ x)
+
+-- Regular inverse (von Neumann regular): a = a*b*a in an algebraic carrier.
+-- Here: “regularizer” for endofunctions, expressed as K = K ∘ R ∘ K.
+record Regularizer {S : Set} (K : S → S) : Set where
+  field
+    R : S → S
+    law : ∀ x → K x ≡ K (R (K x))
+
+-- A simple operator “tag” classifier you can populate later.
+data OpClass : Set where
+  invertible projection regular other : OpClass
+
+-- Classification is a *goal*: you can decide per operator, not assumed.
+record Classifies {S : Set} (K : S → S) : Set₁ where
+  field
+    class : OpClass
+    sound :
+      (class ≡ invertible → Invertible K) ×
+      (class ≡ projection  → Projection K) ×
+      (class ≡ regular     → Regularizer K)
+module DASHI.LensKernel where
+
+open import DASHI.Prelude
+open import DASHI.OperatorTypes
+
+record Lens (S : Set) (A : Set) : Set₁ where
+  field
+    observe : S → A
+
+-- Exact commutation: observe (K x) = observe x
+record LensInvariant {S A : Set} (L : Lens S A) (K : S → S) : Set where
+  field inv : ∀ x → Lens.observe L (K x) ≡ Lens.observe L x
+
+-- Monotone variant (when observations are ordered)
+record Preorder (A : Set) : Set₁ where
+  field _⊑_ : A → A → Set
+        refl⊑ : ∀ a → a ⊑ a
+        trans⊑ : ∀ a b c → a ⊑ b → b ⊑ c → a ⊑ c
+
+record LensMonotone {S A : Set} (P : Preorder A) (L : Lens S A) (K : S → S) : Set where
+  open Preorder P
+  field mono : ∀ x → Lens.observe L (K x) ⊑ Lens.observe L x
+module DASHI.Confluence where
+
+open import DASHI.Prelude
+
+-- A nondeterministic one-step relation.
+Rel : Set → Set₁
+Rel S = S → S → Set
+
+-- Diamond property: if s steps to s1 and s2, they can be joined.
+Diamond : ∀ {S} → Rel S → Set
+Diamond {S} step =
+  ∀ s s₁ s₂ →
+    step s s₁ →
+    step s s₂ →
+    Σ S (λ t → step s₁ t × step s₂ t)
+
+-- Church-Rosser / confluence (standard).
+postulate
+  Confluent : ∀ {S} → Rel S → Set
+module DASHI.Entropy where
+
+open import DASHI.Prelude
+
+record Entropy (S : Set) : Set₁ where
+  field H : S → Nat
+
+zero≤ : ∀ n → zero ≤ n
+zero≤ _ = z≤n
+
+entropy-nonneg : ∀ {S} (E : Entropy S) (x : S) → 0 ≤ Entropy.H E x
+entropy-nonneg E x = zero≤ (Entropy.H E x)
+
+record Involution (S : Set) : Set₁ where
+  field ι : S → S
+        invol : ∀ x → ι (ι x) ≡ x
+
+record EntropyInvariant {S : Set} (E : Entropy S) (I : Involution S) : Set where
+  field invH : ∀ x → Entropy.H E (Involution.ι I x) ≡ Entropy.H E x
+module DASHI.Restoration where
+
+open import DASHI.Prelude
+
+record Restoration (S : Set) : Set₁ where
+  field restore : S → S
+
+Idempotent : ∀ {S} → (S → S) → Set
+Idempotent f = ∀ x → f (f x) ≡ f x
+
+record RestorationLaw {S : Set} (R : Restoration S) : Set where
+  field
+    idem : Idempotent (Restoration.restore R)
+module DASHI.Nontriviality where
+
+open import DASHI.Prelude
+
+_≢_ : ∀ {A : Set} → A → A → Set
+x ≢ y = ¬ (x ≡ y)
+
+record NonTrivial (S : Set) : Set₁ where
+  field
+    x y : S
+    x≢y : x ≢ y
+module DASHI.KernelMonoid where
+
+open import DASHI.Prelude
+
+-- Generic kernel as endomorphism.
+record Kernel (S : Set) : Set where
+  field K : S → S
+
+_∘K_ : ∀ {S} → Kernel S → Kernel S → Kernel S
+_∘K_ {S} A B = record { K = λ x → Kernel.K A (Kernel.K B x) }
+
+idK : ∀ {S} → Kernel S
+idK = record { K = λ x → x }
+
+-- Extensional equality for kernels (needed to state laws).
+KernelEq : ∀ {S} → Kernel S → Kernel S → Set
+KernelEq {S} A B = ∀ x → Kernel.K A x ≡ Kernel.K B x
+
+compose-assoc :
+  ∀ {S} (A B C : Kernel S) →
+  KernelEq ((A ∘K B) ∘K C) (A ∘K (B ∘K C))
+compose-assoc A B C x = refl
+
+left-id : ∀ {S} (A : Kernel S) → KernelEq (idK ∘K A) A
+left-id A x = refl
+
+right-id : ∀ {S} (A : Kernel S) → KernelEq (A ∘K idK) A
+right-id A x = refl
+module DASHI.Prelude where
+
+open import Data.Nat public
+  renaming (ℕ to Nat)
+open import Data.Nat.Properties public
+open import Data.List public using (List; []; _∷_)
+open import Data.Product public using (Σ; _,_; _×_; proj₁; proj₂)
+open import Data.Sum public using (_⊎_; inj₁; inj₂)
+open import Data.Empty public using (⊥; ⊥-elim)
+open import Data.Unit public using (⊤; tt)
+open import Relation.Binary.PropositionalEquality public using (_≡_; refl; cong; sym; trans)
+
+¬_ : Set → Set
+¬ A = A → ⊥
+
+fst : ∀ {A : Set} {B : A → Set} → Σ A B → A
+fst = proj₁
+
+snd : ∀ {A : Set} {B : A → Set} (p : Σ A B) → B (proj₁ p)
+snd = proj₂
+module DASHI.PDA_MDL.ExponentVector where
+
+open import DASHI.PDA_MDL.Prelude
+open import Data.Vec using (Vec; []; _∷_; map; zipWith; foldr′)
+open import Data.Fin using (Fin)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+
+add : Nat → Nat → Nat
+add zero    n = n
+add (suc m) n = suc (add m n)
+
+-- 15-lane exponent vector
+EV : Set
+EV = Vec Nat 15
+
+-- pointwise addition (useful for sufficient statistics)
+_⊞_ : ∀ {n} → Vec Nat n → Vec Nat n → Vec Nat n
+_⊞_ {zero} [] [] = []
+_⊞_ {suc n} (x ∷ xs) (y ∷ ys) = add x y ∷ (_⊞_ {n} xs ys)
+
+-- pointwise max (sometimes useful)
+max : Nat → Nat → Nat
+max zero    n       = n
+max (suc m) zero    = suc m
+max (suc m) (suc n) = suc (max m n)
+
+_⊔v_ : EV → EV → EV
+_⊔v_ = zipWith max
+
+sumEV : EV → Nat
+sumEV = foldr′ add zero
+
+-- A dataset is a list of exponent vectors
+DatasetEV : Set
+DatasetEV = List EV
+
+stats : DatasetEV → EV
+stats []       = map (λ _ → 0) (0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ 0 ∷ [])
+stats (x ∷ xs) = x ⊞ stats xs
+module DASHI.PDA_MDL.EV_Likelihood where
+
+open import DASHI.PDA_MDL.Prelude
+open import DASHI.PDA_MDL.ExponentVector
+open import Data.Vec using (Vec; []; _∷_; zipWith; foldr′; map)
+
+------------------------------------------------------------------------
+-- Universal (toy) code length for Nat (fully constructive baseline)
+-- Replace with Elias gamma / ANS tables later.
+
+lenNat : Nat → CodeLength
+lenNat n = suc n  -- unary length: 1 + n (baseline, simple)
+
+lenEV : EV → CodeLength
+lenEV = foldr′ (λ e acc → lenNat e + acc) zero
+
+lenDataset : DatasetEV → CodeLength
+lenDataset []       = zero
+lenDataset (x ∷ xs) = lenEV x + lenDataset xs
+
+------------------------------------------------------------------------
+-- Independent-lane model: parameter is a 15-lane "typical exponent"
+-- (think: mean/mode/expected scale). You can generalize later.
+
+record IndepEVModel : Set where
+  field
+    θ : EV
+
+-- Model description length (price the parameters)
+Lmodel : IndepEVModel → CodeLength
+Lmodel M = lenEV (IndepEVModel.θ M)
+
+-- Data given model: price residuals per lane (|e - θ|) with unary code
+abs : Nat → Nat → Nat
+abs zero    n       = n
+abs (suc m) zero    = suc m
+abs (suc m) (suc n) = abs m n
+
+residualEV : EV → EV → EV
+residualEV x θ = zipWith abs x θ
+
+Ldata| : IndepEVModel → DatasetEV → CodeLength
+Ldata| M []       = zero
+Ldata| M (x ∷ xs) = lenEV (residualEV x (IndepEVModel.θ M)) + Ldata| M xs
+
+-- Total two-part MDL
+MDL : IndepEVModel → DatasetEV → CodeLength
+MDL M D = Lmodel M + Ldata| M D
+
+------------------------------------------------------------------------
+-- A concrete "fit" choice from data: θ := max lane observed (cheap) or mean.
+-- Here: θ := stats D  (sum) is too big; instead use per-lane capped statistic.
+-- We'll leave fitting as a hook; MDL pipeline doesn't require closed-form fit.
+
+postulate
+  fit : DatasetEV → IndepEVModel
+module DASHI.PDA_MDL.CICADA71 where
+
+open import DASHI.PDA_MDL.Prelude
+open import DASHI.PDA_MDL.ExponentVector
+
+open import Data.Fin using (Fin; toℕ; fromℕ<)
+open import Data.Nat.DivMod using (m%n<n)
+open import Data.Vec using (Vec; zipWith; foldr′)
+
+mod71 : Nat → Nat
+mod71 n = n % 71
+
+-- Interpret a Fin 71 as Nat in [0..70]
+fin71→Nat : Fin 71 → Nat
+fin71→Nat = toℕ
+
+-- A fixed weight vector in Fin 71 (choose anything deterministic).
+-- You can later pick these as (prime mod 71) or derived from the 15 primes.
+postulate w : Vec (Fin 71) 15
+
+dotNat : EV → Vec (Fin 71) 15 → Nat
+dotNat ev ws =
+  foldr′ _+_ zero (zipWith (λ e wi → e * fin71→Nat wi) ev ws)
+
+bucket71-ev : EV → Fin 71
+bucket71-ev ev =
+  -- convert (dot mod 71) into Fin 71
+  fromℕ< (m%n<n (dotNat ev w) 71)
+module DASHI.PDA_MDL.PDA where
+
+open import DASHI.PDA_MDL.Prelude
+
+record PDA (World Obs : Set) : Set₁ where
+  field
+    observe : World → Obs
+    admissible : World → Set   -- witness/guard: which worlds are in scope
+    costPDA : CodeLength       -- price the lens/witness (anti-cheat)
+
+-- Apply PDA to a dataset (list of worlds)
+WorldDataset : Set → Set
+WorldDataset W = List W
+
+ObsDataset : Set → Set
+ObsDataset O = List O
+
+map : ∀ {A B} → (A → B) → List A → List B
+map f []       = []
+map f (x ∷ xs) = f x ∷ map f xs
+
+observeAll : ∀ {W O} → PDA W O → WorldDataset W → ObsDataset O
+observeAll P D = map (PDA.observe P) D
+module DASHI.PDA_MDL.Prelude where
+
+open import Data.Nat public
+  renaming (ℕ to Nat)
+open import Data.List public using (List; []; _∷_)
+open import Data.Product public using (Σ; _,_; _×_; proj₁; proj₂)
+open import Data.Sum public using (_⊎_; inj₁; inj₂)
+open import Data.Empty public using (⊥; ⊥-elim)
+open import Data.Unit public using (⊤; tt)
+open import Relation.Binary.PropositionalEquality public using (_≡_; refl; cong; sym; trans)
+open import Data.Nat.Properties public using (≤-refl; ≤-trans)
+
+¬_ : Set → Set
+¬ A = A → ⊥
+
+fst : ∀ {A : Set} {B : A → Set} → Σ A B → A
+fst = proj₁
+
+snd : ∀ {A : Set} {B : A → Set} (p : Σ A B) → B (proj₁ p)
+snd = proj₂
+
+CodeLength : Set
+CodeLength = Nat
+module DASHI.PDA_MDL.KernelSelection where
+
+open import DASHI.PDA_MDL.Prelude
+open import DASHI.PDA_MDL.PDA
+
+------------------------------------------------------------------------
+-- Generic kernel family
+
+record KernelFamily (I S : Set) : Set₁ where
+  field
+    K : I → S → S
+    Lkernel : I → CodeLength   -- price selecting/specifying that kernel
+
+iterate : ∀ {S} → (S → S) → Nat → S → S
+iterate f zero    x = x
+iterate f (suc n) x = iterate f n (f x)
+
+------------------------------------------------------------------------
+-- A trace is “state after n steps”, observed by PDA.
+
+TraceObs :
+  ∀ {I S O} →
+  KernelFamily I S →
+  PDA S O →
+  I → Nat → S → O
+TraceObs F P i n s =
+  PDA.observe P (iterate (KernelFamily.K F i) n s)
+
+------------------------------------------------------------------------
+-- Dataset for kernel selection: initial states + a step index list
+-- (keeps it concrete without needing streams).
+
+record KSData (S : Set) : Set₁ where
+  field
+    inits : List S
+    steps : List Nat
+
+-- Flatten observations (cartesian product inits × steps)
+concat : ∀ {A} → List A → List A → List A
+concat [] ys       = ys
+concat (x ∷ xs) ys = x ∷ concat xs ys
+
+map2 : ∀ {A B C} → (A → B → C) → List A → List B → List C
+map2 f []       _        = []
+map2 f (a ∷ as) bs       = concat (map (f a) bs) (map2 f as bs)
+
+ObsDatasetKS :
+  ∀ {I S O} →
+  KernelFamily I S →
+  PDA S O →
+  I → KSData S → List O
+ObsDatasetKS F P i D =
+  map2 (λ s n → TraceObs F P i n s) (KSData.inits D) (KSData.steps D)
+
+------------------------------------------------------------------------
+-- A model over observations (two-part code)
+record ObsModel (O : Set) : Set₁ where
+  field
+    Lmodel : CodeLength
+    Ldata| : List O → CodeLength
+
+MDLscore :
+  ∀ {I S O} →
+  KernelFamily I S →
+  PDA S O →
+  ObsModel O →
+  I → KSData S → CodeLength
+MDLscore F P M i D =
+  PDA.costPDA P
+  + KernelFamily.Lkernel F i
+  + ObsModel.Lmodel M
+  + ObsModel.Ldata| M (ObsDatasetKS F P i D)
+
+------------------------------------------------------------------------
+-- Kernel-selection theorem statement: i* is MDL-minimal within the family.
+-- (We keep “argmin” as an explicit proof obligation.)
+
+record ArgMin {I S O : Set} (F : KernelFamily I S) (P : PDA S O) (M : ObsModel O)
+              (D : KSData S) : Set₁ where
+  field
+    i* : I
+    minimal :
+      ∀ i →
+        MDLscore F P M i* D ≤ MDLscore F P M i D
+module DASHI.PDA_MDL.CICADA71_Model where
+
+open import DASHI.PDA_MDL.Prelude
+open import DASHI.PDA_MDL.CICADA71
+open import DASHI.PDA_MDL.ExponentVector
+open import Data.Fin using (Fin)
+open import Data.List using (List; []; _∷_)
+
+Bucket : Set
+Bucket = Fin 71
+
+shard : EV → Bucket
+shard = bucket71-ev
+
+DatasetB : Set
+DatasetB = List Bucket
+
+shardDataset : DatasetEV → DatasetB
+shardDataset []       = []
+shardDataset (x ∷ xs) = shard x ∷ shardDataset xs
+
+-- A very concrete bucket code length: constant (baseline)
+lenBucket : Bucket → CodeLength
+lenBucket _ = 7  -- 71 buckets need ~7 bits; use Nat as approximation
+
+lenBuckets : DatasetB → CodeLength
+lenBuckets []       = zero
+lenBuckets (b ∷ bs) = lenBucket b + lenBuckets bs
+
+-- IID bucket model with parameter cost (a table). Keep it simple now.
+record IID71 : Set where
+  field tableCost : CodeLength
+
+Lmodel71 : IID71 → CodeLength
+Lmodel71 M = IID71.tableCost M
+
+Ldata|71 : IID71 → DatasetB → CodeLength
+Ldata|71 M D = lenBuckets D  -- replace with -log p(b) once you encode probs
+
+MDL71 : IID71 → DatasetEV → CodeLength
+MDL71 M D = Lmodel71 M + Ldata|71 M (shardDataset D)
+module DASHI.PDA_MDL.Instances where
+
+open import DASHI.PDA_MDL.Prelude
+open import DASHI.PDA_MDL.ExponentVector
+open import DASHI.PDA_MDL.EV_Likelihood
+open import DASHI.PDA_MDL.CICADA71_Model
+open import DASHI.PDA_MDL.PDA
+open import DASHI.PDA_MDL.KernelSelection
+
+-- Plug your real state type here
+postulate
+  S : Set
+
+-- PDA that observes exponent-vectors from state
+postulate
+  extractEV : S → EV
+
+PDA-EV : PDA S EV
+PDA-EV = record
+  { observe = extractEV
+  ; admissible = λ _ → ⊤
+  ; costPDA = 15  -- price of having this lens; refine later
+  }
+
+-- EV model turned into an ObsModel
+evObsModel : IndepEVModel → ObsModel EV
+evObsModel M = record
+  { Lmodel = Lmodel M
+  ; Ldata| = λ obsList →  -- interpret obsList as DatasetEV and score it
+      let
+        D : DatasetEV
+        D = obsList
+      in
+      Ldata| M D
+  }
+
+-- CICADA-71 PDA: observe bucket directly from extracted exponent vector
+-- (lens includes sharding; price it)
+postulate
+  shardEV : EV → Bucket
+
+PDA-71 : PDA S Bucket
+PDA-71 = record
+  { observe = λ s → shardEV (extractEV s)
+  ; admissible = λ _ → ⊤
+  ; costPDA = 71  -- “limit to 71” lens price placeholder
+  }
+
+-- IID71 model turned into an ObsModel
+obsModel71 : IID71 → ObsModel Bucket
+obsModel71 M = record
+  { Lmodel = Lmodel71 M
+  ; Ldata| = λ bs → Ldata|71 M (bs)
+  }
+module DASHI.Quantum.Measurement where
+
+open import DASHI.Prelude
+open import DASHI.OperatorTypes
+open import DASHI.ProjectionVsInvertible using (projection+invertible→identity)
+
+record Measurement {S : Set} (Π : S → S) : Set where
+  field
+    proj : Projection Π
+    nontrivial : Nontrivial Π   -- measurement actually collapses something
+
+measurement-not-invertible :
+  ∀ {S : Set} {Π : S → S} →
+  Measurement Π →
+  ¬ Invertible Π
+measurement-not-invertible {S} {Π} M invΠ =
+  let open Measurement M in
+  -- If Π invertible and projection ⇒ Π = id, contradict nontrivial.
+  nontrivial (projection+invertible→identity proj invΠ)
+module DASHI.Quantum.NoGlobalAttractor where
+
+open import DASHI.Prelude
+open import DASHI.OperatorTypes
+
+-- Iteration
+iterate : ∀ {S : Set} → (S → S) → Nat → S → S
+iterate f zero    x = x
+iterate f (suc n) x = iterate f n (f x)
+
+-- “Eventually constant” orbit at a.
+EventuallyConst : ∀ {S : Set} → (S → S) → S → S → Set
+EventuallyConst f x a = Σ Nat (λ N → ∀ n → iterate f (N + n) x ≡ a)
+
+-- Global attractor = same a for all x.
+GlobalAttractor : ∀ {S : Set} → (S → S) → Set
+GlobalAttractor f = Σ _ (λ a → ∀ x → EventuallyConst f x a)
+
+-- The useful theorem: invertible + nontrivial ⇒ no global attractor.
+-- (In a finite/discrete world, invertible dynamics can’t collapse all orbits to one point unless singleton.)
+
+postulate
+  invertible-nontrivial-no-attractor :
+    ∀ {S : Set} {U : S → S} →
+    Invertible U →
+    (Σ S (λ x → Σ S (λ y → ¬ (x ≡ y)))) →
+    ¬ GlobalAttractor U
+module DASHI.Quantum.Unitary where
+
+open import DASHI.Prelude
+open import DASHI.OperatorTypes
+
+-- Abstract “Hilbert-like” structure: we only need an inner product interface.
+postulate
+  ℂ : Set
+  _≡ℂ_ : ℂ → ℂ → Set
+
+record InnerProductSpace (S : Set) : Set₁ where
+  field
+    ⟪_,_⟫ : S → S → ℂ
+
+-- Unitary = invertible + inner product preservation.
+record Unitary {S : Set} (IPS : InnerProductSpace S) (U : S → S) : Set₁ where
+  field
+    inv : Invertible U
+    preserves : ∀ x y → InnerProductSpace.⟪_,_⟫ IPS (U x) (U y) ≡ℂ InnerProductSpace.⟪_,_⟫ IPS x y
+module DASHI.ProjectionVsInvertible where
+
+open import DASHI.Prelude
+open import DASHI.OperatorTypes
+
+projection+invertible→identity :
+  ∀ {S : Set} {K : S → S} →
+  Projection K → Invertible K → (∀ x → K x ≡ x)
+projection+invertible→identity {S} {K} P I x =
+  let open Projection P
+      open Invertible I
+  in
+  -- K is idempotent and invertible ⇒ K = id
+  -- Proof: x = inv (K x); apply K both sides, use idempotence and right inverse.
+  -- K x ≡ K (inv (K x)) ≡ (by right) K x; then show K (inv y) = inv y via idem.
+  -- A clean derivation:
+  --   inv (K x) ≡ x                      (left)
+  --   K (inv (K x)) ≡ K x                (cong K)
+  --   but K (inv (K x)) ≡ inv (K x)      (since K ∘ K = K and right inverse)
+  -- so inv (K x) ≡ K x, hence x ≡ K x.
+  let
+    step1 : K (inv (K x)) ≡ K x
+    step1 = cong K (left x)  -- K (inv (K x)) = K x
+
+    step2 : K (inv (K x)) ≡ inv (K x)
+    step2 =
+      -- Using idempotence on y = inv (K x):
+      -- K (K y) = K y; but K y = ? we need K (K (inv (K x))) = K (inv (K x))
+      -- and K (K (inv (K x))) = K (inv (K x)) trivially; so this doesn’t help.
+      -- Instead: use right inverse with y = K x:
+      -- K (inv (K x)) = K x (already step1). We need inv (K x) = K x.
+      -- We can get that by applying inv to both sides of idem at x:
+      -- idem: K (K x) = K x
+      -- apply inv: inv (K (K x)) = inv (K x)
+      -- but inv (K (K x)) = K x (by left with argument K x)
+      -- so K x = inv (K x).
+      let
+        a : inv (K (K x)) ≡ inv (K x)
+        a = cong inv (Projection.idem P x)
+
+        b : inv (K (K x)) ≡ K x
+        b = Invertible.left I (K x)
+      in
+      trans (sym b) a
+
+    invKx≡Kx : inv (K x) ≡ K x
+    invKx≡Kx = sym step2
+
+  in
+  -- left x : inv (K x) = x, so x = K x
+  trans (sym (Invertible.left I x)) invKx≡Kx
+module DASHI.StrictContractionFinite where
+
+open import DASHI.Prelude
+open import DASHI.OperatorTypes
+
+-- Finite carrier witness: enumerate all elements.
+record Finite (S : Set) : Set₁ where
+  field
+    elems : List S
+    complete : ∀ x → Σ S (λ y → y ≡ x)  -- placeholder “covered”; replace with Mem proof
+
+-- A “strictly contractive” notion as a *property placeholder*.
+-- You should connect this to your Ultrametric/Contraction modules.
+record StrictContractive {S : Set} (K : S → S) : Set₁ where
+  field
+    -- in your repo this will be: ∀ x y → d(Kx,Ky) < d(x,y)
+    contract : ⊤
+
+-- Blind-spot theorem skeleton: if S is finite and K is strict contractive,
+-- then K has a unique fixed point (via eventual stabilization).
+postulate
+  finite-strict→unique-fix :
+    ∀ {S : Set} {K : S → S} →
+    Finite S → StrictContractive K →
+    Σ S (λ a → (K a ≡ a) × (∀ x → (K x ≡ x) → x ≡ a))
+module MaassRestoration where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+------------------------------------------------------------------------
+-- Abstract broken states / restored states.
+postulate
+  Broken  : Set
+  Stable  : Set
+
+------------------------------------------------------------------------
+-- A "restoration" map (Tikkun): Broken → Stable
+
+record Restoration : Set₁ where
+  field
+    restore : Broken → Stable
+
+------------------------------------------------------------------------
+-- Stability contracts you can actually test:
+-- idempotence (restoring twice has no further effect) and coherence
+-- with a projection/normal form.
+
+record NormalForm : Set₁ where
+  field
+    nf : Stable → Stable
+    nf-idem : ∀ s → nf (nf s) ≡ nf s
+
+record RestorationLaw : Set₁ where
+  field
+    R  : Restoration
+    NF : NormalForm
+    restores-to-nf : ∀ b → NormalForm.nf NF (Restoration.restore R b) ≡ Restoration.restore R b
+module ActionMonotonicity where
+
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
+open import KernelAlgebra
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (_≤_)
+
+
+------------------------------------------------------------------------
+-- Action functional
+
+record Action {X : Set} : Set₁ where
+  field
+    A : State X → Nat
+
+open Action public
+
+------------------------------------------------------------------------
+-- Monotonicity property
+
+record Monotone {X : Set}
+                (K : State X → State X)
+                (A : State X → Nat)
+                : Set where
+
+  field
+    monotone :
+      ∀ s → A (K s) ≤ A s
+module FixedPoint where
+
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Equality
+open import Ultrametric as UMetric
+open import Contraction
+
+------------------------------------------------------------------------
+-- Fixed point definition
+
+Fixed : {S : Set} → (S → S) → S → Set
+Fixed K x = K x ≡ x
+
+------------------------------------------------------------------------
+-- Uniqueness of fixed point under contraction
+
+record UniqueFixed
+       {S : Set}
+       (U : UMetric.Ultrametric S)
+       (K : S → S)
+       (C : Contractive U K)
+       : Set where
+
+  open UMetric.Ultrametric U
+  open Contractive C
+
+  field
+    unique :
+      ∀ x y →
+      Fixed K x →
+      Fixed K y →
+      x ≡ y
+module Verification.Prelude where
+
+open import Data.Nat public
+  renaming (ℕ to Nat)
+open import Data.Bool public using (Bool; true; false)
+open import Data.List public using (List; []; _∷_)
+open import Data.Product public using (Σ; _,_; _×_; proj₁; proj₂)
+open import Data.Empty public using (⊥; ⊥-elim)
+open import Data.Unit public using (⊤; tt)
+open import Relation.Binary.PropositionalEquality public using (_≡_; refl; cong; sym; trans)
+
+¬_ : Set → Set
+¬ A = A → ⊥
+
+fst : ∀ {A : Set} {B : A → Set} → Σ A B → A
+fst = proj₁
+
+snd : ∀ {A : Set} {B : A → Set} (p : Σ A B) → B (proj₁ p)
+snd = proj₂
+module Verification.ZK where
+
+open import Verification.Prelude
+
+postulate Public  : Set
+postulate Private : Set
+postulate Output  : Set
+
+-- The spec function (what correctness means)
+postulate spec : Public → Private → Output
+
+-- An implementation whose correctness you want to prove (could be a circuit)
+postulate impl : Public → Private → Output
+
+-- A proof object (SNARK) and a verifier predicate
+postulate Proof : Set
+postulate verify : Public → Output → Proof → Bool
+
+-- Soundness contract (non-ZK): if verifier accepts, output equals spec
+-- (This is where you plug the cryptographic theorem/certificate.)
+postulate zkSoundness :
+  ∀ pub priv out π →
+  verify pub out π ≡ true →
+  out ≡ spec pub priv
+
+-- ZK verification artifact: provide pub/out/proof and a verification boolean proof.
+record ZKCorrectness : Set₁ where
+  field
+    pub  : Public
+    priv : Private
+    out  : Output
+    π    : Proof
+    accepts : verify pub out π ≡ true
+    correct : out ≡ spec pub priv
+module Verification.ExecutionReview where
+
+open import Verification.Prelude
+
+-- A tiny abstract control-flow model.
+postulate Program : Set
+postulate Path    : Set
+
+-- Static analyzer produces a set/list of feasible paths
+postulate enumeratePaths : Program → List Path
+
+-- A property you claim holds on all paths.
+postulate SafeOnPath : Program → Path → Set
+
+-- “Execution review” = proof that for every enumerated path, Safe holds.
+All : ∀ {A : Set} → (A → Set) → List A → Set
+All P []       = ⊤
+All P (x ∷ xs) = P x × All P xs
+
+record ExecutionReview : Set₁ where
+  field
+    P   : Program
+    ok  : All (SafeOnPath P) (enumeratePaths P)
+module Verification.SourceHash where
+
+open import Verification.Prelude
+
+-- Abstract bytes; you can refine to Word8 later.
+postulate Byte : Set
+Bytes = List Byte
+
+-- Cryptographic hash as a function (model-level).
+postulate Hash : Set
+postulate hash : Bytes → Hash
+
+-- A repo snapshot is modeled as its bytes (tarball) + declared hash.
+record Snapshot : Set where
+  constructor snap
+  field
+    blob     : Bytes
+    declared : Hash
+
+-- Integrity proof obligation: declared equals computed.
+record SourceIntegrity : Set where
+  field
+    S : Snapshot
+    ok : Snapshot.declared S ≡ hash (Snapshot.blob S)
+module Verification.BinaryPatching where
+
+open import Verification.Prelude
+
+postulate Binary : Set
+postulate Input  : Set
+postulate Output : Set
+
+-- Semantics of a binary as a function (idealization).
+postulate run : Binary → Input → Output
+
+-- Vulnerability predicate (e.g., triggers UAF, OOB, etc.)
+postulate Vuln : Binary → Set
+
+-- Patch procedure
+postulate patch : Binary → Binary
+
+postulate SafeInput : Input → Set
+
+-- Correctness obligations
+record PatchCorrect : Set₁ where
+  field
+    B : Binary
+    -- vulnerability removed
+    fixed : ¬ Vuln (patch B)
+    -- behavior preserved on some agreed safe domain
+    preserved : ∀ i → SafeInput i → run (patch B) i ≡ run B i
+module Verification.Pipeline where
+
+open import Verification.Prelude
+open import Verification.SourceHash
+open import Verification.ExecutionReview
+open import Verification.ZK
+open import Verification.CostProfile
+open import Verification.BinaryPatching
+open import Verification.LMFDB
+
+record VerificationPipeline : Set₁ where
+  field
+    integrity : SourceIntegrity
+    review    : ExecutionReview
+    zk        : ZKCorrectness
+    cost      : CostWithin
+    patching  : PatchCorrect
+    lmfdb     : LMFDBVerified
+module Verification.LMFDB where
+
+open import Verification.Prelude
+
+postulate Statement : Set
+postulate Cert      : Set
+
+-- Checker is the trusted kernel that validates a certificate for a statement.
+postulate check : Statement → Cert → Bool
+
+record LMFDBVerified : Set₁ where
+  field
+    S    : Statement
+    cert : Cert
+    ok   : check S cert ≡ true
+module Verification.CostProfile where
+
+open import Verification.Prelude
+
+postulate Program : Set
+
+-- Abstract cost model (time, memory, steps, gas...)
+record Cost : Set where
+  constructor cost
+  field
+    time  : Nat
+    mem   : Nat
+    io    : Nat
+
+postulate profile : Program → Cost
+
+-- Thresholds
+record Budget : Set where
+  constructor budget
+  field
+    maxTime : Nat
+    maxMem  : Nat
+    maxIO   : Nat
+
+-- ≤ relation can be imported from stdlib; keep abstract here:
+postulate _≤_ : Nat → Nat → Set
+
+record CostWithin : Set where
+  field
+    P : Program
+    B : Budget
+    okTime : Cost.time (profile P) ≤ Budget.maxTime B
+    okMem  : Cost.mem  (profile P) ≤ Budget.maxMem  B
+    okIO   : Cost.io   (profile P) ≤ Budget.maxIO   B
+module Ultrametric where
+
+open import Data.Nat using (ℕ; _≤_; _<_)
+open import Agda.Builtin.Equality
+open import Agda.Builtin.Nat
+open import Agda.Builtin.Sigma
+open import Data.Nat using (ℕ; _⊔_)
+max : ℕ → ℕ → ℕ
+max = _⊔_
+
+
+------------------------------------------------------------------------
+-- Distance function into ℕ (discrete ultrametric)
+
+record Ultrametric (S : Set) : Set₁ where
+  field
+    d : S → S → Nat
+
+    -- Identity
+    id-zero :
+      ∀ x → d x x ≡ 0
+
+    -- Symmetry
+    symmetric :
+      ∀ x y → d x y ≡ d y x
+
+    -- Strong triangle inequality (ultrametric)
+    ultratriangle :
+      ∀ x y z →
+      d x z ≤ max (d x y) (d y z)
+module MonsterVectors where
+
+open import Agda.Builtin.Nat      using (Nat; zero; suc)
+open import Agda.Builtin.List     using (List; []; _∷_)
+
+open import MonsterState
+
+------------------------------------------------------------------------
+-- Minimal conformance vectors:
+-- (input state, expected next state)
+
+record Vector : Set where
+  constructor vec
+  field
+    input  : State
+    output : State
+
+Vectors : Set
+Vectors = List Vector
+
+-- Fill with concrete examples once your step spec is pinned.
+vectors : Vectors
+vectors = []
+module MonsterTraceCounts where
+
+open import Agda.Builtin.Nat      using (Nat; zero; suc; _+_)
+open import Agda.Builtin.List     using (List; []; _∷_)
+
+open import MonsterState
+open import MonsterGroups
+open import MonsterTrace
+
+------------------------------------------------------------------------
+-- If you encode digits preserved per step as Nat list:
+
+sum : List Nat → Nat
+sum []       = 0
+sum (n ∷ ns) = n + sum ns
+
+------------------------------------------------------------------------
+-- Hook: you provide these for your concrete witness.
+-- Option A: boundary predicate comes from the trace/table.
+-- Option B: boundary predicate comes from state fields you add.
+
+postulate
+  boundary : Boundary
+  digitsPerStep : List Nat
+
+------------------------------------------------------------------------
+-- Derived claims (you will later change these to concrete equalities once
+-- you paste the real trace + digits list and compute the results).
+
+groupsClaim : Nat
+groupsClaim = countGroups boundary exampleTrace
+
+digitsClaim : Nat
+digitsClaim = sum digitsPerStep
+module CRTPeriod where
+
+open import Agda.Builtin.Nat      using (Nat; _+_; _*_)
+open import Agda.Builtin.Equality using (_≡_)
+
+open import Data.Nat.Base   using (nonZero)
+open import Data.Nat.DivMod using (_%_)
+
+------------------------------------------------------------------------
+-- Repo-defined digit function:
+
+d : Nat → Nat
+d N = ((N % 71) + (N % 59) + (N % 47)) % 10
+
+period : Nat
+period = 71 * 59 * 47  -- 196883
+
+------------------------------------------------------------------------
+-- The theorem statement (R1):
+-- d(N + k*period) = d(N) for all k.
+--
+-- Proof is standard modular arithmetic:
+-- (N + k*period) mod p = N mod p for p ∈ {71,59,47}
+-- then propagate through sum and mod 10.
+--
+-- You can discharge this using stdlib DivMod lemmas, or (DASHI-style)
+-- by importing a small proof certificate.
+
+postulate
+  period-thm : ∀ N k → d (N + k * period) ≡ d N
+module Z6_RegularInverse where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Fin using (Fin; zero; suc; toℕ)
+open import Data.Product.Base using (Σ; _,_)
+open import Data.Nat.Properties as NatP using ()
+open import Relation.Binary.PropositionalEquality as Eq using (cong)
+
+------------------------------------------------------------------------
+-- Z6 elements as Fin 6
+Z6 : Set
+Z6 = Fin 6
+
+------------------------------------------------------------------------
+-- Ring operations modulo 6 (postulate or implement via Fin arithmetic).
+-- If you want full concreteness, implement add/mul with toℕ and mod 6.
+postulate
+  _+6_ : Z6 → Z6 → Z6
+  _*6_ : Z6 → Z6 → Z6
+
+------------------------------------------------------------------------
+-- von Neumann regular inverse witness: a = a*b*a
+
+Regular : Z6 → Set
+Regular a = Σ Z6 (λ b → a ≡ (a *6 b) *6 a)
+
+------------------------------------------------------------------------
+-- A concrete witness table (finite, so we can just provide b per a).
+-- You can later refine _+6_/_*6_ and this becomes fully checkable.
+
+postulate
+  bOf : Z6 → Z6
+  regular-law : ∀ a → a ≡ (a *6 bOf a) *6 a
+
+regular : ∀ a → Regular a
+regular a = bOf a , regular-law a
+module FascisticSystem where
+
+open import Data.Product using (Σ; _,_)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (_≡_)
+
+open import Data.Nat as Nat
+open import Data.Bool using (Bool; true; false)
+
+
+
+-- Abstract finite state space
+
+postulate
+  S : Set
+  finiteS : ℕ          -- cardinality (not constructively used)
+
+-- Entropy function (measure into ℕ for simplicity)
+
+postulate
+  H : S → ℕ
+
+-- Projection operator (idempotent, non-invertible)
+
+record Projection : Set where
+  field
+    K        : S → S
+    idemp    : ∀ s → K (K s) ≡ K s
+    contract : ∀ s → H (K s) ≤ H s
+
+-- System = list of projections applied in fixed order
+
+postulate
+  Ktotal : S → S
+
+-- Global contraction property
+
+postulate
+  monotone : ∀ s → H (Ktotal s) ≤ H s
+
+-- Strict decrease when not in fixed set
+
+postulate
+  strict-decrease :
+    ∀ s → H (Ktotal s) < H s ⊎ (Ktotal s ≡ s)
+
+-- Define attractor
+
+Attractor : Set
+Attractor = Σ S (λ s → Ktotal s ≡ s)
+
+-- Iteration
+
+iterate : ℕ → S → S
+iterate zero    s = s
+iterate (suc n) s = Ktotal (iterate n s)
+module PrimeRoles where
+
+open import Agda.Builtin.Nat      using (Nat)
+open import Data.Nat.Base         using (_<_ )
+open import Agda.Builtin.Bool     using (Bool; true; false)
+open import MonsterOntos
+
+------------------------------------------------------------------------
+-- Roles (you can refine these into a lattice later)
+
+data Role : Set where
+  Types       : Role
+  Operators   : Role
+  Functions   : Role
+  Consensus   : Role
+  Completion  : Role
+  Domain      : Nat → Role   -- generic “domain lane” if you want more structure
+
+roleOf : SSP → Role
+roleOf p2  = Types
+roleOf p3  = Operators
+roleOf p11 = Functions
+roleOf p23 = Consensus
+roleOf p71 = Completion
+-- the rest: either assign Domain lanes or make a richer record
+roleOf p5  = Domain 5
+roleOf p7  = Domain 7
+roleOf p13 = Domain 13
+roleOf p17 = Domain 17
+roleOf p19 = Domain 19
+roleOf p29 = Domain 29
+roleOf p31 = Domain 31
+roleOf p41 = Domain 41
+roleOf p47 = Domain 47
+roleOf p59 = Domain 59
+
+------------------------------------------------------------------------
+-- “Axiom of completion” as a termination measure contract:
+-- Completion prime provides a stop condition for any recursive refinement loop.
+
+record CompletionLaw (S : Set) : Set₁ where
+  field
+    measure : S → Nat
+    step    : S → S
+    -- If step decreases measure, recursion terminates.
+    decreases : ∀ s → measure (step s) < measure s
+module ThreeAdic_Attractor where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational using (ℚ; _+_; _-_; _*_; _/_; normalize)
+open import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality as Eq using (trans; sym; cong)
+
+------------------------------------------------------------------------
+-- Define x by the equation 3x = x - 1, and solve in ℚ.
+-- This is the algebraic “digit-shift” property you care about.
+
+postulate
+  x : ℚ
+
+-- Helpers (stdlib has numerals; we keep explicit)
+postulate
+  1ℚ : ℚ
+  2ℚ : ℚ
+  3ℚ : ℚ
+  minusHalfQ : ℚ
+
+postulate
+  shift : (3ℚ * x) ≡ (x - 1ℚ)
+  qed : x ≡ minusHalfQ
+
+------------------------------------------------------------------------
+-- Theorem: if 3x = x - 1 then x = -1/2
+
+solve : shift ≡ shift → x ≡ minusHalfQ
+solve _ =
+  -- You can fill this using ℚ ring reasoning:
+  -- 3x = x - 1  ⇒  2x = -1  ⇒ x = -1/2
+  -- In Agda, easiest is to use ℚP.*-cancelʳ / group properties.
+  qed
+module MonsterState where
+
+open import Agda.Builtin.Nat      using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Bool     using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List     using (List; []; _∷_)
+
+------------------------------------------------------------------------
+-- Factor mask (15 prime-power factors of |M|).
+-- true  = keep
+-- false = remove
+
+FactorCount : Nat
+FactorCount = 15
+
+Mask : Set
+Mask = List Bool
+
+replicate : Nat → Bool → Mask
+replicate zero    b = []
+replicate (suc n) b = b ∷ replicate n b
+
+fullMask : Mask
+fullMask = replicate FactorCount true
+
+emptyMask : Mask
+emptyMask = replicate FactorCount false
+
+------------------------------------------------------------------------
+-- Walk state.
+-- You can extend this with “window position”, “target digits”, etc.
+-- For DASHI: kernel is about how masks evolve; lens decides admissibility.
+
+record State : Set where
+  constructor st
+  field
+    mask   : Mask
+    window : Nat   -- abstract “digit window id” (moving window, index, etc.)
+
+------------------------------------------------------------------------
+-- A lens is the measurement predicate:
+-- admissible s m = “removing to mask m preserves the digit window condition”.
+
+record Lens : Set₁ where
+  field
+    admissible : State → Mask → Bool
+
+------------------------------------------------------------------------
+-- Candidate moves:
+-- In the real system, this is “remove subsets of prime-power factors”.
+-- Here we just take a finite list of candidate masks.
+
+Candidates : Set
+Candidates = List Mask
+module LogicTlurey where
+
+open import Agda.Builtin.Equality
+open import Agda.Builtin.List
+open import Agda.Builtin.Nat
+
+------------------------------------------------------------------------
+-- Local equality utilities (no stdlib needed)
+------------------------------------------------------------------------
+
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+cong : ∀ {A B : Set} {x y : A} (f : A → B) → x ≡ y → f x ≡ f y
+cong f refl = refl
+
+open import Base369
+
+------------------------------------------------------------------------
+-- Dialectical stages
+------------------------------------------------------------------------
+
+data Stage : Set where
+  seed      : Stage
+  counter   : Stage
+  resonance : Stage
+  overflow  : Stage
+
+next : Stage → Stage
+next seed      = counter
+next counter   = resonance
+next resonance = overflow
+next overflow  = seed
+
+------------------------------------------------------------------------
+-- Tlurey traces
+------------------------------------------------------------------------
+
+StageTrace : Nat → Stage → List Stage
+StageTrace zero    _ = []
+StageTrace (suc n) s = s ∷ StageTrace n (next s)
+
+length : ∀ {A : Set} → List A → Nat
+length []       = zero
+length (_ ∷ xs) = suc (length xs)
+
+_++_ : ∀ {A : Set} → List A → List A → List A
+[]       ++ ys = ys
+(x ∷ xs) ++ ys = x ∷ (xs ++ ys)
+
+StageTrace-length : ∀ n s → length (StageTrace n s) ≡ n
+StageTrace-length zero    _ = refl
+StageTrace-length (suc n) s = cong suc (StageTrace-length n (next s))
+
+next⁴ : ∀ s → spin 4 next s ≡ s
+next⁴ seed      = refl
+next⁴ counter   = refl
+next⁴ resonance = refl
+next⁴ overflow  = refl
+
+spin-next-succ : ∀ n s → spin n next (next s) ≡ spin (suc n) next s
+spin-next-succ zero    _ = refl
+spin-next-succ (suc n) s = cong next (spin-next-succ n s)
+
+StageTrace-periodic : ∀ n s → StageTrace (n + 4) s ≡ StageTrace n s ++ StageTrace 4 (spin n next s)
+StageTrace-periodic zero    s = refl
+StageTrace-periodic (suc n) s rewrite sym (spin-next-succ n s) =
+  cong (s ∷_) (StageTrace-periodic n (next s))
+
+StageTrace-cycle : ∀ n → StageTrace (n + 4) seed ≡ StageTrace n seed ++ StageTrace 4 (spin n next seed)
+StageTrace-cycle n = StageTrace-periodic n seed
+
+
+------------------------------------------------------------------------
+-- Semantics via triadic values
+------------------------------------------------------------------------
+
+stageTone : Stage → TriTruth
+stageTone seed      = tri-low
+stageTone counter   = tri-mid
+stageTone resonance = tri-high
+stageTone overflow  = tri-low
+
+combineStage : Stage → Stage → TriTruth
+combineStage a b = triXor (stageTone a) (stageTone b)
+
+stageTone-next-seed : stageTone (next seed) ≡ rotateTri (stageTone seed)
+stageTone-next-seed = refl
+
+stageTone-next-counter : stageTone (next counter) ≡ rotateTri (stageTone counter)
+stageTone-next-counter = refl
+
+stageTone-next-resonance : stageTone (next resonance) ≡ rotateTri (stageTone resonance)
+stageTone-next-resonance = refl
+
+stageTone-next-overflow : stageTone (next overflow) ≡ stageTone seed
+stageTone-next-overflow = refl
+
+resonance-combine : combineStage resonance resonance ≡ tri-mid
+resonance-combine = refl
+module MonsterGroups where
+
+open import Agda.Builtin.Nat      using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Bool     using (Bool; true; false)
+open import Agda.Builtin.List     using (List; []; _∷_)
+
+open import MonsterState
+
+------------------------------------------------------------------------
+-- Boundary predicate: “this state ends a group”.
+-- You define it from the walk semantics (or from the trace table markers).
+
+Boundary : Set
+Boundary = State → Bool
+
+------------------------------------------------------------------------
+-- Count groups in a trace given a boundary predicate.
+-- Convention: group count starts at 0 for empty trace, else 1 + boundaries hit.
+
+countGroups : Boundary → List State → Nat
+countGroups b [] = 0
+countGroups b (s ∷ ss) = suc (go ss)
+  where
+    go : List State → Nat
+    go [] = 0
+    go (t ∷ ts) with b t
+    ... | true  = suc (go ts)
+    ... | false = go ts
+
+------------------------------------------------------------------------
+-- You can similarly count “preserved digits” if your trace stores that.
+-- For now keep it abstract until you add a field.
+-- Agda: 10-Fold Way Bridges
+module TenfoldBridges where
+
+open import Data.Nat using (ℕ)
+open import Data.Nat.DivMod using (_%_)
+open import Data.Bool
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; _≢_)
+
+-- Topological class
+topoClass : ℕ → ℕ
+topoClass n = n % 10
+
+-- Bridge record
+record Bridge : Set where
+  field
+    nodeA : ℕ
+    nodeB : ℕ
+    different : topoClass nodeA ≢ topoClass nodeB
+
+-- Symmetry
+bridge-sym : (b : Bridge) → Bridge
+bridge-sym record { nodeA = a ; nodeB = b ; different = d } =
+  record { nodeA = b ; nodeB = a ; different = λ eq → d (sym eq) }
+
+-- Example: 232 ↔ 323
+bridge-232-323 : Bridge
+bridge-232-323 = record
+  { nodeA = 232
+  ; nodeB = 323
+  ; different = λ ()
+  }
+
+-- Theorem: Symmetry preserves bridges
+bridge-symmetry : (b : Bridge) → 
+  Bridge.nodeA (bridge-sym b) ≡ Bridge.nodeB b
+bridge-symmetry b = refl

@@ -15,6 +15,8 @@ postulate Vuln : Binary → Set
 -- Patch procedure
 postulate patch : Binary → Binary
 
+postulate SafeInput : Input → Set
+
 -- Correctness obligations
 record PatchCorrect : Set₁ where
   field
@@ -22,5 +24,4 @@ record PatchCorrect : Set₁ where
     -- vulnerability removed
     fixed : ¬ Vuln (patch B)
     -- behavior preserved on some agreed safe domain
-    postulate SafeInput : Input → Set
     preserved : ∀ i → SafeInput i → run (patch B) i ≡ run B i

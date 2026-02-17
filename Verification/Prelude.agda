@@ -1,22 +1,19 @@
 module Verification.Prelude where
 
-open import Agda.Builtin.Nat      using (Nat; _+_; _*_; zero; suc)
-open import Agda.Builtin.Bool     using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List     using (List; []; _∷_)
-
-data ⊥ : Set where
-record ⊤ : Set where constructor tt
-
-infixr 4 _,_
-record Σ (A : Set) (B : A → Set) : Set where
-  constructor _,_
-  field fst : A
-        snd : B fst
-
-infixr 3 _×_
-_×_ : Set → Set → Set
-A × B = Σ A (λ _ → B)
+open import Data.Nat public
+  renaming (ℕ to Nat)
+open import Data.Bool public using (Bool; true; false)
+open import Data.List public using (List; []; _∷_)
+open import Data.Product public using (Σ; _,_; _×_; proj₁; proj₂)
+open import Data.Empty public using (⊥; ⊥-elim)
+open import Data.Unit public using (⊤; tt)
+open import Relation.Binary.PropositionalEquality public using (_≡_; refl; cong; sym; trans)
 
 ¬_ : Set → Set
 ¬ A = A → ⊥
+
+fst : ∀ {A : Set} {B : A → Set} → Σ A B → A
+fst = proj₁
+
+snd : ∀ {A : Set} {B : A → Set} (p : Σ A B) → B (proj₁ p)
+snd = proj₂

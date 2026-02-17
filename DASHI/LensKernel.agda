@@ -14,9 +14,9 @@ record LensInvariant {S A : Set} (L : Lens S A) (K : S → S) : Set where
 -- Monotone variant (when observations are ordered)
 record Preorder (A : Set) : Set₁ where
   field _⊑_ : A → A → Set
-        refl : ∀ a → a ⊑ a
-        trans : ∀ a b c → a ⊑ b → b ⊑ c → a ⊑ c
+        refl⊑ : ∀ a → a ⊑ a
+        trans⊑ : ∀ a b c → a ⊑ b → b ⊑ c → a ⊑ c
 
 record LensMonotone {S A : Set} (P : Preorder A) (L : Lens S A) (K : S → S) : Set where
   open Preorder P
-  field mono : ∀ x → observe L (K x) ⊑ observe L x
+  field mono : ∀ x → Lens.observe L (K x) ⊑ Lens.observe L x

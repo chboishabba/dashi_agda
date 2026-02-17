@@ -1,4 +1,4 @@
-module DASHI.NonTriviality where
+module DASHI.Nontriviality where
 
 open import DASHI.Prelude
 
