@@ -13,6 +13,6 @@ record VerificationPipeline : Set₁ where
     integrity : SourceIntegrity
     review    : ExecutionReview
     zk        : ZKCorrectness
-    cost      : CostWithin
+    costVal   : CostWithin
     patching  : PatchCorrect
     lmfdb     : LMFDBVerified

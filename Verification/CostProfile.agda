@@ -23,7 +23,7 @@ record Budget : Set where
     maxIO   : Nat
 
 -- ≤ relation can be imported from stdlib; keep abstract here:
-postulate _≤_ : Nat → Nat → Set
+
 
 record CostWithin : Set where
   field
