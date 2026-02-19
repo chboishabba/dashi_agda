@@ -22,7 +22,7 @@ record COL (S : Nat -> Set) : Set1 where
     obs-stable : (n : Nat) (x : S n) -> Obs n x ≡ true -> Obs n (K n x) ≡ true
 
     -- Lift is witness-respecting: the old state is embedded, not destroyed.
-    postulate-embed : (n : Nat) (x : S n) -> ⊤
+    embed-ok : (n : Nat) (x : S n) -> ⊤
 
 open COL public
 

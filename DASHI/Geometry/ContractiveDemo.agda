@@ -79,9 +79,6 @@ dNat-x≢y=1 {x} {y} x≢y with x ≟ y
 -- Strict contraction on distinct points (Contractive≢ style)
 ------------------------------------------------------------------------
 
-zero<one : 0 < 1
-zero<one = s≤s z≤n
-
 postulate
   contractive≢-proj : ∀ t → (∀ {x y} → x ≢ y → dNat (Kproj t x) (Kproj t y) < dNat x y)
 
