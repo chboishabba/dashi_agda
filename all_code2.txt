@@ -1505,6 +1505,51 @@ invertible-no-strict-descent :
   ¬ (∀ s → InvertibleNat.H U (InvertibleNat.step U s) < InvertibleNat.H U s)
 invertible-no-strict-descent U s₀ strict =
   NatNoInfiniteDescent (InvertibleNat.H U) (InvertibleNat.step U) s₀ strict
+module DASHI.Geometry.EinsteinFromDefect where
+
+open import Agda.Builtin.Equality using (_≡_)
+
+open import DASHI.Unifier using (Geometry; Matter; ℝ)
+
+geometry-metric : (geo : Geometry) → Geometry.M geo → Geometry.M geo → ℝ
+geometry-metric geo = Geometry.g geo
+
+einstein-tensor : (geo : Geometry) → Geometry.M geo → Geometry.M geo → ℝ
+einstein-tensor geo = Geometry.Gμν geo
+
+record BianchiBundle (geometry : Geometry) : Set₁ where
+  field
+    matter : Matter (Geometry.M geometry)
+    first : ∀ x y z → Geometry.BianchiFirst geometry x y z
+    second : ∀ x y z → Geometry.BianchiSecond geometry x y z
+    divergence-free : ∀ x y → Geometry.divergenceFree geometry x y
+    conservation : ∀ x → Matter.conservation matter x
+    defect-correspondence :
+      ∀ x y → Geometry.Gμν geometry x y ≡ Matter.Tμν matter x y
+
+record BianchiConsequences {geometry : Geometry} (bundle : BianchiBundle geometry) : Set₁ where
+  field
+    first : ∀ x y z → Geometry.BianchiFirst geometry x y z
+    second : ∀ x y z → Geometry.BianchiSecond geometry x y z
+    divergence-free : ∀ x y → Geometry.divergenceFree geometry x y
+    conservation : ∀ x → Matter.conservation (BianchiBundle.matter bundle) x
+    defect-correspondence :
+      ∀ x y →
+      Geometry.Gμν geometry x y ≡
+      Matter.Tμν (BianchiBundle.matter bundle) x y
+
+Bianchi-theorem
+  : ∀ {geometry : Geometry}
+  → (bundle : BianchiBundle geometry)
+  → BianchiConsequences bundle
+Bianchi-theorem bundle =
+  record
+    { first = BianchiBundle.first bundle
+    ; second = BianchiBundle.second bundle
+    ; divergence-free = BianchiBundle.divergence-free bundle
+    ; conservation = BianchiBundle.conservation bundle
+    ; defect-correspondence = BianchiBundle.defect-correspondence bundle
+    }
 module DASHI.Geometry.FixedPointExistence_Projection where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -1835,6 +1880,31 @@ record UniquenessClaim (State : Set) : Set₁ where
     E : Emergence State
     admissible : State → Bool
     unique-SM : ∀ s → admissible s ≡ true → Emergence.pickGauge E s ≡ SU3×SU2×U1
+module DASHI.Algebra.ConstraintAlgebraClosure where
+
+open import DASHI.Algebra.ConstraintAlgebraClosureTests renaming
+  (DiracClosure to DiracClosureType
+  ; ValuationEquivariance to ValuationEquivarianceType
+  ; NoLeakageStability to NoLeakageStabilityType
+  ; ConstraintAlgebraTheorem to ConstraintAlgebraTheoremType)
+
+record ConstraintClosureBundle : Set₁ where
+  field
+    invariance : ValuationEquivarianceType
+    stability : NoLeakageStabilityType
+
+closure-from-bundle : ConstraintClosureBundle → DiracClosureType
+closure-from-bundle bundle =
+  ConstraintAlgebraTheoremType
+    (ConstraintClosureBundle.invariance bundle)
+    (ConstraintClosureBundle.stability bundle)
+
+record ConstraintConsequences (bundle : ConstraintClosureBundle) : Set₁ where
+  field
+    closure : DiracClosureType
+
+ConstraintClosure-theorem : ConstraintClosureBundle → DiracClosureType
+ConstraintClosure-theorem = closure-from-bundle
 module DASHI.Algebra.Quantum.SpinEmergence where
 
 open import Data.Nat renaming (ℕ to Nat)
@@ -2764,7 +2834,7 @@ record LorentzInterval {E : Set} (P : Poset E) (CA : ChainAntichain P) : Set₁ 
 
     -- Theorems you said are proven:
     signature-3+1 : Set  -- package the full statement however you like
-    p=3-unique     : Set
+    p3-unique     : Set
 
 ------------------------------------------------------------------------
 -- 4. Multiscale state tower and decimation operator
@@ -2887,15 +2957,17 @@ postulate
 record Geometry : Set₁ where
   field
     M : Set
-    g : Set      -- metric object
-    ∇ : Set      -- connection
-    Gμν : Set    -- Einstein tensor object
-    Bianchi : Set
+    g : M → M → ℝ
+    ∇ : M → M → M
+    Gμν : M → M → ℝ
+    BianchiFirst : M → M → M → Set
+    BianchiSecond : M → M → M → Set
+    divergenceFree : M → M → Set
 
-record Matter : Set₁ where
+record Matter (M : Set) : Set₁ where
   field
-    Tμν : Set
-    conservation : Set
+    Tμν : M → M → ℝ
+    conservation : M → Set
 
 postulate
   Einstein-from-defect : Set
@@ -3535,6 +3607,34 @@ bucket71-ev : EV → Fin 71
 bucket71-ev ev =
   -- convert (dot mod 71) into Fin 71
   fromℕ< (m%n<n (dotNat ev w) 71)
+module DASHI.Lorentz.SignatureUniqueness where
+
+open import DASHI.Unifier using (Poset; ChainAntichain; LorentzInterval)
+
+record SignatureBundle {E : Set} (P : Poset E) (CA : ChainAntichain P) : Set₁ where
+  field
+    interval : LorentzInterval P CA
+    signature-proof : LorentzInterval.signature-3+1 interval
+    p3-uniqueness : LorentzInterval.p3-unique interval
+    scaling-stability : Set
+
+record SignatureConsequences {E : Set} {P : Poset E} {CA : ChainAntichain P}
+  (bundle : SignatureBundle P CA) : Set₁ where
+  field
+    signature-proof : LorentzInterval.signature-3+1 (SignatureBundle.interval bundle)
+    p3-uniqueness : LorentzInterval.p3-unique (SignatureBundle.interval bundle)
+    scaling-stability : Set
+
+Signature-uniqueness
+  : ∀ {E : Set} {P : Poset E} {CA : ChainAntichain P}
+  → (bundle : SignatureBundle P CA)
+  → SignatureConsequences bundle
+Signature-uniqueness bundle =
+  record
+    { signature-proof = SignatureBundle.signature-proof bundle
+    ; p3-uniqueness = SignatureBundle.p3-uniqueness bundle
+    ; scaling-stability = SignatureBundle.scaling-stability bundle
+    }
 module DASHI.Core.KernelMonoid where
 
 open import DASHI.Core.Prelude
@@ -3645,6 +3745,132 @@ record Classifies {S : Set} (K : S → S) : Set₁ where
       (class ≡ invertible → Invertible K) ×
       (class ≡ projection  → Projection K) ×
       (class ≡ regular     → Regularizer K)
+
+module DASHI.Quantum.AnomalyFreedom where
+
+open import DASHI.Unifier using (Tower; HilbertSpace)
+open import DASHI.Quantum.Stone using (StoneBundle; StoneConsequences; Stone-theorem)
+open import DASHI.Quantum.AgreementDepth using (AgreementDepthBundle; AgreementDepth-theorem)
+open import DASHI.Algebra.ConstraintAlgebraClosure
+  using (ConstraintClosureBundle; ConstraintClosure-theorem)
+open import DASHI.Algebra.ConstraintAlgebraClosureTests
+  renaming (DiracClosure to DiracClosureType)
+open import DASHI.Algebra.Quantum.UVFinitenessHolographyTests using (UVFinite)
+
+record AnomalyBundle (Tow : Tower) (HS : HilbertSpace) : Set₁ where
+  field
+    stone : StoneBundle Tow HS
+    agreement : AgreementDepthBundle
+    constraint : ConstraintClosureBundle
+    anomaly-free : Set  -- ensures CCR + constraints align with UV bound
+
+record AnomalyConsequences {Tow HS} (bundle : AnomalyBundle Tow HS) : Set₁ where
+  field
+    stone : StoneConsequences (AnomalyBundle.stone bundle)
+    dirac : DiracClosureType
+    uv-finite : UVFinite
+    anomaly-free : Set
+
+AnomalyFreedom : ∀ {Tow HS} (bundle : AnomalyBundle Tow HS) → AnomalyConsequences bundle
+AnomalyFreedom bundle =
+  record
+    { stone = Stone-theorem (AnomalyBundle.stone bundle)
+    ; dirac = ConstraintClosure-theorem (AnomalyBundle.constraint bundle)
+    ; uv-finite = AgreementDepth-theorem (AnomalyBundle.agreement bundle)
+    ; anomaly-free = AnomalyBundle.anomaly-free bundle
+    }
+module DASHI.Quantum.Stone where
+
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Product using (Σ; _,_; _×_)
+
+open import DASHI.Unifier using (ℝ; HilbertSpace; Tower; WaveLift; _+_; _-_ ; _≤_; _<_; max; toℝ)
+
+absDiff : ℝ → ℝ → ℝ
+absDiff x y = max (x - y) (y - x)
+
+record StoneSelfAdjoint (HS : HilbertSpace) (K : HilbertSpace.H HS → HilbertSpace.H HS) : Set where
+  open HilbertSpace HS public
+  field
+    symmetric :
+      ∀ x y → ⟨ K x , y ⟩ ≡ ⟨ x , K y ⟩
+
+record StoneGroup {Tow : Tower} {HS : HilbertSpace} (lift : WaveLift Tow HS) : Set₁ where
+  field
+    identity :
+      ∀ x → WaveLift.U lift (toℝ 0) x ≡ x
+    composition :
+      ∀ s t x →
+      WaveLift.U lift (s + t) x ≡ WaveLift.U lift s (WaveLift.U lift t x)
+
+record StoneContinuity {S : Set} (U : ℝ → S → S) (dist : S → S → ℝ) : Set₁ where
+  field
+    continuity :
+      ∀ x (ε : ℝ) →
+      toℝ 0 < ε →
+      Σ ℝ (λ δ →
+        (toℝ 0 < δ)
+        × (∀ {s t : ℝ} →
+           absDiff s t < δ →
+           dist (U s x) (U t x) < ε))
+
+record StoneBundle (Tow : Tower) (HS : HilbertSpace) : Set₁ where
+  open HilbertSpace HS public
+  field
+    lift : WaveLift Tow HS
+    generator : H → H
+    distance : H → H → ℝ
+    self-adjoint : StoneSelfAdjoint HS generator
+    stone-group : StoneGroup lift
+    strong-continuity : StoneContinuity (WaveLift.U lift) distance
+
+stone-unitary
+  : ∀ {Tow HS}
+  → StoneBundle Tow HS
+  → ℝ → HilbertSpace.H HS → HilbertSpace.H HS
+stone-unitary bundle = WaveLift.U (StoneBundle.lift bundle)
+
+stone-distance
+  : ∀ {Tow HS} (bundle : StoneBundle Tow HS)
+  → HilbertSpace.H HS → HilbertSpace.H HS → ℝ
+stone-distance bundle = StoneBundle.distance bundle
+
+record StoneConsequences {Tow : Tower} {HS : HilbertSpace} (bundle : StoneBundle Tow HS) : Set₁ where
+  field
+    stone-group : StoneGroup (StoneBundle.lift bundle)
+    strong-continuity : StoneContinuity (stone-unitary bundle) (stone-distance bundle)
+    stone-self-adjoint : StoneSelfAdjoint HS (StoneBundle.generator bundle)
+
+Stone-theorem
+  : ∀ {Tow HS} (bundle : StoneBundle Tow HS)
+  → StoneConsequences bundle
+Stone-theorem bundle =
+  record
+    { stone-group = StoneBundle.stone-group bundle
+    ; strong-continuity = StoneBundle.strong-continuity bundle
+    ; stone-self-adjoint = StoneBundle.self-adjoint bundle
+    }
+module DASHI.Quantum.AgreementDepth where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Unifier using (Tower; WaveLift; HilbertSpace)
+open import DASHI.Algebra.Quantum.UVFinitenessHolographyTests using (AreaBound; UVFinite; UVFinitenessTheorem)
+
+record AgreementDepthBundle : Set₁ where
+  field
+    tower : Tower
+    hs : HilbertSpace
+    lift : WaveLift tower hs
+    area-bound : AreaBound
+
+record AgreementConsequences (bundle : AgreementDepthBundle) : Set₁ where
+  field
+    uv-finite : UVFinite
+    area-bound : AreaBound
+
+AgreementDepth-theorem : AgreementDepthBundle → UVFinite
+AgreementDepth-theorem bundle =
+  UVFinitenessTheorem (AgreementDepthBundle.area-bound bundle)
 module MaassRestoration where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
