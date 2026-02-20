@@ -1,57 +1,54 @@
 module DASHI.Geometry.Signature31AndDim3 where
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Product using (_×_; _,_)
-open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Equality using (_≡_)
 
-QuadraticForm : Set
-QuadraticForm = ⊤
+-- All data/axioms are parameters; no vacuous defaults.
 
-Signature : Set
-Signature = Nat
-
-sig31 : Signature
-sig31 = 4
-
-Cone : Set
-Cone = ⊤
-
-sig : QuadraticForm → Signature
-sig _ = sig31
-
-coneOf : QuadraticForm → Cone
-coneOf _ = tt
-
-record CausalAxioms : Set₁ where
+record LorentzData : Set₁ where
   field
-    isotropy : ∀ (Q : QuadraticForm) → Set
-    finiteSpeed : ∀ (Q : QuadraticForm) → Set
-    convex : ∀ (Q : QuadraticForm) → Set
-    nondeg : ∀ (Q : QuadraticForm) → Set
+    QuadraticForm : Set
+    Signature : Set
+    sig31 : Signature
+    sig : QuadraticForm → Signature
+    Cone : Set
+    coneOf : QuadraticForm → Cone
+
+record CausalAxioms (D : LorentzData) : Set₁ where
+  field
+    isotropy : ∀ (Q : LorentzData.QuadraticForm D) → Set
+    finiteSpeed : ∀ (Q : LorentzData.QuadraticForm D) → Set
+    convex : ∀ (Q : LorentzData.QuadraticForm D) → Set
+    nondeg : ∀ (Q : LorentzData.QuadraticForm D) → Set
     cone-determines-Q :
-      ∀ (Q Q' : QuadraticForm) → coneOf Q ≡ coneOf Q' → sig Q ≡ sig Q'
+      ∀ (Q Q' : LorentzData.QuadraticForm D) →
+      LorentzData.coneOf D Q ≡ LorentzData.coneOf D Q' →
+      LorentzData.sig D Q ≡ LorentzData.sig D Q'
 
 open CausalAxioms public
 
-SignatureUniqueness : CausalAxioms → Set
-SignatureUniqueness A =
-  ∀ (Q : QuadraticForm) →
-  isotropy A Q → finiteSpeed A Q → convex A Q → nondeg A Q →
-  sig Q ≡ sig31
+SignatureUniqueness :
+  ∀ {D} → CausalAxioms D → Set
+SignatureUniqueness {D} A =
+  ∀ (Q : LorentzData.QuadraticForm D) →
+  isotropy A Q →
+  finiteSpeed A Q →
+  convex A Q →
+  nondeg A Q →
+  LorentzData.sig D Q ≡ LorentzData.sig31 D
 
-Dim3Axioms : Set
-Dim3Axioms = ⊤
+record Dim3Witness (D : LorentzData) : Set₁ where
+  field dim3 : Set
 
-record LorentzDimClosure (A : CausalAxioms) : Set where
+record LorentzDimClosure {D} (A : CausalAxioms D) : Set₁ where
   field
     sigProof : SignatureUniqueness A
-    dimProof : Dim3Axioms
+    dimProof : Dim3Witness D
 
-lorentzDimClosure : (A : CausalAxioms) → LorentzDimClosure A
-lorentzDimClosure A =
-  record
-    { sigProof = λ _ _ _ _ _ → refl
-    ; dimProof = tt
-    }
+mkLorentzDimClosure :
+  ∀ {D} (A : CausalAxioms D) →
+  SignatureUniqueness A →
+  Dim3Witness D →
+  LorentzDimClosure A
+mkLorentzDimClosure A sigPf dimPf =
+  record { sigProof = sigPf ; dimProof = dimPf }

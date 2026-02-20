@@ -1,60 +1,40 @@
 module DASHI.Algebra.Quantum.CCRFromProjection where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Product using (_×_; _,_)
-open import Agda.Builtin.Unit using (⊤; tt)
+open import Agda.Builtin.Equality using (_≡_)
 
-ℚ : Set
-ℚ = ⊤
-
-_*q_ : ℚ → ℚ → ℚ
-_*q_ _ _ = tt
-
-Hilbert : Set
-Hilbert = ⊤
-
-U : Set
-U = ⊤
-
-_∙_ : U → U → U
-_∙_ _ _ = tt
-
-Iu : U
-Iu = tt
-
-XTrans : ℚ → U
-XTrans _ = tt
-
-PTrans : ℚ → U
-PTrans _ = tt
-
-phase : ℚ → U
-phase _ = tt
-
-Weyl : Set
-Weyl = ⊤
-
-P : Hilbert → Hilbert
-P _ = tt
-
-idem : ∀ x → P (P x) ≡ P x
-idem _ = refl
-
-actX : ℚ → Hilbert → Hilbert
-actX _ _ = tt
-
-actP : ℚ → Hilbert → Hilbert
-actP _ _ = tt
-
-record ProjectionWeylAxioms : Set₁ where
+-- Parameterised CCR/Weyl data so this module is non-vacuous.
+record CCRData : Set₁ where
   field
-    weyl : Weyl
+    ℚ : Set
+    _*q_ : ℚ → ℚ → ℚ
+    Hilbert : Set
+    U : Set
+    _∙_ : U → U → U
+    Iu : U
+    XTrans : ℚ → U
+    PTrans : ℚ → U
+    phase : ℚ → U
+    P : Hilbert → Hilbert
+    idem : ∀ x → P (P x) ≡ P x
+    actX : ℚ → Hilbert → Hilbert
+    actP : ℚ → Hilbert → Hilbert
+
+Weyl : (D : CCRData) → Set
+Weyl D =
+  ∀ a b →
+    CCRData._∙_ D (CCRData.XTrans D a) (CCRData.PTrans D b) ≡
+    CCRData._∙_ D (CCRData.phase D (CCRData._*q_ D a b))
+                   (CCRData._∙_ D (CCRData.PTrans D b) (CCRData.XTrans D a))
+
+record ProjectionWeylAxioms (D : CCRData) : Set₁ where
+  open CCRData D
+  field
+    weyl : Weyl D
     proj-inv-P : ∀ b ψ → P (actP b ψ) ≡ P ψ
     proj-covar-X : ∀ a ψ → P (actX a ψ) ≡ actX a (P ψ)
 
-CCR : Set
-CCR = ⊤
+CCR : CCRData → Set₁
+CCR D = ProjectionWeylAxioms D
 
-stone-vn : ProjectionWeylAxioms → CCR
-stone-vn _ = tt
+stone-vn : ∀ {D} → ProjectionWeylAxioms D → CCR D
+stone-vn axioms = axioms

@@ -1,56 +1,60 @@
-{-# OPTIONS --allow-unsolved-metas #-}
 module DASHI.Geometry.NoLeakageOrthogonality where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
-open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Product using (_×_; _,_)
-open import Agda.Builtin.Unit using (⊤; tt)
 
--- Abstract vector space / inner-product interfaces
-postulate
-  V : Set
-  _+_ _-_ _*_ : V → V → V
-  0v : V
+----------------------------------------------------------------
+-- Inner-product data supplied as assumptions (no metas/stubs).
+----------------------------------------------------------------
 
-  ⟪_,_⟫ : V → V → V
-  ∥_∥² : V → V
-  two : V
+record InnerProductData : Set₁ where
+  field
+    V : Set
+    _+_ _-_ _*_ : V → V → V
+    0v : V
+    two : V
+    ⟪_,_⟫ : V → V → V
+    ∥_∥² : V → V
+    add-norm² :
+      ∀ a b → ∥ a + b ∥² ≡ (∥ a ∥² + ∥ b ∥²) + (two * ⟪ a , b ⟫)
+    cancel-add-left : ∀ {a c} → a ≡ a + c → c ≡ 0v
+    div2-zero : ∀ {z} → two * z ≡ 0v → z ≡ 0v
 
-postulate
-  add-norm² :
-    ∀ a b → ∥ a + b ∥² ≡ (∥ a ∥² + ∥ b ∥²) + (two * ⟪ a , b ⟫)
+----------------------------------------------------------------
+-- Projections and “no leakage ⇒ orthogonality”
+----------------------------------------------------------------
 
-record Projection : Set₁ where
+record Projection (D : InnerProductData) : Set₁ where
+  open InnerProductData D
   field
     P : V → V
     idem : ∀ x → P (P x) ≡ P x
     split : ∀ x → P x + (x - P x) ≡ x
 
-coarse : Projection → V → V
+coarse : ∀ {D} → Projection D → InnerProductData.V D → InnerProductData.V D
 coarse Pr x = Projection.P Pr x
 
-detail : Projection → V → V
-detail Pr x = x - Projection.P Pr x
+detail : ∀ {D} → Projection D → InnerProductData.V D → InnerProductData.V D
+detail {D} Pr x =
+  let open InnerProductData D in x - Projection.P Pr x
 
-NoLeakage : Projection → Set
-NoLeakage Pr =
+NoLeakage : ∀ {D} → Projection D → Set
+NoLeakage {D} Pr =
   ∀ x → ∥ x ∥² ≡ ∥ coarse Pr x ∥² + ∥ detail Pr x ∥²
+  where open InnerProductData D
 
-Orthogonal : Projection → Set
-Orthogonal Pr =
+Orthogonal : ∀ {D} → Projection D → Set
+Orthogonal {D} Pr =
   ∀ x → ⟪ coarse Pr x , detail Pr x ⟫ ≡ 0v
-
-postulate
-  cancel-add-left : ∀ {a c} → a ≡ a + c → c ≡ 0v
-  div2-zero : ∀ {z} → two * z ≡ 0v → z ≡ 0v
+  where open InnerProductData D
 
 NoLeakage⇒Orthogonal :
-  ∀ (Pr : Projection) →
+  ∀ {D} (Pr : Projection D) →
   NoLeakage Pr →
   Orthogonal Pr
-NoLeakage⇒Orthogonal Pr NL x =
+NoLeakage⇒Orthogonal {D} Pr NL x =
   let open Projection Pr
+      open InnerProductData D
       c = coarse Pr x
       d = detail Pr x
       eq1 = NL x

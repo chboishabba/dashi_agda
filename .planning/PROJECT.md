@@ -23,6 +23,10 @@ Every new lemma must land in Agda with a machine-checked bridge between the quan
   Added `DASHI.Geometry.ProjectionContractiveConstant`, `DASHI.Geometry.NoLeakageOrthogonality`, `DASHI.Geometry.ParallelogramToInnerProduct`, `DASHI.Algebra.Clifford.UniversalProperty`, `DASHI.Algebra.Quantum.SpinFromEvenClifford`, `DASHI.Geometry.EinsteinFromRGNoLeakage`, `DASHI.Algebra.Quantum.CCRFromProjection`, `DASHI.Algebra.Quantum.UVFiniteness`, and `DASHI.Geometry.Signature31AndDim3` so the pipeline from contraction to Clifford/Spin to Einstein/CCR/UVfiniteness and dimension uniqueness is explicit.
 - [x] Constraint-anomaly freedom tying Stone, agreement depth, and constraint closure together.
   `AnomalyBundle` now yields `AnomalyConsequences` with the Stone group, Dirac closure, UV-finiteness, and anomaly-free witness stitched together so the CCR + constraint + UV tower story is tracked in one record.
+- [x] De-stubbed bridge scaffolding (Clifford/Spin, CCR, UV, signature, orthogonality).
+  Clifford universal property now requires an explicit anti-commutation proof; Spin double cover requires kernel/surjectivity data; NoLeakageOrthogonality is parameterised over an inner-product structure without metas; UV finiteness is proved from a supplied bound; signature/dimension closure is purely data-driven (no reflexive defaults).
+- [x] RG→Einstein and anomaly data de-stubbed.
+  `EinsteinFromRGNoLeakage` now depends on an explicit `RGGeometryData` bundle (no postulates), and `AnomalyFreedom` requires concrete cubic/mixed anomaly values with cancellation proofs in its bundle.
 
 ### Active
 - None — the listed bridge theorems have been formalized; further work can resume from new downstream obligations when they arise.
@@ -45,4 +49,4 @@ Every new lemma must land in Agda with a machine-checked bridge between the quan
 | Prioritize bridging theorems over gauge/matter completeness | The checklist called these the “true QG parts,” and failing to mechanize them invalidates the unification | — Pending |
 
 ---
-*Last updated: 2026-02-20 after kickoff planning*
+*Last updated: 2026-02-20 after bridge de-stubbing pass*
