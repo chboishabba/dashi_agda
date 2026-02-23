@@ -1,5 +1,33 @@
 NEWER:
 
+2026-02-23 (request: “all of 1,2,3” with get-shit-done):
+- Scope: finish Level 1/2/3 closure obligations (masked quadratic stability + cone structure + dimension-bound seams).
+- Plan:
+  1) Level 1: add Qσ-R lemma (preservation/monotone under Rᵣ), ensure Qσ-canon + Qσ-split are wired.
+  2) Level 2: define cone predicates (timelike/spacelike/null) and add cone monotonicity + “unique time direction” lemma skeletons.
+  3) Level 3: add orbit fingerprint predicate + minimality/saturation seams for dimension/signature bounds.
+- Checkpoint: re-typecheck touched modules and update COMPACTIFIED_CONTEXT.
+
+2026-02-23 update:
+- Completed constructive nonexpansiveness proofs for Cᵣ and Rᵣ (no postulates).
+- Added/extended FineAgreementUltrametric lemmas (map/append/shiftTail monotonicity, dNatFine-++ and shiftTail ≤).
+- RealOperatorStackShift now wires nonexpR constructively and typechecks.
+- DASHI_Tests.agda checks cleanly (warnings only).
+- Added QuadraticPolarization module (ℤ embedding + B₂ℤ polarization seam).
+- Replaced Force-1+3 with DimensionBoundAssumptions seam (orbit-profile based).
+Open items:
+- Optional: eliminate pattern-shadow warnings in FineAgreementUltrametric (rename pattern variables).
+2026-02-23 update (current):
+- Added mask layer and physics assumption tower; ClosureOnAssumption typechecks (warnings only).
+- Implemented masked quadratic invariance under canon (Qσ-canon).
+- Implemented masked quadratic split over (coarse ++ tail) (Qσ-split).
+Current milestone: Level-1/2/3 closure obligations (per user list).
+Planned next steps:
+1) Qσ-R lemma (preservation or monotone under Rᵣ).
+2) Cone structure definitions + monotonicity skeleton.
+3) Unique time direction lemma skeleton (contradiction with uniqueness).
+4) Orbit fingerprint predicate + minimality/saturation seams (Level 3).
+
 
 
 
@@ -2352,3 +2380,22 @@ Notes:
 
 Checkpoint before execution:
 - Confirm to implement these three modules verbatim (and fix any stdlib name mismatches to typecheck).
+
+---
+
+# 2026-02-23 Milestone: Core Canonicalization + Quadratic Invariant (Assumption-Based)
+
+Goal: Introduce a minimal nontrivial canonicalization on the coarse core, expose a quadratic invariant on the core, and add formal assumptions for signature/orthogonality so the physics layer has named targets.
+
+Planned modules:
+1) `DASHI/Physics/CanonicalizationMinimal.agda` (canonTrit/core-only Cᵣ, nonexpansive seam).
+2) `DASHI/Physics/QuadraticCore.agda` (Qcore, invariance under canonCore, lift to full state).
+3) `DASHI/Physics/SignatureAssumptions.agda` (Quadratic invariant/indefinite signature/hyperbolic cone/orthogonality + Force1Plus3 target).
+
+Wiring:
+- Update `DASHI/Physics/RealOperatorStackShift.agda` to use `Cᵣ` and `nonexpCᵣ`.
+- Keep `nonexpR` as a postulate until shift nonexpansiveness is proven.
+
+Assumptions:
+- Nonexpansiveness of `Cᵣ` is declared as an explicit lemma (may be postulated for now).
+- Quadratic invariance on the core is proven constructively where possible; higher-order signature claims remain assumptions.

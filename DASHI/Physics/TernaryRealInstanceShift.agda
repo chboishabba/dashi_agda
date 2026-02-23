@@ -1,7 +1,7 @@
 module DASHI.Physics.TernaryRealInstanceShift where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
 open import Relation.Binary.PropositionalEquality using (sym)
 open import DASHI.Algebra.Trit using (Trit; zer)
 open import DASHI.Metric.FineAgreementUltrametric as FAM
@@ -14,12 +14,19 @@ open import DASHI.Geometry.RealFiniteSpeed as RFS
 open import DASHI.Geometry.Isotropy as Iso
 open import DASHI.Combinatorics.Entropy using (Involution)
 import DASHI.Physics.RealClosureKitFiber as RKF
+import DASHI.Physics.MaskedClosureKit as MK
+open import DASHI.Physics.IndefiniteMaskQuadratic as IMQ
+open import DASHI.Physics.SignatureFromMask as SFM
+open import DASHI.Physics.DimensionBoundAssumptions as DBA
 open import Data.Nat.Properties as NatP
 open import Data.Unit using (⊤; tt)
-open import Data.Vec using (replicate)
+open import Data.Vec using (Vec; replicate)
+
+m′ : Nat
+m′ = 5
 
 m : Nat
-m = 6
+m = suc m′
 
 k : Nat
 k = 4
@@ -93,3 +100,15 @@ realKitFiber =
     ; iso = iso
     ; fs = fs
     }
+
+------------------------------------------------------------------------
+-- Masked quadratic closure kit (parameterized mask + orbit-profile seam)
+
+mask : Vec IMQ.Sign m
+mask = SFM.oneMinusRestPlus {m = m′}
+
+postulate
+  orbitProfile : DBA.ShellOrbitProfile m
+
+maskKit : MK.RealClosureKitFiberMask
+maskKit = MK.mkMaskKit {m = m} {k = k} realKitFiber mask orbitProfile
