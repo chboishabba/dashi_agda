@@ -1,5 +1,110 @@
 NEWER:
 
+2026-02-25 update:
+- Added `DASHI/Geometry/OrthogonalityFromPolarization.agda` to state the quadratic+polarization ⇒ orthogonality corollary seam (no proofs yet).
+2026-02-25 update:
+- Added `DASHI/Geometry/QuadraticPolarizationFromForm.agda` to bridge quadratic forms to polarization.
+- Wired orthogonality into `PhysicsClosure` and `PhysicsClosureFull` harnesses; updated `PhysicsClosureFullInstance`.
+- `EnergyClosestPointShiftInstance` now constructs `closestAxiomsShift` from `fejerShift` plus a single lemma `fejer⇒closestShift` (postulated seam).
+2026-02-25 update:
+- Integrated empirical LHC findings into Agda comments: MDL/Fejér descent is the intended geometry (closest-point to a fixed set), not global χ² contraction. See `DASHI/MDL/MDLDescentTradeoff.agda` and `DASHI/Energy/ClosestPoint.agda`.
+2026-02-25 update:
+- Proved `fejer⇒closestShift` constructively from ultrametric inequality + Fejér.
+- Added `DASHI/Physics/Closure/MDLFejerAxiomsShift.agda` (formal MDL Fejér/monotone descent witness).
+- Added `DASHI/Physics/QuadraticPolarizationCoreInstance.agda` with a polarization identity seam over ℤ-core quadratic.
+2026-02-25 update:
+- Wired `mdlFejer` into `PhysicsClosureFull` and `PhysicsClosureFullInstance`.
+- Added new geometry packs: `ClosestPoint`, `Parallelogram`, `Polarization`, `InnerProductFromParallelogram`, `QuadraticFromNorm`, `MaskedQuadratic`, `MQContractive`.
+- Added `DASHI/Physics/OrbitSignatureDiscriminant.agda` with profile injectivity + measured profile bridge.
+2026-02-25 update:
+- Added empirical-geometry skeletons: `DASHI/Geometry/QuadraticEmergence.agda`, `DASHI/Energy/EnergySplitProof.agda`, `DASHI/Geometry/SignatureUniqueness.agda`, `DASHI/MDL/MDLDescent.agda`.
+- Added `Fejer→ClosestPoint` postulate in `DASHI/Energy/FejerToClosestPoint.agda`.
+
+2026-02-24 update:
+- Removed Mask15 LCP ultrametric postulates by proving `id-zeroMask`, `dMask-symmetric`, and ultrametric inequality constructively in `DASHI/Algebra/MonsterUltrametric15.agda`.
+- Added abstract energy/projection interfaces: `DASHI/Energy/Energy.agda`, `DASHI/Energy/ClosestPoint.agda`.
+- Added `DASHI/MDL/MDLDescentTradeoff.agda` (single-seam MDL descent lemma).
+- Added `DASHI/Geometry/OrthogonalityFromQuadratic.agda` corollary scaffold.
+2026-02-24 update:
+- Added Bool shift instances for energy/closest-point and MDL tradeoff:
+  - `DASHI/Physics/Closure/EnergyClosestPointShiftInstance.agda`
+  - `DASHI/Physics/Closure/MDLTradeoffShiftInstance.agda`
+- Added `DASHI/Physics/Closure/ShiftEnergyMDLInstances.agda` to re-export them.
+2026-02-24 update:
+- Proved `projTail-idem` and `Pᵣ-idem` in `DASHI/Physics/TailCollapseProof.agda`.
+- Replaced the energy separation postulate with a proof using `dNatFine-zero→eq`.
+- Upgraded MDL tradeoff to nontrivial countNZ-based model/residual lengths with constructive tradeoff lemmas.
+2026-02-24 update:
+- Added `fejerShift` proof in `DASHI/Physics/Closure/EnergyClosestPointShiftInstance.agda`.
+- Added `DASHI/Physics/Closure/MDLDescentShiftInstance.agda` and re-exported via `ShiftEnergyMDLInstances`.
+2026-02-24 update:
+- Added `DASHI/Energy/FejerToClosestPoint.agda` (single-seam bridge from Fejér to closest-point).
+- `closestShift` now derives from `closestAxiomShift` via that bridge.
+
+2026-02-24 update (in progress for 1/2/3):
+- Added `DASHI/Physics/ShellOrbitProfileGenerator.agda` (builds `ShellOrbitProfile` from sorted orbit sizes).
+- Updated `DASHI/Physics/OrbitProfileExternal.agda` to use the generator and a concrete `orbitSizes` list.
+- Added external profiles for m=2..8 (one-minus signature family) based on the latest scan output.
+- Captured full scan table in `.planning/ORBIT_PROFILE_DATA.md`.
+- Added `DASHI/Physics/OrbitProfileComputed.agda` to compute shell orbit profiles internally (Bool action).
+- `TernaryRealInstanceShift` now uses the computed orbit profile instead of external data.
+- Next: add tail-permutation isotropy and orbit-profile modules to match scan-group; wire once commutation + metric preservation are proven (avoid closure-spine postulates).
+2026-02-24 update:
+- Added `DASHI/Geometry/ShiftIsotropyTailPerm.agda` (tail-permutation action + commutesWithT-CPR).
+- Added `DASHI/Physics/OrbitProfileComputedTailPerm.agda` (computed profile under tail-perm list; uses `allPerms` postulate).
+- Added `DASHI/Geometry/RealIsotropyInstanceShiftTailPerm.agda` skeleton (postulated commutation + metric preservation); not wired into shift instance yet to keep spine postulate-free.
+2026-02-24 update (closure surface skeletons):
+- Added quadratic emergence / parallelogram modules: `DASHI/Geometry/ParallelogramLaw.agda`, `DASHI/Geometry/QuadraticFormFromProjection.agda`, `DASHI/Geometry/UniqueInnerProduct.agda`.
+- Added cone/signature modules: `DASHI/Geometry/ConeMetricCompatibility.agda`, `DASHI/Geometry/TimeOrientation.agda`, `DASHI/Geometry/SignatureUniqueness31.agda`.
+- Added constraint algebra modules under `DASHI/Physics/Constraints/`.
+- Added MDL and defect→curvature stubs: `DASHI/MDL/*`, `DASHI/Physics/DefectDensityCurvature.agda`.
+- Added instances stubs: `DASHI/Instances/*`.
+- Added closure harness: `DASHI/Physics/Closure/PhysicsClosure.agda`.
+2026-02-24 update:
+- Removed tail-perm orbit-profile postulate by hardcoding `allPerms` for k=4 in `OrbitProfileComputedTailPerm`.
+2026-02-24 note:
+- Tail-permutation isotropy does NOT commute with `shiftTail/projTail` in `Rᵣ/Pᵣ` (non-bijective shift); commutation proofs are not generally possible for arbitrary permutations.
+- This blocks wiring tail-perm isotropy into the shift closure spine without changing the operator or restricting the group to a trivial/compatible subgroup.
+2026-02-24 update (new skeletons):
+- Added: `DASHI/Geometry/ProjectionDefect.agda`, `DASHI/Geometry/QuadraticForm.agda`, `DASHI/Geometry/QuadraticFormEmergence.agda`.
+- Added: `DASHI/Geometry/ConeTimeIsotropy.agda`, `DASHI/Geometry/Signature31FromConeArrowIsotropy.agda`.
+- Added: `DASHI/Physics/Universality.agda`.
+2026-02-24 update (instances):
+- Added `DASHI/Physics/Closure/MDLConcreteInstance.agda` (trivial but real MDL Lyapunov instance on Bool carrier).
+- Added `DASHI/Physics/Closure/PhysicsClosureFullInstance.agda` wiring `PhysicsClosureFull` to Bool closure stack (`MyRealInstance.myKit`).
+2026-02-24 update:
+- Fixed universe/overload issues in `ProjectionDefect`, `QuadraticForm`, `QuadraticFormEmergence`, `ParallelogramLaw`, `ConeMetricCompatibility`, `Signature31FromConeArrowIsotropy`, `Constraints/Closure`, `Constraints/Bracket`, `MDLLyapunov`, and `PhysicsClosureFull`.
+- `agda -i . -i /usr/share/agda/lib/stdlib DASHI/Physics/Closure/PhysicsClosureFullInstance.agda` now typechecks.
+2026-02-24 plan (continued):
+- Add scaffold proof modules: `EnergyAdditivityProof`, `EnergySplitProof`, `MDLDescentProof`, and a separate signature-uniqueness proof stub to avoid clashing with existing `SignatureUniqueness31`.
+2026-02-24 update:
+- Added `DASHI/Geometry/EnergyAdditivityProof.agda`, `DASHI/Geometry/EnergySplitProof.agda`, `DASHI/MDL/MDLDescentProof.agda`, `DASHI/Geometry/SignatureUniqueness31Proof.agda`.
+2026-02-24 plan:
+- Add a new closure harness that imports the latest quadratic/cone/signature/universality skeletons while preserving the existing harness.
+2026-02-24 plan (continued):
+- Wire `PhysicsClosureFull` to concrete instances (Bool closure stack).
+- Add a concrete MDL Lyapunov instance to begin filling bridge proofs.
+- Typecheck sweep for new harness/instance modules.
+2026-02-24 update:
+- Added `DASHI/Physics/Closure/PhysicsClosureFull.agda` as a parallel harness wired to the new skeleton modules.
+2026-02-24 plan (new closure surface):
+- Add skeleton theorem modules for quadratic emergence, cone/signature uniqueness, constraint closure, MDL Lyapunov, defect→curvature, universality, and a single closure harness.
+- COMPACTIFIED_CONTEXT updated with the current plan (postulate sweep, orbit generator, causal delta cleanup).
+
+2026-02-23 update (completed 1/2/3):
+- Kept `CanonicalizationMinimal.canonTrit` unchanged; relaxed isotropy instead.
+- Added `RealIsotropyInstanceShiftTailInv` (Bool tail‑sign‑flip isotropy) with commutation proofs; wired into `TernaryRealInstanceShift`.
+- Added `dNatFine-++-map≤-tail` to preserve metric under tail sign‑flip.
+- Replaced `orbitProfile` postulate with concrete `OrbitProfileExternal.orbitProfile-m6`.
+- Added `RealCausalStructureNontrivial` (delta = x, order = Qσ≥0) and wired cone monotonicity via mask.
+- `TernaryRealInstanceShift` typechecks with the new isotropy, orbit profile, and causal structure.
+
+2026-02-24 plan (request: “go on all 1/2/3”):
+- Scope:
+  1) Postulate sweep: repo-wide `postulate` inventory; classify closure-critical vs tower scaffolding.
+  2) Orbit profile generator: replace external/static profile with computed profile (depth-1 or shell list), wire into shift instance.
+  3) Strict closure cleanup: eliminate any remaining closure-critical postulates on the shift instance path (or explicitly downgrade to noncritical).
+- Checkpoint before execution: update COMPACTIFIED_CONTEXT with plan and run `rg "postulate"` to produce the inventory.
 2026-02-23 (request: “all of 1,2,3” with get-shit-done):
 - Scope: finish Level 1/2/3 closure obligations (masked quadratic stability + cone structure + dimension-bound seams).
 - Plan:
@@ -33,6 +138,12 @@ NEWER:
 - (1) Isotropy: replace trivial isotropy in `TernaryRealInstanceShift` with Bool sign‑flip. Blocker: current `Cᵣ` (canon) does not commute with invVec, so RealIsotropyInstance won’t typecheck. Needs a decision: (a) adjust canon to commute with invVec, or (b) move isotropy to a different stack.
 - (2) Orbit profile: replace postulate with a concrete external profile record (even if placeholder values).
 - (3) Causal structure: define delta ≠ zeroVec and wire a nontrivial cone monotonicity seam.
+
+2026-02-23 update (new execution plan for 1/2/3):
+- Decision: adjust `CanonicalizationMinimal.canonTrit` to be `inv` so `Cᵣ` commutes with `invVec`, enabling Bool sign‑flip isotropy on the shift stack.
+- Add `RealIsotropyInstanceShift` (Bool sign‑flip for `RealOperatorStackShift`), with explicit commutation lemmas for `Cᵣ`, `Pᵣ`, `Rᵣ`.
+- Replace `orbitProfile` postulate in `TernaryRealInstanceShift` with a concrete external record (`OrbitProfileExternal`) for m=6 (values from script output).
+- Add nontrivial causal structure `maskCausal` (delta = x, order = Qσ≥0) and cone monotonicity proof; wire into `TernaryRealInstanceShift`.
 
 2026-02-23 update:
 - Completed constructive nonexpansiveness proofs for Cᵣ and Rᵣ (no postulates).

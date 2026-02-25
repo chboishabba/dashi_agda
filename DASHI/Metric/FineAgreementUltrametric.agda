@@ -363,6 +363,44 @@ dNatFine-++-map≤ {m} {n} c c' t t' f =
     (NatP.≤-reflexive (trans (cong₂ AM.dNat rx-map ry-map) (dNat-cast (sym eq) _ _)))
     (NatP.≤-trans step (NatP.≤-reflexive (sym rhs)))
 
+dNatFine-++-map≤-tail :
+  ∀ {m n : Nat} (c c' : Vec Trit m) (t t' : Vec Trit n) (f : Trit → Trit) →
+  dNatFine (c ++ map f t) (c' ++ map f t') ≤ dNatFine (c ++ t) (c' ++ t')
+dNatFine-++-map≤-tail {m} {n} c c' t t' f =
+  let
+    eq : m + n ≡ n + m
+    eq = NatP.+-comm m n
+    rx-cast : reverse (c ++ map f t) ≡ cast (sym eq) (reverse (map f t) ++ reverse c)
+    rx-cast = sym (cast-sym eq (reverse-++ eq c (map f t)))
+    ry-cast : reverse (c' ++ map f t') ≡ cast (sym eq) (reverse (map f t') ++ reverse c')
+    ry-cast = sym (cast-sym eq (reverse-++ eq c' (map f t')))
+    rx-map : reverse (c ++ map f t) ≡ cast (sym eq) (map f (reverse t) ++ reverse c)
+    rx-map = trans rx-cast (cong (cast (sym eq)) (cong (_++ reverse c) (sym (map-reverse f t))))
+    ry-map : reverse (c' ++ map f t') ≡ cast (sym eq) (map f (reverse t') ++ reverse c')
+    ry-map = trans ry-cast (cong (cast (sym eq)) (cong (_++ reverse c') (sym (map-reverse f t'))))
+    depth≤ :
+      AM.agreeDepth (reverse t ++ reverse c) (reverse t' ++ reverse c')
+      ≤ AM.agreeDepth (map f (reverse t) ++ reverse c)
+                     (map f (reverse t') ++ reverse c')
+    depth≤ =
+      agreeDepth-++-mono
+        (reverse t) (reverse t')
+        (map f (reverse t)) (map f (reverse t'))
+        (reverse c) (reverse c')
+        (agreeDepth-map≤ f (reverse t) (reverse t'))
+    step : AM.dNat (map f (reverse t) ++ reverse c)
+                   (map f (reverse t') ++ reverse c')
+           ≤ AM.dNat (reverse t ++ reverse c)
+                    (reverse t' ++ reverse c')
+    step = NatP.∸-monoʳ-≤ (n + m) depth≤
+    rhs : dNatFine (c ++ t) (c' ++ t') ≡
+          AM.dNat (reverse t ++ reverse c) (reverse t' ++ reverse c')
+    rhs = dNatFine-++ c c' t t'
+  in
+  NatP.≤-trans
+    (NatP.≤-reflexive (trans (cong₂ AM.dNat rx-map ry-map) (dNat-cast (sym eq) _ _)))
+    (NatP.≤-trans step (NatP.≤-reflexive (sym rhs)))
+
 dNatFine-++-shiftTail≤ :
   ∀ {m n : Nat} (c c' : Vec Trit m) (t t' : Vec Trit n) →
   dNatFine (c ++ TCP.shiftTail t) (c' ++ TCP.shiftTail t') ≤ dNatFine (c ++ t) (c' ++ t')

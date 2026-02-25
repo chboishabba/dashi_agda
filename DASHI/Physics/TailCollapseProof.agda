@@ -43,6 +43,7 @@ projTail : ∀ {k : Nat} → Vec Trit k → Vec Trit k
 projTail {zero}    []       = []
 projTail {suc k′}  t        = (init t) ∷ʳ zer
 
+
 tailStep : ∀ {k : Nat} → Vec Trit k → Vec Trit k
 tailStep t = projTail (shiftTail t)
 
@@ -66,6 +67,7 @@ Pᵣ-++ :
   ∀ (m k : Nat) (c : Vec Trit m) (t : Vec Trit k) →
   Pᵣ {m} {k} (c ++ t) ≡ c ++ projTail t
 Pᵣ-++ m k c t rewrite split-++ m k c t = refl
+
 
 Tᵣ : ∀ {m k : Nat} → Vec Trit (m + k) → Vec Trit (m + k)
 Tᵣ {m} {k} x = Pᵣ {m} {k} (Rᵣ {m} {k} x)
@@ -130,6 +132,24 @@ pair-η (a , b) = refl
 init-∷ʳ : ∀ {A : Set} {n : Nat} (xs : Vec A n) (a : A) → init (xs ∷ʳ a) ≡ xs
 init-∷ʳ {n = zero}    []       a = refl
 init-∷ʳ {n = suc n} (x ∷ xs) a rewrite init-∷ʳ xs a = refl
+
+projTail-idem :
+  ∀ {k : Nat} (t : Vec Trit k) → projTail (projTail t) ≡ projTail t
+projTail-idem {zero} [] = refl
+projTail-idem {suc k′} t =
+  trans
+    (cong (_∷ʳ zer) (init-∷ʳ (init t) zer))
+    refl
+
+Pᵣ-idem :
+  ∀ (m k : Nat) (x : Vec Trit (m + k)) →
+  Pᵣ {m} {k} (Pᵣ {m} {k} x) ≡ Pᵣ {m} {k} x
+Pᵣ-idem m k x with split m k x
+... | (c , t)
+  rewrite Pᵣ-++ m k c t
+        | Pᵣ-++ m k c (projTail t)
+        | projTail-idem t
+  = refl
 
 tailStep≡shiftTail : ∀ {k : Nat} (t : Vec Trit k) → tailStep t ≡ shiftTail t
 tailStep≡shiftTail {zero}    [] = refl
