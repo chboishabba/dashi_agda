@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.PhysicsClosureEmpiricalToFull where
 open import Data.Unit using (⊤; tt)
 open import Data.Product using (_,_)
 open import Relation.Binary.PropositionalEquality using (refl)
+open import Agda.Builtin.Nat using (Nat; _+_)
 
 open import DASHI.Physics.Closure.PhysicsClosureEmpirical as PCE
 open import DASHI.Physics.Closure.PhysicsClosureFull as PCF
@@ -12,10 +13,25 @@ open import DASHI.Physics.Constraints.Generators as CG
 open import DASHI.Physics.Constraints.Bracket as CB
 open import DASHI.Physics.Constraints.Closure as CC
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
+open import DASHI.Physics.Closure.MDLLyapunovShiftInstance as MDLL
 open import DASHI.Physics.UniversalityTheorem as UTH
+open import MDL as OldMDL
+open import DASHI.Physics.RealTernaryCarrier as RTC
+open import DASHI.MDL.MDLDescentTradeoff as MDL using (MDLParts)
+open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI
 
 -- Adapter: embeds empirical closure seams into the full closure package
 -- while leaving the quadratic/signature/constraint layers as explicit stubs.
+--
+-- Note: PhysicsClosureFull.mdlLyap is a generic Set-valued field. We keep it
+-- as ⊤ here and expose a concrete shift witness below.
+
+mdlLyapShiftWitness :
+  ∀ {m k : Nat} →
+  OldMDL.Lyapunov
+    {S = RTC.Carrier (m + k)}
+    (MDLParts.T (MSI.MDLPartsShift {m} {k}))
+mdlLyapShiftWitness {m} {k} = MDLL.lyapunovShift {m} {k}
 empiricalToFull : PCE.PhysicsClosureEmpirical → PCF.PhysicsClosureFull
 empiricalToFull emp =
   record

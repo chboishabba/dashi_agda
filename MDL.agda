@@ -6,6 +6,7 @@ open import Agda.Builtin.Sigma
 open import Agda.Builtin.Bool
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
+open import Data.Nat using (_≤_)
 
 ------------------------------------------------------------------------
 -- Basic length type
@@ -13,10 +14,7 @@ open import Data.Empty using (⊥)
 CodeLength : Set
 CodeLength = Nat
 
-_≤_ : Nat → Nat → Set
-zero ≤ _ = ⊤
-suc m ≤ zero = ⊥
-suc m ≤ suc n = m ≤ n
+-- Use the standard Nat order.
 
 ------------------------------------------------------------------------
 -- Dataset abstraction
@@ -102,3 +100,13 @@ restrictSafe :
   modelTotalLength M ≤ limit71
 
 restrictSafe M p = p
+
+------------------------------------------------------------------------
+-- Lyapunov structure (order-theoretic MDL)
+
+record Lyapunov {S : Set} (T : S → S) : Set₁ where
+  field
+    L : S → CodeLength
+    descent : ∀ s → L (T s) ≤ L s
+
+open Lyapunov public

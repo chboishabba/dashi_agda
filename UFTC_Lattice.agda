@@ -6,6 +6,7 @@ open import Relation.Binary.PropositionalEquality as Eq using (sym; trans; cong)
 open import Data.Nat.Properties as NatP using (≤-refl; ≤-trans; ≤-antisym;
   ⊔-idem; ⊔-comm; ⊔-assoc; ⊔-mono-≤; ⊔-monoˡ-≤; ⊔-monoʳ-≤)
 open import Data.Nat using (_≤_; _⊔_)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 ------------------------------------------------------------------------
 -- Severity levels (0..9). (You can restrict further if you want Fin 10.)
@@ -78,3 +79,23 @@ C_XOR-monotone x x' y y' sx sy =
 C_ROT-monotone :
   ∀ x x' → severity x ⊑ severity x' → severity (C_ROT x) ⊑ severity (C_ROT x')
 C_ROT-monotone x x' sx = sx
+
+------------------------------------------------------------------------
+-- Cone interior monotonicity (structured seam).
+-- Matches empirical: preserved in the interior, boundary cases allowed.
+
+record ConeInterior {X : Set} : Set₁ where
+  field
+    InInterior : X → Set
+    Boundary   : X → Set
+
+open ConeInterior public
+
+record ConeInteriorPreserved {X : Set} (T : X → X) (C : ConeInterior {X}) : Set₁ where
+  field
+    preserve :
+      ∀ x →
+      InInterior C x →
+      InInterior C (T x) ⊎ Boundary C (T x)
+
+open ConeInteriorPreserved public
