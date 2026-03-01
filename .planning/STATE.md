@@ -12,9 +12,9 @@ See: .planning/PROJECT.md (updated 2026-02-28)
 Phase: 5 of 5 (Closure Harness)
 Plan: 06-01 of 2
 Status: In progress
-Last activity: 2026-03-01 — Added concrete severity mapping/restoration + shift wiring (with postulated P‑strict/restore laws)
+Last activity: 2026-03-01 — Pivoted strictness target to FineAgreement (dNatFine); preparing guarded strictness wiring
 
-Progress: [█████████░] 92%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -51,11 +51,11 @@ None yet.
 
 ### Blockers/Concerns
 
-- Need a concrete, guard-based `P-strict` witness for the real shift projection (tail collapse) in the LCP-depth language.
-- Need to pick the guard predicate (`NotSnap`/first-difference) and show it is reached/preserved by `T`.
+- FineAgreement guarded strictness modules added; concrete shift instance uses `dNatFine` and `strictP-fiber`.
+- Remaining work is optional: keep LCP guarded strictness path if desired, but physics closure no longer depends on it.
 
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: `SeverityGuardShiftConcrete` compiles; remaining postulate is guarded strictness `P-strict-on` only.
-Resume file: `DASHI/Physics/SeverityGuardShiftConcrete.agda`
+Stopped at: FineAgreement guarded strictness path is complete; LCP path still contains a postulated `P-strict-on` but is no longer required.
+Resume file: `DASHI/Physics/SeverityGuardShiftConcreteFine.agda`

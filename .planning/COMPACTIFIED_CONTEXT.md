@@ -34,6 +34,13 @@
 - Added `DASHI/Physics/SeverityGuardShiftConcrete.agda` (concrete wiring with postulates for `P-strict-on` and restoration laws; compiles).
 - `MaassRestorationShift` now proves `restore-idem` and `tailOf-restore`; `restore-normal-form''` is discharged via tail=0 and countNZ-replicate-zer.
 - Remaining postulate: `P-strict-on` (strictness under Guard with real LCP stream).
+- Decision: switch strictness target to **FineAgreement ultrametric** (`dNatFine`) and discharge via `RealOperatorStackShift.strictP-fiber`. LCP path remains intact; new FineAgreement guarded strictness modules will be added.
+- Added FineAgreement guarded strictness modules:
+  - `DASHI/Physics/TailCollapseGuardedStrictFine.agda`
+  - `DASHI/Physics/SeverityGuardedStrictFine.agda`
+  - `DASHI/Physics/SeverityGuardShiftInstanceFine.agda`
+  - `DASHI/Physics/SeverityGuardShiftWiringFine.agda`
+  - `DASHI/Physics/SeverityGuardShiftConcreteFine.agda` (concrete wiring using `dNatFine` and `strictP-fiber`; no postulates).
 - Added concrete geometry helpers for isotropy and finite-speed with trivial instances for wiring: `DASHI/Geometry/Isotropy.agda`, `DASHI/Geometry/FiniteSpeed.agda`.
 - Extended `Contraction.agda` with `StrictContraction` (contractive + unique fixed point).
 - Repo fully typechecks against stdlib; ternary carrier + agreement ultrametric are concrete and postulate-free.
