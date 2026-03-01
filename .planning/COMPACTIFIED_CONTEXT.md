@@ -6,6 +6,29 @@
 - Current milestone: remove remaining postulates in `DASHI/Physics/*` by providing concrete witnesses and wiring to existing bridge modules.
 - Added `DASHI/Physics/Closure/SignatureLockCSVEvidence.agda` to connect masked‑Q rank evidence to `SignatureLock` (no export changes).
 - Fixed `EmpiricalClosureWithWitnessPolicy` universe by parameterizing on witness set.
+- Added `DASHI/Physics/Closure/EmpiricalClosureWithSignatureLock.agda` to bundle empirical closure with witness policy and signature‑lock evidence.
+- Masked Orthogonal Split (empirical gate: PASS) in 3D closure embedding (`v_pnorm, v_dnorm, v_arrow`) with quadratic `G = diag([-1, 0.2034, -1])` and projector onto shape coords: self‑adjoint error 0, max cross term 2.396e−16, max split residual 6.661e−16.
+- Added `DASHI/Physics/Cone/ArrowSeparatedDeltaConeSplit.agda` and re-export module to connect arrow-separated delta cone with masked orthogonal split, plus `forwardConeSplit`.
+- Added `DASHI/Physics/Cone/ArrowSeparatedDeltaConeSplitShift.agda` (shift wiring for cone+split bridge).
+- Added `DASHI/Physics/Closure/PhysicsClosureEmpiricalWithConeSplit.agda` (bundle adds cone-split gate to empirical closure).
+- Added `DASHI/Geometry/CompleteUltrametric.agda` and `DASHI/Geometry/BanachFixedPoint.agda` (completeness + Banach fixed point interfaces for ℕ‑ultrametrics).
+- Added `DASHI/Geometry/CompleteUltrametricNat.agda` (constructive completeness for any ℕ‑valued ultrametric using ε=1).
+- Added `DASHI/Geometry/BanachFixedPointNat.agda` (banachFromStrict wrapper).
+- Added `DASHI/Metric/CompleteAgreementUltrametric.agda` and `DASHI/Metric/CompleteFineAgreementUltrametric.agda` (completeness instances for LCP ultrametrics).
+- Added LCP modules under `DASHI/Geometry/LCP/` with <‑based prefixes; `CauchyMod` includes a monotone modulus, and lcp≥‑mono, lcp≥‑at, converges≥ are proved.
+- Added `DASHI/Geometry/LCP/CompleteInstance.agda` (predicate-based complete ultrametric instance for LCP streams).
+- Added `DASHI/Geometry/LCP/NatGlue.agda` with basic Nat inequalities used in Banach‑LCP plumbing.
+- Added `DASHI/Geometry/LCP/ContractiveCompose.agda` and `DASHI/Geometry/LCP/TContractiveDepth.agda` (composition lemma + κ‑contractive T skeleton).
+- Added `DASHI/Geometry/LCP/Banach.agda` with κ‑contractive Banach‑LCP proof (now typechecks).
+- Added `DASHI/Geometry/LCP/FixedPointFromTContract.agda` to wire `T-contract` into Banach‑LCP.
+- Added `DASHI/Geometry/LCP/PStrictStatement.agda` with guard/first‑difference strictness templates for P.
+- Added `DASHI/Physics/ClosureKitLCP.agda` to expose an LCP fixed‑point kit.
+- Added `DASHI/Geometry/LCP/GuardedDomain.agda` (guarded-domain wrapper; lift contractivity under Guard).
+- Added `DASHI/Physics/TailCollapseGuardedStrict.agda` (guarded strictness interface for conditional P + restoration lemmas).
+- Added `DASHI/Physics/SeverityGuard.agda` (severity-based Guard/Snap/Broken predicates from UFTC_Lattice.Code).
+- Added `DASHI/Physics/SeverityGuardedStrict.agda` (adapter from SeverityPolicy to guarded strictness interface).
+- Added `DASHI/Physics/SeverityGuardShiftInstance.agda` (shift carrier severity policy + guarded strictness bundle, parameterized by code/thresholds/restore).
+- Added `DASHI/Physics/SeverityGuardShiftWiring.agda` (shift wiring that takes a concrete severity policy and builds a guarded strictness bundle).
 - Added concrete geometry helpers for isotropy and finite-speed with trivial instances for wiring: `DASHI/Geometry/Isotropy.agda`, `DASHI/Geometry/FiniteSpeed.agda`.
 - Extended `Contraction.agda` with `StrictContraction` (contractive + unique fixed point).
 - Repo fully typechecks against stdlib; ternary carrier + agreement ultrametric are concrete and postulate-free.

@@ -3,6 +3,35 @@ NEWER:
 2026-03-01 update:
 - Added `DASHI/Physics/Closure/SignatureLockCSVEvidence.agda` to wire masked‑Q rank evidence into `SignatureLock` (constructor + sig31 lemma).
 - Fixed universe for `DASHI/Physics/Closure/EmpiricalClosureWithWitnessPolicy.agda` (now parameterized by witness set).
+2026-03-01 update:
+- Added `DASHI/Physics/Closure/EmpiricalClosureWithSignatureLock.agda` to bundle empirical seams + witness policy + signature-lock evidence.
+2026-03-01 update:
+- Added `DASHI/Physics/MaskedOrthogonalSplit.agda` (formal gate record: self-adjoint, orthogonal split, energy split over masked quadratic).
+2026-03-01 update:
+- Added `DASHI/Physics/Cone/ArrowSeparatedDeltaConeSplit.agda` + re-export to bridge arrow-separated cone with masked orthogonal split; includes `forwardConeSplit` helper.
+2026-03-01 update:
+- Added `DASHI/Physics/Cone/ArrowSeparatedDeltaConeSplitShift.agda` (shift wiring for the cone+split bridge).
+- Added `DASHI/Physics/Closure/PhysicsClosureEmpiricalWithConeSplit.agda` (closure harness bundle with cone-split gate).
+2026-03-01 update:
+- Added `DASHI/Geometry/CompleteUltrametric.agda` and `DASHI/Geometry/BanachFixedPoint.agda` (interfaces for completeness + Banach fixed point on ℕ‑valued ultrametrics).
+2026-03-01 update:
+- Added `DASHI/Geometry/CompleteUltrametricNat.agda` proving completeness for any ℕ‑valued ultrametric via ε=1 stabilization.
+2026-03-01 update:
+- Added `DASHI/Geometry/BanachFixedPointNat.agda` (banachFromStrict wrapper for ℕ‑ultrametrics).
+2026-03-01 update:
+- Added `DASHI/Metric/CompleteAgreementUltrametric.agda` and `DASHI/Metric/CompleteFineAgreementUltrametric.agda` instantiating completeness for LCP ultrametrics.
+2026-03-01 update:
+- Added LCP signature modules (`DASHI/Geometry/LCP/Nat∞.agda`, `Stream.agda`, `Cauchy.agda`, `Limit.agda`) with ≤‑based prefix agreement; proved `lcp≥-mono` and `lcp≥-at` (convergence lemma still postulated).
+2026-03-01 update:
+- LCP layer now uses `<`-based prefixes; `converges≥` rechecked under that predicate with monotone modulus.
+2026-03-01 update:
+- Added `DASHI/Geometry/LCP/CompleteInstance.agda` (predicate-based complete ultrametric instance over LCP streams).
+2026-03-01 update:
+- Added `DASHI/Geometry/LCP/NatGlue.agda` (small Nat inequality helpers to simplify Banach‑LCP plumbing).
+2026-03-01 update:
+- Added `DASHI/Geometry/LCP/ContractiveCompose.agda` and `DASHI/Geometry/LCP/TContractiveDepth.agda` (composition lemma + operator witness skeleton for κ‑contractivity).
+2026-03-01 update:
+- Added `DASHI/Geometry/LCP/Banach.agda` with κ‑contractive Banach‑LCP skeleton (orbit-step/cauchy/fixed/unique as postulates).
 
 2026-02-25 update:
 - Added `DASHI/Geometry/OrthogonalityFromPolarization.agda` to state the quadratic+polarization ⇒ orthogonality corollary seam (no proofs yet).
