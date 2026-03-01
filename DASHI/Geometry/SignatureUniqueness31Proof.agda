@@ -17,7 +17,7 @@ record QuadraticFormSpace {ℓ}
   open Additive A
   open ScalarField F
   field
-    Q : Carrier → Scalar
+    Q : Additive.Carrier A → ScalarField.Scalar F
 
 open QuadraticFormSpace public
 
@@ -38,11 +38,11 @@ record SignatureAxioms {ℓ}
   open Additive A
   open ScalarField F
   field
-    ConeS : ConeStructure Carrier
-    Arr   : Arrow Carrier
-    Iso   : Isotropy Carrier
+    ConeS : ConeStructure (Additive.Carrier A)
+    Arr   : Arrow (Additive.Carrier A)
+    Iso   : Isotropy (Additive.Carrier A)
 
-    Timelike : Carrier → Set ℓ
+    Timelike : Additive.Carrier A → Set ℓ
     cone→time : ∀ x → ConeStructure.Cone ConeS x → Timelike x
     time→cone : ∀ x → Timelike x → ConeStructure.Cone ConeS x
 

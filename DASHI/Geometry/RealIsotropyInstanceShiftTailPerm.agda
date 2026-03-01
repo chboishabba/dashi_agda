@@ -30,8 +30,11 @@ act {m} {k} p x = TP.actTailPerm {m} {k} p x
 postulate
   preservesMetric :
     ∀ {m k : Nat} →
-    (U : UMetric.Ultrametric (RTC.Carrier (m + k))) →
-    ∀ p → Iso.PreservesMetric U (act {m} {k} p)
+    ∀ p x y →
+    UMetric.Ultrametric.d (FAM.ultrametricVec {n = m + k})
+      (act {m} {k} p x) (act {m} {k} p y)
+      ≡
+    UMetric.Ultrametric.d (FAM.ultrametricVec {n = m + k}) x y
 
   tailPerm-Rᵣ :
     ∀ {m k} (p : TP.Perm k) (x : RTC.Carrier (m + k)) →
@@ -58,6 +61,7 @@ commutesWithT {m} {k} p x =
     (tailPerm-Rᵣ p)
     (tailPerm-Pᵣ p)
     (tailPerm-Cᵣ p)
+    x
 
 realIsotropyInstanceShiftTailPerm :
   ∀ {m k : Nat} →
@@ -70,7 +74,7 @@ realIsotropyInstanceShiftTailPerm {m} {k} =
           { G = TP.Perm k
           ; group = permGroup
           ; act = act
-          ; preservesMetric = preservesMetric (FAM.ultrametricVec {n = m + k})
+          ; preservesMetric = preservesMetric {m} {k}
           ; commutesWithT = commutesWithT {m} {k}
           }
     ; coneInvariant = TP.Perm k

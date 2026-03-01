@@ -1,6 +1,7 @@
 module DASHI.Physics.SeverityGuardShiftWiringFine where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Data.Nat using (_<_)
 open import Agda.Primitive using (Level; lsuc)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 

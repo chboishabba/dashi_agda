@@ -1,7 +1,7 @@
 module DASHI.Physics.SeverityGuardShiftConcreteFine where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Data.Nat using (_≤_; z≤n)
+open import Data.Nat using (_≤_; _<_; z≤n)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 open import DASHI.Geometry.FiberContraction as FC

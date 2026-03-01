@@ -25,9 +25,17 @@ open ScalarField public
 record ScalarLaws {ℓ} (F : ScalarField {ℓ}) : Set (suc ℓ) where
   open ScalarField F
   field
-    +s-assoc : ∀ a b c → (a +s b) +s c ≡ a +s (b +s c)
-    +s-comm  : ∀ a b → a +s b ≡ b +s a
-    +s-idL   : ∀ a → 0s +s a ≡ a
+    +s-assoc :
+      ∀ (a b c : ScalarField.Scalar F) →
+      ScalarField._+s_ F (ScalarField._+s_ F a b) c
+        ≡
+      ScalarField._+s_ F a (ScalarField._+s_ F b c)
+    +s-comm  :
+      ∀ (a b : ScalarField.Scalar F) →
+      ScalarField._+s_ F a b ≡ ScalarField._+s_ F b a
+    +s-idL   :
+      ∀ (a : ScalarField.Scalar F) →
+      ScalarField._+s_ F (ScalarField.0s F) a ≡ a
 
 open ScalarLaws public
 
@@ -35,12 +43,17 @@ record InnerProductSpace {ℓ} (A : Additive {ℓ}) (F : ScalarField {ℓ}) : Se
   open Additive A
   open ScalarField F
   field
-    ⟪_,_⟫   : Carrier → Carrier → Scalar
+    ⟪_,_⟫   : Additive.Carrier A → Additive.Carrier A → ScalarField.Scalar F
     ip-sym  : ∀ x y → ⟪ x , y ⟫ ≡ ⟪ y , x ⟫
-    ip-addL : ∀ x y z → ⟪ x + y , z ⟫ ≡ ⟪ x , z ⟫ +s ⟪ y , z ⟫
-    ip-addR : ∀ x y z → ⟪ x , y + z ⟫ ≡ ⟪ x , y ⟫ +s ⟪ x , z ⟫
-    ip-negL : ∀ x y → ⟪ - x , y ⟫ ≡ -s ⟪ x , y ⟫
-    E       : Carrier → Scalar
+    ip-addL : ∀ x y z →
+      ⟪ Additive._+_ A x y , z ⟫ ≡
+      ScalarField._+s_ F (⟪ x , z ⟫) (⟪ y , z ⟫)
+    ip-addR : ∀ x y z →
+      ⟪ x , Additive._+_ A y z ⟫ ≡
+      ScalarField._+s_ F (⟪ x , y ⟫) (⟪ x , z ⟫)
+    ip-negL : ∀ x y →
+      ⟪ Additive.-_ A x , y ⟫ ≡ ScalarField.-s_ F (⟪ x , y ⟫)
+    E       : Additive.Carrier A → ScalarField.Scalar F
     E-def   : ∀ x → E x ≡ ⟪ x , x ⟫
 
 open InnerProductSpace public
@@ -53,8 +66,8 @@ Orth {A = A} {F = F} V x y = ⟪_,_⟫ V x y ≡ 0s F
 record Two {ℓ} (F : ScalarField {ℓ}) : Set (suc ℓ) where
   open ScalarField F
   field
-    two : Scalar
-    two-def : two ≡ (1s +s 1s)
+    two : ScalarField.Scalar F
+    two-def : two ≡ ScalarField._+s_ F (ScalarField.1s F) (ScalarField.1s F)
 
 open Two public
 
@@ -69,30 +82,39 @@ EnergyAdditivityProof {A = A} {F = F} V T L killCross x y orth =
       open ScalarField F
       open InnerProductSpace V
       open ScalarLaws L
-      cross0 : ⟪ x , y ⟫ ≡ 0s
+      infixl 6 _⊕_
+      _⊕_ : ScalarField.Scalar F → ScalarField.Scalar F → ScalarField.Scalar F
+      _⊕_ = ScalarField._+s_ F
+      ip : Additive.Carrier A → Additive.Carrier A → ScalarField.Scalar F
+      ip = InnerProductSpace.⟪_,_⟫ V
+      cross0 : ip x y ≡ ScalarField.0s F
       cross0 = killCross x y orth
-      cross0' : ⟪ y , x ⟫ ≡ 0s
-      cross0' = trans (ip-sym y x) cross0
+      cross0' : ip y x ≡ ScalarField.0s F
+      cross0' = trans (InnerProductSpace.ip-sym V y x) cross0
   in
-  trans (E-def (x + y))
+  trans (InnerProductSpace.E-def V (Additive._+_ A x y))
         (trans
-           (ip-addL x y (x + y))
+           (InnerProductSpace.ip-addL V x y (Additive._+_ A x y))
            (trans
-              (cong₂ _+s_ (ip-addR x x y) (ip-addR y x y))
+              (cong₂ (ScalarField._+s_ F) (InnerProductSpace.ip-addR V x x y) (InnerProductSpace.ip-addR V y x y))
               (let
-                  step1 : (⟪ x , x ⟫ +s ⟪ x , y ⟫) +s (⟪ y , x ⟫ +s ⟪ y , y ⟫)
-                          ≡ (⟪ x , x ⟫ +s 0s) +s (0s +s ⟪ y , y ⟫)
-                  step1 = cong₂ _+s_ (cong (λ t → ⟪ x , x ⟫ +s t) cross0)
-                                     (cong (λ t → t +s ⟪ y , y ⟫) cross0')
-                  step2 : (⟪ x , x ⟫ +s 0s) +s (0s +s ⟪ y , y ⟫)
-                          ≡ (⟪ x , x ⟫ +s 0s) +s ⟪ y , y ⟫
-                  step2 = cong (λ t → (⟪ x , x ⟫ +s 0s) +s t) (+s-idL (⟪ y , y ⟫))
-                  step3 : (⟪ x , x ⟫ +s 0s) +s ⟪ y , y ⟫
-                          ≡ ⟪ x , x ⟫ +s ⟪ y , y ⟫
+                  step1 : (ip x x ⊕ ip x y) ⊕ (ip y x ⊕ ip y y)
+                          ≡ (ip x x ⊕ ScalarField.0s F) ⊕ (ScalarField.0s F ⊕ ip y y)
+                  step1 = cong₂ _⊕_ (cong (λ t → ip x x ⊕ t) cross0)
+                                    (cong (λ t → t ⊕ ip y y) cross0')
+                  step2 : (ip x x ⊕ ScalarField.0s F) ⊕ (ScalarField.0s F ⊕ ip y y)
+                          ≡ (ip x x ⊕ ScalarField.0s F) ⊕ ip y y
+                  step2 = cong (λ t → (ip x x ⊕ ScalarField.0s F) ⊕ t) (ScalarLaws.+s-idL L (ip y y))
+                  step3 : (ip x x ⊕ ScalarField.0s F) ⊕ ip y y
+                          ≡ ip x x ⊕ ip y y
                   step3 =
-                    let leftId : (⟪ x , x ⟫ +s 0s) ≡ ⟪ x , x ⟫
-                        leftId = trans (+s-comm (⟪ x , x ⟫) 0s) (+s-idL (⟪ x , x ⟫))
+                    let leftId : (ip x x ⊕ ScalarField.0s F) ≡ ip x x
+                        leftId = trans (ScalarLaws.+s-comm L (ip x x) (ScalarField.0s F))
+                                      (ScalarLaws.+s-idL L (ip x x))
                     in
-                    cong (λ t → t +s ⟪ y , y ⟫) leftId
+                    cong (λ t → t ⊕ ip y y) leftId
+                  step4 : ip x x ⊕ ip y y ≡ InnerProductSpace.E V x ⊕ InnerProductSpace.E V y
+                  step4 = cong₂ _⊕_ (sym (InnerProductSpace.E-def V x))
+                                       (sym (InnerProductSpace.E-def V y))
                in
-               trans step1 (trans step2 step3))))
+               trans step1 (trans step2 (trans step3 step4)))))

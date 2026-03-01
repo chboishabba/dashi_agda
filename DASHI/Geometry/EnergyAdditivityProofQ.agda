@@ -1,12 +1,13 @@
 module DASHI.Geometry.EnergyAdditivityProofQ where
 
+open import Agda.Primitive using (lzero)
+open import Relation.Binary.PropositionalEquality using (_≡_)
 open import DASHI.Geometry.EnergyAdditivityProof
 open import DASHI.Geometry.ScalarLawsQ
 
 -- Convenience wrapper: apply EnergyAdditivityProof with ℚ scalar laws.
 EnergyAdditivityProofℚ :
-  ∀ {ℓ}
-  {A : Additive {ℓ}}
+  ∀ {A : Additive {lzero}}
   (V : InnerProductSpace A scalarFieldℚ)
   (T : Two scalarFieldℚ) →
   (∀ x y → Orth V x y → ⟪_,_⟫ V x y ≡ 0s scalarFieldℚ) →

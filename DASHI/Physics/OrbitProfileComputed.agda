@@ -1,15 +1,16 @@
 module DASHI.Physics.OrbitProfileComputed where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.Bool using (Bool; true; false; if_then_else_)
+open import Data.Bool using (Bool; true; false; if_then_else_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong)
 open import Relation.Nullary using (Dec; yes; no)
 
-open import Data.List using (List; []; _∷_; map; filter; length)
+open import Data.List.Base using (List; []; _∷_; map; filterᵇ; length)
 open import Data.Nat using (_≤_)
 open import Data.Nat.Properties as NatP using (_≤?_)
-open import Data.Vec using (Vec; []; _∷_)
-open import Data.Integer using (ℤ; +_; -[1+_]; _≟_)
+open import Data.Vec using (Vec; []; _∷_; head; tail)
+open import Data.Integer.Base using (ℤ; +_; -1ℤ)
+open import Data.Integer using (_≟_)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import DASHI.Physics.RealTernaryCarrier as RTC
@@ -53,22 +54,17 @@ decEqVec (x ∷ xs) (y ∷ ys) with decEqTrit x y
 ... | yes refl with decEqVec xs ys
 ... | no neq = no (λ eq → neq (cong tail eq))
 ... | yes refl = yes refl
-  where
-    head : ∀ {n : Nat} → Vec Trit (suc n) → Trit
-    head (t ∷ _) = t
-    tail : ∀ {n : Nat} → Vec Trit (suc n) → Vec Trit n
-    tail (_ ∷ ts) = ts
 
 ------------------------------------------------------------------------
 -- Membership / nub
 
-member : ∀ {A : Set} → (A → A → Dec (A ≡ A)) → A → List A → Bool
+member : ∀ {A : Set} → ((x y : A) → Dec (x ≡ y)) → A → List A → Bool
 member dec x [] = false
 member dec x (y ∷ ys) with dec x y
 ... | yes _ = true
 ... | no _  = member dec x ys
 
-nub : ∀ {A : Set} → (A → A → Dec (A ≡ A)) → List A → List A
+nub : ∀ {A : Set} → ((x y : A) → Dec (x ≡ y)) → List A → List A
 nub dec [] = []
 nub dec (x ∷ xs) with member dec x xs
 ... | true  = nub dec xs
@@ -93,28 +89,29 @@ allVecTrit (suc n) =
 isShell1 : ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Bool
 isShell1 σ x with IMQ.Qσ σ x ≟ (+ 1)
 ... | yes _ = true
-... | no _ with IMQ.Qσ σ x ≟ -[1+ 0]
+... | no _ with IMQ.Qσ σ x ≟ -1ℤ
 ... | yes _ = true
 ... | no _  = false
 
 shell1List : ∀ {m : Nat} → Vec IMQ.Sign m → List (Vec Trit m)
-shell1List {m} σ = filter (isShell1 σ) (allVecTrit m)
+shell1List {m} σ = filterᵇ (isShell1 σ) (allVecTrit m)
 
 ------------------------------------------------------------------------
 -- Orbit sizes under a finite action list
 
 orbitSizes :
-  ∀ {A : Set} →
-  (dec : A → A → Dec (A ≡ A)) →
+  ∀ {A X : Set} →
+  (dec : (x y : X) → Dec (x ≡ y)) →
   (gs : List A) →
-  (act : A → A → A) →
-  List A →
+  (act : A → X → X) →
+  List X →
   List Nat
+{-# TERMINATING #-}
 orbitSizes dec gs act [] = []
 orbitSizes dec gs act (x ∷ xs) =
   let
     orb = nub dec (map (λ g → act g x) gs)
-    rest = filter (λ z → not (member dec z orb)) xs
+    rest = filterᵇ (λ z → not (member dec z orb)) xs
   in
   length orb ∷ orbitSizes dec gs act rest
   where

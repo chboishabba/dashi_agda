@@ -12,7 +12,7 @@ open import DASHI.Geometry.ParallelogramLaw
 record InnerProduct (A : AdditiveSpace) : Set₁ where
   open AdditiveSpace A
   field
-    ⟨_,_⟩ : V → V → Nat
+    ⟨_,_⟩ : AdditiveSpace.V A → AdditiveSpace.V A → Nat
 open InnerProduct public
 
 record InducesNorm (A : AdditiveSpace) (IP : InnerProduct A) (N : Normed A) : Set₁ where

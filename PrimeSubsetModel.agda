@@ -3,6 +3,7 @@ module PrimeSubsetModel where
 open import MDL
 open import Agda.Builtin.Nat
 open import Agda.Builtin.Equality
+open import Data.Nat using (_≤_)
 
 ------------------------------------------------------------------------
 -- Abstract prime index

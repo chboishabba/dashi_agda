@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.MDLConcreteInstance where
 
 open import Agda.Builtin.Nat using (Nat; zero)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat using (_≤_)
 open import Data.Nat.Properties as NatP using (≤-refl)
 

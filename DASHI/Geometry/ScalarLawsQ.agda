@@ -14,7 +14,7 @@ scalarFieldℚ =
     ; _*s_ = _*ℚ_
     ; 0s = 0ℚ
     ; 1s = 1ℚ
-    ; -s_ = _-ℚ_
+    ; -s_ = λ x → _-ℚ_ 0ℚ x
     }
 
 -- Scalar laws for ℚ (associativity, commutativity, identity).

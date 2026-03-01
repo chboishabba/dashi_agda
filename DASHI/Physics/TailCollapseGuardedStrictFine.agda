@@ -1,15 +1,16 @@
 module DASHI.Physics.TailCollapseGuardedStrictFine where
 
 open import Agda.Primitive using (Level; lsuc)
-open import Data.Nat using (Nat; _<_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_<_)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Geometry.FiberContraction as FC
 
 -- Guarded strictness interface for conditional projections using a Nat-valued metric.
-record GuardedStrictnessFine {ℓ} : Set (lsuc ℓ) where
+record GuardedStrictnessFine : Set₁ where
   field
-    X : Set ℓ
+    X : Set
     P : X → X
     d : X → X → Nat
 

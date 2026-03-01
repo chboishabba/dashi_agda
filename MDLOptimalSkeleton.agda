@@ -5,6 +5,7 @@ open import PrimeSubsetModel
 open import Agda.Builtin.Nat
 open import Agda.Builtin.Sigma
 open import Agda.Builtin.Unit using (⊤; tt)
+open import Data.Nat using (_≤_)
 
 ------------------------------------------------------------------------
 -- Search space abstraction

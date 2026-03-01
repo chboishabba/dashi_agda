@@ -1,7 +1,7 @@
 module DASHI.Physics.SeverityGuardedStrictFine where
 
-open import Agda.Primitive using (Level; lsuc)
-open import Data.Nat using (Nat; _<_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat using (_<_)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Geometry.FiberContraction as FC
@@ -10,9 +10,9 @@ open import DASHI.Physics.TailCollapseGuardedStrictFine as TG
 
 -- Adapter: build Guard/Broken/Snap from a SeverityPolicy, while leaving
 -- Restore/P/d abstract for the concrete instance.
-record SeverityGuardedStrictFine {ℓ} : Set (lsuc ℓ) where
+record SeverityGuardedStrictFine : Set₁ where
   field
-    S : Set ℓ
+    S : Set
     policy : SG.SeverityPolicy S
 
     Pₛ : S → S

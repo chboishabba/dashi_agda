@@ -9,11 +9,11 @@ open import DASHI.Geometry.EnergyAdditivityProof
 record ProjectionDefect {ℓ} (A : Additive {ℓ}) : Set (suc ℓ) where
   open Additive A
   field
-    P      : Carrier → Carrier
-    D      : Carrier → Carrier
-    D-def  : ∀ x → D x ≡ x + (- (P x))
+    P      : Additive.Carrier A → Additive.Carrier A
+    D      : Additive.Carrier A → Additive.Carrier A
+    D-def  : ∀ x → D x ≡ Additive._+_ A x (Additive.-_ A (P x))
     P-idem : ∀ x → P (P x) ≡ P x
-    decomp : ∀ x → x ≡ (P x) + (D x)
+    decomp : ∀ x → x ≡ Additive._+_ A (P x) (D x)
 
 open ProjectionDefect public
 
@@ -30,5 +30,5 @@ EnergySplitProof {A = A} {F = F} V T2 PD orthPD addE x =
       open InnerProductSpace V
       open ProjectionDefect PD
   in
-  trans (cong (E V) (decomp x))
-        (addE (P x) (D x) (orthPD x))
+  trans (cong (InnerProductSpace.E V) (ProjectionDefect.decomp PD x))
+        (addE (ProjectionDefect.P PD x) (ProjectionDefect.D PD x) (orthPD x))

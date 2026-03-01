@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Closure.PhysicsClosure where
 
 open import Agda.Builtin.Sigma using (Σ; _,_)

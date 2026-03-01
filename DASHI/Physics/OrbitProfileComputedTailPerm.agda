@@ -1,12 +1,15 @@
 module DASHI.Physics.OrbitProfileComputedTailPerm where
 
-open import Agda.Builtin.Nat using (Nat; _+_)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
-open import Data.List using (List; []; _∷_; map; filter; length)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong)
+open import Data.Bool using (Bool; true; false)
+open import Data.List.Base using (List; []; _∷_; map; filterᵇ; length)
 open import Relation.Nullary using (Dec; yes; no)
 open import Data.Nat.Properties as NatP using (_≤?_)
-open import Data.Integer using (ℤ; +_; -[1+_]; _≟_)
-open import Data.Fin using (Fin; zero; suc)
+open import Data.Integer.Base using (ℤ; +_; -1ℤ)
+open import Data.Integer using (_≟_)
+open import Data.Vec using (Vec; []; _∷_; head; tail)
+open import Data.Fin as Fin using (Fin)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import DASHI.Physics.IndefiniteMaskQuadratic as IMQ
@@ -60,11 +63,6 @@ decEqVec (x ∷ xs) (y ∷ ys) with decEqTrit x y
 ... | yes refl with decEqVec xs ys
 ... | no neq = no (λ eq → neq (cong tail eq))
 ... | yes refl = yes refl
-  where
-    head : ∀ {n : Nat} → Vec Trit (suc n) → Trit
-    head (t ∷ _) = t
-    tail : ∀ {n : Nat} → Vec Trit (suc n) → Vec Trit n
-    tail (_ ∷ ts) = ts
 
 ------------------------------------------------------------------------
 -- Shell list and orbit sizes
@@ -72,20 +70,20 @@ decEqVec (x ∷ xs) (y ∷ ys) with decEqTrit x y
 isShell1 : ∀ {m : Nat} → Vec IMQ.Sign m → Vec Trit m → Bool
 isShell1 σ x with IMQ.Qσ σ x ≟ (+ 1)
 ... | yes _ = true
-... | no _ with IMQ.Qσ σ x ≟ -[1+ 0]
+... | no _ with IMQ.Qσ σ x ≟ -1ℤ
 ... | yes _ = true
 ... | no _  = false
 
 shell1List : ∀ {m : Nat} → Vec IMQ.Sign m → List (Vec Trit m)
-shell1List {m} σ = filter (isShell1 σ) (allVecTrit m)
+shell1List {m} σ = filterᵇ (isShell1 σ) (allVecTrit m)
 
-member : ∀ {A : Set} → (A → A → Dec (A ≡ A)) → A → List A → Bool
+member : ∀ {A : Set} → ((x y : A) → Dec (x ≡ y)) → A → List A → Bool
 member dec x [] = false
 member dec x (y ∷ ys) with dec x y
 ... | yes _ = true
 ... | no _  = member dec x ys
 
-nub : ∀ {A : Set} → (A → A → Dec (A ≡ A)) → List A → List A
+nub : ∀ {A : Set} → ((x y : A) → Dec (x ≡ y)) → List A → List A
 nub dec [] = []
 nub dec (x ∷ xs) with member dec x xs
 ... | true  = nub dec xs
@@ -119,18 +117,18 @@ allPerms : (k : Nat) → List (TP.Perm k)
 allPerms zero = [] ∷ []
 allPerms (suc zero) =
   let f0 : Fin 1
-      f0 = zero
+      f0 = Fin.zero
   in (f0 ∷ []) ∷ []
 allPerms (suc (suc (suc (suc zero)))) =
   let
     f0 : Fin 4
-    f0 = zero
+    f0 = Fin.zero
     f1 : Fin 4
-    f1 = suc zero
+    f1 = Fin.suc Fin.zero
     f2 : Fin 4
-    f2 = suc (suc zero)
+    f2 = Fin.suc (Fin.suc Fin.zero)
     f3 : Fin 4
-    f3 = suc (suc (suc zero))
+    f3 = Fin.suc (Fin.suc (Fin.suc Fin.zero))
 
     -- all 24 permutations of [f0,f1,f2,f3]
     p0  = f0 ∷ f1 ∷ f2 ∷ f3 ∷ []

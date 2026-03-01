@@ -17,7 +17,7 @@ Perm : Nat → Set
 Perm k = Vec (Fin k) k
 
 permuteVec : ∀ {A : Set} {k : Nat} → Perm k → Vec A k → Vec A k
-permuteVec {A} {k} p xs = tabulate (λ i → lookup (lookup p i) xs)
+permuteVec {A} {k} p xs = tabulate (λ i → lookup xs (lookup p i))
 
 ------------------------------------------------------------------------
 -- Tail action on full vectors: preserve coarse prefix, permute tail
