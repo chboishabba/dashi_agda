@@ -41,6 +41,11 @@
   - `DASHI/Physics/SeverityGuardShiftInstanceFine.agda`
   - `DASHI/Physics/SeverityGuardShiftWiringFine.agda`
   - `DASHI/Physics/SeverityGuardShiftConcreteFine.agda` (concrete wiring using `dNatFine` and `strictP-fiber`; no postulates).
+- Removed postulates from spine-shared assumption modules by splitting:
+  - `MaskedConeStructure` (postulates moved to `MaskedConeStructureAssumptions`).
+  - `DimensionBoundAssumptions` (postulates moved to `DimensionBoundAssumptionsPostulates`).
+  - `OrbitFingerprintAssumptions` (postulates moved to `OrbitFingerprintAssumptionsPostulates`).
+- Closure spine modules (`AgreementUltrametric`, `RealOperatorStack*`, `TernaryRealInstance*`) are now postulate-free.
 - Added concrete geometry helpers for isotropy and finite-speed with trivial instances for wiring: `DASHI/Geometry/Isotropy.agda`, `DASHI/Geometry/FiniteSpeed.agda`.
 - Extended `Contraction.agda` with `StrictContraction` (contractive + unique fixed point).
 - Repo fully typechecks against stdlib; ternary carrier + agreement ultrametric are concrete and postulate-free.

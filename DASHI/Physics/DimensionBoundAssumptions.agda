@@ -35,36 +35,4 @@ record DimensionBoundGate : Set₁ where
     hasBound : Set
 
 ------------------------------------------------------------------------
--- Dimension-bound theorem seam (replaces Force-1+3)
-
-postulate
-  isotropyShellProfile :
-    ∀ {m : Nat}
-    (B : RTC.Carrier m → RTC.Carrier m → Nat)
-    (S : IndefiniteSignature B)
-    → ShellOrbitProfile m
-
-  OrbitProfile-24-6-2→m≡4 :
-    ∀ {m : Nat}
-    (B : RTC.Carrier m → RTC.Carrier m → Nat)
-    (S : IndefiniteSignature B)
-    → ShellOrbitProfile.orbitCount (isotropyShellProfile B S) ≡ 3
-    → ShellOrbitProfile.top1       (isotropyShellProfile B S) ≡ 24
-    → ShellOrbitProfile.top2       (isotropyShellProfile B S) ≡ 6
-    → ShellOrbitProfile.top3       (isotropyShellProfile B S) ≡ 2
-    → m ≡ 4
-
-  OrbitProfile-24-6-2→m≤4 :
-    ∀ {m : Nat}
-    (B : RTC.Carrier m → RTC.Carrier m → Nat)
-    (S : IndefiniteSignature B)
-    → ShellOrbitProfile.orbitCount (isotropyShellProfile B S) ≡ 3
-    → ShellOrbitProfile.top1       (isotropyShellProfile B S) ≡ 24
-    → ShellOrbitProfile.top2       (isotropyShellProfile B S) ≡ 6
-    → ShellOrbitProfile.top3       (isotropyShellProfile B S) ≡ 2
-    → m ≤ 4
-
-  m≡4→sig≡1+3-up-to-swap :
-    ∀ (B : RTC.Carrier 4 → RTC.Carrier 4 → Nat)
-      (S : IndefiniteSignature B)
-    → (IndefiniteSignature.sig S ≡ (1 , 3)) × (IndefiniteSignature.sig S ≡ (3 , 1))
+-- Dimension-bound theorem seam (moved to DimensionBoundAssumptionsPostulates)

@@ -23,26 +23,7 @@ OneDistinguished : Nat → Nat → Set
 OneDistinguished p q = (p ≡ 1) ⊎ (q ≡ 1)
 
 ------------------------------------------------------------------------
--- Orbit-count minimality seam
-
-postulate
-  MinimalOrbit :
-    ∀ {m p q p' q' : Nat} →
-    (p + q ≡ m) →
-    OneDistinguished p q →
-    (fp  : OrbitFingerprint m p q) →
-    (fp' : OrbitFingerprint m p' q') →
-    OrbitFingerprint.orbitCount fp
-      ≤ OrbitFingerprint.orbitCount fp'
+-- Orbit-count minimality seam (moved to OrbitFingerprintAssumptionsPostulates)
 
 ------------------------------------------------------------------------
--- Saturation seam (dimension bound)
-
-postulate
-  StableSignature : Nat → Nat → Nat → Set
-
-postulate
-  Saturation :
-    ∀ {m p q : Nat} →
-    StableSignature m p q →
-    m ≡ 4
+-- Saturation seam (dimension bound) (moved to OrbitFingerprintAssumptionsPostulates)

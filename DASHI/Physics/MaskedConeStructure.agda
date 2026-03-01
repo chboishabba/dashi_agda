@@ -32,14 +32,7 @@ record CausalStructure (m : Nat) : Set₁ where
     delta : Vec Trit m → Vec Trit m → Vec Trit m
 
 ------------------------------------------------------------------------
--- Cone monotonicity seam:
--- if x ≼ y then Qσ(delta x y) ≥ 0
-
-postulate
-  coneMonotone :
-    ∀ {m : Nat} (σ : Vec IMQ.Sign m) (C : CausalStructure m) (x y : Vec Trit m) →
-    CausalStructure._≼_ C x y →
-    (+ 0) ≤ᵢ IMQ.Qσ σ (CausalStructure.delta C x y)
+-- Cone monotonicity seam (moved to MaskedConeStructureAssumptions)
 
 ------------------------------------------------------------------------
 -- Unique time direction seam
@@ -55,7 +48,4 @@ record UniqueFixedPoint {A : Set} (T : A → A) : Set where
 ¬_ : Set → Set
 ¬ P = P → ⊥
 
-postulate
-  twoTimeLike→noUniqueFP :
-    ∀ {m : Nat} (σ : Vec IMQ.Sign m) (T : Vec Trit m → Vec Trit m) →
-    TwoTimeLike σ → ¬ UniqueFixedPoint T
+-- Unique fixed-point obstruction (moved to MaskedConeStructureAssumptions)

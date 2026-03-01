@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-02-28)
 ## Current Position
 
 Phase: 5 of 5 (Closure Harness)
-Plan: 06-01 of 2
-Status: In progress
-Last activity: 2026-03-01 — Pivoted strictness target to FineAgreement (dNatFine); preparing guarded strictness wiring
+Plan: 06-02 of 2
+Status: Completed
+Last activity: 2026-03-01 — Closure spine postulate-free; FineAgreement guarded strictness wired for shift carrier
 
 Progress: [██████████] 100%
 
@@ -51,11 +51,12 @@ None yet.
 
 ### Blockers/Concerns
 
-- FineAgreement guarded strictness modules added; concrete shift instance uses `dNatFine` and `strictP-fiber`.
-- Remaining work is optional: keep LCP guarded strictness path if desired, but physics closure no longer depends on it.
+- Closure spine modules are postulate-free (AgreementUltrametric, RealOperatorStack*, TernaryRealInstance*).
+- Assumption postulates moved out of spine modules into separate assumption files.
+- FineAgreement guarded strictness path is concrete for shift carrier.
 
 ## Session Continuity
 
 Last session: 2026-03-01
-Stopped at: FineAgreement guarded strictness path is complete; LCP path still contains a postulated `P-strict-on` but is no longer required.
+Stopped at: Closure spine burn‑down completed; remaining work is the heavy theorem packs (EnergyAdditivityProof, EnergySplitProof, MDLDescentProof, Signature uniqueness).
 Resume file: `DASHI/Physics/SeverityGuardShiftConcreteFine.agda`
