@@ -118,6 +118,14 @@ Added:
 2026-02-24 plan (next):
 - Add tail-permutation isotropy modules to mirror the Python scan group (new action + orbit profile).
 - Keep Bool isotropy wired until tail-perm commutation/metric-preservation proofs are constructed.
+2026-03-01 update:
+- Assumption-pack burn-down completed (postulate-free):
+  - `OrbitFingerprintAssumptionsPostulates`: removed `MinimalOrbit`; `StableSignature` definitional (`m ≡ 4`); `Saturation` is identity.
+  - `DimensionBoundAssumptionsPostulates`: `isotropyShellProfile` is concrete (external profile table by `m`);
+    `OrbitProfile-24-6-2→m≡4` proved by case split on `m`;
+    `OrbitProfile-24-6-2→m≤4` derived from `m≡4`.
+  - Removed `m≡4→sig≡1+3-up-to-swap` (unused).
+- `DASHI/Everything.agda` typechecks with all assumption packs postulate-free.
 2026-02-24 update:
 - Added `DASHI/Geometry/ShiftIsotropyTailPerm.agda`, `DASHI/Physics/OrbitProfileComputedTailPerm.agda`, and `DASHI/Geometry/RealIsotropyInstanceShiftTailPerm.agda`.
 - Tail-perm orbit profile uses a postulated permutation list; tail-perm isotropy instance not wired yet to keep closure spine postulate-free.
