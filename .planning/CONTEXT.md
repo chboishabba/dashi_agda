@@ -1,5 +1,9 @@
 NEWER:
 
+2026-03-01 update:
+- Added `DASHI/Physics/Closure/SignatureLockCSVEvidence.agda` to wire masked‑Q rank evidence into `SignatureLock` (constructor + sig31 lemma).
+- Fixed universe for `DASHI/Physics/Closure/EmpiricalClosureWithWitnessPolicy.agda` (now parameterized by witness set).
+
 2026-02-25 update:
 - Added `DASHI/Geometry/OrthogonalityFromPolarization.agda` to state the quadratic+polarization ⇒ orthogonality corollary seam (no proofs yet).
 2026-02-25 update:
@@ -2543,3 +2547,16 @@ Wiring:
 Assumptions:
 - Nonexpansiveness of `Cᵣ` is declared as an explicit lemma (may be postulated for now).
 - Quadratic invariance on the core is proven constructively where possible; higher-order signature claims remain assumptions.
+
+## 2026-02-28 Updates
+- Added snap signature rule and shift instance to formalize exception-class filtering (`DASHI/Physics/SnapSignature.agda`, `DASHI/Physics/SnapSignatureShiftInstance.agda`).
+- Added cone interior from mask (`DASHI/Physics/RealConeInteriorFromMask.agda`) and placeholder shift cone interior instance.
+- Added MDL Lyapunov shift instance and exposed witness in `PhysicsClosureEmpiricalToFull`.
+- Replaced CICADA71 bucket periodicity postulate; introduced cone-interior preserved seam and MDL Lyapunov record.
+- Added snap signature shift instance and cone interior from mask; wired cone‑monotone‑except‑snaps seam for shift (`DASHI/Physics/RealConeMonotoneExceptSnapsShift.agda`).
+- Removed CRTPeriod.period-thm postulate; proof now uses DivMod periodicity.
+- Completed compile sweep for geometry/MDL/cone/snap modules after postulate removal.
+- Added CSV evidence hook module for beta seams (BetaSeamCSVEvidence) to plug external proofs.
+- Added arrow-separated delta cone skeleton module for split arrow/shape cone screening.
+- Added concrete shift instantiation for arrow-separated delta cone with shape=state, arrow=tail nonzero count.
+- Added witness set policy contract module (min forward/backward + quota-preserving snap): `DASHI/Physics/WitnessSetPolicy.agda`.

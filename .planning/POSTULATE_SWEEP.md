@@ -27,3 +27,8 @@ For the shift instance path:
 1. Replace `QuadraticPolarization.B₂ℤ-Q̂core-dot2` with the constructive proof if you want a fully earned bilinear form.
 2. Replace `MaskedConeStructure.coneMonotone` with the concrete `RealCausalStructureNontrivial.coneMonotone-mask` in downstream uses (already done in shift instance).
 3. If you want a theorem-level dimension bound, the `OrbitFingerprintAssumptions` and `DimensionBoundAssumptions` postulates are the next targets.
+
+## 2026-02-28 Updates
+- Removed `CICADA71.bucket71-period` postulate with `Data.Nat.DivMod.[m+kn]%n≡m%n`.
+- Added snap-signature exception class and cone-interior preservation seam to replace ad‑hoc thresholding in geometry checks.
+- Removed CRTPeriod.period-thm postulate using DivMod periodicity lemmas.

@@ -4,6 +4,8 @@
 - A new `AdmissibleQuadratic` interface now bundles contraction, isotropy, involution, and finite-speed invariances; uniqueness is the intended bottleneck.
 - Shared symmetry definitions (`Isotropy`, `PreservesQuadratic`) live in `DASHI/Physics/Core.agda`.
 - Current milestone: remove remaining postulates in `DASHI/Physics/*` by providing concrete witnesses and wiring to existing bridge modules.
+- Added `DASHI/Physics/Closure/SignatureLockCSVEvidence.agda` to connect masked‑Q rank evidence to `SignatureLock` (no export changes).
+- Fixed `EmpiricalClosureWithWitnessPolicy` universe by parameterizing on witness set.
 - Added concrete geometry helpers for isotropy and finite-speed with trivial instances for wiring: `DASHI/Geometry/Isotropy.agda`, `DASHI/Geometry/FiniteSpeed.agda`.
 - Extended `Contraction.agda` with `StrictContraction` (contractive + unique fixed point).
 - Repo fully typechecks against stdlib; ternary carrier + agreement ultrametric are concrete and postulate-free.
@@ -148,3 +150,17 @@ Added:
 - Add missing skeleton modules: `ProjectionDefect`, `QuadraticForm`, `QuadraticFormEmergence`, `ConeTimeIsotropy`, `Signature31FromConeArrowIsotropy`, `Physics/Universality`.
 2026-02-24 plan (new closure surface):
 - Add skeleton theorem modules for quadratic emergence, cone/signature uniqueness, constraint closure, MDL Lyapunov, defect→curvature, universality, and a single closure harness.
+
+## 2026-02-28 (Geometry seam hardening)
+- Added snap signature formalism + shift instance: `DASHI/Physics/SnapSignature.agda`, `DASHI/Physics/SnapSignatureShiftInstance.agda`.
+- Added cone interior from mask: `DASHI/Physics/RealConeInteriorFromMask.agda` and placeholder shift cone interior instance already in `DASHI/Physics/RealConeInteriorInstanceShift.agda`.
+- Added MDL Lyapunov shift instance and witness export in empirical→full adapter.
+- Replaced CICADA71 periodicity postulate and introduced cone-interior preserved seam + MDL Lyapunov record.
+- Wired snap-signature exception rule to shift cone monotonicity: `DASHI/Physics/RealConeMonotoneExceptSnapsShift.agda`.
+- Added shift snap signature instance and cone interior from mask (`DASHI/Physics/SnapSignatureShiftInstance.agda`, `DASHI/Physics/RealConeInteriorFromMask.agda`).
+- Replaced CRTPeriod.period-thm postulate with constructive proof using DivMod periodicity.
+- Completed compile sweep for updated geometry/MDL/cone/snap modules.
+- Added CSV evidence hook for beta seams: `DASHI/Physics/Closure/BetaSeamCSVEvidence.agda`.
+- Added arrow-separated delta cone skeleton: `DASHI/Physics/Cone/ArrowSeparatedDeltaCone.agda`.
+- Added concrete shift instantiation for arrow-separated delta cone: `DASHI/Physics/Cone/ArrowSeparatedDeltaConeShift.agda`.
+- Added witness set policy contract: `DASHI/Physics/WitnessSetPolicy.agda` (min forward/backward + quota-preserving snap).
