@@ -44,13 +44,13 @@ jobs:
             --html --html-dir=site \
             DASHI/Everything.agda
 
-      - name: Build PDF (Docs.Theory.lagda.tex)
+      - name: Build PDF (Docs/Theory.lagda.tex)
         run: |
           set -euxo pipefail
           mkdir -p build/latex
           agda -i . -l standard-library \
             --latex --latex-dir=build/latex \
-            Docs.Theory.lagda.tex
+            Docs/Theory.lagda.tex
 
           latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/latex build/latex/Docs/Theory.tex
 
