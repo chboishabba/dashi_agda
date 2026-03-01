@@ -54,7 +54,7 @@ jobs:
 
           latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/latex build/latex/Docs/Theory.tex
 
-          cp build/latex/Docs/Theory.pdf site/Theory.pdf
+          cp build/latex/Theory.pdf site/Theory.pdf
 
       - name: Add a tiny landing page
         run: |
