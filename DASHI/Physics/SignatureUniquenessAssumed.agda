@@ -1,9 +1,9 @@
 module DASHI.Physics.SignatureUniquenessAssumed where
 
 open import DASHI.Geometry.SignatureUniqueness31
-  using (AdditiveSpace; Quadratic; Cone; ConeMetricCompat
-       ; Signature; sig31
-       ; SignatureLaw; Signature31Theorem)
+  using (Signature; sig31; SignatureLaw; Signature31Theorem)
+open import DASHI.Geometry.ParallelogramLaw using (AdditiveSpace)
+open import DASHI.Geometry.ConeMetricCompatibility using (Quadratic; Cone; ConeMetricCompat)
 open import Data.Unit using (⊤; tt)
 
 -- Explicit dependency on isolated assumption packs.

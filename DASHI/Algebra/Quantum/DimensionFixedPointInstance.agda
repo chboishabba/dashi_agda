@@ -3,6 +3,7 @@ module DASHI.Algebra.Quantum.DimensionFixedPointInstance where
 open import Data.Nat renaming (ℕ to Nat)
 open import Data.Nat.Properties as NatP using (≤-refl)
 open import Data.Unit using (⊤; tt)
+open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Algebra.Quantum.DimensionFixedPoint
 

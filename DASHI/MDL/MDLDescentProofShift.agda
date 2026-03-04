@@ -4,7 +4,7 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Nat using (_≤_; z≤n)
 open import Data.Nat.Properties as NatP using (≤-refl; ≤-trans)
 
-open import DASHI.Energy.Core as EC
+import DASHI.Energy.Core as EC
 open import DASHI.MDL.MDLDescentProof as MDP
 open import DASHI.MDL.MDLDescentTradeoff as MDT using (MDLParts)
 open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI
@@ -16,8 +16,8 @@ preorderNat : EC.Preorder Nat
 preorderNat =
   record
     { _≤_ = _≤_
-    ; refl = ≤-refl
-    ; trans = λ {x} {y} {z} → ≤-trans
+    ; refl = λ _ → ≤-refl
+    ; trans = λ x≤y y≤z → ≤-trans x≤y y≤z
     }
 
 energyNat : ∀ {m k : Nat} → EC.EnergySpace (RTC.Carrier (m + k)) Nat

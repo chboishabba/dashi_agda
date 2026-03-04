@@ -1,9 +1,11 @@
 module DASHI.Geometry.EnergySplitProofQ where
 
 open import Agda.Primitive using (lzero)
+open import Relation.Binary.PropositionalEquality using (_≡_)
 open import DASHI.Geometry.EnergyAdditivityProof
 open import DASHI.Geometry.EnergyAdditivityProofQ
 open import DASHI.Geometry.EnergySplitProof
+open import DASHI.Geometry.ScalarLawsQ using (scalarFieldℚ)
 
 -- Convenience wrapper: apply EnergySplitProof with ℚ scalar laws.
 EnergySplitProofℚ :

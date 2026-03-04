@@ -1,8 +1,12 @@
 module DASHI.Physics.OrbitSignatureDiscriminant where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Data.List using (List; _∷_; []; _++_; replicate)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
+open import Data.List using (List; _∷_; []; _++_)
+open import Data.List.Properties as ListP
+open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Nullary using (¬_)
+open import Relation.Binary.PropositionalEquality using (_≡_; _≢_; refl; sym; trans)
+open import DASHI.Physics.OrbitProfileData as OPD
 
 -- Candidate signatures in 4D.
 data Signature : Set where
@@ -14,6 +18,9 @@ data Signature : Set where
 
 Profile : Set
 Profile = List Nat
+
+append3 : Profile → Profile → Profile → Profile
+append3 a b c = (a ++ b) ++ c
 
 record OrbitProfile (σ : Signature) : Set₁ where
   field
@@ -31,16 +38,16 @@ OrientationTag sig13 = 13
 OrientationTag sig04 = 4
 
 ProfileOf : Signature → Profile
-ProfileOf sig40 = (OrientationTag sig40 ∷ 8 ∷ []) ++ replicate 24 1
-ProfileOf sig31 = (OrientationTag sig31 ∷ 24 ∷ 6 ∷ 2 ∷ []) ++ replicate 28 1
-ProfileOf sig22 = (OrientationTag sig22 ∷ 16 ∷ 16 ∷ 4 ∷ 4 ∷ []) ++ replicate 8 1
-ProfileOf sig13 = (OrientationTag sig13 ∷ 24 ∷ 6 ∷ 2 ∷ []) ++ replicate 28 1
-ProfileOf sig04 = (OrientationTag sig04 ∷ 8 ∷ []) ++ replicate 24 1
+ProfileOf sig40 = append3 (OrientationTag sig40 ∷ []) (OPD.shell1_p4_q0) (OPD.shell2_p4_q0)
+ProfileOf sig31 = append3 (OrientationTag sig31 ∷ []) (OPD.shell1_p3_q1) (OPD.shell2_p3_q1)
+ProfileOf sig22 = append3 (OrientationTag sig22 ∷ []) (OPD.shell1_p2_q2) (OPD.shell2_p2_q2)
+ProfileOf sig13 = append3 (OrientationTag sig13 ∷ []) (OPD.shell1_p1_q3) (OPD.shell2_p1_q3)
+ProfileOf sig04 = append3 (OrientationTag sig04 ∷ []) (OPD.shell1_p0_q4) (OPD.shell2_p0_q4)
 
 -- Measured profile (from dashifine/orbit_profiles/orbit_profile_p3_q1_shell{1,2}.csv).
 -- shell1: [24,6,2], shell2: 28×1; orientation tag 31
 MeasuredProfile : Profile
-MeasuredProfile = (31 ∷ 24 ∷ 6 ∷ 2 ∷ []) ++ replicate 28 1
+MeasuredProfile = append3 (31 ∷ []) (OPD.shell1_p3_q1) (OPD.shell2_p3_q1)
 
 MeasuredSignature : Signature
 MeasuredSignature = sig31
@@ -51,10 +58,16 @@ measured-profile-def = refl
 OrientationTag-diff : OrientationTag sig31 ≢ OrientationTag sig13
 OrientationTag-diff ()
 
+headProfile :
+  Profile → Nat
+headProfile [] = 0
+headProfile (x ∷ _) = x
+
 Profile-sig31≢sig13 : ProfileOf sig31 ≢ ProfileOf sig13
 Profile-sig31≢sig13 eq =
-  OrientationTag-diff (cong List.head eq)
+  OrientationTag-diff (cong headProfile eq)
 
 SignatureFromMeasuredProfile :
   MeasuredProfile ≡ ProfileOf sig31 → MeasuredSignature ≡ sig31
 SignatureFromMeasuredProfile _ = refl
+open import DASHI.Physics.OrbitProfileData as OPD
