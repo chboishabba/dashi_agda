@@ -7,7 +7,7 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 
 open import DASHI.Physics.Closure.PhysicsClosureEmpirical as PCE
 open import DASHI.Physics.Closure.PhysicsClosureFull as PCF
-open import DASHI.Geometry.QuadraticFormFromProjection as QFP
+open import DASHI.Geometry.QuadraticFormEmergence as QFE
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Physics.Constraints.Generators as CG
 open import DASHI.Physics.Constraints.Bracket as CB
@@ -36,7 +36,7 @@ empiricalToFull : PCE.PhysicsClosureEmpirical → PCF.PhysicsClosureFull
 empiricalToFull emp =
   record
     { kit = PCE.kit emp
-    ; metricEmergence = record { build = λ {A} PD → record { A = A ; Q = λ _ → 0 ; parallelogram = record { paral = ⊤ } } }
+    ; metricEmergence = λ {ℓv} {ℓs} A F PD Ax → QFE.QuadraticFormEmergence A F PD Ax
     ; quadraticForm = ⊤
     ; polarization = ⊤
     ; orthogonality = ⊤

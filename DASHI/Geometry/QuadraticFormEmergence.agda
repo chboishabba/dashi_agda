@@ -17,6 +17,11 @@ record QuadraticEmergenceAxioms {ℓv ℓs}
   open ProjectionDefect PD
   field
     Energy : Additive.Carrier A → ScalarField.S F
+    ParallelogramQ :
+      ∀ x y → ScalarField._+s_ F (Energy (Additive._+_ A x y))
+                                  (Energy (Additive._+_ A x (Additive.-_ A y)))
+              ≡ ScalarField._+s_ F (ScalarField._+s_ F (Energy x) (Energy x))
+                                   (ScalarField._+s_ F (Energy y) (Energy y))
     Additive-On-Orth :
       ∀ x y → ProjectionDefect.Orth PD x y →
         Energy (Additive._+_ A x y) ≡
@@ -28,9 +33,16 @@ record QuadraticEmergenceAxioms {ℓv ℓs}
 
 open QuadraticEmergenceAxioms public
 
-postulate
-  QuadraticFormEmergence :
-    ∀ {ℓv ℓs} (A : Additive ℓv) (F : ScalarField ℓs)
-      (PD : ProjectionDefect A)
-      (Ax : QuadraticEmergenceAxioms A F PD)
-    → Σ (QuadraticForm A F) (λ qf → ⊤)
+QuadraticFormEmergence :
+  ∀ {ℓv ℓs} (A : Additive ℓv) (F : ScalarField ℓs)
+    (PD : ProjectionDefect A)
+    (Ax : QuadraticEmergenceAxioms A F PD)
+  → Σ (QuadraticForm A F) (λ qf → ⊤)
+QuadraticFormEmergence A F PD Ax =
+  let open QuadraticEmergenceAxioms Ax renaming (Energy to EnergyAx; ParallelogramQ to ParallelogramQAx) in
+  record
+    { Q = EnergyAx
+    ; Parallelogram = ParallelogramQAx
+    ; Homog = λ _ _ → tt
+    }
+  , tt

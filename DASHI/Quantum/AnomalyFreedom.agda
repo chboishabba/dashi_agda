@@ -8,7 +8,8 @@ open import DASHI.Quantum.AgreementDepth using (AgreementDepthBundle; AgreementD
 open import DASHI.Algebra.ConstraintAlgebraClosure
   using (ConstraintClosureBundle; ConstraintClosure-theorem)
 open import DASHI.Algebra.ConstraintAlgebraClosureTests
-  renaming (DiracClosure to DiracClosureType)
+  renaming (DiracClosure to DiracClosureType
+          ; ConstraintAlgebraAxioms to ConstraintAlgebraAxiomsType)
 open import DASHI.Algebra.Quantum.UVFinitenessHolographyTests using (UVFinite)
 
 record AnomalyBundle (Tow : Tower) (HS : HilbertSpace) : Set₁ where
@@ -26,7 +27,10 @@ record AnomalyBundle (Tow : Tower) (HS : HilbertSpace) : Set₁ where
 record AnomalyConsequences {Tow HS} (bundle : AnomalyBundle Tow HS) : Set₁ where
   field
     stone : StoneConsequences (AnomalyBundle.stone bundle)
-    dirac : DiracClosureType
+    dirac :
+      DiracClosureType
+        (ConstraintAlgebraAxiomsType.struct
+          (ConstraintClosureBundle.axioms (AnomalyBundle.constraint bundle)))
     uv-finite : UVFinite (AgreementDepthBundle.uv-bounded (AnomalyBundle.agreement bundle))
     cubic-zero : AnomalyBundle.cubic bundle ≡ AnomalyBundle.zero bundle
     mixed-zero : AnomalyBundle.mixed bundle ≡ AnomalyBundle.zero bundle

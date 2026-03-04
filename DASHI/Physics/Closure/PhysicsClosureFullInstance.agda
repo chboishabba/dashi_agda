@@ -6,12 +6,14 @@ open import Relation.Binary.PropositionalEquality using (refl)
 
 open import DASHI.Physics.Closure.PhysicsClosureFull as PCF
 open import DASHI.Physics.MyRealInstance as MRI
-open import DASHI.Geometry.QuadraticFormFromProjection as QFP
+open import DASHI.Geometry.QuadraticFormEmergence as QFE
 open import DASHI.Geometry.SignatureUniqueness31 as SU
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
+open import DASHI.Physics.Signature31InstanceShiftZ as Sig31
 open import DASHI.Physics.Constraints.Generators as CG
 open import DASHI.Physics.Constraints.Bracket as CB
 open import DASHI.Physics.Constraints.Closure as CC
+open import DASHI.Physics.Constraints.ConcreteInstance as CI
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
 open import DASHI.Physics.UniversalityTheorem as UTH
 
@@ -22,22 +24,14 @@ physicsClosureFull : PCF.PhysicsClosureFull
 physicsClosureFull =
   record
     { kit = MRI.myKit
-    ; metricEmergence = record { build = λ {A} PD → record { A = A ; Q = λ _ → 0 ; parallelogram = record { paral = ⊤ } } }
+    ; metricEmergence = λ {ℓv} {ℓs} A F PD Ax → QFE.QuadraticFormEmergence A F PD Ax
     ; quadraticForm = ⊤
     ; polarization = ⊤
     ; orthogonality = ⊤
-    ; signature31 = CTI.sig31
-    ; CS = record
-        { Constraint = ⊤
-        ; actsOn = λ X → X
-        ; apply = λ {S} _ x → x
-        }
-    ; L = record
-        { _[_,]_ = λ _ _ → tt
-        ; antisym = ⊤
-        ; jacobi = ⊤
-        }
-    ; constraintClosure = record { closes = λ _ _ → (tt , refl) }
+    ; signature31 = Sig31.signature31
+    ; CS = CI.CS
+    ; L = CI.L
+    ; constraintClosure = CI.closure
     ; mdlLyap = λ {S} T → ⊤
     ; mdlFejer = MDLFA.mdlFejerShift
     ; universality = record { statement = ⊤ }

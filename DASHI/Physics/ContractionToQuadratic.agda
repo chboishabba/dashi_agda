@@ -49,38 +49,50 @@ record UniqueUpToScale {ℓ : Level} (V : Set ℓ) : Set (suc ℓ) where
   field
     uniq : Set ℓ
 
--- Minimal, total witness: constant quadratic with trivial invariance.
+record ContractionForcesQuadraticAxioms {ℓ : Level} (M : MetricSpace ℓ) : Set (suc (suc ℓ)) where
+  field
+    witness : ContractionForcesQuadratic M
+
 contraction⇒invariantQuadratic :
   ∀ {ℓ} {M : MetricSpace ℓ} →
+  ContractionForcesQuadraticAxioms M →
   ContractionForcesQuadratic M
-contraction⇒invariantQuadratic {ℓ} {M} =
-  let open MetricSpace M in
-  record
-    { toV = λ x → x
-    ; theorem = λ C →
-        let
-          quad : QuadraticWitness X
-          quad = record { Q = record { Q = λ _ → PU.⊤ } }
-          inv : Invariant (ContractionOp.T C) (QuadraticWitness.Q quad)
-          inv = record { inv = λ _ → refl }
-        in
-        quad , inv
-    }
+contraction⇒invariantQuadratic ax =
+  ContractionForcesQuadraticAxioms.witness ax
 
--- Admissible quadratics are unique up to scalar / gauge (witnessed).
+record AdmissibleQuadraticUniquenessAxioms
+       {ℓ : Level}
+       {V : Set ℓ}
+       {T   : V → V}
+       {iso : Isotropy V}
+       {ι   : Involution V}
+       {fs  : FiniteSpeed V} : Set (suc (suc ℓ)) where
+  field
+    uniq :
+      (Q₁ Q₂ : AdmissibleQuadratic V T iso ι fs) →
+      UniqueUpToScale V
+
 admissibleQuadraticUnique :
   ∀ {ℓ} {V : Set ℓ}
     {T   : V → V}
     {iso : Isotropy V}
     {ι   : Involution V}
     {fs  : FiniteSpeed V} →
+    AdmissibleQuadraticUniquenessAxioms {V = V} {T = T} {iso = iso} {ι = ι} {fs = fs} →
     (Q₁ Q₂ : AdmissibleQuadratic V T iso ι fs) →
     UniqueUpToScale V
-admissibleQuadraticUnique _ _ = record { uniq = PU.⊤ }
+admissibleQuadraticUnique ax = AdmissibleQuadraticUniquenessAxioms.uniq ax
 
--- Optional: uniqueness theorem (trivial witness).
+record ContractionUniqueQuadraticAxioms {ℓ : Level} (M : MetricSpace ℓ) : Set (suc (suc ℓ)) where
+  field
+    unique :
+      (C : ContractionOp M) →
+      UniqueUpToScale (MetricSpace.X M)
+
 contraction⇒uniqueQuadraticUpToScale :
   ∀ {ℓ} {M : MetricSpace ℓ} →
+  ContractionUniqueQuadraticAxioms M →
   (C : ContractionOp M) →
   UniqueUpToScale (MetricSpace.X M)
-contraction⇒uniqueQuadraticUpToScale _ = record { uniq = PU.⊤ }
+contraction⇒uniqueQuadraticUpToScale ax =
+  ContractionUniqueQuadraticAxioms.unique ax

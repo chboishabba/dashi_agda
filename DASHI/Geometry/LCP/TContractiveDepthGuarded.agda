@@ -9,20 +9,15 @@ open import DASHI.Geometry.LCP.ContractiveCompose using
 open import DASHI.Geometry.LCP.PStrictStatement using
   (P-strict-on-guard; Strictκ-from-guard)
 
-module _ {ℓ} {A : Set ℓ} where
-
-  postulate
-    R : Stream A → Stream A
-    P : Stream A → Stream A
-    C : Stream A → Stream A
-
-    R-nonexp : Nonexpansive R
-    C-nonexp : Nonexpansive C
-
-    κ : ℕ
-    Guard : Stream A → Stream A → Set ℓ
-    Guard-all : ∀ x y → Guard x y
-    P-strict-guard : P-strict-on-guard κ P Guard
+module _ {ℓ} {A : Set ℓ}
+         (R P C : Stream A → Stream A)
+         (R-nonexp : Nonexpansive R)
+         (C-nonexp : Nonexpansive C)
+         (κ : ℕ)
+         (Guard : Stream A → Stream A → Set ℓ)
+         (Guard-all : ∀ x y → Guard x y)
+         (P-strict-guard : P-strict-on-guard κ P Guard)
+         where
 
   T : Stream A → Stream A
   T x = C (P (R x))

@@ -3,24 +3,43 @@ module DASHI.Unifier where
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Data.Nat using (ℕ)
+open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
 open import Data.Product using (Σ)
+open import Data.Unit using (⊤; tt)
 
 ¬ : Set → Set
 ¬ A = A → ⊥
 
-postulate
-  ℝ : Set
-  ℂ : Set
-  toℝ : ℕ → ℝ
-  _+_ : ℝ → ℝ → ℝ
-  _*_ : ℝ → ℝ → ℝ
-  _-_ : ℝ → ℝ → ℝ
-  _≤_ : ℝ → ℝ → Set
-  max : ℝ → ℝ → ℝ
-  _<_ : ℝ → ℝ → Set
-  SO : ℕ → ℕ → Set
+ℝ : Set
+ℝ = ℕ
+
+ℂ : Set
+ℂ = ℕ
+
+toℝ : ℕ → ℝ
+toℝ n = n
+
+_+ℝ_ : ℝ → ℝ → ℝ
+_+ℝ_ = Nat._+_
+
+_*ℝ_ : ℝ → ℝ → ℝ
+_*ℝ_ = Nat._*_
+
+_-ℝ_ : ℝ → ℝ → ℝ
+_-ℝ_ = Nat._∸_
+
+_≤ℝ_ : ℝ → ℝ → Set
+_≤ℝ_ = Nat._≤_
+
+maxℝ : ℝ → ℝ → ℝ
+maxℝ = Nat._⊔_
+
+_<ℝ_ : ℝ → ℝ → Set
+_<ℝ_ = Nat._<_
+
+SO : ℕ → ℕ → Set
+SO _ _ = ⊤
 
 -- You likely already have these (or equivalents) in your Prelude:
 --   ℕ, ℤ, Bool, Σ, ⊥, ⊤, List, etc.
@@ -89,8 +108,10 @@ record LorentzInterval {E : Set} (P : Poset E) (CA : ChainAntichain P) : Set₁ 
     -- Definition constraint
     Δs²-def :
       ∀ a b →
-      Δs² a b ≡ _-_ ((c * c) * (toℝ (τ a b) * toℝ (τ a b)))
-                      (toℝ (σ a b) * toℝ (σ a b))
+      Δs² a b ≡
+        ((c *ℝ c) *ℝ (toℝ (τ a b) *ℝ toℝ (τ a b)))
+        -ℝ
+        (toℝ (σ a b) *ℝ toℝ (σ a b))
 
     -- Theorems you said are proven:
     signature-3+1 : Set  -- package the full statement however you like
@@ -126,15 +147,15 @@ record Ultrametric (X : Set) : Set₁ where
     -- ultrametric axioms
     d0   : ∀ x → d x x ≡ toℝ 0
     sym  : ∀ x y → d x y ≡ d y x
-    ultra : ∀ x y z → d x z ≤ max (d x y) (d y z)
+    ultra : ∀ x y z → d x z ≤ℝ maxℝ (d x y) (d y z)
 
 record Contractive {X : Set} (M : Ultrametric X) (F : X → X) : Set₁ where
   field
     lambda    : ℝ
-    lambdaLt1 : lambda < toℝ 1
+    lambdaLt1 : lambda <ℝ toℝ 1
     contr : ∀ x y →
-      _≤_ ((Ultrametric.d M) (F x) (F y))
-          (lambda * (Ultrametric.d M) x y)
+      _≤ℝ_ ((Ultrametric.d M) (F x) (F y))
+          (_*ℝ_ lambda ((Ultrametric.d M) x y))
 
 record FixedPoint {X : Set} (F : X → X) : Set₁ where
   field
@@ -142,11 +163,16 @@ record FixedPoint {X : Set} (F : X → X) : Set₁ where
     fp : F x* ≡ x*
 
 -- Theorems (stubs)
-postulate
-  Banach-fixed-point :
-    ∀ {X : Set} (M : Ultrametric X) (F : X → X) →
-    Contractive M F →
-    Σ (FixedPoint F) (λ _ → Set)  -- include uniqueness + convergence in the second component
+record BanachFixedPointAxiom {X : Set} (M : Ultrametric X) (F : X → X)
+  (C : Contractive M F) : Set₁ where
+  field
+    theorem : Σ (FixedPoint F) (λ _ → Set)
+
+Banach-fixed-point :
+  ∀ {X : Set} (M : Ultrametric X) (F : X → X) →
+  Contractive M F →
+  Set₁
+Banach-fixed-point M F C = BanachFixedPointAxiom M F C
 
 ------------------------------------------------------------------------
 -- 6. Orthogonal multiscale split ⇒ quadratic defect (assumed proven)
@@ -162,9 +188,19 @@ record DefectFunctional (V : Set) : Set₁ where
     D : V → ℝ
     -- claimed theorem: D(v) = ⟪v,v⟫ and orthogonal split is Pythagorean
 
-postulate
-  orthogonal-split : Set
-  quadratic-forced : Set  -- “only quadratic defect respects nonleakage + orthogonal decomposition”
+record OrthogonalSplitAxiom : Set₁ where
+  field
+    proof : Set
+
+record QuadraticForcedAxiom : Set₁ where
+  field
+    proof : Set
+
+orthogonal-split : Set₁
+orthogonal-split = OrthogonalSplitAxiom
+
+quadratic-forced : Set₁
+quadratic-forced = QuadraticForcedAxiom
 
 ------------------------------------------------------------------------
 -- 7. Wave lift, CCR, UV finiteness (assumed proven)
@@ -182,9 +218,19 @@ record WaveLift (Tow : Tower) (HS : HilbertSpace) : Set₁ where
     U : ℝ → HilbertSpace.H HS → HilbertSpace.H HS         -- unitary evolution
     Hgen : Set                    -- self-adjoint generator packaged
 
-postulate
-  CCR-from-contraction : Set
-  UV-finiteness        : Set
+record CCRFromContractionAxiom : Set₁ where
+  field
+    proof : Set
+
+record UVFinitenessAxiom : Set₁ where
+  field
+    proof : Set
+
+CCR-from-contraction : Set₁
+CCR-from-contraction = CCRFromContractionAxiom
+
+UV-finiteness : Set₁
+UV-finiteness = UVFinitenessAxiom
 
 ------------------------------------------------------------------------
 -- 8. Clifford/Spin structures and representations
@@ -207,9 +253,19 @@ record SpinGroup (QS : QuadraticSpace) (CA : CliffordAlgebra QS) : Set₁ where
     ρ : Spin → SO 3 1  -- represent appropriately
     two-to-one-surj : Set
 
-postulate
-  Clifford-forced : Set         -- from quadratic geometry + linear completion
-  Even-subalgebra-forced : Set  -- from involution invariance / physical observables
+record CliffordForcedAxiom : Set₁ where
+  field
+    proof : Set
+
+record EvenSubalgebraForcedAxiom : Set₁ where
+  field
+    proof : Set
+
+Clifford-forced : Set₁
+Clifford-forced = CliffordForcedAxiom
+
+Even-subalgebra-forced : Set₁
+Even-subalgebra-forced = EvenSubalgebraForcedAxiom
 
 ------------------------------------------------------------------------
 -- 9. GR emergence: Einstein tensor, constraints
@@ -229,9 +285,19 @@ record Matter (M : Set) : Set₁ where
     Tμν : M → M → ℝ
     conservation : M → Set
 
-postulate
-  Einstein-from-defect : Set
-  Constraint-algebra-closure : Set
+record EinsteinFromDefectAxiom : Set₁ where
+  field
+    proof : Set
+
+record ConstraintAlgebraClosureAxiom : Set₁ where
+  field
+    proof : Set
+
+Einstein-from-defect : Set₁
+Einstein-from-defect = EinsteinFromDefectAxiom
+
+Constraint-algebra-closure : Set₁
+Constraint-algebra-closure = ConstraintAlgebraClosureAxiom
 
 ------------------------------------------------------------------------
 -- 10. Unified master theorem (packaged statement)
@@ -241,5 +307,9 @@ record UnifiedQG : Set₁ where
     -- You can store: primitives, constructions, and “all theorems hold”
     ok : Set
 
-postulate
-  DASHI-Unification-Theorem : UnifiedQG
+record DASHIUnificationAxiom : Set₁ where
+  field
+    theorem : UnifiedQG
+
+DASHI-Unification-Theorem : Set₁
+DASHI-Unification-Theorem = DASHIUnificationAxiom

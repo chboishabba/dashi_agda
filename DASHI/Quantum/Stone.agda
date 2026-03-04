@@ -3,10 +3,10 @@ module DASHI.Quantum.Stone where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Product using (Σ; _,_; _×_)
 
-open import DASHI.Unifier using (ℝ; HilbertSpace; Tower; WaveLift; _+_; _-_ ; _≤_; _<_; max; toℝ)
+open import DASHI.Unifier using (ℝ; HilbertSpace; Tower; WaveLift; _+ℝ_; _-ℝ_ ; _≤ℝ_; _<ℝ_; maxℝ; toℝ)
 
 absDiff : ℝ → ℝ → ℝ
-absDiff x y = max (x - y) (y - x)
+absDiff x y = maxℝ (x -ℝ y) (y -ℝ x)
 
 record StoneSelfAdjoint (HS : HilbertSpace) (K : HilbertSpace.H HS → HilbertSpace.H HS) : Set where
   open HilbertSpace HS public
@@ -20,18 +20,18 @@ record StoneGroup {Tow : Tower} {HS : HilbertSpace} (lift : WaveLift Tow HS) : S
       ∀ x → WaveLift.U lift (toℝ 0) x ≡ x
     composition :
       ∀ s t x →
-      WaveLift.U lift (s + t) x ≡ WaveLift.U lift s (WaveLift.U lift t x)
+      WaveLift.U lift (s +ℝ t) x ≡ WaveLift.U lift s (WaveLift.U lift t x)
 
 record StoneContinuity {S : Set} (U : ℝ → S → S) (dist : S → S → ℝ) : Set₁ where
   field
     continuity :
       ∀ x (ε : ℝ) →
-      toℝ 0 < ε →
+      toℝ 0 <ℝ ε →
       Σ ℝ (λ δ →
-        (toℝ 0 < δ)
+        (toℝ 0 <ℝ δ)
         × (∀ {s t : ℝ} →
-           absDiff s t < δ →
-           dist (U s x) (U t x) < ε))
+           absDiff s t <ℝ δ →
+           dist (U s x) (U t x) <ℝ ε))
 
 record StoneBundle (Tow : Tower) (HS : HilbertSpace) : Set₁ where
   open HilbertSpace HS public

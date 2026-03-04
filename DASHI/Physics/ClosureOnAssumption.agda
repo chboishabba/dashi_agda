@@ -30,7 +30,7 @@ record PhysicsClosureOnAssumption : Set₁ where
     dimBound : DimensionBoundGate
     einstein : ∀ {V : Set} (M : DiscreteManifoldLike V) → EinsteinGate M
     clifford : ∀ {VS : VectorSpace} {BF : BilinearForm VS} (C : CliffordData VS BF) → CliffordGate C
-    spin     : ∀ (p q : Nat) → DoubleCover (spinGroup p q) (soGroup p q)
+    spin     : ∀ (A : SpinAxioms) (p q : Nat) → DoubleCover (spinGroup A p q) (soGroup A p q)
     ccr      : ∀ (A : OperatorAlgebra) → CCRGate A
     unitary  : UnitaryLift
     sm       : StandardModelGate

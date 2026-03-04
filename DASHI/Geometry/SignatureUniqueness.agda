@@ -25,7 +25,15 @@ record SignatureAxioms {n : Nat} : Set₁ where
     A  : Arrow (MaskedQuadratic.V MQ)
     I  : SpatialIsotropy (MaskedQuadratic.V MQ)
 
-postulate
-  SignatureUniqueness31 :
-    ∀ {n} (Ax : SignatureAxioms {n}) →
+record SignatureUniquenessAxioms {n : Nat} : Set₁ where
+  field
+    SignatureUniqueness31 :
+      (Ax : SignatureAxioms {n}) →
       MaskedQuadratic.signatureTag (SignatureAxioms.MQ Ax) ≡ sig31
+
+SignatureUniqueness31 :
+  ∀ {n} (Ax : SignatureAxioms {n}) →
+  SignatureUniquenessAxioms {n} →
+  MaskedQuadratic.signatureTag (SignatureAxioms.MQ Ax) ≡ sig31
+SignatureUniqueness31 Ax ax =
+  SignatureUniquenessAxioms.SignatureUniqueness31 ax Ax

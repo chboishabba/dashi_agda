@@ -46,24 +46,39 @@ record ClosestPointAxioms (ℓ : Level) : Set (suc ℓ) where
             (Quadratic._-_ Qd (ProjectionOnto.P Prj x) (ProjectionOnto.P Prj y))
             (Quadratic._-_ Qd x y))
 
-postulate
-  ClosestPoint :
-    ∀ {ℓ} → (A : ClosestPointAxioms ℓ) →
-    let open ClosestPointAxioms A
-    in
-    ∀ x → (∀ s → ProjectionOnto.S Prj s →
-      _≤_
-        (Quadratic.Q Qd (Quadratic._-_ Qd x (ProjectionOnto.P Prj x)))
-        (Quadratic.Q Qd (Quadratic._-_ Qd x s)))
+  -- Provide ClosestPoint + Fejér monotonicity as axioms on this record.
+  field
+    closest :
+      ∀ x → (∀ s → ProjectionOnto.S Prj s →
+        _≤_
+          (Quadratic.Q Qd (Quadratic._-_ Qd x (ProjectionOnto.P Prj x)))
+          (Quadratic.Q Qd (Quadratic._-_ Qd x s)))
 
-  FejerMonotone :
-    ∀ {ℓ} → (A : ClosestPointAxioms ℓ) →
-    let open ClosestPointAxioms A
-    in
-    ∀ x s → ProjectionOnto.S Prj s →
-      _≤_
-        (Quadratic.Q Qd (Quadratic._-_ Qd (ProjectionOnto.P Prj x) s))
-        (Quadratic.Q Qd (Quadratic._-_ Qd x s))
+    fejer :
+      ∀ x s → ProjectionOnto.S Prj s →
+        _≤_
+          (Quadratic.Q Qd (Quadratic._-_ Qd (ProjectionOnto.P Prj x) s))
+          (Quadratic.Q Qd (Quadratic._-_ Qd x s))
+
+ClosestPoint :
+  ∀ {ℓ} → (A : ClosestPointAxioms ℓ) →
+  let open ClosestPointAxioms A
+  in
+  ∀ x → (∀ s → ProjectionOnto.S Prj s →
+    _≤_
+      (Quadratic.Q Qd (Quadratic._-_ Qd x (ProjectionOnto.P Prj x)))
+      (Quadratic.Q Qd (Quadratic._-_ Qd x s)))
+ClosestPoint A = ClosestPointAxioms.closest A
+
+FejerMonotone :
+  ∀ {ℓ} → (A : ClosestPointAxioms ℓ) →
+  let open ClosestPointAxioms A
+  in
+  ∀ x s → ProjectionOnto.S Prj s →
+    _≤_
+      (Quadratic.Q Qd (Quadratic._-_ Qd (ProjectionOnto.P Prj x) s))
+      (Quadratic.Q Qd (Quadratic._-_ Qd x s))
+FejerMonotone A = ClosestPointAxioms.fejer A
 
 record EnergyDist (A : Set) : Set₁ where
   field

@@ -3,57 +3,51 @@ module DASHI.Geometry.ProjectionContractionOrthogonalityTests where
 open import Agda.Builtin.Equality
 open import Agda.Builtin.Sigma
 open import Data.Product public using (_×_)
-open import Agda.Builtin.Nat
+open import Agda.Builtin.Nat using (Nat)
 
 ------------------------------------------------------------------------
--- Minimal algebra: additive group structure (abstract)
--- (You can replace these postulates with your concrete state carrier.)
+-- Context for the test harness (no postulates; all fields are explicit).
 ------------------------------------------------------------------------
 
-postulate
-  S   : Set
-  _S+_ : S → S → S
-  _S-_ : S → S → S
-  0#  : S
+record TestContext : Set₁ where
+  field
+    S   : Set
+    _S+_ : S → S → S
+    _S-_ : S → S → S
+    0#  : S
 
-infixl 6 _S+_ _S-_
+    -- Group-ish laws you’ll need for “detail = x - P x” reasoning
+    +-assoc : ∀ x y z → (x S+ y) S+ z ≡ x S+ (y S+ z)
+    +-idʳ   : ∀ x → x S+ 0# ≡ x
+    +-idˡ   : ∀ x → 0# S+ x ≡ x
+    +-invʳ  : ∀ x → x S- x ≡ 0#
 
-postulate
-  -- Group-ish laws you’ll need for “detail = x - P x” reasoning
-  +-assoc : ∀ x y z → (x S+ y) S+ z ≡ x S+ (y S+ z)
-  +-idʳ   : ∀ x → x S+ 0# ≡ x
-  +-idˡ   : ∀ x → 0# S+ x ≡ x
-  +-invʳ  : ∀ x → x S- x ≡ 0#
+    -- Metric / norm interface (kept abstract; later bind to your induced norm)
+    dist : S → S → Set
 
-------------------------------------------------------------------------
--- Metric / norm interface (keep abstract; later bind to your induced norm)
-------------------------------------------------------------------------
+    -- A “norm” is distance to 0. (You can swap this for your actual norm.)
+    ∥_∥ : S → Set
+    ∥x∥-def : ∀ x → ∥ x ∥ ≡ dist x 0#
 
-postulate
-  dist : S → S → Set  -- you may replace with ℝ or ℚ; kept abstract here
-
--- A “norm” is distance to 0. (You can swap this for your actual norm.)
-postulate
-  ∥_∥ : S → Set
-  ∥x∥-def : ∀ x → ∥ x ∥ ≡ dist x 0#
 
 ------------------------------------------------------------------------
 -- Recognisable lift decomposition (your “telescoping identity”)
 ------------------------------------------------------------------------
 
-record RecognisableLift (P : S → S) : Set where
+record RecognisableLift {C : TestContext} (P : TestContext.S C → TestContext.S C) : Set where
+  open TestContext C renaming (S to S₀; _S+_ to _+_; _S-_ to _-_; 0# to 0#)
   field
     -- every x decomposes uniquely into coarse + detail:
-    coarse   : S → S
-    detail   : S → S
-    split    : ∀ x → x ≡ coarse x S+ detail x
+    coarse   : S₀ → S₀
+    detail   : S₀ → S₀
+    split    : ∀ x → x ≡ coarse x + detail x
 
     -- recognisable uniqueness: if x = c+d = c'+d' with both c,c' fixed by P
     -- and both d,d' in the fiber kernel, then equal (abstracted)
     uniq :
       ∀ x c d c' d' →
-      x ≡ c S+ d →
-      x ≡ c' S+ d' →
+      x ≡ c + d →
+      x ≡ c' + d' →
       P c ≡ c →
       P c' ≡ c' →
       P d ≡ 0# →
@@ -64,10 +58,11 @@ record RecognisableLift (P : S → S) : Set where
 -- Non-expansive idempotent projection axioms
 ------------------------------------------------------------------------
 
-record NonExpansiveProjection (P : S → S) : Set₁ where
+record NonExpansiveProjection {C : TestContext} (P : TestContext.S C → TestContext.S C) : Set₁ where
+  open TestContext C renaming (S to S₀; _S+_ to _+_; _S-_ to _-_; 0# to 0#; dist to dist₀)
   field
     idem  : ∀ x → P (P x) ≡ P x
-    nonexp : ∀ x y → dist (P x) (P y) ≡ dist x y
+    nonexp : ∀ x y → dist₀ (P x) (P y) ≡ dist₀ x y
     -- (If you want ≤ instead of ≡, change dist codomain to ℚ/ℝ and use ≤.)
 
 ------------------------------------------------------------------------
@@ -78,34 +73,34 @@ record NonExpansiveProjection (P : S → S) : Set₁ where
 --   derive Pythagorean split for a quadratic norm and orthogonality.
 ------------------------------------------------------------------------
 
-record OrthogonalSplit (P : S → S) : Set₁ where
+record OrthogonalSplit {C : TestContext} (P : TestContext.S C → TestContext.S C) : Set₁ where
+  open TestContext C renaming (S to S₀; _S+_ to _+_; _S-_ to _-_; 0# to 0#; ∥_∥ to ∥_∥₀)
   field
-    ⟂-pred : S → S → Set          -- “orthogonal” predicate (abstract)
+    ⟂-pred : S₀ → S₀ → Set          -- “orthogonal” predicate (abstract)
     pythag :
       ∀ x →
       let c = P x
-          d = x S- P x
-      in  ∥ x ∥ ≡ (∥ c ∥) × (∥ d ∥)   -- placeholder shape; replace with numeric identity
+          d = x - P x
+      in  ∥_∥₀ x ≡ (∥_∥₀ c) × (∥_∥₀ d)   -- placeholder shape; replace with numeric identity
     orth :
       ∀ x →
       let c = P x
-          d = x S- P x
+          d = x - P x
       in  ⟂-pred c d
 
 ------------------------------------------------------------------------
 -- The Master Theorem (as a test harness)
 ------------------------------------------------------------------------
 
-postulate
-  -- Stability premise: the multiscale hierarchy must forbid leakage.
-  -- You can replace this with your contractive fixed-point stability lemma.
-  StabilityNoLeakage :
-    (P : S → S) → Set
+record ProjectionContractionOrthogonalityAxioms (C : TestContext) : Set₁ where
+  field
+    -- Stability premise: the multiscale hierarchy must forbid leakage.
+    StabilityNoLeakage :
+      (P : TestContext.S C → TestContext.S C) → Set
 
-postulate
-  MasterTheorem :
-    (P : S → S) →
-    RecognisableLift P →
-    NonExpansiveProjection P →
-    StabilityNoLeakage P →
-    OrthogonalSplit P
+    MasterTheorem :
+      (P : TestContext.S C → TestContext.S C) →
+      RecognisableLift {C = C} P →
+      NonExpansiveProjection {C = C} P →
+      StabilityNoLeakage P →
+      OrthogonalSplit {C = C} P

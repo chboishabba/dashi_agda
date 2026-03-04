@@ -23,12 +23,30 @@ record ClosestPoint
   field
     best : ∀ x y → Fix Pr y → Preorder._≤_ (EnergySpace.P ES) (d x (Projection.P Pr x)) (d x y)
 
-postulate
-  FejerSet→ClosestPoint :
-    ∀ {ℓx ℓe}
-      {X : Set ℓx} {E : Set ℓe}
-      (ES : EnergySpace X E)
-      (Pr : Projection X)
-      (d : X → X → E)
-    → FejerSet ES (Projection.P Pr) (Fix Pr)
-    → ClosestPoint ES Pr d
+record FejerSetClosestAxioms
+  {ℓx ℓe}
+  {X : Set ℓx} {E : Set ℓe}
+  (ES : EnergySpace X E)
+  (Pr : Projection X)
+  (d : X → X → E)
+  : Set (lsuc (ℓx ⊔ ℓe)) where
+  field
+    fejer : FejerSet ES (Projection.P Pr) (Fix Pr)
+    fejer⇒closest :
+      ∀ x y → Fix Pr y →
+        Preorder._≤_ (EnergySpace.P ES)
+          (d x (Projection.P Pr x))
+          (d x y)
+
+open FejerSetClosestAxioms public
+
+FejerSet→ClosestPoint :
+  ∀ {ℓx ℓe}
+    {X : Set ℓx} {E : Set ℓe}
+    (ES : EnergySpace X E)
+    (Pr : Projection X)
+    (d : X → X → E)
+  → FejerSetClosestAxioms ES Pr d
+  → ClosestPoint ES Pr d
+FejerSet→ClosestPoint ES Pr d Ax =
+  record { best = fejer⇒closest Ax }

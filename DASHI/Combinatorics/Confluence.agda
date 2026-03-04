@@ -14,6 +14,6 @@ Diamond {S} step =
     step s s₂ →
     Σ S (λ t → step s₁ t × step s₂ t)
 
--- Church-Rosser / confluence (standard).
-postulate
-  Confluent : ∀ {S} → Rel S → Set
+-- Church-Rosser / confluence (simple diamond form).
+Confluent : ∀ {S} → Rel S → Set
+Confluent = Diamond

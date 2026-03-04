@@ -32,13 +32,12 @@ closestFromFejer :
 closestFromFejer ES Pj Ax =
   record { closest = fejer⇒closest Ax }
 
--- Fully formal hinge (no Hilbert assumptions). Proof deferred.
-postulate
-  Fejer→ClosestPoint :
-    ∀ {ℓx ℓs}
-      {X : Set ℓx}
-      {P : Preorder {ℓs}}
-      (ES : EnergySpace X P)
-      (Pj : Projection X)
-    → FejerMonotone ES Pj
-    → ClosestPoint ES Pj
+Fejer→ClosestPoint :
+  ∀ {ℓx ℓs}
+    {X : Set ℓx}
+    {P : Preorder {ℓs}}
+    (ES : EnergySpace X P)
+    (Pj : Projection X)
+  → FejerClosestAxioms ES Pj
+  → ClosestPoint ES Pj
+Fejer→ClosestPoint ES Pj Ax = closestFromFejer ES Pj Ax

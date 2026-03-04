@@ -5,29 +5,25 @@ open import Data.Unit using (⊤)
 open import Data.Product using (_×_; _,_)
 open import Agda.Builtin.List using (List; []; _∷_)
 
--- Abstract state (whatever your physics state representation is)
-postulate State : Set
-
--- Spec and impl: State → signature (finite)
-postulate
-  Sig : Set
-  specSig : State → Sig
-  implSig : State → Sig
-
-record Vector : Set where
+record Vector (State : Set) : Set where
   constructor vec
   field input : State
 
-Vectors : Set
-Vectors = List Vector
+Vectors : Set → Set
+Vectors State = List (Vector State)
 
-ConformsOn : (f g : State → Sig) → Vectors → Set
+ConformsOn : ∀ {State Sig} → (State → Sig) → (State → Sig) → Vectors State → Set
 ConformsOn f g [] = ⊤
 ConformsOn f g (v ∷ vs) =
   (f (Vector.input v) ≡ g (Vector.input v)) × ConformsOn f g vs
 
--- Closure theorem you actually ship:
-postulate vectors : Vectors
+record SMConformanceAxioms : Set₁ where
+  field
+    State : Set
+    Sig : Set
+    specSig : State → Sig
+    implSig : State → Sig
+    vectors : Vectors State
+    physics-conformance : ConformsOn implSig specSig vectors
 
-postulate
-  physics-conformance : ConformsOn implSig specSig vectors
+open SMConformanceAxioms public

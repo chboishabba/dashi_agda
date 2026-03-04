@@ -1,38 +1,38 @@
 
 module DASHI.Geometry.ParallelogramToInnerProduct where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Level using (Level; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
-open import Data.Product using (_×_; _,_)
+open import Data.Unit using (⊤; tt)
 
-postulate
-  V : Set
-  _+_ _-_ : V → V → V
-  0v : V
+open import DASHI.Geometry.Parallelogram
+open import DASHI.Core.Q as Q using (ℚ; _+ℚ_; _-ℚ_; _*ℚ_; fourℚ)
+open import Data.Integer using (+_)
+open import Agda.Builtin.Nat using (Nat)
 
-  ℚ : Set
-  _+q_ _-q_ _*q_ : ℚ → ℚ → ℚ
-  inv2 inv4 : ℚ
-
-  ∥_∥² : V → ℚ
-
-Parallelogram : Set
-Parallelogram =
-  ∀ x y →
-    ∥ (x + y) ∥² +q ∥ (x - y) ∥² ≡
-    (inv2 *q ((∥ x ∥² +q ∥ x ∥²) +q (∥ y ∥² +q ∥ y ∥²)))
-
-polarization : V → V → ℚ
-polarization x y =
-  inv4 *q (∥ (x + y) ∥² -q ∥ (x - y) ∥²)
-
-record InnerProduct : Set₁ where
+record InnerProduct (ℓ : Level) : Set (suc ℓ) where
   field
-    ip : V → V → ℚ
+    V : Set ℓ
+    ⟪_,_⟫ : V → V → ℚ
+
+-- Polarization formula (no further properties required here).
+polarization :
+  ∀ {ℓ} (N : NormedSpace ℓ) →
+  NormedSpace.V N → NormedSpace.V N → ℚ
+polarization N x y =
+  let open NormedSpace N in
+  let inv4 : ℚ
+      inv4 = Q._/_ (+ 1) 4
+      num : ℚ
+      num = ((‖ (x + y) ‖ *ℚ ‖ (x + y) ‖) -ℚ (‖ (x - y) ‖ *ℚ ‖ (x - y) ‖))
+  in inv4 *ℚ num
 
 Parallelogram⇒InnerProduct :
-  Parallelogram →
-  InnerProduct
-Parallelogram⇒InnerProduct _ = record { ip = polarization }
-
--- The polarization identity is captured by `ip`, enabling downstream use of the quadratic form.
+  ∀ {ℓ} (N : NormedSpace ℓ) →
+  Parallelogram N →
+  InnerProduct ℓ
+Parallelogram⇒InnerProduct N _ =
+  record
+    { V = NormedSpace.V N
+    ; ⟪_,_⟫ = polarization N
+    }

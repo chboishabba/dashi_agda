@@ -6,6 +6,7 @@ open import Relation.Nullary      using (¬_; Dec; yes; no)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 -- Removed Reasoning imports as they are missing in stdlib.
 open import Data.Nat              using (_<_; z≤n; s≤s; _≟_; _≤_; _⊔_)
+open import Data.Nat.Base         using (z<s)
 open import Data.Empty            using (⊥-elim)
 
 open import Ultrametric
@@ -76,8 +77,11 @@ dNat-x≢y=1 {x} {y} x≢y with x ≟ y
 -- Strict contraction on distinct points (Contractive≢ style)
 ------------------------------------------------------------------------
 
-postulate
-  contractive≢-proj : ∀ t → (∀ {x y} → x ≢ y → dNat (Kproj t x) (Kproj t y) < dNat x y)
+contractive≢-proj : ∀ t → (∀ {x y} → x ≢ y → dNat (Kproj t x) (Kproj t y) < dNat x y)
+contractive≢-proj t {x} {y} x≢y
+  rewrite dNat-refl0 t
+        | dNat-x≢y=1 {x} {y} x≢y
+  = z<s
 
 ------------------------------------------------------------------------
 -- Fixed point uniqueness for projection

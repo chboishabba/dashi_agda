@@ -68,17 +68,14 @@ E ev = get ev 0 + get ev 1 + get ev 3
 
 ------------------------------------------------------------------------
 -- Lemmas: each successful rule application decreases E by 1
+record FractranAxioms : Set₁ where
+  field
+    E-dec2 : ∀ {ev ev'} → apply r1122 ev ≡ just ev' → E ev' < E ev
+    E-dec3 : ∀ {ev ev'} → apply r53 ev ≡ just ev' → E ev' < E ev
+    E-dec7 : ∀ {ev ev'} → apply r17 ev ≡ just ev' → E ev' < E ev
 
-postulate
-  E-dec2 : ∀ {ev ev'} → apply r1122 ev ≡ just ev' → E ev' < E ev
-  E-dec3 : ∀ {ev ev'} → apply r53 ev ≡ just ev' → E ev' < E ev
-  E-dec7 : ∀ {ev ev'} → apply r17 ev ≡ just ev' → E ev' < E ev
-
-postulate
-  -- Determinism of step (canonical “first applies” rule)
-  --
-  -- This is the usual “function determinism” for Maybe:
-  step-deterministic : ∀ {ev x y} → step ev ≡ just x → step ev ≡ just y → x ≡ y
+    -- Determinism of step (canonical “first applies” rule)
+    step-deterministic : ∀ {ev x y} → step ev ≡ just x → step ev ≡ just y → x ≡ y
 
 ------------------------------------------------------------------------
 -- Fuelled evaluation: iterate step at most fuel times
@@ -101,10 +98,11 @@ run ev = iterate (E ev) step ev
 --
 -- We package it as: step (run ev) = nothing.
 
-postulate
-  -- This is the only “plumbing” lemma you may want to prove explicitly in your Prelude style:
-  -- If step makes a move, E strictly decreases.
-  step-decreases-E : ∀ {ev ev'} → step ev ≡ just ev' → E ev' < E ev
+record FractranTerminationAxioms : Set₁ where
+  field
+    -- If step makes a move, E strictly decreases.
+    step-decreases-E : ∀ {ev ev'} → step ev ≡ just ev' → E ev' < E ev
+    termination : ∀ ev → Obs (run ev)
 
-postulate
-  termination : ∀ ev → Obs (run ev)
+open FractranAxioms public
+open FractranTerminationAxioms public

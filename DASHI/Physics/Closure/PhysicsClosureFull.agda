@@ -1,12 +1,12 @@
 module DASHI.Physics.Closure.PhysicsClosureFull where
 
 open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Agda.Primitive using (Setω)
 open import Data.Unit using (⊤; tt)
 
 open import DASHI.Physics.RealClosureKit
 open import DASHI.Geometry.ProjectionDefect
 open import DASHI.Geometry.QuadraticForm
-open import DASHI.Geometry.QuadraticFormFromProjection
 open import DASHI.Geometry.QuadraticFormEmergence
 open import DASHI.Geometry.OrthogonalityFromPolarization
 open import DASHI.Geometry.ConeTimeIsotropy
@@ -18,12 +18,15 @@ open import DASHI.MDL.MDLLyapunov
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
 open import DASHI.Physics.UniversalityTheorem
 
-record PhysicsClosureFull : Set₁ where
+record PhysicsClosureFull : Setω where
   field
     kit : RealClosureKit
 
     -- Quadratic emergence
-    metricEmergence : QuadraticFromProjection
+    metricEmergence :
+      ∀ {ℓv ℓs} (A : Additive ℓv) (F : ScalarField ℓs)
+        (PD : ProjectionDefect A) (Ax : QuadraticEmergenceAxioms A F PD)
+      → Σ (QuadraticForm A F) (λ _ → ⊤)
     quadraticForm   : Set
     polarization    : Set
     orthogonality   : Set

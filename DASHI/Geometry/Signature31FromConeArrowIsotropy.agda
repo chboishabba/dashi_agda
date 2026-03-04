@@ -23,9 +23,18 @@ record SignatureAxioms {ℓv ℓs}
 
 open SignatureAxioms public
 
-postulate
-  Signature31Theorem :
-    ∀ {ℓv ℓs} (A : Additive ℓv) (F : ScalarField ℓs)
-      (QF : QuadraticForm A F)
-      (Ax : SignatureAxioms A F QF)
+record Signature31FromConeArrowIsotropyAxioms
+  {ℓv ℓs} (A : Additive ℓv) (F : ScalarField ℓs)
+  (QF : QuadraticForm A F) : Set (suc (ℓv ⊔ ℓs)) where
+  field
+    Signature31Theorem :
+      (Ax : SignatureAxioms A F QF) → Signature
+
+Signature31Theorem :
+  ∀ {ℓv ℓs} (A : Additive ℓv) (F : ScalarField ℓs)
+    (QF : QuadraticForm A F)
+    (Ax : SignatureAxioms A F QF)
+    → Signature31FromConeArrowIsotropyAxioms A F QF
     → Signature
+Signature31Theorem A F QF Ax ax =
+  Signature31FromConeArrowIsotropyAxioms.Signature31Theorem ax Ax

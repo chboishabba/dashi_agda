@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Nullary      using (¬_)
 open import Data.Nat              using (_<_)
 open import Data.Empty            using (⊥; ⊥-elim)
+open import DASHI.Geometry.NatNoInfiniteDescent using (NatNoInfiniteDescent)
 
 -- A minimal invertible step system with a Nat-valued measure.
 record InvertibleNat (S : Set) : Set₁ where
@@ -29,10 +30,7 @@ iterate f (suc n) s = iterate f n (f s)
 -- fact as a single lemma that can be discharged from stdlib later.
 --
 -- (If you want, I can give the fully discharged stdlib proof too.)
-postulate
-  NatNoInfiniteDescent :
-    ∀ {S : Set} (H : S → Nat) (f : S → S) (s₀ : S) →
-    (∀ s → H (f s) < H s) → ⊥
+-- Reuse the concrete Nat no-infinite-descent proof.
 
 -- Main theorem: in an inhabited system, “strict collapse everywhere” is impossible.
 no-global-strict-collapse :

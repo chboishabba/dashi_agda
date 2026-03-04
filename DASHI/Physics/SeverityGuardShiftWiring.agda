@@ -1,11 +1,13 @@
 module DASHI.Physics.SeverityGuardShiftWiring where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Data.Nat using (_<_)
 open import Agda.Primitive using (Level; lsuc)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import UFTC_Lattice as UFTC using (Code; Severity)
-open import DASHI.Geometry.LCP.Stream using (Stream; lcp≥)
+open import Ultrametric as UMetric
+open import DASHI.Geometry.FiberContraction as FC
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.TailCollapseProof as TCP
 open import DASHI.Physics.SeverityGuardShiftInstance as SGSI
@@ -19,23 +21,19 @@ record ShiftSeverityGuardWiring {m k : Nat} : Set₁ where
     -- Severity policy for each state
     policyᵣ' : SG.SeverityPolicy (RTC.Carrier (m + k))
 
+    Uᵣ' : UMetric.Ultrametric (RTC.Carrier (m + k))
+
     -- Deterministic tail-kill projection and restoration
     Pᵣ' : RTC.Carrier (m + k) → RTC.Carrier (m + k)
     Restoreᵣ' : RTC.Carrier (m + k) → RTC.Carrier (m + k)
 
-    -- Stream view for LCP depth reasoning
-    projᵣ' : RTC.Carrier (m + k) → Stream Code
-
-    -- Strictness gain
-    κ' : Nat
-
     -- Guarded strictness of P under severity guard
     P-strict-on' :
-      ∀ {x y k′} →
+      ∀ {x y} →
       SG.Guard policyᵣ' x →
       SG.Guard policyᵣ' y →
-      lcp≥ (projᵣ' x) (projᵣ' y) k′ →
-      lcp≥ (projᵣ' (Pᵣ' x)) (projᵣ' (Pᵣ' y)) (k′ + κ')
+      FC.FiberDistinct Pᵣ' x y →
+      UMetric.Ultrametric.d Uᵣ' (Pᵣ' x) (Pᵣ' y) < UMetric.Ultrametric.d Uᵣ' x y
 
     restore-normal-form' :
       ∀ x →
@@ -56,10 +54,9 @@ record ShiftSeverityGuardWiring {m k : Nat} : Set₁ where
           ; safeThresholdᵣ = SG.SeverityPolicy.safeThreshold policyᵣ'
           ; brokenThresholdᵣ = SG.SeverityPolicy.brokenThreshold policyᵣ'
           }
+      ; Uᵣ = Uᵣ'
       ; Pᵣ = Pᵣ'
       ; Restoreᵣ = Restoreᵣ'
-      ; projᵣ = projᵣ'
-      ; κ = κ'
     ; P-strict-on = P-strict-on'
     ; restore-normal-form = restore-normal-form'
     ; restore-idem = restore-idem'

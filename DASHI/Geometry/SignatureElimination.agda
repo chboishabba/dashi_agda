@@ -16,8 +16,17 @@ record SignatureLock {n : Nat} (V : Set) : Set₁ where
     OP : OrbitProfile V
     eliminate : ∀ (MQ : MaskedQuadratic n) → Set  -- refine later
 
-postulate
-  Signature31FromLock :
-    ∀ {n} {V} (MQ : MaskedQuadratic n) (L : SignatureLock {n} V) →
-    SignatureLock.eliminate L MQ →
-    MaskedQuadratic.signatureTag MQ ≡ sig31
+record SignatureEliminationAxioms {n : Nat} (V : Set) : Set₁ where
+  field
+    Signature31FromLock :
+      ∀ (MQ : MaskedQuadratic n) (L : SignatureLock {n} V) →
+      SignatureLock.eliminate L MQ →
+      MaskedQuadratic.signatureTag MQ ≡ sig31
+
+Signature31FromLock :
+  ∀ {n} {V} (MQ : MaskedQuadratic n) (L : SignatureLock {n} V) →
+  SignatureEliminationAxioms {n} V →
+  SignatureLock.eliminate L MQ →
+  MaskedQuadratic.signatureTag MQ ≡ sig31
+Signature31FromLock MQ L ax =
+  SignatureEliminationAxioms.Signature31FromLock ax MQ L

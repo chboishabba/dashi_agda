@@ -13,11 +13,9 @@ record Sig15 : Set where
     b13 : Bool; b17 : Bool; b19 : Bool; b23 : Bool; b29 : Bool
     b31 : Bool; b41 : Bool; b47 : Bool; b59 : Bool; b71 : Bool
 
--- Physics “state” is abstract here; you can later:
---   (a) define it constructively, or
---   (b) import it from a computed table (recommended for closure).
-postulate
-  State : Set
+-- Physics “state” placeholder (minimal concrete carrier).
+data State : Set where
+  st : State
 
 -- A “compatibility detector” is the *lens*:
 -- tells you whether prime p is compatible with state s under your rules.

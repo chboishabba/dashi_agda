@@ -19,9 +19,18 @@ GlobalAttractor f = Σ _ (λ a → ∀ x → EventuallyConst f x a)
 -- The useful theorem: invertible + nontrivial ⇒ no global attractor.
 -- (In a finite/discrete world, invertible dynamics can’t collapse all orbits to one point unless singleton.)
 
-postulate
-  invertible-nontrivial-no-attractor :
-    ∀ {S : Set} {U : S → S} →
-    Invertible U →
-    (Σ S (λ x → Σ S (λ y → ¬ (x ≡ y)))) →
-    ¬ GlobalAttractor U
+record NoGlobalAttractorAxioms : Set₁ where
+  field
+    theorem :
+      ∀ {S : Set} {U : S → S} →
+      Invertible U →
+      (Σ S (λ x → Σ S (λ y → ¬ (x ≡ y)))) →
+      ¬ GlobalAttractor U
+
+invertible-nontrivial-no-attractor :
+  NoGlobalAttractorAxioms →
+  ∀ {S : Set} {U : S → S} →
+  Invertible U →
+  (Σ S (λ x → Σ S (λ y → ¬ (x ≡ y)))) →
+  ¬ GlobalAttractor U
+invertible-nontrivial-no-attractor ax = NoGlobalAttractorAxioms.theorem ax

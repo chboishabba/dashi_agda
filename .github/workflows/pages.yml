@@ -34,27 +34,22 @@ jobs:
         run: |
           set -euxo pipefail
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+          sudo apt-get install -y latexmk texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra texlive-xetex
 
       - name: Build HTML (clickable rendered code)
         run: |
           set -euxo pipefail
           mkdir -p site
+          scripts/generate-everything.sh
           agda -i . -l standard-library \
             --html --html-dir=site \
             DASHI/Everything.agda
 
-      - name: Build PDF (Docs/Theory.lagda.tex)
+      - name: Build PDF (Full Book)
         run: |
           set -euxo pipefail
-          mkdir -p build/latex
-          agda -i . -l standard-library \
-            --latex --latex-dir=build/latex \
-            Docs/Theory.lagda.tex
-
-          latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=build/latex build/latex/Docs/Theory.tex
-
-          cp build/latex/Theory.pdf site/Theory.pdf
+          scripts/build_book.sh
+          cp build/latex/Book.pdf site/Book.pdf
 
       - name: Add a tiny landing page
         run: |
@@ -66,7 +61,7 @@ jobs:
           <h1>DASHI Proof Artifacts</h1>
           <ul>
             <li><a href="./DASHI.Everything.html">Clickable rendered code (HTML)</a></li>
-            <li><a href="./Theory.pdf">Theory PDF</a></li>
+            <li><a href="./Book.pdf">Full Book PDF</a></li>
           </ul>
           HTML
 
@@ -78,8 +73,8 @@ jobs:
       - name: Upload PDF as a normal artifact too
         uses: actions/upload-artifact@v4
         with:
-          name: theory-pdf
-          path: site/Theory.pdf
+          name: book-pdf
+          path: site/Book.pdf
 
   deploy:
     environment:

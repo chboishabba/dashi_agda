@@ -1,25 +1,26 @@
 module DASHI.Algebra.ConstraintAlgebraClosure where
 
 open import DASHI.Algebra.ConstraintAlgebraClosureTests renaming
-  (DiracClosure to DiracClosureType
-  ; ValuationEquivariance to ValuationEquivarianceType
-  ; NoLeakageStability to NoLeakageStabilityType
+  (ConstraintAlgebraAxioms to ConstraintAlgebraAxiomsType
+  ; DiracClosure to DiracClosureType
   ; ConstraintAlgebraTheorem to ConstraintAlgebraTheoremType)
 
 record ConstraintClosureBundle : Set₁ where
   field
-    invariance : ValuationEquivarianceType
-    stability : NoLeakageStabilityType
+    axioms : ConstraintAlgebraAxiomsType
 
-closure-from-bundle : ConstraintClosureBundle → DiracClosureType
+closure-from-bundle :
+  (bundle : ConstraintClosureBundle) →
+  DiracClosureType (ConstraintAlgebraAxiomsType.struct (ConstraintClosureBundle.axioms bundle))
 closure-from-bundle bundle =
-  ConstraintAlgebraTheoremType
-    (ConstraintClosureBundle.invariance bundle)
-    (ConstraintClosureBundle.stability bundle)
+  ConstraintAlgebraTheoremType (ConstraintClosureBundle.axioms bundle)
 
 record ConstraintConsequences (bundle : ConstraintClosureBundle) : Set₁ where
   field
-    closure : DiracClosureType
+    closure :
+      DiracClosureType (ConstraintAlgebraAxiomsType.struct (ConstraintClosureBundle.axioms bundle))
 
-ConstraintClosure-theorem : ConstraintClosureBundle → DiracClosureType
+ConstraintClosure-theorem :
+  (bundle : ConstraintClosureBundle) →
+  DiracClosureType (ConstraintAlgebraAxiomsType.struct (ConstraintClosureBundle.axioms bundle))
 ConstraintClosure-theorem = closure-from-bundle

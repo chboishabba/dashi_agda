@@ -16,8 +16,8 @@ open import DASHI.Physics.UniversalityTheorem as UTH
 
 -- Concrete instance: wires the Bool closure stack into PhysicsClosure,
 -- using the assumption-based signature law.
-physicsClosureAssumed : PC.PhysicsClosure
-physicsClosureAssumed =
+physicsClosureAssumed : SUA.SignatureAssumedAxioms → PC.PhysicsClosure
+physicsClosureAssumed ax =
   record
     { kit = MRI.myKit
     ; metricEmergence = record
@@ -28,7 +28,7 @@ physicsClosureAssumed =
             }
         }
     ; orthogonality = ⊤
-    ; signature31 = SUA.signature31-assumed
+    ; signature31 = SUA.signature31-assumed ax
     ; CS = record
         { Constraint = ⊤
         ; actsOn = λ X → X
@@ -43,3 +43,7 @@ physicsClosureAssumed =
     ; mdlLyap = λ {S} T → ⊤
     ; universality = record { statement = ⊤ }
     }
+
+physicsClosureAssumedDefault : PC.PhysicsClosure
+physicsClosureAssumedDefault =
+  physicsClosureAssumed SUA.signatureAssumedAxioms

@@ -2,7 +2,8 @@ module DASHI.Algebra.OperatorMonoidClosed where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-postulate State : Set
+data State : Set where
+  st : State
 
 Endo : Set
 Endo = State → State

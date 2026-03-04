@@ -32,7 +32,19 @@ record EinsteinGate {V : Set} (M : DiscreteManifoldLike V) : Set₁ where
     symG    : Sym G
     lovelock-unique : ⊤
 
-postulate
-  EinsteinEquation :
-    ∀ {Dim : Nat} {V : Set} →
-    DiscreteManifoldLike V → Set
+record EinsteinAxioms : Set₁ where
+  field
+    EinsteinEquation :
+      ∀ {Dim : Nat} {V : Set} →
+      DiscreteManifoldLike V → Set
+
+EinsteinEquation :
+  (A : EinsteinAxioms) →
+  ∀ {Dim : Nat} {V : Set} →
+  DiscreteManifoldLike V → Set
+EinsteinEquation A {Dim} {V} = EinsteinAxioms.EinsteinEquation A {Dim} {V}
+
+einsteinAxiomsDefault : EinsteinAxioms
+einsteinAxiomsDefault =
+  record
+    { EinsteinEquation = λ {Dim} {V} _ → ⊤ }

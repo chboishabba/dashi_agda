@@ -16,10 +16,11 @@ record StrictContractive {S : Set} (K : S → S) : Set₁ where
     -- in your repo this will be: ∀ x y → d(Kx,Ky) < d(x,y)
     contract : ⊤
 
--- Blind-spot theorem skeleton: if S is finite and K is strict contractive,
--- then K has a unique fixed point (via eventual stabilization).
-postulate
-  finite-strict→unique-fix :
-    ∀ {S : Set} {K : S → S} →
-    Finite S → StrictContractive K →
-    Σ S (λ a → (K a ≡ a) × (∀ x → (K x ≡ x) → x ≡ a))
+record StrictContractionFiniteAxioms : Set₁ where
+  field
+    finite-strict→unique-fix :
+      ∀ {S : Set} {K : S → S} →
+      Finite S → StrictContractive K →
+      Σ S (λ a → (K a ≡ a) × (∀ x → (K x ≡ x) → x ≡ a))
+
+open StrictContractionFiniteAxioms public

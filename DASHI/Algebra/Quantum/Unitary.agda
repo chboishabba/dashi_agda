@@ -3,17 +3,24 @@ module DASHI.Algebra.Quantum.Unitary where
 open import DASHI.Core.Prelude
 open import DASHI.Core.OperatorTypes
 
--- Abstract “Hilbert-like” structure: we only need an inner product interface.
-postulate
-  ℂ : Set
-  _≡ℂ_ : ℂ → ℂ → Set
-
-record InnerProductSpace (S : Set) : Set₁ where
+record ComplexAxioms : Set₁ where
   field
-    ⟪_,_⟫ : S → S → ℂ
+    ℂ : Set
+    _≡ℂ_ : ℂ → ℂ → Set
+
+open ComplexAxioms public
+
+-- Abstract “Hilbert-like” structure: we only need an inner product interface.
+record InnerProductSpace (A : ComplexAxioms) (S : Set) : Set₁ where
+  field
+    ⟪_,_⟫ : S → S → ℂ A
 
 -- Unitary = invertible + inner product preservation.
-record Unitary {S : Set} (IPS : InnerProductSpace S) (U : S → S) : Set₁ where
+record Unitary {A : ComplexAxioms} {S : Set} (IPS : InnerProductSpace A S) (U : S → S) : Set₁ where
   field
     inv : Invertible U
-    preserves : ∀ x y → InnerProductSpace.⟪_,_⟫ IPS (U x) (U y) ≡ℂ InnerProductSpace.⟪_,_⟫ IPS x y
+    preserves :
+      ∀ x y →
+        ComplexAxioms._≡ℂ_ A
+          (InnerProductSpace.⟪_,_⟫ IPS (U x) (U y))
+          (InnerProductSpace.⟪_,_⟫ IPS x y)

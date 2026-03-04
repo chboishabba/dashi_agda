@@ -14,10 +14,17 @@ record BanachFixedPoint {S : Set}
     fixes  : T fp ≡ fp
     unique : ∀ x → T x ≡ x → x ≡ fp
 
--- Interface theorem: completeness + contraction ⇒ fixed point (no proof yet).
-postulate
-  banach :
-    ∀ {S : Set} (U : UMetric.Ultrametric S) (T : S → S) →
-    CU.Complete U → Contr.Contractive U T → BanachFixedPoint U T
+record BanachAxiom {S : Set}
+  (U : UMetric.Ultrametric S)
+  (T : S → S) : Set₁ where
+  field
+    banach :
+      CU.Complete U → Contr.Contractive U T → BanachFixedPoint U T
+
+banach :
+  ∀ {S : Set} (U : UMetric.Ultrametric S) (T : S → S) →
+  BanachAxiom U T →
+  CU.Complete U → Contr.Contractive U T → BanachFixedPoint U T
+banach U T ax = BanachAxiom.banach ax
 
 open BanachFixedPoint public

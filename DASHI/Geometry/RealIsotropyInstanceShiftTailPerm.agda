@@ -16,66 +16,66 @@ open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.RealOperatorStackShift as ROSS
 
 ------------------------------------------------------------------------
--- Tail-permutation isotropy instance (skeleton).
--- To keep the closure spine postulate-free, do NOT wire this into
--- TernaryRealInstanceShift until the postulates below are discharged.
+-- Tail-permutation isotropy instance (axiom record; no postulates).
 ------------------------------------------------------------------------
-
-postulate
-  permGroup : ∀ {k : Nat} → Iso.Group (TP.Perm k)
 
 act : ∀ {m k : Nat} → TP.Perm k → RTC.Carrier (m + k) → RTC.Carrier (m + k)
 act {m} {k} p x = TP.actTailPerm {m} {k} p x
 
-postulate
-  preservesMetric :
-    ∀ {m k : Nat} →
-    ∀ p x y →
-    UMetric.Ultrametric.d (FAM.ultrametricVec {n = m + k})
-      (act {m} {k} p x) (act {m} {k} p y)
-      ≡
-    UMetric.Ultrametric.d (FAM.ultrametricVec {n = m + k}) x y
+record TailPermIsotropyAxioms {m k : Nat} : Set₁ where
+  field
+    permGroup : Iso.Group (TP.Perm k)
 
-  tailPerm-Rᵣ :
-    ∀ {m k} (p : TP.Perm k) (x : RTC.Carrier (m + k)) →
-      ROSS.R {m} {k} (act p x) ≡ act p (ROSS.R {m} {k} x)
+    preservesMetric :
+      ∀ p x y →
+      UMetric.Ultrametric.d (FAM.ultrametricVec {n = m + k})
+        (act {m} {k} p x) (act {m} {k} p y)
+        ≡
+      UMetric.Ultrametric.d (FAM.ultrametricVec {n = m + k}) x y
 
-  tailPerm-Pᵣ :
-    ∀ {m k} (p : TP.Perm k) (x : RTC.Carrier (m + k)) →
-      ROSS.P {m} {k} (act p x) ≡ act p (ROSS.P {m} {k} x)
+    tailPerm-Rᵣ :
+      ∀ (p : TP.Perm k) (x : RTC.Carrier (m + k)) →
+        ROSS.R {m} {k} (act p x) ≡ act p (ROSS.R {m} {k} x)
 
-  tailPerm-Cᵣ :
-    ∀ {m k} (p : TP.Perm k) (x : RTC.Carrier (m + k)) →
-      ROSS.C {m} {k} (act p x) ≡ act p (ROSS.C {m} {k} x)
+    tailPerm-Pᵣ :
+      ∀ (p : TP.Perm k) (x : RTC.Carrier (m + k)) →
+        ROSS.P {m} {k} (act p x) ≡ act p (ROSS.P {m} {k} x)
+
+    tailPerm-Cᵣ :
+      ∀ (p : TP.Perm k) (x : RTC.Carrier (m + k)) →
+        ROSS.C {m} {k} (act p x) ≡ act p (ROSS.C {m} {k} x)
 
 commutesWithT :
-  ∀ {m k : Nat} → (p : TP.Perm k) → (x : RTC.Carrier (m + k)) →
+  ∀ {m k : Nat} →
+  (ax : TailPermIsotropyAxioms {m} {k}) →
+  (p : TP.Perm k) → (x : RTC.Carrier (m + k)) →
     ROSS.C {m} {k} (ROSS.P {m} {k} (ROSS.R {m} {k} (act p x)))
       ≡ act p (ROSS.C {m} {k} (ROSS.P {m} {k} (ROSS.R {m} {k} x)))
-commutesWithT {m} {k} p x =
+commutesWithT {m} {k} ax p x =
   TP.commutesWithT-CPR
     (ROSS.R {m} {k})
     (ROSS.P {m} {k})
     (ROSS.C {m} {k})
     p
-    (tailPerm-Rᵣ p)
-    (tailPerm-Pᵣ p)
-    (tailPerm-Cᵣ p)
+    (TailPermIsotropyAxioms.tailPerm-Rᵣ ax p)
+    (TailPermIsotropyAxioms.tailPerm-Pᵣ ax p)
+    (TailPermIsotropyAxioms.tailPerm-Cᵣ ax p)
     x
 
 realIsotropyInstanceShiftTailPerm :
   ∀ {m k : Nat} →
+  TailPermIsotropyAxioms {m} {k} →
   RIS.RealIsotropy (FAM.ultrametricVec {n = m + k})
     (λ x → ROSS.C {m} {k} (ROSS.P {m} {k} (ROSS.R {m} {k} x)))
-realIsotropyInstanceShiftTailPerm {m} {k} =
+realIsotropyInstanceShiftTailPerm {m} {k} ax =
   record
     { iso =
         record
           { G = TP.Perm k
-          ; group = permGroup
+          ; group = TailPermIsotropyAxioms.permGroup ax
           ; act = act
-          ; preservesMetric = preservesMetric {m} {k}
-          ; commutesWithT = commutesWithT {m} {k}
+          ; preservesMetric = TailPermIsotropyAxioms.preservesMetric ax
+          ; commutesWithT = commutesWithT {m} {k} ax
           }
     ; coneInvariant = TP.Perm k
     }

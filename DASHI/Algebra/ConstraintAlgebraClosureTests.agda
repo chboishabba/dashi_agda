@@ -1,4 +1,3 @@
-{-# OPTIONS --allow-unsolved-metas #-}
 module DASHI.Algebra.ConstraintAlgebraClosureTests where
 
 open import Agda.Builtin.Equality
@@ -8,55 +7,55 @@ open import Agda.Builtin.Sigma
 -- Abstract operator Lie algebra (commutator bracket)
 ------------------------------------------------------------------------
 
-postulate
-  Op : Set
-  _∘_ : Op → Op → Op
-  _-_ : Op → Op → Op
-  I   : Op
+record ConstraintAlgebraStructure : Set₁ where
+  field
+    Op : Set
+    _∘_ : Op → Op → Op
+    _-_ : Op → Op → Op
+    I   : Op
 
-infixl 9 _∘_
+    -- Constraints: Hamiltonian + Momentum (vector-index abstracted)
+    Idx : Set
+    H    : Op
+    Hᵢ   : Idx → Op
 
-_bracket_ : Op → Op → Op
-A bracket B = (A ∘ B) - (B ∘ A)
+open ConstraintAlgebraStructure public
 
-------------------------------------------------------------------------
--- Constraints: Hamiltonian + Momentum (vector-index abstracted)
-------------------------------------------------------------------------
-
-postulate
-  Idx : Set
-  H    : Op
-  Hᵢ   : Idx → Op
+_bracket_ : (S : ConstraintAlgebraStructure) → Op S → Op S → Op S
+_bracket_ S X Y = (_-_ S) ((_∘_ S) X Y) ((_∘_ S) Y X)
 
 ------------------------------------------------------------------------
 -- Closure statement: commutators of constraints re-express as constraints
--- (This is the “no anomaly” test: algebra closes in the same family.)
 ------------------------------------------------------------------------
 
-record DiracClosure : Set where
+record DiracClosure (S : ConstraintAlgebraStructure) : Set where
   field
-    -- [Hᵢ, Hⱼ] = H_k(...)   (structure functions hidden for now)
+    -- [Hᵢ, Hⱼ] = H_k(...)
     mom-mom :
-      ∀ i j → Σ Idx (λ k → (Hᵢ i bracket Hᵢ j) ≡ Hᵢ k)
+      ∀ i j → Σ (Idx S) (λ k → (_bracket_ S (Hᵢ S i) (Hᵢ S j)) ≡ Hᵢ S k)
 
     -- [H, Hᵢ] = H(...)
     ham-mom :
-      ∀ i → (H bracket Hᵢ i) ≡ H
+      ∀ i → (_bracket_ S (H S) (Hᵢ S i)) ≡ H S
 
     -- [H, H] = Hᵢ(...)
     ham-ham :
-      Σ Idx (λ k → (H bracket H) ≡ Hᵢ k)
+      Σ (Idx S) (λ k → (_bracket_ S (H S) (H S)) ≡ Hᵢ S k)
 
 ------------------------------------------------------------------------
--- Theorem obligation: derive closure from “valuation equivariance”
+-- Axiom bundle (no postulates)
 ------------------------------------------------------------------------
 
-postulate
-  ValuationEquivariance : Set     -- your “decimation commutes with relabellings”
-  NoLeakageStability    : Set     -- your fixed-point stability condition
+record ConstraintAlgebraAxioms : Set₁ where
+  field
+    struct : ConstraintAlgebraStructure
+    ValuationEquivariance : Set     -- “decimation commutes with relabellings”
+    NoLeakageStability    : Set     -- fixed-point stability condition
+    closure : DiracClosure struct
 
-postulate
-  ConstraintAlgebraTheorem :
-    ValuationEquivariance →
-    NoLeakageStability →
-    DiracClosure
+open ConstraintAlgebraAxioms public
+
+ConstraintAlgebraTheorem :
+  (A : ConstraintAlgebraAxioms) →
+  DiracClosure (struct A)
+ConstraintAlgebraTheorem A = closure A

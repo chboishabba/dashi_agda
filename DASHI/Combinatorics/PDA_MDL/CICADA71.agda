@@ -3,9 +3,9 @@ module DASHI.Combinatorics.PDA_MDL.CICADA71 where
 open import DASHI.Combinatorics.PDA_MDL.Prelude
 open import DASHI.Combinatorics.PDA_MDL.ExponentVector
 
-open import Data.Fin using (Fin; toℕ; fromℕ<)
+open import Data.Fin using (Fin; toℕ; fromℕ<; zero)
 open import Data.Nat.DivMod using (m%n<n)
-open import Data.Vec using (Vec; zipWith; foldr′)
+open import Data.Vec using (Vec; zipWith; foldr′; replicate)
 
 mod71 : Nat → Nat
 mod71 n = n % 71
@@ -14,9 +14,9 @@ mod71 n = n % 71
 fin71→Nat : Fin 71 → Nat
 fin71→Nat = toℕ
 
--- A fixed weight vector in Fin 71 (choose anything deterministic).
--- You can later pick these as (prime mod 71) or derived from the 15 primes.
-postulate w : Vec (Fin 71) 15
+-- A fixed weight vector in Fin 71 (deterministic placeholder).
+w : Vec (Fin 71) 15
+w = replicate 15 zero
 
 dotNat : EV → Vec (Fin 71) 15 → Nat
 dotNat ev ws =

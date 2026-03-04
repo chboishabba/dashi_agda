@@ -3,25 +3,27 @@ module DASHI.Algebra.Quantum.DimensionFixedPoint where
 open import Data.Nat renaming (ℕ to Nat) using (_∸_)
 open import Relation.Binary.PropositionalEquality
 
-postulate ℝ : Set
-postulate _R^_ : ℝ -> Nat -> ℝ
-postulate _R<=_ : ℝ -> ℝ -> Set
-postulate _R*_ : ℝ -> ℝ -> ℝ
-postulate k : ℝ
-postulate StableFixedPoint : Nat -> Set
+record DimensionFixedPointAxioms : Set₁ where
+  field
+    ℝ : Set
+    _R^_ : ℝ → Nat → ℝ
+    _R<=_ : ℝ → ℝ → Set
+    _R*_ : ℝ → ℝ → ℝ
+    k : ℝ
+    StableFixedPoint : Nat → Set
 
-Bulk : Nat → ℝ → ℝ
-Bulk D L = L R^ D
+    HolographicBound :
+      ∀ D L →
+        _R<=_ (L R^ D) (k R* (L R^ (D ∸ 1)))
 
-Boundary : Nat → ℝ → ℝ
-Boundary D L = L R^ (D ∸ 1)
+    StabilityUnderDecimation :
+      ∀ D →
+        StableFixedPoint D → D ≡ 4
 
-postulate
-  HolographicBound :
-    ∀ D L →
-      Bulk D L R<= (k R* Boundary D L)
+open DimensionFixedPointAxioms public
 
-postulate
-  StabilityUnderDecimation :
-    ∀ D →
-      StableFixedPoint D → D ≡ 4
+Bulk : (A : DimensionFixedPointAxioms) → Nat → ℝ A → ℝ A
+Bulk A D L = _R^_ A L D
+
+Boundary : (A : DimensionFixedPointAxioms) → Nat → ℝ A → ℝ A
+Boundary A D L = _R^_ A L (D ∸ 1)

@@ -52,5 +52,5 @@ MDL M D = Lmodel M + Ldata| M D
 -- Here: θ := stats D  (sum) is too big; instead use per-lane capped statistic.
 -- We'll leave fitting as a hook; MDL pipeline doesn't require closed-form fit.
 
-postulate
-  fit : DatasetEV → IndepEVModel
+fit : DatasetEV → IndepEVModel
+fit D = record { θ = stats D }

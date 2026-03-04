@@ -11,11 +11,16 @@ open import Data.Integer using (ℤ; _+_; _-_; _*_; -_; +_; -[1+_])
 open import Data.Integer.Properties as IntP
 import Relation.Binary.Reasoning.Setoid as EqR
 open import Data.Nat using (_≤_; _<_)
+import Data.Integer.Tactic.RingSolver as IntRS
+import Tactic.RingSolver.NonReflective as NR
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 module ℤ-Reasoning = EqR IntP.≡-setoid
 open ℤ-Reasoning
+
+module Ring = NR IntRS.ring
+open Ring using (Expr; Κ; Ι; _⊕_; _⊗_; ⊝_; _⊜_; solve)
 
 ------------------------------------------------------------------------
 -- Trit → ℤ embedding (for polarization we want ℤ, not Trit)
@@ -106,10 +111,15 @@ b2-trit pos neg = refl
 b2-trit pos zer = refl
 b2-trit pos pos = refl
 
-postulate
-  split-B₂ :
-    (A R X RX Y RY : ℤ) →
-    (A + R) - (X + RX) - (Y + RY) ≡ (A - X - Y) + (R - RX - RY)
+split-B₂ :
+  (A R X RX Y RY : ℤ) →
+  (A + R) - (X + RX) - (Y + RY) ≡ (A - X - Y) + (R - RX - RY)
+split-B₂ A R X RX Y RY =
+  Ring.solve 6
+    (λ A R X RX Y RY →
+       ( ((A ⊕ R) ⊕ (⊝ (X ⊕ RX)) ⊕ (⊝ (Y ⊕ RY)))
+       , ((A ⊕ (⊝ X) ⊕ (⊝ Y)) ⊕ (R ⊕ (⊝ RX) ⊕ (⊝ RY))) ))
+    refl A R X RX Y RY
 ------------------------------------------------------------------------
 -- Sanity property for Q̂core (constructive)
 

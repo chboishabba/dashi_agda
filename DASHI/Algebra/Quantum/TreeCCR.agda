@@ -2,13 +2,12 @@ module DASHI.Algebra.Quantum.TreeCCR where
 
 open import Data.Nat
 
-postulate ℝ : Set
+record TreeCCRAxioms : Set₁ where
+  field
+    ℝ : Set
+    TreeDepth : ℕ → Set
+    LeafNodes : ℕ → ℕ
+    InducedH : ℕ → Set
+    RefinementMap : ∀ n → InducedH n → InducedH (suc n)
 
-postulate
-  TreeDepth : ℕ -> Set
-  LeafNodes : ℕ -> ℕ
-  InducedH : ℕ -> Set
-
-postulate
-  RefinementMap :
-    ∀ n → InducedH n → InducedH (suc n)
+open TreeCCRAxioms public

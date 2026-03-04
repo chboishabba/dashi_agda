@@ -1,33 +1,31 @@
 module DASHI.Physics.TailCollapseGuardedStrict where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
-open import Data.Nat using (ℕ; _+_)
+open import Data.Nat using (_<_)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
-open import DASHI.Geometry.LCP.Stream using (Stream; lcp≥)
+open import Ultrametric as UMetric
+open import DASHI.Geometry.FiberContraction as FC
 
 -- Guarded strictness interface for conditional projections.
 -- This is the “Template B” shape: strictness only in flow regime.
-record GuardedStrictness {ℓ} {A : Set ℓ} : Set (lsuc ℓ) where
+record GuardedStrictness : Set₁ where
   field
-    X : Set ℓ
+    X : Set
+    U : UMetric.Ultrametric X
     P : X → X
-
-    proj : X → Stream A
 
     Guard  : X → Set
     Broken : X → Set
     Snap   : X → Set
     Restore : X → X
 
-    κ : ℕ
-
-    -- Flow regime: strictness in LCP depth (or your chosen Ball predicate).
+    -- Flow regime: strictness on fibers (guarded).
     P-strict-on :
-      ∀ {x y k} →
+      ∀ {x y} →
       Guard x → Guard y →
-      lcp≥ (proj x) (proj y) k →
-      lcp≥ (proj (P x)) (proj (P y)) (k + κ)
+      FC.FiberDistinct P x y →
+      UMetric.Ultrametric.d U (P x) (P y) < UMetric.Ultrametric.d U x y
 
     -- Broken regime: restoration back into Guard.
     restore-normal-form :

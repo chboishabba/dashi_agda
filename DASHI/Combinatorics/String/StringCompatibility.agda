@@ -7,15 +7,19 @@ open import DASHI.Combinatorics.String.HilbertToy
 open import Agda.Builtin.Sigma
 open import Data.Unit using (⊤)
 
-postulate CentralExtension : Set
+record StringCompatibilityAxioms : Set₁ where
+  field
+    CentralExtension : Set
 
-record StringCompatible : Set₁ where
+open StringCompatibilityAxioms public
+
+record StringCompatible (A : StringCompatibilityAxioms) : Set₁ where
   field
     admitsUnitary :
       Σ InnerProductSpace (λ H → Unitary H)
 
     admitsLie :
-      CentralExtension
+      CentralExtension A
 
     noForcedContraction :
       ⊤

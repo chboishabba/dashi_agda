@@ -7,17 +7,17 @@ open import DASHI.Combinatorics.PDA_MDL.CICADA71_Model
 open import DASHI.Combinatorics.PDA_MDL.PDA
 open import DASHI.Combinatorics.PDA_MDL.KernelSelection
 
--- Plug your real state type here
-postulate
-  S : Set
+record PDAInstanceAxioms : Set₁ where
+  field
+    S : Set
+    extractEV : S → EV
+    shardEV : EV → Bucket
 
--- PDA that observes exponent-vectors from state
-postulate
-  extractEV : S → EV
+open PDAInstanceAxioms public
 
-PDA-EV : PDA S EV
-PDA-EV = record
-  { observe = extractEV
+PDA-EV : (A : PDAInstanceAxioms) → PDA (S A) EV
+PDA-EV A = record
+  { observe = extractEV A
   ; admissible = λ _ → ⊤
   ; costPDA = 15  -- price of having this lens; refine later
   }
@@ -36,12 +36,9 @@ evObsModel M = record
 
 -- CICADA-71 PDA: observe bucket directly from extracted exponent vector
 -- (lens includes sharding; price it)
-postulate
-  shardEV : EV → Bucket
-
-PDA-71 : PDA S Bucket
-PDA-71 = record
-  { observe = λ s → shardEV (extractEV s)
+PDA-71 : (A : PDAInstanceAxioms) → PDA (S A) Bucket
+PDA-71 A = record
+  { observe = λ s → shardEV A (extractEV A s)
   ; admissible = λ _ → ⊤
   ; costPDA = 71  -- “limit to 71” lens price placeholder
   }

@@ -2,7 +2,7 @@ module DASHI.Geometry.LCP.Banach where
 
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _≤_; _<_; pred)
 open import Data.Nat.Properties as NatP
-open import Data.Product using (Σ; _,_; _×_)
+open import Data.Product using (Σ; _,_; _×_; proj₁; proj₂)
 open import Data.Sum using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans; subst)
 open import Data.Sum using (inj₁; inj₂)
@@ -115,20 +115,106 @@ x★ : ∀ {ℓ} {A : Set ℓ}
    → Stream A
 x★ κ′ T ctr x₀ = limit (iter T x₀) (orbit-cauchy κ′ T ctr x₀)
 
-postulate
-  fixed :
-    ∀ {ℓ} {A : Set ℓ}
-    → (κ′ : ℕ) → (T : Stream A → Stream A) → (ctr : Contractiveκ (suc κ′) T)
-    → (x₀ : Stream A)
-    → (∀ i → T (x★ κ′ T ctr x₀) i ≡ x★ κ′ T ctr x₀ i)
+-- If a stream s agrees with x and y on the first k digits, then x and y agree on k.
+lcp≥-join :
+  ∀ {ℓ} {A : Set ℓ} {s x y : Stream A} {k}
+  → lcp≥ s x k → lcp≥ s y k → lcp≥ x y k
+lcp≥-join sx sy i i<k =
+  trans (sym (sx i i<k)) (sy i i<k)
 
-  unique :
-    ∀ {ℓ} {A : Set ℓ}
-    → (κ′ : ℕ) → (T : Stream A → Stream A) → (ctr : Contractiveκ (suc κ′) T)
-    → ∀ (u v : Stream A)
-    → (∀ i → T u i ≡ u i)
-    → (∀ i → T v i ≡ v i)
-    → (∀ i → u i ≡ v i)
+-- Transport agreement across pointwise equality.
+lcp≥-cong :
+  ∀ {ℓ} {A : Set ℓ} {x y x' y' : Stream A} {k}
+  → (∀ i → x i ≡ x' i)
+  → (∀ i → y i ≡ y' i)
+  → lcp≥ x y k → lcp≥ x' y' k
+lcp≥-cong ex ey xy i i<k =
+  trans (sym (ex i)) (trans (xy i i<k) (ey i))
+
+fixed :
+  ∀ {ℓ} {A : Set ℓ}
+  → (κ′ : ℕ) → (T : Stream A → Stream A) → (ctr : Contractiveκ (suc κ′) T)
+  → (x₀ : Stream A)
+  → (∀ i → T (x★ κ′ T ctr x₀) i ≡ x★ κ′ T ctr x₀ i)
+fixed κ′ T ctr x₀ i =
+  let
+    k = suc i
+    cauchy = orbit-cauchy κ′ T ctr x₀
+    conv = converges≥ (iter T x₀) cauchy k
+    N = proj₁ conv
+    convN : lcp≥ (iter T x₀ N) (x★ κ′ T ctr x₀) k
+    convN = proj₂ conv NatP.≤-refl
+    convN1 : lcp≥ (iter T x₀ (suc N)) (x★ κ′ T ctr x₀) k
+    convN1 = proj₂ conv (NatP.n≤1+n N)
+
+    -- Contractivity lifts agreement with x★ to agreement with T x★.
+    step : lcp≥ (iter T x₀ (suc N)) (T (x★ κ′ T ctr x₀)) (k + suc κ′)
+    step = ctr (iter T x₀ N) (x★ κ′ T ctr x₀) k convN
+    step' : lcp≥ (iter T x₀ (suc N)) (T (x★ κ′ T ctr x₀)) k
+    step' = lcp≥-mono (NatP.m≤m+n k (suc κ′)) step
+
+    -- Combine two approximations at depth k.
+    agree-k : lcp≥ (x★ κ′ T ctr x₀) (T (x★ κ′ T ctr x₀)) k
+    agree-k = lcp≥-join convN1 step'
+  in
+  sym (lcp≥-at i agree-k)
+
+-- If u and v are fixed points, contractivity boosts agreement depth.
+boost-fixed :
+  ∀ {ℓ} {A : Set ℓ}
+  → (κ′ : ℕ) → (T : Stream A → Stream A) → (ctr : Contractiveκ (suc κ′) T)
+  → (u v : Stream A)
+  → (∀ i → T u i ≡ u i)
+  → (∀ i → T v i ≡ v i)
+  → ∀ k → lcp≥ u v k → lcp≥ u v (k + suc κ′)
+boost-fixed κ′ T ctr u v uf vf k hyp =
+  let
+    h : lcp≥ (T u) (T v) (k + suc κ′)
+    h = ctr u v k hyp
+  in
+  lcp≥-cong uf vf h
+
+-- Base: any two streams agree on the first 0 digits.
+lcp≥-zero : ∀ {ℓ} {A : Set ℓ} (u v : Stream A) → lcp≥ u v 0
+lcp≥-zero u v i ()
+
+-- Iterate boost to reach depth r * (suc κ′).
+boost^ :
+  ∀ {ℓ} {A : Set ℓ}
+  → (κ′ : ℕ) → (T : Stream A → Stream A) → (ctr : Contractiveκ (suc κ′) T)
+  → (u v : Stream A)
+  → (∀ i → T u i ≡ u i)
+  → (∀ i → T v i ≡ v i)
+  → ∀ r → lcp≥ u v (r * (suc κ′))
+boost^ κ′ T ctr u v uf vf zero =
+  lcp≥-zero u v
+boost^ κ′ T ctr u v uf vf (suc r) =
+  let
+    step : lcp≥ u v (r * suc κ′ + suc κ′)
+    step = boost-fixed κ′ T ctr u v uf vf (r * suc κ′)
+      (boost^ κ′ T ctr u v uf vf r)
+    step' : lcp≥ u v (suc κ′ + r * suc κ′)
+    step' = subst (λ k → lcp≥ u v k) (NatP.+-comm (r * suc κ′) (suc κ′)) step
+  in
+  subst
+    (λ k → lcp≥ u v k)
+    (sym (suc-mul-left r (suc κ′)))
+    step'
+
+unique :
+  ∀ {ℓ} {A : Set ℓ}
+  → (κ′ : ℕ) → (T : Stream A → Stream A) → (ctr : Contractiveκ (suc κ′) T)
+  → ∀ (u v : Stream A)
+  → (∀ i → T u i ≡ u i)
+  → (∀ i → T v i ≡ v i)
+  → (∀ i → u i ≡ v i)
+unique κ′ T ctr u v uf vf i =
+  let
+    r = suc i
+    depthBig = boost^ κ′ T ctr u v uf vf r
+    depthSi = lcp≥-mono (mul-κ-lower κ′ NatP.≤-refl) depthBig
+  in
+  lcp≥-at i depthSi
 
 Banach-LCP :
   ∀ {ℓ} {A : Set ℓ}
