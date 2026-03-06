@@ -11,7 +11,7 @@ open import Data.Empty using (⊥; ⊥-elim)
 
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.DimensionBoundAssumptions as DBA
-open import DASHI.Physics.OrbitProfileExternal as OPE
+open import DASHI.Physics.OrbitProfileLegacyFullPerm as OPE
 open import DASHI.Physics.ShellOrbitProfileGenerator as SOPG
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 

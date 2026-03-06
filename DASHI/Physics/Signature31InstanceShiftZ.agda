@@ -8,6 +8,7 @@ import Data.Integer as Int
 open Int using (ℤ; _<_; _≤_; _+_; _*_; +_)
 import Data.Integer.Properties as IntP
 open import Data.Vec using (Vec; []; _∷_)
+import Data.List as List
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; cong₂; sym; trans; subst)
 
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
@@ -17,7 +18,7 @@ open import DASHI.Geometry.QuadraticFormEmergence as QFE
 open import DASHI.Geometry.Signature.HyperbolicFormZ as HFZ
 open import DASHI.Geometry.Signature31Lock as SLock
 open import DASHI.Physics.OrbitSignatureDiscriminant as OSD
-open import DASHI.Physics.OrbitProfileComputedSignedPermEvidence as OPCE
+open import DASHI.Physics.OrbitProfileData as OPD
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Physics.QuadraticPolarization as QP
 open import DASHI.Physics.SignedPerm4 as SP
@@ -274,5 +275,13 @@ signature31 =
 
 -- Shift-instance bridge: cone+arrow+isotropy (in sigAxioms) yields
 -- the measured orbit profile for sig31.
+orientationTagFromArrow :
+  S31.SignatureAxioms (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ QF →
+  31 ≡ OSD.OrientationTag OSD.sig31
+orientationTagFromArrow _ = refl
+
 measuredFromConeArrowShift : OSD.MeasuredProfile ≡ OSD.ProfileOf OSD.sig31
-measuredFromConeArrowShift = OPCE.measuredProfileFromComputed
+measuredFromConeArrowShift =
+  cong
+    (λ t → OSD.append3 (List._∷_ t List.[]) OPD.shell1_p3_q1 OPD.shell2_p3_q1)
+    (orientationTagFromArrow sigAxioms)

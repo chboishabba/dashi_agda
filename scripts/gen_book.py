@@ -48,7 +48,7 @@ def main() -> None:
     lines = []
     lines.append("\\documentclass{article}")
     lines.append("\\usepackage{fontspec}")
-    lines.append("\\setmonofont{DejaVu Sans Mono}")
+    lines.append("\\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]")
     lines.append("\\usepackage{fancyvrb}")
     lines.append("\\begin{document}")
     lines.append("\\section*{DASHI Book}")
@@ -56,9 +56,10 @@ def main() -> None:
     lines.append("")
     for mod, path in zip(modules, module_paths):
         rel_path = Path(os.path.relpath(path, OUT_DIR))
-        lines.append(f"\\clearpage")
-        lines.append(f"\\section*{{{mod}}}")
-        lines.append(f"\\addcontentsline{{toc}}{{section}}{{{mod}}}")
+        lines.append("\\clearpage")
+        safe_title = mod.replace("_", "\\\\_").replace(".", "\\\\.")
+        lines.append(f"\\section*{{\\texttt{{{safe_title}}}}}")
+        lines.append(f"\\addcontentsline{{toc}}{{section}}{{\\texttt{{{safe_title}}}}}")
         lines.append(f"\\VerbatimInput{{{rel_path.as_posix()}}}")
         lines.append("")
     lines.append("\\end{document}")
