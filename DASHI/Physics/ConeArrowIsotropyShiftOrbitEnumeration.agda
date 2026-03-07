@@ -1,11 +1,8 @@
 module DASHI.Physics.ConeArrowIsotropyShiftOrbitEnumeration where
 
 open import Data.List using (List)
-open import Data.Vec using (Vec)
-open import Relation.Nullary using (Dec)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
-open import DASHI.Algebra.Trit using (Trit)
 open import DASHI.Geometry.ConeArrowIsotropyShellAction as CAS
 open import DASHI.Geometry.ConeArrowIsotropyShellEnumeration as CASE
 open import DASHI.Geometry.ConeArrowIsotropyOrbitProfile as CAOP
@@ -13,9 +10,7 @@ open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Physics.OrbitProfileComputedSignedPerm as OPCSP
 open import DASHI.Physics.OrbitSignatureDiscriminant as OSD
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
-open import DASHI.Physics.Signature31OrbitActionAgreement as OAA
 open import DASHI.Physics.Signature31InstanceShiftZ as S31Z
-open import DASHI.Physics.SignedPerm4 as SP
 
 -- Concrete shift-instance orbit enumeration bridge.
 -- This module is the single place where the Stage B shell/action story is
@@ -29,32 +24,9 @@ shiftShellAction =
     S31Z.QF
     S31Z.sigAxioms
 
-shiftCarrierDerivation :
-  CASE.FiniteCarrierShellDerivation
-    shiftShellAction
-    (Vec Trit 4)
-    SP.SignedPerm4
-shiftCarrierDerivation =
-  record
-    { decEq = OPCSP.decEqVec
-    ; carrierPoints = OPCSP.allVecTrit 4
-    ; shell1Pred = OPCSP.isShell 1
-    ; shell2Pred = OPCSP.isShell 2
-    ; actions = OPCSP.allSignedPerm4
-    ; act = OAA.actIso4Trit
-    }
-
-shiftFiniteEnumerationDerivation :
-  CASE.FiniteShellEnumerationDerivation
-    shiftShellAction
-    (Vec Trit 4)
-    SP.SignedPerm4
-shiftFiniteEnumerationDerivation =
-  CASE.buildFiniteShellEnumeration shiftCarrierDerivation
-
 shiftEnumeration : CTI.ShellOrbitEnumeration
 shiftEnumeration =
-  CASE.buildShellOrbitEnumerationFromFinite shiftFiniteEnumerationDerivation
+  CASE.buildShellOrbitEnumerationFromShellAction shiftShellAction
 
 shell1Derived : List _
 shell1Derived = CTI.ShellOrbitEnumeration.shell1OrbitSizes shiftEnumeration

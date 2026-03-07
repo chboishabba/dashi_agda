@@ -4,7 +4,10 @@ open import Level using (Level; suc; _⊔_)
 open import Data.Product using (Σ; _,_)
 open import Data.Unit using (⊤; tt)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Bool using (Bool)
 open import Data.List using (List)
+open import Relation.Nullary using (Dec)
+open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Geometry.QuadraticForm
 
@@ -52,6 +55,28 @@ record ShellIsotropyAction {ℓv} (V : Set ℓv)
     PresShell2 : ∀ (g : IsotropyAction.G Iso) (x : V) → ⊤
 
 open ShellIsotropyAction public
+
+record FiniteShellRealization {ℓv} (V : Set ℓv) : Set (suc ℓv) where
+  field
+    CarrierPoint : Set ℓv
+    decEq : (x y : CarrierPoint) → Dec (x ≡ y)
+    carrierPoints : List CarrierPoint
+    embed : CarrierPoint → V
+    shell1Pred : CarrierPoint → Bool
+    shell2Pred : CarrierPoint → Bool
+
+open FiniteShellRealization public
+
+record FiniteIsotropyRealization {ℓv}
+  (V : Set ℓv) (Iso : IsotropyAction V) (Fin : FiniteShellRealization V)
+  : Set (suc ℓv) where
+  field
+    GroupPoint : Set ℓv
+    groupPoints : List GroupPoint
+    actFinite : GroupPoint → FiniteShellRealization.CarrierPoint Fin → FiniteShellRealization.CarrierPoint Fin
+    actCompat : ∀ (g : GroupPoint) (x : FiniteShellRealization.CarrierPoint Fin) → ⊤
+
+open FiniteIsotropyRealization public
 
 record ShellOrbitEnumeration : Set where
   field

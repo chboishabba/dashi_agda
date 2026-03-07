@@ -154,3 +154,50 @@ buildFiniteShellEnumeration deriv =
     ; actions = D.actions
     ; act = D.act
     }
+
+buildFiniteShellEnumerationFromShellAction :
+  ∀ {ℓv ℓs}
+  {A : Additive ℓv} {F : ScalarField ℓs}
+  {QF : QuadraticForm A F} →
+  (shellAction : CAS.AbstractShellAction A F QF) →
+  FiniteShellEnumerationDerivation
+    shellAction
+    (CTI.FiniteShellRealization.CarrierPoint (CAS.AbstractShellAction.finiteShell shellAction))
+    (CTI.FiniteIsotropyRealization.GroupPoint
+      (CAS.AbstractShellAction.finiteIso shellAction))
+buildFiniteShellEnumerationFromShellAction shellAction =
+  record
+    { decEq = Fin.decEq
+    ; shell1Points = filterBy shell1Pred' carrierPts
+    ; shell2Points = filterBy shell2Pred' carrierPts
+    ; actions = groupPts
+    ; act = actFinite'
+    }
+  where
+    module Fin = CTI.FiniteShellRealization (CAS.AbstractShellAction.finiteShell shellAction)
+    module Iso = CTI.FiniteIsotropyRealization (CAS.AbstractShellAction.finiteIso shellAction)
+
+    carrierPts : List Fin.CarrierPoint
+    carrierPts = Fin.carrierPoints
+
+    shell1Pred' : Fin.CarrierPoint → Bool
+    shell1Pred' = Fin.shell1Pred
+
+    shell2Pred' : Fin.CarrierPoint → Bool
+    shell2Pred' = Fin.shell2Pred
+
+    groupPts : List Iso.GroupPoint
+    groupPts = Iso.groupPoints
+
+    actFinite' : Iso.GroupPoint → Fin.CarrierPoint → Fin.CarrierPoint
+    actFinite' = Iso.actFinite
+
+buildShellOrbitEnumerationFromShellAction :
+  ∀ {ℓv ℓs}
+  {A : Additive ℓv} {F : ScalarField ℓs}
+  {QF : QuadraticForm A F} →
+  (shellAction : CAS.AbstractShellAction A F QF) →
+  CTI.ShellOrbitEnumeration
+buildShellOrbitEnumerationFromShellAction shellAction =
+  buildShellOrbitEnumerationFromFinite
+    (buildFiniteShellEnumerationFromShellAction shellAction)

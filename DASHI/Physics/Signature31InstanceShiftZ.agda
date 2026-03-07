@@ -10,6 +10,7 @@ import Data.Integer.Properties as IntP
 open import Data.Vec using (Vec; []; _∷_)
 import Data.List as List
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; cong₂; sym; trans; subst)
+open import DASHI.Algebra.Trit using (Trit)
 
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Geometry.Signature31FromConeArrowIsotropy as S31
@@ -21,6 +22,7 @@ open import DASHI.Physics.OrbitProfileComputedSignedPerm as OPCSP
 open import DASHI.Physics.OrbitProfileData as OPD
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Physics.QuadraticPolarization as QP
+open import DASHI.Physics.Signature31OrbitActionAgreement as OAA
 open import DASHI.Physics.Signature31ShiftProfileWitness as SPW
 open import DASHI.Physics.SignedPerm4 as SP
 
@@ -305,6 +307,22 @@ sigAxioms =
         record
           { PresShell1 = λ g x → let _ = shell1-pres g x in tt
           ; PresShell2 = λ g x → let _ = shell2-pres g x in tt
+          }
+    ; FiniteShell =
+        record
+          { CarrierPoint = Vec Trit 4
+          ; decEq = OPCSP.decEqVec
+          ; carrierPoints = OPCSP.allVecTrit 4
+          ; embed = QP.vecℤ
+          ; shell1Pred = OPCSP.isShell 1
+          ; shell2Pred = OPCSP.isShell 2
+          }
+    ; FiniteIso =
+        record
+          { GroupPoint = SP.SignedPerm4
+          ; groupPoints = OPCSP.allSignedPerm4
+          ; actFinite = OAA.actIso4Trit
+          ; actCompat = λ _ _ → tt
           }
     ; Timelike↔Cone = λ _ → tt
     }

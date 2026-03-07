@@ -1,10 +1,12 @@
 module DASHI.Geometry.Signature.Signature31Instance where
 
 open import Data.Unit using (⊤; tt)
+open import Data.Bool using (true; false)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_)
 open import Data.List using ([]; _∷_)
 open import Data.Vec using (Vec; replicate)
 open import Relation.Binary.PropositionalEquality using (refl)
+open import Relation.Nullary using (yes)
 
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Geometry.QuadraticForm
@@ -66,6 +68,22 @@ sigAxioms =
         record
           { PresShell1 = λ _ _ → tt
           ; PresShell2 = λ _ _ → tt
+          }
+    ; FiniteShell =
+        record
+          { CarrierPoint = ⊤
+          ; decEq = λ _ _ → yes refl
+          ; carrierPoints = tt ∷ []
+          ; embed = λ _ → Additive.0# AdditiveV
+          ; shell1Pred = λ _ → true
+          ; shell2Pred = λ _ → false
+          }
+    ; FiniteIso =
+        record
+          { GroupPoint = ⊤
+          ; groupPoints = tt ∷ []
+          ; actFinite = λ _ _ → tt
+          ; actCompat = λ _ _ → tt
           }
     ; Timelike↔Cone = λ _ → tt
     }

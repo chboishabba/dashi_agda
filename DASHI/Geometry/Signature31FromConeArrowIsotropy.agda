@@ -1,5 +1,6 @@
 module DASHI.Geometry.Signature31FromConeArrowIsotropy where
 
+open import Agda.Primitive using (Setω)
 open import Level using (Level; _⊔_; suc; zero)
 open import Data.Product using (Σ; _,_)
 open import Data.Unit using (⊤; tt)
@@ -11,7 +12,7 @@ open import DASHI.Geometry.ConeTimeIsotropy
 record SignatureAxioms {ℓv ℓs}
   (A : Additive ℓv) (F : ScalarField ℓs)
   (QF : QuadraticForm A F)
-  : Set (suc (ℓv ⊔ ℓs)) where
+  : Setω where
   open Additive A
   open ScalarField F
   open QuadraticForm QF
@@ -22,13 +23,15 @@ record SignatureAxioms {ℓv ℓs}
     ShellS : ShellStructure (Additive.Carrier A)
     MoveS  : AdmissibleMove (Additive.Carrier A)
     ShellIso : ShellIsotropyAction (Additive.Carrier A) ShellS Iso
+    FiniteShell : FiniteShellRealization (Additive.Carrier A)
+    FiniteIso : FiniteIsotropyRealization (Additive.Carrier A) Iso FiniteShell
     Timelike↔Cone : ∀ (x : Additive.Carrier A) → ⊤
 
 open SignatureAxioms public
 
 record Signature31FromConeArrowIsotropyAxioms
   {ℓv ℓs} (A : Additive ℓv) (F : ScalarField ℓs)
-  (QF : QuadraticForm A F) : Set (suc (ℓv ⊔ ℓs)) where
+  (QF : QuadraticForm A F) : Setω where
   field
     Signature31Theorem :
       (Ax : SignatureAxioms A F QF) → Signature

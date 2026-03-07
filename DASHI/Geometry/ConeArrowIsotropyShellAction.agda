@@ -17,6 +17,8 @@ record AbstractShellAction {ℓv ℓs}
     shellS     : CTI.ShellStructure (Additive.Carrier A)
     moveS      : CTI.AdmissibleMove (Additive.Carrier A)
     shellIso   : CTI.ShellIsotropyAction (Additive.Carrier A) shellS iso
+    finiteShell : CTI.FiniteShellRealization (Additive.Carrier A)
+    finiteIso   : CTI.FiniteIsotropyRealization (Additive.Carrier A) iso finiteShell
 
 open AbstractShellAction public
 
@@ -34,4 +36,6 @@ buildShellAction A F QF Ax =
     ; shellS = S31.SignatureAxioms.ShellS Ax
     ; moveS = S31.SignatureAxioms.MoveS Ax
     ; shellIso = S31.SignatureAxioms.ShellIso Ax
+    ; finiteShell = S31.SignatureAxioms.FiniteShell Ax
+    ; finiteIso = S31.SignatureAxioms.FiniteIso Ax
     }
