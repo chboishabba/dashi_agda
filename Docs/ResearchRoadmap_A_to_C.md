@@ -16,20 +16,17 @@ The canonical path is:
 -> `PhysicsClosureInstanceAssumed` / `PhysicsClosureFullInstance`
 -> `SpinDiracGateFromClosure`
 
-This is a classification theorem. It is not yet a theorem that cone invariance
-and isotropy intrinsically force Lorentz signature.
+This is the finished classification theorem. In addition, the repo now closes
+the Stage B bridge for the current finite 4D shift realization: the
+cone/arrow/isotropy instance carries a finite shell realization and finite
+isotropy realization, the shell-orbit enumeration is derived from the abstract
+shell-action layer, and the resulting profile agrees with the computed
+signed-permutation profile used by the Stage A discriminant.
 
-Current strengthening on the Stage B side:
-
-- the repo now has an explicit shell/action/profile layer,
-- the 4D shift instance proves shell preservation for the signed-permutation
-  action,
-- a dedicated shift-enumeration bridge derives the shell-orbit lists consumed
-  by the current agreement module.
-
-What is still missing is the final intrinsic step showing that the abstract
-shell-action construction itself determines the same orbit enumeration, rather
-than delegating that step to the current concrete enumerator module.
+What is still missing is the broader generalization beyond the current finite
+4D realization. The repo does not yet prove that arbitrary abstract
+cone/arrow/isotropy data force the same shell-orbit structure without passing
+through the current finite realization framework.
 
 ## Stage A — Orbit Profile Signature Discrimination
 
@@ -56,12 +53,12 @@ Primary repo anchors:
 
 ## Stage B — Cone -> Signature Forcing
 
-Stage B is the next rigorous theorem target.
+Stage B is now solved for the current finite 4D shift realization framework.
 
 Current status:
 
-- partially implemented for the concrete 4D shift instance,
-- not yet complete as a theorem headline.
+- complete for the concrete finite 4D shift realization,
+- still open as a fully realization-independent theorem.
 
 Target statement:
 
@@ -75,20 +72,24 @@ to yield:
 
 `cone invariance + arrow/time orientation + isotropy -> sig31`
 
-Primary missing lemma:
+What is now proved in the current framework:
 
-`cone + arrow + isotropy -> orbit shell profile`
+- `SignatureAxioms` carries the finite shell carrier, shell predicates, and
+  finite isotropy action for the 4D shift instance,
+- `AbstractShellAction` transports that data through the geometry-side shell
+  action layer,
+- generic shell enumeration derives the shell-orbit profile from that abstract
+  shell action,
+- the resulting profile is proved equal to the computed signed-permutation
+  profile used by the Stage A discriminant,
+- therefore the concrete finite 4D cone/arrow/isotropy realization forces
+  `sig31`.
 
-Proof obligations before Stage B can be claimed:
+What remains open beyond Stage B:
 
-- expose shell/orbit structure from the abstract cone/arrow/isotropy data,
-- connect the abstract shell action to the concrete 4D signed-permutation
-  enumeration,
-- show the profile derived from the abstract shell/action construction agrees
-  with the computed shift profile consumed by the Stage A discriminant,
-- remove the remaining enumeration seam from the concrete theorem path.
-
-Stage B should be treated as the main rigorous next objective for the project.
+- remove dependence on the current finite realization framework itself,
+- derive the shell-orbit structure from more intrinsic abstract hypotheses,
+- generalize beyond the current ternary 4D signed-permutation model.
 
 ## Stage C — Full Closure Program
 
@@ -127,14 +128,19 @@ Exit criterion:
 
 ### Stage B
 
-Status: open.
+Status: complete for the current finite 4D realization framework.
 
 Exit criterion:
 
 - the concrete shift theorem no longer depends on a manual profile or
   enumeration seam,
 - the shell/action side determines the orbit profile theoremically,
-- the signature theorem can be stated as a genuine cone-forcing result.
+- the signature theorem can be stated as a genuine cone-forcing result for the
+  current finite 4D realization.
+
+Remaining follow-on objective:
+
+- generalize the theorem beyond the current finite realization framework.
 
 ### Stage C
 
@@ -169,5 +175,5 @@ Exit criterion:
 The intended reading discipline is:
 
 - A is proved,
-- B is the next theorem target,
+- B is solved for the current finite 4D realization,
 - C is a research program.

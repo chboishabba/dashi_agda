@@ -3,12 +3,15 @@ module DASHI.Physics.Closure.PhysicsClosureSummary where
 -- Repo-facing summary entrypoint.
 -- Stage A current headline:
 --   orbit profile signature discrimination in 4D.
--- Stage B next rigorous target:
---   cone + arrow + isotropy -> orbit profile -> sig31.
--- Stage B current strengthening:
---   explicit shell/action/profile records,
---   shift-instance shell preservation lemmas,
---   and a dedicated shift-orbit enumeration bridge.
+-- Stage B current solved bridge for the finite 4D shift realization:
+--   cone + arrow + isotropy
+--   -> abstract shell action
+--   -> shell-orbit enumeration
+--   -> orbit profile
+--   -> sig31.
+-- Stage B remaining open direction:
+--   generalize that bridge beyond the current finite ternary
+--   signed-permutation realization.
 -- Stage C long-horizon program:
 --   full closure and downstream symmetry structure, documented in
 --   Docs/ResearchRoadmap_A_to_C.md and not asserted as a current theorem.
@@ -16,9 +19,8 @@ module DASHI.Physics.Closure.PhysicsClosureSummary where
 --   PhysicsClosureInstanceAssumed and PhysicsClosureFullInstance.
 -- Downstream physical consumer:
 --   SpinDiracGateFromClosure.
--- The open lemma remains the intrinsic derivation
---   from the abstract shell-action construction to the concrete orbit
---   enumeration used by the current 4D shift profile.
+-- The current theorem path is solved only for the present finite 4D
+-- realization framework; realization-independent generalization remains open.
 
 open import DASHI.Physics.Closure.PhysicsClosureFull as PCF public
 open import DASHI.Physics.Closure.PhysicsClosureFullInstance as PCFI public
