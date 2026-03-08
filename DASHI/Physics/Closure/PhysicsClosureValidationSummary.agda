@@ -127,6 +127,8 @@ open import DASHI.Physics.Closure.ParametricAlgebraicRegimePersistenceTheorem as
   using (ParametricAlgebraicRegimePersistenceTheorem)
 open import DASHI.Physics.Closure.ParametricAlgebraicRegimeCoherenceTheorem as PARC public
   using (ParametricAlgebraicRegimeCoherenceTheorem)
+open import DASHI.Physics.Closure.ParametricAlgebraicWaveObservableTransportTheorem as PAWOT public
+  using (ParametricAlgebraicWaveObservableTransportTheorem)
 open import DASHI.Physics.Closure.CanonicalGaugeConstraintRealizedInstances as CGCRI public
   using (CanonicalGaugeConstraintRealizedInstances)
 open import DASHI.Physics.Closure.KnownLimitsStatus as KLS public
@@ -189,6 +191,8 @@ open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveRegimeTheorem as KLRWR
   using (KnownLimitsRecoveredWaveRegimeTheorem)
 open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservablesTheorem as KLRWO public
   using (KnownLimitsRecoveredWaveObservablesTheorem)
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportTheorem as KLRWOT public
+  using (KnownLimitsRecoveredWaveObservableTransportTheorem)
 open import DASHI.Physics.Closure.CanonicalStageCTheoremBundle as CSTB public
   using (CanonicalStageCTheoremBundle)
 open import DASHI.Physics.Closure.CanonicalStageCSummaryBundle as CSSB public
@@ -209,6 +213,8 @@ open import DASHI.Physics.Closure.CanonicalWaveRegimeConsumer as CWRC public
   using (WaveRegimeConsumerFromMinimal)
 open import DASHI.Physics.Closure.CanonicalWaveObservableConsumer as CWOC public
   using (WaveObservableConsumerFromMinimal)
+open import DASHI.Physics.Closure.CanonicalWaveObservableTransportConsumer as CWOTC public
+  using (WaveObservableTransportConsumerFromMinimal)
 open import DASHI.Physics.Moonshine.FiniteTwinedTraceDetailedReport as MFTDR public
   using (FiniteTwinedTraceDetailedReport)
 open import DASHI.Physics.Moonshine.WaveGradedShellPrototypeSummary as MWGSPS public
@@ -227,6 +233,8 @@ open import DASHI.Physics.Moonshine.MoonshineTwinedWaveRegimeSummary as MTWRS pu
   using (MoonshineTwinedWaveRegimeSummary)
 open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableSummary as MTWOS public
   using (MoonshineTwinedWaveObservableSummary)
+open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportSummary as MTWOTS public
+  using (MoonshineTwinedWaveObservableTransportSummary)
 
 validationBundle : MCPCV.MinimalCrediblePhysicsClosureValidation
 validationBundle = MCPCVS.minimumCredibleClosureValidationShift
@@ -431,6 +439,12 @@ canonicalParametricAlgebraicRegimeCoherenceTheoremSummary :
 canonicalParametricAlgebraicRegimeCoherenceTheoremSummary =
   CSC.canonicalParametricAlgebraicRegimeCoherenceTheorem
 
+canonicalParametricAlgebraicWaveObservableTransportTheoremSummary :
+  PAWOT.ParametricAlgebraicWaveObservableTransportTheorem
+    CSC.canonicalConstraintGaugePackage
+canonicalParametricAlgebraicWaveObservableTransportTheoremSummary =
+  CSC.canonicalParametricAlgebraicWaveObservableTransportTheorem
+
 secondaryParametricAlgebraicRegimeCoherenceTheoremSummary :
   PARC.ParametricAlgebraicRegimeCoherenceTheorem
     CSC.secondaryConstraintGaugePackage
@@ -538,6 +552,11 @@ canonicalKnownLimitsRecoveredWaveObservablesTheoremSummary :
 canonicalKnownLimitsRecoveredWaveObservablesTheoremSummary =
   CSC.canonicalKnownLimitsRecoveredWaveObservablesTheorem
 
+canonicalKnownLimitsRecoveredWaveObservableTransportTheoremSummary :
+  KLRWOT.KnownLimitsRecoveredWaveObservableTransportTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportTheoremSummary =
+  CSC.canonicalKnownLimitsRecoveredWaveObservableTransportTheorem
+
 canonicalSpinLocalLorentzBridgeSummary :
   SLLB.SpinLocalLorentzBridge CSC.canonicalClosure
 canonicalSpinLocalLorentzBridgeSummary =
@@ -593,6 +612,11 @@ canonicalWaveObservableConsumerSummary :
 canonicalWaveObservableConsumerSummary =
   CSC.canonicalWaveObservableConsumer
 
+canonicalWaveObservableTransportConsumerSummary :
+  CWOTC.WaveObservableTransportConsumerFromMinimal CSC.canonicalClosure
+canonicalWaveObservableTransportConsumerSummary =
+  CSC.canonicalWaveObservableTransportConsumer
+
 canonicalTheoremBundleSummary : CSTB.CanonicalStageCTheoremBundle
 canonicalTheoremBundleSummary = CSTB.canonicalStageCTheoremBundle
 
@@ -628,6 +652,11 @@ canonicalMoonshineTwinedWaveObservableSummary :
   MTWOS.MoonshineTwinedWaveObservableSummary
 canonicalMoonshineTwinedWaveObservableSummary =
   MTWOS.canonicalMoonshineTwinedWaveObservableSummary
+
+canonicalMoonshineTwinedWaveObservableTransportSummary :
+  MTWOTS.MoonshineTwinedWaveObservableTransportSummary
+canonicalMoonshineTwinedWaveObservableTransportSummary =
+  MTWOTS.canonicalMoonshineTwinedWaveObservableTransportSummary
 
 selfSnapshotVerdict : RPR.RigidityVerdict
 selfSnapshotVerdict = MCPCV.selfVerdict validationBundle

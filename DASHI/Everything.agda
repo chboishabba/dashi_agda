@@ -235,6 +235,7 @@ import DASHI.Physics.Moonshine.MoonshineWaveTraceConsistencySummary
 import DASHI.Physics.Moonshine.MoonshineTwinedWaveBundleSummary
 import DASHI.Physics.Moonshine.MoonshineTwinedWaveRegimeSummary
 import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableSummary
+import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportSummary
 import DASHI.Physics.Moonshine.WaveGradedShellPrototypeSummary
 import DASHI.Physics.Moonshine.TwinedComparisonSummary
 import DASHI.Physics.Moonshine.WaveGradedShellModule
@@ -302,6 +303,9 @@ import DASHI.Physics.Closure.KnownLimitsRecoveryWitness
 import DASHI.Physics.Closure.ParametricGaugeConstraintTheorem
 import DASHI.Physics.Closure.CanonicalStageCTheoremBundle
 import DASHI.Physics.Closure.CanonicalStageCSummaryBundle
+import DASHI.Physics.Closure.ParametricAlgebraicWaveObservableTransportTheorem
+import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportTheorem
+import DASHI.Physics.Closure.CanonicalWaveObservableTransportConsumer
 import DASHI.Physics.Closure.CanonicalSpinDiracConsumer
 import DASHI.Physics.Closure.SpinLocalLorentzBridgeTheorem
 import DASHI.Physics.Closure.KnownLimitsStatus

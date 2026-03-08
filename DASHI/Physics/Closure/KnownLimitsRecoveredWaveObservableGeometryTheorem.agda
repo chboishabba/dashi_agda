@@ -1,0 +1,19 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableGeometryTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservablesTheorem as KLRWO
+open import DASHI.Physics.Closure.KnownLimitsRecoveredObservableGeometryTheorem as KLROG
+
+record KnownLimitsRecoveredWaveObservableGeometryTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableGeometryTheorem
+  field
+    recoveredWaveObservables : KLRWO.KnownLimitsRecoveredWaveObservablesTheorem
+    recoveredObservableGeometry : KLROG.KnownLimitsRecoveredObservableGeometryTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableGeometryTheorem :
+  KnownLimitsRecoveredWaveObservableGeometryTheorem
+canonicalKnownLimitsRecoveredWaveObservableGeometryTheorem =
+  knownLimitsRecoveredWaveObservableGeometryTheorem
+    KLRWO.canonicalKnownLimitsRecoveredWaveObservablesTheorem
+    KLROG.canonicalKnownLimitsRecoveredObservableGeometryTheorem

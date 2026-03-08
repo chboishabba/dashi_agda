@@ -18,6 +18,7 @@ open import DASHI.Physics.Closure.ParametricAlgebraicTransportInvarianceTheorem 
 open import DASHI.Physics.Closure.ParametricAlgebraicRegimeInvarianceTheorem as PARI
 open import DASHI.Physics.Closure.ParametricAlgebraicRegimePersistenceTheorem as PARP
 open import DASHI.Physics.Closure.ParametricAlgebraicRegimeCoherenceTheorem as PARC
+open import DASHI.Physics.Closure.ParametricAlgebraicWaveObservableTransportTheorem as PAWOT
 open import DASHI.Physics.Closure.SecondaryConstraintGaugeInstance as SCGI
 open import DASHI.Physics.Closure.KnownLimitsLocalRecoveryTheorem as KLRT
 open import DASHI.Physics.Closure.KnownLimitsEffectiveGeometryTheorem as KLET
@@ -35,6 +36,7 @@ open import DASHI.Physics.Closure.KnownLimitsRecoveredWavefrontTheorem as KLRWF
 open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveGeometryTheorem as KLRWG
 open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveRegimeTheorem as KLRWR
 open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservablesTheorem as KLRWO
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportTheorem as KLRWOT
 open import DASHI.Physics.Closure.SpinLocalLorentzBridgeTheorem as SLLB
 
 record CanonicalStageCTheoremBundle : Setω where
@@ -115,6 +117,12 @@ record CanonicalStageCTheoremBundle : Setω where
     secondaryParametricAlgebraicRegimeCoherenceSummary :
       PARC.ParametricAlgebraicRegimeCoherenceTheorem
         SCGI.secondaryConstraintGaugePackage
+    canonicalParametricAlgebraicWaveObservableTransportSummary :
+      PAWOT.ParametricAlgebraicWaveObservableTransportTheorem
+        CSC.canonicalConstraintGaugePackage
+    secondaryParametricAlgebraicWaveObservableTransportSummary :
+      PAWOT.ParametricAlgebraicWaveObservableTransportTheorem
+        SCGI.secondaryConstraintGaugePackage
     localRecoverySummary : KLRT.KnownLimitsLocalRecoveryTheorem
     effectiveGeometrySummary : KLET.KnownLimitsEffectiveGeometryTheorem
     causalPropagationSummary : KLCPT.KnownLimitsCausalPropagationTheorem
@@ -137,6 +145,8 @@ record CanonicalStageCTheoremBundle : Setω where
       KLRWR.KnownLimitsRecoveredWaveRegimeTheorem
     recoveredWaveObservablesSummary :
       KLRWO.KnownLimitsRecoveredWaveObservablesTheorem
+    recoveredWaveObservableTransportSummary :
+      KLRWOT.KnownLimitsRecoveredWaveObservableTransportTheorem
     spinBridgeSummary : SLLB.SpinLocalLorentzBridge CSC.canonicalClosure
 
 canonicalStageCTheoremBundle : CanonicalStageCTheoremBundle
@@ -194,6 +204,10 @@ canonicalStageCTheoremBundle =
         CSC.canonicalParametricAlgebraicRegimeCoherenceTheorem
     ; secondaryParametricAlgebraicRegimeCoherenceSummary =
         CSC.secondaryParametricAlgebraicRegimeCoherenceTheorem
+    ; canonicalParametricAlgebraicWaveObservableTransportSummary =
+        CSC.canonicalParametricAlgebraicWaveObservableTransportTheorem
+    ; secondaryParametricAlgebraicWaveObservableTransportSummary =
+        CSC.secondaryParametricAlgebraicWaveObservableTransportTheorem
     ; localRecoverySummary = CSC.canonicalKnownLimitsLocalRecoveryTheorem
     ; effectiveGeometrySummary = CSC.canonicalKnownLimitsEffectiveGeometryTheorem
     ; causalPropagationSummary = CSC.canonicalKnownLimitsCausalPropagationTheorem
@@ -222,5 +236,7 @@ canonicalStageCTheoremBundle =
         CSC.canonicalKnownLimitsRecoveredWaveRegimeTheorem
     ; recoveredWaveObservablesSummary =
         CSC.canonicalKnownLimitsRecoveredWaveObservablesTheorem
+    ; recoveredWaveObservableTransportSummary =
+        CSC.canonicalKnownLimitsRecoveredWaveObservableTransportTheorem
     ; spinBridgeSummary = CSC.canonicalSpinLocalLorentzBridge
     }
