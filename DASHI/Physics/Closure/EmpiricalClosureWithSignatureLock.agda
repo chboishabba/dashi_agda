@@ -8,7 +8,7 @@ open import DASHI.Physics.Closure.PhysicsClosureEmpirical as PCE
 open import DASHI.Physics.WitnessSetPolicy as WSP
 open import DASHI.Physics.Closure.SignatureLockCSVEvidence as SLCSV
 open import DASHI.Geometry.MaskedQuadratic as MQ
-open import DASHI.Geometry.SignatureElimination as SE
+open import DASHI.Geometry.Signature.Elimination as SE
 
 -- Bundle empirical seams with witness policy and signature-lock evidence.
 record EmpiricalClosureWithSignatureLock {ℓ} (W : Set ℓ) {n : Nat} (V : Set)

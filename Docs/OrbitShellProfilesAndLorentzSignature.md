@@ -138,17 +138,24 @@ Weyl/root-system combinatorics, not a graded-trace theorem.
 
 ## Orbit-Shell Generating Series
 
-The next algebraic handle on the current theorem stack is a finite
-orbit-shell generating series built from:
+The repo already contains a finite orbit-shell generating series as a local
+formal object. In particular:
+
+- `DASHI.Physics.OrbitShellGeneratingSeriesRootSystemB4` constructs a finite
+  series from explicit shell data,
+- the same series layer is re-exported through the current validation summary
+  surfaces for comparison work.
+
+This series is built from:
 
 - the orientation tag when available,
 - the shell-1 orbit-size multiplicities,
 - the shell-2 orbit-size multiplicities.
 
-This series is intended to make current orbit data easier to compare across
-realizations without changing the theorem source. For the signed-permutation
-shift realization, it is derived directly from the same profile inputs used by
-the 4D signature discriminant.
+This series makes current orbit data easier to compare across realizations
+without changing the theorem source. For the signed-permutation shift
+realization, it is derived directly from the same profile inputs used by the
+4D signature discriminant.
 
 Immediate uses:
 
@@ -157,7 +164,7 @@ Immediate uses:
 - a prototype wave-graded lift that uses the finite series as a grade-0 seed.
 
 This is an algebraic repackaging of the present shell data. It is **not** yet
-a theta-series theorem or a graded-trace theorem.
+a theta-series theorem, a modular-form theorem, or a graded-trace theorem.
 
 The current symmetry-facing prototype layer is:
 
@@ -308,6 +315,9 @@ The next step after this note is:
 - use that family to sharpen the shift-side Lorentz story,
 - and record **parametric `m`** as the next theorem milestone after the
   bounded family lands.
+
+For outreach-specific framing of the scaffold-vs-theorem boundary, see
+`Docs/MathProfOutreachSummary.md` and `Docs/MATH_PROF_OUTREACH_CROSSWALK.md`.
 
 Current closure-side hardening target alongside that theorem work:
 

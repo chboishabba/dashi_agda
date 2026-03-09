@@ -1,0 +1,26 @@
+module DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.FidelityConsumer where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
+open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.ConvergenceConsumer as CWOTGRCONVC
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.FidelityTheorem as KLRWOTGRFID
+
+record WaveObservableTransportGeometryRegimeFidelityConsumerFromMinimal
+         (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where
+  constructor waveObservableTransportGeometryRegimeFidelityConsumer
+  field
+    transportGeometryRegimeConvergenceConsumer :
+      CWOTGRCONVC.WaveObservableTransportGeometryRegimeConvergenceConsumerFromMinimal cl
+    recoveredWaveObservableTransportGeometryRegimeFidelity :
+      KLRWOTGRFID.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeFidelityTheorem
+
+canonicalWaveObservableTransportGeometryRegimeFidelityConsumer :
+  {cl : MCPC.MinimalCrediblePhysicsClosure} →
+  CWOTGRCONVC.WaveObservableTransportGeometryRegimeConvergenceConsumerFromMinimal cl →
+  WaveObservableTransportGeometryRegimeFidelityConsumerFromMinimal cl
+canonicalWaveObservableTransportGeometryRegimeFidelityConsumer
+    waveObservableTransportGeometryRegimeConvergence =
+  waveObservableTransportGeometryRegimeFidelityConsumer
+    waveObservableTransportGeometryRegimeConvergence
+    KLRWOTGRFID.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeFidelityTheorem

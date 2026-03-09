@@ -49,3 +49,15 @@
   again.
 - The repo can now safely resume the `1/2/3/4` widening loop from the cleaned
   canonical Stage C path.
+- Post-cleanup widening is active again; the current wave-regime ladder has
+  resumed from the cleaned canonical summary surface.
+- Math-prof outreach docs should now cite canonical Agda module paths first,
+  then repo-facing summary/export surfaces, and only use `all_code44.txt` as a
+  corroborating bundled index.
+- The outreach note set for thread `Math Prof Outreach Stage`
+  (`69aa52b4-6f7c-839f-aa7f-d120ffe0c1ad`,
+  canonical `decf9e3cde5ccdec0c51ad8aab15999201503998`, source `db`)
+  should keep three layers separate:
+  mathematical closure spine,
+  local scaffolds,
+  still-open physics gaps.

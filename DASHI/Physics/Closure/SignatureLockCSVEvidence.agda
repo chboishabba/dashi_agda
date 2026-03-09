@@ -5,7 +5,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Geometry.MaskedQuadratic as MQ
-open import DASHI.Geometry.SignatureElimination as SE
+open import DASHI.Geometry.Signature.Elimination as SE
 
 -- Evidence bundle meant to be populated from CSV-derived ranking.
 record SignatureRankCSVEvidence {n : Nat} : Set₁ where

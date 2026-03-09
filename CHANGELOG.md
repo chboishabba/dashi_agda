@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-03-09
+
+- promoted the math-prof outreach material into first-class repo docs under
+  `Docs/`, including:
+  a short outreach summary,
+  a claim/evidence crosswalk,
+  and a ranked archive-thread note tied to the canonical archived thread
+  metadata.
+- corrected the outreach evidence policy so canonical Agda module paths and
+  repo-facing summary surfaces are now the primary citations, with
+  `all_code44.txt` treated only as corroborating index evidence.
+- upgraded the orbit-shell generating-series wording across the docs from
+  “next object to add” to “already landed local formal object”, while keeping
+  the modular / graded-trace interpretation explicitly open.
+- aligned the compactified context and TODO with the same
+  theorem-backed vs scaffold-present vs still-open boundary used by the new
+  outreach docs.
+
 ## 2026-03-08
 
 - cleanup/refactor turn landed:
@@ -24,6 +42,8 @@
 
 - added the wave-observable-transport-geometry regime compatibility rung across algebra, known-limits, canonical consumer, and pre-moonshine summary surfaces, then re-exported it through the canonical summaries and top-level tree.
 - added the wave-observable-transport-geometry regime fidelity rung across algebra, known-limits, canonical consumer, and pre-moonshine summary surfaces, then re-exported it through the canonical summaries and top-level tree.
+- added the wave-observable-transport-geometry regime transparency rung across algebra, known-limits, canonical consumer, and pre-moonshine summary surfaces, then re-exported it through the canonical summaries and top-level tree.
+- restored `DASHI.Geometry.ClosestPoint` as a geometry-side compatibility wrapper over `DASHI.Energy.ClosestPoint` so the top-level import tree compiles cleanly again.
 
 - added the wave-observable-transport-geometry regime continuity rung across algebra, known-limits, canonical consumer, and pre-moonshine summary surfaces, then re-exported it through the canonical summaries and top-level tree.
 
@@ -387,3 +407,5 @@
     wave-regime hotspots
   - rewired `Everything.agda` to cover the new ladder modules while preserving
     compatibility with the old long module names
+- Restored the legacy `MDL.Core.Core` import path as a compatibility wrapper so the widened closure/dynamics ladder continues to compile against older module references.
+- Restored the legacy `Monster.TraceCounts` import path as a compatibility wrapper so the top-level legacy Monster path continues to compile.

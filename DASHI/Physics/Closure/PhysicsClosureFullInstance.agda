@@ -26,7 +26,7 @@ open import DASHI.Physics.Constraints.ConcreteInstance as CI
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
 open import DASHI.Physics.RealClosureKit as RK
 open import Data.Nat using (z≤n)
-open import MDL as OldMDL
+open import MDL.Core.Core as OldMDL
 open import DASHI.MDL.MDLDescentTradeoff as MDL using (MDLParts)
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.UniversalityTheorem as UTH

@@ -1,0 +1,23 @@
+module DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.ResilienceSummary where
+
+open import Agda.Builtin.Nat using (Nat)
+
+open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.RobustnessSummary as MTWOTGRROBS
+open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.Summary as MTWOTGRS
+
+record MoonshineTwinedWaveObservableTransportGeometryRegimeResilienceSummary : Set where
+  constructor moonshineTwinedWaveObservableTransportGeometryRegimeResilienceSummary
+  field
+    waveObservableTransportGeometryRegimeRobustnessSummary :
+      MTWOTGRROBS.MoonshineTwinedWaveObservableTransportGeometryRegimeRobustnessSummary
+    waveObservableTransportGeometryRegimeSummary :
+      MTWOTGRS.MoonshineTwinedWaveObservableTransportGeometryRegimeSummary
+    summaryCount : Nat
+
+canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeResilienceSummary :
+  MoonshineTwinedWaveObservableTransportGeometryRegimeResilienceSummary
+canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeResilienceSummary =
+  moonshineTwinedWaveObservableTransportGeometryRegimeResilienceSummary
+    MTWOTGRROBS.canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeRobustnessSummary
+    MTWOTGRS.canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeSummary
+    2

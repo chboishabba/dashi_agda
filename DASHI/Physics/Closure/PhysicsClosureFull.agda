@@ -15,7 +15,7 @@ open import DASHI.Geometry.Signature31FromConeArrowIsotropy
 open import DASHI.Physics.Constraints.Generators
 open import DASHI.Physics.Constraints.Bracket
 open import DASHI.Physics.Constraints.Closure
-open import MDL as OldMDL
+open import MDL.Core.Core as OldMDL
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
 open import DASHI.Physics.Closure.DynamicalClosure as DC
 open import DASHI.Physics.Closure.OrthogonalityZLift

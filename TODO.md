@@ -210,6 +210,10 @@ Priority bucket: `P0` first, then `P1`
 
 - Keep Stage A and Stage B documentation aligned with the new Stage C target:
   minimal credible physics closure.
+- Keep the outreach-facing docs aligned with the same evidence boundary:
+  theorem-backed,
+  scaffold present,
+  physics interpretation still open.
 - Ensure docs, TODOs, code, and changelog all distinguish:
   proved,
   evidence-backed,
@@ -355,6 +359,7 @@ precision.
 - Current landed closure widening: wave-observable-transport-geometry regime symmetry now has theorem surfaces, a canonical consumer, and moonshine summary exports on the authoritative Stage C path.
 - Current landed closure widening: wave-observable-transport-geometry regime convergence now has theorem surfaces, a canonical consumer, and moonshine summary exports on the authoritative Stage C path.
 - Current landed closure widening: wave-observable-transport-geometry regime fidelity now has theorem surfaces, a canonical consumer, and moonshine summary exports on the authoritative Stage C path.
+- Current landed closure widening: wave-observable-transport-geometry regime transparency now has theorem surfaces, a canonical consumer, and moonshine summary exports on the authoritative Stage C path.
 Cleanup
 - [x] replace stale giant summary exports with ladder-based summary exports
 - [x] introduce short-path wrapper modules for closure wave-regime families

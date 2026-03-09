@@ -1,0 +1,43 @@
+{
+  "renames": [
+    { "from": "DASHI.Geometry.RealIsotropyInstanceShiftTailPerm", "to": "DASHI.Geometry.Isotropy.Instance.ShiftTailPerm" },
+    { "from": "DASHI.Geometry.SignatureUniqueness31Proof", "to": "DASHI.Geometry.Signature.Uniqueness31Proof" },
+    { "from": "DASHI.Geometry.SignatureElimination", "to": "DASHI.Geometry.Signature.Elimination" },
+    { "from": "DASHI.Geometry.QuadraticPolarizationFromForm", "to": "DASHI.Geometry.Quadratic.PolarizationFromForm" },
+    { "from": "DASHI.Ultrametric.ConeMonotonicity", "to": "DASHI.Metric.Cone.Monotonicity" },
+    { "from": "MonsterUltrametric", "to": "Monster.Ultrametric" },
+    { "from": "MonsterMask", "to": "Monster.Mask" },
+    { "from": "MonsterStep", "to": "Monster.Step" },
+    { "from": "MonsterTrace", "to": "Monster.Trace" },
+    { "from": "MonsterTraceSound", "to": "Monster.TraceSound" },
+    { "from": "MonsterProjection", "to": "Monster.Projection" },
+    { "from": "KernelAlgebra", "to": "Kernel.Algebra" },
+    { "from": "OperatorMonoid", "to": "Kernel.Monoid" },
+    { "from": "Stabilisation", "to": "Kernel.Stabilisation" },
+    { "from": "MDL", "to": "MDL.Core" },
+    { "from": "MDLOptimalSkeleton", "to": "MDL.OptimalSkeleton" },
+    { "from": "PrimeSubsetModel", "to": "MDL.PrimeSubsetModel" },
+    { "from": "CICADA71", "to": "Ontology.CICADA71" },
+    { "from": "MonsterOntologyContracts", "to": "Ontology.Contracts" },
+    { "from": "GodelLattice", "to": "Ontology.GodelLattice" },
+    { "from": "HeckeScan", "to": "Ontology.Hecke.Scan" }
+  ],
+  "prefix_renames": [
+    {
+      "from_prefix": "DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometryRegime",
+      "to_prefix": "DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime."
+    },
+    {
+      "from_prefix": "DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometryRegime",
+      "to_prefix": "DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime."
+    },
+    {
+      "from_prefix": "DASHI.Physics.Closure.ParametricAlgebraicWaveObservableTransportGeometryRegime",
+      "to_prefix": "DASHI.Physics.Closure.ParametricAlgebraicWaveObservableTransportGeometry.Regime."
+    },
+    {
+      "from_prefix": "DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometryRegime",
+      "to_prefix": "DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime."
+    }
+  ]
+}

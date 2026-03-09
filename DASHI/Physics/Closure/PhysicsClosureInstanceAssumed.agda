@@ -15,7 +15,7 @@ open import DASHI.Physics.Constraints.Bracket as CB
 open import DASHI.Physics.Constraints.Closure as CC
 open import DASHI.Physics.Constraints.ConcreteInstance as CI
 open import Data.Nat using (zero; z≤n)
-open import MDL as OldMDL
+open import MDL.Core.Core as OldMDL
 open import DASHI.Physics.UniversalityTheorem as UTH
 open import DASHI.Physics.RealClosureKit as RK
 

@@ -1,0 +1,25 @@
+module DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.CohesionConsumer where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
+open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.ConcordanceConsumer as CWOTGRCONCC
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.CohesionTheorem as KLRWOTGRCOH
+
+record WaveObservableTransportGeometryRegimeCohesionConsumerFromMinimal
+         (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where
+  constructor waveObservableTransportGeometryRegimeCohesionConsumer
+  field
+    transportGeometryRegimeConcordanceConsumer :
+      CWOTGRCONCC.WaveObservableTransportGeometryRegimeConcordanceConsumerFromMinimal cl
+    recoveredWaveObservableTransportGeometryRegimeCohesion :
+      KLRWOTGRCOH.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeCohesionTheorem
+
+canonicalWaveObservableTransportGeometryRegimeCohesionConsumer :
+  {cl : MCPC.MinimalCrediblePhysicsClosure} →
+  CWOTGRCONCC.WaveObservableTransportGeometryRegimeConcordanceConsumerFromMinimal cl →
+  WaveObservableTransportGeometryRegimeCohesionConsumerFromMinimal cl
+canonicalWaveObservableTransportGeometryRegimeCohesionConsumer waveObsTransportGeometryRegimeConcordance =
+  waveObservableTransportGeometryRegimeCohesionConsumer
+    waveObsTransportGeometryRegimeConcordance
+    KLRWOTGRCOH.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeCohesionTheorem

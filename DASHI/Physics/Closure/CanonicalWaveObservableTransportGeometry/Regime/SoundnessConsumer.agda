@@ -1,0 +1,25 @@
+module DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.SoundnessConsumer where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
+open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.CompletenessConsumer as CWOTGRCM
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.SoundnessTheorem as KLRWOTGRSO
+
+record WaveObservableTransportGeometryRegimeSoundnessConsumerFromMinimal
+         (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where
+  constructor waveObservableTransportGeometryRegimeSoundnessConsumer
+  field
+    transportGeometryRegimeCompletenessConsumer :
+      CWOTGRCM.WaveObservableTransportGeometryRegimeCompletenessConsumerFromMinimal cl
+    recoveredWaveObservableTransportGeometryRegimeSoundness :
+      KLRWOTGRSO.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeSoundnessTheorem
+
+canonicalWaveObservableTransportGeometryRegimeSoundnessConsumer :
+  {cl : MCPC.MinimalCrediblePhysicsClosure} →
+  CWOTGRCM.WaveObservableTransportGeometryRegimeCompletenessConsumerFromMinimal cl →
+  WaveObservableTransportGeometryRegimeSoundnessConsumerFromMinimal cl
+canonicalWaveObservableTransportGeometryRegimeSoundnessConsumer waveObsTransportGeometryRegimeCompleteness =
+  waveObservableTransportGeometryRegimeSoundnessConsumer
+    waveObsTransportGeometryRegimeCompleteness
+    KLRWOTGRSO.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeSoundnessTheorem

@@ -2,7 +2,7 @@ module ActionMonotonicity where
 
 open import Agda.Builtin.Nat
 open import Agda.Builtin.Equality
-open import KernelAlgebra
+open import Kernel.Algebra
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_)
 

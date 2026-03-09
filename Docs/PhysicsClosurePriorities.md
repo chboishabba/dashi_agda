@@ -50,9 +50,9 @@ Immediate next step after this snapshot:
   then orientation/signature refinement,
   then harness promotion.
 - next algebraic handle:
-  add a finite orbit-shell generating series for the theorem-backed shift
-  profile, then compare `B₄` at the series level before attempting any
-  admissible promotion.
+  use the already-landed finite orbit-shell generating-series layer for the
+  theorem-backed shift profile, then compare `B₄` at the series level before
+  attempting any admissible promotion.
 - current symmetry-side prototype after that:
   finite graded shell series and twined fixed-point traces are now present for
   the shift signed action and the `B₄` Weyl action, while the wave lift

@@ -314,22 +314,22 @@ Current closure-burn-down target:
   compatibility and prototype surfaces are no longer mistaken for the
   authoritative closure path.
 
-## Orbit-Shell Series Next Step
+## Orbit-Shell Series Current Status
 
-The next algebraic object to add is a finite orbit-shell generating series
+The repo now already contains a finite orbit-shell generating series layer,
 built from:
 
 - orientation tag,
 - shell-1 orbit-size multiplicities,
 - shell-2 orbit-size multiplicities.
 
-Immediate targets:
+Immediate uses:
 
 - shift series witness from the current theorem-backed profile data,
 - standalone `B₄` series comparison,
 - prototype wave-graded lift using the finite series as the grade-0 seed.
 
-This series work is intended to strengthen comparison and future grading
+This series work strengthens comparison and future grading
 questions. It does **not** by itself upgrade the repo to a theorem-backed
 theta-series or moonshine claim.
 

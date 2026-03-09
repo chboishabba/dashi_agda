@@ -1,0 +1,26 @@
+module DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.TransparencyConsumer where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
+open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.FidelityConsumer as CWOTGRFIDC
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.TransparencyTheorem as KLRWOTGRTRN
+
+record WaveObservableTransportGeometryRegimeTransparencyConsumerFromMinimal
+         (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where
+  constructor waveObservableTransportGeometryRegimeTransparencyConsumer
+  field
+    transportGeometryRegimeFidelityConsumer :
+      CWOTGRFIDC.WaveObservableTransportGeometryRegimeFidelityConsumerFromMinimal cl
+    recoveredWaveObservableTransportGeometryRegimeTransparency :
+      KLRWOTGRTRN.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeTransparencyTheorem
+
+canonicalWaveObservableTransportGeometryRegimeTransparencyConsumer :
+  {cl : MCPC.MinimalCrediblePhysicsClosure} →
+  CWOTGRFIDC.WaveObservableTransportGeometryRegimeFidelityConsumerFromMinimal cl →
+  WaveObservableTransportGeometryRegimeTransparencyConsumerFromMinimal cl
+canonicalWaveObservableTransportGeometryRegimeTransparencyConsumer
+    waveObservableTransportGeometryRegimeFidelity =
+  waveObservableTransportGeometryRegimeTransparencyConsumer
+    waveObservableTransportGeometryRegimeFidelity
+    KLRWOTGRTRN.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeTransparencyTheorem

@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.MDLLyapunovShiftInstance where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
 
-open import MDL as OldMDL
+open import MDL.Core.Core as OldMDL
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI
 open import DASHI.Physics.Closure.MDLDescentShiftInstance as MDSI

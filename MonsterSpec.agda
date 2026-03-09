@@ -4,7 +4,7 @@ open import Agda.Builtin.Nat      using (Nat)
 open import Agda.Builtin.List     using (List)
 
 open import MonsterState
-open import MonsterStep
+open import Monster.Step
 
 ------------------------------------------------------------------------
 -- Canonical spec = step + optional encoding function.

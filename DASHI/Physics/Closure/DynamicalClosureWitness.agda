@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.DynamicalClosureWitness where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat; _+_)
 
-open import MDL as OldMDL
+open import MDL.Core.Core as OldMDL
 open import DASHI.MDL.MDLDescentTradeoff as MDL using (MDLParts)
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI

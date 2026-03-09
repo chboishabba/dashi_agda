@@ -118,9 +118,10 @@ Current theorem status:
   one wave-observable-facing downstream consumer on the widened canonical
   ladder,
   and one richer moonshine twined-wave-observable summary on the prototype track.
-- Next algebraic milestone:
-  add a finite orbit-shell generating series for the current shift profile,
-  then use it for standalone `B₄` comparison and a prototype wave lift.
+- Current algebraic milestone:
+  use the already-landed finite orbit-shell generating-series layer for the
+  current shift profile, then use it for standalone `B₄` comparison and a
+  prototype wave lift.
 - Safe symmetry-interpretation order:
   treat the current orbit profile as living first in a
   Weyl/root-system/theta-like neighborhood;
@@ -165,6 +166,8 @@ physics”.
 
 For the current forward-claim shortlist and falsifiability criteria, see
 `Docs/MinimalCrediblePhysicsClosure.md`.
+For the math-prof outreach framing and archive crosswalk, see
+`Docs/MathProfOutreachSummary.md`.
 
 Cleanup note:
 - the next maintenance turn organizes the closure ladder behind shorter

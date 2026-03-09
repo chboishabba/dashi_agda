@@ -5,7 +5,7 @@ open import Agda.Builtin.List     using (List; []; _∷_)
 
 open import MonsterState
 open import MonsterGroups
-open import MonsterTrace
+open import Monster.Trace
 
 ------------------------------------------------------------------------
 -- If you encode digits preserved per step as Nat list:

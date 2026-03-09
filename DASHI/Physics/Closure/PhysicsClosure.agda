@@ -11,7 +11,7 @@ open import DASHI.Physics.Constraints.Generators
 open import DASHI.Physics.Constraints.Bracket
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.Constraints.Closure
-open import MDL as OldMDL
+open import MDL.Core.Core as OldMDL
 open import DASHI.Physics.Closure.OrthogonalityZLift
 open import DASHI.Physics.UniversalityTheorem
 

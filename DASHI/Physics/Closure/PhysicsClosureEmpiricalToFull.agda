@@ -20,7 +20,7 @@ open import DASHI.Physics.Closure.MDLLyapunovShiftInstance as MDLL
 open import DASHI.Physics.Closure.DynamicalClosure as DC
 open import DASHI.Physics.Closure.DynamicalClosureShiftInstance as DCSI
 open import DASHI.Physics.UniversalityTheorem as UTH
-open import MDL as OldMDL
+open import MDL.Core.Core as OldMDL
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.MDL.MDLDescentTradeoff as MDL using (MDLParts)
 open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI

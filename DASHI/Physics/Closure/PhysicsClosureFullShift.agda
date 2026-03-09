@@ -7,7 +7,7 @@ open import DASHI.Physics.Closure.OrthogonalityZLift
 
 open import DASHI.Physics.RealClosureKitFiber
 open import DASHI.Geometry.SignatureUniqueness31
-open import MDL as OldMDL
+open import MDL.Core.Core as OldMDL
 open import DASHI.MDL.MDLDescentTradeoff as MDL using (MDLParts)
 open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA

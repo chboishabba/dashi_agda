@@ -1,0 +1,21 @@
+module DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.StabilityTheorem where
+
+open import Agda.Primitive using (Setω)
+
+open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.CoherenceTheorem as KLRWOTGRC
+open import DASHI.Physics.Closure.KnownLimitsCompleteLocalRegimeTheorem as KLCLR
+
+record KnownLimitsRecoveredWaveObservableTransportGeometryRegimeStabilityTheorem : Setω where
+  constructor knownLimitsRecoveredWaveObservableTransportGeometryRegimeStabilityTheorem
+  field
+    recoveredWaveObservableTransportGeometryRegimeCoherence :
+      KLRWOTGRC.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeCoherenceTheorem
+    completeLocalRegime :
+      KLCLR.KnownLimitsCompleteLocalRegimeTheorem
+
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeStabilityTheorem :
+  KnownLimitsRecoveredWaveObservableTransportGeometryRegimeStabilityTheorem
+canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeStabilityTheorem =
+  knownLimitsRecoveredWaveObservableTransportGeometryRegimeStabilityTheorem
+    KLRWOTGRC.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeCoherenceTheorem
+    KLCLR.canonicalKnownLimitsCompleteLocalRegimeTheorem

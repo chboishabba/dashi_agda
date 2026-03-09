@@ -1,0 +1,23 @@
+module DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.BalanceSummary where
+
+open import Agda.Builtin.Nat using (Nat)
+
+open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.HarmonySummary as MTWOTGRHARS
+open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.Summary as MTWOTGRS
+
+record MoonshineTwinedWaveObservableTransportGeometryRegimeBalanceSummary : Set where
+  constructor moonshineTwinedWaveObservableTransportGeometryRegimeBalanceSummary
+  field
+    waveObservableTransportGeometryRegimeHarmonySummary :
+      MTWOTGRHARS.MoonshineTwinedWaveObservableTransportGeometryRegimeHarmonySummary
+    waveObservableTransportGeometryRegimeSummary :
+      MTWOTGRS.MoonshineTwinedWaveObservableTransportGeometryRegimeSummary
+    summaryCount : Nat
+
+canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeBalanceSummary :
+  MoonshineTwinedWaveObservableTransportGeometryRegimeBalanceSummary
+canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeBalanceSummary =
+  moonshineTwinedWaveObservableTransportGeometryRegimeBalanceSummary
+    MTWOTGRHARS.canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeHarmonySummary
+    MTWOTGRS.canonicalMoonshineTwinedWaveObservableTransportGeometryRegimeSummary
+    2

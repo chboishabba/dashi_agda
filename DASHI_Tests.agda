@@ -6,7 +6,7 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 
 open import Base369
 open import LogicTlurey
-open import KernelAlgebra
+open import Kernel.Algebra
 open import Ultrametric
 open import Contraction
 open import ActionMonotonicity

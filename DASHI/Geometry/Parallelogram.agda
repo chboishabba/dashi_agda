@@ -13,7 +13,7 @@ record AdditiveSpace (ℓ : Level) : Set (suc ℓ) where
 
 record NormedSpace (ℓ : Level) : Set (suc ℓ) where
   field
-    V : Set ℓ
+    V   : Set ℓ
     _+_ : V → V → V
     _-_ : V → V → V
     ‖_‖ : V → ℚ
