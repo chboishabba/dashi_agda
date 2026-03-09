@@ -1,20 +1,21 @@
 ## Repository Status
 
-Cleanup/refactor note:
+Archive-backed status update:
 
-- The current turn is a consolidation pass, not a widening pass.
-- No new `1/2/3/4` theorem rungs are being added here.
-- The grouped ladder modules are now the intended internal API for the
-  wave-regime hotspot:
-  - `DASHI/Physics/Closure/Algebra/WaveRegime.agda`
-  - `DASHI/Physics/Closure/Recovery/WaveRegime.agda`
-  - `DASHI/Physics/Closure/Consumers/WaveRegime.agda`
-  - `DASHI/Physics/Closure/Canonical/Ladder.agda`
-  - `DASHI/Physics/Moonshine/Reports/WaveRegime.agda`
-  - `DASHI/Physics/Moonshine/Ladder.agda`
-- Existing per-rung modules remain in place as compatibility surfaces.
-- After this cleanup, widening should resume through the grouped ladder
-  surfaces rather than direct per-rung imports.
+- The orbit/signature/shell-family story remains the strongest part of the
+  repo and is now better supported by sibling-repo and archive material.
+- The wave / psi / graded-series bridge is no longer only aspirational:
+  archive material and sibling-repo scaffolding now make it a strong formal
+  direction, though still not a closure theorem.
+- The gauge / matter / internal-algebra direction is stronger than before:
+  there is now a clearer derivation scheme and quotient/contractive/operator
+  stack program, but not a finished recovery theorem.
+- The main open physics-side gaps remain:
+  a natural physical dynamics law,
+  a conserved physical quantity with clear interpretation,
+  an explicit continuum-limit theorem,
+  realization-independent proof,
+  and full gauge/matter recovery as theorem rather than program.
 
 Current theorem status:
 

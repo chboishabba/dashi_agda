@@ -21,6 +21,29 @@ It does **not** mean:
 - realization-independent closure beyond the current 4D framework,
 - Monster/Moonshine or other deep symmetry closure.
 
+## Stronger Archive Support, Same Open Gaps
+
+Recent archive and sibling-repo crosswalk work sharpens the status without
+changing the claim boundary.
+
+Stronger than before:
+
+- state-tensor formalisation now gives a more explicit gauge-covariant /
+  chiral / holonomy-facing wave language,
+- the physics-closure archive material now gives a more explicit candidate
+  route through minimal axioms, contractive stack, canonical Dirac-operator
+  language, and finite `R/C/H` algebra pruning,
+- quotient dynamics are more clearly scaffolded through `K = C ∘ P ∘ R`,
+  fiberwise contraction, ultrametric quotient structure, and invariant tuples.
+
+Still genuinely open:
+
+- a natural physical dynamics law,
+- a conserved physical quantity with clear physical interpretation,
+- an explicit continuum-limit theorem,
+- a realization-independent proof,
+- full gauge/matter recovery as theorem rather than derivation program.
+
 ## Minimum Acceptance Boundary
 
 The minimum target is reached only when all of the following are true:

@@ -2,8 +2,8 @@ module DASHI.Physics.ClosureInstance where
 
 open import DASHI.Physics.ClosureGlue as Glue
 open import DASHI.Physics.TOperator
-open import DASHI.Geometry.RealFiniteSpeed
-open import DASHI.Geometry.RealIsotropy
+open import DASHI.Geometry.RealFiniteSpeed.Core
+open import DASHI.Geometry.RealIsotropy.Core
 open import Contraction
 open import Ultrametric as UMetric
 open import DASHI.Combinatorics.Entropy using (Involution)

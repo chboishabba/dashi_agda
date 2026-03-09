@@ -1,4 +1,4 @@
-module DASHI.Physics.SeverityGuardShiftWiring where
+module DASHI.Physics.SeverityGuard.Shift.Wiring where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Nat using (_<_)
@@ -10,8 +10,8 @@ open import Ultrametric as UMetric
 open import DASHI.Geometry.FiberContraction as FC
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.TailCollapseProof as TCP
-open import DASHI.Physics.SeverityGuardShiftInstance as SGSI
-open import DASHI.Physics.SeverityGuard as SG
+open import DASHI.Physics.SeverityGuard.Shift.Instance as SGSI
+open import DASHI.Physics.SeverityGuard.Core as SG
 
 -- Concrete wiring target for the shift carrier:
 -- Guard/Snap/Broken are driven by UFTC_Lattice.Code severity.

@@ -167,6 +167,18 @@ Stage C must not be described as proved by the current repo state.
 Any Monster/Moonshine interpretation remains explicitly downstream and
 speculative unless supported by separate theorem-level bridges.
 
+Archive-backed clarification:
+
+- newer archive and sibling-repo material now make the quotient/contractive
+  dynamics program and gauge/internal-algebra direction more explicit,
+- they also materially strengthen the wave / psi / graded-series bridge,
+- but they do not close the core open physics requirements:
+  natural dynamics law,
+  conserved physical quantity,
+  explicit continuum limit,
+  realization independence,
+  full gauge/matter recovery as theorem.
+
 Current maintenance decision:
 
 - local widening is paused for one cleanup/refactor turn,

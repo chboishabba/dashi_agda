@@ -6,8 +6,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import Ultrametric as UMetric
 open import DASHI.Combinatorics.Entropy using (Involution)
 open import DASHI.Physics.ContractionQuadraticBridge as CQ
-open import DASHI.Geometry.RealIsotropy as RIS
-open import DASHI.Geometry.RealFiniteSpeed as RFS
+open import DASHI.Geometry.RealIsotropy.Core as RIS
+open import DASHI.Geometry.RealFiniteSpeed.Core as RFS
 
 record Signature : Set where
   field

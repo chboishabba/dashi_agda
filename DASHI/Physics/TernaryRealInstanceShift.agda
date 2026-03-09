@@ -9,10 +9,10 @@ open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.RealOperatorStackShift as ROSS
 open import DASHI.Physics.TailCollapseProof as TCP
 open import DASHI.Geometry.StrictContractionComposition as SCC
-open import DASHI.Geometry.RealIsotropy as RIS
-open import DASHI.Geometry.RealIsotropyInstanceShiftTailInv as RISS
-open import DASHI.Geometry.RealFiniteSpeed as RFS
-open import DASHI.Geometry.RealFiniteSpeedInstanceShift as RFSI
+open import DASHI.Geometry.RealIsotropy.Core as RIS
+open import DASHI.Geometry.RealIsotropy.Instance.ShiftTailInv as RISS
+open import DASHI.Geometry.RealFiniteSpeed.Core as RFS
+open import DASHI.Geometry.RealFiniteSpeed.Instance.Shift as RFSI
 open import DASHI.Combinatorics.Entropy using (Involution)
 import DASHI.Physics.RealClosureKitFiber as RKF
 import DASHI.Physics.MaskedClosureKit as MK

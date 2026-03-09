@@ -1,9 +1,9 @@
-module DASHI.Geometry.RealFiniteSpeedInstanceShift where
+module DASHI.Geometry.RealFiniteSpeed.Instance.Shift where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Vec using (Vec)
 open import DASHI.Algebra.Trit using (Trit)
-open import DASHI.Geometry.RealFiniteSpeed as RFS
+open import DASHI.Geometry.RealFiniteSpeed.Core as RFS
 open import DASHI.Metric.FineAgreementUltrametric as FAM
 open import DASHI.Physics.RealOperatorStackShift as ROSS
 open import Ultrametric as UMetric

@@ -1,4 +1,4 @@
-module DASHI.Physics.SeverityGuardShiftInstance where
+module DASHI.Physics.SeverityGuard.Shift.Instance where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Nat using (_<_)
@@ -6,7 +6,7 @@ open import Agda.Primitive using (Level; lsuc)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import UFTC_Lattice as UFTC using (Code; Severity)
-open import DASHI.Physics.SeverityGuard as SG
+open import DASHI.Physics.SeverityGuard.Core as SG
 open import DASHI.Physics.SeverityGuardedStrict as SGS
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import Ultrametric as UMetric

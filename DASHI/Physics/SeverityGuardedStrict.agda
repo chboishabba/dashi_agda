@@ -6,7 +6,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import Ultrametric as UMetric
 open import DASHI.Geometry.FiberContraction as FC
-open import DASHI.Physics.SeverityGuard as SG using (SeverityPolicy; Guard; Broken; Snap)
+open import DASHI.Physics.SeverityGuard.Core as SG using (SeverityPolicy; Guard; Broken; Snap)
 open import DASHI.Physics.TailCollapseGuardedStrict as TG
 
 -- Adapter: build Guard/Broken/Snap from a SeverityPolicy, while leaving

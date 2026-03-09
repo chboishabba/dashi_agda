@@ -1,4 +1,4 @@
-module DASHI.Geometry.RealIsotropyInstanceShiftTailInv where
+module DASHI.Geometry.RealIsotropy.Instance.ShiftTailInv where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
@@ -12,7 +12,7 @@ open import Data.Vec using (Vec; _++_)
 open import Data.Product using (_,_; proj₁)
 
 open import DASHI.Geometry.Isotropy as Iso
-open import DASHI.Geometry.RealIsotropy as RIS
+open import DASHI.Geometry.RealIsotropy.Core as RIS
 open import DASHI.Algebra.Trit using (Trit; inv)
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.RealOperatorStackShift as ROSS

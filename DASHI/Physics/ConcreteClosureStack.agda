@@ -11,8 +11,8 @@ open import Ultrametric as UMetric
 open import Contraction as Contraction using (_≢_; Contractive≢; StrictContraction)
 open import DASHI.Geometry.Isotropy as Iso
 open import DASHI.Geometry.FiniteSpeed as FS
-open import DASHI.Geometry.RealFiniteSpeed as RFS
-open import DASHI.Geometry.RealIsotropy as RIS
+open import DASHI.Geometry.RealFiniteSpeed.Core as RFS
+open import DASHI.Geometry.RealIsotropy.Core as RIS
 open import DASHI.Geometry.StrictContractionComposition as SCC
 open import DASHI.Physics.TOperator as TOp
 open import DASHI.Physics.ClosureBuilder as CB

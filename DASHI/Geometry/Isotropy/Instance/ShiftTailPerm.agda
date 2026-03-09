@@ -9,7 +9,7 @@ open import Data.Vec using (Vec)
 open import Ultrametric as UMetric
 open import DASHI.Metric.FineAgreementUltrametric as FAM
 open import DASHI.Geometry.Isotropy as Iso
-open import DASHI.Geometry.RealIsotropy as RIS
+open import DASHI.Geometry.RealIsotropy.Core as RIS
 open import DASHI.Geometry.ShiftIsotropyTailPerm as TP
 open import DASHI.Algebra.Trit using (Trit)
 open import DASHI.Physics.RealTernaryCarrier as RTC

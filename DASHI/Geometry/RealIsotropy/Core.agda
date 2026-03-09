@@ -1,4 +1,4 @@
-module DASHI.Geometry.RealIsotropy where
+module DASHI.Geometry.RealIsotropy.Core where
 
 open import Ultrametric as UMetric
 open import DASHI.Geometry.Isotropy as Iso

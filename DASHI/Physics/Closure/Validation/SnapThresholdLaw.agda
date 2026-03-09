@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.Validation.SnapThresholdLaw where
 open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.String using (String)
 
-open import DASHI.Physics.SeverityGuard as SG
+open import DASHI.Physics.SeverityGuard.Core as SG
 
 data SnapThresholdVerdict : Set where
   snapThresholdWitnessed : SnapThresholdVerdict

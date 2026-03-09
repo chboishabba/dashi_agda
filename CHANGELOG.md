@@ -2,6 +2,30 @@
 
 ## 2026-03-09
 
+- aligned repo docs/TODO/context with the stronger archive-backed
+  `Math Prof Outreach Stage` crosswalk:
+  - wave / psi / graded-series bridge now described as strongly scaffolded
+  - gauge / matter / internal-algebra direction now described as
+    substantially scaffolded
+  - quotient/contractive/operator-stack dynamics program now described as a
+    clearer candidate route
+  - open physics gaps kept explicit:
+    natural dynamics law,
+    conserved physical quantity,
+    explicit continuum limit,
+    realization-independent proof,
+    full gauge/matter recovery as theorem
+
+- consolidation turn landed:
+  - rewired `CanonicalStageCTheoremBundle` to use grouped
+    `Closure/Algebra/WaveRegime` and `Closure/Recovery/WaveRegime` imports
+    instead of direct per-rung wave-regime theorem imports
+  - rewired `CanonicalStageCSummaryBundle` to use grouped
+    `Closure/Recovery/WaveRegime` and `Closure/Consumers/WaveRegime` imports
+    instead of direct per-rung recovery/consumer imports
+  - kept per-rung theorem and consumer modules in place as compatibility
+    surfaces; no theorem content changed in this pass
+
 - promoted the math-prof outreach material into first-class repo docs under
   `Docs/`, including:
   a short outreach summary,
@@ -417,3 +441,5 @@
 - Added the short-path `Fusion` rung for the wave-observable-transport-geometry regime on both the algebra and known-limits ladders, plus its canonical consumer and moonshine summary surface.
 - Added the short-path `Calibration` rung for the wave-observable-transport-geometry regime on both the algebra and known-limits ladders, plus its canonical consumer and moonshine summary surface.
 - Added the short-path `Legibility` rung for the wave-observable-transport-geometry regime on both the algebra and known-limits ladders, plus its canonical consumer and moonshine summary surface.
+
+- Tightened `Closure/Canonical/Ladder` so it no longer publicly re-exports both grouped wave-regime ladders and `CanonicalStageC`, eliminating the duplicate-export collision on the cleaned canonical summary path.

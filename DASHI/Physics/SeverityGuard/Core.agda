@@ -1,4 +1,4 @@
-module DASHI.Physics.SeverityGuard where
+module DASHI.Physics.SeverityGuard.Core where
 
 open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Nat using (Nat)

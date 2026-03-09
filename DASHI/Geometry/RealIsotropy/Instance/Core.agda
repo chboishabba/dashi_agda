@@ -1,11 +1,11 @@
-module DASHI.Geometry.RealIsotropyInstance where
+module DASHI.Geometry.RealIsotropy.Instance.Core where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Bool using (Bool; true; false; if_then_else_; _xor_)
 open import Data.Bool.Properties as BoolP
 open import DASHI.Geometry.Isotropy as Iso
-open import DASHI.Geometry.RealIsotropy as RIS
+open import DASHI.Geometry.RealIsotropy.Core as RIS
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.RealOperators as RO
 open import DASHI.Metric.FineAgreementUltrametric as FAM

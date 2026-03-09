@@ -1,4 +1,4 @@
-module DASHI.Geometry.RealFiniteSpeed where
+module DASHI.Geometry.RealFiniteSpeed.Core where
 
 record RealFiniteSpeed {S : Set} (T : S → S) : Set₁ where
   field

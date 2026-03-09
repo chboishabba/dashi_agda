@@ -1,4 +1,4 @@
-module DASHI.Physics.SeverityGuardShiftInstanceFine where
+module DASHI.Physics.SeverityGuard.Shift.InstanceFine where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Nat using (_<_)
@@ -7,7 +7,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import UFTC_Lattice as UFTC using (Code; Severity)
 open import DASHI.Geometry.FiberContraction as FC
-open import DASHI.Physics.SeverityGuard as SG
+open import DASHI.Physics.SeverityGuard.Core as SG
 open import DASHI.Physics.SeverityGuardedStrictFine as SGS
 open import DASHI.Physics.RealTernaryCarrier as RTC
 

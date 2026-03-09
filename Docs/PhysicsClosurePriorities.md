@@ -1,14 +1,25 @@
 # Physics Closure Priorities
 
-## Cleanup Freeze
+## Current Reading
 
-This turn is a consolidation turn.
+The strongest current reading is:
 
-- No new wave-regime theorem rungs should be added.
-- Grouped ladder modules are now the authoritative internal API.
-- Per-rung files remain for compatibility only.
-- The next widening cycle resumes only after the canonical summaries and
-  bundles depend on grouped ladder surfaces.
+- orbit/signature/shell-family closure is strong and better supported than
+  before,
+- wave / psi / graded-series structure is now strongly scaffolded,
+- gauge / matter / internal-algebra direction is substantially scaffolded,
+- but the key physics-side gaps remain open:
+  natural dynamics law,
+  conserved physical quantity,
+  explicit continuum limit,
+  realization-independent proof,
+  full gauge/matter recovery as theorem.
+
+So the priority stays physics-first:
+
+- broaden known-limits recovery beyond the current local slices,
+- broaden gauge/constraint beyond the current local algebra packages,
+- keep moonshine/Weyl as a parallel prototype track, not the main line.
 
 ## P0 — Validation and Closure Hardening
 

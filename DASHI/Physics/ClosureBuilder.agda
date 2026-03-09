@@ -7,8 +7,8 @@ open import DASHI.Combinatorics.Entropy using (Involution)
 
 open import DASHI.Physics.TOperator as TOp
 open import DASHI.Geometry.StrictContractionComposition as SCC
-open import DASHI.Geometry.RealFiniteSpeed as RFS
-open import DASHI.Geometry.RealIsotropy as RIS
+open import DASHI.Geometry.RealFiniteSpeed.Core as RFS
+open import DASHI.Geometry.RealIsotropy.Core as RIS
 import DASHI.Physics.ClosureGlue as Glue
 
 -- Concrete data needed to build a real closure instance.

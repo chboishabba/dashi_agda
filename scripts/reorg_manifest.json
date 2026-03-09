@@ -20,7 +20,10 @@
     { "from": "CICADA71", "to": "Ontology.CICADA71" },
     { "from": "MonsterOntologyContracts", "to": "Ontology.Contracts" },
     { "from": "GodelLattice", "to": "Ontology.GodelLattice" },
-    { "from": "HeckeScan", "to": "Ontology.Hecke.Scan" }
+    { "from": "HeckeScan", "to": "Ontology.Hecke.Scan" },
+    { "from": "DASHI.Geometry.RealFiniteSpeed", "to": "DASHI.Geometry.RealFiniteSpeed.Core" },
+    { "from": "DASHI.Geometry.RealIsotropy", "to": "DASHI.Geometry.RealIsotropy.Core" },
+    { "from": "DASHI.Physics.SeverityGuard", "to": "DASHI.Physics.SeverityGuard.Core" }
   ],
   "prefix_renames": [
     {
@@ -38,6 +41,20 @@
     {
       "from_prefix": "DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometryRegime",
       "to_prefix": "DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime."
+    },
+    {
+      "from_prefix": "DASHI.Geometry.RealFiniteSpeedInstance",
+      "to_prefix": "DASHI.Geometry.RealFiniteSpeed.Instance.",
+      "exact_to": "DASHI.Geometry.RealFiniteSpeed.Instance.Core"
+    },
+    {
+      "from_prefix": "DASHI.Geometry.RealIsotropyInstance",
+      "to_prefix": "DASHI.Geometry.RealIsotropy.Instance.",
+      "exact_to": "DASHI.Geometry.RealIsotropy.Instance.Core"
+    },
+    {
+      "from_prefix": "DASHI.Physics.SeverityGuardShift",
+      "to_prefix": "DASHI.Physics.SeverityGuard.Shift."
     }
   ]
 }

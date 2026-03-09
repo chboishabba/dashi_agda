@@ -5,6 +5,6 @@ module DASHI.Physics.Closure.Canonical.Ladder where
 open import DASHI.Physics.Closure.Algebra.WaveRegime public
 open import DASHI.Physics.Closure.Recovery.WaveRegime public
 open import DASHI.Physics.Closure.Consumers.WaveRegime public
-open import DASHI.Physics.Closure.CanonicalStageC public
+open import DASHI.Physics.Closure.CanonicalStageC
 open import DASHI.Physics.Closure.CanonicalStageCTheoremBundle public
 open import DASHI.Physics.Closure.CanonicalStageCSummaryBundle public

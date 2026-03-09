@@ -12,8 +12,8 @@ open import DASHI.Algebra.Trit using (neg; pos; zer)
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.TernaryRealInstance as TRI
 open import DASHI.Physics.SeverityMapping as SM
-open import DASHI.Physics.SeverityGuard as SG
-open import DASHI.Physics.SeverityGuardShiftConcrete as SGSC
+open import DASHI.Physics.SeverityGuard.Core as SG
+open import DASHI.Physics.SeverityGuard.Shift.Concrete as SGSC
 
 record Chi2BoundaryCase : Set where
   field

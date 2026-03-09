@@ -16,6 +16,14 @@
 
 Priority bucket: `P0`
 
+Open physics-side requirements that remain genuinely unresolved:
+
+- natural physical dynamics law
+- conserved physical quantity with clear interpretation
+- explicit continuum-limit theorem
+- realization-independent proof
+- full gauge/matter recovery as theorem rather than program
+
 - Replace trivial closure fallbacks on the minimum credible path.
   Current priority:
   `PhysicsClosureFullInstance` and `PhysicsClosureEmpiricalToFull` should use
@@ -209,6 +217,8 @@ Priority bucket: `P0` first, then `P1`
 
 - Keep Stage A and Stage B documentation aligned with the new Stage C target:
   minimal credible physics closure.
+- Keep the stronger archive-backed reading visible in docs and summaries
+  without overstating any of the still-open physics gaps.
 - Keep the outreach-facing docs aligned with the same evidence boundary:
   theorem-backed,
   scaffold present,

@@ -11,7 +11,7 @@ open import DASHI.Algebra.Trit using (Trit)
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.IndefiniteMaskQuadratic as IMQ
 open import DASHI.Physics.MaskedConeStructure as MCS
-open import DASHI.Geometry.RealFiniteSpeedInstance as RFSI
+open import DASHI.Geometry.RealFiniteSpeed.Instance.Core as RFSI
 open import DASHI.Physics.RealConeStructureInstance as RCSI
 
 ------------------------------------------------------------------------

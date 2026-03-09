@@ -1,4 +1,4 @@
-module DASHI.Physics.SeverityGuardShiftWiringFine where
+module DASHI.Physics.SeverityGuard.Shift.WiringFine where
 
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Nat using (_<_)
@@ -7,8 +7,8 @@ open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Geometry.FiberContraction as FC
 open import DASHI.Physics.RealTernaryCarrier as RTC
-open import DASHI.Physics.SeverityGuardShiftInstanceFine as SGSI
-open import DASHI.Physics.SeverityGuard as SG
+open import DASHI.Physics.SeverityGuard.Shift.InstanceFine as SGSI
+open import DASHI.Physics.SeverityGuard.Core as SG
 
 -- Concrete wiring target for the shift carrier using dNatFine strictness.
 record ShiftSeverityGuardWiringFine {m k : Nat} : Set₁ where

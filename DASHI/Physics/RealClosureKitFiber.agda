@@ -5,8 +5,8 @@ open import Ultrametric as UMetric
 open import DASHI.Geometry.StrictContractionComposition as SCC
 open import DASHI.Geometry.FiberContraction as FC
 open import DASHI.Combinatorics.Entropy using (Involution)
-open import DASHI.Geometry.RealIsotropy as RIS
-open import DASHI.Geometry.RealFiniteSpeed as RFS
+open import DASHI.Geometry.RealIsotropy.Core as RIS
+open import DASHI.Geometry.RealFiniteSpeed.Core as RFS
 open import DASHI.Physics.TOperator as TOp
 
 record RealClosureKitFiber : Set₁ where

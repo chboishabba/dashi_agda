@@ -70,3 +70,14 @@
   mathematical closure spine,
   local scaffolds,
   still-open physics gaps.
+- Crosswalk against `../dashifine/MATH_PROF_OUTREACH_CROSSWALK.md` now sharpens
+  the status:
+  wave / psi / graded-series bridge is strongly scaffolded,
+  gauge / matter / internal-algebra direction is substantially scaffolded,
+  quotient/contractive/operator-stack dynamics program is more explicit,
+  but the core open gaps remain:
+  natural physical dynamics law,
+  conserved physical quantity,
+  explicit continuum-limit theorem,
+  realization-independent proof,
+  and full gauge/matter recovery as theorem.
