@@ -216,6 +216,10 @@ open import DASHI.Physics.SignatureUniquenessOrbitLock as SUL public
 open import DASHI.Physics.SignatureUniquenessOrbitLockInstance as SULI public
 open import DASHI.Physics.OrbitProfileComputedSignedPermEvidence as OPCE public
 open import DASHI.Physics.ConeArrowIsotropyShiftOrbitEnumeration as SOE public
+-- Canonical signature seam export (theorem-critical; realization-specific).
+-- Canonical signature seam entrypoint (theorem-critical, realization-specific).
+-- Intentionally *not* routed through the prototype trivial witness module
+-- `DASHI.Physics.Signature31`.
 open import DASHI.Physics.Signature31FromShiftOrbitProfile as S31OP public
 open import DASHI.Physics.Signature31ShiftProfileWitness as SPW public
 open import DASHI.Physics.Signature31OrbitActionAgreement as OAA public
