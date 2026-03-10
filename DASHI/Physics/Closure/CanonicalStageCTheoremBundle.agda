@@ -26,11 +26,16 @@ open import DASHI.Physics.Closure.SecondaryConstraintGaugeInstance as SCGI
 open import DASHI.Physics.Closure.KnownLimitsLocalRecoveryTheorem as KLRT
 open import DASHI.Physics.Closure.KnownLimitsEffectiveGeometryTheorem as KLET
 open import DASHI.Physics.Closure.KnownLimitsCausalPropagationTheorem as KLCPT
+open import DASHI.Physics.Closure.KnownLimitsLocalCausalEffectivePropagationTheorem as KLCEPT
 open import DASHI.Physics.Closure.KnownLimitsGeometryTransportTheorem as KLGT
+open import DASHI.Physics.Closure.KnownLimitsLocalCausalGeometryCoherenceTheorem as KLCGCT
 open import DASHI.Physics.Closure.KnownLimitsExtendedLocalRecoveryTheorem as KLER
 open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
 open import DASHI.Physics.Closure.KnownLimitsRecoveredLocalRegimeTheorem as KLRLR
 open import DASHI.Physics.Closure.KnownLimitsCompleteLocalRegimeTheorem as KLCLR
+open import DASHI.Physics.Closure.CanonicalDynamicsLawTheorem as CDLT
+open import DASHI.Physics.Closure.KnownLimitsMatterGaugeTheorem as KLMGT
+open import DASHI.Physics.Closure.KnownLimitsFullMatterGaugeTheorem as KLMGFT
 open import DASHI.Physics.Closure.KnownLimitsRecoveredDynamicsTheorem as KLRDT
 open import DASHI.Physics.Closure.KnownLimitsRecoveredObservablesTheorem as KLROT
 open import DASHI.Physics.Closure.KnownLimitsRecoveredObservableGeometryTheorem as KLROG
@@ -207,11 +212,16 @@ record CanonicalStageCTheoremBundle : Setω where
     localRecoverySummary : KLRT.KnownLimitsLocalRecoveryTheorem
     effectiveGeometrySummary : KLET.KnownLimitsEffectiveGeometryTheorem
     causalPropagationSummary : KLCPT.KnownLimitsCausalPropagationTheorem
+    localCausalEffectivePropagationSummary :
+      KLCEPT.KnownLimitsLocalCausalEffectivePropagationTheorem
     geometryTransportSummary : KLGT.KnownLimitsGeometryTransportTheorem
+    localCausalGeometryCoherenceSummary :
+      KLCGCT.KnownLimitsLocalCausalGeometryCoherenceTheorem
     extendedLocalRecoverySummary : KLER.KnownLimitsExtendedLocalRecoveryTheorem
     localPhysicsCoherenceSummary : KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
     recoveredLocalRegimeSummary : KLRLR.KnownLimitsRecoveredLocalRegimeTheorem
     completeLocalRegimeSummary : KLCLR.KnownLimitsCompleteLocalRegimeTheorem
+    dynamicsLawSummary : CDLT.CanonicalDynamicsLawTheorem
     recoveredDynamicsSummary : KLRDT.KnownLimitsRecoveredDynamicsTheorem
     recoveredObservablesSummary : KLROT.KnownLimitsRecoveredObservablesTheorem
     recoveredObservableGeometrySummary :
@@ -255,6 +265,10 @@ record CanonicalStageCTheoremBundle : Setω where
     recoveredWaveObservableTransportGeometryRegimeIntegritySummary :
       RWR.KnownLimitsRecoveredWaveObservableTransportGeometryRegimeIntegrityTheorem
     spinBridgeSummary : SLLB.SpinLocalLorentzBridge CSC.canonicalClosure
+    knownLimitsMatterGaugeSummary :
+      KLMGT.KnownLimitsMatterGaugeTheorem
+    knownLimitsFullMatterGaugeSummary :
+      KLMGFT.KnownLimitsFullMatterGaugeTheorem
     knownLimitsGRBridgeSummary :
       KLBGT.KnownLimitsGRBridgeTheorem
     knownLimitsQFTBridgeSummary :
@@ -370,7 +384,11 @@ canonicalStageCTheoremBundle =
     ; localRecoverySummary = CSC.canonicalKnownLimitsLocalRecoveryTheorem
     ; effectiveGeometrySummary = CSC.canonicalKnownLimitsEffectiveGeometryTheorem
     ; causalPropagationSummary = CSC.canonicalKnownLimitsCausalPropagationTheorem
+    ; localCausalEffectivePropagationSummary =
+        CSC.canonicalKnownLimitsLocalCausalEffectivePropagationTheorem
     ; geometryTransportSummary = KLGT.canonicalKnownLimitsGeometryTransportTheorem
+    ; localCausalGeometryCoherenceSummary =
+        CSC.canonicalKnownLimitsLocalCausalGeometryCoherenceTheorem
     ; extendedLocalRecoverySummary =
         CSC.canonicalKnownLimitsExtendedLocalRecoveryTheorem
     ; localPhysicsCoherenceSummary =
@@ -379,6 +397,7 @@ canonicalStageCTheoremBundle =
         CSC.canonicalKnownLimitsRecoveredLocalRegimeTheorem
     ; completeLocalRegimeSummary =
         CSC.canonicalKnownLimitsCompleteLocalRegimeTheorem
+    ; dynamicsLawSummary = CSC.canonicalDynamicsLawTheorem
     ; recoveredDynamicsSummary =
         CSC.canonicalKnownLimitsRecoveredDynamicsTheorem
     ; recoveredObservablesSummary =
@@ -424,6 +443,9 @@ canonicalStageCTheoremBundle =
     ; recoveredWaveObservableTransportGeometryRegimeIntegritySummary =
         CSC.canonicalKnownLimitsRecoveredWaveObservableTransportGeometryRegimeIntegrityTheorem
     ; spinBridgeSummary = CSC.canonicalSpinLocalLorentzBridge
+    ; knownLimitsMatterGaugeSummary = CSC.canonicalKnownLimitsMatterGaugeTheorem
+    ; knownLimitsFullMatterGaugeSummary =
+        CSC.canonicalKnownLimitsFullMatterGaugeTheorem
     ; knownLimitsGRBridgeSummary = CSC.canonicalKnownLimitsGRBridgeTheorem
     ; knownLimitsQFTBridgeSummary = CSC.canonicalKnownLimitsQFTBridgeTheorem
     }

@@ -86,12 +86,17 @@ import DASHI.Physics.Closure.KnownLimitsEffectiveGeometryTheorem as KLET
 import DASHI.Physics.Closure.KnownLimitsLocalRecoveryTheorem as KLRT
 import DASHI.Physics.Closure.KnownLimitsRecoveryPackage as KLRP
 import DASHI.Physics.Closure.KnownLimitsRecoveryWitness as KLRW
+import DASHI.Physics.Closure.KnownLimitsLocalCausalEffectivePropagationTheorem as KLCEPT
+import DASHI.Physics.Closure.KnownLimitsLocalCausalGeometryCoherenceTheorem as KLCGCT
+import DASHI.Physics.Closure.KnownLimitsMatterGaugeTheorem as KLMGT
+import DASHI.Physics.Closure.KnownLimitsFullMatterGaugeTheorem as KLMGFT
 import DASHI.Physics.Closure.KnownLimitsGeometryTransportTheorem as KLGT
 import DASHI.Physics.Closure.KnownLimitsLocalCoherenceTheorem as KLLCT
 import DASHI.Physics.Closure.KnownLimitsExtendedLocalRecoveryTheorem as KLER
 import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
 import DASHI.Physics.Closure.KnownLimitsRecoveredLocalRegimeTheorem as KLRLR
 import DASHI.Physics.Closure.KnownLimitsCompleteLocalRegimeTheorem as KLCLR
+import DASHI.Physics.Closure.CanonicalDynamicsLawTheorem as CDLT
 import DASHI.Physics.Closure.KnownLimitsRecoveredDynamicsTheorem as KLRDT
 import DASHI.Physics.Closure.KnownLimitsRecoveredObservablesTheorem as KLROT
 import DASHI.Physics.Closure.KnownLimitsRecoveredObservableGeometryTheorem as KLROG
@@ -1122,6 +1127,15 @@ canonicalKnownLimitsRecovery = KLR.canonicalKnownLimitsRecovery
 canonicalKnownLimitsRecoveryWitness : KLRW.KnownLimitsRecoveryWitnessPlus
 canonicalKnownLimitsRecoveryWitness = KLRW.canonicalKnownLimitsRecoveryWitness
 
+canonicalKnownLimitsMatterGaugeTheorem :
+  KLMGT.KnownLimitsMatterGaugeTheorem
+canonicalKnownLimitsMatterGaugeTheorem = KLMGT.canonicalKnownLimitsMatterGaugeTheorem
+
+canonicalKnownLimitsFullMatterGaugeTheorem :
+  KLMGFT.KnownLimitsFullMatterGaugeTheorem
+canonicalKnownLimitsFullMatterGaugeTheorem =
+  KLMGFT.canonicalKnownLimitsFullMatterGaugeTheorem
+
 canonicalKnownLimitsLocalRecoveryTheorem :
   KLRT.KnownLimitsLocalRecoveryTheorem
 canonicalKnownLimitsLocalRecoveryTheorem =
@@ -1142,10 +1156,20 @@ canonicalKnownLimitsCausalPropagationTheorem :
 canonicalKnownLimitsCausalPropagationTheorem =
   KLCPT.canonicalKnownLimitsCausalPropagationTheorem
 
+canonicalKnownLimitsLocalCausalEffectivePropagationTheorem :
+  KLCEPT.KnownLimitsLocalCausalEffectivePropagationTheorem
+canonicalKnownLimitsLocalCausalEffectivePropagationTheorem =
+  KLCEPT.canonicalKnownLimitsLocalCausalEffectivePropagationTheorem
+
 canonicalKnownLimitsGeometryTransportTheorem :
   KLGT.KnownLimitsGeometryTransportTheorem
 canonicalKnownLimitsGeometryTransportTheorem =
   KLGT.canonicalKnownLimitsGeometryTransportTheorem
+
+canonicalKnownLimitsLocalCausalGeometryCoherenceTheorem :
+  KLCGCT.KnownLimitsLocalCausalGeometryCoherenceTheorem
+canonicalKnownLimitsLocalCausalGeometryCoherenceTheorem =
+  KLCGCT.canonicalKnownLimitsLocalCausalGeometryCoherenceTheorem
 
 canonicalKnownLimitsLocalCoherenceTheorem :
   KLLCT.KnownLimitsLocalCoherenceTheorem
@@ -1171,6 +1195,10 @@ canonicalKnownLimitsCompleteLocalRegimeTheorem :
   KLCLR.KnownLimitsCompleteLocalRegimeTheorem
 canonicalKnownLimitsCompleteLocalRegimeTheorem =
   KLCLR.canonicalKnownLimitsCompleteLocalRegimeTheorem
+
+canonicalDynamicsLawTheorem :
+  CDLT.CanonicalDynamicsLawTheorem
+canonicalDynamicsLawTheorem = CDLT.canonicalDynamicsLawTheorem
 
 canonicalKnownLimitsRecoveredDynamicsTheorem :
   KLRDT.KnownLimitsRecoveredDynamicsTheorem

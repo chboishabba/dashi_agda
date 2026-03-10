@@ -6,11 +6,15 @@ open import DASHI.Physics.Closure.CanonicalStageC as CSC
 open import DASHI.Physics.Closure.CanonicalStageCStatus as CSS
 open import DASHI.Physics.Closure.CanonicalStageCTheoremBundle as CSTB
 open import DASHI.Physics.Closure.CanonicalGaugeConstraintRealizedInstances as CGCRI
+open import DASHI.Physics.Closure.KnownLimitsFullMatterGaugeTheorem as KLMGFT
+open import DASHI.Physics.Closure.KnownLimitsLocalCausalEffectivePropagationTheorem as KLCEPT
+open import DASHI.Physics.Closure.KnownLimitsLocalCausalGeometryCoherenceTheorem as KLCGCT
 open import DASHI.Physics.Closure.KnownLimitsLocalCoherenceTheorem as KLLCT
 open import DASHI.Physics.Closure.KnownLimitsExtendedLocalRecoveryTheorem as KLER
 open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
 open import DASHI.Physics.Closure.KnownLimitsRecoveredLocalRegimeTheorem as KLRLR
 open import DASHI.Physics.Closure.KnownLimitsCompleteLocalRegimeTheorem as KLCLR
+open import DASHI.Physics.Closure.CanonicalDynamicsLawTheorem as CDLT
 open import DASHI.Physics.Closure.KnownLimitsRecoveredDynamicsTheorem as KLRDT
 open import DASHI.Physics.Closure.KnownLimitsRecoveredObservablesTheorem as KLROT
 open import DASHI.Physics.Closure.KnownLimitsRecoveredObservableGeometryTheorem as KLROG
@@ -42,11 +46,17 @@ record CanonicalStageCSummaryBundle : Setω where
     closureStatus : CSS.ClosureSurfaceStatus
     theoremBundle : CSTB.CanonicalStageCTheoremBundle
     realizedGaugeInstances : CGCRI.CanonicalGaugeConstraintRealizedInstances
+    fullMatterGauge : KLMGFT.KnownLimitsFullMatterGaugeTheorem
+    localCausalEffectivePropagation :
+      KLCEPT.KnownLimitsLocalCausalEffectivePropagationTheorem
+    localCausalGeometryCoherence :
+      KLCGCT.KnownLimitsLocalCausalGeometryCoherenceTheorem
     localCoherence : KLLCT.KnownLimitsLocalCoherenceTheorem
     extendedLocalRecovery : KLER.KnownLimitsExtendedLocalRecoveryTheorem
     localPhysicsCoherence : KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
     recoveredLocalRegime : KLRLR.KnownLimitsRecoveredLocalRegimeTheorem
     completeLocalRegime : KLCLR.KnownLimitsCompleteLocalRegimeTheorem
+    dynamicsLaw : CDLT.CanonicalDynamicsLawTheorem
     recoveredDynamics : KLRDT.KnownLimitsRecoveredDynamicsTheorem
     recoveredObservables : KLROT.KnownLimitsRecoveredObservablesTheorem
     recoveredObservableGeometry :
@@ -147,11 +157,17 @@ canonicalStageCSummaryBundle =
     { closureStatus = CSC.canonicalClosureStatus
     ; theoremBundle = CSTB.canonicalStageCTheoremBundle
     ; realizedGaugeInstances = CGCRI.canonicalGaugeConstraintRealizedInstances
+    ; fullMatterGauge = CSC.canonicalKnownLimitsFullMatterGaugeTheorem
+    ; localCausalEffectivePropagation =
+        CSC.canonicalKnownLimitsLocalCausalEffectivePropagationTheorem
+    ; localCausalGeometryCoherence =
+        CSC.canonicalKnownLimitsLocalCausalGeometryCoherenceTheorem
     ; localCoherence = KLLCT.canonicalKnownLimitsLocalCoherenceTheorem
     ; extendedLocalRecovery = CSC.canonicalKnownLimitsExtendedLocalRecoveryTheorem
     ; localPhysicsCoherence = CSC.canonicalKnownLimitsLocalPhysicsCoherenceTheorem
     ; recoveredLocalRegime = CSC.canonicalKnownLimitsRecoveredLocalRegimeTheorem
     ; completeLocalRegime = CSC.canonicalKnownLimitsCompleteLocalRegimeTheorem
+    ; dynamicsLaw = CSC.canonicalDynamicsLawTheorem
     ; recoveredDynamics = CSC.canonicalKnownLimitsRecoveredDynamicsTheorem
     ; recoveredObservables = CSC.canonicalKnownLimitsRecoveredObservablesTheorem
     ; recoveredObservableGeometry =
