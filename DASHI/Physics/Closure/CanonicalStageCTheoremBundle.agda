@@ -52,6 +52,7 @@ open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
 open import DASHI.Physics.Closure.SpinLocalLorentzBridgeTheorem as SLLB
 open import DASHI.Physics.Closure.KnownLimitsGRBridgeTheorem as KLBGT
 open import DASHI.Physics.Closure.KnownLimitsQFTBridgeTheorem as KLBQFT
+open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 
 record CanonicalStageCTheoremBundle : Setω where
   field
@@ -219,6 +220,8 @@ record CanonicalStageCTheoremBundle : Setω where
       KLCGCT.KnownLimitsLocalCausalGeometryCoherenceTheorem
     extendedLocalRecoverySummary : KLER.KnownLimitsExtendedLocalRecoveryTheorem
     localPhysicsCoherenceSummary : KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
+    contractionForcingSummary :
+      CFQT.ContractionForcesQuadraticTheorem
     recoveredLocalRegimeSummary : KLRLR.KnownLimitsRecoveredLocalRegimeTheorem
     completeLocalRegimeSummary : KLCLR.KnownLimitsCompleteLocalRegimeTheorem
     dynamicsLawSummary : CDLT.CanonicalDynamicsLawTheorem
@@ -393,6 +396,8 @@ canonicalStageCTheoremBundle =
         CSC.canonicalKnownLimitsExtendedLocalRecoveryTheorem
     ; localPhysicsCoherenceSummary =
         CSC.canonicalKnownLimitsLocalPhysicsCoherenceTheorem
+    ; contractionForcingSummary =
+        CSC.canonicalContractionForcesQuadraticTheorem
     ; recoveredLocalRegimeSummary =
         CSC.canonicalKnownLimitsRecoveredLocalRegimeTheorem
     ; completeLocalRegimeSummary =

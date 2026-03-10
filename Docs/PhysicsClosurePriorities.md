@@ -102,7 +102,8 @@ Immediate next step after this snapshot:
 - immediate theorem/benchmark sub-goals:
   finish the arithmetic lemma layer for the full parametric shell-1 theorem,
   formalize the χ²-boundary witness on the shift reference,
-  and add a typed snap-threshold benchmark from the concrete severity policy.
+  and extend the typed snap-threshold benchmark beyond the reference shift
+  witness with a second boundary case from the concrete severity policy.
 - current closure hardening object:
   keep the canonical Stage C path on concrete constraint closure and real shift
   dynamics, and remove the remaining trivial closure shim from the empirical
@@ -222,9 +223,10 @@ Immediate first implementation:
   theorem-backed from existing shift witnesses, because the real closure kit
   already carries `obsFixed` and `obsUnique`.
 - the next benchmark hardening step is:
-  use the landed concrete χ²-boundary witness and standalone snap-threshold
-  report as the new baseline, then decide whether to promote the χ² side into
-  a broader falsifier theorem or explicit counterexample library.
+  use the landed concrete χ²-boundary witness plus the expanded snap-threshold
+  report (now carrying multiple boundary cases) as the new baseline, then
+  decide whether to promote the χ² side into a broader falsifier theorem or
+  explicit counterexample library.
 - immediate next validation refinement:
   grow the single shift χ²-boundary witness into an explicit small witness
   library so the Fejér benchmark has a real counterexample surface rather

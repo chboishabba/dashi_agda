@@ -78,3 +78,12 @@ rigiditySuite =
     ; admissibleReport = SOA.syntheticAdmissibleReport
     ; negativeControlReport = tailPermReport
     }
+
+rigidityAggregate : RPRR.RealizationProfileRigidityAggregate
+rigidityAggregate =
+  record
+    { selfReport = referenceSelfReport
+    ; syntheticAdmissibleReport = SOA.syntheticAdmissibleReport
+    ; secondaryAdmissibleReport = boolInvReport
+    ; negativeControlReport = tailPermReport
+    }

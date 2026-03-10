@@ -107,8 +107,9 @@ Current priorities:
 - state a falsifiability/deviation boundary for the framework.
 - immediate validation hardening:
   move the Fejér-over-χ² reference from `interfaceWired` to a concrete
-  shift-side χ²-boundary witness, and add a standalone snap-threshold law
-  benchmark sourced from the same severity/snap policy layer.
+  shift-side χ²-boundary witness, and extend the standalone snap-threshold law
+  benchmark beyond the reference witness with a second boundary case from the
+  same severity/snap policy layer.
 
 ## Forward Prediction Table
 
@@ -116,17 +117,17 @@ These are **not** current theorem outputs. They are forward claims suggested by
 the present closure stack and should be tested on new realizations, datasets,
 or regimes.
 
-| Claim | Source modules | Confidence | What would falsify it |
-| --- | --- | --- | --- |
-| Profile rigidity across new realizations | `Signature31FromShiftOrbitProfile`, `ConeArrowIsotropyShiftOrbitEnumeration` | High | A new 4D realization preserving the same cone/arrow/isotropy structure produces a different shell-profile class or fails to select `(3,1)`. |
-| Fejér-over-χ² monotonicity | `ShiftSeamCertificates`, `EnergyClosestPointShiftInstance`, `MDLFejerAxiomsShift` | High | A compatible shift-like regime shows persistent χ²-style improvement while Fejér/MDL observables lose monotonicity or closest-point behavior. |
-| Observable-space collapse | `RealClosureKitFiber`, `DynamicalClosureShiftInstance` | High | Distinct microstates in the same observable quotient fail to converge to the same observable endpoint in the closure-compatible regime. |
-| Snap-threshold transition law | `SnapSignatureShiftInstance`, `RealConeMonotoneExceptSnapsShift`, `SeverityGuard*` modules | Medium | Regime changes occur diffusely rather than clustering at snap/severity threshold events. |
-| Witness-policy robustness | `WitnessSetPolicy`, `EmpiricalClosureWithWitnessPolicy`, `EmpiricalClosureWithSignatureLock` | Medium | Admissible witness-policy changes alter the final signature/closure classification rather than only efficiency or convergence behavior. |
-| Cone-split persistence | `PhysicsClosureEmpiricalWithConeSplit`, `ArrowSeparatedDeltaConeSplit*`, `MaskedOrthogonalSplit` | Medium | New compatible datasets fail to preserve near-zero cross terms or stable quadratic split structure. |
-| Beta-seam universality | `BetaSeamCertificates*`, `BetaSeamCSVEvidence`, `PhysicsClosureEmpiricalBetaInstance` | Medium | Two seam bundles satisfying the same certificate interface lead to incompatible closure observables. |
-| Defect-density / curvature correlation | `DefectDensityCurvature`, `EinsteinFromDefect` | Low | Persistent defect concentration shows no correlation with effective curvature concentration in the intended closure regime. |
-| Area-law style admissible-state growth | `Holography.AreaLaw` | Low | Admissible-state growth tracks bulk volume systematically better than boundary complexity in closure-compatible regimes. |
+| Claim | Source modules | Confidence | What would falsify it | Preferred test harness / dataset |
+| --- | --- | --- | --- | --- |
+| Profile rigidity across new realizations | `Signature31FromShiftOrbitProfile`, `ConeArrowIsotropyShiftOrbitEnumeration` | High | A new 4D realization preserving the same cone/arrow/isotropy structure produces a different shell-profile class or fails to select `(3,1)`. | `RealizationProfileRigidityShift` harness with admissible realizations (synthetic one-minus, Bool inversion, and future `B₄`). |
+| Fejér-over-χ² monotonicity | `ShiftSeamCertificates`, `EnergyClosestPointShiftInstance`, `MDLFejerAxiomsShift` | High | A compatible shift-like regime shows persistent χ²-style improvement while Fejér/MDL observables lose monotonicity or closest-point behavior. | `FejerOverChiSquaredShift` harness plus χ² boundary library cases. |
+| Observable-space collapse | `RealClosureKitFiber`, `DynamicalClosureShiftInstance` | High | Distinct microstates in the same observable quotient fail to converge to the same observable endpoint in the closure-compatible regime. | `ObservableCollapseShift` harness from `RealClosureKitFiber.obsFixed`/`obsUnique`. |
+| Snap-threshold transition law | `SnapSignatureShiftInstance`, `RealConeMonotoneExceptSnapsShift`, `SeverityGuard*` modules, `SnapThresholdLawShift`, `SnapThresholdLawShiftSecondary` | Medium | Regime changes occur diffusely rather than clustering at snap/severity threshold events. | `SnapThresholdLawShift` + `SnapThresholdLawShiftSecondary` harnesses. |
+| Witness-policy robustness | `WitnessSetPolicy`, `EmpiricalClosureWithWitnessPolicy`, `EmpiricalClosureWithSignatureLock` | Medium | Admissible witness-policy changes alter the final signature/closure classification rather than only efficiency or convergence behavior. | Witness-policy perturbation harness (pending) on `EmpiricalClosureWithWitnessPolicy`. |
+| Cone-split persistence | `PhysicsClosureEmpiricalWithConeSplit`, `ArrowSeparatedDeltaConeSplit*`, `MaskedOrthogonalSplit` | Medium | New compatible datasets fail to preserve near-zero cross terms or stable quadratic split structure. | `MaskedOrthogonalSplit` empirical gate + cone-split CSV evidence runs. |
+| Beta-seam universality | `BetaSeamCertificates*`, `BetaSeamCSVEvidence`, `PhysicsClosureEmpiricalBetaInstance` | Medium | Two seam bundles satisfying the same certificate interface lead to incompatible closure observables. | `BetaSeamCSVEvidence` dataset / certificate replay. |
+| Defect-density / curvature correlation | `DefectDensityCurvature`, `EinsteinFromDefect` | Low | Persistent defect concentration shows no correlation with effective curvature concentration in the intended closure regime. | Defect-density curvature CSV/replay harness (pending). |
+| Area-law style admissible-state growth | `Holography.AreaLaw` | Low | Admissible-state growth tracks bulk volume systematically better than boundary complexity in closure-compatible regimes. | Area-law sweep over synthetic admissible-state datasets (pending). |
 
 ## Validation Priority
 
@@ -396,6 +397,10 @@ This means the current closure stack is already stronger at the
 **signature-rigidity** level than at the **exact shell-profile-rigidity**
 level. The next validation work should preserve this distinction explicitly.
 
+The validation summary now also exposes a falsifiability/deviation boundary
+for the shift profile: mirror-signature exclusion plus the competing 4D
+candidate profile failures are bundled as a typed boundary report.
+
 ## Next Runnable Benchmark
 
 The next runnable benchmark after the rigidity snapshot is:
@@ -444,7 +449,7 @@ the present Stage C path.
   now carried by a concrete shift-side boundary witness from the
   snap/`chi2Spike` severity layer,
   with the standalone snap-threshold benchmark exposed separately as its own
-  typed report.
+  typed report that now includes a secondary shift-side boundary case.
 
 For the current `P0/P1/P2` execution order, see
 `Docs/PhysicsClosurePriorities.md`.

@@ -55,8 +55,23 @@ caseB =
     ; brokenWitness = NatP.≤-refl
     }
 
+caseC-state : RTC.Carrier TRI.n
+caseC-state =
+  replicate TRI.m zer ++ (neg ∷ pos ∷ pos ∷ neg ∷ [])
+
+caseC : Chi2BoundaryCase
+caseC =
+  record
+    { label = "tail-cross-signs"
+    ; state = caseC-state
+    ; code-special4 = refl
+    ; severity4 = refl
+    ; snapWitness = NatP.≤-refl
+    ; brokenWitness = NatP.≤-refl
+    }
+
 caseCount : Nat
-caseCount = 2
+caseCount = 3
 
 primarySecondary : Chi2BoundaryCase × Chi2BoundaryCase
 primarySecondary = caseA , caseB

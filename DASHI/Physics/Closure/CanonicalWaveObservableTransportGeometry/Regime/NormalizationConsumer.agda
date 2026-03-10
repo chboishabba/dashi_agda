@@ -4,7 +4,8 @@ open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
 open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.CalibrationConsumer as CWOTGRCALC
-open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.NormalizationTheorem as KLRWOTGRNORM
+open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
+module KLRWOTGRNORM = RWR
 
 record WaveObservableTransportGeometryRegimeNormalizationConsumerFromMinimal
          (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where

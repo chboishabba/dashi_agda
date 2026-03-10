@@ -21,6 +21,13 @@ record RealizationProfileRigiditySuite : Set where
     admissibleReport : RealizationProfileRigidityReport
     negativeControlReport : RealizationProfileRigidityReport
 
+record RealizationProfileRigidityAggregate : Set where
+  field
+    selfReport : RealizationProfileRigidityReport
+    syntheticAdmissibleReport : RealizationProfileRigidityReport
+    secondaryAdmissibleReport : RealizationProfileRigidityReport
+    negativeControlReport : RealizationProfileRigidityReport
+
 buildReport :
   (reference candidate : RPR.RealizationObservation) →
   RealizationProfileRigidityReport

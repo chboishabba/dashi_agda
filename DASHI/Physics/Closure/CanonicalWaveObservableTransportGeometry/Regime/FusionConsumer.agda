@@ -4,7 +4,8 @@ open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
 open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.SynthesisConsumer as CWOTGRSYNC
-open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.FusionTheorem as KLRWOTGRFUS
+open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
+module KLRWOTGRFUS = RWR
 
 record WaveObservableTransportGeometryRegimeFusionConsumerFromMinimal
          (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where

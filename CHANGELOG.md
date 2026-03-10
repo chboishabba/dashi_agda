@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-03-10
+
+- added a typed falsifiability/deviation boundary harness + report that bundles
+  mirror-signature exclusion with competing 4D profile failures, and wired the
+  shift instance verdict into the validation summary and top-level imports.
+- extended the snap-threshold benchmark beyond the reference shift witness with
+  a secondary shift-side boundary case, and exposed its verdict in the
+  validation summary.
+- expanded the forward prediction table with preferred harness/dataset notes
+  for each claim.
+- added an observable prediction evidence bundle that packages signature-lock
+  and beta-seam CSV evidence alongside the observable prediction package.
+
 ## 2026-03-09
 
 - aligned repo docs/TODO/context with the stronger archive-backed

@@ -26,6 +26,7 @@ open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservablesTheorem as 
 open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportTheorem as KLRWOT
 open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometryTheorem as KLRWOTG
 open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometryCoherenceTheorem as KLRWOTGC
+open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
 open import DASHI.Physics.Closure.CanonicalGeometryConsumer as CGC
 open import DASHI.Physics.Closure.CanonicalObservableConsumer as COC
@@ -57,6 +58,7 @@ record CanonicalStageCSummaryBundle : Setω where
     recoveredLocalRegime : KLRLR.KnownLimitsRecoveredLocalRegimeTheorem
     completeLocalRegime : KLCLR.KnownLimitsCompleteLocalRegimeTheorem
     dynamicsLaw : CDLT.CanonicalDynamicsLawTheorem
+    contractionForcing : CFQT.ContractionForcesQuadraticTheorem
     recoveredDynamics : KLRDT.KnownLimitsRecoveredDynamicsTheorem
     recoveredObservables : KLROT.KnownLimitsRecoveredObservablesTheorem
     recoveredObservableGeometry :
@@ -168,6 +170,7 @@ canonicalStageCSummaryBundle =
     ; recoveredLocalRegime = CSC.canonicalKnownLimitsRecoveredLocalRegimeTheorem
     ; completeLocalRegime = CSC.canonicalKnownLimitsCompleteLocalRegimeTheorem
     ; dynamicsLaw = CSC.canonicalDynamicsLawTheorem
+    ; contractionForcing = CSC.canonicalContractionForcesQuadraticTheorem
     ; recoveredDynamics = CSC.canonicalKnownLimitsRecoveredDynamicsTheorem
     ; recoveredObservables = CSC.canonicalKnownLimitsRecoveredObservablesTheorem
     ; recoveredObservableGeometry =

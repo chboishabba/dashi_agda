@@ -4,7 +4,8 @@ open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
 open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.OperabilityConsumer as CWOTGROPERC
-open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.DurabilityTheorem as KLRWOTGRDUR
+open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
+module KLRWOTGRDUR = RWR
 
 record WaveObservableTransportGeometryRegimeDurabilityConsumerFromMinimal
          (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where

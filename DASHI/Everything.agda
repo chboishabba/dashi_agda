@@ -343,7 +343,11 @@ import DASHI.Physics.Closure.MinimalCrediblePhysicsClosureShiftInstance
 import DASHI.Physics.Closure.MinimalCrediblePhysicsClosureValidation
 import DASHI.Physics.Closure.MinimalCrediblePhysicsClosureValidationShiftInstance
 import DASHI.Physics.Closure.ObservablePredictionPackage
+import DASHI.Physics.Closure.ObservablePredictionEvidence
 import DASHI.Physics.Closure.Validation.RealizationProfileRigidity
+import DASHI.Physics.Closure.Validation.FalsifiabilityBoundary
+import DASHI.Physics.Closure.Validation.FalsifiabilityBoundaryReport
+import DASHI.Physics.Closure.Validation.FalsifiabilityBoundaryShift
 import DASHI.Physics.Closure.Validation.FejerOverChiSquared
 import DASHI.Physics.Closure.Validation.FejerOverChiSquaredReport
 import DASHI.Physics.Closure.Validation.FejerOverChiSquaredShift

@@ -4,7 +4,8 @@ open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
 open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.AdaptabilityConsumer as CWOTGRADAPTC
-open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.ScalabilityTheorem as KLRWOTGRSCAL
+open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
+module KLRWOTGRSCAL = RWR
 
 record WaveObservableTransportGeometryRegimeScalabilityConsumerFromMinimal
          (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where

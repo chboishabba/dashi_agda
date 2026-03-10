@@ -126,7 +126,7 @@ Priority bucket: `P0` first, then `P1`
   no modularity theorem,
   no umbral identification,
   no Monster trace claim yet.
-- Add a validation table for each forward claim:
+- [x] Add a validation table for each forward claim:
   source modules,
   confidence level,
   falsifier,
@@ -141,23 +141,23 @@ Priority bucket: `P0` first, then `P1`
   `obsUnique`, then expose its verdict through the repo-facing validation
   summary.
 - Snap-threshold benchmark:
-  landed for the shift reference; next extend it beyond the current witness
-  state and decide whether the right next step is a richer falsifier surface
-  or additional realization coverage.
-- Build the profile-rigidity harness first.
+  now includes the shift reference plus a secondary boundary case from the
+  χ²-boundary library; next decide whether the right step is a richer
+  falsifier surface or additional realization coverage.
+- [x] Build the profile-rigidity harness first.
   Concrete sub-tasks:
   define the benchmark interface,
   add an alternate realization slot,
   emit a typed benchmark report,
   connect the report to the minimum-credible closure adapter.
-- The tail-permutation comparison is now the first negative control, not the
+- [x] The tail-permutation comparison is now the first negative control, not the
   first admissible alternate realization.
 - Next validation task after the negative control:
   add one genuinely closure-compatible alternate realization that exposes the
   full orientation/profile/signature surface.
-- First canonical admissible alternate realization:
+- [x] First canonical admissible alternate realization:
   the synthetic one-minus realization on the 4D Lorentz-family profile path.
-- Secondary admissible comparison:
+- [x] Secondary admissible comparison:
   the 4D Bool inversion realization on the `(3,1)` mask.
 - Next mathematically serious alternate realization after the current
   synthetic/bool-inversion pair:
@@ -168,49 +168,49 @@ Priority bucket: `P0` first, then `P1`
 - Next sub-task after the independent report:
   classify the `B₄` shell neighborhood explicitly and only then decide whether
   orientation/signature promotion is even plausible.
-- Add an explicit admissible-realization interface so future comparison
+- [x] Add an explicit admissible-realization interface so future comparison
   candidates cannot silently omit orientation/signature data.
-- Keep the synthetic one-minus admissible result recorded as `exactMatch`.
-- Keep the Bool inversion admissible result recorded as
+- [x] Keep the synthetic one-minus admissible result recorded as `exactMatch`.
+- [x] Keep the Bool inversion admissible result recorded as
   `signatureOnlyMatch`.
-- Add one aggregate validation/report object that exposes:
+- [x] Add one aggregate validation/report object that exposes:
   self exact match,
   synthetic one-minus admissible result,
   Bool inversion secondary admissible result,
   tail-permutation negative control.
-- Lift that aggregate rigidity report into a closure-facing adapter so the
+- [x] Lift that aggregate rigidity report into a closure-facing adapter so the
   minimum-credible Stage C entrypoint exposes both:
   theorem-backed closure data and current validation status.
-- Add one repo-facing closure summary surface that re-exports the current
+- [x] Add one repo-facing closure summary surface that re-exports the current
   rigidity suite verdicts directly from the minimum-credible validation
   adapter.
-- After the summary surface lands, move the next runnable benchmark to:
+- [x] After the summary surface lands, move the next runnable benchmark to:
   Fejer-over-χ² monotonicity.
-- Fejer-over-χ² benchmark sub-tasks:
+- [x] Fejer-over-χ² benchmark sub-tasks:
   define the benchmark report type,
   define an explicit χ² falsifier-status type,
   add a shift reference harness,
   expose the current benchmark verdict from theorem-backed Fejér /
   closest-point / MDL witnesses.
-- Upgrade the χ² side from `pending` to an intermediate
+- [x] Upgrade the χ² side from `pending` to an intermediate
   `interfaceWired` status when the snap / `chi2Spike` boundary is present.
-- Immediate χ²-side hardening:
+- [x] Immediate χ²-side hardening:
   landed via a concrete shift-side χ²-boundary witness from the severity/snap
   layer; next decide whether to promote that witness into a broader falsifier
   theorem or an explicit counterexample library.
-- Immediate χ²-side implementation step:
+- [x] Immediate χ²-side implementation step:
   add a small typed shift-side boundary/counterexample library with more than
   one witness state, then surface it through the validation summary before
   attempting a larger falsifier theorem.
-- After that, the next Fejér benchmark target is a standalone formalized χ²
+- [x] After that, the next Fejér benchmark target is a standalone formalized χ²
   falsifier theorem or counterexample witness.
-- Keep the positive side non-placeholder:
+- [x] Keep the positive side non-placeholder:
   benchmark facts/reports should carry the actual theorem witnesses instead of
   only boolean flags.
-- Add one falsifiability / deviation boundary to the same interface.
+- [x] Add one falsifiability / deviation boundary to the same interface.
   Current minimum:
   mirror-signature exclusion plus failure of competing 4D candidate profiles.
-- Promote existing CSV/evidence modules into consumers/providers of the same
+- [x] Promote existing CSV/evidence modules into consumers/providers of the same
   observable package instead of parallel wrappers.
 
 ## Shared Integration
@@ -388,7 +388,7 @@ Cleanup
 - [x] Add a canonical `LocalProgramBundle` for the frozen local ladder.
 - [x] Point `Closure/Canonical/Ladder` at grouped ladder surfaces rather than mirroring `CanonicalStageC`.
 - [x] Rewire `PhysicsClosureValidationSummary` to grouped wave-regime imports only.
-- [ ] Rewire remaining canonical modules away from direct per-rung wave-regime imports.
+- [x] Rewire remaining canonical modules away from direct per-rung wave-regime imports.
 - [x] Add the `Traceability` rung across algebra, recovery, consumer, and moonshine summary surfaces.
 - [x] Add the `Auditability` rung across algebra, recovery, consumer, and moonshine summary surfaces.
 - [x] Add the `Reliability` rung across algebra, recovery, consumer, and moonshine summary surfaces.

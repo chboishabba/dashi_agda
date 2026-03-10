@@ -31,6 +31,12 @@ open import DASHI.Physics.Closure.Validation.FejerOverChiSquared as FCS public
 open import DASHI.Physics.Closure.Validation.FejerOverChiSquaredReport as FCSR
 open import DASHI.Physics.Closure.Validation.FejerOverChiSquaredShift as FCSS
 open import DASHI.Physics.Closure.Validation.Chi2BoundaryShiftLibrary as CBSL
+open import DASHI.Physics.Closure.Validation.Chi2BoundaryShiftTheorem as CBST public
+  using (Chi2BoundaryShiftTheorem; canonicalChi2BoundaryShiftTheorem)
+open import DASHI.Physics.Closure.Validation.FalsifiabilityBoundary as FB public
+  using (FalsifiabilityBoundaryVerdict)
+open import DASHI.Physics.Closure.Validation.FalsifiabilityBoundaryReport as FBR
+open import DASHI.Physics.Closure.Validation.FalsifiabilityBoundaryShift as FBS
 open import DASHI.Physics.Closure.Validation.ObservableCollapse as OC public
   using (ObservableCollapseVerdict)
 open import DASHI.Physics.Closure.Validation.ObservableCollapseReport as OCR
@@ -39,6 +45,8 @@ open import DASHI.Physics.Closure.Validation.SnapThresholdLaw as STL public
   using (SnapThresholdVerdict)
 open import DASHI.Physics.Closure.Validation.SnapThresholdLawReport as STLR
 open import DASHI.Physics.Closure.Validation.SnapThresholdLawShift as STLS
+open import DASHI.Physics.Closure.Validation.SnapThresholdLawShiftSecondary as STLSS
+open import DASHI.Physics.Closure.Validation.SnapThresholdLawShiftTertiary as STLST
 open import DASHI.Physics.Closure.Validation.SyntheticOneMinusShellComparison as SOSC public
   using (SyntheticPromotionStatus)
 open import DASHI.Physics.Closure.Validation.SyntheticOneMinusPromotionBridge as SOPB public
@@ -200,6 +208,8 @@ open import DASHI.Physics.Closure.KnownLimitsMatterGaugeTheorem as KLMGT public
   using (KnownLimitsMatterGaugeTheorem)
 open import DASHI.Physics.Closure.KnownLimitsFullMatterGaugeTheorem as KLMGFT public
   using (KnownLimitsFullMatterGaugeTheorem)
+open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT public
+  using (ContractionForcesQuadraticTheorem)
 open import DASHI.Physics.Closure.KnownLimitsEffectiveGeometryTheorem as KLET public
   using (KnownLimitsEffectiveGeometryTheorem)
 open import DASHI.Physics.Closure.KnownLimitsLocalRecoveryTheorem as KLRT public
@@ -1241,6 +1251,11 @@ canonicalKnownLimitsFullMatterGaugeTheoremSummary :
 canonicalKnownLimitsFullMatterGaugeTheoremSummary =
   CSC.canonicalKnownLimitsFullMatterGaugeTheorem
 
+canonicalContractionForcesQuadraticTheoremSummary :
+  CFQT.ContractionForcesQuadraticTheorem
+canonicalContractionForcesQuadraticTheoremSummary =
+  CSC.canonicalContractionForcesQuadraticTheorem
+
 canonicalKnownLimitsRecoverySummary : KLR.KnownLimitsRecoveryWitness
 canonicalKnownLimitsRecoverySummary = CSC.canonicalKnownLimitsRecovery
 
@@ -2202,6 +2217,9 @@ boolInvSnapshotVerdict = RPRS.boolInvVerdict
 negativeControlSnapshotVerdict : RPR.RigidityVerdict
 negativeControlSnapshotVerdict = MCPCV.negativeControlVerdict validationBundle
 
+rigidityAggregate : RPRR.RealizationProfileRigidityAggregate
+rigidityAggregate = RPRS.rigidityAggregate
+
 fejerShiftVerdict : FCS.FejerBenchmarkVerdict
 fejerShiftVerdict = FCSS.shiftVerdict
 
@@ -2219,6 +2237,13 @@ fejerShiftChi2Status =
 chi2BoundaryCaseCount : Nat
 chi2BoundaryCaseCount = CBSL.caseCount
 
+chi2BoundaryShiftTheorem : CBST.Chi2BoundaryShiftTheorem
+chi2BoundaryShiftTheorem = CBST.canonicalChi2BoundaryShiftTheorem
+
+falsifiabilityBoundaryShiftVerdict : FB.FalsifiabilityBoundaryVerdict
+falsifiabilityBoundaryShiftVerdict =
+  FBR.FalsifiabilityBoundaryReport.verdict FBS.shiftReport
+
 observableCollapseShiftVerdict : OC.ObservableCollapseVerdict
 observableCollapseShiftVerdict =
   OCR.ObservableCollapseReport.verdict OCS.shiftReport
@@ -2226,6 +2251,14 @@ observableCollapseShiftVerdict =
 snapThresholdShiftVerdict : STL.SnapThresholdVerdict
 snapThresholdShiftVerdict =
   STLR.SnapThresholdReport.verdict STLS.shiftReport
+
+snapThresholdSecondaryVerdict : STL.SnapThresholdVerdict
+snapThresholdSecondaryVerdict =
+  STLR.SnapThresholdReport.verdict STLSS.secondaryReport
+
+snapThresholdTertiaryVerdict : STL.SnapThresholdVerdict
+snapThresholdTertiaryVerdict =
+  STLR.SnapThresholdReport.verdict STLST.tertiaryReport
 
 syntheticOneMinusShellMatch : Bool
 syntheticOneMinusShellMatch =

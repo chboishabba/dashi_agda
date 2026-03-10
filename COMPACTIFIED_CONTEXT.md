@@ -99,15 +99,38 @@ Cleanup state:
     `[4(m−1)(m−2),2(m−1),2]`, so `[24,6,2]` is the first nontrivial
     member, and the orbit-profile story encodes the block-preserving
     signed-permutation symmetry you are already modeling.
-  - the closure sequence must keep highlighting the rigorous dynamics / orbit
-    structure: the latest advice is to trust the existing math spine and keep
-    focusing on the hard locking points (dynamics law, conserved quantity,
-    continuum limit, realization independence).
-  - the canonical summary export now intentionally cites these module paths
-    plus the `B₄` comparison modules, so follow-up docs should keep referencing
-    those paths first.
+- the closure sequence must keep highlighting the rigorous dynamics / orbit
+  structure: the latest advice is to trust the existing math spine and keep
+  focusing on the hard locking points (dynamics law, conserved quantity,
+  continuum limit, realization independence).
+- the canonical summary export now intentionally cites these module paths
+  plus the `B₄` comparison modules, so follow-up docs should keep referencing
+  those paths first.
+- the canonical Stage C tower now also exports a `ContractionForcesQuadratic`
+  theorem that bundles the contraction/energy structure with the derived
+  quadratic invariant and the Lorentz signature placeholder, so the physics
+  claim is now tied to a named canonical theorem rather than just an architecture.
   - `KnownLimitsFullMatterGaugeTheorem` now packages the full gauge/matter
     recovery as a canonical Stage C export, and both the GR and QFT bridge
     theorems now depend on it instead of the weaker matter-gauge record.
     The orchestrator’s long-running-development cycle has run to completion,
     so the current theory milestone is now considered fully finished.
+- canonical wave-observable transport-geometry regime consumers now rely on
+  recovery wave-regime wrappers instead of per-rung imports.
+- added a profile-rigidity aggregate report (self, synthetic one-minus,
+  Bool inversion, tail-permutation) and surfaced it in the validation summary.
+- attempted an autonomous orchestrator run; it failed because network access to
+  the Codex backend is blocked in this environment.
+- added a χ² boundary theorem wrapper (`Chi2BoundaryShiftTheorem`) and exposed
+  it in the validation summary; next priorities target falsifiability boundary
+  interfaces and observable-collapse harness wiring.
+- added a typed falsifiability/deviation boundary harness + report for the
+  shift profile (mirror-signature exclusion + competing 4D profile failures),
+  wired into the validation summary; updated plan/status/TODO/docs accordingly.
+- extended the snap-threshold benchmark beyond the reference shift witness with
+  a secondary shift-side boundary case, and exposed its verdict in the
+  validation summary.
+- expanded the forward prediction table with preferred harness/dataset notes
+  for each claim.
+- added an observable prediction evidence bundle that packages signature-lock
+  and beta-seam CSV evidence alongside the observable prediction package.

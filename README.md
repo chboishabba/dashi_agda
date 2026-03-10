@@ -175,8 +175,8 @@ Current theorem status:
   positive side established and carried directly by the benchmark harness,
   χ² side now has a concrete shift-side boundary witness,
   that witness now sits inside a small explicit shift-side boundary library,
-  and the standalone snap-threshold benchmark is now exposed as its own typed
-  validation surface.
+  and the standalone snap-threshold benchmark now includes a secondary
+  shift-side boundary case beyond the reference witness.
 
 The repo does **not** currently claim full physics closure or “solved
 physics”.

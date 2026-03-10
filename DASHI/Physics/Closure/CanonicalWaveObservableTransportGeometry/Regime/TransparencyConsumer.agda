@@ -4,7 +4,8 @@ open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure as MCPC
 open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.FidelityConsumer as CWOTGRFIDC
-open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeometry.Regime.TransparencyTheorem as KLRWOTGRTRN
+open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
+module KLRWOTGRTRN = RWR
 
 record WaveObservableTransportGeometryRegimeTransparencyConsumerFromMinimal
          (cl : MCPC.MinimalCrediblePhysicsClosure) : Setω where

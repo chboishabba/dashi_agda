@@ -63,7 +63,8 @@ module DASHI.Physics.Closure.PhysicsClosureSummary where
 --   χ² side carried by a concrete shift-side boundary witness.
 --   current χ² boundary library size = 2.
 -- Current snap-threshold benchmark snapshot:
---   theorem-backed shift witness exported through the validation summary.
+--   theorem-backed shift witness exported through the validation summary,
+--   plus a secondary shift-side boundary case beyond the reference witness.
 -- Current wave-series status:
 --   concrete grade-0 prototype only,
 --   not on the theorem-critical closure path.
@@ -104,6 +105,8 @@ module DASHI.Physics.Closure.PhysicsClosureSummary where
 --   explicitly,
 --   canonical spin/Dirac consumer now depends on the stronger witness-bearing
 --   Stage C surface rather than only the forced metric seam,
+-  canonical contraction-forces-quadratic theorem now exported explicitly,
+-  canonical signature-forcing invariant now part of the Stage C path,
 --   legacy wrappers are compatibility-only,
 --   wave-series / unification surfaces remain prototype-only.
 -- Current pre-moonshine hardening status:
