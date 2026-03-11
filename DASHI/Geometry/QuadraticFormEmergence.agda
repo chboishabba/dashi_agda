@@ -1,5 +1,9 @@
 module DASHI.Geometry.QuadraticFormEmergence where
 
+-- Alternate/supporting quadratic emergence interface.
+-- Canonical closure routing should prefer the Parallelogram -> QuadraticForm
+-- spine and treat this module as non-canonical.
+
 open import Level using (Level; _⊔_; suc; zero)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)

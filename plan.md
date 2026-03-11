@@ -1,61 +1,64 @@
 # Dashboard Plan
 
-## Stage C Bottleneck Focus (Active 2026-03-10)
+## Phase
+Stage C spine simplification and routing cleanup (active 2026-03-11).
 
-1. Build a direct projection/defect → parallelogram theorem package.
-2. Build a strengthened contraction→quadratic module that exposes
-   invariant/uniqueness seams as explicit pending proof obligations.
-3. Land a first concrete invariant witness in the strengthened module.
-4. Land a strengthened contraction→signature bridge from the new module.
-5. Replace raw seam placeholders with named seam records so the remaining
-   obstruction is explicit in both the contraction and signature bridge layers.
-6. Re-route status/docs so closure is not marked complete before those seams
-   are discharged.
+## Milestones
+1. Canonical spine declaration and import policy.
+2. Quadratic route consolidation to the parallelogram/polarization path.
+3. Signature route consolidation to cone/isotropy canonical path.
+4. Validation summary reroute to canonical-first imports.
+5. Open seam registry narrowed to canonical path only.
 
-## Current Milestones
+## Milestone Tasks
+1. Add canonical route map to docs:
+   `ProjectionDefect → EnergySplitProof → Parallelogram → QuadraticForm
+   → ConeTimeIsotropy → Signature31FromConeArrowIsotropy → Signature31Lock`.
+2. Classify parallel modules as `alternative` or `validation`:
+   - `QuadraticFromNorm`
+   - `QuadraticFromProjection`
+   - `QuadraticFromParallelogram`
+   - `QuadraticEmergence`
+   - `QuadraticFormEmergence`
+3. Ensure closure planning references
+   `ContractionForcesQuadraticStrong` for canonical contraction-to-quadratic
+   tracking and seam management.
+4. Update `PhysicsClosureValidationSummary` plan notes to consume canonical
+   spine exports first, then optional cross-check packages.
+5. Keep runtime guardrail:
+   skip routine direct checks of `PhysicsClosureValidationSummary.agda`
+   until runtime bound improves from the current ~1.25h observation.
 
-1. **Falsifiability/deviation boundary interface** – add a typed boundary
-   harness/report exposing mirror-signature exclusion and competing 4D profile
-   failures, and surface it in the validation summary.
-2. **Observable-space collapse harness** – wire `RealClosureKitFiber.obsFixed`
-   / `obsUnique` into a typed report and validation summary.
-3. **Snap-threshold benchmark extension** – extend the snap-threshold
-   benchmark beyond the shift reference.
-4. **Forward-claim validation table** – add preferred harness/dataset column to
-   the forward prediction table.
-5. **Observable CSV evidence bridge** – bundle CSV evidence and signature-lock
-   evidence with the observable prediction package.
-6. **Broader snap-threshold falsifier surface** – extend the shift-side χ²
-   boundary/snap-threshold benchmark with a third typed boundary witness and
-   expose it in the validation summary.
+## Exit Checkpoint
+- One canonical spine documented and used for closure claims.
+- No parallel emergence route required by the closure claim path.
+- Open seams listed once, on canonical modules only.
 
-## Status
+## Assumptions
+- Existing projection-defect and energy-split theorem surfaces are stable.
+- Alternate derivation modules will remain available as non-canonical checks.
+- No theorem statement changes are needed to adopt canonical routing.
 
-- `Falsifiability/deviation boundary interface`: done (shift boundary harness +
-  report wired into validation summary).
-- `Observable-space collapse harness`: done (shift harness + summary exposure).
-- `Snap-threshold benchmark extension`: done (secondary shift-side boundary case
-  added to the benchmark report).
-- `Forward-claim validation table`: done (preferred harness/dataset column
-  added to the forward prediction table).
-- `Observable CSV evidence bridge`: done (observable prediction evidence bundle
-  now packages signature-lock + beta-seam CSV evidence).
-- `Broader snap-threshold falsifier surface`: done (added a third typed
-  shift-side χ² boundary witness and a tertiary snap-threshold verdict in the
-  validation summary).
+## Open Questions
+- Should `ParallelogramToInnerProduct` or `InnerProductFromParallelogram`
+  be the single exported polarization entrypoint?
+- Should canonical exports reference `DASHI.Energy.EnergySplitProof` or
+  `DASHI.Geometry.EnergySplitProof` as the stable split surface?
+- Which currently exported theorem bundles still import
+  `QuadraticFormEmergence` transitively and need rerouting first?
 
-## Next Priorities
+## Next Skill
+`long-running-development` to execute module import and seam-surface rewiring
+against this plan.
 
-0. Runtime guardrail: skip direct checks of
-   `PhysicsClosureValidationSummary.agda` until runtime bounds are acceptable
-   (currently ~1.25 hours).
-1. Cross-realization validation package: done (Bool inversion-specific snap
-   witness + standalone B₄ harness landed and exported through the validation
-   summary).
-2. Contraction ⇒ quadratic theorem.
-3. Quadratic ⇒ signature theorem.
-4. Concrete constraint-closure theorem (current three-generator system).
-5. Local recovery / effective-geometry theorem.
-6. Signature ⇒ Clifford/spin bridge.
-7. Base369 normalization hardening (tri first): add closed-form cyclic
-   operators and bridge lemmas from recursive `spin` forms.
+## Closure Pipeline Governance
+
+- `0.1` Governance baseline: done.
+  `Docs/ClosurePipeline.md` is now the authoritative Stage C claim map with
+  `canonical` / `supporting` / `experimental` labels.
+- `0.2` Enforcement pass: done.
+  Existing closure-relevant modules are now labeled in
+  `Docs/ClosurePipeline.md` and repo-facing citation order is explicitly
+  canonical-first.
+- Next:
+  keep the label registry synchronized with new module additions/promotions.

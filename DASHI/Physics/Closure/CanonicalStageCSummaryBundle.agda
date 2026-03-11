@@ -30,6 +30,7 @@ open import DASHI.Physics.Closure.KnownLimitsRecoveredWaveObservableTransportGeo
 open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS
 open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
+open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 open import DASHI.Physics.Closure.Recovery.WaveRegime as RWR
 open import DASHI.Physics.Closure.CanonicalGeometryConsumer as CGC
 open import DASHI.Physics.Closure.CanonicalObservableConsumer as COC
@@ -66,6 +67,8 @@ record CanonicalStageCSummaryBundle : Setω where
     contractionForcingStrong : CFQS.ContractionForcesQuadraticStrong
     contractionQuadraticToSignatureBridge :
       CQSB.ContractionQuadraticToSignatureBridgeTheorem
+    contractionSignatureToSpinDiracBridge :
+      CSSDB.ContractionSignatureToSpinDiracBridgeTheorem
     recoveredDynamics : KLRDT.KnownLimitsRecoveredDynamicsTheorem
     recoveredObservables : KLROT.KnownLimitsRecoveredObservablesTheorem
     recoveredObservableGeometry :
@@ -183,6 +186,8 @@ abstract
     ; contractionForcingStrong = CSC.canonicalContractionForcesQuadraticStrong
     ; contractionQuadraticToSignatureBridge =
         CSC.canonicalContractionQuadraticToSignatureBridgeTheorem
+    ; contractionSignatureToSpinDiracBridge =
+        CSC.canonicalContractionSignatureToSpinDiracBridgeTheorem
     ; recoveredDynamics = CSC.canonicalKnownLimitsRecoveredDynamicsTheorem
     ; recoveredObservables = CSC.canonicalKnownLimitsRecoveredObservablesTheorem
     ; recoveredObservableGeometry =

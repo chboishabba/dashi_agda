@@ -217,6 +217,8 @@ open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS publi
   using (ContractionForcesQuadraticStrong)
 open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB public
   using (ContractionQuadraticToSignatureBridgeTheorem)
+open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB public
+  using (ContractionSignatureToSpinDiracBridgeTheorem)
 open import DASHI.Physics.Closure.KnownLimitsEffectiveGeometryTheorem as KLET public
   using (KnownLimitsEffectiveGeometryTheorem)
 open import DASHI.Physics.Closure.KnownLimitsLocalRecoveryTheorem as KLRT public
@@ -1274,6 +1276,11 @@ canonicalContractionQuadraticToSignatureBridgeSummary :
   CQSB.ContractionQuadraticToSignatureBridgeTheorem
 canonicalContractionQuadraticToSignatureBridgeSummary =
   CSC.canonicalContractionQuadraticToSignatureBridgeTheorem
+
+canonicalContractionSignatureToSpinDiracBridgeSummary :
+  CSSDB.ContractionSignatureToSpinDiracBridgeTheorem
+canonicalContractionSignatureToSpinDiracBridgeSummary =
+  CSC.canonicalContractionSignatureToSpinDiracBridgeTheorem
 
 canonicalKnownLimitsRecoverySummary : KLR.KnownLimitsRecoveryWitness
 canonicalKnownLimitsRecoverySummary = CSC.canonicalKnownLimitsRecovery

@@ -5,6 +5,9 @@
 - Runtime policy:
   do not run `PhysicsClosureValidationSummary.agda` in routine validation until
   runtime bounds are acceptable (currently ~1.25 hours).
+- Canonical pipeline policy:
+  use `Docs/ClosurePipeline.md` as the single Stage C claim path, and label new
+  closure modules as `canonical`, `supporting`, or `experimental`.
 - Make grouped wave-regime ladder modules authoritative for new imports:
   - `Closure/Algebra/WaveRegime.agda`
   - `Closure/Recovery/WaveRegime.agda`
@@ -40,6 +43,27 @@ Priority bucket: `P1`
 - [ ] Next follow-up: re-run direct
   `PhysicsClosureValidationSummary.agda` timing/validation once the upstream
   bridge-seam type error is cleared.
+- [x] Pipeline enforcement: tag existing closure-relevant modules in docs as
+  `canonical` / `supporting` / `experimental` and remove ambiguous duplicates
+  from repo-facing claims.
+- [ ] Keep `Docs/ClosurePipeline.md` label registry current whenever new
+  closure modules are added or promoted.
+
+## Track S — Canonical Spine Simplification
+
+Priority bucket: `P0`
+
+- Declare the canonical closure spine in theorem-bundle and summary docs:
+  `ProjectionDefect → EnergySplitProof → Parallelogram → QuadraticForm
+  → ConeTimeIsotropy → Signature31FromConeArrowIsotropy → Signature31Lock`.
+- Classify quadratic/signature parallel routes as one of:
+  `alternative`, `validation`, `experimental`.
+- Rewire canonical Stage C and closure summaries so canonical claims do not
+  depend on `QuadraticEmergence` / `QuadraticFormEmergence` as required steps.
+- Keep `ProjectionDefectToParallelogram` and
+  `ContractionForcesQuadraticStrong` as canonical bottleneck bridge modules.
+- Keep a single seam registry on canonical modules only; remove duplicated seam
+  placeholders from non-canonical derivation surfaces.
 
 ## Track T — Dynamical / Theorem Closure
 

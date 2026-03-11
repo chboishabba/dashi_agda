@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.ContractionForcesQuadraticStrong where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans)
 open import Data.Bool using (true; false)
 open import Data.Vec using (_∷_; [])
 open import Data.Product using (Σ; proj₁)
@@ -10,22 +10,62 @@ open import Data.Unit using (⊤)
 
 open import DASHI.Geometry.ProjectionDefect as PD
 open import DASHI.Geometry.QuadraticForm as QF
-open import DASHI.Geometry.QuadraticFormEmergence as QFE
 open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Physics.QuadraticPolarization as QP
 open import DASHI.Physics.Signature31InstanceShiftZ as S31
 open import DASHI.Physics.SignedPerm4 as SP
 
+record UniqueUpToScaleSeam
+  (m : Nat)
+  (q : QF.QuadraticForm (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ) : Setω where
+  field
+    normalizeToQ̂core :
+      ∀ x →
+        QF.QuadraticForm.Q q x ≡ QP.Q̂core x
+
+mkUniqueUpToScaleSeam :
+  ∀ {m q} →
+  (∀ x → QF.QuadraticForm.Q q x ≡ QP.Q̂core x) →
+  UniqueUpToScaleSeam m q
+mkUniqueUpToScaleSeam f = record { normalizeToQ̂core = f }
+
+record QuadraticUniquenessBridge
+  (m : Nat)
+  (q : QF.QuadraticForm (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ) : Setω where
+  field
+    referenceQuadratic :
+      QF.QuadraticForm (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
+    invariantMatchesReference :
+      ∀ x →
+        QF.QuadraticForm.Q q x
+        ≡
+        QF.QuadraticForm.Q referenceQuadratic x
+    uniqueness :
+      UniqueUpToScaleSeam m referenceQuadratic
+
+mkQuadraticUniquenessBridge :
+  ∀ {m}
+  (q : QF.QuadraticForm (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ) →
+  (∀ x → QF.QuadraticForm.Q q x ≡ QF.QuadraticForm.Q q x) →
+  (∀ x → QF.QuadraticForm.Q q x ≡ QP.Q̂core x) →
+  QuadraticUniquenessBridge m q
+mkQuadraticUniquenessBridge q matches uniqueness =
+  record
+    { referenceQuadratic = q
+    ; invariantMatchesReference = matches
+    ; uniqueness = mkUniqueUpToScaleSeam uniqueness
+    }
+
 record ContractionForcesQuadraticStrong : Setω where
   field
     dimension : Nat
     projection : PD.ProjectionDefect (QES.AdditiveVecℤ {dimension})
-    emergenceAxioms :
-      QFE.QuadraticEmergenceAxioms
-        (QES.AdditiveVecℤ {dimension}) QES.ScalarFieldℤ projection
     projectionParallelogram :
       PDP.ProjectionDefectParallelogramPackage
+        (QES.AdditiveVecℤ {dimension}) QES.ScalarFieldℤ
+    projectionQuadraticWitness :
+      PDP.ProjectionDefectQuadraticWitness
         (QES.AdditiveVecℤ {dimension}) QES.ScalarFieldℤ
     derivedQuadratic :
       QF.QuadraticForm (QES.AdditiveVecℤ {dimension}) QES.ScalarFieldℤ
@@ -37,11 +77,24 @@ record ContractionForcesQuadraticStrong : Setω where
         QF.QuadraticForm.Q derivedQuadratic (dynamicsMap x)
         ≡
         QF.QuadraticForm.Q derivedQuadratic x
-    -- Canonical normalization witness for the derived quadratic.
-    -- This discharges the local uniqueness seam for the current projection path.
-    uniqueUpToScaleWitness :
-      ∀ x →
-        QF.QuadraticForm.Q derivedQuadratic x ≡ QP.Q̂core x
+    quadraticUniquenessBridge :
+      QuadraticUniquenessBridge dimension derivedQuadratic
+
+uniqueUpToScaleWitness :
+  (c : ContractionForcesQuadraticStrong) →
+  ∀ x →
+    QF.QuadraticForm.Q
+      (ContractionForcesQuadraticStrong.derivedQuadratic c) x
+    ≡
+    QP.Q̂core x
+uniqueUpToScaleWitness c x =
+  trans
+    (QuadraticUniquenessBridge.invariantMatchesReference
+      (ContractionForcesQuadraticStrong.quadraticUniquenessBridge c) x)
+    (UniqueUpToScaleSeam.normalizeToQ̂core
+      (QuadraticUniquenessBridge.uniqueness
+        (ContractionForcesQuadraticStrong.quadraticUniquenessBridge c))
+      x)
 
 buildContractionForcesQuadraticStrong :
   (m : Nat) →
@@ -91,12 +144,15 @@ buildContractionForcesQuadraticStrong m dynamics invariantQ uniqueness =
   record
     { dimension = m
     ; projection = proj
-    ; emergenceAxioms = ax
     ; projectionParallelogram = pkg
+    ; projectionQuadraticWitness =
+        PDP.fromProjectionPackageWitness
+          (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ pkg
     ; derivedQuadratic = q
     ; dynamicsMap = dynamics
     ; invariantQuadraticWitness = invariantQ
-    ; uniqueUpToScaleWitness = uniqueness
+    ; quadraticUniquenessBridge =
+        mkQuadraticUniquenessBridge q (λ _ → refl) uniqueness
     }
 
 canonicalIdentityInvariantStrong :

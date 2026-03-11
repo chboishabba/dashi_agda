@@ -327,6 +327,7 @@ import DASHI.Physics.Closure.Canonical.Ladder
 import DASHI.Physics.Closure.CanonicalSpinDiracConsumer
 import DASHI.Physics.Closure.ContractionForcesQuadraticStrong
 import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem
+import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem
 import DASHI.Physics.Closure.SpinLocalLorentzBridgeTheorem
 import DASHI.Physics.Closure.KnownLimitsStatus
 import DASHI.Physics.Closure.DefectCollapseShiftInstance

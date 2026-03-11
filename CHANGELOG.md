@@ -44,6 +44,23 @@
 - hardened `ContractionQuadraticToSignatureBridgeTheorem` by replacing the
   fragile type-level seam equality (`Set`-valued alias + equality law) with a
   direct value-level seam witness, removing the `Set` vs `⊤` mismatch path.
+- introduced a named seam record in
+  `ContractionForcesQuadraticStrong`:
+  `UniqueUpToScaleSeam`, and moved the contraction-uniqueness witness into
+  `uniqueUpToScaleSeam`; kept compatibility via
+  top-level accessor `uniqueUpToScaleWitness`.
+- simplified `ContractionQuadraticToSignatureBridgeTheorem` seam typing so
+  `QuadraticToSignatureBridgeSeam` is non-parameterized and set-level, while
+  canonical quadratic normalization evidence remains in `normalizedQuadratic`.
+- added `Docs/ClosurePipeline.md` as the authoritative Stage C claim chain and
+  introduced explicit module labels (`canonical` / `supporting` /
+  `experimental`) plus promotion/change-control rules.
+- implemented the first concrete label registry in `Docs/ClosurePipeline.md`
+  for current closure-relevant modules and added an explicit canonical-first
+  repo-facing citation order.
+- wired closure-pipeline governance into repo metadata:
+  added a README pointer, added canonical-label policy + enforcement tasks to
+  `TODO.md`, and added pipeline governance/enforcement priorities to `plan.md`.
 - validated the implementation with a targeted typecheck:
   `agda Base369.agda`.
 - validated the new bundle-level wrappers with targeted typechecks:
@@ -59,6 +76,10 @@
 - validated the bridge-seam patch with:
   `agda DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
   and re-ran both bundle checks above.
+- validated the seam-record refactor with:
+  `agda DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`,
+  `agda DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`,
+  and `agda DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda`.
 - attempted targeted validation of
   `DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda`; blocked by an
   existing upstream type error in
@@ -558,3 +579,4 @@
 - Added the `Operability` rung across the cleaned wave-regime cycle: algebra theorem, recovered theorem, canonical consumer, moonshine summary, and canonical/validation exports.
 - Fixed canonical Stage C alias collisions between `Compatibility` and `Composability` on the algebra, recovery, and consumer ladders; `CanonicalStageC.agda` now uses distinct aliases and the grouped summary path compiles cleanly again.
 - Added `Sustainability` wave-regime rung across algebra, recovery, canonical consumer, and moonshine summary grouped surfaces.
+- Re-focused on the actual Stage C bottleneck instead of adding more local rungs: `ContractionForcesQuadraticStrong` now carries an explicit `ProjectionDefectQuadraticWitness` and a named `QuadraticUniquenessBridge`, and `ContractionQuadraticToSignatureBridgeTheorem` now exposes a named `QuadraticToSignatureBridgeSeam` instead of a raw pending placeholder.

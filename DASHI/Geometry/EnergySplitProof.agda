@@ -24,7 +24,7 @@ EnergySplitProof :
   (∀ x → Orth V (P PD x) (D PD x)) →
   (∀ x y → Orth V x y → E V ( _+_ A x y ) ≡ ( _+s_ F (E V x) (E V y) )) →
   ∀ x → E V x ≡ ( _+s_ F (E V (P PD x)) (E V (D PD x)) )
-EnergySplitProof {A = A} {F = F} V T2 PD orthPD addE x =
+EnergySplitProof {A = A} {F = F} V _ PD orthPD addE x =
   let open Additive A
       open ScalarField F
       open InnerProductSpace V

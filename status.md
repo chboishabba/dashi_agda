@@ -1,29 +1,25 @@
 # Status
 
-- Phase: bottleneck theorem path in progress
+- Phase: Stage C spine simplification (execution in progress)
+- Canonical spine: `ProjectionDefect → EnergySplitProof → Parallelogram → QuadraticForm → ConeTimeIsotropy → Signature31FromConeArrowIsotropy → Signature31Lock`
 - Milestones:
-  - cross-realization snap-threshold package (Bool inversion witness + B₄ harness): done
-  - projection/defect → parallelogram package: done
-  - strengthened contraction→quadratic module with explicit seams: done
-  - first concrete invariant witness (identity dynamics): done
-  - nontrivial invariant witness (signed-permutation action on 4D shell): done
-  - strengthened contraction→signature bridge export: done
-  - uniqueness-up-to-scale seam: open
-  - downstream signature/Clifford/gauge closure from those seams: open
-- Tests: Agda typecheck passes for
-  `Chi2BoundaryBoolInversionWitness`,
-  `SnapThresholdLawBoolInversion`,
-  `SnapThresholdLawRootSystemB4`,
-  `ProjectionDefectToParallelogram`,
-  `ContractionForcesQuadraticStrong`,
-  `CanonicalStageC`,
-  `CanonicalStageCTheoremBundle`,
-  and `CanonicalStageCSummaryBundle`.
-  Runtime policy: do not run
-  `DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda`
-  until its runtime bound is acceptable; current observed bound is ~1.25 hours.
-  Orchestrator-generated cross-realization modules were retained after audit
-  and compile-checked individually.
-- Next action: upgrade invariant witness coverage beyond the current signed-
-  permutation family, discharge `uniqueUpToScaleSeam`, and then thread the
-  bridge through Clifford/spin extraction modules.
+  - canonical spine declaration: done
+  - route classification policy: done (documented)
+  - contraction theorem surfaces shifted to projection→parallelogram package exposure: done
+  - quadratic/signature alternate-route module labeling: done (header annotations landed)
+  - closure pipeline label taxonomy update (`canonical/alternative/validation/experimental`): done
+  - full canonical import sweep beyond current contraction surfaces: pending
+  - seam registry narrowed to canonical surfaces everywhere: pending
+- Tests:
+  - `agda -i . DASHI/Physics/Closure/ContractionForcesQuadraticTheorem.agda`: pass
+  - `agda -i . DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`: pass
+  - `agda -i . DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`: pass
+  - `agda -i . DASHI/Physics/Closure/CanonicalStageC.agda`: pass
+  - `agda -i . DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda`: pass
+  - `agda -i . DASHI/Physics/Closure/CanonicalStageCSummaryBundle.agda`: pass
+- Constraints:
+  - runtime guardrail remains active for
+    `DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda`
+    (observed direct check runtime ~1.25h)
+- Next action: continue the canonical import sweep for Stage C-facing docs and
+  summary consumers, then re-run targeted closure checks.

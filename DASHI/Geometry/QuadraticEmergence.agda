@@ -1,5 +1,8 @@
 module DASHI.Geometry.QuadraticEmergence where
 
+-- Alternate quadratic derivation route retained for cross-checking.
+-- Not part of the canonical Stage C closure spine.
+
 open import Level using (Level; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 open import Data.Product using (Σ; _,_)

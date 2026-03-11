@@ -1,5 +1,8 @@
 module DASHI.Geometry.QuadraticFromParallelogram where
 
+-- Legacy/experimental skeleton for parallelogram-to-quadratic routing.
+-- Canonical closure exports should use DASHI.Geometry.QuadraticForm.
+
 open import Data.Product using (Σ; _,_)
 
 record QuadraticForm (A : Set) : Set₁ where

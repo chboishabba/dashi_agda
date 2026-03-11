@@ -9,6 +9,11 @@ open import Data.Unit.Polymorphic as PU using (⊤; tt)
 
 open import DASHI.Physics.Core
 
+-- Canonical realized witnesses for the current repo snapshot live in
+-- `DASHI.Physics.Closure.*`. This module stays --safe and only defines
+-- stable interface records; consumers wanting realized content should
+-- import the closure modules directly (or go through Closure summaries).
+
 -- A “kernel symmetry” / invariance predicate.
 record Invariant {ℓ : Level} {V : Set ℓ} (T : V → V) (Q : Quadratic V) : Set (suc ℓ) where
   field

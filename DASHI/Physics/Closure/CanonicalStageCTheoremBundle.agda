@@ -56,6 +56,7 @@ open import DASHI.Physics.Closure.KnownLimitsQFTBridgeTheorem as KLBQFT
 open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS
 open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
+open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 
 record CanonicalStageCTheoremBundle : Setω where
   field
@@ -229,6 +230,8 @@ record CanonicalStageCTheoremBundle : Setω where
       CFQS.ContractionForcesQuadraticStrong
     contractionQuadraticToSignatureBridgeSummary :
       CQSB.ContractionQuadraticToSignatureBridgeTheorem
+    contractionSignatureToSpinDiracBridgeSummary :
+      CSSDB.ContractionSignatureToSpinDiracBridgeTheorem
     recoveredLocalRegimeSummary : KLRLR.KnownLimitsRecoveredLocalRegimeTheorem
     completeLocalRegimeSummary : KLCLR.KnownLimitsCompleteLocalRegimeTheorem
     dynamicsLawSummary : CDLT.CanonicalDynamicsLawTheorem
@@ -412,6 +415,8 @@ abstract
         CSC.canonicalContractionForcesQuadraticStrong
     ; contractionQuadraticToSignatureBridgeSummary =
         CSC.canonicalContractionQuadraticToSignatureBridgeTheorem
+    ; contractionSignatureToSpinDiracBridgeSummary =
+        CSC.canonicalContractionSignatureToSpinDiracBridgeTheorem
     ; recoveredLocalRegimeSummary =
         CSC.canonicalKnownLimitsRecoveredLocalRegimeTheorem
     ; completeLocalRegimeSummary =

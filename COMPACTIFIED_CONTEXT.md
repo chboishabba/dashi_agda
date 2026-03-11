@@ -1,5 +1,25 @@
 # Compactified Context
 
+## 2026-03-11
+
+- Added new canonical seam bridge module:
+  `DASHI/Physics/Closure/ContractionSignatureToSpinDiracBridgeTheorem.agda`.
+- Export wiring is complete across Stage-C surfaces:
+  `CanonicalStageC`, `CanonicalStageCTheoremBundle`,
+  `CanonicalStageCSummaryBundle`, `PhysicsClosureValidationSummary`, and
+  `Everything`.
+- Verification policy update remains active:
+  no routine full check of
+  `DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda`
+  until runtime bounds improve (last observed full runtime about 1.25h).
+- Targeted check outcome under explicit 2-minute timeout:
+  new bridge module typechecks; broader Stage-C bundle scope checks time out
+  (`exit 124`) due dependency breadth, with no emitted type errors before
+  timeout.
+- Primary mathematical bottleneck is unchanged:
+  discharge strengthened contraction `uniqueUpToScale` seam and thread it into
+  signature/Clifford/spin closure chain.
+
 ## 2026-03-08
 
 - Canonical archived thread checked:
@@ -195,6 +215,13 @@ Cleanup state:
 - that rollout now covers the full moonshine/regime alias block in
   `PhysicsClosureValidationSummary` through the `RegimeResilience` summary
   aliases, still preserving exported names and keeping behavior unchanged.
+- canonical-architecture guardrail is now explicit in repo docs:
+  `Docs/ClosurePipeline.md` defines a single Stage C theorem chain and
+  requires closure modules to be labeled `canonical` / `supporting` /
+  `experimental`; README/TODO/plan now point to and enforce that map.
+- first concrete label registry is now populated in
+  `Docs/ClosurePipeline.md` and repo-facing citation order is explicitly
+  canonical-first, then supporting, then experimental.
 - Cross-realization snap-threshold package is now complete at the current
   benchmark layer:
   - Bool inversion harness now uses its own witness module
@@ -207,3 +234,17 @@ Cleanup state:
   keep orchestrator-generated Bool-inversion/B₄ validation modules and related
   summary wiring as the new baseline (they compile and align with roadmap),
   but keep closure milestone open until `uniqueUpToScaleSeam` is discharged.
+
+## 2026-03-11 (Spine Simplification Decision)
+
+- Canonical planning decision: collapse quadratic emergence to one route through
+  the parallelogram/polarization theorem path.
+- Canonical closure spine is now documented as:
+  `ProjectionDefect → EnergySplitProof → Parallelogram → QuadraticForm
+  → ConeTimeIsotropy → Signature31FromConeArrowIsotropy → Signature31Lock`.
+- Parallel modules in the quadratic/signature family are retained but re-scoped:
+  they are `alternative` or `validation` routes, not closure-critical steps.
+- Active open seams should be listed only on canonical contraction/quadratic and
+  quadratic/signature bridge surfaces, not duplicated across parallel routes.
+- Next execution skill selected: `long-running-development` for import rewiring,
+  seam-surface cleanup, and compile-stable migration.

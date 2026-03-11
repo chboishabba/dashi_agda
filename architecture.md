@@ -1,35 +1,38 @@
 # Architecture Notes for DashI Closure Path
 
-## Current canonical stack
-- Constraint layer: `CanonicalStageC` orchestrates canonical gauge, algebraic, and
-  wave modules, exporting `CanonicalStageCTheoremBundle` and `CanonicalStageCSummaryBundle`.
-- Recovery layer: known-limits modules now include propagation, geometry transport,
-  local coherence, extended recovery, the new local causal-effective propagation,
-  and the local causal-geometry coherence theorem, culminating in
-  `KnownLimitsRecoveredDynamicsTheorem` anchored by `CanonicalDynamicsLawTheorem`.
-- Bridge layer: Stage C now re-exports `KnownLimitsMatterGaugeTheorem`, with existing
-  GR and QFT bridge theorems depending on it.
+## Canonical Spine (Authoritative)
+The canonical closure dependency spine is:
 
-## Remaining architecture work
-1. Land the bottleneck theorem path around projection/defect to quadratic:
-   `ProjectionDefectToParallelogram` then `ContractionForcesQuadraticStrong`.
-2. Discharge the remaining seams:
-   invariant quadratic under the contraction dynamics, and uniqueness up to scale.
-3. Only after (2), treat signature, Clifford, and full gauge/matter recovery
-   as mathematically closed rather than packaged.
+1. `DASHI.Geometry.ProjectionDefect`
+2. `DASHI.Energy.EnergySplitProof` (or `DASHI.Geometry.EnergySplitProof`)
+3. `DASHI.Geometry.Parallelogram`
+4. `DASHI.Geometry.QuadraticForm` via polarization from parallelogram law
+5. `DASHI.Geometry.ConeTimeIsotropy`
+6. `DASHI.Geometry.Signature31FromConeArrowIsotropy`
+7. `DASHI.Geometry.Signature31Lock`
 
-## Engineering hardening track (normalization cost)
-- Base369 cyclic operators are being split into:
-  - compatibility definitions that keep the existing `spin` semantics,
-  - closed-form definitions via index arithmetic (`fromIndex` / modulo carrier period).
-- Scope for this turn:
-  - land the triadic closed-form path with a correctness bridge,
-  - stage hex/nonary migration as follow-up TODO work.
-- Intent:
-  reduce recursive normalization pressure in small but frequently reused cyclic
-  operators without changing external behavior.
+This is the only required theorem route for quadratic and signature emergence.
 
-## Signals to watch
-- `status.json` should flip `milestones_remaining` to 0 once the bridge and
-  dynamics pillars are recorded as canonical exports.
-- `COMPACTIFIED_CONTEXT.md` should summarize each fixed theorem surface.
+## Route Classification Policy
+- `canonical`: required for Stage C theorem closure claims.
+- `alternative`: mathematically valid alternate derivation; not required.
+- `validation`: independent cross-check used to reduce proof-risk.
+- `experimental`: speculative or partial scaffolding not used for closure claims.
+
+Modules currently in the quadratic family
+(`QuadraticFromNorm`, `QuadraticFromProjection`, `QuadraticFromParallelogram`,
+`QuadraticEmergence`, `QuadraticFormEmergence`) should be classified under this
+policy and consumed accordingly.
+
+## Remaining Architecture Work
+1. Keep `ProjectionDefectToParallelogram` and
+   `ContractionForcesQuadraticStrong` as the active canonical bottleneck bridge
+   surfaces.
+2. Replace any raw seam placeholders with named seam packages on canonical
+   modules only.
+3. Thread signature/Clifford/gauge recovery from canonical spine exports
+   instead of parallel emergence routes.
+
+## Performance Intent
+Reducing parallel dependency paths lowers normalization and transport overhead.
+Expected effect: lower compile pressure without changing theorem content.

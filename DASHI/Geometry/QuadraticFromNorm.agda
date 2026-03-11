@@ -1,5 +1,8 @@
 module DASHI.Geometry.QuadraticFromNorm where
 
+-- Alternate quadratic derivation from norm/parallelogram data.
+-- Kept as a validation route rather than canonical closure path.
+
 open import Level using (Level; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 

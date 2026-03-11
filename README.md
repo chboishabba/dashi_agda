@@ -202,6 +202,8 @@ Cleanup note:
 For the current milestone order, see `Docs/PhysicsClosurePriorities.md`.
 For the current orbit-shell / Lorentz-signature framing, see
 `Docs/OrbitShellProfilesAndLorentzSignature.md`.
+For the authoritative Stage C theorem chain and module labels, see
+`Docs/ClosurePipeline.md`.
 
 ## Typecheck Performance Policy (Current)
 

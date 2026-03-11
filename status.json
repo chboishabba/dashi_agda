@@ -5,9 +5,9 @@
   "docs": "ready",
   "external_reasoning": "off",
   "last_action": "long-running-development",
-  "last_cycle_finished_at": "2026-03-11T05:08:04Z",
-  "last_cycle_started_at": "2026-03-11T05:03:44Z",
+  "last_cycle_finished_at": "2026-03-11T16:52:00+10:00",
+  "last_cycle_started_at": "2026-03-11T16:18:00+10:00",
   "last_exit_code": 0,
-  "milestones_remaining": 1,
+  "milestones_remaining": 2,
   "tests": "partial"
 }
