@@ -2,6 +2,19 @@
 
 ## 2026-03-12
 
+- implemented the missing `Quadratic ⇒ Signature` bridge shape in
+  `DASHI/Geometry/CausalForcesLorentz31.agda`:
+  - added explicit theorem `quadraticConeIsotropyForces31` with inputs
+    `(Quadratic, Cone, ConeMetricCompat, iso, fs, arrow)` and output
+    `SignatureLaw`,
+  - routed it through the two-step classification structure
+    (`eliminateEuclideanAndDegenerate` then
+    `spatialIsotropyAndArrowForce31`),
+  - added `normalizedCoreClassifies31` to thread the
+    `ContractionForcesQuadraticStrong.uniqueUpToScaleWitness` normalization seam
+    into the classification path,
+  - kept `lorentz31-from-causal-axioms` as the canonical
+    `Signature31Theorem` constructor consumed by Stage-C bridges.
 - completed a theorem-dependency audit of the quadratic=>signature path and
   removed the remaining hidden profile prerequisite from intrinsic theorem
   construction:

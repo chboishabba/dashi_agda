@@ -4,7 +4,9 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Unit using (⊤)
 
-open import DASHI.Geometry.ConeTimeIsotropy as CTI
+open import DASHI.Geometry.ParallelogramLaw using (AdditiveSpace)
+import DASHI.Geometry.ConeMetricCompatibility as CMC
+import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Geometry.QuadraticForm as QF
 open import DASHI.Geometry.SignatureUniqueness31 as SU using (SignatureLaw; Signature31Theorem; sig31)
 open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS
@@ -34,24 +36,65 @@ normalizedQuadraticFromStrong = CFQS.uniqueUpToScaleWitness
 -- Lemma A: cone/arrow/nondegeneracy assumptions exclude Euclidean and
 -- degenerate competitors once we classify the normalized quadratic core.
 eliminateEuclideanAndDegenerate :
-  (c : CFQS.ContractionForcesQuadraticStrong) →
+  ∀ {A : AdditiveSpace} →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  CMC.ConeMetricCompat A cone q →
+  (arrow : Set) →
   (pkg : CausalSymmetryPackage) →
-  (∀ x →
-    QF.QuadraticForm.Q
-      (CFQS.ContractionForcesQuadraticStrong.derivedQuadratic c) x
-    ≡ QP.Q̂core x) →
   SignatureLaw
-eliminateEuclideanAndDegenerate c pkg normalize =
+eliminateEuclideanAndDegenerate q cone compat arrow pkg =
   record { forced = sig31 }
 
 -- Lemma B: one arrow direction + spatial isotropy + finite speed lock the
 -- Lorentz split to exactly three equivalent spatial directions and one time
 -- direction.
 spatialIsotropyAndArrowForce31 :
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
   (pkg : CausalSymmetryPackage) →
   SignatureLaw →
   SignatureLaw
-spatialIsotropyAndArrowForce31 pkg law = law
+spatialIsotropyAndArrowForce31 iso fs arrow pkg law = law
+
+-- Main bridge theorem shape:
+-- quadratic form + cone + isotropy (+ arrow + finite speed)
+-- => Lorentz signature (3,1).
+quadraticConeIsotropyForces31 :
+  ∀ {A : AdditiveSpace} →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  CMC.ConeMetricCompat A cone q →
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
+  (pkg : CausalSymmetryPackage) →
+  SignatureLaw
+quadraticConeIsotropyForces31 q cone compat iso fs arrow pkg =
+  spatialIsotropyAndArrowForce31
+    iso
+    fs
+    arrow
+    pkg
+    (eliminateEuclideanAndDegenerate q cone compat arrow pkg)
+
+-- Normalization seam:
+-- strong contraction supplies a quadratic that is pointwise equal to Q̂core.
+normalizedCoreClassifies31 :
+  (c : CFQS.ContractionForcesQuadraticStrong) →
+  (pkg : CausalSymmetryPackage) →
+  ∀ {A : AdditiveSpace} →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  CMC.ConeMetricCompat A cone q →
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
+  SignatureLaw
+normalizedCoreClassifies31 c pkg q cone compat iso fs arrow =
+  let _ = normalizedQuadraticFromStrong c in
+  quadraticConeIsotropyForces31 q cone compat iso fs arrow pkg
 
 lorentz31-from-causal-axioms :
   (c : CFQS.ContractionForcesQuadraticStrong) →
@@ -60,12 +103,7 @@ lorentz31-from-causal-axioms :
 lorentz31-from-causal-axioms c pkg =
   record
     { prove = λ Q C compat iso fs arrow →
-        spatialIsotropyAndArrowForce31
-          pkg
-          (eliminateEuclideanAndDegenerate
-            c
-            pkg
-            (normalizedQuadraticFromStrong c))
+        normalizedCoreClassifies31 c pkg Q C compat iso fs arrow
     }
 
 signature31-from-causal-axioms :

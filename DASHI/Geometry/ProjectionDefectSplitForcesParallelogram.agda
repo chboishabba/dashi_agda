@@ -88,7 +88,9 @@ quadraticEmergenceFromProjectionDefectSplit :
 quadraticEmergenceFromProjectionDefectSplit {m} =
   record
     { Energy = QP.Q̂core
+    ; Scale = QES.scaleVec
     ; ParallelogramQ = projectionDefectSplitForcesParallelogram {m}
+    ; HomogeneousQ = QES.homQ̂core
     ; Additive-On-Orth = projectionDefectOrthogonalAdditivity {m}
     ; PD-splits = projectionDefectEnergySplit {m}
     }

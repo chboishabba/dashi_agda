@@ -3,7 +3,6 @@ module DASHI.Geometry.QuadraticForm where
 open import Level using (Level; _⊔_; suc; zero)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 open import Data.Product using (Σ; _,_)
-open import Data.Unit using (⊤; tt)
 
 open import DASHI.Geometry.ProjectionDefect
 
@@ -25,11 +24,18 @@ record QuadraticForm {ℓv ℓs}
   open ScalarField F
   field
     Q : Additive.Carrier A → ScalarField.S F
+    _·_ : ScalarField.S F → Additive.Carrier A → Additive.Carrier A
     Parallelogram :
       ∀ x y → ScalarField._+s_ F (Q (Additive._+_ A x y))
                                   (Q (Additive._+_ A x (Additive.-_ A y)))
               ≡ ScalarField._+s_ F (ScalarField._+s_ F (Q x) (Q x))
                                    (ScalarField._+s_ F (Q y) (Q y))
-    Homog : ∀ (a : ScalarField.S F) (x : Additive.Carrier A) → ⊤
+    Homog :
+      ∀ (a : ScalarField.S F) (x : Additive.Carrier A) →
+        Q (_·_ a x)
+          ≡
+        ScalarField._*s_ F
+          (ScalarField._*s_ F a a)
+          (Q x)
 
 open QuadraticForm public

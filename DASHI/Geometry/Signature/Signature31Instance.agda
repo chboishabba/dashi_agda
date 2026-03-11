@@ -3,9 +3,10 @@ module DASHI.Geometry.Signature.Signature31Instance where
 open import Data.Unit using (⊤; tt)
 open import Data.Bool using (true; false)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_)
+open import Data.Nat.Properties as NatP using (*-zeroʳ)
 open import Data.List using ([]; _∷_)
 open import Data.Vec using (Vec; replicate)
-open import Relation.Binary.PropositionalEquality using (refl)
+open import Relation.Binary.PropositionalEquality using (refl; sym)
 open import Relation.Nullary using (yes)
 
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
@@ -45,8 +46,9 @@ QF : QuadraticForm AdditiveV ScalarNat
 QF =
   record
     { Q = λ _ → 0
+    ; _·_ = λ _ _ → Additive.0# AdditiveV
     ; Parallelogram = λ _ _ → refl
-    ; Homog = λ _ _ → tt
+    ; Homog = λ a _ → sym (NatP.*-zeroʳ (a * a))
     }
 
 sigAxioms : S31.SignatureAxioms AdditiveV ScalarNat QF

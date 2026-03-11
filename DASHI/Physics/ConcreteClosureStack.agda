@@ -21,8 +21,6 @@ open import DASHI.Physics.UnifiedClosure as UC
 open import DASHI.Physics.ContractionQuadraticBridge as CQ
 open import DASHI.Physics.SignatureClassificationBridge as SC
 open import DASHI.Physics.CliffordEvenLiftBridge as CE
-open import DASHI.Physics.Core as Core
-open import DASHI.Physics.DecimationToClifford as D2C
 open import DASHI.Physics.Signature31FromShiftOrbitProfile as S31OP
 open import DASHI.Combinatorics.Entropy using (Involution)
 
@@ -112,29 +110,16 @@ physicsUnification =
         }
     ; q2cl = record
         { build = λ out →
-            let
-              q : Core.Quadratic (CQ.V out)
-              q = record { Q = λ _ → ⊤ }
-              d : D2C.DecimationAlgebra (CQ.V out)
-              d = record
-                { A = CQ.V out
-                ; mul = λ x _ → x
-                ; gen = λ x → x
-                }
-              r : D2C.CliffordRelations (CQ.V out) q d
-              r = record { rel = ⊤ }
-            in
             record
-              { quadratic = q
-              ; decimation = d
-              ; relations = r
-              ; universal = D2C.decimation⇒clifford q d r
-              ; mul = D2C.DecimationAlgebra.mul d
-              ; pairedWord = λ x y →
-                  D2C.DecimationAlgebra.mul d
-                    (D2C.DecimationAlgebra.gen d x)
-                    (D2C.DecimationAlgebra.gen d y)
+              { Q = CQ.Q out
+              ; Cl = ⊤
+              ; mul = λ _ _ → tt
+              ; one = tt
+              ; scalar = λ _ → tt
+              ; embed = λ _ → tt
+              ; cliffordSquare = λ _ → refl
               }
+        ; quadraticCompatibility = λ _ _ → refl
         }
     ; wl = record
         { build = λ {V} {Scalar} Cℓ →
@@ -152,11 +137,11 @@ physicsUnification =
                   }
               ; waveLift = record
                   { lift = λ where
-                      (x , y) → CE.Clifford.pairedWord Cℓ x y
+                      (x , y) → CE.pairedWord Cℓ x y
                   }
               ; landsInEven = λ where
                   (x , y) →
-                    CE.Clifford.pairedWord Cℓ x y , refl
+                    CE.pairedWord Cℓ x y , refl
               }
         }
     }

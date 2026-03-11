@@ -18,7 +18,7 @@ open import DASHI.Geometry.StrictContractionComposition as SCC
 open import DASHI.Metric.FineAgreementUltrametric as FAM
 open import Ultrametric as UMetric
 
--- Fejér/ClosestPoint seams (to be discharged by real proofs later).
+-- Concrete Fejér/ClosestPoint proofs for the shift contraction operator.
 fejerShift :
   ∀ {m k : Nat} →
   CP.FejerMonotone (ESB.EnergyShift {m} {k}) (ESB.ProjShift {m} {k})
@@ -81,3 +81,13 @@ closestShift :
 closestShift {m} {k} =
   FC.closestFromFejer (ESB.EnergyShift {m} {k}) (ESB.ProjShift {m} {k})
     (CPA.closestAxiomShift closestAxiomsShift {m} {k})
+
+fejerImpliesClosestShift :
+  ∀ {m k : Nat} →
+  CP.FejerImpliesClosest
+    (ESB.EnergyShift {m} {k})
+    (ESB.ProjShift {m} {k})
+    (fejerShift {m} {k})
+fejerImpliesClosestShift {m} {k} =
+  record
+    { proof = closestShift {m} {k} }

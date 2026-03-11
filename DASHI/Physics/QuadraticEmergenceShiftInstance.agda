@@ -20,8 +20,8 @@ open import DASHI.Geometry.QuadraticFormEmergence as QFE
 open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
 open import DASHI.Physics.QuadraticPolarization as QP
 
-module ℤR = EqR IntP.≡-setoid
-open ℤR
+module ℤReasonQES = EqR IntP.≡-setoid
+open ℤReasonQES
 
 module RingQ = NR IntRS.ring
 open RingQ using (Expr; Κ; Ι; _⊕_; _⊗_; ⊝_; _⊜_; solve)
@@ -71,6 +71,9 @@ Q̂core-zeroVec {suc m} =
 
 sq : ℤ → ℤ
 sq x = x * x
+
+scaleVec : ∀ {m} → ℤ → Vec ℤ m → Vec ℤ m
+scaleVec a = map (λ x → a * x)
 
 swap-sum : ∀ a x b y → (a + x) + (b + y) ≡ (a + b) + (x + y)
 swap-sum a x b y =
@@ -135,6 +138,33 @@ parallelogramQ̂core {suc m} (a ∷ xs) (b ∷ ys) =
     (QP.Q̂core (a ∷ xs) + QP.Q̂core (a ∷ xs)) + (QP.Q̂core (b ∷ ys) + QP.Q̂core (b ∷ ys))
   ∎
 
+sq-scaleℤ : ∀ a x → (a * x) * (a * x) ≡ (a * a) * (x * x)
+sq-scaleℤ a x =
+  Ring.solve 2
+    (λ a x →
+       ( ((a ⊗ x) ⊗ (a ⊗ x))
+       , ((a ⊗ a) ⊗ (x ⊗ x)) ))
+    refl a x
+
+homQ̂core :
+  ∀ {m} (a : ℤ) (x : Vec ℤ m) →
+    QP.Q̂core (scaleVec a x) ≡ (a * a) * QP.Q̂core x
+homQ̂core {zero} a [] = sym (IntP.*-zeroʳ (a * a))
+homQ̂core {suc m} a (x ∷ xs) =
+  begin
+    QP.Q̂core (scaleVec a (x ∷ xs))
+  ≡⟨ refl ⟩
+    (a * x) * (a * x) + QP.Q̂core (scaleVec a xs)
+  ≡⟨ cong (λ t → t + QP.Q̂core (scaleVec a xs)) (sq-scaleℤ a x) ⟩
+    (a * a) * (x * x) + QP.Q̂core (scaleVec a xs)
+  ≡⟨ cong (λ t → (a * a) * (x * x) + t) (homQ̂core a xs) ⟩
+    (a * a) * (x * x) + (a * a) * QP.Q̂core xs
+  ≡⟨ sym (IntP.*-distribˡ-+ (a * a) (x * x) (QP.Q̂core xs)) ⟩
+    (a * a) * ((x * x) + QP.Q̂core xs)
+  ≡⟨ refl ⟩
+    (a * a) * QP.Q̂core (x ∷ xs)
+  ∎
+
 ------------------------------------------------------------------------
 -- Projection/defect structure (trivial P, D) to satisfy emergence axioms
 
@@ -175,7 +205,9 @@ QuadraticEmergenceShiftAxioms :
 QuadraticEmergenceShiftAxioms {m} =
   record
     { Energy = QP.Q̂core
+    ; Scale = scaleVec
     ; ParallelogramQ = parallelogramQ̂core
+    ; HomogeneousQ = homQ̂core
     ; Additive-On-Orth = λ x y orth →
         begin
           QP.Q̂core (x +ᵥ y)
