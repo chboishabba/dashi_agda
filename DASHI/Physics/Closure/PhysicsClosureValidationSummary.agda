@@ -494,7 +494,9 @@ canonicalConstraintWitnessSummary : CCCW.CanonicalConstraintClosureWitness
 canonicalConstraintWitnessSummary = CSC.canonicalConstraintWitness
 
 canonicalConstraintTheoremSummary : CCCT.CanonicalConstraintClosureTheorem
-canonicalConstraintTheoremSummary = CSC.canonicalConstraintTheorem
+canonicalConstraintTheoremSummary =
+  CSTB.CanonicalStageCTheoremBundle.constraintTheoremSummary
+    CSTB.canonicalStageCTheoremBundle
 
 canonicalGaugeContractTheoremSummary : GGC.UniquenessClaim CI.C
 canonicalGaugeContractTheoremSummary = CSC.canonicalGaugeContractTheorem
@@ -502,7 +504,8 @@ canonicalGaugeContractTheoremSummary = CSC.canonicalGaugeContractTheorem
 canonicalGaugeConstraintBridgeTheoremSummary :
   CGCBT.CanonicalGaugeConstraintBridgeTheorem
 canonicalGaugeConstraintBridgeTheoremSummary =
-  CSC.canonicalGaugeConstraintBridgeTheorem
+  CSTB.CanonicalStageCTheoremBundle.gaugeBridgeSummary
+    CSTB.canonicalStageCTheoremBundle
 
 canonicalConstraintGaugePackageSummary :
   CCGP.CanonicalConstraintGaugePackage
@@ -513,7 +516,8 @@ canonicalParametricGaugeConstraintTheoremSummary :
   PGCT.ParametricGaugeConstraintTheorem
     canonicalConstraintGaugePackageSummary
 canonicalParametricGaugeConstraintTheoremSummary =
-  CSC.canonicalParametricGaugeConstraintTheorem
+  CSTB.CanonicalStageCTheoremBundle.canonicalParametricGaugeSummary
+    CSTB.canonicalStageCTheoremBundle
 
 secondaryConstraintGaugePackageSummary :
   CCGP.CanonicalConstraintGaugePackage
@@ -524,7 +528,8 @@ secondaryParametricGaugeConstraintTheoremSummary :
   PGCT.ParametricGaugeConstraintTheorem
     secondaryConstraintGaugePackageSummary
 secondaryParametricGaugeConstraintTheoremSummary =
-  CSC.secondaryParametricGaugeConstraintTheorem
+  CSTB.CanonicalStageCTheoremBundle.secondaryParametricGaugeSummary
+    CSTB.canonicalStageCTheoremBundle
 
 canonicalParametricGaugeConstraintBridgeTheoremSummary :
   PGCBT.ParametricGaugeConstraintBridgeTheorem
@@ -547,37 +552,43 @@ canonicalParametricAlgebraicClosureTheoremSummary :
   PACT.ParametricAlgebraicClosureTheorem
     canonicalConstraintGaugePackageSummary
 canonicalParametricAlgebraicClosureTheoremSummary =
-  CSC.canonicalParametricAlgebraicClosureTheorem
+  CSTB.CanonicalStageCTheoremBundle.canonicalParametricAlgebraicSummary
+    CSTB.canonicalStageCTheoremBundle
 
 secondaryParametricAlgebraicClosureTheoremSummary :
   PACT.ParametricAlgebraicClosureTheorem
     secondaryConstraintGaugePackageSummary
 secondaryParametricAlgebraicClosureTheoremSummary =
-  CSC.secondaryParametricAlgebraicClosureTheorem
+  CSTB.CanonicalStageCTheoremBundle.secondaryParametricAlgebraicSummary
+    CSTB.canonicalStageCTheoremBundle
 
 canonicalParametricAlgebraicCoherenceTheoremSummary :
   PACTC.ParametricAlgebraicCoherenceTheorem
     canonicalConstraintGaugePackageSummary
 canonicalParametricAlgebraicCoherenceTheoremSummary =
-  CSC.canonicalParametricAlgebraicCoherenceTheorem
+  CSTB.CanonicalStageCTheoremBundle.canonicalParametricAlgebraicCoherenceSummary
+    CSTB.canonicalStageCTheoremBundle
 
 secondaryParametricAlgebraicCoherenceTheoremSummary :
   PACTC.ParametricAlgebraicCoherenceTheorem
     secondaryConstraintGaugePackageSummary
 secondaryParametricAlgebraicCoherenceTheoremSummary =
-  CSC.secondaryParametricAlgebraicCoherenceTheorem
+  CSTB.CanonicalStageCTheoremBundle.secondaryParametricAlgebraicCoherenceSummary
+    CSTB.canonicalStageCTheoremBundle
 
 canonicalParametricAlgebraicStabilityTheoremSummary :
   PACTS.ParametricAlgebraicStabilityTheorem
     canonicalConstraintGaugePackageSummary
 canonicalParametricAlgebraicStabilityTheoremSummary =
-  CSC.canonicalParametricAlgebraicStabilityTheorem
+  CSTB.CanonicalStageCTheoremBundle.canonicalParametricAlgebraicStabilitySummary
+    CSTB.canonicalStageCTheoremBundle
 
 secondaryParametricAlgebraicStabilityTheoremSummary :
   PACTS.ParametricAlgebraicStabilityTheorem
     secondaryConstraintGaugePackageSummary
 secondaryParametricAlgebraicStabilityTheoremSummary =
-  CSC.secondaryParametricAlgebraicStabilityTheorem
+  CSTB.CanonicalStageCTheoremBundle.secondaryParametricAlgebraicStabilitySummary
+    CSTB.canonicalStageCTheoremBundle
 
 canonicalParametricAlgebraicClosureBundleTheoremSummary :
   PACTB.ParametricAlgebraicClosureBundleTheorem

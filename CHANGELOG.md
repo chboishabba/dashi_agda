@@ -580,3 +580,4 @@
 - Fixed canonical Stage C alias collisions between `Compatibility` and `Composability` on the algebra, recovery, and consumer ladders; `CanonicalStageC.agda` now uses distinct aliases and the grouped summary path compiles cleanly again.
 - Added `Sustainability` wave-regime rung across algebra, recovery, canonical consumer, and moonshine summary grouped surfaces.
 - Re-focused on the actual Stage C bottleneck instead of adding more local rungs: `ContractionForcesQuadraticStrong` now carries an explicit `ProjectionDefectQuadraticWitness` and a named `QuadraticUniquenessBridge`, and `ContractionQuadraticToSignatureBridgeTheorem` now exposes a named `QuadraticToSignatureBridgeSeam` instead of a raw pending placeholder.
+- 2026-03-11: added `Stewardship` theorem/consumer/summary rung to the grouped wave-regime ladder and re-exported it through the grouped closure/moonshine surfaces.

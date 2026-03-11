@@ -20,6 +20,8 @@ open import DASHI.Physics.UnifiedClosure as UC
 open import DASHI.Physics.ContractionQuadraticBridge as CQ
 open import DASHI.Physics.SignatureClassificationBridge as SC
 open import DASHI.Physics.CliffordEvenLiftBridge as CE
+open import DASHI.Physics.Core as Core
+open import DASHI.Physics.DecimationToClifford as D2C
 open import DASHI.Combinatorics.Entropy using (Involution)
 
 open import DASHI.Physics.DefaultClosure as DC
@@ -92,19 +94,32 @@ physicsUnification =
         { classify = λ _ _ → record { p = suc (suc (suc zero)) ; q = suc zero } }
     ; q2cl = record
         { build = λ out →
+            let
+              q : Core.Quadratic (CQ.V out)
+              q = record { Q = λ _ → ⊤ }
+              d : D2C.DecimationAlgebra (CQ.V out)
+              d = record
+                { A = CQ.V out
+                ; mul = λ x _ → x
+                ; gen = λ x → x
+                }
+              r : D2C.CliffordRelations (CQ.V out) q d
+              r = record { rel = ⊤ }
+            in
             record
-              { Cl = CQ.V out
-              ; embed = id
-              ; rel = ⊤
-              ; universal = ⊤
+              { quadratic = q
+              ; decimation = d
+              ; relations = r
+              ; universal = D2C.decimation⇒clifford q d r
               }
         }
     ; wl = record
         { buildEven = λ {V} {Scalar} Cℓ →
             record
-              { Even = CE.Clifford.Cl Cℓ
-              ; incl = id
-              ; closed = ⊤
+              { evenSubalg = record
+                  { Even = CE.Clifford.Cl Cℓ
+                  ; inc = id
+                  }
               }
         }
     }

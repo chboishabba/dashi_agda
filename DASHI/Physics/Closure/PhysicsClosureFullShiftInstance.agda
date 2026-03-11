@@ -16,7 +16,7 @@ open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Physics.QuadraticPolarizationCoreInstance as QPCI
 open import DASHI.Physics.Closure.PolarizationZLift as PZL
 open import Data.Product using (proj₁)
-open import DASHI.Geometry.QuadraticFormEmergence as QFE
+open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
 
 -- Concrete shift-closure instance with real Lyapunov witness.
 physicsClosureFullShift : PCFS.PhysicsClosureFullShift
@@ -28,12 +28,16 @@ physicsClosureFullShift =
     ; mdlFejer = MDLFA.mdlFejerShift
     ; dynamics = DCSI.shiftDynamics
     ; quadraticFormZ = λ {m} →
+        let
+          pkg =
+            PDP.fromEmergenceAxioms
+              (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
+              (QES.PDzero {m})
+              (QES.QuadraticEmergenceShiftAxioms {m})
+        in
         proj₁
-          (QFE.QuadraticFormEmergence
-            (QES.AdditiveVecℤ {m})
-            QES.ScalarFieldℤ
-            (QES.PDzero {m})
-            (QES.QuadraticEmergenceShiftAxioms {m}))
+          (PDP.quadraticFromProjectionDefect
+            (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ pkg)
     ; polarizationZ = λ {m} → PZL.polarizationZLift {m}
     ; orthogonalityZ = λ {m} → OZ.orthogonalityZLift {m}
     ; CS = CI.CS

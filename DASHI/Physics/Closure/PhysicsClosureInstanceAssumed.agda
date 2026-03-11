@@ -14,17 +14,9 @@ open import DASHI.Physics.Constraints.Generators as CG
 open import DASHI.Physics.Constraints.Bracket as CB
 open import DASHI.Physics.Constraints.Closure as CC
 open import DASHI.Physics.Constraints.ConcreteInstance as CI
-open import Data.Nat using (zero; z≤n)
-open import MDL.Core.Core as OldMDL
+open import DASHI.Physics.Closure.MDLLyapunovCompatibility as MDLC
 open import DASHI.Physics.UniversalityTheorem as UTH
 open import DASHI.Physics.RealClosureKit as RK
-
-mdlLyapTrivial : ∀ {S : Set} (T : S → S) → OldMDL.Lyapunov T
-mdlLyapTrivial T =
-  record
-    { L = λ _ → zero
-    ; descent = λ _ → z≤n
-    }
 
 -- Legacy assumed closure instance. Signature still comes from the concrete
 -- shift-orbit theorem path; constraint closure now reuses the same concrete
@@ -45,7 +37,7 @@ physicsClosureAssumed =
     ; CS = CI.CS
     ; L = CI.L
     ; constraintClosure = CI.closure
-    ; mdlLyap = λ {S} T → mdlLyapTrivial T
+    ; mdlLyap = λ {S} T → MDLC.mdlLyapTrivial T
     ; universality = UTH.canonicalUniversality (RK.RealClosureKit.C MRI.myKit)
     }
 

@@ -52,3 +52,4 @@ open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regim
 open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.AdaptabilityConsumer public
 open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.ScalabilityConsumer public
 open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.SustainabilityConsumer public
+open import DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.StewardshipConsumer public

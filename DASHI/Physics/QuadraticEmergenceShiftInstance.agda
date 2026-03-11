@@ -2,8 +2,10 @@ module DASHI.Physics.QuadraticEmergenceShiftInstance where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Unit using (⊤)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
-open import Data.Product using (_,_)
+open import Data.Product using (Σ; _,_; proj₁)
+open import Data.Unit using (⊤)
 open import Data.Vec using (Vec; []; _∷_; map; zipWith)
 import Data.Integer as Int
 open Int using (ℤ; _+_; _-_; _*_; +_)
@@ -15,6 +17,7 @@ import Tactic.RingSolver.NonReflective as NR
 import DASHI.Geometry.ProjectionDefect as PD
 open import DASHI.Geometry.QuadraticForm as QF
 open import DASHI.Geometry.QuadraticFormEmergence as QFE
+open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
 open import DASHI.Physics.QuadraticPolarization as QP
 
 module ℤR = EqR IntP.≡-setoid
@@ -196,3 +199,27 @@ QuadraticEmergenceShiftAxioms {m} =
           QP.Q̂core (QP.zeroVecℤ {m}) + QP.Q̂core x
         ∎
     }
+
+-- Package-first canonical routing helpers for the shift realization.
+projectionParallelogramShift :
+  ∀ {m} →
+  PDP.ProjectionDefectParallelogramPackage
+    (AdditiveVecℤ {m}) ScalarFieldℤ
+projectionParallelogramShift {m} =
+  PDP.fromEmergenceAxioms
+    (AdditiveVecℤ {m}) ScalarFieldℤ
+    (PDzero {m})
+    (QuadraticEmergenceShiftAxioms {m})
+
+quadraticShiftΣ :
+  ∀ {m} →
+  Σ (QF.QuadraticForm (AdditiveVecℤ {m}) ScalarFieldℤ) (λ _ → ⊤)
+quadraticShiftΣ {m} =
+  PDP.quadraticFromProjectionDefect
+    (AdditiveVecℤ {m}) ScalarFieldℤ
+    (projectionParallelogramShift {m})
+
+quadraticShift :
+  ∀ {m} →
+  QF.QuadraticForm (AdditiveVecℤ {m}) ScalarFieldℤ
+quadraticShift {m} = proj₁ (quadraticShiftΣ {m})

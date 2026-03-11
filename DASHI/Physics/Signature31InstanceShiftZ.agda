@@ -15,7 +15,6 @@ open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Geometry.Signature31FromConeArrowIsotropy as S31
 open import DASHI.Geometry.QuadraticForm as QF
-open import DASHI.Geometry.QuadraticFormEmergence as QFE
 open import DASHI.Geometry.Signature.HyperbolicFormZ as HFZ
 open import DASHI.Physics.OrbitSignatureDiscriminant as OSD
 open import DASHI.Physics.OrbitProfileComputedSignedPerm as OPCSP
@@ -33,12 +32,7 @@ m = 4
 
 -- Quadratic form derived from ℤ-lifted parallelogram proof.
 QFΣ : Σ (QF.QuadraticForm (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ) (λ _ → ⊤)
-QFΣ =
-  QFE.QuadraticFormEmergence
-    (QES.AdditiveVecℤ {m})
-    QES.ScalarFieldℤ
-    (QES.PDzero {m})
-    (QES.QuadraticEmergenceShiftAxioms {m})
+QFΣ = QES.quadraticShiftΣ {m}
 
 QF : QF.QuadraticForm (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
 QF = proj₁ QFΣ

@@ -5,6 +5,7 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Geometry.OrthogonalityFromPolarization as OP
 open import DASHI.Physics.Closure.CanonicalSpinDiracConsumer as CSDC
+open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 open import DASHI.Physics.Closure.KnownLimitsEffectiveGeometryTheorem as KLET
 open import DASHI.Physics.Closure.KnownLimitsLocalRecoveryTheorem as KLRT
 open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosureShiftInstance as MCCSI
@@ -15,6 +16,8 @@ open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 
 record KnownLimitsPropagationSpinTheorem : Setω where
   field
+    contractionSignatureToSpinDiracBridge :
+      CSSDB.ContractionSignatureToSpinDiracBridgeTheorem
     spinLocalLorentzBridge :
       SLLB.SpinLocalLorentzBridge MCCSI.minimumCredibleClosureShift
     localRecovery : KLRT.KnownLimitsLocalRecoveryTheorem
@@ -31,7 +34,9 @@ canonicalKnownLimitsPropagationSpinTheorem :
   KnownLimitsPropagationSpinTheorem
 canonicalKnownLimitsPropagationSpinTheorem =
   record
-    { spinLocalLorentzBridge = SLLB.canonicalSpinLocalLorentzBridge
+    { contractionSignatureToSpinDiracBridge =
+        CSSDB.canonicalContractionSignatureToSpinDiracBridgeTheorem
+    ; spinLocalLorentzBridge = SLLB.canonicalSpinLocalLorentzBridge
     ; localRecovery = KLRT.canonicalKnownLimitsLocalRecoveryTheorem
     ; effectiveGeometry = KLET.canonicalKnownLimitsEffectiveGeometryTheorem
     ; canonicalConsumer =

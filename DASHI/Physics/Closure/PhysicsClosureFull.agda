@@ -8,7 +8,7 @@ open import Data.Unit using (⊤; tt)
 open import DASHI.Physics.RealClosureKit
 open import DASHI.Geometry.ProjectionDefect
 open import DASHI.Geometry.QuadraticForm
-open import DASHI.Geometry.QuadraticFormEmergence
+open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
 open import DASHI.Geometry.OrthogonalityFromPolarization
 open import DASHI.Geometry.ConeTimeIsotropy
 open import DASHI.Geometry.Signature31FromConeArrowIsotropy
@@ -30,7 +30,7 @@ record PhysicsClosureFull : Setω where
     -- Quadratic emergence
     metricEmergence :
       ∀ {ℓv ℓs} (A : Additive ℓv) (F : ScalarField ℓs)
-        (PD : ProjectionDefect A) (Ax : QuadraticEmergenceAxioms A F PD)
+        (Pkg : PDP.ProjectionDefectParallelogramPackage A F)
       → Σ (QuadraticForm A F) (λ _ → ⊤)
     quadraticFormZ  :
       ∀ {m : Nat} →
