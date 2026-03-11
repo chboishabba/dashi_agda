@@ -8,8 +8,10 @@ open import DASHI.Physics.OrbitSignatureDiscriminant as OSD
 import DASHI.Physics.Signature31IntrinsicShiftInstance as S31I
 
 -- Headline theorem module for the current repo state.
--- The 4D shift instance now discharges an intrinsic shell-forcing theorem, and
--- the computed signed-permutation profile appears as a compatibility corollary.
+-- The 4D shift instance now discharges a causal/quadratic signature theorem,
+-- while the computed signed-permutation profile is retained as a secondary
+-- compatibility witness.
+-- Primary theorem export does not depend on profile equality as input.
 
 profileEq : OSD.MeasuredProfile ≡ OSD.ProfileOf OSD.sig31
 profileEq = S31I.profileEq

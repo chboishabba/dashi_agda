@@ -13,6 +13,15 @@ Archive-backed status update:
   prove the invariant quadratic + uniqueness-up-to-scale seams from the
   contraction/projection machinery and then derive the downstream
   signature/Clifford/gauge chain from that theorem.
+- Canonical closure routing now includes an explicit
+  `ContractionForcesQuadraticStrong -> QuadraticToCliffordBridgeTheorem`
+  step that builds a canonical bilinear-form interface from normalized
+  quadratic data before spin/Dirac layers.
+- Active closure seam tightening:
+  keep the canonical bridge interface fixed while replacing the internal
+  signature source with a causal-classification theorem on the normalized
+  quadratic (`Q̂core`) under cone/arrow/isotropy/finite-speed/nondegeneracy
+  assumptions.
 
 Current theorem status:
 
@@ -144,9 +153,9 @@ Current theorem status:
   reserve Monster/Moonshine language for a future graded-module / trace bridge.
 - Current moonshine-facing prototype:
   finite graded shell series and twined fixed-point traces are now present for
-  the shift signed action and the standalone `B₄` Weyl action; the wave lift
-  remains a prototype grading adapter rather than a theorem-bearing trace
-  module.
+  the shift signed action and the standalone `B₄` Weyl action; canonical
+  closure now carries a theorem-backed `Quadratic⇒Clifford → WaveLift⇒Even`
+  factorization bridge, while the moonshine trace adapter remains prototype.
   Richer twiner libraries and a first graded/twined comparison report surface
   are now landed.
   A richer comparison bundle now sits over the existing detailed report and

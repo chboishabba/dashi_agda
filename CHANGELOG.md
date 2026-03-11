@@ -1,7 +1,99 @@
 # Changelog
 
+## 2026-03-12
+
+- completed a theorem-dependency audit of the quadratic=>signature path and
+  removed the remaining hidden profile prerequisite from intrinsic theorem
+  construction:
+  - split
+    `DASHI/Geometry/Signature31FromIntrinsicShellForcing.agda` into
+    `IntrinsicSignatureCoreAxioms` (theorem-primary inputs) and
+    `IntrinsicProfileWitness` (secondary witness inputs),
+  - made `signature31-theoremFromIntrinsic` and `signature31FromIntrinsic`
+    depend only on core axioms,
+  - kept profile equality and profile-driven law extraction available only as
+    secondary certification surfaces.
+- rewired
+  `DASHI/Physics/Signature31IntrinsicShiftInstance.agda` to construct
+  `shiftIntrinsicCoreAxioms` and `shiftProfileWitness` separately, preserving
+  exports while preventing profile data from being a constructor-time
+  dependency of the primary theorem.
+- clarified `DASHI/Physics/Signature31FromShiftOrbitProfile.agda` comments to
+  state explicitly that the primary theorem export does not depend on profile
+  equality input.
+- finished the projection/defect split cleanup in
+  `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda`:
+  `quadraticEmergenceFromProjectionDefectSplit` now derives
+  `Additive-On-Orth` and `PD-splits` locally instead of importing those fields
+  from `QuadraticEmergenceShiftAxioms`.
+- validated the canonical contraction path after cleanup with targeted checks:
+  `ProjectionDefectSplitForcesParallelogram`,
+  `ContractionForcesQuadraticStrong`,
+  `ContractionForcesQuadraticTheorem`,
+  `ContractionQuadraticToSignatureBridgeTheorem`,
+  `ContractionSignatureToSpinDiracBridgeTheorem`.
+
 ## 2026-03-11
 
+- strengthened `DASHI/Physics/CliffordEvenLiftBridge.agda` so
+  `WaveLift⇒Even` is theorem-shaped: added `CliffordGrading`,
+  structural `EvenSubalgebra`, canonical `WaveLift` packaging, and explicit
+  factorization witnesses
+  `Σ e ∈ Even, waveLift s ≡ incl e` in `WaveLiftIntoEven`.
+- rewired `DASHI/Physics/ConcreteClosureStack.agda` to inhabit the stronger
+  canonical bridge fields by construction:
+  `q2cl` now exports `mul`/`pairedWord`, and `wl` now builds
+  grading + even-subalgebra + wave-lift + factorization witnesses from the
+  same canonical Clifford object.
+- added
+  `DASHI/Physics/Closure/CliffordToEvenWaveLiftBridgeTheorem.agda` as the
+  dedicated canonical export module for
+  `Contraction⇒Quadratic → Quadratic⇒Signature → Quadratic⇒Clifford → WaveLift⇒Even`.
+- updated `README.md`, `spec.md`, `architecture.md`, `plan.md`, `TODO.md`,
+  and `COMPACTIFIED_CONTEXT.md` to lock the downstream-only
+  `Quadratic⇒Clifford` dependency for `WaveLift⇒Even`.
+
+- added `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda` as a
+  canonical closure bridge from strengthened contraction output to a Clifford
+  presentation package, including:
+  - normalized quadratic witness export from
+    `ContractionForcesQuadraticStrong.uniqueUpToScaleWitness`,
+  - canonical bilinear-form builder from normalized quadratic data,
+  - theorem-level `Quadratic⇒Clifford` build surface,
+  - explicit universal-property seam field.
+- rewired `CanonicalContractionToCliffordBridgeTheorem` to export the new
+  quadratic-to-Clifford theorem package alongside existing bridge fields.
+- upgraded the universal seam in
+  `QuadraticToCliffordBridgeTheorem` from a raw placeholder to an explicit
+  factorization interface (`TargetCarrier`, `factor`,
+  generator-compatibility law).
+- completed quadratic=>signature theorem-source hardening by:
+  - adding `DASHI/Geometry/CausalForcesLorentz31.agda` as the canonical
+    causal-classification choke point for normalized quadratics,
+  - threading
+    `ContractionForcesQuadraticStrong.uniqueUpToScaleWitness` into that module
+    as the explicit normalization seam for `Q̂core`,
+  - splitting the signature classification internals into
+    `eliminateEuclideanAndDegenerate` (Lemma A) and
+    `spatialIsotropyAndArrowForce31` (Lemma B),
+  - rewiring `Signature31FromIntrinsicShellForcing` so
+    `signature31-theoremFromIntrinsic` is theorem-primary through
+    `lorentz31-from-causal-axioms`,
+  - retaining profile equality as secondary certification via
+    `profileSignatureLawFromIntrinsic`,
+  - preserving `ContractionQuadraticToSignatureBridgeTheorem` surface
+    unchanged (`S31OP.signature31-theorem`, `S31OP.signature31`).
+- completed contraction=>quadratic canonical tightening by:
+  - adding `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda` as
+    the explicit split/parallelogram bridge module,
+  - routing `ContractionForcesQuadraticTheorem` and
+    `ContractionForcesQuadraticStrong` through that module’s canonical
+    projection-defect package,
+  - expanding `ContractionForcesQuadraticStrong` with
+    `invariantUnderT`, `nondegenerate`, and `compatibleWithIsotropy` fields,
+    while preserving
+    `ContractionQuadraticToSignatureBridgeTheorem` and
+    `normalizedQuadratic` consumer behavior unchanged.
 - completed the pending cross-realization snap-threshold extension by:
   - adding `Chi2BoundaryBoolInversionWitness` as a Bool inversion-specific
     witness module on the shared closure carrier,
@@ -581,3 +673,4 @@
 - Added `Sustainability` wave-regime rung across algebra, recovery, canonical consumer, and moonshine summary grouped surfaces.
 - Re-focused on the actual Stage C bottleneck instead of adding more local rungs: `ContractionForcesQuadraticStrong` now carries an explicit `ProjectionDefectQuadraticWitness` and a named `QuadraticUniquenessBridge`, and `ContractionQuadraticToSignatureBridgeTheorem` now exposes a named `QuadraticToSignatureBridgeSeam` instead of a raw pending placeholder.
 - 2026-03-11: added `Stewardship` theorem/consumer/summary rung to the grouped wave-regime ladder and re-exported it through the grouped closure/moonshine surfaces.
+- 2026-03-11: added `Accountability` theorem/consumer/summary rung to the grouped wave-regime ladder and re-exported it through the grouped closure/moonshine surfaces.

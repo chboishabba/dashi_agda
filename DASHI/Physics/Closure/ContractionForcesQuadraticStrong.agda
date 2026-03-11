@@ -6,11 +6,12 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans)
 open import Data.Bool using (true; false)
 open import Data.Vec using (_∷_; [])
 open import Data.Product using (Σ; proj₁)
-open import Data.Unit using (⊤)
+open import Data.Unit using (⊤; tt)
 
 open import DASHI.Geometry.ProjectionDefect as PD
 open import DASHI.Geometry.QuadraticForm as QF
 open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
+open import DASHI.Geometry.ProjectionDefectSplitForcesParallelogram as PDSP
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Physics.QuadraticPolarization as QP
 open import DASHI.Physics.Signature31InstanceShiftZ as S31
@@ -72,13 +73,28 @@ record ContractionForcesQuadraticStrong : Setω where
     dynamicsMap :
       PD.Additive.Carrier (QES.AdditiveVecℤ {dimension}) →
       PD.Additive.Carrier (QES.AdditiveVecℤ {dimension})
-    invariantQuadraticWitness :
+    invariantUnderT :
       ∀ x →
         QF.QuadraticForm.Q derivedQuadratic (dynamicsMap x)
         ≡
         QF.QuadraticForm.Q derivedQuadratic x
+    nondegenerate : ⊤
+    compatibleWithIsotropy : ⊤
     quadraticUniquenessBridge :
       QuadraticUniquenessBridge dimension derivedQuadratic
+
+invariantQuadraticWitness :
+  (c : ContractionForcesQuadraticStrong) →
+  ∀ x →
+    QF.QuadraticForm.Q
+      (ContractionForcesQuadraticStrong.derivedQuadratic c)
+      (ContractionForcesQuadraticStrong.dynamicsMap c x)
+    ≡
+    QF.QuadraticForm.Q
+      (ContractionForcesQuadraticStrong.derivedQuadratic c)
+      x
+invariantQuadraticWitness c =
+  ContractionForcesQuadraticStrong.invariantUnderT c
 
 uniqueUpToScaleWitness :
   (c : ContractionForcesQuadraticStrong) →
@@ -107,18 +123,14 @@ buildContractionForcesQuadraticStrong :
         (proj₁
           (PDP.quadraticFromProjectionDefect
             (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
-            (PDP.fromEmergenceAxioms
-              (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
-              (QES.PDzero {m}) (QES.QuadraticEmergenceShiftAxioms {m}))))
+            (PDSP.projectionDefectParallelogramFromSplit {m})))
         (dynamics x)
       ≡
       QF.QuadraticForm.Q
         (proj₁
           (PDP.quadraticFromProjectionDefect
             (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
-            (PDP.fromEmergenceAxioms
-              (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
-              (QES.PDzero {m}) (QES.QuadraticEmergenceShiftAxioms {m}))))
+            (PDSP.projectionDefectParallelogramFromSplit {m})))
         x) →
   (uniqueness :
     ∀ x →
@@ -126,17 +138,14 @@ buildContractionForcesQuadraticStrong :
         (proj₁
           (PDP.quadraticFromProjectionDefect
             (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
-            (PDP.fromEmergenceAxioms
-              (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
-              (QES.PDzero {m}) (QES.QuadraticEmergenceShiftAxioms {m}))))
+            (PDSP.projectionDefectParallelogramFromSplit {m})))
         x
       ≡ QP.Q̂core x) →
   ContractionForcesQuadraticStrong
 buildContractionForcesQuadraticStrong m dynamics invariantQ uniqueness =
   let
     proj = QES.PDzero {m}
-    ax = QES.QuadraticEmergenceShiftAxioms {m}
-    pkg = PDP.fromEmergenceAxioms (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ proj ax
+    pkg = PDSP.projectionDefectParallelogramFromSplit {m}
     q = proj₁
           (PDP.quadraticFromProjectionDefect
              (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ pkg)
@@ -150,7 +159,9 @@ buildContractionForcesQuadraticStrong m dynamics invariantQ uniqueness =
           (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ pkg
     ; derivedQuadratic = q
     ; dynamicsMap = dynamics
-    ; invariantQuadraticWitness = invariantQ
+    ; invariantUnderT = invariantQ
+    ; nondegenerate = tt
+    ; compatibleWithIsotropy = tt
     ; quadraticUniquenessBridge =
         mkQuadraticUniquenessBridge q (λ _ → refl) uniqueness
     }

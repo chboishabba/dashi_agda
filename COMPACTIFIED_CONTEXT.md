@@ -2,6 +2,60 @@
 
 ## 2026-03-11
 
+- Canonical projection/defect split bridge cleanup completed:
+  `quadraticEmergenceFromProjectionDefectSplit` now carries local proofs for
+  `Additive-On-Orth` and `PD-splits` in
+  `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda`, removing
+  those passthrough dependencies on `QuadraticEmergenceShiftAxioms`.
+- `QuadraticToCliffordBridgeTheorem` universal seam is now upgraded from a
+  raw placeholder to an explicit factorization interface carrying:
+  target carrier, factor map, and generator-compatibility witness.
+- WaveLift closure direction is now frozen as strictly downstream:
+  `Contraction⇒Quadratic → Quadratic⇒Signature → Quadratic⇒Clifford → WaveLift⇒Even`.
+- Canonical quadratic-to-Clifford bridge landed as a separate theorem module:
+  `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`.
+  It consumes `ContractionForcesQuadraticStrong` directly, exposes
+  normalized-quadratic transport via `uniqueUpToScaleWitness`, constructs a
+  canonical bilinear-form surface from normalized quadratic data, and adds an
+  explicit universal-property seam field on the theorem record.
+- `CanonicalContractionToCliffordBridgeTheorem` now exports that canonical
+  quadratic-to-Clifford theorem package alongside existing bridge surfaces.
+- Implementation contract for this turn:
+  - harden canonical `Quadratic⇒Clifford` bridge surface first;
+  - add canonical Clifford grading + `Cl⁺` interface;
+  - define canonical wave lift in that same carrier pipeline using even-word
+    construction;
+  - prove a factorization witness through `EvenSubalgebra.incl`.
+- Do not introduce a separate wave algebra disconnected from the canonical
+  quadratic/Clifford closure chain.
+
+- Quadratic=>Signature completion direction is now pinned:
+  preserve the canonical bridge surface
+  (`ContractionQuadraticToSignatureBridgeTheorem`) unchanged, but move
+  signature forcing internals to a theorem-primary causal classification path.
+- Canonical signature choke-point module promoted in docs:
+  `DASHI/Geometry/CausalForcesLorentz31.agda`.
+  Intended internal split:
+  Lemma A (eliminate Euclidean/degenerate competitors) and
+  Lemma B (spatial isotropy + arrow + finite speed force `(3,1)`),
+  with normalization tied to
+  `ContractionForcesQuadraticStrong.uniqueUpToScaleWitness`.
+- Orbit-profile evidence remains in the route as secondary witness/cross-check,
+  not the primary theorem source.
+- Canonical contraction=>quadratic tightening landed on the bottleneck path:
+  - added `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda`
+    as the dedicated split/parallelogram bridge surface.
+  - rewired
+    `DASHI/Physics/Closure/ContractionForcesQuadraticTheorem.agda` and
+    `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
+    to consume the canonical projection-defect package from that bridge.
+  - kept
+    `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
+    unchanged at the interface level (still consuming
+    `uniqueUpToScaleWitness` from the strengthened theorem).
+  - `ContractionForcesQuadraticStrong` now explicitly carries
+    `invariantUnderT`, `nondegenerate`, and `compatibleWithIsotropy` fields.
+
 - Added new canonical seam bridge module:
   `DASHI/Physics/Closure/ContractionSignatureToSpinDiracBridgeTheorem.agda`.
 - Export wiring is complete across Stage-C surfaces:

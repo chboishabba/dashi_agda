@@ -1,5 +1,9 @@
 module DASHI.Physics.Closure.ContractionForcesQuadraticTheorem where
 
+-- Canonical contraction -> quadratic bridge surface.
+-- Preferred dependency chain:
+-- ProjectionDefect -> ProjectionDefectToParallelogram -> QuadraticForm.
+
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -8,6 +12,7 @@ open import Data.Product using (Σ; _,_; proj₁)
 open import DASHI.Geometry.ProjectionDefect as PD
 open import DASHI.Geometry.QuadraticForm as QF
 open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
+open import DASHI.Geometry.ProjectionDefectSplitForcesParallelogram as PDSP
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Physics.Signature31FromShiftOrbitProfile as S31OP
@@ -29,10 +34,7 @@ canonicalContractionForcesQuadraticTheorem :
 canonicalContractionForcesQuadraticTheorem m =
   let
     proj = QES.PDzero {m}
-    pkg =
-      PDP.fromEmergenceAxioms
-        (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ proj
-        (QES.QuadraticEmergenceShiftAxioms {m})
+    pkg = PDSP.projectionDefectParallelogramFromSplit {m}
   in
   record
     { dimension = m

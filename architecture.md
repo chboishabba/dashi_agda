@@ -32,6 +32,23 @@ policy and consumed accordingly.
    modules only.
 3. Thread signature/Clifford/gauge recovery from canonical spine exports
    instead of parallel emergence routes.
+4. Keep signature and Clifford routes logically separate:
+   - signature route:
+     `ContractionForcesQuadraticStrong -> ContractionQuadraticToSignatureBridgeTheorem`
+   - Clifford route:
+     `ContractionForcesQuadraticStrong -> QuadraticToCliffordBridgeTheorem`
+     (canonical bilinear from normalized quadratic, then Clifford presentation).
+
+## WaveLift⇒Even Architecture Rule (2026-03-11)
+1. `Quadratic⇒Clifford` is the sole upstream producer for
+   `WaveLift⇒Even` on the canonical path.
+2. `WaveLift⇒Even` is a factorization theorem, not a predicate-only claim:
+   `State → Cl` must factor through `EvenSubalgebra.incl`.
+3. Add explicit Clifford grading interface (`parity`, closure on multiplication,
+   unit-even witness) at the canonical Clifford bridge layer.
+4. Define canonical wave lift using even Clifford words so image-evenness is by
+   construction.
+5. Keep this independent from full Dirac operator semantics at this stage.
 
 ## Performance Intent
 Reducing parallel dependency paths lowers normalization and transport overhead.

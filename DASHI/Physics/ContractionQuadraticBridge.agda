@@ -4,6 +4,16 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Ultrametric as UMetric
 open import Contraction as Contr using (StrictContraction)
 
+record LyapunovWitness (V : Set) (Scalar : Set) (Q : V → Scalar) : Set₁ where
+  field
+    potential : V → Scalar
+    potentialMatchesQuadratic : ∀ v → potential v ≡ Q v
+
+record UniqueUpToScaleWitness (V : Set) (Scalar : Set) (Q : V → Scalar) : Set₁ where
+  field
+    referenceQuadratic : V → Scalar
+    normalized : ∀ v → Q v ≡ referenceQuadratic v
+
 -- Abstract quadratic output forced by contraction.
 record QuadraticOutput : Set₁ where
   field
@@ -12,8 +22,8 @@ record QuadraticOutput : Set₁ where
     B : V → V → Scalar
     Q : V → Scalar
     Q-def : ∀ v → Q v ≡ B v v
-    Lyapunov : Set
-    UniqueUpToScale : Set
+    lyapunovWitness : LyapunovWitness V Scalar Q
+    uniqueUpToScaleWitness : UniqueUpToScaleWitness V Scalar Q
 
 open QuadraticOutput public
 
@@ -28,4 +38,3 @@ record Contraction⇒Quadratic
     out : QuadraticOutput
 
 open Contraction⇒Quadratic public
-

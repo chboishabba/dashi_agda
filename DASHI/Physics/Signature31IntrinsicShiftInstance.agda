@@ -1,14 +1,17 @@
 module DASHI.Physics.Signature31IntrinsicShiftInstance where
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Data.Unit using (tt)
 
 open import DASHI.Geometry.ConeArrowOrientationAsymmetry as CAOA
 open import DASHI.Geometry.ConeArrowOrbitStructure as CAOS
 open import DASHI.Geometry.ConeArrowShellStratification as CASS
 open import DASHI.Geometry.ConeArrowIsotropyOrbitProfile as CAOP
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
+open import DASHI.Geometry.CausalForcesLorentz31 as CFL
 open import DASHI.Geometry.Signature31FromIntrinsicShellForcing as S31ISF
 open import DASHI.Geometry.SignatureUniqueness31 as SU using (Signature31Theorem)
+open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS
 open import DASHI.Physics.ConeArrowIsotropyShiftOrbitEnumeration as SOE
 open import DASHI.Physics.OrbitSignatureDiscriminant as OSD
 open import DASHI.Physics.Signature31ShiftProfileWitness as SPW
@@ -45,9 +48,26 @@ shiftProfileMatches31
         | SOE.shiftEnumeration-shell2≡computed =
   SPW.computed≡sig31Profile
 
-shiftIntrinsicAxioms :
-  S31ISF.IntrinsicSignatureAxioms
-shiftIntrinsicAxioms =
+shiftIntrinsicCoreAxioms :
+  S31ISF.IntrinsicSignatureCoreAxioms
+shiftIntrinsicCoreAxioms =
+  record
+    { strengthenedContraction = CFQS.canonicalNontrivialInvariantStrong
+    ; causalSymmetry =
+        record
+          { coneNontrivial = tt
+          ; arrowOrientation = tt
+          ; isotropyWitness = tt
+          ; finiteSpeedWitness = tt
+          ; involutionWitness = tt
+          ; nondegenerateQuadratic = tt
+          ; quotientContractionWitness = tt
+          }
+    }
+
+shiftProfileWitness :
+  S31ISF.IntrinsicProfileWitness shiftIntrinsicCoreAxioms
+shiftProfileWitness =
   record
     { shellStratification = shiftShellStratification
     ; orientation = shiftOrientation
@@ -60,11 +80,11 @@ profileEq :
       (CAOA.IntrinsicOrientation.orientationTag shiftOrientation)
       shiftOrbitStructure)
   ≡ OSD.ProfileOf OSD.sig31
-profileEq = S31ISF.profileEqFromIntrinsic shiftIntrinsicAxioms
+profileEq = S31ISF.profileEqFromIntrinsic shiftProfileWitness
 
 signature31-theorem : Signature31Theorem
 signature31-theorem =
-  S31ISF.signature31-theoremFromIntrinsic shiftIntrinsicAxioms
+  S31ISF.signature31-theoremFromIntrinsic shiftIntrinsicCoreAxioms
 
 signature31 : CTI.Signature
-signature31 = S31ISF.signature31FromIntrinsic shiftIntrinsicAxioms
+signature31 = S31ISF.signature31FromIntrinsic shiftIntrinsicCoreAxioms

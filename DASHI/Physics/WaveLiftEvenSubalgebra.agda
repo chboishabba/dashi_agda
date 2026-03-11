@@ -2,6 +2,11 @@
 
 module DASHI.Physics.WaveLiftEvenSubalgebra where
 
+-- Prototype-only surface.
+-- Keep this module cycle-safe and lightweight for wave/moonshine experiments.
+-- Canonical WaveLift=>Even theorem exports belong to:
+--   DASHI.Physics.Closure.CliffordToEvenWaveLiftBridgeTheorem
+
 open import Level using (Level; suc)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)

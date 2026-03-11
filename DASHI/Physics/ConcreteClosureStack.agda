@@ -3,8 +3,9 @@ module DASHI.Physics.ConcreteClosureStack where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat using (_≤_; _<_; z≤n; s≤s)
-open import Data.Bool using (false)
+open import Data.Bool using (Bool; false; true)
 open import Data.Nat.Properties using (≤-refl; ≤-trans; ≤-<-trans; <-≤-trans)
+open import Data.Product using (Σ; _,_)
 open import Data.Unit.Polymorphic using (⊤; tt)
 
 open import Ultrametric as UMetric
@@ -22,6 +23,7 @@ open import DASHI.Physics.SignatureClassificationBridge as SC
 open import DASHI.Physics.CliffordEvenLiftBridge as CE
 open import DASHI.Physics.Core as Core
 open import DASHI.Physics.DecimationToClifford as D2C
+open import DASHI.Physics.Signature31FromShiftOrbitProfile as S31OP
 open import DASHI.Combinatorics.Entropy using (Involution)
 
 open import DASHI.Physics.DefaultClosure as DC
@@ -81,8 +83,16 @@ physicsUnification =
             ; B = λ _ _ → zero
             ; Q = λ _ → zero
             ; Q-def = λ _ → refl
-            ; Lyapunov = ⊤
-            ; UniqueUpToScale = ⊤
+            ; lyapunovWitness =
+                record
+                  { potential = λ _ → zero
+                  ; potentialMatchesQuadratic = λ _ → refl
+                  }
+            ; uniqueUpToScaleWitness =
+                record
+                  { referenceQuadratic = λ _ → zero
+                  ; normalized = λ _ → refl
+                  }
             }
         }
     ; sym = record
@@ -91,7 +101,15 @@ physicsUnification =
         ; fs  = record { local = λ _ _ → ⊤ ; preservesLocality = λ _ _ _ → tt }
         }
     ; qs = record
-        { classify = λ _ _ → record { p = suc (suc (suc zero)) ; q = suc zero } }
+        { classify = λ _ _ →
+            record
+              { p = suc (suc (suc zero))
+              ; q = suc zero
+              ; signatureValue = S31OP.signature31
+              ; signatureForced31 = refl
+              ; signatureTheorem = S31OP.signature31-theorem
+              }
+        }
     ; q2cl = record
         { build = λ out →
             let
@@ -111,15 +129,34 @@ physicsUnification =
               ; decimation = d
               ; relations = r
               ; universal = D2C.decimation⇒clifford q d r
+              ; mul = D2C.DecimationAlgebra.mul d
+              ; pairedWord = λ x y →
+                  D2C.DecimationAlgebra.mul d
+                    (D2C.DecimationAlgebra.gen d x)
+                    (D2C.DecimationAlgebra.gen d y)
               }
         }
     ; wl = record
-        { buildEven = λ {V} {Scalar} Cℓ →
+        { build = λ {V} {Scalar} Cℓ →
             record
-              { evenSubalg = record
-                  { Even = CE.Clifford.Cl Cℓ
-                  ; inc = id
+              { State = Σ V (λ _ → V)
+              ; grading = record
+                  { parity = λ _ → true
+                  ; evenClosedMul = ⊤
+                  ; oneEven = ⊤
                   }
+              ; Even = record
+                  { Even = CE.Clifford.Cl Cℓ
+                  ; incl = id
+                  ; closed = ⊤
+                  }
+              ; waveLift = record
+                  { lift = λ where
+                      (x , y) → CE.Clifford.pairedWord Cℓ x y
+                  }
+              ; landsInEven = λ where
+                  (x , y) →
+                    CE.Clifford.pairedWord Cℓ x y , refl
               }
         }
     }

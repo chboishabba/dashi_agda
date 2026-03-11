@@ -48,6 +48,14 @@ Priority bucket: `P1`
   from repo-facing claims.
 - [ ] Keep `Docs/ClosurePipeline.md` label registry current whenever new
   closure modules are added or promoted.
+- [x] Add canonical quadratic-to-Clifford bridge theorem module:
+  `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`, deriving a
+  canonical bilinear form from normalized quadratic output
+  (`ContractionForcesQuadraticStrong.uniqueUpToScaleWitness`) and exposing a
+  universal-property seam on the theorem surface.
+- [x] Wire canonical contraction-to-Clifford bridge exports to include the new
+  quadratic-to-Clifford theorem surface in
+  `CanonicalContractionToCliffordBridgeTheorem`.
 
 ## Track S — Canonical Spine Simplification
 
@@ -81,12 +89,43 @@ Current focus:
 `DASHI/Geometry/ProjectionDefectToParallelogram.agda` and
 `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
 
-- Replace the raw `Set` seam in `ContractionForcesQuadraticStrong` with a
+- [x] Replace the raw `Set` seam in `ContractionForcesQuadraticStrong` with a
   named uniqueness/compatibility seam record.
-- Replace the placeholder-style pending field in
+- [x] Replace the placeholder-style pending field in
   `ContractionQuadraticToSignatureBridgeTheorem` with a named bridge seam
   record that makes the remaining quadratic/signature compatibility gap
   explicit.
+- [x] Add canonical split/parallelogram bridge module:
+  `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda`, and route
+  contraction→quadratic theorem surfaces through it.
+- [x] Replace passthrough fields in
+  `quadraticEmergenceFromProjectionDefectSplit`
+  (`Additive-On-Orth`, `PD-splits`) with direct derivations from the
+  no-leakage/orthogonality + energy-split theorem pipeline.
+- [x] Complete the quadratic-to-signature classification internals using the
+  normalized quadratic from
+  `ContractionForcesQuadraticStrong.uniqueUpToScaleWitness`, with theorem
+  source rooted in causal/symmetry data instead of profile-only forcing.
+- [x] Land explicit Lemma A in the canonical signature route:
+  eliminate Euclidean/degenerate competitors via cone/arrow compatibility.
+- [x] Land explicit Lemma B in the canonical signature route:
+  spatial isotropy + one arrow direction + finite speed force `(3,1)`.
+- [x] Keep orbit-profile equality as a secondary witness and negative-control
+  eliminator on the signature route, not the primary theorem engine.
+- [x] Strengthen `QuadraticToCliffordBridgeTheorem` from a raw
+  presentation-level seam to an explicit factorization interface carrying:
+  target carrier, factor map, and generator-compatibility law.
+- [ ] Complete canonical `Quadratic⇒Clifford` theorem surface as the exclusive
+  upstream for `WaveLift⇒Even`.
+- [ ] Add canonical Clifford grading + even-subalgebra interfaces on
+  `DASHI.Physics.CliffordEvenLiftBridge`.
+- [ ] Define canonical wave lift on the same closure state/carrier pipeline and
+  ensure its image is built from even words.
+- [ ] Prove `WaveLift⇒Even` as factorization through `EvenSubalgebra.incl`
+  (witness form), not only a loose parity predicate.
+- [ ] Thread the completed `WaveLift⇒Even` theorem into canonical bridge
+  bundles (`CanonicalContractionToCliffordBridgeTheorem`,
+  `KnownLimitsQFTBridgeTheorem`) without adding a parallel wave algebra.
 
 - Replace trivial closure fallbacks on the minimum credible path.
   Current priority:
@@ -485,3 +524,4 @@ Cleanup
 - [x] Split `Compatibility` / `Composability` aliases on the canonical Stage C import surface so grouped ladder compiles stop depending on import-order collisions.
  - Landed `Sustainability` rung across algebra, recovery, consumer, and moonshine grouped wave-regime ladders.
 - 2026-03-11: landed `Stewardship` rung across algebra/recovery/consumer/moonshine grouped wave-regime surfaces.
+- 2026-03-11: landed `Accountability` rung across algebra/recovery/consumer/moonshine grouped wave-regime surfaces.

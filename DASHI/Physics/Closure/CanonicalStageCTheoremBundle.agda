@@ -29,6 +29,7 @@ open import DASHI.Physics.Closure.KnownLimitsCausalPropagationTheorem as KLCPT
 open import DASHI.Physics.Closure.KnownLimitsLocalCausalEffectivePropagationTheorem as KLCEPT
 open import DASHI.Physics.Closure.KnownLimitsGeometryTransportTheorem as KLGT
 open import DASHI.Physics.Closure.KnownLimitsLocalCausalGeometryCoherenceTheorem as KLCGCT
+open import DASHI.Physics.Closure.KnownLimitsLocalCoherenceTheorem as KLLCT
 open import DASHI.Physics.Closure.KnownLimitsExtendedLocalRecoveryTheorem as KLER
 open import DASHI.Physics.Closure.KnownLimitsLocalPhysicsCoherenceTheorem as KLLPC
 open import DASHI.Physics.Closure.KnownLimitsRecoveredLocalRegimeTheorem as KLRLR
@@ -57,6 +58,8 @@ open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS
 open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
 open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
+open import DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem as CCTCB
+open import DASHI.Physics.Closure.CanonicalContractionQuadraticSignatureBridgeTheorem as CCQSB
 
 record CanonicalStageCTheoremBundle : Setω where
   field
@@ -222,6 +225,8 @@ record CanonicalStageCTheoremBundle : Setω where
     geometryTransportSummary : KLGT.KnownLimitsGeometryTransportTheorem
     localCausalGeometryCoherenceSummary :
       KLCGCT.KnownLimitsLocalCausalGeometryCoherenceTheorem
+    localCoherenceSummary :
+      KLLCT.KnownLimitsLocalCoherenceTheorem
     extendedLocalRecoverySummary : KLER.KnownLimitsExtendedLocalRecoveryTheorem
     localPhysicsCoherenceSummary : KLLPC.KnownLimitsLocalPhysicsCoherenceTheorem
     contractionForcingSummary :
@@ -232,6 +237,10 @@ record CanonicalStageCTheoremBundle : Setω where
       CQSB.ContractionQuadraticToSignatureBridgeTheorem
     contractionSignatureToSpinDiracBridgeSummary :
       CSSDB.ContractionSignatureToSpinDiracBridgeTheorem
+    contractionToCliffordBridgeSummary :
+      CCTCB.CanonicalContractionToCliffordBridgeTheorem
+    contractionQuadraticSignatureBridgeSummary :
+      CCQSB.CanonicalContractionQuadraticSignatureBridgeTheorem
     recoveredLocalRegimeSummary : KLRLR.KnownLimitsRecoveredLocalRegimeTheorem
     completeLocalRegimeSummary : KLCLR.KnownLimitsCompleteLocalRegimeTheorem
     dynamicsLawSummary : CDLT.CanonicalDynamicsLawTheorem
@@ -405,6 +414,8 @@ abstract
     ; geometryTransportSummary = KLGT.canonicalKnownLimitsGeometryTransportTheorem
     ; localCausalGeometryCoherenceSummary =
         CSC.canonicalKnownLimitsLocalCausalGeometryCoherenceTheorem
+    ; localCoherenceSummary =
+        KLLCT.canonicalKnownLimitsLocalCoherenceTheorem
     ; extendedLocalRecoverySummary =
         CSC.canonicalKnownLimitsExtendedLocalRecoveryTheorem
     ; localPhysicsCoherenceSummary =
@@ -417,6 +428,10 @@ abstract
         CSC.canonicalContractionQuadraticToSignatureBridgeTheorem
     ; contractionSignatureToSpinDiracBridgeSummary =
         CSC.canonicalContractionSignatureToSpinDiracBridgeTheorem
+    ; contractionToCliffordBridgeSummary =
+        CSC.canonicalContractionToCliffordBridgeTheorem
+    ; contractionQuadraticSignatureBridgeSummary =
+        CSC.canonicalContractionQuadraticSignatureBridgeTheorem
     ; recoveredLocalRegimeSummary =
         CSC.canonicalKnownLimitsRecoveredLocalRegimeTheorem
     ; completeLocalRegimeSummary =

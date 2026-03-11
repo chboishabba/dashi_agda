@@ -53,3 +53,4 @@ open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeomet
 open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.ScalabilitySummary public
 open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.SustainabilitySummary public
 open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.StewardshipSummary public
+open import DASHI.Physics.Moonshine.MoonshineTwinedWaveObservableTransportGeometry.Regime.AccountabilitySummary public

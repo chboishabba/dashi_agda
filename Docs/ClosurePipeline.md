@@ -15,10 +15,12 @@ labeled as alternative/validation/experimental.
 5. `DASHI/Geometry/QuadraticForm.agda` (polarization-driven quadratic surface)
 6. `DASHI/Geometry/ConeTimeIsotropy.agda`
 7. `DASHI/Geometry/Signature31FromConeArrowIsotropy.agda`
-8. `DASHI/Geometry/Signature31Lock.agda`
-9. `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
-10. `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
-11. `DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda`
+8. `DASHI/Geometry/CausalForcesLorentz31.agda`
+9. `DASHI/Geometry/Signature31Lock.agda`
+10. `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
+11. `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
+12. `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`
+13. `DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda`
 
 ## Module Labels
 
@@ -53,9 +55,11 @@ Use one of these labels for every closure-relevant module:
 - `DASHI/Geometry/QuadraticForm.agda`
 - `DASHI/Geometry/ConeTimeIsotropy.agda`
 - `DASHI/Geometry/Signature31FromConeArrowIsotropy.agda`
+- `DASHI/Geometry/CausalForcesLorentz31.agda`
 - `DASHI/Geometry/Signature31Lock.agda`
 - `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
 - `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
+- `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`
 - `DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda`
 
 ### Alternative

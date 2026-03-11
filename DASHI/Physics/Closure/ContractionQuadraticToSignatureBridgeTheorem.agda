@@ -1,5 +1,9 @@
 module DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem where
 
+-- Canonical quadratic -> signature bridge surface.
+-- Stage-C pipeline modules should import this bridge rather than alternate
+-- quadratic emergence routes.
+
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 

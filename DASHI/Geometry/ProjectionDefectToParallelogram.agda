@@ -1,5 +1,12 @@
 module DASHI.Geometry.ProjectionDefectToParallelogram where
 
+-- Canonical quadratic emergence path anchor:
+-- ProjectionDefect -> Parallelogram -> QuadraticForm.
+--
+-- Alternative derivations (QuadraticFromNorm, QuadraticEmergence,
+-- QuadraticFormEmergence) are retained for validation/experiments and should
+-- not be imported by Stage-C closure pipeline modules.
+
 open import Level using (Level; _⊔_; suc)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
