@@ -46,23 +46,26 @@ def main() -> None:
     # Write Book.tex that inputs each module source inside a code block.
     # This avoids Agda's LaTeX backend per-module and keeps the PDF build fast.
     lines = []
-    lines.append("\\documentclass{article}")
-    lines.append("\\usepackage{fontspec}")
-    lines.append("\\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]")
-    lines.append("\\usepackage{fancyvrb}")
-    lines.append("\\begin{document}")
-    lines.append("\\section*{DASHI Book}")
-    lines.append("\\tableofcontents")
+    lines.append(r"\documentclass{article}")
+    lines.append(r"\usepackage{fontspec}")
+    
+    # JuliaMono has industry-leading coverage for Agda/Math symbols
+    lines.append(r"\setmonofont{JuliaMono}[Scale=MatchLowercase]")
+    
+    lines.append(r"\usepackage{fancyvrb}")
+    lines.append(r"\begin{document}")
+    lines.append(r"\section*{DASHI Book}")
+    lines.append(r"\tableofcontents")
     lines.append("")
     for mod, path in zip(modules, module_paths):
         rel_path = Path(os.path.relpath(path, OUT_DIR))
-        lines.append("\\clearpage")
-        safe_title = mod.replace("_", "\\_")
-        lines.append(f"\\section*{{\\texttt{{{safe_title}}}}}")
-        lines.append(f"\\addcontentsline{{toc}}{{section}}{{\\texttt{{{safe_title}}}}}")
-        lines.append(f"\\VerbatimInput{{{rel_path.as_posix()}}}")
+        lines.append(r"\clearpage")
+        safe_title = mod.replace("_", r"\_")
+        lines.append(rf"\section*{{\texttt{{{safe_title}}}}}")
+        lines.append(rf"\addcontentsline{{toc}}{{section}}{{\texttt{{{safe_title}}}}}")
+        lines.append(rf"\VerbatimInput{{{rel_path.as_posix()}}}")
         lines.append("")
-    lines.append("\\end{document}")
+    lines.append(r"\end{document}")
 
     BOOK_TEX.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

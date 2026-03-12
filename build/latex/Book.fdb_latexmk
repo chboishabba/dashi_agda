@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1773297287.56291 "build/latex/Book.xdv" "build/latex/Book.pdf" "build/latex/Book" 1773297287.9077 0
-  "build/latex/Book.xdv" 1773297286.90388 17899624 2900ff9cf57ecd87e722b19b84766105 "xelatex"
+["xdvipdfmx"] 1773298750.33218 "build/latex/Book.xdv" "build/latex/Book.pdf" "build/latex/Book" 1773298750.63725 0
+  "build/latex/Book.xdv" 1773298749.96996 17899532 175d5d4fc4f7b486d86d8c3f1c168ccb "xelatex"
   (generated)
   "build/latex/Book.pdf"
   (rewritten before read)
-["xelatex"] 1773297283.78895 "build/latex/Book.tex" "build/latex/Book.xdv" "Book" 1773297287.89552 0
+["xelatex"] 1773298746.76836 "build/latex/Book.tex" "build/latex/Book.xdv" "Book" 1773298750.62629 0
   "/usr/share/texmf-dist/tex/latex/base/article.cls" 1772820570 20144 b966087dda3b194755eb460d32e2ef75 ""
   "/usr/share/texmf-dist/tex/latex/base/fontenc.sty" 1772820570 5275 6f9d359641b36842524cdb97716ab75f ""
   "/usr/share/texmf-dist/tex/latex/base/size10.clo" 1772820570 8448 686612a86f0e04f41ea577f5ec7e83d8 ""
@@ -860,9 +860,9 @@
   "build/latex/../../Verification/SourceHash.agda" 1771245898.58391 607 9229a115db26e5d3ca365fb962957fb6 ""
   "build/latex/../../Verification/ZK.agda" 1771504131.21513 1058 d218de5fd8c78b5a802e8a3c0c661fa9 ""
   "build/latex/../../Z6_RegularInverse.agda" 1771248383.03528 1294 e6904517743bf02c5914135938e2ad6f ""
-  "build/latex/Book.aux" 1773297286.89588 118705 eb01dc344d1158610e28585a45105dec "xelatex"
-  "build/latex/Book.tex" 1773297276.41602 225075 9b5c5f50c44d2ba2d5230dd0a4acab5a ""
-  "build/latex/Book.toc" 1773297286.90388 83306 5080d326b66288ceb3650b8b32e0d9ae "xelatex"
+  "build/latex/Book.aux" 1773298749.95896 118705 eb01dc344d1158610e28585a45105dec "xelatex"
+  "build/latex/Book.tex" 1773298739.69409 225068 5ec8084cbd2d415ba0a9b4c03f78bf55 ""
+  "build/latex/Book.toc" 1773298749.96996 83306 5080d326b66288ceb3650b8b32e0d9ae "xelatex"
   (generated)
   "build/latex/Book.aux"
   "build/latex/Book.log"
