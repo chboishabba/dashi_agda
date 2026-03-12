@@ -167,6 +167,7 @@ import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQS
 import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 import DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem as CCTCB
 import DASHI.Physics.Closure.CanonicalContractionQuadraticSignatureBridgeTheorem as CCQSB
+import DASHI.Physics.Closure.PhysicsClosureFullCanonicalBridgePackage as PCFCBP
 import DASHI.Physics.Closure.SpinLocalLorentzBridgeTheorem as SLLB
 import DASHI.Physics.Closure.KnownLimitsPropagationSpinTheorem as KLPST
 import DASHI.Physics.Closure.KnownLimitsCausalPropagationTheorem as KLCPT
@@ -1252,6 +1253,11 @@ canonicalContractionQuadraticSignatureBridgeTheorem :
   CCQSB.CanonicalContractionQuadraticSignatureBridgeTheorem
 canonicalContractionQuadraticSignatureBridgeTheorem =
   CCQSB.canonicalContractionQuadraticSignatureBridgeTheorem
+
+canonicalPhysicsClosureFullCanonicalBridgePackage :
+  PCFCBP.PhysicsClosureFullCanonicalBridgePackage
+canonicalPhysicsClosureFullCanonicalBridgePackage =
+  PCFCBP.canonicalPhysicsClosureFullCanonicalBridgePackage
 
 canonicalKnownLimitsRecoveredDynamicsTheorem :
   KLRDT.KnownLimitsRecoveredDynamicsTheorem

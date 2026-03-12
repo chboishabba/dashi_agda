@@ -63,6 +63,7 @@ open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem a
 open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 open import DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem as CCTCB
 open import DASHI.Physics.Closure.CanonicalContractionQuadraticSignatureBridgeTheorem as CCQSB
+open import DASHI.Physics.Closure.PhysicsClosureFullCanonicalBridgePackage as PCFCBP
 import DASHI.Physics.Closure.CanonicalPhysicsPathPostulateAudit as CPPA
 
 record CanonicalStageCTheoremBundle : Setω where
@@ -247,6 +248,8 @@ record CanonicalStageCTheoremBundle : Setω where
       CCTCB.CanonicalContractionToCliffordBridgeTheorem
     contractionQuadraticSignatureBridgeSummary :
       CCQSB.CanonicalContractionQuadraticSignatureBridgeTheorem
+    fullClosureCanonicalBridgePackageSummary :
+      PCFCBP.PhysicsClosureFullCanonicalBridgePackage
     noEssentialPostulatesOnCanonicalPhysicsPath :
       CPPA.noEssentialPostulatesOnCanonicalPhysicsPath
     recoveredLocalRegimeSummary : KLRLR.KnownLimitsRecoveredLocalRegimeTheorem
@@ -443,6 +446,8 @@ abstract
         CSC.canonicalContractionToCliffordBridgeTheorem
     ; contractionQuadraticSignatureBridgeSummary =
         CSC.canonicalContractionQuadraticSignatureBridgeTheorem
+    ; fullClosureCanonicalBridgePackageSummary =
+        CSC.canonicalPhysicsClosureFullCanonicalBridgePackage
     ; noEssentialPostulatesOnCanonicalPhysicsPath =
         CPPA.canonicalNoEssentialPostulatesOnCanonicalPhysicsPath
     ; recoveredLocalRegimeSummary =

@@ -1,5 +1,24 @@
 # Devlog
 
+- 2026-03-12: Completed `PhysicsClosureFull` canonical-derivation consolidation.
+  Added `CanonicalExternalInputs` + builder
+  `canonicalPhysicsClosureFullFromExternal` in `PhysicsClosureFull`, so
+  contraction/quadratic/signature/constraint fields are theorem-derived by
+  construction and only external inputs remain caller-supplied.
+  Rewired `PhysicsClosureFullInstance` and `PhysicsClosureEmpiricalToFull` to
+  use the new builder. Added
+  `PhysicsClosureFullCanonicalBridgePackage` to bind full closure endpoint with
+  canonical Clifford/spin/Dirac/even-wave bridges, and exported this package
+  through `CanonicalStageC`, `CanonicalStageCTheoremBundle`, and
+  `CanonicalStageCSummaryBundle`.
+  Checks passed:
+  `PhysicsClosureFullCanonicalBridgePackage`,
+  `PhysicsClosureFull`,
+  `PhysicsClosureFullInstance`,
+  `PhysicsClosureEmpiricalToFull`,
+  `CanonicalStageC`,
+  `CanonicalStageCTheoremBundle`,
+  `CanonicalStageCSummaryBundle`.
 - 2026-03-12: Tightened canonical export surfaces for path-derived constraint
   closure:
   - `CanonicalStageC` now exports

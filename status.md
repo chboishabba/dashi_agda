@@ -64,6 +64,13 @@
     `canonicalConstraintPathWitness` and
     `canonicalConstraintClosureFromPathTheorem` in `CanonicalStageC`,
     threaded through theorem and summary bundles.
+  - `PhysicsClosureFull` now has a canonical builder
+    (`canonicalPhysicsClosureFullFromExternal`) that derives
+    contraction/quadratic/signature/constraint fields from canonical theorem
+    chain outputs, with only external inputs passed by instances.
+  - Added canonical endpoint bridge package
+    (`PhysicsClosureFullCanonicalBridgePackage`) and exported it through
+    `CanonicalStageC` theorem + summary bundles.
   - `AxiomSet` now carries explicit law-status registry
     (`canonical-theorem` / `concrete-instance` / `remaining-assumption`).
   - Heavy regression check:
@@ -75,6 +82,6 @@
     `timeout 90s agda -i . DASHI/Physics/Closure/CanonicalStageC.agda`
     exits `124` (no type errors emitted before timeout).
 - Next action:
-  finish checklist item 12 by reducing remaining assumption seams in
-  `PhysicsClosureFull`-adjacent consumers (especially metric emergence stubs)
-  while preserving the acyclic canonical-path constraint transport.
+  run a focused audit on remaining non-canonical assumption surfaces
+  (`PhysicsClosureInstanceAssumed.metricEmergence` and legacy adapters) and
+  either derive or isolate them off the canonical route.

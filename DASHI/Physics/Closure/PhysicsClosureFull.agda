@@ -16,6 +16,7 @@ open import DASHI.Geometry.SignatureUniqueness31 as SU
 open import DASHI.Physics.Constraints.Generators
 open import DASHI.Physics.Constraints.Bracket
 open import DASHI.Physics.Constraints.Closure
+import DASHI.Physics.Constraints.ConcreteInstance as CI
 open import MDL.Core.Core as OldMDL
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
 open import DASHI.Physics.Closure.DynamicalClosure as DC
@@ -25,6 +26,7 @@ open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Geometry.OrthogonalityFromPolarization as OP
 open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
+open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
 
 record PhysicsClosureFull : Setω where
   field
@@ -70,3 +72,45 @@ canonicalContractionQuadraticToSignatureBridge :
   CQSB.ContractionQuadraticToSignatureBridgeTheorem
 canonicalContractionQuadraticToSignatureBridge =
   CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
+
+record CanonicalExternalInputs : Setω where
+  field
+    kit : RealClosureKit
+    polarizationZ :
+      ∀ {m : Nat} →
+        OP.Polarization (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
+    orthogonalityZ :
+      ∀ {m : Nat} →
+        DASHI.Physics.Closure.OrthogonalityZLift.OrthogonalityZLift {m}
+    mdlLyap : ∀ {S : Set} (T : S → S) → OldMDL.Lyapunov T
+    mdlFejer : MDLFA.MDLFejerAxiomsShift
+    dynamics : DC.DynamicalClosure
+    universality : Universality (RealClosureKit.C kit)
+
+canonicalPhysicsClosureFullFromExternal :
+  CanonicalExternalInputs →
+  PhysicsClosureFull
+canonicalPhysicsClosureFullFromExternal ext =
+  record
+    { kit = CanonicalExternalInputs.kit ext
+    ; metricEmergence = λ {ℓv} {ℓs} A F Pkg →
+        PDP.quadraticFromProjectionDefect A F Pkg
+    ; quadraticFormZ = λ {m} →
+        CFQT.ContractionForcesQuadraticTheorem.derivedQuadratic
+          (CFQT.canonicalContractionForcesQuadraticTheorem m)
+    ; polarizationZ = CanonicalExternalInputs.polarizationZ ext
+    ; orthogonalityZ = CanonicalExternalInputs.orthogonalityZ ext
+    ; signature31Theorem =
+        CQSB.ContractionQuadraticToSignatureBridgeTheorem.signature31Theorem
+          canonicalContractionQuadraticToSignatureBridge
+    ; signature31 =
+        CQSB.ContractionQuadraticToSignatureBridgeTheorem.signature31Value
+          canonicalContractionQuadraticToSignatureBridge
+    ; CS = CI.CS
+    ; L = CI.L
+    ; constraintClosure = CCFCPT.canonicalPathInducedConstraintClosure
+    ; mdlLyap = CanonicalExternalInputs.mdlLyap ext
+    ; mdlFejer = CanonicalExternalInputs.mdlFejer ext
+    ; dynamics = CanonicalExternalInputs.dynamics ext
+    ; universality = CanonicalExternalInputs.universality ext
+    }

@@ -12,7 +12,7 @@ Mode: `get-shit-done` planning pass
 
 ## Execution Order (Concrete File Targets)
 
-1. [ ] `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda`
+1. [x] `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda`
   - Keep this as the local engine for split/parallelogram forcing.
   - Mandatory theorem surface:
     - `projectionDefectSplitForcesParallelogram`
@@ -20,14 +20,14 @@ Mode: `get-shit-done` planning pass
     - `projectionDefectEnergySplit`
     - `quadraticEmergenceFromProjectionDefectSplit`
     - `projectionDefectParallelogramFromSplit`
-2. [ ] `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
+2. [x] `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
   - Centralize all strong transport/uniqueness logic.
   - Mandatory theorem surface:
     - `UniqueUpToScaleSeam`
     - `QuadraticUniquenessBridge`
     - `ContractionForcesQuadraticStrong`
     - `uniqueUpToScaleWitness`
-3. [ ] `DASHI/Physics/Closure/ContractionForcesQuadraticTheorem.agda`
+3. [x] `DASHI/Physics/Closure/ContractionForcesQuadraticTheorem.agda`
   - Keep this as canonical entrypoint from contraction to quadratic theorem output.
   - Mandatory theorem surface:
     - `ContractionForcesQuadraticTheorem`
@@ -42,7 +42,7 @@ Mode: `get-shit-done` planning pass
   - Keep the concrete shift witness pipeline here.
   - Mandatory theorem surface:
     - `shiftForcesProfile`
-6. [ ] `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
+6. [x] `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
   - Force signature as theorem output (not choice field).
   - Mandatory theorem surface:
     - `ContractionQuadraticToSignatureBridgeTheorem`
@@ -66,16 +66,16 @@ Mode: `get-shit-done` planning pass
     - `CliffordRelations.rel` becomes relation law family
     - `UniversalClifford` gains explicit factorization theorem
     - `decimation⇒clifford` proves actual hypotheses transfer
-10. [ ] `DASHI/Physics/Closure/ContractionSignatureToSpinDiracBridgeTheorem.agda`
+10. [x] `DASHI/Physics/Closure/ContractionSignatureToSpinDiracBridgeTheorem.agda`
   - Keep this as single signature-to-spin/Dirac bridge on canonical path.
-11. [ ] Wave evenness lock (mapped modules)
+11. [x] Wave evenness lock (mapped modules)
   - `DASHI/Physics/CliffordEvenLiftBridge.agda`
   - `DASHI/Physics/Closure/CliffordToEvenWaveLiftBridgeTheorem.agda`
   - Mandatory theorem surface:
     - `WaveLiftIntoEven`
     - `WaveLift⇒Even`
     - `canonicalWaveLiftIntoEvenFromContractionQuadratic`
-12. [ ] `DASHI/Physics/Closure/PhysicsClosureFull.agda` (in progress)
+12. [x] `DASHI/Physics/Closure/PhysicsClosureFull.agda`
   - Convert supplied fields to theorem-derived fields where possible:
     - contraction/quadratic
     - signature `(3,1)`

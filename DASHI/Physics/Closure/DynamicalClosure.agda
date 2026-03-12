@@ -10,6 +10,7 @@ open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
 open import DASHI.Physics.Closure.DynamicalClosureStatus as DCS
 open import DASHI.Physics.Closure.ShiftSeamCertificates as SSC
+open import DASHI.Physics.Closure.ContractionDiffusionPair as CDP
 
 -- Shift-level dynamics package for the minimum credible closure path.
 -- This keeps the real proximal / MDL / defect-collapse witnesses together.
@@ -21,6 +22,9 @@ record DynamicalClosure : Setω where
       OldMDL.Lyapunov
         {S = RTC.Carrier (m + k)}
         (MDLParts.T (MSI.MDLPartsShift {m} {k}))
+    contractionDiffusion :
+      ∀ {m k : Nat} →
+      CDP.ContractionDiffusionPair (RTC.Carrier (m + k))
     mdlFejerWitness : MDLFA.MDLFejerAxiomsShift
     status : DCS.DynamicalClosureStatus
 
