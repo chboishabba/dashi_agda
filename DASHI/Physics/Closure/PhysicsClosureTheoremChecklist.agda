@@ -128,3 +128,12 @@ canonicalPhysicsClosureNamedTheoremChecklist =
     ; theoremF = PCTL.waveLiftFactorsThroughEvenCliffordTheorem
     ; theoremG = PCTL.closureCoreWitnessForcesFullClosureTheorem
     }
+
+syntheticPhysicsClosureRealizationIndependenceChecklist :
+  PhysicsClosureRealizationIndependenceChecklist
+syntheticPhysicsClosureRealizationIndependenceChecklist =
+  record
+    { canonicalHeadline = canonicalPhysicsClosureHeadlineTheorem
+    ; independenceTheorem =
+        PCRIT.syntheticPhysicsClosureRealizationIndependenceTheorem
+    }

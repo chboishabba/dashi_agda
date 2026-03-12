@@ -29,6 +29,7 @@ open import DASHI.Physics.Closure.QuadraticToCliffordBridgeTheorem as QTCB
 open import DASHI.Physics.Closure.CliffordToEvenWaveLiftBridgeTheorem as CEW
 open import DASHI.Physics.Closure.CanonicalConstraintClosureWitness as CCCW
 open import DASHI.Physics.Closure.ShiftObservablePredictionInstance as SOPI
+open import DASHI.Physics.Closure.SyntheticObservablePredictionInstance as SYOPI
 open import DASHI.Physics.Signature31Canonical as S31C
 open import DASHI.Physics.RealClosureKit as RK
 open import MDL.Core.Core as OldMDL
@@ -61,7 +62,7 @@ physicsClosureFull =
 
 physicsClosureFullSynthetic : PCF.PhysicsClosureFull
 physicsClosureFullSynthetic =
-  physicsClosureFullFromProvider S31C.syntheticCoreProvider
+  PCF.physicsClosureFullFromCoreWitness syntheticPhysicsClosureCoreWitness
 
 -- Concrete Lyapunov witness for the shift stack is available as:
 -- MDLL.lyapunovShift {m} {k}
@@ -93,5 +94,27 @@ physicsClosureCoreWitness =
     ; dynamics = DCSI.shiftDynamics
     ; dynamicsWitness = DCWI.shiftDynamicsWitness
     ; observables = SOPI.shiftObservablePrediction
+    ; observableSignatureAgreement = refl
+    }
+
+syntheticPhysicsClosureCoreWitness : PCCW.PhysicsClosureCoreWitness
+syntheticPhysicsClosureCoreWitness =
+  record
+    { kit = MRI.myKit
+    ; universality = UTH.canonicalUniversality (RK.RealClosureKit.C MRI.myKit)
+    ; contractionQuadraticWitness =
+        CQSB.ContractionQuadraticToSignatureBridgeTheorem.strengthenedContraction
+          CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
+    ; contractionSignatureWitness =
+        CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
+    ; quadraticCliffordWitness =
+        QTCB.canonicalQuadraticToCliffordBridgeTheorem
+    ; evenWaveLiftWitness =
+        CEW.canonicalCliffordToEvenWaveLiftBridgeTheorem
+    ; signatureCoreProvider = S31C.syntheticCoreProvider
+    ; constraintClosureWitness = CCCW.canonicalConstraintClosureWitness
+    ; dynamics = DCSI.shiftDynamics
+    ; dynamicsWitness = DCWI.shiftDynamicsWitness
+    ; observables = SYOPI.syntheticObservablePrediction
     ; observableSignatureAgreement = refl
     }

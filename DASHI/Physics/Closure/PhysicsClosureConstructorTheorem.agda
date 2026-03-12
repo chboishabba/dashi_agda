@@ -33,3 +33,12 @@ canonicalPhysicsClosureConstructorTheorem =
     ; fullClosure = PCFI.physicsClosureFull
     ; constructedByCanonicalConstructor = refl
     }
+
+syntheticPhysicsClosureConstructorTheorem :
+  PhysicsClosureConstructorTheorem
+syntheticPhysicsClosureConstructorTheorem =
+  record
+    { closureCoreWitness = PCFI.syntheticPhysicsClosureCoreWitness
+    ; fullClosure = PCFI.physicsClosureFullSynthetic
+    ; constructedByCanonicalConstructor = refl
+    }
