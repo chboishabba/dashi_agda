@@ -1,10 +1,10 @@
 module DASHI.Physics.ConeArrowIsotropyForcesProfileShiftInstance where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
-open import DASHI.Geometry.ConeArrowIsotropyOrbitProfile as CAOP
 open import DASHI.Geometry.Signature31FromConeArrowIsotropy as S31
 open import DASHI.Physics.ConeArrowIsotropyForcesProfile as CAF
-open import DASHI.Physics.ConeArrowIsotropyOrbitProfileAgreement as CAOPA
+open import DASHI.Physics.OrbitProfileExternal as OPE
 open import DASHI.Physics.OrbitSignatureDiscriminant as OSD
 open import DASHI.Physics.Signature31InstanceShiftZ as S31Z
 
@@ -19,8 +19,36 @@ shiftForcesProfile :
     (S31.SignatureAxioms.Iso S31Z.sigAxioms)
     OSD.Profile
 shiftForcesProfile =
+  let
+    pipeline = OPE.canonicalOrbitProfilePipeline
+  in
   record
-    { measuredProfile = CAOP.toProfile CAOPA.abstractProfile
-    ; forcedProfile = OSD.ProfileOf OSD.sig31
-    ; measured≡forced = CAOPA.abstractMeasured≡ProfileOfSig31
+    { measuredProfile =
+        OPE.CanonicalOrbitProfilePipeline.measuredProfile pipeline
+    ; forcedProfile =
+        OPE.CanonicalOrbitProfilePipeline.forcedProfile pipeline
+    ; measured≡forced =
+        OPE.CanonicalOrbitProfilePipeline.measured≡forced pipeline
     }
+
+shiftMeasuredProfile :
+  OSD.Profile
+shiftMeasuredProfile =
+  CAF.ConeArrowIsotropyForcesProfile.measuredProfile shiftForcesProfile
+
+shiftForcedProfile :
+  OSD.Profile
+shiftForcedProfile =
+  CAF.ConeArrowIsotropyForcesProfile.forcedProfile shiftForcesProfile
+
+shiftMeasured≡forced :
+  shiftMeasuredProfile ≡ shiftForcedProfile
+shiftMeasured≡forced =
+  CAF.ConeArrowIsotropyForcesProfile.measured≡forced shiftForcesProfile
+
+shiftSignatureForced31 :
+  ∀ s →
+  shiftMeasuredProfile ≡ OSD.ProfileOf s →
+  s ≡ OSD.sig31
+shiftSignatureForced31 =
+  OSD.SignatureFromMeasuredProfileUnique

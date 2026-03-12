@@ -1,0 +1,4 @@
+[cmd] agda -i . DASHI/Everything.agda
+---
+[02_everything_build] Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+[02_everything_build]    Checking DASHI.Physics.Closure.PhysicsClosureValidationSummary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda).

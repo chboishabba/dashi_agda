@@ -1,0 +1,5 @@
+[cmd] agda -i . DASHI/Everything.agda
+---
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+ Checking DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/ConstraintClosureFromCanonicalPathTheorem.agda).
+  Checking DASHI.Physics.Closure.CanonicalStageC (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageC.agda).

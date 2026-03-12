@@ -51,6 +51,38 @@ record AxiomLaws
 open AxiomLaws public
 
 ------------------------------------------------------------------------
+-- Law-surface status registry for canonical path audits.
+
+data LawStatus : Set where
+  canonical-theorem : LawStatus
+  concrete-instance : LawStatus
+  remaining-assumption : LawStatus
+
+record AxiomLawSurfaceStatus : Set₁ where
+  field
+    π-status : LawStatus
+    cone-arrow-status : LawStatus
+    isotropy-status : LawStatus
+    quadratic-status : LawStatus
+    signature-status : LawStatus
+    clifford-status : LawStatus
+    dirac-status : LawStatus
+    finite-algebra-status : LawStatus
+
+canonicalAxiomLawSurfaceStatus : AxiomLawSurfaceStatus
+canonicalAxiomLawSurfaceStatus =
+  record
+    { π-status = concrete-instance
+    ; cone-arrow-status = canonical-theorem
+    ; isotropy-status = canonical-theorem
+    ; quadratic-status = canonical-theorem
+    ; signature-status = canonical-theorem
+    ; clifford-status = canonical-theorem
+    ; dirac-status = canonical-theorem
+    ; finite-algebra-status = remaining-assumption
+    }
+
+------------------------------------------------------------------------
 -- Honest bridge: just the carrier data from an existing closure kit.
 -- Anything beyond this should be provided as an AxiomLaws instance.
 

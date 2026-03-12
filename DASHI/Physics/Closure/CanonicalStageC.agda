@@ -7,6 +7,7 @@ open import DASHI.Physics.Closure.CanonicalStageCStatus as CSS
 open import DASHI.Physics.Closure.CanonicalConstraintClosureStatus as CCCS
 import DASHI.Physics.Closure.CanonicalConstraintClosureWitness as CCCW
 import DASHI.Physics.Closure.CanonicalConstraintClosureTheorem as CCCT
+import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
 import DASHI.Physics.Closure.CanonicalGaugeContractTheorem as CGCT
 import DASHI.Physics.Closure.CanonicalGaugeConstraintBridgeTheorem as CGCBT
 import DASHI.Physics.Closure.CanonicalConstraintGaugePackage as CCGP
@@ -79,6 +80,7 @@ import DASHI.Physics.Closure.ParametricAlgebraicRegimeTransportConsistencyTheore
 import DASHI.Physics.Closure.CanonicalGaugeConstraintRealizedInstances as CGCRI
 import DASHI.Algebra.GaugeGroupContract as GGC
 import DASHI.Physics.Constraints.ConcreteInstance as CI
+import DASHI.Physics.Constraints.Closure as CC
 import DASHI.Physics.Closure.CanonicalSpinDiracConsumer as CSDC
 open import DASHI.Physics.Closure.DynamicalClosureWitness as DCW
 import DASHI.Physics.Closure.KnownLimitsRecovery as KLR
@@ -257,6 +259,15 @@ canonicalConstraintWitness = CCCW.canonicalConstraintClosureWitness
 
 canonicalConstraintTheorem : CCCT.CanonicalConstraintClosureTheorem
 canonicalConstraintTheorem = CCCT.canonicalConstraintClosureTheorem
+
+canonicalConstraintPathWitness :
+  CCFCPT.CanonicalPathWitness
+canonicalConstraintPathWitness = CCFCPT.canonicalPathWitness
+
+canonicalConstraintClosureFromPathTheorem :
+  CC.ClosureLaw CI.CS CI.L
+canonicalConstraintClosureFromPathTheorem =
+  CCFCPT.canonicalPathInducedConstraintClosure
 
 canonicalGaugeContractTheorem : GGC.UniquenessClaim CI.C
 canonicalGaugeContractTheorem = CGCT.canonicalGaugeContractTheorem
@@ -1591,7 +1602,8 @@ canonicalKnownLimitsPropagationSpinTheorem =
 canonicalSpinDiracConsumer :
   CSDC.SpinDiracConsumerFromMinimal canonicalClosure
 canonicalSpinDiracConsumer =
-  CSDC.spinDiracConsumerFromMinimal canonicalClosure
+  CSSDB.ContractionSignatureToSpinDiracBridgeTheorem.canonicalSpinDiracConsumer
+    canonicalContractionSignatureToSpinDiracBridgeTheorem
 
 canonicalPropagationConsumer :
   CPC.PropagationConsumerFromMinimal canonicalClosure

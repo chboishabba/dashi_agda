@@ -1,5 +1,16 @@
 module DASHI.Physics.Closure.PhysicsClosureFullInstance where
 
+-- Assumptions:
+-- - concrete real-kit instance and shift-side dynamics/constraint witnesses
+-- - projection-defect/parallelogram route for quadratic emergence
+--
+-- Output:
+-- - concrete PhysicsClosureFull instance used by canonical minimal-credible
+--   closure.
+--
+-- Classification:
+-- - concrete
+
 open import Data.Unit as DU using (⊤; tt)
 open import DASHI.Physics.Closure.OrthogonalityZLift as OZ
 open import Data.Product using (_,_; proj₁)
@@ -24,12 +35,15 @@ open import DASHI.Physics.Constraints.Generators as CG
 open import DASHI.Physics.Constraints.Bracket as CB
 open import DASHI.Physics.Constraints.Closure as CC
 open import DASHI.Physics.Constraints.ConcreteInstance as CI
+open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
 open import DASHI.Physics.RealClosureKit as RK
 open import MDL.Core.Core as OldMDL
 open import DASHI.MDL.MDLDescentTradeoff as MDL using (MDLParts)
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.UniversalityTheorem as UTH
+open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
+open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
 
 -- Concrete instance: wires the Bool closure stack into PhysicsClosureFull.
 -- The compatibility mdlLyap field remains generic, but the authoritative
@@ -42,22 +56,19 @@ physicsClosureFull =
     ; metricEmergence = λ {ℓv} {ℓs} A F Pkg →
         PDP.quadraticFromProjectionDefect A F Pkg
     ; quadraticFormZ = λ {m} →
-        let
-          pkg =
-            PDP.fromEmergenceAxioms
-              (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
-              (QES.PDzero {m})
-              (QES.QuadraticEmergenceShiftAxioms {m})
-        in
-        proj₁
-          (PDP.quadraticFromProjectionDefect
-            (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ pkg)
+        CFQT.ContractionForcesQuadraticTheorem.derivedQuadratic
+          (CFQT.canonicalContractionForcesQuadraticTheorem m)
     ; polarizationZ = λ {m} → PZL.polarizationZLift {m}
     ; orthogonalityZ = λ {m} → OZ.orthogonalityZLift {m}
-    ; signature31 = S31OP.signature31
+    ; signature31Theorem =
+        CQSB.ContractionQuadraticToSignatureBridgeTheorem.signature31Theorem
+          CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
+    ; signature31 =
+        CQSB.ContractionQuadraticToSignatureBridgeTheorem.signature31Value
+          CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
     ; CS = CI.CS
     ; L = CI.L
-    ; constraintClosure = CI.closure
+    ; constraintClosure = CCFCPT.canonicalPathInducedConstraintClosure
     ; mdlLyap = λ {S} T → MDLC.mdlLyapTrivial T
     ; mdlFejer = MDLFA.mdlFejerShift
     ; dynamics = DCSI.shiftDynamics

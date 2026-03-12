@@ -1,0 +1,3 @@
+[cmd] agda -i . DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda
+---
+Checking DASHI.Physics.Closure.CanonicalStageCTheoremBundle (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda).

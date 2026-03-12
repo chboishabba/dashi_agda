@@ -1,0 +1,25 @@
+[timeout] 1s
+[cmd] agda -i . DASHI/Everything.agda
+---
+[02_everything_build] Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+
+[timeout] 2s
+[cmd] agda -i . DASHI/Everything.agda
+---
+[02_everything_build] Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+
+[timeout] 5s
+[cmd] agda -i . DASHI/Everything.agda
+---
+[02_everything_build] Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+
+[timeout] 10s
+[cmd] agda -i . DASHI/Everything.agda
+---
+[02_everything_build] Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+
+[timeout] 30s
+[cmd] agda -i . DASHI/Everything.agda
+---
+[02_everything_build] Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+[02_everything_build]   Checking DASHI.Physics.Closure.CanonicalStageC (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageC.agda).

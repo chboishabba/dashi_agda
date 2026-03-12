@@ -1,8 +1,10 @@
 module DASHI.Geometry.CausalForcesLorentz31 where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Unit using (⊤)
+open import Data.Empty using (⊥)
+open import Relation.Nullary using (¬_)
 
 open import DASHI.Geometry.ParallelogramLaw using (AdditiveSpace)
 import DASHI.Geometry.ConeMetricCompatibility as CMC
@@ -24,6 +26,55 @@ record CausalSymmetryPackage : Setω where
     quotientContractionWitness : ⊤
 
 open CausalSymmetryPackage public
+
+data AdmissibleSignature : SU.Signature → Set where
+  admissible31 : AdmissibleSignature SU.sig31
+
+data RivalSignature : Set where
+  sig40 : RivalSignature
+  sig22 : RivalSignature
+  sig04 : RivalSignature
+
+rivalAsSU : RivalSignature → SU.Signature
+rivalAsSU sig40 = SU.other
+rivalAsSU sig22 = SU.other
+rivalAsSU sig04 = SU.other
+
+uniqueLorentz31 :
+  ∀ {s : SU.Signature} →
+  AdmissibleSignature s →
+  s ≡ SU.sig31
+uniqueLorentz31 admissible31 = refl
+
+nonAdmissibleSig13 : ¬ AdmissibleSignature SU.sig13
+nonAdmissibleSig13 ()
+
+nonAdmissibleOther : ¬ AdmissibleSignature SU.other
+nonAdmissibleOther ()
+
+nonAdmissibleRival :
+  (r : RivalSignature) →
+  ¬ AdmissibleSignature (rivalAsSU r)
+nonAdmissibleRival sig40 ()
+nonAdmissibleRival sig22 ()
+nonAdmissibleRival sig04 ()
+
+record LorentzSignatureLock : Set₁ where
+  field
+    witness31 : SignatureLaw
+    admissible31Witness :
+      AdmissibleSignature (SignatureLaw.forced witness31)
+    unique31 :
+      ∀ {s : SU.Signature} →
+      AdmissibleSignature s →
+      s ≡ SU.sig31
+    rejectSig13 : ¬ AdmissibleSignature SU.sig13
+    rejectOther : ¬ AdmissibleSignature SU.other
+    rejectRival :
+      (r : RivalSignature) →
+      ¬ AdmissibleSignature (rivalAsSU r)
+
+open LorentzSignatureLock public
 
 normalizedQuadraticFromStrong :
   (c : CFQS.ContractionForcesQuadraticStrong) →
@@ -96,6 +147,28 @@ normalizedCoreClassifies31 c pkg q cone compat iso fs arrow =
   let _ = normalizedQuadraticFromStrong c in
   quadraticConeIsotropyForces31 q cone compat iso fs arrow pkg
 
+lorentzSignatureLockFromCausalAxioms :
+  (c : CFQS.ContractionForcesQuadraticStrong) →
+  (pkg : CausalSymmetryPackage) →
+  ∀ {A : AdditiveSpace} →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  CMC.ConeMetricCompat A cone q →
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
+  LorentzSignatureLock
+lorentzSignatureLockFromCausalAxioms c pkg q cone compat iso fs arrow =
+  record
+    { witness31 =
+        normalizedCoreClassifies31 c pkg q cone compat iso fs arrow
+    ; admissible31Witness = admissible31
+    ; unique31 = uniqueLorentz31
+    ; rejectSig13 = nonAdmissibleSig13
+    ; rejectOther = nonAdmissibleOther
+    ; rejectRival = nonAdmissibleRival
+    }
+
 lorentz31-from-causal-axioms :
   (c : CFQS.ContractionForcesQuadraticStrong) →
   (pkg : CausalSymmetryPackage) →
@@ -103,7 +176,9 @@ lorentz31-from-causal-axioms :
 lorentz31-from-causal-axioms c pkg =
   record
     { prove = λ Q C compat iso fs arrow →
-        normalizedCoreClassifies31 c pkg Q C compat iso fs arrow
+        LorentzSignatureLock.witness31
+          (lorentzSignatureLockFromCausalAxioms
+            c pkg Q C compat iso fs arrow)
     }
 
 signature31-from-causal-axioms :

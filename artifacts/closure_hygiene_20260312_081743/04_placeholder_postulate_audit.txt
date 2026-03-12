@@ -1,0 +1,29 @@
+# Placeholder/Postulate Audit
+
+## postulate declarations
+
+## placeholder markers
+DASHI/Physics/Signature31.agda:6:-- placeholder. Canonical closure surfaces must not route signature claims
+DASHI/Physics/GR.agda:3:-- GR-side adapter boundary: placeholders expressed as parameters.
+DASHI/Physics/FiniteAlgebraCandidates.agda:34:-- A few direct sums as placeholders for finite algebra classification.
+DASHI/Unifier.agda:248:    rel : Set                   -- placeholder for (embedV v)^2 = -(QS.Q v) * 1#
+DASHI/Algebra/CCRFromCylinderAlgebraTests.agda:34:    iħI : Op                      -- “i ħ I” as an operator placeholder
+DASHI/Algebra/PhysicsSignature.agda:16:-- Physics “state” placeholder (minimal concrete carrier).
+DASHI/Energy/Energy.agda:23:    -- Optional separation axiom; keep as a placeholder.
+DASHI/Algebra/AnomalyContracts.agda:16:-- placeholder computed results (set to 0 until you wire the real computation)
+DASHI/Analysis/AbelZeta.agda:60:-- If a richer rational structure is added later, the Nat placeholders
+DASHI/Physics/ContractionToQuadratic.agda:31:    toV      : X → X            -- placeholder if your V is X itself
+DASHI/Physics/Core.agda:43:-- Finite speed / locality placeholder.
+DASHI/Physics/QFT.agda:3:-- QFT-side adapter boundary: placeholders expressed as parameters.
+DASHI/Combinatorics/StrictContractionFinite.agda:10:    complete : ∀ x → Σ S (λ y → y ≡ x)  -- placeholder “covered”; replace with Mem proof
+DASHI/Combinatorics/StrictContractionFinite.agda:12:-- A “strictly contractive” notion as a *property placeholder*.
+DASHI/Combinatorics/PDA_MDL/CICADA71.agda:17:-- A fixed weight vector in Fin 71 (deterministic placeholder).
+DASHI/Physics/AxiomSet.agda:6:-- Split into carriers vs laws to avoid dishonest ⊤/tt placeholders.
+DASHI/Physics/SpinAssumptions.agda:51:-- Default instance (data-level placeholder).
+DASHI/Combinatorics/PDA_MDL/Instances.agda:43:  ; costPDA = 71  -- “limit to 71” lens price placeholder
+DASHI/Algebra/Quantum/SignatureDerivationInstance.agda:23:-- This keeps the formulas concrete while leaving the actual properties to be discharged.
+DASHI/Algebra/GaugeGroupContract.agda:10:  Other      : Gauge  -- placeholder bucket
+DASHI/Geometry/ProjectionContractionOrthogonalityTests.agda:84:      in  ∥_∥₀ x ≡ (∥_∥₀ c) × (∥_∥₀ d)   -- placeholder shape; replace with numeric identity
+DASHI/Geometry/Signature/Signature31Instance.agda:44:-- A trivial quadratic form placeholder on the carrier.
+DASHI/Geometry/Signature/ConeArrowInstances.agda:31:-- Isotropy: trivial action (placeholder concrete instance).
+DASHI/Geometry/OrthogonalityFromQuadratic.agda:31:    closed : ∀ x y → FixP Pj x → FixP Pj y → FixP Pj x  -- placeholder

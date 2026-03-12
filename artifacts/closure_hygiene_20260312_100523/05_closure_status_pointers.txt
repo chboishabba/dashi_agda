@@ -1,0 +1,7 @@
+[cmd] step_05_closure_status_pointers
+---
+# Closure Status Pointers
+DASHI/Physics/Closure/PhysicsClosureFullShiftInstance.agda:1:module DASHI.Physics.Closure.PhysicsClosureFullShiftInstance where
+DASHI/Physics/Closure/CanonicalContractionToCliffordBridgeTheorem.agda:1:module DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem where
+DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda:1:module DASHI.Physics.Closure.CanonicalStageCTheoremBundle where
+DASHI/Physics/Closure/PhysicsClosureFullShift.agda:1:module DASHI.Physics.Closure.PhysicsClosureFullShift where

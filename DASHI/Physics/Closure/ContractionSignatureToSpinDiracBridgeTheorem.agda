@@ -19,6 +19,8 @@ record ContractionSignatureToSpinDiracBridgeTheorem : Setω where
       SLLB.SpinLocalLorentzBridge MCCSI.minimumCredibleClosureShift
     canonicalSpinDiracConsumer :
       CSDC.SpinDiracConsumerFromMinimal MCCSI.minimumCredibleClosureShift
+    spinDiracFromBridgeRoute :
+      CSDC.SpinDiracConsumerFromMinimal MCCSI.minimumCredibleClosureShift
     signatureForced31 :
       CQSB.ContractionQuadraticToSignatureBridgeTheorem.signature31Value
         contractionSignatureBridge
@@ -43,6 +45,9 @@ canonicalContractionSignatureToSpinDiracBridgeTheorem =
     ; spinLocalLorentzBridge = SLLB.canonicalSpinLocalLorentzBridge
     ; canonicalSpinDiracConsumer =
         CSDC.spinDiracConsumerFromMinimal MCCSI.minimumCredibleClosureShift
+    ; spinDiracFromBridgeRoute =
+        SLLB.SpinLocalLorentzBridge.consumer
+          SLLB.canonicalSpinLocalLorentzBridge
     ; signatureForced31 =
         CQSB.ContractionQuadraticToSignatureBridgeTheorem.signatureForced31 bridge
     ; normalizedQuadratic =

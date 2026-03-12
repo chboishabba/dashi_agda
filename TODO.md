@@ -1,5 +1,24 @@
 # TODO
 
+## Track U — Physics Closure Spine Completion (2026-03-12)
+
+Priority bucket: `P0`
+
+- [ ] Execute checklist in `Docs/PhysicsClosureImplementationChecklist.md` in
+  strict order.
+- [ ] Keep contraction→quadratic uniqueness transport centralized in
+  `ContractionForcesQuadraticStrong`.
+- [ ] Keep profile forcing surface narrow:
+  `ConeArrowIsotropyForcesProfile` + shift instance only.
+- [ ] Upgrade `DecimationToClifford` from interface shell to theorem-bearing
+  factorization surface.
+- [ ] Convert `PhysicsClosureFull` from supplied-field record to
+  theorem-derived assembly where possible.
+- [ ] Eliminate assumption-first canonical seams from
+  `PhysicsClosureInstanceAssumed` and canonical constraint-closure route.
+- [ ] Enforce canonical export path in:
+  `CanonicalStageC`, `AxiomSet` (`AxiomLaws`), and `Everything`.
+
 ## Cleanup / Consolidation
 
 - Runtime policy:
@@ -41,8 +60,8 @@ Priority bucket: `P1`
   moonshine/regime aliases in `PhysicsClosureValidationSummary` and re-check
   targeted bundle modules.
 - [ ] Next follow-up: re-run direct
-  `PhysicsClosureValidationSummary.agda` timing/validation once the upstream
-  bridge-seam type error is cleared.
+  `PhysicsClosureValidationSummary.agda` timing/validation when a longer
+  runtime budget is available.
 - [x] Pipeline enforcement: tag existing closure-relevant modules in docs as
   `canonical` / `supporting` / `experimental` and remove ambiguous duplicates
   from repo-facing claims.
@@ -112,18 +131,23 @@ Current focus:
   spatial isotropy + one arrow direction + finite speed force `(3,1)`.
 - [x] Keep orbit-profile equality as a secondary witness and negative-control
   eliminator on the signature route, not the primary theorem engine.
+- [x] Add a theorem-level Lorentz lock package that separates:
+  `(3,1)` witness,
+  uniqueness of admissible signature,
+  and non-admissibility of rival signatures (`sig13`, `other`,
+  plus explicit rival tags `sig40`, `sig22`, `sig04`).
 - [x] Strengthen `QuadraticToCliffordBridgeTheorem` from a raw
   presentation-level seam to an explicit factorization interface carrying:
   target carrier, factor map, and generator-compatibility law.
-- [ ] Complete canonical `Quadratic⇒Clifford` theorem surface as the exclusive
+- [x] Complete canonical `Quadratic⇒Clifford` theorem surface as the exclusive
   upstream for `WaveLift⇒Even`.
-- [ ] Add canonical Clifford grading + even-subalgebra interfaces on
+- [x] Add canonical Clifford grading + even-subalgebra interfaces on
   `DASHI.Physics.CliffordEvenLiftBridge`.
-- [ ] Define canonical wave lift on the same closure state/carrier pipeline and
+- [x] Define canonical wave lift on the same closure state/carrier pipeline and
   ensure its image is built from even words.
-- [ ] Prove `WaveLift⇒Even` as factorization through `EvenSubalgebra.incl`
+- [x] Prove `WaveLift⇒Even` as factorization through `EvenSubalgebra.incl`
   (witness form), not only a loose parity predicate.
-- [ ] Thread the completed `WaveLift⇒Even` theorem into canonical bridge
+- [x] Thread the completed `WaveLift⇒Even` theorem into canonical bridge
   bundles (`CanonicalContractionToCliffordBridgeTheorem`,
   `KnownLimitsQFTBridgeTheorem`) without adding a parallel wave algebra.
 

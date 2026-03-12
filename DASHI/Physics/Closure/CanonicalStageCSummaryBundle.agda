@@ -5,7 +5,10 @@ open import Agda.Primitive using (Setω)
 open import DASHI.Physics.Closure.CanonicalStageC as CSC
 open import DASHI.Physics.Closure.CanonicalStageCStatus as CSS
 open import DASHI.Physics.Closure.CanonicalStageCTheoremBundle as CSTB
+open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
 open import DASHI.Physics.Closure.CanonicalGaugeConstraintRealizedInstances as CGCRI
+open import DASHI.Physics.Constraints.ConcreteInstance as CI
+open import DASHI.Physics.Constraints.Closure as CC
 open import DASHI.Physics.Closure.KnownLimitsFullMatterGaugeTheorem as KLMGFT
 open import DASHI.Physics.Closure.KnownLimitsLocalCausalEffectivePropagationTheorem as KLCEPT
 open import DASHI.Physics.Closure.KnownLimitsLocalCausalGeometryCoherenceTheorem as KLCGCT
@@ -52,6 +55,8 @@ record CanonicalStageCSummaryBundle : Setω where
   field
     closureStatus : CSS.ClosureSurfaceStatus
     theoremBundle : CSTB.CanonicalStageCTheoremBundle
+    constraintPathWitness : CCFCPT.CanonicalPathWitness
+    constraintClosureFromPath : CC.ClosureLaw CI.CS CI.L
     realizedGaugeInstances : CGCRI.CanonicalGaugeConstraintRealizedInstances
     fullMatterGauge : KLMGFT.KnownLimitsFullMatterGaugeTheorem
     localCausalEffectivePropagation :
@@ -175,6 +180,9 @@ abstract
     record
     { closureStatus = CSC.canonicalClosureStatus
     ; theoremBundle = CSTB.canonicalStageCTheoremBundle
+    ; constraintPathWitness = CSC.canonicalConstraintPathWitness
+    ; constraintClosureFromPath =
+        CSC.canonicalConstraintClosureFromPathTheorem
     ; realizedGaugeInstances = CGCRI.canonicalGaugeConstraintRealizedInstances
     ; fullMatterGauge = CSC.canonicalKnownLimitsFullMatterGaugeTheorem
     ; localCausalEffectivePropagation =

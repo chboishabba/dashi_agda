@@ -9,11 +9,12 @@ open import DASHI.Physics.Closure.PhysicsClosure as PC
 open import DASHI.Physics.MyRealInstance as MRI
 open import DASHI.Geometry.QuadraticFormFromProjection as QFP
 open import DASHI.Geometry.SignatureUniqueness31 as SU
-import DASHI.Physics.Signature31FromShiftOrbitProfile as S31OP
+open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
 open import DASHI.Physics.Constraints.Generators as CG
 open import DASHI.Physics.Constraints.Bracket as CB
 open import DASHI.Physics.Constraints.Closure as CC
 open import DASHI.Physics.Constraints.ConcreteInstance as CI
+open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
 open import DASHI.Physics.Closure.MDLLyapunovCompatibility as MDLC
 open import DASHI.Physics.UniversalityTheorem as UTH
 open import DASHI.Physics.RealClosureKit as RK
@@ -33,10 +34,12 @@ physicsClosureAssumed =
             }
         }
     ; orthogonalityZ = λ {m} → OZ.orthogonalityZLift {m}
-    ; signature31 = S31OP.signature31-theorem
+    ; signature31 =
+        CQSB.ContractionQuadraticToSignatureBridgeTheorem.signature31Theorem
+          CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
     ; CS = CI.CS
     ; L = CI.L
-    ; constraintClosure = CI.closure
+    ; constraintClosure = CCFCPT.canonicalPathInducedConstraintClosure
     ; mdlLyap = λ {S} T → MDLC.mdlLyapTrivial T
     ; universality = UTH.canonicalUniversality (RK.RealClosureKit.C MRI.myKit)
     }

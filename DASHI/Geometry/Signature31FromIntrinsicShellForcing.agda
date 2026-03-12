@@ -3,10 +3,12 @@ module DASHI.Geometry.Signature31FromIntrinsicShellForcing where
 open import Level using (_⊔_; suc)
 open import Agda.Primitive using (Setω)
 open import Relation.Binary.PropositionalEquality using (_≡_)
+open import DASHI.Geometry.ParallelogramLaw using (AdditiveSpace)
+open import DASHI.Geometry.ConeMetricCompatibility using (Cone; Quadratic; ConeMetricCompat)
 
 open import DASHI.Geometry.QuadraticForm
 open import DASHI.Geometry.ProjectionDefect using (Additive)
-open import DASHI.Geometry.ConeTimeIsotropy as CTI
+import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Geometry.SignatureUniqueness31 as SU using (Signature31Theorem)
 open import DASHI.Geometry.CausalForcesLorentz31 as CFL
 open import DASHI.Geometry.ConeArrowIsotropyOrbitProfile as CAOP
@@ -77,3 +79,19 @@ signature31FromIntrinsic core =
   CFL.signature31-from-causal-axioms
     (IntrinsicSignatureCoreAxioms.strengthenedContraction core)
     (IntrinsicSignatureCoreAxioms.causalSymmetry core)
+
+lorentzLockFromIntrinsic :
+  (core : IntrinsicSignatureCoreAxioms) →
+  ∀ {A : AdditiveSpace} →
+  (q : Quadratic A) →
+  (cone : Cone A) →
+  ConeMetricCompat A cone q →
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
+  CFL.LorentzSignatureLock
+lorentzLockFromIntrinsic core q cone compat iso fs arrow =
+  CFL.lorentzSignatureLockFromCausalAxioms
+    (IntrinsicSignatureCoreAxioms.strengthenedContraction core)
+    (IntrinsicSignatureCoreAxioms.causalSymmetry core)
+    q cone compat iso fs arrow

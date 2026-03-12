@@ -1,0 +1,13 @@
+[cmd] agda -i . DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda
+---
+          Checking DASHI.Physics.DecimationToClifford (/home/c/Documents/code/dashi_agda/DASHI/Physics/DecimationToClifford.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/DecimationToClifford.agda:56,8-25
+Set (suc (suc ℓ)) is not less or equal than Set (suc ℓ)
+when checking that the type
+(T : TargetAlgebra V Q) →
+RelationRespectingMap D T →
+(Cl → TargetAlgebra.CarrierT T) →
+(Cl → TargetAlgebra.CarrierT T) → Set (suc ℓ)
+of an argument to the constructor
+DASHI.Physics.DecimationToClifford.UniversalClifford.constructor
+fits in the sort Set (suc ℓ) of the datatype.

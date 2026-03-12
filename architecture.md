@@ -4,12 +4,14 @@
 The canonical closure dependency spine is:
 
 1. `DASHI.Geometry.ProjectionDefect`
-2. `DASHI.Energy.EnergySplitProof` (or `DASHI.Geometry.EnergySplitProof`)
-3. `DASHI.Geometry.Parallelogram`
-4. `DASHI.Geometry.QuadraticForm` via polarization from parallelogram law
-5. `DASHI.Geometry.ConeTimeIsotropy`
-6. `DASHI.Geometry.Signature31FromConeArrowIsotropy`
-7. `DASHI.Geometry.Signature31Lock`
+2. `DASHI.Geometry.ProjectionDefectSplitForcesParallelogram`
+3. `DASHI.Geometry.ProjectionDefectToParallelogram`
+4. `DASHI.Geometry.QuadraticForm`
+5. `DASHI.Physics.Closure.ContractionForcesQuadraticStrong`
+6. `DASHI.Geometry.CausalForcesLorentz31`
+7. `DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem`
+8. `DASHI.Physics.Closure.QuadraticToCliffordBridgeTheorem`
+9. `DASHI.Physics.Closure.CliffordToEvenWaveLiftBridgeTheorem`
 
 This is the only required theorem route for quadratic and signature emergence.
 
@@ -49,6 +51,11 @@ policy and consumed accordingly.
 4. Define canonical wave lift using even Clifford words so image-evenness is by
    construction.
 5. Keep this independent from full Dirac operator semantics at this stage.
+
+Current status: implemented and validated with targeted checks on
+`CliffordEvenLiftBridge`, `CliffordToEvenWaveLiftBridgeTheorem`,
+`CanonicalContractionToCliffordBridgeTheorem`, and
+`KnownLimitsQFTBridgeTheorem`.
 
 ## Performance Intent
 Reducing parallel dependency paths lowers normalization and transport overhead.

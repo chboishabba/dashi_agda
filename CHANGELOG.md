@@ -2,6 +2,22 @@
 
 ## 2026-03-12
 
+- synchronized repo status docs with current canonical implementation:
+  `README.md`, `status.md`, `status.json`, `spec.md`, `architecture.md`,
+  `plan.md`, and `Docs/ClosurePipeline.md` now explicitly include the
+  implemented
+  `QuadraticToCliffordBridgeTheorem -> CliffordToEvenWaveLiftBridgeTheorem`
+  segment on the canonical closure route.
+- closed stale TODO entries for already-landed canonical wave-lift work in
+  `TODO.md` (`Quadratic⇒Clifford` exclusivity upstream, grading/even interface,
+  canonical wave-lift construction, witness-form factorization,
+  canonical bundle threading).
+- revalidated targeted bridge modules during the docs/TODO sync:
+  `CliffordEvenLiftBridge`,
+  `CliffordToEvenWaveLiftBridgeTheorem`,
+  `CanonicalContractionToCliffordBridgeTheorem`,
+  `KnownLimitsQFTBridgeTheorem`,
+  `ContractionQuadraticToSignatureBridgeTheorem`.
 - implemented the missing `Quadratic ⇒ Signature` bridge shape in
   `DASHI/Geometry/CausalForcesLorentz31.agda`:
   - added explicit theorem `quadraticConeIsotropyForces31` with inputs
@@ -15,6 +31,19 @@
     into the classification path,
   - kept `lorentz31-from-causal-axioms` as the canonical
     `Signature31Theorem` constructor consumed by Stage-C bridges.
+- tightened that bridge into a theorem lock package:
+  - added `LorentzSignatureLock` to separate
+    `(3,1)` witness,
+    uniqueness of admissible signature,
+    and non-admissibility of rival signatures,
+  - added `lorentzSignatureLockFromCausalAxioms` as the
+    `quadratic+cone+isotropy+arrow+finite-speed` lock constructor,
+  - exported `lorentzLockFromIntrinsic` / `lorentzLock` wrappers through the
+    intrinsic and shift headline signature modules.
+- wired theorem-bearing signature fields through closure records:
+  - `ContractionForcesQuadraticTheorem.signature31Theorem`,
+  - `PhysicsClosureFull.signature31Theorem`,
+  both populated from `S31OP.signature31-theorem`.
 - completed a theorem-dependency audit of the quadratic=>signature path and
   removed the remaining hidden profile prerequisite from intrinsic theorem
   construction:

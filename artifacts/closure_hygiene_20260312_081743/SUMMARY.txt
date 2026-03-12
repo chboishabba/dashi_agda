@@ -1,0 +1,16 @@
+Closure hygiene run: 20260312_081743
+Root: /home/c/Documents/code/dashi_agda
+Agda binary: agda
+
+Build checks:
+  - CanonicalStageCTheoremBundle: see log
+  - Everything.agda: see log
+
+Artifacts:
+  - artifacts/closure_hygiene_20260312_081743/01_canonical_stagec_build.log
+  - artifacts/closure_hygiene_20260312_081743/02_everything_build.log
+  - artifacts/closure_hygiene_20260312_081743/03_canonical_path_audit.txt
+  - artifacts/closure_hygiene_20260312_081743/04_placeholder_postulate_audit.txt
+  - artifacts/closure_hygiene_20260312_081743/05_closure_status_pointers.txt
+
+Overall status: FAIL

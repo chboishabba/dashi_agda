@@ -486,7 +486,7 @@ validationBundle : MCPCV.MinimalCrediblePhysicsClosureValidation
 validationBundle = MCPCVS.minimumCredibleClosureValidationShift
 
 canonicalStageCStatus : CSS.ClosureSurfaceStatus
-canonicalStageCStatus = CSS.canonicalClosureStatus
+canonicalStageCStatus = CSC.canonicalClosureStatus
 
 canonicalDynamicsWitnessSummary : DCW.DynamicalClosureWitness
 canonicalDynamicsWitnessSummary =

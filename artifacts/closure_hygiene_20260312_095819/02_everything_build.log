@@ -1,0 +1,15 @@
+[cmd] agda -i . DASHI/Everything.agda
+---
+[02_everything_build] Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+[02_everything_build]        Checking DASHI.Physics.Closure.PhysicsClosureFullInstance (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/PhysicsClosureFullInstance.agda).
+[02_everything_build] /home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/PhysicsClosureFullInstance.agda:38,13-86
+[02_everything_build] cyclic module dependency:
+[02_everything_build]   DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem
+[02_everything_build]   DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem
+[02_everything_build]   DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem
+[02_everything_build]   DASHI.Physics.Closure.SpinLocalLorentzBridgeTheorem
+[02_everything_build]   DASHI.Physics.Closure.MinimalCrediblePhysicsClosureShiftInstance
+[02_everything_build]   DASHI.Physics.Closure.PhysicsClosureFullInstance
+[02_everything_build]   DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem
+[02_everything_build] when scope checking the declaration
+[02_everything_build]   open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT

@@ -1,0 +1,28 @@
+Closure hygiene run: 20260312_100828
+Root: /home/c/Documents/code/dashi_agda
+Agda binary: agda
+Max workers: 3
+Verbose: 0
+Stage filter from: none
+Stage filter only: 03,04,05
+Cache enabled: 1
+Cache refresh: 0
+Cache file: .cache/closure_hygiene_stage_cache.tsv
+
+Build checks:
+  - CanonicalStageCTheoremBundle: N/A
+  - Everything.agda: N/A
+
+Audit checks:
+  - canonical_path_audit: SKIP (cached PASS)
+  - placeholder_postulate_audit: SKIP (cached PASS)
+  - closure_status_pointers: SKIP (cached PASS)
+
+Artifacts:
+  - artifacts/closure_hygiene_20260312_100828/01_canonical_stagec_build.log
+  - artifacts/closure_hygiene_20260312_100828/02_everything_build.log
+  - artifacts/closure_hygiene_20260312_100828/03_canonical_path_audit.txt
+  - artifacts/closure_hygiene_20260312_100828/04_placeholder_postulate_audit.txt
+  - artifacts/closure_hygiene_20260312_100828/05_closure_status_pointers.txt
+
+Overall status: PASS

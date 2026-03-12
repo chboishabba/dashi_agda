@@ -6,8 +6,12 @@ validation-only status.
 
 Canonical spine target:
 
-`ProjectionDefect → EnergySplitProof → Parallelogram → QuadraticForm
-→ ConeTimeIsotropy → Signature31FromConeArrowIsotropy → Signature31Lock`
+`ProjectionDefect → ProjectionDefectSplitForcesParallelogram
+→ ProjectionDefectToParallelogram → QuadraticForm
+→ ContractionForcesQuadraticStrong → CausalForcesLorentz31
+→ ContractionQuadraticToSignatureBridgeTheorem
+→ QuadraticToCliffordBridgeTheorem
+→ CliffordToEvenWaveLiftBridgeTheorem`
 
 ## Scope
 - Canonicalize the quadratic emergence path around the
@@ -49,3 +53,11 @@ Canonical spine target:
   - canonical wave lift
   - factorization witness that wave lift lands in `Cl⁺`.
 - Evenness should be structural (grading/parity), not physics-semantic.
+
+## Implementation Status (2026-03-12)
+
+- The canonical `WaveLift⇒Even` theorem surface is implemented and wired on the
+  canonical closure path.
+- The canonical record surface now includes:
+  `CliffordGrading`, `EvenSubalgebra`, canonical wave lift, and explicit
+  factorization witness through `EvenSubalgebra.incl`.

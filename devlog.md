@@ -1,5 +1,121 @@
 # Devlog
 
+- 2026-03-12: Tightened canonical export surfaces for path-derived constraint
+  closure:
+  - `CanonicalStageC` now exports
+    `canonicalConstraintPathWitness` and
+    `canonicalConstraintClosureFromPathTheorem`.
+  - `CanonicalStageCTheoremBundle` now includes
+    `constraintPathWitnessSummary` and
+    `constraintClosureFromPathSummary`.
+  - `CanonicalStageCSummaryBundle` now includes
+    `constraintPathWitness` and
+    `constraintClosureFromPath`.
+  Targeted checks passed:
+  `CanonicalStageC`,
+  `CanonicalStageCTheoremBundle`,
+  `CanonicalStageCSummaryBundle`.
+- 2026-03-12: Completed the constraint-path cycle break and switched instance
+  surfaces to path-derived closure:
+  - Reworked `ConstraintClosureFromCanonicalPathTheorem` to use a lightweight
+    `CanonicalPathWitness` (`ContractionQuadraticToSignatureBridgeTheorem` +
+    `QuadraticToCliffordBridgeTheorem`) instead of importing
+    `CanonicalContractionToCliffordBridgeTheorem` directly.
+  - Switched
+    `PhysicsClosureFullInstance`,
+    `PhysicsClosureEmpiricalToFull`,
+    and `PhysicsClosureInstanceAssumed`
+    to consume `canonicalPathInducedConstraintClosure`.
+  - `CanonicalConstraintClosureWitness` remains path-derived.
+  Checks:
+  `ConstraintClosureFromCanonicalPathTheorem`,
+  `CanonicalConstraintClosureWitness`,
+  `PhysicsClosureInstanceAssumed` pass.
+  `CanonicalStageC` reaches long-run path and times out under bounded check
+  (`timeout 90s`, exit `124`) with no type errors emitted.
+- 2026-03-12: Continued item 12/13/14 implementation with constraint/law
+  surface hardening:
+  - `CanonicalConstraintClosureWitness.closureWitness` now points to
+    `ConstraintClosureFromCanonicalPathTheorem.canonicalPathInducedConstraintClosure`
+    (path-derived witness layer).
+  - Kept full/assumed closure instances on
+    `ConstraintClosureFromCanonicalPackage.canonicalPackageInducedClosure`
+    to avoid an import cycle caused by path theorem dependencies.
+  - Added explicit law-status registry in `AxiomSet`
+    (`LawStatus`, `AxiomLawSurfaceStatus`,
+    `canonicalAxiomLawSurfaceStatus`) for canonical theorem/instance/assumption
+    auditing.
+  Validation:
+  - `CanonicalStageC`: pass.
+  - `Everything`: timed check hits runtime guardrail path
+    (`PhysicsClosureValidationSummary`) and exits `124` under 20s timeout.
+- 2026-03-12: Started checklist item 12/13 derivation pass by threading
+  canonical theorem-chain outputs into full-closure adapters:
+  - `PhysicsClosureFull` now exports canonical bridge helpers
+    (`canonicalContractionQuadraticTheorem`,
+    `canonicalContractionQuadraticToSignatureBridge`).
+  - `PhysicsClosureFullInstance` now takes `quadraticFormZ` from
+    `ContractionForcesQuadraticTheorem.derivedQuadratic` and takes
+    `signature31Theorem`/`signature31` from
+    `ContractionQuadraticToSignatureBridgeTheorem`.
+  - `PhysicsClosureEmpiricalToFull` was rewired the same way.
+  - `PhysicsClosureInstanceAssumed` now consumes
+    `ContractionQuadraticToSignatureBridgeTheorem.signature31Theorem` on the
+    canonical route instead of direct profile theorem symbol wiring.
+  Validation passed, including a heavy check of
+  `DASHI/Physics/Closure/CanonicalStageC.agda`.
+- 2026-03-12: Completed checklist item 9 (`DecimationToClifford`) by replacing
+  abstract placeholders with explicit theorem interfaces:
+  `CliffordRelations.rel` now states generator-square collapse from
+  `Quadratic.Q` witnesses; added `TargetAlgebra`,
+  `RelationRespectingMap`, and a stronger `UniversalClifford` carrying
+  `include`, `factor`, `factorOnInclude`, and uniqueness seam fields.
+  Updated `decimation⇒clifford` to construct this richer package.
+  Targeted checks passed:
+  `DecimationToClifford`,
+  `UnificationClosure`,
+  `ContractionSignatureToSpinDiracBridgeTheorem`.
+- 2026-03-12: Continued checklist execution for profile/signature selection
+  front door hardening. Added constructor/symmetry helpers to
+  `ConeArrowIsotropyForcesProfile`, introduced a canonical single-source
+  profile pipeline record in `OrbitProfileExternal`
+  (`CanonicalOrbitProfilePipeline` + canonical equalities), and rewired
+  `ConeArrowIsotropyForcesProfileShiftInstance` to consume that pipeline and
+  expose `shiftSignatureForced31` (signature uniqueness from measured profile
+  equality). Targeted checks passed:
+  `OrbitProfileExternal`,
+  `ConeArrowIsotropyForcesProfile`,
+  `ConeArrowIsotropyForcesProfileShiftInstance`,
+  `Signature31FromShiftOrbitProfile`,
+  `ContractionQuadraticToSignatureBridgeTheorem`.
+- 2026-03-12: Began implementation execution from
+  `Docs/PhysicsClosureImplementationChecklist.md` (Phase 1 hardening).
+  Added representation-invariance/canonicality lemmas to
+  `ContractionForcesQuadraticStrong`
+  (`canonicalQuadraticAgreement`,
+  `canonicalQuadraticAgreementToQ̂core`), added an explicit canonical
+  output surface in `ContractionForcesQuadraticTheorem`
+  (`CanonicalQuadraticOutput`, `canonicalOutput`, `canonicalOutputAgreement`,
+  `canonicalRealStackContractionForcesQuadraticTheorem`), and threaded the
+  canonical theorem object into
+  `ContractionQuadraticToSignatureBridgeTheorem`.
+  Targeted checks passed:
+  `ContractionForcesQuadraticStrong`,
+  `ContractionForcesQuadraticTheorem`,
+  `ContractionQuadraticToSignatureBridgeTheorem`,
+  `ContractionSignatureToSpinDiracBridgeTheorem`.
+- 2026-03-12: Ran `get-shit-done` planning pass to convert the current
+  all_code54-based closure roadmap into an execution-ready, module-mapped
+  checklist with concrete theorem identifiers. Added
+  `Docs/PhysicsClosureImplementationChecklist.md` and synchronized project
+  memory (`plan.md`, `TODO.md`, `status.md`) to route next execution to
+  `long-running-development` on that checklist.
+- 2026-03-12: Tightened `Quadratic ⇒ Signature` from value witness to theorem
+  lock by extending `CausalForcesLorentz31` with `LorentzSignatureLock`
+  (witness/uniqueness/rival-rejection split), adding
+  `lorentzSignatureLockFromCausalAxioms`, and threading theorem-bearing
+  signature fields (`signature31Theorem`) through
+  `ContractionForcesQuadraticTheorem` and `PhysicsClosureFull`.
 - 2026-03-12: Strengthened
   `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda` by replacing
   the raw universal seam placeholder with an explicit factorization interface

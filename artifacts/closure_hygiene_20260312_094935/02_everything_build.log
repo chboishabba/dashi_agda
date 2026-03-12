@@ -1,0 +1,8 @@
+[cmd] agda -i . DASHI/Everything.agda
+---
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+           Checking DASHI.Physics.DecimationToClifford (/home/c/Documents/code/dashi_agda/DASHI/Physics/DecimationToClifford.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/DecimationToClifford.agda:95,40-53
+Set ℓ != Set (suc ℓ)
+when checking that the expression ∀ x → f x ≡ g x has type
+Set (suc ℓ)

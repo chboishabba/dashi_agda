@@ -1,5 +1,17 @@
 module DASHI.Physics.Closure.QuadraticToCliffordBridgeTheorem where
 
+-- Assumptions:
+-- - strong contraction=>quadratic witness
+-- - normalized quadratic seam to Q^core
+--
+-- Output:
+-- - canonical quadratic=>Clifford bridge package
+-- - canonical bilinear builder from normalized quadratic
+-- - explicit factorization seam for universal-property progression
+--
+-- Classification:
+-- - canonical
+
 open import Agda.Primitive using (Setω; lzero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym)

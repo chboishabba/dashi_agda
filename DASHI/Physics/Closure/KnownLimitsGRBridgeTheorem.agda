@@ -1,5 +1,15 @@
 module DASHI.Physics.Closure.KnownLimitsGRBridgeTheorem where
 
+-- Assumptions:
+-- - canonical GR adapter
+-- - canonical known-limits recovery witness package
+--
+-- Output:
+-- - known-limits GR bridge theorem bundle.
+--
+-- Classification:
+-- - known limits
+
 open import Agda.Primitive using (Setω)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 

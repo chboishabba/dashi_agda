@@ -3,9 +3,9 @@ module DASHI.Physics.Closure.KnownLimitsPropagationSpinTheorem where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat)
 
-open import DASHI.Geometry.OrthogonalityFromPolarization as OP
 open import DASHI.Physics.Closure.CanonicalSpinDiracConsumer as CSDC
 open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
+open import DASHI.Geometry.OrthogonalityFromPolarization as OP
 open import DASHI.Physics.Closure.KnownLimitsEffectiveGeometryTheorem as KLET
 open import DASHI.Physics.Closure.KnownLimitsLocalRecoveryTheorem as KLRT
 open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosureShiftInstance as MCCSI
@@ -40,7 +40,8 @@ canonicalKnownLimitsPropagationSpinTheorem =
     ; localRecovery = KLRT.canonicalKnownLimitsLocalRecoveryTheorem
     ; effectiveGeometry = KLET.canonicalKnownLimitsEffectiveGeometryTheorem
     ; canonicalConsumer =
-        CSDC.spinDiracConsumerFromMinimal MCCSI.minimumCredibleClosureShift
+        CSSDB.ContractionSignatureToSpinDiracBridgeTheorem.canonicalSpinDiracConsumer
+          CSSDB.canonicalContractionSignatureToSpinDiracBridgeTheorem
     ; propagationSeams =
         KLET.KnownLimitsEffectiveGeometryTheorem.propagationSeams
           KLET.canonicalKnownLimitsEffectiveGeometryTheorem

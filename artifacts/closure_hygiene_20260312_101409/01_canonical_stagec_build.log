@@ -1,0 +1,12 @@
+[cmd] agda -i . DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda
+---
+     Checking DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/ConstraintClosureFromCanonicalPathTheorem.agda).
+    Checking DASHI.Physics.Closure.CanonicalConstraintClosureWitness (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalConstraintClosureWitness.agda).
+   Checking DASHI.Physics.Closure.CanonicalConstraintClosureTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalConstraintClosureTheorem.agda).
+  Checking DASHI.Physics.Closure.CanonicalGaugeConstraintBridgeTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalGaugeConstraintBridgeTheorem.agda).
+ Checking DASHI.Physics.Closure.KnownLimitsMatterGaugeTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/KnownLimitsMatterGaugeTheorem.agda).
+ Checking DASHI.Physics.Closure.KnownLimitsFullMatterGaugeTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/KnownLimitsFullMatterGaugeTheorem.agda).
+  Checking DASHI.Physics.Closure.KnownLimitsQFTBridgeTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/KnownLimitsQFTBridgeTheorem.agda).
+  Checking DASHI.Physics.Closure.KnownLimitsGRBridgeTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/KnownLimitsGRBridgeTheorem.agda).
+  Checking DASHI.Physics.Closure.PhysicsClosureFivePillarsTheorem (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda).
+ Checking DASHI.Physics.Closure.CanonicalStageC (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageC.agda).

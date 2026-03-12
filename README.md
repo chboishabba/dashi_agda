@@ -188,11 +188,12 @@ Current theorem status:
   witness state type, a Bool inversion-specific harness with its own witness
   selection, and a standalone `B₄` harness.
 - Prioritized next steps (condensed):
-  1) contraction ⇒ quadratic theorem,
-  2) quadratic ⇒ signature theorem,
-  3) concrete constraint-closure theorem,
-  4) local recovery / effective-geometry theorem,
-  5) signature ⇒ Clifford/spin bridge.
+  1) strengthen constructive internals for Lemma A/B in
+     `CausalForcesLorentz31` while preserving canonical interfaces,
+  2) keep closure-pipeline labels and repo-facing citation order synchronized
+     as modules are promoted,
+  3) re-run direct `PhysicsClosureValidationSummary.agda` timing/validation when
+     a longer runtime budget is available.
 
 The repo does **not** currently claim full physics closure or “solved
 physics”.

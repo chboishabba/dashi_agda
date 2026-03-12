@@ -1,0 +1,11 @@
+[timeout] 1s
+[cmd] agda -i . DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda
+---
+Checking DASHI.Physics.Closure.CanonicalStageCTheoremBundle (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda).
+ Checking DASHI.Physics.Closure.CanonicalStageC (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageC.agda).
+
+[timeout] 2s
+[cmd] agda -i . DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda
+---
+Checking DASHI.Physics.Closure.CanonicalStageCTheoremBundle (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda).
+ Checking DASHI.Physics.Closure.CanonicalStageC (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageC.agda).

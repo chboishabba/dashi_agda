@@ -1,0 +1,3 @@
+[cached] skip 05_closure_status_pointers
+[fingerprint] 74ae08382af5a4606b4168e2d1d1a69522f56c254892d33e8d4dad848cad9724
+[source] .cache/closure_hygiene_stage_cache.tsv

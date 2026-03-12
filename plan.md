@@ -1,23 +1,39 @@
 # Dashboard Plan
 
 ## Phase
-Stage C spine simplification and routing cleanup (active 2026-03-11).
+Stage C canonical bridge hardening complete; physics-closure execution checklist activated (active 2026-03-12).
+
+## Current Milestone (2026-03-12)
+Execute the canonical physics-closure chain in strict order:
+`ProjectionDefectSplitForcesParallelogram`
+→ `ContractionForcesQuadraticStrong`
+→ `ContractionForcesQuadraticTheorem`
+→ `ContractionQuadraticToSignatureBridgeTheorem`
+→ `QuadraticToCliffordBridgeTheorem`
+→ `ContractionSignatureToSpinDiracBridgeTheorem`
+→ `CliffordToEvenWaveLiftBridgeTheorem`
+→ `PhysicsClosureFull`.
+
+Execution checklist source:
+`Docs/PhysicsClosureImplementationChecklist.md`
 
 ## Milestones
-1. Canonical spine declaration and import policy.
-2. Quadratic route consolidation to the parallelogram/polarization path.
-3. Signature route consolidation to cone/isotropy canonical path.
-4. Canonical quadratic-to-Clifford bridge from normalized quadratic output.
-5. Validation summary reroute to canonical-first imports.
-6. Open seam registry narrowed to canonical path only.
-6. `Quadratic⇒Clifford` theorem surface hardened for downstream
-   `WaveLift⇒Even`.
-7. Canonical `WaveLift⇒Even` factorization theorem landed.
+1. Canonical spine declaration and import policy. (done)
+2. Quadratic route consolidation to the split/parallelogram route. (done)
+3. Signature route consolidation to theorem-primary causal classification. (done)
+4. Canonical quadratic-to-Clifford bridge from normalized quadratic output. (done)
+5. Canonical `WaveLift⇒Even` factorization theorem and bridge threading. (done)
+6. Keep closure label registry and status docs synchronized as modules evolve. (active)
+7. Strengthen Lemma A/B internals while preserving canonical interfaces. (active)
 
 ## Milestone Tasks
-1. Add canonical route map to docs:
-   `ProjectionDefect → EnergySplitProof → Parallelogram → QuadraticForm
-   → ConeTimeIsotropy → Signature31FromConeArrowIsotropy → Signature31Lock`.
+1. Keep canonical route map aligned to current implementation:
+   `ProjectionDefect → ProjectionDefectSplitForcesParallelogram
+   → ProjectionDefectToParallelogram → QuadraticForm
+   → ContractionForcesQuadraticStrong → CausalForcesLorentz31
+   → ContractionQuadraticToSignatureBridgeTheorem
+   → QuadraticToCliffordBridgeTheorem
+   → CliffordToEvenWaveLiftBridgeTheorem`.
 2. Classify parallel modules as `alternative` or `validation`:
    - `QuadraticFromNorm`
    - `QuadraticFromProjection`
@@ -32,27 +48,15 @@ Stage C spine simplification and routing cleanup (active 2026-03-11).
 5. Keep runtime guardrail:
    skip routine direct checks of `PhysicsClosureValidationSummary.agda`
    until runtime bound improves from the current ~1.25h observation.
-6. Add and wire
-   `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`
-   so canonical Clifford emergence consumes
-   `ContractionForcesQuadraticStrong` normalized quadratic data and exposes
-   an explicit universal-property seam.
-6. Land a canonical split/parallelogram bridge module and route
-   contraction→quadratic theorem surfaces through it without changing the
-   contraction→signature bridge interface.
-7. Expand strengthened contraction outputs to include explicit theorem-facing
-   strength fields (`invariantUnderT`, `nondegenerate`,
-   `compatibleWithIsotropy`) while keeping the existing normalization witness.
-8. Extend `DASHI.Physics.CliffordEvenLiftBridge` with canonical grading and
-   even-subalgebra interfaces, plus canonical wave-lift factorization fields.
-9. Rewire `DASHI.Physics.ConcreteClosureStack` so `q2cl` and `wl` inhabit the
-   strengthened theorem surface by construction.
-10. Add/update `DASHI.Physics.WaveLiftEvenSubalgebra` so it matches the
-    canonical bridge record and exposes a concrete factorization witness form.
-11. Run targeted Agda checks for:
-    `CliffordEvenLiftBridge`, `ConcreteClosureStack`,
-    `CanonicalContractionToCliffordBridgeTheorem`, and
-    `KnownLimitsQFTBridgeTheorem`.
+6. Keep routine guardrail:
+   skip routine direct checks of `PhysicsClosureValidationSummary.agda`
+   while runtime remains around the current ~1.25h bound.
+7. Maintain canonical-first references in repo-facing docs and closure plan
+   notes as modules are added/promoted.
+8. Re-run targeted checks for canonical bridge modules when updating bridge docs:
+   `CliffordEvenLiftBridge`, `CliffordToEvenWaveLiftBridgeTheorem`,
+   `CanonicalContractionToCliffordBridgeTheorem`,
+   `KnownLimitsQFTBridgeTheorem`.
 
 ## Exit Checkpoint
 - One canonical spine documented and used for closure claims.
@@ -73,8 +77,9 @@ Stage C spine simplification and routing cleanup (active 2026-03-11).
   `QuadraticFormEmergence` transitively and need rerouting first?
 
 ## Next Skill
-`update-docs-todo-implement` for strict docs/TODO/code/changelog synchronization
-on canonical `Quadratic⇒Clifford → WaveLift⇒Even` completion work.
+`long-running-development` to execute
+`Docs/PhysicsClosureImplementationChecklist.md` in-order, proving one
+milestone group at a time with targeted Agda checks after each group.
 
 ## Active Signature Classification Focus (2026-03-11)
 

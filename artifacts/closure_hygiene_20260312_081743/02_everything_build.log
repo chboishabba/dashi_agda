@@ -1,0 +1,22 @@
+[cmd] agda -i . DASHI/Everything.agda
+---
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+ Checking DASHI.Geometry.Quadratic.PolarizationFromForm (/home/c/Documents/code/dashi_agda/DASHI/Geometry/Quadratic/PolarizationFromForm.agda).
+ Checking DASHI.Geometry.Signature31Lock (/home/c/Documents/code/dashi_agda/DASHI/Geometry/Signature31Lock.agda).
+ Checking DASHI.Physics.ConeArrowIsotropyForcesProfile (/home/c/Documents/code/dashi_agda/DASHI/Physics/ConeArrowIsotropyForcesProfile.agda).
+ Checking DASHI.Physics.ConeArrowIsotropyOrbitProfileAgreement (/home/c/Documents/code/dashi_agda/DASHI/Physics/ConeArrowIsotropyOrbitProfileAgreement.agda).
+ Checking DASHI.Physics.ConeArrowIsotropyForcesProfileShiftInstance (/home/c/Documents/code/dashi_agda/DASHI/Physics/ConeArrowIsotropyForcesProfileShiftInstance.agda).
+ Checking DASHI.Physics.Closure.BetaSeamCertificatesInstance (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/BetaSeamCertificatesInstance.agda).
+   Checking DASHI.Physics.Closure.PhysicsClosureValidationSummary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda:489,25-51
+Not in scope:
+  CSS.canonicalClosureStatus
+  at /home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda:489,25-51
+    (did you mean
+       'CSC.canonicalClosure' or
+       'CSC.canonicalClosureStatus' or
+       'CSC.canonicalConstraintStatus' or
+       'DCS.DynamicalClosureStatus' or
+       'DynamicalClosureStatus' or
+       'canonicalStageCStatus'?)
+when scope checking CSS.canonicalClosureStatus

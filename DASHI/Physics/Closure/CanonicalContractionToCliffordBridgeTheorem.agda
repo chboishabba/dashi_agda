@@ -1,5 +1,16 @@
 module DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem where
 
+-- Assumptions:
+-- - concrete real stack unification witnesses
+-- - canonical contraction=>signature and signature=>spin/Dirac bridges
+-- - canonical quadratic=>Clifford bridge
+--
+-- Output:
+-- - canonical contraction=>Clifford bridge bundle with concrete witnesses.
+--
+-- Classification:
+-- - canonical
+
 open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.ClosureBuilder as CB
@@ -25,6 +36,10 @@ record CanonicalContractionToCliffordBridgeTheorem : Setω where
         (CB.U CCS.realStack) (CB.T CCS.realStack)
     concreteSignatureBridge : SCB.Quadratic⇒Signature
     concreteCliffordBridge : CE.Quadratic⇒Clifford
+    concreteCliffordFromCanonicalQuadratic :
+      CE.Clifford
+        (CQB.V (CQB.out concreteContractionQuadraticBridge))
+        (CQB.Scalar (CQB.out concreteContractionQuadraticBridge))
     concreteWaveLiftEvenBridge : CE.WaveLift⇒Even
 
 canonicalContractionToCliffordBridgeTheorem :
@@ -32,6 +47,8 @@ canonicalContractionToCliffordBridgeTheorem :
 canonicalContractionToCliffordBridgeTheorem =
   let
     u = CCS.physicsUnification
+    cq = UC.PhysicsUnification.cq u
+    q2cl = UC.PhysicsUnification.q2cl u
   in
   record
     { contractionQuadraticToSignatureBridge =
@@ -40,8 +57,10 @@ canonicalContractionToCliffordBridgeTheorem =
         CSSDB.canonicalContractionSignatureToSpinDiracBridgeTheorem
     ; quadraticToCliffordBridge =
         QTCB.canonicalQuadraticToCliffordBridgeTheorem
-    ; concreteContractionQuadraticBridge = UC.PhysicsUnification.cq u
+    ; concreteContractionQuadraticBridge = cq
     ; concreteSignatureBridge = UC.PhysicsUnification.qs u
-    ; concreteCliffordBridge = UC.PhysicsUnification.q2cl u
+    ; concreteCliffordBridge = q2cl
+    ; concreteCliffordFromCanonicalQuadratic =
+        CE.Quadratic⇒Clifford.build q2cl (CQB.out cq)
     ; concreteWaveLiftEvenBridge = UC.PhysicsUnification.wl u
     }

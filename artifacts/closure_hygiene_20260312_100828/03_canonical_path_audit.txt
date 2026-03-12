@@ -1,0 +1,3 @@
+[cached] skip 03_canonical_path_audit
+[fingerprint] 06a03b6636a7c42185ea953d1c899782861a98e5fd46afb285a4ed7216cec11d
+[source] .cache/closure_hygiene_stage_cache.tsv

@@ -29,6 +29,9 @@ open import DASHI.Physics.Closure.PolarizationZLift as PZL
 open import DASHI.Physics.RealClosureKit as RK
 open import DASHI.Physics.Signature31FromShiftOrbitProfile as S31OP
 open import DASHI.Physics.Constraints.ConcreteInstance as CI
+open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
+open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
+open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
 
 -- Adapter: embeds empirical closure seams into the full closure package.
 --
@@ -51,22 +54,19 @@ empiricalToFull emp =
     ; metricEmergence = λ {ℓv} {ℓs} A F Pkg →
         PDP.quadraticFromProjectionDefect A F Pkg
     ; quadraticFormZ = λ {m} →
-        let
-          pkg =
-            PDP.fromEmergenceAxioms
-              (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ
-              (QES.PDzero {m})
-              (QES.QuadraticEmergenceShiftAxioms {m})
-        in
-        proj₁
-          (PDP.quadraticFromProjectionDefect
-            (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ pkg)
+        CFQT.ContractionForcesQuadraticTheorem.derivedQuadratic
+          (CFQT.canonicalContractionForcesQuadraticTheorem m)
     ; polarizationZ = λ {m} → PZL.polarizationZLift {m}
     ; orthogonalityZ = λ {m} → OZ.orthogonalityZLift {m}
-    ; signature31 = S31OP.signature31
+    ; signature31Theorem =
+        CQSB.ContractionQuadraticToSignatureBridgeTheorem.signature31Theorem
+          CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
+    ; signature31 =
+        CQSB.ContractionQuadraticToSignatureBridgeTheorem.signature31Value
+          CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
     ; CS = CI.CS
     ; L = CI.L
-    ; constraintClosure = CI.closure
+    ; constraintClosure = CCFCPT.canonicalPathInducedConstraintClosure
     ; mdlLyap = λ {S} T → MDLC.mdlLyapTrivial T
     ; mdlFejer = MDLFA.mdlFejerShift
     ; dynamics = DCSI.shiftDynamics

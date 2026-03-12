@@ -1,0 +1,3 @@
+[cached] skip 04_placeholder_postulate_audit
+[fingerprint] 55d8d770608b15ee6f752828341f26ea8d42c8a7e4c2499869e56b698f877078
+[source] .cache/closure_hygiene_stage_cache.tsv

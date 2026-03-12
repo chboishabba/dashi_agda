@@ -1,8 +1,20 @@
 module DASHI.Physics.Closure.ContractionForcesQuadraticStrong where
 
+-- Assumptions:
+-- - projection-defect/parallelogram package on the shift carrier
+-- - chosen dynamics map with quadratic invariance witness
+-- - uniqueness seam to normalized quadratic core
+--
+-- Output:
+-- - strong contraction=>quadratic package with explicit invariance and
+--   uniqueness witnesses.
+--
+-- Classification:
+-- - strong
+
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans; sym)
 open import Data.Bool using (true; false)
 open import Data.Vec using (_∷_; [])
 open import Data.Product using (Σ; proj₁)
@@ -111,6 +123,39 @@ uniqueUpToScaleWitness c x =
       (QuadraticUniquenessBridge.uniqueness
         (ContractionForcesQuadraticStrong.quadraticUniquenessBridge c))
       x)
+
+-- Canonicality lemma: if an alternative admissible quadratic presentation is
+-- also normalized to Q^core on the same carrier, it agrees pointwise with the
+-- canonical strong output.
+canonicalQuadraticAgreement :
+  (c : ContractionForcesQuadraticStrong) →
+  (q′ :
+    QF.QuadraticForm
+      (QES.AdditiveVecℤ
+        {ContractionForcesQuadraticStrong.dimension c})
+      QES.ScalarFieldℤ) →
+  UniqueUpToScaleSeam
+    (ContractionForcesQuadraticStrong.dimension c) q′ →
+  ∀ x →
+    QF.QuadraticForm.Q
+      (ContractionForcesQuadraticStrong.derivedQuadratic c)
+      x
+    ≡
+    QF.QuadraticForm.Q q′ x
+canonicalQuadraticAgreement c q′ uniq′ x =
+  trans
+    (uniqueUpToScaleWitness c x)
+    (sym (UniqueUpToScaleSeam.normalizeToQ̂core uniq′ x))
+
+canonicalQuadraticAgreementToQ̂core :
+  (c : ContractionForcesQuadraticStrong) →
+  ∀ x →
+    QF.QuadraticForm.Q
+      (ContractionForcesQuadraticStrong.derivedQuadratic c)
+      x
+    ≡ QP.Q̂core x
+canonicalQuadraticAgreementToQ̂core c =
+  uniqueUpToScaleWitness c
 
 buildContractionForcesQuadraticStrong :
   (m : Nat) →

@@ -4,6 +4,7 @@ open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.Closure.CanonicalGaugeConstraintBridgeTheorem as CGCBT
 open import DASHI.Physics.Closure.CanonicalSpinDiracConsumer as CSDC
+open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 open import DASHI.Physics.Closure.KnownLimitsRecoveryWitness as KLRW
 open import DASHI.Physics.Closure.MinimalCrediblePhysicsClosureShiftInstance as MCCSI
 open import DASHI.Physics.Closure.SpinLocalLorentzBridgeTheorem as SLLB
@@ -25,6 +26,7 @@ canonicalKnownLimitsMatterGaugeTheorem =
     { spinLocalLorentzBridge = SLLB.canonicalSpinLocalLorentzBridge
     ; gaugeConstraintBridge = CGCBT.canonicalGaugeConstraintBridgeTheorem
     ; spinDiracConsumer =
-        CSDC.spinDiracConsumerFromMinimal MCCSI.minimumCredibleClosureShift
+        CSSDB.ContractionSignatureToSpinDiracBridgeTheorem.canonicalSpinDiracConsumer
+          CSSDB.canonicalContractionSignatureToSpinDiracBridgeTheorem
     ; canonicalRecoveryWitness = KLRW.canonicalKnownLimitsRecoveryWitness
     }

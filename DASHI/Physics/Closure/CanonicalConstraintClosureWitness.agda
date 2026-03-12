@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.Constraints.Bracket using (LieLike)
 open import DASHI.Physics.Constraints.Closure using (ClosureLaw)
 open import DASHI.Physics.Constraints.ConcreteInstance as CI
+open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
 
 record CanonicalConstraintClosureWitness : Setω where
   field
@@ -20,5 +21,5 @@ canonicalConstraintClosureWitness =
     { crcpCloses = refl
     ; cpccCloses = refl
     ; crccCloses = refl
-    ; closureWitness = CI.closure
+    ; closureWitness = CCFCPT.canonicalPathInducedConstraintClosure
     }

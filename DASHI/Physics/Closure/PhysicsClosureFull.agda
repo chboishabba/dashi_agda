@@ -10,8 +10,9 @@ open import DASHI.Geometry.ProjectionDefect
 open import DASHI.Geometry.QuadraticForm
 open import DASHI.Geometry.ProjectionDefectToParallelogram as PDP
 open import DASHI.Geometry.OrthogonalityFromPolarization
-open import DASHI.Geometry.ConeTimeIsotropy
+import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Geometry.Signature31FromConeArrowIsotropy
+open import DASHI.Geometry.SignatureUniqueness31 as SU
 open import DASHI.Physics.Constraints.Generators
 open import DASHI.Physics.Constraints.Bracket
 open import DASHI.Physics.Constraints.Closure
@@ -22,6 +23,8 @@ open import DASHI.Physics.Closure.OrthogonalityZLift
 open import DASHI.Physics.UniversalityTheorem
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Geometry.OrthogonalityFromPolarization as OP
+open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
+open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
 
 record PhysicsClosureFull : Setω where
   field
@@ -42,7 +45,8 @@ record PhysicsClosureFull : Setω where
     orthogonalityZ  : ∀ {m : Nat} → DASHI.Physics.Closure.OrthogonalityZLift.OrthogonalityZLift {m}
 
     -- Signature lock
-    signature31 : Signature
+    signature31Theorem : SU.Signature31Theorem
+    signature31 : CTI.Signature
 
     -- Constraint closure
     CS : ConstraintSystem
@@ -56,3 +60,13 @@ record PhysicsClosureFull : Setω where
 
     -- Universality
     universality : Universality (RealClosureKit.C kit)
+
+canonicalContractionQuadraticTheorem :
+  CFQT.ContractionForcesQuadraticTheorem
+canonicalContractionQuadraticTheorem =
+  CFQT.canonicalRealStackContractionForcesQuadraticTheorem
+
+canonicalContractionQuadraticToSignatureBridge :
+  CQSB.ContractionQuadraticToSignatureBridgeTheorem
+canonicalContractionQuadraticToSignatureBridge =
+  CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem

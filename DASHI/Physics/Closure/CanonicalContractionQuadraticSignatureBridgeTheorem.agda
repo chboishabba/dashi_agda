@@ -1,5 +1,16 @@
 module DASHI.Physics.Closure.CanonicalContractionQuadraticSignatureBridgeTheorem where
 
+-- Assumptions:
+-- - concrete real-stack unification witnesses
+-- - canonical contraction=>Clifford bundle surface
+--
+-- Output:
+-- - compatibility wrapper combining contraction=>quadratic/signature fields
+--   with the canonical contraction=>Clifford bridge.
+--
+-- Classification:
+-- - canonical (compatibility wrapper; non-primary import path)
+
 open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.ClosureBuilder as CB

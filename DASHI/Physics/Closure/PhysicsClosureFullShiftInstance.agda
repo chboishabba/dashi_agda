@@ -12,6 +12,7 @@ open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
 open import DASHI.Physics.UniversalityTheorem as UTH
 open import DASHI.Physics.RealClosureKitFiber as RKF
 open import DASHI.Physics.Constraints.ConcreteInstance as CI
+open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPackage as CCFP
 open import DASHI.Physics.QuadraticEmergenceShiftInstance as QES
 open import DASHI.Physics.QuadraticPolarizationCoreInstance as QPCI
 open import DASHI.Physics.Closure.PolarizationZLift as PZL
@@ -42,6 +43,6 @@ physicsClosureFullShift =
     ; orthogonalityZ = λ {m} → OZ.orthogonalityZLift {m}
     ; CS = CI.CS
     ; L = CI.L
-    ; constraintClosure = CI.closure
+    ; constraintClosure = CCFP.canonicalPackageInducedClosure
     ; universality = UTH.canonicalUniversality (RKF.RealClosureKitFiber.C TRIS.realKitFiber)
     }

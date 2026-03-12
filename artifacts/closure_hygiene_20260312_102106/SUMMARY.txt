@@ -1,0 +1,34 @@
+Closure hygiene run: 20260312_102106
+Root: /home/c/Documents/code/dashi_agda
+Agda binary: agda
+Max workers: 3
+Verbose: 1
+Stage filter from: none
+Stage filter only: none
+Cache enabled: 1
+Cache refresh: 0
+Cache file: .cache/closure_hygiene_stage_cache.tsv
+Cache ordering: shortest-known stage first
+Timeout ladder: 1,2,5,10,30
+
+Build checks:
+  - CanonicalStageCTheoremBundle: TIMEOUT (exit 124)
+  - Everything.agda: TIMEOUT (exit 124)
+
+Audit checks:
+  - canonical_path_audit: PASS
+  - placeholder_postulate_audit: PASS
+  - closure_status_pointers: PASS
+
+Artifacts:
+  - artifacts/closure_hygiene_20260312_102106/01_canonical_stagec_build.log
+  - artifacts/closure_hygiene_20260312_102106/02_everything_build.log
+  - artifacts/closure_hygiene_20260312_102106/03_canonical_path_audit.txt
+  - artifacts/closure_hygiene_20260312_102106/04_placeholder_postulate_audit.txt
+  - artifacts/closure_hygiene_20260312_102106/05_closure_status_pointers.txt
+
+Overall status: FAIL
+
+Failed steps:
+  - 01_canonical_stagec_build:124
+  - 02_everything_build:124

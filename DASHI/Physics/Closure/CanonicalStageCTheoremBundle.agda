@@ -4,7 +4,10 @@ open import Agda.Primitive using (Setω)
 
 open import DASHI.Physics.Closure.CanonicalStageC as CSC
 open import DASHI.Physics.Closure.CanonicalConstraintClosureTheorem as CCCT
+open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
 open import DASHI.Physics.Closure.CanonicalGaugeConstraintBridgeTheorem as CGCBT
+open import DASHI.Physics.Constraints.ConcreteInstance as CI
+open import DASHI.Physics.Constraints.Closure as CC
 open import DASHI.Physics.Closure.ParametricGaugeConstraintTheorem as PGCT
 open import DASHI.Physics.Closure.ParametricAlgebraicClosureTheorem as PACT
 open import DASHI.Physics.Closure.ParametricAlgebraicCoherenceTheorem as PACTC
@@ -60,10 +63,13 @@ open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem a
 open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 open import DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem as CCTCB
 open import DASHI.Physics.Closure.CanonicalContractionQuadraticSignatureBridgeTheorem as CCQSB
+import DASHI.Physics.Closure.CanonicalPhysicsPathPostulateAudit as CPPA
 
 record CanonicalStageCTheoremBundle : Setω where
   field
     constraintTheoremSummary : CCCT.CanonicalConstraintClosureTheorem
+    constraintPathWitnessSummary : CCFCPT.CanonicalPathWitness
+    constraintClosureFromPathSummary : CC.ClosureLaw CI.CS CI.L
     gaugeBridgeSummary : CGCBT.CanonicalGaugeConstraintBridgeTheorem
     canonicalParametricGaugeSummary :
       PGCT.ParametricGaugeConstraintTheorem CSC.canonicalConstraintGaugePackage
@@ -241,6 +247,8 @@ record CanonicalStageCTheoremBundle : Setω where
       CCTCB.CanonicalContractionToCliffordBridgeTheorem
     contractionQuadraticSignatureBridgeSummary :
       CCQSB.CanonicalContractionQuadraticSignatureBridgeTheorem
+    noEssentialPostulatesOnCanonicalPhysicsPath :
+      CPPA.noEssentialPostulatesOnCanonicalPhysicsPath
     recoveredLocalRegimeSummary : KLRLR.KnownLimitsRecoveredLocalRegimeTheorem
     completeLocalRegimeSummary : KLCLR.KnownLimitsCompleteLocalRegimeTheorem
     dynamicsLawSummary : CDLT.CanonicalDynamicsLawTheorem
@@ -303,6 +311,9 @@ abstract
   canonicalStageCTheoremBundle-abs =
     record
     { constraintTheoremSummary = CSC.canonicalConstraintTheorem
+    ; constraintPathWitnessSummary = CSC.canonicalConstraintPathWitness
+    ; constraintClosureFromPathSummary =
+        CSC.canonicalConstraintClosureFromPathTheorem
     ; gaugeBridgeSummary = CSC.canonicalGaugeConstraintBridgeTheorem
     ; canonicalParametricGaugeSummary = CSC.canonicalParametricGaugeConstraintTheorem
     ; secondaryParametricGaugeSummary = SCGI.secondaryParametricGaugeConstraintTheorem
@@ -432,6 +443,8 @@ abstract
         CSC.canonicalContractionToCliffordBridgeTheorem
     ; contractionQuadraticSignatureBridgeSummary =
         CSC.canonicalContractionQuadraticSignatureBridgeTheorem
+    ; noEssentialPostulatesOnCanonicalPhysicsPath =
+        CPPA.canonicalNoEssentialPostulatesOnCanonicalPhysicsPath
     ; recoveredLocalRegimeSummary =
         CSC.canonicalKnownLimitsRecoveredLocalRegimeTheorem
     ; completeLocalRegimeSummary =

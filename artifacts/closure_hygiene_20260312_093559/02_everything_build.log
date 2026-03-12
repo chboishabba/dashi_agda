@@ -1,0 +1,13 @@
+[cmd] agda -i . DASHI/Everything.agda
+---
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+       Checking DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.AdaptabilityConsumer (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalWaveObservableTransportGeometry/Regime/AdaptabilityConsumer.agda).
+      Checking DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.ScalabilityConsumer (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalWaveObservableTransportGeometry/Regime/ScalabilityConsumer.agda).
+     Checking DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.SustainabilityConsumer (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalWaveObservableTransportGeometry/Regime/SustainabilityConsumer.agda).
+    Checking DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.StewardshipConsumer (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalWaveObservableTransportGeometry/Regime/StewardshipConsumer.agda).
+   Checking DASHI.Physics.Closure.CanonicalWaveObservableTransportGeometry.Regime.AccountabilityConsumer (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalWaveObservableTransportGeometry/Regime/AccountabilityConsumer.agda).
+  Checking DASHI.Physics.Closure.Consumers.WaveRegime (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/Consumers/WaveRegime.agda).
+ Checking DASHI.Physics.Closure.CanonicalStageCSummaryBundle (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CanonicalStageCSummaryBundle.agda).
+   Checking DASHI.Physics.Closure.PhysicsClosureValidationSummary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda).
+    Checking DASHI.Physics.Closure.Validation.FalsifiabilityBoundaryShift (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/Validation/FalsifiabilityBoundaryShift.agda).
+    Checking DASHI.Physics.Closure.Validation.SyntheticOneMinusPromotionBridge (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/Validation/SyntheticOneMinusPromotionBridge.agda).

@@ -1,0 +1,9 @@
+[timeout] 1s
+[cmd] agda -i . DASHI/Everything.agda
+---
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+
+[timeout] 2s
+[cmd] agda -i . DASHI/Everything.agda
+---
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).

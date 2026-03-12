@@ -2,12 +2,14 @@ module DASHI.Physics.Signature31IntrinsicShiftInstance where
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
 open import Data.Unit using (tt)
+open import DASHI.Geometry.ParallelogramLaw using (AdditiveSpace)
+import DASHI.Geometry.ConeMetricCompatibility as CMC
 
 open import DASHI.Geometry.ConeArrowOrientationAsymmetry as CAOA
 open import DASHI.Geometry.ConeArrowOrbitStructure as CAOS
 open import DASHI.Geometry.ConeArrowShellStratification as CASS
 open import DASHI.Geometry.ConeArrowIsotropyOrbitProfile as CAOP
-open import DASHI.Geometry.ConeTimeIsotropy as CTI
+import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Geometry.CausalForcesLorentz31 as CFL
 open import DASHI.Geometry.Signature31FromIntrinsicShellForcing as S31ISF
 open import DASHI.Geometry.SignatureUniqueness31 as SU using (Signature31Theorem)
@@ -88,3 +90,17 @@ signature31-theorem =
 
 signature31 : CTI.Signature
 signature31 = S31ISF.signature31FromIntrinsic shiftIntrinsicCoreAxioms
+
+lorentzLock :
+  ∀ {A : AdditiveSpace} →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  CMC.ConeMetricCompat A cone q →
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
+  CFL.LorentzSignatureLock
+lorentzLock q cone compat iso fs arrow =
+  S31ISF.lorentzLockFromIntrinsic
+    shiftIntrinsicCoreAxioms
+    q cone compat iso fs arrow

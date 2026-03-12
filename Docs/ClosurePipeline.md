@@ -20,7 +20,8 @@ labeled as alternative/validation/experimental.
 10. `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
 11. `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
 12. `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`
-13. `DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda`
+13. `DASHI/Physics/Closure/CliffordToEvenWaveLiftBridgeTheorem.agda`
+14. `DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda`
 
 ## Module Labels
 
@@ -60,6 +61,7 @@ Use one of these labels for every closure-relevant module:
 - `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
 - `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
 - `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`
+- `DASHI/Physics/Closure/CliffordToEvenWaveLiftBridgeTheorem.agda`
 - `DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda`
 
 ### Alternative

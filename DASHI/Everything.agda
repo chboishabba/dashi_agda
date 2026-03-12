@@ -260,6 +260,8 @@ import DASHI.Physics.Closure.SpinDiracGateFromClosure
 import DASHI.Physics.Closure.CanonicalConstraintClosureStatus
 import DASHI.Physics.Closure.CanonicalConstraintClosureWitness
 import DASHI.Physics.Closure.CanonicalConstraintClosureTheorem
+import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPackage
+import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem
 import DASHI.Physics.Closure.CanonicalConstraintGaugePackage
 import DASHI.Physics.Closure.CanonicalGaugeContractTheorem
 import DASHI.Physics.Closure.CanonicalGaugeConstraintBridgeTheorem
