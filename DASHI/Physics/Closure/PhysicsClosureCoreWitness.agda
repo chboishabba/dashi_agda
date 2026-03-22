@@ -13,6 +13,7 @@ open import DASHI.Physics.Closure.CanonicalConstraintClosureWitness as CCCW
 open import DASHI.Physics.Closure.ClosureObservableWitness as COW
 open import DASHI.Physics.Closure.DynamicalClosure as DC
 open import DASHI.Physics.Closure.DynamicalClosureWitness as DCW
+open import DASHI.Physics.Closure.ExecutionAdmissibilityWitness as EAW
 open import DASHI.Physics.Signature31Canonical as S31C
 
 record PhysicsClosureCoreWitness : Setω where
@@ -31,6 +32,8 @@ record PhysicsClosureCoreWitness : Setω where
 
     dynamics : DC.DynamicalClosure
     dynamicsWitness : DCW.DynamicalClosureWitness
+    executionAdmissibilityWitness : EAW.SomeExecutionAdmissibilityWitness
+    familyClassificationWitness : EAW.SomeFamilyClassificationWitness
 
     observables : COW.ClosureObservableWitness
     observableSignatureAgreement :

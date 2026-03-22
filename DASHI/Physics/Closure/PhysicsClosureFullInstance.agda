@@ -20,6 +20,8 @@ open import DASHI.Physics.MyRealInstance as MRI
 open import DASHI.Physics.Closure.PolarizationZLift as PZL
 open import DASHI.Physics.Closure.DynamicalClosureShiftInstance as DCSI
 open import DASHI.Physics.Closure.DynamicalClosureShiftWitnessInstance as DCWI
+open import DASHI.Physics.Closure.ExecutionAdmissibilityCurrentTraceWitness as EACTW
+open import DASHI.Physics.Closure.ExecutionAdmissibilityCurrentFamilyWitness as EACFW
 open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI
 open import DASHI.Physics.Closure.MDLLyapunovShiftInstance as MDLL
 open import DASHI.Physics.Closure.MDLFejerAxiomsShift as MDLFA
@@ -77,6 +79,8 @@ coreWitnessWithShiftObservables observables signatureAgreement =
     ; constraintClosureWitness = CCCW.canonicalConstraintClosureWitness
     ; dynamics = DCSI.shiftDynamics
     ; dynamicsWitness = DCWI.shiftDynamicsWitness
+    ; executionAdmissibilityWitness = EACTW.currentTraceExecutionAdmissibility
+    ; familyClassificationWitness = EACFW.currentFamilyClassification
     ; observables = observables
     ; observableSignatureAgreement = signatureAgreement
     }
@@ -101,6 +105,8 @@ coreWitnessWithB4Observables observables signatureAgreement =
     ; constraintClosureWitness = CCCW.canonicalConstraintClosureWitness
     ; dynamics = DCSI.shiftDynamics
     ; dynamicsWitness = DCWI.shiftDynamicsWitness
+    ; executionAdmissibilityWitness = EACTW.currentTraceExecutionAdmissibility
+    ; familyClassificationWitness = EACFW.currentFamilyClassification
     ; observables = observables
     ; observableSignatureAgreement = signatureAgreement
     }
@@ -125,6 +131,8 @@ syntheticPhysicsClosureCoreWitness =
     ; constraintClosureWitness = CCCW.canonicalConstraintClosureWitness
     ; dynamics = DCSI.shiftDynamics
     ; dynamicsWitness = DCWI.shiftDynamicsWitness
+    ; executionAdmissibilityWitness = EACTW.currentTraceExecutionAdmissibility
+    ; familyClassificationWitness = EACFW.currentFamilyClassification
     ; observables = SYCOWI.syntheticClosureObservableWitness
     ; observableSignatureAgreement = refl
     }

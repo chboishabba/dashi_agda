@@ -1,0 +1,14 @@
+module,eigenspace,bott,hecke,da51,orbifold,j-fixed
+MonsterConformance,Earth,C6,baseline,graph-earth,baseline,no
+MonsterGroups,Earth,C5,baseline,graph-earth,baseline,no
+MonsterOntos,Spoke,C6,baseline,graph-spoke,baseline,yes
+MonsterSpec,Earth,C5,baseline,graph-earth,baseline,no
+MonsterState,Spoke,C5,baseline,graph-spoke,baseline,no
+MonsterTraceCounts,Earth,C5,baseline,graph-earth,baseline,no
+MonsterVectors,Earth,C4,baseline,graph-earth,baseline,no
+Base369,Earth,C4,baseline,graph-earth,baseline,no
+CRTPeriod,Earth,C6,baseline,graph-earth,baseline,yes
+Contraction,Hub,C5,baseline,graph-hub,baseline,no
+FixedPoint,Earth,C5,baseline,graph-earth,baseline,no
+Monster.Ultrametric,Earth,C6,baseline,graph-earth,baseline,no
+Ultrametric,Hub,C5,baseline,graph-hub,baseline,no

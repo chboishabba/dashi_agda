@@ -132,6 +132,16 @@ For Monster/Moonshine, the bar is much higher:
 - and a theorem-level bridge from the current finite orbit-shell invariant to
   that graded structure.
 
+Related reporting discipline:
+
+- if a Monster-labeled corpus only shows a small rigid substructure under an
+  embedding but does not separate from non-Monster controls as a class, the
+  safe statement is negative:
+  no distinct Monster fingerprint has been shown.
+- Shared rigid slots are not enough by themselves; they can reflect generic
+  stylistic or structural regularity rather than Monster-specific
+  self-reference.
+
 Without those pieces, the current repo should be described as
 **pre-moonshine**: orbit enumerators, shell polynomials, and
 Weyl/root-system combinatorics, not a graded-trace theorem.

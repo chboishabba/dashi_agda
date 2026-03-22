@@ -1,5 +1,292 @@
 # Changelog
 
+## 2026-03-22
+
+- promoted the family-level execution taxonomy into the Agda witness layer:
+  `ExecutionAdmissibilityWitness` now carries `FamilyClass`,
+  `ExecutionAdmissibilityCurrentFamilyWitness.agda` exports the observed
+  family classifications, and that family witness is threaded through
+  `PhysicsClosureCoreWitness`, `PhysicsClosureFullInstance`, and
+  `MinimalCrediblePhysicsClosure`.
+- added `DASHI/Physics/Closure/TailBoundaryLemma.agda` as a theorem-facing
+  current-witness module for the `mdl_tail_boundary` regime and extended
+  `scripts/regime_test.py` with a `tail_boundary_lemma_latest.json` summary.
+  On the current larger `dashifine` family set that summary reports
+  `1` `mdl_tail_boundary` family out of `9`, with the current case
+  tail-localized, terminal-boundary, cone/Fejér/closest-point admissible,
+  and failing only at the MDL-exact layer.
+- added `scripts/tail_boundary_batch.py` to aggregate the same regime across
+  all currently compatible `dashifine` batches and wrote
+  `artifacts/regime_test/tail_boundary_batch_latest.json`.
+  Current widened count is `2` `mdl_tail_boundary` instances across `3`
+  datasets, still with only one unique family (`ttbar_mtt_8tev_cms`), and
+  both observed instances remain tail-localized and terminal-boundary.
+- extended that batch aggregate with cohort/control summaries:
+  repeated `pTll` families plus `dijet_chi_7tev_cms` and
+  `hgg_pt_8tev_atlas` stay interior,
+  `phistar_50_76` repeats as `arrow_ladder`,
+  `z_pt_7tev_atlas` repeats as `single_arrow_break`,
+  and only `ttbar_mtt_8tev_cms` repeats as `mdl_tail_boundary`.
+- extended the same aggregate with a compatible-dataset inventory:
+  the current local `dashifine` search space contains `3` compatible step
+  files and `7` tail-candidate families, of which only
+  `ttbar_mtt_8tev_cms` and `z_pt_7tev_atlas` currently leave the interior.
+- refreshed the focused `z_pt_7tev_atlas` family export and recorded the
+  narrower read:
+  it remains a `single_arrow_break`, not a second `mdl_tail_boundary`;
+  current run shows one late tail-localized arrow-only boundary step at
+  `t=9->10` with `arrow_delta≈0.0305551`, all tested `v_dnorm` variants still
+  nonincreasing, and clearance under the `lenient` arrow profile.
+- added the first focused still-interior heavy-spectrum check:
+  `atlas_4l_m4l_8tev` stays fully interior on the all-batch run with
+  `12` steps, `0` boundary steps, `closestpoint_frac=1.0`,
+  `fejer_set_frac=1.0`, `MDL_monotone=True`, no onset event, and its last bin
+  is not the max-fractional-uncertainty tail bin.
+- added the next focused heavy-spectrum control check:
+  `atlas_4l_pt4l_8tev` also stays fully interior on the all-batch run with
+  `12` steps, `0` boundary steps, `closestpoint_frac=1.0`,
+  `fejer_set_frac=1.0`, `MDL_monotone=True`, no onset event, and its last bin
+  is not the max-fractional-uncertainty tail bin.
+- pulled archived context for `ZKP Anomaly Analysis`
+  (online UUID `69bf03e8-7634-839b-a9fd-74ed3616943f`,
+  canonical thread `cff5c44711a788e01cdbadd98a72822ce1bb8786`) into the
+  canonical archive and recorded the decision in `COMPACTIFIED_CONTEXT.md`.
+- tightened repo-facing symmetry language in `README.md` and
+  `Docs/OrbitShellProfilesAndLorentzSignature.md` so Monster-labeled anomaly
+  reports are described conservatively:
+  non-separation plus, at most, a non-unique rigid substructure unless control
+  comparisons show otherwise.
+- updated `TODO.md` to require baseline/control comparisons before rigid-slot
+  anomaly summaries are promoted into repo-facing moonshine-adjacent claims.
+- added a second documentation pass from the same `ZKP Anomaly Analysis`
+  thread content to record the stronger measurement split:
+  JMD-side regime metadata is for structural occupancy/classification, while
+  DASHI-side delta/cone/Fejér traces are for dynamics.
+- updated `README.md`, `Docs/MinimalCrediblePhysicsClosure.md`, and `TODO.md`
+  to treat the current DA51 / exponent-vector embedding as a
+  representation-level structural probe, not a reliable Monster-specific
+  semantic discriminator, and to queue regime-occupancy then delta-regime
+  validation as the next tests.
+- added `scripts/regime_test.py` as a local CSV-driven harness for the next
+  two anomaly-analysis passes:
+  `occupancy` mode compares matched JMD regime distributions and numeric
+  summaries between two labeled groups, while `transitions` mode compares
+  DASHI-side regime-transition tables.
+- extended `scripts/regime_test.py` with a `cone` mode for stepwise DASHI-side
+  trace analysis:
+  it embeds per-step rows, computes deltas, checks a hard non-increasing cone
+  on selected axes, and reports Fejér-style weighted energy drift plus
+  violation breakdowns.
+- added a `dashifine-closure-embedding` preset plus single-group support to
+  `scripts/regime_test.py cone`, so existing sibling-repo files such as
+  `../dashifine/hepdata_lyapunov_test_out/dashi_idk_out.csv/closure_embedding_per_step.csv`
+  can be analyzed directly.
+- first direct preset run on that `dashifine` file reports:
+  `cone_pass_rate=0.9333`, `fejer_pass_rate=0.8500`, with the visible
+  violations concentrated on `phistar_50_76` through the `v_arrow` axis.
+- rewrote `scripts/regime_test.py cone` to learn the structural cone
+  separately from the arrow guard:
+  it now derives admissible ternary structural signatures from observed deltas,
+  reports `structural_cone_pass_rate`, `arrow_pass_rate`, and
+  `joint_pass_rate`, and surfaces the nearest admissible structural signature
+  for each violation.
+- updated the direct `dashifine` preset run after that rewrite:
+  `structural_cone_pass_rate=1.0`,
+  `arrow_pass_rate=0.9333`,
+  `joint_pass_rate=0.9333`,
+  confirming that the residual failures are localized arrow-axis breaks rather
+  than structural-cone failure.
+- extended `scripts/regime_test.py cone` again with ultrametric/ternary
+  boundary reporting:
+  it now prints structural magnitude buckets, an ultrametric-style radius
+  histogram, and a focused boundary report for non-joint-admissible steps.
+- direct rerun on the same `dashifine` trace confirms the
+  `phistar_50_76` failures keep an admissible structural signature with zero
+  nearest-signature distance; they are arrow-only boundary cases, not escapes
+  from the learned structural cone.
+- added an arrow-guard sweep to `scripts/regime_test.py cone` and ran it on the
+  same `dashifine` preset:
+  the remaining `phistar_50_76` boundary steps clear at minimum tolerances of
+  roughly `4e-5`, `8e-4`, `8e-3`, and `8e-2`, giving a concrete bracket for
+  any future canonical arrow guard.
+- added an explicit boundary/interior class layer plus CSV export to
+  `scripts/regime_test.py cone`.
+  On the checked `dashifine` trace this yields `56` `interior` steps and `4`
+  `arrow_boundary` steps, with the exported boundary table isolating the
+  `phistar_50_76` cases cleanly.
+- added canonical arrow profiles to `scripts/regime_test.py cone`
+  (`strict`, `boundary`, `lenient`) plus a stable artifact write path for the
+  current boundary witness table at
+  `artifacts/regime_test/arrow_boundary_latest.csv`.
+  On the checked `dashifine` trace those profiles currently yield
+  `56/4`, `59/1`, and `60/0` for `interior/arrow_boundary`.
+- added `scripts/build_jmd_regime_table.py` as a first-pass local JMD-table
+  extractor and generated
+  `artifacts/regime_test/jmd_regime_table.csv` from the current Agda tree.
+- identified the sibling repo `../kant-zk-pastebin` as the explicit DASL-side
+  source anchor for the execution bridge and recorded that source-model role in
+  `COMPACTIFIED_CONTEXT.md`, `README.md`, `TODO.md`, and
+  `Docs/MinimalCrediblePhysicsClosure.md`.
+- extended `scripts/regime_test.py cone` with a first-pass DASL source-model
+  loader that parses `../kant-zk-pastebin/src/dasl.rs` and
+  `../kant-zk-pastebin/src/sheaf.rs`, emits
+  `artifacts/regime_test/dasl_source_lattice_latest.json`, and adds
+  DASL-backed `dasl_eigenspace`, `basin_support`, `basin_js`, and `basin_ok`
+  fields to the execution/eigen artifacts.
+- tightened the semantics of that new source predicate:
+  the artifacts now also export `source_support_ok` and
+  `source_support_mode=parsed_dasl_eigenspace_prior`, while `basin_ok` is kept
+  only as the bridge-facing compatibility alias for the same first-pass
+  support-under-prior predicate.
+- replaced the old trace-side `Hub` heuristic with a refined classifier that
+  treats the mixed structural signature `(1,-1,1)` as `Spoke` rather than
+  `Hub`, and now exports both `legacy_trace_eigenspace` and refined
+  `trace_eigenspace` in the execution/eigen artifacts.
+- direct rerun on the checked `dashifine` trace family shows
+  `legacy_vs_refined_trace_agreement=4/5`;
+  the only changed family is `pTll_76_106`, which moves from legacy `Hub` to
+  refined `Spoke`.
+- immediate source-support consequence of that refined labeler:
+  the previous `12/60` unsupported block disappears, and the current
+  strict-profile source-support proxy now clears all `60/60` checked steps.
+- updated the generated Agda witness export so `basinOK` now reflects the
+  source-backed `basin_ok` predicate instead of reusing `structural_ok`.
+- current direct rerun on the checked `dashifine` trace family with the refined
+  labeler keeps the existing step-class split
+  (`56` `Interior`, `4` `ArrowBoundary`) while removing the earlier localized
+  source-support miss.
+- promoted the DASL source loader from the small encoding subset to the full
+  `15`-prime Monster catalog already present in `../kant-zk-pastebin`,
+  so the default source mode is now `monster-primes` and the emitted source
+  JSON records the richer eigenspace distribution
+  `Earth=0.4667`, `Spoke=0.4`, `Hub=0.0667`, `Clock=0.0667`.
+- direct rerun on the checked `dashifine` trace family under that richer source
+  catalog remains stable:
+  `56` `Interior`, `4` `ArrowBoundary`, `60/60` `source_support_ok`.
+- added an explicit source-projection surface on top of the richer
+  `monster-primes` catalog:
+  a canonical class-to-prime proxy that matches refined trace eigenspace and
+  then selects the highest-exponent source prime in that class.
+- current direct projections on the checked five-trace family are:
+  Earth-family traces → `p2 / T_2 / exponent 46`,
+  refined `Spoke` trace `pTll_76_106` → `p17 / T_17 / exponent 1`.
+- added a scored source-prime ranking surface on top of the canonical
+  projection proxy and exported the top-ranked shortlist in the runtime
+  artifacts.
+- current ranked result on the checked five-trace family:
+  Earth-family traces still rank `p2` first,
+  while refined `Spoke` trace `pTll_76_106` now yields the first meaningful
+  split between the conservative canonical and scored views:
+  canonical projection stays `p17`, but the scored shortlist ranks
+  `p59`, `p71`, then `p17`.
+- added an explicit primary source-projection mode to
+  `scripts/regime_test.py cone` so the runtime artifacts now export both the
+  repo-default canonical projection surface and a selectable
+  `primary_source_projection_*` surface driven by
+  `--source-projection-primary canonical|scored`.
+- added an explicit `projection_conflict` marker so rows where the canonical
+  and primary-selected source representatives diverge are surfaced directly in
+  the runtime artifacts without changing the canonical bridge behavior.
+- retuned the scored source-prime ranking so it is now anchored to canonical
+  consistency in addition to class support, exponent, and attack-triple cues,
+  and labeled the exported top-k list explicitly as a diagnostic shortlist.
+- exported score-component breakdowns for the ranked and primary source
+  projections so the current source-side heuristic can be inspected and tuned
+  explicitly in later passes.
+- extended the within-class source score with `Hecke` proximity and a weak
+  `Bott` cycle prior on top of trace support, exponent, canonical alignment,
+  and attack-triple bonus.
+- ran the same bridge across the three currently compatible `dashifine` trace
+  batches and recorded the summary in
+  `artifacts/regime_test/dashifine_trace_batch_latest.json`.
+  Source support stayed fully intact and the refined `Spoke` family remained
+  canonically `p17`; the only new movement was execution-side, where the larger
+  batches added `ttbar_mtt_8tev_cms` and `z_pt_7tev_atlas` to the
+  arrow-boundary family list.
+- added a per-family arrow-boundary summary surface to
+  `scripts/regime_test.py cone` and a default artifact at
+  `artifacts/regime_test/arrow_boundary_family_latest.json`.
+  Current larger-batch read:
+  `phistar_50_76` is a small arrow-only tolerance ladder,
+  `z_pt_7tev_atlas` is a single moderate arrow break,
+  and `ttbar_mtt_8tev_cms` is the strongest current outlier because it couples
+  large arrow violations with `v_dnorm` failures.
+- added focused family drilldown/export for `scripts/regime_test.py cone`.
+  Current `ttbar_mtt_8tev_cms` read is now explicit:
+  first boundary at `t=10->11`,
+  late arrow sign flip,
+  mixed `v_arrow`/`v_dnorm` onset,
+  no immediate structural-signature change on the first failing step.
+- extended that focused drilldown with terminal-step autopsy data:
+  per-step raw axis values, next-step axis values, per-axis deltas, and
+  alternate `v_dnorm` normalizations
+  (`raw`, `log_abs`, `robust_z`, `winsor95`, `family_minmax`).
+  On the current `ttbar_mtt_8tev_cms` run, the two terminal `v_dnorm`
+  reversals stay positive under all tested transforms, but only at near-zero
+  scale (`~9.4e-13`, `~1.6e-13`), tightening the read toward
+  terminal-bin/tail-edge stiffness rather than broad cone failure.
+- extended the same focused export with raw observable context from the local
+  `dashifine` assets.
+  The current `ttbar_mtt_8tev_cms` export now records that the observable is a
+  `7`-bin spectrum, its last bin (`x≈1350`) has the largest fractional
+  uncertainty (`~8.19%`), and the first boundary onset occurs at the late
+  `alpha=1e4 -> 1e5` jump.
+- extended that focused export again with sibling-repo witness summaries.
+  The current `ttbar_mtt_8tev_cms` export now records that the family still
+  has `closestpoint_frac=1.0` and `fejer_set_frac=1.0`, while the explicit
+  local exception is confined to the MDL-exact descent surface
+  (`MDL_monotone=False`, `2` violations, worst increase `0.694577`).
+- promoted the `ttbar_mtt_8tev_cms` family summary from the generic
+  `mixed_hard_axis_outlier` bucket to a narrower `mdl_tail_boundary` class
+  when the local context shows:
+  tail-bin maximum fractional uncertainty,
+  closest-point admissibility,
+  Fejér-set admissibility,
+  and an MDL-exact-only failure surface.
+  This leaves the step-level witness unchanged as `ArrowBoundary` while making
+  the family-level interpretation more specific.
+- the first seeded JMD table rebuild in this pass produced `844` rows total
+  with `7` Monster rows and `6` matched control rows.
+- extended `scripts/build_jmd_regime_table.py` to merge a repo-tracked seed
+  table (`data/regime_test/jmd_regime_seed.csv`) and emit per-field semantic
+  provenance columns.
+- fixed `scripts/regime_test.py occupancy` so permutation tests and
+  leave-one-out classification operate only on the compared `M/O` subset
+  rather than leaking unlabeled rows into the statistics.
+- current seeded JMD occupancy read on the matched rows is now non-empty:
+  `eigenspace JS=0.5569`,
+  `bott JS=0.0608`,
+  `joint(eigenspace,bott,hecke) JS=0.6176`,
+  with leave-one-out naive Bayes at `0.5385` on the actual matched subset.
+- added a new parallel Agda bridge surface:
+  `ExecutionAdmissibilityWitness`,
+  `ExecutionAdmissibilityShiftWitness`,
+  and a generated concrete current-trace witness module
+  `ExecutionAdmissibilityCurrentTraceWitness`.
+- threaded that new witness through `PhysicsClosureCoreWitness`,
+  `PhysicsClosureFullInstance`, and `MinimalCrediblePhysicsClosure` without
+  changing `DynamicalClosureWitness`.
+- extended `scripts/regime_test.py cone` with execution-admissibility and
+  eigen-overlap exports:
+  `artifacts/regime_test/execution_admissibility_latest.json`,
+  `artifacts/regime_test/eigen_overlap_latest.csv`,
+  and `DASHI/Physics/Closure/ExecutionAdmissibilityCurrentTraceWitness.agda`.
+- direct strict-profile export still confirms the checked `dashifine` trace is
+  `56` `Interior` plus `4` `ArrowBoundary`, with no structural-boundary or
+  outside-class steps.
+- documented that harness in `README.md` and `TODO.md`, keeping the next
+  validation order explicit:
+  JMD regime occupancy/divergence first, DASHI delta-regime comparisons second.
+
+## 2026-03-20
+
+- clarified repo-facing status docs (`README.md`, `status.md`) that
+  `DASHI/Unifier.agda` is an axiomatized sketch module and not part of the
+  canonical Stage C closure pipeline.
+- removed misleading “assumed proven” labels in `DASHI/Unifier.agda` section
+  headings (Lorentz interval, orthogonal split, wave/CCR/UV-finiteness), so the
+  file reads as a placeholder interface rather than a proof-status claim.
+
 ## 2026-03-14
 
 - changed both closure-hygiene entrypoints

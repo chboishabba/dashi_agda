@@ -97,7 +97,7 @@ record ChainAntichain {E : Set} (P : Poset E) : Set₁ where
     causal-axis : Set
 
 ------------------------------------------------------------------------
--- 3. Emergent interval and Lorentz signature (assumed proven)
+-- 3. Emergent interval and Lorentz signature (axiomatized placeholder interface)
 
 record LorentzInterval {E : Set} (P : Poset E) (CA : ChainAntichain P) : Set₁ where
   open ChainAntichain CA
@@ -113,7 +113,7 @@ record LorentzInterval {E : Set} (P : Poset E) (CA : ChainAntichain P) : Set₁ 
         -ℝ
         (toℝ (σ a b) *ℝ toℝ (σ a b))
 
-    -- Theorems you said are proven:
+    -- Downstream seams (axiomatized here; proven elsewhere in the repo when available):
     signature-3+1 : Set  -- package the full statement however you like
     p3-unique     : Set
 
@@ -175,7 +175,7 @@ Banach-fixed-point :
 Banach-fixed-point M F C = BanachFixedPointAxiom M F C
 
 ------------------------------------------------------------------------
--- 6. Orthogonal multiscale split ⇒ quadratic defect (assumed proven)
+-- 6. Orthogonal multiscale split ⇒ quadratic defect (axiomatized placeholder interface)
 
 record InnerProductSpace : Set₁ where
   field
@@ -203,7 +203,7 @@ quadratic-forced : Set₁
 quadratic-forced = QuadraticForcedAxiom
 
 ------------------------------------------------------------------------
--- 7. Wave lift, CCR, UV finiteness (assumed proven)
+-- 7. Wave lift, CCR, UV finiteness (axiomatized placeholder interface)
 
 record HilbertSpace : Set₁ where
   field

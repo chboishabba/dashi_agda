@@ -43,6 +43,9 @@
   - keep routine skip policy for direct
     `DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda` checks while
     runtime remains high.
+  - `DASHI/Unifier.agda` is an axiomatized sketch module; it should not be read
+    as evidence that wave/CCR/UV-finiteness (or other seams) are already
+    theorem-proven on the canonical Stage C path.
 - Active execution source:
   `Docs/PhysicsClosureImplementationChecklist.md`
 - Checklist progress:

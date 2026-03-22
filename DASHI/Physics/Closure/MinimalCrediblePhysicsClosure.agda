@@ -7,6 +7,9 @@ open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Physics.Closure.DynamicalClosure as DC
 open import DASHI.Physics.Closure.DynamicalClosureWitness as DCW
 open import DASHI.Physics.Closure.DynamicalClosureShiftWitnessInstance as DCWI
+open import DASHI.Physics.Closure.ExecutionAdmissibilityWitness as EAW
+open import DASHI.Physics.Closure.ExecutionAdmissibilityCurrentTraceWitness as EACTW
+open import DASHI.Physics.Closure.ExecutionAdmissibilityCurrentFamilyWitness as EACFW
 open import DASHI.Physics.Closure.PhysicsClosureFull as PCF
 open import DASHI.Physics.Closure.ObservablePredictionPackage as OPP
 
@@ -30,3 +33,13 @@ authoritativeDynamics C = PCF.PhysicsClosureFull.dynamics (full C)
 authoritativeDynamicsWitness :
   MinimalCrediblePhysicsClosure → DCW.DynamicalClosureWitness
 authoritativeDynamicsWitness _ = DCWI.shiftDynamicsWitness
+
+authoritativeExecutionAdmissibilityWitness :
+  MinimalCrediblePhysicsClosure → EAW.SomeExecutionAdmissibilityWitness
+authoritativeExecutionAdmissibilityWitness _ =
+  EACTW.currentTraceExecutionAdmissibility
+
+authoritativeFamilyClassificationWitness :
+  MinimalCrediblePhysicsClosure → EAW.SomeFamilyClassificationWitness
+authoritativeFamilyClassificationWitness _ =
+  EACFW.currentFamilyClassification
