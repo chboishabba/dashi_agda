@@ -4,18 +4,20 @@
 
 Priority bucket: `P1`
 
-- [ ] Add a local `flake.nix` that mirrors the existing authoritative GitHub
+- [x] Add a local `flake.nix` that mirrors the existing authoritative GitHub
   typecheck route through `DASHI/Everything.agda`.
-- [ ] Add a second Nix smoke-check surface for merge-relevant standalone roots
+- [x] Add a second Nix smoke-check surface for merge-relevant standalone roots
   plus recursive `Kernel/`, `Monster/`, and `Verification/` modules.
-- [ ] Add a local `dashi-agda.agda-lib` so Nix/dev-shell tooling has an
+- [x] Add a local `dashi-agda.agda-lib` so Nix/dev-shell tooling has an
   explicit library surface to point at.
-- [ ] Make local `agda-record-all` recurse over the same merge-prep target
+- [x] Make local `agda-record-all` recurse over the same merge-prep target
   surface instead of top-level files only.
-- [ ] Keep demo DA51/zkperf JSONL artifacts, if merged, documented as sample
+- [x] Keep demo DA51/zkperf JSONL artifacts, if merged, documented as sample
   witness outputs rather than canonical reproducibility fixtures.
-- [ ] Follow-up once a networked Nix environment is available:
-  generate and commit `flake.lock`, then run `nix flake check` end to end.
+- [x] Generate and keep a local `flake.lock` for the merge-prep Nix surface.
+- [ ] Follow-up after the writable-source fix:
+  rerun `nix flake check`, `nix build .#check`, and
+  `nix build .#merge-smoke` end to end and record the final outcome.
 
 ## Track U — Physics Closure Spine Completion (2026-03-12)
 

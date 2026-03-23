@@ -1,5 +1,44 @@
 # Changelog
 
+## 2026-03-23
+
+- added a local merge-prep Nix / zkperf tooling surface for upstream PR-style
+  integration work:
+  `flake.nix` now exposes an authoritative check that mirrors the existing
+  GitHub CI route through `DASHI/Everything.agda`, a second recursive
+  `merge-smoke` check for merge-relevant standalone roots plus recursive
+  `Kernel/`, `Monster/`, and `Verification/` modules, and a dev shell with
+  `agda-record` / `agda-record-all`.
+- added `dashi-agda.agda-lib` as an explicit local library surface for that
+  tooling.
+- added `scripts/list_merge_agda_targets.sh` and
+  `scripts/run_agda_merge_smoke.sh` so the recursive merge-prep target surface
+  is explicit, deterministic, and reusable by both the smoke check and
+  `agda-record-all`.
+- documented the merge-policy decision that DA51 / zkperf JSONL demo artifacts
+  are acceptable for now as illustrative witness outputs, but should be read
+  as non-authoritative sample data rather than canonical reproducibility
+  fixtures.
+- validated the new local surface with:
+  shell syntax checks for the helper scripts,
+  deterministic target-list output,
+  representative Agda checks on `ActionMonotonicity.agda` and
+  `Monster/Projection.agda`,
+  and one full successful run of `scripts/run_agda_merge_smoke.sh`
+  covering `20` merge-smoke targets.
+- generated `flake.lock` from the new merge-prep flake inputs and then fixed
+  the first Nix-build failure:
+  the original authoritative and merge-smoke derivations tried to let Agda
+  write `_build/*.agdai` into the read-only Nix source tree, so the flake
+  checks now stage the repo into a writable temp directory before typechecking.
+  The flake also now uses `pkgs.perf` instead of the deprecated
+  `linuxPackages.perf` alias.
+- fixed the next authoritative Nix failure too:
+  the derivation now provides a UTF-8 locale through `glibcLocales` and
+  `LOCALE_ARCHIVE`/`LANG`/`LC_ALL`, so Agda's Unicode-bearing diagnostics no
+  longer fail inside the Nix sandbox on modules such as
+  `DASHI/Algebra/MonsterUltrametric15.agda`.
+
 ## 2026-03-22
 
 - checked the sibling repo `../dashi_lean4` against the current JMD-side gap

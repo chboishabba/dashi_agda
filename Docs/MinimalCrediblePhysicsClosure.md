@@ -64,6 +64,10 @@ structural and dynamical questions separate.
   through `DASHI/Everything.agda` and any recursive smoke/record surface
   actually includes nested `Kernel/`, `Monster/`, and `Verification/`
   modules rather than only top-level files.
+  The local merge-prep surface is now explicit:
+  `flake.nix`, `dashi-agda.agda-lib`,
+  `scripts/list_merge_agda_targets.sh`, and
+  `scripts/run_agda_merge_smoke.sh`.
 - Therefore:
   do not treat global cosine/L2 proximity or `p47` stability alone as a
   Monster-specific signal.

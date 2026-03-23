@@ -11,6 +11,8 @@ target/
 # Agda build artifacts
 *.agdai
 artifacts/
+all_code*.txt
+result
 
 
 # Chat history / local DBs

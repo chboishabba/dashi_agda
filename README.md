@@ -896,7 +896,12 @@ upstream `nix`/`zkperf` merge without overstating what it validates.
 - `nix build .#merge-smoke` is the recursive merge-prep smoke check and walks
   the merge-relevant standalone roots plus recursive `Kernel/`, `Monster/`,
   and `Verification/` modules.
+- The merge-prep target list is centralized in
+  `scripts/list_merge_agda_targets.sh`, and the actual recursive compiler pass
+  is wrapped by `scripts/run_agda_merge_smoke.sh`.
 - `agda-record-all` is expected to recurse over that same merge-prep target
   surface rather than only top-level files.
+- `dashi-agda.agda-lib` is now present as the local library surface used by
+  this tooling layer.
 - Any tracked DA51 / zkperf JSONL examples should be read as sample witness
   outputs, not as canonical reproducibility fixtures.

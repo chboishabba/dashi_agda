@@ -16,6 +16,10 @@
   existing GitHub action on `DASHI/Everything.agda`, and add a second
   recursive smoke surface covering the merge-relevant standalone roots plus
   recursive `Kernel/`, `Monster/`, and `Verification/` modules.
+- That local merge surface is now concretized by `flake.nix`,
+  `dashi-agda.agda-lib`,
+  `scripts/list_merge_agda_targets.sh`, and
+  `scripts/run_agda_merge_smoke.sh`.
 - The same merge-relevant recursive target surface should drive
   `agda-record-all`, so future perf/witness collection does not silently omit
   nested modules while pretending to represent the whole repo.
