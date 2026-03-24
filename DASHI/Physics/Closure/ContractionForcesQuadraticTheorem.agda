@@ -111,22 +111,24 @@ canonicalContractionForcesQuadraticTheorem :
   (m : Nat) → ContractionForcesQuadraticTheorem
 canonicalContractionForcesQuadraticTheorem m =
   let
-    proj = QES.PDzero {m}
-    pkg = PDSP.projectionDefectParallelogramFromSplit {m}
-    q =
-      proj₁
-        (PDP.quadraticFromProjectionDefect
-           (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ pkg)
+    strong = CFQS.canonicalIdentityInvariantStrong m
+    theorem = fromStrongContraction strong
   in
   record
-    { dimension = m
-    ; projection = proj
-    ; projectionParallelogram = pkg
-    ; derivedQuadratic = q
-    ; normalizedQuadratic = λ _ → refl
-    ; signature31Theorem = canonicalSignature31Theorem
-    ; signature31Value = CTI.sig31
-    ; signatureForced31 = refl
+    { dimension = ContractionForcesQuadraticTheorem.dimension theorem
+    ; projection = ContractionForcesQuadraticTheorem.projection theorem
+    ; projectionParallelogram =
+        ContractionForcesQuadraticTheorem.projectionParallelogram theorem
+    ; derivedQuadratic =
+        ContractionForcesQuadraticTheorem.derivedQuadratic theorem
+    ; normalizedQuadratic =
+        ContractionForcesQuadraticTheorem.normalizedQuadratic theorem
+    ; signature31Theorem =
+        ContractionForcesQuadraticTheorem.signature31Theorem theorem
+    ; signature31Value =
+        ContractionForcesQuadraticTheorem.signature31Value theorem
+    ; signatureForced31 =
+        ContractionForcesQuadraticTheorem.signatureForced31 theorem
     }
 
 canonicalOutputAgreement :

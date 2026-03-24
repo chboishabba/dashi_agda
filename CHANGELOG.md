@@ -38,6 +38,50 @@
   `LOCALE_ARCHIVE`/`LANG`/`LC_ALL`, so Agda's Unicode-bearing diagnostics no
   longer fail inside the Nix sandbox on modules such as
   `DASHI/Algebra/MonsterUltrametric15.agda`.
+- closed out the merge-prep Nix / zkperf surface after a successful local
+  `nix flake check`, `nix build .#check`, and `nix build .#merge-smoke` run
+  on the locked flake; the merge-prep tooling is now considered complete and
+  the repo returns to the physics closure priorities tracked in `TODO.md`.
+- trimmed the canonical closure export surface by removing the legacy
+  assumption-first closure instance from the public
+  `PhysicsClosureSummary`/`Everything` path while keeping the compatibility
+  module on disk, and dropped the empirical-to-full adapter from the umbrella
+  import too; the outside-wired full-closure and provider-based constructors
+  are now labeled as legacy adapters.
+- routed `physicsClosureFullFromCoreWitness` directly from the core witness,
+  removing the last canonical bounce through the legacy external adapter.
+- routed the canonical contraction→quadratic theorem constructor through the
+  strong package’s canonical identity witness, reducing duplicated split
+  construction on the canonical path.
+- promoted the remaining theorem-checklist / bridge-package seam to the
+  direct core-witness route as a tracked follow-up, so the long-running
+  closure-spine cleanup stays explicit in `TODO.md`.
+
+## 2026-03-25
+
+- recorded the SL ↔ DA51 ↔ Agda contract in `COMPACTIFIED_CONTEXT.md` and
+  `DASHI/HME/Trace.agda` so the proof layer only consumes `TraceWitness`,
+  `CanonicalWitness`, and `ProofStatus` records without touching closure
+  semantics.
+- added `scripts/hme_pipeline.py` to normalize DA51 traces, compute entropy/MDL
+  proxies, score cone similarity against multi-attractor candidates, cluster via
+  k-means, and measure silhouette/invariance metrics (hot/cold/basin metadata
+  remains in the invariants bundle).
+- added `scripts/hme_cli.py` plus `scripts/hme_emit_agda.py` to emit canonical
+  witness JSON, cluster metrics, and invariance scores from actual DA51 inputs
+  and to regenerate `DASHI/HME/Generated/Witnesses.agda` so Agda can import
+  real data without a runtime parser; `scripts/TODO.md` now tracks running these
+  scripts against the curated trace JSON plus wiring `WitnessBundle` into a
+  downstream module.
+- ingested the QG/SL smoke payload via `SensibLaw/scripts/qg_unification_smoke.py`,
+  stored the raw output plus reconstructed `qg_trace.json` and `qg_witness.json`
+  under `scripts/data/`, and refreshed `DASHI/HME/Generated/Witnesses.agda`
+  so the canonical witness matches the actual QG smoke trace.
+- added `scripts/data/demo_traces.json` as a known-good DA51 trace sample, ran
+  the CLI/codegen to produce `scripts/data/demo_witness.json` and the generated
+  module, and introduced `DASHI/HME/Integration.agda` to show how to plug
+  `canonicalWitnesses` into a `WitnessBundle` paired with an existing `Admissible`
+  path so Casey/SL can consume a real proof data pair.
 
 ## 2026-03-22
 

@@ -69,7 +69,7 @@ record ShiftClosureEvidence : Setω where
 
   fullClosure : PCF.PhysicsClosureFull
   fullClosure =
-    PCCT.PhysicsClosureConstructorTheorem.fullClosure constructorTheorem
+    PCF.physicsClosureFullFromCoreWitness coreWitness
 
 record B4ClosureEvidence : Setω where
   field
@@ -99,7 +99,7 @@ record B4ClosureEvidence : Setω where
 
   fullClosure : PCF.PhysicsClosureFull
   fullClosure =
-    PCCT.PhysicsClosureConstructorTheorem.fullClosure constructorTheorem
+    PCF.physicsClosureFullFromCoreWitness coreWitness
 
 record B4PromotionEvidence : Setω where
   field

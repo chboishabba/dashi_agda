@@ -496,7 +496,6 @@ import DASHI.Physics.Closure.PhysicsClosureCoreWitness
 import DASHI.Physics.Closure.PhysicsClosureEmpirical
 import DASHI.Physics.Closure.PhysicsClosureEmpiricalBetaInstance
 import DASHI.Physics.Closure.PhysicsClosureEmpiricalInstance
-import DASHI.Physics.Closure.PhysicsClosureEmpiricalToFull
 import DASHI.Physics.Closure.PhysicsClosureEmpiricalWithConeSplit
 import DASHI.Physics.Closure.PhysicsClosureFivePillarsTheorem
 import DASHI.Physics.Closure.PhysicsClosureFull
@@ -504,7 +503,6 @@ import DASHI.Physics.Closure.PhysicsClosureFullCanonicalBridgePackage
 import DASHI.Physics.Closure.PhysicsClosureFullInstance
 import DASHI.Physics.Closure.PhysicsClosureFullShift
 import DASHI.Physics.Closure.PhysicsClosureFullShiftInstance
-import DASHI.Physics.Closure.PhysicsClosureInstanceAssumed
 import DASHI.Physics.Closure.PhysicsClosureRealizationIndependenceTheorem
 import DASHI.Physics.Closure.PhysicsClosureSummary
 import DASHI.Physics.Closure.PhysicsClosureTheoremChecklist

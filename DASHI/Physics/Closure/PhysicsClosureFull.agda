@@ -84,7 +84,7 @@ canonicalContractionQuadraticToSignatureBridge :
 canonicalContractionQuadraticToSignatureBridge =
   CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
 
-record CanonicalExternalInputs : Setω where
+record LegacyExternalInputs : Setω where
   field
     kit : RealClosureKit
     polarizationZ :
@@ -103,58 +103,71 @@ record CanonicalExternalInputs : Setω where
     dynamics : DC.DynamicalClosure
     universality : Universality (RealClosureKit.C kit)
 
-canonicalPhysicsClosureFullFromExternal :
-  CanonicalExternalInputs →
+physicsClosureFullFromLegacyExternal :
+  LegacyExternalInputs →
   PhysicsClosureFull
-canonicalPhysicsClosureFullFromExternal ext =
+physicsClosureFullFromLegacyExternal ext =
   record
-    { kit = CanonicalExternalInputs.kit ext
+    { kit = LegacyExternalInputs.kit ext
     ; metricEmergence = λ {ℓv} {ℓs} A F Pkg →
         PDP.quadraticFromProjectionDefect A F Pkg
     ; quadraticFormZ = λ {m} →
         CFQT.ContractionForcesQuadraticTheorem.derivedQuadratic
           (CFQT.canonicalContractionForcesQuadraticTheorem m)
-    ; polarizationZ = CanonicalExternalInputs.polarizationZ ext
-    ; orthogonalityZ = CanonicalExternalInputs.orthogonalityZ ext
+    ; polarizationZ = LegacyExternalInputs.polarizationZ ext
+    ; orthogonalityZ = LegacyExternalInputs.orthogonalityZ ext
     ; signatureCoreProvider =
-        CanonicalExternalInputs.signatureCoreProvider ext
+        LegacyExternalInputs.signatureCoreProvider ext
     ; signature31Theorem =
         S31C.signature31-theoremFromProvider
-          (CanonicalExternalInputs.signatureCoreProvider ext)
+          (LegacyExternalInputs.signatureCoreProvider ext)
     ; signature31 =
         S31C.signature31FromProvider
-          (CanonicalExternalInputs.signatureCoreProvider ext)
+          (LegacyExternalInputs.signatureCoreProvider ext)
     ; CS = CI.CS
     ; L = CI.L
     ; constraintClosure = CCFCPT.canonicalPathInducedConstraintClosure
-    ; mdlLyap = λ {m} {k} → CanonicalExternalInputs.mdlLyap ext {m} {k}
-    ; mdlFejer = CanonicalExternalInputs.mdlFejer ext
-    ; dynamics = CanonicalExternalInputs.dynamics ext
-    ; universality = CanonicalExternalInputs.universality ext
+    ; mdlLyap = λ {m} {k} → LegacyExternalInputs.mdlLyap ext {m} {k}
+    ; mdlFejer = LegacyExternalInputs.mdlFejer ext
+    ; dynamics = LegacyExternalInputs.dynamics ext
+    ; universality = LegacyExternalInputs.universality ext
     }
 
 physicsClosureFullFromCoreWitness :
   PCCW.PhysicsClosureCoreWitness →
   PhysicsClosureFull
 physicsClosureFullFromCoreWitness witness =
-  canonicalPhysicsClosureFullFromExternal
-    record
-      { kit = PCCW.PhysicsClosureCoreWitness.kit witness
-      ; polarizationZ =
-          DCW.DynamicalClosureWitness.effectiveGeometryPolarization
-            (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)
-      ; orthogonalityZ =
-          DCW.DynamicalClosureWitness.effectiveGeometryOrthogonality
-            (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)
-      ; signatureCoreProvider =
-          PCCW.PhysicsClosureCoreWitness.signatureCoreProvider witness
-      ; mdlLyap = λ {m} {k} →
-          DCW.DynamicalClosureWitness.monotoneLyapunov
-            (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)
-            {m} {k}
-      ; mdlFejer =
-          DCW.DynamicalClosureWitness.monotoneFejer
-            (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)
-      ; dynamics = PCCW.PhysicsClosureCoreWitness.dynamics witness
-      ; universality = PCCW.PhysicsClosureCoreWitness.universality witness
-      }
+  record
+    { kit = PCCW.PhysicsClosureCoreWitness.kit witness
+    ; metricEmergence = λ {ℓv} {ℓs} A F Pkg →
+        PDP.quadraticFromProjectionDefect A F Pkg
+    ; quadraticFormZ = λ {m} →
+        CFQT.ContractionForcesQuadraticTheorem.derivedQuadratic
+          (CFQT.canonicalContractionForcesQuadraticTheorem m)
+    ; polarizationZ =
+        DCW.DynamicalClosureWitness.effectiveGeometryPolarization
+          (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)
+    ; orthogonalityZ =
+        DCW.DynamicalClosureWitness.effectiveGeometryOrthogonality
+          (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)
+    ; signatureCoreProvider =
+        PCCW.PhysicsClosureCoreWitness.signatureCoreProvider witness
+    ; signature31Theorem =
+        S31C.signature31-theoremFromProvider
+          (PCCW.PhysicsClosureCoreWitness.signatureCoreProvider witness)
+    ; signature31 =
+        S31C.signature31FromProvider
+          (PCCW.PhysicsClosureCoreWitness.signatureCoreProvider witness)
+    ; CS = CI.CS
+    ; L = CI.L
+    ; constraintClosure = CCFCPT.canonicalPathInducedConstraintClosure
+    ; mdlLyap = λ {m} {k} →
+        DCW.DynamicalClosureWitness.monotoneLyapunov
+          (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)
+          {m} {k}
+    ; mdlFejer =
+        DCW.DynamicalClosureWitness.monotoneFejer
+          (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)
+    ; dynamics = PCCW.PhysicsClosureCoreWitness.dynamics witness
+    ; universality = PCCW.PhysicsClosureCoreWitness.universality witness
+    }

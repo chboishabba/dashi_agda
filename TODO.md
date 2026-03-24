@@ -15,9 +15,11 @@ Priority bucket: `P1`
 - [x] Keep demo DA51/zkperf JSONL artifacts, if merged, documented as sample
   witness outputs rather than canonical reproducibility fixtures.
 - [x] Generate and keep a local `flake.lock` for the merge-prep Nix surface.
-- [ ] Follow-up after the writable-source fix:
+- [x] Follow-up after the writable-source fix:
   rerun `nix flake check`, `nix build .#check`, and
   `nix build .#merge-smoke` end to end and record the final outcome.
+- [x] Merge-prep Nix / zkperf surface is complete; return active attention to the
+  physics closure spine and tail-boundary follow-ups below.
 
 ## Track U — Physics Closure Spine Completion (2026-03-12)
 
@@ -37,6 +39,25 @@ Priority bucket: `P0`
   `PhysicsClosureInstanceAssumed` and canonical constraint-closure route.
 - [ ] Enforce canonical export path in:
   `CanonicalStageC`, `AxiomSet` (`AxiomLaws`), and `Everything`.
+- [ ] Keep the remaining theorem-checklist / bridge-package surface on the direct core-witness route instead of converting the full closure through the constructor theorem.
+
+Progress note:
+the legacy assumed closure instance is now kept out of the public
+`PhysicsClosureSummary` and `Everything` export surfaces; the compatibility
+module remains on disk, but the canonical path no longer publicly re-exports
+it.
+Progress note:
+the canonical quadratic theorem constructor now delegates to the strong
+package’s canonical identity witness instead of reconstructing the split
+package inline, so the uniqueness transport seam is a little more centralized.
+Progress note:
+the external full-closure and provider-based constructors have been renamed to
+legacy adapters, so the canonical naming no longer suggests that the
+outside-wired routes are authoritative.
+Progress note:
+`physicsClosureFullFromCoreWitness` now assembles the canonical full closure
+directly from the core witness, rather than bouncing through the legacy
+external adapter.
 
 ## Cleanup / Consolidation
 
@@ -236,6 +257,21 @@ Current focus:
   `PhysicsClosureInstanceAssumed`,
   generic cone/isotropy compatibility placeholders,
   and prototype wave/unification modules.
+
+## Track H — HME Pipeline & Export
+
+- [x] Drop a curated JSON of DA51 traces (exponents length 15 plus `hot`, `cold`,
+  `basin`, `j_fixed`) into `scripts/data/` or document an existing source so
+  `scripts/hme_cli.py` has deterministic inputs.
+- [x] Run `python scripts/hme_cli.py scripts/data/da51_traces.json --k 3 --threshold 0.9993`
+  (with attractors if available) and emit the resulting canonical witnesses.
+- [x] Feed that JSON through `scripts/hme_emit_agda.py` to regenerate
+  `DASHI/HME/Generated/Witnesses.agda`, then point a new sample `WitnessBundle`
+  (e.g. in `DASHI/HME/Integration.agda`) at `canonicalWitnesses` plus a real
+  `Admissible` path to demonstrate the contract is wired end-to-end.
+- [x] Ingest `SensibLaw/scripts/qg_unification_smoke.py` output into `scripts/data/qg_trace.json`,
+  `scripts/data/qg_witness.json`, and `scripts/data/qg_smoke_raw.json` so the
+  recorded canonical witness matches the QG smoke sample.
 
 ## Track E — Observable Consequences / Forward Predictions
 

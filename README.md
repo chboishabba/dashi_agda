@@ -359,6 +359,20 @@ Current theorem status:
   The artifacts now also expose score-component breakdowns for the ranked and
   primary source projections, so later source-side refinements can target the
   metric weights explicitly instead of treating the ranking as opaque.
+  Canonical export cleanup also removed the legacy assumption-first closure
+  instance from the public `PhysicsClosureSummary` and `Everything` surfaces;
+  the compatibility module remains on disk, but it is no longer publicly
+  re-exported on the canonical path, and the umbrella import no longer pulls
+  in the empirical-to-full adapter either. The external full-closure
+  constructor and the provider-based constructor are now named as legacy
+  adapters, so the canonical naming no longer implies that the outside-wired
+  routes are authoritative.
+  The canonical `physicsClosureFullFromCoreWitness` path now assembles the
+  full closure directly from the core witness, instead of bouncing through the
+  legacy external adapter.
+  The canonical contraction→quadratic theorem constructor now also delegates
+  through the strong package’s canonical identity witness, so the uniqueness
+  transport seam is less duplicated.
   The current score now includes source-side `Hecke` proximity and a weak
   `Bott` cycle prior in addition to trace support, exponent, canonical
   alignment, and attack-triple bonus.
@@ -905,3 +919,8 @@ upstream `nix`/`zkperf` merge without overstating what it validates.
   this tooling layer.
 - Any tracked DA51 / zkperf JSONL examples should be read as sample witness
   outputs, not as canonical reproducibility fixtures.
+
+Merge-prep status:
+the local Nix / zkperf surface is complete and validated, so active work now
+returns to the physics closure spine and the existing tail-boundary follow-up
+track.

@@ -27,7 +27,7 @@ minimumCredibleClosureFromProvider :
   MCPC.MinimalCrediblePhysicsClosure
 minimumCredibleClosureFromProvider provider providerSignatureMatches =
   record
-    { full = PCFI.physicsClosureFullFromProvider provider
+    { full = PCFI.physicsClosureFullFromLegacyProvider provider
     ; observables = SOPI.shiftObservablePrediction
     ; closureSignatureMatchesPrediction = providerSignatureMatches
     }

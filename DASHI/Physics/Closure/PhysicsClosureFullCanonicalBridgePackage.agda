@@ -24,7 +24,7 @@ canonicalPhysicsClosureFullCanonicalBridgePackage :
   PhysicsClosureFullCanonicalBridgePackage
 canonicalPhysicsClosureFullCanonicalBridgePackage =
   record
-    { fullClosure = PCFI.physicsClosureFull
+    { fullClosure = PCF.physicsClosureFullFromCoreWitness PCFI.physicsClosureCoreWitness
     ; contractionToCliffordBridge =
         CCTCB.canonicalContractionToCliffordBridgeTheorem
     ; contractionSignatureToSpinDiracBridge =

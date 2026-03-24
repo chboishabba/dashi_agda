@@ -26,8 +26,8 @@ module DASHI.Physics.Closure.PhysicsClosureSummary where
 --   Docs/ResearchRoadmap_A_to_C.md and not asserted as a current theorem.
 -- Primary closure consumer:
 --   PhysicsClosureFullInstance.
--- Legacy compatibility consumer:
---   PhysicsClosureInstanceAssumed.
+-- Legacy compatibility module:
+--   PhysicsClosureInstanceAssumed (kept out of the public summary surface).
 -- Downstream physical consumer:
 --   SpinDiracGateFromClosure.
 -- Current validation snapshot:
@@ -187,12 +187,6 @@ module DASHI.Physics.Closure.PhysicsClosureSummary where
 
 open import DASHI.Physics.Closure.PhysicsClosureFull as PCF public
 open import DASHI.Physics.Closure.PhysicsClosureFullInstance as PCFI public
-open import DASHI.Physics.Closure.PhysicsClosureInstanceAssumed as PCA public
-  using
-    ( physicsClosureAssumed
-    ; physicsClosureAssumedDefault
-    ; legacyPhysicsClosureCompatibility
-    )
 open import DASHI.Physics.Closure.CanonicalStageC as CSC public
 open import DASHI.Physics.Closure.CanonicalStageCStatus as CSS public
 open import DASHI.Physics.Closure.CanonicalConstraintClosureStatus as CCCS public

@@ -1,0 +1,107 @@
+{
+  "envelope": {
+    "envelope": {
+      "admissible": true,
+      "basin": 1,
+      "cold": 7,
+      "exponents": [
+        1,
+        0,
+        -1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hot": 3,
+      "id": "trace-demo-001",
+      "j_fixed": false,
+      "mass": 8,
+      "mdls": {
+        "max_abs": 2.0,
+        "norm": 2.449489742783178,
+        "sum_abs": 4.0
+      },
+      "normalized": [
+        0.4082482904638631,
+        0.0,
+        -0.4082482904638631,
+        0.8164965809277261,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sparsity": 0.8,
+      "steps": 42
+    },
+    "schema_version": "qg_unification.trace_vector.v1",
+    "sink": "sensiblaw",
+    "source": "da51"
+  },
+  "trace_vector": {
+    "admissible": true,
+    "basin": 1,
+    "cold": 7,
+    "exponents": [
+      1,
+      0,
+      -1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "hot": 3,
+    "id": "trace-demo-001",
+    "j_fixed": false,
+    "mass": 8,
+    "mdls": {
+      "max_abs": 2.0,
+      "norm": 2.449489742783178,
+      "sum_abs": 4.0
+    },
+    "normalized": [
+      0.4082482904638631,
+      0.0,
+      -0.4082482904638631,
+      0.8164965809277261,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "sparsity": 0.8,
+    "steps": 42
+  }
+}

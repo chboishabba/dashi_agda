@@ -44,10 +44,10 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 -- Concrete instance: wires the Bool closure stack into PhysicsClosureFull.
 -- The `mdlLyap` field now carries the authoritative shift witness directly.
 
-physicsClosureFullFromProvider :
+physicsClosureFullFromLegacyProvider :
   S31C.IntrinsicCoreProvider → PCF.PhysicsClosureFull
-physicsClosureFullFromProvider provider =
-  PCF.canonicalPhysicsClosureFullFromExternal
+physicsClosureFullFromLegacyProvider provider =
+  PCF.physicsClosureFullFromLegacyExternal
     record
       { kit = MRI.myKit
       ; polarizationZ = λ {m} → PZL.polarizationZLift {m}

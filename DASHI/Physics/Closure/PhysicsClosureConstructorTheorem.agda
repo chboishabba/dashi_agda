@@ -31,7 +31,7 @@ canonicalPhysicsClosureConstructorTheorem :
 canonicalPhysicsClosureConstructorTheorem =
   record
     { closureCoreWitness = PCFI.physicsClosureCoreWitness
-    ; fullClosure = PCFI.physicsClosureFull
+    ; fullClosure = PCF.physicsClosureFullFromCoreWitness PCFI.physicsClosureCoreWitness
     ; constructedByCanonicalConstructor = reflω
     }
 

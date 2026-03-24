@@ -68,6 +68,10 @@ structural and dynamical questions separate.
   `flake.nix`, `dashi-agda.agda-lib`,
   `scripts/list_merge_agda_targets.sh`, and
   `scripts/run_agda_merge_smoke.sh`.
+- Merge-prep closeout:
+  the local Nix / zkperf surface is now complete and should not be treated as
+  a live closure bottleneck; the remaining active priorities stay on the
+  physics closure spine and the tail-boundary regime work.
 - Therefore:
   do not treat global cosine/L2 proximity or `p47` stability alone as a
   Monster-specific signal.
@@ -100,6 +104,19 @@ structural and dynamical questions separate.
   from an explicit scored-primary experimental mode, so bridge-facing claims can
   stay pinned to the canonical surface while ranking-led experiments remain
   inspectable.
+  Canonical export cleanup now keeps the legacy assumption-first closure
+  instance out of the public `PhysicsClosureSummary` and `Everything`
+  surfaces; the compatibility module remains available, but it is no longer
+  re-exported on the canonical path, and the umbrella import no longer pulls
+  in the empirical-to-full adapter either. The external full-closure
+  constructor and the provider-based constructor are now named as legacy
+  adapters rather than canonical helpers.
+  The canonical `physicsClosureFullFromCoreWitness` path now assembles the
+  full closure directly from the core witness, not through the legacy
+  external adapter.
+  The canonical contraction→quadratic theorem constructor now delegates
+  through the strong package’s canonical identity witness, so the uniqueness
+  transport seam is less duplicated on the canonical path.
   A `projection_conflict` marker now makes any divergence between those two
   source representatives explicit, without upgrading that divergence into a
   source/execution failure claim.

@@ -27,6 +27,10 @@
   do not force JSONL sanitization in this pass;
   instead document those demo artifacts as non-authoritative and keep the real
   technical requirement on recursive check/record coverage.
+- Merge-prep closeout:
+  the local Nix / zkperf surface is now implemented, locked, validated, and
+  pushed; future attention returns to the physics closure and tail-boundary
+  priorities already tracked elsewhere in the repo.
 
 ## 2026-03-22
 
@@ -203,6 +207,17 @@
   The runtime artifacts now also expose score-component breakdowns for the
   ranked and primary source projections, so future metric changes can be read
   as deliberate weight changes rather than opaque rank movement.
+  Canonical export cleanup now keeps the legacy assumption-first closure
+  instance out of the public `PhysicsClosureSummary` and `Everything`
+  surfaces; the compatibility module remains on disk, but it is no longer
+  part of the canonical re-export path, and the umbrella import no longer
+  pulls in the empirical-to-full adapter either. The external full-closure
+  and provider-based constructors are now explicitly named as legacy adapters.
+  The canonical `physicsClosureFullFromCoreWitness` path now assembles the
+  full closure directly from the core witness.
+  The canonical contraction→quadratic theorem constructor now also routes
+  through the strong package’s canonical identity witness, reducing the
+  duplicated split-package construction on the canonical path.
   Immediate next source-side refinement is now to add richer within-class terms
   from source metadata itself, especially `Hecke` proximity and a weak `Bott`
   cycle prior, and then test the same bridge on the additional compatible
@@ -685,6 +700,53 @@ Cleanup state:
 - autonomous orchestrator run on 2026-03-11 selected
   `long-running-development` and failed with exit code `1` because network
   calls to Codex backend/MCP endpoints were blocked.
+
+## 2026-03-24
+
+- Ran `robust-context-fetch` for online thread
+  `69c26f38-10ac-839b-abb2-513bd8277db6`, pulled it into the canonical archive,
+  and resolved canonical thread
+  `17603dbe65e67fb7c87ebfbb64b1a66b5ec04449` (“Formal Proof Pipeline”).
+  Source used for the final resolution: `db`. Main topics pulled:
+  - “the proof is the path” is the intended formal reading for the current
+    repo direction: the proof object should be modeled as an admissible path /
+    trajectory, not as a detached theorem artifact.
+  - the next formalization step should make HME a small typed Agda path algebra
+    over seams the repo already treats as canonical, rather than introducing a
+    second proof route.
+  - Casey, SL, and Zelph should be exposed as separate interface surfaces over
+    that same path algebra; do not collapse them into a single layer or claim
+    they are interchangeable.
+  - keep `ClosureAxioms` and the contraction/quadratic/signature/Clifford spine
+    as the frozen canonical bridge, with orbit-profile evidence treated as
+    secondary witness structure rather than the primary theorem source.
+
+## 2026-03-25 (HME Pipeline Contract)
+
+- Documented the full SL ↔ DA51 ↔ Agda boundary contract and pipeline tooling:
+  * `DASHI/HME/Trace.agda` now mirrors the canonical witness/schema interchange,
+    so the proof layer stays untouched while SL can advertise `TraceWitness`,
+    `CanonicalWitness`, and `ProofStatus`.
+  * `scripts/hme_pipeline.py` produces normalized traces, MDL + entropy scores,
+    multi-attractor cone checks, k-means clustering, silhouette scoring, and
+    invariance metrics; `scripts/hme_cli.py` turns a JSON trace list and
+    optional attractors into canonical witness payloads.
+  * `scripts/hme_emit_agda.py` takes CLI JSON output and writes
+    `DASHI/HME/Generated/Witnesses.agda` so Agda can import `canonicalWitnesses`
+    without a foreign parser; the JSON input is expected to be a list of DA51
+    traces (each with `exponents` length 15 plus `hot`, `cold`, `basin`, `j_fixed`)
+    and optional attractor arrays of the same length.
+  * Recorded that the canonical loop remains: SL structures the data, Agda
+    handles admissibility, and feedback to SL flows through `ProofStatus`.
+- Added `scripts/data/demo_traces.json` as the current curated DA51 trace
+  placeholder (15-entry exponent vectors plus `hot`, `cold`, `basin`, `j_fixed`)
+  so `scripts/hme_cli.py` has deterministic inputs, and generated
+  `DASHI/HME/Generated/Witnesses.agda` from that CLI run as a proof-of-concept
+  ingestion module instead of requiring runtime JSON parsing.
+- Re-run that pipeline using the `SensibLaw/scripts/qg_unification_smoke.py`
+  payload so the recorded canonical witness now matches the actual QG/SL smoke
+  sample, and stored `(qg_smoke_raw.json, qg_trace.json, qg_witness.json)` in
+  `scripts/data/` as trace + canonical witness artifacts for future auditing.
 
 ## 2026-03-11
 

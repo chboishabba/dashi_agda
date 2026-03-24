@@ -36,7 +36,7 @@ mdlLyapShiftWitness {m} {k} = MDLL.lyapunovShift {m} {k}
 
 empiricalToFull : PCE.PhysicsClosureEmpirical → PCF.PhysicsClosureFull
 empiricalToFull emp =
-  PCF.canonicalPhysicsClosureFullFromExternal
+  PCF.physicsClosureFullFromLegacyExternal
     record
       { kit = PCE.kit emp
       ; polarizationZ = λ {m} → PZL.polarizationZLift {m}

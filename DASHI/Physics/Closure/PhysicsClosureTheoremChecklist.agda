@@ -107,7 +107,7 @@ canonicalPhysicsClosureTheoremChecklist =
     ; closureCoreWitnessForcesFullClosure =
         PCCT.canonicalPhysicsClosureConstructorTheorem
     ; canonicalCoreWitness = PCFI.physicsClosureCoreWitness
-    ; canonicalFullClosure = PCFI.physicsClosureFull
+    ; canonicalFullClosure = PCF.physicsClosureFullFromCoreWitness PCFI.physicsClosureCoreWitness
     }
 
 canonicalPhysicsClosureHeadlineTheorem :
