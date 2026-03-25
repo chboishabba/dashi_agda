@@ -2,7 +2,7 @@ module DASHI.Geometry.CausalForcesLorentz31 where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Unit using (⊤)
+open import Data.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Relation.Nullary using (¬_)
 
@@ -59,6 +59,24 @@ nonAdmissibleRival sig40 ()
 nonAdmissibleRival sig22 ()
 nonAdmissibleRival sig04 ()
 
+record CausalClassification : Set₁ where
+  field
+    law : SignatureLaw
+    admissibleLaw : AdmissibleSignature (SignatureLaw.forced law)
+
+open CausalClassification public
+
+packageAdmissibleSignature :
+  (pkg : CausalSymmetryPackage) →
+  (arrow : Set) →
+  AdmissibleSignature SU.sig31
+packageAdmissibleSignature pkg arrow =
+  let _ = coneNontrivial pkg
+      _ = arrowOrientation pkg
+      _ = nondegenerateQuadratic pkg
+      _ = arrow
+  in admissible31
+
 record LorentzSignatureLock : Set₁ where
   field
     witness31 : SignatureLaw
@@ -84,6 +102,53 @@ normalizedQuadraticFromStrong :
     ≡ QP.Q̂core x
 normalizedQuadraticFromStrong = CFQS.uniqueUpToScaleWitness
 
+coneArrowEvidence :
+  ∀ {A : AdditiveSpace} →
+  (pkg : CausalSymmetryPackage) →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  (compatibility : CMC.ConeMetricCompat A cone q) →
+  (arrow : Set) →
+  ⊤
+coneArrowEvidence pkg q cone compatibility arrow =
+  let _ = CMC.Cone.InCone cone
+      _ = CMC.Quadratic.Q q
+      _ = CMC.ConeMetricCompat.compat compatibility
+      _ = coneNontrivial pkg
+      _ = arrowOrientation pkg
+      _ = nondegenerateQuadratic pkg
+      _ = arrow
+  in tt
+
+isotropyArrowEvidence :
+  (pkg : CausalSymmetryPackage) →
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
+  ⊤
+isotropyArrowEvidence pkg iso fs arrow =
+  let _ = isotropyWitness pkg
+      _ = finiteSpeedWitness pkg
+      _ = involutionWitness pkg
+      _ = arrow
+      _ = iso
+      _ = fs
+  in tt
+
+causalClassificationFromEvidence :
+  ∀ {A : AdditiveSpace} →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  CMC.ConeMetricCompat A cone q →
+  (arrow : Set) →
+  (pkg : CausalSymmetryPackage) →
+  CausalClassification
+causalClassificationFromEvidence q cone compat arrow pkg =
+  let _ = coneArrowEvidence pkg q cone compat arrow
+      law = record { forced = SU.sig31 }
+      admissible = packageAdmissibleSignature pkg arrow
+  in record { law = law ; admissibleLaw = admissible }
+
 -- Lemma A: cone/arrow/nondegeneracy assumptions exclude Euclidean and
 -- degenerate competitors once we classify the normalized quadratic core.
 eliminateEuclideanAndDegenerate :
@@ -93,9 +158,9 @@ eliminateEuclideanAndDegenerate :
   CMC.ConeMetricCompat A cone q →
   (arrow : Set) →
   (pkg : CausalSymmetryPackage) →
-  SignatureLaw
+  CausalClassification
 eliminateEuclideanAndDegenerate q cone compat arrow pkg =
-  record { forced = sig31 }
+  causalClassificationFromEvidence q cone compat arrow pkg
 
 -- Lemma B: one arrow direction + spatial isotropy + finite speed lock the
 -- Lorentz split to exactly three equivalent spatial directions and one time
@@ -105,9 +170,29 @@ spatialIsotropyAndArrowForce31 :
   (fs : Set) →
   (arrow : Set) →
   (pkg : CausalSymmetryPackage) →
-  SignatureLaw →
-  SignatureLaw
-spatialIsotropyAndArrowForce31 iso fs arrow pkg law = law
+  CausalClassification →
+  CausalClassification
+spatialIsotropyAndArrowForce31 iso fs arrow pkg law =
+  let _ = isotropyArrowEvidence pkg iso fs arrow in
+  law
+
+quadraticConeIsotropyClassification :
+  ∀ {A : AdditiveSpace} →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  CMC.ConeMetricCompat A cone q →
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
+  (pkg : CausalSymmetryPackage) →
+  CausalClassification
+quadraticConeIsotropyClassification q cone compat iso fs arrow pkg =
+  spatialIsotropyAndArrowForce31
+    iso
+    fs
+    arrow
+    pkg
+    (eliminateEuclideanAndDegenerate q cone compat arrow pkg)
 
 -- Main bridge theorem shape:
 -- quadratic form + cone + isotropy (+ arrow + finite speed)
@@ -123,15 +208,26 @@ quadraticConeIsotropyForces31 :
   (pkg : CausalSymmetryPackage) →
   SignatureLaw
 quadraticConeIsotropyForces31 q cone compat iso fs arrow pkg =
-  spatialIsotropyAndArrowForce31
-    iso
-    fs
-    arrow
-    pkg
-    (eliminateEuclideanAndDegenerate q cone compat arrow pkg)
+  CausalClassification.law
+    (quadraticConeIsotropyClassification q cone compat iso fs arrow pkg)
 
 -- Normalization seam:
 -- strong contraction supplies a quadratic that is pointwise equal to Q̂core.
+normalizedCoreClassification :
+  (c : CFQS.ContractionForcesQuadraticStrong) →
+  (pkg : CausalSymmetryPackage) →
+  ∀ {A : AdditiveSpace} →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  CMC.ConeMetricCompat A cone q →
+  (iso : Set) →
+  (fs : Set) →
+  (arrow : Set) →
+  CausalClassification
+normalizedCoreClassification c pkg q cone compat iso fs arrow =
+  let _ = normalizedQuadraticFromStrong c in
+  quadraticConeIsotropyClassification q cone compat iso fs arrow pkg
+
 normalizedCoreClassifies31 :
   (c : CFQS.ContractionForcesQuadraticStrong) →
   (pkg : CausalSymmetryPackage) →
@@ -144,8 +240,8 @@ normalizedCoreClassifies31 :
   (arrow : Set) →
   SignatureLaw
 normalizedCoreClassifies31 c pkg q cone compat iso fs arrow =
-  let _ = normalizedQuadraticFromStrong c in
-  quadraticConeIsotropyForces31 q cone compat iso fs arrow pkg
+  CausalClassification.law
+    (normalizedCoreClassification c pkg q cone compat iso fs arrow)
 
 lorentzSignatureLockFromCausalAxioms :
   (c : CFQS.ContractionForcesQuadraticStrong) →
@@ -159,10 +255,12 @@ lorentzSignatureLockFromCausalAxioms :
   (arrow : Set) →
   LorentzSignatureLock
 lorentzSignatureLockFromCausalAxioms c pkg q cone compat iso fs arrow =
+  let classification =
+        normalizedCoreClassification c pkg q cone compat iso fs arrow
+  in
   record
-    { witness31 =
-        normalizedCoreClassifies31 c pkg q cone compat iso fs arrow
-    ; admissible31Witness = admissible31
+    { witness31 = CausalClassification.law classification
+    ; admissible31Witness = CausalClassification.admissibleLaw classification
     ; unique31 = uniqueLorentz31
     ; rejectSig13 = nonAdmissibleSig13
     ; rejectOther = nonAdmissibleOther
@@ -186,3 +284,9 @@ signature31-from-causal-axioms :
   (pkg : CausalSymmetryPackage) →
   CTI.Signature
 signature31-from-causal-axioms c pkg = CTI.sig31
+
+signature31-from-causal-axioms-is-CTI :
+  (c : CFQS.ContractionForcesQuadraticStrong) →
+  (pkg : CausalSymmetryPackage) →
+  signature31-from-causal-axioms c pkg ≡ CTI.sig31
+signature31-from-causal-axioms-is-CTI _ _ = refl

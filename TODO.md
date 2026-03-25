@@ -25,21 +25,21 @@ Priority bucket: `P1`
 
 Priority bucket: `P0`
 
-- [ ] Execute checklist in `Docs/PhysicsClosureImplementationChecklist.md` in
+- [x] Execute checklist in `Docs/PhysicsClosureImplementationChecklist.md` in
   strict order.
-- [ ] Keep contraction→quadratic uniqueness transport centralized in
+- [x] Keep contraction→quadratic uniqueness transport centralized in
   `ContractionForcesQuadraticStrong`.
-- [ ] Keep profile forcing surface narrow:
+- [x] Keep profile forcing surface narrow:
   `ConeArrowIsotropyForcesProfile` + shift instance only.
-- [ ] Upgrade `DecimationToClifford` from interface shell to theorem-bearing
+- [x] Upgrade `DecimationToClifford` from interface shell to theorem-bearing
   factorization surface.
-- [ ] Convert `PhysicsClosureFull` from supplied-field record to
+- [x] Convert `PhysicsClosureFull` from supplied-field record to
   theorem-derived assembly where possible.
-- [ ] Eliminate assumption-first canonical seams from
+- [x] Eliminate assumption-first canonical seams from
   `PhysicsClosureInstanceAssumed` and canonical constraint-closure route.
-- [ ] Enforce canonical export path in:
+- [x] Enforce canonical export path in:
   `CanonicalStageC`, `AxiomSet` (`AxiomLaws`), and `Everything`.
-- [ ] Keep the remaining theorem-checklist / bridge-package surface on the direct core-witness route instead of converting the full closure through the constructor theorem.
+- [x] Keep the remaining theorem-checklist / bridge-package surface on the direct core-witness route instead of converting the full closure through the constructor theorem.
 
 Progress note:
 the legacy assumed closure instance is now kept out of the public
@@ -110,8 +110,10 @@ Priority bucket: `P1`
 - [x] Pipeline enforcement: tag existing closure-relevant modules in docs as
   `canonical` / `supporting` / `experimental` and remove ambiguous duplicates
   from repo-facing claims.
-- [ ] Keep `Docs/ClosurePipeline.md` label registry current whenever new
-  closure modules are added or promoted.
+- [x] Keep `Docs/ClosurePipeline.md` label registry current whenever new
+  closure modules are added or promoted. (Refreshed 2026-03-25 with split/
+  parallelogram route, spin/Dirac bridge, PhysicsClosureFull, and
+  QuadraticFromProjection classification.)
 - [x] Add canonical quadratic-to-Clifford bridge theorem module:
   `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`, deriving a
   canonical bilinear form from normalized quadratic output
@@ -125,16 +127,20 @@ Priority bucket: `P1`
 
 Priority bucket: `P0`
 
-- Declare the canonical closure spine in theorem-bundle and summary docs:
-  `ProjectionDefect → EnergySplitProof → Parallelogram → QuadraticForm
-  → ConeTimeIsotropy → Signature31FromConeArrowIsotropy → Signature31Lock`.
-- Classify quadratic/signature parallel routes as one of:
+- [x] Declare the canonical closure spine in theorem-bundle and summary docs:
+  `ProjectionDefect → ProjectionDefectSplitForcesParallelogram
+  → ProjectionDefectToParallelogram → QuadraticForm
+  → ContractionForcesQuadraticStrong → ContractionForcesQuadraticTheorem
+  → CausalForcesLorentz31 → ContractionQuadraticToSignatureBridgeTheorem
+  → QuadraticToCliffordBridgeTheorem → ContractionSignatureToSpinDiracBridgeTheorem
+  → CliffordToEvenWaveLiftBridgeTheorem → PhysicsClosureFull`.
+- [x] Classify quadratic/signature parallel routes as one of:
   `alternative`, `validation`, `experimental`.
-- Rewire canonical Stage C and closure summaries so canonical claims do not
+- [x] Rewire canonical Stage C and closure summaries so canonical claims do not
   depend on `QuadraticEmergence` / `QuadraticFormEmergence` as required steps.
-- Keep `ProjectionDefectToParallelogram` and
+- [x] Keep `ProjectionDefectToParallelogram` and
   `ContractionForcesQuadraticStrong` as canonical bottleneck bridge modules.
-- Keep a single seam registry on canonical modules only; remove duplicated seam
+- [x] Keep a single seam registry on canonical modules only; remove duplicated seam
   placeholders from non-canonical derivation surfaces.
 
 ## Track T — Dynamical / Theorem Closure

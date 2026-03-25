@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.ObservableResolutionInvarianceTheorem where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
 
 open import DASHI.Physics.Closure.ClosureObservableWitness as COW
 open import DASHI.Physics.Closure.PhysicsClosureCoreWitness as PCCW
@@ -163,8 +163,9 @@ canonicalShiftClosureEvidence =
     obs =
       PCCW.PhysicsClosureCoreWitness.observables PCFI.physicsClosureCoreWitness
     signatureAgreement =
-      PCCW.PhysicsClosureCoreWitness.observableSignatureAgreement
-        PCFI.physicsClosureCoreWitness
+      trans
+        (S31C.signature31FromProviderDerivedFromCausal S31C.shiftCoreProvider)
+        (sym S31C.canonicalSignatureIsCTI)
   in
   mkShiftClosureEvidence
     obs
@@ -177,8 +178,11 @@ canonicalB4ClosureEvidence =
     obs =
       PCCW.PhysicsClosureCoreWitness.observables PCFI.b4PhysicsClosureCoreWitness
     signatureAgreement =
-      PCCW.PhysicsClosureCoreWitness.observableSignatureAgreement
-        PCFI.b4PhysicsClosureCoreWitness
+      trans
+        (S31C.signature31FromProviderDerivedFromCausal S31C.shiftCoreProvider)
+        (sym
+          (S31C.signature31FromProviderDerivedFromCausal
+            S31C.b4CoreProvider))
   in
   mkB4ClosureEvidence
     obs

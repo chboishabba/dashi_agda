@@ -32,7 +32,7 @@ import DASHI.Physics.Signature31Canonical as S31C
 open import DASHI.Physics.Closure.PhysicsClosureCoreWitness as PCCW
 open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
-open import DASHI.Physics.Closure.ConstraintClosureFromCanonicalPathTheorem as CCFCPT
+open import DASHI.Physics.Closure.CanonicalConstraintClosureWitness as CCCW
 
 record PhysicsClosureFull : Setω where
   field
@@ -126,7 +126,9 @@ physicsClosureFullFromLegacyExternal ext =
           (LegacyExternalInputs.signatureCoreProvider ext)
     ; CS = CI.CS
     ; L = CI.L
-    ; constraintClosure = CCFCPT.canonicalPathInducedConstraintClosure
+    ; constraintClosure =
+        CCCW.CanonicalConstraintClosureWitness.closureWitness
+          CCCW.canonicalConstraintClosureWitness
     ; mdlLyap = λ {m} {k} → LegacyExternalInputs.mdlLyap ext {m} {k}
     ; mdlFejer = LegacyExternalInputs.mdlFejer ext
     ; dynamics = LegacyExternalInputs.dynamics ext
@@ -160,7 +162,9 @@ physicsClosureFullFromCoreWitness witness =
           (PCCW.PhysicsClosureCoreWitness.signatureCoreProvider witness)
     ; CS = CI.CS
     ; L = CI.L
-    ; constraintClosure = CCFCPT.canonicalPathInducedConstraintClosure
+    ; constraintClosure =
+        CCCW.CanonicalConstraintClosureWitness.closureWitness
+          CCCW.canonicalConstraintClosureWitness
     ; mdlLyap = λ {m} {k} →
         DCW.DynamicalClosureWitness.monotoneLyapunov
           (PCCW.PhysicsClosureCoreWitness.dynamicsWitness witness)

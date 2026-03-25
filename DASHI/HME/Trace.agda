@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List using (List)
 open import Data.Product using (_×_; _,_)
+open import DASHI.Physics.Closure.DynamicalClosureStatus as DCS
 
 ------------------------------------------------------------------------
 -- SL ↔ DA51 ↔ Agda boundary contract (types only, no semantics here).
@@ -49,3 +50,7 @@ record ProofStatus : Set where
     valid                : Bool
     violatedConstraints  : List String
     derivedInvariants    : List (String × Float)
+    propagation          : DCS.PropagationStatus
+    causalAdmissibility  : DCS.CausalAdmissibilityStatus
+    monotoneQuantity     : DCS.MonotoneQuantityStatus
+    effectiveGeometry    : DCS.EffectiveGeometryStatus

@@ -1,6 +1,6 @@
 # Status
 
-- Phase: canonical bridge hardening complete; physics-closure execution checklist activated
+- Phase: canonical bridge hardening complete; execution checklist closed; post-checklist closure runway active
 - Canonical spine:
   `ProjectionDefect → ProjectionDefectSplitForcesParallelogram
   → ProjectionDefectToParallelogram → QuadraticForm
@@ -38,8 +38,9 @@
   - `agda -i . DASHI/Physics/Closure/CanonicalContractionToCliffordBridgeTheorem.agda`: pass
   - `agda -i . DASHI/Physics/Closure/KnownLimitsQFTBridgeTheorem.agda`: pass
 - Constraints:
-  - Lemma A/B are explicit theorem seams but still carry minimal forcing payload;
-    stronger constructive eliminators/classification terms remain next.
+  - Lemma A/B are explicit theorem seams that now carry cone/arrow/isotropy
+    evidence via `coneArrowEvidence` and `isotropyArrowEvidence` inside
+    `CausalForcesLorentz31` while maintaining the existing validation guardrails.
   - keep routine skip policy for direct
     `DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda` checks while
     runtime remains high.
@@ -48,6 +49,8 @@
     theorem-proven on the canonical Stage C path.
 - Active execution source:
   `Docs/PhysicsClosureImplementationChecklist.md`
+- Routine validation target policy:
+  `Docs/AgdaValidationTargets.md`
 - Checklist progress:
   - Phase 1 hardening pass started and landed:
     `ContractionForcesQuadraticStrong`,
@@ -83,13 +86,13 @@
     (`canonical-theorem` / `concrete-instance` / `remaining-assumption`).
   - Heavy regression check:
     `agda -i . DASHI/Physics/Closure/CanonicalStageC.agda`: pass.
-  - Runtime guardrail reaffirmed:
+- Runtime guardrail reaffirmed:
     `timeout 20s agda -i . DASHI/Everything.agda` exits `124` in
     `PhysicsClosureValidationSummary`.
   - Bounded canonical-stage recheck:
     `timeout 90s agda -i . DASHI/Physics/Closure/CanonicalStageC.agda`
     exits `124` (no type errors emitted before timeout).
 - Next action:
-  run a focused audit on remaining non-canonical assumption surfaces
-  (`PhysicsClosureInstanceAssumed.metricEmergence` and legacy adapters) and
-  either derive or isolate them off the canonical route.
+  run the post-checklist closure runway in bounded parallel slices:
+  signature/causal consumer hardening, dynamics-status threading,
+  concrete constraint/algebraic-closure wiring, and known-limits consumer uplift.

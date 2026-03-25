@@ -29,3 +29,6 @@ shiftDynamics =
           ; effectiveGeometry = DCS.quadraticPolarizationAndOrthogonality
           }
     }
+
+canonicalStatus : DCS.DynamicalClosureStatus
+canonicalStatus = DC.status shiftDynamics

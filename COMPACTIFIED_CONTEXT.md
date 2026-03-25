@@ -1,5 +1,23 @@
 # Compactified Context
 
+## 2026-03-25
+
+- Applied `zkp-problem-framing`, `get-shit-done`, and
+  `autonomous-orchestrator` to the remaining repo backlog.
+- Durable framing result:
+  the repo is past setup churn; the active work is the physics-closure spine
+  and canonical export cleanup, governed by
+  `Docs/PhysicsClosureImplementationChecklist.md`.
+- Added `Docs/AutonomousOrchestratorClosureFrame.md` as the durable
+  orchestration/frame note for this phase.
+- Normalized `status.json` to the autonomous-orchestrator control vocabulary.
+  Current intended route:
+  `autonomous-orchestrator` control plane -> `long-running-development`
+  child skill.
+- Validation guardrail remains unchanged:
+  treat `PhysicsClosureValidationSummary.agda` and full `Everything.agda`
+  runs as checkpoint-only because they remain too heavy for routine loops.
+
 ## 2026-03-23
 
 - Review of upstream PR `#1` (`nix support`) showed the main technical gap is

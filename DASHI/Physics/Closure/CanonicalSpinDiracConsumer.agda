@@ -9,6 +9,7 @@ open import DASHI.Physics.Closure.DynamicalClosureWitness as DCW
 open import DASHI.Physics.Closure.CanonicalConstraintClosureStatus as CCCS
 open import DASHI.Physics.Closure.KnownLimitsStatus as KLS
 open import DASHI.Physics.Closure.KnownLimitsRecovery as KLR
+open import DASHI.Physics.Closure.KnownLimitsRecoveryWitness as KLRW
 open import DASHI.Physics.Closure.SpinDiracGateFromClosure as SDGC
 
 record SpinDiracConsumerFromMinimal
@@ -20,6 +21,7 @@ record SpinDiracConsumerFromMinimal
     constraintStatus : CCCS.CanonicalConstraintClosureStatus
     knownLimitsStatus : KLS.KnownLimitsStatus
     knownLimitsRecovery : KLR.KnownLimitsRecoveryWitness
+    knownLimitsRecoveryWitnessPlus : KLRW.KnownLimitsRecoveryWitnessPlus
 
 spinDiracConsumerFromMinimal :
   (C : MCPC.MinimalCrediblePhysicsClosure) →
@@ -32,4 +34,5 @@ spinDiracConsumerFromMinimal C =
     ; constraintStatus = CCCS.canonicalConstraintClosureStatus
     ; knownLimitsStatus = KLS.canonicalKnownLimitsStatus
     ; knownLimitsRecovery = KLR.canonicalKnownLimitsRecovery
+    ; knownLimitsRecoveryWitnessPlus = KLRW.canonicalKnownLimitsRecoveryWitness
     }

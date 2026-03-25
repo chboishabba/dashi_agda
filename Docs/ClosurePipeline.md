@@ -8,20 +8,20 @@ labeled as alternative/validation/experimental.
 
 ## Canonical Chain
 
+Stage C canonical closure route (execution order):
+
 1. `DASHI/Geometry/ProjectionDefect.agda`
-2. `DASHI/Energy/EnergySplitProof.agda`
+2. `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda`
 3. `DASHI/Geometry/ProjectionDefectToParallelogram.agda`
-4. `DASHI/Geometry/Parallelogram.agda`
-5. `DASHI/Geometry/QuadraticForm.agda` (polarization-driven quadratic surface)
-6. `DASHI/Geometry/ConeTimeIsotropy.agda`
-7. `DASHI/Geometry/Signature31FromConeArrowIsotropy.agda`
-8. `DASHI/Geometry/CausalForcesLorentz31.agda`
-9. `DASHI/Geometry/Signature31Lock.agda`
-10. `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
-11. `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
-12. `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`
-13. `DASHI/Physics/Closure/CliffordToEvenWaveLiftBridgeTheorem.agda`
-14. `DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda`
+4. `DASHI/Geometry/QuadraticForm.agda`
+5. `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
+6. `DASHI/Physics/Closure/ContractionForcesQuadraticTheorem.agda`
+7. `DASHI/Geometry/CausalForcesLorentz31.agda`
+8. `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
+9. `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`
+10. `DASHI/Physics/Closure/ContractionSignatureToSpinDiracBridgeTheorem.agda`
+11. `DASHI/Physics/Closure/CliffordToEvenWaveLiftBridgeTheorem.agda`
+12. `DASHI/Physics/Closure/PhysicsClosureFull.agda`
 
 ## Module Labels
 
@@ -50,23 +50,22 @@ Use one of these labels for every closure-relevant module:
 ### Canonical
 
 - `DASHI/Geometry/ProjectionDefect.agda`
-- `DASHI/Energy/EnergySplitProof.agda`
+- `DASHI/Geometry/ProjectionDefectSplitForcesParallelogram.agda`
 - `DASHI/Geometry/ProjectionDefectToParallelogram.agda`
-- `DASHI/Geometry/Parallelogram.agda`
 - `DASHI/Geometry/QuadraticForm.agda`
-- `DASHI/Geometry/ConeTimeIsotropy.agda`
-- `DASHI/Geometry/Signature31FromConeArrowIsotropy.agda`
-- `DASHI/Geometry/CausalForcesLorentz31.agda`
-- `DASHI/Geometry/Signature31Lock.agda`
 - `DASHI/Physics/Closure/ContractionForcesQuadraticStrong.agda`
+- `DASHI/Physics/Closure/ContractionForcesQuadraticTheorem.agda`
+- `DASHI/Geometry/CausalForcesLorentz31.agda`
 - `DASHI/Physics/Closure/ContractionQuadraticToSignatureBridgeTheorem.agda`
+- `DASHI/Physics/Closure/ContractionSignatureToSpinDiracBridgeTheorem.agda`
 - `DASHI/Physics/Closure/QuadraticToCliffordBridgeTheorem.agda`
 - `DASHI/Physics/Closure/CliffordToEvenWaveLiftBridgeTheorem.agda`
-- `DASHI/Physics/Closure/PhysicsClosureFivePillarsTheorem.agda`
+- `DASHI/Physics/Closure/PhysicsClosureFull.agda`
 
 ### Alternative
 
 - `DASHI/Geometry/QuadraticFromNorm.agda`
+- `DASHI/Geometry/QuadraticFromProjection.agda`
 - `DASHI/Geometry/QuadraticFromParallelogram.agda`
 - `DASHI/Geometry/QuadraticFormEmergence.agda`
 

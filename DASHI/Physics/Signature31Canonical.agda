@@ -9,7 +9,7 @@ open import DASHI.Geometry.SignatureUniqueness31 as SU using (Signature31Theorem
 open import DASHI.Geometry.Signature31FromIntrinsicShellForcing as S31ISF
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym)
 import DASHI.Physics.Signature31IntrinsicShiftInstance as S31I
 import DASHI.Physics.Signature31IntrinsicSyntheticInstance as S31S
 import DASHI.Physics.Signature31IntrinsicRootSystemB4Instance as S31B4
@@ -84,6 +84,18 @@ signature31-theorem =
 
 signature31 : CTI.Signature
 signature31 = signature31FromProvider shiftCoreProvider
+
+signature31FromProviderDerivedFromCausal :
+  (provider : IntrinsicCoreProvider) →
+  signature31FromProvider provider ≡ CTI.sig31
+signature31FromProviderDerivedFromCausal provider =
+  S31ISF.signature31FromIntrinsicMatchesCTI
+    (IntrinsicCoreProvider.coreAxioms provider)
+
+canonicalSignatureIsCTI :
+  signature31 ≡ CTI.sig31
+canonicalSignatureIsCTI =
+  sym (signature31FromProviderDerivedFromCausal shiftCoreProvider)
 
 syntheticSignature31-theorem : Signature31Theorem
 syntheticSignature31-theorem =

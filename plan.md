@@ -17,14 +17,20 @@ Execute the canonical physics-closure chain in strict order:
 Execution checklist source:
 `Docs/PhysicsClosureImplementationChecklist.md`
 
+All canonical chain steps have now executed and Lemma A/B elimination is lodged inside `CausalForcesLorentz31`; the current focus is the post-checklist closure runway, which can now be worked in parallel across bounded file slices.
+
 ## Milestones
 1. Canonical spine declaration and import policy. (done)
 2. Quadratic route consolidation to the split/parallelogram route. (done)
 3. Signature route consolidation to theorem-primary causal classification. (done)
 4. Canonical quadratic-to-Clifford bridge from normalized quadratic output. (done)
 5. Canonical `WaveLift⇒Even` factorization theorem and bridge threading. (done)
-6. Keep closure label registry and status docs synchronized as modules evolve. (active)
-7. Strengthen Lemma A/B internals while preserving canonical interfaces. (active)
+6. Keep closure label registry and status docs synchronized as modules evolve. (done)
+7. Strengthen Lemma A/B internals while preserving canonical interfaces. (done)
+8. Parallel signature/causal consumer hardening. (active)
+9. Parallel dynamics-status + witness threading. (active)
+10. Parallel concrete constraint/algebraic-closure wiring. (active)
+11. Parallel known-limits consumer uplift. (active)
 
 ## Milestone Tasks
 1. Keep canonical route map aligned to current implementation:
@@ -77,9 +83,9 @@ Execution checklist source:
   `QuadraticFormEmergence` transitively and need rerouting first?
 
 ## Next Skill
-`long-running-development` to execute
-`Docs/PhysicsClosureImplementationChecklist.md` in-order, proving one
-milestone group at a time with targeted Agda checks after each group.
+`autonomous-orchestrator` to manage the post-checklist closure runway in
+parallel, then integrate the landed worker slices back into the canonical
+export/control surfaces.
 
 ## Active Signature Classification Focus (2026-03-11)
 

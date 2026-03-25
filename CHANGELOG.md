@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-03-25
+
+- added [`MONSTER10WALK_INTAKE.md`](/home/c/Documents/code/dashi_agda/MONSTER10WALK_INTAKE.md)
+  to pin the local source hierarchy for the Monster 10-walk thread:
+  upstream `monster/experiments/bott_periodicity/monster_walk.tex` as the
+  source table, plus sibling-repo
+  `../FRACDASH/MONSTER10WALK_CANONICAL.md` and
+  `../FRACDASH/JMD_HANDOFF_NOTE.md` as the current local executable
+  interpretation and claim-boundary notes.
+- updated [`fracdash-impl/README.md`](/home/c/Documents/code/dashi_agda/fracdash-impl/README.md)
+  so the FRACDASH bridge note points directly at the new Monster 10-walk
+  intake document instead of leaving that cross-repo dependency implicit.
+
 ## 2026-03-23
 
 - added a local merge-prep Nix / zkperf tooling surface for upstream PR-style

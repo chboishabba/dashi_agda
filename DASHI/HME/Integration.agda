@@ -11,6 +11,8 @@ open import DASHI.Physics.ClosureGlue using (ClosureAxioms)
 open import DASHI.HME.Trace as Trace
 open import DASHI.HME.All public
 open import DASHI.HME.Generated.Witnesses public
+open import DASHI.Physics.Closure.DynamicalClosureShiftInstance as DCSI
+open import DASHI.Physics.Closure.DynamicalClosureStatus as DCS
 
 ------------------------------------------------------------------------
 -- Convert canonical witness records (generated via `scripts/hme_emit_agda.py`)
@@ -44,6 +46,20 @@ traceWitnessFromCanonical cw =
     { vector     = traceVectorFromCanonical cw
     ; invariant  = traceInvariantFromCanonical cw
     ; admissible = true
+    }
+
+canonicalProofStatus : CanonicalWitness → Trace.ProofStatus
+canonicalProofStatus cw =
+  let status = DCSI.canonicalStatus in
+  record
+    { traceId              = CanonicalWitness.traceId cw
+    ; valid                = true
+    ; violatedConstraints  = []
+    ; derivedInvariants    = CanonicalWitness.invariants cw
+    ; propagation          = DCS.DynamicalClosureStatus.propagation status
+    ; causalAdmissibility  = DCS.DynamicalClosureStatus.causalAdmissibility status
+    ; monotoneQuantity     = DCS.DynamicalClosureStatus.monotoneQuantity status
+    ; effectiveGeometry    = DCS.DynamicalClosureStatus.effectiveGeometry status
     }
 
 --------------------------------------------------------------------------------

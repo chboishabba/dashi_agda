@@ -5,6 +5,10 @@ Purpose: document the FRACDASH-side executable witness/status layer so upstream 
 ## Scope
 - `../dashi_agda` remains the semantic source of truth; this folder records how FRACDASH mirrors or approximates those witnesses in executable form.
 - FRACDASH currently implements regime-class and well-formedness witnesses (contraction + bounded transmutation) for the closed bridge slices (`physics1`, `physics3`, `physics15`, `physics19`, `physics20`, `physics21`, `physics22`) but does **not yet** implement the upstream execution-admissibility or family-classification witnesses.
+- Monster 10-walk intake for this repo is summarized in `MONSTER10WALK_INTAKE.md`;
+  treat the pinned `monster/experiments/bott_periodicity/monster_walk.tex` as
+  the upstream source and `../FRACDASH/MONSTER10WALK_CANONICAL.md` as the
+  current local executable interpretation.
 
 ## Upstream surfaces to mirror
 - `DASHI/Physics/Closure/MinimalCrediblePhysicsClosure.agda`: now exports `authoritativeExecutionAdmissibilityWitness` and `authoritativeFamilyClassificationWitness`.

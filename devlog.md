@@ -1,5 +1,36 @@
 # Devlog
 
+- 2026-03-25: Post-checklist closure runway opened after the Lemma A/B
+  strengthening pass landed in `CausalForcesLorentz31`.
+  - Reset repo control state from “milestones complete” to a broader active
+    parallel runway.
+  - Split the remaining work into bounded worker lanes:
+    signature/causal hardening, dynamics-status + witness threading,
+    concrete constraint/algebraic closure, and known-limits consumer uplift.
+  - Tightened the orchestration policy against unbounded/heavy Agda checks
+    during worker exploration and killed stray long-running validation.
+
+- 2026-03-25: Refreshed closure label registry and project memory to match the
+  current canonical spine (split/parallelogram route through spin/Dirac and
+  PhysicsClosureFull). Marked the PhysicsClosureInstanceAssumed path as
+  legacy/experimental-only in TODO/ClosurePipeline, reclassified
+  `QuadraticFromProjection` as `alternative`, and set the next action to the
+  constructive Lemma A/B strengthening pass.
+- 2026-03-25: Applied `zkp-problem-framing`, `get-shit-done`, and
+  `autonomous-orchestrator` to the remaining closure backlog.
+  - Added `Docs/AutonomousOrchestratorClosureFrame.md` as the durable
+    orchestration/frame note for the current repo phase.
+  - Normalized `status.json` to the control vocabulary expected by the
+    autonomous orchestrator (`docs=ready`, `tests=unknown`) instead of the
+    previous stale/noncanonical values.
+  - Explicit routing result:
+    use `autonomous-orchestrator` as the control plane and
+    `long-running-development` as the next child skill against
+    `Docs/PhysicsClosureImplementationChecklist.md`.
+  - Guardrail reaffirmed:
+    keep `PhysicsClosureValidationSummary.agda` and full `Everything.agda`
+    out of routine inner-loop validation.
+
 - 2026-03-14: Changed closure-hygiene runner defaults so routine runs no
   longer spend hours draining aggregate summary targets after the leaf and
   intermediate modules are already green.

@@ -20,6 +20,11 @@ Archive-backed status update:
   Demo DA51/zkperf JSONL witness files are acceptable as illustrative tracked
   artifacts for now, but they must be documented as non-authoritative sample
   outputs rather than as canonical reproducibility inputs.
+- Routine Agda target policy now lives in `Docs/AgdaValidationTargets.md`:
+  use focused canonical bridge modules in normal edit loops, treat
+  `PhysicsClosureValidationSummary.agda` as heavy/avoid-by-default, and treat
+  `Everything.agda` as an occasional bounded checkpoint rather than a routine
+  inner-loop command.
 - Canonical closure routing now includes an explicit
   `ContractionForcesQuadraticStrong -> QuadraticToCliffordBridgeTheorem`
   step that builds a canonical bilinear-form interface from normalized
@@ -496,12 +501,11 @@ Current theorem status:
   a synthetic one-minus harness with a non-shift policy derived from its
   witness state type, a Bool inversion-specific harness with its own witness
   selection, and a standalone `B₄` harness.
-- Prioritized next steps (condensed):
-  1) strengthen constructive internals for Lemma A/B in
-     `CausalForcesLorentz31` while preserving canonical interfaces,
-  2) keep closure-pipeline labels and repo-facing citation order synchronized
+- Lemma A/B constructive eliminators are now in place inside
+  `CausalForcesLorentz31`; prioritized next steps (condensed):
+  1) keep closure-pipeline labels and repo-facing citation order synchronized
      as modules are promoted,
-  3) re-run direct `PhysicsClosureValidationSummary.agda` timing/validation when
+  2) re-run direct `PhysicsClosureValidationSummary.agda` timing/validation when
      a longer runtime budget is available.
 
 The repo does **not** currently claim full physics closure or “solved

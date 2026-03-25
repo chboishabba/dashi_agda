@@ -16,7 +16,7 @@ module DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem where
 -- quadratic emergence routes.
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Geometry.ConeTimeIsotropy as CTI
 open import DASHI.Geometry.QuadraticForm as QF
@@ -56,7 +56,8 @@ contractionQuadraticToSignatureBridgeFromIntrinsicCore core =
         S31ISF.signature31-theoremFromIntrinsic core
     ; signature31Value =
         S31ISF.signature31FromIntrinsic core
-    ; signatureForced31 = refl
+    ; signatureForced31 =
+        S31ISF.signature31FromIntrinsicMatchesCTI core
     ; normalizedQuadratic =
         CFQS.uniqueUpToScaleWitness
           (S31ISF.IntrinsicSignatureCoreAxioms.strengthenedContraction core)

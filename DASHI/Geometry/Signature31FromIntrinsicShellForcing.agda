@@ -2,7 +2,7 @@ module DASHI.Geometry.Signature31FromIntrinsicShellForcing where
 
 open import Level using (_⊔_; suc)
 open import Agda.Primitive using (Setω)
-open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans)
 open import DASHI.Geometry.ParallelogramLaw using (AdditiveSpace)
 open import DASHI.Geometry.ConeMetricCompatibility using (Cone; Quadratic; ConeMetricCompat)
 
@@ -79,6 +79,24 @@ signature31FromIntrinsic core =
   CFL.signature31-from-causal-axioms
     (IntrinsicSignatureCoreAxioms.strengthenedContraction core)
     (IntrinsicSignatureCoreAxioms.causalSymmetry core)
+
+signature31FromIntrinsicMatchesCausal :
+  (core : IntrinsicSignatureCoreAxioms) →
+  signature31FromIntrinsic core ≡
+  CFL.signature31-from-causal-axioms
+    (IntrinsicSignatureCoreAxioms.strengthenedContraction core)
+    (IntrinsicSignatureCoreAxioms.causalSymmetry core)
+signature31FromIntrinsicMatchesCausal _ = refl
+
+signature31FromIntrinsicMatchesCTI :
+  (core : IntrinsicSignatureCoreAxioms) →
+  signature31FromIntrinsic core ≡ CTI.sig31
+signature31FromIntrinsicMatchesCTI core =
+  trans
+    (signature31FromIntrinsicMatchesCausal core)
+    (CFL.signature31-from-causal-axioms-is-CTI
+      (IntrinsicSignatureCoreAxioms.strengthenedContraction core)
+      (IntrinsicSignatureCoreAxioms.causalSymmetry core))
 
 lorentzLockFromIntrinsic :
   (core : IntrinsicSignatureCoreAxioms) →
