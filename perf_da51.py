@@ -1,10 +1,37 @@
 #!/usr/bin/env python3
 """Collect perf traces from Agda proofs, emit DA51 CBOR shards with fingerprints."""
-import subprocess, json, hashlib, sys, os, glob
+import argparse
+import glob
+import hashlib
+import json
+import os
+import subprocess
 
 AGDA = "/nix/store/c4s2d92ggrrb4nh2myyzskh3snbvqnfb-agdaWithPackages-2.8.0/bin/agda"
 COUNTERS = ["cycles", "instructions", "cache-misses", "branch-misses"]
 DA51_TAG = 0xDA51  # 55889
+
+
+def _load_template_fragments(template_dir):
+    """Load file-name -> fractran payload map from existing shard files."""
+    import cbor2
+
+    template_payloads = {}
+    if not template_dir:
+        return template_payloads
+    for cbor_path in sorted(glob.glob(os.path.join(template_dir, "*.cbor"))):
+        try:
+            with open(cbor_path, "rb") as fh:
+                decoded = cbor2.loads(fh.read())
+            payload = decoded.value if isinstance(decoded, cbor2.CBORTag) else decoded
+            file_name = payload.get("file")
+            if not file_name:
+                file_name = os.path.basename(cbor_path).replace(".cbor", ".agda")
+            if "fractran" in payload and file_name:
+                template_payloads[str(file_name)] = payload["fractran"]
+        except (FileNotFoundError, cbor2.CBORDecodeError, TypeError, AttributeError):
+            continue
+    return template_payloads
 
 
 def perf_stat(agda_file):
@@ -33,19 +60,53 @@ def sha256_file(path):
     return h.hexdigest()
 
 
-def da51_shard(agda_file, counters, src_hash):
-    """Build DA51 CBOR shard: {tag: 0xDA51, file, sha256, counters}."""
+def da51_shard(agda_file, counters, src_hash, fractran=None):
+    """Build a DA51 CBOR shard payload."""
     import cbor2
+
     payload = {
         "file": os.path.basename(agda_file),
         "sha256": src_hash,
         "counters": counters,
         "trace_sha256": hashlib.sha256(json.dumps(counters, sort_keys=True).encode()).hexdigest(),
     }
+    if fractran is not None:
+        payload["fractran"] = fractran
     return cbor2.dumps(cbor2.CBORTag(DA51_TAG, payload))
 
 
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Emit DA51 shards in the checked-in format. By default this preserves\n"
+            "the legacy shard schema (no fractran payload). Use --fractran-template\n"
+            "to project full fractran payloads from an existing shard directory."
+        )
+    )
+    parser.add_argument(
+        "--fractran-template",
+        default="",
+        help=(
+            "Directory containing existing DA51 .cbor shards with full fractran payloads.\n"
+            "If provided, generated shards inherit the matching payload per file."
+        ),
+    )
+    parser.add_argument(
+        "--strict-template",
+        action="store_true",
+        help=(
+            "Fail fast if a file does not have a matching fractran template entry.\n"
+            "Only valid when --fractran-template is also provided."
+        ),
+    )
+    return parser
+
+
 def main():
+    parser = build_parser()
+    args = parser.parse_args()
+
+    template_fragments = _load_template_fragments(args.fractran_template)
     agda_dir = os.path.dirname(os.path.abspath(__file__))
     out_dir = os.path.join(agda_dir, "da51_shards")
     os.makedirs(out_dir, exist_ok=True)
@@ -58,7 +119,10 @@ def main():
         try:
             counters = perf_stat(f)
             src_hash = sha256_file(f)
-            shard = da51_shard(f, counters, src_hash)
+            fractran = template_fragments.get(name)
+            if args.strict_template and args.fractran_template and fractran is None:
+                raise RuntimeError(f"missing fractran template entry for {name}")
+            shard = da51_shard(f, counters, src_hash, fractran)
             shard_path = os.path.join(out_dir, name.replace(".agda", ".cbor"))
             with open(shard_path, "wb") as out:
                 out.write(shard)
