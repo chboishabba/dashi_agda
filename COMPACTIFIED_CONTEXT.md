@@ -841,3 +841,198 @@ Cleanup state:
   quadratic/signature bridge surfaces, not duplicated across parallel routes.
 - Next execution skill selected: `long-running-development` for import rewiring,
   seam-surface cleanup, and compile-stable migration.
+
+## 2026-03-29 (Ultrametric FP formal layer + scalar refinement)
+
+- Context source (db): online UUID `69c3f3ed-3d94-839d-b562-44005a50bf82`, title “Ultrametric fixed‑point lemmas for DASHI”, canonical ID `60b7dd7192b53ed5bac2f705aa6039321759469f`.
+- Added formal shells: `Physics/PhysicalTheory.agda`, `Refinement.agda`, `SymmetryQuotient.agda`, `Observable.agda`, `QuantumHistory.agda`, `Measurement.agda`, `ClassicalEmergence.agda`, `Benchmark.agda`, `CandidateFieldTheory.agda`, `PhysicalTheoryShell.agda`.
+- Added `Physics/LocalWitness.agda` to carry local operator/scaling/observable-invariance witnesses for shell-level toys.
+- Scalar continuum toy now uses a more symmetric centered local relaxation (`centerGate` / `relaxSymVec`) rather than the earlier one-sided gate, carries a nontrivial global sign-flip action plus support quotient, and keeps the same recovery surface. The refinement tower is now explicitly approximate rather than exact; the current `approxEq₀` witness is deliberately coarse (`⊤`) and should be sharpened later.
+- RG universality toy now also has a nontrivial quotient on the irrelevant sector rather than a quotient-trivial shell: relevant coordinate preserved, irrelevant sector contracts via the scalar relaxation, refinement projects only the irrelevant tail, and the shell carries local operator/scaling/observable witnesses.
+- Added `Physics/Toy/GaugeShell.agda`: a shell-level gauge toy in which the gauge origin is pure gauge and the field carrier is the physical quotient. The local step contracts field content, observables read only the field, and recovery says the field relaxes to vacuum modulo gauge.
+- Next work: sharpen the scalar approximate refinement witness beyond the current coarse boundary witness, then push the same quotient/witness pattern into later toys beyond scalar/RG/gauge.
+- Refresh (db pull 2026-03-29): same thread reiterates that global availability of operators/symmetry/observables/scaling is not sufficient; each toy must *instantiate and use* them locally (operator algebra, scaling limit, observable statement, quotient invariance). Do not assume commutation; treat refinement/projection non-commutation as a target and use approxEq witnesses per theory.
+- Refresh correction (db analysis 2026-03-29): the thread does contain explicit code/module artifacts, including module/file names and pasted edit summaries for `DASHI/Physics/*.agda` and `DASHI/Physics/Toy/ScalarContinuum.agda`; it is not only high-level planning text.
+
+## 2026-03-29 (CLOCK / DASHI phase schema refresh)
+
+- Context source (db): online UUID `69c8913d-5240-839b-9bf8-d757ae8b208a`, title `Resonance and Overlap`, canonical ID `343e73cc6a60cd1f29be15301a69aed0fa682002`.
+- Main correction: CLOCK should currently be treated as a cyclic `HexTruth` / `ℤ/6` lift of DASHI’s triadic `TriTruth` / `ℤ/3`, not as a dihedral `⟨r,s⟩` object. Safe formal relation: `CLOCK = fine phase`, `DASHI = coarse phase`, with the coarse map the mod-3 projection `HexTruth → TriTruth`.
+- Safe phase dynamics schema pulled from the thread:
+  `phase : S → HexTruth`, `coarsePhase x = q (phase x)`, and for the intended dynamics `T : S → S`,
+  `coarse (phase (T² x)) = rotateTri (coarse (phase x))`.
+- Repo-facing interpretation boundary:
+  phase carriers alone are kinematics; the physics content comes only once cone admissibility, contraction / Lyapunov descent, and MDL are imposed on top of the phase lift.
+- Design consequence for future formalization:
+  if a CLOCK/DASHI bridge module is added, it should be phrased as a cyclic refinement / square-root lift with dynamic retention-collapse semantics under cone + contraction + MDL, not as a reversal-involution theorem.
+- Implementation landed in `DASHI/Physics/CLOCKPhaseBridge.agda`:
+  `coarseHex : HexTruth → TriTruth` is now the actual mod-3 coarse map, with the proved law
+  `coarseHex (rotateHex h) = rotateTri (coarseHex h)`.
+  The thread’s state-level law is packaged as a separate witness
+  `phase-step² : phase (T² x) = rotateHex (phase x)`,
+  from which the bridge proves
+  `coarse (phase (T² x)) = rotateTri (coarse (phase x))`.
+  This keeps the cyclic interpretation while avoiding the earlier mismatch between a literal one-step hex advance and the thread’s stated `T²` coarse law.
+- Concrete instance landed in `DASHI/Physics/CLOCKPhaseInstance.agda`:
+  `ClockState = HexTruth × Bool` as a two-phase lagged clock, with
+  `clockStep (h , false) = (h , true)` and
+  `clockStep (h , true) = (rotateHex h , false)`.
+  This discharges the actual witness `phase (T² x) = rotateHex (phase x)` on a nontrivial state space and yields the concrete theorem
+  `coarsePhase (T² x) = rotateTri (coarsePhase x)`.
+  It is intentionally only a kinematic instance; no false strict-contraction claim is made for the raw periodic cycle.
+- Follow-up implementation (2026-03-29): the CLOCK instance now also exposes a stroboscopic effective layer:
+  `StrobeState = HexTruth`, `strobeStep = rotateHex`, `strobeEmbed h = (h , false)`,
+  together with `step² (strobeEmbed h) = strobeEmbed (strobeStep h)` and the coarse dynamics theorem
+  `coarsePhase (T² (strobeEmbed h)) = rotateTri (coarsePhase (strobeEmbed h))`.
+  This is the intended “effective coarse dynamics” layer without claiming raw-cycle contraction.
+- Lane follow-up (2026-03-29): `CLOCKPhaseInstance` now packages that effective layer as
+  `EffectiveClockClosure`, with an invariant, step² preservation, a lag-defect Lyapunov condition,
+  and coarse triadic phase evolution on the stroboscopic sector.
+- Second-rung CLOCK lane result: `CLOCKPhaseInstance` now also carries a concrete cone/admissibility layer,
+  with `ClockCone`, `clockStep²-conePreserved`, and `EffectiveClockCone`.
+  The effective clock sector is now not only Lyapunov-packaged but explicitly equipped with a preserved cone on `step²`.
+- Third-rung CLOCK lane result: `CLOCKPhaseInstance` now defines `PhasePhysicsBridgeStep²` and instantiates it as
+  `clockBridgeStep²`, tightening the bridge from the concrete effective clock sector back to a generic step²-level
+  phase/admissibility/defect package without making an unjustified raw-step contraction claim.
+- Local follow-up: the clock line now makes the step²-only choice explicit by adding
+  `strobeProject`, `strobeEmbedProject-onInv`, `strobeProject-step²`, and `EffectiveClockSectorBridge`.
+  The current formal stance is therefore: the effective stroboscopic sector is the honest bridge surface,
+  rather than pretending the raw one-step clock dynamics satisfies the stronger generic bridge.
+- Additional local follow-up: `normalizeToStrobe`, `normalizeToStrobe-inv`,
+  `normalizeToStrobe-id-onInv`, `normalizeToStrobe-is-step-if-needed`, and `normalizeToStrobe-step²`
+  now make the sector-entry story explicit: every state reaches the stroboscopic sector in at most one raw step,
+  and the step² dynamics can then be read through the normalized stroboscopic projection.
+- Latest local follow-up: the CLOCK line now effectively has a named one-step-entry bundle,
+  combining normalization to the stroboscopic sector with the previously added sector bridge and step² phase package.
+- Scalar refinement is no longer using `approxEq₀ = ⊤`.
+  `ScalarContinuum` now tracks agreement on every coordinate except the last, via a recursive `TailApprox`,
+  and proves the refinement witness against the actual centered local relaxation.
+- RG refinement automatically sharpened through that scalar change, and `RGUniversality` now states explicit
+  basin-label invariance, irrelevant-size contraction under step/coarse, a relevance/irrelevance scaling split,
+  and recovered-class / observable-collapse lemmas parameterized by the basin label.
+- Additional RG lane content landed:
+  `rgCoarseStepApprox`, `rgCoarseStepClass-stable`, `rgCoarseRelObservableStable`,
+  and `rgCoarseIrrelObservableMonotone`, so the toy now states one-step coarse/step compatibility
+  and observable stability/monotonicity at the coarse interface.
+- Second-rung RG lane result: `RGUniversality` now has iterated theorem content:
+  `stepPow`, `coarsePow`, basin-label preservation under arbitrary step/coarse iteration,
+  irrelevant-size monotonicity under arbitrary iteration, and corresponding relevant/irrelevant observable
+  stability/monotonicity lemmas over repeated coarse projection.
+- Third-rung RG lane result: `RGUniversality` now packages the step-iterate side as an explicit
+  asymptotic bundle, `rgAsymptotic` with witness `rgAsymptoticWitness`, stating fixed basin label,
+  nonincreasing irrelevance size, boundedness by the initial state, constancy of the relevance observable,
+  and monotonicity of the irrelevance observable across arbitrary `stepPow` iterates.
+- Local follow-up: `RGUniversality` now also defines `rgCanonicalClass`,
+  `rgRecovered-stepPow-canonical`, and `rgRecovered-stepPow-canonical-observable`,
+  so recovered iterates are explicitly tied to a canonical basin representative indexed by the relevant coordinate.
+- Additional local follow-up: `rgRecovered-fixed`, `rgRecovered-stepPow-id`,
+  `rgRecovered-stepPow-from`, `rgRecovered-stepPow-tail-canonical`, and
+  `rgRecovered-stepPow-tail-canonical-observable` now make the “once recovered, always canonical”
+  story explicit for all later iterates.
+- The RG line is now at the point where remaining work is mostly presentation/consumer-side:
+  the asymptotic bundle (`rgAsymptotic`) and the canonical recovered-tail bundle are both present.
+- Gauge lane content landed in `GaugeShell`:
+  recovered states now collapse to the vacuum quotient class, with class equality between recovered states,
+  observable stability on vacuum refinement, and a coarse-vacuum class lemma.
+- Second-rung Gauge lane result: `GaugeShell` now includes one-step coarse/step compatibility
+  (`gaugeCoarseStepApprox`) and coarse-step defect/observable monotonicity
+  (`gaugeCoarseStepDefect≤FineStep`, `gaugeCoarseStepObservableMonotone`).
+- Third-rung Gauge lane result: `GaugeShell` now carries iterated scaling content via `stepPow`, `coarsePow`,
+  `gaugeDefect-stepPow-monotone`, `gaugeDefect-coarsePow-monotone`, and
+  `gaugeObservable-coarsePow-monotone`, extending the one-step coarse theorems to arbitrary-depth projection.
+- Local follow-up: `GaugeShell` now adds `gaugeCanonicalClass`,
+  `gaugeRecovered-stepPow-class`, and `gaugeRecovered-stepPow-observable-collapse`,
+  making recovered iterates collapse to the vacuum quotient class and the corresponding canonical observable value.
+- Additional local follow-up: `gaugeRecovered-fixed`, `gaugeRecovered-stepPow-id`,
+  `gaugeRecovered-stepPow-from`, `gaugeRecovered-stepPow-tail-class`, and
+  `gaugeRecovered-stepPow-tail-observable-collapse` now make the same recovered-tail persistence/canonical-collapse
+  story explicit for later gauge iterates.
+- The Gauge line is now structurally parallel to RG at the recovered-tail level,
+  though it still lacks a named asymptotic bundle record if one is wanted for consumer-side uniformity.
+- Packaging follow-up: consumer-facing summary modules now exist for all three active lanes:
+  `DASHI/Physics/CLOCKPhaseSummaryBundle.agda`,
+  `DASHI/Physics/Toy/RGSummaryBundle.agda`,
+  and `DASHI/Physics/Toy/GaugeSummaryBundle.agda`.
+  CLOCK now exports a bundled closure/cone/bridge/sector surface plus the one-step sector-entry package.
+  RG now exports named asymptotic and recovered-tail bundle records.
+  Gauge now exports a named asymptotic bundle and recovered-tail bundle parallel to RG.
+- Final packaging follow-up: `DASHI/Physics/Toy/UnifiedToySummaryBundle.agda` now gives one cross-toy consumer-facing import surface,
+  bundling the CLOCK closure consumer and the RG/Gauge iterate bundles behind a single module.
+- RG follow-up: `RGUniversality` now also exposes an explicit renormalization family
+  `rgRenormalize k n = rgShellStep n ∘ coarsePow k n`,
+  together with basin stability and relevant/irrelevant observable monotonicity theorems,
+  packaged as `RGRenormalizationBundle`.
+- Latest RG follow-up: the renormalization story is now richer than a single post-coarsening step.
+  `RGUniversality` now also defines `rgFlow k m n = stepPow n m ∘ coarsePow k n`,
+  together with basin stability, relevant/irrelevant observable monotonicity, and
+  canonical-on-recovered theorems, packaged as `RGFlowBundle` and exported through `RGFlowSummary`.
+- Schedule follow-up: the RG flow family now also carries explicit fixed-`k` schedule comparison facts.
+  `rgFlow-step-monotone` and `rgFlow-irr-observable-step-monotone` compare
+  `m` against `suc m` at fixed coarse depth, while
+  `rgFlow-step-tail-canonical` and `rgFlow-step-tail-canonical-observable`
+  make the recovered-tail/canonical-collapse story explicit after a chosen RG schedule has entered the recovered regime.
+- Fused-operator follow-up: `RGUniversality` now also defines a more tightly coupled coarse/evolve family
+  `rgFused`, where each recursive coarse step is preceded by a scale-local evolution step rather than being exposed only as `coarsePow` followed by `stepPow`.
+  The file now carries `RGFusedBundle` with:
+  basin stability,
+  irrelevant-size monotonicity,
+  relevant/irrelevant observable monotonicity,
+  a recovered/canonical-collapse theorem pack,
+  and the anchor comparison `rgFused zero = rgFlow zero 1`.
+  This is the first genuinely less-factorized RG operator surface in the current encoding.
+- Latest fused follow-up: `rgFused` now also carries a recovered-tail persistence layer,
+  via `rgFused-step-tail-canonical` and `rgFused-step-tail-canonical-observable`.
+  So once the fused operator reaches the recovered regime, all later target-scale evolution remains at the same canonical class/observable, mirroring the stronger flow-side persistence story.
+- Comparison follow-up: the RG file now also carries an operator-aware weak comparison layer between `rgFused` and `rgFlow`,
+  without invoking failed coarse-depth associativity claims.
+  `rgFused-flow-basin-agree` and `rgFused-flow-rel-observable-agree` show that the two operators always agree on the relevant/basin sector,
+  and `rgFused-flow-recovered-same-class` plus `rgFused-flow-recovered-observable-agree` show that once both land in the recovered regime,
+  they collapse to the same canonical physical class and observables.
+- Mixed-schedule follow-up: the RG file now also compares target-scale evolution after the fused operator to a nearby flow schedule at the same coarse depth.
+  `rgFused-stepPow-flow-basin-agree` and `rgFused-stepPow-flow-rel-observable-agree`
+  give a structural comparison between `stepPow n t (rgFused k n x)` and `rgFlow k (suc t) n x`
+  without requiring any coarse-depth associativity theorem.
+- Benchmark follow-up: `RGUniversality` now exposes a minimal prediction/data surface for the RG toy.
+  `rgPredictionTheory` evaluates `RGObservableExpr` to `Nat`,
+  `rgBenchmarkTheory` adds a simple gain parameter,
+  and `rgBenchmarkMatch` scores the `rel#` and `irr#` observables with a small total equality-penalty mismatch.
+  `RGSummaryBundle` and `UnifiedToySummaryBundle` now expose this prediction/benchmark layer.
+- Closure-facing wiring follow-up: `DASHI/Physics/Closure/ToySummaryConsumer.agda` now imports the unified toy bundle
+  alongside `Canonical.LocalProgramBundle`, giving the toy theorem surfaces a non-`Toy/` consumer path without overstating their status.
+
+- Benchmark theorem follow-up: the RG line now connects the minimal prediction/data layer back to operator comparison.
+  `rgFused-flow-rel-benchmark-agree` lifts fused-vs-flow relevant-sector agreement to benchmark predictions on `rel#`,
+  `rgFused-stepPow-flow-rel-benchmark-agree` does the same for the nearby mixed schedule `stepPow ∘ rgFused` versus `rgFlow`,
+  and `rgFlow-irr-benchmark-step-monotone` gives a benchmark-facing monotonicity theorem on `irr#` across successive flow steps.
+  `RGSummaryBundle` and `UnifiedToySummaryBundle` now expose these benchmark-comparison results through a dedicated summary bundle.
+
+- Full-score/benchmark-surface follow-up: the RG benchmark line now goes beyond single-observable comparison.
+  `rgBenchmarkDataset` and `rgBenchmarkSelfMismatch-zero` make the current mismatch score usable as a theorem target,
+  and `rgFused-flow-recovered-benchmark-mismatch-zero` lifts fused-vs-flow comparison to the full current mismatch score in the recovered regime.
+  Separately, the RG line now has a raw-state schedule-sensitive benchmark surface via `rgRawQuotiented`,
+  `rgScheduledPredictionTheory`, and `rgScheduledBenchmarkTheory`, with `rgScheduled-rel-benchmark-stable`
+  and `rgScheduled-irr-benchmark-step-monotone` giving the first target-scale schedule theorems on that new surface.
+  `RGSummaryBundle` and `UnifiedToySummaryBundle` now expose both the recovered-score comparison and the schedule-sensitive benchmark package.
+
+- Mixed-schedule benchmark follow-up: the RG line now has a scale-aware mixed coarse/evolve schedule family.
+  `RGMixedSchedule` and `rgRunMixed` execute alternating evolve/coarse paths on raw pre-coarsened states,
+  `rgMixedBenchmarkTheory` and `rgMixedBenchmarkMatch` lift that to a theorem-bearing benchmark surface,
+  `rgMixed-rel-benchmark-stable` and `rgMixed-irr-benchmark-bounded` provide the first structural theorems there,
+  and `rgUniformMixed-one-is-fused` plus `rgUniformMixed-one-benchmark-agree` connect the new surface back to the existing fused operator.
+  `RGSummaryBundle` and `UnifiedToySummaryBundle` now expose this mixed scheduled benchmark layer.
+
+- Mixed-schedule comparison follow-up: the new RG mixed benchmark surface now goes beyond a uniform-one bridge to the fused operator.
+  `rgMixed-rel-benchmark-agree` compares any two mixed schedules on the relevant benchmark sector,
+  `rgMixed-recovered-same-class` and `rgMixed-recovered-observable-agree` give cross-schedule recovered collapse,
+  and `rgMixed-recovered-benchmark-mismatch-zero` lifts that to the full mixed benchmark mismatch score.
+  `RGMixedScheduledBenchmarkSummary` now exposes these comparison/recovered-collapse theorems to consumers.
+
+- Mixed-schedule tail follow-up: the RG mixed path layer now has canonical-vacuum persistence after recovery.
+  `rgMixed-step-tail-canonical` and `rgMixed-step-tail-canonical-observable` mirror the older fused/flow tail theorems on the mixed schedule surface,
+  so once a mixed coarse/evolve path lands in the recovered regime, all later target-scale evolution remains at the same canonical class/observable.
+  `RGMixedScheduledBenchmarkSummary` now exposes these tail theorems alongside the mixed comparison/recovered-collapse pack.
+
+- Mixed-schedule benchmark-tail follow-up: the RG mixed path layer now also collapses benchmark mismatch after later target-scale evolution.
+  `rgMixed-step-tail-benchmark-mismatch-zero` identifies the canonical-vacuum benchmark score as zero after any recovered mixed schedule is pushed forward by `stepPow`,
+  and `rgMixed-step-tail-cross-benchmark-mismatch-zero` does the same across two recovered mixed schedules after matching target-scale evolution.
+  `RGMixedScheduledBenchmarkSummary` now exposes these benchmark-tail theorems in the same package as the mixed class/observable tail facts.

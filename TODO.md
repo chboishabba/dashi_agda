@@ -909,6 +909,65 @@ precision.
 - Current landed closure widening: wave-observable-transport-geometry regime resolution now has theorem surfaces, a canonical consumer, and moonshine summary exports on the authoritative Stage C path.
 - Current landed closure widening: wave-observable-transport-geometry regime calibration now has theorem surfaces, a canonical consumer, and moonshine summary exports on the authoritative Stage C path.
 - Current landed closure widening: wave-observable-transport-geometry regime calibration now has theorem surfaces, a canonical consumer, and moonshine summary exports on the authoritative Stage C path.
+
+## Ultrametric FP formal layer follow-ups (2026-03-29)
+- [x] Replace `scalarStep` shrink with a real local relaxation while preserving refinement/recovery theorems.
+- [x] Add explicit symmetry action and equivariance proof for scalar tower; extend quotient beyond trivial identity action.
+- [x] Thread RG toy through `PhysicalTheory`/`Refinement`/`SymmetryQuotient`/`Observable` with a nontrivial contraction and observable.
+- [x] Draft gauge toy quotient + observable and check equivariance/defect descent against the new shell.
+- [x] Add changelog entry once the scalar relaxation upgrade lands.
+- [x] For each landed toy, instantiate local operator algebra/scaling/observable/quotient witnesses (no relying on global availability).
+- [x] Strengthen the scalar approximate-refinement witness from the current coarse boundary witness (`approxEq₀ = ⊤`) to the sharper “all but last coordinate” relation.
+- [ ] Push the same nontrivial quotient/witness pattern beyond scalar/RG/gauge to later toys.
+- [x] Add a CLOCK/DASHI phase bridge module on the safe schema:
+  `phase : S → HexTruth`, `coarse : HexTruth → TriTruth`, `coarse (phase (T² x)) = rotateTri (coarse (phase x))`,
+  with cone admissibility, contraction/Lyapunov descent, and MDL as the dynamic constraints.
+- [x] Instantiate `CLOCKPhaseBridge` on a concrete state space and prove the `phase-step²` witness, rather than leaving the bridge at the generic packaging level.
+- [ ] Add an effective coarse-grained dynamical instance showing how cone admissibility, descent, and possibly contraction arise on top of the periodic CLOCK kinematics without forcing a false strict-contraction claim for the raw cycle.
+- [x] Add a stroboscopic coarse CLOCK dynamics theorem on the concrete lagged clock instance, with `T²` descending to triadic coarse evolution.
+- [x] Strengthen the RG toy with explicit basin-label / irrelevant-size scaling theorems and observable-collapse lemmas.
+- [x] Push the CLOCK bridge beyond kinematics into an actual effective closure instance with admissibility and Lyapunov/descent witnesses on a nontrivial coarse sector.
+- [ ] Connect the new `EffectiveClockClosure` surface to a concrete admissibility/cone witness instead of the current generic stroboscopic closure packaging.
+- [x] Connect the new `EffectiveClockClosure` surface to a concrete admissibility/cone witness instead of the current generic stroboscopic closure packaging.
+- [x] Push CLOCK from cone preservation on `step²` to a tighter bridge between the effective cone package and the generic `PhasePhysicsBridge` surface.
+- [x] Decide whether the next CLOCK step should be a true `PhasePhysicsBridge` instance on an effective sector or a deliberately separate step²-only closure hierarchy.
+- [x] If CLOCK stays step²-based, add a clearer statement of how the stroboscopic sector substitutes for raw-step contraction in the wider closure story.
+- [x] If needed, package the new CLOCK normalization facts into a named “one-step entry to the stroboscopic sector” theorem family for higher-level closure modules.
+- [x] If desired, lift the CLOCK normalization/sector-entry package into whichever higher-level closure module will consume the step² bridge.
+- [x] Strengthen GaugeShell with recovered-class, observable-stability, and coarse-vacuum class lemmas.
+- [ ] Push GaugeShell from recovered/vacuum-class statements to a more explicit gauge-compatible scaling or coarse-step theorem pack.
+- [x] Push GaugeShell from recovered/vacuum-class statements to a more explicit gauge-compatible scaling or coarse-step theorem pack.
+- [x] Extend GaugeShell from one-step coarse monotonicity to iterated coarse-step or basin-level gauge-invariant scaling.
+- [x] Push GaugeShell from iterated monotonicity to a stronger canonical-basin or eventual-collapse statement.
+- [x] Extend GaugeShell from recovered-step canonical class to a sharper eventual-collapse bound or a more explicitly gauge-invariant basin theorem.
+- [x] If staying with the current toy operator, package the Gauge recovered-tail persistence/collapse lemmas into a named asymptotic bundle parallel to RG.
+- [x] If desired, add a named Gauge asymptotic bundle mirroring `rgAsymptotic`, rather than leaving the recovered-tail story as a flat lemma family.
+- [x] Strengthen RG with coarse-step approximation and coarse observable stability/monotonicity lemmas.
+- [ ] Extend RG from single-step coarse monotonicity to iterated scaling or basin-wise asymptotic statements.
+- [x] Extend RG from single-step coarse monotonicity to iterated scaling or basin-wise asymptotic statements.
+- [x] Push RG from iterated monotonicity to stronger asymptotic collapse/canonical-basin statements.
+- [x] Decide whether the next RG step should target an explicit canonical representative theorem or a more physical coarse-graining operator beyond the current toy asymptotic witness.
+- [x] Push RG from canonical recovered-step statements to a less toy coarse-graining operator or an actual eventual-collapse bound.
+- [x] If staying with the current toy operator, make the RG recovered-tail persistence/canonical-collapse story explicit as a named higher-level theorem bundle.
+- [x] If desired, expose the RG asymptotic and canonical-tail bundles through a higher-level summary module or closure consumer.
+- [x] If useful, add a single cross-toy consumer module that imports the new CLOCK/RG/Gauge summary bundles together.
+- [x] If staying with the current RG toy state, add a more explicit renormalization operator family on top of `coarsePow`/`stepPow` rather than relying only on flat coarse-step lemmas.
+- [x] Wire the packaged toy bundles into at least one closure-side consumer module outside `DASHI/Physics/Toy`.
+- [x] If desired, replace the current RG renormalization family with a genuinely richer coarse operator than “coarse then relax once”.
+- [x] Add schedule-level comparison theorems on the current RG flow family so longer target-scale evolution at fixed coarse depth is explicitly comparable, not just bounded by the initial state.
+- [x] Add a less-factorized fused RG operator in the current encoding, together with an immediate theorem pack, before attempting harder cross-depth comparisons again.
+- [x] Extend the fused RG operator with recovered-tail/canonical-collapse persistence so it matches the stronger flow-side regime persistence surface.
+- [x] Add a weak but useful fused-vs-flow comparison layer that avoids raw coarse-depth associativity while still comparing the new operator to the old one.
+- [x] Add a structural mixed-schedule comparison between `stepPow` after `rgFused` and nearby `rgFlow` schedules that stays within the current encoding and avoids coarse-depth associativity claims.
+- [x] Add a minimal prediction/benchmark-facing layer for the RG toy, with total `PredictionTheory`, `BenchmarkTheory′`, and a simple mismatch score.
+- [ ] If desired, strengthen the RG flow family beyond `coarsePow` plus `stepPow` into a less factorized operator that is not definitional composition of the existing pieces.
+- [ ] If desired, compare different coarse depths or mixed coarse/evolve schedules directly, rather than only fixed-`k` target-scale refinement.
+- [x] Add first benchmark-facing RG comparison theorems: fused-vs-flow agreement on `rel#` and stepwise monotonicity on `irr#`.
+- [x] Lift the RG benchmark comparison from single observables to the full current mismatch score in the recovered regime.
+- [x] Add a schedule-sensitive raw-state RG benchmark surface, with at least one relevance-stability theorem and one irrelevance-monotonicity theorem.
+- [ ] If desired, strengthen the RG benchmark layer beyond the current simple `rel#`/`irr#` penalty score into a richer observable or schedule-sensitive prediction surface.
+- [x] Extend the schedule-sensitive RG benchmark surface from target-scale step schedules to a scale-aware mixed coarse/evolve schedule family on raw pre-coarsened states.
+- [ ] Keep CLOCK formalization cyclic (`ℤ/6` / `HexTruth`) and avoid upgrading it to a dihedral / reversal-involution story unless that stronger relation is actually proved in-repo.
 Cleanup
 - [x] replace stale giant summary exports with ladder-based summary exports
 - [x] introduce short-path wrapper modules for closure wave-regime families
@@ -943,3 +1002,6 @@ Cleanup
  - Landed `Sustainability` rung across algebra, recovery, consumer, and moonshine grouped wave-regime ladders.
 - 2026-03-11: landed `Stewardship` rung across algebra/recovery/consumer/moonshine grouped wave-regime surfaces.
 - 2026-03-11: landed `Accountability` rung across algebra/recovery/consumer/moonshine grouped wave-regime surfaces.
+- [x] Strengthen the mixed RG schedule surface with direct mixed-schedule-vs-mixed-schedule relevant-sector comparison and recovered-score collapse theorems.
+- [x] Add mixed-schedule recovered-tail and canonical-vacuum theorems parallel to the existing fused/flow tail theorems.
+- [x] Add mixed-schedule benchmark-tail theorems that collapse the mixed mismatch score after further target-scale evolution, not just class/observable tails.

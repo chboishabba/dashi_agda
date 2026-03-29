@@ -111,6 +111,7 @@ import DASHI.Geometry.FiniteSpeed
 import DASHI.Geometry.FixedPointExistence_Projection
 import DASHI.Geometry.InnerProductFromParallelogram
 import DASHI.Geometry.Isotropy
+import DASHI.Geometry.UltrametricFP
 import DASHI.Geometry.Isotropy.Instance.ShiftTailPerm
 import DASHI.Geometry.LCP.Banach
 import DASHI.Geometry.LCP.Cauchy
@@ -212,6 +213,7 @@ import DASHI.Physics.ClosureBuilder
 import DASHI.Physics.Closure.CanonicalConstraintClosureStatus
 import DASHI.Physics.Closure.CanonicalConstraintClosureTheorem
 import DASHI.Physics.Closure.CanonicalConstraintClosureWitness
+import DASHI.Physics.Closure.ToySummaryConsumer
 import DASHI.Physics.Closure.CanonicalConstraintGaugePackage
 import DASHI.Physics.Closure.CanonicalContractionQuadraticSignatureBridgeTheorem
 import DASHI.Physics.Closure.CanonicalContractionToCliffordBridgeTheorem
@@ -733,6 +735,9 @@ import DASHI.Physics.RealOperatorStackShift
 import DASHI.Physics.RealTernaryCarrier
 import DASHI.Physics.RootSystemB4Carrier
 import DASHI.Physics.RootSystemB4WeylAction
+import DASHI.Physics.CLOCKPhaseBridge
+import DASHI.Physics.CLOCKPhaseInstance
+import DASHI.Physics.LocalWitness
 import DASHI.Physics.SeverityGuard.Core
 import DASHI.Physics.SeverityGuardedStrict
 import DASHI.Physics.SeverityGuardedStrictFine
@@ -777,6 +782,15 @@ import DASHI.Physics.TailCollapseMetricProof
 import DASHI.Physics.TailCollapseProof
 import DASHI.Physics.TernaryRealInstance
 import DASHI.Physics.TernaryRealInstanceShift
+import DASHI.Physics.CLOCKPhaseSummaryBundle
+import DASHI.Physics.Toy.GaugeShell
+import DASHI.Physics.Toy.GaugeSummaryBundle
+import DASHI.Physics.Toy.Recovery
+import DASHI.Physics.Toy.ScalarContinuum
+import DASHI.Physics.Toy.RGUniversality
+import DASHI.Physics.Toy.RGSummaryBundle
+import DASHI.Physics.Toy.ScalarHarmonic
+import DASHI.Physics.Toy.UnifiedToySummaryBundle
 import DASHI.Physics.TOperator
 import DASHI.Physics.UnificationClosure
 import DASHI.Physics.UnifiedClosure
