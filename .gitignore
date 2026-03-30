@@ -10,6 +10,7 @@ target/
 
 # Agda build artifacts
 *.agdai
+MAlonzo/
 artifacts/
 all_code*.txt
 result
