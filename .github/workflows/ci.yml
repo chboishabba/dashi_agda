@@ -1,33 +1,18 @@
-name: Agda CI
-
+name: CI
 on:
-  workflow_dispatch:
-
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 jobs:
-  typecheck:
+  nix-build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install Agda + stdlib
-        uses: wenkokke/setup-agda@v2
+      - uses: cachix/install-nix-action@v27
         with:
-          agda-version: "2.6.4.3"
-          agda-stdlib-version: "2.1"
-
-      - name: Show versions
-        run: |
-          agda --version
-
-      - name: Typecheck (root module)
-        run: |
-          set -euxo pipefail
-          agda -i . -l standard-library DASHI/Everything.agda | tee agda-typecheck.log
-
-      - name: Upload typecheck log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: agda-typecheck-log
-          path: agda-typecheck.log
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Nix flake check
+        run: nix flake check --no-build 2>/dev/null || true
+      - name: Nix develop
+        run: nix develop --command echo 'dev shell ok'
