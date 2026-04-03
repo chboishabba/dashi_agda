@@ -82,6 +82,35 @@ Current status:
   tied not only to the abstract bracket but also to the live transported RG
   and cone structure, so the nontrivial dynamics and nontrivial invariants are
   carried by the same theorem surface.
+- the contract surface itself is now also easier to consume directly:
+  `DASHI/Physics/Closure/ExecutionContractLaws.agda` packages readable
+  receipt fields for the five actual obligations already present in
+  `ExecutionContract.agda`:
+  arrow admissibility,
+  projected-delta cone admissibility,
+  MDL descent,
+  basin admissibility,
+  and eigen-overlap admissibility.
+  This makes the current execution seam explicit:
+  execution is judged on projected deltas and basin/eigen preservation, not on
+  global `Q(x)` descent and not on source-side `j-fixed` preservation.
+  The matching runtime-side enforcement surface is now
+  `scripts/execution_contract.py`.
+  The next formal closure move is now landed too:
+  `DASHI/Physics/Closure/Projection.agda` is the first-class projection
+  interface consumed by the contract,
+  `DASHI/Physics/Closure/Basin.agda` is the attractor-relative basin carrier
+  on the projected observable space,
+  `ExecutionContract.agda` now consumes those objects directly, and
+  `scripts/run_execution_contract_on_closure_csv.py` is the dedicated runtime
+  adapter for `closure_embedding_per_step.csv`.
+  `scripts/tail_boundary_batch.py` now also calls that runtime adapter per
+  batch so the existing closure-CSV aggregation path carries execution
+  receipts as well as tail-boundary summaries.
+  `scripts/regime_test.py` now also uses the same boundary for step
+  acceptance: `structural_ok` remains diagnostic, but `joint_ok` and
+  `status_class` are now driven by the execution contract clauses that the
+  harness actually computes.
 
 ## 2. Projection/Δ Compatibility
 
@@ -101,6 +130,11 @@ Promotion target:
 
 - state and prove an abstract projection/Δ compatibility theorem above the
   current shift-specific admissibility surface.
+- keep the execution contract phrased on projected deltas rather than letting
+  later runtime layers drift back to absolute-state quadratics.
+- keep the projection object explicit across the bridge: Agda now has a
+  dedicated projection interface, and the runtime runner should say exactly
+  which closure CSV columns instantiate it.
 
 Current status:
 
@@ -166,11 +200,27 @@ Real gap:
 
 - basin preservation is still too tied to the canonical shift basin and its
   coarse-head predicate.
+- basin is still not explicit enough as a reusable attractor-relative object
+  on the projected carrier shared by the abstract contract and runtime
+  receipts.
 
 Promotion target:
 
 - generalize basin preservation beyond the current canonical carrier/predicate
   so it can serve as a genuine theorem obligation, not only a local witness.
+- keep the execution contract consuming that same explicit basin object rather
+  than drifting back to free-form Booleans.
+
+Current status:
+
+- partially landed.
+- `DASHI/Physics/Closure/Basin.agda` now packages basin as an explicit
+  attractor-relative carrier on the projected observable space.
+- `ExecutionContract.agda` now consumes that object directly, so the contract
+  no longer treats basin only as an unconstrained free predicate.
+- the remaining gap is to instantiate that basin object with richer
+  realization-sensitive witnesses rather than only the abstract closure-side
+  interface.
 
 ## 5. Eigen/Hecke Compatibility
 
@@ -215,3 +265,17 @@ The best order is:
 
 That order matches the actual repo bottleneck: binding dynamics to invariants,
 not inventing new theorem families from scratch.
+
+## Current runtime reading
+
+The most useful current operational reading is now:
+
+- proposal channels may be rich, but truth still lives at admissibility;
+- admissibility means:
+  arrow monotone,
+  projected-delta cone compatible,
+  MDL non-increasing,
+  basin preserving,
+  eigen-overlap preserving;
+- runtime acceptance should therefore be checked on `Δx` after projection,
+  not on absolute-state quadratics and not on raw source-side fixed-point tags.

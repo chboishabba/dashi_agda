@@ -176,6 +176,14 @@ structural and dynamical questions separate.
   but still only one unique family (`ttbar_mtt_8tev_cms`).
   In both observed instances the family remains cone / Fejér / closest-point
   admissible, MDL-exact-failing, tail-localized, and terminal-boundary.
+  The same batch path now also attaches the projected-delta execution
+  contract summary per dataset, so the widened aggregate can be read against
+  arrow/cone/basin/MDL/eigen receipts rather than only the older family
+  classification surface.
+  The underlying `regime_test.py` step screen now matches that reading too:
+  the old ultrametric signature admissibility remains available as a
+  diagnostic, but the live acceptance boundary is the execution contract
+  rather than `structural_ok ∧ arrow_ok`.
   That same aggregate also now makes the controls explicit:
   repeated `pTll` families plus `dijet_chi_7tev_cms` and
   `hgg_pt_8tev_atlas` stay interior,

@@ -1,0 +1,87 @@
+module DASHI.Physics.Closure.ExecutionContractLaws where
+
+open import Agda.Primitive using (Level; lsuc; _⊔_)
+open import Data.Product using (_×_; _,_)
+
+open import DASHI.Physics.Closure.ExecutionContract as EC
+
+------------------------------------------------------------------------
+-- Readable receipt layer above the generic execution contract.
+--
+-- The base `ExecutionContract` already has the right abstract shape:
+-- arrow admissibility, cone admissibility on projected deltas, MDL descent,
+-- basin admissibility, and eigen-overlap admissibility.
+--
+-- This module does not change the contract. It packages the five obligations
+-- as a named receipt surface so downstream modules can talk about execution
+-- acceptance without unpacking a nested product by hand.
+
+record ExecutionContractReceipt
+  {ℓx ℓs ℓδ ℓπ ℓe : Level}
+  (C : EC.ExecutionContract {ℓx} {ℓs} {ℓδ} {ℓπ} {ℓe})
+  (x x' : EC.State C)
+  : Set (ℓx ⊔ ℓs ⊔ ℓδ ⊔ ℓπ ⊔ ℓe) where
+  field
+    arrowOK : EC.ArrowAdmissible C x x'
+    coneOK : EC.ConeAdmissible C x x'
+    mdlOK : EC.MDLAdmissible C x x'
+    basinOK : EC.BasinAdmissible C x x'
+    eigenOK : EC.EigenAdmissible C x x'
+
+open ExecutionContractReceipt public
+
+receipt→admissible :
+  {ℓx ℓs ℓδ ℓπ ℓe : Level}
+  {C : EC.ExecutionContract {ℓx} {ℓs} {ℓδ} {ℓπ} {ℓe}}
+  {x x' : EC.State C} →
+  ExecutionContractReceipt C x x' →
+  EC.AdmissibleStep C x x'
+receipt→admissible r =
+  arrowOK r
+  , coneOK r
+  , mdlOK r
+  , basinOK r
+  , eigenOK r
+
+admissible→receipt :
+  {ℓx ℓs ℓδ ℓπ ℓe : Level}
+  {C : EC.ExecutionContract {ℓx} {ℓs} {ℓδ} {ℓπ} {ℓe}}
+  {x x' : EC.State C} →
+  EC.AdmissibleStep C x x' →
+  ExecutionContractReceipt C x x'
+admissible→receipt (arrow-ok , cone-ok , mdl-ok , basin-ok , eigen-ok) =
+  record
+    { arrowOK = arrow-ok
+    ; coneOK = cone-ok
+    ; mdlOK = mdl-ok
+    ; basinOK = basin-ok
+    ; eigenOK = eigen-ok
+    }
+
+------------------------------------------------------------------------
+-- Phase split: proposal channels may be rich, but truth still lives at the
+-- admissibility layer. This is intentionally small and abstract.
+
+record ExecutionContractPhaseSplit
+  {ℓx ℓs ℓδ ℓπ ℓe ℓp : Level}
+  (C : EC.ExecutionContract {ℓx} {ℓs} {ℓδ} {ℓπ} {ℓe})
+  : Set (lsuc (ℓx ⊔ ℓs ⊔ ℓδ ⊔ ℓπ ⊔ ℓe ⊔ ℓp)) where
+  field
+    Proposal : Set ℓp
+    propose : EC.State C → Proposal
+    accepted-step-implies-admissible :
+      ∀ {x x'} →
+      ExecutionContractReceipt C x x' →
+      EC.AdmissibleStep C x x'
+
+open ExecutionContractPhaseSplit public
+
+canonicalPhaseSplit :
+  {ℓx ℓs ℓδ ℓπ ℓe : Level}
+  (C : EC.ExecutionContract {ℓx} {ℓs} {ℓδ} {ℓπ} {ℓe}) →
+  ExecutionContractPhaseSplit C
+canonicalPhaseSplit C = record
+  { Proposal = EC.State C
+  ; propose = λ x → x
+  ; accepted-step-implies-admissible = receipt→admissible
+  }

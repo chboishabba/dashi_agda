@@ -351,6 +351,10 @@ The strongest currently bridged canonical package is:
 This is the maximal currently proved closure-invariant observable package on
 the canonical carrier. It is the coarsest point at which the closure law and
 the schedule side are already identified by theorem, rather than by analogy.
+That boundary is now formalized in
+`DASHI/Physics/Closure/CanonicalClosureCoarseObservable.agda`, which packages
+the canonical projection, schedule-side factorization, and widened-bridge
+obstruction wrappers into one reusable module.
 
 ### 2. Fibre/defect structure over that quotient
 
@@ -367,6 +371,201 @@ coarse closure classes. So they should currently be read as fibre, gauge, or
 defect data over the quotient `Gauge × basinLabel × motifClass`, not as base
 closure observables.
 
+The intended next formalization is now explicit:
+
+- let `π` denote the projection from the closure carrier to the coarse package
+  `Gauge × basinLabel × motifClass`;
+- for each coarse class `q`, define the closure fibre
+  `π⁻¹(q) = { x | π x = q }`;
+- repackage `mdlLevel`, `eigenShadow`, raw `eigenSummary`, and raw
+  `heckeSignature` as fields on that fibre rather than as failed base
+  observables.
+
+On that reading, the current obstructions on `CP` are not saying the data is
+spurious. They are saying the data belongs above the coarse quotient as
+internal structure.
+
+That interpretation is now partly implemented rather than only planned:
+
+- `DASHI/Physics/Closure/CanonicalClosureFibre.agda` defines the thin
+  canonical closure fibre over the coarse package
+  `Gauge × basinLabel × motifClass`;
+- `DASHI/Physics/Closure/CanonicalClosureFibreFields.agda` re-exposes the
+  non-descending channels as fibre-indexed fields on that carrier;
+- the first fibre-law theorem on that surface is modest but real:
+  the transported Hecke-side illegal/forced-stable counts are constant on
+  exact pair chambers of fibre representatives.
+- `DASHI/Physics/Closure/CanonicalClosureFibreDefectFactorization.agda`
+  upgrades that one notch by landing explicit defect-profile, histogram, and
+  orbit-summary carriers on the same fibres, together with the first honest
+  bridge into those richer carriers:
+  illegal chamber entries force stable/zero-drift defect profiles, and the
+  forced-stable count field is bounded above by the orbit-summary stable count
+  field.
+- `DASHI/Physics/Closure/CanonicalClosureFibreEigenShadowObstruction.agda`
+  then proves that `eigenShadow` is genuine fibre data on the canonical side:
+  `CR` and `CP` lie over the same coarse class
+  `Gauge × basinLabel × motifClass`, but their `eigenShadowField` values
+  differ.
+- `DASHI/Physics/Closure/CanonicalClosureFibreOrbitSummaryControl.agda`
+  then shows that this same-fibre `eigenShadow` variation is not invisible to
+  the richer defect layer: the orbit-summary family already distinguishes the
+  `CR`/`CP` pair, and the single `p2` orbit-summary coordinate already
+  separates them. That result has now been strengthened once more on the
+  canonical carrier: equality of the `p2` orbit-summary coordinate is already
+  enough to force equality of `eigenShadowField` on the coarse fibre, so `p2`
+  is no longer only a witness separator there. The same control is now also
+  packaged as an explicit factor-law surface in that module, and the same
+  `p2` coordinate now controls `heckeField` on the canonical coarse fibre as
+  well.
+
+The broader replay also started in
+`DASHI/Physics/Closure/ShiftContractObservableTransportPrimeCompatibilityProfileInstance.agda`.
+That module lifts the observable-transport plus prime-compatibility stack onto
+full `ShiftContractState`, preserving the current honesty boundary while
+showing that the witness-level bridge surface is not confined to the tiny
+three-state canonical carrier.
+
+The coarse package has now been replayed on that same broader carrier in
+`DASHI/Physics/Closure/ShiftContractCoarseObservable.agda`, which packages the
+noncanonical projection to `Gauge × basinLabel × motifClass` and factors it
+through both the observable-transport witness and the bundle observable
+surface.
+
+The broader carrier now also has the first matching fibre layer:
+`DASHI/Physics/Closure/ShiftContractCoarseFibre.agda` exposes the thin fibre
+over that noncanonical coarse package, and
+`DASHI/Physics/Closure/ShiftContractCoarseFibreFields.agda` lifts the same
+kind of Hecke/eigen/prime/count fields onto it. So the remaining gap is no
+longer the lack of a broader carrier-side fibre surface; it is the lack of a
+theorem-bearing noncanonical control law parallel to the canonical `p2`
+surface.
+
+That noncanonical control gap is now sharper on the negative side too.
+`DASHI/Physics/Closure/ShiftContractNoncanonicalP2ControlObstruction.agda`
+shows that the current broader coarse package is itself too weak for a
+canonical-style `p2` factor/control law: two explicit `ShiftContractState`
+points share the same coarse observable while already splitting at the
+transported prime image. So any future noncanonical control surface has to
+strengthen the invariant package rather than merely replay the canonical
+recipe.
+
+The cheapest such strengthening is now explicit.
+`DASHI/Physics/Closure/ShiftContractMdlLevelCoarseObservable.agda`
+and `DASHI/Physics/Closure/ShiftContractMdlLevelCoarseFibre.agda` now package
+`mdlLevel × (Gauge × basinLabel × motifClass)` as the first normalized
+noncanonical strengthening above the old coarse quotient, and the current
+counterexample pair is already separated there. The corresponding narrow
+control-shape is now explicit in
+`DASHI/Physics/Closure/ShiftContractNoncanonicalMdlP2Control.agda`, while
+`DASHI/Physics/Closure/ShiftContractMdlLevelCoarseFibreFields.agda` now gives
+that stronger surface its own Hecke/eigen/prime/count/orbit-summary fibre
+layer. `DASHI/Physics/Closure/ShiftContractMdlLevelP2ControlAttempt.agda`
+packages the first positive theorem there, namely that equality of the
+normalized package already determines both the `mdlLevel` coordinate and the
+old coarse observable. `DASHI/Physics/Closure/ShiftContractMdlLevelCounterexampleAudit.agda`
+records that the original coarse obstruction pair is no longer the active
+blocker on this surface. A second normalized package using
+`eigenShadow` is now packaged in both
+`DASHI/Physics/Closure/ShiftContractEigenShadowNormalizedPackage.agda` and
+`DASHI/Physics/Closure/ShiftContractEigenShadowP2ControlCandidate.agda`, while
+`DASHI/Physics/Closure/ShiftContractRGObservableProjection.agda` packages the
+full shift-side observable projection as an upper-bound surface. So the next
+bundle-side noncanonical control attempt should begin with the formalized
+`mdlLevel` augmentation, not with the old coarse quotient, and should search
+for the new witness or control law beyond that retired coarse counterexample.
+`DASHI/Physics/Closure/ShiftContractMdlLevelOrbitSummaryControlAttempt.agda`
+now records the first normalized intermediate theorem there as well:
+prime equality on the mdl-level fibre already forces equality of the `p2`
+orbit-summary coordinate, even though package equality alone still does not
+reach that control surface. `DASHI/Physics/Closure/ShiftContractMdlLevelP2PrimeBridge.agda`
+now packages the immediate summary-level corollaries too:
+all orbit-summary coordinates now descend along that prime-to-`p2`
+bridge, including `forcedStableCount`, `motifChangeCount`,
+`totalDrift`, `repatterningCount`, `contractiveCount`, and
+`expansiveCount`. `DASHI/Physics/Closure/ShiftContractMdlLevelPrimeImageSubfamilyAttempt.agda`
+also gives the first honest prime-image control theorem on a tiny singleton
+subfamily. `DASHI/Physics/Closure/ShiftContractMdlLevelPrimeImageSubfamilyRefinement.agda`
+now wraps the same explicit witness set into a two-point family where the
+same-state cases remain stable and the mixed case is already rejected by
+`π-mdl-max`. `DASHI/Physics/Closure/ShiftContractMdlLevelWitnessSearchAudit.agda`
+now packages the bounded same-carrier search state explicitly: among the
+current in-repo `ShiftContractState` witnesses, no fresh
+equal-`π-mdl-max` / unequal-prime-image pair has yet been recovered beyond
+that singleton boundary. `DASHI/Physics/Closure/ShiftContractMdlLevelWitnessSourceAudit.agda`
+now records the same exhaustion at the witness-source level, and
+`DASHI/Physics/Closure/ShiftContractMdlLevelExplicitStateSearchAudit.agda`
+closes the obvious direct explicit-state pool on `ShiftContractState`
+itself only as a pairwise search boundary. `ShiftContractTriadicFamily.agda`
+now packages the three one-hot states as a same-carrier triadic family with
+constant `π-mdl-max` and pairwise distinct transported prime images.
+`ShiftContractAnchoredTriadicFamily.agda` now shows the same seam survives a
+broader-support cyclic family too: keep the coarse head fixed at `pos` and
+rotate a second active tail coordinate. The direct neg/pos tail candidates
+still remain checked without yielding a fresh equal-`π-mdl-max` /
+unequal-prime-image witness.
+`DASHI/Physics/Closure/ShiftContractMdlLevelChi2WitnessAudit.agda`
+records that the current chi2 witness pool does not live on the right carrier
+to test this seam directly. The fallback `eigenShadow × π-max` branch is now
+also sharper: `ShiftContractEigenShadowOrbitSummaryObstruction.agda` shows
+that even that stronger normalized surface still does not determine the
+canonical `p2` orbit-summary key, and
+`ShiftContractEigenShadowOrbitSummaryControlAttempt.agda` packages the same
+fact as a direct no-go control schema.
+
+So the remaining gap is no longer "define the fibre surface at all". It is to
+lift the new canonical fibre-control story beyond the tiny three-state carrier
+and show that richer Hecke/eigen variation on broader carriers factors through
+or is controlled by the already-landed defect-profile or histogram layers.
+
+The latest noncanonical audits sharpen that one step further. On the current
+`ShiftContractState` seam, the problem is no longer best described as another
+observable-widening task. The repo has already eliminated:
+
+- the obvious local explicit states;
+- recombinations of the currently known witness sources;
+- and the nearest representation-level fallback
+  `eigenShadow × π-max` at the canonical `p2` orbit-summary seam.
+
+So the remaining bundle-side task is still a generator problem, but it is one
+rung further along than before: the first same-carrier triadic family is
+already landed, and now a second broader-support triadic family is landed as
+well. `ShiftContractDenseTriadicFamily.agda` now extends that explicit cyclic
+surface again to support width three. `ShiftContractAnchoredTrajectoryFamily.agda`
+now also lands the first
+live-step family on that seam: the anchored support-width-two source yields a
+three-state same-fibre trajectory prefix before collapsing out to the one-hot
+fixed point. `ShiftContractTailPatternTrajectoryObstruction.agda` now closes
+the obvious negative trajectory branch beside it: the direct neg/pos tail-sign
+seeds leave the same fibre immediately.
+`ShiftContractSupportCascadeTrajectory.agda` now adds the first mixed-scale
+trajectory too: a dense seed takes one same-fibre width-three step and then
+exits through the anchored and one-hot fibres. The next task is therefore to
+construct a genuinely new family beyond the current explicit
+cyclic/trajectory families and first mixed-scale cascade, and test that
+family against the fixed `π-mdl-max` versus prime-image boundary.
+`ShiftContractParametricTriadicFamily.agda` now packages the positive cyclic
+branch itself as one normalized width-indexed surface, and
+`ShiftContractFullSupportTrajectory.agda` adds a distinct full-support seed
+whose live trajectory cascades 4 -> 3 -> 2 -> 1.
+
+The current audits also give bundle-facing design constraints for that family:
+
+- preserve the normalized coarse package exactly;
+- vary only in directions hidden from `π-mdl-max` but still visible to the
+  transported prime image;
+- avoid pure pair-generated or reflective constructions;
+- direct tail-only probes are still weak, but support widths one, two, and
+  three are now all known positive sources when arranged cyclically, while
+  the direct neg/pos tail-sign seeds are now a known negative live-step
+  branch;
+- prefer cyclic or triadic structure over two-point symmetry.
+
+So the next bundle-side search should not start from arbitrary explicit states.
+It should start from a family generator whose moves are already constrained by
+the kernel of the coarse package and then tested against prime-image
+separation.
+
 ### 3. Representation scaffolding
 
 Some objects remain construction or diagnostic surfaces rather than physical
@@ -379,3 +578,10 @@ observables:
 
 These are still useful, but they are not yet part of the maximal physical
 quotient unless a later theorem promotes them.
+
+The same distinction should guide future bundle work:
+
+- descending observables belong on the base closure quotient;
+- non-descending but lawful observables belong on fibres over that quotient;
+- proof gadgets remain scaffolding until a descent or fibre-law theorem
+  promotes them.

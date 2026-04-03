@@ -2,6 +2,378 @@
 
 ## 2026-04-02
 
+- Noncanonical closure-control reframing after the latest audits:
+  the active gap is no longer "find a stronger theorem on the current obvious
+  state pool". It is now a same-carrier source-generation problem on
+  `ShiftContractState`.
+- That boundary has now moved one rung:
+  `DASHI/Physics/Closure/ShiftContractTriadicFamily.agda` packages the first
+  genuine same-carrier family on that seam. The three one-hot states form a
+  triadic family with constant `π-mdl-max` and pairwise distinct transported
+  prime images. `DASHI/Physics/Closure/ShiftContractAnchoredTriadicFamily.agda`
+  now lands the next rung up: a support-width-two triadic family with the
+  coarse head fixed and a rotating active tail coordinate, again with constant
+  `π-mdl-max` and pairwise distinct transported prime images.
+  `DASHI/Physics/Closure/ShiftContractAnchoredTrajectoryFamily.agda` now
+  converts that second static family into the first live-step trajectory on
+  this seam: the first three states stay inside one `π-mdl-max` fibre and
+  keep pairwise distinct transported prime images, and the next live step
+  exits the fibre by collapsing to the one-hot fixed point.
+  `DASHI/Physics/Closure/ShiftContractDenseTriadicFamily.agda` now pushes the
+  explicit cyclic story one rung further again: support width three also
+  admits a same-carrier triadic family with constant `π-mdl-max` and pairwise
+  distinct transported prime images.
+  `DASHI/Physics/Closure/ShiftContractSupportCascadeTrajectory.agda` now lands
+  the first mixed-scale live trajectory on the seam: a dense seed gives one
+  same-fibre width-three step, then exits through the anchored and one-hot
+  fibres as the live dynamics contracts support width from 3 to 2 to 1.
+  `DASHI/Physics/Closure/ShiftContractParametricTriadicFamily.agda` now
+  packages the positive explicit cyclic branch itself as one normalized
+  width-parameterized surface.
+  `DASHI/Physics/Closure/ShiftContractStateFamily.agda` now adds the matching
+  normalized family-spec surface on the live `ShiftContractState` carrier:
+  generic same-carrier family, cyclic-3 specialization, and canonical cyclic
+  instances at support widths 1, 2, and 3.
+  `DASHI/Physics/Closure/ShiftContractTriadic3CycleInstance.agda` now lands
+  the first concrete balanced tail cycle on that same carrier: keep the head
+  fixed at `pos`, rotate the tail block `(pos , zer , neg)` cyclically, and
+  the resulting three states still stay in one `π-mdl-max` fibre while
+  splitting pairwise at the transported prime image.
+  `DASHI/Physics/Closure/ShiftContractBalancedComposedFamily.agda` now folds
+  that balanced cycle into the composed-generator lane as well: the same
+  three states are recovered from `fullSupport` by varying a cut mask and a
+  neg-restore mask, so the balanced witness is no longer only an explicit
+  cycle but also a theorem-bearing compositional generator.
+  `DASHI/Physics/Closure/ShiftContractParametricTrajectoryCompositionFamily.agda`
+  now packages the successful 3-state prefixes from the live carrier into one
+  generator-class surface:
+  explicit cyclic, concrete balanced cycle, dense composed, balanced
+  composed, and anchored trajectory.
+  `DASHI/Physics/Closure/ShiftContractGeneratorFourthStepBoundary.agda` now
+  adds the first reusable live fourth-step classifier above that surface:
+  the anchored trajectory and explicit width-two branches are explicitly
+  marked as exiting the `π-mdl-max` fibre at the fourth step, the balanced
+  explicit/composed cycles are marked as exiting to the anchored branch, and
+  the explicit width-three and dense composed branches are marked as staying
+  inside the same `π-mdl-max` fibre for one more live step.
+  `DASHI/Physics/Closure/ShiftContractMixedScaleTrajectoryFamily.agda` now
+  packages the mixed-scale branch into one reusable generator-class surface:
+  the dense support cascade is the canonical “stay then exit” family, while
+  the full-support cascade is the canonical “exit immediately, then keep
+  descending” family.
+  `DASHI/Physics/Closure/ShiftContractGeneratorTaxonomy.agda` now connects
+  those normalized surfaces into one higher-level taxonomy: same-fibre prefix
+  classes stay visible as generator classes with explicit fourth-step shape
+  labels, while the mixed-scale branch is exposed through its own normalized
+  family classes on the same carrier.
+  `DASHI/Physics/Closure/ShiftContractCollapseTime.agda` now turns that
+  taxonomy into a coarse collapse-time observable:
+  `immediateExit`, `exitToAnchored`, or `staysOneMoreStep`.
+  `Ontology/Hecke/DefectOrbitCollapseBridge.agda` now adds the first honest
+  Hecke-side bridge from that observable: each generator class gets a
+  representative live state, and the existing
+  `illegalCount <= forcedStableCount_orbit` ladder at `p2` is re-exported on
+  those representatives. This is intentionally weaker than a full persistence
+  dictionary; it is a lower-bound bridge, not a quotient theorem.
+  `Ontology/Hecke/DefectOrbitCollapsePressure.agda` now packages the next
+  coarse Hecke-side layer above that bridge: collapse class is turned into a
+  three-tier pressure classification together with a representative `p2`
+  summary carrying the existing orbit lower bound. And
+  `Ontology/Hecke/DefectProfileCollapseFactorization.agda` now lands the
+  first explicit factorization scaffold: on the current generator classes,
+  collapse time factors through that coarse defect-pressure summary. This is
+  still not a Hecke-determined defect-profile quotient theorem; it is the
+  smallest honest factorization surface above the representative-state bridge.
+  `Ontology/Hecke/StaysOneMoreStepRepresentativeComputations.agda` now
+  evaluates the current `staysOneMoreStep` branch explicitly: each certified
+  stay-class now has a chosen representative state, transported prime image,
+  `p2` orbit summary, and inherited low-pressure tier. And
+  `Ontology/Hecke/DefectOrbitPressureOrder.agda` now packages the first real
+  monotonicity law above that layer: `staysOneMoreStep ≤ exitToAnchored ≤ immediateExit`
+  as an ordered pressure theorem on the current coarse pressure classes.
+  The next theorem layer is now assumption-guarded rather than only
+  aspirational:
+  `Ontology/Hecke/DefectOrbitPressureOrder.agda` now also exposes explicit
+  success predicates for numeric orbit-pressure bounds, and
+  `Ontology/Hecke/DefectProfileCollapseFactorization.agda` now exposes the
+  corresponding guarded summary-factorization predicates for a future
+  Hecke-determined defect-summary quotient. The immediate-exit side is now
+  explicit too in
+  `Ontology/Hecke/ImmediateExitRepresentativeComputations.agda`, so both the
+  stay and immediate branches have named representative-state `p2`
+  computation surfaces. The `exitToAnchored` side is now explicit as well in
+  `Ontology/Hecke/ExitToAnchoredRepresentativeComputations.agda`. On the
+  current classified prefix branch, the exact `p2` counts are now partly
+  normalized:
+  all current `immediateExit` and `exitToAnchored` representatives have
+  `illegalCountP2 = 15` and `forcedStableCountOrbitP2 = 15`,
+  while the current `staysOneMoreStep` representatives split as
+  `explicitWidth1 ↦ 2` and
+  `explicitWidth3, denseComposed ↦ 15`.
+  `Ontology/Hecke/StaysVsImmediateRepresentativeOrder.agda` now turns those
+  exact count theorems into the first discharged numeric witness layer on the
+  current certified classes: every current stay representative is proved
+  `≤` every current immediate-exit representative at `p2`, every current
+  `exitToAnchored` representative is proved `≤` every current immediate-exit
+  representative at `p2`, and the guarded orbit-pressure predicates from
+  `Ontology/Hecke/DefectOrbitPressureOrder.agda` are concretely discharged on
+  those certified sets.
+  `Ontology/Hecke/CertifiedRepresentativePersistence.agda` now adds the
+  first genuinely collapse-free numeric quotient on that same certified
+  representative set: the exact Hecke-side `forcedStableCountOrbitP2` count
+  determines a small persistence tier, with `explicitWidth1` landing in the
+  reduced tier and all current anchored/immediate plus the other current stay
+  representatives landing in the saturated tier. The current factorization
+  module is now wired to record that exact representative-level quotient:
+  `Ontology/Hecke/DefectProfileCollapseFactorization.agda` exposes a
+  certified representative orbit-count factorization through that
+  Hecke-determined count band.
+  `Ontology/Hecke/CertifiedRepresentativeOrbitSummaryPersistence.agda` now
+  lifts that same certified quotient one rung further through the full
+  Hecke-side `DefectOrbitSummary` itself: on the current certified set, the
+  persistence tier factors through the summary's `forcedStableCount` field,
+  not only through the separately named extracted count surface.
+  `Ontology/Hecke/DefectPersistenceRefinement.agda` now adds the next honest
+  refinement above collapse time on that same certified set:
+  collapse time alone does not determine the Hecke-side pressure count, but
+  collapse time plus one Hecke-derived persistence bit does. Concretely,
+  `explicitWidth1` is now isolated as `lowStay`, while
+  `explicitWidth3` and `denseComposed` are `highStay`, and all current
+  anchored/immediate certified representatives remain `nonStay`. That
+  refinement is theorem-bearing through the full `DefectOrbitSummary` via the
+  already-landed persistence-tier factorization, so the current certified
+  law is now:
+  exact `p2` orbit pressure = function of `(collapseTime, stayRefinement)`.
+  `Ontology/Hecke/SupportCascadePersistence.agda` now pushes that story one
+  step beyond the original certified finite quotient: the mixed-scale
+  `supportCascade` class also lands in `staysOneMoreStep`, and its exact
+  `p2` orbit-summary `forcedStableCount` is already `15`, so the saturated
+  persistence side extends at least to that additional live mixed-scale stay
+  class. On the opposite seam,
+  `Ontology/Hecke/CertifiedSaturatedForcedStableCollapse.agda` now packages
+  the matching negative fact: every current saturated certified
+  representative already has `forcedStableCount = 15`, so the present
+  orbit-summary factorization through that field cannot split the saturated
+  side any further.
+  `Ontology/Hecke/CurrentGeneratorPersistenceRefinement.agda` now lifts the
+  positive side of that law to the full current generator taxonomy:
+  every currently landed generator class now has an explicit refinement and
+  exact current `p2` orbit-pressure value, with `supportCascade` joining the
+  saturated-stay branch. And
+  `Ontology/Hecke/CurrentSaturatedForcedStableCollapse.agda` lifts the
+  matching negative theorem to the same scope:
+  every currently saturated generator class
+  (`explicitWidth3`, `denseComposed`, `balancedCycle`,
+  `balancedComposed`, `explicitWidth2`, `anchoredTrajectory`,
+  `supportCascade`, `fullSupportCascade`)
+  already has summary-field `forcedStableCount = 15`, so the current
+  `forcedStableCount`-based summary cannot distinguish any of them.
+  `Ontology/Hecke/CurrentSaturatedOrbitSummaryCollapse.agda` now strengthens
+  that negative boundary again: on the full current saturated generator set,
+  the whole current `DefectOrbitSummary` at `p2` already collapses to the
+  same fully stable summary
+  `(forcedStableCount = 15, motifChangeCount = 0, totalDrift = 0,
+    repatterningCount = 0, contractiveCount = 0, expansiveCount = 0)`.
+  So the next Hecke-side splitter cannot be "the current orbit summary, but
+  looked at more carefully". It must be a richer summary/package than the
+  currently landed `DefectOrbitSummary`, or a genuinely new generator class
+  outside the current taxonomy. The current best reading is that `3` is the
+  generative radix of the recursive ternary construction, while `15` is only
+  an emergent saturated `p2` summary value on the fibre side. A structural
+  decomposition such as `15 = 9 + 6` is now a plausible next hypothesis, but
+  not a landed theorem. A factorization such as `15 = 3 × 5` is now at least
+  as plausible on the current recursive ternary reading: `3` as triadic
+  sector count, `5` as symmetry-reduced local class count. Three
+  implementation surfaces now exist for that next step:
+  `Ontology/Hecke/DefectOrbitSummaryRefinement.agda` packages the smallest
+  histogram-style refinement above the current orbit summary,
+  `Ontology/Hecke/ForcedStableCountDecomposition.agda` packages a candidate
+  additive `9 + 6` decomposition together with a multiplicative `3 × 5`
+  factorization on the current saturated branch, and
+  `Ontology/Hecke/TriadIndexedDefectOrbitSummaryRefinement.agda` packages the
+  next candidate refinement one notch above the flat histogram as a
+  triad-indexed `3 × 5` surface. The next fixed-domain target is now also
+  explicit in
+  `Ontology/Hecke/CurrentSaturatedTriadHistogramSeparation.agda`:
+  keep the domain frozen to the current saturated generator taxonomy and ask
+  whether the triad-indexed histogram separates any of those classes at all.
+  The same fixed domain is now packaged one step more concretely in
+  `Ontology/Hecke/CurrentSaturatedSectorHistogramComputations.agda`:
+  the current saturated classes now carry named three-sector histogram
+  packages and the next theorem targets are phrased directly on those
+  packaged computations rather than only as abstract existential separator
+  surfaces. The current status split is now also packaged explicitly in
+  `Ontology/Hecke/SaturatedInvariantRefinementStatus.agda`:
+  Layer 1 is closed on the current taxonomy
+  (`generator -> collapse class -> stay refinement -> exact p2 pressure`),
+  while Layer 2 remains open and fixed-domain
+  (`current saturated branch -> next separating invariant`).
+  That is now the clean repo-wide status line as well:
+  progress is substantial but not total. The current coarse
+  classification-and-measurement problem is solved on the present generator
+  universe, and the only live mathematical bottleneck is the next invariant
+  `I₂` that would split the saturated branch. Until that invariant is
+  discharged, the repo should be treated as "Layer 1 closed / Layer 2 open"
+  rather than as a completed whole-system theory.
+  The next proof order is now fixed more tightly as well:
+  stay on the current saturated generator set, compare ordered triad-indexed
+  sector histograms sector-by-sector before any whole-package comparison, and
+  try the most asymmetric current pairs first. The initial predicted pair
+  targets are now
+  `balancedCycle` vs `supportCascade`,
+  `balancedComposed` vs `supportCascade`, and
+  `denseComposed` vs `fullSupportCascade`, all packaged directly in
+  `Ontology/Hecke/CurrentSaturatedPredictedPairComparisons.agda`.
+  The next fallback is now encoded too:
+  if those triad-histogram comparisons collapse, the next smallest fixed-domain
+  refinement is sector-correlation rather than another count total. That lane
+  is now packaged in
+  `Ontology/Hecke/TriadSectorCorrelationRefinement.agda`, and the same three
+  predicted pairs now carry correlation comparison targets in
+  `Ontology/Hecke/CurrentSaturatedPredictedPairComparisons.agda`.
+  The next helper surface is now also landed in
+  `Ontology/Hecke/Layer2FiniteSearch.agda`:
+  a thin packaging of the current Layer 2 speedrun as
+  `sector -> package -> correlation`
+  on the fixed three-pair order. This does not add a new invariant. It keeps
+  the open seam in a bounded proposal/search shape, closer to the sibling
+  `../agda` proposal/replay/promote pattern, without reopening the whole
+  taxonomy or reclassifying the problem.
+  The repo now also carries the truly compile-thin shell
+  `Ontology/Hecke/Layer2FiniteSearchShell.agda`,
+  which postulates those same targets instead of importing the heavy
+  histogram chain. That shell is the safe interactive check for the Layer 2
+  control order itself; the heavier `Layer2FiniteSearch.agda` remains only a
+  logical thin wrapper and is still transitively expensive.
+  The control plane is now executable too:
+  `scripts/generate_layer2_long_compute_queue.py`
+  emits the current Layer 2 queue in two explicit batches:
+  a compile-thin shell batch centered on
+  `Ontology/Hecke/Layer2FiniteSearchShell.agda`,
+  and a separate offline-heavy replay batch for the three predicted pairs
+  in
+  `sector -> package -> correlation`
+  order, again with optional `agda --parallel` command templates.
+  It can now also materialize those batches as files:
+  `shell.{txt,json}`,
+  `offline-heavy.{txt,json}`,
+  plus grouped offline-heavy artifacts by pair and by stage for easier
+  offline handoff.
+  The artifact directory is now self-indexing too:
+  `index.{txt,json}` summarizes the shell batch, the full offline-heavy
+  batch, and the grouped pair/stage sub-artifacts from one place.
+  The next control-plane helper is now also landed:
+  `scripts/render_layer2_batch_commands.py`,
+  which consumes one emitted batch JSON artifact and turns it into either
+  plain command lines or a runnable bash script.
+  It also supports a small dedup mode, so repeated identical `agda`
+  invocations can collapse to a unique offline command list when that is the
+  more useful handoff artifact.
+  That script is intentionally queue-only: it externalizes the bounded
+  shell-first / replay-later order without touching the heavy proof modules.
+  Those modules should currently be treated as long-compute items rather than
+  interactive validation targets: they exist as implementation surfaces, but
+  their Agda checks should not be re-run in-session until they are moved onto
+  the long-compute lane.
+  Archived context was also re-resolved from the canonical local archive on
+  2026-04-03:
+  title `Dashi and Physics Insights`,
+  online UUID `69ca43a9-09fc-839b-8cc3-e5ce3868eef5`,
+  canonical thread ID `ad17536d8eeb320106585654a0950424abafa93b`,
+  source `db`.
+  The main recovered decision from that thread was the earlier
+  `Forced-Stable Transfer Bridge` priority
+  (`illegalCount_chamber <= forcedStableCount_hist <= forcedStableCount_orbit`)
+  as the best bridge-closing move at that stage.
+  The repo has now advanced beyond that exact boundary: the current open seam
+  is not "which bridge theorem first?" but the tighter Layer 2 question of
+  whether the fixed-domain triad-indexed refinement splits the saturated
+  branch.
+  On the physics-side execution lane, the repo boundary is now also sharper:
+  the abstract execution contract was already present in
+  `DASHI/Physics/Closure/ExecutionContract.agda`, but the live repo reading is
+  now recorded more explicitly as:
+  arrow monotonicity, projected-delta cone compatibility, MDL non-increase,
+  basin preservation, and eigen-overlap preservation.
+  This is a delta-step contract, not a global `Q(x)` descent claim and not a
+  `j-fixed(source) => j-fixed(trace)` claim.
+  `DASHI/Physics/Closure/ExecutionContractLaws.agda` now adds the readable
+  receipt/law layer above that contract, and `scripts/execution_contract.py`
+  now adds the matching Python projected-delta enforcement surface for
+  `closure_embedding_per_step.csv`-style traces.
+  The closure-side projection/basin seam is now explicit too:
+  `DASHI/Physics/Closure/Projection.agda` carries the projection carrier,
+  source/state delta carriers, and projected-delta compatibility;
+  `DASHI/Physics/Closure/Basin.agda` carries the attractor-relative basin
+  object on the projected carrier; and `ExecutionContract.agda` now consumes
+  those objects directly rather than leaving projection and basin only as
+  free predicates.
+  The runtime mirror of that move is
+  `scripts/run_execution_contract_on_closure_csv.py`, which wires the
+  reusable projected-delta enforcer onto `closure_embedding_per_step.csv`
+  inputs directly.
+  That wiring is no longer isolated either:
+  `scripts/tail_boundary_batch.py` now runs the same closure-CSV execution
+  contract for each compatible batch and records per-dataset receipt summaries
+  alongside the existing tail-boundary family aggregation.
+  The older `scripts/regime_test.py` harness no longer treats the legacy
+  ultrametric signature screen as the execution acceptance boundary either:
+  `structural_ok` is retained as a diagnostic field, but `joint_ok` and
+  `status_class` now track the actual execution contract surface
+  `(cone ∧ mdl ∧ basin ∧ eigen) ∧ arrow`.
+  The last prefix-side hole is now closed: `explicitWidth1` is no longer
+  `boundaryUnknown`, because the one-hot third state steps to another one-hot
+  state while staying in the same `π-mdl-max` fibre for one more live step.
+  `DASHI/Physics/Closure/ShiftContractComposedFamily.agda` now adds the first
+  genuinely compositional generator on that same carrier: a ternary
+  interaction rule combining a shared base state, a varying cut mask, and a
+  shared restore mask. On the current seam that rule recovers the dense
+  width-three cyclic branch exactly, so the generator search has now crossed
+  from “families of hand-written states” to “ways to build states from other
+  states”. And
+  `DASHI/Physics/Closure/ShiftContractFullSupportTrajectory.agda` now adds a
+  distinct full-support seed whose live trajectory cascades 4 -> 3 -> 2 -> 1.
+- What has been explicitly eliminated on that seam:
+  - the old coarse obstruction pair no longer survives on `mdlLevel × π-max`;
+  - the bounded same-carrier witness wrappers have not produced a fresh
+    equal-`π-mdl-max` / unequal-prime-image pair;
+  - the direct explicit-state pool is no longer globally exhausted:
+    the one-hot states fail as pairwise probes but succeed as a triadic
+    family, the anchored support-width-two triad now succeeds as well, and the
+    dense support-width-three triad now succeeds as well;
+    direct neg/pos tail patterns remain checked without a fresh witness on
+    this seam, and `ShiftContractTailPatternTrajectoryObstruction.agda` now
+    shows they also leave the `π-mdl-max` fibre immediately under the live
+    shift step;
+  - the immediate representation-level fallback
+    `eigenShadow × π-max` is now blocked at the canonical `p2` seam by a
+    direct no-go control schema.
+- Consequence:
+  the remaining candidates are no longer local perturbations, obvious witness
+  recombinations, or nearby representation-layer lifts. The next honest search
+  surface is a structured family generator on the same carrier:
+  parameterized families, trajectory-generated families, or mixed-scale
+  families whose `π-mdl-max` image is constant while transported prime image
+  varies.
+- Derived search constraints after those eliminations:
+  - any viable family must remain inside one `π-mdl-max` fibre;
+  - its varying directions must lie in
+    `ker(π-mdl-max) \ ker(primeImage)`;
+  - it should avoid pure pair-generated or involutive constructions;
+  - direct tail-only probes remain weak on this seam, but one-hot states are
+    no longer excluded once they are used triadically rather than pairwise;
+  - the smallest plausible nontrivial source is now demonstrably a triadic or cyclic
+    family, not because 3 states are logically required, but because the
+    current seam is already killing pairwise/reflection-level differences.
+- Immediate docs/TODO guidance:
+  stop describing the next step as "try another widening". The first same-
+  carrier triadic families are now landed, and the first live-step trajectory
+  family is landed too, and the first mixed-scale trajectory is landed as
+  well. The next step is to go beyond the current explicit cyclic/trajectory
+  families, which now span support widths 1, 2, and 3 plus one mixed-scale
+  cascade and one full-support cascade, and add new `ShiftContractState`
+  families to test against the existing `π-mdl-max` / prime-image seam.
+
 - Current closure-language correction:
   "closure" must mean more than a compiling bridge or a toy that works on one
   carrier. The durable target is now stated as:
@@ -33,6 +405,107 @@
   classify the failed channels
   (`mdlLevel`, `eigenShadow` as bridge data, raw `eigenSummary`,
   raw `heckeSignature`) as obstruction/defect data rather than silent failures.
+- Newly landed canonical fibre step:
+  `CanonicalClosureFibre.agda` now defines the thin fibre over the coarse
+  quotient `Gauge × basinLabel × motifClass`, and
+  `CanonicalClosureFibreFields.agda` lifts the obstructed Hecke/eigen channels
+  to fibre-indexed fields. The first control theorem on that surface is
+  intentionally modest: forced-stable and illegal counts are now proved
+  chamber-invariant for fibre representatives via the existing
+  `FactorVecChamberDefectHistograms` machinery.
+- Immediate next gap after that landing:
+  strengthen the fibre-field story from count control to factorization through
+  richer defect-profile or histogram carriers on each coarse closure fibre.
+- Newly landed richer fibre step:
+  `CanonicalClosureFibreDefectFactorization.agda` now places the canonical
+  fibre fields on explicit defect-profile, histogram, and orbit-summary
+  carriers. The current theorem strength is still honest rather than inflated:
+  illegal chamber entries force stable/zero-drift profile behaviour, and the
+  fibre-side forced-stable count is bounded above by the orbit-summary stable
+  count. What remains open is direct control or factorization of the actual
+  Hecke/eigen fibre fields through those carriers.
+- Stronger obstruction found after that:
+  `CanonicalClosureFibreEigenShadowObstruction.agda` shows that `eigenShadow`
+  does not descend even to the canonical coarse closure fibre. `CR` and `CP`
+  already lie in the same coarse fibre
+  `Gauge × basinLabel × motifClass`, but their `eigenShadowField` values
+  differ. So `eigenShadow` is now firmly on the fibre-data side of the split,
+  and the next question is how its variation is controlled by the landed
+  defect-profile/orbit-summary carriers.
+- First positive answer on that control question:
+  `CanonicalClosureFibreOrbitSummaryControl.agda` now proves that the richer
+  orbit-summary family already distinguishes that same-fibre `CR`/`CP` pair,
+  and the single `p2` orbit-summary coordinate already separates it. So the
+  remaining gap is no longer "does the richer carrier see the variation?" but
+  "which orbit-summary or defect-profile quotient is the right structural
+  control surface for it?"
+- New promotions after that:
+  `CanonicalClosureCoarseObservable.agda` now turns the current canonical
+  boundary into a theorem-bearing module: `Gauge × basinLabel × motifClass`
+  is formalized as the maximal currently bridged coarse observable package,
+  with factorization through the landed schedule-side bridge and
+  obstruction-facing wrappers for the wider `CP` failures.
+- `CanonicalClosureFibreOrbitSummaryControl.agda` now goes beyond witness-only
+  separation: on the canonical coarse fibre, equality of the `p2`
+  orbit-summary coordinate forces equality of `eigenShadowField`. So `p2`
+  is now a genuine control surface on that carrier, not just a detecting
+  coordinate.
+- That control surface is now packaged explicitly as a factor-law object in
+  the same module via `P2EigenShadowFactorLaw` and the canonical instance
+  `canonicalP2EigenShadowFactorLaw`.
+- The same `p2` coordinate now also controls `heckeField` on the canonical
+  coarse fibre. So the first nontrivial Hecke/eigen fibre controls now share
+  the same canonical orbit-summary surface.
+- First broader replay after the canonical promotions:
+  `ShiftContractObservableTransportPrimeCompatibilityProfileInstance.agda`
+  now exercises the observable-transport plus prime-compatibility stack on
+  full `ShiftContractState`, recovering the witness-level bridge and the
+  `illegalCount-chamber ≤ forcedStableCount-hist` surface on a broader
+  noncanonical carrier without changing the current reporter boundary.
+- The coarse package itself has now been replayed noncanonically in
+  `ShiftContractCoarseObservable.agda`, which packages the projection to
+  `Gauge × basinLabel × motifClass` on `ShiftContractState` and factors it
+  through the existing observable-transport witness and bundle observable
+  surfaces.
+- That broader replay now also has a matching fibre surface:
+  `ShiftContractCoarseFibre.agda` defines the thin fibre over the same coarse
+  package, and `ShiftContractCoarseFibreFields.agda` lifts the first
+  noncanonical Hecke/eigen/prime/count/orbit-summary fields onto it. So the
+  remaining noncanonical gap is a control theorem, not missing vocabulary.
+- That control gap is now sharper on the negative side as well:
+  `ShiftContractNoncanonicalP2ControlObstruction.agda` proves the current
+  broader coarse package is too weak for a canonical-style `p2` factor law.
+  Two explicit `ShiftContractState` values have the same `π-max` image but
+  different transported prime images, so the next noncanonical control
+  surface has to strengthen the invariant package itself.
+- The first candidate-search round above that obstruction is now landed:
+  `ShiftContractMdlLevelCoarseObservable.agda` and
+  `ShiftContractMdlLevelCoarseFibre.agda` now package the cheapest aligned
+  strengthening `mdlLevel × π-max` as a reusable normalized surface with its
+  own thin fibre. `ShiftContractMdlLevelCoarseFibreFields.agda` now gives
+  that surface its matching Hecke/eigen/prime/count/orbit-summary field
+  layer, `ShiftContractMdlLevelP2ControlAttempt.agda` packages the first
+  narrow positive theorem there, and
+  `ShiftContractMdlLevelCounterexampleAudit.agda` records that the original
+  coarse counterexample pair is no longer the active blocker on this surface.
+  `ShiftContractNoncanonicalMdlP2Control.agda` still packages the missing
+  stronger noncanonical `p2` control-shape. `ShiftContractEigenShadowNormalizedPackage.agda` and
+  `ShiftContractEigenShadowP2ControlCandidate.agda` package the immediate
+  fallback `eigenShadow × π-max`, while
+  `ShiftContractRGObservableProjection.agda` keeps the full normalized shift
+  RG observable projection as the upper-bound reference surface. So the next
+  noncanonical theorem attempt is now to find the new witness or prove the
+  first genuine prime-image control theorem on `mdlLevel × π-max`, not another
+  package search. The intermediate orbit-summary step is now landed too:
+  `ShiftContractMdlLevelOrbitSummaryControlAttempt.agda` shows that prime
+  equality on the mdl-level fibre already forces equality of the `p2`
+  orbit-summary coordinate, and
+  `ShiftContractMdlLevelP2PrimeBridge.agda` now packages the full
+  orbit-summary coordinate corollaries of that bridge. The first singleton
+  subfamily theorem is also now landed in
+  `ShiftContractMdlLevelPrimeImageSubfamilyAttempt.agda`, while
+  `ShiftContractMdlLevelChi2WitnessAudit.agda` records that the chi2 witness
+  pool is carrier-mismatched for this seam.
 
 ## 2026-03-31
 
@@ -1306,3 +1779,34 @@ Cleanup state:
   `RGMixedPhase2TraceBenchmarkSummary` now exports this as
   `one-layer-hold-raw-split`.
 - 2026-04-01 context refresh (db): “Dashi and Physics Insights” online ID `69ca43a9-09fc-839b-8cc3-e5ce3868eef5`, canonical `ad17536d8eeb320106585654a0950424abafa93b`, latest ts 2026-03-31 15:52 UTC. Key payload: Forced-Stable Transfer Bridge candidate (illegalCount_chamber ≤ forcedStableCount_hist ≤ forcedStableCount_orbit) and the pre-bridge inequality target illegalCount_chamber(x,p) ≤ forcedStableCount_hist(S(x),p); confirms exact chambers already exist and next theorems should test chamber-stability of defect histograms/correspondences.
+- 2026-04-02 noncanonical mdl-level audit refinement:
+  `ShiftContractMdlLevelWitnessSearchAudit.agda` now packages the bounded
+  same-carrier search state on `mdlLevel × π-max`. Among the current in-repo
+  `ShiftContractState` witnesses, the old coarse pair is retired, the only
+  certified prime-image subfamily remains the singleton around
+  `coarseCounterexampleLeft`, and no fresh equal-`π-mdl-max` /
+  unequal-prime-image pair has yet been recovered. Immediate gap remains
+  prime-image control beyond that bounded search scope, with
+  `eigenShadow × π-max` still the prepared fallback.
+- 2026-04-02 noncanonical refinement continuation:
+  `ShiftContractMdlLevelPrimeImageSubfamilyRefinement.agda` now wraps the
+  current explicit mdl-level witnesses into a two-point family
+  `{ coarseCounterexampleLeft , coarseCounterexampleRight }`, where the
+  same-state cases are stable and the mixed case is already excluded at
+  `π-mdl-max`.
+  `ShiftContractMdlLevelWitnessSourceAudit.agda` now packages the retired
+  pair, singleton subfamily, and bounded search wrappers as an exhausted
+  same-carrier witness-source boundary.
+  `ShiftContractEigenShadowOrbitSummaryObstruction.agda` turns the prepared
+  `eigenShadow × π-max` fallback into a theorem-bearing obstruction: even that
+  stronger normalized surface still does not determine the canonical `p2`
+  orbit-summary key.
+- 2026-04-02 explicit-state/fallback refinement:
+  `ShiftContractMdlLevelExplicitStateSearchAudit.agda` now closes the obvious
+  direct explicit-state pool on `ShiftContractState`: the retired coarse pair,
+  one-hot states, and direct neg/pos tail patterns are all recorded as
+  checked, and the pool is exhausted at the `π-mdl-max` seam.
+  `ShiftContractEigenShadowOrbitSummaryControlAttempt.agda` packages the
+  fallback branch as a direct no-go control schema: normalized
+  `eigenShadow × π-max` equality still cannot recover the canonical `p2`
+  orbit-summary key.
