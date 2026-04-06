@@ -1937,3 +1937,7 @@ Cleanup
 - [x] Strengthen the mixed RG schedule surface with direct mixed-schedule-vs-mixed-schedule relevant-sector comparison and recovered-score collapse theorems.
 - [x] Add mixed-schedule recovered-tail and canonical-vacuum theorems parallel to the existing fused/flow tail theorems.
 - [x] Add mixed-schedule benchmark-tail theorems that collapse the mixed mismatch score after further target-scale evolution, not just class/observable tails.
+
+- [x] Add a minimal bad-mode suppression surface across the LILA bridge:
+  empirical basin dwell/run-length/transition metrics in `DASHIg`,
+  and a receipt-side invariant stub in `DASHI/Physics/Closure/BadModeSuppression.agda`.

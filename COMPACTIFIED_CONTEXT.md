@@ -23,6 +23,7 @@
   keep the delta-cone analyzer, add a minimal baseline-vs-LILA compare harness,
   and show training-dynamics plots so the result is credible, evaluable, and
   directionally useful without over-engineering the PR.
+  The bridge now also carries a named bad-mode suppression surface: empirically this is basin dwell / run-length / bad->safe transition measurement; formally it is a receipt-side stub in `DASHI/Physics/Closure/BadModeSuppression.agda` with a coherence gate and non-increasing bad-mass target.
 
 ## 2026-04-02
 

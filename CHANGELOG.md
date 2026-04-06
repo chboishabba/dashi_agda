@@ -18,6 +18,7 @@
 - add `scripts/run_compare.sh` and `scripts/plot_training_dynamics.py` to
   match the thread's latest recommendation for a minimal credibility package:
   baseline-vs-LILA comparison plus simple training-dynamics plots.
+- add `DASHI/Physics/Closure/BadModeSuppression.agda` and thread that receipt-side surface through `LilaDashiBridge.agda` so the empirical bad-mode suppression metrics now have a named formal stub: measured bad mass, a coherence gate, and a non-increasing-after-coherence target.
 - tighten the bridge UX with `scripts/run_all.sh`, parameterized model
   entrypoints in `scripts/run_compare.sh`, and a short repo-facing usage page
   plus PlantUML flow diagram in `Docs/TRAINING_DYNAMICS.md` and
