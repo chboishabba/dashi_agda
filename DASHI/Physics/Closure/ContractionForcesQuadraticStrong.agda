@@ -43,6 +43,29 @@ mkUniqueUpToScaleSeam :
   UniqueUpToScaleSeam m q
 mkUniqueUpToScaleSeam f = record { normalizeToQ̂core = f }
 
+record AdmissibleFor
+  (m : Nat)
+  (Δ : PD.Additive.Carrier (QES.AdditiveVecℤ {m}) →
+       PD.Additive.Carrier (QES.AdditiveVecℤ {m}))
+  (q : QF.QuadraticForm (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ) : Setω where
+  field
+    invariantUnderΔ :
+      ∀ x →
+        QF.QuadraticForm.Q q (Δ x) ≡ QF.QuadraticForm.Q q x
+    nondegenerate : ⊤
+    compatibleWithIsotropy : ⊤
+    uniqueUpToScale : UniqueUpToScaleSeam m q
+
+admissibleForNormalization :
+  ∀ {m Δ q} →
+  AdmissibleFor m Δ q →
+  ∀ x →
+    QF.QuadraticForm.Q q x ≡ QP.Q̂core x
+admissibleForNormalization a x =
+  UniqueUpToScaleSeam.normalizeToQ̂core
+    (AdmissibleFor.uniqueUpToScale a)
+    x
+
 record QuadraticUniquenessBridge
   (m : Nat)
   (q : QF.QuadraticForm (QES.AdditiveVecℤ {m}) QES.ScalarFieldℤ) : Setω where
@@ -209,6 +232,22 @@ buildContractionForcesQuadraticStrong m dynamics invariantQ uniqueness =
     ; compatibleWithIsotropy = tt
     ; quadraticUniquenessBridge =
         mkQuadraticUniquenessBridge q (λ _ → refl) uniqueness
+    }
+
+admissibleForFromStrong :
+  (c : ContractionForcesQuadraticStrong) →
+  AdmissibleFor
+    (ContractionForcesQuadraticStrong.dimension c)
+    (ContractionForcesQuadraticStrong.dynamicsMap c)
+    (ContractionForcesQuadraticStrong.derivedQuadratic c)
+admissibleForFromStrong c =
+  record
+    { invariantUnderΔ = ContractionForcesQuadraticStrong.invariantUnderT c
+    ; nondegenerate = ContractionForcesQuadraticStrong.nondegenerate c
+    ; compatibleWithIsotropy =
+        ContractionForcesQuadraticStrong.compatibleWithIsotropy c
+    ; uniqueUpToScale =
+        mkUniqueUpToScaleSeam (uniqueUpToScaleWitness c)
     }
 
 canonicalIdentityInvariantStrong :

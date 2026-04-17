@@ -59,8 +59,10 @@ contractionQuadraticToSignatureBridgeFromIntrinsicCore core =
     ; signatureForced31 =
         S31ISF.signature31FromIntrinsicMatchesCTI core
     ; normalizedQuadratic =
-        CFQS.uniqueUpToScaleWitness
-          (S31ISF.IntrinsicSignatureCoreAxioms.strengthenedContraction core)
+        CFQS.admissibleForNormalization
+          (CFQT.ContractionForcesQuadraticTheorem.admissibleQuadratic
+            (CFQT.fromStrongContraction
+              (S31ISF.IntrinsicSignatureCoreAxioms.strengthenedContraction core)))
     }
 
 contractionQuadraticToSignatureBridgeFromProvider :

@@ -124,6 +124,11 @@ thresholdCount≤supportPrimeCount k x y =
     (thresholdAt≤supportMaskAt k p59 x y)
     (thresholdAt≤supportMaskAt k p71 x y)
 
+thresholdRarity :
+  ∀ k x y →
+  thresholdCount k x y ≤ supportPrimeCount x y
+thresholdRarity = thresholdCount≤supportPrimeCount
+
 largeDeltaAt2≤supportMaskAt :
   ∀ p x y →
   largeDeltaAt2 p x y ≤ supportMaskAt p x y
@@ -133,6 +138,11 @@ largeDeltaCount2≤supportPrimeCount :
   ∀ x y →
   largeDeltaCount2 x y ≤ supportPrimeCount x y
 largeDeltaCount2≤supportPrimeCount = thresholdCount≤supportPrimeCount (suc zero)
+
+thresholdRarity2 :
+  ∀ x y →
+  largeDeltaCount2 x y ≤ supportPrimeCount x y
+thresholdRarity2 = largeDeltaCount2≤supportPrimeCount
 
 record DeltaRarityStructure : Set₁ where
   field

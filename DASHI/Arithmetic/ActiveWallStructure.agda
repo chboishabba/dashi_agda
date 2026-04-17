@@ -6,12 +6,12 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat using (_≤_; z≤n)
 open import Data.Nat.Properties as NatP using (≤-refl)
 
-open import MonsterOntos using
+open import Ontology.GodelLattice using (Vec15)
+open import DASHI.TrackedPrimes using
   ( SSP
   ; p2 ; p3 ; p5 ; p7 ; p11 ; p13 ; p17 ; p19 ; p23 ; p29 ; p31 ; p41 ; p47 ; p59 ; p71
+  ; mapTrackedPrimes15
   )
-open import Ontology.GodelLattice using (Vec15)
-open import Ontology.GodelLattice renaming (v15 to mkVec15)
 
 open import DASHI.Arithmetic.ArithmeticIntegerEmbedding using
   ( Int
@@ -52,20 +52,10 @@ supportMaskAt : SSP → Int → Int → Nat
 supportMaskAt p x y = countNonZeroNat (supportAt p x y)
 
 activeWallMask15 : Int → Int → Vec15 Nat
-activeWallMask15 x y =
-  mkVec15
-    (activeWallMaskAt p2 x y) (activeWallMaskAt p3 x y) (activeWallMaskAt p5 x y) (activeWallMaskAt p7 x y)
-    (activeWallMaskAt p11 x y) (activeWallMaskAt p13 x y) (activeWallMaskAt p17 x y) (activeWallMaskAt p19 x y)
-    (activeWallMaskAt p23 x y) (activeWallMaskAt p29 x y) (activeWallMaskAt p31 x y) (activeWallMaskAt p41 x y)
-    (activeWallMaskAt p47 x y) (activeWallMaskAt p59 x y) (activeWallMaskAt p71 x y)
+activeWallMask15 x y = mapTrackedPrimes15 (λ p → activeWallMaskAt p x y)
 
 supportMask15 : Int → Int → Vec15 Nat
-supportMask15 x y =
-  mkVec15
-    (supportMaskAt p2 x y) (supportMaskAt p3 x y) (supportMaskAt p5 x y) (supportMaskAt p7 x y)
-    (supportMaskAt p11 x y) (supportMaskAt p13 x y) (supportMaskAt p17 x y) (supportMaskAt p19 x y)
-    (supportMaskAt p23 x y) (supportMaskAt p29 x y) (supportMaskAt p31 x y) (supportMaskAt p41 x y)
-    (supportMaskAt p47 x y) (supportMaskAt p59 x y) (supportMaskAt p71 x y)
+supportMask15 x y = mapTrackedPrimes15 (λ p → supportMaskAt p x y)
 
 activeWallCount : Int → Int → Nat
 activeWallCount x y = countNonZero15 (delta15 x y)

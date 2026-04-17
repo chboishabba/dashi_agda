@@ -37,6 +37,11 @@ record ContractionForcesQuadraticTheorem : Setω where
         (QES.AdditiveVecℤ {dimension}) QES.ScalarFieldℤ
     derivedQuadratic :
       QF.QuadraticForm (QES.AdditiveVecℤ {dimension}) QES.ScalarFieldℤ
+    dynamicsMap :
+      PD.Additive.Carrier (QES.AdditiveVecℤ {dimension}) →
+      PD.Additive.Carrier (QES.AdditiveVecℤ {dimension})
+    admissibleQuadratic :
+      CFQS.AdmissibleFor dimension dynamicsMap derivedQuadratic
     normalizedQuadratic :
       ∀ x →
         QF.QuadraticForm.Q derivedQuadratic x ≡ QP.Q̂core x
@@ -69,7 +74,11 @@ fromStrongContraction c =
     ; projectionParallelogram =
         CFQS.ContractionForcesQuadraticStrong.projectionParallelogram c
     ; derivedQuadratic = CFQS.ContractionForcesQuadraticStrong.derivedQuadratic c
-    ; normalizedQuadratic = CFQS.uniqueUpToScaleWitness c
+    ; dynamicsMap = CFQS.ContractionForcesQuadraticStrong.dynamicsMap c
+    ; admissibleQuadratic = CFQS.admissibleForFromStrong c
+    ; normalizedQuadratic =
+        CFQS.admissibleForNormalization
+          (CFQS.admissibleForFromStrong c)
     ; signature31Theorem = canonicalSignature31Theorem
     ; signature31Value = CTI.sig31
     ; signatureForced31 = refl
@@ -121,6 +130,10 @@ canonicalContractionForcesQuadraticTheorem m =
         ContractionForcesQuadraticTheorem.projectionParallelogram theorem
     ; derivedQuadratic =
         ContractionForcesQuadraticTheorem.derivedQuadratic theorem
+    ; dynamicsMap =
+        ContractionForcesQuadraticTheorem.dynamicsMap theorem
+    ; admissibleQuadratic =
+        ContractionForcesQuadraticTheorem.admissibleQuadratic theorem
     ; normalizedQuadratic =
         ContractionForcesQuadraticTheorem.normalizedQuadratic theorem
     ; signature31Theorem =

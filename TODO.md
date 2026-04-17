@@ -1,5 +1,45 @@
 # TODO
 
+## Track A — Arithmetic Pressure / Interaction Lane (2026-04-15)
+
+Priority bucket: `P0`
+
+- [x] Centralize the tracked 15-prime carrier and carrier-wide mapping helpers
+  in `DASHI/TrackedPrimes.agda`.
+- [x] Centralize tracked-base coprime evidence in
+  `DASHI/Arithmetic/TrackedCoprimeTable.agda`
+  so downstream arithmetic modules no longer carry repeated 15x15 clause
+  blocks.
+- [x] Narrow the arithmetic frontier in
+  `DASHI/Arithmetic/CoprimeLayer.agda`
+  to the tracked-only seam
+  `distinctTrackedPrimePowersCoprime`
+  plus the reusable product-divisibility glue
+  `coprimeProductDivides`.
+- [x] Land the honest interaction/packaging surfaces above that seam:
+  `DASHI/Arithmetic/DeltaInteraction.agda`,
+  `DASHI/Arithmetic/EpsilonBound.agda`,
+  and the public bundle in
+  `DASHI/Arithmetic/PartialResult.agda`.
+- [x] Extend `scripts/check_prime_profile_counterexample_search.py` with
+  threshold/signature/shared-budget diagnostics aligned with the theorem
+  surfaces.
+- [x] Replace the postulated tracked-only seam
+  `distinctTrackedPrimePowersCoprime`
+  with the tightest actual theorem sufficient for
+  `DeltaInteraction` / `KPrimeInteraction`,
+  without widening back out to a generic coprime-powers theorem over all
+  naturals.
+- [x] Retry canonical archive ingest for the requested Dashi thread
+  `69de4fb3-c3e4-839e-aea4-08b086794879`.
+  Resolution status:
+  done.
+  It now resolves canonically as
+  `Coprime Primes and DeltaInteraction`
+  (`e4a817086446a12712a5a150254f6ae79f8c566b`)
+  after a clean serial refresh inserted `83` messages and merged `6`
+  duplicates.
+
 ## Track P — Photonuclear Numerical Prototype (2026-03-30)
 
 Priority bucket: `P0`
@@ -35,6 +75,180 @@ Priority bucket: `P0`
 
 Priority bucket: `P0`
 
+- [x] Add the first compile-thin `Δ -> quadratic` bridge surface under
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`.
+  This lane is now packaged repo-natively as:
+  `DeltaInteractionSurface` + `KPrimeInteractionSurface` +
+  theorem-level admissible quadratic candidate.
+  Keep the actual arithmetic-to-canonical identification explicit as the
+  remaining proof obligation:
+  construct a concrete `deltaQuadratic` and discharge its
+  `AdmissibleFor` witness.
+- [x] Refine that bridge surface into an explicit candidate layer.
+  `DeltaQuadraticCandidate` now separates:
+  arithmetic energy on the integer-pair side,
+  transport into the quadratic carrier,
+  transported energy/quadratic coherence,
+  and theorem-level admissibility.
+  The first concrete stub is the cancellation-energy candidate over
+  `DeltaPair = Int × Int`.
+  The tracked `Vec15` transport is now implemented concretely via the
+  arithmetic prime-profile carrier.
+  The remaining cancellation-to-quadratic identification is now modeled
+  honestly as an explicit witness input
+  `TransportPreservesCancellationPressure theorem dim≡15`
+  to the candidate constructor, rather than as a hidden module-level axiom.
+- [ ] Add the next non-cancellation `Δ -> quadratic` measurement lane
+  explicitly, rather than overloading the current witness-gated stub.
+  The refreshed thread now fixes the intended direction:
+  keep `canonicalCancellationDeltaCandidateFromTransportWitness` as the
+  honest cancellation-pressure lane, and add a separate weighted valuation
+  candidate with
+  `Φ(x) = (v_p(x) * sqrt(log p))_p`
+  and
+  `Q₊(x) = Σ_p v_p(x)^2 log p`
+  as a positive diagonal measurement surface that can later be related to
+  the contraction-derived `Q̂core`.
+- [x] Land the first constructive weighted valuation helper surface under
+  `DASHI/Arithmetic/WeightedValuationEnergy.agda`
+  and thread a non-theorem-bearing
+  `WeightedValuationMeasurementCandidate`
+  through
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  so the repo has a concrete `Φ/Q₊` code path without pretending the bridge
+  to `Q̂core` is already proved.
+- [ ] Do not collapse the current seam by assertion.
+  Either discharge
+  `TransportPreservesCancellationPressure theorem dim≡15`
+  against the existing tracked-profile transport, or weaken/replace that
+  transport theorem explicitly if the actual arithmetic quantity is not the
+  theorem-side quadratic on the same carrier.
+- [x] Audit the current cancellation-pressure seam against code, not prose.
+  Result:
+  the present transport is structurally mismatched with the canonical
+  quadratic target because it lifts lane-wise `deltaAt` values directly into
+  `Vec ℤ 15`, while `Q̂core` computes `Σ lane²`.
+  Treat the seam as an explicit assumption unless a new boolean/idempotent
+  transport witness is added.
+- [x] Land a theorem-thin three-body scaffold in a problem-specific namespace
+  rather than the canonical closure namespace.
+  The new `DASHI/Physics/ThreeBody/` cluster now carries:
+  state,
+  step,
+  regime,
+  local energy/action,
+  wave-facing admissible path kernel,
+  and an aggregate bridge record.
+  Keep the semantics explicit:
+  this is a regime-classification scaffold for a non-globally-contracting
+  system, not a solved dynamics theorem.
+- [ ] Next three-body lane:
+  connect the new `DASHI/Physics/ThreeBody/Bridge.agda` scaffold to one
+  existing cone/basin/energy status surface so the regime split is not only
+  named but anchored to one current repo-native admissibility notion.
+- [x] Add the local-vs-global prediction layer inside
+  `DASHI/Physics/ThreeBody/`.
+  The namespace now carries
+  `Delta3Body`,
+  `EnergyΔ3`,
+  `Action3`,
+  `LocalPredictiveHorizon`,
+  and `ChaosBoundary`
+  so the three-body lane can state the intended claim precisely:
+  better data improves current state and regime estimation, while chaotic
+  regions still bound the reliable forecast horizon.
+- [x] Anchor the predictive-horizon surface to one existing repo-native
+  witness.
+  `DASHI/Physics/ThreeBody/PredictiveBoundary.agda` now ties
+  `LocalPredictiveHorizon` to
+  `DASHI.Physics.Closure.Basin.Basin`
+  through the field
+  `basinSurface`
+  plus the compatibility witness
+  `basinForecastCompatibility`.
+  This keeps the three-body lane honest:
+  horizon claims are now explicitly relative to an eventual-stability /
+  in-basin surface rather than a free-floating forecast predicate.
+- [ ] Next predictive-horizon lane:
+  either relate the same horizon surface to a concrete cone-interior witness,
+  or add a separate MDL/Lyapunov status layer if prediction depth is meant to
+  decrease monotonically under an existing coding/energy notion.
+- [x] Add the theorem-thin interference/path-family layer inside
+  `DASHI/Physics/ThreeBody/`.
+  The namespace now carries:
+  path families,
+  regime amplitudes,
+  regime weights,
+  regime distributions,
+  and boundary-generated branching,
+  so the three-body lane can express the intended upgrade from point
+  prediction to structured branch-weight prediction.
+- [ ] Next interference lane:
+  tie the new regime-weight surface to one existing wave or cone
+  admissibility witness so the branch amplitudes are filtered by a current
+  repo-native constraint instead of remaining purely formal placeholders.
+- [x] Add a repo-native theorem-surface entrypoint for the three-body lane.
+  `DASHI/Physics/ThreeBody/PredictabilityTheorem.agda`
+  now packages:
+  cone preservation,
+  local strict contraction,
+  Lyapunov surface,
+  basin-relative predictive horizon,
+  boundary counterexample,
+  and regime-weight convergence surfaces
+  against the actual repo interfaces
+  `UFTC_Lattice`,
+  `Contraction`,
+  `CounterexampleHarness`,
+  `MDL.Core`,
+  and
+  `DASHI/Physics/ThreeBody/BundleIntensity.agda`.
+  `DASHI/Physics/ThreeBody/TheoremSurface.agda`
+  is the thin public entrypoint.
+- [ ] Next three-body theorem lane:
+  replace one theorem-thin `Set` surface in
+  `PredictabilityTheorem.agda`
+  with a concrete compatibility witness from the current bundle/intensity
+  layer, preferably boundary-generated branching or a regime-weight filter.
+- [x] Replace one theorem-thin placeholder in
+  `DASHI/Physics/ThreeBody/PredictabilityTheorem.agda`
+  with a concrete witness from the current bundle/intensity lane.
+  The theorem surface now carries:
+  `BoundaryBranchingCompatibility State Energy Phase`
+  instead of a raw dependent `Set` for boundary branching, and the same file
+  now promotes regime-weight convergence from a dependent `Set` placeholder to
+  the existing `ThreeBodyRegimeDistribution` surface.
+- [x] Add an analysis-side zeta visualization scaffold.
+  `DASHI/Analysis/ZetaVisualization.agda`
+  now carries:
+  `CriticalLineMagnitude`,
+  `PhaseFlow`,
+  `ZeroSpacing`,
+  `ProjectedZetaFeatureView`,
+  and
+  `ZetaVisualizationPack`.
+  This is explicitly visualization-only and does not claim RH, a zero finder,
+  or a completed spectral theorem.
+- [ ] Next zeta lane:
+  connect the analysis-side visualization pack to one concrete data or
+  sampling surface so the pack is not only a type scaffold.
+- [x] Ground the analysis-side zeta visualization pack on the concrete
+  Abel-summed sample surface already present in the repo.
+  `DASHI/Analysis/ZetaVisualization.agda`
+  now packages
+  `AbelZetaSamplingSurface`
+  with explicit equality witnesses back to
+  `eta0`,
+  `etaMinus1`,
+  `zeta0`,
+  and
+  `zetaMinus1`
+  from `DASHI/Analysis/AbelZeta.agda`.
+- [ ] Next zeta lane:
+  derive one concrete observation/view constructor from
+  `AbelZetaSamplingSurface`
+  instead of leaving the feature records populated only by placeholder
+  naturals.
 - [x] Add a repo-accurate checklist separating truly missing theorem families
   from structures that already exist as canonical or partially trivial
   witnesses.

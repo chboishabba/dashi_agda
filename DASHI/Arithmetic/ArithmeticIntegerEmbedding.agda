@@ -4,13 +4,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat using (_+_; _≤_; _∸_; z≤n)
 
-open import MonsterOntos using
+open import DASHI.TrackedPrimes using
   ( SSP
   ; p2 ; p3 ; p5 ; p7 ; p11 ; p13 ; p17 ; p19 ; p23 ; p29 ; p31 ; p41 ; p47 ; p59 ; p71
   ; toNat
+  ; mapTrackedPrimes15
   )
 open import Ontology.GodelLattice using (Vec15)
-open import Ontology.GodelLattice renaming (v15 to mkVec15)
 
 open import DASHI.Arithmetic.NormalizeAddState using
   ( NormalizeAddState
@@ -70,36 +70,16 @@ deltaAt : SSP → Int → Int → Nat
 deltaAt p x y = gammaAt p x y ∸ minNat (alphaAt p x y) (betaAt p x y)
 
 alpha15 : Int → Int → Vec15 Nat
-alpha15 x y =
-  mkVec15
-    (alphaAt p2 x y) (alphaAt p3 x y) (alphaAt p5 x y) (alphaAt p7 x y)
-    (alphaAt p11 x y) (alphaAt p13 x y) (alphaAt p17 x y) (alphaAt p19 x y)
-    (alphaAt p23 x y) (alphaAt p29 x y) (alphaAt p31 x y) (alphaAt p41 x y)
-    (alphaAt p47 x y) (alphaAt p59 x y) (alphaAt p71 x y)
+alpha15 x y = mapTrackedPrimes15 (λ p → alphaAt p x y)
 
 beta15 : Int → Int → Vec15 Nat
-beta15 x y =
-  mkVec15
-    (betaAt p2 x y) (betaAt p3 x y) (betaAt p5 x y) (betaAt p7 x y)
-    (betaAt p11 x y) (betaAt p13 x y) (betaAt p17 x y) (betaAt p19 x y)
-    (betaAt p23 x y) (betaAt p29 x y) (betaAt p31 x y) (betaAt p41 x y)
-    (betaAt p47 x y) (betaAt p59 x y) (betaAt p71 x y)
+beta15 x y = mapTrackedPrimes15 (λ p → betaAt p x y)
 
 gamma15 : Int → Int → Vec15 Nat
-gamma15 x y =
-  mkVec15
-    (gammaAt p2 x y) (gammaAt p3 x y) (gammaAt p5 x y) (gammaAt p7 x y)
-    (gammaAt p11 x y) (gammaAt p13 x y) (gammaAt p17 x y) (gammaAt p19 x y)
-    (gammaAt p23 x y) (gammaAt p29 x y) (gammaAt p31 x y) (gammaAt p41 x y)
-    (gammaAt p47 x y) (gammaAt p59 x y) (gammaAt p71 x y)
+gamma15 x y = mapTrackedPrimes15 (λ p → gammaAt p x y)
 
 delta15 : Int → Int → Vec15 Nat
-delta15 x y =
-  mkVec15
-    (deltaAt p2 x y) (deltaAt p3 x y) (deltaAt p5 x y) (deltaAt p7 x y)
-    (deltaAt p11 x y) (deltaAt p13 x y) (deltaAt p17 x y) (deltaAt p19 x y)
-    (deltaAt p23 x y) (deltaAt p29 x y) (deltaAt p31 x y) (deltaAt p41 x y)
-    (deltaAt p47 x y) (deltaAt p59 x y) (deltaAt p71 x y)
+delta15 x y = mapTrackedPrimes15 (λ p → deltaAt p x y)
 
 alphaSum : Int → Int → Nat
 alphaSum x y = sum15 (alpha15 x y)

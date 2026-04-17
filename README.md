@@ -84,6 +84,47 @@ Current theorem status:
   3. signature forcing / execution-delta interface;
   4. continuum scaling law;
   5. physical reality bridge from wavefield / phase synchronization.
+- Current `Δ -> quadratic` status is intentionally split into two lanes:
+  the concrete cancellation-energy transport in
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  remains gated by the explicit witness
+  `TransportPreservesCancellationPressure theorem dim≡15`,
+  which is now treated repo-side as an external assumption rather than an
+  in-repo derivation from the current tracked-profile transport,
+  while the sharper forward proposal is a weighted valuation measurement
+  layer
+  `Φ(x) = (v_p(x) * sqrt(log p))_p`
+  with
+  `Q₊(x) = Σ_p v_p(x)^2 log p`
+  as a positive diagonal surface that should feed, rather than replace,
+  the existing canonical quadratic/signature stack.
+  The first constructive helper surface for that lane now lives in
+  `DASHI/Arithmetic/WeightedValuationEnergy.agda`.
+- The three-body test case is now scaffolded repo-side as a theorem-thin
+  regime-classification surface under `DASHI/Physics/ThreeBody/`.
+  The intended reading is:
+  state carrier + step operator + local energy/action +
+  contractive/boundary/non-contracting regime split +
+  wave-facing admissible path kernel.
+  It does not claim a closed-form solution or a global contraction theorem.
+  The next landed layer now also separates
+  local state/regime improvement
+  from
+  global forecast depth:
+  `Delta3Body`,
+  `EnergyΔ3`,
+  `Action3`,
+  `LocalPredictiveHorizon`,
+  and `ChaosBoundary`
+  live in the same namespace so the three-body lane can express
+  \"better local prediction over time\" without claiming unlimited
+  long-horizon predictability in chaotic regions.
+  The same namespace now also carries an interference/path-family layer:
+  admissible paths aggregate into regime amplitudes, regime weights, regime
+  distributions, and a boundary-generated branching surface.
+  This lets the repo state the intended Dashi reading of chaos more sharply:
+  point prediction degrades, but structured future branch weights can still
+  be modeled as action-weighted interference over regimes.
 - Current validation snapshot:
   reference signed-permutation self-check = `exactMatch`,
   synthetic one-minus admissible candidate = `exactMatch`,
