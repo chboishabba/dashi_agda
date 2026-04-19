@@ -28,6 +28,34 @@ The structural principle is the same: the informative signal lives in a residual
 - Dashi does not supply **gluon saturation numerics** (saturation scale evolution, BK/JIMWLK equations). At this stage the framework only says “rare clean probe + inverse problem,” not how to integrate a saturation model.
 - Dashi does not re-derive the **CMS result** itself (event counts, CMS detector selections). The note maps the workflow but stops short of reproducing the empirical curves.
 
-## 4. Summary
+## 4. Repo-native empirical sidecars
+
+The photonuclear lane now has four explicit code-side sidecars for empirical
+inputs, measurement packaging, and validation:
+
+- `DASHI/Physics/Closure/PhotonuclearEmpiricalConstantsRegistry.agda`
+- `DASHI/Physics/Closure/PhotonuclearEmpiricalMeasurementSurface.agda`
+- `DASHI/Physics/Closure/PhotonuclearEmpiricalEvidenceSummary.agda`
+- `DASHI/Physics/Closure/PhotonuclearEmpiricalValidationSummary.agda`
+
+Their intended roles are narrow:
+
+- the constants registry records surrogate defaults and example-derived
+  numeric inputs with provenance and boundary tags;
+- the measurement surface packages measured observables, sample payloads, and
+  claim-boundary bookkeeping for downstream runners.
+- the evidence summary combines those two sidecars into one empirical-only
+  control surface;
+- the validation summary wraps that evidence surface in the thinnest
+  repo-facing validation owner, without expanding the physics claim boundary.
+
+These sidecars are **not** proof objects and **not** fit claims. They exist so
+the collider-facing lane can carry:
+
+- what was used as input,
+- what was measured or packaged on the empirical side, and
+- what remains explicitly out of scope for Dashi's current formal closure.
+
+## 5. Summary
 
 CMS has discovered that near-miss (halo) events are richer channels than head-on collisions for probing gluonic structure. Dashi already implements the associated measurement geometry (`Δ`, cone invariants, projection-invariant observables), so the experimental idea sits cleanly inside the existing framework. The missing pieces are the actual photon/QCD dynamics and the numeric saturation story, which can be added as next-layer bridges once the measurement pipeline is formalized.

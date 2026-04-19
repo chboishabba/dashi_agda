@@ -70,6 +70,7 @@ import DASHI.Arithmetic.NormalizeAdd
 import DASHI.Arithmetic.NormalizeAddNonexpansive
 import DASHI.Arithmetic.NormalizeAddState
 import DASHI.Analysis.AbelZeta
+import DASHI.Analysis.GoldbachFormalObjects
 import DASHI.Analysis.ZetaVisualization
 import DASHI.Combinatorics.Confluence
 import DASHI.Combinatorics.Entropy
@@ -346,6 +347,7 @@ import DASHI.Physics.Closure.DynamicalClosureShiftInstance
 import DASHI.Physics.Closure.DynamicalClosureShiftWitnessInstance
 import DASHI.Physics.Closure.DynamicalClosureStatus
 import DASHI.Physics.ThreeBody.Bridge
+import DASHI.Physics.ThreeBody.BoundaryGeneratedBranchingWitness
 import DASHI.Physics.ThreeBody.BundleIntensity
 import DASHI.Physics.ThreeBody.Interference
 import DASHI.Physics.ThreeBody.PredictabilityTheorem

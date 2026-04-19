@@ -20,4 +20,26 @@ What remains external to Dashi is the detailed Standard Model physics:
 - the perturbative QCD photoproduction cross-sections for `γ + A → D0 + X`, and
 - the numerical values in CMS's dataset and their statistical uncertainties.
 
+The repo now keeps the empirical side explicit and fenced:
+
+- `DASHI/Physics/Closure/PhotonuclearEmpiricalConstantsRegistry.agda`
+  is the named registry for surrogate defaults and example-sourced constants,
+  each with provenance and a boundary tag.
+- `DASHI/Physics/Closure/PhotonuclearEmpiricalMeasurementSurface.agda`
+  is the named packaging layer for measured observables, per-sample payloads,
+  and in-scope/out-of-scope claim bookkeeping.
+- `DASHI/Physics/Closure/PhotonuclearEmpiricalEvidenceSummary.agda`
+  is the repo-facing control surface that summarizes those two sidecars in one
+  empirical-only owner.
+- `DASHI/Physics/Closure/PhotonuclearEmpiricalValidationSummary.agda`
+  is the thinner validation-facing wrapper over that evidence summary; it
+  stays empirical-only and records validation tags without making any physics
+  claim.
+- `Docs/PhotonuclearEmpiricalRegistry.md`
+  is the canonical ownership map tying the Agda sidecars to the active script
+  and doc surfaces.
+
+Those modules should be read as provenance and measurement sidecars, not as
+proof that the external QED/QCD layers have been internalized.
+
 Closing this lane means Dashi can now state precisely: the CMS near-miss measurement is an instance of the projection–defect–observable chain we formalized, and `Y_{D0}` can be interpreted as a Dashi observable that feeds into the same saturation-scale inference we already packaged. Turning that statement into a quantitative comparison still requires the external physics layers listed above, but the measurement geometry has been fully integrated into the codebase's story.

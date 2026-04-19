@@ -2,6 +2,88 @@
 
 ## 2026-04-17
 
+- Added the photonuclear empirical validation summary owner at
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalValidationSummary.agda`.
+  The lane now has the full empirical stack in place:
+  constants registry,
+  measurement surface,
+  evidence summary,
+  and a thinner validation wrapper that stays explicitly empirical-only.
+- Refreshed the newer Dashi ChatGPT URL
+  `69e0cb8f-9984-8399-a5fe-d9dbffca71e3`
+  again through the canonical archive path.
+  This refresh succeeded cleanly with
+  `ok=1/1`
+  and
+  `322`
+  ingested messages, and the canonical DB resolution for this UUID now
+  resolves directly as
+  `Dashi on Quantum Computing`
+  with online thread ID
+  `69e0cb8f-9984-8399-a5fe-d9dbffca71e3`,
+  canonical thread ID
+  `934b67438a1d7732f48b2690a3ea215077cc47c3`,
+  source `db`,
+  `231`
+  archived messages, and latest timestamp
+  `2026-04-17T03:12:17+00:00`.
+  This newer refresh shifts the immediate emphasis again:
+  the latest turns are centered on the arithmetic lane,
+  specifically landing honest additions around
+  `ActiveWallStructure`,
+  `WeightedPressure`,
+  `TrackedSupport`,
+  `MaxPressure`,
+  and `PartialResult`,
+  while still rejecting any fake radical / closure theorem surface.
+  The repo-facing interpretation remains:
+  keep the bridge honest,
+  land the strongest theorem-thin arithmetic diagnostics that fit the current
+  proofs,
+  and preserve explicit non-claim boundaries rather than letting refreshed
+  chat pressure blur theorem status.
+- Refreshed the newer Dashi ChatGPT URL
+  `69e0cb8f-9984-8399-a5fe-d9dbffca71e3`
+  again through the canonical archive path after the later thread expansion.
+  This refresh succeeded cleanly with
+  `ok=1/1`
+  and
+  `263`
+  ingested messages, and the canonical DB resolution for this UUID now
+  resolves directly as
+  `Dashi on Quantum Computing`
+  with online thread ID
+  `69e0cb8f-9984-8399-a5fe-d9dbffca71e3`,
+  canonical thread ID
+  `934b67438a1d7732f48b2690a3ea215077cc47c3`,
+  source `db`,
+  `119`
+  archived messages, and latest timestamp
+  `2026-04-17T01:37:31+00:00`.
+  This later refresh sharpens the repo-facing direction beyond the earlier
+  closure-only reading:
+  keep the current cancellation-pressure bridge honest,
+  treat
+  `EnergyΔ`
+  as the quadratic-side-clean object rather than raw linear pressure,
+  make the minimal bridge condition explicit as a boolean/idempotent lane
+  condition if one ever wants raw pressure to equal quadratic energy,
+  and package the arithmetic-to-wave side through explicit formal objects
+  instead of prose.
+  The concrete next theorem-thin objects requested by that refreshed thread
+  are:
+  `EnergyΔ`,
+  `GoldbachCone`,
+  `GoldbachAmplitude`,
+  plus a theorem ladder that separates
+  existence,
+  positivity,
+  stronger positivity,
+  and the analytic gap still blocking any honest Goldbach proof.
+  The same refreshed thread also sharpens the zeta/Riemann side:
+  keep it as an analysis namespace with visualization / feature / sampling
+  surfaces and explicit non-claim boundaries, rather than smuggling it into
+  the closure stack as if RH or a prime-wave theorem had been proved.
 - Refreshed the newer Dashi ChatGPT URL
   `69e0cb8f-9984-8399-a5fe-d9dbffca71e3`
   into the canonical archive with a clean async pull
@@ -87,6 +169,15 @@
   chaos does not erase structure entirely; it turns exact long-horizon path
   prediction into an action-weighted interference pattern over future regime
   branches.
+
+## 2026-04-17
+
+- The photonuclear/LHC empirical side now has a repo-native constants
+  registry in `DASHI/Physics/Closure/PhotonuclearEmpiricalConstantsRegistry.agda`.
+  It packages the reduced surrogate defaults and example-derived reference
+  values with explicit provenance strings and claim-boundary tags so the
+  registry stays clearly in the "inputs and documentation" lane rather than
+  the physics-claim lane.
 
 ## 2026-04-15
 

@@ -68,8 +68,89 @@ Priority bucket: `P0`
   automatically when the canonical emitted example files are missing or stale.
 - [x] Add the same auto-refresh path to the single-state model comparison
   runner.
+- [x] Land a repo-native constants registry and empirical measurement surface
+  for the photonuclear / LHC lane, with explicit provenance and claim
+  boundaries.
+- [x] Add a repo-wide constants owner in `DASHI/Constants/Registry.agda`
+  that references the existing photonuclear empirical registry without
+  duplicating its constants.
+- [x] Add one repo-facing empirical evidence summary owner plus a canonical
+  registry doc tying the Agda sidecars to scripts and docs.
 - [ ] Next follow-up: decide whether the base runner should expose the same
   canonical-example auto-refresh and scorecard output by default.
+- [x] Add the photonuclear empirical validation summary surface.
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalValidationSummary.agda`
+  now wraps the empirical evidence summary in the thinnest repo-facing
+  validation owner, exposing simple counts and status tags while keeping the
+  lane explicitly empirical-only and non-claiming.
+- [x] Add the canonical normalized artifact boundary for legacy HEPData /
+  `dashitest` outputs.
+  `scripts/hepdata_artifact_schema.json`
+  now defines the repo-native JSON contract, and
+  `scripts/hepdata_adapter.py`
+  now normalizes legacy measurement / metrics / timeseries / certification
+  outputs into that contract without rerunning fits or fetching HEPData.
+- [x] Add the first thin consumer for the normalized HEPData artifact lane.
+  `scripts/hepdata_consumer.py`
+  now loads one canonical artifact, selects one family, requires
+  `x/y/cov` measurement readiness, and terminates at the measurement-surface
+  carrier exposed by `scripts/prototype_schema.py` without invoking the
+  runner or scorecard paths.
+- [ ] Next follow-up: decide whether to add a reduced artifact-to-state
+  projection for `DashiStateSchema`, or keep the HEPData bridge explicitly at
+  the measurement-surface layer until a defensible `delta/coarse_head`
+  interpretation exists.
+- [x] Replace stem-only family discovery with an explicit HEPData family
+  crosswalk.
+  `scripts/hepdata_family_crosswalk.json`
+  now maps canonical family names to measurement / metrics / timeseries /
+  certification labels so the adapter does not rely on file-stem coincidence.
+- [x] Add a report-only surface health lane for normalized HEPData artifacts.
+  `scripts/hepdata_surface_report.py`
+  now emits point-count / covariance-shape / rank / condition-number /
+  symmetry diagnostics for one validated `MeasurementSurface` without
+  projecting into `DashiStateSchema`.
+- [ ] Keep `MeasurementSurface -> DashiStateSchema` explicitly deferred until
+  there is a formal projection contract covering:
+  semantic `delta/coarse_head` meaning,
+  covariance propagation,
+  and invariant-preserving failure modes.
+- [x] Add a narrow regression fixture for HEPData family resolution.
+  `tests/test_hepdata_bridge.py`
+  plus
+  `tests/fixtures/hepdata_family_crosswalk_fixture.json`
+  now pin the canonical crosswalk for stable families and the explicit
+  non-alias rule that keeps `ptll_76_106_table` separate from
+  `pTll_76_106`.
+- [x] Expose `projection_eligible` at the measurement health layer.
+  `scripts/hepdata_surface_report.py`
+  now reports the explicit downstream projection gate separately from
+  shape-only consumer admission.
+- [x] Land a contract stub for any future
+  `MeasurementSurface -> DashiStateSchema`
+  interpretation.
+  `scripts/hepdata_projection_contract.py`
+  and
+  `Docs/MeasurementSurfaceProjectionContract.md`
+  now define the result/status/diagnostic boundary without implementing any
+  projection.
+- [x] Declare the transform vocabulary for any future
+  `MeasurementSurface -> DashiStateSchema`
+  lane before implementing projection code.
+  The contract/doc lane now pins
+  `raw`,
+  `gradient`,
+  `whitened`,
+  and
+  `other-declared`
+  together with per-transform preconditions, geometry/regularization flags,
+  and downstream-use declarations.
+- [x] Add an enforcement-side transform validator ahead of any projection
+  implementation.
+  `scripts/hepdata_transform_validator.py`
+  now rejects undeclared transform names with no alias fallback, and
+  `tests/test_hepdata_transform_validator.py`
+  pins the closed transform vocabulary plus the canonical `raw` spec.
 
 ## Track G — Dynamics / Invariants Closure Gap (2026-03-30)
 
@@ -98,7 +179,7 @@ Priority bucket: `P0`
   honestly as an explicit witness input
   `TransportPreservesCancellationPressure theorem dim≡15`
   to the candidate constructor, rather than as a hidden module-level axiom.
-- [ ] Add the next non-cancellation `Δ -> quadratic` measurement lane
+- [x] Add the next non-cancellation `Δ -> quadratic` measurement lane
   explicitly, rather than overloading the current witness-gated stub.
   The refreshed thread now fixes the intended direction:
   keep `canonicalCancellationDeltaCandidateFromTransportWitness` as the
@@ -109,6 +190,13 @@ Priority bucket: `P0`
   `Q₊(x) = Σ_p v_p(x)^2 log p`
   as a positive diagonal measurement surface that can later be related to
   the contraction-derived `Q̂core`.
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  now exposes
+  `WeightedValuationTransportCompatibility`
+  and
+  `WeightedValuationForwardCandidate`
+  so the forward lane has a record-level admissibility/coherence surface
+  without claiming `Q̂core`.
 - [x] Land the first constructive weighted valuation helper surface under
   `DASHI/Arithmetic/WeightedValuationEnergy.agda`
   and thread a non-theorem-bearing
@@ -119,10 +207,50 @@ Priority bucket: `P0`
   to `Q̂core` is already proved.
 - [ ] Do not collapse the current seam by assertion.
   Either discharge
-  `TransportPreservesCancellationPressure theorem dim≡15`
+  `CancellationPressureCompatibility theorem dim≡15`
   against the existing tracked-profile transport, or weaken/replace that
   transport theorem explicitly if the actual arithmetic quantity is not the
   theorem-side quadratic on the same carrier.
+  This remains the sole open cancellation-side seam in
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`.
+- [x] Tighten the bridge seam into a more structured repo-native witness.
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  now exposes
+  `CancellationPressureCompatibility`
+  plus
+  `canonicalCancellationPressureCompatibility`
+  so the cancellation lane records
+  pressure bridge,
+  arithmetic energy,
+  transport,
+  and the external `pressurePreserved` witness explicitly,
+  without pretending the current cancellation transport already proves
+  `Δ -> Q̂core`.
+- [x] Give the weaker profile-side seam its own arithmetic owner.
+  `DASHI/Arithmetic/ArithmeticPrimeProfileBridge.agda`
+  now exposes
+  `EmbeddedPrimeProfileMeasurement`,
+  and
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  now also exposes
+  `EmbeddedProfileScoreCompatibility`
+  plus
+  `canonicalEmbeddedProfileScoreCompatibility`
+  so the repo carries the honest
+  `deltaSum -> embeddedProfileScore`
+  lane separately from the theorem-side quadratic compatibility lane.
+- [x] Add the next thin downstream packaging lane without widening the
+  cancellation claim.
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  now also exposes
+  `DeltaQuadraticSignatureCliffordPackage`
+  plus
+  `deltaBridgeToSignatureCliffordPackage`
+  so an already-packaged `DeltaToQuadraticBridgeTheorem` can carry:
+  normalized delta quadratic,
+  inherited signature-31 data,
+  and a specialized Clifford presentation handle,
+  without adding any new `Δ -> Q̂core` proof claim.
 - [x] Audit the current cancellation-pressure seam against code, not prose.
   Result:
   the present transport is structurally mismatched with the canonical
@@ -244,11 +372,56 @@ Priority bucket: `P0`
   and
   `zetaMinus1`
   from `DASHI/Analysis/AbelZeta.agda`.
-- [ ] Next zeta lane:
+- [x] Next zeta lane:
   derive one concrete observation/view constructor from
   `AbelZetaSamplingSurface`
   instead of leaving the feature records populated only by placeholder
   naturals.
+- [x] Add a theorem-thin Goldbach formal-object lane under `DASHI/Analysis/`
+  or another clearly non-closure namespace.
+  The refreshed `Dashi on Quantum Computing` thread now fixes the intended
+  surfaces:
+  `EnergyΔ`,
+  `GoldbachCone`,
+  `GoldbachAmplitude`,
+  and a theorem ladder separating
+  existence,
+  positivity,
+  stronger positivity,
+  and the unresolved analytic gap.
+  Keep this lane honest:
+  it should formalize the program without claiming a proof of strong
+  Goldbach.
+- [x] Add a first bounded/sample existence constructor to the Goldbach lane.
+  `DASHI/Analysis/GoldbachFormalObjects.agda`
+  now carries
+  `GoldbachExistenceWitness`,
+  `BoundedGoldbachExistence`,
+  and
+  `sampleExistenceFromConeWitness`
+  so the lane can package one admissible prime-pair witness without
+  pretending to prove universal strong Goldbach.
+- [x] Instantiate the Goldbach lane with one concrete sample-side witness.
+  `DASHI/Analysis/GoldbachFormalObjects.agda`
+  now carries
+  `sampleGoldbachCone`,
+  `sampleGoldbachExistenceWitness`,
+  and
+  `sampleGoldbachBoundedExistence`
+  for the explicit `2 + 2 = 4` case on the weighted-valuation energy surface.
+- [x] Add a second nontrivial Goldbach sample witness.
+  `DASHI/Analysis/GoldbachFormalObjects.agda`
+  now also carries
+  `sampleGoldbachCone8`,
+  `sampleGoldbachExistenceWitness8`,
+  and
+  `sampleGoldbachBoundedExistence8`
+  for the explicit `3 + 5 = 8` case.
+- [ ] Add one more analysis-side provenance/feature constructor to
+  `DASHI/Analysis/ZetaVisualization.agda`
+  so the zeta lane records at least one explicit feature/provenance surface
+  beyond the current Abel anchor values, still with no RH, zero-finder, or
+  spectral-closure claim.
 - [x] Add a repo-accurate checklist separating truly missing theorem families
   from structures that already exist as canonical or partially trivial
   witnesses.

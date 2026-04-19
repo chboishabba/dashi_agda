@@ -59,6 +59,30 @@ Archive-backed status update:
   `Branch · Topology and MDA/MDL`
   and the light-transport / phase-sync thread remain support lanes for
   continuum and physical-realization work.
+- Photonuclear empirical lane visibility:
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalConstantsRegistry.agda`,
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalMeasurementSurface.agda`,
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalEvidenceSummary.agda`, and
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalValidationSummary.agda` now
+  provide the empirical-first owner stack, with
+  `Docs/PhotonuclearEmpiricalRegistry.md` as the canonical map. This lane is
+  explicitly empirical-only and non-claiming.
+- Sibling-repo support surfaces:
+  `../dashitest` contains useful diagnostic and measurement artifacts for
+  wave/interference, MDL, and regime-style language, but it is currently a
+  support repo rather than a code dependency for this tree. The strongest
+  cross-reference points are
+  `../dashitest/dashiCORE/README.md`,
+  `../dashitest/dashiCORE/docs/dashibrain_core_integration.md`,
+  `../dashitest/dashifine/newtest/grayscott_krr.py`,
+  `../dashitest/dashifine/newtest/triality_stack.py`,
+  `../dashitest/docs/tree_diffusion_benchmark.md`,
+  `../dashitest/docs/phase3_quotient_learning.md`,
+  `../dashitest/docs/bad_day.md`,
+  `../dashitest/trading/scripts/plot_action_entropy.py`, and
+  `../dashitest/trading/scripts/plot_hysteresis_phase.py`.
+  These are useful documentation-side analogues for measurement and
+  interference language, not theorem evidence for the Agda closure stack.
 
 Current theorem status:
 
@@ -87,11 +111,18 @@ Current theorem status:
 - Current `Δ -> quadratic` status is intentionally split into two lanes:
   the concrete cancellation-energy transport in
   `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
-  remains gated by the explicit witness
-  `TransportPreservesCancellationPressure theorem dim≡15`,
-  which is now treated repo-side as an external assumption rather than an
-  in-repo derivation from the current tracked-profile transport,
-  while the sharper forward proposal is a weighted valuation measurement
+  now packages its witness surface repo-natively as
+  `CancellationPressureCompatibility theorem dim≡15`,
+  with
+  `canonicalCancellationPressureCompatibility`
+  as the thin concrete constructor from the current pair-pressure witness;
+  that lane is still treated repo-side as an external compatibility input
+  rather than an in-repo derivation from the current tracked-profile
+  transport,
+  and the sole remaining cancellation-side seam in that module is the
+  `pressurePreserved` witness inside
+  `CancellationPressureCompatibility`; the sharper forward proposal is
+  a weighted valuation measurement
   layer
   `Φ(x) = (v_p(x) * sqrt(log p))_p`
   with
@@ -100,6 +131,29 @@ Current theorem status:
   the existing canonical quadratic/signature stack.
   The first constructive helper surface for that lane now lives in
   `DASHI/Arithmetic/WeightedValuationEnergy.agda`.
+  The bridge module now also exposes
+  `WeightedValuationTransportCompatibility`
+  plus
+  `WeightedValuationForwardCandidate`
+  so the weighted lane has a record-level admissibility/coherence package
+  without identifying that lane with `Q̂core`.
+  The weaker profile-side seam now also has its own arithmetic owner:
+  `DASHI/Arithmetic/ArithmeticPrimeProfileBridge.agda`
+  exposes
+  `EmbeddedPrimeProfileMeasurement`,
+  while
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  carries
+  `EmbeddedProfileScoreCompatibility`
+  only as the explicit
+  `deltaSum -> embeddedProfileScore`
+  compatibility lane.
+  The same module now also exposes
+  `DeltaQuadraticSignatureCliffordPackage`
+  so an already-packaged delta bridge can carry its normalized quadratic,
+  inherited signature-31 data,
+  and a specialized Clifford presentation handle
+  without widening the cancellation-side claim.
 - The three-body test case is now scaffolded repo-side as a theorem-thin
   regime-classification surface under `DASHI/Physics/ThreeBody/`.
   The intended reading is:
@@ -119,12 +173,192 @@ Current theorem status:
   live in the same namespace so the three-body lane can express
   \"better local prediction over time\" without claiming unlimited
   long-horizon predictability in chaotic regions.
+  `DASHI/Physics/ThreeBody/Bridge.agda`
+  is now also explicitly anchored to the same basin-facing admissibility
+  surface already carried by
+  `DASHI/Physics/ThreeBody/PredictiveBoundary.agda`,
+  rather than introducing a second bridge-local admissibility notion.
+  `DASHI/Physics/ThreeBody/TheoremSurface.agda`
+  now publicly re-exports that bridge surface alongside the theorem-thin
+  predictability and branching surfaces, so downstream consumers can import
+  one entrypoint and still reach the basin-anchored bridge package.
   The same namespace now also carries an interference/path-family layer:
   admissible paths aggregate into regime amplitudes, regime weights, regime
   distributions, and a boundary-generated branching surface.
   This lets the repo state the intended Dashi reading of chaos more sharply:
   point prediction degrades, but structured future branch weights can still
   be modeled as action-weighted interference over regimes.
+
+## Visual Guides
+
+The repo now carries a small figure set for the newer three-body and zeta
+analysis lanes.
+
+Figure provenance:
+
+- the stable repo copies live under `Docs/Images/three-body/` and
+  `Docs/Images/zeta/`;
+- they were imported from the delivered external artifact drop in
+  `temp-DOWNLOADED/`;
+- the associated external Agda sketch is
+  `temp-DOWNLOADED/ThreeBodyPredictability.agda`;
+- the current repo-native formalism surfaces remain the authoritative source
+  for names and claim boundaries.
+
+### Three-body predictability view
+
+![Illustrative three-body trajectory in a projected admissibility cone](Docs/Images/three-body/threebody_projected_admissibility_cone.png)
+
+What this figure is for:
+
+- It visualizes the current three-body lane as a projected
+  admissibility/cone picture rather than as a closed-form trajectory solver.
+- The lower-left interior region is the intended analogue of a more stable,
+  more locally coherent regime.
+- The orange boundary curve marks the transition surface where predictive
+  horizon is expected to shrink and branching becomes more relevant.
+- The upper/right region is the intended non-contracting or unstable side,
+  where point prediction degrades and branch-structured forecasts matter more.
+
+Relevant formalism sources:
+
+- [`DASHI/Physics/ThreeBody/PredictiveBoundary.agda`](DASHI/Physics/ThreeBody/PredictiveBoundary.agda)
+- [`DASHI/Physics/ThreeBody/Interference.agda`](DASHI/Physics/ThreeBody/Interference.agda)
+- [`DASHI/Physics/ThreeBody/BundleIntensity.agda`](DASHI/Physics/ThreeBody/BundleIntensity.agda)
+- [`DASHI/Physics/ThreeBody/PredictabilityTheorem.agda`](DASHI/Physics/ThreeBody/PredictabilityTheorem.agda)
+- [`temp-DOWNLOADED/ThreeBodyPredictability.agda`](temp-DOWNLOADED/ThreeBodyPredictability.agda)
+
+Interpretation boundary:
+
+- This is an illustrative regime map.
+- It is not a proved cone theorem for Newtonian three-body dynamics.
+- It is useful because it matches the current theorem-thin repo split:
+  cone interior, cone boundary, local contraction, local Lyapunov surfaces,
+  basin-relative predictive horizon, and boundary-generated branching.
+
+### Goldbach formal-object lane
+
+The refreshed `Dashi on Quantum Computing` thread landed the Goldbach lane as
+analysis-side formal objects rather than as a solved number-theory claim.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/GoldbachFormalObjects.agda`](DASHI/Analysis/GoldbachFormalObjects.agda)
+- [`CHANGELOG.md`](CHANGELOG.md)
+- [`TODO.md`](TODO.md)
+
+What this lane is for:
+
+- It records the program surfaces `EnergyΔ`, `GoldbachCone`,
+  `GoldbachAmplitude`, `GoldbachTheoremLadder`, and `GoldbachProgramPack`.
+- It now also carries concrete sample-side witnesses rather than only abstract
+  constructors:
+  `sampleGoldbachExistenceWitness` for `2 + 2 = 4` and
+  `sampleGoldbachExistenceWitness8` for `3 + 5 = 8`.
+- It keeps the intended reading explicit: Goldbach is being formalized as a
+  theorem-thin analysis/program lane, not claimed as a proof of strong
+  Goldbach.
+- It also keeps the zeta/Riemann connection in the same analysis-only
+  boundary class: useful as a program direction, but not a proof of RH.
+
+Interpretation boundary:
+
+- This is a formal-object lane, not a solved Goldbach theorem.
+- It does not claim a proof of strong Goldbach.
+- It does not claim a proof of the Riemann hypothesis.
+- It is intended to make the Goldbach program surface explicit while keeping
+  closure claims out of the README.
+
+### Zeta visualization pack
+
+#### Critical-line magnitude
+
+![Critical line magnitude plot for log absolute zeta](Docs/Images/zeta/zeta_logabs_critical_line.png)
+
+Reading:
+
+- The deep troughs are zero neighborhoods for `ζ(1/2 + it)`.
+- This is the cleanest first visualization of where critical-line structure
+  is concentrated.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/AbelZeta.agda`](DASHI/Analysis/AbelZeta.agda)
+- [`DASHI/Analysis/ZetaVisualization.agda`](DASHI/Analysis/ZetaVisualization.agda)
+
+Interpretation boundary:
+
+- This is a visualization surface, not an RH proof surface.
+- In repo terms it belongs to `Analysis`, not `Physics`.
+- The current repo-native observation family now includes:
+  `ZetaBoundaryContrastView` and `ZetaEtaTransferView`,
+  both derived only from the Abel-summed sample surface.
+
+#### Argument flow near the critical line
+
+![Argument flow of zeta near the critical line](Docs/Images/zeta/zeta_argument_flow_strip.png)
+
+Reading:
+
+- The sharp seam near `σ = 1/2` is the main feature.
+- This is the closest direct visual analogue to a phase-flow or boundary-crossing
+  picture in the current Dashi language.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/ZetaVisualization.agda`](DASHI/Analysis/ZetaVisualization.agda)
+
+Interpretation boundary:
+
+- The current repo only packages a visualization scaffold here.
+- No analytic continuation, zero-density theorem, or spectral closure claim is
+  encoded by this image alone.
+
+#### Consecutive zero spacings
+
+![Spacing of consecutive nontrivial zeta zeros](Docs/Images/zeta/zeta_zero_spacings.png)
+
+Reading:
+
+- The spacing sequence is irregular but visibly structured.
+- This is the simplest figure for talking about local spacing regimes without
+  pretending the repo already carries a canonical zero-statistics theorem.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/ZetaVisualization.agda`](DASHI/Analysis/ZetaVisualization.agda)
+
+Interpretation boundary:
+
+- This is an exploratory spacing plot.
+- It is not a GUE claim, pair-correlation theorem, or RH consequence theorem.
+
+#### Dashi-projected zeta feature plot
+
+![Dashi-projected zeta feature plot](Docs/Images/zeta/zeta_dashi_projected_feature_plot.png)
+
+Reading:
+
+- The x-axis is a phase-velocity-style feature.
+- The y-axis is a zero-neighborhood-style score.
+- Color is a local action-like score.
+- The right-side high-phase cluster is the interesting regime in current
+  Dashi language: it is the nearest analogue to a boundary/action/regime
+  concentration rather than a flat cloud.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/ZetaVisualization.agda`](DASHI/Analysis/ZetaVisualization.agda)
+- [`DASHI/Analysis/AbelZeta.agda`](DASHI/Analysis/AbelZeta.agda)
+- external source pack:
+  [`temp-DOWNLOADED/zeta_visualization_pack/`](temp-DOWNLOADED/zeta_visualization_pack/)
+
+Interpretation boundary:
+
+- This figure is intentionally exploratory.
+- It combines phase, local scoring, and zero-neighborhood heuristics.
+- It is useful for regime thinking and visualization design, but it is not yet
+  a canonical theorem object in the repo.
 - Current validation snapshot:
   reference signed-permutation self-check = `exactMatch`,
   synthetic one-minus admissible candidate = `exactMatch`,

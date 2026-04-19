@@ -1,5 +1,8 @@
 module DASHI.Physics.ThreeBody.Bridge where
 
+open import Agda.Builtin.Equality using (_≡_)
+
+open import DASHI.Physics.Closure.Basin
 open import DASHI.Physics.ThreeBody.State
 open import DASHI.Physics.ThreeBody.Step
 open import DASHI.Physics.ThreeBody.Regime
@@ -32,6 +35,19 @@ record ThreeBodyBoundaryDynamics
     energyAction : ThreeBodyEnergyAction State Energy
     predictionSurface :
       ThreeBodyPredictiveBoundaryLayer State Energy Phase
+    predictiveHorizonSurface :
+      LocalPredictiveHorizon State
+    predictiveHorizonCompatible :
+      predictiveHorizonSurface
+      ≡
+      ThreeBodyPredictiveBoundaryLayer.predictiveHorizonSurface
+        predictionSurface
+    basinPredictionSurface : Basin State
+    basinPredictionCompatible :
+      basinPredictionSurface
+      ≡
+      ThreeBodyPredictiveBoundaryLayer.basinAnchoredPredictionSurface
+        predictionSurface
 
     admissiblePathCarrier : Set
     admissiblePathSurface :

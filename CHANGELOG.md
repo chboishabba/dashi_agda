@@ -2,6 +2,190 @@
 
 ## 2026-04-17
 
+- add the canonical normalized empirical-artifact boundary for legacy
+  `dashitest` HEPData outputs.
+  `scripts/hepdata_artifact_schema.json` now defines the repo-native JSON
+  contract, and `scripts/hepdata_adapter.py` now normalizes the old
+  measurement / metrics / timeseries / certification files into that
+  contract with explicit completeness and non-claim status summaries,
+  without rerunning fits or fetching HEPData.
+  The adapter now also prefers NPZ-backed `x/y/cov` measurement surfaces over
+  covariance-free lens tables when both exist, and records per-field
+  readiness for `x`, `y`, and `cov`.
+- add the first thin consumer for canonical legacy HEPData artifacts.
+  `scripts/hepdata_consumer.py` now loads one normalized artifact,
+  selects one family payload,
+  requires `empirical-artifact-ready` validation plus `x/y/cov` field
+  readiness,
+  and terminates at the measurement-surface carrier in
+  `scripts/prototype_schema.py`
+  without invoking runner, scorecard, fitting, or theorem-side logic.
+- replace stem-coincidence family resolution in the legacy HEPData adapter
+  with an explicit crosswalk.
+  `scripts/hepdata_family_crosswalk.json`
+  now records canonical family-to-measurement/metrics/timeseries/
+  certification mappings, and
+  `scripts/hepdata_adapter.py`
+  now records family-resolution metadata in each payload instead of relying
+  on stem-only inference when source families drift across stages.
+- add a report-only health lane for validated HEPData measurement surfaces.
+  `scripts/hepdata_surface_report.py`
+  now consumes one canonical artifact and emits covariance/shape/range
+  diagnostics for the extracted `MeasurementSurface` without constructing a
+  `DashiStateSchema` or a `Δ` interpretation.
+  The report now also exposes
+  `projection_eligible`
+  separately from shape-only admission and flags degraded metric carriers
+  explicitly.
+- add a narrow regression fixture for the HEPData family boundary.
+  `tests/test_hepdata_bridge.py`
+  plus
+  `tests/fixtures/hepdata_family_crosswalk_fixture.json`
+  now pin the canonical family mapping and the non-alias rule keeping
+  `ptll_76_106_table` distinct from `pTll_76_106`.
+- add the first projection-contract stub without widening the empirical
+  bridge.
+  `scripts/hepdata_projection_contract.py`
+  and
+  `Docs/MeasurementSurfaceProjectionContract.md`
+  now define contract-only projection result/status surfaces and hard
+  preconditions for any future
+  `MeasurementSurface -> DashiStateSchema`
+  lane, with no projection implementation and no theorem promotion.
+- tighten that projection contract with a declared transform vocabulary.
+  The contract/doc lane now pins
+  `raw`,
+  `gradient`,
+  `whitened`,
+  and
+  `other-declared`
+  as first-class transform names with explicit preconditions, metric-geometry
+  preservation flags, regularization requirements, and downstream-use
+  declarations, while still leaving projection itself unimplemented.
+- add a vocabulary-enforcement helper for the transform lane.
+  `scripts/hepdata_transform_validator.py`
+  now validates exact transform-name membership against
+  `TRANSFORM_VOCAB`
+  with no alias fallback, and
+  `tests/test_hepdata_transform_validator.py`
+  now pins the closed vocabulary plus the canonical `raw` transform spec,
+  including its comparability group.
+- add a sibling-repo support note for `../dashitest` to the top-level
+  `README`.
+  The note now points at the strongest diagnostic and measurement-side
+  surfaces there while keeping the boundary explicit that `dashitest` is a
+  support repo, not a code dependency or theorem witness for this tree.
+- surface the photonuclear empirical lane in the top-level `README`.
+  The empirical-first owner stack is now visible from the repo entrypoint via
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalConstantsRegistry.agda`,
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalMeasurementSurface.agda`,
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalEvidenceSummary.agda`, and
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalValidationSummary.agda`, with
+  `Docs/PhotonuclearEmpiricalRegistry.md` as the canonical map.
+- add the photonuclear empirical validation summary surface.
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalValidationSummary.agda`
+  now wraps the empirical evidence summary in the thinnest repo-facing
+  validation owner, with explicit status tags and counts but no physics
+  claim.
+- add the missing repo-facing owner for the current photonuclear empirical
+  lane.
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalEvidenceSummary.agda`
+  now combines the constants registry and measurement surface into one
+  empirical-only control surface with explicit counts and status tags, and
+  `Docs/PhotonuclearEmpiricalRegistry.md`
+  now records the canonical ownership map tying the Agda sidecars to the
+  active script and documentation surfaces.
+- refresh the newer Dashi ChatGPT URL
+  `69e0cb8f-9984-8399-a5fe-d9dbffca71e3`
+  again and record the corrected canonical resolution in repo context.
+  The current canonical DB match for that online UUID is now
+  `Dashi on Quantum Computing`
+  with canonical thread ID
+  `934b67438a1d7732f48b2690a3ea215077cc47c3`.
+  The refreshed turns sharpen the repo-facing plan:
+  keep the cancellation bridge honest,
+  formalize the Goldbach lane as theorem-thin analysis objects
+  (`EnergyΔ`, `GoldbachCone`, `GoldbachAmplitude`, theorem ladder),
+  and keep the zeta/Riemann lane explicitly analysis-side and non-claiming.
+- land the first theorem-thin Goldbach formal-object module under
+  `DASHI/Analysis/GoldbachFormalObjects.agda`.
+  The new analysis-side pack introduces:
+  `EnergyΔ`,
+  `GoldbachCone`,
+  `GoldbachAmplitude`,
+  `GoldbachTheoremLadder`,
+  and
+  `GoldbachProgramPack`,
+  with explicit analysis-only / no-solved-Goldbach / no-solved-RH
+  boundaries.
+- tighten the Goldbach analysis lane with a concrete weighted-valuation
+  anchor. `DASHI/Analysis/GoldbachFormalObjects.agda` now exports
+  `weightedValuationEnergyΔ` and the canonical
+  `goldbachWeightedValuationEnergyΔ` instance wired directly to
+  `DASHI/Arithmetic/WeightedValuationEnergy.agda`, while still making no
+  Goldbach or `Δ -> Q̂core` claim.
+- add the first bounded/sample existence constructor to the Goldbach
+  analysis lane.
+  `DASHI/Analysis/GoldbachFormalObjects.agda` now exports
+  `GoldbachExistenceWitness`,
+  `BoundedGoldbachExistence`,
+  and
+  `sampleExistenceFromConeWitness`,
+  so one admissible prime-pair witness can now be carried constructively
+  inside the theorem-thin program surface without claiming a proof of
+  universal strong Goldbach.
+- instantiate the Goldbach analysis lane with one concrete sample witness.
+  `DASHI/Analysis/GoldbachFormalObjects.agda` now adds
+  `sampleGoldbachCone`,
+  `sampleGoldbachExistenceWitness`,
+  and
+  `sampleGoldbachBoundedExistence`
+  for the explicit `2 + 2 = 4` sample on the weighted-valuation energy
+  surface.
+- extend the Goldbach analysis lane with a second nontrivial sample witness.
+  `DASHI/Analysis/GoldbachFormalObjects.agda` now also adds
+  `sampleGoldbachCone8`,
+  `sampleGoldbachExistenceWitness8`,
+  and
+  `sampleGoldbachBoundedExistence8`
+  for the explicit `3 + 5 = 8` sample.
+- tighten the Goldbach theorem ladder so existence is no longer a bare
+  theorem-thin `Set`.
+  `GoldbachTheoremLadder.existenceSurface` now requires a
+  `BoundedGoldbachExistence`
+  witness on the corresponding cone, matching the fact that the analysis lane
+  now carries concrete sample-side witnesses.
+- extend the zeta analysis lane with one concrete derived observation over
+  the current Abel-summed sample surface.
+  `DASHI/Analysis/ZetaVisualization.agda` now exports
+  `ZetaBoundaryContrastView` and
+  `mkBoundaryContrastView`,
+  which compute the exact sample-to-sample eta and zeta boundary deltas from
+  `AbelZetaSamplingSurface` while still making no RH, zero-finder, or
+  critical-line interpolation claim.
+- extend the zeta analysis lane with a second concrete derived observation.
+  `DASHI/Analysis/ZetaVisualization.agda` now also exports
+  `ZetaEtaTransferView` and
+  `mkEtaTransferView`,
+  which compute the exact eta-to-zeta transfer gaps at the current sampled
+  indices while still making no RH, zero-finder, or Euler-product claim.
+- add the first constructive witness object for the current three-body
+  branching lane under
+  `DASHI/Physics/ThreeBody/BoundaryGeneratedBranchingWitness.agda`.
+  The new record packages one boundary state, one generated branch member,
+  one regime label, one basin-anchored branch state, and one observed regime
+  weight into a typed witness sourced from the existing
+  `PredictabilityTheorem`,
+  `Interference`,
+  and
+  `BundleIntensity`
+  surfaces, without claiming a solved chaos theorem.
+- tighten that three-body branching witness so the chosen branch member is
+  explicitly identified with the theorem-generated boundary branch.
+  `BoundaryGeneratedBranchingWitness.agda` now carries the field
+  `branchMemberMatchesGeneratedBoundary`
+  instead of leaving the witness object and theorem-generated branch only
+  side-by-side.
 - refresh the newer Dashi ChatGPT URL
   `69e0cb8f-9984-8399-a5fe-d9dbffca71e3`
   into the canonical archive and record the updated resolution metadata in
@@ -32,12 +216,59 @@
   `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda` now consumes that
   lane as a separate `WeightedValuationMeasurementCandidate` surface without
   pretending it already proves the canonical quadratic bridge.
+- tighten the weighted-valuation forward lane into a record-level witness
+  surface.
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda` now adds
+  `canonicalValuationTransport`,
+  `WeightedValuationTransportCompatibility`,
+  and
+  `WeightedValuationForwardCandidate`
+  so the weighted lane can carry transport coherence, candidate-level
+  admissibility, and weighted-quadratic agreement without claiming an
+  identification with `Q̂core`.
 - tighten the cancellation-pressure seam to match the audited code reality.
   The bridge module now exposes the honest profile-side equality
   `pairCancellationEnergyMatchesEmbeddedProfileScore`, while the stronger
   cancellation-to-canonical-quadratic identification remains explicit as an
   external assumption surface because the current tracked-profile transport
   lifts lane values directly but `Q̂core` evaluates `Σ lane²`.
+- replace the bare cancellation-pressure theorem alias with a record-level
+  compatibility surface.
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  now exposes
+  `CancellationPressureCompatibility`
+  and
+  `canonicalCancellationPressureCompatibility`
+  so the cancellation lane records:
+  pressure bridge,
+  arithmetic energy,
+  transport,
+  and the external `pressurePreserved` witness explicitly,
+  while keeping any `Δ -> Q̂core` identification out of scope.
+- give the weaker profile-side seam its own arithmetic owner.
+  `DASHI/Arithmetic/ArithmeticPrimeProfileBridge.agda`
+  now exposes
+  `EmbeddedPrimeProfileMeasurement`,
+  and
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  now exposes
+  `EmbeddedProfileScoreCompatibility`
+  plus
+  `canonicalEmbeddedProfileScoreCompatibility`,
+  making the honest
+  `deltaSum -> embeddedProfileScore`
+  lane explicit without pretending it is already the theorem-side quadratic.
+- add the next thin signature/Clifford packaging adapter on top of the
+  existing closure stack.
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  now exposes
+  `DeltaQuadraticSignatureCliffordPackage`
+  and
+  `deltaBridgeToSignatureCliffordPackage`,
+  letting an existing delta bridge carry its normalized quadratic,
+  inherited signature-31 data,
+  and a specialized Clifford presentation handle
+  without introducing a new derivation or widening the cancellation claim.
 - add a theorem-thin three-body boundary-of-contraction scaffold under
   `DASHI/Physics/ThreeBody/`.
   The new namespace packages:
@@ -85,6 +316,28 @@
   the current forecast surface is now explicitly basin-relative and
   eventual-stability-facing, without pretending the repo already proves a
   stronger global chaos or Lyapunov theorem for three-body dynamics.
+- anchor the theorem-thin three-body bridge to that same basin-facing
+  admissibility surface.
+  `DASHI/Physics/ThreeBody/Bridge.agda`
+  now carries
+  `basinPredictionSurface`
+  plus
+  `basinPredictionCompatible`,
+  keeping the bridge aligned with
+  `DASHI/Physics/ThreeBody/PredictiveBoundary.agda`
+  instead of introducing a second bridge-local admissibility notion.
+- expose that basin-anchored three-body bridge at the theorem-surface
+  entrypoint and make the bridge carry the predictive-horizon projection
+  explicitly.
+  `DASHI/Physics/ThreeBody/Bridge.agda`
+  now also carries
+  `predictiveHorizonSurface`
+  plus
+  `predictiveHorizonCompatible`,
+  and
+  `DASHI/Physics/ThreeBody/TheoremSurface.agda`
+  now publicly re-exports the bridge alongside the theorem-thin predictability
+  surfaces.
 - add a repo-native theorem-surface layer for the three-body lane instead of
   leaving the simulation/theorem connection only in chat prose.
   `DASHI/Physics/ThreeBody/PredictabilityTheorem.agda`
@@ -138,6 +391,31 @@
   `zetaMinus1`
   from
   `DASHI/Analysis/AbelZeta.agda`.
+- add stable README-facing image copies for the current three-body and zeta
+  visualization lanes under
+  `Docs/Images/three-body/`
+  and
+  `Docs/Images/zeta/`,
+  and document them in `README.md` with:
+  provenance,
+  formalism sources,
+  intended reading,
+  and explicit non-claim boundaries.
+
+## 2026-04-17
+
+- add `DASHI/Physics/Closure/PhotonuclearEmpiricalConstantsRegistry.agda`
+  as the repo-native photonuclear/LHC empirical constants registry.
+  The new surface records the reduced surrogate defaults and example-derived
+  values with explicit provenance strings and claim-boundary tags, so the
+  empirical side stays clearly separated from physics claims or fits.
+- add `DASHI/Physics/Closure/PhotonuclearEmpiricalMeasurementSurface.agda`
+  and align the photonuclear docs with it.
+  The LHC lane now has an explicit measurement-side packaging surface for
+  measured observables, per-sample payloads, and in-scope/out-of-scope claim
+  bookkeeping, and the bridge/capstone notes now point to both that surface
+  and the constants registry as provenance sidecars rather than proof-bearing
+  physics modules.
 
 ## 2026-04-15
 

@@ -8,7 +8,7 @@ module DASHI.Physics.Closure.DeltaToQuadraticBridgeTheorem where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Data.Product using (_×_; _,_)
 open import Data.Integer using (ℤ; +_)
 open import Data.Vec using (Vec; []; _∷_)
@@ -31,6 +31,7 @@ open import DASHI.Physics.QuadraticPolarization as QP
 open import DASHI.Physics.Closure.ContractionForcesQuadraticStrong as CFQS
 open import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 open import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
+open import DASHI.Physics.Closure.QuadraticToCliffordBridgeTheorem as QCB
 
 record DeltaToQuadraticBridgeTheorem : Setω where
   field
@@ -127,6 +128,60 @@ fromAdmissibleDeltaCandidate theorem signatureBridge deltaSurface kSurface qΔ a
     ; contractionQuadraticToSignatureBridge = signatureBridge
     ; deltaQuadratic = qΔ
     ; deltaQuadraticAdmissible = admissibleΔ
+    }
+
+record DeltaQuadraticSignatureCliffordPackage : Setω where
+  field
+    deltaBridgeTheorem : DeltaToQuadraticBridgeTheorem
+    quadraticToCliffordBridge :
+      QCB.QuadraticToCliffordBridgeTheorem
+    cliffordPresentation :
+      QCB.CliffordPresentation
+        (CQSB.ContractionQuadraticToSignatureBridgeTheorem.strengthenedContraction
+          (DeltaToQuadraticBridgeTheorem.contractionQuadraticToSignatureBridge
+            deltaBridgeTheorem))
+
+  normalizedDeltaQuadratic :
+    ∀ x →
+      QF.QuadraticForm.Q
+        (DeltaToQuadraticBridgeTheorem.deltaQuadratic deltaBridgeTheorem)
+        x
+      ≡ QP.Q̂core x
+  normalizedDeltaQuadratic =
+    DeltaToQuadraticBridgeTheorem.normalizedDeltaQuadratic
+      deltaBridgeTheorem
+
+  inheritedSignature31Theorem :
+    SU.Signature31Theorem
+  inheritedSignature31Theorem =
+    DeltaToQuadraticBridgeTheorem.inheritedSignature31Theorem
+      deltaBridgeTheorem
+
+  inheritedSignature31Value :
+    CTI.Signature
+  inheritedSignature31Value =
+    DeltaToQuadraticBridgeTheorem.inheritedSignature31Value
+      deltaBridgeTheorem
+
+  inheritedSignatureForced31 :
+    inheritedSignature31Value ≡ CTI.sig31
+  inheritedSignatureForced31 =
+    DeltaToQuadraticBridgeTheorem.inheritedSignatureForced31
+      deltaBridgeTheorem
+deltaBridgeToSignatureCliffordPackage :
+  (deltaBridge : DeltaToQuadraticBridgeTheorem) →
+  (cliffordBridge : QCB.QuadraticToCliffordBridgeTheorem) →
+  (presentation :
+    QCB.CliffordPresentation
+      (CQSB.ContractionQuadraticToSignatureBridgeTheorem.strengthenedContraction
+        (DeltaToQuadraticBridgeTheorem.contractionQuadraticToSignatureBridge
+          deltaBridge))) →
+  DeltaQuadraticSignatureCliffordPackage
+deltaBridgeToSignatureCliffordPackage deltaBridge cliffordBridge presentation =
+  record
+    { deltaBridgeTheorem = deltaBridge
+    ; quadraticToCliffordBridge = cliffordBridge
+    ; cliffordPresentation = presentation
     }
 
 record DeltaQuadraticCandidate : Setω where
@@ -266,6 +321,42 @@ pairCancellationEnergyMatchesEmbeddedProfileScore x y =
           (AIE.embed-primeIndexedPressure x y)
           (AIE.embed-StateCancellationPressure x y))))
 
+record EmbeddedProfileScoreCompatibility
+  (theorem : CFQT.ContractionForcesQuadraticTheorem)
+  (dim≡15 :
+    CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) : Setω where
+  field
+    pressureBridge : AIEB.IntegerEmbeddingPressureBridge
+    arithmeticEnergyℤ :
+      AIEB.IntegerEmbeddingPressureBridge.IntegerState pressureBridge → ℤ
+    profileScoreℤ :
+      AIEB.IntegerEmbeddingPressureBridge.IntegerState pressureBridge → ℤ
+    stateTransport :
+      AIEB.IntegerEmbeddingPressureBridge.IntegerState pressureBridge →
+      PD.Additive.Carrier
+        (QES.AdditiveVecℤ
+          {CFQT.ContractionForcesQuadraticTheorem.dimension theorem})
+    arithmeticEnergyMatchesBridgePressure :
+      ∀ s →
+        arithmeticEnergyℤ s
+        ≡
+        + (AIEB.embed-scalarCancellationPressure pressureBridge s)
+    arithmeticEnergyMatchesProfileScore :
+      ∀ s →
+        arithmeticEnergyℤ s ≡ profileScoreℤ s
+
+open EmbeddedProfileScoreCompatibility public
+  renaming
+    ( pressureBridge to profilePressureBridge
+    ; arithmeticEnergyℤ to profileArithmeticEnergyℤ
+    ; profileScoreℤ to embeddedProfileScoreℤ
+    ; stateTransport to profileStateTransport
+    ; arithmeticEnergyMatchesBridgePressure to
+        profileArithmeticEnergyMatchesBridgePressure
+    ; arithmeticEnergyMatchesProfileScore to
+        profileArithmeticEnergyMatchesProfileScore
+    )
+
 contractionEnergy :
   (theorem : CFQT.ContractionForcesQuadraticTheorem) →
   PD.Additive.Carrier
@@ -287,43 +378,108 @@ canonicalDeltaTransport :
 canonicalDeltaTransport theorem refl (x , y) =
   liftPrimeContributionVec (APPB.embeddedProfileCarrier x y)
 
-TransportPreservesCancellationPressure :
+canonicalEmbeddedProfileScoreCompatibility :
   (theorem : CFQT.ContractionForcesQuadraticTheorem) →
   (dim≡15 :
     CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) →
-  Set
-TransportPreservesCancellationPressure theorem dim≡15 =
-  ∀ s →
-    + (AIEB.embed-scalarCancellationPressure pairIntegerPressureBridge s)
-    ≡
-    contractionEnergy theorem (canonicalDeltaTransport theorem dim≡15 s)
+  EmbeddedProfileScoreCompatibility theorem dim≡15
+canonicalEmbeddedProfileScoreCompatibility theorem dim≡15 =
+  record
+    { pressureBridge = pairIntegerPressureBridge
+    ; arithmeticEnergyℤ = pairCancellationEnergy
+    ; profileScoreℤ = λ { (x , y) → + (APPB.embeddedProfileScore x y) }
+    ; stateTransport = canonicalDeltaTransport theorem dim≡15
+    ; arithmeticEnergyMatchesBridgePressure = λ _ → refl
+    ; arithmeticEnergyMatchesProfileScore =
+        λ { (x , y) → pairCancellationEnergyMatchesEmbeddedProfileScore x y }
+    }
+
+record CancellationPressureCompatibility
+  (theorem : CFQT.ContractionForcesQuadraticTheorem)
+  (dim≡15 :
+    CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) : Setω where
+  field
+    pressureBridge : AIEB.IntegerEmbeddingPressureBridge
+    arithmeticEnergyℤ :
+      AIEB.IntegerEmbeddingPressureBridge.IntegerState pressureBridge → ℤ
+    stateTransport :
+      AIEB.IntegerEmbeddingPressureBridge.IntegerState pressureBridge →
+      PD.Additive.Carrier
+        (QES.AdditiveVecℤ
+          {CFQT.ContractionForcesQuadraticTheorem.dimension theorem})
+    arithmeticEnergyMatchesBridgePressure :
+      ∀ s →
+        arithmeticEnergyℤ s
+        ≡
+        + (AIEB.embed-scalarCancellationPressure pressureBridge s)
+    pressurePreserved :
+      ∀ s →
+        + (AIEB.embed-scalarCancellationPressure pressureBridge s)
+        ≡
+        contractionEnergy theorem (stateTransport s)
+
+  candidateQuadraticAgreement :
+    ∀ s →
+      arithmeticEnergyℤ s
+      ≡
+      QF.QuadraticForm.Q
+        (CFQT.ContractionForcesQuadraticTheorem.derivedQuadratic theorem)
+        (stateTransport s)
+  candidateQuadraticAgreement s =
+    trans
+      (arithmeticEnergyMatchesBridgePressure s)
+      (pressurePreserved s)
+
+open CancellationPressureCompatibility public
+
+canonicalCancellationPressureCompatibility :
+  (theorem : CFQT.ContractionForcesQuadraticTheorem) →
+  (dim≡15 :
+    CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) →
+  (pressureWitness :
+    ∀ s →
+      + (AIEB.embed-scalarCancellationPressure pairIntegerPressureBridge s)
+      ≡
+      contractionEnergy theorem (canonicalDeltaTransport theorem dim≡15 s)) →
+  CancellationPressureCompatibility theorem dim≡15
+canonicalCancellationPressureCompatibility theorem dim≡15 pressureWitness =
+  record
+    { pressureBridge = pairIntegerPressureBridge
+    ; arithmeticEnergyℤ = pairCancellationEnergy
+    ; stateTransport = canonicalDeltaTransport theorem dim≡15
+    ; arithmeticEnergyMatchesBridgePressure = λ _ → refl
+    ; pressurePreserved = pressureWitness
+    }
 
 CancellationPressureToCanonicalQuadraticAssumption :
   (theorem : CFQT.ContractionForcesQuadraticTheorem) →
   (dim≡15 :
     CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) →
-  Set
+  Setω
 CancellationPressureToCanonicalQuadraticAssumption =
-  TransportPreservesCancellationPressure
+  CancellationPressureCompatibility
 
 pairCancellationEnergyMatchesCanonicalQuadratic :
   (theorem : CFQT.ContractionForcesQuadraticTheorem) →
   (dim≡15 :
     CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) →
-  TransportPreservesCancellationPressure theorem dim≡15 →
+  (pressureWitness :
+    ∀ s →
+      + (AIEB.embed-scalarCancellationPressure pairIntegerPressureBridge s)
+      ≡
+      contractionEnergy theorem (canonicalDeltaTransport theorem dim≡15 s)) →
   ∀ s →
     pairCancellationEnergy s
     ≡
     QF.QuadraticForm.Q
       (CFQT.ContractionForcesQuadraticTheorem.derivedQuadratic theorem)
       (canonicalDeltaTransport theorem dim≡15 s)
-pairCancellationEnergyMatchesCanonicalQuadratic theorem dim≡15 transportWitness (x , y) =
-  let s = (x , y) in
-  trans
-    (cancellation-is-delta-sum x y)
-    (trans
-      (deltaSum-equals-embeddedPressure x y)
-      (transportWitness s))
+pairCancellationEnergyMatchesCanonicalQuadratic theorem dim≡15 pressureWitness =
+  candidateQuadraticAgreement
+    (canonicalCancellationPressureCompatibility
+      theorem
+      dim≡15
+      pressureWitness)
 
 canonicalCancellationDeltaCandidateFromTransportWitness :
   (theorem : CFQT.ContractionForcesQuadraticTheorem) →
@@ -332,23 +488,29 @@ canonicalCancellationDeltaCandidateFromTransportWitness :
   (kSurface : KInt.KPrimeInteractionSurface) →
   (dim≡15 :
     CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) →
-  TransportPreservesCancellationPressure theorem dim≡15 →
+  CancellationPressureCompatibility theorem dim≡15 →
   DeltaQuadraticCandidate
 canonicalCancellationDeltaCandidateFromTransportWitness
-  theorem signatureBridge deltaSurface kSurface dim≡15 transportWitness =
+  theorem signatureBridge deltaSurface kSurface dim≡15 compatibility =
   record
     { theoremSurface = theorem
     ; signatureBridgeSurface = signatureBridge
     ; deltaInteractionInput = deltaSurface
     ; kPrimeInteractionInput = kSurface
-    ; pressureBridge = pairIntegerPressureBridge
-    ; arithmeticEnergyℤ = pairCancellationEnergy
-    ; stateTransport = canonicalDeltaTransport theorem dim≡15
+    ; pressureBridge =
+        CancellationPressureCompatibility.pressureBridge compatibility
+    ; arithmeticEnergyℤ =
+        CancellationPressureCompatibility.arithmeticEnergyℤ compatibility
+    ; stateTransport =
+        CancellationPressureCompatibility.stateTransport compatibility
     ; candidateQuadratic =
         CFQT.ContractionForcesQuadraticTheorem.derivedQuadratic theorem
-    ; arithmeticEnergyMatchesBridgePressure = λ _ → refl
+    ; arithmeticEnergyMatchesBridgePressure =
+        CancellationPressureCompatibility.arithmeticEnergyMatchesBridgePressure
+          compatibility
     ; transportedEnergyMatchesCandidateQuadratic =
-        pairCancellationEnergyMatchesCanonicalQuadratic theorem dim≡15 transportWitness
+        CancellationPressureCompatibility.candidateQuadraticAgreement
+          compatibility
     ; candidateAdmissible =
         CFQT.ContractionForcesQuadraticTheorem.admissibleQuadratic theorem
     }
@@ -404,6 +566,16 @@ canonicalWeightedValuationTransport :
 canonicalWeightedValuationTransport theorem refl n =
   WVE.weightedValuationVecℤ n
 
+canonicalValuationTransport :
+  (theorem : CFQT.ContractionForcesQuadraticTheorem) →
+  CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15 →
+  AIE.Int →
+  PD.Additive.Carrier
+    (QES.AdditiveVecℤ
+      {CFQT.ContractionForcesQuadraticTheorem.dimension theorem})
+canonicalValuationTransport theorem refl n =
+  WVE.valuationVecℤ n
+
 canonicalWeightedQuadraticTransport :
   (theorem : CFQT.ContractionForcesQuadraticTheorem) →
   CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15 →
@@ -435,9 +607,150 @@ canonicalWeightedValuationMeasurementCandidate
     ; weightedQuadraticEnergyℤ =
         + (WVE.weightedQuadraticEnergy x)
     ; valuationTransport =
-        canonicalWeightedValuationTransport theorem dim≡15 x
+        canonicalValuationTransport theorem dim≡15 x
     ; weightedValuationTransport =
         canonicalWeightedValuationTransport theorem dim≡15 x
     ; weightedQuadraticTransport =
         canonicalWeightedQuadraticTransport theorem dim≡15 x
+    }
+
+canonicalWeightedValuationCandidateWeightedLaneAgreement :
+  (theorem : CFQT.ContractionForcesQuadraticTheorem) →
+  (deltaSurface : DInt.DeltaInteractionSurface) →
+  (kSurface : KInt.KPrimeInteractionSurface) →
+  (dim≡15 :
+    CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) →
+  ∀ x y →
+    WeightedValuationMeasurementCandidate.weightedValuationTransport
+      (canonicalWeightedValuationMeasurementCandidate
+        theorem deltaSurface kSurface dim≡15 (x , y))
+    ≡
+    canonicalWeightedValuationTransport theorem dim≡15 x
+canonicalWeightedValuationCandidateWeightedLaneAgreement theorem deltaSurface kSurface dim≡15 x y =
+  refl
+
+canonicalWeightedValuationCandidateQuadraticLaneAgreement :
+  (theorem : CFQT.ContractionForcesQuadraticTheorem) →
+  (deltaSurface : DInt.DeltaInteractionSurface) →
+  (kSurface : KInt.KPrimeInteractionSurface) →
+  (dim≡15 :
+    CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) →
+  ∀ x y →
+    WeightedValuationMeasurementCandidate.weightedQuadraticTransport
+      (canonicalWeightedValuationMeasurementCandidate
+        theorem deltaSurface kSurface dim≡15 (x , y))
+    ≡
+    canonicalWeightedQuadraticTransport theorem dim≡15 x
+canonicalWeightedValuationCandidateQuadraticLaneAgreement theorem deltaSurface kSurface dim≡15 x y =
+  refl
+
+record WeightedValuationTransportCompatibility
+  (theorem : CFQT.ContractionForcesQuadraticTheorem)
+  (dim≡15 :
+    CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15)
+  (n : AIE.Int) : Setω where
+  field
+    candidateQuadratic :
+      QF.QuadraticForm
+        (QES.AdditiveVecℤ
+          {CFQT.ContractionForcesQuadraticTheorem.dimension theorem})
+        QES.ScalarFieldℤ
+    candidateAdmissible :
+      CFQS.AdmissibleFor
+        (CFQT.ContractionForcesQuadraticTheorem.dimension theorem)
+        (CFQT.ContractionForcesQuadraticTheorem.dynamicsMap theorem)
+        candidateQuadratic
+    valuationTransportCoherent :
+      canonicalValuationTransport theorem dim≡15 n
+      ≡
+      subst (Vec ℤ) (sym dim≡15) (WVE.valuationVecℤ n)
+    weightedValuationTransportCoherent :
+      canonicalWeightedValuationTransport theorem dim≡15 n
+      ≡
+      subst (Vec ℤ) (sym dim≡15) (WVE.weightedValuationVecℤ n)
+    weightedQuadraticTransportCoherent :
+      canonicalWeightedQuadraticTransport theorem dim≡15 n
+      ≡
+      subst (Vec ℤ) (sym dim≡15) (WVE.weightedQuadraticVecℤ n)
+    weightedQuadraticEnergyMatchesCandidateQuadratic :
+      + (WVE.weightedQuadraticEnergy n)
+      ≡
+      QF.QuadraticForm.Q
+        candidateQuadratic
+        (canonicalWeightedQuadraticTransport theorem dim≡15 n)
+
+open WeightedValuationTransportCompatibility public
+
+record WeightedValuationForwardCandidate : Setω where
+  field
+    theoremSurface : CFQT.ContractionForcesQuadraticTheorem
+    deltaInteractionInput : DInt.DeltaInteractionSurface
+    kPrimeInteractionInput : KInt.KPrimeInteractionSurface
+    dimension15 :
+      CFQT.ContractionForcesQuadraticTheorem.dimension theoremSurface ≡ 15
+    weightedMeasurement : WeightedValuationMeasurementCandidate
+    transportCompatibility :
+      WeightedValuationTransportCompatibility
+        theoremSurface
+        dimension15
+        (WVE.left
+          (WeightedValuationMeasurementCandidate.arithmeticInput
+            weightedMeasurement))
+
+  forwardCandidateQuadratic :
+    QF.QuadraticForm
+      (QES.AdditiveVecℤ
+        {CFQT.ContractionForcesQuadraticTheorem.dimension theoremSurface})
+      QES.ScalarFieldℤ
+  forwardCandidateQuadratic =
+    WeightedValuationTransportCompatibility.candidateQuadratic
+      transportCompatibility
+
+  forwardCandidateAdmissible :
+    CFQS.AdmissibleFor
+      (CFQT.ContractionForcesQuadraticTheorem.dimension theoremSurface)
+      (CFQT.ContractionForcesQuadraticTheorem.dynamicsMap theoremSurface)
+      forwardCandidateQuadratic
+  forwardCandidateAdmissible =
+    WeightedValuationTransportCompatibility.candidateAdmissible
+      transportCompatibility
+
+  weightedQuadraticCandidateAgreement :
+    + (WVE.weightedQuadraticEnergy
+        (WVE.left
+          (WeightedValuationMeasurementCandidate.arithmeticInput
+            weightedMeasurement)))
+    ≡
+    QF.QuadraticForm.Q
+      forwardCandidateQuadratic
+      (canonicalWeightedQuadraticTransport
+        theoremSurface
+        dimension15
+        (WVE.left
+          (WeightedValuationMeasurementCandidate.arithmeticInput
+            weightedMeasurement)))
+  weightedQuadraticCandidateAgreement =
+    WeightedValuationTransportCompatibility.weightedQuadraticEnergyMatchesCandidateQuadratic
+      transportCompatibility
+
+canonicalWeightedValuationForwardCandidate :
+  (theorem : CFQT.ContractionForcesQuadraticTheorem) →
+  (deltaSurface : DInt.DeltaInteractionSurface) →
+  (kSurface : KInt.KPrimeInteractionSurface) →
+  (dim≡15 :
+    CFQT.ContractionForcesQuadraticTheorem.dimension theorem ≡ 15) →
+  (input : WeightedInput) →
+  WeightedValuationTransportCompatibility theorem dim≡15 (WVE.left input) →
+  WeightedValuationForwardCandidate
+canonicalWeightedValuationForwardCandidate
+  theorem deltaSurface kSurface dim≡15 input compatibility =
+  record
+    { theoremSurface = theorem
+    ; deltaInteractionInput = deltaSurface
+    ; kPrimeInteractionInput = kSurface
+    ; dimension15 = dim≡15
+    ; weightedMeasurement =
+        canonicalWeightedValuationMeasurementCandidate
+          theorem deltaSurface kSurface dim≡15 input
+    ; transportCompatibility = compatibility
     }

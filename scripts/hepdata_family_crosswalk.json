@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0.0",
+  "families": {
+    "atlas_4l_m4l_8tev": {
+      "measurement": {
+        "npz": "atlas_4l_m4l_8tev",
+        "lens_family": "atlas_4l_m4l_8tev"
+      },
+      "metrics": "atlas_4l_m4l_8tev",
+      "timeseries": "atlas_4l_m4l_8tev",
+      "certification_labels": [
+        "atlas_4l_m4l_8tev"
+      ],
+      "aliases": []
+    },
+    "atlas_4l_pt4l_8tev": {
+      "measurement": {
+        "npz": "atlas_4l_pt4l_8tev",
+        "lens_family": "atlas_4l_pt4l_8tev"
+      },
+      "metrics": "atlas_4l_pt4l_8tev",
+      "timeseries": "atlas_4l_pt4l_8tev",
+      "certification_labels": [
+        "atlas_4l_pt4l_8tev"
+      ],
+      "aliases": []
+    },
+    "dijet_chi_13tev_cms_mgt6": {
+      "measurement": {
+        "npz": "dijet_chi_13tev_cms_mgt6",
+        "lens_family": "dijet_chi_13tev_cms_mgt6"
+      },
+      "metrics": "dijet_chi_13tev_cms_mgt6",
+      "timeseries": "dijet_chi_13tev_cms_mgt6",
+      "certification_labels": [
+        "dijet_chi_13tev_cms_mgt6"
+      ],
+      "aliases": []
+    },
+    "dijet_chi_7tev_cms": {
+      "measurement": {
+        "npz": "dijet_chi_7tev_cms",
+        "lens_family": "dijet_chi_7tev_cms"
+      },
+      "metrics": "dijet_chi_7tev_cms",
+      "timeseries": "dijet_chi_7tev_cms",
+      "certification_labels": [
+        "dijet_chi_7tev_cms"
+      ],
+      "aliases": []
+    },
+    "hgg_pt_8tev_atlas": {
+      "measurement": {
+        "npz": "hgg_pt_8tev_atlas",
+        "lens_family": "hgg_pt_8tev_atlas"
+      },
+      "metrics": "hgg_pt_8tev_atlas",
+      "timeseries": "hgg_pt_8tev_atlas",
+      "certification_labels": [
+        "hgg_pt_8tev_atlas"
+      ],
+      "aliases": []
+    },
+    "pTll_106_170": {
+      "measurement": {
+        "npz": "pTll_106_170",
+        "lens_family": "pTll_106_170"
+      },
+      "metrics": "pTll_106_170",
+      "timeseries": "pTll_106_170",
+      "certification_labels": [
+        "pTll_106_170"
+      ],
+      "aliases": []
+    },
+    "pTll_170_350": {
+      "measurement": {
+        "npz": "pTll_170_350",
+        "lens_family": "pTll_170_350"
+      },
+      "metrics": "pTll_170_350",
+      "timeseries": "pTll_170_350",
+      "certification_labels": [
+        "pTll_170_350"
+      ],
+      "aliases": []
+    },
+    "pTll_50_76": {
+      "measurement": {
+        "npz": "pTll_50_76",
+        "lens_family": "pTll_50_76"
+      },
+      "metrics": "pTll_50_76",
+      "timeseries": "pTll_50_76",
+      "certification_labels": [
+        "pTll_50_76"
+      ],
+      "aliases": []
+    },
+    "pTll_76_106": {
+      "measurement": {
+        "npz": "pTll_76_106",
+        "lens_family": "pTll_76_106"
+      },
+      "metrics": "pTll_76_106",
+      "timeseries": "pTll_76_106",
+      "certification_labels": [
+        "pTll_76_106"
+      ],
+      "aliases": []
+    },
+    "phistar_50_76": {
+      "measurement": {
+        "npz": "phistar_50_76",
+        "lens_family": "phistar_50_76"
+      },
+      "metrics": "phistar_50_76",
+      "timeseries": "phistar_50_76",
+      "certification_labels": [
+        "phistar_50_76"
+      ],
+      "aliases": []
+    },
+    "ptll_76_106_table": {
+      "measurement": {
+        "npz": "ptll_76_106_table",
+        "lens_family": "ptll_76_106_table"
+      },
+      "metrics": "ptll_76_106_table",
+      "timeseries": "ptll_76_106_table",
+      "certification_labels": [
+        "ptll_76_106_table"
+      ],
+      "aliases": []
+    },
+    "ttbar_mtt_8tev_cms": {
+      "measurement": {
+        "npz": "ttbar_mtt_8tev_cms",
+        "lens_family": "ttbar_mtt_8tev_cms"
+      },
+      "metrics": "ttbar_mtt_8tev_cms",
+      "timeseries": "ttbar_mtt_8tev_cms",
+      "certification_labels": [
+        "ttbar_mtt_8tev_cms"
+      ],
+      "aliases": []
+    },
+    "z_pt_7tev_atlas": {
+      "measurement": {
+        "npz": "z_pt_7tev_atlas",
+        "lens_family": "z_pt_7tev_atlas"
+      },
+      "metrics": "z_pt_7tev_atlas",
+      "timeseries": "z_pt_7tev_atlas",
+      "certification_labels": [
+        "z_pt_7tev_atlas"
+      ],
+      "aliases": []
+    }
+  }
+}

@@ -167,3 +167,40 @@ embeddedProfileCarrier x y = primeIndexedPressureAt (embed x y)
 embeddedProfileScore :
   Int → Int → Nat
 embeddedProfileScore x y = sum15 (embeddedProfileCarrier x y)
+
+------------------------------------------------------------------------
+-- Minimal concrete package for the embedded prime-profile lane.
+--
+-- This is intentionally weaker than any quadratic/theorem-side bridge:
+-- it records the embedded profile carrier, the induced scalar score, and
+-- the one-step support bound, without identifying that score with a
+-- theorem-side quadratic.
+
+record EmbeddedPrimeProfileMeasurement : Set₁ where
+  field
+    lhs : Int
+    rhs : Int
+    embeddedState : NormalizeAddState
+    carrier : PrimeContributionVec
+    score : Nat
+    scoreMatchesCarrier :
+      score ≡ sum15 carrier
+    normalizedSupportBound :
+      sum15 (primeIndexedPressureAt (normalizeAdd embeddedState))
+      ≤
+      StateSupportPressure (normalizeAdd embeddedState)
+
+open EmbeddedPrimeProfileMeasurement public
+
+embeddedPrimeProfileMeasurement :
+  Int → Int → EmbeddedPrimeProfileMeasurement
+embeddedPrimeProfileMeasurement x y =
+  record
+    { lhs = x
+    ; rhs = y
+    ; embeddedState = embed x y
+    ; carrier = embeddedProfileCarrier x y
+    ; score = embeddedProfileScore x y
+    ; scoreMatchesCarrier = refl
+    ; normalizedSupportBound = embeddedProfileOneStepSupportBound x y
+    }
