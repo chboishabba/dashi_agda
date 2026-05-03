@@ -83,6 +83,54 @@ record EmpiricalAdequacy
       obs fixedPoint ≡ empirical
 
 ------------------------------------------------------------------------
+-- P0.4b: mismatch diagnostic.
+--
+-- A mismatch diagnostic is the admissible negative alternative to a positive
+-- bridge proof.  It is not just inequality: it must locate the first mismatch,
+-- classify the trit-level error, and identify the pipeline component that
+-- explains the gap.
+
+data Trit : Set where
+  tritNeg : Trit
+  tritZero : Trit
+  tritPos : Trit
+
+data MismatchKind : Trit → Trit → Set where
+  signFlipPosNeg :
+    MismatchKind tritPos tritNeg
+  signFlipNegPos :
+    MismatchKind tritNeg tritPos
+  overPromotedPos :
+    MismatchKind tritPos tritZero
+  overPromotedNeg :
+    MismatchKind tritNeg tritZero
+  underPromotedPos :
+    MismatchKind tritZero tritPos
+  underPromotedNeg :
+    MismatchKind tritZero tritNeg
+
+data GapComponent : Set where
+  F-extract : GapComponent
+  F-promote : GapComponent
+  F-graph : GapComponent
+  F-explain : GapComponent
+  F-action : GapComponent
+
+record MismatchDiagnostic : Set₁ where
+  field
+    firstMismatchDepth : Nat
+    modelTrit empiricalTrit : Trit
+    mismatchKind :
+      MismatchKind modelTrit empiricalTrit
+    cause :
+      GapComponent
+
+    -- The concrete lane can attach the proof term, audit record, or remaining
+    -- typed blocker that explains why this component is the responsible cause.
+    causeReceipt : Set
+    causeWitness : causeReceipt
+
+------------------------------------------------------------------------
 -- P0.5: p2 bridge or restricted obstruction.
 --
 -- An unrestricted obstruction over all functions A -> B is too strong:
@@ -191,3 +239,38 @@ record OriginReceipt : Setω where
 
     seam :
       MDLSeam {Carrier} {Cstar} {Cnoncanon}
+
+------------------------------------------------------------------------
+-- W8: origin observation receipt as a conservative diagnostic surface.
+--
+-- This record names the dependency chain needed by downstream planning:
+-- carrier transport, origin observation map, signature owner, dynamics witness,
+-- empirical status/caution, and CRT/J bridge.  It intentionally does not
+-- require `EmpiricalAdequacy`, `ConvergenceBound`, or `MDLSeam`; consumers may
+-- point at those records separately when the corresponding proof obligation is
+-- actually discharged.
+
+data EmpiricalReceiptStatus : Set where
+  empiricalEqualityOnly : EmpiricalReceiptStatus
+  empiricalDiagnosticOnly : EmpiricalReceiptStatus
+  empiricalBlocked : EmpiricalReceiptStatus
+
+record OriginObservationReceipt : Setω where
+  field
+    Source Carrier Obs : Set
+    SignatureOwner DynamicsWitness CRTJBridge : Set
+
+    mapToCarrier : Source → Carrier
+    carrierTransport : Carrier → Carrier
+    originObservationMap : Carrier → Obs
+
+    signatureOwner : SignatureOwner
+    dynamicsWitness : DynamicsWitness
+    crtJBridge : CRTJBridge
+
+    empiricalStatus : EmpiricalReceiptStatus
+
+    -- Type-level caution surfaces: naming them is not a proof that the
+    -- empirical or closure gates are discharged.
+    empiricalCaution : Set
+    closureClaimBoundary : Set

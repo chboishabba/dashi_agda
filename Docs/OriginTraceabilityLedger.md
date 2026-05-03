@@ -38,6 +38,9 @@ surface becomes origin-traceable only when it says which role it plays:
 |---|---|---|---|
 | CoreSpine carrier bridge | Exists through `TritTriTruthBridge`, `TritCarrierBridge`, `FascisticContractionInstance`, `MoonshineBridge`, `CRTPeriodJFixedBridge`, and `StageQuotient`. | `B`: structural bridge from triadic algebra to the ternary carrier, agreement ultrametric, contraction-certificate interface, and CRT/J scalar. | Concrete descent/fixed-point certificates are still per-map obligations; active-wall periodicity and Monster representation semantics are obligations, not proved facts. |
 | `MinimalCrediblePhysicsClosureShiftInstance` | Exists and packages full closure, observable prediction, and signature match. | `A + packaging`: current bounded shift-side minimal closure instance. | Origin receipt is not co-located. A reviewer must follow several modules to see carrier, map, signature, dynamics witness, and scalar bridge. |
+| W8 origin observation receipt | `P0BlockadeProofObligations` now exposes `OriginObservationReceipt` beside the older `OriginReceipt`. | `bridge/governance`: conservative typed receipt surface that names `Source`, `Carrier`, `Obs`, `SignatureOwner`, `DynamicsWitness`, `CRTJBridge`, `mapToCarrier`, `carrierTransport`, `originObservationMap`, concrete owner/witness/bridge values, `EmpiricalReceiptStatus`, `empiricalCaution`, and `closureClaimBoundary`. | No instance is promoted here. The record does not require `EmpiricalAdequacy`, `ConvergenceBound`, or `MDLSeam`; consumers must import or discharge those obligations separately before claiming adequacy, convergence, seam closure, or empirical prediction. |
+| W8b minimal-credible shift origin observation | `MinimalCredibleShiftOriginObservation` now instantiates `OriginObservationReceipt` for the `minimumCredibleClosureShift` path with typed source/carrier/observation tokens, projections to the actual minimal-credible closure, signature equality owner, dynamics witness projection, and CRT/J bridge surface. It also exposes `MinimalCredibleShiftBlockedOriginInstance`. | `A + bridge/governance`: concrete non-promoting origin-observation receipt for the minimal-credible shift path. | Positive origin/empirical promotion remains blocked on `missingEmpiricalAdequacyBridge`; the receipt marks `empiricalBlocked` and does not claim empirical adequacy, convergence-rate closure, or MDL seam closure. |
+| W8c origin receipt promotion obligation | `OriginReceiptPromotionExternalObligation` names the external receipt shape needed to move the minimal-credible origin receipt beyond `empiricalBlocked`: empirical adequacy or promoted empirical status, origin-observation-map compatibility, and closure-boundary preservation. | `bridge/governance`: explicit promotion intake surface for the already-landed origin receipt. | It does not alter the existing receipt status and does not construct an empirical adequacy bridge, `P0.OriginReceipt`, or closure promotion. |
 | `CanonicalStageCTheoremBundle` | Exists as a large summary bundle over many canonical and known-limits theorem surfaces. | `packaging`: useful status bundle, not a new primitive origin theorem. | Needs reader-facing traceability back to the origin thesis and explicit non-claim boundary. |
 | Empirical chi2 / orbit-shell lane | Exists as bounded audit and validation surfaces, including `ShiftContractMdlLevelChi2WitnessAudit` and `RootSystemB4ShellComparison`. The chi2 audit records `poolCarrierMismatch`, and the B4 comparison currently marks the candidate `standaloneOnly`. | `empirical + validation`: evidence and diagnostics, not theorem-source truth. | No theorem currently proves that an origin fixed point uniquely predicts the observed empirical profile. A future `EmpiricalAdequacyBridge` would first need to resolve the carrier mismatch and promotion status. |
 | `AtomicChemistryRecoveryTheorem` | Exists locally and is already named as a strong owner in reader docs. Its own comments explicitly say it does not claim atom recovery, spectra recovery, or chemistry recovery from the canonical closure stack. | `packaging/bridge`: strongest current atom/chemistry interpretation carrier with explicit gates. | Needs a dynamics/relaxation bridge and stronger chemistry-facing law before it can be read as actual atomic or chemistry recovery. |
@@ -57,10 +60,16 @@ surface becomes origin-traceable only when it says which role it plays:
 ## Ordered Promotion Gates
 
 1. Add an origin receipt surface for the minimal-credible closure path.
-   This can be documentation-first or Agda-first. The receipt should name the
-   carrier, concrete map, signature owner, dynamics witness, empirical status,
-   and scalar bridge without changing the theorem strength of the minimal
-   closure record.
+   This now has a W8 Agda owner surface and W8b instance:
+   `P0BlockadeProofObligations.OriginObservationReceipt` names the carrier,
+   carrier transport, origin observation map, signature owner, dynamics witness,
+   empirical status/caution, and CRT/J bridge, while
+  `MinimalCredibleShiftOriginObservation` points that surface at the
+  minimal-credible shift path. The instance remains non-promoting:
+  `empiricalStatus = empiricalBlocked`, with
+  `missingEmpiricalAdequacyBridge` as the typed missing field.
+  `OriginReceiptPromotionExternalObligation` now names the external promotion
+  receipt needed to change that status, without changing it.
 
 2. Add an empirical adequacy bridge only when the theorem ingredients are
    actually available. The bridge should consume the fixed-point/certificate

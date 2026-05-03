@@ -1234,6 +1234,11 @@ run pipeline -> inspect emitted receipts -> compute residuals
   preservation laws, and validation before any JFixedPoint, terminal-object,
   adjunction, subobject-classifier, path-identity, ergodicity,
   tropical-limit, or scale-relevance claim can be emitted.
+- `DASHI.Physics.Closure.ClaimGovernancePromotionObligation` is the current
+  W7 Agda intake for these guarded chart readings. It names the authority and
+  validation receipts required for higher-structure, cross-scale, temporal,
+  spacetime, neurochemical, and market lanes, but constructs no authority token
+  and promotes no chart claim.
 - A cross-scale physics / biology / consciousness reading is not a theorem
   that quantum measurement, vedana, projectors, unitaries, RG relevance,
   thermodynamic free energy, Landauer erasure, chemical phase transitions, DNA

@@ -83,6 +83,13 @@ family of residual chains indexed by `StructuralSignature`.
   classes embed into `ResidualLevel`, illegal defects map to `contradiction`
   and critical pressure, and the canonical saturated histogram maps to
   `partial` rather than `exact`.
+- `DASHI.Interop.PNFResidualConsumerNextObligation` records the current W6
+  receipt-bearing consumer obligation. A future consumer must carry paired
+  `PNFEmissionReceipt` values, receipt-backed atom projections, a
+  receipt-backed residual computation, runtime consumer profile/id, and a
+  Hecke candidate-pool receipt. The current value is a missing-receipt
+  diagnostic only and assigns no wrapper, qualifier, role, residual, or Hecke
+  label by inspection.
 
 ## Hecke Fibre Adapter
 

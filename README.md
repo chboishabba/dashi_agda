@@ -27,6 +27,8 @@ Use one of these reader tracks first:
   `Docs/WorkerCoordinationBoard.md` and `Docs/WorkerCoordinationMap.puml`
 - P0 blocker obligation surface:
   `DASHI/Physics/Closure/P0BlockadeProofObligations.agda`
+- P0 worker-lane obligation index:
+  `DASHI/Physics/Closure/P0BlockerObligationIndex.agda`
 - Atom/wave secondary note: `Docs/AtomAndWaveRecoveryStatus.md`
 - Recovery truth surfaces: `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`
 - Module and diagram entrypoint: [architecture.md](architecture.md)
@@ -51,9 +53,129 @@ promotion governance in `Docs/OriginTraceabilityLedger.md`.
 Current worker lanes:
 
 - Active assignment round `2026-05-04`: `W1`=`Erdos`,
-  `W2`=`Boole`, `W3`=`Tesla`, `W4`=`Poincare`. These assignments are
-  coordination status only; blockers remain red until a typed receipt,
-  theorem owner, or explicit mismatch diagnostic passes targeted validation.
+  `W2`=`Boole`, `W3`=`Tesla`, `W4`=`Poincare`. Result: `W1` produced a typed
+  current-carrier MDL obstruction, `W2` produced a finite-carrier convergence
+  bound, `W3` produced a narrow empirical equality plus mismatch diagnostic,
+  and `W4` produced a symmetric nontrivial quotient-law advance. These are
+  theorem/diagnostic advances, not full blocker closure; stronger carrier,
+  metric, and empirical-promotion gaps remain as recorded in the board.
+- W4 TSFV refinement: the Candidate256 quotient law now records simultaneous
+  sheet-sign reversal as an involution and proves cross-band coupling
+  invariance under it. This keeps the law structural and trit/lattice-native,
+  not based on asymmetric provenance or temporal ordering.
+- Follow-up round `2026-05-04`: `W1b` named a retargeted schedule-MDL
+  replacement channel, and `W2b` added a local pointed metric/horizon rate law.
+  Remaining blockers are now narrower: accept/prove the retargeted channel as
+  the intended noncanonical continuum target, and provide realization-family
+  metric coherence for the convergence theorem.
+- Dependency-reduction round `2026-05-04`: `W1c` added a typed retarget-policy
+  ingredient and acceptance surface, `W2c` added a realization-indexed
+  shift-flow metric family witness, and `W8` added an origin-observation receipt
+  surface. These reduce the implicit blocker surface but do not promote full
+  empirical adequacy, chemistry handoff, or arbitrary-realization convergence.
+- W3 mismatch diagnostic clarification: in this repo the term means a typed
+  negative bridge receipt with three parts: first mismatch depth, trit-level
+  mismatch kind, and the responsible `F_extract` / `F_promote` / `F_graph` /
+  `F_explain` / `F_action` component. It is not mere inequality.
+- Targeted dependency round `2026-05-04`: `W8b` is assigned to `Bernoulli` for
+  a concrete origin-observation receipt instance or typed blocker, and `W3b`
+  is assigned to `Hubble` for the B4 empirical dependency clarification. The
+  retarget-policy ingredient remains governance-parked and must not be
+  inhabited by worker assumption.
+- Targeted dependency results: `W8b` landed
+  `MinimalCredibleShiftOriginObservation`, a concrete non-promoting origin
+  receipt for `minimumCredibleClosureShift` with `empiricalBlocked` and
+  `missingEmpiricalAdequacyBridge`; `W3b` landed a B4 separation receipt showing
+  closure/observable B4 promotion does not discharge empirical B4 validation.
+- Policy-consumption round `2026-05-04`: `W1d` now accepts exactly the canonical
+  retargeted schedule-MDL channel by equality in
+  `CanonicalToNoncanonicalMdlRetargetPolicyDecision`; `W3c` and `W4c` are
+  assigned to consume that policy in their lanes without promoting empirical or
+  physical chemistry closure.
+- Policy-consumption results: `W3c` consumed the W1d policy and W8b origin
+  receipt, leaving typed blockers for chi2 transport, empirical B4 validation,
+  full-profile universe boundary, and `empiricalBlocked`; `W4c` added
+  `ChemistryPhysicalHandoffDiagnostic`, whose status is
+  `missingPhysicalConsumer`.
+- Remainder-narrowing round `2026-05-04`: `W3d` is assigned to chi2
+  fixed-point carrier transport or typed obstruction, and `W4d` is assigned to
+  a chemistry physical-consumer surface or sharper missing-ingredient
+  diagnostic.
+- Remainder-narrowing results: `W3d` added
+  `Chi2FixedPointCarrierTransportObstruction`, naming the needed positive
+  transport receipt and proving the current pool-mismatch/no-same-surface
+  obstruction; `W4d` sharpened the physical-handoff blocker to
+  `missingRetargetedQuotientInterpretationCarrierOrPreservationLaw`.
+- Dual-discharge attempt round `2026-05-04`: `W3e` is assigned to the chi2
+  same-surface / fixed-point defect-observation receipt, and `W4e` is assigned
+  to the retargeted-quotient physical interpretation carrier/preservation law.
+- Dual-discharge results: `W3e` inhabited the chi2 transport receipt only via a
+  `carrierForgettingConstantReceiptOnly` boundary, so W3 still needs a
+  non-forgetting same-surface theorem over `Chi2BoundaryCase`; `W4e` inhabited
+  a boundary-only pre-physical consumer, so W4 now has
+  `retargetedQuotientPrePhysicalConsumerAvailable` without spectra, bonding,
+  wet-lab, or scale-setting claims.
+- Blocker-tightening results: `W3f` added
+  `Chi2NonForgettingSameSurfaceObstruction`, proving the current same `Nat`
+  defect target cannot also distinguish primary/secondary chi2 cases; `W4f`
+  added `ChemistryStrictPhysicalSemanticsBlocker`, naming the strict physical
+  missing ingredients as scale-setting law, spectral observable map, bonding
+  interpretation, and empirical physical validation.
+- Obligation-surfacing results: `W3g` added
+  `Chi2CanonicalPoolObservationCandidate`, a local nonconstant chi2-pool
+  discriminator that remains non-empirical and non-promoting; `W4g` added
+  `W4StrictPhysicalNextObligation`, the concrete obligation surface for the
+  strict Candidate256 physical handoff.
+- Local-transport/ledger results: `W3h` added
+  `Chi2ToShiftPressureTransportCandidate`, mapping the three local chi2 pool
+  cases to start/next/held shift-pressure points without claiming fixed-point
+  empirical adequacy; `W4h` added `W4StrictPhysicalObligationLedger`, ordering
+  strict Candidate256 physical work with scale-setting first.
+- Local-dynamics result: `W3i` added
+  `Chi2TransportDynamicsToFixedPointBridge`, composing the local chi2 transport
+  with the existing two-step shift absorption to the held point while still
+  refusing any empirical observation-target claim.
+- Obligation-narrowing results: `W3j` added
+  `W3EmpiricalTargetPromotionBridgeObligation`, the typed surface for the
+  remaining empirical target/promotion work; `W4i` added
+  `W4StrictPhysicalScaleSettingLaneObligation`, the first ordered strict
+  physical lane.
+- Surrogate-boundary results: `W3k` added
+  `W3SurrogateEmpiricalTargetBoundary`, proving the W3 target/promotion record
+  shape is syntactically inhabitible only with a surrogate `Nat` target; `W4j`
+  added `W4SurrogateScaleSettingBoundary`, proving the scale lane is
+  dimensionlessly inhabitible while physical units/calibration remain missing.
+- Authority/calibration gate results: `W3l` added
+  `W3AcceptedEmpiricalAuthorityGate`, separating surrogate availability from
+  accepted empirical authority; `W4k` added `W4PhysicalCalibrationGate`,
+  separating dimensionless surrogate scale from calibrated physical units and
+  dimensional preservation.
+- Gate-hardening result: `W3AcceptedEvidenceAuthorityToken` and
+  `Candidate256PhysicalCalibrationAuthorityToken` now have no constructors in
+  the current repo, preventing surrogate evidence or `Nat` scale reuse from
+  accidentally promoting W3/W4.
+- External-intake result: `W3AcceptedAuthorityExternalReceiptObligation` and
+  `W4PhysicalCalibrationExternalReceiptObligation` now name the upstream
+  authority/calibration receipt shapes that would be required to unlock those
+  hardened gates, while recording current status as obligations-needed only.
+- Remaining-lane obligation result: `GRQFTConsumerNextObligation`,
+  `PNFResidualConsumerNextObligation`, and
+  `CancellationPressureCompatibilityNextObligation` now name the W5, W6, and W9
+  next receipts/diagnostics without promoting GR/QFT closure, ITIR/PNF runtime
+  labels, or cancellation-pressure compatibility.
+- Final-boundary obligation result:
+  `CanonicalToNoncanonicalMdlRetargetFinalSeamObligation`,
+  `NaturalP2ConvergencePromotionObligation`,
+  `ClaimGovernancePromotionObligation`, and
+  `OriginReceiptPromotionExternalObligation` now name the remaining W1, W2, W7,
+  and W8 promotion receipts without promoting the retargeted seam, natural/p2
+  dynamics, claim-governance readings, or origin empirical status.
+- P0 obligation index result:
+  `P0BlockerObligationIndex` now imports the current W1-W9 obligation/status
+  surfaces as a single board-wide smoke target. This is a discoverability and
+  validation surface only; it does not inhabit any external authority token or
+  promote empirical, chemistry, GR/QFT, PNF, origin, natural, or
+  cancellation-pressure closure.
 - `W1`: MDL/CR aligned carrier or CR-flat target.
 - `W2`: natural / `p2` bridge or obstruction plus
   `CanonicalDynamicsLawTheorem` convergence-rate dynamics.
@@ -776,6 +898,11 @@ Current theorem status:
   inherited signature-31 data,
   and a specialized Clifford presentation handle
   without widening the cancellation-side claim.
+  `DASHI/Physics/Closure/CancellationPressureCompatibilityNextObligation.agda`
+  now names the exact next W9 routes: either supply the existing-route
+  `pressureWitness`, or supply the weighted replacement route with
+  cancellation-to-weighted-quadratic identification. It does not inhabit
+  `CancellationPressureCompatibility`.
 - Generic pressure algebra owner:
   `DASHI/Pressure.agda`
   now exposes a finite five-level pressure carrier with

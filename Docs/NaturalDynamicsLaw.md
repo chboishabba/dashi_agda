@@ -56,6 +56,24 @@ on the intended carrier, with an explicit horizon/fixed-point certificate. That
 rate theorem is the promotion target; another status package would not close
 the natural dynamics law gap.
 
+**Current W2 promotion boundary**
+
+`DASHI.Physics.Closure.NaturalP2ConvergencePromotionObligation` records the
+current state after the landed convergence work. The repo has finite
+shift-flow convergence, a pointed-metric/horizon rate over the shift-flow
+carrier, and a realization-indexed metric family over realized shift-flow
+states. Broader natural / `p2` promotion still needs:
+
+- promotion authority;
+- a natural bridge or obstruction over the intended candidate family;
+- p2 naturality and coherence laws;
+- carrier transport beyond the shift-flow carrier;
+- a carrier-general convergence-rate receipt;
+- uniform realization-rate evidence beyond the current shift-flow family.
+
+That module is an obligation surface only; it does not promote a natural
+dynamics law.
+
 **Bridge toward natural dynamics law**
 
 To answer the request, we require: a state space defined by the `ShiftState` vector and cone witness, an evolution candidate that emerges from contraction + projection (not a hand-wired coarse map), admissibility tied to geometry/MDL rather than fixed witnesses, and a demonstration that the engineered coarse maps can be replaced by naturally emergent flows (e.g., `Tᵣ` or `Rᵣ` flows). Without that derivation, the law remains engineered/post-selected.

@@ -71,6 +71,46 @@ The strongest honest current claim is:
   `ShiftWaveScalingInterface`, and `ShiftWaveRefinementSeam`
   show that the finite phase / interference / refinement lane is active and
   formalized, not just prose.
+- `DASHI.Physics.Closure.ChemistryPhysicalHandoffDiagnostic` records the
+  current W4 chemistry state after carrier-policy acceptance: the accepted
+  retargeted schedule-MDL carrier and Candidate256 quotient/cross-band law form
+  a pre-handoff receipt, but the status remains
+  `retargetedQuotientPrePhysicalConsumerAvailable`. The consumer is deliberately
+  boundary-only: its carrier is the landed quotient carrier and its meaning is
+  only the pre-spectral/pre-scale-setting boundary pair.
+- `DASHI.Physics.Closure.ChemistryStrictPhysicalSemanticsBlocker` records the
+  next W4 physical-semantics gap without promoting it: strict physical semantics
+  require separate scale-setting, spectral observable, bonding interpretation,
+  and empirical physical validation carriers/laws beyond the pre-physical
+  quotient boundary.
+- `DASHI.Physics.Closure.W4StrictPhysicalNextObligation` packages those strict
+  physical-semantics fields as an obligation surface tied to the accepted
+  retargeted carrier and Candidate256 quotient law. It is deliberately not an
+  inhabited physical-chemistry theorem.
+- `DASHI.Physics.Closure.W4StrictPhysicalObligationLedger` orders those
+  obligations for downstream work: scale-setting first, then spectral
+  observable, bonding interpretation, and empirical physical validation. Each
+  lane remains marked `obligationNeededUninhabitedHere`.
+- `DASHI.Physics.Closure.W4StrictPhysicalScaleSettingLaneObligation` narrows the
+  first strict physical lane to a physical scale carrier, quotient-class scale
+  map, and `L_chem` scale-preservation law requirement. It does not inhabit a
+  scale-setting law or strict physical consumer.
+- `DASHI.Physics.Closure.W4SurrogateScaleSettingBoundary` shows the scale lane
+  can be inhabited as a dimensionless `Nat` diagonal `I× (q , q)` over
+  Candidate256 quotient classes. It is explicitly not a physical unit system,
+  calibration, spectrum, bonding interpretation, or empirical validation.
+- `DASHI.Physics.Closure.W4PhysicalCalibrationGate` records the promotion gate
+  from that surrogate to physical scale-setting: a physical unit carrier,
+  Nat-to-unit calibration map, calibrated quotient scale map, and dimensional
+  preservation law are required before the scale lane can promote. Its
+  physical calibration authority token has no constructors in the current repo,
+  so the dimensionless `Nat` surrogate cannot be reused as calibrated physical
+  units without a new upstream authority receipt.
+- `DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation` names
+  that upstream receipt shape explicitly: it must carry calibration authority,
+  physical units, Nat-to-unit calibration, calibrated quotient scale
+  factorization, and dimensional preservation. The current status remains
+  obligations-needed/blocked.
 
 ## 3. Archive-Supported Interpretation
 
@@ -109,6 +149,13 @@ What the archive does not yet justify as repo-native theorem closure:
 - a continuum/scaling-limit theorem that reaches a nontrivial quantum carrier
 - a theorem that links the current shell/profile invariants to atom-facing
   observables on a physically interpretable carrier
+- a typed physical interpretation carrier, quotient-class interpreter,
+  retargeted-carrier preservation law, quotient-law preservation law, and
+  boundary preservation for the quotient classes over the accepted retargeted
+  carrier
+- stronger physical semantics beyond the boundary-only pre-physical consumer:
+  scale setting, spectra, bonding, wet-lab chemistry, or physical validation
+  with preservation laws over the Candidate256 quotient witness
 
 ## Formal Owner Modules
 
@@ -126,6 +173,14 @@ What the archive does not yet justify as repo-native theorem closure:
 - `DASHI.Physics.DashiDynamics`
 - `DASHI.Physics.SchrodingerGap`
 - `DASHI.Physics.ShiftPhaseWaveContinuumStory`
+- `DASHI.Physics.Closure.ChemistryPhysicalHandoffDiagnostic`
+- `DASHI.Physics.Closure.ChemistryStrictPhysicalSemanticsBlocker`
+- `DASHI.Physics.Closure.W4StrictPhysicalNextObligation`
+- `DASHI.Physics.Closure.W4StrictPhysicalObligationLedger`
+- `DASHI.Physics.Closure.W4StrictPhysicalScaleSettingLaneObligation`
+- `DASHI.Physics.Closure.W4SurrogateScaleSettingBoundary`
+- `DASHI.Physics.Closure.W4PhysicalCalibrationGate`
+- `DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation`
 
 ## Not This / Out Of Scope
 

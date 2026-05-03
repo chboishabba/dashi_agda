@@ -10,6 +10,7 @@ open import DASHI.Physics.Closure.CanonicalToNoncanonicalCoarseRecoveryIdentific
 open import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlCRChannelMismatchFamily as CRMismatch
 open import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlCurrentCarrierObstruction as CurrentCarrier
 open import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlCRRetargetRequirement as CRRetarget
+open import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlCRRetargetedChannel as RetargetedChannel
 open import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlGlobalObligationImpossible as GlobalImpossible
 open import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlSeamTheorem as C2NMST
 open import DASHI.Physics.Closure.RGObservableInvariance as RGOI
@@ -40,6 +41,16 @@ open import DASHI.Physics.Constraints.ConcreteInstance as CI
 -- The old global source-schedule obligation is recorded as impossible, not as
 -- a remaining target.
 
+record CanonicalToNoncanonicalMdlCRRetargetPolicyIngredient : Setω where
+  field
+    policyAssumption :
+      RetargetedChannel.CanonicalToNoncanonicalMdlCRRetargetPolicyAssumption
+
+    acceptsRetargetedChannel :
+      RetargetedChannel.CanonicalToNoncanonicalMdlCRRetargetPolicyAssumption.acceptsTransportedScheduleAsIntendedNoncanonicalMdlTarget
+        policyAssumption
+        RetargetedChannel.canonicalToNoncanonicalMdlCRRetargetedChannel
+
 record CanonicalToNoncanonicalMdlNextIngredientGap : Setω where
   field
     rejectedGlobalObligationImpossible :
@@ -55,6 +66,13 @@ record CanonicalToNoncanonicalMdlNextIngredientGap : Setω where
 
     crRetargetTheorem :
       CRRetarget.CanonicalToNoncanonicalMdlCRRetargetTheorem
+
+    crRetargetedChannel :
+      RetargetedChannel.CanonicalToNoncanonicalMdlCRRetargetedChannel
+
+    crRetargetPolicyAcceptanceFromIngredient :
+      CanonicalToNoncanonicalMdlCRRetargetPolicyIngredient →
+      RetargetedChannel.CanonicalToNoncanonicalMdlCRRetargetPolicyAccepted
 
     currentCarrierObstruction :
       CurrentCarrier.CanonicalToNoncanonicalMdlCurrentCarrierObstruction
@@ -105,6 +123,13 @@ canonicalToNoncanonicalMdlNextIngredientGap =
         CRMismatch.canonicalToNoncanonicalMdlCRChannelMismatchFamily
     ; crRetargetTheorem =
         CRRetarget.canonicalCRTransportedScheduleRetargetTheorem
+    ; crRetargetedChannel =
+        RetargetedChannel.canonicalToNoncanonicalMdlCRRetargetedChannel
+    ; crRetargetPolicyAcceptanceFromIngredient =
+        λ ingredient →
+          RetargetedChannel.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+            (CanonicalToNoncanonicalMdlCRRetargetPolicyIngredient.policyAssumption ingredient)
+            (CanonicalToNoncanonicalMdlCRRetargetPolicyIngredient.acceptsRetargetedChannel ingredient)
     ; currentCarrierObstruction =
         CurrentCarrier.canonicalToNoncanonicalMdlCurrentCarrierObstruction
     ; currentCRScheduleAlignmentObstructed =

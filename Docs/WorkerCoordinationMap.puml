@@ -31,18 +31,117 @@ package "Coordination control" {
   rectangle "WorkerCoordinationBoard.md\nsingle routing surface\nlane table + gates" as Board #dcfce7
 }
 
-package "Active assignment round 2026-05-04" {
-  rectangle "Erdos\nW1 active\nMDL/CR seam" as A_W1 #fde68a
-  rectangle "Boole\nW2 active\np2/convergence" as A_W2 #fde68a
-  rectangle "Tesla\nW3 active\nempirical diagnostic" as A_W3 #fde68a
-  rectangle "Poincare\nW4 active\nchemistry law" as A_W4 #fde68a
+package "Completed assignment round 2026-05-04" {
+  rectangle "Erdos\nW1 result\ntyped current-carrier obstruction" as A_W1 #fde68a
+  rectangle "Boole\nW2 result\nfinite convergence bound" as A_W2 #fde68a
+  rectangle "Tesla\nW3 result\nnarrow equality + mismatch diagnostic" as A_W3 #fde68a
+  rectangle "Poincare\nW4 result\nTSFV-compatible symmetric quotient law" as A_W4 #fde68a
+}
+
+package "Completed follow-up round 2026-05-04" {
+  rectangle "Erdos\nW1b result\nretargeted schedule-MDL channel" as B_W1 #fef3c7
+  rectangle "Boole\nW2b result\nlocal pointed metric rate" as B_W2 #fef3c7
+  rectangle "W3 parked\nwaits on carrier transport\nand origin observation map" as B_W3 #e0f2fe
+  rectangle "W4 parked\nwaits on carrier/physical handoff" as B_W4 #e0f2fe
+}
+
+package "Completed dependency-reduction round 2026-05-04" {
+  rectangle "Sagan\nW1c result\nretarget policy ingredient\n+ acceptance surface" as C_W1 #fef3c7
+  rectangle "Fermat\nW2c result\nrealization-indexed\nmetric family witness" as C_W2 #dcfce7
+  rectangle "Leibniz\nW8 result\norigin observation\nreceipt surface" as C_W8 #fef3c7
+  rectangle "W3 still parked\nneeds policy-accepted carrier,\nB4 promotion, origin map instance" as C_W3 #e0f2fe
+  rectangle "W4 still parked\nneeds policy-accepted carrier\nand physical handoff" as C_W4 #e0f2fe
+}
+
+package "Completed targeted dependency round 2026-05-04" {
+  rectangle "Bernoulli\nW8b result\nminimal-credible shift\norigin receipt instance\nempiricalBlocked" as D_W8 #fef3c7
+  rectangle "Hubble\nW3b result\nB4 closure promotion\nseparate from empirical\nvalidation blocker" as D_W3 #fef3c7
+  rectangle "W1 policy parked\nretarget ingredient needs\nexplicit repo governance\nnot worker assumption" as D_W1 #e0f2fe
+  rectangle "W4 physical handoff parked\nwaits on policy-accepted\ncarrier interpretation" as D_W4 #e0f2fe
+}
+
+package "Completed policy-consumption round 2026-05-04" {
+  rectangle "W0\nW1d result\nretarget policy decision\ncanonical channel accepted\nby equality" as E_W1 #fef3c7
+  rectangle "Zeno\nW3c result\npolicy + origin consumed\nremaining empirical blockers\nnow typed" as E_W3 #fef3c7
+  rectangle "Hooke\nW4c result\npre-handoff diagnostic\nmissingPhysicalConsumer" as E_W4 #fef3c7
+}
+
+package "Completed remainder-narrowing round 2026-05-04" {
+  rectangle "Carson\nW3d result\nchi2 fixed-point\ntransport obstruction\nreceipt type named" as F_W3 #fef3c7
+  rectangle "Ptolemy\nW4d result\nmissing retargeted-quotient\ninterpretation carrier\nor preservation law" as F_W4 #fef3c7
+}
+
+package "Completed dual-discharge attempt round 2026-05-04" {
+  rectangle "Carver\nW3e result\nchi2 receipt inhabited\nbut carrier-forgetting\nconstant only" as G_W3 #fef3c7
+  rectangle "Darwin\nW4e result\npre-physical consumer\navailable\nboundary-only meaning" as G_W4 #dcfce7
+}
+
+package "Completed blocker-tightening round 2026-05-04" {
+  rectangle "Harvey\nW3f result\nnon-forgetting same-Nat\nchi2 attempt obstructed\nmissing discriminator +\nnonconstant target" as H_W3 #fef3c7
+  rectangle "McClintock\nW4f result\nstrict physical semantics\nblocked on scale/spectral/\nbonding/empirical laws" as H_W4 #fef3c7
+}
+
+package "Completed obligation-surfacing round 2026-05-04" {
+  rectangle "Helmholtz\nW3g result\nlocal chi2 pool\n0/1/2 discriminator\nnon-empirical" as I_W3 #fef3c7
+  rectangle "Herschel\nW4g result\nstrict physical\nnext-obligation surface\nnot promoted" as I_W4 #fef3c7
+}
+
+package "Completed local-transport / ledger round 2026-05-04" {
+  rectangle "Nietzsche\nW3h result\nlocal chi2 -> shift pressure\nstart/next/held transport\nnot fixed-point adequacy" as J_W3 #fef3c7
+  rectangle "Dalton\nW4h result\nstrict physical\nordered ledger\nscale-setting first" as J_W4 #fef3c7
+}
+
+package "Completed local-dynamics bridge round 2026-05-04" {
+  rectangle "W0\nW3i result\nlocal chi2 transport\nabsorbs to held point\nwithin 2 steps\nnon-empirical" as K_W3 #dcfce7
+}
+
+package "Completed obligation-narrowing round 2026-05-04" {
+  rectangle "Dirac\nW3j result\nempirical target +\npromotion bridge\nobligations needed" as L_W3 #fef3c7
+  rectangle "Kuhn\nW4i result\nscale-setting lane\nobligation narrowed\nnot inhabited" as L_W4 #fef3c7
+}
+
+package "Completed surrogate-boundary round 2026-05-04" {
+  rectangle "Curie\nW3k result\nsurrogate Nat target\ninhabits shape\nnot empirical" as M_W3 #fef3c7
+  rectangle "Kierkegaard\nW4j result\ndimensionless scale\nsurrogate boundary\nnot calibrated" as M_W4 #fef3c7
+}
+
+package "Completed authority / calibration gate round 2026-05-04" {
+  rectangle "Banach\nW3l result\naccepted empirical\nauthority gate\nstill blocked" as N_W3 #fef3c7
+  rectangle "Locke\nW4k result\nphysical calibration\ngate\nunits/law missing" as N_W4 #fef3c7
+}
+
+package "Completed gate-hardening round 2026-05-04" {
+  rectangle "W0\nW3m result\naccepted empirical\nauthority token\nconstructorless" as O_W3 #dcfce7
+  rectangle "W0\nW4l result\nphysical calibration\nauthority token\nconstructorless" as O_W4 #dcfce7
+}
+
+package "Completed external-intake obligation round 2026-05-04" {
+  rectangle "Mendel\nW3n result\nexternal accepted-authority\nreceipt obligation\nblocked/current" as P_W3 #fef3c7
+  rectangle "Hegel\nW4m result\nexternal physical-calibration\nreceipt obligation\nblocked/current" as P_W4 #fef3c7
+}
+
+package "Completed remaining-lane obligation round 2026-05-04" {
+  rectangle "Avicenna\nW5n result\nGR/QFT consumer\nnext-obligation surface\nno closure promotion" as Q_W5 #fef3c7
+  rectangle "Linnaeus\nW6n result\nPNF residual consumer\nreceipt obligation\nno labels by inspection" as Q_W6 #fef3c7
+  rectangle "Kepler\nW9n result\ncancellation-pressure\nnext-obligation surface\nwitness route named" as Q_W9 #fef3c7
+}
+
+package "Completed final-boundary obligation round 2026-05-04" {
+  rectangle "Peirce\nW1e result\nretargeted final seam\nobligation surface\nno old-carrier promotion" as R_W1 #fef3c7
+  rectangle "Ohm\nW2d result\nnatural/p2 promotion\nobligation surface\nshift-flow boundary" as R_W2 #fef3c7
+  rectangle "Schrodinger\nW7n result\nclaim-governance\npromotion obligation\nno chart promotion" as R_W7 #fef3c7
+  rectangle "Aquinas\nW8c result\norigin promotion\nexternal obligation\nempiricalBlocked kept" as R_W8 #fef3c7
+}
+
+package "Completed P0 obligation index round 2026-05-04" {
+  rectangle "W0\nP0 index result\nW1-W9 obligation\nindex surface\nno promotion" as S_W0 #dcfce7
 }
 
 package "P0 theorem / bridge blockers" {
   rectangle "W1 MDL/CR carrier\nneed: CR-flat noncanonical target\nor aligned carrier/channel\nvalidates: targeted MDL seam Agda" as W1 #fecaca
   rectangle "W2 Natural / p2 / convergence\nneed: positive p2 bridge or obstruction\nplus convergence-rate theorem\nvalidates: targeted natural/dynamics Agda" as W2 #fecaca
   rectangle "W3 Empirical adequacy\nneed: obs(fixedPoint) = empirical\nor precise carrier-mismatch diagnostic\nvalidates: empirical bridge Agda/docs" as W3 #fecaca
-  rectangle "W4 Chemistry law\nneed: symmetric nontrivial law\nusing Candidate256 witness\nvalidates: chemistry Agda" as W4 #fecaca
+  rectangle "W4 Chemistry law\nneed: native TSFV-compatible\nsymmetric nontrivial law\nusing Candidate256 witness\nvalidates: chemistry Agda" as W4 #fecaca
   rectangle "W5 GR/QFT consumer\nneed: richer downstream consumer\nor missing upstream ingredient\nvalidates: known-limits/consumer Agda" as W5 #fef3c7
   rectangle "W8 Origin receipt\nneed: co-located carrier/map/\nsignature/dynamics/empirical/CRT receipt\nvalidates: receipt Agda or docs check" as W8 #fef3c7
   rectangle "W9 Cancellation-pressure seam\nneed: discharge or replace\nCancellationPressureCompatibility dim=15\nvalidates: delta-to-quadratic Agda" as W9 #fef3c7
@@ -54,7 +153,7 @@ package "Interop and governance blockers" {
 }
 
 package "Shared promotion rules" {
-  rectangle "No prose promotion\nred/yellow gates move only by\nnamed theorem owner, typed receipt,\nor explicit mismatch diagnostic" as RuleNoProse #fee2e2
+  rectangle "No prose promotion\nred/yellow gates move only by\nnamed theorem owner, typed receipt,\nor explicit mismatch diagnostic\n(location + trit type + F-cause)" as RuleNoProse #fee2e2
   rectangle "Disjoint ownership\none lane per worker\nno unrelated dirty-tree edits" as RuleDisjoint #fee2e2
   rectangle "Verification\nrender diagrams after puml changes\nrun targeted Agda for touched modules\ngit diff --check for docs" as RuleVerify #fee2e2
 }
@@ -77,6 +176,63 @@ A_W4 --> W4 : owns
 W1 --> W3 : carrier dependency
 W1 --> W4 : carrier dependency
 W2 --> W3 : convergence affects checkability
+
+B_W1 --> W1 : owns follow-up
+B_W2 --> W2 : owns follow-up
+B_W3 --> W3 : parked by dependency
+B_W4 --> W4 : parked by dependency
+
+C_W1 --> W1 : owns policy surface
+C_W2 --> W2 : owns realization family
+C_W8 --> W8 : owns receipt surface
+C_W8 --> W3 : origin dependency named
+C_W1 --> W3 : carrier policy dependency
+C_W1 --> W4 : carrier policy dependency
+C_W3 --> W3 : remains parked
+C_W4 --> W4 : remains parked
+D_W8 --> W8 : attempts instance
+D_W8 --> W3 : origin dependency reduction
+D_W3 --> W3 : B4 dependency reduction
+D_W1 --> W1 : governance parked
+D_W1 --> W3 : still carrier blocked
+D_W1 --> W4 : still carrier blocked
+D_W4 --> W4 : remains parked
+E_W1 --> W1 : policy accepted
+E_W1 --> W3 : carrier policy unblocked
+E_W1 --> W4 : carrier policy unblocked
+E_W3 --> W3 : empirical remainder narrowing
+E_W4 --> W4 : physical handoff narrowing
+F_W3 --> W3 : chi2 transport narrowing
+F_W4 --> W4 : physical consumer narrowing
+G_W3 --> W3 : chi2 theorem attempt
+G_W4 --> W4 : physical consumer attempt
+H_W3 --> W3 : non-forgetting blocker tightened
+H_W4 --> W4 : strict physical semantics blocker tightened
+I_W3 --> W3 : local discriminator surfaced
+I_W4 --> W4 : strict obligations surfaced
+J_W3 --> W3 : local transport surfaced
+J_W4 --> W4 : strict ledger surfaced
+K_W3 --> W3 : local dynamics bridge surfaced
+L_W3 --> W3 : empirical target obligations surfaced
+L_W4 --> W4 : scale-setting lane surfaced
+M_W3 --> W3 : surrogate target boundary surfaced
+M_W4 --> W4 : surrogate scale boundary surfaced
+N_W3 --> W3 : authority gate surfaced
+N_W4 --> W4 : calibration gate surfaced
+O_W3 --> W3 : authority token hardened
+O_W4 --> W4 : calibration token hardened
+P_W3 --> W3 : external authority intake surfaced
+P_W4 --> W4 : external calibration intake surfaced
+Q_W5 --> W5 : GR/QFT consumer obligation surfaced
+Q_W6 --> W6 : PNF residual receipt obligation surfaced
+Q_W9 --> W9 : cancellation-pressure witness route surfaced
+R_W1 --> W1 : final retargeted seam surfaced
+R_W2 --> W2 : natural p2 promotion boundary surfaced
+R_W7 --> W7 : claim governance promotion boundary surfaced
+R_W8 --> W8 : origin promotion intake surfaced
+S_W0 --> Board : board-wide obligation index
+S_W0 --> RuleVerify : smoke target typechecks
+S_W0 --> RuleNoProse : non-promoting index only
 
 W1 --> RuleNoProse
 W2 --> RuleNoProse

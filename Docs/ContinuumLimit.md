@@ -49,6 +49,17 @@ The canonical bundle inhabits that stronger surface with the simplest honest
 carrier: the transported `RGObservable` itself, obtained by scaling away the
 bundle's gauge wrapper at the continuum layer.
 
+## W1 Retargeted-Seam Boundary
+
+`DASHI.Physics.Closure.CanonicalToNoncanonicalMdlRetargetFinalSeamObligation`
+records the current MDL/CR seam state after the repo accepted the retargeted
+schedule-MDL channel by equality. The old current noncanonical carrier remains
+obstructed; the remaining W1 work is a final retargeted-seam receipt plus
+downstream handoff compatibility for that accepted target.
+
+This does not prove the old carrier CR-flat, and it does not by itself supply a
+continuum-limit theorem.
+
 ## Next steps
 - Strengthen the current canonical continuum inhabitant beyond this first
   quotient-like carrier so the scaling map is no longer just “drop the gauge

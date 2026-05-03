@@ -6,12 +6,188 @@
   `Docs/WorkerCoordinationBoard.md`, `Docs/WorkerCoordinationMap.puml`,
   `README.md`, and `TODO.md`: `W1`=`Erdos`, `W2`=`Boole`, `W3`=`Tesla`,
   `W4`=`Poincare`
+- integrate the W1-W4 worker results:
+  `CanonicalToNoncanonicalMdlCurrentCarrierObstruction.agda` sharpens W1 by
+  proving the current carriers do not close both MDL alignment legs;
+  `CanonicalDynamicsLawTheorem.agda` now carries a finite shift-flow
+  `P0.ConvergenceBound`; `EmpiricalAdequacyCarrierDiagnostic.agda` records the
+  narrow packaged empirical equality plus full-profile mismatch; and
+  `ChemistryRightLimitsQuotientCrossBandCouplingRequirement.agda` now carries
+  a symmetric, quotient-sensitive, diagonal-nontrivial Candidate256 law surface
+- refine the W4 symmetry statement:
+  `ChemistryRightLimitsQuotientCrossBandCouplingRequirement.agda` now defines
+  a simultaneous sheet-sign reversal involution and proves the cross-band
+  coupling kernel is invariant under that reversal, making the W4 symmetry
+  gate native to the structural trit/lattice representation rather than an
+  external temporal/provenance predicate
 - keep the dependency rule explicit: `W1` is the carrier-critical blocker for
   full `W3` empirical equality and `W4` carrier promotion, while `W2` remains
   partially independent but affects convergence checkability
 - preserve the governance boundary: the assignment round is coordination only
   and does not discharge any red/yellow blocker without targeted Agda or a
   typed mismatch diagnostic
+- start a bounded follow-up round: `W1b` stays with `Erdos` for a
+  replacement/retargeted MDL channel or typed next-ingredient diagnostic, and
+  `W2b` stays with `Boole` for a realization-independent metric/horizon
+  convergence target; `W3` and `W4` are parked until carrier/channel inputs
+  change
+- integrate that follow-up round:
+  `CanonicalToNoncanonicalMdlCRRetargetedChannel.agda` now names the
+  transported schedule MDL readout as a retargeted noncanonical channel, and
+  `CanonicalDynamicsLawTheorem.agda` now carries a local
+  `PointedMetricHorizonConvergenceTarget`; both remain guarded against full
+  promotion until the retargeted-channel policy/theorem and realization-family
+  metric coherence exist
+- integrate the dependency-reduction round:
+  `CanonicalToNoncanonicalMdlCRRetargetedChannel.agda` now exposes
+  `CanonicalToNoncanonicalMdlCRRetargetPolicyAssumption` and
+  `CanonicalToNoncanonicalMdlCRRetargetPolicyAccepted`, while
+  `CanonicalToNoncanonicalMdlNextIngredientGap.agda` names the required
+  `CanonicalToNoncanonicalMdlCRRetargetPolicyIngredient`; this makes the W1
+  retarget-policy gate typed without asserting that the old current carrier is
+  CR-flat or that repo policy has already accepted the retargeted target
+- extend `CanonicalDynamicsLawTheorem.agda` with
+  `RealizationIndexedPointedMetricConvergenceTarget` and
+  `canonicalShiftRealizationMetricConvergenceFamily`, giving W2 a nontrivial
+  realization-tagged shift-flow metric/horizon/rate witness while keeping the
+  wider natural/`p2` theorem boundary explicit
+- add a conservative W8 origin-observation receipt surface:
+  `P0BlockadeProofObligations.agda` now defines `EmpiricalReceiptStatus` and
+  `OriginObservationReceipt`, and `Docs/OriginTraceabilityLedger.md` records
+  that this names carrier transport, origin observation map, signature owner,
+  dynamics witness, empirical status/caution, and CRT/J bridge without
+  promoting empirical adequacy, convergence, or seam closure
+- formalize the W3 meaning of `mismatch diagnostic`:
+  `P0BlockadeProofObligations.agda` now defines trits, trit-level mismatch
+  kinds, the five F-component causes, and `MismatchDiagnostic`; W3 now records
+  structured diagnostics for the chi2 pool, chi2 tail lift, B4 standalone
+  status, full-profile universe mismatch, and missing origin observation map.
+  Reader docs now state that a bare inequality is not an admissible diagnostic.
+- assign the targeted dependency round:
+  `Bernoulli` owns `W8b` for an origin-observation receipt instance or typed
+  missing-field diagnostic, and `Hubble` owns `W3b` for the B4 empirical
+  dependency clarification. `Docs/WorkerCoordinationBoard.md`,
+  `Docs/WorkerCoordinationMap.puml`, `README.md`, and `TODO.md` now record
+  that the `W1` retarget-policy ingredient remains governance-parked rather
+  than worker-inhabited.
+- integrate the targeted dependency round:
+  `MinimalCredibleShiftOriginObservation.agda` now instantiates a concrete
+  non-promoting `OriginObservationReceipt` for `minimumCredibleClosureShift`,
+  marks it `empiricalBlocked`, and exposes
+  `missingEmpiricalAdequacyBridge`; `EmpiricalAdequacyCarrierDiagnostic.agda`
+  now carries `B4EmpiricalDependencyReceipt`, making the B4 closure/observable
+  promotion bridge separate from the empirical B4 shell-validation blocker.
+- add the W1d retarget-policy decision:
+  `CanonicalToNoncanonicalMdlRetargetPolicyDecision.agda` accepts exactly the
+  canonical retargeted schedule-MDL channel by equality, inhabits
+  `CanonicalToNoncanonicalMdlCRRetargetPolicyIngredient`, and produces
+  `CanonicalToNoncanonicalMdlCRRetargetPolicyAccepted` without asserting that
+  the old current noncanonical carrier is CR-flat.
+- integrate the W3c/W4c policy-consumption results:
+  `EmpiricalAdequacyCarrierDiagnostic.agda` now consumes the W1d policy decision
+  and W8b origin receipt while keeping the origin side `empiricalBlocked`, and
+  `ChemistryPhysicalHandoffDiagnostic.agda` records the accepted-carrier
+  Candidate256 quotient/cross-band pre-handoff with status
+  `missingPhysicalConsumer`.
+- start the remainder-narrowing round:
+  `Carson` owns `W3d` for chi2 fixed-point carrier transport or a sharper typed
+  obstruction, and `Ptolemy` owns `W4d` for a physical-consumer surface or
+  sharper missing-ingredient diagnostic.
+- integrate the remainder-narrowing results:
+  `Chi2FixedPointCarrierTransportObstruction.agda` names the positive
+  `Chi2FixedPointCarrierTransportReceipt` and records the current
+  `blockedByPoolMismatchAndNoSameSurface` obstruction, while
+  `ChemistryPhysicalHandoffDiagnostic.agda` now sharpens W4's missing consumer
+  to `missingRetargetedQuotientInterpretationCarrierOrPreservationLaw`.
+- start the dual-discharge attempt round:
+  `Carver` owns `W3e` for the chi2 same-surface / fixed-point
+  defect-observation receipt, and `Darwin` owns `W4e` for the retargeted
+  quotient physical interpretation carrier/preservation law.
+- integrate the dual-discharge results:
+  `Chi2FixedPointCarrierTransportObstruction.agda` now inhabits the chi2
+  transport receipt but records it as `carrierForgettingConstantReceiptOnly`,
+  and `ChemistryPhysicalHandoffDiagnostic.agda` now inhabits a boundary-only
+  `canonicalRetargetedQuotientChemistryPhysicalConsumer` with status
+  `retargetedQuotientPrePhysicalConsumerAvailable`.
+- integrate the blocker-tightening results:
+  `Chi2NonForgettingSameSurfaceObstruction.agda` records that the current
+  same-`Nat` defect target cannot also distinguish primary/secondary chi2
+  cases, and `ChemistryStrictPhysicalSemanticsBlocker.agda` records the strict
+  physical semantics gap as missing scale-setting, spectral observable,
+  bonding, and empirical physical validation ingredients.
+- integrate the obligation-surfacing results:
+  `Chi2CanonicalPoolObservationCandidate.agda` adds a local nonconstant chi2
+  pool discriminator that remains non-empirical and non-promoting, and
+  `W4StrictPhysicalNextObligation.agda` packages the strict Candidate256
+  physical handoff fields as obligations-needed rather than inhabited theorem
+  claims.
+- integrate the local-transport/ledger results:
+  `Chi2ToShiftPressureTransportCandidate.agda` maps the local chi2 pool onto
+  the start/next/held shift-pressure carrier with pairwise distinction while
+  refusing fixed-point empirical adequacy, and
+  `W4StrictPhysicalObligationLedger.agda` orders the strict Candidate256
+  physical lanes with scale-setting first.
+- add the W3 local-dynamics bridge:
+  `Chi2TransportDynamicsToFixedPointBridge.agda` composes the local chi2
+  transport with the existing two-step shift absorption theorem, leaving only
+  empirical observation target and promotion bridge work for that local W3
+  path.
+- add the W3/W4 obligation-narrowing surfaces:
+  `W3EmpiricalTargetPromotionBridgeObligation.agda` packages the remaining W3
+  empirical target/promotion obligations, and
+  `W4StrictPhysicalScaleSettingLaneObligation.agda` narrows the first strict
+  physical Candidate256 lane to scale carrier, quotient-class scale map, and
+  `L_chem` scale-preservation law requirements.
+- add the W3/W4 surrogate-boundary surfaces:
+  `W3SurrogateEmpiricalTargetBoundary.agda` inhabits the W3 target/promotion
+  shape with a synthetic non-authoritative target, and
+  `W4SurrogateScaleSettingBoundary.agda` inhabits the scale-setting shape with
+  a dimensionless `Nat` diagonal while preserving the physical
+  units/calibration blocker.
+- add the W3/W4 authority and calibration gates:
+  `W3AcceptedEmpiricalAuthorityGate.agda` records that current photonuclear
+  evidence remains empirical-only while B4 and origin promotions are blocked,
+  and `W4PhysicalCalibrationGate.agda` records that the dimensionless scale
+  surrogate still needs physical units, calibration, and dimensional
+  preservation before scale-setting promotion.
+- harden those W3/W4 gates:
+  `W3AcceptedEvidenceAuthorityToken` and
+  `Candidate256PhysicalCalibrationAuthorityToken` are constructorless in the
+  current repo, preventing the synthetic W3 target or dimensionless W4 `Nat`
+  scale surrogate from accidentally promoting without a new upstream authority
+  receipt.
+- add external-intake obligation surfaces for the hardened gates:
+  `W3AcceptedAuthorityExternalReceiptObligation.agda` names the external
+  accepted-evidence authority receipt shape needed to combine authority,
+  evidence-backed target, B4 empirical promotion, and origin promotion, while
+  `W4PhysicalCalibrationExternalReceiptObligation.agda` names the external
+  physical-calibration receipt shape needed for units, calibration,
+  factorization, and dimensional preservation. Both record current status as
+  blocked/obligations-needed only.
+- add next-obligation surfaces for the remaining open lanes:
+  `GRQFTConsumerNextObligation.agda` records W5 downstream GR/QFT consumer
+  fields with a constructorless promotion authority token,
+  `DASHI/Interop/PNFResidualConsumerNextObligation.agda` records W6
+  receipt-backed ITIR/PNF residual consumer requirements without labels by
+  inspection, and `CancellationPressureCompatibilityNextObligation.agda`
+  records W9's existing pressure-witness route plus the weighted-valuation
+  replacement seam.
+- add final-boundary obligation surfaces for the remaining coordination lanes:
+  `CanonicalToNoncanonicalMdlRetargetFinalSeamObligation.agda` records W1's
+  final retargeted-seam receipt and handoff requirements,
+  `NaturalP2ConvergencePromotionObligation.agda` records W2's broader
+  natural/p2 promotion requirements beyond the shift-flow convergence
+  receipts, `ClaimGovernancePromotionObligation.agda` records W7 authority and
+  validation requirements for guarded chart readings, and
+  `OriginReceiptPromotionExternalObligation.agda` records W8's external
+  promotion receipt requirements while keeping the current origin receipt
+  `empiricalBlocked`.
+- add a board-wide P0 obligation index:
+  `P0BlockerObligationIndex.agda` imports the current W1-W9 obligation/status
+  surfaces as a single targeted smoke-check module for worker coordination and
+  discoverability. It is explicitly non-promoting and does not inhabit external
+  authority, calibration, empirical, origin, GR/QFT, PNF, natural, or
+  cancellation-pressure receipts.
 
 ## 2026-05-03
 

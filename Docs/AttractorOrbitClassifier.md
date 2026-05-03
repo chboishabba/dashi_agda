@@ -214,6 +214,12 @@ obligation surface for these gates. It is not an implementation of temporal
 semantics, and it does not promote `MereViol`, `CONTRADICTION_mu`, `Overlap`,
 `INCOMPLETE_tau`, `CRTPeriod`, or `JFixedPoint` claims.
 
+`DASHI.Physics.Closure.ClaimGovernancePromotionObligation` now records the W7
+promotion boundary for these and adjacent chart readings. It requires an
+authority token and validation receipts before higher-structure, cross-scale,
+temporal, spacetime, neurochemical, or market readings can move beyond guarded
+fixtures. The current value is obligations-needed only.
+
 ## Spacetime Sheaf / Mereological Space Boundary
 
 The temporal-sheaf reading exposes the next required extension: once spatial

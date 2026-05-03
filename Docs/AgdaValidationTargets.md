@@ -29,6 +29,7 @@ canonical closure spine:
 - `DASHI/Physics/FascisticContractionInstance.agda`
 - `DASHI/Physics/CRTPeriodJFixedBridge.agda`
 - `DASHI/Physics/Closure/TemporalSheafProofObligations.agda`
+- `DASHI/Physics/Closure/P0BlockerObligationIndex.agda`
 
 Use these for routine theorem-edit loops and targeted bridge checks.
 
@@ -123,15 +124,22 @@ Interpretation rule:
 
 | Blocker lane | Allowed validation level | Timeout / avoidance rule |
 |---|---|---|
-| `W1` MDL/CR carrier | `L0/L1` targeted seam modules | Avoid full closure aggregates; check only touched `CanonicalToNoncanonicalMdl*` modules. |
-| `W2` natural / `p2` / convergence | `L2` for heavy natural-charge modules, `L0/L1` for thin helper modules | Use at most a short timeout for `CanonicalP2KeyScheduleBridgeObstruction` and `CanonicalScheduleIndependentNaturalChargeNextIngredientGap`; otherwise route offline. |
+| `W1` MDL/CR carrier | `L0/L1` targeted seam modules | Check `CanonicalToNoncanonicalMdlRetargetFinalSeamObligation.agda` when the final seam boundary changes; avoid full closure aggregates. |
+| `W2` natural / `p2` / convergence | `L2` for heavy natural-charge modules, `L0/L1` for thin helper modules | Check `NaturalP2ConvergencePromotionObligation.agda` for the promotion boundary; use at most a short timeout for heavier natural-charge modules, otherwise route offline. |
 | `W3` empirical adequacy | `L0/L1` targeted empirical bridge modules | Empirical sidecars do not promote theorem closure; carrier mismatch diagnostics are acceptable outputs. |
 | `W4` chemistry law | `L0/L1`, except known heavy photonuclear contact dependencies | Prefer direct chemistry quotient/coupling modules; avoid `AtomicPhotonuclearContactGateTheorem` unless assigned. |
-| `W5` GR/QFT consumer | `L0/L1` consumer modules, `L2` for known full matter/gauge aggregates | Do not run `KnownLimitsFullMatterGaugeTheorem` as an inner-loop check. |
-| `W6` ITIR/PNF consumer | `L0/L1` interop and Hecke bridge modules | Docs-only receipt work uses `git diff --check`; no live ITIR runtime validation unless explicitly assigned. |
-| `W7` claim governance | docs-only or targeted proof-obligation modules | Run `TemporalSheafProofObligations.agda` only if obligation records change. |
-| `W8` origin receipt | docs-only or targeted new receipt module | Do not use `Everything.agda` as routine validation for a receipt surface. |
-| `W9` cancellation-pressure seam | `L0/L1` targeted delta/arithmetic modules | Check `DeltaToQuadraticBridgeTheorem.agda` and touched arithmetic/transport modules; avoid unrelated closure aggregates. |
+| `W5` GR/QFT consumer | `L0/L1` consumer modules, `L2` for known full matter/gauge aggregates | Check `GRQFTConsumerNextObligation.agda` when the W5 next-obligation surface changes; do not run `KnownLimitsFullMatterGaugeTheorem` as an inner-loop check. |
+| `W6` ITIR/PNF consumer | `L0/L1` interop and Hecke bridge modules | Check `DASHI/Interop/PNFResidualConsumerNextObligation.agda` when the W6 receipt surface changes; no live ITIR runtime validation unless explicitly assigned. |
+| `W7` claim governance | docs-only or targeted proof-obligation modules | Check `ClaimGovernancePromotionObligation.agda` when governance gates change; run `TemporalSheafProofObligations.agda` only if obligation records change. |
+| `W8` origin receipt | docs-only or targeted new receipt module | Check `OriginReceiptPromotionExternalObligation.agda` when the origin promotion boundary changes; do not use `Everything.agda` as routine validation for a receipt surface. |
+| `W9` cancellation-pressure seam | `L0/L1` targeted delta/arithmetic modules | Check `CancellationPressureCompatibilityNextObligation.agda`, `DeltaToQuadraticBridgeTheorem.agda`, and touched arithmetic/transport modules; avoid unrelated closure aggregates. |
+
+Board-wide smoke target:
+
+- `DASHI/Physics/Closure/P0BlockerObligationIndex.agda` imports the current
+  W1-W9 obligation/status surfaces without promoting them. Use it after
+  coordination-surface edits to confirm the worker-lane index still type-checks
+  before widening to lane-specific checks.
 
 ## Hygiene Script Policy
 

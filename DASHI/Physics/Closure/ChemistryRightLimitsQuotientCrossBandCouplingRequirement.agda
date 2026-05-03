@@ -1,13 +1,15 @@
 module DASHI.Physics.Closure.ChemistryRightLimitsQuotientCrossBandCouplingRequirement where
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Product using (_×_; _,_)
-open import Data.Vec using (map)
+import Data.Vec as Vec
+open import Data.Vec using (Vec; map)
 
 open import DASHI.Physics.Closure.AtomicChemistryRecoveryTheorem as ACRT
 open import DASHI.Physics.Closure.AtomicChemistryRightLimitsAdapter as ACRLA
@@ -27,6 +29,73 @@ open import Ontology.DNA.ChemistrySheetHamiltonian as CSH
 
 _≢_ : {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
+
+sheetTimeReverse : CSH.Signed → CSH.Signed
+sheetTimeReverse CSH.neg = CSH.pos
+sheetTimeReverse CSH.zer = CSH.zer
+sheetTimeReverse CSH.pos = CSH.neg
+
+sheetTimeReverse-involutive :
+  ∀ s → sheetTimeReverse (sheetTimeReverse s) ≡ s
+sheetTimeReverse-involutive CSH.neg = refl
+sheetTimeReverse-involutive CSH.zer = refl
+sheetTimeReverse-involutive CSH.pos = refl
+
+sameSign-timeReverse :
+  ∀ x y →
+  CSH.sameSign (sheetTimeReverse x) (sheetTimeReverse y)
+    ≡
+  CSH.sameSign x y
+sameSign-timeReverse CSH.neg CSH.neg = refl
+sameSign-timeReverse CSH.neg CSH.zer = refl
+sameSign-timeReverse CSH.neg CSH.pos = refl
+sameSign-timeReverse CSH.zer CSH.neg = refl
+sameSign-timeReverse CSH.zer CSH.zer = refl
+sameSign-timeReverse CSH.zer CSH.pos = refl
+sameSign-timeReverse CSH.pos CSH.neg = refl
+sameSign-timeReverse CSH.pos CSH.zer = refl
+sameSign-timeReverse CSH.pos CSH.pos = refl
+
+countCrossBandCoupling-timeReverse :
+  ∀ {n} (u v : Vec CSH.Signed n) →
+  CSH.countCrossBandCoupling
+    (Vec.map sheetTimeReverse u)
+    (Vec.map sheetTimeReverse v)
+    ≡
+  CSH.countCrossBandCoupling u v
+countCrossBandCoupling-timeReverse Vec.[] Vec.[] = refl
+countCrossBandCoupling-timeReverse (u Vec.∷ us) (v Vec.∷ vs)
+  rewrite sameSign-timeReverse u v with CSH.sameSign u v
+... | true = countCrossBandCoupling-timeReverse us vs
+... | false rewrite countCrossBandCoupling-timeReverse us vs = refl
+
+record TimeSymmetricCrossBandKernel : Set₁ where
+  field
+    timeReverseSigned : CSH.Signed → CSH.Signed
+    involutive :
+      ∀ s → timeReverseSigned (timeReverseSigned s) ≡ s
+    sameSignInvariant :
+      ∀ x y →
+      CSH.sameSign (timeReverseSigned x) (timeReverseSigned y)
+        ≡
+      CSH.sameSign x y
+    crossBandInvariant :
+      ∀ {n} (u v : Vec CSH.Signed n) →
+      CSH.countCrossBandCoupling
+        (Vec.map timeReverseSigned u)
+        (Vec.map timeReverseSigned v)
+        ≡
+      CSH.countCrossBandCoupling u v
+
+canonicalTimeSymmetricCrossBandKernel :
+  TimeSymmetricCrossBandKernel
+canonicalTimeSymmetricCrossBandKernel =
+  record
+    { timeReverseSigned = sheetTimeReverse
+    ; involutive = sheetTimeReverse-involutive
+    ; sameSignInvariant = sameSign-timeReverse
+    ; crossBandInvariant = countCrossBandCoupling-timeReverse
+    }
 
 RequirementSupport :
   TripleLaw.ChemistryRightLimitsQuotientObservableCouplingLaw →
@@ -388,6 +457,9 @@ record ChemistryRightLimitsQuotientCrossBandLaw : Setω where
     strictEnrichment :
       ChemistryRightLimitsStrictEnrichment requirement
 
+    timeSymmetricKernel :
+      TimeSymmetricCrossBandKernel
+
     nonClaimBoundary : List String
 
 requirementToChemistryRightLimitsLaw :
@@ -490,10 +562,13 @@ requirementToQuotientCrossBandLaw req I× sym sensitive =
     ; nontrivialDiagonalAtWitness = sensitive
     ; strictEnrichment =
         requirementToStrictEnrichment req
+    ; timeSymmetricKernel =
+        canonicalTimeSymmetricCrossBandKernel
     ; nonClaimBoundary =
         "L_chem is a quotient/cross-band pre-spectral chemistry law on ChemistryFeature, not a spectral or scale-setting semantics"
         ∷ "Its witness keeps the defect/promoted observables fixed while quotient and cross-band structure separate"
         ∷ "L_chem is inhabited in both witness orders, and I× is symmetric on the Candidate256 pair"
+        ∷ "The cross-band kernel is invariant under simultaneous sheet-sign reversal; this records native TSFV-style structural compatibility, not an external temporal/provenance predicate"
         ∷ "I× is band-sensitive and nontrivial on the same fixed defect/promoted pair, so it is not just pair or triple compatibility"
         ∷ "It strictly enriches the landed pair/triple compatibility surface but does not claim bonding, periodic-table completion, nuclear dynamics, physics-facing handoff, or finished chemistry"
         ∷ []

@@ -76,16 +76,90 @@ Role:
 Role:
 
 - instantiates the narrow typed `EmpiricalAdequacy` equality available today:
-  the packaged photonuclear observable profile is observed at the held
+  the packaged `Nat` defect-channel observable is observed at the held
   shift-pressure fixed point;
-- records that this equality is only over the packaged `Nat` photonuclear
-  surface, not the stronger origin/chi2/B4 empirical adequacy bridge;
+- records that this equality is only over one packaged `Nat` observable, not
+  the stronger full-profile origin/chi2/B4 empirical adequacy bridge;
+- uses the repo-local term `mismatch diagnostic` in the strict typed sense:
+  each diagnostic records the first mismatch depth, the model/empirical trits
+  at that depth, the trit-level mismatch kind, and the responsible pipeline
+  component from `F_extract`, `F_promote`, `F_graph`, `F_explain`, or
+  `F_action`;
 - carries the current blocker statuses as typed evidence:
-  `poolCarrierMismatch`, `noSameSurfaceRecovered`, and `standaloneOnly`;
+  `poolCarrierMismatch`, `noSameSurfaceRecovered`, `standaloneOnly`, and the
+  full photonuclear profile's `Set₁`/`Set` mismatch against the current P0
+  obligation; it also consumes the W8b origin-observation receipt and records
+  that its empirical status remains `empiricalBlocked`;
+- imports `Chi2FixedPointCarrierTransportObstruction`, which names the positive
+  `Chi2FixedPointCarrierTransportReceipt` needed to transport the chi2 pool to
+  the fixed-point carrier, and records the current obstruction as
+  `blockedByPoolMismatchAndNoSameSurface`; the receipt is now inhabited, but
+  only by a `carrierForgettingConstantReceiptOnly` boundary, so it does not
+  discharge the non-forgetting same-surface theorem;
+- imports `Chi2NonForgettingSameSurfaceObstruction`, which proves that the
+  current same `Nat` defect target cannot also distinguish the primary and
+  secondary chi2 cases. The next admissible W3 repair is therefore not another
+  constant fixed-point receipt; it needs a boundary-case discriminator, an
+  injective/nonconstant observation target, and a same-surface transport law
+  over `Chi2BoundaryCase`;
+- imports `Chi2CanonicalPoolObservationCandidate`, which supplies a local
+  nonconstant `0/1/2` discriminator for the canonical chi2 pool cases. This
+  reduces the discriminator gap, but remains explicitly local-only,
+  non-empirical, non-promoting, and not an `obs(fixedPoint) = empirical`
+  bridge;
+- imports `Chi2ToShiftPressureTransportCandidate`, which maps the local chi2
+  pool cases onto `shiftStartPoint`, `shiftNextPoint`, and
+  `shiftHeldExitPoint` with pairwise distinction. This is a local
+  same-carrier transport candidate, not fixed-point landing, not empirical
+  transport, and not an adequacy bridge;
+- imports `Chi2TransportDynamicsToFixedPointBridge`, which composes that local
+  transport with the existing `shiftConvergesToHeldWithin2` dynamics theorem.
+  This isolates the remaining local W3 gap to empirical observation target and
+  promotion bridge work; it still does not assert `obs(fixedPoint) =
+  empirical`;
+- `W3EmpiricalTargetPromotionBridgeObligation` packages the remaining positive
+  W3 work as obligations: nonconstant empirical observation target over the
+  transported chi2 pool, promotion from the local chi2 path to
+  `P0.EmpiricalAdequacy`, empirical B4 promotion beyond `standaloneOnly`, and
+  origin receipt promotion beyond `empiricalBlocked`;
+- `W3SurrogateEmpiricalTargetBoundary` proves the W3 target/promotion record
+  shape is structurally inhabitible with a synthetic `Nat` target, but marks
+  that inhabitant as surrogate-only. It does not replace accepted empirical
+  evidence, does not promote empirical B4 validation, and does not promote the
+  origin observation receipt;
+- `W3AcceptedEmpiricalAuthorityGate` separates the accepted-authority gate from
+  the surrogate target shape. The current gate status records photonuclear
+  evidence and validation as empirical-only, B4 shell comparison as
+  `standaloneOnly`, and the origin observation receipt as `empiricalBlocked`;
+- `W3AcceptedEvidenceAuthorityToken` has no constructors in the current repo.
+  This hardens the gate: the synthetic surrogate target can inhabit the target
+  shape, but it cannot be reused as accepted empirical authority without a new
+  upstream receipt;
+- `W3AcceptedAuthorityExternalReceiptObligation` names that upstream receipt
+  shape explicitly: it must carry the authority token, an evidence-backed
+  empirical target, B4 empirical promotion, origin receipt promotion, and the
+  matching bridge obligations. The current status remains
+  obligations-needed/blocked;
+- exposes structured W3 diagnostics for the current complement of the narrow
+  equality: chi2 pool carrier mismatch and chi2 tail lift are `F_graph`
+  under-promotion diagnostics, chi2 fixed-point carrier transport is now a
+  separate `F_graph` obstruction diagnostic, the carrier-forgetting receipt
+  boundary and the non-forgetting same-surface contradiction are `F_explain`
+  diagnostics, B4 `standaloneOnly` is an `F_promote` under-promotion
+  diagnostic, the B4 closure-promotion bridge is recorded as a separate
+  `F_promote` diagnostic rather than a discharge of empirical B4 validation,
+  and the full-profile universe mismatch plus W8b
+  `empiricalBlocked` receipt are `F_explain` under-promotion diagnostics;
+- consumes the W1 narrow equality retarget policy decision as typed evidence
+  rather than treating retarget policy selection as a remaining W3 blocker;
+- records `B4EmpiricalDependencyReceipt`: the closure/observable
+  `RootSystemB4PromotionBridge` is `admissiblePromotionReady`, but the
+  empirical `RootSystemB4ShellComparison.report` remains `standaloneOnly`, so
+  closure-side B4 promotion does not satisfy the empirical adequacy dependency;
 - names the next type needed for promotion:
   a `StrongEmpiricalAdequacyBridgeNextType` with chi2-pool transport onto the
-  fixed-point carrier, B4 promotion beyond `standaloneOnly`, and a coherent
-  origin observation map.
+  fixed-point carrier, B4 promotion beyond `standaloneOnly`, and promotion of
+  the consumed W8b origin-observation receipt beyond `empiricalBlocked`.
 
 ### Canonical normalized artifact schema
 

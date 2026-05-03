@@ -157,6 +157,23 @@ That weakness has also been reduced one step:
 This is still not a full physical dynamics theorem, but it is now tied to the
 actual closure/recovery stack rather than a synthetic carrier permutation.
 
+## W5 GR/QFT Consumer Obligation Surface
+
+`DASHI.Physics.Closure.GRQFTConsumerNextObligation` records the current W5
+downstream-consumer boundary. It names the fields needed before the known-limits
+GR-like and QFT-like bridge surfaces can promote into a richer GR/QFT consumer:
+
+- spacetime, stress-energy, curvature, Einstein-equation, wave-state, spinor,
+  gauge-representation, and interaction-closure carriers;
+- maps/consumers for stress-energy, curvature, Einstein-equation, spinor,
+  gauge-representation, and interaction closure;
+- laws for the GR equation consumer and QFT interaction consumer;
+- empirical GR/QFT validation and an upstream promotion authority.
+
+The promotion authority token is constructorless in the current module, so this
+is an obligation surface only. It does not derive Einstein's equation, QFT
+interaction closure, or empirical GR/QFT adequacy.
+
 The current canonical inhabitant is now slightly less nominal on the invariant
 side as well:
 
