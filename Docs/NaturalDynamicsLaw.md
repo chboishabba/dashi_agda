@@ -39,6 +39,23 @@ or too local:
 - and the best dynamics/invariant couplings are still local rather than
   realization-independent.
 
+**Origin traceability correction**
+
+The downloaded origin-traceability diagnosis correctly identifies the missing
+general convergence-rate theorem, but it should not be read as saying the repo
+has no dynamics owner. `CanonicalDynamicsLawTheorem.agda` already packages
+propagation, causal admissibility, monotone quantity, continuum-law status, and
+a realization-independent proof-shape slot over current bounded witnesses.
+What remains missing is the stronger theorem:
+
+```text
+d(K^t x, x*) <= max 0 (d(x, x*) - t)
+```
+
+on the intended carrier, with an explicit horizon/fixed-point certificate. That
+rate theorem is the promotion target; another status package would not close
+the natural dynamics law gap.
+
 **Bridge toward natural dynamics law**
 
 To answer the request, we require: a state space defined by the `ShiftState` vector and cone witness, an evolution candidate that emerges from contraction + projection (not a hand-wired coarse map), admissibility tied to geometry/MDL rather than fixed witnesses, and a demonstration that the engineered coarse maps can be replaced by naturally emergent flows (e.g., `Tᵣ` or `Rᵣ` flows). Without that derivation, the law remains engineered/post-selected.

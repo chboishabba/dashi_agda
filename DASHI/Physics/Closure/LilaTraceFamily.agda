@@ -4,7 +4,7 @@ open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Physics.Closure.ExecutionContract as EC
-open import DASHI.Physics.Closure.ExecutionContractLaws as ECL
+import DASHI.Physics.Closure.ExecutionContractLaws as ECL
 
 -- A row in the LILA trace view: one adjacent pair plus the receipt that
 -- certifies the pair against the execution contract.

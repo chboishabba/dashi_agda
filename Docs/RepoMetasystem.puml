@@ -35,8 +35,25 @@ package "Reader tracks" {
   rectangle "RepoGuide.md\nHow the repo is organized" as RepoGuide #dcfce7
   rectangle "PhysicsGuide.md\nHow to read the physics program" as PhysicsGuide #dcfce7
   rectangle "UnificationClaim.md\nStrongest disciplined claim" as UniClaim #dcfce7
+  rectangle "OriginTraceabilityLedger.md\nOrigin thesis + disconnection ledger" as OriginLedger #dcfce7
+  rectangle "WorkerCoordinationBoard.md\nlane owners for red/yellow blockers" as WorkerBoard #dbeafe
+  rectangle "Claim-governance docs\nAttractorOrbitClassifier.md\nClaimComparisonEngine.md\nPNFCaseStudiesWatergateIran.md\nITIRPNFResidualLogicBridge.md\nOriginTraceabilityLedger.md\n[hypotheses stay guarded]" as ClaimGuardDocs #fef3c7
+  rectangle "CoreSpineBridge.md\nTriadic carrier bridge" as CoreSpineDoc #dcfce7
+  rectangle "AntifascisticBoundaryAndMusic.md\nboundary examples + music toy" as BoundaryMusicDoc #fff7ed
+  rectangle "MusicalAttractorTheorem.md\nZ12 carrier + K_music target" as MusicAttractorDoc #fff7ed
   rectangle "PhysicsRecoveryLedger.md\nRepo-native recovery status" as RecoveryLedger #dcfce7
   rectangle "ArchiveRecoveryCrosswalk.md\nArchive truth vs repo truth" as RecoveryCrosswalk #dcfce7
+}
+
+package "Current truth board" {
+  rectangle "What is theorem-owned now\ncanonical closure spine\nUnifiedPhysicsTheorem\nadapter seam owner\n[proved / theorem-owned]" as TruthTheorem #dcfce7
+  rectangle "What is bridge-only now\nCoreSpine carrier bridge\nknown-limits GR/QFT\norigin traceability\n[bridge, not full recovery]" as TruthBridge #fef3c7
+  rectangle "What is packaging now\nMinimalCredible closure\nAtomicChemistryRecoveryTheorem\nDashiDynamics consumers\n[packaging with gates]" as TruthPackaging #dbeafe
+  rectangle "What is exploratory now\nthree-body boundary reading\nmusic MDL basin toy\nMonster music artifacts\n[examples, not theorem spine]" as TruthExploratory #fff7ed
+  rectangle "Music attractor target\n(Z12)^n carrier\nK_music nearest-scale projection\nL_music chromatic Lyapunov\n[documented target, not Agda theorem]" as TruthMusicAttractor #fff7ed
+  rectangle "What is empirical now\nphotonuclear registry\nchi2 audit: carrier mismatch\nB4 comparison: standaloneOnly\n[empirical, non-claim]" as TruthEmpirical #fee2e2
+  rectangle "Open promotion gates\norigin receipt\nEmpiricalAdequacyBridge\nconvergence-rate dynamics\nchemistry relaxation law\nMDL/CR + p2 seams\nNGram / ITIR consumer wiring\n[not closed]" as TruthOpen #fecaca
+  rectangle "Open claim-governance gates\ncomparative theology / living lattices /\naffective states / Base369 semantics /\nmathematical-atlas charts /\ncross-scale physics-biology-consciousness /\nneurochemical body-brain chemistry /\ntemporal sheaf / time-indexed state /\nspacetime sheaf / mereological space /\nmarket self-observation and trader operators\nneed receipts, typed carriers, morphisms,\nscale maps, temporal/spacetime gluing/metrics,\nTime/Space containment carriers,\nevolution-validity preservation,\nbiomedical validation,\nmarket validation,\nand non-authority flags\n[not theorem claims]" as TruthClaimGovernance #fecaca
 }
 
 package "Canonical code surfaces" {
@@ -46,11 +63,13 @@ package "Canonical code surfaces" {
   rectangle "PhysicsUnificationToCanonicalClosureAdapter\nabstract/canonical seam owner" as AdapterOwner #fef3c7
   rectangle "Bridge / packaging consumers" as Consumers #fef3c7
   rectangle "Empirical lane\nphotonuclear + HEPData" as Empirical #fee2e2
+  rectangle "Interop sidecars\nNGram: ternary windows, not text semantics\nITIRJoinBridge: UFTC join -> pressure adapter\nSensibLawResidualLattice: fibred PNF residual chain,\nPNFEmissionReceipt required before labels,\nreceipted performative -> scopeExceeded6,\nindex fallback, six-level refinement\nTetralemma/Sixfold: LogicTlurey/Base369 carrier bridges\nHecke.PNFResidualBridge: quotient fibre -> residual pressure\naggregate-imported; consumer receipts remain" as InteropSidecars #fef3c7
 }
 
 package "Diagram surfaces" {
   rectangle "CanonicalProofSpine.puml/svg\nformal route map" as SpineDiagram #ede9fe
   rectangle "PhysicsUnificationMap.puml/svg\nclaim-boundary map" as PhysDiagram #ede9fe
+  rectangle "WorkerCoordinationMap.puml/svg\nparallel blocker-lane map" as WorkerDiagram #ede9fe
   rectangle "ObservableSignatureGaugeEntryRound.puml/svg\nspecific bridge child graph" as ObsDiagram #ede9fe
   rectangle "TRAINING_DYNAMICS.puml/svg\nruntime evidence child graph" as TrainDiagram #ede9fe
 }
@@ -58,9 +77,16 @@ package "Diagram surfaces" {
 Readme --> RepoGuide : repo track
 Readme --> PhysicsGuide : physics track
 Readme --> UniClaim : shortest serious claim
+Readme --> OriginLedger : origin traceability
+Readme --> WorkerBoard : worker routing
+Readme --> ClaimGuardDocs : claim governance
+Readme --> CoreSpineDoc : core-spine bridge
+Readme --> BoundaryMusicDoc : boundary examples
+Readme --> MusicAttractorDoc : music target
 Readme --> RecoveryLedger : repo recovery truth
 Readme --> RecoveryCrosswalk : archive reconciliation
 Readme --> Arch : architecture entry
+Readme --> TruthTheorem : true-state board
 
 Arch --> Spine : canonical module route
 Arch --> UnifiedOwner : theorem-owner route
@@ -68,21 +94,46 @@ Arch --> AtomOwner : interpretation carrier route
 Arch --> AdapterOwner : abstract/canonical seam route
 Arch --> SpineDiagram : primary child graph
 Arch --> PhysDiagram : claim-boundary child graph
+Arch --> WorkerDiagram : blocker-lane child graph
 Arch --> ObsDiagram : detailed bridge child graph
 Arch --> TrainDiagram : detailed runtime child graph
+Arch --> InteropSidecars : adapter-sidecar status
+Arch --> ClaimGuardDocs : hypothesis guardrails
 
 RepoGuide --> Spine : canonical owners
 RepoGuide --> UnifiedOwner : strong claim owner
 PhysicsGuide --> UnifiedOwner : theorem-owner reading
 PhysicsGuide --> AtomOwner : bounded atom/wave reading
+PhysicsGuide --> OriginLedger : traceability governance
+PhysicsGuide --> ClaimGuardDocs : claim-boundary governance
+PhysicsGuide --> CoreSpineDoc : carrier bridge reading
+PhysicsGuide --> BoundaryMusicDoc : examples / toys
+PhysicsGuide --> MusicAttractorDoc : exploratory bridge
 PhysicsGuide --> Consumers : bridge + packaging reading
 PhysicsGuide --> Empirical : explicit non-claim lane
 UniClaim --> Spine : strongest current evidence
 UniClaim --> UnifiedOwner : theorem-owner route
 UniClaim --> AdapterOwner : abstract/canonical seam
 UniClaim --> AtomOwner : bounded interpretation layer
+UniClaim --> OriginLedger : non-overclaim boundary
+UniClaim --> ClaimGuardDocs : non-claim boundary
 UniClaim --> Consumers : bounded unification interfaces
 UniClaim --> Empirical : what does not count as proof
+OriginLedger --> CoreSpineDoc : origin bridge detail
+OriginLedger --> RecoveryLedger : promotion gates
+OriginLedger --> Consumers : packaging vs instance
+OriginLedger --> Empirical : adequacy gap
+OriginLedger --> TruthBridge : safe origin level
+OriginLedger --> TruthOpen : remaining gates
+WorkerBoard --> TruthOpen : lane assignment
+WorkerBoard --> TruthClaimGovernance : no-prose promotion rule
+ClaimGuardDocs --> TruthClaimGovernance : guardrail ledger
+ClaimGuardDocs --> InteropSidecars : residual / PNF gates
+BoundaryMusicDoc --> TruthExploratory : examples, not closure
+BoundaryMusicDoc --> MusicAttractorDoc : named target
+BoundaryMusicDoc --> Consumers : representation-dependent split
+MusicAttractorDoc --> TruthMusicAttractor : K_music / L_music
+MusicAttractorDoc --> TruthExploratory : not theorem spine
 RecoveryLedger --> Spine : owner modules and statuses
 RecoveryLedger --> UnifiedOwner : theorem-owner status
 RecoveryLedger --> AtomOwner : atom/chemistry recovery gates
@@ -99,6 +150,20 @@ PhysDiagram --> AtomOwner
 PhysDiagram --> AdapterOwner
 PhysDiagram --> Consumers
 PhysDiagram --> Empirical
+WorkerDiagram --> TruthOpen
+WorkerDiagram --> TruthClaimGovernance
+TruthTheorem --> Spine : proof route
+TruthTheorem --> UnifiedOwner : strongest owner
+TruthBridge --> CoreSpineDoc : carrier bridge
+TruthBridge --> AdapterOwner : seam bridge
+TruthPackaging --> AtomOwner : bounded carrier
+TruthPackaging --> Consumers : consumer interfaces
+TruthExploratory --> Consumers : examples and toys
+TruthEmpirical --> Empirical : non-claim evidence
+TruthOpen --> RecoveryLedger : tracked gaps
+TruthOpen --> InteropSidecars : promotion wiring
+TruthClaimGovernance --> ClaimGuardDocs : tracked hypotheses
+TruthClaimGovernance --> InteropSidecars : receipt-bearing consumers
 
 note bottom of Readme
 The README should route.
@@ -114,5 +179,21 @@ note bottom of UnifiedOwner
 The theorem-owner milestone is closed.
 The scientific roadmap is still open beyond this owner layer.
 end note
+
+note bottom of TruthOpen
+If a viewer remembers one rule:
+do not promote red gates by prose.
+Only a named theorem owner can move a gate out of this box.
+end note
+
+legend right
+|= Color |= Meaning |
+|<#dcfce7>| proved / theorem-owned |
+|<#fef3c7>| bridge |
+|<#dbeafe>| packaging |
+|<#fee2e2>| empirical non-claim |
+|<#fecaca>| open gate / blocker |
+|<#ede9fe>| diagram surface |
+endlegend
 
 @enduml

@@ -8,6 +8,11 @@ Use the repo through one canonical map and two reader tracks:
 - repo structure guide: `Docs/RepoGuide.md`
 - physics/unification guide: `Docs/PhysicsGuide.md`
 - compressed claim surface: `Docs/UnificationClaim.md`
+- origin traceability ledger: `Docs/OriginTraceabilityLedger.md`
+- core-spine bridge: `Docs/CoreSpineBridge.md`
+- ITIR/PNF residual bridge: `Docs/ITIRPNFResidualLogicBridge.md`
+- boundary/example lane: `Docs/AntifascisticBoundaryAndMusic.md`
+- music attractor target: `Docs/MusicalAttractorTheorem.md`
 - strong theorem owners:
   `DASHI.Physics.Closure.UnifiedPhysicsTheorem`,
   `DASHI.Physics.Closure.AtomicChemistryRecoveryTheorem`,
@@ -40,7 +45,7 @@ The canonical textual diagram surfaces for this repo are:
 - `Docs/TRAINING_DYNAMICS.puml`
 - `Docs/TRAINING_DYNAMICS.svg`
 
-Regenerate rendered previews with:
+Regenerate rendered SVG and PNG previews with:
 
 ```bash
 ./scripts/render_docs_diagrams.sh
@@ -50,9 +55,17 @@ Use them in this order:
 
 1. `Docs/RepoMetasystem.*` for repo-level orientation
 2. `Docs/CanonicalProofSpine.*` for the canonical theorem route
-3. `Docs/PhysicsUnificationMap.*` for claim boundaries and open gaps
-4. `Docs/PhysicsRealityRoadmap.*` for "how this touches actual physics"
-5. child graphs such as observable/signature and training-dynamics only after the first four
+3. `Docs/OriginTraceabilityLedger.md` for origin/disconnection governance
+4. `Docs/PhysicsUnificationMap.*` for claim boundaries and open gaps
+5. `Docs/PhysicsRealityRoadmap.*` for "how this touches actual physics"
+6. child graphs such as observable/signature and training-dynamics only after the first five
+
+Diagram-reading rule:
+the status boards in `RepoMetasystem`, `CanonicalProofSpine`,
+`PhysicsUnificationMap`, and `PhysicsRealityRoadmap` are intentional. Green is
+theorem-owned, yellow is bridge/advanced-but-blocked, blue is packaging,
+red/pink is empirical or open-gate material. Do not recolor a box without a
+named theorem owner or an explicit ledger update.
 
 ## Canonical Spine (Authoritative)
 The canonical closure dependency spine is:

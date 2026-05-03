@@ -17,6 +17,9 @@ stack.
 For the current join-edge to pressure/severity bridge that connects this
 representation discussion back to the ITIR/SensibLaw legal-join thread, see
 [`JoinEdgePressureBridge.md`](./JoinEdgePressureBridge.md).
+For the PNF/residual fibre adapter over the Hecke quotient surface, see
+[`ITIRPNFResidualLogicBridge.md`](./ITIRPNFResidualLogicBridge.md) and
+[`Ontology/Hecke/PNFResidualBridge.agda`](../Ontology/Hecke/PNFResidualBridge.agda).
 
 ## The split
 
@@ -203,6 +206,10 @@ The repo has already moved beyond plain address and transport diagnostics.
 - exact chambers:
   legality-signature chambers for the current `PairMode` multi-lane transport
   family.
+- interop residual adapter:
+  quotient projection equality can be read as a PNF-style candidate-pool
+  fibre, and coarse Hecke defect classes embed into the four-level residual
+  pressure chain in `Ontology.Hecke.PNFResidualBridge`.
 
 The first orbit-summary component is now constrained cleanly:
 
@@ -215,6 +222,11 @@ The first orbit-summary component is now constrained cleanly:
   exact-chamber illegal-count constancy,
   an abstract closure-to-shift transfer inequality,
   and the composed orbit-summary lower bound.
+- `Ontology/Hecke/PNFResidualBridge.agda` adds the text-pressure-facing
+  adapter above this ladder: `stableDefect -> partial`,
+  `illegalDefect -> contradiction`, and `otherDefect -> noTypedMeet`.
+  This is not a runtime PNF theorem; it is the quotient-fibre/residual-pressure
+  alignment surface.
 - above that bridge, the current certified representative set now carries a
   first genuinely collapse-free numeric quotient in
   `Ontology/Hecke/CertifiedRepresentativePersistence.agda`:

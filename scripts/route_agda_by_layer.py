@@ -51,6 +51,7 @@ L2_EXACT = {
     "DASHI/Physics/Closure/CanonicalGaugeMatterStrengtheningTheorem.agda",
     "DASHI/Physics/Closure/KnownLimitsFullMatterGaugeTheorem.agda",
     "DASHI/Physics/Closure/AtomicPhotonuclearContactGateTheorem.agda",
+    "DASHI/Physics/Closure/CanonicalP2KeyScheduleBridgeObstruction.agda",
     "DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda",
     "Ontology/Hecke/DefectOrbitSummaryRefinement.agda",
     "Ontology/Hecke/ForcedStableCountDecomposition.agda",
@@ -60,6 +61,11 @@ L2_EXACT = {
     "Ontology/Hecke/CurrentSaturatedPredictedPairComparisons.agda",
     "Ontology/Hecke/TriadSectorCorrelationRefinement.agda",
     "Ontology/Hecke/Layer2FiniteSearch.agda",
+}
+
+NATURAL_CHARGE_HEAVY_TIMEOUT_10 = {
+    "DASHI/Physics/Closure/CanonicalP2KeyScheduleBridgeObstruction.agda",
+    "DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda",
 }
 
 
@@ -168,6 +174,7 @@ def classify_target(
             recommended_command=["timeout", str(budget_seconds), "agda", "-i", ".", target],
         )
     elif target in L2_EXACT:
+        recommended_timeout = 10 if target in NATURAL_CHARGE_HEAVY_TIMEOUT_10 else budget_seconds
         if is_heavy_hecke_lane(target):
             decision = RouteDecision(
                 target=target,
@@ -198,7 +205,7 @@ def classify_target(
                 execute_allowed=False,
                 policy_reason_code="heavy_offline_only",
                 rationale="Heavy aggregate target; keep it out of the interactive loop.",
-                recommended_command=["timeout", str(budget_seconds), "agda", "-i", ".", target],
+                recommended_command=["timeout", str(recommended_timeout), "agda", "-i", ".", target],
             )
     elif target.startswith("Ontology/Hecke/"):
         decision = RouteDecision(

@@ -54,6 +54,22 @@ material that is still mostly archive-backed or sibling-repo adjacent. Those
 lanes are now shown on `Docs/PhysicsUnificationMap.puml`, but they are not to
 be read as current theorem evidence for physics closure.
 
+There is now also a named core-spine bridge:
+[`CoreSpineBridge.md`](CoreSpineBridge.md). It makes explicit the typed chain
+from `Base369.TriTruth` to `DASHI.Algebra.Trit`, then to
+`RealTernaryCarrier.Carrier n`, `AgreementUltrametric.ultrametricVec`, the
+bounded contraction-certificate interface, and the CRT/J p47/p59/p71 scalar
+bridge. This is a real bridge layer, not a replacement for the canonical
+closure spine and not a proof of full physical or biological recovery.
+The companion reviewer inventory
+[`CoreSpineReviewerFormalisms.md`](CoreSpineReviewerFormalisms.md) records
+which formalism claims are theorem-backed and which remain obligations.
+The origin/disconnection governance surface is
+[`OriginTraceabilityLedger.md`](OriginTraceabilityLedger.md). It reconciles the
+downloaded traceability diagnosis against current repo state and fixes the
+safe reading: the origin thesis is a bridge/governance spine until a concrete
+theorem surface names its carrier, map, certificate, and consumer.
+
 ## Staged Reading Ladder
 
 1. Start with [CanonicalProofSpine.md](CanonicalProofSpine.md).
@@ -62,25 +78,40 @@ be read as current theorem evidence for physics closure.
    This fixes what the downstream chain actually consumes today.
 3. Read [MinimalCrediblePhysicsClosure.md](MinimalCrediblePhysicsClosure.md).
    This is the best compact statement of what counts as the current milestone.
-4. Read [NaturalDynamicsLaw.md](NaturalDynamicsLaw.md).
+4. Read [CoreSpineBridge.md](CoreSpineBridge.md).
+   This is the compact map from `Base369` / `LogicTlurey` / CRT/J surfaces into
+   the current ternary physics carrier and agreement ultrametric.
+5. Read [CoreSpineReviewerFormalisms.md](CoreSpineReviewerFormalisms.md).
+   This is the reviewer-facing theorem/gap inventory for the six core-spine
+   formalisms.
+6. Read [OriginTraceabilityLedger.md](OriginTraceabilityLedger.md).
+   This reconciles origin-traceability claims with local repo truth and records
+   the promotion gates for empirical adequacy, dynamics, and atom/chemistry.
+7. Read [AntifascisticBoundaryAndMusic.md](AntifascisticBoundaryAndMusic.md).
+   This records the safe antifascistic/three-body/music boundary examples and
+   keeps them out of the canonical proof spine.
+8. Read [MusicalAttractorTheorem.md](MusicalAttractorTheorem.md).
+   This names the exploratory music bridge target over `(Z/12Z)^n` without
+   promoting it into a physics-closure theorem.
+9. Read [NaturalDynamicsLaw.md](NaturalDynamicsLaw.md).
    This explains why the present dynamics-facing story is still too engineered
    to call a natural physical law.
-5. Read [PhotonuclearEmpiricalRegistry.md](PhotonuclearEmpiricalRegistry.md).
+10. Read [PhotonuclearEmpiricalRegistry.md](PhotonuclearEmpiricalRegistry.md).
    This isolates the empirical lane and its non-claim boundary.
-6. Read [PhysicsArchiveCoverageMap.md](PhysicsArchiveCoverageMap.md).
+11. Read [PhysicsArchiveCoverageMap.md](PhysicsArchiveCoverageMap.md).
    This shows which archived threads actually reduce current theorem risk.
-7. Read `Docs/PhysicsRealityRoadmap.svg`.
+12. Read `Docs/PhysicsRealityRoadmap.svg`.
    This is the plain-language map from repo surfaces to familiar physics.
-8. Read `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`.
+13. Read `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`.
    These settle which recovery lanes are repo-native, archive-backed, or still open.
-9. Read `Docs/PhysicsUnificationMap.svg`.
+14. Read `Docs/PhysicsUnificationMap.svg`.
    This now includes the adjacent DNA / brain / crossover lanes and marks them
    explicitly as adjacent rather than theorem-closing.
-10. Read `DASHI.Physics.Closure.UnifiedPhysicsTheorem`,
+15. Read `DASHI.Physics.Closure.UnifiedPhysicsTheorem`,
    `DASHI.Physics.Closure.AtomicChemistryRecoveryTheorem`, and
    `DASHI.Physics.Closure.PhysicsUnificationToCanonicalClosureAdapter`.
    These are the current theorem-owner claim surfaces.
-11. Read [Docs/AtomAndWaveRecoveryStatus.md](AtomAndWaveRecoveryStatus.md).
+16. Read [Docs/AtomAndWaveRecoveryStatus.md](AtomAndWaveRecoveryStatus.md).
    This is the canonical public status surface for shell/orbit/profile and
    wave/regime progress, plus the remaining chemistry/quantum gap.
 
@@ -169,6 +200,11 @@ analogy language.
 - `bridge`: the known-limits side is stronger than "notation only"; the repo
   carries theorem-backed `grLike` and `qftLike` status in the known-limits
   sense, while still not justifying full GR/QFT recovery claims.
+- `bridge`: the core-spine carrier bridge is now explicit. `TritTriTruthBridge`,
+  `TritCarrierBridge`, `FascisticContractionInstance`, `StageQuotient`,
+  `MoonshineBridge`, and `CRTPeriodJFixedBridge` connect the triadic algebra,
+  ternary carrier, agreement ultrametric, contraction-certificate surface, and
+  p47/p59/p71 CRT/J scalar channel.
 - `empirical`: the photonuclear lane is now normalized, versioned, and
   explicitly marked as empirical-only rather than being mixed into theorem
   claims.
@@ -203,6 +239,12 @@ analogy language.
 - `DASHI.Physics.Closure.MinimalCrediblePhysicsClosureShiftInstance`
 - `DASHI.Physics.Closure.KnownLimitsGRBridgeTheorem`
 - `DASHI.Physics.Closure.KnownLimitsQFTBridgeTheorem`
+- `DASHI.Algebra.TritTriTruthBridge`
+- `DASHI.Algebra.MoonshineBridge`
+- `DASHI.Algebra.StageQuotient`
+- `DASHI.Physics.TritCarrierBridge`
+- `DASHI.Physics.FascisticContractionInstance`
+- `DASHI.Physics.CRTPeriodJFixedBridge`
 - `DASHI.Physics.DashiDynamics`
 - `DASHI.Physics.DashiDynamicsShiftInstance`
 - `DASHI.Physics.Closure.PhotonuclearEmpiricalValidationSummary`
@@ -229,4 +271,5 @@ analogy language.
 - a replacement for the canonical theorem modules themselves
 - an empirical performance report
 - moonshine/modular/algebraic-carrier side quests unless they directly tighten
-  the canonical physics spine
+  the canonical physics spine or remain explicitly marked as bridge-only, as
+  in `CoreSpineBridge.md`

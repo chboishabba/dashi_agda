@@ -22,6 +22,13 @@ canonical closure spine:
 - `DASHI/Physics/Closure/Canonical/LocalProgramBundle.agda`
 - `DASHI/Physics/Closure/Canonical/Ladder.agda`
 - `DASHI/Physics/Closure/PhysicsClosureSummary.agda`
+- `DASHI/Algebra/TritTriTruthBridge.agda`
+- `DASHI/Algebra/MoonshineBridge.agda`
+- `DASHI/Algebra/StageQuotient.agda`
+- `DASHI/Physics/TritCarrierBridge.agda`
+- `DASHI/Physics/FascisticContractionInstance.agda`
+- `DASHI/Physics/CRTPeriodJFixedBridge.agda`
+- `DASHI/Physics/Closure/TemporalSheafProofObligations.agda`
 
 Use these for routine theorem-edit loops and targeted bridge checks.
 
@@ -39,6 +46,7 @@ certification targets only:
 - `DASHI/Physics/Closure/CanonicalGaugeMatterStrengtheningTheorem.agda`
 - `DASHI/Physics/Closure/KnownLimitsFullMatterGaugeTheorem.agda`
 - `DASHI/Physics/Closure/AtomicPhotonuclearContactGateTheorem.agda`
+- `DASHI/Physics/Closure/CanonicalP2KeyScheduleBridgeObstruction.agda`
 - `DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`
 
 Reason:
@@ -54,9 +62,32 @@ Reason:
   `AtomicPhotonuclearContactGateTheorem.agda` repeatedly drags in the expensive
   shift/observable/canonical-gauge stack and should be treated as offline-only
   unless that exact lane is the subject of the current work.
+- `CanonicalP2KeyScheduleBridgeObstruction.agda` is theorem-thin logically, but
+  in practice still rebuilds the same natural-charge / canonical-gauge heavy
+  cone as `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda` and
+  should be treated the same way.
 - `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda` appears to
   be logically live, but it currently pulls enough of the same heavy recovery
   stack that it should stay out of routine local validation.
+
+## Natural-Charge Heavy-Lane Rule
+
+The current natural-charge blocker family:
+
+- `DASHI/Physics/Closure/CanonicalP2KeyScheduleBridgeObstruction.agda`
+- `DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`
+
+should not be run interactively without a very short cap.
+
+Practical rule:
+
+- if you absolutely probe one locally, use at most a `10s` timeout
+- otherwise route it straight to `L2` / offline-only validation
+
+Example:
+
+- `timeout 10s agda -i . -l standard-library DASHI/Physics/Closure/CanonicalP2KeyScheduleBridgeObstruction.agda`
+- `timeout 10s agda -i . -l standard-library DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`
 
 ## Bounded-Only Target
 
@@ -87,6 +118,20 @@ Interpretation rule:
   `advanced` or `blocked` lane classification
 - if an `L2` target fails, that is a closure-certification event, not an excuse
   to collapse branch status back into `unknown`
+
+## Blocker Validation Matrix
+
+| Blocker lane | Allowed validation level | Timeout / avoidance rule |
+|---|---|---|
+| `W1` MDL/CR carrier | `L0/L1` targeted seam modules | Avoid full closure aggregates; check only touched `CanonicalToNoncanonicalMdl*` modules. |
+| `W2` natural / `p2` / convergence | `L2` for heavy natural-charge modules, `L0/L1` for thin helper modules | Use at most a short timeout for `CanonicalP2KeyScheduleBridgeObstruction` and `CanonicalScheduleIndependentNaturalChargeNextIngredientGap`; otherwise route offline. |
+| `W3` empirical adequacy | `L0/L1` targeted empirical bridge modules | Empirical sidecars do not promote theorem closure; carrier mismatch diagnostics are acceptable outputs. |
+| `W4` chemistry law | `L0/L1`, except known heavy photonuclear contact dependencies | Prefer direct chemistry quotient/coupling modules; avoid `AtomicPhotonuclearContactGateTheorem` unless assigned. |
+| `W5` GR/QFT consumer | `L0/L1` consumer modules, `L2` for known full matter/gauge aggregates | Do not run `KnownLimitsFullMatterGaugeTheorem` as an inner-loop check. |
+| `W6` ITIR/PNF consumer | `L0/L1` interop and Hecke bridge modules | Docs-only receipt work uses `git diff --check`; no live ITIR runtime validation unless explicitly assigned. |
+| `W7` claim governance | docs-only or targeted proof-obligation modules | Run `TemporalSheafProofObligations.agda` only if obligation records change. |
+| `W8` origin receipt | docs-only or targeted new receipt module | Do not use `Everything.agda` as routine validation for a receipt surface. |
+| `W9` cancellation-pressure seam | `L0/L1` targeted delta/arithmetic modules | Check `DeltaToQuadraticBridgeTheorem.agda` and touched arithmetic/transport modules; avoid unrelated closure aggregates. |
 
 ## Hygiene Script Policy
 
@@ -143,7 +188,8 @@ Current policy examples:
     `DASHI/Physics/Closure/CanonicalAbstractGaugeMatterInstance.agda`,
     `DASHI/Physics/Closure/CanonicalGaugeMatterStrengtheningTheorem.agda`,
     `DASHI/Physics/Closure/KnownLimitsFullMatterGaugeTheorem.agda`,
-    `DASHI/Physics/Closure/AtomicPhotonuclearContactGateTheorem.agda`, and
+    `DASHI/Physics/Closure/AtomicPhotonuclearContactGateTheorem.agda`,
+    `DASHI/Physics/Closure/CanonicalP2KeyScheduleBridgeObstruction.agda`, and
     `DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`
   - the current heavy Hecke Layer 2 implementation lane:
     `Ontology/Hecke/DefectOrbitSummaryRefinement.agda`,

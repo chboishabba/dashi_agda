@@ -30,13 +30,21 @@ program with explicit stop conditions.
 
 ## Tier 3: Moonshine bridge
 
-7. State the legal moonshine-match test forms.
+7. Record the bounded CRT/J scalar bridge.
+   Reference:
+   [`CoreSpineBridge.md`](./CoreSpineBridge.md),
+   `DASHI.Algebra.MoonshineBridge`, and
+   `DASHI.Physics.CRTPeriodJFixedBridge`.
+   This proves only the local identity
+   `CRTPeriod.period + 1 == JFixedPoint.contract JFixedPoint.unit-obs` and the
+   p47/p59/p71 active-wall channel positions.
+8. State the legal moonshine-match test forms.
    Reference:
    [`MoonshineMatch.md`](./MoonshineMatch.md)
-8. State the promotion gate from primes to modular objects.
+9. State the promotion gate from primes to modular objects.
    Reference:
    [`PrimeToModular.md`](./PrimeToModular.md)
-9. Promotion gate:
+10. Promotion gate:
    no genuine moonshine claim is allowed without a modular curve, Hecke,
    Hauptmodul-like, or trace-level lift.
 
@@ -54,4 +62,5 @@ That means the current execution order should be:
 1. make the observed object executable,
 2. make the null-model stop condition executable,
 3. isolate one carrier/factorization hypothesis,
-4. formulate and test the prime-selection property `P`.
+4. use the landed CRT/J scalar bridge only as a bounded structural bridge,
+5. formulate and test the prime-selection property `P`.

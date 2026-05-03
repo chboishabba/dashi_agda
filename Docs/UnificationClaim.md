@@ -51,6 +51,9 @@ What is real today:
   chemistry-right-limits gates, plus an explicit interpretation blocker for
   stronger chemistry claims;
 - an empirical photonuclear lane that is normalized and explicitly non-claiming.
+- an origin-traceability ledger that makes the core-spine thesis visible while
+  classifying it as bridge/governance until a concrete theorem names its
+  carrier, map, certificate, and consumer.
 
 What is not real today:
 
@@ -92,6 +95,9 @@ What is not real today:
 
 - `DashiDynamicsShiftInstance` packages the current shift carrier, pressure
   status, and photonuclear validation summary into one bounded interface.
+- `OriginTraceabilityLedger` packages the current disconnection audit and
+  reconciliation. It does not strengthen theorem claims; it prevents stale
+  absence claims and overbroad origin-thesis wording from becoming repo truth.
 - The atom/quantum-facing side already includes shell/orbit/profile
   computation, synthetic shell realization witnesses, and archive-backed
   dictionary language around closed-shell behavior, but not a finished atomic
@@ -123,9 +129,10 @@ What is not real today:
 2. [CanonicalProofSpine.md](CanonicalProofSpine.md)
 3. [ClosureContractStatus.md](ClosureContractStatus.md)
 4. [MinimalCrediblePhysicsClosure.md](MinimalCrediblePhysicsClosure.md)
-5. [NaturalDynamicsLaw.md](NaturalDynamicsLaw.md)
-6. [PhotonuclearEmpiricalRegistry.md](PhotonuclearEmpiricalRegistry.md)
-7. `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`
+5. [OriginTraceabilityLedger.md](OriginTraceabilityLedger.md)
+6. [NaturalDynamicsLaw.md](NaturalDynamicsLaw.md)
+7. [PhotonuclearEmpiricalRegistry.md](PhotonuclearEmpiricalRegistry.md)
+8. `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`
 
 ## Canonical Theorem Route
 
@@ -192,6 +199,8 @@ Concretely:
   stack.
 - It does not claim that every unification-adjacent module is part of the
   canonical proof route.
+- It does not claim that every theorem in the repo is already a concrete
+  instance of one universal fixed-point theorem.
 
 ## Open Gates
 

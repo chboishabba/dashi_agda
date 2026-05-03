@@ -138,3 +138,37 @@ This note does not claim:
 
 It does claim that the correct next experiment is no longer the explicit
 symmetry reward toy. It is the MDL toy.
+
+## 9. Pitch-Class Carrier Bridge
+
+The safe algebraic bridge for pitch classes is:
+
+`Z/12Z ~= Z/3Z x Z/4Z`
+
+by CRT, since `gcd 3 4 = 1`. This supports a triadic/quartic factor reading of
+the 12-tone carrier, but it does not by itself prove a music theorem.
+
+Do not state that the perfect-fifth shift gives a three-element orbit. The
+perfect-fifth map is `x -> x + 7 mod 12`; since `gcd 7 12 = 1`, it has order
+`12` and generates the full circle of fifths.
+
+For the broader claim-boundary note, see
+[`AntifascisticBoundaryAndMusic.md`](AntifascisticBoundaryAndMusic.md).
+
+## 10. Musical Attractor Theorem Target
+
+The named next bridge surface is
+[`MusicalAttractorTheorem.md`](MusicalAttractorTheorem.md).
+
+It sharpens the toy into a precise theorem-shaped construction:
+
+- carrier: `C_n = (Z/12Z)^n`;
+- metric: summed chromatic distance, not the DASHI prefix ultrametric;
+- map: `K_music` as nearest-scale projection onto a chosen diatonic scale;
+- Lyapunov level: `L_music` as total chromatic dissonance from that scale;
+- certificate: one-step descent to the fixed set `S^n`;
+- quotient discipline: keep CRT `p mod 3`, tonal cluster `floor(p/4) mod 3`,
+  and perfect-fifth order-12 dynamics separate.
+
+Claim level remains `exploratory/bridge` until a concrete Agda module is added
+and checked.

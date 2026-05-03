@@ -13,6 +13,55 @@ claim ladder as the rest of the physics docs:
 The classification below is about the ordinary physics target, not only about
 whether some internal record or adapter exists.
 
+## Origin traceability status
+
+- Owner doc:
+  `Docs/OriginTraceabilityLedger.md`.
+- Current repo status: `bridge/governance`
+- Strongest current evidence:
+  the core-spine bridge modules connect triadic algebra, ternary carrier,
+  agreement ultrametric, contraction-certificate interfaces, and the CRT/J
+  scalar identity; the minimal-credible and Stage C packages give bounded
+  consumers over the canonical closure route.
+- Corrected stale claim:
+  `DASHI.Physics.Closure.AtomicChemistryRecoveryTheorem` exists locally. The
+  remaining issue is not absence; it is that the module explicitly remains a
+  bounded atom/chemistry interpretation carrier with open gates.
+- Missing theorem:
+  a theorem-owned origin receipt proving that a concrete carrier/map/fixed
+  point/certificate predicts the empirical and chemistry-facing surfaces.
+- Nearest promotion step:
+  add a narrow origin receipt for `MinimalCrediblePhysicsClosureShiftInstance`,
+  then separately promote empirical adequacy, convergence-rate dynamics, and
+  atomic chemistry relaxation only when their theorem ingredients are present.
+
+## Boundary examples: antifascistic systems, three-body, music
+
+- Owner doc:
+  `Docs/AntifascisticBoundaryAndMusic.md`.
+  Music target detail:
+  `Docs/MusicalAttractorTheorem.md`.
+- Current repo status: `bridge/exploratory`
+- Strongest current evidence:
+  `AntiFascistSystem`, `FascisticSystem`, and `Fascism_Tests` expose the
+  intended invertible-versus-contracting interface split; `DASHI.Physics.ThreeBody.*`
+  already carries a theorem-thin boundary/predictability namespace; and the
+  music lane has an executable MDL basin toy over `(Z/12Z)^n` plus a named
+  exploratory `K_music` / `L_music` attractor target.
+- Safe interpretation:
+  exact carrier dynamics can be antifascistic while coarse observables behave
+  fascistically after projection. The three-body lane is the clearest current
+  natural example of that split.
+- Missing theorem:
+  a concrete derived incompatibility theorem for a physical Hamiltonian
+  carrier, a solved three-body theorem, or a music-theoretic consonance law.
+- Nearest promotion step:
+  keep these as examples/bridges unless a module names the carrier, map,
+  observable projection, MDL/entropy functional, and certificate.
+  For music specifically, the prose target now names those fields; the
+  remaining promotion step is a checked Agda island with finite `Z/12Z`
+  case analysis and explicit scale-validity assumptions.
+
 ## 1. Natural dynamics law
 
 - Ordinary physics meaning: a non-engineered evolution law with clear physical

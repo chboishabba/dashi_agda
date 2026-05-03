@@ -2,6 +2,9 @@ module DASHI.Physics.Closure.PhysicsUnificationToCanonicalClosureAdapter where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.Closure.CanonicalAbstractGaugeMatterInstance as CAMI
+open import DASHI.Physics.Closure.ShiftContractObservableTransportPrimeCompatibilityProfileInstance as SCOT
+open import DASHI.Physics.Closure.ShiftRGObservableInstance as SRGOI
 
 open import DASHI.Physics.ClosureBuilder as CB
 open import DASHI.Physics.ContractionQuadraticBridge as CQB
@@ -34,6 +37,25 @@ record PhysicsUnificationToCanonicalClosureAdapter : Setω where
 
     coarseRecoveryIdentification :
       CNCRI.CanonicalToNoncanonicalCoarseRecoveryIdentification
+
+    mdlRefinedRecoveryIdentificationFromHypotheses :
+      ((x : CNCRI.CanonicalCarrier) →
+       SRGOI.shiftRGAdmissible (CAMI.canonicalTransportState x) →
+       CAMI.canonicalMdlLevel x
+         ≡
+       CNCRI.noncanonicalMdl
+         (SCOT.shiftContractObservableMdlRefinedContinuumScale
+           (CAMI.canonicalTransportState x)))
+      →
+      ((x : CNCRI.CanonicalCarrier) →
+       SRGOI.shiftRGAdmissible (CAMI.canonicalTransportState x) →
+       CAMI.canonicalMdlLevel (CAMI.canonicalClosureDynamics x)
+         ≡
+       CNCRI.noncanonicalMdl
+         (SCOT.shiftContractObservableMdlRefinedContinuumScale
+           (CAMI.canonicalTransportState x)))
+      →
+      CNCRI.CanonicalToNoncanonicalMdlRefinedRecoveryIdentification
 
     contractionQuadraticBridge :
       CQB.Contraction⇒Quadratic
@@ -78,6 +100,8 @@ canonicalPhysicsUnificationToCanonicalClosureAdapter =
         PCBP.canonicalPhysicsClosureFullCanonicalBridgePackage
     ; coarseRecoveryIdentification =
         CNCRI.canonicalToNoncanonicalCoarseRecoveryIdentification
+    ; mdlRefinedRecoveryIdentificationFromHypotheses =
+        CNCRI.canonicalToNoncanonicalMdlRefinedRecoveryIdentificationFromHypotheses
     ; contractionQuadraticBridge =
         UC.PhysicsUnification.cq concreteUnification
     ; signatureBridge =

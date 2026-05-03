@@ -1,5 +1,5 @@
 @startuml
-title Present State -> Solved Unification
+title Present State -> Serious Unification Claim
 left to right direction
 
 skinparam shadowing false
@@ -39,30 +39,62 @@ package "2. Standard successful formalisms" {
   rectangle "General relativity\nLorentzian metric,\ncurvature, Einstein dynamics" as FormalGR #dcfce7
 }
 
+package "2b. DASHI CoreSpine bridge" {
+  rectangle "Triadic carrier spine\nBase369.TriTruth\n-> TritTriTruthBridge\n-> DASHI.Algebra.Trit\n[proved bridge]" as CoreSpineTri #dcfce7
+  rectangle "Ternary state metric\nTritCarrierBridge\nCarrier n = Vec Trit n\nAgreementUltrametric.ultrametricVec\n[proved bridge]" as CoreSpineMetric #dcfce7
+  rectangle "Contraction/fixed-point certificate\nFascisticContractionInstance\nstrict maps require explicit certificate/descent\n[bridge, not automatic closure]" as CoreSpineContraction #fef3c7
+  rectangle "Stage quotient + moonshine scalar\nStageQuotient overflow seam\nMoonshineBridge / CRTPeriodJFixedBridge\np47 p59 p71 channel positions\n[proved bridge + explicit seams]" as CoreSpineMoonshine #fef3c7
+}
+
+package "2c. Casual-viewer truth board" {
+  rectangle "Closed / strongest\ncanonical proof spine\nUnifiedPhysicsTheorem\nminimal credible shift instance\n[theorem-owned]" as TruthClosed #dcfce7
+  rectangle "Bridge / interpretation\nCoreSpine carrier bridge\nknown-limits GR/QFT\norigin traceability ledger\n[not full recovery]" as TruthBridge #fef3c7
+  rectangle "Packaging / interfaces\nAtomicChemistryRecoveryTheorem\nDashiDynamics\nwave / gradient / HJ / Schrodinger gaps\n[explicit gates remain]" as TruthPackaging #dbeafe
+  rectangle "Exploratory boundary examples\nantifascistic systems\nthree-body carrier/observable split\nmusic MDL basin toy over Z12^n\nMusicalAttractor target: K_music / L_music\n[examples, not theorem closure]" as TruthExploratory #fff7ed
+  rectangle "Empirical / calibration\nphotonuclear data lane\nchi2 carrier mismatch\nB4 standaloneOnly\n[not theorem closure]" as TruthEmpirical #fee2e2
+  rectangle "Still open\nnatural convergence-rate law\nempirical adequacy theorem\nchemistry relaxation/spectra/bonding\ncontinuum / MDL seam / p2 bridge\nNGram / ITIR consumer wiring\n[requires new theorem owners]" as TruthOpen #fecaca
+}
+
 package "3. Current DASHI correspondences" {
   rectangle "Canonical proof spine + theorem owner\nquadratic -> signature -> Clifford -> closure\nOwner: UnifiedPhysicsTheorem\nStatus: repo proved + theorem-owned strong claim\nWhat it currently gives:\n4D-signature-facing formal core" as DashiSpine #fef3c7
   rectangle "Known-limits GR/QFT bridges\nStatus: repo bridge, theorem-backed regimes\nWhat they currently mean:\nregime recovery surfaces, not full recovery" as DashiBridges #fef3c7
   rectangle "Atom/chemistry recovery carrier + bounded atom/wave consumers\nOwner: AtomicChemistryRecoveryTheorem\nStatus: repo packaging/bridge with explicit gates\nWhat they currently mean:\nshared shell/wave recovery carrier,\nfinite wave/phase interfaces,\nnot a final chemistry law" as DashiDynamics #fef3c7
   rectangle "Photonuclear empirical lane\nWhat it currently means:\ncollider measurement sidecar and calibration,\nnot theorem closure" as DashiEmpirical #fee2e2
+  rectangle "Boundary examples and cultural toys\nWhat they currently mean:\nthree-body illustrates carrier-vs-observable predictability;\nmusic tests MDL/compression basin behavior over pitch classes;\nMusicalAttractor names a Z12 carrier + Lyapunov descent target;\nnot canonical physics proof" as DashiBoundaryExamples #fff7ed
 }
 
 package "3b. Adjacent archive-derived programs" {
-  rectangle "DNA-first Agda lane\nCurrent status: local carrier/quotient/UV/\nchemistry/supervoxel/streaming/eigen/channel surfaces\nWhat it currently means:\nreal formal adjacent program,\nnot yet a unification theorem lane" as AdjacentDNA #fff7ed
-  rectangle "Brain-side lane\nCurrent status: mainly archive + sibling-repo adjacent\nWhat it currently means:\nstructural/analysis pressure,\nnot localized as a theorem lane here" as AdjacentBrain #fff7ed
-  rectangle "Brain-DNA / codec / channel crossover\nCurrent status: partial local interfaces + archive design\nWhat it currently means:\nstorage/channel bridge pressure,\nnot current closure evidence" as AdjacentCrossover #fff7ed
+  rectangle "DNA-first Agda lane\nCurrent status: local carrier/quotient/UV/\nchemistry/supervoxel/streaming/eigen/channel surfaces\nWhat it currently means:\nreal formal adjacent program,\nnot a unification theorem lane" as AdjacentDNA #fff7ed
+  rectangle "Brain-side lane\nCurrent status: local theorem-thin vocabulary + coarse-summary + extraction + invariant + invariant-depth surfaces,\nplus localized region automaton,\nvisual form-constant/log-polar,\ngrokking/eigenbasis phase profile,\nand morphospace gap-junction owner surfaces\nWhat it currently means:\nlocalized theorem-thin adjacent lane,\nnot a biological closure theorem" as AdjacentBrain #fff7ed
+  rectangle "Brain-DNA / codec / channel crossover\nCurrent status: partial local owner + compatibility/law/consumer surfaces,\nplus theorem-thin codec-depth/semantic/law/payload-recovery,\nrepresentation owner/semantics/transport-laws/semantic-depth/semantic-laws/consumer-semantics/consumer-laws/integrated-semantics,\nstructural-depth/consumer-semantics/abstract-composition,\nextraction-aware connector-depth/semantics,\nbrain-theme connector,\ntheme chemistry/channel transport/semantic-laws/end-to-end semantic-depth/consumer-semantics/consumer-laws/integrated-semantics,\nconnector semantic-depth/end-to-end semantic-laws/consumer-semantics/consumer-laws/integrated-consumer semantics,\ncodec/chemistry consumer,\nphysics-facing chemistry handoff,\nand abstract crossover/channel + semantic-checksum + long-window chemistry + synthesis/sequencing risk/realism-law/realism-depth/realism-semantics/realism-consumer/consumer-law/integrated-realism surfaces\nand archive design pressure\nWhat it currently means:\nintegrated storage/channel bridge-pressure theorem surface,\nnot current closure evidence" as AdjacentCrossover #fff7ed
+  rectangle "Explicit brain -> DNA -> chemistry connector\nCurrent status: local brain theme owners\n-> BrainThemeConnectorSurface\n-> BrainDnaRepresentationMap\n-> BrainRepresentationTransportLaws\n-> BrainRepresentationSemanticDepth\n-> BrainRepresentationSemanticLaws\n-> BrainRepresentationConsumerSemantics\n-> BrainRepresentationConsumerLaws\n-> BrainRepresentationIntegratedSemantics\n-> BrainChemistryCodecConsumer\n-> BrainConnectorSemanticDepth\n-> BrainThemeChemistryChannelTransport\n-> BrainThemeSemanticTransportLaws\n-> BrainThemeEndToEndSemanticDepth\n-> BrainThemeConsumerSemantics\n-> BrainThemeConsumerLaws\n-> BrainThemeIntegratedSemantics\n-> BrainConnectorEndToEndSemanticLaws\n-> BrainConnectorConsumerSemantics\n-> BrainConnectorConsumerLaws\n-> BrainConnectorIntegratedConsumerSemantics\n-> DNA chemistry/channel boundary\n-> BrainAtomicChemistryHandoff\n-> Atomic chemistry recovery carrier\nWhat it currently means:\nvisible and consumed local connector path,\nstill bounded and theorem-thin" as AdjacentConnector #e0f2fe
 }
 
 package "4. Open gates to a serious unification claim" {
-  rectangle "Natural dynamics law\nCurrent status: advanced but blocked\nLanded:\nCanonicalScheduleIndependentNaturalChargeLaw\nBlocked on:\np2-key carrier/schedule bridge\nNext steps:\n1. land the p2-key bridge\n2. reconnect it to canonical bundle transport\n3. only then widen the law beyond the current coarse quotient" as GapDynamics #fce7f3
-  rectangle "Conserved physical quantity\nCurrent status: advanced but blocked\nLanded:\nCanonicalScheduleIndependentNaturalChargeLaw\nCanonicalScheduleIndependentNaturalChargeWideningObstruction\nCanonicalScheduleIndependentNaturalChargeNextIngredientGap\nBlocked on:\nno proved widening beyond Gauge × basin × motif\nNext steps:\n1. find a new conserved key that survives CP\n2. prove it is quotient-visible and schedule-stable\n3. tie it back to the natural law" as GapConserved #fce7f3
-  rectangle "Continuum limit + realization-independent recovery\nCurrent status: advanced but blocked\nLanded:\nCanonicalToNoncanonicalCoarseRecoveryIdentification\nplus fieldwise gauge/basin/motif equalities\nBlocked on:\nmissing richer MDL-side seam hypotheses\nNext steps:\n1. prove the missing MDL equalities on transported states\n2. reduce coarse-projection dependence further\n3. only then widen to broader carrier recovery" as GapContinuum #fce7f3
-  rectangle "Gauge/matter recovery\nCurrent status: advanced\nLanded:\nCanonicalGaugeMatterInterpretableObservableTheorem\nKnownLimitsInterpretableObservableConsumer\nNext steps:\n1. strengthen canonical payload further\n2. recover more physically interpretable fields\n3. upgrade from bundle shape to a finished recovery theorem" as GapGaugeMatter #fce7f3
-  rectangle "Atomic and nuclear recovery\nCurrent status: advanced but blocked\nLanded:\nShellDictionaryRecoveryGateTheorem\nAtomicPhotonuclearContactGateTheorem\nChemistryRightLimitsGateTheorem\nBlocked on:\nChemistryRightLimitsInterpretationBlockerSpec\nand atomic owner-cycle cleanup\nNext steps:\n1. break the atomic theorem cycle\n2. land a theorem-side interpretation contract\n3. only then move toward spectra/scattering/chemistry" as GapAtomic #fce7f3
-  rectangle "Abstract/canonical seam\nCurrent status: advanced but blocked\nLanded:\nPhysicsUnificationToCanonicalClosureAdapter\nplus coarse recovery identification\nBlocked on:\nricher MDL/refined carrier identification\nNext steps:\n1. keep fieldwise equalities explicit\n2. discharge the richer MDL-side seam obligations\n3. only then tighten abstract/canonical identification further" as GapAdapter #fce7f3
-  rectangle "GR + QFT regime recovery\nCurrent status: advanced but blocked\nLanded:\nstronger payload exposure in GR/QFT bridge owners\nplus KnownLimitsInterpretableObservableConsumer\nBlocked on:\nupstream natural/continuum recovery, not bridge packaging\nNext steps:\n1. strengthen upstream recovery payloads\n2. feed them through the known-limits consumers\n3. only then move beyond regime-note strength" as GapRecovery #fce7f3
+  rectangle "Worker coordination board\nDocs/WorkerCoordinationBoard.md\nW0 integration\nW1 MDL/CR\nW2 natural/p2/convergence\nW3 empirical adequacy\nW4 chemistry law\nW5 GR/QFT consumer\nW6 ITIR/PNF consumer\nW7 claim governance\nW8 origin receipt\nW9 cancellation-pressure seam\n[coordination, not closure]" as WorkerBoard #dbeafe
+  rectangle "Natural dynamics law\nCurrent status: advanced but blocked\nLanded:\nCanonicalScheduleIndependentNaturalChargeLaw\nCanonicalP2KeyScheduleBridgeObstruction\nCanonicalP2OfflineL2ObstructionCertificate" as GapDynamics #fef3c7
+  rectangle "Conserved physical quantity\nCurrent status: advanced but blocked\nLanded:\nCanonicalScheduleIndependentNaturalChargeLaw\nCanonicalScheduleIndependentNaturalChargeWideningObstruction\nCanonicalScheduleIndependentNaturalChargeNextIngredientGap\nCanonicalP2KeyScheduleBridgeObstruction\nCanonicalP2OfflineL2ObstructionCertificate" as GapConserved #fef3c7
+  rectangle "Continuum limit + realization-independent recovery\nCurrent status: advanced but blocked\nLanded:\nCanonicalToNoncanonicalCoarseRecoveryIdentification\nplus fieldwise gauge/basin/motif equalities\nplus conditional MDL seam export\nplus CanonicalToNoncanonicalMdlSeamTheorem\nplus CanonicalClosureShiftMdlScheduleBridge\nplus CanonicalToNoncanonicalScheduleMdlAlignmentBlocker\nplus CanonicalToNoncanonicalMdlCRCrossChannelObstruction" as GapContinuum #fef3c7
+  rectangle "Gauge/matter recovery\nCurrent status: advanced\nLanded:\nCanonicalGaugeMatterInterpretableObservableTheorem\nCanonicalGaugeMatterRecoveredMatterFieldTheorem\nNext steps:\n1. strengthen canonical payload further\n2. recover more physically interpretable fields\n3. upgrade from bundle shape to a finished recovery theorem" as GapGaugeMatter #dcfce7
+  rectangle "Atomic and nuclear recovery\nCurrent status: advanced but blocked\nLanded:\nShellDictionaryRecoveryGateTheorem\nAtomicPhotonuclearContactGateTheorem\nChemistryRightLimitsGateTheorem\nChemistryRightLimitsInterpretationContract\nAtomicChemistryRightLimitsAdapter\nChemistryRightLimitsObservableLaw\nChemistryRightLimitsPromotedObservableCouplingLaw\nChemistryRightLimitsQuotientObservable\nChemistryRightLimitsQuotientObservableCouplingLaw\nChemistryRightLimitsQuotientCrossBandCandidate256Witness" as GapAtomic #fef3c7
+  rectangle "Abstract/canonical seam\nCurrent status: advanced but blocked\nLanded:\nPhysicsUnificationToCanonicalClosureAdapter\nplus coarse recovery identification\nplus conditional MDL seam export" as GapAdapter #fef3c7
+  rectangle "GR + QFT regime recovery\nCurrent status: advanced but blocked\nLanded:\nKnownLimitsInterpretableObservableConsumer\nplus recovered matter-field exposure in GR/QFT bridge owners" as GapRecovery #fef3c7
+  rectangle "Natural widening blocker\nCanonicalScheduleIndependentNaturalChargeWideningObstruction\nCanonicalP2KeyScheduleBridgeObstruction\nCanonicalP2OfflineL2ObstructionCertificate\nno positive canonical p2 carrier/schedule bridge\nnormalized eigenShadow surface too weak for p2\nremaining path: real p2 bridge or stronger ingredient" as BlockerNatural #fecaca
+  rectangle "Natural next steps\n1. either prove a real p2-key bridge on the current presentation\n2. or add a stronger ingredient beyond the landed offline L2 obstruction certificate\n3. only then revisit wider natural-law claims" as BlockerNaturalNext #fecaca
+  rectangle "Conserved next steps\n1. find a conserved key stronger than Gauge × basin × motif\n2. make it quotient-visible and schedule-stable\n3. tie it back to the natural law" as BlockerConserved #fecaca
+  rectangle "MDL seam blocker\nold global source/schedule obligation is impossible\non the current CR-obstructed target\nLanded:\nexplicit CR retarget instantiated\non the transported-schedule MDL channel\nRemaining blocker:\na genuinely noncanonical CR target,\nor one aligned carrier/channel\nwith both source-to-schedule and\nschedule-to-noncanonical on the same carrier" as BlockerMDL #fecaca
+  rectangle "GR/QFT consumer layer\nKnownLimitsInterpretableObservableConsumer\nbridge exists and is consumable" as GapRecoveryConsumer #dcfce7
+  rectangle "Abstract/canonical seam blocker\nkeep fieldwise equalities explicit\ndischarge the richer MDL-side seam obligations\nonly then tighten abstract/canonical identification further" as BlockerAdapter #fecaca
+  rectangle "GR/QFT blocker\nno richer GR/QFT-specific downstream consumer\nbeyond current coarse/interpretable transport\nplus broader upstream recovery" as BlockerRecovery #fecaca
+  rectangle "Chemistry interpretation blocker\ninterpretation contract, adapter seam,\nfirst observable law, promoted-observable coupling law,\nquotient observable, triple coupling law,\nand one concrete quotient-sensitive cross-band witness pair landed\nremaining blocker is now:\na stronger chemistry-facing law using that witness\nbeyond stable pair/triple compatibility" as BlockerChemistry #fecaca
+  rectangle "Brain lane status\nall four notebook-confirmed themes have local owners\nBrainDynamicSemanticTransport landed:\ndynamic transport + bounded semantic drift\nstrict-richer joint consumer witness\nstill theorem-thin; not biological closure" as BlockerBrain #fef3c7
+  rectangle "Brain-DNA status\nBrainWholeChainIntegrationLaw landed:\nI_chain + checksum composition + realism floor\nBrainPhysicsHandoffPromotion landed:\nH_phys through I_chain + Lchem/Candidate256 gates\nstill bounded; no spectra, bonding, wet-lab realism,\nscale-setting, or full atom recovery" as BlockerCrossover #fef3c7
+  rectangle "Interop/text-pressure sidecars\nNGram: fixed-width ternary windows,\nnot text semantics\nITIRJoinBridge + SensibLawResidualLattice:\nfibred PNF residuals + wrapper/index gates\nPNFEmissionReceipt required before labels\nreceipted performative -> scopeExceeded6\nDomain incommensurability: open measure-bridge gate\nAttractorOrbitClassifier: design only,\nno trading/causal/political-label/responsibility/existential-fibre/enemy-classifier/collapsed-quotient/two-axis/three-body/hostile-provenance/four-body/non-Abrahamic-N-body/living-lattice/affective-state/Base369-semantics/neurochemical-body-brain/temporal-sheaf/spacetime-sheaf/market-self-observation/pair-operator/trigger/join-domain/global-bifurcation claims\nTetralemma: TriTruth tone excludes contradiction\nHecke.PNFResidualBridge: quotient fibre -> residual pressure\naggregate-imported; receipt-bearing consumers remain" as GapInterop #fef3c7
+  rectangle "Higher-structure claim guardrails\nCategory / topos / HoTT / ergodic /\ninformation-geometry / coinductive /\ntropical / RG / infinity-category\nreadings are future chart languages only\nNeed: typed chart carriers, morphisms,\npreservation laws, validation\nNo current DASHI infinity-topos,\nJain subobject classifier,\nHoTT Whakapapa/Dreaming theorem,\nergodic Songline theorem,\nFisher/MDL projection,\ntropical degeneration, RG relevance,\nor JFixedPoint terminal-object claim" as GapHigherStructure #fef3c7
+  rectangle "Cross-scale physics / biology / consciousness guardrails\nQuantum collapse, projector/unitary,\nQFT/RG, free energy, Landauer,\nphase transition, CRT correlation length,\nDNA eigenclass, epigenetic Dreaming layer,\npredictive processing, polyvagal/Base369,\nneurochemical body-brain triad,\nGABA/glutamate/monoamines/hormones,\ntemporal sheaf over Time,\nspacetime sheaf over Time x Space,\nCauchy-style slice evolution,\nJFixed topology/singularity transition,\nIIT Phi, market self-observation,\nand reality-self-description\nreadings are scale-unification fixtures only\nNeed: typed carriers at each scale,\nscale maps, observable preservation,\ntemporal/spacetime sections/gluing/metric,\nTime/Space containment carriers,\nevolution-validity preservation,\nmeasurement protocols, empirical validation,\nbiomedical validation where applicable,\nmarket/risk validation where applicable,\nand clinical non-authority flags" as GapCrossScale #fef3c7
 }
 
-package "5. Target state: solved unification" {
+package "5. Target state: serious unification claim" {
   rectangle "One core theory whose limits recover:\nquantum matter, atoms, nuclei,\nparticle interactions, and gravity\non the right physical regimes" as Solved #bbf7d0
 }
 
@@ -79,6 +111,31 @@ FormalGR --> DashiBridges : partial bridge target
 FormalQFT --> DashiEmpirical : collider-facing measurements
 FormalGR --> DashiSpine : Lorentz/signature side relevance
 
+TruthClosed --> DashiSpine : strongest proof layer
+TruthBridge --> CoreSpineTri : carrier bridge
+TruthBridge --> DashiBridges : regime bridge
+TruthPackaging --> DashiDynamics : interfaces
+TruthPackaging --> GapAtomic : gated atom/chemistry
+TruthExploratory --> DashiBoundaryExamples : examples / toys
+TruthEmpirical --> DashiEmpirical : calibration only
+TruthOpen --> GapDynamics : rate theorem
+TruthOpen --> WorkerBoard : assign lane before work
+TruthOpen --> GapContinuum : seam theorem
+TruthOpen --> GapAtomic : chemistry theorem
+TruthOpen --> GapInterop : adapter/import wiring
+TruthOpen --> GapHigherStructure : chart-language gates
+TruthOpen --> GapCrossScale : scale-unification gates
+
+CoreSpineTri --> CoreSpineMetric : vector lift
+CoreSpineMetric --> CoreSpineContraction : agreement-ultrametric maps
+CoreSpineMoonshine --> DashiEmpirical : p47/p59/p71 pressure channel
+CoreSpineTri --> DashiSpine : algebraic carrier support
+CoreSpineMetric --> DashiDynamics : carrier metric vocabulary
+CoreSpineContraction --> GapDynamics : certificate pressure, not natural law
+CoreSpineTri --> AdjacentDNA : ternary observable analogy, not DNA proof
+CoreSpineTri --> AdjacentBrain : ternary activation analogy, not neuroscience proof
+CoreSpineMoonshine --> GapAtomic : bounded scalar/channel pressure
+
 DashiSpine --> GapDynamics
 DashiSpine --> GapConserved
 DashiBridges --> GapRecovery
@@ -87,11 +144,36 @@ DashiDynamics --> GapGaugeMatter
 DashiEmpirical --> GapAtomic
 DashiSpine --> GapAdapter
 DashiDynamics --> AdjacentDNA : chemistry/contact pressure
+DashiBoundaryExamples --> GapDynamics : representation-dependent split
+DashiBoundaryExamples --> AdjacentBrain : aesthetic/cognitive toy pressure
 AdjacentDNA --> AdjacentCrossover : codec/channel pressure
 AdjacentBrain --> AdjacentCrossover : structure pressure
+AdjacentBrain --> AdjacentConnector : extraction/invariant source
+AdjacentConnector --> AdjacentCrossover : connector/codec consumer path
+AdjacentConnector --> GapAtomic : chemistry-facing handoff
 AdjacentCrossover --> GapAtomic : storage/channel/chemistry pressure
 AdjacentCrossover --> GapContinuum : adjacent modeling pressure
+CoreSpineMetric --> GapInterop : n-gram window carrier
+CoreSpineMetric --> GapHigherStructure : chart carrier pressure
+CoreSpineMoonshine --> GapHigherStructure : scalar bridge, not terminal object
+FormalQM --> GapCrossScale : physics analogy requires scale map
+FormalQFT --> GapCrossScale : RG analogy requires validation
+AdjacentDNA --> GapCrossScale : biology analogy requires measurement protocol
+AdjacentBrain --> GapCrossScale : neuroscience analogy requires clinical guardrail
+AdjacentBrain --> BlockerBrain
+AdjacentCrossover --> BlockerCrossover
 
+WorkerBoard --> BlockerMDL : W1
+WorkerBoard --> BlockerNatural : W2
+WorkerBoard --> GapDynamics : W2
+WorkerBoard --> DashiEmpirical : W3
+WorkerBoard --> BlockerChemistry : W4
+WorkerBoard --> BlockerRecovery : W5
+WorkerBoard --> GapInterop : W6
+WorkerBoard --> GapHigherStructure : W7
+WorkerBoard --> GapCrossScale : W7
+WorkerBoard --> GapAdapter : W8
+WorkerBoard --> DashiSpine : W9
 GapDynamics --> Solved
 GapConserved --> Solved
 GapContinuum --> Solved
@@ -99,12 +181,40 @@ GapGaugeMatter --> Solved
 GapAtomic --> Solved
 GapAdapter --> Solved
 GapRecovery --> Solved
+GapDynamics --> BlockerNatural
+GapConserved --> BlockerNatural
+GapConserved --> BlockerConserved
+GapDynamics --> BlockerNaturalNext
+GapContinuum --> BlockerMDL
+GapAdapter --> BlockerMDL
+GapAdapter --> BlockerAdapter
+GapRecovery --> GapRecoveryConsumer
+GapRecovery --> BlockerRecovery
+GapRecoveryConsumer --> Solved
+GapAtomic --> BlockerChemistry
+BlockerBrain --> Solved
+BlockerCrossover --> Solved
 
 note top of DashiSpine
 Strongest current evidence:
 formal geometric/closure structure.
 Closest to spacetime-formalism language,
 not yet to full atom-by-atom physics.
+end note
+
+note top of TruthOpen
+Programmer rule:
+red items are not TODO comments to hand-wave.
+They need named modules, fields, and checks
+before diagrams should recolor them.
+end note
+
+note top of CoreSpineMetric
+CoreSpine explains why several lanes
+share the same ternary carrier vocabulary.
+It is a typed bridge and diagrammatic interpretation layer,
+not a solved unification theorem.
+Concrete contraction still needs a certificate.
 end note
 
 note right of GapContinuum
@@ -118,6 +228,19 @@ Closest current contact with experimental reality:
 photonuclear / collider measurement organization.
 This is useful, but it is not the same as deriving QCD,
 and it is not the only atom/nuclear-facing surface.
+Current empirical adequacy is not closed:
+chi2 and orbit-shell surfaces do not yet prove
+fixed-point prediction of observations.
+end note
+
+note bottom of DashiBoundaryExamples
+Safe music bridge:
+Z12 ~= Z3 x Z4 by CRT.
+MusicalAttractor target:
+K_music projects to a chosen diatonic scale,
+L_music is chromatic dissonance, and descent is one-step.
+Do not claim the perfect fifth shift gives a Z3 orbit;
++7 mod 12 has order 12.
 end note
 
 note left of AdjacentDNA
@@ -125,11 +248,39 @@ These adjacent lanes matter for roadmap truthfulness.
 They widen the program beyond the core physics spine,
 but they do not upgrade the current repo to solved unification
 or to local theorem closure on brain/crossover claims.
+The blocker boxes are intentionally separate from the lane objects.
+end note
+
+note right of AdjacentConnector
+This path is now explicit in the roadmap:
+brain -> brain-DNA -> DNA/chemistry -> physics-facing chemistry carrier.
+It is also now consumed by bounded local modules,
+including bounded representation semantics
+bounded representation transport laws,
+bounded representation semantic-depth,
+bounded representation semantic-laws,
+bounded representation-consumer semantics/laws,
+bounded representation-integrated semantics,
+connector semantic-depth,
+theme-to-chemistry/channel transport,
+theme semantic-transport laws,
+theme end-to-end semantic-depth,
+theme-consumer semantics/laws,
+theme-integrated semantics,
+connector end-to-end semantic-laws,
+connector-consumer semantics/laws,
+connector-integrated consumer semantics,
+BrainWholeChainIntegrationLaw,
+and BrainPhysicsHandoffPromotion.
+The remaining blocker is no longer absence of whole-chain integration.
+The current gap is aggregate/import governance and any future stronger consumer
+that would exceed the bounded I_chain / H_phys handoff surfaces.
 end note
 
 note bottom of Solved
 This is the bar for saying
-"we solved unification" without hedging.
+"serious unification claim"
+without overclaiming final closure.
 end note
 
 legend right
@@ -138,8 +289,11 @@ legend right
 |<#dcfce7>| standard accepted physics formalism |
 |<#fef3c7>| current DASHI correspondence |
 |<#fff7ed>| adjacent archive-derived program |
+|<#fff7ed>| exploratory example / toy |
 |<#fee2e2>| empirical contact surface |
-|<#fce7f3>| missing step / open gap |
+|<#dcfce7>| theorem or consumer landed |
+|<#fef3c7>| advanced but blocked |
+|<#fecaca>| explicit blocker surface |
 |<#bbf7d0>| solved unification target |
 endlegend
 

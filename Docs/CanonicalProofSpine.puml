@@ -37,6 +37,8 @@ rectangle "Atom/chemistry recovery carrier\nAtomicChemistryRecoveryTheorem\n[pac
 rectangle "Minimal credible closure\nMinimalCrediblePhysicsClosureShiftInstance\n[current milestone]" as MinimalCredible #fef3c7
 rectangle "Known-limits GR bridge\nKnownLimitsGRBridgeTheorem\n[bridge, not full recovery]" as GRBridge #fee2e2
 rectangle "Known-limits QFT bridge\nKnownLimitsQFTBridgeTheorem\n[bridge, not full recovery]" as QFTBridge #fee2e2
+rectangle "CoreSpine / origin support\nTritTriTruthBridge\nTritCarrierBridge\nFascisticContractionInstance\nMoonshineBridge / CRTPeriodJFixedBridge\n[bridge support, not canonical proof replacement]" as CoreSpineSupport #dbeafe
+rectangle "Traceability / promotion gates\nOriginTraceabilityLedger\nmissing origin receipt\nmissing empirical adequacy\nmissing convergence-rate dynamics\nmissing chemistry relaxation\n[open governance]" as OriginGates #fecaca
 
 RealStack --> StrongCQ : source stack
 StrongCQ --> SigBridge : signature route
@@ -50,6 +52,12 @@ UnifiedOwner --> AtomOwner : atom/chemistry interpretation layer
 FullClosure --> MinimalCredible : bounded milestone package
 FullClosure --> GRBridge : downstream bridge
 FullClosure --> QFTBridge : downstream bridge
+CoreSpineSupport --> RealStack : carrier vocabulary support
+CoreSpineSupport --> MinimalCredible : origin receipt pressure
+OriginGates --> MinimalCredible : receipt not co-located
+OriginGates --> AtomOwner : recovery gates remain
+OriginGates --> GRBridge : no full recovery claim
+OriginGates --> QFTBridge : no full recovery claim
 
 note top of StrongCQ
 If a reader wants the current formal center of gravity,
@@ -82,12 +90,18 @@ Read as "known-limits bridge surface".
 Do not upgrade to full QFT recovery.
 end note
 
+note bottom of OriginGates
+This is the programmer checklist for honest promotion:
+add theorem owners before changing claim colors.
+end note
+
 legend right
 |= Color |= Meaning |
 |<#dbeafe>| source |
 |<#dcfce7>| proved / theorem-bearing |
 |<#fef3c7>| canonical packaging / theorem owner / milestone |
 |<#fee2e2>| downstream bridge, not final recovery |
+|<#fecaca>| open gate / governance blocker |
 endlegend
 
 @enduml

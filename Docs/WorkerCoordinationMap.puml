@@ -1,0 +1,101 @@
+@startuml
+title Worker Coordination Map For Open Blockers
+left to right direction
+
+skinparam shadowing false
+skinparam roundcorner 18
+skinparam packageStyle rectangle
+skinparam ArrowThickness 2
+skinparam defaultTextAlignment center
+
+skinparam package {
+  BackgroundColor #f8fafc
+  BorderColor #334155
+  FontColor #0f172a
+}
+
+skinparam rectangle {
+  BackgroundColor #ffffff
+  BorderColor #334155
+  FontColor #0f172a
+}
+
+skinparam note {
+  BackgroundColor #fff7ed
+  BorderColor #c2410c
+  FontColor #7c2d12
+}
+
+package "Coordination control" {
+  rectangle "W0 Orchestrator / integrator\nowns this board, diagram wiring,\nTODO/changelog, verification\nstatus: coordination only" as W0 #dbeafe
+  rectangle "WorkerCoordinationBoard.md\nsingle routing surface\nlane table + gates" as Board #dcfce7
+}
+
+package "Active assignment round 2026-05-04" {
+  rectangle "Erdos\nW1 active\nMDL/CR seam" as A_W1 #fde68a
+  rectangle "Boole\nW2 active\np2/convergence" as A_W2 #fde68a
+  rectangle "Tesla\nW3 active\nempirical diagnostic" as A_W3 #fde68a
+  rectangle "Poincare\nW4 active\nchemistry law" as A_W4 #fde68a
+}
+
+package "P0 theorem / bridge blockers" {
+  rectangle "W1 MDL/CR carrier\nneed: CR-flat noncanonical target\nor aligned carrier/channel\nvalidates: targeted MDL seam Agda" as W1 #fecaca
+  rectangle "W2 Natural / p2 / convergence\nneed: positive p2 bridge or obstruction\nplus convergence-rate theorem\nvalidates: targeted natural/dynamics Agda" as W2 #fecaca
+  rectangle "W3 Empirical adequacy\nneed: obs(fixedPoint) = empirical\nor precise carrier-mismatch diagnostic\nvalidates: empirical bridge Agda/docs" as W3 #fecaca
+  rectangle "W4 Chemistry law\nneed: symmetric nontrivial law\nusing Candidate256 witness\nvalidates: chemistry Agda" as W4 #fecaca
+  rectangle "W5 GR/QFT consumer\nneed: richer downstream consumer\nor missing upstream ingredient\nvalidates: known-limits/consumer Agda" as W5 #fef3c7
+  rectangle "W8 Origin receipt\nneed: co-located carrier/map/\nsignature/dynamics/empirical/CRT receipt\nvalidates: receipt Agda or docs check" as W8 #fef3c7
+  rectangle "W9 Cancellation-pressure seam\nneed: discharge or replace\nCancellationPressureCompatibility dim=15\nvalidates: delta-to-quadratic Agda" as W9 #fef3c7
+}
+
+package "Interop and governance blockers" {
+  rectangle "W6 ITIR / PNF consumer\nneed: receipt-bearing consumer\nno labels by inspection\nvalidates: interop Agda/docs" as W6 #fef3c7
+  rectangle "W7 Claim governance\nhigher-structure, cross-scale,\nneurochemical, temporal, spacetime,\nmarket readings remain guarded\nvalidates: guardrail docs + obligation Agda" as W7 #fef3c7
+}
+
+package "Shared promotion rules" {
+  rectangle "No prose promotion\nred/yellow gates move only by\nnamed theorem owner, typed receipt,\nor explicit mismatch diagnostic" as RuleNoProse #fee2e2
+  rectangle "Disjoint ownership\none lane per worker\nno unrelated dirty-tree edits" as RuleDisjoint #fee2e2
+  rectangle "Verification\nrender diagrams after puml changes\nrun targeted Agda for touched modules\ngit diff --check for docs" as RuleVerify #fee2e2
+}
+
+W0 --> Board : maintains
+Board --> W1
+Board --> W2
+Board --> W3
+Board --> W4
+Board --> W5
+Board --> W6
+Board --> W7
+Board --> W8
+Board --> W9
+
+A_W1 --> W1 : owns
+A_W2 --> W2 : owns
+A_W3 --> W3 : owns
+A_W4 --> W4 : owns
+W1 --> W3 : carrier dependency
+W1 --> W4 : carrier dependency
+W2 --> W3 : convergence affects checkability
+
+W1 --> RuleNoProse
+W2 --> RuleNoProse
+W3 --> RuleNoProse
+W4 --> RuleNoProse
+W5 --> RuleNoProse
+W6 --> RuleNoProse
+W7 --> RuleNoProse
+W8 --> RuleNoProse
+W9 --> RuleNoProse
+
+W0 --> RuleDisjoint
+W0 --> RuleVerify
+
+note bottom of Board
+This map coordinates work.
+It does not discharge any blocker.
+Each lane still needs its own theorem,
+receipt, validation, or obstruction.
+end note
+
+@enduml

@@ -1,5 +1,426 @@
 # Changelog
 
+## 2026-05-04
+
+- record the active W1-W4 theorem/bridge assignment round in
+  `Docs/WorkerCoordinationBoard.md`, `Docs/WorkerCoordinationMap.puml`,
+  `README.md`, and `TODO.md`: `W1`=`Erdos`, `W2`=`Boole`, `W3`=`Tesla`,
+  `W4`=`Poincare`
+- keep the dependency rule explicit: `W1` is the carrier-critical blocker for
+  full `W3` empirical equality and `W4` carrier promotion, while `W2` remains
+  partially independent but affects convergence checkability
+- preserve the governance boundary: the assignment round is coordination only
+  and does not discharge any red/yellow blocker without targeted Agda or a
+  typed mismatch diagnostic
+
+## 2026-05-03
+
+- add a worker coordination surface for active diagram blockers.
+  `Docs/WorkerCoordinationBoard.md` and `Docs/WorkerCoordinationMap.puml`
+  now translate the main roadmap blocker boxes into lane IDs `W0` through `W9`
+  with owner labels, primary file surfaces, success conditions, and validation
+  rules. `README.md`, `TODO.md`, `Docs/AgdaValidationTargets.md`, the
+  autonomous-execution docs, and the main diagrams now route parallel workers
+  through the board and explicitly mark the old closure checklist as
+  historical/provenance. This is docs-only coordination; no theorem or blocker
+  was discharged.
+
+## 2026-05-02
+
+- add spacetime-sheaf / mereological-space proof obligations and guardrails.
+  `DASHI.Physics.Closure.TemporalSheafProofObligations` now also names the
+  minimal Agda record surfaces for spacetime sections over `(Time, Space)`,
+  mereological containment, spatial overlap, spacetime gluing,
+  exclusive-coordinate uniqueness, Cauchy-style slice evolution, and
+  `JFixedPoint` spacetime-transition obstruction. `Docs/AttractorOrbitClassifier.md`,
+  `Docs/ClaimComparisonEngine.md`, `README.md`, and
+  `Docs/OriginTraceabilityLedger.md` now state that spacetime, 3+1,
+  Cauchy-surface, spacetime-density-matrix, or singularity readings remain
+  proof obligations until typed carriers, gluing laws, evolution preservation,
+  and transition-obstruction witnesses exist.
+- add temporal-sheaf / time-indexed state proof obligations and guardrails.
+  `DASHI.Physics.Closure.TemporalSheafProofObligations` now names the minimal
+  Agda record surfaces for time-indexed sections, overlap compatibility,
+  `MereViol` non-gluability, exclusive-property single-valued fibres,
+  `JFixedPoint`/`+1` topology-transition obligations, and temporal section
+  metrics. `Docs/AttractorOrbitClassifier.md`,
+  `Docs/ClaimComparisonEngine.md`, `README.md`,
+  `Docs/OriginTraceabilityLedger.md`, and `Docs/AgdaValidationTargets.md` now
+  state that temporal qualifiers are not promoted into sheaves, topology
+  changes, or ultrametric section distances without typed carriers,
+  gluing/restriction laws, transition witnesses, and validation.
+- add neurochemical / body-brain-chemistry guardrails.
+  `Docs/AttractorOrbitClassifier.md`, `Docs/ClaimComparisonEngine.md`,
+  `README.md`, and `Docs/OriginTraceabilityLedger.md` now treat
+  synaptic/electrical, volume-transmission, endocrine/hormonal, and epigenetic
+  or cultural propagation readings as biomedical cross-scale fixtures only.
+  Promotion of GABA, glutamate, dopamine, serotonin, norepinephrine, oxytocin,
+  cortisol, insulin, acetylcholine, allostatic load, receptor-context,
+  body:brain:chemistry, or Base369-biological identity language now requires
+  typed biological carriers, receptor/context models, biomarker measurement
+  protocols, causal hypotheses, biomedical validation, and clinical
+  non-authority flags.
+- add market self-observation / trader-operator guardrails.
+  `Docs/AttractorOrbitClassifier.md`, `Docs/ClaimComparisonEngine.md`,
+  `README.md`, and `Docs/OriginTraceabilityLedger.md` now treat
+  trader-as-node, market-as-RG-stack, operator-trading psychology,
+  three-conjunct signal architecture, MDL market compression, and
+  `JFixedPoint trade` language as hypothesis fixtures only. Promotion to a
+  market signal requires typed trader-state receipts, market-data receipts,
+  cross-scale maps, execution/risk/cost/compliance rules, period/regime-change
+  definitions where claimed, and out-of-sample validation. The main roadmap
+  diagrams now include this as a claim-governance boundary, not a theorem lane.
+- add the minimal P0 blocker proof-obligation interface.
+  `DASHI/Physics/Closure/P0BlockadeProofObligations.agda` now defines the
+  small record surfaces for MDL seam, finite convergence bound, empirical
+  adequacy, p2 bridge or admissible-candidate obstruction, chemistry law,
+  explicit field seam, realization independence, and origin receipt. The module
+  is imported by `DASHI/Everything.agda` and typechecks standalone. This is an
+  obligation surface only; it does not discharge the concrete blocker lanes.
+- refresh diagram claim-governance coverage for the latest comparative-formalism
+  additions.
+  `Docs/PhysicsUnificationMap.puml`, `Docs/PhysicsRealityRoadmap.puml`, and
+  `Docs/RepoMetasystem.puml` now expose the mathematical-atlas /
+  higher-structure and cross-scale physics/biology/consciousness guardrails as
+  explicit diagram nodes. The canonical proof spine remains unchanged because
+  these are hypothesis-governance surfaces, not theorem-owner promotions.
+- add cross-scale physics / biology / consciousness guardrails.
+  `Docs/AttractorOrbitClassifier.md`, `Docs/ClaimComparisonEngine.md`,
+  `Docs/PNFCaseStudiesWatergateIran.md`,
+  `Docs/ITIRPNFResidualLogicBridge.md`, `README.md`, and
+  `Docs/OriginTraceabilityLedger.md` now state that quantum, QFT/RG,
+  thermodynamic, chemical, molecular-biology, epigenetic, neuroscience,
+  affective, theological, and consciousness readings are scale-unification
+  fixtures, not current theorem claims. They require typed carriers at each
+  scale, explicit scale maps, observable-preservation laws, measurement
+  protocols, empirical validation, and clinical non-authority flags before
+  projector/unitary, RG relevance, Landauer erasure, phase transition,
+  correlation length, DNA eigenclass, epigenetic Dreaming-layer,
+  predictive-processing, polyvagal/Base369, IIT Phi, or `JFixedPoint` claims
+  are emitted.
+- add mathematical-atlas / higher-structure guardrails.
+  `Docs/AttractorOrbitClassifier.md`, `Docs/ClaimComparisonEngine.md`,
+  `Docs/PNFCaseStudiesWatergateIran.md`,
+  `Docs/ITIRPNFResidualLogicBridge.md`, `README.md`, and
+  `Docs/OriginTraceabilityLedger.md` now state that category-theory,
+  Jain-topos, HoTT, ergodic, information-geometric, coinductive /
+  non-well-founded, tropical, renormalization, and infinity-categorical
+  readings are future chart languages, not current theorem claims. They require
+  typed chart carriers, morphisms from receipted PNF/residual/operator
+  surfaces, preservation laws, and validation before adjunction,
+  subobject-classifier, path-identity, scan-order, Fisher/MDL, hyperset,
+  tropical-limit, RG relevance, infinity-topos, terminal-object, Monster, or
+  `JFixedPoint` claims are emitted.
+- add affective-state / feelings-wheel guardrails.
+  `Docs/AttractorOrbitClassifier.md`, `Docs/ClaimComparisonEngine.md`,
+  `Docs/PNFCaseStudiesWatergateIran.md`,
+  `Docs/ITIRPNFResidualLogicBridge.md`, and `README.md` now state that emotion
+  wheel, vedana/sankhara, mindfulness-labeling, affective-collapse, trauma,
+  PTSD, healing, high-Mana, Dreaming-centre, and personal-DASHI fixtures
+  require a named affective taxonomy, source or subject/session receipts,
+  psychometric or clinical validation status, contemplative-source profiles
+  where relevant, typed tone/naming/perspective/wrapper carriers, and explicit
+  clinical non-authority flags before Base369, Whakapapa, DharmaSystem,
+  Amalek-collapse, treatment, diagnosis, or `JFixedPoint` claims are emitted.
+- add East Asian / Indigenous living-lattice guardrails.
+  `Docs/AttractorOrbitClassifier.md`, `Docs/ClaimComparisonEngine.md`,
+  `Docs/PNFCaseStudiesWatergateIran.md`,
+  `Docs/ITIRPNFResidualLogicBridge.md`, and `README.md` now state that Taoist,
+  Confucian, Shinto, Indigenous American, Maori, Aboriginal Australian, and
+  broader living-lattice fixtures require culturally governed public receipts,
+  place/community provenance where applicable, restricted-knowledge flags,
+  topology-changing carrier definitions, relation/flow/graph/bundle/derivation
+  rules, typed morphisms, and validation before carrier-substrate,
+  natural-flow, relation-matrix, immanent-node, fully connected,
+  derivation-graph, timeless-bundle, songline/scan-order, metric,
+  `JFixedPoint`, or empirical-proof claims are emitted.
+- add non-Abrahamic / N-body comparative-lattice guardrails.
+  `Docs/AttractorOrbitClassifier.md`, `Docs/ClaimComparisonEngine.md`,
+  `Docs/PNFCaseStudiesWatergateIran.md`,
+  `Docs/ITIRPNFResidualLogicBridge.md`, and `README.md` now state that Hindu,
+  Buddhist, Jain, and broader non-Abrahamic comparative fixtures require
+  school-level source receipts, interpretive-profile metadata, carrier
+  definitions, role-binding or process translations, perspective/action
+  semantics where relevant, typed morphisms into or away from PNF, and
+  validation before identity-map, permanent-distance, telos-free action,
+  process-dissolution, perspective-indexed, `JFixedPoint`, or universal
+  terminus claims are emitted.
+- add conditional-trigger / latent fixed-point guardrails for classifier
+  fixtures.
+  `Docs/AttractorOrbitClassifier.md`,
+  `Docs/ClaimComparisonEngine.md`,
+  `Docs/PNFCaseStudiesWatergateIran.md`, and
+  `Docs/ITIRPNFResidualLogicBridge.md` now state that terminal-looking traces
+  may be modelled as triggered responses only after emitted trigger receipts,
+  modality/qualifier rules, a trigger connective, deactivation semantics,
+  latent fixed-point witness, and convergence theorem exist.
+- add aggressor / responsibility-label guardrails for classifier fixtures.
+  The same docs now state that ordinary aggressor labels require a shared-fibre
+  PNF taxonomy, while incommensurable-operator responsibility labels require a
+  cross-fibre responsibility taxonomy, cost/threat/response receipts,
+  third-party burden provenance where relevant, and external validation.
+- add existential-fibre / multi-domain operator-completeness guardrails.
+  The same docs now state that existential-domain fixtures are separate from
+  economic and theological fibres, requiring physical-survival witness
+  receipts, source provenance, temporal/wrapper/modality fields, a
+  warrant-ordering rule if domains are ranked, and a typed multi-domain
+  interaction operator before operator-completeness or triple-domain claims are
+  emitted.
+- add enemy-classification operator guardrails.
+  The same docs now state that lineage-fixed versus behaviour-conditional
+  classifier claims require textual/source-span receipts, interpretive-profile
+  metadata, classifier-input taxonomy, inverse/deactivation semantics, and
+  validation before they can be compared with operator-duality or contraction
+  surfaces.
+- add collapsed-quotient / no-typed-meet guardrails.
+  The classifier docs now state that a collapsed one-element or coarser
+  lattice is well-formed inside the residual formalism. Cross-carrier
+  comparison yields `noTypedMeet` unless an explicit product lattice or
+  lift/redifferentiation model is supplied; quotient maps and lost-distinction
+  records are required before impassability or resolution claims are emitted.
+- add protected-identity / conduct-axis and three-body lattice guardrails.
+  The classifier docs now state that two-axis and three-component lattice
+  fixtures require role-binding taxonomies, component meet/join laws,
+  product-lattice maps, projection/quotient/lift maps, decision-operator
+  routing, decoupling rules where claimed, source receipts, and validation
+  before any named legal/theological/historical system is classified.
+- add hostile-provenance / four-body theology guardrails.
+  The classifier docs now state that Basilides/Gnostic/Sufi/heresiological or
+  infographic fixtures require source-critical receipts, adversarial/indirect
+  witness qualifiers, orientation maps, product-lattice definitions, operator
+  witnesses, and validation before any direct-doctrine, CRT/JFixedPoint,
+  operator-duality, or current-conflict algebra claim is emitted. The docs also
+  correct the missing-`Ultrametric` phrasing: the module exists; the missing
+  ingredient would be a domain-specific theological-lattice metric.
+- add Base369-chain / algebraic-lift guardrails.
+  `Docs/AttractorOrbitClassifier.md`, `Docs/ClaimComparisonEngine.md`,
+  `Docs/PNFCaseStudiesWatergateIran.md`,
+  `Docs/ITIRPNFResidualLogicBridge.md`, `Docs/CoreSpineBridge.md`, and
+  `Docs/CoreSpineReviewerFormalisms.md` now distinguish the rigorous
+  Tri/Hex/Nonary cyclic-carrier surface from proposed theological,
+  actor-count, Theta, strategy-window, resolution-condition, or global
+  attractor semantics, which require typed carrier maps, commutation/seam
+  proofs, operator witnesses, and validation.
+
+## 2026-05-01
+
+- add the normalized claim-comparison engine surface.
+  `Docs/ClaimComparisonEngine.md` now records the repo-accurate chain from
+  runtime PNF emission through `PNFEmissionReceipt`, `receiptResidual`,
+  residual join laws, UFTC/DASHI pressure, tetralemma/sixfold carrier bridges,
+  and `Ontology.Hecke.PNFResidualBridge`. It explicitly separates runtime
+  emission from compiled residual algebra, corrects the stale
+  `Ultrametric.agda` blocker claim, and names the remaining promotion gates.
+  It now also records already-formal formula spans and attribution-by-response
+  interview exchanges as conditional trace fixtures: useful test surfaces, but
+  valid only after parser/reducer/formula-reader receipts emit typed atoms.
+  It also now records the operator-level sufficient-statistic pattern for
+  formula fixtures: a formula-reader receipt may emit a local-expansion
+  hypothesis such as `f (f x) > f x`, but that does not prove a market period,
+  actor classification, or real-world `AntiFascistSystem` instance without a
+  separate model witness for the carrier, operator, observable, and
+  obligations.
+  It now also records the domain-incommensurability deterrence fixture: a
+  formula can fail as deterrence if the target decision domain has no emitted
+  measure bridge to the formula's cost domain. This is documented as an open
+  design gate, not as a compiled residual constructor or a hand-assigned label
+  for any live corpus.
+  `Docs/AttractorOrbitClassifier.md` now records the downstream
+  attractor/orbit classifier design over receipted residual, wrapper, domain,
+  formula, and Hecke features. It keeps market-risk use behind empirical
+  validation and hidden-operator inference behind causal/provenance validation;
+  no trading signal, price floor, or causal-source attribution is claimed.
+  It now also records the state-operator / political-label boundary:
+  per-domain operator traces may support composite hypotheses only after
+  receipts and feature extraction exist, while live state political labels
+  require a separate taxonomy, receipt corpus, scope rule, and validation
+  standard. `FascisticSystem` remains a formal entropy-collapsing projection
+  property, not a direct political classification.
+  It now also records the relational pair-operator boundary: an interaction
+  claim over `S_left x S_right` needs directed receipts, a product carrier,
+  coupling/composition law, and a joint convergence/non-convergence theorem
+  before component trace labels can imply a joint fixed point, no-fixed-point
+  result, terminal dominance, or operator-level sufficient statistic.
+  It now also records the bot/source join-domain boundary: market-risk and
+  causal-source readings can share a receipted feature stream, but exactness
+  requires a typed observation map, orbit-input bijectivity or canonical
+  representative theorem, a minimal-operator relation, and empirical/causal
+  validation. `CRTPeriod` remains recurrence, not an injective classifier
+  horizon, and `JFixedPoint` is not a trading convergence or source-selection
+  certificate.
+  It now also records the global phase-space / bifurcation boundary:
+  capitalism/socialism/theology/reactive-operator labels are design fixtures,
+  not theorem claims, until a global state carrier, basin metric, perturbation
+  threshold, typed epistemic interaction operator, and validation standard are
+  supplied. `s-mono` remains monotone severity aggregation; it does not by
+  itself prove global reactive Jacobian dynamics or basin exit.
+- add the PNF wrapper case-study boundary.
+  `DASHI.Interop.SensibLawResidualLattice` now has
+  `performativeEvidence` as a wrapper state, records that it mismatches
+  `directEvidence`, and projects it to `scopeExceeded6` in the six-level
+  residual carrier. It also now names `PNFEmissionReceipt` and
+  `receiptResidual`, so text-side residual comparison is explicitly driven by
+  parser/reducer/source-span receipts rather than analyst-assigned labels.
+  `Docs/PNFCaseStudiesWatergateIran.md` documents Watergate as a closed
+  evidence-corpus pattern and the current Iran-war rhetoric example as a live
+  corpus fixture, with external reporting treated only as source-span context.
+  The note now explicitly rejects hand-assigned wrapper, qualifier, role,
+  signature, or residual labels.
+- add the Hecke PNF residual fibre adapter.
+  `Ontology.Hecke.PNFResidualBridge` now maps coarse Hecke defect classes into
+  the PNF residual chain (`stable -> partial`, `illegal -> contradiction`,
+  `other -> noTypedMeet`), proves illegal defects remain contradiction /
+  critical pressure under joins, records the canonical saturated histogram as
+  `partial`, and exposes quotient projection equality as the
+  `SameHeckeCandidatePool` fibre over `QuotientInterfaceOn`.
+- add ITIR PNF / residual logic carrier bridges.
+  `DASHI.Interop.SensibLawResidualLattice` now formalizes the four residual
+  levels as a join-semilattice, maps residual joins into DASHI pressure, and
+  defines a signature-fibred `PredicatePNF` carrier shape without parser
+  semantics. It also records wrapper gating, predicate-index fallback,
+  `SixResidualLevel`, `hexToSixResidual`, non-wrap severity transport, the
+  hex wrap seam, and six-level join/pressure preservation.
+  `DASHI.Algebra.TetralemmaBridge` aligns `LogicTlurey.Stage` and residual
+  levels through a four-position carrier, embeds `TriTruth` into
+  `exact`/`partial`/`noTypedMeet` while excluding `contradiction` from the tone
+  image, and `DASHI.Algebra.SixfoldLogic` maps a six-position carrier onto
+  `Base369.HexTruth`. `DASHI.Everything` imports the bridge modules.
+- add and aggregate-import the NGram / ITIR sidecar surfaces.
+  `DASHI.Combinatorics.NGram` now names fixed-width ternary windows plus
+  bigram/trigram aliases and adjacent agreement observables.
+  `DASHI.Interop.ITIRJoinBridge` now maps UFTC severity/code joins into
+  `DASHI.Pressure`, proves join preservation, and keeps monotonicity as named
+  proof-gap types. `DASHI.Everything` imports both.
+- fix an aggregate import blocker in `LilaTraceFamily`.
+  The module now imports `ExecutionContractLaws` qualified-only, avoiding an
+  overloaded `receipt` projection and allowing `DASHI.Everything` to typecheck.
+- correct docs/UML current-state sidecar wording.
+  `README.md`, `CoreSpineBridge.md`, `OriginTraceabilityLedger.md`,
+  `RepoMetasystem.puml`, `PhysicsUnificationMap.puml`, and
+  `PhysicsRealityRoadmap.puml` now distinguish landed/imported CoreSpine and
+  ultrametric bridge state from active next wiring. The diagrams no longer
+  describe Brain dynamic transport, Brain-DNA whole-chain integration, the
+  physics-facing brain handoff, or the p2 offline L2 obstruction certificate as
+  still absent. They also record that `NGram` and `ITIRJoinBridge` exist as
+  non-claiming adapter sidecars and are now aggregate-imported by
+  `DASHI.Everything`.
+- add the origin-traceability reconciliation surface.
+  `Docs/OriginTraceabilityLedger.md` now records the safe reading of the
+  downloaded disconnection diagnosis: the origin thesis is a bridge/governance
+  spine, `AtomicChemistryRecoveryTheorem` exists locally but remains bounded,
+  the empirical lane exists but lacks an adequacy theorem, and
+  `CanonicalDynamicsLawTheorem` still needs a convergence-rate promotion.
+  `README.md`, `architecture.md`, `PhysicsGuide`, `UnificationClaim`,
+  `PhysicsRecoveryLedger`, `NaturalDynamicsLaw`, and `RepoMetasystem.puml` now
+  route to that ledger.
+- make the main diagrams more communicative about true repo state.
+  `RepoMetasystem.puml`, `CanonicalProofSpine.puml`,
+  `PhysicsUnificationMap.puml`, and `PhysicsRealityRoadmap.puml` now include
+  status boards that separate theorem-owned, bridge-only, packaging,
+  empirical, and open-gate surfaces, including explicit notes for chi2 carrier
+  mismatch, B4 `standaloneOnly`, convergence-rate dynamics, empirical
+  adequacy, and atom/chemistry relaxation gates.
+- render documentation diagrams to SVG and PNG.
+  `scripts/render_docs_diagrams.sh` now emits both formats for top-level
+  `Docs/*.puml` files, and the generated PNG previews are present beside the
+  existing SVG previews.
+- add antifascistic boundary and music governance.
+  `Docs/AntifascisticBoundaryAndMusic.md` now records the safe reading of
+  invertible entropy-preserving systems, the three-body carrier-vs-observable
+  split, and the music MDL basin toy.
+  `Docs/MusicalSymmetryMDL.md` now records the safe pitch-class bridge
+  `Z/12Z ~= Z/3Z x Z/4Z` and rejects the false perfect-fifth `Z3` shortcut.
+  `RepoMetasystem.puml` and `PhysicsRealityRoadmap.puml` now show this lane as
+  exploratory examples/toys rather than theorem closure.
+- add the named musical attractor target.
+  `Docs/MusicalAttractorTheorem.md` records the precise exploratory bridge:
+  `(Z/12Z)^n` carrier, chromatic sum metric, nearest-scale `K_music`,
+  `L_music` Lyapunov/MDL analog, one-step descent to `S^n`, attractor classes,
+  CRT and tonal-cluster quotient separation, and explicit non-claim boundaries.
+  `RepoMetasystem.puml`, `PhysicsRealityRoadmap.puml`, and
+  `PhysicsUnificationMap.puml` now expose the target as an exploratory music
+  surface rather than a theorem-owned physics lane.
+- record the core-spine bridge-module request.
+  The next implementation adds explicit `Trit`/`TriTruth`,
+  CRT/J moonshine, ternary carrier, agreement-ultrametric contraction,
+  stage-quotient, and p47/p59/p71 active-wall bridge modules, while preserving
+  the distinction between proved bridges and still-open descent obligations.
+- land the six core-spine bridge modules and import them from
+  `DASHI.Everything`.
+  The new surfaces prove the `Trit`/`TriTruth` isomorphism, scalar moonshine
+  bridge, carrier-vector lift, `Stage` quotient seam, p47/p59/p71 active-wall
+  positions, and the agreement-ultrametric strict-contraction-to-certificate
+  path without claiming an abstract fascistic descent proof.
+  Targeted Agda checks pass for the six new modules; the aggregate
+  `DASHI.Everything` check remains longer than the 60s bounded validation
+  window and timed out in existing closure imports.
+- update docs and diagrams for the core-spine bridge.
+  Added `Docs/CoreSpineBridge.md`, updated the physics guide, algebraic carrier
+  summary, moonshine proof checklist, and validation-target list, then added a
+  distinct CoreSpine bridge layer to `PhysicsUnificationMap.puml` and
+  `PhysicsRealityRoadmap.puml`.
+  SVG previews were regenerated with `scripts/render_docs_diagrams.sh`.
+- tighten the reviewer-facing core-spine formalisms.
+  `TritTriTruthBridge` now includes transported `tritXor`
+  identity/associativity and an explicit non-homomorphism witness for
+  `Trit.inv`; `TritCarrierBridge` now proves cyclic rotation isometry for the
+  prefix ultrametric and exposes reflection isometry; `CRTPeriodJFixedBridge`
+  now defines `W3` and names the still-open active-wall periodicity and
+  Monster-representation obligations.
+  Added `Docs/CoreSpineReviewerFormalisms.md` to separate supported theorem
+  claims from the invalid stage-kernel/exact-sequence language and the unproved
+  `W3` periodicity claim.
+- record the algebra/logic/modular/contraction theorem-island bridge lane.
+  The implementation target is explicit bridge or obstruction surfaces for
+  `Base369`, `LogicTlurey`, `CRTPeriod`, `JFixedPoint`,
+  `FascisticSystem`, and `Contraction`; the repo already has
+  `Ultrametric.agda`, so the remaining gap is integration, not a missing file.
+- land those bridge surfaces:
+  `TriTruthScanOrderBridge` exposes the two-state `ScanOrder` equivariance
+  obstruction and a refined three-state carrier,
+  `LogicTlureyQuotientBridge` makes the seed/overflow quotient collapse
+  explicit,
+  `CRTJFixedPointBridge` connects `period + 1` to the moonshine contraction,
+  and `FascisticContractionBridge` derives attractors only from explicit
+  stabilization or strict-contraction witnesses while recording the remaining
+  descent gap.
+  `DASHI.Everything` now imports the bridge modules.
+- record the theorem-island correction for the Brain/DNA/Chemistry lane.
+  The next pass targets derived recovery boundaries, non-trivial checksum
+  algebra, semantic equivariance, cross-band Hamiltonian distinction,
+  brain/computer crossover, and a bounded antifascist/logic bridge rather than
+  more theorem-thin wrapper records.
+- add the first break-open surfaces for those theorem islands:
+  a derived base-code recovery boundary plus default-code obstruction,
+  non-trivial checksum algebra, Brain-DNA semantic equivariance, a sheet
+  Hamiltonian distinguishing witness, a first brain/computer crossover, and a
+  bounded LogicTlurey / antifascist bridge into the computer carrier.
+- record the blocker-formula worker routing for the MDL/continuum,
+  natural-charge/`p2`, and atomic-chemistry lanes.
+  The abstract/canonical seam and GR/QFT consumer upgrade are explicitly
+  dependency-parked until the MDL seam witness and adapter seam discharge land.
+- record the Brain/DNA/Chemistry crossover routing.
+  Brain dynamic transport and Brain-DNA whole-chain integration/realism are
+  the next independent lanes; chemistry cross-band invariant work remains on
+  the existing chemistry worker; the physics-facing brain-to-chemistry handoff
+  is parked until the whole-chain integration law promotes.
+- land the P1/P2 blocker-discharge surfaces through workers:
+  the MDL/continuum lane now rejects the old global obligation and exposes the
+  CR-retarget correction surface, while the natural-charge/`p2` lane now has a
+  theorem-thin offline L2 obstruction certificate instead of a constructive
+  `β_p2` bridge.
+- land the first Brain/DNA/Chemistry crossover promotion surfaces through
+  workers:
+  brain dynamic semantic transport, Brain-DNA whole-chain integration with
+  checksum compositionality and a realism floor, and the local chemistry
+  cross-band invariant law.
+  The physics-facing handoff is now the remaining bounded composition target.
+- promote the brain-to-chemistry physics handoff as a bounded wrapper:
+  `BrainPhysicsHandoffPromotion` composes `H_phys` through `I_chain`, carries
+  the Candidate256 `Lchem` cross-band law, and exposes the existing
+  `AtomicChemistryRecoveryTheorem` gate surfaces without widening to spectra,
+  scale-setting, bonding, wet-lab realism, or full atom recovery.
+
 ## 2026-04-17
 
 - inhabit the observable/signature pressure gate for the current physics

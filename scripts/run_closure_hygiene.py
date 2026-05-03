@@ -30,6 +30,7 @@ HEAVY_AGGREGATORS = {
     "DASHI/Physics/Closure/CanonicalGaugeMatterStrengtheningTheorem.agda",
     "DASHI/Physics/Closure/KnownLimitsFullMatterGaugeTheorem.agda",
     "DASHI/Physics/Closure/AtomicPhotonuclearContactGateTheorem.agda",
+    "DASHI/Physics/Closure/CanonicalP2KeyScheduleBridgeObstruction.agda",
     "DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda",
 }
 ALIAS_TO_KEY = {

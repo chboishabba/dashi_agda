@@ -183,3 +183,24 @@ mdlRefinedRecoveryIdentificationFromMdlHypotheses sourceMdl evolveMdl =
     ; sourceMdlToNoncanonicalContinuum = sourceMdl
     ; evolveMdlToNoncanonicalContinuum = evolveMdl
     }
+
+canonicalToNoncanonicalMdlRefinedRecoveryIdentificationFromHypotheses :
+  ((x : CanonicalCarrier) →
+   SRGOI.shiftRGAdmissible (CAMI.canonicalTransportState x) →
+   CAMI.canonicalMdlLevel x
+     ≡
+   noncanonicalMdl
+     (SCOT.shiftContractObservableMdlRefinedContinuumScale
+       (CAMI.canonicalTransportState x)))
+  →
+  ((x : CanonicalCarrier) →
+   SRGOI.shiftRGAdmissible (CAMI.canonicalTransportState x) →
+   CAMI.canonicalMdlLevel (CAMI.canonicalClosureDynamics x)
+     ≡
+   noncanonicalMdl
+     (SCOT.shiftContractObservableMdlRefinedContinuumScale
+       (CAMI.canonicalTransportState x)))
+  →
+  CanonicalToNoncanonicalMdlRefinedRecoveryIdentification
+canonicalToNoncanonicalMdlRefinedRecoveryIdentificationFromHypotheses =
+  mdlRefinedRecoveryIdentificationFromMdlHypotheses

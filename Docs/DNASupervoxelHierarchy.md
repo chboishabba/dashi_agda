@@ -13,6 +13,45 @@ The local repo previously had:
 
 This pass starts that lane.
 
+## Lane Status
+
+In the updated `PhysicsRealityRoadmap` / `PhysicsUnificationMap` language, this
+is an adjacent archive-derived program that is now genuinely localized in Agda.
+It is a real formal lane in this repo, but it is not currently part of the
+central physics-unification theorem spine.
+
+What is localized here now:
+
+- DNA-first `4 -> 16 -> 64 -> 256` carrier ownership
+- chemistry quotient and `U/V` coordinate ownership
+- concrete chemistry screening and UV-aware refinement
+- complement, sheet/Hamiltonian, supervoxel, streaming, eigenclass, and
+  channel owner surfaces
+
+What is genuinely formal here:
+
+- typed Agda owner modules for the carrier, quotient, and chemistry-visible
+  interfaces
+- bounded theorem surfaces for local complement, involution, stabilization, and
+  admissibility-style facts
+- a local formal packaging of DNA-side storage/channel pressure
+
+What this does not currently justify:
+
+- a physics-unification claim
+- a localized brain theorem lane
+- a localized brain-DNA theorem lane
+- a realistic external DNA storage codec or synthesis/sequencing channel model
+
+Concrete open gaps:
+
+- stronger theorem depth on the theorem-thin DNA surfaces
+- a real external codec beyond the current channel boundary/interface layer
+- a more realistic physical channel model for synthesis, sequencing, and error
+  recovery
+- wider crossover localization for brain-side and brain-DNA/channel ideas that
+  still mostly live in archive or sibling-repo form
+
 ## Archived guidance now made local
 
 The archive material pointed to four recurring ideas:

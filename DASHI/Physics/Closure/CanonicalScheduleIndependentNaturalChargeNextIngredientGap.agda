@@ -17,8 +17,10 @@ open import DASHI.Physics.Closure.CanonicalClosureFibreOrbitSummaryControl as CC
 open import DASHI.Physics.Closure.CanonicalClosureShiftScheduleBridge as CCSB
 open import DASHI.Physics.Closure.CanonicalConstraintGaugePackage as CCGP
 open import DASHI.Physics.Closure.ParametricGaugeConstraintTheorem as PGCT
+open import DASHI.Physics.Closure.CanonicalP2KeyScheduleBridgeObstruction as CPKSO
 open import DASHI.Physics.Closure.CanonicalScheduleIndependentNaturalChargeLaw as CSINCL
 open import DASHI.Physics.Closure.CanonicalScheduleIndependentNaturalChargeWideningObstruction as CSINCWO
+open import DASHI.Physics.Closure.ShiftContractEigenShadowOrbitSummaryControlAttempt as SCEC
 open import DASHI.Physics.Closure.ShiftRGObservableInstance as SRGOI
 
 ------------------------------------------------------------------------
@@ -124,8 +126,8 @@ record CanonicalScheduleIndependentNaturalChargeNextIngredientGap : Setω where
       CSINCL.CanonicalScheduleIndependentNaturalChargeLaw
     wideningObstruction :
       CSINCWO.CanonicalScheduleIndependentNaturalChargeWideningObstruction
-    missingP2Bridge :
-      CanonicalP2KeyScheduleBridge → CanonicalP2KeyScheduleBridge
+    bridgeObstruction :
+      CPKSO.CanonicalP2KeyScheduleBridgeObstruction
     bridgeWouldUnlockEigenShadow :
       CanonicalP2KeyScheduleBridge →
       ∀ x →
@@ -148,7 +150,8 @@ canonicalScheduleIndependentNaturalChargeNextIngredientGap =
     { baseLaw = CSINCL.canonicalScheduleIndependentNaturalChargeLaw
     ; wideningObstruction =
         CSINCWO.canonicalScheduleIndependentNaturalChargeWideningObstruction
-    ; missingP2Bridge = λ br → br
+    ; bridgeObstruction =
+        CPKSO.canonicalP2KeyScheduleBridgeObstruction
     ; bridgeWouldUnlockEigenShadow = p2-bridge-unlocks-eigenShadow
     ; bridgeWouldUnlockHecke = p2-bridge-unlocks-hecke
     }

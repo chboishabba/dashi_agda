@@ -6,6 +6,17 @@ Applied skills:
 - `get-shit-done`
 - `autonomous-orchestrator`
 
+## Superseding State
+
+As of `2026-05-03`, the closure checklist referenced below is complete as a
+historical acceptance/provenance surface. The active routing source is now the
+`TODO.md` Active Blocker Board plus `Docs/WorkerCoordinationBoard.md`.
+
+Orchestrator runs should route to TODO active blockers, not to
+`Docs/PhysicsClosureImplementationChecklist.md` as an unfinished checklist.
+Workers must not reopen completed checklist items unless an active blocker
+explicitly names that module as its bounded file surface.
+
 ## ZKP Frame
 
 O:

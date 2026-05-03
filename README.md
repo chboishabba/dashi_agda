@@ -14,10 +14,19 @@ Use one of these reader tracks first:
 - Repo track: `Docs/RepoGuide.md`
 - Physics/unification track: `Docs/PhysicsGuide.md`
 - Short unification claim surface: `Docs/UnificationClaim.md`
+- Origin traceability ledger: `Docs/OriginTraceabilityLedger.md`
+- Core-spine bridge surface: `Docs/CoreSpineBridge.md`
+- Claim comparison engine: `Docs/ClaimComparisonEngine.md`
+- ITIR/PNF residual bridge: `Docs/ITIRPNFResidualLogicBridge.md`
+- PNF case-study boundary: `Docs/PNFCaseStudiesWatergateIran.md`
 - Strong theorem owners:
   `DASHI/Physics/Closure/UnifiedPhysicsTheorem.agda`,
   `DASHI/Physics/Closure/AtomicChemistryRecoveryTheorem.agda`,
   `DASHI/Physics/Closure/PhysicsUnificationToCanonicalClosureAdapter.agda`
+- Worker coordination board:
+  `Docs/WorkerCoordinationBoard.md` and `Docs/WorkerCoordinationMap.puml`
+- P0 blocker obligation surface:
+  `DASHI/Physics/Closure/P0BlockadeProofObligations.agda`
 - Atom/wave secondary note: `Docs/AtomAndWaveRecoveryStatus.md`
 - Recovery truth surfaces: `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`
 - Module and diagram entrypoint: [architecture.md](architecture.md)
@@ -32,22 +41,65 @@ What not to read first:
 
 Archive-backed status update:
 
+## Active Blocker Coordination
+
+The historical closure checklist is complete and now serves as provenance. The
+active blocker queue is coordinated through `Docs/WorkerCoordinationBoard.md`
+and `TODO.md`, with validation policy in `Docs/AgdaValidationTargets.md` and
+promotion governance in `Docs/OriginTraceabilityLedger.md`.
+
+Current worker lanes:
+
+- Active assignment round `2026-05-04`: `W1`=`Erdos`,
+  `W2`=`Boole`, `W3`=`Tesla`, `W4`=`Poincare`. These assignments are
+  coordination status only; blockers remain red until a typed receipt,
+  theorem owner, or explicit mismatch diagnostic passes targeted validation.
+- `W1`: MDL/CR aligned carrier or CR-flat target.
+- `W2`: natural / `p2` bridge or obstruction plus
+  `CanonicalDynamicsLawTheorem` convergence-rate dynamics.
+- `W3`: `EmpiricalAdequacyBridge` or explicit carrier-mismatch diagnostic.
+- `W4`: stronger chemistry-facing law from the landed witness.
+- `W5`: richer GR/QFT consumer gate.
+- `W6`: ITIR/PNF receipt-bearing consumer wiring.
+- `W7`: claim-governance synchronization for higher-structure and cross-scale
+  charts.
+- `W8`: origin receipt for the minimal-credible closure path.
+- `W9`: cancellation-pressure seam in `DeltaToQuadraticBridgeTheorem`.
+
+Workers must choose one lane from the board, keep file ownership bounded, and
+must not reopen completed checklist items unless an active blocker explicitly
+depends on that surface.
+
 ## Diagram Surfaces
 
 - Canonical architecture overview: [architecture.md](architecture.md)
+- Origin traceability and core-spine navigation:
+  `Docs/OriginTraceabilityLedger.md`, `Docs/CoreSpineBridge.md`, and
+  `Docs/ClaimComparisonEngine.md`, `Docs/ITIRPNFResidualLogicBridge.md`
 - Strong claim owners:
   `UnifiedPhysicsTheorem.agda`,
   `AtomicChemistryRecoveryTheorem.agda`,
   `PhysicsUnificationToCanonicalClosureAdapter.agda`
 - Repo reader metasystem: `Docs/RepoMetasystem.puml` and `Docs/RepoMetasystem.svg`
+- Worker coordination map: `Docs/WorkerCoordinationMap.puml` and
+  `Docs/WorkerCoordinationMap.svg`
 - Canonical theorem spine: `Docs/CanonicalProofSpine.puml` and `Docs/CanonicalProofSpine.svg`
 - Physics/unification boundary map: `Docs/PhysicsUnificationMap.puml` and `Docs/PhysicsUnificationMap.svg`
 - Physical reality roadmap: `Docs/PhysicsRealityRoadmap.puml` and `Docs/PhysicsRealityRoadmap.svg`
+- Status-board convention:
+  green = theorem-owned/proved,
+  yellow = bridge or advanced-but-blocked,
+  blue = packaging/interface,
+  red/pink = empirical non-claim or open gate.
 - Observable/signature round: `Docs/ObservableSignatureGaugeEntryRound.puml` and `Docs/ObservableSignatureGaugeEntryRound.svg`
 - Training dynamics bridge: `Docs/TRAINING_DYNAMICS.puml` and `Docs/TRAINING_DYNAMICS.svg`
 - Versioned PlantUML sources: `Docs/*.puml`
-- Versioned rendered previews: `Docs/*.svg`
+- Versioned rendered previews: `Docs/*.svg` and `Docs/*.png`
 - Re-render command: `./scripts/render_docs_diagrams.sh`
+- Worker routing rule:
+  use `Docs/WorkerCoordinationBoard.md` before assigning parallel workers to
+  red/yellow blocker boxes. Each worker should own one lane, one bounded file
+  surface, one success condition, and one validation rule.
 - The orbit/signature/shell-family story remains the strongest part of the
   repo and is now better supported by sibling-repo and archive material.
 - The wave / psi / graded-series bridge is no longer only aspirational:
@@ -159,10 +211,185 @@ Archive-backed status update:
   `Docs/MusicalSymmetryMDL.md` now states the stronger basin target explicitly:
   replace direct symmetry reward with a compression/MDL proxy and ask whether
   symmetric attractor classes still dominate.
+- Antifascistic / three-body / music boundary:
+  `Docs/AntifascisticBoundaryAndMusic.md` records the safe split between
+  invertible entropy-preserving dynamics, three-body carrier-vs-observable
+  predictability, and the maintained music MDL toy. It also fixes the safe
+  pitch-class bridge as `Z/12Z ~= Z/3Z x Z/4Z`, not a perfect-fifth `Z3` orbit.
+- Musical attractor target:
+  `Docs/MusicalAttractorTheorem.md` now names the precise exploratory bridge:
+  carrier `(Z/12Z)^n`, summed chromatic metric, nearest-scale `K_music`,
+  Lyapunov level `L_music`, one-step descent to `S^n`, and explicit quotient
+  boundaries separating CRT `p mod 3`, tonal clustering, and the order-12
+  perfect-fifth map.
 - Canonical closure routing now includes an explicit
   `ContractionForcesQuadraticStrong -> QuadraticToCliffordBridgeTheorem`
   step that builds a canonical bilinear-form interface from normalized
   quadratic data before spin/Dirac layers.
+- Interop/text-pressure sidecars:
+  `DASHI/Combinatorics/NGram.agda` and
+  `DASHI/Interop/ITIRJoinBridge.agda` exist locally and are aggregate-imported
+  by `DASHI/Everything.agda`.
+  `NGram` is a fixed-width ternary-window surface, not text semantics;
+  `ITIRJoinBridge` is a conservative UFTC severity/code to DASHI pressure
+  adapter, not a live ITIR runtime or production join-edge classifier.
+  `DASHI/Interop/SensibLawResidualLattice.agda` adds the four-level
+  `ResidualLevel` join-semilattice, signature-fibred PNF comparison gates,
+  wrapper filtering, `PredicateIndexSurface`, a six-level residual refinement,
+  and a minimal `PredicatePNF` carrier shape;
+  `DASHI/Algebra/TetralemmaBridge.agda` and
+  `DASHI/Algebra/SixfoldLogic.agda` connect the residual/tetralemma/sixfold
+  carriers to `LogicTlurey` and `Base369.HexTruth` without treating parser
+  output as semantic authority. The tetralemma bridge also records the
+  `TriTruth -> ResidualLevel` embedding and proves that `contradiction` is not
+  in the tone image.
+  `Ontology/Hecke/PNFResidualBridge.agda` adds the Hecke-side PNF fibre
+  adapter: quotient projection equality is a candidate-pool fibre, stable /
+  illegal / other defects map to `partial` / `contradiction` / `noTypedMeet`,
+  and illegal defects preserve critical pressure under residual joins.
+  `WrapperState` now includes `performativeEvidence`, which maps to
+  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
+  parser profile, reducer profile, source span, and emitted atom so residual
+  comparison is receipt-driven rather than hand-labelled.
+  `Docs/PNFCaseStudiesWatergateIran.md` records Watergate/Iran as conditional
+  fixtures for this wrapper gate, not as manually labelled examples; it also
+  treats formula posts and attribution-by-response interview exchanges as
+  conditional trace fixtures that require emitted receipts. Formula posts can
+  be tested as operator-level sufficient-statistic fixtures only after a
+  formula-reader receipt emits that structure; they are not proof certificates
+  for market periods, actor classifications, or `AntiFascistSystem` instances
+  without separate model witnesses. The docs also now record
+  domain-incommensurability as an open design fixture: a failed economic-cost
+  to decision-domain measure bridge must be emitted or certified before the
+  repo can classify a comparison as incommensurable.
+  `Docs/ClaimComparisonEngine.md` is the normalized reader surface for the
+  whole path from runtime receipt emission to residual joins, pressure,
+  tetralemma/sixfold carriers, and the Hecke adapter.
+  `Docs/AttractorOrbitClassifier.md` is the downstream design surface for
+  using receipted residual/domain/formula/Hecke features as an
+  attractor-orbit hypothesis generator; it is explicitly not a trading bot,
+  market predictor, or hidden-cause attribution engine without separate
+  empirical and causal validation. State-level political labels are likewise
+  kept outside the operator-class trace unless a separate taxonomy, receipt
+  corpus, scope rule, and validation standard are supplied.
+  Aggressor/responsibility labels likewise require a shared-fibre or
+  cross-fibre responsibility taxonomy, cost/threat/response receipts,
+  third-party burden provenance where relevant, and external validation.
+  Existential-domain and operator-completeness labels likewise require
+  physical-survival witness receipts, provenance, temporal/wrapper/modality
+  fields, an optional warrant-ordering rule, and a typed multi-domain
+  interaction operator before economic/theological/existential fibres can be
+  compared or composed.
+  Enemy-classification operator labels likewise require textual/source-span
+  receipts, interpretive-profile metadata, a classifier-input taxonomy, and
+  inverse/deactivation semantics before the repo can compare lineage-fixed or
+  behaviour-conditional classifiers against operator-duality surfaces.
+  Collapsed-quotient labels likewise remain inside the residual formalism:
+  one-element or coarser quotient lattices can be well-formed, but
+  `noTypedMeet`, product-lattice, and lift/redifferentiation claims require
+  explicit quotient maps, lost-distinction records, receipts, and validation.
+  Protected-identity/conduct-axis and three-body lattice labels likewise
+  require role-binding taxonomies, product-lattice maps, decision-projection
+  rules, decoupling semantics where claimed, source receipts, and validation.
+  Hostile-provenance and four-body theology labels likewise require
+  source-critical receipts, adversarial/indirect witness qualifiers,
+  orientation maps, product-lattice definitions, operator witnesses, and
+  validation; `Ultrametric.agda` exists, but no theological-lattice metric is
+  currently supplied.
+  Non-Abrahamic and N-body comparative-lattice labels likewise require
+  school-level source receipts, interpretive profiles, carrier definitions for
+  identity-map, permanent-distance, telos-free action, process, or
+  perspective-indexed fixtures, typed translations into or away from PNF, and
+  validation before the repo can classify named traditions or doctrines.
+  East Asian and Indigenous living-lattice labels likewise require culturally
+  governed public receipts, place/community provenance where applicable,
+  restricted-knowledge flags, topology-changing carrier definitions for
+  substrate, natural-flow, relation-matrix, immanent-node, fully connected,
+  derivation-graph, or timeless-bundle fixtures, typed morphisms, and
+  validation before the repo can compare them with DASHI carriers, graphs,
+  bundles, scan orders, metrics, or fixed points.
+  Affective-state and feelings-wheel labels likewise require a named emotion
+  taxonomy, source or subject/session receipts, psychometric or clinical
+  validation status, contemplative-source profiles where relevant, typed
+  feeling-tone, naming, perspective, and wrapper carriers, and explicit
+  clinical non-authority flags before the repo can compare them with Base369,
+  Whakapapa, DharmaSystem, Amalek-collapse, trauma-healing, Dreaming, or
+  JFixedPoint fixtures.
+  Mathematical-atlas and higher-structure labels likewise require typed chart
+  interfaces before the repo can promote category-theory, Jain-topos, HoTT,
+  ergodic, information-geometric, coinductive/non-well-founded, tropical,
+  renormalization, or infinity-categorical analogies into theorem claims.
+  Required gates include chart carriers, morphisms from existing
+  PNF/residual/operator surfaces, preservation laws, and validation; the repo
+  does not currently prove a DASHI infinity-topos, a Jain subobject
+  classifier, a checked Amalek adjunction, a HoTT path-space reading of
+  Whakapapa/Dreaming, an ergodic Songline/scan-order theorem, a Fisher/MDL PNF
+  projection, a tropical degeneration, an RG relevance law, or `JFixedPoint` as
+  a terminal object.
+  Cross-scale physics, biology, neuroscience, affective, theological, and
+  consciousness labels likewise require typed scale carriers, explicit scale
+  maps, observable-preservation laws, measurement protocols, empirical
+  validation, and clinical non-authority flags where health-related claims are
+  involved. The repo does not currently prove that quantum superposition is
+  pre-vedana, measurement is vedana, projectors are Amalek, unitaries are
+  AntiFascistSystem, RG relevance governs enemy classifiers, Landauer erasure
+  proves cultural-memory destruction, phase transitions instantiate live
+  conflict triggers, `CRTPeriod` is correlation length, DNA eigenclasses are
+  literal DASHI biology, epigenetics is a Dreaming layer, predictive brain
+  networks are DASHI operator modules, polyvagal states are Base369, IIT Phi is
+  JFixedPoint, or the full chain is reality's self-description.
+  Neurochemical and body-brain-chemistry labels require the same discipline:
+  typed synaptic/electrical, volume-transmission, endocrine/hormonal, and
+  epigenetic or cultural propagation carriers; receptor/context models;
+  biomarker measurement protocols; causal hypotheses; biomedical validation;
+  and clinical non-authority flags before GABA, glutamate, dopamine,
+  serotonin, norepinephrine, oxytocin, cortisol, insulin, or acetylcholine can
+  be compared to DASHI operator classes, Base369, Dreaming, Whakapapa,
+  Amalek-collapse, market behavior, or therapeutic claims.
+  Market self-observation and trader-operator labels likewise require typed
+  trader-state receipts, market-data receipts, cross-scale maps, execution
+  rules, risk controls, cost models, compliance review, and out-of-sample
+  validation before the repo can promote trading psychology, RG-stack,
+  three-conjunct signal, MDL-compression, or `JFixedPoint trade` language into
+  any market signal or investment recommendation.
+  Temporal-sheaf labels likewise require typed Time, Interval, Property,
+  Value, Section, and Global carriers; overlap/restriction/gluing laws;
+  exclusive-property single-valued fibre semantics; pre/post transition
+  sheaves; a proof that a claimed `JFixedPoint` / `+1` transition is not just
+  ordinary `CRTPeriod` recurrence; and a temporal section metric before
+  temporal qualifiers can be promoted from flat metadata into a dimension of
+  the state space. The minimal Agda obligation surface for this is
+  `DASHI.Physics.Closure.TemporalSheafProofObligations`; it is not a discharged
+  temporal semantics theorem.
+  Spacetime-sheaf labels likewise require a typed Space / mereological carrier,
+  containment and spatial-overlap laws, sections over `(Time, Space)`,
+  spacetime gluing, exclusive-property single-valuedness at each coordinate,
+  Cauchy-style slice/delta/admissibility carriers, evolution validity
+  preservation, and pre/post extension-obstruction witnesses before the repo
+  can promote spacetime, 3+1, Cauchy-surface, spacetime-density-matrix, or
+  `JFixedPoint`-as-singularity readings. The current Agda surface only records
+  those proof obligations.
+  Base369-chain interpretations likewise require typed carrier maps,
+  quotient/seam or commutation proofs, operator witnesses, and validation
+  before the repo can promote cyclic carriers into actor-count semantics,
+  Theta operators, strategy windows, resolution conditions, or global
+  attractor claims.
+  Pairwise interaction claims likewise require a product carrier, directed
+  receipts, a coupling/composition law, and a joint attractor theorem before
+  the repo can claim convergence, non-convergence, or terminal dominance.
+  Conditional-trigger claims require emitted trigger receipts, modality and
+  qualifier rules, deactivation semantics, a latent fixed-point witness, and a
+  convergence theorem before a terminal-looking trace can be reclassified as
+  conditional convergence.
+  Bot/source join-domain claims require a typed observation map from operators
+  to receipt streams, an orbit-input bijectivity or canonical-representative
+  theorem, and empirical/causal validation; current Hecke, CRT, and
+  J-fixed-point bridge surfaces do not by themselves provide that.
+  Global phase/bifurcation claims require a global carrier, basin metric,
+  perturbation threshold, typed epistemic interaction operator, and validation
+  standard before the repo can claim a dominant attractor shift or basin exit.
+  The remaining promotion work is consumer wiring, not inventing those
+  surfaces from zero.
 - Active closure seam tightening:
   keep the canonical bridge interface fixed while replacing the internal
   signature source with a causal-classification theorem on the normalized

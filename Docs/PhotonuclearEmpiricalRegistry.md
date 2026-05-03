@@ -69,6 +69,24 @@ Role:
 - exposes simple validation counts and status tags,
 - keeps the lane explicitly empirical-only and non-claiming.
 
+### Empirical adequacy carrier diagnostic
+
+- `DASHI/Physics/Closure/EmpiricalAdequacyCarrierDiagnostic.agda`
+
+Role:
+
+- instantiates the narrow typed `EmpiricalAdequacy` equality available today:
+  the packaged photonuclear observable profile is observed at the held
+  shift-pressure fixed point;
+- records that this equality is only over the packaged `Nat` photonuclear
+  surface, not the stronger origin/chi2/B4 empirical adequacy bridge;
+- carries the current blocker statuses as typed evidence:
+  `poolCarrierMismatch`, `noSameSurfaceRecovered`, and `standaloneOnly`;
+- names the next type needed for promotion:
+  a `StrongEmpiricalAdequacyBridgeNextType` with chi2-pool transport onto the
+  fixed-point carrier, B4 promotion beyond `standaloneOnly`, and a coherent
+  origin observation map.
+
 ### Canonical normalized artifact schema
 
 - `scripts/hepdata_artifact_schema.json`

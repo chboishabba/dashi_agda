@@ -22,6 +22,7 @@ open import DASHI.Physics.ConcreteClosureStack as CCS
 open import DASHI.Physics.UnifiedClosure as UC
 open import DASHI.Physics.QFT as QFT
 open import DASHI.Physics.Closure.CanonicalGaugeMatterInterpretableObservableTheorem as CGMIOT
+open import DASHI.Physics.Closure.CanonicalGaugeMatterRecoveredMatterFieldTheorem as CGMRMFT
 open import DASHI.Physics.Closure.ContractionSignatureToSpinDiracBridgeTheorem as CSSDB
 open import DASHI.Physics.Closure.CliffordToEvenWaveLiftBridgeTheorem as CTEW
 open import DASHI.Physics.Closure.KnownLimitsFullMatterGaugeTheorem as KLMGFT
@@ -68,6 +69,8 @@ record KnownLimitsQFTBridgeTheorem : Setω where
       KLMGFT.KnownLimitsFullMatterGaugeTheorem
     interpretableObservableRecovery :
       CGMIOT.CanonicalGaugeMatterInterpretableObservableTheorem
+    recoveredMatterFieldRecovery :
+      CGMRMFT.CanonicalGaugeMatterRecoveredMatterFieldTheorem
     qftRecovered :
       KLS.KnownLimitsStatus.qftLike KLS.canonicalKnownLimitsStatus
       ≡ KLS.qftLikeTheoremBacked
@@ -105,6 +108,9 @@ canonicalKnownLimitsQFTBridgeTheorem =
         KLMGFT.canonicalKnownLimitsFullMatterGaugeTheorem
     ; interpretableObservableRecovery =
         KLMGFT.KnownLimitsFullMatterGaugeTheorem.canonicalGaugeMatterInterpretableObservable
+          KLMGFT.canonicalKnownLimitsFullMatterGaugeTheorem
+    ; recoveredMatterFieldRecovery =
+        KLMGFT.KnownLimitsFullMatterGaugeTheorem.canonicalGaugeMatterRecoveredMatterField
           KLMGFT.canonicalKnownLimitsFullMatterGaugeTheorem
     ; concreteContractionQuadraticBridge = cq
     ; qftRecovered =

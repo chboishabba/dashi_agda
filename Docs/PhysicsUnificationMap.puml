@@ -30,6 +30,23 @@ package "Proved formal core" {
   rectangle "Canonical theorem spine + theorem owner\nquadratic -> signature -> Clifford -> closure\nUnifiedPhysicsTheorem\n[proved]" as FormalCore #dcfce7
 }
 
+package "Viewer status: true repo state" {
+  rectangle "Strongest closed layer\ncanonical closure spine\nminimal credible shift package\nUnifiedPhysicsTheorem owner\n[repo theorem-owned]" as StateClosed #dcfce7
+  rectangle "Bridge layers, not final recovery\nCoreSpine carrier bridge\nknown-limits GR/QFT\nadapter/origin traceability\n[meaningful but bounded]" as StateBridge #fef3c7
+  rectangle "Packaging layers with gates\nAtomicChemistryRecoveryTheorem\nDashiDynamics + wave/consumer surfaces\n[interfaces, not final physics]" as StatePackaging #dbeafe
+  rectangle "Empirical sidecars\nphotonuclear registry\nchi2 audit currently carrier-mismatched\nB4 comparison standaloneOnly\n[calibration, not proof]" as StateEmpirical #fee2e2
+  rectangle "Exploratory examples\nthree-body boundary reading\nmusic MDL + MusicalAttractor target\n[not proof spine]" as StateExploratory #fff7ed
+  rectangle "Open promotions\norigin receipt\nEmpiricalAdequacyBridge\nconvergence-rate dynamics\nchemistry relaxation\nMDL/CR next seam\nNGram / ITIR consumer wiring\n[future theorem work]" as StateOpen #fecaca
+}
+
+package "CoreSpine carrier bridge" {
+  rectangle "Triadic algebra -> ternary carrier\nBase369.TriTruth\n-> TritTriTruthBridge\n-> DASHI.Algebra.Trit\n[proved bridge]" as CoreSpineTri #dcfce7
+  rectangle "Ternary carrier -> agreement ultrametric\nTritCarrierBridge\nRealTernaryCarrier.Carrier n = Vec Trit n\nAgreementUltrametric.ultrametricVec\n[proved bridge]" as CoreSpineMetric #dcfce7
+  rectangle "Contraction certificate surface\nFascisticContractionInstance\nnon-expanding / strict maps + fixed-point certificate\n[bridge, descent still explicit]" as CoreSpineContraction #fef3c7
+  rectangle "Stage quotient seam\nLogicTlurey.Stage -> StageQuotient -> TriTruth\noverflow seam explicit\n[proved bridge + seam]" as CoreSpineStage #fef3c7
+  rectangle "CRT/J moonshine scalar channel\nMoonshineBridge + CRTPeriodJFixedBridge\nperiod + 1 = contract(unit-obs)\np47/p59/p71 active-wall positions\n[proved scalar bridge]" as CoreSpineMoonshine #dcfce7
+}
+
 package "Bridge layers" {
   rectangle "Signature / Clifford / Dirac / known-limits bridges\nplus narrow realization-independence\nand explicit abstract/canonical adapter\n[bridge]" as BridgeLayers #fef3c7
 }
@@ -42,38 +59,132 @@ package "Packaging layers" {
 }
 
 package "Adjacent archive-derived lanes" {
-  rectangle "DNA-first supervoxel / chemistry quotient lane\ncarrier + quotient + UV bridge + checksum/\nstreaming/eigen/channel owner surfaces\n[packaging + local formalization]" as DNALane #dbeafe
-  rectangle "Brain-side structure / analysis lane\nmostly sibling-repo and archive-backed,\nnot yet a local Agda theorem lane here\n[archive-guided adjacent program]" as BrainLane #fff7ed
-  rectangle "Brain-DNA / codec / channel crossover\nstorage semantics, synthesis-sequencing channel,\nand wider bridge ideas still only partial locally\n[archive-guided adjacent program]" as CrossoverLane #fff7ed
+  rectangle "DNA-first supervoxel / chemistry quotient lane\ncarrier + quotient + UV bridge + checksum/\nstreaming/eigen/channel owner surfaces\n[real formal adjacent program]" as DNALane #dbeafe
+  rectangle "Brain-side structure / analysis lane\nlocal theorem-thin vocabulary + coarse-summary + extraction + invariant + invariant-depth surfaces\nplus localized region automaton,\nvisual form-constant/log-polar,\ngrokking/eigenbasis phase profile,\nand morphospace gap-junction owner surfaces\n[localized theorem-thin adjacent lane]" as BrainLane #fff7ed
+  rectangle "Brain-DNA / codec / channel crossover\nlocal packet/compatibility/attachment-law/consumer surfaces\nplus theorem-thin codec-depth/semantic/law/payload-recovery,\nrepresentation owner/semantics/transport-laws/semantic-depth/semantic-laws/consumer-semantics/consumer-laws/integrated-semantics,\nstructural-depth/consumer-semantics/abstract-composition,\nextraction-aware connector-depth/semantics,\nbrain-theme connector,\ntheme chemistry/channel transport/semantic-laws/end-to-end semantic-depth/consumer-semantics/consumer-laws/integrated-semantics,\nconnector semantic-depth/end-to-end semantic-laws/consumer-semantics/consumer-laws/integrated-consumer semantics,\ncodec/chemistry consumer,\nphysics-facing chemistry handoff,\nand abstract crossover/channel + semantic-checksum + long-window chemistry + synthesis/sequencing risk/realism-law/realism-depth/realism-semantics/realism-consumer/consumer-law/integrated-realism surfaces,\nstill partial and not a closure lane\n[integrated storage/channel bridge-pressure theorem surface]" as CrossoverLane #fff7ed
+  rectangle "Explicit connector chain\nBrain extraction/invariant/theme owners\n-> BrainThemeConnectorSurface\n-> BrainDnaRepresentationMap\n-> BrainRepresentationTransportLaws\n-> BrainRepresentationSemanticDepth\n-> BrainRepresentationSemanticLaws\n-> BrainRepresentationConsumerSemantics\n-> BrainRepresentationConsumerLaws\n-> BrainRepresentationIntegratedSemantics\n-> BrainChemistryCodecConsumer\n-> BrainConnectorSemanticDepth\n-> BrainThemeChemistryChannelTransport\n-> BrainThemeSemanticTransportLaws\n-> BrainThemeEndToEndSemanticDepth\n-> BrainThemeConsumerSemantics\n-> BrainThemeConsumerLaws\n-> BrainThemeIntegratedSemantics\n-> BrainConnectorEndToEndSemanticLaws\n-> BrainConnectorConsumerSemantics\n-> BrainConnectorConsumerLaws\n-> BrainConnectorIntegratedConsumerSemantics\n-> DNA chemistry/channel boundary\n-> BrainAtomicChemistryHandoff\n-> Atomic chemistry recovery carrier\n[explicit local connector path]" as ConnectorChain #e0f2fe
 }
 
 package "Empirical lane" {
   rectangle "Photonuclear empirical registry + validation + HEPData normalization\n[empirical]" as EmpiricalLane #fee2e2
 }
 
+package "Boundary examples / cultural toys" {
+  rectangle "Three-body boundary reading\ncarrier-level reversible dynamics\nobservable-level coarse prediction loss\n[example, not solved three-body theorem]" as ThreeBodyBoundary #fff7ed
+  rectangle "MusicalAttractor target\ncarrier: (Z/12Z)^n\nK_music: nearest-scale projection\nL_music: chromatic Lyapunov level\n[documented target, not Agda theorem]" as MusicAttractor #fff7ed
+}
+
 package "Open program" {
-  rectangle "Open program, now lane-split\nNatural/conserved: advanced but blocked on next ingredient\nContinuum/adapter: advanced but blocked on richer MDL seam\nGauge/GR-QFT: advanced, then blocked on upstream recovery\nAtomic/nuclear: advanced, then blocked on interpretation + owner-cycle cleanup\n[speculative / open]" as OpenProgram #fce7f3
+  rectangle "Worker coordination board\nDocs/WorkerCoordinationBoard.md\nW0 integration\nW1 MDL/CR\nW2 natural/p2/convergence\nW3 empirical adequacy\nW4 chemistry law\nW5 GR/QFT consumer\nW6 ITIR/PNF consumer\nW7 claim governance\nW8 origin receipt\nW9 cancellation-pressure seam\n[coordination, not closure]" as WorkerBoard #dbeafe
+  rectangle "Natural / conserved lane\nAdvanced but blocked\nLanded:\nCanonicalScheduleIndependentNaturalChargeLaw\nCanonicalP2KeyScheduleBridgeObstruction\nCanonicalP2OfflineL2ObstructionCertificate\n[advanced but blocked]" as OpenNatural #fef3c7
+  rectangle "Continuum / adapter lane\nAdvanced but blocked\nLanded:\nCanonicalToNoncanonicalCoarseRecoveryIdentification\nfieldwise seam equalities\nconditional MDL seam export\nCanonicalToNoncanonicalMdlSeamTheorem\nCanonicalClosureShiftMdlScheduleBridge\nCanonicalToNoncanonicalScheduleMdlAlignmentBlocker\nCanonicalToNoncanonicalMdlCRCrossChannelObstruction\n[advanced but blocked]" as OpenContinuum #fef3c7
+  rectangle "Gauge / matter lane\nAdvanced\nLanded:\nCanonicalGaugeMatterInterpretableObservableTheorem\nCanonicalGaugeMatterRecoveredMatterFieldTheorem\n[advanced]" as OpenGauge #dcfce7
+  rectangle "GR / QFT lane\nAdvanced but blocked\nLanded:\nKnownLimitsInterpretableObservableConsumer\nrecovered matter-field bridge exposure\n[advanced but blocked]" as OpenGRQFT #fef3c7
+  rectangle "Atomic / nuclear lane\nAdvanced but blocked\nLanded:\nShellDictionaryRecoveryGateTheorem\nAtomicPhotonuclearContactGateTheorem\nChemistryRightLimitsGateTheorem\nChemistryRightLimitsInterpretationContract\nAtomicChemistryRightLimitsAdapter\nChemistryRightLimitsObservableLaw\nChemistryRightLimitsPromotedObservableCouplingLaw\nChemistryRightLimitsQuotientObservable\nChemistryRightLimitsQuotientObservableCouplingLaw\nChemistryRightLimitsQuotientCrossBandCandidate256Witness\n[advanced but blocked]" as OpenAtomic #fef3c7
+  rectangle "Brain lane status\nall four themes have local owners\nBrainDynamicSemanticTransport landed:\ndynamic transport + bounded semantic drift\nstrict-richer joint consumer witness\n[landed theorem-thin surface]" as BlockerBrain #fef3c7
+  rectangle "Brain-DNA status\nwhole-chain integration law landed:\nI_chain + checksum composition + realism floor\nphysics-facing handoff promotion landed:\nH_phys through I_chain + Lchem/Candidate256 gates\nstill bounded; no spectra, bonding, wet-lab realism,\nscale-setting, or full atom recovery\n[landed theorem-thin surfaces]" as BlockerCrossover #fef3c7
+  rectangle "Natural blocker\nno positive canonical p2 carrier/schedule bridge\nnormalized eigenShadow surface too weak for p2\noffline L2 obstruction certificate is landed\nremaining path: real p2 bridge or stronger ingredient\n[explicit blocker]" as BlockerNatural #fecaca
+  rectangle "Continuum blocker\nold global source/schedule obligation is impossible\non the current CR-obstructed target\nlanded:\nexplicit CR retarget instantiated\non transported-schedule MDL\nremaining blocker:\ngenuinely noncanonical CR target\nor aligned carrier/channel\n[explicit blocker]" as BlockerContinuum #fecaca
+  rectangle "Atomic blocker\none concrete non-degenerate quotient-sensitive\ncross-band witness pair is landed\nremaining blocker:\na stronger chemistry-facing law using that witness\nbeyond stable pair/triple compatibility\n[explicit blocker]" as BlockerAtomic #fecaca
+  rectangle "GR/QFT blocker\nno richer GR/QFT-specific downstream consumer\nbeyond current coarse/interpretable transport\nplus broader upstream recovery\n[explicit blocker]" as BlockerRecovery #fecaca
+  rectangle "Interop/text-pressure sidecars\nNGram: fixed-width ternary windows,\nnot text semantics\nITIRJoinBridge + SensibLawResidualLattice:\nfibred PNF residuals + wrapper/index gates -> pressure\nPNFEmissionReceipt required before labels\nreceipted performative -> scopeExceeded6\nDomain incommensurability: open measure-bridge gate\nAttractorOrbitClassifier: design only,\nno trading/causal/political-label/responsibility/existential-fibre/enemy-classifier/collapsed-quotient/two-axis/three-body/hostile-provenance/four-body/non-Abrahamic-N-body/living-lattice/affective-state/Base369-semantics/neurochemical-body-brain/temporal-sheaf/spacetime-sheaf/market-self-observation/pair-operator/trigger/join-domain/global-bifurcation claims\nTetralemma: TriTruth tone excludes contradiction\nHecke.PNFResidualBridge: quotient fibre -> residual pressure\n[next surface: receipt-bearing consumers]" as OpenInterop #fef3c7
+  rectangle "Higher-structure claim guardrails\nCategory / topos / HoTT / ergodic /\ninformation-geometry / coinductive /\ntropical / RG / infinity-category\nreadings are future chart languages only\nNeed: typed chart carriers, morphisms,\npreservation laws, validation\nNo current DASHI infinity-topos,\nJain subobject classifier,\nHoTT Whakapapa/Dreaming theorem,\nergodic Songline theorem,\nFisher/MDL projection,\ntropical degeneration, RG relevance,\nor JFixedPoint terminal-object claim\n[claim governance]" as OpenHigherStructure #fef3c7
+  rectangle "Cross-scale physics / biology / consciousness guardrails\nQuantum collapse, projector/unitary,\nQFT/RG, free energy, Landauer,\nphase transition, CRT correlation length,\nDNA eigenclass, epigenetic Dreaming layer,\npredictive processing, polyvagal/Base369,\nneurochemical body-brain triad,\nGABA/glutamate/monoamines/hormones,\ntemporal sheaf over Time,\nspacetime sheaf over Time x Space,\nCauchy-style slice evolution,\nJFixed topology/singularity transition,\nIIT Phi, market self-observation,\nand reality-self-description\nreadings are scale-unification fixtures only\nNeed: typed carriers at each scale,\nscale maps, observable preservation,\ntemporal/spacetime sections/gluing/metric,\nTime/Space containment carriers,\nevolution-validity preservation,\nmeasurement protocols, empirical validation,\nbiomedical validation where applicable,\nmarket/risk validation where applicable,\nand clinical non-authority flags\n[claim governance]" as OpenCrossScale #fef3c7
 }
 
 FormalCore --> BridgeLayers : formal transport
+StateClosed --> FormalCore : closed proof route
+StateBridge --> CoreSpineTri : carrier bridge
+StateBridge --> BridgeLayers : recovery bridges
+StatePackaging --> DashiDynamics : interface layer
+StatePackaging --> AtomCarrier : bounded atom carrier
+StateEmpirical --> EmpiricalLane : evidence lane
+StateExploratory --> ThreeBodyBoundary : boundary example
+StateExploratory --> MusicAttractor : cultural toy target
+StateOpen --> OpenNatural : natural/dynamics gates
+StateOpen --> WorkerBoard : assign lanes first
+StateOpen --> OpenContinuum : MDL/CR gates
+StateOpen --> OpenAtomic : chemistry gates
+StateOpen --> OpenInterop : adapter/import gates
+StateOpen --> OpenHigherStructure : chart-language gates
+StateOpen --> OpenCrossScale : scale-unification gates
+CoreSpineTri --> CoreSpineMetric : componentwise lift
+CoreSpineMetric --> CoreSpineContraction : metric carrier for certificates
+CoreSpineStage --> CoreSpineTri : quotient to triadic observable
+CoreSpineMoonshine --> OpenAtomic : p47/p59/p71 pressure channel
+CoreSpineTri --> FormalCore : algebraic carrier spine
+CoreSpineMetric --> DashiDynamics : ternary state metric
+CoreSpineContraction --> DashiDynamics : fixed-point certificate vocabulary
+CoreSpineStage --> BrainLane : dialectic/theme seam vocabulary
+CoreSpineTri --> DNALane : ternary observable bridge, not DNA closure
 FormalCore --> Milestone : current bounded closure package
 BridgeLayers --> DashiDynamics : shared vocabulary pressure
 DashiDynamics --> DynamicsConsumers : bounded consumer interfaces
 EmpiricalLane --> DashiDynamics : packaged validation input
-Milestone --> OpenProgram : does not close this gap
-DynamicsConsumers --> OpenProgram : suggestive, not sufficient
-BridgeLayers --> OpenProgram : bridge, not final recovery
+ThreeBodyBoundary --> OpenNatural : representation-dependent caution
+MusicAttractor --> CoreSpineContraction : descent vocabulary only
+Milestone --> OpenNatural : does not close this gap
+Milestone --> OpenContinuum : does not close this gap
+DynamicsConsumers --> OpenNatural : suggestive, not sufficient
+DynamicsConsumers --> OpenContinuum : suggestive, not sufficient
+BridgeLayers --> OpenGauge : bridge, not final recovery
+BridgeLayers --> OpenGRQFT : bridge, not final recovery
 BridgeLayers --> AtomCarrier : adapter + wave/quotient support
-AtomCarrier --> OpenProgram : strong interpretation layer, not final chemistry proof
+AtomCarrier --> OpenAtomic : strong interpretation layer, not final chemistry proof
 AtomCarrier --> DNALane : chemistry-facing adjacent formal lane
 BridgeLayers --> CrossoverLane : bridge pressure, not theorem closure
 DNALane --> CrossoverLane : codec/channel pressure
 BrainLane --> CrossoverLane : structural pressure
-CrossoverLane --> OpenProgram : adjacent research pressure, not evidence
+BrainLane --> ConnectorChain : extraction/invariant source
+ConnectorChain --> CrossoverLane : local connector surfaces
+ConnectorChain --> DNALane : chemistry/channel attachment
+ConnectorChain --> AtomCarrier : chemistry-facing handoff
+BrainLane --> BlockerBrain
+CrossoverLane --> OpenAtomic : adjacent research pressure, not evidence
+CrossoverLane --> OpenContinuum : adjacent research pressure, not evidence
+CrossoverLane --> BlockerCrossover
+CoreSpineMetric --> OpenInterop : ternary-window sidecar
+CoreSpineMetric --> OpenHigherStructure : chart carrier pressure
+CoreSpineMoonshine --> OpenHigherStructure : scalar bridge, not terminal object
+EmpiricalLane --> OpenCrossScale : validation pressure only
+OpenInterop --> OpenHigherStructure : morphism semantics gate
+OpenInterop --> OpenCrossScale : typed scale-map gate
+OpenGauge --> OpenGRQFT
+WorkerBoard --> BlockerContinuum : W1
+WorkerBoard --> BlockerNatural : W2
+WorkerBoard --> OpenNatural : W2
+WorkerBoard --> StateEmpirical : W3
+WorkerBoard --> BlockerAtomic : W4
+WorkerBoard --> BlockerRecovery : W5
+WorkerBoard --> OpenInterop : W6
+WorkerBoard --> OpenHigherStructure : W7
+WorkerBoard --> OpenCrossScale : W7
+WorkerBoard --> StateBridge : W8
+WorkerBoard --> BridgeLayers : W9
+OpenNatural --> BlockerNatural
+OpenContinuum --> BlockerContinuum
+OpenAtomic --> BlockerAtomic
+OpenGRQFT --> BlockerRecovery
 
 note right of FormalCore
 This is the part to trust first.
 It carries the strongest current evidence.
+end note
+
+note right of StateOpen
+This box is the anti-overclaim guardrail.
+Team programmers should add code here as explicit theorem owners,
+not as extra prose on existing packages.
+end note
+
+note right of CoreSpineContraction
+CoreSpine is a bridge layer:
+it exposes one typed ternary carrier,
+one agreement ultrametric,
+one contraction-certificate interface,
+and the bounded CRT/J scalar channel.
+It does not discharge concrete descent
+or prove biology/chemistry/physics closure.
 end note
 
 note left of BridgeLayers
@@ -86,17 +197,54 @@ end note
 note right of EmpiricalLane
 Useful for calibration and interpretation contracts.
 Not evidence of theorem closure by itself.
+Current chi2 audit reports a carrier mismatch;
+current B4 shell comparison is standaloneOnly.
+end note
+
+note right of MusicAttractor
+Music target is precise but bounded:
+Z12 carrier, chromatic metric,
+K_music projection, L_music descent.
+No perception, uniqueness, Monster-prime,
+or physics-closure claim is made.
 end note
 
 note left of DNALane
 Important scope split:
 the DNA lane is now genuinely localized in Agda,
 but it is not itself a physics-unification theorem lane.
-The brain and crossover material remain mostly archive-guided
-or sibling-repo adjacent rather than local theorem closure here.
+The brain lane now has theorem-thin local owner/summary/extraction/invariant/invariant-depth surfaces,
+while its richer archive-backed brain themes are kept separate in explicit blocker boxes,
+and the crossover lane now has partial local owner/compatibility/law/consumer/connector/depth/semantic/composition/payload surfaces,
+with its own explicit blocker box kept separate from the lane object,
+but neither is local theorem closure here.
 end note
 
-note bottom of OpenProgram
+note right of ConnectorChain
+This is the clearest currently local
+brain -> DNA -> chemistry -> physics path.
+It is now explicit and consumed through
+theme transport, bounded representation semantics,
+bounded representation transport laws,
+bounded representation semantic-depth,
+bounded representation semantic-laws,
+bounded representation-consumer semantics/laws,
+bounded representation-integrated semantics,
+codec/chemistry consumption,
+connector semantic-depth,
+theme-to-chemistry/channel transport,
+theme semantic-transport laws,
+theme end-to-end semantic-depth,
+theme-consumer semantics/laws,
+theme-integrated semantics,
+connector end-to-end semantic-laws,
+connector-consumer semantics/laws,
+connector-integrated consumer semantics,
+and a bounded physics-facing handoff,
+but it remains theorem-thin.
+end note
+
+note bottom of BlockerContinuum
 This is the live non-claim boundary.
 The repo is not entitled to cross it yet.
 Several lanes are now advanced or explicitly blocker-bound,
@@ -109,8 +257,11 @@ legend right
 |<#fef3c7>| bridge |
 |<#dbeafe>| packaging |
 |<#fff7ed>| archive-guided adjacent |
+|<#fff7ed>| exploratory example / cultural toy |
 |<#fee2e2>| empirical |
-|<#fce7f3>| speculative / open |
+|<#dcfce7>| advanced / theorem or consumer landed |
+|<#fef3c7>| advanced but blocked |
+|<#fecaca>| explicit blocker surface |
 endlegend
 
 @enduml

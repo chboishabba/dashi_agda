@@ -1,0 +1,6 @@
+DASHI/Physics/Closure/CurrentBlockerBoardNextAgdas.agda
+DASHI/Physics/Closure/ChemistryRightLimitsNondegenerateQuotientCouplingRequirement.agda
+DASHI/Physics/Closure/CanonicalToNoncanonicalMdlGlobalObligationImpossible.agda
+DASHI/Physics/Closure/CanonicalToNoncanonicalMdlAlignedChannelRequirement.agda
+DASHI/Physics/Closure/CanonicalToNoncanonicalMdlCRRetargetRequirement.agda
+README.md
