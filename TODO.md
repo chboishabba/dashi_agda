@@ -6,6 +6,19 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+Lyapunov-adapter / external-gap audit result `2026-05-05`: W9 now has
+`W9LyapunovAdapterReceipt.agda`, a narrow `CancellationPressureLyapunovBridge`
+for `NormalizeAddState` with pressure `carryDepth + carryBudget`. This is a
+real internal adapter, but it is not the dim-15 theorem-facing pressure/Qcore
+route; the first remaining W9 type is
+`ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+canonical15Dimension`. W4 now records the no-network local audit: t21/t22
+cache files are absent and `scripts/run_t43_projection.py` does not accept the
+needed `--mode`, `--data`, or `--covariance` flags. W5 now has
+`W5PDFCarrierExternalConfirmedGap.agda`, preserving CT18/MSHT/LHAPDF intake as
+required. GR now has `DiscreteConnectionCandidateFromCRT.agda`, diagnostic
+only; CRT/J still does not supply a carrier-internal non-flat connection.
+
 Constructorless-token / retarget audit result `2026-05-05`: W2 now consumes
 the local `UniformConvergenceRateSurface`, but `W2PromotionAuthorityReceipt`
 records that `NaturalP2ConvergencePromotionAuthorityToken` is still

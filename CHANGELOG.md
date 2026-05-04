@@ -2,6 +2,22 @@
 
 ## 2026-05-05
 
+- integrate Lyapunov-adapter / external-gap audit round:
+  `W9LyapunovAdapterReceipt.agda` constructs a narrow
+  `CancellationPressureLyapunovBridge` for `NormalizeAddState` using
+  `carryDepth + carryBudget`, while
+  `W9LyapunovIncompatibilityDiagnostic.agda` preserves the remaining dim-15
+  pressure/Qcore blocker as
+  `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+  canonical15Dimension`. `W4CalibrationRatioZPeakReceiptRequestSurface.agda`
+  now records the no-network local audit of missing t21/t22 artifacts and the
+  t43/t44-only runner interface. `W5PDFCarrierExternalConfirmedGap.agda`
+  records that the local DGLAP/LO plus carrier-correction route is still
+  insufficient and that CT18/MSHT/LHAPDF intake remains required.
+  `DiscreteConnectionCandidateFromCRT.agda` records a diagnostic-only
+  CRT-to-connection first-missing surface, with no asymptotic, Bianchi, or
+  curved-GR promotion claim.
+
 - integrate constructorless-token / retarget audit round:
   `W2PromotionAuthorityReceipt.agda` now consumes local uniform-rate support
   while preserving the constructorless W2 promotion authority boundary.

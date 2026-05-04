@@ -81,6 +81,77 @@ F:
 | `W9-retarget-lyapunov-audit` | `Planck` | `Linnaeus` (`019df440-a266-7cb3-adef-487d0d731085`) | Test whether weighted support can satisfy retarget/Lyapunov interfaces. | `W9WeightedSupportRetargetConsumerReceipt.agda` accepts the retarget consumer narrowly; `W9LyapunovIncompatibilityDiagnostic.agda` records the remaining Lyapunov mismatch. | completed; W9 still non-promoting |
 | `GR-nonflat-crt-audit` | `Gauss` | `Banach` (`019df440-a49d-7a80-8325-b7f464d9fea8`) | Check whether CRT/J p47/p59/p71 surfaces provide a non-flat connection. | `DiscreteEinsteinTensorCandidate.agda` now records `missingCarrierInternalNonFlatConnectionFromCRT`. | completed; GR diagnostic only |
 
+## Active Assignment Round -- Lyapunov Adapter / External Gap Audit
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns integration, board/TODO/changelog updates, validation, and commit.
+- Workers audit one lane each and may land only a receipt or diagnostic that
+  matches the lane's current blocker surface.
+
+R:
+- Test the new W9 Lyapunov-adapter claim against the actual repo interfaces.
+- Preserve W4/W5/GR as non-promoting unless local artifacts, external PDF data,
+  or a carrier-internal non-flat connection are actually present.
+
+C:
+- W9: `W9LyapunovAdapterReceipt.agda`,
+  `W9LyapunovIncompatibilityDiagnostic.agda`, and the retarget-consumer
+  receipt.
+- W4: `W4CalibrationRatioZPeakReceiptRequestSurface.agda`.
+- W5: `W5PDFCarrierExternalConfirmedGap.agda` and PDF intake request surfaces.
+- GR: `DiscreteConnectionCandidateFromCRT.agda` and
+  `DiscreteEinsteinTensorCandidate.agda`.
+
+S:
+- W9 already had a weighted-support retarget consumer, but not a theorem-facing
+  dim-15 pressure/Qcore compatibility route.
+- W4 still lacks local t21/t22 cache files and runner support for arbitrary
+  same-record Z-peak inputs.
+- W5 still lacks local LHAPDF/CT18/MSHT/NNPDF data and provider authority.
+- GR has exact flat Minkowski support but no CRT-derived carrier endomap,
+  connection coefficients, parallel transport, curvature operator, or Bianchi
+  theorem.
+
+L:
+- `grep/interface audit` -> `narrow receipt/diagnostic` ->
+  `timeout 30s agda <touched module>` -> `git diff --check` ->
+  `docs/TODO/changelog sync`.
+
+P:
+- `Planck` tests W9's carry-depth Lyapunov adapter.
+- `Faraday` audits W4 local artifacts and runner flags.
+- `Maxwell` records the confirmed W5 external PDF gap.
+- `Gauss` records the CRT-to-connection first-missing diagnostic.
+
+G:
+- A narrow `CancellationPressureLyapunovBridge` over `NormalizeAddState` is not
+  a W9 kill receipt unless it supplies the dim-15 theorem-facing compatibility
+  route.
+- DGLAP/LO or carrier-correction diagnostics are not local CT18/MSHT/LHAPDF
+  verification.
+- CRT/J period data is not a non-flat GR connection.
+
+F:
+- W9 first remaining type:
+  `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+  canonical15Dimension`.
+- W4 first missing remains local t21/t22 artifacts plus runner generalization.
+- W5 first missing remains accepted external PDF/parton-luminosity intake.
+- GR first missing remains a carrier-internal non-flat connection from CRT/J.
+
+| Lane | Worker | Agent | Assignment | Result | Status |
+|---|---|---|---|---|---|
+| `W9-lyapunov-adapter` | `Planck` | `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) | Check whether `carryDepth + carryBudget` can satisfy the actual Lyapunov interface. | `W9LyapunovAdapterReceipt.agda` constructs a narrow `CancellationPressureLyapunovBridge` for `NormalizeAddState`; `W9LyapunovIncompatibilityDiagnostic.agda` now names the remaining dim-15 compatibility type. | completed; narrow adapter only |
+| `W4-zpeak-local-audit` | `Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Audit local t21/t22 cache and runner support, without network. | `W4CalibrationRatioZPeakReceiptRequestSurface.agda` records missing t21/t22 local artifacts and unsupported `--mode`/`--data`/`--covariance` runner flags. | completed; blocked |
+| `W5-pdf-confirmed-gap` | `Maxwell` | `Curie` (`019df44c-dbff-7e62-9227-da4b82ffc438`) | Encode the external W5 PDF gap without claiming local CT18/MSHT verification. | `W5PDFCarrierExternalConfirmedGap.agda` records DGLAP/LO plus carrier correction as insufficient and keeps CT18/MSHT/LHAPDF intake required. | completed; external PDF blocked |
+| `GR-crt-connection-diagnostic` | `Gauss` | `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) | Decide whether CRT/J supports a non-flat connection candidate today. | `DiscreteConnectionCandidateFromCRT.agda` records diagnostic-only status and inherits `missingCarrierInternalNonFlatConnectionFromCRT`. | completed; diagnostic only |
+
 ## Active Assignment Round -- W3-Promoted Residual Closure Gates
 
 Round date: `2026-05-05`

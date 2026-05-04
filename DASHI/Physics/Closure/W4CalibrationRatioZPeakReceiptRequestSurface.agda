@@ -182,6 +182,15 @@ record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
     supportStatus :
       W4ZPeakDirtyBoundaryCheckSupportStatus
 
+    localAuditDate :
+      String
+
+    firstMissingLocalArtifact :
+      String
+
+    secondMissingLocalArtifact :
+      String
+
     requiredMeasurementLocalPath :
       String
 
@@ -200,6 +209,12 @@ record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
     runnerUnsupportedRequestedFlags :
       List String
 
+    runnerProbeWithoutFreezeStatus :
+      String
+
+    runnerProbeWithFreezeStatus :
+      String
+
     numericAnchorStatus :
       String
 
@@ -212,6 +227,12 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
   record
     { supportStatus =
         blockedByMissingLocalT21T22CacheAndT43RunnerOnly
+    ; localAuditDate =
+        "2026-05-05 local no-network audit"
+    ; firstMissingLocalArtifact =
+        "missing: scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
+    ; secondMissingLocalArtifact =
+        "missing: scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
     ; requiredMeasurementLocalPath =
         "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
     ; requiredCovarianceLocalPath =
@@ -238,8 +259,12 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
         ∷ "--data"
         ∷ "--covariance"
         ∷ []
+    ; runnerProbeWithoutFreezeStatus =
+        "timeout 30s python scripts/run_t43_projection.py --mode dirty-z-peak --data t21 --covariance t22 exits 2 before data access: required --freeze-hash is missing"
+    ; runnerProbeWithFreezeStatus =
+        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-local-audit --mode dirty-z-peak --data t21 --covariance t22 exits 2: unrecognized --mode/--data/--covariance"
     ; numericAnchorStatus =
-        "not-produced: local t21/t22 cache is absent and the current runner is t43/t44-specific"
+        "not-produced: first missing local artifact is t21; t22 is also absent; the current runner is t43/t44-specific"
     ; diagnosticBoundary =
         "This diagnostic records script/data support only"
         ∷ "It does not construct a W4CalibrationRatioZPeakReceipt"
