@@ -8,6 +8,309 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `SIB-R1` | `W0` | Normalize useful sibling-repo evidence into a single typed inventory covering `dashifine`, `dashiQ`, `dashitest`, `DASHIg`, and `dashi_lean4`. | Converts local evidence into discoverable receipt pointers without making it provider evidence. | Targeted Agda inventory plus docs/TODO/changelog; no W3/W4/W5/W6/W8/W9 promotion. |
+| `LILA-R2-check` | `Bernoulli the 2nd` (`019df30c-4630-73c1-8363-c93682cd7a0e`) | Read-only feasibility check for upgrading `LilaE8RootEnumeration` beyond a request surface using existing Agda trit/vector definitions. | Independent read-only lane; W0 owns edits and integration. | Findings only unless existing definitions prove the full carrier/count/norm route; no fabricated E8 root receipt. |
+| `LEAN-R4` | `Sagan the 2nd` (`019df2d6-3431-7702-adcf-69eecafa6a4b`) | Inspect `../dashi_lean4` moonshine files for E8 theta/E4/Delta/J theorem support. | Independent read-only lane for LILA-R4 support. | Finding only: arithmetic moonshine support found, no theta/J receipt. |
+| `LYAP-W2W9` | `Jason the 2nd` (`019df314-780e-7533-9604-dc607cf69baa`) | Inspect `../dashifine/hepdata_lyapunov_test_out_all` for W2/W9 support evidence. | Independent read-only lane for energy/pressure support. | Finding only: aggregate monotone fractions found, no carrier-state-bound pass receipt. |
+| `E8VOCAB-R2` | `Maxwell the 2nd` (`019df314-7939-7102-81ec-6769cd540cc7`) | Inspect `../DASHIg/LeechTransformer/vocab/e8_morpheme_*` for a 240-root enumeration artifact. | Independent read-only lane for LILA-R2 support. | Finding only: 2048-token SentencePiece/BPE vocab, not E8 root enumeration. |
+| `SIB-R2` | `W0` | Encode worker extraction findings into `SiblingEvidenceExtractionDiagnostic`. | Converts negative findings into durable blocker narrowing. | Targeted Agda plus docs/diagrams; no promotion. |
+
+Round instructions:
+
+- Workers must keep diagrams/docs as coordination surfaces by reporting any
+  new lane or blocker names back to W0.
+- Sibling artifacts are evidence pointers only. They can guide the DASHI-native
+  prediction route, Lyapunov lane, LILA trace lane, or theta/J support lane,
+  but cannot inhabit provider receipts unless re-run or adapted inside the
+  governed receipt path.
+- `LILA-R2-check` must distinguish elementary combinatoric feasibility from an
+  accepted E8 carrier receipt; root enumeration, inner product, Weyl action,
+  Lam-Tung projection, and empirical comparison remain separate gates.
+- `SIB-R2` records that the sibling scan did not find an accepted
+  `compute_dashi_ratio` route, constructive E8 root receipt, theta/J adapter,
+  or carrier-state-bound Lyapunov receipt.
+
+## Active Assignment Round -- HEP-R45 Observable Definition Receipt
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R45-agda` | `Helmholtz the 2nd` (`019df393-450e-7e83-8f43-6310b5f66701`) | Record the local t43/t44 and t45/t46 observable-definition header facts as a non-promoting Agda receipt. | Follows HEP-R44's model-normalization failure and checks the table convention before more predictor work. | Targeted Agda passed; normalized-by-total-cross-section hypothesis is blocked; no comparison law or W3/W4/W5/W8 promotion. |
+| `HEP-R45-script` | `Rawls the 2nd` (`019df393-6851-79b0-a22d-3ecf3d5ab3ba`) | Add a local diagnostic script that prints DOI/name/description/observable plus ratio ranges for t43 and t45. | Read-only with respect to prediction modules; confirms both tables use `DSIG/DPHISTAR / DSIG/DPHISTAR`. | Python compile and script execution passed; diagnostic only, no accepted projection or promotion. |
+
+Round result:
+
+- t43 header: `phistar mass 50-76 over mass 76-106`, observable
+  `DSIG/DPHISTAR / DSIG/DPHISTAR`, description says measured differential
+  cross section in `50 <= Mll < 76` divided by measured differential cross
+  section in `76 <= Mll < 106`, and values are not normalized by bin width.
+- t45 header: `phistar mass 106-170 over mass 76-106`, same observable
+  convention, numerator `106 <= Mll < 170`, denominator `76 <= Mll < 106`,
+  and values are not normalized by bin width.
+- Parsed local ranges: t43 has 18 rows, min `0.036572`, max `0.078012`, mean
+  `0.0469034`; t45 has 18 rows, min `0.020919`, max `0.030239`, mean
+  `0.0262884`.
+- Interpretation: the normalized-by-total-cross-section explanation is
+  rejected by the local headers. The HEP-R44 failure remains a
+  model-normalization / neutral-current calibration gap, not a table-convention
+  mismatch escape hatch.
+
+## Active Assignment Round -- HEP-R38 Dirty Comparison Diagnostic
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R38` | Orchestrator / integrator | Compute and encode the covariance-aware comparison diagnostic for the dirty HEP-R37 artifact. | Uses t44 Total uncertainty covariance and the diagnostic `sigma_DASHI` projection. | Targeted Agda/P0 passed; chi2 is a model-gap signal only, not an accepted comparison-law receipt or W3 promotion. |
+
+Round result:
+
+- Diagnostic chi2: `6402144.431093033`.
+- Degrees of freedom: `18`.
+- Diagnostic chi2/dof: `355674.6906162796`.
+- Residual range: `0.877355159718522` to `0.9086506463845561`.
+- First three pulls: `1587.2338127262133`, `1722.710595531962`, `1704.2250745901044`.
+- Interpretation: the current finite-trit `sigma_DASHI` projection is scale/normalization-mismatched to t43 and must be refined before any clean freeze/comparison-law attempt can plausibly pass.
+
+## Active Assignment Round -- HEP-R39 Sigma DASHI V2 Refinement
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R39-python` | `Anscombe the 2nd` (`019df353-22dc-76f2-80dd-7baf020581b1`) | Refine `sigma_DASHI` with phi-star-dependent depth, Breit-Wigner normalization, and smooth finite-carrier phase measure. | Uses only bin edges, mass windows, and deterministic carrier construction; no observed t43 ratio seeding or covariance input. | Python compile and dirty projection passed; no clean freeze, accepted projection receipt, comparison-law receipt, empirical adequacy, or W3/W4/W5/W8 promotion. |
+| `HEP-R39-agda` | `Dirac the 2nd` (`019df353-3eea-71a3-814b-1d01fcbcbeed`) | Add `HEPDataT43SigmaDASHIModelGapRefinementDiagnostic` as the typed HEP-R39 model-gap/refinement surface. | Records HEP-R38 chi2/dof and HEP-R39 dirty v2 result as non-promoting diagnostics. | Targeted Agda passed; accepted comparison and promotion constructors remain blocked. |
+
+Round result:
+
+- Dirty diagnostic artifact: `/tmp/t43_projection_hep_r39_dirty.json`.
+- File SHA-256: `8a11d0962d31ddb52b28256c5469174cf57fce23888f553923af1c21ba6a30ba`.
+- Projection digest: `6c19f2eef039b494f8fddc42b8e0941e464adc8fc93e5502f4eadfd04cbc9c3b`.
+- Diagnostic chi2: `1231.5217160086213`.
+- Degrees of freedom: `18`.
+- Diagnostic chi2/dof: `68.41787311159007`.
+- Residual range: `-0.011206707061669437` to `-0.0016013193462227626`.
+- First three pulls: `-20.058402887592976`, `-15.81554530871195`, `-9.732286913574525`.
+- Interpretation: v2 narrowed the model-gap by orders of magnitude, but it is still a dirty/synthetic-freeze diagnostic and remains above the comparison-law threshold.
+
+## Active Assignment Round -- HEP-R40 Neutral-Current Continuum Refinement
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R40` | Orchestrator / integrator | Add bounded diagnostic gamma/Z neutral-current continuum support to the HEP-R39 `sigma_DASHI` construction and rerun the dirty covariance diagnostic. | Uses no observed t43 ratio seeding and no covariance input to prediction; covariance is used only after projection to measure the dirty diagnostic gap. | Python compile, dirty projection, targeted Agda/P0, and diagram render passed; no clean freeze, accepted projection, comparison-law receipt, empirical adequacy, or W3/W4/W5/W8 promotion. |
+
+Round result:
+
+- Dirty diagnostic artifact: `/tmp/t43_projection_hep_r40_dirty.json`.
+- File SHA-256: `7772bad5b8bdc7407b6432d8fe7585fb7ed357f6eed3db4e3d6883c9c1cffac6`.
+- Projection digest: `96be51a8019b7fcd88e36def0d61fd483c9b3bfe4a1698c9cce6079188567ff9`.
+- Diagnostic chi2: `515.8370788903753`.
+- Degrees of freedom: `18`.
+- Diagnostic chi2/dof: `28.65761549390974`.
+- Residual range: `-0.002095752548174956` to `0.003318827386338624`.
+- First three pulls: `-0.3942458219739305`, `-1.457261191185934`, `-1.0453450331655705`.
+- Interpretation: HEP-R40 fixes the gross low-phi scale mismatch, but the covariance-aware shape remains above threshold and still needs refinement before any clean-freeze comparison-law attempt.
+
+## Active Assignment Round -- HEP-R41 Posterior Shape Response
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R41` | Orchestrator / integrator | Add posterior shoulder-dip / recovery-bump response after inspecting HEP-R40 residual shape and rerun the dirty covariance diagnostic. | This is explicitly posterior residual-shape tuning, not pre-registered prediction. | Python compile, dirty projection, targeted Agda/P0, and diagram render passed; numeric threshold is met but governance blocks accepted comparison-law and W3/W4/W5/W8 promotion. |
+
+Round result:
+
+- Dirty diagnostic artifact: `/tmp/t43_projection_hep_r41_dirty.json`.
+- File SHA-256: `61bdfa327ee79a8979fe28c932ddf3f39052adc23aa94ef9b070c9ccfcafc905`.
+- Projection digest: `4f131476a22ea8b9315370378f106e19c044964335f0b4a1a7d6e846e90ee336`.
+- Diagnostic chi2: `31.33580041084701`.
+- Degrees of freedom: `18`.
+- Diagnostic chi2/dof: `1.7408778006026118`.
+- Residual range: `-0.0010955170766824007` to `0.0005772369356618623`.
+- First three pulls: `-0.3942354635434069`, `-1.4566769302829727`, `-1.0401784201446023`.
+- Interpretation: HEP-R41 is the first numeric-threshold pass signal, but it is governance-blocked because the response was selected after seeing residuals and the artifact is dirty/synthetic-freeze.
+
+## Active Assignment Round -- HEP-R42 t45/t46 Holdout Validation
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R42` | Orchestrator / integrator | Acquire t45/t46, run the unchanged HEP-R41 model against the independent `106-170 / 76-106` ratio, and record holdout result. | Direct `/t45` and `/t46` endpoints returned HEPData error HTML; exact table-name URLs were resolved from record metadata. | Holdout fails with chi2/dof `222.54402462995546`; no accepted comparison law, empirical adequacy, or W3/W4/W5/W8 promotion. |
+
+Round result:
+
+- t45 digest: `bcc1450c5c7818e2792f06f1882c6facdea2e4079070b777f2c5ac3b87343433`.
+- t46 digest: `e325d82ec3ba6962042c54f6b98a911d456f9bf00db22d2238b0cd76e71dcb3f`.
+- Dirty diagnostic artifact: `/tmp/t45_projection_hep_r42_holdout_dirty.json`.
+- Artifact SHA-256: `60242829cd37a9508c1b21da969c43383c1e00f6e4b6c77457ee5d1a67e2b4e3`.
+- Projection digest: `2ac58b6d7c16384769dae42be2877c0025797acacc730f9d9443b00e538bda25`.
+- Diagnostic chi2: `4005.792443339198`.
+- Degrees of freedom: `18`.
+- Diagnostic chi2/dof: `222.54402462995546`.
+- Residual range: `-0.016478603959446673` to `-0.014765036132624995`.
+- First three pulls: `-40.29294654782936`, `-44.9233638377081`, `-46.511886099538266`.
+- Interpretation: unchanged HEP-R41 underpredicts every t45 bin. The t43 numeric pass is table-specific posterior tuning, not general empirical adequacy.
+
+## Active Assignment Round -- HEP-R43/HEP-R44 Mass-Window-General Diagnostic
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R43` | Worker A + Worker B | Create a fresh non-promoting mass-window-general predictor and Agda law-obligation surface after the t45/t46 holdout failure. | t44 is covariance-only, not an independent validation ratio; the independent ratio holdout is t45/t46. | Fresh law exists only as diagnostic; no accepted comparison law or promotion. |
+| `HEP-R44` | Orchestrator / integrator | Run the fresh `sigma_dashi_mass_general` predictor against t43/t44 and t45/t46, then compute covariance-aware chi2. | Worktree remains dirty and freeze hashes are synthetic; results are model-gap diagnostics only. | Both targets fail; no accepted projection, comparison law, empirical adequacy, or W3/W4/W5/W8 promotion. |
+
+Round result:
+
+- t43 dirty diagnostic artifact: `/tmp/t43_projection_hep_r43_mass_general_dirty.json`.
+- t43 artifact SHA-256: `235e289e79d9aca474fbb16ddf8dd11359ff4c9e807d07d032e4e9e15dedb359`.
+- t43 projection digest: `ba9b9f821d1a17ab3c3d9f175081f260665efc5ebc795bedcb2a5479700c678d`.
+- t43 diagnostic chi2/dof: `1770377.845008375`.
+- t43 residual range: `1.8459953092439472` to `2.5122180535409937`.
+- t45 dirty diagnostic artifact: `/tmp/t45_projection_hep_r43_mass_general_dirty.json`.
+- t45 artifact SHA-256: `301c64668a47404b0bc8d75ce79542795f974633ce3fb02df4e851b8be503171`.
+- t45 projection digest: `8adc2d9d5cc764123be371b3d428169356579802b77be46847ea5bfeb6bc5927`.
+- t45 diagnostic chi2/dof: `122.01665676644487`.
+- t45 residual range: `0.005827674966932275` to `0.009752982373518255`.
+- Interpretation: the fresh mass-general predictor is not viable as an accepted comparison law. It overpredicts t43 catastrophically and still fails t45, so the next work surface is mass-normalization/neutral-current calibration before any clean freeze attempt.
+
+## Active Assignment Round -- HEP-R37 Dirty Projection Diagnostic
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R37` | Orchestrator / integrator | Run the HEP-R36 `sigma_DASHI` hook against checksum-bound t43/t44 as a dirty diagnostic artifact and encode the result. | Produces `projectionComplete = true` for 18 bins using `DASHI.Physics.Prediction.sigma_dashi:predict_ratio`; freeze is synthetic and the worktree is dirty. | Targeted Agda/P0 and runner smoke passed; no accepted freeze, projection receipt, chi2, comparison law, empirical adequacy, or W3/W4/W5/W8 promotion. |
+
+Round result:
+
+- Diagnostic artifact: `/tmp/t43_projection_hep_r37_dirty.json`.
+- File SHA-256: `aeab81212b9f341f14d2e7147b4fd3dd64f4fa7d78a4c14beabd1518d853229c`.
+- Projection digest: `175c4872bd0db2cf108456c62e4c01295333af3c3aec186f07b4a2832cb4d8a6`.
+- First bin diagnostic: `R_dashi = 0.9234826533771504`, `R_data = 0.036689`, residual `0.8867936533771504`.
+- The result is intentionally non-promoting because `predictionFixedAt` is not clean and the comparison-law receipt is still absent.
+
+## Active Assignment Round -- HEP-R36 Sigma DASHI Construction
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R36-python` | `Newton the 2nd` (`019df33e-0f48-7080-9276-def1bf34ea7a`) | Implement the internal `sigma_DASHI` prediction hook for t43. | Consumes only t43 bin edges and mass windows; does not read observed ratios, uncertainties, covariance, or external calibration files. | Python smoke and runner projection passed with `projectionComplete = true`; comparison remains `not-computed` / `not-claimed`, so no W3/W4/W5/W8 promotion. |
+| `HEP-R36-agda` | `Ramanujan the 2nd` (`019df33e-3514-7f51-b904-d4aab9ae6443`) | Add the typed `HEPDataT43DASHINativeProjectionReceipt` construction request surface. | Records DashiDynamics/FascisticContraction route, finite trit enumeration, EW-depth mass-window binding, phi-star bin shape, lambda policy, and no observed-ratio seeding. | Targeted Agda passed; no accepted projection receipt, comparison-law receipt, empirical adequacy claim, or W3/W4/W5/W8 promotion. |
+| `W0` | Orchestrator / integrator | Correct worker outputs, index HEP-R36, synchronize diagrams/docs/TODO/changelog, and validate. | Adjusted `sigma_DASHI` to the requested `(m_lo, m_hi, phi_lo, phi_hi)` shape and aligned both mass windows to EW depth 2. | Targeted Python, Agda, P0, diagram render, and diff checks; no promotion. |
+
+Round result:
+
+- HEP-R36 now supplies a governed, runner-callable internal construction hook:
+  `DASHI.Physics.Prediction.sigma_dashi:predict_ratio`.
+- The hook can produce a projection artifact, but that artifact is not a
+  comparison-law receipt and does not close W3.
+- The next gate is a clean `predictionFixedAt` freeze and digest-bound
+  projection run, followed by covariance-aware comparison-law intake.
+
+## Active Assignment Round -- SIB-MATRIX / HEP-R35 / LILA-R2a
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R35` | `Socrates the 2nd` (`019df322-975e-7332-94d3-c6cb5ff23afd`) | Encode the accepted DASHI-native t43 phi-star ratio API diagnostic. | Narrows the HEP-R33 blocker: siblings and CSS/Sudakov do not provide accepted `sigma_DASHI`; DashiDynamics projection construction remains required. | Targeted Agda passed; no projection, comparison law, or W3/W4/W5/W8 promotion. |
+| `LILA-R2a` | `Tesla the 2nd` (`019df323-1468-7661-bac6-fafc044edec1`) | Add scoped count-support receipt for `112 + 128 = 240`. | Supports the E8 enumeration route only at the arithmetic count layer. | Targeted Agda passed; duplicate freedom, completeness, norm/inner-product laws, Weyl closure, and projection compatibility remain missing. |
+| `SIB-MATRIX` | `Dewey the 2nd` (`019df323-1507-7f70-a6ba-4eb1ae353893`) | Encode sibling artifact port/citation/diagnostic/ignore classifications. | Names which child `dashi*` repo math is worth porting and which evidence is only diagnostic. | Targeted Agda passed; port-to-Agda rows still require DASHI-native reproof before any gate use. |
+| `W0` | Orchestrator / integrator | Index the three new surfaces and synchronize diagrams/docs/TODO/changelog. | Shared integration lane only. | Targeted P0 Agda, diagram render, and diff check; no promotion. |
+
+Round result:
+
+- HEP-R35 is now the precise accepted-API blocker: implement a
+  DashiDynamics-backed `sigma_DASHI(50-76, bin) / sigma_DASHI(76-106, bin)`
+  route, freeze it cleanly, and run the digest-bound t43/t44 projection before
+  any comparison-law receipt.
+- LILA-R2a records only arithmetic count support; it does not replace the full
+  E8 carrier theorem.
+- SIB-MATRIX is now the route filter for child `dashi*` math. The top port
+  candidates are dashifine contraction/Lyapunov/seam material for W1/W2/W9
+  after DASHI-native reproof.
+
+## Active Parallel Assignment Round -- HEP-R34 / LILA-R1
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `in progress`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R34` | `Russell` (`019df2ef-3290-7141-9cd9-87420bd01148`) | Add or review a callable `DASHI.Physics.Prediction.phi_star_ratio:predict_ratio` hook that returns one finite ratio per t43 bin using a CSS/Sudakov baseline if no repo-native DASHI extraction exists. | Exercises the existing fail-closed runner; does not satisfy the accepted DASHI prediction API route. | Python hook validation plus optional Agda diagnostic; no comparison law or W3 promotion. |
+| `LILA-R1` | `Mencius` (`019df2ef-54e7-7e81-b44b-f4fa411c65cb`) | Inventory local LILA/E8 evidence and create or review a non-promoting E8/Lam-Tung/phi-star receipt surface. | Coordinates Track 2 without claiming E8 physics theorem completion. | Targeted Agda diagnostic/source inventory only; no E8 unification or W3/W4/W5 promotion. |
+
+Round instructions:
+
+- Workers must report diagram deltas to W0 so the compact board and child
+  diagrams remain the coordination surface.
+- `HEP-R34` can turn `projectionComplete` true for a baseline artifact, but
+  that artifact remains non-promoting until a clean freeze, accepted
+  repo-native prediction API, projection receipt, and comparison-law receipt
+  exist.
+- `LILA-R1` can name local sources and required fields, but must keep root
+  enumeration, Lam-Tung angular coefficient mapping, theta/J compatibility,
+  and phi-star projection as receipt gaps unless proved locally.
+
+## Active Parallel Assignment Round -- LILA-R2/R3/R4
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `in progress`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `LILA-R1a` | `W0` | Record the SPUTNIKAI LILA-E8 related-project provenance note and reject the AllenAI/Lila attribution as unrelated. | Protects W8 provenance and claim-governance surfaces. | Note-only Agda; no DASHI empirical or physics claim. |
+| `LILA-R2` | `Popper` (`019df2fc-da67-70a2-871c-b69560b44a00`) | Add a conservative E8 root-enumeration receipt/request surface over integer and half-integer root classes. | Independent of R3/R4; required before R5 can become an accepted projection route. | Targeted Agda; do not claim 240-root theorem complete unless constructed locally. |
+| `LILA-R3` | `Confucius` (`019df2fc-f9af-70f1-981f-23e61b79ac46`) | Add a conservative Lam-Tung/E8 adapter surface for A0..A7, E8 coordinate assignment, and phi-star projection target. | Depends conceptually on R2 but can surface obligations independently. | Treat Lam-Tung/even-sum equivalence as an obligation unless proved locally. |
+| `LILA-R4` | `Arendt` (`019df2fd-138e-7e00-afea-d66ebeb7a0b4`) | Add a conservative E8 theta/J bridge surface naming required modular-form lemmas and the existing moonshine bridge input. | Independent of R2/R3 as a proof-obligation surface. | Do not assert theta/J theorem unless exact local proof exists. |
+| `LILA-R5` | `parked` | Phi-star projection receipt from E8/Lam-Tung/theta route into t43 projection API. | Blocked on R2/R3/R4 receipts. | No action until prerequisites land. |
+
+Round instructions:
+
+- Keep LILA-E8 as related engineering provenance only; do not cite TinyStories
+  or LILA-E8 benchmark results as DASHI empirical evidence.
+- Do not use AllenAI/Lila in any W8 origin chain; it is a separate math
+  reasoning benchmark.
+- Any LILA-R2/R3/R4 result must report diagram/TODO deltas to W0 and preserve
+  W3/W4/W5/W8 non-promotion.
+
 ## Active Assignment Round
 
 Round date: `2026-05-04`
@@ -512,11 +815,874 @@ Index result:
   inhabit any external authority, calibration, empirical, origin, GR/QFT, PNF,
   natural, or cancellation-pressure receipt.
 
+## Route-Narrowing Queue Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `W3o` | `Euclid` (`019def11-042a-7673-8090-cd80d9e6cb97`) | Add a non-promoting accepted-authority route-narrowing surface for W3. | Must not construct `W3AcceptedEvidenceAuthorityToken` or empirical promotion. | Targeted Agda on `W3AcceptedAuthorityRouteNarrowing.agda`; no empirical adequacy promotion. |
+| `W4n` | `Lovelace` (`019def11-0650-7de3-a9aa-bd8a13e53711`) | Add a non-promoting physical-calibration route-narrowing surface for W4. | Must not construct physical units, calibration, spectra, bonding, or validation. | Targeted Agda on `W4PhysicalCalibrationRouteNarrowing.agda`; no physical chemistry promotion. |
+| `W5/W6/W9o` | `Raman` (`019def11-095f-76a3-bd57-bf5d6686ac91`) | Add a secondary queue for W5, W6, and W9 current obligation surfaces. | Queue only; no GR/QFT, PNF, or cancellation-pressure discharge. | Targeted Agda on `P0SecondaryObligationQueue.agda`; no lane promotion. |
+
+Route-narrowing results:
+
+- `W3o`: landed `W3AcceptedAuthorityRouteNarrowing`, which names the positive
+  accepted-authority route and current blockers: constructorless accepted
+  authority token, evidence-backed target dependency, B4 standalone status, and
+  origin promotion compatibility.
+- `W4n`: landed `W4PhysicalCalibrationRouteNarrowing`, which narrows calibrated
+  physical handoff to physical unit carrier, Nat-to-unit calibration,
+  quotient-scale factorization, dimensional preservation, and physical
+  validation, while keeping a constructorless route-closure token.
+- `W5/W6/W9o`: landed `P0SecondaryObligationQueue`, co-locating current W5,
+  W6, and W9 obligation statuses and required receipts. The queue is
+  validation-only.
+- `P0BlockerObligationIndex`: now imports all three route-narrowing/queue
+  surfaces so the board-wide smoke target covers this round.
+
+Current plateau:
+
+- Do not assign another internal surrogate-promotion worker for W3, W4, W5,
+  W6, W8, or W9. The remaining admissible moves require external accepted
+  authority, physical calibration, empirical promotion, runtime PNF receipts,
+  origin promotion, or pressure-witness receipts. Internal workers may only
+  integrate such receipts after they exist, or maintain docs/diagrams/index
+  consistency.
+
+## Roadmap Gate Wiring Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+This round wires the future `complete and verified physics unification`
+roadmap back into the coordination board. It changes ownership tracking only;
+it does not close any roadmap gate.
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `W-GR / G4` | `W5` / `Maxwell` | Own the GR curvature / GR-QFT completion workstream from `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`. | Consumes the existing W5 GR/QFT consumer diagnostics and request pack. | `GRQFTClosurePromotionReceipt` plus curvature/stress-energy carriers, GR equation law, QFT interaction law, interaction closure, and empirical validation. |
+
+Roadmap-wiring result:
+
+- `W5` is now the named coordination owner for `W-GR` / roadmap gate `G4`.
+  The current W5 artifacts remain `GRQFTConsumerNextObligation`,
+  `GRQFTConsumerSourceDiagnostic`, and
+  `GRQFTClosurePromotionReceiptRequestPack`.
+- This is a tracking fix only. `G4` remains open until the W5 closure-promotion
+  receipt and theorem-level GR/QFT consumer laws are supplied.
+
+## Unified Energy Functional Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `W0-energy` | `W0` | Add a typed coordination surface for the existing energy-functional pattern across UFTC severity, contraction, shift quadratic energy, and `JFixedPoint`. | Cross-cuts W1/W2/W3/W4 as a Lyapunov interface, but does not supply external authority, calibration, empirical, runtime, origin, or pressure receipts. | Targeted Agda on `UnifiedEnergyFunctionalSurface.agda` and `P0BlockerObligationIndex.agda`; no lane promotion. |
+
+Unified-energy result:
+
+- `UnifiedEnergyFunctionalSurface`: landed a typed, non-promoting interface
+  that records UFTC severity propagation as max-energy, generic strict
+  contraction as distance-to-fixed-point descent, the finite shift quadratic
+  descent package, and `JFixedPoint` normalization to `196884`.
+- `P0BlockerObligationIndex`: now imports the unified energy surface so the
+  board-wide smoke target also covers this Lyapunov coordination interface.
+- Boundary: this does not merge the W1/W3/W4 carriers, does not construct
+  empirical authority or physical calibration, and does not discharge W5/W6/W8
+  or W9 external receipt requirements.
+
+## Blocker-Kill Matrix Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `W0-kill-matrix` | `W0` | Add a typed matrix that converts each remaining blocker into a receipt-driven kill condition. | Consumes the current W1/W2/W3/W4/W5/W6/W8/W9 receipt/obligation modules. | Targeted Agda on `BlockerKillConditions.agda` and `P0BlockerObligationIndex.agda`; no receipt construction. |
+
+Blocker-kill result:
+
+- `BlockerKillConditions`: landed `KillCondition`,
+  `BlockerKillConditionMatrix`, and lane-specific typed promotion targets for
+  W1, W2, W3, W4, W5, W6, W8, and W9.
+- Each row records the current state as `blocked`, the receipt/authority/evidence
+  wrappers required for that blocker, and the no-bypass laws that prevent local
+  surrogates, prose, constructorless-token bypass, inspection labels, or
+  dimensionless Nat calibration from counting as promotion.
+- `P0BlockerObligationIndex`: now imports the kill matrix so the board-wide
+  smoke target covers the receipt-driven closure surface.
+- Boundary: this matrix tells workers exactly what to supply or prove
+  impossible; it does not supply any of the missing receipts itself.
+
+## Active Receipt-Kill Parallel Lanes
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+These lanes are parallel because each one targets a different receipt family.
+Workers must either provide the typed receipt or sharpen the impossibility /
+missing-field diagnostic. They must not add another abstraction-only surface.
+
+| Lane | Worker label | Receipt target | Write surface | Kill condition | Validation |
+|---|---|---|---|---|---|
+| `K1-W1-final-seam` | `Noether` | `RetargetedFinalSeamReceiptFields` with final seam receipt and downstream handoff compatibility. | `CanonicalToNoncanonicalMdlRetargetFinalSeamObligation.agda`; adjacent `CanonicalToNoncanonicalMdl*` seam modules only. | Inhabit `W1KillEvidence` and keep old current-carrier obstruction acknowledged; no old-carrier CR-flat revival. | Targeted Agda on touched MDL seam module plus `BlockerKillConditions.agda`. |
+| `K2-W2-natural-p2` | `Turing` | `NaturalP2ConvergencePromotionReceipt` with natural/p2 bridge-or-obstruction plus carrier-general convergence. | `NaturalP2ConvergencePromotionObligation.agda`; bounded helper modules in `CanonicalDynamicsLawTheorem.agda` only if needed. | Inhabit `W2KillAuthority` and `W2KillEvidence`; shift-flow convergence alone is insufficient. | Targeted Agda; route heavy natural-charge modules offline/L2. |
+| `K3-W3-empirical-authority` | `Curie-W3` | `W3AcceptedAuthorityExternalReceipt` with accepted evidence authority, evidence-backed target, B4 empirical promotion, and origin promotion. | `W3AcceptedAuthorityExternalReceiptObligation.agda`; W3 empirical obligation/gate modules only. | Inhabit `W3KillAuthority` and `W3KillEvidence`; no surrogate empirical target or local Nat target promotion. | Targeted empirical Agda plus docs diff check if registry text changes. |
+| `K4-W4-calibration` | `Faraday` | `Candidate256PhysicalCalibrationExternalReceipt` with authority token, physical unit carrier, Nat-to-unit calibration, factorization, and dimensional preservation. | `W4PhysicalCalibrationExternalReceiptObligation.agda`; W4 calibration/scale modules only. | Inhabit `W4KillAuthority` and `W4KillEvidence`; no dimensionless Nat surrogate promotion. | Targeted chemistry/calibration Agda. |
+| `K5-W5-grqft` | `Maxwell` | `GRQFTClosurePromotionReceipt` with promotion authority, GR equation law, QFT interaction law, and empirical validation path. | `GRQFTConsumerNextObligation.agda`; bounded known-limits consumer helpers only. | Inhabit `W5KillAuthority` and `W5KillEvidence`; known-limits local recovery alone is insufficient. | Targeted consumer Agda; avoid full closure aggregates. |
+| `K6-W6-pnf-runtime` | `Liskov` | `PNFResidualConsumerReceipt` with paired runtime `PNFEmissionReceipt`s, receipt-backed residual computation, runtime profile/id, and Hecke candidate-pool receipt. | `DASHI/Interop/PNFResidualConsumerNextObligation.agda`; receipt-producing interop modules only if actual runtime receipts exist. | Inhabit `W6KillAuthority` and `W6KillEvidence`; no labels by inspection. | Targeted interop Agda plus docs diff check. |
+| `K8-W8-origin-promotion` | `Hypatia` | `OriginReceiptPromotionExternalReceipt` with empirical adequacy bridge or promoted empirical status plus origin-map compatibility and closure-boundary preservation. | `OriginReceiptPromotionExternalObligation.agda`; `MinimalCredibleShiftOriginObservation.agda` only if preserving current boundary. | Inhabit `W8KillAuthority` and `W8KillEvidence`; current receipt must not be silently reclassified. | Targeted origin receipt Agda. |
+| `K9-W9-pressure` | `Planck` | `W9KillReceipt`: existing pressure witness route or weighted replacement route with cancellation-to-weighted-quadratic identification. | `CancellationPressureCompatibilityNextObligation.agda`; `DeltaToQuadraticBridgeTheorem.agda`; weighted valuation helpers only if needed. | Inhabit `W9KillAuthority` and `W9KillEvidence`; naming a pressure witness is not enough. | Targeted Agda on W9 modules and touched arithmetic/transport modules. |
+
+Assignment rule:
+
+- All eight lanes may run in parallel if workers keep to their write surfaces.
+- Any worker that cannot inhabit the receipt must return a sharper missing-field
+  diagnostic in the same lane, not a new top-level abstraction.
+- `P0BlockerObligationIndex.agda` is the final smoke target after any lane
+  lands.
+
+Receipt-kill results:
+
+- `K1-W1-final-seam` / `Noether`: landed the final retargeted seam receipt via
+  the accepted transported schedule-MDL replacement equality, and landed
+  downstream handoff compatibility only to the existing pre-physical chemistry
+  handoff consumer. `BlockerKillConditions.w1KillCondition` now records this
+  final-seam kill condition as `unblocked`. Residual boundary remains explicit:
+  no strict physical promotion, no old current-carrier CR-flat revival.
+- `K2-W2-natural-p2` / `Turing`: no promotion. Sharpened the typed obstruction:
+  `NaturalP2ConvergencePromotionAuthorityToken` is constructorless, and the
+  broader receipt still needs natural/p2 bridge-or-obstruction,
+  naturality/coherence carriers and laws, transport-preservation, and
+  realization-uniformity beyond shift-flow convergence.
+- `K3-W3-empirical-authority` / `Curie-W3`: no promotion. Sharpened the typed
+  diagnostic with authority-token elimination for current target/receipt and
+  recorded current B4 standalone-only plus origin `empiricalBlocked` blockers.
+- `K4-W4-calibration` / `Faraday`: no promotion. Sharpened the calibration
+  diagnostic by splitting dimensional preservation into law and witness
+  blockers and exposing constructorless-token impossibility for the physical
+  calibration receipt.
+- `K5-W5-grqft` / `Maxwell`: no promotion. Sharpened the GR/QFT missing-field
+  diagnostic to receipt-level missing GR equation law, GR law witness, QFT
+  interaction law, QFT law witness, and empirical validation.
+- `K6-W6-pnf-runtime` / `Liskov`: no promotion. Added a constructor that builds
+  `PNFResidualConsumerReceipt` only after runtime profile/id, paired
+  `PNFEmissionReceipt`s, and a Hecke candidate-pool receipt id are supplied;
+  derived atom projection and residual computation then come by receipt, not
+  inspection.
+- `K8-W8-origin-promotion` / `Hypatia`: narrowed the origin blocker. Canonical
+  origin-map compatibility and identity closure-boundary preservation are
+  discharged for the current minimal receipt; empirical adequacy bridge or
+  promoted empirical status remains blocked, and the receipt remains
+  `empiricalBlocked`.
+- `K9-W9-pressure` / `Planck`: narrowed W9 by adding a weighted
+  cancellation-pressure candidate receipt and moving the current route toward
+  weighted replacement. Follow-up result: the uniform
+  cancellation-to-weighted-quadratic identification is now typed-obstructed
+  under current `WeightedInput`; `(1 , 1)` is the concrete mismatch. W9 remains
+  blocked and must return to the existing pressure-witness route or a different
+  replacement seam.
+
+Receipt-kill follow-up results:
+
+- `K6b-W6-runtime-intake` / `Hopper`: no promotion. Added
+  `PNFResidualConsumerRuntimeIntakeRequest`, making the concrete runtime intake
+  fields explicit: consumer profile, runtime receipt id, paired runtime
+  `PNFEmissionReceipt`s, and Hecke candidate-pool receipt id. Atom projection,
+  residual computation, and Hecke boundary remain derived after intake, not
+  assigned by inspection.
+- `K8b-W8-empirical-status` / `Emmy`: landed a typed promoted-status receipt
+  shape, but it is externally gated by
+  `ExternalOriginPromotedEmpiricalStatusAuthority`. The current
+  `minimalCredibleShiftOriginObservationReceipt` remains `empiricalBlocked`.
+  W8 still waits on an empirical adequacy bridge or externally authorized
+  promoted empirical status.
+- `K9c-W9-pressure-witness` / `Dirichlet`: the existing pressure-witness route
+  is now sharply obstructed for the concrete canonical-15 theorem.
+  `canonical15ExistingPressureWitnessObstruction` proves that an
+  `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+  canonical15Dimension` would imply `⊥` at `(1 , 3)`: pressure is lane-sum
+  while the theorem normalizes to `Q̂core` sum-of-squares. W9 remains external
+  unless the theorem family is narrowed or a different pressure-compatible
+  quadratic target is supplied.
+
+Receipt-source and route-selection results:
+
+- `K6c-W6-runtime-receipt-source` / `Ada`: no promotion. Added
+  `PNFResidualConsumerRuntimeReceiptSourceDiagnostic`: repo surfaces expose the
+  `PNFEmissionReceipt` constructor, the consumer builder, and the Hecke
+  candidate-pool surface, but no concrete runtime consumer profile/id,
+  left/right emission receipt values, or Hecke candidate-pool receipt id were
+  found. A concrete `PNFResidualConsumerReceipt` remains constructible only
+  after those runtime inputs are supplied.
+- `K8c-W8-origin-authority-source` / `Gauss`: no promotion. Added
+  `CurrentOriginAuthoritySourceDiagnostic`: no current repo surface supplies
+  `ExternalOriginPromotedEmpiricalStatusAuthority` or an origin-specific
+  empirical adequacy bridge for the MinimalCredibleShift origin receipt. Any
+  `PromotedOriginEmpiricalStatusReceipt` eliminates through its constructorless
+  external authority field. Missing receipts are now named:
+  `ExternalOriginPromotedEmpiricalStatusAuthority` or a `P0.EmpiricalAdequacy`
+  bridge over the current origin receipt carrier/observation pair.
+- `K9d-W9-route-selection` / `Riemann`: current W9 route classes are exhausted
+  for canonical-15 under current definitions. `W9CurrentRouteClassExhaustion`
+  records both obstructions: existing pressure witness fails at `(1 , 3)`, and
+  uniform weighted replacement fails at `(1 , 1)`. The selected next typed
+  route is `supplyPressureCompatibleTargetWithQcoreBoundary`, with
+  `PressureCompatibleRetargetBoundary` proving the pair-pressure target matches
+  the bridge while explicitly not claiming canonical Qcore/admissible quadratic
+  promotion.
+
+## External Bridge Split Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `Option-A-observable` | `Kelvin` / Worker A (`019def4d-9817-7d20-a828-5f4e371bfbd3`) | Add the fastest `E_total -> simple observable` bridge for count/frequency/rate-like observables. | Narrows `W3`/`W4`/`W5` to measured value plus authority; does not supply the value. | Targeted Agda on `EmpiricalCalibrationBridgeObservable.agda`; no empirical adequacy or physical promotion. |
+| `Option-B-units` | `Curie` / Worker B (`019def4d-ba73-7d70-afff-af725d881e40`) | Add the unit/dimension-preserving calibration bridge. | Narrows `W4`/`W5` to physical units, dimensional preservation, scale evidence, monotonicity, and authority. | Targeted Agda on `EmpiricalCalibrationBridgeUnits.agda`; no numeric constants or calibration authority. |
+| `Option-C-toy-fit` | `Noether` / Worker C (`019def4d-ddf9-75c2-8fc1-5a74c8ebdf35`) | Add finite toy-fit mechanics with residual and threshold diagnostics. | Hardens `W3`/`W8` bridge mechanics while keeping toy-fit separate from real empirical authority. | Targeted Agda on `EmpiricalCalibrationBridgeToyFit.agda`; toy adequacy cannot promote `W3`/`W8`. |
+
+External bridge split results:
+
+- `Option A`: `EmpiricalCalibrationBridgeObservable` defines a typed
+  `E_total -> simple observable` surface. Adequacy requires an external
+  `EmpiricalCalibrationAuthorityToken`, measured value, measurement witness,
+  and match proof. Current status is `noInRepoMeasuredValue`.
+- `Option B`: `EmpiricalCalibrationBridgeUnits` defines a typed
+  unit/dimension-preserving calibration surface. Numeric calibration claims
+  require a constructorless `ExternalCalibrationAuthorityToken`; current status
+  is `blockedAwaitingExternalUnitCalibration`.
+- `Option C`: `EmpiricalCalibrationBridgeToyFit` defines finite toy
+  observations, calibration/prediction, residual mismatch, threshold
+  acceptance, and dataset-wide acceptance. It keeps
+  `ExternalEmpiricalAuthorityToken` constructorless, so toy-fit adequacy does
+  not become `W3`/`W8` empirical authority.
+- Blocker impact: the external bridge is now split into three typed surfaces.
+  This narrows `W3`/`W4`/`W5`/`W8` but does not close them. Real promotion still
+  needs external measured values, authority tokens, physical unit calibration,
+  dimensional preservation, and empirical validation.
+
+## Intake and Retarget Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `A2-observable-intake` | `Kelvin-Intake` (`019def54-49ac-7a90-93e8-bf9c7a4167af`) | Turn Option A into an explicit external measured-value intake receipt. | Narrows `W3`/`W5` to measured value, measurement witness, authority witness, authority token, state, and match proof. | Targeted Agda on `EmpiricalCalibrationBridgeObservableIntake.agda`; no empirical adequacy from local observable. |
+| `B2-unit-intake` | `Curie-Intake` (`019def54-73e7-7643-ad2a-14999b05a99d`) | Turn Option B into an explicit unit-calibration intake receipt and consumer wiring target. | Narrows `W4`/`W5` to physical unit carrier, dimensions, assignments, preservation, scale evidence, monotonicity, authority, and validation. | Targeted Agda on `EmpiricalCalibrationBridgeUnitsIntake.agda`; no numeric constants or physical promotion. |
+| `C2-toy-authority-boundary` | `Noether-Authority` (`019def54-9e12-72f3-ad24-31bf37e1a3f5`) | Harden Option C's toy-fit / external-authority boundary. | Routes real dataset work to `W3AcceptedAuthorityExternalReceipt`, `W3AcceptedAuthorityPositiveRoute`, and `OriginReceiptPromotionExternalReceipt`. | Targeted Agda on `EmpiricalCalibrationBridgeToyFitAuthorityBoundary.agda`; toy fit remains non-authoritative. |
+| `K9e-W9-retarget` | `Riemann-Retarget` (`019def54-c6e1-7b82-ad1e-264c3cca0f35`) | Inhabit the selected pressure-compatible retarget route or sharpen obstruction. | Follows `K9d` route selection after existing and weighted routes were obstructed. | Targeted Agda on `CancellationPressureCompatibilityNextObligation.agda`; no canonical Qcore or admissible quadratic promotion. |
+
+Intake and retarget results:
+
+- `A2`: `EmpiricalCalibrationBridgeObservableIntake` now names
+  `EmpiricalCalibrationBridgeObservableExternalReceipt`, the exact external
+  Option A receipt shape. The current status remains `noInRepoMeasuredValue`,
+  and any receipt still requires the constructorless
+  `EmpiricalCalibrationAuthorityToken`.
+- `B2`: `EmpiricalCalibrationBridgeUnitsIntake` now names
+  `UnitCalibrationIntakeReceipt` and `intakeReceiptToBridge`, the exact
+  Option B consumer wiring target. The receipt is not constructible in-repo
+  because calibration authority and validation tokens remain external.
+- `C2`: `EmpiricalCalibrationBridgeToyFitAuthorityBoundary` now records that
+  finite toy residual acceptance is not external empirical authority and names
+  the real dataset route through W3 accepted authority and W8 origin promotion.
+- `K9e`: `CancellationPressureCompatibilityNextObligation` now carries
+  `PressureCompatibleTargetWithQcoreBoundaryReceipt` and
+  `canonicalPairPressureRetargetReceipt`. This positively inhabits the selected
+  pressure-compatible retarget route while preserving the explicit non-`Qcore`
+  boundary; downstream consumers still need to accept this retarget receipt or
+  change the compatibility theorem.
+
+## Source Diagnostic and Consumer-Obligation Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `A3-observable-source` | `Kelvin-Source` (`019def59-cd3f-7bd2-8141-0d1c9fb3d687`) | Check whether current repo sources inhabit the Option A measured-observable intake receipt. | Follows `A2`; targets source availability, not bridge shape. | Targeted Agda on `EmpiricalCalibrationBridgeObservableSourceDiagnostic.agda`; no empirical promotion by local inspection. |
+| `B3-unit-source` | `Curie-Source` (`019def59-fa1e-7590-9cb9-ef63b08831a9`) | Check whether current repo sources inhabit the Option B unit-calibration intake receipt. | Follows `B2`; targets unit/calibration source availability. | Targeted Agda on `EmpiricalCalibrationBridgeUnitsSourceDiagnostic.agda`; no units or calibration fabricated. |
+| `C3-real-dataset-route` | `Noether-Route` (`019def5a-22ec-7af3-98a6-8f4c67a1dae2`) | Diagnose current real-dataset authority route after C2. | Follows `C2`; targets W3/W8 receipt route status. | Targeted Agda on `EmpiricalCalibrationBridgeToyFitRealDatasetRouteDiagnostic.agda`; no W3/W8 promotion. |
+| `W9f-retarget-consumer` | `Riemann-Consumer` (`019def5a-55b6-7e22-92c5-d102c9c3ac84`) | Add downstream consumer acceptance obligation for the W9e retarget receipt. | Follows `K9e`; targets consumer acceptance, not theorem closure. | Targeted Agda on `CancellationPressureRetargetConsumerObligation.agda`; no `CancellationPressureCompatibility` promotion. |
+
+Source diagnostic and consumer-obligation results:
+
+- `A3`: `EmpiricalCalibrationBridgeObservableSourceDiagnostic` records all
+  Option A intake sources as missing: measured value, measurement witness,
+  external authority witness, authority token, calibrated state, and
+  observable-match proof. The authority boundary from A2 remains intact.
+- `B3`: `EmpiricalCalibrationBridgeUnitsSourceDiagnostic` records all Option B
+  intake sources as missing: unit carrier, dimension carrier, assignments,
+  dimension preservation, scale evidence, monotonicity, external calibration
+  authority, and validation token.
+- `C3`: `EmpiricalCalibrationBridgeToyFitRealDatasetRouteDiagnostic` records
+  the real-dataset route as blocked on `W3AcceptedAuthorityExternalReceipt`,
+  `W3AcceptedAuthorityPositiveRoute`, and
+  `OriginReceiptPromotionExternalReceipt`.
+- `W9f`: `CancellationPressureRetargetConsumerObligation` names
+  `CancellationPressureRetargetConsumerAcceptanceReceipt` and
+  `retargetConsumerAcceptanceRequiredBeforeRouteAround` for
+  `canonicalPairPressureRetargetReceipt`. W9 remains non-promoting until a
+  downstream consumer accepts the retarget or the theorem route changes.
+
+## External Request / Source Handoff Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `E1-external-receipt-pack` | `Handoff-Pack` (`019def61-3ae7-7141-9930-783fb74d136b`) | Package the A3/B3/C3 external receipt requirements into one provider-facing request surface. | Follows the Option A/B/C source diagnostics; targets handoff clarity only. | Targeted Agda on `EmpiricalCalibrationExternalReceiptRequestPack.agda`; no measured value, unit calibration, real-dataset authority, or origin receipt fabricated. |
+| `W5g-GRQFT-source` | `GRQFT-Validation-Source` (`019def61-9132-73c2-b509-f0d4941e0f32`) | Add current-source diagnostic for W5 GR/QFT closure-promotion receipt fields. | Imports `GRQFTConsumerNextObligation`; known-limits consumer/GR/QFT bridge sources are present, but complete downstream fields, authority, laws, witnesses, and empirical validation remain missing. | Targeted Agda on `GRQFTConsumerSourceDiagnostic.agda`; no GR/QFT closure promotion. |
+| `W6g-runtime-receipt-handoff` | `Runtime-Receipt-Handoff` (`019def61-b9ca-75e3-87fe-fe8984076d97`) | Package the W6 runtime PNF residual consumer missing-receipt fields into a consolidated request pack. | Follows `K6`, `K6b`, and `K6c`; targets handoff clarity, not receipt construction. | Targeted Agda on `DASHI/Interop/PNFResidualConsumerReceiptRequestPack.agda`; no runtime receipt or labels by inspection. |
+| `W9g-retarget-consumer-source` | `Retarget-Consumer-Source` (`019def61-6a4a-76a0-a67f-fb501ea7418c`) | Add current-source diagnostic for W9f retarget consumer acceptance. | Follows `W9f`; checks source availability only. | Targeted Agda on `CancellationPressureRetargetConsumerSourceDiagnostic.agda`; no consumer acceptance or compatibility promotion. |
+
+External request / source handoff results:
+
+- `E1`: landed `EmpiricalCalibrationExternalReceiptRequestPack`, consolidating
+  the exact Option A measured-observable, Option B unit-calibration, and
+  Option C real-dataset authority receipt requests from A3/B3/C3. It is a
+  request pack only; A/B/C and W3/W4/W5/W8 remain externally blocked.
+- `W5g-GRQFT-source`: landed `GRQFTConsumerSourceDiagnostic`, marking only
+  bounded known-limits consumer/bridge sources present and all receipt-kill
+  inputs missing; constructorless promotion authority keeps
+  `GRQFTClosurePromotionReceipt` impossible here.
+- `W6g`: landed `PNFResidualConsumerReceiptRequestPack`, co-locating the exact
+  runtime payload fields for W6: consumer profile, runtime receipt id, paired
+  `PNFEmissionReceipt` values, receipt-backed residual computation via
+  `receiptResidual`, and Hecke candidate-pool receipt id. The pack delegates
+  receipt construction only after runtime supplies those values.
+- `W9g`: landed `CancellationPressureRetargetConsumerSourceDiagnostic`,
+  importing W9 and W9f and recording that no in-repo `RetargetConsumerInterface`
+  or `CancellationPressureRetargetConsumerAcceptanceReceipt` source currently
+  exists. W9 remains blocked until a downstream consumer source plus acceptance
+  receipt, or an explicit theorem route change, lands.
+
+## Provider Request-Pack Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `W5h-GRQFT-request-pack` | `GRQFT-Request-Pack` (`019def69-53c2-79e0-abea-1b2a177e1ae0`) | Package W5 GR/QFT closure-promotion missing receipt fields into a provider-facing request pack. | Follows `W5g`; aggregates W5/W5g diagnostics and exact payload requirements. | Targeted Agda on `GRQFTClosurePromotionReceiptRequestPack.agda`; no authority token, GR/QFT laws, witnesses, empirical validation, or closure promotion. |
+| `W8d-origin-promotion-request-pack` | `Origin-Promotion-Request-Pack` (`019def69-fae5-7983-a007-b27e295cd1d8`) | Package W8 origin-promotion external receipt requirements into a provider-facing request pack. | Follows W8c; references canonical current status, blocked fields, and source diagnostic from `OriginReceiptPromotionExternalObligation`. | Targeted Agda on `OriginReceiptPromotionExternalRequestPack.agda`; no origin empirical promotion or authority token. |
+| `W9h-retarget-acceptance-pack` | `Retarget-Acceptance-Pack` (`019def69-827b-7911-8066-3f05d22aa18e`) | Package W9f/W9g missing retarget consumer interface and acceptance receipt fields into a provider-facing request pack. | Follows `W9f` and `W9g`; no route-around acceptance or theorem promotion. | Targeted Agda on `CancellationPressureRetargetConsumerAcceptanceRequestPack.agda`; no consumer acceptance or compatibility promotion. |
+
+Provider request-pack results:
+
+- `W5h`: landed `GRQFTClosurePromotionReceiptRequestPack`, co-locating the
+  exact provider payload for `GRQFTClosurePromotionReceipt`: promotion
+  authority, downstream consumer fields, GR equation law, QFT interaction law,
+  both consumer law witnesses, and empirical GR/QFT validation. W5 remains
+  blocked until an external provider supplies that receipt or the theorem route
+  changes.
+- `W8d`: landed `OriginReceiptPromotionExternalRequestPack`, co-locating the
+  exact W8 external receipt name, evidence carrier, promoted-status receipt,
+  authority token name, current blocked fields, source diagnostic summary,
+  provider evidence requirements, and non-promotion boundary. W8 remains
+  blocked until `OriginReceiptPromotionExternalReceipt` is externally supplied.
+- `W9h`: landed `CancellationPressureRetargetConsumerAcceptanceRequestPack`,
+  co-locating the exact provider artifacts, required interface/receipt names,
+  W9g missing source fields, W9f missing obligation fields, preserved
+  non-promotion boundaries, provider instructions, and strict blocker impact.
+  W9 remains blocked until an actual downstream consumer interface plus
+  acceptance receipt, or an explicit theorem route change, lands.
+
+## Empirical / Calibration Request-Pack Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `W3p-accepted-authority-request-pack` | `W3-Accepted-Authority-Request-Pack` (`019def6f-7882-7fb2-b515-66ad4240cc54`) | Package W3 accepted-authority external receipt requirements into a provider-facing request pack. | Follows W3n/W3o; references canonical current external status, authority statuses, route blockers, B4 standalone blocker, and W8 origin dependency. | Targeted Agda on `W3AcceptedAuthorityExternalReceiptRequestPack.agda`; no accepted authority token, empirical adequacy, B4 promotion, origin promotion, or W3 promotion. |
+| `W4o-physical-calibration-request-pack` | `Physical-Calibration-Request-Pack` (`019def6f-ae15-7c92-b6b1-de7f5ee21bd6`) | Package W4 Candidate256 physical calibration external receipt requirements into a provider-facing request pack. | Follows W4 external obligation and route narrowing; references canonical current status and blocked fields by equality. | Targeted Agda on `W4PhysicalCalibrationExternalReceiptRequestPack.agda`; no calibration authority, unit system, dimensional law, spectra/bonding/wet-lab validation, or W4 promotion. |
+
+Empirical / calibration request-pack results:
+
+- `W3p`: landed `W3AcceptedAuthorityExternalReceiptRequestPack`, co-locating
+  the exact provider payload for `W3AcceptedAuthorityExternalReceipt`:
+  `W3AcceptedEvidenceAuthorityToken`, `W3EvidenceBackedEmpiricalTarget`,
+  authority equality, B4 empirical promotion, origin receipt promotion, bridge
+  obligations, and bridge-target/evidence equality. W3 remains blocked until
+  that external receipt is supplied.
+- `W4o`: landed `W4PhysicalCalibrationExternalReceiptRequestPack`, co-locating
+  the exact provider payload for `Candidate256PhysicalCalibrationExternalReceipt`:
+  constructorless authority token, physical unit carrier, Nat-to-unit
+  calibration map, calibrated quotient scale map, factorization through the Nat
+  surrogate, dimensional-preservation law and witness, route ingredients,
+  provider instructions, non-promotion boundary, and strict blocker impact. W4
+  remains blocked until an external provider supplies the named receipt.
+
+## Provider Request Index Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `W0-provider-request-index` | `W0` | Co-locate all provider-facing P0 request packs in one typed index. | Follows A/B/C, W3p, W4o, W5h, W6g, W8d, and W9h request packs. | Targeted Agda on `P0ProviderReceiptRequestIndex.agda` and `P0BlockerObligationIndex.agda`; no provider receipt or promotion constructed. |
+
+Provider request index result:
+
+- `W0-provider-request-index`: landed `P0ProviderReceiptRequestIndex`, indexing
+  Option A/B/C external calibration, W3 accepted authority, W4 physical
+  calibration, W5 GR/QFT closure promotion, W6 runtime PNF residual, W8 origin
+  promotion, and W9 retarget acceptance request packs. This is the consolidated
+  provider handoff surface; P0 remains blocked until concrete provider receipts
+  or explicit theorem route changes are supplied.
+
+## Provider Attempt Diagnostic Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `W3-provider-authority` | `Nash` (`019def7c-8637-77a2-a0af-397478089b56`) | Determine whether the current W3 accepted-authority request pack can produce `W3AcceptedAuthorityExternalReceipt`, or return a typed provider-attempt/source diagnostic. | Follows `W3p`; consumes W3 external receipt request pack, authority gate, route narrowing, empirical target promotion bridge obligation, and W8 origin request pack. | Targeted Agda on `W3AcceptedAuthorityProviderAttempt.agda`; no fake authority token, no postulates, no B4/origin promotion by prose. |
+| `W4p-physical-calibration-provider-attempt` | `Huygens` (`019def7c-5c1c-7ed0-a3a3-e6b776fe66ea`) | Determine whether the current repo can legitimately construct `Candidate256PhysicalCalibrationExternalReceipt`; record typed diagnostic if blocked. | Follows `W4o`; consumes the request pack, external receipt obligation, calibration gate, and route narrowing. | Targeted Agda on `W4PhysicalCalibrationProviderAttempt.agda`; diagnostic only, no authority token, no receipt, no physical units, no Nat surrogate promotion. |
+| `W6-runtime-pnf-provider-attempt` | `Einstein` (`019def7c-af24-7a70-bfca-646f69b90403`) | Determine whether current repo sources can build a legitimate `PNFResidualConsumerReceipt`, otherwise land the exact runtime-payload diagnostic. | Follows `W6g`; consumes `PNFResidualConsumerReceiptRequestPack`, `PNFResidualConsumerNextObligation`, `SensibLawResidualLattice`, and `Ontology.Hecke.PNFResidualBridge`. | Targeted Agda on `PNFResidualConsumerRuntimeProviderAttempt.agda`; no synthetic runtime receipts, atom labels, residual labels, or Hecke fibre labels. |
+
+Provider attempt diagnostic results:
+
+- `W3-provider-authority`: landed `W3AcceptedAuthorityProviderAttempt`, a
+  non-promoting diagnostic proving no local positive
+  `W3AcceptedAuthorityExternalReceipt` is constructible from current repo
+  artifacts. The blocker remains the constructorless
+  `W3AcceptedEvidenceAuthorityToken`, missing
+  `W3EvidenceBackedEmpiricalTarget`, missing B4 empirical promotion, missing
+  origin promotion/W8 external receipt, missing bridge obligations, and missing
+  bridge-target/evidence equalities.
+- `W4p`: landed `W4PhysicalCalibrationProviderAttempt`, a typed diagnostic
+  proving the current repo cannot construct
+  `Candidate256PhysicalCalibrationExternalReceipt` because
+  `Candidate256PhysicalCalibrationAuthorityToken` is constructorless. W4
+  remains blocked until an external provider supplies authority, physical
+  units, Nat-to-unit calibration, quotient-scale factorization, and
+  dimensional preservation.
+- `W6-runtime-pnf-provider-attempt`: landed
+  `PNFResidualConsumerRuntimeProviderAttempt`, a diagnostic-only provider
+  attempt. Existing surfaces are the `PNFEmissionReceipt` constructor, consumer
+  builder, request pack, and Hecke candidate-pool bridge; absent runtime
+  payload fields are exactly consumer profile, runtime receipt id, left
+  `PNFEmissionReceipt`, right `PNFEmissionReceipt`, and Hecke candidate-pool
+  receipt id.
+
+## Empirical Compatibility Provider Attempt Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `EMP-A-option-a-measured-observable-provider-attempt` | `Parfit` (`019def83-c4f5-7713-afb2-c42dbb289b4d`) | Determine whether the current Option A measured-observable request can produce `CurrentOptionAExternalReceipt`, or return a typed provider-attempt diagnostic. | Follows `E1`/`A3`; consumes the Option A request pack, intake status, source diagnostic, and P0 provider request index. | Targeted Agda on `EmpiricalCompatibilityOptionAProviderAttempt.agda`; no fake measured value, no authority token, no empirical compatibility promotion. |
+| `EMP-B-option-b-provider-attempt` | `Maxwell` (`019def83-e9f8-7161-92b2-98e28d0b1a05`) | Determine whether current Option B artifacts can legitimately construct `UnitCalibrationIntakeReceipt`; otherwise land typed provider-attempt diagnostic. | Follows `B3`/`E1` and `P0ProviderReceiptRequestIndex`; consumes Option B unit bridge/intake/source diagnostic and W4 provider-attempt diagnostic. | Targeted Agda on `EmpiricalCompatibilityOptionBProviderAttempt.agda`; no Nat unit carrier, no fake authority token, no dimensional law by label/prose, no validation fabricated. |
+| `EMP-C-real-dataset-authority-bridge` | `Turing` (`019def84-142b-74a1-8a69-5992b0b6cafd`) | Determine whether Option C can construct a real-dataset authority bridge beyond the toy-fit boundary. | Follows `C3`, W3 provider attempt, W8 origin-promotion request pack, and P0 provider/blocker indices. | Targeted Agda on `EmpiricalCompatibilityOptionCProviderAttempt.agda`; no postulates, no fake dataset authority, no toy-fit promotion. |
+
+Empirical compatibility provider-attempt results:
+
+- `EMP-A`: landed `EmpiricalCompatibilityOptionAProviderAttempt`, a
+  diagnostic-only provider attempt. No positive
+  `CurrentOptionAExternalReceipt` is constructible from current repo artifacts:
+  measured value, measurement witness, external authority witness,
+  `EmpiricalCalibrationAuthorityToken`, calibrated state, and
+  observable-match proof are all absent. Option A remains a Nat-valued bridge
+  surface/request, not empirical compatibility.
+- `EMP-B`: landed `EmpiricalCompatibilityOptionBProviderAttempt`, a
+  diagnostic-only provider attempt proving no local
+  `UnitCalibrationIntakeReceipt` is constructible. It records missing physical
+  unit carrier, dimension carrier, `dimensionOfUnit`, unit assignments,
+  dimension-preservation law, scale evidence, monotonicity, external
+  calibration authority, and external validation; authority and validation
+  tokens remain constructorless, so W4/W5 stay blocked.
+- `EMP-C`: landed `EmpiricalCompatibilityOptionCProviderAttempt`, a
+  diagnostic-only provider attempt. No legitimate current real-dataset
+  authority bridge is constructible: dataset authority route/token, W3
+  accepted-authority receipt/positive-route fields, W8 origin-promotion
+  fields, and validation receipts remain absent.
+
+## HEPData Empirical Source Candidate Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEPData-source-candidate-diagnostic` | `W0` | Check repo docs, HEPData scripts/tests, sibling `dashifine` outputs, and ITIR search surfaces for empirical-source candidates. | Follows `EMP-C`; refines the difference between source candidates and accepted authority. | Targeted Agda on `HEPDataEmpiricalSourceCandidateDiagnostic.agda`; no HEPData source candidate may be promoted to W3/W8 without projection, units, comparison law, and accepted authority receipts. |
+| `HEPData/ITIR-inventory-sidecar` | `Galileo` (`019def8c-bdfa-7060-8b74-6364d9f955fd`) | Inventory sibling ITIR/dashifine empirical artifacts for future provider lanes. | Read-only sidecar; W0 owns shared docs/diagram updates. | Inventory only; no file edits and no receipt construction. |
+
+HEPData source-candidate result:
+
+- `HEPDataEmpiricalSourceCandidateDiagnostic` records that local HEPData /
+  `MeasurementSurface` candidates exist: artifact schema, adapter/consumer,
+  program-surface script, projection-contract stub, bridge/transform tests,
+  photonuclear registry docs, sibling `dashifine` NPZ/projection/certification
+  artifacts, `dashiQ` authority-discovery scripts and projection docs,
+  `dashitest` copied experimental surfaces, and ITIR generic
+  normalized-source/provenance scaffolding.
+- The diagnostic keeps the empirical lane non-promoting. The missing bridge
+  surfaces are now precise: named physical observable selection, HEPData table
+  column selection, unit/dimension carrier, calibration map, comparison law,
+  `MeasurementSurface -> DashiState` projection, metric propagation law,
+  HEPData observable schema, local dataset checksum, golden conformance tests,
+  HEPData-to-ITIR authority adapter, accepted dataset authority token, W3
+  accepted-authority receipt, and W8 origin-promotion receipt.
+- This narrows the next worker plan: stop searching for “any data” and instead
+  assign provider lanes to build one explicit `DASHI observable -> HEPData
+  observable` bridge, or a typed rejection at the projection contract.
+
+## HEPData Bridge Schema / Projection / Provenance Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEPData-bridge-worker-queue` | `W0` | Add the W0-owned queue for HEP-A through HEP-F bridge lanes. | Follows the HEPData source-candidate diagnostic. | Targeted Agda on `HEPDataBridgeWorkerQueue.agda`; assigns lanes only, no receipts. |
+| `HEP-A-observable-schema` | `Godel` (`019def92-6f31-7493-b25f-0a4457a89652`) | Define the future `HEPDataObservable` schema/checksum request surface. | First required bridge ingredient after source candidates. | Targeted Agda on `HEPDataObservableSchema.agda`; no authority token, no W3/W8 promotion. |
+| `HEP-B-observable-selection` | `Bohr` (`019def98-306d-7910-ae25-f5e5ac503240`) | Add typed diagnostic for one named physical observable plus one HEPData record/table/column/row-selection candidate requirement. | Consumes `HEPDataObservableSchema`; current repo has no legitimate concrete selection without checksum and authority. | Targeted Agda on `HEPDataObservableSelectionDiagnostic.agda`; no fake HEPData selection, no calibration/projection, no authority token, no W3/W8 promotion. |
+| `HEP-C-unit-calibration` | `Dewey` (`019def98-4f2b-7f91-9674-ca441c36a435`) | Add typed unit/dimension/calibration-map requirement diagnostic. | Consumes `HEPDataObservableSchema`; confirms schema unit labels are not physical-unit authority. | Targeted Agda on `HEPDataUnitCalibrationRequirementDiagnostic.agda`; no units/laws/validation fabricated. |
+| `HEP-D-projection-rejection` | `Hume` (`019def92-8ce3-7321-80cd-6445c7efd5bf`) | Encode the current `MeasurementSurface -> DashiState` status as a typed rejection. | Consumes source candidate diagnostic and projection contract. | Targeted Agda on `HEPDataMeasurementSurfaceProjectionRejection.agda`; no projection implementation or empirical promotion. |
+| `HEP-E-comparison-authority-route` | `Kant` (`019def9d-915d-7fa3-b51c-2ac3f18355dc`) | Add comparison-law plus accepted dataset-authority route diagnostic. | Consumes HEP-B/C/D/F; current route is blocked until their receipts exist. | Targeted Agda on `HEPDataComparisonAuthorityRouteDiagnostic.agda`; no authority token, W3 receipt, or W8 promotion. |
+| `HEP-F-itir-provenance-adapter` | `Singer` (`019def92-b110-7e92-95d2-ac807371dc4e`) | Diagnose ITIR normalized-source/provenance scaffold availability and missing HEPData adapter. | Consumes source candidate diagnostic and sibling ITIR inventory. | Targeted Agda on `HEPDataITIRAuthorityAdapterDiagnostic.agda`; no HEPData-specific authority adapter/token fabricated. |
+
+HEPData bridge round results:
+
+- `HEPDataBridgeWorkerQueue` assigns HEP-A through HEP-F while preserving the
+  shared-diagram rule: workers report diagram deltas and W0 applies the shared
+  coordination updates.
+- `HEP-A`: landed `HEPDataObservableSchema`, a non-promoting schema surface.
+  Required semantics are now typed: record, table, citation, units, binning,
+  covariance, local checksum/hash, provenance, Dashi observable target,
+  comparison law target, projection contract, and golden conformance tests.
+- `HEP-B`: landed `HEPDataObservableSelectionDiagnostic`, which records that
+  source candidates and schema shape exist but the required named physical
+  observable plus record/table/column/row-selection candidate is not
+  legitimately selectable in-repo without accepted authority and checksum
+  binding.
+- `HEP-C`: landed `HEPDataUnitCalibrationRequirementDiagnostic`, naming the
+  future `HEPDataUnitCalibrationRequirementReceipt` fields: selected
+  `HEPDataObservable`, physical unit carrier, dimension carrier/dimension map,
+  observable physical unit, internal/measured carriers, conversion/calibration
+  map, scale convention evidence, preservation-or-monotonicity boundary, and
+  validation authority.
+- `HEP-D`: landed `HEPDataMeasurementSurfaceProjectionRejection`, encoding the
+  current `MeasurementSurface -> DashiState` route as `projectionRejected`.
+  Missing pieces are typed: `delta` / `coarse_head` semantics,
+  covariance/metric propagation, transform selection and diagnostics,
+  failure/abstention semantics, theorem-side carrier projection, and authority
+  receipts.
+- `HEP-E`: landed `HEPDataComparisonAuthorityRouteDiagnostic`. The comparison
+  law and accepted dataset authority route are future receipt shapes only;
+  current status is blocked until HEP-B selection, HEP-C calibration, HEP-D
+  projection, and HEP-F authority-adapter receipts exist.
+- `HEP-F`: landed `HEPDataITIRAuthorityAdapterDiagnostic`, recording that ITIR
+  normalized-source/provenance scaffolding exists but no HEPData-specific
+  authority adapter/token is present. Required fields are raw HEPData authority
+  identity, cached artifact checksum, local NPZ hash, source/citation/table
+  identity, derived-projection boundary, and accepted-authority handoff.
+- HEPData bridge split status: fully surfaced as non-promoting diagnostics.
+  None of HEP-A/B/C/D/E/F promotes W3, W4, W5, or W8.
+
+## HEPData Provider Request-Pack Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEPData-provider-receipt-request-pack` | `W0` | Co-locate the HEP-A..F missing receipts into one provider-facing pack. | Follows the HEPData bridge schema/projection/provenance round. | Targeted Agda on `HEPDataProviderReceiptRequestPack.agda`; no observable selection, calibration, projection, comparison law, authority token, W3 receipt, or W8 promotion may be fabricated. |
+
+HEPData provider request-pack result:
+
+- `HEPDataProviderReceiptRequestPack` consolidates the HEPData bridge into one
+  handoff surface: observable schema, selection receipt, unit-calibration
+  receipt, residual/deviation observable-class receipt, theorem-side projection
+  receipt, DASHI defect/residual projection receipt, ITIR authority-adapter
+  receipt, comparison-law receipt, accepted dataset authority token, and
+  accepted route.
+- The pack is indexed by both `P0ProviderReceiptRequestIndex` and
+  `P0BlockerObligationIndex`, so future provider work has one typed entrypoint.
+- Non-promotion is explicit: no HEPData observable/table-column is selected,
+  no physical unit calibration is supplied, no `MeasurementSurface ->
+  DashiState` projection is accepted, no comparison law is inhabited, no
+  HEPData-specific ITIR authority adapter/token is constructed, and no W3/W8
+  empirical promotion follows from the pack.
+
+## HEPData Residual / Deviation Retarget Round
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+
+| Lane | Agent | Assignment | Dependency note | Promotion gate |
+|---|---|---|---|---|
+| `HEP-R1-residual-observable-class` | `Rutherford` (`019defad-d8a7-7a53-8cda-81ce39682c60`) | Define the residual/deviation observable-class request surface. | Follows the provider pack; retargets away from raw saturated values. | Targeted Agda on `HEPDataResidualObservableClassRequest.agda`; no observable, calibration, comparison law, authority, or W3/W4/W5/W8 promotion. |
+| `HEP-R2-defect-projection` | `Meitner` (`019defad-d95e-7972-9439-e7441633e65a`) | Define the HEPData residual/deviation to DASHI defect/residual profile diagnostic. | Follows HEP-D projection rejection and HEP-R1 residual class request. | Targeted Agda on `HEPDataDefectProjectionDiagnostic.agda`; no selected residual observable, projection receipt, comparison law, authority, or empirical adequacy. |
+| `HEP-R3-residual-source-candidates` | `Feynman` (`019defad-da36-7871-b866-7b3fb6655abf`) | Inventory local residual/deviation-like HEPData artifacts and missing receipt fields. | Source discovery only; candidate paths do not become accepted receipts. | Targeted Agda on `HEPDataResidualSourceCandidateDiagnostic.agda`; no provider receipt or promotion. |
+| `HEP-R4-residual-provider-request-pack` | `Bell` (`019defb5-d9d4-7292-9cb1-4a3c635859d5`) | Consolidate HEP-R1/R2/R3 into a residual-specific provider request pack. | Follows HEP-R1/R2/R3 and broad HEPData provider pack. | Targeted Agda on `HEPDataResidualProviderReceiptRequestPack.agda`; no selected residual observable, baseline, projection, comparison law, authority, or promotion. |
+| `HEP-R5-non-collapse-obligation` | `Wu` (`019defb5-dac2-7c81-a4fa-6d8d72930779`) | Define the non-collapse witness obligation for selected residual observables. | Follows HEP-R1/R2 and blocks raw/constant/saturated projections. | Targeted Agda on `HEPDataNonCollapseObservableObligation.agda`; no external witness or empirical compatibility. |
+| `HEP-R6-residual-comparison-law` | `Meyer` (`019defb5-db88-7262-807e-68a16a594f09`) | Define residual-aware comparison-law request modes. | Follows HEP-E and retargets comparison away from raw value equality. | Targeted Agda on `HEPDataResidualComparisonLawRequest.agda`; no comparison law or authority token. |
+| `HEP-R7-empirical-residual-bridge-core` | `Noether` (`019defc2-38eb-7a52-bf00-ec6e461c2e91`) | Define the generic residual observable, baseline/invariance, non-collapse witness, defect projection, and comparison-soundness core. | Follows HEP-R1/R2/R5/R6; this is the bridge shape, not a provider receipt. | Targeted Agda on `HEPDataEmpiricalResidualBridgeCore.agda`; no selected HEPData observable, authority, calibration, empirical adequacy, or promotion. |
+| `HEP-R8-residual-provider-payload-intake` | `Lovelace` (`019defc2-39ba-79d3-b9d5-e71d485afa70`) | Define the residual provider payload intake filter and first-missing outcomes. | Follows HEP-R4 and uses the residual receipt pack as the source of truth. | Targeted Agda on `HEPDataResidualProviderPayloadIntake.agda`; no selected observable, empirical receipt, authority token, local promotion, or raw saturated value. |
+| `HEP-R9-residual-authority-gate` | `Turing` (`019defc2-3b27-7b91-a729-4fea3e6f1ee7`) | Define the authority gate that accepts only the full residual chain or a first-missing typed receipt. | Follows HEP-R4/R5/R6 and HEP-E authority route diagnostics. | Targeted Agda on `HEPDataResidualBridgeAuthorityGate.agda`; rejects raw/path/unchecksumed/no-route/no-witness answers and constructs no authority token or promotion. |
+| `HEP-R10-external-residual-witness-payload` | `Turing` (`019defcf-c4b5-7520-800d-3465066e1c41`) | Define the minimal typed payload carrier for `nonCollapseWitnessReceipt`. | Follows HEP-R5/R8/R9 and binds the provider receipt, intake field, and gate field names. | Targeted Agda on `HEPDataExternalResidualWitnessPayload.agda`; external receipt remains constructorless and no selected observable or promotion is constructed. |
+| `HEP-R11-phistar-local-candidate-diagnostic` | `Volta` (`019defcf-b00a-73b1-99e5-f34327d018af`) | Record the best local `phistar_50_76` evidence pointer with checksums and two non-identical bins. | Follows HEP-R10 and the local `dashifine` HEPData artifacts; first missing provider receipt remains `residualObservableClassReceipt`. | Targeted Agda on `HEPDataExternalResidualWitnessCandidateDiagnostic.agda`; candidate is not an accepted authority route, calibration receipt, or provider-admissible non-collapse receipt. |
+| `HEP-R12-phistar-residual-class-candidate` | `Curie` (`W0 local integration`) | Specialize the residual observable-class request to the `phistar_50_76` candidate as a fluctuation-profile class candidate. | Follows HEP-R1 and HEP-R11; uses the adjacent-bin local-invariance baseline and bin0/bin1 residual definition already recorded in the local candidate diagnostic. | Targeted Agda on `HEPDataResidualObservableClassCandidateDiagnostic.agda`; it still does not construct `residualObservableClassReceipt`, authority, calibration, comparison law, or W3/W4/W5/W8 promotion. |
+| `HEP-R13-phistar-residual-class-proto-receipt` | `Franklin` (`W0 local integration`) | Package the `phistar_50_76` residual class candidate as an externalizable proto-receipt payload. | Follows HEP-R12, HEP-R4 intake policy, HEP-R8 intake, and HEP-R9 authority gate. | Targeted Agda on `HEPDataResidualObservableClassProtoReceipt.agda`; intake is explicitly rejected at first-missing residual class and authority remains blocked. |
+| `HEP-R14-finite-difference-external-alignment` | `Dirac` (`W0 local integration`) | Align the internal `fluctuationProfile` candidate to adjacent-bin finite-difference residual / local bin-to-bin variation language. | Follows HEP-R13 and preserves the candidate normalized-pull boundary. | Targeted Agda on `HEPDataResidualObservableClassExternalAlignment.agda`; no statistical-significance, covariance-complete, authority, or W3/W4/W5/W8 promotion claim. |
+| `HEP-R15-empirical-authority-collation` | `Noether` (`W0 local integration`) | Collate the CMS-SMP-20-003 primary authority source, raw HEPData CSV/covariance artifacts, local normalized artifact, and CMS-SMP-19-010 calibration baseline. | Follows HEP-R14 and corrects the phistar table binding: `phistar mass 50-76` is `ins2079374` / `t19`, covariance is `t20`; the previous `t31` pointer is a different pT-ratio table. | Targeted Agda on `HEPDataEmpiricalAuthorityReceiptCollation.agda`; this is a collation/correction packet only and leaves adapter-transform, projection, comparison law, accepted authority, and W3/W4/W5/W8 promotion open. |
+| `HEP-R16-source-authority` | `Halley` (`019df1e5-b72f-7373-bd50-fa5218d57f55`) | Record the CMS-SMP-20-003 source-authority pointers, including t19/t20 and t68/t69. | Follows HEP-R15; the canonical paper DOI is now `10.1140/epjc/s10052-023-11631-7`, and `10.1140/epjc/s10052-023-11680-y` is rejected as the wrong pointer. | Targeted Agda on `HEPDataCMSSMP20003ExternalSourceAuthorityReceipt.agda`; no accepted authority token, comparison law, accepted route, W3 promotion, or W8 promotion. |
+| `HEP-R17-adapter-transform` | `Linnaeus` (`019df1e5-da3f-79f3-86cb-4ee5a68bee44`) | Add a typed adapter-transform request diagnostic for raw t19/t20 versus local normalized artifact values. | Follows HEP-R15; selected value surface remains blocked until raw, normalized, or a typed transform is accepted. | Targeted Agda on `HEPDataAdapterTransformReceiptRequestDiagnostic.agda`; no selected observable, projection, comparison, authority, or W3/W4/W5/W8 promotion. |
+| `HEP-R18-w4-zpeak-ratio-anchor` | `Raman` (`019df1e5-fd64-7060-ad95-9ae95aebab3c`) | Add same-record W4 Z-peak / ratio calibration anchors. | Follows HEP-R15 and W4 request packs; names t21/t22, t43/t44, and t70/t71 only. | Targeted Agda on `W4CalibrationRatioZPeakReceiptRequestSurface.agda` and provider index; no unit calibration receipt, dimensional preservation proof, `Candidate256PhysicalCalibrationAuthorityToken`, or W4/W5/W8 promotion. |
+| `HEP-R19-w5-w6-source-inventory` | `Aristotle` (`019df1e6-258d-7821-9613-7f238d7437c3`) | Add W5 high-mass and W6 theory-adapter source inventory. | Follows HEP-R15; names t23/t24, t25/t26, t27/t28, t72-t77, and CASCADE TMD as first candidate only. | Targeted Agda on `W5W6PhysicsConsumerSourceInventory.agda`; no GR/QFT closure, QFT interaction law, empirical validation, accepted ITIR adapter, or runtime PNF receipt. |
+| `HEP-R20-doi-resolution` | `Halley` (`019df1e5-b72f-7373-bd50-fa5218d57f55`) | Resolve the CMS-SMP-20-003 paper DOI at the source-authority layer. | Follows the user-supplied DOI correction; `11631-7` is canonical and `11680-y` is rejected. | Targeted Agda on `HEPDataCMSSMP20003ExternalSourceAuthorityReceipt.agda`; source-pointer correction only, no authority-token or W3/W8 promotion. |
+| `HEP-R21-ratio-adapter-route` | `Linnaeus` (`019df1e5-da3f-79f3-86cb-4ee5a68bee44`) | Select the dimensionless `t43/t44` ratio route as the adapter-transform target. | Follows HEP-R17; raw `t19/t20` is retained only as absolute-source context and `t68/t69` as fold-back inputs. | Targeted Agda on `HEPDataRatioAdapterTransformReceiptRequest.agda`; no `predictionFixedAt`, projection receipt, comparison law, authority token, or promotion. |
+| `HEP-R22-prediction-freeze-projection` | `Raman` (`019df1e5-fd64-7060-ad95-9ae95aebab3c`) | Name the remaining internal freeze/projection-run receipt fields. | Follows HEP-R21; the frontier is now commit hash, prediction artifact digest, t43/t44 bin binding, comparison-law input, and pre-registered non-collapse boundary. | Targeted Agda on `HEPDataPredictionFreezeProjectionRunRequest.agda`; no prediction run, projection receipt, comparison law, or W3 promotion. |
+| `HEP-R23-w5-w6-full-table-map` | `Aristotle` (`019df1e6-258d-7821-9613-7f238d7437c3`) | Expand W5/W6 source inventory to the consumer-relevant full table map. | Follows HEP-R19; adds phistar `t23-t28`, ratios `t45-t50`, responses `t72-t77`, pT secondary `t1-t18/t51-t67`, and CASCADE-first theory-adapter note. | Targeted Agda on `W5W6PhysicsConsumerSourceInventory.agda`; no W5/W6 promotion, GR/QFT closure, ITIR adapter, or runtime PNF receipt. |
+| `HEP-R24-ratio-artifacts` | `Fermat` (`019df200-a404-7062-bcde-7b979964a395`) | Record the t43/t44 artifact acquisition request and checksum fields. | Follows HEP-R21; this request surface is now superseded by HEP-R28 checksum-bound artifacts. | Targeted Agda on `HEPDataRatioTableArtifactRequest.agda`; no projection, comparison, authority, or promotion. |
+| `HEP-R25-projection-runner-discovery` | `Kuhn` (`019df200-bcd6-7c72-9f00-e4ba93427843`) | Discover whether an exact DASHI t43 projection runner exists. | Follows HEP-R22; candidate surfaces exist, but no executable digest-bound runner for frozen `t43/t44` projection was found. | Targeted Agda on `HEPDataDASHIProjectionRunnerDiscovery.agda`; no prediction result, runner receipt, projection receipt, comparison law, or promotion. |
+| `HEP-R26-freeze-identity` | `Kierkegaard` (`019df200-d76f-7f43-a374-c1fc1bd4b813`) | Record current freeze identity and dirty-worktree blocker. | Follows HEP-R22; HEAD `e137415fe60aa470b9cd41d2357d9494592c0cec` is diagnostic-only because modified/untracked files are present. | Targeted Agda on `HEPDataPredictionFreezeIdentityDiagnostic.agda`; no clean freeze, no artifact digest, no accepted `predictionFixedAt`. |
+| `HEP-R27-comparison-intake` | `Banach` (`019df200-f143-7c31-ac64-e6b2448990d3`) | Tie the t43/t44 route and freeze/projection request to comparison-law intake. | Follows HEP-R21/R22/R24/R25/R26/R28; HEP-R28 supplies t43/t44 checksums, so comparison now waits on prediction freeze, projection digest, and exact bin binding. | Targeted Agda on `HEPDataRatioComparisonLawIntakeRequest.agda`; no chi2 result, accepted comparison law, empirical adequacy, or W3 promotion. |
+| `HEP-R28-ratio-artifact-receipt` | `W0` (`orchestrator`) | Acquire valid HEPData t43/t44 CSVs and bind local checksums. | Follows HEP-R24; the short `/t43`, `/t44`, and `Table 43` endpoint forms returned HEPData error HTML, while the name-based endpoints returned valid CSVs. | Targeted Agda on `HEPDataRatioTableArtifactReceipt.agda`; no CSV parsing, projection run, comparison law, or W3/W4/W5/W8 promotion. |
+| `HEP-R29-t43-projection-runner-contract` | `HEP-R29` (`bounded lane`) | Add a request/receipt skeleton for an accepted exact digest-bound DASHI t43 projection runner. | Follows HEP-R22/R25; discovery still says no accepted exact t43 projection runner exists, so this lane only names the contract for reading t43 CSV plus `predictionFixedAt` and emitting `t43_projection.json`. | Targeted Agda on `HEPDataT43ProjectionRunnerContract.agda`; no accepted runner receipt, no concrete projection digest, no projection receipt, no comparison law, or W3/W4/W5/W8 promotion. |
+| `HEP-R32-t43-runner-implementation-attempt` | `Sagan` (`019df2d6-3431-7702-adcf-69eecafa6a4b`) | Add fail-closed script infrastructure for the t43 projection runner. | Follows HEP-R28/R29/R30; the runner can verify t43/t44 digests, parse ratio/covariance inputs, and emit an incomplete diagnostic artifact, but `compute_dashi_ratio` and accepted clean `predictionFixedAt` remain missing. | Targeted Agda on `HEPDataT43ProjectionRunnerImplementationAttempt.agda` plus script validation; no `projectionComplete = true`, chi2 receipt, comparison law, empirical adequacy, or W3/W4/W5/W8 promotion. |
+| `HEP-R33-phistar-ratio-prediction-api-route` | `W0` (`orchestrator`) | Narrow the remaining runner blocker to the accepted DASHI phi-star ratio prediction API. | Follows HEP-R32; the runner can now consume a supplied `module:function` hook and emit `projectionComplete = true` only if it returns one finite ratio per t43 bin, but no accepted repo-native API path is present. | Targeted Agda on `HEPDataT43PredictionAPIRouteDiagnostic.agda` plus runner validation; no chi2 receipt, comparison law, empirical adequacy, or W3/W4/W5/W8 promotion. |
+
+HEPData residual/deviation retarget results:
+
+- `HEPDataResidualBridgeWorkerQueue` records the HEP-R1..R33 assignments and the
+  governing reason: saturated internal observables collapse to constants, so
+  raw-value HEPData projection risks constant-to-constant transport.
+- `HEPDataRatioTableArtifactReceipt` records HEP-R28: valid name-endpoint CSVs
+  for t43/t44 were acquired under `scripts/data/hepdata`, with SHA-256 digests
+  `0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b`
+  and `3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b`.
+  This solves the artifact checksum prerequisite only; no projection or
+  comparison receipt is constructed.
+- `HEPDataT43ProjectionRunnerContract` records the HEP-R29 executable runner
+  skeleton: required inputs are checksum-bound t43 CSV, `predictionFixedAt`,
+  frozen prediction artifact, and pre-registered non-collapse boundary; the
+  required output is `t43_projection.json` with `inputDigest`, bin bindings,
+  `R_dashi`, `R_data`, and `projectionDigest`. It does not claim an accepted
+  exact runner receipt or any concrete projection digest exists.
+- `HEPDataT43ProjectionRunnerImplementationAttempt` records HEP-R32: the
+  concrete fail-closed script lane can verify the HEP-R28 t43/t44 digests,
+  parse bin/covariance inputs, and write a diagnostic artifact, but it keeps
+  `projectionComplete = false` until a real DASHI phi-star ratio prediction
+  function and accepted clean `predictionFixedAt` receipt exist.
+- `HEPDataT43PredictionAPIRouteDiagnostic` records HEP-R33: the runner-side API
+  hook is now usable, but the accepted repo-native API path for
+  `sigma_DASHI(50-76, bin) / sigma_DASHI(76-106, bin)` is still missing.
+- `Docs/WorkerCoordinationMap.puml` now keeps only the current-state whole-board
+  view, while `Docs/HEPDataResidualCoordinationMap.puml` carries the HEP-R1..R33
+  child dependency graph. The board remains the full textual source of truth.
+- `HEPDataResidualObservableClassRequest` names admissible non-collapsing
+  observable classes: residual-after-fit, symmetry-breaking deviation,
+  fluctuation profile, anomaly score, and defect profile. It requires a
+  baseline/invariance model, residual definition, uncertainty/covariance
+  handling, HEP-B selection, HEP-C calibration, HEP-D projection target,
+  comparison-law target, and non-collapse justification.
+- `HEPDataDefectProjectionDiagnostic` records the next theorem-side target as a
+  residual/deviation observable projected into a DASHI defect/residual profile.
+  Raw values, constant projections, saturated histograms, orbit summaries, and
+  forced-stable counts are recorded as collapsing blockers for this bridge.
+- `HEPDataResidualSourceCandidateDiagnostic` records local residual-like
+  artifacts such as fit residual plots, chi2 tables/sweeps, Lyapunov artifacts,
+  defect monotonicity reports, and seam scripts. These are path-level
+  candidates only; selection, checksum-bound schema, authority, unit
+  calibration, residual definition, comparison law, provider receipt, and
+  golden conformance tests remain missing.
+- `HEPDataResidualProviderReceiptRequestPack` consolidates HEP-R1/R2/R3 into a
+  residual-specific provider payload with first-missing receipt policy. The
+  required chain is residual class, exact selected residual observable,
+  checksum-bound selection, baseline/invariance model, residual definition,
+  non-collapse witness, calibration/covariance, theorem-side projection,
+  defect projection, residual comparison law, and accepted authority route.
+- `HEPDataNonCollapseObservableObligation` defines the external witness target:
+  two selected observations or bins, distinct residual profiles, a not-constant
+  proof target, preserved defect discriminator, covariance adequacy label,
+  comparison-law compatibility, and authority dependency. The current repo has
+  no such external witness.
+- `HEPDataResidualComparisonLawRequest` narrows the comparison-law target to
+  residual-aware modes: sign pattern, normalized pull, covariance-whitened
+  distance, defect class match, or anomaly ranking. Raw value equality remains
+  rejected for this bridge.
+- `HEPDataEmpiricalResidualBridgeCore` records the minimal generic bridge shape:
+  residual observable, baseline/invariance, non-collapse witness, defect
+  projection, and residual-to-defect comparison soundness. It deliberately
+  leaves selected HEPData observable, provider receipt, authority, calibration,
+  empirical adequacy, and W3/W4/W5/W8 promotion external.
+- `HEPDataResidualProviderPayloadIntake` records the provider payload filter:
+  all residual-specific fields must be present and mutually bound, or intake
+  reports the canonical first-missing receipt. Passing intake is necessary but
+  not sufficient for any promotion.
+- `HEPDataResidualBridgeAuthorityGate` records that the residual bridge is a
+  receipt filter, not a data bridge. It accepts only a full residual receipt
+  chain or first-missing typed diagnostic, and rejects raw saturated values,
+  local artifact paths, unchecksumed selections, missing authority routes, and
+  answers without a non-collapse witness.
+- `HEPDataExternalResidualWitnessPayload` names the exact typed payload carrier
+  for `nonCollapseWitnessReceipt` while preserving the constructorless external
+  receipt boundary.
+- `HEPDataExternalResidualWitnessCandidateDiagnostic` records the current best
+  local normalized-artifact candidate: `phistar_50_76`, HEPData publication
+  record `ins2079374`, table DOI `10.17182/hepdata.115656.v1/t19`, cached
+  artifact `scripts/data/hepdata_phistar_50_76_artifact.json`, and normalized
+  bin pair `0.002 -> 188.4` versus `0.006 -> 185.09`. The candidate residual
+  delta is `3.3100000000000023` with diagonal-covariance normalized pull
+  `0.6169534835701825`; it remains evidence-pointer grade only.
+- `HEPDataResidualObservableClassCandidateDiagnostic` narrows that candidate
+  into a residual observable-class candidate: `fluctuationProfile` under the
+  adjacent-bin equality/null local-invariance baseline, using the same
+  bin0/bin1 residual definition. This is still non-promoting: the first
+  missing provider receipt remains `residualObservableClassReceipt`.
+- `HEPDataResidualObservableClassProtoReceipt` packages the class candidate
+  into the externalizable payload shape for `residualObservableClassReceipt`,
+  while proving local intake remains rejected at
+  `firstMissingResidualObservableClass` and the authority gate remains blocked.
+  This is still non-promoting and does not construct calibration, covariance,
+  projection, comparison-law, non-collapse witness, W3, W4, W5, or W8 receipts.
+- `HEPDataResidualObservableClassExternalAlignment` supplies the paper-facing
+  translation layer: the internal `fluctuationProfile` candidate is externally
+  legible as an adjacent-bin finite-difference residual / local bin-to-bin
+  variation over the published `phistar_50_76` distribution. It now records
+  both raw upstream `t19` non-collapse (`228.59 - 225.69 = 2.90`) and
+  normalized-artifact non-collapse (`188.4 - 185.09 = 3.3100000000000023`)
+  while keeping adapter semantics, significance, covariance adequacy,
+  authority, and promotion external.
+- `HEPDataEmpiricalAuthorityReceiptCollation` records the provider-supplied
+  CMS-SMP-20-003 source metadata and the fetched raw upstream artifacts:
+  `scripts/data/hepdata/ins2079374_phistar_mass_50-76_t19.csv` with SHA-256
+  `1a1d280da645f4c55aba73aabf1b398a3fd9614532c363d972018f194b653677`,
+  and `scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_t20.csv`
+  with SHA-256
+  `fa4b694211862d4b07b761d0dab77c8fe1016d2ccd5015dc6f7bc3272c34201a`.
+  It also names CMS-SMP-19-010 / JHEP 12 (2019) 061 as calibration baseline.
+  This closes source collation only; the first missing provider receipt remains
+  `residualObservableClassReceipt`, and an adapter-transform receipt is now
+  explicit because raw upstream values and the local normalized artifact differ.
+- `HEPDataCMSSMP20003ExternalSourceAuthorityReceipt` records the confirmed
+  source-authority pointers for `ins2079374`, t19/t20, and response matrices
+  t68/t69. HEP-R20 resolves the paper DOI correction: the canonical DOI is
+  `10.1140/epjc/s10052-023-11631-7`, and the earlier
+  `10.1140/epjc/s10052-023-11680-y` pointer is rejected as wrong.
+- `HEPDataAdapterTransformReceiptRequestDiagnostic` records the exact raw versus
+  normalized value split and the required decision: consume raw t19 values,
+  consume the normalized local artifact, or supply a typed raw-to-normalized
+  transformation. Until that decision is accepted, the selected value surface
+  remains blocked.
+- `HEPDataRatioAdapterTransformReceiptRequest` records HEP-R21: the selected
+  comparison route is now dimensionless `t43/t44` ratio `50-76 / 76-106`, with
+  raw `t19/t20` retained as absolute-source context and `t68/t69` retained as
+  fold-back inputs only.
+- `HEPDataPredictionFreezeProjectionRunRequest` records HEP-R22: the remaining
+  internal fields are `predictionFixedAt`, prediction artifact digest, exact
+  `t43/t44` bin binding, comparison-law input, and non-collapse
+  pre-registration boundary.
+- `W4CalibrationRatioZPeakReceiptRequestSurface` names the same-record Z-peak
+  and ratio anchors for future W4 calibration: t21/t22, t43/t44, and response
+  matrices t70/t71. It constructs no ratio-calibration law, unit-calibration
+  receipt, dimensional preservation proof, or W4 promotion.
+- `W5W6PhysicsConsumerSourceInventory` names the HEP-R23 W5/W6 source inventory:
+  phistar high-mass `t23-t28`, ratios `t45-t50`, response matrices `t72-t77`,
+  pT secondary `t1-t18/t51-t67`, and W6 theory-adapter candidates with CASCADE
+  TMD first. It constructs no GR/QFT closure receipt, residual comparison law,
+  accepted ITIR adapter, or runtime PNF receipt.
+- `P0BlockerObligationIndex` now imports the HEP-R1..R33 residual retarget,
+  provider-intake, bridge-core, and authority-gate surfaces as non-promoting
+  lanes. This changes the next admissible provider payload from raw values to
+  residual/deviation/defect receipts, but it still does not close W3, W4, W5,
+  or W8.
+- `P0ProviderReceiptRequestIndex` and `P0BlockerObligationIndex` now index
+  HEP-R7 through HEP-R27 so the residual bridge core, provider payload intake,
+  authority gate, external payload carrier, local candidate diagnostic,
+  empirical authority collation/correction packet, source-authority package,
+  adapter-transform diagnostic, ratio adapter route, prediction-freeze request,
+  ratio artifact request, projection-runner discovery, dirty-freeze diagnostic,
+  comparison-law intake, ratio anchor, and W5/W6 source inventory are
+  discoverable through the same typed P0 handoff surfaces.
+
 ## Formal Model
 
 O:
 - Repo owner/reviewer accepts or rejects promoted theorem and documentation
   changes.
+
+## Physics Lane Maturity Matrix
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `completed`
+Primary surface: `Docs/PhysicsLaneMaturityMatrix.md`
+
+| Lane | Present | Bridged | Packaged | Theorem-complete | Empirically-validated | Governing blocker |
+|---|---:|---:|---:|---:|---:|---|
+| Maxwell / gauge-field regime | yes | yes | partial | no | no | Field-equation recovery and empirical validation remain open. |
+| Schrödinger evolution | yes | yes | yes | no | no | Current consumers are bounded/proxy dynamics surfaces, not end-to-end derivations. |
+| GR curvature / GR-QFT consumer | yes | yes | yes | no | no | W5 richer downstream GR/QFT consumer and validation receipts remain missing. |
+| Predictions / empirical adequacy | yes | yes | yes | no | no | W3/W4/W8 and HEPData residual authority/calibration receipts remain external. |
+
+This table changes the criticism from "these topics are absent" to "these
+topics are present at bounded maturity and still need closure receipts." It is
+not a promotion surface.
+
+## Complete Verified Physics Unification Roadmap
+
+Round date: `2026-05-04`
+Round owner: `W0 orchestrator / integrator`
+Round status: `planned`
+Primary surface: `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`
+
+Target claim:
+
+> DASHI is complete and verified physics unification.
+
+This is a future gated state, not the current claim. The roadmap defines seven
+promotion gates:
+
+| Gate | Target |
+|---|---|
+| `G1` | Canonical spine stability and theorem-owner revalidation. |
+| `G2` | Maxwell/gauge field-equation theorem completion or explicit obstruction. |
+| `G3` | Schrödinger end-to-end evolution theorem completion or scoped equivalent. |
+| `G4` | GR curvature / GR-QFT consumer completion. |
+| `G5` | Empirical prediction validation through accepted authority, calibration, projection, comparison, and empirical adequacy receipts. |
+| `G6` | Cross-lane consistency through one carrier/spine and no-bypass law. |
+| `G7` | Publication audit over claims, diagrams, proofs, receipts, and reproducibility. |
+
+Worker planning implication:
+
+- Use `W-MAX`, `W-SCH`, `W-GR`, `W-EMP`, and `W-XLANE` as the next high-level
+  workstreams.
+- Do not relabel current maturity rows as complete until the corresponding gate
+  has a named theorem owner or accepted receipt.
+- Empirical validation remains external-receipt-driven, starting with the
+  HEPData residual observable-class receipt chain.
 - Orchestrator assigns one nonblocking lane per worker.
 - Workers own bounded file surfaces and must not modify unrelated dirty files.
 

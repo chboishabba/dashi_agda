@@ -1,0 +1,315 @@
+@startuml
+title HEPData Residual Coordination Map - HEP-R1..R45 + LILA-R1..R5 + SIB-R1..R2 + SIB-MATRIX
+left to right direction
+
+skinparam shadowing false
+skinparam roundcorner 16
+skinparam packageStyle rectangle
+skinparam ArrowThickness 2
+skinparam defaultTextAlignment center
+
+package "Residual Retarget Chain" {
+  rectangle "HEP-R1\nResidual observable class request\nno raw collapsed values" as R1 #fef3c7
+  rectangle "HEP-R2\nDefect projection diagnostic\nresidual -> DASHI defect target" as R2 #fef3c7
+  rectangle "HEP-R3\nResidual source candidates\npath inventory only" as R3 #fef3c7
+  rectangle "HEP-R4\nResidual provider request pack\nfirst-missing policy" as R4 #fef3c7
+  rectangle "HEP-R5\nNon-collapse obligation\ntwo bins / distinct residuals" as R5 #fef3c7
+  rectangle "HEP-R6\nResidual comparison-law request\nreject raw equality" as R6 #fef3c7
+  rectangle "HEP-R7\nEmpirical residual bridge core\nbaseline + witness + defect map" as R7 #fef3c7
+  rectangle "HEP-R8\nProvider payload intake\ncanonical first-missing outcomes" as R8 #fef3c7
+  rectangle "HEP-R9\nResidual authority gate\nreceipt filter only" as R9 #fef3c7
+}
+
+package "phistar_50_76 Candidate Chain" {
+  rectangle "HEP-R10\nExternal non-collapse payload carrier\nconstructorless receipt boundary" as R10 #fef3c7
+  rectangle "HEP-R11\nLocal phistar candidate diagnostic\nnormalized artifact evidence pointer" as R11 #fef3c7
+  rectangle "HEP-R12\nResidual class candidate\nfluctuationProfile candidate" as R12 #fef3c7
+  rectangle "HEP-R13\nProto-receipt payload\nnot accepted authority" as R13 #fef3c7
+  rectangle "HEP-R14\nExternal alignment\nfinite-difference residual wording" as R14 #fef3c7
+  rectangle "HEP-R15\nEmpirical authority collation\nraw t19/t20 + normalized artifact split" as R15 #fef3c7
+  rectangle "HEP-R16\nCMS-SMP-20-003 source authority\ncanonical DOI + t68/t69 response pointers" as R16 #fef3c7
+  rectangle "HEP-R17\nAdapter-transform diagnostic\nraw/local selected surface blocked" as R17 #fef3c7
+  rectangle "HEP-R18\nW4 Z-peak ratio anchor\nt21/t22, t43/t44, t70/t71" as R18 #fef3c7
+  rectangle "HEP-R19\nW5/W6 consumer inventory\nhigh-mass tables + theory candidates" as R19 #fef3c7
+  rectangle "HEP-R20\nDOI correction resolved\n11631-7 canonical; 11680-y rejected" as R20 #dcfce7
+  rectangle "HEP-R21\nRatio adapter route selected\nt43/t44 dimensionless target" as R21 #fef3c7
+  rectangle "HEP-R22\nPrediction freeze + projection request\ncommit hash + t43 run missing" as R22 #fecaca
+  rectangle "HEP-R23\nW5/W6 full table map\nphistar, ratios, response, pT" as R23 #fef3c7
+  rectangle "HEP-R24\nRatio artifact request\nsuperseded by HEP-R28" as R24 #dcfce7
+  rectangle "HEP-R25\nProjection runner discovery\nno exact t43 runner found" as R25 #fecaca
+  rectangle "HEP-R26\nFreeze identity diagnostic\nHEAD named; worktree dirty" as R26 #fecaca
+  rectangle "HEP-R27\nComparison-law intake\nfreeze + projection digest + bin binding required" as R27 #fecaca
+  rectangle "HEP-R28\nChecksum-bound t43/t44 artifacts\nvalid CSVs + sha256 manifest" as R28 #dcfce7
+  rectangle "HEP-R29\nT43 runner contract skeleton\ninputDigest/bin bindings/R ratios/projectionDigest" as R29 #fecaca
+  rectangle "HEP-R30\nClean freeze policy request\nstash/commit, rev-parse HEAD,\nrunner uses that hash" as R30 #fecaca
+  rectangle "HEP-R31\nComparison-law receipt skeleton\nchi2 + two-sigma law request only" as R31 #fecaca
+  rectangle "HEP-R32\nFail-closed runner implementation attempt\nverifies digests + writes incomplete artifact" as R32 #fef3c7
+  rectangle "HEP-R33\nPhi-star ratio prediction API route\nrunner hook works; accepted API missing" as R33 #fef3c7
+  rectangle "HEP-R34\nCSS/Sudakov baseline hook\nnon-promoting runner exercise" as R34 #fef3c7
+  rectangle "HEP-R35\nDASHI-native phi-star API diagnostic\nno accepted sibling/CSS route;\nDashiDynamics construction required" as R35 #fecaca
+  rectangle "HEP-R36\nsigma_DASHI construction surface\nrunner-callable internal hook + Agda request;\nnon-promoting until freeze/comparison" as R36 #fef3c7
+  rectangle "HEP-R37\nDirty sigma_DASHI projection diagnostic\nprojectionComplete true, 18 bins;\nsynthetic freeze + no chi2" as R37 #fef3c7
+  rectangle "HEP-R38\nDirty covariance comparison diagnostic\nchi2/dof 355674.69;\nmodel-gap signal only" as R38 #fee2e2
+  rectangle "HEP-R39\nsigma_DASHI v2 refinement diagnostic\nchi2/dof 68.42 dirty;\nmodel narrowed, still blocked" as R39 #fef3c7
+  rectangle "HEP-R40\nNeutral-current continuum refinement\nchi2/dof 28.66 dirty;\ncloser, still blocked" as R40 #fef3c7
+  rectangle "HEP-R41\nPosterior shape response\nchi2/dof 1.74 dirty numeric pass;\ngovernance blocked" as R41 #fef3c7
+  rectangle "HEP-R42\nt45/t46 holdout validation\nunchanged HEP-R41 fails;\nchi2/dof 222.54" as R42 #fee2e2
+  rectangle "HEP-R43\nMass-window-general law obligation\nt44 is covariance-only;\nt45/t46 is holdout" as R43 #fef3c7
+  rectangle "HEP-R44\nMass-general dirty run\nfails t43 and t45;\nchi2/dof 1770377.85 / 122.02" as R44 #fee2e2
+  rectangle "HEP-R45\nObservable-definition receipt\nDSIG/DPHISTAR ratio headers;\nnormalized-total blocked" as R45 #fef3c7
+}
+
+package "LILA / E8 Diagnostic Lane" {
+  rectangle "LILA-R1\nLocal LILA/E8 source diagnostic\nroot-system receipt surface only" as LILA1 #fef3c7
+  rectangle "LILA-R1a\nRelated-project provenance note\nSPUTNIKAI accepted; AllenAI rejected" as LILA1a #dcfce7
+  rectangle "LILA-R2\nE8 root enumeration surface\ninteger + half-integer obligations" as LILA2 #fef3c7
+  rectangle "LILA-R2a\ncount-support receipt\n112 + 128 = 240;\nnon-promoting" as LILA2A #fef3c7
+  rectangle "LILA-R3\nLam-Tung/E8 adapter surface\nA0..A7 + phi* target obligations" as LILA3 #fef3c7
+  rectangle "LILA-R4\nE8 theta/J bridge surface\nmodular-form lemmas required" as LILA4 #fef3c7
+  rectangle "LILA-R5\nPhi-star projection receipt\nparked on R2/R3/R4" as LILA5 #fecaca
+  rectangle "Local LILA sources\nLilaDashiBridge + TraceFamily\nDASHIg phase2 + e8 vocab" as LILASources #dbeafe
+  rectangle "E8 receipt gaps\nroot enumeration + Lam-Tung map\ntheta/J proof + phi* projection" as E8Gaps #fecaca
+  rectangle "Rejected LILA provenance\nAllenAI/Lila unrelated;\nTinyStories not DASHI evidence" as LILAReject #fee2e2
+}
+
+package "Sibling Evidence Sidecar" {
+  rectangle "SIB-R1\nSiblingEvidenceInventory\nread-only evidence pointers" as SIBR1 #fef3c7
+  rectangle "SIB-R2\nSiblingEvidenceExtractionDiagnostic\nbounded worker findings" as SIBR2 #fef3c7
+  rectangle "SIB-MATRIX\nSiblingMathPortingMatrix\nport-to-Agda / citation / diagnostic triage" as SIBMATRIX #fef3c7
+  rectangle "dashifine / dashiQ / dashitest\nphi-star projection candidates\nnot clean projection receipts" as SIBHEP #fef3c7
+  rectangle "dashifine Lyapunov certification\nenergy candidate only\nnot empirical adequacy" as SIBENERGY #fef3c7
+  rectangle "DASHIg Phase 2 traces\nLILA execution evidence only\nnot E8 carrier receipt" as SIBLILA #fef3c7
+  rectangle "dashi_lean4 MoonshineEarn\nLean arithmetic support only\nnot Agda theta/J receipt" as SIBLEAN #fef3c7
+  rectangle "Extracted blocker facts\nno true T-map/API;\nno 240-root vocab;\nno theta/J theorem;\nno carrier-bound pass cert" as SIBFIND #fee2e2
+}
+
+package "Open Receipts" {
+  rectangle "residualObservableClassReceipt\nfirst missing provider receipt" as MissingClass #fecaca
+  rectangle "adapterTransformReceipt\nraw upstream -> local normalized surface" as MissingAdapter #fecaca
+  rectangle "projectionLawReceipt\nHEP residual -> DASHI defect carrier" as MissingProjection #fecaca
+  rectangle "comparisonLawReceipt\nresidual-aware empirical comparison" as MissingComparison #fecaca
+  rectangle "acceptedAuthorityRoute\nprovider authority token + route" as MissingAuthority #fecaca
+  rectangle "predictionFixedAt\ncommit hash + artifact digest" as MissingFreeze #fecaca
+  rectangle "checksumBoundT43T44\nsupplied by HEP-R28\nnot a projection receipt" as MissingRatioArtifacts #dcfce7
+  rectangle "digestBoundProjectionRunner\nfail-closed script exists;\nreal DASHI prediction missing" as MissingRunner #fef3c7
+  rectangle "t43ProjectionRun\nDASHI projection against ratio bins" as MissingProjectionRun #fecaca
+  rectangle "phiStarRatioPredictionAPI\nsigma_DASHI 50-76 / 76-106\naccepted function path missing" as MissingPredictionAPI #fecaca
+  rectangle "sigmaDASHIConstructionReceipt\ncallable exists; clean freeze,\nprojection artifact, comparison law missing" as MissingSigmaDASHIReceipt #fef3c7
+  rectangle "acceptedProjectionRunReceipt\nblocked by dirty worktree,\nsynthetic freeze, no chi2" as MissingAcceptedProjectionRun #fecaca
+  rectangle "sigmaDASHIModelGap\ncurrent finite-trit projection\nnormalization/scale mismatch" as MissingModelRefinement #fecaca
+  rectangle "acceptedDASHIPredictionAPI\nrepo-native DashiDynamics projection\nnot CSS/Sudakov baseline" as MissingAcceptedDASHIAPI #fecaca
+  rectangle "calibrationRatioLaw\nZ-peak/ratio covariance law" as MissingRatio #fecaca
+  rectangle "consumerSelectionReceipts\nW5 high-mass + W6 theory adapter" as MissingConsumer #fecaca
+  rectangle "acceptedLilaE8Receipt\nlocal evidence plus E8/Lam-Tung/theta receipts" as MissingLilaE8 #fecaca
+  rectangle "acceptedSiblingAdapterReceipt\nre-run/adapt sibling artifact through governed lane" as MissingSiblingAdapter #fecaca
+}
+
+package "Authority Data Surfaces" {
+  rectangle "CMS-SMP-20-003\nEur. Phys. J. C 83 (2023) 628\nHEPData/CMS DOI 10.1140/epjc/s10052-023-11631-7" as CMS20003 #dbeafe
+  rectangle "HEPData ins2079374\nphistar mass 50-76 table t19\ncovariance table t20" as HEPData #dbeafe
+  rectangle "Response matrices\n50-76 ee t68\n50-76 mumu t69" as Response50 #dbeafe
+  rectangle "Z-peak / ratio anchors\n76-106 t21/t22\nratio t43/t44" as ZPeak #dbeafe
+  rectangle "High-mass GR/QFT anchors\nt23/t24, t25/t26, t27/t28\nresponses t72-t77" as HighMass #dbeafe
+  rectangle "Theory candidates\nCASCADE TMD first\nMG5, MiNNLO, ARTEMIDE, GENEVA" as Theory #dbeafe
+  rectangle "Raw first bins\n0.002 -> 228.59\n0.006 -> 225.69\ndelta 2.90" as Raw #dcfce7
+  rectangle "Local normalized first bins\n0.002 -> 188.4\n0.006 -> 185.09\ndelta 3.31" as Normalized #dcfce7
+  rectangle "CMS-SMP-19-010\ncalibration baseline named only\nno calibration receipt" as Baseline #fef3c7
+}
+
+R1 --> R2
+R1 --> R4
+R2 --> R4
+R3 --> R4
+R4 --> R8
+R4 --> R9
+R5 --> R7
+R6 --> R7
+R7 --> R8
+R8 --> R9
+
+R5 --> R10
+R10 --> R11
+R11 --> R12
+R12 --> R13
+R13 --> R14
+R14 --> R15
+R15 --> R16
+R15 --> R17
+R15 --> R18
+R15 --> R19
+R16 --> R20
+R17 --> R21
+R21 --> R22
+R21 --> R24
+R22 --> R25
+R22 --> R26
+R24 --> R28
+R28 --> R27
+R25 --> R27
+R25 --> R29
+R26 --> R27
+R26 --> R30
+R29 --> R27
+R29 --> R32
+R30 --> R27
+R30 --> R32
+R28 --> R32
+R27 --> R31
+R32 --> R31
+R32 --> R33
+R33 --> R31
+R33 --> R34
+R33 --> R35
+R34 --> R35
+R35 --> R36
+R36 --> R31 : future comparison-law input
+R36 --> R37
+R37 --> R31 : diagnostic only
+R37 --> R38
+R38 --> R31 : fails comparison
+R38 --> R39 : v2 refinement
+R39 --> R31 : still no comparison law
+R39 --> R40 : continuum refinement
+R40 --> R31 : still no comparison law
+R40 --> R41 : posterior shape response
+R41 --> R31 : numeric pass; governance fail
+R41 --> R42 : independent holdout
+R42 --> R31 : holdout fails
+R42 --> R43 : general law required
+R43 --> R44 : fresh dirty run
+R44 --> R31 : fails both targets
+R44 --> R45 : table convention check
+R45 --> R43 : no normalized-total escape hatch
+R19 --> R23
+
+LILA1 --> LILASources
+LILA1 --> E8Gaps
+LILA1 --> LILA1a
+LILA1a --> LILAReject
+LILA1 --> LILA2
+LILA2 --> LILA2A
+LILA1 --> LILA3
+LILA1 --> LILA4
+LILA2 --> LILA5
+LILA2A --> LILA5 : count only; proof fields still missing
+LILA3 --> LILA5
+LILA4 --> LILA5
+SIBR1 --> SIBHEP
+SIBR1 --> SIBENERGY
+SIBR1 --> SIBLILA
+SIBR1 --> SIBLEAN
+SIBR1 --> SIBR2
+SIBR1 --> SIBMATRIX
+SIBR2 --> SIBFIND
+SIBMATRIX --> SIBFIND : reproof required
+SIBHEP --> R33 : route hint only
+SIBHEP --> R35 : no accepted sigma_DASHI
+SIBENERGY --> R7 : energy hint only
+SIBLILA --> LILA1 : trace hint only
+SIBLEAN --> LILA4 : support hint only
+SIBFIND --> R33 : no accepted API found
+SIBFIND --> R35 : construction required
+SIBFIND --> LILA2 : no 240-root vocab receipt
+SIBFIND --> LILA4 : no theta/J theorem found
+
+R15 --> CMS20003
+R15 --> HEPData
+HEPData --> Raw
+HEPData --> Response50
+R15 --> Normalized
+R15 --> Baseline
+R18 --> ZPeak
+R23 --> HighMass
+R23 --> Theory
+
+R15 --> MissingClass
+R21 --> MissingAdapter
+R15 --> MissingProjection
+R15 --> MissingComparison
+R20 --> MissingAuthority
+R22 --> MissingFreeze
+R28 --> MissingRatioArtifacts
+R25 --> MissingRunner
+R29 --> MissingRunner
+R32 --> MissingRunner
+R22 --> MissingProjectionRun
+R32 --> MissingProjectionRun
+R33 --> MissingPredictionAPI
+R34 --> MissingAcceptedDASHIAPI
+R35 --> MissingPredictionAPI
+R35 --> MissingAcceptedDASHIAPI
+R36 --> MissingSigmaDASHIReceipt
+R36 --> MissingProjectionRun
+R37 --> MissingAcceptedProjectionRun
+R37 --> MissingComparison
+R38 --> MissingModelRefinement
+R38 --> MissingComparison
+R39 --> MissingModelRefinement
+R39 --> MissingComparison
+R40 --> MissingModelRefinement
+R40 --> MissingComparison
+R41 --> MissingModelRefinement
+R41 --> MissingComparison
+R42 --> MissingModelRefinement
+R42 --> MissingComparison
+R43 --> MissingModelRefinement
+R43 --> MissingComparison
+R44 --> MissingModelRefinement
+R44 --> MissingComparison
+R45 --> MissingModelRefinement
+R45 --> MissingComparison
+R30 --> MissingFreeze
+R27 --> MissingComparison
+R31 --> MissingComparison
+R18 --> MissingRatio
+R23 --> MissingConsumer
+LILA1 --> MissingLilaE8
+LILA2 --> MissingLilaE8
+LILA2A --> MissingLilaE8
+LILA3 --> MissingLilaE8
+LILA4 --> MissingLilaE8
+LILA5 --> MissingProjectionRun
+SIBR1 --> MissingSiblingAdapter
+SIBMATRIX --> MissingSiblingAdapter
+SIBHEP --> MissingSiblingAdapter
+SIBLILA --> MissingLilaE8
+SIBLEAN --> MissingLilaE8
+SIBFIND --> MissingPredictionAPI
+SIBFIND --> MissingAcceptedDASHIAPI
+SIBFIND --> MissingLilaE8
+SIBFIND --> MissingComparison
+
+MissingClass --> R4 : first-missing policy
+MissingAdapter --> R21 : ratio route selected; receipt still blocked
+MissingProjection --> R7 : bridge core needs instance
+MissingComparison --> R6 : comparison request
+MissingAuthority --> R9 : gate remains blocked
+MissingFreeze --> R22 : pre-registration boundary
+MissingRatioArtifacts --> R28 : acquired + hash-bound
+MissingRunner --> R32 : fail-closed script; DASHI call still absent
+MissingProjectionRun --> R22 : internal run
+MissingProjectionRun --> R32 : incomplete artifact only
+MissingPredictionAPI --> R33 : accepted function path
+MissingSigmaDASHIReceipt --> R36 : construction surface exists; receipt not accepted
+MissingAcceptedProjectionRun --> R37 : dirty diagnostic only
+MissingModelRefinement --> R38 : current chi2 gap
+MissingModelRefinement --> R39 : dirty v2 narrows gap
+MissingModelRefinement --> R40 : dirty continuum narrows gap
+MissingModelRefinement --> R41 : posterior numeric pass
+MissingModelRefinement --> R42 : holdout failure
+MissingAcceptedDASHIAPI --> R34 : baseline hook is not accepted DASHI API
+MissingFreeze --> R30 : clean certificate + digest still missing
+MissingComparison --> R27 : intake still blocked
+MissingComparison --> R31 : receipt skeleton uninhabited
+MissingRatio --> R18 : W4 remains blocked
+MissingConsumer --> R23 : W5/W6 remain blocked
+MissingLilaE8 --> LILA1 : diagnostic only; no E8 physics closure
+MissingSiblingAdapter --> SIBR1 : sibling evidence must be re-run or adapted
+MissingSiblingAdapter --> SIBR2 : extraction found no accepted shortcut
+
+note bottom
+  This child graph is non-promoting. It coordinates the empirical residual
+  bridge only; it does not promote W3, W4, W5, W6, or W8.
+end note
+
+@enduml

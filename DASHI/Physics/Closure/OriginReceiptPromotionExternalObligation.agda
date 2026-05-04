@@ -4,7 +4,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
-open import Data.Sum using (_⊎_)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 import DASHI.Physics.Closure.MinimalCredibleShiftOriginObservation as Origin
 import DASHI.Physics.Closure.P0BlockadeProofObligations as P0
@@ -18,8 +18,14 @@ import DASHI.Physics.Closure.P0BlockadeProofObligations as P0
 -- beyond the blocked status and/or feed it into the W3 empirical bridge.  It
 -- does not alter the existing receipt and does not construct a promotion.
 
+data ExternalOriginPromotedEmpiricalStatusAuthority : Set where
+
 record PromotedOriginEmpiricalStatusReceipt : Set where
+  constructor promotedOriginEmpiricalStatusReceipt
   field
+    externalStatusAuthority :
+      ExternalOriginPromotedEmpiricalStatusAuthority
+
     promotedEmpiricalStatus :
       P0.EmpiricalReceiptStatus
 
@@ -82,6 +88,146 @@ data OriginReceiptPromotionExternalBlockedField : Set where
   originReceiptStillEmpiricalBlocked :
     OriginReceiptPromotionExternalBlockedField
 
+data CurrentOriginReceiptPromotedStatusImpossible : Set where
+
+currentOriginPromotedStatusAuthorityUnavailable :
+  ExternalOriginPromotedEmpiricalStatusAuthority →
+  CurrentOriginReceiptPromotedStatusImpossible
+currentOriginPromotedStatusAuthorityUnavailable ()
+
+currentOriginPromotedStatusReceiptUnavailable :
+  PromotedOriginEmpiricalStatusReceipt →
+  CurrentOriginReceiptPromotedStatusImpossible
+currentOriginPromotedStatusReceiptUnavailable receipt =
+  currentOriginPromotedStatusAuthorityUnavailable
+    (PromotedOriginEmpiricalStatusReceipt.externalStatusAuthority receipt)
+
+currentOriginReceiptCannotSupplyPromotedStatus :
+  P0.OriginObservationReceipt.empiricalStatus
+    Origin.minimalCredibleShiftOriginObservationReceipt
+  ≡
+  P0.empiricalEqualityOnly
+  ⊎
+  P0.OriginObservationReceipt.empiricalStatus
+    Origin.minimalCredibleShiftOriginObservationReceipt
+  ≡
+  P0.empiricalDiagnosticOnly →
+  CurrentOriginReceiptPromotedStatusImpossible
+currentOriginReceiptCannotSupplyPromotedStatus (inj₁ ())
+currentOriginReceiptCannotSupplyPromotedStatus (inj₂ ())
+
+currentOriginObservationMapCompatibility :
+  (carrier : Origin.MinimalCredibleShiftOriginCarrier) →
+  Origin.originObservationMapMinimalCredibleShift carrier
+  ≡
+  P0.OriginObservationReceipt.originObservationMap
+    Origin.minimalCredibleShiftOriginObservationReceipt
+    carrier
+currentOriginObservationMapCompatibility carrier =
+  refl
+
+currentClosureBoundaryPreservation :
+  Origin.MinimalCredibleShiftClosureBoundary →
+  Origin.MinimalCredibleShiftClosureBoundary
+currentClosureBoundaryPreservation boundary =
+  boundary
+
+currentClosureBoundaryReflectsCurrentReceipt :
+  Origin.MinimalCredibleShiftClosureBoundary →
+  P0.OriginObservationReceipt.closureClaimBoundary
+    Origin.minimalCredibleShiftOriginObservationReceipt
+currentClosureBoundaryReflectsCurrentReceipt boundary =
+  boundary
+
+------------------------------------------------------------------------
+-- K8c / Gauss: source scan diagnostic.
+--
+-- The current repo surfaces include a surrogate `P0.EmpiricalAdequacy` over
+-- the shift-pressure carrier, but no accepted origin authority or bridge that
+-- promotes the concrete MinimalCredibleShift origin receipt.  The diagnostic
+-- below keeps that distinction typed: the current module can eliminate any
+-- attempted promoted-status receipt because such a receipt must carry the
+-- constructorless external authority token.
+
+data OriginEmpiricalAuthoritySourceScanResult : Set where
+  noCurrentOriginAuthoritySourceFound :
+    OriginEmpiricalAuthoritySourceScanResult
+
+data OriginPromotionExternalReceiptNeeded : Set where
+  needExternalOriginPromotedEmpiricalStatusAuthority :
+    OriginPromotionExternalReceiptNeeded
+  needOriginEmpiricalAdequacyBridgeForCurrentReceipt :
+    OriginPromotionExternalReceiptNeeded
+
+record CurrentOriginAuthoritySourceDiagnostic : Setω where
+  field
+    sourceScanResult :
+      OriginEmpiricalAuthoritySourceScanResult
+
+    currentEmpiricalStatusBlocked :
+      P0.OriginObservationReceipt.empiricalStatus
+        Origin.minimalCredibleShiftOriginObservationReceipt
+      ≡
+      P0.empiricalBlocked
+
+    currentReceiptCannotPromoteItself :
+      P0.OriginObservationReceipt.empiricalStatus
+        Origin.minimalCredibleShiftOriginObservationReceipt
+      ≡
+      P0.empiricalEqualityOnly
+      ⊎
+      P0.OriginObservationReceipt.empiricalStatus
+        Origin.minimalCredibleShiftOriginObservationReceipt
+      ≡
+      P0.empiricalDiagnosticOnly →
+      CurrentOriginReceiptPromotedStatusImpossible
+
+    promotedStatusReceiptEliminatesHere :
+      PromotedOriginEmpiricalStatusReceipt →
+      CurrentOriginReceiptPromotedStatusImpossible
+
+    missingExternalAuthorityReceipt :
+      OriginPromotionExternalReceiptNeeded
+
+    missingCurrentOriginAdequacyBridge :
+      OriginPromotionExternalReceiptNeeded
+
+    acceptedSurrogateBoundary :
+      String
+
+    requiredExternalReceipt :
+      String
+
+    noPromotionBoundary :
+      List String
+
+canonicalCurrentOriginAuthoritySourceDiagnostic :
+  CurrentOriginAuthoritySourceDiagnostic
+canonicalCurrentOriginAuthoritySourceDiagnostic =
+  record
+    { sourceScanResult =
+        noCurrentOriginAuthoritySourceFound
+    ; currentEmpiricalStatusBlocked =
+        refl
+    ; currentReceiptCannotPromoteItself =
+        currentOriginReceiptCannotSupplyPromotedStatus
+    ; promotedStatusReceiptEliminatesHere =
+        currentOriginPromotedStatusReceiptUnavailable
+    ; missingExternalAuthorityReceipt =
+        needExternalOriginPromotedEmpiricalStatusAuthority
+    ; missingCurrentOriginAdequacyBridge =
+        needOriginEmpiricalAdequacyBridgeForCurrentReceipt
+    ; acceptedSurrogateBoundary =
+        "surrogate or packaged empirical adequacy surfaces do not promote the MinimalCredibleShift origin receipt"
+    ; requiredExternalReceipt =
+        "supply ExternalOriginPromotedEmpiricalStatusAuthority or a P0.EmpiricalAdequacy bridge whose carrier/observation pair is the current MinimalCredibleShift origin receipt"
+    ; noPromotionBoundary =
+        "K8c found no existing repo surface that can construct the external origin promoted-status authority"
+        ∷ "Any PromotedOriginEmpiricalStatusReceipt in this module eliminates through its constructorless authority field"
+        ∷ "The current MinimalCredibleShift origin receipt remains empiricalBlocked"
+        ∷ []
+    }
+
 record OriginReceiptPromotionExternalCurrentStatus : Setω where
   field
     originObservationReceipt :
@@ -96,10 +242,45 @@ record OriginReceiptPromotionExternalCurrentStatus : Setω where
       ≡
       P0.empiricalBlocked
 
+    currentReceiptCannotPromoteItself :
+      P0.OriginObservationReceipt.empiricalStatus
+        Origin.minimalCredibleShiftOriginObservationReceipt
+      ≡
+      P0.empiricalEqualityOnly
+      ⊎
+      P0.OriginObservationReceipt.empiricalStatus
+        Origin.minimalCredibleShiftOriginObservationReceipt
+      ≡
+      P0.empiricalDiagnosticOnly →
+      CurrentOriginReceiptPromotedStatusImpossible
+
+    canonicalOriginMapCompatibility :
+      (carrier : Origin.MinimalCredibleShiftOriginCarrier) →
+      Origin.originObservationMapMinimalCredibleShift carrier
+      ≡
+      P0.OriginObservationReceipt.originObservationMap
+        Origin.minimalCredibleShiftOriginObservationReceipt
+        carrier
+
+    canonicalClosureBoundaryPreservation :
+      Origin.MinimalCredibleShiftClosureBoundary →
+      Origin.MinimalCredibleShiftClosureBoundary
+
+    canonicalClosureBoundaryReflectsCurrentReceipt :
+      Origin.MinimalCredibleShiftClosureBoundary →
+      P0.OriginObservationReceipt.closureClaimBoundary
+        Origin.minimalCredibleShiftOriginObservationReceipt
+
+    currentAuthoritySourceDiagnostic :
+      CurrentOriginAuthoritySourceDiagnostic
+
     blockedFields :
       List OriginReceiptPromotionExternalBlockedField
 
     requiredExternalReceipt :
+      String
+
+    promotedStatusAuthorityBoundary :
       String
 
     observationMapBoundary :
@@ -121,21 +302,32 @@ canonicalOriginReceiptPromotionExternalCurrentStatus =
         Origin.minimalCredibleShiftBlockedOriginInstanceValue
     ; currentEmpiricalStatusUnchanged =
         refl
+    ; currentReceiptCannotPromoteItself =
+        currentOriginReceiptCannotSupplyPromotedStatus
+    ; canonicalOriginMapCompatibility =
+        currentOriginObservationMapCompatibility
+    ; canonicalClosureBoundaryPreservation =
+        currentClosureBoundaryPreservation
+    ; canonicalClosureBoundaryReflectsCurrentReceipt =
+        currentClosureBoundaryReflectsCurrentReceipt
+    ; currentAuthoritySourceDiagnostic =
+        canonicalCurrentOriginAuthoritySourceDiagnostic
     ; blockedFields =
         missingEmpiricalAdequacyBridgeOrPromotedStatus
-        ∷ missingOriginObservationMapCompatibility
-        ∷ missingClosureBoundaryPreservation
         ∷ originReceiptStillEmpiricalBlocked
         ∷ []
     ; requiredExternalReceipt =
-        "provide an empirical adequacy bridge or promoted empirical status plus origin-map compatibility and closure-boundary preservation"
+        "provide an empirical adequacy bridge or externally-authorized promoted empirical status plus origin-map compatibility and closure-boundary preservation"
+    ; promotedStatusAuthorityBoundary =
+        "a promoted empirical status receipt requires ExternalOriginPromotedEmpiricalStatusAuthority; this module provides no constructor for that authority"
     ; observationMapBoundary =
-        "external origin observation map must agree with originObservationMapMinimalCredibleShift on the current carrier"
+        "canonical current origin observation map compatibility is discharged; any external origin observation map must still agree with originObservationMapMinimalCredibleShift on the current carrier"
     ; closureBoundary =
-        "external promotion must preserve the current closure-claim boundary; origin observation alone does not promote closure"
+        "canonical current closure-boundary preservation is discharged by identity; origin observation alone still does not promote closure"
     ; noPromotionBoundary =
         "This module is an external receipt obligation only"
         ∷ "The existing MinimalCredibleShift origin receipt remains empiricalBlocked"
+        ∷ "No ExternalOriginPromotedEmpiricalStatusAuthority is constructed here"
         ∷ "No P0.OriginReceipt or W3 empirical adequacy bridge is constructed here"
         ∷ []
     }

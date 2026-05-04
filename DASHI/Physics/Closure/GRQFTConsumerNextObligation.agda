@@ -130,16 +130,65 @@ record GRQFTClosurePromotionReceipt : Setω where
 data GRQFTConsumerMissingUpstreamField : Set where
   missingPromotionAuthorityToken :
     GRQFTConsumerMissingUpstreamField
-  missingStressEnergyToCurvatureLaw :
+  missingGREquationLaw :
     GRQFTConsumerMissingUpstreamField
-  missingEinsteinEquationConsumer :
+  missingGREquationLawAtConsumer :
     GRQFTConsumerMissingUpstreamField
-  missingSpinorGaugeRepresentationLaw :
+  missingQFTInteractionLaw :
     GRQFTConsumerMissingUpstreamField
-  missingInteractionClosureLaw :
+  missingQFTInteractionLawAtConsumer :
     GRQFTConsumerMissingUpstreamField
   missingEmpiricalGRQFTValidation :
     GRQFTConsumerMissingUpstreamField
+
+record GRQFTClosurePromotionReceiptMissingFields : Set where
+  field
+    missingAuthority :
+      GRQFTConsumerMissingUpstreamField
+
+    missingGRLaw :
+      GRQFTConsumerMissingUpstreamField
+
+    missingGRConsumerLaw :
+      GRQFTConsumerMissingUpstreamField
+
+    missingQFTLaw :
+      GRQFTConsumerMissingUpstreamField
+
+    missingQFTConsumerLaw :
+      GRQFTConsumerMissingUpstreamField
+
+    missingEmpiricalValidation :
+      GRQFTConsumerMissingUpstreamField
+
+    receiptFieldDiagnostic :
+      List String
+
+canonicalGRQFTClosurePromotionReceiptMissingFields :
+  GRQFTClosurePromotionReceiptMissingFields
+canonicalGRQFTClosurePromotionReceiptMissingFields =
+  record
+    { missingAuthority =
+        missingPromotionAuthorityToken
+    ; missingGRLaw =
+        missingGREquationLaw
+    ; missingGRConsumerLaw =
+        missingGREquationLawAtConsumer
+    ; missingQFTLaw =
+        missingQFTInteractionLaw
+    ; missingQFTConsumerLaw =
+        missingQFTInteractionLawAtConsumer
+    ; missingEmpiricalValidation =
+        missingEmpiricalGRQFTValidation
+    ; receiptFieldDiagnostic =
+        "GRQFTClosurePromotionReceipt requires an external promotionAuthority"
+        ∷ "GRQFTClosurePromotionReceipt requires grEquationLaw"
+        ∷ "GRQFTClosurePromotionReceipt requires grEquationLawAtConsumer"
+        ∷ "GRQFTClosurePromotionReceipt requires qftInteractionLaw"
+        ∷ "GRQFTClosurePromotionReceipt requires qftInteractionLawAtConsumer"
+        ∷ "Downstream promotion also requires empirical GR/QFT validation outside known-limits recovery"
+        ∷ []
+    }
 
 record GRQFTConsumerNextObligationCurrentStatus : Setω where
   field
@@ -157,6 +206,9 @@ record GRQFTConsumerNextObligationCurrentStatus : Setω where
 
     qftKnownLimitsStatus :
       KLS.QFTLikeStatus
+
+    receiptMissingFields :
+      GRQFTClosurePromotionReceiptMissingFields
 
     blockedFields :
       List GRQFTConsumerMissingUpstreamField
@@ -190,16 +242,18 @@ canonicalGRQFTConsumerNextObligationCurrentStatus =
         KLS.KnownLimitsStatus.grLike KLS.canonicalKnownLimitsStatus
     ; qftKnownLimitsStatus =
         KLS.KnownLimitsStatus.qftLike KLS.canonicalKnownLimitsStatus
+    ; receiptMissingFields =
+        canonicalGRQFTClosurePromotionReceiptMissingFields
     ; blockedFields =
         missingPromotionAuthorityToken
-        ∷ missingStressEnergyToCurvatureLaw
-        ∷ missingEinsteinEquationConsumer
-        ∷ missingSpinorGaugeRepresentationLaw
-        ∷ missingInteractionClosureLaw
+        ∷ missingGREquationLaw
+        ∷ missingGREquationLawAtConsumer
+        ∷ missingQFTInteractionLaw
+        ∷ missingQFTInteractionLawAtConsumer
         ∷ missingEmpiricalGRQFTValidation
         ∷ []
     ; requiredNextReceipt =
-        "provide external authority plus GR equation and QFT interaction consumer laws before downstream closure promotion"
+        "provide external authority, GR equation law, QFT interaction law, consumer law witnesses, and empirical GR/QFT validation before downstream closure promotion"
     ; knownLimitsBoundary =
         "known-limits GR/QFT bridges are theorem-backed local recovery surfaces, not full GR/QFT closure"
     ; closurePromotionBoundary =
@@ -210,8 +264,8 @@ canonicalGRQFTConsumerNextObligationCurrentStatus =
         ∷ []
     ; noPromotionBoundary =
         "This module is a W5 next-obligation surface only"
-        ∷ "No Einstein equation recovery theorem is promoted here"
-        ∷ "No QFT interaction-closure theorem is promoted here"
+        ∷ "No GR equation law or consumer proof is promoted here"
+        ∷ "No QFT interaction law or consumer proof is promoted here"
         ∷ "No empirical GR/QFT validation claim is made here"
         ∷ []
     }
@@ -220,4 +274,10 @@ canonicalGRQFTConsumerBlockedFields :
   List GRQFTConsumerMissingUpstreamField
 canonicalGRQFTConsumerBlockedFields =
   GRQFTConsumerNextObligationCurrentStatus.blockedFields
+    canonicalGRQFTConsumerNextObligationCurrentStatus
+
+canonicalGRQFTConsumerReceiptMissingFields :
+  GRQFTClosurePromotionReceiptMissingFields
+canonicalGRQFTConsumerReceiptMissingFields =
+  GRQFTConsumerNextObligationCurrentStatus.receiptMissingFields
     canonicalGRQFTConsumerNextObligationCurrentStatus

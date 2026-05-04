@@ -55,6 +55,22 @@ package "2c. Casual-viewer truth board" {
   rectangle "Still open\nnatural convergence-rate law\nempirical adequacy theorem\nchemistry relaxation/spectra/bonding\ncontinuum / MDL seam / p2 bridge\nNGram / ITIR consumer wiring\n[requires new theorem owners]" as TruthOpen #fecaca
 }
 
+package "2d. Physics lane maturity table" {
+  rectangle "Maxwell / gauge\npresent + bridged\npackaged partial\nnot theorem-complete\nnot empirically validated" as RoadmapMaturityMaxwell #fef3c7
+  rectangle "Schrodinger\npresent + bridged + packaged\nnot theorem-complete\nnot empirically validated" as RoadmapMaturitySchrodinger #dbeafe
+  rectangle "GR curvature\npresent + bridged + packaged\nnot theorem-complete\nnot empirically validated" as RoadmapMaturityGR #fef3c7
+  rectangle "Predictions\npresent + bridged + packaged\nnot theorem-complete\nnot empirically validated" as RoadmapMaturityPrediction #fee2e2
+}
+
+package "2e. Roadmap to complete verified unification" {
+  rectangle "1. Spine stability\ncanonical theorem owners\nrevalidated" as RoadmapTargetSpine #dbeafe
+  rectangle "2. Lane theorem completion\nMaxwell + Schrodinger + GR\nclosed or obstructed" as RoadmapTargetTheorems #fef3c7
+  rectangle "G4 / W-GR owner\nW5 GR/QFT consumer\ncurvature + stress-energy\n+ interaction closure receipts\n[tracking only]" as RoadmapTargetGR #fef3c7
+  rectangle "3. Empirical validation\naccepted authority,\ncalibration, projection,\ncomparison receipts" as RoadmapTargetEmpirical #fee2e2
+  rectangle "4. Cross-lane consistency\nsingle carrier/spine\ncommuting package" as RoadmapTargetConsistency #fef3c7
+  rectangle "5. Publishable target\ncomplete and verified\nphysics unification" as RoadmapTargetClaim #bbf7d0
+}
+
 package "3. Current DASHI correspondences" {
   rectangle "Canonical proof spine + theorem owner\nquadratic -> signature -> Clifford -> closure\nOwner: UnifiedPhysicsTheorem\nStatus: repo proved + theorem-owned strong claim\nWhat it currently gives:\n4D-signature-facing formal core" as DashiSpine #fef3c7
   rectangle "Known-limits GR/QFT bridges\nStatus: repo bridge, theorem-backed regimes\nWhat they currently mean:\nregime recovery surfaces, not full recovery" as DashiBridges #fef3c7
@@ -125,6 +141,20 @@ TruthOpen --> GapAtomic : chemistry theorem
 TruthOpen --> GapInterop : adapter/import wiring
 TruthOpen --> GapHigherStructure : chart-language gates
 TruthOpen --> GapCrossScale : scale-unification gates
+RoadmapMaturityMaxwell --> GapGaugeMatter : present lane, closure open
+RoadmapMaturitySchrodinger --> DashiDynamics : packaged dynamics consumer
+RoadmapMaturityGR --> GapRecovery : bridge / consumer lane
+RoadmapMaturityPrediction --> DashiEmpirical : empirical lane, authority blocked
+RoadmapMaturityMaxwell --> RoadmapTargetTheorems
+RoadmapMaturitySchrodinger --> RoadmapTargetTheorems
+RoadmapMaturityGR --> RoadmapTargetGR
+RoadmapTargetGR --> RoadmapTargetTheorems
+RoadmapMaturityPrediction --> RoadmapTargetEmpirical
+DashiSpine --> RoadmapTargetSpine
+RoadmapTargetSpine --> RoadmapTargetConsistency
+RoadmapTargetTheorems --> RoadmapTargetConsistency
+RoadmapTargetEmpirical --> RoadmapTargetConsistency
+RoadmapTargetConsistency --> RoadmapTargetClaim
 
 CoreSpineTri --> CoreSpineMetric : vector lift
 CoreSpineMetric --> CoreSpineContraction : agreement-ultrametric maps
@@ -169,6 +199,7 @@ WorkerBoard --> GapDynamics : W2
 WorkerBoard --> DashiEmpirical : W3
 WorkerBoard --> BlockerChemistry : W4
 WorkerBoard --> BlockerRecovery : W5
+WorkerBoard --> RoadmapTargetGR : W5 owns W-GR / G4
 WorkerBoard --> GapInterop : W6
 WorkerBoard --> GapHigherStructure : W7
 WorkerBoard --> GapCrossScale : W7
@@ -190,6 +221,7 @@ GapAdapter --> BlockerMDL
 GapAdapter --> BlockerAdapter
 GapRecovery --> GapRecoveryConsumer
 GapRecovery --> BlockerRecovery
+GapRecovery --> RoadmapTargetGR : G4 closure receipts
 GapRecoveryConsumer --> Solved
 GapAtomic --> BlockerChemistry
 BlockerBrain --> Solved

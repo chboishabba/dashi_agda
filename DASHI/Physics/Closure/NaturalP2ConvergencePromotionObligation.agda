@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NaturalP2ConvergencePromotionObligation where
 open import Agda.Primitive using (Set; Setω)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.CanonicalDynamicsLawTheorem as CDT
@@ -80,6 +81,16 @@ record NaturalP2ConvergencePromotionReceipt : Setω where
     realizedMetricFamilyReceipt :
       CDT.RealizationIndexedPointedMetricConvergenceTarget
 
+naturalP2ConvergencePromotionAuthorityUnavailable :
+  NaturalP2ConvergencePromotionAuthorityToken → ⊥
+naturalP2ConvergencePromotionAuthorityUnavailable ()
+
+naturalP2ConvergencePromotionReceiptImpossible :
+  NaturalP2ConvergencePromotionReceipt → ⊥
+naturalP2ConvergencePromotionReceiptImpossible receipt =
+  naturalP2ConvergencePromotionAuthorityUnavailable
+    (NaturalP2ConvergencePromotionReceipt.promotionAuthority receipt)
+
 ------------------------------------------------------------------------
 -- Current non-promoting status.
 
@@ -88,16 +99,40 @@ data NaturalP2ConvergenceMissingField : Set where
     NaturalP2ConvergenceMissingField
   missingNaturalBridgeOrObstruction :
     NaturalP2ConvergenceMissingField
+  missingNaturalityCarrier :
+    NaturalP2ConvergenceMissingField
+  missingP2SingleStepCarrier :
+    NaturalP2ConvergenceMissingField
+  missingP2DoubleStepCarrier :
+    NaturalP2ConvergenceMissingField
   missingP2NaturalityLaw :
     NaturalP2ConvergenceMissingField
   missingP2CoherenceLaw :
     NaturalP2ConvergenceMissingField
   missingCarrierTransportLaw :
     NaturalP2ConvergenceMissingField
+  missingTransportPreservesConvergenceLaw :
+    NaturalP2ConvergenceMissingField
   missingCarrierGeneralConvergenceRate :
+    NaturalP2ConvergenceMissingField
+  missingRealizationUniformityLaw :
     NaturalP2ConvergenceMissingField
   missingUniformRealizationRateBeyondShiftFlow :
     NaturalP2ConvergenceMissingField
+
+record NaturalP2ConvergencePromotionImpossibilityDiagnostic : Setω where
+  field
+    authorityUnavailable :
+      NaturalP2ConvergencePromotionAuthorityToken → ⊥
+
+    receiptImpossible :
+      NaturalP2ConvergencePromotionReceipt → ⊥
+
+    typedMissingFields :
+      List NaturalP2ConvergenceMissingField
+
+    obstructionSummary :
+      String
 
 record NaturalP2ConvergencePromotionCurrentStatus : Setω where
   field
@@ -116,6 +151,9 @@ record NaturalP2ConvergencePromotionCurrentStatus : Setω where
 
     landedRealizationMetricFamily :
       CDT.RealizationIndexedPointedMetricConvergenceTarget
+
+    impossibilityDiagnostic :
+      NaturalP2ConvergencePromotionImpossibilityDiagnostic
 
     missingFields :
       List NaturalP2ConvergenceMissingField
@@ -147,13 +185,41 @@ currentNaturalP2ConvergencePromotionStatus =
     ; landedRealizationMetricFamily =
         CDT.CanonicalDynamicsLawTheorem.realizationMetricConvergenceFamily
           CDT.canonicalDynamicsLawTheorem
+    ; impossibilityDiagnostic =
+        record
+          { authorityUnavailable =
+              naturalP2ConvergencePromotionAuthorityUnavailable
+          ; receiptImpossible =
+              naturalP2ConvergencePromotionReceiptImpossible
+          ; typedMissingFields =
+              missingPromotionAuthorityToken
+              ∷ missingNaturalBridgeOrObstruction
+              ∷ missingNaturalityCarrier
+              ∷ missingP2SingleStepCarrier
+              ∷ missingP2DoubleStepCarrier
+              ∷ missingP2NaturalityLaw
+              ∷ missingP2CoherenceLaw
+              ∷ missingCarrierTransportLaw
+              ∷ missingTransportPreservesConvergenceLaw
+              ∷ missingCarrierGeneralConvergenceRate
+              ∷ missingRealizationUniformityLaw
+              ∷ missingUniformRealizationRateBeyondShiftFlow
+              ∷ []
+          ; obstructionSummary =
+              "NaturalP2ConvergencePromotionReceipt is uninhabitable here because the authority token has no constructor; landed shift-flow convergence does not provide natural p2 or carrier-general convergence authority"
+          }
     ; missingFields =
         missingPromotionAuthorityToken
         ∷ missingNaturalBridgeOrObstruction
+        ∷ missingNaturalityCarrier
+        ∷ missingP2SingleStepCarrier
+        ∷ missingP2DoubleStepCarrier
         ∷ missingP2NaturalityLaw
         ∷ missingP2CoherenceLaw
         ∷ missingCarrierTransportLaw
+        ∷ missingTransportPreservesConvergenceLaw
         ∷ missingCarrierGeneralConvergenceRate
+        ∷ missingRealizationUniformityLaw
         ∷ missingUniformRealizationRateBeyondShiftFlow
         ∷ []
     ; requiredNextReceipt =

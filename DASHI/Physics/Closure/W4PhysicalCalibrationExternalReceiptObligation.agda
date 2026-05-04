@@ -4,6 +4,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ChemistryPhysicalHandoffDiagnostic as Handoff
@@ -121,8 +122,35 @@ data Candidate256PhysicalCalibrationExternalBlockedField : Set where
     Candidate256PhysicalCalibrationExternalBlockedField
   missingExternalFactorizationLaw :
     Candidate256PhysicalCalibrationExternalBlockedField
-  missingExternalDimensionalPreservation :
+  missingExternalDimensionalPreservationLaw :
     Candidate256PhysicalCalibrationExternalBlockedField
+  missingExternalDimensionalPreservationAtWitness :
+    Candidate256PhysicalCalibrationExternalBlockedField
+
+candidate256PhysicalCalibrationAuthorityTokenImpossibleHere :
+  Gate.Candidate256PhysicalCalibrationAuthorityToken →
+  ⊥
+candidate256PhysicalCalibrationAuthorityTokenImpossibleHere ()
+
+candidate256PhysicalCalibrationExternalReceiptImpossibleHere :
+  Candidate256PhysicalCalibrationExternalReceipt →
+  ⊥
+candidate256PhysicalCalibrationExternalReceiptImpossibleHere receipt =
+  candidate256PhysicalCalibrationAuthorityTokenImpossibleHere
+    (Candidate256PhysicalCalibrationExternalReceipt.calibrationAuthority
+      receipt)
+
+canonicalCandidate256PhysicalCalibrationExternalBlockedFields :
+  List Candidate256PhysicalCalibrationExternalBlockedField
+canonicalCandidate256PhysicalCalibrationExternalBlockedFields =
+  missingExternalCalibrationAuthorityToken
+  ∷ missingExternalPhysicalUnitCarrier
+  ∷ missingExternalNatToUnitCalibrationMap
+  ∷ missingExternalCalibratedQuotientScaleMap
+  ∷ missingExternalFactorizationLaw
+  ∷ missingExternalDimensionalPreservationLaw
+  ∷ missingExternalDimensionalPreservationAtWitness
+  ∷ []
 
 record Candidate256PhysicalCalibrationExternalReceiptCurrentStatus : Setω where
   field
@@ -144,13 +172,23 @@ record Candidate256PhysicalCalibrationExternalReceiptCurrentStatus : Setω where
     requiredExternalReceipt : String
     authorityBoundary : String
     calibrationBoundary : String
+    factorizationBoundary : String
     dimensionalBoundary : String
+    downstreamPhysicalBoundary : String
 
     noAuthorityConstructedHere :
       List String
 
     noPromotionBoundary :
       List String
+
+    impossibleWithoutExternalAuthority :
+      Gate.Candidate256PhysicalCalibrationAuthorityToken →
+      ⊥
+
+    impossibleReceiptWithoutExternalAuthority :
+      Candidate256PhysicalCalibrationExternalReceipt →
+      ⊥
 
 canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus :
   Candidate256PhysicalCalibrationExternalReceiptCurrentStatus
@@ -163,13 +201,7 @@ canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus =
     ; scaleSettingStatus =
         Scale.candidate256ScaleSettingObligationStatus
     ; blockedExternalFields =
-        missingExternalCalibrationAuthorityToken
-        ∷ missingExternalPhysicalUnitCarrier
-        ∷ missingExternalNatToUnitCalibrationMap
-        ∷ missingExternalCalibratedQuotientScaleMap
-        ∷ missingExternalFactorizationLaw
-        ∷ missingExternalDimensionalPreservation
-        ∷ []
+        canonicalCandidate256PhysicalCalibrationExternalBlockedFields
     ; gateBlockedIngredients =
         Gate.Candidate256PhysicalCalibrationCurrentStatus.blockedIngredients
           Gate.canonicalCandidate256PhysicalCalibrationCurrentStatus
@@ -179,11 +211,16 @@ canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus =
         "Candidate256PhysicalCalibrationAuthorityToken has no constructor in the current repo"
     ; calibrationBoundary =
         "physical unit carrier, Nat-to-unit calibration map, and calibrated quotient scale map remain external obligations"
+    ; factorizationBoundary =
+        "the calibrated quotient scale map must factor through candidate256SurrogateScale before it can feed the physical scale-setting lane"
     ; dimensionalBoundary =
-        "dimensional preservation must be supplied externally before the scale-setting gate can be inhabited"
+        "dimensional preservation requires both the law family and its inhabitant at every Candidate256 quotient-law witness"
+    ; downstreamPhysicalBoundary =
+        "spectral observable mapping, bonding interpretation, and empirical physical validation remain later strict-physical lanes after calibration"
     ; noAuthorityConstructedHere =
         "This module does not construct Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "This module does not inhabit Candidate256PhysicalCalibrationExternalReceipt"
+        ∷ "Any total receipt construction is impossible here until an external authority token is supplied outside this constructorless boundary"
         ∷ []
     ; noPromotionBoundary =
         "The current status is obligations-needed only"
@@ -191,4 +228,8 @@ canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus =
         ∷ "No Candidate256PhysicalCalibrationGate value is constructed here"
         ∷ "No spectra, bonding, empirical validation, or physical closure claim is made here"
         ∷ []
+    ; impossibleWithoutExternalAuthority =
+        candidate256PhysicalCalibrationAuthorityTokenImpossibleHere
+    ; impossibleReceiptWithoutExternalAuthority =
+        candidate256PhysicalCalibrationExternalReceiptImpossibleHere
     }

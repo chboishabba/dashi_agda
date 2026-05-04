@@ -30,6 +30,90 @@ canonical closure spine:
 - `DASHI/Physics/CRTPeriodJFixedBridge.agda`
 - `DASHI/Physics/Closure/TemporalSheafProofObligations.agda`
 - `DASHI/Physics/Closure/P0BlockerObligationIndex.agda`
+- `DASHI/Physics/Closure/W3AcceptedAuthorityRouteNarrowing.agda`
+- `DASHI/Physics/Closure/W4PhysicalCalibrationRouteNarrowing.agda`
+- `DASHI/Physics/Closure/P0SecondaryObligationQueue.agda`
+- `DASHI/Physics/Closure/UnifiedEnergyFunctionalSurface.agda`
+- `DASHI/Physics/Closure/BlockerKillConditions.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservable.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnits.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFit.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservableIntake.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnitsIntake.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFitAuthorityBoundary.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservableSourceDiagnostic.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnitsSourceDiagnostic.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFitRealDatasetRouteDiagnostic.agda`
+- `DASHI/Physics/Closure/EmpiricalCalibrationExternalReceiptRequestPack.agda`
+- `DASHI/Physics/Closure/W3AcceptedAuthorityExternalReceiptRequestPack.agda`
+- `DASHI/Physics/Closure/W4PhysicalCalibrationExternalReceiptRequestPack.agda`
+- `DASHI/Physics/Closure/P0ProviderReceiptRequestIndex.agda`
+- `DASHI/Physics/Closure/HEPDataProviderReceiptRequestPack.agda`
+- `DASHI/Physics/Closure/HEPDataResidualBridgeWorkerQueue.agda`
+- `DASHI/Physics/Closure/HEPDataResidualObservableClassRequest.agda`
+- `DASHI/Physics/Closure/HEPDataDefectProjectionDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataResidualSourceCandidateDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataResidualProviderReceiptRequestPack.agda`
+- `DASHI/Physics/Closure/HEPDataNonCollapseObservableObligation.agda`
+- `DASHI/Physics/Closure/HEPDataResidualComparisonLawRequest.agda`
+- `DASHI/Physics/Closure/HEPDataEmpiricalResidualBridgeCore.agda`
+- `DASHI/Physics/Closure/HEPDataResidualProviderPayloadIntake.agda`
+- `DASHI/Physics/Closure/HEPDataResidualBridgeAuthorityGate.agda`
+- `DASHI/Physics/Closure/HEPDataExternalResidualWitnessPayload.agda`
+- `DASHI/Physics/Closure/HEPDataExternalResidualWitnessCandidateDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataResidualObservableClassCandidateDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataResidualObservableClassProtoReceipt.agda`
+- `DASHI/Physics/Closure/HEPDataResidualObservableClassExternalAlignment.agda`
+- `DASHI/Physics/Closure/HEPDataEmpiricalAuthorityReceiptCollation.agda`
+- `DASHI/Physics/Closure/HEPDataCMSSMP20003ExternalSourceAuthorityReceipt.agda`
+- `DASHI/Physics/Closure/HEPDataAdapterTransformReceiptRequestDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataRatioAdapterTransformReceiptRequest.agda`
+- `DASHI/Physics/Closure/HEPDataPredictionFreezeProjectionRunRequest.agda`
+- `DASHI/Physics/Closure/HEPDataRatioTableArtifactRequest.agda`
+- `DASHI/Physics/Closure/HEPDataRatioTableArtifactReceipt.agda`
+- `DASHI/Physics/Closure/HEPDataDASHIProjectionRunnerDiscovery.agda`
+- `DASHI/Physics/Closure/HEPDataPredictionFreezeIdentityDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataRatioComparisonLawIntakeRequest.agda`
+- `DASHI/Physics/Closure/HEPDataT43ProjectionRunnerContract.agda`
+- `DASHI/Physics/Closure/HEPDataT43ProjectionRunnerImplementationAttempt.agda`
+- `DASHI/Physics/Closure/HEPDataT43PredictionAPIRouteDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataT43SudakovBaselinePredictionHook.agda`
+- `DASHI/Physics/Closure/HEPDataT43DASHINativeAPIRouteDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataT43DASHINativeProjectionReceipt.agda`
+- `DASHI/Physics/Closure/HEPDataT43DASHINativeProjectionRunDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataT43DASHINativeComparisonDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataT43SigmaDASHIModelGapRefinementDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataT43NeutralCurrentContinuumRefinementDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataT43PosteriorShapeResponseDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataT45HoldoutValidationDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataMassWindowGeneralPredictionLawDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataMassWindowGeneralPredictionRunDiagnostic.agda`
+- `DASHI/Physics/Closure/HEPDataObservableDefinitionReceipt.agda`
+- `DASHI/Physics/Closure/HEPDataPredictionFreezePolicyRequest.agda`
+- `DASHI/Physics/Closure/HEPDataComparisonLawReceiptRequest.agda`
+- `DASHI/Physics/Closure/W4CalibrationRatioZPeakReceiptRequestSurface.agda`
+- `DASHI/Physics/Closure/W5W6PhysicsConsumerSourceInventory.agda`
+- `DASHI/Physics/Closure/LilaE8RootSystemLocalSourceDiagnostic.agda`
+- `DASHI/Physics/Closure/LilaE8RootSystemLatticeReceipt.agda`
+- `DASHI/Physics/Closure/LilaE8InitialisationPriorNote.agda`
+- `DASHI/Physics/Closure/LilaE8RootEnumeration.agda`
+- `DASHI/Physics/Closure/LilaE8RootEnumerationReceiptR2.agda`
+- `DASHI/Physics/Closure/LamTungE8AdapterSurface.agda`
+- `DASHI/Physics/Closure/LilaE8ThetaJBridgeSurface.agda`
+- `DASHI/Physics/Closure/LilaE8PhiStarProjectionReceipt.agda`
+- `DASHI/Physics/Closure/SiblingEvidenceInventory.agda`
+- `DASHI/Physics/Closure/SiblingEvidenceExtractionDiagnostic.agda`
+- `DASHI/Physics/Closure/SiblingMathPortingMatrix.agda`
+- `DASHI/Physics/Closure/CancellationPressureRetargetConsumerObligation.agda`
+- `DASHI/Physics/Closure/CancellationPressureRetargetConsumerSourceDiagnostic.agda`
+- `DASHI/Physics/Closure/GRQFTConsumerSourceDiagnostic.agda`
+- `DASHI/Physics/Closure/GRQFTClosurePromotionReceiptRequestPack.agda`
+- `DASHI/Interop/PNFResidualConsumerNextObligation.agda`
+- `DASHI/Interop/PNFResidualConsumerReceiptRequestPack.agda`
+- `DASHI/Physics/Closure/OriginReceiptPromotionExternalObligation.agda`
+- `DASHI/Physics/Closure/OriginReceiptPromotionExternalRequestPack.agda`
+- `DASHI/Physics/Closure/CancellationPressureCompatibilityNextObligation.agda`
+- `DASHI/Physics/Closure/CancellationPressureRetargetConsumerAcceptanceRequestPack.agda`
 
 Use these for routine theorem-edit loops and targeted bridge checks.
 
@@ -137,9 +221,235 @@ Interpretation rule:
 Board-wide smoke target:
 
 - `DASHI/Physics/Closure/P0BlockerObligationIndex.agda` imports the current
-  W1-W9 obligation/status surfaces without promoting them. Use it after
-  coordination-surface edits to confirm the worker-lane index still type-checks
-  before widening to lane-specific checks.
+  W1-W9 obligation/status surfaces, including the W3/W4 route-narrowing modules
+  the W5/W6/W9 secondary queue, the unified energy-functional surface, and the
+  Option A/B/C empirical-calibration bridge surfaces,
+  without promoting them. Use it after coordination-surface edits to confirm
+  the worker-lane index still type-checks before widening to lane-specific
+  checks.
+
+Current non-promoting energy target:
+
+- `DASHI/Physics/Closure/UnifiedEnergyFunctionalSurface.agda` records the
+  shared severity/contraction/shift-energy/J-scalar Lyapunov skeleton. Check it
+  directly when that coordination interface changes, then check
+  `P0BlockerObligationIndex.agda`.
+
+Current receipt-kill matrix target:
+
+- `DASHI/Physics/Closure/BlockerKillConditions.agda` records the W1/W2/W3/W4/
+  W5/W6/W8/W9 receipt-driven kill rows. Check it directly when blocker receipt
+  targets or no-bypass laws change, then check `P0BlockerObligationIndex.agda`.
+
+Current external bridge split targets:
+
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservable.agda` records
+  the Option A simple observable surface and its external measured-value /
+  authority boundary.
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnits.agda` records the
+  Option B unit/dimension-preserving calibration surface and its constructorless
+  numeric-calibration authority boundary.
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFit.agda` records the
+  Option C finite toy-fit surface and its non-authority boundary.
+
+Check these directly when empirical-calibration bridge interfaces change, then
+check `P0BlockerObligationIndex.agda`.
+
+Current external bridge intake targets:
+
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservableIntake.agda`
+  records the Option A measured-value / witness / authority / match-proof
+  intake receipt.
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnitsIntake.agda` records
+  the Option B unit-calibration intake receipt and consumer wiring target.
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFitAuthorityBoundary.agda`
+  records that Option C toy-fit adequacy is not external authority and names
+  the real dataset receipt route through W3/W8.
+
+Check these directly when intake receipt shapes change, then check
+`P0BlockerObligationIndex.agda`.
+
+Current source diagnostic / consumer-obligation targets:
+
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservableSourceDiagnostic.agda`
+  records that current sources do not provide the Option A measured-observable
+  receipt fields.
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnitsSourceDiagnostic.agda`
+  records that current sources do not provide the Option B unit-calibration
+  receipt fields.
+- `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFitRealDatasetRouteDiagnostic.agda`
+  records that current sources do not provide the W3/W8 real-dataset authority
+  route receipts.
+- `DASHI/Physics/Closure/CancellationPressureRetargetConsumerObligation.agda`
+  records the downstream consumer acceptance required for the W9 pressure-
+  compatible retarget receipt.
+- `DASHI/Physics/Closure/EmpiricalCalibrationExternalReceiptRequestPack.agda`
+  consolidates the A3/B3/C3 external receipt request fields without supplying
+  the missing authority, calibration, validation, or origin receipts.
+- `DASHI/Physics/Closure/GRQFTConsumerSourceDiagnostic.agda` records W5 GR/QFT
+  closure-promotion source availability and keeps the constructorless authority
+  gate explicit.
+- `DASHI/Interop/PNFResidualConsumerReceiptRequestPack.agda` packages the W6
+  runtime payload fields required before a receipt-backed PNF residual consumer
+  can be built.
+- `DASHI/Physics/Closure/CancellationPressureRetargetConsumerSourceDiagnostic.agda`
+  records that current W9 retarget consumer interface and acceptance receipt
+  sources are missing.
+- `DASHI/Physics/Closure/GRQFTClosurePromotionReceiptRequestPack.agda`
+  packages the W5 closure-promotion receipt payload required from an external
+  provider.
+- `DASHI/Physics/Closure/OriginReceiptPromotionExternalRequestPack.agda`
+  packages the W8 origin-promotion external receipt payload required from an
+  external provider.
+- `DASHI/Physics/Closure/CancellationPressureRetargetConsumerAcceptanceRequestPack.agda`
+  packages the W9 retarget consumer interface and acceptance receipt payload
+  required from an external provider.
+- `DASHI/Physics/Closure/W3AcceptedAuthorityExternalReceiptRequestPack.agda`
+  packages the W3 accepted-authority external receipt payload required from an
+  external provider.
+- `DASHI/Physics/Closure/W4PhysicalCalibrationExternalReceiptRequestPack.agda`
+  packages the W4 Candidate256 physical-calibration receipt payload required
+  from an external provider.
+- `DASHI/Physics/Closure/P0ProviderReceiptRequestIndex.agda` co-locates all
+  provider-facing P0 request packs without constructing any provider receipt.
+- `DASHI/Physics/Closure/W3AcceptedAuthorityProviderAttempt.agda` records the
+  diagnostic-only W3 provider attempt and keeps accepted authority, B4
+  promotion, origin promotion, and bridge fields external.
+- `DASHI/Physics/Closure/W4PhysicalCalibrationProviderAttempt.agda` records the
+  diagnostic-only W4 provider attempt and keeps calibration authority, physical
+  units, factorization, and dimensional preservation external.
+- `DASHI/Interop/PNFResidualConsumerRuntimeProviderAttempt.agda` records the
+  diagnostic-only W6 runtime provider attempt and keeps concrete runtime PNF
+  payload fields external.
+- `DASHI/Physics/Closure/EmpiricalCompatibilityOptionAProviderAttempt.agda`
+  records the diagnostic-only Option A measured-observable provider attempt and
+  keeps measured value, authority, calibrated state, and match proof external.
+- `DASHI/Physics/Closure/EmpiricalCompatibilityOptionBProviderAttempt.agda`
+  records the diagnostic-only Option B unit-calibration provider attempt and
+  keeps unit carrier, dimensional law, authority, and validation external.
+- `DASHI/Physics/Closure/EmpiricalCompatibilityOptionCProviderAttempt.agda`
+  records the diagnostic-only Option C real-dataset authority provider attempt
+  and keeps W3/W8 authority and validation receipts external.
+- `DASHI/Physics/Closure/HEPDataEmpiricalSourceCandidateDiagnostic.agda`
+  records that local HEPData / `MeasurementSurface` source candidates are
+  present while `HEPDataObservable` schema, checksums, golden conformance
+  tests, projection, units, comparison law, ITIR authority adapter, and
+  accepted authority receipts remain absent.
+- `DASHI/Physics/Closure/HEPDataBridgeWorkerQueue.agda` records the assigned
+  HEP-A through HEP-F bridge lanes without constructing receipts.
+- `DASHI/Physics/Closure/HEPDataObservableSchema.agda` records the HEP-A
+  observable schema/checksum request surface and its W3/W8 authority gates.
+- `DASHI/Physics/Closure/HEPDataObservableSelectionDiagnostic.agda` records
+  the HEP-B observable/table-column selection diagnostic and keeps concrete
+  selection blocked on checksum binding and accepted authority.
+- `DASHI/Physics/Closure/HEPDataUnitCalibrationRequirementDiagnostic.agda`
+  records the HEP-C unit/dimension/calibration requirement diagnostic and
+  keeps unit labels separate from physical-unit authority.
+- `DASHI/Physics/Closure/HEPDataMeasurementSurfaceProjectionRejection.agda`
+  records the HEP-D typed projection rejection for the current
+  `MeasurementSurface -> DashiState` boundary.
+- `DASHI/Physics/Closure/HEPDataComparisonAuthorityRouteDiagnostic.agda`
+  records the HEP-E comparison-law and accepted dataset authority route
+  diagnostic, blocked on HEP-B/C/D/F receipts.
+- `DASHI/Physics/Closure/HEPDataITIRAuthorityAdapterDiagnostic.agda` records
+  the HEP-F ITIR provenance scaffold diagnostic and missing HEPData authority
+  adapter/token fields.
+- `DASHI/Physics/Closure/HEPDataProviderReceiptRequestPack.agda` records the
+  consolidated HEP-A..F provider request pack and keeps observable selection,
+  residual/deviation class receipt, unit calibration, defect projection,
+  theorem-side projection, comparison law, ITIR authority, W3 accepted
+  authority, and W8 origin promotion external.
+- `DASHI/Physics/Closure/HEPDataResidualBridgeWorkerQueue.agda` records the
+  HEP-R1..R15 residual/deviation retarget assignments without constructing
+  provider receipts.
+- `DASHI/Physics/Closure/HEPDataResidualObservableClassRequest.agda` records
+  that HEPData bridge payloads must target residual/deviation/anomaly /
+  symmetry-breaking / defect-profile classes rather than raw collapsed values.
+- `DASHI/Physics/Closure/HEPDataDefectProjectionDiagnostic.agda` records the
+  theorem-side residual/deviation-to-DASHI-defect-profile diagnostic and blocks
+  raw/constant projections.
+- `DASHI/Physics/Closure/HEPDataResidualSourceCandidateDiagnostic.agda` records
+  local residual-like artifact candidates while keeping selection, checksum,
+  calibration, comparison, authority, and provider receipts absent.
+- `DASHI/Physics/Closure/HEPDataResidualProviderReceiptRequestPack.agda`
+  records the residual-specific first-missing provider receipt policy.
+- `DASHI/Physics/Closure/HEPDataNonCollapseObservableObligation.agda` records
+  the required external non-collapse witness over two observations or bins.
+- `DASHI/Physics/Closure/HEPDataResidualComparisonLawRequest.agda` records
+  residual-aware comparison-law modes and rejects raw value equality.
+- `DASHI/Physics/Closure/HEPDataEmpiricalResidualBridgeCore.agda` records the
+  generic residual observable, baseline/invariance, non-collapse witness,
+  defect projection, and comparison-soundness core without constructing a
+  HEPData receipt.
+- `DASHI/Physics/Closure/HEPDataResidualProviderPayloadIntake.agda` records the
+  residual provider payload fields and first-missing intake outcomes.
+- `DASHI/Physics/Closure/HEPDataResidualBridgeAuthorityGate.agda` records the
+  receipt-filter gate that rejects raw/path/unchecksumed/no-route/no-witness
+  provider answers and constructs no authority token.
+- `DASHI/Physics/Closure/HEPDataExternalResidualWitnessPayload.agda` records
+  the external non-collapse witness payload carrier and keeps the external
+  receipt constructorless.
+- `DASHI/Physics/Closure/HEPDataExternalResidualWitnessCandidateDiagnostic.agda`
+  records the `phistar_50_76` checksum-bound local candidate as an
+  evidence-pointer surface only.
+- `DASHI/Physics/Closure/HEPDataResidualObservableClassCandidateDiagnostic.agda`
+  records the `phistar_50_76` residual observable-class candidate as a
+  `fluctuationProfile` candidate only; it does not construct
+  `residualObservableClassReceipt`.
+- `DASHI/Physics/Closure/HEPDataResidualObservableClassProtoReceipt.agda`
+  packages that candidate as an externalizable proto-receipt payload while
+  preserving first-missing intake rejection and the blocked authority gate.
+- `DASHI/Physics/Closure/HEPDataResidualObservableClassExternalAlignment.agda`
+  aligns the internal `fluctuationProfile` candidate with adjacent-bin
+  finite-difference residual / local bin-to-bin variation language without
+  claiming significance or authority promotion.
+- `DASHI/Physics/Closure/HEPDataEmpiricalAuthorityReceiptCollation.agda`
+  records the CMS-SMP-20-003 authority collation and correction packet:
+  published `phistar mass 50-76` is `ins2079374` table `t19`, covariance is
+  `t20`, and raw upstream values are kept separate from the local normalized
+  artifact until an adapter-transform receipt exists.
+- `DASHI/Physics/Closure/HEPDataRatioTableArtifactReceipt.agda` records the
+  HEP-R28 checksum-bound `t43/t44` artifact receipt: valid name-endpoint CSVs,
+  local paths, SHA-256 digests, and rejected HEPData error-HTML endpoint forms,
+  without constructing projection, comparison, or promotion receipts.
+- `DASHI/Physics/Closure/HEPDataPredictionFreezePolicyRequest.agda` records the
+  HEP-R30 clean-freeze policy sequence and clean-worktree certificate shape
+  without accepting the current dirty diagnostic `HEAD`.
+- `DASHI/Physics/Closure/HEPDataComparisonLawReceiptRequest.agda` records the
+  HEP-R31 future comparison-law receipt shape for t43/t44: adapter receipt,
+  projection artifact, t43/t44 digests, freeze hash, worktree-clean
+  certificate, chi2, chi2/dof, per-bin two-sigma law, and authority DOI, while
+  keeping the receipt uninhabited and W3 non-promoted.
+- `DASHI/Physics/Closure/HEPDataT43SudakovBaselinePredictionHook.agda` records
+  HEP-R34: the callable CSS/Sudakov baseline hook exists and can exercise the
+  runner, but is not an accepted repo-native DASHI prediction API.
+- `DASHI/Physics/Closure/LilaE8RootSystemLocalSourceDiagnostic.agda` and
+  `DASHI/Physics/Closure/LilaE8RootSystemLatticeReceipt.agda` record LILA-R1:
+  local LILA/E8 evidence pointers and remaining E8/Lam-Tung/phi-star receipt
+  gaps, without physics promotion.
+- `DASHI/Physics/Closure/LilaE8InitialisationPriorNote.agda` records LILA-R1a:
+  SPUTNIKAI/sovereign-lila-e8 as related engineering provenance and
+  AllenAI/Lila as rejected unrelated provenance.
+- `DASHI/Physics/Closure/LilaE8RootEnumeration.agda`,
+  `DASHI/Physics/Closure/LamTungE8AdapterSurface.agda`,
+  `DASHI/Physics/Closure/LilaE8ThetaJBridgeSurface.agda`, and
+  `DASHI/Physics/Closure/LilaE8PhiStarProjectionReceipt.agda` record
+  LILA-R2/R3/R4/R5 request surfaces. R5 remains parked on accepted R2/R3/R4
+  receipts and does not provide the HEP-R33 prediction API.
+- `DASHI/Physics/Closure/SiblingEvidenceInventory.agda` records SIB-R1:
+  sibling `dashifine`, `dashiQ`, `dashitest`, `DASHIg`, and `dashi_lean4`
+  artifacts as useful non-promoting evidence pointers. It does not construct a
+  clean freeze, accepted DASHI prediction API, projection receipt, comparison
+  law, E8 carrier receipt, Lam-Tung adapter, or any W3/W4/W5/W6/W8/W9
+  promotion receipt.
+- `DASHI/Physics/Closure/SiblingEvidenceExtractionDiagnostic.agda` records
+  SIB-R2: worker extraction findings over the sibling artifacts. It preserves
+  the negative facts that no accepted `compute_dashi_ratio` shortcut,
+  240-root E8 vocabulary, theta/J Lean theorem receipt, or carrier-state-bound
+  Lyapunov pass certificate was found.
+
+Check these directly when source diagnostics or retarget consumer obligations
+change, then check `P0BlockerObligationIndex.agda`.
 
 ## Hygiene Script Policy
 

@@ -1,12 +1,15 @@
 module DASHI.Physics.Closure.CanonicalToNoncanonicalMdlRetargetFinalSeamObligation where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
+open import Data.List.Base using (List; _∷_; [])
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlCRRetargetedChannel as Retargeted
 import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlCurrentCarrierObstruction as CurrentCarrier
 import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlRetargetPolicyDecision as Policy
+import DASHI.Physics.Closure.ChemistryPhysicalHandoffDiagnostic as Handoff
 
 ------------------------------------------------------------------------
 -- W1e: final seam obligation after W1d policy acceptance.
@@ -15,6 +18,27 @@ import DASHI.Physics.Closure.CanonicalToNoncanonicalMdlRetargetPolicyDecision as
 -- replacement noncanonical MDL target.  This module records the narrow
 -- remaining seam surface.  It does not promote the old current carrier and
 -- does not assert that the old current carrier is CR-flat.
+
+RetargetedFinalSeamReceipt :
+  Retargeted.CanonicalToNoncanonicalMdlCRRetargetPolicyAccepted →
+  Set
+RetargetedFinalSeamReceipt accepted =
+  (x : _) →
+  Retargeted.transportedScheduleMdlChannel x
+    ≡
+  Retargeted.CanonicalToNoncanonicalMdlCRRetargetedChannel.replacementNoncanonicalMdl
+    (Retargeted.CanonicalToNoncanonicalMdlCRRetargetPolicyAccepted.channel
+      accepted)
+    x
+
+RetargetedFinalSeamDownstreamHandoffCompatibility :
+  Retargeted.CanonicalToNoncanonicalMdlCRRetargetPolicyAccepted →
+  Set
+RetargetedFinalSeamDownstreamHandoffCompatibility _ =
+  Handoff.ChemistryPhysicalHandoffPreReceipt.currentStatus
+    Handoff.canonicalChemistryPhysicalHandoffPreReceipt
+    ≡
+  Handoff.retargetedQuotientPrePhysicalConsumerAvailable
 
 record RetargetedFinalSeamReceiptFields : Setω where
   field
@@ -39,6 +63,43 @@ record RetargetedFinalSeamReceiptFields : Setω where
     downstreamHandoffCompatibility :
       Set
 
+canonicalRetargetedFinalSeamReceipt :
+  RetargetedFinalSeamReceipt
+    Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+canonicalRetargetedFinalSeamReceipt =
+  Retargeted.CanonicalToNoncanonicalMdlCRRetargetPolicyAccepted.acceptedReplacementIsTransportedSchedule
+    Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+
+canonicalRetargetedFinalSeamHandoffCompatibility :
+  RetargetedFinalSeamDownstreamHandoffCompatibility
+    Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+canonicalRetargetedFinalSeamHandoffCompatibility =
+  refl
+
+canonicalRetargetedFinalSeamReceiptFields :
+  RetargetedFinalSeamReceiptFields
+canonicalRetargetedFinalSeamReceiptFields =
+  record
+    { acceptedRetargetedTarget =
+        Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+    ; oldCurrentCarrierObstructionAcknowledged =
+        CurrentCarrier.canonicalToNoncanonicalMdlCurrentCarrierObstruction
+    ; acceptedTargetIsTransportedSchedule =
+        canonicalRetargetedFinalSeamReceipt
+    ; finalSeamReceipt =
+        RetargetedFinalSeamReceipt
+          Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+    ; downstreamHandoffCompatibility =
+        RetargetedFinalSeamDownstreamHandoffCompatibility
+          Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+    }
+
+data RetargetedFinalSeamResidualField : Set where
+  strictPhysicalPromotionNotClaimed :
+    RetargetedFinalSeamResidualField
+  oldCurrentCarrierCRFlatStillObstructed :
+    RetargetedFinalSeamResidualField
+
 record RetargetedFinalSeamObligationStatus : Setω where
   field
     w1dAcceptedByEquality :
@@ -47,11 +108,23 @@ record RetargetedFinalSeamObligationStatus : Setω where
     currentCarrierStillObstructed :
       CurrentCarrier.CanonicalToNoncanonicalMdlCurrentCarrierObstruction
 
-    finalSeamReceiptStillNeeded :
+    finalSeamReceiptLanded :
       Set
 
-    downstreamHandoffCompatibilityStillNeeded :
+    downstreamHandoffCompatibilityLanded :
       Set
+
+    finalSeamReceiptWitness :
+      finalSeamReceiptLanded
+
+    downstreamHandoffCompatibilityWitness :
+      downstreamHandoffCompatibilityLanded
+
+    residualFields :
+      List RetargetedFinalSeamResidualField
+
+    statusBoundary :
+      List String
 
     noOldCurrentCarrierCRFlatClaim :
       Retargeted.CanonicalToNoncanonicalMdlCRRetargetPolicyAccepted →
@@ -66,10 +139,26 @@ canonicalRetargetedFinalSeamObligationStatus =
         Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
     ; currentCarrierStillObstructed =
         CurrentCarrier.canonicalToNoncanonicalMdlCurrentCarrierObstruction
-    ; finalSeamReceiptStillNeeded =
-        ⊥
-    ; downstreamHandoffCompatibilityStillNeeded =
-        ⊥
+    ; finalSeamReceiptLanded =
+        RetargetedFinalSeamReceipt
+          Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+    ; downstreamHandoffCompatibilityLanded =
+        RetargetedFinalSeamDownstreamHandoffCompatibility
+          Policy.canonicalToNoncanonicalMdlCRRetargetPolicyAccepted
+    ; finalSeamReceiptWitness =
+        canonicalRetargetedFinalSeamReceipt
+    ; downstreamHandoffCompatibilityWitness =
+        canonicalRetargetedFinalSeamHandoffCompatibility
+    ; residualFields =
+        strictPhysicalPromotionNotClaimed
+        ∷ oldCurrentCarrierCRFlatStillObstructed
+        ∷ []
+    ; statusBoundary =
+        "W1 final seam receipt is the accepted transported schedule-MDL replacement equality"
+        ∷ "Downstream handoff compatibility is only with the existing pre-physical chemistry handoff consumer"
+        ∷ "No strict physical calibration, spectra, bonding, wet-lab, or empirical validation claim is made here"
+        ∷ "The old current noncanonical carrier remains obstructed and no CR-flat claim is revived"
+        ∷ []
     ; noOldCurrentCarrierCRFlatClaim =
         λ _ _ → ⊥
     }

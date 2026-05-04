@@ -39,6 +39,24 @@ package "Viewer status: true repo state" {
   rectangle "Open promotions\norigin receipt\nEmpiricalAdequacyBridge\nconvergence-rate dynamics\nchemistry relaxation\nMDL/CR next seam\nNGram / ITIR consumer wiring\n[future theorem work]" as StateOpen #fecaca
 }
 
+package "Physics-facing lane maturity" {
+  rectangle "Maxwell / gauge-field regime\npresent: yes\nbridged: yes\npackaged: partial\ntheorem-complete: no\nempirically-validated: no" as MaturityMaxwell #fef3c7
+  rectangle "Schrodinger evolution\npresent: yes\nbridged: yes\npackaged: yes\ntheorem-complete: no\nempirically-validated: no" as MaturitySchrodinger #dbeafe
+  rectangle "GR curvature / GR-QFT consumer\npresent: yes\nbridged: yes\npackaged: yes\ntheorem-complete: no\nempirically-validated: no" as MaturityGR #fef3c7
+  rectangle "Predictions / empirical adequacy\npresent: yes\nbridged: yes\npackaged: yes\ntheorem-complete: no\nempirically-validated: no" as MaturityPrediction #fee2e2
+}
+
+package "Target roadmap: complete and verified physics unification" {
+  rectangle "G1 canonical spine stability\nrevalidate theorem owners\nand closure ledger" as TargetG1 #dbeafe
+  rectangle "G2 Maxwell / gauge completion\nfield-equation theorem\nor explicit obstruction" as TargetG2 #fef3c7
+  rectangle "G3 Schrodinger completion\nend-to-end evolution theorem\nor scoped equivalent" as TargetG3 #fef3c7
+  rectangle "G4 GR curvature completion\ncurvature / stress-energy /\ninteraction consumer theorem" as TargetG4 #fef3c7
+  rectangle "G5 empirical prediction validation\naccepted authority + calibration +\nprojection + comparison receipts" as TargetG5 #fee2e2
+  rectangle "G6 cross-lane consistency\ncommuting carrier/spine package\nno-bypass law" as TargetG6 #fef3c7
+  rectangle "G7 publication audit\nclaims, diagrams, proofs,\nreceipts, reproducibility" as TargetG7 #dbeafe
+  rectangle "Target claim\ncomplete and verified\nphysics unification\n[future gated state]" as TargetComplete #bbf7d0
+}
+
 package "CoreSpine carrier bridge" {
   rectangle "Triadic algebra -> ternary carrier\nBase369.TriTruth\n-> TritTriTruthBridge\n-> DASHI.Algebra.Trit\n[proved bridge]" as CoreSpineTri #dcfce7
   rectangle "Ternary carrier -> agreement ultrametric\nTritCarrierBridge\nRealTernaryCarrier.Carrier n = Vec Trit n\nAgreementUltrametric.ultrametricVec\n[proved bridge]" as CoreSpineMetric #dcfce7
@@ -108,6 +126,22 @@ StateOpen --> OpenAtomic : chemistry gates
 StateOpen --> OpenInterop : adapter/import gates
 StateOpen --> OpenHigherStructure : chart-language gates
 StateOpen --> OpenCrossScale : scale-unification gates
+MaturityMaxwell --> OpenGauge : gauge lane present, closure open
+MaturitySchrodinger --> DynamicsConsumers : packaged dynamics surface
+MaturityGR --> OpenGRQFT : bridge / consumer lane
+MaturityPrediction --> EmpiricalLane : empirical lane, authority blocked
+StateClosed --> TargetG1 : preserve and revalidate spine
+MaturityMaxwell --> TargetG2
+MaturitySchrodinger --> TargetG3
+MaturityGR --> TargetG4
+MaturityPrediction --> TargetG5
+TargetG1 --> TargetG6
+TargetG2 --> TargetG6
+TargetG3 --> TargetG6
+TargetG4 --> TargetG6
+TargetG5 --> TargetG6
+TargetG6 --> TargetG7
+TargetG7 --> TargetComplete
 CoreSpineTri --> CoreSpineMetric : componentwise lift
 CoreSpineMetric --> CoreSpineContraction : metric carrier for certificates
 CoreSpineStage --> CoreSpineTri : quotient to triadic observable

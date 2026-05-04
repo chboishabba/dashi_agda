@@ -5,6 +5,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
+open import DASHI.Physics.Closure.P0BlockadeProofObligations as P0
+open import DASHI.Physics.Closure.Validation.RootSystemB4ShellComparison as B4C
 open import DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate as AUTH
 open import DASHI.Physics.Closure.W3EmpiricalTargetPromotionBridgeObligation as W3
 
@@ -61,6 +63,27 @@ data W3AcceptedAuthorityExternalReceiptStatus : Set where
   externalReceiptObligationOnly :
     W3AcceptedAuthorityExternalReceiptStatus
 
+data W3AcceptedAuthorityExternalReceiptImpossible : Set where
+
+currentAcceptedAuthorityTokenUninhabited :
+  AUTH.W3AcceptedEvidenceAuthorityToken →
+  W3AcceptedAuthorityExternalReceiptImpossible
+currentAcceptedAuthorityTokenUninhabited ()
+
+currentEvidenceBackedEmpiricalTargetBlockedByAuthority :
+  AUTH.W3EvidenceBackedEmpiricalTarget →
+  W3AcceptedAuthorityExternalReceiptImpossible
+currentEvidenceBackedEmpiricalTargetBlockedByAuthority target =
+  currentAcceptedAuthorityTokenUninhabited
+    (AUTH.W3EvidenceBackedEmpiricalTarget.evidenceAuthority target)
+
+currentAcceptedAuthorityExternalReceiptBlockedByAuthority :
+  W3AcceptedAuthorityExternalReceipt →
+  W3AcceptedAuthorityExternalReceiptImpossible
+currentAcceptedAuthorityExternalReceiptBlockedByAuthority receipt =
+  currentAcceptedAuthorityTokenUninhabited
+    (W3AcceptedAuthorityExternalReceipt.authorityToken receipt)
+
 record W3AcceptedAuthorityExternalReceiptCurrentStatus : Setω where
   field
     authorityGateStatus :
@@ -80,6 +103,33 @@ record W3AcceptedAuthorityExternalReceiptCurrentStatus : Setω where
 
     empiricalTargetNonPromotion :
       W3.W3EmpiricalTargetPromotionBoundaryToken
+
+    acceptedAuthorityTokenUninhabited :
+      AUTH.W3AcceptedEvidenceAuthorityToken →
+      W3AcceptedAuthorityExternalReceiptImpossible
+
+    evidenceBackedTargetBlockedByAuthority :
+      AUTH.W3EvidenceBackedEmpiricalTarget →
+      W3AcceptedAuthorityExternalReceiptImpossible
+
+    externalReceiptBlockedByAuthority :
+      W3AcceptedAuthorityExternalReceipt →
+      W3AcceptedAuthorityExternalReceiptImpossible
+
+    receiptB4StandaloneBlocksEmpiricalPromotion :
+      B4C.B4ShellComparisonReport.promotionStatus
+        (W3.W3EmpiricalTargetPromotionBridgeObligationReceipt.b4ShellReport
+          empiricalTargetPromotionObligationReceipt)
+      ≡
+      B4C.admissibleReady →
+      W3.W3B4EmpiricalPromotionBlocked
+
+    receiptOriginReceiptStillBlocked :
+      P0.OriginObservationReceipt.empiricalStatus
+        (W3.W3EmpiricalTargetPromotionBridgeObligationReceipt.originObservationReceipt
+          empiricalTargetPromotionObligationReceipt)
+      ≡
+      P0.empiricalBlocked
 
     authorityBoundary :
       List String
@@ -108,9 +158,24 @@ currentW3AcceptedAuthorityExternalReceiptStatus =
         W3.canonicalW3EmpiricalTargetPromotionObligationsNeededToken
     ; empiricalTargetNonPromotion =
         W3.canonicalW3EmpiricalTargetPromotionCurrentNonPromotionToken
+    ; acceptedAuthorityTokenUninhabited =
+        currentAcceptedAuthorityTokenUninhabited
+    ; evidenceBackedTargetBlockedByAuthority =
+        currentEvidenceBackedEmpiricalTargetBlockedByAuthority
+    ; externalReceiptBlockedByAuthority =
+        currentAcceptedAuthorityExternalReceiptBlockedByAuthority
+    ; receiptB4StandaloneBlocksEmpiricalPromotion =
+        W3.W3EmpiricalTargetPromotionBridgeObligationReceipt.b4EmpiricalPromotionBlocked
+          W3.canonicalW3EmpiricalTargetPromotionBridgeObligationReceipt
+    ; receiptOriginReceiptStillBlocked =
+        W3.W3EmpiricalTargetPromotionBridgeObligationReceipt.originObservationReceiptBlocked
+          W3.canonicalW3EmpiricalTargetPromotionBridgeObligationReceipt
     ; authorityBoundary =
         "External accepted evidence authority must supply W3AcceptedEvidenceAuthorityToken"
         ∷ "The current repo deliberately constructs no W3AcceptedEvidenceAuthorityToken"
+        ∷ "Any current W3EvidenceBackedEmpiricalTarget or accepted-authority external receipt eliminates through the missing authority token"
+        ∷ "Current B4 empirical promotion is contradictory: the shell report is standaloneOnly, not admissibleReady"
+        ∷ "Current origin receipt promotion is blocked: the origin observation receipt remains empiricalBlocked"
         ∷ "The evidence-backed target, B4 empirical promotion, and origin receipt promotion must arrive together"
         ∷ []
     ; nonPromotionBoundary =
