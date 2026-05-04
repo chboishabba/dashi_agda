@@ -367,7 +367,7 @@ HEP-R53 result:
 
 Round date: `2026-05-05`
 Round owner: `W0 orchestrator / integrator`
-Round status: `launched`
+Round status: `integrated; W2 sum-invariance receipt landed; promotion authority still absent`
 
 FORMAL MODEL: O, R, C, S, L, P, G, F
 
@@ -505,6 +505,7 @@ R:
 
 C:
 - W2: `NaturalP2ConvergencePromotionObligation.agda`,
+  `DASHI/Arithmetic/NormalizeAddSumPreservation.agda`,
   `CanonicalP2OfflineL2ObstructionCertificate.agda`,
   `BlockerKillConditions.agda`, `Docs/NaturalDynamicsLaw.md`.
 - W3: `W3AcceptedAuthorityProviderAttempt.agda`,
@@ -660,8 +661,11 @@ C:
 S:
 - HEP-R53 and HEP-R54 are done. W3 is now blocked only on external
   `W3AcceptedEvidenceAuthorityToken` for accepted-authority closure.
-- W2 is the fork for complete unification: a positive bridge opens the GR
-  continuum route; a final obstruction forces a new mathematical ingredient.
+- W2 carry-field obstruction target is superseded by the sum-invariance target:
+  `normalizeAdd` preserves `lhs + rhs` and tracked-prime p-adic valuations of
+  that sum by definitional equality. The governance kill condition still
+  requires the promotion authority token and carrier-general convergence-rate
+  receipt before W2 is marked unblocked.
 - W5/PDF has a precise t45 mass-kernel correction target and should be tested
   before the route is classified as internal or external.
 - W6 is smaller and provider-runtime gated; it can proceed independently.
@@ -689,13 +693,13 @@ G:
 - Broad aggregate validation remains parked.
 
 F:
-- Missing evidence remains W2 bridge/rate or final obstruction, W5 PDF carrier
-  or external PDF route, W6 runtime payload, W4 calibration/source coupling,
-  and GR metric recovery.
+- Missing evidence remains W2 promotion authority and carrier-general
+  convergence-rate packaging, W5 external PDF route, W6 runtime payload, W4
+  calibration/source coupling, and GR metric recovery.
 
 | Lane | Worker | Agent id | Assignment | Expected output | Status |
 |---|---|---|---|---|---|
-| `W2-critical-path-bridge` | `Turing / Cicero` | `019df414-e48e-7392-8e3d-30ca8e51b017` | Strongest repo-supported positive natural `p2` candidate-family / bridge attempt. | Narrow advance or exact missing ingredient; no fake theorem. | held: candidate returned, but `timeout 30s agda NaturalP2ConvergencePromotionObligation.agda` exits `124`; not integration-ready |
+| `W2-critical-path-bridge` | `Turing / Cicero` | `019df414-e48e-7392-8e3d-30ca8e51b017` | Strongest repo-supported natural `p2` invariant / bridge attempt. | Narrow advance or exact missing ingredient; no fake theorem. | integrated as positive ingredient: `NormalizeAddSumPreservationReceipt`; W2 kill not promoted because authority/rate packaging remain absent |
 | `W5-PDF-carrier-diagnostic` | `Maxwell / Goodall` | `019df414-e56e-71a0-83ca-aa345005bdeb` | Test t45 correction factor route and classify internal vs external PDF path. | Numeric diagnostic and optional non-promoting typed surface. | integrated: required correction `0.8804486068`, proxy `0.8751733190`, still `externallyPDFGated` |
 | `W6-runtime-PNF-readiness` | `Liskov / Pauli` | `019df414-e65a-7542-a678-129149edb11c` | Verify W6 runtime provider request is complete or sharpen missing payload. | Provider-ready payload list or narrow update. | completed no-op: existing request pack already names the five runtime payload fields |
 | `GR-metric-minimal-target` | `Gauss / Darwin` | `019df414-e7c8-7d73-b059-d06de4839363` | Define weakest sufficient GR recovery target and dependencies. | Roadmap/diagnostic update; no GR theorem claim. | integrated in roadmap: discrete metric/curvature candidate only; W2/W4/W5 gated |
@@ -712,11 +716,17 @@ Round result update:
   `PNFEmissionReceipt`s, and `heckeCandidatePoolReceiptId`, with
   receipt-backed residual computed from the paired emissions.
 - `GR-metric-minimal-target`: roadmap now records the weakest sufficient target
-  as a discrete metric/curvature candidate, not a GR recovery theorem.
-- `W2-critical-path-bridge`: candidate-family code exists in the worktree but
-  is held out of integration because the targeted Agda check exceeds the
-  required `30s` cap. Next action is W2 import/performance isolation or a
-  smaller receipt surface before commit.
+  as a discrete metric/curvature candidate, not a GR recovery theorem. The
+  flat-space side now also has `MinkowskiLimitReceipt.agda`, recording the
+  exact hyperbolic/Minkowski quadratic and the B4 intrinsic `sig31` match.
+- `W2-critical-path-bridge`: landed
+  `DASHI/Arithmetic/NormalizeAddSumPreservation.agda` and threaded its
+  canonical receipt into `NaturalP2ConvergencePromotionObligation.agda`.
+  The earlier heavy candidate-family imports were removed; targeted `30s`
+  Agda validation now passes. This is a positive theorem ingredient, but it is
+  not a full W2 kill receipt because the existing W2 authority token is still
+  constructorless and the carrier-general convergence-rate packaging remains
+  separate.
 
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 

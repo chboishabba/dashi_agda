@@ -2,6 +2,17 @@
 
 ## 2026-05-05
 
+- land W2 sum-invariance and GR flat-space receipts:
+  `DASHI/Arithmetic/NormalizeAddSumPreservation.agda` proves by `refl` that
+  `normalizeAdd` preserves `lhs + rhs` and the p-adic valuation of that sum for
+  every tracked prime. `NaturalP2ConvergencePromotionObligation.agda` now
+  carries that positive invariant instead of the timeout-prone candidate-family
+  imports. `DASHI/Physics/Closure/MinkowskiLimitReceipt.agda` records the
+  exact hyperbolic/Minkowski quadratic and the B4 intrinsic `sig31` match.
+  These are theorem receipts, but W2 kill promotion still awaits the existing
+  constructorless authority token and carrier-general convergence-rate
+  packaging; curved GR recovery remains open.
+
 - integrate fastest-path sidecar results:
   W5 now has `PDFCarrierLogRatioDiagnostic.agda`, threaded into
   `GRQFTConsumerNextObligation.agda`, recording required t45 correction

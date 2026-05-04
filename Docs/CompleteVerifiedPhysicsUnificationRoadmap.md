@@ -206,20 +206,26 @@ W3 accepted authority, W4 Z-peak/cross-band calibration support, and W7
 governance. HEP-R53 and HEP-R54 already moved the t43 claim to a reproducible
 non-collapse witness plus a typed first-missing authority-token gate.
 
-For complete unification, the critical dependency is W2. If W2 resolves as a
-positive natural `p2` bridge/rate theorem, then the GR metric-recovery route can
-be pursued through a continuum-limit argument. If W2 resolves only as a final
-obstruction over the admissible natural candidate family, the current carrier
-cannot honestly claim the existing convergence route to GR recovery without a
-new mathematical ingredient.
+For complete unification, the critical dependency is W2. The carry-field
+obstruction target is now superseded by a positive invariant:
+`normalizeAdd` preserves `lhs + rhs` and therefore preserves p-adic valuations
+of that sum for every tracked prime by definitional equality. This opens the
+right W2 route, but the governance kill condition still requires the
+constructorless W2 promotion authority token and carrier-general
+convergence-rate packaging before W2 can be marked closed.
+
+The GR flat-space side also now has an exact receipt:
+`MinkowskiLimitReceipt.agda` records the hyperbolic/Minkowski quadratic and the
+B4 intrinsic `sig31` match. This is flat-space only. Curved-regime GR recovery
+still requires a continuum field-equation argument plus W4 source coupling and
+W5 GR/QFT/PDF receipts.
 
 Current fastest-path order:
 
-1. Resolve W2 first: attempt the positive natural `p2`
-   bridge-or-obstruction receipt over an admissible candidate family.
-2. In parallel, test the W5 PDF-carrier route against the precise t45
-   mass-kernel correction target before deciding whether the route is internal
-   or externally PDF-gated.
+1. Package the W2 sum/p-adic invariant into the carrier-general convergence
+   receipt surface and supply the W2 promotion authority token.
+2. In parallel, keep the W5 PDF-carrier route external: the t45 log-ratio
+   diagnostic is suggestive but not an internal PDF derivation.
 3. In parallel, keep W6 runtime PNF intake provider-ready; this is smaller and
    does not gate W2, W4, W5, or GR recovery.
 4. Keep the GR recovery target at the weakest honest level: a discrete

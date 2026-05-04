@@ -98,16 +98,18 @@ checking, and `Gauss` / `Darwin`
 target sidecar. HEP-R55/W3 is not relaunched because the next action there is
 external provider engagement for `W3AcceptedEvidenceAuthorityToken`.
 
-Fastest-path result update `2026-05-05`: W5 landed a non-promoting PDF-carrier
-log-ratio diagnostic. The t45 required correction is `0.8804486068`; the
-nearest two-pressure-unit / 15-prime proxy is `0.8751733190`, close enough to
-be suggestive but still `externallyPDFGated`. W6 returned no-op because the
-existing PNF receipt request pack already names the required runtime payload
-fields. GR sidecar is diagnostic-only: discrete metric/curvature candidate,
-with continuum promotion gated on W2 and source coupling gated on W4. W2
-returned a candidate-family first step but it is held out of integration
-because `timeout 30s agda NaturalP2ConvergencePromotionObligation.agda` exits
-`124`.
+Fastest-path result update `2026-05-05`: W2 landed the lightweight
+`NormalizeAddSumPreservationReceipt`: `normalizeAdd` preserves `lhs + rhs` and
+tracked-prime p-adic valuations of that sum by definitional equality. This
+supersedes the carry-field obstruction target, but the W2 kill condition is not
+promoted until the authority token and carrier-general convergence-rate
+packaging exist. GR flat-space landed `MinkowskiLimitReceipt`, recording the
+exact hyperbolic/Minkowski quadratic and B4 intrinsic `sig31` match. W5 landed
+a non-promoting PDF-carrier log-ratio diagnostic. The t45 required correction
+is `0.8804486068`; the nearest two-pressure-unit / 15-prime proxy is
+`0.8751733190`, close enough to be suggestive but still `externallyPDFGated`.
+W6 returned no-op because the existing PNF receipt request pack already names
+the required runtime payload fields.
 
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a

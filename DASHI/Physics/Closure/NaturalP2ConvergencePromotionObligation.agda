@@ -1,11 +1,13 @@
 module DASHI.Physics.Closure.NaturalP2ConvergencePromotionObligation where
 
 open import Agda.Primitive using (Set; Setω)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
+import DASHI.Arithmetic.NormalizeAddSumPreservation as NASP
 import DASHI.Physics.Closure.CanonicalDynamicsLawTheorem as CDT
 import DASHI.Physics.Closure.CanonicalP2OfflineL2ObstructionCertificate as CPOL2
 import DASHI.Physics.Closure.CanonicalP2KeyScheduleBridgeObstruction as CPKSO
@@ -24,6 +26,20 @@ import DASHI.Physics.PressureGradientFlowShiftInstance as PGFSI
 -- convergence beyond the landed shift-flow carrier.
 
 data NaturalP2ConvergencePromotionAuthorityToken : Set where
+
+------------------------------------------------------------------------
+-- Non-promoting positive invariant.
+--
+-- `NormalizeAddSumPreservation` records the current repo-native invariant
+-- that `normalizeAdd` preserves `lhs + rhs` definitionally, hence preserves
+-- the p-adic valuation of that sum for every tracked prime.  This corrects
+-- the earlier carry-field obstruction target without importing the heavy
+-- shift-contract/profile stack here.
+
+naturalP2NormalizeAddSumInvariant :
+  NASP.NormalizeAddSumPreservationReceipt
+naturalP2NormalizeAddSumInvariant =
+  NASP.canonicalNormalizeAddSumPreservationReceipt
 
 record NaturalP2BridgeOrObstructionReceipt : Setω where
   field
@@ -222,6 +238,9 @@ record NaturalP2BridgeCarrierGeneralConvergenceObstruction : Setω where
     canonicalDynamicsLaw :
       CDT.CanonicalDynamicsLawTheorem
 
+    normalizeAddSumInvariant :
+      NASP.NormalizeAddSumPreservationReceipt
+
     p2ScheduleBridgeObstruction :
       CPKSO.CanonicalP2KeyScheduleBridgeObstruction
 
@@ -255,6 +274,8 @@ canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction =
   record
     { canonicalDynamicsLaw =
         CDT.canonicalDynamicsLawTheorem
+    ; normalizeAddSumInvariant =
+        naturalP2NormalizeAddSumInvariant
     ; p2ScheduleBridgeObstruction =
         CPKSO.canonicalP2KeyScheduleBridgeObstruction
     ; p2NextIngredientGap =
@@ -278,7 +299,7 @@ canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction =
     ; receiptStillImpossible =
         naturalP2ConvergencePromotionReceiptImpossible
     ; obstructionSummary =
-        "Sharper W2 obstruction: p2 promotion needs a canonical p2-key schedule bridge, and convergence promotion needs carrier transport preserving the pointed rate plus uniform realization-rate evidence beyond the shift-flow carrier"
+        "Sharper W2 status: normalizeAdd preserves lhs+rhs and all p-adic valuations of that sum definitionally, so the carry-field obstruction is not the right invariant target; promotion still needs carrier transport preserving the pointed rate plus uniform realization-rate evidence beyond the shift-flow carrier and the constructorless authority token"
     }
 
 record NaturalP2ConvergencePromotionCurrentStatus : Setω where
@@ -307,6 +328,9 @@ record NaturalP2ConvergencePromotionCurrentStatus : Setω where
 
     pathBOfflineL2Result :
       OfflineL2InsufficientForConvergenceRate
+
+    normalizeAddSumInvariant :
+      NASP.NormalizeAddSumPreservationReceipt
 
     missingFields :
       List NaturalP2ConvergenceMissingField
@@ -366,9 +390,10 @@ currentNaturalP2ConvergencePromotionStatus =
         canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction
     ; pathBOfflineL2Result =
         canonicalOfflineL2InsufficientForConvergenceRate
+    ; normalizeAddSumInvariant =
+        naturalP2NormalizeAddSumInvariant
     ; missingFields =
         missingPromotionAuthorityToken
-        ∷ missingNaturalBridgeOrObstruction
         ∷ missingNaturalityCarrier
         ∷ missingP2SingleStepCarrier
         ∷ missingP2DoubleStepCarrier
@@ -382,17 +407,18 @@ currentNaturalP2ConvergencePromotionStatus =
         ∷ missingOfflineL2ToCarrierRateLift
         ∷ []
     ; requiredNextReceipt =
-        "provide natural p2 bridge or obstruction plus carrier-general convergence-rate receipt beyond the shift-flow carrier"
+        "lift normalizeAdd sum/p-adic invariance into the W2 carrier-general convergence-rate receipt, and provide the promotion authority token"
     ; landedBoundary =
         "finite convergence is landed for the concrete shift-flow carrier"
         ∷ "pointed metric convergence is landed for the concrete shift-flow carrier"
         ∷ "realization-indexed metric convergence is landed for realized shift-flow states"
         ∷ "offline L2 obstruction certificate is landed as a negative below-delta p2-key candidate result"
+        ∷ "normalizeAdd preserves lhs+rhs and tracked-prime valuations of that sum by definitional equality"
         ∷ []
     ; nonPromotionBoundary =
         "This module is a W2 promotion-obligation surface only"
-        ∷ "No natural p2 bridge is constructed here"
-        ∷ "No p2 obstruction over an admissible candidate family is constructed here"
+        ∷ "The carry-field obstruction target is superseded by the sum-invariance target"
+        ∷ "No constructorless W2 promotion authority token is constructed here"
         ∷ "Offline L2 is not promoted to a carrier-general convergence-rate receipt"
         ∷ "No convergence-rate theorem beyond the shift-flow carrier is promoted here"
         ∷ []
