@@ -392,6 +392,7 @@ canonicalW3AcceptedAuthorityProviderAttemptDiagnostic =
         "HEP-R51/R52/R53 surfaces are consumed: bounded t43 candidate, comparison-law receipt, and runner per-bin non-collapse receipt"
         ∷ "No legitimate W3AcceptedAuthorityExternalReceipt is locally constructible from current repo artifacts"
         ∷ "The first missing field is W3AcceptedEvidenceAuthorityToken, which is constructorless and is not supplied by the request pack"
+        ∷ "HEP-R55 is therefore external provider engagement only: supply that accepted authority token or return a typed authority-unavailable/mismatch diagnostic"
         ∷ "Any evidence-backed empirical target or accepted-authority external receipt eliminates through that missing authority token"
         ∷ "B4 empirical promotion remains missing because the current B4 shell report is standaloneOnly"
         ∷ "Origin promotion remains missing because W8 reports no current origin authority source and the current origin receipt remains empiricalBlocked"

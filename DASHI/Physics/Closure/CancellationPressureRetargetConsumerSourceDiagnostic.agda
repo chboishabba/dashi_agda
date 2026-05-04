@@ -29,6 +29,23 @@ data RetargetConsumerSourceMissingField : Set where
 
 data RetargetConsumerSourceClosureToken : Set where
 
+data Dim15DeltaToQuadraticFirstMissingStatus : Set where
+  dim15DeltaToQuadraticFirstMissing :
+    Dim15DeltaToQuadraticFirstMissingStatus
+
+data Dim15DeltaToQuadraticSurvivingRoute : Set where
+  supplyDim15TheoremPressureWitness :
+    Dim15DeltaToQuadraticSurvivingRoute
+  supplyDownstreamRetargetConsumerAcceptance :
+    Dim15DeltaToQuadraticSurvivingRoute
+
+canonicalDim15DeltaToQuadraticSurvivingRoutes :
+  List Dim15DeltaToQuadraticSurvivingRoute
+canonicalDim15DeltaToQuadraticSurvivingRoutes =
+  supplyDim15TheoremPressureWitness
+  ∷ supplyDownstreamRetargetConsumerAcceptance
+  ∷ []
+
 currentRetargetConsumerSourceMissingFields :
   List RetargetConsumerSourceMissingField
 currentRetargetConsumerSourceMissingFields =
@@ -207,4 +224,86 @@ currentW9RetargetConsumerAbsenceDiagnostic =
         ∷ "The selected pressure-compatible retarget remains non-Qcore and non-promoting"
         ∷ "W9 still requires a downstream consumer acceptance receipt or explicit theorem route change"
         ∷ []
+    }
+
+record Dim15DeltaToQuadraticObligation : Setω where
+  field
+    firstMissingStatus :
+      Dim15DeltaToQuadraticFirstMissingStatus
+
+    closureObstruction :
+      W9.Dim15DeltaToQuadraticClosureObstruction
+
+    closureStatusIsCurrent :
+      W9.Dim15DeltaToQuadraticClosureObstruction.closureStatus
+        closureObstruction
+      ≡
+      W9.dim15RoutesExhaustedRetargetAwaitingConsumer
+
+    retargetAbsenceDiagnostic :
+      W9RetargetConsumerAbsenceDiagnostic
+
+    retargetConsumerInterfaceSourceIsMissing :
+      CancellationPressureRetargetConsumerSourceDiagnostic.retargetConsumerInterfaceSource
+        (W9RetargetConsumerAbsenceDiagnostic.sourceDiagnostic
+          retargetAbsenceDiagnostic)
+      ≡
+      sourceMissing
+
+    acceptanceReceiptSourceIsMissing :
+      CancellationPressureRetargetConsumerSourceDiagnostic.acceptanceReceiptSource
+        (W9RetargetConsumerAbsenceDiagnostic.sourceDiagnostic
+          retargetAbsenceDiagnostic)
+      ≡
+      sourceMissing
+
+    survivingRoutes :
+      List Dim15DeltaToQuadraticSurvivingRoute
+
+    survivingRoutesAreCanonical :
+      survivingRoutes
+      ≡
+      canonicalDim15DeltaToQuadraticSurvivingRoutes
+
+    exactSurvivingRouteNames :
+      List String
+
+    noPromotionBoundary :
+      List String
+
+    nextTheoremAttempt :
+      String
+
+currentDim15DeltaToQuadraticObligation :
+  Dim15DeltaToQuadraticObligation
+currentDim15DeltaToQuadraticObligation =
+  record
+    { firstMissingStatus =
+        dim15DeltaToQuadraticFirstMissing
+    ; closureObstruction =
+        W9.canonical15DeltaToQuadraticClosureObstruction
+    ; closureStatusIsCurrent =
+        refl
+    ; retargetAbsenceDiagnostic =
+        currentW9RetargetConsumerAbsenceDiagnostic
+    ; retargetConsumerInterfaceSourceIsMissing =
+        refl
+    ; acceptanceReceiptSourceIsMissing =
+        refl
+    ; survivingRoutes =
+        canonicalDim15DeltaToQuadraticSurvivingRoutes
+    ; survivingRoutesAreCanonical =
+        refl
+    ; exactSurvivingRouteNames =
+        "dim-15 theorem: supply a pressure witness accepted by the existing DeltaToQuadraticBridgeTheorem/CancellationPressureCompatibility consumer path"
+        ∷ "downstream retarget consumer acceptance: supply RetargetConsumerInterface plus CancellationPressureRetargetConsumerAcceptanceReceipt for canonicalPairPressureRetargetReceipt"
+        ∷ []
+    ; noPromotionBoundary =
+        "This obligation does not construct a dim-15 theorem or pressureWitness"
+        ∷ "This obligation does not construct a RetargetConsumerInterface"
+        ∷ "This obligation does not construct a CancellationPressureRetargetConsumerAcceptanceReceipt"
+        ∷ "This obligation does not promote CancellationPressureCompatibility or W9KillReceipt"
+        ∷ []
+    ; nextTheoremAttempt =
+        "Attempt a dim-15-specific pressureWitness over canonicalDeltaTransport; otherwise wait for downstream retarget consumer acceptance"
     }

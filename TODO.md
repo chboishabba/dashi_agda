@@ -60,6 +60,32 @@ authority. W8 request surfaces now list HEP-R53 as support evidence only, not
 origin authority. W4 remains unchanged: blocked on t21/t22 artifacts and
 Z-peak runner support.
 
+First-missing formalism alignment round `2026-05-05`: `Turing` / `Hubble`
+(`019df410-7c68-7a80-a5be-466f6c3294ac`) owns W2 Natural p2
+bridge/obstruction alignment; `Curie-Authority` / `Harvey`
+(`019df410-b29b-72b2-89da-45f70210360a`) owns W3 accepted-authority
+token/provider readiness; `Faraday` / `Lovelace`
+(`019df410-80d5-7350-9981-eec179ea3c9b`) owns W4 Z-peak/cross-band/calibration
+alignment; `Maxwell` / `Newton`
+(`019df410-9402-73d2-acbb-f1caf7984ee5`) owns W5 GRQFT/PDF closure alignment;
+and `Planck` / `Archimedes` (`019df410-9dff-79e3-bfda-42a67a86d250`) owns W9
+dim-15/retarget-consumer alignment. Workers must prefer existing typed surfaces
+over duplicate standalone obligation modules; W3 non-collapse is already
+HEP-R53 and must not be reopened as missing.
+
+First-missing formalism alignment results `2026-05-05`: W2 required no edit;
+`NaturalP2BridgeOrObstructionReceipt` and the W2 kill condition already cover
+the requested formalism, with the next theorem ingredient being a concrete
+admissible natural `p2` candidate family and bridge/obstruction over it. W3
+provider instructions now state HEP-R55 is external-only for
+`W3AcceptedEvidenceAuthorityToken`. W4 now has
+`W4PhysicalCalibrationObligationSurface`, with
+`missingSameRecordT21T22ArtifactReceipt` first missing. W5 required no edit;
+existing GRQFT/PDF request and diagnostic surfaces already cover the proposed
+formalism. W9 now has `Dim15DeltaToQuadraticObligation`, naming the two
+surviving routes: dim-15 pressure-witness theorem or downstream retarget
+consumer acceptance.
+
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a
 narrow empirical equality plus mismatch diagnostic, and `W4` landed a

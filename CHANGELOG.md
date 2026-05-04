@@ -2,6 +2,34 @@
 
 ## 2026-05-05
 
+- launch the first-missing formalism alignment round:
+  `Docs/WorkerCoordinationBoard.md` and `TODO.md` now assign W2 to `Turing` /
+  `Hubble` (`019df410-7c68-7a80-a5be-466f6c3294ac`), W3 authority-token
+  readiness to `Curie-Authority` / `Harvey`
+  (`019df410-b29b-72b2-89da-45f70210360a`), W4 calibration alignment to
+  `Faraday` / `Lovelace` (`019df410-80d5-7350-9981-eec179ea3c9b`), W5
+  GRQFT/PDF closure alignment to `Maxwell` / `Newton`
+  (`019df410-9402-73d2-acbb-f1caf7984ee5`), and W9 dim-15/retarget alignment
+  to `Planck` / `Archimedes`
+  (`019df410-9dff-79e3-bfda-42a67a86d250`). This round aligns proposed
+  standalone formalisms with existing typed surfaces; it does not reopen
+  HEP-R53 W3 non-collapse, fabricate authority/calibration/PDF receipts, or
+  construct W2/W9 theorems.
+
+- integrate first-missing formalism alignment results:
+  W2 required no duplicate module because `NaturalP2BridgeOrObstructionReceipt`
+  and the W2 kill condition already cover the requested bridge/obstruction
+  formalism. W3 accepted-authority provider wording now records HEP-R55 as
+  external-only for `W3AcceptedEvidenceAuthorityToken`. W4 adds
+  `W4PhysicalCalibrationObligationSurface.agda`, a non-promoting aggregation
+  naming `missingSameRecordT21T22ArtifactReceipt` as first missing while
+  preserving the calibration authority boundary. W5 required no duplicate
+  module because existing GRQFT/PDF request and diagnostic surfaces already
+  cover the proposed formalism. W9 adds `Dim15DeltaToQuadraticObligation` in
+  `CancellationPressureRetargetConsumerSourceDiagnostic.agda`, naming the two
+  surviving routes: dim-15 pressure-witness theorem or downstream retarget
+  consumer acceptance.
+
 - update W7 post-HEP-R53 publishable-scope governance:
   `ClaimGovernancePromotionObligation.agda` now binds the bounded W3 t43
   comparison-law receipt to the HEP-R53 runner-side non-collapse receipt. The

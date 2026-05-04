@@ -205,6 +205,7 @@ canonicalW3AcceptedAuthorityProviderPayloadRequest =
         ∷ []
     ; providerInstructions =
         "Supply the exact W3AcceptedAuthorityExternalReceipt payload named above; do not replace it with the current surrogate target"
+        ∷ "HEP-R55 first response should supply W3AcceptedEvidenceAuthorityToken from an accepted external authority, or return a typed authority-unavailable/mismatch diagnostic"
         ∷ "Authority must be accepted evidence authority, not empirical-only photonuclear summary packaging"
         ∷ "B4 must be empirically promoted from standaloneOnly to admissibleReady"
         ∷ "Origin must be promoted beyond empiricalBlocked through the W8 origin-promotion receipt route"
@@ -232,6 +233,7 @@ canonicalW3AcceptedAuthorityProviderPayloadRequest =
         ∷ []
     ; strictBlockerImpact =
         "W3 remains blocked until W3AcceptedAuthorityExternalReceipt is externally supplied"
+        ∷ "The first missing provider field is W3AcceptedEvidenceAuthorityToken; HEP-R55 should be external provider engagement only"
         ∷ "Current B4 status remains empirical-standalone, not promoted"
         ∷ "Current origin status remains empiricalBlocked and depends on W8 origin-promotion evidence"
         ∷ "This module only makes the accepted-authority provider handoff typed and auditable"

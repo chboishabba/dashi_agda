@@ -483,6 +483,138 @@ Round validation:
 - `timeout 30s agda
   DASHI/Physics/Closure/OriginReceiptPromotionExternalRequestPack.agda`
 
+## Active Assignment Round -- First-Missing Formalism Alignment
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `launched`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns integration and determines whether proposed standalone obligation
+  modules are genuinely missing or duplicate already-landed surfaces.
+- Lane workers own one first-missing surface each: W2, W3 authority, W4, W5,
+  and W9.
+
+R:
+- Align the proposed W2/W3/W4/W5/W9 formalism list with the current repo state.
+- Do not reopen stale gaps: W3 non-collapse is already HEP-R53; HEP-R54 makes
+  `W3AcceptedEvidenceAuthorityToken` the current W3 first-missing item.
+- Prefer the repo's existing typed surfaces over new duplicate modules.
+
+C:
+- W2: `NaturalP2ConvergencePromotionObligation.agda`,
+  `CanonicalP2OfflineL2ObstructionCertificate.agda`,
+  `BlockerKillConditions.agda`, `Docs/NaturalDynamicsLaw.md`.
+- W3: `W3AcceptedAuthorityProviderAttempt.agda`,
+  `W3AcceptedAuthorityExternalReceiptRequestPack.agda`,
+  `W3AcceptedAuthorityExternalReceiptObligation.agda`,
+  `W3AcceptedEmpiricalAuthorityGate.agda`.
+- W4: `W4CalibrationRatioZPeakReceiptRequestSurface.agda`,
+  `W4PhysicalCalibrationExternalReceiptRequestPack.agda`,
+  `W4PhysicalCalibrationExternalReceiptObligation.agda`, chemistry cross-band
+  modules.
+- W5: `GRQFTClosurePromotionReceiptRequestPack.agda`,
+  `GRQFTConsumerNextObligation.agda`,
+  `GRQFTConsumerSourceDiagnostic.agda`,
+  `HEPDataMassKernelCalibrationDiagnostic.agda`.
+- W9: `CancellationPressureCompatibilityNextObligation.agda`,
+  `CancellationPressureRetargetConsumerSourceDiagnostic.agda`,
+  `CancellationPressureRetargetConsumerAcceptanceRequestPack.agda`,
+  `DeltaToQuadraticBridgeTheorem.agda`, `WeightedValuationEnergy.agda`.
+
+S:
+- W2 Path B is landed as insufficient; positive p2 bridge/rate remains hard.
+- W3 runner non-collapse and HEP-R54 first-missing diagnostic are landed;
+  current first-missing item is the external accepted evidence authority token.
+- W4 remains blocked by missing t21/t22 support and calibration authority.
+- W5 remains blocked by PDF carrier and GRQFT closure authority.
+- W9 remains blocked by dim-15 theorem or downstream retarget consumer
+  acceptance; consumer absence is already typed.
+
+L:
+- Run five read-mostly workers in parallel.
+- Workers may edit only if a narrow non-duplicative mapping/diagnostic is
+  genuinely missing.
+
+P:
+- `Turing` / `Hubble` (`019df410-7c68-7a80-a5be-466f6c3294ac`): W2
+  Natural p2 bridge/obstruction alignment.
+- `Curie-Authority` / `Harvey` (`019df410-b29b-72b2-89da-45f70210360a`): W3
+  accepted-authority token/provider packet readiness.
+- `Faraday` / `Lovelace` (`019df410-80d5-7350-9981-eec179ea3c9b`): W4
+  calibration/Z-peak/cross-band obligation alignment.
+- `Maxwell` / `Newton` (`019df410-9402-73d2-acbb-f1caf7984ee5`): W5
+  GRQFT/PDF closure obligation alignment.
+- `Planck` / `Archimedes` (`019df410-9dff-79e3-bfda-42a67a86d250`): W9
+  dim-15/retarget-consumer obligation alignment.
+
+G:
+- No postulates may be introduced as hidden assumptions or pseudo-closures.
+- No authority token, calibration receipt, PDF carrier, p2 theorem, W9 kill
+  theorem, or unification claim may be fabricated.
+- Any Agda validation must be targeted with `timeout 30s agda <target>`.
+
+F:
+- The missing evidence is expected to remain external for W3/W4/W5 and
+  theorem-level for W2/W9 unless a worker finds an already-present construct
+  that the current board has missed.
+
+| Lane | Worker | Agent id | Assignment | Expected output | Status |
+|---|---|---|---|---|---|
+| `W2-first-missing-formalism` | `Turing / Hubble` | `019df410-7c68-7a80-a5be-466f6c3294ac` | Map Natural p2 bridge/obstruction request to current W2 surfaces. | No-op rationale or narrow diagnostic naming exact next theorem. | completed; no edit |
+| `W3-authority-first-missing` | `Curie-Authority / Harvey` | `019df410-b29b-72b2-89da-45f70210360a` | Verify W3 first-missing is external `W3AcceptedEvidenceAuthorityToken`. | Provider ask or request-pack sharpening; no token fabrication. | completed; non-promoting |
+| `W4-calibration-first-missing` | `Faraday / Lovelace` | `019df410-80d5-7350-9981-eec179ea3c9b` | Align Z-peak/cross-band/calibration formalism with current W4 surfaces. | No-op rationale or non-promoting obligation mapping. | completed; non-promoting |
+| `W5-GRQFT-first-missing` | `Maxwell / Newton` | `019df410-9402-73d2-acbb-f1caf7984ee5` | Align PDF carrier/GRQFT closure formalism with current W5 surfaces. | Exact PDF/authority first-missing fields. | completed; no edit |
+| `W9-dim15-first-missing` | `Planck / Archimedes` | `019df410-9dff-79e3-bfda-42a67a86d250` | Align dim-15 delta-to-quadratic and retarget-consumer routes. | Exact theorem/consumer next action. | completed; non-promoting |
+
+Round result update:
+
+- `W2-first-missing-formalism` / `Turing`: no edit. The requested
+  `NaturalP2BridgeOrObstruction` obligation is already represented by
+  `NaturalP2BridgeOrObstructionReceipt`, the current missing-field list, and
+  the W2 kill condition. First-missing theorem ingredient remains a concrete
+  admissible natural `p2` candidate family plus positive bridge or typed
+  obstruction over that same family.
+- `W3-authority-first-missing` / `Curie-Authority`: provider request wording
+  sharpened in `W3AcceptedAuthorityExternalReceiptRequestPack.agda` and
+  `W3AcceptedAuthorityProviderAttempt.agda`. HEP-R55 is external-only:
+  provide `W3AcceptedEvidenceAuthorityToken` from an accepted external
+  authority, or return a typed authority-unavailable/mismatch diagnostic.
+- `W4-calibration-first-missing` / `Faraday`: non-promoting aggregation landed
+  in `W4PhysicalCalibrationObligationSurface.agda`. It names
+  `missingSameRecordT21T22ArtifactReceipt` as first missing, preserves the
+  t43/t44 runner-support blocker, and constructs no Z-peak law, calibration
+  authority, physical unit carrier, dimensional preservation, or W4 promotion.
+- `W5-GRQFT-first-missing` / `Maxwell`: no edit. The proposed
+  `GRQFTClosureObligationSurface` is already covered by the existing W5
+  request pack, next obligation, source diagnostic, and mass-kernel
+  `pdfRequired` diagnostic. First missing remains PDF carrier/mass-kernel route
+  plus full GRQFT closure authority, downstream fields, laws, witnesses, and
+  empirical validation.
+- `W9-dim15-first-missing` / `Planck`: non-promoting
+  `Dim15DeltaToQuadraticObligation` landed in
+  `CancellationPressureRetargetConsumerSourceDiagnostic.agda`. The only
+  surviving routes are a dim-15 pressure-witness theorem or downstream
+  `RetargetConsumerInterface` plus
+  `CancellationPressureRetargetConsumerAcceptanceReceipt`.
+
+Round validation:
+
+- `timeout 30s agda
+  DASHI/Physics/Closure/NaturalP2ConvergencePromotionObligation.agda`
+- `timeout 30s agda
+  DASHI/Physics/Closure/W3AcceptedAuthorityExternalReceiptRequestPack.agda`
+- `timeout 30s agda
+  DASHI/Physics/Closure/W3AcceptedAuthorityProviderAttempt.agda`
+- `timeout 30s agda
+  DASHI/Physics/Closure/W4PhysicalCalibrationObligationSurface.agda`
+- `timeout 30s agda
+  DASHI/Physics/Closure/CancellationPressureRetargetConsumerSourceDiagnostic.agda`
+- W5 worker also validated the existing GRQFT/mass-kernel targets with
+  targeted `timeout 30s` checks and made no edits.
+
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 
 Round date: `2026-05-04`
