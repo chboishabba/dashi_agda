@@ -110,6 +110,25 @@ Round result update:
   admissible outputs are still typed theorem receipts, external receipts, or
   typed first-missing diagnostics.
 
+Parallel worker launch update:
+
+| Lane | Named role | Live worker | Agent id | Current assignment |
+|---|---|---|---|---|
+| `K2-W2-natural-p2-bridge` | `Turing` | `Boole` | `019df3e5-51fe-7ed3-9587-3fd4a1251d5d` | Natural p2 bridge/rate theorem or typed obstruction. |
+| `K3-W3-authority-residual` | `Curie-W3` | `Beauvoir` | `019df3e5-527f-7da2-977c-d076b975fcb2` | Residual observable-class/non-collapse progress or first-missing diagnostic; no authority-token fabrication. |
+| `K4-W4-calibration-anchor` | `Faraday` | `Peirce` | `019df3e5-5388-7d73-a1ca-cb205d80ac73` | Z-peak calibration request/witness-pair sharpening without Nat-unit promotion. |
+| `K5-W5-GRQFT-PDF-carrier` | `Maxwell` | `Gauss` | `019df3e5-548b-7291-9479-7a4c7ff89bf8` | GRQFT closure/PDF-carrier payload or missing-field diagnostic. |
+| `K6-W6-runtime-PNF` | `Liskov` | `Parfit` | `019df3e5-55d5-7542-9d22-9e12600d3c07` | Runtime PNF payload if present, otherwise sharper source diagnostic. |
+| `K9-W9-dim15-pressure` | `Planck` | `Jason` | `019df3e5-56c3-7c31-8d11-92b72662fe93` | Dim-15 bridge, weighted replacement receipt, or sharper obstruction. |
+
+Launch governance:
+
+- Workers must return one typed output: promotion receipt, typed obstruction,
+  or first-missing diagnostic.
+- Workers own only their lane file surface and must not edit cross-lane state.
+- W0 integrates only after targeted Agda validation and board/TODO/changelog
+  synchronization.
+
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 
 Round date: `2026-05-04`
