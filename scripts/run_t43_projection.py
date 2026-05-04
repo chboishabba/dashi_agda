@@ -8,7 +8,6 @@ import importlib
 import json
 import math
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
@@ -256,7 +255,7 @@ def incomplete_artifact(
     return finalize_artifact({
         "artifactSchema": "dashi-hepdata-t43-projection-v1",
         "schemaVersion": "0.1.0",
-        "generatedUtc": datetime.now(timezone.utc).isoformat(),
+        "generatedUtc": "deterministic-artifact",
         "worker": "HEP-R32",
         "scope": "scripts-only fail-closed t43/t44 projection runner",
         "projectionComplete": False,
@@ -343,7 +342,7 @@ def completed_projection_artifact(
     return finalize_artifact({
         "artifactSchema": "dashi-hepdata-t43-projection-v1",
         "schemaVersion": "0.1.0",
-        "generatedUtc": datetime.now(timezone.utc).isoformat(),
+        "generatedUtc": "deterministic-artifact",
         "worker": "HEP-R33",
         "scope": "digest-bound t43/t44 projection runner with caller-supplied prediction API",
         "projectionComplete": True,
