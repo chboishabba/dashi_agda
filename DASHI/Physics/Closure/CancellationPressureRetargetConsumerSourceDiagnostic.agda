@@ -143,3 +143,68 @@ currentCancellationPressureRetargetConsumerSourceDiagnostic =
         ∷ "The next admissible move is a downstream consumer source plus acceptance receipt, or an explicit theorem route change"
         ∷ []
     }
+
+record W9RetargetConsumerAbsenceDiagnostic : Setω where
+  field
+    sourceDiagnostic :
+      CancellationPressureRetargetConsumerSourceDiagnostic
+
+    retargetConsumerInterfaceSourceIsMissing :
+      CancellationPressureRetargetConsumerSourceDiagnostic.retargetConsumerInterfaceSource
+        sourceDiagnostic
+      ≡
+      sourceMissing
+
+    acceptanceReceiptSourceIsMissing :
+      CancellationPressureRetargetConsumerSourceDiagnostic.acceptanceReceiptSource
+        sourceDiagnostic
+      ≡
+      sourceMissing
+
+    missingSourceFieldsAreCurrent :
+      CancellationPressureRetargetConsumerSourceDiagnostic.missingSourceFields
+        sourceDiagnostic
+      ≡
+      currentRetargetConsumerSourceMissingFields
+
+    selectedRouteRemainsRetarget :
+      CancellationPressureRetargetConsumerSourceDiagnostic.selectedNextRoute
+        sourceDiagnostic
+      ≡
+      W9.supplyPressureCompatibleTargetWithQcoreBoundary
+
+    preservedBoundariesMatchW9f :
+      CancellationPressureRetargetConsumerSourceDiagnostic.preservedBoundaries
+        sourceDiagnostic
+      ≡
+      W9f.pressureCompatibleButNonQcore
+      ∷ W9f.noAdmissibleQuadraticPromotion
+      ∷ W9f.noCancellationPressureCompatibilityPromotion
+      ∷ []
+
+    absenceBoundary :
+      List String
+
+currentW9RetargetConsumerAbsenceDiagnostic :
+  W9RetargetConsumerAbsenceDiagnostic
+currentW9RetargetConsumerAbsenceDiagnostic =
+  record
+    { sourceDiagnostic =
+        currentCancellationPressureRetargetConsumerSourceDiagnostic
+    ; retargetConsumerInterfaceSourceIsMissing =
+        refl
+    ; acceptanceReceiptSourceIsMissing =
+        refl
+    ; missingSourceFieldsAreCurrent =
+        refl
+    ; selectedRouteRemainsRetarget =
+        refl
+    ; preservedBoundariesMatchW9f =
+        refl
+    ; absenceBoundary =
+        "Planck W9 scan found no in-repo downstream RetargetConsumerInterface inhabitant"
+        ∷ "Planck W9 scan found no in-repo CancellationPressureRetargetConsumerAcceptanceReceipt inhabitant"
+        ∷ "The selected pressure-compatible retarget remains non-Qcore and non-promoting"
+        ∷ "W9 still requires a downstream consumer acceptance receipt or explicit theorem route change"
+        ∷ []
+    }

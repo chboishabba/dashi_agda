@@ -83,6 +83,18 @@ realization-rate evidence beyond the shift-flow carrier. The existing
 shift-flow and realization-indexed receipts remain landed, but they are not
 carrier-general authority.
 
+**Path B / Offline L2 result**
+
+`NaturalP2ConvergencePromotionObligation` now records
+`canonicalOfflineL2InsufficientForConvergenceRate`. This is the Path B
+diagnostic: the existing
+`CanonicalP2OfflineL2ObstructionCertificate` proves that below-δ normalized
+eigenShadow candidates cannot force the canonical `p2` key. That certificate
+is therefore negative evidence for the bridge, not a convergence-rate lift.
+It still leaves the carrier transport law, transport-preserves-rate law,
+uniform realization law, and positive p2-key schedule bridge absent. W2 remains
+blocked and non-promoted.
+
 **Bridge toward natural dynamics law**
 
 To answer the request, we require: a state space defined by the `ShiftState` vector and cone witness, an evolution candidate that emerges from contraction + projection (not a hand-wired coarse map), admissibility tied to geometry/MDL rather than fixed witnesses, and a demonstration that the engineered coarse maps can be replaced by naturally emergent flows (e.g., `Tᵣ` or `Rᵣ` flows). Without that derivation, the law remains engineered/post-selected.

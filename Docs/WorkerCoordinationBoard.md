@@ -218,6 +218,49 @@ F:
 | `3` | `K4-W4-zpeak-anchor` | `Faraday` | `Meitner` | `019df3fb-f611-7f82-9ab3-3596152f70f1` | Verify local t21/t22 data and run/diagnose the dirty Z-peak boundary check. | Numeric chi2/dof and mean pred/data anchor, or exact missing artifact/script diagnostic. |
 | `4` | `K9-W9-retarget-consumer-scan` | `Planck` | `Einstein` | `019df3fb-f7f7-7903-be2a-57d29bc2832f` | Search for a repo consumer that accepts the cancellation-pressure retarget route. | Consumer candidate, or typed `W9RetargetConsumerAbsenceDiagnostic`-style obstruction. |
 
+Round 2 W3 result update:
+
+- `K3-W3-authority-packet` / `Curie-W3`: non-promoting authority-packet
+  diagnostic landed in `W3T43AuthorityPacketCandidateDiagnostic.agda`.
+  `/tmp/t43_clean_freeze.json` exists and matches SHA-256
+  `ffd659e6e2f271d75ec6bf90c5be34cbb9959a8f9d32762c1a2231835fb61eac`, but
+  lacks `per_bin`. The strongest fallback residual candidate is bin `17`,
+  `phiStar = 2.215`, range `1.153` to `3.277`, prediction
+  `0.07610793309784744`, data `0.078012`, residual
+  `-0.001904066902152557`. Provider-grade non-collapse still requires a
+  `per_bin`/pull payload or accepted provider receipt; no authority token or
+  `W3AcceptedAuthorityExternalReceipt` is constructed.
+
+Round 2 W2 result update:
+
+- `K2-W2-L2-sufficiency` / `Turing`: Path B is recorded as a typed
+  non-promotion in `NaturalP2ConvergencePromotionObligation.agda`.
+  `CanonicalP2OfflineL2ObstructionCertificate` is negative evidence: it
+  proves below-delta normalized-shadow p2-key candidates impossible, but does
+  not supply carrier transport, rate preservation, uniform realization, or a
+  positive p2-key schedule bridge. W2 remains blocked.
+
+Round 2 W4 result update:
+
+- `K4-W4-zpeak-anchor` / `Faraday`: typed missing-support diagnostic landed in
+  `W4CalibrationRatioZPeakReceiptRequestSurface.agda`. The local HEPData cache
+  has t43/t44, t45/t46, and t19/t20, but no t21/t22 CSVs. The current
+  `scripts/run_t43_projection.py` runner accepts t43/t44-specific inputs, not
+  the requested dirty `--mode` / `--data` / `--covariance` flags. No
+  `chi2/dof`, `mean pred/data`, calibration authority, unit carrier,
+  dimensional law, or W4 promotion is produced.
+
+Round 2 W9 result update:
+
+- `K9-W9-retarget-consumer-scan` / `Planck`: typed absence diagnostic landed in
+  `CancellationPressureRetargetConsumerSourceDiagnostic.agda`. No in-repo
+  downstream `RetargetConsumerInterface` inhabitant or
+  `CancellationPressureRetargetConsumerAcceptanceReceipt` inhabitant was found.
+  The selected route remains `supplyPressureCompatibleTargetWithQcoreBoundary`
+  and the preserved W9f boundaries remain non-Qcore and non-promoting. W9
+  remains blocked on downstream consumer acceptance or an explicit theorem
+  route change.
+
 Round 2 integration rule:
 
 - W0 will integrate only lane-local changes with targeted `timeout 30s` Agda

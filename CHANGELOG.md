@@ -2,6 +2,37 @@
 
 ## 2026-05-05
 
+- record the W3 and W9 next-priority diagnostics:
+  `W3T43AuthorityPacketCandidateDiagnostic.agda` records the checksum-bound
+  t43 authority-packet candidate and strongest fallback residual witness
+  candidate from `/tmp/t43_clean_freeze.json`, while explicitly noting that the
+  artifact lacks `per_bin` and therefore cannot construct
+  `nonCollapseWitnessReceipt`, `W3AcceptedEvidenceAuthorityToken`, or
+  `W3AcceptedAuthorityExternalReceipt`.
+  `CancellationPressureRetargetConsumerSourceDiagnostic.agda` records
+  `currentW9RetargetConsumerAbsenceDiagnostic`, showing no in-repo downstream
+  retarget consumer or acceptance receipt exists. These are non-promoting
+  diagnostics only.
+
+- land the W2 Path B Offline L2 insufficiency diagnostic:
+  `NaturalP2ConvergencePromotionObligation.agda` now records
+  `canonicalOfflineL2InsufficientForConvergenceRate`, tying the existing
+  `CanonicalP2OfflineL2ObstructionCertificate` to the convergence-rate
+  obligation. The result is explicitly non-promoting: Offline L2 proves that
+  below-delta normalized-shadow candidates cannot force the canonical `p2` key,
+  so it does not supply carrier transport, rate preservation, uniform
+  realization evidence, or a positive p2-key schedule bridge. W2 remains
+  blocked with a sharper first-missing lift diagnostic.
+
+- record the W4 Z-peak dirty-boundary support diagnostic:
+  `W4CalibrationRatioZPeakReceiptRequestSurface.agda` now records that the
+  requested same-record t21/t22 dirty boundary check is blocked locally because
+  `scripts/data/hepdata` lacks the t21 measurement and t22 covariance CSVs, and
+  `scripts/run_t43_projection.py` is currently a t43/t44 runner rather than a
+  generic `--mode` / `--data` / `--covariance` runner. No numeric Z-peak
+  anchor, calibration authority, physical unit carrier, dimensional law, or W4
+  promotion is constructed.
+
 - launch the next-priority worker round:
   `Docs/WorkerCoordinationBoard.md` and `TODO.md` now record the live
   assignments for W3 authority-packet preparation (`Curie-W3` / `Kuhn`,

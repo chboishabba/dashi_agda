@@ -153,6 +153,10 @@ data W4CalibrationRatioZPeakMissingRequirement : Set where
   missingDimensionalPreservationProof :
     W4CalibrationRatioZPeakMissingRequirement
 
+data W4ZPeakDirtyBoundaryCheckSupportStatus : Set where
+  blockedByMissingLocalT21T22CacheAndT43RunnerOnly :
+    W4ZPeakDirtyBoundaryCheckSupportStatus
+
 canonicalW4CalibrationRatioZPeakMissingRequirements :
   List W4CalibrationRatioZPeakMissingRequirement
 canonicalW4CalibrationRatioZPeakMissingRequirements =
@@ -172,6 +176,77 @@ sameRecordZPeakRatioCalibrationLawImpossibleHere :
   W4SameRecordZPeakRatioCalibrationLaw →
   ⊥
 sameRecordZPeakRatioCalibrationLawImpossibleHere ()
+
+record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
+  field
+    supportStatus :
+      W4ZPeakDirtyBoundaryCheckSupportStatus
+
+    requiredMeasurementLocalPath :
+      String
+
+    requiredCovarianceLocalPath :
+      String
+
+    observedLocalCacheFiles :
+      List String
+
+    runnerName :
+      String
+
+    runnerSupportedInputFlags :
+      List String
+
+    runnerUnsupportedRequestedFlags :
+      List String
+
+    numericAnchorStatus :
+      String
+
+    diagnosticBoundary :
+      List String
+
+canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic :
+  W4ZPeakDirtyBoundaryCheckSupportDiagnostic
+canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
+  record
+    { supportStatus =
+        blockedByMissingLocalT21T22CacheAndT43RunnerOnly
+    ; requiredMeasurementLocalPath =
+        "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
+    ; requiredCovarianceLocalPath =
+        "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
+    ; observedLocalCacheFiles =
+        "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv"
+        ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_over_mass_76-106_t44.csv"
+        ∷ "scripts/data/hepdata/ins2079374_phistar_mass_106-170_over_mass_76-106_t45.csv"
+        ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_106-170_over_mass_76-106_t46.csv"
+        ∷ "scripts/data/hepdata/ins2079374_phistar_mass_50-76_t19.csv"
+        ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_t20.csv"
+        ∷ []
+    ; runnerName =
+        "scripts/run_t43_projection.py"
+    ; runnerSupportedInputFlags =
+        "--t43"
+        ∷ "--t44"
+        ∷ "--freeze-hash"
+        ∷ "--prediction-api"
+        ∷ "--output"
+        ∷ []
+    ; runnerUnsupportedRequestedFlags =
+        "--mode"
+        ∷ "--data"
+        ∷ "--covariance"
+        ∷ []
+    ; numericAnchorStatus =
+        "not-produced: local t21/t22 cache is absent and the current runner is t43/t44-specific"
+    ; diagnosticBoundary =
+        "This diagnostic records script/data support only"
+        ∷ "It does not construct a W4CalibrationRatioZPeakReceipt"
+        ∷ "It does not construct a Candidate256PhysicalCalibrationAuthorityToken"
+        ∷ "It does not construct a physical unit carrier, dimensional law, or W4 promotion"
+        ∷ []
+    }
 
 record W4SameRecordZPeakT21T22ArtifactReceiptRequest : Set where
   field
@@ -304,6 +379,14 @@ record W4CalibrationRatioZPeakReceiptRequestSurface : Setω where
       ≡
       canonicalW4SameRecordZPeakT21T22ArtifactReceiptRequest
 
+    zPeakDirtyBoundaryCheckSupportDiagnostic :
+      W4ZPeakDirtyBoundaryCheckSupportDiagnostic
+
+    zPeakDirtyBoundaryCheckSupportDiagnosticIsCanonical :
+      zPeakDirtyBoundaryCheckSupportDiagnostic
+      ≡
+      canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic
+
     missingRequirements :
       List W4CalibrationRatioZPeakMissingRequirement
 
@@ -368,6 +451,10 @@ canonicalW4CalibrationRatioZPeakReceiptRequestSurface =
     ; zPeakT21T22ArtifactReceiptRequest =
         canonicalW4SameRecordZPeakT21T22ArtifactReceiptRequest
     ; zPeakT21T22ArtifactReceiptRequestIsCanonical =
+        refl
+    ; zPeakDirtyBoundaryCheckSupportDiagnostic =
+        canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic
+    ; zPeakDirtyBoundaryCheckSupportDiagnosticIsCanonical =
         refl
     ; missingRequirements =
         canonicalW4CalibrationRatioZPeakMissingRequirements

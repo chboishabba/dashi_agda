@@ -253,6 +253,16 @@ was isolated behind an abstract gap boundary so targeted Agda validation stays
 bounded. W2 remains blocked: no natural p2 bridge, promotion authority, or
 carrier-general convergence receipt is constructed.
 
+Turing W2 Path B Offline L2 result `2026-05-05`:
+`NaturalP2ConvergencePromotionObligation` now also carries
+`canonicalOfflineL2InsufficientForConvergenceRate`. The existing
+`CanonicalP2OfflineL2ObstructionCertificate` is recorded as negative evidence:
+all below-δ normalized-shadow candidates that would force the canonical `p2`
+key are impossible. It therefore cannot by itself yield a carrier-general
+convergence-rate receipt. The first missing lift fields are carrier transport,
+transport-preserves-pointed-rate, uniform realization, and a positive p2-key
+schedule bridge. This is non-promoting.
+
 Faraday W4 calibration-anchor result `2026-05-05`:
 `W4CalibrationRatioZPeakReceiptRequestSurface` now carries a typed
 same-record t21/t22 artifact receipt request for the Z-peak measurement and
@@ -263,6 +273,34 @@ as a provider field while preserving the constructorless physical calibration
 authority boundary. W4 remains blocked on external calibration authority,
 physical unit carrier, dimensional preservation law, and concrete physical
 witness receipt; no Nat surrogate is promoted to a physical unit.
+
+Faraday W4 Z-peak dirty-boundary support result `2026-05-05`:
+`W4CalibrationRatioZPeakReceiptRequestSurface` now also records
+`canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic`: the local cache contains
+t43/t44, t45/t46, and t19/t20, but not the required same-record t21/t22 CSVs,
+and `scripts/run_t43_projection.py` supports t43/t44 flags rather than the
+requested dirty `--mode` / `--data` / `--covariance` invocation. No Z-peak
+`chi2/dof` or `mean pred/data` anchor was produced; this is a missing
+artifact/script-support diagnostic only.
+
+Curie-W3 authority-packet result `2026-05-05`:
+`W3T43AuthorityPacketCandidateDiagnostic` records the checksum-bound local
+t43 authority-packet candidate. `/tmp/t43_clean_freeze.json` matches SHA-256
+`ffd659e6e2f271d75ec6bf90c5be34cbb9959a8f9d32762c1a2231835fb61eac`, but lacks
+`per_bin`; the strongest fallback residual candidate is bin `17`, `phiStar =
+2.215`, prediction `0.07610793309784744`, data `0.078012`, residual
+`-0.001904066902152557`. This is not provider-grade non-collapse. The next
+admissible action is a verbose/per-bin artifact or external provider payload
+that can bind `nonCollapseWitnessReceipt`, followed by the accepted authority
+token and `W3AcceptedAuthorityExternalReceipt`.
+
+Planck W9 retarget-consumer scan result `2026-05-05`:
+`CancellationPressureRetargetConsumerSourceDiagnostic` now exports
+`currentW9RetargetConsumerAbsenceDiagnostic`. No in-repo downstream
+`RetargetConsumerInterface` or
+`CancellationPressureRetargetConsumerAcceptanceReceipt` inhabitant was found.
+The pressure-compatible retarget remains non-Qcore and non-promoting; W9 stays
+blocked on downstream consumer acceptance or an explicit theorem route change.
 
 W5 GRQFT/PDF diagnostic sharpening `2026-05-05`: `Maxwell` added the external
 PDF carrier/mass-kernel route as a typed missing upstream field in

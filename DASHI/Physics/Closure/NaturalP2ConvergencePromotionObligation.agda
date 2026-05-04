@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.CanonicalDynamicsLawTheorem as CDT
+import DASHI.Physics.Closure.CanonicalP2OfflineL2ObstructionCertificate as CPOL2
 import DASHI.Physics.Closure.CanonicalP2KeyScheduleBridgeObstruction as CPKSO
 import DASHI.Physics.Closure.CanonicalScheduleIndependentNaturalChargeNextIngredientGap as CSING
 import DASHI.Physics.Closure.P0BlockadeProofObligations as P0
@@ -121,6 +122,8 @@ data NaturalP2ConvergenceMissingField : Set where
     NaturalP2ConvergenceMissingField
   missingUniformRealizationRateBeyondShiftFlow :
     NaturalP2ConvergenceMissingField
+  missingOfflineL2ToCarrierRateLift :
+    NaturalP2ConvergenceMissingField
 
 record NaturalP2ConvergencePromotionImpossibilityDiagnostic : Setω where
   field
@@ -143,6 +146,76 @@ data StrongerNaturalP2ConvergenceIngredient : Set where
     StrongerNaturalP2ConvergenceIngredient
   uniformRealizationRateBeyondShiftFlowNeeded :
     StrongerNaturalP2ConvergenceIngredient
+  offlineL2ToCarrierGeneralRateLiftNeeded :
+    StrongerNaturalP2ConvergenceIngredient
+
+data OfflineL2ConvergenceRateLiftMissingField : Set where
+  missingBelowδToCarrierTransport :
+    OfflineL2ConvergenceRateLiftMissingField
+  missingOfflineL2PreservesPointedRate :
+    OfflineL2ConvergenceRateLiftMissingField
+  missingOfflineL2UniformRealizationLaw :
+    OfflineL2ConvergenceRateLiftMissingField
+  missingPositiveP2KeyScheduleBridge :
+    OfflineL2ConvergenceRateLiftMissingField
+
+record OfflineL2InsufficientForConvergenceRate : Setω where
+  field
+    offlineL2Certificate :
+      CPOL2.CanonicalP2OfflineL2ObstructionCertificate
+
+    allBelowδCandidatesImpossible :
+      CPOL2.OfflineL2P2BridgeCandidate
+        CPOL2.normalizedShadowBelowδ_p2 →
+      ⊥
+
+    landedShiftConvergence :
+      P0.ConvergenceBound {PGFSI.ShiftFlowState}
+
+    landedRealizationMetricFamily :
+      CDT.RealizationIndexedPointedMetricConvergenceTarget
+
+    missingLiftFields :
+      List OfflineL2ConvergenceRateLiftMissingField
+
+    stillMissingPromotionFields :
+      List NaturalP2ConvergenceMissingField
+
+    resultBoundary :
+      String
+
+canonicalOfflineL2InsufficientForConvergenceRate :
+  OfflineL2InsufficientForConvergenceRate
+canonicalOfflineL2InsufficientForConvergenceRate =
+  record
+    { offlineL2Certificate =
+        CPOL2.canonicalP2OfflineL2ObstructionCertificate
+    ; allBelowδCandidatesImpossible =
+        CPOL2.CanonicalP2OfflineL2ObstructionCertificate.allBelowδCandidatesImpossible
+          CPOL2.canonicalP2OfflineL2ObstructionCertificate
+    ; landedShiftConvergence =
+        CDT.CanonicalDynamicsLawTheorem.boundedConvergenceRate
+          CDT.canonicalDynamicsLawTheorem
+    ; landedRealizationMetricFamily =
+        CDT.CanonicalDynamicsLawTheorem.realizationMetricConvergenceFamily
+          CDT.canonicalDynamicsLawTheorem
+    ; missingLiftFields =
+        missingBelowδToCarrierTransport
+        ∷ missingOfflineL2PreservesPointedRate
+        ∷ missingOfflineL2UniformRealizationLaw
+        ∷ missingPositiveP2KeyScheduleBridge
+        ∷ []
+    ; stillMissingPromotionFields =
+        missingCarrierTransportLaw
+        ∷ missingTransportPreservesConvergenceLaw
+        ∷ missingCarrierGeneralConvergenceRate
+        ∷ missingRealizationUniformityLaw
+        ∷ missingUniformRealizationRateBeyondShiftFlow
+        ∷ missingOfflineL2ToCarrierRateLift
+        ∷ []
+    ; resultBoundary =
+        "Path B non-promotion: the OfflineL2 certificate is an obstruction to below-delta normalized-shadow candidates forcing the p2 key; it does not supply carrier transport, rate preservation, or uniform realization evidence for a carrier-general convergence bound"
+    }
 
 record NaturalP2BridgeCarrierGeneralConvergenceObstruction : Setω where
   field
@@ -160,6 +233,9 @@ record NaturalP2BridgeCarrierGeneralConvergenceObstruction : Setω where
 
     landedRealizationMetricFamily :
       CDT.RealizationIndexedPointedMetricConvergenceTarget
+
+    pathBOfflineL2Result :
+      OfflineL2InsufficientForConvergenceRate
 
     strongerIngredients :
       List StrongerNaturalP2ConvergenceIngredient
@@ -189,10 +265,13 @@ canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction =
     ; landedRealizationMetricFamily =
         CDT.CanonicalDynamicsLawTheorem.realizationMetricConvergenceFamily
           CDT.canonicalDynamicsLawTheorem
+    ; pathBOfflineL2Result =
+        canonicalOfflineL2InsufficientForConvergenceRate
     ; strongerIngredients =
         canonicalP2KeyScheduleBridgeNeeded
         ∷ carrierTransportPreservesRateNeeded
         ∷ uniformRealizationRateBeyondShiftFlowNeeded
+        ∷ offlineL2ToCarrierGeneralRateLiftNeeded
         ∷ []
     ; noPromotionAuthority =
         naturalP2ConvergencePromotionAuthorityUnavailable
@@ -225,6 +304,9 @@ record NaturalP2ConvergencePromotionCurrentStatus : Setω where
 
     sharperTypedObstruction :
       NaturalP2BridgeCarrierGeneralConvergenceObstruction
+
+    pathBOfflineL2Result :
+      OfflineL2InsufficientForConvergenceRate
 
     missingFields :
       List NaturalP2ConvergenceMissingField
@@ -275,12 +357,15 @@ currentNaturalP2ConvergencePromotionStatus =
               ∷ missingCarrierGeneralConvergenceRate
               ∷ missingRealizationUniformityLaw
               ∷ missingUniformRealizationRateBeyondShiftFlow
+              ∷ missingOfflineL2ToCarrierRateLift
               ∷ []
           ; obstructionSummary =
               "NaturalP2ConvergencePromotionReceipt is uninhabitable here because the authority token has no constructor; landed shift-flow convergence does not provide natural p2 or carrier-general convergence authority"
           }
     ; sharperTypedObstruction =
         canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction
+    ; pathBOfflineL2Result =
+        canonicalOfflineL2InsufficientForConvergenceRate
     ; missingFields =
         missingPromotionAuthorityToken
         ∷ missingNaturalBridgeOrObstruction
@@ -294,6 +379,7 @@ currentNaturalP2ConvergencePromotionStatus =
         ∷ missingCarrierGeneralConvergenceRate
         ∷ missingRealizationUniformityLaw
         ∷ missingUniformRealizationRateBeyondShiftFlow
+        ∷ missingOfflineL2ToCarrierRateLift
         ∷ []
     ; requiredNextReceipt =
         "provide natural p2 bridge or obstruction plus carrier-general convergence-rate receipt beyond the shift-flow carrier"
@@ -301,11 +387,13 @@ currentNaturalP2ConvergencePromotionStatus =
         "finite convergence is landed for the concrete shift-flow carrier"
         ∷ "pointed metric convergence is landed for the concrete shift-flow carrier"
         ∷ "realization-indexed metric convergence is landed for realized shift-flow states"
+        ∷ "offline L2 obstruction certificate is landed as a negative below-delta p2-key candidate result"
         ∷ []
     ; nonPromotionBoundary =
         "This module is a W2 promotion-obligation surface only"
         ∷ "No natural p2 bridge is constructed here"
         ∷ "No p2 obstruction over an admissible candidate family is constructed here"
+        ∷ "Offline L2 is not promoted to a carrier-general convergence-rate receipt"
         ∷ "No convergence-rate theorem beyond the shift-flow carrier is promoted here"
         ∷ []
     }
