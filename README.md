@@ -561,7 +561,11 @@ Current worker lanes:
 - `W5`: richer GR/QFT consumer gate.
 - `W6`: ITIR/PNF receipt-bearing consumer wiring.
 - `W7`: claim-governance synchronization for higher-structure and cross-scale
-  charts.
+  charts. Current post-HEP-R53 publishable scope is only the bounded t43
+  below-Z Drell-Yan phistar ratio result: formal carrier plus
+  no-free-parameter phistar ratio comparison, `chi2/dof = 2.1565191176`, and
+  runner-side non-collapse evidence. This is not unification and not full W3
+  accepted authority before HEP-R54.
 - `W8`: origin receipt for the minimal-credible closure path.
 - `W9`: cancellation-pressure seam in `DeltaToQuadraticBridgeTheorem`.
 

@@ -1,10 +1,15 @@
 module DASHI.Physics.Closure.W3AcceptedAuthorityProviderAttempt where
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; _∷_; [])
 
+import DASHI.Physics.Closure.HEPDataResidualObservableClassReceiptProtoAlignment as Residual
+import DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt as Comparison
+import DASHI.Physics.Closure.HEPDataW3NonCollapseWitnessReceipt as NonCollapse
+import DASHI.Physics.Closure.HEPDataW3PromotionCandidate as Candidate
 import DASHI.Physics.Closure.OriginReceiptPromotionExternalObligation as W8
 import DASHI.Physics.Closure.OriginReceiptPromotionExternalRequestPack as W8Pack
 import DASHI.Physics.Closure.W3AcceptedAuthorityExternalReceiptObligation as EXT
@@ -84,6 +89,18 @@ record W3AcceptedAuthorityProviderAttemptDiagnostic : Setω where
     originPromotionCurrentStatus :
       W8.OriginReceiptPromotionExternalCurrentStatus
 
+    w3PromotionCandidate :
+      Candidate.HEPDataW3PromotionCandidate
+
+    w3ComparisonLawReceipt :
+      Comparison.W3ComparisonLawReceipt
+
+    w3RunnerPerBinNonCollapseReceipt :
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt
+
+    residualProtoAlignment :
+      Residual.HEPDataResidualObservableClassReceiptProtoAlignment
+
     constructionDecision :
       W3AcceptedAuthorityProviderAttemptDecision
 
@@ -113,6 +130,14 @@ record W3AcceptedAuthorityProviderAttemptDiagnostic : Setω where
       ≡
       Pack.W3AcceptedAuthorityProviderPayloadRequest.missingProviderFields
         Pack.canonicalW3AcceptedAuthorityProviderPayloadRequest
+
+    firstMissingAuthorityProviderField :
+      Pack.W3AcceptedAuthorityProviderMissingField
+
+    firstMissingAuthorityProviderFieldIsAcceptedEvidenceAuthorityToken :
+      firstMissingAuthorityProviderField
+      ≡
+      Pack.missingAcceptedEvidenceAuthorityToken
 
     attemptBlockers :
       List W3AcceptedAuthorityProviderAttemptBlocker
@@ -168,6 +193,35 @@ record W3AcceptedAuthorityProviderAttemptDiagnostic : Setω where
       ≡
       W8.noCurrentOriginAuthoritySourceFound
 
+    r51CandidateNumericPasses :
+      Candidate.HEPDataW3PromotionCandidate.cleanRunNumericPass
+        w3PromotionCandidate
+      ≡
+      true
+
+    r52ComparisonLawPromotesBoundedT43 :
+      Comparison.W3ComparisonLawReceipt.w3Status w3ComparisonLawReceipt
+      ≡
+      Comparison.promotedT43BelowZOnly
+
+    r53RunnerPerBinWitnessExtracted :
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.status
+        w3RunnerPerBinNonCollapseReceipt
+      ≡
+      NonCollapse.perBinRunnerWitnessExtracted
+
+    r53AuthorityTokenConstructedHereIsFalse :
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.authorityTokenConstructedHere
+        w3RunnerPerBinNonCollapseReceipt
+      ≡
+      false
+
+    r53ExternalReceiptConstructedHereIsFalse :
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.acceptedAuthorityExternalReceiptConstructedHere
+        w3RunnerPerBinNonCollapseReceipt
+      ≡
+      false
+
     impossibleAuthorityHere :
       AUTH.W3AcceptedEvidenceAuthorityToken →
       EXT.W3AcceptedAuthorityExternalReceiptImpossible
@@ -205,6 +259,9 @@ record W3AcceptedAuthorityProviderAttemptDiagnostic : Setω where
     exactW8ExternalReceiptName :
       String
 
+    nextProviderPacket :
+      String
+
     diagnosticBoundary :
       List String
 
@@ -229,6 +286,14 @@ canonicalW3AcceptedAuthorityProviderAttemptDiagnostic =
         W8Pack.canonicalOriginReceiptPromotionExternalRequestPack
     ; originPromotionCurrentStatus =
         W8.canonicalOriginReceiptPromotionExternalCurrentStatus
+    ; w3PromotionCandidate =
+        Candidate.canonicalHEPDataW3PromotionCandidate
+    ; w3ComparisonLawReceipt =
+        Comparison.canonicalHEPDataW3ComparisonLawReceipt
+    ; w3RunnerPerBinNonCollapseReceipt =
+        NonCollapse.canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt
+    ; residualProtoAlignment =
+        Residual.canonicalHEPDataResidualObservableClassReceiptProtoAlignment
     ; constructionDecision =
         noLocalAcceptedAuthorityExternalReceipt
     ; externalReceiptSource =
@@ -247,6 +312,10 @@ canonicalW3AcceptedAuthorityProviderAttemptDiagnostic =
         Pack.W3AcceptedAuthorityProviderPayloadRequest.missingProviderFields
           Pack.canonicalW3AcceptedAuthorityProviderPayloadRequest
     ; providerMissingFieldsAreCanonical =
+        refl
+    ; firstMissingAuthorityProviderField =
+        Pack.missingAcceptedEvidenceAuthorityToken
+    ; firstMissingAuthorityProviderFieldIsAcceptedEvidenceAuthorityToken =
         refl
     ; attemptBlockers =
         canonicalW3AcceptedAuthorityProviderAttemptBlockers
@@ -273,6 +342,16 @@ canonicalW3AcceptedAuthorityProviderAttemptDiagnostic =
     ; w8SourceScanResult =
         W8.noCurrentOriginAuthoritySourceFound
     ; w8SourceScanResultIsCanonical =
+        refl
+    ; r51CandidateNumericPasses =
+        refl
+    ; r52ComparisonLawPromotesBoundedT43 =
+        refl
+    ; r53RunnerPerBinWitnessExtracted =
+        refl
+    ; r53AuthorityTokenConstructedHereIsFalse =
+        refl
+    ; r53ExternalReceiptConstructedHereIsFalse =
         refl
     ; impossibleAuthorityHere =
         Pack.W3AcceptedAuthorityProviderPayloadRequest.impossibleAuthorityHere
@@ -306,9 +385,13 @@ canonicalW3AcceptedAuthorityProviderAttemptDiagnostic =
     ; exactW8ExternalReceiptName =
         W8Pack.OriginReceiptPromotionExternalRequestPack.exactExternalReceiptName
           W8Pack.canonicalOriginReceiptPromotionExternalRequestPack
+    ; nextProviderPacket =
+        Pack.W3AcceptedAuthorityProviderPayloadRequest.exactAuthorityTokenName
+          Pack.canonicalW3AcceptedAuthorityProviderPayloadRequest
     ; diagnosticBoundary =
-        "No legitimate W3AcceptedAuthorityExternalReceipt is locally constructible from current repo artifacts"
-        ∷ "The accepted evidence authority token is constructorless and is not supplied by the request pack"
+        "HEP-R51/R52/R53 surfaces are consumed: bounded t43 candidate, comparison-law receipt, and runner per-bin non-collapse receipt"
+        ∷ "No legitimate W3AcceptedAuthorityExternalReceipt is locally constructible from current repo artifacts"
+        ∷ "The first missing field is W3AcceptedEvidenceAuthorityToken, which is constructorless and is not supplied by the request pack"
         ∷ "Any evidence-backed empirical target or accepted-authority external receipt eliminates through that missing authority token"
         ∷ "B4 empirical promotion remains missing because the current B4 shell report is standaloneOnly"
         ∷ "Origin promotion remains missing because W8 reports no current origin authority source and the current origin receipt remains empiricalBlocked"

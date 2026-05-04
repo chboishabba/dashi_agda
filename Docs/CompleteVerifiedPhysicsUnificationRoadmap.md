@@ -161,6 +161,15 @@ Until every gate closes, the correct claim remains:
 > DASHI has a verified internal spine and explicit physics-facing lanes, with a
 > finite roadmap to complete and verified physics unification.
 
+The current post-HEP-R53 empirical claim is narrower:
+
+> DASHI has a bounded below-Z Drell-Yan phistar ratio result for the t43
+> `50-76 / 76-106 GeV` lane: a formal carrier and no-free-parameter phistar
+> ratio comparison with `chi2/dof = 2.1565191176`, plus runner-side
+> non-collapse evidence. This is not complete physics unification, not full
+> W3 accepted authority before HEP-R54, and not closure of the W2, W4, W5, or
+> W9 gaps.
+
 After every gate closes, the target claim can become:
 
 > DASHI is complete and verified physics unification.

@@ -53,6 +53,15 @@ record OriginReceiptPromotionExternalRequestPack : Setω where
     missingEvidenceKinds :
       List W8.OriginPromotionExternalReceiptNeeded
 
+    supportEvidence :
+      List W8.OriginReceiptPromotionSupportEvidence
+
+    supportEvidenceIsCurrent :
+      supportEvidence
+      ≡
+      W8.OriginReceiptPromotionExternalCurrentStatus.supportEvidence
+        currentStatus
+
     exactExternalReceiptName :
       String
 
@@ -106,6 +115,11 @@ canonicalOriginReceiptPromotionExternalRequestPack =
         W8.needExternalOriginPromotedEmpiricalStatusAuthority
         ∷ W8.needOriginEmpiricalAdequacyBridgeForCurrentReceipt
         ∷ []
+    ; supportEvidence =
+        W8.OriginReceiptPromotionExternalCurrentStatus.supportEvidence
+          W8.canonicalOriginReceiptPromotionExternalCurrentStatus
+    ; supportEvidenceIsCurrent =
+        refl
     ; exactExternalReceiptName =
         "DASHI.Physics.Closure.OriginReceiptPromotionExternalObligation.OriginReceiptPromotionExternalReceipt"
     ; exactEvidenceCarrierName =
@@ -137,6 +151,7 @@ canonicalOriginReceiptPromotionExternalRequestPack =
         ∷ []
     ; sourceDiagnosticSummary =
         "canonicalCurrentOriginAuthoritySourceDiagnostic reports no current origin authority source"
+        ∷ "HEP-R53 t43 runner-side non-collapse evidence is support evidence only, not external origin authority"
         ∷ "current source scan requires ExternalOriginPromotedEmpiricalStatusAuthority or an origin-specific P0.EmpiricalAdequacy bridge"
         ∷ "the current MinimalCredibleShift origin receipt remains empiricalBlocked"
         ∷ []

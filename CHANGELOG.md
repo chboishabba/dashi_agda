@@ -2,6 +2,15 @@
 
 ## 2026-05-05
 
+- update W7 post-HEP-R53 publishable-scope governance:
+  `ClaimGovernancePromotionObligation.agda` now binds the bounded W3 t43
+  comparison-law receipt to the HEP-R53 runner-side non-collapse receipt. The
+  exact admissible claim is formal carrier plus no-free-parameter below-Z t43
+  phistar ratio comparison, `50-76 / 76-106 GeV`, `chi2/dof =
+  2.1565191176`, and runner-side non-collapse witness. This is not complete
+  unification, not full W3 accepted authority before HEP-R54, and not closure
+  of W2, W4, W5, W6, W8, or W9.
+
 - launch the HEP-R54 / publishable-scope sidecar round:
   `Docs/WorkerCoordinationBoard.md` and `TODO.md` now assign `Curie-W3` /
   `Confucius` (`019df40b-48e3-7291-b872-edcd5744cb71`) to the W3 accepted
@@ -12,6 +21,18 @@
   HEP-R53. This is a coordination update only; no accepted authority token,
   W4 calibration, W8 origin authority, W2 theorem, W9 kill receipt, or full
   unification claim is constructed.
+
+- integrate HEP-R54 / publishable-scope sidecar results:
+  `W3AcceptedAuthorityProviderAttempt.agda` now consumes HEP-R51/R52/R53 and
+  records `missingAcceptedEvidenceAuthorityToken` as the first missing
+  authority provider field; no `W3AcceptedEvidenceAuthorityToken` or
+  `W3AcceptedAuthorityExternalReceipt` is constructed. W7 governance now
+  records the honest bounded publishable claim after HEP-R53: below-Z Drell-Yan
+  phistar t43, formal carrier plus no-free-parameter comparison, `chi2/dof =
+  2.1565191176`, and runner-side non-collapse evidence, explicitly not full
+  unification or full W3 accepted authority. W8 origin request surfaces now
+  list HEP-R53 as support evidence only, not origin authority. W4 remains
+  blocked on same-record t21/t22 artifacts and Z-peak runner support.
 
 - land HEP-R53 per-bin output and W3 t43 non-collapse witness receipt:
   `scripts/run_t43_projection.py` now emits a `per_bin` payload containing

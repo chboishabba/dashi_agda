@@ -103,9 +103,11 @@ Round result update:
 - `K7-W7-claim-governance` / `Arendt`: completed for bounded scope.
   `BoundedW3T43ClaimGovernancePromotionReceipt` records the publishable claim
   boundary: below-Z Drell-Yan phistar ratio, `50-76 / 76-106 GeV`, t43 lane,
-  `chi2/dof = 2.1565191176`, clean deterministic carrier, no posterior tuning,
-  and no external PDF. It does not construct the broader
-  `ClaimGovernancePromotionAuthorityToken`.
+  formal carrier plus no-free-parameter phistar ratio comparison,
+  `chi2/dof = 2.1565191176`, and HEP-R53 runner-side non-collapse evidence.
+  It does not construct the broader `ClaimGovernancePromotionAuthorityToken`,
+  does not claim unification, and does not claim full W3 accepted authority
+  before HEP-R54.
 - `K2` returned a typed obstruction sharpening. The initial targeted Agda check
   timed out at `30s` in
   `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`; W0
@@ -442,9 +444,44 @@ F:
 
 | Lane | Worker | Agent id | Assignment | Success condition | Status |
 |---|---|---|---|---|---|
-| `HEP-R54-W3-authority-assembly` | `Curie-W3 / Confucius` | `019df40b-48e3-7291-b872-edcd5744cb71` | Assemble `W3AcceptedAuthorityExternalReceipt` if constructible from HEP-R51/R52/R53, or land a typed first-missing authority diagnostic. | Real receipt or non-promoting diagnostic naming the exact absent authority field. | launched |
-| `W7-publishable-scope-after-R53` | `Arendt / Kant` | `019df40b-4a39-74f0-93d3-36973dc08e56` | Record the honest bounded publishable claim after HEP-R53. | Claim text includes t43 comparison plus non-collapse and excludes full unification. | launched |
-| `W4-W8-sidecar-after-R53` | `Faraday-Hypatia / Ampere` | `019df40b-4b45-7453-9db4-ecfcc11eaf3d` | Check whether HEP-R53 changes W4 or W8 next action. | Narrow status update or no-op rationale; no external token fabrication. | launched |
+| `HEP-R54-W3-authority-assembly` | `Curie-W3 / Confucius` | `019df40b-48e3-7291-b872-edcd5744cb71` | Assemble `W3AcceptedAuthorityExternalReceipt` if constructible from HEP-R51/R52/R53, or land a typed first-missing authority diagnostic. | Real receipt or non-promoting diagnostic naming the exact absent authority field. | completed; non-promoting |
+| `W7-publishable-scope-after-R53` | `Arendt / Kant` | `019df40b-4a39-74f0-93d3-36973dc08e56` | Record the honest bounded publishable claim after HEP-R53. | Claim text includes t43 comparison plus non-collapse and excludes full unification and full W3 accepted authority before HEP-R54. | completed |
+| `W4-W8-sidecar-after-R53` | `Faraday-Hypatia / Ampere` | `019df40b-4b45-7453-9db4-ecfcc11eaf3d` | Check whether HEP-R53 changes W4 or W8 next action. | Narrow status update or no-op rationale; no external token fabrication. | completed; W8 support only |
+
+Round result update:
+
+- `HEP-R54-W3-authority-assembly` / `Curie-W3`: non-promoting diagnostic
+  landed in `W3AcceptedAuthorityProviderAttempt.agda`. HEP-R51/R52/R53 are now
+  consumed as typed inputs: W3 promotion candidate, comparison-law receipt,
+  runner per-bin non-collapse receipt, and residual proto alignment. The first
+  missing authority provider field is
+  `missingAcceptedEvidenceAuthorityToken`; no
+  `W3AcceptedEvidenceAuthorityToken` or `W3AcceptedAuthorityExternalReceipt` is
+  constructed.
+- `W7-publishable-scope-after-R53` / `Arendt`: bounded governance scope
+  updated in `ClaimGovernancePromotionObligation.agda` and supporting docs.
+  The publishable claim is restricted to the below-Z Drell-Yan phistar ratio
+  t43 lane: formal carrier plus no-free-parameter comparison,
+  `chi2/dof = 2.1565191176`, and HEP-R53 runner-side non-collapse evidence.
+  It explicitly excludes full unification and full W3 accepted authority before
+  HEP-R54 closes.
+- `W4-W8-sidecar-after-R53` / `Faraday-Hypatia`: W8 support evidence landed in
+  `OriginReceiptPromotionExternalObligation.agda` and
+  `OriginReceiptPromotionExternalRequestPack.agda`. HEP-R53 is support
+  evidence only, not external origin authority. W4 next action is unchanged:
+  it remains blocked on same-record t21/t22 artifacts and suitable Z-peak
+  runner support.
+
+Round validation:
+
+- `timeout 30s agda
+  DASHI/Physics/Closure/W3AcceptedAuthorityProviderAttempt.agda`
+- `timeout 30s agda
+  DASHI/Physics/Closure/ClaimGovernancePromotionObligation.agda`
+- `timeout 30s agda
+  DASHI/Physics/Closure/OriginReceiptPromotionExternalObligation.agda`
+- `timeout 30s agda
+  DASHI/Physics/Closure/OriginReceiptPromotionExternalRequestPack.agda`
 
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 

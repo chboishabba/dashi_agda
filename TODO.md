@@ -39,11 +39,26 @@ authority assembly attempt after HEP-R53; success is either a real
 `W3AcceptedAuthorityExternalReceipt` or a typed first-missing diagnostic naming
 the absent authority field. `Arendt` / `Kant`
 (`019df40b-4a39-74f0-93d3-36973dc08e56`) owns W7 publishable-scope governance:
-bounded t43 comparison plus non-collapse evidence, explicitly not full
-unification. `Faraday-Hypatia` / `Ampere`
+bounded t43 comparison plus non-collapse evidence, formal carrier plus
+no-free-parameter phistar ratio comparison, `chi2/dof = 2.1565191176275613`,
+explicitly not full unification and not full W3 accepted authority before
+HEP-R54; this W7 scope update is now landed in
+`ClaimGovernancePromotionObligation.agda`. `Faraday-Hypatia` / `Ampere`
 (`019df40b-4b45-7453-9db4-ecfcc11eaf3d`) owns W4/W8 sidecar status after
 HEP-R53. W2 and W9 are not relaunched in this round; their prior diagnostics
 remain the current hard-blocker state.
+
+HEP-R54 / publishable-scope results `2026-05-05`: `W3AcceptedAuthorityProviderAttempt`
+now consumes HEP-R51/R52/R53 and records
+`missingAcceptedEvidenceAuthorityToken` as the first missing authority provider
+field; HEP-R54 is non-promoting and constructs no accepted authority receipt.
+`ClaimGovernancePromotionObligation` and supporting docs now state the bounded
+publishable claim after HEP-R53: below-Z Drell-Yan phistar ratio t43,
+formal carrier plus no-free-parameter comparison, `chi2/dof = 2.1565191176`,
+and runner-side non-collapse evidence; not unification and not full W3 accepted
+authority. W8 request surfaces now list HEP-R53 as support evidence only, not
+origin authority. W4 remains unchanged: blocked on t21/t22 artifacts and
+Z-peak runner support.
 
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a

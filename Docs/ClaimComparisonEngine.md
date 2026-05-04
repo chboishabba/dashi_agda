@@ -1239,6 +1239,13 @@ run pipeline -> inspect emitted receipts -> compute residuals
   validation receipts required for higher-structure, cross-scale, temporal,
   spacetime, neurochemical, and market lanes, but constructs no authority token
   and promotes no chart claim.
+- After HEP-R53, the only publishable physics-facing W7 claim is bounded:
+  below-Z Drell-Yan phistar ratio `50-76 / 76-106 GeV`, t43 lane, formal
+  carrier plus no-free-parameter phistar ratio comparison with
+  `chi2/dof = 2.1565191176`, and runner-side non-collapse witness
+  `(bin 12, prediction 0.0486590199823977, data 0.049758, pull
+  -2.280159308132989)`. This is not a unification claim, not full W3 accepted
+  authority, and not a promotion of W2, W4, W5, or W9.
 - A cross-scale physics / biology / consciousness reading is not a theorem
   that quantum measurement, vedana, projectors, unitaries, RG relevance,
   thermodynamic free energy, Landauer erasure, chemical phase transitions, DNA

@@ -1,12 +1,14 @@
 module DASHI.Physics.Closure.ClaimGovernancePromotionObligation where
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.TemporalSheafProofObligations as Temporal
 import DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt as W3T43
+import DASHI.Physics.Closure.HEPDataW3NonCollapseWitnessReceipt as W3T43NonCollapse
 
 ------------------------------------------------------------------------
 -- W7n claim-governance promotion obligation.
@@ -138,11 +140,12 @@ record ClaimGovernancePromotionReceipt : Setω where
 ------------------------------------------------------------------------
 -- Bounded W3 t43 publishable-scope receipt.
 --
--- This is the immediate W7 governance surface after HEP-R52.  It records the
+-- This is the immediate W7 governance surface after HEP-R53.  It records the
 -- narrow claim that may be made from the bounded W3 comparison-law receipt
--- without constructing the broader ClaimGovernancePromotionAuthorityToken
--- needed for higher-structure, cross-scale, temporal, spacetime,
--- neurochemical, or market readings.
+-- plus runner-side t43 non-collapse evidence, without constructing the
+-- broader ClaimGovernancePromotionAuthorityToken needed for higher-structure,
+-- cross-scale, temporal, spacetime, neurochemical, or market readings, and
+-- without constructing W3 accepted authority before HEP-R54.
 
 data BoundedW3T43PublishableClaimStatus : Set where
   publishableBelowZT43DrellYanPhiStarRatio :
@@ -150,6 +153,8 @@ data BoundedW3T43PublishableClaimStatus : Set where
 
 data BoundedW3T43ClaimBoundary : Set where
   noFullEmpiricalAdequacy :
+    BoundedW3T43ClaimBoundary
+  noW3AcceptedAuthorityBeforeHEPR54 :
     BoundedW3T43ClaimBoundary
   noW4PhysicalCalibration :
     BoundedW3T43ClaimBoundary
@@ -166,6 +171,9 @@ record BoundedW3T43ClaimGovernancePromotionReceipt : Setω where
   field
     comparisonLawReceipt :
       W3T43.W3ComparisonLawReceipt
+
+    runnerNonCollapseReceipt :
+      W3T43NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt
 
     publishableClaimStatus :
       BoundedW3T43PublishableClaimStatus
@@ -196,6 +204,24 @@ record BoundedW3T43ClaimGovernancePromotionReceipt : Setω where
       ≡
       W3T43.blockedPDFRequired
 
+    runnerEvidenceIsHEPR53PerBin :
+      W3T43NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.status
+        runnerNonCollapseReceipt
+      ≡
+      W3T43NonCollapse.perBinRunnerWitnessExtracted
+
+    runnerEvidenceHasNonZeroPull :
+      W3T43NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.witnessPullNonZero
+        runnerNonCollapseReceipt
+      ≡
+      true
+
+    runnerEvidenceKeepsAcceptedAuthorityExternal :
+      W3T43NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.acceptedAuthorityExternalReceiptConstructedHere
+        runnerNonCollapseReceipt
+      ≡
+      false
+
     claimText :
       String
 
@@ -211,6 +237,8 @@ canonicalBoundedW3T43ClaimGovernancePromotionReceipt =
   record
     { comparisonLawReceipt =
         W3T43.canonicalHEPDataW3ComparisonLawReceipt
+    ; runnerNonCollapseReceipt =
+        W3T43NonCollapse.canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt
     ; publishableClaimStatus =
         publishableBelowZT43DrellYanPhiStarRatio
     ; w3StatusPromotedT43BelowZOnly =
@@ -223,10 +251,17 @@ canonicalBoundedW3T43ClaimGovernancePromotionReceipt =
         refl
     ; w5StillPDFRequired =
         refl
+    ; runnerEvidenceIsHEPR53PerBin =
+        refl
+    ; runnerEvidenceHasNonZeroPull =
+        refl
+    ; runnerEvidenceKeepsAcceptedAuthorityExternal =
+        refl
     ; claimText =
-        "Below-Z Drell-Yan phistar ratio, 50-76 over 76-106 GeV, t43 lane, chi2/dof 2.1565191176, clean deterministic carrier, no posterior tuning, no external PDF"
+        "Bounded below-Z Drell-Yan phistar ratio, 50-76 over 76-106 GeV, t43 lane: formal carrier plus no-free-parameter phistar ratio comparison with chi2/dof 2.1565191176 and HEP-R53 runner-side non-collapse witness; not unification and not full W3 accepted authority before HEP-R54"
     ; claimBoundary =
         noFullEmpiricalAdequacy
+        ∷ noW3AcceptedAuthorityBeforeHEPR54
         ∷ noW4PhysicalCalibration
         ∷ noW5PDFCarrier
         ∷ noW6RuntimeConsumer
@@ -236,7 +271,8 @@ canonicalBoundedW3T43ClaimGovernancePromotionReceipt =
     ; noBroadGovernanceAuthorityConstructed =
         "This bounded W3 t43 receipt does not construct ClaimGovernancePromotionAuthorityToken"
         ∷ "It does not promote higher-structure, cross-scale, temporal, spacetime, neurochemical, or market readings"
-        ∷ "It does not close full W3 empirical adequacy, W4 calibration, W5 GRQFT/PDF, W6 runtime, or W8 origin-promotion gates"
+        ∷ "HEP-R53 runner-side non-collapse evidence does not construct W3AcceptedEvidenceAuthorityToken or W3AcceptedAuthorityExternalReceipt"
+        ∷ "It does not close full W3 empirical adequacy, W4 calibration, W5 GRQFT/PDF, W6 runtime, W8 origin-promotion, W2 p2/rate, or W9 dim-15 pressure gates"
         ∷ []
     }
 

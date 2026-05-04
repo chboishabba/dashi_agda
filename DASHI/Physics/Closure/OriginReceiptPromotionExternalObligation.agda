@@ -93,6 +93,12 @@ data OriginReceiptPromotionExternalBlockedField : Set where
 
 data CurrentOriginReceiptPromotedStatusImpossible : Set where
 
+data OriginReceiptPromotionSupportEvidence : Set where
+  firstGateSatisfiedByBoundedT43ComparisonLaw :
+    OriginReceiptPromotionSupportEvidence
+  hepr53T43RunnerNonCollapseEvidenceOnly :
+    OriginReceiptPromotionSupportEvidence
+
 record OriginReceiptPromotionFirstGateSatisfiedReceipt : Setω where
   field
     w3ComparisonLawReceipt :
@@ -123,6 +129,9 @@ record OriginReceiptPromotionFirstGateSatisfiedReceipt : Setω where
     externalPromotionReceiptStillRequired :
       List OriginReceiptPromotionExternalBlockedField
 
+    supportEvidence :
+      List OriginReceiptPromotionSupportEvidence
+
     noPromotionBoundary :
       List String
 
@@ -144,8 +153,13 @@ canonicalOriginReceiptPromotionFirstGateSatisfiedReceipt =
         missingEmpiricalAdequacyBridgeOrPromotedStatus
         ∷ originReceiptStillEmpiricalBlocked
         ∷ []
+    ; supportEvidence =
+        firstGateSatisfiedByBoundedT43ComparisonLaw
+        ∷ hepr53T43RunnerNonCollapseEvidenceOnly
+        ∷ []
     ; noPromotionBoundary =
         "W8 first empirical gate is satisfied by the bounded HEP-R52 W3 t43 comparison-law receipt"
+        ∷ "HEP-R53 adds runner-side t43 non-collapse evidence only; it is not external origin authority"
         ∷ "This receipt records only the first-gate condition; it does not construct OriginReceiptPromotionExternalReceipt"
         ∷ "The current MinimalCredibleShift origin receipt remains empiricalBlocked"
         ∷ "External origin promoted-status authority or an origin-specific empirical adequacy bridge is still required"
@@ -339,6 +353,9 @@ record OriginReceiptPromotionExternalCurrentStatus : Setω where
     firstEmpiricalGateReceipt :
       OriginReceiptPromotionFirstGateSatisfiedReceipt
 
+    supportEvidence :
+      List OriginReceiptPromotionSupportEvidence
+
     blockedFields :
       List OriginReceiptPromotionExternalBlockedField
 
@@ -379,6 +396,9 @@ canonicalOriginReceiptPromotionExternalCurrentStatus =
         canonicalCurrentOriginAuthoritySourceDiagnostic
     ; firstEmpiricalGateReceipt =
         canonicalOriginReceiptPromotionFirstGateSatisfiedReceipt
+    ; supportEvidence =
+        OriginReceiptPromotionFirstGateSatisfiedReceipt.supportEvidence
+          canonicalOriginReceiptPromotionFirstGateSatisfiedReceipt
     ; blockedFields =
         firstEmpiricalGateSatisfiedByW3T43
         ∷ missingEmpiricalAdequacyBridgeOrPromotedStatus
@@ -394,6 +414,7 @@ canonicalOriginReceiptPromotionExternalCurrentStatus =
         "canonical current closure-boundary preservation is discharged by identity; origin observation alone still does not promote closure"
     ; noPromotionBoundary =
         "This module is an external receipt obligation only"
+        ∷ "HEP-R53 t43 non-collapse evidence is support evidence only, not an origin-promotion authority"
         ∷ "The existing MinimalCredibleShift origin receipt remains empiricalBlocked"
         ∷ "No ExternalOriginPromotedEmpiricalStatusAuthority is constructed here"
         ∷ "No P0.OriginReceipt or W3 empirical adequacy bridge is constructed here"
