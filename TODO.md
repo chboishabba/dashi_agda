@@ -204,6 +204,31 @@ actions require external accepted authority, physical calibration, empirical
 promotion, runtime PNF receipts, origin promotion, or pressure-witness receipts
 to be supplied first.
 
+W3-promoted residual closure assignment round `2026-05-05`:
+`Docs/WorkerCoordinationBoard.md` now assigns the remaining receipt-kill gates
+to parallel lanes after the t43 W3 promotion. `Noether` audits W1's already
+unblocked final seam, `Turing` owns the W2 natural p2 bridge/rate theorem or
+obstruction, `Curie-W3` owns the W3 accepted-authority plus residual
+observable-class split, `Faraday` owns W4 calibration/Z-peak/cross-band witness
+intake, `Maxwell` owns W5 GRQFT/PDF-carrier closure intake, `Liskov` owns W6
+runtime PNF payload intake, `Arendt` owns W7 claim governance, `Hypatia` owns
+the W8 first-empirical-gate/origin-promotion recording, and `Planck` owns W9
+dim-15 pressure compatibility or replacement-route proof. This is an
+assignment/control update only; no W2-W9 blocker is promoted by the assignment.
+
+First W3-promoted residual closure results `2026-05-05`: `Noether` completed
+the W1 audit: the final retargeted seam receipt is already landed and
+`BlockerKillConditions.w1KillCondition.currentState = unblocked`. `Hypatia`
+landed `OriginReceiptPromotionFirstGateSatisfiedReceipt`, recording that the
+bounded HEP-R52 W3 t43 comparison-law receipt satisfies W8's first empirical
+gate while keeping the current origin receipt `empiricalBlocked` and the full
+external origin-promotion receipt absent. `Arendt` landed
+`BoundedW3T43ClaimGovernancePromotionReceipt`, recording the bounded
+publishable scope as below-Z Drell-Yan phistar ratio, `50-76 / 76-106 GeV`,
+t43 lane, `chi2/dof = 2.1565191176`, clean deterministic carrier, no posterior
+tuning, and no external PDF. W2, W3 residual authority, W4, W5, W6, and W9
+remain open.
+
 HEPData residual/deviation retarget `2026-05-04`: raw-value HEPData projection
 is now explicitly deprioritized because the saturated branch can collapse
 internal observables to constants. `HEPDataResidualBridgeWorkerQueue`,

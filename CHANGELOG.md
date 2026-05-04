@@ -2,6 +2,31 @@
 
 ## 2026-05-05
 
+- assign the W3-promoted residual closure lanes:
+  `Docs/WorkerCoordinationBoard.md` now records
+  `w3-promoted-residual-closure-2026-05-05` as the active orchestrator handoff
+  for the remaining gates. `Noether` audits W1's unblocked final seam,
+  `Turing` owns W2 p2/rate, `Curie-W3` owns W3 authority plus residual
+  observable class, `Faraday` owns W4 calibration/Z-peak/cross-band witness,
+  `Maxwell` owns W5 GRQFT/PDF carrier, `Liskov` owns W6 runtime PNF intake,
+  `Arendt` owns W7 claim governance, `Hypatia` owns W8 first-empirical-gate
+  origin recording, and `Planck` owns W9 dim-15 pressure compatibility. This
+  is a coordination update only and constructs no missing external receipt,
+  authority token, calibration token, runtime payload, or W2/W9 theorem.
+- record the first W3-promoted residual closure results:
+  `OriginReceiptPromotionExternalObligation.agda` now contains
+  `OriginReceiptPromotionFirstGateSatisfiedReceipt`, tying the bounded HEP-R52
+  W3 t43 comparison-law receipt to W8's first empirical gate while preserving
+  `empiricalBlocked` for the current origin receipt and leaving
+  `OriginReceiptPromotionExternalReceipt` external. `ClaimGovernancePromotionObligation.agda`
+  now contains `BoundedW3T43ClaimGovernancePromotionReceipt`, documenting the
+  bounded publishable scope for below-Z Drell-Yan phistar ratio
+  `50-76 / 76-106 GeV`, t43 lane, `chi2/dof = 2.1565191176`, clean
+  deterministic carrier, no posterior tuning, and no external PDF.
+  `P0BlockerObligationIndex.agda` indexes HEP-R51 and HEP-R52. The W1 audit
+  confirmed the final seam is already landed and
+  `w1KillCondition.currentState = unblocked`; W2, W3 residual authority, W4,
+  W5, W6, and W9 remain open.
 - add HEP-R45 observable-definition receipt:
   `HEPDataObservableDefinitionReceipt.agda` records the local t43/t44 and
   t45/t46 HEPData CSV header facts as a non-promoting receipt. Both ratio

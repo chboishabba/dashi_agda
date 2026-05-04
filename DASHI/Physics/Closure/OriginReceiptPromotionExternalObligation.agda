@@ -8,6 +8,7 @@ open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 import DASHI.Physics.Closure.MinimalCredibleShiftOriginObservation as Origin
 import DASHI.Physics.Closure.P0BlockadeProofObligations as P0
+import DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt as W3T43
 
 ------------------------------------------------------------------------
 -- W8c external origin-receipt promotion obligation.
@@ -79,6 +80,8 @@ record OriginReceiptPromotionExternalReceipt : Setω where
 -- Current non-promoting status.
 
 data OriginReceiptPromotionExternalBlockedField : Set where
+  firstEmpiricalGateSatisfiedByW3T43 :
+    OriginReceiptPromotionExternalBlockedField
   missingEmpiricalAdequacyBridgeOrPromotedStatus :
     OriginReceiptPromotionExternalBlockedField
   missingOriginObservationMapCompatibility :
@@ -89,6 +92,65 @@ data OriginReceiptPromotionExternalBlockedField : Set where
     OriginReceiptPromotionExternalBlockedField
 
 data CurrentOriginReceiptPromotedStatusImpossible : Set where
+
+record OriginReceiptPromotionFirstGateSatisfiedReceipt : Setω where
+  field
+    w3ComparisonLawReceipt :
+      W3T43.W3ComparisonLawReceipt
+
+    w3StatusPromotedT43BelowZOnly :
+      W3T43.W3ComparisonLawReceipt.w3Status w3ComparisonLawReceipt
+      ≡
+      W3T43.promotedT43BelowZOnly
+
+    w8GateUnblockedByT43ComparisonLaw :
+      W3T43.W3ComparisonLawReceipt.w8Gate w3ComparisonLawReceipt
+      ≡
+      W3T43.unblockedByT43ComparisonLaw
+
+    scopeIsBelowZT43Only :
+      W3T43.W3ComparisonLawScopeBoundary.scope
+        (W3T43.W3ComparisonLawReceipt.scopeBoundary w3ComparisonLawReceipt)
+      ≡
+      W3T43.t43BelowZMassWindowRatio
+
+    currentOriginReceiptStillBlocked :
+      P0.OriginObservationReceipt.empiricalStatus
+        Origin.minimalCredibleShiftOriginObservationReceipt
+      ≡
+      P0.empiricalBlocked
+
+    externalPromotionReceiptStillRequired :
+      List OriginReceiptPromotionExternalBlockedField
+
+    noPromotionBoundary :
+      List String
+
+canonicalOriginReceiptPromotionFirstGateSatisfiedReceipt :
+  OriginReceiptPromotionFirstGateSatisfiedReceipt
+canonicalOriginReceiptPromotionFirstGateSatisfiedReceipt =
+  record
+    { w3ComparisonLawReceipt =
+        W3T43.canonicalHEPDataW3ComparisonLawReceipt
+    ; w3StatusPromotedT43BelowZOnly =
+        refl
+    ; w8GateUnblockedByT43ComparisonLaw =
+        refl
+    ; scopeIsBelowZT43Only =
+        refl
+    ; currentOriginReceiptStillBlocked =
+        refl
+    ; externalPromotionReceiptStillRequired =
+        missingEmpiricalAdequacyBridgeOrPromotedStatus
+        ∷ originReceiptStillEmpiricalBlocked
+        ∷ []
+    ; noPromotionBoundary =
+        "W8 first empirical gate is satisfied by the bounded HEP-R52 W3 t43 comparison-law receipt"
+        ∷ "This receipt records only the first-gate condition; it does not construct OriginReceiptPromotionExternalReceipt"
+        ∷ "The current MinimalCredibleShift origin receipt remains empiricalBlocked"
+        ∷ "External origin promoted-status authority or an origin-specific empirical adequacy bridge is still required"
+        ∷ []
+    }
 
 currentOriginPromotedStatusAuthorityUnavailable :
   ExternalOriginPromotedEmpiricalStatusAuthority →
@@ -274,6 +336,9 @@ record OriginReceiptPromotionExternalCurrentStatus : Setω where
     currentAuthoritySourceDiagnostic :
       CurrentOriginAuthoritySourceDiagnostic
 
+    firstEmpiricalGateReceipt :
+      OriginReceiptPromotionFirstGateSatisfiedReceipt
+
     blockedFields :
       List OriginReceiptPromotionExternalBlockedField
 
@@ -312,8 +377,11 @@ canonicalOriginReceiptPromotionExternalCurrentStatus =
         currentClosureBoundaryReflectsCurrentReceipt
     ; currentAuthoritySourceDiagnostic =
         canonicalCurrentOriginAuthoritySourceDiagnostic
+    ; firstEmpiricalGateReceipt =
+        canonicalOriginReceiptPromotionFirstGateSatisfiedReceipt
     ; blockedFields =
-        missingEmpiricalAdequacyBridgeOrPromotedStatus
+        firstEmpiricalGateSatisfiedByW3T43
+        ∷ missingEmpiricalAdequacyBridgeOrPromotedStatus
         ∷ originReceiptStillEmpiricalBlocked
         ∷ []
     ; requiredExternalReceipt =

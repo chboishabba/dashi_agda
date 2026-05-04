@@ -66,6 +66,8 @@ import DASHI.Physics.Closure.HEPDataT45HoldoutValidationDiagnostic as HEPR42
 import DASHI.Physics.Closure.HEPDataMassWindowGeneralPredictionLawDiagnostic as HEPR43
 import DASHI.Physics.Closure.HEPDataMassWindowGeneralPredictionRunDiagnostic as HEPR44
 import DASHI.Physics.Closure.HEPDataObservableDefinitionReceipt as HEPR45
+import DASHI.Physics.Closure.HEPDataW3PromotionCandidate as HEPR51
+import DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt as HEPR52
 import DASHI.Physics.Closure.HEPDataComparisonLawReceiptRequest as HEPR31
 import DASHI.Physics.Closure.HEPDataResidualBridgeWorkerQueue as HEPRQueue
 import DASHI.Physics.Closure.HEPDataResidualComparisonLawRequest as HEPR6
@@ -286,6 +288,10 @@ data P0WorkerLane : Set where
   HEPDataMassWindowGeneralPredictionRunDiagnostic :
     P0WorkerLane
   HEPDataObservableDefinitionReceipt :
+    P0WorkerLane
+  HEPDataW3PromotionCandidate :
+    P0WorkerLane
+  HEPDataW3ComparisonLawReceipt :
     P0WorkerLane
   HEPDataPredictionFreezePolicyRequest :
     P0WorkerLane
@@ -530,6 +536,12 @@ record P0BlockerObligationIndex : Setω where
     hepdataObservableDefinitionReceipt :
       HEPR45.HEPDataObservableDefinitionReceipt
 
+    hepdataW3PromotionCandidate :
+      HEPR51.HEPDataW3PromotionCandidate
+
+    hepdataW3ComparisonLawReceipt :
+      HEPR52.W3ComparisonLawReceipt
+
     hepdataPredictionFreezePolicyRequest :
       HEPR30.HEPDataPredictionFreezePolicyRequest
 
@@ -734,6 +746,8 @@ p0BlockerObligationIndex =
         ∷ HEPDataMassWindowGeneralPredictionLawDiagnostic
         ∷ HEPDataMassWindowGeneralPredictionRunDiagnostic
         ∷ HEPDataObservableDefinitionReceipt
+        ∷ HEPDataW3PromotionCandidate
+        ∷ HEPDataW3ComparisonLawReceipt
         ∷ HEPDataPredictionFreezePolicyRequest
         ∷ HEPDataComparisonLawReceiptRequest
         ∷ W4CalibrationRatioZPeakReceiptRequestSurface
@@ -888,6 +902,10 @@ p0BlockerObligationIndex =
         HEPR44.canonicalHEPDataMassWindowGeneralPredictionRunDiagnostic
     ; hepdataObservableDefinitionReceipt =
         HEPR45.canonicalHEPDataObservableDefinitionReceipt
+    ; hepdataW3PromotionCandidate =
+        HEPR51.canonicalHEPDataW3PromotionCandidate
+    ; hepdataW3ComparisonLawReceipt =
+        HEPR52.canonicalHEPDataW3ComparisonLawReceipt
     ; hepdataPredictionFreezePolicyRequest =
         HEPR30.canonicalHEPDataPredictionFreezePolicyRequest
     ; hepdataComparisonLawReceiptRequest =
@@ -1002,6 +1020,8 @@ p0BlockerObligationIndex =
         ∷ "It indexes HEP-R43 as the mass-window-general prediction-law obligation: t44 is covariance-only, t45/t46 is the holdout, and a general law must predict both 50-76/76-106 and 106-170/76-106 without observed-table tuning"
         ∷ "It indexes HEP-R44 as the dirty run of the fresh mass-window-general predictor: t43 chi2/dof is 1770377.845008375 and t45 chi2/dof is 122.01665676644487, so no comparison law or promotion is constructed"
         ∷ "It indexes HEP-R45 as the observable-definition receipt: local t43/t45 headers are DSIG/DPHISTAR divided by DSIG/DPHISTAR, not total-normalized differential ratios, so the next gap is model normalization/calibration rather than a table-convention escape hatch"
+        ∷ "It indexes HEP-R51 as the bounded W3 t43 promotion candidate: clean deterministic t43 chi2/dof is 2.1565191176, but final promotion waited on HEP-R52 comparison-law governance"
+        ∷ "It indexes HEP-R52 as the bounded W3 t43 comparison-law receipt: W3 is promoted for below-Z t43 only, W4/W8 first gates are unblocked, W5 remains pdfRequired, and no full empirical adequacy or external authority receipt is constructed"
         ∷ "It indexes LILA-R1 local LILA/E8 source diagnostics and root-system lattice receipt surfaces as non-promoting evidence inventory only"
         ∷ "It indexes the LILA-E8 related-project note as provenance correction only: SPUTNIKAI/sovereign-lila-e8 is distinct from AllenAI/Lila and supplies no DASHI receipt"
         ∷ "It indexes LILA-R2/R3/R4/R5 as non-promoting request surfaces: E8 root enumeration, Lam-Tung/E8 adapter, theta/J bridge, and parked phi-star projection receipt"

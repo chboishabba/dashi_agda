@@ -8,6 +8,108 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Active Assignment Round -- W3-Promoted Residual Closure Gates
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `assigned`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns integration, board updates, TODO/changelog alignment, and final
+  promotion decisions.
+- Each worker below owns exactly one nonblocking lane and must return a compact
+  `FORMAL MODEL: O, R, C, S, L, P, G, F` summary.
+
+R:
+- Preserve the t43 W3 promotion as bounded empirical contact while routing the
+  remaining gates to typed receipts, theorems, or obstruction certificates.
+- No lane may move by prose, naming, or surrogate reuse.
+
+C:
+- Coordination: `Docs/WorkerCoordinationBoard.md`,
+  `Docs/WorkerCoordinationMap.puml`, `TODO.md`, `CHANGELOG.md`.
+- Kill matrix: `DASHI/Physics/Closure/BlockerKillConditions.agda`.
+- Lane files are listed per worker below.
+
+S:
+- `W1` kill condition is currently `unblocked` in
+  `BlockerKillConditions.w1KillCondition`.
+- `W2` and `W9` are the deepest internal theorem lanes.
+- `W3`, `W4`, `W5`, `W6`, and `W8` are receipt-gated; local diagnostics may
+  sharpen payloads but cannot construct constructorless authority tokens.
+- `W7` remains first-class governance for publishable claim scope.
+
+L:
+- `assigned` -> `typed receipt/theorem/obstruction attempted` -> `targeted
+  validation` -> `docs/TODO/changelog synchronized` -> `promoted only if the
+  kill receipt or theorem gate is inhabited`.
+
+P:
+- Run internal theorem lanes in parallel with external receipt-intake lanes.
+- Keep `W7` as a governance sidecar so claim boundaries are updated as soon as
+  any lane changes state.
+
+G:
+- Promotion requires a named Agda theorem, typed receipt, or typed obstruction
+  certificate matching the kill-condition surface.
+- External authority/calibration/runtime/origin tokens remain constructorless
+  unless a provider receipt supplies them.
+- Worker outputs that only add diagnostics must remain explicitly
+  non-promoting.
+
+F:
+- Missing evidence remains: W2 p2 bridge/rate, W3 authority and residual
+  observable class, W4 calibration and cross-band physical witness, W5 GRQFT
+  closure/PDF carrier, W6 runtime PNF payload, W8 origin promotion receipt, W9
+  dim-15 delta-to-quadratic or replacement route, and W7 publication scope
+  receipt.
+
+| Lane | Worker | Model tier | Assignment | Primary surface | Success condition | Validation |
+|---|---|---|---|---|---|---|
+| `K1-W1-final-seam-audit` | `Noether` | `gpt-5.1-codex-mini` | Audit that the retargeted final seam remains the current W1 kill condition and that downstream consumers do not revive the old current-carrier CR-flat route. | `CanonicalToNoncanonicalMdlRetargetFinalSeamObligation.agda`; `BlockerKillConditions.agda`; `TODO.md` | Report `w1KillCondition.currentState = unblocked` with any stale docs patched; no new theorem work unless the status regresses. | Targeted Agda on touched MDL seam modules or docs diff only. |
+| `K2-W2-natural-p2-bridge` | `Turing` | `gpt-5.4-mini` | Attempt `NaturalP2BridgeOrObstructionReceipt` and `CarrierGeneralConvergenceRateReceipt`, or produce a stronger typed obstruction. | `NaturalP2ConvergencePromotionObligation.agda`; `CanonicalScheduleIndependentNatural*.agda`; `CanonicalDynamicsLawTheorem.agda`; `Docs/NaturalDynamicsLaw.md` | Positive p2 bridge/rate receipt, or obstruction certificate naming the missing stronger ingredient. | Targeted Agda on W2 modules; avoid broad aggregate checks. |
+| `K3-W3-authority-residual` | `Curie-W3` | `gpt-5.4-mini` | Split W3 into external accepted-authority intake and internal residual observable-class bridge; first missing internal target is the residual class/non-collapse witness. | `W3AcceptedAuthorityExternalReceiptRequestPack.agda`; `HEPDataResidualObservableClass*.agda`; `HEPDataNonCollapseObservableObligation.agda`; `Docs/HEPDataResidualCoordinationMap.puml` | Either provider-ready `W3AcceptedAuthorityExternalReceipt` payload is supplied, or residual-class/non-collapse missing fields are sharpened without promotion. | Targeted empirical Agda plus diagram render if PUML changes. |
+| `K4-W4-calibration-anchor` | `Faraday` | `gpt-5.4-mini` | Build the request surface for same-record Z-peak ratio calibration and one quotient-sensitive cross-band witness pair, without using Nat surrogates as units. | `W4PhysicalCalibrationExternalReceiptRequestPack.agda`; `W4PhysicalCalibrationExternalReceiptObligation.agda`; chemistry quotient/cross-band modules; HEP-R18 source notes | Provider-ready `Candidate256PhysicalCalibrationExternalReceipt` payload fields, or an obstruction naming the missing unit/calibration/witness ingredient. | Targeted chemistry/calibration Agda. |
+| `K5-W5-GRQFT-PDF-carrier` | `Maxwell` | `gpt-5.4-mini` | Keep W5 blocked on the external PDF carrier while sharpening the richer downstream GRQFT consumer fields. | `GRQFTClosurePromotionReceiptRequestPack.agda`; `GRQFTConsumerNextObligation.agda`; `GRQFTConsumerSourceDiagnostic.agda`; `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md` | `GRQFTClosurePromotionReceipt` payload or typed diagnostic showing the exact missing PDF/law/witness fields. | Targeted Agda on GRQFT modules. |
+| `K6-W6-runtime-PNF` | `Liskov` | `gpt-5.3-codex-spark` | Search only the runtime/intake surface for concrete PNF receipt values and package any supplied payload into the existing request shape. | `DASHI/Interop/PNFResidualConsumerReceiptRequestPack.agda`; `PNFResidualConsumerRuntimeProviderAttempt.agda`; `Ontology/Hecke/PNFResidualBridge.agda`; `Docs/ITIRPNFResidualLogicBridge.md` | Concrete runtime receipt id, paired `PNFEmissionReceipt`s, residual computation, and Hecke candidate-pool receipt id, or a source diagnostic saying which field is still absent. | Targeted interop Agda plus docs diff. |
+| `K7-W7-claim-governance` | `Arendt` | `gpt-5.1-codex-mini` | Maintain publishable-claim boundaries after W3(t43) promotion and before any full W3/W4/W5/W6/W8/W9 closure. | `ClaimGovernancePromotionObligation.agda`; `Docs/ClaimComparisonEngine.md`; `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`; `README.md` | `ClaimGovernancePromotionReceipt` draft surface or updated guardrail text distinguishing proved t43 contact from blocked full adequacy. | Docs diff; targeted Agda if the obligation module changes. |
+| `K8-W8-origin-first-gate` | `Hypatia` | `gpt-5.1-codex-mini` | Record W3(t43) as satisfying W8's first empirical gate while preserving the absent external origin authority token. | `OriginReceiptPromotionExternalRequestPack.agda`; `OriginReceiptPromotionExternalObligation.agda`; `MinimalCredibleShiftOriginObservation.agda`; `Docs/OriginTraceabilityLedger.md` | Typed note/request field tying W3(t43) to first-gate satisfaction, with `OriginReceiptPromotionExternalReceipt` still externally blocked. | Targeted origin Agda or docs diff. |
+| `K9-W9-dim15-pressure` | `Planck` | `gpt-5.4-mini` | Attack the dim-15 delta-to-quadratic gap by either constructive bridge or explicit weighted/replacement obligation that routes around current obstructions. | `DeltaToQuadraticBridgeTheorem.agda`; `CancellationPressureCompatibilityNextObligation.agda`; `CancellationPressureRetargetConsumerObligation.agda`; `WeightedValuationEnergy.agda` | `W9KillReceipt` route via `ContractionForcesQuadraticTheorem.dimension = 15`, or a typed replacement-route obstruction/receipt. | Targeted Agda on W9 modules. |
+
+Orchestrator handoff contract:
+
+- `orchestrator_id`: `w3-promoted-residual-closure-2026-05-05`.
+- Each child gets only its lane row plus the compact `FORMAL MODEL` above.
+- Return contract: changed files, validation run, lane state, remaining `F`,
+  and whether the result is promoting or non-promoting.
+- Escalation: if a worker finds a constructive theorem route with coupled
+  imports outside its surface, pause that lane and return the proposed widened
+  surface to `W0`.
+
+Round result update:
+
+- `K1-W1-final-seam-audit` / `Noether`: completed. The W1 final seam receipt
+  was already landed in
+  `CanonicalToNoncanonicalMdlRetargetFinalSeamObligation.agda`, and
+  `BlockerKillConditions.w1KillCondition.currentState` is `unblocked`. No old
+  current-carrier CR-flat route is revived.
+- `K8-W8-origin-first-gate` / `Hypatia`: completed for the first empirical
+  gate. `OriginReceiptPromotionFirstGateSatisfiedReceipt` records that the
+  bounded HEP-R52 W3 t43 comparison-law receipt unblocks W8's first empirical
+  gate while the current origin receipt remains `empiricalBlocked` and
+  `OriginReceiptPromotionExternalReceipt` is still external.
+- `K7-W7-claim-governance` / `Arendt`: completed for bounded scope.
+  `BoundedW3T43ClaimGovernancePromotionReceipt` records the publishable claim
+  boundary: below-Z Drell-Yan phistar ratio, `50-76 / 76-106 GeV`, t43 lane,
+  `chi2/dof = 2.1565191176`, clean deterministic carrier, no posterior tuning,
+  and no external PDF. It does not construct the broader
+  `ClaimGovernancePromotionAuthorityToken`.
+- `K2`, `K3`, `K4`, `K5`, `K6`, and `K9` remain assigned and open. Their next
+  admissible outputs are still typed theorem receipts, external receipts, or
+  typed first-missing diagnostics.
+
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 
 Round date: `2026-05-04`
