@@ -7,6 +7,7 @@ open import Data.List.Base using (List; _∷_; [])
 open import Data.Unit using (⊤; tt)
 
 import DASHI.Physics.Closure.MinkowskiLimitReceipt as ML
+import DASHI.Physics.CRTPeriodJFixedBridge as CRTJ
 
 ------------------------------------------------------------------------
 -- Diagnostic-only GR candidate surface.
@@ -115,6 +116,8 @@ flatCandidateNoCurvedGRPromotion =
 data DiscreteEinsteinTensorFirstMissingCondition : Set where
   missingNonFlatConnectionOrShift :
     DiscreteEinsteinTensorFirstMissingCondition
+  missingCarrierInternalNonFlatConnectionFromCRT :
+    DiscreteEinsteinTensorFirstMissingCondition
   missingCurvatureToRicciContraction :
     DiscreteEinsteinTensorFirstMissingCondition
   missingEinsteinTensorLaw :
@@ -127,6 +130,67 @@ data DiscreteEinsteinTensorFirstMissingCondition : Set where
 data DiscreteEinsteinTensorCandidateStatus : Set where
   flatMetricCandidateOnly :
     DiscreteEinsteinTensorCandidateStatus
+  crtMoonshineAuditNoConnection :
+    DiscreteEinsteinTensorCandidateStatus
+
+------------------------------------------------------------------------
+-- CRT / moonshine audit.
+--
+-- CRTPeriodJFixedBridge gives a finite p47/p59/p71 scalar coupling and a
+-- periodicity target.  That is useful evidence for a future construction, but
+-- it is not yet a canonical endomap on the Minkowski carrier and therefore is
+-- not a non-flat connection.
+
+record CRTMoonshineNonFlatConnectionAudit : Set₁ where
+  field
+    crtMoonshineCoupling :
+      CRTJ.SSPMoonshineCoupling
+
+    suppliedSurface :
+      List String
+
+    missingSurface :
+      List String
+
+    firstMissing :
+      DiscreteEinsteinTensorFirstMissingCondition
+
+    noGRPromotionBoundary :
+      List String
+
+canonicalCRTMoonshineNonFlatConnectionAudit :
+  CRTMoonshineNonFlatConnectionAudit
+canonicalCRTMoonshineNonFlatConnectionAudit =
+  record
+    { crtMoonshineCoupling =
+        CRTJ.sspMoonshineCouplingSurface
+    ; suppliedSurface =
+        "CRT period product over p47/p59/p71 is available"
+        ∷ "J contract bridge to period plus one is available"
+        ∷ "active-wall p47/p59/p71 channel projections are available"
+        ∷ "A W3 periodicity obligation target is named"
+        ∷ []
+    ; missingSurface =
+        "No W3PeriodicityObligation inhabitant is supplied here"
+        ∷ "No CRT-derived endomap on MinkowskiCarrier is supplied"
+        ∷ "No connection coefficients, parallel transport, or non-linear shift law are supplied"
+        ∷ "No curvature operator derived from CRT/J or p47/p59/p71 channels is supplied"
+        ∷ []
+    ; firstMissing =
+        missingCarrierInternalNonFlatConnectionFromCRT
+    ; noGRPromotionBoundary =
+        "The CRT/J audit does not promote curved GR recovery"
+        ∷ "The CRT/J audit does not construct a non-flat connection"
+        ∷ "The CRT/J audit does not prove Einstein equations or continuum recovery"
+        ∷ []
+    }
+
+crtMoonshineAuditExactFirstMissing :
+  CRTMoonshineNonFlatConnectionAudit.firstMissing
+    canonicalCRTMoonshineNonFlatConnectionAudit
+  ≡
+  missingCarrierInternalNonFlatConnectionFromCRT
+crtMoonshineAuditExactFirstMissing = refl
 
 record DiscreteEinsteinTensorCandidateDiagnostic : Set₁ where
   field
@@ -138,6 +202,9 @@ record DiscreteEinsteinTensorCandidateDiagnostic : Set₁ where
 
     flatCandidateSurface :
       DiscreteEinsteinTensorCandidateSurface
+
+    crtMoonshineAudit :
+      CRTMoonshineNonFlatConnectionAudit
 
     firstMissing :
       DiscreteEinsteinTensorFirstMissingCondition
@@ -161,10 +228,13 @@ canonicalDiscreteEinsteinTensorCandidateDiagnostic =
         ML.minkowskiLimitReceipt
     ; flatCandidateSurface =
         flatOnlyDiscreteEinsteinTensorCandidateSurface
+    ; crtMoonshineAudit =
+        canonicalCRTMoonshineNonFlatConnectionAudit
     ; firstMissing =
-        missingNonFlatConnectionOrShift
+        missingCarrierInternalNonFlatConnectionFromCRT
     ; orderedRemainingConditions =
-        missingNonFlatConnectionOrShift
+        missingCarrierInternalNonFlatConnectionFromCRT
+        ∷ missingNonFlatConnectionOrShift
         ∷ missingCurvatureToRicciContraction
         ∷ missingEinsteinTensorLaw
         ∷ missingStressEnergySourceCoupling
@@ -173,8 +243,9 @@ canonicalDiscreteEinsteinTensorCandidateDiagnostic =
     ; diagnosticBoundary =
         "MinkowskiLimitReceipt supplies the exact flat Lorentzian quadratic"
         ∷ "The candidate surface here is flat and identity-shift only"
+        ∷ "CRT/J p47/p59/p71 surfaces are finite scalar/periodicity surfaces, not a canonical non-flat connection"
         ∷ "Known GR/QFT closure files require downstream curvature, stress-energy, and Einstein-equation consumer fields"
-        ∷ "No concrete non-flat connection or shift-curvature operator is present in this module"
+        ∷ "No concrete carrier-internal non-flat connection or shift-curvature operator is present in this module"
         ∷ []
     ; noGRPromotionBoundary =
         "This module does not prove curved GR recovery"
@@ -189,7 +260,7 @@ discreteEinsteinTensorExactFirstMissing :
   DiscreteEinsteinTensorCandidateDiagnostic.firstMissing
     canonicalDiscreteEinsteinTensorCandidateDiagnostic
   ≡
-  missingNonFlatConnectionOrShift
+  missingCarrierInternalNonFlatConnectionFromCRT
 discreteEinsteinTensorExactFirstMissing = refl
 
 discreteEinsteinTensorFlatConditionWitness :

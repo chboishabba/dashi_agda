@@ -2,6 +2,20 @@
 
 ## 2026-05-05
 
+- integrate constructorless-token / retarget audit round:
+  `W2PromotionAuthorityReceipt.agda` now consumes local uniform-rate support
+  while preserving the constructorless W2 promotion authority boundary.
+  `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda` records the HEP-R55
+  token-only external intake request and explicitly rejects local
+  self-issuance. `W5PDFCarrierExternalIntakeRequest.agda` records absent local
+  LHAPDF tooling and tightens the external provider payload. W9 now has
+  `W9WeightedSupportRetargetConsumerReceipt.agda`, a non-promoting weighted
+  support retarget-consumer acceptance receipt, while
+  `W9LyapunovIncompatibilityDiagnostic.agda` keeps W9 blocked on the missing
+  Lyapunov bridge. `DiscreteEinsteinTensorCandidate.agda` records that CRT/J
+  p47/p59/p71 surfaces do not yet supply a carrier-internal non-flat
+  connection.
+
 - integrate W2/W3/GR fanout round:
   `UniformConvergenceRateSurface.agda` records the fixed local
   `NormalizeAddState` / `normalizeAdd` rate surface; `W2PromotionAuthorityReceipt.agda`

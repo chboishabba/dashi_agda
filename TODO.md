@@ -6,6 +6,19 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+Constructorless-token / retarget audit result `2026-05-05`: W2 now consumes
+the local `UniformConvergenceRateSurface`, but `W2PromotionAuthorityReceipt`
+records that `NaturalP2ConvergencePromotionAuthorityToken` is still
+constructorless and not self-issuable. W3 now has
+`W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda`, a token-only HEP-R55
+intake request with exact DOI/table/freeze/per-bin evidence; it constructs no
+accepted authority token. W4 required no edit because its current receipt
+already records missing t21/t22 artifacts and the t43/t44-only runner. W5
+records missing local LHAPDF tooling plus the external PDF/parton-luminosity
+carrier blocker for correction `0.8804486068`. W9 now has a narrow weighted
+support retarget-consumer acceptance receipt, but the Lyapunov bridge remains
+missing. GR now records `missingCarrierInternalNonFlatConnectionFromCRT`.
+
 Next-priority assignment round `2026-05-05`: W3 accepted-authority packet is
 highest priority and is assigned to `Curie-W3` / live worker `Kuhn`
 (`019df3fb-f403-7301-a6b6-abd8ffae6a19`) to extract or diagnose the t43

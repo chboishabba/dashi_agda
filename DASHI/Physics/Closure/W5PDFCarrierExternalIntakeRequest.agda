@@ -59,6 +59,9 @@ record W5PDFCarrierExternalIntakeRequest : Set where
     observedLocalCache :
       List String
 
+    observedLocalTooling :
+      List String
+
     exactExternalIntakeBlocker :
       String
 
@@ -101,8 +104,10 @@ canonicalW5PDFCarrierExternalIntakeRequest =
     ; requiredProviderPayload =
         "local or external table identifier and version"
         ∷ "parton-luminosity correction for the CMS-SMP-20-003 t45 window"
-        ∷ "x and Q2 convention used for the 106-170 / 76-106 GeV ratio"
+        ∷ "x and Q2 convention used for both 106-170 and 76-106 GeV mass windows"
+        ∷ "flavour/channel convention used to form the Drell-Yan parton-luminosity ratio"
         ∷ "computed correction factor targeting 0.8804486068"
+        ∷ "tolerance statement comparing the computed correction against 0.8804486068"
         ∷ "authority/provenance receipt for the PDF table or equivalent mass-kernel route"
         ∷ []
     ; observedLocalCache =
@@ -110,8 +115,13 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         ∷ "scripts/data/outputs has t43/t45 projection JSON artifacts"
         ∷ "no CT18, MSHT, NNPDF, or LHAPDF table was found in scripts/data during this lane"
         ∷ []
+    ; observedLocalTooling =
+        "python3 importlib.util.find_spec(\"lhapdf\") returned absent"
+        ∷ "lhapdf-config was not found on PATH"
+        ∷ "therefore no local CT18/MSHT/NNPDF correction factor was computed in this lane"
+        ∷ []
     ; exactExternalIntakeBlocker =
-        "missing external PDF/parton-luminosity carrier for required t45 correction 0.8804486068"
+        "missing local LHAPDF tooling or external PDF/parton-luminosity carrier for required t45 correction 0.8804486068"
     ; noNetworkFetchPerformed =
         true
     ; noPDFCarrierConstructed =

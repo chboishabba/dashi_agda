@@ -3,11 +3,11 @@ module DASHI.Physics.Closure.W9LyapunovIncompatibilityDiagnostic where
 -- W9 Planck lane: check whether the existing weighted max/support bound can
 -- be consumed as the cancellation-pressure Lyapunov retarget consumer.
 --
--- Result: the bound is present, but it is not a consumer for the current
--- interfaces.  It proves a Nat inequality over integer-pair pressure, while
--- the Lyapunov side requires a CancellationPressureLyapunovBridge and the
--- retarget side requires a RetargetConsumerInterface plus acceptance receipt.
--- This diagnostic is intentionally non-promoting.
+-- Result: the bound is present and can inhabit the current retarget consumer
+-- interface, but it is still not a Lyapunov bridge.  It proves a Nat
+-- inequality over integer-pair pressure and now has a narrow non-promoting
+-- RetargetConsumerInterface adapter.  The Lyapunov side still requires a
+-- CancellationPressureLyapunovBridge.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
@@ -24,15 +24,18 @@ import DASHI.Arithmetic.WeightedPressure as Weighted
 import DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation as W9
 import DASHI.Physics.Closure.CancellationPressureRetargetConsumerObligation as W9f
 import DASHI.Physics.Closure.CancellationPressureRetargetConsumerSourceDiagnostic as W9g
+import DASHI.Physics.Closure.W9WeightedSupportRetargetConsumerReceipt as W9r
 
 data W9LyapunovCompatibilityStatus : Set where
   weightedSupportBoundAvailable :
+    W9LyapunovCompatibilityStatus
+  weightedSupportRetargetAdapterAvailable :
     W9LyapunovCompatibilityStatus
   weightedSupportNotALyapunovConsumer :
     W9LyapunovCompatibilityStatus
 
 data W9WeightedSupportRetargetVerdict : Set where
-  typedIncompatibilityDiagnostic :
+  retargetConsumerAcceptedLyapunovBridgeStillMissing :
     W9WeightedSupportRetargetVerdict
 
 record W9LyapunovIncompatibilityDiagnostic : Setω where
@@ -44,17 +47,26 @@ record W9LyapunovIncompatibilityDiagnostic : Setω where
     retargetSourceDiagnostic :
       W9g.CancellationPressureRetargetConsumerSourceDiagnostic
 
-    retargetConsumerInterfaceSourceIsMissing :
+    earlierRetargetConsumerInterfaceSourceWasMissing :
       W9g.CancellationPressureRetargetConsumerSourceDiagnostic.retargetConsumerInterfaceSource
         retargetSourceDiagnostic
       ≡
       W9g.sourceMissing
 
-    acceptanceReceiptSourceIsMissing :
+    earlierAcceptanceReceiptSourceWasMissing :
       W9g.CancellationPressureRetargetConsumerSourceDiagnostic.acceptanceReceiptSource
         retargetSourceDiagnostic
       ≡
       W9g.sourceMissing
+
+    weightedSupportRetargetReceipt :
+      W9r.WeightedSupportRetargetConsumerReceipt
+
+    weightedSupportRetargetScope :
+      W9r.WeightedSupportRetargetConsumerReceipt.receiptScope
+        weightedSupportRetargetReceipt
+      ≡
+      W9r.retargetConsumerAcceptedOnly
 
     currentClosureStatus :
       W9.W9Dim15ClosureStatus
@@ -76,6 +88,9 @@ record W9LyapunovIncompatibilityDiagnostic : Setω where
     retargetAcceptanceRequiredName :
       String
 
+    lyapunovBridgeStillRequiredName :
+      String
+
     verdict :
       W9WeightedSupportRetargetVerdict
 
@@ -93,9 +108,13 @@ canonicalW9LyapunovIncompatibilityDiagnostic =
         Max.weightedMaxPressure≤weightedSupport
     ; retargetSourceDiagnostic =
         W9g.currentCancellationPressureRetargetConsumerSourceDiagnostic
-    ; retargetConsumerInterfaceSourceIsMissing =
+    ; earlierRetargetConsumerInterfaceSourceWasMissing =
         refl
-    ; acceptanceReceiptSourceIsMissing =
+    ; earlierAcceptanceReceiptSourceWasMissing =
+        refl
+    ; weightedSupportRetargetReceipt =
+        W9r.canonicalWeightedSupportRetargetConsumerReceipt
+    ; weightedSupportRetargetScope =
         refl
     ; currentClosureStatus =
         W9.Dim15DeltaToQuadraticClosureObstruction.closureStatus
@@ -103,26 +122,29 @@ canonicalW9LyapunovIncompatibilityDiagnostic =
     ; currentClosureStatusIsRetargetAwaitingConsumer =
         refl
     ; weightedBoundStatus =
-        weightedSupportNotALyapunovConsumer
+        weightedSupportRetargetAdapterAvailable
     ; lyapunovConsumerRequiredName =
         "DASHI.Arithmetic.CancellationPressureLyapunovBridge.CancellationPressureLyapunovBridge"
     ; retargetConsumerRequiredName =
         "DASHI.Physics.Closure.CancellationPressureRetargetConsumerObligation.RetargetConsumerInterface"
     ; retargetAcceptanceRequiredName =
         "DASHI.Physics.Closure.CancellationPressureRetargetConsumerObligation.CancellationPressureRetargetConsumerAcceptanceReceipt"
+    ; lyapunovBridgeStillRequiredName =
+        "DASHI.Arithmetic.CancellationPressureLyapunovBridge.CancellationPressureLyapunovBridge"
     ; verdict =
-        typedIncompatibilityDiagnostic
+        retargetConsumerAcceptedLyapunovBridgeStillMissing
     ; diagnosticBoundary =
         "weightedMaxPressure≤weightedSupport is available and validated"
         ∷ "That theorem is only a pressure upper bound over integer-pair inputs"
+        ∷ "A narrow RetargetConsumerInterface adapter now consumes that bound for canonicalPairPressureRetargetReceipt"
+        ∷ "The adapter is non-promoting and preserves the non-Qcore retarget boundary"
         ∷ "CancellationPressureLyapunovBridge requires a CancellationPressureMDL bridge plus MDLLyapunov"
-        ∷ "CancellationPressureRetargetConsumerAcceptanceReceipt requires a concrete RetargetConsumerInterface"
-        ∷ "No current interface consumes weightedMaxPressure≤weightedSupport as the missing retarget acceptance receipt"
+        ∷ "weightedMaxPressure≤weightedSupport does not supply the MDL functional, pressure≈mdl equality, residual≤pressure, or Lyapunov decrease proof"
         ∷ []
     ; exactW9Status =
         "W9 remains retarget-awaiting-consumer"
-        ∷ "This diagnostic does not construct a RetargetConsumerInterface"
-        ∷ "This diagnostic does not construct a CancellationPressureRetargetConsumerAcceptanceReceipt"
+        ∷ "A weighted-support RetargetConsumerInterface and acceptance receipt are constructed"
+        ∷ "This diagnostic does not construct a CancellationPressureLyapunovBridge"
         ∷ "This diagnostic does not claim dim-15 quadratic forcing or W9 closure"
         ∷ []
     }

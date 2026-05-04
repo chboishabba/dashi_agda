@@ -8,6 +8,79 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Active Assignment Round -- Constructorless Token / Retarget Audit
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrating`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns integration, board/TODO/changelog updates, validation, and commit.
+- Each worker audits exactly one already-named open lane and may only land a
+  typed receipt or diagnostic in that lane.
+
+R:
+- Audit the highest-leverage open claims after `8fa4ff8` without
+  re-implementing closed receipts.
+- No constructorless authority token, external PDF carrier, W4 calibration
+  authority, curved-GR theorem, or W9 kill receipt may be fabricated.
+
+C:
+- W2: `W2PromotionAuthorityReceipt.agda`.
+- W3: `W3AcceptedAuthorityExternalReceiptRequestPack.agda`,
+  `W3AcceptedAuthorityProviderAttempt.agda`, and HEP-R55 token intake.
+- W4: `W4ZPeakCalibrationAnchorReceipt.agda`, local t21/t22 cache, and the
+  t43 projection runner interface.
+- W5: `W5PDFCarrierExternalIntakeRequest.agda`.
+- W9: `W9LyapunovIncompatibilityDiagnostic.agda` and retarget-consumer
+  obligation surfaces.
+- GR: `DiscreteEinsteinTensorCandidate.agda` and CRT/J period surfaces.
+
+S:
+- W2 sum-invariance and local uniform-rate support are landed, but the W2
+  promotion authority token remains constructorless.
+- HEP-R53 W3 non-collapse is concrete; HEP-R55 is now token-only intake.
+- W4 still lacks local t21/t22 artifacts and runner support for same-record
+  Z-peak dirty-boundary checks.
+- W5 lacks local LHAPDF tooling and local CT18/MSHT/NNPDF data.
+- W9 has a weighted support pressure bound; the question is whether it can be
+  consumed by the retarget/Lyapunov interfaces.
+- GR flat-space is exact; the next question is whether CRT/J yields a
+  carrier-internal non-flat connection.
+
+L:
+- `audit existing surface` -> `land narrow receipt/diagnostic only if missing`
+  -> `timeout 30s agda <touched module>` -> `git diff --check` ->
+  `W0 docs/TODO/changelog sync`.
+
+P:
+- Run W2, W3, W4, W5, W9, and GR lanes in parallel.
+- Park W4 network fetch and W5 external PDF tooling unless explicitly approved.
+
+G:
+- Public verifiability is not local construction of an accepted authority
+  token when the repo models that token as constructorless.
+- Retarget-consumer acceptance is not W9 closure unless the Lyapunov bridge or
+  kill receipt is also inhabited.
+- A CRT/J scalar or period surface is not a curved-GR connection unless it
+  supplies a carrier endomap/parallel-transport/curvature operator.
+
+F:
+- Missing evidence after this audit is expected to remain external for
+  W3/W4/W5 and theorem/interface-level for W2/W9/GR unless a worker finds an
+  already-present construct.
+
+| Lane | Worker | Agent | Assignment | Result | Status |
+|---|---|---|---|---|---|
+| `W2-token-audit` | `Newton` | `Tesla` (`019df440-9d97-73b3-9a7a-b7469d4456ce`) | Decide whether W2 promotion can self-issue from sum-invariance plus uniform-rate support. | `W2PromotionAuthorityReceipt.agda` now consumes `UniformConvergenceRateSurface`; self-issuance is explicitly not permitted because `NaturalP2ConvergencePromotionAuthorityToken` remains constructorless. | completed; non-promoting |
+| `W3-HEP-R55-token-intake` | `Curie-W3` | `Carver` (`019df440-9e9c-7732-972b-1830940d900e`) | Narrow W3 first-missing to token-only authority intake. | `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda` records required DOI/table/freeze/per-bin evidence and preserves the constructorless-token boundary. | completed; external token outstanding |
+| `W4-zpeak-artifact-runner-audit` | `Faraday` | `Epicurus` (`019df440-a018-7733-ba0e-c280a9d60356`) | Check local t21/t22 availability and runner support. | No edit; existing W4 receipt already records missing t21/t22 artifacts and the t43/t44-only runner interface. | completed; blocked |
+| `W5-pdf-tooling-audit` | `Maxwell` | `Poincare` (`019df440-a6ef-7c11-b1fb-5beaba0594d0`) | Check local LHAPDF/CT18/MSHT/NNPDF availability. | `W5PDFCarrierExternalIntakeRequest.agda` now records absent local LHAPDF tooling and tighter provider payload fields. | completed; external PDF/tooling blocked |
+| `W9-retarget-lyapunov-audit` | `Planck` | `Linnaeus` (`019df440-a266-7cb3-adef-487d0d731085`) | Test whether weighted support can satisfy retarget/Lyapunov interfaces. | `W9WeightedSupportRetargetConsumerReceipt.agda` accepts the retarget consumer narrowly; `W9LyapunovIncompatibilityDiagnostic.agda` records the remaining Lyapunov mismatch. | completed; W9 still non-promoting |
+| `GR-nonflat-crt-audit` | `Gauss` | `Banach` (`019df440-a49d-7a80-8325-b7f464d9fea8`) | Check whether CRT/J p47/p59/p71 surfaces provide a non-flat connection. | `DiscreteEinsteinTensorCandidate.agda` now records `missingCarrierInternalNonFlatConnectionFromCRT`. | completed; GR diagnostic only |
+
 ## Active Assignment Round -- W3-Promoted Residual Closure Gates
 
 Round date: `2026-05-05`
