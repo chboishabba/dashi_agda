@@ -152,7 +152,7 @@ Launch governance:
 
 Round date: `2026-05-05`
 Round owner: `W0 orchestrator / integrator`
-Round status: `launched`
+Round status: `completed`
 
 FORMAL MODEL: O, R, C, S, L, P, G, F
 
@@ -265,6 +265,101 @@ Round 2 integration rule:
 
 - W0 will integrate only lane-local changes with targeted `timeout 30s` Agda
   validation plus `git diff --check`.
+
+## Active Assignment Round -- HEP-R53 Reproducibility / Non-Collapse Handoff
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `launched`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns runner evidence extraction, per-bin output shape, reproducibility
+  extraction, and final promotion decisions.
+- `Curie-Receipt` owns only the W3 non-collapse witness receipt shape.
+- `Curie-W3` is parked for subsequent HEP-R54 accepted-authority assembly
+  after HEP-R53 supplies admissible values or a typed absence diagnostic.
+- `Faraday` remains parked on t21/t22 availability.
+- `W2` and `W9` remain non-promoting from prior diagnostics.
+
+R:
+- HEP-R53 turned the current t43 runner/artifact situation into a reproducible
+  per-bin evidence surface and typed W3 non-collapse witness receipt.
+- W3 receipt-shape work prepared the provider route without fabricating
+  accepted authority or HEP-R54 authority assembly.
+
+C:
+- Coordination: `Docs/WorkerCoordinationBoard.md`, `TODO.md`, `CHANGELOG.md`.
+- Runner/evidence scope is owned by `W0`; receipt-shape scope is owned by
+  `Curie-Receipt`.
+- Code: `scripts/run_t43_projection.py` and
+  `DASHI/Physics/Closure/HEPDataW3NonCollapseWitnessReceipt.agda`.
+
+S:
+- The prior W3 authority-packet diagnostic found
+  `/tmp/t43_clean_freeze.json` checksum-bound but lacking `per_bin`.
+- W0 added `per_bin` to the runner and produced
+  `/tmp/t43_clean_freeze_v2.json`. Prediction bins are stable against the
+  prior artifact; covariance recomputation gives `chi2/dof =
+  2.1565191176275613`.
+- HEP-R53 is now complete for runner-side non-collapse evidence. HEP-R54 can
+  proceed to accepted-authority assembly, still without fabricating the
+  constructorless authority token.
+- Faraday's W4 Z-peak path is still blocked by local t21/t22 artifact
+  availability and runner support.
+- W2 Offline L2 and W9 retarget-consumer scans are recorded as
+  non-promoting diagnostics; they are not reopened in this round.
+
+L:
+- `assigned` -> `runner per_bin/reproducibility extraction by W0` -> `receipt
+  shape prepared by Curie-Receipt` -> `HEP-R53 receipt validated` -> `HEP-R54
+  authority assembly by Curie-W3`.
+
+P:
+- HEP-R53 completed as a runner/witness receipt. Do not claim accepted
+  authority receipt, W4 calibration, W2 theorem, or W9 kill receipt from this
+  result.
+
+G:
+- HEP-R53 promotion within the W3 residual chain requires concrete W0-provided
+  per-bin/reproducibility values plus the matching typed receipt; that gate is
+  now satisfied by the validated receipt. HEP-R54 still requires accepted
+  authority assembly and cannot fabricate constructorless authority.
+
+F:
+- Missing evidence remains: W3 accepted-authority assembly/token, t21/t22 W4
+  inputs, W2 positive bridge/rate, and W9 downstream consumer acceptance or
+  theorem route change.
+
+| Lane | Owner | Assignment | Gate | Status |
+|---|---|---|---|---|
+| `HEP-R53-W0-runner-per-bin` | `W0` | Add runner `per_bin` output and extract reproducibility values. | Concrete values supplied by W0. | completed |
+| `HEP-R53-W3-non-collapse-receipt-shape` | `Curie-Receipt` | Prepare and validate the W3 non-collapse witness receipt shape. | Receipt consumes W0 values; no accepted authority construction. | completed |
+| `HEP-R54-W3-accepted-authority-assembly` | `Curie-W3` | Assemble accepted-authority packet after HEP-R53. | Requires HEP-R53 receipt plus accepted authority token route. | next |
+| `W4-t21-t22-availability` | `Faraday` | Stay parked on t21/t22 measurement/covariance availability and runner support. | t21/t22 artifacts plus suitable runner path. | parked |
+| `W2-natural-p2` | `W2` | No new assignment; preserve prior Offline L2 / p2 diagnostics. | Positive bridge/rate or stronger typed obstruction in a future round. | non-promoting |
+| `W9-retarget-consumer` | `W9` | No new assignment; preserve prior retarget-consumer absence diagnostic. | Downstream acceptance receipt or explicit theorem route change. | non-promoting |
+
+HEP-R53 result:
+
+- Runner output: `scripts/run_t43_projection.py` now emits `per_bin` with
+  `bin`, `phiStar`, `phiStarLow`, `phiStarHigh`, `pred`, `data`, `unc`, and
+  `pull`.
+- Reproduced artifact: `/tmp/t43_clean_freeze_v2.json`.
+- Artifact SHA-256:
+  `3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0`.
+- Projection digest:
+  `cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79`.
+- Strongest non-collapse witness: bin `12`, `phiStar =
+  0.10250000000000001`, range `0.091` to `0.114`, prediction
+  `0.0486590199823977`, data `0.049758`, uncertainty
+  `0.00048197510309143566`, pull `-2.280159308132989`.
+- Validation: `python3 -m py_compile scripts/run_t43_projection.py`,
+  covariance recomputation `chi2/dof = 2.1565191176275613`,
+  `timeout 30s agda
+  DASHI/Physics/Closure/HEPDataW3NonCollapseWitnessReceipt.agda`, and
+  `git diff --check`.
 
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 

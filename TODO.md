@@ -19,6 +19,20 @@ consumer scan is assigned to `Planck` / `Einstein`
 must be targeted as `timeout 30s agda <target>`; broad aggregate validation is
 parked.
 
+HEP-R53 result `2026-05-05`: `scripts/run_t43_projection.py` now emits
+`per_bin`, and `HEPDataW3NonCollapseWitnessReceipt` records the W3 t43
+runner-side non-collapse witness. `/tmp/t43_clean_freeze_v2.json` has SHA-256
+`3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0` and
+projection digest
+`cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79`.
+Prediction bins are stable against the previous checksum-bound artifact, and
+covariance recomputation gives `chi2/dof = 2.1565191176275613`. Strongest
+witness: bin `12`, prediction `0.0486590199823977`, data `0.049758`,
+uncertainty `0.00048197510309143566`, pull `-2.280159308132989`. HEP-R54 is
+now the next W3 action: accepted-authority assembly. No W4 calibration, W2
+theorem, W9 kill receipt, or constructorless authority token is fabricated by
+HEP-R53.
+
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a
 narrow empirical equality plus mismatch diagnostic, and `W4` landed a

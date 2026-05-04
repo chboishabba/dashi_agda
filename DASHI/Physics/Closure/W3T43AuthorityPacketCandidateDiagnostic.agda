@@ -219,7 +219,7 @@ canonicalW3T43AuthorityPacketCandidateDiagnostic =
     ; freezeCommit =
         "3205d746639568762c9e97adf4a3672c356bd491"
     ; exactRerunNeededForProviderPayload =
-        "python3 scripts/run_t43_projection.py --mode clean --verbose --output /tmp/t43_clean_freeze_verbose.json"
+        "python3 scripts/run_t43_projection.py --freeze-hash 3205d746639568762c9e97adf4a3672c356bd491 --prediction-api DASHI.Physics.Prediction.sigma_dashi:predict_ratio --output /tmp/t43_clean_freeze_v2.json"
     ; authorityReceiptConstructibleHere =
         false
     ; w3PromotionConstructedHere =

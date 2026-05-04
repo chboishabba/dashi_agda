@@ -2,6 +2,22 @@
 
 ## 2026-05-05
 
+- land HEP-R53 per-bin output and W3 t43 non-collapse witness receipt:
+  `scripts/run_t43_projection.py` now emits a `per_bin` payload containing
+  per-bin prediction, data, covariance-diagonal uncertainty, and pull.
+  `HEPDataW3NonCollapseWitnessReceipt.agda` records the runner-side t43
+  non-collapse witness: bin `12`, prediction `0.0486590199823977`, data
+  `0.049758`, uncertainty `0.00048197510309143566`, pull
+  `-2.280159308132989`. The new artifact
+  `/tmp/t43_clean_freeze_v2.json` has SHA-256
+  `3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0` and
+  projection digest
+  `cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79`.
+  Prediction bins are stable against the prior checksum-bound artifact, and
+  covariance recomputation gives `chi2/dof = 2.1565191176275613`. HEP-R54
+  accepted-authority assembly is now the next W3 action; no constructorless
+  authority token or `W3AcceptedAuthorityExternalReceipt` is fabricated here.
+
 - record the W3 and W9 next-priority diagnostics:
   `W3T43AuthorityPacketCandidateDiagnostic.agda` records the checksum-bound
   t43 authority-packet candidate and strongest fallback residual witness

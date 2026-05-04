@@ -324,18 +324,35 @@ def completed_projection_artifact(
     predictions: list[float],
 ) -> dict[str, Any]:
     bins: list[dict[str, Any]] = []
+    per_bin: list[dict[str, Any]] = []
     for row, prediction in zip(t43["bins"], predictions, strict=True):
         data = row["ratio"]
+        index = row["index"]
+        uncertainty = math.sqrt(t44["covariance"][index][index])
+        residual = prediction - data
+        pull = residual / uncertainty if uncertainty > 0.0 else 0.0
         bins.append(
             {
-                "index": row["index"],
+                "index": index,
                 "phiStar": row["phiStar"],
                 "phiStarLow": row["phiStarLow"],
                 "phiStarHigh": row["phiStarHigh"],
                 "R_data": data,
                 "R_dashi": prediction,
-                "residual": prediction - data,
+                "residual": residual,
                 "uncertainties": row["uncertainties"],
+            }
+        )
+        per_bin.append(
+            {
+                "bin": index,
+                "phiStar": row["phiStar"],
+                "phiStarLow": row["phiStarLow"],
+                "phiStarHigh": row["phiStarHigh"],
+                "pred": prediction,
+                "data": data,
+                "unc": uncertainty,
+                "pull": pull,
             }
         )
 
@@ -388,6 +405,7 @@ def completed_projection_artifact(
             "status": prediction_api_status,
         },
         "bins": bins,
+        "per_bin": per_bin,
         "comparison": {
             "chi2": None,
             "chi2PerDof": None,
