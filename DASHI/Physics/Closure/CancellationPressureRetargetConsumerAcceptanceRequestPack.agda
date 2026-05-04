@@ -46,6 +46,17 @@ record RetargetConsumerAcceptanceRequestPack : Setω where
     retargetReceipt :
       W9.PressureCompatibleTargetWithQcoreBoundaryReceipt
 
+    currentClosureObstruction :
+      W9.Dim15DeltaToQuadraticClosureObstruction
+
+    closureStatus :
+      W9.W9Dim15ClosureStatus
+
+    closureStatusIsCurrent :
+      closureStatus
+      ≡
+      W9.dim15RoutesExhaustedRetargetAwaitingConsumer
+
     exactRetargetReceiptName :
       String
 
@@ -123,6 +134,13 @@ canonicalRetargetConsumerAcceptanceRequestPack =
         W9g.currentCancellationPressureRetargetConsumerSourceDiagnostic
     ; retargetReceipt =
         W9.canonicalPairPressureRetargetReceipt
+    ; currentClosureObstruction =
+        W9.canonical15DeltaToQuadraticClosureObstruction
+    ; closureStatus =
+        W9.Dim15DeltaToQuadraticClosureObstruction.closureStatus
+          W9.canonical15DeltaToQuadraticClosureObstruction
+    ; closureStatusIsCurrent =
+        refl
     ; exactRetargetReceiptName =
         "DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation.canonicalPairPressureRetargetReceipt"
     ; selectedRoute =

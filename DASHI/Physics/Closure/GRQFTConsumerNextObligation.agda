@@ -130,6 +130,8 @@ record GRQFTClosurePromotionReceipt : Setω where
 data GRQFTConsumerMissingUpstreamField : Set where
   missingPromotionAuthorityToken :
     GRQFTConsumerMissingUpstreamField
+  missingPDFCarrierPrerequisite :
+    GRQFTConsumerMissingUpstreamField
   missingGREquationLaw :
     GRQFTConsumerMissingUpstreamField
   missingGREquationLawAtConsumer :
@@ -141,9 +143,50 @@ data GRQFTConsumerMissingUpstreamField : Set where
   missingEmpiricalGRQFTValidation :
     GRQFTConsumerMissingUpstreamField
 
+data GRQFTPDFCarrierPrerequisiteStatus : Set where
+  pdfCarrierPrerequisiteMissing :
+    GRQFTPDFCarrierPrerequisiteStatus
+
+record GRQFTPDFCarrierPrerequisiteDiagnostic : Set where
+  field
+    prerequisiteStatus :
+      GRQFTPDFCarrierPrerequisiteStatus
+
+    requiredCarrier :
+      String
+
+    sourceScanBoundary :
+      List String
+
+    noPDFCarrierConstructedHere :
+      List String
+
+canonicalGRQFTPDFCarrierPrerequisiteDiagnostic :
+  GRQFTPDFCarrierPrerequisiteDiagnostic
+canonicalGRQFTPDFCarrierPrerequisiteDiagnostic =
+  record
+    { prerequisiteStatus =
+        pdfCarrierPrerequisiteMissing
+    ; requiredCarrier =
+        "external PDF carrier/mass-kernel route needed before W5 GR/QFT closure-promotion receipt can be assessed"
+    ; sourceScanBoundary =
+        "Current W5 sources do not provide an external PDF carrier"
+        ∷ "Below-Z t43 comparison evidence explicitly records no external PDF"
+        ∷ "Known-limits GR/QFT bridges do not derive the high-mass PDF carrier prerequisite"
+        ∷ []
+    ; noPDFCarrierConstructedHere =
+        "This module does not construct a PDF carrier"
+        ∷ "This module does not derive the neutral-current mass-kernel/PDF route"
+        ∷ "This module does not use t43 numeric evidence as a W5 PDF prerequisite receipt"
+        ∷ []
+    }
+
 record GRQFTClosurePromotionReceiptMissingFields : Set where
   field
     missingAuthority :
+      GRQFTConsumerMissingUpstreamField
+
+    missingPDFCarrier :
       GRQFTConsumerMissingUpstreamField
 
     missingGRLaw :
@@ -170,6 +213,8 @@ canonicalGRQFTClosurePromotionReceiptMissingFields =
   record
     { missingAuthority =
         missingPromotionAuthorityToken
+    ; missingPDFCarrier =
+        missingPDFCarrierPrerequisite
     ; missingGRLaw =
         missingGREquationLaw
     ; missingGRConsumerLaw =
@@ -182,6 +227,7 @@ canonicalGRQFTClosurePromotionReceiptMissingFields =
         missingEmpiricalGRQFTValidation
     ; receiptFieldDiagnostic =
         "GRQFTClosurePromotionReceipt requires an external promotionAuthority"
+        ∷ "GRQFTClosurePromotionReceipt requires the external PDF carrier prerequisite before W5 GR/QFT/PDF closure intake"
         ∷ "GRQFTClosurePromotionReceipt requires grEquationLaw"
         ∷ "GRQFTClosurePromotionReceipt requires grEquationLawAtConsumer"
         ∷ "GRQFTClosurePromotionReceipt requires qftInteractionLaw"
@@ -209,6 +255,9 @@ record GRQFTConsumerNextObligationCurrentStatus : Setω where
 
     receiptMissingFields :
       GRQFTClosurePromotionReceiptMissingFields
+
+    pdfCarrierPrerequisite :
+      GRQFTPDFCarrierPrerequisiteDiagnostic
 
     blockedFields :
       List GRQFTConsumerMissingUpstreamField
@@ -244,8 +293,11 @@ canonicalGRQFTConsumerNextObligationCurrentStatus =
         KLS.KnownLimitsStatus.qftLike KLS.canonicalKnownLimitsStatus
     ; receiptMissingFields =
         canonicalGRQFTClosurePromotionReceiptMissingFields
+    ; pdfCarrierPrerequisite =
+        canonicalGRQFTPDFCarrierPrerequisiteDiagnostic
     ; blockedFields =
         missingPromotionAuthorityToken
+        ∷ missingPDFCarrierPrerequisite
         ∷ missingGREquationLaw
         ∷ missingGREquationLawAtConsumer
         ∷ missingQFTInteractionLaw
@@ -253,7 +305,7 @@ canonicalGRQFTConsumerNextObligationCurrentStatus =
         ∷ missingEmpiricalGRQFTValidation
         ∷ []
     ; requiredNextReceipt =
-        "provide external authority, GR equation law, QFT interaction law, consumer law witnesses, and empirical GR/QFT validation before downstream closure promotion"
+        "provide external authority, PDF carrier prerequisite, GR equation law, QFT interaction law, consumer law witnesses, and empirical GR/QFT validation before downstream closure promotion"
     ; knownLimitsBoundary =
         "known-limits GR/QFT bridges are theorem-backed local recovery surfaces, not full GR/QFT closure"
     ; closurePromotionBoundary =

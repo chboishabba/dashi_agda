@@ -138,6 +138,8 @@ canonicalW4CalibrationRatioZPeakAnchors =
 data W4CalibrationRatioZPeakMissingRequirement : Set where
   missingTypedZPeakArtifactReceipt :
     W4CalibrationRatioZPeakMissingRequirement
+  missingSameRecordT21T22ArtifactReceipt :
+    W4CalibrationRatioZPeakMissingRequirement
   missingTypedRatioArtifactReceipt :
     W4CalibrationRatioZPeakMissingRequirement
   missingResponseMatrixConsumptionLaw :
@@ -155,6 +157,7 @@ canonicalW4CalibrationRatioZPeakMissingRequirements :
   List W4CalibrationRatioZPeakMissingRequirement
 canonicalW4CalibrationRatioZPeakMissingRequirements =
   missingTypedZPeakArtifactReceipt
+  ∷ missingSameRecordT21T22ArtifactReceipt
   ∷ missingTypedRatioArtifactReceipt
   ∷ missingResponseMatrixConsumptionLaw
   ∷ missingRatioCovarianceCalibrationLaw
@@ -169,6 +172,93 @@ sameRecordZPeakRatioCalibrationLawImpossibleHere :
   W4SameRecordZPeakRatioCalibrationLaw →
   ⊥
 sameRecordZPeakRatioCalibrationLawImpossibleHere ()
+
+record W4SameRecordZPeakT21T22ArtifactReceiptRequest : Set where
+  field
+    measurementAnchor :
+      W4CalibrationRatioZPeakTableAnchor
+
+    covarianceAnchor :
+      W4CalibrationRatioZPeakTableAnchor
+
+    measurementTableDOI :
+      String
+
+    measurementTableDOIIsT21 :
+      measurementTableDOI
+      ≡
+      "10.17182/hepdata.115656.v1/t21"
+
+    covarianceTableDOI :
+      String
+
+    covarianceTableDOIIsT22 :
+      covarianceTableDOI
+      ≡
+      "10.17182/hepdata.115656.v1/t22"
+
+    sameRecordRequirement :
+      String
+
+    requestedReceiptFields :
+      List String
+
+    requestBoundary :
+      List String
+
+canonicalW4SameRecordZPeakT21T22ArtifactReceiptRequest :
+  W4SameRecordZPeakT21T22ArtifactReceiptRequest
+canonicalW4SameRecordZPeakT21T22ArtifactReceiptRequest =
+  record
+    { measurementAnchor =
+        record
+          { role =
+              zPeakPhistarMeasurement
+          ; tableTitle =
+              "phistar mass 76-106"
+          ; tableDOI =
+              "10.17182/hepdata.115656.v1/t21"
+          ; tableRecord =
+              "same HEPData record ins2079374 / submission 10.17182/hepdata.115656.v1"
+          ; anchorUse =
+              "Z-peak phistar measured surface anchor only"
+          }
+    ; covarianceAnchor =
+        record
+          { role =
+              zPeakPhistarCovariance
+          ; tableTitle =
+              "Covariance matrices for phistar mass 76-106"
+          ; tableDOI =
+              "10.17182/hepdata.115656.v1/t22"
+          ; tableRecord =
+              "same HEPData record ins2079374 / submission 10.17182/hepdata.115656.v1"
+          ; anchorUse =
+              "Z-peak phistar covariance anchor only"
+          }
+    ; measurementTableDOI =
+        "10.17182/hepdata.115656.v1/t21"
+    ; measurementTableDOIIsT21 =
+        refl
+    ; covarianceTableDOI =
+        "10.17182/hepdata.115656.v1/t22"
+    ; covarianceTableDOIIsT22 =
+        refl
+    ; sameRecordRequirement =
+        "t21 and t22 must be supplied from HEPData record ins2079374 / submission 10.17182/hepdata.115656.v1"
+    ; requestedReceiptFields =
+        "t21 acquisition URL, local path, SHA-256 digest, first header line, and bin binding"
+        ∷ "t22 acquisition URL, local path, SHA-256 digest, first header line, and covariance-shape binding"
+        ∷ "proof or typed diagnostic that t21/t22 share the same HEPData record and denominator Z-peak mass interval"
+        ∷ "explicit statement that these artifacts are anchors only, not a physical unit carrier or dimensional law"
+        ∷ []
+    ; requestBoundary =
+        "This request sharpens the Z-peak artifact intake to t21/t22 before any ratio-calibration law is inhabited"
+        ∷ "It does not consume t43/t44, t70/t71, or response matrices"
+        ∷ "It does not construct W4SameRecordZPeakRatioCalibrationLaw"
+        ∷ "It does not construct Candidate256PhysicalCalibrationAuthorityToken or Candidate256PhysicalCalibrationExternalReceipt"
+        ∷ []
+    }
 
 record W4CalibrationRatioZPeakReceiptRequestSurface : Setω where
   field
@@ -205,6 +295,14 @@ record W4CalibrationRatioZPeakReceiptRequestSurface : Setω where
       sameRecordAnchors
       ≡
       canonicalW4CalibrationRatioZPeakAnchors
+
+    zPeakT21T22ArtifactReceiptRequest :
+      W4SameRecordZPeakT21T22ArtifactReceiptRequest
+
+    zPeakT21T22ArtifactReceiptRequestIsCanonical :
+      zPeakT21T22ArtifactReceiptRequest
+      ≡
+      canonicalW4SameRecordZPeakT21T22ArtifactReceiptRequest
 
     missingRequirements :
       List W4CalibrationRatioZPeakMissingRequirement
@@ -267,12 +365,18 @@ canonicalW4CalibrationRatioZPeakReceiptRequestSurface =
         canonicalW4CalibrationRatioZPeakAnchors
     ; sameRecordAnchorsAreCanonical =
         refl
+    ; zPeakT21T22ArtifactReceiptRequest =
+        canonicalW4SameRecordZPeakT21T22ArtifactReceiptRequest
+    ; zPeakT21T22ArtifactReceiptRequestIsCanonical =
+        refl
     ; missingRequirements =
         canonicalW4CalibrationRatioZPeakMissingRequirements
     ; missingRequirementsAreCanonical =
         refl
     ; providerRequestFields =
-        "Bind raw or normalized local artifacts for t21/t22, t70/t71, and t43 with checksums"
+        "First bind same-record t21/t22 local artifacts with checksums, first headers, bin binding, and covariance-shape binding"
+        ∷ "Keep t21/t22 as Z-peak artifact anchors, not as a physical unit carrier or dimensional preservation law"
+        ∷ "Bind raw or normalized local artifacts for t70/t71 and t43 only after the t21/t22 artifact request is discharged or diagnostically blocked"
         ∷ "State how the 50-76 / 76-106 ratio table is consumed as a calibration anchor"
         ∷ "State how electron and muon response matrices are consumed, if at all"
         ∷ "Provide a typed covariance/uncertainty handling law for the ratio-calibration surface"
@@ -281,6 +385,7 @@ canonicalW4CalibrationRatioZPeakReceiptRequestSurface =
         ∷ []
     ; calibrationRatioBoundary =
         "The anchors name a same-record Z-peak calibration/ratio surface"
+        ∷ "The immediate W4 artifact intake is narrowed to t21/t22 measurement/covariance receipt fields"
         ∷ "The anchors can guide a future provider receipt for ratio calibration"
         ∷ "The constructorless W4SameRecordZPeakRatioCalibrationLaw records that no calibration law is inhabited here"
         ∷ "No response-matrix, covariance, or ratio-consumption theorem is constructed here"

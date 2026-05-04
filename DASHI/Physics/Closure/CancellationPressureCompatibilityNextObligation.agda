@@ -229,6 +229,20 @@ canonical15Dimension : CFQT.ContractionForcesQuadraticTheorem.dimension
   canonical15Theorem ≡ 15
 canonical15Dimension = refl
 
+canonical15WeightedReplacementCandidateReceipt :
+  (replacement :
+    WeightedValuationReplacementObligation
+      canonical15Theorem
+      canonical15Dimension) →
+  WeightedCancellationPressureCandidateReceipt
+    canonical15Theorem
+    canonical15Dimension
+    replacement
+canonical15WeightedReplacementCandidateReceipt =
+  weightedReplacementCandidateReceipt
+    canonical15Theorem
+    canonical15Dimension
+
 canonical15PressureWitnessConcreteMismatch :
   (+ (AIE.deltaSum one three))
   ≢
@@ -435,6 +449,112 @@ canonical15RouteSelectionDiagnostic =
         canonical15PressureDiffersFromQcore
     ; weightedRouteBoundary =
         weightedUniformIdentificationDiffersFromPressure
+    }
+
+data W9Dim15ClosureStatus : Set where
+  dim15RoutesExhaustedRetargetAwaitingConsumer :
+    W9Dim15ClosureStatus
+
+record Dim15DeltaToQuadraticClosureObstruction : Setω where
+  field
+    closureStatus : W9Dim15ClosureStatus
+
+    exhaustedRouteClasses : W9CurrentRouteClassExhaustion
+
+    selectedRetargetReceipt :
+      PressureCompatibleTargetWithQcoreBoundaryReceipt
+
+    selectedRetargetRouteIsPressureBoundary :
+      PressureCompatibleTargetWithQcoreBoundaryReceipt.selectedNextRoute
+        selectedRetargetReceipt
+      ≡
+      supplyPressureCompatibleTargetWithQcoreBoundary
+
+    retargetBoundaryIsNonPromotion :
+      PressureCompatibleTargetWithQcoreBoundaryReceipt.nonPromotionBoundary
+        selectedRetargetReceipt
+      ≡
+      retargetMustNotClaimCanonicalQcore
+
+    retargetMatchesBridgeAtBoundary :
+      PressureCompatibleTargetWithQcoreBoundaryReceipt.pressureTargetMatchesBridgeAtBoundary
+        selectedRetargetReceipt
+      ≡
+      PressureCompatibleTargetWithQcoreBoundaryReceipt.pressureTargetMatchesBridgeAtBoundary
+        selectedRetargetReceipt
+
+    retargetDiffersFromCanonicalQcoreAtBoundary :
+      PressureCompatibleTargetWithQcoreBoundaryReceipt.pressureTargetDiffersFromCanonicalQcoreAtBoundary
+        selectedRetargetReceipt
+      ≡
+      PressureCompatibleTargetWithQcoreBoundaryReceipt.pressureTargetDiffersFromCanonicalQcoreAtBoundary
+        selectedRetargetReceipt
+
+    existingCanonical15RouteImpossible :
+      ExistingCancellationPressureCompatibilityObligation
+        canonical15Theorem
+        canonical15Dimension →
+      ⊥
+
+    weightedUniformReplacementImpossible :
+      (∀ input →
+        + (AIE.deltaSum (WVE.left input) (WVE.right input))
+        ≡
+        + (WVE.weightedQuadraticEnergy (WVE.left input))) →
+      ⊥
+
+    weightedReplacementOnlyYieldsCandidateReceipt :
+      (replacement :
+        WeightedValuationReplacementObligation
+          canonical15Theorem
+          canonical15Dimension) →
+      WeightedCancellationPressureCandidateReceipt
+        canonical15Theorem
+        canonical15Dimension
+        replacement
+
+    weightedReplacementStillCarriesPointwiseIdentification :
+      (replacement :
+        WeightedValuationReplacementObligation
+          canonical15Theorem
+          canonical15Dimension) →
+      + (AIE.deltaSum
+          (WVE.left
+            (WeightedValuationReplacementObligation.input replacement))
+          (WVE.right
+            (WeightedValuationReplacementObligation.input replacement)))
+      ≡
+      + (WVE.weightedQuadraticEnergy
+          (WVE.left
+            (WeightedValuationReplacementObligation.input replacement)))
+
+canonical15DeltaToQuadraticClosureObstruction :
+  Dim15DeltaToQuadraticClosureObstruction
+canonical15DeltaToQuadraticClosureObstruction =
+  record
+    { closureStatus =
+        dim15RoutesExhaustedRetargetAwaitingConsumer
+    ; exhaustedRouteClasses =
+        canonical15CurrentRouteClassExhaustion
+    ; selectedRetargetReceipt =
+        canonicalPairPressureRetargetReceipt
+    ; selectedRetargetRouteIsPressureBoundary =
+        refl
+    ; retargetBoundaryIsNonPromotion =
+        refl
+    ; retargetMatchesBridgeAtBoundary =
+        refl
+    ; retargetDiffersFromCanonicalQcoreAtBoundary =
+        refl
+    ; existingCanonical15RouteImpossible =
+        canonical15ExistingPressureWitnessObstruction
+    ; weightedUniformReplacementImpossible =
+        CancellationToWeightedQuadraticIdentificationObstruction.noUniformIdentification
+          canonicalCancellationToWeightedQuadraticIdentificationObstruction
+    ; weightedReplacementOnlyYieldsCandidateReceipt =
+        canonical15WeightedReplacementCandidateReceipt
+    ; weightedReplacementStillCarriesPointwiseIdentification =
+        WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy
     }
 
 record CancellationPressureCompatibilityNextObligation

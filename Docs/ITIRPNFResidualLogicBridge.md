@@ -87,7 +87,10 @@ family of residual chains indexed by `StructuralSignature`.
   receipt-bearing consumer obligation. A future consumer must carry paired
   `PNFEmissionReceipt` values, receipt-backed atom projections, a
   receipt-backed residual computation, runtime consumer profile/id, and a
-  Hecke candidate-pool receipt. The current value is a missing-receipt
+  Hecke candidate-pool receipt. The source diagnostic now lists the missing
+  runtime pieces explicitly: consumer profile, runtime receipt id, left and
+  right `PNFEmissionReceipt` values, receipt-backed residual computation, and
+  Hecke candidate-pool receipt id. The current value is a missing-receipt
   diagnostic only and assigns no wrapper, qualifier, role, residual, or Hecke
   label by inspection.
 

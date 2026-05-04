@@ -61,6 +61,7 @@ canonicalMissingRuntimePayloadFields =
   ∷ W6.missingConcreteRuntimeReceiptIdValue
   ∷ W6.missingConcreteLeftPNFEmissionReceiptValue
   ∷ W6.missingConcreteRightPNFEmissionReceiptValue
+  ∷ W6.missingConcreteReceiptBackedResidualComputation
   ∷ W6.missingConcreteHeckeCandidatePoolReceiptIdValue
   ∷ []
 
@@ -97,7 +98,7 @@ canonicalRuntimeProviderAttempt =
         Request.payloadToConsumerReceipt
     ; noSyntheticPromotionBoundary =
         "No positive PNFResidualConsumerReceipt fixture is exported because no concrete runtime payload is present"
-        ∷ "The absent payload fields are exactly: consumer profile, runtime receipt id, left PNFEmissionReceipt, right PNFEmissionReceipt, and Hecke candidate-pool receipt id"
+        ∷ "The absent payload fields are exactly: consumer profile, runtime receipt id, left PNFEmissionReceipt, right PNFEmissionReceipt, receipt-backed residual computation, and Hecke candidate-pool receipt id"
         ∷ "If runtime supplies those fields, Request.payloadToConsumerReceipt constructs the consumer receipt with atom and residual projections by refl"
         ∷ "This attempt does not synthesize atom labels, wrapper labels, qualifier labels, role bindings, residual levels, or Hecke fibre labels"
         ∷ []
@@ -121,3 +122,16 @@ runtimeProviderAttemptConclusionIsDiagnostic :
   ≡
   diagnosticOnlyMissingRuntimePayload
 runtimeProviderAttemptConclusionIsDiagnostic = refl
+
+data PNFResidualConsumerRuntimeProviderOutput : Setω where
+  runtimePayloadPresent :
+    Request.PNFResidualConsumerRuntimeReceiptPayload →
+    PNFResidualConsumerRuntimeProviderOutput
+  runtimePayloadAbsentDiagnostic :
+    PNFResidualConsumerRuntimeProviderAttempt →
+    PNFResidualConsumerRuntimeProviderOutput
+
+canonicalRuntimeProviderOutput :
+  PNFResidualConsumerRuntimeProviderOutput
+canonicalRuntimeProviderOutput =
+  runtimePayloadAbsentDiagnostic canonicalRuntimeProviderAttempt

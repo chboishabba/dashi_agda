@@ -128,6 +128,7 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
         ∷ "Provide a calibrated quotient-class scale map into the physical unit carrier"
         ∷ "Prove the calibrated quotient scale factors through candidate256SurrogateScale"
         ∷ "Provide dimensional preservation law and witness for the Candidate256 quotient law"
+        ∷ "For the same-record Z-peak calibration anchor, provide checksum-bound t21 measurement and t22 covariance artifacts before any ratio-calibration law"
         ∷ "Preserve downstream boundary: spectra, bonding, wet-lab evidence, and empirical physical validation remain later receipts"
         ∷ []
     ; providerInstructions =

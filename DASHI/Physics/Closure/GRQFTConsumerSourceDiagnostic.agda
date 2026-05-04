@@ -27,6 +27,9 @@ record GRQFTConsumerReceiptSourceAvailability : Set where
     promotionAuthoritySource :
       GRQFTConsumerSourceAvailability
 
+    pdfCarrierPrerequisiteSource :
+      GRQFTConsumerSourceAvailability
+
     grEquationLawSource :
       GRQFTConsumerSourceAvailability
 
@@ -59,6 +62,8 @@ canonicalGRQFTConsumerReceiptSourceAvailability :
 canonicalGRQFTConsumerReceiptSourceAvailability =
   record
     { promotionAuthoritySource =
+        sourceMissing
+    ; pdfCarrierPrerequisiteSource =
         sourceMissing
     ; grEquationLawSource =
         sourceMissing
@@ -99,6 +104,9 @@ record GRQFTConsumerSourceDiagnostic : Setω where
 
     receiptMissingFields :
       W5.GRQFTClosurePromotionReceiptMissingFields
+
+    pdfCarrierPrerequisite :
+      W5.GRQFTPDFCarrierPrerequisiteDiagnostic
 
     receiptBlockedFields :
       List W5.GRQFTConsumerMissingUpstreamField
@@ -142,6 +150,8 @@ canonicalGRQFTConsumerSourceDiagnostic =
         W5.canonicalGRQFTConsumerNextObligationCurrentStatus
     ; receiptMissingFields =
         W5.canonicalGRQFTConsumerReceiptMissingFields
+    ; pdfCarrierPrerequisite =
+        W5.canonicalGRQFTPDFCarrierPrerequisiteDiagnostic
     ; receiptBlockedFields =
         W5.canonicalGRQFTConsumerBlockedFields
     ; blockedFieldsStillCanonical =
@@ -161,13 +171,14 @@ canonicalGRQFTConsumerSourceDiagnostic =
         "Current W5 source scan imports only GRQFTConsumerNextObligation"
         ∷ "Known-limits observable consumer, GR bridge, and QFT bridge sources are present"
         ∷ "Complete GRQFTDownstreamConsumerFields source is not promoted here"
+        ∷ "No external PDF carrier prerequisite source is present for W5 GR/QFT/PDF closure intake"
         ∷ "No promotion authority, GR equation law, QFT interaction law, or consumer law witness source is present"
         ∷ "No empirical GR/QFT validation source is present"
         ∷ []
     ; blockerImpact =
         "Strict blocker remains: W5 cannot promote known-limits GR/QFT recovery into GR/QFT closure"
-        ∷ "The next admissible step is still an external GRQFTClosurePromotionReceipt with authority, laws, witnesses, downstream fields, and empirical validation"
-        ∷ "This diagnostic fabricates no authority token, empirical validation token, or promotion receipt"
+        ∷ "The next admissible step is still an external GRQFTClosurePromotionReceipt with authority, PDF carrier prerequisite, laws, witnesses, downstream fields, and empirical validation"
+        ∷ "This diagnostic fabricates no authority token, PDF carrier, empirical validation token, or promotion receipt"
         ∷ []
     ; impossibleAuthorityHere =
         grqftPromotionAuthorityImpossibleHere

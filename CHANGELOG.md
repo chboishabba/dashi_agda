@@ -2,6 +2,50 @@
 
 ## 2026-05-05
 
+- sharpen the W4 same-record Z-peak calibration-anchor request:
+  `W4CalibrationRatioZPeakReceiptRequestSurface.agda` now includes a typed
+  `W4SameRecordZPeakT21T22ArtifactReceiptRequest` for the t21 measurement and
+  t22 covariance anchors, with DOI equalities, requested checksum/header/bin
+  fields, and a non-promotion request boundary.
+  `W4PhysicalCalibrationExternalReceiptRequestPack.agda` adds the matching
+  provider payload requirement. This is request/diagnostic progress only:
+  no `Candidate256PhysicalCalibrationAuthorityToken`, physical unit carrier,
+  dimensional preservation proof, ratio-calibration law, or W4 promotion is
+  constructed.
+
+- sharpen W6 runtime PNF provider diagnostic:
+  `PNFResidualConsumerNextObligation.agda` now names missing
+  receipt-backed residual computation as an explicit missing runtime source,
+  and `PNFResidualConsumerRuntimeProviderAttempt.agda` exports the canonical
+  provider output as diagnostic-only. No concrete consumer profile, runtime
+  receipt id, paired `PNFEmissionReceipt` values, residual computation, or
+  Hecke candidate-pool receipt id is fabricated.
+
+- add W3 residual observable-class receipt/proto alignment:
+  `HEPDataResidualObservableClassReceiptProtoAlignment.agda` records the typed
+  W3 residual-closure output for Curie-W3. The local `phistar_50_76` proto
+  receipt is aligned to the provider-facing `residualObservableClassReceipt`
+  slot and may be returned as the first-missing typed diagnostic, but it remains
+  unaccepted: residual payload intake still rejects at
+  `firstMissingResidualObservableClass`, the residual authority gate remains
+  blocked, `nonCollapseWitnessReceipt` is still a later missing receipt, and no
+  `W3AcceptedAuthorityExternalReceipt` or W3/W4/W5/W8 promotion is constructed.
+- sharpen W5 GRQFT/PDF carrier diagnostics:
+  `GRQFTConsumerNextObligation.agda` now treats the external PDF
+  carrier/mass-kernel route as a first-class missing upstream field and
+  carries a non-promoting `GRQFTPDFCarrierPrerequisiteDiagnostic`.
+  `GRQFTConsumerSourceDiagnostic.agda` marks that prerequisite source as
+  missing, and `GRQFTClosurePromotionReceiptRequestPack.agda` adds it to the
+  exact provider payload request. No PDF carrier, promotion authority, GR/QFT
+  law, witness, empirical validation, or closure-promotion receipt is
+  constructed.
+- hold the W2 Natural p2 convergence output for isolation:
+  the W2 worker output is not included in the safe-lane integration because
+  `timeout 30s agda DASHI/Physics/Closure/NaturalP2ConvergencePromotionObligation.agda`
+  timed out while checking
+  `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda` through the
+  import chain. W2 remains pending a bounded isolation round before its typed
+  obstruction is committed.
 - assign the W3-promoted residual closure lanes:
   `Docs/WorkerCoordinationBoard.md` now records
   `w3-promoted-residual-closure-2026-05-05` as the active orchestrator handoff
@@ -696,6 +740,16 @@
   exact W9 retarget consumer interface and acceptance receipt artifacts. The
   P0 index, worker board, and worker map now include these as non-promoting
   provider-facing request packs.
+- sharpen the W9 dim-15 pressure obstruction:
+  `CancellationPressureCompatibilityNextObligation.agda` now exposes
+  `canonical15WeightedReplacementCandidateReceipt` and
+  `canonical15DeltaToQuadraticClosureObstruction`, packaging the canonical
+  `(1 , 3)` pressure-witness failure, the `(1 , 1)` weighted uniform
+  identification failure, and the selected pressure-compatible retarget's
+  non-Qcore boundary. `CancellationPressureRetargetConsumerAcceptanceRequestPack.agda`
+  threads that typed obstruction into the provider handoff without constructing
+  a `W9KillReceipt`, admissible quadratic promotion, or
+  `CancellationPressureCompatibility`.
 - integrate the empirical / calibration request-pack round:
   `W3AcceptedAuthorityExternalReceiptRequestPack.agda` packages the exact W3
   accepted-authority external receipt payload, and

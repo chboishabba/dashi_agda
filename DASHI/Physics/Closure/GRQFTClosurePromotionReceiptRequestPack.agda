@@ -42,6 +42,9 @@ record GRQFTClosurePromotionProviderPayloadRequest : Setω where
     missingFieldsReceipt :
       W5.GRQFTClosurePromotionReceiptMissingFields
 
+    pdfCarrierPrerequisite :
+      W5.GRQFTPDFCarrierPrerequisiteDiagnostic
+
     missingFieldsReceiptStillCanonical :
       missingFieldsReceipt
       ≡
@@ -82,6 +85,7 @@ canonicalGRQFTClosurePromotionProviderPayloadRequest =
         "DASHI.Physics.Closure.GRQFTConsumerNextObligation.GRQFTClosurePromotionReceipt"
     ; exactMissingReceiptFields =
         "promotionAuthority : GRQFTClosurePromotionAuthorityToken"
+        ∷ "pdfCarrierPrerequisite : external PDF carrier/mass-kernel route before W5 GR/QFT/PDF closure intake"
         ∷ "downstreamConsumerFields : GRQFTDownstreamConsumerFields"
         ∷ "grEquationLaw : einsteinEquationCarrier -> Set"
         ∷ "qftInteractionLaw : interactionClosureCarrier -> Set"
@@ -97,6 +101,9 @@ canonicalGRQFTClosurePromotionProviderPayloadRequest =
     ; missingFieldsReceipt =
         W5Source.GRQFTConsumerSourceDiagnostic.receiptMissingFields
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
+    ; pdfCarrierPrerequisite =
+        W5Source.GRQFTConsumerSourceDiagnostic.pdfCarrierPrerequisite
+          W5Source.canonicalGRQFTConsumerSourceDiagnostic
     ; missingFieldsReceiptStillCanonical =
         refl
     ; sourceAvailability =
@@ -106,11 +113,12 @@ canonicalGRQFTClosurePromotionProviderPayloadRequest =
         refl
     ; providerInstructions =
         "External provider must supply the full GRQFTClosurePromotionReceipt payload, not another known-limits theorem"
-        ∷ "The payload must include promotion authority, downstream consumer fields, GR equation law, QFT interaction law, both consumer law witnesses, and empirical GR/QFT validation"
+        ∷ "The payload must include promotion authority, the PDF carrier prerequisite, downstream consumer fields, GR equation law, QFT interaction law, both consumer law witnesses, and empirical GR/QFT validation"
         ∷ "Known-limits observable, GR bridge, and QFT bridge sources may be reused only as inputs to downstreamConsumerFields"
         ∷ []
     ; nonPromotionBoundary =
         "This request pack does not construct GRQFTClosurePromotionAuthorityToken"
+        ∷ "This request pack does not construct an external PDF carrier or mass-kernel route"
         ∷ "This request pack does not construct GRQFTDownstreamConsumerFields"
         ∷ "This request pack does not construct GR/QFT laws, consumer witnesses, empirical validation, or GRQFTClosurePromotionReceipt"
         ∷ []
@@ -172,6 +180,7 @@ canonicalGRQFTClosurePromotionReceiptRequestPack =
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
     ; consolidatedRequestBoundary =
         "Request pack only aggregates W5 and W5g diagnostics into provider-facing missing receipt fields"
+        ∷ "It adds the PDF carrier prerequisite as a diagnostic field, not as a supplied carrier"
         ∷ "It does not promote known-limits GR/QFT bridge results into full GR/QFT closure"
         ∷ "It does not discharge W5, empirical validation, or downstream physics authority blockers"
         ∷ []

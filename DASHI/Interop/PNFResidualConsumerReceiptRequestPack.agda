@@ -149,6 +149,7 @@ canonicalPNFResidualConsumerReceiptRequestPack =
     ; strictBlockerImpact =
         "Blocked until runtime supplies consumer profile and runtime receipt id"
         ∷ "Blocked until runtime supplies paired PNFEmissionReceipt values"
+        ∷ "Blocked until residual computation can be derived as receiptResidual over the paired PNFEmissionReceipt values"
         ∷ "Blocked until runtime supplies the Hecke candidate-pool receipt id"
         ∷ "After those values arrive, emitted atoms and residual level derive from receipt fields by refl"
         ∷ "No runtime receipt, atom label, residual label, or Hecke fibre label is fabricated here"

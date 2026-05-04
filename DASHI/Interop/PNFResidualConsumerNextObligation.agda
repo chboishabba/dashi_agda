@@ -175,6 +175,8 @@ data PNFResidualConsumerMissingRuntimeSource : Set where
     PNFResidualConsumerMissingRuntimeSource
   missingConcreteRightPNFEmissionReceiptValue :
     PNFResidualConsumerMissingRuntimeSource
+  missingConcreteReceiptBackedResidualComputation :
+    PNFResidualConsumerMissingRuntimeSource
   missingConcreteHeckeCandidatePoolReceiptIdValue :
     PNFResidualConsumerMissingRuntimeSource
 
@@ -281,6 +283,7 @@ canonicalPNFResidualConsumerRuntimeReceiptSourceDiagnostic =
         ∷ missingConcreteRuntimeReceiptIdValue
         ∷ missingConcreteLeftPNFEmissionReceiptValue
         ∷ missingConcreteRightPNFEmissionReceiptValue
+        ∷ missingConcreteReceiptBackedResidualComputation
         ∷ missingConcreteHeckeCandidatePoolReceiptIdValue
         ∷ []
     ; constructibleAfterSources =
@@ -292,7 +295,7 @@ canonicalPNFResidualConsumerRuntimeReceiptSourceDiagnostic =
         "DASHI.Interop.SensibLawResidualLattice exports the PNFEmissionReceipt constructor, not concrete runtime receipt values"
         ∷ "DASHI.Interop.PNFResidualConsumerNextObligation exports the consumer builder, not runtime inputs"
         ∷ "Ontology.Hecke.PNFResidualBridge exports the candidate-pool surface, not a runtime candidate-pool receipt id"
-        ∷ "A concrete PNFResidualConsumerReceipt is constructible only after runtime supplies the five intake fields"
+        ∷ "A concrete PNFResidualConsumerReceipt is constructible only after runtime supplies the five intake fields; the residual computation is then receiptResidual over the paired receipts"
         ∷ []
     }
 
