@@ -98,6 +98,17 @@ checking, and `Gauss` / `Darwin`
 target sidecar. HEP-R55/W3 is not relaunched because the next action there is
 external provider engagement for `W3AcceptedEvidenceAuthorityToken`.
 
+Fastest-path result update `2026-05-05`: W5 landed a non-promoting PDF-carrier
+log-ratio diagnostic. The t45 required correction is `0.8804486068`; the
+nearest two-pressure-unit / 15-prime proxy is `0.8751733190`, close enough to
+be suggestive but still `externallyPDFGated`. W6 returned no-op because the
+existing PNF receipt request pack already names the required runtime payload
+fields. GR sidecar is diagnostic-only: discrete metric/curvature candidate,
+with continuum promotion gated on W2 and source coupling gated on W4. W2
+returned a candidate-family first step but it is held out of integration
+because `timeout 30s agda NaturalP2ConvergencePromotionObligation.agda` exits
+`124`.
+
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a
 narrow empirical equality plus mismatch diagnostic, and `W4` landed a

@@ -272,7 +272,7 @@ Round 2 integration rule:
 
 Round date: `2026-05-05`
 Round owner: `W0 orchestrator / integrator`
-Round status: `launched`
+Round status: `partially integrated; W2 held for timeout isolation`
 
 FORMAL MODEL: O, R, C, S, L, P, G, F
 
@@ -644,6 +644,7 @@ C:
   `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`,
   `CanonicalDynamicsLawTheorem.agda`, `Docs/NaturalDynamicsLaw.md`.
 - W5/PDF: `HEPDataMassKernelCalibrationDiagnostic.agda`,
+  `PDFCarrierLogRatioDiagnostic.agda`,
   `GRQFTConsumerNextObligation.agda`,
   `GRQFTClosurePromotionReceiptRequestPack.agda`,
   `GRQFTConsumerSourceDiagnostic.agda`.
@@ -694,10 +695,28 @@ F:
 
 | Lane | Worker | Agent id | Assignment | Expected output | Status |
 |---|---|---|---|---|---|
-| `W2-critical-path-bridge` | `Turing / Cicero` | `019df414-e48e-7392-8e3d-30ca8e51b017` | Strongest repo-supported positive natural `p2` candidate-family / bridge attempt. | Narrow advance or exact missing ingredient; no fake theorem. | launched |
-| `W5-PDF-carrier-diagnostic` | `Maxwell / Goodall` | `019df414-e56e-71a0-83ca-aa345005bdeb` | Test t45 correction factor route and classify internal vs external PDF path. | Numeric diagnostic and optional non-promoting typed surface. | launched |
-| `W6-runtime-PNF-readiness` | `Liskov / Pauli` | `019df414-e65a-7542-a678-129149edb11c` | Verify W6 runtime provider request is complete or sharpen missing payload. | Provider-ready payload list or narrow update. | launched |
-| `GR-metric-minimal-target` | `Gauss / Darwin` | `019df414-e7c8-7d73-b059-d06de4839363` | Define weakest sufficient GR recovery target and dependencies. | Roadmap/diagnostic update; no GR theorem claim. | launched |
+| `W2-critical-path-bridge` | `Turing / Cicero` | `019df414-e48e-7392-8e3d-30ca8e51b017` | Strongest repo-supported positive natural `p2` candidate-family / bridge attempt. | Narrow advance or exact missing ingredient; no fake theorem. | held: candidate returned, but `timeout 30s agda NaturalP2ConvergencePromotionObligation.agda` exits `124`; not integration-ready |
+| `W5-PDF-carrier-diagnostic` | `Maxwell / Goodall` | `019df414-e56e-71a0-83ca-aa345005bdeb` | Test t45 correction factor route and classify internal vs external PDF path. | Numeric diagnostic and optional non-promoting typed surface. | integrated: required correction `0.8804486068`, proxy `0.8751733190`, still `externallyPDFGated` |
+| `W6-runtime-PNF-readiness` | `Liskov / Pauli` | `019df414-e65a-7542-a678-129149edb11c` | Verify W6 runtime provider request is complete or sharpen missing payload. | Provider-ready payload list or narrow update. | completed no-op: existing request pack already names the five runtime payload fields |
+| `GR-metric-minimal-target` | `Gauss / Darwin` | `019df414-e7c8-7d73-b059-d06de4839363` | Define weakest sufficient GR recovery target and dependencies. | Roadmap/diagnostic update; no GR theorem claim. | integrated in roadmap: discrete metric/curvature candidate only; W2/W4/W5 gated |
+
+Round result update:
+
+- `W5-PDF-carrier-diagnostic`: landed
+  `PDFCarrierLogRatioDiagnostic.agda` and threaded it into
+  `GRQFTConsumerNextObligation.agda`. The nearest proxy is numerically close,
+  but `internalDerivationAvailable = false`; W5 remains blocked on an external
+  PDF/parton-luminosity carrier or equivalent typed mass-kernel route.
+- `W6-runtime-PNF-readiness`: no repo edit required. The provider-ready payload
+  is already exactly `consumerProfile`, `runtimeReceiptId`, paired
+  `PNFEmissionReceipt`s, and `heckeCandidatePoolReceiptId`, with
+  receipt-backed residual computed from the paired emissions.
+- `GR-metric-minimal-target`: roadmap now records the weakest sufficient target
+  as a discrete metric/curvature candidate, not a GR recovery theorem.
+- `W2-critical-path-bridge`: candidate-family code exists in the worktree but
+  is held out of integration because the targeted Agda check exceeds the
+  required `30s` cap. Next action is W2 import/performance isolation or a
+  smaller receipt surface before commit.
 
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 

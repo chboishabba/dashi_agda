@@ -2,6 +2,16 @@
 
 ## 2026-05-05
 
+- integrate fastest-path sidecar results:
+  W5 now has `PDFCarrierLogRatioDiagnostic.agda`, threaded into
+  `GRQFTConsumerNextObligation.agda`, recording required t45 correction
+  `0.8804486068` versus proxy `0.8751733190` while preserving
+  `externallyPDFGated` status. W6 returned provider-ready with no edit because
+  the existing runtime request pack already names the five payload fields. GR
+  remains a diagnostic discrete metric/curvature target, not a recovery
+  theorem. W2 returned a positive candidate-family first step, but W0 held it
+  out of integration because the targeted `30s` Agda check exits `124`.
+
 - launch the fastest-path-to-completion round:
   `Docs/WorkerCoordinationBoard.md`,
   `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`, and `TODO.md` now

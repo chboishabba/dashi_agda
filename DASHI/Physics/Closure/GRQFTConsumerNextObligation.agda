@@ -9,6 +9,7 @@ import DASHI.Physics.Closure.KnownLimitsGRBridgeTheorem as GR
 import DASHI.Physics.Closure.KnownLimitsInterpretableObservableConsumer as IOC
 import DASHI.Physics.Closure.KnownLimitsQFTBridgeTheorem as QFT
 import DASHI.Physics.Closure.KnownLimitsStatus as KLS
+import DASHI.Physics.Closure.PDFCarrierLogRatioDiagnostic as PDFLog
 
 ------------------------------------------------------------------------
 -- W5n GR/QFT next-obligation surface.
@@ -152,6 +153,9 @@ record GRQFTPDFCarrierPrerequisiteDiagnostic : Set where
     prerequisiteStatus :
       GRQFTPDFCarrierPrerequisiteStatus
 
+    nearestPathDiagnostic :
+      PDFLog.PDFCarrierLogRatioDiagnostic
+
     requiredCarrier :
       String
 
@@ -167,10 +171,13 @@ canonicalGRQFTPDFCarrierPrerequisiteDiagnostic =
   record
     { prerequisiteStatus =
         pdfCarrierPrerequisiteMissing
+    ; nearestPathDiagnostic =
+        PDFLog.canonicalPDFCarrierLogRatioDiagnostic
     ; requiredCarrier =
         "external PDF carrier/mass-kernel route needed before W5 GR/QFT closure-promotion receipt can be assessed"
     ; sourceScanBoundary =
         "Current W5 sources do not provide an external PDF carrier"
+        ∷ "Nearest t45 log-ratio diagnostic is numerically suggestive but internally underived"
         ∷ "Below-Z t43 comparison evidence explicitly records no external PDF"
         ∷ "Known-limits GR/QFT bridges do not derive the high-mass PDF carrier prerequisite"
         ∷ []
