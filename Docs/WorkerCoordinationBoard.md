@@ -616,117 +616,121 @@ Round validation:
 - W5 worker also validated the existing GRQFT/mass-kernel targets with
   targeted `timeout 30s` checks and made no edits.
 
-## Active Assignment Round -- Fastest Path To Completion
+## Active Assignment Round -- W2/W3/GR Fanout After Sum-Invariance
 
 Round date: `2026-05-05`
 Round owner: `W0 orchestrator / integrator`
-Round status: `launched`
+Round status: `first batch integrated locally; W7/W5 queued batch running`
 
 FORMAL MODEL: O, R, C, S, L, P, G, F
 
 O:
-- `W0` owns fastest-path control and separates publishable bounded scope from
-  complete-unification scope.
-- `Turing` owns W2 as the critical-path fork.
-- `Maxwell` owns the W5 PDF-carrier nearest-path diagnostic.
-- `Liskov` owns W6 runtime PNF provider readiness.
-- `Gauss` owns the GR metric-recovery minimal target sidecar.
+- `W0` owns integration, board updates, TODO/changelog alignment, and final
+  promotion decisions.
+- `Newton`, `Turing`, `Faraday`, `Planck`, `Gauss`, and `Curie-W3` completed
+  first-batch lane work on disjoint surfaces.
+- `Arendt` and `Maxwell` are now live as the second batch.
 
 R:
-- Reorder the program around the actual critical path: W2 first for full
-  unification, W5/PDF and W6 in parallel, and GR metric recovery defined as a
-  weakest sufficient target rather than an immediate theorem claim.
-- Preserve the publishable bounded claim as a separate, nearer paper target.
+- Fan out after the W2 sum-invariance receipt: separate pure W2 packaging from
+  W4, W9, GR, W3 authority audit, W7 governance, and W5 external PDF intake.
+- Preserve the publishable bounded claim as separate from complete
+  unification; no lane may promote by prose.
 
 C:
 - W2: `NaturalP2ConvergencePromotionObligation.agda`,
+  `DASHI/Arithmetic/NormalizeAddSumPreservation.agda`,
+  `DASHI/Arithmetic/NormalizeAdd*.agda`,
   `CanonicalP2OfflineL2ObstructionCertificate.agda`,
-  `CanonicalP2KeyScheduleBridgeObstruction.agda`,
-  `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`,
-  `CanonicalDynamicsLawTheorem.agda`, `Docs/NaturalDynamicsLaw.md`.
+  `CanonicalDynamicsLawTheorem.agda`.
+- W3: `scripts/run_t43_projection.py`,
+  `HEPDataW3NonCollapseWitnessReceipt.agda`,
+  `W3AcceptedAuthorityProviderAttempt.agda`.
+- W4: `W4PhysicalCalibrationObligationSurface.agda`,
+  `W4CalibrationRatioZPeakReceiptRequestSurface.agda`, local t21/t22 cache.
 - W5/PDF: `HEPDataMassKernelCalibrationDiagnostic.agda`,
-  `PDFCarrierLogRatioDiagnostic.agda`,
-  `GRQFTConsumerNextObligation.agda`,
-  `GRQFTClosurePromotionReceiptRequestPack.agda`,
-  `GRQFTConsumerSourceDiagnostic.agda`.
-- W6: `DASHI/Interop/PNFResidualConsumerReceiptRequestPack.agda`,
-  `PNFResidualConsumerRuntimeProviderAttempt.agda`,
-  `PNFResidualConsumerNextObligation.agda`,
-  `Ontology/Hecke/PNFResidualBridge.agda`,
-  `Docs/ITIRPNFResidualLogicBridge.md`.
-- GR sidecar: `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`,
-  known-limits and GRQFT surfaces, and signature/root-system surfaces read-only
-  unless a narrow diagnostic is justified.
+  `PDFCarrierLogRatioDiagnostic.agda`, `GRQFTConsumerNextObligation.agda`.
+- W9: `CancellationPressure*`, `Weighted*`, and Lyapunov/retarget consumer
+  surfaces.
+- GR: `MinkowskiLimitReceipt.agda`, known-limits GR/QFT files, and any new
+  discrete-curvature diagnostic.
 
 S:
-- HEP-R53 and HEP-R54 are done. W3 is now blocked only on external
-  `W3AcceptedEvidenceAuthorityToken` for accepted-authority closure.
-- W2 carry-field obstruction target is superseded by the sum-invariance target:
-  `normalizeAdd` preserves `lhs + rhs` and tracked-prime p-adic valuations of
-  that sum by definitional equality. The governance kill condition still
-  requires the promotion authority token and carrier-general convergence-rate
-  receipt before W2 is marked unblocked.
-- W5/PDF has a precise t45 mass-kernel correction target and should be tested
-  before the route is classified as internal or external.
-- W6 is smaller and provider-runtime gated; it can proceed independently.
-- GR metric recovery has no near-term theorem path and must be reduced to the
-  weakest sufficient target with explicit W2/W4 dependencies.
+- HEP-R53 and HEP-R54 are done. W3 is blocked on external
+  `W3AcceptedEvidenceAuthorityToken`; Curie-W3 is audit-only unless a mismatch
+  is found.
+- W2 carry-field obstruction target is superseded by the sum-invariance target,
+  but the kill condition still requires authority/rate packaging.
+- W5/PDF is currently `externallyPDFGated`.
+- W6 provider payload is already request-packed and is not relaunched.
+- GR flat-space is exact; curved field equations remain open.
 
 L:
-- Run four workers in parallel; no W3 worker is launched because HEP-R55 is
-  external-provider engagement only.
+- Run one live worker per nonblocking lane until the active-agent limit is
+  reached. Queue governance/PDF intake sidecars behind the live batch.
 
 P:
-- `Turing` / `Cicero` (`019df414-e48e-7392-8e3d-30ca8e51b017`): W2 positive
-  bridge/candidate-family attempt.
-- `Maxwell` / `Goodall` (`019df414-e56e-71a0-83ca-aa345005bdeb`): W5 PDF
-  correction-factor diagnostic.
-- `Liskov` / `Pauli` (`019df414-e65a-7542-a678-129149edb11c`): W6 runtime
-  provider-readiness check.
-- `Gauss` / `Darwin` (`019df414-e7c8-7d73-b059-d06de4839363`): GR
-  metric-recovery minimal target.
+- `Newton` / `Chandrasekhar` (`019df433-3ed8-7461-a42d-1042b0ed3b51`): W2
+  full-closure audit / authority-rate packaging.
+- `Turing` / `Helmholtz` (`019df433-3fb6-74d0-9368-253b6094bce6`): W2
+  uniform-rate and carrier-transport support.
+- `Faraday` / `Popper` (`019df433-40c6-7c71-878b-d1347914a5b1`): W4 Z-peak
+  calibration-anchor intake.
+- `Planck` / `Locke` (`019df433-4248-7a72-90a2-a572467f7abe`): W9 Lyapunov
+  compatibility / retarget consumer route.
+- `Gauss` / `Beauvoir` (`019df433-9a7c-7500-bba3-f4efc9e36c53`): GR
+  discrete Einstein-tensor candidate / first-missing diagnostic.
+- `Curie-W3` / `Kepler` (`019df433-9b79-7b23-87a3-b87151e24b61`): HEP-R53
+  non-collapse and HEP-R55 authority-token audit.
+- `Arendt` / `Rawls` (`019df436-40ae-75e0-b6e6-840af646495d`): W7
+  publishable-scope update.
+- `Maxwell` / `Russell` (`019df436-424b-7ac0-a053-ea243e325919`): W5 external
+  PDF intake request.
 
 G:
-- No PDF carrier, runtime receipt, W2 bridge, GR metric theorem, or unification
-  claim may be promoted by assignment text.
+- Promotion requires a named typed receipt/theorem matching the kill surface.
+- Do not fabricate constructorless authority tokens.
 - Agda validation remains targeted with `timeout 30s agda <target>`.
 - Broad aggregate validation remains parked.
 
 F:
-- Missing evidence remains W2 promotion authority and carrier-general
-  convergence-rate packaging, W5 external PDF route, W6 runtime payload, W4
-  calibration/source coupling, and GR metric recovery.
+- Missing evidence remains W2 promotion authority/rate packaging, W5 external
+  PDF route, W6 runtime payload, W4 calibration/source coupling, W9 retarget
+  consumer acceptance, and GR curved field-equation recovery.
 
 | Lane | Worker | Agent id | Assignment | Expected output | Status |
 |---|---|---|---|---|---|
-| `W2-critical-path-bridge` | `Turing / Cicero` | `019df414-e48e-7392-8e3d-30ca8e51b017` | Strongest repo-supported natural `p2` invariant / bridge attempt. | Narrow advance or exact missing ingredient; no fake theorem. | integrated as positive ingredient: `NormalizeAddSumPreservationReceipt`; W2 kill not promoted because authority/rate packaging remain absent |
-| `W5-PDF-carrier-diagnostic` | `Maxwell / Goodall` | `019df414-e56e-71a0-83ca-aa345005bdeb` | Test t45 correction factor route and classify internal vs external PDF path. | Numeric diagnostic and optional non-promoting typed surface. | integrated: required correction `0.8804486068`, proxy `0.8751733190`, still `externallyPDFGated` |
-| `W6-runtime-PNF-readiness` | `Liskov / Pauli` | `019df414-e65a-7542-a678-129149edb11c` | Verify W6 runtime provider request is complete or sharpen missing payload. | Provider-ready payload list or narrow update. | completed no-op: existing request pack already names the five runtime payload fields |
-| `GR-metric-minimal-target` | `Gauss / Darwin` | `019df414-e7c8-7d73-b059-d06de4839363` | Define weakest sufficient GR recovery target and dependencies. | Roadmap/diagnostic update; no GR theorem claim. | integrated in roadmap: discrete metric/curvature candidate only; W2/W4/W5 gated |
+| `W2-full-closure` | `Newton / Chandrasekhar` | `019df433-3ed8-7461-a42d-1042b0ed3b51` | Audit whether W2 can be killed from de4a8a2 without fabricating constructorless authority; implement receipt or typed diagnostic. | `W2PromotionAuthorityReceipt` or exact remaining-field diagnostic. | completed: W2 not promotable; diagnostic landed |
+| `W2-uniform-rate-transport` | `Turing / Helmholtz` | `019df433-3fb6-74d0-9368-253b6094bce6` | Check `normalizeAdd` parameterization and nontrivial `NormalizeAddState -> NormalizeAddState` transports. | `UniformConvergenceRateSurface` / transport-rate surface or obstruction. | completed: fixed local surface, no nontrivial transport found |
+| `W4-zpeak-anchor` | `Faraday / Popper` | `019df433-40c6-7c71-878b-d1347914a5b1` | Check t21/t22 cache and runner CLI; run local dirty Z-peak diagnostic if feasible. | W4 Z-peak anchor receipt or missing-artifact diagnostic. | completed: blocked by missing t21/t22 artifacts and t43-specific runner |
+| `W9-lyapunov-compat` | `Planck / Locke` | `019df433-4248-7a72-90a2-a572467f7abe` | Check whether weighted support bound can satisfy Lyapunov retarget consumer. | W9 compatibility receipt or incompatibility diagnostic. | completed: weighted bound present, not a retarget consumer |
+| `GR-einstein-candidate` | `Gauss / Beauvoir` | `019df433-9a7c-7500-bba3-f4efc9e36c53` | Define weakest discrete curvature / Einstein-tensor candidate from current surfaces. | Candidate receipt or first-missing diagnostic; no GR promotion. | completed: flat-only candidate, first missing non-flat connection/shift |
+| `W3-noncollapse-authority-audit` | `Curie-W3 / Kepler` | `019df433-9b79-7b23-87a3-b87151e24b61` | Audit HEP-R53 `per_bin` and non-collapse receipt; identify true HEP-R55 blocker. | No-op audit or narrow patch; no authority-token fabrication. | completed no-op: HEP-R53 concrete, HEP-R55 authority token missing |
+| `W7-publishable-scope` | `Arendt / Rawls` | `019df436-40ae-75e0-b6e6-840af646495d` | Update bounded governance receipt to include W2 sum-invariance and Minkowski flat-space if not already present. | Bounded W7 scope receipt update. | live |
+| `W5-pdf-external-intake` | `Maxwell / Russell` | `019df436-424b-7ac0-a053-ea243e325919` | Check local CT18/MSHT/NNPDF/LHAPDF cache and write external intake request if absent. | W5 PDF external intake request. | live |
 
 Round result update:
 
-- `W5-PDF-carrier-diagnostic`: landed
-  `PDFCarrierLogRatioDiagnostic.agda` and threaded it into
-  `GRQFTConsumerNextObligation.agda`. The nearest proxy is numerically close,
-  but `internalDerivationAvailable = false`; W5 remains blocked on an external
-  PDF/parton-luminosity carrier or equivalent typed mass-kernel route.
-- `W6-runtime-PNF-readiness`: no repo edit required. The provider-ready payload
-  is already exactly `consumerProfile`, `runtimeReceiptId`, paired
-  `PNFEmissionReceipt`s, and `heckeCandidatePoolReceiptId`, with
-  receipt-backed residual computed from the paired emissions.
-- `GR-metric-minimal-target`: roadmap now records the weakest sufficient target
-  as a discrete metric/curvature candidate, not a GR recovery theorem. The
-  flat-space side now also has `MinkowskiLimitReceipt.agda`, recording the
-  exact hyperbolic/Minkowski quadratic and the B4 intrinsic `sig31` match.
-- `W2-critical-path-bridge`: landed
-  `DASHI/Arithmetic/NormalizeAddSumPreservation.agda` and threaded its
-  canonical receipt into `NaturalP2ConvergencePromotionObligation.agda`.
-  The earlier heavy candidate-family imports were removed; targeted `30s`
-  Agda validation now passes. This is a positive theorem ingredient, but it is
-  not a full W2 kill receipt because the existing W2 authority token is still
-  constructorless and the carrier-general convergence-rate packaging remains
-  separate.
+- `W2-full-closure`: `W2PromotionAuthorityReceipt.agda` records that W2 is not
+  promotable without governance fabrication. The sum-invariance receipt is
+  positive, but `NaturalP2ConvergencePromotionAuthorityToken -> ⊥` and
+  `NaturalP2ConvergencePromotionReceipt -> ⊥` still hold.
+- `W2-uniform-rate-transport`: `UniformConvergenceRateSurface.agda` records
+  that `NormalizeAddState` is concrete, `normalizeAdd` is a fixed endomap, and
+  no nontrivial arithmetic transport was found beyond `normalizeAdd`.
+- `W4-zpeak-anchor`: `W4ZPeakCalibrationAnchorReceipt.agda` records that the
+  dirty Z-peak run is not locally feasible: t21/t22 artifacts are absent and
+  the current runner exposes the t43/t44 interface only.
+- `W9-lyapunov-compat`: `W9LyapunovIncompatibilityDiagnostic.agda` records
+  that `weightedMaxPressure<=weightedSupport` is available but does not satisfy
+  the current Lyapunov/retarget consumer interfaces.
+- `GR-einstein-candidate`: `DiscreteEinsteinTensorCandidate.agda` records a
+  flat-only candidate over `MinkowskiLimitReceipt`; the first missing curved
+  condition is `missingNonFlatConnectionOrShift`.
+- `W3-noncollapse-authority-audit`: no repo edit. HEP-R53 is concrete with
+  bin-12 witness and artifact SHA
+  `3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0`;
+  HEP-R55 remains blocked on `missingAcceptedEvidenceAuthorityToken`.
 
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 

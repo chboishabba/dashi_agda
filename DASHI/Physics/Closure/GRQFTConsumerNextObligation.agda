@@ -10,6 +10,7 @@ import DASHI.Physics.Closure.KnownLimitsInterpretableObservableConsumer as IOC
 import DASHI.Physics.Closure.KnownLimitsQFTBridgeTheorem as QFT
 import DASHI.Physics.Closure.KnownLimitsStatus as KLS
 import DASHI.Physics.Closure.PDFCarrierLogRatioDiagnostic as PDFLog
+import DASHI.Physics.Closure.W5PDFCarrierExternalIntakeRequest as PDFIntake
 
 ------------------------------------------------------------------------
 -- W5n GR/QFT next-obligation surface.
@@ -156,6 +157,9 @@ record GRQFTPDFCarrierPrerequisiteDiagnostic : Set where
     nearestPathDiagnostic :
       PDFLog.PDFCarrierLogRatioDiagnostic
 
+    externalIntakeRequest :
+      PDFIntake.W5PDFCarrierExternalIntakeRequest
+
     requiredCarrier :
       String
 
@@ -173,6 +177,8 @@ canonicalGRQFTPDFCarrierPrerequisiteDiagnostic =
         pdfCarrierPrerequisiteMissing
     ; nearestPathDiagnostic =
         PDFLog.canonicalPDFCarrierLogRatioDiagnostic
+    ; externalIntakeRequest =
+        PDFIntake.canonicalW5PDFCarrierExternalIntakeRequest
     ; requiredCarrier =
         "external PDF carrier/mass-kernel route needed before W5 GR/QFT closure-promotion receipt can be assessed"
     ; sourceScanBoundary =

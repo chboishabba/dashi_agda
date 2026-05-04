@@ -5,10 +5,13 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
+open import Data.Unit using (⊤)
 
 import DASHI.Physics.Closure.TemporalSheafProofObligations as Temporal
 import DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt as W3T43
 import DASHI.Physics.Closure.HEPDataW3NonCollapseWitnessReceipt as W3T43NonCollapse
+import DASHI.Arithmetic.NormalizeAddSumPreservation as W2Sum
+import DASHI.Physics.Closure.MinkowskiLimitReceipt as Minkowski
 
 ------------------------------------------------------------------------
 -- W7n claim-governance promotion obligation.
@@ -140,12 +143,15 @@ record ClaimGovernancePromotionReceipt : Setω where
 ------------------------------------------------------------------------
 -- Bounded W3 t43 publishable-scope receipt.
 --
--- This is the immediate W7 governance surface after HEP-R53.  It records the
--- narrow claim that may be made from the bounded W3 comparison-law receipt
--- plus runner-side t43 non-collapse evidence, without constructing the
--- broader ClaimGovernancePromotionAuthorityToken needed for higher-structure,
--- cross-scale, temporal, spacetime, neurochemical, or market readings, and
--- without constructing W3 accepted authority before HEP-R54.
+-- This is the immediate W7 governance surface after HEP-R53 plus the W2
+-- sum-invariance and Minkowski flat-space receipts.  It records the narrow
+-- claim that may be made from the bounded W3 comparison-law receipt plus
+-- runner-side t43 non-collapse evidence, the definitional normalizeAdd
+-- sum-invariance surface, and the exact flat Lorentzian/Minkowski quadratic
+-- surface.  It does not construct the broader ClaimGovernancePromotionAuthorityToken
+-- needed for higher-structure, cross-scale, temporal, spacetime,
+-- neurochemical, or market readings, and it does not construct W3 accepted
+-- authority before HEP-R55.
 
 data BoundedW3T43PublishableClaimStatus : Set where
   publishableBelowZT43DrellYanPhiStarRatio :
@@ -154,15 +160,25 @@ data BoundedW3T43PublishableClaimStatus : Set where
 data BoundedW3T43ClaimBoundary : Set where
   noFullEmpiricalAdequacy :
     BoundedW3T43ClaimBoundary
-  noW3AcceptedAuthorityBeforeHEPR54 :
+  noW3AcceptedAuthorityBeforeHEPR55 :
+    BoundedW3T43ClaimBoundary
+  noFullStandardModelCoverage :
+    BoundedW3T43ClaimBoundary
+  noT45AboveZPromotion :
     BoundedW3T43ClaimBoundary
   noW4PhysicalCalibration :
+    BoundedW3T43ClaimBoundary
+  noChemistryCalibration :
     BoundedW3T43ClaimBoundary
   noW5PDFCarrier :
     BoundedW3T43ClaimBoundary
   noW6RuntimeConsumer :
     BoundedW3T43ClaimBoundary
   noW8ExternalOriginPromotion :
+    BoundedW3T43ClaimBoundary
+  noCurvedGRRecovery :
+    BoundedW3T43ClaimBoundary
+  noUnificationClaim :
     BoundedW3T43ClaimBoundary
   noCrossScaleOrTemporalClaim :
     BoundedW3T43ClaimBoundary
@@ -174,6 +190,12 @@ record BoundedW3T43ClaimGovernancePromotionReceipt : Setω where
 
     runnerNonCollapseReceipt :
       W3T43NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt
+
+    w2SumInvariantReceipt :
+      W2Sum.NormalizeAddSumPreservationReceipt
+
+    minkowskiFlatSpaceReceipt :
+      Minkowski.CarrierQuadraticIsMinkowski
 
     publishableClaimStatus :
       BoundedW3T43PublishableClaimStatus
@@ -222,6 +244,30 @@ record BoundedW3T43ClaimGovernancePromotionReceipt : Setω where
       ≡
       false
 
+    w2EvidenceIsSumInvariantOnly :
+      W2Sum.NormalizeAddSumPreservationReceipt.nonPromotionBoundary
+        w2SumInvariantReceipt
+      ≡
+      W2Sum.normalizeAddOneStepSumInvariantEvidence
+
+    minkowskiEvidenceIsFlatSpaceOnly :
+      Minkowski.CarrierQuadraticIsMinkowski.flatSpaceOnly
+        minkowskiFlatSpaceReceipt
+      ≡
+      ⊤
+
+    minkowskiEvidenceHasNoEinsteinEquationClaim :
+      Minkowski.CarrierQuadraticIsMinkowski.noEinsteinEquationClaim
+        minkowskiFlatSpaceReceipt
+      ≡
+      ⊤
+
+    minkowskiEvidenceHasNoCurvedGRPromotion :
+      Minkowski.CarrierQuadraticIsMinkowski.noCurvedGRPromotion
+        minkowskiFlatSpaceReceipt
+      ≡
+      ⊤
+
     claimText :
       String
 
@@ -239,6 +285,10 @@ canonicalBoundedW3T43ClaimGovernancePromotionReceipt =
         W3T43.canonicalHEPDataW3ComparisonLawReceipt
     ; runnerNonCollapseReceipt =
         W3T43NonCollapse.canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt
+    ; w2SumInvariantReceipt =
+        W2Sum.canonicalNormalizeAddSumPreservationReceipt
+    ; minkowskiFlatSpaceReceipt =
+        Minkowski.minkowskiLimitReceipt
     ; publishableClaimStatus =
         publishableBelowZT43DrellYanPhiStarRatio
     ; w3StatusPromotedT43BelowZOnly =
@@ -257,22 +307,37 @@ canonicalBoundedW3T43ClaimGovernancePromotionReceipt =
         refl
     ; runnerEvidenceKeepsAcceptedAuthorityExternal =
         refl
+    ; w2EvidenceIsSumInvariantOnly =
+        refl
+    ; minkowskiEvidenceIsFlatSpaceOnly =
+        refl
+    ; minkowskiEvidenceHasNoEinsteinEquationClaim =
+        refl
+    ; minkowskiEvidenceHasNoCurvedGRPromotion =
+        refl
     ; claimText =
-        "Bounded below-Z Drell-Yan phistar ratio, 50-76 over 76-106 GeV, t43 lane: formal carrier plus no-free-parameter phistar ratio comparison with chi2/dof 2.1565191176 and HEP-R53 runner-side non-collapse witness; not unification and not full W3 accepted authority before HEP-R54"
+        "Bounded below-Z Drell-Yan phistar ratio, 50-76 over 76-106 GeV, t43 lane: formal carrier plus no-free-parameter phistar ratio comparison with chi2/dof 2.1565191176, HEP-R53 runner-side non-collapse witness, W2 normalizeAdd sum-invariance, and exact Minkowski flat-space quadratic receipt; not full Standard Model coverage, not t45/above-Z, not curved GR, not chemistry calibration, not unification, and not full W3 accepted authority before HEP-R55"
     ; claimBoundary =
         noFullEmpiricalAdequacy
-        ∷ noW3AcceptedAuthorityBeforeHEPR54
+        ∷ noW3AcceptedAuthorityBeforeHEPR55
+        ∷ noFullStandardModelCoverage
+        ∷ noT45AboveZPromotion
         ∷ noW4PhysicalCalibration
+        ∷ noChemistryCalibration
         ∷ noW5PDFCarrier
         ∷ noW6RuntimeConsumer
         ∷ noW8ExternalOriginPromotion
+        ∷ noCurvedGRRecovery
+        ∷ noUnificationClaim
         ∷ noCrossScaleOrTemporalClaim
         ∷ []
     ; noBroadGovernanceAuthorityConstructed =
         "This bounded W3 t43 receipt does not construct ClaimGovernancePromotionAuthorityToken"
         ∷ "It does not promote higher-structure, cross-scale, temporal, spacetime, neurochemical, or market readings"
         ∷ "HEP-R53 runner-side non-collapse evidence does not construct W3AcceptedEvidenceAuthorityToken or W3AcceptedAuthorityExternalReceipt"
-        ∷ "It does not close full W3 empirical adequacy, W4 calibration, W5 GRQFT/PDF, W6 runtime, W8 origin-promotion, W2 p2/rate, or W9 dim-15 pressure gates"
+        ∷ "W2 sum-invariance is cited only as a definitional invariant receipt; this module does not construct W2 promotion authority"
+        ∷ "Minkowski flat-space evidence is cited only as an exact flat quadratic receipt; this module does not claim curved GR, Einstein equations, or continuum recovery"
+        ∷ "It does not close full W3 empirical adequacy, W4 chemistry/physical calibration, W5 GRQFT/PDF or t45, W6 runtime, W8 origin-promotion, or W9 dim-15 pressure gates"
         ∷ []
     }
 

@@ -2,6 +2,20 @@
 
 ## 2026-05-05
 
+- integrate W2/W3/GR fanout round:
+  `UniformConvergenceRateSurface.agda` records the fixed local
+  `NormalizeAddState` / `normalizeAdd` rate surface; `W2PromotionAuthorityReceipt.agda`
+  records that W2 remains blocked on constructorless authority and
+  carrier-general convergence packaging. `W4ZPeakCalibrationAnchorReceipt.agda`
+  records missing t21/t22 artifacts and the t43/t44 runner boundary.
+  `W9LyapunovIncompatibilityDiagnostic.agda` records that the weighted support
+  bound is not a current Lyapunov/retarget consumer.
+  `DiscreteEinsteinTensorCandidate.agda` records a flat-only GR candidate with
+  first missing `missingNonFlatConnectionOrShift`. W7 bounded scope now includes
+  W2 sum-invariance and Minkowski flat-space while excluding unification.
+  `W5PDFCarrierExternalIntakeRequest.agda` records the missing external PDF
+  carrier for required t45 correction `0.8804486068`.
+
 - land W2 sum-invariance and GR flat-space receipts:
   `DASHI/Arithmetic/NormalizeAddSumPreservation.agda` proves by `refl` that
   `normalizeAdd` preserves `lhs + rhs` and the p-adic valuation of that sum for

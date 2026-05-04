@@ -111,6 +111,24 @@ is `0.8804486068`; the nearest two-pressure-unit / 15-prime proxy is
 W6 returned no-op because the existing PNF receipt request pack already names
 the required runtime payload fields.
 
+W2/W3/GR fanout round `2026-05-05`: first batch completed with typed
+non-promoting outputs. W2 full-closure audit landed
+`W2PromotionAuthorityReceipt.agda`, confirming W2 still cannot be promoted
+without fabricating the constructorless authority token and carrier-general
+convergence packaging. W2 support landed `UniformConvergenceRateSurface.agda`,
+recording fixed `NormalizeAddState` and no nontrivial arithmetic transport.
+W4 landed `W4ZPeakCalibrationAnchorReceipt.agda`, blocked on missing t21/t22
+artifacts and the t43/t44-only runner interface. W9 landed
+`W9LyapunovIncompatibilityDiagnostic.agda`, recording that the weighted support
+bound is available but not a Lyapunov/retarget consumer. GR landed
+`DiscreteEinsteinTensorCandidate.agda`, flat-only with first missing
+`missingNonFlatConnectionOrShift`. W3 audit required no edit: HEP-R53 is
+concrete, HEP-R55 remains blocked on `missingAcceptedEvidenceAuthorityToken`.
+W7 updated bounded publishable scope to include W2 sum-invariance and
+Minkowski flat-space while excluding unification. W5 landed
+`W5PDFCarrierExternalIntakeRequest.agda`, blocked on missing external
+PDF/parton-luminosity carrier for correction `0.8804486068`.
+
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a
 narrow empirical equality plus mismatch diagnostic, and `W4` landed a
