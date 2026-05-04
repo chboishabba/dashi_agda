@@ -2,6 +2,17 @@
 
 ## 2026-05-05
 
+- launch the next-priority worker round:
+  `Docs/WorkerCoordinationBoard.md` and `TODO.md` now record the live
+  assignments for W3 authority-packet preparation (`Curie-W3` / `Kuhn`,
+  `019df3fb-f403-7301-a6b6-abd8ffae6a19`), W2 Offline L2 sufficiency
+  (`Turing` / `Mendel`, `019df3fb-f520-78f0-9d47-5e718b1c59ac`), W4 Z-peak
+  anchor preparation (`Faraday` / `Meitner`,
+  `019df3fb-f611-7f82-9ab3-3596152f70f1`), and W9 retarget consumer scan
+  (`Planck` / `Einstein`, `019df3fb-f7f7-7903-be2a-57d29bc2832f`). This is a
+  coordination update only: no W3 accepted authority receipt, W2 theorem, W4
+  calibration receipt, or W9 kill receipt is constructed.
+
 - resolve the W2 Natural p2 convergence isolation timeout:
   `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda` now keeps
   the p2 key, schedule admissibility, closure dynamics, and richer invariant

@@ -148,6 +148,81 @@ Launch governance:
 - W0 integrates only after targeted Agda validation and board/TODO/changelog
   synchronization.
 
+## Active Assignment Round -- W3 Authority Packet / W2-W4-W9 Next Moves
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `launched`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns integration and promotion decisions.
+- Four workers own disjoint next-priority lanes: W3 authority packet, W2 L2
+  sufficiency, W4 Z-peak calibration anchor, and W9 retarget consumer scan.
+
+R:
+- Convert the next priority queue into typed outputs without prose promotion:
+  W3 provider-ready residual/non-collapse packet, W2 theorem or obstruction,
+  W4 numeric anchor or missing-file diagnostic, and W9 consumer candidate or
+  absence diagnostic.
+
+C:
+- W3: `HEPDataResidualObservableClassReceiptProtoAlignment.agda`,
+  `W3AcceptedAuthorityExternalReceipt*`, `HEPDataResidualObservableClass*`,
+  and `HEPDataNonCollapseObservableObligation.agda`.
+- W2: `NaturalP2ConvergencePromotionObligation.agda`,
+  `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`, and
+  `OfflineL2*` / p2 obstruction surfaces.
+- W4: `W4CalibrationRatioZPeakReceiptRequestSurface.agda`,
+  `W4PhysicalCalibrationExternalReceipt*`, local t21/t22 cache, and
+  `scripts/run_t43_projection.py`.
+- W9: `CancellationPressureCompatibilityNextObligation.agda`,
+  `CancellationPressureRetargetConsumerAcceptanceRequestPack.agda`,
+  `DeltaToQuadraticBridgeTheorem.agda`, and weighted-valuation surfaces.
+
+S:
+- W3 is highest leverage because t43 is already bounded-promoted and the
+  first-missing residual slot is named. The non-collapse witness must be
+  extracted or diagnosed before any provider packet can close.
+- W2 remains the highest-value internal theorem lane, but the prior timeout
+  makes import discipline mandatory.
+- W4 can prepare a same-record Z-peak numeric anchor but cannot promote before
+  external calibration authority.
+- W9 has route exhaustion typed; the next narrow question is whether any
+  retarget consumer exists in the repo.
+
+L:
+- Keep edits lane-local and minimal.
+- Use read-only scans before constructing any new diagnostic surface.
+
+P:
+- Run W3, W2, W4, and W9 in parallel; hold W5/W6 on external provider/runtime
+  inputs for this round.
+
+G:
+- `agda` validation must be targeted and called as `timeout 30s agda <target>`.
+- No broad aggregate validation, no constructorless authority-token
+  fabrication, and no W3/W4/W9 promotion unless the typed kill receipt is
+  actually inhabited.
+
+F:
+- Missing evidence remains W3 accepted authority/non-collapse, W2 positive
+  bridge or L2 sufficiency, W4 calibration authority, and W9 dim-15
+  contraction or accepted replacement route.
+
+| Priority | Lane | Named role | Live worker | Agent id | Assignment | Expected output |
+|---|---|---|---|---|---|---|
+| `1` | `K3-W3-authority-packet` | `Curie-W3` | `Kuhn` | `019df3fb-f403-7301-a6b6-abd8ffae6a19` | Extract/verify the t43 non-collapse witness and assemble the strongest repo-honest provider-facing authority packet surface. | Witness triple plus residual/non-collapse packet, or first-missing diagnostic; non-promoting unless external authority is actually supplied. |
+| `2` | `K2-W2-L2-sufficiency` | `Turing` | `Mendel` | `019df3fb-f520-78f0-9d47-5e718b1c59ac` | Attempt the Offline L2 sufficiency route for carrier-general convergence rate. | `L2SufficientForConvergenceRate`-style receipt, or typed obstruction naming the missing law. |
+| `3` | `K4-W4-zpeak-anchor` | `Faraday` | `Meitner` | `019df3fb-f611-7f82-9ab3-3596152f70f1` | Verify local t21/t22 data and run/diagnose the dirty Z-peak boundary check. | Numeric chi2/dof and mean pred/data anchor, or exact missing artifact/script diagnostic. |
+| `4` | `K9-W9-retarget-consumer-scan` | `Planck` | `Einstein` | `019df3fb-f7f7-7903-be2a-57d29bc2832f` | Search for a repo consumer that accepts the cancellation-pressure retarget route. | Consumer candidate, or typed `W9RetargetConsumerAbsenceDiagnostic`-style obstruction. |
+
+Round 2 integration rule:
+
+- W0 will integrate only lane-local changes with targeted `timeout 30s` Agda
+  validation plus `git diff --check`.
+
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 
 Round date: `2026-05-04`

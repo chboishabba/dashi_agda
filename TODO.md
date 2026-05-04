@@ -6,6 +6,19 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+Next-priority assignment round `2026-05-05`: W3 accepted-authority packet is
+highest priority and is assigned to `Curie-W3` / live worker `Kuhn`
+(`019df3fb-f403-7301-a6b6-abd8ffae6a19`) to extract or diagnose the t43
+non-collapse witness and assemble the provider-facing residual/authority
+packet without fabricating constructorless authority. W2 Path B is assigned to
+`Turing` / `Mendel` (`019df3fb-f520-78f0-9d47-5e718b1c59ac`) for Offline L2
+sufficiency or typed obstruction. W4 Z-peak anchor preparation is assigned to
+`Faraday` / `Meitner` (`019df3fb-f611-7f82-9ab3-3596152f70f1`). W9 retarget
+consumer scan is assigned to `Planck` / `Einstein`
+(`019df3fb-f7f7-7903-be2a-57d29bc2832f`). Any Agda validation in this round
+must be targeted as `timeout 30s agda <target>`; broad aggregate validation is
+parked.
+
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a
 narrow empirical equality plus mismatch diagnostic, and `W4` landed a
