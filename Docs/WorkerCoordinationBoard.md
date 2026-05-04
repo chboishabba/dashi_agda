@@ -361,6 +361,91 @@ HEP-R53 result:
   DASHI/Physics/Closure/HEPDataW3NonCollapseWitnessReceipt.agda`, and
   `git diff --check`.
 
+## Active Assignment Round -- HEP-R54 / Publishable-Scope Sidecars
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `launched`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns integration, promotion decisions, and docs/TODO/changelog
+  consistency.
+- `Curie-W3` owns HEP-R54 accepted-authority assembly attempt.
+- `Arendt` owns W7 publishable-claim governance after HEP-R53.
+- `Faraday-Hypatia` owns W4/W8 sidecar status after HEP-R53.
+
+R:
+- Convert the honest post-HEP-R53 state into three typed or documented outputs:
+  W3 authority assembly attempt, W7 bounded publishable-scope update, and
+  W4/W8 sidecar status.
+- Keep the distinction sharp between the real t43 empirical contact and a full
+  physics unification claim.
+
+C:
+- HEP-R54 W3: `W3AcceptedAuthorityExternalReceiptObligation.agda`,
+  `W3AcceptedAuthorityExternalReceiptRequestPack.agda`,
+  `W3AcceptedAuthorityProviderAttempt.agda`,
+  `HEPDataW3PromotionCandidate.agda`, `HEPDataW3ComparisonLawReceipt.agda`,
+  `HEPDataW3NonCollapseWitnessReceipt.agda`,
+  `HEPDataResidualObservableClassReceiptProtoAlignment.agda`, and
+  `W3T43AuthorityPacketCandidateDiagnostic.agda`.
+- W7 governance: `ClaimGovernancePromotionObligation.agda`,
+  `Docs/ClaimComparisonEngine.md`,
+  `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`, and `README.md`.
+- W4/W8 sidecar: `W4CalibrationRatioZPeakReceiptRequestSurface.agda`,
+  `W4PhysicalCalibrationExternalReceiptRequestPack.agda`,
+  `OriginReceiptPromotionExternalObligation.agda`,
+  `OriginReceiptPromotionExternalRequestPack.agda`,
+  `MinimalCredibleShiftOriginObservation.agda`, and
+  `Docs/OriginTraceabilityLedger.md`.
+
+S:
+- HEP-R53 supplied runner-side non-collapse evidence for the t43 lane.
+- HEP-R54 may now assemble everything except any constructorless accepted
+  authority token. If that token remains absent, the right output is a typed
+  first-missing diagnostic, not a fake receipt.
+- The honest publishable claim is bounded t43 empirical contact with formal
+  carrier and non-collapse evidence. It is not full physics unification.
+- W4 remains blocked by t21/t22 availability and calibration authority. W8
+  remains blocked by external origin authority even though the empirical gate
+  support is stronger.
+- W2 and W9 are not relaunched here; their prior diagnostics remain the
+  current hard-blocker state.
+
+L:
+- Run HEP-R54, W7, and W4/W8 in parallel.
+- Keep W2/W9 as recorded hard blockers for this round.
+
+P:
+- `Curie-W3` / `Confucius`
+  (`019df40b-48e3-7291-b872-edcd5744cb71`): W3 HEP-R54 accepted-authority
+  assembly attempt.
+- `Arendt` / `Kant` (`019df40b-4a39-74f0-93d3-36973dc08e56`): W7
+  publishable-scope governance.
+- `Faraday-Hypatia` / `Ampere`
+  (`019df40b-4b45-7453-9db4-ecfcc11eaf3d`): W4/W8 sidecar status.
+
+G:
+- No accepted authority, origin authority, calibration authority, W2 theorem,
+  W9 kill receipt, or unification claim may be promoted by prose.
+- Agda validation must be targeted as `timeout 30s agda <target>`.
+- Broad aggregate validation remains parked because of the known Agda
+  performance class.
+
+F:
+- Missing evidence remains: accepted W3 authority token/receipt, W4 t21/t22
+  plus physical calibration authority, W8 external origin authority, W2
+  positive p2 bridge/rate, W9 dim-15 theorem or accepted replacement route,
+  W5 PDF/GRQFT closure, and W6 runtime PNF payload.
+
+| Lane | Worker | Agent id | Assignment | Success condition | Status |
+|---|---|---|---|---|---|
+| `HEP-R54-W3-authority-assembly` | `Curie-W3 / Confucius` | `019df40b-48e3-7291-b872-edcd5744cb71` | Assemble `W3AcceptedAuthorityExternalReceipt` if constructible from HEP-R51/R52/R53, or land a typed first-missing authority diagnostic. | Real receipt or non-promoting diagnostic naming the exact absent authority field. | launched |
+| `W7-publishable-scope-after-R53` | `Arendt / Kant` | `019df40b-4a39-74f0-93d3-36973dc08e56` | Record the honest bounded publishable claim after HEP-R53. | Claim text includes t43 comparison plus non-collapse and excludes full unification. | launched |
+| `W4-W8-sidecar-after-R53` | `Faraday-Hypatia / Ampere` | `019df40b-4b45-7453-9db4-ecfcc11eaf3d` | Check whether HEP-R53 changes W4 or W8 next action. | Narrow status update or no-op rationale; no external token fabrication. | launched |
+
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 
 Round date: `2026-05-04`

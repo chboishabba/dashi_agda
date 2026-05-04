@@ -2,6 +2,17 @@
 
 ## 2026-05-05
 
+- launch the HEP-R54 / publishable-scope sidecar round:
+  `Docs/WorkerCoordinationBoard.md` and `TODO.md` now assign `Curie-W3` /
+  `Confucius` (`019df40b-48e3-7291-b872-edcd5744cb71`) to the W3 accepted
+  authority assembly attempt, `Arendt` / `Kant`
+  (`019df40b-4a39-74f0-93d3-36973dc08e56`) to W7 bounded publishable-scope
+  governance, and `Faraday-Hypatia` / `Ampere`
+  (`019df40b-4b45-7453-9db4-ecfcc11eaf3d`) to W4/W8 sidecar status after
+  HEP-R53. This is a coordination update only; no accepted authority token,
+  W4 calibration, W8 origin authority, W2 theorem, W9 kill receipt, or full
+  unification claim is constructed.
+
 - land HEP-R53 per-bin output and W3 t43 non-collapse witness receipt:
   `scripts/run_t43_projection.py` now emits a `per_bin` payload containing
   per-bin prediction, data, covariance-diagonal uncertainty, and pull.

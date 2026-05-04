@@ -33,6 +33,18 @@ now the next W3 action: accepted-authority assembly. No W4 calibration, W2
 theorem, W9 kill receipt, or constructorless authority token is fabricated by
 HEP-R53.
 
+HEP-R54 / publishable-scope assignment round `2026-05-05`: `Curie-W3` /
+`Confucius` (`019df40b-48e3-7291-b872-edcd5744cb71`) owns the W3 accepted
+authority assembly attempt after HEP-R53; success is either a real
+`W3AcceptedAuthorityExternalReceipt` or a typed first-missing diagnostic naming
+the absent authority field. `Arendt` / `Kant`
+(`019df40b-4a39-74f0-93d3-36973dc08e56`) owns W7 publishable-scope governance:
+bounded t43 comparison plus non-collapse evidence, explicitly not full
+unification. `Faraday-Hypatia` / `Ampere`
+(`019df40b-4b45-7453-9db4-ecfcc11eaf3d`) owns W4/W8 sidecar status after
+HEP-R53. W2 and W9 are not relaunched in this round; their prior diagnostics
+remain the current hard-blocker state.
+
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a
 narrow empirical equality plus mismatch diagnostic, and `W4` landed a
