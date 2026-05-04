@@ -2,6 +2,19 @@
 
 ## 2026-05-05
 
+- launch the fastest-path-to-completion round:
+  `Docs/WorkerCoordinationBoard.md`,
+  `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`, and `TODO.md` now
+  record that W2 is the critical-path fork for complete unification. `Turing` /
+  `Cicero` (`019df414-e48e-7392-8e3d-30ca8e51b017`) owns the W2 positive
+  natural `p2` candidate-family / bridge attempt. `Maxwell` / `Goodall`
+  (`019df414-e56e-71a0-83ca-aa345005bdeb`) owns the W5 PDF-carrier correction
+  diagnostic, `Liskov` / `Pauli`
+  (`019df414-e65a-7542-a678-129149edb11c`) owns W6 runtime PNF readiness, and
+  `Gauss` / `Darwin` (`019df414-e7c8-7d73-b059-d06de4839363`) owns the GR
+  metric-recovery weakest-sufficient-target sidecar. HEP-R55/W3 is left as
+  external provider engagement for `W3AcceptedEvidenceAuthorityToken`.
+
 - launch the first-missing formalism alignment round:
   `Docs/WorkerCoordinationBoard.md` and `TODO.md` now assign W2 to `Turing` /
   `Hubble` (`019df410-7c68-7a80-a5be-466f6c3294ac`), W3 authority-token

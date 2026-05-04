@@ -86,6 +86,18 @@ formalism. W9 now has `Dim15DeltaToQuadraticObligation`, naming the two
 surviving routes: dim-15 pressure-witness theorem or downstream retarget
 consumer acceptance.
 
+Fastest-path assignment round `2026-05-05`: W2 is now the critical-path fork
+for complete unification. `Turing` / `Cicero`
+(`019df414-e48e-7392-8e3d-30ca8e51b017`) owns the strongest repo-supported
+positive natural `p2` candidate-family / bridge attempt. In parallel,
+`Maxwell` / `Goodall` (`019df414-e56e-71a0-83ca-aa345005bdeb`) owns the W5
+PDF-carrier correction-factor diagnostic, `Liskov` / `Pauli`
+(`019df414-e65a-7542-a678-129149edb11c`) owns W6 runtime PNF provider-readiness
+checking, and `Gauss` / `Darwin`
+(`019df414-e7c8-7d73-b059-d06de4839363`) owns the GR metric-recovery minimal
+target sidecar. HEP-R55/W3 is not relaunched because the next action there is
+external provider engagement for `W3AcceptedEvidenceAuthorityToken`.
+
 Completed assignment round `2026-05-04`: `W1` landed a typed current-carrier
 MDL obstruction, `W2` landed a finite-carrier convergence bound, `W3` landed a
 narrow empirical equality plus mismatch diagnostic, and `W4` landed a

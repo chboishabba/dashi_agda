@@ -615,6 +615,90 @@ Round validation:
 - W5 worker also validated the existing GRQFT/mass-kernel targets with
   targeted `timeout 30s` checks and made no edits.
 
+## Active Assignment Round -- Fastest Path To Completion
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `launched`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns fastest-path control and separates publishable bounded scope from
+  complete-unification scope.
+- `Turing` owns W2 as the critical-path fork.
+- `Maxwell` owns the W5 PDF-carrier nearest-path diagnostic.
+- `Liskov` owns W6 runtime PNF provider readiness.
+- `Gauss` owns the GR metric-recovery minimal target sidecar.
+
+R:
+- Reorder the program around the actual critical path: W2 first for full
+  unification, W5/PDF and W6 in parallel, and GR metric recovery defined as a
+  weakest sufficient target rather than an immediate theorem claim.
+- Preserve the publishable bounded claim as a separate, nearer paper target.
+
+C:
+- W2: `NaturalP2ConvergencePromotionObligation.agda`,
+  `CanonicalP2OfflineL2ObstructionCertificate.agda`,
+  `CanonicalP2KeyScheduleBridgeObstruction.agda`,
+  `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`,
+  `CanonicalDynamicsLawTheorem.agda`, `Docs/NaturalDynamicsLaw.md`.
+- W5/PDF: `HEPDataMassKernelCalibrationDiagnostic.agda`,
+  `GRQFTConsumerNextObligation.agda`,
+  `GRQFTClosurePromotionReceiptRequestPack.agda`,
+  `GRQFTConsumerSourceDiagnostic.agda`.
+- W6: `DASHI/Interop/PNFResidualConsumerReceiptRequestPack.agda`,
+  `PNFResidualConsumerRuntimeProviderAttempt.agda`,
+  `PNFResidualConsumerNextObligation.agda`,
+  `Ontology/Hecke/PNFResidualBridge.agda`,
+  `Docs/ITIRPNFResidualLogicBridge.md`.
+- GR sidecar: `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`,
+  known-limits and GRQFT surfaces, and signature/root-system surfaces read-only
+  unless a narrow diagnostic is justified.
+
+S:
+- HEP-R53 and HEP-R54 are done. W3 is now blocked only on external
+  `W3AcceptedEvidenceAuthorityToken` for accepted-authority closure.
+- W2 is the fork for complete unification: a positive bridge opens the GR
+  continuum route; a final obstruction forces a new mathematical ingredient.
+- W5/PDF has a precise t45 mass-kernel correction target and should be tested
+  before the route is classified as internal or external.
+- W6 is smaller and provider-runtime gated; it can proceed independently.
+- GR metric recovery has no near-term theorem path and must be reduced to the
+  weakest sufficient target with explicit W2/W4 dependencies.
+
+L:
+- Run four workers in parallel; no W3 worker is launched because HEP-R55 is
+  external-provider engagement only.
+
+P:
+- `Turing` / `Cicero` (`019df414-e48e-7392-8e3d-30ca8e51b017`): W2 positive
+  bridge/candidate-family attempt.
+- `Maxwell` / `Goodall` (`019df414-e56e-71a0-83ca-aa345005bdeb`): W5 PDF
+  correction-factor diagnostic.
+- `Liskov` / `Pauli` (`019df414-e65a-7542-a678-129149edb11c`): W6 runtime
+  provider-readiness check.
+- `Gauss` / `Darwin` (`019df414-e7c8-7d73-b059-d06de4839363`): GR
+  metric-recovery minimal target.
+
+G:
+- No PDF carrier, runtime receipt, W2 bridge, GR metric theorem, or unification
+  claim may be promoted by assignment text.
+- Agda validation remains targeted with `timeout 30s agda <target>`.
+- Broad aggregate validation remains parked.
+
+F:
+- Missing evidence remains W2 bridge/rate or final obstruction, W5 PDF carrier
+  or external PDF route, W6 runtime payload, W4 calibration/source coupling,
+  and GR metric recovery.
+
+| Lane | Worker | Agent id | Assignment | Expected output | Status |
+|---|---|---|---|---|---|
+| `W2-critical-path-bridge` | `Turing / Cicero` | `019df414-e48e-7392-8e3d-30ca8e51b017` | Strongest repo-supported positive natural `p2` candidate-family / bridge attempt. | Narrow advance or exact missing ingredient; no fake theorem. | launched |
+| `W5-PDF-carrier-diagnostic` | `Maxwell / Goodall` | `019df414-e56e-71a0-83ca-aa345005bdeb` | Test t45 correction factor route and classify internal vs external PDF path. | Numeric diagnostic and optional non-promoting typed surface. | launched |
+| `W6-runtime-PNF-readiness` | `Liskov / Pauli` | `019df414-e65a-7542-a678-129149edb11c` | Verify W6 runtime provider request is complete or sharpen missing payload. | Provider-ready payload list or narrow update. | launched |
+| `GR-metric-minimal-target` | `Gauss / Darwin` | `019df414-e7c8-7d73-b059-d06de4839363` | Define weakest sufficient GR recovery target and dependencies. | Roadmap/diagnostic update; no GR theorem claim. | launched |
+
 ## Active Assignment Round -- Sibling Evidence / LILA-R2 Feasibility
 
 Round date: `2026-05-04`

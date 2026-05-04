@@ -98,6 +98,32 @@ Required outputs:
 - W5 closure-promotion receipts.
 - Explicit boundary for regimes not covered.
 
+Weakest sufficient metric-recovery target:
+- A discrete metric/curvature candidate over the current known-limits geometry
+  and GR bridge surfaces, with an explicit map from the discrete spacetime
+  carrier to curvature data. This is only a candidate target; it is not an
+  Einstein-equation theorem.
+- A continuum-limit dependency on W2: the discrete candidate can only become a
+  GR recovery route after W2 supplies a positive natural `p2`
+  bridge/rate/continuum receipt over the admissible carrier family. If W2
+  resolves as obstruction only, this route remains blocked unless a new
+  mathematical ingredient replaces the current convergence path.
+- A stress-energy/source dependency on W4: the curvature side cannot be
+  coupled to a physical source term until W4 supplies calibrated physical
+  units, scale-setting, and dimensional-preservation receipts. Existing W4
+  surrogate or pre-physical surfaces are not source terms for GR recovery.
+- A W5/PDF and empirical dependency: the GR/QFT request pack must still receive
+  promotion authority, downstream consumer fields, GR/QFT laws, witnesses, PDF
+  carrier prerequisite, and empirical validation before G4 can close.
+
+Operational status:
+- Near-term work is diagnostic only. The honest target is to name the discrete
+  metric/curvature candidate and its receipt dependencies, not to prove metric
+  recovery.
+- Full GR metric recovery is years/open and gated at minimum on W2 continuum
+  progress, W4 physical source calibration, W5/PDF closure intake, and later
+  empirical validation.
+
 Exit condition:
 - `Docs/PhysicsLaneMaturityMatrix.md` can mark GR curvature / GR-QFT as
   `theorem-complete = yes`.
@@ -169,6 +195,41 @@ The current post-HEP-R53 empirical claim is narrower:
 > non-collapse evidence. This is not complete physics unification, not full
 > W3 accepted authority before HEP-R54, and not closure of the W2, W4, W5, or
 > W9 gaps.
+
+## Fastest Path After HEP-R54
+
+The fastest path to a complete physics-unification claim is not the same as the
+fastest path to a publishable phenomenology/formal-methods paper.
+
+For a publishable bounded paper, the remaining high-value items are external
+W3 accepted authority, W4 Z-peak/cross-band calibration support, and W7
+governance. HEP-R53 and HEP-R54 already moved the t43 claim to a reproducible
+non-collapse witness plus a typed first-missing authority-token gate.
+
+For complete unification, the critical dependency is W2. If W2 resolves as a
+positive natural `p2` bridge/rate theorem, then the GR metric-recovery route can
+be pursued through a continuum-limit argument. If W2 resolves only as a final
+obstruction over the admissible natural candidate family, the current carrier
+cannot honestly claim the existing convergence route to GR recovery without a
+new mathematical ingredient.
+
+Current fastest-path order:
+
+1. Resolve W2 first: attempt the positive natural `p2`
+   bridge-or-obstruction receipt over an admissible candidate family.
+2. In parallel, test the W5 PDF-carrier route against the precise t45
+   mass-kernel correction target before deciding whether the route is internal
+   or externally PDF-gated.
+3. In parallel, keep W6 runtime PNF intake provider-ready; this is smaller and
+   does not gate W2, W4, W5, or GR recovery.
+4. Keep the GR recovery target at the weakest honest level: a discrete
+   metric/curvature candidate only, with continuum promotion gated by W2,
+   stress-energy/source coupling gated by W4, and downstream GR/QFT/PDF
+   promotion gated by W5 receipts.
+
+This keeps the current claim honest: DASHI has a formally verified bounded
+collider-observable result, but complete unification still requires W2,
+W4 source calibration, W5/PDF, W6 runtime, and GR metric recovery.
 
 After every gate closes, the target claim can become:
 
