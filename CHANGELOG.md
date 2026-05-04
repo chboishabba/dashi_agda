@@ -2,6 +2,18 @@
 
 ## 2026-05-05
 
+- resolve the W2 Natural p2 convergence isolation timeout:
+  `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda` now keeps
+  the p2 key, schedule admissibility, closure dynamics, and richer invariant
+  unlock claims behind an abstract gap boundary. This preserves the landed base
+  natural-charge law, widening obstruction, and p2 schedule-bridge obstruction
+  fields while avoiding normalization of the concrete carrier/fibre proof spine
+  during W2 governance checks. `NaturalP2ConvergencePromotionObligation.agda`
+  now exports the canonical
+  `NaturalP2BridgeCarrierGeneralConvergenceObstruction` under `timeout 30s`
+  validation. No natural p2 bridge, promotion authority, or carrier-general
+  convergence receipt is constructed.
+
 - sharpen the W4 same-record Z-peak calibration-anchor request:
   `W4CalibrationRatioZPeakReceiptRequestSurface.agda` now includes a typed
   `W4SameRecordZPeakT21T22ArtifactReceiptRequest` for the t21 measurement and

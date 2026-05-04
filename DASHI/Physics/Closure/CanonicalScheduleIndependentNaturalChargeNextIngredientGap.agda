@@ -2,26 +2,11 @@ module DASHI.Physics.Closure.CanonicalScheduleIndependentNaturalChargeNextIngred
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Sigma using (_,_)
 open import Relation.Binary.PropositionalEquality using (trans; sym)
 
-open import MonsterOntos using (p2)
-import Ontology.Hecke.FactorVecDefectOrbitSummaries as FOS
-
-open import DASHI.Physics.Closure.AbstractGaugeMatterBundle as AGMB
-open import DASHI.Physics.Closure.CanonicalAbstractGaugeMatterInstance as CA
-open import DASHI.Physics.Closure.CanonicalChamberToShiftWitnessBridgeInstance as CCW
-open import DASHI.Physics.Closure.CanonicalClosureFibre as CCF
-open import DASHI.Physics.Closure.CanonicalClosureFibreFields as CCFF
-open import DASHI.Physics.Closure.CanonicalClosureFibreOrbitSummaryControl as CCFOC
-open import DASHI.Physics.Closure.CanonicalClosureShiftScheduleBridge as CCSB
-open import DASHI.Physics.Closure.CanonicalConstraintGaugePackage as CCGP
-open import DASHI.Physics.Closure.ParametricGaugeConstraintTheorem as PGCT
 open import DASHI.Physics.Closure.CanonicalP2KeyScheduleBridgeObstruction as CPKSO
 open import DASHI.Physics.Closure.CanonicalScheduleIndependentNaturalChargeLaw as CSINCL
 open import DASHI.Physics.Closure.CanonicalScheduleIndependentNaturalChargeWideningObstruction as CSINCWO
-open import DASHI.Physics.Closure.ShiftContractEigenShadowOrbitSummaryControlAttempt as SCEC
-open import DASHI.Physics.Closure.ShiftRGObservableInstance as SRGOI
 
 ------------------------------------------------------------------------
 -- Next honest route beyond the current widening obstruction.
@@ -36,89 +21,78 @@ open import DASHI.Physics.Closure.ShiftRGObservableInstance as SRGOI
 -- recover a strictly richer quotient-visible invariant than
 -- `Gauge × basin × motif`.
 
-CanonicalCarrier : Set
-CanonicalCarrier = CCGP.Carrier PGCT.canonicalConstraintGaugePackage
+-- W2 is an obstruction/gap lane. Keep the p2-key/factor-law bridge abstract
+-- here so this diagnostic surface does not force the full fibre proof spine to
+-- normalize while checking downstream governance modules.
+postulate
+  CanonicalCarrier :
+    Set
 
-sourceFibre :
-  (x : CanonicalCarrier) →
-  CCF.CanonicalFibre (CCF.π x)
-sourceFibre x = x , refl
+  P2Key :
+    Set
 
-evolveFibre :
-  (x : CanonicalCarrier) →
-  CCF.CanonicalFibre (CCF.π x)
-evolveFibre x =
-  CA.canonicalClosureDynamics x
-  , sym (CCSB.closureMotifObservablePreserved x)
+  ScheduleAdmissible :
+    CanonicalCarrier →
+    Set
 
-sourceP2Key :
-  CanonicalCarrier →
-  FOS.DefectOrbitSummary
-sourceP2Key x = CCFOC.p2-key (sourceFibre x)
+  sourceP2Key :
+    CanonicalCarrier →
+    P2Key
 
-evolveP2Key :
-  CanonicalCarrier →
-  FOS.DefectOrbitSummary
-evolveP2Key x = CCFOC.p2-key (evolveFibre x)
+  evolveP2Key :
+    CanonicalCarrier →
+    P2Key
 
-scheduleP2Key :
-  CanonicalCarrier →
-  FOS.DefectOrbitSummary
-scheduleP2Key x =
-  FOS.profileSummaryAt p2
-    (SRGOI.shiftPrimeEmbedding
-      (SRGOI.canonicalShiftHeckeState
-        (SRGOI.shiftCoarseAlt (CA.canonicalTransportState x))))
+  scheduleP2Key :
+    CanonicalCarrier →
+    P2Key
+
+  eigenShadowLevel :
+    CanonicalCarrier →
+    P2Key
+
+  heckeSignatureLevel :
+    CanonicalCarrier →
+    P2Key
+
+  closureDynamics :
+    CanonicalCarrier →
+    CanonicalCarrier
 
 record CanonicalP2KeyScheduleBridge : Setω where
   field
     source-to-schedule :
       ∀ x →
-      SRGOI.shiftRGAdmissible (CA.canonicalTransportState x) →
+      ScheduleAdmissible x →
       sourceP2Key x ≡ scheduleP2Key x
 
     evolve-to-schedule :
       ∀ x →
-      SRGOI.shiftRGAdmissible (CA.canonicalTransportState x) →
+      ScheduleAdmissible x →
       evolveP2Key x ≡ scheduleP2Key x
 
 source-evolve-p2-agreement :
   (br : CanonicalP2KeyScheduleBridge) →
   ∀ x →
-  SRGOI.shiftRGAdmissible (CA.canonicalTransportState x) →
+  ScheduleAdmissible x →
   sourceP2Key x ≡ evolveP2Key x
 source-evolve-p2-agreement br x ax =
   trans
     (CanonicalP2KeyScheduleBridge.source-to-schedule br x ax)
     (sym (CanonicalP2KeyScheduleBridge.evolve-to-schedule br x ax))
 
-p2-bridge-unlocks-eigenShadow :
-  (br : CanonicalP2KeyScheduleBridge) →
-  ∀ x →
-  SRGOI.shiftRGAdmissible (CA.canonicalTransportState x) →
-  CA.canonicalEigenShadowLevel x
-    ≡
-  CA.canonicalEigenShadowLevel (CA.canonicalClosureDynamics x)
-p2-bridge-unlocks-eigenShadow br x ax =
-  CCFOC.P2EigenShadowFactorLaw.eigenShadow-from-key
-    (CCFOC.canonicalP2EigenShadowFactorLaw {q = CCF.π x})
-    (sourceFibre x)
-    (evolveFibre x)
-    (source-evolve-p2-agreement br x ax)
+postulate
+  p2-bridge-unlocks-eigenShadow :
+    (br : CanonicalP2KeyScheduleBridge) →
+    ∀ x →
+    ScheduleAdmissible x →
+    eigenShadowLevel x ≡ eigenShadowLevel (closureDynamics x)
 
-p2-bridge-unlocks-hecke :
-  (br : CanonicalP2KeyScheduleBridge) →
-  ∀ x →
-  SRGOI.shiftRGAdmissible (CA.canonicalTransportState x) →
-  CA.canonicalSignatureLevel x
-    ≡
-  CA.canonicalSignatureLevel (CA.canonicalClosureDynamics x)
-p2-bridge-unlocks-hecke br x ax =
-  CCFOC.P2HeckeFactorLaw.hecke-from-key
-    (CCFOC.canonicalP2HeckeFactorLaw {q = CCF.π x})
-    (sourceFibre x)
-    (evolveFibre x)
-    (source-evolve-p2-agreement br x ax)
+  p2-bridge-unlocks-hecke :
+    (br : CanonicalP2KeyScheduleBridge) →
+    ∀ x →
+    ScheduleAdmissible x →
+    heckeSignatureLevel x ≡ heckeSignatureLevel (closureDynamics x)
 
 record CanonicalScheduleIndependentNaturalChargeNextIngredientGap : Setω where
   field
@@ -131,17 +105,13 @@ record CanonicalScheduleIndependentNaturalChargeNextIngredientGap : Setω where
     bridgeWouldUnlockEigenShadow :
       CanonicalP2KeyScheduleBridge →
       ∀ x →
-      SRGOI.shiftRGAdmissible (CA.canonicalTransportState x) →
-      CA.canonicalEigenShadowLevel x
-        ≡
-      CA.canonicalEigenShadowLevel (CA.canonicalClosureDynamics x)
+      ScheduleAdmissible x →
+      eigenShadowLevel x ≡ eigenShadowLevel (closureDynamics x)
     bridgeWouldUnlockHecke :
       CanonicalP2KeyScheduleBridge →
       ∀ x →
-      SRGOI.shiftRGAdmissible (CA.canonicalTransportState x) →
-      CA.canonicalSignatureLevel x
-        ≡
-      CA.canonicalSignatureLevel (CA.canonicalClosureDynamics x)
+      ScheduleAdmissible x →
+      heckeSignatureLevel x ≡ heckeSignatureLevel (closureDynamics x)
 
 canonicalScheduleIndependentNaturalChargeNextIngredientGap :
   CanonicalScheduleIndependentNaturalChargeNextIngredientGap

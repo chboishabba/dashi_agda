@@ -229,6 +229,17 @@ t43 lane, `chi2/dof = 2.1565191176`, clean deterministic carrier, no posterior
 tuning, and no external PDF. W2, W3 residual authority, W4, W5, W6, and W9
 remain open.
 
+Turing W2 Natural p2 obstruction result `2026-05-05`:
+`NaturalP2ConvergencePromotionObligation` now carries
+`canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction`, tying the W2
+lane to the existing p2-key schedule-bridge obstruction and naming the stronger
+missing ingredients: canonical p2-key schedule bridge, carrier transport that
+preserves the pointed convergence rate, and uniform realization-rate evidence
+beyond the shift-flow carrier. `CanonicalScheduleIndependentNaturalChargeNextIngredientGap`
+was isolated behind an abstract gap boundary so targeted Agda validation stays
+bounded. W2 remains blocked: no natural p2 bridge, promotion authority, or
+carrier-general convergence receipt is constructed.
+
 Faraday W4 calibration-anchor result `2026-05-05`:
 `W4CalibrationRatioZPeakReceiptRequestSurface` now carries a typed
 same-record t21/t22 artifact receipt request for the Z-peak measurement and

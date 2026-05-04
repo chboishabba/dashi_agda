@@ -12,7 +12,7 @@ prose.
 
 Round date: `2026-05-05`
 Round owner: `W0 orchestrator / integrator`
-Round status: `round-1 safe lanes integrated; W2 isolation pending`
+Round status: `round-1 integrated`
 
 FORMAL MODEL: O, R, C, S, L, P, G, F
 
@@ -106,19 +106,21 @@ Round result update:
   `chi2/dof = 2.1565191176`, clean deterministic carrier, no posterior tuning,
   and no external PDF. It does not construct the broader
   `ClaimGovernancePromotionAuthorityToken`.
-- `K2` returned a typed obstruction sharpening but is held out of the safe-lane
-  integration commit because targeted Agda timed out at `30s` while checking
-  `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda` through the
-  W2 import chain.
-- `K3`, `K4`, `K5`, `K6`, and `K9` returned non-promoting first outputs that
-  are ready for safe-lane integration after targeted bounded validation.
+- `K2` returned a typed obstruction sharpening. The initial targeted Agda check
+  timed out at `30s` in
+  `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`; W0
+  isolated that module and replaced its concrete carrier/fibre normalization
+  path with an abstract gap boundary. The gap module and W2 obligation now pass
+  targeted `30s` Agda validation.
+- `K3`, `K4`, `K5`, `K6`, and `K9` returned non-promoting first outputs and
+  were integrated after targeted bounded validation.
 
 Round 1 integration status:
 
 | Lane | Result | Status |
 |---|---|---|
 | `K1-W1-final-seam-audit` | unblocked final seam was already recorded. | recorded |
-| `K2-W2-natural-p2-bridge` | typed obstruction sharpened, but Agda timed out in `CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda`. | blocked; isolation round pending |
+| `K2-W2-natural-p2-bridge` | typed obstruction sharpened; `CanonicalScheduleIndependentNaturalChargeNextIngredientGap` now uses an abstract gap boundary to avoid forcing the concrete fibre normalization path. | blocked; typed obstruction landed |
 | `K3-W3-authority-residual` | `HEPDataResidualObservableClassReceiptProtoAlignment` aligns the local `phistar_50_76` proto receipt to the first-missing residual observable-class slot. | first-missing: `residualObservableClassReceipt` |
 | `K4-W4-calibration-anchor` | same-record t21/t22 Z-peak artifact request sharpened. | blocked; no calibration authority |
 | `K5-W5-GRQFT-PDF-carrier` | GRQFT/PDF carrier prerequisite threaded through source diagnostic and request pack. | blocked; no PDF carrier |

@@ -74,6 +74,15 @@ states. Broader natural / `p2` promotion still needs:
 That module is an obligation surface only; it does not promote a natural
 dynamics law.
 
+The current typed W2 output is the sharper obstruction
+`canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction`. It names the
+stronger ingredient rather than constructing a promotion receipt: a canonical
+`p2`-key schedule bridge is still required on the natural side, and carrier
+transport must preserve the pointed convergence rate with uniform
+realization-rate evidence beyond the shift-flow carrier. The existing
+shift-flow and realization-indexed receipts remain landed, but they are not
+carrier-general authority.
+
 **Bridge toward natural dynamics law**
 
 To answer the request, we require: a state space defined by the `ShiftState` vector and cone witness, an evolution candidate that emerges from contraction + projection (not a hand-wired coarse map), admissibility tied to geometry/MDL rather than fixed witnesses, and a demonstration that the engineered coarse maps can be replaced by naturally emergent flows (e.g., `Tᵣ` or `Rᵣ` flows). Without that derivation, the law remains engineered/post-selected.

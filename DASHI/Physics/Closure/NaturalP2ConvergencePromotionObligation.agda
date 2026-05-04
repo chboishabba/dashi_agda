@@ -7,6 +7,8 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.CanonicalDynamicsLawTheorem as CDT
+import DASHI.Physics.Closure.CanonicalP2KeyScheduleBridgeObstruction as CPKSO
+import DASHI.Physics.Closure.CanonicalScheduleIndependentNaturalChargeNextIngredientGap as CSING
 import DASHI.Physics.Closure.P0BlockadeProofObligations as P0
 import DASHI.Physics.PressureGradientFlowShiftInstance as PGFSI
 
@@ -134,6 +136,72 @@ record NaturalP2ConvergencePromotionImpossibilityDiagnostic : Setω where
     obstructionSummary :
       String
 
+data StrongerNaturalP2ConvergenceIngredient : Set where
+  canonicalP2KeyScheduleBridgeNeeded :
+    StrongerNaturalP2ConvergenceIngredient
+  carrierTransportPreservesRateNeeded :
+    StrongerNaturalP2ConvergenceIngredient
+  uniformRealizationRateBeyondShiftFlowNeeded :
+    StrongerNaturalP2ConvergenceIngredient
+
+record NaturalP2BridgeCarrierGeneralConvergenceObstruction : Setω where
+  field
+    canonicalDynamicsLaw :
+      CDT.CanonicalDynamicsLawTheorem
+
+    p2ScheduleBridgeObstruction :
+      CPKSO.CanonicalP2KeyScheduleBridgeObstruction
+
+    p2NextIngredientGap :
+      CSING.CanonicalScheduleIndependentNaturalChargeNextIngredientGap
+
+    landedShiftConvergence :
+      P0.ConvergenceBound {PGFSI.ShiftFlowState}
+
+    landedRealizationMetricFamily :
+      CDT.RealizationIndexedPointedMetricConvergenceTarget
+
+    strongerIngredients :
+      List StrongerNaturalP2ConvergenceIngredient
+
+    noPromotionAuthority :
+      NaturalP2ConvergencePromotionAuthorityToken → ⊥
+
+    receiptStillImpossible :
+      NaturalP2ConvergencePromotionReceipt → ⊥
+
+    obstructionSummary :
+      String
+
+canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction :
+  NaturalP2BridgeCarrierGeneralConvergenceObstruction
+canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction =
+  record
+    { canonicalDynamicsLaw =
+        CDT.canonicalDynamicsLawTheorem
+    ; p2ScheduleBridgeObstruction =
+        CPKSO.canonicalP2KeyScheduleBridgeObstruction
+    ; p2NextIngredientGap =
+        CSING.canonicalScheduleIndependentNaturalChargeNextIngredientGap
+    ; landedShiftConvergence =
+        CDT.CanonicalDynamicsLawTheorem.boundedConvergenceRate
+          CDT.canonicalDynamicsLawTheorem
+    ; landedRealizationMetricFamily =
+        CDT.CanonicalDynamicsLawTheorem.realizationMetricConvergenceFamily
+          CDT.canonicalDynamicsLawTheorem
+    ; strongerIngredients =
+        canonicalP2KeyScheduleBridgeNeeded
+        ∷ carrierTransportPreservesRateNeeded
+        ∷ uniformRealizationRateBeyondShiftFlowNeeded
+        ∷ []
+    ; noPromotionAuthority =
+        naturalP2ConvergencePromotionAuthorityUnavailable
+    ; receiptStillImpossible =
+        naturalP2ConvergencePromotionReceiptImpossible
+    ; obstructionSummary =
+        "Sharper W2 obstruction: p2 promotion needs a canonical p2-key schedule bridge, and convergence promotion needs carrier transport preserving the pointed rate plus uniform realization-rate evidence beyond the shift-flow carrier"
+    }
+
 record NaturalP2ConvergencePromotionCurrentStatus : Setω where
   field
     canonicalDynamicsLaw :
@@ -154,6 +222,9 @@ record NaturalP2ConvergencePromotionCurrentStatus : Setω where
 
     impossibilityDiagnostic :
       NaturalP2ConvergencePromotionImpossibilityDiagnostic
+
+    sharperTypedObstruction :
+      NaturalP2BridgeCarrierGeneralConvergenceObstruction
 
     missingFields :
       List NaturalP2ConvergenceMissingField
@@ -208,6 +279,8 @@ currentNaturalP2ConvergencePromotionStatus =
           ; obstructionSummary =
               "NaturalP2ConvergencePromotionReceipt is uninhabitable here because the authority token has no constructor; landed shift-flow convergence does not provide natural p2 or carrier-general convergence authority"
           }
+    ; sharperTypedObstruction =
+        canonicalNaturalP2BridgeCarrierGeneralConvergenceObstruction
     ; missingFields =
         missingPromotionAuthorityToken
         ∷ missingNaturalBridgeOrObstruction
