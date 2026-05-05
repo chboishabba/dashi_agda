@@ -162,6 +162,7 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "CT18NLO central grid is present at scripts/data/pdf/CT18NLO/CT18NLO_0000.dat; SHA-256 375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410"
         ∷ "scripts/extract_ct18_pdf_packet.py parsed the lhagrid1 table and wrote scripts/data/pdf/ct18_dashi_pdf_packet.json"
         ∷ "local fixed-x u-quark xfxQ extraction gives W5 correction 1.0506681065158017 with gap 0.17021949971580164 from target 0.8804486068"
+        ∷ "prediction baseline inspected at DASHI.Physics.Prediction.sigma_dashi:predict_ratio_106_170_over_76_106, which computes sigma_DASHI(106-170, phi bin) / sigma_DASHI(76-106, phi bin)"
         ∷ "python importlib.util.find_spec(\"lhapdf\") returned absent; lhapdf-config and lhapdf executables were not found on PATH"
         ∷ []
     ; rapidityIntegratedConventionAudit =
@@ -170,7 +171,8 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "center luminosities: t43 = 179275.14868433212, t45 = 24220.800992111075, ratio = 0.13510406305538247"
         ∷ "mass-window luminosities: t43 = 4694301.66970352, z_peak = 2092088.6841268337, t45 = 1572004.6396784543"
         ∷ "window ratios: z_peak/t43 = 0.4456655816623231, t45/z_peak = 0.7514043986785174, t45/t43 = 0.3348750784006896"
-        ∷ "the rapidity-integrated convention does not hit the W5 target 0.8804486068; abs gap for t45/t43 window ratio is 0.5455735283993104"
+        ∷ "matching CT18 query for the repo t45 baseline is t45/z_peak = 0.7514043986785174; abs gap from target 0.8804486068 is 0.12904420812148265"
+        ∷ "the older t45/t43 window ratio is not the matching denominator for predict_ratio_106_170_over_76_106 and has abs gap 0.5455735283993104"
         ∷ "therefore the first missing item is narrower: an accepted parton-luminosity/bin-integration convention that maps CT18NLO to the DASHI t45 correction surface"
         ∷ []
     ; dependencyRationale =

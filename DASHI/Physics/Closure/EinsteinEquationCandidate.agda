@@ -188,6 +188,17 @@ record EinsteinEquationCandidateObligationSurface : Setω where
     mergedW4W5ExternalPDFIntakeRequest :
       W5PDFIntake.W5PDFCarrierExternalIntakeRequest
 
+    firstActionableGRBlockerAfterSharedW4W5Dependencies :
+      String
+
+    postSharedW4W5NextQueueField :
+      EinsteinEquationMatterCouplingQueueField
+
+    postSharedW4W5NextIsMatterField :
+      postSharedW4W5NextQueueField
+      ≡
+      missingW4MatterField
+
     firstMissingIsW4MatterCoupling :
       firstMissing
       ≡
@@ -245,6 +256,12 @@ canonicalEinsteinEquationCandidateObligationSurface =
         refl
     ; mergedW4W5ExternalPDFIntakeRequest =
         W5PDFIntake.canonicalW5PDFCarrierExternalIntakeRequest
+    ; firstActionableGRBlockerAfterSharedW4W5Dependencies =
+        "DASHI.Physics.Closure.EinsteinEquationCandidate.W4MatterStressEnergyInterfaceReceipt"
+    ; postSharedW4W5NextQueueField =
+        missingW4MatterField
+    ; postSharedW4W5NextIsMatterField =
+        refl
     ; firstMissingIsW4MatterCoupling =
         refl
     ; unsupportedClaims =
@@ -255,6 +272,7 @@ canonicalEinsteinEquationCandidateObligationSurface =
         ∷ "The first W4 gate is the W4 anchor receipt"
         ∷ "After the W4 anchor exists, the next typed GR action is W4 calibration authority"
         ∷ "After W4 calibration authority, the merged W4+W5 external PDF intake is required before matter is available"
+        ∷ "After W4 anchor, calibration authority, and merged W4+W5 external PDF intake, the first actionable GR blocker is W4MatterStressEnergyInterfaceReceipt"
         ∷ "T_mu_nu is gated on a W4 matter field and stress-energy tensor"
         ∷ "Any non-flat connection must be sourced through the W4 matter-coupling queue"
         ∷ "The current W4 surface remains an obligation surface, not a supplied matter-coupling receipt"
