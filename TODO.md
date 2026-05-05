@@ -6,6 +6,23 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+W9/Qcore + W4/GR governance assignment result `2026-05-05`: the proposed W9
+one-line close does not type-check against the actual kill route.
+`W9CancellationPressureQcoreCompatibilityReceipt.agda` records that
+`weightedMaxPressure≤weightedSupport` is a `Nat` inequality, while the active
+W9 route still requires the `ℤ` equality in
+`ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+canonical15Dimension`; the existing canonical-15 obstruction remains decisive.
+`EinsteinEquationCandidate.agda` reframes GR as a W4-gated obligation
+`G_mu_nu = 8pi T_mu_nu` and makes W4 matter coupling the first missing field,
+without claiming Bianchi, continuum limit, non-flat connection, or GR recovery.
+`W4CalibrationRatioZPeakReceiptRequestSurface.agda` and
+`scripts/run_t43_projection.py` now prepare a fail-closed `dirty-z-peak`
+runner path with `--data`/`--covariance`, but W4 remains blocked on missing
+local t21/t22 CSVs and schema/digest binding. `W2W3SelfIssuanceGovernanceRulingDiagnostic.agda`
+records that the single W2/W3 self-issuance ruling is not active under current
+constructorless-token policy.
+
 Lyapunov-adapter / external-gap audit result `2026-05-05`: W9 now has
 `W9LyapunovAdapterReceipt.agda`, a narrow `CancellationPressureLyapunovBridge`
 for `NormalizeAddState` with pressure `carryDepth + carryBudget`. This is a

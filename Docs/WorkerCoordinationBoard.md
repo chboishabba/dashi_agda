@@ -8,6 +8,89 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Active Assignment Round -- W9/Qcore + W4/GR Governance Audit
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned existing lane workers and owns integration, validation,
+  board/TODO/changelog sync, and commit.
+- Workers were constrained to one lane each and no constructorless-token,
+  external authority, W9 kill, W4 calibration, or GR recovery fabrication.
+
+R:
+- Test the proposed W9 Qcore close against actual repo types.
+- Reframe GR as an obligation only if the W4 matter-coupling gate is the real
+  first missing field.
+- Prepare W4 only as far as local data/runner surfaces allow.
+- Audit whether the proposed W2/W3 self-issuance ruling is already admissible.
+
+C:
+- W9: `CancellationPressureCompatibilityNextObligation.agda`,
+  `W9CancellationPressureQcoreCompatibilityReceipt.agda`, and
+  `BlockerKillConditions.agda`.
+- GR: `DiscreteEinsteinTensorCandidate.agda`,
+  `DiscreteConnectionCandidateFromCRT.agda`, and
+  `EinsteinEquationCandidate.agda`.
+- W4: `W4CalibrationRatioZPeakReceiptRequestSurface.agda` and
+  `scripts/run_t43_projection.py`.
+- Governance: `W2PromotionAuthorityReceipt.agda`,
+  `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda`, and
+  `W2W3SelfIssuanceGovernanceRulingDiagnostic.agda`.
+
+S:
+- W9 has useful weighted-support and Lyapunov sidecars, but the active kill
+  route still names the canonical-15 theorem-facing pressure/Qcore equality.
+- GR flat vacuum is correct; sourced non-flat GR needs a W4 matter coupling and
+  stress-energy surface before Einstein equations can be consumed.
+- W4 t21/t22 files are not in the local cache.
+- W2/W3 tokens remain constructorless under current policy.
+
+L:
+- `type audit` -> `receipt or diagnostic only` ->
+  `timeout 30s agda <touched module>` / `python -m py_compile` ->
+  `git diff --check` -> docs/TODO/changelog sync.
+
+P:
+- `Planck` / `Galileo` tested W9 Qcore compatibility.
+- `Gauss` / `Euclid` typed the GR Einstein-equation obligation surface.
+- `Faraday` / `Boole` prepared the fail-closed W4 runner path and artifact
+  diagnostic.
+- Governance / `Curie` audited W2/W3 self-issuance policy.
+
+G:
+- W9 is not closed: `weightedMaxPressure≤weightedSupport` is not
+  `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+  canonical15Dimension`.
+- GR is not promoted: `EinsteinEquationCandidate.agda` is an obligation surface
+  gated on W4 matter coupling.
+- W4 is not anchored: the dirty Z-peak path fails closed until public t21/t22
+  CSVs are present and digest/schema-bound.
+- W2/W3 are not self-issued: changing status requires an explicit governance
+  amendment to the constructorless-token policy.
+
+F:
+- W9 first missing remains
+  `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+  canonical15Dimension`.
+- W4 first missing remains
+  `scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv`, then t22 and
+  schema binding.
+- GR first missing is now `missingW4MatterCouplingReceipt`.
+- W2/W3 first missing remains their respective constructorless authority
+  tokens or a formal policy amendment.
+
+| Lane | Worker | Agent | Assignment | Result | Status |
+|---|---|---|---|---|---|
+| `W9-qcore-compatibility` | `Planck` | `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) | Verify whether weighted support can inhabit the canonical-15 Qcore compatibility route. | `W9CancellationPressureQcoreCompatibilityReceipt.agda` records a typed mismatch: weighted support is a `Nat` inequality, not the required `ℤ` equality; canonical-15 obstruction remains. | completed; W9 still blocked |
+| `GR-einstein-equation-obligation` | `Gauss` | `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) | Record the revised W4-gated Einstein-equation target without promotion. | `EinsteinEquationCandidate.agda` records `G_mu_nu = 8pi T_mu_nu` with W4 matter coupling first missing and unsupported GR claims excluded. | completed; obligation only |
+| `W4-zpeak-runner-prep` | `Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Prepare W4 t21/t22 path without network and keep fail-closed behavior. | `scripts/run_t43_projection.py` accepts `dirty-z-peak`, `--data`, and `--covariance`; W4 diagnostic records missing artifacts and remaining schema/digest binding. | completed; blocked on data |
+| `W2-W3-self-issuance-audit` | `Governance` | `Curie` (`019df44c-dbff-7e62-9227-da4b82ffc438`) | Audit the proposed single self-issuance ruling for W2/W3. | `W2W3SelfIssuanceGovernanceRulingDiagnostic.agda` records current policy forbids self-issuance unless constructorless-token governance is explicitly amended. | completed; tokens outstanding |
+
 ## Active Assignment Round -- Constructorless Token / Retarget Audit
 
 Round date: `2026-05-05`

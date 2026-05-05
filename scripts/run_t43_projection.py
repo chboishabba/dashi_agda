@@ -26,6 +26,8 @@ T43_PATH = DATA_DIR / "ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv"
 T44_PATH = DATA_DIR / "ins2079374_Covariance_phistar_mass_50-76_over_mass_76-106_t44.csv"
 T45_PATH = DATA_DIR / "ins2079374_phistar_mass_106-170_over_mass_76-106_t45.csv"
 T46_PATH = DATA_DIR / "ins2079374_Covariance_phistar_mass_106-170_over_mass_76-106_t46.csv"
+T21_PATH = DATA_DIR / "ins2079374_phistar_mass_76-106_t21.csv"
+T22_PATH = DATA_DIR / "ins2079374_Covariance_phistar_mass_76-106_t22.csv"
 
 KNOWN_DIGESTS = {
     T43_PATH.name: "0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b",
@@ -53,6 +55,13 @@ def sha256_file(path: Path) -> str:
 def verify_digest(path: Path) -> dict[str, Any]:
     expected = KNOWN_DIGESTS.get(path.name)
     if expected is None:
+        if not path.exists():
+            return {
+                "path": display_path(path),
+                "sha256": None,
+                "expectedSha256": None,
+                "status": "missing",
+            }
         return {
             "path": display_path(path),
             "sha256": None,
@@ -245,6 +254,7 @@ def finalize_artifact(payload: dict[str, Any]) -> dict[str, Any]:
 
 def incomplete_artifact(
     *,
+    mode: str,
     freeze_hash: str,
     digest_results: list[dict[str, Any]],
     t43: dict[str, Any] | None,
@@ -258,6 +268,7 @@ def incomplete_artifact(
         "generatedUtc": "deterministic-artifact",
         "worker": "HEP-R32",
         "scope": "scripts-only fail-closed t43/t44 projection runner",
+        "mode": mode,
         "projectionComplete": False,
         "comparisonLawStatus": "incomplete",
         "failureCode": "prediction-missing",
@@ -316,6 +327,7 @@ def _validate_prediction_values(raw: Any, *, expected_len: int) -> list[float]:
 
 def completed_projection_artifact(
     *,
+    mode: str,
     freeze_hash: str,
     digest_results: list[dict[str, Any]],
     t43: dict[str, Any],
@@ -362,6 +374,7 @@ def completed_projection_artifact(
         "generatedUtc": "deterministic-artifact",
         "worker": "HEP-R33",
         "scope": "digest-bound t43/t44 projection runner with caller-supplied prediction API",
+        "mode": mode,
         "projectionComplete": True,
         "comparisonLawStatus": "not-claimed",
         "failureCode": None,
@@ -421,7 +434,7 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Fail-closed HEPData t43/t44 DASHI projection runner.")
+    parser = argparse.ArgumentParser(description="Fail-closed HEPData ratio/covariance DASHI projection runner.")
     parser.add_argument(
         "--freeze-hash",
         "--freeze",
@@ -434,8 +447,16 @@ def parse_args() -> argparse.Namespace:
         default="/tmp/t43_projection_diagnostic.json",
         help="JSON artifact path. Defaults to /tmp/t43_projection_diagnostic.json.",
     )
-    parser.add_argument("--t43", default=str(T43_PATH), help="Path to t43 ratio CSV.")
-    parser.add_argument("--t44", default=str(T44_PATH), help="Path to t44 covariance CSV.")
+    parser.add_argument(
+        "--mode",
+        choices=["t43-ratio", "dirty-z-peak"],
+        default="t43-ratio",
+        help="Diagnostic mode label. dirty-z-peak still requires local t21/t22 artifacts and compatible schema.",
+    )
+    parser.add_argument("--t43", dest="data", default=str(T43_PATH), help="Path to t43 ratio CSV.")
+    parser.add_argument("--t44", dest="covariance", default=str(T44_PATH), help="Path to t44 covariance CSV.")
+    parser.add_argument("--data", dest="data", help="Path to measurement/ratio CSV. Alias for --t43.")
+    parser.add_argument("--covariance", dest="covariance", help="Path to covariance CSV. Alias for --t44.")
     parser.add_argument(
         "--prediction-api",
         help="Optional module:function callable. Omit until compute_dashi_ratio is wired.",
@@ -445,21 +466,23 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    t43_path = Path(args.t43)
-    t44_path = Path(args.t44)
+    t43_path = Path(args.data)
+    t44_path = Path(args.covariance)
     output_path = Path(args.output)
 
     digest_results = [verify_digest(t43_path), verify_digest(t44_path)]
     if any(result["status"] != "ok" for result in digest_results):
         artifact = incomplete_artifact(
+            mode=args.mode,
             freeze_hash=args.freeze_hash,
             digest_results=digest_results,
             t43=None,
             t44=None,
-            reason="t43/t44 digest verification failed",
+            reason="data/covariance digest verification failed",
             prediction_api_status="not-attempted",
         )
         artifact["failureCode"] = "digest-mismatch"
+        artifact = finalize_artifact(artifact)
         write_json(output_path, artifact)
         return EXIT_DIGEST_MISMATCH
 
@@ -468,14 +491,16 @@ def main() -> int:
         t44 = parse_t44(t44_path, t43["bins"])
     except Exception as exc:
         artifact = incomplete_artifact(
+            mode=args.mode,
             freeze_hash=args.freeze_hash,
             digest_results=digest_results,
             t43=None,
             t44=None,
-            reason=f"CSV parse failed: {exc}",
+            reason=f"data/covariance CSV parse failed: {exc}",
             prediction_api_status="not-attempted",
         )
         artifact["failureCode"] = "parse-error"
+        artifact = finalize_artifact(artifact)
         write_json(output_path, artifact)
         return EXIT_PARSE_ERROR
 
@@ -487,6 +512,7 @@ def main() -> int:
 
     if prediction_api is None:
         artifact = incomplete_artifact(
+            mode=args.mode,
             freeze_hash=args.freeze_hash,
             digest_results=digest_results,
             t43=t43,
@@ -504,6 +530,7 @@ def main() -> int:
         )
     except Exception as exc:
         artifact = incomplete_artifact(
+            mode=args.mode,
             freeze_hash=args.freeze_hash,
             digest_results=digest_results,
             t43=t43,
@@ -517,6 +544,7 @@ def main() -> int:
         return EXIT_PREDICTION_INVALID
 
     artifact = completed_projection_artifact(
+        mode=args.mode,
         freeze_hash=args.freeze_hash,
         digest_results=digest_results,
         t43=t43,

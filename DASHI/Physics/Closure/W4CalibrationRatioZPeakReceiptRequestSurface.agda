@@ -191,6 +191,9 @@ record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
     secondMissingLocalArtifact :
       String
 
+    requiredNoNetworkAcquisitionCommands :
+      List String
+
     requiredMeasurementLocalPath :
       String
 
@@ -215,6 +218,9 @@ record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
     runnerProbeWithFreezeStatus :
       String
 
+    runnerGeneralizationGap :
+      String
+
     numericAnchorStatus :
       String
 
@@ -233,6 +239,11 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
         "missing: scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
     ; secondMissingLocalArtifact =
         "missing: scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
+    ; requiredNoNetworkAcquisitionCommands =
+        "curl -L --fail --output scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv https://www.hepdata.net/download/table/ins2079374/Table%2021/csv"
+        ∷ "curl -L --fail --output scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv https://www.hepdata.net/download/table/ins2079374/Table%2022/csv"
+        ∷ "sha256sum scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv > scripts/data/hepdata/ins2079374_t21_t22.sha256"
+        ∷ []
     ; requiredMeasurementLocalPath =
         "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
     ; requiredCovarianceLocalPath =
@@ -250,21 +261,23 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
     ; runnerSupportedInputFlags =
         "--t43"
         ∷ "--t44"
+        ∷ "--data"
+        ∷ "--covariance"
+        ∷ "--mode"
         ∷ "--freeze-hash"
         ∷ "--prediction-api"
         ∷ "--output"
         ∷ []
     ; runnerUnsupportedRequestedFlags =
-        "--mode"
-        ∷ "--data"
-        ∷ "--covariance"
-        ∷ []
+        []
     ; runnerProbeWithoutFreezeStatus =
         "timeout 30s python scripts/run_t43_projection.py --mode dirty-z-peak --data t21 --covariance t22 exits 2 before data access: required --freeze-hash is missing"
     ; runnerProbeWithFreezeStatus =
-        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-local-audit --mode dirty-z-peak --data t21 --covariance t22 exits 2: unrecognized --mode/--data/--covariance"
+        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-local-audit --mode dirty-z-peak --data t21 --covariance t22 now reaches fail-closed digest input checking once runner patch is present"
+    ; runnerGeneralizationGap =
+        "CLI can accept --data/--covariance as aliases, but arbitrary t21/t22 physics semantics still require local artifacts, checksums, and parser/schema binding before W4 can run"
     ; numericAnchorStatus =
-        "not-produced: first missing local artifact is t21; t22 is also absent; the current runner is t43/t44-specific"
+        "not-produced: first missing local artifact is t21; t22 is also absent; runner CLI path is prepared but no t21/t22 numeric anchor can run"
     ; diagnosticBoundary =
         "This diagnostic records script/data support only"
         ∷ "It does not construct a W4CalibrationRatioZPeakReceipt"

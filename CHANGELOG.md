@@ -2,6 +2,20 @@
 
 ## 2026-05-05
 
+- integrate W9/Qcore + W4/GR governance assignment round:
+  `W9CancellationPressureQcoreCompatibilityReceipt.agda` rejects the proposed
+  W9 close in the actual repo types: the available weighted-support theorem is
+  a `Nat` inequality, while the current W9 kill route still needs the
+  canonical-15 `ℤ` pressure-to-contraction-energy equality, which remains
+  obstructed. `EinsteinEquationCandidate.agda` records GR as a W4-gated
+  `G_mu_nu = 8pi T_mu_nu` obligation surface with matter coupling first
+  missing, not as a curved-GR promotion. `W4CalibrationRatioZPeakReceiptRequestSurface.agda`
+  and `scripts/run_t43_projection.py` add a fail-closed dirty Z-peak CLI path
+  for future t21/t22 runs, while preserving the missing-artifact and schema
+  boundary. `W2W3SelfIssuanceGovernanceRulingDiagnostic.agda` records that W2
+  and W3 remain blocked by constructorless authority tokens unless governance
+  policy is explicitly amended.
+
 - integrate Lyapunov-adapter / external-gap audit round:
   `W9LyapunovAdapterReceipt.agda` constructs a narrow
   `CancellationPressureLyapunovBridge` for `NormalizeAddState` using
