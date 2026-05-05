@@ -6,6 +6,27 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+Z-peak/W9 theorem next-six assignment result `2026-05-05`: W4 remains
+fail-closed but now has an exact prediction contract. `scripts/run_t43_projection.py`
+rejects existing ratio predictors for `--mode dirty-z-peak` unless their
+metadata declares `supportsDirtyZPeakAbsolutePrediction = true` and
+`dirtyZPeakAbsolutePredictionCallable` matching the supplied callable; the
+required output is absolute t21 `d sigma/d phistar [pb]` predictions, not
+t43/t45 ratios. `W4ZPeakCalibrationAnchorReceipt.agda` records the rejected
+`DASHI.Physics.Prediction.sigma_dashi:predict_ratio` callable and keeps W4
+blocked on `missingDirtyZPeakPredictionAPI`. W9 remains blocked:
+`W9CancellationPressureQcoreCompatibilityReceipt.agda` now records that the
+weighted-Qcore candidate route still needs
+`WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy`,
+which the repo already obstructs at `(one , one)`; the canonical-15 route also
+retains the `(one , three)` counterexample. `EinsteinEquationCandidate.agda`
+adds the future `W4MatterStressEnergyInterfaceReceipt` and records the
+post-anchor next gate as W4 calibration authority. W2, W3, and W5 were audited
+as no-change: W2 has no legitimate
+`NaturalP2ConvergencePromotionAuthorityToken` constructor/policy hook, W3 is
+packet-complete but externally token-blocked, and W5 has no local
+LHAPDF/CT18/MSHT/NNPDF tooling or grids.
+
 W9/W4/governance/PDF tranche result `2026-05-05`: the proposed W9 canonical
 `refl` close is rejected against the actual theorem-facing route.
 `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records the

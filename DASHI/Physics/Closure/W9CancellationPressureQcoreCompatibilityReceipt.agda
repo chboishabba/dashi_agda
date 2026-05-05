@@ -22,6 +22,7 @@ open import Data.Product using (_,_)
 
 import DASHI.Arithmetic.ArithmeticIntegerEmbedding as AIE
 import DASHI.Arithmetic.MaxPressure as Max
+import DASHI.Arithmetic.WeightedValuationEnergy as WVE
 import DASHI.Arithmetic.WeightedPressure as Weighted
 import DASHI.Physics.Closure.BlockerKillConditions as Kill
 import DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation as W9
@@ -31,6 +32,8 @@ data W9QcoreCompatibilityClaimStatus : Set where
   weightedSupportNotQcoreCompatibility :
     W9QcoreCompatibilityClaimStatus
   proposedReflRejectedByCanonical15Counterexample :
+    W9QcoreCompatibilityClaimStatus
+  weightedQcoreBoundDoesNotMatchExistingRoute :
     W9QcoreCompatibilityClaimStatus
 
 WeightedSupportBoundType : Set
@@ -62,6 +65,24 @@ record W9CancellationPressureQcoreCompatibilityDiagnostic : Setω where
           W9.canonical15Dimension
           (W9.one , W9.three)))
 
+    weightedUniformIdentificationObstructed :
+      (∀ input →
+        + (AIE.deltaSum (WVE.left input) (WVE.right input))
+        ≡
+        + (WVE.weightedQuadraticEnergy (WVE.left input))) →
+      ⊥
+
+    weightedRouteCounterexampleInput :
+      DQ.WeightedInput
+
+    weightedRouteCounterexampleMismatch :
+      (+ (AIE.deltaSum
+          (WVE.left weightedRouteCounterexampleInput)
+          (WVE.right weightedRouteCounterexampleInput)))
+      W9.≢
+      (+ (WVE.weightedQuadraticEnergy
+          (WVE.left weightedRouteCounterexampleInput)))
+
     blockerKillCondition :
       Kill.KillCondition
 
@@ -81,6 +102,9 @@ record W9CancellationPressureQcoreCompatibilityDiagnostic : Setω where
     firstMissingType :
       String
 
+    weightedRouteFirstMissingField :
+      String
+
     exactKillReceiptTypeName :
       String
 
@@ -97,6 +121,15 @@ canonicalW9CancellationPressureQcoreCompatibilityDiagnostic =
         W9.canonical15ExistingPressureWitnessObstruction
     ; canonical15PressureWitnessCounterexample =
         W9.canonical15PressureWitnessConcreteMismatch
+    ; weightedUniformIdentificationObstructed =
+        W9.CancellationToWeightedQuadraticIdentificationObstruction.noUniformIdentification
+          W9.canonicalCancellationToWeightedQuadraticIdentificationObstruction
+    ; weightedRouteCounterexampleInput =
+        W9.CancellationToWeightedQuadraticIdentificationObstruction.counterexampleInput
+          W9.canonicalCancellationToWeightedQuadraticIdentificationObstruction
+    ; weightedRouteCounterexampleMismatch =
+        W9.CancellationToWeightedQuadraticIdentificationObstruction.counterexampleMismatch
+          W9.canonicalCancellationToWeightedQuadraticIdentificationObstruction
     ; blockerKillCondition =
         Kill.w9KillCondition
     ; blockerKillConditionIsW9 =
@@ -104,9 +137,11 @@ canonicalW9CancellationPressureQcoreCompatibilityDiagnostic =
     ; blockerKillConditionStillBlocked =
         refl
     ; status =
-        proposedReflRejectedByCanonical15Counterexample
+        weightedQcoreBoundDoesNotMatchExistingRoute
     ; firstMissingType =
         "DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation.ExistingCancellationPressureCompatibilityObligation canonical15Theorem canonical15Dimension"
+    ; weightedRouteFirstMissingField =
+        "DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation.WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy"
     ; exactKillReceiptTypeName =
         "DASHI.Physics.Closure.BlockerKillConditions.W9KillReceipt"
     ; diagnosticBoundary =
@@ -115,6 +150,8 @@ canonicalW9CancellationPressureQcoreCompatibilityDiagnostic =
         ∷ "ExistingCancellationPressureCompatibilityObligation requires an ℤ equality to contractionEnergy after canonicalDeltaTransport"
         ∷ "The proposed refl route is rejected at the canonical-15 counterexample input (one , three)"
         ∷ "canonical15ExistingPressureWitnessObstruction rejects that exact canonical-15 pressure witness"
+        ∷ "A weighted-Qcore candidate lives on canonicalWeightedQuadraticTransport of the left input, not canonicalDeltaTransport of the pair"
+        ∷ "The weighted route still requires cancellationPressureIdentifiesWeightedQuadraticEnergy, and the repo has a concrete obstruction at (one , one)"
         ∷ "BlockerKillConditions.W9KillReceipt is not constructed here"
         ∷ []
     }

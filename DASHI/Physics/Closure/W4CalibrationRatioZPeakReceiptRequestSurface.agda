@@ -228,6 +228,9 @@ record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
     numericAnchorStatus :
       String
 
+    exactMissingPredictionContract :
+      String
+
     diagnosticBoundary :
       List String
 
@@ -277,11 +280,13 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
     ; runnerProbeWithoutFreezeStatus =
         "timeout 30s python scripts/run_t43_projection.py --mode dirty-z-peak --data t21 --covariance t22 exits 2 before data access: required --freeze-hash is missing"
     ; runnerProbeWithFreezeStatus =
-        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-t21-t22-local --mode dirty-z-peak --data t21 --covariance t22 parses t21/t22 and exits 42 at missing compute_dashi_ratio"
+        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-zpeak-contract --mode dirty-z-peak --data t21 --covariance t22 --prediction-api DASHI.Physics.Prediction.sigma_dashi:predict_ratio exits 42 with prediction-contract-missing"
     ; runnerGeneralizationGap =
-        "CLI accepts --data/--covariance and binds t21/t22 digests/schema; W4 dirty projection still requires a real compute_dashi_ratio prediction API before comparison numerics can close"
+        "CLI accepts --data/--covariance and binds t21/t22 digests/schema; W4 dirty projection refuses ratio predictors and still requires a real absolute t21 Z-peak prediction API before comparison numerics can close"
     ; numericAnchorStatus =
-        "prepared-not-closed: t21 rowCount 18 value column d sigma/d phistar [pb]; t22 total covariance shape 18x18 symmetric; projection output remains prediction-missing"
+        "prepared-not-closed: t21 rowCount 18 value column d sigma/d phistar [pb]; t22 total covariance shape 18x18 symmetric; existing ratio API is rejected for dirty-z-peak"
+    ; exactMissingPredictionContract =
+        "batch callable module:function whose metadata declares supportsDirtyZPeakAbsolutePrediction true and dirtyZPeakAbsolutePredictionCallable equal to that module:function; output must be absolute t21 d sigma/d phistar [pb] predictions, not t43/t45 ratios"
     ; diagnosticBoundary =
         "This diagnostic records script/data support only"
         ∷ "It does not construct a W4CalibrationRatioZPeakReceipt"

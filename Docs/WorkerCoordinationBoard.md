@@ -8,6 +8,91 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Active Assignment Round -- Z-Peak/W9 Theorem Next Six
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated`
+orchestrator_id: `zpeak-w9-nextsix-2026-05-05`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned six parallel lanes and owns integration, validation,
+  board/TODO/changelog sync, and any commit.
+- Workers have disjoint write surfaces and must return typed receipts,
+  typed diagnostics, or no-change audits.
+
+R:
+- W4 must either wire a real Z-peak DASHI prediction API or name the exact
+  missing callable contract.
+- W9 must attack the actual
+  `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+  canonical15Dimension`, not the rejected naive equality.
+- W3 and W2 must preserve constructorless-token governance.
+- GR must remain W4-gated, and W5 must remain external-PDF gated unless real
+  provider data is supplied.
+
+C:
+- W4 API: `scripts/run_t43_projection.py` plus W4 Z-peak receipt/request
+  modules.
+- W9 theorem: W9/cancellation-pressure compatibility modules only.
+- W3 authority: W3 accepted-authority packet modules/docs only.
+- W2 governance: W2 promotion/governance modules only.
+- GR matter queue: GR/W4 matter-coupling diagnostic modules only.
+- W5 PDF: W5 CT18/MSHT/LHAPDF intake modules only.
+
+S:
+- Worktree started clean at `8fd1615`.
+- t21/t22 artifacts are local and parsed; W4 is blocked on
+  `missingDirtyZPeakPredictionAPI`.
+- W9 has a concrete `(one , three)` counterexample to the naive pressure/Qcore
+  equality route.
+- W2 and W3 authority tokens remain constructorless under current governance.
+- W5 has no local LHAPDF/CT18 table provenance.
+
+L:
+- `assignment` -> `lane receipt/diagnostic/no-change` ->
+  `timeout 30s agda <touched module>` / `timeout 30s python -m py_compile` ->
+  `BlockerKillConditions.agda` and `P0BlockerObligationIndex.agda` if closure
+  surfaces changed -> `git diff --check`.
+
+P:
+- `Faraday` / `Boole` owns W4 Z-peak prediction API.
+- `Planck` / `Galileo` owns W9 theorem-facing compatibility.
+- `Curie-W3` / `Curie` owns W3 authority packet audit.
+- `Newton` / `Hooke` owns W2 governance-token policy audit.
+- `Gauss` / `Euclid` owns GR W4 matter-coupling queue.
+- `Maxwell` / `Boyle` owns W5 external PDF packet audit.
+
+G:
+- No W4 anchor without repo-backed Z-peak predictions.
+- No W9 close unless the actual theorem-facing obligation is inhabited and
+  accepted by `BlockerKillConditions.agda`.
+- No W2/W3 token fabrication.
+- No GR recovery, Bianchi, Einstein-equation, or continuum-limit promotion.
+- No W5 t45/PDF promotion without external PDF provenance and computed
+  correction.
+
+F:
+- W4 first missing: `missingDirtyZPeakPredictionAPI`.
+- W9 first missing:
+  `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+  canonical15Dimension`.
+- W3 first missing: `W3AcceptedEvidenceAuthorityToken`.
+- W2 first missing: `NaturalP2ConvergencePromotionAuthorityToken`.
+- GR first missing: W4 anchor/authority-backed matter coupling.
+- W5 first missing: CT18/MSHT/LHAPDF packet fields and computed correction.
+
+| Lane | Worker | Agent | Assignment | Result | Status |
+|---|---|---|---|---|---|
+| `W4-zpeak-prediction-api` | `Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Wire or diagnose the real Z-peak `compute_dashi_ratio` path for `dirty-z-peak`. | Runner now rejects existing ratio predictors for `dirty-z-peak` unless metadata declares an absolute t21 `d sigma/d phistar [pb]` prediction contract; W4 receipt diagnostics name the exact missing callable contract. | completed; prediction-contract blocked |
+| `W9-canonical-15-theorem-route` | `Planck` | `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) | Map the proposed weighted-Qcore-bound route to the actual canonical-15 obligation, or produce the exact mismatch diagnostic. | Weighted-Qcore route does not inhabit the existing route: it still requires `WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy`, already obstructed at `(one , one)`. | completed; W9 still blocked |
+| `W3-authority-packet-audit` | `Curie-W3` | `Curie` (`019df44c-dbff-7e62-9227-da4b82ffc438`) | Confirm HEP-R55 packet completeness and sharpen provider handoff only if stale. | No-change audit: packet is complete with no missing packet fields; first missing remains external `W3AcceptedEvidenceAuthorityToken`. | completed; external token outstanding |
+| `W2-token-policy-audit` | `Newton` | `Hooke` (`019df69c-1244-7a53-99f0-551c2d122e32`) | Find any legitimate W2 authority-token constructor/policy hook, or preserve the governance boundary. | No-change audit: token type is empty, `naturalP2ConvergencePromotionAuthorityUnavailable` eliminates it, and no legitimate constructor/policy hook exists. | completed; governance blocked |
+| `GR-w4-matter-queue` | `Gauss` | `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) | Keep the GR matter-coupling queue precise and W4-gated. | `EinsteinEquationCandidate.agda` adds the future `W4MatterStressEnergyInterfaceReceipt` shape and records the post-anchor next gate as W4 calibration authority. | completed; obligation sharpened |
+| `W5-pdf-packet-audit` | `Maxwell` | `Boyle` (`019df69c-3ac6-72c1-bed6-66d99ac35af3`) | Audit CT18/MSHT/LHAPDF packet fields and local non-network validation options. | No-change audit: PDF packet fields are current; no local LHAPDF/CT18/MSHT/NNPDF tooling or grids are available. | completed; external PDF blocked |
+
 ## Active Assignment Round -- W9/W4/Governance/PDF Tranche
 
 Round date: `2026-05-05`

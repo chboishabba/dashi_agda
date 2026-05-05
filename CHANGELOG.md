@@ -2,6 +2,22 @@
 
 ## 2026-05-05
 
+- integrate Z-peak/W9 theorem next-six assignment:
+  `scripts/run_t43_projection.py` now enforces an explicit dirty Z-peak
+  prediction contract. Existing t43/t45 ratio predictors are rejected for the
+  t21 absolute `d sigma/d phistar [pb]` lane unless module metadata declares
+  `supportsDirtyZPeakAbsolutePrediction` and the exact callable identity.
+  `W4CalibrationRatioZPeakReceiptRequestSurface.agda` and
+  `W4ZPeakCalibrationAnchorReceipt.agda` record the rejected ratio callable
+  and preserve the missing absolute prediction API as the W4 first missing
+  item. `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records
+  that the weighted-Qcore route still depends on the obstructed
+  cancellation-pressure to weighted-quadratic identification at `(one , one)`,
+  so W9 remains blocked. `EinsteinEquationCandidate.agda` adds the future
+  `W4MatterStressEnergyInterfaceReceipt` shape and records W4 calibration
+  authority as the post-anchor GR gate. W2, W3, and W5 were audited as
+  no-change external/governance blockers.
+
 - integrate W9/W4/governance/PDF tranche:
   `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records the
   concrete canonical-15 counterexample and rejects the proposed canonical-state

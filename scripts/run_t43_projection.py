@@ -250,6 +250,30 @@ def load_prediction_api(spec: str | None) -> tuple[Callable[[list[dict[str, Any]
     return function, f"loaded {spec}"
 
 
+def dirty_z_peak_prediction_contract_error(spec: str | None, value_column: str) -> str | None:
+    if value_column == "Ratio":
+        return None
+    if not spec:
+        return "no --prediction-api supplied for absolute t21 Z-peak d sigma/d phistar [pb]"
+    module_name, _, function_name = spec.partition(":")
+    try:
+        module = importlib.import_module(module_name)
+        metadata_function = getattr(module, "metadata", None)
+        metadata = metadata_function() if callable(metadata_function) else {}
+    except Exception as exc:
+        return f"prediction API metadata unavailable for dirty-z-peak: {exc}"
+
+    supports = metadata.get("supportsDirtyZPeakAbsolutePrediction") is True
+    declared_function = metadata.get("dirtyZPeakAbsolutePredictionCallable") == spec
+    if supports and declared_function:
+        return None
+    return (
+        "dirty-z-peak requires a batch callable declared by metadata as "
+        "supportsDirtyZPeakAbsolutePrediction with dirtyZPeakAbsolutePredictionCallable "
+        f"matching {spec!r}; {module_name}:{function_name} is not such a callable"
+    )
+
+
 def finalize_artifact(payload: dict[str, Any]) -> dict[str, Any]:
     payload = dict(payload)
     payload["projectionDigest"] = ""
@@ -526,6 +550,26 @@ def main() -> int:
             reason="DASHI ratio prediction is unavailable; compute_dashi_ratio is not wired",
             prediction_api_status=prediction_status,
         )
+        write_json(output_path, artifact)
+        return EXIT_PREDICTION_MISSING
+
+    dirty_contract_error = (
+        dirty_z_peak_prediction_contract_error(args.prediction_api, t43["valueColumn"])
+        if args.mode == "dirty-z-peak"
+        else None
+    )
+    if dirty_contract_error is not None:
+        artifact = incomplete_artifact(
+            mode=args.mode,
+            freeze_hash=args.freeze_hash,
+            digest_results=digest_results,
+            t43=t43,
+            t44=t44,
+            reason=dirty_contract_error,
+            prediction_api_status=prediction_status,
+        )
+        artifact["failureCode"] = "prediction-contract-missing"
+        artifact = finalize_artifact(artifact)
         write_json(output_path, artifact)
         return EXIT_PREDICTION_MISSING
 

@@ -7,6 +7,8 @@ open import Data.List.Base using (List; _∷_; [])
 open import Data.Unit using (⊤; tt)
 
 import DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate as DET
+import DASHI.Physics.Closure.W4CalibrationRatioZPeakReceiptRequestSurface as W4Anchor
+import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation as W4External
 import DASHI.Physics.Closure.W4PhysicalCalibrationObligationSurface as W4
 
 ------------------------------------------------------------------------
@@ -47,6 +49,33 @@ data EinsteinEquationMatterCouplingQueueField : Set where
     EinsteinEquationMatterCouplingQueueField
   missingDiscreteEinsteinEquationLawFromStressEnergy :
     EinsteinEquationMatterCouplingQueueField
+
+record W4MatterStressEnergyInterfaceReceipt : Setω where
+  field
+    w4AnchorReceipt :
+      W4Anchor.W4SameRecordZPeakT21T22ArtifactReceiptRequest
+
+    w4CalibrationAuthorityReceipt :
+      W4External.Candidate256PhysicalCalibrationExternalReceipt
+
+    MatterField :
+      Set
+
+    StressEnergyTensor :
+      MatterField →
+      Set
+
+    matterFieldFromW4 :
+      MatterField →
+      Set
+
+    stressEnergyFromMatter :
+      (matter : MatterField) →
+      StressEnergyTensor matter →
+      Set
+
+    interfaceBoundary :
+      List String
 
 canonicalEinsteinEquationFirstMissingFields :
   List EinsteinEquationFirstMissingField
@@ -130,6 +159,17 @@ record EinsteinEquationCandidateObligationSurface : Setω where
       ≡
       missingW4AnchorReceipt
 
+    postAnchorNextQueueField :
+      EinsteinEquationMatterCouplingQueueField
+
+    postAnchorNextIsW4CalibrationAuthority :
+      postAnchorNextQueueField
+      ≡
+      missingW4CalibrationAuthority
+
+    requiredPostAuthorityInterfaceName :
+      String
+
     firstMissingIsW4MatterCoupling :
       firstMissing
       ≡
@@ -175,6 +215,12 @@ canonicalEinsteinEquationCandidateObligationSurface =
         missingW4AnchorReceipt
     ; nextQueueFieldIsW4Anchor =
         refl
+    ; postAnchorNextQueueField =
+        missingW4CalibrationAuthority
+    ; postAnchorNextIsW4CalibrationAuthority =
+        refl
+    ; requiredPostAuthorityInterfaceName =
+        "DASHI.Physics.Closure.EinsteinEquationCandidate.W4MatterStressEnergyInterfaceReceipt"
     ; firstMissingIsW4MatterCoupling =
         refl
     ; unsupportedClaims =
@@ -183,6 +229,7 @@ canonicalEinsteinEquationCandidateObligationSurface =
         "Flat vacuum is the currently correct local GR surface"
         ∷ "The target equation is recorded only as G_mu_nu = 8pi T_mu_nu"
         ∷ "The first W4 gate is the W4 anchor receipt"
+        ∷ "After the W4 anchor exists, the next typed GR action is W4 calibration authority"
         ∷ "W4 calibration authority must follow the anchor before matter is available"
         ∷ "T_mu_nu is gated on a W4 matter field and stress-energy tensor"
         ∷ "Any non-flat connection must be sourced through the W4 matter-coupling queue"
