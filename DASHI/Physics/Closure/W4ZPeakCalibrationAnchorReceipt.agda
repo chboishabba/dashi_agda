@@ -11,14 +11,16 @@ import DASHI.Physics.Closure.W4CalibrationRatioZPeakReceiptRequestSurface as ZPe
 ------------------------------------------------------------------------
 -- W4 Z-peak calibration-anchor worker diagnostic.
 --
--- Faraday checked the local W4 Z-peak path without editing the projection
--- runner.  The dirty boundary run cannot be produced from the current local
--- state: the same-record t21/t22 artifacts are absent and the runner is still
--- the digest-bound t43/t44 interface.  This file is therefore a non-promoting
--- missing-artifact diagnostic, not a calibration receipt.
+-- Faraday retrieved the local W4 Z-peak t21/t22 CSVs and bound their digests
+-- and parser-visible schema.  The dirty boundary path now parses the real
+-- measurement/covariance numerics but still stops at the missing
+-- compute_dashi_ratio prediction API.  This file is therefore a non-promoting
+-- prepared-anchor diagnostic, not a calibration receipt.
 
 data W4ZPeakCalibrationAnchorWorkerStatus : Set where
   blockedByMissingT21T22ArtifactsAndRunnerInterface :
+    W4ZPeakCalibrationAnchorWorkerStatus
+  preparedWithT21T22ArtifactsAndPredictionMissing :
     W4ZPeakCalibrationAnchorWorkerStatus
 
 record W4ZPeakCalibrationAnchorMissingArtifactDiagnostic : Setω where
@@ -36,6 +38,39 @@ record W4ZPeakCalibrationAnchorMissingArtifactDiagnostic : Setω where
       String
 
     requiredCovarianceLocalPath :
+      String
+
+    measurementSha256 :
+      String
+
+    covarianceSha256 :
+      String
+
+    measurementRowCount :
+      String
+
+    covarianceTotalRowCount :
+      String
+
+    covarianceMatrixShape :
+      String
+
+    covarianceSymmetryStatus :
+      String
+
+    measurementValueColumn :
+      String
+
+    firstMeasurementBinValue :
+      String
+
+    lastMeasurementBinValue :
+      String
+
+    firstTotalCovarianceDiagonal :
+      String
+
+    dirtyRunnerProjectionDigest :
       String
 
     observedLocalCacheFiles :
@@ -73,7 +108,7 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic :
 canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
   record
     { status =
-        blockedByMissingT21T22ArtifactsAndRunnerInterface
+        preparedWithT21T22ArtifactsAndPredictionMissing
     ; requestSurface =
         ZPeak.canonicalW4CalibrationRatioZPeakReceiptRequestSurface
     ; supportDiagnostic =
@@ -82,7 +117,33 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
         "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
     ; requiredCovarianceLocalPath =
         "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
+    ; measurementSha256 =
+        "4ece677d0e2640a786351e19d0190454aeb3dc49f7e6fbda4814e3fe88dc3270"
+    ; covarianceSha256 =
+        "718588d67d3c41195d25a6f01c4ff4bcf2d0d85c193e27ebd22925474a0d9ea7"
+    ; measurementRowCount =
+        "18"
+    ; covarianceTotalRowCount =
+        "324"
+    ; covarianceMatrixShape =
+        "18 x 18"
+    ; covarianceSymmetryStatus =
+        "symmetric true"
+    ; measurementValueColumn =
+        "d sigma / d phistar [pb]"
+    ; firstMeasurementBinValue =
+        "phiStar 0.002, low 0.0, high 0.004, value 6230.5 pb"
+    ; lastMeasurementBinValue =
+        "phiStar 2.215, low 1.153, high 3.277, value 6.3554 pb"
+    ; firstTotalCovarianceDiagonal =
+        "t22 Total uncertainty [(pb)^2] covariance[0,0] = 8552.8"
+    ; dirtyRunnerProjectionDigest =
+        "360e1be033371516e1478f1f19acf90cdcc8b6e0e326f69921b2fea54d87fb67"
     ; observedLocalCacheFiles =
+        "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
+        ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
+        ∷ "scripts/data/hepdata/ins2079374_t21_t22.sha256"
+        ∷
         "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv"
         ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_over_mass_76-106_t44.csv"
         ∷ "scripts/data/hepdata/ins2079374_phistar_mass_106-170_over_mass_76-106_t45.csv"
@@ -94,24 +155,24 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
         "scripts/run_t43_projection.py"
     ; observedRunnerFlags =
         "--freeze-hash"
+        ∷ "--mode"
+        ∷ "--data"
+        ∷ "--covariance"
         ∷ "--output"
         ∷ "--t43"
         ∷ "--t44"
         ∷ "--prediction-api"
         ∷ []
     ; absentRunnerFlags =
-        "--mode"
-        ∷ "--data"
-        ∷ "--covariance"
-        ∷ []
+        []
     ; numericRunStatus =
-        "not-run: same-record t21/t22 artifacts are absent locally and current runner is t43/t44-specific"
+        "prepared-not-closed: dirty-z-peak run parsed t21/t22 digests/schema and exited 42 because compute_dashi_ratio is not wired"
     ; firstMissing =
-        ZPeak.missingSameRecordT21T22ArtifactReceipt
+        ZPeak.missingDirtyZPeakPredictionAPI
     ; nextProviderAction =
-        "supply checksum-bound t21 measurement and t22 covariance artifacts, then generalize the runner or add a Z-peak-specific runner before any dirty boundary numeric anchor is recorded"
+        "supply a real compute_dashi_ratio prediction API for the t21 Z-peak measurement carrier before any comparison law or W4 internal anchor closure is recorded"
     ; nonPromotionBoundary =
-        "This diagnostic records a failed local feasibility check for the W4 Z-peak dirty boundary run"
+        "This diagnostic records a prepared local t21/t22 feasibility check for the W4 Z-peak dirty boundary run"
         ∷ "It does not construct W4SameRecordZPeakRatioCalibrationLaw"
         ∷ "It does not construct Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "It does not construct Candidate256PhysicalCalibrationExternalReceipt"

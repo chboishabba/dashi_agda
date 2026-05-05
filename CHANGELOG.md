@@ -2,6 +2,22 @@
 
 ## 2026-05-05
 
+- integrate W9/W4/governance/PDF tranche:
+  `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records the
+  concrete canonical-15 counterexample and rejects the proposed canonical-state
+  `refl` close. W4 public t21/t22 artifacts are now local with SHA-256 digests
+  and parser-visible schema; the dirty Z-peak path parses the 18-bin
+  measurement and 18 x 18 covariance matrix, then fails closed at the missing
+  `compute_dashi_ratio` prediction API. `EinsteinEquationCandidate.agda` now
+  orders the W4-gated GR queue as anchor, calibration authority, matter field,
+  stress-energy tensor, then discrete Einstein-equation law.
+  `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda` is packet-complete for
+  external authority review but constructs no token.
+  `W2GovernanceSelfIssuanceIntakeRequest.agda` records the W2 governance
+  closing packet while keeping self-issuance unavailable.
+  `W5CT18ExternalIntakeReceipt.agda` records the CT18/MSHT/LHAPDF packet fields
+  required before W5 can consume the external PDF carrier.
+
 - integrate W9/Qcore + W4/GR governance assignment round:
   `W9CancellationPressureQcoreCompatibilityReceipt.agda` rejects the proposed
   W9 close in the actual repo types: the available weighted-support theorem is

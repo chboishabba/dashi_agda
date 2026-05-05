@@ -140,6 +140,8 @@ data W4CalibrationRatioZPeakMissingRequirement : Set where
     W4CalibrationRatioZPeakMissingRequirement
   missingSameRecordT21T22ArtifactReceipt :
     W4CalibrationRatioZPeakMissingRequirement
+  missingDirtyZPeakPredictionAPI :
+    W4CalibrationRatioZPeakMissingRequirement
   missingTypedRatioArtifactReceipt :
     W4CalibrationRatioZPeakMissingRequirement
   missingResponseMatrixConsumptionLaw :
@@ -156,12 +158,14 @@ data W4CalibrationRatioZPeakMissingRequirement : Set where
 data W4ZPeakDirtyBoundaryCheckSupportStatus : Set where
   blockedByMissingLocalT21T22CacheAndT43RunnerOnly :
     W4ZPeakDirtyBoundaryCheckSupportStatus
+  preparedWithLocalT21T22CacheAndRunnerParseOnly :
+    W4ZPeakDirtyBoundaryCheckSupportStatus
 
 canonicalW4CalibrationRatioZPeakMissingRequirements :
   List W4CalibrationRatioZPeakMissingRequirement
 canonicalW4CalibrationRatioZPeakMissingRequirements =
   missingTypedZPeakArtifactReceipt
-  ∷ missingSameRecordT21T22ArtifactReceipt
+  ∷ missingDirtyZPeakPredictionAPI
   ∷ missingTypedRatioArtifactReceipt
   ∷ missingResponseMatrixConsumptionLaw
   ∷ missingRatioCovarianceCalibrationLaw
@@ -232,16 +236,16 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic :
 canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
   record
     { supportStatus =
-        blockedByMissingLocalT21T22CacheAndT43RunnerOnly
+        preparedWithLocalT21T22CacheAndRunnerParseOnly
     ; localAuditDate =
-        "2026-05-05 local no-network audit"
+        "2026-05-05 local HEPData retrieval and dirty-z-peak parse audit"
     ; firstMissingLocalArtifact =
-        "missing: scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
+        "present: scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv sha256 4ece677d0e2640a786351e19d0190454aeb3dc49f7e6fbda4814e3fe88dc3270"
     ; secondMissingLocalArtifact =
-        "missing: scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
+        "present: scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv sha256 718588d67d3c41195d25a6f01c4ff4bcf2d0d85c193e27ebd22925474a0d9ea7"
     ; requiredNoNetworkAcquisitionCommands =
-        "curl -L --fail --output scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv https://www.hepdata.net/download/table/ins2079374/Table%2021/csv"
-        ∷ "curl -L --fail --output scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv https://www.hepdata.net/download/table/ins2079374/Table%2022/csv"
+        "curl -L --fail --output scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv https://www.hepdata.net/download/table/ins2079374/phistar%20mass%2076-106/csv"
+        ∷ "curl -L --fail --output scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv https://www.hepdata.net/download/table/ins2079374/Covariance%20matrices%20for%20phistar%20mass%2076-106/csv"
         ∷ "sha256sum scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv > scripts/data/hepdata/ins2079374_t21_t22.sha256"
         ∷ []
     ; requiredMeasurementLocalPath =
@@ -273,11 +277,11 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
     ; runnerProbeWithoutFreezeStatus =
         "timeout 30s python scripts/run_t43_projection.py --mode dirty-z-peak --data t21 --covariance t22 exits 2 before data access: required --freeze-hash is missing"
     ; runnerProbeWithFreezeStatus =
-        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-local-audit --mode dirty-z-peak --data t21 --covariance t22 now reaches fail-closed digest input checking once runner patch is present"
+        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-t21-t22-local --mode dirty-z-peak --data t21 --covariance t22 parses t21/t22 and exits 42 at missing compute_dashi_ratio"
     ; runnerGeneralizationGap =
-        "CLI can accept --data/--covariance as aliases, but arbitrary t21/t22 physics semantics still require local artifacts, checksums, and parser/schema binding before W4 can run"
+        "CLI accepts --data/--covariance and binds t21/t22 digests/schema; W4 dirty projection still requires a real compute_dashi_ratio prediction API before comparison numerics can close"
     ; numericAnchorStatus =
-        "not-produced: first missing local artifact is t21; t22 is also absent; runner CLI path is prepared but no t21/t22 numeric anchor can run"
+        "prepared-not-closed: t21 rowCount 18 value column d sigma/d phistar [pb]; t22 total covariance shape 18x18 symmetric; projection output remains prediction-missing"
     ; diagnosticBoundary =
         "This diagnostic records script/data support only"
         ∷ "It does not construct a W4CalibrationRatioZPeakReceipt"

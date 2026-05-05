@@ -36,6 +36,18 @@ data EinsteinEquationFirstMissingField : Set where
   missingDiscreteEinsteinEquationLaw :
     EinsteinEquationFirstMissingField
 
+data EinsteinEquationMatterCouplingQueueField : Set where
+  missingW4AnchorReceipt :
+    EinsteinEquationMatterCouplingQueueField
+  missingW4CalibrationAuthority :
+    EinsteinEquationMatterCouplingQueueField
+  missingW4MatterField :
+    EinsteinEquationMatterCouplingQueueField
+  missingW4StressEnergyTensorFromMatterField :
+    EinsteinEquationMatterCouplingQueueField
+  missingDiscreteEinsteinEquationLawFromStressEnergy :
+    EinsteinEquationMatterCouplingQueueField
+
 canonicalEinsteinEquationFirstMissingFields :
   List EinsteinEquationFirstMissingField
 canonicalEinsteinEquationFirstMissingFields =
@@ -43,6 +55,16 @@ canonicalEinsteinEquationFirstMissingFields =
   ∷ missingW4SourcedNonFlatConnection
   ∷ missingW4StressEnergyTensor
   ∷ missingDiscreteEinsteinEquationLaw
+  ∷ []
+
+canonicalEinsteinEquationMatterCouplingQueue :
+  List EinsteinEquationMatterCouplingQueueField
+canonicalEinsteinEquationMatterCouplingQueue =
+  missingW4AnchorReceipt
+  ∷ missingW4CalibrationAuthority
+  ∷ missingW4MatterField
+  ∷ missingW4StressEnergyTensorFromMatterField
+  ∷ missingDiscreteEinsteinEquationLawFromStressEnergy
   ∷ []
 
 data EinsteinEquationUnsupportedClaim : Set where
@@ -82,6 +104,9 @@ record EinsteinEquationCandidateObligationSurface : Setω where
     w4MatterCouplingGate :
       W4.W4PhysicalCalibrationObligationSurface
 
+    w4AnchorName :
+      String
+
     equationTargetLabel :
       String
 
@@ -93,6 +118,17 @@ record EinsteinEquationCandidateObligationSurface : Setω where
 
     orderedFirstMissingFields :
       List EinsteinEquationFirstMissingField
+
+    matterCouplingQueue :
+      List EinsteinEquationMatterCouplingQueueField
+
+    nextMatterCouplingQueueField :
+      EinsteinEquationMatterCouplingQueueField
+
+    nextQueueFieldIsW4Anchor :
+      nextMatterCouplingQueueField
+      ≡
+      missingW4AnchorReceipt
 
     firstMissingIsW4MatterCoupling :
       firstMissing
@@ -122,6 +158,9 @@ canonicalEinsteinEquationCandidateObligationSurface =
         DET.canonicalDiscreteEinsteinTensorCandidateDiagnostic
     ; w4MatterCouplingGate =
         W4.canonicalW4PhysicalCalibrationObligationSurface
+    ; w4AnchorName =
+        W4.W4PhysicalCalibrationObligationSurface.zPeakAnchorName
+          W4.canonicalW4PhysicalCalibrationObligationSurface
     ; equationTargetLabel =
         "G_mu_nu = 8pi T_mu_nu"
     ; sourceTermLabel =
@@ -130,6 +169,12 @@ canonicalEinsteinEquationCandidateObligationSurface =
         missingW4MatterCouplingReceipt
     ; orderedFirstMissingFields =
         canonicalEinsteinEquationFirstMissingFields
+    ; matterCouplingQueue =
+        canonicalEinsteinEquationMatterCouplingQueue
+    ; nextMatterCouplingQueueField =
+        missingW4AnchorReceipt
+    ; nextQueueFieldIsW4Anchor =
+        refl
     ; firstMissingIsW4MatterCoupling =
         refl
     ; unsupportedClaims =
@@ -137,8 +182,10 @@ canonicalEinsteinEquationCandidateObligationSurface =
     ; obligationBoundary =
         "Flat vacuum is the currently correct local GR surface"
         ∷ "The target equation is recorded only as G_mu_nu = 8pi T_mu_nu"
-        ∷ "T_mu_nu is gated on W4 matter coupling"
-        ∷ "Any non-flat connection must be sourced through the W4 matter-coupling route"
+        ∷ "The first W4 gate is the W4 anchor receipt"
+        ∷ "W4 calibration authority must follow the anchor before matter is available"
+        ∷ "T_mu_nu is gated on a W4 matter field and stress-energy tensor"
+        ∷ "Any non-flat connection must be sourced through the W4 matter-coupling queue"
         ∷ "The current W4 surface remains an obligation surface, not a supplied matter-coupling receipt"
         ∷ []
     ; nonPromotionBoundary =

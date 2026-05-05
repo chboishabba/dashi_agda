@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.W3AcceptedEvidenceAuthorityTokenIntakeRequest where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Float using (Float)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; _∷_; [])
@@ -33,6 +34,10 @@ data W3AuthorityTokenSelfIssuanceDecision : Set where
   selfIssuanceNotPermittedByConstructorlessGate :
     W3AuthorityTokenSelfIssuanceDecision
 
+data W3AcceptedEvidenceAuthorityTokenPacketReadiness : Set where
+  readyForExternalAuthorityTokenReview :
+    W3AcceptedEvidenceAuthorityTokenPacketReadiness
+
 record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
   field
     status :
@@ -55,6 +60,62 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
 
     r53PerBinNonCollapseReceipt :
       NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt
+
+    packetReadiness :
+      W3AcceptedEvidenceAuthorityTokenPacketReadiness
+
+    packetReadyForExternalAuthority :
+      Bool
+
+    packetReadyForExternalAuthorityIsTrue :
+      packetReadyForExternalAuthority
+      ≡
+      true
+
+    witnessBinIndex :
+      Float
+
+    witnessBinIndexMatchesR53 :
+      witnessBinIndex
+      ≡
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.witnessBinIndex
+        r53PerBinNonCollapseReceipt
+
+    witnessPrediction :
+      Float
+
+    witnessPredictionMatchesR53 :
+      witnessPrediction
+      ≡
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.witnessPrediction
+        r53PerBinNonCollapseReceipt
+
+    witnessData :
+      Float
+
+    witnessDataMatchesR53 :
+      witnessData
+      ≡
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.witnessData
+        r53PerBinNonCollapseReceipt
+
+    witnessUncertainty :
+      Float
+
+    witnessUncertaintyMatchesR53 :
+      witnessUncertainty
+      ≡
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.witnessUncertainty
+        r53PerBinNonCollapseReceipt
+
+    witnessPull :
+      Float
+
+    witnessPullMatchesR53 :
+      witnessPull
+      ≡
+      NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt.witnessPull
+        r53PerBinNonCollapseReceipt
 
     exactAuthorityTokenName :
       String
@@ -116,6 +177,9 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
     exactFirstMissingBlocker :
       String
 
+    stillMissingPacketFields :
+      List String
+
 canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest :
   W3AcceptedEvidenceAuthorityTokenIntakeRequest
 canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
@@ -134,6 +198,32 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         Candidate.canonicalW3T43AuthorityPacketCandidateDiagnostic
     ; r53PerBinNonCollapseReceipt =
         NonCollapse.canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt
+    ; packetReadiness =
+        readyForExternalAuthorityTokenReview
+    ; packetReadyForExternalAuthority =
+        true
+    ; packetReadyForExternalAuthorityIsTrue =
+        refl
+    ; witnessBinIndex =
+        12.0
+    ; witnessBinIndexMatchesR53 =
+        refl
+    ; witnessPrediction =
+        0.0486590199823977
+    ; witnessPredictionMatchesR53 =
+        refl
+    ; witnessData =
+        0.049758
+    ; witnessDataMatchesR53 =
+        refl
+    ; witnessUncertainty =
+        0.00048197510309143566
+    ; witnessUncertaintyMatchesR53 =
+        refl
+    ; witnessPull =
+        -2.280159308132989
+    ; witnessPullMatchesR53 =
+        refl
     ; exactAuthorityTokenName =
         Pack.W3AcceptedAuthorityProviderPayloadRequest.exactAuthorityTokenName
           Pack.canonicalW3AcceptedAuthorityProviderPayloadRequest
@@ -150,7 +240,7 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         ∷ "freezeCommit: 3205d746639568762c9e97adf4a3672c356bd491"
         ∷ "perBinArtifactSha256: 3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0"
         ∷ "perBinProjectionDigest: cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79"
-        ∷ "nonCollapseWitness: bin 12, pred 0.0486590199823977, data 0.049758, pull -2.280159308132989"
+        ∷ "nonCollapseWitness: bin 12, pred 0.0486590199823977, data 0.049758, unc 0.00048197510309143566, pull -2.280159308132989"
         ∷ []
     ; requiredTokenEvidenceFieldsArePublicAndRunnerBound =
         true
@@ -187,6 +277,8 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         ∷ []
     ; exactFirstMissingBlocker =
         "W3AcceptedEvidenceAuthorityToken remains externally outstanding"
+    ; stillMissingPacketFields =
+        []
     }
 
 canonicalW3AcceptedEvidenceAuthorityTokenFirstMissing :
@@ -208,3 +300,17 @@ canonicalW3AcceptedEvidenceAuthorityTokenConstructedHere :
   ≡
   false
 canonicalW3AcceptedEvidenceAuthorityTokenConstructedHere = refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenPacketReady :
+  W3AcceptedEvidenceAuthorityTokenIntakeRequest.packetReadyForExternalAuthority
+    canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
+  ≡
+  true
+canonicalW3AcceptedEvidenceAuthorityTokenPacketReady = refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenStillMissingNoPacketFields :
+  W3AcceptedEvidenceAuthorityTokenIntakeRequest.stillMissingPacketFields
+    canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
+  ≡
+  []
+canonicalW3AcceptedEvidenceAuthorityTokenStillMissingNoPacketFields = refl

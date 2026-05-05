@@ -30,6 +30,8 @@ T21_PATH = DATA_DIR / "ins2079374_phistar_mass_76-106_t21.csv"
 T22_PATH = DATA_DIR / "ins2079374_Covariance_phistar_mass_76-106_t22.csv"
 
 KNOWN_DIGESTS = {
+    T21_PATH.name: "4ece677d0e2640a786351e19d0190454aeb3dc49f7e6fbda4814e3fe88dc3270",
+    T22_PATH.name: "718588d67d3c41195d25a6f01c4ff4bcf2d0d85c193e27ebd22925474a0d9ea7",
     T43_PATH.name: "0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b",
     T44_PATH.name: "3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b",
     T45_PATH.name: "bcc1450c5c7818e2792f06f1882c6facdea2e4079070b777f2c5ac3b87343433",
@@ -125,10 +127,10 @@ def parse_t43(path: Path) -> dict[str, Any]:
         "$\\varphi^*$",
         "$\\varphi^*$ LOW",
         "$\\varphi^*$ HIGH",
-        "Ratio",
     ]
-    if header[:4] != expected_prefix:
-        raise ValueError(f"{path}: unexpected t43 header prefix {header[:4]!r}")
+    if header[:3] != expected_prefix or len(header) < 4:
+        raise ValueError(f"{path}: unexpected data header prefix {header[:4]!r}")
+    value_column = header[3]
 
     bins: list[dict[str, Any]] = []
     for index, row in enumerate(rows):
@@ -141,6 +143,7 @@ def parse_t43(path: Path) -> dict[str, Any]:
                 "phiStarLow": _to_float(row[1], context=f"t43 row {index} phiStarLow"),
                 "phiStarHigh": _to_float(row[2], context=f"t43 row {index} phiStarHigh"),
                 "ratio": _to_float(row[3], context=f"t43 row {index} ratio"),
+                "valueColumn": value_column,
                 "uncertainties": {
                     header[column]: _to_float(row[column], context=f"t43 row {index} {header[column]}")
                     for column in range(4, len(header))
@@ -152,6 +155,7 @@ def parse_t43(path: Path) -> dict[str, Any]:
         "path": display_path(path),
         "commentPreamble": comments,
         "columns": header,
+        "valueColumn": value_column,
         "rowCount": len(bins),
         "bins": bins,
     }
@@ -180,9 +184,10 @@ def parse_t44(path: Path, bins: list[dict[str, Any]]) -> dict[str, Any]:
         sections[current_label].append(row)
 
     n = len(bins)
-    total_rows = sections.get("Total uncertainty")
-    if total_rows is None:
+    total_label = next((label for label in sections if label.startswith("Total uncertainty")), None)
+    if total_label is None:
         raise ValueError(f"{path}: missing Total uncertainty covariance section")
+    total_rows = sections[total_label]
     if len(total_rows) != n * n:
         raise ValueError(
             f"{path}: expected {n * n} Total uncertainty covariance rows for {n} bins, got {len(total_rows)}"
@@ -220,6 +225,7 @@ def parse_t44(path: Path, bins: list[dict[str, Any]]) -> dict[str, Any]:
         "columns": header,
         "rowCount": len(total_rows),
         "sectionCount": len(sections),
+        "totalUncertaintySection": total_label,
         "sections": [
             {"name": name, "rowCount": len(section_rows)}
             for name, section_rows in sections.items()

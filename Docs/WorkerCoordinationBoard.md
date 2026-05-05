@@ -8,6 +8,93 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Active Assignment Round -- W9/W4/Governance/PDF Tranche
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrating`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned six parallel lanes and owns integration, validation,
+  board/TODO/changelog sync, and commit.
+- Workers were constrained to disjoint write surfaces and to typed
+  receipts/diagnostics only.
+
+R:
+- Test the proposed W9 canonical-15 close against the actual theorem-facing
+  obligation.
+- Move W4 from missing data to a digest/schema-bound Z-peak artifact state if
+  public t21/t22 data can be retrieved.
+- Keep W2/W3 constructorless-token lanes as governance intake, not promotion.
+- Normalize W4-gated GR matter coupling and W5 external PDF intake.
+
+C:
+- W9: `W9CancellationPressureQcoreCompatibilityReceipt.agda`.
+- W4: `W4CalibrationRatioZPeakReceiptRequestSurface.agda`,
+  `W4ZPeakCalibrationAnchorReceipt.agda`, `scripts/run_t43_projection.py`, and
+  local t21/t22 cache artifacts.
+- GR: `EinsteinEquationCandidate.agda`.
+- W3: `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda`.
+- W2: `W2GovernanceSelfIssuanceIntakeRequest.agda`.
+- W5: `W5CT18ExternalIntakeReceipt.agda`.
+
+S:
+- W9 has an attractive canonical-state intuition, but the active kill route is
+  still the theorem-facing canonical-15 pressure/Qcore compatibility type.
+- W4 t21/t22 data is public and can be locally cached, but the dirty Z-peak
+  path still needs a real DASHI prediction API before anchor closure.
+- W2/W3 have evidence packets but their authority tokens remain constructorless
+  under current governance.
+- GR first consumes W4 through a matter-coupling/stress-energy queue.
+- W5 needs an external CT18/MSHT/LHAPDF packet, not another internal proxy.
+
+L:
+- `lane audit` -> `receipt or diagnostic` ->
+  `timeout 30s agda <touched module>` / `python -m py_compile` ->
+  `BlockerKillConditions.agda` and `P0BlockerObligationIndex.agda` ->
+  `git diff --check`.
+
+P:
+- `Planck` / `Galileo` audited W9 canonical-15 pressure/Qcore equality.
+- `Faraday` / `Boole` retrieved and bound W4 t21/t22 artifacts and runner
+  parsing.
+- `Gauss` / `Euclid` sharpened the GR W4 matter-coupling queue.
+- `Curie` tightened the W3 accepted-authority token packet.
+- `Newton` / `Bohr` wrote the W2 governance intake request.
+- `Maxwell` / `Kierkegaard` wrote the W5 CT18/MSHT/LHAPDF intake surface.
+
+G:
+- W9 is not closed: the proposed `refl` equality is rejected by the existing
+  canonical-15 pressure witness counterexample.
+- W4 data is present and parsed, but W4 internal anchor is not closed because
+  `compute_dashi_ratio` is not wired for the Z-peak lane.
+- W2 and W3 remain blocked on constructorless authority tokens.
+- GR remains an obligation surface gated on W4 anchor, W4 authority, matter
+  field, stress-energy tensor, then the discrete Einstein-equation law.
+- W5 remains blocked on an external PDF packet with provider fields.
+
+F:
+- W9 first missing remains
+  `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+  canonical15Dimension`.
+- W4 first missing moved from local t21/t22 artifacts to
+  `missingDirtyZPeakPredictionAPI`.
+- W3 first missing remains `W3AcceptedEvidenceAuthorityToken`, with packet
+  fields complete for external review.
+- W2 first missing remains `NaturalP2ConvergencePromotionAuthorityToken`.
+- W5 first missing is the external PDF packet fields.
+
+| Lane | Worker | Agent | Assignment | Result | Status |
+|---|---|---|---|---|---|
+| `W9-canonical-15-qcore` | `Planck` | `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) | Verify the proposed canonical-state `refl` proof against the actual W9 kill route. | `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records the concrete canonical-15 counterexample and rejects the proposed close. | completed; W9 still blocked |
+| `W4-zpeak-data-anchor` | `Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Retrieve t21/t22, bind digests/schema, run dirty Z-peak path if possible. | t21/t22 CSVs and checksum file are local; runner parses 18-bin measurement and 18 x 18 covariance, then exits at missing prediction API. | completed; data resolved, prediction blocked |
+| `GR-matter-coupling-queue` | `Gauss` | `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) | Normalize the W4-gated GR matter queue without promoting GR. | `EinsteinEquationCandidate.agda` names W4 anchor, W4 authority, matter field, stress-energy tensor, then Einstein-equation law. | completed; obligation only |
+| `W3-authority-token-packet` | `Curie-W3` | `Curie` (`019df44c-dbff-7e62-9227-da4b82ffc438`) | Tighten HEP-R55 accepted-authority token packet. | `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda` now binds HEP-R53 witness values and records no missing packet fields, but no token. | completed; external token outstanding |
+| `W2-governance-intake` | `Newton` | `Bohr` (`019df685-f6a8-77d1-8fff-f9b7e25b89ae`) | Record W2 promotion authority governance intake. | `W2GovernanceSelfIssuanceIntakeRequest.agda` records landed evidence and keeps self-issuance unavailable. | completed; governance blocked |
+| `W5-pdf-intake` | `Maxwell` | `Kierkegaard` (`019df685-f767-7342-859a-4db5fdcd9336`) | Formalize CT18/MSHT/LHAPDF external packet requirements. | `W5CT18ExternalIntakeReceipt.agda` lists required PDF packet fields and keeps W5 external/not ready. | completed; external PDF blocked |
+
 ## Active Assignment Round -- W9/Qcore + W4/GR Governance Audit
 
 Round date: `2026-05-05`

@@ -15,18 +15,22 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 open import Data.Empty using (⊥)
+open import Data.Integer using (+_)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Nat using (_≤_)
+open import Data.Product using (_,_)
 
-open import DASHI.Arithmetic.ArithmeticIntegerEmbedding using (Int)
-
+import DASHI.Arithmetic.ArithmeticIntegerEmbedding as AIE
 import DASHI.Arithmetic.MaxPressure as Max
 import DASHI.Arithmetic.WeightedPressure as Weighted
 import DASHI.Physics.Closure.BlockerKillConditions as Kill
 import DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation as W9
+import DASHI.Physics.Closure.DeltaToQuadraticBridgeTheorem as DQ
 
 data W9QcoreCompatibilityClaimStatus : Set where
   weightedSupportNotQcoreCompatibility :
+    W9QcoreCompatibilityClaimStatus
+  proposedReflRejectedByCanonical15Counterexample :
     W9QcoreCompatibilityClaimStatus
 
 WeightedSupportBoundType : Set
@@ -47,6 +51,16 @@ record W9CancellationPressureQcoreCompatibilityDiagnostic : Setω where
 
     canonical15ExistingRouteObstructed :
       Canonical15QcoreCompatibilityType → ⊥
+
+    canonical15PressureWitnessCounterexample :
+      (+ (AIE.deltaSum W9.one W9.three))
+      W9.≢
+      (DQ.contractionEnergy
+        W9.canonical15Theorem
+        (DQ.canonicalDeltaTransport
+          W9.canonical15Theorem
+          W9.canonical15Dimension
+          (W9.one , W9.three)))
 
     blockerKillCondition :
       Kill.KillCondition
@@ -81,6 +95,8 @@ canonicalW9CancellationPressureQcoreCompatibilityDiagnostic =
         Max.weightedMaxPressure≤weightedSupport
     ; canonical15ExistingRouteObstructed =
         W9.canonical15ExistingPressureWitnessObstruction
+    ; canonical15PressureWitnessCounterexample =
+        W9.canonical15PressureWitnessConcreteMismatch
     ; blockerKillCondition =
         Kill.w9KillCondition
     ; blockerKillConditionIsW9 =
@@ -88,7 +104,7 @@ canonicalW9CancellationPressureQcoreCompatibilityDiagnostic =
     ; blockerKillConditionStillBlocked =
         refl
     ; status =
-        weightedSupportNotQcoreCompatibility
+        proposedReflRejectedByCanonical15Counterexample
     ; firstMissingType =
         "DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation.ExistingCancellationPressureCompatibilityObligation canonical15Theorem canonical15Dimension"
     ; exactKillReceiptTypeName =
@@ -97,6 +113,7 @@ canonicalW9CancellationPressureQcoreCompatibilityDiagnostic =
         "weightedSupport has type Int -> Int -> Nat and is used as an upper bound target"
         ∷ "weightedMaxPressure≤weightedSupport proves a Nat inequality, not a Qcore equality"
         ∷ "ExistingCancellationPressureCompatibilityObligation requires an ℤ equality to contractionEnergy after canonicalDeltaTransport"
+        ∷ "The proposed refl route is rejected at the canonical-15 counterexample input (one , three)"
         ∷ "canonical15ExistingPressureWitnessObstruction rejects that exact canonical-15 pressure witness"
         ∷ "BlockerKillConditions.W9KillReceipt is not constructed here"
         ∷ []

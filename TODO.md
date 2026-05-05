@@ -6,6 +6,28 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+W9/W4/governance/PDF tranche result `2026-05-05`: the proposed W9 canonical
+`refl` close is rejected against the actual theorem-facing route.
+`W9CancellationPressureQcoreCompatibilityReceipt.agda` now records the
+canonical-15 pressure witness counterexample at `(one , three)` and keeps the
+first missing type as
+`ExistingCancellationPressureCompatibilityObligation canonical15Theorem
+canonical15Dimension`. W4 t21/t22 public artifacts are now local and
+digest-bound: `ins2079374_phistar_mass_76-106_t21.csv` SHA-256
+`4ece677d0e2640a786351e19d0190454aeb3dc49f7e6fbda4814e3fe88dc3270` and
+`ins2079374_Covariance_phistar_mass_76-106_t22.csv` SHA-256
+`718588d67d3c41195d25a6f01c4ff4bcf2d0d85c193e27ebd22925474a0d9ea7`.
+`scripts/run_t43_projection.py --mode dirty-z-peak` parses 18 measurement bins
+and an 18 x 18 covariance matrix, then exits fail-closed at
+`missingDirtyZPeakPredictionAPI`; W4 internal anchor is not closed. W3
+accepted-authority intake is packet-complete for external review but still
+blocked on `W3AcceptedEvidenceAuthorityToken`. W2 now has
+`W2GovernanceSelfIssuanceIntakeRequest.agda`, still blocked on
+`NaturalP2ConvergencePromotionAuthorityToken`. W5 now has
+`W5CT18ExternalIntakeReceipt.agda`, still blocked on external PDF packet
+fields. GR's matter-coupling queue now starts with W4 anchor, then W4
+authority, matter field, stress-energy tensor, and the discrete Einstein law.
+
 W9/Qcore + W4/GR governance assignment result `2026-05-05`: the proposed W9
 one-line close does not type-check against the actual kill route.
 `W9CancellationPressureQcoreCompatibilityReceipt.agda` records that
