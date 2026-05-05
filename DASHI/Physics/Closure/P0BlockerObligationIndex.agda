@@ -111,6 +111,7 @@ import DASHI.Physics.Closure.W5W6PhysicsConsumerSourceInventory as HEPR19
 import DASHI.Interop.PNFResidualConsumerReceiptRequestPack as W6Pack
 import DASHI.Physics.Closure.CancellationPressureRetargetConsumerAcceptanceRequestPack as W9Pack
 import DASHI.Physics.Closure.CancellationPressureRetargetConsumerSourceDiagnostic as W9Source
+import DASHI.Physics.Closure.W9PairTransportBridgeObstruction as W9PairBridge
 
 ------------------------------------------------------------------------
 -- P0 blocker obligation index.
@@ -173,6 +174,8 @@ data P0WorkerLane : Set where
   W8OriginPromotionExternalRequestPack :
     P0WorkerLane
   W9RetargetConsumerAcceptanceRequestPack :
+    P0WorkerLane
+  W9PairTransportBridgeObstruction :
     P0WorkerLane
   W3AcceptedAuthorityExternalReceiptRequestPack :
     P0WorkerLane
@@ -659,6 +662,9 @@ record P0BlockerObligationIndex : Setω where
     w9RetargetConsumerAcceptanceRequestPack :
       W9Pack.RetargetConsumerAcceptanceRequestPack
 
+    w9PairTransportBridgeObstruction :
+      W9PairBridge.W9PairTransportBridgeObstruction
+
     indexBoundary :
       List String
 
@@ -694,6 +700,7 @@ p0BlockerObligationIndex =
         ∷ W5GRQFTClosurePromotionReceiptRequestPack
         ∷ W8OriginPromotionExternalRequestPack
         ∷ W9RetargetConsumerAcceptanceRequestPack
+        ∷ W9PairTransportBridgeObstruction
         ∷ W3AcceptedAuthorityExternalReceiptRequestPack
         ∷ W4PhysicalCalibrationExternalReceiptRequestPack
         ∷ P0ProviderReceiptRequestIndex
@@ -994,6 +1001,8 @@ p0BlockerObligationIndex =
         W9Source.currentCancellationPressureRetargetConsumerSourceDiagnostic
     ; w9RetargetConsumerAcceptanceRequestPack =
         W9Pack.canonicalRetargetConsumerAcceptanceRequestPack
+    ; w9PairTransportBridgeObstruction =
+        W9PairBridge.canonicalW9PairTransportBridgeObstruction
     ; indexBoundary =
         "This index imports the W1-W9 current obligation surfaces"
         ∷ "It is a validation and discoverability surface only"
