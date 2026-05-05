@@ -6,6 +6,26 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+Next-six blocker parallel assignment `2026-05-05`:
+`W0` assigned six disjoint lanes under orchestrator id
+`next-six-blockers-2026-05-05`. `Maxwell-Faraday` owns the W4/W5 shared
+PDF-intake packet, `Planck` owns the W9 theorem-interface bridge,
+`Curie-W3` owns the W3 authority-token packet audit, `Newton` owns the W2
+promotion-token audit, `Hypatia-Faraday` owns the W4 calibration/matter-source
+queue, and `Gauss` owns the GR Einstein-law queue. Promotion guards remain:
+no W4/W5 close without external PDF provenance and computed correction, no W9
+close without the actual theorem-facing interface inhabited, no W2/W3 token
+fabrication, and no GR promotion before W4 matter/stress-energy exists.
+Round result: Boole tightened the shared W4/W5 PDF packet and W5 extraction
+contract; Peirce sharpened the W4 post-PDF calibration/matter-source chain;
+Planck, Curie, Newton, and Euclid returned no-change audits preserving their
+current blockers. W4/W5 first missing remains
+`missingSharedCT18MSHTLHAPDFPartonLuminosityIntake`; W9 first missing remains
+the B4 weighted-Qcore-to-actual-transport bridge; W3 first missing remains
+`W3AcceptedEvidenceAuthorityToken`; W2 first missing remains
+`NaturalP2ConvergencePromotionAuthorityToken`; GR remains W4
+matter/stress-energy gated.
+
 Maxwell-Faraday merged W4/W5 PDF dependency result `2026-05-05`:
 `W4W5PDFSharedDependencyDiagnostic.agda` records the common upstream first
 missing item:

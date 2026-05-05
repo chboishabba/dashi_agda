@@ -2,6 +2,20 @@
 
 ## 2026-05-05
 
+- assign next-six blocker parallel tranche:
+  `Docs/WorkerCoordinationBoard.md` now records orchestrator id
+  `next-six-blockers-2026-05-05` with six disjoint lanes: W4/W5 shared PDF
+  intake, W9 theorem-interface bridge, W3 authority-token audit, W2
+  promotion-token audit, W4 calibration/matter-source queue, and GR
+  Einstein-law queue. `W4W5PDFSharedDependencyDiagnostic.agda` and
+  `W5PDFCarrierExternalIntakeRequest.agda` now include exact PDF packet
+  precision fields, local no-LHAPDF audit facts, and W4/W5 extraction
+  contracts. `W4PhysicalCalibrationObligationSurface.agda` now records the
+  post-PDF chain from shared PDF-backed Z-peak adequacy to external physical
+  calibration, `matterFieldFromW4`, and `stressEnergyTensorFromW4`. W9, W3,
+  W2, and GR returned no-change audits that preserve the current blockers and
+  construct no promotions or authority tokens.
+
 - record merged W4/W5 PDF dependency:
   `W4W5PDFSharedDependencyDiagnostic.agda` now records that W4 dirty Z-peak
   shape adequacy and W5 t45 correction share the same upstream

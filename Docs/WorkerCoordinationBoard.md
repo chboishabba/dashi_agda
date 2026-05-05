@@ -99,6 +99,95 @@ F:
 
 ## Active Assignment Round -- W9/W4/Governance/PDF Tranche
 
+## Active Assignment Round -- Next-Six Blocker Parallel Assignment
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated`
+orchestrator_id: `next-six-blockers-2026-05-05`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned six independent blocker lanes after `4ee422c`.
+- Each worker owns one bounded surface and must return a typed receipt,
+  diagnostic, or no-change audit.
+
+R:
+- Advance the highest-priority first-missing item in each lane without prose
+  promotion.
+- Preserve constructorless-token and external-authority boundaries.
+- Use `timeout 30s agda <target>` for any touched Agda module.
+
+C:
+- W4/W5 shared PDF: `W4W5PDFSharedDependencyDiagnostic.agda` and W5 PDF
+  intake surfaces.
+- W9 theorem bridge: `W9CancellationPressureQcoreCompatibilityReceipt.agda`
+  and direct W9 imports/usages.
+- W3 authority: `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda`.
+- W2 governance: `W2PromotionAuthorityReceipt.agda`,
+  `W2GovernanceSelfIssuanceIntakeRequest.agda`, and direct policy surfaces.
+- W4 calibration/matter: W4 calibration authority and matter-source request
+  surfaces.
+- GR: `EinsteinEquationCandidate.agda` and direct GR diagnostics.
+
+S:
+- W4 and W5 now share one PDF/parton-luminosity first-missing item.
+- W9 is the last high-priority internal theorem-interface bridge, but the
+  current kill route is pair-transport-facing, not a unary `Nat` bound.
+- W3 and W2 are packet/math-complete respectively, but token-blocked.
+- W4 matter coupling and GR Einstein-law work are downstream of PDF-backed W4
+  adequacy and calibration authority.
+
+L:
+- `rg/read interface` -> `typed receipt or diagnostic` ->
+  `timeout 30s agda <touched module>` when changed ->
+  `BlockerKillConditions.agda` only for claimed status changes ->
+  `git diff --check`.
+
+P:
+- `Maxwell-Faraday` / `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) owns
+  the W4/W5 shared PDF intake packet.
+- `Planck` / `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) owns the W9
+  theorem-interface bridge.
+- `Curie-W3` / `Curie` (`019df44c-dbff-7e62-9227-da4b82ffc438`) owns the W3
+  authority-token packet audit.
+- `Newton` / `Feynman` (`019df6d9-bdfd-7892-b9fc-00fcb13061d5`) owns the W2
+  promotion-authority token audit.
+- `Hypatia-Faraday` / `Peirce` (`019df6d9-c057-7d63-905a-8cd36e23abf7`) owns
+  the W4 calibration authority and matter-source queue.
+- `Gauss` / `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) owns the GR
+  discrete Einstein-law queue.
+
+G:
+- No W4/W5 promotion without external PDF provenance and computed correction.
+- No W9 close unless the actual theorem-facing interface is inhabited and
+  accepted by the repo kill surfaces.
+- No W2/W3 token fabrication.
+- No W4 calibration authority, matter field, stress-energy tensor, GR
+  recovery, Bianchi identity, Einstein-equation, or continuum-limit promotion.
+
+F:
+- W4/W5 first missing:
+  `missingSharedCT18MSHTLHAPDFPartonLuminosityIntake`.
+- W9 first missing: `wQcoreBound≡QcoreCompatBound` or equivalent bridge into
+  the actual W9 transport.
+- W3 first missing: `W3AcceptedEvidenceAuthorityToken`.
+- W2 first missing: `NaturalP2ConvergencePromotionAuthorityToken`.
+- W4 calibration/matter first missing: PDF-backed W4 adequacy, then
+  `Candidate256PhysicalCalibrationExternalReceipt`, then `matterFieldFromW4`.
+- GR first missing: W4 matter/stress-energy interface before
+  `G_mu_nu = 8pi T_mu_nu`.
+
+| Lane | Worker | Agent | Assignment | Return contract | Status |
+|---|---|---|---|---|---|
+| `W4-W5-shared-pdf-intake` | `Maxwell-Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Sharpen the CT18/MSHT/LHAPDF-compatible packet fields that jointly unblock W4 shape adequacy and W5 t45 correction. | `W4W5PDFSharedDependencyDiagnostic.agda` and `W5PDFCarrierExternalIntakeRequest.agda` now require exact PDF set/version, grid checksums, parton-luminosity convention, x/Q2 mapping, W4/W5 extraction contract, tolerance, and provenance. Local audit found HEPData CSVs present but no LHAPDF/CT18/MSHT/NNPDF grid or tooling. | completed; shared external PDF blocked |
+| `W9-theorem-interface-bridge` | `Planck` | `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) | Read the actual canonical-15/Qcore kill interface and either wire a non-postulated bridge or return the exact type mismatch. | No-change audit with targeted Agda pass: W9 accepts only existing compatibility or weighted replacement routes; unary `Nat` bound still cannot inhabit the pair-transport equality. First missing remains `wQcoreBound≡QcoreCompatBound` or equivalent transport alias. | completed; W9 still blocked |
+| `W3-authority-token-audit` | `Curie-W3` | `Curie` (`019df44c-dbff-7e62-9227-da4b82ffc438`) | Confirm HEP-R55 packet completeness against current HEP-R53 evidence. | No-change audit: HEP-R53 artifact SHA, projection digest, witness bin/pred/data/unc/pull all present; packet-ready remains true and first missing remains external `W3AcceptedEvidenceAuthorityToken`. | completed; external token outstanding |
+| `W2-promotion-token-audit` | `Newton` | `Feynman` (`019df6d9-bdfd-7892-b9fc-00fcb13061d5`) | Search for a legitimate `NaturalP2ConvergencePromotionAuthorityToken` constructor or policy hook. | No-change audit: token datatype is empty, eliminator confirms uninhabited, and no legitimate constructor/policy hook exists. | completed; governance blocked |
+| `W4-calibration-matter-source` | `Hypatia-Faraday` | `Peirce` (`019df6d9-c057-7d63-905a-8cd36e23abf7`) | Verify the post-PDF W4 calibration authority and matter-source first-missing chain. | `W4PhysicalCalibrationObligationSurface.agda` now records `missingSharedPDFBackedZPeakShapeAdequacy -> missingExternalPhysicalCalibrationReceipt -> missingMatterFieldFromW4 -> missingStressEnergyTensorFromW4`; no authority, matter field, stress-energy tensor, or W4 promotion. | completed; W4 still blocked |
+| `GR-einstein-law-queue` | `Gauss` | `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) | Keep GR gated on W4/PDF/calibration/matter stress-energy and patch only if stale. | No-change audit: `EinsteinEquationCandidate.agda` already names `W4MatterStressEnergyInterfaceReceipt`, `G_mu_nu = 8pi T_mu_nu`, and the W4/PDF/calibration/matter/stress-energy queue. | completed; obligation only |
+
 Round date: `2026-05-05`
 Round owner: `W0 orchestrator / integrator`
 Round status: `integrating`

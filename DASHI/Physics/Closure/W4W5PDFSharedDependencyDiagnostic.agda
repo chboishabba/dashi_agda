@@ -75,6 +75,12 @@ record W4W5PDFSharedDependencyDiagnostic : Setω where
     sharedProviderPayload :
       List String
 
+    packetPrecisionFields :
+      List String
+
+    localPDFIntakeAudit :
+      List String
+
     dependencyRationale :
       List String
 
@@ -136,6 +142,22 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "computed W5 t45 correction targeting 0.8804486068"
         ∷ "W4 Z-peak shape adequacy statement under the same PDF/parton-luminosity conventions"
         ∷ "authority/provenance receipt for the external PDF table or equivalent mass-kernel route"
+        ∷ []
+    ; packetPrecisionFields =
+        "PDF set/version: exact family, member, error-set prescription, perturbative order, alpha_s value, and release label"
+        ∷ "grid checksum: LHAPDF .dat/.info checksum or provider-table digest for every grid used by W4 and W5"
+        ∷ "parton-luminosity convention: initial-state flavours, q qbar symmetrisation, collider energy, normalization, and bin integration rule"
+        ∷ "x/Q2 convention: mapping from each CMS-SMP-20-003 mass window to x1, x2, Q2 or Q, including bin-centre versus integrated treatment"
+        ∷ "W4 extraction: produce the dirty Z-peak 76-106 GeV shape prediction for the local t21/t22 covariance path and report chi2/dof against 298.8462841768543 baseline"
+        ∷ "W5 extraction: produce the 106-170 over 76-106 t45 correction factor and compare with target 0.8804486068"
+        ∷ "tolerance: state numerical tolerance, covariance treatment, PDF uncertainty treatment, and pass/fail criterion for both W4 shape and W5 t45"
+        ∷ "provenance: record provider, command/API, input filenames, checksums, timestamp, and no-manual-overfit attestation"
+        ∷ []
+    ; localPDFIntakeAudit =
+        "local HEPData t21/t22 and t45/t46 CSV artifacts are present under scripts/data/hepdata"
+        ∷ "no CT18/MSHT/NNPDF/LHAPDF grid or provider table was found under scripts/data in this lane"
+        ∷ "python importlib.util.find_spec(\"lhapdf\") returned absent"
+        ∷ "lhapdf-config and lhapdf executables were not found on PATH"
         ∷ []
     ; dependencyRationale =
         "The W4 dirty Z-peak data and covariance are local and parsed, but the current carrier-only shape fit is inadequate"
