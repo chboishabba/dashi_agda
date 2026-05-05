@@ -24,8 +24,8 @@ O:
   typed diagnostics, or no-change audits.
 
 R:
-- W4 must either wire a real Z-peak DASHI prediction API or name the exact
-  missing callable contract.
+- W4 must either wire a governed Z-peak DASHI prediction path or name the exact
+  remaining adequacy gap.
 - W9 must attack the actual
   `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
   canonical15Dimension`, not the rejected naive equality.
@@ -43,9 +43,10 @@ C:
 - W5 PDF: W5 CT18/MSHT/LHAPDF intake modules only.
 
 S:
-- Worktree started clean at `8fd1615`.
-- t21/t22 artifacts are local and parsed; W4 is blocked on
-  `missingDirtyZPeakPredictionAPI`.
+- Worktree started clean at `8fd1615`, then checkpointed at `26f6354`.
+- t21/t22 artifacts are local and parsed; W4 now accepts a declared
+  uncalibrated Z-peak shape callable plus one scalar fit, but the fit is not
+  adequate.
 - W9 has a concrete `(one , three)` counterexample to the naive pressure/Qcore
   equality route.
 - W2 and W3 authority tokens remain constructorless under current governance.
@@ -75,7 +76,7 @@ G:
   correction.
 
 F:
-- W4 first missing: `missingDirtyZPeakPredictionAPI`.
+- W4 first missing: `missingDirtyZPeakShapeAdequacy`.
 - W9 first missing:
   `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
   canonical15Dimension`.
@@ -86,7 +87,7 @@ F:
 
 | Lane | Worker | Agent | Assignment | Result | Status |
 |---|---|---|---|---|---|
-| `W4-zpeak-prediction-api` | `Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Wire or diagnose the real Z-peak `compute_dashi_ratio` path for `dirty-z-peak`. | Runner now rejects existing ratio predictors for `dirty-z-peak` unless metadata declares an absolute t21 `d sigma/d phistar [pb]` prediction contract; W4 receipt diagnostics name the exact missing callable contract. | completed; prediction-contract blocked |
+| `W4-zpeak-prediction-api` | `Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Wire or diagnose the real Z-peak `compute_dashi_ratio` path for `dirty-z-peak`. | Runner now accepts `DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape` as an uncalibrated shape callable and fits one covariance-weighted scalar; result is inadequate at chi2/dof `298.8462841768543`, so W4 remains blocked on shape adequacy. | completed; shape-fit inadequate |
 | `W9-canonical-15-theorem-route` | `Planck` | `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) | Map the proposed weighted-Qcore-bound route to the actual canonical-15 obligation, or produce the exact mismatch diagnostic. | Weighted-Qcore route does not inhabit the existing route: it still requires `WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy`, already obstructed at `(one , one)`. | completed; W9 still blocked |
 | `W3-authority-packet-audit` | `Curie-W3` | `Curie` (`019df44c-dbff-7e62-9227-da4b82ffc438`) | Confirm HEP-R55 packet completeness and sharpen provider handoff only if stale. | No-change audit: packet is complete with no missing packet fields; first missing remains external `W3AcceptedEvidenceAuthorityToken`. | completed; external token outstanding |
 | `W2-token-policy-audit` | `Newton` | `Hooke` (`019df69c-1244-7a53-99f0-551c2d122e32`) | Find any legitimate W2 authority-token constructor/policy hook, or preserve the governance boundary. | No-change audit: token type is empty, `naturalP2ConvergencePromotionAuthorityUnavailable` eliminates it, and no legitimate constructor/policy hook exists. | completed; governance blocked |

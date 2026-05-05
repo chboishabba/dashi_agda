@@ -139,6 +139,31 @@ def predict_ratio_106_170_over_76_106(bins: list[dict[str, Any]]) -> list[float]
     return _predict_ratio_for_mass_windows(bins, MASS_WINDOW_106_170_GEV, MASS_WINDOW_76_106_GEV)
 
 
+def predict_dirty_z_peak_shape(bins: list[dict[str, Any]]) -> list[float]:
+    """Return the uncalibrated 76-106 GeV phi-star shape for W4.
+
+    The t21 table is an absolute ``d sigma / d phi* [pb]`` surface.  This
+    internal construction does not carry the physical ``pb`` unit calibration,
+    so this callable deliberately returns only the same finite-construction
+    shape used by ``sigma_DASHI``.  The dirty Z-peak runner may fit exactly one
+    scalar calibration factor against t21/t22 and record that factor as a W4
+    calibration anchor.  Observed values, uncertainties, and covariance entries
+    are not read here.
+    """
+
+    if not isinstance(bins, list):
+        raise TypeError("predict_dirty_z_peak_shape expects list[dict] bin records")
+    return [
+        sigma_DASHI(
+            MASS_WINDOW_76_106_GEV[0],
+            MASS_WINDOW_76_106_GEV[1],
+            _finite_edge(item, "phiStarLow"),
+            _finite_edge(item, "phiStarHigh"),
+        )
+        for item in bins
+    ]
+
+
 def sigma_DASHI(m_lo: float, m_hi: float, phi_lo: float, phi_hi: float) -> float:
     """Compute an internal finite-enumeration sigma for one mass window/bin.
 
@@ -170,6 +195,9 @@ def metadata() -> dict[str, Any]:
     return {
         "callable": "DASHI.Physics.Prediction.sigma_dashi:predict_ratio",
         "sigmaCallable": "DASHI.Physics.Prediction.sigma_dashi:sigma_DASHI",
+        "dirtyZPeakShapePredictionCallable": "DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape",
+        "supportsDirtyZPeakShapePrediction": True,
+        "supportsDirtyZPeakAbsolutePrediction": False,
         "classification": CONSTRUCTION_CLASSIFICATION,
         "acceptedEmpiricalAdequacyReceipt": ACCEPTED_EMPIRICAL_ADEQUACY_RECEIPT,
         "observedT43RatioSeeding": OBSERVED_T43_RATIO_SEEDING,

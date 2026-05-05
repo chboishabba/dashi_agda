@@ -13,10 +13,10 @@ import DASHI.Physics.Closure.W4CalibrationRatioZPeakReceiptRequestSurface as ZPe
 --
 -- Faraday retrieved the local W4 Z-peak t21/t22 CSVs and bound their digests
 -- and parser-visible schema.  The dirty boundary path now parses the real
--- measurement/covariance numerics but rejects existing ratio predictors
--- because no callable declares the absolute t21 Z-peak prediction contract.
--- This file is therefore a non-promoting prepared-anchor diagnostic, not a
--- calibration receipt.
+-- measurement/covariance numerics.  A declared Z-peak shape callable now runs
+-- through a one-parameter covariance-weighted scale fit, but the current shape
+-- is not adequate.  The fitted scalar is a dirty calibration diagnostic, not
+-- an upstream physical unit authority.
 
 data W4ZPeakCalibrationAnchorWorkerStatus : Set where
   blockedByMissingT21T22ArtifactsAndRunnerInterface :
@@ -24,6 +24,8 @@ data W4ZPeakCalibrationAnchorWorkerStatus : Set where
   preparedWithT21T22ArtifactsAndPredictionMissing :
     W4ZPeakCalibrationAnchorWorkerStatus
   preparedWithT21T22ArtifactsAndPredictionContractMissing :
+    W4ZPeakCalibrationAnchorWorkerStatus
+  preparedWithT21T22ArtifactsAndInadequateShapeFit :
     W4ZPeakCalibrationAnchorWorkerStatus
 
 record W4ZPeakCalibrationAnchorMissingArtifactDiagnostic : Setω where
@@ -85,6 +87,24 @@ record W4ZPeakCalibrationAnchorMissingArtifactDiagnostic : Setω where
     exactMissingPredictionContract :
       String
 
+    acceptedShapePredictionCallable :
+      String
+
+    shapeFitCalibrationScale :
+      String
+
+    shapeFitChi2PerDof :
+      String
+
+    shapeFitProjectionDigest :
+      String
+
+    shapeFitFirstBinPull :
+      String
+
+    shapeFitLastBinPull :
+      String
+
     observedLocalCacheFiles :
       List String
 
@@ -120,7 +140,7 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic :
 canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
   record
     { status =
-        preparedWithT21T22ArtifactsAndPredictionContractMissing
+        preparedWithT21T22ArtifactsAndInadequateShapeFit
     ; requestSurface =
         ZPeak.canonicalW4CalibrationRatioZPeakReceiptRequestSurface
     ; supportDiagnostic =
@@ -150,13 +170,25 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
     ; firstTotalCovarianceDiagonal =
         "t22 Total uncertainty [(pb)^2] covariance[0,0] = 8552.8"
     ; dirtyRunnerProjectionDigest =
-        "a287c094d2f27e3ba6e84bbaaa2482b07ea79b37aaa2d3124fecc0afe94870ef"
+        "36191efc92cb3c9b1641c9206171a307c4796369a4acd1485bf87d1051662b8b"
     ; rejectedPredictionCallable =
         "DASHI.Physics.Prediction.sigma_dashi:predict_ratio"
     ; rejectedPredictionCallableStatus =
         "rejected: loaded callable is a t43 ratio predictor and does not declare supportsDirtyZPeakAbsolutePrediction metadata for t21 d sigma/d phistar [pb]"
     ; exactMissingPredictionContract =
-        "batch callable list[bin dict] -> list[float] for t21 Z-peak absolute d sigma/d phistar [pb], with metadata supportsDirtyZPeakAbsolutePrediction true and dirtyZPeakAbsolutePredictionCallable matching the supplied module:function"
+        "batch callable list[bin dict] -> list[float] with metadata supportsDirtyZPeakShapePrediction true for uncalibrated shape plus runner-side scalar fit, or supportsDirtyZPeakAbsolutePrediction true for externally calibrated pb predictions"
+    ; acceptedShapePredictionCallable =
+        "DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape"
+    ; shapeFitCalibrationScale =
+        "230534508.31238452"
+    ; shapeFitChi2PerDof =
+        "298.8462841768543"
+    ; shapeFitProjectionDigest =
+        "36191efc92cb3c9b1641c9206171a307c4796369a4acd1485bf87d1051662b8b"
+    ; shapeFitFirstBinPull =
+        "-67.35457265472463"
+    ; shapeFitLastBinPull =
+        "-51.62836040061707"
     ; observedLocalCacheFiles =
         "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
         ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
@@ -184,14 +216,15 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
     ; absentRunnerFlags =
         []
     ; numericRunStatus =
-        "prepared-not-closed: dirty-z-peak run parsed t21/t22 digests/schema and exited 42 prediction-contract-missing when given the existing ratio predictor"
+        "prepared-not-closed: dirty-z-peak run parsed t21/t22 digests/schema, accepted the declared Z-peak shape callable, fitted one scalar, and produced chi2/dof 298.8462841768543"
     ; firstMissing =
-        ZPeak.missingDirtyZPeakPredictionAPI
+        ZPeak.missingDirtyZPeakShapeAdequacy
     ; nextProviderAction =
-        "supply a real absolute t21 Z-peak prediction API satisfying exactMissingPredictionContract before any comparison law or W4 internal anchor closure is recorded"
+        "supply a materially better Z-peak shape law or an externally calibrated absolute t21 prediction before any comparison law or W4 internal anchor closure is recorded"
     ; nonPromotionBoundary =
         "This diagnostic records a prepared local t21/t22 feasibility check for the W4 Z-peak dirty boundary run"
         ∷ "It does not construct W4SameRecordZPeakRatioCalibrationLaw"
+        ∷ "It records a failed dirty shape-fit diagnostic, not an adequate W4 anchor"
         ∷ "It does not construct Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "It does not construct Candidate256PhysicalCalibrationExternalReceipt"
         ∷ "It does not construct physical unit calibration, dimensional preservation, or W4 promotion"

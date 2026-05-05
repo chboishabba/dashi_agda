@@ -250,26 +250,34 @@ def load_prediction_api(spec: str | None) -> tuple[Callable[[list[dict[str, Any]
     return function, f"loaded {spec}"
 
 
-def dirty_z_peak_prediction_contract_error(spec: str | None, value_column: str) -> str | None:
+def dirty_z_peak_prediction_contract_status(spec: str | None, value_column: str) -> tuple[str, str | None]:
     if value_column == "Ratio":
-        return None
+        return "ratio", None
     if not spec:
-        return "no --prediction-api supplied for absolute t21 Z-peak d sigma/d phistar [pb]"
+        return "missing", "no --prediction-api supplied for t21 Z-peak d sigma/d phistar [pb]"
     module_name, _, function_name = spec.partition(":")
     try:
         module = importlib.import_module(module_name)
         metadata_function = getattr(module, "metadata", None)
         metadata = metadata_function() if callable(metadata_function) else {}
     except Exception as exc:
-        return f"prediction API metadata unavailable for dirty-z-peak: {exc}"
+        return "invalid", f"prediction API metadata unavailable for dirty-z-peak: {exc}"
 
-    supports = metadata.get("supportsDirtyZPeakAbsolutePrediction") is True
-    declared_function = metadata.get("dirtyZPeakAbsolutePredictionCallable") == spec
-    if supports and declared_function:
-        return None
+    supports_absolute = metadata.get("supportsDirtyZPeakAbsolutePrediction") is True
+    declared_absolute = metadata.get("dirtyZPeakAbsolutePredictionCallable") == spec
+    if supports_absolute and declared_absolute:
+        return "absolute", None
+
+    supports_shape = metadata.get("supportsDirtyZPeakShapePrediction") is True
+    declared_shape = metadata.get("dirtyZPeakShapePredictionCallable") == spec
+    if supports_shape and declared_shape:
+        return "shape-with-fitted-scale", None
+
     return (
+        "invalid",
         "dirty-z-peak requires a batch callable declared by metadata as "
-        "supportsDirtyZPeakAbsolutePrediction with dirtyZPeakAbsolutePredictionCallable "
+        "either supportsDirtyZPeakAbsolutePrediction with dirtyZPeakAbsolutePredictionCallable "
+        "or supportsDirtyZPeakShapePrediction with dirtyZPeakShapePredictionCallable "
         f"matching {spec!r}; {module_name}:{function_name} is not such a callable"
     )
 
@@ -280,6 +288,20 @@ def finalize_artifact(payload: dict[str, Any]) -> dict[str, Any]:
     stable = json.dumps(payload, sort_keys=True, separators=(",", ":"))
     payload["projectionDigest"] = hashlib.sha256(stable.encode("utf-8")).hexdigest()
     return payload
+
+
+def source_authority_for_mode(mode: str) -> dict[str, Any]:
+    if mode == "dirty-z-peak":
+        return {
+            "record": "ins2079374",
+            "measurementTableDoi": "10.17182/hepdata.115656.v1/t21",
+            "covarianceTableDoi": "10.17182/hepdata.115656.v1/t22",
+        }
+    return {
+        "record": "ins2079374",
+        "ratioTableDoi": "10.17182/hepdata.115656.v1/t43",
+        "covarianceTableDoi": "10.17182/hepdata.115656.v1/t44",
+    }
 
 
 def incomplete_artifact(
@@ -316,11 +338,7 @@ def incomplete_artifact(
             "runnerHashBinding": "caller-supplied",
             "worktreeCleanCertificate": "not asserted by this runner",
         },
-        "sourceAuthority": {
-            "record": "ins2079374",
-            "ratioTableDoi": "10.17182/hepdata.115656.v1/t43",
-            "covarianceTableDoi": "10.17182/hepdata.115656.v1/t44",
-        },
+        "sourceAuthority": source_authority_for_mode(mode),
         "inputs": {
             "digests": digest_results,
             "t43": t43,
@@ -355,6 +373,66 @@ def _validate_prediction_values(raw: Any, *, expected_len: int) -> list[float]:
     return values
 
 
+def _solve_linear_system(matrix: list[list[float]], vector: list[float]) -> list[float]:
+    n = len(vector)
+    if len(matrix) != n or any(len(row) != n for row in matrix):
+        raise ValueError("linear solve requires a square matrix matching the vector length")
+    augmented = [list(row) + [vector[index]] for index, row in enumerate(matrix)]
+    for column in range(n):
+        pivot_row = max(range(column, n), key=lambda row: abs(augmented[row][column]))
+        pivot = augmented[pivot_row][column]
+        if abs(pivot) < 1.0e-30:
+            raise ArithmeticError("covariance matrix is singular for scale fit")
+        if pivot_row != column:
+            augmented[column], augmented[pivot_row] = augmented[pivot_row], augmented[column]
+        pivot = augmented[column][column]
+        for item in range(column, n + 1):
+            augmented[column][item] /= pivot
+        for row in range(n):
+            if row == column:
+                continue
+            factor = augmented[row][column]
+            if factor == 0.0:
+                continue
+            for item in range(column, n + 1):
+                augmented[row][item] -= factor * augmented[column][item]
+    return [augmented[row][n] for row in range(n)]
+
+
+def _dot(left: list[float], right: list[float]) -> float:
+    return sum(a * b for a, b in zip(left, right, strict=True))
+
+
+def _fit_dirty_z_peak_scale(
+    shape_predictions: list[float],
+    data_values: list[float],
+    covariance: list[list[float]],
+) -> dict[str, Any]:
+    c_inv_data = _solve_linear_system(covariance, data_values)
+    c_inv_shape = _solve_linear_system(covariance, shape_predictions)
+    denominator = _dot(shape_predictions, c_inv_shape)
+    if denominator <= 0.0 or not math.isfinite(denominator):
+        raise ArithmeticError("non-positive denominator in dirty Z-peak scale fit")
+    numerator = _dot(shape_predictions, c_inv_data)
+    scale = numerator / denominator
+    if not math.isfinite(scale) or scale <= 0.0:
+        raise ArithmeticError("non-finite or non-positive dirty Z-peak scale fit")
+    scaled = [scale * value for value in shape_predictions]
+    residual = [prediction - data for prediction, data in zip(scaled, data_values, strict=True)]
+    c_inv_residual = _solve_linear_system(covariance, residual)
+    chi2 = _dot(residual, c_inv_residual)
+    dof = max(len(data_values) - 1, 1)
+    return {
+        "scale": scale,
+        "scaledPredictions": scaled,
+        "chi2": chi2,
+        "chi2PerDof": chi2 / dof,
+        "dof": dof,
+        "fitParameterCount": 1,
+        "method": "covariance-weighted scalar fit: argmin_A (A shape - data)^T C^-1 (A shape - data)",
+    }
+
+
 def completed_projection_artifact(
     *,
     mode: str,
@@ -364,6 +442,8 @@ def completed_projection_artifact(
     t44: dict[str, Any],
     prediction_api_status: str,
     predictions: list[float],
+    prediction_mode: str = "direct",
+    calibration: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     bins: list[dict[str, Any]] = []
     per_bin: list[dict[str, Any]] = []
@@ -422,11 +502,7 @@ def completed_projection_artifact(
             "runnerHashBinding": "caller-supplied",
             "worktreeCleanCertificate": "not asserted by this runner",
         },
-        "sourceAuthority": {
-            "record": "ins2079374",
-            "ratioTableDoi": "10.17182/hepdata.115656.v1/t43",
-            "covarianceTableDoi": "10.17182/hepdata.115656.v1/t44",
-        },
+        "sourceAuthority": source_authority_for_mode(mode),
         "inputs": {
             "digests": digest_results,
             "t43": {
@@ -446,14 +522,16 @@ def completed_projection_artifact(
         "predictionApi": {
             "expected": "batch callable: list[t43 bin dict] -> list[float]",
             "status": prediction_api_status,
+            "predictionMode": prediction_mode,
         },
+        "calibration": calibration,
         "bins": bins,
         "per_bin": per_bin,
         "comparison": {
-            "chi2": None,
-            "chi2PerDof": None,
+            "chi2": None if calibration is None else calibration["chi2"],
+            "chi2PerDof": None if calibration is None else calibration["chi2PerDof"],
             "perBinTwoSigmaLaw": None,
-            "status": "not-computed",
+            "status": "not-computed" if calibration is None else "dirty-z-peak-scale-fit",
         },
     })
 
@@ -553,10 +631,10 @@ def main() -> int:
         write_json(output_path, artifact)
         return EXIT_PREDICTION_MISSING
 
-    dirty_contract_error = (
-        dirty_z_peak_prediction_contract_error(args.prediction_api, t43["valueColumn"])
+    dirty_prediction_mode, dirty_contract_error = (
+        dirty_z_peak_prediction_contract_status(args.prediction_api, t43["valueColumn"])
         if args.mode == "dirty-z-peak"
-        else None
+        else ("direct", None)
     )
     if dirty_contract_error is not None:
         artifact = incomplete_artifact(
@@ -574,7 +652,7 @@ def main() -> int:
         return EXIT_PREDICTION_MISSING
 
     try:
-        predictions = _validate_prediction_values(
+        raw_predictions = _validate_prediction_values(
             prediction_api(t43["bins"]),
             expected_len=t43["rowCount"],
         )
@@ -593,6 +671,31 @@ def main() -> int:
         write_json(output_path, artifact)
         return EXIT_PREDICTION_INVALID
 
+    calibration = None
+    predictions = raw_predictions
+    if args.mode == "dirty-z-peak" and dirty_prediction_mode == "shape-with-fitted-scale":
+        try:
+            calibration = _fit_dirty_z_peak_scale(
+                raw_predictions,
+                [row["ratio"] for row in t43["bins"]],
+                t44["covariance"],
+            )
+            predictions = calibration["scaledPredictions"]
+        except Exception as exc:
+            artifact = incomplete_artifact(
+                mode=args.mode,
+                freeze_hash=args.freeze_hash,
+                digest_results=digest_results,
+                t43=t43,
+                t44=t44,
+                reason=f"dirty Z-peak scale fit failed: {exc}",
+                prediction_api_status=prediction_status,
+            )
+            artifact["failureCode"] = "calibration-fit-invalid"
+            artifact = finalize_artifact(artifact)
+            write_json(output_path, artifact)
+            return EXIT_PREDICTION_INVALID
+
     artifact = completed_projection_artifact(
         mode=args.mode,
         freeze_hash=args.freeze_hash,
@@ -601,6 +704,8 @@ def main() -> int:
         t44=t44,
         prediction_api_status=prediction_status,
         predictions=predictions,
+        prediction_mode=dirty_prediction_mode,
+        calibration=calibration,
     )
     write_json(output_path, artifact)
     return 0

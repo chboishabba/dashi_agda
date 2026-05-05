@@ -31,6 +31,8 @@ data W4PhysicalCalibrationFirstMissingPrerequisite : Set where
     W4PhysicalCalibrationFirstMissingPrerequisite
   missingT43RunnerGeneralizationForZPeakAnchor :
     W4PhysicalCalibrationFirstMissingPrerequisite
+  missingDirtyZPeakShapeAdequacy :
+    W4PhysicalCalibrationFirstMissingPrerequisite
   missingExternalPhysicalCalibrationReceipt :
     W4PhysicalCalibrationFirstMissingPrerequisite
   missingStrictPhysicalScaleSettingConsumer :
@@ -39,8 +41,7 @@ data W4PhysicalCalibrationFirstMissingPrerequisite : Set where
 canonicalW4PhysicalCalibrationFirstMissingPrerequisites :
   List W4PhysicalCalibrationFirstMissingPrerequisite
 canonicalW4PhysicalCalibrationFirstMissingPrerequisites =
-  missingSameRecordT21T22ArtifactReceipt
-  ∷ missingT43RunnerGeneralizationForZPeakAnchor
+  missingDirtyZPeakShapeAdequacy
   ∷ missingExternalPhysicalCalibrationReceipt
   ∷ missingStrictPhysicalScaleSettingConsumer
   ∷ []
@@ -137,12 +138,12 @@ canonicalW4PhysicalCalibrationObligationSurface =
     ; firstMissingPrerequisites =
         canonicalW4PhysicalCalibrationFirstMissingPrerequisites
     ; nextPrerequisite =
-        missingSameRecordT21T22ArtifactReceipt
+        missingDirtyZPeakShapeAdequacy
     ; strictPhysicalNextMissingIngredient =
         Ledger.candidate256RecommendedNextMissingIngredient
     ; exactNextObligationMapping =
-        "Z-peak first: bind t21 measurement and t22 covariance local artifacts from HEPData record ins2079374"
-        ∷ "Runner/cache blocker: current local support lacks t21/t22 cache and remains t43/t44-specific"
+        "Z-peak data/cache is present: t21 measurement and t22 covariance local artifacts from HEPData record ins2079374 are digest-bound"
+        ∷ "Runner blocker moved: dirty-z-peak accepts a declared uncalibrated shape callable plus one scalar fit, but current shape chi2/dof is 298.8462841768543"
         ∷ "Cross-band prerequisite: Candidate256 quotient/cross-band witness is available but remains pre-scale-setting"
         ∷ "Physical calibration prerequisite: external Candidate256 receipt must supply authority, unit carrier, calibration, factorization, and dimensional preservation"
         ∷ "Strict physical lane: recommended next chemistry-facing lane is scale setting, before spectra, bonding, and empirical validation"

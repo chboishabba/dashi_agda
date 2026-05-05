@@ -3,14 +3,17 @@
 ## 2026-05-05
 
 - integrate Z-peak/W9 theorem next-six assignment:
-  `scripts/run_t43_projection.py` now enforces an explicit dirty Z-peak
-  prediction contract. Existing t43/t45 ratio predictors are rejected for the
-  t21 absolute `d sigma/d phistar [pb]` lane unless module metadata declares
-  `supportsDirtyZPeakAbsolutePrediction` and the exact callable identity.
+  `scripts/run_t43_projection.py` now supports a governed dirty Z-peak
+  shape-fit path: a declared uncalibrated t21 shape callable is fitted with
+  one covariance-weighted scalar and the scalar is emitted as calibration
+  metadata. `DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape`
+  wires the existing finite `sigma_DASHI` construction into that path without
+  claiming upstream `pb` units. The current fit is inadequate
+  (`chi2/dof = 298.8462841768543`, scale `230534508.31238452`), so
   `W4CalibrationRatioZPeakReceiptRequestSurface.agda` and
-  `W4ZPeakCalibrationAnchorReceipt.agda` record the rejected ratio callable
-  and preserve the missing absolute prediction API as the W4 first missing
-  item. `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records
+  `W4ZPeakCalibrationAnchorReceipt.agda` move the W4 first missing item to
+  shape adequacy rather than calibration-anchor closure.
+  `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records
   that the weighted-Qcore route still depends on the obstructed
   cancellation-pressure to weighted-quadratic identification at `(one , one)`,
   so W9 remains blocked. `EinsteinEquationCandidate.agda` adds the future

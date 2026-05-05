@@ -6,15 +6,19 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
-Z-peak/W9 theorem next-six assignment result `2026-05-05`: W4 remains
-fail-closed but now has an exact prediction contract. `scripts/run_t43_projection.py`
-rejects existing ratio predictors for `--mode dirty-z-peak` unless their
-metadata declares `supportsDirtyZPeakAbsolutePrediction = true` and
-`dirtyZPeakAbsolutePredictionCallable` matching the supplied callable; the
-required output is absolute t21 `d sigma/d phistar [pb]` predictions, not
-t43/t45 ratios. `W4ZPeakCalibrationAnchorReceipt.agda` records the rejected
-`DASHI.Physics.Prediction.sigma_dashi:predict_ratio` callable and keeps W4
-blocked on `missingDirtyZPeakPredictionAPI`. W9 remains blocked:
+Z-peak/W9 theorem next-six assignment result `2026-05-05`: W4 now has a
+governed dirty Z-peak shape-fit path. `scripts/run_t43_projection.py` accepts
+declared uncalibrated shape callables for `--mode dirty-z-peak`, fits one
+covariance-weighted scalar, and keeps the scale as calibration metadata rather
+than pretending the predictor carried upstream `pb` units.
+`DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape` runs on t21/t22,
+but the fit is inadequate: chi2/dof `298.8462841768543`, scale
+`230534508.31238452`, first-bin pull `-67.35457265472463`, last-bin pull
+`-51.62836040061707`, projection digest
+`36191efc92cb3c9b1641c9206171a307c4796369a4acd1485bf87d1051662b8b`.
+`W4ZPeakCalibrationAnchorReceipt.agda` therefore moves W4 from
+`missingDirtyZPeakPredictionAPI` to `missingDirtyZPeakShapeAdequacy`; W4
+internal anchor is still not closed. W9 remains blocked:
 `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records that the
 weighted-Qcore candidate route still needs
 `WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy`,

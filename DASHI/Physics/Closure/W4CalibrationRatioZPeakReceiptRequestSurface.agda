@@ -142,6 +142,8 @@ data W4CalibrationRatioZPeakMissingRequirement : Set where
     W4CalibrationRatioZPeakMissingRequirement
   missingDirtyZPeakPredictionAPI :
     W4CalibrationRatioZPeakMissingRequirement
+  missingDirtyZPeakShapeAdequacy :
+    W4CalibrationRatioZPeakMissingRequirement
   missingTypedRatioArtifactReceipt :
     W4CalibrationRatioZPeakMissingRequirement
   missingResponseMatrixConsumptionLaw :
@@ -231,6 +233,12 @@ record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
     exactMissingPredictionContract :
       String
 
+    dirtyZPeakShapeFitStatus :
+      String
+
+    dirtyZPeakShapeFitChi2PerDof :
+      String
+
     diagnosticBoundary :
       List String
 
@@ -280,13 +288,17 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
     ; runnerProbeWithoutFreezeStatus =
         "timeout 30s python scripts/run_t43_projection.py --mode dirty-z-peak --data t21 --covariance t22 exits 2 before data access: required --freeze-hash is missing"
     ; runnerProbeWithFreezeStatus =
-        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-zpeak-contract --mode dirty-z-peak --data t21 --covariance t22 --prediction-api DASHI.Physics.Prediction.sigma_dashi:predict_ratio exits 42 with prediction-contract-missing"
+        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-zpeak-shape-fit --mode dirty-z-peak --data t21 --covariance t22 --prediction-api DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape exits 0 and emits a non-promoting scalar shape-fit artifact"
     ; runnerGeneralizationGap =
-        "CLI accepts --data/--covariance and binds t21/t22 digests/schema; W4 dirty projection refuses ratio predictors and still requires a real absolute t21 Z-peak prediction API before comparison numerics can close"
+        "CLI accepts --data/--covariance and binds t21/t22 digests/schema; W4 dirty projection accepts a declared Z-peak shape callable but the current shape-fit is not adequate"
     ; numericAnchorStatus =
-        "prepared-not-closed: t21 rowCount 18 value column d sigma/d phistar [pb]; t22 total covariance shape 18x18 symmetric; existing ratio API is rejected for dirty-z-peak"
+        "prepared-not-closed: t21 rowCount 18 value column d sigma/d phistar [pb]; t22 total covariance shape 18x18 symmetric; current shape fit chi2/dof 298.8462841768543"
     ; exactMissingPredictionContract =
-        "batch callable module:function whose metadata declares supportsDirtyZPeakAbsolutePrediction true and dirtyZPeakAbsolutePredictionCallable equal to that module:function; output must be absolute t21 d sigma/d phistar [pb] predictions, not t43/t45 ratios"
+        "batch callable module:function whose metadata declares either supportsDirtyZPeakAbsolutePrediction true or supportsDirtyZPeakShapePrediction true; shape callables are scalar-fit by the runner and must not claim upstream pb-unit calibration"
+    ; dirtyZPeakShapeFitStatus =
+        "completed-but-inadequate: DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape is accepted as an uncalibrated shape callable and fitted with one covariance-weighted scalar"
+    ; dirtyZPeakShapeFitChi2PerDof =
+        "298.8462841768543"
     ; diagnosticBoundary =
         "This diagnostic records script/data support only"
         ∷ "It does not construct a W4CalibrationRatioZPeakReceipt"
