@@ -50,6 +50,8 @@ data W5CT18ExternalPacketField : Set where
     W5CT18ExternalPacketField
   missingT45CorrectionComputation :
     W5CT18ExternalPacketField
+  missingAcceptedRapidityIntegrationConvention :
+    W5CT18ExternalPacketField
   missingCorrectionToleranceStatement :
     W5CT18ExternalPacketField
   missingPDFTableAuthorityReceipt :
@@ -148,6 +150,7 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ missingMassWindowConvention
         ∷ missingFlavourChannelConvention
         ∷ missingT45CorrectionComputation
+        ∷ missingAcceptedRapidityIntegrationConvention
         ∷ missingCorrectionToleranceStatement
         ∷ missingPDFTableAuthorityReceipt
         ∷ []
@@ -156,6 +159,7 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "missing 106-170 and 76-106 GeV mass-window convention"
         ∷ "missing flavour/channel convention"
         ∷ "local fixed-x CT18 central extraction computed 1.0506681065158017; missing accepted computation that targets 0.8804486068"
+        ∷ "local rapidity-window luminosity convention computed center ratio 0.13510406305538247 and window ratio 0.3348750784006896; missing accepted convention that maps CT18NLO onto the W5 target"
         ∷ "missing tolerance statement against 0.8804486068"
         ∷ "missing external PDF table authority/provenance receipt"
         ∷ []
@@ -166,6 +170,7 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "The required correction remains 0.8804486068"
         ∷ "Local CT18NLO artifact is present: archive SHA-256 c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213; central grid SHA-256 375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410"
         ∷ "Local parser extraction at x = 0.01 gives u-quark xfxQ ratio 1.0506681065158017, which does not satisfy the W5 target"
+        ∷ "Local parser rapidity-window DY luminosity integration gives t45/t43 center ratio 0.13510406305538247 and mass-window ratio 0.3348750784006896, which also do not satisfy the W5 target"
         ∷ "The confirmed internal DGLAP/LO carrier route remains insufficient for t45"
         ∷ "W5 is not externally ready until an accepted parton-luminosity/bin-integration convention and authority/provenance packet are supplied"
         ∷ []

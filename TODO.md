@@ -4919,3 +4919,15 @@ Cleanup
 - [x] Add a minimal bad-mode suppression surface across the LILA bridge:
   empirical basin dwell/run-length/transition metrics in `DASHIg`,
   and a receipt-side invariant stub in `DASHI/Physics/Closure/BadModeSuppression.agda`.
+
+## 2026-05-05 W4/W5 CT18 Convention Follow-Up
+
+- [x] Extend `scripts/extract_ct18_pdf_packet.py` with a rapidity-window
+  Drell-Yan light-quark luminosity integration over the local CT18NLO grid.
+- [x] Record the non-promoting result in the W4/W5 and W5 typed intake
+  diagnostics: fixed-`x` ratio `1.0506681065158017`, rapidity-window center
+  ratio `0.13510406305538247`, and rapidity-window mass-window ratio
+  `0.3348750784006896`, all failing the W5 target `0.8804486068`.
+- [ ] Supply or derive the accepted parton-luminosity/bin-integration
+  convention that maps CT18NLO onto the DASHI t45 correction surface, with
+  authority/provenance and tolerance fields.

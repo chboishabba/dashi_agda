@@ -81,6 +81,9 @@ record W4W5PDFSharedDependencyDiagnostic : Setω where
     localPDFIntakeAudit :
       List String
 
+    rapidityIntegratedConventionAudit :
+      List String
+
     dependencyRationale :
       List String
 
@@ -160,6 +163,15 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "scripts/extract_ct18_pdf_packet.py parsed the lhagrid1 table and wrote scripts/data/pdf/ct18_dashi_pdf_packet.json"
         ∷ "local fixed-x u-quark xfxQ extraction gives W5 correction 1.0506681065158017 with gap 0.17021949971580164 from target 0.8804486068"
         ∷ "python importlib.util.find_spec(\"lhapdf\") returned absent; lhapdf-config and lhapdf executables were not found on PATH"
+        ∷ []
+    ; rapidityIntegratedConventionAudit =
+        "scripts/extract_ct18_pdf_packet.py now also evaluates a rapidity-window Drell-Yan light-quark luminosity convention over the local CT18NLO grid"
+        ∷ "convention: sqrt_s = 13000 GeV, eta_cut = 2.4, n_x = 200, n_m = 80, flavours u/d/s with charge weights 4/9, 1/9, 1/9"
+        ∷ "center luminosities: t43 = 179275.14868433212, t45 = 24220.800992111075, ratio = 0.13510406305538247"
+        ∷ "mass-window luminosities: t43 = 4694301.66970352, z_peak = 2092088.6841268337, t45 = 1572004.6396784543"
+        ∷ "window ratios: z_peak/t43 = 0.4456655816623231, t45/z_peak = 0.7514043986785174, t45/t43 = 0.3348750784006896"
+        ∷ "the rapidity-integrated convention does not hit the W5 target 0.8804486068; abs gap for t45/t43 window ratio is 0.5455735283993104"
+        ∷ "therefore the first missing item is narrower: an accepted parton-luminosity/bin-integration convention that maps CT18NLO to the DASHI t45 correction surface"
         ∷ []
     ; dependencyRationale =
         "The W4 dirty Z-peak data and covariance are local and parsed, but the current carrier-only shape fit is inadequate"

@@ -4855,6 +4855,19 @@
 - updated `Docs/MoonshinePrimeObject.md` and `TODO.md` to record that this
   first principled lift is now landed and that the next moonshine step is a
   richer normalized-observable lift beyond verdict-slot/cardinality metadata
+
+# 2026-05-05
+
+- extend `scripts/extract_ct18_pdf_packet.py` with a rapidity-window
+  Drell-Yan light-quark luminosity diagnostic over the local CT18NLO central
+  grid, including mass-window integrations for t43, Z-peak, and t45
+- refresh `scripts/data/pdf/ct18_dashi_pdf_packet.json` with the new CT18
+  convention probe values: fixed-`x` ratio `1.0506681065158017`,
+  rapidity-window center ratio `0.13510406305538247`, and rapidity-window
+  mass-window ratio `0.3348750784006896`
+- update W4/W5 and W5 typed diagnostics to record that the rapidity-window
+  convention does not satisfy the W5 target `0.8804486068`; no W4/W5 promotion
+  is claimed
 # 2026-04-19
 
 - add `DASHI/Pressure.agda` as the generic finite pressure algebra owner,

@@ -138,6 +138,7 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         ∷ "scripts/data/pdf/CT18NLO.tar.gz is present; SHA-256 c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213"
         ∷ "scripts/data/pdf/CT18NLO/CT18NLO_0000.dat central grid is present; SHA-256 375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410"
         ∷ "scripts/data/pdf/ct18_dashi_pdf_packet.json records the local extraction"
+        ∷ "the packet now includes rapidity-window DY luminosity diagnostics: t45/t43 center ratio 0.13510406305538247 and mass-window ratio 0.3348750784006896"
         ∷ []
     ; observedLocalTooling =
         "python3 importlib.util.find_spec(\"lhapdf\") returned absent; pip has no lhapdf wheel for this environment"
@@ -146,7 +147,7 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         ∷ "repo-local scripts/extract_ct18_pdf_packet.py parsed the CT18NLO lhagrid1 central member without LHAPDF runtime bindings"
         ∷ []
     ; exactExternalIntakeBlocker =
-        "local CT18NLO central fixed-x extraction gives 1.0506681065158017, not 0.8804486068; missing accepted parton-luminosity/bin-integration convention and authority/provenance route"
+        "local CT18NLO central fixed-x extraction gives 1.0506681065158017, and local rapidity-window DY luminosity gives t45/t43 window ratio 0.3348750784006896; neither matches 0.8804486068, so the missing item is an accepted parton-luminosity/bin-integration convention and authority/provenance route"
     ; networkFetchPerformed =
         true
     ; noPDFCarrierConstructed =

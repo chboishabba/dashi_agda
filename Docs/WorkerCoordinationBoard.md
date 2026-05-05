@@ -3068,3 +3068,23 @@ The coordination layer is complete when:
 - every lane has a file surface, success condition, and validation rule;
 - diagrams render cleanly;
 - README/TODO/changelog mention the coordination surface.
+
+## CT18 Rapidity-Integration Probe — 2026-05-05
+
+`W4/W5` remains blocked, but the missing convention is now narrower.
+`scripts/extract_ct18_pdf_packet.py` evaluates both the previous fixed-`x`
+proxy and a rapidity-window Drell-Yan light-quark luminosity convention over
+the local CT18NLO grid.
+
+Result:
+
+- fixed-`x` u-quark ratio: `1.0506681065158017` vs target `0.8804486068`
+- rapidity-window center ratio: `0.13510406305538247`
+- rapidity-window mass-window ratio: `0.3348750784006896`
+- t43/z/t45 window luminosities: `4694301.66970352`,
+  `2092088.6841268337`, `1572004.6396784543`
+
+No W4 or W5 promotion follows. The first missing item is now an accepted
+parton-luminosity/bin-integration convention that maps the local CT18NLO grid
+onto the DASHI t45 correction surface, plus the usual authority/provenance
+packet.
