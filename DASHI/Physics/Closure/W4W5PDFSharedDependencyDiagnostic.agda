@@ -139,8 +139,8 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
     ; sharedProviderPayload =
         "PDF set identifier and version"
         ∷ "LHAPDF grid/checksum or equivalent provider table checksum"
-        ∷ "parton-luminosity route for CMS-SMP-20-003 Z-peak and t45 windows"
-        ∷ "x and Q2 convention for the 76-106, 106-170, and denominator 76-106 mass windows"
+        ∷ "parton-luminosity route for CMS-SMP-20-003 below-Z, Z-peak, and t45 windows"
+        ∷ "x and Q2 convention for the 50-76, 76-106, and 106-170 GeV mass windows"
         ∷ "flavour/channel convention for the Drell-Yan q qbar luminosity ratio"
         ∷ "computed W5 t45 correction targeting 0.8804486068"
         ∷ "W4 Z-peak shape adequacy statement under the same PDF/parton-luminosity conventions"
@@ -171,9 +171,10 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "center luminosities: t43 = 179275.14868433212, t45 = 24220.800992111075, ratio = 0.13510406305538247"
         ∷ "mass-window luminosities: t43 = 4694301.66970352, z_peak = 2092088.6841268337, t45 = 1572004.6396784543"
         ∷ "window ratios: z_peak/t43 = 0.4456655816623231, t45/z_peak = 0.7514043986785174, t45/t43 = 0.3348750784006896"
-        ∷ "matching CT18 query for the repo t45 baseline is t45/z_peak = 0.7514043986785174; abs gap from target 0.8804486068 is 0.12904420812148265"
-        ∷ "the older t45/t43 window ratio is not the matching denominator for predict_ratio_106_170_over_76_106 and has abs gap 0.5455735283993104"
-        ∷ "therefore the first missing item is narrower: an accepted parton-luminosity/bin-integration convention that maps CT18NLO to the DASHI t45 correction surface"
+        ∷ "z-peak denominator probe gives t45/z_peak = 0.7514043986785174; abs gap from target 0.8804486068 is 0.12904420812148265"
+        ∷ "t43 denominator hypothesis was tested directly: t45/t43 = 0.3348750784006896; abs gap from target 0.8804486068 is 0.5455735283993104"
+        ∷ "therefore changing only the denominator to t43 does not close W4/W5 under the current rapidity-window CT18 convention"
+        ∷ "the first missing item remains an accepted parton-luminosity/bin-integration convention that maps CT18NLO to the DASHI t45 correction surface"
         ∷ []
     ; dependencyRationale =
         "The W4 dirty Z-peak data and covariance are local and parsed, but the current carrier-only shape fit is inadequate"

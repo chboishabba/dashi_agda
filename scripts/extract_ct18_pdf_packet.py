@@ -226,6 +226,7 @@ def main() -> int:
     w5_center_luminosity_ratio = lum_t45_center / lum_t43_center
     w5_window_luminosity_ratio = lum_t45_window / lum_t43_window
     w5_matching_target_luminosity_ratio = lum_t45_window / lum_z_window
+    w5_t43_denominator_hypothesis_ratio = lum_t45_window / lum_t43_window
 
     phi_bins = [0.004, 0.008, 0.015, 0.025, 0.04, 0.07, 0.12, 0.2, 0.35, 0.6, 1.0, 1.7, 3.0]
     q_z = 91.2
@@ -263,6 +264,12 @@ def main() -> int:
         "W5_matching_target_quantity": "DASHI.Physics.Prediction.sigma_dashi:predict_ratio_106_170_over_76_106 computes sigma_DASHI(106-170, phi bin) / sigma_DASHI(76-106, phi bin)",
         "W5_matching_target_luminosity_ratio": w5_matching_target_luminosity_ratio,
         "W5_matching_target_luminosity_abs_gap": abs(w5_matching_target_luminosity_ratio - required),
+        "W5_t43_denominator_hypothesis_quantity": "rapidity-window CT18 mass-window luminosity ratio L(106-170 GeV) / L(50-76 GeV)",
+        "W5_t43_denominator_hypothesis_ratio": w5_t43_denominator_hypothesis_ratio,
+        "W5_t43_denominator_hypothesis_abs_gap": abs(
+            w5_t43_denominator_hypothesis_ratio - required
+        ),
+        "W5_t43_denominator_hypothesis_status": "rejected: the t43 denominator is already computed by W5_window_luminosity_ratio and gives 0.3348750784006896, not 0.8804486068",
         "W4W5_luminosity_convention": {
             "kind": "rapidity-window Drell-Yan light-quark luminosity",
             "sqrt_s": args.sqrt_s,

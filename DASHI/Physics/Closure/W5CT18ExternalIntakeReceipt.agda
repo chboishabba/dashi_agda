@@ -159,7 +159,9 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "missing 106-170 and 76-106 GeV mass-window convention"
         ∷ "missing flavour/channel convention"
         ∷ "local fixed-x CT18 central extraction computed 1.0506681065158017; missing accepted computation that targets 0.8804486068"
-        ∷ "matching local rapidity-window CT18 query for sigma_DASHI(106-170)/sigma_DASHI(76-106) computed t45/z_peak = 0.7514043986785174 with abs gap 0.12904420812148265; missing accepted convention that maps CT18NLO onto the W5 target"
+        ∷ "z-peak denominator rapidity-window CT18 query computed t45/z_peak = 0.7514043986785174 with abs gap 0.12904420812148265"
+        ∷ "t43 denominator hypothesis was tested directly and computed t45/t43 = 0.3348750784006896 with abs gap 0.5455735283993104; changing only the denominator does not satisfy the W5 target"
+        ∷ "missing accepted convention that maps CT18NLO onto the W5 target"
         ∷ "missing tolerance statement against 0.8804486068"
         ∷ "missing external PDF table authority/provenance receipt"
         ∷ []
@@ -171,8 +173,8 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "Local CT18NLO artifact is present: archive SHA-256 c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213; central grid SHA-256 375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410"
         ∷ "Local parser extraction at x = 0.01 gives u-quark xfxQ ratio 1.0506681065158017, which does not satisfy the W5 target"
         ∷ "The repo t45 prediction baseline is sigma_DASHI(106-170, phi bin) / sigma_DASHI(76-106, phi bin)"
-        ∷ "Local parser matching rapidity-window DY luminosity integration gives t45/z_peak = 0.7514043986785174, which does not satisfy the W5 target"
-        ∷ "Local parser also records non-matching t45/t43 center ratio 0.13510406305538247 and mass-window ratio 0.3348750784006896 for audit continuity"
+        ∷ "Local parser rapidity-window DY luminosity integration gives t45/z_peak = 0.7514043986785174, which does not satisfy the W5 target"
+        ∷ "Local parser also records the t43-denominator mass-window ratio t45/t43 = 0.3348750784006896 and center ratio 0.13510406305538247; the t43 denominator hypothesis is rejected under this convention"
         ∷ "The confirmed internal DGLAP/LO carrier route remains insufficient for t45"
         ∷ "W5 is not externally ready until an accepted parton-luminosity/bin-integration convention and authority/provenance packet are supplied"
         ∷ []
