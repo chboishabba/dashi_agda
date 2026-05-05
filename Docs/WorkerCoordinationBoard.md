@@ -188,6 +188,71 @@ F:
 | `W4-calibration-matter-source` | `Hypatia-Faraday` | `Peirce` (`019df6d9-c057-7d63-905a-8cd36e23abf7`) | Verify the post-PDF W4 calibration authority and matter-source first-missing chain. | `W4PhysicalCalibrationObligationSurface.agda` now records `missingSharedPDFBackedZPeakShapeAdequacy -> missingExternalPhysicalCalibrationReceipt -> missingMatterFieldFromW4 -> missingStressEnergyTensorFromW4`; no authority, matter field, stress-energy tensor, or W4 promotion. | completed; W4 still blocked |
 | `GR-einstein-law-queue` | `Gauss` | `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) | Keep GR gated on W4/PDF/calibration/matter stress-energy and patch only if stale. | No-change audit: `EinsteinEquationCandidate.agda` already names `W4MatterStressEnergyInterfaceReceipt`, `G_mu_nu = 8pi T_mu_nu`, and the W4/PDF/calibration/matter/stress-energy queue. | completed; obligation only |
 
+## Active Assignment Round -- CT18NLO PDF Intake Attempt
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated`
+orchestrator_id: `pdf-w9-governance-close`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` attempted the highest-leverage W4/W5 external PDF intake.
+- No W2/W3 authority tokens, W9 kill receipt, W4 anchor closure, W5 t45
+  promotion, or GR promotion were constructed.
+
+R:
+- Establish whether CT18NLO can be used locally to compute the W4/W5 packet.
+- Preserve the exact distinction between grid availability and accepted
+  parton-luminosity authority.
+
+C:
+- Added `scripts/extract_ct18_pdf_packet.py`.
+- Added CT18NLO grid artifacts under `scripts/data/pdf/`.
+- Updated `W4W5PDFSharedDependencyDiagnostic.agda`,
+  `W5PDFCarrierExternalIntakeRequest.agda`, and
+  `W5CT18ExternalIntakeReceipt.agda`.
+
+S:
+- `lhapdf` is not available as a Python package in the repo-local virtualenv;
+  `lhapdf`, `lhapdf-config`, and Python `lhapdf` bindings remain absent.
+- The public CT18NLO LHAPDF grid was downloaded and the central member was
+  parsed directly as `lhagrid1`.
+- The local fixed-`x = 0.01` central-member extraction does not match the W5
+  target.
+
+L:
+- `pip/install attempt` -> `direct public grid artifact` -> `local parser` ->
+  `typed non-promoting intake diagnostics` ->
+  `timeout 30s agda <touched module>` -> `P0`/`BlockerKillConditions`.
+
+P:
+- `scripts/extract_ct18_pdf_packet.py` produces
+  `scripts/data/pdf/ct18_dashi_pdf_packet.json`.
+- CT18NLO archive SHA-256:
+  `c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213`.
+- CT18NLO central grid SHA-256:
+  `375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410`.
+- Local fixed-`x = 0.01`, flavor `2`, central-member extraction:
+  numerator `0.7974526680434302`, denominator `0.7589957885824878`, ratio
+  `1.0506681065158017`, absolute gap `0.17021949971580164` from target
+  `0.8804486068`.
+
+G:
+- This is not an accepted PDF carrier because the local extraction is a
+  fixed-`x` proxy and lacks the accepted parton-luminosity/bin-integration
+  convention and authority/provenance receipt.
+- W4 shape adequacy, W5 t45 correction, W4 calibration authority, and GR
+  matter/stress-energy remain blocked.
+
+F:
+- W4/W5 first missing is now sharper: accepted parton-luminosity/bin-integration
+  convention over the local CT18NLO grid, or equivalent provider-authority
+  packet.
+- W9 first missing remains the pair-transport Qcore bridge.
+- W2/W3 first missing remains constructorless authority tokens.
+
 Round date: `2026-05-05`
 Round owner: `W0 orchestrator / integrator`
 Round status: `integrating`

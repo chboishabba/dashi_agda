@@ -16,8 +16,9 @@ import DASHI.Physics.Closure.W5PDFCarrierExternalConfirmedGap as Gap
 -- This module is the provider-facing receipt lane for blocker 6.  It records
 -- the exact fields an external PDF carrier packet must carry before the t45
 -- neutral-current correction can be evaluated.  The canonical value below is
--- intentionally a first-missing receipt diagnostic: no CT18/MSHT/LHAPDF packet
--- is present in this lane, no local LHAPDF grid is assumed, and no W5 closure
+-- intentionally a first-missing receipt diagnostic: a local CT18NLO grid
+-- artifact is present and parsed, but no accepted LHAPDF runtime route,
+-- parton-luminosity/bin-integration convention, authority packet, W5 closure,
 -- or t45 promotion follows from this file.
 
 data W5ExternalPDFFamily : Set where
@@ -92,10 +93,10 @@ record W5CT18ExternalIntakeReceipt : Set where
     receiptNotes :
       List String
 
-    noNetworkFetchPerformed :
+    networkFetchPerformed :
       Bool
 
-    noLocalLHAPDFGridAssumed :
+    noAcceptedLHAPDFRuntimeAssumed :
       ⊤
 
     noExternalPDFPacketAccepted :
@@ -143,9 +144,7 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "authority/provenance receipt for the external PDF table"
         ∷ []
     ; missingPacketFields =
-        missingPDFSetIdentifierAndVersion
-        ∷ missingLHAPDFGridOrEquivalentTable
-        ∷ missingPartonLuminosityRoute
+        missingPartonLuminosityRoute
         ∷ missingMassWindowConvention
         ∷ missingFlavourChannelConvention
         ∷ missingT45CorrectionComputation
@@ -153,12 +152,10 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ missingPDFTableAuthorityReceipt
         ∷ []
     ; missingPacketFieldLabels =
-        "missing PDF set identifier and version"
-        ∷ "missing LHAPDF grid/checksum or equivalent table checksum"
-        ∷ "missing accepted parton-luminosity route"
+        "missing accepted parton-luminosity route"
         ∷ "missing 106-170 and 76-106 GeV mass-window convention"
         ∷ "missing flavour/channel convention"
-        ∷ "missing computed t45 correction for 0.8804486068"
+        ∷ "local fixed-x CT18 central extraction computed 1.0506681065158017; missing accepted computation that targets 0.8804486068"
         ∷ "missing tolerance statement against 0.8804486068"
         ∷ "missing external PDF table authority/provenance receipt"
         ∷ []
@@ -167,12 +164,14 @@ canonicalW5CT18ExternalIntakeReceipt =
     ; receiptNotes =
         "This is a CT18/MSHT/LHAPDF intake receipt surface, not a positive external PDF carrier"
         ∷ "The required correction remains 0.8804486068"
+        ∷ "Local CT18NLO artifact is present: archive SHA-256 c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213; central grid SHA-256 375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410"
+        ∷ "Local parser extraction at x = 0.01 gives u-quark xfxQ ratio 1.0506681065158017, which does not satisfy the W5 target"
         ∷ "The confirmed internal DGLAP/LO carrier route remains insufficient for t45"
-        ∷ "W5 is not externally ready until all packet fields are supplied by an external provider"
+        ∷ "W5 is not externally ready until an accepted parton-luminosity/bin-integration convention and authority/provenance packet are supplied"
         ∷ []
-    ; noNetworkFetchPerformed =
+    ; networkFetchPerformed =
         true
-    ; noLocalLHAPDFGridAssumed =
+    ; noAcceptedLHAPDFRuntimeAssumed =
         tt
     ; noExternalPDFPacketAccepted =
         tt

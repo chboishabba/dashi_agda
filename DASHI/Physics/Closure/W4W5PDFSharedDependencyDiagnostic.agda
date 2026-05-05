@@ -155,9 +155,11 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ []
     ; localPDFIntakeAudit =
         "local HEPData t21/t22 and t45/t46 CSV artifacts are present under scripts/data/hepdata"
-        ∷ "no CT18/MSHT/NNPDF/LHAPDF grid or provider table was found under scripts/data in this lane"
-        ∷ "python importlib.util.find_spec(\"lhapdf\") returned absent"
-        ∷ "lhapdf-config and lhapdf executables were not found on PATH"
+        ∷ "CT18NLO archive is present at scripts/data/pdf/CT18NLO.tar.gz; SHA-256 c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213"
+        ∷ "CT18NLO central grid is present at scripts/data/pdf/CT18NLO/CT18NLO_0000.dat; SHA-256 375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410"
+        ∷ "scripts/extract_ct18_pdf_packet.py parsed the lhagrid1 table and wrote scripts/data/pdf/ct18_dashi_pdf_packet.json"
+        ∷ "local fixed-x u-quark xfxQ extraction gives W5 correction 1.0506681065158017 with gap 0.17021949971580164 from target 0.8804486068"
+        ∷ "python importlib.util.find_spec(\"lhapdf\") returned absent; lhapdf-config and lhapdf executables were not found on PATH"
         ∷ []
     ; dependencyRationale =
         "The W4 dirty Z-peak data and covariance are local and parsed, but the current carrier-only shape fit is inadequate"
@@ -166,7 +168,7 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "This receipt merges the provider-facing dependency; it does not merge W4 and W5 promotions"
         ∷ []
     ; nextAdmissibleAction =
-        "supply a CT18/MSHT/LHAPDF-compatible packet satisfying the shared provider payload, then rerun W4 Z-peak shape adequacy and W5 t45 correction checks"
+        "supply the accepted parton-luminosity/bin-integration convention over the local CT18NLO grid, or an equivalent provider-authority packet, then rerun W4 Z-peak shape adequacy and W5 t45 correction checks"
     ; noW4AnchorClosure =
         tt
     ; noW4Promotion =

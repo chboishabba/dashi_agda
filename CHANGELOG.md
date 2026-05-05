@@ -2,6 +2,21 @@
 
 ## 2026-05-05
 
+- attempt CT18NLO PDF intake:
+  direct `lhapdf` installation was unavailable (`pip` has no wheel in the
+  repo-local virtualenv), so the public CT18NLO LHAPDF grid was downloaded to
+  `scripts/data/pdf/`. Added `scripts/extract_ct18_pdf_packet.py` to parse the
+  `lhagrid1` central member without LHAPDF runtime bindings and emit
+  `scripts/data/pdf/ct18_dashi_pdf_packet.json`. The archive digest is
+  `c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213`; the
+  central grid digest is
+  `375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410`. The
+  local fixed-`x = 0.01` extraction gives W5 correction
+  `1.0506681065158017`, not `0.8804486068`, so W4/W5 remain blocked on an
+  accepted parton-luminosity/bin-integration convention and authority route,
+  not on missing CT18 grid data. Updated the W4/W5 and W5 intake Agda surfaces
+  accordingly; no W4/W5 promotion or PDF carrier was constructed.
+
 - assign next-six blocker parallel tranche:
   `Docs/WorkerCoordinationBoard.md` now records orchestrator id
   `next-six-blockers-2026-05-05` with six disjoint lanes: W4/W5 shared PDF

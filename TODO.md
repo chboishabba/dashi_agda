@@ -6,6 +6,19 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+PDF intake attempt `2026-05-05`: direct `pip install lhapdf` failed because
+the system Python is externally managed and the repo-local `.venv` has no
+published `lhapdf` wheel. W0 downloaded the public CT18NLO LHAPDF grid into
+`scripts/data/pdf/` and added `scripts/extract_ct18_pdf_packet.py`, which
+parses the `lhagrid1` central member without LHAPDF runtime bindings. Artifact
+digests are now recorded in the W4/W5 and W5 intake surfaces: archive SHA-256
+`c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213`, central
+grid SHA-256 `375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410`.
+The naive fixed-`x = 0.01` CT18 central extraction gives W5 correction
+`1.0506681065158017`, not the required `0.8804486068`; W4/W5 therefore remain
+blocked on an accepted parton-luminosity/bin-integration convention and
+authority/provenance route, not on absence of the CT18 grid artifact.
+
 Next-six blocker parallel assignment `2026-05-05`:
 `W0` assigned six disjoint lanes under orchestrator id
 `next-six-blockers-2026-05-05`. `Maxwell-Faraday` owns the W4/W5 shared

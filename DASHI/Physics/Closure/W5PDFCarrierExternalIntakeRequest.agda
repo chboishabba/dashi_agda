@@ -22,6 +22,8 @@ data W5PDFCarrierLocalCacheStatus : Set where
     W5PDFCarrierLocalCacheStatus
   localPDFCarrierTablesPresentButNotProcessedHere :
     W5PDFCarrierLocalCacheStatus
+  localCT18NLOGridParsedButConventionMismatch :
+    W5PDFCarrierLocalCacheStatus
 
 data W5PDFCarrierIntakeStatus : Set where
   awaitingExternalPDFCarrierIntake :
@@ -71,7 +73,7 @@ record W5PDFCarrierExternalIntakeRequest : Set where
     exactExternalIntakeBlocker :
       String
 
-    noNetworkFetchPerformed :
+    networkFetchPerformed :
       Bool
 
     noPDFCarrierConstructed :
@@ -90,7 +92,7 @@ canonicalW5PDFCarrierExternalIntakeRequest =
     { intakeStatus =
         awaitingExternalPDFCarrierIntake
     ; localCacheStatus =
-        noLocalCT18MSHTNNPDFLHAPDFTablesFound
+        localCT18NLOGridParsedButConventionMismatch
     ; nearestPathDiagnostic =
         PDFLog.canonicalPDFCarrierLogRatioDiagnostic
     ; requiredT45Correction =
@@ -133,17 +135,19 @@ canonicalW5PDFCarrierExternalIntakeRequest =
     ; observedLocalCache =
         "scripts/data/hepdata has t43/t44, t45/t46, and t19/t20 HEPData tables"
         ∷ "scripts/data/outputs has t43/t45 projection JSON artifacts"
-        ∷ "no CT18, MSHT, NNPDF, or LHAPDF table was found in scripts/data during this lane"
+        ∷ "scripts/data/pdf/CT18NLO.tar.gz is present; SHA-256 c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213"
+        ∷ "scripts/data/pdf/CT18NLO/CT18NLO_0000.dat central grid is present; SHA-256 375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410"
+        ∷ "scripts/data/pdf/ct18_dashi_pdf_packet.json records the local extraction"
         ∷ []
     ; observedLocalTooling =
-        "python3 importlib.util.find_spec(\"lhapdf\") returned absent"
+        "python3 importlib.util.find_spec(\"lhapdf\") returned absent; pip has no lhapdf wheel for this environment"
         ∷ "lhapdf-config was not found on PATH"
         ∷ "lhapdf executable was not found on PATH"
-        ∷ "therefore no local CT18/MSHT/NNPDF correction factor was computed in this lane"
+        ∷ "repo-local scripts/extract_ct18_pdf_packet.py parsed the CT18NLO lhagrid1 central member without LHAPDF runtime bindings"
         ∷ []
     ; exactExternalIntakeBlocker =
-        "missing local LHAPDF tooling or external PDF/parton-luminosity carrier for required t45 correction 0.8804486068"
-    ; noNetworkFetchPerformed =
+        "local CT18NLO central fixed-x extraction gives 1.0506681065158017, not 0.8804486068; missing accepted parton-luminosity/bin-integration convention and authority/provenance route"
+    ; networkFetchPerformed =
         true
     ; noPDFCarrierConstructed =
         tt
