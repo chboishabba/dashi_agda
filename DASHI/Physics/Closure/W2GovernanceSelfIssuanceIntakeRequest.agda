@@ -61,6 +61,15 @@ record W2GovernanceSelfIssuanceIntakeRequest : Setω where
     exactBlockingFields :
       List W2.NaturalP2ConvergenceMissingField
 
+    backingReceipts :
+      List String
+
+    certifiedEvidencePayloadRequired :
+      List String
+
+    exactClosingCondition :
+      List String
+
     governanceIntakePacket :
       List String
 
@@ -92,6 +101,26 @@ canonicalW2GovernanceSelfIssuanceIntakeRequest =
     ; exactBlockingFields =
         W2Audit.W2PromotionAuthorityAuditDiagnostic.remainingTypedFields
           W2Audit.canonicalW2PromotionAuthorityAuditDiagnostic
+    ; backingReceipts =
+        "DASHI.Arithmetic.NormalizeAddSumPreservation: normalizeAdd preserves lhs+rhs and tracked-prime valuations of that sum definitionally"
+        ∷ "DASHI.Arithmetic.UniformConvergenceRateSurface: NormalizeAddState is the fixed local arithmetic surface and normalizeAdd has one-step canonical landing"
+        ∷ "DASHI.Physics.Closure.W2PromotionAuthorityReceipt: audit consumes the landed W2 evidence and proves the current promotion receipt still eliminates through the empty authority token"
+        ∷ "DASHI.Physics.Closure.NaturalP2ConvergencePromotionObligation: current status records remaining naturality, transport, carrier-general convergence, and authority-token fields"
+        ∷ []
+    ; certifiedEvidencePayloadRequired =
+        "NaturalP2ConvergencePromotionAuthorityToken constructor or explicit governance policy hook"
+        ∷ "Evidence payload certified by that hook: normalizeAdd sum/p-adic invariance receipt"
+        ∷ "Evidence payload certified by that hook: local uniform-rate support receipt"
+        ∷ "Evidence payload certified by that hook: natural p2 bridge-or-obstruction packaging"
+        ∷ "Evidence payload certified by that hook: carrier transport preserving convergence"
+        ∷ "Evidence payload certified by that hook: carrier-general realization-uniform convergence-rate receipt"
+        ∷ []
+    ; exactClosingCondition =
+        "W2 closes only when NaturalP2ConvergencePromotionAuthorityToken is inhabited by an explicit constructor or governance policy hook"
+        ∷ "The same closing action must identify the certified evidence payload carried by the token"
+        ∷ "After that token exists, NaturalP2ConvergencePromotionReceipt must be inhabited with p2Receipt, carrierGeneralConvergence, shiftConvergenceReceipt, and realizedMetricFamilyReceipt"
+        ∷ "A prose ruling alone is not a closing condition while NaturalP2ConvergencePromotionAuthorityToken remains an empty datatype"
+        ∷ []
     ; governanceIntakePacket =
         "Governance intake: W2 normalizeAdd sum/p-adic invariance and local uniform rate support are landed evidence"
         ∷ "Exact blocker: NaturalP2ConvergencePromotionAuthorityToken is constructorless under current governance"
