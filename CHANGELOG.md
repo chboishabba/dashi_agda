@@ -2,6 +2,24 @@
 
 ## 2026-05-05
 
+- record merged W4/W5 PDF dependency:
+  `W4W5PDFSharedDependencyDiagnostic.agda` now records that W4 dirty Z-peak
+  shape adequacy and W5 t45 correction share the same upstream
+  CT18/MSHT/LHAPDF-compatible parton-luminosity intake. The diagnostic binds
+  the current W4 failed shape fit (`chi2/dof = 298.8462841768543`, digest
+  `36191efc92cb3c9b1641c9206171a307c4796369a4acd1485bf87d1051662b8b`) and
+  the W5 required correction `0.8804486068`, while explicitly constructing no
+  W4 anchor closure, W4 promotion, W5 t45 promotion, or external PDF carrier.
+  `P0BlockerObligationIndex.agda` imports the new diagnostic for
+  discoverability.
+  `W9CancellationPressureQcoreCompatibilityReceipt.agda` additionally records
+  that the proposed `pressure <= wQcoreBound^2` theorem is not accepted by the
+  current W9 kill constructors without a typed bridge into the theorem-facing
+  pair transport. `EinsteinEquationCandidate.agda` now places the merged W4/W5
+  PDF intake before future W4 matter-field/stress-energy receipts. W4 Z-peak
+  diagnostics also record that no local CSS momentum-space/qT artifact with
+  chi2/dof approximately `65` is present.
+
 - integrate Z-peak/W9 theorem next-six assignment:
   `scripts/run_t43_projection.py` now supports a governed dirty Z-peak
   shape-fit path: a declared uncalibrated t21 shape callable is fitted with

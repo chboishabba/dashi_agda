@@ -105,6 +105,12 @@ record W4ZPeakCalibrationAnchorMissingArtifactDiagnostic : Setω where
     shapeFitLastBinPull :
       String
 
+    cssMomentumSpaceDiagnosticStatus :
+      String
+
+    cssMomentumSpaceClaimedChi2PerDof :
+      String
+
     observedLocalCacheFiles :
       List String
 
@@ -189,6 +195,10 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
         "-67.35457265472463"
     ; shapeFitLastBinPull =
         "-51.62836040061707"
+    ; cssMomentumSpaceDiagnosticStatus =
+        "not-present-in-repo-audit: no separate CSS momentum-space/qT dirty Z-peak callable or artifact was found during the W4 shape lane"
+    ; cssMomentumSpaceClaimedChi2PerDof =
+        "unbound: claimed chi2/dof approximately 65 is not represented by the current local diagnostic; current declared shape chi2/dof is 298.8462841768543"
     ; observedLocalCacheFiles =
         "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
         ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"

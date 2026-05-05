@@ -106,6 +106,7 @@ import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation as W
 import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptRequestPack as W4Pack
 import DASHI.Physics.Closure.W4PhysicalCalibrationProviderAttempt as W4Attempt
 import DASHI.Physics.Closure.W4CalibrationRatioZPeakReceiptRequestSurface as HEPR18
+import DASHI.Physics.Closure.W4W5PDFSharedDependencyDiagnostic as W4W5PDF
 import DASHI.Physics.Closure.W5W6PhysicsConsumerSourceInventory as HEPR19
 import DASHI.Interop.PNFResidualConsumerReceiptRequestPack as W6Pack
 import DASHI.Physics.Closure.CancellationPressureRetargetConsumerAcceptanceRequestPack as W9Pack
@@ -298,6 +299,8 @@ data P0WorkerLane : Set where
   HEPDataComparisonLawReceiptRequest :
     P0WorkerLane
   W4CalibrationRatioZPeakReceiptRequestSurface :
+    P0WorkerLane
+  W4W5PDFSharedDependencyDiagnostic :
     P0WorkerLane
   W5W6PhysicsConsumerSourceInventory :
     P0WorkerLane
@@ -551,6 +554,9 @@ record P0BlockerObligationIndex : Setω where
     w4CalibrationRatioZPeakReceiptRequestSurface :
       HEPR18.W4CalibrationRatioZPeakReceiptRequestSurface
 
+    w4w5PDFSharedDependencyDiagnostic :
+      W4W5PDF.W4W5PDFSharedDependencyDiagnostic
+
     w5w6PhysicsConsumerSourceInventory :
       HEPR19.W5W6PhysicsConsumerSourceInventory
 
@@ -751,6 +757,7 @@ p0BlockerObligationIndex =
         ∷ HEPDataPredictionFreezePolicyRequest
         ∷ HEPDataComparisonLawReceiptRequest
         ∷ W4CalibrationRatioZPeakReceiptRequestSurface
+        ∷ W4W5PDFSharedDependencyDiagnostic
         ∷ W5W6PhysicsConsumerSourceInventory
         ∷ LilaE8RootSystemLocalSourceDiagnostic
         ∷ LilaE8RootSystemLatticeReceipt
@@ -912,6 +919,8 @@ p0BlockerObligationIndex =
         HEPR31.canonicalHEPDataComparisonLawReceiptRequest
     ; w4CalibrationRatioZPeakReceiptRequestSurface =
         HEPR18.canonicalW4CalibrationRatioZPeakReceiptRequestSurface
+    ; w4w5PDFSharedDependencyDiagnostic =
+        W4W5PDF.canonicalW4W5PDFSharedDependencyDiagnostic
     ; w5w6PhysicsConsumerSourceInventory =
         HEPR19.canonicalW5W6PhysicsConsumerSourceInventory
     ; lilaE8RootSystemLocalSourceDiagnostic =

@@ -239,6 +239,12 @@ record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
     dirtyZPeakShapeFitChi2PerDof :
       String
 
+    cssMomentumSpaceDiagnosticStatus :
+      String
+
+    cssMomentumSpaceClaimedChi2PerDof :
+      String
+
     diagnosticBoundary :
       List String
 
@@ -299,6 +305,10 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
         "completed-but-inadequate: DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape is accepted as an uncalibrated shape callable and fitted with one covariance-weighted scalar"
     ; dirtyZPeakShapeFitChi2PerDof =
         "298.8462841768543"
+    ; cssMomentumSpaceDiagnosticStatus =
+        "not-present-in-repo-audit: no separate CSS momentum-space/qT dirty Z-peak callable or artifact was found; only the existing sigma_dashi predict_dirty_z_peak_shape scalar-fit diagnostic ran"
+    ; cssMomentumSpaceClaimedChi2PerDof =
+        "unbound: claimed chi2/dof approximately 65 was not found in local W4 shape diagnostics or prediction artifacts"
     ; diagnosticBoundary =
         "This diagnostic records script/data support only"
         ∷ "It does not construct a W4CalibrationRatioZPeakReceipt"

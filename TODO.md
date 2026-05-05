@@ -6,6 +6,35 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+Maxwell-Faraday merged W4/W5 PDF dependency result `2026-05-05`:
+`W4W5PDFSharedDependencyDiagnostic.agda` records the common upstream first
+missing item:
+`missingSharedCT18MSHTLHAPDFPartonLuminosityIntake`. W4 still has
+`missingDirtyZPeakShapeAdequacy` with the current local dirty Z-peak shape fit
+at chi2/dof `298.8462841768543` and projection digest
+`36191efc92cb3c9b1641c9206171a307c4796369a4acd1485bf87d1051662b8b`. W5 still
+requires the external PDF correction target `0.8804486068`. The merged
+diagnostic does not close W4, does not promote W5/t45, and does not construct
+an external PDF carrier; the next admissible action is a CT18/MSHT/LHAPDF
+packet with parton-luminosity route, conventions, correction computation,
+tolerance, and authority/provenance.
+
+Planck/Gauss/Boole follow-up assignment result `2026-05-05`: W9 still does
+not close. `W9CancellationPressureQcoreCompatibilityReceipt.agda` now records
+that the proposed `pressure <= wQcoreBound^2` theorem is a unary `Nat` bound
+and does not inhabit the current W9 kill constructors, which require
+theorem-level pair-pressure/Qcore equality through the actual canonical
+transport. The first missing bridge is from the B4 weighted-Qcore bound into
+either `ExistingCancellationPressureCompatibilityObligation.pressureWitness`
+or
+`WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy`;
+equivalently, supply `wQcoreBound≡QcoreCompatBound` for the real W9 transport.
+`EinsteinEquationCandidate.agda` now inserts the merged W4/W5 external PDF
+intake between W4 calibration authority and the future W4 matter field.
+Boole's local audit found no separate CSS momentum-space/qT dirty Z-peak
+callable or artifact at chi2/dof approximately `65`; the only bound local
+dirty Z-peak shape diagnostic remains chi2/dof `298.8462841768543`.
+
 Z-peak/W9 theorem next-six assignment result `2026-05-05`: W4 now has a
 governed dirty Z-peak shape-fit path. `scripts/run_t43_projection.py` accepts
 declared uncalibrated shape callables for `--mode dirty-z-peak`, fits one

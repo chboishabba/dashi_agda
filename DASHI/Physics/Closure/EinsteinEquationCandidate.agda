@@ -10,6 +10,7 @@ import DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate as DET
 import DASHI.Physics.Closure.W4CalibrationRatioZPeakReceiptRequestSurface as W4Anchor
 import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation as W4External
 import DASHI.Physics.Closure.W4PhysicalCalibrationObligationSurface as W4
+import DASHI.Physics.Closure.W5PDFCarrierExternalIntakeRequest as W5PDFIntake
 
 ------------------------------------------------------------------------
 -- Discrete Einstein-equation obligation surface.
@@ -43,6 +44,8 @@ data EinsteinEquationMatterCouplingQueueField : Set where
     EinsteinEquationMatterCouplingQueueField
   missingW4CalibrationAuthority :
     EinsteinEquationMatterCouplingQueueField
+  missingMergedW4W5ExternalPDFIntake :
+    EinsteinEquationMatterCouplingQueueField
   missingW4MatterField :
     EinsteinEquationMatterCouplingQueueField
   missingW4StressEnergyTensorFromMatterField :
@@ -57,6 +60,9 @@ record W4MatterStressEnergyInterfaceReceipt : Setω where
 
     w4CalibrationAuthorityReceipt :
       W4External.Candidate256PhysicalCalibrationExternalReceipt
+
+    mergedW4W5ExternalPDFIntake :
+      W5PDFIntake.W5PDFCarrierExternalIntakeRequest
 
     MatterField :
       Set
@@ -91,6 +97,7 @@ canonicalEinsteinEquationMatterCouplingQueue :
 canonicalEinsteinEquationMatterCouplingQueue =
   missingW4AnchorReceipt
   ∷ missingW4CalibrationAuthority
+  ∷ missingMergedW4W5ExternalPDFIntake
   ∷ missingW4MatterField
   ∷ missingW4StressEnergyTensorFromMatterField
   ∷ missingDiscreteEinsteinEquationLawFromStressEnergy
@@ -170,6 +177,17 @@ record EinsteinEquationCandidateObligationSurface : Setω where
     requiredPostAuthorityInterfaceName :
       String
 
+    postAuthorityNextQueueField :
+      EinsteinEquationMatterCouplingQueueField
+
+    postAuthorityNextIsMergedW4W5ExternalPDFIntake :
+      postAuthorityNextQueueField
+      ≡
+      missingMergedW4W5ExternalPDFIntake
+
+    mergedW4W5ExternalPDFIntakeRequest :
+      W5PDFIntake.W5PDFCarrierExternalIntakeRequest
+
     firstMissingIsW4MatterCoupling :
       firstMissing
       ≡
@@ -221,6 +239,12 @@ canonicalEinsteinEquationCandidateObligationSurface =
         refl
     ; requiredPostAuthorityInterfaceName =
         "DASHI.Physics.Closure.EinsteinEquationCandidate.W4MatterStressEnergyInterfaceReceipt"
+    ; postAuthorityNextQueueField =
+        missingMergedW4W5ExternalPDFIntake
+    ; postAuthorityNextIsMergedW4W5ExternalPDFIntake =
+        refl
+    ; mergedW4W5ExternalPDFIntakeRequest =
+        W5PDFIntake.canonicalW5PDFCarrierExternalIntakeRequest
     ; firstMissingIsW4MatterCoupling =
         refl
     ; unsupportedClaims =
@@ -230,7 +254,7 @@ canonicalEinsteinEquationCandidateObligationSurface =
         ∷ "The target equation is recorded only as G_mu_nu = 8pi T_mu_nu"
         ∷ "The first W4 gate is the W4 anchor receipt"
         ∷ "After the W4 anchor exists, the next typed GR action is W4 calibration authority"
-        ∷ "W4 calibration authority must follow the anchor before matter is available"
+        ∷ "After W4 calibration authority, the merged W4+W5 external PDF intake is required before matter is available"
         ∷ "T_mu_nu is gated on a W4 matter field and stress-energy tensor"
         ∷ "Any non-flat connection must be sourced through the W4 matter-coupling queue"
         ∷ "The current W4 surface remains an obligation surface, not a supplied matter-coupling receipt"

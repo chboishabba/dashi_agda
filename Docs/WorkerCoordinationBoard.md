@@ -77,6 +77,8 @@ G:
 
 F:
 - W4 first missing: `missingDirtyZPeakShapeAdequacy`.
+- W4/W5 merged PDF first missing:
+  `missingSharedCT18MSHTLHAPDFPartonLuminosityIntake`.
 - W9 first missing:
   `ExistingCancellationPressureCompatibilityObligation canonical15Theorem
   canonical15Dimension`.
@@ -87,11 +89,12 @@ F:
 
 | Lane | Worker | Agent | Assignment | Result | Status |
 |---|---|---|---|---|---|
-| `W4-zpeak-prediction-api` | `Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Wire or diagnose the real Z-peak `compute_dashi_ratio` path for `dirty-z-peak`. | Runner now accepts `DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape` as an uncalibrated shape callable and fits one covariance-weighted scalar; result is inadequate at chi2/dof `298.8462841768543`, so W4 remains blocked on shape adequacy. | completed; shape-fit inadequate |
-| `W9-canonical-15-theorem-route` | `Planck` | `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) | Map the proposed weighted-Qcore-bound route to the actual canonical-15 obligation, or produce the exact mismatch diagnostic. | Weighted-Qcore route does not inhabit the existing route: it still requires `WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy`, already obstructed at `(one , one)`. | completed; W9 still blocked |
+| `W4-zpeak-prediction-api` | `Faraday` | `Boole` (`019df44c-dce0-7f12-b1ef-13b176c78f23`) | Wire or diagnose the real Z-peak `compute_dashi_ratio` path for `dirty-z-peak`. | Runner accepts `DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape` as an uncalibrated shape callable and fits one covariance-weighted scalar; result is inadequate at chi2/dof `298.8462841768543`. The claimed CSS momentum-space diagnostic at chi2/dof ~65 is not present in local repo artifacts. | completed; shape-fit inadequate |
+| `W4-W5-pdf-shared-dependency` | `Maxwell-Faraday` | `Jason` (`019df6bc-a45e-70e2-a6e5-f505f22f0158`) | Record that W4 dirty Z-peak shape adequacy and W5 t45 correction share the external CT18/MSHT/LHAPDF PDF intake dependency. | `W4W5PDFSharedDependencyDiagnostic.agda` binds W4 chi2/dof `298.8462841768543`, W5 correction `0.8804486068`, and first missing `missingSharedCT18MSHTLHAPDFPartonLuminosityIntake`; no W4/W5 promotion. | completed; shared external PDF blocked |
+| `W9-canonical-15-theorem-route` | `Planck` | `Galileo` (`019df44c-d9f9-73c1-a3fa-f7eb190815a9`) | Map the proposed weighted-Qcore-bound route to the actual canonical-15 obligation, or produce the exact mismatch diagnostic. | The proposed `pressure <= wQcoreBound^2` theorem is a `Nat` unary bound and does not inhabit the current kill interfaces. First missing is a typed bridge from B4 weighted-Qcore bound into `ExistingCancellationPressureCompatibilityObligation.pressureWitness` or `WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy`, equivalently `wQcoreBound≡QcoreCompatBound` for the actual transport. | completed; W9 still blocked |
 | `W3-authority-packet-audit` | `Curie-W3` | `Curie` (`019df44c-dbff-7e62-9227-da4b82ffc438`) | Confirm HEP-R55 packet completeness and sharpen provider handoff only if stale. | No-change audit: packet is complete with no missing packet fields; first missing remains external `W3AcceptedEvidenceAuthorityToken`. | completed; external token outstanding |
 | `W2-token-policy-audit` | `Newton` | `Hooke` (`019df69c-1244-7a53-99f0-551c2d122e32`) | Find any legitimate W2 authority-token constructor/policy hook, or preserve the governance boundary. | No-change audit: token type is empty, `naturalP2ConvergencePromotionAuthorityUnavailable` eliminates it, and no legitimate constructor/policy hook exists. | completed; governance blocked |
-| `GR-w4-matter-queue` | `Gauss` | `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) | Keep the GR matter-coupling queue precise and W4-gated. | `EinsteinEquationCandidate.agda` adds the future `W4MatterStressEnergyInterfaceReceipt` shape and records the post-anchor next gate as W4 calibration authority. | completed; obligation sharpened |
+| `GR-w4-matter-queue` | `Gauss` | `Euclid` (`019df44c-db40-7ec3-98f9-018f806e71f9`) | Keep the GR matter-coupling queue precise and W4-gated. | `EinsteinEquationCandidate.agda` now records the queue as W4 anchor -> W4 calibration authority -> merged W4/W5 external PDF intake -> W4 matter field -> stress-energy tensor -> discrete Einstein law. | completed; obligation sharpened |
 | `W5-pdf-packet-audit` | `Maxwell` | `Boyle` (`019df69c-3ac6-72c1-bed6-66d99ac35af3`) | Audit CT18/MSHT/LHAPDF packet fields and local non-network validation options. | No-change audit: PDF packet fields are current; no local LHAPDF/CT18/MSHT/NNPDF tooling or grids are available. | completed; external PDF blocked |
 
 ## Active Assignment Round -- W9/W4/Governance/PDF Tranche
