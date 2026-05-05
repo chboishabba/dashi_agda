@@ -27,7 +27,16 @@ data W4PhysicalCalibrationObligationSurfaceStatus : Set where
   blockedAtZPeakArtifactAndCrossBandPrerequisitesOnly :
     W4PhysicalCalibrationObligationSurfaceStatus
 
+data AcceptedDYLuminosityConvention : Set where
+
+acceptedDYLuminosityConventionImpossibleHere :
+  AcceptedDYLuminosityConvention →
+  ⊥
+acceptedDYLuminosityConventionImpossibleHere ()
+
 data W4PhysicalCalibrationFirstMissingPrerequisite : Set where
+  missingAcceptedDYLuminosityConvention :
+    W4PhysicalCalibrationFirstMissingPrerequisite
   missingSameRecordT21T22ArtifactReceipt :
     W4PhysicalCalibrationFirstMissingPrerequisite
   missingT43RunnerGeneralizationForZPeakAnchor :
@@ -48,7 +57,8 @@ data W4PhysicalCalibrationFirstMissingPrerequisite : Set where
 canonicalW4PhysicalCalibrationFirstMissingPrerequisites :
   List W4PhysicalCalibrationFirstMissingPrerequisite
 canonicalW4PhysicalCalibrationFirstMissingPrerequisites =
-  missingSharedPDFBackedZPeakShapeAdequacy
+  missingAcceptedDYLuminosityConvention
+  ∷ missingSharedPDFBackedZPeakShapeAdequacy
   ∷ missingDirtyZPeakShapeAdequacy
   ∷ missingExternalPhysicalCalibrationReceipt
   ∷ missingMatterFieldFromW4
@@ -91,6 +101,12 @@ record W4PhysicalCalibrationObligationSurface : Setω where
     sharedPDFDependency :
       SharedPDF.W4W5PDFSharedDependencyDiagnostic
 
+    acceptedDYLuminosityConventionName :
+      String
+
+    acceptedDYLuminosityConventionBoundary :
+      List String
+
     crossBandWitnessPrerequisite :
       String
 
@@ -125,6 +141,10 @@ record W4PhysicalCalibrationObligationSurface : Setω where
       ZPeak.W4SameRecordZPeakRatioCalibrationLaw →
       ⊥
 
+    acceptedDYLuminosityConventionBoundaryImpossibleHere :
+      AcceptedDYLuminosityConvention →
+      ⊥
+
     externalReceiptImpossibleHere :
       External.Candidate256PhysicalCalibrationExternalReceipt →
       ⊥
@@ -155,6 +175,13 @@ canonicalW4PhysicalCalibrationObligationSurface =
         ZPeak.canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic
     ; sharedPDFDependency =
         SharedPDF.canonicalW4W5PDFSharedDependencyDiagnostic
+    ; acceptedDYLuminosityConventionName =
+        "AcceptedDYLuminosityConvention"
+    ; acceptedDYLuminosityConventionBoundary =
+        "Constructorless W4-local convention boundary: an accepted Drell-Yan parton-luminosity/bin-integration convention must be supplied before PDF-backed W4 adequacy can feed matterFieldFromW4"
+        ∷ "The convention must bind PDF family/member, grid checksums, x/Q2 or rapidity-window integration, flavour weights, normalization, covariance treatment, and W4/W5 pass/fail tolerances"
+        ∷ "The current local CT18 probes are diagnostics only; they do not inhabit AcceptedDYLuminosityConvention"
+        ∷ []
     ; crossBandWitnessPrerequisite =
         "consume Candidate256 quotient/cross-band witness only through strict physical scale-setting fields, not as physical calibration authority"
     ; externalCalibrationPrerequisite =
@@ -162,28 +189,31 @@ canonicalW4PhysicalCalibrationObligationSurface =
     ; firstMissingPrerequisites =
         canonicalW4PhysicalCalibrationFirstMissingPrerequisites
     ; nextPrerequisite =
-        missingSharedPDFBackedZPeakShapeAdequacy
+        missingAcceptedDYLuminosityConvention
     ; strictPhysicalNextMissingIngredient =
         Ledger.candidate256RecommendedNextMissingIngredient
     ; postPDFAuthorityMatterFirstMissingChain =
-        missingSharedPDFBackedZPeakShapeAdequacy
+        missingAcceptedDYLuminosityConvention
+        ∷ missingSharedPDFBackedZPeakShapeAdequacy
         ∷ missingExternalPhysicalCalibrationReceipt
         ∷ missingMatterFieldFromW4
         ∷ missingStressEnergyTensorFromW4
         ∷ []
     ; grMatterSourceQueue =
-        "First supply the shared CT18/MSHT/LHAPDF-compatible parton-luminosity intake that makes the W4 Z-peak shape adequate"
+        "First supply AcceptedDYLuminosityConvention over the shared CT18/MSHT/LHAPDF-compatible parton-luminosity intake"
+        ∷ "Then use that convention to rerun the W4 Z-peak shape adequacy check"
         ∷ "Then supply Candidate256PhysicalCalibrationExternalReceipt with authority token, physical unit carrier, calibration map, quotient-scale factorization, and dimensional preservation"
         ∷ "Only after that receipt exists, construct matterFieldFromW4 from the calibrated W4 physical unit carrier and Candidate256 quotient-scale map"
         ∷ "Then construct stressEnergyTensorFromW4 over that matter field for the GR Einstein-equation lane"
         ∷ []
     ; exactNextObligationMapping =
         "Z-peak data/cache is present: t21 measurement and t22 covariance local artifacts from HEPData record ins2079374 are digest-bound"
+        ∷ "Accepted DY luminosity prerequisite: no AcceptedDYLuminosityConvention is inhabited for the local CT18/MSHT/LHAPDF packet"
         ∷ "Shared PDF prerequisite: W4 dirty Z-peak shape adequacy and W5 t45 correction both wait on missingSharedCT18MSHTLHAPDFPartonLuminosityIntake"
         ∷ "Runner blocker moved: dirty-z-peak accepts a declared uncalibrated shape callable plus one scalar fit, but current shape chi2/dof is 298.8462841768543"
         ∷ "Cross-band prerequisite: Candidate256 quotient/cross-band witness is available but remains pre-scale-setting"
         ∷ "Physical calibration prerequisite: external Candidate256 receipt must supply authority, unit carrier, calibration, factorization, and dimensional preservation"
-        ∷ "Matter-source prerequisite: matterFieldFromW4 and stressEnergyTensorFromW4 are downstream of the external physical calibration receipt, not current W4 evidence"
+        ∷ "Matter-source prerequisite: matterFieldFromW4 and stressEnergyTensorFromW4 are downstream of both AcceptedDYLuminosityConvention and Candidate256PhysicalCalibrationExternalReceipt, not current W4 evidence"
         ∷ "Strict physical lane: recommended next chemistry-facing lane is scale setting, before spectra, bonding, and empirical validation"
         ∷ []
     ; matterSourceBoundary =
@@ -191,17 +221,20 @@ canonicalW4PhysicalCalibrationObligationSurface =
         ∷ "It does not construct matterFieldFromW4"
         ∷ "It does not construct stressEnergyTensorFromW4"
         ∷ "It does not construct a sourced non-flat connection or an Einstein-equation receipt"
-        ∷ "Those constructions remain inadmissible until PDF-backed W4 adequacy and Candidate256PhysicalCalibrationExternalReceipt exist"
+        ∷ "Those constructions remain inadmissible until AcceptedDYLuminosityConvention, PDF-backed W4 adequacy, and Candidate256PhysicalCalibrationExternalReceipt exist"
         ∷ []
     ; nonPromotionBoundary =
         "This surface only maps already-existing W4 request, route, Z-peak, and chemistry-ledger obligations"
         ∷ "It does not construct W4SameRecordZPeakRatioCalibrationLaw"
+        ∷ "It does not construct AcceptedDYLuminosityConvention"
         ∷ "It does not construct Candidate256PhysicalCalibrationExternalReceipt"
         ∷ "It does not construct matterFieldFromW4 or stressEnergyTensorFromW4"
         ∷ "It does not construct physical unit authority, dimensional preservation, scale-setting closure, spectra, bonding, empirical validation, or W4 promotion"
         ∷ []
     ; zPeakCalibrationLawImpossibleHere =
         ZPeak.canonicalW4CalibrationRatioZPeakLawIsUninhabited
+    ; acceptedDYLuminosityConventionBoundaryImpossibleHere =
+        acceptedDYLuminosityConventionImpossibleHere
     ; externalReceiptImpossibleHere =
         External.candidate256PhysicalCalibrationExternalReceiptImpossibleHere
     }

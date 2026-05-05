@@ -179,6 +179,35 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def read_info_fields(path: Path) -> dict[str, str]:
+    keys = {
+        "SetDesc",
+        "Authors",
+        "Reference",
+        "Format",
+        "DataVersion",
+        "NumMembers",
+        "SetIndex",
+        "OrderQCD",
+        "FlavorScheme",
+        "NumFlavors",
+        "ErrorType",
+        "ErrorConfLevel",
+        "AlphaS_MZ",
+        "AlphaS_OrderQCD",
+    }
+    fields: dict[str, str] = {}
+    if not path.exists():
+        return fields
+    for line in path.read_text().splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        if key in keys:
+            fields[key] = value.strip()
+    return fields
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -193,6 +222,12 @@ def main() -> int:
         type=Path,
         help="downloaded CT18NLO archive, used for provenance digest",
     )
+    parser.add_argument(
+        "--info",
+        default="scripts/data/pdf/CT18NLO/CT18NLO.info",
+        type=Path,
+        help="LHAPDF set metadata file, used for convention provenance",
+    )
     parser.add_argument("--output", default="/tmp/ct18_dashi_pdf_packet.json", type=Path)
     parser.add_argument("--sqrt-s", default=13_000.0, type=float)
     parser.add_argument("--eta-cut", default=2.4, type=float)
@@ -201,6 +236,7 @@ def main() -> int:
     args = parser.parse_args()
 
     table = parse_lhagrid1(args.grid)
+    info_fields = read_info_fields(args.info)
     x = 0.01
     q_t43 = 61.64
     q_t45 = 134.24
@@ -244,6 +280,9 @@ def main() -> int:
         "set_index": 14400,
         "member": 0,
         "format": "lhagrid1",
+        "info": str(args.info),
+        "info_sha256": sha256(args.info) if args.info.exists() else None,
+        "info_fields": info_fields,
         "archive": str(args.archive),
         "archive_sha256": sha256(args.archive) if args.archive.exists() else None,
         "grid": str(args.grid),
@@ -270,8 +309,31 @@ def main() -> int:
             w5_t43_denominator_hypothesis_ratio - required
         ),
         "W5_t43_denominator_hypothesis_status": "rejected: the t43 denominator is already computed by W5_window_luminosity_ratio and gives 0.3348750784006896, not 0.8804486068",
+        "accepted_dy_luminosity_convention_status": "candidate_local_ct18nlo_convention_not_accepted",
+        "accepted_dy_luminosity_first_missing": "missingAcceptedDYLuminosityConventionAuthority",
+        "accepted_dy_luminosity_decision": {
+            "promotes_w4": False,
+            "promotes_w5": False,
+            "reason": "local CT18NLO convention is provenance-ready but not accepted by a repo authority surface and does not numerically match the W5 target",
+            "target": required,
+            "matching_target_ratio": w5_matching_target_luminosity_ratio,
+            "matching_target_abs_gap": abs(w5_matching_target_luminosity_ratio - required),
+        },
+        "accepted_dy_luminosity_required_authority": [
+            "citation or provider receipt accepting the Drell-Yan luminosity definition",
+            "mass-bin integration prescription for CMS-SMP-20-003 phi-star windows",
+            "scale choice authority for Q = M and any alternative Q^2 convention",
+            "flavour/channel sum authority including charge weights and heavy-flavour treatment",
+            "PDF member and uncertainty prescription over CT18NLO members",
+            "numeric tolerance and covariance treatment for W4 shape and W5 t45 correction",
+        ],
         "W4W5_luminosity_convention": {
             "kind": "rapidity-window Drell-Yan light-quark luminosity",
+            "formula": "integral dlog(x1) sum_q e_q^2 [q(x1,Q) qbar(tau/x1,Q) + qbar(x1,Q) q(tau/x1,Q)] with tau = M^2/s",
+            "pdf_table_quantity": "LHAPDF lhagrid1 stores x*f(x,Q); extractor divides by x before forming q and qbar luminosities",
+            "bin_integration": "trapezoid in log(x1) for each mass point, then trapezoid in mass over the requested mass window",
+            "scale_choice": "Q = dilepton mass for each center/window integration point",
+            "acceptance_status": "candidate diagnostic only; no accepted convention authority",
             "sqrt_s": args.sqrt_s,
             "eta_cut": args.eta_cut,
             "n_x": args.n_x,

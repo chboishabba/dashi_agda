@@ -9,6 +9,7 @@ open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.W4ZPeakCalibrationAnchorReceipt as W4ZPeak
+import DASHI.Physics.Closure.W4W5AcceptedDYLuminosityConventionDiagnostic as DYConvention
 import DASHI.Physics.Closure.W5CT18ExternalIntakeReceipt as W5CT18
 import DASHI.Physics.Closure.W5PDFCarrierExternalConfirmedGap as W5Gap
 
@@ -44,6 +45,9 @@ record W4W5PDFSharedDependencyDiagnostic : Setω where
 
     w5ConfirmedExternalGap :
       W5Gap.W5PDFCarrierExternalConfirmedGap
+
+    dyLuminosityConventionDiagnostic :
+      DYConvention.W4W5AcceptedDYLuminosityConventionDiagnostic
 
     firstMissing :
       W4W5PDFSharedFirstMissing
@@ -114,6 +118,8 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         W5CT18.canonicalW5CT18ExternalIntakeReceipt
     ; w5ConfirmedExternalGap =
         W5Gap.canonicalW5PDFCarrierExternalConfirmedGap
+    ; dyLuminosityConventionDiagnostic =
+        DYConvention.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
     ; firstMissing =
         missingSharedCT18MSHTLHAPDFPartonLuminosityIntake
     ; w4FirstMissingLabel =
@@ -174,6 +180,7 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "z-peak denominator probe gives t45/z_peak = 0.7514043986785174; abs gap from target 0.8804486068 is 0.12904420812148265"
         ∷ "t43 denominator hypothesis was tested directly: t45/t43 = 0.3348750784006896; abs gap from target 0.8804486068 is 0.5455735283993104"
         ∷ "therefore changing only the denominator to t43 does not close W4/W5 under the current rapidity-window CT18 convention"
+        ∷ "the CT18 packet now records formula, bin integration, scale choice, flavour sum, PDF member, checksums, and citation fields, but marks the convention candidate-not-accepted"
         ∷ "the first missing item remains an accepted parton-luminosity/bin-integration convention that maps CT18NLO to the DASHI t45 correction surface"
         ∷ []
     ; dependencyRationale =

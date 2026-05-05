@@ -175,6 +175,7 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "The repo t45 prediction baseline is sigma_DASHI(106-170, phi bin) / sigma_DASHI(76-106, phi bin)"
         ∷ "Local parser rapidity-window DY luminosity integration gives t45/z_peak = 0.7514043986785174, which does not satisfy the W5 target"
         ∷ "Local parser also records the t43-denominator mass-window ratio t45/t43 = 0.3348750784006896 and center ratio 0.13510406305538247; the t43 denominator hypothesis is rejected under this convention"
+        ∷ "The packet now records formula, bin integration, scale choice, flavour sum, CT18NLO member/provenance, and required authority fields, but remains candidate-not-accepted"
         ∷ "The confirmed internal DGLAP/LO carrier route remains insufficient for t45"
         ∷ "W5 is not externally ready until an accepted parton-luminosity/bin-integration convention and authority/provenance packet are supplied"
         ∷ []

@@ -11,6 +11,8 @@
     "z_peak_window": 2092088.6841268337
   },
   "W4W5_luminosity_convention": {
+    "acceptance_status": "candidate diagnostic only; no accepted convention authority",
+    "bin_integration": "trapezoid in log(x1) for each mass point, then trapezoid in mass over the requested mass window",
     "eta_cut": 2.4,
     "flavors": [
       {
@@ -26,6 +28,7 @@
         "pid": 3
       }
     ],
+    "formula": "integral dlog(x1) sum_q e_q^2 [q(x1,Q) qbar(tau/x1,Q) + qbar(x1,Q) q(tau/x1,Q)] with tau = M^2/s",
     "kind": "rapidity-window Drell-Yan light-quark luminosity",
     "mass_windows": {
       "t43_below_z": [
@@ -43,6 +46,8 @@
     },
     "n_m": 80,
     "n_x": 200,
+    "pdf_table_quantity": "LHAPDF lhagrid1 stores x*f(x,Q); extractor divides by x before forming q and qbar luminosities",
+    "scale_choice": "Q = dilepton mass for each center/window integration point",
     "sqrt_s": 13000.0
   },
   "W4_Q_Z": 91.2,
@@ -130,11 +135,47 @@
   "W5_t43_denominator_hypothesis_status": "rejected: the t43 denominator is already computed by W5_window_luminosity_ratio and gives 0.3348750784006896, not 0.8804486068",
   "W5_window_luminosity_abs_gap": 0.5455735283993104,
   "W5_window_luminosity_ratio": 0.3348750784006896,
+  "accepted_dy_luminosity_convention_status": "candidate_local_ct18nlo_convention_not_accepted",
+  "accepted_dy_luminosity_decision": {
+    "matching_target_abs_gap": 0.12904420812148265,
+    "matching_target_ratio": 0.7514043986785174,
+    "promotes_w4": false,
+    "promotes_w5": false,
+    "reason": "local CT18NLO convention is provenance-ready but not accepted by a repo authority surface and does not numerically match the W5 target",
+    "target": 0.8804486068
+  },
+  "accepted_dy_luminosity_first_missing": "missingAcceptedDYLuminosityConventionAuthority",
+  "accepted_dy_luminosity_required_authority": [
+    "citation or provider receipt accepting the Drell-Yan luminosity definition",
+    "mass-bin integration prescription for CMS-SMP-20-003 phi-star windows",
+    "scale choice authority for Q = M and any alternative Q^2 convention",
+    "flavour/channel sum authority including charge weights and heavy-flavour treatment",
+    "PDF member and uncertainty prescription over CT18NLO members",
+    "numeric tolerance and covariance treatment for W4 shape and W5 t45 correction"
+  ],
   "archive": "scripts/data/pdf/CT18NLO.tar.gz",
   "archive_sha256": "c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213",
   "format": "lhagrid1",
   "grid": "scripts/data/pdf/CT18NLO/CT18NLO_0000.dat",
   "grid_sha256": "375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410",
+  "info": "scripts/data/pdf/CT18NLO/CT18NLO.info",
+  "info_fields": {
+    "AlphaS_MZ": "0.118000",
+    "AlphaS_OrderQCD": "1",
+    "Authors": "T.-J. Hou, K. Xie, J. Gao, S. Dulat, M. Guzzi, T. J. Hobbs, J. Huston, P. Nadolsky, J. Pumplin, C. Schmidt, I. Sitiwaldi, D. Stump, C.-P. Yuan",
+    "DataVersion": "1",
+    "ErrorConfLevel": "90",
+    "ErrorType": "hessian",
+    "FlavorScheme": "variable",
+    "Format": "lhagrid1",
+    "NumFlavors": "5",
+    "NumMembers": "59",
+    "OrderQCD": "1",
+    "Reference": "arXiv:1908.11394 (temporary)",
+    "SetDesc": "'CT18NLO, 3-loop PDF evolution with HOPPET and HOPPET alphas_s running solution. This set has 59 member PDFs. mem=0 --> central value; mem=1-58 --> eigenvector sets 90%'",
+    "SetIndex": "14400"
+  },
+  "info_sha256": "be60232d8e6c49982c82f5fa990fd5b0fd1050719944f31602bf27cdb16548b0",
   "interpolation": "log-x/log-Q bilinear over LHAPDF6 lhagrid1 x*f(x,Q) values",
   "member": 0,
   "pdf_set": "CT18NLO",

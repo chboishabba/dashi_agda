@@ -141,6 +141,8 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         ∷ "the packet identifies the repo t45 baseline as sigma_DASHI(106-170, phi bin) / sigma_DASHI(76-106, phi bin)"
         ∷ "the packet includes the z-peak denominator rapidity-window DY luminosity ratio t45/z_peak = 0.7514043986785174 with gap 0.12904420812148265 from target 0.8804486068"
         ∷ "the packet also records the t43 denominator hypothesis directly: t45/t43 window ratio 0.3348750784006896 with gap 0.5455735283993104"
+        ∷ "the packet now records formula, bin integration, scale choice, flavour sum, CT18NLO info digest be60232d8e6c49982c82f5fa990fd5b0fd1050719944f31602bf27cdb16548b0, and required authority fields"
+        ∷ "the packet status is candidate_local_ct18nlo_convention_not_accepted with first missing missingAcceptedDYLuminosityConventionAuthority"
         ∷ []
     ; observedLocalTooling =
         "python3 importlib.util.find_spec(\"lhapdf\") returned absent; pip has no lhapdf wheel for this environment"
@@ -149,7 +151,7 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         ∷ "repo-local scripts/extract_ct18_pdf_packet.py parsed the CT18NLO lhagrid1 central member without LHAPDF runtime bindings"
         ∷ []
     ; exactExternalIntakeBlocker =
-        "local CT18NLO rapidity-window DY query gives t45/z_peak = 0.7514043986785174 and t45/t43 = 0.3348750784006896, neither matching target 0.8804486068; missing item is an accepted parton-luminosity/bin-integration convention and authority/provenance route"
+        "local CT18NLO rapidity-window DY query is now provenance-ready but candidate-not-accepted: t45/z_peak = 0.7514043986785174 and t45/t43 = 0.3348750784006896, neither matching target 0.8804486068; missing item is missingAcceptedDYLuminosityConventionAuthority"
     ; networkFetchPerformed =
         true
     ; noPDFCarrierConstructed =
