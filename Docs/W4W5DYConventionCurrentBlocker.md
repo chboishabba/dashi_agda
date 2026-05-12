@@ -18,6 +18,17 @@ diagnostic, but it is not an accepted Drell-Yan luminosity convention authority.
 No W4 promotion, W5 promotion, external PDF carrier, or downstream physical
 calibration receipt follows from the current local artifacts.
 
+Lane 5 now has a non-promoting pressure-domain localisation surface:
+
+```text
+scripts/chi2_pressure_decomposition.py
+Docs/DYPressureDecompositionArchitecture.md
+```
+
+This surface can record candidate t43/W4 chi2 pressure, but it does not assign
+final cause while the accepted DY convention/bin-normalization authority is
+missing.
+
 ## CT18 Local Grid Status
 
 Local CT18NLO grid artifacts are recorded under:

@@ -8,6 +8,7 @@ open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.HEPDataW3NonCollapseWitnessReceipt as NonCollapse
+import DASHI.Physics.Closure.HEPDataRatioTableArtifactReceipt as RatioReceipt
 import DASHI.Physics.Closure.W3AcceptedAuthorityExternalReceiptObligation as EXT
 import DASHI.Physics.Closure.W3AcceptedAuthorityExternalReceiptRequestPack as Pack
 import DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate as AUTH
@@ -42,6 +43,10 @@ data W3AcceptedEvidenceAuthorityTokenHandoffPacketStatus : Set where
   finalProviderFacingHandoffPacketRequestOnly :
     W3AcceptedEvidenceAuthorityTokenHandoffPacketStatus
 
+data W3CanonicalHEPDataChecksumRouteStatus : Set where
+  localHEPDataArtifactReceiptBoundAwaitingProviderCanonicalBinding :
+    W3CanonicalHEPDataChecksumRouteStatus
+
 record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
   field
     status :
@@ -64,6 +69,12 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
 
     r53PerBinNonCollapseReceipt :
       NonCollapse.HEPDataW3T43RunnerPerBinNonCollapseReceipt
+
+    localRatioTableArtifactReceipt :
+      RatioReceipt.HEPDataRatioTableArtifactReceipt
+
+    canonicalHEPDataChecksumRouteStatus :
+      W3CanonicalHEPDataChecksumRouteStatus
 
     packetReadiness :
       W3AcceptedEvidenceAuthorityTokenPacketReadiness
@@ -172,6 +183,90 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
       ≡
       true
 
+    candidateComparisonArtifact :
+      String
+
+    candidateComparisonArtifactSha256 :
+      String
+
+    candidateComparisonStatus :
+      String
+
+    candidateComparisonChi2PerDof :
+      String
+
+    localT19CsvSha256 :
+      String
+
+    localT20CsvSha256 :
+      String
+
+    localT43CsvSha256 :
+      String
+
+    localT43CsvSha256MatchesHEPR28Receipt :
+      localT43CsvSha256
+      ≡
+      RatioReceipt.HEPDataRatioTableArtifactReceipt.t43Sha256
+        localRatioTableArtifactReceipt
+
+    localT44CsvSha256 :
+      String
+
+    localT44CsvSha256MatchesHEPR28Receipt :
+      localT44CsvSha256
+      ≡
+      RatioReceipt.HEPDataRatioTableArtifactReceipt.t44Sha256
+        localRatioTableArtifactReceipt
+
+    localT43T44ManifestPath :
+      String
+
+    localT43T44ManifestPathMatchesHEPR28Receipt :
+      localT43T44ManifestPath
+      ≡
+      RatioReceipt.HEPDataRatioTableArtifactReceipt.sha256ManifestPath
+        localRatioTableArtifactReceipt
+
+    localT43T44HeadersValidated :
+      Bool
+
+    localT43T44HeadersValidatedMatchesHEPR28Receipt :
+      localT43T44HeadersValidated
+      ≡
+      RatioReceipt.HEPDataRatioTableArtifactReceipt.artifactHeadersValidated
+        localRatioTableArtifactReceipt
+
+    localT43T44HeadersValidatedIsTrue :
+      localT43T44HeadersValidated
+      ≡
+      true
+
+    providerCanonicalT43ChecksumOrEquivalent :
+      String
+
+    providerCanonicalT44ChecksumOrEquivalent :
+      String
+
+    providerCanonicalTableChecksumBindingPresent :
+      Bool
+
+    providerCanonicalTableChecksumBindingPresentIsFalse :
+      providerCanonicalTableChecksumBindingPresent
+      ≡
+      false
+
+    tableChecksumBound :
+      Bool
+
+    tableChecksumBoundIsFalseUntilProviderAttestation :
+      tableChecksumBound
+      ≡
+      false
+
+    exactRemainingChecksumGap :
+      String
+
     claimScopeBoundary :
       List String
 
@@ -261,6 +356,10 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         Candidate.canonicalW3T43AuthorityPacketCandidateDiagnostic
     ; r53PerBinNonCollapseReceipt =
         NonCollapse.canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt
+    ; localRatioTableArtifactReceipt =
+        RatioReceipt.canonicalHEPDataRatioTableArtifactReceipt
+    ; canonicalHEPDataChecksumRouteStatus =
+        localHEPDataArtifactReceiptBoundAwaitingProviderCanonicalBinding
     ; packetReadiness =
         readyForExternalAuthorityTokenReview
     ; handoffPacketStatus =
@@ -311,12 +410,58 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         ∷ "freezeCommit: 3205d746639568762c9e97adf4a3672c356bd491"
         ∷ "perBinArtifactSha256: 3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0"
         ∷ "perBinProjectionDigest: cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79"
+        ∷ "cleanComparisonArtifactSha256: 92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238"
+        ∷ "cmsAnalysisId: CMS-SMP-20-003"
         ∷ "nonCollapseWitness: bin 12, pred 0.0486590199823977, data 0.049758, unc 0.00048197510309143566, pull -2.280159308132989"
         ∷ []
     ; requiredTokenEvidenceFieldsArePublicAndRunnerBound =
         true
     ; requiredTokenEvidenceFieldsArePublicAndRunnerBoundIsTrue =
         refl
+    ; candidateComparisonArtifact =
+        "logs/research/w3_frozen_3205d74_t43_comparison_20260513.json"
+    ; candidateComparisonArtifactSha256 =
+        "92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238"
+    ; candidateComparisonStatus =
+        "candidate-pass-no-authority-token"
+    ; candidateComparisonChi2PerDof =
+        "2.1565191176275618"
+    ; localT19CsvSha256 =
+        "1a1d280da645f4c55aba73aabf1b398a3fd9614532c363d972018f194b653677"
+    ; localT20CsvSha256 =
+        "fa4b694211862d4b07b761d0dab77c8fe1016d2ccd5015dc6f7bc3272c34201a"
+    ; localT43CsvSha256 =
+        "0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b"
+    ; localT43CsvSha256MatchesHEPR28Receipt =
+        refl
+    ; localT44CsvSha256 =
+        "3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b"
+    ; localT44CsvSha256MatchesHEPR28Receipt =
+        refl
+    ; localT43T44ManifestPath =
+        "scripts/data/hepdata/ins2079374_t43_t44.sha256"
+    ; localT43T44ManifestPathMatchesHEPR28Receipt =
+        refl
+    ; localT43T44HeadersValidated =
+        true
+    ; localT43T44HeadersValidatedMatchesHEPR28Receipt =
+        refl
+    ; localT43T44HeadersValidatedIsTrue =
+        refl
+    ; providerCanonicalT43ChecksumOrEquivalent =
+        "awaiting provider canonical HEPData t43 checksum or immutable equivalent"
+    ; providerCanonicalT44ChecksumOrEquivalent =
+        "awaiting provider canonical HEPData t44 checksum or immutable equivalent"
+    ; providerCanonicalTableChecksumBindingPresent =
+        false
+    ; providerCanonicalTableChecksumBindingPresentIsFalse =
+        refl
+    ; tableChecksumBound =
+        false
+    ; tableChecksumBoundIsFalseUntilProviderAttestation =
+        refl
+    ; exactRemainingChecksumGap =
+        "tableChecksumBound: authoritative HEPData t43/t44 table checksum or provider-equivalent immutable table binding is absent"
     ; claimScopeBoundary =
         "Claim scope is limited SM+GR empirical coordination for the bounded below-Z t43 lane"
         ∷ "This packet is not a broad unification claim"
@@ -355,6 +500,11 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         ∷ "runnerTrace: freeze commit 3205d746639568762c9e97adf4a3672c356bd491"
         ∷ "artifactTrace: per-bin artifact sha256 3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0"
         ∷ "projectionTrace: per-bin projection digest cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79"
+        ∷ "candidateComparisonTrace: logs/research/w3_frozen_3205d74_t43_comparison_20260513.json sha256 92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238 chi2/dof 2.1565191176275618"
+        ∷ "localSourceTableChecksumTrace: t19 1a1d280da645f4c55aba73aabf1b398a3fd9614532c363d972018f194b653677; t20 fa4b694211862d4b07b761d0dab77c8fe1016d2ccd5015dc6f7bc3272c34201a"
+        ∷ "localTableChecksumTrace: t43 0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b; t44 3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b"
+        ∷ "localHEPR28ReceiptTrace: t43/t44 checksums match HEPDataRatioTableArtifactReceipt and manifest scripts/data/hepdata/ins2079374_t43_t44.sha256"
+        ∷ "remainingChecksumTrace: tableChecksumBound still requires provider attestation of authoritative HEPData t43/t44 payload checksums or equivalent immutable table records"
         ∷ "witnessTrace: bin 12 pred 0.0486590199823977 data 0.049758 unc 0.00048197510309143566 pull -2.280159308132989"
         ∷ "boundaryTrace: token-only intake request; no accepted receipt, evidence-backed target, B4 promotion, origin promotion, W4/W5/W8 promotion, or broad unification claim"
         ∷ []
@@ -373,6 +523,9 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         ∷ "requestPack: DASHI.Physics.Closure.W3AcceptedAuthorityExternalReceiptRequestPack.canonicalW3AcceptedAuthorityExternalReceiptRequestPack"
         ∷ "currentExternalStatus: W3AcceptedAuthorityExternalReceipt obligation-only; no accepted external receipt constructed"
         ∷ "authorityEvidence: HEP-R53 runner per-bin non-collapse receipt plus public HEPData t43/t44 source fields"
+        ∷ "candidateComparison: candidate-pass-no-authority-token chi2/dof 2.1565191176275618 artifact sha256 92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238"
+        ∷ "localChecksumRoute: HEP-R28 local t43/t44 checksum receipt is bound, with CSV DOI headers validated"
+        ∷ "remainingChecksumObligation: tableChecksumBound"
         ∷ "traceabilityChecklist: providerTraceabilityChecklist"
         ∷ "claimScope: limited SM+GR empirical coordination for bounded below-Z t43, not broad unification"
         ∷ "providerResponse: supply the accepted authority token or return typed authority-unavailable/mismatch diagnostic"
@@ -382,7 +535,7 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
     ; providerFacingHandoffPacketIsFinalIsTrue =
         refl
     ; exactFirstMissingBlocker =
-        "W3AcceptedEvidenceAuthorityToken remains externally outstanding"
+        "W3AcceptedEvidenceAuthorityToken remains externally outstanding; tableChecksumBound remains absent"
     ; exactFirstMissingStatus =
         "request-only final handoff; first missing = W3AcceptedEvidenceAuthorityToken; no W3AcceptedAuthorityExternalReceipt or W3AcceptedAuthorityPositiveRoute is constructed in repo"
     ; exactFirstMissingName =
@@ -391,7 +544,10 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
     ; exactFirstMissingNameMatchesAuthorityTokenName =
         refl
     ; stillMissingPacketFields =
-        []
+        "providerCanonicalT43ChecksumOrEquivalent"
+        ∷ "providerCanonicalT44ChecksumOrEquivalent"
+        ∷ "tableChecksumBound"
+        ∷ []
     }
 
 canonicalW3AcceptedEvidenceAuthorityTokenFirstMissing :
@@ -435,9 +591,45 @@ canonicalW3AcceptedEvidenceAuthorityTokenFirstMissingProviderField :
   Pack.missingAcceptedEvidenceAuthorityToken
 canonicalW3AcceptedEvidenceAuthorityTokenFirstMissingProviderField = refl
 
-canonicalW3AcceptedEvidenceAuthorityTokenStillMissingNoPacketFields :
+canonicalW3AcceptedEvidenceAuthorityTokenStillMissingTableChecksumBound :
   W3AcceptedEvidenceAuthorityTokenIntakeRequest.stillMissingPacketFields
     canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
   ≡
+  "providerCanonicalT43ChecksumOrEquivalent"
+  ∷
+  "providerCanonicalT44ChecksumOrEquivalent"
+  ∷
+  "tableChecksumBound"
+  ∷
   []
-canonicalW3AcceptedEvidenceAuthorityTokenStillMissingNoPacketFields = refl
+canonicalW3AcceptedEvidenceAuthorityTokenStillMissingTableChecksumBound = refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenTableChecksumBound :
+  W3AcceptedEvidenceAuthorityTokenIntakeRequest.tableChecksumBound
+    canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
+  ≡
+  false
+canonicalW3AcceptedEvidenceAuthorityTokenTableChecksumBound = refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenLocalT43ChecksumBound :
+  W3AcceptedEvidenceAuthorityTokenIntakeRequest.localT43CsvSha256
+    canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
+  ≡
+  RatioReceipt.HEPDataRatioTableArtifactReceipt.t43Sha256
+    RatioReceipt.canonicalHEPDataRatioTableArtifactReceipt
+canonicalW3AcceptedEvidenceAuthorityTokenLocalT43ChecksumBound = refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenLocalT44ChecksumBound :
+  W3AcceptedEvidenceAuthorityTokenIntakeRequest.localT44CsvSha256
+    canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
+  ≡
+  RatioReceipt.HEPDataRatioTableArtifactReceipt.t44Sha256
+    RatioReceipt.canonicalHEPDataRatioTableArtifactReceipt
+canonicalW3AcceptedEvidenceAuthorityTokenLocalT44ChecksumBound = refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenProviderCanonicalBindingAbsent :
+  W3AcceptedEvidenceAuthorityTokenIntakeRequest.providerCanonicalTableChecksumBindingPresent
+    canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
+  ≡
+  false
+canonicalW3AcceptedEvidenceAuthorityTokenProviderCanonicalBindingAbsent = refl

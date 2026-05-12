@@ -1,0 +1,43 @@
+{
+  "artifactSchema": "dashi-w3-authority-checksum-request-v1",
+  "generatedDate": "2026-05-13",
+  "lane": "W3",
+  "status": "provider-canonical-checksum-binding-requested",
+  "promotionStatus": "candidate-only-no-authority-token",
+  "comparison": {
+    "artifact": "logs/research/w3_frozen_3205d74_t43_comparison_20260513.json",
+    "artifactSha256": "92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238",
+    "status": "candidate-pass-no-authority-token",
+    "chi2PerDof": "2.1565191176275618"
+  },
+  "localChecksumBinding": {
+    "bindingStatus": "local-hepdata-artifact-receipt-bound",
+    "receipt": "DASHI/Physics/Closure/HEPDataRatioTableArtifactReceipt.agda",
+    "manifest": "scripts/data/hepdata/ins2079374_t43_t44.sha256",
+    "t43": {
+      "tableDoi": "10.17182/hepdata.115656.v1/t43",
+      "path": "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv",
+      "sha256": "0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b",
+      "firstHeaderLine": "#: table_doi: 10.17182/hepdata.115656.v1/t43"
+    },
+    "t44": {
+      "tableDoi": "10.17182/hepdata.115656.v1/t44",
+      "path": "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_over_mass_76-106_t44.csv",
+      "sha256": "3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b",
+      "firstHeaderLine": "#: table_doi: 10.17182/hepdata.115656.v1/t44"
+    }
+  },
+  "providerCanonicalChecksumBinding": {
+    "bindingStatus": "absent",
+    "providerCanonicalT43ChecksumOrEquivalent": null,
+    "providerCanonicalT44ChecksumOrEquivalent": null,
+    "tableChecksumBound": false
+  },
+  "exactExternalStep": "Provider must return providerCanonicalT43ChecksumOrEquivalent and providerCanonicalT44ChecksumOrEquivalent, then explicitly set tableChecksumBound=true for the cited HEPData DOI/table provenance, or mark the field insufficient/rejected with the exact failed rule.",
+  "nonPromotionBoundary": [
+    "No W3AcceptedEvidenceAuthorityToken is constructed.",
+    "No W3AcceptedAuthorityExternalReceipt is constructed.",
+    "Local HEP-R28 checksums are not treated as provider canonical authority.",
+    "W3 remains candidate-only until an accepted external authority response exists."
+  ]
+}

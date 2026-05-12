@@ -10,7 +10,6 @@ open import Data.List.Base using (List; _∷_; [])
 open import Data.Vec using (Vec; []; _∷_)
 
 import DASHI.Physics.Closure.ChemistryPhysicalHandoffDiagnostic as Handoff
-import DASHI.Physics.Closure.ChemistryRightLimitsQuotientCrossBandCandidate256Witness as Candidate256
 import DASHI.Physics.Closure.DrosophilaGenomeW4CandidateAuthorityReceipt as Genome
 import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation as External
 import DASHI.Physics.Closure.W4StrictPhysicalNextObligation as Next
@@ -456,11 +455,9 @@ candidate256TritDimensionalInvarianceUnderT :
   candidate256TritQuotientCalibrationMap (candidate256QuotientT q)
   ≡
   candidate256TritQuotientCalibrationMap q
-candidate256TritDimensionalInvarianceUnderT q
-  rewrite candidate256AddressNegationCompatibility q
-        | v3AddressNegationInvariant
-            candidate256TritValuationFuel
-            (candidate256IntegerAddress q) =
+candidate256TritDimensionalInvarianceUnderT
+  (CDQ.chemistryFeature strengths purines)
+  rewrite countStrongButLastFlipLastInvariant strengths =
     refl
 
 candidate256LeftTritDepth :
@@ -487,6 +484,71 @@ candidate256TritNontrivialSeparation :
   candidate256TritQuotientCalibrationMap Surrogate.candidate256RightQuotientClass →
   ⊥
 candidate256TritNontrivialSeparation ()
+
+candidate256TritNontrivialSeparationAfterT :
+  candidate256TritQuotientCalibrationMap
+    (candidate256QuotientT Surrogate.candidate256LeftQuotientClass)
+  ≡
+  candidate256TritQuotientCalibrationMap
+    (candidate256QuotientT Surrogate.candidate256RightQuotientClass) →
+  ⊥
+candidate256TritNontrivialSeparationAfterT equalityAfterT
+  rewrite candidate256TritDimensionalInvarianceUnderT
+            Surrogate.candidate256LeftQuotientClass
+        | candidate256TritDimensionalInvarianceUnderT
+            Surrogate.candidate256RightQuotientClass =
+    candidate256TritNontrivialSeparation equalityAfterT
+
+Candidate256TritLchemDimensionalPreservation :
+  Handoff.QuotientLawAtWitness Next.canonicalCandidate256QuotientLaw →
+  Set
+Candidate256TritLchemDimensionalPreservation _ =
+  (q : Surrogate.Candidate256QuotientClass) →
+  candidate256TritQuotientCalibrationMap (candidate256QuotientT q)
+  ≡
+  candidate256TritQuotientCalibrationMap q
+
+candidate256TritLchemDimensionalPreservationAtWitness :
+  (law : Handoff.QuotientLawAtWitness Next.canonicalCandidate256QuotientLaw) →
+  Candidate256TritLchemDimensionalPreservation law
+candidate256TritLchemDimensionalPreservationAtWitness _ =
+  candidate256TritDimensionalInvarianceUnderT
+
+record Candidate256RchemRelationAtWitness
+  (law : Handoff.QuotientLawAtWitness Next.canonicalCandidate256QuotientLaw) :
+  Set where
+  field
+    tsfvCompatibility :
+      Candidate256TritLchemDimensionalPreservation law
+
+    nontrivialPositiveWitness :
+      candidate256TritQuotientCalibrationMap
+        Surrogate.candidate256LeftQuotientClass
+      ≡
+      candidate256TritQuotientCalibrationMap
+        Surrogate.candidate256RightQuotientClass →
+      ⊥
+
+    nontrivialNegativeWitness :
+      candidate256TritQuotientCalibrationMap
+        (candidate256QuotientT Surrogate.candidate256LeftQuotientClass)
+      ≡
+      candidate256TritQuotientCalibrationMap
+        (candidate256QuotientT Surrogate.candidate256RightQuotientClass) →
+      ⊥
+
+candidate256RchemRelationAtWitness :
+  (law : Handoff.QuotientLawAtWitness Next.canonicalCandidate256QuotientLaw) →
+  Candidate256RchemRelationAtWitness law
+candidate256RchemRelationAtWitness law =
+  record
+    { tsfvCompatibility =
+        candidate256TritLchemDimensionalPreservationAtWitness law
+    ; nontrivialPositiveWitness =
+        candidate256TritNontrivialSeparation
+    ; nontrivialNegativeWitness =
+        candidate256TritNontrivialSeparationAfterT
+    }
 
 candidate256InternalTritCalibrationLaw :
   TSFVTritCalibrationLaw
@@ -642,21 +704,19 @@ canonicalTSFVTritCalibrationLawDiagnostic =
         ∷ "Positive: local addressAbs is invariant under addressNegation"
         ∷ "Positive: local bounded v3 map uses DASHI.Arithmetic.VpDepth.vp-depth at p = 3"
         ∷ "Positive: v3AddressDepth is invariant under addressNegation by addressAbsNegationInvariant"
-        ∷ "Negative: no local Candidate256QuotientClass -> TSFVIntegerAddress function is evidenced"
-        ∷ "Negative: no local Candidate256 quotient T involution/address-negation compatibility theorem is evidenced"
+        ∷ "Positive: Candidate256 quotient T flips the final strength coordinate and is involutive"
+        ∷ "Positive: Candidate256 integerAddress uses pow3(countStrongButLast) with final-strength sign"
+        ∷ "Positive: Candidate256 addressNegationCompatibility is inhabited for the internal T"
+        ∷ "Positive: internal quotientCalibrationMap factors through v3AddressDepth"
+        ∷ "Positive: internal dimensional invariance under T is inhabited"
+        ∷ "Positive: canonical Candidate256 left/right witnesses separate at v3 depths 1 and 0"
         ∷ "Negative: diagnostic TSFVDiagnosticPhysicalUnitCarrier is not an external PhysicalUnitCarrier authority"
         ∷ "Negative: no Candidate256PhysicalCalibrationAuthorityToken or external receipt is constructed"
         ∷ []
     ; missingFieldList =
-        "quotientT : Candidate256QuotientClass -> Candidate256QuotientClass"
-        ∷ "quotientTInvolutive : (q : Candidate256QuotientClass) -> quotientT (quotientT q) == q"
-        ∷ "integerAddress : Candidate256QuotientClass -> TSFVIntegerAddress"
-        ∷ "addressNegationCompatibility : integerAddress (quotientT q) == addressNegation (integerAddress q)"
-        ∷ "quotientCalibrationMap : Candidate256QuotientClass -> PhysicalUnitCarrier"
-        ∷ "quotientCalibrationMatchesV3Address : quotientCalibrationMap q == calibrationMap (v3AddressDepth valuationFuel (integerAddress q))"
-        ∷ "dimensionalInvarianceUnderT : quotientCalibrationMap (quotientT q) == quotientCalibrationMap q"
-        ∷ "nontrivialSeparation over candidate256LeftQuotientClass and candidate256RightQuotientClass"
-        ∷ "external physical unit authority and Candidate256PhysicalCalibrationAuthorityToken"
+        "external physical unit authority for the baseUnit/calibration carrier"
+        ∷ "Candidate256PhysicalCalibrationAuthorityToken"
+        ∷ "Candidate256PhysicalCalibrationExternalReceipt consuming authority, physical units, calibration, factorization, and dimensional preservation"
         ∷ []
     }
 
@@ -666,6 +726,14 @@ tsfvTritDiagnosticDoesNotConstructLaw :
   ≡
   false
 tsfvTritDiagnosticDoesNotConstructLaw =
+  refl
+
+tsfvTritDiagnosticConstructsInternalLaw :
+  TSFVTritCalibrationLawDiagnostic.constructsInternalTritCalibrationLaw
+    canonicalTSFVTritCalibrationLawDiagnostic
+  ≡
+  true
+tsfvTritDiagnosticConstructsInternalLaw =
   refl
 
 tsfvTritDiagnosticDoesNotPromoteW4 :

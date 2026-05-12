@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.CliffordEvenLiftBridge as Clifford
+import DASHI.Algebra.Trit.E8RootEnumeration as E8
 import DASHI.Physics.Closure.CliffordToEvenWaveLiftBridgeTheorem as CliffordTheorem
 import DASHI.Physics.Closure.LamTungE8AdapterSurface as R3
 import DASHI.Physics.Closure.LilaE8RootEnumerationReceiptR2 as R2
@@ -21,9 +22,133 @@ import DASHI.Physics.Closure.LilaE8RootEnumerationReceiptR2 as R2
 -- coordinate enumeration.  It does not postulate or prove the Lam-Tung
 -- relation as an E8 even-sum identity.
 
+E8RootEnumerationReceipt : Set
+E8RootEnumerationReceipt =
+  E8.E8RootEnumerationComplete
+
 data LamTungAsE8EvenSumIdentityStatus : Set where
   blockedAwaitingR2CoordinateEnumerationAndIdentityProof :
     LamTungAsE8EvenSumIdentityStatus
+
+data Lane1E8RootEnumerationReceiptField : Set where
+  lane1E8RootCarrier :
+    Lane1E8RootEnumerationReceiptField
+  lane1E8IndexedRootCarrier :
+    Lane1E8RootEnumerationReceiptField
+  lane1IntegerRoots :
+    Lane1E8RootEnumerationReceiptField
+  lane1IntegerRootsLength112 :
+    Lane1E8RootEnumerationReceiptField
+  lane1HalfRoots :
+    Lane1E8RootEnumerationReceiptField
+  lane1HalfRootsLength128 :
+    Lane1E8RootEnumerationReceiptField
+  lane1AllRoots :
+    Lane1E8RootEnumerationReceiptField
+  lane1AllRootsLength240 :
+    Lane1E8RootEnumerationReceiptField
+  lane1RootEqualityDecision :
+    Lane1E8RootEnumerationReceiptField
+  lane1RootMembershipDecision :
+    Lane1E8RootEnumerationReceiptField
+  lane1NoDuplicateRoots :
+    Lane1E8RootEnumerationReceiptField
+  lane1EnumerationComplete :
+    Lane1E8RootEnumerationReceiptField
+  lane1SquaredNormLaw :
+    Lane1E8RootEnumerationReceiptField
+  lane1InnerProductLaw :
+    Lane1E8RootEnumerationReceiptField
+  lane1EvenSumParityLaw :
+    Lane1E8RootEnumerationReceiptField
+  lane1CoordinateChart8 :
+    Lane1E8RootEnumerationReceiptField
+  lane1CoordinateAssignmentCompatibility :
+    Lane1E8RootEnumerationReceiptField
+
+canonicalLane1E8RootEnumerationReceiptFields :
+  List Lane1E8RootEnumerationReceiptField
+canonicalLane1E8RootEnumerationReceiptFields =
+  lane1E8RootCarrier
+  ∷ lane1E8IndexedRootCarrier
+  ∷ lane1IntegerRoots
+  ∷ lane1IntegerRootsLength112
+  ∷ lane1HalfRoots
+  ∷ lane1HalfRootsLength128
+  ∷ lane1AllRoots
+  ∷ lane1AllRootsLength240
+  ∷ lane1RootEqualityDecision
+  ∷ lane1RootMembershipDecision
+  ∷ lane1NoDuplicateRoots
+  ∷ lane1EnumerationComplete
+  ∷ lane1SquaredNormLaw
+  ∷ lane1InnerProductLaw
+  ∷ lane1EvenSumParityLaw
+  ∷ lane1CoordinateChart8
+  ∷ lane1CoordinateAssignmentCompatibility
+  ∷ []
+
+data E8RootExhaustiveCheckStep : Set where
+  checkIntegerRootFamily112 :
+    E8RootExhaustiveCheckStep
+  checkHalfRootFamily128 :
+    E8RootExhaustiveCheckStep
+  appendFamiliesAndCheckLength240 :
+    E8RootExhaustiveCheckStep
+  decideEveryPairForDuplicateFreedom :
+    E8RootExhaustiveCheckStep
+  decideMembershipForEachCandidateRoot :
+    E8RootExhaustiveCheckStep
+  verifySquaredNormForAll240Roots :
+    E8RootExhaustiveCheckStep
+  verifyInnerProductsInE8LatticeConvention :
+    E8RootExhaustiveCheckStep
+  verifyEvenSumParityForAll240Roots :
+    E8RootExhaustiveCheckStep
+  verifyA0ToA7CoordinateAssignment :
+    E8RootExhaustiveCheckStep
+  transportLamTungRelationToEvenSumIdentity :
+    E8RootExhaustiveCheckStep
+
+canonicalE8RootExhaustiveCheckSteps :
+  List E8RootExhaustiveCheckStep
+canonicalE8RootExhaustiveCheckSteps =
+  checkIntegerRootFamily112
+  ∷ checkHalfRootFamily128
+  ∷ appendFamiliesAndCheckLength240
+  ∷ decideEveryPairForDuplicateFreedom
+  ∷ decideMembershipForEachCandidateRoot
+  ∷ verifySquaredNormForAll240Roots
+  ∷ verifyInnerProductsInE8LatticeConvention
+  ∷ verifyEvenSumParityForAll240Roots
+  ∷ verifyA0ToA7CoordinateAssignment
+  ∷ transportLamTungRelationToEvenSumIdentity
+  ∷ []
+
+data LilaR3CurrentlyUninhabited : Set where
+  noE8RootEnumerationReceipt :
+    LilaR3CurrentlyUninhabited
+  noLamTungCoefficientReceipt :
+    LilaR3CurrentlyUninhabited
+  noA0ToA7CoordinateAssignmentProof :
+    LilaR3CurrentlyUninhabited
+  noEvenSumIdentityProof :
+    LilaR3CurrentlyUninhabited
+  noPhiStarProjectionReceipt :
+    LilaR3CurrentlyUninhabited
+  noPromotionReceipt :
+    LilaR3CurrentlyUninhabited
+
+canonicalLilaR3CurrentlyUninhabited :
+  List LilaR3CurrentlyUninhabited
+canonicalLilaR3CurrentlyUninhabited =
+  noE8RootEnumerationReceipt
+  ∷ noLamTungCoefficientReceipt
+  ∷ noA0ToA7CoordinateAssignmentProof
+  ∷ noEvenSumIdentityProof
+  ∷ noPhiStarProjectionReceipt
+  ∷ noPromotionReceipt
+  ∷ []
 
 data LilaR3IdentityDependency : Set where
   needsPromotedR2EightDimensionalDoubledCoordinateFrame :
@@ -125,6 +250,34 @@ record LamTungAsE8EvenSumIdentityDiagnostic : Setω where
     cliffordBridge :
       CliffordTheorem.CliffordToEvenWaveLiftBridgeTheorem
 
+    e8RootEnumerationReceiptGate :
+      E8RootEnumerationReceipt →
+      ⊥
+
+    lane1RequiredReceiptFields :
+      List Lane1E8RootEnumerationReceiptField
+
+    lane1RequiredReceiptFieldsAreCanonical :
+      lane1RequiredReceiptFields
+      ≡
+      canonicalLane1E8RootEnumerationReceiptFields
+
+    exhaustiveCheckOver240Roots :
+      List E8RootExhaustiveCheckStep
+
+    exhaustiveCheckOver240RootsIsCanonical :
+      exhaustiveCheckOver240Roots
+      ≡
+      canonicalE8RootExhaustiveCheckSteps
+
+    currentlyUninhabited :
+      List LilaR3CurrentlyUninhabited
+
+    currentlyUninhabitedIsCanonical :
+      currentlyUninhabited
+      ≡
+      canonicalLilaR3CurrentlyUninhabited
+
     bridgeLayersCliffordBinding :
       List String
 
@@ -191,6 +344,20 @@ canonicalLamTungAsE8EvenSumIdentityDiagnostic =
         refl
     ; cliffordBridge =
         CliffordTheorem.canonicalCliffordToEvenWaveLiftBridgeTheorem
+    ; e8RootEnumerationReceiptGate =
+        E8.e8RootEnumerationCompleteImpossibleHere
+    ; lane1RequiredReceiptFields =
+        canonicalLane1E8RootEnumerationReceiptFields
+    ; lane1RequiredReceiptFieldsAreCanonical =
+        refl
+    ; exhaustiveCheckOver240Roots =
+        canonicalE8RootExhaustiveCheckSteps
+    ; exhaustiveCheckOver240RootsIsCanonical =
+        refl
+    ; currentlyUninhabited =
+        canonicalLilaR3CurrentlyUninhabited
+    ; currentlyUninhabitedIsCanonical =
+        refl
     ; bridgeLayersCliffordBinding =
         "No local BridgeLayers.Clifford module was found by the R3 scan"
         ∷ "This diagnostic binds instead to DASHI.Physics.CliffordEvenLiftBridge"

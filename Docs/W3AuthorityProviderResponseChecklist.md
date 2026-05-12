@@ -1,8 +1,8 @@
 # W3 Authority Provider Response Checklist
 
-Date: 2026-05-06
+Date: 2026-05-13
 Owner: Curie-W3
-Status: provider-response checklist plus local absence record; non-promoting
+Status: provider-response checklist plus local absence record; candidate-only; non-promoting
 
 This checklist asks an external W3 authority provider for a bounded response on
 the W3 t43 evidence packet. The response must not promote any downstream gate
@@ -25,9 +25,48 @@ The response must include every checklist item below.
 | t43 observable accepted | `accept`, `reject`, or `insufficient` for the bounded below-Z `t43` observable |
 | Comparison law accepted | `accept`, `reject`, or `insufficient` for the stated t43 comparison law |
 | Non-collapse witness accepted | `accept`, `reject`, or `insufficient` for the listed non-collapse witness |
-| Provenance packet accepted | `accept`, `reject`, or `insufficient` for the DOI, commit, artifact, and digest provenance packet |
+| Provenance packet accepted | `accept`, `reject`, or `insufficient` for the DOI, CMS-SMP-20-003, commit, artifact, and digest provenance packet |
+| `tableChecksumBound` | `accept`, `reject`, or `insufficient`; must bind authoritative HEPData `t43` and `t44` table payloads, or provider-equivalent immutable table records, to the cited DOI/table provenance |
 | Token status | `accepted external token supplied`, `rejected`, or `insufficient`; no local token may be constructed |
 | Rejection reason if any | Required for `reject` or `insufficient`; name the failed field, missing field, or authority rule |
+
+## Candidate Artifact Binding
+
+The candidate comparison now under review is:
+
+| Field | Value |
+|---|---|
+| Artifact | `logs/research/w3_frozen_3205d74_t43_comparison_20260513.json` |
+| Artifact SHA-256 | `92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238` |
+| Status | `candidate-pass-no-authority-token` |
+| Chi2/dof | `2.1565191176275618` |
+| HEPData dataset DOI | `10.17182/hepdata.104472` |
+| HEPData submission DOI | `10.17182/hepdata.115656.v1` |
+| CMS paper DOI | `10.1140/epjc/s10052-023-11631-7` |
+| CMS analysis id | `CMS-SMP-20-003` |
+| Ratio table | `t43` |
+| Covariance table | `t44` |
+| Local t19 CSV SHA-256 | `1a1d280da645f4c55aba73aabf1b398a3fd9614532c363d972018f194b653677` |
+| Local t20 CSV SHA-256 | `fa4b694211862d4b07b761d0dab77c8fe1016d2ccd5015dc6f7bc3272c34201a` |
+| Local t43 CSV SHA-256 | `0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b` |
+| Local t44 CSV SHA-256 | `3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b` |
+| Local t43/t44 manifest | `scripts/data/hepdata/ins2079374_t43_t44.sha256` |
+| Local checksum receipt | `DASHI/Physics/Closure/HEPDataRatioTableArtifactReceipt.agda` |
+| Local header check | t43 and t44 CSVs have first-line table DOI headers matching `10.17182/hepdata.115656.v1/t43` and `10.17182/hepdata.115656.v1/t44` |
+
+The local CSV checksums are candidate-input checks only. They do not discharge
+`tableChecksumBound` unless the provider explicitly accepts them as matching
+the authoritative HEPData table payloads or supplies an equivalent immutable
+table binding.
+
+Local checksum route status:
+
+```text
+localHEPDataArtifactReceiptBoundAwaitingProviderCanonicalBinding
+providerCanonicalT43ChecksumOrEquivalent = missing
+providerCanonicalT44ChecksumOrEquivalent = missing
+tableChecksumBound = false
+```
 
 ## Source And Boundary
 
@@ -73,6 +112,7 @@ Status: awaiting provider response; non-promoting
 authorityTokenConstructedHere = false
 responseContainsAcceptedToken = false
 exactRemainingGap = W3AcceptedEvidenceAuthorityToken
+exactRemainingChecksumGap = tableChecksumBound
 ```
 
 The typed Agda receipt surface also keeps the authority token constructorless
@@ -86,5 +126,14 @@ or rejection/insufficiency reason is present locally.
 Exact external blocker:
 
 ```text
-missing accepted external W3AcceptedEvidenceAuthorityToken
+missing accepted external W3AcceptedEvidenceAuthorityToken, with tableChecksumBound still absent
+```
+
+Exact external checksum step:
+
+```text
+Return providerCanonicalT43ChecksumOrEquivalent and
+providerCanonicalT44ChecksumOrEquivalent, then explicitly set
+tableChecksumBound=true for the cited HEPData DOI/table provenance, or mark the
+field insufficient/rejected with the exact failed rule.
 ```

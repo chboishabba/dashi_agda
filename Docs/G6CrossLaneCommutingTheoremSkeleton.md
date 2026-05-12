@@ -1,6 +1,6 @@
 # G6 Cross-Lane Commuting Theorem Skeleton
 
-Status: typed obligation surface; non-promoting.
+Status: typed obligation/dependency surface; non-promoting.
 
 This document records the G6 placeholder that was missing from the roadmap.
 The corresponding Agda module is:
@@ -62,6 +62,38 @@ Until those fields are inhabited, the current status is:
 skeletonOnlyNoPromotion
 ```
 
+## Named Dependency Certificates
+
+The Agda module now records the section blockers as named dependency
+certificates rather than unnamed comments or false obstruction proofs:
+
+| Certificate | Section field | Dependency gate |
+|---|---|---|
+| `sectionEMDependencyCertificate` | `section-EM` | G2 Maxwell theorem gap |
+| `sectionQMDependencyCertificate` | `section-QM` | G3 Schrodinger theorem gap |
+| `sectionGRDependencyCertificate` | `section-GR` | G4 GR, curvature, stress-energy, and sourced Einstein-law gap |
+| `sectionEmpDependencyCertificate` | `section-emp` | G5 empirical validation gap |
+
+These certificates are collected by:
+
+```text
+canonicalG6SectionDependencyCertificates
+canonicalG6SectionObstructionStatus
+```
+
+## Why These Are Not Negation Proofs
+
+The current `CrossLaneSpineDiagramObligation` record already includes
+`section-EM`, `section-QM`, `section-GR`, and `section-emp` as fields. Any
+inhabitant of that record therefore already supplies the section proofs. From
+that shape, Agda cannot honestly derive a `not section-*` result without a
+separate concrete failed candidate.
+
+For a real typed obstruction, the skeleton shape would need an additional
+pre-section candidate diagram record that contains the lane carriers and
+morphisms without section fields. A future worker could then prove that a
+specific candidate cannot supply one of the required section fields.
+
 ## Claim Boundary
 
 This skeleton:
@@ -69,6 +101,7 @@ This skeleton:
 - does not close G6;
 - does not construct a complete-unification theorem;
 - does not replace Maxwell, Schrodinger, GR, or empirical receipts;
+- does not prove negation of any section field;
 - does not permit publication language beyond "G6 obligation has a typed
   placeholder."
 

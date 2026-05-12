@@ -1,8 +1,8 @@
 # W3 Accepted Evidence Authority Token Submission
 
-Date: 2026-05-06
+Date: 2026-05-13
 Owner: Curie-W3
-Status: final external-facing submission bundle; non-promoting
+Status: final external-facing submission bundle; candidate-only; non-promoting
 
 This submission asks an external evidence authority to decide whether the W3
 t43 evidence packet is sufficient to supply:
@@ -41,8 +41,11 @@ Numerical comparison recorded in
 | Mean pred/data | `0.9941233097` |
 | Mean pred/data acceptance window | `[0.97, 1.03]` |
 
-The requested token certifies accepted authority over this bounded W3 evidence
-packet only. It does not certify above-Z behavior, full Standard Model
+The 2026-05-13 clean candidate comparison artifact records status
+`candidate-pass-no-authority-token`, with chi2/dof `2.1565191176275618` and a
+non-collapse witness present. The requested token certifies accepted authority
+over this bounded W3 evidence packet only. It does not certify above-Z behavior,
+full Standard Model
 coverage, W4/W5 calibration, GR recovery, W8 origin promotion, or a broad
 unification claim.
 
@@ -56,6 +59,7 @@ Required public/source fields from
 | Dataset DOI | `10.17182/hepdata.104472` |
 | Submission DOI | `10.17182/hepdata.115656.v1` |
 | CMS paper DOI | `10.1140/epjc/s10052-023-11631-7` |
+| CMS analysis id | `CMS-SMP-20-003` |
 | Ratio table | `10.17182/hepdata.115656.v1/t43` |
 | Covariance table | `10.17182/hepdata.115656.v1/t44` |
 | Observable convention | `UnnormalizedDifferentialCrossSectionRatio` |
@@ -63,10 +67,63 @@ Required public/source fields from
 | Frozen commit | `3205d746639568762c9e97adf4a3672c356bd491` |
 | Per-bin artifact SHA-256 | `3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0` |
 | Per-bin projection digest | `cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79` |
+| Clean comparison artifact | `logs/research/w3_frozen_3205d74_t43_comparison_20260513.json` |
+| Clean comparison artifact SHA-256 | `92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238` |
+| Clean comparison status | `candidate-pass-no-authority-token` |
+| Clean comparison chi2/dof | `2.1565191176275618` |
+| Local t19 CSV SHA-256 | `1a1d280da645f4c55aba73aabf1b398a3fd9614532c363d972018f194b653677` |
+| Local t20 CSV SHA-256 | `fa4b694211862d4b07b761d0dab77c8fe1016d2ccd5015dc6f7bc3272c34201a` |
+| Local t43 CSV SHA-256 | `0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b` |
+| Local t44 CSV SHA-256 | `3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b` |
+| Local t43/t44 manifest | `scripts/data/hepdata/ins2079374_t43_t44.sha256` |
+| Local checksum receipt | `DASHI/Physics/Closure/HEPDataRatioTableArtifactReceipt.agda` |
+| Local header binding | t43 first header `#: table_doi: 10.17182/hepdata.115656.v1/t43`; t44 first header `#: table_doi: 10.17182/hepdata.115656.v1/t44` |
 
 The authority response must confirm that these public/source and runner-bound
 fields are acceptable evidence for the W3 authority-token boundary, or return
 the exact field or rule that prevents acceptance.
+
+The local t43/t44 checksum route is now bound to HEP-R28:
+
+```text
+local t43 checksum:
+  0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b
+  = HEPDataRatioTableArtifactReceipt.t43Sha256
+
+local t44 checksum:
+  3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b
+  = HEPDataRatioTableArtifactReceipt.t44Sha256
+```
+
+This is a local HEPData artifact/download-route binding only. It is not an
+external provider statement that those local CSV payloads are the canonical
+HEPData payloads, and it is not an accepted W3 authority token.
+
+## Remaining Authority Obligation
+
+The local CSV checksums above bind the candidate comparison and source-table
+inputs to checked-in local artifacts. They are not a provider attestation that
+HEPData table `t43` and covariance table `t44` are checksum-bound to the cited
+HEPData/CMS-SMP-20-003 provenance. The exact remaining external obligation is:
+
+```text
+tableChecksumBound:
+  provider attests the authoritative HEPData t43 and t44 table payloads,
+  or provider-equivalent immutable table records, match the cited DOI/table
+  provenance and the candidate comparison inputs.
+```
+
+Exact fields still required from the provider:
+
+```text
+providerCanonicalT43ChecksumOrEquivalent:
+providerCanonicalT44ChecksumOrEquivalent:
+tableChecksumBound: true
+```
+
+Until `tableChecksumBound` is supplied by an accepted external authority, the
+packet remains candidate-only and no `W3AcceptedEvidenceAuthorityToken` is
+constructed.
 
 ## Non-Collapse Witness Status
 
@@ -115,10 +172,14 @@ The acceptance must bind that token to:
 - HEPData DOI `10.17182/hepdata.104472`
 - submission DOI `10.17182/hepdata.115656.v1`
 - CMS paper DOI `10.1140/epjc/s10052-023-11631-7`
+- CMS analysis id `CMS-SMP-20-003`
 - ratio table `t43` and covariance table `t44`
+- provider-bound table checksums or provider-equivalent immutable table
+  records for `t43` and `t44`
 - observable convention `UnnormalizedDifferentialCrossSectionRatio`
 - frozen commit `3205d746639568762c9e97adf4a3672c356bd491`
 - per-bin artifact SHA-256 and projection digest listed above
+- clean comparison artifact SHA-256 listed above
 - non-collapse witness bin 12 and its numeric values listed above
 - bounded claim scope: below-Z t43 W3 authority token only
 
@@ -133,6 +194,7 @@ rejection classes are:
 - frozen commit mismatch
 - comparison law rejected or underspecified
 - covariance/source rejected or underspecified
+- table checksum binding missing or underspecified
 - non-collapse witness rejected or not reproduced
 - authority scope does not permit W3 token issuance
 
@@ -162,12 +224,20 @@ evidence_binding:
   dataset_doi: 10.17182/hepdata.104472
   submission_doi: 10.17182/hepdata.115656.v1
   paper_doi: 10.1140/epjc/s10052-023-11631-7
+  cms_analysis_id: CMS-SMP-20-003
   ratio_table: t43
   covariance_table: t44
+  table_checksum_bound: true | false
+  authoritative_t43_table_checksum_or_equivalent:
+  authoritative_t44_table_checksum_or_equivalent:
+  local_t43_csv_sha256: 0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b
+  local_t44_csv_sha256: 3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b
+  local_t43_t44_manifest: scripts/data/hepdata/ins2079374_t43_t44.sha256
   observable_convention: UnnormalizedDifferentialCrossSectionRatio
   frozen_commit: 3205d746639568762c9e97adf4a3672c356bd491
   per_bin_artifact_sha256: 3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0
   per_bin_projection_digest: cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79
+  clean_comparison_artifact_sha256: 92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238
   witness_bin: 12
   witness_prediction: 0.0486590199823977
   witness_data: 0.049758
