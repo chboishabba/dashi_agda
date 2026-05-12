@@ -1,6 +1,6 @@
 module DASHI.Algebra.Trit.E8RootEnumeration where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
@@ -9,7 +9,9 @@ open import Data.Empty using (⊥)
 open import Data.List.Base as List using (List; _∷_; []; length; _++_)
 open import Data.Vec using (Vec)
 import Data.Vec as Vec
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Relation.Nullary using (Dec)
+open import Relation.Nullary using (yes; no)
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Algebra.Trit.HalfTrit as HT
@@ -230,6 +232,46 @@ canonicalAvailableConcreteE8Generators =
   ∷ availableCombinedHalfTritRootList240
   ∷ []
 
+data AvailableConcreteE8ProofLayer : Set where
+  availableIndexedRootDecidableEquality :
+    AvailableConcreteE8ProofLayer
+  availableIndexedRootMembershipCheck :
+    AvailableConcreteE8ProofLayer
+  availableIntegerIndexedRootNoDuplicateCheck :
+    AvailableConcreteE8ProofLayer
+  availableHalfIndexedRootNoDuplicateCheck :
+    AvailableConcreteE8ProofLayer
+  availableIntegerHalfFamilyDisjointCheck :
+    AvailableConcreteE8ProofLayer
+  availableCombinedIndexedRootNoDuplicateCheck :
+    AvailableConcreteE8ProofLayer
+  availableHalfRootEvenParityByConstruction :
+    AvailableConcreteE8ProofLayer
+  availableBooleanBackedIndexedMembershipBridge :
+    AvailableConcreteE8ProofLayer
+  availableBooleanBackedNoDuplicateBridge :
+    AvailableConcreteE8ProofLayer
+  availableBooleanBackedDisjointnessBridge :
+    AvailableConcreteE8ProofLayer
+  availableBooleanBackedHalfParityBridge :
+    AvailableConcreteE8ProofLayer
+
+canonicalAvailableConcreteE8ProofLayer :
+  List AvailableConcreteE8ProofLayer
+canonicalAvailableConcreteE8ProofLayer =
+  availableIndexedRootDecidableEquality
+  ∷ availableIndexedRootMembershipCheck
+  ∷ availableIntegerIndexedRootNoDuplicateCheck
+  ∷ availableHalfIndexedRootNoDuplicateCheck
+  ∷ availableIntegerHalfFamilyDisjointCheck
+  ∷ availableCombinedIndexedRootNoDuplicateCheck
+  ∷ availableHalfRootEvenParityByConstruction
+  ∷ availableBooleanBackedIndexedMembershipBridge
+  ∷ availableBooleanBackedNoDuplicateBridge
+  ∷ availableBooleanBackedDisjointnessBridge
+  ∷ availableBooleanBackedHalfParityBridge
+  ∷ []
+
 data HalfTritInterfaceMissing : Set where
   missingHalfTritCarrier :
     HalfTritInterfaceMissing
@@ -402,6 +444,76 @@ data E8Sign : Set where
     E8Sign
   positiveSign :
     E8Sign
+
+_≟E8Sign_ :
+  (x y : E8Sign) →
+  Dec (x ≡ y)
+negativeSign ≟E8Sign negativeSign =
+  yes refl
+negativeSign ≟E8Sign positiveSign =
+  no (λ ())
+positiveSign ≟E8Sign negativeSign =
+  no (λ ())
+positiveSign ≟E8Sign positiveSign =
+  yes refl
+
+decEqIndexedRoot :
+  {n : Nat} →
+  (x y : Vec HTI.HalfTritIndexed n) →
+  Dec (x ≡ y)
+decEqIndexedRoot Vec.[] Vec.[] =
+  yes refl
+decEqIndexedRoot (x Vec.∷ xs) (y Vec.∷ ys)
+  with HTI._≟Indexed_ x y
+... | no neq =
+  no (λ eq → neq (cong Vec.head eq))
+... | yes refl
+  with decEqIndexedRoot xs ys
+... | no neq =
+  no (λ eq → neq (cong Vec.tail eq))
+... | yes refl =
+  yes refl
+
+memberIndexedRoot :
+  {n : Nat} →
+  Vec HTI.HalfTritIndexed n →
+  List (Vec HTI.HalfTritIndexed n) →
+  Bool
+memberIndexedRoot x [] =
+  false
+memberIndexedRoot x (y ∷ ys)
+  with decEqIndexedRoot x y
+... | yes _ =
+  true
+... | no _ =
+  memberIndexedRoot x ys
+
+noDuplicatesIndexedRootList :
+  {n : Nat} →
+  List (Vec HTI.HalfTritIndexed n) →
+  Bool
+noDuplicatesIndexedRootList [] =
+  true
+noDuplicatesIndexedRootList (x ∷ xs)
+  with memberIndexedRoot x xs
+... | true =
+  false
+... | false =
+  noDuplicatesIndexedRootList xs
+
+disjointIndexedRootLists :
+  {n : Nat} →
+  List (Vec HTI.HalfTritIndexed n) →
+  List (Vec HTI.HalfTritIndexed n) →
+  Bool
+disjointIndexedRootLists [] ys =
+  true
+disjointIndexedRootLists (x ∷ xs) ys
+  with memberIndexedRoot x ys
+... | true =
+  false
+... | false =
+  disjointIndexedRootLists xs ys
 
 allE8Signs :
   List E8Sign
@@ -713,6 +825,245 @@ combinedRootsLengthIs240 :
 combinedRootsLengthIs240 =
   refl
 
+integerIndexedRootsNoDuplicatesCheck :
+  Bool
+integerIndexedRootsNoDuplicatesCheck =
+  noDuplicatesIndexedRootList integerIndexedRoots
+
+integerIndexedRootsNoDuplicatesCheckIsTrue :
+  integerIndexedRootsNoDuplicatesCheck ≡ true
+integerIndexedRootsNoDuplicatesCheckIsTrue =
+  refl
+
+halfIndexedRootsNoDuplicatesCheck :
+  Bool
+halfIndexedRootsNoDuplicatesCheck =
+  noDuplicatesIndexedRootList halfIndexedRoots
+
+halfIndexedRootsNoDuplicatesCheckIsTrue :
+  halfIndexedRootsNoDuplicatesCheck ≡ true
+halfIndexedRootsNoDuplicatesCheckIsTrue =
+  refl
+
+integerHalfIndexedRootsDisjointCheck :
+  Bool
+integerHalfIndexedRootsDisjointCheck =
+  disjointIndexedRootLists integerIndexedRoots halfIndexedRoots
+
+integerHalfIndexedRootsDisjointCheckIsTrue :
+  integerHalfIndexedRootsDisjointCheck ≡ true
+integerHalfIndexedRootsDisjointCheckIsTrue =
+  refl
+
+combinedIndexedRootsNoDuplicatesCheck :
+  Bool
+combinedIndexedRootsNoDuplicatesCheck =
+  noDuplicatesIndexedRootList combinedIndexedRoots
+
+combinedIndexedRootsNoDuplicatesCheckIsTrue :
+  combinedIndexedRootsNoDuplicatesCheck ≡ true
+combinedIndexedRootsNoDuplicatesCheckIsTrue =
+  refl
+
+halfIndexedRootsEvenParityByConstruction :
+  halfIndexedRoots ≡ List.map signVectorToHalfIndexedRoot (evenSignVectors 8)
+halfIndexedRootsEvenParityByConstruction =
+  refl
+
+-- Boolean-backed proof bridge layer.
+--
+-- These predicates are intentionally tied to the executable checks above.
+-- They give downstream modules proof terms that the concrete computations
+-- normalized as expected, but they are not yet native E8 lattice-membership or
+-- completeness proofs.
+
+data IndexedRootMember :
+  {n : Nat} →
+  Vec HTI.HalfTritIndexed n →
+  List (Vec HTI.HalfTritIndexed n) →
+  Set where
+  memberByExecutableCheck :
+    {n : Nat}
+    {x : Vec HTI.HalfTritIndexed n}
+    {xs : List (Vec HTI.HalfTritIndexed n)} →
+    memberIndexedRoot x xs ≡ true →
+    IndexedRootMember x xs
+
+data IndexedRootNoDuplicates :
+  {n : Nat} →
+  List (Vec HTI.HalfTritIndexed n) →
+  Set where
+  noDuplicatesByExecutableCheck :
+    {n : Nat}
+    {xs : List (Vec HTI.HalfTritIndexed n)} →
+    noDuplicatesIndexedRootList xs ≡ true →
+    IndexedRootNoDuplicates xs
+
+data IndexedRootFamiliesDisjoint :
+  {n : Nat} →
+  List (Vec HTI.HalfTritIndexed n) →
+  List (Vec HTI.HalfTritIndexed n) →
+  Set where
+  disjointByExecutableCheck :
+    {n : Nat}
+    {xs ys : List (Vec HTI.HalfTritIndexed n)} →
+    disjointIndexedRootLists xs ys ≡ true →
+    IndexedRootFamiliesDisjoint xs ys
+
+data HalfIndexedRootParitySound :
+  E8IndexedRootList →
+  Set where
+  paritySoundByEvenSignVectorConstruction :
+    {xs : E8IndexedRootList} →
+    xs ≡ List.map signVectorToHalfIndexedRoot (evenSignVectors 8) →
+    HalfIndexedRootParitySound xs
+
+integerIndexedRootsNoDuplicatesBridge :
+  IndexedRootNoDuplicates integerIndexedRoots
+integerIndexedRootsNoDuplicatesBridge =
+  noDuplicatesByExecutableCheck integerIndexedRootsNoDuplicatesCheckIsTrue
+
+halfIndexedRootsNoDuplicatesBridge :
+  IndexedRootNoDuplicates halfIndexedRoots
+halfIndexedRootsNoDuplicatesBridge =
+  noDuplicatesByExecutableCheck halfIndexedRootsNoDuplicatesCheckIsTrue
+
+combinedIndexedRootsNoDuplicatesBridge :
+  IndexedRootNoDuplicates combinedIndexedRoots
+combinedIndexedRootsNoDuplicatesBridge =
+  noDuplicatesByExecutableCheck combinedIndexedRootsNoDuplicatesCheckIsTrue
+
+integerHalfIndexedRootsDisjointBridge :
+  IndexedRootFamiliesDisjoint integerIndexedRoots halfIndexedRoots
+integerHalfIndexedRootsDisjointBridge =
+  disjointByExecutableCheck integerHalfIndexedRootsDisjointCheckIsTrue
+
+halfIndexedRootsParitySoundBridge :
+  HalfIndexedRootParitySound halfIndexedRoots
+halfIndexedRootsParitySoundBridge =
+  paritySoundByEvenSignVectorConstruction halfIndexedRootsEvenParityByConstruction
+
+data E8NativePropositionalLiftTarget : Set where
+  liftMemberIndexedRootToNativeRootMembership :
+    E8NativePropositionalLiftTarget
+  liftIndexedRootNoDuplicatesToNativeUnique :
+    E8NativePropositionalLiftTarget
+  liftIndexedRootFamiliesDisjointToNativeDisjoint :
+    E8NativePropositionalLiftTarget
+  liftHalfIndexedRootParitySoundToNativeEvenParity :
+    E8NativePropositionalLiftTarget
+  liftIntegerGeneratorToTwoSparseCompleteness :
+    E8NativePropositionalLiftTarget
+  liftHalfGeneratorToEvenParityCompleteness :
+    E8NativePropositionalLiftTarget
+  liftCombinedGeneratorToE8Completeness :
+    E8NativePropositionalLiftTarget
+
+canonicalE8NativePropositionalLiftTargets :
+  List E8NativePropositionalLiftTarget
+canonicalE8NativePropositionalLiftTargets =
+  liftMemberIndexedRootToNativeRootMembership
+  ∷ liftIndexedRootNoDuplicatesToNativeUnique
+  ∷ liftIndexedRootFamiliesDisjointToNativeDisjoint
+  ∷ liftHalfIndexedRootParitySoundToNativeEvenParity
+  ∷ liftIntegerGeneratorToTwoSparseCompleteness
+  ∷ liftHalfGeneratorToEvenParityCompleteness
+  ∷ liftCombinedGeneratorToE8Completeness
+  ∷ []
+
+data E8StructuralBridgeResidualObligation : Set where
+  bridgeExecutableMembershipToNativeMembership :
+    E8StructuralBridgeResidualObligation
+  bridgeExecutableNoDuplicatesToNativeNoDuplicates :
+    E8StructuralBridgeResidualObligation
+  bridgeExecutableDisjointnessToNativeDisjointness :
+    E8StructuralBridgeResidualObligation
+  bridgeEvenSignConstructionToNativeParityPredicate :
+    E8StructuralBridgeResidualObligation
+  proveIntegerTwoSparseCompleteness :
+    E8StructuralBridgeResidualObligation
+  proveHalfEvenParityCompleteness :
+    E8StructuralBridgeResidualObligation
+  proveCombinedE8Completeness :
+    E8StructuralBridgeResidualObligation
+
+canonicalE8StructuralBridgeResidualObligations :
+  List E8StructuralBridgeResidualObligation
+canonicalE8StructuralBridgeResidualObligations =
+  bridgeExecutableMembershipToNativeMembership
+  ∷ bridgeExecutableNoDuplicatesToNativeNoDuplicates
+  ∷ bridgeExecutableDisjointnessToNativeDisjointness
+  ∷ bridgeEvenSignConstructionToNativeParityPredicate
+  ∷ proveIntegerTwoSparseCompleteness
+  ∷ proveHalfEvenParityCompleteness
+  ∷ proveCombinedE8Completeness
+  ∷ []
+
+record E8BooleanBackedStructuralBridgeLayer : Set where
+  field
+    integerFamilyNoDuplicates :
+      IndexedRootNoDuplicates integerIndexedRoots
+
+    halfFamilyNoDuplicates :
+      IndexedRootNoDuplicates halfIndexedRoots
+
+    combinedFamilyNoDuplicates :
+      IndexedRootNoDuplicates combinedIndexedRoots
+
+    integerHalfFamiliesDisjoint :
+      IndexedRootFamiliesDisjoint integerIndexedRoots halfIndexedRoots
+
+    halfFamilyParitySound :
+      HalfIndexedRootParitySound halfIndexedRoots
+
+    residualNativeProofObligations :
+      List E8StructuralBridgeResidualObligation
+
+    residualNativeProofObligationsAreCanonical :
+      residualNativeProofObligations ≡
+      canonicalE8StructuralBridgeResidualObligations
+
+    nativePropositionalLiftTargets :
+      List E8NativePropositionalLiftTarget
+
+    nativePropositionalLiftTargetsAreCanonical :
+      nativePropositionalLiftTargets ≡
+      canonicalE8NativePropositionalLiftTargets
+
+    completesE8RootEnumeration :
+      Bool
+
+    completesE8RootEnumerationIsFalse :
+      completesE8RootEnumeration ≡ false
+
+canonicalE8BooleanBackedStructuralBridgeLayer :
+  E8BooleanBackedStructuralBridgeLayer
+canonicalE8BooleanBackedStructuralBridgeLayer =
+  record
+    { integerFamilyNoDuplicates =
+        integerIndexedRootsNoDuplicatesBridge
+    ; halfFamilyNoDuplicates =
+        halfIndexedRootsNoDuplicatesBridge
+    ; combinedFamilyNoDuplicates =
+        combinedIndexedRootsNoDuplicatesBridge
+    ; integerHalfFamiliesDisjoint =
+        integerHalfIndexedRootsDisjointBridge
+    ; halfFamilyParitySound =
+        halfIndexedRootsParitySoundBridge
+    ; residualNativeProofObligations =
+        canonicalE8StructuralBridgeResidualObligations
+    ; residualNativeProofObligationsAreCanonical =
+        refl
+    ; nativePropositionalLiftTargets =
+        canonicalE8NativePropositionalLiftTargets
+    ; nativePropositionalLiftTargetsAreCanonical =
+        refl
+    ; completesE8RootEnumeration =
+        false
+    ; completesE8RootEnumerationIsFalse =
+        refl
+    }
+
 data E8RootEnumerationProofObligation : Set where
   integerIndexedRootsNoDuplicatesObligation :
     E8RootEnumerationProofObligation
@@ -951,6 +1302,12 @@ record E8RootEnumerationObstruction : Setω where
     availableConcreteGeneratorsAreCanonical :
       availableConcreteGenerators ≡ canonicalAvailableConcreteE8Generators
 
+    availableConcreteProofLayer :
+      List AvailableConcreteE8ProofLayer
+
+    availableConcreteProofLayerIsCanonical :
+      availableConcreteProofLayer ≡ canonicalAvailableConcreteE8ProofLayer
+
     coordinatePairGenerator :
       List CoordinatePair8
 
@@ -1010,6 +1367,57 @@ record E8RootEnumerationObstruction : Setω where
 
     concreteCombinedRootsLengthIs240 :
       concreteCombinedRootsLength ≡ expectedTotalRootCount
+
+    concreteIntegerIndexedRootsNoDuplicatesCheck :
+      Bool
+
+    concreteIntegerIndexedRootsNoDuplicatesCheckIsTrue :
+      concreteIntegerIndexedRootsNoDuplicatesCheck ≡ true
+
+    concreteHalfIndexedRootsNoDuplicatesCheck :
+      Bool
+
+    concreteHalfIndexedRootsNoDuplicatesCheckIsTrue :
+      concreteHalfIndexedRootsNoDuplicatesCheck ≡ true
+
+    concreteIntegerHalfIndexedRootsDisjointCheck :
+      Bool
+
+    concreteIntegerHalfIndexedRootsDisjointCheckIsTrue :
+      concreteIntegerHalfIndexedRootsDisjointCheck ≡ true
+
+    concreteCombinedIndexedRootsNoDuplicatesCheck :
+      Bool
+
+    concreteCombinedIndexedRootsNoDuplicatesCheckIsTrue :
+      concreteCombinedIndexedRootsNoDuplicatesCheck ≡ true
+
+    concreteHalfIndexedRootsEvenParityByConstruction :
+      concreteHalfIndexedRoots ≡
+      List.map signVectorToHalfIndexedRoot (evenSignVectors 8)
+
+    booleanBackedStructuralBridgeLayer :
+      E8BooleanBackedStructuralBridgeLayer
+
+    booleanBackedStructuralBridgeDoesNotCompleteEnumeration :
+      E8BooleanBackedStructuralBridgeLayer.completesE8RootEnumeration
+        booleanBackedStructuralBridgeLayer
+      ≡
+      false
+
+    structuralBridgeResidualObligations :
+      List E8StructuralBridgeResidualObligation
+
+    structuralBridgeResidualObligationsAreCanonical :
+      structuralBridgeResidualObligations ≡
+      canonicalE8StructuralBridgeResidualObligations
+
+    nativePropositionalLiftTargets :
+      List E8NativePropositionalLiftTarget
+
+    nativePropositionalLiftTargetsAreCanonical :
+      nativePropositionalLiftTargets ≡
+      canonicalE8NativePropositionalLiftTargets
 
     remainingConcreteProofObligations :
       List E8RootEnumerationProofObligation
@@ -1198,6 +1606,10 @@ canonicalE8RootEnumerationObstruction =
         canonicalAvailableConcreteE8Generators
     ; availableConcreteGeneratorsAreCanonical =
         refl
+    ; availableConcreteProofLayer =
+        canonicalAvailableConcreteE8ProofLayer
+    ; availableConcreteProofLayerIsCanonical =
+        refl
     ; coordinatePairGenerator =
         allCoordinatePairs8
     ; coordinatePairGeneratorLengthIs28 =
@@ -1238,6 +1650,36 @@ canonicalE8RootEnumerationObstruction =
         combinedRootsLength
     ; concreteCombinedRootsLengthIs240 =
         combinedRootsLengthIs240
+    ; concreteIntegerIndexedRootsNoDuplicatesCheck =
+        integerIndexedRootsNoDuplicatesCheck
+    ; concreteIntegerIndexedRootsNoDuplicatesCheckIsTrue =
+        integerIndexedRootsNoDuplicatesCheckIsTrue
+    ; concreteHalfIndexedRootsNoDuplicatesCheck =
+        halfIndexedRootsNoDuplicatesCheck
+    ; concreteHalfIndexedRootsNoDuplicatesCheckIsTrue =
+        halfIndexedRootsNoDuplicatesCheckIsTrue
+    ; concreteIntegerHalfIndexedRootsDisjointCheck =
+        integerHalfIndexedRootsDisjointCheck
+    ; concreteIntegerHalfIndexedRootsDisjointCheckIsTrue =
+        integerHalfIndexedRootsDisjointCheckIsTrue
+    ; concreteCombinedIndexedRootsNoDuplicatesCheck =
+        combinedIndexedRootsNoDuplicatesCheck
+    ; concreteCombinedIndexedRootsNoDuplicatesCheckIsTrue =
+        combinedIndexedRootsNoDuplicatesCheckIsTrue
+    ; concreteHalfIndexedRootsEvenParityByConstruction =
+        halfIndexedRootsEvenParityByConstruction
+    ; booleanBackedStructuralBridgeLayer =
+        canonicalE8BooleanBackedStructuralBridgeLayer
+    ; booleanBackedStructuralBridgeDoesNotCompleteEnumeration =
+        refl
+    ; structuralBridgeResidualObligations =
+        canonicalE8StructuralBridgeResidualObligations
+    ; structuralBridgeResidualObligationsAreCanonical =
+        refl
+    ; nativePropositionalLiftTargets =
+        canonicalE8NativePropositionalLiftTargets
+    ; nativePropositionalLiftTargetsAreCanonical =
+        refl
     ; remainingConcreteProofObligations =
         canonicalE8RootEnumerationProofObligations
     ; remainingConcreteProofObligationsAreCanonical =
@@ -1289,14 +1731,21 @@ canonicalE8RootEnumerationObstruction =
         ∷ "The half family shape is all eight-coordinate doubled +/-1 sign vectors with even minus parity"
         ∷ "halfIndexedRoots concretely enumerates even-parity sign vectors and normalizes to length 128"
         ∷ "combinedIndexedRoots appends the concrete integer and half families and normalizes to length 240"
-        ∷ "A complete receipt still needs root-level decidable equality, parity soundness, duplicate freedom, disjointness, cardinality bridges, and completeness"
+        ∷ "Root-level indexed equality, membership, and executable duplicate/disjointness checks are now available"
+        ∷ "The integer family, half family, and combined indexed list all compute no-duplicates = true"
+        ∷ "The integer and half indexed families compute disjoint = true"
+        ∷ "Boolean-backed structural bridge terms now package the normalized executable checks as proof objects"
+        ∷ "The bridge layer records completesE8RootEnumeration = false until native predicates and completeness proofs are inhabited"
+        ∷ "A complete receipt still needs structural proof bridges from these executable checks to propositional duplicate-freedom, membership, and completeness predicates"
         ∷ []
     ; flipWhenHalfTritLands =
         "HalfTrit is available locally; keep importing it without redefining it here"
         ∷ "Use EightVec HalfTrit as the root carrier shape"
         ∷ "integerRoots : List (EightVec HalfTrit) now exists with normalized length 112"
         ∷ "halfRoots : List (EightVec HalfTrit) now exists with normalized length 128"
-        ∷ "Prove root-level decidable equality, no duplicates within each family, disjointness across families, and appended count 240"
+        ∷ "Root-level decidable equality and executable no-duplicate/disjointness checks now normalize successfully"
+        ∷ "Boolean-backed bridge terms now expose those normalized checks to downstream Agda surfaces"
+        ∷ "Bridge the executable checks to structural no-duplicates, disjointness, membership, and completeness proofs"
         ∷ "Only then replace this obstruction with an E8RootEnumerationComplete receipt"
         ∷ []
     ; flipWhenHalfTritIndexedLands =
@@ -1304,7 +1753,8 @@ canonicalE8RootEnumerationObstruction =
         ∷ "Finite index roundtrips, decidable equality, and all-values/no-duplicate facts are now available for coordinates"
         ∷ "Indexed sign vectors now enumerate the 28 coordinate pairs times four signs for the 112 integer roots"
         ∷ "Indexed parity split over eight signs now enumerates the 128 half roots"
-        ∷ "Bind disjointness, no-duplicates, parity soundness, membership, and completeness before setting receiptCompletedHere = true"
+        ∷ "Executable disjointness/no-duplicate checks are bound; structural proof bridges remain before receiptCompletedHere can become true"
+        ∷ "The current bridge is boolean-backed only and explicitly non-promoting"
         ∷ []
     ; completeReceiptBlocked =
         e8RootEnumerationCompleteImpossibleHere

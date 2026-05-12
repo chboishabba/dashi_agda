@@ -212,6 +212,29 @@ record AcceptedDYLuminosityConventionAuthorityReceipt : Setω where
     requiredPayloadFieldLabels :
       List String
 
+    ct18ProjectionBindingStatus :
+      DY.CT18DASHIProjectionConventionBindingStatus
+
+    ct18ProjectionPacketPath :
+      String
+
+    ct18ProjectionT43ArtifactPath :
+      String
+
+    ct18ProjectionT45ArtifactPath :
+      String
+
+    ct18ProjectionResidualFields :
+      List DY.CT18DASHIProjectionConventionResidualField
+
+    ct18ProjectionResidualFieldsAreCanonical :
+      ct18ProjectionResidualFields
+      ≡
+      DY.canonicalCT18DASHIProjectionConventionResidualFields
+
+    ct18ProjectionBindingNotes :
+      List String
+
     acceptedOrReplacementPayloadContract :
       List String
 
@@ -350,6 +373,24 @@ canonicalAcceptedDYLuminosityConventionAuthorityReceipt =
         ∷ "attestation_no_manual_overfit"
         ∷ "status accepted/rejected/insufficient"
         ∷ []
+    ; ct18ProjectionBindingStatus =
+        DY.localCT18GridConventionBoundToProjectionArtifactsCandidateOnly
+    ; ct18ProjectionPacketPath =
+        DY.W4W5AcceptedDYLuminosityConventionDiagnostic.ct18ProjectionPacketPath
+          DY.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
+    ; ct18ProjectionT43ArtifactPath =
+        DY.W4W5AcceptedDYLuminosityConventionDiagnostic.ct18ProjectionT43ArtifactPath
+          DY.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
+    ; ct18ProjectionT45ArtifactPath =
+        DY.W4W5AcceptedDYLuminosityConventionDiagnostic.ct18ProjectionT45ArtifactPath
+          DY.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
+    ; ct18ProjectionResidualFields =
+        DY.canonicalCT18DASHIProjectionConventionResidualFields
+    ; ct18ProjectionResidualFieldsAreCanonical =
+        refl
+    ; ct18ProjectionBindingNotes =
+        DY.W4W5AcceptedDYLuminosityConventionDiagnostic.ct18ProjectionBindingNotes
+          DY.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
     ; acceptedOrReplacementPayloadContract =
         "accepted response: provider accepts the convention and supplies all required fields with provenance"
         ∷ "replacement response: provider rejects the local candidate and supplies a complete replacement convention with the same required fields"

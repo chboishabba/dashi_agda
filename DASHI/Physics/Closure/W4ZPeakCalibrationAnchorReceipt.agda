@@ -78,6 +78,18 @@ record W4ZPeakCalibrationAnchorMissingArtifactDiagnostic : Setω where
     dirtyRunnerProjectionDigest :
       String
 
+    dirtyRunnerOutputPath :
+      String
+
+    dirtyRunnerOutputSha256 :
+      String
+
+    publicIntakeLogPath :
+      String
+
+    publicDownloadAccessStatus :
+      String
+
     rejectedPredictionCallable :
       String
 
@@ -176,7 +188,15 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
     ; firstTotalCovarianceDiagonal =
         "t22 Total uncertainty [(pb)^2] covariance[0,0] = 8552.8"
     ; dirtyRunnerProjectionDigest =
-        "36191efc92cb3c9b1641c9206171a307c4796369a4acd1485bf87d1051662b8b"
+        "7fa002539fef1dc9bd51b22c1d512b4ed7be85417a3afb6f1e9992bbdc3dbdc1"
+    ; dirtyRunnerOutputPath =
+        "logs/research/w4_z_peak_anchor_dirty_run_20260513.json"
+    ; dirtyRunnerOutputSha256 =
+        "c8db3b690edcd1b4a792cd772651c5d018d04275d2163007fec7bee6a50a0ada"
+    ; publicIntakeLogPath =
+        "logs/research/w4_z_peak_t21_t22_public_intake_20260513.json"
+    ; publicDownloadAccessStatus =
+        "DOI JSON-LD resolves t21 to HEPData record 129900 and t22 to 129901; title and numeric download routes returned HTTP 403 from this environment, so the run used existing checksum-bound local CSVs"
     ; rejectedPredictionCallable =
         "DASHI.Physics.Prediction.sigma_dashi:predict_ratio"
     ; rejectedPredictionCallableStatus =
@@ -190,7 +210,7 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
     ; shapeFitChi2PerDof =
         "298.8462841768543"
     ; shapeFitProjectionDigest =
-        "36191efc92cb3c9b1641c9206171a307c4796369a4acd1485bf87d1051662b8b"
+        "7fa002539fef1dc9bd51b22c1d512b4ed7be85417a3afb6f1e9992bbdc3dbdc1"
     ; shapeFitFirstBinPull =
         "-67.35457265472463"
     ; shapeFitLastBinPull =
@@ -226,7 +246,7 @@ canonicalW4ZPeakCalibrationAnchorMissingArtifactDiagnostic =
     ; absentRunnerFlags =
         []
     ; numericRunStatus =
-        "prepared-not-closed: dirty-z-peak run parsed t21/t22 digests/schema, accepted the declared Z-peak shape callable, fitted one scalar, and produced chi2/dof 298.8462841768543"
+        "prepared-not-closed: dirty-z-peak run parsed t21/t22 digests/schema, accepted the declared Z-peak shape callable, fitted one scalar, and produced chi2/dof 298.8462841768543 in logs/research/w4_z_peak_anchor_dirty_run_20260513.json"
     ; firstMissing =
         ZPeak.missingDirtyZPeakShapeAdequacy
     ; nextProviderAction =

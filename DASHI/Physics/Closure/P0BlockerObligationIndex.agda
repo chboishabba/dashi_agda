@@ -989,8 +989,7 @@ p0BlockerObligationIndex =
     ; w9PressureCompatibleRetargetReceipt =
         W9.canonicalPairPressureRetargetReceipt
     ; w9RetargetConsumerMissingFields =
-        W9Consumer.missingDownstreamConsumerAcceptance
-        ∷ W9Consumer.missingTheoremConsumerRouteChange
+        W9Consumer.missingTheoremConsumerRouteChange
         ∷ []
     ; w9RetargetConsumerPreservedBoundaries =
         W9Consumer.pressureCompatibleButNonQcore
@@ -1010,9 +1009,9 @@ p0BlockerObligationIndex =
         ∷ "It does not promote empirical, chemistry, GR/QFT, PNF, origin, natural, or cancellation-pressure closure"
         ∷ "It indexes Option A/B/C empirical-calibration bridge surfaces as non-promoting external-bridge interfaces"
         ∷ "It indexes A2/B2/C2 intake boundaries and the W9 pressure-compatible retarget receipt without consumer promotion"
-        ∷ "It indexes A3/B3/C3 source diagnostics and the W9 retarget consumer-obligation surface without constructing missing receipts"
+        ∷ "It indexes A3/B3/C3 source diagnostics and the W9 retarget consumer-obligation surface without promoting accepted retarget receipts"
         ∷ "It indexes the external empirical-calibration receipt request pack, W5 GR/QFT source diagnostic, W6 runtime receipt request pack, and W9 retarget-consumer source diagnostic as non-promoting handoff surfaces"
-        ∷ "It indexes W5 GR/QFT closure-promotion, W8 origin-promotion, and W9 retarget-acceptance request packs as provider-facing handoff surfaces only"
+        ∷ "It indexes W5 GR/QFT closure-promotion, W8 origin-promotion, and W9 retarget route-change request packs as provider-facing handoff surfaces only"
         ∷ "It indexes W3 accepted-authority and W4 physical-calibration request packs as provider-facing handoff surfaces only"
         ∷ "It indexes the P0 provider receipt request index as a provider-facing handoff surface only"
         ∷ "It indexes W3, W4, and W6 provider-attempt diagnostics as non-promoting proof that current local sources still lack the required provider receipts"

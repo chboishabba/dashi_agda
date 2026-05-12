@@ -68,6 +68,56 @@ Still external:
 | Candidate256/TSFV-to-W4 binding law | Missing external authority |
 | `Candidate256PhysicalCalibrationAuthorityToken` | Constructorless locally |
 | `Candidate256PhysicalCalibrationExternalReceipt` | Not constructed |
+| provider-bound base-unit citation/checksum | Missing external authority |
+
+## Candidate Base-Unit Routes
+
+The request surface now exposes candidate routes for the shared `baseUnit`
+obligation. These routes are provider-facing candidates only. They do not
+select a base unit, construct physical authority, construct
+`Candidate256PhysicalCalibrationAuthorityToken`, or promote W4.
+
+The typed Agda surface is:
+
+```text
+DASHI.Physics.Closure.W4PhysicalUnitAuthorityRequestSurface.canonicalW4BaseUnitCandidateRoutes
+```
+
+Current candidate routes:
+
+| Route | Candidate meaning | Required before acceptance |
+|---|---|---|
+| `protonMassCODATACandidate` | Use a proton-mass energy-equivalent as the W4 natural base-unit candidate. | Provider-bound value, uncertainty, unit convention, conversion target, immutable citation/checksum, and dimensional preservation binding. |
+| `dyConventionNaturalUnitCandidate` | Inherit a base unit from an accepted DY luminosity/cross-section convention. | `AcceptedDYLuminosityConventionAuthorityReceipt` or replacement packet, normalisation preservation, conversion law, and statement that the selected DY base unit satisfies W4 physical-unit authority. |
+| `providerSuppliedOtherBaseUnitCandidate` | Let the provider supply a replacement base unit. | Complete `PhysicalUnitCarrier`, `DimensionCarrier`, `dimensionOfUnit`, `conversionLaw`, `Candidate256TSFVBindingLaw`, and `dimensionalPreservationLaw`. |
+
+The proton-mass/CODATA route is deliberately not written as an accepted
+authority. A remembered value, DOI name, standards label, or prose citation is
+insufficient. It becomes admissible only when the provider binds the exact
+value, uncertainty, unit convention, conversion target, immutable citation or
+checksum, and W4 dimensional-preservation statement.
+
+Current value note: if the proton-mass candidate route is used, the provider
+packet should bind the current CODATA 2022 proton mass energy equivalent:
+
+```json
+{
+  "baseUnitName": "proton mass energy equivalent",
+  "baseUnitValue": "938.27208943",
+  "baseUnitUncertainty": "0.00000029",
+  "baseUnitUnit": "MeV",
+  "providerSource": "CODATA 2022"
+}
+```
+
+Do not reuse the stale CODATA 2018 value `938.27208816` unless a compatibility
+surface explicitly requires historical constants. This note is still
+provider-facing and non-promoting; it does not choose the proton mass as W4
+`baseUnit`.
+
+Likewise, the DY route is not supplied by the local pressure decomposition
+tool. The tool exiting `45` proves the opposite: attribution is blocked until
+an accepted DY convention authority or replacement packet exists.
 
 ## Unified Base-Unit Bridge
 
@@ -129,6 +179,48 @@ provider still has to supply the witness selection rule, the chemistry-law
 receipt/artifact, and the external physical-unit authority binding those
 witnesses to the shared `baseUnit` / `requiredBaseUnit` obligation.
 
+The quotient-sensitive witness is now exposed as a separate parameterized
+surface:
+
+```text
+DASHI.Physics.Closure.W4PhysicalUnitAuthorityRequestSurface.canonicalW4QuotientSensitiveCrossBandWitnessSurface
+```
+
+It is parameterized by an existing:
+
+```text
+Handoff.QuotientLawAtWitness Next.canonicalCandidate256QuotientLaw
+```
+
+Given that witness, the surface records the internal `T` involution
+`candidate256QuotientT`, its involution law, TSFV compatibility, the canonical
+left/right non-collapse witness, and the `T`-flipped non-collapse witness. It
+does not construct the `QuotientLawAtWitness`, a provider chemistry-law
+receipt, a physical-unit authority token, or W4 promotion.
+
+## Provider Receipt Surface
+
+The provider response/receipt shape is now named in Agda as:
+
+```text
+DASHI.Physics.Closure.W4PhysicalUnitAuthorityRequestSurface.canonicalW4PhysicalUnitAuthorityProviderReceiptSurface
+```
+
+This is a receipt surface, not the external receipt itself. An accepted
+provider response must bind the exact request it answers, the physical-unit
+carrier/base-unit/dimension/conversion fields, provider-bound base-unit
+citation/checksum/value/uncertainty, the Candidate256/TSFV binding law,
+dimensional preservation, and an external
+`Candidate256PhysicalCalibrationAuthorityToken` plus
+`Candidate256PhysicalCalibrationExternalReceipt` payload. If the response
+consumes the quotient-sensitive cross-band witness, it must also provide the
+chemistry-law receipt and witness-selection rule.
+
+An insufficient response preserves the blocker by naming missing typed fields.
+The local surface keeps the same impossibility boundary: it does not construct
+`Candidate256PhysicalCalibrationAuthorityToken`,
+`Candidate256PhysicalCalibrationExternalReceipt`, or W4 promotion.
+
 ## Required Provider Payload
 
 An accepted provider response must supply all of the following as typed or
@@ -151,6 +243,7 @@ are not enough.
 | `dimensionalPreservationLaw` | Law family over `QuotientLawAtWitness canonicalCandidate256QuotientLaw -> Set`. |
 | `dimensionalPreservationAtWitness` | Inhabitant for every Candidate256 quotient-law witness. |
 | `Candidate256PhysicalCalibrationAuthorityToken` | External authority artifact inhabiting the constructorless token boundary outside this repo. |
+| provider-bound base-unit citation/checksum | Immutable citation, checksum, DOI/table/version, or replacement authority record for the chosen base unit. |
 | `authorityCitation` | DOI, standards reference, provider document, review record, or artifact id. |
 | `validationPayload` | Checksums, provenance, measurement inputs, commands/API calls, timestamps, and review boundary. |
 
@@ -177,6 +270,11 @@ Only a real external accepted response may use this shape:
   "dimensionalPreservationLaw": "",
   "dimensionalPreservationAtWitness": "",
   "Candidate256PhysicalCalibrationAuthorityToken": "",
+  "chosenBaseUnitCandidateRoute": "",
+  "providerBoundBaseUnitCitation": "",
+  "providerBoundBaseUnitChecksum": "",
+  "providerBoundBaseUnitValue": "",
+  "providerBoundBaseUnitUncertainty": "",
   "authorityCitation": "",
   "validationPayload": [],
   "authorityBoundary": []
@@ -213,6 +311,11 @@ These do not satisfy the request:
 - `TSFV.TSFVTritCalibrationLaw.baseUnit` by itself, because the current value
   is only the internal diagnostic base unit until a provider supplies the W4
   `requiredBaseUnit` payload.
+- Proton mass or CODATA named without provider-bound value, uncertainty, unit
+  convention, checksum/citation, conversion law, and W4 dimensional
+  preservation binding.
+- DY luminosity or pressure-decomposition diagnostics without an accepted DY
+  convention authority receipt or replacement packet.
 - The dimensionless `Nat` surrogate by itself.
 - Drosophila/codon candidate evidence without physical-unit authority.
 - HEPData/Z-peak/PDF artifacts without unit authority and a typed binding law.

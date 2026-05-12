@@ -52,6 +52,12 @@ Use one of these reader tracks first:
   `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnitsSourceDiagnostic.agda`,
   `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFitRealDatasetRouteDiagnostic.agda`,
   `DASHI/Physics/Closure/CancellationPressureRetargetConsumerObligation.agda`
+- W9 MDL termination seam route:
+  `DASHI/Physics/Closure/W9MDLTerminationSeamRoute.agda` records the real
+  `normalizeAdd` one-step canonicalization plus carry-depth/budget MDL
+  Lyapunov bridge as a non-pressure seam witness. It is not W9 closure: the
+  current kill matrix still lacks a theorem-consumer route constructor for
+  this MDL termination seam.
 - External request/source handoff surfaces:
   `DASHI/Physics/Closure/EmpiricalCalibrationExternalReceiptRequestPack.agda`,
   `DASHI/Physics/Closure/GRQFTConsumerSourceDiagnostic.agda`,
@@ -341,15 +347,19 @@ Current worker lanes:
   witnesses, downstream fields, and empirical validation;
   `PNFResidualConsumerReceiptRequestPack` co-locates W6 runtime payload fields;
   and `CancellationPressureRetargetConsumerSourceDiagnostic` records that W9
-  still lacks a retarget consumer interface and acceptance receipt. These are
-  handoff/source surfaces only, not blocker promotions.
+  now has a weighted-support `RetargetConsumerInterface` and acceptance receipt
+  whose downstream predicate is a `<=` pressure-support bound. These are
+  handoff/source surfaces only, not blocker promotions; W9 still needs an
+  explicit theorem-consumer route change or the original equality witness.
 - Provider request-pack round:
   `GRQFTClosurePromotionReceiptRequestPack`,
   `OriginReceiptPromotionExternalRequestPack`, and
   `CancellationPressureRetargetConsumerAcceptanceRequestPack` now co-locate the
-  exact provider payloads for W5, W8, and W9. They do not construct authority
-  tokens, empirical adequacy, GR/QFT laws, origin promotion, retarget
-  acceptance, or cancellation-pressure compatibility.
+  exact provider payloads for W5, W8, and W9. The W9 pack now consumes the
+  local weighted-support retarget acceptance and keeps the remaining blocker at
+  theorem-consumer route change. They do not construct authority tokens,
+  empirical adequacy, GR/QFT laws, origin promotion, W9 kill evidence, or
+  cancellation-pressure compatibility.
 - Empirical / calibration request-pack round:
   `W3AcceptedAuthorityExternalReceiptRequestPack` and
   `W4PhysicalCalibrationExternalReceiptRequestPack` now co-locate the exact
@@ -565,7 +575,11 @@ Current worker lanes:
   below-Z Drell-Yan phistar ratio result: formal carrier plus
   no-free-parameter phistar ratio comparison, `chi2/dof = 2.1565191176`, and
   runner-side non-collapse evidence. This is not unification and not full W3
-  accepted authority before HEP-R54.
+  accepted authority before HEP-R54. The W3 non-collapse runner receipt is
+  hardened by `Docs/W3NonCollapseRunnerReceiptHardening.md` and
+  `scripts/check_w3_noncollapse_receipt.py`; the check binds the JSON witness,
+  checksum, and Agda receipt literals while preserving
+  `providerGradePayloadPresent = false`.
 - `W8`: origin receipt for the minimal-credible closure path.
 - `W9`: cancellation-pressure seam in `DeltaToQuadraticBridgeTheorem`.
 
@@ -1284,6 +1298,12 @@ Current theorem status:
   `pressureWitness`, or supply the weighted replacement route with
   cancellation-to-weighted-quadratic identification. It does not inhabit
   `CancellationPressureCompatibility`.
+  The retarget diagnostic lane is deliberately weaker: `W9WeightedSupportRetargetConsumerReceipt`
+  accepts `canonicalPairPressureRetargetReceipt` through
+  `weightedMaxPressure <= weightedSupport`, but that `<=` surface is not a
+  `W9KillReceipt` because the kill route in `BlockerKillConditions` still
+  accepts only the existing equality witness route or the weighted replacement
+  identification route.
 - Generic pressure algebra owner:
   `DASHI/Pressure.agda`
   now exposes a finite five-level pressure carrier with

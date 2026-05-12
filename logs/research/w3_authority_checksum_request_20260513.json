@@ -28,16 +28,59 @@
     }
   },
   "providerCanonicalChecksumBinding": {
-    "bindingStatus": "absent",
-    "providerCanonicalT43ChecksumOrEquivalent": null,
-    "providerCanonicalT44ChecksumOrEquivalent": null,
-    "tableChecksumBound": false
+    "bindingStatus": "canonical-json-payloads-present-awaiting-accepted-authority-token",
+    "providerCanonicalT43ChecksumOrEquivalent": "5cfefe5a5a99c415f9225a3515383e8ce5e9a874861ff6c5fc08365871bfd340",
+    "providerCanonicalT44ChecksumOrEquivalent": "2dfa2abe120981f1f8379d95c8d6e0362394c6f6c8fed01dd45fc76a3e2b660b",
+    "tableChecksumBound": "candidate-canonical-json-bound-awaiting-accepted-authority-token"
   },
-  "exactExternalStep": "Provider must return providerCanonicalT43ChecksumOrEquivalent and providerCanonicalT44ChecksumOrEquivalent, then explicitly set tableChecksumBound=true for the cited HEPData DOI/table provenance, or mark the field insufficient/rejected with the exact failed rule.",
+  "canonicalHEPDataAttempt": {
+    "attemptDate": "2026-05-13",
+    "recordMetadata": {
+      "url": "https://www.hepdata.net/record/ins2079374?format=json",
+      "fetchStatus": "success",
+      "sha256": "fde88f3acf0b07ccf4be9ddbf311249d5eedf81ca43017a71376dd9a5b1fb36d",
+      "identifiedTables": {
+        "t43": {
+          "doi": "10.17182/hepdata.115656.v1/t43",
+          "id": 1316250,
+          "name": "phistar mass 50-76 over mass 76-106",
+          "csvUrl": "https://www.hepdata.net/download/table/ins2079374/phistar mass 50-76 over mass 76-106/csv"
+        },
+        "t44": {
+          "doi": "10.17182/hepdata.115656.v1/t44",
+          "id": 1316252,
+          "name": "Covariance matrices for phistar mass 50-76 over mass 76-106",
+          "csvUrl": "https://www.hepdata.net/download/table/ins2079374/Covariance matrices for phistar mass 50-76 over mass 76-106/csv"
+        }
+      }
+    },
+    "payloadDownloads": {
+      "t43": {
+        "status": "supplied-by-user-browser-download",
+        "sourcePath": "/home/c/Downloads/hep115656-1316250-1.json",
+        "stagedPath": "logs/research/provider_inputs/hepdata_ins2079374/t43_canonical.json",
+        "sha256": "5cfefe5a5a99c415f9225a3515383e8ce5e9a874861ff6c5fc08365871bfd340",
+        "semanticRowsChecked": 18,
+        "semanticMismatches": 0,
+        "checksumBound": true
+      },
+      "t44": {
+        "status": "supplied-by-user-browser-download",
+        "sourcePath": "/home/c/Downloads/hep115656-1316252-1.json",
+        "stagedPath": "logs/research/provider_inputs/hepdata_ins2079374/t44_canonical.json",
+        "sha256": "2dfa2abe120981f1f8379d95c8d6e0362394c6f6c8fed01dd45fc76a3e2b660b",
+        "semanticRowsChecked": 324,
+        "semanticMismatches": 0,
+        "checksumBound": true
+      }
+    },
+    "attemptConclusion": "Canonical t43/t44 JSON payloads were supplied by browser download, staged, checksum-bound, and semantically matched against the local ratio CSV cache. This closes the local canonical-payload discovery gap but does not self-issue W3AcceptedEvidenceAuthorityToken."
+  },
+  "exactExternalStep": "Accepted external authority response must now consume the bound canonical t43/t44 JSON payloads and explicitly supply W3AcceptedEvidenceAuthorityToken, or mark the packet insufficient/rejected with an exact rule.",
   "nonPromotionBoundary": [
-    "No W3AcceptedEvidenceAuthorityToken is constructed.",
-    "No W3AcceptedAuthorityExternalReceipt is constructed.",
-    "Local HEP-R28 checksums are not treated as provider canonical authority.",
+    "Canonical t43/t44 JSON payloads are staged and checksum-bound.",
+    "No W3AcceptedEvidenceAuthorityToken is constructed locally.",
+    "No W3AcceptedAuthorityExternalReceipt is constructed locally.",
     "W3 remains candidate-only until an accepted external authority response exists."
   ]
 }

@@ -78,6 +78,10 @@ Required public/source fields from
 | Local t43/t44 manifest | `scripts/data/hepdata/ins2079374_t43_t44.sha256` |
 | Local checksum receipt | `DASHI/Physics/Closure/HEPDataRatioTableArtifactReceipt.agda` |
 | Local header binding | t43 first header `#: table_doi: 10.17182/hepdata.115656.v1/t43`; t44 first header `#: table_doi: 10.17182/hepdata.115656.v1/t44` |
+| Canonical HEPData record metadata fetch | `https://www.hepdata.net/record/ins2079374?format=json`, SHA-256 `fde88f3acf0b07ccf4be9ddbf311249d5eedf81ca43017a71376dd9a5b1fb36d` |
+| Metadata-discovered t43 table | DOI `10.17182/hepdata.115656.v1/t43`, id `1316250`, name `phistar mass 50-76 over mass 76-106` |
+| Metadata-discovered t44 table | DOI `10.17182/hepdata.115656.v1/t44`, id `1316252`, name `Covariance matrices for phistar mass 50-76 over mass 76-106` |
+| Canonical table payload attempt | Direct HEPData `csv` table downloads for t43/t44 returned HTTP `403`; no canonical payload checksum was bound |
 
 The authority response must confirm that these public/source and runner-bound
 fields are acceptable evidence for the W3 authority-token boundary, or return
@@ -98,6 +102,14 @@ local t44 checksum:
 This is a local HEPData artifact/download-route binding only. It is not an
 external provider statement that those local CSV payloads are the canonical
 HEPData payloads, and it is not an accepted W3 authority token.
+
+On 2026-05-13, the HEPData record metadata route was reachable and identified
+the authoritative t43/t44 table names, DOIs, ids, and download URLs. The direct
+table-payload URLs returned HTTP `403`, so the local worker could not compute a
+canonical t43/t44 payload checksum from HEPData itself. This failed download
+does not reject the W3 packet; it preserves the existing external blocker:
+provider-equivalent checksum binding is still required before
+`tableChecksumBound` may become `true`.
 
 ## Remaining Authority Obligation
 

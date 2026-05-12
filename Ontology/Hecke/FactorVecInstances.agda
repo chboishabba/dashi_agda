@@ -7,7 +7,8 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import MonsterOntos using
   (SSP; p2; p3; p5; p7; p11; p13; p17; p19; p23; p29; p31; p41; p47; p59; p71)
-open import Ontology.GodelLattice using (Vec15; FactorVec)
+open import Ontology.GodelLattice using
+  (Vec15; FactorVec; updateVec15; updateVec15-commutes)
 open import Ontology.GodelLattice renaming (v15 to mkVec15)
 import Ontology.Hecke.QuotientRepresentation as HQ
 import Ontology.Hecke.ReverseRepresentation as HR
@@ -47,6 +48,47 @@ bumpPrime p59 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) 
   mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 (suc e59) e71
 bumpPrime p71 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) =
   mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 (suc e71)
+
+primeBump : SSP → FactorVec → FactorVec
+primeBump p = updateVec15 p suc
+
+bumpPrime≡primeBump : ∀ p v → bumpPrime p v ≡ primeBump p v
+bumpPrime≡primeBump p2  (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p3  (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p5  (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p7  (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p11 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p13 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p17 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p19 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p23 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p29 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p31 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p41 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p47 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p59 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+bumpPrime≡primeBump p71 (mkVec15 e2 e3 e5 e7 e11 e13 e17 e19 e23 e29 e31 e41 e47 e59 e71) = refl
+
+primeBumpCommutes :
+  ∀ p q v →
+  primeBump p (primeBump q v) ≡ primeBump q (primeBump p v)
+primeBumpCommutes p q v =
+  updateVec15-commutes p q suc suc (λ _ → refl) v
+
+by-abelian-factorvec :
+  ∀ p q v →
+  primeBump p (primeBump q v) ≡ primeBump q (primeBump p v)
+by-abelian-factorvec = primeBumpCommutes
+
+bumpPrimeCommutes :
+  ∀ p q v →
+  bumpPrime p (bumpPrime q v) ≡ bumpPrime q (bumpPrime p v)
+bumpPrimeCommutes p q v
+  rewrite bumpPrime≡primeBump q v
+        | bumpPrime≡primeBump p v
+        | bumpPrime≡primeBump p (primeBump q v)
+        | bumpPrime≡primeBump q (primeBump p v)
+  = primeBumpCommutes p q v
 
 nextPrime : SSP → SSP
 nextPrime p2  = p3

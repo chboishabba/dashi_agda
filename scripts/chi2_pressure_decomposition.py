@@ -24,6 +24,14 @@ EXIT_BLOCKED = 45
 EXIT_INPUT_ERROR = 46
 
 ACCEPTED_STATUSES = {"accepted", "replacement"}
+ABSENT_STRINGS = {"", "missing", "insufficient", "unknown", "none", "null"}
+NEGATIVE_AUTHORITY_MARKERS = (
+    "no accepted convention",
+    "not an accepted authority",
+    "not accepted",
+    "cannot provide authority",
+    "no convention or luminosity value is accepted",
+)
 
 REQUIRED_PROVIDER_FIELDS = (
     "provider_name",
@@ -53,6 +61,49 @@ RUNNER_CONVERSION_FIELDS = (
     "W4_per_bin_luminosities",
 )
 
+FIELD_GROUPS = {
+    "provider_identity": (
+        "provider_name",
+        "provider_role",
+        "source_citation",
+        "attestation_no_manual_overfit",
+    ),
+    "pdf_authority": (
+        "pdf_set_version",
+        "lhapdf_id",
+        "member_id",
+        "grid_checksum",
+    ),
+    "dy_convention": (
+        "scale_convention",
+        "rapidity_window",
+        "mass_bin_rule",
+        "flavour_weight_rule",
+        "integration_method",
+    ),
+    "luminosity_runner_inputs": (
+        "luminosity_values",
+        "L43",
+        "L45",
+        "W4_per_bin_luminosities",
+    ),
+    "normalization_conversion": (
+        "normalization_preservation_law",
+        "conversion_law",
+    ),
+    "efficiency_acceptance": (
+        "efficiency_acceptance_model",
+        "systematic_budget",
+        "cms_smp_publication_pointer",
+    ),
+}
+
+FIELD_TO_GROUP = {
+    field: group
+    for group, fields in FIELD_GROUPS.items()
+    for field in fields
+}
+
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
@@ -79,10 +130,26 @@ def absentish(value: Any) -> bool:
     if value is None:
         return True
     if isinstance(value, str):
-        return value.strip().lower() in {"", "missing", "insufficient", "unknown", "none", "null"}
+        return value.strip().lower() in ABSENT_STRINGS
     if isinstance(value, list):
         return len(value) == 0
     return False
+
+
+def field_status(value: Any) -> str:
+    if absentish(value):
+        return "missing"
+    if isinstance(value, str) and any(marker in value.strip().lower() for marker in NEGATIVE_AUTHORITY_MARKERS):
+        return "negative-authority-marker"
+    return "present"
+
+
+def group_missing(fields: list[str]) -> dict[str, list[str]]:
+    grouped: dict[str, list[str]] = {group: [] for group in FIELD_GROUPS}
+    grouped["other"] = []
+    for field in fields:
+        grouped.setdefault(FIELD_TO_GROUP.get(field, "other"), []).append(field)
+    return {group: values for group, values in grouped.items() if values}
 
 
 def choose_authority_payload(packet: dict[str, Any]) -> dict[str, Any]:
@@ -118,14 +185,68 @@ def finite_positive(value: Any) -> bool:
     return math.isfinite(number) and number > 0.0
 
 
+def positive_diagnostic(value: Any) -> dict[str, Any]:
+    return {
+        "raw": value,
+        "present": not absentish(value),
+        "positiveFinite": finite_positive(value),
+    }
+
+
+def w4_luminosity_diagnostic(value: Any) -> dict[str, Any]:
+    if not isinstance(value, list):
+        return {
+            "present": not absentish(value),
+            "count": 0,
+            "positiveFiniteCount": 0,
+            "allPositiveFinite": False,
+            "shape": type(value).__name__,
+        }
+    positive_count = 0
+    for item in value:
+        candidate = item.get("luminosity", item) if isinstance(item, dict) else item
+        if finite_positive(candidate):
+            positive_count += 1
+    return {
+        "present": bool(value),
+        "count": len(value),
+        "positiveFiniteCount": positive_count,
+        "allPositiveFinite": bool(value) and positive_count == len(value),
+        "shape": "list",
+    }
+
+
 def inspect_authority(path: Path | None) -> dict[str, Any]:
+    all_missing = list(REQUIRED_PROVIDER_FIELDS) + list(RUNNER_CONVERSION_FIELDS)
     if path is None:
         return {
             "path": None,
             "present": False,
             "accepted": False,
             "status": "missing",
-            "missingFields": list(REQUIRED_PROVIDER_FIELDS) + list(RUNNER_CONVERSION_FIELDS),
+            "missingFields": all_missing,
+            "missingByGroup": group_missing(all_missing),
+            "negativeAuthorityMarkerFields": [],
+            "providerDeclaredMissingFields": [],
+            "fieldDiagnostics": [
+                {"field": field, "group": FIELD_TO_GROUP.get(field, "other"), "status": "missing"}
+                for field in all_missing
+            ],
+            "runnerLuminosityDiagnostics": {
+                "L43": positive_diagnostic(None),
+                "L45": positive_diagnostic(None),
+                "W4_per_bin_luminosities": w4_luminosity_diagnostic(None),
+            },
+            "authorityGate": {
+                "statusAcceptedOrReplacement": False,
+                "requiredFieldsPresent": False,
+                "negativeAuthorityMarkersAbsent": True,
+                "accepted": False,
+                "acceptedFalseReasons": ["authorityPacketMissing", "requiredFieldsMissing"],
+                "firstMissing": all_missing[0],
+                "firstMissingGroup": FIELD_TO_GROUP.get(all_missing[0], "other"),
+                "blockedExitCode": EXIT_BLOCKED,
+            },
             "sha256": None,
         }
     if not path.exists():
@@ -134,14 +255,52 @@ def inspect_authority(path: Path | None) -> dict[str, Any]:
             "present": False,
             "accepted": False,
             "status": "missing-file",
-            "missingFields": list(REQUIRED_PROVIDER_FIELDS) + list(RUNNER_CONVERSION_FIELDS),
+            "missingFields": all_missing,
+            "missingByGroup": group_missing(all_missing),
+            "negativeAuthorityMarkerFields": [],
+            "providerDeclaredMissingFields": [],
+            "fieldDiagnostics": [
+                {"field": field, "group": FIELD_TO_GROUP.get(field, "other"), "status": "missing"}
+                for field in all_missing
+            ],
+            "runnerLuminosityDiagnostics": {
+                "L43": positive_diagnostic(None),
+                "L45": positive_diagnostic(None),
+                "W4_per_bin_luminosities": w4_luminosity_diagnostic(None),
+            },
+            "authorityGate": {
+                "statusAcceptedOrReplacement": False,
+                "requiredFieldsPresent": False,
+                "negativeAuthorityMarkersAbsent": True,
+                "accepted": False,
+                "acceptedFalseReasons": ["authorityPacketMissingFile", "requiredFieldsMissing"],
+                "firstMissing": all_missing[0],
+                "firstMissingGroup": FIELD_TO_GROUP.get(all_missing[0], "other"),
+                "blockedExitCode": EXIT_BLOCKED,
+            },
             "sha256": None,
         }
 
     packet = load_json(path)
     authority = choose_authority_payload(packet)
     status = authority.get("status", packet.get("status"))
-    missing = [field for field in REQUIRED_PROVIDER_FIELDS if absentish(authority.get(field, packet.get(field)))]
+    field_diagnostics = []
+    missing = []
+    negative_markers = []
+    for field in REQUIRED_PROVIDER_FIELDS:
+        value = authority.get(field, packet.get(field))
+        status_for_field = field_status(value)
+        field_diagnostics.append(
+            {
+                "field": field,
+                "group": FIELD_TO_GROUP.get(field, "other"),
+                "status": status_for_field,
+            }
+        )
+        if status_for_field == "missing":
+            missing.append(field)
+        elif status_for_field == "negative-authority-marker":
+            negative_markers.append(field)
 
     luminosities = packet.get("luminosities") if isinstance(packet.get("luminosities"), dict) else packet
     l43 = first_present(luminosities, ("L43", "L_M43_Y43", "L_50_76", "L_M50_76", "luminosity_43"))
@@ -165,12 +324,44 @@ def inspect_authority(path: Path | None) -> dict[str, Any]:
         missing.append("W4_per_bin_luminosities")
 
     accepted = status in ACCEPTED_STATUSES and not missing
+    accepted_false_reasons = []
+    if status not in ACCEPTED_STATUSES:
+        accepted_false_reasons.append("statusNotAcceptedOrReplacement")
+    if missing:
+        accepted_false_reasons.append("requiredFieldsMissing")
+    if negative_markers:
+        accepted_false_reasons.append("negativeAuthorityMarkerPresent")
+        accepted = False
+
+    provider_declared_missing = packet.get("missing_fields", authority.get("missing_fields", []))
+    if not isinstance(provider_declared_missing, list):
+        provider_declared_missing = [provider_declared_missing]
+
     return {
         "path": str(path),
         "present": True,
         "accepted": accepted,
         "status": status,
         "missingFields": missing,
+        "missingByGroup": group_missing(missing),
+        "negativeAuthorityMarkerFields": negative_markers,
+        "providerDeclaredMissingFields": provider_declared_missing,
+        "fieldDiagnostics": field_diagnostics,
+        "runnerLuminosityDiagnostics": {
+            "L43": positive_diagnostic(l43),
+            "L45": positive_diagnostic(l45),
+            "W4_per_bin_luminosities": w4_luminosity_diagnostic(w4),
+        },
+        "authorityGate": {
+            "statusAcceptedOrReplacement": status in ACCEPTED_STATUSES,
+            "requiredFieldsPresent": not missing,
+            "negativeAuthorityMarkersAbsent": not negative_markers,
+            "accepted": accepted,
+            "acceptedFalseReasons": accepted_false_reasons,
+            "firstMissing": missing[0] if missing else None,
+            "firstMissingGroup": FIELD_TO_GROUP.get(missing[0], "other") if missing else None,
+            "blockedExitCode": EXIT_BLOCKED if not accepted else None,
+        },
         "sha256": sha256_file(path),
     }
 
@@ -305,9 +496,18 @@ def build_decomposition(authority: dict[str, Any], t43: dict[str, Any], w4: dict
 
     return {
         "artifactSchema": "dashi-dy-chi2-pressure-decomposition-v1",
-        "schemaVersion": "0.1.0",
+        "schemaVersion": "0.2.0",
         "status": "blocked-non-promoting" if blocked_reasons else "computed-non-promoting",
         "blockedReasons": blocked_reasons,
+        "firstMissing": {
+            "field": authority.get("authorityGate", {}).get("firstMissing"),
+            "group": authority.get("authorityGate", {}).get("firstMissingGroup"),
+            "reason": (
+                "accepted DY convention authority is absent or incomplete"
+                if not authority["accepted"] else
+                None
+            ),
+        },
         "inputs": {
             "authority": authority,
             "t43Comparison": t43,
@@ -317,6 +517,7 @@ def build_decomposition(authority: dict[str, Any], t43: dict[str, Any], w4: dict
             "convention_bin_normalization": {
                 "status": "blocked" if convention_missing else "authority-fields-present",
                 "missingFields": convention_missing,
+                "missingByGroup": group_missing(convention_missing),
                 "attribution": (
                     "cannot separate convention/bin-normalization from PDF/model pressure until the accepted "
                     "provider conversion law supplies L43, L45, W4 ell_i, and normalization preservation"
@@ -327,6 +528,7 @@ def build_decomposition(authority: dict[str, Any], t43: dict[str, Any], w4: dict
             "pdf": {
                 "status": "indeterminate" if pdf_missing else "authority-fields-present",
                 "missingFields": pdf_missing,
+                "missingByGroup": group_missing(pdf_missing),
                 "attribution": (
                     "local CT18 material is candidate provenance only; no accepted PDF authority attribution"
                     if pdf_missing else
@@ -342,6 +544,7 @@ def build_decomposition(authority: dict[str, Any], t43: dict[str, Any], w4: dict
             "efficiency_acceptance": {
                 "status": "missing" if efficiency_missing else "authority-fields-present",
                 "missingFields": efficiency_missing,
+                "missingByGroup": group_missing(efficiency_missing),
                 "attribution": "missing efficiency/acceptance is not proof for any pressure domain; it remains an explicit provider gap",
             },
         },

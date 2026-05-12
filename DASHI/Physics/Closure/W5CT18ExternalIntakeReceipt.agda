@@ -111,6 +111,26 @@ record W5CT18ExternalIntakeReceipt : Set where
     missingAuthorityFields :
       List DYConvention.W4W5DYLuminosityAuthorityField
 
+    lhapdf6ExternalIntakeContract :
+      List Intake.LHAPDF6ExternalIntakeContractField
+
+    lhapdf6ExternalIntakeContractIsCanonical :
+      lhapdf6ExternalIntakeContract
+      ≡
+      Intake.canonicalLHAPDF6ExternalIntakeContractFields
+
+    lhapdf6ExternalIntakeContractLabels :
+      List String
+
+    localCT18GridParsed :
+      Bool
+
+    localCT18GridParsedIsTrue :
+      localCT18GridParsed ≡ true
+
+    localCT18DASHIProjectionBinding :
+      List String
+
     providerAuthorityContract :
       List String
 
@@ -202,6 +222,9 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "Local parser rapidity-window DY luminosity integration gives t45/z_peak = 0.7514043986785174, which does not satisfy the W5 target"
         ∷ "Local parser also records the t43-denominator mass-window ratio t45/t43 = 0.3348750784006896 and center ratio 0.13510406305538247; the t43 denominator hypothesis is rejected under this convention"
         ∷ "The packet now records formula, bin integration, scale choice, flavour sum, CT18NLO member/provenance, and required authority fields, but remains candidate-not-accepted"
+        ∷ "Euler 2026-05-13 reran the CT18 equivalent-table candidate packet at logs/research/w4w5_pdf_ct18_candidate_run_20260513.json; SHA-256 7b4e5e815c3e65619cd9591734eb00e7c80be0402c6d06c3c8d33d1c8da6609f"
+        ∷ "Euler 2026-05-13 recorded that a real LHAPDF runtime run is not possible here: lhapdf, lhapdf-config, and Python lhapdf are absent; no MSHT20 grid was found locally"
+        ∷ "The exact tool/provider obstruction is logs/research/w4w5_pdf_lhapdf_intake_obstruction_20260513.json; SHA-256 a67318e71b4c18fde71597874f93aa28ab020557f230dd3843f807e40545b88d"
         ∷ "The confirmed internal DGLAP/LO carrier route remains insufficient for t45"
         ∷ "W5 is not externally ready until an accepted parton-luminosity/bin-integration convention and authority/provenance packet are supplied"
         ∷ []
@@ -224,11 +247,26 @@ canonicalW5CT18ExternalIntakeReceipt =
     ; missingAuthorityFields =
         DYConvention.W4W5AcceptedDYLuminosityConventionDiagnostic.missingAuthorityFields
           DYConvention.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
+    ; lhapdf6ExternalIntakeContract =
+        Intake.canonicalLHAPDF6ExternalIntakeContractFields
+    ; lhapdf6ExternalIntakeContractIsCanonical =
+        refl
+    ; lhapdf6ExternalIntakeContractLabels =
+        Intake.W5PDFCarrierExternalIntakeRequest.lhapdf6ExternalIntakeContractLabels
+          Intake.canonicalW5PDFCarrierExternalIntakeRequest
+    ; localCT18GridParsed =
+        true
+    ; localCT18GridParsedIsTrue =
+        refl
+    ; localCT18DASHIProjectionBinding =
+        Intake.W5PDFCarrierExternalIntakeRequest.localCT18DASHIProjectionBinding
+          Intake.canonicalW5PDFCarrierExternalIntakeRequest
     ; providerAuthorityContract =
         "receipt is provider-ready only as an intake surface: no accepted external packet is present"
         ∷ "receipt must accept or replace the candidate CT18NLO formula, bin integration, scale choice, flavour sum, member/error treatment, and tolerance"
         ∷ "receipt must carry provider, command/API, source path or DOI, input checksums, timestamp, and explicit acceptance statement"
         ∷ "receipt must leave local CT18 fixed-x and rapidity-window probes candidate-only/falsified until an authority supersedes them"
+        ∷ "receipt must supply a real LHAPDF route or accepted equivalent provider table because the 2026-05-13 local preflight found no LHAPDF runtime and no MSHT20 grid"
         ∷ "receipt must not construct W5 closure or W4/W5 shared closure"
         ∷ []
     ; networkFetchPerformed =

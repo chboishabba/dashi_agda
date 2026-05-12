@@ -3,9 +3,10 @@ module DASHI.Physics.Closure.CancellationPressureRetargetConsumerSourceDiagnosti
 -- W9g: current-source diagnostic for W9f's retarget consumer obligation.
 --
 -- This module records source availability only.  It imports the W9 retarget
--- receipt and W9f consumer-obligation surface, but it does not construct a
--- RetargetConsumerInterface, a consumer acceptance receipt, a canonical Qcore,
--- an admissible quadratic, or CancellationPressureCompatibility.
+-- receipt, W9f consumer-obligation surface, and the weighted-support retarget
+-- acceptance receipt, but it does not construct a theorem-consumer route
+-- change, a canonical Qcore, an admissible quadratic, or
+-- CancellationPressureCompatibility.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
@@ -14,6 +15,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation as W9
 import DASHI.Physics.Closure.CancellationPressureRetargetConsumerObligation as W9f
+import DASHI.Physics.Closure.W9WeightedSupportRetargetConsumerReceipt as W9r
 
 data RetargetConsumerSourcePresence : Set where
   sourcePresent :
@@ -36,21 +38,25 @@ data Dim15DeltaToQuadraticFirstMissingStatus : Set where
 data Dim15DeltaToQuadraticSurvivingRoute : Set where
   supplyDim15TheoremPressureWitness :
     Dim15DeltaToQuadraticSurvivingRoute
-  supplyDownstreamRetargetConsumerAcceptance :
+  supplyTheoremConsumerRouteChangeForAcceptedRetarget :
     Dim15DeltaToQuadraticSurvivingRoute
 
 canonicalDim15DeltaToQuadraticSurvivingRoutes :
   List Dim15DeltaToQuadraticSurvivingRoute
 canonicalDim15DeltaToQuadraticSurvivingRoutes =
   supplyDim15TheoremPressureWitness
-  ∷ supplyDownstreamRetargetConsumerAcceptance
+  ∷ supplyTheoremConsumerRouteChangeForAcceptedRetarget
   ∷ []
 
 currentRetargetConsumerSourceMissingFields :
   List RetargetConsumerSourceMissingField
 currentRetargetConsumerSourceMissingFields =
-  missingRetargetConsumerInterfaceSource
-  ∷ missingCancellationPressureRetargetConsumerAcceptanceReceiptSource
+  []
+
+currentRetargetConsumerObligationMissingFields :
+  List W9f.RetargetConsumerMissingField
+currentRetargetConsumerObligationMissingFields =
+  W9f.missingTheoremConsumerRouteChange
   ∷ []
 
 record CancellationPressureRetargetConsumerSourceDiagnostic : Setω where
@@ -78,12 +84,10 @@ record CancellationPressureRetargetConsumerSourceDiagnostic : Setω where
     obligationMissingFields :
       List W9f.RetargetConsumerMissingField
 
-    obligationMissingFieldsMatchW9f :
+    obligationMissingFieldsAreCurrent :
       obligationMissingFields
       ≡
-      W9f.missingDownstreamConsumerAcceptance
-      ∷ W9f.missingTheoremConsumerRouteChange
-      ∷ []
+      currentRetargetConsumerObligationMissingFields
 
     preservedBoundaries :
       List W9f.RetargetConsumerBoundary
@@ -124,16 +128,14 @@ currentCancellationPressureRetargetConsumerSourceDiagnostic =
     ; selectedNextRouteIsCanonicalRetarget =
         refl
     ; retargetConsumerInterfaceSource =
-        sourceMissing
+        sourcePresent
     ; acceptanceReceiptSource =
-        sourceMissing
+        sourcePresent
     ; missingSourceFields =
         currentRetargetConsumerSourceMissingFields
     ; obligationMissingFields =
-        W9f.missingDownstreamConsumerAcceptance
-        ∷ W9f.missingTheoremConsumerRouteChange
-        ∷ []
-    ; obligationMissingFieldsMatchW9f =
+        currentRetargetConsumerObligationMissingFields
+    ; obligationMissingFieldsAreCurrent =
         refl
     ; preservedBoundaries =
         W9f.pressureCompatibleButNonQcore
@@ -149,40 +151,58 @@ currentCancellationPressureRetargetConsumerSourceDiagnostic =
     ; closureWouldNeedInterface =
         λ ()
     ; diagnosticBoundary =
-        "W9f names the downstream retarget consumer obligation, but this source scan found no in-repo RetargetConsumerInterface source"
-        ∷ "This source scan found no in-repo CancellationPressureRetargetConsumerAcceptanceReceipt source for canonicalPairPressureRetargetReceipt"
-        ∷ "The available W9 receipt remains pressure-compatible at the boundary but non-Qcore"
+        "W9WeightedSupportRetargetConsumerReceipt supplies the in-repo RetargetConsumerInterface source"
+        ∷ "W9WeightedSupportRetargetConsumerReceipt supplies the in-repo CancellationPressureRetargetConsumerAcceptanceReceipt source for canonicalPairPressureRetargetReceipt"
+        ∷ "That acceptance is the weightedMaxPressure <= weightedSupport bound"
+        ∷ "The available W9 retarget remains pressure-compatible at the boundary but non-Qcore"
         ∷ "No admissible-quadratic or CancellationPressureCompatibility promotion is constructed here"
         ∷ []
     ; blockerImpact =
-        "Strict blocker remains: W9 retarget cannot replace or route around existing theorem consumers yet"
-        ∷ "Missing source fields are RetargetConsumerInterface and CancellationPressureRetargetConsumerAcceptanceReceipt"
-        ∷ "The next admissible move is a downstream consumer source plus acceptance receipt, or an explicit theorem route change"
+        "Strict blocker remains: the accepted W9 retarget cannot replace or route around existing theorem consumers without a theorem-consumer route change"
+        ∷ "The retarget consumer interface and acceptance receipt are present but non-promoting"
+        ∷ "The next admissible move is an explicit theorem route change, or the original pressure-witness equality/identification route"
         ∷ []
     }
 
-record W9RetargetConsumerAbsenceDiagnostic : Setω where
+record W9RetargetConsumerLeReceiptDiagnostic : Setω where
   field
     sourceDiagnostic :
       CancellationPressureRetargetConsumerSourceDiagnostic
 
-    retargetConsumerInterfaceSourceIsMissing :
+    weightedSupportRetargetReceipt :
+      W9r.WeightedSupportRetargetConsumerReceipt
+
+    retargetConsumerInterfaceSourceIsPresent :
       CancellationPressureRetargetConsumerSourceDiagnostic.retargetConsumerInterfaceSource
         sourceDiagnostic
       ≡
-      sourceMissing
+      sourcePresent
 
-    acceptanceReceiptSourceIsMissing :
+    acceptanceReceiptSourceIsPresent :
       CancellationPressureRetargetConsumerSourceDiagnostic.acceptanceReceiptSource
         sourceDiagnostic
       ≡
-      sourceMissing
+      sourcePresent
 
     missingSourceFieldsAreCurrent :
       CancellationPressureRetargetConsumerSourceDiagnostic.missingSourceFields
         sourceDiagnostic
       ≡
       currentRetargetConsumerSourceMissingFields
+
+    retargetConsumer :
+      W9f.RetargetConsumerInterface
+
+    acceptanceReceipt :
+      W9f.CancellationPressureRetargetConsumerAcceptanceReceipt
+        retargetConsumer
+        W9.canonicalPairPressureRetargetReceipt
+
+    acceptanceScopeIsRetargetOnly :
+      W9r.WeightedSupportRetargetConsumerReceipt.receiptScope
+        weightedSupportRetargetReceipt
+      ≡
+      W9r.retargetConsumerAcceptedOnly
 
     selectedRouteRemainsRetarget :
       CancellationPressureRetargetConsumerSourceDiagnostic.selectedNextRoute
@@ -199,30 +219,39 @@ record W9RetargetConsumerAbsenceDiagnostic : Setω where
       ∷ W9f.noCancellationPressureCompatibilityPromotion
       ∷ []
 
-    absenceBoundary :
+    receiptBoundary :
       List String
 
-currentW9RetargetConsumerAbsenceDiagnostic :
-  W9RetargetConsumerAbsenceDiagnostic
-currentW9RetargetConsumerAbsenceDiagnostic =
+currentW9RetargetConsumerLeReceiptDiagnostic :
+  W9RetargetConsumerLeReceiptDiagnostic
+currentW9RetargetConsumerLeReceiptDiagnostic =
   record
     { sourceDiagnostic =
         currentCancellationPressureRetargetConsumerSourceDiagnostic
-    ; retargetConsumerInterfaceSourceIsMissing =
+    ; weightedSupportRetargetReceipt =
+        W9r.canonicalWeightedSupportRetargetConsumerReceipt
+    ; retargetConsumerInterfaceSourceIsPresent =
         refl
-    ; acceptanceReceiptSourceIsMissing =
+    ; acceptanceReceiptSourceIsPresent =
         refl
     ; missingSourceFieldsAreCurrent =
+        refl
+    ; retargetConsumer =
+        W9r.weightedSupportRetargetConsumer
+    ; acceptanceReceipt =
+        W9r.weightedSupportRetargetAcceptanceReceipt
+    ; acceptanceScopeIsRetargetOnly =
         refl
     ; selectedRouteRemainsRetarget =
         refl
     ; preservedBoundariesMatchW9f =
         refl
-    ; absenceBoundary =
-        "Planck W9 scan found no in-repo downstream RetargetConsumerInterface inhabitant"
-        ∷ "Planck W9 scan found no in-repo CancellationPressureRetargetConsumerAcceptanceReceipt inhabitant"
+    ; receiptBoundary =
+        "Planck W9 scan found a local weighted-support RetargetConsumerInterface inhabitant"
+        ∷ "Planck W9 scan found a local CancellationPressureRetargetConsumerAcceptanceReceipt inhabitant for canonicalPairPressureRetargetReceipt"
+        ∷ "The acceptance predicate is weightedMaxPressure <= weightedSupport"
         ∷ "The selected pressure-compatible retarget remains non-Qcore and non-promoting"
-        ∷ "W9 still requires a downstream consumer acceptance receipt or explicit theorem route change"
+        ∷ "W9 still requires an explicit theorem-consumer route change or the original equality route"
         ∷ []
     }
 
@@ -240,22 +269,22 @@ record Dim15DeltaToQuadraticObligation : Setω where
       ≡
       W9.dim15RoutesExhaustedRetargetAwaitingConsumer
 
-    retargetAbsenceDiagnostic :
-      W9RetargetConsumerAbsenceDiagnostic
+    retargetLeReceiptDiagnostic :
+      W9RetargetConsumerLeReceiptDiagnostic
 
-    retargetConsumerInterfaceSourceIsMissing :
+    retargetConsumerInterfaceSourceIsPresent :
       CancellationPressureRetargetConsumerSourceDiagnostic.retargetConsumerInterfaceSource
-        (W9RetargetConsumerAbsenceDiagnostic.sourceDiagnostic
-          retargetAbsenceDiagnostic)
+        (W9RetargetConsumerLeReceiptDiagnostic.sourceDiagnostic
+          retargetLeReceiptDiagnostic)
       ≡
-      sourceMissing
+      sourcePresent
 
-    acceptanceReceiptSourceIsMissing :
+    acceptanceReceiptSourceIsPresent :
       CancellationPressureRetargetConsumerSourceDiagnostic.acceptanceReceiptSource
-        (W9RetargetConsumerAbsenceDiagnostic.sourceDiagnostic
-          retargetAbsenceDiagnostic)
+        (W9RetargetConsumerLeReceiptDiagnostic.sourceDiagnostic
+          retargetLeReceiptDiagnostic)
       ≡
-      sourceMissing
+      sourcePresent
 
     survivingRoutes :
       List Dim15DeltaToQuadraticSurvivingRoute
@@ -284,11 +313,11 @@ currentDim15DeltaToQuadraticObligation =
         W9.canonical15DeltaToQuadraticClosureObstruction
     ; closureStatusIsCurrent =
         refl
-    ; retargetAbsenceDiagnostic =
-        currentW9RetargetConsumerAbsenceDiagnostic
-    ; retargetConsumerInterfaceSourceIsMissing =
+    ; retargetLeReceiptDiagnostic =
+        currentW9RetargetConsumerLeReceiptDiagnostic
+    ; retargetConsumerInterfaceSourceIsPresent =
         refl
-    ; acceptanceReceiptSourceIsMissing =
+    ; acceptanceReceiptSourceIsPresent =
         refl
     ; survivingRoutes =
         canonicalDim15DeltaToQuadraticSurvivingRoutes
@@ -296,14 +325,14 @@ currentDim15DeltaToQuadraticObligation =
         refl
     ; exactSurvivingRouteNames =
         "dim-15 theorem: supply a pressure witness accepted by the existing DeltaToQuadraticBridgeTheorem/CancellationPressureCompatibility consumer path"
-        ∷ "downstream retarget consumer acceptance: supply RetargetConsumerInterface plus CancellationPressureRetargetConsumerAcceptanceReceipt for canonicalPairPressureRetargetReceipt"
+        ∷ "accepted retarget route: supply an explicit theorem-consumer route change for the non-Qcore weighted-support retarget"
         ∷ []
     ; noPromotionBoundary =
         "This obligation does not construct a dim-15 theorem or pressureWitness"
-        ∷ "This obligation does not construct a RetargetConsumerInterface"
-        ∷ "This obligation does not construct a CancellationPressureRetargetConsumerAcceptanceReceipt"
+        ∷ "This obligation records the weighted-support RetargetConsumerInterface and acceptance receipt as present"
+        ∷ "This obligation does not construct a theorem-consumer route change"
         ∷ "This obligation does not promote CancellationPressureCompatibility or W9KillReceipt"
         ∷ []
     ; nextTheoremAttempt =
-        "Attempt a dim-15-specific pressureWitness over canonicalDeltaTransport; otherwise wait for downstream retarget consumer acceptance"
+        "Attempt a dim-15-specific pressureWitness over canonicalDeltaTransport; otherwise add a theorem-consumer route change for the accepted non-Qcore retarget"
     }

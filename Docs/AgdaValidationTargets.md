@@ -389,6 +389,12 @@ Current source diagnostic / consumer-obligation targets:
 - `DASHI/Physics/Closure/HEPDataExternalResidualWitnessPayload.agda` records
   the external non-collapse witness payload carrier and keeps the external
   receipt constructorless.
+- `Docs/W3NonCollapseRunnerReceiptHardening.md` and
+  `scripts/check_w3_noncollapse_receipt.py` harden the W3 t43 runner-side
+  non-collapse receipt by binding the frozen comparison JSON checksum, selected
+  per-bin witness, canonical t43/t44 JSON checksums, and Agda receipt literals.
+  The checker preserves `providerGradePayloadPresent = false` and cannot
+  substitute for `W3AcceptedEvidenceAuthorityToken`.
 - `DASHI/Physics/Closure/HEPDataExternalResidualWitnessCandidateDiagnostic.agda`
   records the `phistar_50_76` checksum-bound local candidate as an
   evidence-pointer surface only.

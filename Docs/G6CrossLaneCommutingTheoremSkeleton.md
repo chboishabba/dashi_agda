@@ -81,6 +81,121 @@ canonicalG6SectionDependencyCertificates
 canonicalG6SectionObstructionStatus
 ```
 
+## Actual Embedding Dependency Index
+
+The skeleton now also records a precise index of the actual embeddings and
+recoveries G6 needs before a section proof can be supplied:
+
+```text
+canonicalG6ActualEmbeddingDependencyIndex
+```
+
+The section-critical entries are:
+
+| Dependency | Required morphism or law |
+|---|---|
+| `emLaneIntoSpineEmbedding` | `ι-EM : MaxwellLane -> Spine` plus `section-EM` |
+| `qmLaneIntoSpineEmbedding` | `ι-QM : SchrodingerLane -> Spine` plus `section-QM` |
+| `grLaneIntoSpineEmbedding` | `ι-GR : GRLane -> Spine` plus `section-GR` |
+| `empiricalLaneIntoSpineEmbedding` | `ι-emp : EmpiricalLane -> Spine` plus `section-emp` |
+| `spineToEMRecovery` | `π-EM : Spine -> MaxwellLane` over the same carriers as `ι-EM` |
+| `spineToQMRecovery` | `π-QM : Spine -> SchrodingerLane` over the same carriers as `ι-QM` |
+| `spineToGRRecovery` | `π-GR : Spine -> GRLane` over the same carriers as `ι-GR` |
+| `spineToEmpiricalRecovery` | `π-emp : Spine -> EmpiricalLane` over the same carriers as `ι-emp` |
+
+The conditional prime-sector entries are:
+
+| Dependency | Required morphism or law |
+|---|---|
+| `p2PrimeAddressEmbedding` | `p2Address` plus `p2ProjectionIsPrimeProjection` |
+| `primeAddressEigenProjectionEmbedding` | `primeProjection : PrimeAddress -> EigenCarrier -> EigenCarrier` plus `primeIndex` injectivity |
+| `eigenCarrierComplexDecompositionEmbedding` | `eigenvalueDecomposition` with `Re`/`Im` over the same carrier |
+| `projectedPrimeOrthogonalityEmbedding` | `primeProjectionPreservesOrthogonality` |
+
+This index is descriptive and non-promoting. It does not inhabit any lane
+embedding, recovery map, section proof, or closed G2/G3/G4/G5 theorem.
+
+## Candidate Routes
+
+The Agda module also records three route candidates. These are typed planning
+surfaces only. They do not construct `CrossLaneSpineDiagramObligation`, any
+section field, or any path equality.
+
+| Candidate | Shape | Section proofs still required |
+|---|---|---|
+| `wgFixedPointTestRouteCandidate` | Test whether the G-lane spine prediction is already the W-lane accepted empirical fixed point | `section-emp`; the fixed-point diagnostic must be converted into the exact empirical section proof |
+| `e8GWardIdentityRouteCandidate` | Relate the LILA E8 electroweak sub-root constraint to the G2 U(1) Ward identity | `section-EM`; the Ward route must become the Maxwell recovery section, not only an E8 or angular identity |
+| `g4WPerturbativeNegligibilityRouteCandidate` | Bound GR corrections to DY predictions below the accepted comparison tolerance | `section-GR` and `section-emp`; the tolerance claim must bridge to exact G6 section fields |
+
+The candidates are collected by:
+
+```text
+canonicalG6RouteCandidateSurfaces
+```
+
+## Prime-Sector Orthogonality Consequences
+
+The skeleton now also contains a conditional algebraic surface:
+
+```text
+G6PrimeSectorOrthogonalityInputs
+p2EigenvalueDecompositionCommutes
+p2ProjectionPreservesOrthogonality
+primeAddressOrthogonalityCommutes
+```
+
+These are not new G6 section proofs. They say that once a future theorem owner
+supplies a shared `PrimeAddress` carrier, p2-prime projection identification,
+complex `Re`/`Im` projection over the eigenvalue decomposition, `primeIndex`
+injectivity, and projection-preserves-orthogonality laws, the p2 eigenvalue
+decomposition and prime-address orthogonality diagrams commute. The
+`p2ProjectionPreservesOrthogonality` lemma is the concrete p2 specialization:
+it rewrites both p2 projections through `p2ProjectionIsPrimeProjection` and then
+uses the conditional `primeProjectionPreservesOrthogonality` law.
+
+The current missing laws are recorded as:
+
+```text
+missingP2PrimeProjectionIdentification
+missingComplexProjectionReImLaw
+missingPrimeIndexInjectivity
+missingOrthogonalProjectionLaws
+```
+
+They are collected by:
+
+```text
+canonicalG6PrimeSectorOrthogonalitySurface
+```
+
+Each candidate has status:
+
+```text
+candidateRouteOnlyNoSectionProof
+```
+
+The corresponding typed fields are:
+
+```text
+sectionProofsRequiredForRoute
+sectionBridgeObligation
+missingSectionFields
+missingPathEqualities
+```
+
+The current blockers remain concrete:
+
+- no G2 `section-EM`;
+- no G3 `section-QM`;
+- no G4 `section-GR`;
+- no G5 `section-emp`;
+- no proof that any route candidate supplies the exact path equalities required
+  by G6.
+- no shared prime-sector package supplying complex projection, primeIndex
+  injectivity, and orthogonal projection laws.
+- no actual embedding/recovery index entry is inhabited by closed G2/G3/G4/G5
+  lane evidence.
+
 ## Why These Are Not Negation Proofs
 
 The current `CrossLaneSpineDiagramObligation` record already includes
@@ -101,9 +216,10 @@ This skeleton:
 - does not close G6;
 - does not construct a complete-unification theorem;
 - does not replace Maxwell, Schrodinger, GR, or empirical receipts;
+- does not promote any route candidate into a section proof;
 - does not prove negation of any section field;
 - does not permit publication language beyond "G6 obligation has a typed
-  placeholder."
+  placeholder and named candidate routes."
 
 G6 closes only when concrete lane morphisms and section proofs are supplied and
 the commuting witness is consumed by the publication audit.

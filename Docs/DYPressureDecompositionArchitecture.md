@@ -107,6 +107,40 @@ no Candidate256 physical calibration promotion
 no placeholder efficiency/acceptance treated as proof
 ```
 
+## Provider Intake Diagnostics
+
+The tool now emits a grouped authority gate rather than a flat missing-field
+list. The provider packet is inspected in these groups:
+
+| Group | Fields |
+|---|---|
+| `provider_identity` | `provider_name`, `provider_role`, `source_citation`, `attestation_no_manual_overfit` |
+| `pdf_authority` | `pdf_set_version`, `lhapdf_id`, `member_id`, `grid_checksum` |
+| `dy_convention` | `scale_convention`, `rapidity_window`, `mass_bin_rule`, `flavour_weight_rule`, `integration_method` |
+| `luminosity_runner_inputs` | `luminosity_values`, `L43`, `L45`, `W4_per_bin_luminosities` |
+| `normalization_conversion` | `normalization_preservation_law`, `conversion_law` |
+| `efficiency_acceptance` | `efficiency_acceptance_model`, `systematic_budget`, `cms_smp_publication_pointer` |
+
+Each blocked artifact includes:
+
+```text
+inputs.authority.missingByGroup
+inputs.authority.runnerLuminosityDiagnostics
+inputs.authority.authorityGate.acceptedFalseReasons
+firstMissing.field
+firstMissing.group
+```
+
+This makes the fail-closed state directly actionable for a provider. For
+example, an `insufficient` example packet now records the first missing field as
+`provider_role` in group `provider_identity`, while also showing that `L43`,
+`L45`, and `W4_per_bin_luminosities` are not positive finite runner inputs.
+
+The tool also treats negative authority wording inside required fields as a
+gate failure. A packet cannot become accepted by placing text such as "not
+accepted" or "no accepted convention" in an attestation while setting
+`status = accepted`.
+
 ## Interpretation
 
 Current pressure attribution is:

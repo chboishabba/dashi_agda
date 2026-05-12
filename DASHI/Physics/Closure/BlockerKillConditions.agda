@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.BlockerKillConditions where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; _∷_; [])
 
@@ -204,6 +205,76 @@ data W9KillRouteReceipt
   weightedReplacementRoute :
     W9.WeightedValuationReplacementObligation theorem dim≡15 →
     W9KillRouteReceipt theorem dim≡15
+
+data W9KillRouteChangeStatus : Set where
+  acceptedRouteChangeNeeded :
+    W9KillRouteChangeStatus
+
+record W9MDLTerminationSeamAcceptedRouteRequest : Set where
+  field
+    routeChangeStatus :
+      W9KillRouteChangeStatus
+
+    currentAcceptedW9KillRouteConstructors :
+      List String
+
+    missingConstructorName :
+      String
+
+    expectedConsumerModule :
+      String
+
+    requiredConstructorShape :
+      String
+
+    importCycleBoundary :
+      String
+
+    preservesCurrentBlockedState :
+      KillState
+
+    preservesCurrentBlockedState≡blocked :
+      preservesCurrentBlockedState ≡ blocked
+
+    preservedNoBypassLaw :
+      List NoBypassLaw
+
+    noClosureClaim :
+      List String
+
+canonicalW9MDLTerminationSeamAcceptedRouteRequest :
+  W9MDLTerminationSeamAcceptedRouteRequest
+canonicalW9MDLTerminationSeamAcceptedRouteRequest =
+  record
+    { routeChangeStatus =
+        acceptedRouteChangeNeeded
+    ; currentAcceptedW9KillRouteConstructors =
+        "existingPressureWitnessRoute : ExistingCancellationPressureCompatibilityObligation theorem dim≡15 -> W9KillRouteReceipt theorem dim≡15"
+        ∷ "weightedReplacementRoute : WeightedValuationReplacementObligation theorem dim≡15 -> W9KillRouteReceipt theorem dim≡15"
+        ∷ []
+    ; missingConstructorName =
+        "mdlTerminationSeamRoute"
+    ; expectedConsumerModule =
+        "DASHI.Physics.Closure.W9MDLTerminationSeamRoute"
+    ; requiredConstructorShape =
+        "mdlTerminationSeamRoute : W9MDLTerminationSeamKillRouteConsumer canonicalMDLTerminationSeamWitness -> accepted W9 route receipt"
+    ; importCycleBoundary =
+        "BlockerKillConditions cannot import W9MDLTerminationSeamRoute because that module imports BlockerKillConditions; the accepted route must be introduced by a shared interface or a downstream consumer module."
+    ; preservesCurrentBlockedState =
+        blocked
+    ; preservesCurrentBlockedState≡blocked =
+        refl
+    ; preservedNoBypassLaw =
+        noPressureWitnessByNaming
+        ∷ noProsePromotion
+        ∷ []
+    ; noClosureClaim =
+        "This request does not construct W9KillReceipt"
+        ∷ "This request does not add a pressure-equality witness"
+        ∷ "This request does not assert that the weighted replacement route is satisfied"
+        ∷ "W9 remains blocked until an accepted consumer route is added without violating the module boundary"
+        ∷ []
+    }
 
 record W9KillReceipt : Setω where
   field

@@ -35,6 +35,17 @@ missing provider luminosity method for L(M45,Y45) and L(M43,Y43)
   response as awaiting provider response and non-promoting.
 - `DASHI/Physics/Closure/AcceptedDYLuminosityConventionAuthorityReceipt.agda`
   remains constructorless for accepted authority in the canonical local state.
+- Euler's 2026-05-13 W4/W5 PDF preflight now records that system LHAPDF runtime
+  is available (`/usr/bin/lhapdf`, `/usr/bin/lhapdf-config`, and system Python
+  `lhapdf` at `6.5.5`) and repo-local CT18NLO resolves with
+  `LHAPDF_DATA_PATH=/usr/share/lhapdf/LHAPDF:$PWD/scripts/data/pdf`. The repo
+  `.venv` still lacks Python `lhapdf`, and no local MSHT20 grid was found. The
+  provider-authority obstruction artifact is
+  `logs/research/w4w5_pdf_lhapdf_intake_obstruction_20260513.json`
+  SHA-256 `082448674db69767aff1897f7fb66054a6dbc3a70b86f31813185a6a2c10fd41`.
+  The fresh CT18 equivalent-table candidate run is
+  `logs/research/w4w5_pdf_ct18_candidate_run_20260513.json`
+  SHA-256 `7b4e5e815c3e65619cd9591734eb00e7c80be0402c6d06c3c8d33d1c8da6609f`.
 
 ## Commands Run
 
@@ -69,3 +80,8 @@ No `logs/research/w5_t45_correction_decision*.json` artifact was written,
 because no real accepted DY adapter output exists locally.  No
 `DASHI/Physics/Closure/W5T45CorrectionReceipt.agda` edit is permitted under
 this state.
+
+The 2026-05-13 system-LHAPDF CT18 candidate rerun remains non-promoting:
+fixed-`x` ratio `1.0506160645962357`, rapidity-window `t45/z_peak`
+`0.7513909431520515`, and rapidity-window `t45/t43`
+`0.33485771276970683`; none is an accepted correction receipt.

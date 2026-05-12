@@ -1,5 +1,205 @@
 # Compactified Context
 
+## 2026-05-13
+
+- Hard-core pressure-point orchestration:
+  after the latest worker returns, the easy scaffolding layer is exhausted.
+  The active front is now three concentrated pressure points, all
+  non-promoting until typed consumers/theorems exist. First, W9 has an
+  inhabited `MDLTerminationSeamWitness`, but the kill matrix has no accepted
+  MDL termination consumer route, so W9 remains blocked on a theorem-consumer
+  interface decision rather than on the old refuted pressure equality. Second,
+  G2 needs the real oriented prime-lattice boundary layer: oriented endpoint
+  maps, signed plaquette boundary, incidence summation, coefficient
+  cancellation laws, and `boundaryOfBoundaryZero`; `primeBumpCommutes` is the
+  only closed upstream algebraic lemma so far. Third, G3/GR now concentrate on
+  the carrier-operator/differential-geometry core: concrete translation
+  operators, commutator closure, metric/signature binding, and the
+  `carrierConnectionIsLeviCivita` / metric-compatibility bridge needed before
+  finite-r Bianchi can imply the GR vacuum/sourced surfaces. G6 remains
+  downstream of those inputs and may only record dependency surfaces.
+  Worker returns sharpened, but did not close, all lanes: W9 now wires the MDL
+  witness projection into the non-promoting retarget consumer and still needs
+  an accepted `mdlTerminationSeamRoute` in the kill matrix; G2 now has signed
+  boundary helper lemmas and an incidence-summation surface but no SFGC
+  instantiation or `d²=0`; G3 now names concrete carrier-operator,
+  action-law, and commutator-closure obligations; GR now names
+  `metricCompatibility` and `carrierConnectionIsLeviCivita`; G6 now has a
+  conditional p2 orthogonality specialization plus an actual embedding
+  dependency index. No W9, G2, G3, GR, G6, W7, or paper admissibility promotion
+  follows.
+  Follow-up workers adapted the user's concrete inhabitants to the current
+  interfaces. W9 now has a `W9MDLTerminationSeamAcceptedRouteRequest` in the
+  kill matrix, but direct consumption remains blocked by an import cycle
+  between `BlockerKillConditions` and `W9MDLTerminationSeamRoute`. G2 now has
+  `correctedSquareBoundary`, its signed-sum shape, and a typed
+  `G2SFGCGaugeFieldCurvatureAPIObstruction`; the first missing carrier field is
+  still `missingPrimeLattice2CellLayer`, with `missingConnectionCarrierForSFGCGaugeField`
+  as the concrete SFGC API sub-gap. G3 now has a typechecked unit
+  `CarrierOperator` smoke carrier and local record inhabitants, but the real
+  IW route still needs a `DASHIState -> p2 prime-address` interface exposing
+  `p2Exponent`, prime bump/state update, and filtration laws. GR now factors
+  `carrierConnectionIsLeviCivita` through a
+  `GRStandardLeviCivitaAlgebraLawObligation`; the first overall blocker remains
+  `missingFiniteRBaseCarrier`, and the Levi-Civita/Ricci path next needs the
+  six-term Ricci identity cancellation for a selected finite-r metric and
+  connection pair.
+
+- GR/G6 algebraic consequences lane:
+  `GRDiscreteBianchiFiniteR` now exposes
+  `GRFiniteRRicciFromBianchiObligation` and a vacuum Ricci-zero obligation
+  surface. It is deliberately non-promoting: the missing laws are finite-r
+  metric contraction from curvature to Ricci, trace=4 reduction for the selected
+  metric/signature surface, curvature-to-Ricci boundary, and stress-energy
+  compatibility. `CrossLaneCommutingTheoremSkeleton` now provides conditional
+  theorem surfaces for `p2EigenvalueDecompositionCommutes` and
+  `primeAddressOrthogonalityCommutes`; they require p2-prime projection
+  identification, complex Re/Im projection, primeIndex injectivity, and
+  orthogonal projection laws before G6 can consume them.
+
+- GR finite-r Bianchi sidecar:
+  Added `DASHI.Physics.Closure.GRDiscreteBianchiFiniteR` as a non-promoting
+  obligation surface for the Jacobi-to-Bianchi bridge. It records that the
+  repo has abstract carrier Lie algebra/Jacobi vocabulary plus GR/Einstein/
+  curvature diagnostics, but still lacks a finite-r base carrier,
+  neighborhood/cell layer, derivation carrier, finite-r bracket/Jacobi witness,
+  connection or shift law, curvature-as-bracket-defect construction, covariant
+  exterior-derivative or cyclic-sum Bianchi expression, finite-r Bianchi law,
+  curvature contraction boundary, and stress-energy compatibility. No vacuum
+  Einstein closure, finite-r GR promotion, sourced Einstein law, or GR/QFT
+  promotion was constructed.
+
+- Conditional post-W2/W3/W9 next-lane routing:
+  the user asked for assignments assuming a future commit closes W2, W3, and
+  W9. This is recorded only as a conditional branch; the actual repo still has
+  W2/W3 constructorless-token obstructions and W9's missing
+  `Canonical15PressureWitnessType`. Six downstream workers are assigned:
+  W4/W5 shared LHAPDF/PDF intake, W4 calibration authority/cross-band witness,
+  W3 non-collapse hardening, G2 Maxwell full-theorem surface, G3 Schrodinger
+  full-theorem surface, and W4-gated GR matter coupling / finite-r Bianchi.
+
+- W2/W3/W9 follow-up routing:
+  three guarded workers are live for the latest immediate proposal. Ohm checks
+  whether the landed governance policy plus current W2 interfaces can actually
+  construct `NaturalP2ConvergencePromotionAuthorityToken`; McClintock checks
+  the same for `W3AcceptedEvidenceAuthorityToken` and the non-collapse witness
+  surface; Hubble checks whether the W9 canonical-15 route can be turned into a
+  real case-split/contraction proof. The guardrail is strict: if the current
+  Agda interfaces remain constructorless or mismatched, workers must return
+  typed obstructions rather than promotions.
+- First W2/W3/W9 follow-up return:
+  Hubble sharpened W9 without closing it. `Canonical15PressureWitnessType` is
+  now the named missing theorem: current cancellation pressure must be
+  identified with transported contraction energy at canonical-15. The
+  available contraction-forces theorem normalizes to `Qhatcore`; it does not
+  provide that pressure witness. `ContractForces31Signature` has no pressure
+  field, and the B4 weighted-Qcore route has no W9 kill constructor.
+- Completed W2/W3/W9 follow-up returns:
+  Ohm added a W2 governance-token constructor obstruction: the policy permits
+  the evidence class but constructs no token, and
+  `NaturalP2ConvergencePromotionAuthorityToken` remains constructorless.
+  McClintock added the analogous W3 authority-token obstruction: canonical
+  t43/t44 payloads and runner-side non-collapse are represented, but
+  `W3AcceptedEvidenceAuthorityToken` has no constructor/governance hook or
+  external value. None of W2, W3, or W9 closed.
+- W2/W3 governance hook lane:
+  the smallest honest typed interface is a request/audit hook that consumes
+  `Docs/DASHIGovernanceSelfIssuancePolicy.md` and the current W2/W3 evidence
+  packets while preserving the constructorless-token boundary. It may record
+  typed policy consumption, but it may not return
+  `NaturalP2ConvergencePromotionAuthorityToken` or
+  `W3AcceptedEvidenceAuthorityToken`. W2 remains blocked on the authority token
+  plus natural/p2 and carrier-general payload receipts; W3 remains blocked on
+  the authority token, accepted provider response, and provider canonical
+  checksum binding.
+
+- Non-limited paper closure routing:
+  the active worker assignment is now organized as a four-phase sequence
+  rather than a prose ambition. Phase 1 is immediate and dependency-free:
+  W2/W3 constructorless-token governance ruling, W9 canonical-15 pressure
+  equality test, and t21/t22 W4 Z-peak anchor intake. Phase 2 covers CT18/DY
+  convention binding, LHAPDF/PDF intake, and W4 calibration authority. Phase 3
+  covers G2 Maxwell, G3 Schrodinger, GR Einstein/Bianchi/matter coupling, and
+  G6 commuting diagrams. Phase 4 covers G4 QFT/GR full consumer packaging and
+  W7 claim governance. This is coordination only: no authority token, W9 kill,
+  G2/G3/GR/G6 theorem closure, or non-limited paper admissibility follows
+  until typed receipts/theorems are inhabited.
+- First worker returns for that routing:
+  Archimedes added typechecked theorem-kernel obligation records for G2
+  Maxwell, G3 Schrodinger, and finite-r GR; Helmholtz added
+  `NonLimitedPaperBundleClaimGovernance.agda`, where the canonical
+  `paperAdmissibility` computes to `paperBlocked missingRoadmapGovernance`.
+  These are obligation/claim-governance surfaces only, not promotions.
+- G2 prime-lattice 2-cell lane:
+  Faraday's curvature surface is sharpened one layer upstream. The next
+  admissible object is a conditional
+  `PrimeLattice2CellLayer SFGC.GaugeField` carrying prime-lattice 0/1/2-cell
+  types, plaquettes with 1-cell boundaries, discrete 0/1/2-form carriers,
+  `d0`, `d1`, `zeroDiscrete2Form`, a typed `d² = 0` law, the
+  `SFGC.GaugeField` to 1-form embedding, and 2-form-to-field-strength map.
+  The current repo has no concrete prime-lattice cell carriers, plaquette
+  boundary operator, exterior derivative, or nilpotency proof, so the G2 lane
+  remains an obligation surface and must not instantiate
+  `DiscreteCurvatureCarrier SFGC.GaugeField` with a degenerate carrier.
+  Follow-up inspection separated the FactorVec algebra from the G2 geometry:
+  `updateVec15-commutes` now discharges prime-indexed coordinate update
+  commutation, and `FactorVecInstances` proves `primeBumpCommutes`,
+  `by-abelian-factorvec`, and `bumpPrimeCommutes`. The actual G2 cochain
+  strengthening still lacks oriented edge endpoint maps, the corrected signed
+  square boundary `+bottom,+right,-top,-left`, `boundaryOfBoundaryZero`,
+  coefficient zero/addition/inverse laws, an abelian-group normalization
+  solver/package, and finite incidence summation laws connecting `d0`/`d1` to
+  those boundaries. `CorrectedSquareBoundaryCochainSurface` names the typed
+  `δ₁∘δ₀≡0` obligation; constant-zero `d1` remains a degenerate non-promotion.
+- G2 vacuum-Hecke lane:
+  the attempted `vacuumHeckeEigenvaluesReal` route cannot be constructed from
+  current definitions. The inspected vacuum/gauge side only supplies the static
+  `SFGC.vacuumGaugeField`; the Hecke/eigen side supplies compatibility scans
+  and coarse `PHEM.EigenProfile` counters, not scalar Hecke eigenvalues or
+  complex/imaginary-part structure. The new
+  `VacuumHeckeEigenvalueRealityBridge` names the exact missing fields:
+  `VacuumState`, `activeMode`, `heckeEigenvalue`, `imaginaryPart`,
+  `zeroImaginaryPart`, `RealEigenvalue`, and `realEigenvalueBridge`.
+  `canonicalVacuumHeckeEigenvalueRealityObligation` records the no-promotion
+  boundary and does not provide vacuum-flatness evidence.
+- Einstein the 2nd follow-up routing:
+  the `GR-matter-coupling` lane may sharpen the existing finite-r GR kernel
+  only as a W4-gated Bianchi/matter obligation surface. The surface must be
+  parameterized by a future theorem-facing
+  `EinsteinEquationCandidate.W4MatterStressEnergyInterfaceReceipt` and must
+  preserve missing Candidate256 calibration authority, accepted DY/PDF-backed
+  W4 adequacy, finite-r Bianchi, stress-energy compatibility, and sourced
+  Einstein-law witnesses. No GR/G4/G6/GRQFT closure follows before those are
+  inhabited.
+- Remaining worker returns for that routing:
+  Raman's policy permits bounded self-issuance classes but constructs no W2/W3
+  token. Nietzsche refuted the W9 canonical-15 equality route: the normal forms
+  are `2` and `10`, so W9 stays obstructed. Lovelace ran the W4 dirty Z-peak
+  anchor from local checksum-bound t21/t22 payloads and preserved
+  `chi2/dof = 298.8462841768543` as authority-blocked, not W4 closure. Carson
+  recorded local CT18NLO as parsed candidate provenance and expanded the
+  LHAPDF/PDF intake contract, still blocked on accepted convention/provenance.
+
+- Worker A W2 governance token audit:
+  the landed self-issuance policy is permissive only at the evidence-class
+  layer. It constructs no token, and the current W2 Agda type still has no
+  `NaturalP2ConvergencePromotionAuthorityToken` constructor or typed policy
+  hook. W2 therefore returns a non-promoting obstruction/request surface: the
+  first missing constructor is the authority-token inhabitant itself; the
+  natural/p2 and carrier-general convergence receipt payloads remain separate
+  downstream missing fields.
+
+- DASHI-Markov compatibility framing:
+  Markov structure is now treated as a downstream view of a DASHI lane, not as
+  its foundation. The relevant present state is the current typed joined slice:
+  carrier, residual/pressure state, open obligations, accepted authorities, and
+  admissibility boundary, plus explicit promotion status. A lane is
+  DASHI-Markov when that joined state is a sufficient summary of raw history for
+  the next admissible transition. This is structural first and probabilistic
+  only when a later projection supplies a kernel, transition matrix, HMM, or
+  MDP interface. `DASHI.Process.DASHIMarkovCompatibility` is the process-facing
+  facade; `DASHI.Core.DashiMarkov` remains the lightweight core surface.
+
 ## 2026-05-05
 
 - Wikidata global-latent formalism clarification:
@@ -3086,10 +3286,31 @@ Cleanup state:
   receipt requests, `GRQFTConsumerSourceDiagnostic` for W5 source availability,
   `PNFResidualConsumerReceiptRequestPack` for W6 runtime PNF payload handoff,
   and `CancellationPressureRetargetConsumerSourceDiagnostic` for W9 retarget
-  consumer source absence.  `P0BlockerObligationIndex` indexes all four as
+  consumer source absence at that point.  `P0BlockerObligationIndex` indexes all four as
   non-promoting handoff surfaces; W3/W4/W5/W6/W8/W9 remain blocked until
   authority, calibration, empirical, runtime, origin, or pressure-witness
   receipts arrive.
+- 2026-05-13 W9 retarget diagnostic retarget:
+  the W9 diagnostic lane now treats `W9WeightedSupportRetargetConsumerReceipt`
+  as the local minimal retarget consumer receipt.  Its consumer accepts
+  `canonicalPairPressureRetargetReceipt` through the
+  `weightedMaxPressure <= weightedSupport` bound, so the old source-absence
+  statement is no longer current.  This is still non-promoting: the W9 kill
+  matrix accepts only the existing pressure-witness equality route or the
+  weighted cancellation-to-quadratic identification route, so the next viable
+  interface is an explicit theorem-consumer route change for the non-Qcore
+  retarget, or one of those original equality routes.
+- 2026-05-13 W9 MDL termination seam route:
+  the pressure-equality route remains refuted, but a real local
+  `MDLTerminationSeamWitness` can be built from existing receipts:
+  `normalizeAdd` reaches `normalizeAddCanonical` in one step, is idempotent at
+  the resolved state, preserves the observable sum, and the existing
+  carry-depth/budget adapter supplies a `CancellationPressureLyapunovBridge`.
+  This is a non-pressure, non-Qcore seam only.  The current W9 kill matrix
+  cannot consume it because `W9KillRouteReceipt` has no
+  `mdlTerminationSeamRoute` constructor; the exact next route change is for the
+  theorem consumer to accept that constructor while preserving the non-Qcore
+  and no-admissible-quadratic boundaries.
 - 2026-05-04 P0 provider request-pack round:
   `GRQFTClosurePromotionReceiptRequestPack`,
   `OriginReceiptPromotionExternalRequestPack`, and
@@ -3335,3 +3556,25 @@ Cleanup state:
   fallback branch as a direct no-go control schema: normalized
   `eigenShadow × π-max` equality still cannot recover the canonical `p2`
   orbit-summary key.
+- 2026-05-13 G3 Poincare-sector carrier continuation:
+  `DASHI/Physics/Closure/G3PoincareGalileiCarrierChain.agda` is the scoped
+  owner for the G3 Poincare/Galilei carrier chain. The intended next layer is
+  an independent `PoincareSectorCarrier` record with honest state/operator,
+  CCR-shaped commutator, metric, translation-generator, Lorentz-generator, and
+  Poincare-relation fields. Current available witnesses are only structural
+  (`DASHIState` and the abstract CCR `Op` / `_commutator_` surface). Missing
+  concrete `CarrierOperator`, commutator closure, metric/signature, and
+  Poincare bracket-relation proofs must remain a non-promoting obligation
+  surface; no `poincareToGalileiContractionDerived` theorem is available.
+- 2026-05-13 G3 IW/density continuation:
+  the same module now owns the non-promoting IW associated-graded and
+  MDL-density-to-L2 lane surfaces. No local filtration, associated graded
+  carrier, inhabited Poincare/Galilei carrier algebra, filtered bracket law,
+  contraction parameter law, or Poincare-at-`p2` isomorphism was found, so the
+  IW result is `G3IWAssociatedGradedObligationSurface`. The finite density
+  lane has inhabited support (`shiftPhaseWaveDensityMonotone` and
+  `shiftPointDensityMonotone`) but no positive analytic L2 density theorem;
+  `CanonicalP2OfflineL2ObstructionCertificate` remains negative evidence only.
+  The exact positive seam remains `MDLToL2SeamDerivedType
+  obligationSchrodingerHamiltonianEvolutionFields`, with no unguarded
+  postulate.

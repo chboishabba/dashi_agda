@@ -49,17 +49,17 @@ record W9LyapunovIncompatibilityDiagnostic : Setω where
     retargetSourceDiagnostic :
       W9g.CancellationPressureRetargetConsumerSourceDiagnostic
 
-    earlierRetargetConsumerInterfaceSourceWasMissing :
+    retargetConsumerInterfaceSourceIsPresent :
       W9g.CancellationPressureRetargetConsumerSourceDiagnostic.retargetConsumerInterfaceSource
         retargetSourceDiagnostic
       ≡
-      W9g.sourceMissing
+      W9g.sourcePresent
 
-    earlierAcceptanceReceiptSourceWasMissing :
+    retargetAcceptanceReceiptSourceIsPresent :
       W9g.CancellationPressureRetargetConsumerSourceDiagnostic.acceptanceReceiptSource
         retargetSourceDiagnostic
       ≡
-      W9g.sourceMissing
+      W9g.sourcePresent
 
     weightedSupportRetargetReceipt :
       W9r.WeightedSupportRetargetConsumerReceipt
@@ -122,9 +122,9 @@ canonicalW9LyapunovIncompatibilityDiagnostic =
         Max.weightedMaxPressure≤weightedSupport
     ; retargetSourceDiagnostic =
         W9g.currentCancellationPressureRetargetConsumerSourceDiagnostic
-    ; earlierRetargetConsumerInterfaceSourceWasMissing =
+    ; retargetConsumerInterfaceSourceIsPresent =
         refl
-    ; earlierAcceptanceReceiptSourceWasMissing =
+    ; retargetAcceptanceReceiptSourceIsPresent =
         refl
     ; weightedSupportRetargetReceipt =
         W9r.canonicalWeightedSupportRetargetConsumerReceipt
@@ -150,21 +150,21 @@ canonicalW9LyapunovIncompatibilityDiagnostic =
     ; lyapunovBridgeStillRequiredName =
         "No longer missing for the narrow NormalizeAddState carryDepth+carryBudget adapter"
     ; firstRemainingMissingType =
-        "DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation.ExistingCancellationPressureCompatibilityObligation canonical15Theorem canonical15Dimension"
+        "Either ExistingCancellationPressureCompatibilityObligation canonical15Theorem canonical15Dimension, or an explicit theorem-consumer route change for the accepted non-Qcore retarget"
     ; verdict =
         narrowAdaptersAvailableDim15CompatibilityStillMissing
     ; diagnosticBoundary =
         "weightedMaxPressure≤weightedSupport is available and validated"
         ∷ "That theorem is only a pressure upper bound over integer-pair inputs"
-        ∷ "A narrow RetargetConsumerInterface adapter now consumes that bound for canonicalPairPressureRetargetReceipt"
+        ∷ "A narrow RetargetConsumerInterface adapter now consumes that <= bound for canonicalPairPressureRetargetReceipt"
         ∷ "The adapter is non-promoting and preserves the non-Qcore retarget boundary"
         ∷ "A separate carryDepth+carryBudget CancellationPressureLyapunovBridge is constructible for NormalizeAddState"
         ∷ "That Lyapunov adapter is not the dim-15 pair-pressure/Qcore compatibility route"
-        ∷ "The first remaining theorem-facing type is ExistingCancellationPressureCompatibilityObligation for canonical15Theorem and canonical15Dimension"
+        ∷ "The remaining theorem-facing routes are the original equality witness or an explicit consumer route change for the accepted retarget"
         ∷ []
     ; exactW9Status =
         "W9 remains dim15RoutesExhaustedRetargetAwaitingConsumer"
-        ∷ "A weighted-support RetargetConsumerInterface and acceptance receipt are constructed"
+        ∷ "A weighted-support RetargetConsumerInterface and acceptance receipt are constructed from a <= bound"
         ∷ "A narrow carryDepth+carryBudget CancellationPressureLyapunovBridge is constructed only for NormalizeAddState"
         ∷ "This diagnostic does not claim dim-15 quadratic forcing or W9 closure"
         ∷ []

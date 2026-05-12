@@ -3,10 +3,10 @@ module DASHI.Physics.Closure.CancellationPressureRetargetConsumerAcceptanceReque
 -- W9h: provider-facing request pack for the W9 retarget consumer
 -- acceptance lane.
 --
--- This module packages the missing interface and acceptance-receipt fields
--- named by W9f/W9g.  It does not construct a RetargetConsumerInterface, a
--- CancellationPressureRetargetConsumerAcceptanceReceipt, a route-around
--- acceptance, an admissible quadratic, a canonical Qcore, or
+-- This module now records the local weighted-support retarget acceptance and
+-- packages the remaining theorem-consumer route-change need named by W9f/W9g.
+-- It does not construct a route-around theorem consumer, an admissible
+-- quadratic, a canonical Qcore, or
 -- CancellationPressureCompatibility.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -21,18 +21,21 @@ import DASHI.Physics.Closure.CancellationPressureRetargetConsumerSourceDiagnosti
 data RetargetConsumerAcceptanceRequestStatus : Set where
   blockedAwaitingRetargetConsumerProvider :
     RetargetConsumerAcceptanceRequestStatus
+  retargetAcceptedAwaitingTheoremConsumerRouteChange :
+    RetargetConsumerAcceptanceRequestStatus
 
 data RetargetConsumerAcceptanceProviderArtifact : Set where
   providerMustSupplyRetargetConsumerInterface :
     RetargetConsumerAcceptanceProviderArtifact
   providerMustSupplyAcceptanceReceipt :
     RetargetConsumerAcceptanceProviderArtifact
+  providerMustSupplyTheoremConsumerRouteChange :
+    RetargetConsumerAcceptanceProviderArtifact
 
 canonicalProviderArtifacts :
   List RetargetConsumerAcceptanceProviderArtifact
 canonicalProviderArtifacts =
-  providerMustSupplyRetargetConsumerInterface
-  ∷ providerMustSupplyAcceptanceReceipt
+  providerMustSupplyTheoremConsumerRouteChange
   ∷ []
 
 record RetargetConsumerAcceptanceRequestPack : Setω where
@@ -42,6 +45,9 @@ record RetargetConsumerAcceptanceRequestPack : Setω where
 
     sourceDiagnostic :
       W9g.CancellationPressureRetargetConsumerSourceDiagnostic
+
+    acceptedRetargetReceipt :
+      W9g.W9RetargetConsumerLeReceiptDiagnostic
 
     retargetReceipt :
       W9.PressureCompatibleTargetWithQcoreBoundaryReceipt
@@ -91,12 +97,10 @@ record RetargetConsumerAcceptanceRequestPack : Setω where
     obligationMissingFields :
       List W9f.RetargetConsumerMissingField
 
-    obligationMissingFieldsMatchW9f :
+    obligationMissingFieldsAreCurrent :
       obligationMissingFields
       ≡
-      W9f.missingDownstreamConsumerAcceptance
-      ∷ W9f.missingTheoremConsumerRouteChange
-      ∷ []
+      W9g.currentRetargetConsumerObligationMissingFields
 
     preservedBoundaries :
       List W9f.RetargetConsumerBoundary
@@ -129,9 +133,11 @@ canonicalRetargetConsumerAcceptanceRequestPack :
 canonicalRetargetConsumerAcceptanceRequestPack =
   record
     { currentStatus =
-        blockedAwaitingRetargetConsumerProvider
+        retargetAcceptedAwaitingTheoremConsumerRouteChange
     ; sourceDiagnostic =
         W9g.currentCancellationPressureRetargetConsumerSourceDiagnostic
+    ; acceptedRetargetReceipt =
+        W9g.currentW9RetargetConsumerLeReceiptDiagnostic
     ; retargetReceipt =
         W9.canonicalPairPressureRetargetReceipt
     ; currentClosureObstruction =
@@ -166,8 +172,8 @@ canonicalRetargetConsumerAcceptanceRequestPack =
     ; obligationMissingFields =
         W9g.CancellationPressureRetargetConsumerSourceDiagnostic.obligationMissingFields
           W9g.currentCancellationPressureRetargetConsumerSourceDiagnostic
-    ; obligationMissingFieldsMatchW9f =
-        W9g.CancellationPressureRetargetConsumerSourceDiagnostic.obligationMissingFieldsMatchW9f
+    ; obligationMissingFieldsAreCurrent =
+        W9g.CancellationPressureRetargetConsumerSourceDiagnostic.obligationMissingFieldsAreCurrent
           W9g.currentCancellationPressureRetargetConsumerSourceDiagnostic
     ; preservedBoundaries =
         W9g.CancellationPressureRetargetConsumerSourceDiagnostic.preservedBoundaries
@@ -176,34 +182,29 @@ canonicalRetargetConsumerAcceptanceRequestPack =
         W9g.CancellationPressureRetargetConsumerSourceDiagnostic.preservedBoundariesMatchW9f
           W9g.currentCancellationPressureRetargetConsumerSourceDiagnostic
     ; providerRequiredInterfaceFields =
-        "acceptsRetargetReceipt : PressureCompatibleTargetWithQcoreBoundaryReceipt -> Set"
-        ∷ "acceptanceIsNonPromoting : RetargetConsumerBoundary"
+        "Already supplied by W9WeightedSupportRetargetConsumerReceipt.weightedSupportRetargetConsumer"
+        ∷ "acceptsRetargetReceipt uses weightedMaxPressure <= weightedSupport"
         ∷ []
     ; providerRequiredReceiptFields =
-        "acceptsSelectedPressureCompatibleRoute"
-        ∷ "acceptsPressureBridgeMatchedBoundary"
-        ∷ "preservesNonQcoreBoundary"
-        ∷ "acknowledgesRetargetNonPromotion"
-        ∷ "downstreamConsumerAcceptance"
-        ∷ "downstreamAcceptanceBoundary"
+        "Already supplied by W9WeightedSupportRetargetConsumerReceipt.weightedSupportRetargetAcceptanceReceipt"
+        ∷ "Remaining needed interface is theorem-consumer route change, not another acceptance receipt"
         ∷ []
     ; providerInstructions =
-        "Provider must supply a concrete RetargetConsumerInterface for canonicalPairPressureRetargetReceipt"
-        ∷ "Provider must supply CancellationPressureRetargetConsumerAcceptanceReceipt for that interface and receipt"
-        ∷ "Provider must prove downstreamAcceptanceBoundary equals noCancellationPressureCompatibilityPromotion"
-        ∷ "Provider must either accept the retarget for a downstream theorem consumer or provide an explicit theorem route change"
+        "Retarget consumer acceptance is locally supplied by the weighted-support <= receipt"
+        ∷ "Provider must supply an explicit theorem-consumer route change before this retarget can route around CancellationPressureCompatibility"
+        ∷ "The route change must preserve the non-Qcore and no-admissible-quadratic boundaries"
         ∷ []
     ; noPromotionBoundary =
-        "This request pack does not construct RetargetConsumerInterface"
-        ∷ "This request pack does not construct CancellationPressureRetargetConsumerAcceptanceReceipt"
+        "This request pack records the existing weighted-support RetargetConsumerInterface"
+        ∷ "This request pack records the existing weighted-support CancellationPressureRetargetConsumerAcceptanceReceipt"
+        ∷ "This request pack does not construct a theorem-consumer route change"
         ∷ "This request pack does not replace or route around CancellationPressureCompatibility"
         ∷ "This request pack does not assert canonical Qcore or admissible-quadratic promotion"
         ∷ []
     ; strictBlockerImpact =
-        "W9 remains blocked: no retarget consumer interface source exists in repo"
-        ∷ "W9 remains blocked: no retarget consumer acceptance receipt source exists in repo"
+        "W9 remains blocked: no theorem-consumer route change exists for the accepted non-Qcore retarget"
         ∷ "The pressure-compatible retarget remains non-Qcore and non-promoting"
-        ∷ "The next admissible move is a downstream provider receipt or explicit theorem route change"
+        ∷ "The next admissible move is an explicit theorem route change or the original equality witness route"
         ∷ []
     }
 

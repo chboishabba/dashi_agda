@@ -26,12 +26,20 @@ canonical carrier/spine rather than asserted by analogy.
 Current coordination state, as of 2026-05-13:
 
 - `G1` is the only definitively closed gate.
-- `G2`, `G3`, and `G4` have advanced bridge or partial-consumer surfaces, but
-  they are not field-equation-complete.
-- `G5` is not closed: W3 is residual because the local run is not the frozen
-  `3205d74` comparison and the comparison status remains `not-claimed` /
-  `not-computed`; W4/W5 remain blocked on accepted Drell-Yan convention and
-  authority.
+- `G2` has a typed Maxwell field-equation obligation surface in
+  `DASHI/Physics/Closure/MaxwellGaugeFieldEquationScope.agda`; it is not a
+  Maxwell field-equation theorem.
+- `G3` has a typed Schrodinger/Hamiltonian obligation surface in
+  `DASHI/Physics/Closure/SchrodingerEvolutionScope.agda`; it is not a
+  Schrodinger evolution theorem.
+- `G4` has advanced bridge or partial-consumer surfaces, but it is not
+  curvature- or Einstein-equation-complete.
+- `G5` is not closed: W3 now has a frozen local candidate pass
+  (`chi2/dof = 2.1565191176275618`) and local checksum binding, but no
+  `W3AcceptedEvidenceAuthorityToken`; canonical HEPData table payload
+  checksum binding is still absent after metadata discovery and HTTP `403`
+  payload-download attempts. W4/W5 remain blocked on accepted Drell-Yan
+  convention and authority.
 - `G6` now has a typed skeleton in
   `DASHI/Physics/Closure/CrossLaneCommutingTheoremSkeleton.agda`, but it is
   `skeletonOnlyNoPromotion`; no concrete lane morphisms or section proofs are
@@ -41,6 +49,48 @@ Current coordination state, as of 2026-05-13:
 The plateau is explicit: remaining work is either an internal construction
 that has not yet been assigned to a theorem owner, or an external receipt /
 authority boundary that cannot be replaced by local prose.
+
+## 2026-05-13 Novel-Math Route Intake
+
+The latest route sketch from
+`/home/c/Downloads/As you can see in the pumls there are many blocker(6).md`
+is treated as a guarded tranche-6 route ledger, not as a promotion event.  It
+changes the work queue only where the route can be re-expressed as a typed
+obligation, candidate proof route, or concrete worker lane.
+
+The paste contains paper-level language such as "proof complete" for G2, G3,
+G4, G6, and W8.  This roadmap does not adopt those labels as gate state.  A
+gate closes here only when the corresponding repo-local Agda inhabitant,
+receipt, or accepted external authority exists.
+
+### Tranche 6 Current-State Table
+
+| Gate / work item | Current validated state | Tranche 6 treatment | Next proof surface |
+|---|---|---|---|
+| `G1` canonical spine | Closed. | Unchanged. | Preserve revalidation discipline for downstream edits. |
+| `G2` Maxwell | Obligation surface only. | Candidate sector-restriction route via `U(1)` Killing-form/Yang-Mills restriction; not a Maxwell theorem. | Inhabit `SpineActionU1SectorRestriction`, current extraction, and field-equation law. |
+| `G3` Schrodinger | Obligation surface only. | Candidate route via Kato-Rellich/Stone plus Inonu-Wigner contraction; not a Schrodinger theorem. | State and inhabit Hamiltonian, domain/self-adjointness, unitarity, and contraction interfaces. |
+| `G4` GR | Advanced bridge/partial-consumer surfaces only. | Candidate E8 / `SO(2,3)` MacDowell-Mansouri route; not curvature or Einstein-equation closure. | Type structure-group constraint, vierbein/spin-connection carriers, action equivalence, and sourced-consumer obligations. |
+| `G5` empirical adequacy | Not closed. W3 t43 has local candidate pass `chi2/dof = 2.1565191176275618` and artifact SHA `92b61032...`, but no `W3AcceptedEvidenceAuthorityToken`. | Unchanged: local pass remains non-authoritative because canonical HEPData table checksum/authority is absent after HTTP `403` payload attempts. | Obtain canonical table checksum equivalence or accepted authority token; keep DY and unit authorities separate. |
+| `G6` cross-lane consistency | Skeleton only; no concrete section proofs. | Candidate W/G fixed-point, E8/G Ward, and GR/W perturbative-negligibility routes; not a commuting theorem. | Inhabit lane sections for G2, G3, G4, G5 and cross-path propositional equalities. |
+| `W8` origin | Candidate rigidity route only; no origin receipt. | E8 semisimplicity/Whitehead rigidity route remains candidate-only and must preserve `U(1)`/reductive caveats. | State semisimplicity boundary, rigidity theorem, model-uniqueness/origin receipt, and authority boundary. |
+| `W9` cancellation | Blocked. | Pseudo-Goldstone / de Sitter-scale ideas are problem-formulation candidates, not cancellation proof. | New vacuum-energy/hierarchy-pressure theorem route or durable obstruction. |
+
+| Surface | Route-sketch value | Current repo status | Governance decision |
+|---|---|---|---|
+| E8 completeness | Coordinatewise exhaustion proof for integer and half-integer families. | Generators and executable no-duplicate/disjointness checks exist; structural propositional proofs and completeness remain open. | Continue LILA-R2 as an internal proof-bridge lane. |
+| LILA-R3 | Restrict Lam-Tung claim to an electroweak sub-root-system / Ward-identity route rather than all roots. | Staged and gated on `E8RootEnumerationComplete`; no identity receipt. | Update staging to require an electroweak-frame/branching receipt before any Lam-Tung promotion. |
+| LILA-R4/LILA-R5 | Ratio and E8-observable coherence routes are typed but externally/branching gated. | No denominator authority and no naturality proof. | Treat as request/scope surfaces only. |
+| G2 Maxwell | Bianchi part is routine; sourced equation depends on a sector-restriction theorem for the spine action. | Obligation surface exists; sector restriction is not proved. | Add sector-restriction as the next G2 obligation, not as theorem closure. |
+| G3 Schrodinger | Unitarity route through self-adjoint Hamiltonian and contraction to non-relativistic dynamics. | Obligation surface exists; Hamiltonian, self-adjointness/domain, unitarity, and contraction are not proved. | Add contraction/domain theorem candidates as obligations. |
+| G4 GR | BF / MacDowell-Mansouri route addresses the `F^2` versus Einstein-Hilbert `R` mismatch if the spine structure group supports it. | No G4 scope module currently encodes this route. | Assign a G4 scope worker to type the structure-group and first-order-gravity obligations. |
+| G6 | W/G fixed-point test, E8/G Ward route, GR/W perturbative-negligibility route. | Skeleton only; no concrete sections. | Add typed route candidates while preserving `skeletonOnlyNoPromotion`. |
+| W5 t45 | Correction formula is constructible after accepted DY convention. | DY convention authority is absent. | Keep W5 blocked on DY convention. |
+| W8 origin | E8 semisimplicity/rigidity route proposed. | W8 remains external/blocked in current request packs; no rigidity theorem. | Downgrade from "no route" to "candidate internal rigidity route", not to unblocked. |
+| W9 cancellation | No credible cancellation/vacuum-energy route. | Still blocked. | Preserve W9 obstruction status. |
+
+No row in this table constructs a receipt, token, theorem, gate closure, or
+empirical promotion by itself.
 
 ## Strict Dependency Path To The Target Claim
 

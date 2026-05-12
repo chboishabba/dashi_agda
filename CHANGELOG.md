@@ -2,6 +2,375 @@
 
 ## 2026-05-13
 
+- integrate hard-core pressure-point round:
+  `NonLimitedPaperBundleClaimGovernance.agda` now includes a typed
+  `HardCorePressurePointBundle` for the five active pressure points: W9 MDL
+  kill-matrix consumer, G2 oriented-boundary/incidence algebra, G3
+  carrier-operator contraction, GR Levi-Civita metric compatibility, and G6
+  lane embedding orthogonality. The canonical bundle records all five as
+  route-change-required, typed-but-uninhabited, or downstream-gated; the
+  computed paper admissibility remains `paperBlocked missingRoadmapGovernance`.
+  `TODO.md`, `COMPACTIFIED_CONTEXT.md`, and `Docs/WorkerCoordinationBoard.md`
+  now record the worker returns and non-promotion boundaries.
+
+- advance W9/G2/G3/GR/G6 pressure surfaces without promotion:
+  `W9MDLTerminationSeamRoute.agda` now wires the MDL witness's retarget
+  acceptance into the non-promoting consumer, but the kill matrix still lacks
+  an accepted `mdlTerminationSeamRoute`. `G2DiscreteCurvatureCarrier.agda`
+  adds signed-boundary helper lemmas and a
+  `SignedBoundaryIncidenceSummationSurface`, but no SFGC instantiation or
+  `d²=0` theorem. `G3PoincareGalileiCarrierChain.agda` adds concrete
+  carrier-operator/action-law/commutator obligation records.
+  `GRDiscreteBianchiFiniteR.agda` adds explicit metric-compatibility and
+  `carrierConnectionIsLeviCivita` pressure surfaces.
+  `CrossLaneCommutingTheoremSkeleton.agda` adds conditional p2 orthogonality
+  specialization and an actual embedding dependency index. None of W9, G2,
+  G3, GR, G6, W7, the non-limited paper, or full unification is promoted.
+
+- adapt supplied hard-core inhabitants to current Agda interfaces:
+  `BlockerKillConditions.agda` now records a
+  `W9MDLTerminationSeamAcceptedRouteRequest`, preserving the blocked state and
+  naming the import-cycle boundary that prevents directly consuming the MDL
+  seam from the kill matrix. `G2DiscreteCurvatureCarrier.agda` now adds the
+  corrected square boundary/signed-sum surface and a
+  `G2SFGCGaugeFieldCurvatureAPIObstruction` rather than constructing a fake
+  shift-gauge curvature carrier. `G3PoincareGalileiCarrierChain.agda` now
+  includes a unit smoke carrier inhabiting the local operator obligation
+  records while recording the missing p2 prime-address interface. `GRDiscreteBianchiFiniteR.agda`
+  now factors the Levi-Civita path through a standard algebra-law obligation
+  and explicitly names the six-term Ricci identity cancellation as the next
+  selected-metric sub-obligation. All changes are non-promoting.
+
+- sharpen GR/G6 algebraic consequence surfaces:
+  `GRDiscreteBianchiFiniteR.agda` now separates the conditional
+  `GRFiniteRRicciFromBianchiObligation` / vacuum Ricci-zero surface from the
+  Jacobi-to-Bianchi sidecar and explicitly names missing metric contraction,
+  trace=4 reduction, curvature-to-Ricci boundary, and stress-energy
+  compatibility. `CrossLaneCommutingTheoremSkeleton.agda` now provides
+  conditional `p2EigenvalueDecompositionCommutes` and
+  `primeAddressOrthogonalityCommutes` theorem surfaces from explicit
+  p2-prime projection, complex Re/Im, primeIndex injectivity, and orthogonal
+  projection laws. No GR finite-r closure, vacuum Einstein theorem, G6 section,
+  or complete-unification promotion was constructed.
+
+- add G2 vacuum-Hecke eigenvalue reality obstruction:
+  `G2DiscreteCurvatureCarrier.agda` now records the attempted
+  `vacuumHeckeEigenvaluesReal` lane as a non-promoting obligation. The current
+  inspected support has a static `SFGC.vacuumGaugeField`, Hecke compatibility
+  scans, and coarse `PHEM.EigenProfile` counters, but no typed `VacuumState`,
+  `activeMode`, scalar `heckeEigenvalue`, `imaginaryPart`,
+  `zeroImaginaryPart`, `RealEigenvalue`, or `realEigenvalueBridge`. The new
+  conditional bridge only states what would be needed before real vacuum Hecke
+  eigenvalues could feed a vacuum-flatness route; no such candidate or flatness
+  proof is constructed.
+
+- add GR finite-r discrete Bianchi sidecar scope:
+  `GRDiscreteBianchiFiniteR.agda` now states the Jacobi-to-Bianchi bridge as an
+  obligation over the existing carrier Lie algebra vocabulary, GR first-order
+  finite-r surface, Einstein-equation candidate, discrete Einstein tensor
+  diagnostic, and CRT connection diagnostic. The canonical sidecar names the
+  exact missing finite-r ingredients: base carrier, cell/neighborhood layer,
+  derivation carrier, bracket/Jacobi witness, connection or shift law,
+  curvature-as-bracket-defect construction, covariant cyclic/exterior Bianchi
+  expression, finite-r Bianchi law, curvature contraction boundary, and
+  stress-energy compatibility. No vacuum Einstein closure, finite-r GR
+  promotion, sourced Einstein law, or GR/QFT promotion was constructed.
+
+- add the W9 MDL termination seam route request:
+  `W9MDLTerminationSeamRoute.agda` constructs a real
+  `MDLTerminationSeamWitness` from existing receipts: `normalizeAdd`
+  one-step canonicalization/idempotence, sum preservation, the
+  carry-depth/budget `CancellationPressureLyapunovBridge`, and the
+  weighted-support retarget acceptance receipt. The module also defines a
+  non-pressure route consumer and records the exact missing theorem-consumer
+  route change: add an `mdlTerminationSeamRoute`-style W9 kill-route
+  constructor for the accepted non-Qcore MDL seam. This does not construct
+  `CancellationPressureCompatibility`, a pressure equality, or `W9KillReceipt`.
+
+- sharpen G2 cochain-complex blocker without promoting curvature:
+  `G2DiscreteCurvatureCarrier.agda` now records a dedicated
+  `G2PrimeLatticeCochainLawObligation` for the attempted `d0`/`d1`/`d² = 0`
+  strengthening. `Ontology.GodelLattice` now exposes prime-indexed
+  `updateVec15` with `updateVec15-commutes`, and
+  `Ontology.Hecke.FactorVecInstances` now proves `primeBumpCommutes`,
+  `by-abelian-factorvec`, and `bumpPrimeCommutes`. The inspected `Phase4`
+  finite-gauge base still lacks oriented edge endpoints, the corrected signed
+  square boundary `+bottom,+right,-top,-left`, `boundaryOfBoundaryZero`, finite
+  incidence summation, and a `Phase4` abelian-group normalizer/proof package,
+  so `G2DiscreteCurvatureCarrier.agda` adds a typed
+  `CorrectedSquareBoundaryCochainSurface` obligation instead of constructing a
+  concrete cochain proof or `DiscreteCurvatureCarrier SFGC.GaugeField`.
+  `Docs/MaxwellGaugeFieldEquationScope.md`, `TODO.md`, and
+  `COMPACTIFIED_CONTEXT.md` record the same non-promoting boundary.
+
+- retarget the W9 diagnostic lane to the existing `<=` consumer receipt:
+  `CancellationPressureRetargetConsumerSourceDiagnostic.agda` now records the
+  local `W9WeightedSupportRetargetConsumerReceipt` as the current
+  `RetargetConsumerInterface` and
+  `CancellationPressureRetargetConsumerAcceptanceReceipt` source for
+  `canonicalPairPressureRetargetReceipt`. The accepted predicate is the
+  weighted-support bound `weightedMaxPressure <= weightedSupport`, and the
+  request pack now asks for an explicit theorem-consumer route change rather
+  than another acceptance provider. This remains non-promoting: the W9 kill
+  matrix still accepts only the existing pressure-witness equality route or
+  weighted cancellation-to-quadratic identification route.
+
+- add W2/W3 governance policy hook request surface:
+  `Docs/DASHIGovernanceSelfIssuancePolicy.md` and
+  `Docs/W2W3AuthorityGovernanceFork.md` now state that the admissible hook is
+  request-only in the current typed state. The new
+  `DASHI/Physics/Closure/W2W3GovernancePolicyHookRequest.agda` consumes the
+  landed self-issuance policy, W2 audit/intake evidence, and W3
+  authority-token intake/response evidence while proving
+  `tokenProducingHookAuthorizedNow = false`. `DASHI/Everything.agda`,
+  `TODO.md`, and `COMPACTIFIED_CONTEXT.md` index the same boundary. No
+  `NaturalP2ConvergencePromotionAuthorityToken`,
+  `W3AcceptedEvidenceAuthorityToken`, W2 promotion receipt, or W3 accepted
+  authority receipt is constructed.
+
+- sharpen G2 prime-lattice 2-cell curvature obligations:
+  `G2DiscreteCurvatureCarrier.agda` now exposes a conditional
+  `PrimeLattice2CellLayer` with prime-lattice 0/1/2-cell carriers, plaquettes,
+  discrete 0/1/2-form carriers, exterior derivatives, a typed `d² = 0` law,
+  and the shift-gauge-to-1-form / 2-form-to-field-strength maps needed before
+  `DiscreteCurvatureCarrier SFGC.GaugeField` can be inhabited. The canonical
+  G2 obstruction now names the missing base types and keeps the carrier
+  non-promoted. `Docs/MaxwellGaugeFieldEquationScope.md`,
+  `COMPACTIFIED_CONTEXT.md`, and `TODO.md` record the same boundary.
+
+- add G2 Maxwell curvature/discrete-equation obstruction surface:
+  `DASHI/Physics/Closure/MaxwellGaugeFieldEquationScope.agda`,
+  `Docs/MaxwellGaugeFieldEquationScope.md`, and `TODO.md` now record the
+  inspected finite/static gauge support for a future curvature-to-field-strength
+  and discrete Maxwell equation route. The exact first missing field is
+  `DiscreteCurvatureCarrier for SFGC.GaugeField`; after that, the first missing
+  lemma is `curvatureToFieldStrengthFromShiftGaugeConnection`. No
+  `MaxwellGaugeFieldEquationTheorem` inhabitant is constructed, so G2 remains
+  non-promoted.
+
+- add W4-gated finite-r GR Bianchi/matter obligation surface:
+  `GRFirstOrderGravityScope.agda` now separates the future
+  `GRFiniteRW4BianchiMatterTheoremObligation`, parameterized by an
+  `EinsteinEquationCandidate.W4MatterStressEnergyInterfaceReceipt`, from the
+  canonical diagnostic surface that records the receipt is still impossible
+  here. The surface orders W4 matter/stress-energy, finite-r Bianchi,
+  stress-energy compatibility, and the sourced Einstein law without proving any
+  of them. `Docs/GRFirstOrderGravityScope.md`, `TODO.md`, and
+  `COMPACTIFIED_CONTEXT.md` record the same no-promotion boundary. No W4
+  calibration authority, finite-r Bianchi theorem, sourced Einstein equation,
+  GR/G4/G6 closure, or GR/QFT promotion was constructed.
+
+- assign conditional post-W2/W3/W9 next-lane tranche:
+  `Docs/WorkerCoordinationBoard.md` and `TODO.md` now record six downstream
+  lanes under the explicit hypothetical that a future commit closes W2, W3, and
+  W9. The current repo state is preserved as blocked; the new assignments cover
+  W4/W5 shared PDF intake, W4 calibration authority, W3 non-collapse
+  hardening, G2 Maxwell, G3 Schrodinger, and GR matter coupling. These are
+  conditional staging lanes and do not promote W4, W5, G2, G3, GR, G6, W7, or
+  the non-limited paper.
+
+- sharpen the G3 Schrodinger theorem surface:
+  `SchrodingerEvolutionScope.agda`, `Docs/SchrodingerEvolutionScope.md`, and
+  `TODO.md` now record the inspected finite Hamiltonian/unitary-like support
+  and the offline-L2 obstruction certificate while adding explicit
+  Poincare-to-Galilei, Galilei/Hamiltonian, CCR compatibility, and MDL-to-L2
+  seam obligations. The exact missing fields include
+  `poincareToGalileiContractionDerived`,
+  `galileiHamiltonianCompatibilityDerived`, `ccrCompatibilityDerived`, and
+  `mdlToL2SeamDerived`; the scope now also records their exact upstream theorem
+  types as `PoincareToGalileiContractionDerivedType`,
+  `GalileiHamiltonianCompatibilityDerivedType`, `CCRCompatibilityDerivedType`,
+  and `MDLToL2SeamDerivedType`. No `SchrodingerEvolutionTheorem` or G3 closure
+  is constructed.
+
+- sharpen the G3 Poincare-to-Galilei carrier-level obstruction:
+  `SchrodingerEvolutionScope.agda` now records
+  `G3PoincareToGalileiCarrierLevelObstruction`, naming the exact missing
+  carrier/type chain from `PoincareSectorCarrier` through
+  `PoincareToGalileiContractionCarrier` plus the upstream theorem type
+  `PoincareToGalileiContractionDerivedType
+  obligationSchrodingerHamiltonianEvolutionFields`. This is an obstruction
+  packet only; no contraction theorem inhabitant or new postulate was added.
+
+- add the G3 Poincare-Galilei carrier-chain surface:
+  `DASHI/Physics/Closure/G3PoincareGalileiCarrierChain.agda` and
+  `Docs/G3PoincareGalileiCarrierChain.md` now record the reusable
+  `PoincareSectorCarrier -> NonRelativisticLimitCarrier ->
+  GalileiSectorCarrier -> PoincareToGalileiContractionCarrier` chain with a
+  non-promoting `DASHIState` marker. The exact downstream Schrodinger
+  obligation remains `PoincareToGalileiContractionDerivedType
+  obligationSchrodingerHamiltonianEvolutionFields`; no
+  `poincareToGalileiContractionDerived` inhabitant is constructed.
+
+- continue the G3 Poincare-sector carrier layer:
+  `DASHI/Physics/Closure/G3PoincareGalileiCarrierChain.agda` now defines an
+  independent `PoincareSectorCarrier` record with state/operator/action,
+  CCR-shaped `Op` and commutator surfaces, metric, translation-generator,
+  Lorentz-generator, and Poincare bracket-relation fields. The canonical chain
+  now carries a non-promoting obligation packet naming the missing concrete
+  `CarrierOperator`, commutator closure, metric/signature witness, and
+  translation/translation, Lorentz/translation, and Lorentz/Lorentz relation
+  proofs. No Poincare algebra witness or contraction theorem is constructed.
+
+- add non-promoting G3 IW and MDL-density surfaces:
+  `G3PoincareGalileiCarrierChain.agda` now records
+  `G3IWAssociatedGradedObligationSurface` for the missing contraction
+  filtration, associated graded, carrier algebra, filtered bracket law,
+  contraction parameter, Poincare-at-`p2` carrier/isomorphism, and Galilei
+  associated-graded identification. It also records
+  `G3MDLDensityToL2ObligationSurface`, which reuses the inhabited finite
+  `shiftPhaseWaveDensityMonotone` and `shiftPointDensityMonotone` laws while
+  keeping the positive L2 density/seam theorem as the exact
+  `MDLToL2SeamDerivedType obligationSchrodingerHamiltonianEvolutionFields`
+  obligation. No unguarded postulate, IW contraction theorem, or MDL-to-L2
+  theorem inhabitant was added.
+
+- record W2 governance-token constructor obstruction:
+  `DASHI/Physics/Closure/W2GovernanceTokenConstructorObstruction.agda`,
+  `Docs/W2GovernanceTokenConstructorObstruction.md`, and `TODO.md` now record
+  that the landed self-issuance policy is permissive only at the evidence-class
+  layer. It constructs no W2 token, and the current Agda type still lacks a
+  real `NaturalP2ConvergencePromotionAuthorityToken` constructor or typed
+  policy-hook inhabitant. This keeps W2 non-promoted and names the first
+  missing constructor before the separate natural/p2 and carrier-general
+  convergence payloads.
+
+- assign guarded W2/W3/W9 follow-up tranche:
+  `Docs/WorkerCoordinationBoard.md` and `TODO.md` now record three narrow
+  workers for the latest immediate-token/proof proposal. The tranche explicitly
+  allows W2/W3 token or W9 theorem construction only if the existing Agda
+  interfaces provide a real constructor path; otherwise workers must return a
+  typed obstruction or request surface. This assignment does not itself promote
+  W2, W3, W9, G5, or the non-limited paper.
+
+- integrate W9 follow-up obstruction sharpening:
+  `W9CancellationPressureQcoreCompatibilityReceipt.agda` now names
+  `Canonical15PressureWitnessType` as the missing theorem needed to identify
+  cancellation pressure with transported contraction energy. The inspected
+  case-split, contraction-forces, signature-31, and B4 weighted-Qcore routes
+  remain non-promoting because none supplies the required pressure witness or
+  W9 kill constructor.
+
+- assign non-limited paper closure bundle lanes:
+  `Docs/WorkerCoordinationBoard.md` and `TODO.md` now record the six parallel
+  assignments needed to turn current obligation surfaces into one
+  theorem-facing non-limited-paper dependency object: W3/W2 authority
+  governance, W9 pressure equality/obstruction, W4 Z-peak data anchor,
+  CT18/DY convention binding, G2/G3/G4 theorem kernels, and paper-level claim
+  governance. This is coordination only; no authority token, theorem closure,
+  W9 closure, G6 closure, or paper admissibility claim is constructed.
+  The worker board now also records the refined phase sequence: immediate
+  no-dependency lanes, short-term CT18/W4 intake, medium G2/G3/GR/G6 theorem
+  lanes, and final G4/W7 packaging, with the critical path kept as routing
+  metadata rather than a promotion claim.
+
+- integrate first non-limited paper closure worker returns:
+  the G2, G3, and GR scope modules now contain theorem-kernel obligation
+  records for Maxwell sector restriction, Schrodinger evolution/contraction,
+  and finite-r GR/Bianchi/matter-coupling work. A new
+  `NonLimitedPaperBundleClaimGovernance.agda` module represents the 12-step
+  non-limited paper roadmap as typed status fields with computed
+  admissibility; the canonical state remains blocked at
+  `missingRoadmapGovernance`. These additions are non-promoting and do not
+  close G2, G3, GR/G4, G6, W7, W9, the non-limited paper, or full unification.
+
+- integrate remaining non-limited paper closure worker returns:
+  governance docs now define a bounded self-issuance policy fork for W2/W3
+  evidence classes without populating tokens; the W9 canonical-15 `refl` route
+  is refuted by a typed normal-form mismatch (`2` versus `10`); the W4 Z-peak
+  anchor run is checksum-bound and records `chi2/dof = 298.8462841768543`
+  while keeping accepted DY authority absent; and CT18NLO is recorded as local
+  candidate provenance with an expanded LHAPDF/PDF intake contract. These are
+  routing and obstruction/authority surfaces only, not W2/W3/W4/W5/W9 or paper
+  promotions.
+
+- record W4/W5 LHAPDF intake preflight obstruction:
+  `scripts/w4w5_pdf_lhapdf_intake_preflight.py` now emits a fail-closed
+  W4/W5 PDF intake artifact. The 2026-05-13 rerun records system LHAPDF
+  tooling present (`/usr/bin/lhapdf`, `/usr/bin/lhapdf-config`, and system
+  Python `lhapdf` at `6.5.5`) and repo-local CT18NLO resolvable with
+  `LHAPDF_DATA_PATH=/usr/share/lhapdf/LHAPDF:$PWD/scripts/data/pdf`. The repo
+  `.venv` still lacks the Python `lhapdf` module, no local MSHT20 grid was
+  found, and a fresh CT18 equivalent-table candidate packet remains at
+  `logs/research/w4w5_pdf_ct18_candidate_run_20260513.json` SHA-256
+  `7b4e5e815c3e65619cd9591734eb00e7c80be0402c6d06c3c8d33d1c8da6609f`. The
+  provider-authority obstruction artifact is
+  `logs/research/w4w5_pdf_lhapdf_intake_obstruction_20260513.json` SHA-256
+  `082448674db69767aff1897f7fb66054a6dbc3a70b86f31813185a6a2c10fd41`.
+  W4/W5 receipt surfaces and blocker docs cite the obstruction while keeping
+  the CT18 numerics candidate-only and non-promoting.
+
+- add corrected CT18 DY luminosity convention diagnostic:
+  `scripts/run_w4w5_ct18_corrected_dy_luminosity.py` computes the full-`x`
+  charge-weighted `dL/dtau` convention with system LHAPDF and records the
+  non-promoting artifact
+  `logs/research/w4w5_ct18_corrected_dy_luminosity_20260513.json` SHA-256
+  `34d4a317d29b23a39e6d0b865028ba8640059123371dddfdf443e4b0e8ec43a8`.
+  The `dtau` mass-window `L(106-170)/L(76-106)` correction is
+  `0.9931829614316737`, not target `0.8804486068`; W4/W5 remain blocked on
+  `missingAcceptedDYLuminosityConventionAuthority`. A focused pytest regression
+  covers the `dx/x` convention.
+
+- sharpen W4 provider calibration-authority surfaces:
+  `W4PhysicalUnitAuthorityRequestSurface.agda` now exposes a provider
+  response/receipt surface for physical-unit authority and a parameterized
+  quotient-sensitive cross-band witness surface over an existing
+  `QuotientLawAtWitness canonicalCandidate256QuotientLaw`. The witness surface
+  packages the internal TSFV `T` involution, compatibility, positive
+  non-collapse, and `T`-flipped non-collapse while preserving the external
+  chemistry-law receipt and physical-unit authority blockers. The docs and
+  TODO entry mirror the same non-promoting boundary: no
+  `Candidate256PhysicalCalibrationAuthorityToken`, external calibration
+  receipt, or W4 promotion is constructed.
+
+- add DASHI-Markov compatibility surface:
+  `Docs/DASHIMarkovCompatibility.md`, `DASHI/Core/DashiMarkov.agda`, and
+  `DASHI/Process/DASHIMarkovCompatibility.agda` define Markov structure as a
+  downstream projection of a DASHI lane. The native state is the typed joined
+  slice of carrier, residual/pressure state, open obligations, accepted
+  authorities, admissibility boundary, and promotion status. The Agda surfaces
+  record structural transition, history sufficiency, multiscale joined state,
+  and optional relation-valued kernel compatibility without adding stochastic
+  assumptions, stationarity, HMM/MDP machinery, promotion receipts, or a global
+  latent oracle.
+
+- stage canonical HEPData JSON payloads for W3 authority review:
+  browser-downloaded HEPData table JSON exports for `t19`, `t20`, `t43`, and
+  `t44` are staged under
+  `logs/research/provider_inputs/hepdata_ins2079374/` with checksums recorded
+  in `checksums.txt`. The active W3 ratio payloads are now hash-bound and
+  semantically checked against the local CSV cache: `t43` has `18/18` matching
+  ratio rows and `t44` has `324/324` matching total-covariance entries. The W3
+  docs and receipt/intake surfaces now record this as canonical-payload
+  discovery completed while preserving the no-self-issuance boundary: no
+  `W3AcceptedEvidenceAuthorityToken`, accepted external receipt, G5 closure, or
+  unification promotion is constructed locally. The W4 physical-unit request
+  docs also note that the proton-mass candidate route should use CODATA 2022
+  `938.27208943(29) MeV`, not the stale CODATA 2018 value.
+
+- add W3 authority-token governance obstruction audit:
+  `W3AcceptedEvidenceAuthorityTokenGovernanceObstruction.agda` records that the
+  landed governance policy permits bounded public-DOI/frozen-commit
+  self-issuance only at policy level; the Agda token remains constructorless.
+  The exact missing items are the `W3AcceptedEvidenceAuthorityToken`
+  constructor/governance hook, `Pack.missingAcceptedEvidenceAuthorityToken`, and
+  `W3AcceptedEvidenceAuthorityTokenReceipt.authorityToken`. The audit also
+  records that the non-collapse witness is already represented runner-side by
+  `canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt`, while provider-grade
+  external receipt and the authority token remain absent. No W3 promotion or
+  accepted external receipt is constructed.
+
+- harden W3 non-collapse runner receipt validation:
+  `Docs/W3NonCollapseRunnerReceiptHardening.md`,
+  `scripts/check_w3_noncollapse_receipt.py`, and
+  `tests/test_w3_noncollapse_receipt.py` now verify that the frozen t43
+  comparison JSON checksum, selected bin-12 witness, canonical t43/t44 JSON
+  checksums, and Agda runner receipt literals agree. The checker fails closed if
+  the local artifact claims provider-grade non-collapse or W3 authority-token /
+  external-receipt construction. This confirms runner-side non-collapse is
+  complete at the local receipt level, while provider-grade external
+  non-collapse and `W3AcceptedEvidenceAuthorityToken` remain absent.
+
 - refresh complete physics-unification roadmap:
   `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md` now records the active
   strict dependency path to a publishable physics-unification claim: internal
@@ -5126,3 +5495,11 @@
 - update `README.md` and `TODO.md` to record the ownership split:
   generic pressure algebra now lives in `DASHI/`,
   while `Ontology/Hecke/*Pressure*` remains the domain-specific consumer lane
+## 2026-05-13 W4/W5 LHAPDF environment clarification
+
+- Clarified the W4/W5 PDF-intake docs after system LHAPDF was installed:
+  `/usr/bin/lhapdf`, `/usr/bin/lhapdf-config`, and system Python `lhapdf` are
+  available at `6.5.5`, while the repo-local `.venv` still lacks the Python
+  binding. CT18NLO resolves with
+  `LHAPDF_DATA_PATH=/usr/share/lhapdf/LHAPDF:$PWD/scripts/data/pdf`; no W4/W5
+  promotion follows until accepted DY/PDF convention authority is supplied.

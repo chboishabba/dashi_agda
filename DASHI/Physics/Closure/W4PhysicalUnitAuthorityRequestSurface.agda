@@ -13,6 +13,7 @@ import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation as E
 import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptRequestPack as Pack
 import DASHI.Physics.Closure.W4PhysicalCalibrationGate as Gate
 import DASHI.Physics.Closure.W4StrictPhysicalNextObligation as Next
+import DASHI.Physics.Closure.W4SurrogateScaleSettingBoundary as Surrogate
 
 ------------------------------------------------------------------------
 -- W4 physical-unit authority request surface.
@@ -47,12 +48,32 @@ data W4PhysicalUnitAuthorityMissingField : Set where
     W4PhysicalUnitAuthorityMissingField
   missingCandidate256PhysicalCalibrationExternalReceipt :
     W4PhysicalUnitAuthorityMissingField
+  missingProviderBoundBaseUnitCitation :
+    W4PhysicalUnitAuthorityMissingField
+  missingProviderBoundBaseUnitChecksum :
+    W4PhysicalUnitAuthorityMissingField
+
+data W4BaseUnitCandidateRoute : Set where
+  protonMassCODATACandidate :
+    W4BaseUnitCandidateRoute
+  dyConventionNaturalUnitCandidate :
+    W4BaseUnitCandidateRoute
+  providerSuppliedOtherBaseUnitCandidate :
+    W4BaseUnitCandidateRoute
 
 data W4TSFVChemistryWitnessSelectionStatus : Set where
   witnessSelectionOpenUntilRchemRelationFixed :
     W4TSFVChemistryWitnessSelectionStatus
   providerChemistryLawReceiptRequiredBeforeSelection :
     W4TSFVChemistryWitnessSelectionStatus
+
+data W4PhysicalUnitAuthorityProviderReceiptSurfaceStatus : Set where
+  providerReceiptSurfaceOnlyAwaitingExternalAuthority :
+    W4PhysicalUnitAuthorityProviderReceiptSurfaceStatus
+
+data W4QuotientSensitiveCrossBandWitnessStatus : Set where
+  quotientSensitiveWitnessAvailableAtInternalTSFVLevelOnly :
+    W4QuotientSensitiveCrossBandWitnessStatus
 
 data W4TSFVChemistryReceiptMissingField : Set where
   missingProviderRchemRelation :
@@ -88,6 +109,172 @@ canonicalW4PhysicalUnitAuthorityMissingFields =
   ∷ missingCandidate256TSFVBindingLaw
   ∷ missingCandidate256PhysicalCalibrationAuthorityToken
   ∷ missingCandidate256PhysicalCalibrationExternalReceipt
+  ∷ missingProviderBoundBaseUnitCitation
+  ∷ missingProviderBoundBaseUnitChecksum
+  ∷ []
+
+record W4BaseUnitCandidateAuthorityRoute : Set where
+  field
+    candidateRoute :
+      W4BaseUnitCandidateRoute
+
+    candidateRouteName :
+      String
+
+    candidateBaseUnitName :
+      String
+
+    candidateDimension :
+      String
+
+    candidateConversionTarget :
+      String
+
+    requiredProviderCitation :
+      String
+
+    requiredProviderValidation :
+      List String
+
+    acceptedOnlyIfProviderBound :
+      List String
+
+    rejectedInterpretations :
+      List String
+
+    constructsPhysicalUnitAuthority :
+      Bool
+
+    constructsCandidate256PhysicalCalibrationAuthorityToken :
+      Bool
+
+    promotesW4 :
+      Bool
+
+protonMassCODATACandidateRoute :
+  W4BaseUnitCandidateAuthorityRoute
+protonMassCODATACandidateRoute =
+  record
+    { candidateRoute =
+        protonMassCODATACandidate
+    ; candidateRouteName =
+        "proton-mass CODATA/natural-unit candidate route"
+    ; candidateBaseUnitName =
+        "proton mass energy-equivalent candidate; provider must bind exact value and unit convention"
+    ; candidateDimension =
+        "mass or energy in an explicitly named natural-unit convention"
+    ; candidateConversionTarget =
+        "provider-bound SI or natural-unit target; e.g. MeV/c^2, GeV, kg, or c = hbar = 1 convention"
+    ; requiredProviderCitation =
+        "provider must supply DOI/standard/table/version for the proton mass or replacement base unit; current proton-mass candidate should use CODATA 2022 value 938.27208943(29) MeV, not the stale CODATA 2018 value"
+    ; requiredProviderValidation =
+        "exact value and uncertainty"
+        ∷ "unit convention and conversion target"
+        ∷ "checksum or immutable citation for the authority record"
+        ∷ "statement that this base unit is admissible for Candidate256/TSFV W4 calibration"
+        ∷ "dimensional preservation binding for the calibrated quotient scale map"
+        ∷ []
+    ; acceptedOnlyIfProviderBound =
+        "A proton-mass value is only a candidate until a provider binds the citation, value, uncertainty, unit convention, and conversion law"
+        ∷ "The route does not by itself choose proton mass as W4 baseUnit"
+        ∷ "The route does not by itself prove Candidate256 physical calibration"
+        ∷ []
+    ; rejectedInterpretations =
+        "proton mass mentioned in prose as a completed authority"
+        ∷ "a remembered numeric value without provider checksum or citation"
+        ∷ "a base-unit label without DimensionCarrier and conversionLaw"
+        ∷ []
+    ; constructsPhysicalUnitAuthority =
+        false
+    ; constructsCandidate256PhysicalCalibrationAuthorityToken =
+        false
+    ; promotesW4 =
+        false
+    }
+
+dyConventionNaturalUnitCandidateRoute :
+  W4BaseUnitCandidateAuthorityRoute
+dyConventionNaturalUnitCandidateRoute =
+  record
+    { candidateRoute =
+        dyConventionNaturalUnitCandidate
+    ; candidateRouteName =
+        "accepted DY convention natural-unit candidate route"
+    ; candidateBaseUnitName =
+        "base unit inherited from an accepted DY luminosity/cross-section convention"
+    ; candidateDimension =
+        "cross-section, energy, luminosity, or natural-unit dimension as declared by the accepted DY provider"
+    ; candidateConversionTarget =
+        "the conversion target named by AcceptedDYLuminosityConventionAuthorityReceipt"
+    ; requiredProviderCitation =
+        "provider must supply the accepted DY convention receipt or replacement authority packet"
+    ; requiredProviderValidation =
+        "luminosity, bin-normalisation, efficiency, acceptance, and systematic-budget provenance"
+        ∷ "normalisation-preservation law"
+        ∷ "conversion law from DY convention units to Candidate256/TSFV calibrated units"
+        ∷ "statement that the selected DY base unit satisfies W4 physical-unit authority"
+        ∷ []
+    ; acceptedOnlyIfProviderBound =
+        "The DY route is only admissible after AcceptedDYLuminosityConventionAuthorityReceipt or replacement authority exists"
+        ∷ "It cannot be inferred from the local pressure decomposition tool exiting 45"
+        ∷ []
+    ; rejectedInterpretations =
+        "using a DY paper label without accepted convention fields"
+        ∷ "using local HEPData artifacts as physical-unit authority"
+        ∷ "using pressure-attribution diagnostics as base-unit authority"
+        ∷ []
+    ; constructsPhysicalUnitAuthority =
+        false
+    ; constructsCandidate256PhysicalCalibrationAuthorityToken =
+        false
+    ; promotesW4 =
+        false
+    }
+
+providerSuppliedOtherBaseUnitCandidateRoute :
+  W4BaseUnitCandidateAuthorityRoute
+providerSuppliedOtherBaseUnitCandidateRoute =
+  record
+    { candidateRoute =
+        providerSuppliedOtherBaseUnitCandidate
+    ; candidateRouteName =
+        "provider-supplied replacement base-unit candidate route"
+    ; candidateBaseUnitName =
+        "provider-named base unit"
+    ; candidateDimension =
+        "provider-named dimension carrier"
+    ; candidateConversionTarget =
+        "provider-named SI or natural-unit conversion target"
+    ; requiredProviderCitation =
+        "provider must cite and validate the replacement base-unit authority"
+    ; requiredProviderValidation =
+        "replacement base unit"
+        ∷ "DimensionCarrier and dimensionOfUnit"
+        ∷ "conversionLaw"
+        ∷ "Candidate256TSFVBindingLaw"
+        ∷ "dimensionalPreservationLaw"
+        ∷ []
+    ; acceptedOnlyIfProviderBound =
+        "A replacement base unit is admissible only if it supplies all W4 required provider fields"
+        ∷ []
+    ; rejectedInterpretations =
+        "provider preference without typed fields"
+        ∷ "unvalidated unit choice"
+        ∷ []
+    ; constructsPhysicalUnitAuthority =
+        false
+    ; constructsCandidate256PhysicalCalibrationAuthorityToken =
+        false
+    ; promotesW4 =
+        false
+    }
+
+canonicalW4BaseUnitCandidateRoutes :
+  List W4BaseUnitCandidateAuthorityRoute
+canonicalW4BaseUnitCandidateRoutes =
+  protonMassCODATACandidateRoute
+  ∷ dyConventionNaturalUnitCandidateRoute
+  ∷ providerSuppliedOtherBaseUnitCandidateRoute
   ∷ []
 
 record W4PhysicalUnitAuthorityProviderRequest : Setω where
@@ -118,6 +305,9 @@ record W4PhysicalUnitAuthorityProviderRequest : Setω where
 
     exactMissingFields :
       List W4PhysicalUnitAuthorityMissingField
+
+    candidateBaseUnitRoutes :
+      List W4BaseUnitCandidateAuthorityRoute
 
     acceptedResponseMustSupply :
       List String
@@ -240,6 +430,113 @@ record W4TSFVChemistryLawReceiptRequest : Setω where
     promotesW4 :
       Bool
 
+record W4QuotientSensitiveCrossBandWitnessSurface
+  (law : Handoff.QuotientLawAtWitness
+    Next.canonicalCandidate256QuotientLaw) :
+  Setω where
+  field
+    status :
+      W4QuotientSensitiveCrossBandWitnessStatus
+
+    selectedRchemRelation :
+      TSFV.Candidate256RchemRelationAtWitness law
+
+    quotientInvolution :
+      Surrogate.Candidate256QuotientClass →
+      Surrogate.Candidate256QuotientClass
+
+    quotientInvolutionIsT :
+      quotientInvolution ≡ TSFV.candidate256QuotientT
+
+    quotientInvolutionInvolutive :
+      (q : Surrogate.Candidate256QuotientClass) →
+      quotientInvolution (quotientInvolution q) ≡ q
+
+    positiveWitnessClass :
+      Surrogate.Candidate256QuotientClass
+
+    negativeWitnessClass :
+      Surrogate.Candidate256QuotientClass
+
+    positiveWitnessClassIsCanonicalLeft :
+      positiveWitnessClass ≡ Surrogate.candidate256LeftQuotientClass
+
+    negativeWitnessClassIsCanonicalRight :
+      negativeWitnessClass ≡ Surrogate.candidate256RightQuotientClass
+
+    tsfvCompatibilityWitness :
+      TSFV.Candidate256TritLchemDimensionalPreservation law
+
+    positiveNonCollapseWitness :
+      TSFV.candidate256TritQuotientCalibrationMap
+        Surrogate.candidate256LeftQuotientClass
+      ≡
+      TSFV.candidate256TritQuotientCalibrationMap
+        Surrogate.candidate256RightQuotientClass →
+      ⊥
+
+    tFlippedNonCollapseWitness :
+      TSFV.candidate256TritQuotientCalibrationMap
+        (TSFV.candidate256QuotientT Surrogate.candidate256LeftQuotientClass)
+      ≡
+      TSFV.candidate256TritQuotientCalibrationMap
+        (TSFV.candidate256QuotientT Surrogate.candidate256RightQuotientClass) →
+      ⊥
+
+    providerReceiptBoundary :
+      List String
+
+    constructsProviderChemistryLawReceipt :
+      Bool
+
+    constructsCandidate256PhysicalCalibrationAuthorityToken :
+      Bool
+
+    constructsCandidate256PhysicalCalibrationExternalReceipt :
+      Bool
+
+    promotesW4 :
+      Bool
+
+record W4PhysicalUnitAuthorityProviderReceiptSurface : Setω where
+  field
+    status :
+      W4PhysicalUnitAuthorityProviderReceiptSurfaceStatus
+
+    request :
+      W4PhysicalUnitAuthorityProviderRequest
+
+    acceptedResponseMustBind :
+      List String
+
+    insufficientResponsePreserves :
+      List String
+
+    quotientSensitiveCrossBandWitness :
+      (law : Handoff.QuotientLawAtWitness
+        Next.canonicalCandidate256QuotientLaw) →
+      W4QuotientSensitiveCrossBandWitnessSurface law
+
+    receiptBoundary :
+      List String
+
+    constructsCandidate256PhysicalCalibrationAuthorityToken :
+      Bool
+
+    constructsCandidate256PhysicalCalibrationExternalReceipt :
+      Bool
+
+    promotesW4 :
+      Bool
+
+    impossibleAuthorityHere :
+      Gate.Candidate256PhysicalCalibrationAuthorityToken →
+      ⊥
+
+    impossibleReceiptHere :
+      External.Candidate256PhysicalCalibrationExternalReceipt →
+      ⊥
+
 canonicalW4PhysicalUnitAuthorityProviderRequest :
   W4PhysicalUnitAuthorityProviderRequest
 canonicalW4PhysicalUnitAuthorityProviderRequest =
@@ -274,11 +571,14 @@ canonicalW4PhysicalUnitAuthorityProviderRequest =
         ∷ []
     ; exactMissingFields =
         canonicalW4PhysicalUnitAuthorityMissingFields
+    ; candidateBaseUnitRoutes =
+        canonicalW4BaseUnitCandidateRoutes
     ; acceptedResponseMustSupply =
         "a non-Nat physical unit carrier with an explicit baseUnit"
         ∷ "a dimension carrier and dimensionOfUnit map"
         ∷ "a conversion law to SI units or to an explicitly named natural-unit convention"
         ∷ "a dimensional preservation statement for the calibrated Candidate256/TSFV map"
+        ∷ "a provider-bound base-unit citation/checksum/value packet; proton mass and DY natural units are only candidate routes until this is supplied"
         ∷ "a binding law from TSFV.candidate256InternalTritCalibrationLaw to the W4 calibrated quotient scale map"
         ∷ "an external Candidate256PhysicalCalibrationAuthorityToken artifact"
         ∷ "a payload sufficient to inhabit Candidate256PhysicalCalibrationExternalReceipt outside this request surface"
@@ -293,6 +593,8 @@ canonicalW4PhysicalUnitAuthorityProviderRequest =
     ; rejectedSubstitutes =
         "TSFV.candidate256InternalTritCalibrationLaw by itself"
         ∷ "TSFVDiagnosticPhysicalUnitCarrier by itself"
+        ∷ "proton mass or CODATA named without provider-bound value, uncertainty, unit convention, checksum/citation, and conversion law"
+        ∷ "DY luminosity or pressure-decomposition diagnostics without AcceptedDYLuminosityConventionAuthorityReceipt"
         ∷ "the dimensionless Nat surrogate by itself"
         ∷ "labels, comments, citations, or prose dimensional annotations without typed fields"
         ∷ "Drosophila/codon candidate evidence without physical-unit authority"
@@ -410,4 +712,97 @@ canonicalW4TSFVChemistryLawReceiptRequest =
         false
     ; promotesW4 =
         false
+    }
+
+canonicalW4QuotientSensitiveCrossBandWitnessSurface :
+  (law : Handoff.QuotientLawAtWitness
+    Next.canonicalCandidate256QuotientLaw) →
+  W4QuotientSensitiveCrossBandWitnessSurface law
+canonicalW4QuotientSensitiveCrossBandWitnessSurface law =
+  record
+    { status =
+        quotientSensitiveWitnessAvailableAtInternalTSFVLevelOnly
+    ; selectedRchemRelation =
+        TSFV.candidate256RchemRelationAtWitness law
+    ; quotientInvolution =
+        TSFV.candidate256QuotientT
+    ; quotientInvolutionIsT =
+        refl
+    ; quotientInvolutionInvolutive =
+        TSFV.candidate256QuotientTInvolutive
+    ; positiveWitnessClass =
+        Surrogate.candidate256LeftQuotientClass
+    ; negativeWitnessClass =
+        Surrogate.candidate256RightQuotientClass
+    ; positiveWitnessClassIsCanonicalLeft =
+        refl
+    ; negativeWitnessClassIsCanonicalRight =
+        refl
+    ; tsfvCompatibilityWitness =
+        TSFV.candidate256TritLchemDimensionalPreservationAtWitness law
+    ; positiveNonCollapseWitness =
+        TSFV.candidate256TritNontrivialSeparation
+    ; tFlippedNonCollapseWitness =
+        TSFV.candidate256TritNontrivialSeparationAfterT
+    ; providerReceiptBoundary =
+        "This surface is parameterized by an existing QuotientLawAtWitness; it does not construct the cross-band law witness"
+        ∷ "The quotient-sensitive content is internal TSFV structure: T involution, T-invariance, positive non-collapse, and T-flipped non-collapse"
+        ∷ "A provider chemistry-law receipt must still bind this witness to external physical-unit authority before consumption"
+        ∷ "No Candidate256PhysicalCalibrationAuthorityToken, external receipt, or W4 promotion is constructed"
+        ∷ []
+    ; constructsProviderChemistryLawReceipt =
+        false
+    ; constructsCandidate256PhysicalCalibrationAuthorityToken =
+        false
+    ; constructsCandidate256PhysicalCalibrationExternalReceipt =
+        false
+    ; promotesW4 =
+        false
+    }
+
+canonicalW4PhysicalUnitAuthorityProviderReceiptSurface :
+  W4PhysicalUnitAuthorityProviderReceiptSurface
+canonicalW4PhysicalUnitAuthorityProviderReceiptSurface =
+  record
+    { status =
+        providerReceiptSurfaceOnlyAwaitingExternalAuthority
+    ; request =
+        canonicalW4PhysicalUnitAuthorityProviderRequest
+    ; acceptedResponseMustBind =
+        "the exact request surface and provider payload version being answered"
+        ∷ "external PhysicalUnitCarrier, baseUnit, DimensionCarrier, dimensionOfUnit, conversionTarget, and conversionLaw"
+        ∷ "provider-bound base-unit citation/checksum/value/uncertainty packet"
+        ∷ "Candidate256TSFVBindingLaw and calibratedScaleMapFactorsThroughNat if using the current receipt shape"
+        ∷ "dimensionalPreservationLaw and dimensionalPreservationAtWitness over the Candidate256 quotient-law witness"
+        ∷ "external Candidate256PhysicalCalibrationAuthorityToken artifact and Candidate256PhysicalCalibrationExternalReceipt payload"
+        ∷ "provider chemistry-law receipt if the response consumes the quotient-sensitive cross-band witness"
+        ∷ []
+    ; insufficientResponsePreserves =
+        "missing authority token keeps Candidate256PhysicalCalibrationAuthorityToken constructorless locally"
+        ∷ "missing external unit carrier/baseUnit keeps the TSFV diagnostic carrier non-authoritative"
+        ∷ "missing quotient-sensitive chemistry receipt keeps R-chem witness selection non-promoting"
+        ∷ "missing dimensional preservation keeps W4 physical calibration blocked"
+        ∷ []
+    ; quotientSensitiveCrossBandWitness =
+        canonicalW4QuotientSensitiveCrossBandWitnessSurface
+    ; receiptBoundary =
+        "This is a provider response/receipt surface, not the receipt itself"
+        ∷ "Accepted responses must be external artifacts satisfying the named fields; local strings are not authority"
+        ∷ "Insufficient or rejected responses preserve W4 as blocked and should identify missing typed fields"
+        ∷ "This surface does not construct Candidate256PhysicalCalibrationAuthorityToken"
+        ∷ "This surface does not construct Candidate256PhysicalCalibrationExternalReceipt"
+        ∷ "This surface does not promote W4"
+        ∷ []
+    ; constructsCandidate256PhysicalCalibrationAuthorityToken =
+        false
+    ; constructsCandidate256PhysicalCalibrationExternalReceipt =
+        false
+    ; promotesW4 =
+        false
+    ; impossibleAuthorityHere =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.impossibleWithoutExternalAuthority
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
+    ; impossibleReceiptHere =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.impossibleReceiptWithoutExternalAuthority
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
     }

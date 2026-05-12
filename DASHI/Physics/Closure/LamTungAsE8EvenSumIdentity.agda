@@ -128,7 +128,11 @@ canonicalE8RootExhaustiveCheckSteps =
 data LilaR3CurrentlyUninhabited : Set where
   noE8RootEnumerationReceipt :
     LilaR3CurrentlyUninhabited
+  noE8RootProofClosureReceipt :
+    LilaR3CurrentlyUninhabited
   noLamTungCoefficientReceipt :
+    LilaR3CurrentlyUninhabited
+  noExhaustive240RootIdentityCheck :
     LilaR3CurrentlyUninhabited
   noA0ToA7CoordinateAssignmentProof :
     LilaR3CurrentlyUninhabited
@@ -143,7 +147,9 @@ canonicalLilaR3CurrentlyUninhabited :
   List LilaR3CurrentlyUninhabited
 canonicalLilaR3CurrentlyUninhabited =
   noE8RootEnumerationReceipt
+  ∷ noE8RootProofClosureReceipt
   ∷ noLamTungCoefficientReceipt
+  ∷ noExhaustive240RootIdentityCheck
   ∷ noA0ToA7CoordinateAssignmentProof
   ∷ noEvenSumIdentityProof
   ∷ noPhiStarProjectionReceipt
@@ -151,6 +157,8 @@ canonicalLilaR3CurrentlyUninhabited =
   ∷ []
 
 data LilaR3IdentityDependency : Set where
+  needsR2ConcreteGeneratorSurface :
+    LilaR3IdentityDependency
   needsPromotedR2EightDimensionalDoubledCoordinateFrame :
     LilaR3IdentityDependency
   needsR2RootEnumeratorAndMembershipDecision :
@@ -171,7 +179,8 @@ data LilaR3IdentityDependency : Set where
 canonicalLilaR3IdentityDependencies :
   List LilaR3IdentityDependency
 canonicalLilaR3IdentityDependencies =
-  needsPromotedR2EightDimensionalDoubledCoordinateFrame
+  needsR2ConcreteGeneratorSurface
+  ∷ needsPromotedR2EightDimensionalDoubledCoordinateFrame
   ∷ needsR2RootEnumeratorAndMembershipDecision
   ∷ needsR2DuplicateFreedomAndCompleteness
   ∷ needsR2NormInnerProductAndEvenSumLaw
@@ -179,6 +188,34 @@ canonicalLilaR3IdentityDependencies =
   ∷ needsLamTungCoefficientDefinitionReceipt
   ∷ needsCliffordEvenSubspaceInterpretationLaw
   ∷ needsLamTungAsE8EvenSumProof
+  ∷ []
+
+data ElectroweakSubRootRestrictionRequirement : Set where
+  electroweakSubRootCarrierInsideR2E8Roots :
+    ElectroweakSubRootRestrictionRequirement
+  electroweakSubRootMembershipDecidable :
+    ElectroweakSubRootRestrictionRequirement
+  electroweakSubRootUniqueInsideCombinedRoots :
+    ElectroweakSubRootRestrictionRequirement
+  electroweakSubRootDisjointFromExcludedRoots :
+    ElectroweakSubRootRestrictionRequirement
+  electroweakSubRootCompletenessForLamTungSector :
+    ElectroweakSubRootRestrictionRequirement
+  electroweakSubRootCoordinateAssignmentA0ToA7 :
+    ElectroweakSubRootRestrictionRequirement
+  electroweakSubRootEvenSumRestrictsLamTungRelation :
+    ElectroweakSubRootRestrictionRequirement
+
+canonicalElectroweakSubRootRestrictionRequirements :
+  List ElectroweakSubRootRestrictionRequirement
+canonicalElectroweakSubRootRestrictionRequirements =
+  electroweakSubRootCarrierInsideR2E8Roots
+  ∷ electroweakSubRootMembershipDecidable
+  ∷ electroweakSubRootUniqueInsideCombinedRoots
+  ∷ electroweakSubRootDisjointFromExcludedRoots
+  ∷ electroweakSubRootCompletenessForLamTungSector
+  ∷ electroweakSubRootCoordinateAssignmentA0ToA7
+  ∷ electroweakSubRootEvenSumRestrictsLamTungRelation
   ∷ []
 
 data LilaR3IdentityNoPromotionGuard : Set where
@@ -189,6 +226,8 @@ data LilaR3IdentityNoPromotionGuard : Set where
   noLamTungProofFabricated :
     LilaR3IdentityNoPromotionGuard
   noE8CarrierPromotionFromR2CountSupport :
+    LilaR3IdentityNoPromotionGuard
+  noE8CarrierPromotionFromConcreteGeneratorsOnly :
     LilaR3IdentityNoPromotionGuard
   noCliffordBindingAsPhysicalProof :
     LilaR3IdentityNoPromotionGuard
@@ -202,9 +241,24 @@ canonicalLilaR3IdentityNoPromotionGuard =
   ∷ noDrellYanCleanFreezeClaim
   ∷ noLamTungProofFabricated
   ∷ noE8CarrierPromotionFromR2CountSupport
+  ∷ noE8CarrierPromotionFromConcreteGeneratorsOnly
   ∷ noCliffordBindingAsPhysicalProof
   ∷ noPhiStarProjectionReceipt
   ∷ []
+
+data LilaR3ExecutionReadiness : Set where
+  generatorSurfaceAvailableButProofClosureMissing :
+    LilaR3ExecutionReadiness
+  readyForExhaustiveIdentityCheckAfterE8Receipt :
+    E8RootEnumerationReceipt →
+    LilaR3ExecutionReadiness
+
+data ElectroweakSubRootRestrictionReceipt : Set where
+
+electroweakSubRootRestrictionReceiptImpossibleHere :
+  ElectroweakSubRootRestrictionReceipt →
+  ⊥
+electroweakSubRootRestrictionReceiptImpossibleHere ()
 
 data LamTungAsE8EvenSumIdentity : Set where
 
@@ -253,6 +307,33 @@ record LamTungAsE8EvenSumIdentityDiagnostic : Setω where
     e8RootEnumerationReceiptGate :
       E8RootEnumerationReceipt →
       ⊥
+
+    executionReadiness :
+      LilaR3ExecutionReadiness
+
+    lane1AvailableConcreteGenerators :
+      List E8.AvailableConcreteE8Generator
+
+    lane1AvailableConcreteGeneratorsAreCanonical :
+      lane1AvailableConcreteGenerators
+      ≡
+      E8.canonicalAvailableConcreteE8Generators
+
+    lane1RemainingProofObligations :
+      List E8.E8RootEnumerationProofObligation
+
+    lane1RemainingProofObligationsAreCanonical :
+      lane1RemainingProofObligations
+      ≡
+      E8.canonicalE8RootEnumerationProofObligations
+
+    lane1NativePropositionalLiftTargets :
+      List E8.E8NativePropositionalLiftTarget
+
+    lane1NativePropositionalLiftTargetsAreCanonical :
+      lane1NativePropositionalLiftTargets
+      ≡
+      E8.canonicalE8NativePropositionalLiftTargets
 
     lane1RequiredReceiptFields :
       List Lane1E8RootEnumerationReceiptField
@@ -311,6 +392,18 @@ record LamTungAsE8EvenSumIdentityDiagnostic : Setω where
     finalReceiptDependenciesAreCanonical :
       finalReceiptDependencies ≡ canonicalLilaR3IdentityDependencies
 
+    electroweakSubRootRestrictionRequirements :
+      List ElectroweakSubRootRestrictionRequirement
+
+    electroweakSubRootRestrictionRequirementsAreCanonical :
+      electroweakSubRootRestrictionRequirements
+      ≡
+      canonicalElectroweakSubRootRestrictionRequirements
+
+    electroweakSubRootRestrictionReceiptGate :
+      ElectroweakSubRootRestrictionReceipt →
+      ⊥
+
     noPromotionGuard :
       List LilaR3IdentityNoPromotionGuard
 
@@ -346,6 +439,20 @@ canonicalLamTungAsE8EvenSumIdentityDiagnostic =
         CliffordTheorem.canonicalCliffordToEvenWaveLiftBridgeTheorem
     ; e8RootEnumerationReceiptGate =
         E8.e8RootEnumerationCompleteImpossibleHere
+    ; executionReadiness =
+        generatorSurfaceAvailableButProofClosureMissing
+    ; lane1AvailableConcreteGenerators =
+        E8.canonicalAvailableConcreteE8Generators
+    ; lane1AvailableConcreteGeneratorsAreCanonical =
+        refl
+    ; lane1RemainingProofObligations =
+        E8.canonicalE8RootEnumerationProofObligations
+    ; lane1RemainingProofObligationsAreCanonical =
+        refl
+    ; lane1NativePropositionalLiftTargets =
+        E8.canonicalE8NativePropositionalLiftTargets
+    ; lane1NativePropositionalLiftTargetsAreCanonical =
+        refl
     ; lane1RequiredReceiptFields =
         canonicalLane1E8RootEnumerationReceiptFields
     ; lane1RequiredReceiptFieldsAreCanonical =
@@ -384,13 +491,20 @@ canonicalLamTungAsE8EvenSumIdentityDiagnostic =
         canonicalLilaR3IdentityDependencies
     ; finalReceiptDependenciesAreCanonical =
         refl
+    ; electroweakSubRootRestrictionRequirements =
+        canonicalElectroweakSubRootRestrictionRequirements
+    ; electroweakSubRootRestrictionRequirementsAreCanonical =
+        refl
+    ; electroweakSubRootRestrictionReceiptGate =
+        electroweakSubRootRestrictionReceiptImpossibleHere
     ; noPromotionGuard =
         canonicalLilaR3IdentityNoPromotionGuard
     ; noPromotionGuardIsCanonical =
         refl
     ; blockedOnR2 =
-        "LILA-R2 currently records count support 112 + 128 = 240 only"
-        ∷ "R3 final receipt needs an eight-dimensional doubled-coordinate carrier, enumerators, membership decisions, duplicate freedom, completeness, norm/inner-product/even-sum laws, and projection compatibility"
+        "LILA-R2 now exposes concrete generator surfaces: integerIndexedRoots length 112, halfIndexedRoots length 128, and combinedIndexedRoots length 240"
+        ∷ "These generator surfaces are not an E8RootEnumerationComplete receipt"
+        ∷ "R3 final receipt still needs root membership decisions, duplicate freedom, disjointness, completeness, norm/inner-product/even-sum laws, and projection compatibility"
         ∷ "The A0..A7 to E8 coordinate assignment cannot be promoted from coordinate slot names alone"
         ∷ "The Clifford even-subalgebra binding is available but awaits an R2-backed E8 coordinate frame before it can carry the Lam-Tung identity target"
         ∷ []

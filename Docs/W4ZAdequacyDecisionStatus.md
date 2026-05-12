@@ -32,6 +32,40 @@ missing accepted luminosity vector ell_i per bin from a real accepted provider p
 
 ## Local Evidence
 
+The t21/t22 public-route and local payload binding audit is:
+
+```text
+logs/research/w4_z_peak_t21_t22_public_intake_20260513.json
+```
+
+It records DOI JSON-LD success for t21/t22, HTTP 403 from this environment for
+the tested HEPData title/numeric JSON/CSV download routes, and checksum-bound
+use of the existing local t21/t22 CSV payloads.
+
+The dirty Z-peak anchor runner artifact is:
+
+```text
+logs/research/w4_z_peak_anchor_dirty_run_20260513.json
+```
+
+It records `chi2/dof = 298.8462841768543`, projection digest
+`7fa002539fef1dc9bd51b22c1d512b4ed7be85417a3afb6f1e9992bbdc3dbdc1`, and no W4
+promotion.
+
+Euler's 2026-05-13 shared PDF preflight also emitted:
+
+```text
+logs/research/w4w5_pdf_ct18_candidate_run_20260513.json
+logs/research/w4w5_pdf_lhapdf_intake_obstruction_20260513.json
+```
+
+Their SHA-256 digests are respectively
+`7b4e5e815c3e65619cd9591734eb00e7c80be0402c6d06c3c8d33d1c8da6609f` and
+`a67318e71b4c18fde71597874f93aa28ab020557f230dd3843f807e40545b88d`. The
+preflight found no real LHAPDF runtime and no local MSHT20 grid, so no W4
+accepted per-bin luminosity vector could be emitted from a real LHAPDF/MSHT
+run.
+
 The only local authority-shaped packet is:
 
 ```text

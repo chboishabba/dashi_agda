@@ -196,9 +196,11 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "CT18NLO archive is present at scripts/data/pdf/CT18NLO.tar.gz; SHA-256 c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213"
         ∷ "CT18NLO central grid is present at scripts/data/pdf/CT18NLO/CT18NLO_0000.dat; SHA-256 375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410"
         ∷ "scripts/extract_ct18_pdf_packet.py parsed the lhagrid1 table and wrote scripts/data/pdf/ct18_dashi_pdf_packet.json"
+        ∷ "Euler 2026-05-13 reran the CT18 equivalent-table candidate at logs/research/w4w5_pdf_ct18_candidate_run_20260513.json; SHA-256 7b4e5e815c3e65619cd9591734eb00e7c80be0402c6d06c3c8d33d1c8da6609f"
+        ∷ "Euler 2026-05-13 emitted logs/research/w4w5_pdf_lhapdf_intake_obstruction_20260513.json; SHA-256 a67318e71b4c18fde71597874f93aa28ab020557f230dd3843f807e40545b88d"
         ∷ "local fixed-x u-quark xfxQ extraction gives W5 correction 1.0506681065158017 with gap 0.17021949971580164 from target 0.8804486068"
         ∷ "prediction baseline inspected at DASHI.Physics.Prediction.sigma_dashi:predict_ratio_106_170_over_76_106, which computes sigma_DASHI(106-170, phi bin) / sigma_DASHI(76-106, phi bin)"
-        ∷ "python importlib.util.find_spec(\"lhapdf\") returned absent; lhapdf-config and lhapdf executables were not found on PATH"
+        ∷ "python importlib.util.find_spec(\"lhapdf\") returned absent; lhapdf-config and lhapdf executables were not found on PATH; no local MSHT20 grid was found by the 2026-05-13 preflight"
         ∷ []
     ; rapidityIntegratedConventionAudit =
         "scripts/extract_ct18_pdf_packet.py now also evaluates a rapidity-window Drell-Yan light-quark luminosity convention over the local CT18NLO grid"

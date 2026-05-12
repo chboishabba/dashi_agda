@@ -242,6 +242,43 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
       ≡
       true
 
+    canonicalHEPDataRecordMetadataUrl :
+      String
+
+    canonicalHEPDataRecordMetadataFetchStatus :
+      String
+
+    canonicalHEPDataRecordMetadataSha256 :
+      String
+
+    canonicalHEPDataRecordMetadataIdentifiesT43T44 :
+      Bool
+
+    canonicalHEPDataRecordMetadataIdentifiesT43T44IsTrue :
+      canonicalHEPDataRecordMetadataIdentifiesT43T44
+      ≡
+      true
+
+    canonicalHEPDataT43DownloadUrl :
+      String
+
+    canonicalHEPDataT44DownloadUrl :
+      String
+
+    canonicalHEPDataT43DownloadAttemptStatus :
+      String
+
+    canonicalHEPDataT44DownloadAttemptStatus :
+      String
+
+    canonicalDownloadAttemptBindsTableChecksum :
+      Bool
+
+    canonicalDownloadAttemptBindsTableChecksumIsFalse :
+      canonicalDownloadAttemptBindsTableChecksum
+      ≡
+      false
+
     providerCanonicalT43ChecksumOrEquivalent :
       String
 
@@ -448,10 +485,32 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         refl
     ; localT43T44HeadersValidatedIsTrue =
         refl
+    ; canonicalHEPDataRecordMetadataUrl =
+        "https://www.hepdata.net/record/ins2079374?format=json"
+    ; canonicalHEPDataRecordMetadataFetchStatus =
+        "fetched 2026-05-13; metadata route succeeded and identified t43/t44, but table payload downloads returned HTTP 403"
+    ; canonicalHEPDataRecordMetadataSha256 =
+        "fde88f3acf0b07ccf4be9ddbf311249d5eedf81ca43017a71376dd9a5b1fb36d"
+    ; canonicalHEPDataRecordMetadataIdentifiesT43T44 =
+        true
+    ; canonicalHEPDataRecordMetadataIdentifiesT43T44IsTrue =
+        refl
+    ; canonicalHEPDataT43DownloadUrl =
+        "https://www.hepdata.net/download/table/ins2079374/phistar mass 50-76 over mass 76-106/csv"
+    ; canonicalHEPDataT44DownloadUrl =
+        "https://www.hepdata.net/download/table/ins2079374/Covariance matrices for phistar mass 50-76 over mass 76-106/csv"
+    ; canonicalHEPDataT43DownloadAttemptStatus =
+        "CLI HTTP 403 from direct endpoint; user-supplied browser JSON staged at logs/research/provider_inputs/hepdata_ins2079374/t43_canonical.json sha256 5cfefe5a5a99c415f9225a3515383e8ce5e9a874861ff6c5fc08365871bfd340 with 18/18 semantic row matches"
+    ; canonicalHEPDataT44DownloadAttemptStatus =
+        "CLI HTTP 403 from direct endpoint; user-supplied browser JSON staged at logs/research/provider_inputs/hepdata_ins2079374/t44_canonical.json sha256 2dfa2abe120981f1f8379d95c8d6e0362394c6f6c8fed01dd45fc76a3e2b660b with 324/324 total-covariance row matches"
+    ; canonicalDownloadAttemptBindsTableChecksum =
+        false
+    ; canonicalDownloadAttemptBindsTableChecksumIsFalse =
+        refl
     ; providerCanonicalT43ChecksumOrEquivalent =
-        "awaiting provider canonical HEPData t43 checksum or immutable equivalent"
+        "candidate canonical JSON payload sha256 5cfefe5a5a99c415f9225a3515383e8ce5e9a874861ff6c5fc08365871bfd340; accepted authority response still required"
     ; providerCanonicalT44ChecksumOrEquivalent =
-        "awaiting provider canonical HEPData t44 checksum or immutable equivalent"
+        "candidate canonical JSON payload sha256 2dfa2abe120981f1f8379d95c8d6e0362394c6f6c8fed01dd45fc76a3e2b660b; accepted authority response still required"
     ; providerCanonicalTableChecksumBindingPresent =
         false
     ; providerCanonicalTableChecksumBindingPresentIsFalse =
@@ -461,7 +520,7 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
     ; tableChecksumBoundIsFalseUntilProviderAttestation =
         refl
     ; exactRemainingChecksumGap =
-        "tableChecksumBound: authoritative HEPData t43/t44 table checksum or provider-equivalent immutable table binding is absent"
+        "tableChecksumBound: canonical t43/t44 JSON payloads are staged and semantically checked; accepted external authority response over those payloads is still absent"
     ; claimScopeBoundary =
         "Claim scope is limited SM+GR empirical coordination for the bounded below-Z t43 lane"
         ∷ "This packet is not a broad unification claim"
@@ -502,9 +561,15 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         ∷ "projectionTrace: per-bin projection digest cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79"
         ∷ "candidateComparisonTrace: logs/research/w3_frozen_3205d74_t43_comparison_20260513.json sha256 92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238 chi2/dof 2.1565191176275618"
         ∷ "localSourceTableChecksumTrace: t19 1a1d280da645f4c55aba73aabf1b398a3fd9614532c363d972018f194b653677; t20 fa4b694211862d4b07b761d0dab77c8fe1016d2ccd5015dc6f7bc3272c34201a"
+        ∷ "canonicalSourceJsonTrace: user-supplied HEPData JSONs staged at logs/research/provider_inputs/hepdata_ins2079374/t19_canonical.json sha256 c3b5d5cba53e6f0a85cac9b8de077073177d170d13d8e1efdf35db085a45adb7 and t20_canonical.json sha256 2caae4b6eff3477ac079851afb1c75aa772e1e7bf493b93a830d365828d2d583"
+        ∷ "canonicalSourceJsonSemanticTrace: t19 18/18 source rows match local CSV values; t20 324/324 total-covariance entries match local CSV; these bind absolute-source context only, not the active t43/t44 ratio authority payload"
         ∷ "localTableChecksumTrace: t43 0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b; t44 3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b"
+        ∷ "canonicalRatioJsonTrace: user-supplied HEPData JSONs staged at logs/research/provider_inputs/hepdata_ins2079374/t43_canonical.json sha256 5cfefe5a5a99c415f9225a3515383e8ce5e9a874861ff6c5fc08365871bfd340 and t44_canonical.json sha256 2dfa2abe120981f1f8379d95c8d6e0362394c6f6c8fed01dd45fc76a3e2b660b"
+        ∷ "canonicalRatioJsonSemanticTrace: t43 18/18 ratio rows match local CSV; t44 324/324 total-covariance entries match local CSV; accepted authority token is still not constructed here"
+        ∷ "canonicalMetadataTrace: HEPData record metadata fetched from https://www.hepdata.net/record/ins2079374?format=json with sha256 fde88f3acf0b07ccf4be9ddbf311249d5eedf81ca43017a71376dd9a5b1fb36d; it identifies DOI t43/t44 and canonical download URLs"
+        ∷ "canonicalPayloadAttemptTrace: direct CLI HEPData table payload downloads for t43/t44 returned HTTP 403, then browser-downloaded canonical JSON payloads were supplied and staged"
         ∷ "localHEPR28ReceiptTrace: t43/t44 checksums match HEPDataRatioTableArtifactReceipt and manifest scripts/data/hepdata/ins2079374_t43_t44.sha256"
-        ∷ "remainingChecksumTrace: tableChecksumBound still requires provider attestation of authoritative HEPData t43/t44 payload checksums or equivalent immutable table records"
+        ∷ "remainingChecksumTrace: canonical t43/t44 JSON payloads are bound locally; W3 still requires accepted external authority response before token consumption or promotion"
         ∷ "witnessTrace: bin 12 pred 0.0486590199823977 data 0.049758 unc 0.00048197510309143566 pull -2.280159308132989"
         ∷ "boundaryTrace: token-only intake request; no accepted receipt, evidence-backed target, B4 promotion, origin promotion, W4/W5/W8 promotion, or broad unification claim"
         ∷ []
@@ -525,7 +590,10 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         ∷ "authorityEvidence: HEP-R53 runner per-bin non-collapse receipt plus public HEPData t43/t44 source fields"
         ∷ "candidateComparison: candidate-pass-no-authority-token chi2/dof 2.1565191176275618 artifact sha256 92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238"
         ∷ "localChecksumRoute: HEP-R28 local t43/t44 checksum receipt is bound, with CSV DOI headers validated"
-        ∷ "remainingChecksumObligation: tableChecksumBound"
+        ∷ "canonicalMetadataRoute: HEPData record metadata fetched and identifies t43/t44 DOI/download URLs; direct CLI payload attempts returned HTTP 403"
+        ∷ "canonicalRatioJsonRoute: browser-downloaded t43/t44 JSON payloads are staged, checksum-bound, and semantically checked"
+        ∷ "canonicalSourceJsonRoute: t19/t20 JSONs are now staged and semantically checked; W3 still needs t43/t44 authoritative payload binding for the ratio comparison"
+        ∷ "remainingChecksumObligation: accepted authority response over the staged canonical t43/t44 payloads"
         ∷ "traceabilityChecklist: providerTraceabilityChecklist"
         ∷ "claimScope: limited SM+GR empirical coordination for bounded below-Z t43, not broad unification"
         ∷ "providerResponse: supply the accepted authority token or return typed authority-unavailable/mismatch diagnostic"
@@ -535,7 +603,7 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
     ; providerFacingHandoffPacketIsFinalIsTrue =
         refl
     ; exactFirstMissingBlocker =
-        "W3AcceptedEvidenceAuthorityToken remains externally outstanding; tableChecksumBound remains absent"
+        "W3AcceptedEvidenceAuthorityToken remains externally outstanding; canonical t43/t44 JSON payloads are staged but no accepted authority response has consumed them"
     ; exactFirstMissingStatus =
         "request-only final handoff; first missing = W3AcceptedEvidenceAuthorityToken; no W3AcceptedAuthorityExternalReceipt or W3AcceptedAuthorityPositiveRoute is constructed in repo"
     ; exactFirstMissingName =
@@ -544,9 +612,9 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
     ; exactFirstMissingNameMatchesAuthorityTokenName =
         refl
     ; stillMissingPacketFields =
-        "providerCanonicalT43ChecksumOrEquivalent"
-        ∷ "providerCanonicalT44ChecksumOrEquivalent"
-        ∷ "tableChecksumBound"
+        "accepted external authority decision over staged t43/t44 canonical JSON payloads"
+        ∷ "W3AcceptedEvidenceAuthorityToken"
+        ∷ "W3AcceptedAuthorityExternalReceipt"
         ∷ []
     }
 
@@ -595,11 +663,11 @@ canonicalW3AcceptedEvidenceAuthorityTokenStillMissingTableChecksumBound :
   W3AcceptedEvidenceAuthorityTokenIntakeRequest.stillMissingPacketFields
     canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
   ≡
-  "providerCanonicalT43ChecksumOrEquivalent"
+  "accepted external authority decision over staged t43/t44 canonical JSON payloads"
   ∷
-  "providerCanonicalT44ChecksumOrEquivalent"
+  "W3AcceptedEvidenceAuthorityToken"
   ∷
-  "tableChecksumBound"
+  "W3AcceptedAuthorityExternalReceipt"
   ∷
   []
 canonicalW3AcceptedEvidenceAuthorityTokenStillMissingTableChecksumBound = refl

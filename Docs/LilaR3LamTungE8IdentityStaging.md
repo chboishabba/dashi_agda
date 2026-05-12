@@ -1,7 +1,7 @@
 # LILA-R3 Lam-Tung/E8 Identity Staging
 
 Date: `2026-05-13`
-Status: `staged behind LILA-R2; skeleton-only; non-promoting`
+Status: `staged behind LILA-R2 proof closure; skeleton-only; non-promoting`
 Owner: `Lie-class worker / DASHI Lane 4 LILA-R3 staging`
 
 This document stages LILA-R3 as a future proof obligation, not as a theorem.
@@ -16,7 +16,8 @@ DASHI.Physics.Closure.LamTungAsE8EvenSumIdentity.E8RootEnumerationReceipt
 
 `E8RootEnumerationComplete` is constructorless today, so the R3 surface can name
 the dependency and proof obligations but cannot inhabit the Lam-Tung/E8
-identity.
+identity. The current E8 module now exposes concrete generator surfaces, but
+those generators are not a completion receipt.
 
 ## Current Local Surfaces
 
@@ -25,6 +26,10 @@ identity.
     - integer class: `112`
     - half class: `128`
     - total expected class: `240`
+  - now exposes concrete generator surfaces:
+    - `integerIndexedRoots` / integer family length `112`;
+    - `halfIndexedRoots` / half family length `128`;
+    - `combinedIndexedRoots` / combined family length `240`.
   - keeps `E8RootEnumerationComplete` constructorless.
 - `DASHI.Physics.Closure.LilaE8RootEnumerationReceiptR2`
   - records count support only via `LilaE8RootEnumerationReceiptR2`.
@@ -65,7 +70,53 @@ DASHI.Algebra.Trit.E8RootEnumeration.e8RootEnumerationCompleteImpossibleHere
 ```
 
 This is a no-promotion dependency: it records that R3 cannot proceed until the
-root enumeration receipt exists.
+root enumeration receipt exists. Concrete lists with the right lengths are
+available, but R3 treats them as pre-receipt evidence until the proof-closure
+obligations below are discharged.
+
+## Native Lift And Sub-Root Gate
+
+R3 now imports the exact R2 propositional-lift ledger
+`canonicalE8NativePropositionalLiftTargets`. The ledger names the required
+lift from executable membership/no-duplicate/disjointness/parity checks to
+native root membership, `Unique`/no-duplicate structure, native disjointness,
+native even parity, and integer/half/combined completeness. It is a dependency
+ledger only; it does not inhabit `E8RootEnumerationComplete`.
+
+R3 also records a separate electroweak sub-root restriction gate:
+
+- the electroweak sub-root carrier must be shown inside the completed R2 E8
+  root set;
+- membership in that restricted carrier must be decidable;
+- the restricted roots must be unique inside the combined root list;
+- the restricted roots must be disjoint from the excluded roots;
+- the restricted carrier must be complete for the Lam-Tung electroweak sector;
+- the A0..A7 coordinate assignment must target that restricted carrier;
+- the restricted even-sum law must be proved equivalent to the Lam-Tung
+  relation.
+
+The local placeholder `ElectroweakSubRootRestrictionReceipt` is constructorless,
+with an impossibility eliminator, so no electroweak sub-root restriction is
+claimed here.
+
+## Current Lane 1 Boundary
+
+The R3 diagnostic now records both sides of the Lane 1 state:
+
+- available generator surface:
+  - concrete integer-root generator/list with length `112`;
+  - concrete half-root generator/list with length `128`;
+  - concrete combined generator/list with length `240`;
+- missing proof closure:
+  - integer-family no-duplicates and completeness;
+  - half-family parity soundness, no-duplicates, and completeness;
+  - integer/half disjointness;
+  - combined no-duplicates;
+  - combined E8-shape completeness.
+
+This distinction is important. LILA-R3 may start planning the exhaustive
+Lam-Tung/E8 check against the expected list shapes, but it may not execute or
+promote the identity from generator length alone.
 
 ## Required Lane 1 Fields
 
@@ -182,6 +233,7 @@ The current repo cannot inhabit:
 - `E8RootEnumerationReceipt`;
 - `LamTungRelationAsE8EvenSumObligation`;
 - `LamTungAsE8EvenSumIdentity`;
+- exhaustive 240-root Lam-Tung/E8 identity check;
 - A0..A7 coefficient-definition receipt;
 - A0..A7-to-E8 coordinate-assignment proof;
 - phi-star projection receipt;

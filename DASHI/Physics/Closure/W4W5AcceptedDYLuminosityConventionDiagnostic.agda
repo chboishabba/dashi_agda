@@ -33,6 +33,47 @@ data W4W5DYLuminosityAuthorityReadiness : Set where
   acceptedAuthorityReceiptMissing :
     W4W5DYLuminosityAuthorityReadiness
 
+data CT18DASHIProjectionConventionBindingStatus : Set where
+  localCT18GridConventionBoundToProjectionArtifactsCandidateOnly :
+    CT18DASHIProjectionConventionBindingStatus
+
+data CT18DASHIProjectionConventionResidualField : Set where
+  missingExternalAuthorityPayload :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedCT18ConventionDecision :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedDASHIProjectionConsumptionLaw :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedW4PerBinLuminosityVector :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedW5L43L45Luminosities :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedEfficiencyAcceptanceModel :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedSystematicBudget :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedNormalizationPreservationLaw :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedProviderToRunnerConversionLaw :
+    CT18DASHIProjectionConventionResidualField
+  missingAcceptedComparisonTolerance :
+    CT18DASHIProjectionConventionResidualField
+
+canonicalCT18DASHIProjectionConventionResidualFields :
+  List CT18DASHIProjectionConventionResidualField
+canonicalCT18DASHIProjectionConventionResidualFields =
+  missingExternalAuthorityPayload
+  ∷ missingAcceptedCT18ConventionDecision
+  ∷ missingAcceptedDASHIProjectionConsumptionLaw
+  ∷ missingAcceptedW4PerBinLuminosityVector
+  ∷ missingAcceptedW5L43L45Luminosities
+  ∷ missingAcceptedEfficiencyAcceptanceModel
+  ∷ missingAcceptedSystematicBudget
+  ∷ missingAcceptedNormalizationPreservationLaw
+  ∷ missingAcceptedProviderToRunnerConversionLaw
+  ∷ missingAcceptedComparisonTolerance
+  ∷ []
+
 data W4W5DYLuminosityAuthorityField : Set where
   acceptedPDFSetAuthority :
     W4W5DYLuminosityAuthorityField
@@ -129,6 +170,38 @@ record W4W5AcceptedDYLuminosityConventionDiagnostic : Set where
 
     missingAuthorityFields :
       List W4W5DYLuminosityAuthorityField
+
+    ct18ProjectionBindingStatus :
+      CT18DASHIProjectionConventionBindingStatus
+
+    ct18ProjectionPacketPath :
+      String
+
+    ct18ProjectionT43ArtifactPath :
+      String
+
+    ct18ProjectionT45ArtifactPath :
+      String
+
+    ct18ProjectionBindingArtifactFields :
+      List String
+
+    ct18ProjectionResidualFields :
+      List CT18DASHIProjectionConventionResidualField
+
+    ct18ProjectionResidualFieldsAreCanonical :
+      ct18ProjectionResidualFields
+      ≡
+      canonicalCT18DASHIProjectionConventionResidualFields
+
+    ct18ProjectionBindingNotes :
+      List String
+
+    localCT18ProjectionPayloadPresent :
+      Bool
+
+    externalAuthorityPayloadPresent :
+      Bool
 
     providerReadyReceiptContract :
       List String
@@ -275,6 +348,37 @@ canonicalW4W5AcceptedDYLuminosityConventionDiagnostic =
         ∷ acceptedSourceDOIAuthority
         ∷ acceptedExternalProvenanceAuthority
         ∷ []
+    ; ct18ProjectionBindingStatus =
+        localCT18GridConventionBoundToProjectionArtifactsCandidateOnly
+    ; ct18ProjectionPacketPath =
+        "scripts/data/pdf/ct18_dashi_pdf_packet.json"
+    ; ct18ProjectionT43ArtifactPath =
+        "scripts/data/outputs/t43_projection_v4.json"
+    ; ct18ProjectionT45ArtifactPath =
+        "scripts/data/outputs/t45_projection_v4.json"
+    ; ct18ProjectionBindingArtifactFields =
+        "ct18 packet: accepted_dy_luminosity_convention_status = candidate_local_ct18nlo_convention_not_accepted"
+        ∷ "ct18 packet: W4W5_luminosity_convention formula, mass windows, scale choice, eta_cut, flavour weights, n_x, and n_m are locally recorded"
+        ∷ "ct18 packet: W4_luminosity_shape contains local candidate per-bin luminosity proxies, not accepted ell_i values"
+        ∷ "ct18 packet: W5 luminosity ratios are recorded for fixed-x, t45/z_peak, and t45/t43 negative probes"
+        ∷ "t43 projection artifact: dashi-hepdata-t43-projection-v1 JSON with R_dashi, R_data, residuals, and bin bindings"
+        ∷ "t45 projection artifact: dashi-hepdata-t43-projection-v1 JSON with R_dashi, R_data, residuals, and bin bindings for the above-Z surface"
+        ∷ []
+    ; ct18ProjectionResidualFields =
+        canonicalCT18DASHIProjectionConventionResidualFields
+    ; ct18ProjectionResidualFieldsAreCanonical =
+        refl
+    ; ct18ProjectionBindingNotes =
+        "The local CT18 grid convention is now bound to the DASHI projection artifact paths as candidate provenance"
+        ∷ "This binding is not an external PDF authority claim and does not accept the CT18 luminosity convention"
+        ∷ "The W4 per-bin values in the packet are local luminosity proxies; they are not accepted provider ell_i inputs"
+        ∷ "The W5 L43/L45 values are local diagnostics; no provider has accepted them as runner inputs"
+        ∷ "DASHI projection consumption still needs an accepted normalization-preservation and provider-to-runner conversion law"
+        ∷ []
+    ; localCT18ProjectionPayloadPresent =
+        true
+    ; externalAuthorityPayloadPresent =
+        false
     ; providerReadyReceiptContract =
         "provider receipt must explicitly say whether this candidate formula is accepted, replaced, or rejected"
         ∷ "provider receipt must bind each accepted field to a source path, DOI, checksum, command/API, and timestamp"

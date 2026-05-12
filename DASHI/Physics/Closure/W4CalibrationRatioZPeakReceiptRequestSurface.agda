@@ -227,6 +227,12 @@ record W4ZPeakDirtyBoundaryCheckSupportDiagnostic : Set where
     runnerGeneralizationGap :
       String
 
+    publicDownloadAccessStatus :
+      String
+
+    publicIntakeLogPath :
+      String
+
     numericAnchorStatus :
       String
 
@@ -255,7 +261,7 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
     { supportStatus =
         preparedWithLocalT21T22CacheAndRunnerParseOnly
     ; localAuditDate =
-        "2026-05-05 local HEPData retrieval and dirty-z-peak parse audit"
+        "2026-05-13 local HEPData t21/t22 public-route audit and dirty-z-peak rerun"
     ; firstMissingLocalArtifact =
         "present: scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv sha256 4ece677d0e2640a786351e19d0190454aeb3dc49f7e6fbda4814e3fe88dc3270"
     ; secondMissingLocalArtifact =
@@ -270,7 +276,10 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
     ; requiredCovarianceLocalPath =
         "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
     ; observedLocalCacheFiles =
-        "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv"
+        "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv"
+        ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv"
+        ∷ "scripts/data/hepdata/ins2079374_t21_t22.sha256"
+        ∷ "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv"
         ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_over_mass_76-106_t44.csv"
         ∷ "scripts/data/hepdata/ins2079374_phistar_mass_106-170_over_mass_76-106_t45.csv"
         ∷ "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_106-170_over_mass_76-106_t46.csv"
@@ -294,11 +303,15 @@ canonicalW4ZPeakDirtyBoundaryCheckSupportDiagnostic =
     ; runnerProbeWithoutFreezeStatus =
         "timeout 30s python scripts/run_t43_projection.py --mode dirty-z-peak --data t21 --covariance t22 exits 2 before data access: required --freeze-hash is missing"
     ; runnerProbeWithFreezeStatus =
-        "timeout 30s python scripts/run_t43_projection.py --freeze-hash W4-zpeak-shape-fit --mode dirty-z-peak --data t21 --covariance t22 --prediction-api DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape exits 0 and emits a non-promoting scalar shape-fit artifact"
+        "python scripts/run_t43_projection.py --freeze-hash W4-zpeak-anchor-t21-t22-20260513 --mode dirty-z-peak --data scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv --covariance scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv --prediction-api DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape exits 0 and emits logs/research/w4_z_peak_anchor_dirty_run_20260513.json"
     ; runnerGeneralizationGap =
         "CLI accepts --data/--covariance and binds t21/t22 digests/schema; W4 dirty projection accepts a declared Z-peak shape callable but the current shape-fit is not adequate"
+    ; publicDownloadAccessStatus =
+        "DOI JSON-LD resolves t21/t22 to HEPData records 129900/129901; title and numeric JSON/CSV download routes returned HTTP 403 from this environment, so existing local CSV payloads remain the checksum-bound numeric inputs"
+    ; publicIntakeLogPath =
+        "logs/research/w4_z_peak_t21_t22_public_intake_20260513.json"
     ; numericAnchorStatus =
-        "prepared-not-closed: t21 rowCount 18 value column d sigma/d phistar [pb]; t22 total covariance shape 18x18 symmetric; current shape fit chi2/dof 298.8462841768543"
+        "prepared-not-closed: t21 rowCount 18 value column d sigma/d phistar [pb]; t22 total covariance shape 18x18 symmetric; current shape fit chi2/dof 298.8462841768543 with projection digest 7fa002539fef1dc9bd51b22c1d512b4ed7be85417a3afb6f1e9992bbdc3dbdc1"
     ; exactMissingPredictionContract =
         "batch callable module:function whose metadata declares either supportsDirtyZPeakAbsolutePrediction true or supportsDirtyZPeakShapePrediction true; shape callables are scalar-fit by the runner and must not claim upstream pb-unit calibration"
     ; dirtyZPeakShapeFitStatus =

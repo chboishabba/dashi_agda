@@ -8,6 +8,261 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Active Assignment Round -- Hard-Core Mathematical Pressure Points
+
+Round date: `2026-05-13`
+Round owner: `W0 orchestrator / integrator`
+Round status: `returned; integrated; non-promoting`
+orchestrator_id: `hard-core-pressure-points-2026-05-13`
+
+This round follows the exhaustion of the easy scaffold layer. The active front
+is no longer environment setup or prose roadmap alignment; it is the exact
+interfaces and algebra needed for W9, G2, G3/GR, and downstream G6. Workers
+must return an inhabited theorem/consumer only if the current Agda interfaces
+support it. Otherwise they must return a typed obstruction or request surface.
+
+| Lane | Worker | Scope | Required output | Guardrail |
+|---|---|---|---|---|
+| `W9-mdl-kill-consumer` | `Cicero the 2nd` (`019e1dfb-02d9-77b1-ab04-fff7e86597a6`) | W9 kill matrix and `W9MDLTerminationSeamRoute`. | Wire the existing `MDLTerminationSeamWitness` into a policy-safe non-pressure consumer if accepted, or sharpen the missing constructor/request surface. | Do not close W9 unless the active kill matrix consumes the MDL route as an accepted theorem consumer. |
+| `G2-oriented-boundary` | `Averroes the 2nd` (`019e1dfb-1a01-7371-a572-99de1ba8a99a`) | `G2DiscreteCurvatureCarrier` and prime-lattice cochain helpers. | Oriented endpoints, signed boundary/incidence surfaces, and any real small lemmas for `boundaryOfBoundaryZero`. | No degenerate zero curvature carrier and no Maxwell/G2 promotion. |
+| `G3-GR-connection-core` | `Galileo the 2nd` (`019e1dfb-2b33-78a3-99ce-0f24ebc47717`) | `G3PoincareGalileiCarrierChain` and `GRDiscreteBianchiFiniteR`. | Sharpen concrete carrier translation/commutator/metric obligations and the `carrierConnectionIsLeviCivita` / metric-compatibility pressure point. | No Schrodinger, GR, or finite-r Bianchi promotion without inhabited carrier/operator laws. |
+| `G6-embedding-dependencies` | `Laplace the 2nd` (`019e1dfb-3ca9-7b70-a347-bfa2c6aa6644`) | `CrossLaneCommutingTheoremSkeleton`. | Dependency index for actual Maxwell/Schrodinger/GR/empirical embeddings and orthogonality inputs. | G6 remains downstream of G2, G3, GR, and empirical closure. |
+
+Current pressure points:
+
+```text
+W9: MDL witness exists -> missing accepted kill-matrix consumer route
+G2: primeBumpCommutes closed -> missing oriented boundary/incidence d²=0 layer
+G3/GR: carrier records exist -> missing concrete operators and Levi-Civita bridge
+G6: conditional lemmas exist -> missing actual lane embeddings and orthogonality inputs
+```
+
+Returned worker results:
+
+| Worker | Lane | Result | Validation | Promotion boundary |
+|---|---|---|---|---|
+| `Cicero the 2nd` | `W9-mdl-kill-consumer` | Added projection-level wiring from `MDLTerminationSeamWitness.retargetConsumerReceipt` into the existing non-promoting consumer via `consumesWitnessRetargetAcceptance` and `consumesWitnessRetargetScope`. | Targeted Agda passed on W9 MDL seam and kill matrix; scoped diff check passed. | No new `W9KillRouteReceipt` constructor; W9 remains blocked until an accepted `mdlTerminationSeamRoute` or an existing pressure/weighted route is inhabited. |
+| `Averroes the 2nd` | `G2-oriented-boundary` | Added signed-boundary helpers, corrected oriented-edge boundary shape, and `SignedBoundaryIncidenceSummationSurface`. | Targeted Agda passed on `G2DiscreteCurvatureCarrier.agda`. | No SFGC instantiation, no concrete prime-lattice cell carriers, no `δ₁ ∘ δ₀ ≡ 0`, no `DiscreteCurvatureCarrier`, and no Maxwell closure. |
+| `Galileo the 2nd` | `G3-GR-connection-core` | Added G3 carrier-operator/action-law/commutator obligation records and GR metric-compatibility / Levi-Civita pressure surfaces. | Targeted Agda passed on G3 carrier chain and GR finite-r Bianchi modules. | No concrete carrier operator, commutator proof, metric-compatibility witness, finite-r Bianchi theorem, Schrodinger closure, or GR closure. |
+| `Laplace the 2nd` | `G6-embedding-dependencies` | Added conditional `p2ProjectionPreservesOrthogonality` and `G6ActualEmbeddingDependency` / canonical dependency index. | Targeted Agda passed on G6 skeleton. | No G2/G3/G4/G5 section proofs, no actual embeddings, and no G6 closure. |
+| `Kuhn the 2nd` | `W9-mdl-kill-consumer follow-up` | Added `W9MDLTerminationSeamAcceptedRouteRequest` to the kill matrix and wired the MDL route-change request to it. | Targeted Agda passed on W9 MDL seam and kill matrix; scoped diff check passed. | Direct accepted constructor is still blocked by the `BlockerKillConditions` / `W9MDLTerminationSeamRoute` import cycle; W9 remains blocked. |
+| `Noether the 2nd` | `G2-oriented-boundary follow-up` | Added `correctedSquareBoundary`, signed-sum shape lemmas, `correctedSquareBoundaryFromSurface`, and `G2SFGCGaugeFieldCurvatureAPIObstruction`. | Targeted Agda passed on `G2DiscreteCurvatureCarrier.agda`; scoped diff check passed. | First missing remains `missingPrimeLattice2CellLayer`; SFGC sub-gap is `missingConnectionCarrierForSFGCGaugeField`; no curvature carrier or Maxwell closure. |
+| `Copernicus the 2nd` | `G3-carrier-operator follow-up` | Added a unit smoke carrier and inhabited local `PoincareCarrierOperator*` records plus `PoincareSectorCarrier`. | Targeted Agda passed on `G3PoincareGalileiCarrierChain.agda`; scoped diff check passed. | Real IW route still lacks a `DASHIState -> p2 prime-address` interface: projection, `p2Exponent`, state bump/update, and filtration law. |
+| `Mencius the 2nd` | `GR-Levi-Civita follow-up` | Added `GRStandardLeviCivitaAlgebraLawObligation` and `GRCarrierConnectionLeviCivitaDependency`, naming Christoffel symmetry, metric compatibility, six-term Ricci cancellation, and trace=4 laws. | Targeted Agda passed on `GRDiscreteBianchiFiniteR.agda`. | Overall first missing remains `missingFiniteRBaseCarrier`; Levi-Civita/Ricci sub-gap is `sixTermRicciIdentityCancellation` for a selected finite-r metric/connection. |
+
+## Conditional Assignment Round -- Post W2/W3/W9 Closure Next Lanes
+
+Round date: `2026-05-13`
+Round owner: `W0 orchestrator / integrator`
+Round status: `assigned conditionally; gated on future W2/W3/W9 close`
+orchestrator_id: `conditional-post-w2-w3-w9-next-lanes-2026-05-13`
+
+This round follows the user's hypothetical branch: assume a future commit
+actually inhabits the W2 authority token, W3 authority token, and W9
+canonical-15 case-split/pressure witness. That assumption is not true in the
+current repo; the current repo still records W2/W3 constructorless-token
+obstructions and W9's missing `Canonical15PressureWitnessType`.
+
+The workers below may stage formalisms, runners, intake receipts, or sharpened
+obligations. They must not claim W4, W5, G2, G3, GR, G6, W7, or the
+non-limited paper unless the required typed receipt/theorem is actually
+inhabited.
+
+| Lane | Worker | Scope | Required output | Guardrail |
+|---|---|---|---|---|
+| `W4W5-PDF-shared-intake` | `Euler the 2nd` | LHAPDF/CT18/MSHT W4/W5 intake scripts, logs, W5 PDF receipt surfaces, W4/W5 blocker docs. | Real PDF-intake run or exact tool/provider obstruction; if runnable, checksum-bound correction factors for W4 Z-peak and W5 t45. | No W4/W5 promotion without accepted PDF/convention receipt and recorded numerics. |
+| `W4-calibration-authority` | `Lagrange the 2nd` | W4 calibration authority request, physical-unit authority, cross-band chemistry witness docs/modules. | Provider-facing calibration-authority receipt/request plus quotient-sensitive cross-band witness surface. | No Candidate256 physical calibration token fabrication. |
+| `W3-noncollapse-hardening` | `Noether-W3 the 2nd` | W3 non-collapse runner/receipt surfaces and canonical HEPData logs. | Confirm runner-side witness is complete, or add provider-grade non-collapse request/receipt surface. | This does not substitute for `W3AcceptedEvidenceAuthorityToken`. |
+| `G2-Maxwell-full-theorem` | `Faraday the 2nd` | Maxwell scope/theorem modules. | Curvature-to-field-strength and discrete Maxwell equation obligation/theorem surface, or exact first-missing lemma. | No G2 closure unless `MaxwellGaugeFieldEquationTheorem` is inhabited. |
+| `G3-Schrodinger-full-theorem` | `Heisenberg the 2nd` | Schrodinger scope/theorem modules. | Poincare-to-Galilei contraction, Hamiltonian, unitarity, and MDL-to-L2 seam surface, or exact missing lemma. | No G3 closure unless `SchrodingerEvolutionTheorem` is inhabited. |
+| `GR-matter-coupling` | `Einstein the 2nd` | GR first-order, matter coupling, Einstein equation candidate modules. | W4-gated matter/stress-energy/finite-r Bianchi obligation surface or theorem if already supported. | No GR/G4 closure before W4 calibration authority and finite-r Bianchi are inhabited. |
+
+Conditional dependency map:
+
+```text
+future W2/W3/W9 close
+  ├── W4W5-PDF-shared-intake ──► W4 shape / W5 t45 advancement
+  ├── W4-calibration-authority ─► GR matter coupling preconditions
+  ├── W3-noncollapse-hardening ─► W3 authority packet hardening only
+  ├── G2-Maxwell-full-theorem ──► G6 precondition
+  ├── G3-Schrodinger-full-theorem ─► G6 precondition
+  └── GR-matter-coupling ───────► G6 precondition after W4
+
+G2 + G3 + GR + G5 ──► future G6
+G6 + settled W4/W5/W9/W2/W3 ──► future W7 claim governance
+```
+
+Returned worker results:
+
+| Worker | Lane | Result | Validation | Promotion boundary |
+|---|---|---|---|---|
+| `Euler the 2nd` | `W4W5-PDF-shared-intake` | Added fail-closed LHAPDF/MSHT/CT18 preflight, focused tests, a fresh CT18 equivalent-table candidate run, and exact provider-authority obstruction artifact. System LHAPDF is now present (`6.5.5`) and resolves repo-local CT18NLO with `LHAPDF_DATA_PATH=/usr/share/lhapdf/LHAPDF:$PWD/scripts/data/pdf`; no local MSHT20 grid was found. | Preflight pytest, JSON validation, checksum verification, targeted Agda on W5 PDF/CT18/shared diagnostic surfaces, and fail-closed runner probes passed. | CT18NLO grid and runtime are available, but still candidate evidence only; no W4/W5 promotion, accepted PDF carrier, or accepted DY convention receipt. |
+| `Lagrange the 2nd` | `W4-calibration-authority` | Added a provider response/receipt surface and parameterized quotient-sensitive cross-band witness surface to `W4PhysicalUnitAuthorityRequestSurface.agda`. The witness uses an existing `QuotientLawAtWitness`, TSFV `T` involution, compatibility, positive non-collapse, and `T`-flipped non-collapse. | Targeted Agda passed on W4 physical-unit authority and Z-peak request surfaces; scoped diff check passed. | No `Candidate256PhysicalCalibrationAuthorityToken`, external calibration receipt, or W4 promotion. |
+| `Noether-W3 the 2nd` | `W3-noncollapse-hardening` | Added a fail-closed W3 non-collapse checker and tests binding the frozen comparison checksum, bin-12 witness, canonical t43/t44 checksums, and Agda runner receipt literals. Runner-side non-collapse is complete locally via `canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt`. | Script, pytest, checksum, JSON, targeted Agda, and Python compile validations passed. | Provider-grade external non-collapse remains absent; no `W3AcceptedEvidenceAuthorityToken` or W3 promotion. |
+| `Faraday the 2nd` | `G2-Maxwell-full-theorem` | Added `G2MaxwellCurvatureDiscreteEquationSurface` and obstruction certificates to the Maxwell scope. Exact first missing field is `DiscreteCurvatureCarrier for SFGC.GaugeField`; after that, the first missing lemma is `curvatureToFieldStrengthFromShiftGaugeConnection`. | Targeted 30s Agda checks passed on Maxwell scope, finite gauge coupling, and gauge current consistency. | No `MaxwellGaugeFieldEquationTheorem`; G2 remains open. |
+| `Heisenberg the 2nd` | `G3-Schrodinger-full-theorem` | Tightened Schrodinger scope with inspected finite support surfaces and typed obligations for Poincare-to-Galilei contraction, Galilei/Hamiltonian compatibility, CCR compatibility, and MDL-to-L2 seam. | Targeted Agda on Schrodinger scope passed. | No `SchrodingerEvolutionTheorem`; G3 remains open with exact missing fields `poincareToGalileiContractionDerived`, `galileiHamiltonianCompatibilityDerived`, `ccrCompatibilityDerived`, and `mdlToL2SeamDerived`. |
+| `Einstein the 2nd` | `GR-matter-coupling` | Added `GRFiniteRW4BianchiMatterTheoremObligation`, parameterized by a future `W4MatterStressEnergyInterfaceReceipt`, plus a canonical blocked diagnostic surface. | Targeted Agda passed on GR first-order scope, Einstein candidate, W4 matter/stress interface, and MDL internal bridge. | No W4 calibration authority, finite-r Bianchi theorem, sourced Einstein equation, GR/G4/G6 closure, or GR/QFT promotion. |
+
+## Active Assignment Round -- W2/W3 Token and W9 Proof Follow-up
+
+Round date: `2026-05-13`
+Round owner: `W0 orchestrator / integrator`
+Round status: `assigned; parallel work in progress; guarded`
+orchestrator_id: `w2-w3-w9-followup-2026-05-13`
+
+This follow-up tests the user's latest proposed "today" tranche against the
+actual repo interfaces. It is deliberately narrow: the workers may construct a
+token or theorem only if the existing Agda datatypes and the landed governance
+policy supply a real constructor path. Otherwise they must return a typed
+obstruction or request surface.
+
+| Lane | Worker | Scope | Required output | Guardrail |
+|---|---|---|---|---|
+| `W2-governance-token` | `Ohm the 2nd` (`019e1d91-b261-7c21-a1b2-690549ed39e3`) | W2 promotion/governance modules and directly related docs. | `NaturalP2ConvergencePromotionAuthorityToken` if constructible, else exact typed obstruction/request surface. | Do not bypass a constructorless token with prose or policy text. |
+| `W3-authority-token` | `McClintock the 2nd` (`019e1d91-dbc1-7d12-abac-0f3a6ead25cb`) | W3 accepted-evidence receipt/intake modules, canonical HEPData payload logs, and non-collapse surfaces. | `W3AcceptedEvidenceAuthorityToken` if constructible, else exact missing constructor/field; also assess non-collapse witness status. | Do not claim W3 promotion unless the token is actually inhabited. |
+| `W9-canonical15-proof` | `Hubble the 2nd` (`019e1d92-0077-7b50-891a-05df5d157337`) | W9 cancellation-pressure modules and the real contraction/signature interfaces. | Case-split or `ContractionForcesQuadraticTheorem` route if supported, else sharpened obstruction naming the missing interface. | Do not revive the refuted `refl` route (`2` versus `10`). |
+
+Expected validation:
+- Targeted Agda on touched modules.
+- JSON/checksum validation for any W3 provider artifacts touched.
+- `git diff --check` on touched docs/code.
+
+Returned worker results:
+
+| Worker | Lane | Result | Validation | Promotion boundary |
+|---|---|---|---|---|
+| `Ohm the 2nd` | `W2-governance-token` | Added `W2GovernanceTokenConstructorObstruction.agda` and its doc note. The governance policy permits the `refl-proved-internal` evidence class, but `tokensConstructedByPolicy = false` and `NaturalP2ConvergencePromotionAuthorityToken` is still constructorless. | Targeted Agda passed on the W2 obstruction, W2 promotion authority receipt, and natural p2 convergence promotion obligation. | No W2 authority token or `NaturalP2ConvergencePromotionReceipt` is constructed; W2 remains blocked on a real token constructor/policy hook plus downstream natural/p2 payload receipts. |
+| `McClintock the 2nd` | `W3-authority-token` | Added `W3AcceptedEvidenceAuthorityTokenGovernanceObstruction.agda` plus JSON audit log. Canonical t43/t44 payloads are bound and runner-side non-collapse is already represented, but the policy is only permission-level and `W3AcceptedEvidenceAuthorityToken` remains constructorless. | Targeted Agda passed on W3 obstruction/intake/receipt/non-collapse modules; JSON logs, provider checksums, and HEPData bridge tests passed. | No `W3AcceptedEvidenceAuthorityToken` or external receipt is constructed; W3 remains blocked on a real token constructor/governance hook or external value of the exact token type. |
+| `Hubble the 2nd` | `W9-canonical15-proof` | Strengthened `W9CancellationPressureQcoreCompatibilityReceipt.agda` with `Canonical15PressureWitnessType` and inspected-route statuses. The case-split and `ContractionForcesQuadraticTheorem` routes still require a pressure witness identifying cancellation pressure with transported contraction energy; `ContractForces31Signature` has no such pressure field, and the B4 weighted-Qcore bound has no W9 kill constructor. | Targeted Agda passed on W9 receipt, next-obligation, blocker-kill, and contraction-forces modules; scoped `git diff --check` passed. | No `W9KillReceipt` or compatibility receipt is inhabited; W9 remains blocked. |
+
+## Active Assignment Round -- Non-Limited Paper Closure Bundle
+
+Round date: `2026-05-13`
+Round owner: `W0 orchestrator / integrator`
+Round status: `assigned; parallel work in progress; non-promoting`
+orchestrator_id: `non-limited-paper-closure-bundle-2026-05-13`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- The non-limited paper path needs one theorem-facing dependency object rather
+  than more lane-local prose. Current W3 is narrowed to authority closure;
+  G2/G3/G4/G6 are scoped obligations; W9 remains unresolved or retargeted.
+
+R:
+- Assign disjoint worker lanes for authority governance, W9 pressure status,
+  W4 Z-peak data anchor, CT18/DY convention binding, G2/G3/G4 theorem kernels,
+  and the paper-level claim-governance bundle.
+- Preserve the latest strict sequence as a roadmap, not as a promotion:
+  immediate no-dependency lanes first, then CT18/W4 intake, then theorem
+  closures, then final G4/W7 packaging.
+
+C:
+- `Raman the 2nd`: Phase 1 governance ruling on W2/W3 constructorless
+  authority tokens, with an explicit self-issuance-vs-countersignature fork.
+- `Nietzsche the 2nd`: Phase 1 W9 canonical-15 pressure equality, or exact
+  typed obstruction if the proposed `refl` route does not normalize.
+- `Lovelace the 2nd`: Phase 1 t21/t22 public data intake and W4 Z-peak anchor
+  run, producing numerics or a precise access/runner obstruction.
+- `Carson the 2nd`: Phase 2 CT18/DY convention binding and LHAPDF-compatible
+  CT18NLO/MSHT20 PDF intake contract for W4/W5.
+- `Archimedes the 2nd`: Phase 3 G2/G3/GR theorem-kernel records, including
+  U(1) sector/Killing restriction, NR contraction/continuum seam, and finite-r
+  Bianchi/matter-coupling obligations.
+- `Helmholtz the 2nd`: Phase 4 paper dependency bundle and W7 claim-governance
+  receipt, binding all paper-scope sentences to typed receipts/theorems or
+  explicit non-claim boundaries.
+
+S:
+- Immediate no-dependency targets:
+  governance ruling on W2/W3 tokens; W9 canonical-15 equality test; t21/t22
+  download plus W4 dirty Z-peak anchor.
+- Short-term targets:
+  CT18 convention binding, LHAPDF/PDF intake, and W4 calibration authority plus
+  cross-band chemistry witness.
+- Medium-term theorem targets:
+  G2 Maxwell closure, G3 Schrodinger closure, GR Einstein/Bianchi/matter
+  coupling, and G6 cross-lane commuting diagrams.
+- Final packaging targets:
+  G4 QFT/GR full consumer and W7 claim-governance receipt.
+
+G:
+- No worker may construct W3/W2 authority tokens, W4/W5 promotion, G2/G3/G4
+  theorem closure, G6 closure, W9 closure, or non-limited paper admissibility
+  by prose. Each lane must return an inhabitant, typed obstruction, or exact
+  missing-field surface.
+
+F:
+- The expected integration target is a typed `NonLimitedPaperBundle` or
+  equivalent dependency object whose admissibility is computed from fields, not
+  narrated after the fact.
+- Critical path currently recorded for worker routing:
+  governance ruling -> W4 anchor -> G2/G3/GR theorem work -> W7 claim
+  governance. CT18/W5 and W9 run in parallel and remain non-promoting until
+  their receipt surfaces are inhabited.
+
+Returned worker results:
+
+| Worker | Lane | Result | Validation | Promotion boundary |
+|---|---|---|---|---|
+| `Raman the 2nd` | Phase 1 W2/W3 governance ruling | Added `Docs/DASHIGovernanceSelfIssuancePolicy.md` and `Docs/W2W3AuthorityGovernanceFork.md`. Policy permits bounded self-issuance for `refl-proved-internal` and `public-doi-frozen-commit` classes, with required audit/revocation/no-overreach fields. | Governance-doc term scans and scoped diff checks completed. | `tokensConstructedByThisPolicy = false`; no W2 or W3 authority token is populated by the policy alone. |
+| `Nietzsche the 2nd` | Phase 1 W9 canonical-15 equality | Tested the proposed `mkCanonical` `refl` route and refuted it: at dimension 15, `maxCancellationPressure` normalizes to `2` while `weightedQcoreSupport` normalizes to `10`. | Targeted Agda on `W9CancellationPressureQcoreCompatibilityReceipt.agda` passed. | W9 remains obstructed; no W9 kill condition or compatibility receipt is inhabited. |
+| `Lovelace the 2nd` | Phase 1 t21/t22 W4 anchor | Resolved DOI JSON-LD for t21/t22, recorded 403 on direct table download routes, checksum-bound existing local t21/t22 CSV payloads, and completed dirty Z-peak run with `chi2/dof = 298.8462841768543`, `chi2 = 5080.386831006523`, `dof = 17`, fitted scale `230534508.31238452`. | JSON formatting, checksum verification, and targeted Agda on W4 anchor/request surfaces passed. | W4 adequacy remains blocked on accepted DY luminosity convention authority; no W4 promotion. |
+| `Carson the 2nd` | Phase 2 CT18/DY convention and PDF intake | Bound local CT18NLO candidate grid/projection paths and recorded `localCT18GridParsed = true`; expanded LHAPDF-6 CT18NLO/MSHT20 intake contract and first-missing accepted convention fields. | `jq` inspection plus targeted Agda on DY convention and W5 PDF intake surfaces passed. | Candidate provenance only; no PDF authority, accepted convention, W5 correction, or W5 promotion. |
+| `Archimedes the 2nd` | Phase 3 G2/G3/GR theorem kernels | Added `G2MaxwellTheoremKernel`, `G3SchrodingerTheoremKernel`, and `GRFiniteRTheoremKernel` records to the existing scope modules. | Targeted Agda on all three touched modules passed. | Obligation packets only; no Maxwell, Schrodinger, Einstein/GR, GRQFT, G2, G3, G4, or G6 closure. |
+| `Helmholtz the 2nd` | Phase 4 dependency bundle / W7 claim governance | Added `NonLimitedPaperRoadmapBundle`, computed `paperAdmissibility`, and a canonical blocked claim-governance receipt. | Targeted Agda on `NonLimitedPaperBundleClaimGovernance.agda` passed. | Current canonical admissibility is `paperBlocked missingRoadmapGovernance`; no non-limited paper or full-unification promotion. |
+
+## Active Assignment Round -- W3 Canonical HEPData JSON Intake
+
+Round date: `2026-05-13`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated; canonical payloads staged; authority token still absent`
+orchestrator_id: `w3-canonical-hepdata-json-intake-2026-05-13`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- The CLI HEPData payload routes returned HTTP `403`, but the user supplied
+  browser-downloaded HEPData JSON exports for the required tables.
+
+R:
+- Stage and checksum-bind canonical JSON exports for t19/t20 source context and
+  t43/t44 W3 ratio comparison, then verify semantic agreement with the local
+  CSV cache without self-issuing an authority token.
+
+C:
+- Staged payloads:
+  `logs/research/provider_inputs/hepdata_ins2079374/t19_canonical.json`,
+  `t20_canonical.json`, `t43_canonical.json`, and `t44_canonical.json`.
+- Checksums:
+  `logs/research/provider_inputs/hepdata_ins2079374/checksums.txt`.
+- Intake logs:
+  `logs/research/w3_authority_t19_t20_canonical_json_intake_20260513.json`
+  and `logs/research/w3_authority_t43_t44_canonical_json_intake_20260513.json`.
+- Updated surfaces:
+  `Docs/W3AuthorityProviderResponseChecklist.md`,
+  `Docs/W3AcceptedEvidenceAuthorityProviderResponse.md`,
+  `DASHI/Physics/Closure/W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda`,
+  and `DASHI/Physics/Closure/W3AcceptedEvidenceAuthorityTokenReceipt.agda`.
+
+S:
+- t43 canonical JSON SHA-256:
+  `5cfefe5a5a99c415f9225a3515383e8ce5e9a874861ff6c5fc08365871bfd340`.
+- t44 canonical JSON SHA-256:
+  `2dfa2abe120981f1f8379d95c8d6e0362394c6f6c8fed01dd45fc76a3e2b660b`.
+- t43 semantic check: `18/18` ratio rows match local CSV.
+- t44 semantic check: `324/324` total-covariance entries match local CSV.
+
+G:
+- No `W3AcceptedEvidenceAuthorityToken` is constructed locally.
+- No accepted external receipt, G5 closure, W8 origin promotion, or unification
+  claim follows from this intake.
+
+F:
+- Remaining W3 gap is now narrower: an accepted external authority response
+  must consume the staged canonical t43/t44 payloads and issue, reject, or mark
+  insufficient the typed W3 accepted-evidence authority token.
+
 ## Active Assignment Round -- Drosophila Genome W4 Candidate Packet
 
 Round date: `2026-05-12`
@@ -860,7 +1115,8 @@ C:
 
 S:
 - `lhapdf` is not available as a Python package in the repo-local virtualenv;
-  `lhapdf`, `lhapdf-config`, and Python `lhapdf` bindings remain absent.
+  as of the later 2026-05-13 rerun, system `lhapdf`, `lhapdf-config`, and
+  system Python `lhapdf` are available at `6.5.5`.
 - The public CT18NLO LHAPDF grid was downloaded and the central member was
   parsed directly as `lhagrid1`.
 - The local fixed-`x = 0.01` central-member extraction does not match the W5
@@ -3809,3 +4065,182 @@ F:
 | Kelvin | Candidate256 minimal missing fields | `Docs/Candidate256MinimalMissingFields.md` | Candidate256 blocker reduced to W4-derived fields plus one irreducible external calibration authority payload. |
 | Gauss-Noether | Einstein candidate patch plan | `Docs/EinsteinCandidateInterfacePatchPlan.md` | Future adapter route into `EinsteinEquationCandidate.W4MatterStressEnergyInterfaceReceipt` is explicit and guarded. |
 | Noether | Paper readiness matrix | `Docs/LimitedSMGRPaperReadinessMatrix.md` | Paper sections and claim levels now map to inhabited receipts, forbidden claims, blockers, and next actions. |
+
+## Novel-Math Route Intake — 2026-05-13
+
+orchestrator_id: `novel-math-route-intake-2026-05-13`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- W0 integrated the latest novel-math route paste from
+  `/home/c/Downloads/As you can see in the pumls there are many blocker(5).md`.
+- The paste is treated as route evidence and worker guidance, not as theorem
+  evidence.
+
+R:
+- Preserve the useful proof sketches while preventing accidental promotion.
+- Update the roadmap so current statuses match the repository: W3 is a local
+  candidate pass without authority, G2/G3 are typed obligation surfaces, and
+  G4/G6/W8/W9 remain open.
+
+C:
+- Updated:
+  `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`.
+- Added:
+  `Docs/NovelMathRouteLedger-20260513.md`.
+
+S:
+- E8 generators and executable checks exist, but structural propositional
+  proofs and completeness remain open.
+- G2 now needs a named `U(1)` sector-restriction theorem obligation.
+- G3 now needs named Hamiltonian-domain/self-adjointness/contraction
+  obligations.
+- G4 has a plausible first-order / BF / MacDowell-Mansouri route, but no
+  typed scope module for that route yet.
+- G6 has route sketches, but no concrete section proofs.
+- W8 has a candidate rigidity route through E8 semisimplicity, not an origin
+  receipt.
+- W9 remains blocked.
+
+L:
+- `route sketch`
+  -> `typed obligation surface`
+  -> `candidate theorem owner`
+  -> `typechecked theorem or obstruction`
+  -> `gate receipt`.
+
+P:
+- Assign workers to six bounded lanes:
+  E8 structural bridge, G2 sector restriction, G3 contraction/domain scope,
+  G4 first-order gravity scope, G6 route candidates, and W8 rigidity route.
+- Keep external W3/DY/W4 authority lanes active separately.
+
+G:
+- No theorem, token, receipt, or gate closure follows from this route intake.
+- Rows marked "complete" in the source paste are downgraded to candidate
+  route status unless the repo already has an inhabited proof term.
+- W8 is not reclassified as unblocked; it is reclassified as "candidate
+  internal rigidity route, still no receipt."
+
+F:
+- Missing structural E8 proof bridge.
+- Missing G2 sector-restriction theorem.
+- Missing G3 self-adjointness/domain/contraction theorem.
+- Missing G4 first-order structure-group scope.
+- Missing G6 section proofs.
+- Missing W8 rigidity/origin theorem.
+
+### Worker Results
+
+| Worker | Lane | Result | Promotion boundary |
+|---|---|---|---|
+| E8-Bridge | E8 structural proof bridge | Added boolean-backed structural predicates and bridge layer for membership, no-duplicates, disjointness, and half-root parity-by-construction. | `E8RootEnumerationComplete` remains uninhabited; native structural proof and completeness gaps remain. |
+| Maxwell-Sector | G2 sector restriction | Added `G2MaxwellSectorRestrictionObligations`, separating homogeneous/Bianchi obligations from sourced Maxwell sector restriction. | No `MaxwellGaugeFieldEquationTheorem`; no G2 closure; no G6 `section-EM`. |
+| Schrodinger-Contraction | G3 domain/contraction | Added self-adjointness-domain, exponential/unitary evolution, norm preservation, and Inonu-Wigner contraction obligations. | No `SchrodingerEvolutionTheorem`; no G3 closure; no G6 `section-QM`. |
+| GR-FirstOrder | G4 first-order route | Added `GRFirstOrderGravityScope` with structure-group, vierbein, spin-connection, Palatini/BF, MacDowell-Mansouri, stress-energy, Einstein-consumer, and section obligations. | No GR closure, Einstein theorem, GRQFT receipt, G4 closure, or G6 `section-GR`. |
+| G6-Routes | G6 route candidates | Added W/G fixed-point, E8/G Ward-identity, and G4/W perturbative-negligibility route candidates. | `skeletonOnlyNoPromotion` remains; no section proofs or path equalities. |
+| W8-Rigidity | W8 rigidity route | Added candidate route through E8 semisimplicity / Whitehead-style rigidity with explicit `U(1)` caveats. | No W8 receipt, no categoricity theorem, no Whitehead/cohomology proof. |
+
+Follow-up state:
+
+- Internal roadmap is now mostly typed as obligations rather than prose.
+- The remaining E8 task is native structural proof/completeness, not generator
+  construction.
+- G2/G3/G4 now each have explicit next theorem ingredients.
+- G6 has named route candidates but still waits on G2/G3/G4/G5 sections.
+- W8 is no longer "no route found"; it is "candidate rigidity route,
+  unproved and non-promoting."
+- W9 remains the only lane in this round with no constructive route.
+
+## Active Assignment Round -- Route-Intake Guardrails And Authority Access
+
+Round date: `2026-05-13`
+Round owner: `W0 orchestrator / Worker 6 board integrator`
+Round status: `active; assignment-only; non-promoting`
+orchestrator_id: `route-intake-guardrails-authority-access-2026-05-13`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` opened a new six-lane tranche from the source paste
+  `/home/c/Downloads/As you can see in the pumls there are many blocker(6).md`.
+- `Worker 6` owns board integration only in
+  `Docs/WorkerCoordinationBoard.md`.
+- The source paste is treated as route-intake evidence, not as a proof,
+  authority token, receipt, or promotion decision.
+
+R:
+- Convert high-confidence prose routes into guarded worker assignments with
+  explicit validation contracts.
+- Preserve current promoted state: `G1` is closed; `G2`, `G3`, `G4`, `G6`,
+  and `W8` are route candidates or obligation surfaces only; `W3` is
+  `candidate-pass-no-authority-token`; `W9` remains blocked.
+- Keep governance and no-promotion boundaries visible before any worker edits
+  theorem, authority, roadmap, or receipt surfaces.
+
+C:
+- Board-only assignment surface:
+  `Docs/WorkerCoordinationBoard.md`.
+- Downstream lane targets are named for worker routing only; this round does
+  not edit those files.
+
+S:
+- The previous tranche tightened route candidates for E8/LILA, G2/G3/G4,
+  G6, and W8, but did not close their gates.
+- The new paste contains stronger mathematical claims about sector
+  restriction, Stone/Kato-Rellich style evolution, MacDowell-Mansouri gravity,
+  G6 commutativity, W8 rigidity, and W3 access blockers.
+- Those claims must be downgraded to obligations until each has a
+  typechecked term, accepted external authority, or explicit obstruction.
+- W3 access is a route-to-authority problem, not a local proof problem.
+- W9 remains outside the constructive tranche except as a guardrail: no lane
+  may imply that E8, G6, or W8 work closes cancellation pressure.
+
+L:
+- `source paste`
+  -> `guarded route intake`
+  -> `bounded worker lane`
+  -> `typed obligation / authority request / obstruction`
+  -> `targeted validation`
+  -> `board integration`
+  -> `promotion review only if receipts are inhabited`.
+
+P:
+- Assign six active lanes for this tranche:
+
+| Lane | Worker | Assignment | Return contract | Expected validations | Boundary |
+|---|---|---|---|---|---|
+| `roadmap-guarded-route-intake` | `Worker 1` | Reconcile the roadmap against the new source paste while preserving `G1 closed`, `G2/G3/G4/G6/W8 obligation-only`, `W3 candidate-pass-no-authority-token`, and `W9 blocked`. | Minimal roadmap diff proposal plus exact rows whose wording must be downgraded from "complete" to "route/obligation" if no inhabited receipt exists. | Docs diff check; no Agda required unless a roadmap import or generated index changes. | No theorem, receipt, or paper claim is promoted by roadmap language. |
+| `g2-g3-g4-surface-tightening` | `Worker 2` | Tighten G2 sector restriction, G3 domain/evolution/contraction, and G4 first-order gravity surfaces into exact theorem obligations or obstruction diagnostics. | File list, first missing constructors/theorems, and targeted Agda commands for each touched module. | Targeted Agda only on touched G2/G3/G4 modules and any direct consumers. | No `MaxwellGaugeFieldEquationTheorem`, `SchrodingerEvolutionTheorem`, Einstein/GR closure, or GRQFT receipt unless the term is actually inhabited. |
+| `g6-w8-guardrails` | `Worker 3` | Guard G6 commutativity and W8 rigidity/origin language so route sketches cannot bypass missing section proofs or origin receipts. | A guardrail patch or no-change audit naming each missing section proof, naturality/path equality, Whitehead/cohomology proof, and origin receipt. | Targeted Agda on touched G6/W8 modules; docs diff check for governance text. | No G6 closure, W8 origin receipt, categoricity theorem, or rigidity promotion from prose. |
+| `e8-lila-propositional-lift` | `Worker 4` | Attempt the mechanical lift from executable/boolean E8 and LILA checks to native propositional completeness, uniqueness, disjointness, parity, and Lam-Tung bridge obligations. | Either typechecked propositional lift terms or the exact boolean-to-proposition blocker with the smallest missing lemma. | Targeted Agda on E8/LILA modules; run existing executable checks only as supporting evidence. | Boolean/executable success is not an `E8RootEnumerationComplete` or LILA receipt until propositionally inhabited. |
+| `w3-authority-access-route` | `Worker 5` | Resolve the W3 authority access path as an external-provider/checksum route, including the HTTP 403/access failure if still present. | Provider/access route, checksum or canonical-source strategy, and accepted/rejected/insufficient response path; no local self-issuance. | JSON/checksum validation for authority artifacts if acquired; targeted Agda only for W3 authority intake surfaces. | No `W3AcceptedEvidenceAuthorityToken` fabrication; candidate pass remains non-publishable without accepted authority. |
+| `board-integration` | `Worker 6` | Maintain this board as the active assignment and governance surface for the tranche. | Board update only, preserving other workers' edits and recording lane status when returned. | `git diff --check -- Docs/WorkerCoordinationBoard.md`. | Board text records assignments and results only; it cannot promote gates. |
+
+G:
+- No source-paste claim is accepted as a theorem, token, receipt, authority,
+  origin proof, or gate closure.
+- No lane may promote `G2`, `G3`, `G4`, `G6`, `W8`, `W3`, `W4`, `W5`, `W9`,
+  Candidate256, GRQFT, limited SM+GR, or full unification by prose.
+- `G1` remains the only closed gate named in this tranche.
+- `W3` remains `candidate-pass-no-authority-token` until an accepted external
+  authority route is ingested.
+- `W9` remains blocked; pseudo-Goldstone, E8, G6, or rigidity sketches may
+  only reframe the blocker unless they inhabit the active W9 kill interface.
+- Workers must preserve accepted/rejected/insufficient authority outcomes as
+  distinct states.
+
+F:
+- Missing roadmap downgrade pass for any over-strong "complete" claims.
+- Missing G2 sector-restriction theorem and source/inhomogeneous Maxwell
+  interface.
+- Missing G3 self-adjointness-domain, evolution, and contraction inhabitants.
+- Missing G4 structure-group, first-order gravity, stress-energy, Einstein,
+  and GRQFT consumer receipts.
+- Missing G6 section proofs, naturality/path equalities, and empirical
+  authority alignment.
+- Missing E8/LILA native propositional lift from executable checks.
+- Missing W8 Whitehead/cohomology/categoricity proof and origin receipt.
+- Missing accepted W3 authority access route and token.
+- Missing W9 constructive kill route.
