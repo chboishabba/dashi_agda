@@ -29,6 +29,8 @@ data W4W5PDFSharedDependencyStatus : Set where
     W4W5PDFSharedDependencyStatus
 
 data W4W5PDFSharedFirstMissing : Set where
+  missingSharedAcceptedDYLuminosityConventionAuthority :
+    W4W5PDFSharedFirstMissing
   missingSharedCT18MSHTLHAPDFPartonLuminosityIntake :
     W4W5PDFSharedFirstMissing
 
@@ -49,8 +51,14 @@ record W4W5PDFSharedDependencyDiagnostic : Setω where
     dyLuminosityConventionDiagnostic :
       DYConvention.W4W5AcceptedDYLuminosityConventionDiagnostic
 
+    authorityFirstMissing :
+      DYConvention.W4W5DYLuminosityFirstMissing
+
     firstMissing :
       W4W5PDFSharedFirstMissing
+
+    sharedEquivalentFirstMissingName :
+      String
 
     w4FirstMissingLabel :
       String
@@ -59,6 +67,9 @@ record W4W5PDFSharedDependencyDiagnostic : Setω where
       String
 
     sharedMissingLabel :
+      String
+
+    exactFirstMissingStatus :
       String
 
     w4CurrentShapeFitChi2PerDof :
@@ -86,6 +97,18 @@ record W4W5PDFSharedDependencyDiagnostic : Setω where
       List String
 
     rapidityIntegratedConventionAudit :
+      List String
+
+    acceptedConventionGate :
+      List String
+
+    acceptedAuthorityReceiptSurface :
+      List String
+
+    sharedMissingAuthorityFields :
+      List DYConvention.W4W5DYLuminosityAuthorityField
+
+    providerReadyMergeContract :
       List String
 
     dependencyRationale :
@@ -120,14 +143,20 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         W5Gap.canonicalW5PDFCarrierExternalConfirmedGap
     ; dyLuminosityConventionDiagnostic =
         DYConvention.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
+    ; authorityFirstMissing =
+        DYConvention.missingAcceptedDYLuminosityConventionAuthority
     ; firstMissing =
-        missingSharedCT18MSHTLHAPDFPartonLuminosityIntake
+        missingSharedAcceptedDYLuminosityConventionAuthority
+    ; sharedEquivalentFirstMissingName =
+        "missingSharedAcceptedDYLuminosityConventionAuthority"
     ; w4FirstMissingLabel =
         "W4 first missing remains missingDirtyZPeakShapeAdequacy; current local shape fit chi2/dof is 298.8462841768543"
     ; w5FirstMissingLabel =
         "W5 first missing remains CT18/MSHT/LHAPDF packet fields and computed t45 correction"
     ; sharedMissingLabel =
-        "missing shared CT18/MSHT/LHAPDF-compatible parton-luminosity intake"
+        "missingAcceptedDYLuminosityConventionAuthority, surfaced through the shared CT18/MSHT/LHAPDF-compatible parton-luminosity intake"
+    ; exactFirstMissingStatus =
+        "first missing: accepted W4/W5 Drell-Yan luminosity and mass-bin integration convention authority/provenance; local CT18NLO rapidity-window packet is candidate-only and rejected against the W5 target"
     ; w4CurrentShapeFitChi2PerDof =
         "298.8462841768543"
     ; w4CurrentShapeFitDigest =
@@ -183,6 +212,33 @@ canonicalW4W5PDFSharedDependencyDiagnostic =
         ∷ "the CT18 packet now records formula, bin integration, scale choice, flavour sum, PDF member, checksums, and citation fields, but marks the convention candidate-not-accepted"
         ∷ "the first missing item remains an accepted parton-luminosity/bin-integration convention that maps CT18NLO to the DASHI t45 correction surface"
         ∷ []
+    ; acceptedConventionGate =
+        "do not merge this diagnostic into W4 closure without accepted convention provenance and a W4 dirty Z-peak shape adequacy pass under that convention"
+        ∷ "do not merge this diagnostic into W5 closure without accepted convention provenance and a t45 correction/tolerance pass under that convention"
+        ∷ "the present local CT18NLO packet is admissible as provenance input only, not as the accepting authority"
+        ∷ "the rejected ratios remain part of the audit surface: fixed-x = 1.0506681065158017, t45/z_peak = 0.7514043986785174, t45/t43 = 0.3348750784006896"
+        ∷ []
+    ; acceptedAuthorityReceiptSurface =
+        "first missing name: missingAcceptedDYLuminosityConventionAuthority"
+        ∷ "PDF set: authority must accept CT18NLO or replacement PDF family/version"
+        ∷ "LHAPDF id: authority must accept id 14400 or replacement id"
+        ∷ "grid checksum: authority must accept the grid/table checksum used by W4 and W5"
+        ∷ "factorization scale convention: authority must accept Q = M or an explicit Q2 alternative"
+        ∷ "rapidity window: authority must accept eta_cut = 2.4 or an explicit replacement"
+        ∷ "mass-bin integration rule: authority must accept the 50-76, 76-106, and 106-170 GeV integration rule"
+        ∷ "flavour-weight rule: authority must accept charge weights, q qbar symmetrisation, and heavy-flavour handling"
+        ∷ "source DOI: authority must provide the DOI or equivalent provider citation"
+        ∷ "external authority/provenance: authority must name provider, command/API, inputs, checksums, timestamp, and acceptance statement"
+        ∷ []
+    ; sharedMissingAuthorityFields =
+        DYConvention.W4W5AcceptedDYLuminosityConventionDiagnostic.missingAuthorityFields
+          DYConvention.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
+    ; providerReadyMergeContract =
+        "shared receipt must use the accepted-DY authority as the first missing item, not a W4 or W5 closure claim"
+        ∷ "shared receipt must route W4 shape adequacy and W5 t45 correction through the same accepted convention authority"
+        ∷ "shared receipt may cite local CT18NLO ratios only as candidate/falsified probes"
+        ∷ "shared receipt must keep missingSharedCT18MSHTLHAPDFPartonLuminosityIntake as a broader dependency label, not the exact authority blocker"
+        ∷ []
     ; dependencyRationale =
         "The W4 dirty Z-peak data and covariance are local and parsed, but the current carrier-only shape fit is inadequate"
         ∷ "The W5 t45 route already records that local DGLAP/carrier diagnostics do not provide an accepted PDF carrier"
@@ -205,8 +261,16 @@ canonicalW4W5SharedFirstMissing :
   W4W5PDFSharedDependencyDiagnostic.firstMissing
     canonicalW4W5PDFSharedDependencyDiagnostic
     ≡
-  missingSharedCT18MSHTLHAPDFPartonLuminosityIntake
+  missingSharedAcceptedDYLuminosityConventionAuthority
 canonicalW4W5SharedFirstMissing =
+  refl
+
+canonicalW4W5SharedAuthorityFirstMissing :
+  W4W5PDFSharedDependencyDiagnostic.authorityFirstMissing
+    canonicalW4W5PDFSharedDependencyDiagnostic
+    ≡
+  DYConvention.missingAcceptedDYLuminosityConventionAuthority
+canonicalW4W5SharedAuthorityFirstMissing =
   refl
 
 canonicalW4W5SharedDependencyDoesNotCloseW4 :

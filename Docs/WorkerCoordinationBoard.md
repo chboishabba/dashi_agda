@@ -8,6 +8,541 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Active Assignment Round -- Drosophila Genome W4 Candidate Packet
+
+Round date: `2026-05-12`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated; candidate-only; non-promoting`
+orchestrator_id: `drosophila-genome-w4-candidate-2026-05-12`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` tested the proposed Drosophila genome route as a W4 chemistry /
+  Candidate256 support candidate.
+
+R:
+- Bind the public Drosophila Release 6 authority route to local checksums and
+  compute a CDS-based non-uniform codon witness without constructing W4
+  physical calibration.
+
+C:
+- Extractor:
+  `scripts/extract_drosophila_genome_packet.py`.
+- Data:
+  `scripts/data/genome/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna.gz`,
+  `scripts/data/genome/GCF_000001215.4_Release_6_plus_ISO1_MT_cds_from_genomic.fna.gz`,
+  and `scripts/data/genome/drosophila_release6_authority_packet.json`.
+- Receipt:
+  `DASHI/Physics/Closure/DrosophilaGenomeW4CandidateAuthorityReceipt.agda`.
+- Status note:
+  `Docs/DrosophilaGenomeW4CandidateAuthority.md`.
+
+S:
+- NCBI `GCF_000001215.4` / `Release 6 plus ISO1 MT` is now locally
+  checksum-bound.
+- The Release 6 reference DOI is `10.1101/gr.185579.114`; the previously
+  suggested `10.1126/science.1237175` is rejected for this route.
+- The genomic FASTA checksum is
+  `e69e907b5e87ce756236dcef93e82001cfd08f1a0ed5f22e36cbbd3a87ebc57d`.
+- The CDS FASTA checksum is
+  `3f379cec1d952f9a1c22e2b6dd9ff8eefce6da97ffb198cde93dc0a17c40da01`.
+- The CDS codon witness is non-uniform:
+  `20409720` ACGT codons, all `64` codons observed, max `GAG = 867771`,
+  min nonzero `TGA = 8978`.
+
+G:
+- This is not an accepted W4 authority receipt.
+- No `Candidate256PhysicalCalibrationAuthorityToken` is constructed.
+- No `Candidate256PhysicalCalibrationExternalReceipt` is inhabited.
+- No calibration law, `BrainAtomicChemistryHandoffProfile` compatibility proof,
+  W4 promotion, Brain promotion, biological recovery, physics promotion, or
+  unification claim is constructed.
+
+F:
+- Missing TSFV-compatible calibration-law theorem.
+- Missing handoff proof from the Drosophila codon carrier to
+  `BrainAtomicChemistryHandoffProfile`.
+- Missing external Candidate256 physical-calibration authority and dimensional
+  preservation payload.
+
+## Active Assignment Round -- Brain Proviso And Physics Boundary Audit
+
+Round date: `2026-05-12`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated; non-promoting`
+orchestrator_id: `brain-proviso-physics-boundary-2026-05-12`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned six bounded lanes: Brain governance proviso, W1-W6
+  assignability audit, Brain-to-physics boundary-handle inventory, W4/W5 DY
+  convention blocker audit, W2/W9 promotion-boundary audit, and validation.
+- Workers may record evidence, blocker surfaces, and lateral-review conditions
+  only.
+
+R:
+- Convert the Brain lane out-of-scope statement into a conditional governance
+  proviso, verify whether W1-W6 are still assigned to direct typed conditions,
+  and preserve the non-promoting boundary for Brain, W4/W5, W2, and W9.
+
+C:
+- Brain:
+  `Docs/BrainLaneStatus.md`,
+  `Docs/BrainPhysicsBoundaryHandles.md`, and
+  `Ontology/Brain/BrainGovernanceProviso.agda`.
+- Physics lane audit:
+  `Docs/PhysicsLaneAssignabilityAudit.md`.
+- W4/W5:
+  `Docs/W4W5DYConventionCurrentBlocker.md`.
+- W2/W9:
+  `Docs/W2W9PromotionBoundaryAudit.md`.
+
+S:
+- Brain lateral support review is inactive by default. It becomes eligible
+  only when a direct lane has a typed exhaustion receipt and no retarget
+  remains available.
+- W1-W6 remain assigned or explicitly typed: W1 is locally unblocked, W2/W3/W4
+  and W5 are authority/provenance blocked, and W6 is runtime-payload blocked.
+- Brain connector handles such as `hamiltonian`, `crossBand`, and
+  `thermoChecksum` are inventory handles only; the physics-law receipts for
+  Hamiltonian dynamics, Maxwell, Schrodinger, GR, SM recovery, and unification
+  are absent.
+- W4/W5 remain blocked on accepted DY luminosity/bin-integration authority.
+- W2 remains blocked by `NaturalP2ConvergencePromotionAuthorityToken`; W9
+  remains pair-route obstructed with weighted-support retarget accepted-only.
+
+G:
+- No Brain physics promotion, biological recovery, multiscale persistence, or
+  unification claim.
+- No replacement of W1-W6 typed kill conditions with Brain-side evidence.
+- No W4/W5 promotion without accepted DY convention/provenance.
+- No W2 token fabrication and no W9 kill receipt.
+
+F:
+- Missing typed exhaustion receipt plus no-retarget condition for any Brain
+  lateral-support review.
+- Missing accepted DY authority, W3 authority, W4 adequacy, Candidate256
+  calibration, matter/stress-energy, discrete Einstein law, GRQFT validation,
+  W2 promotion authority, and W9 accepted kill route.
+
+## Active Assignment Round -- Post-b4fd258 Evidence And Brain Integration
+
+Round date: `2026-05-12`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated; non-promoting`
+orchestrator_id: `post-b4fd258-brain-evidence-2026-05-12`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned six bounded lanes: W7/W8 audit, W4 Z-peak run audit,
+  dashiBRAIN receipt integration, W2 blocker classification, W9 bridge
+  classification, and final integration.
+- Workers may record bounded receipts and typed obstructions only.
+
+R:
+- Confirm what is already complete, run the first reproducible W4 check, link
+  selected dashiBRAIN evidence locally, and sharpen W2/W9 first-missing items.
+
+C:
+- W7/W8:
+  `ClaimGovernancePromotionObligation.agda` and
+  `OriginReceiptPromotionExternalObligation.agda`.
+- W4:
+  `W4ZPeakCalibrationAnchorReceipt.agda`, `scripts/run_t43_projection.py`, and
+  local t21/t22 HEPData files.
+- Brain:
+  `Docs/BrainLaneStatus.md`, `Docs/DrosophilaHemibrainArtifactManifest.md`,
+  and the new non-promoting `Ontology/Brain/Drosophila*` /
+  `Brain*Receipt.agda` surfaces.
+- W2/W9:
+  current W2 promotion/governance surfaces and
+  `W9PairTransportBridgeObstruction.agda`.
+
+S:
+- W7 bounded claim governance already typechecks.
+- W8 first empirical gate already typechecks and remains non-promoting.
+- W4 data/runner wiring is present, but the dirty Z-peak run is a negative
+  adequacy result at `chi2/dof = 298.8462841768543`.
+- W2 is not a current timeout; it is blocked on the constructorless
+  `NaturalP2ConvergencePromotionAuthorityToken`.
+- W9 canonical pair transport remains obstructed; the weighted-support route is
+  retarget-accepted only and does not construct a W9 kill receipt.
+- dashiBRAIN is now linked as selected external numeric Brain evidence, with
+  multiscale persistence recorded as obstructed under the selected
+  coarse-grain curves.
+
+G:
+- No W3 authority token.
+- No W4 calibration or physical scale promotion from the negative Z-peak run.
+- No W8 external origin authority.
+- No W2 promotion token.
+- No W9 kill receipt.
+- No Brain lane promotion, physics promotion, biological recovery claim, or
+  unification claim.
+
+F:
+- Missing accepted DY luminosity/shape convention for W4/W5.
+- Missing external W3/W8/W2 authority where required.
+- Missing W9 kill-route constructor consuming the retarget-only Nat-bound path.
+- Missing locality-preserving coarse-grain receipt that preserves nontrivial
+  Drosophila neutral/defect structure.
+
+## Active Assignment Round -- Limited SM+GR Authority/Gate Follow-Up
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated; non-promoting`
+orchestrator_id: `limited-sm-gr-authority-gates-2026-05-05`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned six bounded lanes and owns integration and promotion decisions.
+- No worker may construct an authority token, accepted DY convention,
+  calibration receipt, stress-energy receipt, Einstein-law receipt, or GRQFT
+  promotion receipt by prose.
+
+R:
+- Keep the limited SM+GR paper path as a typed dependency chain:
+  accepted DY convention authority -> W4/W5 adequacy/correction -> W4 physical
+  calibration -> W4 matter/stress-energy -> discrete Einstein law -> GRQFT/QFT
+  consumer validation.
+
+C:
+- W4/W5 authority surfaces:
+  `W4W5AcceptedDYLuminosityConventionDiagnostic.agda`,
+  `W4W5PDFSharedDependencyDiagnostic.agda`,
+  `W5PDFCarrierExternalIntakeRequest.agda`, and
+  `W5CT18ExternalIntakeReceipt.agda`.
+- W3 authority handoff:
+  `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda`.
+- W4 calibration surfaces:
+  `W4PhysicalCalibrationExternalReceiptObligation.agda`,
+  `W4PhysicalCalibrationExternalReceiptRequestPack.agda`, and
+  `W4PhysicalCalibrationObligationSurface.agda`.
+- Matter/GR/GRQFT surfaces:
+  `EinsteinEquationCandidate.agda`,
+  `GRQFTConsumerNextObligation.agda`,
+  `GRQFTConsumerSourceDiagnostic.agda`, and
+  `GRQFTClosurePromotionReceiptRequestPack.agda`.
+
+S:
+- W4/W5 now canonicalize `missingAcceptedDYLuminosityConventionAuthority` and
+  `missingSharedAcceptedDYLuminosityConventionAuthority`.
+- W3 remains blocked on `W3AcceptedEvidenceAuthorityToken`.
+- W4 calibration is downstream of `AcceptedDYLuminosityConventionAuthority` and
+  `W4ZAdequacy`.
+- Matter/stress-energy remains blocked until accepted DY/PDF-backed W4 adequacy
+  and Candidate256 calibration exist.
+- The discrete Einstein-law lane is downstream of
+  `W4MatterStressEnergyInterfaceReceipt`.
+- GRQFT/QFT consumer validation remains blocked on authority, GR law, QFT law,
+  empirical validation, and closure-promotion receipts.
+
+L:
+- `request surface` -> `external authority/provenance receipt` -> `calibration`
+  -> `matter/stress-energy` -> `discrete Einstein law` -> `GRQFT validation`
+  -> `limited known-limit SM+GR paper claim`.
+
+P:
+- `Maxwell` owned W4/W5 accepted DY convention authority.
+- `Hegel` owned W3 authority handoff.
+- `Laplace` owned W4 physical calibration queue.
+- `Heisenberg` owned W4 matter/stress-energy bridge.
+- `Euler` audited the discrete Einstein-law queue read-only.
+- `Carson` owned GRQFT/QFT consumer validation.
+
+G:
+- No synthetic authority tokens.
+- No W4/W5 close without accepted DY convention/provenance.
+- No W4 calibration before W4 adequacy.
+- No stress-energy promotion before W4 calibration, anchor, and accepted
+  DY/PDF-backed adequacy.
+- No GR promotion before `grEquationLaw` and `grEquationLawAtConsumer`.
+- No limited SM/QFT+GR promotion before GRQFT/QFT consumer validation.
+
+F:
+- Missing accepted DY luminosity convention authority.
+- Missing W3 accepted evidence authority token.
+- Missing W4 adequacy and Candidate256 physical calibration receipt.
+- Missing W4 matter/stress-energy interface receipt.
+- Missing discrete Einstein-law receipt.
+- Missing GRQFT/QFT consumer validation and closure-promotion authority.
+
+Provider-facing packet:
+- `Docs/AcceptedDYLuminosityConventionAuthorityProviderPacket.md` is the
+  sendable authority request for the W4/W5 shared DY convention blocker.
+- The packet preserves local CT18NLO fixed-`x`, `t45/z_peak`, and `t45/t43`
+  probes as negative diagnostics and does not promote W4 or W5.
+
+## Active Assignment Round -- Submission And Compatibility Readiness
+
+Round date: `2026-05-06`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated; non-promoting`
+orchestrator_id: `submission-compatibility-readiness-2026-05-06`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned six bounded lanes after the receipt-ingestion infrastructure
+  existed.
+- Workers produced provider-facing submission bundles, one executable adapter,
+  a claim boundary, and downstream compatibility audits only.
+
+R:
+- Move from request surfaces to first external-facing asks and executable
+  readiness without promoting any receipt.
+- Keep publication language gated by inhabited authority, adequacy,
+  calibration, matter/stress-energy, Einstein-law, and GRQFT receipts.
+
+C:
+- DY authority submission:
+  `Docs/AcceptedDYLuminosityConventionAuthoritySubmission.md`.
+- DY luminosity adapter:
+  `scripts/dy_luminosity_from_authority_packet.py`.
+- W3 authority submission:
+  `Docs/W3AcceptedEvidenceAuthorityTokenSubmission.md`.
+- Claim boundary:
+  `Docs/LimitedSMGRUnificationClaimBoundary.md`.
+- Candidate256 calibration audit:
+  `Docs/Candidate256CalibrationDependencyAudit.md`.
+- W4 matter/stress-energy compatibility audit:
+  `Docs/W4MatterStressEnergyCompatibilityAudit.md`.
+
+S:
+- DY and W3 now have final provider-facing submission bundles.
+- The DY adapter can turn an accepted/replacement authority-shaped JSON into
+  W4/W5 luminosity artifacts, but fails closed without accepted authority and
+  provider-supplied luminosities.
+- Candidate256 calibration is not ready even if W4 adequacy lands tomorrow:
+  it still needs the external calibration authority token, physical unit
+  carrier, scale maps, calibration constant, factorization, dimensional law,
+  citation, validation payload, and source W4 adequacy digest.
+- W4 matter/stress-energy is preflight-compatible with the Einstein queue, but
+  the standalone preflight contract does not directly inhabit the
+  theorem-facing Einstein candidate receipt.
+
+L:
+- `submission bundle` -> `accepted/rejected/insufficient provider response` ->
+  `DY luminosity adapter outputs` -> `W4 adequacy / W5 correction` ->
+  `Candidate256 calibration` -> `W4 matter/stress-energy` ->
+  `discrete Einstein law`.
+
+P:
+- `Maxwell-Faraday` / `Sartre` (`019df8b4-7cac-7582-855f-470e38161396`)
+  owned the final DY authority submission bundle.
+- `Feynman-Laplace` / `Hilbert` (`019df8b4-a64a-74c2-bb60-7f9d99d14dc3`)
+  owned the DY luminosity adapter.
+- `Curie-W3` / `Hypatia` (`019df8b4-cb3e-7651-a643-800bea7e732b`)
+  owned the final W3 authority submission bundle.
+- `Noether` / `Dirac` (`019df8b4-f004-7b00-8445-6d743494fbc4`)
+  owned the limited SM+GR claim boundary.
+- `Kelvin` / `Arendt` (`019df8b5-0f35-7d52-b2c2-4d9704beec23`)
+  owned the Candidate256 calibration dependency audit.
+- `Gauss` / `Wegener` (`019df8b5-36e9-7650-9e74-4ef61fd57405`)
+  owned the W4 matter/stress-energy compatibility audit.
+
+G:
+- No accepted DY authority, W3 token, W4 adequacy, W5 correction, Candidate256
+  calibration, W4 matter/stress-energy, Einstein-law, or GRQFT promotion was
+  constructed.
+- The DY adapter is readiness infrastructure only; it consumes provider
+  luminosities and does not derive or accept the convention locally.
+- The claim boundary forbids full SM, full GR, quantum gravity, and full
+  unification claims until separately promoted by inhabited receipts.
+
+F:
+- Missing accepted DY luminosity convention authority and provider
+  luminosities.
+- Missing accepted external `W3AcceptedEvidenceAuthorityToken`.
+- Missing W4 adequacy and W5 correction under the accepted convention.
+- Missing `Candidate256PhysicalCalibrationExternalReceipt`.
+- Missing theorem-facing W4 matter/stress-energy receipt and discrete
+  Einstein-law receipt.
+
+## Active Assignment Round -- Receipt Ingestion And Downstream Readiness
+
+Round date: `2026-05-06`
+Round owner: `W0 orchestrator / integrator`
+Round status: `integrated; non-promoting`
+orchestrator_id: `receipt-ingestion-downstream-readiness-2026-05-06`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigned six bounded lanes after the DY provider packet landed.
+- Workers prepared response-ingestion, fail-closed computation, calibration,
+  and matter/stress-energy surfaces only.
+
+R:
+- Shift from request definition to receipt ingestion and downstream readiness.
+- Preserve the limited known-limit SM+GR dependency chain:
+  accepted DY convention -> W4/W5 computations -> Candidate256 calibration ->
+  W4 matter/stress-energy -> discrete Einstein law -> GRQFT validation.
+
+C:
+- DY response ingestion:
+  `AcceptedDYLuminosityConventionAuthorityReceipt.agda` and
+  `Docs/AcceptedDYLuminosityConventionAuthorityResponse.md`.
+- W4 adequacy readiness:
+  `W4ZAdequacyReceipt.agda`,
+  `Docs/W4ZAdequacyReceiptTemplate.md`, and
+  `scripts/run_w4_z_peak_adequacy.py`.
+- W5 correction readiness:
+  `W5T45CorrectionReceipt.agda`,
+  `Docs/W5T45CorrectionReceiptTemplate.md`, and
+  `scripts/run_w5_t45_pdf_correction.py`.
+- W3 response ingestion:
+  `W3AcceptedEvidenceAuthorityTokenReceipt.agda` and
+  `Docs/W3AcceptedEvidenceAuthorityProviderResponse.md`.
+- Candidate256 calibration preflight:
+  `Candidate256PhysicalCalibrationExternalReceipt.agda` and
+  `Docs/Candidate256PhysicalCalibrationReceiptTemplate.md`.
+- W4 matter/stress-energy preflight:
+  `W4MatterStressEnergyInterfaceReceipt.agda` and
+  `Docs/W4MatterStressEnergyInterfaceContract.md`.
+
+S:
+- DY and W3 response lanes are now ready to ingest external decisions, but
+  canonical local states remain `awaitingProviderResponse`.
+- W4 and W5 runners are fail-closed before any calculation unless an accepted
+  DY authority/provider packet is supplied.
+- Candidate256 calibration is blocked on accepted DY authority plus
+  `W4ZAdequacyReceipt`.
+- W4 matter/stress-energy is blocked on
+  `Candidate256PhysicalCalibrationExternalReceipt`.
+
+L:
+- `provider response` -> `accepted/rejected/insufficient receipt` ->
+  `fail-closed W4/W5 computation` -> `Candidate256 calibration` ->
+  `matter/stress-energy` -> `discrete Einstein law`.
+
+P:
+- `Maxwell-Faraday` / `Zeno` (`019df8a7-fe7d-71d2-83d0-0e72078b1d7d`) owned
+  DY authority response ingestion.
+- `Laplace` / `Copernicus` (`019df8a7-fef6-75f1-89ed-624250f4df26`) owned W4
+  Z-peak adequacy readiness.
+- `Feynman` / `Volta` (`019df8a8-005f-7d72-8d92-86f1498ed895`) owned W5 t45
+  correction readiness.
+- `Curie-W3` / `Parfit` (`019df8a8-01af-7240-b09c-c987bbb6ad5f`) owned W3
+  authority response ingestion.
+- `Kelvin` / `Halley` (`019df8a8-031a-7613-b15b-e7803e6b96a9`) owned
+  Candidate256 physical calibration preflight.
+- `Gauss-Noether` / `Gibbs` (`019df8a8-057d-72f3-8019-b8da48bb39ff`) owned W4
+  matter/stress-energy preflight.
+
+G:
+- No authority token or accepted convention was fabricated.
+- No W4 adequacy, W5 correction pass, W3 authority, Candidate256 calibration,
+  matter/stress-energy, GR law, QFT law, or GRQFT promotion was constructed.
+- New runners fail closed before computation when required provider artifacts
+  are absent.
+
+F:
+- Missing `AcceptedDYLuminosityConventionAuthority`.
+- Missing accepted per-bin W4 luminosity vector and real W4 computation
+  payload.
+- Missing W5 provider luminosity method and accepted `R45/R43` result.
+- Missing accepted external `W3AcceptedEvidenceAuthorityToken`.
+- Missing `Candidate256PhysicalCalibrationExternalReceipt`.
+- Missing `W4MatterStressEnergyPromotion`.
+
+## Active Assignment Round -- Wikidata Monotone Structural Coherence
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `active docs/governance sidecar; non-P0; non-promoting`
+orchestrator_id: `wikidata-monotone-coherence-2026-05-05`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` owns the assignment, integration, docs/TODO/changelog sync, and any
+  later promotion decision.
+- Four read-only workers own disjoint discovery lanes. No worker may claim live
+  Wikidata edit authority, runtime PNF receipts, or ontology-index availability
+  by prose.
+
+R:
+- Convert the Wikidata monotone structural coherence formalism into bounded
+  repo lanes that can later become Agda/doc/runtime surfaces.
+- Preserve the existing PNF residual and W6 receipt-governance boundaries.
+- Keep the monotone convergence claim conditional on the coherence filter,
+  bounded slices, precomputed ontology index, and external promotion receipt.
+
+C:
+- Residual-core lane: `DASHI/Interop/SensibLawResidualLattice.agda`,
+  `DASHI/Interop/PNFResidualConsumerNextObligation.agda`,
+  `Ontology/Hecke/PNFResidualBridge.agda`, and
+  `Docs/ITIRPNFResidualLogicBridge.md`.
+- Ontology-index lane: `Docs`, `DASHI/Interop`, `Ontology`, `scripts`, and
+  `tests` only for existing Wikidata/index/slice/runtime surfaces.
+- Governance-doc lane: `README.md`, `TODO.md`,
+  `Docs/WorkerCoordinationBoard.md`, and
+  `Docs/ITIRPNFResidualLogicBridge.md`.
+- Validation lane: `Docs/AgdaValidationTargets.md`, `tests`, and `flake.nix`.
+
+S:
+- The four-level and six-level residual carriers, signature/wrapper gates,
+  `PNFEmissionReceipt`, and W6 runtime-receipt obligation already exist.
+- The pasted Wikidata formalism adds ontology-index, bounded-slice,
+  mutation/filter, global-severity, disposition, and governance-token surfaces
+  that are not yet recorded as a Wikidata-specific repo lane.
+- The sharpened product reading distinguishes the formal endstate from the
+  runtime projection: the formalism is global latent monotone structural
+  coherence over a snapshot-derived ontology index, while bounded review
+  packets and QID diagnostics are local projections of that state.
+- The global monotonicity theorem is directionally a non-increasing severity
+  theorem; any "non-decreasing coherence" wording must be treated as the same
+  statement only after the order convention is made explicit.
+
+L:
+- `assignment` -> `read-only lane report` -> `minimal Agda/doc proposal` ->
+  `docs/TODO/changelog consistency` -> targeted validation only if code changes
+  later.
+
+P:
+- `Rho` / `Godel` (`019df7fb-669f-79c2-aaec-3a16239c983d`) owns the residual
+  core gap analysis.
+- `Kappa` / `Ptolemy` (`019df7fb-672c-7d62-8f79-94ec76518a73`) owns the
+  ontology-index and bounded-slice surface scan.
+- `Eta` / `Confucius` (`019df7fb-67af-7473-8201-9656f062f81b`) owns docs and
+  governance placement.
+- `Lambda` / `Pauli` (`019df7fb-6874-7a80-a467-6736f395ed67`) owns validation
+  and complexity policy.
+
+G:
+- No Wikidata bot promotion without an explicit external promotion receipt.
+- No runtime `PNFEmissionReceipt` values are fabricated in Agda or docs.
+- No live Wikidata dump, disjointness index, or UpRef index is assumed present
+  unless a later provider artifact supplies it.
+- No global monotonicity claim may omit the precondition that all applied edits
+  respect the coherence filter.
+- Any later Agda implementation must validate only targeted interop modules
+  first and avoid `DASHI/Everything.agda` as an inner-loop check.
+
+F:
+- Missing Wikidata-specific QID/PID/statement carriers.
+- Missing ontology-index request/intake surface for P279 closure,
+  disjointness, upstream references, and property constraints.
+- Missing bounded-slice and mutation/filter carrier.
+- Missing QID-only diagnostic/repair-candidate projection surface from the
+  global ontology index into local review packets.
+- Missing global-severity theorem surface tying local filter monotonicity to
+  finite-chain convergence.
+- Missing disposition-map and governance-token request surface.
+
+| Lane | Worker | Agent | Assignment | Return contract | Status |
+|---|---|---|---|---|---|
+| `WD-R-residual-core` | `Rho` | `Godel` (`019df7fb-669f-79c2-aaec-3a16239c983d`) | Audit existing residual/PNF Agda carriers against the Wikidata formalism. | Existing matches, exact missing Agda surfaces, targeted validation commands, compact `O/R/C/S/L/P/G/F`. | active; read-only |
+| `WD-O-ontology-index` | `Kappa` | `Ptolemy` (`019df7fb-672c-7d62-8f79-94ec76518a73`) | Find or rule out existing Wikidata ontology-index, slice, mutation, and filter surfaces. | File paths, minimal new module/doc layout if missing, validation commands, compact `O/R/C/S/L/P/G/F`. | active; read-only |
+| `WD-G-governance-docs` | `Eta` | `Confucius` (`019df7fb-67af-7473-8201-9656f062f81b`) | Place the round without disturbing active P0 physics blocker lanes. | Exact doc sections to update and governance language to preserve, compact `O/R/C/S/L/P/G/F`. | active; read-only |
+| `WD-V-validation-policy` | `Lambda` | `Pauli` (`019df7fb-6874-7a80-a467-6736f395ed67`) | Identify the narrowest verification surface for docs-only assignment and later Agda additions. | Commands, runtime constraints, risks, compact `O/R/C/S/L/P/G/F`. | active; read-only |
+
 ## Active Assignment Round -- Z-Peak/W9 Theorem Next Six
 
 Round date: `2026-05-05`
@@ -98,6 +633,115 @@ F:
 | `W5-pdf-packet-audit` | `Maxwell` | `Boyle` (`019df69c-3ac6-72c1-bed6-66d99ac35af3`) | Audit CT18/MSHT/LHAPDF packet fields and local non-network validation options. | No-change audit: PDF packet fields are current; no local LHAPDF/CT18/MSHT/NNPDF tooling or grids are available. | completed; external PDF blocked |
 
 ## Active Assignment Round -- W9/W4/Governance/PDF Tranche
+
+## Active Assignment Round -- Limited SM+GR Unification Paper Tranche
+
+Round date: `2026-05-05`
+Round owner: `W0 orchestrator / integrator`
+Round status: `assigned`
+orchestrator_id: `limited-sm-gr-unification-2026-05-05`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- `W0` assigns six bounded lanes toward one limited known-limit SM+GR
+  unification paper claim.
+- The target is not "DASHI unifies physics"; it is a defensible limited
+  claim that connects W3 empirical contact, W4/W5 Drell-Yan convention,
+  W4 physical calibration, matter/stress-energy, discrete Einstein law, and
+  QFT/GRQFT consumer validation.
+
+R:
+- Advance the shortest receipt chain that can support a limited SM+GR paper.
+- Preserve current external-authority and constructorless-token boundaries.
+- Require a typed receipt, request pack, or diagnostic from every worker.
+
+C:
+- W3: `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda` and external
+  authority receipt surfaces.
+- W4/W5: accepted Drell-Yan luminosity convention and shared PDF dependency
+  surfaces.
+- W4 calibration: physical calibration authority and matter-source surfaces.
+- GR: `EinsteinEquationCandidate.agda` and W4 matter/stress-energy interface.
+- GRQFT/QFT: `GRQFTConsumerNextObligation.agda`,
+  `GRQFTConsumerSourceDiagnostic.agda`, and
+  `GRQFTClosurePromotionReceiptRequestPack.agda`.
+
+S:
+- W3 packet is complete but blocked on `W3AcceptedEvidenceAuthorityToken`.
+- W4/W5 are blocked on accepted parton-luminosity/bin-integration convention
+  plus authority/provenance, not on a simple denominator fix.
+- W4 calibration and GR matter/stress-energy are downstream of W4/W5
+  convention acceptance.
+- GR has candidate/obligation surfaces, but no sourced Einstein-law receipt.
+- GRQFT/QFT has known-limit and consumer surfaces, but no full closure
+  promotion, laws, witnesses, or empirical GR/QFT validation.
+
+L:
+- `authority/request packet` -> `accepted convention/calibration` ->
+  `matter/stress-energy receipt` -> `equation/consumer law` ->
+  `empirical validation` -> `limited paper claim`.
+
+P:
+- Assign one worker per non-overlapping lane, with no synthetic authority
+  construction and no promotion by prose.
+
+G:
+- No `W3AcceptedEvidenceAuthorityToken` fabrication.
+- No W4/W5 close without accepted DY convention/provenance.
+- No W4 physical calibration without `Candidate256PhysicalCalibrationExternalReceipt`.
+- No GR promotion without W4 matter/stress-energy and discrete Einstein law.
+- No limited SM+GR claim without QFT/GRQFT consumer law and empirical
+  validation receipt.
+
+F:
+- Remaining unification distance is concentrated in convention/provenance,
+  physical calibration, matter/stress-energy construction, sourced
+  Einstein-law proof, and QFT/GRQFT consumer validation.
+
+| Lane | Worker | Agent | Assignment | Deliverable | Success condition |
+|---|---|---|---|---|---|
+| `limited-w3-authority-anchor` | `Curie-W3` | `Lorentz` (`019df832-dea3-7e82-9b67-563e487fb425`) | Convert packet-complete HEP-R55 into the narrowest external-review/accepted-authority handoff. | `W3AcceptedAuthorityExternalReceipt` if authority is supplied, otherwise final provider-facing token packet. | W3 authority status is no longer ambiguous; no token is fabricated. |
+| `limited-dy-convention` | `Maxwell-Faraday` | `Hume` (`019df832-df40-71a0-a913-33928e7d5a73`) | Define the accepted Drell-Yan luminosity/bin-integration convention needed by both W4 and W5. | `AcceptedDYLuminosityConventionAuthority` request/receipt surface with PDF set, member, checksum, flavour weights, rapidity/bin convention, scale choice, and provenance. | W4/W5 blocker moves from convention unknown to accepted convention or typed rejected convention. |
+| `limited-w4-physical-calibration` | `Kelvin` | `Planck` (`019df832-dfe6-7542-b7ae-9b3f7b12e356`) | Turn PDF-backed W4 adequacy into physical calibration authority. | `Candidate256PhysicalCalibrationExternalReceipt` request/receipt surface. | Physical scale/unit interface is either accepted or first-missing is exact. |
+| `limited-matter-stress-energy` | `Gauss` | `Gauss` (`019df832-e1de-7511-8fb8-a275c1daa524`) | Build the W4-gated matter field and stress-energy interface. | `matterFieldFromW4` and `stressEnergyTensorFromW4` receipt surfaces, or first-missing diagnostic. | GR right-hand source term is typed from W4, not asserted. |
+| `limited-discrete-einstein-law` | `Noether` | `Descartes` (`019df832-e32d-7be1-9bef-370f028291cc`) | Consume W4 stress-energy in the discrete Einstein-law target. | `grEquationLaw`, `grEquationLawAtConsumer`, and `W4MatterStressEnergyInterfaceReceipt` updates. | `G_mu_nu = 8pi T_mu_nu` is either proved in the known-limit regime or blocked by a precise theorem gap. |
+| `limited-qft-grqft-consumer` | `Maxwell-GRQFT` | `Averroes` (`019df832-e62a-7702-801f-604c2c24ac1c`) | Add the QFT/GRQFT interaction and empirical-validation side of the limited claim. | `qftInteractionLaw`, `qftInteractionLawAtConsumer`, `EmpiricalGRQFTValidationReceipt`, or request-pack diagnostic. | Paper claim can say limited SM/QFT + GR closure rather than GR plus one collider ratio. |
+
+Round result:
+- `Curie-W3` / `Lorentz`: `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda`
+  now has a final request-only provider-facing handoff packet. First missing
+  remains `W3AcceptedEvidenceAuthorityToken`; no accepted-authority token or
+  positive receipt was constructed.
+- `Maxwell-Faraday` / `Hume`: W4/W5 convention surfaces now require an
+  accepted DY luminosity/bin-integration authority. Local CT18NLO remains
+  candidate-only; rejected probes remain diagnostic evidence, not closure.
+- `Kelvin` / `Planck`: W4 physical calibration request surfaces now make
+  `Candidate256PhysicalCalibrationExternalReceipt` explicitly downstream of
+  accepted PDF-backed W4 adequacy. Current first missing remains
+  `missingAcceptedDYLuminosityConvention`.
+- `Gauss` / `Gauss`: `EinsteinEquationCandidate.agda` now exposes the
+  W4-gated matter/stress-energy first missing as
+  `missingW4AnchorArtifactReceiptForMatterStress`.
+- `Noether` / `Descartes`: the discrete Einstein-law obligation now packages
+  `curvatureCarrier`, `einsteinEquationCarrier`, `einsteinEquationConsumer`,
+  `grEquationLaw`, and `grEquationLawAtConsumer` as consumers of
+  `W4MatterStressEnergyInterfaceReceipt`. No GR promotion was constructed.
+- `Maxwell-GRQFT` / `Averroes`: GRQFT request/diagnostic surfaces now include
+  the empirical validation receipt payload tied to `grEquationLaw` and
+  `qftInteractionLaw`. W5 remains blocked on `missingPromotionAuthorityToken`
+  and external PDF/consumer validation inputs.
+
+Validation policy:
+- For touched Agda modules: `timeout 30s agda <module>`.
+- For closure/index changes: `timeout 30s agda
+  DASHI/Physics/Closure/BlockerKillConditions.agda` and
+  `timeout 30s agda DASHI/Physics/Closure/P0BlockerObligationIndex.agda`.
+- For docs-only assignment updates: `git diff --check`.
+
+Promotion decision: `hold` until W3 authority, accepted W4/W5 convention,
+W4 calibration/matter, discrete Einstein law, and QFT/GRQFT validation are
+all receipt-backed.
 
 ## Active Assignment Round -- Next-Six Blocker Parallel Assignment
 
@@ -3088,3 +3732,80 @@ No W4 or W5 promotion follows. The first missing item is now an accepted
 parton-luminosity/bin-integration convention that maps the local CT18NLO grid
 onto the DASHI t45 correction surface, plus the usual authority/provenance
 packet.
+
+## Evidence Decision Forcing Tranche — 2026-05-06
+
+orchestrator_id: `evidence-decision-forcing-2026-05-06`
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+O:
+- W0 orchestrated six non-promoting lanes after readiness infrastructure
+  already existed.
+- Each worker owned one disjoint artifact and was not allowed to fabricate
+  authority, claim promotion, or add abstract receipt skeletons.
+
+R:
+- Switch from scaffolding to first evidence-decision pressure:
+  provider-answerable checklists, executable adapter smoke evidence,
+  minimal missing-field reduction, exact patch plan, and paper readiness
+  matrix.
+
+C:
+- New artifacts:
+  `Docs/DYAuthorityProviderResponseChecklist.md`,
+  `scripts/data/authority_packet.example.json`,
+  `logs/research/dy_authority_adapter_smoke.json`,
+  `Docs/W3AuthorityProviderResponseChecklist.md`,
+  `Docs/Candidate256MinimalMissingFields.md`,
+  `Docs/EinsteinCandidateInterfacePatchPlan.md`,
+  `Docs/LimitedSMGRPaperReadinessMatrix.md`.
+
+S:
+- `scripts/data/authority_packet.example.json` is intentionally
+  `insufficient`; it demonstrates the response shape and must fail closed.
+- The adapter smoke records three outcomes: absent packet exits `50`,
+  insufficient authority exits `51`, and accepted-shaped temporary fixture
+  exits `0` while remaining `computed-not-promoted`.
+- Candidate256 now reduces to W4-derived fields plus one external calibration
+  authority payload after W4 adequacy exists.
+- The Einstein interface path is patch-planned, not inhabited.
+
+L:
+- `request surface`
+  -> `provider checklist / example response shape`
+  -> `fail-closed adapter smoke`
+  -> `accepted provider response`
+  -> `W4/W5 computation`
+  -> `downstream calibration / matter / Einstein receipts`
+
+P:
+- Treat these artifacts as the next handoff layer for external response
+  collection.
+- Use the smoke artifact only as plumbing evidence.
+- Use the paper readiness matrix to select the highest allowed paper claim
+  based on actually inhabited receipts.
+
+G:
+- No W4/W5 promotion follows from the example packet or smoke fixture.
+- No W3 authority token is fabricated from the checklist.
+- No Candidate256, matter/stress-energy, Einstein, GRQFT, or limited
+  unification receipt is constructed.
+- `accepted`, `rejected`, and `insufficient` provider responses must be
+  preserved distinctly.
+
+F:
+- Still missing real accepted DY authority and provider luminosities.
+- Still missing W3 accepted evidence authority token.
+- Still missing W4 adequacy, W5 correction, Candidate256 physical
+  calibration, W4 matter/stress-energy, discrete Einstein law, and GRQFT
+  validation.
+
+| Worker | Lane | Deliverable | Result |
+|---|---|---|---|
+| Maxwell-Faraday | DY provider response checklist | `Docs/DYAuthorityProviderResponseChecklist.md`, `scripts/data/authority_packet.example.json` | Provider can answer accepted/rejected/insufficient in one pass; example packet is valid JSON and intentionally fail-closed. |
+| Feynman-Laplace | Adapter integration smoke | `logs/research/dy_authority_adapter_smoke.json` | Absent packet exits `50`; insufficient authority exits `51`; accepted-shaped fixture exits `0` and emits W4/W5-shaped artifacts without promotion. |
+| Curie-W3 | W3 provider response checklist | `Docs/W3AuthorityProviderResponseChecklist.md` | External reviewer can answer accept/reject/insufficient for the W3 token boundary without repo-internal interpretation. |
+| Kelvin | Candidate256 minimal missing fields | `Docs/Candidate256MinimalMissingFields.md` | Candidate256 blocker reduced to W4-derived fields plus one irreducible external calibration authority payload. |
+| Gauss-Noether | Einstein candidate patch plan | `Docs/EinsteinCandidateInterfacePatchPlan.md` | Future adapter route into `EinsteinEquationCandidate.W4MatterStressEnergyInterfaceReceipt` is explicit and guarded. |
+| Noether | Paper readiness matrix | `Docs/LimitedSMGRPaperReadinessMatrix.md` | Paper sections and claim levels now map to inhabited receipts, forbidden claims, blockers, and next actions. |

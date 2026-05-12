@@ -38,6 +38,10 @@ data W3AcceptedEvidenceAuthorityTokenPacketReadiness : Set where
   readyForExternalAuthorityTokenReview :
     W3AcceptedEvidenceAuthorityTokenPacketReadiness
 
+data W3AcceptedEvidenceAuthorityTokenHandoffPacketStatus : Set where
+  finalProviderFacingHandoffPacketRequestOnly :
+    W3AcceptedEvidenceAuthorityTokenHandoffPacketStatus
+
 record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
   field
     status :
@@ -63,6 +67,9 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
 
     packetReadiness :
       W3AcceptedEvidenceAuthorityTokenPacketReadiness
+
+    handoffPacketStatus :
+      W3AcceptedEvidenceAuthorityTokenHandoffPacketStatus
 
     packetReadyForExternalAuthority :
       Bool
@@ -126,6 +133,34 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
       Pack.W3AcceptedAuthorityProviderPayloadRequest.exactAuthorityTokenName
         providerPayloadRequest
 
+    exactFirstMissingProviderField :
+      Pack.W3AcceptedAuthorityProviderMissingField
+
+    exactFirstMissingProviderFieldIsToken :
+      exactFirstMissingProviderField
+      ≡
+      Pack.missingAcceptedEvidenceAuthorityToken
+
+    exactFirstMissingProviderFieldIsFirstInPack :
+      Pack.W3AcceptedAuthorityProviderPayloadRequest.missingProviderFields
+        providerPayloadRequest
+      ≡
+      Pack.missingAcceptedEvidenceAuthorityToken
+      ∷
+      Pack.missingEvidenceBackedEmpiricalTarget
+      ∷
+      Pack.missingEvidenceTargetAuthorityEquality
+      ∷
+      Pack.missingB4EmpiricalPromotion
+      ∷
+      Pack.missingOriginReceiptPromotion
+      ∷
+      Pack.missingBridgeObligations
+      ∷
+      Pack.missingBridgeTargetEvidenceEquality
+      ∷
+      []
+
     requiredTokenEvidenceFields :
       List String
 
@@ -136,6 +171,9 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
       requiredTokenEvidenceFieldsArePublicAndRunnerBound
       ≡
       true
+
+    claimScopeBoundary :
+      List String
 
     selfIssuanceDecision :
       W3AuthorityTokenSelfIssuanceDecision
@@ -171,11 +209,36 @@ record W3AcceptedEvidenceAuthorityTokenIntakeRequest : Setω where
     nonPromotionBoundary :
       List String
 
+    providerTraceabilityChecklist :
+      List String
+
     providerInstruction :
       List String
 
+    providerFacingHandoffPacket :
+      List String
+
+    providerFacingHandoffPacketIsFinal :
+      Bool
+
+    providerFacingHandoffPacketIsFinalIsTrue :
+      providerFacingHandoffPacketIsFinal
+      ≡
+      true
+
     exactFirstMissingBlocker :
       String
+
+    exactFirstMissingStatus :
+      String
+
+    exactFirstMissingName :
+      String
+
+    exactFirstMissingNameMatchesAuthorityTokenName :
+      exactFirstMissingName
+      ≡
+      exactAuthorityTokenName
 
     stillMissingPacketFields :
       List String
@@ -200,6 +263,8 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         NonCollapse.canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt
     ; packetReadiness =
         readyForExternalAuthorityTokenReview
+    ; handoffPacketStatus =
+        finalProviderFacingHandoffPacketRequestOnly
     ; packetReadyForExternalAuthority =
         true
     ; packetReadyForExternalAuthorityIsTrue =
@@ -229,6 +294,12 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
           Pack.canonicalW3AcceptedAuthorityProviderPayloadRequest
     ; exactAuthorityTokenNameMatchesPack =
         refl
+    ; exactFirstMissingProviderField =
+        Pack.missingAcceptedEvidenceAuthorityToken
+    ; exactFirstMissingProviderFieldIsToken =
+        refl
+    ; exactFirstMissingProviderFieldIsFirstInPack =
+        refl
     ; requiredTokenEvidenceFields =
         "datasetDOI: 10.17182/hepdata.104472"
         ∷ "paperDOI: 10.1140/epjc/s10052-023-11631-7"
@@ -246,6 +317,12 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         true
     ; requiredTokenEvidenceFieldsArePublicAndRunnerBoundIsTrue =
         refl
+    ; claimScopeBoundary =
+        "Claim scope is limited SM+GR empirical coordination for the bounded below-Z t43 lane"
+        ∷ "This packet is not a broad unification claim"
+        ∷ "This packet is not full Standard Model coverage"
+        ∷ "This packet is not curved-GR closure, W4/W5 promotion, or W8 origin promotion"
+        ∷ []
     ; selfIssuanceDecision =
         selfIssuanceNotPermittedByConstructorlessGate
     ; selfIssuancePermitted =
@@ -270,13 +347,49 @@ canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest =
         ∷ "No W3AcceptedEvidenceAuthorityToken is constructed in this module"
         ∷ "No W3AcceptedAuthorityExternalReceipt is constructed in this module"
         ∷ []
-    ; providerInstruction =
-        "External provider must supply W3AcceptedEvidenceAuthorityToken acknowledging the required evidence fields"
-        ∷ "If the provider cannot supply the token, return a typed authority-unavailable or field-mismatch diagnostic"
-        ∷ "Do not treat public verifiability of the evidence fields as local construction of the accepted authority token"
+    ; providerTraceabilityChecklist =
+        "typedFirstMissing: Pack.missingAcceptedEvidenceAuthorityToken"
+        ∷ "exactTokenType: DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate.W3AcceptedEvidenceAuthorityToken"
+        ∷ "sourceTrace: HEPData dataset DOI 10.17182/hepdata.104472 and submission DOI 10.17182/hepdata.115656.v1"
+        ∷ "tableTrace: ratio t43 and covariance t44"
+        ∷ "runnerTrace: freeze commit 3205d746639568762c9e97adf4a3672c356bd491"
+        ∷ "artifactTrace: per-bin artifact sha256 3987f82678943bab7679a9948e865f74f2263cdbe38a0e997734dad38939fda0"
+        ∷ "projectionTrace: per-bin projection digest cc6ea1a8ea57ef376ae275c1b49e32b27d6d204d7b70cad5c6308b3f8a897a79"
+        ∷ "witnessTrace: bin 12 pred 0.0486590199823977 data 0.049758 unc 0.00048197510309143566 pull -2.280159308132989"
+        ∷ "boundaryTrace: token-only intake request; no accepted receipt, evidence-backed target, B4 promotion, origin promotion, W4/W5/W8 promotion, or broad unification claim"
         ∷ []
+    ; providerInstruction =
+        "External provider must supply DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate.W3AcceptedEvidenceAuthorityToken acknowledging the required evidence fields"
+        ∷ "If the provider cannot supply the token, return a typed authority-unavailable or field-mismatch diagnostic"
+        ∷ "The exact first missing provider field is Pack.missingAcceptedEvidenceAuthorityToken"
+        ∷ "Do not treat public verifiability of the evidence fields as local construction of the accepted authority token"
+        ∷ "Treat the handoff scope as limited SM+GR empirical coordination for the bounded t43 lane, not broad unification"
+        ∷ []
+    ; providerFacingHandoffPacket =
+        "handoffStatus: finalProviderFacingHandoffPacketRequestOnly"
+        ∷ "target: DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate.W3AcceptedEvidenceAuthorityToken"
+        ∷ "firstMissingProviderField: Pack.missingAcceptedEvidenceAuthorityToken"
+        ∷ "firstMissingType: DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate.W3AcceptedEvidenceAuthorityToken"
+        ∷ "requestPack: DASHI.Physics.Closure.W3AcceptedAuthorityExternalReceiptRequestPack.canonicalW3AcceptedAuthorityExternalReceiptRequestPack"
+        ∷ "currentExternalStatus: W3AcceptedAuthorityExternalReceipt obligation-only; no accepted external receipt constructed"
+        ∷ "authorityEvidence: HEP-R53 runner per-bin non-collapse receipt plus public HEPData t43/t44 source fields"
+        ∷ "traceabilityChecklist: providerTraceabilityChecklist"
+        ∷ "claimScope: limited SM+GR empirical coordination for bounded below-Z t43, not broad unification"
+        ∷ "providerResponse: supply the accepted authority token or return typed authority-unavailable/mismatch diagnostic"
+        ∷ []
+    ; providerFacingHandoffPacketIsFinal =
+        true
+    ; providerFacingHandoffPacketIsFinalIsTrue =
+        refl
     ; exactFirstMissingBlocker =
         "W3AcceptedEvidenceAuthorityToken remains externally outstanding"
+    ; exactFirstMissingStatus =
+        "request-only final handoff; first missing = W3AcceptedEvidenceAuthorityToken; no W3AcceptedAuthorityExternalReceipt or W3AcceptedAuthorityPositiveRoute is constructed in repo"
+    ; exactFirstMissingName =
+        Pack.W3AcceptedAuthorityProviderPayloadRequest.exactAuthorityTokenName
+          Pack.canonicalW3AcceptedAuthorityProviderPayloadRequest
+    ; exactFirstMissingNameMatchesAuthorityTokenName =
+        refl
     ; stillMissingPacketFields =
         []
     }
@@ -307,6 +420,20 @@ canonicalW3AcceptedEvidenceAuthorityTokenPacketReady :
   ≡
   true
 canonicalW3AcceptedEvidenceAuthorityTokenPacketReady = refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenHandoffPacketFinal :
+  W3AcceptedEvidenceAuthorityTokenIntakeRequest.providerFacingHandoffPacketIsFinal
+    canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
+  ≡
+  true
+canonicalW3AcceptedEvidenceAuthorityTokenHandoffPacketFinal = refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenFirstMissingProviderField :
+  W3AcceptedEvidenceAuthorityTokenIntakeRequest.exactFirstMissingProviderField
+    canonicalW3AcceptedEvidenceAuthorityTokenIntakeRequest
+  ≡
+  Pack.missingAcceptedEvidenceAuthorityToken
+canonicalW3AcceptedEvidenceAuthorityTokenFirstMissingProviderField = refl
 
 canonicalW3AcceptedEvidenceAuthorityTokenStillMissingNoPacketFields :
   W3AcceptedEvidenceAuthorityTokenIntakeRequest.stillMissingPacketFields

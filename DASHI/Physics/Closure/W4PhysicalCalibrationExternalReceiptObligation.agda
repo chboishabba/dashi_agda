@@ -127,6 +127,22 @@ data Candidate256PhysicalCalibrationExternalBlockedField : Set where
   missingExternalDimensionalPreservationAtWitness :
     Candidate256PhysicalCalibrationExternalBlockedField
 
+data W4PhysicalCalibrationExternalReceiptQueueItem : Set where
+  awaitingAcceptedDYLuminosityConventionAuthority :
+    W4PhysicalCalibrationExternalReceiptQueueItem
+  awaitingW4ZAdequacy :
+    W4PhysicalCalibrationExternalReceiptQueueItem
+  awaitingCandidate256PhysicalCalibrationExternalReceipt :
+    W4PhysicalCalibrationExternalReceiptQueueItem
+
+canonicalW4PhysicalCalibrationExternalReceiptQueue :
+  List W4PhysicalCalibrationExternalReceiptQueueItem
+canonicalW4PhysicalCalibrationExternalReceiptQueue =
+  awaitingAcceptedDYLuminosityConventionAuthority
+  ∷ awaitingW4ZAdequacy
+  ∷ awaitingCandidate256PhysicalCalibrationExternalReceipt
+  ∷ []
+
 candidate256PhysicalCalibrationAuthorityTokenImpossibleHere :
   Gate.Candidate256PhysicalCalibrationAuthorityToken →
   ⊥
@@ -169,7 +185,14 @@ record Candidate256PhysicalCalibrationExternalReceiptCurrentStatus : Setω where
     gateBlockedIngredients :
       List Gate.Candidate256PhysicalCalibrationBlockedIngredient
 
+    downstreamReceiptQueue :
+      List W4PhysicalCalibrationExternalReceiptQueueItem
+
+    downstreamReceiptQueueName :
+      String
+
     requiredExternalReceipt : String
+    requiredAuthorityArtifact : String
     authorityBoundary : String
     calibrationBoundary : String
     factorizationBoundary : String
@@ -177,6 +200,9 @@ record Candidate256PhysicalCalibrationExternalReceiptCurrentStatus : Setω where
     downstreamPhysicalBoundary : String
 
     noAuthorityConstructedHere :
+      List String
+
+    legitimateAuthorityArtifactBoundary :
       List String
 
     noPromotionBoundary :
@@ -205,8 +231,14 @@ canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus =
     ; gateBlockedIngredients =
         Gate.Candidate256PhysicalCalibrationCurrentStatus.blockedIngredients
           Gate.canonicalCandidate256PhysicalCalibrationCurrentStatus
+    ; downstreamReceiptQueue =
+        canonicalW4PhysicalCalibrationExternalReceiptQueue
+    ; downstreamReceiptQueueName =
+        "AcceptedDYLuminosityConventionAuthority -> W4ZAdequacy -> Candidate256PhysicalCalibrationExternalReceipt"
     ; requiredExternalReceipt =
-        "provide an upstream external receipt carrying authority, units, calibration, factorization, and dimensional preservation"
+        "after AcceptedDYLuminosityConventionAuthority and W4ZAdequacy, provide an external receipt carrying authority, units, calibration, factorization, and dimensional preservation"
+    ; requiredAuthorityArtifact =
+        "provide an actual external artifact that inhabits Candidate256PhysicalCalibrationAuthorityToken outside this constructorless repo boundary"
     ; authorityBoundary =
         "Candidate256PhysicalCalibrationAuthorityToken has no constructor in the current repo"
     ; calibrationBoundary =
@@ -221,6 +253,12 @@ canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus =
         "This module does not construct Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "This module does not inhabit Candidate256PhysicalCalibrationExternalReceipt"
         ∷ "Any total receipt construction is impossible here until an external authority token is supplied outside this constructorless boundary"
+        ∷ []
+    ; legitimateAuthorityArtifactBoundary =
+        "A legitimate Candidate256PhysicalCalibrationExternalReceipt must carry an already-inhabited Candidate256PhysicalCalibrationAuthorityToken"
+        ∷ "Local diagnostics, HEPData anchor names, Z-peak shape fits, CT18 packet probes, labels, and prose provenance do not inhabit that token"
+        ∷ "The receipt boundary is intentionally downstream of AcceptedDYLuminosityConventionAuthority and W4ZAdequacy: it needs external physical-unit authority plus calibration and dimensional-preservation terms"
+        ∷ "Without that authority artifact, this module exposes only the request shape and the impossibility eliminator"
         ∷ []
     ; noPromotionBoundary =
         "The current status is obligations-needed only"

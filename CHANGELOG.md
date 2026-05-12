@@ -1,6 +1,220 @@
 # Changelog
 
+## 2026-05-13
+
+- refresh complete physics-unification roadmap:
+  `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md` now records the active
+  strict dependency path to a publishable physics-unification claim: internal
+  construction, empirical contact, and cross-lane closure/publication audit.
+  The roadmap names the current state as one closed gate (`G1`), partial or
+  blocked bridge surfaces for `G2`-`G5`, and absent `G6`/`G7` packages. The
+  older HEP-R54 fastest-path section is retained only as historical traceability
+  and marked superseded. This is documentation/governance only; it adds no
+  theorem closure, external authority, promotion receipt, or unification claim.
+
+- add G6 cross-lane commuting theorem skeleton:
+  `CrossLaneCommutingTheoremSkeleton.agda` records the typed diagram
+  obligation for the common-spine commuting theorem: lane embeddings,
+  recovery morphisms, section proofs, and the derived equality chain once
+  those sections are supplied. The surface is a record obligation rather than
+  top-level postulates and has status `skeletonOnlyNoPromotion`. It does not
+  close G6, replace G2/G3/G4/G5, or construct a complete-unification claim.
+
+- wire G6 cross-lane commuting skeleton into roadmap diagrams:
+  `PhysicsUnificationMap.puml` and `PhysicsRealityRoadmap.puml` now include
+  explicit `CrossLaneCommutingTheoremSkeleton` nodes labelled SKELETON /
+  no-promotion / postulate-obligation only. The wiring routes G1-G5 inputs
+  through the skeleton before the G6/cross-lane consistency target, without
+  implying G6 theorem closure or complete unification.
+
+- sharpen accepted DY luminosity convention authority surface:
+  `AcceptedDYLuminosityConventionAuthorityReceipt.agda` and the W4/W5 DY
+  diagnostic now require luminosity values, efficiency/acceptance model,
+  systematic budget, CMS-SMP publication pointer, normalization-preservation
+  law, and conversion law in addition to the existing PDF/provenance fields.
+  Provider docs and the example JSON mirror the same fail-closed packet shape;
+  no W4/W5 promotion or synthetic external authority was added.
+
+- add GRQFT partial consumer receipt:
+  `GRQFTConsumerNextObligationV2.agda` now inhabits a partial consumer receipt
+  for internally adaptable carriers: spacetime from the known-limits GR bridge
+  carrier, wave state from the known-limits QFT bridge, a spinor adapter over
+  that wave-state carrier, and the internal gauge-representation carrier. The
+  request pack records this V2 partial receipt as reusable input while keeping
+  stress-energy, curvature/Einstein laws, interaction closure, PDF authority,
+  empirical validation, promotion authority, and full `GRQFTClosurePromotionReceipt`
+  external-gated.
+
+## 2026-05-12
+
+- add W2 canonical pressure / realization-metric P2 obstruction:
+  `W2CanonicalPressureMetricP2BridgeOrObstruction.agda` defines the explicit
+  offline-L2 admissible `Nat -> Nat` candidate family from the canonical
+  pressure scalar to the inhabited realization-indexed metric scalar and
+  returns `W2KillEvidence` as an obstruction. The obstruction consumes
+  `CanonicalP2OfflineL2ObstructionCertificate`; every admissible candidate
+  would need the below-delta p2-key forcing bridge that certificate rejects.
+  This does not construct `NaturalP2ConvergencePromotionAuthorityToken` or a
+  `NaturalP2ConvergencePromotionReceipt`.
+
+- add LILA-R4 Theta/J bridge citation boundary:
+  `LilaE8ThetaJBridgeSurface.agda` records a cross-language
+  `LeanSiblingCitationReceipt` for `../dashi_lean4/MoonshineEarn.lean`
+  after the exact requested `../dashilean4/MoonshineEarn.lean` path was not
+  present. The receipt binds SHA-256
+  `62343c34a138a66e5374c17ee92b07104023b1c13d651f56ea17ab2e271d268a` and
+  names discovered Moonshine/Ramanujan Lean theorems, but asserts no Lean proof
+  in Agda and gives no LILA-R5, W3, G5, physics, or unification promotion.
+
+- add Drosophila Release 6 genome W4 candidate packet:
+  downloaded the NCBI `GCF_000001215.4` genomic FASTA and CDS FASTA, added a
+  reproducible extractor, and emitted a checksum-bound authority/codon packet.
+  `DrosophilaGenomeW4CandidateAuthorityReceipt.agda` records the corrected
+  Release 6 reference DOI `10.1101/gr.185579.114`, rejects the previously
+  suggested `10.1126/science.1237175` for this route, binds the genomic FASTA
+  SHA-256
+  `e69e907b5e87ce756236dcef93e82001cfd08f1a0ed5f22e36cbbd3a87ebc57d`, binds
+  the CDS FASTA SHA-256
+  `3f379cec1d952f9a1c22e2b6dd9ff8eefce6da97ffb198cde93dc0a17c40da01`, and
+  records a CDS-based non-uniform codon witness. This remains candidate-only:
+  no TSFV calibration law, Candidate256 authority token, Candidate256 physical
+  calibration receipt, W4 promotion, Brain promotion, or unification claim was
+  constructed.
+
+- add Brain proviso and physics-boundary audit tranche:
+  the Brain lane is now explicitly conditional rather than permanently
+  ontologically excluded. `BrainGovernanceProviso.agda` keeps Brain/physics
+  promotion flags false and allows lateral support review only after typed
+  exhaustion of a direct W1-W6 lane with no retarget availability.
+  New docs record W1-W6 assignability, Brain-to-physics boundary handles,
+  W4/W5's accepted-DY convention blocker, and W2/W9 promotion-boundary blockers.
+  The result is non-promoting: Brain evidence does not replace W1-W6 kill
+  conditions, does not construct W2/W9/W4/W5 authority, and does not support a
+  physics-promotion or unification claim.
+
+- orchestrate W3/W4/W7/W8/W2/W9 plus dashiBRAIN integration lanes:
+  W7 bounded claim-governance and W8 first empirical gate were audited and
+  already typecheck without edits. W4 Z-peak data and runner wiring were
+  verified, producing the existing negative adequacy artifact
+  `chi2/dof = 298.8462841768543`; W4 remains blocked on dirty Z-peak shape
+  adequacy / accepted DY convention, not missing t21/t22 files. W2 targeted
+  surfaces now typecheck under 30s; the active blocker is the constructorless
+  `NaturalP2ConvergencePromotionAuthorityToken`, with the p2 bridge still named
+  as a downstream technical ingredient. W9 now records that the canonical pair
+  route is typed-obstructed and the weighted-support route is accepted-only
+  until a W9 kill-route constructor consumes it. The Drosophila hemibrain lane
+  now has non-promoting external numeric receipts, a checksum manifest,
+  single-scale closure/gauge robustness receipts, and a typed coarse-grain
+  persistence obstruction. No W3 authority token, W4 calibration, W8 external
+  origin authority, W2 promotion, W9 kill receipt, Brain promotion, physics
+  promotion, or unification claim was constructed.
+
+## 2026-05-06
+
+- add evidence-decision forcing artifacts:
+  DY authority intake now has a provider response checklist and a syntactically
+  valid example authority packet that intentionally fails closed as
+  `insufficient`. The DY luminosity adapter smoke artifact records absent
+  packet exit `50`, insufficient authority exit `51`, and accepted-shaped
+  temporary fixture exit `0` while preserving `computed-not-promoted` status.
+  W3 now has a provider response checklist; Candidate256 minimal missing
+  fields are reduced to W4-derived values plus one external calibration
+  authority payload; the Einstein candidate interface has a guarded patch plan;
+  and the limited SM+GR paper readiness matrix maps receipts to paper sections,
+  allowed claims, forbidden claims, blockers, and next actions. No authority
+  token, W4/W5 promotion, Candidate256 calibration, stress-energy receipt,
+  Einstein law, GRQFT validation, or limited-unification claim was constructed.
+
 ## 2026-05-05
+
+- add submission and compatibility readiness artifacts:
+  final provider-facing submission bundles now exist for the W4/W5 accepted DY
+  luminosity convention and the W3 accepted evidence authority token. A shared
+  DY luminosity adapter consumes accepted/replacement authority-shaped JSON and
+  emits W4/W5 luminosity artifacts while failing closed without provider
+  authority and luminosities. New claim-boundary and compatibility audit docs
+  keep Level 1/2/3 publication language, Candidate256 calibration, and W4
+  matter/stress-energy downstream of inhabited receipts. No authority token,
+  W4/W5 promotion, calibration receipt, stress-energy receipt, Einstein law, or
+  GRQFT promotion was constructed.
+
+- assign receipt-ingestion and downstream-readiness lanes:
+  six non-promoting lanes now prepare the next handoff layer after the DY
+  provider packet. New response-ingestion surfaces exist for accepted DY
+  luminosity authority and W3 accepted evidence authority; W4 and W5 now have
+  fail-closed runner/receipt templates gated on accepted provider packets;
+  Candidate256 physical calibration and W4 matter/stress-energy now have
+  explicit preflight contracts. No W4 adequacy, W5 pass, W3 token,
+  Candidate256 calibration, stress-energy receipt, GR law, or GRQFT promotion
+  was constructed.
+
+- add DY convention authority provider packet:
+  `Docs/AcceptedDYLuminosityConventionAuthorityProviderPacket.md` now
+  externalizes the W4/W5 accepted Drell-Yan luminosity convention request in a
+  sendable form. It names the required PDF, LHAPDF, checksum, scale, rapidity,
+  mass-bin, flavour, integration, source, and provenance fields, preserves the
+  failed fixed-`x`, `t45/z_peak`, and `t45/t43` probes as negative diagnostics,
+  and keeps W4/W5 non-promoting until an accepted authority receipt exists.
+
+- run six-lane limited SM+GR authority/gate follow-up:
+  W4/W5 accepted DY convention surfaces now canonicalize
+  `missingAcceptedDYLuminosityConventionAuthority` and the shared
+  `missingSharedAcceptedDYLuminosityConventionAuthority` without promoting
+  W4/W5. `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda` now exposes the
+  provider-facing token field and preserves the constructorless
+  `W3AcceptedEvidenceAuthorityToken` boundary. W4 physical calibration,
+  matter/stress-energy, discrete Einstein-law, and GRQFT/QFT consumer lanes now
+  preserve their downstream order: accepted DY convention authority, W4
+  adequacy, `Candidate256PhysicalCalibrationExternalReceipt`, W4 matter/stress
+  energy, discrete Einstein law, and GRQFT validation. No authority token,
+  calibration receipt, stress-energy receipt, Einstein-law receipt, or GRQFT
+  closure promotion was constructed.
+
+- assign limited SM+GR unification paper tranche:
+  `Docs/WorkerCoordinationBoard.md` now records orchestrator id
+  `limited-sm-gr-unification-2026-05-05` with six highest-gain lanes toward a
+  limited known-limit SM+GR paper claim: W3 accepted authority, W4/W5 accepted
+  Drell-Yan luminosity convention, W4 physical calibration, W4-derived
+  matter/stress-energy, discrete Einstein law, and QFT/GRQFT consumer
+  validation. `TODO.md` mirrors the same promotion guards: no synthetic
+  authority tokens, no W4/W5 close without accepted convention/provenance, no
+  GR promotion before W4 matter/stress-energy, and no limited SM+GR claim
+  without GR equation law plus QFT/GRQFT consumer validation.
+
+- integrate limited SM+GR unification worker lanes:
+  `W3AcceptedEvidenceAuthorityTokenIntakeRequest.agda` now contains a final
+  request-only provider-facing handoff packet. W4/W5 convention and PDF intake
+  surfaces now make accepted DY luminosity/bin-integration authority the exact
+  shared first missing item. W4 physical calibration surfaces now keep
+  `Candidate256PhysicalCalibrationExternalReceipt` downstream of accepted
+  PDF-backed W4 adequacy. `EinsteinEquationCandidate.agda` now exposes
+  `missingW4AnchorArtifactReceiptForMatterStress` and packages the future
+  discrete Einstein-law consumer payload. GRQFT request/diagnostic surfaces now
+  include the empirical validation receipt payload tied to `grEquationLaw` and
+  `qftInteractionLaw`. No authority token, W4/W5 promotion, GR promotion, or
+  GRQFT closure promotion was constructed.
+
+- clarify Wikidata global-latent formalism:
+  `Docs/ITIRPNFResidualLogicBridge.md`, `Docs/WorkerCoordinationBoard.md`,
+  `TODO.md`, and `COMPACTIFIED_CONTEXT.md` now distinguish the formal endstate
+  from current repo/runtime state. The formalism is recorded as monotone
+  structural coherence over a snapshot-derived global ontology index; bounded
+  QID diagnostics and review packets are local projections. The remaining gaps
+  are still explicit: QID/PID/statement carriers, live/global ontology index,
+  mutation/filter carriers, QID-only repair projection, global severity theorem,
+  and governance-token surfaces. No edit authority, runtime receipt, or P0
+  promotion was constructed.
+
+- assign Wikidata monotone structural coherence worker lanes:
+  `Docs/WorkerCoordinationBoard.md` now records orchestrator id
+  `wikidata-monotone-coherence-2026-05-05` with four read-only docs/governance
+  sidecar lanes for the pasted formalism: residual-core Agda gap analysis,
+  ontology-index and bounded-slice surface scan, docs/governance placement,
+  and validation policy. `Docs/ITIRPNFResidualLogicBridge.md`, `TODO.md`, and
+  `COMPACTIFIED_CONTEXT.md` now reflect the same non-promoting boundary: no
+  Wikidata edit authority without external promotion receipt, no fabricated
+  runtime `PNFEmissionReceipt`, no assumed live dump/index, and no monotonicity
+  theorem without the filter-respecting edit-stream precondition.
 
 - attempt CT18NLO PDF intake:
   direct `lhapdf` installation was unavailable (`pip` has no wheel in the

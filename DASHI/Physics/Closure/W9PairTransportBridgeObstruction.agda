@@ -21,6 +21,7 @@ import DASHI.Arithmetic.WeightedValuationEnergy as WVE
 import DASHI.Physics.Closure.BlockerKillConditions as Kill
 import DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation as W9
 import DASHI.Physics.Closure.DeltaToQuadraticBridgeTheorem as DQ
+import DASHI.Physics.Closure.W9WeightedSupportRetargetConsumerReceipt as W9Retarget
 
 Canonical15PairPressureWitness : Setω
 Canonical15PairPressureWitness =
@@ -41,6 +42,8 @@ data W9PairTransportBridgeStatus : Set where
   blockedByWeightedReplacementIdentificationMismatch :
     W9PairTransportBridgeStatus
   requiresNewAcceptedKillRoute :
+    W9PairTransportBridgeStatus
+  retargetAcceptedOnlyNoW9KillReceipt :
     W9PairTransportBridgeStatus
 
 record W9PairTransportBridgeObstruction : Setω where
@@ -88,6 +91,14 @@ record W9PairTransportBridgeObstruction : Setω where
       (+ (WVE.weightedQuadraticEnergy
           (WVE.left weightedRouteCounterexample)))
 
+    retargetConsumerScope :
+      W9Retarget.W9WeightedSupportRetargetScope
+
+    retargetConsumerScopeIsAcceptedOnly :
+      retargetConsumerScope
+      ≡
+      W9Retarget.retargetConsumerAcceptedOnly
+
     firstMissingBridge :
       String
 
@@ -122,17 +133,22 @@ canonicalW9PairTransportBridgeObstruction =
     ; weightedRouteCounterexampleMismatch =
         W9.CancellationToWeightedQuadraticIdentificationObstruction.counterexampleMismatch
           W9.canonicalCancellationToWeightedQuadraticIdentificationObstruction
+    ; retargetConsumerScope =
+        W9Retarget.currentW9WeightedSupportRetargetScope
+    ; retargetConsumerScopeIsAcceptedOnly =
+        refl
     ; firstMissingBridge =
-        "Either prove ExistingCancellationPressureCompatibilityObligation.pressureWitness over canonicalDeltaTransport, prove WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy, or add a new accepted W9KillRouteReceipt constructor for the unary Nat bound"
+        "No canonicalDeltaTransport bridge is inhabitable: the available weighted-support path is retargetConsumerAcceptedOnly, so W9 still lacks either ExistingCancellationPressureCompatibilityObligation.pressureWitness, WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy, or a W9KillRouteReceipt constructor accepting the retarget-only Nat-bound receipt"
     ; obstructionBoundary =
         "canonicalDeltaTransport theorem refl (x , y) uses the pair embeddedProfileCarrier"
         ∷ "ExistingCancellationPressureCompatibilityObligation requires a pointwise Z equality over that pair transport"
         ∷ "WeightedValuationReplacementObligation uses canonicalWeightedQuadraticTransport of the left input"
         ∷ "The current repo has counterexamples for both accepted routes"
+        ∷ "W9WeightedSupportRetargetConsumerReceipt inhabits the downstream retarget consumer only"
         ∷ "No W9KillReceipt is constructed here"
         ∷ []
     ; status =
-        requiresNewAcceptedKillRoute
+        retargetAcceptedOnlyNoW9KillReceipt
     }
 
 currentW9PairTransportBridgeStatus :

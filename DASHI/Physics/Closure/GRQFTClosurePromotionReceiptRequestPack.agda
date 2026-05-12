@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.GRQFTConsumerNextObligation as W5
+import DASHI.Physics.Closure.GRQFTConsumerNextObligationV2 as W5V2
 import DASHI.Physics.Closure.GRQFTConsumerSourceDiagnostic as W5Source
 
 ------------------------------------------------------------------------
@@ -34,6 +35,20 @@ record GRQFTClosurePromotionProviderPayloadRequest : Setω where
     missingUpstreamFields :
       List W5.GRQFTConsumerMissingUpstreamField
 
+    firstMissingPolicy :
+      List W5.GRQFTConsumerFirstMissingReceipt
+
+    firstMissingPolicyStillCanonical :
+      firstMissingPolicy
+      ≡
+      W5.canonicalGRQFTConsumerFirstMissingPolicy
+
+    exactFirstMissingName :
+      String
+
+    limitedPromotionGateName :
+      String
+
     missingUpstreamFieldsStillCanonical :
       missingUpstreamFields
       ≡
@@ -52,6 +67,9 @@ record GRQFTClosurePromotionProviderPayloadRequest : Setω where
 
     sourceAvailability :
       W5Source.GRQFTConsumerReceiptSourceAvailability
+
+    partialConsumerReceipt :
+      W5V2.GRQFTPartialConsumerReceipt
 
     sourceAvailabilityStillDiagnosticCanonical :
       sourceAvailability
@@ -75,6 +93,10 @@ record GRQFTClosurePromotionProviderPayloadRequest : Setω where
       W5.GRQFTClosurePromotionReceipt →
       ⊥
 
+    impossibleLimitedPromotionGateHere :
+      W5.LimitedSMQFTGRPromotionPrerequisiteGate →
+      ⊥
+
 canonicalGRQFTClosurePromotionProviderPayloadRequest :
   GRQFTClosurePromotionProviderPayloadRequest
 canonicalGRQFTClosurePromotionProviderPayloadRequest =
@@ -91,10 +113,23 @@ canonicalGRQFTClosurePromotionProviderPayloadRequest =
         ∷ "qftInteractionLaw : interactionClosureCarrier -> Set"
         ∷ "grEquationLawAtConsumer : stressEnergy -> curvature -> grEquationLaw (einsteinEquationConsumer stressEnergy curvature)"
         ∷ "qftInteractionLawAtConsumer : waveState -> qftInteractionLaw (interactionClosureConsumer (gaugeRepresentationMap (spinorRealizationMap waveState)))"
+        ∷ "empiricalGRQFTValidationReceipt : EmpiricalGRQFTValidationReceipt downstreamConsumerFields grEquationLaw qftInteractionLaw"
+        ∷ "GRQFTClosurePromotionReceipt : required before LimitedSMQFTGRPromotionPrerequisiteGate or any limited SM/QFT+GR promotion"
         ∷ "empirical GR/QFT validation external to known-limits local recovery"
         ∷ []
     ; missingUpstreamFields =
         W5Source.GRQFTConsumerSourceDiagnostic.receiptBlockedFields
+          W5Source.canonicalGRQFTConsumerSourceDiagnostic
+    ; firstMissingPolicy =
+        W5Source.GRQFTConsumerSourceDiagnostic.firstMissingPolicy
+          W5Source.canonicalGRQFTConsumerSourceDiagnostic
+    ; firstMissingPolicyStillCanonical =
+        refl
+    ; exactFirstMissingName =
+        W5Source.GRQFTConsumerSourceDiagnostic.exactFirstMissingName
+          W5Source.canonicalGRQFTConsumerSourceDiagnostic
+    ; limitedPromotionGateName =
+        W5Source.GRQFTConsumerSourceDiagnostic.limitedPromotionGateName
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
     ; missingUpstreamFieldsStillCanonical =
         refl
@@ -109,18 +144,24 @@ canonicalGRQFTClosurePromotionProviderPayloadRequest =
     ; sourceAvailability =
         W5Source.GRQFTConsumerSourceDiagnostic.sourceAvailability
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
+    ; partialConsumerReceipt =
+        W5V2.canonicalGRQFTPartialConsumerReceipt
     ; sourceAvailabilityStillDiagnosticCanonical =
         refl
     ; providerInstructions =
         "External provider must supply the full GRQFTClosurePromotionReceipt payload, not another known-limits theorem"
-        ∷ "The payload must include promotion authority, the PDF carrier prerequisite, downstream consumer fields, GR equation law, QFT interaction law, both consumer law witnesses, and empirical GR/QFT validation"
+        ∷ "The payload must include promotion authority, the PDF carrier prerequisite, downstream consumer fields, GR equation law, QFT interaction law, both consumer law witnesses, and EmpiricalGRQFTValidationReceipt"
         ∷ "Known-limits observable, GR bridge, and QFT bridge sources may be reused only as inputs to downstreamConsumerFields"
+        ∷ "The partial V2 consumer receipt already supplies spacetime, wave-state, spinor-adapter, and gauge-representation carrier fields; provider payload must supply the external-gated stress-energy, curvature/Einstein, interaction, authority, PDF, and validation fields"
+        ∷ "The empirical receipt must validate the same qftInteractionLaw consumed by qftInteractionLawAtConsumer"
+        ∷ "If the full chain cannot be supplied, return the earliest missing name from canonicalGRQFTConsumerFirstMissingPolicy"
         ∷ []
     ; nonPromotionBoundary =
         "This request pack does not construct GRQFTClosurePromotionAuthorityToken"
         ∷ "This request pack does not construct an external PDF carrier or mass-kernel route"
         ∷ "This request pack does not construct GRQFTDownstreamConsumerFields"
-        ∷ "This request pack does not construct GR/QFT laws, consumer witnesses, empirical validation, or GRQFTClosurePromotionReceipt"
+        ∷ "This request pack does not construct GR/QFT laws, consumer witnesses, EmpiricalGRQFTValidationReceipt, or GRQFTClosurePromotionReceipt"
+        ∷ "This request pack does not construct LimitedSMQFTGRPromotionPrerequisiteGate or any limited SM/QFT+GR promotion"
         ∷ []
     ; strictBlockerImpact =
         W5Source.GRQFTConsumerSourceDiagnostic.blockerImpact
@@ -130,6 +171,9 @@ canonicalGRQFTClosurePromotionProviderPayloadRequest =
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
     ; impossibleReceiptHere =
         W5Source.GRQFTConsumerSourceDiagnostic.impossibleReceiptHere
+          W5Source.canonicalGRQFTConsumerSourceDiagnostic
+    ; impossibleLimitedPromotionGateHere =
+        W5Source.GRQFTConsumerSourceDiagnostic.impossibleLimitedPromotionGateHere
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
     }
 
@@ -144,11 +188,23 @@ record GRQFTClosurePromotionReceiptRequestPack : Setω where
     providerPayloadRequest :
       GRQFTClosurePromotionProviderPayloadRequest
 
+    firstMissingPolicy :
+      List W5.GRQFTConsumerFirstMissingReceipt
+
+    exactFirstMissingName :
+      String
+
+    limitedPromotionGateName :
+      String
+
     requiredNextReceipt :
       String
 
     knownLimitsBoundary :
       String
+
+    partialConsumerReceipt :
+      W5V2.GRQFTPartialConsumerReceipt
 
     closurePromotionBoundary :
       String
@@ -169,20 +225,33 @@ canonicalGRQFTClosurePromotionReceiptRequestPack =
         W5Source.canonicalGRQFTConsumerSourceDiagnostic
     ; providerPayloadRequest =
         canonicalGRQFTClosurePromotionProviderPayloadRequest
+    ; firstMissingPolicy =
+        GRQFTClosurePromotionProviderPayloadRequest.firstMissingPolicy
+          canonicalGRQFTClosurePromotionProviderPayloadRequest
+    ; exactFirstMissingName =
+        GRQFTClosurePromotionProviderPayloadRequest.exactFirstMissingName
+          canonicalGRQFTClosurePromotionProviderPayloadRequest
+    ; limitedPromotionGateName =
+        GRQFTClosurePromotionProviderPayloadRequest.limitedPromotionGateName
+          canonicalGRQFTClosurePromotionProviderPayloadRequest
     ; requiredNextReceipt =
         W5Source.GRQFTConsumerSourceDiagnostic.requiredNextReceipt
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
     ; knownLimitsBoundary =
         W5Source.GRQFTConsumerSourceDiagnostic.knownLimitsBoundary
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
+    ; partialConsumerReceipt =
+        W5V2.canonicalGRQFTPartialConsumerReceipt
     ; closurePromotionBoundary =
         W5Source.GRQFTConsumerSourceDiagnostic.closurePromotionBoundary
           W5Source.canonicalGRQFTConsumerSourceDiagnostic
     ; consolidatedRequestBoundary =
         "Request pack only aggregates W5 and W5g diagnostics into provider-facing missing receipt fields"
         ∷ "It adds the PDF carrier prerequisite as a diagnostic field, not as a supplied carrier"
+        ∷ "It records the V2 partial consumer receipt for internally adaptable carriers only"
         ∷ "It does not promote known-limits GR/QFT bridge results into full GR/QFT closure"
         ∷ "It does not discharge W5, empirical validation, or downstream physics authority blockers"
+        ∷ "It requires qftInteractionLaw, qftInteractionLawAtConsumer, EmpiricalGRQFTValidationReceipt, and GRQFTClosurePromotionReceipt authority before any limited SM/QFT+GR promotion"
         ∷ []
     ; consolidatedStrictBlockerImpact =
         "W5 remains blocked until an external GRQFTClosurePromotionReceipt is supplied"

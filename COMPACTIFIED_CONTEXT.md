@@ -1,5 +1,31 @@
 # Compactified Context
 
+## 2026-05-05
+
+- Wikidata global-latent formalism clarification:
+  the current reader-facing version now distinguishes the formal endstate from
+  the available runtime/repo state. The formalism is global latent monotone
+  structural coherence over a snapshot-derived ontology index: compile typed
+  carriers, compute residual/severity state, admit only mutations with
+  `severity(after) <= severity(before)`, and get non-increasing aggregate
+  structural incoherence over a finite lattice. Bounded QID diagnostics and
+  review packets are local projections of that state. The repo still lacks the
+  concrete Wikidata QID/PID/statement carriers, live global index,
+  mutation/filter carrier, QID-only repair projection, and global severity
+  theorem; no edit authority or runtime receipt is fabricated.
+
+- Wikidata monotone structural coherence assignment:
+  `Docs/WorkerCoordinationBoard.md` now records orchestrator id
+  `wikidata-monotone-coherence-2026-05-05` for a read-only four-lane discovery
+  round over the pasted formalism. `Rho` / `Godel` audits existing residual
+  and PNF Agda surfaces; `Kappa` / `Ptolemy` scans for Wikidata ontology-index,
+  bounded-slice, mutation, and filter surfaces; `Eta` / `Confucius` owns docs
+  and governance placement; `Lambda` / `Pauli` owns validation policy. The
+  round is non-promoting: no live Wikidata edit authority, runtime
+  `PNFEmissionReceipt`, dump/index artifact, or global monotonicity theorem is
+  claimed without the corresponding receipt, provider artifact, or
+  filter-respecting edit-stream precondition.
+
 ## 2026-05-04
 
 - SIB-R1 sibling evidence inventory:

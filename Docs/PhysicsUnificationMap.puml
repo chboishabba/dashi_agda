@@ -98,6 +98,7 @@ package "Open program" {
   rectangle "Continuum / adapter lane\nAdvanced but blocked\nLanded:\nCanonicalToNoncanonicalCoarseRecoveryIdentification\nfieldwise seam equalities\nconditional MDL seam export\nCanonicalToNoncanonicalMdlSeamTheorem\nCanonicalClosureShiftMdlScheduleBridge\nCanonicalToNoncanonicalScheduleMdlAlignmentBlocker\nCanonicalToNoncanonicalMdlCRCrossChannelObstruction\n[advanced but blocked]" as OpenContinuum #fef3c7
   rectangle "Gauge / matter lane\nAdvanced\nLanded:\nCanonicalGaugeMatterInterpretableObservableTheorem\nCanonicalGaugeMatterRecoveredMatterFieldTheorem\n[advanced]" as OpenGauge #dcfce7
   rectangle "GR / QFT lane\nAdvanced but blocked\nLanded:\nKnownLimitsInterpretableObservableConsumer\nrecovered matter-field bridge exposure\n[advanced but blocked]" as OpenGRQFT #fef3c7
+  rectangle "G6 cross-lane commuting skeleton\nCrossLaneCommutingTheoremSkeleton\nSKELETON / no promotion\npostulate-obligation only\nrequires G2/G3/G4/G5 section proofs\n[not theorem closure]" as G6CrossLaneSkeleton #fef3c7
   rectangle "Atomic / nuclear lane\nAdvanced but blocked\nLanded:\nShellDictionaryRecoveryGateTheorem\nAtomicPhotonuclearContactGateTheorem\nChemistryRightLimitsGateTheorem\nChemistryRightLimitsInterpretationContract\nAtomicChemistryRightLimitsAdapter\nChemistryRightLimitsObservableLaw\nChemistryRightLimitsPromotedObservableCouplingLaw\nChemistryRightLimitsQuotientObservable\nChemistryRightLimitsQuotientObservableCouplingLaw\nChemistryRightLimitsQuotientCrossBandCandidate256Witness\n[advanced but blocked]" as OpenAtomic #fef3c7
   rectangle "Brain lane status\nall four themes have local owners\nBrainDynamicSemanticTransport landed:\ndynamic transport + bounded semantic drift\nstrict-richer joint consumer witness\n[landed theorem-thin surface]" as BlockerBrain #fef3c7
   rectangle "Brain-DNA status\nwhole-chain integration law landed:\nI_chain + checksum composition + realism floor\nphysics-facing handoff promotion landed:\nH_phys through I_chain + Lchem/Candidate256 gates\nstill bounded; no spectra, bonding, wet-lab realism,\nscale-setting, or full atom recovery\n[landed theorem-thin surfaces]" as BlockerCrossover #fef3c7
@@ -135,11 +136,12 @@ MaturityMaxwell --> TargetG2
 MaturitySchrodinger --> TargetG3
 MaturityGR --> TargetG4
 MaturityPrediction --> TargetG5
-TargetG1 --> TargetG6
-TargetG2 --> TargetG6
-TargetG3 --> TargetG6
-TargetG4 --> TargetG6
-TargetG5 --> TargetG6
+TargetG1 --> G6CrossLaneSkeleton : spine input
+TargetG2 --> G6CrossLaneSkeleton : Maxwell section obligation
+TargetG3 --> G6CrossLaneSkeleton : Schrodinger section obligation
+TargetG4 --> G6CrossLaneSkeleton : GR section obligation
+TargetG5 --> G6CrossLaneSkeleton : empirical section obligation
+G6CrossLaneSkeleton --> TargetG6 : skeleton feeds G6 target
 TargetG6 --> TargetG7
 TargetG7 --> TargetComplete
 CoreSpineTri --> CoreSpineMetric : componentwise lift

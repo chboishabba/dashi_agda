@@ -39,11 +39,20 @@ record W4PhysicalCalibrationProviderPayloadRequest : Setω where
     exactCalibrationGateName :
       String
 
+    exactAuthorityArtifactRequirement :
+      String
+
     exactMissingReceiptFields :
       List String
 
     blockedExternalFields :
       List External.Candidate256PhysicalCalibrationExternalBlockedField
+
+    downstreamReceiptQueue :
+      List External.W4PhysicalCalibrationExternalReceiptQueueItem
+
+    downstreamReceiptQueueName :
+      String
 
     blockedExternalFieldsAreCanonical :
       blockedExternalFields
@@ -68,6 +77,9 @@ record W4PhysicalCalibrationProviderPayloadRequest : Setω where
       List String
 
     providerInstructions :
+      List String
+
+    rejectedReceiptSubstitutes :
       List String
 
     routeBoundary :
@@ -101,6 +113,9 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
         "DASHI.Physics.Closure.W4PhysicalCalibrationGate.Candidate256PhysicalCalibrationAuthorityToken"
     ; exactCalibrationGateName =
         "DASHI.Physics.Closure.W4PhysicalCalibrationGate.Candidate256PhysicalCalibrationGate"
+    ; exactAuthorityArtifactRequirement =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.requiredAuthorityArtifact
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
     ; exactMissingReceiptFields =
         "calibrationAuthority : Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "physicalUnitCarrier : Set"
@@ -114,6 +129,12 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
     ; blockedExternalFields =
         External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.blockedExternalFields
           External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
+    ; downstreamReceiptQueue =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.downstreamReceiptQueue
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
+    ; downstreamReceiptQueueName =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.downstreamReceiptQueueName
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
     ; blockedExternalFieldsAreCanonical =
         refl
     ; blockedExternalFieldsAreCurrent =
@@ -123,7 +144,9 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
     ; routeMissingIngredientsAreCanonical =
         refl
     ; providerPayloadFields =
-        "Provide a physical unit carrier distinct from the dimensionless Nat surrogate"
+        "First obtain AcceptedDYLuminosityConventionAuthority for the DY luminosity/bin-integration convention"
+        ∷ "Then establish W4ZAdequacy downstream of that accepted convention authority"
+        ∷ "Then provide a physical unit carrier distinct from the dimensionless Nat surrogate"
         ∷ "Provide a Nat-to-physical-unit calibration map for Candidate256 surrogate scale values"
         ∷ "Provide a calibrated quotient-class scale map into the physical unit carrier"
         ∷ "Prove the calibrated quotient scale factors through candidate256SurrogateScale"
@@ -133,9 +156,18 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
         ∷ []
     ; providerInstructions =
         "Use the exact Candidate256PhysicalCalibrationExternalReceipt type named above"
+        ∷ "Treat AcceptedDYLuminosityConventionAuthority -> W4ZAdequacy -> Candidate256PhysicalCalibrationExternalReceipt as the receipt queue"
+        ∷ "Do not construct this receipt unless a legitimate external authority artifact already inhabits Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "Do not satisfy the request with Nat as its own promoted physical unit carrier"
         ∷ "Do not replace dimensional preservation with a label or prose unit annotation"
         ∷ "If no positive calibration receipt can be supplied, return a typed source/authority diagnostic instead of prose"
+        ∷ []
+    ; rejectedReceiptSubstitutes =
+        "same-record HEPData t21/t22/t43/t44/t45/t46 anchors"
+        ∷ "dirty Z-peak scalar shape-fit artifacts or chi2/dof improvements"
+        ∷ "CT18/MSHT/LHAPDF packet probes not accepted by an external physical calibration authority"
+        ∷ "Candidate256 quotient/cross-band witness terms before strict physical scale-setting"
+        ∷ "strings, labels, citations, and provider diagnostics that do not inhabit Candidate256PhysicalCalibrationAuthorityToken"
         ∷ []
     ; routeBoundary =
         Route.W4PhysicalCalibrationRouteNarrowingCurrentStatus.routeBoundary
@@ -144,7 +176,7 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
         External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.noPromotionBoundary
           External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
     ; strictBlockerImpact =
-        "W4 remains blocked until Candidate256PhysicalCalibrationExternalReceipt is externally supplied"
+        "W4 remains blocked first on AcceptedDYLuminosityConventionAuthority, then W4ZAdequacy, then Candidate256PhysicalCalibrationExternalReceipt"
         ∷ "Candidate256PhysicalCalibrationAuthorityToken is constructorless in the current repo"
         ∷ "The current Candidate256 Nat surrogate remains dimensionless and non-promoting"
         ∷ "Scale-setting can discharge only after units, calibration, factorization, and dimensional preservation are supplied"
@@ -175,6 +207,12 @@ record W4PhysicalCalibrationExternalReceiptRequestPack : Setω where
     requiredNextReceipt :
       String
 
+    downstreamReceiptQueue :
+      List External.W4PhysicalCalibrationExternalReceiptQueueItem
+
+    downstreamReceiptQueueName :
+      String
+
     requiredExternalReceiptMatchesCurrent :
       requiredNextReceipt
       ≡
@@ -182,6 +220,9 @@ record W4PhysicalCalibrationExternalReceiptRequestPack : Setω where
         currentExternalStatus
 
     consolidatedRequestBoundary :
+      List String
+
+    legitimateAuthorityArtifactBoundary :
       List String
 
     consolidatedStrictBlockerImpact :
@@ -202,14 +243,24 @@ canonicalW4PhysicalCalibrationExternalReceiptRequestPack =
     ; requiredNextReceipt =
         External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.requiredExternalReceipt
           External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
+    ; downstreamReceiptQueue =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.downstreamReceiptQueue
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
+    ; downstreamReceiptQueueName =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.downstreamReceiptQueueName
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
     ; requiredExternalReceiptMatchesCurrent =
         refl
     ; consolidatedRequestBoundary =
         "Request pack only aggregates W4 external receipt obligations and route narrowing into provider-facing fields"
+        ∷ "Receipt queue is AcceptedDYLuminosityConventionAuthority -> W4ZAdequacy -> Candidate256PhysicalCalibrationExternalReceipt"
         ∷ "It does not construct Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "It does not construct Candidate256PhysicalCalibrationExternalReceipt"
         ∷ "It does not construct Candidate256PhysicalCalibrationGate or strict physical closure"
         ∷ []
+    ; legitimateAuthorityArtifactBoundary =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.legitimateAuthorityArtifactBoundary
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
     ; consolidatedStrictBlockerImpact =
         W4PhysicalCalibrationProviderPayloadRequest.strictBlockerImpact
           canonicalW4PhysicalCalibrationProviderPayloadRequest

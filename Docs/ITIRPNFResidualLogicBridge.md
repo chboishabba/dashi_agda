@@ -25,6 +25,41 @@ import that runtime. The safe reading is:
   is not allowed to assign `WrapperState`, `QualifierState`, role bindings, or
   residual levels.
 
+## Wikidata Structural Coherence Boundary
+
+Wikidata monotone structural coherence is admissible only as a structural
+receipt/coherence check over emitted predicate fibres. It may compare whether a
+sequence of receipt-backed structural signatures, qualifier states, wrapper
+states, provenance fields, and bounded ontology-index references preserves or
+sharpens information monotonically. It does not authorize Wikidata edits,
+assign truth, select facts, construct live ontology-index artifacts, or promote
+residual levels without emitted receipts and an external promotion boundary.
+
+The latest Wikidata formalism should be read as a global-latent structural
+coherence theorem shape, not merely as bounded local repair comparison:
+
+```text
+global ontology snapshot Omega
+  -> typed ontology index and residual/severity carriers
+  -> candidate mutations
+  -> monotone admission filter severity(after) <= severity(before)
+  -> aggregate structural incoherence is non-increasing
+  -> finite lattice convergence to a fixed point
+```
+
+The bounded QID or review-packet flow is the first product projection of that
+larger shape. A completed QID-only tool could project a local slice from the
+global index, diagnose pressure, and emit candidate local/upstream mutations
+that pass the monotone filter. That still would not be edit authority: the
+formal layer certifies structural-coherence improvement, while community or
+external governance certifies edit desirability.
+
+Current repo state is behind that endstate. It records residual carriers,
+receipt obligations, and non-promoting Wikidata coherence language, but it does
+not yet provide concrete Wikidata QID/PID/statement carriers, a live
+snapshot-derived ontology index, bounded mutation/filter carriers, or a
+QID-only repair bot.
+
 ## Fibred PNF Comparison
 
 The PNF residual lattice is not a flat comparison over arbitrary atoms. It is a
@@ -172,6 +207,10 @@ topologically distinct.
 - No PNF atom is treated as theorem input without an explicit bridge receipt.
 - No residual comparison decides policy, routing, legal truth, or Wikidata
   edits.
+- No Wikidata monotone structural-coherence result is treated as Wikidata edit
+  authority, fact authority, ontology truth, or residual-label authority. It
+  requires emitted receipts for structural signatures, qualifiers, wrappers,
+  provenance, and any monotone map being claimed.
 - No Hecke support/fibre class is treated as a `PredicatePNF`; the bridge only
   aligns candidate-pool and residual-pressure structure.
 - No live political claim is promoted from `performativeEvidence` to

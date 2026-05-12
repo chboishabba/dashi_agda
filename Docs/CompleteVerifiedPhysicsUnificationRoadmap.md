@@ -23,6 +23,383 @@ The target state requires all four lanes to become theorem-complete and
 empirically validated, with cross-lane consistency proven through the same
 canonical carrier/spine rather than asserted by analogy.
 
+Current coordination state, as of 2026-05-13:
+
+- `G1` is the only definitively closed gate.
+- `G2`, `G3`, and `G4` have advanced bridge or partial-consumer surfaces, but
+  they are not field-equation-complete.
+- `G5` is not closed: W3 is residual because the local run is not the frozen
+  `3205d74` comparison and the comparison status remains `not-claimed` /
+  `not-computed`; W4/W5 remain blocked on accepted Drell-Yan convention and
+  authority.
+- `G6` now has a typed skeleton in
+  `DASHI/Physics/Closure/CrossLaneCommutingTheoremSkeleton.agda`, but it is
+  `skeletonOnlyNoPromotion`; no concrete lane morphisms or section proofs are
+  inhabited.
+- `G7` has no publication audit package.
+
+The plateau is explicit: remaining work is either an internal construction
+that has not yet been assigned to a theorem owner, or an external receipt /
+authority boundary that cannot be replaced by local prose.
+
+## Strict Dependency Path To The Target Claim
+
+The path from the current position to a publishable physics-unification claim
+has three phases:
+
+1. Internal construction.
+2. Empirical contact.
+3. Cross-lane closure and publication audit.
+
+The sequence below is the governing roadmap. It supersedes older "fastest path"
+language that treated W2, HEP-R54, or t43-only evidence as sufficient for a
+complete-unification trajectory.
+
+### Phase I: Internal Construction
+
+These steps have no external authority dependency, but may still require new
+DASHI mathematics.
+
+#### I.1 HalfTrit Type Construction
+
+Gate:
+- LILA-R2 obstruction.
+
+Required outputs:
+- `HalfTrit : Set`.
+- An embedding / doubled-coordinate bridge from the existing trit carrier.
+- Duplicate-freedom and equality/decision lemmas sufficient for E8 root
+  enumeration.
+
+Reason:
+- `DASHI.Algebra.Trit` currently exposes only `Trit` constructors. Without a
+  half-integer trit coordinate, LILA-R2, LILA-R3, LILA-R5, and any
+  `computedashiratio` route through E8 remain constructorless.
+
+Exit:
+- A typechecked half-trit carrier plus the local lemmas needed by
+  `DASHI.Algebra.Trit.E8RootEnumeration`.
+
+#### I.2 Matter / Stress-Energy Bridge
+
+Gate:
+- W4 matter/stress-energy interface.
+
+Current status:
+- `DASHI/Physics/Closure/W4MatterStressEnergyMDLInternalBridge.agda` provides
+  an internal MDL/Lyapunov-to-stress-energy-shaped bridge, but it is
+  adapter-needed, not a physical stress-energy promotion.
+
+Required outputs:
+- Energy-density adapter from the Lyapunov scalar `J`.
+- Pressure adapter, including the Nat/rational carrier needed for a scoped
+  `p = J / 3` statement if that isotropic form is retained.
+- A conservation boundary that honestly distinguishes Lyapunov descent
+  (`<=`) from divergence-free conservation or equality.
+
+Exit:
+- An inhabited W4 matter/stress-energy interface or a typed obstruction naming
+  the exact missing adapter.
+
+#### I.3 TSFVTritCalibrationLaw
+
+Gate:
+- Candidate256 physical calibration law.
+
+Current status:
+- `DASHI/Physics/Closure/TSFVCandidate256CalibrationLawDiagnostic.agda`
+  constructs a LILA-R2-independent 3-adic diagnostic layer, but the full
+  calibration law is not inhabited.
+
+Required outputs:
+- Candidate256 quotient involution `T`.
+- Integer address for `Candidate256QuotientClass`.
+- Proof that address negation and absolute value/3-adic valuation are
+  compatible with the quotient.
+- Calibration map through the 3-adic scale.
+- Dimensional-invariance theorem.
+- Nontrivial calibrated separation.
+- Physical-unit authority boundary.
+
+Exit:
+- `TSFVTritCalibrationLaw` inhabited, or an exact typed obstruction.
+
+#### I.4 LILA-R2 E8 Root Enumeration
+
+Dependency:
+- I.1 HalfTrit construction.
+
+Required outputs:
+- 240-root enumeration over the doubled-coordinate HalfTrit/E8 frame.
+- Root-decision procedure.
+- Duplicate-freedom and completeness theorem.
+
+Exit:
+- `LILA-R2Receipt : E8RootEnumerationComplete`.
+
+#### I.5 LILA-R3 and LILA-R4
+
+Dependency:
+- I.4 E8 root enumeration.
+
+Required outputs:
+- LILA-R3: Lam-Tung as an E8/Clifford even-sum identity.
+- LILA-R4: SHA-bound Lean citation boundary to
+  `../dashi_lean4/MoonshineEarn.lean`, preserving the corrected sibling path.
+
+Exit:
+- `LILA-R3Receipt` and `LILA-R4Receipt`, with no cross-language proof imported
+  as an Agda theorem unless an explicit trust boundary is provided.
+
+#### I.6 LILA-R5 `computedashiratio`
+
+Dependencies:
+- I.3, I.4, and I.5.
+
+Required output:
+- A real DASHI predictor function that the empirical runner can consume, such
+  as `computedashiratio : PhistarBin -> RationalApprox`.
+
+Exit:
+- The empirical runner can emit predicted values for the target tables instead
+  of a placeholder / residual boundary.
+
+#### I.7 GRQFT Partial Consumer Receipt
+
+Dependencies:
+- I.2 stress-energy adapter and I.3 calibration law for any physical-source
+  claim.
+
+Current status:
+- `GRQFTConsumerNextObligationV2.agda` now supports partial internal consumer
+  closure for spacetime, wave-state, spinor-adapter, and gauge-representation
+  fields.
+
+Required outputs:
+- Keep the partial receipt explicitly partial.
+- Add stress-energy only after I.2 supplies the required adapter.
+- Keep curvature, sourced Einstein law, and interaction closure external- or
+  theorem-gated until their receipts exist.
+
+Exit:
+- A publishable limited-recovery theorem only if the paper language says
+  exactly which fields are recovered and which remain blocked.
+
+### Phase II: Empirical Contact
+
+These steps require accepted data, frozen artifacts, or external authority.
+
+#### II.1 HEAD Freeze And W3 Comparison Law Execution
+
+Gate:
+- `W3AcceptedEvidenceAuthorityToken`.
+
+Required outputs:
+- Frozen predictor state at `3205d74` or an accepted replacement freeze.
+- Projection artifact digest.
+- Comparison-law execution against the named CMS/HEPData table and covariance
+  source.
+- `chi2/dof <= 4.0` if promotion is claimed.
+- Non-collapse witness.
+- Accepted authority route.
+
+Exit:
+- W3 accepted authority, or a residual boundary that records the exact missing
+  field. Current local state is residual, not promoted.
+
+#### II.2 Accepted DY Luminosity Convention Binding
+
+Gate:
+- `AcceptedDYLuminosityConventionAuthorityReceipt`.
+
+Required outputs:
+- Provider identity and role.
+- PDF set/version, member, grid checksum, scale convention, rapidity window,
+  mass-bin rule, flavour weights, and integration method.
+- Luminosity values or route for W5 `L43` / `L45` and W4 per-bin `ell_i`.
+- Efficiency/acceptance model.
+- Systematic budget.
+- CMS-SMP publication pointer.
+- Normalization-preservation law.
+- Conversion law.
+- Source citation, no-manual-overfit attestation, accepted status, and external
+  provenance.
+
+Exit:
+- W4/W5 runners can consume a convention packet without inventing any physics
+  convention locally.
+
+#### II.3 W4 Z-Peak Adequacy Test
+
+Dependencies:
+- II.2 accepted DY convention, plus I.6 if the runner needs the LILA/DASHI
+  predictor path.
+
+Current status:
+- The current dirty Z-peak result is a typed obstruction with
+  `chi2/dof = 298.8462841768543`.
+
+Exit:
+- `W4ZAdequacyReceipt` if the convention-bound run passes the typed threshold,
+  or a negative obstruction naming the failing component.
+
+#### II.4 W5 `t45` Correction
+
+Dependencies:
+- II.2 accepted DY convention and, if the target route is DASHI-native rather
+  than external-PDF-only, I.6.
+
+Required outputs:
+- Accepted high-mass Drell-Yan ratio/correction run.
+- Provenance-bound artifact.
+- Pass/fail receipt against the target tolerance.
+
+Exit:
+- W5 correction receipt, or a typed negative obstruction preserving the PDF /
+  convention gap.
+
+#### II.5 W3 Extended Scope
+
+Dependencies:
+- II.1, II.3, and II.4.
+
+Required outputs:
+- One receipt per table / observable.
+- One comparison-law result per receipt.
+- One non-collapse witness per promoted empirical claim.
+
+Exit:
+- `G5` empirical prediction validation can close only after the empirical
+  scope is accepted beyond a request or residual surface.
+
+#### II.6 W8 Origin Receipt And W9 Pressure Witness
+
+Status:
+- Parallel completeness lanes for publication audit, not substitutes for G5.
+
+Required outputs:
+- W8 origin-adequacy bridge / accepted source receipt.
+- W9 cancellation-pressure witness or accepted retarget route consumed by an
+  actual kill constructor.
+
+Exit:
+- Publication-audit completeness improves; no empirical or unification gate is
+  bypassed.
+
+### Phase III: Cross-Lane Closure And Publication
+
+#### III.1 W2 Natural P2 Bridge Or Final Obstruction
+
+Gate:
+- W2 kill condition.
+
+Current status:
+- `W2CanonicalPressureMetricP2BridgeOrObstruction.agda` decides the local
+  offline-L2 candidate family as obstruction. The constructorless
+  `NaturalP2ConvergencePromotionAuthorityToken` still blocks promotion.
+
+Exit:
+- A smaller-universe positive bridge, or an accepted obstruction receipt that
+  the W2 kill route can consume.
+
+#### III.2 Maxwell Gauge Field Equation Theorem
+
+Gate:
+- `MaxwellGaugeFieldEquationTheorem` or explicit scoped substitute.
+
+Required outputs:
+- Field-equation-level statement over the canonical gauge/matter carrier.
+- Preservation/no-bypass laws.
+- Boundary if only part of Maxwell recovery is derivable.
+
+Exit:
+- `G2` closes.
+
+#### III.3 Schrodinger Evolution Theorem
+
+Gate:
+- `SchrodingerEvolutionTheorem` or explicit scoped substitute.
+
+Required outputs:
+- Hamiltonian/evolution carrier.
+- Evolution theorem.
+- Unitarity/conservation or typed limitation.
+
+Exit:
+- `G3` closes.
+
+#### III.4 G6 Cross-Lane Commuting Theorem
+
+Gate:
+- Cross-lane commuting theorem over the common spine.
+
+Current status:
+- `CrossLaneCommutingTheoremSkeleton.agda` records the obligation shape:
+  a canonical spine, four lane embeddings, four recovery morphisms, and four
+  section proofs. The skeleton derives equality between lane round-trips only
+  after the section proofs are supplied.
+
+Required outputs:
+- A diagrammatic square/cube connecting Maxwell, Schrodinger, GR, and
+  empirical prediction lanes through one carrier.
+- Compositional proofs that lane morphisms commute.
+- No-bypass law separating theorem completion from empirical validation.
+
+Exit:
+- The program becomes one unification package rather than parallel recovered
+  surfaces.
+
+#### III.5 G7 Publication Boundary Audit
+
+Gate:
+- Reproducibility and claim-governance audit.
+
+Required outputs:
+- Theorem list with exact module names and validation commands.
+- Maturity matrix with closed columns.
+- Empirical receipt bundle with SHA-256 digests.
+- Limitations section.
+- Reproducibility script or equivalent validation target.
+
+Exit:
+- The target publication claim can be made at the strongest level supported by
+  inhabited receipts.
+
+## Complete Step Graph
+
+```text
+I.1 HalfTrit -> I.4 E8 roots -> I.5 Lam-Tung + ThetaJ -> I.6 computedashiratio
+I.2 Stress-energy -> I.7 GRQFT partial
+I.3 TSFVTritCalibrationLaw -> I.7 GRQFT partial
+
+I.6 -> II.1 t43 clean run -> W3 authority decision
+II.2 DY convention -> II.3 W4 Z-peak -> W4 decision
+II.2 DY convention -> II.4 W5 t45 -> W5 decision
+II.1 + II.3 + II.4 -> II.5 W3 extended scope -> G5 decision
+II.6 W8 + W9 run in parallel for audit completeness
+
+III.1 W2 bridge/obstruction finalisation
+III.2 Maxwell theorem -> G2
+III.3 Schrodinger theorem -> G3
+I.7 + II.3 + later sourced-curvature work -> G4
+G2 + G3 + G4 + G5 -> III.4 G6 cross-lane commuting theorem
+G6 -> III.5 G7 publication audit
+G7 -> target claim, bounded by the receipts actually inhabited
+```
+
+## Honest Distance
+
+| Phase | Steps | Internal? | Blocking factor |
+|---|---|---|---|
+| I internal construction | I.1-I.7 | Yes | New DASHI constructions; no external receipts. |
+| II empirical contact | II.1-II.6 | No | Frozen runs, CMS/HEPData/DY convention authority, and empirical receipts. |
+| III cross-lane closure | III.1-III.5 | Mixed | G6 is genuinely new unification mathematics; G7 is audit/governance. |
+
+There are approximately fourteen major sequential steps between the current
+state and the target claim. Roughly half are internal construction or novel
+mathematics; the rest require external receipts, frozen empirical artifacts, or
+publication-governance evidence.
+
 ## Target Claim
 
 The publishable target claim is:
@@ -196,7 +573,14 @@ The current post-HEP-R53 empirical claim is narrower:
 > W3 accepted authority before HEP-R54, and not closure of the W2, W4, W5, or
 > W9 gaps.
 
-## Fastest Path After HEP-R54
+## Superseded Fastest Path After HEP-R54
+
+Status:
+- Historical / superseded by `Strict Dependency Path To The Target Claim`
+  above.
+- Kept for traceability because older coordination rounds and changelog entries
+  cite this section.
+- Do not use this section as the active promotion path.
 
 The fastest path to a complete physics-unification claim is not the same as the
 fastest path to a publishable phenomenology/formal-methods paper.

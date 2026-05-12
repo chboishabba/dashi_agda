@@ -9,6 +9,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.W5PDFCarrierExternalIntakeRequest as Intake
 import DASHI.Physics.Closure.W5PDFCarrierExternalConfirmedGap as Gap
+import DASHI.Physics.Closure.W4W5AcceptedDYLuminosityConventionDiagnostic as DYConvention
 
 ------------------------------------------------------------------------
 -- W5 CT18/MSHT/LHAPDF external intake receipt surface.
@@ -71,6 +72,9 @@ record W5CT18ExternalIntakeReceipt : Set where
     confirmedGap :
       Gap.W5PDFCarrierExternalConfirmedGap
 
+    authorityFirstMissing :
+      DYConvention.W4W5DYLuminosityFirstMissing
+
     acceptableFamilies :
       List W5ExternalPDFFamily
 
@@ -89,10 +93,25 @@ record W5CT18ExternalIntakeReceipt : Set where
     missingPacketFieldLabels :
       List String
 
+    firstMissingStatus :
+      String
+
     externalReady :
       Bool
 
     receiptNotes :
+      List String
+
+    conventionAcceptanceGate :
+      List String
+
+    acceptedAuthorityReceiptSurface :
+      List String
+
+    missingAuthorityFields :
+      List DYConvention.W4W5DYLuminosityAuthorityField
+
+    providerAuthorityContract :
       List String
 
     networkFetchPerformed :
@@ -125,6 +144,8 @@ canonicalW5CT18ExternalIntakeReceipt =
         Intake.canonicalW5PDFCarrierExternalIntakeRequest
     ; confirmedGap =
         Gap.canonicalW5PDFCarrierExternalConfirmedGap
+    ; authorityFirstMissing =
+        DYConvention.missingAcceptedDYLuminosityConventionAuthority
     ; acceptableFamilies =
         ct18PDF
         ∷ mshtPDF
@@ -137,11 +158,14 @@ canonicalW5CT18ExternalIntakeReceipt =
     ; requiredPacketFields =
         "PDF family: CT18, MSHT, or LHAPDF-compatible equivalent"
         ∷ "PDF set identifier and version"
-        ∷ "LHAPDF grid path/checksum or equivalent provider table checksum"
+        ∷ "LHAPDF id and grid path/checksum or equivalent provider table checksum"
         ∷ "parton-luminosity route for the CMS-SMP-20-003 t45 window"
-        ∷ "x and Q2 convention for 106-170 and 76-106 GeV mass windows"
-        ∷ "flavour/channel convention for the Drell-Yan luminosity ratio"
+        ∷ "factorization scale convention for 106-170 and 76-106 GeV mass windows"
+        ∷ "rapidity-window convention for the Drell-Yan luminosity ratio"
+        ∷ "mass-bin integration rule for the Drell-Yan luminosity ratio"
+        ∷ "flavour-weight rule for the Drell-Yan luminosity ratio"
         ∷ "computed t45 correction factor targeting 0.8804486068"
+        ∷ "source DOI for the PDF set and/or accepted luminosity convention"
         ∷ "tolerance statement for the difference from 0.8804486068"
         ∷ "authority/provenance receipt for the external PDF table"
         ∷ []
@@ -165,6 +189,8 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "missing tolerance statement against 0.8804486068"
         ∷ "missing external PDF table authority/provenance receipt"
         ∷ []
+    ; firstMissingStatus =
+        "first missing: missingAcceptedDYLuminosityConventionAuthority; CT18 grid provenance exists locally but is not an accepted W5 t45 correction convention"
     ; externalReady =
         false
     ; receiptNotes =
@@ -179,8 +205,34 @@ canonicalW5CT18ExternalIntakeReceipt =
         ∷ "The confirmed internal DGLAP/LO carrier route remains insufficient for t45"
         ∷ "W5 is not externally ready until an accepted parton-luminosity/bin-integration convention and authority/provenance packet are supplied"
         ∷ []
+    ; conventionAcceptanceGate =
+        "the local CT18NLO packet may feed an accepted receipt only after an authority accepts the formula, bin integration, scale choice, flavour sum, member/error treatment, and tolerance"
+        ∷ "the present receipt therefore cannot construct a PDF carrier and cannot promote W5"
+        ∷ "W4/W5 merged blocker status remains first-missing rather than closed"
+        ∷ []
+    ; acceptedAuthorityReceiptSurface =
+        "PDF set"
+        ∷ "LHAPDF id"
+        ∷ "grid checksum"
+        ∷ "factorization scale convention"
+        ∷ "rapidity window"
+        ∷ "mass-bin integration rule"
+        ∷ "flavour-weight rule"
+        ∷ "source DOI"
+        ∷ "external authority/provenance"
+        ∷ []
+    ; missingAuthorityFields =
+        DYConvention.W4W5AcceptedDYLuminosityConventionDiagnostic.missingAuthorityFields
+          DYConvention.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
+    ; providerAuthorityContract =
+        "receipt is provider-ready only as an intake surface: no accepted external packet is present"
+        ∷ "receipt must accept or replace the candidate CT18NLO formula, bin integration, scale choice, flavour sum, member/error treatment, and tolerance"
+        ∷ "receipt must carry provider, command/API, source path or DOI, input checksums, timestamp, and explicit acceptance statement"
+        ∷ "receipt must leave local CT18 fixed-x and rapidity-window probes candidate-only/falsified until an authority supersedes them"
+        ∷ "receipt must not construct W5 closure or W4/W5 shared closure"
+        ∷ []
     ; networkFetchPerformed =
-        true
+        false
     ; noAcceptedLHAPDFRuntimeAssumed =
         tt
     ; noExternalPDFPacketAccepted =
@@ -213,3 +265,11 @@ canonicalW5CT18ExternalNotReady :
     ≡
   false
 canonicalW5CT18ExternalNotReady = refl
+
+canonicalW5CT18ExternalAuthorityFirstMissing :
+  W5CT18ExternalIntakeReceipt.authorityFirstMissing
+    canonicalW5CT18ExternalIntakeReceipt
+    ≡
+  DYConvention.missingAcceptedDYLuminosityConventionAuthority
+canonicalW5CT18ExternalAuthorityFirstMissing =
+  refl

@@ -183,6 +183,126 @@ e8ThetaJPromotionImpossibleHere :
   ⊥
 e8ThetaJPromotionImpossibleHere ()
 
+------------------------------------------------------------------------
+-- LILA-R4 Lean sibling citation boundary.
+
+data LeanSiblingCitationStatus : Set where
+  leanSiblingFound :
+    LeanSiblingCitationStatus
+  exactRequestedPathNotFoundButSiblingFound :
+    LeanSiblingCitationStatus
+  leanSiblingNotFound :
+    LeanSiblingCitationStatus
+
+data LilaR4ThetaJBridgeBoundary : Set where
+  citationOnly :
+    LilaR4ThetaJBridgeBoundary
+  leanProofExternalToAgda :
+    LilaR4ThetaJBridgeBoundary
+  thetaJBridgeNotAsserted :
+    LilaR4ThetaJBridgeBoundary
+  noLilaR5Promotion :
+    LilaR4ThetaJBridgeBoundary
+  noW3OrG5Promotion :
+    LilaR4ThetaJBridgeBoundary
+
+record LeanSiblingCitationReceipt : Setω where
+  field
+    status :
+      LeanSiblingCitationStatus
+
+    requestedSiblingPath :
+      String
+
+    discoveredSiblingPath :
+      String
+
+    discoveredSiblingSha256 :
+      String
+
+    leanNamespace :
+      String
+
+    discoveredDefinitions :
+      List String
+
+    discoveredTheorems :
+      List String
+
+    expectedThetaJBridgeNames :
+      List String
+
+    exactNotFoundDiagnostic :
+      List String
+
+    citationBoundary :
+      List String
+
+    noPromotionBoundary :
+      List LilaR4ThetaJBridgeBoundary
+
+canonicalLeanSiblingCitationReceipt :
+  LeanSiblingCitationReceipt
+canonicalLeanSiblingCitationReceipt =
+  record
+    { status =
+        exactRequestedPathNotFoundButSiblingFound
+    ; requestedSiblingPath =
+        "../dashilean4/MoonshineEarn.lean"
+    ; discoveredSiblingPath =
+        "../dashi_lean4/MoonshineEarn.lean"
+    ; discoveredSiblingSha256 =
+        "62343c34a138a66e5374c17ee92b07104023b1c13d651f56ea17ab2e271d268a"
+    ; leanNamespace =
+        "MoonshineEarn"
+    ; discoveredDefinitions =
+        "MoonshineEarn.fstep"
+        ∷ []
+    ; discoveredTheorems =
+        "MoonshineEarn.perf_product"
+        ∷ "MoonshineEarn.moonshine_product"
+        ∷ "MoonshineEarn.earning_chain"
+        ∷ "MoonshineEarn.moonshine_observed"
+        ∷ "MoonshineEarn.each_fires_once"
+        ∷ "MoonshineEarn.full_perf_earn"
+        ∷ "MoonshineEarn.observer_preserved"
+        ∷ "taxi_is_1729"
+        ∷ "taxi_step1"
+        ∷ "taxi_step2"
+        ∷ "taxi_step3"
+        ∷ "taxi_earns_moonshine"
+        ∷ "earning_quotient"
+        ∷ "earning_remainder"
+        ∷ "earning_decomp"
+        ∷ "taxicab_sum1"
+        ∷ "taxicab_sum2"
+        ∷ []
+    ; expectedThetaJBridgeNames =
+        "Theta/J bridge theorem not found by exact name in MoonshineEarn.lean"
+        ∷ "Ramanujan-class local evidence is represented by taxi_earns_moonshine and taxicab_sum*"
+        ∷ "J/moonshine local evidence is represented by moonshine_observed and earning_chain"
+        ∷ []
+    ; exactNotFoundDiagnostic =
+        "Exact requested sibling directory ../dashilean4 was not present from this repo sandbox"
+        ∷ "Local sibling directory ../dashi_lean4 was present"
+        ∷ "MoonshineEarn.lean was found at ../dashi_lean4/MoonshineEarn.lean"
+        ∷ "No theorem literally named Theta/J, theta_j, LILA_R4, or E8 was found in that file"
+        ∷ []
+    ; citationBoundary =
+        "This receipt cites local sibling Lean names and checksum only"
+        ∷ "The Lean theorem bodies remain external to Agda"
+        ∷ "Agda consumers must not treat this receipt as a proof of the Theta/J bridge"
+        ∷ "A later cross-language checker may replace this citation boundary with a verified import receipt"
+        ∷ []
+    ; noPromotionBoundary =
+        citationOnly
+        ∷ leanProofExternalToAgda
+        ∷ thetaJBridgeNotAsserted
+        ∷ noLilaR5Promotion
+        ∷ noW3OrG5Promotion
+        ∷ []
+    }
+
 record LilaE8ThetaJBridgeSurface : Setω where
   field
     status :
@@ -208,6 +328,15 @@ record LilaE8ThetaJBridgeSurface : Setω where
 
     bridgeCompletedHereIsFalse :
       bridgeCompletedHere ≡ false
+
+    leanCitationReceipt :
+      LeanSiblingCitationReceipt
+
+    leanCitationFound :
+      Bool
+
+    exactRequestedLeanPathFound :
+      Bool
 
     requiredLemmas :
       List E8ThetaJRequiredLemma
@@ -244,6 +373,9 @@ record LilaE8ThetaJBridgeSurface : Setω where
     nonPromotionBoundaryIsCanonical :
       nonPromotionBoundary ≡ canonicalE8ThetaJBridgeBoundaries
 
+    leanCitationNonPromotionBoundary :
+      List LilaR4ThetaJBridgeBoundary
+
     promotionReceiptBlocked :
       E8ThetaJPromotionReceipt →
       ⊥
@@ -266,6 +398,12 @@ canonicalLilaE8ThetaJBridgeSurface =
         false
     ; bridgeCompletedHereIsFalse =
         refl
+    ; leanCitationReceipt =
+        canonicalLeanSiblingCitationReceipt
+    ; leanCitationFound =
+        true
+    ; exactRequestedLeanPathFound =
+        false
     ; requiredLemmas =
         canonicalE8ThetaJRequiredLemmas
     ; requiredLemmasAreCanonical =
@@ -282,12 +420,14 @@ canonicalLilaE8ThetaJBridgeSurface =
         "Existing DASHI moonshine surfaces provide finite CRT/J scalar bridges only"
         ∷ "This surface records the proposed modular-form route from E8 theta series to J as requested lemmas"
         ∷ "The current LILA/E8 lattice receipt remains non-promoting and does not provide a theta-series carrier"
+        ∷ "Local sibling Lean artifact ../dashi_lean4/MoonshineEarn.lean was found and checksum-bound as citation evidence only"
         ∷ "No theorem is asserted unless future local receipts provide the exact modular-form proofs and compatibility lift"
         ∷ []
     ; suggestedW0TodoDeltas =
         "Add LILA-R4 follow-up: supply formal Theta_E8 = E4 receipt with q-expansion normalisation"
         ∷ "Add LILA-R4 follow-up: supply formal J = E4^3 / Delta - 744 receipt with Delta division-domain boundary"
         ∷ "Add LILA-R4 follow-up: bind modular J-function receipt to existing CRTPeriodJFixedBridge/JFixedPoint surface"
+        ∷ "Add cross-language follow-up: verify the cited Lean sibling artifact before replacing citation boundary with a proof receipt"
         ∷ []
     ; suggestedW0DiagramDeltas =
         "Optional diagram edge: LilaE8RootSystemLatticeReceipt -> LilaE8ThetaJBridgeSurface labelled theta-carrier requested"
@@ -297,6 +437,9 @@ canonicalLilaE8ThetaJBridgeSurface =
         canonicalE8ThetaJBridgeBoundaries
     ; nonPromotionBoundaryIsCanonical =
         refl
+    ; leanCitationNonPromotionBoundary =
+        LeanSiblingCitationReceipt.noPromotionBoundary
+          canonicalLeanSiblingCitationReceipt
     ; promotionReceiptBlocked =
         e8ThetaJPromotionImpossibleHere
     }

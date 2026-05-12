@@ -45,6 +45,18 @@ What is local here:
   `Ontology/Brain/BrainMorphospaceGapJunctionSurface.agda`
 - theorem-thin local downstream theme-consumer law surface in
   `Ontology/Brain/BrainThemeConsumerLaws.agda`
+- non-promoting external numeric Drosophila / hemibrain receipt surface in
+  `Ontology/Brain/DrosophilaHemibrainExternalRunReceipt.agda`
+- non-promoting single-scale closure receipt in
+  `Ontology/Brain/BrainKernelClosureReceipt.agda`
+- non-promoting single-scale gauge-robustness receipt in
+  `Ontology/Brain/BrainGaugeRobustnessReceipt.agda`
+- non-promoting coarse-grain persistence obstruction in
+  `Ontology/Brain/DrosophilaCoarseGrainPersistenceObstruction.agda`
+- non-promoting governance proviso surface in
+  `Ontology/Brain/BrainGovernanceProviso.agda`
+- checksum manifest for the selected sibling-repo artifacts in
+  `Docs/DrosophilaHemibrainArtifactManifest.md`
 - the local extraction/invariant/invariant-depth stack is now explicitly
   consumed from `Ontology/BrainDNA/`, not only declared in isolation
 - nearby crossover interfaces on the DNA / channel side that may later become
@@ -53,9 +65,70 @@ What is local here:
 What is adjacent rather than local:
 
 - most brain-specific structure, datasets, and analysis code
-- current hemibrain / Drosophila-oriented work in `../dashiBRAIN`
+- current hemibrain / Drosophila-oriented analysis code in `../dashiBRAIN`,
+  except for the selected external numeric receipts and checksums now mirrored
+  as non-promoting Brain lane evidence
 - archive-backed design language relating brain structure to wider DASHI
   modeling
+
+## Drosophila / Hemibrain Receipt Status
+
+Selected sibling-repo artifacts from `../dashiBRAIN` are now recorded locally
+as receipts, not as theorem promotion.
+
+Positive bounded receipt:
+
+- `outputs/defect_curve_20260120-142843.csv` records the baseline single-scale
+  defect trace `633, 42, 2, 0`
+- `outputs/sprint3_default_geometry_summary.json` records the selected
+  geometry summary: `179907` nodes, `7084254` edges, final state
+  `{+1: 137901, 0: 42006, -1: 0}`, and `8` +1 components
+- `Ontology/Brain/BrainKernelClosureReceipt.agda` packages only this
+  single-scale external numeric closure receipt
+- `Ontology/Brain/BrainGaugeRobustnessReceipt.agda` records Sprint 3
+  single-scale gauge robustness from the source docs
+
+Negative receipt:
+
+- selected coarse-grain curves for random blocks, degree-binned blocks, ROI,
+  radius `r=1`, and radius `r=2` are all one-step `0` curves
+- `Ontology/Brain/DrosophilaCoarseGrainPersistenceObstruction.agda` records
+  this as a multiscale persistence obstruction
+
+The checksum source is `Docs/DrosophilaHemibrainArtifactManifest.md`.
+
+Claim boundary:
+
+- safe to say: selected external numeric evidence supports single-scale
+  hemibrain kernel closure and tested single-scale gauge robustness
+- safe to say: selected coarse-grain receipts obstruct multiscale persistence
+  promotion
+- unsafe to say: full Drosophila brain recovery, biological component
+  interpretation, local Brain theorem closure, or physics/empirical promotion
+
+## Conditional Exclusion / Proviso
+
+The Brain lane is excluded from physics promotion. Its current role is
+non-promoting governance support and theorem-thin adjacent packaging only.
+
+The active W1-W6 physics lanes remain assigned to their direct typed kill
+conditions in `DASHI/Physics/Closure/BlockerKillConditions.agda`. Brain-side
+receipts do not replace those kill conditions, do not construct their authority
+tokens, and do not promote any W1-W6 physics lane by lateral prose.
+
+The only permitted conditional role is lateral support review. Brain may become
+eligible for that review only if a direct physics lane enters typed exhaustion
+and no typed retarget remains available for that direct lane. Even then, the
+Brain lane supplies review pressure or candidate support targets only; it still
+does not claim physics promotion, biological recovery, multiscale persistence,
+or unification.
+
+Local Agda surface:
+
+- `Ontology/Brain/BrainGovernanceProviso.agda` records the non-promoting Brain
+  role, imports the W1-W6 kill-condition rows, sets Brain and physics
+  promotion flags to `false`, and marks the default lateral-review status as
+  not eligible.
 
 ## Notebook-Confirmed Brain Themes
 

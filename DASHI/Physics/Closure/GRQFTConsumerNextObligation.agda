@@ -82,6 +82,65 @@ record GRQFTDownstreamConsumerFields : Setω where
     noPromotionBoundary :
       List String
 
+record EmpiricalGRQFTValidationReceipt
+  (downstreamConsumerFields : GRQFTDownstreamConsumerFields)
+  (grEquationLaw :
+    GRQFTDownstreamConsumerFields.einsteinEquationCarrier
+      downstreamConsumerFields →
+    Set)
+  (qftInteractionLaw :
+    GRQFTDownstreamConsumerFields.interactionClosureCarrier
+      downstreamConsumerFields →
+    Set) : Setω where
+  field
+    empiricalDatasetCarrier : Set
+    empiricalComparisonCarrier : Set
+
+    empiricalProjection :
+      empiricalDatasetCarrier →
+      empiricalComparisonCarrier
+
+    grEmpiricalValidationLaw :
+      empiricalComparisonCarrier →
+      Set
+
+    qftInteractionEmpiricalValidationLaw :
+      empiricalComparisonCarrier →
+      Set
+
+    grLawEmpiricallyValidated :
+      (stressEnergy :
+        GRQFTDownstreamConsumerFields.stressEnergyCarrier
+          downstreamConsumerFields) →
+      (curvature :
+        GRQFTDownstreamConsumerFields.curvatureCarrier
+          downstreamConsumerFields) →
+      grEquationLaw
+        (GRQFTDownstreamConsumerFields.einsteinEquationConsumer
+          downstreamConsumerFields
+          stressEnergy
+          curvature) →
+      (dataset : empiricalDatasetCarrier) →
+      grEmpiricalValidationLaw (empiricalProjection dataset)
+
+    qftInteractionLawEmpiricallyValidated :
+      (waveState :
+        GRQFTDownstreamConsumerFields.waveStateCarrier
+          downstreamConsumerFields) →
+      qftInteractionLaw
+        (GRQFTDownstreamConsumerFields.interactionClosureConsumer
+          downstreamConsumerFields
+          (GRQFTDownstreamConsumerFields.gaugeRepresentationMap
+            downstreamConsumerFields
+            (GRQFTDownstreamConsumerFields.spinorRealizationMap
+              downstreamConsumerFields
+              waveState))) →
+      (dataset : empiricalDatasetCarrier) →
+      qftInteractionEmpiricalValidationLaw (empiricalProjection dataset)
+
+    validationBoundary :
+      List String
+
 record GRQFTClosurePromotionReceipt : Setω where
   field
     promotionAuthority :
@@ -126,6 +185,54 @@ record GRQFTClosurePromotionReceipt : Setω where
               downstreamConsumerFields
               waveState)))
 
+    empiricalGRQFTValidationReceipt :
+      EmpiricalGRQFTValidationReceipt
+        downstreamConsumerFields
+        grEquationLaw
+        qftInteractionLaw
+
+record LimitedSMQFTGRPromotionPrerequisiteGate : Setω where
+  field
+    closurePromotionReceiptBeforeLimitedPromotion :
+      GRQFTClosurePromotionReceipt
+
+    authorityBeforeLimitedPromotion :
+      GRQFTClosurePromotionAuthorityToken
+
+    qftInteractionLawBeforeLimitedPromotion :
+      GRQFTDownstreamConsumerFields.interactionClosureCarrier
+        (GRQFTClosurePromotionReceipt.downstreamConsumerFields
+          closurePromotionReceiptBeforeLimitedPromotion) →
+      Set
+
+    qftInteractionLawAtConsumerBeforeLimitedPromotion :
+      (waveState :
+        GRQFTDownstreamConsumerFields.waveStateCarrier
+          (GRQFTClosurePromotionReceipt.downstreamConsumerFields
+            closurePromotionReceiptBeforeLimitedPromotion)) →
+      qftInteractionLawBeforeLimitedPromotion
+        (GRQFTDownstreamConsumerFields.interactionClosureConsumer
+          (GRQFTClosurePromotionReceipt.downstreamConsumerFields
+            closurePromotionReceiptBeforeLimitedPromotion)
+          (GRQFTDownstreamConsumerFields.gaugeRepresentationMap
+            (GRQFTClosurePromotionReceipt.downstreamConsumerFields
+              closurePromotionReceiptBeforeLimitedPromotion)
+            (GRQFTDownstreamConsumerFields.spinorRealizationMap
+              (GRQFTClosurePromotionReceipt.downstreamConsumerFields
+                closurePromotionReceiptBeforeLimitedPromotion)
+              waveState)))
+
+    empiricalReceiptBeforeLimitedPromotion :
+      EmpiricalGRQFTValidationReceipt
+        (GRQFTClosurePromotionReceipt.downstreamConsumerFields
+          closurePromotionReceiptBeforeLimitedPromotion)
+        (GRQFTClosurePromotionReceipt.grEquationLaw
+          closurePromotionReceiptBeforeLimitedPromotion)
+        qftInteractionLawBeforeLimitedPromotion
+
+    limitedPromotionBoundary :
+      List String
+
 ------------------------------------------------------------------------
 -- Current non-promoting diagnostic.
 
@@ -144,6 +251,37 @@ data GRQFTConsumerMissingUpstreamField : Set where
     GRQFTConsumerMissingUpstreamField
   missingEmpiricalGRQFTValidation :
     GRQFTConsumerMissingUpstreamField
+
+data GRQFTConsumerFirstMissingReceipt : Set where
+  firstMissingGRQFTClosurePromotionAuthorityToken :
+    GRQFTConsumerFirstMissingReceipt
+  firstMissingPDFCarrierPrerequisite :
+    GRQFTConsumerFirstMissingReceipt
+  firstMissingGREquationLaw :
+    GRQFTConsumerFirstMissingReceipt
+  firstMissingGREquationLawAtConsumer :
+    GRQFTConsumerFirstMissingReceipt
+  firstMissingQFTInteractionLaw :
+    GRQFTConsumerFirstMissingReceipt
+  firstMissingQFTInteractionLawAtConsumer :
+    GRQFTConsumerFirstMissingReceipt
+  firstMissingEmpiricalGRQFTValidationReceipt :
+    GRQFTConsumerFirstMissingReceipt
+  firstMissingGRQFTClosurePromotionReceipt :
+    GRQFTConsumerFirstMissingReceipt
+
+canonicalGRQFTConsumerFirstMissingPolicy :
+  List GRQFTConsumerFirstMissingReceipt
+canonicalGRQFTConsumerFirstMissingPolicy =
+  firstMissingGRQFTClosurePromotionAuthorityToken
+  ∷ firstMissingPDFCarrierPrerequisite
+  ∷ firstMissingGREquationLaw
+  ∷ firstMissingGREquationLawAtConsumer
+  ∷ firstMissingQFTInteractionLaw
+  ∷ firstMissingQFTInteractionLawAtConsumer
+  ∷ firstMissingEmpiricalGRQFTValidationReceipt
+  ∷ firstMissingGRQFTClosurePromotionReceipt
+  ∷ []
 
 data GRQFTPDFCarrierPrerequisiteStatus : Set where
   pdfCarrierPrerequisiteMissing :
@@ -245,6 +383,7 @@ canonicalGRQFTClosurePromotionReceiptMissingFields =
         ∷ "GRQFTClosurePromotionReceipt requires grEquationLawAtConsumer"
         ∷ "GRQFTClosurePromotionReceipt requires qftInteractionLaw"
         ∷ "GRQFTClosurePromotionReceipt requires qftInteractionLawAtConsumer"
+        ∷ "GRQFTClosurePromotionReceipt requires empiricalGRQFTValidationReceipt tied to the same GR/QFT laws"
         ∷ "Downstream promotion also requires empirical GR/QFT validation outside known-limits recovery"
         ∷ []
     }
@@ -271,6 +410,15 @@ record GRQFTConsumerNextObligationCurrentStatus : Setω where
 
     pdfCarrierPrerequisite :
       GRQFTPDFCarrierPrerequisiteDiagnostic
+
+    firstMissingPolicy :
+      List GRQFTConsumerFirstMissingReceipt
+
+    exactFirstMissingName :
+      String
+
+    limitedPromotionGateName :
+      String
 
     blockedFields :
       List GRQFTConsumerMissingUpstreamField
@@ -308,6 +456,12 @@ canonicalGRQFTConsumerNextObligationCurrentStatus =
         canonicalGRQFTClosurePromotionReceiptMissingFields
     ; pdfCarrierPrerequisite =
         canonicalGRQFTPDFCarrierPrerequisiteDiagnostic
+    ; firstMissingPolicy =
+        canonicalGRQFTConsumerFirstMissingPolicy
+    ; exactFirstMissingName =
+        "firstMissingGRQFTClosurePromotionAuthorityToken"
+    ; limitedPromotionGateName =
+        "LimitedSMQFTGRPromotionPrerequisiteGate"
     ; blockedFields =
         missingPromotionAuthorityToken
         ∷ missingPDFCarrierPrerequisite
@@ -318,7 +472,7 @@ canonicalGRQFTConsumerNextObligationCurrentStatus =
         ∷ missingEmpiricalGRQFTValidation
         ∷ []
     ; requiredNextReceipt =
-        "provide external authority, PDF carrier prerequisite, GR equation law, QFT interaction law, consumer law witnesses, and empirical GR/QFT validation before downstream closure promotion"
+        "provide external authority, PDF carrier prerequisite, GR equation law, QFT interaction law, consumer law witnesses, and EmpiricalGRQFTValidationReceipt before downstream closure promotion"
     ; knownLimitsBoundary =
         "known-limits GR/QFT bridges are theorem-backed local recovery surfaces, not full GR/QFT closure"
     ; closurePromotionBoundary =
@@ -332,6 +486,7 @@ canonicalGRQFTConsumerNextObligationCurrentStatus =
         ∷ "No GR equation law or consumer proof is promoted here"
         ∷ "No QFT interaction law or consumer proof is promoted here"
         ∷ "No empirical GR/QFT validation claim is made here"
+        ∷ "Any limited SM/QFT+GR promotion must first pass LimitedSMQFTGRPromotionPrerequisiteGate over an external GRQFTClosurePromotionReceipt"
         ∷ []
     }
 

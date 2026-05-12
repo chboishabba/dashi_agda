@@ -42,6 +42,9 @@ record GRQFTConsumerReceiptSourceAvailability : Set where
     qftInteractionLawWitnessSource :
       GRQFTConsumerSourceAvailability
 
+    empiricalGRQFTValidationReceiptSource :
+      GRQFTConsumerSourceAvailability
+
     downstreamConsumerFieldsSource :
       GRQFTConsumerSourceAvailability
 
@@ -73,6 +76,8 @@ canonicalGRQFTConsumerReceiptSourceAvailability =
         sourceMissing
     ; qftInteractionLawWitnessSource =
         sourceMissing
+    ; empiricalGRQFTValidationReceiptSource =
+        sourceMissing
     ; downstreamConsumerFieldsSource =
         sourceMissing
     ; knownLimitsObservableConsumerSource =
@@ -97,6 +102,14 @@ grqftPromotionReceiptImpossibleHere receipt =
   grqftPromotionAuthorityImpossibleHere
     (W5.GRQFTClosurePromotionReceipt.promotionAuthority receipt)
 
+limitedSMQFTGRPromotionGateImpossibleHere :
+  W5.LimitedSMQFTGRPromotionPrerequisiteGate →
+  ⊥
+limitedSMQFTGRPromotionGateImpossibleHere gate =
+  grqftPromotionAuthorityImpossibleHere
+    (W5.LimitedSMQFTGRPromotionPrerequisiteGate.authorityBeforeLimitedPromotion
+      gate)
+
 record GRQFTConsumerSourceDiagnostic : Setω where
   field
     nextObligationStatus :
@@ -110,6 +123,20 @@ record GRQFTConsumerSourceDiagnostic : Setω where
 
     receiptBlockedFields :
       List W5.GRQFTConsumerMissingUpstreamField
+
+    firstMissingPolicy :
+      List W5.GRQFTConsumerFirstMissingReceipt
+
+    firstMissingPolicyStillCanonical :
+      firstMissingPolicy
+      ≡
+      W5.canonicalGRQFTConsumerFirstMissingPolicy
+
+    exactFirstMissingName :
+      String
+
+    limitedPromotionGateName :
+      String
 
     blockedFieldsStillCanonical :
       receiptBlockedFields
@@ -142,6 +169,10 @@ record GRQFTConsumerSourceDiagnostic : Setω where
       W5.GRQFTClosurePromotionReceipt →
       ⊥
 
+    impossibleLimitedPromotionGateHere :
+      W5.LimitedSMQFTGRPromotionPrerequisiteGate →
+      ⊥
+
 canonicalGRQFTConsumerSourceDiagnostic :
   GRQFTConsumerSourceDiagnostic
 canonicalGRQFTConsumerSourceDiagnostic =
@@ -154,6 +185,17 @@ canonicalGRQFTConsumerSourceDiagnostic =
         W5.canonicalGRQFTPDFCarrierPrerequisiteDiagnostic
     ; receiptBlockedFields =
         W5.canonicalGRQFTConsumerBlockedFields
+    ; firstMissingPolicy =
+        W5.GRQFTConsumerNextObligationCurrentStatus.firstMissingPolicy
+          W5.canonicalGRQFTConsumerNextObligationCurrentStatus
+    ; firstMissingPolicyStillCanonical =
+        refl
+    ; exactFirstMissingName =
+        W5.GRQFTConsumerNextObligationCurrentStatus.exactFirstMissingName
+          W5.canonicalGRQFTConsumerNextObligationCurrentStatus
+    ; limitedPromotionGateName =
+        W5.GRQFTConsumerNextObligationCurrentStatus.limitedPromotionGateName
+          W5.canonicalGRQFTConsumerNextObligationCurrentStatus
     ; blockedFieldsStillCanonical =
         refl
     ; sourceAvailability =
@@ -173,15 +215,20 @@ canonicalGRQFTConsumerSourceDiagnostic =
         ∷ "Complete GRQFTDownstreamConsumerFields source is not promoted here"
         ∷ "No external PDF carrier prerequisite source is present for W5 GR/QFT/PDF closure intake"
         ∷ "No promotion authority, GR equation law, QFT interaction law, or consumer law witness source is present"
+        ∷ "No EmpiricalGRQFTValidationReceipt source is present for the same downstream GR/QFT laws"
+        ∷ "firstMissingGRQFTClosurePromotionAuthorityToken remains the exact first missing name before any limited SM/QFT+GR promotion can be considered"
         ∷ "No empirical GR/QFT validation source is present"
         ∷ []
     ; blockerImpact =
         "Strict blocker remains: W5 cannot promote known-limits GR/QFT recovery into GR/QFT closure"
-        ∷ "The next admissible step is still an external GRQFTClosurePromotionReceipt with authority, PDF carrier prerequisite, laws, witnesses, downstream fields, and empirical validation"
-        ∷ "This diagnostic fabricates no authority token, PDF carrier, empirical validation token, or promotion receipt"
+        ∷ "The next admissible step is still an external GRQFTClosurePromotionReceipt with authority, PDF carrier prerequisite, laws, witnesses, downstream fields, and EmpiricalGRQFTValidationReceipt"
+        ∷ "LimitedSMQFTGRPromotionPrerequisiteGate is also impossible here because it requires the same constructorless promotion authority"
+        ∷ "This diagnostic fabricates no authority token, PDF carrier, empirical validation receipt, or promotion receipt"
         ∷ []
     ; impossibleAuthorityHere =
         grqftPromotionAuthorityImpossibleHere
     ; impossibleReceiptHere =
         grqftPromotionReceiptImpossibleHere
+    ; impossibleLimitedPromotionGateHere =
+        limitedSMQFTGRPromotionGateImpossibleHere
     }

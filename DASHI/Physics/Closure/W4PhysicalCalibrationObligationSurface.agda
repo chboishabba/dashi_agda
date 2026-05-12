@@ -13,6 +13,7 @@ import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation as E
 import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptRequestPack as Request
 import DASHI.Physics.Closure.W4PhysicalCalibrationRouteNarrowing as Route
 import DASHI.Physics.Closure.W4StrictPhysicalObligationLedger as Ledger
+import DASHI.Physics.Closure.W4W5AcceptedDYLuminosityConventionDiagnostic as DY
 import DASHI.Physics.Closure.W4W5PDFSharedDependencyDiagnostic as SharedPDF
 
 ------------------------------------------------------------------------
@@ -34,7 +35,32 @@ acceptedDYLuminosityConventionImpossibleHere :
   ⊥
 acceptedDYLuminosityConventionImpossibleHere ()
 
+data AcceptedDYLuminosityConventionAuthorityBoundary : Set where
+
+acceptedDYLuminosityConventionAuthorityBoundaryImpossibleHere :
+  AcceptedDYLuminosityConventionAuthorityBoundary →
+  ⊥
+acceptedDYLuminosityConventionAuthorityBoundaryImpossibleHere ()
+
+data W4PhysicalCalibrationReceiptQueueItem : Set where
+  AcceptedDYLuminosityConventionAuthority :
+    W4PhysicalCalibrationReceiptQueueItem
+  W4ZAdequacy :
+    W4PhysicalCalibrationReceiptQueueItem
+  Candidate256PhysicalCalibrationExternalReceipt :
+    W4PhysicalCalibrationReceiptQueueItem
+
+canonicalW4PhysicalCalibrationReceiptQueue :
+  List W4PhysicalCalibrationReceiptQueueItem
+canonicalW4PhysicalCalibrationReceiptQueue =
+  AcceptedDYLuminosityConventionAuthority
+  ∷ W4ZAdequacy
+  ∷ Candidate256PhysicalCalibrationExternalReceipt
+  ∷ []
+
 data W4PhysicalCalibrationFirstMissingPrerequisite : Set where
+  missingAcceptedDYLuminosityConventionAuthority :
+    W4PhysicalCalibrationFirstMissingPrerequisite
   missingAcceptedDYLuminosityConvention :
     W4PhysicalCalibrationFirstMissingPrerequisite
   missingSameRecordT21T22ArtifactReceipt :
@@ -44,6 +70,8 @@ data W4PhysicalCalibrationFirstMissingPrerequisite : Set where
   missingSharedPDFBackedZPeakShapeAdequacy :
     W4PhysicalCalibrationFirstMissingPrerequisite
   missingDirtyZPeakShapeAdequacy :
+    W4PhysicalCalibrationFirstMissingPrerequisite
+  missingW4ZAdequacy :
     W4PhysicalCalibrationFirstMissingPrerequisite
   missingExternalPhysicalCalibrationReceipt :
     W4PhysicalCalibrationFirstMissingPrerequisite
@@ -57,9 +85,8 @@ data W4PhysicalCalibrationFirstMissingPrerequisite : Set where
 canonicalW4PhysicalCalibrationFirstMissingPrerequisites :
   List W4PhysicalCalibrationFirstMissingPrerequisite
 canonicalW4PhysicalCalibrationFirstMissingPrerequisites =
-  missingAcceptedDYLuminosityConvention
-  ∷ missingSharedPDFBackedZPeakShapeAdequacy
-  ∷ missingDirtyZPeakShapeAdequacy
+  missingAcceptedDYLuminosityConventionAuthority
+  ∷ missingW4ZAdequacy
   ∷ missingExternalPhysicalCalibrationReceipt
   ∷ missingMatterFieldFromW4
   ∷ missingStressEnergyTensorFromW4
@@ -107,17 +134,32 @@ record W4PhysicalCalibrationObligationSurface : Setω where
     acceptedDYLuminosityConventionBoundary :
       List String
 
+    acceptedDYLuminosityConventionAuthorityFirstMissing :
+      DY.W4W5DYLuminosityFirstMissing
+
+    receiptQueue :
+      List W4PhysicalCalibrationReceiptQueueItem
+
+    receiptQueueName :
+      String
+
     crossBandWitnessPrerequisite :
       String
 
     externalCalibrationPrerequisite :
       String
 
+    legitimateExternalReceiptBoundary :
+      List String
+
     firstMissingPrerequisites :
       List W4PhysicalCalibrationFirstMissingPrerequisite
 
     nextPrerequisite :
       W4PhysicalCalibrationFirstMissingPrerequisite
+
+    exactFirstMissingStatus :
+      String
 
     strictPhysicalNextMissingIngredient :
       Blocker.StrictPhysicalMissingIngredient
@@ -134,6 +176,9 @@ record W4PhysicalCalibrationObligationSurface : Setω where
     matterSourceBoundary :
       List String
 
+    limitedSMGRPaperBoundary :
+      List String
+
     nonPromotionBoundary :
       List String
 
@@ -143,6 +188,10 @@ record W4PhysicalCalibrationObligationSurface : Setω where
 
     acceptedDYLuminosityConventionBoundaryImpossibleHere :
       AcceptedDYLuminosityConvention →
+      ⊥
+
+    acceptedDYLuminosityConventionAuthorityImpossibleHere :
+      AcceptedDYLuminosityConventionAuthorityBoundary →
       ⊥
 
     externalReceiptImpossibleHere :
@@ -176,44 +225,55 @@ canonicalW4PhysicalCalibrationObligationSurface =
     ; sharedPDFDependency =
         SharedPDF.canonicalW4W5PDFSharedDependencyDiagnostic
     ; acceptedDYLuminosityConventionName =
-        "AcceptedDYLuminosityConvention"
+        "AcceptedDYLuminosityConventionAuthority"
     ; acceptedDYLuminosityConventionBoundary =
         "Constructorless W4-local convention boundary: an accepted Drell-Yan parton-luminosity/bin-integration convention must be supplied before PDF-backed W4 adequacy can feed matterFieldFromW4"
         ∷ "The convention must bind PDF family/member, grid checksums, x/Q2 or rapidity-window integration, flavour weights, normalization, covariance treatment, and W4/W5 pass/fail tolerances"
-        ∷ "The current local CT18 probes are diagnostics only; they do not inhabit AcceptedDYLuminosityConvention"
+        ∷ "The current local CT18 probes are diagnostics only; they do not inhabit AcceptedDYLuminosityConventionAuthority"
         ∷ []
+    ; acceptedDYLuminosityConventionAuthorityFirstMissing =
+        DY.missingAcceptedDYLuminosityConventionAuthority
+    ; receiptQueue =
+        canonicalW4PhysicalCalibrationReceiptQueue
+    ; receiptQueueName =
+        "AcceptedDYLuminosityConventionAuthority -> W4ZAdequacy -> Candidate256PhysicalCalibrationExternalReceipt"
     ; crossBandWitnessPrerequisite =
         "consume Candidate256 quotient/cross-band witness only through strict physical scale-setting fields, not as physical calibration authority"
     ; externalCalibrationPrerequisite =
         "provide Candidate256PhysicalCalibrationExternalReceipt with authority token, units, calibration map, quotient-scale factorization, and dimensional preservation"
+    ; legitimateExternalReceiptBoundary =
+        External.Candidate256PhysicalCalibrationExternalReceiptCurrentStatus.legitimateAuthorityArtifactBoundary
+          External.canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
     ; firstMissingPrerequisites =
         canonicalW4PhysicalCalibrationFirstMissingPrerequisites
     ; nextPrerequisite =
-        missingAcceptedDYLuminosityConvention
+        missingAcceptedDYLuminosityConventionAuthority
+    ; exactFirstMissingStatus =
+        "first missing now: missingAcceptedDYLuminosityConventionAuthority; queue: AcceptedDYLuminosityConventionAuthority -> W4ZAdequacy -> Candidate256PhysicalCalibrationExternalReceipt"
     ; strictPhysicalNextMissingIngredient =
         Ledger.candidate256RecommendedNextMissingIngredient
     ; postPDFAuthorityMatterFirstMissingChain =
-        missingAcceptedDYLuminosityConvention
-        ∷ missingSharedPDFBackedZPeakShapeAdequacy
+        missingAcceptedDYLuminosityConventionAuthority
+        ∷ missingW4ZAdequacy
         ∷ missingExternalPhysicalCalibrationReceipt
         ∷ missingMatterFieldFromW4
         ∷ missingStressEnergyTensorFromW4
         ∷ []
     ; grMatterSourceQueue =
-        "First supply AcceptedDYLuminosityConvention over the shared CT18/MSHT/LHAPDF-compatible parton-luminosity intake"
-        ∷ "Then use that convention to rerun the W4 Z-peak shape adequacy check"
+        "First supply AcceptedDYLuminosityConventionAuthority over the shared CT18/MSHT/LHAPDF-compatible parton-luminosity intake"
+        ∷ "Then establish W4ZAdequacy from that accepted convention authority"
         ∷ "Then supply Candidate256PhysicalCalibrationExternalReceipt with authority token, physical unit carrier, calibration map, quotient-scale factorization, and dimensional preservation"
         ∷ "Only after that receipt exists, construct matterFieldFromW4 from the calibrated W4 physical unit carrier and Candidate256 quotient-scale map"
         ∷ "Then construct stressEnergyTensorFromW4 over that matter field for the GR Einstein-equation lane"
         ∷ []
     ; exactNextObligationMapping =
         "Z-peak data/cache is present: t21 measurement and t22 covariance local artifacts from HEPData record ins2079374 are digest-bound"
-        ∷ "Accepted DY luminosity prerequisite: no AcceptedDYLuminosityConvention is inhabited for the local CT18/MSHT/LHAPDF packet"
-        ∷ "Shared PDF prerequisite: W4 dirty Z-peak shape adequacy and W5 t45 correction both wait on missingSharedCT18MSHTLHAPDFPartonLuminosityIntake"
+        ∷ "Accepted DY luminosity prerequisite: no AcceptedDYLuminosityConventionAuthority is inhabited for the local CT18/MSHT/LHAPDF packet"
+        ∷ "W4 adequacy prerequisite: W4ZAdequacy is downstream of accepted DY convention authority, not current local probes"
         ∷ "Runner blocker moved: dirty-z-peak accepts a declared uncalibrated shape callable plus one scalar fit, but current shape chi2/dof is 298.8462841768543"
         ∷ "Cross-band prerequisite: Candidate256 quotient/cross-band witness is available but remains pre-scale-setting"
         ∷ "Physical calibration prerequisite: external Candidate256 receipt must supply authority, unit carrier, calibration, factorization, and dimensional preservation"
-        ∷ "Matter-source prerequisite: matterFieldFromW4 and stressEnergyTensorFromW4 are downstream of both AcceptedDYLuminosityConvention and Candidate256PhysicalCalibrationExternalReceipt, not current W4 evidence"
+        ∷ "Matter-source prerequisite: matterFieldFromW4 and stressEnergyTensorFromW4 are downstream of AcceptedDYLuminosityConventionAuthority, W4ZAdequacy, and Candidate256PhysicalCalibrationExternalReceipt, not current W4 evidence"
         ∷ "Strict physical lane: recommended next chemistry-facing lane is scale setting, before spectra, bonding, and empirical validation"
         ∷ []
     ; matterSourceBoundary =
@@ -221,12 +281,20 @@ canonicalW4PhysicalCalibrationObligationSurface =
         ∷ "It does not construct matterFieldFromW4"
         ∷ "It does not construct stressEnergyTensorFromW4"
         ∷ "It does not construct a sourced non-flat connection or an Einstein-equation receipt"
-        ∷ "Those constructions remain inadmissible until AcceptedDYLuminosityConvention, PDF-backed W4 adequacy, and Candidate256PhysicalCalibrationExternalReceipt exist"
+        ∷ "Those constructions remain inadmissible until AcceptedDYLuminosityConventionAuthority, W4ZAdequacy, and Candidate256PhysicalCalibrationExternalReceipt exist"
+        ∷ []
+    ; limitedSMGRPaperBoundary =
+        "Limited paper claim: this surface records a typed SM-to-GR matter-source obligation path, not a broad unification theorem"
+        ∷ "Current W4 evidence can name Z-peak/PDF/calibration prerequisites but cannot source non-flat GR geometry"
+        ∷ "The first missing item is the accepted Drell-Yan luminosity/bin-integration convention; the external physical calibration receipt remains unconstructed"
+        ∷ "Candidate256PhysicalCalibrationExternalReceipt is queued after AcceptedDYLuminosityConventionAuthority and W4ZAdequacy, so this surface does not imply Candidate256 calibration is available"
+        ∷ "Any later SM+GR bridge must consume actual matterFieldFromW4 and stressEnergyTensorFromW4 terms, not this request surface"
         ∷ []
     ; nonPromotionBoundary =
         "This surface only maps already-existing W4 request, route, Z-peak, and chemistry-ledger obligations"
         ∷ "It does not construct W4SameRecordZPeakRatioCalibrationLaw"
-        ∷ "It does not construct AcceptedDYLuminosityConvention"
+        ∷ "It does not construct AcceptedDYLuminosityConventionAuthority"
+        ∷ "It does not construct W4ZAdequacy"
         ∷ "It does not construct Candidate256PhysicalCalibrationExternalReceipt"
         ∷ "It does not construct matterFieldFromW4 or stressEnergyTensorFromW4"
         ∷ "It does not construct physical unit authority, dimensional preservation, scale-setting closure, spectra, bonding, empirical validation, or W4 promotion"
@@ -235,6 +303,8 @@ canonicalW4PhysicalCalibrationObligationSurface =
         ZPeak.canonicalW4CalibrationRatioZPeakLawIsUninhabited
     ; acceptedDYLuminosityConventionBoundaryImpossibleHere =
         acceptedDYLuminosityConventionImpossibleHere
+    ; acceptedDYLuminosityConventionAuthorityImpossibleHere =
+        acceptedDYLuminosityConventionAuthorityBoundaryImpossibleHere
     ; externalReceiptImpossibleHere =
         External.candidate256PhysicalCalibrationExternalReceiptImpossibleHere
     }

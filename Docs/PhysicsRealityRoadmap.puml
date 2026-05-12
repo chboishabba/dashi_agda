@@ -67,6 +67,7 @@ package "2e. Roadmap to complete verified unification" {
   rectangle "2. Lane theorem completion\nMaxwell + Schrodinger + GR\nclosed or obstructed" as RoadmapTargetTheorems #fef3c7
   rectangle "G4 / W-GR owner\nW5 GR/QFT consumer\ncurvature + stress-energy\n+ interaction closure receipts\n[tracking only]" as RoadmapTargetGR #fef3c7
   rectangle "3. Empirical validation\naccepted authority,\ncalibration, projection,\ncomparison receipts" as RoadmapTargetEmpirical #fee2e2
+  rectangle "G6 cross-lane commuting skeleton\nCrossLaneCommutingTheoremSkeleton\nSKELETON / no promotion\npostulate-obligation only\nrequires lane section proofs" as RoadmapG6Skeleton #fef3c7
   rectangle "4. Cross-lane consistency\nsingle carrier/spine\ncommuting package" as RoadmapTargetConsistency #fef3c7
   rectangle "5. Publishable target\ncomplete and verified\nphysics unification" as RoadmapTargetClaim #bbf7d0
 }
@@ -151,9 +152,10 @@ RoadmapMaturityGR --> RoadmapTargetGR
 RoadmapTargetGR --> RoadmapTargetTheorems
 RoadmapMaturityPrediction --> RoadmapTargetEmpirical
 DashiSpine --> RoadmapTargetSpine
-RoadmapTargetSpine --> RoadmapTargetConsistency
-RoadmapTargetTheorems --> RoadmapTargetConsistency
-RoadmapTargetEmpirical --> RoadmapTargetConsistency
+RoadmapTargetSpine --> RoadmapG6Skeleton : spine input
+RoadmapTargetTheorems --> RoadmapG6Skeleton : lane section obligations
+RoadmapTargetEmpirical --> RoadmapG6Skeleton : empirical section obligation
+RoadmapG6Skeleton --> RoadmapTargetConsistency : skeleton feeds consistency target
 RoadmapTargetConsistency --> RoadmapTargetClaim
 
 CoreSpineTri --> CoreSpineMetric : vector lift

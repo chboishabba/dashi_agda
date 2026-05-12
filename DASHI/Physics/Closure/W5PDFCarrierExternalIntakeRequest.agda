@@ -8,6 +8,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.PDFCarrierLogRatioDiagnostic as PDFLog
+import DASHI.Physics.Closure.W4W5AcceptedDYLuminosityConventionDiagnostic as DYConvention
 
 ------------------------------------------------------------------------
 -- W5 external PDF-carrier intake request.
@@ -40,6 +41,9 @@ record W5PDFCarrierExternalIntakeRequest : Set where
     nearestPathDiagnostic :
       PDFLog.PDFCarrierLogRatioDiagnostic
 
+    authorityFirstMissing :
+      DYConvention.W4W5DYLuminosityFirstMissing
+
     requiredT45Correction :
       Float
 
@@ -62,6 +66,18 @@ record W5PDFCarrierExternalIntakeRequest : Set where
       List String
 
     extractionContract :
+      List String
+
+    acceptedConventionBlocker :
+      List String
+
+    acceptedAuthorityReceiptSurface :
+      List String
+
+    missingAuthorityFields :
+      List DYConvention.W4W5DYLuminosityAuthorityField
+
+    providerAuthorityContract :
       List String
 
     observedLocalCache :
@@ -95,6 +111,8 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         localCT18NLOGridParsedButConventionMismatch
     ; nearestPathDiagnostic =
         PDFLog.canonicalPDFCarrierLogRatioDiagnostic
+    ; authorityFirstMissing =
+        DYConvention.missingAcceptedDYLuminosityConventionAuthority
     ; requiredT45Correction =
         0.8804486068
     ; correctionNumerator =
@@ -110,11 +128,16 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         ∷ "LHAPDF-compatible table carrying an accepted parton-luminosity route"
         ∷ []
     ; requiredProviderPayload =
-        "local or external table identifier and version"
+        "PDF set identifier and version accepted by the convention authority"
+        ∷ "LHAPDF id accepted by the convention authority, currently candidate id 14400 for CT18NLO"
+        ∷ "grid checksum accepted by the convention authority for every .info/.dat or provider-table artifact"
         ∷ "parton-luminosity correction for the CMS-SMP-20-003 t45 window"
-        ∷ "x and Q2 convention used for the 50-76, 76-106, and 106-170 GeV mass windows"
-        ∷ "flavour/channel convention used to form the Drell-Yan parton-luminosity ratio"
+        ∷ "factorization scale convention used for the 50-76, 76-106, and 106-170 GeV mass windows"
+        ∷ "rapidity-window convention used by the accepted Drell-Yan parton-luminosity route"
+        ∷ "mass-bin integration rule for the 50-76, 76-106, and 106-170 GeV windows"
+        ∷ "flavour-weight rule used to form the Drell-Yan parton-luminosity ratio"
         ∷ "computed correction factor targeting 0.8804486068"
+        ∷ "source DOI for the PDF set and/or accepted luminosity convention"
         ∷ "tolerance statement comparing the computed correction against 0.8804486068"
         ∷ "authority/provenance receipt for the PDF table or equivalent mass-kernel route"
         ∷ []
@@ -131,6 +154,33 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         ∷ "report numerator and denominator luminosity values before forming the correction factor"
         ∷ "report computed correction factor and residual relative to 0.8804486068"
         ∷ "do not promote W5 unless the packet satisfies the provider precision fields and the tolerance statement passes"
+        ∷ []
+    ; acceptedConventionBlocker =
+        "missingAcceptedDYLuminosityConventionAuthority is the first missing item"
+        ∷ "accepted DY luminosity convention authority is absent"
+        ∷ "accepted mass-bin integration convention over the CMS-SMP-20-003 windows is absent"
+        ∷ "accepted CT18NLO member/error-set and PDF uncertainty convention is absent"
+        ∷ "accepted numeric tolerance/covariance treatment tying the local CT18 packet to W4/W5 is absent"
+        ∷ []
+    ; acceptedAuthorityReceiptSurface =
+        "PDF set"
+        ∷ "LHAPDF id"
+        ∷ "grid checksum"
+        ∷ "factorization scale convention"
+        ∷ "rapidity window"
+        ∷ "mass-bin integration rule"
+        ∷ "flavour-weight rule"
+        ∷ "source DOI"
+        ∷ "external authority/provenance"
+        ∷ []
+    ; missingAuthorityFields =
+        DYConvention.W4W5AcceptedDYLuminosityConventionDiagnostic.missingAuthorityFields
+          DYConvention.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
+    ; providerAuthorityContract =
+        "external intake must provide authority for the DY luminosity convention before a PDF carrier can be constructed"
+        ∷ "external intake must mark local CT18NLO probes as candidate-only or supersede them with an accepted authority receipt"
+        ∷ "external intake must not infer W5 closure from the presence of CT18 files, checksums, or candidate ratios"
+        ∷ "external intake must preserve first missing missingAcceptedDYLuminosityConventionAuthority until authority/provenance is accepted"
         ∷ []
     ; observedLocalCache =
         "scripts/data/hepdata has t43/t44, t45/t46, and t19/t20 HEPData tables"
@@ -151,9 +201,9 @@ canonicalW5PDFCarrierExternalIntakeRequest =
         ∷ "repo-local scripts/extract_ct18_pdf_packet.py parsed the CT18NLO lhagrid1 central member without LHAPDF runtime bindings"
         ∷ []
     ; exactExternalIntakeBlocker =
-        "local CT18NLO rapidity-window DY query is now provenance-ready but candidate-not-accepted: t45/z_peak = 0.7514043986785174 and t45/t43 = 0.3348750784006896, neither matching target 0.8804486068; missing item is missingAcceptedDYLuminosityConventionAuthority"
+        "first missing: missingAcceptedDYLuminosityConventionAuthority; local CT18NLO rapidity-window DY query is provenance-ready but candidate-not-accepted: t45/z_peak = 0.7514043986785174 and t45/t43 = 0.3348750784006896, neither matching target 0.8804486068"
     ; networkFetchPerformed =
-        true
+        false
     ; noPDFCarrierConstructed =
         tt
     ; noPartonLuminosityAuthorityFabricated =
@@ -168,3 +218,11 @@ canonicalW5PDFCarrierExternalIntakeStillBlocked :
     ≡
   awaitingExternalPDFCarrierIntake
 canonicalW5PDFCarrierExternalIntakeStillBlocked = refl
+
+canonicalW5PDFCarrierExternalIntakeAuthorityFirstMissing :
+  W5PDFCarrierExternalIntakeRequest.authorityFirstMissing
+    canonicalW5PDFCarrierExternalIntakeRequest
+    ≡
+  DYConvention.missingAcceptedDYLuminosityConventionAuthority
+canonicalW5PDFCarrierExternalIntakeAuthorityFirstMissing =
+  refl
