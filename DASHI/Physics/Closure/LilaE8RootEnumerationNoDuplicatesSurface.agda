@@ -44,6 +44,115 @@ data LilaE8NoDuplicatesFirstMissing : Set where
   missingCombinedE8Completeness :
     LilaE8NoDuplicatesFirstMissing
 
+data LilaE8MissingNativePredicateName : Set where
+  expectedNativeE8RootMember :
+    LilaE8MissingNativePredicateName
+  expectedNativeE8RootNoDuplicates :
+    LilaE8MissingNativePredicateName
+  expectedNativeE8RootFamiliesDisjoint :
+    LilaE8MissingNativePredicateName
+  expectedNativeE8IntegerTwoSparseCompleteness :
+    LilaE8MissingNativePredicateName
+  expectedNativeE8HalfEvenParityCompleteness :
+    LilaE8MissingNativePredicateName
+  expectedNativeE8CombinedCompleteness :
+    LilaE8MissingNativePredicateName
+
+canonicalLilaE8MissingNativePredicateNames :
+  List LilaE8MissingNativePredicateName
+canonicalLilaE8MissingNativePredicateNames =
+  expectedNativeE8RootMember
+  ∷ expectedNativeE8RootNoDuplicates
+  ∷ expectedNativeE8RootFamiliesDisjoint
+  ∷ expectedNativeE8IntegerTwoSparseCompleteness
+  ∷ expectedNativeE8HalfEvenParityCompleteness
+  ∷ expectedNativeE8CombinedCompleteness
+  ∷ []
+
+data LilaE8ExpectedBridgeShape : Set where
+  executableIndexedMemberToNativeMember :
+    LilaE8ExpectedBridgeShape
+  executableIndexedNoDuplicatesToNativeNoDuplicates :
+    LilaE8ExpectedBridgeShape
+  executableIndexedDisjointToNativeDisjoint :
+    LilaE8ExpectedBridgeShape
+  integerGeneratorToNativeTwoSparseCompleteness :
+    LilaE8ExpectedBridgeShape
+  halfGeneratorToNativeEvenParityCompleteness :
+    LilaE8ExpectedBridgeShape
+  combinedGeneratorToNativeE8Completeness :
+    LilaE8ExpectedBridgeShape
+
+canonicalLilaE8ExpectedBridgeShapes :
+  List LilaE8ExpectedBridgeShape
+canonicalLilaE8ExpectedBridgeShapes =
+  executableIndexedMemberToNativeMember
+  ∷ executableIndexedNoDuplicatesToNativeNoDuplicates
+  ∷ executableIndexedDisjointToNativeDisjoint
+  ∷ integerGeneratorToNativeTwoSparseCompleteness
+  ∷ halfGeneratorToNativeEvenParityCompleteness
+  ∷ combinedGeneratorToNativeE8Completeness
+  ∷ []
+
+record LilaE8NativeReflectionBridgeRequest : Set where
+  field
+    missingNativePredicateNames :
+      List LilaE8MissingNativePredicateName
+
+    missingNativePredicateNamesAreCanonical :
+      missingNativePredicateNames ≡
+      canonicalLilaE8MissingNativePredicateNames
+
+    expectedBridgeShapes :
+      List LilaE8ExpectedBridgeShape
+
+    expectedBridgeShapesAreCanonical :
+      expectedBridgeShapes ≡ canonicalLilaE8ExpectedBridgeShapes
+
+    expectedNativeRootMemberShape :
+      String
+
+    expectedNativeNoDuplicatesShape :
+      String
+
+    expectedNativeDisjointShape :
+      String
+
+    expectedNativeCompletenessShape :
+      String
+
+    requestIsNonPromoting :
+      Bool
+
+    requestIsNonPromotingIsTrue :
+      requestIsNonPromoting ≡ true
+
+canonicalLilaE8NativeReflectionBridgeRequest :
+  LilaE8NativeReflectionBridgeRequest
+canonicalLilaE8NativeReflectionBridgeRequest =
+  record
+    { missingNativePredicateNames =
+        canonicalLilaE8MissingNativePredicateNames
+    ; missingNativePredicateNamesAreCanonical =
+        refl
+    ; expectedBridgeShapes =
+        canonicalLilaE8ExpectedBridgeShapes
+    ; expectedBridgeShapesAreCanonical =
+        refl
+    ; expectedNativeRootMemberShape =
+        "E8RootMember : E8.E8RootCarrier -> E8.E8RootList -> Set"
+    ; expectedNativeNoDuplicatesShape =
+        "E8RootNoDuplicates : E8.E8RootList -> Set"
+    ; expectedNativeDisjointShape =
+        "E8RootFamiliesDisjoint : E8.E8RootList -> E8.E8RootList -> Set"
+    ; expectedNativeCompletenessShape =
+        "E8RootEnumerationComplete inhabited only after native membership, no-duplicates, disjointness, integer two-sparse completeness, half even-parity completeness, and combined completeness"
+    ; requestIsNonPromoting =
+        true
+    ; requestIsNonPromotingIsTrue =
+        refl
+    }
+
 canonicalLilaE8NoDuplicatesFirstMissing :
   List LilaE8NoDuplicatesFirstMissing
 canonicalLilaE8NoDuplicatesFirstMissing =
@@ -153,6 +262,9 @@ record LilaE8RootEnumerationNoDuplicatesSurface : Setω where
         E8.integerIndexedRoots
         E8.halfIndexedRoots
 
+    nativeReflectionBridgeRequest :
+      LilaE8NativeReflectionBridgeRequest
+
     booleanBackedLayer :
       E8.E8BooleanBackedStructuralBridgeLayer
 
@@ -223,6 +335,8 @@ canonicalLilaE8RootEnumerationNoDuplicatesSurface =
         E8.combinedIndexedRootsNoDuplicatesBridge
     ; integerHalfDisjointIndexedReceipt =
         E8.integerHalfIndexedRootsDisjointBridge
+    ; nativeReflectionBridgeRequest =
+        canonicalLilaE8NativeReflectionBridgeRequest
     ; booleanBackedLayer =
         E8.canonicalE8BooleanBackedStructuralBridgeLayer
     ; booleanBackedLayerDoesNotCompleteEnumeration =
@@ -247,7 +361,8 @@ canonicalLilaE8RootEnumerationNoDuplicatesSurface =
         ∷ "The half indexed family computes length 128 and no-duplicates = true"
         ∷ "The integer and half indexed families compute disjoint = true"
         ∷ "This sidecar is boolean-backed and indexed-list-level only"
-        ∷ "First missing: bridge executable indexed membership/no-duplicates/disjointness to native E8 predicates"
+        ∷ "Native predicate request: E8RootMember, E8RootNoDuplicates, E8RootFamiliesDisjoint, and native completeness shapes are not present here"
+        ∷ "First missing: bridge executable indexed membership/no-duplicates/disjointness to those native E8 predicates"
         ∷ "Completeness still needs integer two-sparse, half even-parity, and combined E8 completeness proofs"
         ∷ "No LILA-R3, Lam-Tung, phi-star, or publication promotion is claimed here"
         ∷ []

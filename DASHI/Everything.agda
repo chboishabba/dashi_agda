@@ -309,12 +309,15 @@ import DASHI.Physics.Closure.BlockerKillConditionsBase
 import DASHI.Physics.Closure.G2DiscreteCurvatureCarrier
 import DASHI.Physics.Closure.G2PlaquetteBumpCommutationLaw
 import DASHI.Physics.Closure.G2PrimeLatticeCoefficientBridge
+import DASHI.Physics.Closure.G2SFGCAsUOnePrimeLattice
+import DASHI.Physics.Closure.G2SFGCPrimeLatticeOrbit
 import DASHI.Physics.Closure.G2TransverseEdgeAPI
 import DASHI.Physics.Closure.G3ConcreteOperators
 import DASHI.Physics.Closure.G3ContractionCarrier
 import DASHI.Physics.Closure.G3P2OperatorSurface
 import DASHI.Physics.Closure.G3PoincareGalileiCarrierChain
 import DASHI.Physics.Closure.G3SelectedCarrierInstance
+import DASHI.Physics.Closure.G3WaveFunctionOperatorAlgebra
 import DASHI.Physics.Closure.G6PrerequisiteIndex
 import DASHI.Physics.Closure.GRConcreteLeviCivita
 import DASHI.Physics.Closure.GRDiscreteBianchiFiniteR
