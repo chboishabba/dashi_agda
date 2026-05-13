@@ -5,6 +5,8 @@ open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; _∷_; [])
 
+import DASHI.Physics.Closure.BlockerKillConditions as Kill
+
 ------------------------------------------------------------------------
 -- Non-limited paper roadmap bundle / W7 claim-governance surface.
 --
@@ -24,8 +26,11 @@ data RoadmapStepStatus : Set where
   blockedByMissingTheorem :
     RoadmapStepStatus
 
-data W9RoadmapStatus : Set where
+data W9RoadmapStatus : Setω where
   w9AcceptedKillRoute :
+    W9RoadmapStatus
+  w9AcceptedMDLTerminationSeamKillRoute :
+    Kill.W9KillReceipt →
     W9RoadmapStatus
   w9BlockedNoConstructiveKillRoute :
     W9RoadmapStatus
@@ -187,6 +192,99 @@ data NonLimitedPaperMissingField : Set where
   missingW7ClaimGovernance :
     NonLimitedPaperMissingField
 
+data RoadmapGovernanceExternalGate : Set where
+  w2ExternalAuthorityGate :
+    RoadmapGovernanceExternalGate
+  w3ExternalEvidenceAuthorityGate :
+    RoadmapGovernanceExternalGate
+  w4ExternalCalibrationGate :
+    RoadmapGovernanceExternalGate
+  w5ExternalPDFAndGRQFTGate :
+    RoadmapGovernanceExternalGate
+
+data RoadmapGovernanceInternalGate : Set where
+  g2InternalDiscreteCurvatureGate :
+    RoadmapGovernanceInternalGate
+  g3InternalPoincareGalileiGate :
+    RoadmapGovernanceInternalGate
+  grInternalFiniteRBianchiGate :
+    RoadmapGovernanceInternalGate
+
+data RoadmapGovernanceDownstreamGate : Set where
+  g6DownstreamCommutativityGate :
+    RoadmapGovernanceDownstreamGate
+
+data RoadmapGovernanceFinalReceiptGate : Set where
+  w7FinalClaimGovernanceReceiptGate :
+    RoadmapGovernanceFinalReceiptGate
+
+record CurrentRoadmapGovernanceGapReceipt : Setω where
+  field
+    gapField :
+      NonLimitedPaperMissingField
+
+    gapFieldIsRoadmapGovernance :
+      gapField
+      ≡
+      missingRoadmapGovernance
+
+    externalGates :
+      List RoadmapGovernanceExternalGate
+
+    internalGates :
+      List RoadmapGovernanceInternalGate
+
+    downstreamGate :
+      RoadmapGovernanceDownstreamGate
+
+    finalReceiptGate :
+      RoadmapGovernanceFinalReceiptGate
+
+    w9StatusAlreadyClosed :
+      W9RoadmapStatus
+
+    decompositionSummary :
+      List String
+
+    noPaperAdmissibilityFromThisGapReceipt :
+      ClaimPromotionBoundary
+
+canonicalCurrentRoadmapGovernanceGapReceipt :
+  CurrentRoadmapGovernanceGapReceipt
+canonicalCurrentRoadmapGovernanceGapReceipt =
+  record
+    { gapField =
+        missingRoadmapGovernance
+    ; gapFieldIsRoadmapGovernance =
+        refl
+    ; externalGates =
+        w2ExternalAuthorityGate
+        ∷ w3ExternalEvidenceAuthorityGate
+        ∷ w4ExternalCalibrationGate
+        ∷ w5ExternalPDFAndGRQFTGate
+        ∷ []
+    ; internalGates =
+        g2InternalDiscreteCurvatureGate
+        ∷ g3InternalPoincareGalileiGate
+        ∷ grInternalFiniteRBianchiGate
+        ∷ []
+    ; downstreamGate =
+        g6DownstreamCommutativityGate
+    ; finalReceiptGate =
+        w7FinalClaimGovernanceReceiptGate
+    ; w9StatusAlreadyClosed =
+        w9AcceptedMDLTerminationSeamKillRoute
+          Kill.canonicalMDLTerminationSeamW9KillReceipt
+    ; decompositionSummary =
+        "missingRoadmapGovernance now decomposes into W2/W3/W4/W5 external gates"
+        ∷ "It also requires G2/G3/GR internal gates before downstream G6 commutativity"
+        ∷ "W7 remains the final claim-governance receipt after those gates"
+        ∷ "W9 is already represented by the accepted MDL termination seam kill receipt"
+        ∷ []
+    ; noPaperAdmissibilityFromThisGapReceipt =
+        noRoadmapStepUpgradeBySummary
+    }
+
 data PaperAdmissibility : Set where
   paperAdmissibleFromTypedRoadmap :
     PaperAdmissibility
@@ -198,6 +296,9 @@ record NonLimitedPaperRoadmapBundle : Setω where
   field
     roadmapGovernance :
       RoadmapStepStatus
+
+    currentRoadmapGovernanceGap :
+      CurrentRoadmapGovernanceGapReceipt
 
     w9Status :
       W9RoadmapStatus
@@ -263,6 +364,8 @@ w9Missing :
   PaperAdmissibility
 w9Missing w9AcceptedKillRoute next =
   next
+w9Missing (w9AcceptedMDLTerminationSeamKillRoute receipt) next =
+  next
 w9Missing w9BlockedNoConstructiveKillRoute next =
   paperBlocked missingW9AcceptedKillRoute
 w9Missing w9RetargetCandidateOnly next =
@@ -322,6 +425,9 @@ record NonLimitedPaperClaimGovernanceReceipt : Setω where
       ≡
       computedAdmissibility
 
+    consumedRoadmapGovernanceGap :
+      CurrentRoadmapGovernanceGapReceipt
+
     theoremFacingDependencyObject :
       String
 
@@ -337,8 +443,11 @@ canonicalNonLimitedPaperRoadmapBundle =
   record
     { roadmapGovernance =
         obligationSurfaceOnly
+    ; currentRoadmapGovernanceGap =
+        canonicalCurrentRoadmapGovernanceGapReceipt
     ; w9Status =
-        w9BlockedNoConstructiveKillRoute
+        w9AcceptedMDLTerminationSeamKillRoute
+          Kill.canonicalMDLTerminationSeamW9KillReceipt
     ; hardCorePressurePoints =
         canonicalHardCorePressurePointBundle
     ; w4Anchor =
@@ -370,7 +479,8 @@ canonicalNonLimitedPaperRoadmapBundle =
     ; roadmapNotes =
         "12-step non-limited paper roadmap is represented as typed status fields"
         ∷ "Current bundle is intentionally non-promoting"
-        ∷ "W9 is blocked; W4 anchor/calibration and CT18/PDF authority remain missing or obligation-only"
+        ∷ "missingRoadmapGovernance decomposes into W2/W3/W4/W5 external gates; G2/G3/GR internal gates; G6 downstream; and W7 final receipt"
+        ∷ "W9 has an accepted MDL termination seam kill route; W4 anchor/calibration and CT18/PDF authority remain missing or obligation-only"
         ∷ "G2, G3, GR, G6, G4 full consumer, and W7 claim governance are not accepted closures here"
         ∷ []
     }
@@ -390,6 +500,9 @@ canonicalNonLimitedPaperClaimGovernanceReceipt =
         paperBlocked missingRoadmapGovernance
     ; computedFromTypedStatuses =
         refl
+    ; consumedRoadmapGovernanceGap =
+        NonLimitedPaperRoadmapBundle.currentRoadmapGovernanceGap
+          canonicalNonLimitedPaperRoadmapBundle
     ; theoremFacingDependencyObject =
         "NonLimitedPaperRoadmapBundle"
     ; noClaimPromotion =
@@ -400,7 +513,8 @@ canonicalNonLimitedPaperClaimGovernanceReceipt =
         ∷ []
     ; governanceBoundary =
         "Admissibility is computed from the 12 typed roadmap statuses"
-        ∷ "This surface does not construct W4, CT18/PDF, G2, G3, GR, G6, G4, W7, or W9 receipts"
+        ∷ "missingRoadmapGovernance is the current typed gap receipt: W2/W3/W4/W5 external, G2/G3/GR internal, G6 downstream, W7 final receipt"
+        ∷ "This surface consumes the accepted W9 MDL termination seam kill receipt but does not construct W4, CT18/PDF, G2, G3, GR, G6, G4, or W7 receipts"
         ∷ "Current admissibility is blocked at missingRoadmapGovernance"
         ∷ []
     }

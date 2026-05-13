@@ -2,6 +2,189 @@
 
 ## 2026-05-13
 
+- add the W4/W5 public pT-table integral diagnostic:
+  `scripts/run_w4w5_hepdata_pt_integral.py` now probes the direct HEPData
+  `ins2079374` t1/t3/t21/t22 CSV endpoints, records the CLI 403 / Cloudflare
+  failures, and falls back to the CMS public YAML mirror for absolute
+  `d sigma / d pT(ll)` tables. The generated
+  `scripts/data/outputs/w4w5_hepdata_pt_integral.json` records SHA-256
+  digests, source URLs, pT integrals, and ratios for inclusive and
+  at-least-one-jet 50-76, 76-106, and 106-170 GeV mass windows. The direct
+  pT-table integrals do not match the old `0.8804486068` W5 target, so
+  `Docs/W4W5AcceptanceBridgeProviderRequest.md`, `TODO.md`, and
+  `COMPACTIFIED_CONTEXT.md` now record this as a negative, non-promoting
+  diagnostic. No W4/W5 authority or gate promotion is claimed.
+
+- add the G3 contraction-carrier fail-closed receipt:
+  `G3ContractionCarrier.agda` now checks the selected concrete `P/H/K`
+  operator package against the real Schrodinger-scope
+  `PoincareToGalileiContractionCarrier` target and records the exact
+  non-promotion boundary. The selected FactorVec endomorphisms, p2
+  filtration, and bump-commutation laws do not yet supply the wave-function
+  scalar ring, Lie bracket semantics, filtered bracket law, associated-graded
+  Galilei identification, or contraction-parameter law needed to inhabit
+  `SES.PoincareToGalileiContractionDerivedType`. No G3 promotion is claimed.
+
+- add the G2 Phase4 prime-lattice coefficient bridge:
+  `G2PrimeLatticeCoefficientBridge.agda` now supplies a concrete
+  `PrimeLatticeCoefficientLaw Phase4` for the standalone prime lattice and
+  proves `δ₁ (δ₀ f) = φ0` by finite normalization over the four Phase4
+  constructors. The same module records the fail-closed SFGC bridge boundary:
+  `SFGC.GaugeField` is still `ShiftPressurePoint -> Phase4`, and the exact
+  first missing interface is a real `PrimeLatticeEdge -> ShiftPressurePoint`
+  projection or prime-indexed SFGC link action. No
+  `DiscreteCurvatureCarrier SFGC.GaugeField`, Maxwell bridge, or G2 promotion
+  is claimed.
+
+- integrate the next-six parallel lane assignment:
+  `G3SelectedCarrierInstance.agda` now gives a concrete selected
+  `DASHIState` with `Carrier = FactorVec` and p2 bump/projection laws, while
+  explicitly preserving the global adapter gap. `G3P2OperatorSurface.agda`
+  now carries adapter-indexed `P`, `H`, `K`, commutator, p2 filtration, and IW
+  request surfaces, still conditional on the missing global adapter.
+  `G2TransverseEdgeAPI.agda` records that the current SFGC surface exposes only
+  right edges and names the missing transverse edge, endpoint, and plaquette
+  bump-commutation APIs. `G2PlaquetteBumpCommutationLaw.agda` adds the
+  conditional signed-boundary, vacuum-flatness, and d²/bump-commutation law
+  surface. `GRSelectedNonFlatMetricInstance.agda` adds a selected non-flat
+  metric dependency with inverse/trace laws and names
+  `missingSelectedChristoffelFromMetricLaw` as the first GR gap. The V2
+  external authority packet set is now split into per-gate provider requests.
+  No G2, G3, GR, W2/W3/W4/W5, G6, W7, or paper promotion is claimed.
+
+- harden Lane 6 external authority provider packets:
+  `Docs/ExternalAuthorityPacketV2.md` now indexes sendable W2, W3, W4, and W5
+  provider requests. `Docs/W2ExternalAuthorityProviderRequest.md`,
+  `Docs/W3ExternalAuthorityProviderRequest.md`,
+  `Docs/W4ExternalAuthorityProviderRequest.md`, and
+  `Docs/W5ExternalAuthorityProviderRequest.md` split the evidence,
+  requested authority identity, exact receipt shape, source artifacts, and
+  non-promotion caveats by gate. `Docs/ExternalAuthorityPacket.md` now points
+  to the V2/per-gate packet set. No Agda gates or external closures are
+  changed.
+
+- integrate next-six-lanes follow-up after W9 closure:
+  `G3PoincareGalileiCarrierChain.agda` now adds
+  `G3DASHIStateCarrierFactorVecAdapterRequest`, naming the exact missing
+  assumption-free `DASHIState.Carrier -> FactorVec` adapter, p2 bump state,
+  factor-vector preservation, p2 exponent, and filtration laws. A new
+  `G3P2OperatorSurface.agda` provides a conditional, non-promoting operator
+  package parameterized by that adapter, including p2/spatial bump,
+  momentum/boost, and commutator-obligation surfaces. `GRNonFlatScalarAlgebraSurface.agda`
+  now has `canonicalGRFiniteRCarrierScalarOperations` and an explicit
+  conditional non-flat metric dependency surface with metric, inverse law,
+  derivative, finite contraction, Christoffel, trace, and Ricci-cancellation
+  inputs; `GRDiscreteBianchiFiniteR.agda` consumes this as a request only.
+  `G2DiscreteCurvatureCarrier.agda` now records
+  `canonicalSFGCNondegeneratePlaquetteCarrierRequest`, making
+  `ShiftGaugeFieldGaugeConnection`, independent transverse edges, endpoint
+  laws, and plaquette bump-commutation laws the first concrete G2 interface
+  gap. `Docs/W4W5AcceptanceBridgeProviderRequest.md` adds the provider-facing
+  W4/W5 acceptance bridge packet. No G2, G3, GR, W4/W5, G6, W7, or paper
+  promotion is claimed.
+
+- integrate the high-alpha follow-up tranche after W9 closure:
+  `W7ClaimGovernanceReceiptRequest.agda` now records the current W7 gate board
+  as a non-promoting request: W9 closed, W2/W3/W4/W5 external-required,
+  G2/G3/GR internal-pending, and G6 downstream-pending; it does not construct
+  W7 or `paperAdmissible`. `G6PrerequisiteIndex.agda` indexes future G6
+  prerequisites without importing or manufacturing the missing theorem
+  inhabitants. `GRNonFlatScalarAlgebraSurface.agda` now separates selected
+  non-flat scalar operations, metric dependency, inverse metric laws,
+  Christoffel-from-metric, and six-term Ricci cancellation obligations; first
+  missing remains the selected `CarrierScalar` operations. `G2DiscreteCurvatureCarrier.agda`
+  now adds a four-term SFGC right-edge two-step signed-boundary surface with
+  `δ₁` and `δ₁∘δ₀` normalizer laws, but no transverse plaquette or
+  `DiscreteCurvatureCarrier SFGC.GaugeField`. `G3PoincareGalileiCarrierChain.agda`
+  now records the exact fail-closed `DASHIState.Carrier -> FactorVec` adapter
+  blocker after inspecting the real `DASHIState` shape. The paper remains
+  blocked at `missingRoadmapGovernance`.
+
+- add the concise external authority packet export:
+  `Docs/ExternalAuthorityPacket.md` now indexes the W2/W3/W4/W5 evidence and
+  authority gaps without claiming external tokens. It records the W3 frozen
+  commit `3205d746...`, chi2/dof `2.1565`, mean pred/data `0.9941`, the
+  W4/W5 public `DSIG/DPHISTAR` ratios `t43/Z = 0.048798342138242475`,
+  `t45/Z = 0.025440376842598356`, `t45/t43 = 0.5213369087525034`, and the
+  missing accepted `A(M,phi*)` bridge / observable-conversion law.
+
+- integrate the post-W9 baseline six-lane dispatch:
+  `NonLimitedPaperBundleClaimGovernance.agda` now includes
+  `CurrentRoadmapGovernanceGapReceipt`, decomposing `missingRoadmapGovernance`
+  into W2/W3/W4/W5 external gates, G2/G3/GR internal gates, G6 downstream, and
+  W7 final claim governance while preserving `paperBlocked
+  missingRoadmapGovernance`. `W2W3W4W5ExternalAuthorityPacketSurface.agda`
+  records the four external gates in one packet and explicitly keeps internal
+  construction unauthorized. `G2DiscreteCurvatureCarrier.agda` now adds a
+  conservative right-edge return plaquette normalizer and local `δ₁∘δ₀` zero
+  surface, without claiming a nondegenerate curvature carrier. `G3PoincareGalileiCarrierChain.agda`
+  now adds `G3CarrierToFactorVecMinimalAdapter` and the p2 exponent-after-bump
+  lemma, without supplying a real `DASHIState` projection. `GRDiscreteBianchiFiniteR.agda`
+  now records a selected non-flat finite-r scalar-algebra dependency request,
+  without promoting non-flat Levi-Civita or Einstein closure.
+
+- reconcile six high-alpha lanes:
+  W9 is now formally unblocked through the accepted MDL termination seam route:
+  `BlockerKillConditions.agda` ties `w9KillCondition` to
+  `canonicalMDLTerminationSeamW9KillReceipt`, and
+  `NonLimitedPaperBundleClaimGovernance.agda` consumes the same receipt through
+  an accepted W9 roadmap status. The paper remains blocked on roadmap
+  governance, and no pressure-equality/Qcore claim is added.
+  `W2W3ExternalAuthorityFormalClosureRequest.agda` records Option B for W2/W3:
+  both lanes are pending external authority receipts and no constructorless
+  tokens are fabricated. `G2DiscreteCurvatureCarrier.agda` now adds an
+  `SFGCShiftRightEdge` Phase4 1-form bridge and narrows the G2 blocker to a
+  right-edge plaquette/signed-boundary/`δ₁` normalizer. `G3PoincareGalileiCarrierChain.agda`
+  now adds a fail-closed `G3CarrierToFactorVecExternalInterfaceRequest`.
+  `GRDiscreteBianchiFiniteR.agda` now has a typechecked flat Minkowski finite-r
+  Levi-Civita closure, explicitly non-promoting for selected non-flat GR.
+  `W4W5PhiStarToMassAcceptanceBridgeRequest.agda` and the public-ratio runner
+  now record the checked CMS/HEPData/Zenodo links, the CLI HEPData JSON 403, and
+  the exact missing `A(M, phi*)` / conversion law without promoting
+  `0.5213369087525034` to `0.8804486068`.
+
+- integrate six-lane follow-up worker assignment:
+  `BlockerKillConditions.agda` now includes `mdlTerminationSeamRoute` on
+  `W9KillRouteReceipt`, with `canonicalMDLTerminationSeamW9KillReceipt`
+  inhabiting `W9KillReceipt` through the existing MDL termination seam
+  consumer. The broader canonical blocker row and non-limited roadmap bundle
+  are intentionally not promoted yet. `W2W3GovernancePolicyHookRequest.agda`
+  now records the exact Option-B ruling: the policy permits evidence classes
+  but does not authorize token constructors. `G2DiscreteCurvatureCarrier.agda`
+  now packages finite `Phase4` abelian coefficient laws plus a point-link
+  `connectionToPointLink1Form` bridge and vacuum-zero law; prime-lattice
+  curvature remains open. `G3PoincareGalileiCarrierChain.agda` now exposes
+  `G3DASHIStateP2ProjectionInterface` over the real `DASHIState.Carrier` /
+  `carrierValue` accessors. `W4W5PhiStarToMassAcceptanceBridgeRequest.agda`
+  records that public CMS/HEPData artifacts do not provide the acceptance law
+  needed to identify `0.5213369087525034` with the old `0.8804486068`
+  correction surface. `GRDiscreteBianchiFiniteR.agda` now has a flat constant
+  finite-r prerequisite from `MinkowskiLimitReceipt`, while selected non-flat
+  GR remains blocked on scalar algebra and Levi-Civita/Ricci ingredients.
+
+- integrate six-lane implementation tranche without promotion:
+  `scripts/run_w4w5_hepdata_public_ratio_integral.py` now emits a bounded
+  public HEPData ratio-integral diagnostic and
+  `scripts/data/outputs/w4w5_hepdata_public_ratio_integral.json` records the
+  current run. The local CSVs support a `DSIG/DPHISTAR` / `DSIG/DPHISTAR`
+  ratio-table diagnostic rather than a `dσ/dM` mass-window integral; computed
+  supported ratios are `t43/Z = 0.048798342138242475`,
+  `t45/Z = 0.025440376842598356`, and `t45/t43 = 0.5213369087525034`, with no
+  W4/W5 promotion. `W4W5PublicHEPDataRatioDiagnostic.agda` now binds those
+  three numbers as the public-table diagnostic result and explicitly separates
+  `0.5213369087525034` from the older `0.8804486068` PDF-carrier target.
+  `BlockerKillConditionsBase.agda` splits neutral kill-state
+  vocabulary from the W9 kill matrix so the MDL route request no longer depends
+  on the full kill matrix, but no accepted `W9KillRouteReceipt` constructor is
+  added. `W2W3GovernancePolicyHookRequest.agda` records that current policy
+  does not authorize token-producing hooks. `G2DiscreteCurvatureCarrier.agda`
+  now names `missingGaugeFieldAtProjection` and the required
+  `connectionTo1Form` / vacuum-real SFGC API. `G3PoincareGalileiCarrierChain.agda`
+  now names the real `DASHIState` p2 prime-address interface request.
+  `GRDiscreteBianchiFiniteR.agda` now includes a
+  `GRChristoffelFromMetricSixTermRicciIdentityRequest`. All changes preserve
+  the current blocked/non-promoting status.
+
 - integrate hard-core pressure-point round:
   `NonLimitedPaperBundleClaimGovernance.agda` now includes a typed
   `HardCorePressurePointBundle` for the five active pressure points: W9 MDL
@@ -5503,3 +5686,41 @@
   binding. CT18NLO resolves with
   `LHAPDF_DATA_PATH=/usr/share/lhapdf/LHAPDF:$PWD/scripts/data/pdf`; no W4/W5
   promotion follows until accepted DY/PDF convention authority is supplied.
+
+## 2026-05-13 non-limited paper interface diagnostic lock-in
+
+- Ran the two blocking interface diagnostics directly against the current repo
+  instead of spawning another conditional worker round. `DASHIState` is only a
+  dependent carrier package (`Carrier : Set`, `carrierValue : Carrier`) with no
+  hidden `FactorVec`/`NormalForm`/p2 update surface, so G3/GR now require an
+  explicit adapter/specializer or narrowed selected-state consumer.
+- Confirmed the SFGC gauge surface is one-dimensional at the exposed API:
+  `GaugeField = ShiftPressurePoint -> Phase4`, `SFGCShiftRightEdge =
+  ShiftPressurePoint`, and the edge target is `SSL.rightNeighbor`. No
+  `shiftPrime`, `ShiftDirection`, or transverse edge exists, so G2 now requires
+  a real two-direction/transverse-edge API before a nondegenerate plaquette or
+  `DiscreteCurvatureCarrier SFGC.GaugeField` can be constructed.
+- Updated `Docs/WorkerCoordinationBoard.md` and `TODO.md` to lock these routes
+  and prevent more Route A/B/C conditional surface churn. No gate promotion is
+  claimed.
+
+## 2026-05-13 selected-carrier / prime-lattice concrete tranche
+
+- Added `DASHI/Geometry/PrimeLattice.agda` as the first standalone
+  prime-lattice geometry layer over `Ontology.GodelLattice.FactorVec` and
+  `Ontology.Hecke.FactorVecInstances.primeBump`. It defines edges, 2-cells,
+  square endpoint sharing via `primeBumpCommutes`, and coefficient-parametric
+  `δ₀`, `δ₁`, and `δ₁∘δ₀-zero`. This is a G2 prerequisite only; no
+  `DiscreteCurvatureCarrier` or Maxwell promotion is claimed.
+- Added `DASHI/Physics/Closure/G3ConcreteOperators.agda`, a concrete selected
+  operator package over the existing `selectedG3FactorVecDASHIState`, with p2
+  and spatial prime-bump operators plus `PP`/`HP` commutation and p2 filtration
+  witnesses. G3 remains unpromoted because the wave-function scalar
+  ring/bracket semantics, associated-graded Galilei identification, and
+  `PoincareToGalileiContractionCarrier` are still missing.
+- Added `DASHI/Physics/Closure/GRConcreteLeviCivita.agda`, connecting the
+  selected FactorVec-backed G3 state to the existing flat constant Minkowski
+  finite-r Levi-Civita prerequisite. This closes only the flat selected
+  prerequisite; non-flat GR remains open.
+- Imported the new modules from `DASHI/Everything.agda` and updated the worker
+  coordination board / TODO surfaces to record exact non-promotion boundaries.

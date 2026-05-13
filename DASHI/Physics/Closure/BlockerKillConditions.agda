@@ -1,9 +1,10 @@
 module DASHI.Physics.Closure.BlockerKillConditions where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; _∷_; [])
+
+open import DASHI.Physics.Closure.BlockerKillConditionsBase public
 
 import DASHI.Interop.PNFResidualConsumerNextObligation as W6
 import DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation as W9
@@ -16,6 +17,7 @@ import DASHI.Physics.Closure.W3AcceptedAuthorityExternalReceiptObligation as W3
 import DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate as W3Gate
 import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation as W4
 import DASHI.Physics.Closure.W4PhysicalCalibrationGate as W4Gate
+import DASHI.Physics.Closure.W9MDLTerminationSeamRoute as W9MDL
 
 ------------------------------------------------------------------------
 -- Receipt-driven blocker-kill matrix.
@@ -24,59 +26,6 @@ import DASHI.Physics.Closure.W4PhysicalCalibrationGate as W4Gate
 -- records the remaining P0 blockers as receipt-kill conditions: each row says
 -- which receipt must exist, which authority/evidence gates it must carry, and
 -- that no local surrogate may bypass those gates.
-
-data KillState : Set where
-  blocked :
-    KillState
-  unblocked :
-    KillState
-
-data BlockerLane : Set where
-  W1MdlCr :
-    BlockerLane
-  W2NaturalP2Convergence :
-    BlockerLane
-  W3Empirical :
-    BlockerLane
-  W4Chemistry :
-    BlockerLane
-  W5GRQFT :
-    BlockerLane
-  W6ITIRPNF :
-    BlockerLane
-  W8Origin :
-    BlockerLane
-  W9Cancellation :
-    BlockerLane
-
-data NoBypassLaw : Set where
-  noProsePromotion :
-    NoBypassLaw
-  noLocalSurrogatePromotion :
-    NoBypassLaw
-  noConstructorlessTokenBypass :
-    NoBypassLaw
-  noCarrierMergeByAssumption :
-    NoBypassLaw
-  noEmpiricalByInspection :
-    NoBypassLaw
-  noPhysicalCalibrationByNatSurrogate :
-    NoBypassLaw
-  noRuntimeReceiptByInspection :
-    NoBypassLaw
-  noPressureWitnessByNaming :
-    NoBypassLaw
-
-record KillCondition : Setω where
-  field
-    lane :
-      BlockerLane
-
-    currentState :
-      KillState
-
-    noBypassLaw :
-      List NoBypassLaw
 
 ------------------------------------------------------------------------
 -- Lane-specific authority/evidence wrappers.
@@ -206,75 +155,16 @@ data W9KillRouteReceipt
     W9.WeightedValuationReplacementObligation theorem dim≡15 →
     W9KillRouteReceipt theorem dim≡15
 
-data W9KillRouteChangeStatus : Set where
-  acceptedRouteChangeNeeded :
-    W9KillRouteChangeStatus
+  mdlTerminationSeamRoute :
+    W9MDL.W9MDLTerminationSeamKillRouteConsumer
+      W9MDL.canonicalMDLTerminationSeamWitness →
+    W9KillRouteReceipt theorem dim≡15
 
-record W9MDLTerminationSeamAcceptedRouteRequest : Set where
-  field
-    routeChangeStatus :
-      W9KillRouteChangeStatus
-
-    currentAcceptedW9KillRouteConstructors :
-      List String
-
-    missingConstructorName :
-      String
-
-    expectedConsumerModule :
-      String
-
-    requiredConstructorShape :
-      String
-
-    importCycleBoundary :
-      String
-
-    preservesCurrentBlockedState :
-      KillState
-
-    preservesCurrentBlockedState≡blocked :
-      preservesCurrentBlockedState ≡ blocked
-
-    preservedNoBypassLaw :
-      List NoBypassLaw
-
-    noClosureClaim :
-      List String
-
-canonicalW9MDLTerminationSeamAcceptedRouteRequest :
-  W9MDLTerminationSeamAcceptedRouteRequest
-canonicalW9MDLTerminationSeamAcceptedRouteRequest =
-  record
-    { routeChangeStatus =
-        acceptedRouteChangeNeeded
-    ; currentAcceptedW9KillRouteConstructors =
-        "existingPressureWitnessRoute : ExistingCancellationPressureCompatibilityObligation theorem dim≡15 -> W9KillRouteReceipt theorem dim≡15"
-        ∷ "weightedReplacementRoute : WeightedValuationReplacementObligation theorem dim≡15 -> W9KillRouteReceipt theorem dim≡15"
-        ∷ []
-    ; missingConstructorName =
-        "mdlTerminationSeamRoute"
-    ; expectedConsumerModule =
-        "DASHI.Physics.Closure.W9MDLTerminationSeamRoute"
-    ; requiredConstructorShape =
-        "mdlTerminationSeamRoute : W9MDLTerminationSeamKillRouteConsumer canonicalMDLTerminationSeamWitness -> accepted W9 route receipt"
-    ; importCycleBoundary =
-        "BlockerKillConditions cannot import W9MDLTerminationSeamRoute because that module imports BlockerKillConditions; the accepted route must be introduced by a shared interface or a downstream consumer module."
-    ; preservesCurrentBlockedState =
-        blocked
-    ; preservesCurrentBlockedState≡blocked =
-        refl
-    ; preservedNoBypassLaw =
-        noPressureWitnessByNaming
-        ∷ noProsePromotion
-        ∷ []
-    ; noClosureClaim =
-        "This request does not construct W9KillReceipt"
-        ∷ "This request does not add a pressure-equality witness"
-        ∷ "This request does not assert that the weighted replacement route is satisfied"
-        ∷ "W9 remains blocked until an accepted consumer route is added without violating the module boundary"
-        ∷ []
-    }
+canonicalMDLTerminationSeamW9KillRouteReceipt :
+  W9KillRouteReceipt W9.canonical15Theorem W9.canonical15Dimension
+canonicalMDLTerminationSeamW9KillRouteReceipt =
+  mdlTerminationSeamRoute
+    W9MDL.canonicalW9MDLTerminationSeamKillRouteConsumer
 
 record W9KillReceipt : Setω where
   field
@@ -286,6 +176,18 @@ record W9KillReceipt : Setω where
 
     routeReceipt :
       W9KillRouteReceipt theorem dim≡15
+
+canonicalMDLTerminationSeamW9KillReceipt :
+  W9KillReceipt
+canonicalMDLTerminationSeamW9KillReceipt =
+  record
+    { theorem =
+        W9.canonical15Theorem
+    ; dim≡15 =
+        W9.canonical15Dimension
+    ; routeReceipt =
+        canonicalMDLTerminationSeamW9KillRouteReceipt
+    }
 
 record W9KillAuthority
   (receipt : W9KillReceipt) : Setω where
@@ -387,10 +289,59 @@ w9KillCondition : KillCondition
 w9KillCondition =
   record
     { lane = W9Cancellation
-    ; currentState = blocked
+    ; currentState = unblocked
     ; noBypassLaw =
         noPressureWitnessByNaming
         ∷ noProsePromotion
+        ∷ []
+    }
+
+data W9KillConditionRouteStatus : Set where
+  acceptedMDLTerminationSeamRoute :
+    W9KillConditionRouteStatus
+
+record W9KillConditionReconciliation : Setω where
+  field
+    condition :
+      KillCondition
+
+    conditionIsW9 :
+      KillCondition.lane condition
+      ≡
+      W9Cancellation
+
+    acceptedState :
+      KillCondition.currentState condition
+      ≡
+      unblocked
+
+    routeStatus :
+      W9KillConditionRouteStatus
+
+    acceptedReceipt :
+      W9KillReceipt
+
+    noPressureEqualityClaim :
+      List W9MDL.MDLTerminationSeamBoundary
+
+canonicalMDLTerminationSeamW9KillConditionReconciliation :
+  W9KillConditionReconciliation
+canonicalMDLTerminationSeamW9KillConditionReconciliation =
+  record
+    { condition =
+        w9KillCondition
+    ; conditionIsW9 =
+        refl
+    ; acceptedState =
+        refl
+    ; routeStatus =
+        acceptedMDLTerminationSeamRoute
+    ; acceptedReceipt =
+        canonicalMDLTerminationSeamW9KillReceipt
+    ; noPressureEqualityClaim =
+        W9MDL.nonPressureRoute
+        ∷ W9MDL.nonQcoreRoute
+        ∷ W9MDL.noCancellationPressureCompatibilityPromotion
         ∷ []
     }
 

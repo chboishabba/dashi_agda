@@ -1,0 +1,132 @@
+{
+  "artifact_schema": "dashi-w4w5-hepdata-public-ratio-integral-diagnostic-v1",
+  "checked_public_links": [
+    {
+      "access": "HTTP 200 via public CMS results page",
+      "finding": "Describes corrected differential cross sections and ratios in mass windows; does not publish A(M, phi*) or a phi-star-to-mass conversion law.",
+      "url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/"
+    },
+    {
+      "access": "HTTP 200",
+      "finding": "Lists phistar measurements, covariance matrices, and response matrices; no acceptance/efficiency central-value surface is listed.",
+      "url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/submission.yaml"
+    },
+    {
+      "access": "HTTP 200",
+      "finding": "Metadata enumerates phistar cross-section, ratio, covariance, and response tables t19/t21/t23, t43/t45, t20/t22/t44/t46, and t68-t73.",
+      "url": "https://www.hepdata.net/record/ins2079374?format=json"
+    },
+    {
+      "access": "HTTP 200",
+      "finding": "Response YAML has dependent variable P for detector-bin migration; it is not an acceptance/efficiency surface A(M, phi*).",
+      "url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/electron_response_phistar_mass_50-76.yaml"
+    },
+    {
+      "access": "HTTP 200 via Zenodo API",
+      "finding": "Additional resource points to a hepdata_lib package artifact, not a CMS acceptance/efficiency or conversion-law payload.",
+      "url": "https://zenodo.org/record/4946277"
+    }
+  ],
+  "computed_ratios": {
+    "t43_50_76_over_76_106": {
+      "formula": "sum Ratio_i * (dsigma_Z/dphistar)_i * dphistar_i / sum (dsigma_Z/dphistar)_i * dphistar_i",
+      "implied_numerator_integral_pb": 36.3574799156312,
+      "integrated_ratio_over_z": 0.048798342138242475,
+      "phi_bin_count": 18,
+      "phi_range": [
+        0.0,
+        3.277
+      ],
+      "ratio_max": 0.078012,
+      "ratio_min": 0.036572,
+      "ratio_name": "phistar mass 50-76 over mass 76-106",
+      "ratio_table": "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv",
+      "ratio_table_doi": "10.17182/hepdata.115656.v1/t43",
+      "unweighted_ratio_mean": 0.046903444444444435,
+      "z_denominator_integral_pb": 745.0556376000002
+    },
+    "t45_106_170_over_76_106": {
+      "formula": "sum Ratio_i * (dsigma_Z/dphistar)_i * dphistar_i / sum (dsigma_Z/dphistar)_i * dphistar_i",
+      "implied_numerator_integral_pb": 18.9544961892464,
+      "integrated_ratio_over_z": 0.025440376842598356,
+      "phi_bin_count": 18,
+      "phi_range": [
+        0.0,
+        3.277
+      ],
+      "ratio_max": 0.030239,
+      "ratio_min": 0.020919,
+      "ratio_name": "phistar mass 106-170 over mass 76-106",
+      "ratio_table": "scripts/data/hepdata/ins2079374_phistar_mass_106-170_over_mass_76-106_t45.csv",
+      "ratio_table_doi": "10.17182/hepdata.115656.v1/t45",
+      "unweighted_ratio_mean": 0.026288444444444444,
+      "z_denominator_integral_pb": 745.0556376000002
+    },
+    "t45_over_t43_from_public_ratio_integrals": 0.5213369087525034
+  },
+  "exact_missing_public_field": "central-value acceptance/efficiency surface A(M, phi*) for the CMS-SMP-20-003 mass windows 50-76, 76-106, and 106-170 GeV, or an accepted observable-conversion law from DSIG/DPHISTAR ratio-table integrals to mass-integrated cross-section/PDF correction ratios",
+  "governance": {
+    "does_not_claim_dsigma_dM_from_ratio_tables": true,
+    "does_not_construct_accepted_dy_luminosity_convention": true,
+    "no_authority_promotion": true,
+    "no_w4_promotion": true,
+    "no_w5_promotion": true
+  },
+  "requested_target": "bin-integrated dsigma/dM ratios from public HEPData tables",
+  "status": "non_promoting_public_hepdata_ratio_integral_diagnostic",
+  "supported_computation": "phistar-bin integrated DSIG/DPHISTAR ratio-table integral using t21 as the public Z-window denominator",
+  "tables": [
+    {
+      "description": "The measured differential cross section in the $76 \\le M_{ll} < 106$ GeV mass window, in bins of the $\\varphi^*$ variable. The values are normalized by the bin width.",
+      "has_absolute_dsigma_dphistar_column": true,
+      "has_dsigma_dM_column": false,
+      "has_ratio_column": false,
+      "is_ratio_table": false,
+      "name": "phistar mass 76-106",
+      "observable": "DSIG/DPHISTAR",
+      "path": "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv",
+      "row_count": 18,
+      "table_doi": "10.17182/hepdata.115656.v1/t21",
+      "values_normalized_by_bin_width": true
+    },
+    {
+      "description": "The measured differential cross section in the $50 \\le M_{ll} < 76$ GeV mass window, in bins of the $\\varphi^*$ variable, divided by the measured differential cross section in the $76 \\le M_{ll} < 106$ GeV mass window. At least one jet is required. The values are not normalized by the bin width.",
+      "has_absolute_dsigma_dphistar_column": false,
+      "has_dsigma_dM_column": false,
+      "has_ratio_column": true,
+      "is_ratio_table": true,
+      "name": "phistar mass 50-76 over mass 76-106",
+      "observable": "DSIG/DPHISTAR / DSIG/DPHISTAR",
+      "path": "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv",
+      "row_count": 18,
+      "table_doi": "10.17182/hepdata.115656.v1/t43",
+      "values_normalized_by_bin_width": false
+    },
+    {
+      "description": "The measured differential cross section in the $106 \\le M_{ll} < 170$ GeV mass window, in bins of the $\\varphi^*$ variable, divided by the measured differential cross section in the $76 \\le M_{ll} < 106$ GeV mass window. At least one jet is required. The values are not normalized by the bin width.",
+      "has_absolute_dsigma_dphistar_column": false,
+      "has_dsigma_dM_column": false,
+      "has_ratio_column": true,
+      "is_ratio_table": true,
+      "name": "phistar mass 106-170 over mass 76-106",
+      "observable": "DSIG/DPHISTAR / DSIG/DPHISTAR",
+      "path": "scripts/data/hepdata/ins2079374_phistar_mass_106-170_over_mass_76-106_t45.csv",
+      "row_count": 18,
+      "table_doi": "10.17182/hepdata.115656.v1/t45",
+      "values_normalized_by_bin_width": false
+    }
+  ],
+  "target_computable_from_columns": false,
+  "unsupported_target_reasons": [
+    "none of t21/t43/t45 exposes a dsigma/dM column",
+    "t43 and t45 expose Ratio columns for DSIG/DPHISTAR / DSIG/DPHISTAR"
+  ],
+  "url_failures": [
+    {
+      "manual_action": "Browser/manual download is only needed for canonical table JSON payloads; it would not supply the missing A(M, phi*) field.",
+      "redirected_to": "https://www.hepdata.net/download/table/ins2079374/Table%2043/1/json",
+      "status": "HTTP 403 / Cloudflare challenge from CLI",
+      "url": "https://www.hepdata.net/record/ins2079374?format=json&table=Table%2043"
+    }
+  ]
+}

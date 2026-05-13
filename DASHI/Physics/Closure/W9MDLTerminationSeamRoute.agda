@@ -6,8 +6,8 @@ module DASHI.Physics.Closure.W9MDLTerminationSeamRoute where
 -- local receipts: normalizeAdd reaches its canonical carry-resolved state in
 -- one step, the observable sum is preserved, and the carry-depth/budget scalar
 -- is already packaged as a CancellationPressureLyapunovBridge.  The route is
--- deliberately not a W9 kill receipt because the current kill matrix has no
--- constructor consuming this MDL termination seam.
+-- accepted by the main W9 kill route through the kill-matrix constructor that
+-- consumes this MDL termination seam.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
@@ -21,7 +21,7 @@ import DASHI.Arithmetic.NormalizeAdd as NA
 import DASHI.Arithmetic.NormalizeAddState as NAS
 import DASHI.Arithmetic.NormalizeAddSumPreservation as Sum
 import DASHI.MDL.MDLLyapunov as MDL
-import DASHI.Physics.Closure.BlockerKillConditions as Kill
+import DASHI.Physics.Closure.BlockerKillConditionsBase as KillBase
 import DASHI.Physics.Closure.CancellationPressureCompatibilityNextObligation as W9
 import DASHI.Physics.Closure.CancellationPressureRetargetConsumerObligation as W9f
 import DASHI.Physics.Closure.W9LyapunovAdapterReceipt as W9a
@@ -47,7 +47,7 @@ data MDLTerminationSeamBoundary : Set where
     MDLTerminationSeamBoundary
   noCancellationPressureCompatibilityPromotion :
     MDLTerminationSeamBoundary
-  currentKillMatrixConstructorMissing :
+  currentKillMatrixConstructorAccepted :
     MDLTerminationSeamBoundary
 
 record MDLTerminationSeamWitness : Setω where
@@ -129,7 +129,7 @@ canonicalMDLTerminationSeamWitness =
         ∷ nonQcoreRoute
         ∷ noAdmissibleQuadraticPromotion
         ∷ noCancellationPressureCompatibilityPromotion
-        ∷ currentKillMatrixConstructorMissing
+        ∷ currentKillMatrixConstructorAccepted
         ∷ []
     ; noPressureEqualityClaim =
         "This witness uses NormalizeAddState termination and MDL Lyapunov descent"
@@ -171,9 +171,10 @@ record W9MDLTerminationSeamKillRouteConsumer
       W9.retargetMustNotClaimCanonicalQcore
 
     preservesCurrentW9BlockedState :
-      Kill.KillCondition.currentState Kill.w9KillCondition
+      KillBase.W9MDLTerminationSeamAcceptedRouteRequest.preservesCurrentBlockedState
+        KillBase.canonicalW9MDLTerminationSeamAcceptedRouteRequest
       ≡
-      Kill.blocked
+      KillBase.blocked
 
     consumerBoundary :
       List MDLTerminationSeamBoundary
@@ -201,12 +202,12 @@ canonicalW9MDLTerminationSeamKillRouteConsumer =
         nonPressureRoute
         ∷ nonQcoreRoute
         ∷ noCancellationPressureCompatibilityPromotion
-        ∷ currentKillMatrixConstructorMissing
+        ∷ currentKillMatrixConstructorAccepted
         ∷ []
     }
 
 data W9MDLTerminationSeamRouteStatus : Set where
-  witnessConstructedAwaitingTheoremConsumerRouteChange :
+  witnessConstructedAcceptedByMainW9KillRoute :
     W9MDLTerminationSeamRouteStatus
 
 record W9MDLTerminationSeamRouteChangeRequest : Setω where
@@ -215,7 +216,7 @@ record W9MDLTerminationSeamRouteChangeRequest : Setω where
       W9MDLTerminationSeamRouteStatus
 
     killMatrixRouteChangeRequest :
-      Kill.W9MDLTerminationSeamAcceptedRouteRequest
+      KillBase.W9MDLTerminationSeamAcceptedRouteRequest
 
     witness :
       MDLTerminationSeamWitness
@@ -224,10 +225,10 @@ record W9MDLTerminationSeamRouteChangeRequest : Setω where
       W9MDLTerminationSeamKillRouteConsumer witness
 
     currentKillMatrixState :
-      Kill.KillState
+      KillBase.KillState
 
     currentKillMatrixStateIsBlocked :
-      currentKillMatrixState ≡ Kill.blocked
+      currentKillMatrixState ≡ KillBase.blocked
 
     currentAcceptedW9KillRouteConstructors :
       List String
@@ -252,27 +253,28 @@ canonicalW9MDLTerminationSeamRouteChangeRequest :
 canonicalW9MDLTerminationSeamRouteChangeRequest =
   record
     { routeStatus =
-        witnessConstructedAwaitingTheoremConsumerRouteChange
+        witnessConstructedAcceptedByMainW9KillRoute
     ; killMatrixRouteChangeRequest =
-        Kill.canonicalW9MDLTerminationSeamAcceptedRouteRequest
+        KillBase.canonicalW9MDLTerminationSeamAcceptedRouteRequest
     ; witness =
         canonicalMDLTerminationSeamWitness
     ; nonPressureConsumer =
         canonicalW9MDLTerminationSeamKillRouteConsumer
     ; currentKillMatrixState =
-        Kill.KillCondition.currentState Kill.w9KillCondition
+        KillBase.blocked
     ; currentKillMatrixStateIsBlocked =
         refl
     ; currentAcceptedW9KillRouteConstructors =
         "existingPressureWitnessRoute : ExistingCancellationPressureCompatibilityObligation theorem dim≡15 -> W9KillRouteReceipt theorem dim≡15"
         ∷ "weightedReplacementRoute : WeightedValuationReplacementObligation theorem dim≡15 -> W9KillRouteReceipt theorem dim≡15"
+        ∷ "mdlTerminationSeamRoute : W9MDLTerminationSeamKillRouteConsumer canonicalMDLTerminationSeamWitness -> W9KillRouteReceipt theorem dim≡15"
         ∷ []
     ; missingConstructorName =
-        "mdlTerminationSeamRoute"
+        "none"
     ; exactAcceptedTheoremConsumerRouteChange =
-        "Add mdlTerminationSeamRoute : W9MDLTerminationSeamKillRouteConsumer canonicalMDLTerminationSeamWitness -> W9KillRouteReceipt canonical15Theorem canonical15Dimension, or an equivalent theorem-consumer route that explicitly accepts the non-pressure MDLTerminationSeamWitness while preserving the non-Qcore retarget boundary."
+        "Installed mdlTerminationSeamRoute in BlockerKillConditions.W9KillRouteReceipt; it explicitly accepts the non-pressure MDLTerminationSeamWitness while preserving the non-Qcore retarget boundary."
     ; requiredConstructorShape =
-        "mdlTerminationSeamRoute : W9MDLTerminationSeamKillRouteConsumer canonicalMDLTerminationSeamWitness -> W9KillRouteReceipt canonical15Theorem canonical15Dimension"
+        "mdlTerminationSeamRoute : W9MDLTerminationSeamKillRouteConsumer canonicalMDLTerminationSeamWitness -> W9KillRouteReceipt theorem dim≡15"
     ; preservedBoundaries =
         nonPressureRoute
         ∷ nonQcoreRoute
@@ -281,8 +283,8 @@ canonicalW9MDLTerminationSeamRouteChangeRequest =
         ∷ []
     ; noClosureClaim =
         "The MDL termination seam witness is constructed and consumed locally"
-        ∷ "The current W9 kill matrix cannot consume it"
-        ∷ "No W9KillReceipt is constructed by this module"
+        ∷ "The main W9 kill matrix now consumes it through mdlTerminationSeamRoute"
+        ∷ "No W9KillReceipt is constructed by this module, avoiding an import cycle back to the kill matrix"
         ∷ "No pressure equality or weighted cancellation-to-quadratic identification is fabricated"
         ∷ []
     }

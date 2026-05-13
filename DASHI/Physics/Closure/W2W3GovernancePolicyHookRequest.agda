@@ -11,6 +11,7 @@ import DASHI.Physics.Closure.NaturalP2ConvergencePromotionObligation as W2
 import DASHI.Physics.Closure.W2GovernanceSelfIssuanceIntakeRequest as W2Intake
 import DASHI.Physics.Closure.W2GovernanceTokenConstructorObstruction as W2Obs
 import DASHI.Physics.Closure.W2PromotionAuthorityReceipt as W2Audit
+import DASHI.Physics.Closure.W3AcceptedAuthorityExternalReceiptRequestPack as W3Pack
 import DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate as W3Gate
 import DASHI.Physics.Closure.W3AcceptedEvidenceAuthorityTokenGovernanceObstruction as W3Obs
 import DASHI.Physics.Closure.W3AcceptedEvidenceAuthorityTokenIntakeRequest as W3Intake
@@ -37,6 +38,14 @@ data W2W3GovernanceHookDisposition : Set where
 data W2W3TokenProducingHookAuthorization : Set where
   tokenProducingHookBlockedByCurrentTypedState :
     W2W3TokenProducingHookAuthorization
+
+data W2W3PolicyTokenProductionRuling : Set where
+  policyPermitsEvidenceClassesButDoesNotAuthorizeConstructors :
+    W2W3PolicyTokenProductionRuling
+
+data W2W3ExactFirstMissingConclusion : Set where
+  firstMissingIsExactAuthorityTokenInhabitant :
+    W2W3ExactFirstMissingConclusion
 
 record DASHIGovernanceSelfIssuancePolicyEvidence : Setω where
   field
@@ -449,6 +458,94 @@ record W2W3GovernancePolicyHookRequest : Setω where
     noPromotionBoundary :
       List String
 
+record W2W3PolicyConstructorAuthorizationDiagnostic : Setω where
+  field
+    policyEvidence :
+      DASHIGovernanceSelfIssuancePolicyEvidence
+
+    hookRequest :
+      W2W3GovernancePolicyHookRequest
+
+    policyTokenProductionRuling :
+      W2W3PolicyTokenProductionRuling
+
+    evidenceClassesPermitted :
+      Bool
+
+    evidenceClassesPermittedIsTrue :
+      evidenceClassesPermitted
+      ≡
+      true
+
+    tokensConstructedByPolicy :
+      Bool
+
+    tokensConstructedByPolicyIsFalse :
+      tokensConstructedByPolicy
+      ≡
+      false
+
+    tokenProducingHookAuthorizedNow :
+      Bool
+
+    tokenProducingHookAuthorizedNowIsFalse :
+      tokenProducingHookAuthorizedNow
+      ≡
+      false
+
+    currentRepoContainsExplicitAcceptedSelfIssuanceConstructorPolicy :
+      Bool
+
+    currentRepoContainsExplicitAcceptedSelfIssuanceConstructorPolicyIsFalse :
+      currentRepoContainsExplicitAcceptedSelfIssuanceConstructorPolicy
+      ≡
+      false
+
+    w2ExactFirstMissingConclusion :
+      W2W3ExactFirstMissingConclusion
+
+    w2ExactFirstMissingField :
+      W2.NaturalP2ConvergenceMissingField
+
+    w2ExactFirstMissingFieldIsAuthorityToken :
+      w2ExactFirstMissingField
+      ≡
+      W2.missingPromotionAuthorityToken
+
+    w2ExactFirstMissingConstructor :
+      W2Obs.W2FirstMissingAuthorityConstructor
+
+    w2ExactFirstMissingTypedInterface :
+      W2Obs.W2FirstMissingTypedInterface
+
+    w2AuthorityTokenUnavailable :
+      W2.NaturalP2ConvergencePromotionAuthorityToken →
+      ⊥
+
+    w3ExactFirstMissingConclusion :
+      W2W3ExactFirstMissingConclusion
+
+    w3ExactFirstMissingProviderField :
+      W3Pack.W3AcceptedAuthorityProviderMissingField
+
+    w3ExactFirstMissingProviderFieldIsAuthorityToken :
+      w3ExactFirstMissingProviderField
+      ≡
+      W3Pack.missingAcceptedEvidenceAuthorityToken
+
+    w3ExactFirstMissingHook :
+      W3Obs.W3AuthorityTokenFirstMissingTypedHook
+
+    w3AuthorityTokenUnavailable :
+      W3Gate.W3AcceptedEvidenceAuthorityToken →
+      ⊥
+
+    exactFirstMissingSummary :
+      List String
+
+    requestOnlyBoundary :
+      List String
+
 canonicalW2W3GovernancePolicyHookRequest :
   W2W3GovernancePolicyHookRequest
 canonicalW2W3GovernancePolicyHookRequest =
@@ -499,6 +596,70 @@ canonicalW2W3GovernancePolicyHookRequest =
         ∷ []
     }
 
+canonicalW2W3PolicyConstructorAuthorizationDiagnostic :
+  W2W3PolicyConstructorAuthorizationDiagnostic
+canonicalW2W3PolicyConstructorAuthorizationDiagnostic =
+  record
+    { policyEvidence =
+        canonicalDASHIGovernanceSelfIssuancePolicyEvidence
+    ; hookRequest =
+        canonicalW2W3GovernancePolicyHookRequest
+    ; policyTokenProductionRuling =
+        policyPermitsEvidenceClassesButDoesNotAuthorizeConstructors
+    ; evidenceClassesPermitted =
+        true
+    ; evidenceClassesPermittedIsTrue =
+        refl
+    ; tokensConstructedByPolicy =
+        DASHIGovernanceSelfIssuancePolicyEvidence.tokensConstructedByThisPolicy
+          canonicalDASHIGovernanceSelfIssuancePolicyEvidence
+    ; tokensConstructedByPolicyIsFalse =
+        refl
+    ; tokenProducingHookAuthorizedNow =
+        W2W3GovernancePolicyHookRequest.tokenProducingHookAuthorizedNow
+          canonicalW2W3GovernancePolicyHookRequest
+    ; tokenProducingHookAuthorizedNowIsFalse =
+        refl
+    ; currentRepoContainsExplicitAcceptedSelfIssuanceConstructorPolicy =
+        false
+    ; currentRepoContainsExplicitAcceptedSelfIssuanceConstructorPolicyIsFalse =
+        refl
+    ; w2ExactFirstMissingConclusion =
+        firstMissingIsExactAuthorityTokenInhabitant
+    ; w2ExactFirstMissingField =
+        W2.missingPromotionAuthorityToken
+    ; w2ExactFirstMissingFieldIsAuthorityToken =
+        refl
+    ; w2ExactFirstMissingConstructor =
+        W2Obs.missingNaturalP2ConvergencePromotionAuthorityConstructor
+    ; w2ExactFirstMissingTypedInterface =
+        W2Obs.missingNaturalP2PromotionAuthorityConstructorOrPolicyHook
+    ; w2AuthorityTokenUnavailable =
+        W2.naturalP2ConvergencePromotionAuthorityUnavailable
+    ; w3ExactFirstMissingConclusion =
+        firstMissingIsExactAuthorityTokenInhabitant
+    ; w3ExactFirstMissingProviderField =
+        W3Pack.missingAcceptedEvidenceAuthorityToken
+    ; w3ExactFirstMissingProviderFieldIsAuthorityToken =
+        refl
+    ; w3ExactFirstMissingHook =
+        W3Obs.missingTokenConstructorOrPolicyHook
+    ; w3AuthorityTokenUnavailable =
+        W3Obs.w3AcceptedEvidenceAuthorityTokenStillUninhabited
+    ; exactFirstMissingSummary =
+        "W2 first missing: inhabitant of NaturalP2ConvergencePromotionAuthorityToken, via an explicit constructor or non-postulated policy hook of that exact result type"
+        ∷ "W2 receipt field blocked first: NaturalP2ConvergencePromotionReceipt.promotionAuthority"
+        ∷ "W3 first missing: W3AcceptedEvidenceAuthorityToken accepted-authority inhabitant, represented in the provider pack as missingAcceptedEvidenceAuthorityToken"
+        ∷ "W3 receipt field blocked first: W3AcceptedEvidenceAuthorityTokenReceipt.authorityToken"
+        ∷ []
+    ; requestOnlyBoundary =
+        "The policy permits evidence classes only; it does not authorize adding token-producing fields or constructors in the current repo state"
+        ∷ "No NaturalP2ConvergencePromotionAuthorityToken is fabricated here"
+        ∷ "No W3AcceptedEvidenceAuthorityToken is fabricated here"
+        ∷ "This diagnostic is a governance request surface, not a promotion receipt"
+        ∷ []
+    }
+
 canonicalW2W3GovernanceHookConsumesPolicy :
   W2W3GovernancePolicyHookRequest.typedPolicyEvidenceConsumed
     canonicalW2W3GovernancePolicyHookRequest
@@ -526,3 +687,24 @@ canonicalW3GovernanceHookRemainsBlocked :
   ≡
   false
 canonicalW3GovernanceHookRemainsBlocked = refl
+
+canonicalW2W3PolicyDoesNotAuthorizeTokenProduction :
+  W2W3PolicyConstructorAuthorizationDiagnostic.tokenProducingHookAuthorizedNow
+    canonicalW2W3PolicyConstructorAuthorizationDiagnostic
+  ≡
+  false
+canonicalW2W3PolicyDoesNotAuthorizeTokenProduction = refl
+
+canonicalW2ExactFirstMissingIsAuthorityToken :
+  W2W3PolicyConstructorAuthorizationDiagnostic.w2ExactFirstMissingField
+    canonicalW2W3PolicyConstructorAuthorizationDiagnostic
+  ≡
+  W2.missingPromotionAuthorityToken
+canonicalW2ExactFirstMissingIsAuthorityToken = refl
+
+canonicalW3ExactFirstMissingIsAuthorityToken :
+  W2W3PolicyConstructorAuthorizationDiagnostic.w3ExactFirstMissingProviderField
+    canonicalW2W3PolicyConstructorAuthorizationDiagnostic
+  ≡
+  W3Pack.missingAcceptedEvidenceAuthorityToken
+canonicalW3ExactFirstMissingIsAuthorityToken = refl
