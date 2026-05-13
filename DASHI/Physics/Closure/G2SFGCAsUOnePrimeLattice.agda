@@ -71,6 +71,176 @@ phase4PrimeLatticeD2Zero :
 phase4PrimeLatticeD2Zero =
   G2PLCB.phase4PrimeLatticeD2Zero
 
+------------------------------------------------------------------------
+-- Minimal U(1)-style system supported by the current SFGC API.
+--
+-- This is deliberately weaker than DiscreteCurvatureCarrier.  It records the
+-- actual connection carrier, Phase4 coefficient laws, right-edge 1-form, the
+-- available vacuum-zero law, and the available d²/return-boundary laws.  It
+-- does not manufacture a nondegenerate plaquette or field strength.
+
+record DiscreteUOneConnectionSystem (ConnectionCarrier : Set) : Set₁ where
+  field
+    Coefficient :
+      Set
+
+    zeroCoefficient :
+      Coefficient
+
+    coefficientLaw :
+      G2DCC.AbelianCoefficientLawSurface Coefficient
+
+    Site :
+      Set
+
+    Edge :
+      Set
+
+    Plaquette :
+      Set
+
+    Discrete0Form :
+      Set
+
+    Discrete1Form :
+      Set
+
+    Discrete2Form :
+      Set
+
+    edgeSource :
+      Edge →
+      Site
+
+    edgeTarget :
+      Edge →
+      Site
+
+    connectionToDiscrete1Form :
+      ConnectionCarrier →
+      Discrete1Form
+
+    evaluate1 :
+      Discrete1Form →
+      Edge →
+      Coefficient
+
+    evaluate2 :
+      Discrete2Form →
+      Plaquette →
+      Coefficient
+
+    δ₀ :
+      Discrete0Form →
+      Discrete1Form
+
+    δ₁ :
+      Discrete1Form →
+      Discrete2Form
+
+    vacuumConnection :
+      ConnectionCarrier
+
+    vacuumConnectionZero :
+      (edge : Edge) →
+      evaluate1 (connectionToDiscrete1Form vacuumConnection) edge
+        ≡
+      zeroCoefficient
+
+    phase4PrimeLatticeCoefficientD2Zero :
+      (f : PL.0Form SPTI4.Phase4) →
+      (cell : PL.PrimeLattice2Cell) →
+      PL.δ₁ G2PLCB.phase4PrimeLatticeCoefficientLaw
+        (PL.δ₀ G2PLCB.phase4PrimeLatticeCoefficientLaw f)
+        cell
+        ≡
+      SPTI4.φ0
+
+    availableDegeneratePlaquetteZero :
+      (a : Discrete1Form) →
+      (plaquette : Plaquette) →
+      evaluate2 (δ₁ a) plaquette
+        ≡
+      zeroCoefficient
+
+    availableDegenerateD2Zero :
+      (f : Discrete0Form) →
+      (plaquette : Plaquette) →
+      evaluate2 (δ₁ (δ₀ f)) plaquette
+        ≡
+      zeroCoefficient
+
+    firstMissingForDiscreteCurvatureCarrier :
+      G2SFGCAsUOnePrimeLatticeMissing
+
+    remainingMissingForDiscreteCurvatureCarrier :
+      List G2SFGCAsUOnePrimeLatticeMissing
+
+    interfaceBoundary :
+      List String
+
+canonicalSFGCDiscreteUOneConnectionSystem :
+  DiscreteUOneConnectionSystem SFGC.GaugeField
+canonicalSFGCDiscreteUOneConnectionSystem =
+  record
+    { Coefficient =
+        SPTI4.Phase4
+    ; zeroCoefficient =
+        SPTI4.φ0
+    ; coefficientLaw =
+        G2DCC.phase4AbelianCoefficientLawSurface
+    ; Site =
+        SPTI.ShiftPressurePoint
+    ; Edge =
+        G2DCC.SFGCShiftRightEdge
+    ; Plaquette =
+        G2DCC.SFGCShiftRightEdgeTwoStepReturnPlaquette
+    ; Discrete0Form =
+        G2DCC.SFGCShiftRightEdge0Form
+    ; Discrete1Form =
+        G2DCC.SFGCShiftRightEdge1Form
+    ; Discrete2Form =
+        G2DCC.SFGCShiftRightEdgeTwoStep2Form
+    ; edgeSource =
+        G2DCC.sfgcShiftRightEdgeSource
+    ; edgeTarget =
+        G2DCC.sfgcShiftRightEdgeTarget
+    ; connectionToDiscrete1Form =
+        G2DCC.connectionToShiftRightEdge1Form
+    ; evaluate1 =
+        λ form edge → form edge
+    ; evaluate2 =
+        λ form plaquette → form plaquette
+    ; δ₀ =
+        G2DCC.sfgcShiftRightEdgeδ₀
+    ; δ₁ =
+        G2DCC.sfgcShiftRightEdgeTwoStepδ₁
+    ; vacuumConnection =
+        SFGC.vacuumGaugeField
+    ; vacuumConnectionZero =
+        G2DCC.vacuumShiftRightEdge1FormZero
+    ; phase4PrimeLatticeCoefficientD2Zero =
+        phase4PrimeLatticeD2Zero
+    ; availableDegeneratePlaquetteZero =
+        G2DCC.sfgcShiftRightEdgeTwoStepδ₁Zero
+    ; availableDegenerateD2Zero =
+        G2DCC.sfgcShiftRightEdgeTwoStepδ₁δ₀Zero
+    ; firstMissingForDiscreteCurvatureCarrier =
+        missingNondegenerateSFGCPlaquetteGeometry
+    ; remainingMissingForDiscreteCurvatureCarrier =
+        missingNondegenerateSFGCPlaquetteGeometry
+        ∷ missingUOneFieldStrengthFromCurvature
+        ∷ []
+    ; interfaceBoundary =
+        "This is the actual minimal U(1)-style system supported by the present SFGC API"
+        ∷ "ConnectionCarrier is SFGC.GaugeField and connectionToDiscrete1Form is the right-edge sampler A edge"
+        ∷ "Coefficient is Phase4 with zero φ0 and the local abelian coefficient law surface"
+        ∷ "Vacuum-zero is definitional for SFGC.vacuumGaugeField on every right edge"
+        ∷ "The available plaquette is the degenerate 1D two-step return boundary, whose δ1 and δ1δ0 both normalize to φ0"
+        ∷ "This record is not a DiscreteCurvatureCarrier because it lacks a nondegenerate plaquette geometry and fieldStrengthFromCurvature"
+        ∷ []
+    }
+
 record G2SFGCAsUOnePrimeLatticeDiagnostic : Set₁ where
   field
     status :
@@ -137,6 +307,9 @@ record G2SFGCAsUOnePrimeLatticeDiagnostic : Set₁ where
     availableTwoStepReturnSurface :
       G2DCC.SFGCShiftRightEdgeTwoStepPlaquetteSurface
 
+    minimalDiscreteUOneConnectionSystem :
+      DiscreteUOneConnectionSystem SFGC.GaugeField
+
     priorNoFactorVecOrbitDiagnostic :
       G2ORBIT.G2SFGCPrimeLatticeOrbitDiagnostic
 
@@ -186,6 +359,8 @@ canonicalG2SFGCAsUOnePrimeLatticeDiagnostic =
           G2DCC.canonicalSFGCShiftRightEdgePrimeLattice1FormBridge
     ; availableTwoStepReturnSurface =
         G2DCC.canonicalSFGCShiftRightEdgeTwoStepPlaquetteSurface
+    ; minimalDiscreteUOneConnectionSystem =
+        canonicalSFGCDiscreteUOneConnectionSystem
     ; priorNoFactorVecOrbitDiagnostic =
         G2ORBIT.canonicalG2SFGCPrimeLatticeOrbitDiagnostic
     ; firstMissingForOptionB =

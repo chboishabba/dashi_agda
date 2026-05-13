@@ -3,6 +3,8 @@
 Date: `2026-05-13`
 Status: `provider request; blocked; non-promoting`
 Owner: `Lane 6`
+Typed surface:
+`DASHI.Physics.Closure.W4ExternalAuthorityTokenSurface`
 
 This packet asks for the external authority inputs needed before any W4
 Z-window adequacy or physical calibration claim can be considered. It does not
@@ -24,10 +26,23 @@ normalization/conversion law, covariance/systematic propagation, and
 CMS-SMP-20-003 t21/t22 source binding
 ```
 
+The new request-only token surface is:
+
+```text
+DASHI.Physics.Closure.W4ExternalAuthorityTokenSurface.W4ExternalAuthorityToken
+```
+
+It is constructorless in-repo. The canonical request pack is:
+
+```text
+DASHI.Physics.Closure.W4ExternalAuthorityTokenSurface.canonicalW4ExternalAuthorityProviderRequest
+```
+
 ## Evidence And Source Artifacts
 
 | Artifact | Role |
 |---|---|
+| `DASHI/Physics/Closure/W4ExternalAuthorityTokenSurface.agda` | typed constructorless W4 request surface |
 | `Docs/AcceptedDYLuminosityConventionAuthorityProviderPacket.md` | provider-facing DY convention request |
 | `Docs/W4W5DYConventionCurrentBlocker.md` | current shared W4/W5 DY convention blocker |
 | `Docs/DYAuthorityProviderResponseStatus.md` | local provider-response status |
@@ -66,12 +81,47 @@ An accepted W4 response must provide:
 If the provider rejects or marks insufficient any field, the response must name
 the exact failed rule.
 
+## Exact Typed Fields Requested
+
+The typed surface records the current first-class missing fields:
+
+```text
+missingAcceptedDYLuminosityConventionAuthority
+missingAcceptedPerBinLuminosityVector
+missingInternalDiagonalConvention
+missingLeptonChannelCombineConvention
+missingZAndBelowZAnchorBinding
+missingProviderIdentityAndDate
+missingStrictInequalityOrAdequacyThresholdPrimitive
+```
+
+The provider must state the luminosity convention for the W4 per-phi-star-bin
+`ell_i` vector, the internal diagonal convention consumed by the W4 adequacy
+formula, the electron/muon channel-combine convention, and the source binding
+for both the Z-window anchor and the below-Z anchor.
+
+Provider/date fields are mandatory: provider identity, role/scope, contact or
+trace id, response date, and source citation or artifact retrieval date.
+
 ## Non-Promotion Boundary
 
 ```text
 promotesW4 = false
 authorityTokenConstructedHere = false
+adequacyReceiptConstructedHere = false
+physicalCalibrationReceiptConstructedHere = false
 ```
 
 No W4 adequacy, physical calibration, matter/stress-energy interface, GR, or
 paper claim follows from this request.
+
+Exact remaining blocker:
+
+```text
+missingAcceptedDYLuminosityConventionAuthority
+```
+
+Even after that authority lands, W4 still requires the accepted per-bin
+luminosity vector, diagonal/channel/anchor conventions, provider/date metadata,
+and an authority-backed strict inequality or adequacy-threshold primitive before
+any W4 adequacy receipt can be considered.

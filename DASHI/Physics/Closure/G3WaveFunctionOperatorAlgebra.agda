@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.G3WaveFunctionOperatorAlgebra where
 
 open import Agda.Primitive using (Set; Setω; lzero; lsuc)
+open import Agda.Builtin.Nat using (Nat; _+_) renaming (zero to natZero; suc to natSuc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym)
@@ -11,7 +12,10 @@ import DASHI.Geometry.EnergyAdditivityProof as Energy
 import DASHI.Geometry.ScalarLawsQ as ScalarQ
 import DASHI.Physics.Closure.G3ConcreteOperators as G3Concrete
 import DASHI.Physics.Closure.G3ContractionCarrier as G3Contraction
+open import Data.Rational.Solver using (module +-*-Solver)
 import Data.Rational.Properties as Rₚ
+
+open +-*-Solver
 
 ------------------------------------------------------------------------
 -- Selected G3 wave-function/operator algebra.
@@ -268,6 +272,11 @@ record WaveFunctionOperatorPointwiseLinearity
       (v : SelectedG3State) →
       A (scaleψ a ψ) v ≡ scaleψ a (A ψ) v
 
+    preserves--ψ :
+      (ψ φ : WaveFunction) →
+      (v : SelectedG3State) →
+      A (ψ -ψ φ) v ≡ (A ψ -ψ A φ) v
+
 stateOperatorToWaveFunctionOperatorPointwiseLinearity :
   (T : G3Concrete.SelectedG3Operator) →
   WaveFunctionOperatorPointwiseLinearity
@@ -278,6 +287,8 @@ stateOperatorToWaveFunctionOperatorPointwiseLinearity T =
         λ ψ φ v → refl
     ; preserves-scaleψ =
         λ a ψ v → refl
+    ; preserves--ψ =
+        λ ψ φ v → refl
     }
 
 selectedPψPointwiseLinearity :
@@ -313,6 +324,117 @@ waveFunctionOperatorSubtraction :
   WaveFunctionOperator
 waveFunctionOperatorSubtraction A B ψ =
   A ψ -ψ B ψ
+
+operatorCommutator :
+  WaveFunctionOperator →
+  WaveFunctionOperator →
+  WaveFunctionOperator
+operatorCommutator A B =
+  waveFunctionOperatorSubtraction
+    (operatorCompose A B)
+    (operatorCompose B A)
+
+operatorCommutatorAntisymPointwise :
+  (A B : WaveFunctionOperator) →
+  (ψ : WaveFunction) →
+  (v : SelectedG3State) →
+  operatorCommutator A B ψ v
+  ≡
+  (0ℚ -ℚ operatorCommutator B A ψ v)
+operatorCommutatorAntisymPointwise A B ψ v =
+  solve 2
+    (λ x y → x :- y := con 0ℚ :- (y :- x))
+    refl
+    (A (B ψ) v)
+    (B (A ψ) v)
+
+operatorCommutatorJacobiPointwise :
+  (A B C : WaveFunctionOperator) →
+  WaveFunctionOperatorPointwiseLinearity A →
+  WaveFunctionOperatorPointwiseLinearity B →
+  WaveFunctionOperatorPointwiseLinearity C →
+  (ψ : WaveFunction) →
+  (v : SelectedG3State) →
+  ( operatorCommutator A (operatorCommutator B C) ψ
+    +ψ
+    ( operatorCommutator B (operatorCommutator C A) ψ
+      +ψ
+      operatorCommutator C (operatorCommutator A B) ψ
+    )
+  ) v
+  ≡
+  0ℚ
+operatorCommutatorJacobiPointwise A B C linA linB linC ψ v
+  rewrite
+    WaveFunctionOperatorPointwiseLinearity.preserves--ψ
+      linA (operatorCompose B C ψ) (operatorCompose C B ψ) v
+  | WaveFunctionOperatorPointwiseLinearity.preserves--ψ
+      linB (operatorCompose C A ψ) (operatorCompose A C ψ) v
+  | WaveFunctionOperatorPointwiseLinearity.preserves--ψ
+      linC (operatorCompose A B ψ) (operatorCompose B A ψ) v =
+  solve 6
+    (λ a b c d e f →
+      (((a :- b) :- (c :- f)) :+
+       (((c :- d) :- (e :- b)) :+
+        ((e :- f) :- (a :- d))))
+      :=
+      con 0ℚ)
+    refl
+    (A (B (C ψ)) v)
+    (A (C (B ψ)) v)
+    (B (C (A ψ)) v)
+    (B (A (C ψ)) v)
+    (C (A (B ψ)) v)
+    (C (B (A ψ)) v)
+
+record G3CommutatorPointwiseLieLaws : Setω where
+  field
+    bracket :
+      WaveFunctionOperator →
+      WaveFunctionOperator →
+      WaveFunctionOperator
+
+    bracketIsOperatorCommutator :
+      bracket ≡ operatorCommutator
+
+    antisym :
+      (A B : WaveFunctionOperator) →
+      (ψ : WaveFunction) →
+      (v : SelectedG3State) →
+      bracket A B ψ v
+      ≡
+      (0ℚ -ℚ bracket B A ψ v)
+
+    jacobiForPointwiseLinearOperators :
+      (A B C : WaveFunctionOperator) →
+      WaveFunctionOperatorPointwiseLinearity A →
+      WaveFunctionOperatorPointwiseLinearity B →
+      WaveFunctionOperatorPointwiseLinearity C →
+      (ψ : WaveFunction) →
+      (v : SelectedG3State) →
+      ( bracket A (bracket B C) ψ
+        +ψ
+        ( bracket B (bracket C A) ψ
+          +ψ
+          bracket C (bracket A B) ψ
+        )
+      ) v
+      ≡
+      0ℚ
+
+canonicalG3CommutatorPointwiseLieLaws :
+  G3CommutatorPointwiseLieLaws
+canonicalG3CommutatorPointwiseLieLaws =
+  record
+    { bracket =
+        operatorCommutator
+    ; bracketIsOperatorCommutator =
+        refl
+    ; antisym =
+        operatorCommutatorAntisymPointwise
+    ; jacobiForPointwiseLinearOperators =
+        operatorCommutatorJacobiPointwise
+    }
 
 CCRWaveFunctionOperator :
   Set (lsuc lzero)
@@ -360,6 +482,342 @@ selectedPψHψCommutator :
   CCRWaveFunctionOperator
 selectedPψHψCommutator d =
   waveFunctionCommutator (selectedPψCCR d) selectedHψCCR
+
+selectedPψPψCommutesPointwise :
+  (d e : G3Concrete.G3SpatialDirection) →
+  (ψ : WaveFunction) →
+  (v : SelectedG3State) →
+  selectedPψ d (selectedPψ e ψ) v
+    ≡
+  selectedPψ e (selectedPψ d ψ) v
+selectedPψPψCommutesPointwise d e ψ v =
+  cong ψ (G3Concrete.selectedPPCommutes e d v)
+
+selectedHψPψCommutesPointwise :
+  (d : G3Concrete.G3SpatialDirection) →
+  (ψ : WaveFunction) →
+  (v : SelectedG3State) →
+  selectedHψ (selectedPψ d ψ) v
+    ≡
+  selectedPψ d (selectedHψ ψ) v
+selectedHψPψCommutesPointwise d ψ v =
+  cong ψ (sym (G3Concrete.selectedHPCommutes d v))
+
+selectedPψHψCommutatorZeroPointwise :
+  (d : G3Concrete.G3SpatialDirection) →
+  (ψ : WaveFunction) →
+  (v : SelectedG3State) →
+  CCR.Op.apply (selectedPψHψCommutator d) ψ v ≡ 0ℚ
+selectedPψHψCommutatorZeroPointwise d ψ v
+  rewrite G3Concrete.selectedHPCommutes d v =
+  Rₚ.+-inverseʳ
+    (ψ (G3Concrete.selectedP d (G3Concrete.selectedH v)))
+
+record G3SelectedCommutatorPointwiseLaws : Setω where
+  field
+    selectedPψPψCommutes :
+      (d e : G3Concrete.G3SpatialDirection) →
+      (ψ : WaveFunction) →
+      (v : SelectedG3State) →
+      selectedPψ d (selectedPψ e ψ) v
+        ≡
+      selectedPψ e (selectedPψ d ψ) v
+
+    selectedHψPψCommutes :
+      (d : G3Concrete.G3SpatialDirection) →
+      (ψ : WaveFunction) →
+      (v : SelectedG3State) →
+      selectedHψ (selectedPψ d ψ) v
+        ≡
+      selectedPψ d (selectedHψ ψ) v
+
+    selectedPψHψCommutatorZero :
+      (d : G3Concrete.G3SpatialDirection) →
+      (ψ : WaveFunction) →
+      (v : SelectedG3State) →
+      CCR.Op.apply (selectedPψHψCommutator d) ψ v ≡ 0ℚ
+
+    commutatorPointwiseLieLaws :
+      G3CommutatorPointwiseLieLaws
+
+    remainingLieLawGaps :
+      List G3WaveFunctionOperatorAlgebraGap
+
+canonicalG3SelectedCommutatorPointwiseLaws :
+  G3SelectedCommutatorPointwiseLaws
+canonicalG3SelectedCommutatorPointwiseLaws =
+  record
+    { selectedPψPψCommutes =
+        selectedPψPψCommutesPointwise
+    ; selectedHψPψCommutes =
+        selectedHψPψCommutesPointwise
+    ; selectedPψHψCommutatorZero =
+        selectedPψHψCommutatorZeroPointwise
+    ; commutatorPointwiseLieLaws =
+        canonicalG3CommutatorPointwiseLieLaws
+    ; remainingLieLawGaps =
+        []
+    }
+
+------------------------------------------------------------------------
+-- Selected p2-filtered bracket compatibility.
+--
+-- This is the narrow filtered-bracket layer for the selected G3
+-- wave-function/operator algebra.  It does not identify the associated
+-- graded Galilei carrier and it does not state a contraction-parameter
+-- limit.  It records the degree calculus needed by those downstream
+-- obligations: selected P has p2-degree 0, selected H and K have p2-degree
+-- 1, and the commutator bracket respects degree addition.
+
+data SelectedOperatorP2Degree :
+  WaveFunctionOperator →
+  Nat →
+  Set where
+  selectedIdentityDegreeZero :
+    SelectedOperatorP2Degree (λ ψ → ψ) natZero
+
+  selectedPψDegreeZero :
+    (d : G3Concrete.G3SpatialDirection) →
+    SelectedOperatorP2Degree (selectedPψ d) natZero
+
+  selectedHψDegreeOne :
+    SelectedOperatorP2Degree selectedHψ (natSuc natZero)
+
+  selectedKψDegreeOne :
+    (d : G3Concrete.G3SpatialDirection) →
+    SelectedOperatorP2Degree (selectedKψ d) (natSuc natZero)
+
+  selectedCommutatorDegree :
+    {A B : WaveFunctionOperator} →
+    {m n : Nat} →
+    SelectedOperatorP2Degree A m →
+    SelectedOperatorP2Degree B n →
+    SelectedOperatorP2Degree (operatorCommutator A B) (m + n)
+
+selectedBracketRespectsP2Degree :
+  {A B : WaveFunctionOperator} →
+  {m n : Nat} →
+  SelectedOperatorP2Degree A m →
+  SelectedOperatorP2Degree B n →
+  SelectedOperatorP2Degree (operatorCommutator A B) (m + n)
+selectedBracketRespectsP2Degree degA degB =
+  selectedCommutatorDegree degA degB
+
+record G3SelectedFilteredBracketCompatibility : Setω where
+  field
+    degree :
+      WaveFunctionOperator →
+      Nat →
+      Set
+
+    degreeIsSelectedP2Degree :
+      degree ≡ SelectedOperatorP2Degree
+
+    pHasDegreeZero :
+      (d : G3Concrete.G3SpatialDirection) →
+      degree (selectedPψ d) natZero
+
+    hHasDegreeOne :
+      degree selectedHψ (natSuc natZero)
+
+    kHasDegreeOne :
+      (d : G3Concrete.G3SpatialDirection) →
+      degree (selectedKψ d) (natSuc natZero)
+
+    bracketRespectsDegree :
+      {A B : WaveFunctionOperator} →
+      {m n : Nat} →
+      degree A m →
+      degree B n →
+      degree (operatorCommutator A B) (m + n)
+
+    exactSemanticBoundary :
+      List String
+
+canonicalG3SelectedFilteredBracketCompatibility :
+  G3SelectedFilteredBracketCompatibility
+canonicalG3SelectedFilteredBracketCompatibility =
+  record
+    { degree =
+        SelectedOperatorP2Degree
+    ; degreeIsSelectedP2Degree =
+        refl
+    ; pHasDegreeZero =
+        selectedPψDegreeZero
+    ; hHasDegreeOne =
+        selectedHψDegreeOne
+    ; kHasDegreeOne =
+        selectedKψDegreeOne
+    ; bracketRespectsDegree =
+        selectedBracketRespectsP2Degree
+    ; exactSemanticBoundary =
+        "Typed filtered bracket compatibility only: selected P has p2-degree 0; selected H and K have p2-degree 1"
+        ∷ "The commutator bracket is closed under p2-degree addition by selectedCommutatorDegree"
+        ∷ "No associated-graded Galilei identification is claimed here"
+        ∷ "No contraction-parameter or Schrodinger Poincare-to-Galilei carrier is claimed here"
+        ∷ []
+    }
+
+------------------------------------------------------------------------
+-- Selected associated-graded Galilei evidence.
+--
+-- This is the first associated-graded layer that is available from the
+-- selected wave-function/operator algebra: it identifies the selected
+-- Galilei generators by p2 degree and proves that the selected bracket
+-- calculus sends those generators to the expected graded slots.
+--
+-- It deliberately does not construct the quotient carrier
+-- gr(F) = ⊕ F_n / F_{n-1}, a projection into that quotient, or the
+-- Schrodinger-scope SES contraction carrier.  Those are still the exact
+-- first missing pieces for full G3 promotion.
+
+data G3SelectedAssociatedGradedGenerator : Set where
+  selectedSpatialMomentumGenerator :
+    G3Concrete.G3SpatialDirection →
+    G3SelectedAssociatedGradedGenerator
+
+  selectedHamiltonianGenerator :
+    G3SelectedAssociatedGradedGenerator
+
+  selectedBoostGenerator :
+    G3Concrete.G3SpatialDirection →
+    G3SelectedAssociatedGradedGenerator
+
+  selectedMassCentralSlot :
+    G3SelectedAssociatedGradedGenerator
+
+selectedGeneratorOperator :
+  G3SelectedAssociatedGradedGenerator →
+  WaveFunctionOperator
+selectedGeneratorOperator (selectedSpatialMomentumGenerator d) =
+  selectedPψ d
+selectedGeneratorOperator selectedHamiltonianGenerator =
+  selectedHψ
+selectedGeneratorOperator (selectedBoostGenerator d) =
+  selectedKψ d
+selectedGeneratorOperator selectedMassCentralSlot =
+  λ ψ → ψ
+
+selectedGeneratorDegree :
+  G3SelectedAssociatedGradedGenerator →
+  Nat
+selectedGeneratorDegree (selectedSpatialMomentumGenerator d) =
+  natZero
+selectedGeneratorDegree selectedHamiltonianGenerator =
+  natSuc natZero
+selectedGeneratorDegree (selectedBoostGenerator d) =
+  natSuc natZero
+selectedGeneratorDegree selectedMassCentralSlot =
+  natZero
+
+selectedGeneratorHasDegree :
+  (g : G3SelectedAssociatedGradedGenerator) →
+  SelectedOperatorP2Degree
+    (selectedGeneratorOperator g)
+    (selectedGeneratorDegree g)
+selectedGeneratorHasDegree (selectedSpatialMomentumGenerator d) =
+  selectedPψDegreeZero d
+selectedGeneratorHasDegree selectedHamiltonianGenerator =
+  selectedHψDegreeOne
+selectedGeneratorHasDegree (selectedBoostGenerator d) =
+  selectedKψDegreeOne d
+selectedGeneratorHasDegree selectedMassCentralSlot =
+  selectedIdentityDegreeZero
+
+record G3SelectedAssociatedGradedGalileiEvidence : Setω where
+  field
+    filteredBracketCompatibility :
+      G3SelectedFilteredBracketCompatibility
+
+    generator :
+      Set
+
+    generatorIsSelected :
+      generator ≡ G3SelectedAssociatedGradedGenerator
+
+    generatorOperator :
+      G3SelectedAssociatedGradedGenerator →
+      WaveFunctionOperator
+
+    generatorOperatorIsSelected :
+      generatorOperator ≡ selectedGeneratorOperator
+
+    generatorDegree :
+      G3SelectedAssociatedGradedGenerator →
+      Nat
+
+    generatorDegreeIsSelected :
+      generatorDegree ≡ selectedGeneratorDegree
+
+    generatorHasDegree :
+      (g : G3SelectedAssociatedGradedGenerator) →
+      SelectedOperatorP2Degree
+        (generatorOperator g)
+        (generatorDegree g)
+
+    ppBracketDegreeZero :
+      (d e : G3Concrete.G3SpatialDirection) →
+      SelectedOperatorP2Degree
+        (operatorCommutator (selectedPψ d) (selectedPψ e))
+        natZero
+
+    hpBracketDegreeOne :
+      (d : G3Concrete.G3SpatialDirection) →
+      SelectedOperatorP2Degree
+        (operatorCommutator selectedHψ (selectedPψ d))
+        (natSuc natZero)
+
+    kpBracketDegreeOne :
+      (d e : G3Concrete.G3SpatialDirection) →
+      SelectedOperatorP2Degree
+        (operatorCommutator (selectedKψ d) (selectedPψ e))
+        (natSuc natZero)
+
+    exactFirstMissingForFullAssociatedGraded :
+      List String
+
+canonicalG3SelectedAssociatedGradedGalileiEvidence :
+  G3SelectedAssociatedGradedGalileiEvidence
+canonicalG3SelectedAssociatedGradedGalileiEvidence =
+  record
+    { filteredBracketCompatibility =
+        canonicalG3SelectedFilteredBracketCompatibility
+    ; generator =
+        G3SelectedAssociatedGradedGenerator
+    ; generatorIsSelected =
+        refl
+    ; generatorOperator =
+        selectedGeneratorOperator
+    ; generatorOperatorIsSelected =
+        refl
+    ; generatorDegree =
+        selectedGeneratorDegree
+    ; generatorDegreeIsSelected =
+        refl
+    ; generatorHasDegree =
+        selectedGeneratorHasDegree
+    ; ppBracketDegreeZero =
+        λ d e →
+          selectedBracketRespectsP2Degree
+            (selectedPψDegreeZero d)
+            (selectedPψDegreeZero e)
+    ; hpBracketDegreeOne =
+        λ d →
+          selectedBracketRespectsP2Degree
+            selectedHψDegreeOne
+            (selectedPψDegreeZero d)
+    ; kpBracketDegreeOne =
+        λ d e →
+          selectedBracketRespectsP2Degree
+            (selectedKψDegreeOne d)
+            (selectedPψDegreeZero e)
+    ; exactFirstMissingForFullAssociatedGraded =
+        "Missing quotient carrier gr(F) = direct sum F_n / F_{n-1}; this file only identifies selected generators and degree/bracket slots"
+        ∷ "Missing projection/quotient map from selected wave-function operators into the associated-graded carrier"
+        ∷ "Missing p2-indexed Poincare-at-p2 carrier and isomorphism required by the Schrodinger SES target"
+        ∷ "Missing contraction-parameter law; no 1/c -> 0 or p2-adic limit certificate is claimed"
+        ∷ []
+    }
 
 SelectedScalarField :
   Set
@@ -414,6 +872,9 @@ record G3WaveFunctionModuleSurface : Setω where
       waveFunction →
       waveFunction
 
+    pointwiseModuleLaws :
+      G3WaveFunctionPointwiseModuleLaws
+
     remainingModuleLawGaps :
       List G3WaveFunctionOperatorAlgebraGap
 
@@ -443,9 +904,10 @@ canonicalG3WaveFunctionModuleSurface =
         oneψ
     ; scale =
         scaleψ
+    ; pointwiseModuleLaws =
+        canonicalG3WaveFunctionPointwiseModuleLaws
     ; remainingModuleLawGaps =
-        missingWaveFunctionModuleLaws
-        ∷ []
+        []
     }
 
 record G3SelectedWaveFunctionOperatorAlgebra : Setω where
@@ -482,6 +944,17 @@ record G3SelectedWaveFunctionOperatorAlgebra : Setω where
       G3Concrete.G3SpatialDirection →
       waveFunctionOperator
 
+    pOperatorLinearity :
+      (d : G3Concrete.G3SpatialDirection) →
+      WaveFunctionOperatorPointwiseLinearity (selectedPψ d)
+
+    hOperatorLinearity :
+      WaveFunctionOperatorPointwiseLinearity selectedHψ
+
+    kOperatorLinearity :
+      (d : G3Concrete.G3SpatialDirection) →
+      WaveFunctionOperatorPointwiseLinearity (selectedKψ d)
+
     ccrOperatorSurface :
       Set (lsuc lzero)
 
@@ -499,6 +972,15 @@ record G3SelectedWaveFunctionOperatorAlgebra : Setω where
     pHCommutator :
       G3Concrete.G3SpatialDirection →
       CCRWaveFunctionOperator
+
+    selectedCommutatorPointwiseLaws :
+      G3SelectedCommutatorPointwiseLaws
+
+    filteredBracketCompatibility :
+      G3SelectedFilteredBracketCompatibility
+
+    associatedGradedGalileiEvidence :
+      G3SelectedAssociatedGradedGalileiEvidence
 
     exactSchrodingerContractionCarrierTarget :
       Set
@@ -546,6 +1028,12 @@ canonicalG3SelectedWaveFunctionOperatorAlgebra =
         selectedHψ
     ; kOperator =
         selectedKψ
+    ; pOperatorLinearity =
+        selectedPψPointwiseLinearity
+    ; hOperatorLinearity =
+        selectedHψPointwiseLinearity
+    ; kOperatorLinearity =
+        selectedKψPointwiseLinearity
     ; ccrOperatorSurface =
         CCRWaveFunctionOperator
     ; ccrOperatorSurfaceIsExact =
@@ -556,6 +1044,12 @@ canonicalG3SelectedWaveFunctionOperatorAlgebra =
         refl
     ; pHCommutator =
         selectedPψHψCommutator
+    ; selectedCommutatorPointwiseLaws =
+        canonicalG3SelectedCommutatorPointwiseLaws
+    ; filteredBracketCompatibility =
+        canonicalG3SelectedFilteredBracketCompatibility
+    ; associatedGradedGalileiEvidence =
+        canonicalG3SelectedAssociatedGradedGalileiEvidence
     ; exactSchrodingerContractionCarrierTarget =
         G3Contraction.SchrodingerPoincareToGalileiContractionCarrier
     ; exactSchrodingerContractionCarrierTargetIsExact =
@@ -565,11 +1059,7 @@ canonicalG3SelectedWaveFunctionOperatorAlgebra =
     ; exactDerivedContractionTheoremTargetIsExact =
         refl
     ; remainingGaps =
-        missingWaveFunctionModuleLaws
-        ∷ missingOperatorLinearityProofs
-        ∷ missingCommutatorLieLaws
-        ∷ missingFilteredBracketCompatibility
-        ∷ missingAssociatedGradedGalileiIdentification
+        missingAssociatedGradedGalileiIdentification
         ∷ missingContractionParameterLaw
         ∷ missingSchrodingerPoincareToGalileiContractionCarrier
         ∷ []
@@ -577,7 +1067,11 @@ canonicalG3SelectedWaveFunctionOperatorAlgebra =
         "Concrete selected G3 wave functions are SelectedG3State -> ℚ"
         ∷ "The scalar field and scalar laws are the existing DASHI.Geometry.ScalarLawsQ witnesses"
         ∷ "P, H, and K are lifted from selected state endomorphisms by precomposition"
+        ∷ "Pointwise wave-function module laws and P/H/K pointwise linearity over +ψ and scaleψ are inhabited"
         ∷ "The CCR commutator is available over pointwise wave-function subtraction"
-        ∷ "No function extensionality, wave-function module laws, operator linearity, Lie laws, filtered bracket compatibility, associated graded carrier, Galilei identification, contraction parameter law, or Schrodinger Poincare-to-Galilei carrier is claimed"
+        ∷ "Pointwise commutator antisymmetry and Jacobi for pointwise-linear wave-function operators are inhabited"
+        ∷ "Selected P/H commutator vanishes pointwise from selectedHPCommutes"
+        ∷ "Selected p2-filtered bracket compatibility is inhabited as a typed degree-addition surface"
+        ∷ "Selected associated-graded Galilei generator evidence is inhabited, but the quotient carrier gr(F), projection map, p2 Poincare isomorphism, contraction parameter law, and Schrodinger Poincare-to-Galilei carrier are not claimed"
         ∷ []
     }
