@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NaturalP2ConvergencePromotionObligation where
 
 open import Agda.Primitive using (Set; Setω)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
@@ -26,6 +27,78 @@ import DASHI.Physics.PressureGradientFlowShiftInstance as PGFSI
 -- convergence beyond the landed shift-flow carrier.
 
 data NaturalP2ConvergencePromotionAuthorityToken : Set where
+
+data NaturalP2ConvergencePromotionAuthorityTokenDefinitionStatus : Set where
+  constructorlessFailClosedAtDefinitionSite :
+    NaturalP2ConvergencePromotionAuthorityTokenDefinitionStatus
+
+data NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAuditConclusion : Set where
+  noAcceptedNonPostulatedExactPolicyHookPresent :
+    NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAuditConclusion
+
+record NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure : Setω where
+  field
+    exactTokenDefinitionForm :
+      String
+
+    tokenDefinitionStatus :
+      NaturalP2ConvergencePromotionAuthorityTokenDefinitionStatus
+
+    tokenHasConstructor :
+      Bool
+
+    tokenHasConstructorIsFalse :
+      tokenHasConstructor
+      ≡
+      false
+
+    recordConversionPermitted :
+      Bool
+
+    recordConversionPermittedIsFalse :
+      recordConversionPermitted
+      ≡
+      false
+
+    authorityTokenUnavailable :
+      NaturalP2ConvergencePromotionAuthorityToken →
+      ⊥
+
+    firstMissing :
+      String
+
+    constructorlessClosureBoundary :
+      List String
+
+record NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAudit : Setω where
+  field
+    definitionSiteClosure :
+      NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure
+
+    auditConclusion :
+      NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAuditConclusion
+
+    acceptedNonPostulatedExactPolicyHookPresent :
+      Bool
+
+    acceptedNonPostulatedExactPolicyHookPresentIsFalse :
+      acceptedNonPostulatedExactPolicyHookPresent
+      ≡
+      false
+
+    postulateToRecordConversionAccepted :
+      Bool
+
+    postulateToRecordConversionAcceptedIsFalse :
+      postulateToRecordConversionAccepted
+      ≡
+      false
+
+    exactDefinitionSiteRequest :
+      List String
+
+    noPromotionBoundary :
+      List String
 
 ------------------------------------------------------------------------
 -- Non-promoting positive invariant.
@@ -103,6 +176,87 @@ record NaturalP2ConvergencePromotionReceipt : Setω where
 naturalP2ConvergencePromotionAuthorityUnavailable :
   NaturalP2ConvergencePromotionAuthorityToken → ⊥
 naturalP2ConvergencePromotionAuthorityUnavailable ()
+
+canonicalNaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure :
+  NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure
+canonicalNaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure =
+  record
+    { exactTokenDefinitionForm =
+        "data NaturalP2ConvergencePromotionAuthorityToken : Set where"
+    ; tokenDefinitionStatus =
+        constructorlessFailClosedAtDefinitionSite
+    ; tokenHasConstructor =
+        false
+    ; tokenHasConstructorIsFalse =
+        refl
+    ; recordConversionPermitted =
+        false
+    ; recordConversionPermittedIsFalse =
+        refl
+    ; authorityTokenUnavailable =
+        naturalP2ConvergencePromotionAuthorityUnavailable
+    ; firstMissing =
+        "NaturalP2ConvergencePromotionAuthorityToken constructor or non-postulated exact policy hook"
+    ; constructorlessClosureBoundary =
+        "Definition site is intentionally fail-closed while the authority token has no constructor"
+        ∷ "Do not replace this canonical empty datatype with a local record conversion"
+        ∷ "A future promotion must add a real constructor or exact non-postulated policy hook at the canonical authority boundary"
+        ∷ []
+    }
+
+canonicalNaturalP2ConvergencePromotionAuthorityTokenStillConstructorless :
+  NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure.tokenHasConstructor
+    canonicalNaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure
+  ≡
+  false
+canonicalNaturalP2ConvergencePromotionAuthorityTokenStillConstructorless =
+  refl
+
+canonicalNaturalP2ConvergencePromotionAuthorityTokenRecordConversionRejected :
+  NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure.recordConversionPermitted
+    canonicalNaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure
+  ≡
+  false
+canonicalNaturalP2ConvergencePromotionAuthorityTokenRecordConversionRejected =
+  refl
+
+canonicalNaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAudit :
+  NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAudit
+canonicalNaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAudit =
+  record
+    { definitionSiteClosure =
+        canonicalNaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteClosure
+    ; auditConclusion =
+        noAcceptedNonPostulatedExactPolicyHookPresent
+    ; acceptedNonPostulatedExactPolicyHookPresent =
+        false
+    ; acceptedNonPostulatedExactPolicyHookPresentIsFalse =
+        refl
+    ; postulateToRecordConversionAccepted =
+        false
+    ; postulateToRecordConversionAcceptedIsFalse =
+        refl
+    ; exactDefinitionSiteRequest =
+        "Leave the canonical empty datatype unchanged until governance amends this definition site"
+        ∷ "Accepted route A: add a real constructor to NaturalP2ConvergencePromotionAuthorityToken in this module"
+        ∷ "Accepted route B: import a non-postulated exact policy hook whose result type is NaturalP2ConvergencePromotionAuthorityToken"
+        ∷ "The hook must consume the named W2 evidence packet, audit conditions, revocation conditions, and no-overreach clauses"
+        ∷ "A local shadow record or postulated hook does not inhabit the canonical token"
+        ∷ []
+    ; noPromotionBoundary =
+        "No accepted non-postulated exact policy hook is present in the current W2 governance surface"
+        ∷ "No NaturalP2ConvergencePromotionAuthorityToken is constructed by this audit"
+        ∷ "No NaturalP2ConvergencePromotionReceipt can be promoted from this audit"
+        ∷ []
+    }
+
+canonicalNaturalP2ConvergencePromotionAuthorityTokenNoExactPolicyHookPresent :
+  NaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAudit.acceptedNonPostulatedExactPolicyHookPresent
+    canonicalNaturalP2ConvergencePromotionAuthorityTokenDefinitionSiteAudit
+  ≡
+  false
+canonicalNaturalP2ConvergencePromotionAuthorityTokenNoExactPolicyHookPresent =
+  refl
 
 naturalP2ConvergencePromotionReceiptImpossible :
   NaturalP2ConvergencePromotionReceipt → ⊥

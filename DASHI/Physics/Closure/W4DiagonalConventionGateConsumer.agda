@@ -7,6 +7,12 @@ open import Data.List.Base using (List; _∷_; [])
 open import Data.Nat.Base using (_<_)
 
 import DASHI.Physics.Closure.W4ResponseMatrixAcceptanceCandidateReceipt as Candidate
+import DASHI.Physics.Closure.W4ExternalAuthorityTokenSurface as W4Authority
+
+scaledDecimalStrictGT9566over9000 :
+  9000 < 9566
+scaledDecimalStrictGT9566over9000 =
+  Candidate.scaledDecimalStrictGreaterThan9566over9000
 
 ------------------------------------------------------------------------
 -- W4 diagonal-convention gate-consumer request.
@@ -203,6 +209,17 @@ record W4DiagonalConventionGateConsumerRequest : Set where
     internalAdequacyFirstMissing :
       Candidate.W4ZInternalAdequacyEvidenceFirstMissing
 
+    externalAuthorityFirstMissingBeforeHookRequest :
+      W4Authority.W4ExternalAuthorityMissingField
+
+    externalAuthorityFirstMissingAfterHookRequest :
+      W4Authority.W4ExternalAuthorityMissingField
+
+    externalAuthorityFirstMissingUnchanged :
+      externalAuthorityFirstMissingAfterHookRequest
+      ≡
+      externalAuthorityFirstMissingBeforeHookRequest
+
     internalAdequacyStrictGreaterThanWitness :
       9000 < 9566
 
@@ -361,8 +378,14 @@ canonicalW4DiagonalConventionGateConsumerRequest =
         "Internal non-promoting adequacy evidence: 76-106 GeV geometric-mean diagonal combined efficiency 0.9566 clears bound 0.90, with an Agda Nat witness for scaled-decimal strict inequality 9566 > 9000"
     ; internalAdequacyFirstMissing =
         Candidate.internalAdequacyArithmeticDischargedW4ZAdequacyPending
+    ; externalAuthorityFirstMissingBeforeHookRequest =
+        W4Authority.w4AuthorityFirstMissingBeforePolicyHookRequest
+    ; externalAuthorityFirstMissingAfterHookRequest =
+        W4Authority.w4AuthorityFirstMissingAfterPolicyHookRequest
+    ; externalAuthorityFirstMissingUnchanged =
+        W4Authority.w4AuthorityPolicyHookRequestFirstMissingUnchanged
     ; internalAdequacyStrictGreaterThanWitness =
-        Candidate.scaledDecimalStrictGreaterThan9566over9000
+        scaledDecimalStrictGT9566over9000
     ; internalAdequacyComputedPass =
         true
     ; internalAdequacyComputedPassIsTrue =
@@ -415,7 +438,8 @@ canonicalW4DiagonalConventionGateConsumerRequest =
         ∷ "The accepted channel-combination law is the geometric mean, not the previous BLUE request"
         ∷ "The accepted covariance law is linearized Jacobian propagation through sigma/A"
         ∷ "A non-promoting internal adequacy evidence receipt records 0.9566 > 0.90 at the string/scaled-decimal layer with a typed Nat witness"
-        ∷ "The exact remaining local blocker is a W4ZAdequacy consumer for the corrected observable and covariance"
+        ∷ "The diagonal-consumer local blocker is a W4ZAdequacy consumer for the corrected observable and covariance"
+        ∷ "The external authority blocker is unchanged before/after public-source policy-hook request: missingAcceptedDYLuminosityConventionAuthority"
         ∷ "No W4ZAdequacy, accepted DY convention authority, or W4 gate receipt is constructed"
         ∷ []
     }

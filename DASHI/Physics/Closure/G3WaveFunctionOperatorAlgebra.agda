@@ -4,7 +4,7 @@ open import Agda.Primitive using (Set; Setω; lzero; lsuc)
 open import Agda.Builtin.Nat using (Nat; _+_) renaming (zero to natZero; suc to natSuc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
 
 import DASHI.Algebra.CCR as CCR
 open import DASHI.Core.Q using (ℚ; _+ℚ_; _-ℚ_; _*ℚ_; 0ℚ; 1ℚ)
@@ -318,12 +318,96 @@ operatorCompose :
 operatorCompose A B ψ =
   A (B ψ)
 
+zeroWaveFunctionOperator :
+  WaveFunctionOperator
+zeroWaveFunctionOperator ψ =
+  zeroψ
+
+waveFunctionOperatorAddition :
+  WaveFunctionOperator →
+  WaveFunctionOperator →
+  WaveFunctionOperator
+waveFunctionOperatorAddition A B ψ =
+  A ψ +ψ B ψ
+
+waveFunctionOperatorNegation :
+  WaveFunctionOperator →
+  WaveFunctionOperator
+waveFunctionOperatorNegation A ψ =
+  zeroψ -ψ A ψ
+
 waveFunctionOperatorSubtraction :
   WaveFunctionOperator →
   WaveFunctionOperator →
   WaveFunctionOperator
 waveFunctionOperatorSubtraction A B ψ =
   A ψ -ψ B ψ
+
+WaveFunctionOperatorPointwiseEquality :
+  WaveFunctionOperator →
+  WaveFunctionOperator →
+  Set
+WaveFunctionOperatorPointwiseEquality A B =
+  (ψ : WaveFunction) →
+  (v : SelectedG3State) →
+  A ψ v ≡ B ψ v
+
+waveFunctionOperatorPointwiseRefl :
+  (A : WaveFunctionOperator) →
+  WaveFunctionOperatorPointwiseEquality A A
+waveFunctionOperatorPointwiseRefl A ψ v =
+  refl
+
+waveFunctionOperatorPointwiseSym :
+  (A B : WaveFunctionOperator) →
+  WaveFunctionOperatorPointwiseEquality A B →
+  WaveFunctionOperatorPointwiseEquality B A
+waveFunctionOperatorPointwiseSym A B A≈B ψ v =
+  sym (A≈B ψ v)
+
+waveFunctionOperatorPointwiseTrans :
+  (A B C : WaveFunctionOperator) →
+  WaveFunctionOperatorPointwiseEquality A B →
+  WaveFunctionOperatorPointwiseEquality B C →
+  WaveFunctionOperatorPointwiseEquality A C
+waveFunctionOperatorPointwiseTrans A B C A≈B B≈C ψ v =
+  trans (A≈B ψ v) (B≈C ψ v)
+
+waveFunctionOperatorZeroDifferencePointwise :
+  (A : WaveFunctionOperator) →
+  WaveFunctionOperatorPointwiseEquality
+    (waveFunctionOperatorSubtraction A A)
+    zeroWaveFunctionOperator
+waveFunctionOperatorZeroDifferencePointwise A ψ v =
+  -ψ-self-zero-pointwise (A ψ) v
+
+waveFunctionOperatorNegatedDifferencePointwise :
+  (A B : WaveFunctionOperator) →
+  WaveFunctionOperatorPointwiseEquality
+    (waveFunctionOperatorSubtraction B A)
+    (waveFunctionOperatorNegation
+      (waveFunctionOperatorSubtraction A B))
+waveFunctionOperatorNegatedDifferencePointwise A B ψ v =
+  solve 2
+    (λ x y → y :- x := con 0ℚ :- (x :- y))
+    refl
+    (A ψ v)
+    (B ψ v)
+
+waveFunctionOperatorAdditiveDifferencePointwise :
+  (A B C : WaveFunctionOperator) →
+  WaveFunctionOperatorPointwiseEquality
+    (waveFunctionOperatorAddition
+      (waveFunctionOperatorSubtraction A B)
+      (waveFunctionOperatorSubtraction B C))
+    (waveFunctionOperatorSubtraction A C)
+waveFunctionOperatorAdditiveDifferencePointwise A B C ψ v =
+  solve 3
+    (λ x y z → (x :- y) :+ (y :- z) := x :- z)
+    refl
+    (A ψ v)
+    (B ψ v)
+    (C ψ v)
 
 operatorCommutator :
   WaveFunctionOperator →

@@ -127,6 +127,178 @@ data DiscreteEinsteinTensorFirstMissingCondition : Set where
   missingContinuumLimitReceipt :
     DiscreteEinsteinTensorFirstMissingCondition
 
+data DiscreteEinsteinTensorConstructionMissingPrimitive : Set where
+  missingBasePointOrCellCarrier :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingCoordinateIndexCarrier :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingScalarAlgebraForTensorComponents :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingFiniteContractionOverCoordinateIndex :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingMetricComponents :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingInverseMetricComponents :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingDiscreteDifferenceDelta :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingNonFlatGammaConnectionCoefficients :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingRiemannFromDeltaGammaLaw :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingRicciContractionLaw :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingScalarCurvatureTraceLaw :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingEinsteinTensorSubtractionLaw :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+  missingFiniteRBianchiWitness :
+    DiscreteEinsteinTensorConstructionMissingPrimitive
+
+canonicalDiscreteEinsteinTensorConstructionMissingPrimitives :
+  List DiscreteEinsteinTensorConstructionMissingPrimitive
+canonicalDiscreteEinsteinTensorConstructionMissingPrimitives =
+  missingBasePointOrCellCarrier
+  ∷ missingCoordinateIndexCarrier
+  ∷ missingScalarAlgebraForTensorComponents
+  ∷ missingFiniteContractionOverCoordinateIndex
+  ∷ missingMetricComponents
+  ∷ missingInverseMetricComponents
+  ∷ missingDiscreteDifferenceDelta
+  ∷ missingNonFlatGammaConnectionCoefficients
+  ∷ missingRiemannFromDeltaGammaLaw
+  ∷ missingRicciContractionLaw
+  ∷ missingScalarCurvatureTraceLaw
+  ∷ missingEinsteinTensorSubtractionLaw
+  ∷ missingFiniteRBianchiWitness
+  ∷ []
+
+record DiscreteEinsteinTensorConstructionRequestSurface : Set₁ where
+  field
+    BasePoint :
+      Set
+
+    CoordinateIndex :
+      Set
+
+    Scalar :
+      Set
+
+    _+_ :
+      Scalar →
+      Scalar →
+      Scalar
+
+    _-_ :
+      Scalar →
+      Scalar →
+      Scalar
+
+    _*_ :
+      Scalar →
+      Scalar →
+      Scalar
+
+    oneHalf :
+      Scalar
+
+    finiteContraction :
+      (CoordinateIndex → Scalar) →
+      Scalar
+
+    metricComponent :
+      BasePoint →
+      CoordinateIndex →
+      CoordinateIndex →
+      Scalar
+
+    inverseMetricComponent :
+      BasePoint →
+      CoordinateIndex →
+      CoordinateIndex →
+      Scalar
+
+    Δ :
+      (BasePoint → Scalar) →
+      BasePoint →
+      CoordinateIndex →
+      Scalar
+
+    Γ :
+      BasePoint →
+      CoordinateIndex →
+      CoordinateIndex →
+      CoordinateIndex →
+      Scalar
+
+    Riemann :
+      BasePoint →
+      CoordinateIndex →
+      CoordinateIndex →
+      CoordinateIndex →
+      CoordinateIndex →
+      Scalar
+
+    RiemannFromΔΓLaw :
+      (base : BasePoint) →
+      (rho sigma mu nu : CoordinateIndex) →
+      Set
+
+    Ricci :
+      BasePoint →
+      CoordinateIndex →
+      CoordinateIndex →
+      Scalar
+
+    RicciFromRiemannLaw :
+      (base : BasePoint) →
+      (mu nu : CoordinateIndex) →
+      Ricci base mu nu
+      ≡
+      finiteContraction
+        (λ rho →
+          Riemann base rho mu rho nu)
+
+    scalarCurvature :
+      BasePoint →
+      Scalar
+
+    scalarCurvatureTraceLaw :
+      (base : BasePoint) →
+      scalarCurvature base
+      ≡
+      finiteContraction
+        (λ mu →
+          finiteContraction
+            (λ nu →
+              inverseMetricComponent base mu nu *
+              Ricci base mu nu))
+
+    EinsteinTensor :
+      BasePoint →
+      CoordinateIndex →
+      CoordinateIndex →
+      Scalar
+
+    EinsteinTensorLaw :
+      (base : BasePoint) →
+      (mu nu : CoordinateIndex) →
+      EinsteinTensor base mu nu
+      ≡
+      Ricci base mu nu
+      -
+      ((oneHalf * scalarCurvature base) *
+        metricComponent base mu nu)
+
+    finiteRBianchiWitness :
+      Set
+
+    nonFlatWitness :
+      Set
+
+    constructionBoundary :
+      List String
+
 data DiscreteEinsteinTensorCandidateStatus : Set where
   flatMetricCandidateOnly :
     DiscreteEinsteinTensorCandidateStatus
@@ -212,6 +384,17 @@ record DiscreteEinsteinTensorCandidateDiagnostic : Set₁ where
     orderedRemainingConditions :
       List DiscreteEinsteinTensorFirstMissingCondition
 
+    tensorConstructionRequestName :
+      String
+
+    missingTensorConstructionPrimitives :
+      List DiscreteEinsteinTensorConstructionMissingPrimitive
+
+    missingTensorConstructionPrimitivesAreCanonical :
+      missingTensorConstructionPrimitives
+      ≡
+      canonicalDiscreteEinsteinTensorConstructionMissingPrimitives
+
     diagnosticBoundary :
       List String
 
@@ -240,10 +423,17 @@ canonicalDiscreteEinsteinTensorCandidateDiagnostic =
         ∷ missingStressEnergySourceCoupling
         ∷ missingContinuumLimitReceipt
         ∷ []
+    ; tensorConstructionRequestName =
+        "DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate.DiscreteEinsteinTensorConstructionRequestSurface"
+    ; missingTensorConstructionPrimitives =
+        canonicalDiscreteEinsteinTensorConstructionMissingPrimitives
+    ; missingTensorConstructionPrimitivesAreCanonical =
+        refl
     ; diagnosticBoundary =
         "MinkowskiLimitReceipt supplies the exact flat Lorentzian quadratic"
         ∷ "The candidate surface here is flat and identity-shift only"
         ∷ "CRT/J p47/p59/p71 surfaces are finite scalar/periodicity surfaces, not a canonical non-flat connection"
+        ∷ "DiscreteEinsteinTensorConstructionRequestSurface now names the required Δ, Γ, Riemann, Ricci, scalar-curvature, and Einstein-tensor fields"
         ∷ "Known GR/QFT closure files require downstream curvature, stress-energy, and Einstein-equation consumer fields"
         ∷ "No concrete carrier-internal non-flat connection or shift-curvature operator is present in this module"
         ∷ []

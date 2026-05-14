@@ -5,11 +5,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.List.Base as List using (List; _∷_; [])
 open import Data.Vec using (Vec)
 import Data.Vec as Vec
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 open import Relation.Nullary using (yes; no)
 
 import DASHI.Algebra.Trit.HalfTrit as HT
@@ -45,6 +45,8 @@ data LilaE8NoDuplicatesFirstMissing : Set where
     LilaE8NoDuplicatesFirstMissing
   missingCombinedE8Completeness :
     LilaE8NoDuplicatesFirstMissing
+  missingUpstreamE8RootEnumerationCompletePromotion :
+    LilaE8NoDuplicatesFirstMissing
 
 data LilaE8MissingNativePredicateName : Set where
   expectedNativeE8RootMember :
@@ -59,13 +61,13 @@ data LilaE8MissingNativePredicateName : Set where
     LilaE8MissingNativePredicateName
   expectedNativeE8CombinedCompleteness :
     LilaE8MissingNativePredicateName
+  expectedNativeE8RootEnumerationCompletePromotion :
+    LilaE8MissingNativePredicateName
 
 canonicalLilaE8MissingNativePredicateNames :
   List LilaE8MissingNativePredicateName
 canonicalLilaE8MissingNativePredicateNames =
-  expectedNativeE8IntegerTwoSparseCompleteness
-  ∷ expectedNativeE8HalfEvenParityCompleteness
-  ∷ expectedNativeE8CombinedCompleteness
+  expectedNativeE8RootEnumerationCompletePromotion
   ∷ []
 
 data LilaE8ExpectedBridgeShape : Set where
@@ -81,13 +83,13 @@ data LilaE8ExpectedBridgeShape : Set where
     LilaE8ExpectedBridgeShape
   combinedGeneratorToNativeE8Completeness :
     LilaE8ExpectedBridgeShape
+  localSemanticCompletenessToUpstreamE8ReceiptPromotion :
+    LilaE8ExpectedBridgeShape
 
 canonicalLilaE8ExpectedBridgeShapes :
   List LilaE8ExpectedBridgeShape
 canonicalLilaE8ExpectedBridgeShapes =
-  integerGeneratorToNativeTwoSparseCompleteness
-  ∷ halfGeneratorToNativeEvenParityCompleteness
-  ∷ combinedGeneratorToNativeE8Completeness
+  localSemanticCompletenessToUpstreamE8ReceiptPromotion
   ∷ []
 
 record LilaE8NativeReflectionBridgeRequest : Set where
@@ -142,7 +144,7 @@ canonicalLilaE8NativeReflectionBridgeRequest =
     ; expectedNativeDisjointShape =
         "E8RootFamiliesDisjoint : E8.E8RootList -> E8.E8RootList -> Set, available here as an indexed-image-backed native wrapper"
     ; expectedNativeCompletenessShape =
-        "E8RootEnumerationComplete inhabited only after universal integer two-sparse completeness, half even-parity completeness, and combined completeness"
+        "Local semantic integer/half/combined completeness is implemented for the finite native root predicates; the remaining gap is promoting that surface to the upstream empty E8RootEnumerationComplete receipt"
     ; requestIsNonPromoting =
         true
     ; requestIsNonPromotingIsTrue =
@@ -152,9 +154,7 @@ canonicalLilaE8NativeReflectionBridgeRequest =
 canonicalLilaE8NoDuplicatesFirstMissing :
   List LilaE8NoDuplicatesFirstMissing
 canonicalLilaE8NoDuplicatesFirstMissing =
-  missingIntegerTwoSparseCompleteness
-  ∷ missingHalfEvenParityCompleteness
-  ∷ missingCombinedE8Completeness
+  missingUpstreamE8RootEnumerationCompletePromotion
   ∷ []
 
 ------------------------------------------------------------------------
@@ -1037,6 +1037,134 @@ data E8NativeFiniteRootMember :
     memberNativeRoot root roots ≡ true →
     E8NativeFiniteRootMember root roots
 
+nativeBoolMembershipToFiniteRootMember :
+  {root : E8.E8RootCarrier} →
+  {roots : E8.E8RootList} →
+  memberNativeRoot root roots ≡ true →
+  E8NativeFiniteRootMember root roots
+nativeBoolMembershipToFiniteRootMember =
+  nativeMemberByExecutableCheck
+
+nativeFiniteRootMemberToBoolMembership :
+  {root : E8.E8RootCarrier} →
+  {roots : E8.E8RootList} →
+  E8NativeFiniteRootMember root roots →
+  memberNativeRoot root roots ≡ true
+nativeFiniteRootMemberToBoolMembership
+  (nativeMemberByExecutableCheck membershipCheck) =
+  membershipCheck
+
+indexedBoolMembershipToIndexedRootMember :
+  {root : E8.E8IndexedRootCarrier} →
+  {roots : E8.E8IndexedRootList} →
+  E8.memberIndexedRoot root roots ≡ true →
+  E8.IndexedRootMember root roots
+indexedBoolMembershipToIndexedRootMember =
+  E8.memberByExecutableCheck
+
+record E8IndexedImageLookup
+  (root : E8.E8RootCarrier)
+  (indexedRoots : E8.E8IndexedRootList) :
+  Set where
+  constructor indexedImageLookup
+  field
+    indexedRoot :
+      E8.E8IndexedRootCarrier
+
+    rootIsIndexedImage :
+      root ≡ E8.indexedRootToHalfTritRoot indexedRoot
+
+    indexedMembership :
+      E8.IndexedRootMember indexedRoot indexedRoots
+
+indexedBoolMemberHead :
+  (root : E8.E8IndexedRootCarrier) →
+  (roots : E8.E8IndexedRootList) →
+  E8.memberIndexedRoot root (root ∷ roots) ≡ true
+indexedBoolMemberHead root roots
+  with E8.decEqIndexedRoot root root
+... | yes _ =
+  refl
+... | no root≢root =
+  ⊥-elim (root≢root refl)
+
+indexedBoolMemberConsFromTail :
+  (root head : E8.E8IndexedRootCarrier) →
+  (tail : E8.E8IndexedRootList) →
+  E8.memberIndexedRoot root tail ≡ true →
+  E8.memberIndexedRoot root (head ∷ tail) ≡ true
+indexedBoolMemberConsFromTail root head tail tailMembership
+  with E8.decEqIndexedRoot root head
+... | yes _ =
+  refl
+... | no _ =
+  tailMembership
+
+indexedMemberConsFromTail :
+  {root head : E8.E8IndexedRootCarrier} →
+  {tail : E8.E8IndexedRootList} →
+  E8.IndexedRootMember root tail →
+  E8.IndexedRootMember root (head ∷ tail)
+indexedMemberConsFromTail {root} {head} {tail}
+  (E8.memberByExecutableCheck tailMembership) =
+  E8.memberByExecutableCheck
+    (indexedBoolMemberConsFromTail root head tail tailMembership)
+
+indexedImageBoolMembershipLookup :
+  {root : E8.E8RootCarrier} →
+  (indexedRoots : E8.E8IndexedRootList) →
+  memberNativeRoot root (indexedImage indexedRoots) ≡ true →
+  E8IndexedImageLookup root indexedRoots
+indexedImageBoolMembershipLookup [] ()
+indexedImageBoolMembershipLookup {root} (indexedRoot ∷ indexedRoots) membershipCheck
+  with decEqNativeRoot root (E8.indexedRootToHalfTritRoot indexedRoot)
+... | yes rootIsIndexedImage =
+  indexedImageLookup
+    indexedRoot
+    rootIsIndexedImage
+    (E8.memberByExecutableCheck
+      (indexedBoolMemberHead indexedRoot indexedRoots))
+... | no _
+  with indexedImageBoolMembershipLookup {root = root} indexedRoots membershipCheck
+... | indexedImageLookup foundRoot rootIsIndexedImage indexedMembership =
+  indexedImageLookup
+    foundRoot
+    rootIsIndexedImage
+    (indexedMemberConsFromTail indexedMembership)
+
+indexedImageLookupToNativeRootMember :
+  {root : E8.E8RootCarrier} →
+  {indexedRoots : E8.E8IndexedRootList} →
+  E8IndexedImageLookup root indexedRoots →
+  E8RootMember root (indexedImage indexedRoots)
+indexedImageLookupToNativeRootMember
+  (indexedImageLookup indexedRoot rootIsIndexedImage indexedMembership) =
+  memberByIndexedImage
+    rootIsIndexedImage
+    refl
+    indexedMembership
+
+integerNativeBoolMembershipToIndexedImageLookup :
+  {root : E8.E8RootCarrier} →
+  memberNativeRoot root E8.integerRoots ≡ true →
+  E8IndexedImageLookup root E8.integerIndexedRoots
+integerNativeBoolMembershipToIndexedImageLookup =
+  indexedImageBoolMembershipLookup E8.integerIndexedRoots
+
+halfNativeBoolMembershipToIndexedImageLookup :
+  {root : E8.E8RootCarrier} →
+  memberNativeRoot root E8.halfRoots ≡ true →
+  E8IndexedImageLookup root E8.halfIndexedRoots
+halfNativeBoolMembershipToIndexedImageLookup =
+  indexedImageBoolMembershipLookup E8.halfIndexedRoots
+
+combinedNativeBoolMembershipToIndexedImageLookup :
+  {root : E8.E8RootCarrier} →
+  memberNativeRoot root E8.combinedRoots ≡ true →
+  E8IndexedImageLookup root E8.combinedIndexedRoots
+combinedNativeBoolMembershipToIndexedImageLookup =
+  indexedImageBoolMembershipLookup E8.combinedIndexedRoots
+
 E8SemanticNativeIntegerTwoSparseRoot :
   E8.E8RootCarrier →
   Set
@@ -1075,8 +1203,7 @@ canonicalLilaE8NativeCompletenessRefinedFirstMissingAfterIntegerNormalization =
 canonicalLilaE8NativeCompletenessRefinedFirstMissingAfterHalfCombinedNormalization :
   List LilaE8NativeCompletenessRefinedFirstMissing
 canonicalLilaE8NativeCompletenessRefinedFirstMissingAfterHalfCombinedNormalization =
-  missingNativeFiniteMembershipWitnessToGeneratorClassifierCase
-  ∷ []
+  []
 
 data E8SemanticFiniteMembershipClassifierInverseObligation : Set where
   integerFiniteMembershipToPairSignClassifier :
@@ -1094,10 +1221,1365 @@ canonicalE8SemanticFiniteMembershipClassifierInverseObligations =
   ∷ combinedFiniteMembershipToIntegerOrHalfClassifierCase
   ∷ []
 
+record E8IntegerFiniteMembershipGeneratorIndexedWitness
+  (root : E8.E8RootCarrier) :
+  Set where
+  constructor integerFiniteMembershipGeneratorIndexedWitness
+  field
+    pair :
+      E8.CoordinatePair8
+
+    leftSign :
+      E8.E8Sign
+
+    rightSign :
+      E8.E8Sign
+
+    rootIsGeneratorImage :
+      root ≡
+      E8.indexedRootToHalfTritRoot
+        (E8.mkIntegerIndexedRoot pair leftSign rightSign)
+
+    indexedMembership :
+      E8.IndexedRootMember
+        (E8.mkIntegerIndexedRoot pair leftSign rightSign)
+        E8.integerIndexedRoots
+
+integerGeneratorFiniteMembershipWitness :
+  (pair : E8.CoordinatePair8) →
+  (leftSign rightSign : E8.E8Sign) →
+  E8IntegerFiniteMembershipGeneratorIndexedWitness
+    (E8.indexedRootToHalfTritRoot
+      (E8.mkIntegerIndexedRoot pair leftSign rightSign))
+integerGeneratorFiniteMembershipWitness pair leftSign rightSign =
+  integerFiniteMembershipGeneratorIndexedWitness
+    pair
+    leftSign
+    rightSign
+    refl
+    (integerGeneratorIndexedMembershipNormalization pair leftSign rightSign)
+
+record E8IntegerGeneratorMembershipWitnessTable : Set where
+  field
+    rowWitness :
+      (pair : E8.CoordinatePair8) →
+      (leftSign rightSign : E8.E8Sign) →
+      E8IntegerFiniteMembershipGeneratorIndexedWitness
+        (E8.indexedRootToHalfTritRoot
+          (E8.mkIntegerIndexedRoot pair leftSign rightSign))
+
+    rowNativeMembership :
+      (pair : E8.CoordinatePair8) →
+      (leftSign rightSign : E8.E8Sign) →
+      E8RootMember
+        (E8.indexedRootToHalfTritRoot
+          (E8.mkIntegerIndexedRoot pair leftSign rightSign))
+        E8.integerRoots
+
+    rowClassifier :
+      (pair : E8.CoordinatePair8) →
+      (leftSign rightSign : E8.E8Sign) →
+      E8IntegerTwoSparseClassifierInverse
+        (E8.indexedRootToHalfTritRoot
+          (E8.mkIntegerIndexedRoot pair leftSign rightSign))
+
+canonicalE8IntegerGeneratorMembershipWitnessTable :
+  E8IntegerGeneratorMembershipWitnessTable
+canonicalE8IntegerGeneratorMembershipWitnessTable =
+  record
+    { rowWitness =
+        integerGeneratorFiniteMembershipWitness
+    ; rowNativeMembership =
+        integerGeneratorNativeMembershipNormalization
+    ; rowClassifier =
+        λ pair leftSign rightSign →
+          integerClassifierInverseByGenerator
+            pair
+            leftSign
+            rightSign
+            refl
+    }
+
+record E8HalfFiniteMembershipGeneratorIndexedWitness
+  (root : E8.E8RootCarrier) :
+  Set where
+  constructor halfFiniteMembershipGeneratorIndexedWitness
+  field
+    signs :
+      E8.EightVec E8.E8Sign
+
+    rootIsGeneratorImage :
+      root ≡
+      E8.indexedRootToHalfTritRoot
+        (E8.signVectorToHalfIndexedRoot signs)
+
+    indexedMembership :
+      E8.IndexedRootMember
+        (E8.signVectorToHalfIndexedRoot signs)
+        E8.halfIndexedRoots
+
+data E8CombinedFiniteMembershipGeneratorIndexedWitness
+  (root : E8.E8RootCarrier) :
+  Set where
+  combinedFiniteMembershipIntegerWitness :
+    E8IntegerFiniteMembershipGeneratorIndexedWitness root →
+    E8CombinedFiniteMembershipGeneratorIndexedWitness root
+
+  combinedFiniteMembershipHalfWitness :
+    E8HalfFiniteMembershipGeneratorIndexedWitness root →
+    E8CombinedFiniteMembershipGeneratorIndexedWitness root
+
+record E8NativeFiniteMembershipWitnessToGeneratorClassifierPrimitive :
+  Set where
+  field
+    integerFiniteMembershipCarriesGeneratorIndex :
+      {root : E8.E8RootCarrier} →
+      E8SemanticNativeIntegerTwoSparseRoot root →
+      E8IntegerFiniteMembershipGeneratorIndexedWitness root
+
+    halfFiniteMembershipCarriesGeneratorIndex :
+      {root : E8.E8RootCarrier} →
+      E8SemanticNativeHalfEvenParityRoot root →
+      E8HalfFiniteMembershipGeneratorIndexedWitness root
+
+    combinedFiniteMembershipCarriesGeneratorIndex :
+      {root : E8.E8RootCarrier} →
+      E8SemanticNativeCombinedRoot root →
+      E8CombinedFiniteMembershipGeneratorIndexedWitness root
+
+data E8FiniteMembershipWitnessTableField : Set where
+  finiteMembershipWitnessRootField :
+    E8FiniteMembershipWitnessTableField
+  finiteMembershipWitnessFamilyField :
+    E8FiniteMembershipWitnessTableField
+  finiteMembershipWitnessNativeMembershipCheckField :
+    E8FiniteMembershipWitnessTableField
+  finiteMembershipWitnessGeneratorIndexField :
+    E8FiniteMembershipWitnessTableField
+  finiteMembershipWitnessIndexedImageEqualityField :
+    E8FiniteMembershipWitnessTableField
+  finiteMembershipWitnessIndexedMembershipField :
+    E8FiniteMembershipWitnessTableField
+  finiteMembershipWitnessProofField :
+    E8FiniteMembershipWitnessTableField
+
+canonicalE8FiniteMembershipWitnessTableFields :
+  List E8FiniteMembershipWitnessTableField
+canonicalE8FiniteMembershipWitnessTableFields =
+  finiteMembershipWitnessRootField
+  ∷ finiteMembershipWitnessFamilyField
+  ∷ finiteMembershipWitnessNativeMembershipCheckField
+  ∷ finiteMembershipWitnessGeneratorIndexField
+  ∷ finiteMembershipWitnessIndexedImageEqualityField
+  ∷ finiteMembershipWitnessIndexedMembershipField
+  ∷ finiteMembershipWitnessProofField
+  ∷ []
+
+record E8FiniteMembershipWitnessTableRequest : Set where
+  field
+    requestedTableFields :
+      List E8FiniteMembershipWitnessTableField
+
+    requestedTableFieldsAreCanonical :
+      requestedTableFields ≡
+      canonicalE8FiniteMembershipWitnessTableFields
+
+    rootFieldShape :
+      String
+
+    familyFieldShape :
+      String
+
+    nativeMembershipCheckFieldShape :
+      String
+
+    generatorIndexFieldShape :
+      String
+
+    indexedImageEqualityFieldShape :
+      String
+
+    indexedMembershipFieldShape :
+      String
+
+    proofFieldShape :
+      String
+
+    consumerPrimitiveShape :
+      String
+
+    requestIsNonPromoting :
+      Bool
+
+    requestIsNonPromotingIsTrue :
+      requestIsNonPromoting ≡ true
+
+canonicalE8FiniteMembershipWitnessTableRequest :
+  E8FiniteMembershipWitnessTableRequest
+canonicalE8FiniteMembershipWitnessTableRequest =
+  record
+    { requestedTableFields =
+        canonicalE8FiniteMembershipWitnessTableFields
+    ; requestedTableFieldsAreCanonical =
+        refl
+    ; rootFieldShape =
+        "root : E8.E8RootCarrier, matching the semantic finite native-list membership row"
+    ; familyFieldShape =
+        "family : integer, half, or combined; combined rows must carry the integer/half source case"
+    ; nativeMembershipCheckFieldShape =
+        "nativeMembershipCheck : memberNativeRoot root familyRoots == true; integer generator rows now carry witnesses, but arbitrary native-list membership still needs proof-relevant inversion"
+    ; generatorIndexFieldShape =
+        "generator index : integer pair/signs, half even sign vector, or combined integer/half case"
+    ; indexedImageEqualityFieldShape =
+        "rootIsGeneratorImage : root == indexedRootToHalfTritRoot(generator-indexed root)"
+    ; indexedMembershipFieldShape =
+        "indexedMembership : generator-indexed root is a member of the corresponding integer, half, or combined indexed list"
+    ; proofFieldShape =
+        "proof : proof-relevant lookup from native finite membership to the generator-indexed witness, not just a Bool membership check"
+    ; consumerPrimitiveShape =
+        "consumer primitive supplies total integer, half, and combined finite-membership-to-generator-witness functions; only integer generator-indexed rows are available here"
+    ; requestIsNonPromoting =
+        true
+    ; requestIsNonPromotingIsTrue =
+        refl
+    }
+
+integerFiniteMembershipWitnessToClassifier :
+  {root : E8.E8RootCarrier} →
+  E8IntegerFiniteMembershipGeneratorIndexedWitness root →
+  E8IntegerTwoSparseClassifierInverse root
+integerFiniteMembershipWitnessToClassifier
+  (integerFiniteMembershipGeneratorIndexedWitness
+    pair
+    leftSign
+    rightSign
+    rootIsGeneratorImage
+    indexedMembership) =
+  integerClassifierInverseByGenerator
+    pair
+    leftSign
+    rightSign
+    rootIsGeneratorImage
+
+halfFiniteMembershipWitnessToClassifier :
+  {root : E8.E8RootCarrier} →
+  E8HalfFiniteMembershipGeneratorIndexedWitness root →
+  E8HalfEvenParityClassifierInverse root
+halfFiniteMembershipWitnessToClassifier
+  (halfFiniteMembershipGeneratorIndexedWitness
+    signs
+    rootIsGeneratorImage
+    indexedMembership) =
+  halfClassifierInverseByGenerator
+    signs
+    indexedMembership
+    rootIsGeneratorImage
+
+combinedFiniteMembershipWitnessToClassifierCase :
+  {root : E8.E8RootCarrier} →
+  E8CombinedFiniteMembershipGeneratorIndexedWitness root →
+  E8CombinedClassifierCase root
+combinedFiniteMembershipWitnessToClassifierCase
+  (combinedFiniteMembershipIntegerWitness witness) =
+  combinedClassifierIntegerCase
+    (integerFiniteMembershipWitnessToClassifier witness)
+combinedFiniteMembershipWitnessToClassifierCase
+  (combinedFiniteMembershipHalfWitness witness) =
+  combinedClassifierHalfCase
+    (halfFiniteMembershipWitnessToClassifier witness)
+
+record E8IntegerIndexedRootGeneratorShape
+  (indexedRoot : E8.E8IndexedRootCarrier) :
+  Set where
+  constructor integerIndexedRootGeneratorShape
+  field
+    pair :
+      E8.CoordinatePair8
+
+    leftSign :
+      E8.E8Sign
+
+    rightSign :
+      E8.E8Sign
+
+    indexedRootIsGenerator :
+      indexedRoot ≡
+      E8.mkIntegerIndexedRoot pair leftSign rightSign
+
+record E8HalfIndexedRootGeneratorShape
+  (indexedRoot : E8.E8IndexedRootCarrier) :
+  Set where
+  constructor halfIndexedRootGeneratorShape
+  field
+    signs :
+      E8.EightVec E8.E8Sign
+
+    indexedRootIsGenerator :
+      indexedRoot ≡
+      E8.signVectorToHalfIndexedRoot signs
+
+data E8CombinedIndexedRootGeneratorShape
+  (indexedRoot : E8.E8IndexedRootCarrier) :
+  Set where
+  combinedIndexedRootIntegerShape :
+    E8IntegerIndexedRootGeneratorShape indexedRoot →
+    E8.IndexedRootMember indexedRoot E8.integerIndexedRoots →
+    E8CombinedIndexedRootGeneratorShape indexedRoot
+
+  combinedIndexedRootHalfShape :
+    E8HalfIndexedRootGeneratorShape indexedRoot →
+    E8.IndexedRootMember indexedRoot E8.halfIndexedRoots →
+    E8CombinedIndexedRootGeneratorShape indexedRoot
+
+false≢true :
+  false ≡ true →
+  ⊥
+false≢true ()
+
+true≢false :
+  true ≡ false →
+  ⊥
+true≢false ()
+
+memberIndexedRootAppendRightWhenLeftFalse :
+  (root : E8.E8IndexedRootCarrier) →
+  (left right : E8.E8IndexedRootList) →
+  E8.memberIndexedRoot root left ≡ false →
+  E8.memberIndexedRoot root (left List.++ right) ≡ true →
+  E8.memberIndexedRoot root right ≡ true
+memberIndexedRootAppendRightWhenLeftFalse root [] right leftMiss appendHit =
+  appendHit
+memberIndexedRootAppendRightWhenLeftFalse
+  root
+  (candidate ∷ left)
+  right
+  leftMiss
+  appendHit
+  with E8.decEqIndexedRoot root candidate
+... | yes _ =
+  ⊥-elim (true≢false leftMiss)
+... | no _ =
+  memberIndexedRootAppendRightWhenLeftFalse
+    root
+    left
+    right
+    leftMiss
+    appendHit
+
+integerIndexedRootGeneratorShapeForPair :
+  (indexedRoot : E8.E8IndexedRootCarrier) →
+  (pair : E8.CoordinatePair8) →
+  E8.memberIndexedRoot indexedRoot
+    (E8.integerIndexedRootsForPair pair) ≡ true →
+  E8IntegerIndexedRootGeneratorShape indexedRoot
+integerIndexedRootGeneratorShapeForPair
+  indexedRoot
+  pair
+  membershipCheck
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.negativeSign
+      E8.negativeSign)
+... | yes indexedRootIsGenerator =
+  integerIndexedRootGeneratorShape
+    pair
+    E8.negativeSign
+    E8.negativeSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.negativeSign
+      E8.positiveSign)
+... | yes indexedRootIsGenerator =
+  integerIndexedRootGeneratorShape
+    pair
+    E8.negativeSign
+    E8.positiveSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.positiveSign
+      E8.negativeSign)
+... | yes indexedRootIsGenerator =
+  integerIndexedRootGeneratorShape
+    pair
+    E8.positiveSign
+    E8.negativeSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.positiveSign
+      E8.positiveSign)
+... | yes indexedRootIsGenerator =
+  integerIndexedRootGeneratorShape
+    pair
+    E8.positiveSign
+    E8.positiveSign
+    indexedRootIsGenerator
+... | no _ =
+  ⊥-elim (false≢true membershipCheck)
+
+integerIndexedRootGeneratorShapeInPairList :
+  (indexedRoot : E8.E8IndexedRootCarrier) →
+  (pairs : List E8.CoordinatePair8) →
+  E8.memberIndexedRoot indexedRoot
+    (List.concatMap E8.integerIndexedRootsForPair pairs) ≡ true →
+  E8IntegerIndexedRootGeneratorShape indexedRoot
+integerIndexedRootGeneratorShapeInPairList indexedRoot [] ()
+integerIndexedRootGeneratorShapeInPairList
+  indexedRoot
+  (pair ∷ pairs)
+  membershipCheck
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.negativeSign
+      E8.negativeSign)
+... | yes indexedRootIsGenerator =
+  integerIndexedRootGeneratorShape
+    pair
+    E8.negativeSign
+    E8.negativeSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.negativeSign
+      E8.positiveSign)
+... | yes indexedRootIsGenerator =
+  integerIndexedRootGeneratorShape
+    pair
+    E8.negativeSign
+    E8.positiveSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.positiveSign
+      E8.negativeSign)
+... | yes indexedRootIsGenerator =
+  integerIndexedRootGeneratorShape
+    pair
+    E8.positiveSign
+    E8.negativeSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.positiveSign
+      E8.positiveSign)
+... | yes indexedRootIsGenerator =
+  integerIndexedRootGeneratorShape
+    pair
+    E8.positiveSign
+    E8.positiveSign
+    indexedRootIsGenerator
+... | no _ =
+  integerIndexedRootGeneratorShapeInPairList
+    indexedRoot
+    pairs
+    membershipCheck
+
+integerIndexedRootMemberToGeneratorShape :
+  {indexedRoot : E8.E8IndexedRootCarrier} →
+  E8.IndexedRootMember indexedRoot E8.integerIndexedRoots →
+  E8IntegerIndexedRootGeneratorShape indexedRoot
+integerIndexedRootMemberToGeneratorShape {indexedRoot}
+  (E8.memberByExecutableCheck membershipCheck) =
+  integerIndexedRootGeneratorShapeInPairList
+    indexedRoot
+    E8.allCoordinatePairs8
+    membershipCheck
+
+halfIndexedRootGeneratorShapeInSignList :
+  (indexedRoot : E8.E8IndexedRootCarrier) →
+  (signRows : List (E8.EightVec E8.E8Sign)) →
+  E8.memberIndexedRoot indexedRoot
+    (List.map E8.signVectorToHalfIndexedRoot signRows) ≡ true →
+  E8HalfIndexedRootGeneratorShape indexedRoot
+halfIndexedRootGeneratorShapeInSignList indexedRoot [] ()
+halfIndexedRootGeneratorShapeInSignList
+  indexedRoot
+  (signs ∷ signRows)
+  membershipCheck
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.signVectorToHalfIndexedRoot signs)
+... | yes indexedRootIsGenerator =
+  halfIndexedRootGeneratorShape signs indexedRootIsGenerator
+... | no _ =
+  halfIndexedRootGeneratorShapeInSignList
+    indexedRoot
+    signRows
+    membershipCheck
+
+halfIndexedRootMemberToGeneratorShape :
+  {indexedRoot : E8.E8IndexedRootCarrier} →
+  E8.IndexedRootMember indexedRoot E8.halfIndexedRoots →
+  E8HalfIndexedRootGeneratorShape indexedRoot
+halfIndexedRootMemberToGeneratorShape {indexedRoot}
+  (E8.memberByExecutableCheck membershipCheck) =
+  halfIndexedRootGeneratorShapeInSignList
+    indexedRoot
+    (E8.evenSignVectors 8)
+    membershipCheck
+
+combinedIndexedRootIntegerShapeByGenerator :
+  {indexedRoot : E8.E8IndexedRootCarrier} →
+  (pair : E8.CoordinatePair8) →
+  (leftSign rightSign : E8.E8Sign) →
+  indexedRoot ≡ E8.mkIntegerIndexedRoot pair leftSign rightSign →
+  E8CombinedIndexedRootGeneratorShape indexedRoot
+combinedIndexedRootIntegerShapeByGenerator
+  pair
+  leftSign
+  rightSign
+  indexedRootIsGenerator =
+  combinedIndexedRootIntegerShape
+    (integerIndexedRootGeneratorShape
+      pair
+      leftSign
+      rightSign
+      indexedRootIsGenerator)
+    (subst
+      (λ candidate →
+        E8.IndexedRootMember candidate E8.integerIndexedRoots)
+      (sym indexedRootIsGenerator)
+      (integerGeneratorIndexedMembershipNormalization
+        pair
+        leftSign
+        rightSign))
+
+combinedIndexedRootGeneratorShapeInIntegerPairList :
+  (indexedRoot : E8.E8IndexedRootCarrier) →
+  (pairs : List E8.CoordinatePair8) →
+  E8.memberIndexedRoot indexedRoot
+    (List.concatMap E8.integerIndexedRootsForPair pairs
+     List.++ E8.halfIndexedRoots) ≡ true →
+  E8CombinedIndexedRootGeneratorShape indexedRoot
+combinedIndexedRootGeneratorShapeInIntegerPairList indexedRoot [] membershipCheck =
+  combinedIndexedRootHalfShape
+    (halfIndexedRootMemberToGeneratorShape
+      (E8.memberByExecutableCheck membershipCheck))
+    (E8.memberByExecutableCheck membershipCheck)
+combinedIndexedRootGeneratorShapeInIntegerPairList
+  indexedRoot
+  (pair ∷ pairs)
+  membershipCheck
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.negativeSign
+      E8.negativeSign)
+... | yes indexedRootIsGenerator =
+  combinedIndexedRootIntegerShapeByGenerator
+    pair
+    E8.negativeSign
+    E8.negativeSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.negativeSign
+      E8.positiveSign)
+... | yes indexedRootIsGenerator =
+  combinedIndexedRootIntegerShapeByGenerator
+    pair
+    E8.negativeSign
+    E8.positiveSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.positiveSign
+      E8.negativeSign)
+... | yes indexedRootIsGenerator =
+  combinedIndexedRootIntegerShapeByGenerator
+    pair
+    E8.positiveSign
+    E8.negativeSign
+    indexedRootIsGenerator
+... | no _
+  with E8.decEqIndexedRoot
+    indexedRoot
+    (E8.mkIntegerIndexedRoot
+      pair
+      E8.positiveSign
+      E8.positiveSign)
+... | yes indexedRootIsGenerator =
+  combinedIndexedRootIntegerShapeByGenerator
+    pair
+    E8.positiveSign
+    E8.positiveSign
+    indexedRootIsGenerator
+... | no _ =
+  combinedIndexedRootGeneratorShapeInIntegerPairList
+    indexedRoot
+    pairs
+    membershipCheck
+
+combinedIndexedRootMemberToGeneratorShape :
+  {indexedRoot : E8.E8IndexedRootCarrier} →
+  E8.IndexedRootMember indexedRoot E8.combinedIndexedRoots →
+  E8CombinedIndexedRootGeneratorShape indexedRoot
+combinedIndexedRootMemberToGeneratorShape {indexedRoot}
+  (E8.memberByExecutableCheck membershipCheck) =
+  combinedIndexedRootGeneratorShapeInIntegerPairList
+    indexedRoot
+    E8.allCoordinatePairs8
+    membershipCheck
+
+record E8IndexedRootGeneratorShapeInversionBridge : Set where
+  field
+    integerShapeInversion :
+      {indexedRoot : E8.E8IndexedRootCarrier} →
+      E8.IndexedRootMember indexedRoot E8.integerIndexedRoots →
+      E8IntegerIndexedRootGeneratorShape indexedRoot
+
+    halfShapeInversion :
+      {indexedRoot : E8.E8IndexedRootCarrier} →
+      E8.IndexedRootMember indexedRoot E8.halfIndexedRoots →
+      E8HalfIndexedRootGeneratorShape indexedRoot
+
+    combinedShapeInversion :
+      {indexedRoot : E8.E8IndexedRootCarrier} →
+      E8.IndexedRootMember indexedRoot E8.combinedIndexedRoots →
+      E8CombinedIndexedRootGeneratorShape indexedRoot
+
+indexedRootGeneratorShapeInversionBridge :
+  E8IndexedRootGeneratorShapeInversionBridge
+indexedRootGeneratorShapeInversionBridge =
+  record
+    { integerShapeInversion =
+        integerIndexedRootMemberToGeneratorShape
+    ; halfShapeInversion =
+        halfIndexedRootMemberToGeneratorShape
+    ; combinedShapeInversion =
+        combinedIndexedRootMemberToGeneratorShape
+    }
+
+integerIndexedImageLookupToGeneratorWitness :
+  {root : E8.E8RootCarrier} →
+  (lookup : E8IndexedImageLookup root E8.integerIndexedRoots) →
+  E8IntegerIndexedRootGeneratorShape
+    (E8IndexedImageLookup.indexedRoot lookup) →
+  E8IntegerFiniteMembershipGeneratorIndexedWitness root
+integerIndexedImageLookupToGeneratorWitness
+  (indexedImageLookup indexedRoot rootIsIndexedImage indexedMembership)
+  (integerIndexedRootGeneratorShape
+    pair
+    leftSign
+    rightSign
+    indexedRootIsGenerator) =
+  integerFiniteMembershipGeneratorIndexedWitness
+    pair
+    leftSign
+    rightSign
+    (trans
+      rootIsIndexedImage
+      (cong E8.indexedRootToHalfTritRoot indexedRootIsGenerator))
+    (subst
+      (λ candidate →
+        E8.IndexedRootMember candidate E8.integerIndexedRoots)
+      indexedRootIsGenerator
+      indexedMembership)
+
+halfIndexedImageLookupToGeneratorWitness :
+  {root : E8.E8RootCarrier} →
+  (lookup : E8IndexedImageLookup root E8.halfIndexedRoots) →
+  E8HalfIndexedRootGeneratorShape
+    (E8IndexedImageLookup.indexedRoot lookup) →
+  E8HalfFiniteMembershipGeneratorIndexedWitness root
+halfIndexedImageLookupToGeneratorWitness
+  (indexedImageLookup indexedRoot rootIsIndexedImage indexedMembership)
+  (halfIndexedRootGeneratorShape signs indexedRootIsGenerator) =
+  halfFiniteMembershipGeneratorIndexedWitness
+    signs
+    (trans
+      rootIsIndexedImage
+      (cong E8.indexedRootToHalfTritRoot indexedRootIsGenerator))
+    (subst
+      (λ candidate →
+        E8.IndexedRootMember candidate E8.halfIndexedRoots)
+      indexedRootIsGenerator
+      indexedMembership)
+
+combinedIndexedImageLookupToGeneratorWitness :
+  {root : E8.E8RootCarrier} →
+  (lookup : E8IndexedImageLookup root E8.combinedIndexedRoots) →
+  E8CombinedIndexedRootGeneratorShape
+    (E8IndexedImageLookup.indexedRoot lookup) →
+  E8CombinedFiniteMembershipGeneratorIndexedWitness root
+combinedIndexedImageLookupToGeneratorWitness
+  (indexedImageLookup indexedRoot rootIsIndexedImage indexedMembership)
+  (combinedIndexedRootIntegerShape integerShape integerMembership) =
+  combinedFiniteMembershipIntegerWitness
+    (integerIndexedImageLookupToGeneratorWitness
+      (indexedImageLookup indexedRoot rootIsIndexedImage integerMembership)
+      integerShape)
+combinedIndexedImageLookupToGeneratorWitness
+  (indexedImageLookup indexedRoot rootIsIndexedImage indexedMembership)
+  (combinedIndexedRootHalfShape halfShape halfMembership) =
+  combinedFiniteMembershipHalfWitness
+    (halfIndexedImageLookupToGeneratorWitness
+      (indexedImageLookup indexedRoot rootIsIndexedImage halfMembership)
+      halfShape)
+
+record E8IndexedImageLookupToGeneratorWitnessConsumers : Set where
+  field
+    integerLookupConsumer :
+      {root : E8.E8RootCarrier} →
+      (lookup : E8IndexedImageLookup root E8.integerIndexedRoots) →
+      E8IntegerIndexedRootGeneratorShape
+        (E8IndexedImageLookup.indexedRoot lookup) →
+      E8IntegerFiniteMembershipGeneratorIndexedWitness root
+
+    halfLookupConsumer :
+      {root : E8.E8RootCarrier} →
+      (lookup : E8IndexedImageLookup root E8.halfIndexedRoots) →
+      E8HalfIndexedRootGeneratorShape
+        (E8IndexedImageLookup.indexedRoot lookup) →
+      E8HalfFiniteMembershipGeneratorIndexedWitness root
+
+    combinedLookupConsumer :
+      {root : E8.E8RootCarrier} →
+      (lookup : E8IndexedImageLookup root E8.combinedIndexedRoots) →
+      E8CombinedIndexedRootGeneratorShape
+        (E8IndexedImageLookup.indexedRoot lookup) →
+      E8CombinedFiniteMembershipGeneratorIndexedWitness root
+
+indexedImageLookupToGeneratorWitnessConsumers :
+  E8IndexedImageLookupToGeneratorWitnessConsumers
+indexedImageLookupToGeneratorWitnessConsumers =
+  record
+    { integerLookupConsumer =
+        integerIndexedImageLookupToGeneratorWitness
+    ; halfLookupConsumer =
+        halfIndexedImageLookupToGeneratorWitness
+    ; combinedLookupConsumer =
+        combinedIndexedImageLookupToGeneratorWitness
+    }
+
+integerNativeFiniteMembershipToGeneratorWitness :
+  {root : E8.E8RootCarrier} →
+  E8SemanticNativeIntegerTwoSparseRoot root →
+  E8IntegerFiniteMembershipGeneratorIndexedWitness root
+integerNativeFiniteMembershipToGeneratorWitness membership
+  with integerNativeBoolMembershipToIndexedImageLookup
+    (nativeFiniteRootMemberToBoolMembership membership)
+... | lookup =
+  integerIndexedImageLookupToGeneratorWitness
+    lookup
+    (integerIndexedRootMemberToGeneratorShape
+      (E8IndexedImageLookup.indexedMembership lookup))
+
+halfNativeFiniteMembershipToGeneratorWitness :
+  {root : E8.E8RootCarrier} →
+  E8SemanticNativeHalfEvenParityRoot root →
+  E8HalfFiniteMembershipGeneratorIndexedWitness root
+halfNativeFiniteMembershipToGeneratorWitness membership
+  with halfNativeBoolMembershipToIndexedImageLookup
+    (nativeFiniteRootMemberToBoolMembership membership)
+... | lookup =
+  halfIndexedImageLookupToGeneratorWitness
+    lookup
+    (halfIndexedRootMemberToGeneratorShape
+      (E8IndexedImageLookup.indexedMembership lookup))
+
+combinedNativeFiniteMembershipToGeneratorWitness :
+  {root : E8.E8RootCarrier} →
+  E8SemanticNativeCombinedRoot root →
+  E8CombinedFiniteMembershipGeneratorIndexedWitness root
+combinedNativeFiniteMembershipToGeneratorWitness membership
+  with combinedNativeBoolMembershipToIndexedImageLookup
+    (nativeFiniteRootMemberToBoolMembership membership)
+... | lookup =
+  combinedIndexedImageLookupToGeneratorWitness
+    lookup
+    (combinedIndexedRootMemberToGeneratorShape
+      (E8IndexedImageLookup.indexedMembership lookup))
+
+record E8LocalSemanticNativeCompletenessSurface : Set where
+  field
+    integerCompletenessWitness :
+      {root : E8.E8RootCarrier} →
+      E8SemanticNativeIntegerTwoSparseRoot root →
+      E8IntegerFiniteMembershipGeneratorIndexedWitness root
+
+    halfCompletenessWitness :
+      {root : E8.E8RootCarrier} →
+      E8SemanticNativeHalfEvenParityRoot root →
+      E8HalfFiniteMembershipGeneratorIndexedWitness root
+
+    combinedCompletenessWitness :
+      {root : E8.E8RootCarrier} →
+      E8SemanticNativeCombinedRoot root →
+      E8CombinedFiniteMembershipGeneratorIndexedWitness root
+
+    integerHalfCombinedCompletenessClearedHere :
+      Bool
+
+    integerHalfCombinedCompletenessClearedHereIsTrue :
+      integerHalfCombinedCompletenessClearedHere ≡ true
+
+    promotesToUpstreamE8RootEnumerationComplete :
+      Bool
+
+    promotesToUpstreamE8RootEnumerationCompleteIsFalse :
+      promotesToUpstreamE8RootEnumerationComplete ≡ false
+
+localSemanticNativeCompletenessSurface :
+  E8LocalSemanticNativeCompletenessSurface
+localSemanticNativeCompletenessSurface =
+  record
+    { integerCompletenessWitness =
+        integerNativeFiniteMembershipToGeneratorWitness
+    ; halfCompletenessWitness =
+        halfNativeFiniteMembershipToGeneratorWitness
+    ; combinedCompletenessWitness =
+        combinedNativeFiniteMembershipToGeneratorWitness
+    ; integerHalfCombinedCompletenessClearedHere =
+        true
+    ; integerHalfCombinedCompletenessClearedHereIsTrue =
+        refl
+    ; promotesToUpstreamE8RootEnumerationComplete =
+        false
+    ; promotesToUpstreamE8RootEnumerationCompleteIsFalse =
+        refl
+    }
+
+data E8NativeCompletenessPromotionBlocker : Set where
+  missingPromotionFromLocalSemanticFiniteCompletenessToUpstreamCompleteReceipt :
+    E8NativeCompletenessPromotionBlocker
+
+canonicalE8NativeCompletenessPromotionBlockers :
+  List E8NativeCompletenessPromotionBlocker
+canonicalE8NativeCompletenessPromotionBlockers =
+  missingPromotionFromLocalSemanticFiniteCompletenessToUpstreamCompleteReceipt
+  ∷ []
+
+data E8UpstreamCompleteReceiptConstructorBoundary : Set where
+  upstreamE8RootEnumerationCompleteHasNoConstructors :
+    E8UpstreamCompleteReceiptConstructorBoundary
+
+record E8UpstreamCompleteReceiptPromotionAudit : Setω where
+  field
+    upstreamCompleteReceiptTypeName :
+      String
+
+    upstreamCompleteReceiptConstructorBoundary :
+      E8UpstreamCompleteReceiptConstructorBoundary
+
+    upstreamCompleteReceiptEliminator :
+      E8.E8RootEnumerationComplete →
+      ⊥
+
+    upstreamCanonicalObstruction :
+      E8.E8RootEnumerationObstruction
+
+    upstreamRequiredConcreteProofObligations :
+      List E8.E8RootEnumerationProofObligation
+
+    upstreamRequiredConcreteProofObligationsAreCanonical :
+      upstreamRequiredConcreteProofObligations
+      ≡
+      E8.canonicalE8RootEnumerationProofObligations
+
+    upstreamRequiredEnumerationObligations :
+      List E8.E8RootEnumerationObligation
+
+    upstreamRequiredEnumerationObligationsAreCanonical :
+      upstreamRequiredEnumerationObligations
+      ≡
+      E8.canonicalE8RootEnumerationObligations
+
+    upstreamReceiptCompletedHere :
+      Bool
+
+    upstreamReceiptCompletedHereIsFalse :
+      upstreamReceiptCompletedHere ≡ false
+
+    localSemanticCompletenessReceipt :
+      E8LocalSemanticNativeCompletenessSurface
+
+    localSemanticCompletenessClearsFiniteIntegerHalfCombined :
+      E8LocalSemanticNativeCompletenessSurface.integerHalfCombinedCompletenessClearedHere
+        localSemanticCompletenessReceipt
+      ≡
+      true
+
+    localSemanticCompletenessIsNotUpstreamConstructor :
+      Bool
+
+    localSemanticCompletenessIsNotUpstreamConstructorIsTrue :
+      localSemanticCompletenessIsNotUpstreamConstructor ≡ true
+
+    exactMissingPromotionBlocker :
+      E8NativeCompletenessPromotionBlocker
+
+    exactMissingPromotionBlockerIsCanonical :
+      exactMissingPromotionBlocker
+      ≡
+      missingPromotionFromLocalSemanticFiniteCompletenessToUpstreamCompleteReceipt
+
+    promotionImplementedHere :
+      Bool
+
+    promotionImplementedHereIsFalse :
+      promotionImplementedHere ≡ false
+
+    promotionAuditShape :
+      String
+
+canonicalE8UpstreamCompleteReceiptPromotionAudit :
+  E8UpstreamCompleteReceiptPromotionAudit
+canonicalE8UpstreamCompleteReceiptPromotionAudit =
+  record
+    { upstreamCompleteReceiptTypeName =
+        "DASHI.Algebra.Trit.E8RootEnumeration.E8RootEnumerationComplete"
+    ; upstreamCompleteReceiptConstructorBoundary =
+        upstreamE8RootEnumerationCompleteHasNoConstructors
+    ; upstreamCompleteReceiptEliminator =
+        E8.e8RootEnumerationCompleteImpossibleHere
+    ; upstreamCanonicalObstruction =
+        E8.canonicalE8RootEnumerationObstruction
+    ; upstreamRequiredConcreteProofObligations =
+        E8.E8RootEnumerationObstruction.remainingConcreteProofObligations
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamRequiredConcreteProofObligationsAreCanonical =
+        E8.E8RootEnumerationObstruction.remainingConcreteProofObligationsAreCanonical
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamRequiredEnumerationObligations =
+        E8.E8RootEnumerationObstruction.remainingEnumerationObligations
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamRequiredEnumerationObligationsAreCanonical =
+        E8.E8RootEnumerationObstruction.remainingEnumerationObligationsAreCanonical
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamReceiptCompletedHere =
+        E8.E8RootEnumerationObstruction.receiptCompletedHere
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamReceiptCompletedHereIsFalse =
+        E8.E8RootEnumerationObstruction.receiptCompletedHereIsFalse
+          E8.canonicalE8RootEnumerationObstruction
+    ; localSemanticCompletenessReceipt =
+        localSemanticNativeCompletenessSurface
+    ; localSemanticCompletenessClearsFiniteIntegerHalfCombined =
+        refl
+    ; localSemanticCompletenessIsNotUpstreamConstructor =
+        true
+    ; localSemanticCompletenessIsNotUpstreamConstructorIsTrue =
+        refl
+    ; exactMissingPromotionBlocker =
+        missingPromotionFromLocalSemanticFiniteCompletenessToUpstreamCompleteReceipt
+    ; exactMissingPromotionBlockerIsCanonical =
+        refl
+    ; promotionImplementedHere =
+        false
+    ; promotionImplementedHereIsFalse =
+        refl
+    ; promotionAuditShape =
+        "The local semantic finite completeness surface is available, but upstream E8RootEnumerationComplete has no constructors here; promotion remains blocked by canonical upstream concrete proof obligations and enumeration obligations."
+    }
+
+record E8LocalSemanticCompletenessUpstreamPromotionBoundary : Setω where
+  field
+    localSemanticCompletenessReceipt :
+      E8LocalSemanticNativeCompletenessSurface
+
+    localSemanticCompletenessClearsIntegerHalfCombined :
+      E8LocalSemanticNativeCompletenessSurface.integerHalfCombinedCompletenessClearedHere
+        localSemanticCompletenessReceipt
+      ≡
+      true
+
+    localSemanticCompletenessDoesNotPromoteUpstream :
+      E8LocalSemanticNativeCompletenessSurface.promotesToUpstreamE8RootEnumerationComplete
+        localSemanticCompletenessReceipt
+      ≡
+      false
+
+    upstreamObstruction :
+      E8.E8RootEnumerationObstruction
+
+    upstreamRemainingConcreteProofObligations :
+      List E8.E8RootEnumerationProofObligation
+
+    upstreamRemainingConcreteProofObligationsAreCanonical :
+      upstreamRemainingConcreteProofObligations
+      ≡
+      E8.canonicalE8RootEnumerationProofObligations
+
+    upstreamRemainingEnumerationObligations :
+      List E8.E8RootEnumerationObligation
+
+    upstreamRemainingEnumerationObligationsAreCanonical :
+      upstreamRemainingEnumerationObligations
+      ≡
+      E8.canonicalE8RootEnumerationObligations
+
+    upstreamReceiptCompletedHere :
+      Bool
+
+    upstreamReceiptCompletedHereIsFalse :
+      upstreamReceiptCompletedHere ≡ false
+
+    upstreamCompleteReceiptBlocked :
+      E8.E8RootEnumerationComplete →
+      ⊥
+
+    exactPromotionBlockers :
+      List E8NativeCompletenessPromotionBlocker
+
+    exactPromotionBlockersAreCanonical :
+      exactPromotionBlockers
+      ≡
+      canonicalE8NativeCompletenessPromotionBlockers
+
+    upstreamCompleteReceiptPromotionAudit :
+      E8UpstreamCompleteReceiptPromotionAudit
+
+    upstreamCompleteReceiptPromotionAuditDoesNotPromote :
+      E8UpstreamCompleteReceiptPromotionAudit.promotionImplementedHere
+        upstreamCompleteReceiptPromotionAudit
+      ≡
+      false
+
+    promotionToUpstreamCompleteReceiptImplemented :
+      Bool
+
+    promotionToUpstreamCompleteReceiptImplementedIsFalse :
+      promotionToUpstreamCompleteReceiptImplemented ≡ false
+
+    promotionBoundaryShape :
+      String
+
+localSemanticCompletenessUpstreamPromotionBoundary :
+  E8LocalSemanticCompletenessUpstreamPromotionBoundary
+localSemanticCompletenessUpstreamPromotionBoundary =
+  record
+    { localSemanticCompletenessReceipt =
+        localSemanticNativeCompletenessSurface
+    ; localSemanticCompletenessClearsIntegerHalfCombined =
+        refl
+    ; localSemanticCompletenessDoesNotPromoteUpstream =
+        refl
+    ; upstreamObstruction =
+        E8.canonicalE8RootEnumerationObstruction
+    ; upstreamRemainingConcreteProofObligations =
+        E8.E8RootEnumerationObstruction.remainingConcreteProofObligations
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamRemainingConcreteProofObligationsAreCanonical =
+        E8.E8RootEnumerationObstruction.remainingConcreteProofObligationsAreCanonical
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamRemainingEnumerationObligations =
+        E8.E8RootEnumerationObstruction.remainingEnumerationObligations
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamRemainingEnumerationObligationsAreCanonical =
+        E8.E8RootEnumerationObstruction.remainingEnumerationObligationsAreCanonical
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamReceiptCompletedHere =
+        E8.E8RootEnumerationObstruction.receiptCompletedHere
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamReceiptCompletedHereIsFalse =
+        E8.E8RootEnumerationObstruction.receiptCompletedHereIsFalse
+          E8.canonicalE8RootEnumerationObstruction
+    ; upstreamCompleteReceiptBlocked =
+        E8.E8RootEnumerationObstruction.completeReceiptBlocked
+          E8.canonicalE8RootEnumerationObstruction
+    ; exactPromotionBlockers =
+        canonicalE8NativeCompletenessPromotionBlockers
+    ; exactPromotionBlockersAreCanonical =
+        refl
+    ; upstreamCompleteReceiptPromotionAudit =
+        canonicalE8UpstreamCompleteReceiptPromotionAudit
+    ; upstreamCompleteReceiptPromotionAuditDoesNotPromote =
+        refl
+    ; promotionToUpstreamCompleteReceiptImplemented =
+        false
+    ; promotionToUpstreamCompleteReceiptImplementedIsFalse =
+        refl
+    ; promotionBoundaryShape =
+        "Local semantic finite completeness is wired to the upstream obstruction; promotion is blocked because E8RootEnumerationComplete has no constructor and upstream remainingConcreteProofObligations/remainingEnumerationObligations remain canonical."
+    }
+
+nativeFiniteMembershipWitnessToGeneratorClassifierPrimitive :
+  E8NativeFiniteMembershipWitnessToGeneratorClassifierPrimitive
+nativeFiniteMembershipWitnessToGeneratorClassifierPrimitive =
+  record
+    { integerFiniteMembershipCarriesGeneratorIndex =
+        integerNativeFiniteMembershipToGeneratorWitness
+    ; halfFiniteMembershipCarriesGeneratorIndex =
+        halfNativeFiniteMembershipToGeneratorWitness
+    ; combinedFiniteMembershipCarriesGeneratorIndex =
+        combinedNativeFiniteMembershipToGeneratorWitness
+    }
+
+data E8NativeFiniteMembershipWitnessPrimitiveBlocker : Set where
+  missingIntegerNativeBoolMembershipToIndexedGeneratorReflection :
+    E8NativeFiniteMembershipWitnessPrimitiveBlocker
+  missingNativeBoolMembershipToProofRelevantIndexedWitnessConversion :
+    E8NativeFiniteMembershipWitnessPrimitiveBlocker
+  missingIntegerNativeMembershipLookupTableTotalityForArbitraryNativeMembers :
+    E8NativeFiniteMembershipWitnessPrimitiveBlocker
+  missingHalfNativeMembershipLookupTable :
+    E8NativeFiniteMembershipWitnessPrimitiveBlocker
+  missingCombinedNativeMembershipLookupTable :
+    E8NativeFiniteMembershipWitnessPrimitiveBlocker
+  missingNativeRootEqualityReflectsIndexedGeneratorImage :
+    E8NativeFiniteMembershipWitnessPrimitiveBlocker
+  missingProofRelevantLookupOverExecutableBoolMembership :
+    E8NativeFiniteMembershipWitnessPrimitiveBlocker
+  missingIndexedRootGeneratorShapeInversion :
+    E8NativeFiniteMembershipWitnessPrimitiveBlocker
+
+canonicalE8NativeFiniteMembershipWitnessPrimitiveBlockers :
+  List E8NativeFiniteMembershipWitnessPrimitiveBlocker
+canonicalE8NativeFiniteMembershipWitnessPrimitiveBlockers =
+  []
+
+canonicalE8NativeFiniteMembershipWitnessPrimitiveBlockersBeforeIntegerLookupNarrowing :
+  List E8NativeFiniteMembershipWitnessPrimitiveBlocker
+canonicalE8NativeFiniteMembershipWitnessPrimitiveBlockersBeforeIntegerLookupNarrowing =
+  []
+
+data E8IntegerNativeTotalLookupRequiredPrimitive : Set where
+  integerNativeBoolMembershipReflectsIndexedGeneratorImage :
+    E8IntegerNativeTotalLookupRequiredPrimitive
+  integerNativeRootEqualityReflectsCoordinatePairAndSigns :
+    E8IntegerNativeTotalLookupRequiredPrimitive
+  integerGeneratorIndexedMemberSelectsWitnessTableRow :
+    E8IntegerNativeTotalLookupRequiredPrimitive
+
+canonicalE8IntegerNativeTotalLookupRequiredPrimitives :
+  List E8IntegerNativeTotalLookupRequiredPrimitive
+canonicalE8IntegerNativeTotalLookupRequiredPrimitives =
+  integerNativeBoolMembershipReflectsIndexedGeneratorImage
+  ∷ integerNativeRootEqualityReflectsCoordinatePairAndSigns
+  ∷ integerGeneratorIndexedMemberSelectsWitnessTableRow
+  ∷ []
+
+record E8IntegerNativeMembershipTotalLookupRequest : Set where
+  field
+    availableIntegerWitnessTable :
+      E8IntegerGeneratorMembershipWitnessTable
+
+    requiredPrimitives :
+      List E8IntegerNativeTotalLookupRequiredPrimitive
+
+    requiredPrimitivesAreCanonical :
+      requiredPrimitives ≡
+      canonicalE8IntegerNativeTotalLookupRequiredPrimitives
+
+    currentNativeMembershipShape :
+      String
+
+    requestedIndexedReflectionShape :
+      String
+
+    requestedPairSignDecompositionShape :
+      String
+
+    requestedTotalLookupShape :
+      String
+
+    currentNativeMembershipCarriesPairSignData :
+      Bool
+
+    currentNativeMembershipCarriesPairSignDataIsFalse :
+      currentNativeMembershipCarriesPairSignData ≡ false
+
+    totalLookupImplementedHere :
+      Bool
+
+    totalLookupImplementedHereIsTrue :
+      totalLookupImplementedHere ≡ true
+
+    indexedImageLookupConsumerAvailable :
+      Bool
+
+    indexedImageLookupConsumerAvailableIsTrue :
+      indexedImageLookupConsumerAvailable ≡ true
+
+    remainingPrimitiveBlockers :
+      List E8NativeFiniteMembershipWitnessPrimitiveBlocker
+
+canonicalE8IntegerNativeMembershipTotalLookupRequest :
+  E8IntegerNativeMembershipTotalLookupRequest
+canonicalE8IntegerNativeMembershipTotalLookupRequest =
+  record
+    { availableIntegerWitnessTable =
+        canonicalE8IntegerGeneratorMembershipWitnessTable
+    ; requiredPrimitives =
+        canonicalE8IntegerNativeTotalLookupRequiredPrimitives
+    ; requiredPrimitivesAreCanonical =
+        refl
+    ; currentNativeMembershipShape =
+        "E8SemanticNativeIntegerTwoSparseRoot root = nativeMemberByExecutableCheck (memberNativeRoot root E8.integerRoots == true); it carries only the Bool equality proof"
+    ; requestedIndexedReflectionShape =
+        "{root : E8.E8RootCarrier} -> memberNativeRoot root E8.integerRoots == true -> Sigma indexedRoot . root == E8.indexedRootToHalfTritRoot indexedRoot x E8.IndexedRootMember indexedRoot E8.integerIndexedRoots"
+    ; requestedPairSignDecompositionShape =
+        "indexedRoot : E8.E8IndexedRootCarrier -> E8.IndexedRootMember indexedRoot E8.integerIndexedRoots -> Sigma pair leftSign rightSign . indexedRoot == E8.mkIntegerIndexedRoot pair leftSign rightSign"
+    ; requestedTotalLookupShape =
+        "{root : E8.E8RootCarrier} -> E8SemanticNativeIntegerTwoSparseRoot root -> E8IntegerFiniteMembershipGeneratorIndexedWitness root"
+    ; currentNativeMembershipCarriesPairSignData =
+        false
+    ; currentNativeMembershipCarriesPairSignDataIsFalse =
+        refl
+    ; totalLookupImplementedHere =
+        true
+    ; totalLookupImplementedHereIsTrue =
+        refl
+    ; indexedImageLookupConsumerAvailable =
+        true
+    ; indexedImageLookupConsumerAvailableIsTrue =
+        refl
+    ; remainingPrimitiveBlockers =
+        canonicalE8NativeFiniteMembershipWitnessPrimitiveBlockers
+    }
+
+data E8NativeBoolMembershipReflectionTarget : Set where
+  nativeBoolIntegerMembershipToIntegerIndexedWitness :
+    E8NativeBoolMembershipReflectionTarget
+  nativeBoolHalfMembershipToHalfIndexedWitness :
+    E8NativeBoolMembershipReflectionTarget
+  nativeBoolCombinedMembershipToCombinedIndexedWitness :
+    E8NativeBoolMembershipReflectionTarget
+
+canonicalE8NativeBoolMembershipReflectionTargets :
+  List E8NativeBoolMembershipReflectionTarget
+canonicalE8NativeBoolMembershipReflectionTargets =
+  nativeBoolIntegerMembershipToIntegerIndexedWitness
+  ∷ nativeBoolHalfMembershipToHalfIndexedWitness
+  ∷ nativeBoolCombinedMembershipToCombinedIndexedWitness
+  ∷ []
+
+record E8NativeBoolMembershipToIndexedWitnessRequest : Set where
+  field
+    requestedTargets :
+      List E8NativeBoolMembershipReflectionTarget
+
+    requestedTargetsAreCanonical :
+      requestedTargets ≡
+      canonicalE8NativeBoolMembershipReflectionTargets
+
+    currentBoolMembershipShape :
+      String
+
+    implementedBoolToFiniteMembershipReflectionShape :
+      String
+
+    requestedIntegerWitnessConversionShape :
+      String
+
+    requestedHalfWitnessConversionShape :
+      String
+
+    requestedCombinedWitnessConversionShape :
+      String
+
+    requiredLookupApiShape :
+      String
+
+    exactMissingIndexedLookupBridgeShape :
+      String
+
+    concreteLookupOrIndexApiFoundHere :
+      Bool
+
+    concreteLookupOrIndexApiFoundHereIsTrue :
+      concreteLookupOrIndexApiFoundHere ≡ true
+
+    reflectionImplementedHere :
+      Bool
+
+    reflectionImplementedHereIsTrue :
+      reflectionImplementedHere ≡ true
+
+    indexedImageLookupBridgeImplementedHere :
+      Bool
+
+    indexedImageLookupBridgeImplementedHereIsTrue :
+      indexedImageLookupBridgeImplementedHere ≡ true
+
+    indexedImageLookupToGeneratorWitnessConsumerImplementedHere :
+      Bool
+
+    indexedImageLookupToGeneratorWitnessConsumerImplementedHereIsTrue :
+      indexedImageLookupToGeneratorWitnessConsumerImplementedHere ≡ true
+
+    remainingPrimitiveBlockers :
+      List E8NativeFiniteMembershipWitnessPrimitiveBlocker
+
+canonicalE8NativeBoolMembershipToIndexedWitnessRequest :
+  E8NativeBoolMembershipToIndexedWitnessRequest
+canonicalE8NativeBoolMembershipToIndexedWitnessRequest =
+  record
+    { requestedTargets =
+        canonicalE8NativeBoolMembershipReflectionTargets
+    ; requestedTargetsAreCanonical =
+        refl
+    ; currentBoolMembershipShape =
+        "{root : E8.E8RootCarrier} -> memberNativeRoot root roots == true; this only states executable native-list membership"
+    ; implementedBoolToFiniteMembershipReflectionShape =
+        "{root : E8.E8RootCarrier} {roots : E8.E8RootList} -> memberNativeRoot root roots == true -> E8NativeFiniteRootMember root roots; indexed-image lookup plus generator-shape inversion now carries integer, half, and combined generator rows"
+    ; requestedIntegerWitnessConversionShape =
+        "{root : E8.E8RootCarrier} -> memberNativeRoot root E8.integerRoots == true -> E8IntegerFiniteMembershipGeneratorIndexedWitness root"
+    ; requestedHalfWitnessConversionShape =
+        "{root : E8.E8RootCarrier} -> memberNativeRoot root E8.halfRoots == true -> E8HalfFiniteMembershipGeneratorIndexedWitness root"
+    ; requestedCombinedWitnessConversionShape =
+        "{root : E8.E8RootCarrier} -> memberNativeRoot root E8.combinedRoots == true -> E8CombinedFiniteMembershipGeneratorIndexedWitness root"
+    ; requiredLookupApiShape =
+        "A proof-relevant finite-list lookup/index API that returns the matching indexed root, root == indexedRootToHalfTritRoot indexedRoot, and IndexedRootMember indexedRoot familyIndexedRoots"
+    ; exactMissingIndexedLookupBridgeShape =
+        "{root : E8.E8RootCarrier} {indexedRoots : E8.E8IndexedRootList} -> memberNativeRoot root (indexedImage indexedRoots) == true -> Sigma indexedRoot . root == E8.indexedRootToHalfTritRoot indexedRoot x E8.IndexedRootMember indexedRoot indexedRoots; specialized consumers needed for integerIndexedRoots, halfIndexedRoots, and combinedIndexedRoots"
+    ; concreteLookupOrIndexApiFoundHere =
+        true
+    ; concreteLookupOrIndexApiFoundHereIsTrue =
+        refl
+    ; reflectionImplementedHere =
+        true
+    ; reflectionImplementedHereIsTrue =
+        refl
+    ; indexedImageLookupBridgeImplementedHere =
+        true
+    ; indexedImageLookupBridgeImplementedHereIsTrue =
+        refl
+    ; indexedImageLookupToGeneratorWitnessConsumerImplementedHere =
+        true
+    ; indexedImageLookupToGeneratorWitnessConsumerImplementedHereIsTrue =
+        refl
+    ; remainingPrimitiveBlockers =
+        canonicalE8NativeFiniteMembershipWitnessPrimitiveBlockers
+    }
+
 data E8SemanticFiniteMembershipToGeneratorClassifierEquivalenceNarrowing :
   Set where
   semanticFiniteMembershipEquivalenceNarrowedToWitnessCarryingInverse :
     List E8SemanticFiniteMembershipClassifierInverseObligation →
+    List E8NativeFiniteMembershipWitnessPrimitiveBlocker →
     E8SemanticFiniteMembershipToGeneratorClassifierEquivalenceNarrowing
 
 semanticFiniteMembershipToGeneratorClassifierEquivalenceNarrowing :
@@ -1105,6 +2587,7 @@ semanticFiniteMembershipToGeneratorClassifierEquivalenceNarrowing :
 semanticFiniteMembershipToGeneratorClassifierEquivalenceNarrowing =
   semanticFiniteMembershipEquivalenceNarrowedToWitnessCarryingInverse
     canonicalE8SemanticFiniteMembershipClassifierInverseObligations
+    canonicalE8NativeFiniteMembershipWitnessPrimitiveBlockers
 
 record LilaE8NativeShapePredicateLayer : Set where
   field
@@ -1153,6 +2636,15 @@ record LilaE8NativeShapePredicateLayer : Set where
     integerGeneratorMembershipNormalizationReceipt :
       E8IntegerGeneratorMembershipNormalization
 
+    integerGeneratorMembershipWitnessTableAvailable :
+      Bool
+
+    integerGeneratorMembershipWitnessTableAvailableIsTrue :
+      integerGeneratorMembershipWitnessTableAvailable ≡ true
+
+    integerGeneratorMembershipWitnessTable :
+      E8IntegerGeneratorMembershipWitnessTable
+
     halfGeneratorCombinedMembershipNormalizationAvailable :
       Bool
 
@@ -1188,6 +2680,65 @@ record LilaE8NativeShapePredicateLayer : Set where
 
     semanticFiniteMembershipEquivalenceNarrowingReceipt :
       E8SemanticFiniteMembershipToGeneratorClassifierEquivalenceNarrowing
+
+    finiteMembershipWitnessTableRequestAvailable :
+      Bool
+
+    finiteMembershipWitnessTableRequestAvailableIsTrue :
+      finiteMembershipWitnessTableRequestAvailable ≡ true
+
+    finiteMembershipWitnessTableRequest :
+      E8FiniteMembershipWitnessTableRequest
+
+    nativeBoolMembershipToIndexedWitnessRequestAvailable :
+      Bool
+
+    nativeBoolMembershipToIndexedWitnessRequestAvailableIsTrue :
+      nativeBoolMembershipToIndexedWitnessRequestAvailable ≡ true
+
+    nativeBoolMembershipToIndexedWitnessRequest :
+      E8NativeBoolMembershipToIndexedWitnessRequest
+
+    indexedRootGeneratorShapeInversionBridgeAvailable :
+      Bool
+
+    indexedRootGeneratorShapeInversionBridgeAvailableIsTrue :
+      indexedRootGeneratorShapeInversionBridgeAvailable ≡ true
+
+    indexedRootGeneratorShapeInversionBridgeReceipt :
+      E8IndexedRootGeneratorShapeInversionBridge
+
+    nativeFiniteMembershipWitnessPrimitiveAvailable :
+      Bool
+
+    nativeFiniteMembershipWitnessPrimitiveAvailableIsTrue :
+      nativeFiniteMembershipWitnessPrimitiveAvailable ≡ true
+
+    nativeFiniteMembershipWitnessPrimitiveReceipt :
+      E8NativeFiniteMembershipWitnessToGeneratorClassifierPrimitive
+
+    localSemanticNativeCompletenessAvailable :
+      Bool
+
+    localSemanticNativeCompletenessAvailableIsTrue :
+      localSemanticNativeCompletenessAvailable ≡ true
+
+    localSemanticNativeCompletenessReceipt :
+      E8LocalSemanticNativeCompletenessSurface
+
+    localSemanticNativeCompletenessClearsIntegerHalfCombined :
+      E8LocalSemanticNativeCompletenessSurface.integerHalfCombinedCompletenessClearedHere
+        localSemanticNativeCompletenessReceipt
+      ≡
+      true
+
+    nativeCompletenessPromotionBlockers :
+      List E8NativeCompletenessPromotionBlocker
+
+    nativeCompletenessPromotionBlockersAreCanonical :
+      nativeCompletenessPromotionBlockers
+      ≡
+      canonicalE8NativeCompletenessPromotionBlockers
 
     generatorShapesPromoteNativeCompleteness :
       Bool
@@ -1236,6 +2787,12 @@ canonicalLilaE8NativeShapePredicateLayer =
         refl
     ; integerGeneratorMembershipNormalizationReceipt =
         integerGeneratorMembershipNormalization
+    ; integerGeneratorMembershipWitnessTableAvailable =
+        true
+    ; integerGeneratorMembershipWitnessTableAvailableIsTrue =
+        refl
+    ; integerGeneratorMembershipWitnessTable =
+        canonicalE8IntegerGeneratorMembershipWitnessTable
     ; halfGeneratorCombinedMembershipNormalizationAvailable =
         true
     ; halfGeneratorCombinedMembershipNormalizationAvailableIsTrue =
@@ -1260,6 +2817,42 @@ canonicalLilaE8NativeShapePredicateLayer =
         refl
     ; semanticFiniteMembershipEquivalenceNarrowingReceipt =
         semanticFiniteMembershipToGeneratorClassifierEquivalenceNarrowing
+    ; finiteMembershipWitnessTableRequestAvailable =
+        true
+    ; finiteMembershipWitnessTableRequestAvailableIsTrue =
+        refl
+    ; finiteMembershipWitnessTableRequest =
+        canonicalE8FiniteMembershipWitnessTableRequest
+    ; nativeBoolMembershipToIndexedWitnessRequestAvailable =
+        true
+    ; nativeBoolMembershipToIndexedWitnessRequestAvailableIsTrue =
+        refl
+    ; nativeBoolMembershipToIndexedWitnessRequest =
+        canonicalE8NativeBoolMembershipToIndexedWitnessRequest
+    ; indexedRootGeneratorShapeInversionBridgeAvailable =
+        true
+    ; indexedRootGeneratorShapeInversionBridgeAvailableIsTrue =
+        refl
+    ; indexedRootGeneratorShapeInversionBridgeReceipt =
+        indexedRootGeneratorShapeInversionBridge
+    ; nativeFiniteMembershipWitnessPrimitiveAvailable =
+        true
+    ; nativeFiniteMembershipWitnessPrimitiveAvailableIsTrue =
+        refl
+    ; nativeFiniteMembershipWitnessPrimitiveReceipt =
+        nativeFiniteMembershipWitnessToGeneratorClassifierPrimitive
+    ; localSemanticNativeCompletenessAvailable =
+        true
+    ; localSemanticNativeCompletenessAvailableIsTrue =
+        refl
+    ; localSemanticNativeCompletenessReceipt =
+        localSemanticNativeCompletenessSurface
+    ; localSemanticNativeCompletenessClearsIntegerHalfCombined =
+        refl
+    ; nativeCompletenessPromotionBlockers =
+        canonicalE8NativeCompletenessPromotionBlockers
+    ; nativeCompletenessPromotionBlockersAreCanonical =
+        refl
     ; generatorShapesPromoteNativeCompleteness =
         false
     ; generatorShapesPromoteNativeCompletenessIsFalse =
@@ -1388,11 +2981,25 @@ data LilaE8NoDuplicatesValidationBoundary : Set where
     LilaE8NoDuplicatesValidationBoundary
   validatesIntegerGeneratorMembershipNormalization :
     LilaE8NoDuplicatesValidationBoundary
+  validatesIntegerGeneratorMembershipWitnessTableRows :
+    LilaE8NoDuplicatesValidationBoundary
   validatesHalfGeneratorCombinedMembershipNormalization :
     LilaE8NoDuplicatesValidationBoundary
   validatesSemanticNativeFiniteClassifierPredicates :
     LilaE8NoDuplicatesValidationBoundary
+  validatesNativeBoolMembershipFiniteReflection :
+    LilaE8NoDuplicatesValidationBoundary
   validatesSemanticFiniteMembershipEquivalenceNarrowing :
+    LilaE8NoDuplicatesValidationBoundary
+  validatesLocalSemanticNativeCompleteness :
+    LilaE8NoDuplicatesValidationBoundary
+  recordsFiniteMembershipWitnessTableRequest :
+    LilaE8NoDuplicatesValidationBoundary
+  recordsNativeBoolMembershipToIndexedWitnessRequest :
+    LilaE8NoDuplicatesValidationBoundary
+  recordsUpstreamCompletenessReceiptPromotionBlocker :
+    LilaE8NoDuplicatesValidationBoundary
+  recordsUpstreamCompletenessReceiptPromotionBoundary :
     LilaE8NoDuplicatesValidationBoundary
   doesNotValidateNativeCompleteness :
     LilaE8NoDuplicatesValidationBoundary
@@ -1413,9 +3020,16 @@ canonicalLilaE8NoDuplicatesValidationBoundary =
   ∷ validatesNativeIntegerHalfAndCombinedShapePredicates
   ∷ validatesGeneratorBackedClassifierInverses
   ∷ validatesIntegerGeneratorMembershipNormalization
+  ∷ validatesIntegerGeneratorMembershipWitnessTableRows
   ∷ validatesHalfGeneratorCombinedMembershipNormalization
   ∷ validatesSemanticNativeFiniteClassifierPredicates
+  ∷ validatesNativeBoolMembershipFiniteReflection
   ∷ validatesSemanticFiniteMembershipEquivalenceNarrowing
+  ∷ validatesLocalSemanticNativeCompleteness
+  ∷ recordsFiniteMembershipWitnessTableRequest
+  ∷ recordsNativeBoolMembershipToIndexedWitnessRequest
+  ∷ recordsUpstreamCompletenessReceiptPromotionBlocker
+  ∷ recordsUpstreamCompletenessReceiptPromotionBoundary
   ∷ doesNotValidateNativeCompleteness
   ∷ doesNotValidateNormInnerProductOrWeylClosure
   ∷ doesNotPromoteLamTungOrPhiStar
@@ -1518,6 +3132,55 @@ record LilaE8RootEnumerationNoDuplicatesSurface : Setω where
       ≡
       false
 
+    localSemanticNativeCompletenessReceipt :
+      E8LocalSemanticNativeCompletenessSurface
+
+    localSemanticNativeCompletenessClearsIntegerHalfCombined :
+      E8LocalSemanticNativeCompletenessSurface.integerHalfCombinedCompletenessClearedHere
+        localSemanticNativeCompletenessReceipt
+      ≡
+      true
+
+    nativeCompletenessPromotionBlockers :
+      List E8NativeCompletenessPromotionBlocker
+
+    nativeCompletenessPromotionBlockersAreCanonical :
+      nativeCompletenessPromotionBlockers
+      ≡
+      canonicalE8NativeCompletenessPromotionBlockers
+
+    upstreamPromotionBoundary :
+      E8LocalSemanticCompletenessUpstreamPromotionBoundary
+
+    upstreamPromotionBoundaryDoesNotPromote :
+      E8LocalSemanticCompletenessUpstreamPromotionBoundary.promotionToUpstreamCompleteReceiptImplemented
+        upstreamPromotionBoundary
+      ≡
+      false
+
+    upstreamPromotionBoundaryCompleteReceiptBlocked :
+      E8.E8RootEnumerationComplete →
+      ⊥
+
+    finiteMembershipWitnessTableRequest :
+      E8FiniteMembershipWitnessTableRequest
+
+    finiteMembershipWitnessTableRequestIsCanonical :
+      finiteMembershipWitnessTableRequest
+      ≡
+      canonicalE8FiniteMembershipWitnessTableRequest
+
+    integerGeneratorMembershipWitnessTable :
+      E8IntegerGeneratorMembershipWitnessTable
+
+    nativeBoolMembershipToIndexedWitnessRequest :
+      E8NativeBoolMembershipToIndexedWitnessRequest
+
+    nativeBoolMembershipToIndexedWitnessRequestIsCanonical :
+      nativeBoolMembershipToIndexedWitnessRequest
+      ≡
+      canonicalE8NativeBoolMembershipToIndexedWitnessRequest
+
     nativeReflectionBridgeRequest :
       LilaE8NativeReflectionBridgeRequest
 
@@ -1605,6 +3268,31 @@ canonicalLilaE8RootEnumerationNoDuplicatesSurface =
         refl
     ; nativeShapePredicateLayerDoesNotProveCompleteness =
         refl
+    ; localSemanticNativeCompletenessReceipt =
+        localSemanticNativeCompletenessSurface
+    ; localSemanticNativeCompletenessClearsIntegerHalfCombined =
+        refl
+    ; nativeCompletenessPromotionBlockers =
+        canonicalE8NativeCompletenessPromotionBlockers
+    ; nativeCompletenessPromotionBlockersAreCanonical =
+        refl
+    ; upstreamPromotionBoundary =
+        localSemanticCompletenessUpstreamPromotionBoundary
+    ; upstreamPromotionBoundaryDoesNotPromote =
+        refl
+    ; upstreamPromotionBoundaryCompleteReceiptBlocked =
+        E8LocalSemanticCompletenessUpstreamPromotionBoundary.upstreamCompleteReceiptBlocked
+          localSemanticCompletenessUpstreamPromotionBoundary
+    ; finiteMembershipWitnessTableRequest =
+        canonicalE8FiniteMembershipWitnessTableRequest
+    ; finiteMembershipWitnessTableRequestIsCanonical =
+        refl
+    ; integerGeneratorMembershipWitnessTable =
+        canonicalE8IntegerGeneratorMembershipWitnessTable
+    ; nativeBoolMembershipToIndexedWitnessRequest =
+        canonicalE8NativeBoolMembershipToIndexedWitnessRequest
+    ; nativeBoolMembershipToIndexedWitnessRequestIsCanonical =
+        refl
     ; nativeReflectionBridgeRequest =
         canonicalLilaE8NativeReflectionBridgeRequest
     ; booleanBackedLayer =
@@ -1635,11 +3323,17 @@ canonicalLilaE8RootEnumerationNoDuplicatesSurface =
         ∷ "Native shape predicates are available for integer two-sparse roots, half even-parity roots, and their combined family"
         ∷ "Generator-backed classifier inverses now extract integer generators, half generators, and combined integer/half cases"
         ∷ "Integer generator membership now normalizes into the executable indexed integer root list by finite case split over 28 coordinate pairs and four sign choices"
+        ∷ "Integer generator-indexed witness table rows now carry pair/sign, native membership, indexed membership, and classifier witnesses"
         ∷ "Half generator membership now normalizes into the half family by carried membership and into the combined family by append-right membership"
         ∷ "Combined classifier cases now normalize to native membership in the combined root list"
         ∷ "Semantic native classifier predicates for arbitrary roots are now finite native-list membership predicates over integer, half, and combined roots"
-        ∷ "Refined first missing: recover witness-carrying generator classifier cases from semantic finite native-list membership"
-        ∷ "Completeness still needs integer pair/sign, half even-sign-vector, and combined family-case inverses for finite membership"
+        ∷ "Bool finite membership now reflects to and from E8NativeFiniteRootMember, and indexed bool membership reflects to E8.IndexedRootMember"
+        ∷ "Indexed root generator-shape inversion now recovers integer pair/sign, half sign-vector, and combined integer/half shape records from proof-relevant indexed membership"
+        ∷ "A finite membership witness table request now names the exact needed root, generator-index, indexed-image equality, indexed membership, and proof fields"
+        ∷ "Semantic finite native membership now converts through indexed-image lookup and generator-shape inversion to witness-carrying integer, half, and combined classifier cases"
+        ∷ "Local semantic integer, half, and combined completeness now converts finite native membership into existing generator-indexed witnesses"
+        ∷ "The local semantic completeness surface is wired to the upstream E8RootEnumerationObstruction; its remainingConcreteProofObligations and remainingEnumerationObligations are still canonical, and E8RootEnumerationComplete is empty here"
+        ∷ "The remaining E8/LILA completeness blocker is promotion from that local finite semantic surface to the upstream empty E8RootEnumerationComplete receipt"
         ∷ "No LILA-R3, Lam-Tung, phi-star, or publication promotion is claimed here"
         ∷ []
     }

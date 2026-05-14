@@ -1,9 +1,11 @@
 module DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate where
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 open import DASHI.Physics.DashiDynamicsShiftInstance as DDSI
@@ -50,6 +52,164 @@ data W3AuthorityGateStatus : Set where
     W3AuthorityGateStatus
 
 data W3AcceptedEvidenceAuthorityToken : Set where
+
+data W3AcceptedEvidenceAuthorityTokenDefinitionStatus : Set where
+  constructorlessFailClosedAtDefinitionSite :
+    W3AcceptedEvidenceAuthorityTokenDefinitionStatus
+
+data W3AcceptedEvidenceAuthorityTokenDefinitionSiteAuditConclusion : Set where
+  noAcceptedNonPostulatedExactPolicyHookPresent :
+    W3AcceptedEvidenceAuthorityTokenDefinitionSiteAuditConclusion
+
+w3AcceptedEvidenceAuthorityTokenUnavailable :
+  W3AcceptedEvidenceAuthorityToken →
+  ⊥
+w3AcceptedEvidenceAuthorityTokenUnavailable ()
+
+record W3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure : Setω where
+  field
+    exactTokenDefinitionForm :
+      String
+
+    tokenDefinitionStatus :
+      W3AcceptedEvidenceAuthorityTokenDefinitionStatus
+
+    tokenHasConstructor :
+      Bool
+
+    tokenHasConstructorIsFalse :
+      tokenHasConstructor
+      ≡
+      false
+
+    recordConversionPermitted :
+      Bool
+
+    recordConversionPermittedIsFalse :
+      recordConversionPermitted
+      ≡
+      false
+
+    authorityTokenUnavailable :
+      W3AcceptedEvidenceAuthorityToken →
+      ⊥
+
+    firstMissing :
+      String
+
+    constructorlessClosureBoundary :
+      List String
+
+record W3AcceptedEvidenceAuthorityTokenDefinitionSiteAudit : Setω where
+  field
+    definitionSiteClosure :
+      W3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure
+
+    auditConclusion :
+      W3AcceptedEvidenceAuthorityTokenDefinitionSiteAuditConclusion
+
+    acceptedNonPostulatedExactPolicyHookPresent :
+      Bool
+
+    acceptedNonPostulatedExactPolicyHookPresentIsFalse :
+      acceptedNonPostulatedExactPolicyHookPresent
+      ≡
+      false
+
+    postulateToRecordConversionAccepted :
+      Bool
+
+    postulateToRecordConversionAcceptedIsFalse :
+      postulateToRecordConversionAccepted
+      ≡
+      false
+
+    exactDefinitionSiteRequest :
+      List String
+
+    noPromotionBoundary :
+      List String
+
+canonicalW3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure :
+  W3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure
+canonicalW3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure =
+  record
+    { exactTokenDefinitionForm =
+        "data W3AcceptedEvidenceAuthorityToken : Set where"
+    ; tokenDefinitionStatus =
+        constructorlessFailClosedAtDefinitionSite
+    ; tokenHasConstructor =
+        false
+    ; tokenHasConstructorIsFalse =
+        refl
+    ; recordConversionPermitted =
+        false
+    ; recordConversionPermittedIsFalse =
+        refl
+    ; authorityTokenUnavailable =
+        w3AcceptedEvidenceAuthorityTokenUnavailable
+    ; firstMissing =
+        "W3AcceptedEvidenceAuthorityToken constructor or accepted authority policy hook"
+    ; constructorlessClosureBoundary =
+        "Definition site is intentionally fail-closed while no accepted evidence authority has produced this token"
+        ∷ "Do not replace this canonical empty datatype with a local record conversion"
+        ∷ "A future W3 promotion must add a real constructor or exact non-postulated accepted-authority hook at the canonical authority boundary"
+        ∷ []
+    }
+
+canonicalW3AcceptedEvidenceAuthorityTokenStillConstructorless :
+  W3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure.tokenHasConstructor
+    canonicalW3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure
+  ≡
+  false
+canonicalW3AcceptedEvidenceAuthorityTokenStillConstructorless =
+  refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenRecordConversionRejected :
+  W3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure.recordConversionPermitted
+    canonicalW3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure
+  ≡
+  false
+canonicalW3AcceptedEvidenceAuthorityTokenRecordConversionRejected =
+  refl
+
+canonicalW3AcceptedEvidenceAuthorityTokenDefinitionSiteAudit :
+  W3AcceptedEvidenceAuthorityTokenDefinitionSiteAudit
+canonicalW3AcceptedEvidenceAuthorityTokenDefinitionSiteAudit =
+  record
+    { definitionSiteClosure =
+        canonicalW3AcceptedEvidenceAuthorityTokenDefinitionSiteClosure
+    ; auditConclusion =
+        noAcceptedNonPostulatedExactPolicyHookPresent
+    ; acceptedNonPostulatedExactPolicyHookPresent =
+        false
+    ; acceptedNonPostulatedExactPolicyHookPresentIsFalse =
+        refl
+    ; postulateToRecordConversionAccepted =
+        false
+    ; postulateToRecordConversionAcceptedIsFalse =
+        refl
+    ; exactDefinitionSiteRequest =
+        "Leave the canonical empty datatype unchanged until governance amends this definition site"
+        ∷ "Accepted route A: add a real constructor to W3AcceptedEvidenceAuthorityToken in this module"
+        ∷ "Accepted route B: import a non-postulated exact policy hook whose result type is W3AcceptedEvidenceAuthorityToken"
+        ∷ "The hook must consume the public DOI, frozen commit, canonical t43/t44 checksums, comparison law, non-collapse witness, audit log, revocation clauses, and no-overreach clauses"
+        ∷ "A local shadow record or postulated hook does not inhabit the canonical token"
+        ∷ []
+    ; noPromotionBoundary =
+        "No accepted non-postulated exact policy hook is present in the current W3 governance surface"
+        ∷ "No W3AcceptedEvidenceAuthorityToken is constructed by this audit"
+        ∷ "No W3EvidenceBackedEmpiricalTarget can be promoted from this audit"
+        ∷ []
+    }
+
+canonicalW3AcceptedEvidenceAuthorityTokenNoExactPolicyHookPresent :
+  W3AcceptedEvidenceAuthorityTokenDefinitionSiteAudit.acceptedNonPostulatedExactPolicyHookPresent
+    canonicalW3AcceptedEvidenceAuthorityTokenDefinitionSiteAudit
+  ≡
+  false
+canonicalW3AcceptedEvidenceAuthorityTokenNoExactPolicyHookPresent =
+  refl
 
 record W3EvidenceBackedEmpiricalTarget : Setω where
   field

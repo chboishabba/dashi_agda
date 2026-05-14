@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.W4ZAdequacyReceipt where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Float using (Float)
 open import Agda.Builtin.String using (String)
@@ -46,6 +46,133 @@ data W4ZAdequacyFirstMissing : Set where
     W4ZAdequacyFirstMissing
   missingTypedAdequacyReviewThreshold :
     W4ZAdequacyFirstMissing
+
+data AcceptedDYLuminosityConventionAuthorityHookState : Set where
+  requestedAtCanonicalDefinitionSite :
+    AcceptedDYLuminosityConventionAuthorityHookState
+
+data AcceptedDYLuminosityConventionAuthorityHookDisposition : Set where
+  failClosedNoConstructorNoProvider :
+    AcceptedDYLuminosityConventionAuthorityHookDisposition
+
+w4ZAdequacyFirstMissingBeforeAuthorityHook :
+  W4ZAdequacyFirstMissing
+w4ZAdequacyFirstMissingBeforeAuthorityHook =
+  missingAcceptedDYLuminosityConventionAuthority
+
+w4ZAdequacyFirstMissingAfterAuthorityHook :
+  W4ZAdequacyFirstMissing
+w4ZAdequacyFirstMissingAfterAuthorityHook =
+  missingAcceptedDYLuminosityConventionAuthority
+
+w4ZAdequacyAuthorityHookFirstMissingUnchanged :
+  w4ZAdequacyFirstMissingAfterAuthorityHook
+  ≡
+  w4ZAdequacyFirstMissingBeforeAuthorityHook
+w4ZAdequacyAuthorityHookFirstMissingUnchanged =
+  refl
+
+record AcceptedDYLuminosityConventionAuthorityPolicyHookRequest : Setω where
+  field
+    hookState :
+      AcceptedDYLuminosityConventionAuthorityHookState
+
+    disposition :
+      AcceptedDYLuminosityConventionAuthorityHookDisposition
+
+    canonicalDefinitionSite :
+      String
+
+    exactAuthorityName :
+      String
+
+    exactReceiptConsumerName :
+      String
+
+    firstMissingBeforeHookRequest :
+      W4ZAdequacyFirstMissing
+
+    firstMissingAfterHookRequest :
+      W4ZAdequacyFirstMissing
+
+    firstMissingUnchanged :
+      firstMissingAfterHookRequest
+      ≡
+      firstMissingBeforeHookRequest
+
+    requiredHookSignature :
+      List String
+
+    requiredProviderPacketFields :
+      List String
+
+    acceptedOutputContract :
+      List String
+
+    tokenProducingHookAuthorizedHere :
+      Bool
+
+    tokenProducingHookAuthorizedHereIsFalse :
+      tokenProducingHookAuthorizedHere ≡ false
+
+    acceptedAuthorityConstructedHere :
+      Bool
+
+    acceptedAuthorityConstructedHereIsFalse :
+      acceptedAuthorityConstructedHere ≡ false
+
+    noAcceptedAuthorityHere :
+      AcceptedDYLuminosityConventionAuthority →
+      ⊥
+
+    failClosedBoundary :
+      List String
+
+data W4AuthorityClosureRoute : Set where
+  publicSourceSelfIssuedRoute :
+    W4AuthorityClosureRoute
+  postulateToRecordRewriteRoute :
+    W4AuthorityClosureRoute
+  localShadowRecordRoute :
+    W4AuthorityClosureRoute
+  providerOrGovernanceExactHookRoute :
+    W4AuthorityClosureRoute
+
+record W4AuthorityClosureRouteAudit : Setω where
+  field
+    auditedDefinitionSite :
+      String
+
+    acceptedRoute :
+      W4AuthorityClosureRoute
+
+    rejectedRoutes :
+      List W4AuthorityClosureRoute
+
+    publicSourceEvidencePreserved :
+      Bool
+
+    publicSourceEvidencePreservedIsTrue :
+      publicSourceEvidencePreserved ≡ true
+
+    exactAcceptedAuthorityAvailableHere :
+      Bool
+
+    exactAcceptedAuthorityAvailableHereIsFalse :
+      exactAcceptedAuthorityAvailableHere ≡ false
+
+    postulateToRecordRewriteAuthorizedHere :
+      Bool
+
+    postulateToRecordRewriteAuthorizedHereIsFalse :
+      postulateToRecordRewriteAuthorizedHere ≡ false
+
+    noAcceptedAuthorityHere :
+      AcceptedDYLuminosityConventionAuthority →
+      ⊥
+
+    auditBoundary :
+      List String
 
 data W4ZAdequacyFailType : Set where
   acceptedConventionMissing :
@@ -218,6 +345,95 @@ canonicalW4ZAdequacyRunnerTemplate =
         ∷ "missing or unparsable input vectors exit before artifact emission"
         ∷ "computed artifact status is computed-not-promoted"
         ∷ "runner does not decide W4 promotion"
+        ∷ []
+    }
+
+canonicalAcceptedDYLuminosityConventionAuthorityPolicyHookRequest :
+  AcceptedDYLuminosityConventionAuthorityPolicyHookRequest
+canonicalAcceptedDYLuminosityConventionAuthorityPolicyHookRequest =
+  record
+    { hookState =
+        requestedAtCanonicalDefinitionSite
+    ; disposition =
+        failClosedNoConstructorNoProvider
+    ; canonicalDefinitionSite =
+        "DASHI.Physics.Closure.W4ZAdequacyReceipt"
+    ; exactAuthorityName =
+        "DASHI.Physics.Closure.W4ZAdequacyReceipt.AcceptedDYLuminosityConventionAuthority"
+    ; exactReceiptConsumerName =
+        "DASHI.Physics.Closure.W4ZAdequacyReceipt.W4ZAdequacyReceipt"
+    ; firstMissingBeforeHookRequest =
+        w4ZAdequacyFirstMissingBeforeAuthorityHook
+    ; firstMissingAfterHookRequest =
+        w4ZAdequacyFirstMissingAfterAuthorityHook
+    ; firstMissingUnchanged =
+        w4ZAdequacyAuthorityHookFirstMissingUnchanged
+    ; requiredHookSignature =
+        "policyHook : ProviderAuthorityPacket -> AcceptedDYLuminosityConventionAuthority"
+        ∷ "zAdequacyConsumer : AcceptedDYLuminosityConventionAuthority -> W4 accepted m_i/d_i/ell_i/sigma_i inputs -> W4ZAdequacyReceipt"
+        ∷ "Both outputs must use the canonical W4ZAdequacyReceipt module types"
+        ∷ []
+    ; requiredProviderPacketFields =
+        "provider identity, authority scope, trace id, and response date"
+        ∷ "accepted or replacement decision for the DY luminosity convention"
+        ∷ "PDF set/version, member, grid checksum, scale, rapidity, mass-bin, flavour, and integration convention"
+        ∷ "accepted per-bin ell_i luminosity vector with normalization and conversion law"
+        ∷ "source citation, immutable artifact references, and no-manual-overfit attestation"
+        ∷ []
+    ; acceptedOutputContract =
+        "The hook must return an inhabitant of the exact constructorless AcceptedDYLuminosityConventionAuthority type"
+        ∷ "A W4ZAdequacyReceipt may be consumed only after accepted authority and real m_i/d_i/ell_i/sigma_i inputs exist"
+        ∷ "This request surface does not itself authorize W4 promotion"
+        ∷ []
+    ; tokenProducingHookAuthorizedHere =
+        false
+    ; tokenProducingHookAuthorizedHereIsFalse =
+        refl
+    ; acceptedAuthorityConstructedHere =
+        false
+    ; acceptedAuthorityConstructedHereIsFalse =
+        refl
+    ; noAcceptedAuthorityHere =
+        acceptedDYLuminosityConventionAuthorityMissing
+    ; failClosedBoundary =
+        "AcceptedDYLuminosityConventionAuthority is intentionally constructorless at the canonical definition site"
+        ∷ "No external provider answer or governance-authorized token-producing hook is present in this module"
+        ∷ "The first missing remains missingAcceptedDYLuminosityConventionAuthority before and after this request"
+        ∷ []
+    }
+
+canonicalW4AuthorityClosureRouteAudit :
+  W4AuthorityClosureRouteAudit
+canonicalW4AuthorityClosureRouteAudit =
+  record
+    { auditedDefinitionSite =
+        "DASHI.Physics.Closure.W4ZAdequacyReceipt.AcceptedDYLuminosityConventionAuthority"
+    ; acceptedRoute =
+        providerOrGovernanceExactHookRoute
+    ; rejectedRoutes =
+        publicSourceSelfIssuedRoute
+        ∷ postulateToRecordRewriteRoute
+        ∷ localShadowRecordRoute
+        ∷ []
+    ; publicSourceEvidencePreserved =
+        true
+    ; publicSourceEvidencePreservedIsTrue =
+        refl
+    ; exactAcceptedAuthorityAvailableHere =
+        false
+    ; exactAcceptedAuthorityAvailableHereIsFalse =
+        refl
+    ; postulateToRecordRewriteAuthorizedHere =
+        false
+    ; postulateToRecordRewriteAuthorizedHereIsFalse =
+        refl
+    ; noAcceptedAuthorityHere =
+        acceptedDYLuminosityConventionAuthorityMissing
+    ; auditBoundary =
+        "Public CMS/HEPData evidence is preserved as evidence, not converted into authority"
+        ∷ "A local postulate-to-record rewrite would change the governance type and is not authorized in this lane"
+        ∷ "A local shadow record cannot inhabit the canonical constructorless authority type"
+        ∷ "The only accepted closure route is an exact provider/governance hook returning this module's AcceptedDYLuminosityConventionAuthority, or an owner-approved constructor in this canonical module"
         ∷ []
     }
 

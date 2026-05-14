@@ -311,6 +311,7 @@ import DASHI.Physics.Closure.G2PlaquetteBumpCommutationLaw
 import DASHI.Physics.Closure.G2NondegeneratePlaquetteSchema
 import DASHI.Physics.Closure.G2PrimeLatticeCoefficientBridge
 import DASHI.Physics.Closure.G2SFGCAsUOnePrimeLattice
+import DASHI.Physics.Closure.G2SFGCGaugeFieldSchemaExtension
 import DASHI.Physics.Closure.G2SFGCPrimeLatticeOrbit
 import DASHI.Physics.Closure.G2SFGCSecondDirectionPatchPlan
 import DASHI.Physics.Closure.G2TransverseEdgeAPI
@@ -321,6 +322,10 @@ import DASHI.Physics.Closure.G3ContractionParameterLawSurface
 import DASHI.Physics.Closure.G3GalileiIdentification
 import DASHI.Physics.Closure.G3P2AdicNormMetricSurface
 import DASHI.Physics.Closure.G3P2LimitConvergenceSurface
+import DASHI.Physics.Closure.ContinuumLimitTheorem
+import DASHI.Physics.Closure.DiscreteBianchiIdentitySurface
+import DASHI.Physics.Closure.DiscreteEinsteinTensorNextThreadIndex
+import DASHI.Physics.Closure.DiscreteEinsteinVacuumLimitSurface
 import DASHI.Physics.Closure.G3P2OperatorSurface
 import DASHI.Physics.Closure.G3PoincareGalileiCarrierChain
 import DASHI.Physics.Closure.G3SelectedCarrierInstance
@@ -331,6 +336,7 @@ import DASHI.Physics.Closure.GRConcreteLeviCivita
 import DASHI.Physics.Closure.GRDiscreteBianchiFiniteR
 import DASHI.Physics.Closure.GRNonFlatScalarAlgebraSurface
 import DASHI.Physics.Closure.GRSelectedNonFlatMetricInstance
+import DASHI.Physics.Closure.SchwarzschildLimitCandidate
 import DASHI.Physics.Closure.LilaE8RootEnumerationNoDuplicatesSurface
 import DASHI.Physics.Closure.NonLimitedPaperBundleClaimGovernance
 import DASHI.Physics.Closure.W2W3ExternalAuthorityFormalClosureRequest
@@ -341,6 +347,7 @@ import DASHI.Physics.Closure.W2W3TokenProducingHooks
 import DASHI.Physics.Closure.W2W3W4W5ExternalAuthorityPacketSurface
 import DASHI.Physics.Closure.W3AcceptedEvidenceAuthorityTokenGovernanceObstruction
 import DASHI.Physics.Closure.W4ExternalAuthorityTokenSurface
+import DASHI.Physics.Closure.W4MatterStressEnergyInterfaceReceipt
 import DASHI.Physics.Closure.W4ResponseMatrixAcceptanceCandidateReceipt
 import DASHI.Physics.Closure.W4DiagonalConventionGateConsumer
 import DASHI.Physics.Closure.W4W5PhiStarToMassAcceptanceBridgeRequest

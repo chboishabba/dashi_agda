@@ -220,8 +220,293 @@ SelectedEquivalentModuloPreviousCumulativeFiltration n A B =
       ≡
       G3.waveFunctionOperatorSubtraction A B)
 
+record G3SelectedOperatorPointwiseEqualitySurface : Setω where
+  field
+    operatorEquality :
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator →
+      Set
+
+    operatorEqualityIsPointwise :
+      operatorEquality ≡ G3.WaveFunctionOperatorPointwiseEquality
+
+    operatorEqualityRefl :
+      (A : G3.WaveFunctionOperator) →
+      operatorEquality A A
+
+    operatorEqualitySym :
+      (A B : G3.WaveFunctionOperator) →
+      operatorEquality A B →
+      operatorEquality B A
+
+    operatorEqualityTrans :
+      (A B C : G3.WaveFunctionOperator) →
+      operatorEquality A B →
+      operatorEquality B C →
+      operatorEquality A C
+
+    zeroDifferencePointwise :
+      (A : G3.WaveFunctionOperator) →
+      operatorEquality
+        (G3.waveFunctionOperatorSubtraction A A)
+        G3.zeroWaveFunctionOperator
+
+    negatedDifferencePointwise :
+      (A B : G3.WaveFunctionOperator) →
+      operatorEquality
+        (G3.waveFunctionOperatorSubtraction B A)
+        (G3.waveFunctionOperatorNegation
+          (G3.waveFunctionOperatorSubtraction A B))
+
+    additiveDifferencePointwise :
+      (A B C : G3.WaveFunctionOperator) →
+      operatorEquality
+        (G3.waveFunctionOperatorAddition
+          (G3.waveFunctionOperatorSubtraction A B)
+          (G3.waveFunctionOperatorSubtraction B C))
+        (G3.waveFunctionOperatorSubtraction A C)
+
+    equalitySurfaceBoundary :
+      List String
+
+canonicalG3SelectedOperatorPointwiseEqualitySurface :
+  G3SelectedOperatorPointwiseEqualitySurface
+canonicalG3SelectedOperatorPointwiseEqualitySurface =
+  record
+    { operatorEquality =
+        G3.WaveFunctionOperatorPointwiseEquality
+    ; operatorEqualityIsPointwise =
+        refl
+    ; operatorEqualityRefl =
+        G3.waveFunctionOperatorPointwiseRefl
+    ; operatorEqualitySym =
+        G3.waveFunctionOperatorPointwiseSym
+    ; operatorEqualityTrans =
+        G3.waveFunctionOperatorPointwiseTrans
+    ; zeroDifferencePointwise =
+        G3.waveFunctionOperatorZeroDifferencePointwise
+    ; negatedDifferencePointwise =
+        G3.waveFunctionOperatorNegatedDifferencePointwise
+    ; additiveDifferencePointwise =
+        G3.waveFunctionOperatorAdditiveDifferencePointwise
+    ; equalitySurfaceBoundary =
+        "Accepted local operator equality is pointwise equality on wave-function operators"
+        ∷ "Zero difference, negated difference, and additive difference laws are now typechecked pointwise laws from the G3 operator definitions"
+        ∷ "These laws do not by themselves prove that zero/difference/additive witnesses are represented inside the selected previous cumulative filtration"
+        ∷ []
+    }
+
+record G3SelectedOperatorSetoidSurface : Setω where
+  field
+    equalitySurface :
+      G3SelectedOperatorPointwiseEqualitySurface
+
+    Carrier :
+      Set
+
+    CarrierIsWaveFunctionOperator :
+      Carrier ≡ G3.WaveFunctionOperator
+
+    _≈_ :
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator →
+      Set
+
+    equalityIsPointwise :
+      _≈_ ≡
+      G3SelectedOperatorPointwiseEqualitySurface.operatorEquality
+        equalitySurface
+
+    refl≈ :
+      (A : G3.WaveFunctionOperator) →
+      A ≈ A
+
+    sym≈ :
+      (A B : G3.WaveFunctionOperator) →
+      A ≈ B →
+      B ≈ A
+
+    trans≈ :
+      (A B C : G3.WaveFunctionOperator) →
+      A ≈ B →
+      B ≈ C →
+      A ≈ C
+
+    setoidBoundary :
+      List String
+
+canonicalG3SelectedOperatorSetoidSurface :
+  G3SelectedOperatorSetoidSurface
+canonicalG3SelectedOperatorSetoidSurface =
+  record
+    { equalitySurface =
+        canonicalG3SelectedOperatorPointwiseEqualitySurface
+    ; Carrier =
+        G3.WaveFunctionOperator
+    ; CarrierIsWaveFunctionOperator =
+        refl
+    ; _≈_ =
+        G3.WaveFunctionOperatorPointwiseEquality
+    ; equalityIsPointwise =
+        refl
+    ; refl≈ =
+        G3.waveFunctionOperatorPointwiseRefl
+    ; sym≈ =
+        G3.waveFunctionOperatorPointwiseSym
+    ; trans≈ =
+        G3.waveFunctionOperatorPointwiseTrans
+    ; setoidBoundary =
+        "Local operator setoid surface is pointwise equality on G3.WaveFunctionOperator"
+        ∷ "This is an equality surface only; it does not manufacture previous-filtration representatives"
+        ∷ []
+    }
+
+record G3SelectedOperatorAdditiveQuotientPrimitive : Setω where
+  field
+    equalitySurface :
+      G3SelectedOperatorPointwiseEqualitySurface
+
+    operatorZero :
+      G3.WaveFunctionOperator
+
+    operatorZeroIsG3Zero :
+      operatorZero ≡ G3.zeroWaveFunctionOperator
+
+    operatorAddition :
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator
+
+    operatorAdditionIsG3Addition :
+      operatorAddition ≡ G3.waveFunctionOperatorAddition
+
+    operatorNegation :
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator
+
+    operatorNegationIsG3Negation :
+      operatorNegation ≡ G3.waveFunctionOperatorNegation
+
+    operatorDifference :
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator
+
+    operatorDifferenceIsG3Subtraction :
+      operatorDifference ≡ G3.waveFunctionOperatorSubtraction
+
+    zeroDifferenceInPreviousFiltration :
+      (n : Nat) →
+      (A : G3.WaveFunctionOperator) →
+      SelectedEquivalentModuloPreviousCumulativeFiltration n A A
+
+    negationClosureInPreviousFiltration :
+      (n : Nat) →
+      (A B : G3.WaveFunctionOperator) →
+      SelectedEquivalentModuloPreviousCumulativeFiltration n A B →
+      SelectedEquivalentModuloPreviousCumulativeFiltration n B A
+
+    additionClosureInPreviousFiltration :
+      (n : Nat) →
+      (A B C : G3.WaveFunctionOperator) →
+      SelectedEquivalentModuloPreviousCumulativeFiltration n A B →
+      SelectedEquivalentModuloPreviousCumulativeFiltration n B C →
+      SelectedEquivalentModuloPreviousCumulativeFiltration n A C
+
+    acceptedDifferenceImageMembership :
+      (n : Nat) →
+      (A B : G3.WaveFunctionOperator) →
+      SelectedEquivalentModuloPreviousCumulativeFiltration n A B →
+      Σ (SelectedCumulativeFiltrationPiece n)
+        (λ previousPiece →
+          G3SelectedOperatorPointwiseEqualitySurface.operatorEquality
+            equalitySurface
+            (selectedCumulativeFiltrationOperator n previousPiece)
+            (operatorDifference A B))
+
+    additiveQuotientPrimitiveBoundary :
+      List String
+
+record G3SelectedModuloPreviousEquivalenceOnPrimitive
+  (prim : G3SelectedOperatorAdditiveQuotientPrimitive) : Setω where
+  field
+    relation :
+      (n : Nat) →
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator →
+      Set
+
+    relationIsSelectedCandidate :
+      relation ≡ SelectedEquivalentModuloPreviousCumulativeFiltration
+
+    reflModuloPrevious :
+      (n : Nat) →
+      (A : G3.WaveFunctionOperator) →
+      relation n A A
+
+    symModuloPrevious :
+      (n : Nat) →
+      (A B : G3.WaveFunctionOperator) →
+      relation n A B →
+      relation n B A
+
+    transModuloPrevious :
+      (n : Nat) →
+      (A B C : G3.WaveFunctionOperator) →
+      relation n A B →
+      relation n B C →
+      relation n A C
+
+    acceptedDifferenceMembership :
+      (n : Nat) →
+      (A B : G3.WaveFunctionOperator) →
+      relation n A B →
+      Σ (SelectedCumulativeFiltrationPiece n)
+        (λ previousPiece →
+          G3SelectedOperatorPointwiseEqualitySurface.operatorEquality
+            (G3SelectedOperatorAdditiveQuotientPrimitive.equalitySurface prim)
+            (selectedCumulativeFiltrationOperator n previousPiece)
+            (G3SelectedOperatorAdditiveQuotientPrimitive.operatorDifference prim A B))
+
+    primitiveEquivalenceBoundary :
+      List String
+
+selectedModuloPreviousEquivalenceFromPrimitive :
+  (prim : G3SelectedOperatorAdditiveQuotientPrimitive) →
+  G3SelectedModuloPreviousEquivalenceOnPrimitive prim
+selectedModuloPreviousEquivalenceFromPrimitive prim =
+  record
+    { relation =
+        SelectedEquivalentModuloPreviousCumulativeFiltration
+    ; relationIsSelectedCandidate =
+        refl
+    ; reflModuloPrevious =
+        G3SelectedOperatorAdditiveQuotientPrimitive.zeroDifferenceInPreviousFiltration
+          prim
+    ; symModuloPrevious =
+        G3SelectedOperatorAdditiveQuotientPrimitive.negationClosureInPreviousFiltration
+          prim
+    ; transModuloPrevious =
+        G3SelectedOperatorAdditiveQuotientPrimitive.additionClosureInPreviousFiltration
+          prim
+    ; acceptedDifferenceMembership =
+        G3SelectedOperatorAdditiveQuotientPrimitive.acceptedDifferenceImageMembership
+          prim
+    ; primitiveEquivalenceBoundary =
+        "If the additive quotient primitive is inhabited, the selected candidate relation is reflexive, symmetric, and transitive"
+        ∷ "The proof consumes only zero-difference, negation closure, addition closure, and accepted difference-image membership fields"
+        ∷ "No primitive is constructed here; this is a typed receipt schema for the first missing gate"
+        ∷ []
+    }
+
 record G3SelectedEquivalenceModuloPreviousFiltrationBlocker : Setω where
   field
+    operatorSetoidSurface :
+      G3SelectedOperatorSetoidSurface
+
+    pointwiseOperatorEqualitySurface :
+      G3SelectedOperatorPointwiseEqualitySurface
+
     currentFiltrationPiece :
       Nat →
       Set
@@ -266,7 +551,11 @@ canonicalG3SelectedEquivalenceModuloPreviousFiltrationBlocker :
   G3SelectedEquivalenceModuloPreviousFiltrationBlocker
 canonicalG3SelectedEquivalenceModuloPreviousFiltrationBlocker =
   record
-    { currentFiltrationPiece =
+    { operatorSetoidSurface =
+        canonicalG3SelectedOperatorSetoidSurface
+    ; pointwiseOperatorEqualitySurface =
+        canonicalG3SelectedOperatorPointwiseEqualitySurface
+    ; currentFiltrationPiece =
         SelectedCumulativeFiltrationPiece
     ; currentFiltrationPieceIsSelected =
         refl
@@ -288,15 +577,16 @@ canonicalG3SelectedEquivalenceModuloPreviousFiltrationBlocker =
         ∷ missingSelectedPreviousFiltrationNegationClosure
         ∷ missingSelectedPreviousFiltrationAdditionClosure
         ∷ missingSelectedPreviousFiltrationDifferenceImageMembership
-        ∷ missingAcceptedOperatorEqualityOrSetoidForDifferenceImage
         ∷ []
     ; exactBlockerBoundary =
         "Candidate relation: A ~ B modulo F<=n when G3.waveFunctionOperatorSubtraction A B is represented by a selected previous cumulative filtration piece"
+        ∷ "The local operator setoid surface is now pointwise equality on WaveFunctionOperator"
         ∷ "The ambient operator subtraction function exists, but the selected cumulative filtration has no closure primitive for operator differences"
+        ∷ "Pointwise operator equality/setoid laws are now exposed, including zero difference, negated difference, and additive difference laws"
         ∷ "Reflexivity is blocked by the absence of a selected zero-difference witness in the previous cumulative filtration"
         ∷ "Symmetry is blocked by the absence of selected previous-filtration negation closure"
         ∷ "Transitivity is blocked by the absence of selected previous-filtration addition closure for difference witnesses"
-        ∷ "Projection to a quotient is blocked by the absence of an accepted image-membership and operator equality/setoid API for difference representatives"
+        ∷ "Projection to a quotient is blocked by the absence of an accepted image-membership API consuming pointwise equality for difference representatives"
         ∷ []
     }
 
@@ -578,6 +868,9 @@ record G3AssociatedGradedQuotientSurface : Setω where
     selectedEquivalenceModuloPreviousFiltrationBlocker :
       G3SelectedEquivalenceModuloPreviousFiltrationBlocker
 
+    requestedAdditiveQuotientPrimitiveName :
+      String
+
     requestedQuotientAPIName :
       String
 
@@ -585,6 +878,9 @@ record G3AssociatedGradedQuotientSurface : Setω where
       String
 
     requestedQuotientAPIFields :
+      List String
+
+    requestedAdditiveQuotientPrimitiveFields :
       List String
 
     requestedPoincareGalileiIsomorphismAPIFields :
@@ -636,6 +932,8 @@ canonicalG3AssociatedGradedQuotientSurface =
         canonicalG3SelectedPreviousFiltrationInclusionEvidence
     ; selectedEquivalenceModuloPreviousFiltrationBlocker =
         canonicalG3SelectedEquivalenceModuloPreviousFiltrationBlocker
+    ; requestedAdditiveQuotientPrimitiveName =
+        "G3SelectedOperatorAdditiveQuotientPrimitive"
     ; requestedQuotientAPIName =
         "G3AssociatedGradedQuotientAPI"
     ; requestedPoincareGalileiIsomorphismAPIName =
@@ -649,6 +947,14 @@ canonicalG3AssociatedGradedQuotientSurface =
         ∷ "projection : (n : Nat) -> (A : WaveFunctionOperator) -> SelectedOperatorP2Degree A n -> quotientCarrier n"
         ∷ "projectionRespectsEquivalentModuloPrevious : projection descends through equivalentModuloPrevious"
         ∷ "bracketDescendsToQuotient : selected commutator descends to quotient brackets"
+        ∷ []
+    ; requestedAdditiveQuotientPrimitiveFields =
+        "equalitySurface : G3SelectedOperatorPointwiseEqualitySurface"
+        ∷ "operatorZero/operatorAddition/operatorNegation/operatorDifference tied to G3 operator definitions"
+        ∷ "zeroDifferenceInPreviousFiltration : reflexivity witness for A - A in F<=n"
+        ∷ "negationClosureInPreviousFiltration : symmetry witness by closure under negated differences"
+        ∷ "additionClosureInPreviousFiltration : transitivity witness by closure under added differences"
+        ∷ "acceptedDifferenceImageMembership : previous-filtration representative with accepted pointwise equality to the operator difference"
         ∷ []
     ; requestedPoincareGalileiIsomorphismAPIFields =
         "PoincareAtP2 : Nat -> Set"
@@ -689,12 +995,12 @@ canonicalG3AssociatedGradedQuotientSurface =
         ∷ "Selected projection into F_n is concrete, and selected generators/brackets project by existing degree evidence"
         ∷ "This module now defines cumulative F<=n and a constructive previous-in-current inclusion F<=n -> F<=suc(n)"
         ∷ "It defines only a candidate relation A ~ B when waveFunctionOperatorSubtraction A B is represented by the previous cumulative filtration"
-        ∷ "The candidate is not accepted as an equivalence because selected filtration subtraction/difference closure, zero difference, negation closure, addition closure, difference image membership, and operator equality/setoid primitives are absent"
+        ∷ "Pointwise operator equality/setoid laws now exist, but the candidate is not accepted as an equivalence because selected filtration subtraction/difference closure, zero difference, negation closure, addition closure, and difference image membership are absent"
         ∷ "No inspected quotient primitive constructs the quotient carrier F_n / F_{n-1} for this operator algebra"
         ∷ "Without that quotient carrier, the projection from selected operators into gr(F) cannot be accepted"
         ∷ []
     ; promotionBoundary =
-        "Non-promoting surface only: this module constructs selected prequotient F_n pieces, then requests the exact gr(F) quotient API and p2-indexed Poincare/Galilei isomorphism API"
+        "Non-promoting surface only: this module constructs selected prequotient F_n pieces, then requests the additive quotient primitive, exact gr(F) quotient API, and p2-indexed Poincare/Galilei isomorphism API"
         ∷ "No SchrodingerPoincareToGalileiContractionCarrier is constructed here"
         ∷ "The next closure step is equivalence modulo previous filtration plus an accepted quotient carrier; after that, implement G3AssociatedGradedQuotientAPI and consume it in the contraction-parameter and SES carrier lanes"
         ∷ []
