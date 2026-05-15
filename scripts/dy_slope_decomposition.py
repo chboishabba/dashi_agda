@@ -17,6 +17,11 @@ from run_t43_projection import T44_PATH, parse_t44
 
 DEFAULT_INPUT = Path("scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json")
 DEFAULT_OUTPUT = Path("scripts/data/outputs/dy_slope_decomposition_sigma_dashi_v4_20260515.json")
+Z_MASS_GEV = 91.2
+LAMBDA_QCD_GEV = 0.2
+ALPHA_S_IR_FLOOR_GEV = 1.0
+SUDAKOV_A1 = 4.0 / 3.0
+SUDAKOV_A2 = (67.0 / 18.0 - math.pi**2 / 6.0) * SUDAKOV_A1
 
 
 def _trbd_projection(
@@ -52,6 +57,112 @@ def _promotability_label(chi2_per_dof: float) -> str:
 
 def _sign_label(value: float) -> str:
     return "+" if value >= 0.0 else "-"
+
+
+def _alpha_s_two_loop_proxy(mu: np.ndarray | float) -> np.ndarray | float:
+    mu_array = np.maximum(np.asarray(mu, dtype=float), ALPHA_S_IR_FLOOR_GEV)
+    return 12.0 * math.pi / (23.0 * np.log(mu_array**2 / LAMBDA_QCD_GEV**2))
+
+
+def _gamma_sudakov_nll_proxy(phi_star: np.ndarray | float) -> np.ndarray | float:
+    scale = np.maximum(
+        Z_MASS_GEV * np.asarray(phi_star, dtype=float),
+        ALPHA_S_IR_FLOOR_GEV,
+    )
+    alpha_over_pi = _alpha_s_two_loop_proxy(scale) / math.pi
+    return SUDAKOV_A1 * alpha_over_pi + SUDAKOV_A2 * alpha_over_pi**2
+
+
+def _normalise_column(column: np.ndarray) -> np.ndarray:
+    norm = float(np.sqrt(np.mean(column**2)))
+    if norm <= 0.0 or not math.isfinite(norm):
+        raise ValueError("cannot normalise degenerate CSS basis column")
+    return column / norm
+
+
+def _css_bases(
+    phi_star: np.ndarray,
+    phi_np: float,
+    phi_fo: float,
+) -> tuple[np.ndarray, np.ndarray, dict[str, float]]:
+    gamma = np.asarray(_gamma_sudakov_nll_proxy(phi_star), dtype=float)
+    delta_fo = 1.0 + float(_alpha_s_two_loop_proxy(Z_MASS_GEV)) / math.pi
+    b_np = phi_star * np.exp(-(phi_star**2) / (phi_np**2))
+    b_resumm = phi_star * (phi_star / phi_fo) ** (-gamma)
+    b_fo = phi_star ** (-delta_fo)
+    basis_css_shape = np.column_stack(
+        [
+            _normalise_column(b_np),
+            _normalise_column(b_resumm),
+            _normalise_column(b_fo),
+        ]
+    )
+    raw_log_directions = np.column_stack(
+        [
+            np.log(np.maximum(b_np, np.finfo(float).tiny)),
+            np.log(np.maximum(b_resumm, np.finfo(float).tiny)),
+            np.log(np.maximum(b_fo, np.finfo(float).tiny)),
+        ]
+    )
+    raw_log_directions = raw_log_directions - raw_log_directions.mean(axis=0)
+    basis_css_log_directions = np.column_stack(
+        [
+            _normalise_column(raw_log_directions[:, index])
+            for index in range(raw_log_directions.shape[1])
+        ]
+    )
+    return basis_css_shape, basis_css_log_directions, {
+        "phi_np": float(phi_np),
+        "phi_fo": float(phi_fo),
+        "z_mass_gev": Z_MASS_GEV,
+        "lambda_qcd_gev": LAMBDA_QCD_GEV,
+        "alpha_s_ir_floor_gev": ALPHA_S_IR_FLOOR_GEV,
+        "sudakov_a1": SUDAKOV_A1,
+        "sudakov_a2": SUDAKOV_A2,
+        "gamma_sudakov_at_np": float(_gamma_sudakov_nll_proxy(phi_np)),
+        "gamma_sudakov_at_fo": float(_gamma_sudakov_nll_proxy(phi_fo)),
+        "delta_fo": float(delta_fo),
+    }
+
+
+def _positive_css_forward_fit(
+    basis_css: np.ndarray,
+    log_data: np.ndarray,
+    cov_inv: np.ndarray,
+) -> dict[str, Any]:
+    def chi2_from_log_coeff(log_coefficients: np.ndarray) -> float:
+        coefficients = np.exp(log_coefficients)
+        css_shape = basis_css @ coefficients
+        if np.any(~np.isfinite(css_shape)) or np.any(css_shape <= 0.0):
+            return 1.0e30
+        residual = np.log(css_shape) - log_data
+        return float(residual @ cov_inv @ residual)
+
+    initial_scale = float(np.exp(np.mean(log_data)))
+    initial_coefficients = np.full(
+        basis_css.shape[1],
+        initial_scale / basis_css.shape[1],
+    )
+    result = minimize(
+        chi2_from_log_coeff,
+        np.log(initial_coefficients),
+        method="L-BFGS-B",
+    )
+    coefficients = np.exp(result.x)
+    css_shape = basis_css @ coefficients
+    residual = np.log(css_shape) - log_data
+    chi2 = float(residual @ cov_inv @ residual)
+    dof = len(log_data) - basis_css.shape[1]
+    return {
+        "basis_dim": int(basis_css.shape[1]),
+        "coefficients": [float(value) for value in coefficients],
+        "chi2": chi2,
+        "chi2_per_dof": chi2 / dof,
+        "dof": int(dof),
+        "optimizer_success": bool(result.success),
+        "optimizer_message": str(result.message),
+        "strict_log_residual_convention": "log(css_positive_shape_fit) - log(data)",
+    }
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -216,6 +327,26 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
         basis_sudakov,
         cov_inv,
         chi2_raw,
+    )
+
+    basis_css_shape, basis_css_log_directions, css_parameters = _css_bases(
+        phi_star,
+        transition_1_phi,
+        transition_2_phi,
+    )
+    css_log_normal = basis_css_log_directions.T @ cov_inv @ basis_css_log_directions
+    css_log_condition_number = float(np.linalg.cond(css_log_normal))
+    css_residual_projection = _trbd_projection(
+        residual_pred_minus_data,
+        basis_css_log_directions,
+        cov_inv,
+        chi2_raw,
+    )
+    css_shape_normal = basis_css_shape.T @ cov_inv @ basis_css_shape
+    css_forward_fit = _positive_css_forward_fit(
+        basis_css_shape,
+        log_data,
+        cov_inv,
     )
 
     d2_pred = np.gradient(np.gradient(pred, phi_star), phi_star)
@@ -581,6 +712,49 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
                     or chi2_bin_integrated_per_dof <= 2.0
                 ),
             },
+            "css_resummation_basis": {
+                "basis_name": "CSS_QCD_resummation_three_component",
+                "basis_source": "Causal_QCD_CSS_resummation_proxy",
+                "protocol": "strict_log_metric",
+                "derivation_path": (
+                    "CSS factorisation -> Sudakov exponent -> NLL anomalous dimension proxy"
+                ),
+                "transition_scales_frozen_from_sign_flips": True,
+                "transition_scale_caveat": (
+                    "transition locations are empirical sign-flip bins; functional form is CSS-derived proxy"
+                ),
+                "existing_predictor_reuse_note": (
+                    "DASHI.Physics.Prediction.sigma_dashi contains HEP-R48/HEP-R49 "
+                    "bin-integrated Sudakov predictor diagnostics; this pass is a "
+                    "strict-log decomposition and positive-shape fit, not a replacement predictor"
+                ),
+                "parameters": css_parameters,
+                "basis_components": [
+                    "phiStar * exp(-phiStar^2 / phiStarNP^2)",
+                    "phiStar * (phiStar / phiStarFO)^(-gammaSudakov(phiStar))",
+                    "phiStar^(-deltaFO)",
+                ],
+                "residual_projection_basis_convention": (
+                    "centered and RMS-normalized log component directions"
+                ),
+                "residual_projection_normal_matrix_condition": css_log_condition_number,
+                "forward_shape_normal_matrix_condition": float(
+                    np.linalg.cond(css_shape_normal)
+                ),
+                "residual_projection": {
+                    key: value
+                    for key, value in css_residual_projection.items()
+                    if key != "residual_perp"
+                },
+                "forward_positive_shape_fit": css_forward_fit,
+                "residual_projection_promotability": _promotability_label(
+                    css_residual_projection["chi2_perp_per_dof"]
+                ),
+                "forward_fit_promotability": _promotability_label(
+                    css_forward_fit["chi2_per_dof"]
+                ),
+                "promotable_if_derived": css_forward_fit["chi2_per_dof"] <= 2.0,
+            },
             "smooth_antisymmetric_discrimination": {
                 "shifted_cubic": {
                     key: value
@@ -814,6 +988,38 @@ def main() -> int:
     print(
         "  Promotable if derived:         "
         f"{multi_transition['promotable_if_derived']}"
+    )
+
+    css = extended["css_resummation_basis"]
+    print("\nCSS RESUMMATION BASIS")
+    print(f"  Basis source:                 {css['basis_source']}")
+    print(
+        "  Transition scales:            "
+        f"phi*_NP = {css['parameters']['phi_np']:.6f}, "
+        f"phi*_FO = {css['parameters']['phi_fo']:.6f}"
+    )
+    print(
+        "  gamma at transitions:         "
+        f"{css['parameters']['gamma_sudakov_at_np']:.6f}, "
+        f"{css['parameters']['gamma_sudakov_at_fo']:.6f}"
+    )
+    print(f"  fixed-order delta:            {css['parameters']['delta_fo']:.6f}")
+    css_projection = css["residual_projection"]
+    css_forward = css["forward_positive_shape_fit"]
+    print(
+        "  residual projection           "
+        f"chi2/dof = {css_projection['chi2_perp_per_dof']:10.6f}  "
+        f"{css['residual_projection_promotability']}"
+    )
+    print(
+        "  positive forward shape fit     "
+        f"chi2/dof = {css_forward['chi2_per_dof']:10.6f}  "
+        f"{css['forward_fit_promotability']}"
+    )
+    print(f"  forward coefficients:         {css_forward['coefficients']}")
+    print(
+        "  Promotable if derived:         "
+        f"{css['promotable_if_derived']}"
     )
 
     smooth = extended["smooth_antisymmetric_discrimination"]

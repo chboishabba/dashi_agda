@@ -5,8 +5,10 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Unit using (tt)
 open import Data.List.Base using (List; _∷_; [])
 
+import DASHI.Core.TypedResidualBasisDecomposition as TRBD
 import DASHI.Physics.Closure.DrellYanStrictLogLinearSubspaceReceipt as Strict
 
 ------------------------------------------------------------------------
@@ -309,6 +311,111 @@ record DYMultiTransitionObstruction : Setω where
     obstructionAssessment :
       List String
 
+data CSSResummationShapeLawStatus : Set where
+  cssResummationCandidateNonPromoting :
+    CSSResummationShapeLawStatus
+
+  cssResummationShapeLawPromoting :
+    CSSResummationShapeLawStatus
+
+record CSSResummationShapeLawReceipt : Setω where
+  field
+    status :
+      CSSResummationShapeLawStatus
+
+    sourceStrictDiagnostic :
+      Strict.DrellYanStrictLogLinearSubspaceReceipt
+
+    multiTransitionObstruction :
+      DYMultiTransitionObstruction
+
+    artifactPath :
+      String
+
+    basisName :
+      String
+
+    basisSource :
+      String
+
+    protocol :
+      String
+
+    transitionPhiStars :
+      List String
+
+    transitionScalesFrozenFromSignFlips :
+      Bool
+
+    transitionScalesFrozenFromSignFlipsIsTrue :
+      transitionScalesFrozenFromSignFlips ≡ true
+
+    residualProjectionBasisConvention :
+      String
+
+    residualProjectionChi2PerDof :
+      String
+
+    residualProjectionCoverage :
+      String
+
+    residualProjectionCondition :
+      String
+
+    forwardFitChi2PerDof :
+      String
+
+    forwardFitCondition :
+      String
+
+    forwardFitOptimizerSuccess :
+      Bool
+
+    forwardFitOptimizerSuccessIsTrue :
+      forwardFitOptimizerSuccess ≡ true
+
+    gammaSudakovAtNP :
+      String
+
+    gammaSudakovAtFO :
+      String
+
+    fixedOrderDelta :
+      String
+
+    trbdReceipt :
+      TRBD.TRBDReceipt String
+
+    structuralDerivationAccepted :
+      Bool
+
+    structuralDerivationAcceptedIsFalse :
+      structuralDerivationAccepted ≡ false
+
+    strictPassAchieved :
+      Bool
+
+    strictPassAchievedIsFalse :
+      strictPassAchieved ≡ false
+
+    nonPromoting :
+      Bool
+
+    nonPromotingIsTrue :
+      nonPromoting ≡ true
+
+    promotingReceiptExists :
+      Bool
+
+    promotingReceiptExistsIsFalse :
+      promotingReceiptExists ≡ false
+
+    validationCommands :
+      List String
+
+    promotionBoundary :
+      List String
+
 data ModelGapCandidate : Set where
   wrongPDFSet :
     ModelGapCandidate
@@ -443,6 +550,9 @@ record LogLinearShapeLawReceipt : Setω where
     multiTransitionObstruction :
       DYMultiTransitionObstruction
 
+    cssResummationShapeLawReceipt :
+      CSSResummationShapeLawReceipt
+
     distributedTheoreticalModelGap :
       DYDistributedTheoreticalModelGap
 
@@ -471,6 +581,7 @@ open DASHITypedDerivation public
 open LogPolynomialDecompositionReceipt public
 open DYEndpointThresholdObstruction public
 open DYMultiTransitionObstruction public
+open CSSResummationShapeLawReceipt public
 open DYDistributedTheoreticalModelGap public
 open LogLinearShapeLawReceipt public
 
@@ -723,6 +834,169 @@ canonicalDYMultiTransitionObstruction =
         ∷ []
     }
 
+canonicalCSSResummationTRBDThresholds :
+  TRBD.TRBDProtocolThresholds
+canonicalCSSResummationTRBDThresholds =
+  record
+    { coverageThresholdName =
+        "diagnostic coverage only"
+    ; coverageThreshold =
+        "no promotion threshold from coverage alone"
+    ; perpendicularThresholdName =
+        "strict-log chi2/dof"
+    ; perpendicularThreshold =
+        "2.0"
+    ; thresholdFrozen =
+        true
+    ; thresholdFrozenIsTrue =
+        refl
+    }
+
+canonicalCSSResummationTypedBasis :
+  TRBD.TypedBasis String
+canonicalCSSResummationTypedBasis =
+  record
+    { basisName =
+        "CSS_QCD_resummation_three_component"
+    ; basisVectors =
+        "log(phiStar * exp(-phiStar^2 / phiStarNP^2))"
+        ∷ "log(phiStar * (phiStar / phiStarFO)^(-gammaSudakov(phiStar)))"
+        ∷ "log(phiStar^(-deltaFO))"
+        ∷ []
+    ; basisSource =
+        TRBD.causalBasis
+    ; notFitted =
+        tt
+    ; basisSourceDescription =
+        "CSS/QCD resummation proxy basis with empirical sign-flip transition scales"
+    ; basisPromotionBoundary =
+        "the functional form is CSS-motivated, but this artifact is still a diagnostic proxy"
+        ∷ "transition scales are frozen from residual sign flips and require an accepted derivation before promotion"
+        ∷ "strict-log residual projection remains blocked, so no PromotableTRBDReceipt is inhabited"
+        ∷ []
+    }
+
+canonicalCSSResummationTRBDReceipt :
+  TRBD.TRBDReceipt String
+canonicalCSSResummationTRBDReceipt =
+  record
+    { observed =
+        "CMS-SMP-20-003 t43 strict-log data vector"
+    ; predicted =
+        "sigma_DASHI v4 strict-log prediction vector"
+    ; residualConvention =
+        "log(prediction) - log(data)"
+    ; metricOrCovariance =
+        "full propagated strict-log covariance"
+    ; basis =
+        canonicalCSSResummationTypedBasis
+    ; basisCoefficients =
+        "-0.05646861716803852"
+        ∷ "-0.29104543829985646"
+        ∷ "0.1839077444694179"
+        ∷ []
+    ; rawChi2PerDof =
+        "3180.211733150705"
+    ; perpendicularChi2PerDof =
+        "583.0310302095853"
+    ; basisCoverage =
+        "0.8472242628449239"
+    ; basisCoverageFormula =
+        "rho_B = 1 - (perpendicular chi2 / raw chi2)"
+    ; coverageHonest =
+        refl
+    ; thresholds =
+        canonicalCSSResummationTRBDThresholds
+    ; obstructionStatus =
+        TRBD.obstructionTypedPartial "CSS_QCD_resummation_three_component"
+    ; projectionArtifact =
+        "scripts/data/outputs/dy_slope_decomposition_sigma_dashi_v4_20260515.json"
+    ; diagnosticOnly =
+        true
+    ; promotionBoundary =
+        "CSS residual projection is blocked at chi2/dof 583.0310302095853"
+        ∷ "CSS positive forward shape fit is blocked at chi2/dof 1577.8709184684762"
+        ∷ "the receipt remains non-promoting; no strictPassAchieved proof is supplied"
+        ∷ []
+    }
+
+canonicalCSSResummationShapeLawReceipt :
+  CSSResummationShapeLawReceipt
+canonicalCSSResummationShapeLawReceipt =
+  record
+    { status =
+        cssResummationCandidateNonPromoting
+    ; sourceStrictDiagnostic =
+        Strict.canonicalDrellYanStrictLogLinearSubspaceReceipt
+    ; multiTransitionObstruction =
+        canonicalDYMultiTransitionObstruction
+    ; artifactPath =
+        "scripts/data/outputs/dy_slope_decomposition_sigma_dashi_v4_20260515.json"
+    ; basisName =
+        "CSS_QCD_resummation_three_component"
+    ; basisSource =
+        "Causal_QCD_CSS_resummation_proxy"
+    ; protocol =
+        "strict_log_metric"
+    ; transitionPhiStars =
+        "0.1395"
+        ∷ "0.8385"
+        ∷ []
+    ; transitionScalesFrozenFromSignFlips =
+        true
+    ; transitionScalesFrozenFromSignFlipsIsTrue =
+        refl
+    ; residualProjectionBasisConvention =
+        "centered and RMS-normalized log component directions"
+    ; residualProjectionChi2PerDof =
+        "583.0310302095853"
+    ; residualProjectionCoverage =
+        "0.8472242628449239"
+    ; residualProjectionCondition =
+        "258.17507686000937"
+    ; forwardFitChi2PerDof =
+        "1577.8709184684762"
+    ; forwardFitCondition =
+        "4.1034104834379495"
+    ; forwardFitOptimizerSuccess =
+        true
+    ; forwardFitOptimizerSuccessIsTrue =
+        refl
+    ; gammaSudakovAtNP =
+        "0.09468644955930833"
+    ; gammaSudakovAtFO =
+        "0.0638246890157665"
+    ; fixedOrderDelta =
+        "1.0426083906235053"
+    ; trbdReceipt =
+        canonicalCSSResummationTRBDReceipt
+    ; structuralDerivationAccepted =
+        false
+    ; structuralDerivationAcceptedIsFalse =
+        refl
+    ; strictPassAchieved =
+        false
+    ; strictPassAchievedIsFalse =
+        refl
+    ; nonPromoting =
+        true
+    ; nonPromotingIsTrue =
+        refl
+    ; promotingReceiptExists =
+        false
+    ; promotingReceiptExistsIsFalse =
+        refl
+    ; validationCommands =
+        "python scripts/dy_slope_decomposition.py"
+        ∷ "agda -i . -i /usr/share/agda-stdlib DASHI/Physics/Closure/DrellYanLogLinearShapeLawReceipt.agda"
+        ∷ []
+    ; promotionBoundary =
+        "the CSS-derived proxy basis has been tested internally and does not close the strict-log gap"
+        ∷ "because both residual projection and positive forward shape fit are blocked, this is not a W3 full-authority input"
+        ∷ "remaining branch stays distributed theoretical model gap, with acceptance, EW, PDF, and forward kinematic candidates still live"
+        ∷ []
+    }
+
 canonicalDYDistributedTheoreticalModelGap :
   DYDistributedTheoreticalModelGap
 canonicalDYDistributedTheoreticalModelGap =
@@ -842,6 +1116,8 @@ canonicalDrellYanLogLinearShapeLawReceipt =
         canonicalDYEndpointThresholdObstruction
     ; multiTransitionObstruction =
         canonicalDYMultiTransitionObstruction
+    ; cssResummationShapeLawReceipt =
+        canonicalCSSResummationShapeLawReceipt
     ; distributedTheoreticalModelGap =
         canonicalDYDistributedTheoreticalModelGap
     ; residualObstructionAfterShapeRemoval =

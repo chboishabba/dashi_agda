@@ -281,6 +281,64 @@
       "total_chi2_direct": 57243.81119671269,
       "total_chi2_eigensum": 57243.811196712755
     },
+    "css_resummation_basis": {
+      "basis_components": [
+        "phiStar * exp(-phiStar^2 / phiStarNP^2)",
+        "phiStar * (phiStar / phiStarFO)^(-gammaSudakov(phiStar))",
+        "phiStar^(-deltaFO)"
+      ],
+      "basis_name": "CSS_QCD_resummation_three_component",
+      "basis_source": "Causal_QCD_CSS_resummation_proxy",
+      "derivation_path": "CSS factorisation -> Sudakov exponent -> NLL anomalous dimension proxy",
+      "existing_predictor_reuse_note": "DASHI.Physics.Prediction.sigma_dashi contains HEP-R48/HEP-R49 bin-integrated Sudakov predictor diagnostics; this pass is a strict-log decomposition and positive-shape fit, not a replacement predictor",
+      "forward_fit_promotability": "blocked",
+      "forward_positive_shape_fit": {
+        "basis_dim": 3,
+        "chi2": 23668.063777027142,
+        "chi2_per_dof": 1577.8709184684762,
+        "coefficients": [
+          0.016890811585534925,
+          0.07496292273660732,
+          0.022905355446221236
+        ],
+        "dof": 15,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "optimizer_success": true,
+        "strict_log_residual_convention": "log(css_positive_shape_fit) - log(data)"
+      },
+      "forward_shape_normal_matrix_condition": 4.1034104834379495,
+      "parameters": {
+        "alpha_s_ir_floor_gev": 1.0,
+        "delta_fo": 1.0426083906235053,
+        "gamma_sudakov_at_fo": 0.0638246890157665,
+        "gamma_sudakov_at_np": 0.09468644955930833,
+        "lambda_qcd_gev": 0.2,
+        "phi_fo": 0.8385,
+        "phi_np": 0.1395,
+        "sudakov_a1": 1.3333333333333333,
+        "sudakov_a2": 2.769717540498661,
+        "z_mass_gev": 91.2
+      },
+      "promotable_if_derived": false,
+      "protocol": "strict_log_metric",
+      "residual_projection": {
+        "basis_dim": 3,
+        "chi2_perp": 8745.465453143779,
+        "chi2_perp_per_dof": 583.0310302095853,
+        "coefficients": [
+          -0.05646861716803852,
+          -0.29104543829985646,
+          0.1839077444694179
+        ],
+        "coverage": 0.8472242628449239,
+        "dof_perp": 15
+      },
+      "residual_projection_basis_convention": "centered and RMS-normalized log component directions",
+      "residual_projection_normal_matrix_condition": 258.17507686000937,
+      "residual_projection_promotability": "blocked",
+      "transition_scale_caveat": "transition locations are empirical sign-flip bins; functional form is CSS-derived proxy",
+      "transition_scales_frozen_from_sign_flips": true
+    },
     "log_cubic": {
       "basis_dim": 4,
       "chi2_perp": 252.51270887792188,
