@@ -46,6 +46,19 @@ data ExtendedLogPolynomialStatus : Set where
   localizedResidualTargetOpen :
     ExtendedLogPolynomialStatus
 
+data MechanismCandidate : Set where
+  resummationTransition :
+    String →
+    MechanismCandidate
+
+  binIntegrationArtifact :
+    Nat →
+    MechanismCandidate
+
+  pdfThresholdSlope :
+    String →
+    MechanismCandidate
+
 data DASHITypedDerivationStatus : Set where
   derivationRequested :
     DASHITypedDerivationStatus
@@ -150,6 +163,77 @@ record LogPolynomialDecompositionReceipt : Setω where
     nextBasisRequest :
       List String
 
+record DYEndpointThresholdObstruction : Setω where
+  field
+    artifactPath :
+      String
+
+    logCubicChi2PerDof :
+      String
+
+    peakBin :
+      Nat
+
+    peakPhiStar :
+      String
+
+    quadraticCoefficientApproxZero :
+      Bool
+
+    quadraticCoefficientApproxZeroIsTrue :
+      quadraticCoefficientApproxZero ≡ true
+
+    cubicCoefficientLarge :
+      Bool
+
+    cubicCoefficientLargeIsTrue :
+      cubicCoefficientLarge ≡ true
+
+    cleanAntisymmetricSignature :
+      Bool
+
+    cleanAntisymmetricSignatureIsFalse :
+      cleanAntisymmetricSignature ≡ false
+
+    signedWindowBins :
+      List Nat
+
+    signedWindowPhiStars :
+      List String
+
+    signedWindowResidualSigns :
+      List String
+
+    signFlipCount :
+      Nat
+
+    signFlipLocations :
+      List String
+
+    stepAtPeakChi2PerDof :
+      String
+
+    piecewiseLogLinearChi2PerDof :
+      String
+
+    stepAtPeakBlocked :
+      Bool
+
+    stepAtPeakBlockedIsTrue :
+      stepAtPeakBlocked ≡ true
+
+    piecewiseLogLinearBlocked :
+      Bool
+
+    piecewiseLogLinearBlockedIsTrue :
+      piecewiseLogLinearBlocked ≡ true
+
+    mechanismCandidates :
+      List MechanismCandidate
+
+    mechanismAssessment :
+      List String
+
 record LogLinearShapeLawReceipt : Setω where
   field
     status :
@@ -191,6 +275,9 @@ record LogLinearShapeLawReceipt : Setω where
     extendedLogPolynomialReceipt :
       LogPolynomialDecompositionReceipt
 
+    endpointThresholdObstruction :
+      DYEndpointThresholdObstruction
+
     residualObstructionAfterShapeRemoval :
       Bool
 
@@ -214,6 +301,7 @@ record LogLinearShapeLawReceipt : Setω where
 
 open DASHITypedDerivation public
 open LogPolynomialDecompositionReceipt public
+open DYEndpointThresholdObstruction public
 open LogLinearShapeLawReceipt public
 
 canonicalDASHILogLinearSlopeDerivationRequest :
@@ -319,6 +407,94 @@ canonicalDrellYanLogPolynomialDecompositionReceipt =
         ∷ []
     }
 
+canonicalDYEndpointThresholdObstruction :
+  DYEndpointThresholdObstruction
+canonicalDYEndpointThresholdObstruction =
+  record
+    { artifactPath =
+        "scripts/data/outputs/dy_slope_decomposition_sigma_dashi_v4_20260515.json"
+    ; logCubicChi2PerDof =
+        "18.036622062708705"
+    ; peakBin =
+        17
+    ; peakPhiStar =
+        "2.215"
+    ; quadraticCoefficientApproxZero =
+        true
+    ; quadraticCoefficientApproxZeroIsTrue =
+        refl
+    ; cubicCoefficientLarge =
+        true
+    ; cubicCoefficientLargeIsTrue =
+        refl
+    ; cleanAntisymmetricSignature =
+        false
+    ; cleanAntisymmetricSignatureIsFalse =
+        refl
+    ; signedWindowBins =
+        9
+        ∷ 10
+        ∷ 11
+        ∷ 12
+        ∷ 13
+        ∷ 14
+        ∷ 15
+        ∷ 16
+        ∷ 17
+        ∷ []
+    ; signedWindowPhiStars =
+        "0.051000000000000004"
+        ∷ "0.0645"
+        ∷ "0.08149999999999999"
+        ∷ "0.10250000000000001"
+        ∷ "0.1395"
+        ∷ "0.21150000000000002"
+        ∷ "0.391"
+        ∷ "0.8385"
+        ∷ "2.215"
+        ∷ []
+    ; signedWindowResidualSigns =
+        "+"
+        ∷ "+"
+        ∷ "+"
+        ∷ "+"
+        ∷ "+"
+        ∷ "-"
+        ∷ "-"
+        ∷ "-"
+        ∷ "+"
+        ∷ []
+    ; signFlipCount =
+        2
+    ; signFlipLocations =
+        "0.1395"
+        ∷ "0.8385"
+        ∷ []
+    ; stepAtPeakChi2PerDof =
+        "47.561793578554"
+    ; piecewiseLogLinearChi2PerDof =
+        "47.56179357855403"
+    ; stepAtPeakBlocked =
+        true
+    ; stepAtPeakBlockedIsTrue =
+        refl
+    ; piecewiseLogLinearBlocked =
+        true
+    ; piecewiseLogLinearBlockedIsTrue =
+        refl
+    ; mechanismCandidates =
+        resummationTransition "2.215"
+        ∷ binIntegrationArtifact 17
+        ∷ pdfThresholdSlope "2.215"
+        ∷ []
+    ; mechanismAssessment =
+        "signed residual window is not a clean endpoint antisymmetry: sign flips occur at phiStar 0.1395 and 0.8385"
+        ∷ "step-at-peak and piecewise log-linear bases both remain blocked at chi2/dof 47.561793578554"
+        ∷ "cubic remains the best tested compact basis but is only partial at chi2/dof 18.036622062708705"
+        ∷ "next target is endpoint spike plus midrange sign structure, not a solved threshold law"
+        ∷ []
+    }
+
 canonicalDrellYanLogLinearShapeLawReceipt :
   LogLinearShapeLawReceipt
 canonicalDrellYanLogLinearShapeLawReceipt =
@@ -351,6 +527,8 @@ canonicalDrellYanLogLinearShapeLawReceipt =
         "111.96455543013676"
     ; extendedLogPolynomialReceipt =
         canonicalDrellYanLogPolynomialDecompositionReceipt
+    ; endpointThresholdObstruction =
+        canonicalDYEndpointThresholdObstruction
     ; residualObstructionAfterShapeRemoval =
         true
     ; residualObstructionAfterShapeRemovalIsTrue =

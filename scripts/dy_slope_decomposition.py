@@ -47,6 +47,10 @@ def _promotability_label(chi2_per_dof: float) -> str:
     return "blocked"
 
 
+def _sign_label(value: float) -> str:
+    return "+" if value >= 0.0 else "-"
+
+
 def _load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
@@ -119,6 +123,40 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     top_residual_bins = [int(value) for value in np.argsort(per_bin_chi2_after_linear)[-5:][::-1]]
     peak_bin = top_residual_bins[0]
 
+    window = 8
+    signed_window_lo = max(0, peak_bin - window)
+    signed_window_hi = min(n_bins, peak_bin + window + 1)
+    signed_residual_window = []
+    for index in range(signed_window_lo, signed_window_hi):
+        signed_residual_window.append(
+            {
+                "bin": int(index),
+                "phi_star": float(phi_star[index]),
+                "residual_perp_after_linear": float(residual_corrected[index]),
+                "sign": _sign_label(float(residual_corrected[index])),
+                "per_bin_chi2_after_linear_diag_approx": float(per_bin_chi2_after_linear[index]),
+            }
+        )
+    window_signs = np.sign(residual_corrected[signed_window_lo:signed_window_hi])
+    sign_flip_offsets = np.where(np.diff(window_signs) != 0)[0]
+    sign_flip_bins = [int(signed_window_lo + offset) for offset in sign_flip_offsets]
+
+    step_basis = np.zeros_like(phi_star)
+    step_basis[peak_bin:] = 1.0
+    basis_step = np.column_stack([np.ones_like(log_phi), log_phi, step_basis])
+    step_projection = _trbd_projection(residual_pred_minus_data, basis_step, cov_inv, chi2_raw)
+
+    below_pivot = (phi_star < phi_star[peak_bin]).astype(float)
+    above_pivot = 1.0 - below_pivot
+    basis_piecewise = np.column_stack(
+        [
+            np.ones_like(log_phi),
+            log_phi * below_pivot,
+            log_phi * above_pivot,
+        ]
+    )
+    piecewise_projection = _trbd_projection(residual_pred_minus_data, basis_piecewise, cov_inv, chi2_raw)
+
     data_coeff = np.linalg.solve(normal, basis.T @ cov_inv @ log_data)
     pred_coeff = np.linalg.solve(normal, basis.T @ cov_inv @ log_pred)
     slope_data_observed = float(data_coeff[1])
@@ -184,6 +222,43 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
             "log_cubic_promotability": _promotability_label(
                 cubic_projection["chi2_perp_per_dof"]
             ),
+            "signed_residual_window_after_linear": {
+                "window": int(window),
+                "lo": int(signed_window_lo),
+                "hi_exclusive": int(signed_window_hi),
+                "rows": signed_residual_window,
+                "sign_flip_count": int(len(sign_flip_bins)),
+                "sign_flip_bins": sign_flip_bins,
+                "sign_flip_phi_star": [
+                    float(phi_star[index]) for index in sign_flip_bins
+                ],
+            },
+            "mechanism_discrimination": {
+                "pivot_bin": int(peak_bin),
+                "pivot_phi_star": float(phi_star[peak_bin]),
+                "step_at_peak": {
+                    key: value
+                    for key, value in step_projection.items()
+                    if key != "residual_perp"
+                },
+                "piecewise_log_linear_at_peak": {
+                    key: value
+                    for key, value in piecewise_projection.items()
+                    if key != "residual_perp"
+                },
+                "step_promotability": _promotability_label(
+                    step_projection["chi2_perp_per_dof"]
+                ),
+                "piecewise_log_linear_promotability": _promotability_label(
+                    piecewise_projection["chi2_perp_per_dof"]
+                ),
+                "preferred_diagnostic_basis": (
+                    "step_at_peak"
+                    if step_projection["chi2_perp_per_dof"]
+                    < piecewise_projection["chi2_perp_per_dof"]
+                    else "piecewise_log_linear_at_peak"
+                ),
+            },
         },
         "promotability_assessment": (
             "shape component dominates, but corrected chi2/dof remains above 2; residual obstruction remains"
@@ -251,6 +326,27 @@ def main() -> int:
     )
     print(f"    top 5 bins:                 {extended['top_residual_bins_after_linear']}")
 
+    signed = extended["signed_residual_window_after_linear"]
+    print("\nSIGNED RESIDUAL AROUND PEAK BIN")
+    print(
+        "  Peak bin: "
+        f"{extended['peak_residual_bin_after_linear']}  "
+        f"phi_star = {extended['peak_residual_phi_star_after_linear']:.6f}"
+    )
+    print(f"  Window: bins {signed['lo']} to {signed['hi_exclusive'] - 1}")
+    print("   bin    phi_star        r_perp   sign    per-bin chi2")
+    for row in signed["rows"]:
+        print(
+            f"  {row['bin']:4d}  {row['phi_star']:10.6f}  "
+            f"{row['residual_perp_after_linear']:12.6f}  "
+            f"{row['sign']:>5s}  "
+            f"{row['per_bin_chi2_after_linear_diag_approx']:14.6f}"
+        )
+    print(f"  Sign flips in window:         {signed['sign_flip_count']}")
+    if signed["sign_flip_count"] > 0:
+        print(f"  Flip bins:                    {signed['sign_flip_bins']}")
+        print(f"  Flip phi_star:                {signed['sign_flip_phi_star']}")
+
     print("\nPROMOTABILITY LADDER")
     for label, key in [
         ("log-linear", "log_linear"),
@@ -260,6 +356,18 @@ def main() -> int:
         item = extended[key]
         status = _promotability_label(item["chi2_perp_per_dof"])
         print(f"  {label:15s} chi2/dof = {item['chi2_perp_per_dof']:10.6f}  {status}")
+
+    mechanism = extended["mechanism_discrimination"]
+    print("\nMECHANISM DISCRIMINATION")
+    for label, key in [
+        ("log-cubic", "log_cubic"),
+        ("step at peak", "step_at_peak"),
+        ("piecewise log-linear", "piecewise_log_linear_at_peak"),
+    ]:
+        item = extended[key] if key == "log_cubic" else mechanism[key]
+        status = _promotability_label(item["chi2_perp_per_dof"])
+        print(f"  {label:22s} chi2/dof = {item['chi2_perp_per_dof']:10.6f}  {status}")
+    print(f"  Preferred diagnostic basis:   {mechanism['preferred_diagnostic_basis']}")
     print(f"\n  Artifact written: {args.output}")
     return 0
 
