@@ -382,6 +382,55 @@
         "optimizer_message": "Solution found.",
         "optimizer_success": true
       },
+      "full_tensor_diagnostic": {
+        "angular_grid": {
+          "fiducial_fraction_proxy": 0.18139391235716001,
+          "n_cos_theta": 161,
+          "n_phi_cs": 181
+        },
+        "basis_source": "Causal_QCD_EMST_tensor_structure_proxy",
+        "coefficient_means_fiducial": [
+          0.18139391235716001,
+          0.1602942320270734,
+          -0.0008563745437500823,
+          0.021022582558846384,
+          3.0478652746993074e-20
+        ],
+        "coefficient_means_inclusive": [
+          1.0,
+          0.6666795262528453,
+          -6.7053036043384764e-18,
+          -4.114618120844065e-18,
+          1.2801034153737092e-18
+        ],
+        "component_count_proxy": 5,
+        "cuts": {
+          "lepton_eta_max": 2.4,
+          "lepton_pT_lead_GeV": 25.0,
+          "lepton_pT_sub_GeV": 20.0
+        },
+        "diagnostic_only": true,
+        "dominant_proxy_component": "A2_like_linear_phiStar",
+        "five_component_proxy": {
+          "chi2": 74933.47544644953,
+          "chi2_per_dof": 4162.970858136086,
+          "positive_pre_scale": true,
+          "promotability": "blocked",
+          "scale": 2.2542208148792335
+        },
+        "full_emst_surface_status": "missing_nine_component_fiducial_leptonic_coefficients",
+        "leading_plus_A2_proxy": {
+          "chi2": 85143.02072918935,
+          "chi2_per_dof": 4730.167818288297,
+          "positive_pre_scale": true,
+          "promotability": "blocked",
+          "scale": 2.5975889974371964
+        },
+        "method": "deterministic_five_component_angular_proxy",
+        "promotion_boundary": "proxy result cannot promote; promotion requires the full nine-component EMST fiducial coefficient surface evaluated from the exact CMS cuts",
+        "reference": "arXiv:2006.11382",
+        "structure_function_count_required": 9
+      },
       "kappa_distance_fit_minus_derived": 0.27129797406014555,
       "promotability_derived_kappa": "blocked",
       "promotion_boundary": "derived scalar kappa is not the full fiducial correction surface; do not promote unless strict threshold passes and the acceptance surface contract is complete",

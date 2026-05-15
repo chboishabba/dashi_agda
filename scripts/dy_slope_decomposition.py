@@ -174,6 +174,135 @@ def _emst_fiducial_power_correction(
     return kappa * (sigma_inclusive + phi_star * dsigma_dphi)
 
 
+def _emst_fiducial_tensor_proxy(
+    phi_star: np.ndarray,
+    sigma_inclusive: np.ndarray,
+    selection_metadata: dict[str, Any],
+    cov_inv: np.ndarray,
+    log_data: np.ndarray,
+) -> dict[str, Any]:
+    """Deterministic five-component EMST-inspired tensor diagnostic.
+
+    This is intentionally recorded as a proxy, not as the full EMST surface:
+    the real correction requires the nine fiducial leptonic coefficient
+    functions integrated over the exact CMS selection.
+    """
+    lepton_pt = selection_metadata.get("lepton_pT_min_GeV", {})
+    if isinstance(lepton_pt, dict):
+        pt_lead = float(lepton_pt.get("leading", 25.0))
+        pt_sub = float(lepton_pt.get("subleading", 20.0))
+    else:
+        pt_lead = float(selection_metadata.get("leading_lepton_pT_min_GeV", lepton_pt))
+        pt_sub = float(selection_metadata.get("subleading_lepton_pT_min_GeV", 20.0))
+    eta_max = float(selection_metadata.get("lepton_eta_max", 2.4))
+    mass = 91.1876
+
+    # Fixed midpoint grid keeps the artifact reproducible across runs.
+    n_cos = 161
+    n_phi = 181
+    cos_theta = np.linspace(-1.0 + 1.0 / n_cos, 1.0 - 1.0 / n_cos, n_cos)
+    phi_cs = np.linspace(0.0, 2.0 * math.pi, n_phi, endpoint=False)
+    cos_grid, phi_grid = np.meshgrid(cos_theta, phi_cs, indexing="ij")
+    sin_grid = np.sqrt(np.maximum(1.0 - cos_grid**2, 0.0))
+
+    # Collinear-limit fiducial proxy.  This is not a replacement for the
+    # published EMST leptonic-tensor integration; it is a deterministic
+    # smoke test for whether angular tensor directions beat scalar kappa.
+    pt_l1 = (mass / 2.0) * sin_grid * np.abs(np.cos(phi_grid))
+    pt_l2 = (mass / 2.0) * sin_grid * np.abs(np.sin(phi_grid))
+    eta_l = -np.log(np.tan(np.arccos(np.clip(np.abs(cos_grid), 0.0, 1.0)) / 2.0) + 1.0e-12)
+    fiducial = (pt_l1 > pt_lead) & (pt_l2 > pt_sub) & (eta_l < eta_max)
+    fiducial_fraction = float(np.mean(fiducial))
+
+    angular_basis = [
+        np.ones_like(cos_grid),
+        sin_grid**2,
+        sin_grid * np.cos(phi_grid),
+        sin_grid**2 * np.cos(2.0 * phi_grid),
+        sin_grid * np.cos(phi_grid) * cos_grid,
+    ]
+    coefficient_means = []
+    coefficient_acceptance_weighted = []
+    for basis in angular_basis:
+        coefficient_means.append(float(np.mean(basis)))
+        coefficient_acceptance_weighted.append(float(np.mean(basis * fiducial)))
+
+    qT_over_Q = phi_star
+    structure_functions = np.vstack(
+        [
+            sigma_inclusive,
+            sigma_inclusive * qT_over_Q**2,
+            sigma_inclusive * qT_over_Q,
+            sigma_inclusive * qT_over_Q**2,
+            sigma_inclusive * qT_over_Q * 0.5,
+        ]
+    )
+
+    coeff = np.array(coefficient_acceptance_weighted, dtype=float)
+    sigma_tensor = coeff @ structure_functions
+    tensor_positive_pre_scale = bool(np.all(sigma_tensor > 0.0))
+    if not tensor_positive_pre_scale:
+        sigma_tensor = np.maximum(sigma_tensor, np.finfo(float).tiny)
+    scale = float(np.exp(np.mean(log_data) - np.mean(np.log(sigma_tensor))))
+    sigma_tensor_scaled = sigma_tensor * scale
+    residual_tensor = np.log(sigma_tensor_scaled) - log_data
+    chi2_tensor = float(residual_tensor @ cov_inv @ residual_tensor)
+
+    sigma_leading_a2 = (
+        coeff[0] * structure_functions[0]
+        + coeff[2] * structure_functions[2]
+    )
+    leading_a2_positive_pre_scale = bool(np.all(sigma_leading_a2 > 0.0))
+    if not leading_a2_positive_pre_scale:
+        sigma_leading_a2 = np.maximum(sigma_leading_a2, np.finfo(float).tiny)
+    scale_a2 = float(np.exp(np.mean(log_data) - np.mean(np.log(sigma_leading_a2))))
+    sigma_leading_a2_scaled = sigma_leading_a2 * scale_a2
+    residual_a2 = np.log(sigma_leading_a2_scaled) - log_data
+    chi2_a2 = float(residual_a2 @ cov_inv @ residual_a2)
+
+    n_bins = len(phi_star)
+    return {
+        "reference": "arXiv:2006.11382",
+        "method": "deterministic_five_component_angular_proxy",
+        "basis_source": "Causal_QCD_EMST_tensor_structure_proxy",
+        "full_emst_surface_status": "missing_nine_component_fiducial_leptonic_coefficients",
+        "component_count_proxy": 5,
+        "structure_function_count_required": 9,
+        "dominant_proxy_component": "A2_like_linear_phiStar",
+        "cuts": {
+            "lepton_pT_lead_GeV": pt_lead,
+            "lepton_pT_sub_GeV": pt_sub,
+            "lepton_eta_max": eta_max,
+        },
+        "angular_grid": {
+            "n_cos_theta": n_cos,
+            "n_phi_cs": n_phi,
+            "fiducial_fraction_proxy": fiducial_fraction,
+        },
+        "coefficient_means_inclusive": coefficient_means,
+        "coefficient_means_fiducial": coefficient_acceptance_weighted,
+        "leading_plus_A2_proxy": {
+            "scale": scale_a2,
+            "positive_pre_scale": leading_a2_positive_pre_scale,
+            "chi2": chi2_a2,
+            "chi2_per_dof": chi2_a2 / n_bins,
+            "promotability": _promotability_label(chi2_a2 / n_bins),
+        },
+        "five_component_proxy": {
+            "scale": scale,
+            "positive_pre_scale": tensor_positive_pre_scale,
+            "chi2": chi2_tensor,
+            "chi2_per_dof": chi2_tensor / n_bins,
+            "promotability": _promotability_label(chi2_tensor / n_bins),
+        },
+        "diagnostic_only": True,
+        "promotion_boundary": (
+            "proxy result cannot promote; promotion requires the full nine-component "
+            "EMST fiducial coefficient surface evaluated from the exact CMS cuts"
+        ),
+    }
+
+
 def _cms_smp_20_003_derived_kappa(selection_metadata: dict[str, Any]) -> dict[str, Any]:
     lepton_pt = selection_metadata.get("lepton_pT_min_GeV", {})
     if isinstance(lepton_pt, dict):
@@ -423,6 +552,13 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     )
     kappa_fitted = float(emst_fit_result.x)
     chi2_emst_fitted = float(emst_fit_result.fun)
+    emst_tensor_proxy = _emst_fiducial_tensor_proxy(
+        phi_star,
+        pred,
+        selection_metadata,
+        cov_inv,
+        log_data,
+    )
 
     d2_pred = np.gradient(np.gradient(pred, phi_star), phi_star)
     bin_widths = phi_star_high - phi_star_low
@@ -862,6 +998,7 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
                     "derived_scalar_kappa_only; central A(M,phi*) and full "
                     "EMST fiducial surface remain missing"
                 ),
+                "full_tensor_diagnostic": emst_tensor_proxy,
                 "zero_free_parameter_promotable": chi2_emst_derived_per_dof <= 2.0,
                 "promotion_boundary": (
                     "derived scalar kappa is not the full fiducial correction "
@@ -1161,6 +1298,21 @@ def main() -> int:
         "  zero-free-param promotable:   "
         f"{emst['zero_free_parameter_promotable']}"
     )
+    full_tensor = emst["full_tensor_diagnostic"]
+    print("\nEMST FULL TENSOR DIAGNOSTIC")
+    print(f"  Method:                       {full_tensor['method']}")
+    print(f"  Surface status:               {full_tensor['full_emst_surface_status']}")
+    print(
+        "  Leading + A2 proxy chi2/dof:  "
+        f"{full_tensor['leading_plus_A2_proxy']['chi2_per_dof']:10.6f}  "
+        f"{full_tensor['leading_plus_A2_proxy']['promotability']}"
+    )
+    print(
+        "  Five-component proxy chi2/dof:"
+        f"  {full_tensor['five_component_proxy']['chi2_per_dof']:10.6f}  "
+        f"{full_tensor['five_component_proxy']['promotability']}"
+    )
+    print(f"  Diagnostic only:              {full_tensor['diagnostic_only']}")
 
     smooth = extended["smooth_antisymmetric_discrimination"]
     print("\nSMOOTH ANTISYMMETRIC DISCRIMINATION")

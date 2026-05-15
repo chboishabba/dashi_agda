@@ -518,6 +518,56 @@ record DYDistributedTheoreticalModelGap : Setω where
     gapAssessment :
       List String
 
+record EMSTFullTensorReceipt : Setω where
+  field
+    reference :
+      String
+
+    nStructureFunctionsRequired :
+      Nat
+
+    nStructureFunctionsRequiredIsNine :
+      nStructureFunctionsRequired ≡ 9
+
+    proxyComponentCount :
+      Nat
+
+    proxyComponentCountIsFive :
+      proxyComponentCount ≡ 5
+
+    dominantProxyTerm :
+      String
+
+    cutsSource :
+      String
+
+    leptonicCoefficientMethod :
+      String
+
+    chi2LeadPlusA2Proxy :
+      String
+
+    chi2FiveComponentProxy :
+      String
+
+    fullEMSTSurfaceStatus :
+      String
+
+    diagnosticOnly :
+      Bool
+
+    diagnosticOnlyIsTrue :
+      diagnosticOnly ≡ true
+
+    promotes :
+      Bool
+
+    promotesIsFalse :
+      promotes ≡ false
+
+    nextIfBlocked :
+      String
+
 data AcceptanceMetadataGapStatus : Set where
   acceptanceMetadataGapOpen :
     AcceptanceMetadataGapStatus
@@ -595,6 +645,9 @@ record DYAcceptanceMetadataGapReceipt : Setω where
 
     emstDerivedScalarPromotesIsFalse :
       emstDerivedScalarPromotes ≡ false
+
+    emstFullTensorReceipt :
+      EMSTFullTensorReceipt
 
     emstBlockedUntilSelectionMetadataComplete :
       Bool
@@ -706,6 +759,7 @@ open DYEndpointThresholdObstruction public
 open DYMultiTransitionObstruction public
 open CSSResummationShapeLawReceipt public
 open DYDistributedTheoreticalModelGap public
+open EMSTFullTensorReceipt public
 open DYAcceptanceMetadataGapReceipt public
 open LogLinearShapeLawReceipt public
 
@@ -1215,6 +1269,44 @@ canonicalDYDistributedTheoreticalModelGap =
         ∷ []
     }
 
+canonicalEMSTFullTensorReceipt :
+  EMSTFullTensorReceipt
+canonicalEMSTFullTensorReceipt =
+  record
+    { reference =
+        "arXiv:2006.11382"
+    ; nStructureFunctionsRequired =
+        9
+    ; nStructureFunctionsRequiredIsNine =
+        refl
+    ; proxyComponentCount =
+        5
+    ; proxyComponentCountIsFive =
+        refl
+    ; dominantProxyTerm =
+        "A2_like_linear_phiStar"
+    ; cutsSource =
+        "CMS-SMP-20-003-6b8eb1d"
+    ; leptonicCoefficientMethod =
+        "deterministic_five_component_angular_proxy"
+    ; chi2LeadPlusA2Proxy =
+        "4730.167818"
+    ; chi2FiveComponentProxy =
+        "4162.970858"
+    ; fullEMSTSurfaceStatus =
+        "missing_nine_component_fiducial_leptonic_coefficients"
+    ; diagnosticOnly =
+        true
+    ; diagnosticOnlyIsTrue =
+        refl
+    ; promotes =
+        false
+    ; promotesIsFalse =
+        refl
+    ; nextIfBlocked =
+        "derive the full nine-component EMST fiducial coefficient surface over the exact CMS cuts before EW/PDF lanes are promoted"
+    }
+
 canonicalDYAcceptanceMetadataGapReceipt :
   DYAcceptanceMetadataGapReceipt
 canonicalDYAcceptanceMetadataGapReceipt =
@@ -1269,6 +1361,8 @@ canonicalDYAcceptanceMetadataGapReceipt =
         false
     ; emstDerivedScalarPromotesIsFalse =
         refl
+    ; emstFullTensorReceipt =
+        canonicalEMSTFullTensorReceipt
     ; emstBlockedUntilSelectionMetadataComplete =
         true
     ; emstBlockedUntilSelectionMetadataCompleteIsTrue =
@@ -1289,7 +1383,8 @@ canonicalDYAcceptanceMetadataGapReceipt =
         "CMS-SMP-20-003 t43 fiducial selection metadata is machine-readable: lepton pT/eta, channel triggers, anti-kt R=0.4 jets, jet pT/y, lepton isolation, and channel combination are now sourced from arXiv:2205.04897"
         ∷ "supply or derive the central acceptance surface A(M,phi*) and its provenance"
         ∷ "Pass 20 derived scalar EMST proxy kappa=0.290919 gives chi2/dof=3044.091531 and is non-promoting"
-        ∷ "supply or derive the full EMST fiducial power-correction surface from the machine-readable CMS cuts; scalar kappa is insufficient"
+        ∷ "Pass 21 deterministic five-component tensor proxy gives chi2/dof=4162.970858 and is non-promoting"
+        ∷ "supply or derive the full nine-component EMST fiducial power-correction surface from the machine-readable CMS cuts; scalar and five-component proxies are insufficient"
         ∷ "only then implement the EMST fiducial power-correction diagnostic as a pre-frozen strict-log prediction correction"
         ∷ "rerun strict-log without posterior retuning before any full W3 authority promotion"
         ∷ []
