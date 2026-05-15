@@ -1,0 +1,36 @@
+{
+  "basis": "span_1_log_phiStar",
+  "chi2_corrected_after_shape_removal": 1791.432886882188,
+  "chi2_cross": 6.821210263296962e-12,
+  "chi2_fraction_from_shape": 0.968705212853035,
+  "chi2_per_dof_corrected_after_shape_removal": 111.96455543013676,
+  "chi2_per_dof_raw": 3180.211733150705,
+  "chi2_raw": 57243.81119671269,
+  "chi2_shape": 55452.378309830514,
+  "covariance_law": "C_log[i,j] = C_raw[i,j] / (R_data[i] * R_data[j])",
+  "existing_runner_log_phi_diagnostic": {
+    "basis": [
+      "1",
+      "log(phiStar)"
+    ],
+    "fitInnerProduct": "inverse propagated log covariance",
+    "fittedChi2": 55452.378309830514,
+    "fittedChi2FractionOfFull": 0.9687052128530349,
+    "intercept": -0.3104937924536695,
+    "logPhiSlope": -0.34242419691254444,
+    "remainingChi2AfterProjection": 1791.432886882188,
+    "remainingChi2FractionOfFull": 0.031294787146965215,
+    "status": "computed"
+  },
+  "intercept_fit_pred_minus_data": -0.3104937924536695,
+  "n_bins": 18,
+  "promotability_assessment": "shape component dominates, but corrected chi2/dof remains above 2; residual obstruction remains",
+  "protocol": "strict_log_covariance_weighted_wls_projection",
+  "residual_convention": "log(prediction) - log(data)",
+  "slope_correction_needed_for_prediction": 0.3424241969125445,
+  "slope_dashi_v4": -0.21843391917080585,
+  "slope_data_observed": 0.12399027774173865,
+  "slope_fit_pred_minus_data": -0.34242419691254444,
+  "source_artifact": "scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json",
+  "strict_pass_after_shape_removal": false
+}

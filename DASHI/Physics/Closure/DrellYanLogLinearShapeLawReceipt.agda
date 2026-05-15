@@ -80,8 +80,26 @@ record LogLinearShapeLawReceipt : Setω where
     slopeDerivation :
       DASHITypedDerivation
 
+    slopeArtifactPath :
+      String
+
+    fittedResidualSlopePredMinusData :
+      String
+
+    slopeCorrectionNeededForPrediction :
+      String
+
+    chi2FractionFromShape :
+      String
+
     chi2PerDofCorrected :
       String
+
+    residualObstructionAfterShapeRemoval :
+      Bool
+
+    residualObstructionAfterShapeRemovalIsTrue :
+      residualObstructionAfterShapeRemoval ≡ true
 
     strictPassAchieved :
       Bool
@@ -140,11 +158,23 @@ canonicalDrellYanLogLinearShapeLawReceipt =
     ; spanBasisName =
         "span(1, log(phiStar))"
     ; slopePrediction =
-        "missing"
+        "fitted diagnostic only; no DASHI-derived slope prediction accepted"
     ; slopeDerivation =
         canonicalDASHILogLinearSlopeDerivationRequest
+    ; slopeArtifactPath =
+        "scripts/data/outputs/dy_slope_decomposition_sigma_dashi_v4_20260515.json"
+    ; fittedResidualSlopePredMinusData =
+        "-0.34242419691254444"
+    ; slopeCorrectionNeededForPrediction =
+        "0.3424241969125445"
+    ; chi2FractionFromShape =
+        "0.968705212853035"
     ; chi2PerDofCorrected =
-        "not-yet-computed"
+        "111.96455543013676"
+    ; residualObstructionAfterShapeRemoval =
+        true
+    ; residualObstructionAfterShapeRemovalIsTrue =
+        refl
     ; strictPassAchieved =
         false
     ; strictPassAchievedIsFalse =
@@ -154,9 +184,9 @@ canonicalDrellYanLogLinearShapeLawReceipt =
     ; shapePassAchievedIsFalse =
         refl
     ; nextReceiptRequest =
-        "replace slopePrediction = missing with a DASHI-derived below-Z log-linear slope"
-        ∷ "rerun t43 strict-log diagnostics with the corrected shape law"
-        ∷ "only construct a full authority token if strictPassAchieved becomes true"
+        "span(1, log(phiStar)) explains 0.968705212853035 of strict-log chi2 but does not close the receipt"
+        ∷ "after fitted shape removal chi2/dof is 111.96455543013676, so a residual obstruction remains"
+        ∷ "extend the decomposition beyond the single log-linear slope before any full authority promotion"
         ∷ []
     }
 
