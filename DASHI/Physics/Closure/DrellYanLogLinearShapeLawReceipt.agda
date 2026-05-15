@@ -584,6 +584,18 @@ record DYAcceptanceMetadataGapReceipt : Setω where
     emstCorrectionStatus :
       String
 
+    emstDerivedScalarKappa :
+      String
+
+    emstDerivedScalarChi2PerDof :
+      String
+
+    emstDerivedScalarPromotes :
+      Bool
+
+    emstDerivedScalarPromotesIsFalse :
+      emstDerivedScalarPromotes ≡ false
+
     emstBlockedUntilSelectionMetadataComplete :
       Bool
 
@@ -1249,6 +1261,14 @@ canonicalDYAcceptanceMetadataGapReceipt =
         "arXiv:2006.11382"
     ; emstCorrectionStatus =
         "blocked_until_central_acceptance_and_fiducial_power_correction_surface_are_machine_readable"
+    ; emstDerivedScalarKappa =
+        "0.290919"
+    ; emstDerivedScalarChi2PerDof =
+        "3044.091531"
+    ; emstDerivedScalarPromotes =
+        false
+    ; emstDerivedScalarPromotesIsFalse =
+        refl
     ; emstBlockedUntilSelectionMetadataComplete =
         true
     ; emstBlockedUntilSelectionMetadataCompleteIsTrue =
@@ -1268,7 +1288,8 @@ canonicalDYAcceptanceMetadataGapReceipt =
     ; nextProviderRequest =
         "CMS-SMP-20-003 t43 fiducial selection metadata is machine-readable: lepton pT/eta, channel triggers, anti-kt R=0.4 jets, jet pT/y, lepton isolation, and channel combination are now sourced from arXiv:2205.04897"
         ∷ "supply or derive the central acceptance surface A(M,phi*) and its provenance"
-        ∷ "supply or derive the EMST fiducial power-correction surface from the machine-readable CMS cuts"
+        ∷ "Pass 20 derived scalar EMST proxy kappa=0.290919 gives chi2/dof=3044.091531 and is non-promoting"
+        ∷ "supply or derive the full EMST fiducial power-correction surface from the machine-readable CMS cuts; scalar kappa is insufficient"
         ∷ "only then implement the EMST fiducial power-correction diagnostic as a pre-frozen strict-log prediction correction"
         ∷ "rerun strict-log without posterior retuning before any full W3 authority promotion"
         ∷ []

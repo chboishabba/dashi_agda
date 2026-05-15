@@ -165,6 +165,45 @@ def _positive_css_forward_fit(
     }
 
 
+def _emst_fiducial_power_correction(
+    phi_star: np.ndarray,
+    sigma_inclusive: np.ndarray,
+    kappa: float,
+) -> np.ndarray:
+    dsigma_dphi = np.gradient(sigma_inclusive, phi_star)
+    return kappa * (sigma_inclusive + phi_star * dsigma_dphi)
+
+
+def _cms_smp_20_003_derived_kappa(selection_metadata: dict[str, Any]) -> dict[str, Any]:
+    lepton_pt = selection_metadata.get("lepton_pT_min_GeV", {})
+    if isinstance(lepton_pt, dict):
+        pt_lead = float(lepton_pt.get("leading", selection_metadata.get("leading_lepton_pT_min_GeV", 25.0)))
+        pt_sub = float(lepton_pt.get("subleading", selection_metadata.get("subleading_lepton_pT_min_GeV", 20.0)))
+    else:
+        pt_lead = float(selection_metadata.get("leading_lepton_pT_min_GeV", lepton_pt))
+        pt_sub = float(selection_metadata.get("subleading_lepton_pT_min_GeV", 20.0))
+    eta_max = float(selection_metadata.get("lepton_eta_max", 2.4))
+    m_z = 91.1876
+    f_eta = 1.0 - 1.0 / (math.cosh(eta_max) ** 2)
+    kappa = (pt_lead / (m_z / 2.0)) ** 2 * f_eta
+    return {
+        "analysis": "CMS-SMP-20-003",
+        "source": selection_metadata.get("fiducial_selection_source", {}),
+        "lepton_pT_lead_GeV": pt_lead,
+        "lepton_pT_sub_GeV": pt_sub,
+        "lepton_eta_max": eta_max,
+        "jet_pT_min_GeV": selection_metadata.get("jet_pT_min_GeV"),
+        "jet_rapidity_abs_max": selection_metadata.get("jet_rapidity_abs_max"),
+        "jet_algorithm": selection_metadata.get("jet_algorithm"),
+        "jet_radius": selection_metadata.get("jet_radius"),
+        "m_z_GeV": m_z,
+        "f_eta": f_eta,
+        "kappa_derived": kappa,
+        "kappa_derivation": "EMST proxy: (pT_lead/(M_Z/2))^2 * (1 - 1/cosh^2(eta_max))",
+        "zero_free_parameters": True,
+    }
+
+
 def _load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
@@ -213,6 +252,9 @@ def _load_log_covariance(payload: dict[str, Any], data: np.ndarray) -> np.ndarra
 
 def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     payload = _load_json(input_path)
+    selection_metadata = payload.get("selection_metadata", {})
+    if not isinstance(selection_metadata, dict):
+        selection_metadata = {}
     phi_star, data, pred = _per_bin_arrays(payload)
     phi_star_low, phi_star_high = _per_bin_edges(payload)
     log_cov = _load_log_covariance(payload, data)
@@ -348,6 +390,39 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
         log_data,
         cov_inv,
     )
+
+    emst_kappa = _cms_smp_20_003_derived_kappa(selection_metadata)
+    kappa_derived = float(emst_kappa["kappa_derived"])
+    delta_fid_derived = _emst_fiducial_power_correction(
+        phi_star,
+        pred,
+        kappa_derived,
+    )
+    pred_emst_derived = pred + delta_fid_derived
+    emst_derived_positive = bool(np.all(pred_emst_derived > 0.0))
+    if emst_derived_positive:
+        residual_emst_derived = np.log(pred_emst_derived) - log_data
+        chi2_emst_derived = float(residual_emst_derived @ cov_inv @ residual_emst_derived)
+        chi2_emst_derived_per_dof = chi2_emst_derived / n_bins
+    else:
+        chi2_emst_derived = 1.0e30
+        chi2_emst_derived_per_dof = 1.0e30
+
+    def emst_kappa_chi2(kappa: float) -> float:
+        delta_fid = _emst_fiducial_power_correction(phi_star, pred, kappa)
+        corrected = pred + delta_fid
+        if np.any(~np.isfinite(corrected)) or np.any(corrected <= 0.0):
+            return 1.0e30
+        residual = np.log(corrected) - log_data
+        return float(residual @ cov_inv @ residual) / n_bins
+
+    emst_fit_result = minimize_scalar(
+        emst_kappa_chi2,
+        bounds=(-1.0, 1.0),
+        method="bounded",
+    )
+    kappa_fitted = float(emst_fit_result.x)
+    chi2_emst_fitted = float(emst_fit_result.fun)
 
     d2_pred = np.gradient(np.gradient(pred, phi_star), phi_star)
     bin_widths = phi_star_high - phi_star_low
@@ -755,6 +830,45 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
                 ),
                 "promotable_if_derived": css_forward_fit["chi2_per_dof"] <= 2.0,
             },
+            "emst_fiducial_power_correction": {
+                "reference": "arXiv:2006.11382",
+                "correction_type": "fiducial_power_correction_proxy",
+                "basis_source": "Causal_QCD_EMST_CMS_SMP_20_003",
+                "strict_log_metric": True,
+                "residual_convention": "log(prediction_with_emst_correction) - log(data)",
+                "cms_cuts": emst_kappa,
+                "derived_kappa": kappa_derived,
+                "derived_delta_min": float(np.min(delta_fid_derived)),
+                "derived_delta_max": float(np.max(delta_fid_derived)),
+                "derived_prediction_positive": emst_derived_positive,
+                "chi2_derived_kappa": chi2_emst_derived,
+                "chi2_per_dof_derived_kappa": chi2_emst_derived_per_dof,
+                "promotability_derived_kappa": _promotability_label(
+                    chi2_emst_derived_per_dof
+                ),
+                "fitted_kappa_diagnostic": {
+                    "kappa": kappa_fitted,
+                    "chi2_per_dof": chi2_emst_fitted,
+                    "optimizer_success": bool(emst_fit_result.success),
+                    "optimizer_message": str(emst_fit_result.message),
+                    "diagnostic_only": True,
+                },
+                "kappa_distance_fit_minus_derived": kappa_fitted - kappa_derived,
+                "central_acceptance_A_status": selection_metadata.get(
+                    "central_acceptance_A",
+                    "MISSING",
+                ),
+                "surface_status": (
+                    "derived_scalar_kappa_only; central A(M,phi*) and full "
+                    "EMST fiducial surface remain missing"
+                ),
+                "zero_free_parameter_promotable": chi2_emst_derived_per_dof <= 2.0,
+                "promotion_boundary": (
+                    "derived scalar kappa is not the full fiducial correction "
+                    "surface; do not promote unless strict threshold passes and "
+                    "the acceptance surface contract is complete"
+                ),
+            },
             "smooth_antisymmetric_discrimination": {
                 "shifted_cubic": {
                     key: value
@@ -1020,6 +1134,32 @@ def main() -> int:
     print(
         "  Promotable if derived:         "
         f"{css['promotable_if_derived']}"
+    )
+
+    emst = extended["emst_fiducial_power_correction"]
+    print("\nEMST FIDUCIAL POWER CORRECTION")
+    print(f"  Reference:                    {emst['reference']}")
+    print(f"  Basis source:                 {emst['basis_source']}")
+    print(f"  derived kappa:                {emst['derived_kappa']:.6f}")
+    print(f"  f(eta):                       {emst['cms_cuts']['f_eta']:.6f}")
+    print(
+        "  derived kappa chi2/dof:       "
+        f"{emst['chi2_per_dof_derived_kappa']:10.6f}  "
+        f"{emst['promotability_derived_kappa']}"
+    )
+    print(
+        "  fitted kappa diagnostic:      "
+        f"{emst['fitted_kappa_diagnostic']['kappa']:.6f}  "
+        f"chi2/dof = {emst['fitted_kappa_diagnostic']['chi2_per_dof']:10.6f}"
+    )
+    print(
+        "  fit-derived kappa distance:   "
+        f"{emst['kappa_distance_fit_minus_derived']:.6f}"
+    )
+    print(f"  surface status:               {emst['surface_status']}")
+    print(
+        "  zero-free-param promotable:   "
+        f"{emst['zero_free_parameter_promotable']}"
     )
 
     smooth = extended["smooth_antisymmetric_discrimination"]

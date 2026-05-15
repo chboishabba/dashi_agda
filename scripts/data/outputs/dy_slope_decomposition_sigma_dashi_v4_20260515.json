@@ -339,6 +339,58 @@
       "transition_scale_caveat": "transition locations are empirical sign-flip bins; functional form is CSS-derived proxy",
       "transition_scales_frozen_from_sign_flips": true
     },
+    "emst_fiducial_power_correction": {
+      "basis_source": "Causal_QCD_EMST_CMS_SMP_20_003",
+      "central_acceptance_A_status": "MISSING",
+      "chi2_derived_kappa": 54793.647553154195,
+      "chi2_per_dof_derived_kappa": 3044.0915307307887,
+      "cms_cuts": {
+        "analysis": "CMS-SMP-20-003",
+        "f_eta": 0.967616225658682,
+        "jet_algorithm": "anti-kt",
+        "jet_pT_min_GeV": 30.0,
+        "jet_radius": 0.4,
+        "jet_rapidity_abs_max": 2.4,
+        "kappa_derivation": "EMST proxy: (pT_lead/(M_Z/2))^2 * (1 - 1/cosh^2(eta_max))",
+        "kappa_derived": 0.2909186609829125,
+        "lepton_eta_max": 2.4,
+        "lepton_pT_lead_GeV": 25.0,
+        "lepton_pT_sub_GeV": 20.0,
+        "m_z_GeV": 91.1876,
+        "source": {
+          "analysis": "CMS-SMP-20-003",
+          "arxiv": "2205.04897",
+          "paper_doi": "10.1140/epjc/s10052-023-11631-7",
+          "source_notes": [
+            "arXiv source SMP-20-003_temp.tex lines 163-197",
+            "particle-level phase-space statement lines 346-352",
+            "jet clustering statement lines 153-154"
+          ],
+          "source_section": "Event selection and unfolding particle-level phase space"
+        },
+        "zero_free_parameters": true
+      },
+      "correction_type": "fiducial_power_correction_proxy",
+      "derived_delta_max": 0.05266371671751496,
+      "derived_delta_min": 0.010953458272766612,
+      "derived_kappa": 0.2909186609829125,
+      "derived_prediction_positive": true,
+      "fitted_kappa_diagnostic": {
+        "chi2_per_dof": 3012.314226386642,
+        "diagnostic_only": true,
+        "kappa": 0.5622166350430581,
+        "optimizer_message": "Solution found.",
+        "optimizer_success": true
+      },
+      "kappa_distance_fit_minus_derived": 0.27129797406014555,
+      "promotability_derived_kappa": "blocked",
+      "promotion_boundary": "derived scalar kappa is not the full fiducial correction surface; do not promote unless strict threshold passes and the acceptance surface contract is complete",
+      "reference": "arXiv:2006.11382",
+      "residual_convention": "log(prediction_with_emst_correction) - log(data)",
+      "strict_log_metric": true,
+      "surface_status": "derived_scalar_kappa_only; central A(M,phi*) and full EMST fiducial surface remain missing",
+      "zero_free_parameter_promotable": false
+    },
     "log_cubic": {
       "basis_dim": 4,
       "chi2_perp": 252.51270887792188,
