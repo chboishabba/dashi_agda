@@ -1,0 +1,274 @@
+{
+  "accepted_provider_families": [
+    "DYTURBO",
+    "ResBos2",
+    "CuTe-MCFM",
+    "EMST-AppendixB"
+  ],
+  "artifact_schema": "dashi.emst.independent_hadronic_structure_functions.contract.v1",
+  "component_count": 9,
+  "component_names": [
+    "W0",
+    "W1",
+    "W2",
+    "W3",
+    "W4",
+    "W5",
+    "W6",
+    "W7",
+    "W8"
+  ],
+  "expected_grid": [
+    {
+      "bin": 0,
+      "phi_star": 0.002,
+      "phi_star_high": 0.004,
+      "phi_star_low": 0.0,
+      "qT_GeV_leading_small_phi": 0.18237520000000002
+    },
+    {
+      "bin": 1,
+      "phi_star": 0.006,
+      "phi_star_high": 0.008,
+      "phi_star_low": 0.004,
+      "qT_GeV_leading_small_phi": 0.5471256
+    },
+    {
+      "bin": 2,
+      "phi_star": 0.01,
+      "phi_star_high": 0.012,
+      "phi_star_low": 0.008,
+      "qT_GeV_leading_small_phi": 0.911876
+    },
+    {
+      "bin": 3,
+      "phi_star": 0.014,
+      "phi_star_high": 0.016,
+      "phi_star_low": 0.012,
+      "qT_GeV_leading_small_phi": 1.2766264
+    },
+    {
+      "bin": 4,
+      "phi_star": 0.018000000000000002,
+      "phi_star_high": 0.02,
+      "phi_star_low": 0.016,
+      "qT_GeV_leading_small_phi": 1.6413768000000002
+    },
+    {
+      "bin": 5,
+      "phi_star": 0.022,
+      "phi_star_high": 0.024,
+      "phi_star_low": 0.02,
+      "qT_GeV_leading_small_phi": 2.0061272
+    },
+    {
+      "bin": 6,
+      "phi_star": 0.026500000000000003,
+      "phi_star_high": 0.029,
+      "phi_star_low": 0.024,
+      "qT_GeV_leading_small_phi": 2.4164714000000003
+    },
+    {
+      "bin": 7,
+      "phi_star": 0.0315,
+      "phi_star_high": 0.034,
+      "phi_star_low": 0.029,
+      "qT_GeV_leading_small_phi": 2.8724094
+    },
+    {
+      "bin": 8,
+      "phi_star": 0.0395,
+      "phi_star_high": 0.045,
+      "phi_star_low": 0.034,
+      "qT_GeV_leading_small_phi": 3.6019102000000003
+    },
+    {
+      "bin": 9,
+      "phi_star": 0.051000000000000004,
+      "phi_star_high": 0.057,
+      "phi_star_low": 0.045,
+      "qT_GeV_leading_small_phi": 4.6505676000000005
+    },
+    {
+      "bin": 10,
+      "phi_star": 0.0645,
+      "phi_star_high": 0.072,
+      "phi_star_low": 0.057,
+      "qT_GeV_leading_small_phi": 5.8816002
+    },
+    {
+      "bin": 11,
+      "phi_star": 0.08149999999999999,
+      "phi_star_high": 0.091,
+      "phi_star_low": 0.072,
+      "qT_GeV_leading_small_phi": 7.4317893999999995
+    },
+    {
+      "bin": 12,
+      "phi_star": 0.10250000000000001,
+      "phi_star_high": 0.114,
+      "phi_star_low": 0.091,
+      "qT_GeV_leading_small_phi": 9.346729000000002
+    },
+    {
+      "bin": 13,
+      "phi_star": 0.1395,
+      "phi_star_high": 0.165,
+      "phi_star_low": 0.114,
+      "qT_GeV_leading_small_phi": 12.720670200000002
+    },
+    {
+      "bin": 14,
+      "phi_star": 0.21150000000000002,
+      "phi_star_high": 0.258,
+      "phi_star_low": 0.165,
+      "qT_GeV_leading_small_phi": 19.286177400000003
+    },
+    {
+      "bin": 15,
+      "phi_star": 0.391,
+      "phi_star_high": 0.524,
+      "phi_star_low": 0.258,
+      "qT_GeV_leading_small_phi": 35.654351600000005
+    },
+    {
+      "bin": 16,
+      "phi_star": 0.8385,
+      "phi_star_high": 1.153,
+      "phi_star_low": 0.524,
+      "qT_GeV_leading_small_phi": 76.46080260000001
+    },
+    {
+      "bin": 17,
+      "phi_star": 2.215,
+      "phi_star_high": 3.277,
+      "phi_star_low": 1.153,
+      "qT_GeV_leading_small_phi": 201.980534
+    }
+  ],
+  "promotion_boundary": "contract artifact only; no W_i values supplied, no strict-log promotion possible",
+  "required_columns": [
+    "phi_star",
+    "qT_GeV",
+    "W0",
+    "W1",
+    "W2",
+    "W3",
+    "W4",
+    "W5",
+    "W6",
+    "W7",
+    "W8"
+  ],
+  "required_provider_metadata": [
+    "source",
+    "provider_family",
+    "perturbative_order",
+    "pdf_set",
+    "fiducial_cuts_hash",
+    "not_derived_from_sigma_inclusive"
+  ],
+  "selection_metadata": {
+    "acceptance_metadata_status": "fiducial_selection_complete_acceptance_surface_missing",
+    "acceptance_source": "MISSING",
+    "at_least_one_jet": true,
+    "b_tagged_jet_veto": true,
+    "bin_convention": "not_bin_width_normalized_ratio_values",
+    "bin_integration_status": "not_implemented_for_sigma_dashi_v4_strict_log_contract",
+    "bin_variable": "phiStar",
+    "central_acceptance_A": "MISSING",
+    "comparison_contract_status": "non_promoting",
+    "covariance_table_doi": "10.17182/hepdata.115656.v1/t44",
+    "dataset_label": "t43_below_Z",
+    "denominator_mass_window_GeV": {
+      "high": 106.0,
+      "high_inclusive": false,
+      "low": 76.0
+    },
+    "fiducial_selection_source": {
+      "analysis": "CMS-SMP-20-003",
+      "arxiv": "2205.04897",
+      "paper_doi": "10.1140/epjc/s10052-023-11631-7",
+      "source_notes": [
+        "arXiv source SMP-20-003_temp.tex lines 163-197",
+        "particle-level phase-space statement lines 346-352",
+        "jet clustering statement lines 153-154"
+      ],
+      "source_section": "Event selection and unfolding particle-level phase space"
+    },
+    "hepdata_doi": "10.17182/hepdata.115656.v1/t43",
+    "jet_algorithm": "anti-kt",
+    "jet_eta_max": "not_used_particle_level_uses_abs_y_lt_2p4",
+    "jet_lepton_deltaR_min": 0.4,
+    "jet_pT_min_GeV": 30.0,
+    "jet_radius": 0.4,
+    "jet_rapidity_abs_max": 2.4,
+    "leading_lepton_pT_min_GeV": 25.0,
+    "lepton_eta_max": 2.4,
+    "lepton_flavour": "ee_or_mumu_combined_after_compatibility_check",
+    "lepton_isolation": "exactly_two_isolated_leptons_same_flavour_opposite_charge; detailed isolation criteria referenced to CMS Sirunyan:2019bzr",
+    "lepton_pT_min_GeV": {
+      "leading": 25.0,
+      "subleading": 20.0
+    },
+    "mass_window_source": "HEPData t43 table preamble",
+    "missing_critical": [
+      "central_acceptance_A",
+      "emst_fiducial_power_correction_surface"
+    ],
+    "missing_fields": [
+      "central_acceptance_A",
+      "acceptance_source",
+      "emst_fiducial_power_correction_surface"
+    ],
+    "missing_fields_count": 3,
+    "numerator_mass_window_GeV": {
+      "high": 76.0,
+      "high_inclusive": false,
+      "low": 50.0
+    },
+    "observable": "DSIG/DPHISTAR / DSIG/DPHISTAR",
+    "observable_name": "DSIG/DPHISTAR / DSIG/DPHISTAR",
+    "phi_star_bin_count": 18,
+    "phi_star_bin_edges_source": "t43 CSV LOW/HIGH columns",
+    "prediction_bin_treatment": "direct",
+    "process": "pp -> Z/gamma* -> ll + >=1 jet",
+    "ratio_denominator_mass_window_GeV": [
+      76.0,
+      106.0
+    ],
+    "ratio_numerator_mass_window_GeV": [
+      50.0,
+      76.0
+    ],
+    "ratio_table_doi": "10.17182/hepdata.115656.v1/t43",
+    "reason": "sigma_dashi_v4 is compared against a fiducial unfolded HEPData ratio table requiring at least one jet. The CMS fiducial selection metadata is now machine-readable, but the local predictor still does not encode the central A(M,phi*) acceptance surface or EMST fiducial power-correction surface, so strict-log chi2 conflates acceptance gaps with shape-law failure.",
+    "record": "ins2079374",
+    "requires_at_least_one_jet": true,
+    "sqrt_s_GeV": 13000,
+    "strict_log_interpretation": "chi2/dof is informative but not a pure shape-law test until the fiducial acceptance contract is represented in the predictor",
+    "subleading_lepton_pT_min_GeV": 20.0,
+    "table_name": "phistar mass 50-76 over mass 76-106",
+    "third_lepton_veto": {
+      "eta_abs_max": 2.4,
+      "pT_min_GeV": 10.0
+    },
+    "trigger_channel": {
+      "dielectron": {
+        "leading_pT_threshold_GeV": 23.0,
+        "subleading_pT_threshold_GeV": 12.0
+      },
+      "dimuon": {
+        "leading_pT_threshold_GeV": 18.0,
+        "subleading_pT_threshold_GeV": 7.0
+      },
+      "single_muon": {
+        "pT_threshold_GeV": 24.0
+      }
+    },
+    "values_normalized_by_bin_width": false
+  },
+  "selection_metadata_digest": "e7aa45ebae0afd6444bc00400221b62e0cc6db14b7dc4dfad7d5779633a23cc5",
+  "status": "awaiting_independent_wi_provider",
+  "strict_artifact": "scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json"
+}

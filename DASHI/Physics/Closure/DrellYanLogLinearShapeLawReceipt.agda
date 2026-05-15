@@ -645,6 +645,50 @@ record DYStrictLogDiagnosticSummary : Setω where
     fullAuthorityInhabitedIsFalse :
       fullAuthorityInhabited ≡ false
 
+record IndependentHadronicStructureFunctionProviderContract : Setω where
+  field
+    artifactPath :
+      String
+
+    artifactStatus :
+      String
+
+    requiredComponentCount :
+      Nat
+
+    requiredComponentCountIsNine :
+      requiredComponentCount ≡ 9
+
+    expectedBinCount :
+      Nat
+
+    expectedBinCountIsEighteen :
+      expectedBinCount ≡ 18
+
+    requiredColumns :
+      List String
+
+    acceptedProviderFamilies :
+      List String
+
+    independenceRequired :
+      Bool
+
+    independenceRequiredIsTrue :
+      independenceRequired ≡ true
+
+    strictLogPromotionAvailable :
+      Bool
+
+    strictLogPromotionAvailableIsFalse :
+      strictLogPromotionAvailable ≡ false
+
+    validationCommand :
+      String
+
+    rejectionCommand :
+      String
+
 data AcceptanceMetadataGapStatus : Set where
   acceptanceMetadataGapOpen :
     AcceptanceMetadataGapStatus
@@ -839,6 +883,7 @@ open ProxyDivergenceRecord public
 open DYDistributedTheoreticalModelGap public
 open EMSTFullTensorReceipt public
 open DYStrictLogDiagnosticSummary public
+open IndependentHadronicStructureFunctionProviderContract public
 open DYAcceptanceMetadataGapReceipt public
 open LogLinearShapeLawReceipt public
 
@@ -1445,6 +1490,55 @@ canonicalDYStrictLogDiagnosticSummary =
         false
     ; fullAuthorityInhabitedIsFalse =
         refl
+    }
+
+canonicalIndependentHadronicStructureFunctionProviderContract :
+  IndependentHadronicStructureFunctionProviderContract
+canonicalIndependentHadronicStructureFunctionProviderContract =
+  record
+    { artifactPath =
+        "scripts/data/outputs/emst_wi_provider_contract_20260516.json"
+    ; artifactStatus =
+        "awaiting_independent_wi_provider"
+    ; requiredComponentCount =
+        9
+    ; requiredComponentCountIsNine =
+        refl
+    ; expectedBinCount =
+        18
+    ; expectedBinCountIsEighteen =
+        refl
+    ; requiredColumns =
+        "phi_star"
+        ∷ "qT_GeV"
+        ∷ "W0"
+        ∷ "W1"
+        ∷ "W2"
+        ∷ "W3"
+        ∷ "W4"
+        ∷ "W5"
+        ∷ "W6"
+        ∷ "W7"
+        ∷ "W8"
+        ∷ []
+    ; acceptedProviderFamilies =
+        "DYTURBO"
+        ∷ "ResBos2"
+        ∷ "CuTe-MCFM"
+        ∷ "EMST-AppendixB"
+        ∷ []
+    ; independenceRequired =
+        true
+    ; independenceRequiredIsTrue =
+        refl
+    ; strictLogPromotionAvailable =
+        false
+    ; strictLogPromotionAvailableIsFalse =
+        refl
+    ; validationCommand =
+        "python scripts/import_emst_structure_functions.py --provider PROVIDER.json --assert-independent-provider"
+    ; rejectionCommand =
+        "python scripts/import_emst_structure_functions.py --provider scripts/data/outputs/emst_nine_component_C_fid_sigma_dashi_v4_20260515.json --output /tmp/emst_wi_provider_reject_leptonic_coefficients.json --assert-independent-provider"
     }
 
 canonicalDYAcceptanceMetadataGapReceipt :
