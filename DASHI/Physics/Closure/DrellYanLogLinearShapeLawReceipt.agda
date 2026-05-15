@@ -476,6 +476,15 @@ record DirectDYTurboFiducialDiagnostic : Setω where
     undampedResummedOnlyStrictPassIsFalse :
       undampedResummedOnlyStrictPass ≡ false
 
+    matchedSerial20k5Chi2PerDof :
+      String
+
+    matchedSerial20k5StrictPass :
+      Bool
+
+    matchedSerial20k5StrictPassIsFalse :
+      matchedSerial20k5StrictPass ≡ false
+
     interpretation :
       String
 
@@ -1500,8 +1509,14 @@ canonicalDirectDYTurboFiducialDiagnostic =
         false
     ; undampedResummedOnlyStrictPassIsFalse =
         refl
+    ; matchedSerial20k5Chi2PerDof =
+        "11017.367707"
+    ; matchedSerial20k5StrictPass =
+        false
+    ; matchedSerial20k5StrictPassIsFalse =
+        refl
     ; interpretation =
-        "removing matched finite-order terms makes the grid log-valid only when damping is disabled, but the resulting resummed-only fiducial shape is worse than the strict-log v4 baseline and is diagnostic-only"
+        "removing matched finite-order terms makes the grid log-valid only when damping is disabled, while the serial 20k/5 matched run is log-valid but worse than the strict-log v4 baseline; direct xs_qt diagnostics do not promote and the independent W_i provider remains required"
     ; diagnosticOnly =
         true
     ; diagnosticOnlyIsTrue =
