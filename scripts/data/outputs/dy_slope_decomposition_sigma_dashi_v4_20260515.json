@@ -24,6 +24,263 @@
   },
   "extended_basis_decomposition": {
     "basis_source": "Structural_QCD_log_series",
+    "covariance_bin_kinematic_diagnostics": {
+      "branch_assessment": "distributed_theoretical_model_gap",
+      "chi2_fraction_top5_pull_bins": 1.3470945028924206,
+      "chi2_top5_pull_bins": 77112.82338770326,
+      "kinematic_rescaling": {
+        "chi2_per_dof": 3105.3455095026266,
+        "diagnostic_limitations": [
+          "prediction is interpolated as point values, not re-integrated over bins",
+          "covariance remains tied to the original binning",
+          "artifact has bin edges but no continuous prediction spectrum"
+        ],
+        "log_scale": 0.3867733988783631,
+        "optimal_phi_star_scale": 1.4722228461241493,
+        "optimizer_success": true,
+        "promotability": "blocked",
+        "scale_deviation_from_one": 0.47222284612414933
+      },
+      "n_large_pulls_abs_gt_3": 17,
+      "n_modes_90pct_chi2_eigenvalue_order": 16,
+      "n_modes_90pct_chi2_ranked_by_contribution": 8,
+      "protocol": "strict_log_metric",
+      "top5_pull_bins": [
+        0,
+        1,
+        2,
+        3,
+        8
+      ],
+      "top_chi2_eigenmode_rows": [
+        {
+          "chi2_contribution": 13871.020608167772,
+          "cumulative_chi2_fraction_ranked": 0.24231476413234232,
+          "eigenvalue": 6.088482262271954e-05,
+          "mode": 9,
+          "rank": 0
+        },
+        {
+          "chi2_contribution": 10063.65561143542,
+          "cumulative_chi2_fraction_ranked": 0.4181181462106715,
+          "eigenvalue": 0.0012582772436884552,
+          "mode": 0,
+          "rank": 1
+        },
+        {
+          "chi2_contribution": 7402.5938303621915,
+          "cumulative_chi2_fraction_ranked": 0.5474350745494209,
+          "eigenvalue": 2.4063063506580487e-05,
+          "mode": 15,
+          "rank": 2
+        },
+        {
+          "chi2_contribution": 7209.925201697582,
+          "cumulative_chi2_fraction_ranked": 0.6733862481517757,
+          "eigenvalue": 4.493473170649795e-05,
+          "mode": 10,
+          "rank": 3
+        },
+        {
+          "chi2_contribution": 5122.317618167566,
+          "cumulative_chi2_fraction_ranked": 0.7628687181530345,
+          "eigenvalue": 9.026190678561447e-05,
+          "mode": 8,
+          "rank": 4
+        },
+        {
+          "chi2_contribution": 3574.7658501450414,
+          "cumulative_chi2_fraction_ranked": 0.8253167937687672,
+          "eigenvalue": 0.00022670513441859434,
+          "mode": 1,
+          "rank": 5
+        },
+        {
+          "chi2_contribution": 3314.2141284423687,
+          "cumulative_chi2_fraction_ranked": 0.8832132555723569,
+          "eigenvalue": 9.930178597343804e-05,
+          "mode": 6,
+          "rank": 6
+        },
+        {
+          "chi2_contribution": 1663.4728966801924,
+          "cumulative_chi2_fraction_ranked": 0.9122726920756993,
+          "eigenvalue": 1.994699708523319e-05,
+          "mode": 16,
+          "rank": 7
+        },
+        {
+          "chi2_contribution": 1341.8316124161092,
+          "cumulative_chi2_fraction_ranked": 0.9357133328081102,
+          "eigenvalue": 4.470185761378559e-05,
+          "mode": 11,
+          "rank": 8
+        },
+        {
+          "chi2_contribution": 1012.0502566988029,
+          "cumulative_chi2_fraction_ranked": 0.9533929777433677,
+          "eigenvalue": 9.767098725871901e-05,
+          "mode": 7,
+          "rank": 9
+        }
+      ],
+      "top_eigenmode_rows": [
+        {
+          "chi2_contribution": 10063.65561143542,
+          "cumulative_chi2_fraction": 0.1758033820783292,
+          "eigenvalue": 0.0012582772436884552,
+          "mode": 0
+        },
+        {
+          "chi2_contribution": 3574.7658501450414,
+          "cumulative_chi2_fraction": 0.23825145769406195,
+          "eigenvalue": 0.00022670513441859434,
+          "mode": 1
+        },
+        {
+          "chi2_contribution": 55.67581721332261,
+          "cumulative_chi2_fraction": 0.23922406619180853,
+          "eigenvalue": 0.00012726290919328053,
+          "mode": 2
+        },
+        {
+          "chi2_contribution": 77.24165882641847,
+          "cumulative_chi2_fraction": 0.24057341133867488,
+          "eigenvalue": 0.00012267392598531618,
+          "mode": 3
+        },
+        {
+          "chi2_contribution": 651.6665931716785,
+          "cumulative_chi2_fraction": 0.25195746455854684,
+          "eigenvalue": 0.00011422815677762306,
+          "mode": 4
+        },
+        {
+          "chi2_contribution": 256.08384466589564,
+          "cumulative_chi2_fraction": 0.2564310284130898,
+          "eigenvalue": 0.00010572487018257127,
+          "mode": 5
+        },
+        {
+          "chi2_contribution": 3314.2141284423687,
+          "cumulative_chi2_fraction": 0.31432749021667933,
+          "eigenvalue": 9.930178597343804e-05,
+          "mode": 6
+        },
+        {
+          "chi2_contribution": 1012.0502566988029,
+          "cumulative_chi2_fraction": 0.33200713515193697,
+          "eigenvalue": 9.767098725871901e-05,
+          "mode": 7
+        },
+        {
+          "chi2_contribution": 5122.317618167566,
+          "cumulative_chi2_fraction": 0.4214896051531958,
+          "eigenvalue": 9.026190678561447e-05,
+          "mode": 8
+        },
+        {
+          "chi2_contribution": 13871.020608167772,
+          "cumulative_chi2_fraction": 0.6638043692855381,
+          "eigenvalue": 6.088482262271954e-05,
+          "mode": 9
+        }
+      ],
+      "top_pull_rows": [
+        {
+          "abs_pull": 112.65395270261924,
+          "bin": 0,
+          "phi_star": 0.002,
+          "pull": 112.65395270261924
+        },
+        {
+          "abs_pull": 103.28583760402452,
+          "bin": 1,
+          "phi_star": 0.006,
+          "pull": 103.28583760402452
+        },
+        {
+          "abs_pull": 93.77280328088621,
+          "bin": 2,
+          "phi_star": 0.01,
+          "pull": 93.77280328088621
+        },
+        {
+          "abs_pull": 91.13185835725072,
+          "bin": 3,
+          "phi_star": 0.014,
+          "pull": 91.13185835725072
+        },
+        {
+          "abs_pull": 86.33300748610044,
+          "bin": 8,
+          "phi_star": 0.0395,
+          "pull": 86.33300748610044
+        },
+        {
+          "abs_pull": 84.53881671846183,
+          "bin": 4,
+          "phi_star": 0.018000000000000002,
+          "pull": 84.53881671846183
+        },
+        {
+          "abs_pull": 81.55222540478901,
+          "bin": 6,
+          "phi_star": 0.026500000000000003,
+          "pull": 81.55222540478901
+        },
+        {
+          "abs_pull": 76.46867666207284,
+          "bin": 5,
+          "phi_star": 0.022,
+          "pull": 76.46867666207284
+        },
+        {
+          "abs_pull": 75.2861369769996,
+          "bin": 9,
+          "phi_star": 0.051000000000000004,
+          "pull": 75.2861369769996
+        },
+        {
+          "abs_pull": 75.18167264129414,
+          "bin": 7,
+          "phi_star": 0.0315,
+          "pull": 75.18167264129414
+        },
+        {
+          "abs_pull": 68.67484608882985,
+          "bin": 10,
+          "phi_star": 0.0645,
+          "pull": 68.67484608882985
+        },
+        {
+          "abs_pull": 62.41491694095357,
+          "bin": 11,
+          "phi_star": 0.08149999999999999,
+          "pull": 62.41491694095357
+        },
+        {
+          "abs_pull": 51.35664325952809,
+          "bin": 12,
+          "phi_star": 0.10250000000000001,
+          "pull": 51.35664325952809
+        },
+        {
+          "abs_pull": 43.51490272899713,
+          "bin": 13,
+          "phi_star": 0.1395,
+          "pull": 43.51490272899713
+        },
+        {
+          "abs_pull": 29.185067805867156,
+          "bin": 16,
+          "phi_star": 0.8385,
+          "pull": -29.185067805867156
+        }
+      ],
+      "total_chi2_direct": 57243.81119671269,
+      "total_chi2_eigensum": 57243.811196712755
+    },
     "log_cubic": {
       "basis_dim": 4,
       "chi2_perp": 252.51270887792188,
@@ -95,8 +352,8 @@
     },
     "multi_transition_discrimination": {
       "bin_integration_correction": {
-        "chi2": 56120.09069379521,
-        "chi2_per_dof": 3117.782816321956,
+        "chi2": 56438.97396077188,
+        "chi2_per_dof": 3135.4985533762156,
         "promotability": "blocked",
         "protocol": "second_derivative_point_to_bin_average_correction_in_strict_log_metric"
       },

@@ -9,6 +9,7 @@ from typing import Any
 
 import numpy as np
 from scipy.optimize import minimize, minimize_scalar
+from scipy.interpolate import interp1d
 from scipy.special import erf
 
 from run_t43_projection import T44_PATH, parse_t44
@@ -74,6 +75,17 @@ def _per_bin_arrays(payload: dict[str, Any]) -> tuple[np.ndarray, np.ndarray, np
     return phi_star, data, pred
 
 
+def _per_bin_edges(payload: dict[str, Any]) -> tuple[np.ndarray, np.ndarray]:
+    rows = payload.get("per_bin")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("strict-log artifact is missing non-empty per_bin records")
+    low = np.array([float(row["phiStarLow"]) for row in rows], dtype=float)
+    high = np.array([float(row["phiStarHigh"]) for row in rows], dtype=float)
+    if np.any(high <= low):
+        raise ValueError("strict-log artifact has invalid phiStar bin edges")
+    return low, high
+
+
 def _load_log_covariance(payload: dict[str, Any], data: np.ndarray) -> np.ndarray:
     strict = payload.get("strictComparison")
     propagated = strict.get("propagatedCovariance") if isinstance(strict, dict) else None
@@ -91,6 +103,7 @@ def _load_log_covariance(payload: dict[str, Any], data: np.ndarray) -> np.ndarra
 def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     payload = _load_json(input_path)
     phi_star, data, pred = _per_bin_arrays(payload)
+    phi_star_low, phi_star_high = _per_bin_edges(payload)
     log_cov = _load_log_covariance(payload, data)
     cov_inv = np.linalg.inv(log_cov)
     cov_inv = 0.5 * (cov_inv + cov_inv.T)
@@ -206,7 +219,7 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     )
 
     d2_pred = np.gradient(np.gradient(pred, phi_star), phi_star)
-    bin_widths = np.gradient(phi_star)
+    bin_widths = phi_star_high - phi_star_low
     bin_integration_correction = (bin_widths**2 / 24.0) * d2_pred
     pred_bin_integrated = np.maximum(pred + bin_integration_correction, np.finfo(float).tiny)
     residual_bin_integrated = np.log(pred_bin_integrated) - log_data
@@ -330,6 +343,97 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     chi2_multiplicative_corrected_per_dof = (
         chi2_multiplicative_corrected / n_bins
     )
+
+    covariance_eigenvalues, covariance_eigenvectors = np.linalg.eigh(log_cov)
+    eigen_order = np.argsort(covariance_eigenvalues)[::-1]
+    covariance_eigenvalues = covariance_eigenvalues[eigen_order]
+    covariance_eigenvectors = covariance_eigenvectors[:, eigen_order]
+    residual_in_eigenbasis = covariance_eigenvectors.T @ residual_pred_minus_data
+    chi2_per_eigenmode = residual_in_eigenbasis**2 / covariance_eigenvalues
+    cumulative_chi2_per_mode = np.cumsum(chi2_per_eigenmode)
+    total_chi2_eigensum = float(cumulative_chi2_per_mode[-1])
+    n_modes_90pct = int(
+        np.searchsorted(cumulative_chi2_per_mode / chi2_raw, 0.90) + 1
+    )
+    eigen_chi2_order = np.argsort(chi2_per_eigenmode)[::-1]
+    cumulative_chi2_ranked = np.cumsum(chi2_per_eigenmode[eigen_chi2_order])
+    n_modes_90pct_ranked = int(
+        np.searchsorted(cumulative_chi2_ranked / chi2_raw, 0.90) + 1
+    )
+    top_eigenmode_rows = []
+    for mode in range(min(10, n_bins)):
+        top_eigenmode_rows.append(
+            {
+                "mode": int(mode),
+                "eigenvalue": float(covariance_eigenvalues[mode]),
+                "chi2_contribution": float(chi2_per_eigenmode[mode]),
+                "cumulative_chi2_fraction": float(
+                    cumulative_chi2_per_mode[mode] / chi2_raw
+                ),
+            }
+        )
+    top_chi2_eigenmode_rows = []
+    for rank, mode in enumerate(eigen_chi2_order[:10]):
+        top_chi2_eigenmode_rows.append(
+            {
+                "rank": int(rank),
+                "mode": int(mode),
+                "eigenvalue": float(covariance_eigenvalues[mode]),
+                "chi2_contribution": float(chi2_per_eigenmode[mode]),
+                "cumulative_chi2_fraction_ranked": float(
+                    cumulative_chi2_ranked[rank] / chi2_raw
+                ),
+            }
+        )
+
+    diag_sigma_log = np.sqrt(np.diag(log_cov))
+    pulls = residual_pred_minus_data / diag_sigma_log
+    sorted_by_abs_pull = np.argsort(np.abs(pulls))[::-1]
+    top_pull_rows = []
+    for index in sorted_by_abs_pull[:15]:
+        top_pull_rows.append(
+            {
+                "bin": int(index),
+                "phi_star": float(phi_star[index]),
+                "pull": float(pulls[index]),
+                "abs_pull": float(abs(pulls[index])),
+            }
+        )
+    n_large_pulls = int(np.sum(np.abs(pulls) > 3.0))
+    top5_pull_bins = [int(index) for index in sorted_by_abs_pull[:5]]
+    top5_pull_mask = np.zeros(n_bins)
+    top5_pull_mask[top5_pull_bins] = 1.0
+    residual_top5_pull_bins = residual_pred_minus_data * top5_pull_mask
+    chi2_top5_pull_bins = float(
+        residual_top5_pull_bins @ cov_inv @ residual_top5_pull_bins
+    )
+
+    def kinematic_rescaled_chi2(log_scale: float) -> float:
+        scale = float(np.exp(log_scale))
+        phi_rescaled = phi_star * scale
+        try:
+            interpolator = interp1d(
+                phi_rescaled,
+                pred,
+                bounds_error=False,
+                fill_value="extrapolate",
+                assume_sorted=True,
+            )
+            pred_rescaled = interpolator(phi_star)
+        except ValueError:
+            return 1.0e9
+        if np.any(~np.isfinite(pred_rescaled)) or np.any(pred_rescaled <= 0.0):
+            return 1.0e9
+        residual_rescaled = np.log(pred_rescaled) - log_data
+        return float(residual_rescaled @ cov_inv @ residual_rescaled) / n_bins
+
+    kinematic_result = minimize_scalar(
+        kinematic_rescaled_chi2,
+        bounds=(-0.5, 0.5),
+        method="bounded",
+    )
+    optimal_phi_scale = float(np.exp(kinematic_result.x))
+    chi2_kinematic_rescaled = float(kinematic_result.fun)
 
     data_coeff = np.linalg.solve(normal, basis.T @ cov_inv @ log_data)
     pred_coeff = np.linalg.solve(normal, basis.T @ cov_inv @ log_pred)
@@ -533,6 +637,44 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
                     or chi2_multiplicative_corrected_per_dof <= 2.0
                 ),
             },
+            "covariance_bin_kinematic_diagnostics": {
+                "protocol": "strict_log_metric",
+                "total_chi2_direct": chi2_raw,
+                "total_chi2_eigensum": total_chi2_eigensum,
+                "n_modes_90pct_chi2_eigenvalue_order": n_modes_90pct,
+                "n_modes_90pct_chi2_ranked_by_contribution": n_modes_90pct_ranked,
+                "top_eigenmode_rows": top_eigenmode_rows,
+                "top_chi2_eigenmode_rows": top_chi2_eigenmode_rows,
+                "top_pull_rows": top_pull_rows,
+                "n_large_pulls_abs_gt_3": n_large_pulls,
+                "top5_pull_bins": top5_pull_bins,
+                "chi2_top5_pull_bins": chi2_top5_pull_bins,
+                "chi2_fraction_top5_pull_bins": chi2_top5_pull_bins / chi2_raw,
+                "kinematic_rescaling": {
+                    "optimal_phi_star_scale": optimal_phi_scale,
+                    "log_scale": float(kinematic_result.x),
+                    "chi2_per_dof": chi2_kinematic_rescaled,
+                    "scale_deviation_from_one": abs(optimal_phi_scale - 1.0),
+                    "optimizer_success": bool(kinematic_result.success),
+                    "promotability": _promotability_label(
+                        chi2_kinematic_rescaled
+                    ),
+                    "diagnostic_limitations": [
+                        "prediction is interpolated as point values, not re-integrated over bins",
+                        "covariance remains tied to the original binning",
+                        "artifact has bin edges but no continuous prediction spectrum",
+                    ],
+                },
+                "branch_assessment": (
+                    "covariance_eigenstructure_obstruction"
+                    if n_modes_90pct_ranked <= 3
+                    else "discrete_bin_obstruction"
+                    if n_large_pulls <= 5
+                    else "kinematic_convention_mismatch"
+                    if chi2_kinematic_rescaled < 10.0
+                    else "distributed_theoretical_model_gap"
+                ),
+            },
         },
         "promotability_assessment": (
             "shape component dominates, but corrected chi2/dof remains above 2; residual obstruction remains"
@@ -713,6 +855,64 @@ def main() -> int:
         "  Promotable if derived:         "
         f"{smooth['promotable_if_derived']}"
     )
+
+    cov_diag = extended["covariance_bin_kinematic_diagnostics"]
+    print("\nCOVARIANCE, BIN, AND KINEMATIC DIAGNOSTICS")
+    print(f"  Total chi2 direct:            {cov_diag['total_chi2_direct']:.6f}")
+    print(f"  Total chi2 eigensum:          {cov_diag['total_chi2_eigensum']:.6f}")
+    print(
+        "  Modes for 90 pct chi2:        "
+        f"{cov_diag['n_modes_90pct_chi2_ranked_by_contribution']} "
+        "(ranked by contribution)"
+    )
+    print(
+        "  Modes for 90 pct chi2:        "
+        f"{cov_diag['n_modes_90pct_chi2_eigenvalue_order']} "
+        "(eigenvalue order)"
+    )
+    print("  Top eigenmodes by eigenvalue:")
+    print("   mode      eigenvalue      chi2_contrib    cumul_frac")
+    for row in cov_diag["top_eigenmode_rows"]:
+        print(
+            f"  {row['mode']:5d}  "
+            f"{row['eigenvalue']:14.6e}  "
+            f"{row['chi2_contribution']:14.6f}  "
+            f"{row['cumulative_chi2_fraction']:12.6f}"
+        )
+    print("  Top eigenmodes by chi2 contribution:")
+    print("   rank   mode      eigenvalue      chi2_contrib    cumul_frac")
+    for row in cov_diag["top_chi2_eigenmode_rows"]:
+        print(
+            f"  {row['rank']:5d}  "
+            f"{row['mode']:5d}  "
+            f"{row['eigenvalue']:14.6e}  "
+            f"{row['chi2_contribution']:14.6f}  "
+            f"{row['cumulative_chi2_fraction_ranked']:12.6f}"
+        )
+    print("  Top pull bins:")
+    print("    bin    phi_star        pull      abs_pull")
+    for row in cov_diag["top_pull_rows"]:
+        print(
+            f"  {row['bin']:5d}  "
+            f"{row['phi_star']:10.6f}  "
+            f"{row['pull']:10.6f}  "
+            f"{row['abs_pull']:10.6f}"
+        )
+    print(f"  Bins with |pull| > 3:         {cov_diag['n_large_pulls_abs_gt_3']}")
+    print(
+        "  chi2 fraction top-5 pulls:    "
+        f"{cov_diag['chi2_fraction_top5_pull_bins']:.6f}"
+    )
+    kin = cov_diag["kinematic_rescaling"]
+    print(
+        "  kinematic phi* scale:         "
+        f"{kin['optimal_phi_star_scale']:.6f}"
+    )
+    print(
+        "  kinematic rescaled chi2/dof:  "
+        f"{kin['chi2_per_dof']:.6f}  {kin['promotability']}"
+    )
+    print(f"  Branch assessment:            {cov_diag['branch_assessment']}")
     print(f"\n  Artifact written: {args.output}")
     return 0
 

@@ -309,6 +309,93 @@ record DYMultiTransitionObstruction : Setω where
     obstructionAssessment :
       List String
 
+data ModelGapCandidate : Set where
+  wrongPDFSet :
+    ModelGapCandidate
+
+  missingElectroweakCorrection :
+    ModelGapCandidate
+
+  acceptanceModelGap :
+    ModelGapCandidate
+
+  forwardKinematicModelGap :
+    ModelGapCandidate
+
+record DYDistributedTheoreticalModelGap : Setω where
+  field
+    artifactPath :
+      String
+
+    protocol :
+      String
+
+    branchAssessment :
+      String
+
+    totalChi2Direct :
+      String
+
+    totalChi2Eigensum :
+      String
+
+    modesFor90PctChi2Ranked :
+      Nat
+
+    modesFor90PctChi2EigenvalueOrder :
+      Nat
+
+    lowRankCovarianceObstruction :
+      Bool
+
+    lowRankCovarianceObstructionIsFalse :
+      lowRankCovarianceObstruction ≡ false
+
+    largePullBinCount :
+      Nat
+
+    discreteFewBinObstruction :
+      Bool
+
+    discreteFewBinObstructionIsFalse :
+      discreteFewBinObstruction ≡ false
+
+    kinematicScaleFactor :
+      String
+
+    kinematicRescaledChi2PerDof :
+      String
+
+    kinematicConventionMismatch :
+      Bool
+
+    kinematicConventionMismatchIsFalse :
+      kinematicConventionMismatch ≡ false
+
+    topPullBins :
+      List Nat
+
+    topPullPhiStars :
+      List String
+
+    topPullValues :
+      List String
+
+    topChi2Eigenmodes :
+      List Nat
+
+    modelGapCandidates :
+      List ModelGapCandidate
+
+    promotingReceiptExists :
+      Bool
+
+    promotingReceiptExistsIsFalse :
+      promotingReceiptExists ≡ false
+
+    gapAssessment :
+      List String
+
 record LogLinearShapeLawReceipt : Setω where
   field
     status :
@@ -356,6 +443,9 @@ record LogLinearShapeLawReceipt : Setω where
     multiTransitionObstruction :
       DYMultiTransitionObstruction
 
+    distributedTheoreticalModelGap :
+      DYDistributedTheoreticalModelGap
+
     residualObstructionAfterShapeRemoval :
       Bool
 
@@ -381,6 +471,7 @@ open DASHITypedDerivation public
 open LogPolynomialDecompositionReceipt public
 open DYEndpointThresholdObstruction public
 open DYMultiTransitionObstruction public
+open DYDistributedTheoreticalModelGap public
 open LogLinearShapeLawReceipt public
 
 canonicalDASHILogLinearSlopeDerivationRequest :
@@ -602,7 +693,7 @@ canonicalDYMultiTransitionObstruction =
     ; sudakovMatchedChi2PerDof =
         "2148.233239451757"
     ; binIntegrationChi2PerDof =
-        "3117.782816321956"
+        "3135.4985533762156"
     ; transitionsAreQCDNatural =
         true
     ; transitionsAreQCDNaturalIsTrue =
@@ -627,8 +718,91 @@ canonicalDYMultiTransitionObstruction =
         "two sign flips at phiStar 0.1395 and 0.8385 define a three-lobe positive-negative-positive residual after log-linear removal"
         ∷ "the transitions are QCD-natural, but the tested three-region piecewise log-linear basis is blocked at chi2/dof 33.32747844293448"
         ∷ "the tested Sudakov-matched Gaussian/log/power basis is blocked at chi2/dof 2148.233239451757"
-        ∷ "the point-to-bin-average correction approximation is blocked at chi2/dof 3117.782816321956"
+        ∷ "the point-to-bin-average correction approximation with actual bin widths is blocked at chi2/dof 3135.4985533762156"
         ∷ "log-cubic remains the best compact diagnostic at chi2/dof 18.036622062708705, but no tested basis promotes"
+        ∷ []
+    }
+
+canonicalDYDistributedTheoreticalModelGap :
+  DYDistributedTheoreticalModelGap
+canonicalDYDistributedTheoreticalModelGap =
+  record
+    { artifactPath =
+        "scripts/data/outputs/dy_slope_decomposition_sigma_dashi_v4_20260515.json"
+    ; protocol =
+        "strict_log_metric"
+    ; branchAssessment =
+        "distributed_theoretical_model_gap"
+    ; totalChi2Direct =
+        "57243.81119671269"
+    ; totalChi2Eigensum =
+        "57243.81119671269"
+    ; modesFor90PctChi2Ranked =
+        8
+    ; modesFor90PctChi2EigenvalueOrder =
+        16
+    ; lowRankCovarianceObstruction =
+        false
+    ; lowRankCovarianceObstructionIsFalse =
+        refl
+    ; largePullBinCount =
+        17
+    ; discreteFewBinObstruction =
+        false
+    ; discreteFewBinObstructionIsFalse =
+        refl
+    ; kinematicScaleFactor =
+        "1.4722228461241493"
+    ; kinematicRescaledChi2PerDof =
+        "3105.3455095026266"
+    ; kinematicConventionMismatch =
+        false
+    ; kinematicConventionMismatchIsFalse =
+        refl
+    ; topPullBins =
+        0
+        ∷ 1
+        ∷ 2
+        ∷ 3
+        ∷ 8
+        ∷ []
+    ; topPullPhiStars =
+        "0.002"
+        ∷ "0.006"
+        ∷ "0.01"
+        ∷ "0.014"
+        ∷ "0.0395"
+        ∷ []
+    ; topPullValues =
+        "112.653953"
+        ∷ "103.285838"
+        ∷ "93.772803"
+        ∷ "91.131858"
+        ∷ "86.333007"
+        ∷ []
+    ; topChi2Eigenmodes =
+        9
+        ∷ 0
+        ∷ 15
+        ∷ 10
+        ∷ 8
+        ∷ []
+    ; modelGapCandidates =
+        wrongPDFSet
+        ∷ missingElectroweakCorrection
+        ∷ acceptanceModelGap
+        ∷ forwardKinematicModelGap
+        ∷ []
+    ; promotingReceiptExists =
+        false
+    ; promotingReceiptExistsIsFalse =
+        refl
+    ; gapAssessment =
+        "covariance chi2 is not low-rank: 8 contribution-ranked eigenmodes are needed for 90 percent of chi2"
+        ∷ "the obstruction is not a few-bin artifact: 17 bins have absolute log-space pull above 3"
+        ∷ "phiStar rescaling is blocked at chi2/dof 3105.3455095026266 and is only a point-value diagnostic with fixed covariance"
+        ∷ "all tested smooth, piecewise, threshold, multiplicative, covariance, discrete-bin, and kinematic-rescaling branches fail"
+        ∷ "remaining named branch is a distributed theoretical model gap: wrong PDF set, missing electroweak correction, acceptance model gap, or forward kinematic model gap"
         ∷ []
     }
 
@@ -668,6 +842,8 @@ canonicalDrellYanLogLinearShapeLawReceipt =
         canonicalDYEndpointThresholdObstruction
     ; multiTransitionObstruction =
         canonicalDYMultiTransitionObstruction
+    ; distributedTheoreticalModelGap =
+        canonicalDYDistributedTheoreticalModelGap
     ; residualObstructionAfterShapeRemoval =
         true
     ; residualObstructionAfterShapeRemovalIsTrue =
