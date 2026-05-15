@@ -303,6 +303,194 @@ def _emst_fiducial_tensor_proxy(
     }
 
 
+def _cs_lepton_kinematics_from_angles(
+    cos_theta_cs: np.ndarray,
+    phi_cs: np.ndarray,
+    q_t: float,
+    q_mass: float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    sin_theta = np.sqrt(np.maximum(1.0 - cos_theta_cs**2, 0.0))
+    lepton_energy_cs = q_mass / 2.0
+    px_cs = lepton_energy_cs * sin_theta * np.cos(phi_cs)
+    py_cs = lepton_energy_cs * sin_theta * np.sin(phi_cs)
+    pz_cs = lepton_energy_cs * cos_theta_cs
+
+    # qT / Q is the small-qT approximation.  Use the physical boost velocity
+    # so the diagnostic remains finite for the high-phi* bins in this table.
+    beta_t = q_t / math.sqrt(q_mass**2 + q_t**2)
+    gamma_t = 1.0 / math.sqrt(1.0 - beta_t**2)
+
+    px1 = gamma_t * (px_cs + beta_t * lepton_energy_cs)
+    py1 = py_cs
+    pz1 = pz_cs
+    pt1 = np.sqrt(px1**2 + py1**2)
+    eta1 = np.arcsinh(pz1 / np.maximum(pt1, np.finfo(float).tiny))
+
+    px2 = gamma_t * (-px_cs + beta_t * lepton_energy_cs)
+    py2 = -py_cs
+    pz2 = -pz_cs
+    pt2 = np.sqrt(px2**2 + py2**2)
+    eta2 = np.arcsinh(pz2 / np.maximum(pt2, np.finfo(float).tiny))
+
+    return pt1, pt2, np.abs(eta1), np.abs(eta2)
+
+
+def _emst_nine_component_quadrature(
+    phi_star: np.ndarray,
+    sigma_inclusive: np.ndarray,
+    selection_metadata: dict[str, Any],
+    cov_inv: np.ndarray,
+    log_data: np.ndarray,
+) -> dict[str, Any]:
+    """Nine-component deterministic fiducial angular quadrature diagnostic.
+
+    This evaluates the Lam-Tung angular basis over the CMS lepton fiducial
+    region using deterministic quadrature.  It is closer to the required EMST
+    surface than the five-component smoke test, but it remains a diagnostic
+    until the hadronic structure functions are sourced from the full EMST
+    calculation rather than power-counting proxies.
+    """
+    lepton_pt = selection_metadata.get("lepton_pT_min_GeV", {})
+    if isinstance(lepton_pt, dict):
+        pt_lead = float(lepton_pt.get("leading", 25.0))
+        pt_sub = float(lepton_pt.get("subleading", 20.0))
+    else:
+        pt_lead = float(selection_metadata.get("leading_lepton_pT_min_GeV", lepton_pt))
+        pt_sub = float(selection_metadata.get("subleading_lepton_pT_min_GeV", 20.0))
+    eta_max = float(selection_metadata.get("lepton_eta_max", 2.4))
+    mass = 91.1876
+    n_cos = 100
+    n_phi = 100
+
+    cos_nodes, cos_weights = np.polynomial.legendre.leggauss(n_cos)
+    phi_nodes = np.linspace(0.0, 2.0 * math.pi, n_phi, endpoint=False)
+    phi_weights = np.full(n_phi, 2.0 * math.pi / n_phi)
+    cos_grid, phi_grid = np.meshgrid(cos_nodes, phi_nodes, indexing="ij")
+    weight_grid = cos_weights[:, None] * phi_weights[None, :]
+    sin_grid = np.sqrt(np.maximum(1.0 - cos_grid**2, 0.0))
+    total_weight = float(np.sum(weight_grid))
+
+    angular_basis = np.stack(
+        [
+            np.ones_like(cos_grid),
+            cos_grid,
+            0.5 * (3.0 * cos_grid**2 - 1.0),
+            sin_grid * cos_grid * np.cos(phi_grid),
+            sin_grid * cos_grid * np.sin(phi_grid),
+            sin_grid**2 * np.cos(2.0 * phi_grid),
+            sin_grid**2 * np.sin(2.0 * phi_grid),
+            sin_grid * np.cos(phi_grid),
+            sin_grid * np.sin(phi_grid),
+        ],
+        axis=0,
+    )
+
+    c_fid_integral = np.zeros((9, len(phi_star)))
+    c_fid_acceptance_mean = np.zeros((9, len(phi_star)))
+    fiducial_fraction = np.zeros(len(phi_star))
+
+    for column, phi_value in enumerate(phi_star):
+        q_t = mass * float(phi_value)
+        pt1, pt2, eta1, eta2 = _cs_lepton_kinematics_from_angles(
+            cos_grid,
+            phi_grid,
+            q_t,
+            mass,
+        )
+        lead_pt = np.maximum(pt1, pt2)
+        sublead_pt = np.minimum(pt1, pt2)
+        fiducial = (
+            (lead_pt > pt_lead)
+            & (sublead_pt > pt_sub)
+            & (eta1 < eta_max)
+            & (eta2 < eta_max)
+        )
+        fid_weight = weight_grid * fiducial
+        fid_norm = float(np.sum(fid_weight))
+        fiducial_fraction[column] = fid_norm / total_weight
+        for row in range(9):
+            weighted = angular_basis[row] * fid_weight
+            c_fid_integral[row, column] = float(np.sum(weighted) / total_weight)
+            c_fid_acceptance_mean[row, column] = float(
+                np.sum(weighted) / max(fid_norm, np.finfo(float).tiny)
+            )
+
+    power = np.array([0, 1, 2, 1, 1, 2, 2, 1, 1], dtype=float)
+    q_t_over_q = phi_star
+    structure_functions = np.vstack(
+        [sigma_inclusive * q_t_over_q**component_power for component_power in power]
+    )
+    sigma_v5 = np.sum(structure_functions * c_fid_integral, axis=0)
+    positive_pre_scale = bool(np.all(sigma_v5 > 0.0))
+    sigma_v5_safe = np.maximum(sigma_v5, np.finfo(float).tiny)
+    scale = float(np.exp(np.mean(log_data) - np.mean(np.log(sigma_v5_safe))))
+    sigma_v5_scaled = sigma_v5_safe * scale
+    residual = np.log(sigma_v5_scaled) - log_data
+    chi2 = float(residual @ cov_inv @ residual)
+    n_bins = len(phi_star)
+
+    coefficient_path = Path("scripts/data/outputs/emst_nine_component_C_fid_sigma_dashi_v4_20260515.json")
+    coefficient_artifact = {
+        "method": "deterministic_gauss_legendre_phi_quadrature",
+        "reference": "arXiv:2006.11382 angular decomposition target",
+        "status": "nine_component_fiducial_angular_surface_diagnostic",
+        "full_emst_surface_status": (
+            "fiducial leptonic angular coefficients computed; hadronic W_i "
+            "still power-counting proxies"
+        ),
+        "cms_cuts": {
+            "lepton_pT_lead_GeV": pt_lead,
+            "lepton_pT_sub_GeV": pt_sub,
+            "lepton_eta_max": eta_max,
+        },
+        "kinematic_mapping": "qT = M_Z * phiStar; transverse boost beta = qT/sqrt(M_Z^2 + qT^2)",
+        "n_cos_nodes": n_cos,
+        "n_phi_nodes": n_phi,
+        "n_components": 9,
+        "phi_star_grid": [float(value) for value in phi_star],
+        "fiducial_fraction": [float(value) for value in fiducial_fraction],
+        "C_fid_integral_over_4pi": c_fid_integral.tolist(),
+        "C_fid_acceptance_mean": c_fid_acceptance_mean.tolist(),
+    }
+    coefficient_path.parent.mkdir(parents=True, exist_ok=True)
+    with coefficient_path.open("w", encoding="utf-8") as handle:
+        json.dump(coefficient_artifact, handle, indent=2, sort_keys=True)
+
+    return {
+        "reference": "arXiv:2006.11382",
+        "method": "deterministic_nine_component_fiducial_angular_quadrature",
+        "basis_source": "Causal_QCD_EMST_tensor_structure_quadrature_diagnostic",
+        "component_count": 9,
+        "structure_function_power_proxy": [int(value) for value in power],
+        "full_emst_surface_status": (
+            "nine leptonic coefficients computed by quadrature; hadronic W_i "
+            "remain proxy power-counted, so this is not yet the full EMST prediction"
+        ),
+        "cuts": {
+            "lepton_pT_lead_GeV": pt_lead,
+            "lepton_pT_sub_GeV": pt_sub,
+            "lepton_eta_max": eta_max,
+        },
+        "angular_grid": {
+            "n_cos_nodes": n_cos,
+            "n_phi_nodes": n_phi,
+            "fiducial_fraction_min": float(np.min(fiducial_fraction)),
+            "fiducial_fraction_max": float(np.max(fiducial_fraction)),
+        },
+        "coefficient_artifact": str(coefficient_path),
+        "scale": scale,
+        "positive_pre_scale": positive_pre_scale,
+        "chi2": chi2,
+        "chi2_per_dof": chi2 / n_bins,
+        "promotability": _promotability_label(chi2 / n_bins),
+        "diagnostic_only": True,
+        "promotion_boundary": (
+            "requires full EMST hadronic structure functions and exact fiducial "
+            "coefficient formulas before this can promote"
+        ),
+    }
+
+
 def _cms_smp_20_003_derived_kappa(selection_metadata: dict[str, Any]) -> dict[str, Any]:
     lepton_pt = selection_metadata.get("lepton_pT_min_GeV", {})
     if isinstance(lepton_pt, dict):
@@ -553,6 +741,13 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     kappa_fitted = float(emst_fit_result.x)
     chi2_emst_fitted = float(emst_fit_result.fun)
     emst_tensor_proxy = _emst_fiducial_tensor_proxy(
+        phi_star,
+        pred,
+        selection_metadata,
+        cov_inv,
+        log_data,
+    )
+    emst_nine_component = _emst_nine_component_quadrature(
         phi_star,
         pred,
         selection_metadata,
@@ -999,6 +1194,7 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
                     "EMST fiducial surface remain missing"
                 ),
                 "full_tensor_diagnostic": emst_tensor_proxy,
+                "nine_component_quadrature_diagnostic": emst_nine_component,
                 "zero_free_parameter_promotable": chi2_emst_derived_per_dof <= 2.0,
                 "promotion_boundary": (
                     "derived scalar kappa is not the full fiducial correction "
@@ -1313,6 +1509,17 @@ def main() -> int:
         f"{full_tensor['five_component_proxy']['promotability']}"
     )
     print(f"  Diagnostic only:              {full_tensor['diagnostic_only']}")
+    nine_component = emst["nine_component_quadrature_diagnostic"]
+    print("\nEMST NINE-COMPONENT QUADRATURE DIAGNOSTIC")
+    print(f"  Method:                       {nine_component['method']}")
+    print(f"  Surface status:               {nine_component['full_emst_surface_status']}")
+    print(
+        "  Nine-component chi2/dof:      "
+        f"{nine_component['chi2_per_dof']:10.6f}  "
+        f"{nine_component['promotability']}"
+    )
+    print(f"  Coefficient artifact:         {nine_component['coefficient_artifact']}")
+    print(f"  Diagnostic only:              {nine_component['diagnostic_only']}")
 
     smooth = extended["smooth_antisymmetric_discrimination"]
     print("\nSMOOTH ANTISYMMETRIC DISCRIMINATION")

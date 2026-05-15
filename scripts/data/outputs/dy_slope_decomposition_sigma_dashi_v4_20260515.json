@@ -432,6 +432,43 @@
         "structure_function_count_required": 9
       },
       "kappa_distance_fit_minus_derived": 0.27129797406014555,
+      "nine_component_quadrature_diagnostic": {
+        "angular_grid": {
+          "fiducial_fraction_max": 0.8607917649996338,
+          "fiducial_fraction_min": 0.7704401088675318,
+          "n_cos_nodes": 100,
+          "n_phi_nodes": 100
+        },
+        "basis_source": "Causal_QCD_EMST_tensor_structure_quadrature_diagnostic",
+        "chi2": 101032.00620571639,
+        "chi2_per_dof": 5612.889233650911,
+        "coefficient_artifact": "scripts/data/outputs/emst_nine_component_C_fid_sigma_dashi_v4_20260515.json",
+        "component_count": 9,
+        "cuts": {
+          "lepton_eta_max": 2.4,
+          "lepton_pT_lead_GeV": 25.0,
+          "lepton_pT_sub_GeV": 20.0
+        },
+        "diagnostic_only": true,
+        "full_emst_surface_status": "nine leptonic coefficients computed by quadrature; hadronic W_i remain proxy power-counted, so this is not yet the full EMST prediction",
+        "method": "deterministic_nine_component_fiducial_angular_quadrature",
+        "positive_pre_scale": true,
+        "promotability": "blocked",
+        "promotion_boundary": "requires full EMST hadronic structure functions and exact fiducial coefficient formulas before this can promote",
+        "reference": "arXiv:2006.11382",
+        "scale": 0.5887631467852398,
+        "structure_function_power_proxy": [
+          0,
+          1,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1
+        ]
+      },
       "promotability_derived_kappa": "blocked",
       "promotion_boundary": "derived scalar kappa is not the full fiducial correction surface; do not promote unless strict threshold passes and the acceptance surface contract is complete",
       "reference": "arXiv:2006.11382",
