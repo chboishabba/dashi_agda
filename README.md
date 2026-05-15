@@ -494,6 +494,12 @@ Current worker lanes:
   non-promoting: no clean freeze, accepted DASHI prediction API, digest-bound
   projection, comparison law, E8 carrier, Lam-Tung adapter, theta/J bridge, or
   W3/W4/W5/W6/W8/W9 promotion receipt is constructed from sibling evidence.
+  It now also records sibling video diagnostics: `dashifine` GIF/frame
+  visualizations and `dashitest` codec, Vulkan/VAAPI, live-sheet, and MP4 smoke
+  artifacts. These are documented in `Docs/SiblingVideoEvidenceInventory.md`
+  and remain engineering diagnostics until a local video-continuity receipt
+  binds frames to a trace, observation map, metric, admissibility law, command,
+  and artifact digests.
   `SiblingEvidenceExtractionDiagnostic` records the worker extraction results:
   the sibling HEPData scripts are coefficient-flow/proxy diagnostics rather
   than an accepted `sigma_DASHI` ratio API, the Lyapunov JSON is aggregate
@@ -1201,11 +1207,16 @@ depends on that surface.
   Schrödinger step.
 - Sibling-repo support surfaces:
   `../dashitest` contains useful diagnostic and measurement artifacts for
-  wave/interference, MDL, and regime-style language, but it is currently a
-  support repo rather than a code dependency for this tree. The strongest
+  wave/interference, MDL, video/codec diagnostics, and regime-style language,
+  but it is currently a support repo rather than a code dependency for this
+  tree. The strongest
   cross-reference points are
+  `Docs/SiblingVideoEvidenceInventory.md`,
   `../dashitest/dashiCORE/README.md`,
   `../dashitest/dashiCORE/docs/dashibrain_core_integration.md`,
+  `../dashitest/compression/video_bench.py`,
+  `../dashitest/vulkan/video_bench_vk.py`,
+  `../dashitest/vulkan_compute/compute_image_preview.py`,
   `../dashitest/dashifine/newtest/grayscott_krr.py`,
   `../dashitest/dashifine/newtest/triality_stack.py`,
   `../dashitest/docs/tree_diffusion_benchmark.md`,
@@ -1215,6 +1226,9 @@ depends on that surface.
   `../dashitest/trading/scripts/plot_hysteresis_phase.py`.
   These are useful documentation-side analogues for measurement and
   interference language, not theorem evidence for the Agda closure stack.
+  The sibling video artifacts prove executable/recorded diagnostic paths exist;
+  they do not prove video-continuity closure or promotion without an in-repo
+  receipt.
 
 Current theorem status:
 

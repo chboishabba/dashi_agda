@@ -29,6 +29,10 @@ data SiblingEvidenceKind : Set where
     SiblingEvidenceKind
   dashitestHepMirrorCandidate :
     SiblingEvidenceKind
+  dashifineVideoDiagnosticCandidate :
+    SiblingEvidenceKind
+  dashitestVideoDiagnosticCandidate :
+    SiblingEvidenceKind
   dashigLilaPhase2Trace :
     SiblingEvidenceKind
   dashigE8NamedVocabularyArtifact :
@@ -43,6 +47,8 @@ canonicalSiblingEvidenceKinds =
   ∷ dashifineLyapunovEnergyCandidate
   ∷ dashiQHepMirrorCandidate
   ∷ dashitestHepMirrorCandidate
+  ∷ dashifineVideoDiagnosticCandidate
+  ∷ dashitestVideoDiagnosticCandidate
   ∷ dashigLilaPhase2Trace
   ∷ dashigE8NamedVocabularyArtifact
   ∷ dashiLean4MoonshineArithmeticSupport
@@ -118,6 +124,34 @@ dashitestHepMirrorCandidateEntry =
         "test mirror only; no provider authority or promotion token is accepted from this path"
     }
 
+dashifineVideoDiagnosticCandidateEntry :
+  SiblingEvidenceEntry
+dashifineVideoDiagnosticCandidateEntry =
+  record
+    { evidenceKind =
+        dashifineVideoDiagnosticCandidate
+    ; siblingPath =
+        "../dashifine/41_viz_cone_monotone.py; ../dashifine/42_viz_closure_flow.py; ../dashifine/43_viz_ultrametric_tree.py; ../dashifine/44_viz_ultrametric_grid.py; ../dashifine/26_hepdata_contraction_animation.py; ../dashifine/newtest/grayscott_krr.py"
+    ; evidenceRole =
+        "GIF and frame-sequence diagnostics for closure flow, cone quantity, ultrametric lens states, contraction trajectories, and rollout visualization"
+    ; promotionBoundary =
+        "visual diagnostic only; no video artifact is theorem authority without a repo-local trace, observation map, metric, admissibility law, rerun command, and digest-bound receipt"
+    }
+
+dashitestVideoDiagnosticCandidateEntry :
+  SiblingEvidenceEntry
+dashitestVideoDiagnosticCandidateEntry =
+  record
+    { evidenceKind =
+        dashitestVideoDiagnosticCandidate
+    ; siblingPath =
+        "../dashitest/compression/video_bench.py; ../dashitest/vulkan/video_bench_vk.py; ../dashitest/vulkan_compute/compute_image_preview.py; ../dashitest/dashilearn/run_live_sheet.sh; ../dashitest/dashilearn/run_tree_live_sheet.sh; ../dashitest/tree_diffusion_20260108T145922Z.mp4; ../dashitest/sheet.mp4"
+    ; evidenceRole =
+        "video compression, Vulkan/VAAPI preview, live-sheet recording, and tree-diffusion MP4 smoke artifacts for engineering continuity and codec diagnostics"
+    ; promotionBoundary =
+        "sibling video evidence only; it records executable and recorded diagnostics but no Agda closure theorem, comparison law, provider authority, or promotion token"
+    }
+
 dashigLilaPhase2TraceEntry :
   SiblingEvidenceEntry
 dashigLilaPhase2TraceEntry =
@@ -167,6 +201,8 @@ canonicalSiblingEvidenceEntries =
   ∷ dashifineLyapunovEnergyCandidateEntry
   ∷ dashiQHepMirrorCandidateEntry
   ∷ dashitestHepMirrorCandidateEntry
+  ∷ dashifineVideoDiagnosticCandidateEntry
+  ∷ dashitestVideoDiagnosticCandidateEntry
   ∷ dashigLilaPhase2TraceEntry
   ∷ dashigE8NamedVocabularyArtifactEntry
   ∷ dashiLean4MoonshineArithmeticSupportEntry
@@ -191,6 +227,8 @@ data SiblingEvidenceMissingReceipt : Set where
     SiblingEvidenceMissingReceipt
   missingProviderAuthorityReceipt :
     SiblingEvidenceMissingReceipt
+  missingVideoContinuityReceipt :
+    SiblingEvidenceMissingReceipt
 
 canonicalSiblingEvidenceMissingReceipts :
   List SiblingEvidenceMissingReceipt
@@ -204,6 +242,7 @@ canonicalSiblingEvidenceMissingReceipts =
   ∷ missingThetaJAgdaAdapterReceipt
   ∷ missingRuntimePNFReceipt
   ∷ missingProviderAuthorityReceipt
+  ∷ missingVideoContinuityReceipt
   ∷ []
 
 data SiblingEvidencePromotedReceipt : Set where
@@ -287,6 +326,7 @@ canonicalSiblingEvidenceInventory =
     ; inventoryNotes =
         "Sibling evidence is useful for routing and cross-checking but is not a provider receipt"
         ∷ "dashifine/dashiQ/dashitest phi-star artifacts can guide the accepted DASHI prediction API route"
+        ∷ "dashifine GIF diagnostics and dashitest video/codec/Vulkan artifacts are sibling engineering evidence, not theorem authority"
         ∷ "DASHIg LILA Phase 2 artifacts can guide the trace lane but not E8/Lam-Tung physics closure"
         ∷ "dashi_lean4 moonshine arithmetic can guide a future Agda theta/J adapter but is not imported here"
         ∷ []
@@ -297,6 +337,7 @@ canonicalSiblingEvidenceInventory =
         ∷ "It constructs no digest-bound projection artifact"
         ∷ "It constructs no comparison-law receipt"
         ∷ "It constructs no E8 carrier, Lam-Tung adapter, theta/J bridge, or phi-star projection receipt"
+        ∷ "It constructs no video-continuity receipt binding frames to a trace, observation map, metric, and admissibility law"
         ∷ "It constructs no W3/W4/W5/W6/W8/W9 promotion receipt"
         ∷ []
     ; promotedReceiptBlocked =
