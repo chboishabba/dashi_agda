@@ -429,6 +429,33 @@ data ModelGapCandidate : Set where
   forwardKinematicModelGap :
     ModelGapCandidate
 
+data ActualStrictLogBlocker : Set where
+  missingHadronicStructureFunctions :
+    ActualStrictLogBlocker
+
+record ProxyDivergenceRecord : Setω where
+  field
+    scalarEMSTChi2PerDof :
+      String
+
+    fiveComponentProxyChi2PerDof :
+      String
+
+    nineComponentProxyChi2PerDof :
+      String
+
+    monotoneDivergenceWithAngularComplexity :
+      Bool
+
+    monotoneDivergenceWithAngularComplexityIsTrue :
+      monotoneDivergenceWithAngularComplexity ≡ true
+
+    interpretation :
+      String
+
+    conclusion :
+      String
+
 record DYDistributedTheoreticalModelGap : Setω where
   field
     artifactPath :
@@ -567,6 +594,56 @@ record EMSTFullTensorReceipt : Setω where
 
     nextIfBlocked :
       String
+
+record DYStrictLogDiagnosticSummary : Setω where
+  field
+    adjacentRatioChi2PerDof :
+      String
+
+    adjacentRatioThreshold :
+      String
+
+    adjacentRatioPass :
+      Bool
+
+    adjacentRatioPassIsTrue :
+      adjacentRatioPass ≡ true
+
+    strictLogBaselineChi2PerDof :
+      String
+
+    logCubicChi2PerDof :
+      String
+
+    logCubicInterpretation :
+      String
+
+    proxyDivergence :
+      ProxyDivergenceRecord
+
+    actualBlocker :
+      ActualStrictLogBlocker
+
+    blockerSourceRequest :
+      List String
+
+    nHadronicComponentsRequired :
+      Nat
+
+    nHadronicComponentsRequiredIsNine :
+      nHadronicComponentsRequired ≡ 9
+
+    strictPassAchieved :
+      Bool
+
+    strictPassAchievedIsFalse :
+      strictPassAchieved ≡ false
+
+    fullAuthorityInhabited :
+      Bool
+
+    fullAuthorityInhabitedIsFalse :
+      fullAuthorityInhabited ≡ false
 
 data AcceptanceMetadataGapStatus : Set where
   acceptanceMetadataGapOpen :
@@ -758,8 +835,10 @@ open LogPolynomialDecompositionReceipt public
 open DYEndpointThresholdObstruction public
 open DYMultiTransitionObstruction public
 open CSSResummationShapeLawReceipt public
+open ProxyDivergenceRecord public
 open DYDistributedTheoreticalModelGap public
 open EMSTFullTensorReceipt public
+open DYStrictLogDiagnosticSummary public
 open DYAcceptanceMetadataGapReceipt public
 open LogLinearShapeLawReceipt public
 
@@ -1294,7 +1373,7 @@ canonicalEMSTFullTensorReceipt =
     ; chi2FiveComponentProxy =
         "4162.970858"
     ; fullEMSTSurfaceStatus =
-        "missing_nine_component_fiducial_leptonic_coefficients"
+        "missing_independent_hadronic_structure_functions_W_i"
     ; diagnosticOnly =
         true
     ; diagnosticOnlyIsTrue =
@@ -1304,7 +1383,68 @@ canonicalEMSTFullTensorReceipt =
     ; promotesIsFalse =
         refl
     ; nextIfBlocked =
-        "derive the full nine-component EMST fiducial coefficient surface over the exact CMS cuts before EW/PDF lanes are promoted"
+        "supply independent nine-component hadronic structure functions W_i from DYTURBO, ResBos2, CuTe-MCFM, or an EMST Appendix-B implementation"
+    }
+
+canonicalProxyDivergenceRecord :
+  ProxyDivergenceRecord
+canonicalProxyDivergenceRecord =
+  record
+    { scalarEMSTChi2PerDof =
+        "3044.091531"
+    ; fiveComponentProxyChi2PerDof =
+        "4162.970858"
+    ; nineComponentProxyChi2PerDof =
+        "5612.889234"
+    ; monotoneDivergenceWithAngularComplexity =
+        true
+    ; monotoneDivergenceWithAngularComplexityIsTrue =
+        refl
+    ; interpretation =
+        "increasing angular proxy complexity worsens strict-log chi2, so power-counted W_i placeholders are anticorrelated with the fiducial residual"
+    ; conclusion =
+        "hadronic structure functions W_i cannot be reconstructed from sigma_inclusive alone and require an independent QCD calculation"
+    }
+
+canonicalDYStrictLogDiagnosticSummary :
+  DYStrictLogDiagnosticSummary
+canonicalDYStrictLogDiagnosticSummary =
+  record
+    { adjacentRatioChi2PerDof =
+        "2.1565191176"
+    ; adjacentRatioThreshold =
+        "4.0"
+    ; adjacentRatioPass =
+        true
+    ; adjacentRatioPassIsTrue =
+        refl
+    ; strictLogBaselineChi2PerDof =
+        "3180.211733"
+    ; logCubicChi2PerDof =
+        "18.036622"
+    ; logCubicInterpretation =
+        "best compact residual basis with no hadronic-structure claim"
+    ; proxyDivergence =
+        canonicalProxyDivergenceRecord
+    ; actualBlocker =
+        missingHadronicStructureFunctions
+    ; blockerSourceRequest =
+        "DYTURBO Lam-Tung structure-function grid for CMS-SMP-20-003"
+        ∷ "ResBos2 fiducial angular structure-function grid for CMS-SMP-20-003"
+        ∷ "CuTe-MCFM or EMST Appendix-B implementation producing nine W_i over the phiStar grid"
+        ∷ []
+    ; nHadronicComponentsRequired =
+        9
+    ; nHadronicComponentsRequiredIsNine =
+        refl
+    ; strictPassAchieved =
+        false
+    ; strictPassAchievedIsFalse =
+        refl
+    ; fullAuthorityInhabited =
+        false
+    ; fullAuthorityInhabitedIsFalse =
+        refl
     }
 
 canonicalDYAcceptanceMetadataGapReceipt :
@@ -1352,7 +1492,7 @@ canonicalDYAcceptanceMetadataGapReceipt =
     ; emstReference =
         "arXiv:2006.11382"
     ; emstCorrectionStatus =
-        "blocked_until_central_acceptance_and_fiducial_power_correction_surface_are_machine_readable"
+        "blocked_until_independent_hadronic_structure_functions_W_i_are_machine_readable"
     ; emstDerivedScalarKappa =
         "0.290919"
     ; emstDerivedScalarChi2PerDof =
@@ -1384,8 +1524,9 @@ canonicalDYAcceptanceMetadataGapReceipt =
         ∷ "supply or derive the central acceptance surface A(M,phi*) and its provenance"
         ∷ "Pass 20 derived scalar EMST proxy kappa=0.290919 gives chi2/dof=3044.091531 and is non-promoting"
         ∷ "Pass 21 deterministic five-component tensor proxy gives chi2/dof=4162.970858 and is non-promoting"
-        ∷ "supply or derive the full nine-component EMST fiducial power-correction surface from the machine-readable CMS cuts; scalar and five-component proxies are insufficient"
-        ∷ "only then implement the EMST fiducial power-correction diagnostic as a pre-frozen strict-log prediction correction"
+        ∷ "Pass 22 nine-component leptonic quadrature proxy gives chi2/dof=5612.889234 and is non-promoting"
+        ∷ "proxy divergence establishes that W_i cannot be power-counted from sigma_inclusive alone"
+        ∷ "supply independent nine-component hadronic structure functions W_i before any further EMST strict-log correction attempt"
         ∷ "rerun strict-log without posterior retuning before any full W3 authority promotion"
         ∷ []
     }
