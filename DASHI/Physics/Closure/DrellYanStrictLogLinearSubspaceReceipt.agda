@@ -5,7 +5,10 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Unit using (tt)
 open import Data.List.Base using (List; _∷_; [])
+
+import DASHI.Core.TypedResidualBasisDecomposition as TRBD
 
 ------------------------------------------------------------------------
 -- Corrected strict Drell-Yan log-covariance diagnosis.
@@ -330,7 +333,122 @@ canonicalSpan1LogPhiStarShapeObstructionDocumented =
         "derive a DASHI log-linear slope law for the below-Z phiStar spectrum and re-run the strict-log receipt"
     }
 
-record DrellYanStrictLogLinearSubspaceReceipt : Set where
+dyStrictLogTRBDThresholds :
+  TRBD.TRBDProtocolThresholds
+dyStrictLogTRBDThresholds =
+  record
+    { coverageThresholdName =
+        "rho_min"
+    ; coverageThreshold =
+        "0.90"
+    ; perpendicularThresholdName =
+        "strict-log chi2/dof tau"
+    ; perpendicularThreshold =
+        "2.0"
+    ; thresholdFrozen =
+        true
+    ; thresholdFrozenIsTrue =
+        refl
+    }
+
+dyStrictLogSpan1LogPhiStarTypedBasis :
+  TRBD.TypedBasis String
+dyStrictLogSpan1LogPhiStarTypedBasis =
+  record
+    { basisName =
+        "span1LogPhiStar"
+    ; basisVectors =
+        "1"
+        ∷ "log(phiStar)"
+        ∷ []
+    ; basisSource =
+        TRBD.structuralBasis
+    ; notFitted =
+        tt
+    ; basisSourceDescription =
+        "structural log-linear below-Z phiStar basis; fitted coefficients are diagnostic but the basis is not data-fitted"
+    ; basisPromotionBoundary =
+        "basis may type the obstruction, but fitted coefficients do not derive a DASHI shape law"
+        ∷ "promotion requires a structural or causal derivation of the correction and a passing perpendicular residual"
+        ∷ []
+    }
+
+canonicalDrellYanStrictLogTRBDReceipt :
+  TRBD.TRBDReceipt String
+canonicalDrellYanStrictLogTRBDReceipt =
+  record
+    { observed =
+        "log sigma_data below-Z t43"
+    ; predicted =
+        "log sigma_DASHI_v4 below-Z t43"
+    ; residualConvention =
+        "log(prediction) - log(data)"
+    ; metricOrCovariance =
+        "inverse propagated log covariance, C_log[i,j] = C_raw[i,j] / (R_data[i] * R_data[j])"
+    ; basis =
+        dyStrictLogSpan1LogPhiStarTypedBasis
+    ; basisCoefficients =
+        "-0.3104937924536695"
+        ∷ "-0.34242419691254444"
+        ∷ []
+    ; rawChi2PerDof =
+        "3180.211733150705"
+    ; perpendicularChi2PerDof =
+        "111.96455543013676"
+    ; basisCoverage =
+        "0.968705212853035"
+    ; basisCoverageFormula =
+        "rho_B = 1 - (perpendicular chi2 / raw chi2)"
+    ; coverageHonest =
+        refl
+    ; thresholds =
+        dyStrictLogTRBDThresholds
+    ; obstructionStatus =
+        TRBD.obstructionTypedPartial "span1LogPhiStar"
+    ; projectionArtifact =
+        "scripts/data/outputs/dy_slope_decomposition_sigma_dashi_v4_20260515.json"
+    ; diagnosticOnly =
+        true
+    ; promotionBoundary =
+        "TRBD status is obstructionTypedPartial: coverage is high but perpendicular chi2/dof remains 111.96455543013676 > 2.0"
+        ∷ "no PromotableTRBDReceipt is constructed for this DY strict-log receipt"
+        ∷ []
+    }
+
+canonicalDrellYanStrictLogOpenShapeLawRequest :
+  TRBD.OpenShapeLawRequest String
+canonicalDrellYanStrictLogOpenShapeLawRequest =
+  record
+    { receipt =
+        canonicalDrellYanStrictLogTRBDReceipt
+    ; obstructionNamed =
+        TRBD.openTypedPartial "span1LogPhiStar"
+    ; derivationPending =
+        record
+          { requestedQuantity =
+              "DASHI-derived below-Z log-linear phiStar slope correction"
+          ; requestedDerivationSource =
+              TRBD.structuralBasis
+          ; requestOpen =
+              true
+          ; requestOpenIsTrue =
+              refl
+          ; requestNotes =
+              "fitted correction slope is 0.3424241969125445, but a fitted coefficient is not a law"
+              ∷ "single-slope removal is insufficient because perpendicular chi2/dof remains 111.96455543013676"
+              ∷ []
+          }
+    ; nonPromoting =
+        true
+    ; nonPromotingIsTrue =
+        refl
+    ; notPromotableReason =
+        "basis coverage is high, but TRBD classification is obstructionTypedPartial rather than obstructionTypedClean"
+        ∷ "the residual complement still fails the strict threshold"
+        ∷ []
+    }
+
+record DrellYanStrictLogLinearSubspaceReceipt : Setω where
   field
     scope :
       String
@@ -383,6 +501,12 @@ record DrellYanStrictLogLinearSubspaceReceipt : Set where
     shapeObstructionDocumented :
       ShapeObstructionDocumented
 
+    trbdReceipt :
+      TRBD.TRBDReceipt String
+
+    trbdOpenShapeLawRequest :
+      TRBD.OpenShapeLawRequest String
+
     exactFirstMissing :
       List StrictLogFirstMissing
 
@@ -430,6 +554,10 @@ canonicalDrellYanStrictLogLinearSubspaceReceipt =
         span1LogPhiStar
     ; shapeObstructionDocumented =
         canonicalSpan1LogPhiStarShapeObstructionDocumented
+    ; trbdReceipt =
+        canonicalDrellYanStrictLogTRBDReceipt
+    ; trbdOpenShapeLawRequest =
+        canonicalDrellYanStrictLogOpenShapeLawRequest
     ; exactFirstMissing =
         missingDepthAveragedKernelImplementation
         ∷ missingSpan1LogPhiStarShapeLaw
