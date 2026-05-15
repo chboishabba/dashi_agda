@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
@@ -15,6 +15,10 @@ open import DASHI.Physics.Closure.PhotonuclearEmpiricalEvidenceSummary as PEES
 open import DASHI.Physics.Closure.PhotonuclearEmpiricalValidationSummary as PEVS
 open import DASHI.Physics.Closure.Validation.RootSystemB4PromotionBridge as B4PB
 open import DASHI.Physics.Closure.Validation.RootSystemB4ShellComparison as B4C
+open import DASHI.Physics.Closure.DrellYanAdjacentRatioEmpiricalLaneReceipt as DYAdjacent
+open import DASHI.Physics.Closure.DrellYanLogLinearShapeLawReceipt as DYShape
+open import DASHI.Physics.Closure.DrellYanStrictLogLinearSubspaceReceipt as DYStrictLog
+open import DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt as W3Comparison
 open import DASHI.Physics.Closure.W3EmpiricalTargetPromotionBridgeObligation as W3
 open import DASHI.Physics.Closure.W3SurrogateEmpiricalTargetBoundary as W3S
 
@@ -32,6 +36,8 @@ open import DASHI.Physics.Closure.W3SurrogateEmpiricalTargetBoundary as W3S
 data W3AuthorityLane : Set where
   surrogateTargetLane :
     W3AuthorityLane
+  partialAuthorityReceiptLane :
+    W3AuthorityLane
   acceptedEvidenceBackedTargetLane :
     W3AuthorityLane
   b4EmpiricalPromotionLane :
@@ -41,6 +47,8 @@ data W3AuthorityLane : Set where
 
 data W3AuthorityGateStatus : Set where
   surrogateAvailable :
+    W3AuthorityGateStatus
+  partialAuthorityReceiptsAvailable :
     W3AuthorityGateStatus
   acceptedEvidenceBlocked :
     W3AuthorityGateStatus
@@ -52,6 +60,102 @@ data W3AuthorityGateStatus : Set where
     W3AuthorityGateStatus
 
 data W3AcceptedEvidenceAuthorityToken : Set where
+
+data W3EvidenceAuthorityTier : Set where
+  partialBelowZDiagnosticAuthority :
+    W3EvidenceAuthorityTier
+
+  fullStrictLogShapeAuthority :
+    W3EvidenceAuthorityTier
+
+record W3PartialAuthorityEvidence : Setω where
+  field
+    comparisonLawReceipt :
+      W3Comparison.W3ComparisonLawReceipt
+
+    adjacentRatioEmpiricalLaneReceipt :
+      DYAdjacent.DrellYanAdjacentRatioEmpiricalLaneReceipt
+
+    strictLogDiagnosticReceipt :
+      DYStrictLog.DrellYanStrictLogLinearSubspaceReceipt
+
+    shapeObstructionDocumented :
+      DYStrictLog.ShapeObstructionDocumented
+
+    tier :
+      W3EvidenceAuthorityTier
+
+    criterionSatisfied :
+      Bool
+
+    criterionSatisfiedIsTrue :
+      criterionSatisfied ≡ true
+
+    strictPassAchieved :
+      Bool
+
+    strictPassAchievedIsFalse :
+      strictPassAchieved ≡ false
+
+    noFullAuthorityClaim :
+      List String
+
+record W3FullAuthorityEvidence : Setω where
+  field
+    logLinearShapeLawReceipt :
+      DYShape.LogLinearShapeLawReceipt
+
+    tier :
+      W3EvidenceAuthorityTier
+
+    shapePassAchieved :
+      Bool
+
+data W3TieredAcceptedEvidenceAuthorityToken : Setω where
+  W3PartialAuthority :
+    W3PartialAuthorityEvidence →
+    W3TieredAcceptedEvidenceAuthorityToken
+
+  W3FullAuthority :
+    W3FullAuthorityEvidence →
+    W3TieredAcceptedEvidenceAuthorityToken
+
+open W3PartialAuthorityEvidence public
+open W3FullAuthorityEvidence public
+
+canonicalW3PartialAuthorityEvidence :
+  W3PartialAuthorityEvidence
+canonicalW3PartialAuthorityEvidence =
+  record
+    { comparisonLawReceipt =
+        W3Comparison.canonicalHEPDataW3ComparisonLawReceipt
+    ; adjacentRatioEmpiricalLaneReceipt =
+        DYAdjacent.canonicalDrellYanAdjacentRatioEmpiricalLaneReceipt
+    ; strictLogDiagnosticReceipt =
+        DYStrictLog.canonicalDrellYanStrictLogLinearSubspaceReceipt
+    ; shapeObstructionDocumented =
+        DYStrictLog.canonicalSpan1LogPhiStarShapeObstructionDocumented
+    ; tier =
+        partialBelowZDiagnosticAuthority
+    ; criterionSatisfied =
+        true
+    ; criterionSatisfiedIsTrue =
+        refl
+    ; strictPassAchieved =
+        false
+    ; strictPassAchievedIsFalse =
+        refl
+    ; noFullAuthorityClaim =
+        "Partial tier consumes the bounded W3 comparison-law pass and adjacent-ratio lane only"
+        ∷ "Strict-log shape pass remains false and names span(1, log(phiStar)) as the open request"
+        ∷ "This tier does not inhabit W3AcceptedEvidenceAuthorityToken and does not replace external accepted authority"
+        ∷ []
+    }
+
+canonicalW3TieredPartialAuthorityToken :
+  W3TieredAcceptedEvidenceAuthorityToken
+canonicalW3TieredPartialAuthorityToken =
+  W3PartialAuthority canonicalW3PartialAuthorityEvidence
 
 data W3AcceptedEvidenceAuthorityTokenDefinitionStatus : Set where
   constructorlessFailClosedAtDefinitionSite :
@@ -351,12 +455,14 @@ currentW3AcceptedEmpiricalAuthorityGateStatus =
         refl
     ; lanes =
         surrogateTargetLane
+        ∷ partialAuthorityReceiptLane
         ∷ acceptedEvidenceBackedTargetLane
         ∷ b4EmpiricalPromotionLane
         ∷ originPromotionLane
         ∷ []
     ; statuses =
         surrogateAvailable
+        ∷ partialAuthorityReceiptsAvailable
         ∷ acceptedEvidenceBlocked
         ∷ b4EmpiricalPromotionBlocked
         ∷ originPromotionBlocked
@@ -369,6 +475,7 @@ currentW3AcceptedEmpiricalAuthorityGateStatus =
         ∷ []
     ; authorityBoundary =
         "The W3 surrogate target is available only as a syntactic chi2/shift-pressure target shape"
+        ∷ "A partial bounded-t43 authority tier is available from the comparison, adjacent-ratio, strict-log diagnostic, and typed shape-obstruction receipts"
         ∷ "Accepted empirical replacement requires an evidence-backed W3 target carrying W3AcceptedEvidenceAuthorityToken"
         ∷ "The canonical photonuclear summaries currently expose empiricalOnly and empiricalOnlyValidation non-claim boundaries"
         ∷ "B4 shell comparison remains standaloneOnly, so B4 empirical promotion is blocked"
