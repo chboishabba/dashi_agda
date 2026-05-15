@@ -456,6 +456,35 @@ record ProxyDivergenceRecord : Setω where
     conclusion :
       String
 
+record DirectDYTurboFiducialDiagnostic : Setω where
+  field
+    provider :
+      String
+
+    dampedResummedOnlyStatus :
+      String
+
+    dampedResummedOnlyBlocker :
+      String
+
+    undampedResummedOnlyChi2PerDof :
+      String
+
+    undampedResummedOnlyStrictPass :
+      Bool
+
+    undampedResummedOnlyStrictPassIsFalse :
+      undampedResummedOnlyStrictPass ≡ false
+
+    interpretation :
+      String
+
+    diagnosticOnly :
+      Bool
+
+    diagnosticOnlyIsTrue :
+      diagnosticOnly ≡ true
+
 record DYDistributedTheoreticalModelGap : Setω where
   field
     artifactPath :
@@ -620,6 +649,9 @@ record DYStrictLogDiagnosticSummary : Setω where
 
     proxyDivergence :
       ProxyDivergenceRecord
+
+    directDYTurboDiagnostic :
+      DirectDYTurboFiducialDiagnostic
 
     actualBlocker :
       ActualStrictLogBlocker
@@ -880,6 +912,7 @@ open DYEndpointThresholdObstruction public
 open DYMultiTransitionObstruction public
 open CSSResummationShapeLawReceipt public
 open ProxyDivergenceRecord public
+open DirectDYTurboFiducialDiagnostic public
 open DYDistributedTheoreticalModelGap public
 open EMSTFullTensorReceipt public
 open DYStrictLogDiagnosticSummary public
@@ -1451,6 +1484,30 @@ canonicalProxyDivergenceRecord =
         "hadronic structure functions W_i cannot be reconstructed from sigma_inclusive alone and require an independent QCD calculation"
     }
 
+canonicalDirectDYTurboFiducialDiagnostic :
+  DirectDYTurboFiducialDiagnostic
+canonicalDirectDYTurboFiducialDiagnostic =
+  record
+    { provider =
+        "DYTurbo-1.4.2 direct fiducial xs_qt over CMS-SMP-20-003 cuts"
+    ; dampedResummedOnlyStatus =
+        "blocked"
+    ; dampedResummedOnlyBlocker =
+        "resummation damping gives zero numerator in the highest qT bin, so the log-ratio is not valid"
+    ; undampedResummedOnlyChi2PerDof =
+        "7739.325951"
+    ; undampedResummedOnlyStrictPass =
+        false
+    ; undampedResummedOnlyStrictPassIsFalse =
+        refl
+    ; interpretation =
+        "removing matched finite-order terms makes the grid log-valid only when damping is disabled, but the resulting resummed-only fiducial shape is worse than the strict-log v4 baseline and is diagnostic-only"
+    ; diagnosticOnly =
+        true
+    ; diagnosticOnlyIsTrue =
+        refl
+    }
+
 canonicalDYStrictLogDiagnosticSummary :
   DYStrictLogDiagnosticSummary
 canonicalDYStrictLogDiagnosticSummary =
@@ -1471,6 +1528,8 @@ canonicalDYStrictLogDiagnosticSummary =
         "best compact residual basis with no hadronic-structure claim"
     ; proxyDivergence =
         canonicalProxyDivergenceRecord
+    ; directDYTurboDiagnostic =
+        canonicalDirectDYTurboFiducialDiagnostic
     ; actualBlocker =
         missingHadronicStructureFunctions
     ; blockerSourceRequest =
