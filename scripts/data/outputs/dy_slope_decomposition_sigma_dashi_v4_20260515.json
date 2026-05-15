@@ -93,6 +93,56 @@
       },
       "step_promotability": "blocked"
     },
+    "multi_transition_discrimination": {
+      "bin_integration_correction": {
+        "chi2": 56120.09069379521,
+        "chi2_per_dof": 3117.782816321956,
+        "promotability": "blocked",
+        "protocol": "second_derivative_point_to_bin_average_correction_in_strict_log_metric"
+      },
+      "lobe_structure_after_linear": [
+        "positive",
+        "negative",
+        "positive"
+      ],
+      "piecewise_log_linear_3_region": {
+        "basis_dim": 6,
+        "chi2_perp": 399.92974131521373,
+        "chi2_perp_per_dof": 33.32747844293448,
+        "coefficients": [
+          -0.20680813044226892,
+          -0.329916043985666,
+          -0.3393780179077595,
+          -0.3548643271110632,
+          -0.2513283238152351,
+          0.008277546221320623
+        ],
+        "coverage": 0.9930135724202412,
+        "dof_perp": 12
+      },
+      "piecewise_promotability": "blocked",
+      "promotable_if_derived": false,
+      "sudakov_matched_gaussian_log_power": {
+        "basis_dim": 4,
+        "chi2_perp": 30075.2653523246,
+        "chi2_perp_per_dof": 2148.233239451757,
+        "coefficients": [
+          -9630.61190571591,
+          0.28766266801032536,
+          -0.7998878655628727,
+          -0.18545634445210896
+        ],
+        "coverage": 0.474611058844878,
+        "dof_perp": 14
+      },
+      "sudakov_promotability": "blocked",
+      "transition_1_bin": 13,
+      "transition_1_interpretation": "non-perturbative to perturbative resummation transition",
+      "transition_1_phi_star": 0.1395,
+      "transition_2_bin": 16,
+      "transition_2_interpretation": "resummation to fixed-order tail transition",
+      "transition_2_phi_star": 0.8385
+    },
     "peak_residual_bin_after_linear": 17,
     "peak_residual_per_bin_chi2_after_linear_diag_approx": 643.3263320985052,
     "peak_residual_phi_star_after_linear": 2.215,

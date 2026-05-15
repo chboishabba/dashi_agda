@@ -234,6 +234,81 @@ record DYEndpointThresholdObstruction : Setω where
     mechanismAssessment :
       List String
 
+data LobeSign : Set where
+  positiveLobe :
+    LobeSign
+
+  negativeLobe :
+    LobeSign
+
+record DYMultiTransitionObstruction : Setω where
+  field
+    artifactPath :
+      String
+
+    transition1PhiStar :
+      String
+
+    transition1Interp :
+      String
+
+    transition2PhiStar :
+      String
+
+    transition2Interp :
+      String
+
+    lobeCount :
+      Nat
+
+    lobeStructure :
+      List LobeSign
+
+    logCubicChi2PerDof :
+      String
+
+    piecewise3RegionChi2PerDof :
+      String
+
+    sudakovMatchedChi2PerDof :
+      String
+
+    binIntegrationChi2PerDof :
+      String
+
+    transitionsAreQCDNatural :
+      Bool
+
+    transitionsAreQCDNaturalIsTrue :
+      transitionsAreQCDNatural ≡ true
+
+    piecewise3RegionBlocked :
+      Bool
+
+    piecewise3RegionBlockedIsTrue :
+      piecewise3RegionBlocked ≡ true
+
+    sudakovMatchedBlocked :
+      Bool
+
+    sudakovMatchedBlockedIsTrue :
+      sudakovMatchedBlocked ≡ true
+
+    binIntegrationBlocked :
+      Bool
+
+    binIntegrationBlockedIsTrue :
+      binIntegrationBlocked ≡ true
+
+    promotingReceiptExists :
+      Bool
+
+    promotingReceiptExistsIsFalse :
+      promotingReceiptExists ≡ false
+
+    obstructionAssessment :
+      List String
+
 record LogLinearShapeLawReceipt : Setω where
   field
     status :
@@ -278,6 +353,9 @@ record LogLinearShapeLawReceipt : Setω where
     endpointThresholdObstruction :
       DYEndpointThresholdObstruction
 
+    multiTransitionObstruction :
+      DYMultiTransitionObstruction
+
     residualObstructionAfterShapeRemoval :
       Bool
 
@@ -302,6 +380,7 @@ record LogLinearShapeLawReceipt : Setω where
 open DASHITypedDerivation public
 open LogPolynomialDecompositionReceipt public
 open DYEndpointThresholdObstruction public
+open DYMultiTransitionObstruction public
 open LogLinearShapeLawReceipt public
 
 canonicalDASHILogLinearSlopeDerivationRequest :
@@ -495,6 +574,64 @@ canonicalDYEndpointThresholdObstruction =
         ∷ []
     }
 
+canonicalDYMultiTransitionObstruction :
+  DYMultiTransitionObstruction
+canonicalDYMultiTransitionObstruction =
+  record
+    { artifactPath =
+        "scripts/data/outputs/dy_slope_decomposition_sigma_dashi_v4_20260515.json"
+    ; transition1PhiStar =
+        "0.1395"
+    ; transition1Interp =
+        "non-perturbative to perturbative resummation transition"
+    ; transition2PhiStar =
+        "0.8385"
+    ; transition2Interp =
+        "resummation to fixed-order tail transition"
+    ; lobeCount =
+        3
+    ; lobeStructure =
+        positiveLobe
+        ∷ negativeLobe
+        ∷ positiveLobe
+        ∷ []
+    ; logCubicChi2PerDof =
+        "18.036622062708705"
+    ; piecewise3RegionChi2PerDof =
+        "33.32747844293448"
+    ; sudakovMatchedChi2PerDof =
+        "2148.233239451757"
+    ; binIntegrationChi2PerDof =
+        "3117.782816321956"
+    ; transitionsAreQCDNatural =
+        true
+    ; transitionsAreQCDNaturalIsTrue =
+        refl
+    ; piecewise3RegionBlocked =
+        true
+    ; piecewise3RegionBlockedIsTrue =
+        refl
+    ; sudakovMatchedBlocked =
+        true
+    ; sudakovMatchedBlockedIsTrue =
+        refl
+    ; binIntegrationBlocked =
+        true
+    ; binIntegrationBlockedIsTrue =
+        refl
+    ; promotingReceiptExists =
+        false
+    ; promotingReceiptExistsIsFalse =
+        refl
+    ; obstructionAssessment =
+        "two sign flips at phiStar 0.1395 and 0.8385 define a three-lobe positive-negative-positive residual after log-linear removal"
+        ∷ "the transitions are QCD-natural, but the tested three-region piecewise log-linear basis is blocked at chi2/dof 33.32747844293448"
+        ∷ "the tested Sudakov-matched Gaussian/log/power basis is blocked at chi2/dof 2148.233239451757"
+        ∷ "the point-to-bin-average correction approximation is blocked at chi2/dof 3117.782816321956"
+        ∷ "log-cubic remains the best compact diagnostic at chi2/dof 18.036622062708705, but no tested basis promotes"
+        ∷ []
+    }
+
 canonicalDrellYanLogLinearShapeLawReceipt :
   LogLinearShapeLawReceipt
 canonicalDrellYanLogLinearShapeLawReceipt =
@@ -529,6 +666,8 @@ canonicalDrellYanLogLinearShapeLawReceipt =
         canonicalDrellYanLogPolynomialDecompositionReceipt
     ; endpointThresholdObstruction =
         canonicalDYEndpointThresholdObstruction
+    ; multiTransitionObstruction =
+        canonicalDYMultiTransitionObstruction
     ; residualObstructionAfterShapeRemoval =
         true
     ; residualObstructionAfterShapeRemovalIsTrue =

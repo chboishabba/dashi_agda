@@ -157,6 +157,60 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     )
     piecewise_projection = _trbd_projection(residual_pred_minus_data, basis_piecewise, cov_inv, chi2_raw)
 
+    if len(sign_flip_bins) >= 2:
+        transition_1_bin = sign_flip_bins[0]
+        transition_2_bin = sign_flip_bins[1]
+    else:
+        transition_1_bin = 13
+        transition_2_bin = 16
+    transition_1_phi = float(phi_star[transition_1_bin])
+    transition_2_phi = float(phi_star[transition_2_bin])
+
+    region_1 = (phi_star < transition_1_phi).astype(float)
+    region_2 = ((phi_star >= transition_1_phi) & (phi_star < transition_2_phi)).astype(float)
+    region_3 = (phi_star >= transition_2_phi).astype(float)
+    basis_two_transition = np.column_stack(
+        [
+            region_1,
+            log_phi * region_1,
+            region_2,
+            log_phi * region_2,
+            region_3,
+            log_phi * region_3,
+        ]
+    )
+    two_transition_projection = _trbd_projection(
+        residual_pred_minus_data,
+        basis_two_transition,
+        cov_inv,
+        chi2_raw,
+    )
+
+    gaussian_width = 0.5
+    gauss_log = np.exp(-0.5 * (log_phi / gaussian_width) ** 2)
+    basis_sudakov = np.column_stack(
+        [
+            gauss_log * region_1,
+            log_phi * region_2,
+            region_3,
+            log_phi * region_3,
+        ]
+    )
+    sudakov_projection = _trbd_projection(
+        residual_pred_minus_data,
+        basis_sudakov,
+        cov_inv,
+        chi2_raw,
+    )
+
+    d2_pred = np.gradient(np.gradient(pred, phi_star), phi_star)
+    bin_widths = np.gradient(phi_star)
+    bin_integration_correction = (bin_widths**2 / 24.0) * d2_pred
+    pred_bin_integrated = np.maximum(pred + bin_integration_correction, np.finfo(float).tiny)
+    residual_bin_integrated = np.log(pred_bin_integrated) - log_data
+    chi2_bin_integrated = float(residual_bin_integrated @ cov_inv @ residual_bin_integrated)
+    chi2_bin_integrated_per_dof = chi2_bin_integrated / n_bins
+
     data_coeff = np.linalg.solve(normal, basis.T @ cov_inv @ log_data)
     pred_coeff = np.linalg.solve(normal, basis.T @ cov_inv @ log_pred)
     slope_data_observed = float(data_coeff[1])
@@ -257,6 +311,50 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
                     if step_projection["chi2_perp_per_dof"]
                     < piecewise_projection["chi2_perp_per_dof"]
                     else "piecewise_log_linear_at_peak"
+                ),
+            },
+            "multi_transition_discrimination": {
+                "transition_1_bin": int(transition_1_bin),
+                "transition_1_phi_star": transition_1_phi,
+                "transition_1_interpretation": (
+                    "non-perturbative to perturbative resummation transition"
+                ),
+                "transition_2_bin": int(transition_2_bin),
+                "transition_2_phi_star": transition_2_phi,
+                "transition_2_interpretation": (
+                    "resummation to fixed-order tail transition"
+                ),
+                "lobe_structure_after_linear": [
+                    "positive",
+                    "negative",
+                    "positive",
+                ],
+                "piecewise_log_linear_3_region": {
+                    key: value
+                    for key, value in two_transition_projection.items()
+                    if key != "residual_perp"
+                },
+                "sudakov_matched_gaussian_log_power": {
+                    key: value
+                    for key, value in sudakov_projection.items()
+                    if key != "residual_perp"
+                },
+                "bin_integration_correction": {
+                    "protocol": "second_derivative_point_to_bin_average_correction_in_strict_log_metric",
+                    "chi2": chi2_bin_integrated,
+                    "chi2_per_dof": chi2_bin_integrated_per_dof,
+                    "promotability": _promotability_label(chi2_bin_integrated_per_dof),
+                },
+                "piecewise_promotability": _promotability_label(
+                    two_transition_projection["chi2_perp_per_dof"]
+                ),
+                "sudakov_promotability": _promotability_label(
+                    sudakov_projection["chi2_perp_per_dof"]
+                ),
+                "promotable_if_derived": (
+                    two_transition_projection["chi2_perp_per_dof"] <= 2.0
+                    or sudakov_projection["chi2_perp_per_dof"] <= 2.0
+                    or chi2_bin_integrated_per_dof <= 2.0
                 ),
             },
         },
@@ -368,6 +466,37 @@ def main() -> int:
         status = _promotability_label(item["chi2_perp_per_dof"])
         print(f"  {label:22s} chi2/dof = {item['chi2_perp_per_dof']:10.6f}  {status}")
     print(f"  Preferred diagnostic basis:   {mechanism['preferred_diagnostic_basis']}")
+
+    multi_transition = extended["multi_transition_discrimination"]
+    print("\nMULTI-TRANSITION MECHANISM DISCRIMINATION")
+    print(
+        "  Transition 1: "
+        f"bin {multi_transition['transition_1_bin']}  "
+        f"phi_star = {multi_transition['transition_1_phi_star']:.6f}"
+    )
+    print(
+        "  Transition 2: "
+        f"bin {multi_transition['transition_2_bin']}  "
+        f"phi_star = {multi_transition['transition_2_phi_star']:.6f}"
+    )
+    for label, key in [
+        ("log-cubic compact", "log_cubic"),
+        ("piecewise log-linear 3-region", "piecewise_log_linear_3_region"),
+        ("Sudakov-matched", "sudakov_matched_gaussian_log_power"),
+    ]:
+        item = extended[key] if key == "log_cubic" else multi_transition[key]
+        status = _promotability_label(item["chi2_perp_per_dof"])
+        print(f"  {label:32s} chi2/dof = {item['chi2_perp_per_dof']:10.6f}  {status}")
+    bin_integration = multi_transition["bin_integration_correction"]
+    print(
+        "  bin-integration correction      "
+        f"chi2/dof = {bin_integration['chi2_per_dof']:10.6f}  "
+        f"{bin_integration['promotability']}"
+    )
+    print(
+        "  Promotable if derived:         "
+        f"{multi_transition['promotable_if_derived']}"
+    )
     print(f"\n  Artifact written: {args.output}")
     return 0
 
