@@ -1,0 +1,57 @@
+{
+  "artifact_schema": "dashi.dyturbo.t43_direct_strict_log.v1",
+  "denominator_dat": "temp-DOWNLOADED/dyturbo/run_cms_smoke/tmp_dyturbo_t43_den_wi_lite_main.dat",
+  "denominator_xs_qt": [
+    1211.93,
+    8143.67,
+    21434.2,
+    5276.32,
+    5550.36,
+    -2601.44,
+    25740.2,
+    22021.4,
+    33603.7,
+    34356.0,
+    43086.3,
+    52992.4,
+    48521.3,
+    73298.8,
+    109005.0,
+    111973.0,
+    48717.2,
+    8210.65
+  ],
+  "failure_reason": "DYTurbo xs_qt has non-positive bins; increase statistics or change provider settings",
+  "n_bins": 18,
+  "non_positive_denominator_bins": [
+    5
+  ],
+  "non_positive_numerator_bins": [
+    2,
+    3
+  ],
+  "numerator_dat": "temp-DOWNLOADED/dyturbo/run_cms_smoke/tmp_dyturbo_t43_num_wi_lite_main.dat",
+  "numerator_xs_qt": [
+    49.1816,
+    610.407,
+    -109.188,
+    -93.5746,
+    965.802,
+    310.785,
+    1248.79,
+    623.93,
+    1138.09,
+    1304.27,
+    1041.37,
+    728.444,
+    1622.49,
+    1875.58,
+    2203.44,
+    1764.02,
+    790.697,
+    195.168
+  ],
+  "promotes": false,
+  "status": "blocked",
+  "strict_artifact": "scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json"
+}
