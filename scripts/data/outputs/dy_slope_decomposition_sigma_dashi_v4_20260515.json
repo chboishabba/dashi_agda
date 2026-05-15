@@ -225,6 +225,58 @@
       ],
       "window": 8
     },
+    "smooth_antisymmetric_discrimination": {
+      "erf_mu_log_phi": 0.002672930367290974,
+      "erf_optimizer_success": true,
+      "erf_pivot_phi_star": 1.0026765058306102,
+      "erf_promotability": "blocked",
+      "erf_sigma_log_phi": 0.19866530597209847,
+      "erf_sigmoid": {
+        "basis_dim": 3,
+        "chi2_perp": 684.8061104862752,
+        "chi2_perp_per_dof": 45.65374069908501,
+        "coefficients": [
+          -0.11888718471234148,
+          -0.35935958044401084,
+          0.21236726232114692
+        ],
+        "coverage": 0.9880370280005815,
+        "dof_perp": 15
+      },
+      "multiplicative_correction": {
+        "basis": "log_ratio_quadratic_in_log_phiStar",
+        "chi2_after_correction": 1745.2876070658726,
+        "chi2_per_dof_after_correction": 96.9604226147707,
+        "coefficients": [
+          0.3456040018237741,
+          0.37520820716245223,
+          0.005629554053299893
+        ],
+        "log_ratio_projection_chi2_perp_per_dof": 116.35250713772491,
+        "max_alpha_deviation": 0.9108525598917556,
+        "promotability": "blocked"
+      },
+      "promotable_if_derived": false,
+      "shifted_cubic": {
+        "basis_dim": 4,
+        "chi2_perp": 252.51270887792128,
+        "chi2_perp_per_dof": 18.036622062708663,
+        "coefficients": [
+          -0.10811366203888984,
+          -0.2869148555908943,
+          0.06123853232606521,
+          0.010077661408074598
+        ],
+        "coverage": 0.9955888208070182,
+        "dof_perp": 14
+      },
+      "shifted_cubic_identifiability_note": "diagnostic pivot is not identifiable because span(1, x-mu, (x-mu)^2, (x-mu)^3) equals span(1, x, x^2, x^3)",
+      "shifted_cubic_improvement_vs_unshifted": 4.263256414560601e-14,
+      "shifted_cubic_mu_log_phi": -0.6277967951702398,
+      "shifted_cubic_optimizer_success": true,
+      "shifted_cubic_pivot_phi_star": 0.5337665034149978,
+      "shifted_cubic_promotability": "partial"
+    },
     "top_residual_bins_after_linear": [
       17,
       8,

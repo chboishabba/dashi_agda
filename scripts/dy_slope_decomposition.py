@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+from scipy.optimize import minimize, minimize_scalar
+from scipy.special import erf
 
 from run_t43_projection import T44_PATH, parse_t44
 
@@ -211,6 +213,124 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
     chi2_bin_integrated = float(residual_bin_integrated @ cov_inv @ residual_bin_integrated)
     chi2_bin_integrated_per_dof = chi2_bin_integrated / n_bins
 
+    def shifted_cubic_chi2(mu: float) -> float:
+        log_phi_shifted = log_phi - mu
+        shifted_basis = np.column_stack(
+            [
+                np.ones_like(log_phi),
+                log_phi_shifted,
+                log_phi_shifted**2,
+                log_phi_shifted**3,
+            ]
+        )
+        try:
+            shifted_projection = _trbd_projection(
+                residual_pred_minus_data,
+                shifted_basis,
+                cov_inv,
+                chi2_raw,
+            )
+        except np.linalg.LinAlgError:
+            return 1.0e9
+        return float(shifted_projection["chi2_perp_per_dof"])
+
+    shifted_result = minimize_scalar(
+        shifted_cubic_chi2,
+        bounds=(-3.0, 2.0),
+        method="bounded",
+    )
+    shifted_mu = float(shifted_result.x)
+    shifted_log_phi = log_phi - shifted_mu
+    shifted_cubic_basis = np.column_stack(
+        [
+            np.ones_like(log_phi),
+            shifted_log_phi,
+            shifted_log_phi**2,
+            shifted_log_phi**3,
+        ]
+    )
+    shifted_cubic_projection = _trbd_projection(
+        residual_pred_minus_data,
+        shifted_cubic_basis,
+        cov_inv,
+        chi2_raw,
+    )
+
+    def erf_basis_chi2(params: np.ndarray) -> float:
+        mu = float(params[0])
+        sigma = max(float(params[1]), 0.01)
+        erf_component = erf((log_phi - mu) / sigma)
+        erf_basis = np.column_stack(
+            [
+                np.ones_like(log_phi),
+                log_phi,
+                erf_component,
+            ]
+        )
+        try:
+            erf_projection = _trbd_projection(
+                residual_pred_minus_data,
+                erf_basis,
+                cov_inv,
+                chi2_raw,
+            )
+        except np.linalg.LinAlgError:
+            return 1.0e9
+        return float(erf_projection["chi2_perp_per_dof"])
+
+    erf_result = minimize(
+        erf_basis_chi2,
+        x0=np.array([0.0, 0.5]),
+        method="Nelder-Mead",
+        options={"xatol": 1.0e-4, "fatol": 1.0e-4},
+    )
+    erf_mu = float(erf_result.x[0])
+    erf_sigma = max(float(erf_result.x[1]), 0.01)
+    erf_component = erf((log_phi - erf_mu) / erf_sigma)
+    erf_basis = np.column_stack(
+        [
+            np.ones_like(log_phi),
+            log_phi,
+            erf_component,
+        ]
+    )
+    erf_projection = _trbd_projection(
+        residual_pred_minus_data,
+        erf_basis,
+        cov_inv,
+        chi2_raw,
+    )
+
+    log_ratio = log_data - log_pred
+    basis_multiplicative = np.column_stack(
+        [
+            np.ones_like(log_phi),
+            log_phi,
+            log_phi**2,
+        ]
+    )
+    multiplicative_projection = _trbd_projection(
+        log_ratio,
+        basis_multiplicative,
+        cov_inv,
+        float(log_ratio @ cov_inv @ log_ratio),
+    )
+    multiplicative_coefficients = np.array(
+        multiplicative_projection["coefficients"],
+        dtype=float,
+    )
+    alpha_fit = np.exp(basis_multiplicative @ multiplicative_coefficients)
+    pred_multiplicative_corrected = pred * alpha_fit
+    residual_multiplicative_corrected = np.log(pred_multiplicative_corrected) - log_data
+    chi2_multiplicative_corrected = float(
+        residual_multiplicative_corrected
+        @ cov_inv
+        @ residual_multiplicative_corrected
+    )
+    chi2_multiplicative_corrected_per_dof = (
+        chi2_multiplicative_corrected / n_bins
+    )
+
     data_coeff = np.linalg.solve(normal, basis.T @ cov_inv @ log_data)
     pred_coeff = np.linalg.solve(normal, basis.T @ cov_inv @ log_pred)
     slope_data_observed = float(data_coeff[1])
@@ -357,6 +477,62 @@ def decompose(input_path: Path, output_path: Path) -> dict[str, Any]:
                     or chi2_bin_integrated_per_dof <= 2.0
                 ),
             },
+            "smooth_antisymmetric_discrimination": {
+                "shifted_cubic": {
+                    key: value
+                    for key, value in shifted_cubic_projection.items()
+                    if key != "residual_perp"
+                },
+                "shifted_cubic_mu_log_phi": shifted_mu,
+                "shifted_cubic_pivot_phi_star": float(np.exp(shifted_mu)),
+                "shifted_cubic_optimizer_success": bool(shifted_result.success),
+                "shifted_cubic_improvement_vs_unshifted": (
+                    cubic_projection["chi2_perp_per_dof"]
+                    - shifted_cubic_projection["chi2_perp_per_dof"]
+                ),
+                "shifted_cubic_identifiability_note": (
+                    "diagnostic pivot is not identifiable because "
+                    "span(1, x-mu, (x-mu)^2, (x-mu)^3) equals "
+                    "span(1, x, x^2, x^3)"
+                ),
+                "erf_sigmoid": {
+                    key: value
+                    for key, value in erf_projection.items()
+                    if key != "residual_perp"
+                },
+                "erf_mu_log_phi": erf_mu,
+                "erf_pivot_phi_star": float(np.exp(erf_mu)),
+                "erf_sigma_log_phi": erf_sigma,
+                "erf_optimizer_success": bool(erf_result.success),
+                "multiplicative_correction": {
+                    "basis": "log_ratio_quadratic_in_log_phiStar",
+                    "coefficients": [
+                        float(value) for value in multiplicative_coefficients
+                    ],
+                    "log_ratio_projection_chi2_perp_per_dof": multiplicative_projection[
+                        "chi2_perp_per_dof"
+                    ],
+                    "chi2_after_correction": chi2_multiplicative_corrected,
+                    "chi2_per_dof_after_correction": (
+                        chi2_multiplicative_corrected_per_dof
+                    ),
+                    "max_alpha_deviation": float(np.max(np.abs(alpha_fit - 1.0))),
+                    "promotability": _promotability_label(
+                        chi2_multiplicative_corrected_per_dof
+                    ),
+                },
+                "shifted_cubic_promotability": _promotability_label(
+                    shifted_cubic_projection["chi2_perp_per_dof"]
+                ),
+                "erf_promotability": _promotability_label(
+                    erf_projection["chi2_perp_per_dof"]
+                ),
+                "promotable_if_derived": (
+                    shifted_cubic_projection["chi2_perp_per_dof"] <= 2.0
+                    or erf_projection["chi2_perp_per_dof"] <= 2.0
+                    or chi2_multiplicative_corrected_per_dof <= 2.0
+                ),
+            },
         },
         "promotability_assessment": (
             "shape component dominates, but corrected chi2/dof remains above 2; residual obstruction remains"
@@ -496,6 +672,46 @@ def main() -> int:
     print(
         "  Promotable if derived:         "
         f"{multi_transition['promotable_if_derived']}"
+    )
+
+    smooth = extended["smooth_antisymmetric_discrimination"]
+    print("\nSMOOTH ANTISYMMETRIC DISCRIMINATION")
+    shifted = smooth["shifted_cubic"]
+    print(
+        "  shifted cubic pivot:          "
+        f"log(phi*) = {smooth['shifted_cubic_mu_log_phi']:.6f}, "
+        f"phi* = {smooth['shifted_cubic_pivot_phi_star']:.6f}"
+    )
+    print(
+        "  shifted cubic                 "
+        f"chi2/dof = {shifted['chi2_perp_per_dof']:10.6f}  "
+        f"{smooth['shifted_cubic_promotability']}"
+    )
+    print(
+        "  shifted cubic improvement:    "
+        f"{smooth['shifted_cubic_improvement_vs_unshifted']:.6f}"
+    )
+    erf_item = smooth["erf_sigmoid"]
+    print(
+        "  erf pivot/width:              "
+        f"log(phi*) = {smooth['erf_mu_log_phi']:.6f}, "
+        f"phi* = {smooth['erf_pivot_phi_star']:.6f}, "
+        f"sigma = {smooth['erf_sigma_log_phi']:.6f}"
+    )
+    print(
+        "  erf/sigmoid                   "
+        f"chi2/dof = {erf_item['chi2_perp_per_dof']:10.6f}  "
+        f"{smooth['erf_promotability']}"
+    )
+    mult = smooth["multiplicative_correction"]
+    print(
+        "  multiplicative correction     "
+        f"chi2/dof = {mult['chi2_per_dof_after_correction']:10.6f}  "
+        f"{mult['promotability']}"
+    )
+    print(
+        "  Promotable if derived:         "
+        f"{smooth['promotable_if_derived']}"
     )
     print(f"\n  Artifact written: {args.output}")
     return 0
