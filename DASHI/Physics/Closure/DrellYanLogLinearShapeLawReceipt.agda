@@ -1230,17 +1230,15 @@ canonicalDYAcceptanceMetadataGapReceipt =
     ; atLeastOneJetRequiredIsTrue =
         refl
     ; acceptanceMetadataStatus =
-        "incomplete"
+        "fiducial_selection_complete_acceptance_surface_missing"
     ; comparisonContractStatus =
         "non_promoting"
     ; missingCriticalFields =
-        "jet_pT_min_GeV"
-        ∷ "lepton_eta_max"
-        ∷ "central_acceptance_A"
-        ∷ "lepton_pT_min_GeV"
+        "central_acceptance_A"
+        ∷ "emst_fiducial_power_correction_surface"
         ∷ []
     ; missingFieldsCount =
-        10
+        3
     ; strictLogConflatesAcceptance =
         true
     ; strictLogConflatesAcceptanceIsTrue =
@@ -1250,7 +1248,7 @@ canonicalDYAcceptanceMetadataGapReceipt =
     ; emstReference =
         "arXiv:2006.11382"
     ; emstCorrectionStatus =
-        "blocked_until_selection_metadata_and_fiducial_correction_surface_are_machine_readable"
+        "blocked_until_central_acceptance_and_fiducial_power_correction_surface_are_machine_readable"
     ; emstBlockedUntilSelectionMetadataComplete =
         true
     ; emstBlockedUntilSelectionMetadataCompleteIsTrue =
@@ -1268,8 +1266,9 @@ canonicalDYAcceptanceMetadataGapReceipt =
     ; promotingReceiptExistsIsFalse =
         refl
     ; nextProviderRequest =
-        "complete the CMS-SMP-20-003 t43 fiducial selection metadata: jet pT, jet eta, jet algorithm, lepton pT, lepton eta, isolation, flavour/channel, trigger"
-        ∷ "supply or derive the central acceptance/fiducial correction surface A(M,phi*) and its provenance"
+        "CMS-SMP-20-003 t43 fiducial selection metadata is machine-readable: lepton pT/eta, channel triggers, anti-kt R=0.4 jets, jet pT/y, lepton isolation, and channel combination are now sourced from arXiv:2205.04897"
+        ∷ "supply or derive the central acceptance surface A(M,phi*) and its provenance"
+        ∷ "supply or derive the EMST fiducial power-correction surface from the machine-readable CMS cuts"
         ∷ "only then implement the EMST fiducial power-correction diagnostic as a pre-frozen strict-log prediction correction"
         ∷ "rerun strict-log without posterior retuning before any full W3 authority promotion"
         ∷ []

@@ -1,5 +1,5 @@
 {
-  "acceptance_metadata_status": "incomplete",
+  "acceptance_metadata_status": "fiducial_selection_complete_acceptance_surface_missing",
   "artifactSchema": "dashi-hepdata-t43-projection-v1",
   "at_least_one_jet": true,
   "bins": [
@@ -804,13 +804,14 @@
     "worktreeCleanCertificate": "not asserted by this runner"
   },
   "projectionComplete": true,
-  "projectionDigest": "bc1aa5766cba7ee80c2246b38a59f437eb3a7a5e2eb97a915f888d84e034084a",
+  "projectionDigest": "80a05da77911bf79fe89b7ff64606c65dece9ed43d2d787045489f23e1b80f59",
   "schemaVersion": "0.1.0",
   "scope": "digest-bound t43/t44 projection runner with caller-supplied prediction API",
   "selection_metadata": {
-    "acceptance_metadata_status": "incomplete",
+    "acceptance_metadata_status": "fiducial_selection_complete_acceptance_surface_missing",
     "acceptance_source": "MISSING",
     "at_least_one_jet": true,
+    "b_tagged_jet_veto": true,
     "bin_convention": "not_bin_width_normalized_ratio_values",
     "bin_integration_status": "not_implemented_for_sigma_dashi_v4_strict_log_contract",
     "bin_variable": "phiStar",
@@ -823,34 +824,43 @@
       "high_inclusive": false,
       "low": 76.0
     },
+    "fiducial_selection_source": {
+      "analysis": "CMS-SMP-20-003",
+      "arxiv": "2205.04897",
+      "paper_doi": "10.1140/epjc/s10052-023-11631-7",
+      "source_notes": [
+        "arXiv source SMP-20-003_temp.tex lines 163-197",
+        "particle-level phase-space statement lines 346-352",
+        "jet clustering statement lines 153-154"
+      ],
+      "source_section": "Event selection and unfolding particle-level phase space"
+    },
     "hepdata_doi": "10.17182/hepdata.115656.v1/t43",
-    "jet_algorithm": "MISSING",
-    "jet_eta_max": "MISSING",
-    "jet_pT_min_GeV": "MISSING",
-    "lepton_eta_max": "MISSING",
-    "lepton_flavour": "MISSING",
-    "lepton_isolation": "MISSING",
-    "lepton_pT_min_GeV": "MISSING",
+    "jet_algorithm": "anti-kt",
+    "jet_eta_max": "not_used_particle_level_uses_abs_y_lt_2p4",
+    "jet_lepton_deltaR_min": 0.4,
+    "jet_pT_min_GeV": 30.0,
+    "jet_radius": 0.4,
+    "jet_rapidity_abs_max": 2.4,
+    "leading_lepton_pT_min_GeV": 25.0,
+    "lepton_eta_max": 2.4,
+    "lepton_flavour": "ee_or_mumu_combined_after_compatibility_check",
+    "lepton_isolation": "exactly_two_isolated_leptons_same_flavour_opposite_charge; detailed isolation criteria referenced to CMS Sirunyan:2019bzr",
+    "lepton_pT_min_GeV": {
+      "leading": 25.0,
+      "subleading": 20.0
+    },
     "mass_window_source": "HEPData t43 table preamble",
     "missing_critical": [
-      "jet_pT_min_GeV",
-      "lepton_eta_max",
       "central_acceptance_A",
-      "lepton_pT_min_GeV"
+      "emst_fiducial_power_correction_surface"
     ],
     "missing_fields": [
-      "jet_pT_min_GeV",
-      "jet_eta_max",
-      "jet_algorithm",
-      "lepton_pT_min_GeV",
-      "lepton_eta_max",
-      "lepton_isolation",
-      "lepton_flavour",
-      "trigger_channel",
       "central_acceptance_A",
-      "acceptance_source"
+      "acceptance_source",
+      "emst_fiducial_power_correction_surface"
     ],
-    "missing_fields_count": 10,
+    "missing_fields_count": 3,
     "numerator_mass_window_GeV": {
       "high": 76.0,
       "high_inclusive": false,
@@ -871,13 +881,30 @@
       76.0
     ],
     "ratio_table_doi": "10.17182/hepdata.115656.v1/t43",
-    "reason": "sigma_dashi_v4 is compared against a fiducial unfolded HEPData ratio table requiring at least one jet. The local predictor does not encode the jet, lepton fiducial, trigger/channel, or central A(M,phi*) acceptance contract, so strict-log chi2 conflates acceptance gaps with shape-law failure.",
+    "reason": "sigma_dashi_v4 is compared against a fiducial unfolded HEPData ratio table requiring at least one jet. The CMS fiducial selection metadata is now machine-readable, but the local predictor still does not encode the central A(M,phi*) acceptance surface or EMST fiducial power-correction surface, so strict-log chi2 conflates acceptance gaps with shape-law failure.",
     "record": "ins2079374",
     "requires_at_least_one_jet": true,
     "sqrt_s_GeV": 13000,
     "strict_log_interpretation": "chi2/dof is informative but not a pure shape-law test until the fiducial acceptance contract is represented in the predictor",
+    "subleading_lepton_pT_min_GeV": 20.0,
     "table_name": "phistar mass 50-76 over mass 76-106",
-    "trigger_channel": "MISSING",
+    "third_lepton_veto": {
+      "eta_abs_max": 2.4,
+      "pT_min_GeV": 10.0
+    },
+    "trigger_channel": {
+      "dielectron": {
+        "leading_pT_threshold_GeV": 23.0,
+        "subleading_pT_threshold_GeV": 12.0
+      },
+      "dimuon": {
+        "leading_pT_threshold_GeV": 18.0,
+        "subleading_pT_threshold_GeV": 7.0
+      },
+      "single_muon": {
+        "pT_threshold_GeV": 24.0
+      }
+    },
     "values_normalized_by_bin_width": false
   },
   "sourceAuthority": {

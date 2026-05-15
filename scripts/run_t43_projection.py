@@ -183,22 +183,13 @@ def selection_metadata_for_t43(t43: dict[str, Any], *, prediction_mode: str) -> 
     not_bin_width_normalized = "not normalized by the bin width" in description
 
     missing_fields = [
-        "jet_pT_min_GeV",
-        "jet_eta_max",
-        "jet_algorithm",
-        "lepton_pT_min_GeV",
-        "lepton_eta_max",
-        "lepton_isolation",
-        "lepton_flavour",
-        "trigger_channel",
         "central_acceptance_A",
         "acceptance_source",
+        "emst_fiducial_power_correction_surface",
     ]
     missing_critical = [
-        "jet_pT_min_GeV",
-        "lepton_eta_max",
         "central_acceptance_A",
-        "lepton_pT_min_GeV",
+        "emst_fiducial_power_correction_surface",
     ]
 
     return {
@@ -217,16 +208,38 @@ def selection_metadata_for_t43(t43: dict[str, Any], *, prediction_mode: str) -> 
         "ratio_numerator_mass_window_GeV": [50.0, 76.0],
         "ratio_denominator_mass_window_GeV": [76.0, 106.0],
         "mass_window_source": "HEPData t43 table preamble",
+        "fiducial_selection_source": {
+            "analysis": "CMS-SMP-20-003",
+            "arxiv": "2205.04897",
+            "paper_doi": "10.1140/epjc/s10052-023-11631-7",
+            "source_section": "Event selection and unfolding particle-level phase space",
+            "source_notes": [
+                "arXiv source SMP-20-003_temp.tex lines 163-197",
+                "particle-level phase-space statement lines 346-352",
+                "jet clustering statement lines 153-154",
+            ],
+        },
         "at_least_one_jet": at_least_one_jet,
         "requires_at_least_one_jet": at_least_one_jet,
-        "jet_pT_min_GeV": "MISSING",
-        "jet_eta_max": "MISSING",
-        "jet_algorithm": "MISSING",
-        "lepton_pT_min_GeV": "MISSING",
-        "lepton_eta_max": "MISSING",
-        "lepton_isolation": "MISSING",
-        "lepton_flavour": "MISSING",
-        "trigger_channel": "MISSING",
+        "jet_pT_min_GeV": 30.0,
+        "jet_rapidity_abs_max": 2.4,
+        "jet_eta_max": "not_used_particle_level_uses_abs_y_lt_2p4",
+        "jet_algorithm": "anti-kt",
+        "jet_radius": 0.4,
+        "jet_lepton_deltaR_min": 0.4,
+        "b_tagged_jet_veto": True,
+        "leading_lepton_pT_min_GeV": 25.0,
+        "subleading_lepton_pT_min_GeV": 20.0,
+        "lepton_pT_min_GeV": {"leading": 25.0, "subleading": 20.0},
+        "lepton_eta_max": 2.4,
+        "lepton_isolation": "exactly_two_isolated_leptons_same_flavour_opposite_charge; detailed isolation criteria referenced to CMS Sirunyan:2019bzr",
+        "lepton_flavour": "ee_or_mumu_combined_after_compatibility_check",
+        "third_lepton_veto": {"pT_min_GeV": 10.0, "eta_abs_max": 2.4},
+        "trigger_channel": {
+            "dielectron": {"leading_pT_threshold_GeV": 23.0, "subleading_pT_threshold_GeV": 12.0},
+            "dimuon": {"leading_pT_threshold_GeV": 18.0, "subleading_pT_threshold_GeV": 7.0},
+            "single_muon": {"pT_threshold_GeV": 24.0},
+        },
         "central_acceptance_A": "MISSING",
         "acceptance_source": "MISSING",
         "bin_convention": "not_bin_width_normalized_ratio_values"
@@ -238,7 +251,7 @@ def selection_metadata_for_t43(t43: dict[str, Any], *, prediction_mode: str) -> 
         "phi_star_bin_edges_source": "t43 CSV LOW/HIGH columns",
         "prediction_bin_treatment": prediction_mode,
         "bin_integration_status": "not_implemented_for_sigma_dashi_v4_strict_log_contract",
-        "acceptance_metadata_status": "incomplete",
+        "acceptance_metadata_status": "fiducial_selection_complete_acceptance_surface_missing",
         "missing_fields": missing_fields,
         "missing_fields_count": len(missing_fields),
         "missing_critical": missing_critical,
@@ -249,9 +262,10 @@ def selection_metadata_for_t43(t43: dict[str, Any], *, prediction_mode: str) -> 
         ),
         "reason": (
             "sigma_dashi_v4 is compared against a fiducial unfolded HEPData "
-            "ratio table requiring at least one jet. The local predictor does "
-            "not encode the jet, lepton fiducial, trigger/channel, or central "
-            "A(M,phi*) acceptance contract, so strict-log chi2 conflates "
+            "ratio table requiring at least one jet. The CMS fiducial selection "
+            "metadata is now machine-readable, but the local predictor still "
+            "does not encode the central A(M,phi*) acceptance surface or EMST "
+            "fiducial power-correction surface, so strict-log chi2 conflates "
             "acceptance gaps with shape-law failure."
         ),
     }
