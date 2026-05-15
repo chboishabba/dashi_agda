@@ -2,7 +2,7 @@
   "basis": "span_1_log_phiStar",
   "chi2_corrected_after_shape_removal": 1791.432886882188,
   "chi2_cross": 6.821210263296962e-12,
-  "chi2_fraction_from_shape": 0.968705212853035,
+  "chi2_fraction_from_shape": 0.9687052128530348,
   "chi2_per_dof_corrected_after_shape_removal": 111.96455543013676,
   "chi2_per_dof_raw": 3180.211733150705,
   "chi2_raw": 57243.81119671269,
@@ -21,6 +21,64 @@
     "remainingChi2AfterProjection": 1791.432886882188,
     "remainingChi2FractionOfFull": 0.031294787146965215,
     "status": "computed"
+  },
+  "extended_basis_decomposition": {
+    "basis_source": "Structural_QCD_log_series",
+    "log_cubic": {
+      "basis_dim": 4,
+      "chi2_perp": 252.51270887792188,
+      "chi2_perp_per_dof": 18.036622062708705,
+      "coefficients": [
+        -0.261608474568653,
+        -0.19810845664320986,
+        0.08021870293046186,
+        0.010077661408074227
+      ],
+      "coverage": 0.9955888208070182,
+      "dof_perp": 14
+    },
+    "log_cubic_promotability": "partial",
+    "log_linear": {
+      "basis_dim": 2,
+      "chi2_perp": 1791.432886882188,
+      "chi2_perp_per_dof": 111.96455543013676,
+      "coefficients": [
+        -0.3104937924536695,
+        -0.34242419691254444
+      ],
+      "coverage": 0.9687052128530348,
+      "dof_perp": 16
+    },
+    "log_quadratic": {
+      "basis_dim": 3,
+      "chi2_perp": 1745.2876070658738,
+      "chi2_perp_per_dof": 116.35250713772491,
+      "coefficients": [
+        -0.3456040018237741,
+        -0.37520820716245223,
+        -0.005629554053299893
+      ],
+      "coverage": 0.9695113310840124,
+      "dof_perp": 15
+    },
+    "log_quadratic_promotability": "blocked",
+    "peak_residual_bin_after_linear": 17,
+    "peak_residual_per_bin_chi2_after_linear_diag_approx": 643.3263320985052,
+    "peak_residual_phi_star_after_linear": 2.215,
+    "top_residual_bins_after_linear": [
+      17,
+      8,
+      7,
+      9,
+      6
+    ],
+    "top_residual_phi_star_after_linear": [
+      2.215,
+      0.0395,
+      0.0315,
+      0.051000000000000004,
+      0.026500000000000003
+    ]
   },
   "intercept_fit_pred_minus_data": -0.3104937924536695,
   "n_bins": 18,
