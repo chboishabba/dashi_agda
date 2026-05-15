@@ -16,6 +16,7 @@ EXIT_DIGEST_MISMATCH = 20
 EXIT_PARSE_ERROR = 21
 EXIT_PREDICTION_MISSING = 42
 EXIT_PREDICTION_INVALID = 43
+EXIT_STRICT_COMPARISON_INVALID = 44
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
@@ -159,6 +160,110 @@ def parse_t43(path: Path) -> dict[str, Any]:
         "rowCount": len(bins),
         "bins": bins,
     }
+
+
+def _comment_value(comments: list[str], key: str) -> str | None:
+    prefix = f"#: {key}:"
+    for comment in comments:
+        if comment.startswith(prefix):
+            return comment[len(prefix):].strip()
+    return None
+
+
+def selection_metadata_for_t43(t43: dict[str, Any], *, prediction_mode: str) -> dict[str, Any]:
+    comments = t43.get("commentPreamble", [])
+    if not isinstance(comments, list):
+        comments = []
+    description = _comment_value(comments, "description") or ""
+    observable = _comment_value(comments, "keyword observables") or t43.get("valueColumn", "")
+    table_doi = _comment_value(comments, "table_doi") or "MISSING"
+    cm_energy = _comment_value(comments, "keyword cmenergies") or "MISSING"
+    name = _comment_value(comments, "name") or "phistar mass 50-76 over mass 76-106"
+    at_least_one_jet = "At least one jet is required" in description
+    not_bin_width_normalized = "not normalized by the bin width" in description
+
+    missing_fields = [
+        "jet_pT_min_GeV",
+        "jet_eta_max",
+        "jet_algorithm",
+        "lepton_pT_min_GeV",
+        "lepton_eta_max",
+        "lepton_isolation",
+        "lepton_flavour",
+        "trigger_channel",
+        "central_acceptance_A",
+        "acceptance_source",
+    ]
+    missing_critical = [
+        "jet_pT_min_GeV",
+        "lepton_eta_max",
+        "central_acceptance_A",
+        "lepton_pT_min_GeV",
+    ]
+
+    return {
+        "record": "ins2079374",
+        "hepdata_doi": table_doi,
+        "ratio_table_doi": table_doi,
+        "covariance_table_doi": "10.17182/hepdata.115656.v1/t44",
+        "observable": observable,
+        "observable_name": observable,
+        "table_name": name,
+        "process": "pp -> Z/gamma* -> ll + >=1 jet",
+        "sqrt_s_GeV": int(cm_energy) if str(cm_energy).isdigit() else cm_energy,
+        "dataset_label": "t43_below_Z",
+        "numerator_mass_window_GeV": {"low": 50.0, "high": 76.0, "high_inclusive": False},
+        "denominator_mass_window_GeV": {"low": 76.0, "high": 106.0, "high_inclusive": False},
+        "ratio_numerator_mass_window_GeV": [50.0, 76.0],
+        "ratio_denominator_mass_window_GeV": [76.0, 106.0],
+        "mass_window_source": "HEPData t43 table preamble",
+        "at_least_one_jet": at_least_one_jet,
+        "requires_at_least_one_jet": at_least_one_jet,
+        "jet_pT_min_GeV": "MISSING",
+        "jet_eta_max": "MISSING",
+        "jet_algorithm": "MISSING",
+        "lepton_pT_min_GeV": "MISSING",
+        "lepton_eta_max": "MISSING",
+        "lepton_isolation": "MISSING",
+        "lepton_flavour": "MISSING",
+        "trigger_channel": "MISSING",
+        "central_acceptance_A": "MISSING",
+        "acceptance_source": "MISSING",
+        "bin_convention": "not_bin_width_normalized_ratio_values"
+        if not_bin_width_normalized
+        else "UNKNOWN",
+        "bin_variable": "phiStar",
+        "values_normalized_by_bin_width": not not_bin_width_normalized,
+        "phi_star_bin_count": t43.get("rowCount"),
+        "phi_star_bin_edges_source": "t43 CSV LOW/HIGH columns",
+        "prediction_bin_treatment": prediction_mode,
+        "bin_integration_status": "not_implemented_for_sigma_dashi_v4_strict_log_contract",
+        "acceptance_metadata_status": "incomplete",
+        "missing_fields": missing_fields,
+        "missing_fields_count": len(missing_fields),
+        "missing_critical": missing_critical,
+        "comparison_contract_status": "non_promoting",
+        "strict_log_interpretation": (
+            "chi2/dof is informative but not a pure shape-law test until "
+            "the fiducial acceptance contract is represented in the predictor"
+        ),
+        "reason": (
+            "sigma_dashi_v4 is compared against a fiducial unfolded HEPData "
+            "ratio table requiring at least one jet. The local predictor does "
+            "not encode the jet, lepton fiducial, trigger/channel, or central "
+            "A(M,phi*) acceptance contract, so strict-log chi2 conflates "
+            "acceptance gaps with shape-law failure."
+        ),
+    }
+
+
+def warn_incomplete_acceptance_contract(selection_metadata: dict[str, Any]) -> None:
+    if selection_metadata.get("acceptance_metadata_status") == "complete":
+        return
+    print("  WARNING: strict-log chi2 computed with incomplete acceptance contract.")
+    print(f"  Missing critical fields: {selection_metadata.get('missing_critical', [])}")
+    print("  chi2 result is informative but NOT promotable until contract is complete.")
+    print()
 
 
 def parse_t44(path: Path, bins: list[dict[str, Any]]) -> dict[str, Any]:
@@ -403,6 +508,218 @@ def _dot(left: list[float], right: list[float]) -> float:
     return sum(a * b for a, b in zip(left, right, strict=True))
 
 
+def _matrix_condition_estimate(matrix: list[list[float]]) -> float | None:
+    diagonal = [abs(row[index]) for index, row in enumerate(matrix)]
+    positive = [value for value in diagonal if value > 0.0 and math.isfinite(value)]
+    if len(positive) != len(matrix):
+        return None
+    return max(positive) / min(positive)
+
+
+def _log_covariance_diagnostics(
+    *,
+    residual: list[float],
+    propagated_covariance: list[list[float]],
+    full_chi2: float,
+    phi_star_values: list[float],
+) -> dict[str, Any]:
+    diagonal_terms: list[float] = []
+    for index, value in enumerate(residual):
+        variance = propagated_covariance[index][index]
+        if variance <= 0.0 or not math.isfinite(variance):
+            raise ArithmeticError(f"log covariance diagonal variance is invalid at bin {index}: {variance!r}")
+        diagonal_terms.append((value * value) / variance)
+    diagonal_chi2 = sum(diagonal_terms)
+    off_diagonal_contribution = full_chi2 - diagonal_chi2
+
+    diagnostics: dict[str, Any] = {
+        "diagnosticStatus": "computed-diagonal-only",
+        "diagonalOnlyChi2": diagonal_chi2,
+        "diagonalOnlyChi2PerDof": diagonal_chi2 / len(residual),
+        "diagonalOnlyTerms": diagonal_terms,
+        "fullOverDiagonalChi2": full_chi2 / diagonal_chi2 if diagonal_chi2 > 0.0 else None,
+        "offDiagonalContributionToChi2": off_diagonal_contribution,
+        "offDiagonalContributionFraction": (
+            off_diagonal_contribution / full_chi2 if full_chi2 > 0.0 else None
+        ),
+        "offDiagonalDominanceDiagnostic": (
+            "full-covariance-smaller-than-diagonal"
+            if full_chi2 < diagonal_chi2
+            else "full-covariance-larger-than-diagonal"
+        ),
+    }
+
+    try:
+        import numpy as np  # type: ignore[import-not-found]
+    except Exception as exc:
+        diagnostics["eigenmodeStatus"] = "unavailable"
+        diagnostics["eigenmodeFailureReason"] = f"numpy import failed: {exc}"
+        return diagnostics
+
+    covariance = np.array(propagated_covariance, dtype=float)
+    residual_vector = np.array(residual, dtype=float)
+    try:
+        inverse_covariance = np.linalg.inv(covariance)
+        symmetric_inverse = 0.5 * (inverse_covariance + inverse_covariance.T)
+        eigenvalues, eigenvectors = np.linalg.eigh(symmetric_inverse)
+    except Exception as exc:
+        diagnostics["eigenmodeStatus"] = "failed"
+        diagnostics["eigenmodeFailureReason"] = str(exc)
+        return diagnostics
+
+    order = np.argsort(eigenvalues)[::-1]
+    eigenvalues = eigenvalues[order]
+    eigenvectors = eigenvectors[:, order]
+    projections = eigenvectors.T @ residual_vector
+    contributions = eigenvalues * projections * projections
+    contribution_sum = float(np.sum(contributions))
+    top_count = min(6, len(residual))
+    top_modes: list[dict[str, Any]] = []
+    for rank in range(top_count):
+        vector = eigenvectors[:, rank]
+        top_modes.append({
+            "rank": rank + 1,
+            "eigenvalue": float(eigenvalues[rank]),
+            "projection": float(projections[rank]),
+            "chi2Contribution": float(contributions[rank]),
+            "chi2ContributionFraction": (
+                float(contributions[rank] / contribution_sum)
+                if contribution_sum > 0.0
+                else None
+            ),
+            "eigenvector": [float(item) for item in vector.tolist()],
+        })
+
+    residual_norm = float(np.linalg.norm(residual_vector))
+    leading_cosine = None
+    if residual_norm > 0.0:
+        leading_cosine = float(abs(projections[0]) / residual_norm)
+    positive_eigenvalues = [float(value) for value in eigenvalues.tolist() if value > 0.0]
+
+    diagnostics.update({
+        "diagnosticStatus": "computed",
+        "eigenmodeStatus": "computed",
+        "inverseCovarianceSymmetrization": "0.5 * (C^-1 + (C^-1)^T)",
+        "eigenvalueOrdering": "descending inverse-covariance eigenvalue",
+        "eigenConditionNumber": (
+            max(positive_eigenvalues) / min(positive_eigenvalues)
+            if len(positive_eigenvalues) == len(residual)
+            else None
+        ),
+        "eigenContributionSum": contribution_sum,
+        "eigenContributionVsFullChi2AbsDelta": abs(contribution_sum - full_chi2),
+        "leadingModeContributionFraction": (
+            float(contributions[0] / contribution_sum)
+            if contribution_sum > 0.0
+            else None
+        ),
+        "leadingModeEuclideanCosineAbs": leading_cosine,
+        "topInverseCovarianceModes": top_modes,
+    })
+    if len(phi_star_values) == len(residual) and all(value > 0.0 for value in phi_star_values):
+        log_phi = np.log(np.array(phi_star_values, dtype=float))
+        design = np.column_stack([np.ones(len(residual)), log_phi])
+        try:
+            normal = design.T @ symmetric_inverse @ design
+            rhs = design.T @ symmetric_inverse @ residual_vector
+            coefficients = np.linalg.solve(normal, rhs)
+            fitted = design @ coefficients
+            residual_minus_fit = residual_vector - fitted
+            fitted_chi2 = float(fitted.T @ symmetric_inverse @ fitted)
+            remaining_chi2 = float(residual_minus_fit.T @ symmetric_inverse @ residual_minus_fit)
+            diagnostics["logPhiLinearSubspaceDiagnostic"] = {
+                "status": "computed",
+                "basis": ["1", "log(phiStar)"],
+                "fitInnerProduct": "inverse propagated log covariance",
+                "intercept": float(coefficients[0]),
+                "logPhiSlope": float(coefficients[1]),
+                "fittedChi2": fitted_chi2,
+                "remainingChi2AfterProjection": remaining_chi2,
+                "fittedChi2FractionOfFull": fitted_chi2 / full_chi2 if full_chi2 > 0.0 else None,
+                "remainingChi2FractionOfFull": remaining_chi2 / full_chi2 if full_chi2 > 0.0 else None,
+            }
+        except Exception as exc:
+            diagnostics["logPhiLinearSubspaceDiagnostic"] = {
+                "status": "failed",
+                "failureReason": str(exc),
+            }
+    else:
+        diagnostics["logPhiLinearSubspaceDiagnostic"] = {
+            "status": "unavailable",
+            "failureReason": "phiStar values missing, nonpositive, or length-mismatched",
+        }
+    return diagnostics
+
+
+def _log_covariance_transform(
+    *,
+    data_values: list[float],
+    predictions: list[float],
+    covariance: list[list[float]],
+    threshold: float,
+    phi_star_values: list[float],
+) -> dict[str, Any]:
+    if threshold <= 0.0 or not math.isfinite(threshold):
+        raise ValueError("strict chi2/dof threshold must be finite and positive")
+    for index, value in enumerate(data_values):
+        if value <= 0.0 or not math.isfinite(value):
+            raise ValueError(f"log transform requires positive finite data value at bin {index}, got {value!r}")
+    for index, value in enumerate(predictions):
+        if value <= 0.0 or not math.isfinite(value):
+            raise ValueError(f"log transform requires positive finite prediction at bin {index}, got {value!r}")
+
+    log_data = [math.log(value) for value in data_values]
+    log_predictions = [math.log(value) for value in predictions]
+    residual = [pred - data for pred, data in zip(log_predictions, log_data, strict=True)]
+    jacobian = [1.0 / value for value in data_values]
+    propagated_covariance = [
+        [
+            jacobian[i] * covariance[i][j] * jacobian[j]
+            for j in range(len(data_values))
+        ]
+        for i in range(len(data_values))
+    ]
+    c_inv_residual = _solve_linear_system(propagated_covariance, residual)
+    chi2 = _dot(residual, c_inv_residual)
+    if chi2 < -1.0e-9 or not math.isfinite(chi2):
+        raise ArithmeticError(f"strict log-covariance chi2 is invalid: {chi2!r}")
+    chi2 = max(0.0, chi2)
+    dof = len(data_values)
+    chi2_per_dof = chi2 / dof
+    diagnostics = _log_covariance_diagnostics(
+        residual=residual,
+        propagated_covariance=propagated_covariance,
+        full_chi2=chi2,
+        phi_star_values=phi_star_values,
+    )
+    return {
+        "transform": "log-ratio",
+        "transformKind": "other-declared",
+        "thresholdChi2PerDof": threshold,
+        "strictProtocolPass": chi2_per_dof <= threshold,
+        "fitParameterCount": 0,
+        "dof": dof,
+        "chi2": chi2,
+        "chi2PerDof": chi2_per_dof,
+        "residualDefinition": "log(R_pred) - log(R_data)",
+        "covariancePropagationLaw": "C_log[i,j] = C_raw[i,j] / (R_data[i] * R_data[j])",
+        "jacobianDiagonal": jacobian,
+        "logData": log_data,
+        "logPredictions": log_predictions,
+        "logResiduals": residual,
+        "propagatedCovariance": propagated_covariance,
+        "diagnostics": diagnostics,
+        "solver": "Gauss-Jordan solve of propagated covariance; no regularization",
+        "conditionEstimateFromDiagonal": _matrix_condition_estimate(propagated_covariance),
+        "failurePolicy": [
+            "fail closed on nonpositive data or predictions",
+            "fail closed on singular propagated covariance",
+            "fail closed on undeclared prediction API",
+            "no scalar refit and no posterior retuning",
+        ],
+    }
+
+
 def _fit_dirty_z_peak_scale(
     shape_predictions: list[float],
     data_values: list[float],
@@ -444,9 +761,14 @@ def completed_projection_artifact(
     predictions: list[float],
     prediction_mode: str = "direct",
     calibration: dict[str, Any] | None = None,
+    strict_comparison: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     bins: list[dict[str, Any]] = []
     per_bin: list[dict[str, Any]] = []
+    selection_metadata = selection_metadata_for_t43(
+        t43,
+        prediction_mode=prediction_mode,
+    )
     for row, prediction in zip(t43["bins"], predictions, strict=True):
         data = row["ratio"]
         index = row["index"]
@@ -496,6 +818,7 @@ def completed_projection_artifact(
             "no W8 promotion",
             "no empirical adequacy claim",
             "projection artifact still requires comparison-law receipt review",
+            "strict log-covariance diagnostics are non-promoting unless a separate receipt accepts them",
         ],
         "predictionFreeze": {
             "freezeHash": freeze_hash,
@@ -525,13 +848,30 @@ def completed_projection_artifact(
             "predictionMode": prediction_mode,
         },
         "calibration": calibration,
+        "strictComparison": strict_comparison,
+        "selection_metadata": selection_metadata,
+        "acceptance_metadata_status": selection_metadata["acceptance_metadata_status"],
+        "comparison_contract_status": selection_metadata["comparison_contract_status"],
+        "at_least_one_jet": selection_metadata["at_least_one_jet"],
         "bins": bins,
         "per_bin": per_bin,
         "comparison": {
-            "chi2": None if calibration is None else calibration["chi2"],
-            "chi2PerDof": None if calibration is None else calibration["chi2PerDof"],
+            "chi2": (
+                strict_comparison["chi2"]
+                if strict_comparison is not None
+                else None if calibration is None else calibration["chi2"]
+            ),
+            "chi2PerDof": (
+                strict_comparison["chi2PerDof"]
+                if strict_comparison is not None
+                else None if calibration is None else calibration["chi2PerDof"]
+            ),
             "perBinTwoSigmaLaw": None,
-            "status": "not-computed" if calibration is None else "dirty-z-peak-scale-fit",
+            "status": (
+                "strict-log-covariance"
+                if strict_comparison is not None
+                else "not-computed" if calibration is None else "dirty-z-peak-scale-fit"
+            ),
         },
     })
 
@@ -557,9 +897,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--mode",
-        choices=["t43-ratio", "dirty-z-peak"],
+        choices=["t43-ratio", "dirty-z-peak", "t43-strict-log"],
         default="t43-ratio",
-        help="Diagnostic mode label. dirty-z-peak still requires local t21/t22 artifacts and compatible schema.",
+        help="Diagnostic mode label. t43-strict-log computes a non-promoting log-covariance chi2/dof diagnostic.",
     )
     parser.add_argument("--t43", dest="data", default=str(T43_PATH), help="Path to t43 ratio CSV.")
     parser.add_argument("--t44", dest="covariance", default=str(T44_PATH), help="Path to t44 covariance CSV.")
@@ -568,6 +908,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--prediction-api",
         help="Optional module:function callable. Omit until compute_dashi_ratio is wired.",
+    )
+    parser.add_argument(
+        "--strict-threshold",
+        type=float,
+        default=2.0,
+        help="Strict diagnostic chi2/dof threshold for t43-strict-log. Defaults to 2.0.",
     )
     return parser.parse_args()
 
@@ -672,6 +1018,7 @@ def main() -> int:
         return EXIT_PREDICTION_INVALID
 
     calibration = None
+    strict_comparison = None
     predictions = raw_predictions
     if args.mode == "dirty-z-peak" and dirty_prediction_mode == "shape-with-fitted-scale":
         try:
@@ -695,6 +1042,41 @@ def main() -> int:
             artifact = finalize_artifact(artifact)
             write_json(output_path, artifact)
             return EXIT_PREDICTION_INVALID
+    elif args.mode == "t43-strict-log":
+        try:
+            warn_incomplete_acceptance_contract(
+                selection_metadata_for_t43(
+                    t43,
+                    prediction_mode=dirty_prediction_mode,
+                )
+            )
+            strict_comparison = _log_covariance_transform(
+                data_values=[row["ratio"] for row in t43["bins"]],
+                predictions=predictions,
+                covariance=t44["covariance"],
+                threshold=args.strict_threshold,
+                phi_star_values=[row["phiStar"] for row in t43["bins"]],
+            )
+        except Exception as exc:
+            artifact = incomplete_artifact(
+                mode=args.mode,
+                freeze_hash=args.freeze_hash,
+                digest_results=digest_results,
+                t43=t43,
+                t44=t44,
+                reason=f"strict log-covariance comparison failed: {exc}",
+                prediction_api_status=prediction_status,
+            )
+            artifact["failureCode"] = "strict-comparison-invalid"
+            artifact["strictComparison"] = {
+                "transform": "log-ratio",
+                "thresholdChi2PerDof": args.strict_threshold,
+                "status": "failed-closed",
+                "failureReason": str(exc),
+            }
+            artifact = finalize_artifact(artifact)
+            write_json(output_path, artifact)
+            return EXIT_STRICT_COMPARISON_INVALID
 
     artifact = completed_projection_artifact(
         mode=args.mode,
@@ -706,6 +1088,7 @@ def main() -> int:
         predictions=predictions,
         prediction_mode=dirty_prediction_mode,
         calibration=calibration,
+        strict_comparison=strict_comparison,
     )
     write_json(output_path, artifact)
     return 0
