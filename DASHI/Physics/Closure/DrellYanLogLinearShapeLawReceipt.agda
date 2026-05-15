@@ -494,6 +494,21 @@ record DYDistributedTheoreticalModelGap : Setω where
     modelGapCandidates :
       List ModelGapCandidate
 
+    firstActionableChild :
+      String
+
+    firstActionableChildIsAcceptance :
+      Bool
+
+    firstActionableChildIsAcceptanceIsTrue :
+      firstActionableChildIsAcceptance ≡ true
+
+    physicsCandidatesBlockedUntilAcceptance :
+      Bool
+
+    physicsCandidatesBlockedUntilAcceptanceIsTrue :
+      physicsCandidatesBlockedUntilAcceptance ≡ true
+
     promotingReceiptExists :
       Bool
 
@@ -501,6 +516,99 @@ record DYDistributedTheoreticalModelGap : Setω where
       promotingReceiptExists ≡ false
 
     gapAssessment :
+      List String
+
+data AcceptanceMetadataGapStatus : Set where
+  acceptanceMetadataGapOpen :
+    AcceptanceMetadataGapStatus
+
+record DYAcceptanceMetadataGapReceipt : Setω where
+  field
+    status :
+      AcceptanceMetadataGapStatus
+
+    parentModelGap :
+      DYDistributedTheoreticalModelGap
+
+    candidate :
+      ModelGapCandidate
+
+    candidateIsAcceptanceModelGap :
+      candidate ≡ acceptanceModelGap
+
+    selectionMetadataArtifact :
+      String
+
+    datasetLabel :
+      String
+
+    ratioTableDoi :
+      String
+
+    covarianceTableDoi :
+      String
+
+    sqrtSGeV :
+      Nat
+
+    atLeastOneJetRequired :
+      Bool
+
+    atLeastOneJetRequiredIsTrue :
+      atLeastOneJetRequired ≡ true
+
+    acceptanceMetadataStatus :
+      String
+
+    comparisonContractStatus :
+      String
+
+    missingCriticalFields :
+      List String
+
+    missingFieldsCount :
+      Nat
+
+    strictLogConflatesAcceptance :
+      Bool
+
+    strictLogConflatesAcceptanceIsTrue :
+      strictLogConflatesAcceptance ≡ true
+
+    strictLogInterpretation :
+      String
+
+    emstReference :
+      String
+
+    emstCorrectionStatus :
+      String
+
+    emstBlockedUntilSelectionMetadataComplete :
+      Bool
+
+    emstBlockedUntilSelectionMetadataCompleteIsTrue :
+      emstBlockedUntilSelectionMetadataComplete ≡ true
+
+    acceptedByExternalAuthority :
+      Bool
+
+    acceptedByExternalAuthorityIsFalse :
+      acceptedByExternalAuthority ≡ false
+
+    acceptanceContractComplete :
+      Bool
+
+    acceptanceContractCompleteIsFalse :
+      acceptanceContractComplete ≡ false
+
+    promotingReceiptExists :
+      Bool
+
+    promotingReceiptExistsIsFalse :
+      promotingReceiptExists ≡ false
+
+    nextProviderRequest :
       List String
 
 record LogLinearShapeLawReceipt : Setω where
@@ -556,6 +664,9 @@ record LogLinearShapeLawReceipt : Setω where
     distributedTheoreticalModelGap :
       DYDistributedTheoreticalModelGap
 
+    acceptanceMetadataGapReceipt :
+      DYAcceptanceMetadataGapReceipt
+
     residualObstructionAfterShapeRemoval :
       Bool
 
@@ -583,6 +694,7 @@ open DYEndpointThresholdObstruction public
 open DYMultiTransitionObstruction public
 open CSSResummationShapeLawReceipt public
 open DYDistributedTheoreticalModelGap public
+open DYAcceptanceMetadataGapReceipt public
 open LogLinearShapeLawReceipt public
 
 canonicalDASHILogLinearSlopeDerivationRequest :
@@ -1067,6 +1179,16 @@ canonicalDYDistributedTheoreticalModelGap =
         ∷ acceptanceModelGap
         ∷ forwardKinematicModelGap
         ∷ []
+    ; firstActionableChild =
+        "acceptanceModelGap"
+    ; firstActionableChildIsAcceptance =
+        true
+    ; firstActionableChildIsAcceptanceIsTrue =
+        refl
+    ; physicsCandidatesBlockedUntilAcceptance =
+        true
+    ; physicsCandidatesBlockedUntilAcceptanceIsTrue =
+        refl
     ; promotingReceiptExists =
         false
     ; promotingReceiptExistsIsFalse =
@@ -1076,7 +1198,80 @@ canonicalDYDistributedTheoreticalModelGap =
         ∷ "the obstruction is not a few-bin artifact: 17 bins have absolute log-space pull above 3"
         ∷ "phiStar rescaling is blocked at chi2/dof 3105.3455095026266 and is only a point-value diagnostic with fixed covariance"
         ∷ "all tested smooth, piecewise, threshold, multiplicative, covariance, discrete-bin, and kinematic-rescaling branches fail"
-        ∷ "remaining named branch is a distributed theoretical model gap: wrong PDF set, missing electroweak correction, acceptance model gap, or forward kinematic model gap"
+        ∷ "first actionable child is acceptanceModelGap because strict-log compares a fiducial unfolded table to a predictor without the fiducial acceptance contract"
+        ∷ "EW, PDF, and forward kinematic candidates remain live but blocked until the acceptance contract is machine-readable and accepted"
+        ∷ []
+    }
+
+canonicalDYAcceptanceMetadataGapReceipt :
+  DYAcceptanceMetadataGapReceipt
+canonicalDYAcceptanceMetadataGapReceipt =
+  record
+    { status =
+        acceptanceMetadataGapOpen
+    ; parentModelGap =
+        canonicalDYDistributedTheoreticalModelGap
+    ; candidate =
+        acceptanceModelGap
+    ; candidateIsAcceptanceModelGap =
+        refl
+    ; selectionMetadataArtifact =
+        "scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json"
+    ; datasetLabel =
+        "t43_below_Z"
+    ; ratioTableDoi =
+        "10.17182/hepdata.115656.v1/t43"
+    ; covarianceTableDoi =
+        "10.17182/hepdata.115656.v1/t44"
+    ; sqrtSGeV =
+        13000
+    ; atLeastOneJetRequired =
+        true
+    ; atLeastOneJetRequiredIsTrue =
+        refl
+    ; acceptanceMetadataStatus =
+        "incomplete"
+    ; comparisonContractStatus =
+        "non_promoting"
+    ; missingCriticalFields =
+        "jet_pT_min_GeV"
+        ∷ "lepton_eta_max"
+        ∷ "central_acceptance_A"
+        ∷ "lepton_pT_min_GeV"
+        ∷ []
+    ; missingFieldsCount =
+        10
+    ; strictLogConflatesAcceptance =
+        true
+    ; strictLogConflatesAcceptanceIsTrue =
+        refl
+    ; strictLogInterpretation =
+        "chi2/dof=3180.211733150705 is informative but not a pure shape-law test until the fiducial acceptance contract is represented"
+    ; emstReference =
+        "arXiv:2006.11382"
+    ; emstCorrectionStatus =
+        "blocked_until_selection_metadata_and_fiducial_correction_surface_are_machine_readable"
+    ; emstBlockedUntilSelectionMetadataComplete =
+        true
+    ; emstBlockedUntilSelectionMetadataCompleteIsTrue =
+        refl
+    ; acceptedByExternalAuthority =
+        false
+    ; acceptedByExternalAuthorityIsFalse =
+        refl
+    ; acceptanceContractComplete =
+        false
+    ; acceptanceContractCompleteIsFalse =
+        refl
+    ; promotingReceiptExists =
+        false
+    ; promotingReceiptExistsIsFalse =
+        refl
+    ; nextProviderRequest =
+        "complete the CMS-SMP-20-003 t43 fiducial selection metadata: jet pT, jet eta, jet algorithm, lepton pT, lepton eta, isolation, flavour/channel, trigger"
+        ∷ "supply or derive the central acceptance/fiducial correction surface A(M,phi*) and its provenance"
+        ∷ "only then implement the EMST fiducial power-correction diagnostic as a pre-frozen strict-log prediction correction"
+        ∷ "rerun strict-log without posterior retuning before any full W3 authority promotion"
         ∷ []
     }
 
@@ -1120,6 +1315,8 @@ canonicalDrellYanLogLinearShapeLawReceipt =
         canonicalCSSResummationShapeLawReceipt
     ; distributedTheoreticalModelGap =
         canonicalDYDistributedTheoreticalModelGap
+    ; acceptanceMetadataGapReceipt =
+        canonicalDYAcceptanceMetadataGapReceipt
     ; residualObstructionAfterShapeRemoval =
         true
     ; residualObstructionAfterShapeRemovalIsTrue =
@@ -1135,7 +1332,7 @@ canonicalDrellYanLogLinearShapeLawReceipt =
     ; nextReceiptRequest =
         "span(1, log(phiStar)) explains 0.968705212853035 of strict-log chi2 but does not close the receipt"
         ∷ "after fitted shape removal chi2/dof is 111.96455543013676, so a residual obstruction remains"
-        ∷ "extend the decomposition beyond the single log-linear slope before any full authority promotion"
+        ∷ "stop residual-basis search and resolve the acceptance metadata contract before any further physics correction"
         ∷ []
     }
 
