@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
+open import Data.Nat.Base using (ℕ; suc; _≤_)
 
 ------------------------------------------------------------------------
 -- DCHoTT B0 bridge obligation index.
@@ -13,6 +14,39 @@ open import Data.List.Base using (List; _∷_; [])
 -- that must be discharged before a B0 claim can be promoted.  It deliberately
 -- does not import DCHoTT-Agda, does not construct a torsion-free G-structure,
 -- and does not prove B0.
+
+record ProObjectCarrier : Set₁ where
+  field
+    -- The finite refinement tower X_d.
+    depthCarrier :
+      ℕ →
+      Set
+
+    -- Compatible refinement maps phi_{d+1,d} : X_{d+1} -> X_d.
+    refinementMap :
+      (d : ℕ) →
+      depthCarrier (suc d) →
+      depthCarrier d
+
+    -- Lightweight depth-indexed bound for transport-defect decay.
+    -- This intentionally uses the repo's constructive Nat-valued bound
+    -- convention instead of importing a real-analysis dependency here.
+    waveCoherenceBound :
+      ℕ →
+      ℕ
+
+    waveCoherenceDecay :
+      (d : ℕ) →
+      waveCoherenceBound (suc d)
+      ≤
+      waveCoherenceBound d
+
+    -- The inverse-limit/pro-object target.  Constructing this from the
+    -- tower is B0.1's obligation; this index only names the socket.
+    proObjectLimit :
+      Set
+
+open ProObjectCarrier public
 
 data DCHoTTB0BridgeStatus : Set where
   indexedObligationsOnlyNoB0Proof :
@@ -102,7 +136,7 @@ canonicalCarrierToDSpaceSocket =
     ; dashiTarget =
         "DASHI carrier -> DCHoTT formal D-space"
     ; adapterObligation =
-        "provide a DASHI carrier, model disk D, and proof that the formal disk bundle is a D-fiber-bundle"
+        "construct ProObjectCarrier.proObjectLimit from the refinement tower and bind it to a DCHoTT formal D-space"
     }
 
 canonicalWaveCoherentToFlatSocket :
@@ -279,6 +313,7 @@ canonicalDCHoTTBridgeObligationIndex =
         dchottB0PromotionReceiptImpossibleHere
     ; governanceBoundary =
         "B0 remains open: this index names sub-obligations only"
+        ∷ "ProObjectCarrier records the inverse-limit target for Paper 2; it is not constructed here"
         ∷ "carrierToDSpace must bind DASHI carriers to DCHoTT formal D-spaces"
         ∷ "waveCoherentToFlat must connect DASHI wave coherence to homogeneous formal-disk triviality"
         ∷ "refinementToGStr must construct a G-structure lift compatible with refinement"
