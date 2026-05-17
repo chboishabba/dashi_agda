@@ -3,9 +3,10 @@ module DASHI.Geometry.DCHoTTBridgeObligationIndex where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
-open import Data.Nat.Base using (ℕ; suc; _≤_)
+open import Data.Nat.Base using (ℕ; zero; suc; _≤_)
 
 ------------------------------------------------------------------------
 -- DCHoTT B0 bridge obligation index.
@@ -66,6 +67,73 @@ record ProCompatibleFamily (P : ProObjectCarrier) : Set₁ where
 
 open ProCompatibleFamily public
 
+-- User-facing B0.1 point form.  This is definitionally the same
+-- compatible-family idea, but with names matching the pro-object theorem:
+-- point d : X_d and coherence d : phi_d(point (suc d)) = point d.
+record ProObjectPoint (P : ProObjectCarrier) : Set₁ where
+  field
+    point :
+      (d : ℕ) →
+      ProObjectCarrier.depthCarrier P d
+
+    coherence :
+      (d : ℕ) →
+      ProObjectCarrier.refinementMap P d (point (suc d))
+      ≡
+      point d
+
+open ProObjectPoint public
+
+proObjectPointAsCompatibleFamily :
+  {P : ProObjectCarrier} →
+  ProObjectPoint P →
+  ProCompatibleFamily P
+proObjectPointAsCompatibleFamily x =
+  record
+    { familyAtDepth =
+        ProObjectPoint.point x
+    ; familyCompatible =
+        ProObjectPoint.coherence x
+    }
+
+compatibleFamilyAsProObjectPoint :
+  {P : ProObjectCarrier} →
+  ProCompatibleFamily P →
+  ProObjectPoint P
+compatibleFamilyAsProObjectPoint x =
+  record
+    { point =
+        ProCompatibleFamily.familyAtDepth x
+    ; coherence =
+        ProCompatibleFamily.familyCompatible x
+    }
+
+-- B0.1 formal-disk structure induced by the coarsest refinement projection.
+-- In this scaffold, Im is the depth-zero projection, formal closeness is
+-- equality after that projection, and the disk at x is the Sigma type of
+-- formally close pro-object points.
+Im :
+  {P : ProObjectCarrier} →
+  ProObjectPoint P →
+  ProObjectCarrier.depthCarrier P zero
+Im x =
+  ProObjectPoint.point x zero
+
+FormallyClose :
+  {P : ProObjectCarrier} →
+  ProObjectPoint P →
+  ProObjectPoint P →
+  Set
+FormallyClose x y =
+  Im x ≡ Im y
+
+FormalDisk :
+  {P : ProObjectCarrier} →
+  ProObjectPoint P →
+  Set₁
+FormalDisk {P} x =
+  Σ (ProObjectPoint P) (FormallyClose x)
+
 record ProLimitProjectionSurface (P : ProObjectCarrier) : Set₁ where
   field
     limitProjection :
@@ -96,6 +164,15 @@ limitAsCompatibleFamily surface x =
         λ d →
           ProLimitProjectionSurface.limitProjectionCompatible surface d x
     }
+
+limitAsProObjectPoint :
+  {P : ProObjectCarrier} →
+  ProLimitProjectionSurface P →
+  ProObjectCarrier.proObjectLimit P →
+  ProObjectPoint P
+limitAsProObjectPoint surface x =
+  compatibleFamilyAsProObjectPoint
+    (limitAsCompatibleFamily surface x)
 
 data DCHoTTB0BridgeStatus : Set where
   indexedObligationsOnlyNoB0Proof :
@@ -133,6 +210,9 @@ data DCHoTTB0BridgeBlocker : Set where
   missingWaveCoherentToFlat :
     DCHoTTB0BridgeBlocker
 
+  missingFlatFormalDiskTrivialization :
+    DCHoTTB0BridgeBlocker
+
   missingRefinementToGStr :
     DCHoTTB0BridgeBlocker
 
@@ -145,9 +225,74 @@ canonicalDCHoTTB0BridgeBlockers =
   missingCarrierToDSpace
   ∷ missingLimitProjectionCompatibility
   ∷ missingWaveCoherentToFlat
+  ∷ missingFlatFormalDiskTrivialization
   ∷ missingRefinementToGStr
   ∷ missingGStrToLeviCivita
   ∷ []
+
+data FlatFormalDiskOpenObligation : Set where
+  missingTransportDefectNorm :
+    FlatFormalDiskOpenObligation
+
+  missingSummableWaveCoherenceDecay :
+    FlatFormalDiskOpenObligation
+
+  missingLimitParallelTransport :
+    FlatFormalDiskOpenObligation
+
+  missingDCHoTTFormalDiskTrivialization :
+    FlatFormalDiskOpenObligation
+
+canonicalFlatFormalDiskOpenObligations :
+  List FlatFormalDiskOpenObligation
+canonicalFlatFormalDiskOpenObligations =
+  missingTransportDefectNorm
+  ∷ missingSummableWaveCoherenceDecay
+  ∷ missingLimitParallelTransport
+  ∷ missingDCHoTTFormalDiskTrivialization
+  ∷ []
+
+record WaveCoherentFlatFormalDiskSurface (P : ProObjectCarrier) : Setω where
+  field
+    projectionSurface :
+      ProLimitProjectionSurface P
+
+    formalDiskAt :
+      ProObjectPoint P →
+      Set₁
+
+    formalDiskAtIsDepthZeroDisk :
+      (x : ProObjectPoint P) →
+      formalDiskAt x
+      ≡
+      FormalDisk x
+
+    curvatureDecayBound :
+      ℕ →
+      ℕ
+
+    curvatureDecayBoundIsCarrierBound :
+      curvatureDecayBound
+      ≡
+      ProObjectCarrier.waveCoherenceBound P
+
+    flatInLimitClaim :
+      String
+
+    flatInLimitClaim-v :
+      flatInLimitClaim
+      ≡
+      "target-only-wave-coherence-decay-should-trivialize-formal-disk-transport-in-the-limit"
+
+    openFlatnessObligations :
+      List FlatFormalDiskOpenObligation
+
+    openFlatnessObligationsAreCanonical :
+      openFlatnessObligations
+      ≡
+      canonicalFlatFormalDiskOpenObligations
+
+open WaveCoherentFlatFormalDiskSurface public
 
 -- Constructorless: no value of this type is manufactured by this index.
 data DCHoTTB0PromotionReceipt : Set where
@@ -367,8 +512,11 @@ canonicalDCHoTTBridgeObligationIndex =
     ; governanceBoundary =
         "B0 remains open: this index names sub-obligations only"
         ∷ "ProObjectCarrier records the inverse-limit target for Paper 2; it is not constructed here"
+        ∷ "ProObjectPoint is the compatible-family type (x_d) with refinement coherence"
+        ∷ "Im, FormallyClose, and FormalDisk record the depth-zero formal-disk scaffold for B0.1"
         ∷ "ProCompatibleFamily and ProLimitProjectionSurface record only the DASHI-side compatible-family cone"
         ∷ "limit projection compatibility does not imply a DCHoTT formal D-space, manifold, G-structure, or Levi-Civita adapter"
+        ∷ "WaveCoherentFlatFormalDiskSurface records the B0.2 flat-in-the-limit target without proving DCHoTT disk-bundle triviality"
         ∷ "carrierToDSpace must bind DASHI carriers to DCHoTT formal D-spaces"
         ∷ "waveCoherentToFlat must connect DASHI wave coherence to homogeneous formal-disk triviality"
         ∷ "refinementToGStr must construct a G-structure lift compatible with refinement"

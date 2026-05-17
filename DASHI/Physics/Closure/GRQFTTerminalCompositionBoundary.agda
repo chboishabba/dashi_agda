@@ -11,6 +11,7 @@ import DASHI.Geometry.DCHoTTBridgeObligationIndex as B0
 import DASHI.Physics.QFT.AQFTTypedNetSurface as AQFT
 import DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface as AQFTQuotient
 import DASHI.Physics.Closure.InteractingQFTBoundaryReceipt as IQFT
+import DASHI.Physics.Closure.AdapterIrreducibilityNoGoIndex as AdapterNoGo
 import DASHI.Physics.Closure.GRQFTClosurePromotionReceiptRequestPack as Request
 
 ------------------------------------------------------------------------
@@ -114,8 +115,17 @@ record GRQFTCompositionBoundary : Setω where
     aqftCarrierAlgebraQuotientSurface :
       AQFTQuotient.AQFTCarrierAlgebraQuotientSurface
 
+    depthFilteredLocalAlgebraSurface :
+      AQFTQuotient.DepthFilteredLocalAlgebraSurface
+
+    cauchyEvolutionTarget :
+      AQFTQuotient.CauchyEvolutionReceiptTarget
+
     interactingQFTBoundary :
       IQFT.InteractingQFTBoundaryReceipt
+
+    adapterIrreducibilityNoGoIndex :
+      AdapterNoGo.AdapterIrreducibilityNoGoIndex
 
     closureRequestPack :
       Request.GRQFTClosurePromotionReceiptRequestPack
@@ -182,7 +192,7 @@ record GRQFTCompositionBoundary : Setω where
     cosmologicalConstStatus-v :
       cosmologicalConstStatus
       ≡
-      "open-vacuum-adapter-GR-calibration-mismatch"
+      "Lambda-eff-requires-Adapter2-times-Adapter4-interaction-120-OOM-discrepancy-is-open"
 
     bornRuleDerivation :
       String
@@ -239,8 +249,14 @@ canonicalGRQFTCompositionBoundary =
         AQFT.canonicalAQFTTypedNetSurface
     ; aqftCarrierAlgebraQuotientSurface =
         AQFTQuotient.canonicalAQFTCarrierAlgebraQuotientSurface
+    ; depthFilteredLocalAlgebraSurface =
+        AQFTQuotient.canonicalDepthFilteredLocalAlgebraSurface
+    ; cauchyEvolutionTarget =
+        AQFTQuotient.canonicalCauchyEvolutionReceiptTarget
     ; interactingQFTBoundary =
         IQFT.canonicalInteractingQFTBoundaryReceipt
+    ; adapterIrreducibilityNoGoIndex =
+        AdapterNoGo.canonicalAdapterIrreducibilityNoGoIndex
     ; closureRequestPack =
         Request.canonicalGRQFTClosurePromotionReceiptRequestPack
     ; hardConstructionSteps =
@@ -272,7 +288,7 @@ canonicalGRQFTCompositionBoundary =
     ; massGapStatus-v =
         refl
     ; cosmologicalConstStatus =
-        "open-vacuum-adapter-GR-calibration-mismatch"
+        "Lambda-eff-requires-Adapter2-times-Adapter4-interaction-120-OOM-discrepancy-is-open"
     ; cosmologicalConstStatus-v =
         refl
     ; bornRuleDerivation =
@@ -297,10 +313,11 @@ canonicalGRQFTCompositionBoundary =
         terminalPromotionReceiptImpossibleHere
     ; compositionBoundary =
         "B0 requires the discrete-to-smooth ProObjectCarrier construction and DCHoTT G-structure bridge"
-        ∷ "AQFT requires local algebras from promoted receipts, quotient operations, isotony, causality, time-slice, and descent"
+        ∷ "AQFT requires depth-filtered local algebras, filtered colimits, quotient operations, isotony, causality, Cauchy time-slice evolution, and descent"
         ∷ "adapter irreducibility requires four no-go theorems: signature, Born state, vacuum, and couplings"
         ∷ "GRQFT composition is valid only after B0, B1, AQFTNet, and all four adapters are supplied"
-        ∷ "mass gap and cosmological constant remain open obligations of the composed object"
+        ∷ "mass gap is an open spectral property of the composed Yang-Mills AQFT object, not a missing composition input"
+        ∷ "cosmological constant is an open Adapter2-times-Adapter4 vacuum/renormalisation calibration mismatch"
         ∷ "the terminal everything-else sentence is recorded as a target claim, not a promoted theorem"
         ∷ []
     }

@@ -589,6 +589,7 @@ import DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface
 import DASHI.Physics.Closure.AQFTNetReceipt
 import DASHI.Physics.Closure.KleinGordonAQFTReceipt
 import DASHI.Physics.Closure.InteractingQFTBoundaryReceipt
+import DASHI.Physics.Closure.AdapterIrreducibilityNoGoIndex
 import DASHI.Physics.Closure.GRQFTTerminalCompositionBoundary
 import DASHI.Physics.Closure.CalculusCompletionPack
 import DASHI.Physics.Closure.ExternalFormalImportRoadmapReceipt

@@ -20,21 +20,33 @@ separate experimental runs are the safe default.
 B0.1 compatible-family surface `2026-05-17`:
 `DASHI/Geometry/DCHoTTBridgeObligationIndex.agda` now narrows the first B0
 construction step with `ProCompatibleFamily` and `ProLimitProjectionSurface`.
-This is only the DASHI-side inverse-limit cone for `ProObjectCarrier`; it does
-not close `carrierToDSpace`, construct a DCHoTT formal D-space/manifold,
-promote a G-structure, or inhabit a Levi-Civita adapter. Next admissible Paper 2
-action is to replace the remaining `proObjectLimit : Set` socket with a genuine
-limit construction and then prove the formal-D-space adapter separately.
+It also records `ProObjectPoint`, `Im`, `FormallyClose`, and `FormalDisk` as the
+depth-zero formal-disk scaffold, and `WaveCoherentFlatFormalDiskSurface` as the
+B0.2 flat-in-the-limit target. This is only DASHI-side inverse-limit/formal-disk
+structure for `ProObjectCarrier`; it does not close `carrierToDSpace`, construct
+a DCHoTT formal D-space/manifold, promote a G-structure, or inhabit a
+Levi-Civita adapter. Next admissible Paper 2 action is to replace the remaining
+`proObjectLimit : Set` socket with a genuine limit construction and then prove
+the formal-D-space adapter separately.
 
 AQFT carrier-algebra quotient surface `2026-05-17`:
 `DASHI/Physics/QFT/AQFTCarrierAlgebraQuotientSurface.agda` now records the
 typed target `A(O)` as promoted receipts over a carrier restricted to a region,
 quotiented by transport equivalence. This does not construct a concrete
 C*-algebra, local net from DASHI data, GNS/vacuum adapter, Born rule,
-interacting AQFT, Standard Model, stress-energy, or GRQFT receipt. Next
-admissible Paper 3 action is to replace the abstract restricted-carrier and
-quotient postulates with real carrier restriction, equivalence, quotient, and
-algebra-operation laws.
+interacting AQFT, Standard Model, stress-energy, or GRQFT receipt. The same
+module now records `CauchyEvolutionReceiptTarget` as the Paper 3a time-slice
+obligation. Next admissible Paper 3 action is to replace the abstract
+restricted-carrier and quotient postulates with real carrier restriction,
+equivalence, quotient, algebra-operation laws, and a Cauchy evolution theorem
+showing that carrier data on a Cauchy surface determines the target region.
+
+Adapter irreducibility no-go index `2026-05-17`:
+`DASHI/Physics/Closure/AdapterIrreducibilityNoGoIndex.agda` now names the four
+no-go theorem targets required before any terminal GRQFT/TOE boundary can
+promote: signature no-preferred-reduction, nonunique local-algebra state space,
+curved-spacetime no-preferred-vacuum, and no canonical gauge-coupling ratio
+without a GUT receipt. This is an index only; no no-go theorem is proved.
 
 Read-first status note `2026-05-15`: older W9 TODO entries that say "W9 remains
 blocked" are historical unless they explicitly refer to pressure/Qcore routes.

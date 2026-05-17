@@ -5,9 +5,12 @@
 - add the first B0.1 compatible-family surface:
   `DASHI/Geometry/DCHoTTBridgeObligationIndex.agda` now records
   `ProCompatibleFamily` and `ProLimitProjectionSurface` for the DASHI-side
-  inverse-limit cone over a `ProObjectCarrier`. The helper
-  `limitAsCompatibleFamily` turns a projected pro-limit point into a compatible
-  refinement-depth family. This narrows the first B0.1 construction target
+  inverse-limit cone over a `ProObjectCarrier`, plus `ProObjectPoint`, `Im`,
+  `FormallyClose`, and `FormalDisk` for the depth-zero formal-disk scaffold.
+  The helpers `limitAsCompatibleFamily` and `limitAsProObjectPoint` turn a
+  projected pro-limit point into a compatible refinement-depth family. The same
+  module now records `WaveCoherentFlatFormalDiskSurface` as the B0.2
+  flat-in-the-limit target. These narrow the B0.1/B0.2 construction targets
   without constructing a DCHoTT formal D-space, manifold, G-structure,
   Levi-Civita adapter, or B0 proof.
 
@@ -24,9 +27,25 @@
   restricted to a region, quotiented by transport equivalence. The surface is
   exported through `DASHI/Everything.agda` and wired into
   `GRQFTTerminalCompositionBoundary` as a non-promoting dependency. Restricted
-  carriers, quotient operations, C*-algebra structure, GNS/vacuum selection,
-  Born rule, interacting AQFT, Standard Model, and GRQFT composition are still
-  open obligations.
+  carriers, quotient operations, and C*-algebra structure are still open. The
+  same module now records `CauchyEvolutionReceiptTarget` as the Paper 3a
+  time-slice theorem target: carrier data on a Cauchy surface must determine
+  the target region before AQFT promotion is possible.
+
+- add the adapter irreducibility no-go index:
+  `DASHI/Physics/Closure/AdapterIrreducibilityNoGoIndex.agda` records the four
+  empirical adapter no-go theorem targets: metric signature, Born state,
+  vacuum selection, and coupling constants. It is wired into
+  `GRQFTTerminalCompositionBoundary` and remains non-promoting: no
+  irreducibility proof, GUT boundary proof, Standard Model construction,
+  GRQFT receipt, or TOE claim is constructed.
+
+- sharpen the terminal GRQFT open-obligation wording:
+  `GRQFTTerminalCompositionBoundary` now records the mass gap as an open
+  spectral property of the composed Yang-Mills AQFT object and updates the
+  cosmological constant status to the Adapter2-times-Adapter4
+  vacuum/renormalisation calibration mismatch with the 120-order discrepancy
+  explicitly named.
 
 - add Monster and Monster-LILA as external artifact submodules:
   `monster` is now recognized as the existing pinned

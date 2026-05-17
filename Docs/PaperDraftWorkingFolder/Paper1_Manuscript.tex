@@ -277,6 +277,10 @@ central open bridge theorem and the target of the next paper. The current
 receipt is \texttt{LeviCivitaBridge.agda}: it typechecks against the cloned
 DCHoTT-Agda flat modules and records B0 as a named postulated obligation, not
 an imported theorem \cite{wellen-2018,dchott-agda}.
+\texttt{DCHoTTBridgeObligationIndex.agda} further names the B0.1 pro-object
+compatible-family/formal-disk scaffold and the B0.2 flat-formal-disk target;
+both remain Paper 2 construction targets, not DCHoTT manifold or Levi-Civita
+proofs.
 
 \textbf{B1 (curvature from nilpotent transport).} The discrete Bianchi and
 Einstein candidate surfaces are downstream of B0. They remain suspended until
@@ -291,6 +295,9 @@ Klein-Gordon free-field witness is recorded in
 \texttt{KleinGordonAQFTReceipt.agda}, which cites the stack result as a
 bounded free-field surface while leaving concrete algebra-net reconstruction,
 GNS state selection, and Born-rule derivation open \cite{haag-kastler-stacks-2024}.
+\texttt{AQFTCarrierAlgebraQuotientSurface.agda} stages \(A(O)\), \(A_d(O)\),
+the filtered colimit \(\mathrm{colim}_d A_d(O)\), and Cauchy time-slice
+evolution as typed targets only.
 
 \textbf{B3 (interacting boundary).} Interacting QFT, renormalisation, and
 coupling calibration are typed adapter boundaries. The record
@@ -1348,8 +1355,8 @@ G6 & Official tracked commuting route & Migration or split of old universal law 
 E8/LILA & Local integer/root boundary & Upstream completion constructor/API & Upstream E8 completion \\
 W3 & Bounded Drell-Yan receipt & Accepted W3 evidence-authority token & Accepted empirical authority \\
 W4/W5 & Request/diagnostic surfaces & Accepted DY convention and correction receipts & Matter field, stress-energy, sourced physics \\
-DCHoTT bridge & \texttt{LeviCivitaBridge.agda} shim and \texttt{G-structures} socket typecheck & B0 geometric emergence theorem; torsion-free/Levi-Civita specialization & Levi-Civita uniqueness, GR promotion \\
-AQFT net & AQFT/Klein-Gordon receipts typecheck & Constructive interacting AQFT net; GNS/vacuum adapter; Born-rule derivation & Interacting QFT, Standard Model \\
+DCHoTT bridge & \texttt{LeviCivitaBridge.agda} plus B0.1/B0.2 target sockets & B0 geometric emergence theorem; DCHoTT formal-D-space adapter; torsion-free/Levi-Civita specialization & Levi-Civita uniqueness, GR promotion \\
+AQFT net & AQFT/Klein-Gordon receipts plus carrier-algebra quotient sockets & Constructive local algebra quotient, filtered colimit, Cauchy time-slice receipt, GNS/vacuum adapter, Born-rule derivation & Interacting QFT, Standard Model \\
 GRQFT & Typed consumer surface & B0 plus AQFT net plus coupling calibration plus stress-energy adapter & Full unification claim \\
 GR & Future adapter path & Non-flat connection, curvature, Ricci, sourced interface & Einstein tensor, Schwarzschild, continuum GR \\
 Cross-domain spine & Shared projection-defect / MDL schema & Calibration, universality, domain receipts & Cross-domain recovery \\
@@ -1433,6 +1440,15 @@ DCHoTT import shim &
 DCHoTT Levi-Civita bridge &
 \scriptsize\ttfamily\seqsplit{DASHI.Geometry.LeviCivitaBridge} &
 \scriptsize\ttfamily\seqsplit{canonicalLeviCivitaBridgeReceipt} \\
+DCHoTT B0 obligation index &
+\scriptsize\ttfamily\seqsplit{DASHI.Geometry.DCHoTTBridgeObligationIndex} &
+\scriptsize\ttfamily\seqsplit{canonicalDCHoTTBridgeObligationIndex} \\
+AQFT carrier algebra quotient surface &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface} &
+\scriptsize\ttfamily\seqsplit{canonicalAQFTCarrierAlgebraQuotientSurface / canonicalDepthFilteredLocalAlgebraSurface / canonicalCauchyEvolutionReceiptTarget} \\
+Adapter irreducibility no-go index &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.AdapterIrreducibilityNoGoIndex} &
+\scriptsize\ttfamily\seqsplit{canonicalAdapterIrreducibilityNoGoIndex} \\
 AQFT net receipt &
 \scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.AQFTNetReceipt} &
 \scriptsize\ttfamily\seqsplit{canonicalAQFTNetReceipt} \\
