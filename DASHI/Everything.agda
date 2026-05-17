@@ -585,6 +585,7 @@ import DASHI.Physics.Closure.MDLLyapunovCompatibility
 import DASHI.Physics.Closure.MDLLyapunovShiftInstance
 import DASHI.Physics.Closure.MDLTradeoffShiftInstance
 import DASHI.Physics.QFT.AQFTTypedNetSurface
+import DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface
 import DASHI.Physics.Closure.AQFTNetReceipt
 import DASHI.Physics.Closure.KleinGordonAQFTReceipt
 import DASHI.Physics.Closure.InteractingQFTBoundaryReceipt

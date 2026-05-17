@@ -124,7 +124,7 @@ i\partial_t\psi=H\psi,
 | \(R^\rho{}_{\sigma\mu\nu}\) | transport defect from noncommuting refinement transport | curvature carrier, covariance, torsion convention |
 | \(R_{\mu\nu},R\) | contracted transport defect | Ricci/scalar contraction and index laws |
 | \(G_{\mu\nu}\) | stable curvature-obstruction tensor | contracted Bianchi/divergence-free law |
-| \(T_{\mu\nu}\) | promoted source projection / matter residual carrier | accepted stress-energy interface and authority |
+| \(T_{\mu\nu}\) | source/stress-energy target projection / matter residual carrier | accepted stress-energy interface and authority |
 | \(\Lambda g_{\mu\nu}\) | background refinement/vacuum term | cosmological-term convention and calibration |
 | \(8\pi G/c^4\) | source-coupling normalization | weak-field/Newtonian limit and unit calibration |
 
@@ -222,8 +222,8 @@ obstruction are represented explicitly.
 DASHI is not presented as an isolated replacement for existing formal
 geometry or algebraic QFT. It is a carrier-and-receipt layer that can be
 bridged to external formal mathematics when the corresponding adapters are
-made explicit. The current bridge layer has six laws, B0--B5, each recorded as
-a typed obligation rather than as a prose promise.
+made explicit. The current bridge layer has six named obligation slots,
+B0--B5, each recorded as a typed obligation rather than as a prose promise.
 
 **B0 (geometric emergence).** Wave-coherent and refinement-stable DASHI
 transport should determine a DCHoTT `G-structures` socket. This is the central
@@ -238,7 +238,8 @@ non-flat metric/Levi-Civita adapter is imported or proved; the current
 manuscript therefore discusses curvature and Einstein tensors as target
 surfaces, not completed GR.
 
-**B2 (local quantum field).** The Haag-Kastler stack route identifies a
+**B2 (local quantum field).** The cited Haag-Kastler stack route is recorded
+as identifying a
 locally covariant AQFT as a point of the relevant HK 2-functor. The
 Klein-Gordon free-field witness is recorded in
 `KleinGordonAQFTReceipt.agda`, which cites the stack result as a bounded
@@ -264,7 +265,7 @@ Haag-Kastler/AQFT-net, and cohesive HoTT as external import candidates and
 keeps them in a suspended state until the corresponding proofs or adapters are
 inhabited.
 
-The honest TOE claim is therefore deliberately weaker than a completed
+The honest frontier claim is therefore deliberately weaker than a completed
 unification theorem: DASHI localizes which pieces are derived from carrier
 transport and which pieces require external geometric, algebraic, empirical,
 or calibration input. The absence of an inhabitant is manuscript-relevant
@@ -847,7 +848,7 @@ obligations are carrier patches, local sections, transition maps, cocycle
 laws, oriented 0/1/2-cells, finite incidence, \(d_1d_0=0\), a nondegenerate
 curvature carrier, and field-equation witnesses.
 
-**Corollary 9.5 (Why the abelian/nonabelian split is forced).** If the
+**Corollary 9.5 (Why the abelian/nonabelian split has this target shape).** If the
 transport group is abelian, the plaquette defect is a boundary-of-boundary
 object: \(F=dA\), gauge change is \(A\mapsto A+d\lambda\), and the homogeneous
 law \(dF=0\) follows from \(d^2=0\). This is the DASHI route to an EM-shaped
@@ -858,7 +859,7 @@ Yang-Mills-shaped curvature \(F_A=dA+A\wedge A\). The field equations
 \(d{*F}=J\) and \(d_A{*F_A}=J\) are not obtained from this split alone; they
 require a Hodge/source/action adapter.
 
-**Theorem 9.6 (Plaquette ordering forces the Yang-Mills curvature form).**
+**Derivation Sketch 9.6 (Plaquette ordering motivates the Yang-Mills curvature target).**
 Let \(U_\mu(x)=\exp(\epsilon A_\mu(x))\) and
 \(U_\nu(x)=\exp(\epsilon A_\nu(x))\) be infinitesimal transports in two local
 directions. The
@@ -1028,7 +1029,8 @@ connection, units, and physical regime for \(G_{\mu\nu}\), \(\Lambda g_{\mu\nu}\
 and \(T_{\mu\nu}\).
 
 **Lemma 11.4 (Why the Einstein tensor is the natural source-facing target).**
-Once the Levi-Civita route is chosen, the contracted Bianchi identity gives
+In the standard GR target, once a Levi-Civita route and contracted-Bianchi
+adapter are supplied, the contracted Bianchi identity gives
 \[
 \nabla^\mu G_{\mu\nu}=0.
 \]
@@ -1292,7 +1294,7 @@ claims, and Paper 1 does not require or assert a Monster moonshine theorem.
 
 ## 13. Cross-Domain Variational Spine
 
-The cross-domain variational-spine boundary records a common typed object,
+The cross-domain variational-spine boundary records a common typed schema,
 `(X, delta, pi, defect, gate, observation, symmetry)`, shared by several
 non-promoting target rows. Paper 1 does not infer chemistry closure,
 biological prediction, perceptual empirical fit, or universal closure from

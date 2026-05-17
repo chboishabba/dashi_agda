@@ -17,6 +17,25 @@ status. Because the license surface is AGPL/commercial-dual-license flavored,
 future code reuse requires explicit license review; citation, inspection, and
 separate experimental runs are the safe default.
 
+B0.1 compatible-family surface `2026-05-17`:
+`DASHI/Geometry/DCHoTTBridgeObligationIndex.agda` now narrows the first B0
+construction step with `ProCompatibleFamily` and `ProLimitProjectionSurface`.
+This is only the DASHI-side inverse-limit cone for `ProObjectCarrier`; it does
+not close `carrierToDSpace`, construct a DCHoTT formal D-space/manifold,
+promote a G-structure, or inhabit a Levi-Civita adapter. Next admissible Paper 2
+action is to replace the remaining `proObjectLimit : Set` socket with a genuine
+limit construction and then prove the formal-D-space adapter separately.
+
+AQFT carrier-algebra quotient surface `2026-05-17`:
+`DASHI/Physics/QFT/AQFTCarrierAlgebraQuotientSurface.agda` now records the
+typed target `A(O)` as promoted receipts over a carrier restricted to a region,
+quotiented by transport equivalence. This does not construct a concrete
+C*-algebra, local net from DASHI data, GNS/vacuum adapter, Born rule,
+interacting AQFT, Standard Model, stress-energy, or GRQFT receipt. Next
+admissible Paper 3 action is to replace the abstract restricted-carrier and
+quotient postulates with real carrier restriction, equivalence, quotient, and
+algebra-operation laws.
+
 Read-first status note `2026-05-15`: older W9 TODO entries that say "W9 remains
 blocked" are historical unless they explicitly refer to pressure/Qcore routes.
 Current status is narrower: W9 is unblocked only through the accepted MDL
@@ -221,10 +240,13 @@ bound back into DASHI admissibility receipts.
 Drell-Yan strict-log consumer metadata `2026-05-17`:
 `scripts/run_dyturbo_t43_strict_log.py` now accepts provider metadata flags
 (`--provider-treatment`, `--cut-mode`, `--fpc-applied`, `--fpc-artifact`,
-`--qt-phi-mapping`, and `--normalization-treatment`) and writes them into both
+`--qt-phi-mapping`, `--jet-mode`, and `--normalization-treatment`) and writes them into both
 blocked and computed artifacts. Future FPC outputs must use these fields so
-provider treatment, cut geometry, and qT-to-phi* mapping are auditable before
-any strict-log result is interpreted.
+provider treatment, cut geometry, qT-to-phi* mapping, and jet-contract
+treatment are auditable before any strict-log result is interpreted. Current
+DYTurbo `xs_qt` artifacts are diagnostic only and cannot promote even if their
+metadata claims native `phi*`; a distinct native event-level `phi*` provider is
+required.
 
 Drell-Yan strict-pass orthogonality target `2026-05-15`:
 `DrellYanStrictLogLinearSubspaceReceipt.agda` records the corrected theorem

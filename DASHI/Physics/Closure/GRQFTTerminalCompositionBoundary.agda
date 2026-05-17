@@ -9,6 +9,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Geometry.DCHoTTBridgeObligationIndex as B0
 import DASHI.Physics.QFT.AQFTTypedNetSurface as AQFT
+import DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface as AQFTQuotient
 import DASHI.Physics.Closure.InteractingQFTBoundaryReceipt as IQFT
 import DASHI.Physics.Closure.GRQFTClosurePromotionReceiptRequestPack as Request
 
@@ -109,6 +110,9 @@ record GRQFTCompositionBoundary : Setω where
 
     aqftTypedNetSurface :
       AQFT.AQFTTypedNetSurface
+
+    aqftCarrierAlgebraQuotientSurface :
+      AQFTQuotient.AQFTCarrierAlgebraQuotientSurface
 
     interactingQFTBoundary :
       IQFT.InteractingQFTBoundaryReceipt
@@ -233,6 +237,8 @@ canonicalGRQFTCompositionBoundary =
         B0.canonicalDCHoTTBridgeObligationIndex
     ; aqftTypedNetSurface =
         AQFT.canonicalAQFTTypedNetSurface
+    ; aqftCarrierAlgebraQuotientSurface =
+        AQFTQuotient.canonicalAQFTCarrierAlgebraQuotientSurface
     ; interactingQFTBoundary =
         IQFT.canonicalInteractingQFTBoundaryReceipt
     ; closureRequestPack =
@@ -291,7 +297,7 @@ canonicalGRQFTCompositionBoundary =
         terminalPromotionReceiptImpossibleHere
     ; compositionBoundary =
         "B0 requires the discrete-to-smooth ProObjectCarrier construction and DCHoTT G-structure bridge"
-        ∷ "AQFT requires local algebras from promoted receipts, isotony, causality, time-slice, and descent"
+        ∷ "AQFT requires local algebras from promoted receipts, quotient operations, isotony, causality, time-slice, and descent"
         ∷ "adapter irreducibility requires four no-go theorems: signature, Born state, vacuum, and couplings"
         ∷ "GRQFT composition is valid only after B0, B1, AQFTNet, and all four adapters are supplied"
         ∷ "mass gap and cosmological constant remain open obligations of the composed object"

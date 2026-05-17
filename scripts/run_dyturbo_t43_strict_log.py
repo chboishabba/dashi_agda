@@ -190,7 +190,20 @@ def compute(args: argparse.Namespace) -> dict[str, Any]:
         "exact-cms-at-least-one-jet",
         "exact_cms_at_least_one_jet",
     }
-    promotes = bool(strict_pass and provider_contract_exact)
+    xs_qt_artifact_non_promoting = True
+    promotes = False
+    if strict_pass and provider_contract_exact:
+        non_promoting_reason = (
+            "DYTurbo xs_qt artifact is diagnostic only; native event-level phi* "
+            "with exact CMS at-least-one-jet selection is required"
+        )
+    elif not strict_pass:
+        non_promoting_reason = "chi2 threshold failed"
+    else:
+        non_promoting_reason = (
+            "provider metadata is not exact-cms-leading-subleading with FPC enabled "
+            "with native phi* observable mapping and exact at-least-one-jet selection"
+        )
     return {
         "artifact_schema": "dashi.dyturbo.t43_direct_strict_log.v1",
         "status": "computed",
@@ -214,6 +227,7 @@ def compute(args: argparse.Namespace) -> dict[str, Any]:
         "provider_contract_exact_cms": provider_contract_exact,
         "observable_contract_exact": observable_contract_exact,
         "jet_contract_exact": jet_contract_exact,
+        "xs_qt_artifact_non_promoting": xs_qt_artifact_non_promoting,
         "promotes": promotes,
         "numerator_xs_qt": [float(value) for value in numerator],
         "denominator_xs_qt": [float(value) for value in denominator],
@@ -221,22 +235,13 @@ def compute(args: argparse.Namespace) -> dict[str, Any]:
         "log_prediction": [float(value) for value in log_prediction],
         "log_residuals": [float(value) for value in residual],
         "promotion_boundary": (
-            "direct DYTurbo fiducial route promotes only if strict-log chi2/dof <= threshold "
-            "and provider metadata proves exact CMS leading/subleading cuts with FPC enabled "
-            "on the native phi* observable with the CMS at-least-one-jet selection; "
-            "leading-order qT-to-phi* maps and lepton-only fiducial cuts remain diagnostic; "
-            "it does not satisfy the independent W_i provider contract"
+            "DYTurbo xs_qt artifacts are diagnostic only for this strict-log lane. "
+            "Promotion requires a distinct native event-level phi* provider with exact CMS "
+            "leading/subleading cuts, FPC treatment if applicable, and exact CMS "
+            "at-least-one-jet selection; leading-order qT-to-phi* maps and lepton-only "
+            "fiducial cuts remain non-promoting diagnostics."
         ),
-        "non_promoting_reason": None
-        if promotes
-        else (
-            "chi2 threshold failed"
-            if not strict_pass
-            else (
-                "provider metadata is not exact-cms-leading-subleading with FPC enabled "
-                "with native phi* observable mapping and exact at-least-one-jet selection"
-            )
-        ),
+        "non_promoting_reason": non_promoting_reason,
     }
 
 

@@ -48,6 +48,55 @@ record ProObjectCarrier : Set₁ where
 
 open ProObjectCarrier public
 
+-- B0.1 starts with the ordinary inverse-limit surface: a point of the
+-- pro-object is a compatible family through all finite refinement depths.
+-- This is still DASHI-side structure only; it does not construct a DCHoTT
+-- formal D-space, manifold, G-structure, or Levi-Civita receipt.
+record ProCompatibleFamily (P : ProObjectCarrier) : Set₁ where
+  field
+    familyAtDepth :
+      (d : ℕ) →
+      ProObjectCarrier.depthCarrier P d
+
+    familyCompatible :
+      (d : ℕ) →
+      ProObjectCarrier.refinementMap P d (familyAtDepth (suc d))
+      ≡
+      familyAtDepth d
+
+open ProCompatibleFamily public
+
+record ProLimitProjectionSurface (P : ProObjectCarrier) : Set₁ where
+  field
+    limitProjection :
+      (d : ℕ) →
+      ProObjectCarrier.proObjectLimit P →
+      ProObjectCarrier.depthCarrier P d
+
+    limitProjectionCompatible :
+      (d : ℕ) →
+      (x : ProObjectCarrier.proObjectLimit P) →
+      ProObjectCarrier.refinementMap P d (limitProjection (suc d) x)
+      ≡
+      limitProjection d x
+
+open ProLimitProjectionSurface public
+
+limitAsCompatibleFamily :
+  {P : ProObjectCarrier} →
+  ProLimitProjectionSurface P →
+  ProObjectCarrier.proObjectLimit P →
+  ProCompatibleFamily P
+limitAsCompatibleFamily surface x =
+  record
+    { familyAtDepth =
+        λ d →
+          ProLimitProjectionSurface.limitProjection surface d x
+    ; familyCompatible =
+        λ d →
+          ProLimitProjectionSurface.limitProjectionCompatible surface d x
+    }
+
 data DCHoTTB0BridgeStatus : Set where
   indexedObligationsOnlyNoB0Proof :
     DCHoTTB0BridgeStatus
@@ -78,6 +127,9 @@ data DCHoTTB0BridgeBlocker : Set where
   missingCarrierToDSpace :
     DCHoTTB0BridgeBlocker
 
+  missingLimitProjectionCompatibility :
+    DCHoTTB0BridgeBlocker
+
   missingWaveCoherentToFlat :
     DCHoTTB0BridgeBlocker
 
@@ -91,6 +143,7 @@ canonicalDCHoTTB0BridgeBlockers :
   List DCHoTTB0BridgeBlocker
 canonicalDCHoTTB0BridgeBlockers =
   missingCarrierToDSpace
+  ∷ missingLimitProjectionCompatibility
   ∷ missingWaveCoherentToFlat
   ∷ missingRefinementToGStr
   ∷ missingGStrToLeviCivita
@@ -164,7 +217,7 @@ canonicalRefinementToGStrSocket =
     ; sourceModule =
         "G-structure"
     ; sourceName =
-        "groups-over-automorphismgroup-of_; G-structures; G-str->"
+        "groups-over-automorphismgroup-of_; G-structures; G-str→"
     ; dashiTarget =
         "DASHI refinement/coarse-graining data -> G-structure lift"
     ; adapterObligation =
@@ -314,6 +367,8 @@ canonicalDCHoTTBridgeObligationIndex =
     ; governanceBoundary =
         "B0 remains open: this index names sub-obligations only"
         ∷ "ProObjectCarrier records the inverse-limit target for Paper 2; it is not constructed here"
+        ∷ "ProCompatibleFamily and ProLimitProjectionSurface record only the DASHI-side compatible-family cone"
+        ∷ "limit projection compatibility does not imply a DCHoTT formal D-space, manifold, G-structure, or Levi-Civita adapter"
         ∷ "carrierToDSpace must bind DASHI carriers to DCHoTT formal D-spaces"
         ∷ "waveCoherentToFlat must connect DASHI wave coherence to homogeneous formal-disk triviality"
         ∷ "refinementToGStr must construct a G-structure lift compatible with refinement"

@@ -2,6 +2,32 @@
 
 ## 2026-05-17
 
+- add the first B0.1 compatible-family surface:
+  `DASHI/Geometry/DCHoTTBridgeObligationIndex.agda` now records
+  `ProCompatibleFamily` and `ProLimitProjectionSurface` for the DASHI-side
+  inverse-limit cone over a `ProObjectCarrier`. The helper
+  `limitAsCompatibleFamily` turns a projected pro-limit point into a compatible
+  refinement-depth family. This narrows the first B0.1 construction target
+  without constructing a DCHoTT formal D-space, manifold, G-structure,
+  Levi-Civita adapter, or B0 proof.
+
+- fail-close DYTurbo `xs_qt` strict-log artifacts:
+  `scripts/run_dyturbo_t43_strict_log.py` now records `jet_mode` as part of the
+  strict-log provider metadata and keeps all DYTurbo `xs_qt` outputs
+  diagnostic-only. Even if a run supplies native-looking metadata, this script
+  cannot set `promotes = true`; strict-log promotion requires a distinct native
+  event-level `phi*` provider with the exact CMS at-least-one-jet contract.
+
+- add the AQFT carrier-algebra quotient target surface:
+  `DASHI/Physics/QFT/AQFTCarrierAlgebraQuotientSurface.agda` records the next
+  typed construction target `A(O)` as promoted receipts over the carrier
+  restricted to a region, quotiented by transport equivalence. The surface is
+  exported through `DASHI/Everything.agda` and wired into
+  `GRQFTTerminalCompositionBoundary` as a non-promoting dependency. Restricted
+  carriers, quotient operations, C*-algebra structure, GNS/vacuum selection,
+  Born rule, interacting AQFT, Standard Model, and GRQFT composition are still
+  open obligations.
+
 - add Monster and Monster-LILA as external artifact submodules:
   `monster` is now recognized as the existing pinned
   `meta-introspector/monster` submodule, and `Monster-LILA` has been added as a
