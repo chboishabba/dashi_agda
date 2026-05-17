@@ -10,7 +10,12 @@
   The helpers `limitAsCompatibleFamily` and `limitAsProObjectPoint` turn a
   projected pro-limit point into a compatible refinement-depth family. The same
   module now records `WaveCoherentFlatFormalDiskSurface` as the B0.2
-  flat-in-the-limit target. These narrow the B0.1/B0.2 construction targets
+  flat-in-the-limit target. The same module now records
+  `RefinementStableGStructureSurface` as the B0.3 target: a depth-indexed
+  frame bundle, compatible metric tower, Lorentz signature adapter, pro-frame
+  limit, and DCHoTT G-structure reduction witness remain required before any
+  refinement-to-G-structure claim can promote. These narrow the B0.1/B0.2/B0.3
+  construction targets
   without constructing a DCHoTT formal D-space, manifold, G-structure,
   Levi-Civita adapter, or B0 proof.
 
@@ -45,7 +50,11 @@
   spectral property of the composed Yang-Mills AQFT object and updates the
   cosmological constant status to the Adapter2-times-Adapter4
   vacuum/renormalisation calibration mismatch with the 120-order discrepancy
-  explicitly named.
+  explicitly named. It also now exposes the B0 bridge blockers, B0.2 flat-disk
+  obligations, B0.3 G-structure obligations, AQFT typed-net, quotient, depth,
+  and time-slice obligations, adapter no-go obligations including the GUT boundary, and
+  the W5/GRQFT request-pack authority requirements before any terminal claim can
+  promote.
 
 - add Monster and Monster-LILA as external artifact submodules:
   `monster` is now recognized as the existing pinned

@@ -17,17 +17,21 @@ status. Because the license surface is AGPL/commercial-dual-license flavored,
 future code reuse requires explicit license review; citation, inspection, and
 separate experimental runs are the safe default.
 
-B0.1 compatible-family surface `2026-05-17`:
+B0.1/B0.2/B0.3 bridge target surfaces `2026-05-17`:
 `DASHI/Geometry/DCHoTTBridgeObligationIndex.agda` now narrows the first B0
 construction step with `ProCompatibleFamily` and `ProLimitProjectionSurface`.
 It also records `ProObjectPoint`, `Im`, `FormallyClose`, and `FormalDisk` as the
 depth-zero formal-disk scaffold, and `WaveCoherentFlatFormalDiskSurface` as the
-B0.2 flat-in-the-limit target. This is only DASHI-side inverse-limit/formal-disk
-structure for `ProObjectCarrier`; it does not close `carrierToDSpace`, construct
-a DCHoTT formal D-space/manifold, promote a G-structure, or inhabit a
-Levi-Civita adapter. Next admissible Paper 2 action is to replace the remaining
-`proObjectLimit : Set` socket with a genuine limit construction and then prove
-the formal-D-space adapter separately.
+B0.2 flat-in-the-limit target. `RefinementStableGStructureSurface` now records
+the B0.3 frame/metric tower target: depth-indexed frames, frame refinement
+compatibility, a compatible metric tower, Lorentz signature adapter, pro-frame
+limit, and DCHoTT G-structure reduction witness. This is only DASHI-side
+inverse-limit/formal-disk/frame scaffolding for `ProObjectCarrier`; it does not
+close `carrierToDSpace`, construct a DCHoTT formal D-space/manifold, promote a
+G-structure, prove torsion-freeness, or inhabit a Levi-Civita adapter. Next
+admissible Paper 2 action is to replace the remaining `proObjectLimit : Set`
+socket with a genuine limit construction, then prove the formal-D-space adapter
+and the refinement-stable frame-to-G-structure reduction separately.
 
 AQFT carrier-algebra quotient surface `2026-05-17`:
 `DASHI/Physics/QFT/AQFTCarrierAlgebraQuotientSurface.agda` now records the
@@ -47,6 +51,16 @@ no-go theorem targets required before any terminal GRQFT/TOE boundary can
 promote: signature no-preferred-reduction, nonunique local-algebra state space,
 curved-spacetime no-preferred-vacuum, and no canonical gauge-coupling ratio
 without a GUT receipt. This is an index only; no no-go theorem is proved.
+
+GRQFT terminal boundary blocker exposure `2026-05-17`:
+`DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda` now surfaces the
+active blocker lists instead of relying only on imported records: B0 bridge
+blockers, B0.2 flat formal-disk obligations, B0.3 G-structure obligations, AQFT
+typed-net obligations, AQFT quotient/depth-filtered/Cauchy-evolution
+obligations, adapter irreducibility obligations including the GUT boundary, and
+the W5/GRQFT request-pack authority/PDF/downstream-field/validation payload.
+The terminal claim remains `terminalClaimPromoted = false`; mass gap and
+cosmological constant remain terminal open obligations.
 
 Read-first status note `2026-05-15`: older W9 TODO entries that say "W9 remains
 blocked" are historical unless they explicitly refer to pressure/Qcore routes.

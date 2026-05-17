@@ -130,6 +130,38 @@ record GRQFTCompositionBoundary : Setω where
     closureRequestPack :
       Request.GRQFTClosurePromotionReceiptRequestPack
 
+    b0BridgeBlockers :
+      List B0.DCHoTTB0BridgeBlocker
+
+    b02FlatFormalDiskOpenObligations :
+      List B0.FlatFormalDiskOpenObligation
+
+    b03GStructureOpenObligations :
+      List B0.GStructureReductionOpenObligation
+
+    aqftTypedNetOpenObligations :
+      List AQFT.AQFTTypedNetOpenObligation
+
+    aqftQuotientOpenObligations :
+      List AQFTQuotient.AQFTCarrierAlgebraQuotientOpenObligation
+
+    depthFilteredOpenObligations :
+      List AQFTQuotient.DepthFilteredAlgebraOpenObligation
+
+    cauchyEvolutionOpenObligations :
+      List AQFTQuotient.CauchyEvolutionOpenObligation
+
+    adapterIrreducibilityOpenObligations :
+      List AdapterNoGo.AdapterIrreducibilityOpenObligation
+
+    closureRequestPackStillRequired :
+      String
+
+    closureRequestPackStillRequired-v :
+      closureRequestPackStillRequired
+      ≡
+      "GRQFT-request-pack-authority-PDF-carrier-downstream-fields-GR-law-QFT-law-consumers-and-empirical-validation-still-required"
+
     hardConstructionSteps :
       List GRQFTHardConstructionStep
 
@@ -160,7 +192,7 @@ record GRQFTCompositionBoundary : Setω where
     b0TheoremShape-v :
       b0TheoremShape
       ≡
-      "ProObjectCarrier inverse-limit admits DCHoTT manifold and torsion-free G-structure target"
+      "B0.1-compatible-pro-object-plus-B0.2-flat-disk-plus-B0.3-frame-metric-tower-admits-DCHoTT-manifold-and-torsion-free-G-structure-target"
 
     aqftConstructionShape :
       String
@@ -216,7 +248,7 @@ record GRQFTCompositionBoundary : Setω where
     everythingElseTargetClaim-v :
       everythingElseTargetClaim
       ≡
-      "target-only-inhabited-or-reducible-to-above-four-after-B0-AQFT-and-adapter-no-go-theorems"
+      "target-only-inhabited-or-reducible-to-above-four-after-B0-B1-AQFT-W5-request-pack-and-adapter-no-go-theorems"
 
     terminalClaimPromoted :
       Bool
@@ -259,6 +291,27 @@ canonicalGRQFTCompositionBoundary =
         AdapterNoGo.canonicalAdapterIrreducibilityNoGoIndex
     ; closureRequestPack =
         Request.canonicalGRQFTClosurePromotionReceiptRequestPack
+    ; b0BridgeBlockers =
+        B0.canonicalDCHoTTB0BridgeBlockers
+    ; b02FlatFormalDiskOpenObligations =
+        B0.canonicalFlatFormalDiskOpenObligations
+    ; b03GStructureOpenObligations =
+        B0.canonicalGStructureReductionOpenObligations
+    ; aqftTypedNetOpenObligations =
+        AQFT.AQFTTypedNetSurface.openObligations AQFT.canonicalAQFTTypedNetSurface
+    ; aqftQuotientOpenObligations =
+        AQFTQuotient.AQFTCarrierAlgebraQuotientSurface.openObligations
+          AQFTQuotient.canonicalAQFTCarrierAlgebraQuotientSurface
+    ; depthFilteredOpenObligations =
+        AQFTQuotient.canonicalDepthFilteredAlgebraOpenObligations
+    ; cauchyEvolutionOpenObligations =
+        AQFTQuotient.canonicalCauchyEvolutionOpenObligations
+    ; adapterIrreducibilityOpenObligations =
+        AdapterNoGo.canonicalAdapterIrreducibilityOpenObligations
+    ; closureRequestPackStillRequired =
+        "GRQFT-request-pack-authority-PDF-carrier-downstream-fields-GR-law-QFT-law-consumers-and-empirical-validation-still-required"
+    ; closureRequestPackStillRequired-v =
+        refl
     ; hardConstructionSteps =
         canonicalGRQFTHardConstructionSteps
     ; hardConstructionStepsAreCanonical =
@@ -272,7 +325,7 @@ canonicalGRQFTCompositionBoundary =
     ; survivingOpenObligationsAreCanonical =
         refl
     ; b0TheoremShape =
-        "ProObjectCarrier inverse-limit admits DCHoTT manifold and torsion-free G-structure target"
+        "B0.1-compatible-pro-object-plus-B0.2-flat-disk-plus-B0.3-frame-metric-tower-admits-DCHoTT-manifold-and-torsion-free-G-structure-target"
     ; b0TheoremShape-v =
         refl
     ; aqftConstructionShape =
@@ -300,7 +353,7 @@ canonicalGRQFTCompositionBoundary =
     ; couplingUnification-v =
         refl
     ; everythingElseTargetClaim =
-        "target-only-inhabited-or-reducible-to-above-four-after-B0-AQFT-and-adapter-no-go-theorems"
+        "target-only-inhabited-or-reducible-to-above-four-after-B0-B1-AQFT-W5-request-pack-and-adapter-no-go-theorems"
     ; everythingElseTargetClaim-v =
         refl
     ; terminalClaimPromoted =
@@ -312,11 +365,11 @@ canonicalGRQFTCompositionBoundary =
     ; impossibleReceiptHere =
         terminalPromotionReceiptImpossibleHere
     ; compositionBoundary =
-        "B0 requires the discrete-to-smooth ProObjectCarrier construction and DCHoTT G-structure bridge"
+        "B0 requires the B0.1 pro-object construction, B0.2 flat formal-disk target, B0.3 frame/metric tower, and DCHoTT G-structure bridge"
         ∷ "AQFT requires depth-filtered local algebras, filtered colimits, quotient operations, isotony, causality, Cauchy time-slice evolution, and descent"
-        ∷ "adapter irreducibility requires four no-go theorems: signature, Born state, vacuum, and couplings"
-        ∷ "GRQFT composition is valid only after B0, B1, AQFTNet, and all four adapters are supplied"
-        ∷ "mass gap is an open spectral property of the composed Yang-Mills AQFT object, not a missing composition input"
+        ∷ "adapter irreducibility requires four no-go theorems plus the GUT receipt boundary"
+        ∷ "GRQFT composition is valid only after B0, B1, AQFTNet, W5 request-pack authority, and all four adapters are supplied"
+        ∷ "mass gap is not a structural composition input, but remains a terminal open spectral obligation before completed GRQFT/TOE promotion"
         ∷ "cosmological constant is an open Adapter2-times-Adapter4 vacuum/renormalisation calibration mismatch"
         ∷ "the terminal everything-else sentence is recorded as a target claim, not a promoted theorem"
         ∷ []

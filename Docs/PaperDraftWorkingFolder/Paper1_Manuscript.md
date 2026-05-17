@@ -232,9 +232,10 @@ open bridge theorem and the target of the next paper. The current receipt is
 modules and records B0 as a named postulated obligation, not an imported
 theorem.
 `DCHoTTBridgeObligationIndex.agda` further names the B0.1 pro-object
-compatible-family/formal-disk scaffold and the B0.2 flat-formal-disk target;
-both remain Paper 2 construction targets, not DCHoTT manifold or Levi-Civita
-proofs.
+compatible-family/formal-disk scaffold, the B0.2 flat-formal-disk target, and
+the B0.3 refinement-stable frame/metric/G-structure reduction target; all
+remain Paper 2 construction targets, not DCHoTT manifold, G-structure, or
+Levi-Civita proofs.
 
 **B1 (curvature from nilpotent transport).** The discrete Bianchi and Einstein
 candidate surfaces are downstream of B0. They remain suspended until the
@@ -1323,7 +1324,7 @@ stronger physical claims.
 | W3 | Bounded Drell-Yan comparison receipts but constructorless accepted authority | Accepted W3 evidence-authority token | Accepted empirical authority, CMS validation, above-Z promotion |
 | W4 | Local/request surfaces only | `AcceptedDYLuminosityConventionAuthority`, W4 adequacy, Candidate256 calibration, `matterFieldFromW4`, `stressEnergyTensorFromW4` | W4 adequacy, matter field, stress-energy tensor, sourced physics |
 | W5 | Parked / blocked downstream of accepted DY convention | Accepted W5 correction receipt for the intended observable/regime | W5 correction, CT18/LHAPDF agreement, DY convention closure |
-| DCHoTT bridge | `LeviCivitaBridge.agda` plus `DCHoTTBridgeObligationIndex.agda` B0.1/B0.2 target sockets | B0 geometric emergence theorem; DCHoTT formal-D-space adapter; torsion-free/Levi-Civita specialization | Levi-Civita uniqueness, GR promotion |
+| DCHoTT bridge | `LeviCivitaBridge.agda` plus `DCHoTTBridgeObligationIndex.agda` B0.1/B0.2/B0.3 target sockets | B0 geometric emergence theorem; DCHoTT formal-D-space adapter; refinement-stable frame/metric tower; G-structure reduction; torsion-free/Levi-Civita specialization | Levi-Civita uniqueness, GR promotion |
 | AQFT net | `AQFTNetReceipt.agda`, `KleinGordonAQFTReceipt.agda`, and `AQFTCarrierAlgebraQuotientSurface.agda` target sockets | Constructive local algebra quotient, filtered colimit, Cauchy time-slice receipt, GNS/vacuum adapter, Born-rule derivation | Interacting QFT, Standard Model |
 | GRQFT | `GRQFTConsumerNextObligation.agda` typed consumer surface | B0 plus AQFT net plus coupling calibration plus stress-energy adapter | Full unification claim |
 | GR | Future adapter path from finite differences to non-flat connection and curvature | Prime-difference-to-Riemann adapter bundle, curvature carrier, Ricci contraction, sourced stress-energy interface | Riemann/Ricci/Einstein tensor, Schwarzschild, continuum GR, GRQFT |

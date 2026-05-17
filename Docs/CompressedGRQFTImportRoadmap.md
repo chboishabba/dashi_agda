@@ -27,7 +27,11 @@ geometric emergence, torsion-free specialisation, and Levi-Civita uniqueness
 remain open.  `DASHI.Geometry.DCHoTTBridgeObligationIndex` now decomposes B0
 into four open audit targets: carrier-to-formal-D-space, wave-coherence to
 flat formal disk, refinement stability to G-structure, and G-structure to
-Levi-Civita specialisation.  The Haag-Kastler stack surface is also now recorded as a
+Levi-Civita specialisation.  It additionally names the concrete B0.1 compatible
+family/formal-disk scaffold, the B0.2 flat-formal-disk target, and the B0.3
+refinement-stable frame/metric/pro-frame target without constructing a DCHoTT
+manifold, G-structure, torsion-free specialization, or Levi-Civita adapter.
+The Haag-Kastler stack surface is also now recorded as a
 self-contained DASHI receipt at `DASHI.Physics.Closure.AQFTNetReceipt`; this
 is a governance/intake surface, not a concrete QFT carrier.  The first
 free-field witness and boundary surfaces are also now explicit:
@@ -102,7 +106,7 @@ from imported external formal infrastructure:
 | Adapter-boundary matrix | yes | `Docs/PhysicsLaneMaturityMatrix.md` already records metric, representation, GNS/vacuum, Born-rule, and calibration boundaries. |
 | DCHoTT dependency / import shim | yes | `DCHoTT-Agda` is cloned locally and `DASHI.Geometry.DCHoTTImportShim` typechecks against its flat modules. |
 | DCHoTT Levi-Civita bridge socket | yes | `DASHI.Geometry.LeviCivitaBridge` typechecks against `G-structures` and records B0 as first open obligation. |
-| DCHoTT B0 obligation index | yes | `DASHI.Geometry.DCHoTTBridgeObligationIndex` splits B0 into four open sub-obligations and constructs no B0 promotion receipt. |
+| DCHoTT B0 obligation index | yes | `DASHI.Geometry.DCHoTTBridgeObligationIndex` splits B0 into four open sub-obligations, records B0.1/B0.2/B0.3 target surfaces, and constructs no B0 promotion receipt. |
 | AQFT typed net surface | yes | `DASHI.Physics.QFT.AQFTTypedNetSurface` introduces typed region/local-algebra sockets for isotony, causality, time-slice, and descent while keeping concrete C*-algebras, GNS, Born, vacuum, and interacting QFT open. |
 | DCHoTT imported theorem | no | The shim sees manifold/formal-disk/G-structure surfaces but imports no torsion-free Levi-Civita or B0 theorem. |
 
@@ -134,10 +138,11 @@ not a from-scratch conceptual design pass.
    `DASHI.Geometry.DCHoTTImportShim` proves the flat imports resolve, and
    `DASHI.Geometry.LeviCivitaBridge` proves the actual `G-structures` socket
    can be targeted.  `DASHI.Geometry.DCHoTTBridgeObligationIndex` fixes the
-   proof checklist so this does not remain one opaque postulate.  The next
-   deliverable is a proof-grade bridge from DASHI
-   wave-coherent/refinement-stable transport into that socket, followed by the
-   torsion-free/Levi-Civita specialisation.
+   proof checklist so this does not remain one opaque postulate and now records
+   the B0.1 compatible family, B0.2 flat-disk, and B0.3 frame/metric/G-structure
+   target surfaces. The next deliverable is a proof-grade bridge from DASHI
+   wave-coherent/refinement-stable transport into the DCHoTT socket, followed
+   by the torsion-free/Levi-Civita specialisation.
 
 3. Write the DASHI-to-DCHoTT translation layer.
    Map DASHI carrier, transport receipt, curvature receipt, admissibility, and

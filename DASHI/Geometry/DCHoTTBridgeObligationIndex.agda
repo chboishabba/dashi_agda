@@ -216,6 +216,12 @@ data DCHoTTB0BridgeBlocker : Set where
   missingRefinementToGStr :
     DCHoTTB0BridgeBlocker
 
+  missingRefinementStableFrameMetricTower :
+    DCHoTTB0BridgeBlocker
+
+  missingDCHoTTGStructureReduction :
+    DCHoTTB0BridgeBlocker
+
   missingGStrToLeviCivita :
     DCHoTTB0BridgeBlocker
 
@@ -227,6 +233,8 @@ canonicalDCHoTTB0BridgeBlockers =
   ∷ missingWaveCoherentToFlat
   ∷ missingFlatFormalDiskTrivialization
   ∷ missingRefinementToGStr
+  ∷ missingRefinementStableFrameMetricTower
+  ∷ missingDCHoTTGStructureReduction
   ∷ missingGStrToLeviCivita
   ∷ []
 
@@ -293,6 +301,154 @@ record WaveCoherentFlatFormalDiskSurface (P : ProObjectCarrier) : Setω where
       canonicalFlatFormalDiskOpenObligations
 
 open WaveCoherentFlatFormalDiskSurface public
+
+data GStructureReductionOpenObligation : Set where
+  missingDepthIndexedFrameBundle :
+    GStructureReductionOpenObligation
+
+  missingFrameRefinementCompatibility :
+    GStructureReductionOpenObligation
+
+  missingMetricCompatibilityTower :
+    GStructureReductionOpenObligation
+
+  missingLorentzSignatureAdapter :
+    GStructureReductionOpenObligation
+
+  missingProFrameLimitConstruction :
+    GStructureReductionOpenObligation
+
+  missingDCHoTTGStructureReductionWitness :
+    GStructureReductionOpenObligation
+
+  missingTorsionFreeSpecialization :
+    GStructureReductionOpenObligation
+
+canonicalGStructureReductionOpenObligations :
+  List GStructureReductionOpenObligation
+canonicalGStructureReductionOpenObligations =
+  missingDepthIndexedFrameBundle
+  ∷ missingFrameRefinementCompatibility
+  ∷ missingMetricCompatibilityTower
+  ∷ missingLorentzSignatureAdapter
+  ∷ missingProFrameLimitConstruction
+  ∷ missingDCHoTTGStructureReductionWitness
+  ∷ missingTorsionFreeSpecialization
+  ∷ []
+
+-- B0.3 target: refinement-stable frame and metric data should reduce the
+-- pro-object frame bundle to a Lorentz G-structure.  This surface only
+-- records the DASHI-side tower and target; it does not construct a DCHoTT
+-- G-structure value, torsion-free specialization, or Levi-Civita adapter.
+record RefinementStableGStructureSurface (P : ProObjectCarrier) : Setω where
+  field
+    projectionSurface :
+      ProLimitProjectionSurface P
+
+    FrameAtDepth :
+      ℕ →
+      Set
+
+    frameRefinementMap :
+      (d : ℕ) →
+      FrameAtDepth (suc d) →
+      FrameAtDepth d
+
+    frameOfDepthCarrier :
+      (d : ℕ) →
+      ProObjectCarrier.depthCarrier P d →
+      FrameAtDepth d
+
+    frameOfRefinementCompatible :
+      (d : ℕ) →
+      (x : ProObjectCarrier.depthCarrier P (suc d)) →
+      frameRefinementMap d (frameOfDepthCarrier (suc d) x)
+      ≡
+      frameOfDepthCarrier d (ProObjectCarrier.refinementMap P d x)
+
+    frameCompatibleWithCarrier :
+      String
+
+    frameCompatibleWithCarrier-v :
+      frameCompatibleWithCarrier
+      ≡
+      "target-only-frames-classify-local-bases-for-depth-carrier-sites"
+
+    MetricAtDepth :
+      ℕ →
+      Set
+
+    MetricRelAtDepth :
+      (d : ℕ) →
+      FrameAtDepth d →
+      FrameAtDepth d →
+      Set
+
+    metricRefinementCompatible :
+      (d : ℕ) →
+      Set
+
+    metricRelRefinementCompatible :
+      (d : ℕ) →
+      (u v : FrameAtDepth (suc d)) →
+      MetricRelAtDepth (suc d) u v →
+      MetricRelAtDepth d
+        (frameRefinementMap d u)
+        (frameRefinementMap d v)
+
+    lorentzSignatureAdapter :
+      Set
+
+    SignatureClass :
+      Set
+
+    lorentz31 :
+      SignatureClass
+
+    signatureAtDepth :
+      (d : ℕ) →
+      FrameAtDepth d →
+      SignatureClass
+
+    signatureRefinementLocked :
+      (d : ℕ) →
+      (f : FrameAtDepth (suc d)) →
+      signatureAtDepth d (frameRefinementMap d f)
+      ≡
+      signatureAtDepth (suc d) f
+
+    ProFrameLimit :
+      Set
+
+    proFrameProjection :
+      (d : ℕ) →
+      ProFrameLimit →
+      FrameAtDepth d
+
+    proFrameProjectionCompatible :
+      (d : ℕ) →
+      (f : ProFrameLimit) →
+      frameRefinementMap d (proFrameProjection (suc d) f)
+      ≡
+      proFrameProjection d f
+
+    gStructureReductionTarget :
+      String
+
+    gStructureReductionTarget-v :
+      gStructureReductionTarget
+      ≡
+      "target-only-refinement-stable-frame-and-metric-tower-should-define-Lorentz-G-structure-reduction"
+
+    openGStructureObligations :
+      List GStructureReductionOpenObligation
+
+    openGStructureObligationsAreCanonical :
+      openGStructureObligations
+      ≡
+      canonicalGStructureReductionOpenObligations
+
+open RefinementStableGStructureSurface public
 
 -- Constructorless: no value of this type is manufactured by this index.
 data DCHoTTB0PromotionReceipt : Set where
@@ -366,7 +522,7 @@ canonicalRefinementToGStrSocket =
     ; dashiTarget =
         "DASHI refinement/coarse-graining data -> G-structure lift"
     ; adapterObligation =
-        "construct the BG/Bi lift of the formal disk classifying map and prove compatibility under refinement maps"
+        "construct a depth-indexed frame bundle, compatible metric tower, Lorentz signature adapter, pro-frame limit, and DCHoTT G-structure reduction witness"
     }
 
 canonicalGStrToLeviCivitaSocket :
@@ -517,9 +673,10 @@ canonicalDCHoTTBridgeObligationIndex =
         ∷ "ProCompatibleFamily and ProLimitProjectionSurface record only the DASHI-side compatible-family cone"
         ∷ "limit projection compatibility does not imply a DCHoTT formal D-space, manifold, G-structure, or Levi-Civita adapter"
         ∷ "WaveCoherentFlatFormalDiskSurface records the B0.2 flat-in-the-limit target without proving DCHoTT disk-bundle triviality"
+        ∷ "RefinementStableGStructureSurface records the B0.3 frame/metric/pro-frame target without constructing a DCHoTT G-structure reduction"
         ∷ "carrierToDSpace must bind DASHI carriers to DCHoTT formal D-spaces"
         ∷ "waveCoherentToFlat must connect DASHI wave coherence to homogeneous formal-disk triviality"
-        ∷ "refinementToGStr must construct a G-structure lift compatible with refinement"
+        ∷ "refinementToGStr must construct a G-structure lift compatible with refinement-stable frames and metric adapters"
         ∷ "gStrToLeviCivita is blocked on a missing torsion-free/metric-compatible DCHoTT specialization"
         ∷ "no DCHoTTB0PromotionReceipt is constructed or promoted here"
         ∷ []
