@@ -16,6 +16,7 @@ Status: paper-writing claim control surface; non-promoting.
 | Cross-domain variational spine boundary | `DASHI.Physics.Closure.CrossDomainVariationalSpine.canonicalCrossDomainVariationalSpineBoundary`; `Docs/CurrentGateStatus.md` cross-domain row | DASHI may describe a typed projection-defect / MDL spine as a structural theorem-target boundary across physics, molecular, bonding, biological, and perceptual rows. |
 | Drell-Yan bounded W3 t43 comparison-law receipt | `DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt.canonicalHEPDataW3ComparisonLawReceipt`; `DASHI.Physics.Closure.DrellYanAdjacentRatioEmpiricalLaneReceipt.canonicalDrellYanAdjacentRatioEmpiricalLaneReceipt` | DASHI has an inhabited bounded W3 `t43` below-Z Drell-Yan comparison-law receipt with `chi2/dof = 2.1565191176`, threshold `4.0`, mean pred/data `0.9941233097`, and no above-Z promotion. |
 | Drell-Yan strict-log failure diagnosis | `DASHI.Physics.Closure.DrellYanStrictLogLinearSubspaceReceipt.canonicalDrellYanStrictLogLinearSubspaceReceipt` | The current strict-log Drell-Yan failure may be described as a negative strict diagnostic dominated by the log-linear residual subspace, with strict pass still missing. |
+| External bridge B0--B5 obligation layer | `DASHI.Geometry.DCHoTTImportShim.canonicalDCHoTTImportShimReceipt`; `DASHI.Geometry.LeviCivitaBridge.canonicalLeviCivitaBridgeReceipt`; `DASHI.Physics.Closure.AQFTNetReceipt.canonicalAQFTNetReceipt`; `DASHI.Physics.Closure.KleinGordonAQFTReceipt.canonicalKleinGordonAQFTReceipt`; `DASHI.Physics.Closure.InteractingQFTBoundaryReceipt.canonicalInteractingQFTBoundaryReceipt`; `DASHI.Physics.Closure.ExternalFormalImportRoadmapReceipt.canonicalExternalFormalImportRoadmapReceipt` | Paper 1 may state the external bridge layer as a typed obligation map: B0 geometric emergence is open; curvature/GR promotion is suspended downstream of B0; the Klein-Gordon AQFT stack witness is recorded as a bounded free-field surface; interacting QFT and coupling calibration are adapter boundaries; compression admissibility is inhabited; and the honest frontier records open obligations without claiming completed unification. |
 
 ## Appendix / Future-Work Boundary Claims
 
@@ -86,6 +87,11 @@ surfaces. They are not part of the main Paper 1 positive theorem inventory.
   empirical adequacy, convergence-rate theorem, origin fixed-point theorem,
   Monster representation semantics, non-flat GR, domain recovery, or completed
   unification.
+- The DCHoTT/AQFT bridge layer remains non-promoting: no B0 proof, non-flat
+  Levi-Civita adapter, Levi-Civita uniqueness theorem import, concrete
+  interacting AQFT net, GNS/vacuum derivation, Born-rule derivation, Standard
+  Model construction, GRQFT receipt, or full unification follows from the
+  current shim and receipt files.
 
 ## Reviewer-Facing Rule
 

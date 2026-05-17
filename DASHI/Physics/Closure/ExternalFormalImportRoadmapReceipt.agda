@@ -45,6 +45,12 @@ data ExternalImportStatus : Set where
   dependencyIntakeShimTypechecked :
     ExternalImportStatus
 
+  bridgeSocketTypechecked :
+    ExternalImportStatus
+
+  dashNativeReceiptTypechecked :
+    ExternalImportStatus
+
   importedAndTypechecked :
     ExternalImportStatus
 
@@ -63,6 +69,9 @@ record ExternalFormalImportCandidateReceipt : Setω where
       String
 
     sourceLocator :
+      String
+
+    toolchainCompatibility :
       String
 
     localDependencyPresent :
@@ -109,8 +118,20 @@ record LocalFormalOverlapAuditReceipt : Setω where
     localAQFTNetReceiptPresent :
       Bool
 
-    localAQFTNetReceiptPresentIsFalse :
-      localAQFTNetReceiptPresent ≡ false
+    localAQFTNetReceiptPresentIsTrue :
+      localAQFTNetReceiptPresent ≡ true
+
+    localKleinGordonAQFTReceiptPresent :
+      Bool
+
+    localKleinGordonAQFTReceiptPresentIsTrue :
+      localKleinGordonAQFTReceiptPresent ≡ true
+
+    localInteractingQFTBoundaryReceiptPresent :
+      Bool
+
+    localInteractingQFTBoundaryReceiptPresentIsTrue :
+      localInteractingQFTBoundaryReceiptPresent ≡ true
 
     localAdapterBoundaryMatrixPresent :
       Bool
@@ -129,6 +150,12 @@ record LocalFormalOverlapAuditReceipt : Setω where
 
     localDCHoTTImportShimPresentIsTrue :
       localDCHoTTImportShimPresent ≡ true
+
+    localDCHoTTLeviCivitaBridgePresent :
+      Bool
+
+    localDCHoTTLeviCivitaBridgePresentIsTrue :
+      localDCHoTTLeviCivitaBridgePresent ≡ true
 
     localCohesiveBridgeTheoremPresent :
       Bool
@@ -208,11 +235,13 @@ canonicalDCHoTTMetricAdapterImportCandidate =
     ; stageTarget =
         metricAdapterStage
     ; status =
-        dependencyIntakeShimTypechecked
+        bridgeSocketTypechecked
     ; sourceName =
         "DCHoTT-Agda / Wellen-Cherubini differential cohesion in Agda"
     ; sourceLocator =
         "https://github.com/felixwellen/DCHoTT-Agda ; Wellen thesis on formalizing Cartan geometry in modal HoTT"
+    ; toolchainCompatibility =
+        "DCHoTT-Agda README target Agda 2.6.2.2; DASHI flat import shim typechecks under Agda 2.6.4.3 with standard-library-2.0"
     ; localDependencyPresent =
         true
     ; dashImportImplemented =
@@ -225,14 +254,15 @@ canonicalDCHoTTMetricAdapterImportCandidate =
         "LeviCivitaAdapterReceipt"
     ; integrationObligations =
         "record exact DCHoTT-Agda commit, license, Agda version, stdlib version, and compatibility notes"
-        ∷ "extend the flat import shim into a typed DASHI-to-DCHoTT translation layer"
+        ∷ "replace LeviCivitaBridge's postulated B0-geometricEmergence socket with a proof or imported theorem"
         ∷ "identify the exact DCHoTT construction corresponding to the torsion-free G-structure / Levi-Civita adapter target"
         ∷ "write a translation layer from DASHI carrier/transport receipts into the DCHoTT modality vocabulary"
         ∷ "prove or import the specialisation from torsion-free G-structure to the DASHI Levi-Civita adapter target"
         ∷ []
     ; governanceBoundary =
-        "DCHoTT dependency is local and the flat import shim typechecks"
+        "DCHoTT dependency is local, the flat import shim typechecks, and LeviCivitaBridge typechecks against the actual G-structures socket"
         ∷ "no DCHoTT theorem is imported into a DASHI metric adapter by this roadmap receipt"
+        ∷ "LeviCivitaBridge records B0 as a postulated open obligation and does not import torsion-free or Levi-Civita uniqueness"
         ∷ "Stage 2 is timeline-compressed by an existing formalisation candidate and import shim, not locally closed"
         ∷ "no metric adapter, Hodge star, Ricci contraction, Einstein tensor, or GR promotion follows from this receipt"
         ∷ []
@@ -247,15 +277,17 @@ canonicalAQFTNetImportCandidate =
     ; stageTarget =
         aqftCarrierStage
     ; status =
-        externalCandidateVerified
+        dashNativeReceiptTypechecked
     ; sourceName =
         "Haag-Kastler stacks"
     ; sourceLocator =
         "arXiv:2404.14510"
+    ; toolchainCompatibility =
+        "DASHI-native stdlib-only receipt; no external Agda AQFT dependency imported"
     ; localDependencyPresent =
         false
     ; dashImportImplemented =
-        false
+        true
     ; theoremImportedIntoDASHI =
         false
     ; leapfrogMechanism =
@@ -263,13 +295,17 @@ canonicalAQFTNetImportCandidate =
     ; targetDASHIReceipt =
         "AQFTNetReceipt"
     ; integrationObligations =
-        "define DASHI OpenRegion, local algebra, isotony, causality, and time-slice receipt surfaces"
+        "refine the bool/string receipt into typed OpenRegion, local algebra, isotony, causality, and time-slice carriers"
         ∷ "bind the local-to-global descent condition without selecting a Hilbert representation"
+        ∷ "replace KleinGordonAQFTReceipt's cited theorem surface with a typed local algebra net if a proof-grade Agda AQFT library becomes available"
         ∷ "keep GNS state, vacuum selection, Born rule, and empirical representation choice as explicit adapters"
         ∷ "connect the AQFT net receipt to existing GRQFT consumer request-pack fields"
         ∷ []
     ; governanceBoundary =
-        "AQFT nets avoid a premature single-Fock-space assumption but do not solve interacting QFT"
+        "DASHI.Physics.Closure.AQFTNetReceipt now records the Haag-Kastler point/descent contract"
+        ∷ "DASHI.Physics.Closure.KleinGordonAQFTReceipt records the cited free-field stack witness"
+        ∷ "DASHI.Physics.Closure.InteractingQFTBoundaryReceipt names constructive interacting nets as the first open QFT obligation"
+        ∷ "AQFT nets avoid a premature single-Fock-space assumption but do not solve interacting QFT"
         ∷ "Haag theorem is staged around, not refuted"
         ∷ "no Born-rule, vacuum-selection, empirical QFT, or GRQFT promotion follows from this receipt"
         ∷ []
@@ -289,6 +325,8 @@ canonicalCohesiveAmbientImportCandidate =
         "Schreiber modal/cohesive HoTT physics programme"
     ; sourceLocator =
         "https://ncatlab.org/schreiber/show/Modern+Physics+formalized+in+Modal+Homotopy+Type+Theory"
+    ; toolchainCompatibility =
+        "conceptual ambient-framework candidate only; no local Agda dependency imported"
     ; localDependencyPresent =
         false
     ; dashImportImplemented =
@@ -328,8 +366,16 @@ canonicalLocalFormalOverlapAuditReceipt =
     ; localGRQFTConsumerObligationPresentIsTrue =
         refl
     ; localAQFTNetReceiptPresent =
-        false
-    ; localAQFTNetReceiptPresentIsFalse =
+        true
+    ; localAQFTNetReceiptPresentIsTrue =
+        refl
+    ; localKleinGordonAQFTReceiptPresent =
+        true
+    ; localKleinGordonAQFTReceiptPresentIsTrue =
+        refl
+    ; localInteractingQFTBoundaryReceiptPresent =
+        true
+    ; localInteractingQFTBoundaryReceiptPresentIsTrue =
         refl
     ; localAdapterBoundaryMatrixPresent =
         true
@@ -343,24 +389,32 @@ canonicalLocalFormalOverlapAuditReceipt =
         true
     ; localDCHoTTImportShimPresentIsTrue =
         refl
+    ; localDCHoTTLeviCivitaBridgePresent =
+        true
+    ; localDCHoTTLeviCivitaBridgePresentIsTrue =
+        refl
     ; localCohesiveBridgeTheoremPresent =
         false
     ; localCohesiveBridgeTheoremPresentIsFalse =
         refl
     ; strongestReading =
-        "DASHI already has local overlap surfaces for flat Levi-Civita, GR/QFT consumer obligations, adapter-boundary governance, and a DCHoTT flat import shim, but it does not yet import a torsion-free Levi-Civita adapter, define an AQFT net receipt, or prove the cohesive bridge theorem"
+        "DASHI already has local overlap surfaces for flat Levi-Civita, GR/QFT consumer obligations, adapter-boundary governance, a DCHoTT flat import shim, a DCHoTT G-structures bridge socket, an AQFT net receipt, a Klein-Gordon free-field witness, and an interacting-QFT boundary receipt, but it does not yet import a torsion-free Levi-Civita adapter, refine AQFT into concrete algebra carriers, construct interacting QFT, or prove the cohesive bridge theorem"
     ; overlapEvidence =
         "DASHI.Physics.Closure.GRConcreteLeviCivita closes only the selected flat Minkowski Levi-Civita prerequisite"
         ∷ "DASHI.Physics.Closure.GRDiscreteBianchiFiniteR and DiscreteBianchiIdentitySurface name non-flat Riemann, Ricci, Bianchi, and Einstein adapter requests"
         ∷ "DASHI.Physics.Closure.GRQFTConsumerNextObligation names downstream GR/QFT closure fields and keeps promotion constructorless"
         ∷ "Docs/PhysicsLaneMaturityMatrix.md records local observable-net, GNS/vacuum, Born-rule, metric, representation, and calibration boundaries"
         ∷ "DASHI.Geometry.DCHoTTImportShim imports DCHoTT flat modules and exposes manifold, formal-disk, and G-structure sockets"
+        ∷ "DASHI.Geometry.LeviCivitaBridge typechecks a non-promoting bridge against the actual DCHoTT G-structures socket and records B0 as first open obligation"
+        ∷ "DASHI.Physics.Closure.AQFTNetReceipt records the Haag-Kastler point/descent contract without constructing a QFT representation"
+        ∷ "DASHI.Physics.Closure.KleinGordonAQFTReceipt records the free-field Theorem 4.41 witness while keeping vacuum and Born-rule adapters open"
+        ∷ "DASHI.Physics.Closure.InteractingQFTBoundaryReceipt records constructive interacting nets as first open QFT obligation"
         ∷ []
     ; governanceBoundary =
         "in-repo overlap and DCHoTT import resolution reduce translation work but do not satisfy imported-theorem gates"
         ∷ "flat Levi-Civita is not the non-flat metric adapter needed for GR promotion"
-        ∷ "GRQFT consumer obligations are not Haag-Kastler AQFT nets"
-        ∷ "DCHoTT import shim is not a torsion-free G-structure specialisation or B0 proof"
+        ∷ "the AQFT/Klein-Gordon receipts are not concrete C*-algebra net reconstructions, GNS/vacuum derivations, Born-rule derivations, or interacting QFT proofs"
+        ∷ "DCHoTT import shim and LeviCivitaBridge are not a torsion-free G-structure specialisation or B0 proof"
         ∷ "adapter-boundary prose is not the B0 geometric-emergence theorem"
         ∷ []
     }
@@ -399,8 +453,8 @@ canonicalCompressedGRQFTImportRoadmapReceipt =
         refl
     ; nextExecutableSteps =
         "record exact DCHoTT-Agda commit/hash/license and Agda/std-lib compatibility notes"
-        ∷ "extend the DCHoTT import shim into a typed translation layer before writing the Levi-Civita adapter bridge"
-        ∷ "add AQFTNetReceipt as a DASHI-native net/descent interface before any QFT carrier promotion"
+        ∷ "replace LeviCivitaBridge's B0 postulate with a proof/import and then refine it toward torsion-free/Levi-Civita uniqueness"
+        ∷ "refine AQFTNetReceipt and KleinGordonAQFTReceipt from bool/string governance surfaces into typed OpenRegion/local-algebra/descent carriers before any QFT carrier promotion"
         ∷ "connect both bridges to GRQFTConsumerNextObligation without constructing GRQFTClosurePromotionReceipt"
         ∷ []
     ; compressedRoadmapBoundary =

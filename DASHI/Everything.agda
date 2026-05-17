@@ -139,6 +139,8 @@ import DASHI.Geometry.ConeArrowOrientationAsymmetry
 import DASHI.Geometry.ConeArrowShellStratification
 import DASHI.Geometry.ConeMetricCompatibility
 import DASHI.Geometry.DCHoTTImportShim
+import DASHI.Geometry.LeviCivitaBridge
+import DASHI.Geometry.DCHoTTBridgeObligationIndex
 import DASHI.Geometry.ConeTimeIsotropy
 import DASHI.Geometry.ContractiveDemo
 import DASHI.Geometry.DefectCollapse
@@ -582,6 +584,10 @@ import DASHI.Physics.Closure.MDLFejerAxiomsShift
 import DASHI.Physics.Closure.MDLLyapunovCompatibility
 import DASHI.Physics.Closure.MDLLyapunovShiftInstance
 import DASHI.Physics.Closure.MDLTradeoffShiftInstance
+import DASHI.Physics.QFT.AQFTTypedNetSurface
+import DASHI.Physics.Closure.AQFTNetReceipt
+import DASHI.Physics.Closure.KleinGordonAQFTReceipt
+import DASHI.Physics.Closure.InteractingQFTBoundaryReceipt
 import DASHI.Physics.Closure.CalculusCompletionPack
 import DASHI.Physics.Closure.ExternalFormalImportRoadmapReceipt
 import DASHI.Physics.Closure.MarxDialecticalDerivativeReceipt

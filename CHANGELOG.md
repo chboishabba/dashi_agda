@@ -2,6 +2,29 @@
 
 ## 2026-05-17
 
+- add post-submission DCHoTT/AQFT scaffold surfaces:
+  `DASHI/Geometry/DCHoTTBridgeObligationIndex.agda` decomposes B0 into the
+  four open bridge obligations `carrierToDSpace`, `waveCoherentToFlat`,
+  `refinementToGStr`, and `gStrToLeviCivita`, while keeping B0 unproved and
+  constructorless for promotion authority. `DASHI/Physics/QFT/AQFTTypedNetSurface.agda`
+  adds a typed region/local-algebra interface for isotony, causality,
+  time-slice, and descent without constructing a C*-algebra, GNS state, Born
+  rule adapter, vacuum, interacting QFT, Standard Model, or GRQFT receipt.
+  Both modules are exported through `DASHI/Everything.agda`.
+
+- complete the Paper 1 external bridge pack:
+  `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md` and `.tex` now add the
+  §2 B0--B5 bridge layer between the background and derivation spine. The new
+  text binds DCHoTT geometry, Haag-Kastler/AQFT, interacting-QFT boundaries,
+  compression admissibility, and honest-frontier obligations to the
+  corresponding repo receipts without promoting B0, non-flat Levi-Civita, GR,
+  interacting QFT, Standard Model, or GRQFT closure. §11 now cites the
+  operational TRBD decomposition surface and native Z+jet/event-level-`phi*`
+  provider blocker; §12 adds the MDL non-increase law from the compression
+  admissibility receipt; §14 and the receipt index now include DCHoTT/AQFT/GRQFT
+  rows. `ClaimLedger.md`, `TODO.md`, and `Paper1_References.bib` were synced
+  with the new bridge wording and references.
+
 - polish Paper 1 positioning around carrier geometry:
   `Paper1_Manuscript.md` and `.tex` now present the constructive ultrametric
   carrier geometry as the mathematical thesis while keeping closure semantics
@@ -41,8 +64,20 @@
   `ca8c755af0b26f8f50c5a60d3b7f9384a26f5d0e`; `dashi-agda.agda-lib` includes
   `DCHoTT-Agda`; and `DASHI/Geometry/DCHoTTImportShim.agda` typechecks against
   the actual flat DCHoTT modules (`Manifolds`, `FormalDiskBundle`,
-  `G-structure`). Non-flat Levi-Civita import, AQFT net receipt, and the
-  cohesive bridge theorem remain absent.
+  `G-structure`). `DASHI/Geometry/LeviCivitaBridge.agda` now typechecks a
+  non-promoting bridge against the actual exported `G-structures` socket,
+  links the existing flat `GRConcreteLeviCivita` prerequisite and downstream
+  `DiscreteEinsteinTensorCandidate` diagnostic, and records B0 geometric
+  emergence as the first open obligation. `DASHI/Physics/Closure/AQFTNetReceipt.agda` now records the
+  Haag-Kastler stack contract as a stdlib-only receipt: locally covariant AQFT
+  as a point of the HK 2-functor, isotony, causality, time-slice, descent, and
+  the Klein-Gordon witness surface. `KleinGordonAQFTReceipt.agda` now records
+  the cited Theorem 4.41 free-field stack witness, and
+  `InteractingQFTBoundaryReceipt.agda` records constructive interacting local
+  algebra nets, renormalisation, and coupling calibration as open boundary
+  obligations. Non-flat Levi-Civita import, concrete AQFT algebra-net carriers,
+  GNS/vacuum selection, Born rule derivation, interacting QFT construction,
+  proof-grade B0, and the cohesive bridge theorem remain absent.
 
 - reorder the Paper 1 opening around reader orientation:
   `Paper1_Manuscript.md` and `.tex` now open with the abstract and concise

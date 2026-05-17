@@ -24,10 +24,11 @@ log chi2/dof is larger (`326.09046767953845` / `5219.418540183218`), while
 the leading inverse-covariance mode contributes only `0.006612430351796318` /
 `0.012596343284573172` of chi2. The dominant signal is shape-law alignment:
 the `1, log(phiStar)` subspace accounts for `0.890463699129403` /
-`0.9687052128530349` of chi2. Next admissible action is a new frozen no-refit
-predictor whose strict log residual breaks that log-linear shape law, or an
-accepted projection/covariance convention that justifies a different frozen
-comparison law.
+`0.9687052128530349` of chi2. This older strict-log target is downstream of
+the provider audit below: no frozen no-refit predictor or projection/covariance
+convention can promote until the comparison is rebuilt from a native
+event-level `phi*` provider with the exact CMS `Z+>=1jet` contract. qT-grid
+DYTurbo artifacts remain diagnostics only.
 
 Paper 1 receipt-label cleanup `2026-05-17`:
 `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md` and `.tex` now keep long
@@ -79,6 +80,23 @@ map, and conclusion; target equations are presented as obligation surfaces;
 closure/frontier semantics remain certification infrastructure. No new claims,
 references, figures, sections, or derivation targets were added.
 
+Paper 1 external bridge pack `2026-05-17`:
+`Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md` and `.tex` now include the
+§2 external formal bridge layer. The B0--B5 laws are stated as typed
+obligations: B0 geometric emergence remains open in
+`LeviCivitaBridge.agda`; GR curvature promotion stays suspended downstream of
+B0; the Klein-Gordon AQFT stack witness is bounded by
+`KleinGordonAQFTReceipt.agda`; interacting QFT and coupling calibration stay
+adapter boundaries; compression admissibility is tied to the MDL
+non-increase law; and the honest frontier records the large open obligations
+without claiming completed unification. §11 now names the operational TRBD
+implementation surface and Z+jet/native-`phi*` provider blocker, §12 promotes
+the MDL form of `CompressionAdmissibilityReceipt` into the main text, and
+§14/receipt index include DCHoTT/AQFT/GRQFT rows. `ClaimLedger.md` has the
+matching allowed bridge claim plus non-promotion boundary. Next admissible
+paper action is copyediting and bibliography/PDF validation, not new theorem
+claims.
+
 Drell-Yan DYTurbo FPC provider route `2026-05-17`:
 `scripts/generate_dyturbo_cms_cards.py` now generates fail-closed DYTurbo
 FPC smoke cards and a manifest for the CMS-SMP-20-003 t43 numerator and
@@ -93,7 +111,9 @@ lepton thresholds `25/20 GeV`. The next admissible provider action is either
 a compiled `user/user_cuts.h` implementation of leading/subleading pT ordering
 inside the integrand, or an external ResBos2/SCETlib/DYTurbo artifact already
 using exact CMS fiducial cuts. No promotion is possible from stock-card FPC
-smoke output alone.
+smoke output alone. After the later t43 provider audit, these lepton/FPC
+artifacts are also explicitly non-promoting for strict-log t43 unless they are
+upgraded to native event-level `phi*` and exact CMS `Z+>=1jet` selection.
 
 DYTurbo long-run UI progress `2026-05-17`:
 `scripts/run_dyturbo_with_progress.py` wraps DYTurbo execution and emits JSONL
@@ -125,16 +145,41 @@ GRQFT ambient-framework timeline. DCHoTT dependency intake has advanced:
 `ca8c755af0b26f8f50c5a60d3b7f9384a26f5d0e`, `dashi-agda.agda-lib` includes
 that path, and `DASHI/Geometry/DCHoTTImportShim.agda` typechecks against the
 actual flat modules (`Manifolds`, `FormalDiskBundle`, `G-structure`). The
-receipt remains fail-closed on theorem import: no torsion-free G-structure,
-Levi-Civita adapter, B0 theorem, AQFT net, or GRQFT promotion is claimed.
-Remaining intake items are license clarification and a typed translation
-layer that removes the shim's postulated sockets.
+receipt remains fail-closed on theorem import. `DASHI/Geometry/LeviCivitaBridge.agda`
+now typechecks a non-promoting bridge against the actual DCHoTT `G-structures`
+socket and records B0 geometric emergence as the first open obligation. No
+torsion-free G-structure, Levi-Civita uniqueness adapter, concrete AQFT algebra
+net, or GRQFT promotion is claimed. `DASHI/Physics/Closure/AQFTNetReceipt.agda`
+now records the
+Haag-Kastler point/descent/isotony/causality/time-slice contract as a
+stdlib-only DASHI receipt; it keeps GNS/vacuum, Born rule, representation
+choice, and interacting QFT open. `DASHI/Physics/Closure/KleinGordonAQFTReceipt.agda`
+records the cited Theorem 4.41 Klein-Gordon free-field stack witness while
+keeping concrete algebra-net reconstruction, vacuum selection, and Born-rule
+derivation open. `DASHI/Physics/Closure/InteractingQFTBoundaryReceipt.agda`
+records constructive interacting local algebra nets as the first open QFT
+obligation, with renormalisation and coupling constants staged as adapters.
+Remaining intake items are license clarification, replacing the
+`LeviCivitaBridge` B0 postulate with a proof or imported theorem,
+adding/importing the torsion-free/Levi-Civita specialisation, and refining
+AQFT/Klein-Gordon receipts from bool/string fields into typed
+open-region/local-algebra carriers.
+Post-submission scaffold follow-up `2026-05-17`: `DASHI/Geometry/DCHoTTBridgeObligationIndex.agda`
+now splits B0 into four auditable open sub-obligations
+(`carrierToDSpace`, `waveCoherentToFlat`, `refinementToGStr`,
+`gStrToLeviCivita`) without importing or proving B0. `DASHI/Physics/QFT/AQFTTypedNetSurface.agda`
+adds a typed Haag-Kastler-shaped net interface for regions, local algebras,
+isotony, causality, time-slice, and descent, while leaving C*-algebras, GNS,
+Born rule, vacuum, and interacting QFT open. Both modules are exported through
+`DASHI/Everything.agda`; they are scaffold receipts only and do not change
+Paper 1's non-promotion boundary.
 Follow-up audit corrected the local-overlap state: the repo already has
 `GRConcreteLeviCivita.agda` for the selected flat Minkowski Levi-Civita
 prerequisite, `GRQFTConsumerNextObligation.agda` for constructorless GR/QFT
 consumer fields, and `Docs/PhysicsLaneMaturityMatrix.md` for adapter-boundary
 governance. What remains absent is a non-flat DCHoTT-backed Levi-Civita
-adapter, an `AQFTNetReceipt`, and the B0/cohesive bridge theorem.
+adapter, a concrete AQFT algebra-net implementation, an interacting-QFT
+construction, and the proof-grade B0/cohesive bridge theorem.
 
 Marx algebraic derivative bridge `2026-05-17`:
 `DASHI/Physics/Closure/MarxDialecticalDerivativeReceipt.agda` and

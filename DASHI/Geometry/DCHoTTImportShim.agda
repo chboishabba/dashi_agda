@@ -51,6 +51,18 @@ record DCHoTTImportShimReceipt : Setω where
     actualModuleLayout :
       String
 
+    dependencyCommit :
+      String
+
+    agdaVersionCompatibility :
+      String
+
+    stdlibCompatibility :
+      String
+
+    licenseStatus :
+      String
+
     importsResolve :
       Bool
 
@@ -109,6 +121,14 @@ canonicalDCHoTTImportShimReceipt =
         "DCHoTT-Agda"
     ; actualModuleLayout =
         "flat root modules: Basics, Manifolds, FormalDiskBundle, G-structure"
+    ; dependencyCommit =
+        "ca8c755af0b26f8f50c5a60d3b7f9384a26f5d0e"
+    ; agdaVersionCompatibility =
+        "DCHoTT-Agda README target Agda 2.6.2.2; shim typechecked locally under Agda 2.6.4.3"
+    ; stdlibCompatibility =
+        "DASHI build uses standard-library-2.0 via /usr/share/agda/lib/standard-library.agda-lib"
+    ; licenseStatus =
+        "no license file found in DCHoTT-Agda clone root; redistribution status remains an intake item"
     ; importsResolve =
         true
     ; importsResolveIsTrue =

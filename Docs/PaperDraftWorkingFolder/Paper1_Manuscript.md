@@ -217,6 +217,59 @@ claimed here is not the invention of these classical ingredients, but their
 integration into a typed unification architecture where promotion and
 obstruction are represented explicitly.
 
+### 2.1 External Formal Bridges and the Honest TOE Receipt
+
+DASHI is not presented as an isolated replacement for existing formal
+geometry or algebraic QFT. It is a carrier-and-receipt layer that can be
+bridged to external formal mathematics when the corresponding adapters are
+made explicit. The current bridge layer has six laws, B0--B5, each recorded as
+a typed obligation rather than as a prose promise.
+
+**B0 (geometric emergence).** Wave-coherent and refinement-stable DASHI
+transport should determine a DCHoTT `G-structures` socket. This is the central
+open bridge theorem and the target of the next paper. The current receipt is
+`LeviCivitaBridge.agda`: it typechecks against the cloned DCHoTT-Agda flat
+modules and records B0 as a named postulated obligation, not an imported
+theorem.
+
+**B1 (curvature from nilpotent transport).** The discrete Bianchi and Einstein
+candidate surfaces are downstream of B0. They remain suspended until the
+non-flat metric/Levi-Civita adapter is imported or proved; the current
+manuscript therefore discusses curvature and Einstein tensors as target
+surfaces, not completed GR.
+
+**B2 (local quantum field).** The Haag-Kastler stack route identifies a
+locally covariant AQFT as a point of the relevant HK 2-functor. The
+Klein-Gordon free-field witness is recorded in
+`KleinGordonAQFTReceipt.agda`, which cites the stack result as a bounded
+free-field surface while leaving concrete algebra-net reconstruction, GNS
+state selection, and Born-rule derivation open.
+
+**B3 (interacting boundary).** Interacting QFT, renormalisation, and coupling
+calibration are typed adapter boundaries. The record
+`InteractingQFTBoundaryReceipt.agda` treats constructive interacting local
+algebra nets as the first missing primitive and explicitly blocks Standard
+Model or interacting-QFT promotion.
+
+**B4 (compression admissibility).** Compression is governed by an MDL
+Lyapunov condition: admissible transport must not increase the required
+description length at the active projection grade. This is recorded by the
+compression admissibility receipt and used in the compression section below.
+
+**B5 (honest frontier).** The four large open obligations--mass gap,
+cosmological constant, Born-rule derivation, and coupling unification--are
+not hidden by the architecture. They are named as open receipts. The
+repository file `ExternalFormalImportRoadmapReceipt.agda` records DCHoTT-Agda,
+Haag-Kastler/AQFT-net, and cohesive HoTT as external import candidates and
+keeps them in a suspended state until the corresponding proofs or adapters are
+inhabited.
+
+The honest TOE claim is therefore deliberately weaker than a completed
+unification theorem: DASHI localizes which pieces are derived from carrier
+transport and which pieces require external geometric, algebraic, empirical,
+or calibration input. The absence of an inhabitant is manuscript-relevant
+state, not an editorial disclaimer.
+
 The 15 supersingular-prime coordinate framing, JMD provenance, Base369/trit
 intuition, UFT-C/SWAR implementation context, Markov-after-quotient readings,
 and orbit-shell/signature families are useful for background, appendix, and
@@ -1123,8 +1176,12 @@ recorded by the Drell-Yan strict-log diagnostic receipt. It is also negative:
 3180.211733150705`. The strict-log receipt localizes the failure: full
 covariance reduces chi-square relative to diagonal-only covariance, so the
 failure is not explained by covariance inflation. The main obstruction is the
-log-linear residual subspace. The next theorem target is a frozen no-refit
-route discharging `StrictPassOrthogonalityObligation`, not a prose promotion.
+log-linear residual subspace. Any frozen no-refit route discharging
+`StrictPassOrthogonalityObligation` is downstream of the provider contract:
+the strict-log comparison first requires a native event-level \(\phi^*\)
+provider with the exact CMS \(Z+\geq 1\)-jet selection, not a \(q_T\)-grid
+remapping. Until then, it remains a named theorem target, not a prose
+promotion.
 
 ### Typed Residual Basis Decomposition
 
@@ -1149,6 +1206,17 @@ Drell-Yan strict-log receipt instantiates it with the structural basis
 coverage is high, but the perpendicular residual still fails the strict
 threshold `2.0`, so the TRBD status is `obstructionTypedPartial`; no
 promotable TRBD receipt is constructed.
+
+Operationally, the Drell-Yan TRBD diagnostic decomposes
+\(\Delta\sigma_i=\sigma_i^{\rm data}-\sigma_i^{\rm theory}\) at the transition
+regions around \(\varphi^*\approx0.14\) and \(\varphi^*\approx0.84\), using
+log-linear, log-quadratic, and log-cubic projections. The observed sign change
+near \(\varphi^*=0.1395\) is not treated as endpoint antisymmetry; it is
+recorded as evidence for a two-transition residual basis. The implementation
+surface is `dy_slope_decomposition.py`, while
+`DrellYanLogLinearShapeLawReceipt.agda` binds the strict-log obstruction and
+keeps the stronger lane blocked on a native Z+jet, event-level \(\varphi^*\)
+provider.
 
 This is a methodological contribution independent of the particular
 Drell-Yan predictor. TRBD distinguishes a typed obstruction from a passing
@@ -1191,6 +1259,16 @@ for exact, PNF, and motif
 recoverability witnesses. It also records that the residual carrier is
 preserved, CID identity and semantic identity are separated, and false
 semantic collapse is excluded.
+
+The same receipt also records the MDL form of admissibility:
+\[
+L_{\rm MDL}(T(s))\leq L_{\rm MDL}(s).
+\]
+Thus admissible carrier transport is description-length non-increasing at the
+chosen projection grade. Cone monotonicity and max-severity joins are
+downstream of this condition. Vacuum energy and cosmological-constant terms
+remain MDL-calibration open obligations: no receipt currently supplies a
+description-length bound that would promote those physical claims.
 
 **Boundary.** The receipt status is diagnostic. It does not construct an
 external ITIR runtime authority token, and it does not identify byte-exact CID
@@ -1236,6 +1314,9 @@ stronger physical claims.
 | W3 | Bounded Drell-Yan comparison receipts but constructorless accepted authority | Accepted W3 evidence-authority token | Accepted empirical authority, CMS validation, above-Z promotion |
 | W4 | Local/request surfaces only | `AcceptedDYLuminosityConventionAuthority`, W4 adequacy, Candidate256 calibration, `matterFieldFromW4`, `stressEnergyTensorFromW4` | W4 adequacy, matter field, stress-energy tensor, sourced physics |
 | W5 | Parked / blocked downstream of accepted DY convention | Accepted W5 correction receipt for the intended observable/regime | W5 correction, CT18/LHAPDF agreement, DY convention closure |
+| DCHoTT bridge | `LeviCivitaBridge.agda` shim and `G-structures` socket typecheck | B0 geometric emergence theorem; torsion-free/Levi-Civita specialization | Levi-Civita uniqueness, GR promotion |
+| AQFT net | `AQFTNetReceipt.agda` and `KleinGordonAQFTReceipt.agda` typecheck | Constructive interacting AQFT net; GNS/vacuum adapter; Born-rule derivation | Interacting QFT, Standard Model |
+| GRQFT | `GRQFTConsumerNextObligation.agda` typed consumer surface | B0 plus AQFT net plus coupling calibration plus stress-energy adapter | Full unification claim |
 | GR | Future adapter path from finite differences to non-flat connection and curvature | Prime-difference-to-Riemann adapter bundle, curvature carrier, Ricci contraction, sourced stress-energy interface | Riemann/Ricci/Einstein tensor, Schwarzschild, continuum GR, GRQFT |
 | Cross-domain spine | Shared typed projection-defect / MDL schema `(X, delta, pi, defect, gate, observation, symmetry)` | Quantitative calibration, universality, tractability, domain receipts, recovery equivalence | Chemistry closure, biology prediction, perception fit, TOE promotion |
 | Brain/DNA/synthetic lanes | Non-promoting theorem targets and calibration fixtures | Domain datasets, transition laws, inverse-projection proofs, ranking validation | fMRI validation, DNA blueprint, disease-gene validation, synthetic biology closure |
@@ -1295,6 +1376,12 @@ for the human-readable labels used in the body.
 | Drell-Yan adjacent-ratio lane | `DASHI.Physics.Closure.DrellYanAdjacentRatioEmpiricalLaneReceipt` | `canonicalDrellYanAdjacentRatioEmpiricalLaneReceipt` |
 | Drell-Yan strict-log diagnostic | `DASHI.Physics.Closure.DrellYanStrictLogLinearSubspaceReceipt` | `canonicalDrellYanStrictLogLinearSubspaceReceipt` |
 | Compression admissibility | `DASHI.Physics.Closure.CompressionAdmissibilityReceipt` | `canonicalCompressionAdmissibilityReceipt` |
+| DCHoTT import shim | `DASHI.Geometry.DCHoTTImportShim` | `canonicalDCHoTTImportShimReceipt` |
+| DCHoTT Levi-Civita bridge | `DASHI.Geometry.LeviCivitaBridge` | `canonicalLeviCivitaBridgeReceipt` |
+| AQFT net receipt | `DASHI.Physics.Closure.AQFTNetReceipt` | `canonicalAQFTNetReceipt` |
+| Klein-Gordon AQFT witness | `DASHI.Physics.Closure.KleinGordonAQFTReceipt` | `canonicalKleinGordonAQFTReceipt` |
+| Interacting QFT boundary | `DASHI.Physics.Closure.InteractingQFTBoundaryReceipt` | `canonicalInteractingQFTBoundaryReceipt` |
+| External formal import roadmap | `DASHI.Physics.Closure.ExternalFormalImportRoadmapReceipt` | `canonicalExternalFormalImportRoadmapReceipt` |
 | Cross-domain variational spine | `DASHI.Physics.Closure.CrossDomainVariationalSpine` | `canonicalCrossDomainVariationalSpineBoundary` |
 
 ## 16. What This Paper Does Not Claim
