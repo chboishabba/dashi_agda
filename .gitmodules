@@ -4,3 +4,6 @@
 [submodule "DCHoTT-Agda"]
 	path = DCHoTT-Agda
 	url = https://github.com/felixwellen/DCHoTT-Agda.git
+[submodule "Monster-LILA"]
+	path = Monster-LILA
+	url = https://github.com/meta-introspector/Monster-LILA.git

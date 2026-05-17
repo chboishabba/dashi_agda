@@ -6,6 +6,17 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+Monster / Monster-LILA artifact intake `2026-05-17`:
+`monster` is tracked as a pinned submodule at
+`f2aa01f9077807996675fb1c3fd32f7359395eeb`, and `Monster-LILA` has been added
+as a pinned submodule at `ac5272ec345aed17fd0383e8eca89b2a875a7313`.
+`Docs/MonsterAndLILAExternalArtifactIntake.md` records both as external
+experimental/reference artifacts only. They do not promote DASHI theorem
+authority, Paper 1 claims, DCHoTT/AQFT/GRQFT bridge receipts, or LHC provider
+status. Because the license surface is AGPL/commercial-dual-license flavored,
+future code reuse requires explicit license review; citation, inspection, and
+separate experimental runs are the safe default.
+
 Read-first status note `2026-05-15`: older W9 TODO entries that say "W9 remains
 blocked" are historical unless they explicitly refer to pressure/Qcore routes.
 Current status is narrower: W9 is unblocked only through the accepted MDL

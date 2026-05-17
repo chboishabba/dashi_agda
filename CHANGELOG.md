@@ -2,6 +2,14 @@
 
 ## 2026-05-17
 
+- add Monster and Monster-LILA as external artifact submodules:
+  `monster` is now recognized as the existing pinned
+  `meta-introspector/monster` submodule, and `Monster-LILA` has been added as a
+  pinned `meta-introspector/Monster-LILA` submodule. `Docs/MonsterAndLILAExternalArtifactIntake.md`
+  records both as external experimental/reference artifacts only, with AGPL /
+  commercial-license cautions and no DASHI theorem, Paper 1, DCHoTT/AQFT/GRQFT,
+  or LHC-provider promotion.
+
 - add post-submission DCHoTT/AQFT scaffold surfaces:
   `DASHI/Geometry/DCHoTTBridgeObligationIndex.agda` decomposes B0 into the
   four open bridge obligations `carrierToDSpace`, `waveCoherentToFlat`,
