@@ -138,6 +138,7 @@ import DASHI.Geometry.ConeArrowOrbitStructure
 import DASHI.Geometry.ConeArrowOrientationAsymmetry
 import DASHI.Geometry.ConeArrowShellStratification
 import DASHI.Geometry.ConeMetricCompatibility
+import DASHI.Geometry.DCHoTTImportShim
 import DASHI.Geometry.ConeTimeIsotropy
 import DASHI.Geometry.ContractiveDemo
 import DASHI.Geometry.DefectCollapse
@@ -326,10 +327,21 @@ import DASHI.Physics.Closure.ContinuumLimitTheorem
 import DASHI.Physics.Closure.DiscreteBianchiIdentitySurface
 import DASHI.Physics.Closure.DiscreteEinsteinTensorNextThreadIndex
 import DASHI.Physics.Closure.DiscreteEinsteinVacuumLimitSurface
+import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient
+import DASHI.Physics.Closure.CrossDomainVariationalSpine
+import DASHI.Physics.Closure.DevelopmentalGenomicInverseBridge
+import DASHI.Physics.Closure.DrellYanStrictLogLinearSubspaceReceipt
+import DASHI.Physics.Closure.DrellYanLogLinearShapeLawReceipt
+import DASHI.Physics.Closure.DrellYanAdjacentRatioEmpiricalLaneReceipt
+import DASHI.Physics.Closure.FactorVecConcretePredictionReceipts
+import DASHI.Physics.Closure.FactorVecPhysicalLawProjectionTheorem
+import DASHI.Physics.Closure.FactorVecFalsifiablePredictionLanes
+import DASHI.Physics.Closure.FormalCompressionUniversalityBridge
 import DASHI.Physics.Closure.G3P2OperatorSurface
 import DASHI.Physics.Closure.G3PoincareGalileiCarrierChain
 import DASHI.Physics.Closure.G3SelectedCarrierInstance
 import DASHI.Physics.Closure.G3WaveFunctionOperatorAlgebra
+import DASHI.Physics.Closure.G6AboveThresholdIndependence
 import DASHI.Physics.Closure.G6CrossLaneCommutingTheorem
 import DASHI.Physics.Closure.G6PrerequisiteIndex
 import DASHI.Physics.Closure.GRConcreteLeviCivita
@@ -570,6 +582,9 @@ import DASHI.Physics.Closure.MDLFejerAxiomsShift
 import DASHI.Physics.Closure.MDLLyapunovCompatibility
 import DASHI.Physics.Closure.MDLLyapunovShiftInstance
 import DASHI.Physics.Closure.MDLTradeoffShiftInstance
+import DASHI.Physics.Closure.CalculusCompletionPack
+import DASHI.Physics.Closure.ExternalFormalImportRoadmapReceipt
+import DASHI.Physics.Closure.MarxDialecticalDerivativeReceipt
 import DASHI.Physics.Closure.MinimalCrediblePhysicsClosure
 import DASHI.Physics.Closure.MinimalCrediblePhysicsClosureShiftInstance
 import DASHI.Physics.Closure.MinimalCrediblePhysicsClosureValidation
@@ -676,6 +691,7 @@ import DASHI.Physics.Closure.PhysicsClosureSummary
 import DASHI.Physics.Closure.PhysicsClosureTheoremChecklist
 import DASHI.Physics.Closure.PhysicsClosureTheoremLadder
 import DASHI.Physics.Closure.P0BlockadeProofObligations
+import DASHI.Physics.Closure.PostEntropyUniversalityTheorem
 import DASHI.Physics.Closure.TemporalSheafProofObligations
 import DASHI.Physics.Closure.PolarizationZLift
 import DASHI.Physics.Closure.QuadraticToCliffordBridgeTheorem
@@ -1012,6 +1028,8 @@ import Ontology.BrainComputer.LogicTlureyQuotientBridge
 import Ontology.Contracts
 import Ontology.DNA.TriTruthScanOrderBridge
 import Ontology.GodelLattice
+import Ontology.GodelScalarization
+import Ontology.GodelScalarizationTransportDerived
 import Ontology.Hecke.PNFResidualBridge
 import Ontology.Hecke.PrimeHeckeEigenMotifPipeline
 import Ontology.Hecke.Scan

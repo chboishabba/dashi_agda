@@ -12,6 +12,25 @@ This scope records what is available for a future
 `MaxwellGaugeFieldEquationTheorem` and what is still missing. It does not claim
 G2.
 
+## 2026-05-17 Status Sync
+
+The newer `G2SFGCGaugeFieldSchemaExtension` surface clears the
+direction-indexed SFGC schema-adoption blocker for current core-facing
+consumers via `canonicalG2SFGCGaugeFieldSchemaExtensionReceipt` and
+`noRemainingG2SFGCSchemaExtensionMissing`. That is not the same as this
+Maxwell field-equation scope.
+
+For the Maxwell/abelian-gauge row in Paper 1, the current adapter boundary is
+therefore: bind the adopted G2 schema into this Maxwell scope; supply an
+exterior-derivative/nilpotency layer, Hodge star, source-current extraction,
+U(1) sector/action restriction, covariance law, units, and accepted EM
+conventions. The older direct route below still records the missing
+`DiscreteCurvatureCarrier for SFGC.GaugeField` and
+`curvatureToFieldStrengthFromShiftGaugeConnection` obligations for this
+Maxwell-specific surface. No `MaxwellGaugeFieldEquationTheorem`,
+`DiscreteCurvatureCarrier SFGC.GaugeField`, or field-equation promotion follows
+from schema adoption alone.
+
 ## Already Inhabited Inputs
 
 The scope imports the current theorem-backed canonical gauge/matter surfaces:

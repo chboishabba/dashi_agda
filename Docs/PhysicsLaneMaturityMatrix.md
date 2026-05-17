@@ -26,6 +26,29 @@ more precise question "what closure obligations remain?"
 | GR curvature / GR-QFT consumer | `W5` / `W-GR` | yes | yes | yes | no | no | Known-limits GR/QFT bridge and consumer surfaces exist; richer downstream GR/QFT closure and empirical validation remain blocked. |
 | Predictions / empirical adequacy | `W-EMP` | yes | yes | yes | no | no | Empirical/calibration, provider-intake, HEPData residual, and authority-gate lanes exist; accepted empirical adequacy remains externally blocked. |
 
+## Cross-Row Adapter Boundary Matrix
+
+This table is the canonical non-promoting control surface for the six-row
+physics adapter boundary. The paper draft may summarize it, but this file is
+the repo-side claim-control source.
+
+| Target role | DASHI derivation engine already present | Adapter still needed | Boundary gates |
+|---|---|---|---|
+| Maxwell / abelian gauge | Static finite gauge surfaces, recovered matter-field inputs, conditional cochain/curvature obligations, and Maxwell equation scope. Homogeneous/Bianchi side is expected to follow after a real exterior-derivative or discrete-curvature carrier exists. | `DiscreteCurvatureCarrier SFGC.GaugeField`, curvature-to-field-strength bridge, nontrivial matter-current extraction, Hodge/codifferential surface, sourced equation consumer. | metric, calibration |
+| Yang-Mills / non-abelian gauge | Gauge/matter bundle and sector-restriction targets exist; current executable support is finite/static and abelian-like. | Lie algebra bracket and Jacobi witness, representation action, trace/Killing normalization, non-abelian connection with `F = dA + A wedge A`, covariant derivative, `D F = 0`, and `D * F = J`. | metric, representation, calibration |
+| QFT commutator | Selected wave-function operator commutator, pointwise antisymmetry/Jacobi, filtered bracket compatibility, and a thin QFT adapter exist. | Local observable net, Hilbert/GNS representation, vacuum/state functional, CCR/CAR representation witness, statistics grading, and interaction/source law. | representation, statistics/vacuum, calibration |
+| GR curvature | Known-limits GR bridge, first-order gravity scope, finite-r Bianchi sidecars, selected non-flat metric data, and flat Levi-Civita diagnostics exist. | Non-flat Levi-Civita/Christoffel law, curvature-as-connection defect, Ricci/scalar contraction, Einstein tensor law, physical stress-energy source, Newton/`8piG` normalization. | metric, calibration |
+| Measurement / uncertainty | Projection/fibre vocabulary, measurement shell, `BornLike` weight interface, selected commutator algebra, and empirical projection rejection surfaces exist. | Born probability law, outcome sigma algebra, normalization, expectation/variance, uncertainty propagation, empirical observable map, and measurement-to-projection receipt. | Born rule, metric, calibration |
+| Sector splitting / Standard Model | Nominal `SU3 x SU2 x U1` gauge label, abstract gauge/matter bundle, constant gauge-recovery packages, and U(1) sector-restriction obligations exist. | Typed coset `G/H` carrier, subgroup-preservation law, SM multiplet table, hypercharge assignments, Higgs representation, symmetry-breaking/Goldstone sector, and gauge/Yukawa coupling normalization. | representation, calibration |
+
+Boundary gates are intentionally irreducible interfaces. They are not treated
+as engineering debt: `metric` covers Hodge stars, contractions, Levi-Civita
+selection, and physical stress-energy dimensions; `representation` covers
+matter multiplets and source-current definitions; `statistics/vacuum` covers
+CCR/CAR choice and GNS/vacuum selection; `Born rule` covers probability
+semantics; `calibration` covers units, coupling constants, charge
+normalization, and empirical authority.
+
 ## Closure Obligations
 
 | Lane | Next closure obligation |

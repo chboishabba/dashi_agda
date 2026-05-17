@@ -8,6 +8,16 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Read-First Supersession Note
+
+For current gate posture, read `Docs/CurrentGateStatus.md` dated `2026-05-15`
+before using older rows in this board. Historical route-intake rows remain
+useful for provenance, but they are superseded where current status records
+bounded positives for G2 schema extension, G3 constructive finite-support
+subtraction, tracked G6 commuting, or W9 unblocked through the MDL termination
+seam. Older "blocked" wording should be read as applying to the broader/full
+gate route unless it is explicitly revalidated as current.
+
 ## W4/W5 Public pT Diagnostic Round
 
 Round date: `2026-05-13`

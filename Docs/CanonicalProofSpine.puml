@@ -1,5 +1,5 @@
 @startuml
-title Canonical Proof Spine
+title Canonical Proof Spine - repo-roadmap context, not Paper 1 completed-unification claim
 left to right direction
 
 skinparam shadowing false
@@ -30,8 +30,8 @@ rectangle "Strong quadratic forcing\nContractionForcesQuadraticStrong\n[proved]\
 rectangle "Lorentz / signature bridge\nContractionQuadraticToSignatureBridgeTheorem\n[proved + bridge]" as SigBridge #dcfce7
 rectangle "Clifford bridge\nQuadraticToCliffordBridgeTheorem\n[proved + bridge]" as CliffBridge #dcfce7
 rectangle "Canonical contraction -> Clifford bundle\nCanonicalContractionToCliffordBridgeTheorem\n[canonical assembly]" as CliffBundle #fef3c7
-rectangle "Full closure instance\nPhysicsClosureFullInstance\n[current canonical closure package]" as FullClosure #fef3c7
-rectangle "Unified theorem owner\nUnifiedPhysicsTheorem\n[strong claim owner]" as UnifiedOwner #fef3c7
+rectangle "Full closure instance\nPhysicsClosureFullInstance\n[repo theorem-owner context;\nnot Paper 1 completed closure]" as FullClosure #fef3c7
+rectangle "Unified theorem owner\nUnifiedPhysicsTheorem\n[repo-native owner;\nnot accepted full-unification claim]" as UnifiedOwner #fef3c7
 rectangle "Abstract/canonical seam owner\nPhysicsUnificationToCanonicalClosureAdapter\n[adapter theorem owner]" as AdapterOwner #fef3c7
 rectangle "Atom/chemistry recovery carrier\nAtomicChemistryRecoveryTheorem\n[packaging + bridge owner]" as AtomOwner #fef3c7
 rectangle "Minimal credible closure\nMinimalCrediblePhysicsClosureShiftInstance\n[current milestone]" as MinimalCredible #fef3c7
@@ -72,7 +72,8 @@ end note
 
 note bottom of UnifiedOwner
 This is where the strong repo-native claim lives now.
-It does not erase the remaining proof gates.
+It does not erase the remaining proof gates and is not
+the Paper 1 positive claim inventory by itself.
 end note
 
 note bottom of AtomOwner

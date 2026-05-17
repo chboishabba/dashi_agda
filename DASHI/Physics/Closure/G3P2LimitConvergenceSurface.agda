@@ -4,24 +4,28 @@ open import Agda.Primitive using (Set; Setω; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _==_)
 open import Agda.Builtin.String using (String)
-open import Data.Integer as ℤ using (∣_∣)
+open import Data.Integer as ℤ using (∣_∣; +0; +[1+_]; -[1+_])
 open import Data.List.Base using (List; _∷_; []; _++_)
 open import Data.Nat.Base using (_∸_; _≤_; z≤n; s≤s)
-open import Data.Rational as Rat using (↥_; ↧ₙ_)
+open import Data.Rational as Rat using (↥_; ↧ₙ_; -_)
 import Data.Rational.Properties as RatProps
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
-open import Relation.Nullary.Decidable.Core using (yes; no)
+open import Relation.Nullary.Decidable.Core using (Dec; yes; no)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym)
 
 open import DASHI.Core.Q using (ℚ; 0ℚ; 1ℚ)
 import DASHI.Arithmetic.ArithmeticIntegerEmbedding as AIE
+import DASHI.Arithmetic.NatBoolEquality as NatBoolEq
+import DASHI.Arithmetic.VpAddUnequal as VpAddUnequal
+import DASHI.Arithmetic.VpDepth as VpDepth
 import Ultrametric as UMetric
 import DASHI.Geometry.CompleteUltrametric as CompleteU
 import DASHI.Geometry.CompleteUltrametricNat as CompleteUNat
 import DASHI.Physics.Closure.G3ConcreteOperators as G3Concrete
 import DASHI.Physics.Closure.G3P2AdicNormMetricSurface as G3Norm
 import DASHI.Physics.Closure.G3WaveFunctionOperatorAlgebra as G3Wave
+import MonsterOntos as MO
 import Ontology.GodelLattice as GL
 
 ------------------------------------------------------------------------
@@ -191,6 +195,18 @@ matrixElementP2Valuation q =
   ∸
   AIE.vp 2 (↧ₙ q)
 
+matrixElementP2ValuationNegationInvariant :
+  (q : ℚ) →
+  matrixElementP2Valuation (- q)
+  ≡
+  matrixElementP2Valuation q
+matrixElementP2ValuationNegationInvariant (Rat.mkℚ -[1+ n ] d prf) =
+  refl
+matrixElementP2ValuationNegationInvariant (Rat.mkℚ +0 d prf) =
+  refl
+matrixElementP2ValuationNegationInvariant (Rat.mkℚ +[1+ n ] d prf) =
+  refl
+
 ¬_ :
   Set →
   Set
@@ -249,6 +265,66 @@ minNat-right-lower (suc m) (suc n) =
 ≤-minNat {suc _} {suc _} {zero} _ ()
 ≤-minNat {suc k} {suc m} {suc n} (s≤s k≤m) (s≤s k≤n) =
   s≤s (≤-minNat {k} {m} {n} k≤m k≤n)
+
+MatrixElementP2ValuationDifferenceUltrametricLaw :
+  Set
+MatrixElementP2ValuationDifferenceUltrametricLaw =
+  (x y : ℚ) →
+  minNat
+    (matrixElementP2Valuation x)
+    (matrixElementP2Valuation y)
+  ≤
+  matrixElementP2Valuation (x Rat.- y)
+
+record MatrixElementP2ValuationDifferenceUltrametricPrerequisiteSurface : Set where
+  field
+    availableBoundedNaturalAddMinUnequal :
+      (p : MO.SSP) →
+      (x y : AIE.Int) →
+      NatBoolEq.natEq (AIE.alphaAt p x y) (AIE.betaAt p x y)
+      ≡
+      false →
+      AIE.gammaAt p x y
+      ≡
+      VpDepth.minNat (AIE.alphaAt p x y) (AIE.betaAt p x y)
+
+    exactAvailableBoundedNaturalTheoremName :
+      String
+
+    exactAvailableBoundedNaturalTheoremType :
+      String
+
+    exactRemainingRationalNormalizationBridgeName :
+      String
+
+    exactRemainingRationalNormalizationBridgeType :
+      String
+
+    exactTargetPrimitiveName :
+      String
+
+    exactTargetPrimitiveType :
+      String
+
+matrixElementP2ValuationDifferenceUltrametricPrerequisites :
+  MatrixElementP2ValuationDifferenceUltrametricPrerequisiteSurface
+matrixElementP2ValuationDifferenceUltrametricPrerequisites =
+  record
+    { availableBoundedNaturalAddMinUnequal =
+        VpAddUnequal.vp-add-min-unequal
+    ; exactAvailableBoundedNaturalTheoremName =
+        "DASHI.Arithmetic.VpAddUnequal.vp-add-min-unequal"
+    ; exactAvailableBoundedNaturalTheoremType =
+        "(p : SSP) (x y : AIE.Int) -> NatBoolEq.natEq (AIE.alphaAt p x y) (AIE.betaAt p x y) ≡ false -> AIE.gammaAt p x y ≡ VpDepth.minNat (AIE.alphaAt p x y) (AIE.betaAt p x y)"
+    ; exactRemainingRationalNormalizationBridgeName =
+        "matrixElementP2ValuationRationalDifferenceNormalisationBridge"
+    ; exactRemainingRationalNormalizationBridgeType =
+        "(x y : ℚ) -> minNat (matrixElementP2Valuation x) (matrixElementP2Valuation y) <= matrixElementP2Valuation (x Rat.- y), derived from normalized numerator/denominator arithmetic plus bounded AIE.vp denominator transport"
+    ; exactTargetPrimitiveName =
+        "matrixElementP2ValuationDifferenceUltrametric"
+    ; exactTargetPrimitiveType =
+        "MatrixElementP2ValuationDifferenceUltrametricLaw"
+    }
 
 record G3SelectedMatrixIndexPair : Set where
   constructor _,ᵐ_
@@ -576,6 +652,231 @@ SelectedSubtractionCandidateEntriesAreNonzero A# B# =
     0ℚ
   )
 
+SelectedSubtractionEntryIsNonzero :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  G3SelectedMatrixIndexPair →
+  Set
+SelectedSubtractionEntryIsNonzero A# B# entry =
+  ¬
+  (
+    selectedOperatorMatrixElement
+      (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#))
+      (source entry)
+      (target entry)
+    ≡
+    0ℚ
+  )
+
+record G3SelectedSubtractionCertifiedSupport
+  (A# B# : G3ConstructiveFiniteSupportOperator) : Set where
+  field
+    support :
+      List G3SelectedMatrixIndexPair
+
+    emptySupportSentinel :
+      Nat
+
+    supportEntriesAreNonzero :
+      (entry : G3SelectedMatrixIndexPair) →
+      MatrixIndexPairListed entry support →
+      SelectedSubtractionEntryIsNonzero A# B# entry
+
+    supportEntriesComeFromCandidate :
+      (entry : G3SelectedMatrixIndexPair) →
+      MatrixIndexPairListed entry support →
+      MatrixIndexPairListed
+        entry
+        (selectedFiniteSupportOperatorSubtractionSupportCandidate A# B#)
+
+    supportCoversEveryNonzeroMatrixElement :
+      (source target : G3Wave.SelectedG3State) →
+      ¬
+      (
+        selectedOperatorMatrixElement
+          (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#))
+          source
+          target
+        ≡
+        0ℚ
+      ) →
+      MatrixIndexPairListed (source ,ᵐ target) support
+
+selectedSubtractionEntryZeroDec :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  (entry : G3SelectedMatrixIndexPair) →
+  Dec
+  (
+    selectedOperatorMatrixElement
+      (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#))
+      (source entry)
+      (target entry)
+    ≡
+    0ℚ
+  )
+selectedSubtractionEntryZeroDec A# B# entry =
+  RatProps._≟_
+    (selectedOperatorMatrixElement
+      (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#))
+      (source entry)
+      (target entry))
+    0ℚ
+
+selectedSubtractionFilteredSupportFromCandidateList :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  List G3SelectedMatrixIndexPair →
+  List G3SelectedMatrixIndexPair
+selectedSubtractionFilteredSupportFromCandidateList A# B# [] =
+  []
+selectedSubtractionFilteredSupportFromCandidateList A# B# (entry ∷ rest)
+  with selectedSubtractionEntryZeroDec A# B# entry
+... | yes _ =
+  selectedSubtractionFilteredSupportFromCandidateList A# B# rest
+... | no _ =
+  entry
+  ∷ selectedSubtractionFilteredSupportFromCandidateList A# B# rest
+
+selectedFiniteSupportOperatorSubtractionFilteredSupportCandidate :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  List G3SelectedMatrixIndexPair
+selectedFiniteSupportOperatorSubtractionFilteredSupportCandidate A# B# =
+  selectedSubtractionFilteredSupportFromCandidateList
+    A#
+    B#
+    (selectedFiniteSupportOperatorSubtractionSupportCandidate A# B#)
+
+selectedSubtractionFilteredSupportEntriesAreNonzeroFromCandidateList :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  (candidate : List G3SelectedMatrixIndexPair) →
+  (entry : G3SelectedMatrixIndexPair) →
+  MatrixIndexPairListed
+    entry
+    (selectedSubtractionFilteredSupportFromCandidateList A# B# candidate) →
+  SelectedSubtractionEntryIsNonzero A# B# entry
+selectedSubtractionFilteredSupportEntriesAreNonzeroFromCandidateList
+  A# B# [] entry ()
+selectedSubtractionFilteredSupportEntriesAreNonzeroFromCandidateList
+  A# B# (head ∷ rest) entry listed
+  with selectedSubtractionEntryZeroDec A# B# head
+... | yes _ =
+  selectedSubtractionFilteredSupportEntriesAreNonzeroFromCandidateList
+    A#
+    B#
+    rest
+    entry
+    listed
+... | no headNonzero =
+  kept listed
+  where
+    kept :
+      MatrixIndexPairListed
+        entry
+        (head
+          ∷ selectedSubtractionFilteredSupportFromCandidateList A# B# rest) →
+      SelectedSubtractionEntryIsNonzero A# B# entry
+    kept here =
+      headNonzero
+    kept (there restListed) =
+      selectedSubtractionFilteredSupportEntriesAreNonzeroFromCandidateList
+        A#
+        B#
+        rest
+        entry
+        restListed
+
+selectedSubtractionFilteredSupportEntriesComeFromCandidateList :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  (candidate : List G3SelectedMatrixIndexPair) →
+  (entry : G3SelectedMatrixIndexPair) →
+  MatrixIndexPairListed
+    entry
+    (selectedSubtractionFilteredSupportFromCandidateList A# B# candidate) →
+  MatrixIndexPairListed entry candidate
+selectedSubtractionFilteredSupportEntriesComeFromCandidateList
+  A# B# [] entry ()
+selectedSubtractionFilteredSupportEntriesComeFromCandidateList
+  A# B# (head ∷ rest) entry listed
+  with selectedSubtractionEntryZeroDec A# B# head
+... | yes _ =
+  there
+    (selectedSubtractionFilteredSupportEntriesComeFromCandidateList
+      A#
+      B#
+      rest
+      entry
+      listed)
+... | no _ =
+  kept listed
+  where
+    kept :
+      MatrixIndexPairListed
+        entry
+        (head
+          ∷ selectedSubtractionFilteredSupportFromCandidateList A# B# rest) →
+      MatrixIndexPairListed entry (head ∷ rest)
+    kept here =
+      here
+    kept (there restListed) =
+      there
+        (selectedSubtractionFilteredSupportEntriesComeFromCandidateList
+          A#
+          B#
+          rest
+          entry
+          restListed)
+
+selectedSubtractionFilteredSupportCoversCandidateListedEntry :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  (candidate : List G3SelectedMatrixIndexPair) →
+  (entry : G3SelectedMatrixIndexPair) →
+  SelectedSubtractionEntryIsNonzero A# B# entry →
+  MatrixIndexPairListed entry candidate →
+  MatrixIndexPairListed
+    entry
+    (selectedSubtractionFilteredSupportFromCandidateList A# B# candidate)
+selectedSubtractionFilteredSupportCoversCandidateListedEntry
+  A# B# [] entry entryNonzero ()
+selectedSubtractionFilteredSupportCoversCandidateListedEntry
+  A# B# (head ∷ rest) entry entryNonzero listed
+  with selectedSubtractionEntryZeroDec A# B# head
+... | yes headZero =
+  discarded listed
+  where
+    discarded :
+      MatrixIndexPairListed entry (head ∷ rest) →
+      MatrixIndexPairListed
+        entry
+        (selectedSubtractionFilteredSupportFromCandidateList A# B# rest)
+    discarded here =
+      ⊥-elim (entryNonzero headZero)
+    discarded (there restListed) =
+      selectedSubtractionFilteredSupportCoversCandidateListedEntry
+        A#
+        B#
+        rest
+        entry
+        entryNonzero
+        restListed
+... | no _ =
+  kept listed
+  where
+    kept :
+      MatrixIndexPairListed entry (head ∷ rest) →
+      MatrixIndexPairListed
+        entry
+        (head
+          ∷ selectedSubtractionFilteredSupportFromCandidateList A# B# rest)
+    kept here =
+      here
+    kept (there restListed) =
+      there
+        (selectedSubtractionFilteredSupportCoversCandidateListedEntry
+          A#
+          B#
+          rest
+          entry
+          entryNonzero
+          restListed)
+
 selectedFiniteSupportOperatorSubtractionCandidateCoversEveryNonzero :
   (A# B# : G3ConstructiveFiniteSupportOperator) →
   (src tgt : G3Wave.SelectedG3State) →
@@ -638,6 +939,94 @@ selectedFiniteSupportOperatorSubtractionSupportWitnessFromCandidate
           A#
           B#
     }
+
+selectedFiniteSupportOperatorSubtractionSupportWitnessFromCertified :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  G3SelectedSubtractionCertifiedSupport A# B# →
+  G3FiniteNonzeroMatrixSupportWitness
+    (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#))
+selectedFiniteSupportOperatorSubtractionSupportWitnessFromCertified
+  A# B# certified =
+  record
+    { support =
+        G3SelectedSubtractionCertifiedSupport.support certified
+    ; emptySupportSentinel =
+        G3SelectedSubtractionCertifiedSupport.emptySupportSentinel certified
+    ; supportEntriesAreNonzero =
+        G3SelectedSubtractionCertifiedSupport.supportEntriesAreNonzero certified
+    ; supportCoversEveryNonzeroMatrixElement =
+        G3SelectedSubtractionCertifiedSupport.supportCoversEveryNonzeroMatrixElement
+          certified
+    }
+
+selectedSubtractionCertifiedSupportFromCandidate :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  Nat →
+  SelectedSubtractionCandidateEntriesAreNonzero A# B# →
+  G3SelectedSubtractionCertifiedSupport A# B#
+selectedSubtractionCertifiedSupportFromCandidate
+  A# B# sentinel candidateEntriesAreNonzero =
+  record
+    { support =
+        selectedFiniteSupportOperatorSubtractionSupportCandidate A# B#
+    ; emptySupportSentinel =
+        sentinel
+    ; supportEntriesAreNonzero =
+        candidateEntriesAreNonzero
+    ; supportEntriesComeFromCandidate =
+        λ _ listed → listed
+    ; supportCoversEveryNonzeroMatrixElement =
+        selectedFiniteSupportOperatorSubtractionCandidateCoversEveryNonzero
+          A#
+          B#
+    }
+
+selectedFiniteSupportOperatorSubtractionCertifiedSupport :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  Nat →
+  G3SelectedSubtractionCertifiedSupport A# B#
+selectedFiniteSupportOperatorSubtractionCertifiedSupport A# B# sentinel =
+  record
+    { support =
+        selectedFiniteSupportOperatorSubtractionFilteredSupportCandidate A# B#
+    ; emptySupportSentinel =
+        sentinel
+    ; supportEntriesAreNonzero =
+        selectedSubtractionFilteredSupportEntriesAreNonzeroFromCandidateList
+          A#
+          B#
+          (selectedFiniteSupportOperatorSubtractionSupportCandidate A# B#)
+    ; supportEntriesComeFromCandidate =
+        selectedSubtractionFilteredSupportEntriesComeFromCandidateList
+          A#
+          B#
+          (selectedFiniteSupportOperatorSubtractionSupportCandidate A# B#)
+    ; supportCoversEveryNonzeroMatrixElement =
+        λ src tgt subtractionNonzero →
+          selectedSubtractionFilteredSupportCoversCandidateListedEntry
+            A#
+            B#
+            (selectedFiniteSupportOperatorSubtractionSupportCandidate A# B#)
+            (src ,ᵐ tgt)
+            subtractionNonzero
+            (selectedFiniteSupportOperatorSubtractionCandidateCoversEveryNonzero
+              A#
+              B#
+              src
+              tgt
+              subtractionNonzero)
+    }
+
+selectedFiniteSupportOperatorSubtractionSupportWitness :
+  (A# B# : G3ConstructiveFiniteSupportOperator) →
+  Nat →
+  G3FiniteNonzeroMatrixSupportWitness
+    (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#))
+selectedFiniteSupportOperatorSubtractionSupportWitness A# B# sentinel =
+  selectedFiniteSupportOperatorSubtractionSupportWitnessFromCertified
+    A#
+    B#
+    (selectedFiniteSupportOperatorSubtractionCertifiedSupport A# B# sentinel)
 
 G3FiniteSupportOperatorFiltrationDegree :
   G3ConstructiveFiniteSupportOperator →
@@ -772,6 +1161,21 @@ record G3FiniteSupportDifferenceNormLawSurface : Setω where
         (G3Wave.waveFunctionOperatorNegation
           (G3Wave.waveFunctionOperatorSubtraction A B))
 
+    matrixElementP2ValuationNegationInvariantPrimitive :
+      (q : ℚ) →
+      matrixElementP2Valuation (- q)
+      ≡
+      matrixElementP2Valuation q
+
+    requestedMatrixElementP2ValuationDifferenceUltrametricName :
+      String
+
+    requestedMatrixElementP2ValuationDifferenceUltrametricType :
+      String
+
+    matrixElementP2ValuationDifferenceUltrametricPrerequisiteSurfacePrimitive :
+      MatrixElementP2ValuationDifferenceUltrametricPrerequisiteSurface
+
     selectedSubtractionSupportCandidate :
       (A# B# : G3ConstructiveFiniteSupportOperator) →
       List G3SelectedMatrixIndexPair
@@ -803,6 +1207,37 @@ record G3FiniteSupportDifferenceNormLawSurface : Setω where
           (operator A#)
           (operator B#))
 
+    selectedSubtractionCertifiedSupportType :
+      (A# B# : G3ConstructiveFiniteSupportOperator) →
+      Set
+
+    selectedSubtractionSupportWitnessFromCertified :
+      (A# B# : G3ConstructiveFiniteSupportOperator) →
+      selectedSubtractionCertifiedSupportType A# B# →
+      G3FiniteNonzeroMatrixSupportWitness
+        (G3Wave.waveFunctionOperatorSubtraction
+          (operator A#)
+          (operator B#))
+
+    selectedSubtractionSupportWitnessPrimitive :
+      (A# B# : G3ConstructiveFiniteSupportOperator) →
+      Nat →
+      G3FiniteNonzeroMatrixSupportWitness
+        (G3Wave.waveFunctionOperatorSubtraction
+          (operator A#)
+          (operator B#))
+
+    selectedSubtractionCertifiedSupportPrimitive :
+      (A# B# : G3ConstructiveFiniteSupportOperator) →
+      Nat →
+      selectedSubtractionCertifiedSupportType A# B#
+
+    selectedSubtractionCertifiedSupportFromCandidatePrimitive :
+      (A# B# : G3ConstructiveFiniteSupportOperator) →
+      Nat →
+      SelectedSubtractionCandidateEntriesAreNonzero A# B# →
+      selectedSubtractionCertifiedSupportType A# B#
+
     exactFilledDifferencePrimitiveName :
       String
 
@@ -810,6 +1245,12 @@ record G3FiniteSupportDifferenceNormLawSurface : Setω where
       String
 
     requestedSubtractionSupportWitnessType :
+      String
+
+    requestedCertifiedSubtractionSupportName :
+      String
+
+    requestedCertifiedSubtractionSupportType :
       String
 
     requestedDifferenceNormSymmetryLawType :
@@ -850,18 +1291,40 @@ canonicalG3FiniteSupportDifferenceNormLawSurface =
         selectedFiniteSupportOperatorDifferenceNormIndexDegreeSoundness
     ; subtractionSymmetryPointwise =
         selectedWaveFunctionOperatorSubtractionSymmetryPointwise
+    ; matrixElementP2ValuationNegationInvariantPrimitive =
+        matrixElementP2ValuationNegationInvariant
+    ; requestedMatrixElementP2ValuationDifferenceUltrametricName =
+        "matrixElementP2ValuationDifferenceUltrametric"
+    ; requestedMatrixElementP2ValuationDifferenceUltrametricType =
+        "MatrixElementP2ValuationDifferenceUltrametricLaw = (x y : ℚ) -> minNat (matrixElementP2Valuation x) (matrixElementP2Valuation y) <= matrixElementP2Valuation (x Rat.- y)"
+    ; matrixElementP2ValuationDifferenceUltrametricPrerequisiteSurfacePrimitive =
+        matrixElementP2ValuationDifferenceUltrametricPrerequisites
     ; selectedSubtractionSupportCandidate =
         selectedFiniteSupportOperatorSubtractionSupportCandidate
     ; selectedSubtractionSupportCandidateCoversEveryNonzero =
         selectedFiniteSupportOperatorSubtractionCandidateCoversEveryNonzero
     ; selectedSubtractionSupportWitnessFromCandidate =
         selectedFiniteSupportOperatorSubtractionSupportWitnessFromCandidate
+    ; selectedSubtractionCertifiedSupportType =
+        G3SelectedSubtractionCertifiedSupport
+    ; selectedSubtractionSupportWitnessFromCertified =
+        selectedFiniteSupportOperatorSubtractionSupportWitnessFromCertified
+    ; selectedSubtractionSupportWitnessPrimitive =
+        selectedFiniteSupportOperatorSubtractionSupportWitness
+    ; selectedSubtractionCertifiedSupportPrimitive =
+        selectedFiniteSupportOperatorSubtractionCertifiedSupport
+    ; selectedSubtractionCertifiedSupportFromCandidatePrimitive =
+        selectedSubtractionCertifiedSupportFromCandidate
     ; exactFilledDifferencePrimitiveName =
         "selectedFiniteSupportOperatorDifferenceNormIndex : (A# B# : G3ConstructiveFiniteSupportOperator) -> G3FiniteNonzeroMatrixSupportWitness (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#)) -> Nat"
     ; requestedSubtractionSupportWitnessName =
         "selectedFiniteSupportOperatorSubtractionSupportWitness"
     ; requestedSubtractionSupportWitnessType =
-        "Closed conditionally as selectedFiniteSupportOperatorSubtractionSupportWitnessFromCandidate : (A# B# : G3ConstructiveFiniteSupportOperator) -> Nat -> SelectedSubtractionCandidateEntriesAreNonzero A# B# -> G3FiniteNonzeroMatrixSupportWitness (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#)); unconditional closure needs exact cancellation-filtered support entries"
+        "Closed by selectedFiniteSupportOperatorSubtractionCertifiedSupport plus selectedFiniteSupportOperatorSubtractionSupportWitnessFromCertified : (A# B# : G3ConstructiveFiniteSupportOperator) -> Nat -> G3FiniteNonzeroMatrixSupportWitness (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#)); the older union-candidate path remains available from SelectedSubtractionCandidateEntriesAreNonzero"
+    ; requestedCertifiedSubtractionSupportName =
+        "G3SelectedSubtractionCertifiedSupport"
+    ; requestedCertifiedSubtractionSupportType =
+        "Inhabited by selectedFiniteSupportOperatorSubtractionCertifiedSupport : (A# B# : G3ConstructiveFiniteSupportOperator) -> Nat -> G3SelectedSubtractionCertifiedSupport A# B#; it filters selectedFiniteSupportOperatorSubtractionSupportCandidate by rational zero equality and proves nonzero entries, candidate origin, and nonzero coverage"
     ; requestedDifferenceNormSymmetryLawType =
         "(A# B# : G3ConstructiveFiniteSupportOperator) -> (AB# : G3FiniteNonzeroMatrixSupportWitness (G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#))) -> (BA# : G3FiniteNonzeroMatrixSupportWitness (G3Wave.waveFunctionOperatorSubtraction (operator B#) (operator A#))) -> selectedFiniteSupportOperatorDifferenceNormIndex A# B# AB# ≡ selectedFiniteSupportOperatorDifferenceNormIndex B# A# BA#"
     ; requestedDifferenceNormUltrametricLawType =
@@ -871,9 +1334,8 @@ canonicalG3FiniteSupportDifferenceNormLawSurface =
     ; exactNextBracketProductSupportBlocker =
         "selectedFiniteSupportOperatorProductSupportWitness : (A# B# : G3ConstructiveFiniteSupportOperator) -> G3FiniteNonzeroMatrixSupportWitness (G3Wave.operatorCompose (operator A#) (operator B#)); bracket closure then also needs subtraction support for operatorCommutator A B = operatorCompose A B - operatorCompose B A"
     ; exactRemainingDifferenceNormLawBlockers =
-        "The finite union support candidate for A# - B# now covers every nonzero difference entry; the exact witness still needs SelectedSubtractionCandidateEntriesAreNonzero, i.e. a cancellation filter/proof that each listed candidate entry is nonzero after subtraction"
-        ∷ "Pointwise subtraction antisymmetry exists, but no matrixElementP2Valuation invariance law is available for negated rational matrix elements, so witness-independent norm symmetry is still blocked"
-        ∷ "No p2 valuation inequality for rational differences is imported here, so the ultrametric law for selected matrix elements is still unavailable"
+        "matrixElementP2ValuationNegationInvariant is closed for rational negation; norm-level symmetry is now narrowed to transporting/comparing the exact cancellation-filtered support witnesses for A# - B# and B# - A#"
+        ∷ "No p2 valuation inequality for rational differences is imported here; exact request is matrixElementP2ValuationDifferenceUltrametric : MatrixElementP2ValuationDifferenceUltrametricLaw"
         ∷ "No finite-support product/composition support witness exists; this is the exact next support blocker for commutator/bracket laws"
         ∷ "No p2-level rescaling operation on G3ConstructiveFiniteSupportOperator carries a support witness or min-shift valuation law"
         ∷ []
@@ -1514,6 +1976,21 @@ record G3MatrixElementP2ValuationSurface : Setω where
       ℚ →
       Nat
 
+    matrixElementP2ValuationNegationInvariantPrimitive :
+      (q : ℚ) →
+      matrixElementP2ValuationPrimitive (- q)
+      ≡
+      matrixElementP2ValuationPrimitive q
+
+    requestedMatrixElementP2ValuationDifferenceUltrametricName :
+      String
+
+    requestedMatrixElementP2ValuationDifferenceUltrametricType :
+      String
+
+    matrixElementP2ValuationDifferenceUltrametricPrerequisiteSurfacePrimitive :
+      MatrixElementP2ValuationDifferenceUltrametricPrerequisiteSurface
+
     exactFilledPrimitiveName :
       String
 
@@ -1536,6 +2013,14 @@ canonicalG3MatrixElementP2ValuationSurface =
         refl
     ; matrixElementP2ValuationPrimitive =
         matrixElementP2Valuation
+    ; matrixElementP2ValuationNegationInvariantPrimitive =
+        matrixElementP2ValuationNegationInvariant
+    ; requestedMatrixElementP2ValuationDifferenceUltrametricName =
+        "matrixElementP2ValuationDifferenceUltrametric"
+    ; requestedMatrixElementP2ValuationDifferenceUltrametricType =
+        "MatrixElementP2ValuationDifferenceUltrametricLaw = (x y : ℚ) -> minNat (matrixElementP2Valuation x) (matrixElementP2Valuation y) <= matrixElementP2Valuation (x Rat.- y)"
+    ; matrixElementP2ValuationDifferenceUltrametricPrerequisiteSurfacePrimitive =
+        matrixElementP2ValuationDifferenceUltrametricPrerequisites
     ; exactFilledPrimitiveName =
         "matrixElementP2Valuation : ℚ -> Nat"
     ; primitiveSemantics =
@@ -1543,6 +2028,9 @@ canonicalG3MatrixElementP2ValuationSurface =
         ∷ "The numerator is read via Data.Rational.↥_ and absolute-valued with Data.Integer.∣_∣"
         ∷ "The denominator is read via Data.Rational.↧ₙ_"
         ∷ "AIE.vp supplies the repo-local bounded valuation depth; negative rational valuations collapse to zero via _∸_"
+        ∷ "matrixElementP2ValuationNegationInvariant proves invariance under rational negation by rational constructor cases"
+        ∷ "matrixElementP2ValuationDifferenceUltrametricPrerequisites exposes DASHI.Arithmetic.VpAddUnequal.vp-add-min-unequal as the available bounded natural valuation input"
+        ∷ "Rational-difference ultrametric remains requested as matrixElementP2ValuationDifferenceUltrametric : MatrixElementP2ValuationDifferenceUltrametricLaw"
         ∷ []
     ; firstNormIndexMissingAfterValuation =
         missingGlobalFiniteNonzeroMatrixSupportWitness
@@ -2073,8 +2561,9 @@ canonicalG3P2LimitConvergenceFailClosedReceipt =
         ∷ "selectedFiniteSupportOperatorNormIndexDegreeSoundness is now closed for G3ConstructiveFiniteSupportOperator"
         ∷ "selectedFiniteSupportOperatorDifferenceNormIndex is now closed relative to an explicit support witness for G3Wave.waveFunctionOperatorSubtraction (operator A#) (operator B#)"
         ∷ "selectedFiniteSupportOperatorSubtractionSupportCandidate is now the union of the two finite support witnesses and covers every nonzero selected matrix element of A# - B#"
-        ∷ "selectedFiniteSupportOperatorSubtractionSupportWitnessFromCandidate now constructs the exact subtraction witness from the candidate once cancellation-filtered nonzero entries are supplied"
-        ∷ "G3Wave.waveFunctionOperatorNegatedDifferencePointwise supplies pointwise subtraction antisymmetry; norm-level symmetry still needs valuation invariance under rational negation and compatible exact support witnesses"
+        ∷ "selectedFiniteSupportOperatorSubtractionCertifiedSupport now constructs cancellation-filtered certified support, and selectedFiniteSupportOperatorSubtractionSupportWitness closes the subtraction support witness from it"
+        ∷ "matrixElementP2ValuationNegationInvariant closes p2 valuation invariance under rational negation"
+        ∷ "G3Wave.waveFunctionOperatorNegatedDifferencePointwise supplies pointwise subtraction antisymmetry; norm-level symmetry is narrowed to compatible exact support-witness transport/comparison"
         ∷ "The finite-support filtration bracket-law surface is named, with bracket/support-closure and valuation bounds left explicit"
         ∷ "The exact next bracket/product support blocker is selectedFiniteSupportOperatorProductSupportWitness for G3Wave.operatorCompose"
         ∷ "The finite-support subtype path clears the global witness blocker only for operators carrying explicit finite-support evidence"
@@ -2088,7 +2577,8 @@ canonicalG3P2LimitConvergenceFailClosedReceipt =
         ∷ "No arbitrary selected operator norm-index function is fabricated here"
         ∷ "No global finite-support witness for arbitrary WaveFunctionOperator is fabricated here; the closed path is restricted to G3ConstructiveFiniteSupportOperator"
         ∷ "No arbitrary selected operator norm-index degree-soundness law is fabricated here; the promoted soundness path is restricted to G3ConstructiveFiniteSupportOperator"
-        ∷ "No unconditional selected finite-support subtraction support witness, product support witness, or bracket law is fabricated here"
+        ∷ "No selected finite-support product support witness or bracket law is fabricated here"
+        ∷ "No rational-difference ultrametric law is fabricated here; the exact request is matrixElementP2ValuationDifferenceUltrametric : MatrixElementP2ValuationDifferenceUltrametricLaw"
         ∷ "No zeroψ/oneψ constant wave-function is promoted as a selected basis vector; the basis vector is coordinate-sensitive"
         ∷ "No identity/symmetry/ultrametric law for a difference norm is fabricated here beyond the witness-relative difference norm-index primitive and the finite subtraction support-cover candidate"
         ∷ "No p2-level rescaling operation on WaveFunctionOperator is fabricated here"

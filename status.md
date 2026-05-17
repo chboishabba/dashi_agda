@@ -23,6 +23,82 @@
     `CanonicalContractionToCliffordBridgeTheorem` and
     `KnownLimitsQFTBridgeTheorem`: done
 - Tests:
+  - `agda -i . -l standard-library DASHI/Everything.agda`: pass
+    on 2026-05-15 after scalarization, post-entropy/formal-compression bridge,
+    G6 above-threshold, and W9 bridge reconciliation imports.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/W9PairTransportBridgeObstruction.agda`: pass
+    on 2026-05-15 after reconciling W9 to the accepted MDL termination seam
+    route.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/P0BlockerObligationIndex.agda`: pass
+    on 2026-05-15 with the reconciled W9 bridge.
+  - `python -m py_compile scripts/run_t43_projection.py`: pass on 2026-05-15
+    after adding the fail-closed `t43-strict-log` diagnostic mode.
+  - `python scripts/run_t43_projection.py --freeze-hash 3205d746639568762c9e97adf4a3672c356bd491 --mode t43-strict-log --prediction-api DASHI.Physics.Prediction.phi_star_ratio:predict_ratio --output scripts/data/outputs/t43_strict_log_phi_star_ratio_20260515.json`:
+    pass/emitted artifact on 2026-05-15; strict diagnostic fails promotion with
+    `chi2/dof = 283.45739523864586`. The diagnostic decomposition records
+    diagonal-only log chi2/dof `326.09046767953845`, leading inverse-covariance
+    contribution fraction `0.006612430351796318`, and `1, log(phiStar)`
+    subspace chi2 fraction `0.890463699129403`.
+  - `python scripts/run_t43_projection.py --freeze-hash 3205d746639568762c9e97adf4a3672c356bd491 --mode t43-strict-log --prediction-api DASHI.Physics.Prediction.sigma_dashi_v4:predict_ratio --output scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json`:
+    pass/emitted artifact on 2026-05-15; strict diagnostic fails promotion with
+    `chi2/dof = 3180.211733150705`. The diagnostic decomposition records
+    diagonal-only log chi2/dof `5219.418540183218`, leading inverse-covariance
+    contribution fraction `0.012596343284573172`, and `1, log(phiStar)`
+    subspace chi2 fraction `0.9687052128530349`.
+  - `git diff --check`: pass on 2026-05-15 after the strict t43 diagnostic
+    script/docs/artifact update.
+  - `agda -i . -l standard-library DASHI/Everything.agda`: pass on
+    2026-05-15 after the strict t43 diagnostic script/docs/artifact update.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/G3AssociatedGradedQuotientSurface.agda`:
+    pass on 2026-05-15 after adding the projection-only associated-graded
+    interface target.
+  - `agda -i . -l standard-library DASHI/Everything.agda`: pass on
+    2026-05-15 after adding the G3 projection interface and strict-log
+    diagnostic decomposition.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/CrossDomainVariationalSpine.agda`:
+    pass on 2026-05-15 after adding the non-promoting physics/chemistry/biology/perception
+    variational-spine boundary.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/DrellYanStrictLogLinearSubspaceReceipt.agda`:
+    pass on 2026-05-15 after adding the corrected strict-log subspace receipt
+    and depth-averaged orthogonality target.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/BrainConnectomeFMRIObservationQuotient.agda`:
+    pass on 2026-05-15 after adding the non-promoting connectome/fMRI
+    perception observation quotient target.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/BrainConnectomeFMRIObservationQuotient.agda`:
+    pass on 2026-05-15 after tightening the formal brain bridge with pointwise
+    gate-law, MDL-order/descent, quotient-equivalence, and symmetry-respecting
+    bridge obligations.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/DevelopmentalGenomicInverseBridge.agda`:
+    pass on 2026-05-15 after adding the non-promoting genome-to-development-to-
+    connectome forward spine and phenotype-residual-to-candidate-genomic-
+    perturbation inverse bridge.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/DevelopmentalGenomicInverseBridge.agda`:
+    pass on 2026-05-15 after adding the causal-shape taxonomy, layered
+    residual compatibility surface, inverse developmental object,
+    calibration-fixture suite, CRISPR perturbation MDL surface, and
+    fixture-specific non-promotion blockers.
+  - `agda -i . -l standard-library DASHI/Physics/Closure/DevelopmentalGenomicInverseBridge.agda`:
+    pass on 2026-05-15 after adding `SyntheticConstructCarrier`,
+    `SyntheticBiologyInverse`, synthetic calibration fixtures, and the
+    natural/synthetic score-bridge target.
+  - `agda -i . -l standard-library DASHI/Everything.agda`: pass on
+    2026-05-15 with `CrossDomainVariationalSpine` imported by the aggregate.
+  - `agda -i . -l standard-library DASHI/Everything.agda`: pass on
+    2026-05-15 with `DrellYanStrictLogLinearSubspaceReceipt` and
+    `BrainConnectomeFMRIObservationQuotient` imported by the aggregate.
+  - `agda -i . -l standard-library DASHI/Everything.agda`: pass on
+    2026-05-15 with `DevelopmentalGenomicInverseBridge` imported by the
+    aggregate.
+  - `agda -i . -l standard-library DASHI/Everything.agda`: pass on
+    2026-05-15 after the developmental calibration-fixture extension.
+  - `agda -i . -l standard-library DASHI/Everything.agda`: pass on
+    2026-05-15 after the synthetic biology inverse extension.
+  - `git diff --check`: pass on 2026-05-15 after the developmental genomic
+    inverse bridge and docs/ledger updates.
+  - `git diff --check`: pass on 2026-05-15 after the developmental
+    calibration-fixture docs/ledger update.
+  - `git diff --check`: pass on 2026-05-15 after the synthetic biology inverse
+    docs/ledger update.
   - `agda -i . DASHI/Physics/Closure/Canonical/LocalProgramBundle.agda`: pass
   - `agda -i . DASHI/Physics/Closure/Canonical/Ladder.agda`: pass
   - `agda -i . DASHI/Physics/Closure/PhysicsClosureSummary.agda`: pass

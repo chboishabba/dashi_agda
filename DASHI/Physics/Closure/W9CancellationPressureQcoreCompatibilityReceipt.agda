@@ -8,8 +8,8 @@ module DASHI.Physics.Closure.W9CancellationPressureQcoreCompatibilityReceipt whe
 -- The W9 Qcore route requires an equality in ℤ between embedded cancellation
 -- pressure and theorem-level contraction energy after canonical delta
 -- transport.  The canonical 15 route already exports a counterexample to that
--- pressure witness, so this module records the mismatch and does not construct
--- a W9 kill receipt.
+-- pressure witness.  W9 is now killed separately by the MDL termination seam;
+-- this module records that the Qcore/pressure route remains obstructed.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
@@ -436,10 +436,19 @@ record W9CancellationPressureQcoreCompatibilityDiagnostic : Setω where
       ≡
       Kill.W9Cancellation
 
-    blockerKillConditionStillBlocked :
+    blockerKillConditionNowUnblockedByMDLSeam :
       Kill.KillCondition.currentState blockerKillCondition
       ≡
-      Kill.blocked
+      Kill.unblocked
+
+    blockerKillConditionReconciliation :
+      Kill.W9KillConditionReconciliation
+
+    blockerKillConditionRouteStatus :
+      Kill.W9KillConditionReconciliation.routeStatus
+        blockerKillConditionReconciliation
+      ≡
+      Kill.acceptedMDLTerminationSeamRoute
 
     status :
       W9QcoreCompatibilityClaimStatus
@@ -523,16 +532,20 @@ canonicalW9CancellationPressureQcoreCompatibilityDiagnostic =
     ; proposedWeightedQcoreBoundStatement =
         "pressure(n) <= wQcoreBound(n) * wQcoreBound(n), where wQcoreBound is the B4 weighted double-root maximum over the 15-prime carrier"
     ; proposedWeightedQcoreBoundProofStatus =
-        "Analytic case proof is externally stated, but this repo has no current Agda interface that turns that Nat inequality into a W9KillRouteReceipt"
+        "Analytic case proof is externally stated, but this repo has no current Agda interface that turns that Nat inequality into a pressure/Qcore route; W9 is killed separately by the MDL termination seam"
     ; proposedWeightedQcoreBoundDoesNotInhabitExistingRoute =
         "Existing route requires forall pair s: + embed-scalarCancellationPressure pairIntegerPressureBridge s == contractionEnergy canonical15Theorem (canonicalDeltaTransport canonical15Theorem canonical15Dimension s)"
     ; requiredNewInterfaceForBoundRoute =
-        "Either add a B4WeightedQcoreBound route to BlockerKillConditions.W9KillRouteReceipt, or prove an identity from the bound's B4 weighted root carrier to canonicalDeltaTransport/Qcore for the existing route"
+        "Either add a pressure/Qcore-specific route, or prove an identity from the bound's B4 weighted root carrier to canonicalDeltaTransport/Qcore for the existing pressure route; the existing W9 kill route is the MDL termination seam"
     ; blockerKillCondition =
         Kill.w9KillCondition
     ; blockerKillConditionIsW9 =
         refl
-    ; blockerKillConditionStillBlocked =
+    ; blockerKillConditionNowUnblockedByMDLSeam =
+        refl
+    ; blockerKillConditionReconciliation =
+        Kill.canonicalMDLTerminationSeamW9KillConditionReconciliation
+    ; blockerKillConditionRouteStatus =
         refl
     ; status =
         maxCancellationPressureWeightedQcoreSupportEqualityObstructed
@@ -565,14 +578,15 @@ canonicalW9CancellationPressureQcoreCompatibilityDiagnostic =
         ∷ "canonical15ExistingPressureWitnessObstruction rejects that exact canonical-15 pressure witness"
         ∷ "A weighted-Qcore candidate lives on canonicalWeightedQuadraticTransport of the left input, not canonicalDeltaTransport of the pair"
         ∷ "The weighted route still requires cancellationPressureIdentifiesWeightedQuadraticEnergy, and the repo has a concrete obstruction at (one , one)"
-        ∷ "The proposed pressure <= wQcoreBound^2 theorem is a Nat bound over a unary weighted-Qcore surface; no current W9 kill constructor accepts that theorem shape"
+        ∷ "The proposed pressure <= wQcoreBound^2 theorem is a Nat bound over a unary weighted-Qcore surface; it is not the accepted MDL termination seam route"
         ∷ "A genuine case-split route would have to prove Canonical15PressureWitnessType in every branch; no such case-split interface is exported"
         ∷ "The ContractionForcesQuadraticTheorem route normalizes theorem energy to Qhatcore, but still needs the missing pressureWitness to identify cancellation pressure with that energy"
         ∷ "The signature31 fields certify CTI.sig31 only; they do not provide a ContractForces31Signature pressure bridge"
         ∷ "The first missing interface is a typed bridge from B4WeightedQcoreBound to either ExistingCancellationPressureCompatibilityObligation.pressureWitness or WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy"
         ∷ "The inspected B4 root bound is quadraticWeight : B4Point -> Nat on Vec Z 4; W9 currently needs a Vec Z 15 pair-transport identity"
         ∷ "No current symbol named wQcoreBound or QcoreCompatBound was found; the first missing lemma is their alias/equivalence into the W9 transport"
-        ∷ "BlockerKillConditions.W9KillReceipt is not constructed here"
+        ∷ "BlockerKillConditions.canonicalMDLTerminationSeamW9KillReceipt is the accepted W9 kill receipt, but it is not constructed by this Qcore diagnostic"
+        ∷ "This module remains a negative pressure/Qcore compatibility diagnostic only"
         ∷ []
     }
 

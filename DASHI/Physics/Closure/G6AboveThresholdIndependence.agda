@@ -137,11 +137,74 @@ aboveThresholdIndependenceFromLaneOperator operator =
     (g6AboveThresholdCarrierFromLaneOperator operator)
     (g6AboveThresholdPrimitiveProviderFromLaneOperator operator)
 
+oldLaneOperatorAboveThresholdActionCollapse :
+  (operator : G6.LaneOperator) →
+  (p : Nat) →
+  (lane : Lane) →
+  (c : G6.LaneOperator.opSharedCarrier operator) →
+  71 < p →
+  G6.LaneOperator.opSharedLaneAction operator lane c
+  ≡
+  c
+oldLaneOperatorAboveThresholdActionCollapse =
+  G6.laneOperatorSharedActionIdentityAboveThreshold
+
+G6TrackedAboveThresholdCoordinateIndependence :
+  G6.G6NontrivialTrackedCrossLaneCommutingReceipt →
+  Set
+G6TrackedAboveThresholdCoordinateIndependence receipt =
+  (p : Nat) →
+  (lane : Lane) →
+  (c :
+    G6.NontrivialTrackedLaneOperator.Carrier
+      (G6.G6NontrivialTrackedCrossLaneCommutingReceipt.trackedOperator
+        receipt)) →
+  71 < p →
+  G6.NontrivialTrackedLaneOperator.outsideBasisValuationAt
+    (G6.G6NontrivialTrackedCrossLaneCommutingReceipt.trackedOperator receipt)
+    p
+    (G6.NontrivialTrackedLaneOperator.laneAction
+      (G6.G6NontrivialTrackedCrossLaneCommutingReceipt.trackedOperator
+        receipt)
+      lane
+      c)
+  ≡
+  G6.NontrivialTrackedLaneOperator.outsideBasisValuationAt
+    (G6.G6NontrivialTrackedCrossLaneCommutingReceipt.trackedOperator receipt)
+    p
+    c
+
+trackedAboveThresholdCoordinateIndependenceFromReceipt :
+  (receipt : G6.G6NontrivialTrackedCrossLaneCommutingReceipt) →
+  G6TrackedAboveThresholdCoordinateIndependence receipt
+trackedAboveThresholdCoordinateIndependenceFromReceipt receipt =
+  G6.G6NontrivialTrackedCrossLaneCommutingReceipt.outsideBasisCoordinateIdentityLaw
+    receipt
+
+canonicalG6TrackedAboveThresholdCoordinateIndependence :
+  G6TrackedAboveThresholdCoordinateIndependence
+    G6.canonicalG6NontrivialTrackedCrossLaneCommutingReceipt
+canonicalG6TrackedAboveThresholdCoordinateIndependence =
+  trackedAboveThresholdCoordinateIndependenceFromReceipt
+    G6.canonicalG6NontrivialTrackedCrossLaneCommutingReceipt
+
+canonicalG6OfficialTrackedAboveThresholdCoordinateIndependence :
+  G6TrackedAboveThresholdCoordinateIndependence
+    (G6.G6OfficialTrackedCrossLaneCommutingTheorem.sourceReceipt
+      G6.canonicalG6OfficialTrackedCrossLaneCommutingTheorem)
+canonicalG6OfficialTrackedAboveThresholdCoordinateIndependence =
+  trackedAboveThresholdCoordinateIndependenceFromReceipt
+    (G6.G6OfficialTrackedCrossLaneCommutingTheorem.sourceReceipt
+      G6.canonicalG6OfficialTrackedCrossLaneCommutingTheorem)
+
 data G6AboveThresholdStatus : Set where
   conditionalOnCarrierPrimeBoundedness :
     G6AboveThresholdStatus
 
   dischargedByLaneOperatorCarrierAPI :
+    G6AboveThresholdStatus
+
+  dischargedByTrackedOutsideBasisCoordinateReceipt :
     G6AboveThresholdStatus
 
 record G6AboveThresholdMissingPrimitiveReport : Set where
@@ -181,11 +244,14 @@ canonicalG6AboveThresholdMissingPrimitiveReport =
     ; exactSharedCarrierBlocker =
         "LaneOperator now exposes opSharedCarrier, opFactorVec, opValuationAt, opLaneToShared, and shared action laws"
         ∷ "aboveThresholdIndependenceFromLaneOperator derives the component equality over the LaneOperator shared carrier"
+        ∷ "oldLaneOperatorAboveThresholdActionCollapse records that this derivation is stronger than coordinate independence: every old LaneOperator shared action is identity above threshold"
+        ∷ "Nontrivial above-threshold consumers should cite canonicalG6OfficialTrackedAboveThresholdCoordinateIndependence on the tracked surface"
         ∷ "This module still does not construct a concrete LaneOperator inhabitant"
         ∷ []
     ; noPromotionBoundary =
         "This module does not postulate carrierPrimeBoundedness"
         ∷ "This module promotes only the above-threshold component equality conditional on an inhabited LaneOperator"
+        ∷ "It does not promote nontrivial scaling through the old LaneOperator universal vanished-prime identity law"
         ∷ "Full G6 promotion remains blocked by the separate CRT phase computation and carrier-filtration induction requests"
         ∷ []
     }

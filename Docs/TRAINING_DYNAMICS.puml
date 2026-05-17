@@ -41,7 +41,7 @@ package "Bridge layer" {
   component "TraceFamily\n(Row, interpret : Row -> TraceRow C)" as TraceFamily
 }
 
-package "Runtime evidence" {
+package "Runtime trace diagnostics" {
   artifact "training log CSV" as Logs
   artifact "delta_cone_lila.py" as DeltaScript
   artifact "checkpoint_prime_vectors.py" as PrimeScript
@@ -70,12 +70,14 @@ DASHI is the admissibility lens.
 end note
 
 note bottom of DeltaT
-Empirical side: test Delta, not absolutes.
+Trace-diagnostic side: test Delta, not absolutes.
 Arrow coordinates stay outside the quadratic.
 end note
 
 note bottom of Admissible
 Formal claim: traces are interpreted inside DASHI.
 Not an equality claim and not a safety proof.
+This supplies no Drell-Yan W3 accepted authority,
+W4 adequacy, W5 correction, or external provider token.
 end note
 @enduml

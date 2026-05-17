@@ -1,5 +1,378 @@
 # Changelog
 
+## 2026-05-17
+
+- polish Paper 1 positioning around carrier geometry:
+  `Paper1_Manuscript.md` and `.tex` now present the constructive ultrametric
+  carrier geometry as the mathematical thesis while keeping closure semantics
+  as certification infrastructure. The target-equation block is renamed to
+  target obligation surfaces, the opening replaces framework/lane posture with
+  carrier-geometry and bounded empirical-receipt wording, and the conclusion
+  now ends on staged derivation surfaces rather than a governance-centered
+  frontier claim.
+
+- tighten Paper 1 Section 5 application prose:
+  `Paper1_Manuscript.md` and `.tex` now compress the G2/G3/G6/E8 application
+  table, replace remaining "Paper 1 may" status narration with direct
+  positive-result and open-obstruction statements, and make the G2 subsection
+  construction-first around directed plaquette neighborhoods.
+
+- record the Drell-Yan t43 provider audit:
+  `Docs/DYLaneProviderAudit.md` now states the active HEPData `t43/t44`
+  contract as a native `phi*` `50-76 / 76-106` ratio with at least one jet
+  required. `DASHI/Physics/Closure/DrellYanLogLinearShapeLawReceipt.agda`
+  adds `DYLaneProviderAuditReceipt` and updates the strict-log diagnostic
+  summary so the current blocker is a missing native-`phi*`, exact-jet
+  provider. Existing DYTurbo `xs_qt` outputs remain diagnostic and
+  non-promoting; the next promotable route is Rivet `CMS_2022_I2079374` on a
+  Z+jet generator or a DYTurbo native-`phi*` plus exact-jet implementation.
+
+- add the compressed GR/QFT import roadmap:
+  `DASHI/Physics/Closure/ExternalFormalImportRoadmapReceipt.agda` records
+  DCHoTT-Agda, Haag-Kastler/AQFT-net, and Schreiber cohesive HoTT as external
+  import candidates for compressing the metric-adapter, QFT-carrier, and
+  GRQFT ambient-framework timeline. `Docs/CompressedGRQFTImportRoadmap.md`
+  captures the dependency-intake, import-shim, DCHoTT bridge, AQFT-net receipt,
+  and GRQFT consumer-staging plan. The receipt is explicitly non-promoting:
+  no external theorem is currently imported into a DASHI adapter. A follow-up
+  local-overlap audit now records that DASHI already has flat Levi-Civita,
+  GR/QFT consumer-obligation, and adapter-boundary surfaces in repo. The
+  DCHoTT dependency has since been cloned locally at
+  `ca8c755af0b26f8f50c5a60d3b7f9384a26f5d0e`; `dashi-agda.agda-lib` includes
+  `DCHoTT-Agda`; and `DASHI/Geometry/DCHoTTImportShim.agda` typechecks against
+  the actual flat DCHoTT modules (`Manifolds`, `FormalDiskBundle`,
+  `G-structure`). Non-flat Levi-Civita import, AQFT net receipt, and the
+  cohesive bridge theorem remain absent.
+
+- reorder the Paper 1 opening around reader orientation:
+  `Paper1_Manuscript.md` and `.tex` now open with the abstract and concise
+  introduction before the target field equations, core carrier grammar, and
+  derivation map. The carrier tuple remains early but no longer appears as the
+  first object after the title, and the target/core/map blocks stay unnumbered
+  so the existing theorem section numbers are preserved. Theorem 10.2's
+  projection-defect display now uses explicit section application instead of a
+  fragile composed-map display.
+
+- compress Paper 1 framework narration after derivation pass:
+  `Paper1_Manuscript.md` and `.tex` now tighten Section 5, QFT/GR/measurement
+  wording, empirical contact, compression, closure frontier, reproducibility,
+  glossary, Appendix C, and conclusions. The pass deletes the redundant
+  certification-flow table, replaces "forbidden promotion" with "unsupported
+  stronger claim", compresses the sibling experiment inventory into a
+  diagnostic origins paragraph, removes repo-local references from the main
+  `\nocite` set, and adds a standard filtered/graded algebra reference.
+
+- tighten Paper 1 mathematical prose voice:
+  `Paper1_Manuscript.md` and `.tex` now replace the remaining
+  ontology-narration phrasing in the Introduction, Background, Section 4,
+  Compression section, and Conclusions with direct object/property/consequence
+  statements. The pass keeps the theorem topology unchanged while making the
+  carrier, projection-defect, filtration, lane-action, and UFT descriptions
+  read as mathematical exposition rather than framework self-description.
+
+- harden Paper 1 namespace, figure, and citation infrastructure:
+  `Paper1_Manuscript.md` and `.tex` now clarify that G2/G3/G6 are
+  DASHI-native derivation-lane labels rather than claims about same-named
+  external mathematical objects. The manuscript adds glossary and symbol-index
+  appendices, shortens the non-claim section, splits the old origin diagnostics
+  plate into three larger figure groups, and expands `Paper1_References.bib`
+  with strategic anchors for ultrametrics/p-adics, gauge/lattice geometry, GR,
+  QFT/operator scaffolding, root systems, dependent type theory, MDL, and
+  Drell-Yan.
+
+- add the Marx algebraic derivative receipt:
+  `DASHI/Physics/Closure/MarxDialecticalDerivativeReceipt.agda` records Marx's
+  finite-difference route as a non-promoting DASHI receipt: ordinary
+  displacement, algebraic factorization witness, lawful collapse, and promoted
+  operational symbol. The receipt now also names the admissible algebraic
+  factorization class and theorem-shaped power/linearity/product/chain rule
+  receipts. `Docs/MarxDialecticalDerivativeReceipt.md` ties the bridge to local
+  PDF anchors from Marx's mathematical manuscripts and to the repo's existing
+  fascistic/antifascistic boundary vocabulary: premature projection is blocked
+  collapse, while cancellation after factorization is witness-preserving
+  contraction. No modern-analysis, differential-geometry, political/economic,
+  or complete calculus-tower promotion is constructed.
+
+- add the calculus completion pack:
+  `DASHI/Physics/Closure/CalculusCompletionPack.agda` records the next
+  post-Marx calculus layers as bounded DASHI surfaces: analytic completion,
+  topology, Banach/Hilbert carriers, measure/integration, and
+  infinite-dimensional Frechet-style calculus. `Docs/CalculusCompletionPack.md`
+  documents the same roadmap and keeps the Python/Lean/Agda workflow split out
+  of Agda. The pack is an adapter/roadmap receipt only; it does not claim a
+  completed proof of standard analysis.
+
+- move long Agda identifiers out of Paper 1 explanatory prose:
+  `Paper1_Manuscript.md` and `.tex` now use human-readable receipt labels in
+  the body (for example, "tracked G6 commuting theorem" and "compression
+  admissibility receipt") and keep exact Agda names/modules in a compact
+  reproducibility receipt index. This preserves auditability while reducing
+  repo-report tone and TeX line pressure in the main mathematical exposition.
+
+- add the Paper 1 origins figure pack:
+  a six-lane read-only audit of sibling visual and experiment folders selected
+  dashifine ultrametric stills, dashitest tree-diffusion plots, FRACDASH
+  branch-density projection, and dashiRTX adaptive-refinement imagery as
+  diagnostic-only visual provenance. Stable copies now live under
+  `Docs/Images/paper1-origin-figures/`, the LaTeX-facing composite plate lives
+  under `Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/`, and
+  `Docs/PaperDraftWorkingFolder/FigureCandidateManifest.md` records paths,
+  digests, roles, and non-promotion boundaries. Paper 1's origins appendix now
+  includes the plate without changing the main derivation topology.
+
+- sync Paper 1's submission-facing and stale adapter surfaces:
+  `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md` and `.tex` now use a
+  stronger derivation-program title, a single-paragraph journal-shaped
+  abstract, and explicit keywords. The early derivation map now distinguishes
+  G2 schema adoption from Maxwell field-equation closure, and sharpens QFT,
+  GR, measurement, and sector-splitting adapter obligations without adding new
+  targets. `Docs/MaxwellGaugeFieldEquationScope.md` records the same sync note:
+  the newer G2 SFGC schema-extension receipt clears schema adoption for current
+  core-facing consumers, while Maxwell still needs schema-to-Maxwell binding,
+  exterior derivative/nilpotency, Hodge/current/source laws, sector/action
+  restriction, covariance, units, and convention authority.
+
+- add the DYTurbo FPC provider-card harness:
+  `scripts/generate_dyturbo_cms_cards.py` now emits CMS-SMP-20-003 t43
+  numerator/denominator FPC smoke cards plus a manifest that records the local
+  DYTurbo 1.4.2 semantics. The local source exposes FPC through
+  `doFPC/qtfpc/FPCquad/intDimFPC`, not a literal `recoil = 2` card key, and
+  activates the FPC term only when `fixedorder_only = true`. The generated
+  cards are deliberately non-promoting because stock DYTurbo cards cannot
+  express the exact CMS leading/subleading lepton pT cuts (`25/20 GeV`); exact
+  strict-log closure still requires a compiled `user_cuts.h` path or an
+  external fiducial provider artifact.
+
+- add UI-facing progress for long DYTurbo jobs:
+  `scripts/run_dyturbo_with_progress.py` wraps a DYTurbo card run and emits
+  JSONL `start`, `heartbeat`, parsed bin-row `progress`, and terminal
+  `complete`/`failed` events with elapsed time, estimated completion when
+  possible, and output-candidate paths. This keeps FPC/provider runs visible
+  during silent pcubature or Vegas phases.
+
+- add provider metadata to the DYTurbo strict-log consumer:
+  `scripts/run_dyturbo_t43_strict_log.py` now records provider treatment, cut
+  mode, FPC status/artifact, qT-to-phi* mapping, and normalization treatment in
+  blocked and computed artifacts, so future FPC strict-log outputs carry their
+  comparison contract explicitly.
+
+## 2026-05-16
+
+- add the narrow Paper 1 integrator derivation pass:
+  `Paper1_Manuscript.md` and `.tex` now include four targeted inserts without
+  changing the manuscript architecture: a root-shell lemma reframing E8/LILA
+  as bounded local geometry, a Lorentz bridge from bounded traversal to
+  invariant cone targets, a plaquette-ordering theorem deriving the
+  Yang-Mills curvature commutator term, and a projection-incompatibility
+  theorem explaining residual fibre growth for uncertainty/interference
+  targets. The pass keeps all field equations and Lorentz/E8 readings as
+  adapter targets unless their receipt surfaces are inhabited.
+
+- address the full-PDF reviewer feedback pass:
+  the opening hierarchy now precedes the target equations, a compact
+  frontier-at-a-glance table appears after the abstract, compression semantics
+  now includes the formal admissibility theorem inhabited by
+  `canonicalCompressionAdmissibilityReceipt`, empirical contact now names TRBD
+  as a reusable typed residual-basis method, the unreadable narrative diagram
+  is replaced in the PDF body by a compact table, and bibliography placeholders
+  are replaced with concrete Agda, CMS/HEPData, CSS, and EMST references.
+
+- reorder Paper 1 around the page-early physics equations:
+  the target-equation material now appears before the abstract in
+  `Paper1_Manuscript.md` and `.tex`, including the transport-defect,
+  gauge-curvature, Yang-Mills/Maxwell, QFT/operator, and GR source equations
+  plus a table mapping Einstein-side terms to DASHI structural obligations.
+  The origins/video provenance section now follows the formal derivation
+  sections, and the public narrative diagram has been moved out of the
+  introduction.
+
+- replace the physics-facing target table with derivation sections:
+  `Paper1_Manuscript.md` and `.tex` now put target equations and obligations
+  in the body and add math-first sections for locality/time/causality from
+  finite-support traversal, gauge transport from local sections, QFT/operator
+  surfaces from filtered quotients, curvature/GR from transport defect, and
+  measurement/interference/entropy/sector splitting from projection-defect.
+  The GR target equation, gauge curvature equations, and operator/QFT target
+  equations are now visible before empirical contact, while all physical
+  closures remain residual obligations rather than promoted results.
+
+- add the Paper 1 derivation spine:
+  `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md` and
+  `Paper1_Manuscript.tex` now derive the core carrier route in
+  Definition/Lemma/Proof form: primitive ternary state, traversal,
+  voxel/hypercube cell, trie ultrametric, tracked `FactorVec` valuation,
+  projection-defect structure, and filtration/associated-graded descent. The
+  TeX surface now includes theorem-style environments via `amsthm`/`amssymb`
+  and builds to the updated PDF.
+
+- recast construction and physics sections around the derivation:
+  G2/G3/G6/E8-LILA are now presented as applications of the derivation spine
+  rather than as module inventory, and a new physics-facing emergence-target
+  bridge maps locality, time/causality, measurement, uncertainty/interference,
+  gauge transport, QFT/operator filtrations, and curvature/GR to explicit
+  theorem obligations. The closure/frontier language remains fail-closed but
+  is less dominant in the paper flow.
+
+- integrate sibling video evidence inventory into the origins section:
+  Paper 1 now cites the SIB-R1 boundary in
+  `DASHI/Physics/Closure/SiblingEvidenceInventory.agda` and the concrete
+  `Docs/SiblingVideoEvidenceInventory.md` inventory, distinguishing dashifine
+  GIF/frame diagnostics, dashitest codec/Vulkan/live-sheet/MP4 smoke artifacts,
+  and tree-diffusion metrics from DASHI-local theorem authority. The text keeps
+  the evidence diagnostic-only until a local receipt binds trace source,
+  observation map, metric, admissibility law, rerun command, digests, and
+  promotion boundary.
+
+## 2026-05-15
+
+- add first-page formalism and origins narrative to Paper 1:
+  `Paper1_Manuscript.md` and `.tex` now open with a compact core-formalism box
+  covering the carrier tuple, ternary coordinate, projection-defect split,
+  ultrametric refinement, filtered operator surfaces, tracked lane actions, and
+  UFT/motif compression as manuscript grammar rather than a universal physics
+  law. A new section, `From Ternary Traversal to Carrier Geometry`, records the
+  disciplined origin path from trits/Base369 and dialectical unresolvedness
+  through cube/voxel traversal, video-like continuity diagnostics, UFT tries,
+  FactorVec lanes, and filtration/operator closure. `EarlyOriginThreadReference.md`,
+  `SourceLedger.md`, `ClaimLedger.md`, and `OriginTraceabilityLedger.md` now
+  preserve the source-thread handles and non-promotion boundaries.
+
+- rebalance the Paper 1 manuscript around the mathematical carrier:
+  `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md` and
+  `Paper1_Manuscript.tex` now foreground the ultrametric carrier,
+  projection-defect split, UFT/compression semantics, filtration, lane action,
+  and local mathematical surfaces before the obstruction frontier. The
+  obstruction table is preserved as a later certification layer, so typed
+  governance remains the enforcement architecture without dominating the
+  reader's first encounter with the physics-unification substrate.
+
+- assemble the Paper 1 manuscript and TeX/PDF surface:
+  six manuscript workers drafted the lead narrative, formal core, empirical
+  contact, obstruction frontier, provenance/related-work, and TeX/PDF assembly
+  lanes under `Docs/PaperDraftWorkingFolder/sections/21_*` through
+  `26_*`. The integrated authoring surface is now
+  `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md`, with a direct TeX
+  version in `Paper1_Manuscript.tex`, bibliography stubs in
+  `Paper1_References.bib`, a vector PDF figure converted from SVG at
+  `Docs/PaperDraftWorkingFolder/figures/PublicPaperNarrativeFlow.pdf`, and a
+  compiled draft PDF at
+  `Docs/PaperDraftWorkingFolder/build/Paper1_Manuscript.pdf`. The manuscript
+  foregrounds physics unification as the thesis and typed claim governance as
+  the enforcement architecture, while preserving bounded W3 contact, strict
+  Drell-Yan failure, W4/W5 authority blockers, G3 quotient blockers, tracked
+  G6 scope, local/upstream E8 boundaries, and non-promoting provenance routes.
+
+- add the Paper 1 drafting and reviewer-control workspace:
+  `Docs/Paper1DraftSkeleton.md`, `Docs/Paper1InternalFormalMethodsOutline.md`,
+  and `Docs/PaperDraftWorkingFolder/` now package the fail-closed Paper 1
+  manuscript surface. The working folder contains the main manuscript, source
+  and claim ledgers, formal-methods positioning, outreach/crosswalk synthesis,
+  cross-domain variational-spine boundary, braid-memory current-event boundary,
+  and claim-risk audits. This is a docs-only paper workspace: it does not
+  construct authority tokens, promote empirical validation, close GR, or expand
+  the formal theorem inventory beyond named receipts and non-promoting
+  theorem-target boundaries.
+
+- add the 15SSP scalarization and TOE-bridge boundary layer:
+  `Ontology/GodelScalarization.agda` defines the FactorVec Gödel scalar, and
+  `Ontology/GodelScalarizationTransportDerived.agda` derives the signed
+  transport scalar law for the current 15-lane SSP transfer API. The new
+  FactorVec closure modules package post-entropy, formal-compression,
+  physical-projection, falsifiable-lane, and concrete-prediction receipt
+  surfaces. `PostEntropyUniversalityTheorem.agda` and
+  `FormalCompressionUniversalityBridge.agda` now also carry explicit
+  non-promotion boundary records: the scalarization theorem is closed, while
+  global post-entropy universality and physical closure remain witness
+  obligations, not TOE promotion.
+
+- attach the first Drell-Yan adjacent-ratio empirical lane receipt:
+  `DrellYanAdjacentRatioEmpiricalLaneReceipt.agda` binds the existing W3
+  CMS-SMP-20-003 / HEPData `ins2079374` t43/t44 comparison-law receipt to the
+  FactorVec falsification-lane surface, recording `chi2/dof = 2.1565191176`
+  and `mean pred/data = 0.9941233097`. The receipt explicitly records that the
+  stricter `chi2/dof <= 2` lane target is not passed, so this is bounded
+  empirical contact rather than strict lane success. `Docs/CurrentGateStatus.md`
+  and `Docs/LimitedSMGRPaperReadinessMatrix.md` were updated to preserve that
+  boundary.
+
+- add a fail-closed strict Drell-Yan log-covariance diagnostic mode:
+  `scripts/run_t43_projection.py --mode t43-strict-log` now compares predictions
+  against t43 ratios using the full t44 covariance propagated to log residuals,
+  with no scalar refit and an explicit `chi2/dof <= 2` threshold. The persisted
+  artifacts
+  `scripts/data/outputs/t43_strict_log_phi_star_ratio_20260515.json` and
+  `scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json` record
+  strict failures for the current predictors (`283.4574` and `3180.2117`
+  chi2/dof respectively), so this mode is a negative diagnostic, not a promotion
+  receipt. The same artifacts now also carry diagnostic decomposition fields:
+  diagonal-only log chi2/dof is worse (`326.0905` / `5219.4185`), so
+  off-diagonal covariance is not the inflation source; leading inverse-covariance
+  modes are not rank-1 dominant (`0.0066` / `0.0126` contribution fractions);
+  the residuals are instead mostly captured by the `1, log(phiStar)` subspace
+  (`0.8905` / `0.9687` chi2 fractions).
+
+- add a G3 associated-graded projection-interface target:
+  `G3AssociatedGradedQuotientSurface.agda` now records
+  `G3AssociatedGradedProjectionInterface`, a projection-only API for mapping
+  selected prequotient `F_n` pieces into an abstract graded-class surface while
+  requiring the projection to respect the candidate modulo-previous relation.
+  This is explicitly weaker than constructing `F_n / F_{n-1}`: the accepted
+  quotient carrier, accepted equivalence modulo previous filtration, and
+  Poincare/Galilei associated-graded isomorphism remain open blockers.
+
+- add the cross-domain variational spine boundary:
+  `CrossDomainVariationalSpine.agda` defines the common typed object
+  `(X, delta, pi, defect, gate, observation, symmetry)` and records molecular
+  PES minima, bonding projection/defect density, resonance MDL projection,
+  biological attractors, and Kluver perceptual orbit classes as instances of
+  the same theorem target. The canonical boundary explicitly allows only the
+  structural/compositional bridge claim; quantitative calibration,
+  universality, chemistry/biology/perception empirical prediction receipts, and
+  cross-domain recovery equivalences remain missing.
+
+- add corrected Drell-Yan strict-log and brain/fMRI observation targets:
+  `DrellYanStrictLogLinearSubspaceReceipt.agda` records the empirical
+  refutation of the off-diagonal-inflation and rank-1-eigenmode explanations,
+  and the positive diagnosis that sigma_DASHI v4 is dominated by the
+  `1, log(phiStar)` residual subspace (`0.9687` chi2 fraction). It also names
+  `StrictPassOrthogonalityObligation` and a depth-averaged curvature-kernel
+  candidate as the next non-promoting theorem target. Separately,
+  `BrainConnectomeFMRIObservationQuotient.agda` refines the perception lane into
+  `phase orbit -> neural initialization -> connectome-constrained processing ->
+  high-resolution/laminar fMRI readout -> behavioral report`, with missing
+  dataset/protocol/metric receipts explicitly listed. The brain/fMRI module now
+  also records the concrete brain carrier target `X_brain = (V,E,W,sigma)`,
+  the connectome carrier `C = (V,E,W,Lambda)`, ternary neuronal state,
+  connectome-constrained threshold transition, MDL processing energy,
+  connectome symmetry quotient, processing orbit quotient, inverse observation
+  target, and the laminar readout factorization constraint. The bridge target
+  now includes pointwise gate-law, MDL-order/descent-soundness, quotient
+  equivalence, class-of-state, and symmetry-respecting bridge obligations.
+
+- add the developmental genomic inverse bridge boundary:
+  `DevelopmentalGenomicInverseBridge.agda` records the forward generative chain
+  `genome -> regulatory activation -> morphogenesis -> neural differentiation
+  -> developmental connectome -> mature processing -> observable readout`, and
+  the inverse condition-probing chain `DeltaY -> DeltaO -> DeltaT_C -> DeltaC
+  -> DeltaM -> DeltaR -> candidate Delta g`. The module packages candidate
+  regulatory fibres and ranking by phenotype residual, MDL perturbation,
+  pleiotropy, and layer-constraint penalties. It now also adds causal-shape
+  taxonomy, CRISPR perturbation classes, layered residual compatibility,
+  fibre-refinement, laminar-narrowing, and calibration-fixture slots for HBB,
+  CFTR, CCR5-Delta32, PCSK9, LCT enhancer, HOX/SHH, FOXP2, and APOE. It
+  explicitly forbids DNA blueprint, one-gene-causes-condition, disease-gene
+  validation, and biology/cognition/perception closure claims until dataset,
+  calibration, inverse-projection, fixture-ground-truth, fixture-ranking, and
+  ranking-validation receipts exist.
+
+- reconcile W9 and G6 stale status surfaces:
+  `W9PairTransportBridgeObstruction.agda` and
+  `W9CancellationPressureQcoreCompatibilityReceipt.agda` now agree with the kill
+  matrix that W9 is unblocked only through the MDL termination seam while the
+  pressure-equality/Qcore routes remain negative diagnostics. G6 docs now
+  distinguish the paper-usable tracked `GL.FactorVec` theorem from the still
+  skeleton-only full common-spine section theorem.
+
 ## 2026-05-13
 
 - add the W4/W5 public pT-table integral diagnostic:
@@ -5724,3 +6097,25 @@
   prerequisite; non-flat GR remains open.
 - Imported the new modules from `DASHI/Everything.agda` and updated the worker
   coordination board / TODO surfaces to record exact non-promotion boundaries.
+
+## 2026-05-16 Paper 1 narrative geometry pass
+
+- Updated `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md` and the TeX
+  source with a dedicated "Why the Carrier Geometry Is Forced" section. The
+  new bridge explains ternary unresolvedness, recursive trie refinement,
+  ultrametric distance, prime-lane independence, projection-defect residuals,
+  and filtration as one carrier geometry before the manuscript enters the
+  formal construction inventory.
+- Refined the G6 prose so cross-lane commuting reads as tracked independence
+  of distinct valuation exponents on the official `GL.FactorVec` route, while
+  preserving the full `LaneOperator` non-promotion boundary.
+
+## 2026-05-16 Paper 1 derivation-priority pass
+
+- Replaced the early closure/frontier-style summary with a derivation map that
+  keeps target equations and carrier-to-physics adapters visually central.
+- Added derivation lemmas for the abelian/nonabelian gauge split, the
+  quotient-grade commutator obstruction, and the Einstein tensor as the
+  divergence-free source-facing curvature target.
+- Moved the origins/trits/Base369/video lineage out of the main derivation
+  path into appendix-style context after the claim-boundary sections.

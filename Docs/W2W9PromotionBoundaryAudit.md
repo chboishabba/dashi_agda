@@ -73,16 +73,16 @@ Evidence:
   `canonicalWeightedSupportRetargetConsumerReceipt` but explicitly lists that
   no dim-15 pressure witness, no `CancellationPressureCompatibility`, and no W9
   kill receipt are constructed.
-- `W9PairTransportBridgeObstruction.agda:39-47` includes the status
-  `retargetAcceptedOnlyNoW9KillReceipt`.
-- `W9PairTransportBridgeObstruction.agda:111-152` records the current
-  obstruction: `Kill.w9KillCondition` is still blocked, both accepted routes
-  are rejected by local counterexamples, the retarget consumer scope is
-  accepted-only, and no `W9KillReceipt` is constructed.
+- `W9PairTransportBridgeObstruction.agda:39-46` now includes the status
+  `acceptedMDLTerminationSeamRouteOnly`.
+- `W9PairTransportBridgeObstruction.agda:111-155` records the reconciled split:
+  `Kill.w9KillCondition` is unblocked by the accepted MDL termination seam route,
+  while both pressure-equality routes are still rejected by local counterexamples
+  and the weighted-support retarget consumer remains non-Qcore/non-pressure.
 
-Exact current status: W9 remains blocked. The first missing bridge is from the
-available weighted-support/retarget consumer surface into an accepted W9 kill
-route, either by inhabiting the existing pair pressure witness, supplying the
+Exact current status: W9 is unblocked only through the MDL termination seam kill
+receipt. The still-missing pressure bridge would require either inhabiting the
+existing pair pressure witness, supplying the
 weighted cancellation-to-quadratic identification, or adding an explicitly
 accepted kill route for the retarget-only receipt. This audit does not attempt
 any of those.

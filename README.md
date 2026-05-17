@@ -55,9 +55,10 @@ Use one of these reader tracks first:
 - W9 MDL termination seam route:
   `DASHI/Physics/Closure/W9MDLTerminationSeamRoute.agda` records the real
   `normalizeAdd` one-step canonicalization plus carry-depth/budget MDL
-  Lyapunov bridge as a non-pressure seam witness. It is not W9 closure: the
-  current kill matrix still lacks a theorem-consumer route constructor for
-  this MDL termination seam.
+  Lyapunov bridge as a non-pressure seam witness. Current status supersedes
+  the older pressure/Qcore-only wording: W9 is unblocked only through the
+  accepted MDL termination seam route; the pressure-equality and Qcore routes
+  remain negative diagnostics and do not promote broader closure.
 - External request/source handoff surfaces:
   `DASHI/Physics/Closure/EmpiricalCalibrationExternalReceiptRequestPack.agda`,
   `DASHI/Physics/Closure/GRQFTConsumerSourceDiagnostic.agda`,
@@ -604,6 +605,13 @@ depends on that surface.
   `AtomicChemistryRecoveryTheorem.agda`,
   `PhysicsUnificationToCanonicalClosureAdapter.agda`
 - Repo reader metasystem: `Docs/RepoMetasystem.puml` and `Docs/RepoMetasystem.svg`
+- Public Paper 1 narrative flow: `Docs/PublicPaperNarrativeFlow.puml` and
+  `Docs/PublicPaperNarrativeFlow.svg`
+- Paper 1 manuscript source: `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md`
+  and `.tex`; full Agda constructor names belong in the reproducibility
+  receipt index, while the body should use human-readable receipt labels. The
+  manuscript glossary records that G2/G3/G6 are DASHI-native lane labels, not
+  standard-object equivalence claims unless explicitly inhabited.
 - Worker coordination map: `Docs/WorkerCoordinationMap.puml` and
   `Docs/WorkerCoordinationMap.svg`
 - Canonical theorem spine: `Docs/CanonicalProofSpine.puml` and `Docs/CanonicalProofSpine.svg`
@@ -1315,9 +1323,9 @@ Current theorem status:
   The retarget diagnostic lane is deliberately weaker: `W9WeightedSupportRetargetConsumerReceipt`
   accepts `canonicalPairPressureRetargetReceipt` through
   `weightedMaxPressure <= weightedSupport`, but that `<=` surface is not a
-  `W9KillReceipt` because the kill route in `BlockerKillConditions` still
-  accepts only the existing equality witness route or the weighted replacement
-  identification route.
+  pressure-equality/Qcore witness. `BlockerKillConditions` now accepts the MDL
+  termination seam route as the W9 kill receipt; this unblocks W9 only on that
+  non-pressure route and does not inhabit `CancellationPressureCompatibility`.
 - Generic pressure algebra owner:
   `DASHI/Pressure.agda`
   now exposes a finite five-level pressure carrier with
@@ -1400,6 +1408,23 @@ Figure provenance:
   `temp-DOWNLOADED/ThreeBodyPredictability.agda`;
 - the current repo-native formalism surfaces remain the authoritative source
   for names and claim boundaries.
+
+Paper 1 origins figure pack:
+
+- manifest:
+  `Docs/PaperDraftWorkingFolder/FigureCandidateManifest.md`;
+- stable repo copies:
+  `Docs/Images/paper1-origin-figures/`;
+- LaTeX-facing figures:
+  `Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/` now contains
+  three larger origin figure groups for ultrametric refinement, tree-diffusion
+  rollout, and branch-density/adaptive-refinement intuition. The old composite
+  plate remains archived but is no longer the preferred manuscript figure.
+- claim boundary:
+  the pack is visual provenance for traversal, refinement, ultrametric
+  diagnostics, and sibling engineering experiments. It is not theorem
+  authority, empirical closure, video-continuity closure, codec correctness, or
+  promotion evidence.
 
 ### Three-body predictability view
 

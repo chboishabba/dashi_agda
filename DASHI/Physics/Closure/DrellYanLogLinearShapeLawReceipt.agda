@@ -433,6 +433,9 @@ data ActualStrictLogBlocker : Set where
   missingHadronicStructureFunctions :
     ActualStrictLogBlocker
 
+  missingNativePhiStarJetProvider :
+    ActualStrictLogBlocker
+
 record ProxyDivergenceRecord : Setω where
   field
     scalarEMSTChi2PerDof :
@@ -493,6 +496,80 @@ record DirectDYTurboFiducialDiagnostic : Setω where
 
     diagnosticOnlyIsTrue :
       diagnosticOnly ≡ true
+
+record DYLaneProviderAuditReceipt : Setω where
+  field
+    ratioTableDoi :
+      String
+
+    covarianceTableDoi :
+      String
+
+    observableClass :
+      String
+
+    observableClassSource :
+      String
+
+    massWindowNumerator :
+      String
+
+    massWindowDenominator :
+      String
+
+    eventLevelPhiStarRequired :
+      Bool
+
+    eventLevelPhiStarRequiredIsTrue :
+      eventLevelPhiStarRequired ≡ true
+
+    atLeastOneJetRequired :
+      Bool
+
+    atLeastOneJetRequiredIsTrue :
+      atLeastOneJetRequired ≡ true
+
+    jetSelection :
+      String
+
+    qTProviderNonPromoting :
+      Bool
+
+    qTProviderNonPromotingIsTrue :
+      qTProviderNonPromoting ≡ true
+
+    inclusiveEMSTCSSNonCommensurable :
+      Bool
+
+    inclusiveEMSTCSSNonCommensurableIsTrue :
+      inclusiveEMSTCSSNonCommensurable ≡ true
+
+    w3AdjacentRatioUnaffected :
+      Bool
+
+    w3AdjacentRatioUnaffectedIsTrue :
+      w3AdjacentRatioUnaffected ≡ true
+
+    providerPathDYTurbo :
+      String
+
+    providerPathRivet :
+      String
+
+    preferredNextProviderPath :
+      String
+
+    proxySearchComplete :
+      Bool
+
+    proxySearchCompleteIsTrue :
+      proxySearchComplete ≡ true
+
+    strictLogPromotionAvailable :
+      Bool
+
+    strictLogPromotionAvailableIsFalse :
+      strictLogPromotionAvailable ≡ false
 
 record DYDistributedTheoreticalModelGap : Setω where
   field
@@ -661,6 +738,9 @@ record DYStrictLogDiagnosticSummary : Setω where
 
     directDYTurboDiagnostic :
       DirectDYTurboFiducialDiagnostic
+
+    providerAudit :
+      DYLaneProviderAuditReceipt
 
     actualBlocker :
       ActualStrictLogBlocker
@@ -922,6 +1002,7 @@ open DYMultiTransitionObstruction public
 open CSSResummationShapeLawReceipt public
 open ProxyDivergenceRecord public
 open DirectDYTurboFiducialDiagnostic public
+open DYLaneProviderAuditReceipt public
 open DYDistributedTheoreticalModelGap public
 open EMSTFullTensorReceipt public
 open DYStrictLogDiagnosticSummary public
@@ -1516,10 +1597,64 @@ canonicalDirectDYTurboFiducialDiagnostic =
     ; matchedSerial20k5StrictPassIsFalse =
         refl
     ; interpretation =
-        "removing matched finite-order terms makes the grid log-valid only when damping is disabled, while the serial 20k/5 matched run is log-valid but worse than the strict-log v4 baseline; direct xs_qt diagnostics do not promote and the independent W_i provider remains required"
+        "removing matched finite-order terms makes the grid log-valid only when damping is disabled, while the serial 20k/5 matched run is log-valid but worse than the strict-log v4 baseline; direct xs_qt diagnostics do not promote because t43 requires native event-level phi-star and at-least-one-jet selection"
     ; diagnosticOnly =
         true
     ; diagnosticOnlyIsTrue =
+        refl
+    }
+
+canonicalDYLaneProviderAuditReceipt :
+  DYLaneProviderAuditReceipt
+canonicalDYLaneProviderAuditReceipt =
+  record
+    { ratioTableDoi =
+        "10.17182/hepdata.115656.v1/t43"
+    ; covarianceTableDoi =
+        "10.17182/hepdata.115656.v1/t44"
+    ; observableClass =
+        "Z+ge1jet-phi-star-ratio-t43"
+    ; observableClassSource =
+        "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv"
+    ; massWindowNumerator =
+        "50 <= M_ll < 76 GeV"
+    ; massWindowDenominator =
+        "76 <= M_ll < 106 GeV"
+    ; eventLevelPhiStarRequired =
+        true
+    ; eventLevelPhiStarRequiredIsTrue =
+        refl
+    ; atLeastOneJetRequired =
+        true
+    ; atLeastOneJetRequiredIsTrue =
+        refl
+    ; jetSelection =
+        "at least one CMS jet; exact provider must implement the CMS-SMP-20-003 jet selection, not only inclusive Drell-Yan"
+    ; qTProviderNonPromoting =
+        true
+    ; qTProviderNonPromotingIsTrue =
+        refl
+    ; inclusiveEMSTCSSNonCommensurable =
+        true
+    ; inclusiveEMSTCSSNonCommensurableIsTrue =
+        refl
+    ; w3AdjacentRatioUnaffected =
+        true
+    ; w3AdjacentRatioUnaffectedIsTrue =
+        refl
+    ; providerPathDYTurbo =
+        "DYTurbo native phi-star histogram plus exact t43 jet selection; current xs_qt route is diagnostic only"
+    ; providerPathRivet =
+        "Rivet CMS_2022_I2079374 on a Z+jet event generator, producing YODA t43 in native phi-star bins"
+    ; preferredNextProviderPath =
+        "Rivet-CMS_2022_I2079374-on-Z+jet-generator"
+    ; proxySearchComplete =
+        true
+    ; proxySearchCompleteIsTrue =
+        refl
+    ; strictLogPromotionAvailable =
+        false
+    ; strictLogPromotionAvailableIsFalse =
         refl
     }
 
@@ -1545,12 +1680,14 @@ canonicalDYStrictLogDiagnosticSummary =
         canonicalProxyDivergenceRecord
     ; directDYTurboDiagnostic =
         canonicalDirectDYTurboFiducialDiagnostic
+    ; providerAudit =
+        canonicalDYLaneProviderAuditReceipt
     ; actualBlocker =
-        missingHadronicStructureFunctions
+        missingNativePhiStarJetProvider
     ; blockerSourceRequest =
-        "DYTURBO Lam-Tung structure-function grid for CMS-SMP-20-003"
-        ∷ "ResBos2 fiducial angular structure-function grid for CMS-SMP-20-003"
-        ∷ "CuTe-MCFM or EMST Appendix-B implementation producing nine W_i over the phiStar grid"
+        "native event-level phi-star provider for HEPData t43"
+        ∷ "exact CMS-SMP-20-003 at-least-one-jet selection inside the provider"
+        ∷ "Rivet CMS_2022_I2079374 on a Z+jet event generator, or DYTurbo extended with native phi-star plus exact jet selection"
         ∷ []
     ; nHadronicComponentsRequired =
         9

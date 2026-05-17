@@ -1,5 +1,5 @@
 @startuml
-title HEPData Residual Coordination Map - HEP-R1..R45 + LILA-R1..R5 + SIB-R1..R2 + SIB-MATRIX
+title HEPData Residual Coordination Map - W3 bounded t43 receipt + W4/W5 blocked authority lanes
 left to right direction
 
 skinparam shadowing false
@@ -33,17 +33,17 @@ package "phistar_50_76 Candidate Chain" {
   rectangle "HEP-R19\nW5/W6 consumer inventory\nhigh-mass tables + theory candidates" as R19 #fef3c7
   rectangle "HEP-R20\nDOI correction resolved\n11631-7 canonical; 11680-y rejected" as R20 #dcfce7
   rectangle "HEP-R21\nRatio adapter route selected\nt43/t44 dimensionless target" as R21 #fef3c7
-  rectangle "HEP-R22\nPrediction freeze + projection request\ncommit hash + t43 run missing" as R22 #fecaca
+  rectangle "HEP-R22\nW3 bounded t43 comparison artifact\nfrozen commit + digest recorded;\nauthority missing" as R22 #fecaca
   rectangle "HEP-R23\nW5/W6 full table map\nphistar, ratios, response, pT" as R23 #fef3c7
   rectangle "HEP-R24\nRatio artifact request\nsuperseded by HEP-R28" as R24 #dcfce7
-  rectangle "HEP-R25\nProjection runner discovery\nno exact t43 runner found" as R25 #fecaca
-  rectangle "HEP-R26\nFreeze identity diagnostic\nHEAD named; worktree dirty" as R26 #fecaca
-  rectangle "HEP-R27\nComparison-law intake\nfreeze + projection digest + bin binding required" as R27 #fecaca
+  rectangle "HEP-R25\nT43 runner/per-bin witness\nrunner evidence exists;\nprovider-grade payload absent" as R25 #fecaca
+  rectangle "HEP-R26\nW3 freeze identity\ncommit/digest bound for t43;\nno accepted authority token" as R26 #fecaca
+  rectangle "HEP-R27\nBounded W3 comparison-law receipt\nchi2/dof 2.1565 < 4.0;\nt43 only" as R27 #fecaca
   rectangle "HEP-R28\nChecksum-bound t43/t44 artifacts\nvalid CSVs + sha256 manifest" as R28 #dcfce7
   rectangle "HEP-R29\nT43 runner contract skeleton\ninputDigest/bin bindings/R ratios/projectionDigest" as R29 #fecaca
   rectangle "HEP-R30\nClean freeze policy request\nstash/commit, rev-parse HEAD,\nrunner uses that hash" as R30 #fecaca
-  rectangle "HEP-R31\nComparison-law receipt skeleton\nchi2 + two-sigma law request only" as R31 #fecaca
-  rectangle "HEP-R32\nFail-closed runner implementation attempt\nverifies digests + writes incomplete artifact" as R32 #fef3c7
+  rectangle "HEP-R31\nCanonical W3 t43 comparison-law receipt\nstrict <=2 false;\nno accepted external authority" as R31 #fecaca
+  rectangle "HEP-R32\nFail-closed runner + per-bin non-collapse\nper-bin stable;\nprovider receipt still absent" as R32 #fef3c7
   rectangle "HEP-R33\nPhi-star ratio prediction API route\nrunner hook works; accepted API missing" as R33 #fef3c7
   rectangle "HEP-R34\nCSS/Sudakov baseline hook\nnon-promoting runner exercise" as R34 #fef3c7
   rectangle "HEP-R35\nDASHI-native phi-star API diagnostic\nno accepted sibling/CSS route;\nDashiDynamics construction required" as R35 #fecaca
@@ -52,10 +52,10 @@ package "phistar_50_76 Candidate Chain" {
   rectangle "HEP-R38\nDirty covariance comparison diagnostic\nchi2/dof 355674.69;\nmodel-gap signal only" as R38 #fee2e2
   rectangle "HEP-R39\nsigma_DASHI v2 refinement diagnostic\nchi2/dof 68.42 dirty;\nmodel narrowed, still blocked" as R39 #fef3c7
   rectangle "HEP-R40\nNeutral-current continuum refinement\nchi2/dof 28.66 dirty;\ncloser, still blocked" as R40 #fef3c7
-  rectangle "HEP-R41\nPosterior shape response\nchi2/dof 1.74 dirty numeric pass;\ngovernance blocked" as R41 #fef3c7
-  rectangle "HEP-R42\nt45/t46 holdout validation\nunchanged HEP-R41 fails;\nchi2/dof 222.54" as R42 #fee2e2
+  rectangle "HEP-R41\nSuperseded by bounded W3 t43 receipt\nchi2/dof 2.1565;\nstrict <=2 false" as R41 #fef3c7
+  rectangle "HEP-R42\nW5 t45/t46 correction lane\nparked pending accepted DY convention" as R42 #fee2e2
   rectangle "HEP-R43\nMass-window-general law obligation\nt44 is covariance-only;\nt45/t46 is holdout" as R43 #fef3c7
-  rectangle "HEP-R44\nMass-general dirty run\nfails t43 and t45;\nchi2/dof 1770377.85 / 122.02" as R44 #fee2e2
+  rectangle "HEP-R44\nStrict-log / mass-general diagnostics\nnegative;\nno strict pass receipt" as R44 #fee2e2
   rectangle "HEP-R45\nObservable-definition receipt\nDSIG/DPHISTAR ratio headers;\nnormalized-total blocked" as R45 #fef3c7
 }
 
@@ -87,32 +87,32 @@ package "Open Receipts" {
   rectangle "residualObservableClassReceipt\nfirst missing provider receipt" as MissingClass #fecaca
   rectangle "adapterTransformReceipt\nraw upstream -> local normalized surface" as MissingAdapter #fecaca
   rectangle "projectionLawReceipt\nHEP residual -> DASHI defect carrier" as MissingProjection #fecaca
-  rectangle "comparisonLawReceipt\nresidual-aware empirical comparison" as MissingComparison #fecaca
+  rectangle "acceptedW3AuthorityToken\nW3AcceptedEvidenceAuthorityToken missing" as MissingComparison #fecaca
   rectangle "acceptedAuthorityRoute\nprovider authority token + route" as MissingAuthority #fecaca
-  rectangle "predictionFixedAt\ncommit hash + artifact digest" as MissingFreeze #fecaca
+  rectangle "providerFreezeAttestation\nexternal authority over frozen artifact missing" as MissingFreeze #fecaca
   rectangle "checksumBoundT43T44\nsupplied by HEP-R28\nnot a projection receipt" as MissingRatioArtifacts #dcfce7
-  rectangle "digestBoundProjectionRunner\nfail-closed script exists;\nreal DASHI prediction missing" as MissingRunner #fef3c7
-  rectangle "t43ProjectionRun\nDASHI projection against ratio bins" as MissingProjectionRun #fecaca
+  rectangle "providerGradePerBinPayload\nrunner per-bin witness exists;\nprovider receipt missing" as MissingRunner #fef3c7
+  rectangle "accepted-convention W4/W5 run\nblocked before authority" as MissingProjectionRun #fecaca
   rectangle "phiStarRatioPredictionAPI\nsigma_DASHI 50-76 / 76-106\naccepted function path missing" as MissingPredictionAPI #fecaca
   rectangle "sigmaDASHIConstructionReceipt\ncallable exists; clean freeze,\nprojection artifact, comparison law missing" as MissingSigmaDASHIReceipt #fef3c7
-  rectangle "acceptedProjectionRunReceipt\nblocked by dirty worktree,\nsynthetic freeze, no chi2" as MissingAcceptedProjectionRun #fecaca
-  rectangle "sigmaDASHIModelGap\ncurrent finite-trit projection\nnormalization/scale mismatch" as MissingModelRefinement #fecaca
+  rectangle "strictPassReceipt\nstrict log protocol fails current predictors" as MissingAcceptedProjectionRun #fecaca
+  rectangle "strictLogShapeObstruction\nspan(1, log(phiStar)) dominates chi2" as MissingModelRefinement #fecaca
   rectangle "acceptedDASHIPredictionAPI\nrepo-native DashiDynamics projection\nnot CSS/Sudakov baseline" as MissingAcceptedDASHIAPI #fecaca
-  rectangle "calibrationRatioLaw\nZ-peak/ratio covariance law" as MissingRatio #fecaca
-  rectangle "consumerSelectionReceipts\nW5 high-mass + W6 theory adapter" as MissingConsumer #fecaca
+  rectangle "acceptedDYLuminosityConventionAuthority\nfirst missing for W4/W5" as MissingRatio #fecaca
+  rectangle "W5T45CorrectionReceipt\nblocked: no accepted convention/provider luminosity" as MissingConsumer #fecaca
   rectangle "acceptedLilaE8Receipt\nlocal evidence plus E8/Lam-Tung/theta receipts" as MissingLilaE8 #fecaca
   rectangle "acceptedSiblingAdapterReceipt\nre-run/adapt sibling artifact through governed lane" as MissingSiblingAdapter #fecaca
 }
 
 package "Authority Data Surfaces" {
   rectangle "CMS-SMP-20-003\nEur. Phys. J. C 83 (2023) 628\nHEPData/CMS DOI 10.1140/epjc/s10052-023-11631-7" as CMS20003 #dbeafe
-  rectangle "HEPData ins2079374\nphistar mass 50-76 table t19\ncovariance table t20" as HEPData #dbeafe
+  rectangle "HEPData ins2079374\nactive W3 ratio t43 + covariance t44;\nt19/t20 source context only" as HEPData #dbeafe
   rectangle "Response matrices\n50-76 ee t68\n50-76 mumu t69" as Response50 #dbeafe
   rectangle "Z-peak / ratio anchors\n76-106 t21/t22\nratio t43/t44" as ZPeak #dbeafe
   rectangle "High-mass GR/QFT anchors\nt23/t24, t25/t26, t27/t28\nresponses t72-t77" as HighMass #dbeafe
   rectangle "Theory candidates\nCASCADE TMD first\nMG5, MiNNLO, ARTEMIDE, GENEVA" as Theory #dbeafe
   rectangle "Raw first bins\n0.002 -> 228.59\n0.006 -> 225.69\ndelta 2.90" as Raw #dcfce7
-  rectangle "Local normalized first bins\n0.002 -> 188.4\n0.006 -> 185.09\ndelta 3.31" as Normalized #dcfce7
+  rectangle "Legacy t19/t20 normalized diagnostic\nnot active W3 t43 receipt" as Normalized #dcfce7
   rectangle "CMS-SMP-19-010\ncalibration baseline named only\nno calibration receipt" as Baseline #fef3c7
 }
 
@@ -300,7 +300,7 @@ MissingModelRefinement --> R42 : holdout failure
 MissingAcceptedDASHIAPI --> R34 : baseline hook is not accepted DASHI API
 MissingFreeze --> R30 : clean certificate + digest still missing
 MissingComparison --> R27 : intake still blocked
-MissingComparison --> R31 : receipt skeleton uninhabited
+MissingComparison --> R31 : accepted authority / strict pass still missing
 MissingRatio --> R18 : W4 remains blocked
 MissingConsumer --> R23 : W5/W6 remain blocked
 MissingLilaE8 --> LILA1 : diagnostic only; no E8 physics closure
@@ -309,7 +309,9 @@ MissingSiblingAdapter --> SIBR2 : extraction found no accepted shortcut
 
 note bottom
   This child graph is non-promoting. It coordinates the empirical residual
-  bridge only; it does not promote W3, W4, W5, W6, or W8.
+  bridge only. It records the bounded W3 t43 comparison-law surface plus
+  blocked authority lanes, but does not promote accepted W3 authority, W4, W5,
+  W6, W8, physical calibration, or full empirical adequacy.
 end note
 
 @enduml

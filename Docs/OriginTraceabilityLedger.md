@@ -8,6 +8,14 @@ repo. It is a reader and reviewer surface, not a theorem owner. Its purpose is
 to keep the origin story visible without upgrading bridge, packaging, or
 empirical lanes into stronger claims than the Agda modules carry.
 
+Paper-facing origin narrative may be used as provenance and bridge context
+only. Promotion requires either an `A` instance naming a concrete carrier, map,
+certificate, and consumer, or a `B` structural surface proving carrier,
+metric, algebraic, signature, Clifford, moonshine, or seam data needed by an
+instance lane. No universal fixed-point theorem, empirical adequacy,
+convergence-rate theorem, moonshine representation semantics, or completed
+physics claim follows from the origin thesis alone.
+
 ## Origin Thesis
 
 The useful organizing thesis is:

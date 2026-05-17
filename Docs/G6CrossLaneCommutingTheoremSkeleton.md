@@ -1,6 +1,6 @@
 # G6 Cross-Lane Commuting Theorem Skeleton
 
-Status: typed obligation/dependency surface; non-promoting.
+Status: typed full-section obligation/dependency surface; non-promoting.
 
 This document records the G6 placeholder that was missing from the roadmap.
 The corresponding Agda module is:
@@ -11,6 +11,11 @@ DASHI/Physics/Closure/CrossLaneCommutingTheoremSkeleton.agda
 
 The skeleton does not prove G6. It names the diagram that must eventually be
 inhabited after G2, G3, G4, and G5 provide theorem-complete lanes.
+
+As of the tracked-route update, `G6OfficialTrackedCrossLaneCommutingTheorem`
+and the official tracked above-threshold coordinate-independence theorem are
+paper-usable for the `GL.FactorVec` tracked route. This document remains about
+the fuller common-spine section theorem, not that tracked theorem.
 
 ## Diagram Obligation
 
@@ -213,13 +218,13 @@ specific candidate cannot supply one of the required section fields.
 
 This skeleton:
 
-- does not close G6;
+- does not close full common-spine G6 section closure;
 - does not construct a complete-unification theorem;
 - does not replace Maxwell, Schrodinger, GR, or empirical receipts;
 - does not promote any route candidate into a section proof;
 - does not prove negation of any section field;
-- does not permit publication language beyond "G6 obligation has a typed
-  placeholder and named candidate routes."
+- does not permit publication language for full G6 beyond "G6 section closure
+  has a typed placeholder and named candidate routes."
 
 G6 closes only when concrete lane morphisms and section proofs are supplied and
 the commuting witness is consumed by the publication audit.

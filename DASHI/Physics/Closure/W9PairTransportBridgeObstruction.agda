@@ -2,11 +2,10 @@ module DASHI.Physics.Closure.W9PairTransportBridgeObstruction where
 
 -- W9 theorem-interface bridge audit.
 --
--- The current kill interface accepts either the existing pair-transport
--- pressure witness or the weighted replacement obligation.  The available
--- unary weighted-Qcore/Nat-bound story is not one of those constructors.
--- This module records the exact typed obstruction without constructing a
--- W9KillReceipt.
+-- The current kill matrix now accepts the MDL termination seam as the W9 kill
+-- route.  The older pair-transport pressure equality route and weighted
+-- replacement identity route remain refuted.  This module records that split:
+-- W9 is unblocked via the MDL seam, but not via pressure equality or Qcore.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
@@ -41,9 +40,7 @@ data W9PairTransportBridgeStatus : Set where
     W9PairTransportBridgeStatus
   blockedByWeightedReplacementIdentificationMismatch :
     W9PairTransportBridgeStatus
-  requiresNewAcceptedKillRoute :
-    W9PairTransportBridgeStatus
-  retargetAcceptedOnlyNoW9KillReceipt :
+  acceptedMDLTerminationSeamRouteOnly :
     W9PairTransportBridgeStatus
 
 record W9PairTransportBridgeObstruction : Setω where
@@ -56,10 +53,18 @@ record W9PairTransportBridgeObstruction : Setω where
       ≡
       Kill.W9Cancellation
 
-    actualKillConditionIsStillBlocked :
+    actualKillConditionIsNowUnblocked :
       Kill.KillCondition.currentState actualKillCondition
       ≡
-      Kill.blocked
+      Kill.unblocked
+
+    killConditionReconciliation :
+      Kill.W9KillConditionReconciliation
+
+    killConditionRouteStatus :
+      Kill.W9KillConditionReconciliation.routeStatus killConditionReconciliation
+      ≡
+      Kill.acceptedMDLTerminationSeamRoute
 
     existingRouteCounterexample :
       DQ.DeltaPair
@@ -116,7 +121,11 @@ canonicalW9PairTransportBridgeObstruction =
         Kill.w9KillCondition
     ; actualKillConditionIsW9 =
         refl
-    ; actualKillConditionIsStillBlocked =
+    ; actualKillConditionIsNowUnblocked =
+        refl
+    ; killConditionReconciliation =
+        Kill.canonicalMDLTerminationSeamW9KillConditionReconciliation
+    ; killConditionRouteStatus =
         refl
     ; existingRouteCounterexample =
         W9.one , W9.three
@@ -138,17 +147,18 @@ canonicalW9PairTransportBridgeObstruction =
     ; retargetConsumerScopeIsAcceptedOnly =
         refl
     ; firstMissingBridge =
-        "No canonicalDeltaTransport bridge is inhabitable: the available weighted-support path is retargetConsumerAcceptedOnly, so W9 still lacks either ExistingCancellationPressureCompatibilityObligation.pressureWitness, WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy, or a W9KillRouteReceipt constructor accepting the retarget-only Nat-bound receipt"
+        "No canonicalDeltaTransport pressure-equality bridge is inhabitable: W9 is killed by the accepted MDL termination seam route, while ExistingCancellationPressureCompatibilityObligation.pressureWitness and WeightedValuationReplacementObligation.cancellationPressureIdentifiesWeightedQuadraticEnergy remain refuted"
     ; obstructionBoundary =
         "canonicalDeltaTransport theorem refl (x , y) uses the pair embeddedProfileCarrier"
         ∷ "ExistingCancellationPressureCompatibilityObligation requires a pointwise Z equality over that pair transport"
         ∷ "WeightedValuationReplacementObligation uses canonicalWeightedQuadraticTransport of the left input"
         ∷ "The current repo has counterexamples for both accepted routes"
         ∷ "W9WeightedSupportRetargetConsumerReceipt inhabits the downstream retarget consumer only"
-        ∷ "No W9KillReceipt is constructed here"
+        ∷ "BlockerKillConditions.canonicalMDLTerminationSeamW9KillReceipt is the accepted W9 kill receipt"
+        ∷ "No pressure-equality, weighted-Qcore, or cancellation-pressure compatibility promotion is claimed here"
         ∷ []
     ; status =
-        retargetAcceptedOnlyNoW9KillReceipt
+        acceptedMDLTerminationSeamRouteOnly
     }
 
 currentW9PairTransportBridgeStatus :

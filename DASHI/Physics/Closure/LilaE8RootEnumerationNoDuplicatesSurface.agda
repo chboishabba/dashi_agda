@@ -2116,6 +2116,23 @@ record E8UpstreamCompleteReceiptPromotionAudit : Setω where
       ≡
       E8.canonicalE8RootEnumerationObligations
 
+    upstreamPromotionBoundary :
+      E8.E8RootEnumerationCompletePromotionBoundary
+
+    upstreamPromotionBoundaryMissingTheoremNames :
+      List E8.E8UpstreamPromotionMissingTheoremName
+
+    upstreamPromotionBoundaryMissingTheoremNamesAreCanonical :
+      upstreamPromotionBoundaryMissingTheoremNames
+      ≡
+      E8.canonicalE8UpstreamPromotionMissingTheoremNames
+
+    upstreamPromotionBoundaryConstructorAvailable :
+      Bool
+
+    upstreamPromotionBoundaryConstructorAvailableIsFalse :
+      upstreamPromotionBoundaryConstructorAvailable ≡ false
+
     upstreamReceiptCompletedHere :
       Bool
 
@@ -2178,6 +2195,20 @@ canonicalE8UpstreamCompleteReceiptPromotionAudit =
     ; upstreamRequiredEnumerationObligationsAreCanonical =
         E8.E8RootEnumerationObstruction.remainingEnumerationObligationsAreCanonical
           E8.canonicalE8RootEnumerationObstruction
+    ; upstreamPromotionBoundary =
+        E8.canonicalE8RootEnumerationCompletePromotionBoundary
+    ; upstreamPromotionBoundaryMissingTheoremNames =
+        E8.E8RootEnumerationCompletePromotionBoundary.exactMissingTheoremNames
+          E8.canonicalE8RootEnumerationCompletePromotionBoundary
+    ; upstreamPromotionBoundaryMissingTheoremNamesAreCanonical =
+        E8.E8RootEnumerationCompletePromotionBoundary.exactMissingTheoremNamesAreCanonical
+          E8.canonicalE8RootEnumerationCompletePromotionBoundary
+    ; upstreamPromotionBoundaryConstructorAvailable =
+        E8.E8RootEnumerationCompletePromotionBoundary.completeReceiptConstructorAvailable
+          E8.canonicalE8RootEnumerationCompletePromotionBoundary
+    ; upstreamPromotionBoundaryConstructorAvailableIsFalse =
+        E8.E8RootEnumerationCompletePromotionBoundary.completeReceiptConstructorAvailableIsFalse
+          E8.canonicalE8RootEnumerationCompletePromotionBoundary
     ; upstreamReceiptCompletedHere =
         E8.E8RootEnumerationObstruction.receiptCompletedHere
           E8.canonicalE8RootEnumerationObstruction
@@ -2240,6 +2271,23 @@ record E8LocalSemanticCompletenessUpstreamPromotionBoundary : Setω where
       ≡
       E8.canonicalE8RootEnumerationObligations
 
+    upstreamPromotionBoundary :
+      E8.E8RootEnumerationCompletePromotionBoundary
+
+    upstreamPromotionBoundaryMissingTheoremNames :
+      List E8.E8UpstreamPromotionMissingTheoremName
+
+    upstreamPromotionBoundaryMissingTheoremNamesAreCanonical :
+      upstreamPromotionBoundaryMissingTheoremNames
+      ≡
+      E8.canonicalE8UpstreamPromotionMissingTheoremNames
+
+    upstreamPromotionBoundaryConstructorAvailable :
+      Bool
+
+    upstreamPromotionBoundaryConstructorAvailableIsFalse :
+      upstreamPromotionBoundaryConstructorAvailable ≡ false
+
     upstreamReceiptCompletedHere :
       Bool
 
@@ -2300,6 +2348,20 @@ localSemanticCompletenessUpstreamPromotionBoundary =
     ; upstreamRemainingEnumerationObligationsAreCanonical =
         E8.E8RootEnumerationObstruction.remainingEnumerationObligationsAreCanonical
           E8.canonicalE8RootEnumerationObstruction
+    ; upstreamPromotionBoundary =
+        E8.canonicalE8RootEnumerationCompletePromotionBoundary
+    ; upstreamPromotionBoundaryMissingTheoremNames =
+        E8.E8RootEnumerationCompletePromotionBoundary.exactMissingTheoremNames
+          E8.canonicalE8RootEnumerationCompletePromotionBoundary
+    ; upstreamPromotionBoundaryMissingTheoremNamesAreCanonical =
+        E8.E8RootEnumerationCompletePromotionBoundary.exactMissingTheoremNamesAreCanonical
+          E8.canonicalE8RootEnumerationCompletePromotionBoundary
+    ; upstreamPromotionBoundaryConstructorAvailable =
+        E8.E8RootEnumerationCompletePromotionBoundary.completeReceiptConstructorAvailable
+          E8.canonicalE8RootEnumerationCompletePromotionBoundary
+    ; upstreamPromotionBoundaryConstructorAvailableIsFalse =
+        E8.E8RootEnumerationCompletePromotionBoundary.completeReceiptConstructorAvailableIsFalse
+          E8.canonicalE8RootEnumerationCompletePromotionBoundary
     ; upstreamReceiptCompletedHere =
         E8.E8RootEnumerationObstruction.receiptCompletedHere
           E8.canonicalE8RootEnumerationObstruction

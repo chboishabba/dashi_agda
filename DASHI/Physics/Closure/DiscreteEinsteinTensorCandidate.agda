@@ -1,13 +1,23 @@
 module DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (zero)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Unit using (⊤; tt)
 
+open import MonsterOntos using (SSP)
 import DASHI.Physics.Closure.MinkowskiLimitReceipt as ML
 import DASHI.Physics.CRTPeriodJFixedBridge as CRTJ
+import Ontology.GodelLattice as GL
+import Ontology.Hecke.FactorVecInstances as FVI
+
+infix 4 _≢_
+
+_≢_ : {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
 
 ------------------------------------------------------------------------
 -- Diagnostic-only GR candidate surface.
@@ -173,7 +183,7 @@ canonicalDiscreteEinsteinTensorConstructionMissingPrimitives =
   ∷ missingFiniteRBianchiWitness
   ∷ []
 
-record DiscreteEinsteinTensorConstructionRequestSurface : Set₁ where
+record DiscreteEinsteinTensorConstructionRequestSurface : Set₂ where
   field
     BasePoint :
       Set
@@ -294,10 +304,355 @@ record DiscreteEinsteinTensorConstructionRequestSurface : Set₁ where
       Set
 
     nonFlatWitness :
-      Set
+      Set₁
 
     constructionBoundary :
       List String
+
+record FactorVecSSPDiscreteEinsteinTensorConstructionRequestSurface : Set₂ where
+  field
+    constructionRequest :
+      DiscreteEinsteinTensorConstructionRequestSurface
+
+    basePointIsFactorVec :
+      DiscreteEinsteinTensorConstructionRequestSurface.BasePoint
+        constructionRequest
+      ≡
+      GL.FactorVec
+
+    coordinateIndexIsSSP :
+      DiscreteEinsteinTensorConstructionRequestSurface.CoordinateIndex
+        constructionRequest
+      ≡
+      SSP
+
+    alignmentBoundary :
+      List String
+
+zeroFactorVec :
+  GL.FactorVec
+zeroFactorVec =
+  GL.v15
+    zero zero zero zero zero
+    zero zero zero zero zero
+    zero zero zero zero zero
+
+factorVecLeft :
+  GL.FactorVec →
+  GL.FactorVec →
+  GL.FactorVec
+factorVecLeft x _ = x
+
+factorVecSSPPrimeDifferenceΔ :
+  (GL.FactorVec → GL.FactorVec) →
+  GL.FactorVec →
+  SSP →
+  GL.FactorVec
+factorVecSSPPrimeDifferenceΔ observable base direction =
+  observable (FVI.primeBump direction base)
+
+factorVecSSPZeroMetric :
+  GL.FactorVec →
+  SSP →
+  SSP →
+  GL.FactorVec
+factorVecSSPZeroMetric _ _ _ =
+  zeroFactorVec
+
+factorVecSSPZeroConnection :
+  GL.FactorVec →
+  SSP →
+  SSP →
+  SSP →
+  GL.FactorVec
+factorVecSSPZeroConnection _ _ _ _ =
+  zeroFactorVec
+
+factorVecSSPZeroRiemann :
+  GL.FactorVec →
+  SSP →
+  SSP →
+  SSP →
+  SSP →
+  GL.FactorVec
+factorVecSSPZeroRiemann _ _ _ _ _ =
+  zeroFactorVec
+
+factorVecSSPContraction :
+  (SSP → GL.FactorVec) →
+  GL.FactorVec
+factorVecSSPContraction component =
+  component MonsterOntos.p2
+
+factorVecSSPRicci :
+  GL.FactorVec →
+  SSP →
+  SSP →
+  GL.FactorVec
+factorVecSSPRicci base mu nu =
+  factorVecSSPContraction
+    (λ rho →
+      factorVecSSPZeroRiemann base rho mu rho nu)
+
+factorVecSSPScalarCurvature :
+  GL.FactorVec →
+  GL.FactorVec
+factorVecSSPScalarCurvature base =
+  factorVecSSPContraction
+    (λ mu →
+      factorVecSSPContraction
+        (λ nu →
+          factorVecLeft
+            (factorVecSSPZeroMetric base mu nu)
+            (factorVecSSPRicci base mu nu)))
+
+factorVecSSPEinsteinTensor :
+  GL.FactorVec →
+  SSP →
+  SSP →
+  GL.FactorVec
+factorVecSSPEinsteinTensor base mu nu =
+  factorVecLeft
+    (factorVecSSPRicci base mu nu)
+    (factorVecLeft
+      (factorVecLeft zeroFactorVec (factorVecSSPScalarCurvature base))
+      (factorVecSSPZeroMetric base mu nu))
+
+factorVecSSPCommutatorShapedRiemannFromΔΓLaw :
+  (base : GL.FactorVec) →
+  (rho sigma mu nu : SSP) →
+  Set
+factorVecSSPCommutatorShapedRiemannFromΔΓLaw base rho sigma _ _ =
+  (observable : GL.FactorVec → GL.FactorVec) →
+  observable (FVI.primeBump sigma (FVI.primeBump rho base))
+  ≡
+  observable (FVI.primeBump rho (FVI.primeBump sigma base)) →
+  observable (FVI.primeBump sigma (FVI.primeBump rho base))
+  ≡
+  observable (FVI.primeBump rho (FVI.primeBump sigma base))
+
+data FactorVecSSPFiniteRBianchiWitness : Set where
+
+data FactorVecSSPNonFlatConnectionWitnessMissingField : Set where
+  missingFactorVecSSPConnectionCoefficientsDifferFromZero :
+    FactorVecSSPNonFlatConnectionWitnessMissingField
+  missingFactorVecSSPRiemannCurvatureDifferFromZero :
+    FactorVecSSPNonFlatConnectionWitnessMissingField
+  missingFactorVecSSPConnectionMatchesConstructionRequest :
+    FactorVecSSPNonFlatConnectionWitnessMissingField
+  missingFactorVecSSPRiemannMatchesConstructionRequest :
+    FactorVecSSPNonFlatConnectionWitnessMissingField
+  missingFactorVecSSPRiemannFromNonFlatDeltaGamma :
+    FactorVecSSPNonFlatConnectionWitnessMissingField
+
+record FactorVecSSPNonFlatConnectionWitness : Set₁ where
+  field
+    connectionCoefficients :
+      GL.FactorVec →
+      SSP →
+      SSP →
+      SSP →
+      GL.FactorVec
+
+    connectionMatchesConstructionRequest :
+      connectionCoefficients
+      ≡
+      factorVecSSPZeroConnection
+
+    nonFlatBase :
+      GL.FactorVec
+
+    nonFlatRho :
+      SSP
+
+    nonFlatSigma :
+      SSP
+
+    nonFlatMu :
+      SSP
+
+    nonFlatConnectionComponent :
+      connectionCoefficients nonFlatBase nonFlatRho nonFlatSigma nonFlatMu
+      ≢
+      zeroFactorVec
+
+    riemannCurvature :
+      GL.FactorVec →
+      SSP →
+      SSP →
+      SSP →
+      SSP →
+      GL.FactorVec
+
+    riemannMatchesConstructionRequest :
+      riemannCurvature
+      ≡
+      factorVecSSPZeroRiemann
+
+    nonFlatNu :
+      SSP
+
+    nonFlatRiemannComponent :
+      riemannCurvature nonFlatBase nonFlatRho nonFlatSigma nonFlatMu nonFlatNu
+      ≢
+      zeroFactorVec
+
+    riemannFromNonFlatΔΓ :
+      factorVecSSPCommutatorShapedRiemannFromΔΓLaw
+        nonFlatBase
+        nonFlatRho
+        nonFlatSigma
+        nonFlatMu
+        nonFlatNu
+
+    witnessBoundary :
+      List String
+
+canonicalFactorVecSSPNonFlatConnectionWitnessRequiredFields :
+  List FactorVecSSPNonFlatConnectionWitnessMissingField
+canonicalFactorVecSSPNonFlatConnectionWitnessRequiredFields =
+  missingFactorVecSSPConnectionCoefficientsDifferFromZero
+  ∷ missingFactorVecSSPRiemannCurvatureDifferFromZero
+  ∷ missingFactorVecSSPConnectionMatchesConstructionRequest
+  ∷ missingFactorVecSSPRiemannMatchesConstructionRequest
+  ∷ missingFactorVecSSPRiemannFromNonFlatDeltaGamma
+  ∷ []
+
+factorVecSSPDiscreteEinsteinTensorConstructionRequest :
+  DiscreteEinsteinTensorConstructionRequestSurface
+factorVecSSPDiscreteEinsteinTensorConstructionRequest =
+  record
+    { BasePoint =
+        GL.FactorVec
+    ; CoordinateIndex =
+        SSP
+    ; Scalar =
+        GL.FactorVec
+    ; _+_ =
+        factorVecLeft
+    ; _-_ =
+        factorVecLeft
+    ; _*_ =
+        factorVecLeft
+    ; oneHalf =
+        zeroFactorVec
+    ; finiteContraction =
+        factorVecSSPContraction
+    ; metricComponent =
+        factorVecSSPZeroMetric
+    ; inverseMetricComponent =
+        factorVecSSPZeroMetric
+    ; Δ =
+        factorVecSSPPrimeDifferenceΔ
+    ; Γ =
+        factorVecSSPZeroConnection
+    ; Riemann =
+        factorVecSSPZeroRiemann
+    ; RiemannFromΔΓLaw =
+        factorVecSSPCommutatorShapedRiemannFromΔΓLaw
+    ; Ricci =
+        factorVecSSPRicci
+    ; RicciFromRiemannLaw =
+        λ _ _ _ → refl
+    ; scalarCurvature =
+        factorVecSSPScalarCurvature
+    ; scalarCurvatureTraceLaw =
+        λ _ → refl
+    ; EinsteinTensor =
+        factorVecSSPEinsteinTensor
+    ; EinsteinTensorLaw =
+        λ _ _ _ → refl
+    ; finiteRBianchiWitness =
+        FactorVecSSPFiniteRBianchiWitness
+    ; nonFlatWitness =
+        FactorVecSSPNonFlatConnectionWitness
+    ; constructionBoundary =
+        "BasePoint is Ontology.GodelLattice.FactorVec"
+        ∷ "CoordinateIndex is MonsterOntos.SSP"
+        ∷ "Δ is prime-bump pullback over FactorVec"
+        ∷ "RiemannFromΔΓLaw is only the commutator-shaped adapter law requested by the Bianchi surface"
+        ∷ "Γ and Riemann remain zero placeholders; no non-flat connection inhabitant is supplied"
+        ∷ "nonFlatWitness is the structured FactorVecSSPNonFlatConnectionWitness request boundary"
+        ∷ []
+    }
+
+record FactorVecSSPNonFlatConnectionWitnessRequest : Set₂ where
+  field
+    targetConstructionRequest :
+      DiscreteEinsteinTensorConstructionRequestSurface
+
+    targetConstructionRequestIsCanonicalFactorVecSSP :
+      targetConstructionRequest
+      ≡
+      factorVecSSPDiscreteEinsteinTensorConstructionRequest
+
+    requestedWitnessName :
+      String
+
+    requiredMissingFields :
+      List FactorVecSSPNonFlatConnectionWitnessMissingField
+
+    firstMissingField :
+      FactorVecSSPNonFlatConnectionWitnessMissingField
+
+    firstMissingFieldIsNonZeroConnectionComponent :
+      firstMissingField
+      ≡
+      missingFactorVecSSPConnectionCoefficientsDifferFromZero
+
+    obstructionBoundary :
+      List String
+
+canonicalFactorVecSSPNonFlatConnectionWitnessRequest :
+  FactorVecSSPNonFlatConnectionWitnessRequest
+canonicalFactorVecSSPNonFlatConnectionWitnessRequest =
+  record
+    { targetConstructionRequest =
+        factorVecSSPDiscreteEinsteinTensorConstructionRequest
+    ; targetConstructionRequestIsCanonicalFactorVecSSP =
+        refl
+    ; requestedWitnessName =
+        "DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate.FactorVecSSPNonFlatConnectionWitness"
+    ; requiredMissingFields =
+        canonicalFactorVecSSPNonFlatConnectionWitnessRequiredFields
+    ; firstMissingField =
+        missingFactorVecSSPConnectionCoefficientsDifferFromZero
+    ; firstMissingFieldIsNonZeroConnectionComponent =
+        refl
+    ; obstructionBoundary =
+        "A witness must supply Γ coefficients over FactorVec and SSP"
+        ∷ "The supplied Γ must match the construction request's Γ field"
+        ∷ "The witness must name a base/direction triple where Γ differs from zeroFactorVec"
+        ∷ "The witness must supply Riemann curvature matching the construction request's Riemann field"
+        ∷ "The witness must name a base/direction quadruple where Riemann differs from zeroFactorVec"
+        ∷ "The witness must supply the RiemannFromΔΓ law at that non-flat component"
+        ∷ "The canonical FactorVec/SSP request currently has zero Γ and zero Riemann placeholders, so this request is intentionally not inhabited"
+        ∷ []
+    }
+
+factorVecSSPNonFlatConnectionWitnessRequestExactFirstMissing :
+  FactorVecSSPNonFlatConnectionWitnessRequest.firstMissingField
+    canonicalFactorVecSSPNonFlatConnectionWitnessRequest
+  ≡
+  missingFactorVecSSPConnectionCoefficientsDifferFromZero
+factorVecSSPNonFlatConnectionWitnessRequestExactFirstMissing = refl
+
+canonicalFactorVecSSPDiscreteEinsteinTensorConstructionRequestSurface :
+  FactorVecSSPDiscreteEinsteinTensorConstructionRequestSurface
+canonicalFactorVecSSPDiscreteEinsteinTensorConstructionRequestSurface =
+  record
+    { constructionRequest =
+        factorVecSSPDiscreteEinsteinTensorConstructionRequest
+    ; basePointIsFactorVec =
+        refl
+    ; coordinateIndexIsSSP =
+        refl
+    ; alignmentBoundary =
+        "DiscreteEinsteinTensorConstructionRequestSurface.BasePoint is GL.FactorVec"
+        ∷ "DiscreteEinsteinTensorConstructionRequestSurface.CoordinateIndex is SSP"
+        ∷ "The aligned request intentionally does not inhabit its nonFlatWitness"
+        ∷ []
+    }
 
 data DiscreteEinsteinTensorCandidateStatus : Set where
   flatMetricCandidateOnly :

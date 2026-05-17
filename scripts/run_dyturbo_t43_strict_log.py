@@ -81,6 +81,15 @@ def _extract_h1_values(dat_path: Path, hist_name: str) -> list[float]:
 
 
 def _failure(reason: str, args: argparse.Namespace, **extra: Any) -> dict[str, Any]:
+    observable_contract_exact = args.qt_phi_mapping in {
+        "native-phi-star",
+        "native_phi_star",
+        "validated-event-level-phistar",
+    }
+    jet_contract_exact = args.jet_mode in {
+        "exact-cms-at-least-one-jet",
+        "exact_cms_at_least_one_jet",
+    }
     payload = {
         "artifact_schema": "dashi.dyturbo.t43_direct_strict_log.v1",
         "status": "blocked",
@@ -88,6 +97,25 @@ def _failure(reason: str, args: argparse.Namespace, **extra: Any) -> dict[str, A
         "numerator_dat": args.numerator_dat,
         "denominator_dat": args.denominator_dat,
         "strict_artifact": args.strict_artifact,
+        "provider_treatment": args.provider_treatment,
+        "cut_mode": args.cut_mode,
+        "fpc_applied": args.fpc_applied,
+        "fpc_artifact": args.fpc_artifact,
+        "qt_phi_mapping": args.qt_phi_mapping,
+        "jet_mode": args.jet_mode,
+        "normalization_treatment": args.normalization_treatment,
+        "provider_contract_exact_cms": (
+            args.provider_treatment in {
+                "fpc_fixed_order_fiducial",
+                "dyturbo_fpc_exact_cms_fiducial",
+            }
+            and args.cut_mode == "exact-cms-leading-subleading"
+            and args.fpc_applied
+            and observable_contract_exact
+            and jet_contract_exact
+        ),
+        "observable_contract_exact": observable_contract_exact,
+        "jet_contract_exact": jet_contract_exact,
         "promotes": False,
     }
     payload.update(extra)
@@ -134,11 +162,47 @@ def compute(args: argparse.Namespace) -> dict[str, Any]:
     chi2 = float(residual @ cov_inv @ residual)
     chi2_per_dof = chi2 / n_bins
     strict_pass = bool(chi2_per_dof <= args.threshold)
+    provider_contract_exact = (
+        args.provider_treatment in {
+            "fpc_fixed_order_fiducial",
+            "dyturbo_fpc_exact_cms_fiducial",
+        }
+        and args.cut_mode == "exact-cms-leading-subleading"
+        and args.fpc_applied
+        and args.qt_phi_mapping
+        in {
+            "native-phi-star",
+            "native_phi_star",
+            "validated-event-level-phistar",
+        }
+        and args.jet_mode
+        in {
+            "exact-cms-at-least-one-jet",
+            "exact_cms_at_least_one_jet",
+        }
+    )
+    observable_contract_exact = args.qt_phi_mapping in {
+        "native-phi-star",
+        "native_phi_star",
+        "validated-event-level-phistar",
+    }
+    jet_contract_exact = args.jet_mode in {
+        "exact-cms-at-least-one-jet",
+        "exact_cms_at_least_one_jet",
+    }
+    promotes = bool(strict_pass and provider_contract_exact)
     return {
         "artifact_schema": "dashi.dyturbo.t43_direct_strict_log.v1",
         "status": "computed",
         "provider": "DYTurbo-1.4.2-direct-fiducial-xs_qt",
         "provider_role": "direct fiducial t43 ratio prediction, not a pure hadronic W_i grid",
+        "provider_treatment": args.provider_treatment,
+        "cut_mode": args.cut_mode,
+        "fpc_applied": args.fpc_applied,
+        "fpc_artifact": args.fpc_artifact,
+        "qt_phi_mapping": args.qt_phi_mapping,
+        "jet_mode": args.jet_mode,
+        "normalization_treatment": args.normalization_treatment,
         "numerator_dat": args.numerator_dat,
         "denominator_dat": args.denominator_dat,
         "strict_artifact": args.strict_artifact,
@@ -147,15 +211,31 @@ def compute(args: argparse.Namespace) -> dict[str, Any]:
         "chi2": chi2,
         "chi2_per_dof": chi2_per_dof,
         "strict_pass": strict_pass,
-        "promotes": strict_pass,
+        "provider_contract_exact_cms": provider_contract_exact,
+        "observable_contract_exact": observable_contract_exact,
+        "jet_contract_exact": jet_contract_exact,
+        "promotes": promotes,
         "numerator_xs_qt": [float(value) for value in numerator],
         "denominator_xs_qt": [float(value) for value in denominator],
         "prediction_ratio": [float(value) for value in ratio],
         "log_prediction": [float(value) for value in log_prediction],
         "log_residuals": [float(value) for value in residual],
         "promotion_boundary": (
-            "direct DYTurbo fiducial route promotes only if strict-log chi2/dof <= threshold; "
+            "direct DYTurbo fiducial route promotes only if strict-log chi2/dof <= threshold "
+            "and provider metadata proves exact CMS leading/subleading cuts with FPC enabled "
+            "on the native phi* observable with the CMS at-least-one-jet selection; "
+            "leading-order qT-to-phi* maps and lepton-only fiducial cuts remain diagnostic; "
             "it does not satisfy the independent W_i provider contract"
+        ),
+        "non_promoting_reason": None
+        if promotes
+        else (
+            "chi2 threshold failed"
+            if not strict_pass
+            else (
+                "provider metadata is not exact-cms-leading-subleading with FPC enabled "
+                "with native phi* observable mapping and exact at-least-one-jet selection"
+            )
         ),
     }
 
@@ -169,6 +249,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--strict-artifact", default=str(DEFAULT_STRICT_ARTIFACT))
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
     parser.add_argument("--threshold", type=float, default=2.0)
+    parser.add_argument("--provider-treatment", default="unspecified")
+    parser.add_argument("--cut-mode", default="unspecified")
+    parser.add_argument("--fpc-applied", action="store_true")
+    parser.add_argument("--fpc-artifact", default="")
+    parser.add_argument("--qt-phi-mapping", default="qT=Q*phiStar-leading-order")
+    parser.add_argument("--jet-mode", default="none")
+    parser.add_argument("--normalization-treatment", default="raw-xs-qt-ratio-no-posterior-normalization")
     return parser.parse_args()
 
 

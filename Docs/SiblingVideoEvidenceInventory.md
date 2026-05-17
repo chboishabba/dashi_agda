@@ -90,6 +90,25 @@ artifacts, and tree-diffusion metrics.
   `tree_rollout_mse = 4.246448141002339e-06` and
   `rbf_rollout_mse = 2.155684319973986e-05`.
 
+## Paper 1 curated figure pack
+
+The Paper 1 origins appendix now has a curated local figure pack:
+
+- manifest:
+  `Docs/PaperDraftWorkingFolder/FigureCandidateManifest.md`
+- stable image copies:
+  `Docs/Images/paper1-origin-figures/`
+- LaTeX-facing plate:
+  `Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/paper1_origin_diagnostics_plate.png`
+
+The plate includes stills or static plots for dashifine ultrametric-tree and
+ultrametric-grid diagnostics, dashitest tree-diffusion rollout and detail-band
+diagnostics, a FRACDASH rank-4 branch-density projection, and a dashiRTX
+adaptive-refinement toy frame. These figures are selected because they show the
+geometry behind traversal, refinement, and projection better than prose alone.
+They remain visual provenance only and inherit the non-promotion boundary
+below.
+
 ## Boundary
 
 The correct paper and repo claim is:

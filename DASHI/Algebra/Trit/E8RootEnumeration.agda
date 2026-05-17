@@ -5,11 +5,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.List.Base as List using (List; _∷_; []; length; _++_)
 open import Data.Vec using (Vec)
 import Data.Vec as Vec
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 open import Relation.Nullary using (Dec)
 open import Relation.Nullary using (yes; no)
 
@@ -488,6 +488,31 @@ memberIndexedRoot x (y ∷ ys)
 ... | no _ =
   memberIndexedRoot x ys
 
+memberIndexedRoot-head :
+  {n : Nat}
+  (x : Vec HTI.HalfTritIndexed n)
+  (xs : List (Vec HTI.HalfTritIndexed n)) →
+  memberIndexedRoot x (x ∷ xs) ≡ true
+memberIndexedRoot-head x xs
+  with decEqIndexedRoot x x
+... | yes _ =
+  refl
+... | no neq =
+  ⊥-elim (neq refl)
+
+memberIndexedRoot-cons-no :
+  {n : Nat}
+  (x y : Vec HTI.HalfTritIndexed n)
+  (xs : List (Vec HTI.HalfTritIndexed n)) →
+  (x ≡ y → ⊥) →
+  memberIndexedRoot x (y ∷ xs) ≡ memberIndexedRoot x xs
+memberIndexedRoot-cons-no x y xs neq
+  with decEqIndexedRoot x y
+... | yes eq =
+  ⊥-elim (neq eq)
+... | no _ =
+  refl
+
 noDuplicatesIndexedRootList :
   {n : Nat} →
   List (Vec HTI.HalfTritIndexed n) →
@@ -918,6 +943,424 @@ data HalfIndexedRootParitySound :
     xs ≡ List.map signVectorToHalfIndexedRoot (evenSignVectors 8) →
     HalfIndexedRootParitySound xs
 
+record IntegerIndexedRootTwoSparseShape
+  (indexedRoot : E8IndexedRootCarrier) :
+  Set where
+  constructor integerIndexedRootTwoSparseShape
+  field
+    pair :
+      CoordinatePair8
+
+    leftSign :
+      E8Sign
+
+    rightSign :
+      E8Sign
+
+    generatedRootIsIndexedRoot :
+      mkIntegerIndexedRoot pair leftSign rightSign ≡ indexedRoot
+
+integerIndexedRootGeneratorMembership :
+  (pair : CoordinatePair8) →
+  (leftSign rightSign : E8Sign) →
+  IndexedRootMember
+    (mkIntegerIndexedRoot pair leftSign rightSign)
+    integerIndexedRoots
+integerIndexedRootGeneratorMembership pair01 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair01 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair01 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair01 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair02 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair02 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair02 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair02 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair03 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair03 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair03 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair03 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair04 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair04 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair04 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair04 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair05 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair05 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair05 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair05 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair06 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair06 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair06 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair06 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair07 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair07 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair07 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair07 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair12 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair12 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair12 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair12 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair13 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair13 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair13 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair13 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair14 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair14 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair14 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair14 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair15 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair15 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair15 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair15 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair16 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair16 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair16 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair16 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair17 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair17 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair17 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair17 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair23 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair23 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair23 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair23 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair24 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair24 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair24 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair24 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair25 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair25 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair25 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair25 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair26 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair26 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair26 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair26 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair27 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair27 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair27 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair27 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair34 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair34 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair34 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair34 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair35 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair35 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair35 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair35 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair36 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair36 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair36 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair36 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair37 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair37 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair37 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair37 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair45 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair45 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair45 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair45 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair46 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair46 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair46 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair46 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair47 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair47 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair47 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair47 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair56 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair56 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair56 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair56 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair57 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair57 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair57 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair57 positiveSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair67 negativeSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair67 negativeSign positiveSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair67 positiveSign negativeSign =
+  memberByExecutableCheck refl
+integerIndexedRootGeneratorMembership pair67 positiveSign positiveSign =
+  memberByExecutableCheck refl
+
+record IntegerIndexedRootsCompleteForTwoSparseShape : Set where
+  field
+    integerTwoSparseShapeMember :
+      {indexedRoot : E8IndexedRootCarrier} →
+      IntegerIndexedRootTwoSparseShape indexedRoot →
+      IndexedRootMember indexedRoot integerIndexedRoots
+
+integerIndexedRootsCompleteForTwoSparseShape :
+  IntegerIndexedRootsCompleteForTwoSparseShape
+integerIndexedRootsCompleteForTwoSparseShape =
+  record
+    { integerTwoSparseShapeMember =
+        λ {indexedRoot}
+          (integerIndexedRootTwoSparseShape
+            pair
+            leftSign
+            rightSign
+            generatedRootIsIndexedRoot) →
+          subst
+            (λ candidate → IndexedRootMember candidate integerIndexedRoots)
+            generatedRootIsIndexedRoot
+            (integerIndexedRootGeneratorMembership
+              pair
+              leftSign
+              rightSign)
+    }
+
+integerIndexedRootsCompleteForTwoSparseShapeTheorem :
+  {indexedRoot : E8IndexedRootCarrier} →
+  IntegerIndexedRootTwoSparseShape indexedRoot →
+  IndexedRootMember indexedRoot integerIndexedRoots
+integerIndexedRootsCompleteForTwoSparseShapeTheorem =
+  IntegerIndexedRootsCompleteForTwoSparseShape.integerTwoSparseShapeMember
+    integerIndexedRootsCompleteForTwoSparseShape
+
+record HalfIndexedRootEvenParityShape
+  (indexedRoot : E8IndexedRootCarrier) :
+  Set where
+  constructor halfIndexedRootEvenParityShape
+  field
+    signs :
+      EightVec E8Sign
+
+    generatedRootIsIndexedRoot :
+      signVectorToHalfIndexedRoot signs ≡ indexedRoot
+
+    generatedRootIsInEvenParityFamily :
+      memberIndexedRoot
+        (signVectorToHalfIndexedRoot signs)
+        halfIndexedRoots
+      ≡
+      true
+
+record HalfIndexedRootsCompleteForEvenParityShape : Set where
+  field
+    halfEvenParityShapeMember :
+      {indexedRoot : E8IndexedRootCarrier} →
+      HalfIndexedRootEvenParityShape indexedRoot →
+      IndexedRootMember indexedRoot halfIndexedRoots
+
+halfIndexedRootsCompleteForEvenParityShape :
+  HalfIndexedRootsCompleteForEvenParityShape
+halfIndexedRootsCompleteForEvenParityShape =
+  record
+    { halfEvenParityShapeMember =
+        λ {indexedRoot}
+          (halfIndexedRootEvenParityShape
+            signs
+            generatedRootIsIndexedRoot
+            generatedRootIsInEvenParityFamily) →
+          subst
+            (λ candidate → IndexedRootMember candidate halfIndexedRoots)
+            generatedRootIsIndexedRoot
+            (memberByExecutableCheck generatedRootIsInEvenParityFamily)
+    }
+
+halfIndexedRootsCompleteForEvenParityShapeTheorem :
+  {indexedRoot : E8IndexedRootCarrier} →
+  HalfIndexedRootEvenParityShape indexedRoot →
+  IndexedRootMember indexedRoot halfIndexedRoots
+halfIndexedRootsCompleteForEvenParityShapeTheorem =
+  HalfIndexedRootsCompleteForEvenParityShape.halfEvenParityShapeMember
+    halfIndexedRootsCompleteForEvenParityShape
+
+indexedRootMemberAppendLeft :
+  {n : Nat}
+  {x : Vec HTI.HalfTritIndexed n}
+  {xs ys : List (Vec HTI.HalfTritIndexed n)} →
+  IndexedRootMember x xs →
+  IndexedRootMember x (xs ++ ys)
+indexedRootMemberAppendLeft {xs = []} (memberByExecutableCheck ())
+indexedRootMemberAppendLeft {x = x} {xs = y ∷ xs} {ys = ys}
+  (memberByExecutableCheck membershipCheck)
+  with decEqIndexedRoot x y
+... | yes refl =
+  memberByExecutableCheck (memberIndexedRoot-head x (xs ++ ys))
+... | no neq
+  with indexedRootMemberAppendLeft
+         {xs = xs}
+         {ys = ys}
+         (memberByExecutableCheck membershipCheck)
+... | memberByExecutableCheck recursiveCheck =
+  memberByExecutableCheck
+    (trans (memberIndexedRoot-cons-no x y (xs ++ ys) neq) recursiveCheck)
+
+indexedRootMemberAppendRight :
+  {n : Nat}
+  {x : Vec HTI.HalfTritIndexed n}
+  {xs ys : List (Vec HTI.HalfTritIndexed n)} →
+  IndexedRootMember x ys →
+  IndexedRootMember x (xs ++ ys)
+indexedRootMemberAppendRight {xs = []} membership =
+  membership
+indexedRootMemberAppendRight {x = x} {xs = y ∷ xs} {ys = ys} membership
+  with decEqIndexedRoot x y
+... | yes refl =
+  memberByExecutableCheck (memberIndexedRoot-head x (xs ++ ys))
+... | no neq
+  with indexedRootMemberAppendRight
+         {xs = xs}
+         {ys = ys}
+         membership
+... | memberByExecutableCheck recursiveCheck =
+  memberByExecutableCheck
+    (trans (memberIndexedRoot-cons-no x y (xs ++ ys) neq) recursiveCheck)
+
+data CombinedIndexedRootE8Shape
+  (indexedRoot : E8IndexedRootCarrier) :
+  Set where
+  combinedIntegerIndexedRootShape :
+    IntegerIndexedRootTwoSparseShape indexedRoot →
+    CombinedIndexedRootE8Shape indexedRoot
+  combinedHalfIndexedRootShape :
+    HalfIndexedRootEvenParityShape indexedRoot →
+    CombinedIndexedRootE8Shape indexedRoot
+
+record CombinedIndexedRootsCompleteForE8Shape : Set where
+  field
+    combinedE8ShapeMember :
+      {indexedRoot : E8IndexedRootCarrier} →
+      CombinedIndexedRootE8Shape indexedRoot →
+      IndexedRootMember indexedRoot combinedIndexedRoots
+
+combinedIndexedRootsCompleteForE8Shape :
+  CombinedIndexedRootsCompleteForE8Shape
+combinedIndexedRootsCompleteForE8Shape =
+  record
+    { combinedE8ShapeMember =
+        λ
+          { (combinedIntegerIndexedRootShape integerShape) →
+              indexedRootMemberAppendLeft
+                (integerIndexedRootsCompleteForTwoSparseShapeTheorem
+                  integerShape)
+          ; (combinedHalfIndexedRootShape halfShape) →
+              indexedRootMemberAppendRight
+                {xs = integerIndexedRoots}
+                {ys = halfIndexedRoots}
+                (halfIndexedRootsCompleteForEvenParityShapeTheorem
+                  halfShape)
+          }
+    }
+
+combinedIndexedRootsCompleteForE8ShapeTheorem :
+  {indexedRoot : E8IndexedRootCarrier} →
+  CombinedIndexedRootE8Shape indexedRoot →
+  IndexedRootMember indexedRoot combinedIndexedRoots
+combinedIndexedRootsCompleteForE8ShapeTheorem =
+  CombinedIndexedRootsCompleteForE8Shape.combinedE8ShapeMember
+    combinedIndexedRootsCompleteForE8Shape
+
 integerIndexedRootsNoDuplicatesBridge :
   IndexedRootNoDuplicates integerIndexedRoots
 integerIndexedRootsNoDuplicatesBridge =
@@ -966,9 +1409,6 @@ canonicalE8NativePropositionalLiftTargets =
   ∷ liftIndexedRootNoDuplicatesToNativeUnique
   ∷ liftIndexedRootFamiliesDisjointToNativeDisjoint
   ∷ liftHalfIndexedRootParitySoundToNativeEvenParity
-  ∷ liftIntegerGeneratorToTwoSparseCompleteness
-  ∷ liftHalfGeneratorToEvenParityCompleteness
-  ∷ liftCombinedGeneratorToE8Completeness
   ∷ []
 
 data E8StructuralBridgeResidualObligation : Set where
@@ -994,9 +1434,6 @@ canonicalE8StructuralBridgeResidualObligations =
   ∷ bridgeExecutableNoDuplicatesToNativeNoDuplicates
   ∷ bridgeExecutableDisjointnessToNativeDisjointness
   ∷ bridgeEvenSignConstructionToNativeParityPredicate
-  ∷ proveIntegerTwoSparseCompleteness
-  ∷ proveHalfEvenParityCompleteness
-  ∷ proveCombinedE8Completeness
   ∷ []
 
 record E8BooleanBackedStructuralBridgeLayer : Set where
@@ -1086,13 +1523,10 @@ canonicalE8RootEnumerationProofObligations :
   List E8RootEnumerationProofObligation
 canonicalE8RootEnumerationProofObligations =
   integerIndexedRootsNoDuplicatesObligation
-  ∷ integerIndexedRootsCompleteForTwoSparseShapeObligation
   ∷ halfIndexedRootsEvenParitySoundnessObligation
   ∷ halfIndexedRootsNoDuplicatesObligation
-  ∷ halfIndexedRootsCompleteForEvenParityShapeObligation
   ∷ integerHalfIndexedRootsDisjointObligation
   ∷ combinedIndexedRootsNoDuplicatesObligation
-  ∷ combinedIndexedRootsCompleteForE8ShapeObligation
   ∷ []
 
 data E8RootEnumerationComplete : Set where
@@ -1101,6 +1535,103 @@ e8RootEnumerationCompleteImpossibleHere :
   E8RootEnumerationComplete →
   ⊥
 e8RootEnumerationCompleteImpossibleHere ()
+
+data E8UpstreamPromotionMissingTheoremName : Set where
+  missingIntegerIndexedRootsCompleteForTwoSparseShapeTheorem :
+    E8UpstreamPromotionMissingTheoremName
+  missingHalfIndexedRootsCompleteForEvenParityShapeTheorem :
+    E8UpstreamPromotionMissingTheoremName
+  missingCombinedIndexedRootsCompleteForE8ShapeTheorem :
+    E8UpstreamPromotionMissingTheoremName
+  missingEnumerationIsCompleteTheorem :
+    E8UpstreamPromotionMissingTheoremName
+  missingE8RootEnumerationCompleteConstructorPayload :
+    E8UpstreamPromotionMissingTheoremName
+
+canonicalE8UpstreamPromotionMissingTheoremNames :
+  List E8UpstreamPromotionMissingTheoremName
+canonicalE8UpstreamPromotionMissingTheoremNames =
+  missingEnumerationIsCompleteTheorem
+  ∷ missingE8RootEnumerationCompleteConstructorPayload
+  ∷ []
+
+record E8RootEnumerationCompletePromotionBoundary : Setω where
+  field
+    booleanBackedStructuralBridgeLayer :
+      E8BooleanBackedStructuralBridgeLayer
+
+    booleanBackedStructuralBridgeDoesNotCompleteEnumeration :
+      E8BooleanBackedStructuralBridgeLayer.completesE8RootEnumeration
+        booleanBackedStructuralBridgeLayer
+      ≡
+      false
+
+    remainingConcreteProofObligations :
+      List E8RootEnumerationProofObligation
+
+    remainingConcreteProofObligationsAreCanonical :
+      remainingConcreteProofObligations ≡
+      canonicalE8RootEnumerationProofObligations
+
+    remainingEnumerationObligations :
+      List E8RootEnumerationObligation
+
+    remainingEnumerationObligationsAreCanonical :
+      remainingEnumerationObligations ≡ canonicalE8RootEnumerationObligations
+
+    exactMissingTheoremNames :
+      List E8UpstreamPromotionMissingTheoremName
+
+    exactMissingTheoremNamesAreCanonical :
+      exactMissingTheoremNames ≡
+      canonicalE8UpstreamPromotionMissingTheoremNames
+
+    completeReceiptConstructorAvailable :
+      Bool
+
+    completeReceiptConstructorAvailableIsFalse :
+      completeReceiptConstructorAvailable ≡ false
+
+    localSemanticSurfacePromotesHere :
+      Bool
+
+    localSemanticSurfacePromotesHereIsFalse :
+      localSemanticSurfacePromotesHere ≡ false
+
+    promotionBoundaryShape :
+      String
+
+canonicalE8RootEnumerationCompletePromotionBoundary :
+  E8RootEnumerationCompletePromotionBoundary
+canonicalE8RootEnumerationCompletePromotionBoundary =
+  record
+    { booleanBackedStructuralBridgeLayer =
+        canonicalE8BooleanBackedStructuralBridgeLayer
+    ; booleanBackedStructuralBridgeDoesNotCompleteEnumeration =
+        refl
+    ; remainingConcreteProofObligations =
+        canonicalE8RootEnumerationProofObligations
+    ; remainingConcreteProofObligationsAreCanonical =
+        refl
+    ; remainingEnumerationObligations =
+        canonicalE8RootEnumerationObligations
+    ; remainingEnumerationObligationsAreCanonical =
+        refl
+    ; exactMissingTheoremNames =
+        canonicalE8UpstreamPromotionMissingTheoremNames
+    ; exactMissingTheoremNamesAreCanonical =
+        refl
+    ; completeReceiptConstructorAvailable =
+        false
+    ; completeReceiptConstructorAvailableIsFalse =
+        refl
+    ; localSemanticSurfacePromotesHere =
+        false
+    ; localSemanticSurfacePromotesHereIsFalse =
+        refl
+    ; promotionBoundaryShape =
+        "Upstream promotion remains fail-closed: integerIndexedRootsCompleteForTwoSparseShape, halfIndexedRootsCompleteForEvenParityShape, and combinedIndexedRootsCompleteForE8Shape are discharged; discharge enumerationIsComplete before adding an E8RootEnumerationComplete constructor payload."
+    }
 
 record E8RootEnumerationObstruction : Setω where
   field

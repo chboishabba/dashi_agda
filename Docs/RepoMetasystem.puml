@@ -67,6 +67,7 @@ package "Canonical code surfaces" {
 }
 
 package "Diagram surfaces" {
+  rectangle "PublicPaperNarrativeFlow.puml/svg\npublic Paper 1 flow map" as PublicDiagram #ede9fe
   rectangle "CanonicalProofSpine.puml/svg\nformal route map" as SpineDiagram #ede9fe
   rectangle "PhysicsUnificationMap.puml/svg\nclaim-boundary map" as PhysDiagram #ede9fe
   rectangle "WorkerCoordinationMap.puml/svg\nparallel blocker-lane map" as WorkerDiagram #ede9fe

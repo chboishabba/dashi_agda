@@ -3,6 +3,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -10,6 +12,8 @@
 \usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{microtype}
+\usepackage{seqsplit}
+\usepackage{float}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
@@ -20,31 +24,172 @@
   urlcolor=blue
 }
 
-\title{DASHI: A Fail-Closed Constructive Physics-Unification Architecture\\
-\large Carrier Geometry, Filtration, Projection-Defect Structure, and Mechanized Closure Frontiers}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{obstruction}[definition]{Obstruction}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\title{DASHI: A Constructive Carrier Derivation Program for Physics-Unification Structures\\
+\large Ultrametric Carrier Geometry, Projection-Defect Semantics, and Mechanized Closure Frontiers}
 \author{DASHI project}
-\date{Draft of 2026-05-15}
+\date{Draft of 2026-05-17}
 
 \begin{document}
 \sloppy
 \maketitle
 
+\begin{abstract}
+Background: physics-unification programs often state target equations before
+making explicit which carrier, quotient, source, and calibration obligations
+are actually inhabited. Objective: this paper constructs a typed ultrametric
+carrier geometry for staging those obligations without collapsing theorem,
+target, obstruction, and empirical receipt into one status. Methods: DASHI
+combines a ternary/refinement carrier, \texttt{FactorVec} valuation
+coordinates, projection-defect decomposition, filtered operator surfaces, local
+transport, root-shell boundaries, UFT/motif compression, and mechanized
+admissibility receipts. Results: the manuscript derives a carrier spine from
+unresolvedness through recursive refinement, ultrametric distance, tracked lane
+commutation, projection residuals, and quotient-sensitive filtration; then
+applies that spine to gauge curvature, Yang-Mills ordering defects, QFT
+commutator targets, GR curvature/Bianchi targets, measurement residuals,
+sector splitting, compression admissibility, and a bounded below-Z Drell-Yan
+\texttt{t43} empirical contact surface (\texttt{chi2/dof = 2.1565191176}
+under threshold \texttt{4.0}). The same typed discipline blocks stronger
+readings: strict \texttt{chi2/dof <= 2} and strict log-covariance tests fail,
+upstream E8 completion is not promoted, and accepted empirical authority,
+sourced non-flat GR, continuum recovery, GRQFT closure, and completed
+unification remain open. Conclusion: DASHI proposes a constructive
+ultrametric carrier geometry in which admissible refinement, compression,
+transport, and quotient structure generate staged physics-facing derivation
+surfaces, while typed closure semantics track the residual obligations that
+block stronger promotion.
+\end{abstract}
+
+\noindent\textbf{Keywords:} ultrametric geometry; physics unification; gauge
+theory; filtered operator algebras; projection-defect decomposition; dependent
+type theory; constructive mathematics; formal methods.
+
+\section{Introduction}
+
+DASHI separates proved structure, target equations, empirical fits, and
+unresolved obstructions inside one constructive carrier geometry. A state
+carries trit-valued local data, tracked prime-lane valuations, ultrametric refinement
+depth, lane-local actions, and projections into observable surfaces. The
+residual left by a projection remains part of the formal state rather than
+being discarded or promoted by convention.
+
+Observable structure is modeled as a projection from a richer carrier space.
+For a surface \(s\), a projection \(P_s:X\to Y_s\) exposes the admissible
+component of \(x\in X\). The defect \(D_s(x)\) records the residual structure:
+unresolved branches, incompatible quotient data, missing adapters, or absent
+empirical authority. Filtrations organize limiting behavior and associated
+graded constructions. Ultrametric refinement organizes address depth and
+precision. Independent lane actions give componentwise laws for selected
+coordinate sectors.
+
+The same carrier supports local transport, filtered operators, ultrametric
+refinement, finite root-shell boundaries, compression structures, and bounded
+empirical receipts. Direction-indexed discrete sites define local transport
+schemas. Finite-support operators define filtered contraction targets. The
+tracked G6 commuting theorem gives a coordinate-independence law for selected
+prime-lane actions. Local E8/LILA surfaces record bounded root-geometry and
+upstream-promotion boundaries. UFT-style compression records repeated
+refinement motifs and recoverable residual distinctions. The bounded
+Drell-Yan empirical receipt records one comparison against a frozen typed
+surface.
+
+\section*{Target Obligation Surfaces and DASHI Derivation Roles}
+
+The governing order for every displayed equation is
+\[
+\text{carrier schema} < \text{interpretation map} <
+\text{field-equation law} < \text{calibrated physics claim}.
+\]
+Until the interpretation map, quotient laws, physical units, source interface,
+and empirical/authority receipts are inhabited, the equations in this opening
+section are target obligation surfaces. They are placed here first because they
+are the reason the derivation spine matters, not because they are already
+closed.
+DASHI's current claim is that it gives a typed derivation route in which each
+term has an explicit carrier-side obligation:
+\[
+\Omega_p=H_p-I,
+\qquad
+F_A=dA+A\wedge A,
+\qquad
+[\nabla_\mu,\nabla_\nu]V^\rho
+=R^\rho{}_{\sigma\mu\nu}V^\sigma,
+\]
+\[
+R_{\mu\nu}=R^\rho{}_{\mu\rho\nu},
+\qquad
+G_{\mu\nu}=R_{\mu\nu}-\frac12Rg_{\mu\nu},
+\]
+\[
+G_{\mu\nu}+\Lambda g_{\mu\nu}
+=
+\frac{8\pi G}{c^4}T_{\mu\nu}.
+\]
+The gauge and operator targets are similarly explicit:
+\[
+d_AF_A=0,
+\qquad
+d_A{*F_A}=J,
+\qquad
+dF=0,\quad d{*F}=J,
+\]
+\[
+U(t)=e^{-itH},
+\qquad
+i\partial_t\psi=H\psi,
+\qquad
+[\phi(t,x),\pi(t,y)]=i\delta(x-y).
+\]
+
+\begin{center}
+\small
+\begin{tabular}{p{0.22\linewidth}p{0.37\linewidth}p{0.32\linewidth}}
+\toprule
+Physics term & DASHI structural reading & First residual obligation \\
+\midrule
+\(g_{\mu\nu}\) & projected metric over refinement carrier & metric emergence, inverse, signature, units \\
+\(\nabla\) & admissible transport law & non-flat connection/transport adapter \\
+\(R^\rho{}_{\sigma\mu\nu}\) & noncommuting refinement transport defect & curvature carrier, covariance, torsion convention \\
+\(R_{\mu\nu},R\) & contracted transport defect & Ricci/scalar contraction and index laws \\
+\(G_{\mu\nu}\) & stable curvature-obstruction tensor & contracted Bianchi/divergence-free law \\
+\(T_{\mu\nu}\) & promoted source projection / matter residual carrier & stress-energy interface and authority \\
+\(\Lambda g_{\mu\nu}\) & background refinement/vacuum term & cosmological convention and calibration \\
+\(8\pi G/c^4\) & source-coupling normalization & weak-field/Newtonian limit and unit calibration \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The normalization \(\kappa=8\pi G/c^4\) is not arbitrary decoration. In a
+completed route it must be fixed by geometric normalization, spherical-flux
+structure, and weak-field consistency with the Newtonian limit. Paper 1 does
+not prove that calibration. It makes the missing calibration a named
+obligation rather than hiding it behind the formal carrier.
+
+\section*{Core Carrier Grammar}
+
 \noindent\fcolorbox{black!45}{black!3}{%
 \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
 \small
-\textbf{Core formalism.}
-Paper 1 uses the following grammar to stage DASHI's current
-physics-unification carrier without treating the grammar itself as a universal
-physical law:
+The constructions in this paper use a carrier of the form
 \[
 x \in \mathcal X \simeq (a,\nu,\tau,d,\ell,r),
 \qquad
 \tau \in \{-1,0,+1\}.
 \]
-Here \(a\) is a prime/supersingular-prime address, \(\nu\) is
-\texttt{FactorVec}-style valuation data, \(\tau\) is the ternary coordinate,
-\(d\) is refinement depth, \(\ell\) is the active lane, and \(r\) records
-receipt/projection status. A surface \(s\) exposes only its admitted
+Here \(a\) is a refinement address, \(\nu\) is
+\texttt{FactorVec}-style prime-lane valuation data, \(\tau\) is the ternary
+coordinate, \(d\) is refinement depth, \(\ell\) is the active lane, and \(r\)
+records residual/projection status. A surface \(s\) exposes only its admitted
 projection:
 \[
 x = P_s(x) + D_s(x), \qquad
@@ -56,96 +201,53 @@ Filtered operator surfaces use \(F_0 \subseteq F_1 \subseteq \cdots\),
 \(\operatorname{gr}_nF=F_n/F_{n-1}\), and descended brackets only where
 quotient, equivalence, norm, and bracket laws are inhabited. Lane actions
 commute only on the official tracked independent \texttt{GL.FactorVec} route.
-UFT/motif compression supplies reusable projected structure while residual
+UFT/motif compression records reusable projected structure while residual
 defects remain visible.
 \end{minipage}}
 
 \vspace{0.8em}
 
-\begin{abstract}
-DASHI is a constructive physics-unification program built around a typed
-carrier geometry. Its central object is not a single fitted equation, but a
-coherent mathematical substrate in which prime-coordinate carriers,
-ultrametric refinement, projection-defect decomposition, filtered operator
-surfaces, lane independence, local root-geometry boundaries, compression
-semantics, and empirical-contact receipts can be staged inside one typed
-architecture.
+\section*{Derivation Map at a Glance}
 
-The manuscript uses a projection-defect schema to organize promoted content
-and residual obstruction across those surfaces. Filtrations organize limiting
-behavior, ultrametric addresses organize refinement depth, lane actions
-organize independent coordinate sectors, and admissibility gates determine
-which constructions may be read as physics-facing claims. Typed closure and
-obstruction semantics are therefore not external project governance; they are
-the enforcement layer of the unification substrate itself.
+The closure frontier appears later. The early reader map is a derivation-role
+map: each target equation is read as a structural role to be produced by the
+carrier, followed by the adapter still needed for a calibrated physics claim.
+\begin{center}
+\small
+\begin{tabular}{p{0.20\linewidth}p{0.38\linewidth}p{0.32\linewidth}}
+\toprule
+Target role & DASHI derivation engine & Adapter still needed \\
+\midrule
+Maxwell / abelian gauge & commuting local transports give additive plaquette curvature \(F=dA\) with \(dF=0\) from \(d_1d_0=0\) & bind adopted G2 schema into Maxwell scope; exterior derivative/nilpotency, Hodge star, source current, U(1) sector/action, covariance, units/convention \\
+Yang-Mills / nonabelian gauge & noncommuting local transports force the commutator term \(A\wedge A\) in \(F_A=dA+A\wedge A\) & representation, sector restriction, action/source law, calibrated field equation and coupling convention \\
+QFT commutator & filtered finite-support operators descend only through quotient-correct brackets & equivalence modulo denominator filtration, accepted quotient carrier, descended norm/bracket, Hilbert/amplitude/CCR/Born laws \\
+GR curvature & path-dependent carrier transport yields curvature as the minimal commutator obstruction & non-flat connection, Christoffel-from-metric law, Ricci/Bianchi reduction, stress-energy interface, units/calibration/source law \\
+Measurement / uncertainty & projection \(\pi:X\to Q\) leaves residual fibres \(R_\pi(x)\) & amplitude/probability law plus empirical projection and observable map \\
+Sector splitting & projection preserves a subgroup \(H\subseteq G\), leaving residual cosets \(G/H\) & concrete SM representation, subgroup projection law, coupling/mixing calibration \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-Paper 1 presents the current constructive frontier of this program. The
-positive inventory includes direction-indexed G2 SFGC schema adoption, an
-official tracked G6 cross-lane commuting route, constructive finite-support G3
-selected-operator subtraction support, an E8/LILA integer and local semantic
-boundary, a typed cross-domain projection-defect / MDL spine boundary, and an
-inhabited bounded W3 below-Z Drell-Yan \texttt{t43} comparison-law receipt with
-\texttt{chi2/dof = 2.1565191176} under threshold \texttt{4.0}. The contribution
-is a mathematically coherent ultrametric carrier architecture for physics
-unification whose closure semantics expose the exact frontier rather than hide
-it.
-\end{abstract}
-
-\section{Introduction}
-
-The starting point of DASHI is that a physics-unification program needs a
-carrier rich enough to hold geometry, dynamics, compression, empirical contact,
-and unresolved structure without forcing them into the same proof status. The
-basic pattern is a state carried by prime/trit and \texttt{FactorVec}-style
-coordinates, refined by ultrametric depth, acted on by lane-local operators,
-and read through projections whose residuals remain visible. This is a
-physics thesis before it is a governance thesis: the closure discipline is
-needed because the proposed carrier is ambitious, not because the paper is
-about process management.
-
-The organizing picture is projection from structured possibility into a
-surface-visible form. A candidate state can carry more information than a
-particular physics-facing surface is allowed to expose. The promoted
-projection is the piece that survives the current admissibility gate; the
-defect records what is left unresolved, incompatible, or not yet transported
-across the relevant boundary. Filtration gives limiting and contraction
-language, ultrametric refinement gives address and precision language, and lane
-independence gives compositionality between coordinate sectors.
-
-This architecture lets several mathematical neighborhoods meet without being
-collapsed into metaphor. Direction-indexed discrete sites supply local carrier
-geometry. Finite-support operator surfaces supply controlled algebra for
-filtered contraction targets. Tracked cross-lane commuting supplies a
-coordinate-independence law for selected lane actions. Local E8/LILA surfaces
-supply finite root-geometry and upstream-promotion boundaries. UFT-style
-compression supplies refinement, motif, and residual language. The Drell-Yan
-lane supplies a bounded example of empirical contact bound to a frozen typed
-receipt.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\linewidth]{Docs/PaperDraftWorkingFolder/figures/PublicPaperNarrativeFlow.pdf}
-  \caption{Reader-facing narrative flow for Paper 1. The diagram foregrounds
-  the constructive carrier substrate, local mathematical surfaces, empirical
-  contact, compression geometry, and the later certification frontier. It is a
-  narrative map, not a proof of completed unification.}
-  \label{fig:narrative-flow}
-\end{figure}
 
 \section{Background and Related Work}
 
 DASHI draws on standard mathematical neighborhoods including ultrametric and
-p-adic structure, lattice and gauge language, contraction and associated
-graded constructions, root-system classification, mechanized mathematics, and
-compression-style trie geometry. The claims made here are restricted to the
-repo-local receipt and obstruction surfaces cited in the claim ledger.
+p-adic structure \cite{schikhof-1984,vladimirov-volovich-zelenov-1994},
+lattice and gauge language
+\cite{nakahara-2003,wilson-1974,kogut-1979}, contraction and associated
+graded constructions \cite{weibel-1994}, root-system classification
+\cite{humphreys-1972},
+mechanized mathematics \cite{norell-2007,hott-book,plfa-agda}, and
+compression-style trie geometry \cite{rissanen-1978,grunwald-2007}. The
+claims made here are restricted to the repo-local receipt and obstruction
+surfaces cited in the claim ledger.
 
-The formal-methods positioning is central. DASHI uses Agda as a typed
-development surface: selected propositions, receipts, audits, and blockers are
-represented as typed artifacts, and the absence of a required inhabitant is
-manuscript-relevant state. This places the paper near proof assistants,
-dependent type theory, mechanized mathematics, and proof-carrying artifacts,
-while remaining narrower than an end-to-end certified physics pipeline.
+Agda is used as the mechanized verification surface for selected propositions,
+receipts, audits, and blockers. A proved construction is represented by an
+inhabited artifact; a missing constructor is recorded as a manuscript-relevant
+obligation. This places the paper near proof assistants, dependent type theory,
+mechanized mathematics, and proof-carrying artifacts, while remaining narrower
+than an end-to-end certified physics pipeline.
 
 Ultrametric and p-adic language organizes refinement by depth: nearby states
 share high-level valuation or prefix structure, while separation can occur at
@@ -154,158 +256,254 @@ as an external analogy for compatible refinement across precision levels. In
 Paper 1 this is expository support for carrier and compression geometry, not
 an independent proof of convergence.
 
-\section{From Ternary Traversal to Carrier Geometry}
+The labels G2, G3, and G6 are DASHI derivation-lane names. They should not be
+read as claims of equivalence to standard mathematical objects with similar
+names, such as the exceptional Lie group \(G_2\), unless an inhabited surface
+states that equivalence. E8 is different: the paper explicitly uses standard
+root-system language there, but only for the bounded local enumeration and
+promotion-boundary surfaces stated below.
 
-The origin path into DASHI is best read as an iterative formalization of
-traversal: a state is first treated as a trit-valued position, then as a
-refinable address, then as a carrier point whose projections and residuals are
-tracked by typed operators. The point of the \texttt{3-6-9} or
-\texttt{Base369} vocabulary is not numerological. Its safe role is to supply
-cyclic finite carriers: triadic, hexadic, and nonary state spaces with
-rotations, wrapped addition, and quotient/refinement seams. At the lowest
-level, a trit distinguishes three statuses: positive, negative, and unresolved
-or neutral.
 
-Older dialectical language in the archive should be read in the same
-disciplined way. A dialectical state may be carried through a transition while
-retaining unresolved residue. A counter-state, conflict state, or overflow
-state is not a mystical third force; it is a typed indication that the present
-projection has not discharged all of the structure in the carrier. In the
-current manuscript this becomes the projection-defect discipline: a selected
-surface exposes \(P_s(x)\), while the residual \(D_s(x)\) records what is
-blocked, incompatible, untransported, or not yet promoted.
+\section{Derivation Spine}
 
-The geometric intuition then moves from a one-dimensional cycle to traversal
-through a cube-like state space. Rubik-like cube, hypercube, and voxel language
-is useful only as intuition for finite-coordinate movement: each coordinate
-records a local trit, phase, or valuation, and a traversal is a sequence of
-admissible coordinate updates. Voxel language fits the same role at nonary
-scale: a local \(3^2\) or \(3^k\) block can be read as a small cell of
-structured state, and overflow means that the current cell cannot preserve the
-relevant invariant without adding a refinement coordinate.
+The carrier geometry is not introduced as an inventory. It is derived from a
+small sequence of representational obligations: unresolved local state,
+coordinate traversal, recursive refinement, prime-lane valuation, surface
+projection, residual defect, and filtered operator descent.
 
-Video and state-continuity testing belong at this transition point as
-engineering diagnostics. A video trace is a sampled path through state space:
-continuity testing asks whether adjacent frames preserve the expected local
-carrier relation, whether an apparent jump is an admissible carry/refinement,
-and whether the projection defect increases at the boundary. Such tests can
-motivate carrier choices and expose discontinuities, but they are not theorem
-authority unless the trace, observation map, metric, and admissibility law are
-bound by a repo-local receipt. The sibling \texttt{dashifine} and
-\texttt{dashitest} repositories contain concrete video-side evidence at this
-engineering level: GIF/frame visualizations for closure and ultrametric
-diagnostics, codec and Vulkan/VAAPI video benchmark paths, live-sheet recording
-scripts, and short MP4 smoke artifacts. These may be cited as sibling
-diagnostic evidence, not as DASHI theorem authority, until ported into a local
-receipt with command and artifact digests.
+\begin{center}
+\begin{tabular}{p{0.16\linewidth}p{0.28\linewidth}p{0.46\linewidth}}
+\toprule
+Stage & Object & Spine statement \\
+\midrule
+1 & Primitive ternary state & Signed evidence with unresolved residue requires at least three local statuses. \\
+2 & Traversal & Coordinate-local updates turn primitive states into paths in a finite state graph. \\
+3 & Voxel / hypercube cell & A finite block of ternary coordinates is a \(3^k\) cell with coordinate-wall adjacency. \\
+4 & Trie and ultrametric & Recursive refinement is represented by prefix addresses whose natural distance is ultrametric. \\
+5 & \texttt{FactorVec} & Prime-lane valuation counts refine addresses into the tracked \texttt{Vec15 Nat} carrier. \\
+6 & Projection-defect & Every visible reading is a projection together with a residual defect. \\
+7 & Filtration & Depth, support, valuation, and admissibility organize surfaces into filtered theorem targets. \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-UFT/trie refinement gives this traversal a compression geometry. A trie node is
-a coarse address; descending the trie adds precision. Nearby branches share
-prefix structure, and separation occurs at the first incompatible depth. This
-matches the ternary ultrametric reading already used in the carrier spine:
-refinement depth is not just a storage index but a metric and semantic
-relation. A motif is then a reusable local shape in the trie, not an equality
-claim.
+\begin{definition}[Primitive local state]
+Let \(T=\{-1,0,+1\}\). A primitive local state is an element \(t\in T\).
+The values \(+1\) and \(-1\) record oriented alternatives. The value \(0\)
+records unresolved residue: structure that has not been discharged by the
+current surface.
+\end{definition}
 
-\texttt{FactorVec} is the corresponding prime-coordinate refinement of the
-same idea. Instead of only trit positions, a state carries valuation data
-across tracked prime lanes. Multi-lane transport, chamber legality, signed
-scans, and defect summaries turn traversal into a controlled carrier geometry:
-a move may be legal or illegal, stable or repatterning, contractive or
-expansive, and these labels are computed at the representation layer rather
-than inferred from prose.
+\begin{lemma}[Ternary minimality]
+Any local carrier that distinguishes a positive orientation, a negative
+orientation, and unresolved residue needs at least three local values.
+\end{lemma}
+\begin{proof}
+A two-valued carrier distinguishes at most two equivalence classes. If
+unresolved residue is identified with \(+1\), unresolved structure is promoted
+as positive evidence. If it is identified with \(-1\), unresolved structure is
+promoted as negative evidence. If \(+1\) and \(-1\) are identified, orientation
+is lost. The three roles therefore require three values. This is a bookkeeping
+minimality result, not a physical law.
+\end{proof}
 
-This origin story gives a disciplined reading of the transition from trits to
-carrier geometry. DASHI starts with ternary traversal because trits make
-unresolvedness explicit. It passes through \texttt{Base369}, cube/voxel
-traversal, video-like continuity traces, UFT tries, and \texttt{FactorVec}
-lanes because each adds a more precise way to talk about transition, address,
-refinement, and defect. None of this proves full physics unification,
-automatic convergence, Monster representation semantics, empirical adequacy,
-or domain recovery. It supplies a traceable formal path by which those stronger
-claims would have to be typed, projected, tested, and closed.
+\begin{definition}[Traversal]
+For a finite coordinate set \(I\), a primitive state is a function \(x:I\to T\).
+A coordinate update is a map \(u_{i,\phi}:T^I\to T^I\) that changes only
+coordinate \(i\), using a local rule \(\phi:T\to T\), and leaves every
+\(j\neq i\) fixed. A traversal is a finite sequence
+\[
+x_0 \xrightarrow{u_1} x_1 \xrightarrow{u_2}\cdots
+\xrightarrow{u_n} x_n .
+\]
+\end{definition}
 
-\section{Why the Carrier Geometry Is Forced}
+\begin{lemma}[Traversal as address word]
+Every traversal determines a word in the update alphabet
+\(\Sigma=\{(i,\phi)\mid i\in I,\phi:T\to T\}\).
+\end{lemma}
+\begin{proof}
+Record the label \((i_m,\phi_m)\) of each update \(u_m\). The traversal is
+represented by the word
+\[
+(i_1,\phi_1)(i_2,\phi_2)\cdots(i_n,\phi_n)\in\Sigma^\ast.
+\]
+The word is a formal update trace relative to the chosen carrier; it does not
+by itself claim a unique physical history.
+\end{proof}
 
-The carrier is not chosen by taste. It is the smallest structure that keeps
-four pressures visible at once: unresolvedness, refinement, locality, and
-projection. If a state can be affirmed, denied, or still undischarged by the
-current surface, binary truth is already too small. A ternary coordinate is
-the first stable carrier for that situation: \texttt{+1}, \texttt{-1}, and
-\texttt{0} are not metaphysical labels, but bookkeeping for oriented evidence
-and unresolved residue.
+\begin{definition}[Ternary cell and voxel refinement]
+For a finite block \(B\subseteq I\) with \(|B|=k\), the local cell is
+\(C_B=T^B\). It has \(3^k\) vertices. Two vertices are coordinate-adjacent
+when they differ in exactly one coordinate. A voxel refinement replaces one
+coordinate \(i\) by a finite child block \(B_i\), replacing the factor \(T\) at
+\(i\) by \(T^{B_i}\).
+\end{definition}
 
-Once unresolved state is allowed to refine, a tree appears almost immediately.
-A coarse node records what is visible at the current depth; descending the
-trie adds distinctions. Two states that share a long prefix are close for any
-observer or surface that cannot see past that depth, and the first
-incompatible digit is the natural separation event. This is why the
-ultrametric is not decoration. It is the metric forced by recursive
-refinement: distance is controlled by the earliest depth at which two
-histories, addresses, or motifs can no longer be jointly refined.
+\begin{lemma}[Hypercube language is finite-coordinate language]
+The cube, voxel, and hypercube terms used in the origins story can be read as
+finite coordinate cells and their refinements.
+\end{lemma}
+\begin{proof}
+A block \(T^B\) is a finite product of local coordinate carriers. Its
+coordinate-adjacency graph is the ternary analogue of a cubical graph: faces
+are obtained by fixing coordinates, and refinements replace a coordinate by a
+child product. Thus the geometric language refers to finite-coordinate
+movement and refinement, not to an assertion that physical spacetime has been
+derived.
+\end{proof}
 
-Prime-coordinate and \texttt{FactorVec} structure enter when refinement must
-also remember independent axes of change. A factorized carrier records how
-much of each tracked prime lane is present. If one update changes only the
-\texttt{p} valuation and another changes only the \texttt{q} valuation, then
-for \texttt{p != q} the two updates should commute on the tracked projection.
-G6 is the formal version of that intuition: independent valuation coordinates
-naturally commute, but only the official tracked theorem is allowed to say so
-inside the paper.
+\begin{definition}[Refinement trie and ultrametric]
+Let \(\Sigma\) be a finite refinement alphabet. A trie address is a finite or
+infinite word in \(\Sigma\). For infinite addresses \(a,b\), let
+\(\lambda(a,b)\) be the length of their longest common prefix, with
+\(\lambda(a,a)=\infty\). Fix \(0<\alpha<1\), and define
+\[
+\rho(a,b)=
+\begin{cases}
+0, & a=b,\\
+\alpha^{\lambda(a,b)}, & a\neq b.
+\end{cases}
+\]
+\end{definition}
 
-Projection-defect decomposition is then inevitable rather than decorative.
-Every observation, theorem surface, empirical receipt, or compression motif
-exposes only part of the carrier. A less disciplined theory would forget the
-remainder and later reintroduce it as an assumption. DASHI keeps the remainder
-as \(D_s(x)\): the residual defect relative to a surface. This is why
-obstruction belongs to the mathematics. It is the unpromoted part of the
-carrier after projection, not a separate editorial apology.
+\begin{lemma}[Trie distance is ultrametric]
+The distance \(\rho\) satisfies
+\[
+\rho(a,c)\leq \max(\rho(a,b),\rho(b,c)).
+\]
+\end{lemma}
+\begin{proof}
+If \(a\) and \(b\) agree for \(m\) symbols, and \(b\) and \(c\) agree for
+\(m\) symbols, then \(a\) and \(c\) also agree for \(m\) symbols. Hence
+\(\lambda(a,c)\geq \min(\lambda(a,b),\lambda(b,c))\). Since
+\(0<\alpha<1\), increasing prefix depth decreases distance, so the displayed
+ultrametric inequality follows.
+\end{proof}
 
-Filtration is the same idea applied to operators. A local move is useful only
-if it respects the depth and quotient structure on which the carrier is being
-read. When an operation preserves the relevant filtration and descends to the
-quotient, it can become a theorem-facing action on the associated graded
-surface. When it does not, the failure is visible as a missing equivalence,
-missing quotient carrier, or missing descended law. G3 is therefore not just a
-blocker list; it is the exact place where finite-support operator intuition is
-being asked to become quotient-correct algebra.
+\begin{definition}[\texttt{FactorVec}]
+Let
+\[
+P=\{2,3,5,7,11,13,17,19,23,29,31,41,47,59,71\}
+\]
+be the tracked supersingular-prime lane set used by the repo-native carrier.
+A \texttt{FactorVec} is a function \(\nu:P\to\mathbb{N}\), equivalently a
+\texttt{Vec15 Nat} exponent vector with one coordinate for each tracked prime
+lane. For \(p\in P\), define the prime-lane bump \(B_p\) by
+\[
+B_p(\nu)(q)=
+\begin{cases}
+\nu(q)+1, & q=p,\\
+\nu(q), & q\neq p.
+\end{cases}
+\]
+\end{definition}
 
-The root-geometry and empirical lanes fit the same pattern. E8/LILA supplies
-finite local shape and symmetry boundaries where enumeration and promotion can
-be audited. The Drell-Yan lane supplies a bounded observable projection where
-a frozen comparison can be checked while stricter residual shape laws remain
-visible. These are different projections of the same recursively refining
-carrier grammar. Paper 1 is compelling only if the reader can see that unity
-before seeing the blocker table.
+\begin{lemma}[Coordinate bumps commute]
+For all \(p,q\in P\), \(B_p(B_q(\nu))=B_q(B_p(\nu))\).
+\end{lemma}
+\begin{proof}
+Check each coordinate \(r\in P\). If \(r\) is neither \(p\) nor \(q\), both
+sides equal \(\nu(r)\). If \(r=p\neq q\), both sides equal \(\nu(p)+1\). If
+\(r=q\neq p\), both sides equal \(\nu(q)+1\). If \(p=q=r\), both sides equal
+\(\nu(p)+2\). The vectors are equal coordinatewise.
+\end{proof}
+
+\begin{definition}[Surface projection and defect]
+A surface \(s\) consists of a visible carrier \(Y_s\), an admissibility gate
+\(G_s\), and a projection \(P_s:X\to Y_s\). The defect \(D_s(x)\) is the
+residual information not promoted by \(P_s\). When the carrier has an additive
+split, this is written \(x=P_s(x)+D_s(x)\).
+\end{definition}
+
+\begin{lemma}[Defect makes non-closure visible]
+If two states \(x,x'\in X\) satisfy \(P_s(x)=P_s(x')\) but differ in gate
+status, residual content, or unmet obligations, then the projection alone
+cannot distinguish them. Recording \((P_s(x),D_s(x))\) keeps the promoted
+component and the unpromoted residual in the same formal account.
+\end{lemma}
+
+\begin{definition}[Filtration and associated graded target]
+A filtration on \(X\) is an increasing sequence
+\[
+F_0\subseteq F_1\subseteq F_2\subseteq\cdots .
+\]
+When quotient structure is available, the \(n\)-th graded piece is
+\(\operatorname{gr}_nF=F_n/F_{n-1}\). This notation is a target unless the
+equivalence relation, quotient carrier, projection-respects-equivalence law,
+and descended operations are supplied.
+\end{definition}
+
+\begin{lemma}[Descent requires equivalence preservation]
+Suppose \(A:X\to X\) is filtration-preserving and \(x\sim_n y\) means
+\(x-y\in F_{n-1}\). If \(x\sim_n y \Rightarrow A(x)\sim_n A(y)\), then \(A\)
+induces an operator on \(F_n/F_{n-1}\).
+\end{lemma}
+\begin{proof}
+Define the induced map by \([x]\mapsto[A(x)]\). If \([x]=[y]\), then
+\(x\sim_n y\). By equivalence preservation, \(A(x)\sim_n A(y)\), so
+\([A(x)]=[A(y)]\). Thus the definition is independent of representative.
+\end{proof}
+
+\begin{theorem}[Early DASHI carrier spine]
+Starting from primitive signed state with unresolved residue, the carrier
+grammar is forced in the restricted sense
+\[
+\begin{aligned}
+\text{primitive state}
+&\to \text{traversal}
+\to \text{voxel / hypercube cell}\\
+&\to \text{trie / ultrametric refinement}
+\to \text{\texttt{FactorVec} valuation}\\
+&\to \text{projection-defect}
+\to \text{filtration}.
+\end{aligned}
+\]
+\end{theorem}
+\begin{proof}
+The lemmas above derive the route. Ternary minimality gives primitive local
+state. Traversal turns such states into coordinate-local update words. Ternary
+cells give the bounded reading of voxel and hypercube traversal. Recursive
+refinement gives prefix geometry and hence an ultrametric. Prime-lane
+refinement gives the \texttt{FactorVec} valuation route and basic coordinate
+commutation. Surface observation forces projection-defect accounting. Filtered
+operator language then requires quotient descent before theorem-facing
+dynamics can be promoted.
+\end{proof}
+
+This theorem does not assert that the grammar completes physics. It asserts
+that the listed structures are not a catalog: they arise as successive
+obligations once signed unresolved state, traversal, recursive refinement,
+prime-lane valuation, surface projection, and filtered operator descent are
+all kept visible.
 
 \section{Core Constructive Architecture}
 
-The core DASHI architecture is a carrier geometry before it is a list of
-gates. The carrier is intended to hold prime-coordinate location, trit-valued
-or unresolved state, \texttt{FactorVec}-style valuation data, lane-local
-actions, depth/refinement information, and typed projections into the surfaces
-a reader can inspect. This is the mathematical reason the architecture can
-talk about discrete gauge sites, filtered operators, E8/LILA root boundaries,
-compression motifs, and empirical comparison receipts without treating them as
-unrelated subsystems.
+The carrier used below has six recurring components:
+\[
+  x \in X \simeq (a,\nu,\tau,d,\ell,r),
+\]
+where \(a\) is a refinement address, \(\nu\) is tracked prime-lane valuation
+data, \(\tau\) is local trit state, \(d\) is depth or filtration grade, \(\ell\)
+records the active lane/action context, and \(r\) records residual structure.
+The later gauge, operator, root-shell, compression, and empirical sections use
+different projections of this same carrier.
 
 \subsection{Carrier Coordinates and Depth}
 
-The paper-facing carrier intuition is coordinate-rich but not continuously
-overcommitted. Prime and supersingular-prime coordinates provide addressable
-axes. Trit and Base369-style language supplies a compact way to discuss
-positive, negative, and unresolved or neutral positions. \texttt{FactorVec}
-surfaces make valuation information explicit enough for tracked lane actions.
-UFT-style addresses add a refinement geometry: nearby addresses share
-high-level prefix or valuation structure, and separation occurs at the first
-incompatible depth.
+States are indexed by ternary local coordinates, refinement depth, and tracked
+prime-lane valuation vectors. Prime and supersingular-prime coordinates provide
+addressable lanes. Trit and Base369-style carriers distinguish positive,
+negative, and unresolved positions. A \texttt{FactorVec} assigns one valuation
+coordinate to each tracked prime lane, so lane updates can be checked
+componentwise.
 
-This gives the carrier a natural physics reading. A state is not merely a
-point in a set; it is a structured address with depth, projection grade,
-valuation content, and possible unresolved branches. Refinement can therefore
-be discussed without pretending that every refinement is already an observable
-physical fact. Hensel-style language is useful as intuition for compatible
-partial information lifting through increasing precision.
+Trie addresses induce an ultrametric: states are close when they share a long
+common refinement prefix, and they separate at the first incompatible depth.
+The carrier therefore records depth and precision without treating every
+refinement branch as an observed physical fact. Hensel-style lifting remains an
+external analogy for compatible partial information across increasing
+precision.
 
 \subsection{Projection-Defect Decomposition}
 
@@ -314,118 +512,653 @@ The central local equation is the projection-defect split:
   x = P(x) + D(x).
 \]
 Here \(P(x)\) denotes the promoted projection visible to a chosen surface, and
-\(D(x)\) denotes the residual defect left by that projection. The point is not
-that every domain has the same observables. The point is that DASHI repeatedly
-uses the same structural move: expose the admissible part of a richer carrier,
-preserve the residual, and make later promotion depend on a typed bridge
-rather than a rhetorical analogy.
+\(D(x)\) denotes the residual defect left by that projection. Projection exposes
+the admissible component of a carrier state while retaining the unresolved
+residual. Later promotion requires a typed bridge from \(D(x)\) into the
+stronger surface.
 
 \subsection{Filtration, Lane Action, and Compression}
 
-Filtration supplies the limiting direction of the architecture. It lets DASHI
-ask whether a restricted operator surface descends to an associated graded
-object, whether contraction language is quotient-correct, and whether norms or
-brackets survive projection. Lane actions supply coordinate-local dynamics:
-selected transformations can act on tracked prime sectors, and the official G6
-theorem checks that selected cross-lane actions commute on the tracked route.
+Filtrations organize limiting behavior and associated graded constructions.
+For an operator surface, the key question is whether restricted operators
+descend to \(F_n/F_{n-1}\), whether the quotient is well defined, and whether
+norms or brackets are preserved after projection. Lane actions are
+coordinate-local transformations on tracked sectors; the tracked G6 commuting
+theorem checks selected cross-lane actions on the current prime-valuation
+route.
 
-Compression is not decorative. The UFT and motif vocabulary supply a way to
-talk about reusable structure, address refinement, branch compatibility, and
-semantic distance. A motif is not equality; it is evidence of reusable
-projection structure at a chosen grade. This is why compression belongs in the
-physics paper: it is the language by which a rich carrier becomes searchable,
-refinable, and composable without collapsing residual structure.
+Repeated local substructures permit refinement-address compression without
+collapsing admissible distinctions. UFT addresses record refinement structure,
+motifs record reusable projected substructure at a chosen grade, and residuals
+record distinctions that compression must preserve. A motif is not equality; it
+is evidence of reusable projection structure subject to the compression
+admissibility theorem below.
 
-\subsection{Closure Semantics as Enforcement}
+\subsection{Closure Discipline}
 
-The closure layer enters after the carrier has something worth protecting.
-Fail-closed promotion says that a local theorem, audit, or receipt promotes
-only the claim authorized by its owning surface. A request surface can point to
-an empirical, geometric, or upstream mathematical authority, but it does not
-supply that authority. This is the enforcement architecture of the unification
-program: it keeps the carrier ambitious while making the claim surface exact.
+Closure in DASHI is a mathematical typing rule, not an editorial disclaimer. A
+surface promotes only the projection whose evidence is inhabited at that
+surface. The residual part remains visible as a defect: a missing quotient
+law, adapter, authority token, convention receipt, calibration, or upstream
+constructor.
 
-\section{Mathematical Constructions}
+This gives the manuscript one discipline for all lanes. A theorem surface may
+promote a local algebraic statement; an empirical receipt may promote a
+bounded comparison; a boundary record may promote only the fact that a
+stronger bridge is still absent. Diagnostics, analogies, provenance, and
+request surfaces can motivate later work, but they do not promote stronger
+physical claims.
 
-\begin{longtable}{p{0.12\linewidth}p{0.25\linewidth}p{0.28\linewidth}p{0.25\linewidth}}
+\begin{quote}
+\texttt{surface S promotes projection P\_s(x);}\\
+\texttt{residual D\_s(x) records the first missing bridge for stronger claim Q.}
+\end{quote}
+
+The intervening sections use this rule locally: each lane states its promoted
+surface, its first residual obligation, and no stronger reading unless the
+corresponding surface is inhabited.
+
+\section{Mathematical Constructions as Applications}
+
+The G2, G3, G6, and E8/LILA constructions instantiate the derivation spine on
+specific local carriers: discrete plaquette transport, finite-support
+operators, prime-lane commuting updates, and bounded root-shell geometry.
+
+\begin{longtable}{p{0.12\linewidth}p{0.25\linewidth}p{0.28\linewidth}p{0.24\linewidth}}
 \toprule
 Label & Mathematical role & Current positive surface & Boundary \\
 \midrule
-G2 & Direction-indexed discrete carrier schema & SFGC schema adoption for current core-facing consumers & No Maxwell closure or field-equation recovery follows \\
-G3 & Restricted finite-support operator filtration & Certified subtraction support for selected constructive finite-support operators & Associated-graded quotient infrastructure remains missing \\
-G6 & Tracked cross-lane coordinate independence & Official tracked cross-lane commuting theorem and above-threshold independence & Old universal \texttt{LaneOperator} promotion remains blocked \\
-E8/LILA & Local finite root-enumeration and upstream boundary & Integer/two-sparse completeness plus local semantic audit boundary & Upstream \texttt{E8RootEnumerationComplete} remains blocked \\
+G2 & Directed plaquette carrier schema & Direction-indexed SFGC schema & No Maxwell closure or field equation follows \\
+G3 & Finite-support operator filtration & Selected finite-support subtraction support & Associated-graded quotient descent remains open \\
+G6 & Prime-lane coordinate independence & Tracked cross-lane commuting theorem & Universal lane-operator promotion remains blocked \\
+E8/LILA & Finite root-shell enumeration & Integer/two-sparse local completeness & Upstream E8 completion remains blocked \\
 \bottomrule
 \end{longtable}
 
-\subsection{G2: Direction-Indexed Discrete Gauge Schema}
+\subsection{G2: Local Plaquettes from Coordinate Traversal}
 
-The G2 lane supplies the current direction-indexed carrier schema for local
-discrete gauge geometry. The positive surface is
-\texttt{canonicalG2SFGCGaugeFieldSchemaExtensionReceipt}, with the
-no-remaining-missing surface
-\texttt{noRemainingG2SFGCSchemaExtensionMissing}. The admissible paper claim is
-narrow: direction-indexed SFGC schema adoption is complete for the current
-core-facing consumers. This does not prove Maxwell closure, Yang-Mills
-dynamics, field-equation recovery, empirical calibration, limited Standard
-Model plus GR closure, GRQFT closure, or completed unification.
+The local carrier is modeled by directed plaquette neighborhoods. A site has
+two visible movement directions; the minimal local cell records traversal in
+one coordinate, traversal in the other, and comparison around the resulting
+small square. This defines a checked interface for sites, directed edges, and
+plaquette-shaped neighborhoods.
+
+The positive surface is the G2 schema-extension receipt together with the G2
+no-remaining-missing witness. Direction-indexed SFGC schema adoption is complete
+for the current core surfaces. Dynamics remain open: curvature, field
+equations, continuum recovery, and calibration are deferred to the closure
+frontier. Exact Agda identifiers are listed in the reproducibility table.
 
 \subsection{G3: Selected Finite-Support Operators and the Quotient Gap}
 
-The G3 lane is the restricted operator-calculus lane. The current positive
-result is certified subtraction support for a selected constructive
-finite-support subtype, through
-\texttt{selectedFiniteSupportOperatorSubtractionCertifiedSupport},
-\texttt{selectedFiniteSupportOperatorSubtractionSupportWitnessFromCertified},
-and \texttt{G3SelectedSubtractionCertifiedSupport}. A genuine associated
-graded layer still requires quotient classes of the form \texttt{F\_n /
-F\_\{n-1\}} and the kernel-equivalence law:
+The G3 application starts where local traversal becomes operator calculus. The
+current constructive result is certified subtraction support for a selected
+constructive finite-support subtype, not arbitrary operator closure. Subtraction
+closure is required before filtered operators descend to stable quotient
+structures. The relevant inhabited surfaces are the selected finite-support
+subtraction support receipt, the selected subtraction support witness, and the
+selected subtraction certified-support record. A genuine associated graded layer still
+requires quotient classes of the form \(F_n/F_{n-1}\) and the kernel-equivalence
+law:
 \[
   [x] = [0] \quad \Longleftrightarrow \quad
   x \textrm{ lies in the denominator filtration piece.}
 \]
 Until the accepted equivalence, quotient carrier,
 projection-respects-equivalence, and descended norm/bracket/isomorphism laws
-are inhabited, Paper 1 cannot claim global Schrodinger promotion, arbitrary
-operator finite support, norm-law closure, product support, bracket support,
-or a completed Galilei contraction theorem.
+are inhabited, quotient notation is only a target shape. The current positive
+surface is selected finite-support subtraction support. The open obstruction is
+quotient-correct norm, product, bracket, and contraction structure.
 
-\subsection{G6: Official Tracked Cross-Lane Commuting}
+\subsection{G6: Distinct-Coordinate Commutation in Tracked \texttt{FactorVec}}
 
 The G6 lane records cross-lane independence inside the prime-coordinate
 carrier. An update to the \texttt{p} lane and an update to the \texttt{q} lane
 factor through distinct valuation exponents, so for \texttt{p != q} the order
-of those two tracked updates should not change the projected state. The
-theorem matters because DASHI does not leave that independence as prose; it
-pins it to the official tracked \texttt{GL.FactorVec} route. The positive
-surfaces are
-\texttt{canonicalG6OfficialTrackedCrossLaneCommutingTheorem} and
-\texttt{canonicalG6OfficialTrackedAboveThresholdCoordinateIndependence}. The
-old full \texttt{LaneOperator} interface is not promoted; its universal
+of those two tracked updates should not change the projected state. The tracked
+route proves that independent prime-lane updates commute componentwise. The
+positive surfaces are the tracked G6 commuting theorem and the tracked above-threshold
+coordinate-independence consumer. The old full \texttt{LaneOperator} interface
+is not promoted; its universal
 vanished-prime identity law blocks the nontrivial scaling route used by the
-tracked theorem. Paper 1 may claim the official tracked cross-lane commuting
-theorem and tracked above-threshold coordinate independence, but not old
-universal \texttt{LaneOperator} promotion, full G6 closure, or downstream
-physics closure from G6 alone.
+tracked theorem. Migration from the tracked route to the older universal
+interface, or to downstream physics, remains uninhabited.
 
 \subsection{E8/LILA: Local Completeness and Upstream Promotion Boundary}
 
-The E8/LILA lane is a finite root-enumeration and promotion boundary, not a
-completed E8-to-physics derivation. The positive and boundary surfaces are
-\texttt{integerIndexedRootsCompleteForTwoSparseShapeTheorem},
-\texttt{canonicalE8RootEnumerationCompletePromotionBoundary}, and
-\texttt{canonicalE8UpstreamCompleteReceiptPromotionAudit}. Paper 1 may
-describe local integer completeness and the exact upstream-promotion audit. It
-must not claim upstream \texttt{E8RootEnumerationComplete}, E8-derived Standard
-Model recovery, limited SM+GR, GRQFT closure, or completed unification from E8
-structure.
+The E8/LILA application uses the same spine in an enumeration setting. The
+carrier is finite local root geometry: integer and sparse local shapes can be
+enumerated, audited, and compared against the local semantic boundary. The
+positive and boundary surfaces are the E8 integer/two-sparse completeness
+theorem, the E8 upstream-promotion boundary, and the E8 upstream-promotion
+audit. The positive result is local integer/two-sparse completeness under the
+current audit boundary. The missing adapter is the upstream completion
+constructor or promotion API, not a stronger physics claim by local enumeration
+alone.
+
+\begin{lemma}[Root-shell emergence as bounded local geometry]
+Suppose a finite carrier region admits signed local coordinates, a norm or
+shell predicate, and an admissibility test that retains only locally compatible
+coordinate differences. Then the visible local states are organized first by
+shell membership and adjacency, not by arbitrary list position. When the
+admissible shell is finite, enumeration can certify completeness of that
+bounded shell and detect duplicate or missing local representatives.
+\end{lemma}
+
+\begin{proof}
+The norm/shell predicate partitions candidate local differences into finite
+fibres. The compatibility test removes candidates outside the current local
+geometry. Completeness is therefore a finite membership statement: every
+admissible representative in the shell has been listed, and no listed
+representative violates the predicate. This is the shape of the local
+E8/LILA root-boundary surface. It does not supply an upstream E8 completion
+token or a physical representation theorem.
+\end{proof}
+
+\section{Locality, Time, and Causality from Finite-Support Traversal}
+
+\begin{definition}[Finite-support configuration]
+Let \(I\) be a coordinate index set and let \(\mathcal A_i\) be the value
+space at coordinate \(i\). A configuration is an admissible finite-support
+assignment
+\[
+x\in\mathcal C\subseteq\prod_{i\in I}^{\mathrm{fin}}\mathcal A_i,
+\qquad
+\operatorname{supp}(x)=\{i\in I\mid x(i)\neq 0_i\}.
+\]
+\end{definition}
+
+\begin{lemma}[Finite support gives a local boundary]
+If \(x,y\in\mathcal C\) have finite support, then
+\[
+\Delta(x,y)=\{i\in I\mid x(i)\neq y(i)\}
+\]
+is finite.
+\end{lemma}
+
+\begin{proof}
+\(\Delta(x,y)\subseteq
+\operatorname{supp}(x)\cup\operatorname{supp}(y)\), and the right side is
+finite. Thus any actual state difference has a finite coordinate witness.
+\end{proof}
+
+\begin{definition}[Local move and traversal history]
+A move \(m:\mathcal C\rightharpoonup\mathcal C\) has finite footprint
+\(\operatorname{foot}(m)\subset I\) when \(m(x)=y\) implies
+\[
+x|_{I\setminus\operatorname{foot}(m)}
+=
+y|_{I\setminus\operatorname{foot}(m)}.
+\]
+A traversal history is a sequence
+\[
+H=(x_0\xrightarrow{m_0}x_1\xrightarrow{m_1}x_2\cdots)
+\]
+with \(x_{k+1}=m_k(x_k)\). Its internal time is the occurrence order of this
+sequence, not an assumed physical spacetime parameter.
+\end{definition}
+
+\begin{lemma}[Local moves preserve finite support]
+If \(x\) has finite support and \(m\) has finite footprint, then \(m(x)\),
+when defined, has finite support.
+\end{lemma}
+
+\begin{proof}
+If \(y=m(x)\), then
+\[
+\operatorname{supp}(y)\subseteq
+\operatorname{supp}(x)\cup\operatorname{foot}(m).
+\]
+The right side is finite.
+\end{proof}
+
+\begin{definition}[Traversal filtration and causal preorder]
+Define
+\[
+S_n(H)=
+\bigcup_{k\le n}\operatorname{supp}(x_k)
+\cup
+\bigcup_{k<n}\operatorname{foot}(m_k).
+\]
+Then \(S_0(H)\subseteq S_1(H)\subseteq\cdots\). An event
+\(e_k=(k,m_k,x_k,x_{k+1})\) directly depends on \(e_j\) when \(j<k\) and the
+later move inspects a coordinate affected or certified by the earlier move,
+for example
+\[
+\operatorname{foot}(m_j)\cap\operatorname{insp}(m_k)\neq\varnothing.
+\]
+The reflexive-transitive closure gives an internal causal preorder subordinate
+to traversal order.
+\end{definition}
+
+\begin{lemma}[Finite-speed propagation in traversal steps]
+If the coordinate set carries a locally finite graph and every move footprint
+lies in a bounded neighborhood of its inspection set, then after \(n\)
+traversal steps the support of \(x_n\) lies in the \(n\)-step reachable region
+from the initial support.
+\end{lemma}
+
+This is an internal locality theorem target. It does not yet assert
+relativistic locality, light cones, or spacetime completion. The residual
+obligations are the coordinate adjacency structure, admissible move class,
+finite-branching law, dependence predicate, and history-equivalence criterion.
+
+\begin{corollary}[Lorentz bridge as propagation-envelope target]
+If local moves have a uniform propagation bound and admissible histories
+preserve an invariant propagation envelope, then the reachability preorder
+determines cone-shaped regions
+\[
+\mathcal C^+(e)=\{e'\mid e\preceq e'\},
+\qquad
+\mathcal C^-(e)=\{e'\mid e'\preceq e\}.
+\]
+A Lorentz-like structure is the additional target in which these cones are
+represented by an invariant quadratic envelope, for example
+\[
+q(\Delta)=c^2\Delta t^2-\|\Delta x\|^2\ge 0,
+\]
+up to the accepted signature and calibration laws.
+\end{corollary}
+
+\begin{proof}
+Bounded traversal gives finite reachable regions at each step. If the bound
+is stable under admissible changes of local coordinates, then reachability
+cannot be represented as an arbitrary graph property; it becomes an invariant
+envelope of possible influence. The Lorentz target is the case where that
+envelope is coordinatized by a nondegenerate quadratic cone. The present paper
+does not inhabit that target; it names the adapter from finite traversal to
+invariant cone geometry.
+\end{proof}
+
+\section{Gauge Transport from Local Sections}
+
+\begin{definition}[Local section and transition]
+Let \(C\) be the finite carrier and let \(\pi:P\to C\) be a bundle target. A
+local chart over \(U_i\subseteq C\) is a section
+\[
+s_i:U_i\to P,
+\qquad
+\pi\circ s_i=\mathrm{id}_{U_i}.
+\]
+On overlaps \(U_{ij}=U_i\cap U_j\), a transition map is a gauge element
+\[
+g_{ij}:U_{ij}\to G,
+\qquad
+s_j(x)=s_i(x)\cdot g_{ij}(x),
+\]
+with target cocycle laws \(g_{ii}=1\), \(g_{ji}=g_{ij}^{-1}\), and
+\(g_{ij}g_{jk}=g_{ik}\) on triple overlaps.
+\end{definition}
+
+The terminology in this section is the standard bundle, connection, and
+curvature terminology used in gauge geometry
+\cite{nakahara-2003,baez-muniain-1994,marsh-2016}; the DASHI contribution is
+the carrier-side staging of which pieces are inhabited, targeted, or still
+residual.
+
+\begin{definition}[Connection and plaquette defect]
+A local connection assigns an oriented edge \(e:x\to y\) a transport
+\(U_e:F_x\to F_y\), or after trivialization an element \(U_e\in G\). For a
+plaquette \(p\) with oriented boundary \(e_1+e_2-e_3-e_4\), define holonomy
+\[
+\operatorname{Hol}(p)=U_{e_4}^{-1}U_{e_3}^{-1}U_{e_2}U_{e_1},
+\]
+up to boundary convention, and discrete curvature defect
+\[
+\Omega(p)=\operatorname{Hol}(p)-1
+\quad\text{or}\quad
+F(p)\approx\log(\operatorname{Hol}(p)).
+\]
+\end{definition}
+
+\begin{lemma}[Abelian transport reduces to a boundary sum]
+When link transports commute, plaquette holonomy can be represented additively
+by a cochain \(a:E_1\to A\):
+\[
+F(p)=d_1a(p)=a(e_1)+a(e_2)-a(e_3)-a(e_4),
+\qquad
+a\mapsto a+d_0\lambda.
+\]
+Curvature is gauge invariant when \(d_1d_0=0\).
+\end{lemma}
+
+\begin{definition}[Nonabelian target]
+When transports do not commute, the order around the plaquette matters and
+the smooth target becomes
+\[
+F=dA+A\wedge A,
+\qquad
+F_{\mu\nu}=
+\partial_\mu A_\nu-\partial_\nu A_\mu+[A_\mu,A_\nu].
+\]
+This is a target adapter, not a Maxwell or Yang-Mills closure. The residual
+obligations are carrier patches, local sections, transition maps, cocycle
+laws, oriented cells, finite incidence, \(d_1d_0=0\), a nondegenerate curvature
+carrier, and field-equation witnesses.
+\end{definition}
+
+\begin{corollary}[Why the abelian/nonabelian split is forced]
+If the transport group is abelian, the plaquette defect is a
+boundary-of-boundary object: \(F=dA\), gauge change is
+\(A\mapsto A+d\lambda\), and the homogeneous law \(dF=0\) follows from
+\(d^2=0\). This is the DASHI route to an EM-shaped abelian sector. If the
+transport group is nonabelian, additive boundary calculus is not stable under
+composition; the commutator correction is the minimal local term that records
+the ordering defect, giving the Yang-Mills-shaped curvature
+\(F_A=dA+A\wedge A\). The field equations \(d{*F}=J\) and
+\(d_A{*F_A}=J\) are not obtained from this split alone; they require a
+Hodge/source/action adapter.
+\end{corollary}
+
+\begin{theorem}[Plaquette ordering forces the Yang-Mills curvature form]
+Let \(U_\mu(x)=\exp(\epsilon A_\mu(x))\) and
+\(U_\nu(x)=\exp(\epsilon A_\nu(x))\) be infinitesimal transports in two local
+directions. The second-order plaquette holonomy has the form
+\[
+U_\nu(x)^{-1}U_\mu(x+\nu)^{-1}U_\nu(x+\mu)U_\mu(x)
+=
+I+\epsilon^2\bigl(
+\partial_\mu A_\nu-\partial_\nu A_\mu+[A_\mu,A_\nu]
+\bigr)+O(\epsilon^3),
+\]
+up to the chosen orientation convention. Thus the nonabelian curvature target
+is not an optional embellishment: the commutator term is the first
+order-sensitive local obstruction to plaquette closure.
+\end{theorem}
+
+\begin{proof}
+Expand each edge transport to second order and compare the two orders around
+the plaquette. The derivative terms record the change of the local connection
+along neighboring edges. The only second-order term that survives solely
+because the two transports fail to commute is \([A_\mu,A_\nu]\). In the
+abelian case this term vanishes and the curvature reduces to \(dA\). The
+residual obligations are the accepted smooth-limit adapter, representation,
+action/source law, Hodge operator, and calibrated field equation.
+\end{proof}
+
+\section{QFT and Operator Surfaces from Filtered Quotients}
+
+Let \(A_{\mathrm{fs}}\) denote the selected finite-support operator surface
+over the current G3 wave-function carrier \(W\):
+\[
+W=\mathrm{SelectedG3State}\to\mathbb Q,
+\qquad
+A_{\mathrm{fs}}\subseteq \operatorname{End}(W).
+\]
+Let \(F_n\) be the selected filtration piece. The associated graded target is
+not \(F_n\) itself but
+\[
+\operatorname{gr}_n(F)=F_n/F_{n-1}.
+\]
+We use standard operator-algebra notation here
+\cite{haag-1996,reed-simon-1980,weinberg-1995}; the constructed object is the
+quotient-descent condition, not a field algebra.
+
+\begin{definition}[Quotient descent law]
+The quotient projection
+\(\pi_n:F_n\to\operatorname{gr}_n(F)\) is well formed only with an equivalence
+\[
+A\sim_n B \quad\Longleftrightarrow\quad A-B\in F_{n-1}
+\]
+and the kernel law
+\[
+\pi_n(A)=\pi_n(B)
+\quad\Longleftrightarrow\quad
+A-B\in F_{n-1}.
+\]
+\end{definition}
+
+\begin{definition}[Descended bracket target]
+The local bracket is
+\[
+[A,B]=A\circ B-B\circ A.
+\]
+The associated-graded bracket target is
+\[
+[\pi_m(A),\pi_n(B)]_{\mathrm{gr}}
+=
+\pi_{m+n}([A,B]).
+\]
+This definition is representative-independent only if
+\[
+A\sim_m A',\;B\sim_n B'
+\Rightarrow
+[A,B]-[A',B']\in F_{m+n-1}.
+\]
+\end{definition}
+
+\begin{definition}[Amplitude and commutator target]
+A physical operator claim requires a structure map
+\[
+\Phi:\operatorname{gr}(F)\to \operatorname{End}(\mathcal H)
+\]
+that preserves the descended bracket. A canonical commutator is therefore a
+residual target
+\[
+R_{\mathrm{CCR}}(i,j)=
+[\Phi(X_i),\Phi(P_j)]-i\hbar\delta_{ij}I,
+\]
+with promotion only after \(R_{\mathrm{CCR}}(i,j)=0\) is inhabited under an
+accepted state space, scalar/amplitude structure, identity, calibration, and
+quotient-descent receipt.
+\end{definition}
+
+\begin{lemma}[Why the commutator is the obstruction object]
+For operators that descend through \(\pi_n\), the expression
+\(A\circ B-B\circ A\) is the least local witness of order-dependence: it
+vanishes exactly when the two updates commute at the chosen projection grade.
+Thus the QFT-facing bracket does not enter as a decorative analogy. It is the
+obstruction to exchanging filtered updates after quotienting. The remaining
+physics step is the representation map \(\Phi\) that turns that obstruction
+calculus into a calibrated operator algebra over \(\mathcal H\).
+\end{lemma}
+
+The residual obligations are the quotient carrier, kernel-equivalence law,
+finite-support product and commutator closure, bracket descent, amplitude
+space \(\mathcal H\), bracket preservation, and physical calibration. QFT,
+local QFT, field algebra, Born rule, and interaction closure remain open.
+
+\section{Curvature and GR from Transport Defect}
+
+The GR target remains
+\[
+G_{\mu\nu}+\Lambda g_{\mu\nu}
+=
+\frac{8\pi G}{c^4}T_{\mu\nu}.
+\]
+In this paper the equation is a target: each term specifies a carrier-side
+construction still to be supplied. The left side requires
+metric, connection, curvature, Ricci contraction, scalar curvature, Einstein
+tensor, cosmological term, and a contracted-Bianchi law. The right side
+requires an authority-backed matter/stress-energy tensor, physical-unit
+normalization, and covariant conservation.
+The curvature and Bianchi notation follows standard GR conventions
+\cite{wald-1984,carroll-2019,misner-thorne-wheeler-1973}; DASHI uses it here
+to name the exact adapter targets.
+
+\begin{definition}[Transport defect]
+Let \(X\) be a discrete carrier with vertices \(x\), oriented edges \(e:x\to
+y\), and local fibres \(F_x\). A local transport assigns \(U_e:F_x\to F_y\).
+For a path \(\gamma=e_n\cdots e_1\), let
+\(U_\gamma=U_{e_n}\cdots U_{e_1}\). For a plaquette \(p\) based at \(x\),
+define
+\[
+H_p=U_{\partial p}:F_x\to F_x,
+\qquad
+\Omega_p=H_p-\mathrm{id}_{F_x}.
+\]
+A non-flat curvature target requires a carrier where some plaquette defect is
+nonzero and transforms covariantly under frame change.
+\end{definition}
+
+\begin{definition}[Connection and curvature target]
+A discrete connection can be treated as primitive transport \(U_{x,\mu}\), or
+by an expansion
+\[
+U_{x,\mu}=I+\epsilon\Gamma_\mu(x)+O(\epsilon^2).
+\]
+The covariant difference target is
+\[
+\nabla_\mu\phi(x)=U_{x,\mu}^{-1}\phi(x+\mu)-\phi(x).
+\]
+For a GR route, this must supply \(\Gamma^\rho_{\mu\nu}\), \(g_{\mu\nu}\),
+\(g^{\mu\nu}\), metric compatibility \(\nabla_\lambda g_{\mu\nu}=0\), and
+torsion-free symmetry where the Levi-Civita route is intended.
+
+Curvature is the failure of covariant transport to commute:
+\[
+[\nabla_\mu,\nabla_\nu]V^\rho
+=
+R^\rho{}_{\sigma\mu\nu}V^\sigma
+-T^\lambda{}_{\mu\nu}\nabla_\lambda V^\rho.
+\]
+The torsion-free GR target sets the torsion term to zero.
+\end{definition}
+
+\begin{definition}[Bianchi, contraction, and source]
+The Bianchi targets are
+\[
+R^\rho{}_{[\sigma\mu\nu]}=0,
+\qquad
+\nabla_{[\lambda}R^\rho{}_{|\sigma|\mu\nu]}=0.
+\]
+Once \(R^\rho{}_{\sigma\mu\nu}\) exists, the Ricci and scalar contractions are
+\[
+R_{\mu\nu}=R^\rho{}_{\mu\rho\nu},
+\qquad
+R=g^{\mu\nu}R_{\mu\nu},
+\]
+and the Einstein tensor is
+\[
+G_{\mu\nu}=R_{\mu\nu}-\frac12 Rg_{\mu\nu}.
+\]
+The sourced equation then requires the same carrier, index convention, metric,
+connection, units, and physical regime for \(G_{\mu\nu}\), \(\Lambda
+g_{\mu\nu}\), and \(T_{\mu\nu}\).
+\end{definition}
+
+\begin{lemma}[Why the Einstein tensor is the natural source-facing target]
+Once the Levi-Civita route is chosen, the contracted Bianchi identity gives
+\[
+\nabla^\mu G_{\mu\nu}=0.
+\]
+Any sourced curvature equation coupled to a conserved stress-energy target
+must therefore put a divergence-free curvature object on the left-hand side.
+The cosmological term is compatible because \(\nabla^\mu g_{\mu\nu}=0\). This
+does not prove the DASHI GR adapter; it explains why the adapter must target
+\[
+G_{\mu\nu}+\Lambda g_{\mu\nu}=\kappa T_{\mu\nu}
+\]
+rather than an arbitrary curvature expression. The value
+\(\kappa=8\pi G/c^4\) remains a weak-field/Newtonian calibration obligation.
+\end{lemma}
+
+The residual obligations are a non-flat connection, curvature covariance,
+finite-radius Bianchi identity, metric/inverse/contraction laws, contracted
+Bianchi law, physical stress-energy interface, unit constants \(G,c,\Lambda\),
+and an inhabited sourced equation.
+
+\section{Measurement, Interference, Entropy, and Sector Splitting}
+
+Let \(X\) be a carrier state space and let
+\[
+\pi:X\to Q
+\]
+be a projection, coarse-graining, or quotient map into an observational state
+space. Two states are observationally equivalent when
+\[
+x\sim_\pi x' \Longleftrightarrow \pi(x)=\pi(x').
+\]
+Measurement is modeled first as selecting or stabilizing a quotient
+representative in \(Q\), rather than as direct access to \(x\).
+
+\begin{definition}[Residual fibre]
+The residual fibre of \(x\) is
+\[
+R_\pi(x)=\pi^{-1}(\pi(x)).
+\]
+Uncertainty is represented by the residual equivalence class left by the
+projection, pending a probability/amplitude law.
+\end{definition}
+
+\begin{theorem}[Incompatible projections force residual growth]
+Let \(\pi_1:X\to Q_1\) and \(\pi_2:X\to Q_2\) be two projections. If there is
+no projection \(\pi_{12}:X\to Q_{12}\) and maps \(r_i:Q_{12}\to Q_i\) such
+that
+\[
+\pi_i=r_i\circ\pi_{12}
+\quad(i=1,2),
+\]
+while preserving the required distinctions of both \(Q_1\) and \(Q_2\), then
+the two observations admit no joint quotient representative. Sequential
+measurement must therefore leave an order-dependent residual
+\[
+\begin{aligned}
+D_{12}(x)
+&=
+\pi_2\!\left(s_1(\pi_1(x))\right)
+-
+\pi_1\!\left(s_2(\pi_2(x))\right),
+\end{aligned}
+\]
+where \(s_i\) is any chosen section or representative rule. Nonzero
+\(D_{12}\) is the projection-defect route to uncertainty and interference
+targets.
+\end{theorem}
+
+\begin{proof}
+A joint quotient representative is precisely a common refinement through
+which both projections factor. If no such refinement preserves the demanded
+distinctions, choosing a representative for one projection collapses
+distinctions needed by the other. The lost information moves into a residual
+fibre, and different section choices can produce different downstream
+projected states. A probability or amplitude law is still required before
+this becomes quantum measurement theory.
+\end{proof}
+
+\begin{definition}[Interference and entropy targets]
+If unresolved branches \(x_i\) combine before projection,
+\[
+\Psi=\sum_i a_i x_i,
+\qquad
+\pi(\Psi)
+\]
+can depend on branch combination before quotient separation. Entropy may be
+read projection-relatively as residual volume:
+\[
+S_\pi(q)\sim\log\mu(\pi^{-1}(q)),
+\qquad
+S_\pi=-\sum_i p_i\log p_i
+\]
+when branch weights \(p_i\) are supplied by the chosen formal model.
+\end{definition}
+
+\begin{definition}[Sector splitting]
+Let \(\mathcal A\) be an algebra of transformations on \(X\). The
+projection-compatible subalgebra is
+\[
+\mathcal A_\pi=\{a\in\mathcal A\mid \pi\circ a
+\text{ is well defined on }Q\}.
+\]
+Commuting projected operations \([a,b]_\pi=0\) form abelian sector targets.
+Noncommuting residual operations \([a,b]_\pi\neq0\) point toward nonabelian
+targets. If a symmetry group \(G\) acts on \(X\) but projection preserves only
+\(H\subseteq G\), then residual cosets \(G/H\) label directions no longer
+treated equivalently by the projected description. This is a target mechanism
+for sector splitting, not a derivation of the observed weak/strong/EM
+decomposition.
+\end{definition}
+
+The residual obligations are the base category, the precise nature of \(\pi\),
+branch-weight law, interference theorem, residual commutator, concrete group
+\(G\), subgroup \(H\), representation data, and empirical calibration.
 
 \section{Empirical Contact}
 
-The empirical-contact lane is intentionally narrow. Its role is to show that
-the constructive architecture can bind a named physics observable to a frozen,
-mechanically tracked receipt while still blocking stronger claims whose
-authority, convention, or strict-fit obligations are missing.
+The empirical result used in this paper is deliberately bounded: a below-\(Z\)
+Drell-Yan comparison against CMS-SMP-20-003 / HEPData \texttt{t43}. The receipt
+binds a named observable to a frozen comparison while leaving accepted
+authority, convention, and strict-fit obligations open.
 
 The current positive surface is the bounded W3 below-Z Drell-Yan
 comparison-law receipt over CMS-SMP-20-003 / HEPData \texttt{ins2079374/t43},
@@ -443,86 +1176,114 @@ not satisfied. The strict log-covariance diagnostic is also negative:
 residual subspace; the next theorem target is a frozen no-refit route
 discharging \texttt{StrictPassOrthogonalityObligation}, not a prose promotion.
 
+\subsection*{Typed Residual Basis Decomposition}
+
+The empirical lane also exposes a reusable method: Typed Residual Basis
+Decomposition (TRBD). A TRBD receipt records
+\[
+\begin{aligned}
+\text{residual}
+&\longrightarrow
+\text{projection onto a typed basis}
+\longrightarrow
+\text{named obstruction}
+\\
+&\longrightarrow
+\text{coverage and perpendicular residual}
+\longrightarrow
+\text{promotion decision}.
+\end{aligned}
+\]
+The reusable core is \texttt{DASHI.Core.TypedResidualBasisDecomposition}. The
+Drell-Yan strict-log receipt instantiates it with the structural basis
+\(\{1,\log(\varphi^*)\}\). For \texttt{sigmaDashiV4Predictor}, the raw
+strict-log \texttt{chi2/dof} is \texttt{3180.211733150705}, the perpendicular
+\texttt{chi2/dof} is \texttt{111.96455543013676}, and the basis coverage is
+\texttt{0.968705212853035}. The coverage is high, but the perpendicular
+residual still fails the strict threshold \texttt{2.0}, so the TRBD status is
+\texttt{obstructionTypedPartial}; no promotable TRBD receipt is constructed.
+
+TRBD distinguishes a typed obstruction from a passing shape law: identifying
+the residual subspace is useful, but it does not promote the predictor unless
+the complement is also discharged.
+
 The bounded W3 comparison-law receipt is not accepted W3 empirical authority.
-No accepted provider token, non-postulated policy hook, or governance payload
+No accepted provider token, non-postulated policy hook, or authority payload
 currently inhabits \texttt{W3AcceptedEvidenceAuthorityToken}. W4 and W5 remain
 blocked by missing accepted Drell-Yan luminosity/convention authority.
 
 \section{Compression, Semantic Geometry, and Cross-Domain Spine}
 
-The UFT vocabulary supplies a compression-facing view of the carrier:
-addresses refine ultrametrically, motif membership is graded by projection
-evidence, and unresolved or incompatible branches remain represented rather
-than collapsed. The visual intuition is a floating trie of possible
-refinements. A coarse address names a region of structure; descending the trie
-adds precision, distinguishes branches, and exposes incompatibilities. Unlike
-an ordinary lookup tree, the UFT reading is semantic and typed: branch distance
-is ultrametric, branch membership is projection-grade dependent, and
-unresolved branches can remain live without being forced into a binary
-collapse.
+UFT addresses compress repeated refinement structure. Two states may share a
+motif at grade \(\Omega\) only when the distinctions required below \(\Omega\)
+remain recoverable. A coarse address names a region of structure; descending
+the trie adds precision, distinguishes branches, and exposes incompatibilities.
+Branch distance is ultrametric, branch membership is projection-grade
+dependent, and unresolved branches can remain live without binary collapse.
 
-Motifs then become reusable local shapes inside that trie. A motif does not
-assert identity between two states. It says that two carrier regions share
-enough projection structure to support a typed comparison at a chosen grade.
-Exact members, compatible members, blocked members, and residual members are
-different mathematical statuses. This lets the architecture reuse structure
-without treating resemblance as theoremhood.
+\begin{theorem}[Compression admissibility at a projection grade]
+Let \(\Xi\) be a semantic state, let \(\Omega\) be the active projection grade,
+and let \(\Pi_{\mathrm{compress}}(\Xi)\) be a compressed representative. The
+compression is admissible at grade \(\Omega\) only if every finer grade
+\(\Omega'\leq\Omega\) has an explicit recoverability witness:
+\[
+\forall \Omega'\leq\Omega,\quad
+\mathrm{RequiredDistinctions}(\Omega')
+\subseteq
+\mathrm{Recoverable}_{\Omega'}
+\bigl(\Pi_{\mathrm{compress}}(\Xi)\bigr).
+\]
+\end{theorem}
+
+The compression admissibility receipt inhabits this condition at motif grade
+for exact, PNF, and motif recoverability witnesses. It also records that the
+residual carrier is preserved, CID identity and semantic identity are
+separated, and false semantic collapse is excluded. The receipt status is
+diagnostic: it does not construct an external ITIR runtime authority token and
+does not identify byte-exact CID equality with semantic equivalence.
 
 UFT-C, lattice-logic, null/hinge codes, SWAR implementation machinery,
 Base369/trit notation, Hensel-style refinement, and Markov-after-quotient
 readings are routed as background or appendix material unless a repo-local
 surface promotes a stronger claim.
 
-The cross-domain material is included as a theorem-target boundary, not as a
-new promoted result. The current Agda surface
-\texttt{canonicalCrossDomainVariationalSpineBoundary} records a common typed
-object \texttt{(X, delta, pi, defect, gate, observation, symmetry)} shared by
-physics, molecular, bonding, biological, and perceptual target rows. Its value
-for Paper 1 is structural: it shows how projection, defect, admissible
-descent, observation quotient, and symmetry-orbit language can be stated in
-one typed grammar. It does not imply chemistry closure, bonding-energy
-prediction, molecular spectra, protein folding, biological prediction,
-perceptual empirical fit, or universal TOE closure.
+The cross-domain variational-spine boundary records a common typed object
+\((X,\delta,\pi,\mathrm{defect},\mathrm{gate},\mathrm{observation},
+\mathrm{symmetry})\) shared by several non-promoting target rows. Paper 1 does
+not infer chemistry closure, biological prediction, perceptual empirical fit,
+or universal closure from that boundary.
 
-\section{Obstruction Frontier}
+\section{Closure Frontier}
 
-The preceding sections put the carrier first: coordinate structure,
-projection-defect decomposition, filtration, lane action, compression, local
-mathematical surfaces, empirical contact, and cross-domain spine. The
-obstruction frontier now records the exact residuals of that architecture. It
-is not the emotional center of the paper, but it is the certification layer
-that makes the physics-unification thesis admissible.
+The closure frontier records the exact residual obligations remaining for
+stronger physical claims.
 
-\begin{longtable}{p{0.16\linewidth}p{0.29\linewidth}p{0.27\linewidth}p{0.18\linewidth}}
+\begin{longtable}{p{0.16\linewidth}p{0.29\linewidth}p{0.27\linewidth}p{0.17\linewidth}}
 \toprule
-Gate & Current surface & First missing primitive/token & Forbidden promotion \\
+Gate & Current surface & First missing primitive/token & Unsupported stronger claim \\
 \midrule
 G2 & Direction-indexed SFGC schema adoption & Maxwell/curvature/field-equation carrier and receipts & Maxwell closure, physical curvature \\
 G3 & Selected finite-support subtraction support & Quotient carrier, kernel-equivalence law, descended laws & Global operator or Schrodinger closure \\
 G6 & Official tracked commuting route & Migration or split of old universal law & Old full \texttt{LaneOperator} promotion \\
 E8/LILA & Local integer/root boundary & Upstream completion constructor/API & Upstream E8 completion \\
-W3 & Bounded Drell-Yan receipt & \texttt{W3AcceptedEvidenceAuthorityToken} & Accepted empirical authority \\
+W3 & Bounded Drell-Yan receipt & Accepted W3 evidence-authority token & Accepted empirical authority \\
 W4/W5 & Request/diagnostic surfaces & Accepted DY convention and correction receipts & Matter field, stress-energy, sourced physics \\
 GR & Future adapter path & Non-flat connection, curvature, Ricci, sourced interface & Einstein tensor, Schwarzschild, continuum GR \\
-Cross-domain spine & Shared projection-defect / MDL schema & Calibration, universality, domain receipts & Chemistry/biology/perception recovery \\
+Cross-domain spine & Shared projection-defect / MDL schema & Calibration, universality, domain receipts & Cross-domain recovery \\
 Provenance & JMD/SSP/archive/source routing & Repo-local receipts or accepted authority & Provenance-as-proof \\
 \bottomrule
 \end{longtable}
 
-The frontier has a constructive interpretation. Every row identifies a
-residual defect: the exact bridge, authority, quotient law, adapter, or
-calibration object that would be needed for a stronger projection. This is how
-DASHI avoids converting an elegant carrier into an overclaimed physics result.
+Every row identifies a residual defect: the exact bridge, authority, quotient
+law, adapter, or calibration object required for a stronger projection.
+
 
 \section{Reproducibility}
 
-The canonical authoring surface is
-\texttt{Docs/PaperDraftWorkingFolder/Paper1\_Manuscript.md}. The claim-control
-surface is \texttt{Docs/PaperDraftWorkingFolder/ClaimLedger.md}, and
-source/provenance routing is recorded in
-\texttt{Docs/PaperDraftWorkingFolder/SourceLedger.md},
-\texttt{ArchiveTopicIntegrationPlan.md}, and
-\texttt{ArchiveRelativeLocationReference.md}.
+The canonical manuscript, claim ledger, source ledger, archive-topic plan, and
+relative archive-location reference are included in the accompanying
+repository. Exact repository paths are listed in the supplemental repository
+materials rather than in the main prose.
 
 The narrow verification surface for this draft is:
 \begin{verbatim}
@@ -531,47 +1292,280 @@ plantuml -checkonly Docs/*.puml
 git diff --check -- Docs/PaperDraftWorkingFolder Docs README.md
 \end{verbatim}
 
+\subsection*{Receipt Index}
+
+Agda identifiers are kept out of explanatory prose except where the exact name
+is the object under discussion. The table below gives the exact receipt names
+for the human-readable labels used in the body.
+
+\begin{longtable}{p{0.20\linewidth}p{0.34\linewidth}p{0.34\linewidth}}
+\toprule
+Receipt label & Module & Agda identifier \\
+\midrule
+G2 schema extension &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.G2SFGCGaugeFieldSchemaExtension} &
+\scriptsize\ttfamily\seqsplit{canonicalG2SFGCGaugeFieldSchemaExtensionReceipt} \\
+G2 no-missing witness &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.G2SFGCGaugeFieldSchemaExtension} &
+\scriptsize\ttfamily\seqsplit{noRemainingG2SFGCSchemaExtensionMissing} \\
+G3 selected subtraction support &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.G3P2LimitConvergenceSurface} &
+\scriptsize\ttfamily\seqsplit{selectedFiniteSupportOperatorSubtractionCertifiedSupport} \\
+G3 selected subtraction witness &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.G3P2LimitConvergenceSurface} &
+\scriptsize\ttfamily\seqsplit{selectedFiniteSupportOperatorSubtractionSupportWitnessFromCertified} \\
+G3 certified-support record &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.G3P2LimitConvergenceSurface} &
+\scriptsize\ttfamily\seqsplit{G3SelectedSubtractionCertifiedSupport} \\
+G6 tracked commuting theorem &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.G6CrossLaneCommutingTheorem} &
+\scriptsize\ttfamily\seqsplit{canonicalG6OfficialTrackedCrossLaneCommutingTheorem} \\
+G6 above-threshold independence &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.G6AboveThresholdIndependence} &
+\scriptsize\ttfamily\seqsplit{canonicalG6OfficialTrackedAboveThresholdCoordinateIndependence} \\
+E8 integer/two-sparse completeness &
+\scriptsize\ttfamily\seqsplit{DASHI.Algebra.Trit.E8RootEnumeration} &
+\scriptsize\ttfamily\seqsplit{integerIndexedRootsCompleteForTwoSparseShapeTheorem} \\
+E8 upstream-promotion boundary &
+\scriptsize\ttfamily\seqsplit{DASHI.Algebra.Trit.E8RootEnumeration} &
+\scriptsize\ttfamily\seqsplit{canonicalE8RootEnumerationCompletePromotionBoundary} \\
+E8 upstream-promotion audit &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.LilaE8RootEnumerationNoDuplicatesSurface} &
+\scriptsize\ttfamily\seqsplit{canonicalE8UpstreamCompleteReceiptPromotionAudit} \\
+W3 bounded comparison law &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.HEPDataW3ComparisonLawReceipt} &
+\scriptsize\ttfamily\seqsplit{canonicalHEPDataW3ComparisonLawReceipt} \\
+Drell-Yan adjacent-ratio lane &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.DrellYanAdjacentRatioEmpiricalLaneReceipt} &
+\scriptsize\ttfamily\seqsplit{canonicalDrellYanAdjacentRatioEmpiricalLaneReceipt} \\
+Drell-Yan strict-log diagnostic &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.DrellYanStrictLogLinearSubspaceReceipt} &
+\scriptsize\ttfamily\seqsplit{canonicalDrellYanStrictLogLinearSubspaceReceipt} \\
+Compression admissibility &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.CompressionAdmissibilityReceipt} &
+\scriptsize\ttfamily\seqsplit{canonicalCompressionAdmissibilityReceipt} \\
+Cross-domain variational spine &
+\scriptsize\ttfamily\seqsplit{DASHI.Physics.Closure.CrossDomainVariationalSpine} &
+\scriptsize\ttfamily\seqsplit{canonicalCrossDomainVariationalSpineBoundary} \\
+\bottomrule
+\end{longtable}
+
 \section{What This Paper Does Not Claim}
 
-This paper does not claim that DASHI has completed physics unification. It does
-not claim an accepted theory of everything, accepted external empirical
-authority, physical calibration, sourced Einstein equations, non-flat GR
-closure, Schwarzschild recovery, continuum recovery, GRQFT closure, limited
-SM+GR closure, strict Drell-Yan success, above-Z Drell-Yan promotion, W4/W5
-authority closure, upstream E8 completion, universal G6 closure, arbitrary
-wavefunction-operator closure, chemistry closure, biology prediction,
-perceptual validation, or cross-domain recovery equivalence.
+This paper presents a constructive carrier derivation architecture and several
+partial inhabited surfaces. It does not claim completed empirical closure,
+sourced non-flat GR, GRQFT unification, upstream E8 completion, accepted W3/W4/W5
+authority, or completed physics unification. Stronger readings remain
+conditioned on the residual obligations listed in the closure frontier.
 
-\section{Conclusion}
+\section*{Appendix A: Glossary and Naming Conventions}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{p{0.24\linewidth}p{0.66\linewidth}}
+\toprule
+Term & Meaning in this paper \\
+\midrule
+G2 lane & DASHI-native direction-indexed carrier schema for local
+plaquette/traversal constructions. It is not identified with the exceptional
+Lie group \(G_2\) unless such an equivalence is explicitly inhabited. \\
+G3 lane & DASHI-native filtered finite-support operator lane. The current
+positive result is selected finite-support subtraction support; associated
+graded quotient descent remains open. \\
+G6 lane & DASHI-native tracked cross-lane commuting lane over
+\texttt{FactorVec} valuation coordinates. It is not a universal
+\texttt{LaneOperator} theorem. \\
+E8/LILA & Local finite root-shell enumeration and audit surfaces associated
+with bounded E8-style root geometry. Upstream E8 completion is separate. \\
+Surface & A projection context with a visible carrier, admissibility gate,
+projection map, and residual defect. \\
+Inhabited & Constructed or proved in the current typed surface. \\
+Target & A specified mathematical obligation shape that is not yet inhabited. \\
+Receipt & A mechanized or repo-local witness record for a bounded claim. \\
+Promotion & Admissible elevation of a claim to the status allowed by its
+evidence surface. \\
+Residual / defect & Residual structure after projection. \\
+Obstruction & A named missing bridge, law, token, adapter, or authority value
+that blocks a stronger claim. \\
+Calibration & The units, constants, empirical convention, or source-coupling
+normalization needed for a physical claim. \\
+Projection-defect decomposition & The reading \(x=P_s(x)+D_s(x)\), where
+\(P_s(x)\) is the admitted projection and \(D_s(x)\) is residual structure. \\
+UFT & Ultrametric Floating Trie: a hierarchical refinement-address structure
+where shared prefixes induce ultrametric distance. \\
+\texttt{FactorVec} & Prime-lane valuation vector indexed by the tracked prime
+coordinate set. \\
+\bottomrule
+\end{longtable}
+\renewcommand{\arraystretch}{1.0}
 
-DASHI should be read as a constructive physics-unification program centered on
-a coherent carrier geometry. Prime-coordinate structure, ultrametric
-refinement, projection-defect decomposition, filtered operator surfaces,
-tracked lane actions, local root-geometry boundaries, semantic compression,
-and bounded empirical receipts are staged as parts of one mathematical
-architecture. The paper's thesis is that this architecture makes unification a
-constructive closure problem rather than a sequence of informal analogies.
+\section*{Appendix B: Symbol and Object Index}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{p{0.24\linewidth}p{0.66\linewidth}}
+\toprule
+Symbol & Meaning \\
+\midrule
+\(\mathcal X\) & DASHI carrier state space. \\
+\(x\) & Carrier state. \\
+\((a,\nu,\tau,d,\ell,r)\) & Address, valuation vector, ternary coordinate,
+refinement depth, active lane, and receipt/projection status. \\
+\(\tau\in\{-1,0,+1\}\) & Primitive ternary coordinate: opposed, unresolved,
+affirmed. \\
+\(P_s\) & Projection admitted by surface \(s\). \\
+\(D_s(x)\) & Residual defect of \(x\) at surface \(s\). \\
+\(\rho(x,y)\) & Ultrametric distance between carrier states. \\
+\(F_n\) & Filtration layer. \\
+\(\operatorname{gr}_n(F)\) & Associated graded target \(F_n/F_{n-1}\). \\
+\(U_e\) & Transport operator on an oriented edge. \\
+\(\operatorname{Hol}(p)\) & Plaquette holonomy. \\
+\(\Omega(p)\) & Plaquette transport defect. \\
+\(A,F_A\) & Connection one-form and nonabelian curvature target. \\
+\(\nabla\) & Connection/covariant derivative target. \\
+\(R^\rho{}_{\sigma\mu\nu}\) & Curvature target. \\
+\(R_{\mu\nu},R\) & Ricci and scalar curvature targets. \\
+\(G_{\mu\nu}\) & Einstein tensor target. \\
+\(T_{\mu\nu}\) & Stress-energy/source target. \\
+\(\pi:X\to Q\) & Observation or quotient projection. \\
+\(R_\pi(x)\) & Residual fibre \(\pi^{-1}(\pi(x))\). \\
+\(H\subseteq G\) & Preserved subgroup under sector projection. \\
+\(G/H\) & Residual coset sector. \\
+\bottomrule
+\end{longtable}
+\renewcommand{\arraystretch}{1.0}
 
-The current frontier is substantial but not final. G2 supplies a
-direction-indexed carrier schema for current core-facing consumers. G3
-supplies selected finite-support subtraction support and exposes the
-associated-graded quotient gap. G6 supplies the official tracked cross-lane
-commuting route. E8/LILA supplies local integer/root-boundary structure while
-preserving upstream ownership. UFT and motif language supply the compression
-geometry that keeps refinement, semantic distance, and residual structure in
-the same typed vocabulary. The Drell-Yan lane supplies bounded empirical
-contact and the stricter residual shape law that still fails.
+\section*{Appendix C: Origins from Ternary Traversal to Carrier Geometry}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{A.\arabic{figure}}
+\renewcommand{\theHfigure}{appendix.A.\arabic{figure}}
 
-Typed closure is what keeps this architecture from becoming another
-unification narrative closed by assertion. It does not reduce the physics
-ambition; it makes the ambition legible. The positive surfaces stand where
-they are inhabited, and the stronger empirical, GR, upstream E8,
-universal-operator, and completed-unification readings remain exact residual
-obligations. Paper 1's contribution is therefore a mathematically coherent
-ultrametric carrier architecture for physics unification with a visible,
-mechanized closure frontier.
+The earliest DASHI experiments used cyclic ternary and nonary carriers. A
+trit distinguished positive, negative, and unresolved states; larger wrapped
+state spaces represented transition, tension, overflow, and refinement without
+collapsing the unresolved case into a binary decision. Later dialectical
+language in the archive corresponds to the same mechanism: a transition may
+carry unresolved residue, and the current projection records that residue as
+\(D_s(x)\).
 
-\nocite{dashi-claim-ledger-2026,dashi-source-ledger-2026,dashi-public-narrative-flow-2026,agda-project,hepdata-placeholder}
+The geometric intuition then moves from a one-dimensional cycle to traversal
+through a cube-like state space. Rubik-like cube, hypercube, and voxel language
+is useful only as intuition for finite-coordinate movement: each coordinate
+records a local trit, phase, or valuation, and a traversal is a sequence of
+admissible coordinate updates. Voxel language fits the same role at nonary
+scale: a local \(3^2\) or \(3^k\) block can be read as a small cell of
+structured state, and overflow means that the current cell cannot preserve the
+relevant invariant without adding a refinement coordinate.
+
+Early implementations tested traversal continuity using sampled video/state
+traces. A video trace is a sampled path through state space: continuity testing
+asks whether adjacent frames preserve the expected local carrier relation,
+whether an apparent jump is an admissible carry/refinement, and whether the
+projection defect increases at the boundary. Such tests motivated carrier
+choices and exposed discontinuities. The experiments are heuristic unless
+bound to a reproducible metric and verification surface.
+
+The sibling inventories record this boundary. Early implementations explored
+ultrametric refinement, traversal continuity, diffusion rollout, branch-density
+localization, and adaptive refinement. One tree-diffusion diagnostic records
+\texttt{tree\_rollout\_mse = 4.246448141002339e-06} versus
+\texttt{rbf\_rollout\_mse = 2.155684319973986e-05}. These experiments motivated
+the refinement and transport structures later formalized in the carrier; they
+are not theorem-level evidence.
+
+The selected figures are copied into
+\texttt{Docs/Images/paper1-origin-figures/} and recorded in
+\texttt{Docs/PaperDraftWorkingFolder/FigureCandidateManifest.md}. They
+illustrate the refinement and traversal geometries that motivated the carrier
+formalism.
+
+\begin{center}
+\centering
+\begin{minipage}{0.48\linewidth}
+\includegraphics[width=\linewidth]{Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/dashifine_ultrametric_tree_frame0.png}
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}
+\includegraphics[width=\linewidth]{Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/dashifine_ultrametric_grid_frame0.png}
+\end{minipage}
+\par\smallskip\small\textbf{Figure A.1. Ultrametric refinement geometry.}
+States sharing longer refinement
+prefixes cluster naturally under the induced ultrametric; divergence occurs at
+the first incompatible address or valuation depth.
+\end{center}
+
+\begin{center}
+\centering
+\begin{minipage}{0.48\linewidth}
+\includegraphics[width=\linewidth]{Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/dashitest_tree_diffusion_rollout_mse.png}
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}
+\includegraphics[width=\linewidth]{Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/dashitest_tree_diffusion_tree_band_quotient.png}
+\end{minipage}
+\par\smallskip\small\textbf{Figure A.2. Traversal continuity and tree-diffusion rollout diagnostics.}
+The
+sibling run gives a concrete visual and metric surface for tree-structured
+transport; it does not promote a video-continuity or codec-correctness theorem.
+\end{center}
+
+\begin{center}
+\centering
+\begin{minipage}{0.48\linewidth}
+\includegraphics[width=\linewidth]{Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/fracdash_rank4_basin_branch_density.png}
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}
+\includegraphics[width=\linewidth]{Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/dashirtx_refinement_frame_100.png}
+\end{minipage}
+\par\smallskip\small\textbf{Figure A.3. Branch density and adaptive refinement.}
+The diagnostics show
+refinement concentrating around structured local regions rather than spreading
+uniformly across the carrier.
+\end{center}
+
+UFT/trie refinement gives this traversal a compression geometry. A trie node is
+a coarse address; descending the trie adds precision. Nearby branches share
+prefix structure, and separation occurs at the first incompatible depth. This
+matches the ternary ultrametric reading already used in the carrier spine:
+refinement depth is not just a storage index but a metric and semantic
+relation. A motif is then a reusable local shape in the trie, not an equality
+claim.
+
+\texttt{FactorVec} is the corresponding prime-coordinate refinement of the
+same idea. Instead of only trit positions, a state carries valuation data
+across tracked prime lanes. Multi-lane transport, chamber legality, signed
+scans, and defect summaries turn traversal into a controlled carrier geometry:
+a move may be legal or illegal, stable or repatterning, contractive or
+expansive, and these labels are computed at the representation layer rather
+than inferred from prose.
+
+The transition from trits to carrier geometry is therefore historical and
+mathematical. Ternary traversal made unresolvedness explicit; \texttt{Base369},
+cube/voxel traversal, video-like continuity traces, UFT tries, and
+\texttt{FactorVec} lanes added progressively sharper ways to represent
+transition, address, refinement, and defect. These origins do not prove full
+physics unification, automatic convergence, Monster representation semantics,
+empirical adequacy, or domain recovery. They record the path by which stronger
+claims would have to be typed, projected, tested, and closed.
+
+\section{Conclusions}
+
+DASHI is a constructive physics-unification program centered on a coherent
+carrier geometry. Prime-coordinate structure, ultrametric refinement,
+projection-defect decomposition, filtered operator surfaces, tracked lane
+actions, local root-geometry boundaries, semantic compression, and bounded
+empirical receipts are treated as parts of one mathematical construction.
+
+The current frontier is substantial but not final. G2 records a
+direction-indexed carrier schema, G3 records selected finite-support
+subtraction support, G6 records tracked cross-lane commutation, and E8/LILA
+records local root-boundary structure. UFT and motif structures keep refinement,
+semantic distance, and residual structure in the same typed vocabulary; the
+Drell-Yan receipt records bounded empirical contact and a stricter residual
+shape law that still fails.
+
+The residual obligations remain explicit throughout the construction, so
+stronger physical claims require the corresponding adapters before promotion.
+Paper 1's contribution is a constructive ultrametric carrier geometry whose
+refinement, transport, projection, compression, and quotient structures support
+staged physics-facing derivation surfaces with a visible certification
+frontier.
+
+\nocite{cms-smp-20-003,hepdata-ins2079374,collins-soper-sterman-1985,ebert-michel-stewart-tackmann-2021,drell-yan-1970}
 \bibliographystyle{plain}
 \bibliography{Docs/PaperDraftWorkingFolder/Paper1_References}
 

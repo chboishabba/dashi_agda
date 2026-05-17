@@ -220,6 +220,60 @@ SelectedEquivalentModuloPreviousCumulativeFiltration n A B =
       ≡
       G3.waveFunctionOperatorSubtraction A B)
 
+-- Projection-only interface.  This is intentionally weaker than an
+-- associated-graded quotient construction: it records the exact projection
+-- laws a future quotient must satisfy, while avoiding any claim that
+-- F_n / F_{n-1} has been constructed for the selected operator algebra.
+record G3AssociatedGradedProjectionInterface : Setω where
+  field
+    GradedClass :
+      Nat →
+      Set
+
+    equivalentModuloPrevious :
+      (n : Nat) →
+      G3.WaveFunctionOperator →
+      G3.WaveFunctionOperator →
+      Set
+
+    equivalentModuloPreviousIsSelectedCandidate :
+      equivalentModuloPrevious
+      ≡
+      SelectedEquivalentModuloPreviousCumulativeFiltration
+
+    projectExact :
+      (n : Nat) →
+      SelectedFiltrationPiece n →
+      GradedClass n
+
+    projectOperator :
+      (n : Nat) →
+      (A : G3.WaveFunctionOperator) →
+      G3.SelectedOperatorP2Degree A n →
+      GradedClass n
+
+    projectOperatorFactorsThroughExact :
+      (n : Nat) →
+      (A : G3.WaveFunctionOperator) →
+      (deg : G3.SelectedOperatorP2Degree A n) →
+      projectOperator n A deg
+      ≡
+      projectExact n
+        (selectedProjectionToFiltrationPiece n A deg)
+
+    projectRespectsModuloPrevious :
+      (n : Nat) →
+      (A B : G3.WaveFunctionOperator) →
+      (degA : G3.SelectedOperatorP2Degree A n) →
+      (degB : G3.SelectedOperatorP2Degree B n) →
+      equivalentModuloPrevious n A B →
+      projectOperator n A degA
+      ≡
+      projectOperator n B degB
+
+    noQuotientClaimBoundary :
+      List String
+
 record G3SelectedOperatorPointwiseEqualitySurface : Setω where
   field
     operatorEquality :
@@ -871,6 +925,9 @@ record G3AssociatedGradedQuotientSurface : Setω where
     requestedAdditiveQuotientPrimitiveName :
       String
 
+    requestedProjectionInterfaceName :
+      String
+
     requestedQuotientAPIName :
       String
 
@@ -881,6 +938,9 @@ record G3AssociatedGradedQuotientSurface : Setω where
       List String
 
     requestedAdditiveQuotientPrimitiveFields :
+      List String
+
+    requestedProjectionInterfaceFields :
       List String
 
     requestedPoincareGalileiIsomorphismAPIFields :
@@ -934,6 +994,8 @@ canonicalG3AssociatedGradedQuotientSurface =
         canonicalG3SelectedEquivalenceModuloPreviousFiltrationBlocker
     ; requestedAdditiveQuotientPrimitiveName =
         "G3SelectedOperatorAdditiveQuotientPrimitive"
+    ; requestedProjectionInterfaceName =
+        "G3AssociatedGradedProjectionInterface"
     ; requestedQuotientAPIName =
         "G3AssociatedGradedQuotientAPI"
     ; requestedPoincareGalileiIsomorphismAPIName =
@@ -955,6 +1017,16 @@ canonicalG3AssociatedGradedQuotientSurface =
         ∷ "negationClosureInPreviousFiltration : symmetry witness by closure under negated differences"
         ∷ "additionClosureInPreviousFiltration : transitivity witness by closure under added differences"
         ∷ "acceptedDifferenceImageMembership : previous-filtration representative with accepted pointwise equality to the operator difference"
+        ∷ []
+    ; requestedProjectionInterfaceFields =
+        "GradedClass : Nat -> Set"
+        ∷ "equivalentModuloPrevious : candidate relation on selected operators"
+        ∷ "equivalentModuloPreviousIsSelectedCandidate : relation is the current selected modulo-previous candidate"
+        ∷ "projectExact : SelectedFiltrationPiece n -> GradedClass n"
+        ∷ "projectOperator : selected operator with p2-degree evidence -> GradedClass n"
+        ∷ "projectOperatorFactorsThroughExact : projectOperator factors through the concrete F_n Sigma piece"
+        ∷ "projectRespectsModuloPrevious : projection respects the candidate modulo-previous relation"
+        ∷ "noQuotientClaimBoundary : records that this is projection-only and non-promoting"
         ∷ []
     ; requestedPoincareGalileiIsomorphismAPIFields =
         "PoincareAtP2 : Nat -> Set"

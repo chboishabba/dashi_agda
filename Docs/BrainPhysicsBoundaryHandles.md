@@ -39,6 +39,68 @@ Local Brain theme/profile surfaces exist as theorem-thin packaging:
 
 These profiles expose exact alignment and checksum handles. They do not assert neuroscience completeness, learning dynamics, or physical law recovery.
 
+### fMRI observation quotient handle
+
+`DASHI/Physics/Closure/BrainConnectomeFMRIObservationQuotient.agda` records a
+non-promoting empirical observation target for the perception lane:
+
+`phase orbit class -> neural state initialization -> connectome-constrained
+processing -> high-resolution/laminar fMRI readout -> behavioral report`.
+
+The module names the DASHI brain object `B = (C, N, P, O)` where `C` is a
+structural connectome, `N` is neural or microcircuit state, `P` is processing
+transition, and `O` is observed readout. It treats high-resolution/laminar fMRI
+as a macroscopic observation quotient for layer profile, column pattern,
+orientation map, retinotopic geometry, and temporal coherence. It does not
+claim a BOLD model, fMRI calibration, behavioral adequacy, or perception
+closure.
+
+The current typed target includes a formal connectome carrier
+`C = (V,E,W,Lambda)`, ternary state carrier `sigma : V -> {-1,0,+1}`,
+connectome-constrained threshold transition, MDL processing energy, connectome
+symmetry quotient, processing orbit quotient, inverse-observation target, and
+laminar readout factorization constraint. These are bridge handles only; no
+dataset-specific transition, hemodynamic transfer function, layer-calibrated
+BOLD model, or behavioral adequacy receipt is present.
+
+The bridge also names formal proof obligations rather than only prose: a
+pointwise ternary gate law, an accepted complexity order for `delta_C`, MDL
+descent soundness, quotient equivalence laws, class-of-state projection, and
+symmetry-respecting bridge/readout laws. These obligations are not dataset
+receipts and do not establish empirical adequacy.
+
+### Developmental genomic inverse handle
+
+`DASHI/Physics/Closure/DevelopmentalGenomicInverseBridge.agda` records the
+developmental bridge that sits below the connectome/fMRI observation handle.
+The forward chain is:
+
+`genome -> regulatory activation -> morphogenesis -> neural differentiation ->
+developmental connectome -> mature processing -> neuronal state -> observable
+readout`.
+
+The inverse chain is:
+
+`phenotype/brain residual -> observation residual -> processing residual ->
+connectome residual -> morphogenesis residual -> regulatory residual ->
+candidate genomic perturbation`.
+
+This is a boundary handle for inverse search. It states that observed
+conditions can constrain a candidate regulatory fibre and candidate genomic
+perturbations through phenotype residual, MDL perturbation, pleiotropy, and
+layer-constraint penalties. It does not claim DNA encodes a brain snapshot,
+thoughts, percepts, or a disease label; it also does not validate any specific
+gene, regulatory element, developmental law, connectome formation model, or
+biological/cognitive closure.
+
+The same module also records a synthetic construct calibration handle:
+`SyntheticConstructCarrier`, `SyntheticBiologyInverse`, GFP/RFP reporter
+fixtures, metabolic-odor target, and short-vs-long pathway counterfixtures.
+These are engineered search/calibration targets only. They do not provide
+construct-library authority, wet-lab validation, host-safety validation,
+CRISPR-guide authority, metabolic-engineering proof, or transfer of synthetic
+fixture performance to natural genetics.
+
 ### Cross-band and Hamiltonian-like handles
 
 The current BrainDNA connector chain exposes `crossBand` and `hamiltonian` as `Nat` fields carried through exact profile witnesses:

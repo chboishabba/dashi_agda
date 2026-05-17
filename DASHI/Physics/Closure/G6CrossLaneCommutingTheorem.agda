@@ -494,6 +494,101 @@ x ≢ y =
   x ≡ y →
   ⊥
 
+record G6LaneOperatorNontrivialSharedAction
+  (operator : LaneOperator) : Setω where
+  field
+    lane :
+      Lane
+
+    witness :
+      LaneOperator.opSharedCarrier operator
+
+    actionNotIdentity :
+      LaneOperator.opSharedLaneAction operator lane witness
+      ≢
+      witness
+
+laneOperatorSharedActionIdentityAboveThreshold :
+  (operator : LaneOperator) →
+  (p : Nat) →
+  (lane : Lane) →
+  (x : LaneOperator.opSharedCarrier operator) →
+  71 < p →
+  LaneOperator.opSharedLaneAction operator lane x
+  ≡
+  x
+laneOperatorSharedActionIdentityAboveThreshold operator p lane x p>71 =
+  LaneOperator.opSharedLaneActionIdentityWhenVanishes
+    operator
+    p
+    lane
+    x
+    (LaneOperator.opValuationOutsideTrackedBasisVanishes operator p x p>71)
+
+laneOperatorNontrivialSharedActionImpossibleAboveThreshold :
+  (operator : LaneOperator) →
+  (p : Nat) →
+  71 < p →
+  G6LaneOperatorNontrivialSharedAction operator →
+  ⊥
+laneOperatorNontrivialSharedActionImpossibleAboveThreshold
+  operator p p>71 nontrivial =
+  G6LaneOperatorNontrivialSharedAction.actionNotIdentity nontrivial
+    (laneOperatorSharedActionIdentityAboveThreshold
+      operator
+      p
+      (G6LaneOperatorNontrivialSharedAction.lane nontrivial)
+      (G6LaneOperatorNontrivialSharedAction.witness nontrivial)
+      p>71)
+
+record G6LaneOperatorUniversalVanishesIdentityObstruction
+  (operator : LaneOperator) : Setω where
+  field
+    obstructionTheoremName :
+      String
+
+    everySharedActionIdentityAboveThreshold :
+      (p : Nat) →
+      (lane : Lane) →
+      (x : LaneOperator.opSharedCarrier operator) →
+      71 < p →
+      LaneOperator.opSharedLaneAction operator lane x
+      ≡
+      x
+
+    nontrivialSharedActionImpossibleAboveThreshold :
+      (p : Nat) →
+      71 < p →
+      G6LaneOperatorNontrivialSharedAction operator →
+      ⊥
+
+    blockedLaw :
+      String
+
+    paperCitationBoundary :
+      List String
+
+g6LaneOperatorUniversalVanishesIdentityObstruction :
+  (operator : LaneOperator) →
+  G6LaneOperatorUniversalVanishesIdentityObstruction operator
+g6LaneOperatorUniversalVanishesIdentityObstruction operator =
+  record
+    { obstructionTheoremName =
+        "laneOperatorNontrivialSharedActionImpossibleAboveThreshold"
+    ; everySharedActionIdentityAboveThreshold =
+        laneOperatorSharedActionIdentityAboveThreshold operator
+    ; nontrivialSharedActionImpossibleAboveThreshold =
+        laneOperatorNontrivialSharedActionImpossibleAboveThreshold operator
+    ; blockedLaw =
+        "LaneOperator.opSharedLaneActionIdentityWhenVanishes combined with opValuationOutsideTrackedBasisVanishes"
+    ; paperCitationBoundary =
+        "For every old LaneOperator and every p > 71, outside-basis vanishing feeds the vanished-prime identity law"
+        ∷ "The result is global shared-action identity, not merely outside-basis coordinate identity"
+        ∷ "A nontrivial shared action therefore contradicts the old LaneOperator law"
+        ∷ "The official nontrivial G6 theorem must cite G6OfficialTrackedCrossLaneCommutingTheorem on the tracked surface"
+        ∷ []
+    }
+
 trackedValuation :
   TP.SSP →
   GL.FactorVec →
@@ -1153,6 +1248,150 @@ canonicalG6NontrivialTrackedCrossLaneCommutingReceiptConsumable :
   trackedCrossLaneTheoremConsumable
 canonicalG6NontrivialTrackedCrossLaneCommutingReceiptConsumable = refl
 
+data G6OfficialTrackedPromotionStatus : Set where
+  officialTrackedReceiptPromoted :
+    G6OfficialTrackedPromotionStatus
+
+  fullLaneOperatorPromotionStillBlocked :
+    G6OfficialTrackedPromotionStatus
+
+record G6OfficialTrackedCrossLaneCommutingTheorem : Set₁ where
+  field
+    status :
+      G6OfficialTrackedPromotionStatus
+
+    sourceReceipt :
+      G6NontrivialTrackedCrossLaneCommutingReceipt
+
+    officialTrackedOperator :
+      NontrivialTrackedLaneOperator
+
+    officialTrackedOperatorMatchesReceipt :
+      officialTrackedOperator
+      ≡
+      G6NontrivialTrackedCrossLaneCommutingReceipt.trackedOperator
+        sourceReceipt
+
+    officialCrossLaneCommutation :
+      G6TrackedCrossLaneCommutationTheorem officialTrackedOperator
+
+    officialTrackedPrimeBump :
+      (lane : Lane) →
+      (x : NontrivialTrackedLaneOperator.Carrier officialTrackedOperator) →
+      NontrivialTrackedLaneOperator.trackedValuationAt officialTrackedOperator
+        (NontrivialTrackedLaneOperator.laneActionPrime
+          officialTrackedOperator
+          lane)
+        (NontrivialTrackedLaneOperator.laneAction
+          officialTrackedOperator
+          lane
+          x)
+      ≡
+      suc
+        (NontrivialTrackedLaneOperator.trackedValuationAt
+          officialTrackedOperator
+          (NontrivialTrackedLaneOperator.laneActionPrime
+            officialTrackedOperator
+            lane)
+          x)
+
+    officialTrackedPrimeLocality :
+      (lane : Lane) →
+      (q : TP.SSP) →
+      NontrivialTrackedLaneOperator.laneActionPrime officialTrackedOperator lane
+      ≢
+      q →
+      (x : NontrivialTrackedLaneOperator.Carrier officialTrackedOperator) →
+      NontrivialTrackedLaneOperator.trackedValuationAt officialTrackedOperator q
+        (NontrivialTrackedLaneOperator.laneAction
+          officialTrackedOperator
+          lane
+          x)
+      ≡
+      NontrivialTrackedLaneOperator.trackedValuationAt
+        officialTrackedOperator
+        q
+        x
+
+    officialOutsideBasisCoordinateIdentity :
+      (p : Nat) →
+      (lane : Lane) →
+      (x : NontrivialTrackedLaneOperator.Carrier officialTrackedOperator) →
+      71 < p →
+      NontrivialTrackedLaneOperator.outsideBasisValuationAt
+        officialTrackedOperator
+        p
+        (NontrivialTrackedLaneOperator.laneAction
+          officialTrackedOperator
+          lane
+          x)
+      ≡
+      NontrivialTrackedLaneOperator.outsideBasisValuationAt
+        officialTrackedOperator
+        p
+        x
+
+    promotedTheoremName :
+      String
+
+    remainingFullG6Blockers :
+      List G6TrackedToLaneOperatorInterfaceSplit
+
+    failClosedBoundary :
+      List String
+
+g6OfficialTrackedCrossLaneCommutingTheoremFromReceipt :
+  G6NontrivialTrackedCrossLaneCommutingReceipt →
+  G6OfficialTrackedCrossLaneCommutingTheorem
+g6OfficialTrackedCrossLaneCommutingTheoremFromReceipt receipt =
+  record
+    { status =
+        officialTrackedReceiptPromoted
+    ; sourceReceipt =
+        receipt
+    ; officialTrackedOperator =
+        G6NontrivialTrackedCrossLaneCommutingReceipt.trackedOperator receipt
+    ; officialTrackedOperatorMatchesReceipt =
+        refl
+    ; officialCrossLaneCommutation =
+        G6NontrivialTrackedCrossLaneCommutingReceipt.trackedCrossLaneCommutation
+          receipt
+    ; officialTrackedPrimeBump =
+        G6NontrivialTrackedCrossLaneCommutingReceipt.trackedActionBumpsPrime
+          receipt
+    ; officialTrackedPrimeLocality =
+        G6NontrivialTrackedCrossLaneCommutingReceipt.trackedActionPreservesOtherPrime
+          receipt
+    ; officialOutsideBasisCoordinateIdentity =
+        G6NontrivialTrackedCrossLaneCommutingReceipt.outsideBasisCoordinateIdentityLaw
+          receipt
+    ; promotedTheoremName =
+        "G6OfficialTrackedCrossLaneCommutingTheorem"
+    ; remainingFullG6Blockers =
+        G6NontrivialTrackedCrossLaneCommutingReceipt.remainingFullG6InterfaceSplit
+          receipt
+    ; failClosedBoundary =
+        "Official consumers may cite this tracked theorem for nontrivial FactorVec scaling cross-lane commutation"
+        ∷ "This theorem consumes G6NontrivialTrackedCrossLaneCommutingReceipt rather than LaneOperator"
+        ∷ "The promoted identity law is outside-basis coordinate identity plus tracked-prime bump/locality"
+        ∷ "The old LaneOperator law is recorded separately by g6LaneOperatorUniversalVanishesIdentityObstruction"
+        ∷ "It does not inhabit or replace the full LaneOperator theorem surface"
+        ∷ []
+    }
+
+canonicalG6OfficialTrackedCrossLaneCommutingTheorem :
+  G6OfficialTrackedCrossLaneCommutingTheorem
+canonicalG6OfficialTrackedCrossLaneCommutingTheorem =
+  g6OfficialTrackedCrossLaneCommutingTheoremFromReceipt
+    canonicalG6NontrivialTrackedCrossLaneCommutingReceipt
+
+canonicalG6OfficialTrackedCrossLaneCommutingTheoremPromoted :
+  G6OfficialTrackedCrossLaneCommutingTheorem.status
+    canonicalG6OfficialTrackedCrossLaneCommutingTheorem
+  ≡
+  officialTrackedReceiptPromoted
+canonicalG6OfficialTrackedCrossLaneCommutingTheoremPromoted = refl
+
 record G6FactorVecScalingCarrierAPI : Set₁ where
   field
     Carrier :
@@ -1290,11 +1529,13 @@ canonicalG6ScalingLaneOperatorRequest =
         "No set-valuation carrier API is missing for GL.FactorVec: setValuation, setValCommutes, valuationOfSetAt, and valuationOfSetAtOther are inhabited for tracked SSP coordinates"
         ∷ "The remaining full LaneOperator blocker is opSharedLaneActionIdentityWhenVanishes : (p : Nat) -> lane -> x -> opValuationAt p x == 0 -> opSharedLaneAction lane x == x"
         ∷ "Because opValuationOutsideTrackedBasisVanishes makes every p > 71 vanish, that field forces every shared lane action to be identity"
+        ∷ "laneOperatorNontrivialSharedActionImpossibleAboveThreshold records the obstruction as a theorem rather than a failed construction"
         ∷ "NontrivialTrackedLaneOperator splits the law into outside-basis coordinate identity plus tracked-prime bump/locality; adopting that split in LaneOperator is the remaining interface decision"
         ∷ []
     ; failClosedBoundary =
         "g6ConcreteNontrivialTrackedScalingLaneOperator is inhabited over GL.FactorVec and proves tracked bump, other-tracked-prime preservation, outside-basis coordinate identity, and cross-lane commutation"
         ∷ "The concrete identity LaneOperator remains the only full LaneOperator inhabitant in this file"
+        ∷ "g6LaneOperatorUniversalVanishesIdentityObstruction shows why nontrivial shared scaling cannot be promoted through the old LaneOperator law"
         ∷ "No nontrivial scaling LaneOperator is fabricated while the universal vanished-prime identity law remains in LaneOperator"
         ∷ []
     }
