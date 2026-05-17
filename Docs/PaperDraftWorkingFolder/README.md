@@ -24,6 +24,27 @@ paper's center. It does not claim completed physics closure, empirical
 authority, sourced GR, Schwarzschild recovery, continuum recovery, GRQFT,
 limited SM+GR, Monster moonshine, or completed unification.
 
+## Tier A / Paper 1 Publishability
+
+Paper 1 is currently publishable as a typed receipt-system and formalized
+foundations paper. The publishable object is the checked accounting discipline:
+formal receipt surfaces, blocker surfaces, promotion boundaries, and
+reviewer-auditable traceability from paper prose to repository artifacts.
+
+This is not a mass-gap submission, a Standard Model derivation, or a terminal
+physics-unification claim. The paper must explicitly preserve the boundary:
+no terminal claim, no Standard Model derivation, and no Clay Yang-Mills
+mass-gap claim.
+
+Remaining delta before submission:
+
+- 20--30 page self-contained exposition.
+- Reproducibility README for checking and locating typed surfaces.
+- Four-way classifier table for formalized receipts, bounded diagnostics, open
+  obligations, and forbidden terminal claims.
+- AFM/LMCS-style venue framing around mechanized foundations and
+  claim-governance, with non-promoting language.
+
 ## Current Positive Scope
 
 - G2 direction-indexed SFGC schema adoption for current core-facing consumers.

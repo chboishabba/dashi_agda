@@ -217,7 +217,7 @@ claimed here is not the invention of these classical ingredients, but their
 integration into a typed unification architecture where promotion and
 obstruction are represented explicitly.
 
-### 2.1 External Formal Bridges and the Honest TOE Receipt
+### 2.1 External Formal Bridges and Terminal Boundaries
 
 DASHI is not presented as an isolated replacement for existing formal
 geometry or algebraic QFT. It is a carrier-and-receipt layer that can be
@@ -233,9 +233,14 @@ modules and records B0 as a named postulated obligation, not an imported
 theorem.
 `DCHoTTBridgeObligationIndex.agda` further names the B0.1 pro-object
 compatible-family/formal-disk scaffold, the B0.2 flat-formal-disk target, and
-the B0.3 refinement-stable frame/metric/G-structure reduction target; all
-remain Paper 2 construction targets, not DCHoTT manifold, G-structure, or
-Levi-Civita proofs.
+the B0.3 refinement-stable frame/metric/G-structure reduction target.
+`ProObjectSemantics.agda` constructs the DASHI-side B0.1 compatible-family
+limit surface: pro-object points, depth projections, refinement coherence,
+depthwise agreement balls, and the depth-zero formal-thickening relation. The
+analytic and external-geometric steps remain open: real-valued ultrametric
+completion, transport-smooth sheaves, formal-disk-to-DCHoTT equivalence,
+DCHoTT manifold/G-structure promotion, and Levi-Civita specialization are not
+proved here.
 
 **B1 (curvature from nilpotent transport).** The discrete Bianchi and Einstein
 candidate surfaces are downstream of B0. They remain suspended until the
@@ -265,13 +270,20 @@ Lyapunov condition: admissible transport must not increase the required
 description length at the active projection grade. This is recorded by the
 compression admissibility receipt and used in the compression section below.
 
-**B5 (honest frontier).** The four large open obligations--mass gap,
-cosmological constant, Born-rule derivation, and coupling unification--are
-not hidden by the architecture. They are named as open receipts. The
-repository file `ExternalFormalImportRoadmapReceipt.agda` records DCHoTT-Agda,
-Haag-Kastler/AQFT-net, and cohesive HoTT as external import candidates and
-keeps them in a suspended state until the corresponding proofs or adapters are
-inhabited.
+**B5 (honest frontier).** The terminal status layer separates weak modulo
+accounting from unqualified closure. The repository records a weak terminal
+claim only modulo an explicit minimal package: B0.1 \(\Im\) reflection, B0.3
+`WeakBG`, Bisognano--Wichmann/time-slice authority,
+Doplicher--Roberts reconstruction, \(C^*\)-completion, and
+pointwise-to-uniform mass-gap transfer. This is not a terminal theorem. The
+unqualified terminal claim remains blocked; continuum mass-gap authority,
+`laneDimension`, DHR-to-Standard-Model matching, final adapter acceptance,
+stress-energy/Wald authority, and GRQFT composition remain open gates. The
+repository files `ExternalFormalImportRoadmapReceipt.agda`,
+`BalabanRGMassGapReceiptSurface.agda`,
+`TerminalOpenProblemStatusSurface.agda`, and
+`GRQFTTerminalCompositionBoundary.agda` record these terminal boundaries
+without promoting completed unification.
 
 The honest frontier claim is therefore deliberately weaker than a completed
 unification theorem: DASHI localizes which pieces are derived from carrier
@@ -1324,9 +1336,9 @@ stronger physical claims.
 | W3 | Bounded Drell-Yan comparison receipts but constructorless accepted authority | Accepted W3 evidence-authority token | Accepted empirical authority, CMS validation, above-Z promotion |
 | W4 | Local/request surfaces only | `AcceptedDYLuminosityConventionAuthority`, W4 adequacy, Candidate256 calibration, `matterFieldFromW4`, `stressEnergyTensorFromW4` | W4 adequacy, matter field, stress-energy tensor, sourced physics |
 | W5 | Parked / blocked downstream of accepted DY convention | Accepted W5 correction receipt for the intended observable/regime | W5 correction, CT18/LHAPDF agreement, DY convention closure |
-| DCHoTT bridge | `LeviCivitaBridge.agda` plus `DCHoTTBridgeObligationIndex.agda` B0.1/B0.2/B0.3 target sockets | B0 geometric emergence theorem; DCHoTT formal-D-space adapter; refinement-stable frame/metric tower; G-structure reduction; torsion-free/Levi-Civita specialization | Levi-Civita uniqueness, GR promotion |
+| DCHoTT bridge | `LeviCivitaBridge.agda` plus B0.1/B0.2/B0.3 sockets; DASHI-side B0.1 pro-object semantics | DCHoTT formal-D-space adapter; real-valued ultrametric completion; refinement-stable frame/metric tower; G-structure reduction; torsion-free/Levi-Civita specialization | Levi-Civita uniqueness, GR promotion |
 | AQFT net | `AQFTNetReceipt.agda`, `KleinGordonAQFTReceipt.agda`, and `AQFTCarrierAlgebraQuotientSurface.agda` target sockets | Constructive local algebra quotient, filtered colimit, Cauchy time-slice receipt, GNS/vacuum adapter, Born-rule derivation | Interacting QFT, Standard Model |
-| GRQFT | `GRQFTConsumerNextObligation.agda` typed consumer surface | B0 plus AQFT net plus coupling calibration plus stress-energy adapter | Full unification claim |
+| GRQFT / terminal boundary | Weak terminal grammar modulo explicit postulates; terminal promotion blocked | B0 plus AQFT net, DHR/SM comparison, continuum mass-gap authority, laneDimension, final adapter acceptance, stress-energy/Wald authority | Unqualified terminal GRQFT/TOE claim |
 | GR | Future adapter path from finite differences to non-flat connection and curvature | Prime-difference-to-Riemann adapter bundle, curvature carrier, Ricci contraction, sourced stress-energy interface | Riemann/Ricci/Einstein tensor, Schwarzschild, continuum GR, GRQFT |
 | Cross-domain spine | Shared typed projection-defect / MDL schema `(X, delta, pi, defect, gate, observation, symmetry)` | Quantitative calibration, universality, tractability, domain receipts, recovery equivalence | Chemistry closure, biology prediction, perception fit, TOE promotion |
 | Brain/DNA/synthetic lanes | Non-promoting theorem targets and calibration fixtures | Domain datasets, transition laws, inverse-projection proofs, ranking validation | fMRI validation, DNA blueprint, disease-gene validation, synthetic biology closure |
@@ -1389,11 +1401,14 @@ for the human-readable labels used in the body.
 | DCHoTT import shim | `DASHI.Geometry.DCHoTTImportShim` | `canonicalDCHoTTImportShimReceipt` |
 | DCHoTT Levi-Civita bridge | `DASHI.Geometry.LeviCivitaBridge` | `canonicalLeviCivitaBridgeReceipt` |
 | DCHoTT B0 obligation index | `DASHI.Geometry.DCHoTTBridgeObligationIndex` | `canonicalDCHoTTBridgeObligationIndex` |
+| B0.1 pro-object semantics | `DASHI.Geometry.ProObjectSemantics` | `canonicalB01ProObjectSemanticsReceipt` |
 | AQFT carrier algebra quotient surface | `DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface` | `canonicalAQFTCarrierAlgebraQuotientSurface`; `canonicalDepthFilteredLocalAlgebraSurface`; `canonicalCauchyEvolutionReceiptTarget` |
 | Adapter irreducibility no-go index | `DASHI.Physics.Closure.AdapterIrreducibilityNoGoIndex` | `canonicalAdapterIrreducibilityNoGoIndex` |
 | AQFT net receipt | `DASHI.Physics.Closure.AQFTNetReceipt` | `canonicalAQFTNetReceipt` |
 | Klein-Gordon AQFT witness | `DASHI.Physics.Closure.KleinGordonAQFTReceipt` | `canonicalKleinGordonAQFTReceipt` |
 | Interacting QFT boundary | `DASHI.Physics.Closure.InteractingQFTBoundaryReceipt` | `canonicalInteractingQFTBoundaryReceipt` |
+| Terminal open-problem status | `DASHI.Physics.Closure.TerminalOpenProblemStatusSurface` | `canonicalTerminalOpenProblemStatusSurface` |
+| GRQFT terminal composition boundary | `DASHI.Physics.Closure.GRQFTTerminalCompositionBoundary` | `canonicalGRQFTCompositionBoundary` |
 | External formal import roadmap | `DASHI.Physics.Closure.ExternalFormalImportRoadmapReceipt` | `canonicalExternalFormalImportRoadmapReceipt` |
 | Cross-domain variational spine | `DASHI.Physics.Closure.CrossDomainVariationalSpine` | `canonicalCrossDomainVariationalSpineBoundary` |
 
@@ -1404,6 +1419,8 @@ partial inhabited surfaces. It does not claim completed empirical closure,
 sourced non-flat GR, GRQFT unification, upstream E8 completion, accepted
 W3/W4/W5 authority, or completed physics unification. Stronger readings
 remain conditioned on the residual obligations listed in the closure frontier.
+In particular, weak terminal status modulo named postulates is not an
+unqualified terminal theorem.
 
 ## Appendix A. Glossary and Naming Conventions
 

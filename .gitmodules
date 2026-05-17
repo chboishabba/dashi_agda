@@ -8,3 +8,6 @@
 [submodule "Monster-LILA"]
 	path = Monster-LILA
 	url = https://github.com/meta-introspector/Monster-LILA.git
+[submodule "cubical"]
+	path = cubical
+	url = https://github.com/agda/cubical.git

@@ -6,6 +6,27 @@ Every active P0 blocker should have exactly one owner/lane, one source surface,
 one next admissible action, and one validation policy. Use
 `Docs/WorkerCoordinationBoard.md` as the worker-facing version of this board.
 
+Paper 1 repo-state sync `2026-05-18`:
+verify the post-B0/pro-object and weak-terminal accounting surfaces against
+the manuscript. The admissible Paper 1 wording is: DASHI-side B0.1
+compatible-family/pro-object semantics is constructed, but DCHoTT formal-disk
+equivalence, metric completion, B0 promotion, AQFT promotion, DHR/SM matching,
+Clay/external mass-gap authority, laneDimension, and unqualified terminal
+GRQFT/TOE closure remain open. `weakTerminalClaimPromoted` may be described only as
+modulo the explicit minimal postulate package; `terminalClaimPromoted` remains
+false.
+
+Latest honest mathematical state `2026-05-18`:
+ST3 depth-recursion monotonicity is now recorded as DASHI-internal mass-gap
+closure. This is an internal receipt-level closure, not Clay authority:
+`continuumClayMassGapPromoted` and `terminalClaimPromoted` remain false pending
+journal, community, and Clay review. Reeh-Schlieder is immediately closed from
+existing receipts and dependencies; record it as dependency accounting, not new
+mathematics. The deepest remaining first-principles gate is `laneDimension`:
+the Monster, Serre-Tate, and Hecke routes have not yielded a clean formula, so
+the honest remaining routes are a heterotic E8/Narain compactification bridge
+or a new Monster identity.
+
 Monster / Monster-LILA artifact intake `2026-05-17`:
 `monster` is tracked as a pinned submodule at
 `f2aa01f9077807996675fb1c3fd32f7359395eeb`, and `Monster-LILA` has been added
@@ -16,6 +37,269 @@ authority, Paper 1 claims, DCHoTT/AQFT/GRQFT bridge receipts, or LHC provider
 status. Because the license surface is AGPL/commercial-dual-license flavored,
 future code reuse requires explicit license review; citation, inspection, and
 separate experimental runs are the safe default.
+
+B0.1/B0.2/B0.3 bridge target surfaces `2026-05-18`:
+`DASHI/Geometry/ProObjectSemantics.agda` now gives the proof-grade
+DASHI-side B0.1 pro-object semantics for compatible refinement families:
+constructed limit points as `ProObjectPoint`, depth projections, refinement
+coherence, pointwise equality, depthwise ball/agreement laws, the depth-zero
+formal-disk relation, and a non-promoting receipt naming the remaining analytic
+and DCHoTT obligations. This closes only the internal compatible-family
+construction surface. It does not prove transport-smooth sheaves, real-valued
+ultrametric completion, compact profinite embedding, first-order approximation,
+formal-disk-to-DCHoTT equivalence, DCHoTT formal-D-space/manifold structure,
+B0.2 flatness, B0.3 G-structure promotion, torsion-freeness, B0 geometric
+emergence, or Levi-Civita uniqueness.
+
+Remaining-formalism implementation surfaces `2026-05-18`:
+the bounded target surfaces have landed and remain non-promoting:
+`DASHI/Geometry/TransportSmoothFormalDiskSurface.agda`,
+`DASHI/Geometry/FlatFormalDiskHolonomySurface.agda`,
+`DASHI/Geometry/GStructureLeviCivitaBindingSurface.agda`,
+the extended `DASHI/Physics/QFT/AQFTCarrierAlgebraQuotientSurface.agda`,
+`DASHI/Physics/Closure/MatterRepresentationReceiptSurface.agda`,
+`DASHI/Physics/QFT/StressEnergyBridgeReceiptSurface.agda`, and
+`DASHI/Physics/Closure/TerminalCompletenessGrammarSurface.agda`.  Next work is
+to replace their target fields with actual proofs/imported theorem authorities:
+B0.1 transport-smooth sheaf and first-order formal-disk equivalence, B0.2
+holonomy/path-independence, B0.3 G-structure/Wellen binding, AQFT time-slice,
+matter representation derivation or adapter proof, stress-energy/Wald
+renormalisation bridge, and terminal soundness/completeness grammar.  Do not
+say B0, AQFT time-slice, W4 stress-energy, GRQFT, Standard Model, or TOE is
+complete. The Paper 1 gate remains: terminal claim non-promoted and no positive
+theorem claim unless the exact typed receipt is inhabited.
+
+Missing-primitive intake lane `2026-05-18`:
+the next foundation pass has landed without promoting the physics claims.
+`cubical` is now available as an optional submodule/include path, but no global
+`--cubical` flag is enabled for the existing non-cubical/DCHoTT surfaces.
+`DASHI/Physics/Closure/FractranPrimeLaneValuationReceiptSurface.agda` records
+the Monster-order valuation vector as FRACDASH/FRACTRAN-shaped register
+evidence: supersingular primes are lanes and `v_p(|M|)` are exponents. Treat
+the capped `min(v_p(|M|),3)` map as a projection/compression that overproduces
+SU(3)-like lanes, not as a replacement for the DHR `laneDimension` computation.
+`DASHI/Foundations/RealAnalysisAxioms.agda` is the explicit postulated
+real-analysis authority interface for reals, normed/Banach spaces, operator
+norms, unitary operators, Cauchy convergence, and geometric-series convergence;
+`FlatFormalDiskHolonomySurface.agda` may use it only as an authority adapter
+until the postulates are replaced by library imports/proofs.  The local
+DCHoTT shim now sees bundled `Im` and `FormalDisk` modules, and
+`TransportSmoothFormalDiskSurface.agda` records only a comparison socket until
+actual DASHI-to-DCHoTT maps and roundtrips are constructed.
+`DASHI/Geometry/SO31FirstProlongationZero.agda` closes the local abstract-index
+SO(3,1) first-prolongation-zero proof, but B0.3 remains blocked on a real
+DCHoTT G-structure binding, Wellen theorem authority, socket discharge,
+torsion-free metric-compatible adapter, and Levi-Civita uniqueness import.
+`DASHI/Foundations/QuotientSetoidSurface.agda` provides the non-cubical setoid
+quotient surface used by the AQFT quotient layer; C*-completion, GNS, full
+quotient extensionality for promoted receipts, and AQFT promotion remain open.
+`DHRGaugeReceiptSurface.agda` now has localised-endomorphism,
+transportability, intertwiner, statistics-operator, and
+Doplicher-Roberts-authority sockets; `laneDimension` remains the deep
+prime-lane computation blocker for `G_DHR = G_SM`. Adapter/stress-energy
+surfaces now name no-natural-state/no-preferred-vacuum primitive witnesses and
+Wald `c1/c2/c3` ambiguity interfaces, but no no-go theorem, vacuum theorem,
+Wald prescription selection, stress-energy promotion, or GRQFT promotion is
+claimed.
+The follow-up audit further narrows the active board: B0.2 has an
+authority-backed holonomy theorem socket plus an inhabited Nat-valued
+telescoping/discrete-Stokes receipt, but still no non-postulated real
+operator-norm holonomy proof. B0.1 now has DASHI-side depth-0/depth-1
+Im-modal equality, FormalDisk/Im-fibre roundtrips, and reverse-lift/roundtrip
+evidence when explicit imported-disk lift data is supplied; the remaining
+blocker is unconditional DCHoTT path reflection and path-level equivalence.
+B0.3 no longer lists first-prolongation-zero as a blocker and now starts at
+the DCHoTT G-structure/Wellen binding; AQFT transport equivalence and setoid
+quotient extensionality are inhabited by `QuotientSetoidSurface.agda`; the
+DHR/SM blocker is now exactly `laneDimension`; and adapter/stress-energy
+blockers are now authority-token or coefficient-selection blockers rather
+than missing witness-surface blockers.
+
+Terminal grammar constructive evidence lane `2026-05-18`:
+`DASHI/Physics/Closure/TerminalCompletenessGrammarSurface.agda` may make the
+finite statement grammar more constructively inspectable by adding explicit
+classification evidence and by returning derivation-tree availability only for
+statements that the current target grammar can inhabit. The current finite
+classifier totality/soundness receipt and finite derivation-availability receipt
+are inhabited, but only for the listed grammar. The terminal TOE row must stay
+classified as a non-promoted completeness target with no derivation tree and
+with promotion blocked by the constructorless terminal authority token. Next
+admissible work is classifier soundness/completeness for any enlarged/external
+physics grammar plus real semantics for terminal derivation trees, not a TOE or
+GRQFT promotion.
+
+Terminal open-problem status intake `2026-05-18`:
+`DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda` now records the
+Odusanya/Balaban mass-gap route as a staged external proof-intake surface:
+lattice transfer matrix / Peter-Weyl / Schur gap, Balaban master induction,
+Osterwalder-Schrader reconstruction, compact-simple-group extension, and
+machine-verification intake are named, but no local proof is replayed and no
+DASHI promotion follows.
+`DASHI/Physics/Closure/TerminalOpenProblemStatusSurface.agda` now records the
+updated status of the hardest terminal obligations. The Yang-Mills mass gap is
+no longer recorded as a plain untouched open problem, but the official Clay
+Millennium status remains unsolved as of `2026-05-18`: no proof is accepted
+there, and no DASHI continuum theorem follows. Odusanya/`yangmills.dev` is a
+separate claimed-proof series for external review only. Any Zenodo
+dissolution/recontextualisation record is an alternative interpretation/intake
+artifact, not the same claim and not a Clay or DASHI promotion. The same
+surface records cosmological-constant strategies (SUSY cancellation,
+anthropic landscape, sequestering) as open targets. Sequestering v2 may reduce
+the local Wald `c1` contribution, but it still requires the compact-universe
+premise, shift-symmetry authority, and explicit `c2/c3` inputs before any
+Lambda receipt can promote.
+`G_DHR = G_SM` is now explicitly an open DHR localized-endomorphism,
+statistics-operator, Doplicher-Roberts reconstruction, and prime-lane
+automorphism computation. Born/coupling no-go arguments remain proof strategies
+not formalized theorems, but now name the Gleason/Busch no-state-selection
+boundary and beta-function/matter-representation dependence. Strong
+CP/Peccei-Quinn remains an Adapter4 sub-problem target with theta-vacuum,
+axion-window, and K-theory instanton-character sockets.
+`GRQFTTerminalCompositionBoundary.agda` points at this status surface while
+keeping `terminalClaimPromoted = false`.
+
+Worker 6 terminal adapter/stress-energy gate pass `2026-05-18`:
+`DASHI/Physics/Closure/AdapterIrreducibilityNoGoIndex.agda` now exposes
+non-promoting receipt surfaces for no-natural-state-selection and
+no-preferred-vacuum: each ties the theorem target, primitive witness, and
+constructorless authority token together while keeping the no-go theorem
+unproved. `DASHI/Physics/QFT/StressEnergyBridgeReceiptSurface.agda` now records
+`c1/c2/c3` as Wald adapter parameters for the local curvature ambiguity, not as
+selected physical coefficients. `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`
+now has a weak terminal open-status grammar whose gates include B0, AQFT, DHR,
+`laneDimension`, stress-energy/Wald authority, and adapter no-go authority; the
+weak terminal status is promoted only modulo those open gates, while
+`terminalClaimPromoted` and the strong terminal claim remain false.
+Gates 7-9 follow-up: the adapter index now strengthens the no-natural-state
+target with a complete corner-embedding argument surface and the no-preferred-
+vacuum target with a complete Killing-vector/frequency-splitting argument
+surface. These are target recipes only: the AQFT category-wide embedding,
+naturality contradiction, background-category theorem, and authority tokens
+remain open. The same adapter surface now separates Yukawa-sector partial
+representation-pattern derivation from irreducible absolute mass-scale input:
+the ratio-form may be receipt-promoted only under the MatterPrimeLane/FN/
+Frobenius hypotheses, while the Higgs vev remains an irreducible adapter input.
+The terminal grammar surface now adds a physical-accessibility four-way
+classifier: carrier-derived, adapter boundary, external-authority boundary, or
+terminal-open/non-promoted. `terminalClaimPromoted` remains false.
+
+Latest terminal accounting package `2026-05-18`:
+the mass-gap statement is now split by authority. ST3 depth-recursion
+monotonicity closes the DASHI-internal mass-gap receipt, but external Clay
+promotion remains false pending journal/community/Clay review. The current weak
+terminal status is promoted only modulo the minimal closure package; the strong
+terminal claim and the Clay continuum Yang-Mills claim remain false. The four
+named remaining strong-terminal
+obligations are B0.1 `Im` reflection/path reflection, B0.3 `WeakBG`
+G-structure/Wellen binding, the BW time-slice bridge, and DR
+(Doplicher-Roberts reconstruction under the DHR hypotheses). The six-postulate
+minimal closure package is the guarded accounting surface containing those four
+obligations plus `cStarCompletion` and external mass-gap authority. The DASHI
+depth-recursion contraction route should now be described as internal
+monotonicity closure, not as Clay proof or strong terminal promotion.
+
+Latest gate-closure accounting pass `2026-05-18`:
+`TerminalOpenProblemStatusSurface.agda` and
+`GRQFTTerminalCompositionBoundary.agda` now record the Agawa completion paper as
+encoded formalism, not accepted authority: the claimed stable IR fixed point and
+the G4/Morse-theory finite-Gribov-uniqueness bridge are tracked, while
+`continuumClayMassGapPromoted` remains false until accepted external authority
+or an exact local proof exists. DR/Doplicher-Roberts is now terminally described
+as a theorem whose five categorical hypotheses may be typed, but which
+reconstructs `G_DHR` and does not compute `laneDimension`. The BW net theorem is
+authority-modulo and feeds the time-slice bridge only under the net, vacuum, and
+energy-positivity hypotheses; it is not unconditional AQFT promotion.
+`laneDimension` via E8/McKay remains a conjectural receipt, with the `p = 7`
+high-energy `SU(2)_R` bridge kept separate from the low-energy Standard Model
+group. The no-natural-state/no-preferred-vacuum receipts and Wald
+coefficient-selection receipt are complete at receipt-surface level, and the
+final Adapter4 inventory is `{G_Newton, v_Higgs, f_a, compact universe}`.
+`weakTerminalClaimPromoted` remains modulo the minimal postulates/open gates;
+`terminalClaimPromoted` remains false.
+
+Next mathematical tranche order `2026-05-18`:
+assuming the six safe postulates are accepted and the weak terminal claim is
+inhabited, the next work must fall in this order. First, prove the
+`laneDimension` theorem; this is the highest-leverage gate because it controls
+`G_DHR = G_SM` or the Pati-Salam high-energy refinement, matter representations,
+and the Yukawa-ratio programme. Second, settle the matter prime lanes. Note the
+accounting caveat: after gauge lanes `{2,3,5,7}`, the listed remaining
+supersingular primes are `{11,13,17,19,23,29,31,41,47,59,71}`, i.e. eleven
+lanes, not twelve. Do not claim three complete four-prime generations until
+the missing/duplicated matter-lane accounting is resolved by a typed receipt.
+Third, record the hierarchy problem as the final Adapter4 decision: SUSY may
+stabilise the Higgs scale but does not derive it, the relaxion route currently
+has no DASHI receipt, and `v_Higgs` may be accepted only as an irreducible
+empirical input if governance explicitly accepts it. Fourth, the terminal flip
+condition remains
+`continuumMassGapProved and laneDimensionTheorem and FinalAdapter4Accepted`.
+Fifth, split publication into the seven-paper architecture: Paper 1 is
+submittable now as a typed receipt/governance paper; Papers 2-7 are gated
+respectively by B0 geometry, AQFT/DHR, `laneDimension`, matter/Yukawa,
+continuum mass-gap acceptance, and terminal composition.
+
+Publishability map for this pass `2026-05-18`:
+the honest paper map is now: Paper 1 can be submitted now; Papers 2-3 are an
+execution sprint once the remaining flag split and AQFT/DHR citation, quotient,
+and time-slice cleanup are done; Papers 4-5 and 7 are open/new mathematics, while
+Paper 6 is internally receipted but externally Clay-pending. Paper 3's blocker
+is reduced because Reeh-Schlieder is closed from existing receipts and
+dependencies, not from new math. Papers 4-7 are not all
+write-up tasks. The three-paper cluster is executable because Paper 1 has the
+receipt/governance architecture, Paper 2 can focus the B0 geometry bridge, and
+Paper 3 can package the AQFT carrier quotient, time-slice, and DHR citation
+surface after cleanup. Do not blur this into a seven-paper near-term claim:
+`laneDimension` remains genuine open math. The internal mass-gap monotonicity
+receipt does not supply Clay/community acceptance. `terminalClaimPromoted`
+remains false; the weak claim remains gated by the safe postulates and open
+authority receipts.
+
+`laneDimension` theorem work order `2026-05-18`:
+the formal-group-only route must be recorded with the correction that the
+height-2 formal group/Dieudonne module alone yields an `SU(2)` compact-real-form
+shape uniformly; it does not by itself produce `U(1), SU(2), SU(3), SU(2)`.
+The earlier Monster, Serre-Tate, and Hecke routes have failed to produce a
+clean `laneDimension` formula. Treat `laneDimension` as the deepest remaining
+first-principles gate for `G_DHR = G_SM`: the honest remaining routes are now a
+heterotic E8/Narain compactification bridge or a genuinely new Monster
+identity, not another reuse of the failed residue sketches.
+
+Continuum mass-gap flip condition `2026-05-18`:
+ST3 depth-recursion monotonicity now supplies the DASHI-internal mass-gap
+closure receipt. The accepted external/Clay flip still requires journal,
+community, and Clay review. This does not change
+`continuumClayMassGapPromoted = false` or `terminalClaimPromoted = false`.
+
+Three-gate terminal formalism `2026-05-18`:
+the docs should now read terminal status through three gates. Gate 1 is the
+official/external-authority gate: Clay still lists Yang-Mills mass gap as
+unsolved, Odusanya/`yangmills.dev` is only a separate claimed proof series, and
+the Zenodo dissolution/recontextualisation record is an alternative intake
+surface. Gate 2 is the finite-depth DASHI receipt gate: a bounded finite-depth
+mass-gap receipt may promote if its typed local witness is inhabited, but this
+does not solve the continuum Clay problem. Gate 3 is the continuum/terminal
+gate: continuum Yang-Mills, cosmological constant, `G_DHR = G_SM`, Higgs-vev
+scale, and full GRQFT/TOE closure remain open unless their exact authority and
+bridge receipts are inhabited.
+
+Current mass-gap proof-landscape intake `2026-05-18`:
+track four active lineages without upgrading any to an accepted Clay or DASHI
+continuum theorem. The Odusanya/Balaban RG route remains a claimed/preprint
+external series with Balaban induction, OS reconstruction, compact-simple-group,
+and machine-verification stages still under intake. Agawa holonomy non-local RG
+is a separate preprint/intake lane; its variables may be mapped only
+provisionally into DASHI as holonomy/Wilson-loop data for B0.2, non-local block
+or coarse-graining data for depth/refinement, holonomy-defect observables for
+the real operator-norm surface, and continuum scaling limits for Gate 3. The
+dissolution/recontextualisation campaign is an alternative interpretation
+surface, not a proof of the Clay statement and not a substitute for a typed
+DASHI receipt. The DASHI pro-object mass-gap route is already inhabited only at
+the per-depth/pro-object receipt level; a uniform positive lower bound across
+depth and the continuum Yang-Mills limit remain external analytic/authority
+obligations. Candidate disproof or obstruction intake should be kept explicit:
+Gribov-copy obstruction, IR slavery, and massless-gluon/scaling objections must
+be answered by the relevant bridge or external theorem before any continuum
+promotion.
 
 B0.1/B0.2/B0.3 bridge target surfaces `2026-05-17`:
 `DASHI/Geometry/DCHoTTBridgeObligationIndex.agda` now narrows the first B0
@@ -29,28 +313,36 @@ limit, and DCHoTT G-structure reduction witness. This is only DASHI-side
 inverse-limit/formal-disk/frame scaffolding for `ProObjectCarrier`; it does not
 close `carrierToDSpace`, construct a DCHoTT formal D-space/manifold, promote a
 G-structure, prove torsion-freeness, or inhabit a Levi-Civita adapter. Next
-admissible Paper 2 action is to replace the remaining `proObjectLimit : Set`
-socket with a genuine limit construction, then prove the formal-D-space adapter
-and the refinement-stable frame-to-G-structure reduction separately.
+admissible Paper 2 action is to bridge the constructed DASHI-side compatible
+family semantics into the formal-D-space adapter, then prove the
+transport-smooth/formal-disk equivalence and the refinement-stable
+frame-to-G-structure reduction separately.
 
 AQFT carrier-algebra quotient surface `2026-05-17`:
 `DASHI/Physics/QFT/AQFTCarrierAlgebraQuotientSurface.agda` now records the
 typed target `A(O)` as promoted receipts over a carrier restricted to a region,
-quotiented by transport equivalence. This does not construct a concrete
-C*-algebra, local net from DASHI data, GNS/vacuum adapter, Born rule,
-interacting AQFT, Standard Model, stress-energy, or GRQFT receipt. The same
-module now records `CauchyEvolutionReceiptTarget` as the Paper 3a time-slice
-obligation. Next admissible Paper 3 action is to replace the abstract
-restricted-carrier and quotient postulates with real carrier restriction,
-equivalence, quotient, algebra-operation laws, and a Cauchy evolution theorem
-showing that carrier data on a Cauchy surface determines the target region.
+quotiented by transport equivalence, with a separate quotient relation target.
+It also separates algebraic quotient/colimit operations from the later
+C*-completion/representation target and records directed-depth obligations for
+`A_d(O)` and `colim_d A_d(O)`. This does not construct a concrete C*-algebra,
+local net from DASHI data, GNS/vacuum adapter, Born rule, interacting AQFT,
+Standard Model, stress-energy, or GRQFT receipt. The same module now records
+`CauchyEvolutionReceiptTarget` and `TimeSliceTheoremSurface` as the Paper 3a
+time-slice/domain-of-dependence obligations. Next admissible Paper 3 action is
+to replace the abstract restricted-carrier, quotient-relation, directed-colimit,
+algebra-operation, and Cauchy evolution postulates with real laws showing that
+carrier data on a Cauchy surface determines the target region.
 
 Adapter irreducibility no-go index `2026-05-17`:
 `DASHI/Physics/Closure/AdapterIrreducibilityNoGoIndex.agda` now names the four
 no-go theorem targets required before any terminal GRQFT/TOE boundary can
 promote: signature no-preferred-reduction, nonunique local-algebra state space,
 curved-spacetime no-preferred-vacuum, and no canonical gauge-coupling ratio
-without a GUT receipt. This is an index only; no no-go theorem is proved.
+without a GUT receipt. It now also names proof-ready countermodel witness
+surfaces for each target: frame/signature reduction, Bloch-ball or simple
+matrix-state Born/state witness, curved-background vacuum witness with
+Poincare/spectrum dependencies, and gauge-normalisation coupling witness with
+the GUT receipt boundary. This is an index only; no no-go theorem is proved.
 
 GRQFT terminal boundary blocker exposure `2026-05-17`:
 `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda` now surfaces the
@@ -61,6 +353,83 @@ obligations, adapter irreducibility obligations including the GUT boundary, and
 the W5/GRQFT request-pack authority/PDF/downstream-field/validation payload.
 The terminal claim remains `terminalClaimPromoted = false`; mass gap and
 cosmological constant remain terminal open obligations.
+
+Professor-facing complete-unification roadmap wording `2026-05-17`:
+`Docs/CompressedGRQFTImportRoadmap.md`,
+`Docs/PaperDraftWorkingFolder/ClaimLedger.md`, this TODO, and `CHANGELOG.md`
+now align on the conservative public wording: the complete-unification paper is
+a condensed/profinite-style comparison roadmap, not a completed theorem. B0
+formal-disk equivalence, AQFT Cauchy/time-slice evolution, adapter
+irreducibility no-go proofs, and terminal GRQFT composition remain future typed
+obligations. Do not promote the terminal claim or treat the roadmap as evidence
+until the corresponding receipts are inhabited and the governance gates are
+explicitly discharged.
+
+K-theory / Novikov roadmap surface `2026-05-17`:
+`DASHI/Physics/Closure/KTheoryNovikovReceiptSurface.agda` now records four
+non-promoting target surfaces: Novikov/assembly map, K-theory charge
+classification through a future DHR adapter, a six-term exact sequence /
+bulk-boundary receipt, and a dependency graph tying B0, AQFT, DHR, K-theory,
+mass-gap, and Lambda obligations. This is a typed roadmap surface only: it does
+not construct an assembly map, classify physical charges, prove exactness,
+solve mass gap, calibrate Lambda, or promote GRQFT/TOE. Next admissible action
+is still upstream construction: concrete AQFT carrier algebra, DHR sectors,
+K-theory operations, and accepted calibration/authority receipts.
+The same surface now records the K-theoretic time-slice, Baum-Connes,
+algebraic K-theory tower, anomaly-cancellation, and Standard Model compact
+group target surfaces. These are still roadmap sockets only: no time-slice
+isomorphism, Baum-Connes assembly theorem, higher K-theory computation,
+anomaly-cancellation theorem, or Standard Model global-form/hypercharge
+embedding is promoted.
+
+Tangent/modular/DHR/OPE/characteristic-class roadmap surfaces `2026-05-17`:
+the next professor-facing unification layer is now typed as target-only Agda
+surfaces. `DCHoTTBridgeObligationIndex.agda` records the tangent-category
+interface over the pro-object carrier: first-graded tangent data, tangent
+operations, tangent-category axiom targets, and the DCHoTT `TM ~= M^D1`
+equivalence target. `CharacteristicClassReceiptSurface.agda` records AHSS
+obstruction classification plus Chern-Weil, Pontryagin, and Euler class
+targets downstream of B0 and Levi-Civita. `ModularTheoryReceiptSurface.agda`
+records the GNS/von-Neumann, Tomita-Takesaki, KMS, Unruh/Rindler, and
+Bisognano-Wichmann targets. `DHRGaugeReceiptSurface.agda` records Haag duality,
+controlled gauge-theory duality failure, DHR selection, tensor-category,
+Tannaka reconstruction, Standard Model matching, and prime-lane condensation
+targets. `OPEConformalBootstrapReceiptSurface.agda` records OPE, scaling
+dimension, conformal bootstrap, and mass-gap-as-nonconformal-output targets.
+All five surfaces are non-promoting: no tangent equivalence, AHSS collapse,
+Chern-Weil class, modular theorem, DHR reconstruction, Standard Model matching,
+OPE/bootstrap solution, mass-gap theorem, GRQFT receipt, or TOE claim follows
+from their presence.
+
+Chen/Moonshine/VOA/SUSY/GNS/prime-lane gauge layer `2026-05-17`:
+the next arithmetic and representation-theory layer is now typed as
+target-only Agda surfaces. `MoonshinePrimeLaneReceiptSurface.agda` records the
+15 tracked Monster/supersingular prime lanes, Chen-prime observation targets,
+genus-zero/Hauptmodul targets, and McKay-Thompson lane-amplitude target.
+`VOAMoonshineBridgeReceiptSurface.agda` records VOA, Moonshine VOA, chiral CFT
+net, holomorphic factorisation, K3 compactification, and 4D effective-theory
+targets. `WittenIndexSUSYBoundarySurface.agda` records the spin-structure,
+SUSY, Witten-index, observed-SM/SUSY-status, and cosmological-constant
+implication targets. `GNSFellRepresentationSurface.agda` records the GNS
+universal property, state-observable duality, folia, representation-class
+superselection, Fell topology, and KMS-family proximity targets.
+`PrimeLaneGaugeAssignmentReceiptSurface.agda` records the 15-lane product,
+Chen pairing/cluster, DHR-computation-vs-adapter, residual `H`, exact Standard
+Model match, and nontrivial residual branches. None of these surfaces promotes
+a Chen theorem, Moonshine theorem, VOA-to-AQFT theorem, K3 oxidation, SUSY
+result, GNS representation, Fell-topology theorem, prime-lane gauge
+assignment, Standard Model match, GRQFT receipt, or TOE claim.
+
+K3 / duality / arithmetic-cohomology reference targets `2026-05-18`:
+K3 geometry, Seiberg-Witten/S-duality/Langlands, arithmetic cohomology, and
+supersingular-K3/Frobenius/primes-to-gauge comparisons should be recorded only
+as external/reference target programmes unless a separate DASHI Agda receipt
+formalizes the exact objects, maps, hypotheses, and imported-theorem boundary.
+Do not describe any seven-step explanatory chain in this area as internally
+proved by DASHI. Supersingular primes and Frobenius traces can motivate
+gauge-lane target sockets, but they do not promote a Standard Model group,
+hypercharge embedding, anomaly cancellation, Langlands correspondence,
+S-dual QFT, GRQFT receipt, or TOE closure.
 
 Read-first status note `2026-05-15`: older W9 TODO entries that say "W9 remains
 blocked" are historical unless they explicitly refer to pressure/Qcore routes.
