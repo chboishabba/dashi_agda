@@ -10,9 +10,13 @@ target/
 
 # Agda build artifacts
 *.agdai
+MAlonzo/
 artifacts/
 all_code*.txt
 result
+
+# Local downloaded/extracted third-party packages and scratch exports
+temp-DOWNLOADED/
 
 
 # Chat history / local DBs

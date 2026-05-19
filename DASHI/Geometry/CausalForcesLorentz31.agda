@@ -4,6 +4,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
+open import Data.Product using (Σ; _,_; proj₁)
 open import Relation.Nullary using (¬_)
 
 open import DASHI.Geometry.ParallelogramLaw using (AdditiveSpace)
@@ -17,15 +18,29 @@ open import DASHI.Physics.QuadraticPolarization as QP
 -- Causal/symmetry package for the quadratic=>signature choke point.
 record CausalSymmetryPackage : Setω where
   field
-    coneNontrivial : ⊤
-    arrowOrientation : ⊤
-    isotropyWitness : ⊤
-    finiteSpeedWitness : ⊤
-    involutionWitness : ⊤
-    nondegenerateQuadratic : ⊤
-    quotientContractionWitness : ⊤
+    coneNontrivial : Set
+    coneNontrivialWitness : coneNontrivial
+    arrowOrientation : Set
+    arrowOrientationWitness : arrowOrientation
+    isotropyEvidence : Set
+    isotropyWitness : isotropyEvidence
+    finiteSpeed : Set
+    finiteSpeedWitness : finiteSpeed
+    involution : Set
+    involutionWitness : involution
+    nondegenerateQuadratic : Set
+    nondegenerateQuadraticWitness : nondegenerateQuadratic
+    quotientContraction : Set
+    quotientContractionWitness : quotientContraction
 
 open CausalSymmetryPackage public
+
+record ConeWitness {A : AdditiveSpace} (cone : CMC.Cone A) : Set₁ where
+  field
+    point : AdditiveSpace.V A
+    pointInCone : CMC.Cone.InCone cone point
+
+open ConeWitness public
 
 data AdmissibleSignature : SU.Signature → Set where
   admissible31 : AdmissibleSignature SU.sig31
@@ -71,9 +86,9 @@ packageAdmissibleSignature :
   (arrow : Set) →
   AdmissibleSignature SU.sig31
 packageAdmissibleSignature pkg arrow =
-  let _ = coneNontrivial pkg
-      _ = arrowOrientation pkg
-      _ = nondegenerateQuadratic pkg
+  let _ = coneNontrivialWitness pkg
+      _ = arrowOrientationWitness pkg
+      _ = nondegenerateQuadraticWitness pkg
       _ = arrow
   in admissible31
 
@@ -109,16 +124,37 @@ coneArrowEvidence :
   (cone : CMC.Cone A) →
   (compatibility : CMC.ConeMetricCompat A cone q) →
   (arrow : Set) →
-  ⊤
+  Σ
+    (∀ x →
+      CMC.Cone.InCone cone x →
+      CMC.ConeMetricCompat.compat compatibility x)
+    (λ _ → ⊤)
 coneArrowEvidence pkg q cone compatibility arrow =
   let _ = CMC.Cone.InCone cone
       _ = CMC.Quadratic.Q q
       _ = CMC.ConeMetricCompat.compat compatibility
-      _ = coneNontrivial pkg
-      _ = arrowOrientation pkg
-      _ = nondegenerateQuadratic pkg
+      compatTransport = CMC.ConeMetricCompat.cone⇒compat compatibility
+      _ = coneNontrivialWitness pkg
+      _ = arrowOrientationWitness pkg
+      _ = nondegenerateQuadraticWitness pkg
       _ = arrow
-  in tt
+  in compatTransport , tt
+
+coneCompatAtWitness :
+  ∀ {A : AdditiveSpace} →
+  (pkg : CausalSymmetryPackage) →
+  (q : CMC.Quadratic A) →
+  (cone : CMC.Cone A) →
+  (compatibility : CMC.ConeMetricCompat A cone q) →
+  (arrow : Set) →
+  (witness : ConeWitness cone) →
+  CMC.ConeMetricCompat.compat compatibility
+    (ConeWitness.point witness)
+coneCompatAtWitness pkg q cone compatibility arrow witness =
+  let compatTransport = proj₁ (coneArrowEvidence pkg q cone compatibility arrow) in
+  compatTransport
+    (ConeWitness.point witness)
+    (ConeWitness.pointInCone witness)
 
 isotropyArrowEvidence :
   (pkg : CausalSymmetryPackage) →
@@ -130,6 +166,7 @@ isotropyArrowEvidence pkg iso fs arrow =
   let _ = isotropyWitness pkg
       _ = finiteSpeedWitness pkg
       _ = involutionWitness pkg
+      _ = quotientContractionWitness pkg
       _ = arrow
       _ = iso
       _ = fs
@@ -144,7 +181,8 @@ causalClassificationFromEvidence :
   (pkg : CausalSymmetryPackage) →
   CausalClassification
 causalClassificationFromEvidence q cone compat arrow pkg =
-  let _ = coneArrowEvidence pkg q cone compat arrow
+  let compatTransport = proj₁ (coneArrowEvidence pkg q cone compat arrow)
+      _ = compatTransport
       law = record { forced = SU.sig31 }
       admissible = packageAdmissibleSignature pkg arrow
   in record { law = law ; admissibleLaw = admissible }

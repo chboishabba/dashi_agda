@@ -33,6 +33,14 @@ STAGE_ORDER=("01" "02" "03" "04" "05")
 HEAVY_AGGREGATORS=(
   "DASHI/Everything.agda"
   "DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda"
+  "DASHI/Physics/Closure/ShiftContractObservableTransportPrimeCompatibilityProfileInstance.agda"
+  "DASHI/Physics/Closure/ShiftObservableSignaturePressureConsumer.agda"
+  "DASHI/Physics/DashiDynamicsShiftInstance.agda"
+  "DASHI/Physics/Closure/CanonicalAbstractGaugeMatterInstance.agda"
+  "DASHI/Physics/Closure/CanonicalGaugeMatterStrengtheningTheorem.agda"
+  "DASHI/Physics/Closure/KnownLimitsFullMatterGaugeTheorem.agda"
+  "DASHI/Physics/Closure/AtomicPhotonuclearContactGateTheorem.agda"
+  "DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda"
 )
 
 usage() {

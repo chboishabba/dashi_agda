@@ -1,0 +1,30 @@
+{
+  "admissibility": {
+    "basin_expected": true,
+    "coarse_head_matches_shell1": true,
+    "notes": [
+      "Numeric representative of the shell1 trit seed pos, zer, zer, zer.",
+      "Does not execute Agda; anchors the prototype state to the named canonical witness."
+    ]
+  },
+  "coarse_head": [
+    1.0
+  ],
+  "delta": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "mdl_level": 0.0,
+  "photon_energy": 0.22,
+  "provenance": {
+    "basin_symbol": "ShiftInBasin",
+    "bridge_symbol": "canonicalShiftGeometryBridge",
+    "derivation": "canonical shell1 numeric representative",
+    "module": "DASHI/Geometry/ShiftLorentzEmergenceInstance.agda",
+    "seed_origin": "DASHI/Physics/Signature31InstanceShiftZ.agda::shell1SeedTrit",
+    "state_symbol": "canonicalShiftStateWitness"
+  },
+  "trace_id": "near-miss-shell1-emitted"
+}

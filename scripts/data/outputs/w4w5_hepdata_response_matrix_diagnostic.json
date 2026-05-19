@@ -1,0 +1,1531 @@
+{
+  "acceptance_candidate_summary": {
+    "all_column_sum_candidates_bounded_with_1e_minus_5_roundoff": true,
+    "all_diagonal_candidates_bounded_exact": true,
+    "column_sum_candidate_formula": "A_col[j] = sum_i P[i][j]",
+    "column_sum_candidate_stats": [
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "50-76",
+        "max": 1.0000049340000001,
+        "max_abs_gap_to_one": 5.503000000017799e-06,
+        "mean": 1.0000009722218333,
+        "min": 0.999994497,
+        "sha256": "1dff609f908e3b3a8a6d9406bfc78795947d35aaba266de724dc52cb86399b41"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "50-76",
+        "max": 1.00000485,
+        "max_abs_gap_to_one": 4.899999999974369e-06,
+        "mean": 0.9999995997777779,
+        "min": 0.9999951,
+        "sha256": "1c032b4c99bf961cebbae1a08772f0d6755575e65af2de0b715aef3dd6b8b6ea"
+      },
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "76-106",
+        "max": 1.00000338829,
+        "max_abs_gap_to_one": 4.782129999991724e-06,
+        "mean": 0.9999989673471243,
+        "min": 0.99999521787,
+        "sha256": "c8d769ec9996093d9bbe54f04552543977e9040b3dafb044f5ec9a2785fc352a"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "76-106",
+        "max": 1.00000488,
+        "max_abs_gap_to_one": 4.880000000095919e-06,
+        "mean": 1.0000008408100554,
+        "min": 0.9999953565199999,
+        "sha256": "52e1a96bfb4b514075956e6310e4dfff15102750fc0934c0121ced61956803b5"
+      },
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "106-170",
+        "max": 1.0000054250000001,
+        "max_abs_gap_to_one": 5.425000000114366e-06,
+        "mean": 1.0000010230855556,
+        "min": 0.999995423,
+        "sha256": "8d6a510b651eb2a0b37595f902da4e95c11f474ec1f2fe2684df085acb13a009"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "106-170",
+        "max": 1.00000446,
+        "max_abs_gap_to_one": 5.679599999974805e-06,
+        "mean": 0.99999991755,
+        "min": 0.9999943204,
+        "sha256": "18dd807e13815ac08c1c756966a5a87a355367f263b2eef4128970529d1da8d5"
+      },
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "170-350",
+        "max": 1.000004278,
+        "max_abs_gap_to_one": 4.278000000024207e-06,
+        "mean": 1.0000005608944444,
+        "min": 0.9999969000000001,
+        "sha256": "db1372e02e400896019abee3d16205d03f95ebed93ec16a7d22c787a18f189ea"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "170-350",
+        "max": 1.0000048,
+        "max_abs_gap_to_one": 4.799999999915983e-06,
+        "mean": 1.000000026858889,
+        "min": 0.999995297,
+        "sha256": "3ee171cc07f63ee5aae29f144f6828f9fbddb3b020482513189e72122fc1e8bd"
+      },
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "350-1000",
+        "max": 1.000004631,
+        "max_abs_gap_to_one": 4.63099999992167e-06,
+        "mean": 1.0000001565166667,
+        "min": 0.999995641,
+        "sha256": "2f7c728f8580cfcd290cc061f3c1100f3d532ed24281678a2fa4fbdee5ad9a90"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": false,
+        "in_unit_interval_with_1e_minus_5_roundoff": true,
+        "mass_window": "350-1000",
+        "max": 1.000003926,
+        "max_abs_gap_to_one": 1.910199999999307e-05,
+        "mean": 0.9999990224444445,
+        "min": 0.999980898,
+        "sha256": "4eae502d6d2be457a1393456d820c64ef24ee0f1dbf26e3d561aa2eef831283a"
+      }
+    ],
+    "diagonal_candidate_formula": "A_diag[j] = P[j][j]",
+    "diagonal_candidate_stats": [
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": true,
+        "mass_window": "50-76",
+        "max": 0.99849,
+        "mean": 0.9216377777777777,
+        "min": 0.8279,
+        "sha256": "1dff609f908e3b3a8a6d9406bfc78795947d35aaba266de724dc52cb86399b41"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": true,
+        "mass_window": "50-76",
+        "max": 0.99967,
+        "mean": 0.9835272222222221,
+        "min": 0.96268,
+        "sha256": "1c032b4c99bf961cebbae1a08772f0d6755575e65af2de0b715aef3dd6b8b6ea"
+      },
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": true,
+        "mass_window": "76-106",
+        "max": 0.99824,
+        "mean": 0.9277322222222223,
+        "min": 0.85072,
+        "sha256": "c8d769ec9996093d9bbe54f04552543977e9040b3dafb044f5ec9a2785fc352a"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": true,
+        "mass_window": "76-106",
+        "max": 0.99957,
+        "mean": 0.9857633333333333,
+        "min": 0.97034,
+        "sha256": "52e1a96bfb4b514075956e6310e4dfff15102750fc0934c0121ced61956803b5"
+      },
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": true,
+        "mass_window": "106-170",
+        "max": 0.99836,
+        "mean": 0.9344861111111111,
+        "min": 0.86503,
+        "sha256": "8d6a510b651eb2a0b37595f902da4e95c11f474ec1f2fe2684df085acb13a009"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": true,
+        "mass_window": "106-170",
+        "max": 1.0,
+        "mean": 0.9885316666666666,
+        "min": 0.97522,
+        "sha256": "18dd807e13815ac08c1c756966a5a87a355367f263b2eef4128970529d1da8d5"
+      },
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": true,
+        "mass_window": "170-350",
+        "max": 0.99788,
+        "mean": 0.9454105555555555,
+        "min": 0.88369,
+        "sha256": "db1372e02e400896019abee3d16205d03f95ebed93ec16a7d22c787a18f189ea"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": true,
+        "mass_window": "170-350",
+        "max": 0.99977,
+        "mean": 0.989388888888889,
+        "min": 0.97653,
+        "sha256": "3ee171cc07f63ee5aae29f144f6828f9fbddb3b020482513189e72122fc1e8bd"
+      },
+      {
+        "channel": "electron",
+        "in_unit_interval_exact": true,
+        "mass_window": "350-1000",
+        "max": 0.99756,
+        "mean": 0.9586933333333333,
+        "min": 0.90681,
+        "sha256": "2f7c728f8580cfcd290cc061f3c1100f3d532ed24281678a2fa4fbdee5ad9a90"
+      },
+      {
+        "channel": "muon",
+        "in_unit_interval_exact": true,
+        "mass_window": "350-1000",
+        "max": 1.0,
+        "mean": 0.9915038888888889,
+        "min": 0.97844,
+        "sha256": "4eae502d6d2be457a1393456d820c64ef24ee0f1dbf26e3d561aa2eef831283a"
+      }
+    ],
+    "interpretation": "The published P matrices are numerically column-stochastic. The formal column-sum extraction is therefore locally computable and checksum-bound, but yields A_col approximately equal to one for every truth bin. The diagonal extraction is also locally computable and bounded in [0,1], but represents same-bin retention rather than a full acceptance vector unless a W4 gate receipt adopts that convention."
+  },
+  "artifact_schema": "dashi-w4w5-hepdata-response-matrix-diagnostic-v2",
+  "channels_by_mass_window": {
+    "106-170": [
+      "electron",
+      "muon"
+    ],
+    "170-350": [
+      "electron",
+      "muon"
+    ],
+    "350-1000": [
+      "electron",
+      "muon"
+    ],
+    "50-76": [
+      "electron",
+      "muon"
+    ],
+    "76-106": [
+      "electron",
+      "muon"
+    ]
+  },
+  "cms_public_base_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata",
+  "diagnostic_findings": {
+    "cms_public_mirror_fetch_succeeded": true,
+    "column_sum_acceptance_candidate_bounded_with_roundoff": true,
+    "column_sum_acceptance_candidate_computed": true,
+    "diagonal_acceptance_candidate_bounded": true,
+    "diagonal_acceptance_candidate_computed": true,
+    "direct_A_M_phi_acceptance_surface_present": false,
+    "hepdata_cli_direct_fetch_succeeded": false,
+    "relevant_low_z_high_z_response_matrices_present": true,
+    "response_matrices_look_like_unfolding_or_migration_data": true,
+    "usable_for_A_M_phi_without_additional_law": false
+  },
+  "discovered_response_specs": [
+    {
+      "channel": "electron",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/electron_response_phistar_mass_50-76.yaml",
+      "data_file": "electron_response_phistar_mass_50-76.yaml",
+      "doc_index": 68,
+      "hepdata_table_hint": "t68",
+      "mass_window": "50-76",
+      "name": "electron response phistar mass 50-76"
+    },
+    {
+      "channel": "muon",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/muon_response_phistar_mass_50-76.yaml",
+      "data_file": "muon_response_phistar_mass_50-76.yaml",
+      "doc_index": 69,
+      "hepdata_table_hint": "t69",
+      "mass_window": "50-76",
+      "name": "muon response phistar mass 50-76"
+    },
+    {
+      "channel": "electron",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/electron_response_phistar_mass_76-106.yaml",
+      "data_file": "electron_response_phistar_mass_76-106.yaml",
+      "doc_index": 70,
+      "hepdata_table_hint": "t70",
+      "mass_window": "76-106",
+      "name": "electron response phistar mass 76-106"
+    },
+    {
+      "channel": "muon",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/muon_response_phistar_mass_76-106.yaml",
+      "data_file": "muon_response_phistar_mass_76-106.yaml",
+      "doc_index": 71,
+      "hepdata_table_hint": "t71",
+      "mass_window": "76-106",
+      "name": "muon response phistar mass 76-106"
+    },
+    {
+      "channel": "electron",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/electron_response_phistar_mass_106-170.yaml",
+      "data_file": "electron_response_phistar_mass_106-170.yaml",
+      "doc_index": 72,
+      "hepdata_table_hint": "t72",
+      "mass_window": "106-170",
+      "name": "electron response phistar mass 106-170"
+    },
+    {
+      "channel": "muon",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/muon_response_phistar_mass_106-170.yaml",
+      "data_file": "muon_response_phistar_mass_106-170.yaml",
+      "doc_index": 73,
+      "hepdata_table_hint": "t73",
+      "mass_window": "106-170",
+      "name": "muon response phistar mass 106-170"
+    },
+    {
+      "channel": "electron",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/electron_response_phistar_mass_170-350.yaml",
+      "data_file": "electron_response_phistar_mass_170-350.yaml",
+      "doc_index": 74,
+      "hepdata_table_hint": "t74",
+      "mass_window": "170-350",
+      "name": "electron response phistar mass 170-350"
+    },
+    {
+      "channel": "muon",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/muon_response_phistar_mass_170-350.yaml",
+      "data_file": "muon_response_phistar_mass_170-350.yaml",
+      "doc_index": 75,
+      "hepdata_table_hint": "t75",
+      "mass_window": "170-350",
+      "name": "muon response phistar mass 170-350"
+    },
+    {
+      "channel": "electron",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/electron_response_phistar_mass_350-1000.yaml",
+      "data_file": "electron_response_phistar_mass_350-1000.yaml",
+      "doc_index": 76,
+      "hepdata_table_hint": "t76",
+      "mass_window": "350-1000",
+      "name": "electron response phistar mass 350-1000"
+    },
+    {
+      "channel": "muon",
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/muon_response_phistar_mass_350-1000.yaml",
+      "data_file": "muon_response_phistar_mass_350-1000.yaml",
+      "doc_index": 77,
+      "hepdata_table_hint": "t77",
+      "mass_window": "350-1000",
+      "name": "muon response phistar mass 350-1000"
+    }
+  ],
+  "errors": [],
+  "exact_missing_map": {
+    "local_arithmetic_now_available": "A_col[j] = sum_i P[i][j] and A_diag[j] = P[j][j] are computed for every cached t68-t77 response matrix and bound to source SHA-256 digests.",
+    "missing_typed_receipt_or_gate_consumer": "an existing W4 gate consumer that accepts either the column-sum or diagonal candidate as the W4 A(M, phi*) bridge and states the channel-combination, covariance, and observable-conversion convention",
+    "why_response_matrix_still_does_not_promote": "The column sums are numerically one within roundoff, indicating a normalized migration matrix rather than a visible acceptance loss surface. The diagonal is bounded and physically meaningful as bin-retention/purity, but no current gate consumer accepts it as the W4 bridge by type."
+  },
+  "governance": {
+    "constructsAcceptedDYLuminosityConventionAuthority": false,
+    "constructsPhiStarToMassAcceptanceBridge": false,
+    "diagnostic_only": true,
+    "promotesW4": false,
+    "promotesW5": false
+  },
+  "hepdata_direct_yaml_attempts": [],
+  "matrices": [
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          1.0000034,
+          0.99999623,
+          1.00000034,
+          1.00000234,
+          1.00000035,
+          1.00000195,
+          1.00000104,
+          1.000002664,
+          1.000004551293,
+          0.999994497,
+          1.000004934,
+          1.000002823,
+          0.999999,
+          0.9999978697,
+          0.999997424,
+          1.000001902,
+          1.000004285,
+          1.0000019
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.92285,
+          0.84049,
+          0.8377,
+          0.83558,
+          0.84406,
+          0.8279,
+          0.87019,
+          0.86402,
+          0.93631,
+          0.94182,
+          0.96096,
+          0.96437,
+          0.97246,
+          0.98654,
+          0.99157,
+          0.99673,
+          0.99744,
+          0.99849
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 25691,
+      "channel": "electron",
+      "column_sum_stats": {
+        "max": 1.0000049340000001,
+        "max_abs_gap_to_one": 5.503000000017799e-06,
+        "mean": 1.0000009722218333,
+        "min": 0.999994497
+      },
+      "data_file": "electron_response_phistar_mass_50-76.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 50-76 (electron channel)",
+      "diagonal_stats": {
+        "max": 0.99849,
+        "max_abs_gap_to_one": 0.17210000000000003,
+        "mean": 0.9216377777777777,
+        "min": 0.8279
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 68,
+      "hepdata_table_hint": "t68",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_50-76.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "50-76",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 18.000017499993,
+      "name": "electron response phistar mass 50-76",
+      "negative_entry_count": 5,
+      "row_sum_stats": {
+        "max": 1.0320599182,
+        "max_abs_gap_to_one": 0.042894397999999945,
+        "mean": 1.0000009722218333,
+        "min": 0.957105602
+      },
+      "sha256": "1dff609f908e3b3a8a6d9406bfc78795947d35aaba266de724dc52cb86399b41",
+      "source": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_50-76.yaml",
+      "source_kind": "local_file",
+      "value_max": 0.99849,
+      "value_min": -0.00027912
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          1.00000036,
+          1.00000272,
+          0.99999688,
+          0.99999727,
+          1.00000001,
+          1.00000348,
+          1.00000027,
+          0.999998,
+          0.999997804,
+          0.9999977,
+          0.9999975,
+          0.9999951,
+          1.0000017,
+          1.0000009,
+          1.00000485,
+          0.99999852,
+          0.999998412,
+          1.00000132
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.98721,
+          0.96927,
+          0.96719,
+          0.9635,
+          0.97035,
+          0.96268,
+          0.96727,
+          0.97087,
+          0.9877,
+          0.98702,
+          0.99127,
+          0.99338,
+          0.99309,
+          0.99663,
+          0.99778,
+          0.99909,
+          0.99952,
+          0.99967
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 25323,
+      "channel": "muon",
+      "column_sum_stats": {
+        "max": 1.00000485,
+        "max_abs_gap_to_one": 4.899999999974369e-06,
+        "mean": 0.9999995997777779,
+        "min": 0.9999951
+      },
+      "data_file": "muon_response_phistar_mass_50-76.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 50-76 (muon channel)",
+      "diagonal_stats": {
+        "max": 0.99967,
+        "max_abs_gap_to_one": 0.03732000000000002,
+        "mean": 0.9835272222222221,
+        "min": 0.96268
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 69,
+      "hepdata_table_hint": "t69",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_50-76.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "50-76",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 17.999992796,
+      "name": "muon response phistar mass 50-76",
+      "negative_entry_count": 1,
+      "row_sum_stats": {
+        "max": 1.00967947,
+        "max_abs_gap_to_one": 0.009679470000000023,
+        "mean": 0.9999995997777779,
+        "min": 0.99339
+      },
+      "sha256": "1c032b4c99bf961cebbae1a08772f0d6755575e65af2de0b715aef3dd6b8b6ea",
+      "source": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_50-76.yaml",
+      "source_kind": "local_file",
+      "value_max": 0.99967,
+      "value_min": -1.2992e-05
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          0.9999952531,
+          1.0000017477,
+          1.00000338829,
+          1.000001109631,
+          0.9999992607,
+          1.00000142112,
+          0.99999608602,
+          0.9999980957,
+          0.99999647063,
+          0.9999974454,
+          1.00000071805,
+          1.00000080674,
+          1.000000268687,
+          0.99999521787,
+          0.99999816918,
+          0.99999751303,
+          0.9999979404,
+          1.0000005
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.92262,
+          0.85302,
+          0.85078,
+          0.8516,
+          0.85162,
+          0.85072,
+          0.87917,
+          0.87938,
+          0.94266,
+          0.9479,
+          0.95835,
+          0.96697,
+          0.97194,
+          0.98685,
+          0.99262,
+          0.99689,
+          0.99785,
+          0.99824
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 26503,
+      "channel": "electron",
+      "column_sum_stats": {
+        "max": 1.00000338829,
+        "max_abs_gap_to_one": 4.782129999991724e-06,
+        "mean": 0.9999989673471243,
+        "min": 0.99999521787
+      },
+      "data_file": "electron_response_phistar_mass_76-106.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 76-106 (electron channel)",
+      "diagonal_stats": {
+        "max": 0.99824,
+        "max_abs_gap_to_one": 0.14927999999999997,
+        "mean": 0.9277322222222223,
+        "min": 0.85072
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 70,
+      "hepdata_table_hint": "t70",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_76-106.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "76-106",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 17.99998141224824,
+      "name": "electron response phistar mass 76-106",
+      "negative_entry_count": 12,
+      "row_sum_stats": {
+        "max": 1.0318227831,
+        "max_abs_gap_to_one": 0.031822783099999974,
+        "mean": 0.9999989673471243,
+        "min": 0.9684677206700001
+      },
+      "sha256": "c8d769ec9996093d9bbe54f04552543977e9040b3dafb044f5ec9a2785fc352a",
+      "source": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_76-106.yaml",
+      "source_kind": "local_file",
+      "value_max": 0.99824,
+      "value_min": -8.2025e-06
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          0.9999995472,
+          1.00000119,
+          1.00000018114,
+          1.0000036266,
+          1.000003738679,
+          1.00000100942,
+          1.00000138436,
+          1.000001778415,
+          0.99999535652,
+          1.0000048063,
+          0.9999982,
+          0.999999,
+          1.0000011,
+          1.0,
+          1.000002071947,
+          1.00000488,
+          0.999995814,
+          1.00000145
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.98516,
+          0.97053,
+          0.97076,
+          0.97034,
+          0.97111,
+          0.97037,
+          0.97661,
+          0.97543,
+          0.98888,
+          0.98972,
+          0.99188,
+          0.99372,
+          0.9947,
+          0.99753,
+          0.99858,
+          0.99931,
+          0.99957,
+          0.99954
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 25482,
+      "channel": "muon",
+      "column_sum_stats": {
+        "max": 1.00000488,
+        "max_abs_gap_to_one": 4.880000000095919e-06,
+        "mean": 1.0000008408100554,
+        "min": 0.9999953565199999
+      },
+      "data_file": "muon_response_phistar_mass_76-106.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 76-106 (muon channel)",
+      "diagonal_stats": {
+        "max": 0.99957,
+        "max_abs_gap_to_one": 0.02966000000000002,
+        "mean": 0.9857633333333333,
+        "min": 0.97034
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 71,
+      "hepdata_table_hint": "t71",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_76-106.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "76-106",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 18.000015134581,
+      "name": "muon response phistar mass 76-106",
+      "negative_entry_count": 1,
+      "row_sum_stats": {
+        "max": 1.006504237,
+        "max_abs_gap_to_one": 0.007455911979999952,
+        "mean": 1.0000008408100554,
+        "min": 0.99254408802
+      },
+      "sha256": "52e1a96bfb4b514075956e6310e4dfff15102750fc0934c0121ced61956803b5",
+      "source": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_76-106.yaml",
+      "source_kind": "local_file",
+      "value_max": 0.99957,
+      "value_min": -1.9058e-06
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          1.000002381,
+          1.00000075785,
+          1.0000021297,
+          1.00000348965,
+          0.999995423,
+          1.000005425,
+          1.000002693,
+          0.999998187,
+          1.000001347,
+          0.999995934,
+          0.999998219,
+          0.99999878374,
+          1.0000017947,
+          1.0000001781,
+          1.0000036873,
+          1.0000004625,
+          1.00000294,
+          1.000004583
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.92887,
+          0.86503,
+          0.86544,
+          0.86777,
+          0.86733,
+          0.86531,
+          0.88937,
+          0.88888,
+          0.94827,
+          0.95241,
+          0.96159,
+          0.97096,
+          0.97492,
+          0.98759,
+          0.99358,
+          0.997,
+          0.99836,
+          0.99807
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 26095,
+      "channel": "electron",
+      "column_sum_stats": {
+        "max": 1.0000054250000001,
+        "max_abs_gap_to_one": 5.425000000114366e-06,
+        "mean": 1.0000010230855556,
+        "min": 0.999995423
+      },
+      "data_file": "electron_response_phistar_mass_106-170.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 106-170 (electron channel)",
+      "diagonal_stats": {
+        "max": 0.99836,
+        "max_abs_gap_to_one": 0.13497000000000003,
+        "mean": 0.9344861111111111,
+        "min": 0.86503
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 72,
+      "hepdata_table_hint": "t72",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_106-170.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "106-170",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 18.00001841554,
+      "name": "electron response phistar mass 106-170",
+      "negative_entry_count": 5,
+      "row_sum_stats": {
+        "max": 1.02987521315,
+        "max_abs_gap_to_one": 0.030382821000000004,
+        "mean": 1.0000010230855556,
+        "min": 0.969617179
+      },
+      "sha256": "8d6a510b651eb2a0b37595f902da4e95c11f474ec1f2fe2684df085acb13a009",
+      "source": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_106-170.yaml",
+      "source_kind": "local_file",
+      "value_max": 0.99836,
+      "value_min": -3.5967e-05
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          1.000000642,
+          1.000000082,
+          1.00000366,
+          1.000002741,
+          1.00000268,
+          1.000000065,
+          0.999997776,
+          0.9999958445,
+          0.999999075,
+          1.0000024,
+          0.9999967,
+          0.9999975,
+          0.9999988,
+          0.99999572,
+          1.00000295,
+          1.0000031,
+          1.00000446,
+          0.9999943204
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.98764,
+          0.97593,
+          0.97522,
+          0.97613,
+          0.97746,
+          0.97695,
+          0.98063,
+          0.98146,
+          0.99085,
+          0.99174,
+          0.99344,
+          0.99453,
+          0.99595,
+          0.99809,
+          0.99884,
+          0.99941,
+          0.9993,
+          1.0
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 25383,
+      "channel": "muon",
+      "column_sum_stats": {
+        "max": 1.00000446,
+        "max_abs_gap_to_one": 5.679599999974805e-06,
+        "mean": 0.99999991755,
+        "min": 0.9999943204
+      },
+      "data_file": "muon_response_phistar_mass_106-170.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 106-170 (muon channel)",
+      "diagonal_stats": {
+        "max": 1.0,
+        "max_abs_gap_to_one": 0.024780000000000024,
+        "mean": 0.9885316666666666,
+        "min": 0.97522
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 73,
+      "hepdata_table_hint": "t73",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_106-170.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "106-170",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 17.9999985159,
+      "name": "muon response phistar mass 106-170",
+      "negative_entry_count": 2,
+      "row_sum_stats": {
+        "max": 1.004886454,
+        "max_abs_gap_to_one": 0.0048864539999999845,
+        "mean": 0.99999991755,
+        "min": 0.99638114
+      },
+      "sha256": "18dd807e13815ac08c1c756966a5a87a355367f263b2eef4128970529d1da8d5",
+      "source": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_106-170.yaml",
+      "source_kind": "local_file",
+      "value_max": 1.0,
+      "value_min": -1.7666e-05
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          0.999998365,
+          1.0000032645,
+          0.9999983905,
+          1.000000166,
+          1.000004119,
+          1.000000264,
+          0.999998879,
+          1.000004278,
+          1.0000021402,
+          1.00000074607,
+          0.99999997173,
+          1.0000026817,
+          1.000002131,
+          1.000002277,
+          0.999997303,
+          1.0000005094,
+          0.99999771,
+          0.9999969
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.94148,
+          0.88783,
+          0.88624,
+          0.89171,
+          0.88755,
+          0.88369,
+          0.90889,
+          0.90752,
+          0.95818,
+          0.96211,
+          0.96994,
+          0.97593,
+          0.97883,
+          0.99072,
+          0.99418,
+          0.99711,
+          0.99788,
+          0.9976
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 25971,
+      "channel": "electron",
+      "column_sum_stats": {
+        "max": 1.000004278,
+        "max_abs_gap_to_one": 4.278000000024207e-06,
+        "mean": 1.0000005608944444,
+        "min": 0.9999969000000001
+      },
+      "data_file": "electron_response_phistar_mass_170-350.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 170-350 (electron channel)",
+      "diagonal_stats": {
+        "max": 0.99788,
+        "max_abs_gap_to_one": 0.11631000000000002,
+        "mean": 0.9454105555555555,
+        "min": 0.88369
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 74,
+      "hepdata_table_hint": "t74",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_170-350.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "170-350",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 18.0000100961,
+      "name": "electron response phistar mass 170-350",
+      "negative_entry_count": 21,
+      "row_sum_stats": {
+        "max": 1.022099508,
+        "max_abs_gap_to_one": 0.02534475650000001,
+        "mean": 1.0000005608944444,
+        "min": 0.9746552435
+      },
+      "sha256": "db1372e02e400896019abee3d16205d03f95ebed93ec16a7d22c787a18f189ea",
+      "source": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_170-350.yaml",
+      "source_kind": "local_file",
+      "value_max": 0.99788,
+      "value_min": -0.0010732
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          1.000000291,
+          0.999995297,
+          1.000001807,
+          0.999997145,
+          1.000004264,
+          1.00000400486,
+          0.9999974416,
+          0.999996281,
+          1.000001892,
+          0.999999418,
+          1.0000032,
+          1.0000048,
+          0.9999979,
+          0.99999661,
+          0.99999883,
+          0.9999993,
+          1.000000442,
+          1.00000156
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.98886,
+          0.97653,
+          0.97721,
+          0.97804,
+          0.97886,
+          0.97797,
+          0.9832,
+          0.98361,
+          0.99232,
+          0.99166,
+          0.99293,
+          0.99527,
+          0.99637,
+          0.99818,
+          0.999,
+          0.99948,
+          0.99974,
+          0.99977
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 25419,
+      "channel": "muon",
+      "column_sum_stats": {
+        "max": 1.0000048,
+        "max_abs_gap_to_one": 4.799999999915983e-06,
+        "mean": 1.000000026858889,
+        "min": 0.999995297
+      },
+      "data_file": "muon_response_phistar_mass_170-350.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 170-350 (muon channel)",
+      "diagonal_stats": {
+        "max": 0.99977,
+        "max_abs_gap_to_one": 0.02346999999999999,
+        "mean": 0.989388888888889,
+        "min": 0.97653
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 75,
+      "hepdata_table_hint": "t75",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_170-350.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "170-350",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 18.00000048346,
+      "name": "muon response phistar mass 170-350",
+      "negative_entry_count": 3,
+      "row_sum_stats": {
+        "max": 1.00495414166,
+        "max_abs_gap_to_one": 0.004954141660000078,
+        "mean": 1.000000026858889,
+        "min": 0.996128787
+      },
+      "sha256": "3ee171cc07f63ee5aae29f144f6828f9fbddb3b020482513189e72122fc1e8bd",
+      "source": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_170-350.yaml",
+      "source_kind": "local_file",
+      "value_max": 0.99977,
+      "value_min": -5.3112e-06
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          1.00000428,
+          0.99999623,
+          1.0000022713,
+          1.00000033,
+          1.000004631,
+          1.000000457,
+          0.999995641,
+          0.999999879,
+          1.000000195,
+          0.99999973,
+          0.999998804,
+          1.00000071,
+          1.000001843,
+          0.999997128,
+          0.99999867,
+          1.0000008,
+          0.999997918,
+          1.0000033
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.95904,
+          0.91071,
+          0.91237,
+          0.91952,
+          0.91648,
+          0.90681,
+          0.93822,
+          0.93373,
+          0.96923,
+          0.97174,
+          0.97621,
+          0.98367,
+          0.98313,
+          0.99019,
+          0.99756,
+          0.99555,
+          0.99668,
+          0.99564
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 25656,
+      "channel": "electron",
+      "column_sum_stats": {
+        "max": 1.000004631,
+        "max_abs_gap_to_one": 4.63099999992167e-06,
+        "mean": 1.0000001565166667,
+        "min": 0.999995641
+      },
+      "data_file": "electron_response_phistar_mass_350-1000.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 350-1000 (electron channel)",
+      "diagonal_stats": {
+        "max": 0.99756,
+        "max_abs_gap_to_one": 0.09319,
+        "mean": 0.9586933333333333,
+        "min": 0.90681
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 76,
+      "hepdata_table_hint": "t76",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_350-1000.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "350-1000",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 18.0000028173,
+      "name": "electron response phistar mass 350-1000",
+      "negative_entry_count": 11,
+      "row_sum_stats": {
+        "max": 1.020229391,
+        "max_abs_gap_to_one": 0.027623520000000013,
+        "mean": 1.0000001565166667,
+        "min": 0.97237648
+      },
+      "sha256": "2f7c728f8580cfcd290cc061f3c1100f3d532ed24281678a2fa4fbdee5ad9a90",
+      "source": "scripts/data/hepdata/ins2079374_electron_response_phistar_mass_350-1000.yaml",
+      "source_kind": "local_file",
+      "value_max": 0.99756,
+      "value_min": -0.00040748
+    },
+    {
+      "acceptance_bridge_note": "This YAML exposes a square P migration/response matrix for one lepton channel and one mass window. It does not by itself expose a central-value A(M, phi*) acceptance/efficiency vector or an accepted observable-conversion law.",
+      "acceptance_candidates": {
+        "column_sum_candidate_note": "Column sums are numerically one within roundoff, which is consistent with a truth-bin-normalized response/migration matrix. This makes A_col a valid local arithmetic extraction but not, by itself, evidence for an independent central acceptance-loss vector.",
+        "column_sum_candidate_plausible_as_normalized_migration_probability": true,
+        "column_sum_definition": "A_col[j] = sum_i P[i][j]",
+        "column_sums": [
+          1.000000395,
+          0.999999275,
+          1.000003926,
+          1.000003584,
+          0.999998744,
+          0.999995387,
+          0.9999974988,
+          1.0000014,
+          1.0000021422,
+          1.0000023,
+          1.00000316,
+          0.999996,
+          1.0000038,
+          0.999995526,
+          0.999999568,
+          0.999980898,
+          0.9999988,
+          1.0
+        ],
+        "column_sums_in_unit_interval_exact": false,
+        "column_sums_in_unit_interval_with_1e_minus_5_roundoff": true,
+        "diagonal": [
+          0.99041,
+          0.98169,
+          0.97844,
+          0.98623,
+          0.97948,
+          0.98213,
+          0.98812,
+          0.99028,
+          0.99326,
+          0.99106,
+          0.99669,
+          0.99546,
+          0.9973,
+          0.99798,
+          0.99984,
+          1.0,
+          0.9987,
+          1.0
+        ],
+        "diagonal_candidate_note": "The diagonal entries are in [0,1] and quantify same-bin retention/migration purity for the published binning. They are not identical to a full acceptance correction unless a gate consumer explicitly accepts that convention.",
+        "diagonal_candidate_plausible_as_bin_retention_efficiency": true,
+        "diagonal_definition": "A_diag[j] = P[j][j]",
+        "diagonal_in_unit_interval_exact": true,
+        "diagonal_in_unit_interval_with_1e_minus_12_roundoff": true
+      },
+      "byte_count": 25389,
+      "channel": "muon",
+      "column_sum_stats": {
+        "max": 1.000003926,
+        "max_abs_gap_to_one": 1.910199999999307e-05,
+        "mean": 0.9999990224444445,
+        "min": 0.999980898
+      },
+      "data_file": "muon_response_phistar_mass_350-1000.yaml",
+      "dependent_headers": [
+        {
+          "name": "P"
+        }
+      ],
+      "dependent_value_count": 324,
+      "dependent_variable_count": 1,
+      "description": "Response matrix for phistar mass 350-1000 (muon channel)",
+      "diagonal_stats": {
+        "max": 1.0,
+        "max_abs_gap_to_one": 0.021560000000000024,
+        "mean": 0.9915038888888889,
+        "min": 0.97844
+      },
+      "direct_acceptance_surface": false,
+      "doc_index": 77,
+      "hepdata_table_hint": "t77",
+      "independent_headers": [
+        {
+          "name": "$\\varphi^*$"
+        },
+        {
+          "name": "$\\varphi^*$"
+        }
+      ],
+      "independent_value_counts": [
+        324,
+        324
+      ],
+      "independent_variable_count": 2,
+      "is_square_matrix": true,
+      "local_path": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_350-1000.yaml",
+      "looks_like_response_matrix": true,
+      "mass_window": "350-1000",
+      "matrix_dimension": [
+        18,
+        18
+      ],
+      "matrix_value_sum": 17.999982404,
+      "name": "muon response phistar mass 350-1000",
+      "negative_entry_count": 11,
+      "row_sum_stats": {
+        "max": 1.01116845,
+        "max_abs_gap_to_one": 0.011168449999999996,
+        "mean": 0.9999990224444445,
+        "min": 0.993892601
+      },
+      "sha256": "4eae502d6d2be457a1393456d820c64ef24ee0f1dbf26e3d561aa2eef831283a",
+      "source": "scripts/data/hepdata/ins2079374_muon_response_phistar_mass_350-1000.yaml",
+      "source_kind": "local_file",
+      "value_max": 1.0,
+      "value_min": -0.00010201
+    }
+  ],
+  "matrix_count": 10,
+  "missing": [],
+  "network_mode": "disabled",
+  "record": "ins2079374",
+  "record_url": "https://www.hepdata.net/record/ins2079374",
+  "relevant_50_76_76_106_106_170_matrix_count": 6,
+  "requested_range": "t68-t77 / CMS submission documents 68-77",
+  "status": "non_promoting_public_response_matrix_diagnostic",
+  "submission": {
+    "bytes": 62089,
+    "sha256": "917a23b6c873c2acc623758cd6938c47f010da956a4d4fd9cbcda258632ed74c",
+    "source": "scripts/data/hepdata/ins2079374_submission.yaml",
+    "source_kind": "local_file"
+  }
+}

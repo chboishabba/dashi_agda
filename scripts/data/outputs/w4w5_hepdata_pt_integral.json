@@ -1,0 +1,270 @@
+{
+  "artifact_schema": "dashi-w4w5-hepdata-pt-integral-diagnostic-v1",
+  "cms_public_base_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata",
+  "computed_ratios": {
+    "inclusive_106_170_over_50_76": {
+      "abs_gap_to_0_8804486068": 0.3614161312792117,
+      "denominator_integral_pb": 36.658834750000004,
+      "denominator_key": "inclusive_50_76",
+      "formula": "integral(numerator d sigma / d pT) / integral(denominator d sigma / d pT)",
+      "name": "inclusive pT-integrated 106-170 / 50-76",
+      "numerator_integral_pb": 19.027125750000003,
+      "numerator_key": "inclusive_106_170",
+      "value": 0.5190324755207884
+    },
+    "inclusive_106_170_over_76_106": {
+      "abs_gap_to_0_8804486068": 0.8550229929279195,
+      "denominator_integral_pb": 748.3447930000001,
+      "denominator_key": "inclusive_76_106",
+      "formula": "integral(numerator d sigma / d pT) / integral(denominator d sigma / d pT)",
+      "name": "inclusive pT-integrated 106-170 / 76-106",
+      "numerator_integral_pb": 19.027125750000003,
+      "numerator_key": "inclusive_106_170",
+      "value": 0.025425613872080487
+    },
+    "inclusive_50_76_over_76_106": {
+      "abs_gap_to_0_8804486068": 0.8314620499442487,
+      "denominator_integral_pb": 748.3447930000001,
+      "denominator_key": "inclusive_76_106",
+      "formula": "integral(numerator d sigma / d pT) / integral(denominator d sigma / d pT)",
+      "name": "inclusive pT-integrated 50-76 / 76-106",
+      "numerator_integral_pb": 36.658834750000004,
+      "numerator_key": "inclusive_50_76",
+      "value": 0.04898655685575138
+    },
+    "jet_106_170_over_50_76": {
+      "abs_gap_to_0_8804486068": 0.1216074175933326,
+      "denominator_integral_pb": 5.130630500000001,
+      "denominator_key": "jet_50_76",
+      "formula": "integral(numerator d sigma / d pT) / integral(denominator d sigma / d pT)",
+      "name": "at-least-one-jet pT-integrated 106-170 / 50-76",
+      "numerator_integral_pb": 3.89333375,
+      "numerator_key": "jet_106_170",
+      "value": 0.7588411892066674
+    },
+    "jet_106_170_over_76_106": {
+      "abs_gap_to_0_8804486068": 0.8492491591904348,
+      "denominator_integral_pb": 124.7885475,
+      "denominator_key": "jet_76_106",
+      "formula": "integral(numerator d sigma / d pT) / integral(denominator d sigma / d pT)",
+      "name": "at-least-one-jet pT-integrated 106-170 / 76-106",
+      "numerator_integral_pb": 3.89333375,
+      "numerator_key": "jet_106_170",
+      "value": 0.031199447609565292
+    },
+    "jet_50_76_over_76_106": {
+      "abs_gap_to_0_8804486068": 0.839334012530041,
+      "denominator_integral_pb": 124.7885475,
+      "denominator_key": "jet_76_106",
+      "formula": "integral(numerator d sigma / d pT) / integral(denominator d sigma / d pT)",
+      "name": "at-least-one-jet pT-integrated 50-76 / 76-106",
+      "numerator_integral_pb": 5.130630500000001,
+      "numerator_key": "jet_50_76",
+      "value": 0.041114594269958955
+    }
+  },
+  "errors": [],
+  "governance": {
+    "accepted_authority_receipt_present": false,
+    "no_authority_promotion": true,
+    "no_w4_promotion": true,
+    "no_w5_promotion": true
+  },
+  "hepdata_direct_download_attempts": [
+    {
+      "ok": false,
+      "reason": "Forbidden",
+      "snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content",
+      "status": 403,
+      "url": "https://www.hepdata.net/download/table/ins2079374/t1/csv"
+    },
+    {
+      "ok": false,
+      "reason": "Forbidden",
+      "snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content",
+      "status": 403,
+      "url": "https://www.hepdata.net/download/table/ins2079374/t3/csv"
+    },
+    {
+      "ok": false,
+      "reason": "Forbidden",
+      "snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content",
+      "status": 403,
+      "url": "https://www.hepdata.net/download/table/ins2079374/t21/csv"
+    },
+    {
+      "ok": false,
+      "reason": "Forbidden",
+      "snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content",
+      "status": 403,
+      "url": "https://www.hepdata.net/download/table/ins2079374/t22/csv"
+    },
+    {
+      "ok": false,
+      "reason": "Forbidden",
+      "snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content",
+      "status": 403,
+      "url": "https://www.hepdata.net/download/table/ins2079374/Table%201/1/csv"
+    },
+    {
+      "ok": false,
+      "reason": "Forbidden",
+      "snippet": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content",
+      "status": 403,
+      "url": "https://www.hepdata.net/download/table/ins2079374/Table%203/1/csv"
+    }
+  ],
+  "interpretation": {
+    "claim_tested": "public absolute pT tables may yield mass-window integrated ratios closer to the older W5 target 0.8804486068",
+    "diagnostic_only": true,
+    "does_not_construct_acceptance_bridge": true,
+    "does_not_construct_w4_or_w5_authority": true,
+    "does_not_establish_dsigma_dm": true
+  },
+  "manual_download_links_if_needed": [],
+  "network_mode": "enabled",
+  "record": "ins2079374",
+  "record_url": "https://www.hepdata.net/record/ins2079374",
+  "source_integrals": {
+    "inclusive_106_170": {
+      "bin_count": 16,
+      "byte_count": 505259,
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_106-170.yaml",
+      "formula": "sum_i (d sigma / d pT(ll))_i * (pT_high_i - pT_low_i)",
+      "integral_pb": 19.027125750000003,
+      "jet_required": false,
+      "key": "inclusive_106_170",
+      "mass_window": "106-170 GeV",
+      "name": "pT ll mass 106-170",
+      "observable": "$\\mathrm{d}\\sigma/\\mathrm{d}p_T(ll)$",
+      "pt_range": [
+        0.0,
+        1000.0
+      ],
+      "sha256": "8527aeceb78860bd3296c0bdfebc06a36bb6b881c7a029fb2ac6c618588b8875",
+      "source": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_106-170.yaml",
+      "source_kind": "cms_public_yaml",
+      "table_hint": "t5 / Table 5",
+      "units": "pb/GeV",
+      "x_axis": "$p_T(ll)$",
+      "x_units": "GeV"
+    },
+    "inclusive_50_76": {
+      "bin_count": 16,
+      "byte_count": 505145,
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_50-76.yaml",
+      "formula": "sum_i (d sigma / d pT(ll))_i * (pT_high_i - pT_low_i)",
+      "integral_pb": 36.658834750000004,
+      "jet_required": false,
+      "key": "inclusive_50_76",
+      "mass_window": "50-76 GeV",
+      "name": "pT ll mass 50-76",
+      "observable": "$\\mathrm{d}\\sigma/\\mathrm{d}p_T(ll)$",
+      "pt_range": [
+        0.0,
+        1000.0
+      ],
+      "sha256": "70dfab0959a013f52f49663821fd623fa4f25af06bdea9ff827f8162beb4a9b1",
+      "source": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_50-76.yaml",
+      "source_kind": "cms_public_yaml",
+      "table_hint": "t1 / Table 1",
+      "units": "pb/GeV",
+      "x_axis": "$p_T(ll)$",
+      "x_units": "GeV"
+    },
+    "inclusive_76_106": {
+      "bin_count": 37,
+      "byte_count": 1166967,
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_76-106.yaml",
+      "formula": "sum_i (d sigma / d pT(ll))_i * (pT_high_i - pT_low_i)",
+      "integral_pb": 748.3447930000001,
+      "jet_required": false,
+      "key": "inclusive_76_106",
+      "mass_window": "76-106 GeV",
+      "name": "pT ll mass 76-106",
+      "observable": "$\\mathrm{d}\\sigma/\\mathrm{d}p_T(ll)$",
+      "pt_range": [
+        0.0,
+        1000.0
+      ],
+      "sha256": "e4cc5978d6aade727b9f45bf50ee5bf78418382e83804ebcfc73e586789456f7",
+      "source": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_76-106.yaml",
+      "source_kind": "cms_public_yaml",
+      "table_hint": "t3 / Table 3",
+      "units": "pb/GeV",
+      "x_axis": "$p_T(ll)$",
+      "x_units": "GeV"
+    },
+    "jet_106_170": {
+      "bin_count": 12,
+      "byte_count": 379209,
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_106-170_jet.yaml",
+      "formula": "sum_i (d sigma / d pT(ll))_i * (pT_high_i - pT_low_i)",
+      "integral_pb": 3.89333375,
+      "jet_required": true,
+      "key": "jet_106_170",
+      "mass_window": "106-170 GeV",
+      "name": "pT ll mass 106-170 jet",
+      "observable": "$\\mathrm{d}\\sigma/\\mathrm{d}p_T(ll)$",
+      "pt_range": [
+        0.0,
+        1000.0
+      ],
+      "sha256": "35563938a4d34687fa1376284e1dd06c8905b82a2363cd063a9267f0fab6c2e9",
+      "source": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_106-170_jet.yaml",
+      "source_kind": "cms_public_yaml",
+      "table_hint": "jet absolute pT table",
+      "units": "pb/GeV",
+      "x_axis": "$p_T(ll)$",
+      "x_units": "GeV"
+    },
+    "jet_50_76": {
+      "bin_count": 12,
+      "byte_count": 379152,
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_50-76_jet.yaml",
+      "formula": "sum_i (d sigma / d pT(ll))_i * (pT_high_i - pT_low_i)",
+      "integral_pb": 5.130630500000001,
+      "jet_required": true,
+      "key": "jet_50_76",
+      "mass_window": "50-76 GeV",
+      "name": "pT ll mass 50-76 jet",
+      "observable": "$\\mathrm{d}\\sigma/\\mathrm{d}p_T(ll)$",
+      "pt_range": [
+        0.0,
+        1000.0
+      ],
+      "sha256": "e72f923be6670c4157b34ec906df9d750ee2ecdd0a4ca6555703e4e4cf7a4049",
+      "source": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_50-76_jet.yaml",
+      "source_kind": "cms_public_yaml",
+      "table_hint": "jet absolute pT table",
+      "units": "pb/GeV",
+      "x_axis": "$p_T(ll)$",
+      "x_units": "GeV"
+    },
+    "jet_76_106": {
+      "bin_count": 33,
+      "byte_count": 1041978,
+      "cms_url": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_76-106_jet.yaml",
+      "formula": "sum_i (d sigma / d pT(ll))_i * (pT_high_i - pT_low_i)",
+      "integral_pb": 124.7885475,
+      "jet_required": true,
+      "key": "jet_76_106",
+      "mass_window": "76-106 GeV",
+      "name": "pT ll mass 76-106 jet",
+      "observable": "$\\mathrm{d}\\sigma/\\mathrm{d}p_T(ll)$",
+      "pt_range": [
+        0.0,
+        1000.0
+      ],
+      "sha256": "54b6936c2d0e705075244831bf6211556108bb3b43a4b0f7584d7b1bd13b5f26",
+      "source": "https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/pt_ll_mass_76-106_jet.yaml",
+      "source_kind": "cms_public_yaml",
+      "table_hint": "jet absolute pT table",
+      "units": "pb/GeV",
+      "x_axis": "$p_T(ll)$",
+      "x_units": "GeV"
+    }
+  },
+  "status": "non_promoting_public_hepdata_pt_integral_diagnostic",
+  "target_under_test": 0.8804486068
+}

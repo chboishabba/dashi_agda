@@ -1,3 +1,5 @@
 name: dashi-agda
 depend: standard-library
 include: .
+         DCHoTT-Agda
+         cubical

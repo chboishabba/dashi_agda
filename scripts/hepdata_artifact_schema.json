@@ -1,0 +1,442 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dashi.local/schemas/hepdata_artifact_schema.json",
+  "title": "Normalized dashitest HEPData empirical artifact",
+  "description": "Canonical JSON boundary for legacy dashitest HEPData outputs normalized into dashi_agda without refitting, fetching, or theorem claims.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_schema",
+    "schema_version",
+    "generated_utc",
+    "source",
+    "assumptions"
+  ],
+  "properties": {
+    "artifact_schema": {
+      "type": "string",
+      "const": "dashi-hpdata-empirical-v1"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "generated_utc": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dashitest_root",
+        "input_root"
+      ],
+      "properties": {
+        "dashitest_root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_family": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "assumptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_filenames",
+        "scope"
+      ],
+      "properties": {
+        "input_filenames": {
+          "type": "object"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "family_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "family": {
+      "$ref": "#/$defs/family_payload"
+    },
+    "families": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/family_payload"
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "family"
+      ]
+    },
+    {
+      "required": [
+        "family_count",
+        "families"
+      ]
+    }
+  ],
+  "$defs": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "missing",
+        "error"
+      ]
+    },
+    "generic_value": {
+      "type": [
+        "string",
+        "number",
+        "integer",
+        "boolean",
+        "null",
+        "object",
+        "array"
+      ]
+    },
+    "row_object": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/generic_value"
+      }
+    },
+    "measurement_field_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "cov"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/status"
+        },
+        "y": {
+          "$ref": "#/$defs/status"
+        },
+        "cov": {
+          "$ref": "#/$defs/status"
+        }
+      }
+    },
+    "measurement_payload": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "path": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "field_status": {
+          "$ref": "#/$defs/measurement_field_status"
+        },
+        "source_dir": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/row_object"
+          }
+        },
+        "x": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "y": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "cov": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/generic_value"
+          }
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "table_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "path",
+        "rows"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "path": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/row_object"
+          }
+        },
+        "summary_last_row": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/row_object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "certification_payload": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "selected",
+        "path",
+        "value"
+      ],
+      "properties": {
+        "selected": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/generic_value"
+          }
+        }
+      }
+    },
+    "counts_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measurement_rows",
+        "metric_rows",
+        "timeseries_rows",
+        "has_certification"
+      ],
+      "properties": {
+        "measurement_rows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "metric_rows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timeseries_rows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "has_certification": {
+          "type": "boolean"
+        }
+      }
+    },
+    "summary_statuses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measurement",
+        "metrics",
+        "timeseries",
+        "certification"
+      ],
+      "properties": {
+        "measurement": {
+          "$ref": "#/$defs/status"
+        },
+        "metrics": {
+          "$ref": "#/$defs/status"
+        },
+        "timeseries": {
+          "$ref": "#/$defs/status"
+        },
+        "certification": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "missing"
+          ]
+        }
+      }
+    },
+    "evidence_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "counts",
+        "statuses",
+        "measurement_fields",
+        "non_claim_boundary"
+      ],
+      "properties": {
+        "counts": {
+          "$ref": "#/$defs/counts_summary"
+        },
+        "statuses": {
+          "$ref": "#/$defs/summary_statuses"
+        },
+        "measurement_fields": {
+          "$ref": "#/$defs/measurement_field_status"
+        },
+        "non_claim_boundary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "validation_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "counts",
+        "statuses",
+        "measurement_fields",
+        "validation_status",
+        "non_claim_boundary"
+      ],
+      "properties": {
+        "counts": {
+          "$ref": "#/$defs/counts_summary"
+        },
+        "statuses": {
+          "$ref": "#/$defs/summary_statuses"
+        },
+        "measurement_fields": {
+          "$ref": "#/$defs/measurement_field_status"
+        },
+        "validation_status": {
+          "type": "string",
+          "enum": [
+            "empirical-artifact-ready",
+            "partial-empirical-artifact"
+          ]
+        },
+        "non_claim_boundary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "family_payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family",
+        "measurement",
+        "metrics",
+        "timeseries",
+        "certification",
+        "evidence_summary",
+        "validation_summary"
+      ],
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "measurement": {
+          "$ref": "#/$defs/measurement_payload"
+        },
+        "metrics": {
+          "$ref": "#/$defs/table_payload"
+        },
+        "timeseries": {
+          "$ref": "#/$defs/table_payload"
+        },
+        "certification": {
+          "$ref": "#/$defs/certification_payload"
+        },
+        "evidence_summary": {
+          "$ref": "#/$defs/evidence_summary"
+        },
+        "validation_summary": {
+          "$ref": "#/$defs/validation_summary"
+        }
+      }
+    }
+  }
+}

@@ -106,3 +106,12 @@ canonicalContractionSignatureToSpinDiracBridgeTheorem =
         ContractionSignatureToSpinDiracBridgeTheoremFromMinimal.normalizedQuadratic
           derived
     }
+
+spinDiracBridgeBoundary :
+  (bridge : ContractionSignatureToSpinDiracBridgeTheorem) →
+  CFQS.SignatureCliffordGaugeBoundary
+    (CQSB.ContractionQuadraticToSignatureBridgeTheorem.strengthenedContraction
+      (ContractionSignatureToSpinDiracBridgeTheorem.contractionSignatureBridge bridge))
+spinDiracBridgeBoundary bridge =
+  CQSB.signatureBridgeBoundary
+    (ContractionSignatureToSpinDiracBridgeTheorem.contractionSignatureBridge bridge)

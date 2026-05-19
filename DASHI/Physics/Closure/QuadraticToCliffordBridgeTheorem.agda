@@ -14,7 +14,7 @@ module DASHI.Physics.Closure.QuadraticToCliffordBridgeTheorem where
 
 open import Agda.Primitive using (Setω; lzero)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Unit using (⊤; tt)
 
 open import DASHI.Geometry.ProjectionDefect as PD
@@ -107,7 +107,20 @@ record UniversalFactorization
       (T : TargetAlgebra c R B) →
       (h : RelationRespectingMap c R B T) →
       (f g : CG.CliffordAlgebra.Carrier Cl → TargetAlgebra.CarrierT T) →
-      Set
+      (fOnGenerators :
+        ∀ v →
+          f (CG.CliffordAlgebra.embed Cl v)
+          ≡
+          RelationRespectingMap.onGenerators h v) →
+      (gOnGenerators :
+        ∀ v →
+          g (CG.CliffordAlgebra.embed Cl v)
+          ≡
+          RelationRespectingMap.onGenerators h v) →
+      ∀ v →
+        f (CG.CliffordAlgebra.embed Cl v)
+        ≡
+        g (CG.CliffordAlgebra.embed Cl v)
 
 record CliffordPresentation
   (c : CFQS.ContractionForcesQuadraticStrong) : Setω where
@@ -208,7 +221,8 @@ canonicalQuadraticToClifford =
                       ; factorOnGenerators = λ v →
                           sym (RelationRespectingMap.generatorsCollapse h v)
                       }
-                ; factorUniqueSeam = λ _ _ _ _ → ⊤
+                ; factorUniqueSeam = λ _ _ f g fOnGenerators gOnGenerators v →
+                    trans (fOnGenerators v) (sym (gOnGenerators v))
                 }
           }
     }
@@ -226,3 +240,11 @@ canonicalQuadraticToCliffordBridgeTheorem =
     ; quadraticToClifford = q2cl
     ; canonicalPresentation = Quadratic⇒Clifford.build q2cl c
     }
+
+cliffordBridgeBoundary :
+  (bridge : QuadraticToCliffordBridgeTheorem) →
+  CFQS.SignatureCliffordGaugeBoundary
+    (QuadraticToCliffordBridgeTheorem.strengthenedContraction bridge)
+cliffordBridgeBoundary bridge =
+  CFQS.signatureCliffordGaugeBoundary
+    (QuadraticToCliffordBridgeTheorem.strengthenedContraction bridge)

@@ -16,6 +16,11 @@ def _load_template_fragments(template_dir):
     """Load file-name -> fractran payload map from existing shard files."""
     import cbor2
 
+    # Temporary bridge for generator/schema mismatch:
+    # shipped shards currently carry `fractran`, while legacy generation
+    # in this script emits only counters. When template_dir is provided, we
+    # copy that existing `fractran` payload by file name so downstream tooling
+    # can regenerate without changing canonical shard semantics.
     template_payloads = {}
     if not template_dir:
         return template_payloads
@@ -30,6 +35,8 @@ def _load_template_fragments(template_dir):
             if "fractran" in payload and file_name:
                 template_payloads[str(file_name)] = payload["fractran"]
         except (FileNotFoundError, cbor2.CBORDecodeError, TypeError, AttributeError):
+            # Ignore malformed/unreadable shards during template hydration so
+            # bulk regeneration can continue in best-effort mode.
             continue
     return template_payloads
 
@@ -64,6 +71,8 @@ def da51_shard(agda_file, counters, src_hash, fractran=None):
     """Build a DA51 CBOR shard payload."""
     import cbor2
 
+    # The shipped contract is larger than this emitter for now; `fractran`
+    # is intentionally optional and opt-in via the compatibility flag.
     payload = {
         "file": os.path.basename(agda_file),
         "sha256": src_hash,
@@ -119,6 +128,7 @@ def main():
         try:
             counters = perf_stat(f)
             src_hash = sha256_file(f)
+            # Match by file name for deterministic payload overlay.
             fractran = template_fragments.get(name)
             if args.strict_template and args.fractran_template and fractran is None:
                 raise RuntimeError(f"missing fractran template entry for {name}")

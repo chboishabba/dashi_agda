@@ -100,3 +100,14 @@ Mode: `get-shit-done` planning pass
 - `PhysicsClosureFull` is assembled primarily from theorem chain outputs.
 - Constraint closure is derived/transported from canonical geometry package.
 - Canonical path has no essential postulates left.
+
+## Closure Status
+
+This checklist is complete and now serves as historical acceptance and
+provenance for the canonical closure-spine hardening pass. It is not the active
+blocker queue.
+
+Active blockers live in the `TODO.md` Active Blocker Board and in
+`Docs/WorkerCoordinationBoard.md`. Future workers should reopen checklist items
+only when an active blocker explicitly names one of these modules as its bounded
+file surface.
