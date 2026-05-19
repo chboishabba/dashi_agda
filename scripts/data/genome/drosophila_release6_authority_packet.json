@@ -1,0 +1,139 @@
+{
+  "artifacts": {
+    "cds_from_genomic_fasta_gz": {
+      "acgt_bases": 61229245,
+      "ambiguous_or_gap_bases": 0,
+      "path": "scripts/data/genome/GCF_000001215.4_Release_6_plus_ISO1_MT_cds_from_genomic.fna.gz",
+      "sequence_count": 30802,
+      "sha256": "3f379cec1d952f9a1c22e2b6dd9ff8eefce6da97ffb198cde93dc0a17c40da01",
+      "total_bases": 61229245
+    },
+    "genomic_fasta_gz": {
+      "acgt_bases": 142573024,
+      "ambiguous_or_gap_bases": 1152978,
+      "path": "scripts/data/genome/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna.gz",
+      "sequence_count": 1870,
+      "sha256": "e69e907b5e87ce756236dcef93e82001cfd08f1a0ed5f22e36cbbd3a87ebc57d",
+      "total_bases": 143726002
+    }
+  },
+  "authority_metadata": {
+    "assembly_accession": "GCF_000001215.4",
+    "assembly_name": "Release 6 plus ISO1 MT",
+    "ncbi_datasets_url": "https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001215.4/",
+    "ncbi_ftp_dir": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/215/GCF_000001215.4_Release_6_plus_ISO1_MT/",
+    "organism": "Drosophila melanogaster",
+    "rejected_prior_doi": "10.1126/science.1237175",
+    "rejected_prior_doi_reason": "not the Drosophila Release 6 reference sequence paper",
+    "release6_reference_doi": "10.1101/gr.185579.114",
+    "release6_reference_pubmed": "25589440",
+    "taxid": 7227
+  },
+  "authority_metadata_sha256": "8e68338ea742454d7854721773f7d302b060ad53ffb79fae7b3f70996f02b902",
+  "claim_boundary": [
+    "This packet binds Drosophila Release 6 authority metadata and local FASTA checksums.",
+    "The CDS codon frequency witness is non-uniform, but it is not a W4 calibration law.",
+    "This packet does not construct Candidate256PhysicalCalibrationAuthorityToken.",
+    "This packet does not inhabit Candidate256PhysicalCalibrationExternalReceipt.",
+    "This packet does not promote W4, Brain, physics, biology recovery, or unification."
+  ],
+  "codon_frequency_witness": {
+    "bottom10_codons": [
+      {
+        "codon": "TGA",
+        "count": 8978
+      },
+      {
+        "codon": "TAG",
+        "count": 10872
+      },
+      {
+        "codon": "TAA",
+        "count": 12922
+      },
+      {
+        "codon": "TTA",
+        "count": 93721
+      },
+      {
+        "codon": "GGG",
+        "count": 94117
+      },
+      {
+        "codon": "AGA",
+        "count": 104858
+      },
+      {
+        "codon": "TGT",
+        "count": 118551
+      },
+      {
+        "codon": "AGG",
+        "count": 124367
+      },
+      {
+        "codon": "GTA",
+        "count": 133107
+      },
+      {
+        "codon": "TCT",
+        "count": 149448
+      }
+    ],
+    "cds_sequence_count": 30802,
+    "chi_square_vs_uniform_64": 6954583.252121048,
+    "distinct_acgt_codons": 64,
+    "max_codon": "GAG",
+    "max_codon_count": 867771,
+    "max_min_count_ratio": 96.65526843394966,
+    "min_nonzero_codon": "TGA",
+    "min_nonzero_codon_count": 8978,
+    "nonuniform_witness": true,
+    "skipped_ambiguous_codons": 0,
+    "skipped_partial_bases": 85,
+    "top10_codons": [
+      {
+        "codon": "GAG",
+        "count": 867771
+      },
+      {
+        "codon": "AAG",
+        "count": 781524
+      },
+      {
+        "codon": "CAG",
+        "count": 765466
+      },
+      {
+        "codon": "CTG",
+        "count": 750284
+      },
+      {
+        "codon": "GCC",
+        "count": 673206
+      },
+      {
+        "codon": "GAT",
+        "count": 568047
+      },
+      {
+        "codon": "GTG",
+        "count": 550820
+      },
+      {
+        "codon": "GGC",
+        "count": 540750
+      },
+      {
+        "codon": "AAC",
+        "count": 528342
+      },
+      {
+        "codon": "GAC",
+        "count": 486795
+      }
+    ],
+    "total_acgt_codons": 20409720
+  },
+  "status": "candidate_authority_and_checksum_bound_selection_non_promoting"
+}

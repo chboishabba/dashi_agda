@@ -1,0 +1,275 @@
+{
+  "G_N_candidate_schema": {
+    "acceptance_rule": "abs((G_N_candidate / G_N) - 1) <= acceptance_relative_tolerance",
+    "computed": false,
+    "fail_closed_policy": "no G_N candidate or acceptance claim is computed unless all required inputs are resolved",
+    "formula": "G_N_candidate = G00 / (8 * pi * T00)",
+    "ratio_formula_at_k_eq_1": "G_N_candidate / G_N",
+    "result": null
+  },
+  "artifact": "schwarzschild_limit_candidate_diagnostic",
+  "candidate_checks": {
+    "G_N_ratio_at_k_eq_1": null,
+    "weak_field_factor_formula": null
+  },
+  "constants_recorded": {
+    "speed_of_light_m_per_s": 299792458.0,
+    "speed_of_light_status": "exact_SI_definition"
+  },
+  "formal_agda_surface_observation": {
+    "boundary": "request-only; no non-flat metric, W4 mass source, weak-field Newtonian limit, or Schwarzschild metric match is constructed in the Agda surface",
+    "exact_missing_primitives": [
+      "missingRadialValuation",
+      "missingSphericalSymmetryPredicate",
+      "missingW4MassSource",
+      "missingBirkhoffCarrierProof",
+      "missingWeakFieldNewtonianPotential",
+      "missingSchwarzschildMetricMatch"
+    ],
+    "first_missing": "missingRadialValuation",
+    "missing_surface_fields": [
+      "radialValuation : Carrier -> CarrierScalar",
+      "sphericalSymmetryPredicate : Carrier -> Set",
+      "w4MassSource : Carrier -> CarrierScalar",
+      "birkhoffCarrierProof : (x : Carrier) -> sphericalSymmetryPredicate x -> Set",
+      "weakFieldNewtonianPotential : Carrier -> CarrierScalar",
+      "metricMatch : (x : Carrier) -> (symmetry : sphericalSymmetryPredicate x) -> birkhoffCarrierProof x symmetry -> Set"
+    ],
+    "path": "DASHI/Physics/Closure/SchwarzschildLimitCandidate.agda",
+    "present": true,
+    "status": "request_surface_only_no_numeric_inputs"
+  },
+  "input_resolution": {
+    "input_files": [
+      {
+        "json_object_loaded": false,
+        "path": "/home/c/Documents/code/dashi_agda/scripts/data/schwarzschild_limit_candidate_inputs.json",
+        "present": false
+      },
+      {
+        "json_object_loaded": false,
+        "path": "/home/c/Documents/code/dashi_agda/scripts/data/physics_constants.json",
+        "present": false
+      },
+      {
+        "json_object_loaded": true,
+        "path": "/home/c/Documents/code/dashi_agda/scripts/data/authority_packet.example.json",
+        "present": true
+      }
+    ],
+    "resolved_keys": {
+      "acceptance_relative_tolerance": {
+        "key": null,
+        "source": null
+      },
+      "candidate_G_N_ratio_at_k_eq_1": {
+        "key": null,
+        "source": null
+      },
+      "candidate_weak_field_factor_formula": {
+        "key": null,
+        "source": null
+      },
+      "einstein_tensor_G00_at_k_eq_1_SI": {
+        "key": null,
+        "source": null
+      },
+      "gravitational_constant_G_N_m3_kg_minus1_s_minus2": {
+        "key": null,
+        "source": null
+      },
+      "radial_probe_r_m": {
+        "key": null,
+        "source": null
+      },
+      "source_mass_M_kg": {
+        "key": null,
+        "source": null
+      },
+      "source_radius_R_m": {
+        "key": null,
+        "source": null
+      },
+      "stress_energy_T00_at_k_eq_1_SI": {
+        "key": null,
+        "source": null
+      },
+      "units": {
+        "key": null,
+        "source": null
+      }
+    }
+  },
+  "input_schema": {
+    "acceptance_relative_tolerance": {
+      "description": "Maximum accepted absolute relative difference between G_N_candidate / G_N and 1.",
+      "required": true,
+      "unit": "dimensionless"
+    },
+    "einstein_tensor_G00_at_k_eq_1_SI": {
+      "description": "G00 component evaluated at k=1 in the same convention as 8*pi*G_N*T00.",
+      "required": true,
+      "unit": "s^-2 or convention-equivalent SI curvature density"
+    },
+    "gravitational_constant_G_N_m3_kg_minus1_s_minus2": {
+      "description": "Reference Newton gravitational constant used for the k=1 ratio check.",
+      "required": true,
+      "unit": "m^3 kg^-1 s^-2"
+    },
+    "source_mass_M_kg": {
+      "description": "Mass source used for the Schwarzschild sanity check.",
+      "required": true,
+      "unit": "kg"
+    },
+    "source_radius_R_m": {
+      "description": "Source radius used as the Schwarzschild radial scale.",
+      "required": true,
+      "unit": "m"
+    },
+    "stress_energy_T00_at_k_eq_1_SI": {
+      "description": "T00 component evaluated at k=1; must be finite and nonzero.",
+      "required": true,
+      "unit": "kg m^-1 s^-2 or convention-equivalent SI energy density"
+    },
+    "units": {
+      "accepted_value": "SI",
+      "description": "Explicit unit convention for G00, T00, G_N, source mass, and source radius.",
+      "required": true
+    }
+  },
+  "interpretation": [
+    "This artifact is a deterministic scaffold for the Schwarzschild limit candidate.",
+    "It does not invent missing physical calibration data or a repo-local candidate formula.",
+    "A fail-closed status means numeric Schwarzschild or k=1 G_N-ratio claims are intentionally not made."
+  ],
+  "missing_inputs": {
+    "candidate": [
+      "einstein_tensor_G00_at_k_eq_1_SI",
+      "stress_energy_T00_at_k_eq_1_SI",
+      "acceptance_relative_tolerance",
+      "units"
+    ],
+    "numeric": [
+      "gravitational_constant_G_N_m3_kg_minus1_s_minus2",
+      "source_mass_M_kg",
+      "source_radius_R_m"
+    ]
+  },
+  "numeric_sanity": {
+    "compactness_r_s_over_r": null,
+    "computed": false,
+    "radial_probe_outside_schwarzschild_radius": null,
+    "schwarzschild_radius_m": null,
+    "standard_weak_field_factor_1_minus_r_s_over_r": null
+  },
+  "promotion_status": "diagnostic_only_no_proof_no_gate_promotion",
+  "repo_root": "/home/c/Documents/code/dashi_agda",
+  "repo_signal_scan": {
+    "files_scanned": 1421,
+    "files_skipped": 1096,
+    "matches": {
+      "G_N": [
+        {
+          "excerpt": "-- This module records the narrow local fact needed by the Newton lane:",
+          "line": 25,
+          "path": "DASHI/Arithmetic/UniformConvergenceRateSurface.agda"
+        },
+        {
+          "excerpt": "\u2237 \"No weak-field Newtonian limit or metric match theorem is constructed here\"",
+          "line": 179,
+          "path": "DASHI/Physics/Closure/SchwarzschildLimitCandidate.agda"
+        },
+        {
+          "excerpt": "-- Newton W2 full-closure audit.",
+          "line": 13,
+          "path": "DASHI/Physics/Closure/W2PromotionAuthorityReceipt.agda"
+        },
+        {
+          "excerpt": "- It is not a proved cone theorem for Newtonian three-body dynamics.",
+          "line": 1416,
+          "path": "README.md"
+        },
+        {
+          "excerpt": "`Curie-W3` owns the W3 authority-token packet audit, `Newton` owns the W2",
+          "line": 781,
+          "path": "TODO.md"
+        },
+        {
+          "excerpt": "r_s = 2 G_N M / c^2",
+          "line": 6,
+          "path": "scripts/run_schwarzschild_limit_candidate_diagnostic.py"
+        }
+      ],
+      "Schwarzschild": [
+        {
+          "excerpt": "-- This module is a routing index only.  Schwarzschild and continuum surfaces",
+          "line": 17,
+          "path": "DASHI/Physics/Closure/DiscreteEinsteinTensorNextThreadIndex.agda"
+        },
+        {
+          "excerpt": "-- Schwarzschild-limit candidate surface.",
+          "line": 12,
+          "path": "DASHI/Physics/Closure/SchwarzschildLimitCandidate.agda"
+        },
+        {
+          "excerpt": "\"\"\"Fail-closed Schwarzschild limit candidate diagnostic.",
+          "line": 2,
+          "path": "scripts/run_schwarzschild_limit_candidate_diagnostic.py"
+        }
+      ],
+      "k_eq_1": [
+        {
+          "excerpt": "{ K = 1",
+          "line": 43,
+          "path": "DASHI/Algebra/Quantum/UVFinitenessHolographyInstance.agda"
+        },
+        {
+          "excerpt": "cluster_ids = kmeans([trace], k=1)",
+          "line": 241,
+          "path": "scripts/hme_pipeline.py"
+        },
+        {
+          "excerpt": "\"k_eq_1\": re.compile(r\"\\bk\\s*=\\s*1\\b|\\bk_eq_1\\b|\\bk=1\\b\", re.IGNORECASE),",
+          "line": 50,
+          "path": "scripts/run_schwarzschild_limit_candidate_diagnostic.py"
+        }
+      ],
+      "weak_field": [
+        {
+          "excerpt": "\u2237 \"No weak-field Newtonian limit or metric match theorem is constructed here\"",
+          "line": 179,
+          "path": "DASHI/Physics/Closure/SchwarzschildLimitCandidate.agda"
+        },
+        {
+          "excerpt": "\"weak_field\": re.compile(r\"weak[-_ ]field|weak field\", re.IGNORECASE),",
+          "line": 49,
+          "path": "scripts/run_schwarzschild_limit_candidate_diagnostic.py"
+        }
+      ]
+    },
+    "scope": "bounded text scan of README/TODO/status/devlog/DASHI/scripts excluding scripts/data and pdf caches"
+  },
+  "required_inputs": {
+    "candidate": [
+      "einstein_tensor_G00_at_k_eq_1_SI",
+      "stress_energy_T00_at_k_eq_1_SI",
+      "acceptance_relative_tolerance",
+      "units"
+    ],
+    "numeric": [
+      "gravitational_constant_G_N_m3_kg_minus1_s_minus2",
+      "source_mass_M_kg",
+      "source_radius_R_m"
+    ]
+  },
+  "status": "fail_closed_missing_inputs",
+  "symbolic_sanity": {
+    "G_N_candidate_formula": "G_N_candidate = G00 / (8 * pi * T00)",
+    "G_N_ratio_formula_at_k_eq_1": "G_N_candidate_over_reference_G_N = G_N_candidate / G_N",
+    "candidate_formula_policy": "candidate G_N ratio is computed only from explicit G00, T00, G_N, acceptance, and units input keys",
+    "compactness_formula": "epsilon = r_s / R",
+    "numeric_evaluation_policy": "only evaluated when G_N, M, and R are present as positive finite inputs",
+    "schwarzschild_radius_formula": "r_s = 2 * G_N * M / c^2",
+    "standard_schwarzschild_g_tt_weak_field_factor": "1 - r_s / r = 1 - 2 * G_N * M / (c^2 * r)"
+  }
+}

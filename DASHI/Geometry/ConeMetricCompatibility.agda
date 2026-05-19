@@ -17,12 +17,13 @@ open Cone public
 record Quadratic (A : AdditiveSpace) : Set₁ where
   open AdditiveSpace A
   field
-    Q : AdditiveSpace.V A → Nat
+    Scalar : Set
+    Q : AdditiveSpace.V A → Scalar
 open Quadratic public
 
 record ConeMetricCompat (A : AdditiveSpace) (C : Cone A) (QF : Quadratic A) : Set₁ where
   open AdditiveSpace A
-  open Cone C
   open Quadratic QF
   field
-    compat : Set
+    compat : AdditiveSpace.V A → Set
+    cone⇒compat : ∀ x → Cone.InCone C x → compat x

@@ -1,0 +1,7 @@
+DASHI/CurrentBlockageBreakBundle.agda
+DASHI/Physics/Closure/CanonicalToNoncanonicalMdlBranchResolved.agda
+DASHI/Physics/Closure/ChemistryRightLimitsBlockageBroken.agda
+Ontology/Brain/BrainSideLocalTheoremLane.agda
+Ontology/BrainDNA/BrainDNACrossoverBridgePressureResolved.agda
+Ontology/DNA/DNAFirstLocalProgramBundle.agda
+README.md

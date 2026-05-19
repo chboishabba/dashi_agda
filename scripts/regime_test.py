@@ -319,6 +319,15 @@ def classify_step(structural_ok: bool, arrow_ok: bool) -> str:
     return "outside"
 
 
+def execution_non_arrow_ok(record: Mapping[str, object]) -> bool:
+    return (
+        bool(record.get("in_cone"))
+        and bool(record.get("fejer_ok"))
+        and bool(record.get("basin_ok"))
+        and bool(record.get("eigen_ok"))
+    )
+
+
 def normalize_counter(counter: Counter[str]) -> Dict[str, float]:
     total = sum(counter.values())
     if total == 0:
@@ -1255,8 +1264,13 @@ def build_family_drilldown(
                 "energy_delta": float(record["energy_delta"]),
                 "delta_norm": float(record["delta_norm"]),
                 "structural_ok": bool(record["structural_ok"]),
+                "cone_ok": bool(record.get("cone_ok", record["in_cone"])),
+                "mdl_ok": bool(record.get("mdl_ok", record["fejer_ok"])),
                 "arrow_ok": bool(record["arrow_ok"]),
+                "execution_non_arrow_ok": bool(record.get("execution_non_arrow_ok", False)),
                 "joint_ok": bool(record["joint_ok"]),
+                "legacy_joint_ok": bool(record.get("legacy_joint_ok", False)),
+                "legacy_status_class": str(record.get("legacy_status_class", record["status_class"])),
                 "trace_eigenspace": record["trace_eigenspace"],
                 "source_projection_eigenspace": record["source_projection_eigenspace"],
                 "source_projection_prime": record["source_projection_prime"],
@@ -1316,7 +1330,7 @@ def build_family_classification_records(
             if first_boundary_index is not None
             else None
         )
-        cone_ok = all(bool(record.get("structural_ok")) for record in subset)
+        cone_ok = all(bool(record.get("cone_ok", record.get("in_cone"))) for record in subset)
         closest_ok = all_report_rows_satisfy(
             report_summary,
             "closestpoint",
@@ -1552,7 +1566,7 @@ def emit_agda_witness(
         ]
     )
     for index, record in enumerate(sorted_records):
-        lines.append(f"coneOKFn {fin_pattern(index)} = {bool_set_constructor(bool(record['structural_ok']))}")
+        lines.append(f"coneOKFn {fin_pattern(index)} = {bool_set_constructor(bool(record.get('cone_ok', record['in_cone'])))}")
     lines.extend(
         [
             "",
@@ -1568,7 +1582,7 @@ def emit_agda_witness(
         ]
     )
     for index, record in enumerate(sorted_records):
-        lines.append(f"mdlOKFn {fin_pattern(index)} = {bool_set_constructor(bool(record['fejer_ok']))}")
+        lines.append(f"mdlOKFn {fin_pattern(index)} = {bool_set_constructor(bool(record.get('mdl_ok', record['fejer_ok'])))}")
     lines.extend(
         [
             "",
@@ -1988,10 +2002,12 @@ def cone_mode(args: argparse.Namespace) -> int:
         record["arrow_ok"] = arrow_condition(
             float(record["arrow_delta"]), args.arrow_direction, args.arrow_eps
         )
-        record["joint_ok"] = bool(record["structural_ok"] and record["arrow_ok"])
-        record["status_class"] = classify_step(
+        record["legacy_joint_ok"] = bool(record["structural_ok"] and record["arrow_ok"])
+        record["legacy_status_class"] = classify_step(
             bool(record["structural_ok"]), bool(record["arrow_ok"])
         )
+        record["joint_ok"] = record["legacy_joint_ok"]
+        record["status_class"] = record["legacy_status_class"]
         record["nearest_signature"] = min(
             admissible_signatures,
             key=lambda candidate: hamming_distance(signature, candidate),
@@ -2144,6 +2160,8 @@ def cone_mode(args: argparse.Namespace) -> int:
             hybrid_labels[name] = hybrid_label
 
         for record in subset:
+            record["cone_ok"] = bool(record["in_cone"])
+            record["mdl_ok"] = bool(record["fejer_ok"])
             record["legacy_trace_eigenspace"] = legacy_trace_label
             record["legacy_trace_eigen_score"] = legacy_trace_score
             record["trace_eigenspace"] = trace_label
@@ -2188,6 +2206,12 @@ def cone_mode(args: argparse.Namespace) -> int:
             record["selected_eigenspace"] = selected_label
             record["selected_eigen_score"] = selected_score
             record["eigen_ok"] = selected_score >= args.eigen_threshold
+            record["execution_non_arrow_ok"] = execution_non_arrow_ok(record)
+            record["joint_ok"] = bool(record["execution_non_arrow_ok"] and record["arrow_ok"])
+            record["status_class"] = classify_step(
+                bool(record["execution_non_arrow_ok"]),
+                bool(record["arrow_ok"]),
+            )
 
         trace_summaries.append(
             {
@@ -2780,8 +2804,13 @@ def cone_mode(args: argparse.Namespace) -> int:
                 "delta_norm": float(record["delta_norm"]),
                 "cone_failures": list(record["cone_failures"]),
                 "structural_ok": bool(record["structural_ok"]),
+                "cone_ok": bool(record.get("cone_ok", record["in_cone"])),
+                "mdl_ok": bool(record.get("mdl_ok", record["fejer_ok"])),
                 "arrow_ok": bool(record["arrow_ok"]),
+                "execution_non_arrow_ok": bool(record.get("execution_non_arrow_ok", False)),
                 "joint_ok": bool(record["joint_ok"]),
+                "legacy_joint_ok": bool(record.get("legacy_joint_ok", False)),
+                "legacy_status_class": str(record.get("legacy_status_class", record["status_class"])),
                 "fejer_ok": bool(record["fejer_ok"]),
                 "legacy_trace_eigenspace": record["legacy_trace_eigenspace"],
                 "legacy_trace_eigen_score": float(record["legacy_trace_eigen_score"]),

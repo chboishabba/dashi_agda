@@ -1,0 +1,44 @@
+{
+  "status": "insufficient",
+  "provider_name": "missing external provider answer",
+  "provider_role": "insufficient",
+  "pdf_set_version": "missing",
+  "lhapdf_id": "missing",
+  "member_id": "missing",
+  "grid_checksum": "missing",
+  "scale_convention": "missing",
+  "rapidity_window": "missing",
+  "mass_bin_rule": "missing",
+  "flavour_weight_rule": "missing",
+  "integration_method": "missing",
+  "luminosity_values": "missing",
+  "efficiency_acceptance_model": "missing",
+  "systematic_budget": "missing",
+  "cms_smp_publication_pointer": "missing",
+  "normalization_preservation_law": "missing",
+  "conversion_law": "missing",
+  "source_citation": "missing",
+  "attestation_no_manual_overfit": "No accepted convention or luminosity value is supplied by this example packet.",
+  "missing_fields": [
+    "external accepted provider answer",
+    "provider-authoritative convention",
+    "provider luminosities",
+    "efficiency/acceptance model",
+    "systematic budget",
+    "CMS-SMP publication pointer",
+    "normalization preservation law",
+    "conversion law"
+  ],
+  "insufficient_reason": "This is a syntactically valid, fail-closed example of the authority packet field shape. It is not an accepted authority packet and must not be used to promote W4 or W5.",
+  "luminosities": {
+    "L43": null,
+    "L45": null,
+    "W4_per_bin_luminosities": []
+  },
+  "governance": {
+    "no_promotion": true,
+    "no_token_fabrication": true,
+    "no_manual_overfit": true,
+    "adapter_note": "scripts/dy_luminosity_from_authority_packet.py requires status accepted or replacement plus positive finite luminosities; this example intentionally fails closed until an external provider replaces the missing values."
+  }
+}

@@ -1,3 +1,13 @@
 [submodule "monster"]
 	path = monster
 	url = https://github.com/meta-introspector/monster.git
+	ignore = untracked
+[submodule "DCHoTT-Agda"]
+	path = DCHoTT-Agda
+	url = https://github.com/felixwellen/DCHoTT-Agda.git
+[submodule "Monster-LILA"]
+	path = Monster-LILA
+	url = https://github.com/meta-introspector/Monster-LILA.git
+[submodule "cubical"]
+	path = cubical
+	url = https://github.com/agda/cubical.git

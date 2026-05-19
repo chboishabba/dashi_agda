@@ -1,0 +1,300 @@
+{
+  "artifactSchema": "dashi-w3-t43-frozen-projection-comparison-v1",
+  "blockingFacts": [],
+  "comparison": {
+    "candidateOnly": true,
+    "chi2": 38.81734411729611,
+    "chi2PerDof": 2.1565191176275618,
+    "dof": 18,
+    "meanPredData": 0.9941233096866525,
+    "method": "residual^T covariance^-1 residual using frozen R_dashi - R_data and ins2079374/t44 Total uncertainty covariance",
+    "status": "candidate-pass-no-authority-token",
+    "threshold": 4.0,
+    "thresholdSource": "DASHI/Physics/Closure/HEPDataW3ComparisonLawReceipt.agda canonical acceptanceThreshold"
+  },
+  "generatedUtc": "2026-05-12T15:08:06Z",
+  "inputs": {
+    "covarianceSection": "Total uncertainty",
+    "covarianceSymmetric": true,
+    "nBins": 18,
+    "t43": {
+      "expectedSha256": "0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b",
+      "path": "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv",
+      "sha256": "0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b",
+      "status": "ok"
+    },
+    "t44": {
+      "expectedSha256": "3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b",
+      "path": "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_over_mass_76-106_t44.csv",
+      "sha256": "3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b",
+      "status": "ok"
+    }
+  },
+  "nonCollapseWitness": {
+    "externalNonCollapseWitnessReceiptConstructed": false,
+    "providerGradePayloadPresent": false,
+    "selectedBy": "maximum absolute pull over frozen projection bins using covariance diagonal sigma",
+    "status": "runner-per-bin-candidate-witness",
+    "witness": {
+      "absPull": 2.280159308132989,
+      "binIndex": 12,
+      "covarianceSigma": 0.00048197510309143566,
+      "data": 0.049758,
+      "phiStar": 0.10250000000000001,
+      "phiStarHigh": 0.114,
+      "phiStarLow": 0.091,
+      "prediction": 0.0486590199823977,
+      "pull": -2.280159308132989,
+      "residual": -0.001098980017602294
+    },
+    "witnessPredDataDistinct": true,
+    "witnessPullNonZero": true
+  },
+  "perBin": [
+    {
+      "absPull": 0.39992854428159663,
+      "binIndex": 0,
+      "covarianceSigma": 0.0005587038571551122,
+      "data": 0.036689,
+      "phiStar": 0.002,
+      "phiStarHigh": 0.004,
+      "phiStarLow": 0.0,
+      "prediction": 0.03646555837972344,
+      "pull": -0.39992854428159663,
+      "residual": -0.00022344162027655712
+    },
+    {
+      "absPull": 1.4449947432466537,
+      "binIndex": 1,
+      "covarianceSigma": 0.0005183145762951299,
+      "data": 0.036572,
+      "phiStar": 0.006,
+      "phiStarHigh": 0.008,
+      "phiStarLow": 0.004,
+      "prediction": 0.03582303816190542,
+      "pull": -1.4449947432466537,
+      "residual": -0.0007489618380945792
+    },
+    {
+      "absPull": 1.0366696342902721,
+      "binIndex": 2,
+      "covarianceSigma": 0.0005259847906546348,
+      "data": 0.036933,
+      "phiStar": 0.01,
+      "phiStarHigh": 0.012,
+      "phiStarLow": 0.008,
+      "prediction": 0.036387727539429815,
+      "pull": -1.0366696342902721,
+      "residual": -0.0005452724605701856
+    },
+    {
+      "absPull": 0.43380172716309456,
+      "binIndex": 3,
+      "covarianceSigma": 0.0005104899607240087,
+      "data": 0.037257,
+      "phiStar": 0.014,
+      "phiStarHigh": 0.016,
+      "phiStarLow": 0.012,
+      "prediction": 0.037478451426661494,
+      "pull": 0.43380172716309456,
+      "residual": 0.0002214514266614953
+    },
+    {
+      "absPull": 0.27928531536795514,
+      "binIndex": 4,
+      "covarianceSigma": 0.0005258897222802514,
+      "data": 0.037852,
+      "phiStar": 0.018000000000000002,
+      "phiStarHigh": 0.02,
+      "phiStarLow": 0.016,
+      "prediction": 0.0379988732769358,
+      "pull": 0.27928531536795514,
+      "residual": 0.00014687327693580637
+    },
+    {
+      "absPull": 1.474327736793172,
+      "binIndex": 5,
+      "covarianceSigma": 0.0005604819354805291,
+      "data": 0.039362,
+      "phiStar": 0.022,
+      "phiStarHigh": 0.024,
+      "phiStarLow": 0.02,
+      "prediction": 0.038535665936549536,
+      "pull": -1.474327736793172,
+      "residual": -0.0008263340634504651
+    },
+    {
+      "absPull": 0.19041604070785784,
+      "binIndex": 6,
+      "covarianceSigma": 0.00050468802244555,
+      "data": 0.039333,
+      "phiStar": 0.026500000000000003,
+      "phiStarHigh": 0.029,
+      "phiStarLow": 0.024,
+      "prediction": 0.03923689930497324,
+      "pull": -0.19041604070785784,
+      "residual": -9.610069502676011e-05
+    },
+    {
+      "absPull": 0.8842206943152068,
+      "binIndex": 7,
+      "covarianceSigma": 0.0005264693723285335,
+      "data": 0.039874,
+      "phiStar": 0.0315,
+      "phiStarHigh": 0.034,
+      "phiStarLow": 0.029,
+      "prediction": 0.04033951511393603,
+      "pull": 0.8842206943152068,
+      "residual": 0.00046551511393602696
+    },
+    {
+      "absPull": 0.11334589983013962,
+      "binIndex": 8,
+      "covarianceSigma": 0.00043294341431646696,
+      "data": 0.041293,
+      "phiStar": 0.0395,
+      "phiStarHigh": 0.045,
+      "phiStarLow": 0.034,
+      "prediction": 0.041342072360871236,
+      "pull": 0.11334589983013962,
+      "residual": 4.90723608712329e-05
+    },
+    {
+      "absPull": 1.3740163890649442,
+      "binIndex": 9,
+      "covarianceSigma": 0.000458028383399981,
+      "data": 0.04373,
+      "phiStar": 0.051000000000000004,
+      "phiStarHigh": 0.057,
+      "phiStarLow": 0.045,
+      "prediction": 0.0431006614945515,
+      "pull": -1.3740163890649442,
+      "residual": -0.0006293385054484957
+    },
+    {
+      "absPull": 0.6439582097618206,
+      "binIndex": 10,
+      "covarianceSigma": 0.00046151923036857304,
+      "data": 0.045168,
+      "phiStar": 0.0645,
+      "phiStarHigh": 0.072,
+      "phiStarLow": 0.057,
+      "prediction": 0.0448708009026412,
+      "pull": -0.6439582097618206,
+      "residual": -0.00029719909735879957
+    },
+    {
+      "absPull": 0.7154114125107243,
+      "binIndex": 11,
+      "covarianceSigma": 0.0004571214280691729,
+      "data": 0.047075,
+      "phiStar": 0.08149999999999999,
+      "phiStarHigh": 0.091,
+      "phiStarLow": 0.072,
+      "prediction": 0.04674797011345611,
+      "pull": -0.7154114125107243,
+      "residual": -0.00032702988654388643
+    },
+    {
+      "absPull": 2.280159308132989,
+      "binIndex": 12,
+      "covarianceSigma": 0.00048197510309143566,
+      "data": 0.049758,
+      "phiStar": 0.10250000000000001,
+      "phiStarHigh": 0.114,
+      "phiStarLow": 0.091,
+      "prediction": 0.0486590199823977,
+      "pull": -2.280159308132989,
+      "residual": -0.001098980017602294
+    },
+    {
+      "absPull": 0.470807474427584,
+      "binIndex": 13,
+      "covarianceSigma": 0.0004498666469077253,
+      "data": 0.052453,
+      "phiStar": 0.1395,
+      "phiStarHigh": 0.165,
+      "phiStarLow": 0.114,
+      "prediction": 0.05224119942014017,
+      "pull": -0.470807474427584,
+      "residual": -0.00021180057985983186
+    },
+    {
+      "absPull": 0.5710896437333349,
+      "binIndex": 14,
+      "covarianceSigma": 0.0004480624956409541,
+      "data": 0.056302,
+      "phiStar": 0.21150000000000002,
+      "phiStarHigh": 0.258,
+      "phiStarLow": 0.165,
+      "prediction": 0.05655788385100586,
+      "pull": 0.5710896437333349,
+      "residual": 0.0002558838510058614
+    },
+    {
+      "absPull": 1.189349143582259,
+      "binIndex": 15,
+      "covarianceSigma": 0.0004540704791108975,
+      "data": 0.060302,
+      "phiStar": 0.391,
+      "phiStarHigh": 0.524,
+      "phiStarLow": 0.258,
+      "prediction": 0.06084204833545653,
+      "pull": 1.189349143582259,
+      "residual": 0.0005400483354565319
+    },
+    {
+      "absPull": 0.13179324794527736,
+      "binIndex": 16,
+      "covarianceSigma": 0.0006295474565114214,
+      "data": 0.066297,
+      "phiStar": 0.8385,
+      "phiStarHigh": 1.153,
+      "phiStarLow": 0.524,
+      "prediction": 0.06637997010402932,
+      "pull": 0.13179324794527736,
+      "residual": 8.297010402932847e-05
+    },
+    {
+      "absPull": 1.6671581844702152,
+      "binIndex": 17,
+      "covarianceSigma": 0.0011421033228215388,
+      "data": 0.078012,
+      "phiStar": 2.215,
+      "phiStarHigh": 3.277,
+      "phiStarLow": 1.153,
+      "prediction": 0.07610793309784744,
+      "pull": -1.6671581844702152,
+      "residual": -0.001904066902152557
+    }
+  ],
+  "promotionBoundary": {
+    "comparisonLawPromotionClaimed": false,
+    "ifThresholdPass": "candidate only; authority token is not fabricated by this artifact",
+    "noW4Promotion": true,
+    "noW5Promotion": true,
+    "noW8Promotion": true,
+    "w3AcceptedAuthorityExternalReceiptConstructed": false,
+    "w3AcceptedEvidenceAuthorityTokenConstructed": false
+  },
+  "runnerLocated": {
+    "cliBoundary": "runner CLI requires a prediction API for fresh projections; this artifact recomputes comparison from the frozen projection bins and t44 covariance",
+    "path": "scripts/run_t43_projection.py",
+    "reusedFunctions": [
+      "parse_t43",
+      "parse_t44",
+      "_solve_linear_system",
+      "_dot"
+    ]
+  },
+  "schemaVersion": "0.1.0",
+  "scope": "non-promoting W3 comparison diagnostic from existing frozen projection artifact",
+  "sourceProjection": {
+    "path": "logs/research/w3_frozen_3205d74_t43_projection_20260513.json",
+    "priorComparisonStatus": "not-computed",
+    "projectionComplete": true,
+    "projectionDigest": "00f6c23f97f9c0275d90e6ffbf6151b07defcc163708e2d93982d9b7d6866035",
+    "sha256": "ffd659e6e2f271d75ec6bf90c5be34cbb9959a8f9d32762c1a2231835fb61eac"
+  },
+  "worker": "Lane3-W3-comparison-from-frozen-projection"
+}

@@ -4,6 +4,7 @@ open import Data.Unit using (⊤; tt)
 open import Data.Product using (Σ; _,_; proj₁)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Bool using (Bool; true; false; if_then_else_)
+open import Data.Nat using (z≤n)
 import Data.Integer as Int
 open Int using (ℤ; _<_; _≤_; _+_; _*_; +_)
 import Data.Integer.Properties as IntP
@@ -46,6 +47,20 @@ toCounts (t ∷ s) = toCounts' t s
 
 zero4 : Vec ℤ (suc (suc (suc (suc 0))))
 zero4 = (+ 0) ∷ (+ 0) ∷ (+ 0) ∷ (+ 0) ∷ []
+
+-- Canonical nonzero shell seed used for cone witnessing in the shift bridge.
+-- This is a shell-1 timelike unit axis point, lifted via vecℤ.
+shell1SeedTrit : Vec Trit m
+shell1SeedTrit = pos ∷ zer ∷ zer ∷ zer ∷ []
+
+shell1SeedIsShell1 : OPCSP.isShell 1 shell1SeedTrit ≡ true
+shell1SeedIsShell1 = refl
+
+shell1ConePoint : Vec ℤ m
+shell1ConePoint = QP.vecℤ shell1SeedTrit
+
+shell1ConeWitness : HFZ.ConeBound (+ 1) (toCounts shell1ConePoint)
+shell1ConeWitness = Int.+≤+ z≤n
 
 coneNontrivialWitness :
   HFZ.ConeBound (+ 1) (toCounts zero4)

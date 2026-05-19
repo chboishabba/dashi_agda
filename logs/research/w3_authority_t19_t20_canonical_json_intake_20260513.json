@@ -1,0 +1,58 @@
+{
+  "artifactSchema": "dashi-w3-authority-t19-t20-canonical-json-intake-v1",
+  "generatedDate": "2026-05-13T04:07:18+10:00",
+  "lane": "W3",
+  "status": "canonical-t19-t20-json-supplied-by-user-and-staged",
+  "promotionStatus": "candidate-only-no-authority-token",
+  "sourceFiles": {
+    "t19": "/home/c/Downloads/hep115656-1316203-1.json",
+    "t20": "/home/c/Downloads/hep115656-1316205-1.json"
+  },
+  "stagedFiles": {
+    "t19": {
+      "path": "logs/research/provider_inputs/hepdata_ins2079374/t19_canonical.json",
+      "sha256": "c3b5d5cba53e6f0a85cac9b8de077073177d170d13d8e1efdf35db085a45adb7",
+      "canonicalJsonSha256": "41050f347cee247891b0e85d6cbd28b634a1c0d0c00c6e3149a4b3f11ead2912",
+      "doi": "10.17182/hepdata.115656.v1/t19",
+      "name": "phistar mass 50-76",
+      "location": "Figure 19 top left",
+      "x_count": 1,
+      "values": 18
+    },
+    "t20": {
+      "path": "logs/research/provider_inputs/hepdata_ins2079374/t20_canonical.json",
+      "sha256": "2caae4b6eff3477ac079851afb1c75aa772e1e7bf493b93a830d365828d2d583",
+      "canonicalJsonSha256": "c83c58b80f8c68f73699e30db0d528349cda978634abd6851e8bf78b48e50960",
+      "doi": "10.17182/hepdata.115656.v1/t20",
+      "name": "Covariance matrices for phistar mass 50-76",
+      "location": "Figure 19 top left",
+      "x_count": 2,
+      "values": 324
+    }
+  },
+  "semanticChecks": {
+    "t19AgainstLocalCsv": {
+      "checkedRows": 18,
+      "mismatches": 0,
+      "checkedFields": "bin center/low/high and measured value"
+    },
+    "t20AgainstLocalCsv": {
+      "checkedRows": 324,
+      "mismatches": 0,
+      "checkedFields": "two-axis bin center/low/high and Total uncertainty value only",
+      "note": "HEPData JSON carries additional decomposed covariance groups; local CSV cache stores total uncertainty column only."
+    }
+  },
+  "authorityDecision": {
+    "w3AcceptedEvidenceAuthorityTokenConstructed": false,
+    "w3AcceptedAuthorityExternalReceiptConstructed": false,
+    "tableChecksumBound": false,
+    "reason": "The supplied canonical JSONs bind t19/t20 absolute-source context only. The active W3 comparison authority still requires t43/t44 canonical-equivalent payload binding and an accepted external authority token."
+  },
+  "futureBlockedLinksForUserBrowser": [
+    "https://www.hepdata.net/download/table/1316250/json",
+    "https://www.hepdata.net/download/table/1316252/json",
+    "https://www.hepdata.net/download/table/1316250/csv",
+    "https://www.hepdata.net/download/table/1316252/csv"
+  ]
+}

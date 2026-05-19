@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "family": "pTll_50_76",
+      "expected": {
+        "canonical_family": "pTll_50_76",
+        "measurement_npz": "pTll_50_76",
+        "metrics": "pTll_50_76",
+        "timeseries": "pTll_50_76",
+        "certification_labels": [
+          "pTll_50_76"
+        ]
+      }
+    },
+    {
+      "family": "ptll_76_106_table",
+      "expected": {
+        "canonical_family": "ptll_76_106_table",
+        "measurement_npz": "ptll_76_106_table",
+        "metrics": "ptll_76_106_table",
+        "timeseries": "ptll_76_106_table",
+        "certification_labels": [
+          "ptll_76_106_table"
+        ]
+      }
+    },
+    {
+      "family": "dijet_chi_13tev_cms_mgt6",
+      "expected": {
+        "canonical_family": "dijet_chi_13tev_cms_mgt6",
+        "measurement_npz": "dijet_chi_13tev_cms_mgt6",
+        "metrics": "dijet_chi_13tev_cms_mgt6",
+        "timeseries": "dijet_chi_13tev_cms_mgt6",
+        "certification_labels": [
+          "dijet_chi_13tev_cms_mgt6"
+        ]
+      }
+    }
+  ],
+  "non_alias_rule": {
+    "left": "pTll_76_106",
+    "right": "ptll_76_106_table"
+  }
+}

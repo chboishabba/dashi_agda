@@ -1,0 +1,81 @@
+{
+  "artifact_schema": "dashi.dy_t43_provider_audit.v1",
+  "contract": {
+    "anti_kt_source_bound_locally": false,
+    "at_least_one_jet_required": true,
+    "covariance_table_doi": "10.17182/hepdata.115656.v1/t44",
+    "event_level_phi_star_required": true,
+    "mass_window_denominator": "76 <= M_ll < 106 GeV",
+    "mass_window_numerator": "50 <= M_ll < 76 GeV",
+    "observable": "DSIG/DPHISTAR / DSIG/DPHISTAR",
+    "ratio_table_doi": "10.17182/hepdata.115656.v1/t43"
+  },
+  "covariance_table": "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_over_mass_76-106_t44.csv",
+  "dyturbo_route": {
+    "bos_phist_implemented": false,
+    "compiled_user_cuts_marker_present": true,
+    "hist_fill_leptons_only": true,
+    "hphistareta_placeholder": true,
+    "interface_cuts_discards_jets": false,
+    "source_exists": true,
+    "source_path": "temp-DOWNLOADED/dyturbo/source/dyturbo-1.4.2",
+    "user_cuts_lepton_only": true,
+    "user_histogram_hook_exists": true,
+    "user_observable_hook_exists": true
+  },
+  "local_tools": {
+    "Herwig": null,
+    "MadGraph": null,
+    "Sherpa": null,
+    "herwig": null,
+    "mg5_aMC": null,
+    "pythia8-config": null,
+    "rivet": null,
+    "rivet-buildplugin": null,
+    "sherpa": null,
+    "yoda": null,
+    "yodamerge": null
+  },
+  "promotion_guard": {
+    "preferred_next_provider": "Rivet CMS_2022_I2079374 on a Z+jet event generator",
+    "qT_xs_route_promoting": false,
+    "requires_exact_jet_selection": true,
+    "requires_native_phi_star": true
+  },
+  "ratio_table": "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv",
+  "rivet_route": {
+    "analysis": "CMS_2022_I2079374",
+    "available": false,
+    "next_check": "rivet --list-analyses | rg CMS_2022_I2079374"
+  },
+  "status": "blocked",
+  "submission_metadata": "scripts/data/hepdata/ins2079374_submission.yaml",
+  "t43_header": [
+    "#: table_doi: 10.17182/hepdata.115656.v1/t43",
+    "#: name: phistar mass 50-76 over mass 76-106",
+    "#: description: The measured differential cross section in the $50 \\le M_{ll} < 76$ GeV mass window, in bins of the $\\varphi^*$ variable, divided by the measured differential cross section in the $76 \\le M_{ll} < 106$ GeV mass window. At least one jet is required. The values are not normalized by the bin width.",
+    "#: data_file: phistar_mass_50-76_over_mass_76-106.yaml",
+    "#: keyword reactions: P P --> GAMMA* --> LEPTON+ LEPTON- | P P --> GAMMA* --> E+ E- | P P --> GAMMA* --> MU+ MU- | P P --> Z --> LEPTON+ LEPTON- | P P --> Z --> E+ E- | P P --> Z --> MU+ MU-",
+    "#: keyword cmenergies: 13000",
+    "#: keyword phrases: Cross Section | Single Differential Cross Section | Drell Yan | Z Production | Di-Muon Production | Transverse Momentum Dependence",
+    "#: keyword observables: DSIG/DPHISTAR / DSIG/DPHISTAR",
+    "$\\varphi^*$,$\\varphi^*$ LOW,$\\varphi^*$ HIGH,Ratio,Data stat. +,Data stat. -,Unfolding stat. +,Unfolding stat. -,Unfolding model +,Unfolding model -,Int. luminosity +,Int. luminosity -,Lepton energy +,Lepton energy -,Efficiency +,Efficiency -,Backgrounds +,Backgrounds -,Jet energy +,Jet energy -,Others +,Others -",
+    "0.002,0.0,0.004,0.036689,0.00020182,-0.00020182,0.00030765,-0.00030765,1.1634e-05,-1.1634e-05,3.1989e-05,-3.1989e-05,0.00026842,-0.00026842,0.00016007,-0.00016007,0.00027918,-0.00027918,5.511e-08,-5.511e-08,1.2413e-06,-1.2413e-06",
+    "0.006,0.004,0.008,0.036572,0.00020475,-0.00020475,0.00032066,-0.00032066,5.3495e-06,-5.3495e-06,1.4194e-05,-1.4194e-05,0.00028408,-0.00028408,0.00016165,-0.00016165,0.00012966,-0.00012966,2.0248e-07,-2.0248e-07,5.2647e-06,-5.2647e-06",
+    "0.01,0.008,0.012,0.036933,0.00020561,-0.00020561,0.00032308,-0.00032308,4.633e-05,-4.633e-05,9.6532e-06,-9.6532e-06,0.00030218,-0.00030218,0.00016222,-0.00016222,9.9815e-05,-9.9815e-05,7.1404e-07,-7.1404e-07,1.2939e-05,-1.2939e-05"
+  ],
+  "t44_header": [
+    "#: table_doi: 10.17182/hepdata.115656.v1/t44",
+    "#: name: Covariance matrices for phistar mass 50-76 over mass 76-106",
+    "#: description: The measured differential cross section in the $50 \\le M_{ll} < 76$ GeV mass window, in bins of the $\\varphi^*$ variable, divided by the measured differential cross section in the $76 \\le M_{ll} < 106$ GeV mass window. At least one jet is required. The values are not normalized by the bin width. This entry contains the covariance matrix of the results.",
+    "#: data_file: covariance_matrices_for_phistar_mass_50-76_over_mass_76-106.yaml",
+    "#: keyword reactions: P P --> GAMMA* --> LEPTON+ LEPTON- | P P --> GAMMA* --> E+ E- | P P --> GAMMA* --> MU+ MU- | P P --> Z --> LEPTON+ LEPTON- | P P --> Z --> E+ E- | P P --> Z --> MU+ MU-",
+    "#: keyword cmenergies: 13000",
+    "#: keyword phrases: Cross Section | Single Differential Cross Section | Drell Yan | Z Production | Di-Muon Production | Transverse Momentum Dependence",
+    "#: keyword observables: DSIG/DPHISTAR / DSIG/DPHISTAR",
+    "$\\varphi^*$,$\\varphi^*$ LOW,$\\varphi^*$ HIGH,$\\varphi^*$,$\\varphi^*$ LOW,$\\varphi^*$ HIGH,Total uncertainty",
+    "0.002,0.0,0.004,0.002,0.0,0.004,3.1215e-07",
+    "0.002,0.0,0.004,0.006,0.004,0.008,1.2772e-07",
+    "0.002,0.0,0.004,0.01,0.008,0.012,1.3382e-07"
+  ]
+}

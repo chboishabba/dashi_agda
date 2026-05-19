@@ -46,3 +46,12 @@ record PhysicsClosureCoreWitness : Setω where
     S31C.signature31FromProvider signatureCoreProvider
 
 open PhysicsClosureCoreWitness public
+
+closureQuadraticBoundary :
+  (w : PhysicsClosureCoreWitness) →
+  CFQS.SignatureCliffordGaugeBoundary
+    (CQSB.ContractionQuadraticToSignatureBridgeTheorem.strengthenedContraction
+      (PhysicsClosureCoreWitness.contractionSignatureWitness w))
+closureQuadraticBoundary w =
+  CQSB.signatureBridgeBoundary
+    (PhysicsClosureCoreWitness.contractionSignatureWitness w)

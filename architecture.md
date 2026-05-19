@@ -1,5 +1,72 @@
 # Architecture Notes for DashI Closure Path
 
+## Reader Navigation
+
+Use the repo through one canonical map and two reader tracks:
+
+- entry surface: `README.md`
+- repo structure guide: `Docs/RepoGuide.md`
+- physics/unification guide: `Docs/PhysicsGuide.md`
+- compressed claim surface: `Docs/UnificationClaim.md`
+- origin traceability ledger: `Docs/OriginTraceabilityLedger.md`
+- core-spine bridge: `Docs/CoreSpineBridge.md`
+- ITIR/PNF residual bridge: `Docs/ITIRPNFResidualLogicBridge.md`
+- boundary/example lane: `Docs/AntifascisticBoundaryAndMusic.md`
+- music attractor target: `Docs/MusicalAttractorTheorem.md`
+- strong theorem owners:
+  `DASHI.Physics.Closure.UnifiedPhysicsTheorem`,
+  `DASHI.Physics.Closure.AtomicChemistryRecoveryTheorem`,
+  `DASHI.Physics.Closure.PhysicsUnificationToCanonicalClosureAdapter`
+- atom/wave secondary note: `Docs/AtomAndWaveRecoveryStatus.md`
+- recovery truth surfaces: `Docs/PhysicsRecoveryLedger.md`, `Docs/ArchiveRecoveryCrosswalk.md`
+
+Classification discipline for those surfaces:
+
+- `proved`: current canonical theorem route and what it strictly establishes
+- `bridge`: interpretation layers that connect formal and physics-facing statements
+- `packaging`: assembly layers that bundle existing lanes without upgrading claims
+- `empirical`: measurement/data lanes with explicit non-claim boundaries
+- `speculative`: roadmap or intuition surfaces outside the current theorem contract
+
+## Diagram Entry Points
+
+The canonical textual diagram surfaces for this repo are:
+
+- `Docs/RepoMetasystem.puml`
+- `Docs/RepoMetasystem.svg`
+- `Docs/CanonicalProofSpine.puml`
+- `Docs/CanonicalProofSpine.svg`
+- `Docs/PhysicsUnificationMap.puml`
+- `Docs/PhysicsUnificationMap.svg`
+- `Docs/PhysicsRealityRoadmap.puml`
+- `Docs/PhysicsRealityRoadmap.svg`
+- `Docs/ObservableSignatureGaugeEntryRound.puml`
+- `Docs/ObservableSignatureGaugeEntryRound.svg`
+- `Docs/TRAINING_DYNAMICS.puml`
+- `Docs/TRAINING_DYNAMICS.svg`
+
+Regenerate rendered SVG and PNG previews with:
+
+```bash
+./scripts/render_docs_diagrams.sh
+```
+
+Use them in this order:
+
+1. `Docs/RepoMetasystem.*` for repo-level orientation
+2. `Docs/CanonicalProofSpine.*` for the canonical theorem route
+3. `Docs/OriginTraceabilityLedger.md` for origin/disconnection governance
+4. `Docs/PhysicsUnificationMap.*` for claim boundaries and open gaps
+5. `Docs/PhysicsRealityRoadmap.*` for "how this touches actual physics"
+6. child graphs such as observable/signature and training-dynamics only after the first five
+
+Diagram-reading rule:
+the status boards in `RepoMetasystem`, `CanonicalProofSpine`,
+`PhysicsUnificationMap`, and `PhysicsRealityRoadmap` are intentional. Green is
+theorem-owned, yellow is bridge/advanced-but-blocked, blue is packaging,
+red/pink is empirical or open-gate material. Do not recolor a box without a
+named theorem owner or an explicit ledger update.
+
 ## Canonical Spine (Authoritative)
 The canonical closure dependency spine is:
 
@@ -14,6 +81,22 @@ The canonical closure dependency spine is:
 9. `DASHI.Physics.Closure.CliffordToEvenWaveLiftBridgeTheorem`
 
 This is the only required theorem route for quadratic and signature emergence.
+
+## Strong Claim Owners
+
+The strong repo-native physics-unification claim now lives in code first:
+
+1. `DASHI.Physics.Closure.UnifiedPhysicsTheorem`
+2. `DASHI.Physics.Closure.AtomicChemistryRecoveryTheorem`
+3. `DASHI.Physics.Closure.PhysicsUnificationToCanonicalClosureAdapter`
+
+Read them in that order.
+
+- `UnifiedPhysicsTheorem` is the main owner for the strong claim.
+- `AtomicChemistryRecoveryTheorem` is the atom/chemistry interpretation carrier.
+- `PhysicsUnificationToCanonicalClosureAdapter` is the explicit seam between
+  abstract `UnifiedClosure.PhysicsUnification` and the canonical
+  checklist/package/full-closure story.
 
 ## Route Classification Policy
 - `canonical`: required for Stage C theorem closure claims.

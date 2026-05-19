@@ -1,0 +1,90 @@
+{
+  "artifact": "dy_authority_adapter_smoke",
+  "date": "2026-05-06",
+  "owner": "Feynman-Laplace",
+  "script": "scripts/dy_luminosity_from_authority_packet.py",
+  "status": "smoke-recorded-not-promoted",
+  "scope": {
+    "changed_repo_files": [
+      "logs/research/dy_authority_adapter_smoke.json"
+    ],
+    "temporary_fixtures": [
+      "/tmp/dashi_authority_packet.insufficient.json",
+      "/tmp/dashi_authority_packet.example.json"
+    ],
+    "temporary_outputs": [
+      "/tmp/dashi_dy_authority_adapter_artifact.json",
+      "/tmp/dashi_w4_luminosities.csv",
+      "/tmp/dashi_w4_authority.json",
+      "/tmp/dashi_w5_provider_packet.json"
+    ],
+    "promotion": "none"
+  },
+  "commands": [
+    {
+      "command": "python scripts/dy_luminosity_from_authority_packet.py --authority-packet /tmp/dashi_authority_packet.missing.json",
+      "exit_code": 50,
+      "stderr": "authority packet absent: /tmp/dashi_authority_packet.missing.json",
+      "observation": "fail-closed absent packet behavior"
+    },
+    {
+      "command": "python scripts/dy_luminosity_from_authority_packet.py --authority-packet /tmp/dashi_authority_packet.insufficient.json",
+      "exit_code": 51,
+      "stderr": "authority packet invalid: authority status must be accepted or replacement",
+      "observation": "fail-closed missing/insufficient authority behavior"
+    },
+    {
+      "command": "python scripts/dy_luminosity_from_authority_packet.py --authority-packet /tmp/dashi_authority_packet.example.json --output /tmp/dashi_dy_authority_adapter_artifact.json --write-w4-luminosity-csv /tmp/dashi_w4_luminosities.csv --write-w4-authority-json /tmp/dashi_w4_authority.json --write-w5-provider-packet /tmp/dashi_w5_provider_packet.json",
+      "exit_code": 0,
+      "observation": "accepted-shaped packet produces full adapter artifact and optional downstream-shaped files"
+    }
+  ],
+  "accepted_example": {
+    "packet": "/tmp/dashi_authority_packet.example.json",
+    "source_packet_sha256": "bbda9bcfec62e19f09aa88484e21c737fdfbc89b6560cb7cdf53bc2ac6208c18",
+    "artifact_schema": "dashi-dy-luminosity-from-authority-packet-v1",
+    "schema_version": "0.1.0",
+    "adapter_status": "computed-not-promoted",
+    "authority_status": "accepted",
+    "luminosities": {
+      "L43": 1.25,
+      "L45": 1.1005607585,
+      "R45_over_43": 0.8804486067999999,
+      "W4_per_bin_luminosities": [
+        0.91,
+        1.03,
+        0.98
+      ]
+    },
+    "provenance_hash": "06951d45ed9a2420f6c83676f68673e3f25ca8f6f77609c340b6800e543649bf",
+    "downstream_shapes": {
+      "w4AcceptedDYLuminosityAuthority": "present",
+      "w5ProviderPacket": "present"
+    },
+    "governance": {
+      "no_authority_fabricated": true,
+      "no_w4_promotion": true,
+      "no_w5_promotion": true,
+      "requires_external_provider_packet_with_accepted_or_replacement_status": true
+    }
+  },
+  "fail_closed": {
+    "absent_packet_exit": 50,
+    "invalid_or_insufficient_authority_exit": 51,
+    "accepted_statuses": [
+      "accepted",
+      "replacement"
+    ],
+    "insufficient_status_accepted": false
+  },
+  "zkp_frame": {
+    "O": "Feynman-Laplace records adapter smoke evidence; Maxwell-Faraday owns the provider packet lane; the repo remains multi-agent and non-promoting.",
+    "R": "Exercise the authority-packet adapter against absent, insufficient, and accepted-shaped inputs without fabricating promotion evidence.",
+    "C": "scripts/dy_luminosity_from_authority_packet.py plus temporary /tmp packet fixtures and this smoke artifact.",
+    "S": "Adapter fails closed on absent input and insufficient authority, and accepts a complete example-shaped packet with provider fields and luminosities.",
+    "L": "unknown -> fail-closed observed -> accepted-shape observed -> smoke recorded; no transition to promoted closure.",
+    "P": "Retain this smoke artifact as adapter integration evidence only; downstream receipts may consume real external authority later.",
+    "G": "No promotion; accepted/replacement status plus all required fields are mandatory; smoke fixtures are not authority receipts.",
+    "F": "A real external/provider authority packet is still missing, so W4/W5 closure remains blocked outside this adapter smoke."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "artifactSchema": "dashi-w3-authority-t43-t44-canonical-json-intake-v1",
+  "generatedDate": "2026-05-13T04:07:18+10:00",
+  "lane": "W3",
+  "status": "canonical-t43-t44-json-supplied-by-user-and-staged",
+  "promotionStatus": "candidate-pass-canonical-payloads-bound-awaiting-accepted-authority-token",
+  "sourceFiles": {
+    "t43": "/home/c/Downloads/hep115656-1316250-1.json",
+    "t44": "/home/c/Downloads/hep115656-1316252-1.json"
+  },
+  "stagedFiles": {
+    "t43": {
+      "path": "logs/research/provider_inputs/hepdata_ins2079374/t43_canonical.json",
+      "sha256": "5cfefe5a5a99c415f9225a3515383e8ce5e9a874861ff6c5fc08365871bfd340",
+      "canonicalJsonSha256": "9deb46c59a5d44c6d98599c81db154791563b08a576d3b5fe46b7ca9d91996a4",
+      "doi": "10.17182/hepdata.115656.v1/t43",
+      "name": "phistar mass 50-76 over mass 76-106",
+      "location": "Figure 22 top left",
+      "x_count": 1,
+      "values": 18
+    },
+    "t44": {
+      "path": "logs/research/provider_inputs/hepdata_ins2079374/t44_canonical.json",
+      "sha256": "2dfa2abe120981f1f8379d95c8d6e0362394c6f6c8fed01dd45fc76a3e2b660b",
+      "canonicalJsonSha256": "ee938eedf77b703e3d318eb17fb737163716a849a853b2e414eaf15aa8bc88a7",
+      "doi": "10.17182/hepdata.115656.v1/t44",
+      "name": "Covariance matrices for phistar mass 50-76 over mass 76-106",
+      "location": "Figure 22 top left",
+      "x_count": 2,
+      "values": 324
+    }
+  },
+  "semanticChecks": {
+    "t43AgainstLocalCsv": {
+      "checkedRows": 18,
+      "mismatches": 0,
+      "checkedFields": "bin center/low/high and ratio value"
+    },
+    "t44AgainstLocalCsv": {
+      "checkedRows": 324,
+      "mismatches": 0,
+      "checkedFields": "two-axis bin center/low/high and Total uncertainty value only",
+      "note": "HEPData JSON carries additional decomposed covariance groups; local CSV cache stores total uncertainty column only."
+    }
+  },
+  "authorityDecision": {
+    "canonicalPayloadBindingPresent": true,
+    "tableChecksumBoundCandidate": true,
+    "w3AcceptedEvidenceAuthorityTokenConstructed": false,
+    "w3AcceptedAuthorityExternalReceiptConstructed": false,
+    "reason": "The canonical HEPData JSON payloads for t43/t44 are staged, checksum-bound, and semantically match the local ratio CSV cache used by the candidate comparison. The repo still does not self-issue W3AcceptedEvidenceAuthorityToken; an accepted external authority response remains required before W3 promotion."
+  }
+}

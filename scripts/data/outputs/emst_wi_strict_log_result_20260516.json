@@ -1,0 +1,10 @@
+{
+  "artifact_schema": "dashi.emst.wi_strict_log_result.v1",
+  "coefficient_artifact": "scripts/data/outputs/emst_nine_component_C_fid_sigma_dashi_v4_20260515.json",
+  "failure_reason": "W_i provider status is 'awaiting_independent_wi_provider', expected 'valid_independent_wi_grid'",
+  "promotes": false,
+  "promotion_boundary": "strict-log result requires a valid independent W_i provider artifact and positive pre-normalized fiducial prediction",
+  "status": "blocked",
+  "strict_artifact": "scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json",
+  "wi_provider_artifact": "scripts/data/outputs/emst_wi_provider_contract_20260516.json"
+}

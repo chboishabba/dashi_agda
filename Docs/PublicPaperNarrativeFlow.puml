@@ -1,0 +1,129 @@
+@startuml
+title DASHI Paper 1 Narrative Flow
+top to bottom direction
+
+skinparam shadowing false
+skinparam roundcorner 14
+skinparam packageStyle rectangle
+skinparam ArrowThickness 2
+skinparam defaultTextAlignment center
+skinparam backgroundColor #ffffff
+
+skinparam package {
+  BackgroundColor #f8fafc
+  BorderColor #334155
+  FontColor #0f172a
+}
+
+skinparam rectangle {
+  BackgroundColor #ffffff
+  BorderColor #334155
+  FontColor #0f172a
+}
+
+skinparam note {
+  BackgroundColor #fff7ed
+  BorderColor #c2410c
+  FontColor #7c2d12
+}
+
+rectangle "Physics-unification thesis\none carrier program, many closure gates\n[not completed TOE]" as Thesis #dbeafe
+
+package "Constructive substrate" {
+  rectangle "Carrier geometry\nprime / trit / FactorVec coordinates\nprojection-defect vocabulary" as Carrier #e0f2fe
+  rectangle "Filtration and operators\nfinite support, tracked lanes,\nlocal E8 boundary" as Operators #ede9fe
+  rectangle "Admissibility gates\nreceipts, authorities,\nrequest surfaces, blockers" as Gates #fef3c7
+}
+
+package "Current inhabited Paper 1 surfaces" {
+  rectangle "G2 schema\n2-direction carrier adoption\n[current core-facing consumers]" as G2 #dcfce7
+  rectangle "G6 tracked route\ncross-lane commuting on tracked API\nold universal route still blocked" as G6 #dcfce7
+  rectangle "G3 finite-support route\ncertified selected subtraction support\nassociated-graded quotient still open" as G3 #dcfce7
+  rectangle "E8/LILA boundary\ninteger/local semantic evidence\nupstream promotion still blocked" as E8 #dcfce7
+}
+
+package "Empirical contact and diagnostics" {
+  rectangle "Bounded W3 Drell-Yan receipt\nHEPData t43/t44, chi2/dof 2.1565\npasses local threshold 4.0 only" as W3 #d1fae5
+  rectangle "Strict Drell-Yan diagnostics\nchi2/dof <= 2 fails;\nstrict log-covariance fails;\nlog-linear residual mode identified" as StrictDY #fee2e2
+  rectangle "W4/W5 convention gates\naccepted DY luminosity/PDF authority\nstill missing" as W45 #fecaca
+}
+
+package "Explicit obstruction frontier" {
+  rectangle "No accepted external W3 authority\nconstructorless token remains" as W3Block #fecaca
+  rectangle "No physical calibration\nno W4 adequacy, stress-energy,\nor sourced GR" as CalBlock #fecaca
+  rectangle "No full recovery claim\nno Schwarzschild, continuum,\nGRQFT, or completed unification" as FullBlock #fecaca
+}
+
+package "Routed future material" {
+  rectangle "Carrier provenance\nJMD / 15 SSP / Monster context\nbackground only" as Provenance #fef3c7
+  rectangle "Compression and refinement\nUFT-C, Hensel/p-adic,\nMarkov-after-quotient view" as Compression #fef3c7
+  rectangle "Cross-domain outlook\nchemistry, DNA/brain/perception,\norbit-shell/signature families" as Outlook #fff7ed
+}
+
+rectangle "Reader takeaway\nDASHI advances a constructive physics-unification\narchitecture by showing inhabited surfaces and exact\nremaining obligations in the same typed system." as Takeaway #bbf7d0
+
+Thesis --> Carrier
+Thesis --> Gates
+Carrier --> Operators
+Operators --> G2
+Operators --> G6
+Operators --> G3
+Operators --> E8
+Gates --> G2
+Gates --> G6
+Gates --> G3
+Gates --> E8
+Gates --> W3
+W3 --> StrictDY : stronger tests
+W3 --> W3Block : authority still external
+StrictDY --> W45 : next shape/convention obligations
+W45 --> CalBlock
+G3 --> FullBlock : quotient / norm / bracket gaps
+E8 --> FullBlock : upstream promotion gap
+G6 --> FullBlock : old full interface gap
+G2 --> FullBlock : no field-equation closure
+Provenance --> Carrier : background
+Compression --> Carrier : intuition / appendix
+Outlook --> FullBlock : future targets only
+W3Block --> Takeaway
+CalBlock --> Takeaway
+FullBlock --> Takeaway
+G2 --> Takeaway
+G6 --> Takeaway
+G3 --> Takeaway
+E8 --> Takeaway
+W3 --> Takeaway
+
+note right of Thesis
+Public-facing rule:
+physics unification is the thesis;
+typed governance is the enforcement mechanism.
+end note
+
+note right of StrictDY
+This does not erase the bounded W3 receipt.
+It records stronger protocols that currently fail
+and names the next shape-law obstruction.
+end note
+
+note right of Outlook
+These topics can help readers see the route,
+but they are appendix/future-work unless
+repo-local receipts promote them.
+end note
+
+legend bottom
+|= Color |= Meaning |
+|<#dbeafe>| thesis / starting point |
+|<#e0f2fe>| carrier substrate |
+|<#ede9fe>| formal machinery |
+|<#dcfce7>| inhabited local surface |
+|<#d1fae5>| bounded empirical contact |
+|<#fee2e2>| negative diagnostic |
+|<#fecaca>| blocked promotion |
+|<#fef3c7>| background / appendix |
+|<#fff7ed>| future-work outlook |
+|<#bbf7d0>| reader takeaway |
+endlegend
+
+@enduml

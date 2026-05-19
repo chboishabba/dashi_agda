@@ -1,0 +1,251 @@
+@startuml
+title Worker Coordination Map For Open Blockers - Current State
+left to right direction
+
+skinparam shadowing false
+skinparam roundcorner 18
+skinparam packageStyle rectangle
+skinparam ArrowThickness 2
+skinparam defaultTextAlignment center
+
+skinparam package {
+  BackgroundColor #f8fafc
+  BorderColor #334155
+  FontColor #0f172a
+}
+
+skinparam rectangle {
+  BackgroundColor #ffffff
+  BorderColor #334155
+  FontColor #0f172a
+}
+
+skinparam note {
+  BackgroundColor #fff7ed
+  BorderColor #c2410c
+  FontColor #7c2d12
+}
+
+package "Coordination Control" {
+  rectangle "W0 orchestrator / integrator\nowns board, diagrams, TODO,\nchangelog, validation\nstatus: coordination only" as W0 #dbeafe
+  rectangle "WorkerCoordinationBoard.md\nfull lane history + gates\nsource of truth" as Board #dcfce7
+  rectangle "AgdaValidationTargets.md\ntargeted validation policy" as Validation #dcfce7
+}
+
+package "Current P0 Blockers" {
+  rectangle "W1 MDL/CR carrier\nfinal retargeted seam landed\nstrict physical promotion still external" as W1 #fef3c7
+  rectangle "W2 natural / p2 convergence\nfinite and metric-family surfaces landed\nnatural/p2 promotion still blocked" as W2 #fef3c7
+  rectangle "W3 empirical adequacy\nblocked on accepted authority,\nprojection, comparison, origin" as W3 #fecaca
+  rectangle "W4 chemistry / calibration\nblocked on physical unit carrier,\ncalibration, dimensional law" as W4 #fecaca
+  rectangle "W5 GR/QFT consumer\nowns roadmap W-GR / G4\nblocked on closure-promotion receipt" as W5 #fecaca
+  rectangle "W6 ITIR / PNF\nblocked on runtime emission receipts\nand Hecke candidate-pool receipt" as W6 #fecaca
+  rectangle "W8 origin receipt\nblocked on empirical adequacy bridge\nor external promoted status authority" as W8 #fecaca
+  rectangle "W9 cancellation-pressure seam\ncurrent route classes exhausted\nneeds pressure-compatible target acceptance" as W9 #fecaca
+}
+
+package "Provider Request Index" {
+  rectangle "P0ProviderReceiptRequestIndex\nco-located provider-facing\nrequest packs only" as Provider #fef3c7
+  rectangle "P0BlockerObligationIndex\nboard-wide smoke target\nnon-promoting index" as P0Index #fef3c7
+  rectangle "BlockerKillConditions\nreceipt-driven kill matrix\nno bypass by prose/surrogate" as Kill #fef3c7
+}
+
+package "Roadmap To Publishable Claim" {
+  rectangle "CompleteVerifiedPhysicsUnificationRoadmap\nG1..G7 future gates" as Roadmap #e0f2fe
+  rectangle "G4 / W-GR\nGR curvature + GR-QFT completion\nowner: W5 / Maxwell" as G4 #fef3c7
+  rectangle "G5 empirical validation\naccepted residual authority,\ncalibration, projection, comparison" as G5 #fecaca
+  rectangle "G6 cross-lane consistency\ncommuting theorem package\nnot yet represented by proof" as G6 #fecaca
+  rectangle "G7 publication audit\nclaims, proofs, receipts,\nreproducibility" as G7 #fecaca
+}
+
+package "HEPData Residual Bridge" {
+  rectangle "HEPDataResidualCoordinationMap.puml\nchild graph for HEP-R1..R45 + LILA-R1..R5" as HEPChild #dbeafe
+  rectangle "HEP-R15 authority collation\nCMS-SMP-20-003 source + raw t19/t20\nlocal normalized artifact separated" as HEPR15 #fef3c7
+  rectangle "HEP-R20 source DOI resolved\n11631-7 canonical;\n11680-y rejected" as HEPR20 #dcfce7
+  rectangle "HEP-R17 adapter transform\nraw/local selected surface still blocked" as HEPR17 #fef3c7
+  rectangle "HEP-R21 ratio adapter\nt43/t44 selected;\nprojection still blocked" as HEPR21 #fef3c7
+  rectangle "HEP-R22 prediction freeze\ncommit hash + t43 run missing" as HEPR22 #fecaca
+  rectangle "HEP-R24 ratio artifact request\nsuperseded by HEP-R28;\nchecksum-bound CSVs acquired" as HEPR24 #dcfce7
+  rectangle "HEP-R25 projection runner\nno exact t43 runner found" as HEPR25 #fecaca
+  rectangle "HEP-R26 freeze identity\nHEAD named;\ndirty tree blocks freeze" as HEPR26 #fecaca
+  rectangle "HEP-R27 comparison intake\nblocked on freeze,\nprojection digest, bin binding" as HEPR27 #fecaca
+  rectangle "HEP-R28 t43/t44 artifacts\nvalid CSVs acquired;\nsha256 bound" as HEPR28 #dcfce7
+  rectangle "HEP-R29 t43 runner contract\ncontract only;\nno accepted exact runner" as HEPR29 #fecaca
+  rectangle "HEP-R30 clean freeze policy\nstash/commit, rev-parse HEAD,\nrunner uses that hash" as HEPR30 #fecaca
+  rectangle "HEP-R31 comparison-law skeleton\nchi2 + two-sigma law;\nuninhabited" as HEPR31 #fecaca
+  rectangle "HEP-R32 runner attempt\nfail-closed script;\nprojectionComplete false" as HEPR32 #fef3c7
+  rectangle "HEP-R33 prediction API route\nrunner hook works;\naccepted API missing" as HEPR33 #fef3c7
+  rectangle "HEP-R34 Sudakov baseline hook\nprojectionComplete true possible;\nnot accepted DASHI API" as HEPR34 #fef3c7
+  rectangle "HEP-R35 DASHI-native API diagnostic\nno accepted sigma_DASHI route in siblings\nor CSS/Sudakov; construction required" as HEPR35 #fecaca
+  rectangle "HEP-R36 sigma_DASHI construction\nrunner-callable internal hook + receipt request;\nnon-promoting until freeze/comparison" as HEPR36 #fef3c7
+  rectangle "HEP-R37 dirty projection diagnostic\nprojectionComplete true for 18 bins;\nsynthetic freeze, no chi2/comparison" as HEPR37 #fef3c7
+  rectangle "HEP-R38 dirty comparison diagnostic\nchi2/dof ~ 355674;\nmodel-gap signal, no acceptance" as HEPR38 #fee2e2
+  rectangle "HEP-R39 sigma_DASHI v2 refinement\nchi2/dof ~ 68.42 dirty diagnostic;\nmodel narrowed, still no acceptance" as HEPR39 #fef3c7
+  rectangle "HEP-R40 neutral-current continuum\nchi2/dof ~ 28.66 dirty diagnostic;\ncloser, still no acceptance" as HEPR40 #fef3c7
+  rectangle "HEP-R41 posterior shape response\nchi2/dof ~ 1.74 dirty numeric pass;\ngovernance fail, no acceptance" as HEPR41 #fef3c7
+  rectangle "HEP-R42 t45/t46 holdout\nunchanged HEP-R41 fails;\nchi2/dof ~ 222.54, no promotion" as HEPR42 #fee2e2
+  rectangle "HEP-R43 mass-general law obligation\nt44 covariance-only;\nt45/t46 is holdout target" as HEPR43 #fef3c7
+  rectangle "HEP-R44 mass-general dirty run\nfails t43 and t45;\nchi2/dof ~ 1770377.85 / 122.02" as HEPR44 #fee2e2
+  rectangle "HEP-R45 observable definition\nDSIG/DPHISTAR ratio headers;\nnormalized-total hypothesis blocked" as HEPR45 #fef3c7
+  rectangle "LILA-R1..R5 E8/LILA route\nprovenance note + R2/R3/R4 assigned;\nR5 parked on receipts" as LILA1 #fef3c7
+  rectangle "LILA-R2 count support\n112 + 128 = 240 recorded;\nnot full E8 carrier theorem" as LILA2R #fef3c7
+  rectangle "HEP-R18 W4 ratio anchor\nZ-peak and ratio tables named only" as HEPR18 #fef3c7
+  rectangle "HEP-R23 W5/W6 inventory\nfull table map + theory candidates only" as HEPR23 #fef3c7
+  rectangle "Current missing receipts\nclean predictionFixedAt,\naccepted DASHI projection,\ncomparison, authority token" as HEPFirstMissing #fecaca
+  rectangle "Raw upstream surface\nins2079374 / t19: 228.59 -> 225.69\ncovariance t20" as HEPRaw #fef3c7
+  rectangle "Normalized local surface\n188.4 -> 185.09\nartifact checksum-bound only" as HEPNormalized #fef3c7
+}
+
+package "Sibling Evidence Inventory" {
+  rectangle "SIB-R1\nSiblingEvidenceInventory\nread-only evidence pointers only" as SIBR1 #fef3c7
+  rectangle "SIB-R2\nSiblingEvidenceExtractionDiagnostic\nworker findings; no promotion" as SIBR2 #fef3c7
+  rectangle "SIB-MATRIX\nSiblingMathPortingMatrix\nport / citation / diagnostic triage only" as SIBMATRIX #fef3c7
+  rectangle "dashifine / dashiQ / dashitest\nHEP projection candidates\nnot digest-bound receipts" as SIBHEP #fef3c7
+  rectangle "DASHIg LILA Phase 2\ntrace + e8 vocab artifacts\nnot E8 physics receipts" as SIBLILA #fef3c7
+  rectangle "dashi_lean4 moonshine\narithmetic support only\nnot Agda theta/J receipt" as SIBLEAN #fef3c7
+  rectangle "Extraction results\nno accepted phi-star API;\n2048-token vocab;\naggregate Lyapunov only" as SIBFIND #fee2e2
+}
+
+package "Rules" {
+  rectangle "No-promotion boundary\nW3/W4/W5/W8 stay blocked until\naccepted external receipts exist" as NoPromotion #fee2e2
+  rectangle "Validation rule\nrender diagrams + targeted Agda\nbefore widening checks" as RuleVerify #dcfce7
+}
+
+W0 --> Board : maintains
+W0 --> Validation : maintains
+W0 --> P0Index : indexes
+Board --> P0Index : lane state
+P0Index --> Provider : provider entrypoint
+P0Index --> Kill : kill rows
+P0Index --> SIBR2 : indexes
+
+Roadmap --> G4
+Roadmap --> G5
+Roadmap --> G6
+Roadmap --> G7
+G4 --> W5 : owned by
+G5 --> W3 : validates
+G5 --> W4 : calibrates
+G5 --> W8 : origin dependency
+
+Provider --> W3 : accepted authority request
+Provider --> W4 : calibration request
+Provider --> W5 : GR/QFT closure request
+Provider --> W6 : runtime PNF request
+Provider --> W8 : origin promotion request
+Provider --> W9 : retarget acceptance request
+
+HEPChild --> HEPR15 : detailed residual chain
+HEPChild --> SIBR1 : sibling evidence sidecar
+HEPR15 --> HEPR20 : source authority package
+HEPR15 --> HEPR17 : raw/local adapter gap
+HEPR17 --> HEPR21 : selected ratio route
+HEPR21 --> HEPR22 : freeze/projection request
+HEPR21 --> HEPR24 : artifact requirement
+HEPR22 --> HEPR25 : runner discovery
+HEPR22 --> HEPR26 : freeze identity
+HEPR24 --> HEPR28 : artifact acquisition
+HEPR28 --> HEPR27 : checksum dependency solved
+HEPR25 --> HEPR27 : runner dependency
+HEPR25 --> HEPR29 : contract skeleton
+HEPR26 --> HEPR27 : freeze dependency
+HEPR26 --> HEPR30 : clean policy request
+HEPR29 --> HEPR27 : output schema dependency
+HEPR29 --> HEPR32 : implementation attempt
+HEPR28 --> HEPR32 : checksum-bound inputs
+HEPR30 --> HEPR27 : freeze certificate dependency
+HEPR30 --> HEPR32 : policy dependency
+HEPR27 --> HEPR31 : receipt skeleton
+HEPR32 --> HEPR31 : incomplete artifact only
+HEPR32 --> HEPR33 : API hook path
+HEPR33 --> HEPR31 : projectionComplete gate
+HEPR33 --> HEPR34 : baseline hook lane
+HEPR33 --> HEPR35 : accepted route diagnostic
+HEPR34 --> HEPR35 : rejected as accepted API
+HEPR35 --> HEPR36 : internal construction lane
+HEPR36 --> HEPR31 : projection artifact still needs receipt review
+HEPR36 --> HEPR37 : diagnostic run
+HEPR37 --> HEPR31 : comparison-law input not accepted
+HEPR37 --> HEPR38 : covariance diagnostic
+HEPR38 --> HEPR31 : fails; no receipt
+HEPR38 --> HEPR39 : model-gap refinement
+HEPR39 --> HEPR31 : still above threshold; no receipt
+HEPR39 --> HEPR40 : continuum refinement
+HEPR40 --> HEPR31 : still above threshold; no receipt
+HEPR40 --> HEPR41 : posterior residual-shape response
+HEPR41 --> HEPR31 : numeric pass but governance fail
+HEPR41 --> HEPR42 : independent holdout
+HEPR42 --> HEPR31 : holdout failure; no receipt
+HEPR42 --> HEPR43 : general law required
+HEPR43 --> HEPR44 : fresh diagnostic run
+HEPR44 --> HEPR31 : fails both targets; no receipt
+HEPR44 --> HEPR45 : check table convention
+HEPR45 --> HEPR43 : no convention escape hatch
+LILA1 --> HEPFirstMissing : diagnostic only
+LILA1 --> LILA2R : count-support only
+LILA2R --> HEPFirstMissing : E8 carrier still missing
+SIBR1 --> SIBHEP
+SIBR1 --> SIBLILA
+SIBR1 --> SIBLEAN
+SIBR1 --> SIBR2 : worker extraction round
+SIBR1 --> SIBMATRIX : porting triage
+SIBR2 --> SIBFIND : records findings
+SIBMATRIX --> SIBFIND : no promotion / reproof required
+SIBHEP --> HEPR33 : routing evidence only
+SIBHEP --> HEPR35 : no accepted sigma_DASHI API
+SIBLILA --> LILA1 : trace evidence only
+SIBLEAN --> LILA1 : theta/J support only
+SIBR1 --> HEPFirstMissing : no promotion receipt
+SIBFIND --> HEPFirstMissing : HEP-R33 still blocked
+SIBFIND --> LILA1 : LILA-R2/R4 still blocked
+HEPR15 --> HEPR18 : W4 ratio anchor
+HEPR15 --> HEPR23 : W5/W6 source inventory
+HEPR15 --> HEPRaw : authoritative raw table
+HEPR15 --> HEPNormalized : local normalized artifact
+HEPR20 --> HEPFirstMissing : authority token still absent
+HEPR21 --> HEPFirstMissing : adapter receipt still blocked
+HEPR22 --> HEPFirstMissing : prediction/projection still blocked
+HEPR28 --> HEPFirstMissing : artifacts solved; projection still missing
+HEPR29 --> HEPFirstMissing : runner contract only
+HEPR32 --> HEPFirstMissing : runner fail-closed; DASHI call missing
+HEPR33 --> HEPFirstMissing : accepted prediction API missing
+HEPR34 --> HEPFirstMissing : baseline is non-promoting
+HEPR35 --> HEPFirstMissing : DashiDynamics projection construction required
+HEPR36 --> HEPFirstMissing : clean freeze + comparison law still missing
+HEPR37 --> HEPFirstMissing : dirty diagnostic; no accepted freeze
+HEPR38 --> HEPFirstMissing : huge chi2 gap; refine model
+HEPR39 --> HEPFirstMissing : dirty v2 narrows gap; clean freeze + law still missing
+HEPR40 --> HEPFirstMissing : dirty continuum narrows gap; clean freeze + law still missing
+HEPR41 --> HEPFirstMissing : posterior numeric pass; pre-registration + clean freeze still missing
+HEPR42 --> HEPFirstMissing : holdout fails; general prediction law missing
+HEPR43 --> HEPFirstMissing : t44 covariance-only; mass-general law required
+HEPR44 --> HEPFirstMissing : dirty mass-general run fails both targets
+HEPR45 --> HEPFirstMissing : headers block normalized-total hypothesis
+HEPR26 --> HEPFirstMissing : clean freeze still missing
+HEPR30 --> HEPFirstMissing : clean certificate + digest still missing
+HEPR27 --> HEPFirstMissing : comparison intake still blocked
+HEPR31 --> HEPFirstMissing : comparison receipt uninhabited
+HEPR18 --> HEPFirstMissing : calibration law still blocked
+HEPR23 --> HEPFirstMissing : consumer receipts still blocked
+HEPFirstMissing --> W3 : empirical authority still blocked
+HEPFirstMissing --> W4 : calibration/covariance still blocked
+HEPFirstMissing --> W5 : no physical closure promotion
+HEPFirstMissing --> W6 : no ITIR/PNF adapter promotion
+HEPFirstMissing --> W8 : no origin promotion
+
+W1 --> NoPromotion
+W2 --> NoPromotion
+W3 --> NoPromotion
+W4 --> NoPromotion
+W5 --> NoPromotion
+W6 --> NoPromotion
+W8 --> NoPromotion
+W9 --> NoPromotion
+NoPromotion --> RuleVerify
+Validation --> RuleVerify
+
+note bottom of HEPChild
+  The full HEP-R1..R45 plus LILA-R1..R5 plus SIB-R1 dependency chain is split
+  into a child diagram so this current-state map remains renderable.
+end note
+
+@enduml

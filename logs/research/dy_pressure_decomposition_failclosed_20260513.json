@@ -1,0 +1,347 @@
+{
+  "artifactDigest": "868984ee7a3b5a70747061dfb8cafd548c3768b361bb79b08ada53b2a8e492eb",
+  "artifactSchema": "dashi-dy-chi2-pressure-decomposition-v1",
+  "blockedReasons": [
+    "missingAcceptedDYLuminosityConventionAuthority"
+  ],
+  "firstMissing": {
+    "field": "provider_role",
+    "group": "provider_identity",
+    "reason": "accepted DY convention authority is absent or incomplete"
+  },
+  "inputs": {
+    "authority": {
+      "accepted": false,
+      "authorityGate": {
+        "accepted": false,
+        "acceptedFalseReasons": [
+          "statusNotAcceptedOrReplacement",
+          "requiredFieldsMissing",
+          "negativeAuthorityMarkerPresent"
+        ],
+        "blockedExitCode": 45,
+        "firstMissing": "provider_role",
+        "firstMissingGroup": "provider_identity",
+        "negativeAuthorityMarkersAbsent": false,
+        "requiredFieldsPresent": false,
+        "statusAcceptedOrReplacement": false
+      },
+      "fieldDiagnostics": [
+        {
+          "field": "provider_name",
+          "group": "provider_identity",
+          "status": "present"
+        },
+        {
+          "field": "provider_role",
+          "group": "provider_identity",
+          "status": "missing"
+        },
+        {
+          "field": "pdf_set_version",
+          "group": "pdf_authority",
+          "status": "missing"
+        },
+        {
+          "field": "lhapdf_id",
+          "group": "pdf_authority",
+          "status": "missing"
+        },
+        {
+          "field": "member_id",
+          "group": "pdf_authority",
+          "status": "missing"
+        },
+        {
+          "field": "grid_checksum",
+          "group": "pdf_authority",
+          "status": "missing"
+        },
+        {
+          "field": "scale_convention",
+          "group": "dy_convention",
+          "status": "missing"
+        },
+        {
+          "field": "rapidity_window",
+          "group": "dy_convention",
+          "status": "missing"
+        },
+        {
+          "field": "mass_bin_rule",
+          "group": "dy_convention",
+          "status": "missing"
+        },
+        {
+          "field": "flavour_weight_rule",
+          "group": "dy_convention",
+          "status": "missing"
+        },
+        {
+          "field": "integration_method",
+          "group": "dy_convention",
+          "status": "missing"
+        },
+        {
+          "field": "luminosity_values",
+          "group": "luminosity_runner_inputs",
+          "status": "missing"
+        },
+        {
+          "field": "efficiency_acceptance_model",
+          "group": "efficiency_acceptance",
+          "status": "missing"
+        },
+        {
+          "field": "systematic_budget",
+          "group": "efficiency_acceptance",
+          "status": "missing"
+        },
+        {
+          "field": "cms_smp_publication_pointer",
+          "group": "efficiency_acceptance",
+          "status": "missing"
+        },
+        {
+          "field": "normalization_preservation_law",
+          "group": "normalization_conversion",
+          "status": "missing"
+        },
+        {
+          "field": "conversion_law",
+          "group": "normalization_conversion",
+          "status": "missing"
+        },
+        {
+          "field": "source_citation",
+          "group": "provider_identity",
+          "status": "missing"
+        },
+        {
+          "field": "attestation_no_manual_overfit",
+          "group": "provider_identity",
+          "status": "negative-authority-marker"
+        }
+      ],
+      "missingByGroup": {
+        "dy_convention": [
+          "scale_convention",
+          "rapidity_window",
+          "mass_bin_rule",
+          "flavour_weight_rule",
+          "integration_method"
+        ],
+        "efficiency_acceptance": [
+          "efficiency_acceptance_model",
+          "systematic_budget",
+          "cms_smp_publication_pointer"
+        ],
+        "luminosity_runner_inputs": [
+          "luminosity_values",
+          "L43",
+          "L45",
+          "W4_per_bin_luminosities"
+        ],
+        "normalization_conversion": [
+          "normalization_preservation_law",
+          "conversion_law"
+        ],
+        "pdf_authority": [
+          "pdf_set_version",
+          "lhapdf_id",
+          "member_id",
+          "grid_checksum"
+        ],
+        "provider_identity": [
+          "provider_role",
+          "source_citation"
+        ]
+      },
+      "missingFields": [
+        "provider_role",
+        "pdf_set_version",
+        "lhapdf_id",
+        "member_id",
+        "grid_checksum",
+        "scale_convention",
+        "rapidity_window",
+        "mass_bin_rule",
+        "flavour_weight_rule",
+        "integration_method",
+        "luminosity_values",
+        "efficiency_acceptance_model",
+        "systematic_budget",
+        "cms_smp_publication_pointer",
+        "normalization_preservation_law",
+        "conversion_law",
+        "source_citation",
+        "L43",
+        "L45",
+        "W4_per_bin_luminosities"
+      ],
+      "negativeAuthorityMarkerFields": [
+        "attestation_no_manual_overfit"
+      ],
+      "path": "scripts/data/authority_packet.example.json",
+      "present": true,
+      "providerDeclaredMissingFields": [
+        "external accepted provider answer",
+        "provider-authoritative convention",
+        "provider luminosities",
+        "efficiency/acceptance model",
+        "systematic budget",
+        "CMS-SMP publication pointer",
+        "normalization preservation law",
+        "conversion law"
+      ],
+      "runnerLuminosityDiagnostics": {
+        "L43": {
+          "positiveFinite": false,
+          "present": false,
+          "raw": null
+        },
+        "L45": {
+          "positiveFinite": false,
+          "present": false,
+          "raw": null
+        },
+        "W4_per_bin_luminosities": {
+          "allPositiveFinite": false,
+          "count": 0,
+          "positiveFiniteCount": 0,
+          "present": false,
+          "shape": "list"
+        }
+      },
+      "sha256": "453fdb5cb8c70b9aea13469248e6610b74d7031682aa193e04388e307efd06c2",
+      "status": "insufficient"
+    },
+    "t43Comparison": {
+      "artifactSchema": "dashi-w3-t43-frozen-projection-comparison-v1",
+      "chi2": 38.81734411729611,
+      "chi2PerDof": 2.1565191176275618,
+      "comparisonStatus": "candidate-pass-no-authority-token",
+      "dof": 18,
+      "label": "T43",
+      "maxAbsPull": 2.280159308132989,
+      "maxPullBin": 12,
+      "missingFields": [],
+      "path": "logs/research/w3_frozen_3205d74_t43_comparison_20260513.json",
+      "present": true,
+      "required": true,
+      "sha256": "92b61032c06cb4d00d22e00bf9e280b47806f9ebf18f012f5b82a41b0afae238",
+      "status": "ok",
+      "threshold": 4.0
+    },
+    "w4Comparison": {
+      "artifactSchema": "markdown-status",
+      "chi2": null,
+      "chi2PerDof": 298.8462841768543,
+      "comparisonStatus": "dirty-shape-diagnostic-not-accepted-dy-adequacy",
+      "dof": null,
+      "label": "W4",
+      "maxAbsPull": null,
+      "maxPullBin": null,
+      "missingFields": [],
+      "path": "Docs/W4W5DYConventionCurrentBlocker.md",
+      "present": true,
+      "required": true,
+      "sha256": "1a3fe041e7eda0c8f9b8ee14b366cb7411bf9d66a53abde254c0cce8590560f7",
+      "status": "status-doc-observed",
+      "threshold": null
+    }
+  },
+  "nonPromotionBoundary": [
+    "no W4 promotion",
+    "no W5 promotion",
+    "no DY convention receipt constructed",
+    "no Candidate256 physical calibration promotion",
+    "no placeholder efficiency/acceptance treated as proof"
+  ],
+  "pressureAttributionStatus": {
+    "authority": "missing accepted DY convention authority",
+    "final": "no promotable attribution; convention/bin-normalization, PDF, model, and efficiency/acceptance remain entangled",
+    "t43": "candidate ratio pressure observed at chi2/dof=2.1565191176275618",
+    "w4": "dirty Z-peak pressure observed at chi2/dof=298.8462841768543"
+  },
+  "pressureDomains": {
+    "convention_bin_normalization": {
+      "attribution": "cannot separate convention/bin-normalization from PDF/model pressure until the accepted provider conversion law supplies L43, L45, W4 ell_i, and normalization preservation",
+      "missingByGroup": {
+        "dy_convention": [
+          "scale_convention",
+          "rapidity_window",
+          "mass_bin_rule",
+          "flavour_weight_rule",
+          "integration_method"
+        ],
+        "luminosity_runner_inputs": [
+          "luminosity_values",
+          "L43",
+          "L45",
+          "W4_per_bin_luminosities"
+        ],
+        "normalization_conversion": [
+          "normalization_preservation_law",
+          "conversion_law"
+        ]
+      },
+      "missingFields": [
+        "scale_convention",
+        "rapidity_window",
+        "mass_bin_rule",
+        "flavour_weight_rule",
+        "integration_method",
+        "luminosity_values",
+        "normalization_preservation_law",
+        "conversion_law",
+        "L43",
+        "L45",
+        "W4_per_bin_luminosities"
+      ],
+      "status": "blocked"
+    },
+    "efficiency_acceptance": {
+      "attribution": "missing efficiency/acceptance is not proof for any pressure domain; it remains an explicit provider gap",
+      "missingByGroup": {
+        "efficiency_acceptance": [
+          "efficiency_acceptance_model",
+          "systematic_budget",
+          "cms_smp_publication_pointer"
+        ]
+      },
+      "missingFields": [
+        "efficiency_acceptance_model",
+        "systematic_budget",
+        "cms_smp_publication_pointer"
+      ],
+      "status": "missing"
+    },
+    "model": {
+      "attribution": "observed chi2 pressure is candidate/model-side only until authority and bin normalization are accepted",
+      "status": "candidate-pressure-observed",
+      "t43Chi2PerDof": 2.1565191176275618,
+      "w4Chi2PerDof": 298.8462841768543
+    },
+    "pdf": {
+      "attribution": "local CT18 material is candidate provenance only; no accepted PDF authority attribution",
+      "missingByGroup": {
+        "pdf_authority": [
+          "pdf_set_version",
+          "lhapdf_id",
+          "member_id",
+          "grid_checksum"
+        ]
+      },
+      "missingFields": [
+        "pdf_set_version",
+        "lhapdf_id",
+        "member_id",
+        "grid_checksum"
+      ],
+      "status": "indeterminate"
+    }
+  },
+  "schemaVersion": "0.2.0",
+  "status": "blocked-non-promoting"
+}

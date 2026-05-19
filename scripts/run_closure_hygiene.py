@@ -23,6 +23,15 @@ DEFAULT_METADATA = ROOT_DIR / ".cache" / "closure_hygiene_metadata.tsv"
 HEAVY_AGGREGATORS = {
     "DASHI/Everything.agda",
     "DASHI/Physics/Closure/PhysicsClosureValidationSummary.agda",
+    "DASHI/Physics/Closure/ShiftContractObservableTransportPrimeCompatibilityProfileInstance.agda",
+    "DASHI/Physics/Closure/ShiftObservableSignaturePressureConsumer.agda",
+    "DASHI/Physics/DashiDynamicsShiftInstance.agda",
+    "DASHI/Physics/Closure/CanonicalAbstractGaugeMatterInstance.agda",
+    "DASHI/Physics/Closure/CanonicalGaugeMatterStrengtheningTheorem.agda",
+    "DASHI/Physics/Closure/KnownLimitsFullMatterGaugeTheorem.agda",
+    "DASHI/Physics/Closure/AtomicPhotonuclearContactGateTheorem.agda",
+    "DASHI/Physics/Closure/CanonicalP2KeyScheduleBridgeObstruction.agda",
+    "DASHI/Physics/Closure/CanonicalScheduleIndependentNaturalChargeNextIngredientGap.agda",
 }
 ALIAS_TO_KEY = {
     "01": "module:DASHI/Physics/Closure/CanonicalStageCTheoremBundle.agda",

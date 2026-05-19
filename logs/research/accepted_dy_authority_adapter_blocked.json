@@ -1,0 +1,104 @@
+{
+  "artifact": "accepted_dy_authority_adapter_blocked",
+  "date": "2026-05-06",
+  "lane": "Accepted DY adapter run",
+  "owner": "Feynman-Laplace",
+  "status": "blocked-no-accepted-authority-packet",
+  "promotion": "none",
+  "inspected": {
+    "adapter": "scripts/dy_luminosity_from_authority_packet.py",
+    "example_packet": "scripts/data/authority_packet.example.json"
+  },
+  "adapter_observation": {
+    "accepted_statuses": [
+      "accepted",
+      "replacement"
+    ],
+    "required_behavior": "fail closed unless an authority packet has accepted/replacement status, required provider authority fields, and positive finite luminosities",
+    "example_packet_status": "insufficient",
+    "example_packet_result": "rejected by adapter with exit code 51"
+  },
+  "local_authority_packet_search": {
+    "real_accepted_or_replacement_packet_found": false,
+    "candidate_hits_reviewed": [
+      {
+        "path": "logs/research/dy_authority_adapter_smoke.json",
+        "decision": "not a real authority packet",
+        "reason": "records a smoke run using temporary accepted-shaped fixture /tmp/dashi_authority_packet.example.json and explicitly says W4/W5 closure remains blocked"
+      },
+      {
+        "path": "scripts/data/pdf/ct18_dashi_pdf_packet.json",
+        "decision": "not accepted",
+        "reason": "accepted_dy_luminosity_convention_status is candidate_local_ct18nlo_convention_not_accepted and first missing authority is missingAcceptedDYLuminosityConventionAuthority"
+      },
+      {
+        "path": "Docs/AcceptedDYLuminosityConventionAuthoritySubmission.md",
+        "decision": "template/submission surface only",
+        "reason": "documentation shape with blank luminosity fields, not a local provider packet"
+      },
+      {
+        "path": "Docs/DYAuthorityProviderResponseChecklist.md",
+        "decision": "checklist/template only",
+        "reason": "documents required fields and placeholder values, not a local provider packet"
+      }
+    ],
+    "search_commands": [
+      "rg -n \"accepted_dy_luminosity|authority_response|\\\"status\\\"\\s*:\\s*\\\"(accepted|replacement)\\\"|W4_per_bin_luminosities|L43|L45\" --glob '*.json' --glob '*.md' --glob '*.jsonl' --glob '!monster/markov_samples/**'",
+      "find . -iname '*authority*packet*' -o -iname '*dy*authority*' -o -iname '*luminosity*packet*'"
+    ]
+  },
+  "gate": {
+    "W4_computation": "gated",
+    "W5_computation": "gated",
+    "reason": "No real local accepted/replacement DY authority packet is available.",
+    "no_synthetic_accepted_packet": true,
+    "no_adapter_run_artifact_written": true
+  },
+  "commands_run": [
+    {
+      "command": "sed -n '1,240p' scripts/dy_luminosity_from_authority_packet.py",
+      "exit_code": 0
+    },
+    {
+      "command": "sed -n '241,520p' scripts/dy_luminosity_from_authority_packet.py",
+      "exit_code": 0
+    },
+    {
+      "command": "sed -n '1,220p' scripts/data/authority_packet.example.json",
+      "exit_code": 0
+    },
+    {
+      "command": "rg --files",
+      "exit_code": 0
+    },
+    {
+      "command": "rg -n \"accepted_dy_luminosity|authority_response|\\\"status\\\"\\s*:\\s*\\\"(accepted|replacement)\\\"|W4_per_bin_luminosities|L43|L45\" --glob '*.json' --glob '*.md' --glob '*.jsonl' --glob '!monster/markov_samples/**'",
+      "exit_code": 0
+    },
+    {
+      "command": "find . -iname '*authority*packet*' -o -iname '*dy*authority*' -o -iname '*luminosity*packet*'",
+      "exit_code": 0
+    },
+    {
+      "command": "sed -n '1,180p' logs/research/dy_authority_adapter_smoke.json",
+      "exit_code": 0
+    },
+    {
+      "command": "sed -n '120,170p' scripts/data/pdf/ct18_dashi_pdf_packet.json",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/dy_luminosity_from_authority_packet.py --authority-packet scripts/data/authority_packet.example.json",
+      "exit_code": 51,
+      "stderr": "authority packet invalid: authority status must be accepted or replacement"
+    },
+    {
+      "command": "ls logs/research",
+      "exit_code": 0
+    },
+    {
+      "command": "git status --short",
+      "exit_code": 0
+    }
+  ]
+}

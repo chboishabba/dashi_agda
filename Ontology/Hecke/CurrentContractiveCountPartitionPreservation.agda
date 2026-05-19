@@ -1,0 +1,159 @@
+module Ontology.Hecke.CurrentContractiveCountPartitionPreservation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+open import DASHI.Physics.Closure.ShiftContractCollapseTime
+  using (GeneratorCollapseClass; mixedScaleClass; prefixClass)
+open import DASHI.Physics.Closure.ShiftContractMixedScaleTrajectoryFamily
+  using (fullSupportCascade; supportCascade)
+open import DASHI.Physics.Closure.ShiftContractParametricTrajectoryCompositionFamily
+  using
+    ( anchoredTrajectory
+    ; balancedComposed
+    ; balancedCycle
+    ; denseComposed
+    ; explicitWidth1
+    ; explicitWidth2
+    ; explicitWidth3
+    )
+open import Ontology.Hecke.ContractiveCountLayer2Invariant
+  using (contractiveCountFamily)
+open import Ontology.Hecke.DefectOrbitCollapseBridge
+  using (primeImage)
+open import Ontology.Hecke.FactorVecDefectOrbitSummaries
+  using (profileSummaryFamily)
+
+data CurrentGenerator : Set where
+  currentExplicitWidth1 : CurrentGenerator
+  currentExplicitWidth2 : CurrentGenerator
+  currentExplicitWidth3 : CurrentGenerator
+  currentBalancedCycle : CurrentGenerator
+  currentDenseComposed : CurrentGenerator
+  currentBalancedComposed : CurrentGenerator
+  currentAnchoredTrajectory : CurrentGenerator
+  currentSupportCascade : CurrentGenerator
+  currentFullSupportCascade : CurrentGenerator
+
+currentGeneratorClass : CurrentGenerator → GeneratorCollapseClass
+currentGeneratorClass currentExplicitWidth1 = prefixClass explicitWidth1
+currentGeneratorClass currentExplicitWidth2 = prefixClass explicitWidth2
+currentGeneratorClass currentExplicitWidth3 = prefixClass explicitWidth3
+currentGeneratorClass currentBalancedCycle = prefixClass balancedCycle
+currentGeneratorClass currentDenseComposed = prefixClass denseComposed
+currentGeneratorClass currentBalancedComposed = prefixClass balancedComposed
+currentGeneratorClass currentAnchoredTrajectory = prefixClass anchoredTrajectory
+currentGeneratorClass currentSupportCascade = mixedScaleClass supportCascade
+currentGeneratorClass currentFullSupportCascade = mixedScaleClass fullSupportCascade
+
+currentContractiveCountFamilyAt : CurrentGenerator → _
+currentContractiveCountFamilyAt c =
+  contractiveCountFamily (primeImage (currentGeneratorClass c))
+
+currentProfileSummaryFamilyAt : CurrentGenerator → _
+currentProfileSummaryFamilyAt c =
+  profileSummaryFamily (primeImage (currentGeneratorClass c))
+
+CurrentContractiveCountPreservesFullFamily : Set
+CurrentContractiveCountPreservesFullFamily =
+  ∀ c₁ c₂ →
+    currentContractiveCountFamilyAt c₁
+      ≡
+    currentContractiveCountFamilyAt c₂
+      →
+    currentProfileSummaryFamilyAt c₁
+      ≡
+    currentProfileSummaryFamilyAt c₂
+
+currentContractiveCountPreservesFullFamily :
+  CurrentContractiveCountPreservesFullFamily
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentExplicitWidth1 eq = refl
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentExplicitWidth2 ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentExplicitWidth3 ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentBalancedCycle ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentDenseComposed ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentBalancedComposed ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentAnchoredTrajectory ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentSupportCascade ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth1 currentFullSupportCascade ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentExplicitWidth1 ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentExplicitWidth2 eq = refl
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentExplicitWidth3 ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentBalancedCycle ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentDenseComposed ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentBalancedComposed ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentAnchoredTrajectory eq = refl
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentSupportCascade ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth2 currentFullSupportCascade ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentExplicitWidth1 ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentExplicitWidth2 ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentExplicitWidth3 eq = refl
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentBalancedCycle ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentDenseComposed eq = refl
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentBalancedComposed ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentAnchoredTrajectory ()
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentSupportCascade eq = refl
+currentContractiveCountPreservesFullFamily currentExplicitWidth3 currentFullSupportCascade ()
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentExplicitWidth1 ()
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentExplicitWidth2 ()
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentExplicitWidth3 ()
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentBalancedCycle eq = refl
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentDenseComposed ()
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentBalancedComposed eq = refl
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentAnchoredTrajectory ()
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentSupportCascade ()
+currentContractiveCountPreservesFullFamily currentBalancedCycle currentFullSupportCascade ()
+currentContractiveCountPreservesFullFamily currentDenseComposed currentExplicitWidth1 ()
+currentContractiveCountPreservesFullFamily currentDenseComposed currentExplicitWidth2 ()
+currentContractiveCountPreservesFullFamily currentDenseComposed currentExplicitWidth3 eq = refl
+currentContractiveCountPreservesFullFamily currentDenseComposed currentBalancedCycle ()
+currentContractiveCountPreservesFullFamily currentDenseComposed currentDenseComposed eq = refl
+currentContractiveCountPreservesFullFamily currentDenseComposed currentBalancedComposed ()
+currentContractiveCountPreservesFullFamily currentDenseComposed currentAnchoredTrajectory ()
+currentContractiveCountPreservesFullFamily currentDenseComposed currentSupportCascade eq = refl
+currentContractiveCountPreservesFullFamily currentDenseComposed currentFullSupportCascade ()
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentExplicitWidth1 ()
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentExplicitWidth2 ()
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentExplicitWidth3 ()
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentBalancedCycle eq = refl
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentDenseComposed ()
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentBalancedComposed eq = refl
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentAnchoredTrajectory ()
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentSupportCascade ()
+currentContractiveCountPreservesFullFamily currentBalancedComposed currentFullSupportCascade ()
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentExplicitWidth1 ()
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentExplicitWidth2 eq = refl
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentExplicitWidth3 ()
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentBalancedCycle ()
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentDenseComposed ()
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentBalancedComposed ()
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentAnchoredTrajectory eq = refl
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentSupportCascade ()
+currentContractiveCountPreservesFullFamily currentAnchoredTrajectory currentFullSupportCascade ()
+currentContractiveCountPreservesFullFamily currentSupportCascade currentExplicitWidth1 ()
+currentContractiveCountPreservesFullFamily currentSupportCascade currentExplicitWidth2 ()
+currentContractiveCountPreservesFullFamily currentSupportCascade currentExplicitWidth3 eq = refl
+currentContractiveCountPreservesFullFamily currentSupportCascade currentBalancedCycle ()
+currentContractiveCountPreservesFullFamily currentSupportCascade currentDenseComposed eq = refl
+currentContractiveCountPreservesFullFamily currentSupportCascade currentBalancedComposed ()
+currentContractiveCountPreservesFullFamily currentSupportCascade currentAnchoredTrajectory ()
+currentContractiveCountPreservesFullFamily currentSupportCascade currentSupportCascade eq = refl
+currentContractiveCountPreservesFullFamily currentSupportCascade currentFullSupportCascade ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentExplicitWidth1 ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentExplicitWidth2 ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentExplicitWidth3 ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentBalancedCycle ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentDenseComposed ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentBalancedComposed ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentAnchoredTrajectory ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentSupportCascade ()
+currentContractiveCountPreservesFullFamily currentFullSupportCascade currentFullSupportCascade eq = refl
+
+record CurrentContractiveCountPartitionSurface : Set₁ where
+  field
+    preservesFullFamily : CurrentContractiveCountPreservesFullFamily
+
+currentContractiveCountPartitionSurface :
+  CurrentContractiveCountPartitionSurface
+currentContractiveCountPartitionSurface = record
+  { preservesFullFamily = currentContractiveCountPreservesFullFamily
+  }

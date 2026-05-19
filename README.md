@@ -1,7 +1,636 @@
+## Start Here
+
+This repo is a formal-and-bridge workspace around the DASHI program.
+For a new serious reader, the important split is:
+
+- `proved`: the canonical Agda theorem spine and the specific closure claims it currently discharges
+- `bridge`: documents and modules that connect the formal spine to physics-facing interpretations without claiming full derivation
+- `packaging`: summary surfaces that assemble current lanes without strengthening theorems
+- `empirical`: data-facing and measurement-facing surfaces that stay explicitly non-claiming
+- `speculative`: roadmap or intuition surfaces that are not current repo claims
+
+Use one of these reader tracks first:
+
+- Repo track: `Docs/RepoGuide.md`
+- Physics/unification track: `Docs/PhysicsGuide.md`
+- Physics lane maturity matrix: `Docs/PhysicsLaneMaturityMatrix.md`
+- Complete verified physics unification roadmap:
+  `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`
+  - `G4` / `W-GR` is tracked by the existing `W5` GR/QFT consumer lane on the
+    worker coordination board; this is ownership wiring only, not theorem
+    closure.
+- Short unification claim surface: `Docs/UnificationClaim.md`
+- Origin traceability ledger: `Docs/OriginTraceabilityLedger.md`
+- Core-spine bridge surface: `Docs/CoreSpineBridge.md`
+- Claim comparison engine: `Docs/ClaimComparisonEngine.md`
+- ITIR/PNF residual bridge: `Docs/ITIRPNFResidualLogicBridge.md`
+- PNF case-study boundary: `Docs/PNFCaseStudiesWatergateIran.md`
+- Strong theorem owners:
+  `DASHI/Physics/Closure/UnifiedPhysicsTheorem.agda`,
+  `DASHI/Physics/Closure/AtomicChemistryRecoveryTheorem.agda`,
+  `DASHI/Physics/Closure/PhysicsUnificationToCanonicalClosureAdapter.agda`
+- Worker coordination board:
+  `Docs/WorkerCoordinationBoard.md` and `Docs/WorkerCoordinationMap.puml`
+- P0 blocker obligation surface:
+  `DASHI/Physics/Closure/P0BlockadeProofObligations.agda`
+- P0 worker-lane obligation index:
+  `DASHI/Physics/Closure/P0BlockerObligationIndex.agda`
+- Unified energy-functional coordination surface:
+  `DASHI/Physics/Closure/UnifiedEnergyFunctionalSurface.agda`
+- Receipt-driven blocker-kill matrix:
+  `DASHI/Physics/Closure/BlockerKillConditions.agda`
+- External empirical-calibration bridge surfaces:
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservable.agda`,
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnits.agda`,
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFit.agda`
+- External bridge intake surfaces:
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservableIntake.agda`,
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnitsIntake.agda`,
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFitAuthorityBoundary.agda`
+- External source diagnostics and W9 consumer obligation:
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeObservableSourceDiagnostic.agda`,
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeUnitsSourceDiagnostic.agda`,
+  `DASHI/Physics/Closure/EmpiricalCalibrationBridgeToyFitRealDatasetRouteDiagnostic.agda`,
+  `DASHI/Physics/Closure/CancellationPressureRetargetConsumerObligation.agda`
+- W9 MDL termination seam route:
+  `DASHI/Physics/Closure/W9MDLTerminationSeamRoute.agda` records the real
+  `normalizeAdd` one-step canonicalization plus carry-depth/budget MDL
+  Lyapunov bridge as a non-pressure seam witness. Current status supersedes
+  the older pressure/Qcore-only wording: W9 is unblocked only through the
+  accepted MDL termination seam route; the pressure-equality and Qcore routes
+  remain negative diagnostics and do not promote broader closure.
+- External request/source handoff surfaces:
+  `DASHI/Physics/Closure/EmpiricalCalibrationExternalReceiptRequestPack.agda`,
+  `DASHI/Physics/Closure/GRQFTConsumerSourceDiagnostic.agda`,
+  `DASHI/Interop/PNFResidualConsumerReceiptRequestPack.agda`,
+  `DASHI/Physics/Closure/CancellationPressureRetargetConsumerSourceDiagnostic.agda`
+- Provider request-pack surfaces:
+  `DASHI/Physics/Closure/GRQFTClosurePromotionReceiptRequestPack.agda`,
+  `DASHI/Physics/Closure/OriginReceiptPromotionExternalRequestPack.agda`,
+  `DASHI/Physics/Closure/CancellationPressureRetargetConsumerAcceptanceRequestPack.agda`,
+  `DASHI/Physics/Closure/W3AcceptedAuthorityExternalReceiptRequestPack.agda`,
+  `DASHI/Physics/Closure/W4PhysicalCalibrationExternalReceiptRequestPack.agda`
+- Provider request-pack index:
+  `DASHI/Physics/Closure/P0ProviderReceiptRequestIndex.agda`
+- Provider attempt diagnostics:
+  `DASHI/Physics/Closure/W3AcceptedAuthorityProviderAttempt.agda`,
+  `DASHI/Physics/Closure/W4PhysicalCalibrationProviderAttempt.agda`,
+  `DASHI/Interop/PNFResidualConsumerRuntimeProviderAttempt.agda`
+- Empirical compatibility provider-attempt diagnostics:
+  `DASHI/Physics/Closure/EmpiricalCompatibilityOptionAProviderAttempt.agda`,
+  `DASHI/Physics/Closure/EmpiricalCompatibilityOptionBProviderAttempt.agda`,
+  `DASHI/Physics/Closure/EmpiricalCompatibilityOptionCProviderAttempt.agda`
+- HEPData empirical-source candidate diagnostic:
+  `DASHI/Physics/Closure/HEPDataEmpiricalSourceCandidateDiagnostic.agda`
+- HEPData bridge queue and first request/diagnostic lanes:
+  `DASHI/Physics/Closure/HEPDataBridgeWorkerQueue.agda`,
+  `DASHI/Physics/Closure/HEPDataObservableSchema.agda`,
+  `DASHI/Physics/Closure/HEPDataObservableSelectionDiagnostic.agda`,
+  `DASHI/Physics/Closure/HEPDataUnitCalibrationRequirementDiagnostic.agda`,
+  `DASHI/Physics/Closure/HEPDataMeasurementSurfaceProjectionRejection.agda`,
+  `DASHI/Physics/Closure/HEPDataComparisonAuthorityRouteDiagnostic.agda`,
+  `DASHI/Physics/Closure/HEPDataITIRAuthorityAdapterDiagnostic.agda`
+- HEPData provider request-pack surface:
+  `DASHI/Physics/Closure/HEPDataProviderReceiptRequestPack.agda`
+- HEPData residual/deviation retarget surfaces:
+  `DASHI/Physics/Closure/HEPDataResidualBridgeWorkerQueue.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualObservableClassRequest.agda`,
+  `DASHI/Physics/Closure/HEPDataDefectProjectionDiagnostic.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualSourceCandidateDiagnostic.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualProviderReceiptRequestPack.agda`,
+  `DASHI/Physics/Closure/HEPDataNonCollapseObservableObligation.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualComparisonLawRequest.agda`,
+  `DASHI/Physics/Closure/HEPDataEmpiricalResidualBridgeCore.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualProviderPayloadIntake.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualBridgeAuthorityGate.agda`,
+  `DASHI/Physics/Closure/HEPDataExternalResidualWitnessPayload.agda`,
+  `DASHI/Physics/Closure/HEPDataExternalResidualWitnessCandidateDiagnostic.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualObservableClassCandidateDiagnostic.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualObservableClassProtoReceipt.agda`,
+  `DASHI/Physics/Closure/HEPDataResidualObservableClassExternalAlignment.agda`
+- HEPData t43 runner / prediction-hook surfaces:
+  `DASHI/Physics/Closure/HEPDataT43PredictionAPIRouteDiagnostic.agda`,
+  `DASHI/Physics/Closure/HEPDataT43SudakovBaselinePredictionHook.agda`,
+  `DASHI/Physics/Closure/HEPDataObservableDefinitionReceipt.agda`,
+  `scripts/diagnose_hepdata_ratio_conventions.py`,
+  `scripts/run_t43_projection.py`,
+  `DASHI/Physics/Prediction/phi_star_ratio.py`
+- LILA/E8 diagnostic surfaces:
+  `DASHI/Physics/Closure/LilaE8InitialisationPriorNote.agda`,
+  `DASHI/Physics/Closure/LilaE8RootSystemLocalSourceDiagnostic.agda`,
+  `DASHI/Physics/Closure/LilaE8RootSystemLatticeReceipt.agda`,
+  `DASHI/Physics/Closure/LilaE8RootEnumeration.agda`,
+  `DASHI/Physics/Closure/LamTungE8AdapterSurface.agda`,
+  `DASHI/Physics/Closure/LilaE8ThetaJBridgeSurface.agda`,
+  `DASHI/Physics/Closure/LilaE8PhiStarProjectionReceipt.agda`
+- Atom/wave secondary note: `Docs/AtomAndWaveRecoveryStatus.md`
+- Recovery truth surfaces: `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`
+- Module and diagram entrypoint: [architecture.md](architecture.md)
+
+What not to read first:
+
+- do not start with `DASHI/Everything.agda`
+- do not start with long status bullets below
+- do not treat empirical or packaging lanes as theorem closure
+
 ## Repository Status
 
 Archive-backed status update:
 
+## Active Blocker Coordination
+
+The historical closure checklist is complete and now serves as provenance. The
+active blocker queue is coordinated through `Docs/WorkerCoordinationBoard.md`
+and `TODO.md`, with validation policy in `Docs/AgdaValidationTargets.md` and
+promotion governance in `Docs/OriginTraceabilityLedger.md`.
+
+Current worker lanes:
+
+- Active assignment round `2026-05-04`: `W1`=`Erdos`,
+  `W2`=`Boole`, `W3`=`Tesla`, `W4`=`Poincare`. Result: `W1` produced a typed
+  current-carrier MDL obstruction, `W2` produced a finite-carrier convergence
+  bound, `W3` produced a narrow empirical equality plus mismatch diagnostic,
+  and `W4` produced a symmetric nontrivial quotient-law advance. These are
+  theorem/diagnostic advances, not full blocker closure; stronger carrier,
+  metric, and empirical-promotion gaps remain as recorded in the board.
+- W4 TSFV refinement: the Candidate256 quotient law now records simultaneous
+  sheet-sign reversal as an involution and proves cross-band coupling
+  invariance under it. This keeps the law structural and trit/lattice-native,
+  not based on asymmetric provenance or temporal ordering.
+- Follow-up round `2026-05-04`: `W1b` named a retargeted schedule-MDL
+  replacement channel, and `W2b` added a local pointed metric/horizon rate law.
+  Remaining blockers are now narrower: accept/prove the retargeted channel as
+  the intended noncanonical continuum target, and provide realization-family
+  metric coherence for the convergence theorem.
+- Dependency-reduction round `2026-05-04`: `W1c` added a typed retarget-policy
+  ingredient and acceptance surface, `W2c` added a realization-indexed
+  shift-flow metric family witness, and `W8` added an origin-observation receipt
+  surface. These reduce the implicit blocker surface but do not promote full
+  empirical adequacy, chemistry handoff, or arbitrary-realization convergence.
+- W3 mismatch diagnostic clarification: in this repo the term means a typed
+  negative bridge receipt with three parts: first mismatch depth, trit-level
+  mismatch kind, and the responsible `F_extract` / `F_promote` / `F_graph` /
+  `F_explain` / `F_action` component. It is not mere inequality.
+- Targeted dependency round `2026-05-04`: `W8b` is assigned to `Bernoulli` for
+  a concrete origin-observation receipt instance or typed blocker, and `W3b`
+  is assigned to `Hubble` for the B4 empirical dependency clarification. The
+  retarget-policy ingredient remains governance-parked and must not be
+  inhabited by worker assumption.
+- Targeted dependency results: `W8b` landed
+  `MinimalCredibleShiftOriginObservation`, a concrete non-promoting origin
+  receipt for `minimumCredibleClosureShift` with `empiricalBlocked` and
+  `missingEmpiricalAdequacyBridge`; `W3b` landed a B4 separation receipt showing
+  closure/observable B4 promotion does not discharge empirical B4 validation.
+- Policy-consumption round `2026-05-04`: `W1d` now accepts exactly the canonical
+  retargeted schedule-MDL channel by equality in
+  `CanonicalToNoncanonicalMdlRetargetPolicyDecision`; `W3c` and `W4c` are
+  assigned to consume that policy in their lanes without promoting empirical or
+  physical chemistry closure.
+- Policy-consumption results: `W3c` consumed the W1d policy and W8b origin
+  receipt, leaving typed blockers for chi2 transport, empirical B4 validation,
+  full-profile universe boundary, and `empiricalBlocked`; `W4c` added
+  `ChemistryPhysicalHandoffDiagnostic`, whose status is
+  `missingPhysicalConsumer`.
+- Remainder-narrowing round `2026-05-04`: `W3d` is assigned to chi2
+  fixed-point carrier transport or typed obstruction, and `W4d` is assigned to
+  a chemistry physical-consumer surface or sharper missing-ingredient
+  diagnostic.
+- Remainder-narrowing results: `W3d` added
+  `Chi2FixedPointCarrierTransportObstruction`, naming the needed positive
+  transport receipt and proving the current pool-mismatch/no-same-surface
+  obstruction; `W4d` sharpened the physical-handoff blocker to
+  `missingRetargetedQuotientInterpretationCarrierOrPreservationLaw`.
+- Dual-discharge attempt round `2026-05-04`: `W3e` is assigned to the chi2
+  same-surface / fixed-point defect-observation receipt, and `W4e` is assigned
+  to the retargeted-quotient physical interpretation carrier/preservation law.
+- Dual-discharge results: `W3e` inhabited the chi2 transport receipt only via a
+  `carrierForgettingConstantReceiptOnly` boundary, so W3 still needs a
+  non-forgetting same-surface theorem over `Chi2BoundaryCase`; `W4e` inhabited
+  a boundary-only pre-physical consumer, so W4 now has
+  `retargetedQuotientPrePhysicalConsumerAvailable` without spectra, bonding,
+  wet-lab, or scale-setting claims.
+- Blocker-tightening results: `W3f` added
+  `Chi2NonForgettingSameSurfaceObstruction`, proving the current same `Nat`
+  defect target cannot also distinguish primary/secondary chi2 cases; `W4f`
+  added `ChemistryStrictPhysicalSemanticsBlocker`, naming the strict physical
+  missing ingredients as scale-setting law, spectral observable map, bonding
+  interpretation, and empirical physical validation.
+- Obligation-surfacing results: `W3g` added
+  `Chi2CanonicalPoolObservationCandidate`, a local nonconstant chi2-pool
+  discriminator that remains non-empirical and non-promoting; `W4g` added
+  `W4StrictPhysicalNextObligation`, the concrete obligation surface for the
+  strict Candidate256 physical handoff.
+- Local-transport/ledger results: `W3h` added
+  `Chi2ToShiftPressureTransportCandidate`, mapping the three local chi2 pool
+  cases to start/next/held shift-pressure points without claiming fixed-point
+  empirical adequacy; `W4h` added `W4StrictPhysicalObligationLedger`, ordering
+  strict Candidate256 physical work with scale-setting first.
+- Local-dynamics result: `W3i` added
+  `Chi2TransportDynamicsToFixedPointBridge`, composing the local chi2 transport
+  with the existing two-step shift absorption to the held point while still
+  refusing any empirical observation-target claim.
+- Obligation-narrowing results: `W3j` added
+  `W3EmpiricalTargetPromotionBridgeObligation`, the typed surface for the
+  remaining empirical target/promotion work; `W4i` added
+  `W4StrictPhysicalScaleSettingLaneObligation`, the first ordered strict
+  physical lane.
+- Surrogate-boundary results: `W3k` added
+  `W3SurrogateEmpiricalTargetBoundary`, proving the W3 target/promotion record
+  shape is syntactically inhabitible only with a surrogate `Nat` target; `W4j`
+  added `W4SurrogateScaleSettingBoundary`, proving the scale lane is
+  dimensionlessly inhabitible while physical units/calibration remain missing.
+- Authority/calibration gate results: `W3l` added
+  `W3AcceptedEmpiricalAuthorityGate`, separating surrogate availability from
+  accepted empirical authority; `W4k` added `W4PhysicalCalibrationGate`,
+  separating dimensionless surrogate scale from calibrated physical units and
+  dimensional preservation.
+- Gate-hardening result: `W3AcceptedEvidenceAuthorityToken` and
+  `Candidate256PhysicalCalibrationAuthorityToken` now have no constructors in
+  the current repo, preventing surrogate evidence or `Nat` scale reuse from
+  accidentally promoting W3/W4.
+- External-intake result: `W3AcceptedAuthorityExternalReceiptObligation` and
+  `W4PhysicalCalibrationExternalReceiptObligation` now name the upstream
+  authority/calibration receipt shapes that would be required to unlock those
+  hardened gates, while recording current status as obligations-needed only.
+- Remaining-lane obligation result: `GRQFTConsumerNextObligation`,
+  `PNFResidualConsumerNextObligation`, and
+  `CancellationPressureCompatibilityNextObligation` now name the W5, W6, and W9
+  next receipts/diagnostics without promoting GR/QFT closure, ITIR/PNF runtime
+  labels, or cancellation-pressure compatibility.
+- Final-boundary obligation result:
+  `CanonicalToNoncanonicalMdlRetargetFinalSeamObligation`,
+  `NaturalP2ConvergencePromotionObligation`,
+  `ClaimGovernancePromotionObligation`, and
+  `OriginReceiptPromotionExternalObligation` now name the remaining W1, W2, W7,
+  and W8 promotion receipts without promoting the retargeted seam, natural/p2
+  dynamics, claim-governance readings, or origin empirical status.
+- P0 obligation index result:
+  `P0BlockerObligationIndex` now imports the current W1-W9 obligation/status
+  surfaces as a single board-wide smoke target. This is a discoverability and
+  validation surface only; it does not inhabit any external authority token or
+  promote empirical, chemistry, GR/QFT, PNF, origin, natural, or
+  cancellation-pressure closure.
+- Route-narrowing queue result:
+  `W3AcceptedAuthorityRouteNarrowing`,
+  `W4PhysicalCalibrationRouteNarrowing`, and `P0SecondaryObligationQueue` now
+  name the next W3, W4, and W5/W6/W9 routes as typed blocked diagnostics. The
+  P0 index imports these surfaces, but no authority, calibration, physical,
+  empirical, GR/QFT, PNF, or cancellation-pressure promotion was made.
+- Unified energy-functional surface:
+  `UnifiedEnergyFunctionalSurface` now records the shared Lyapunov skeleton
+  already present in the codebase: UFTC severity propagation as max-energy,
+  strict contraction as distance-to-fixed-point energy descent, shift quadratic
+  energy as a finite descent instance, and `JFixedPoint` normalization to
+  `196884`. The P0 index imports this as a coordination interface only; it does
+  not merge carriers or promote W1/W3/W4/W5/W6/W8/W9 receipts.
+- Blocker-kill matrix:
+  `BlockerKillConditions` now converts the remaining red/yellow blockers into
+  receipt-driven kill rows. Each row names the receipt type, authority/evidence
+  wrappers, typed promotion target, current `blocked` state, and no-bypass
+  laws. The matrix is imported by the P0 index; it does not construct the
+  missing receipts.
+- Active receipt-kill lanes:
+  `Docs/WorkerCoordinationBoard.md` now assigns eight parallel receipt-kill
+  lanes: `Noether`/W1 final seam, `Turing`/W2 natural-p2, `Curie-W3`/W3
+  empirical authority, `Faraday`/W4 calibration, `Maxwell`/W5 GR/QFT,
+  `Liskov`/W6 runtime PNF, `Hypatia`/W8 origin promotion, and `Planck`/W9
+  pressure witness or weighted replacement. Each lane must supply the named
+  typed receipt or return a sharper impossibility diagnostic.
+- Receipt-kill results:
+  W1's final seam kill condition is now unblocked, with only pre-physical
+  downstream handoff. W6 now has a receipt constructor once runtime PNF
+  receipts exist. W8 is narrowed to empirical promotion/status. W9 has a weighted
+  cancellation-pressure candidate receipt, but the uniform
+  cancellation-to-weighted-quadratic identification is now typed-obstructed at
+  `(1 , 1)`, so W9 must return to the pressure-witness route or a different
+  replacement seam. W2/W3/W4/W5 remain blocked
+  with sharper constructorless-token or receipt-field diagnostics.
+- Receipt-kill follow-up results:
+  W6 now has an explicit runtime-intake request surface for the consumer
+  profile, runtime receipt id, paired `PNFEmissionReceipt`s, and Hecke
+  candidate-pool receipt id. W8 now has a promoted-status receipt shape, but it
+  remains externally authority-gated and the current origin receipt remains
+  `empiricalBlocked`. W9's existing pressure-witness route is also obstructed
+  for canonical-15 at `(1 , 3)`, complementing the weighted-route obstruction;
+  W9 now requires a narrowed theorem family or different pressure-compatible
+  quadratic target.
+- Receipt-source and route-selection results:
+  W6 has no concrete in-repo runtime receipt values for the new intake request;
+  W8 has no in-repo promoted empirical-status authority or origin-specific
+  adequacy bridge; and W9's current route classes are exhausted for
+  canonical-15. The only typed W9 continuation now named locally is a
+  pressure-compatible retarget with an explicit boundary that does not claim
+  canonical Qcore/admissible quadratic promotion.
+- External bridge split round:
+  Option A now types the `E_total -> simple observable` bridge while requiring
+  measured value plus authority for adequacy. Option B now types the
+  unit/dimension-preserving calibration bridge while requiring external unit
+  calibration and dimensional preservation evidence. Option C now types finite
+  toy-fit mechanics while keeping toy adequacy separate from accepted empirical
+  authority. These surfaces narrow W3/W4/W5/W8 but do not promote any blocker.
+- Intake and retarget round:
+  A2/B2/C2 now name the concrete external receipt shapes needed after the
+  Option A/B/C split: measured-value intake, unit-calibration intake, and
+  real-dataset authority routing. W9 now has a pressure-compatible retarget
+  receipt with an explicit non-Qcore boundary. These are route/intake advances,
+  not empirical, physical, origin, or canonical-Qcore closure.
+- Source diagnostic and consumer-obligation round:
+  A3/B3/C3 now record that current repo sources do not supply the required
+  Option A measured-observable receipt, Option B unit-calibration receipt, or
+  Option C real-dataset authority route. W9f names the downstream consumer
+  acceptance receipt required before the W9 retarget can route around
+  `CancellationPressureCompatibility`. These are diagnostics and obligation
+  surfaces only.
+- External request / source handoff round:
+  `EmpiricalCalibrationExternalReceiptRequestPack` consolidates the A3/B3/C3
+  external receipt requests; `GRQFTConsumerSourceDiagnostic` records that W5
+  has known-limits bridge sources but lacks promotion authority, laws,
+  witnesses, downstream fields, and empirical validation;
+  `PNFResidualConsumerReceiptRequestPack` co-locates W6 runtime payload fields;
+  and `CancellationPressureRetargetConsumerSourceDiagnostic` records that W9
+  now has a weighted-support `RetargetConsumerInterface` and acceptance receipt
+  whose downstream predicate is a `<=` pressure-support bound. These are
+  handoff/source surfaces only, not blocker promotions; W9 still needs an
+  explicit theorem-consumer route change or the original equality witness.
+- Provider request-pack round:
+  `GRQFTClosurePromotionReceiptRequestPack`,
+  `OriginReceiptPromotionExternalRequestPack`, and
+  `CancellationPressureRetargetConsumerAcceptanceRequestPack` now co-locate the
+  exact provider payloads for W5, W8, and W9. The W9 pack now consumes the
+  local weighted-support retarget acceptance and keeps the remaining blocker at
+  theorem-consumer route change. They do not construct authority tokens,
+  empirical adequacy, GR/QFT laws, origin promotion, W9 kill evidence, or
+  cancellation-pressure compatibility.
+- Empirical / calibration request-pack round:
+  `W3AcceptedAuthorityExternalReceiptRequestPack` and
+  `W4PhysicalCalibrationExternalReceiptRequestPack` now co-locate the exact
+  provider payloads for W3 accepted authority and W4 Candidate256 physical
+  calibration. They do not construct empirical authority, empirical adequacy,
+  B4 promotion, origin promotion, calibration authority, physical units,
+  dimensional laws, or physical validation.
+- Provider request index round:
+  `P0ProviderReceiptRequestIndex` now co-locates all provider-facing P0 request
+  packs in one typed surface: A/B/C, W3, W4, W5, W6, W8, and W9. It is a
+  handoff index only; concrete provider receipts or explicit theorem-route
+  changes are still required before promotion.
+- Provider attempt diagnostic round:
+  `W3AcceptedAuthorityProviderAttempt`,
+  `W4PhysicalCalibrationProviderAttempt`, and
+  `PNFResidualConsumerRuntimeProviderAttempt` attempted the W3, W4, and W6
+  provider lanes against current repo artifacts. All three are diagnostic-only:
+  W3 still lacks accepted authority/B4/origin/bridge receipts, W4 still lacks
+  calibration authority/units/dimensional preservation, and W6 still lacks the
+  concrete runtime payload.
+- Empirical compatibility provider attempt round:
+  Option A, B, and C were attempted against current repo artifacts. All three
+  are diagnostic-only: A lacks measured value/authority/match proof, B lacks
+  unit calibration authority/validation/dimensional preservation, and C lacks
+  real-dataset authority plus W3/W8 promotion receipts.
+- HEPData empirical source candidate round:
+  local HEPData / `MeasurementSurface` candidates are present and indexed by
+  `HEPDataEmpiricalSourceCandidateDiagnostic`, including artifact schema,
+  adapter/consumer, program-surface, projection-contract, tests, registry docs,
+  sibling `dashifine` NPZ/projection/certification artifacts, `dashiQ`
+  authority-discovery scripts and projection docs, `dashitest` copied
+  experimental surfaces, and ITIR provenance scaffolding. This narrows the
+  empirical blocker to a HEPData observable schema/checksum, projection, units,
+  comparison law, ITIR authority adapter, and accepted authority receipts; it
+  does not promote W3/W8 empirical compatibility.
+- HEPData bridge schema/projection/provenance round:
+  `HEPDataBridgeWorkerQueue` assigns HEP-A through HEP-F as typed bridge lanes.
+  `HEPDataObservableSchema` defines the non-promoting observable schema and
+  checksum request, `HEPDataObservableSelectionDiagnostic` records that no
+  checksum-bound authority-accepted observable/table-column selection exists
+  yet, `HEPDataUnitCalibrationRequirementDiagnostic` records that schema unit
+  labels are not physical calibration authority,
+  `HEPDataMeasurementSurfaceProjectionRejection` records the current projection
+  contract as a typed rejection, `HEPDataComparisonAuthorityRouteDiagnostic`
+  records that comparison law and accepted dataset authority route are blocked
+  until HEP-B/C/D/F receipts exist, and `HEPDataITIRAuthorityAdapterDiagnostic`
+  records that ITIR provenance scaffolding exists but no HEPData-specific
+  authority adapter/token exists.
+- HEPData provider request-pack round:
+  `HEPDataProviderReceiptRequestPack` now co-locates the HEP-A..F bridge
+  receipt chain as a provider-facing payload and indexes it through the P0
+  provider and blocker indexes. It is still non-promoting: the selected
+  observable/table column, checksum-bound authority, unit calibration,
+  theorem-side projection, comparison law, ITIR authority adapter/token, W3
+  accepted-authority receipt, and W8 origin-promotion receipt remain external.
+- HEPData residual/deviation retarget round:
+  raw-value HEPData projection is no longer the intended default bridge because
+  saturated internal observables can collapse to constants. The new
+  non-promoting surfaces require residual/deviation/anomaly/symmetry-breaking
+  or defect-profile observable classes, a baseline/invariance model,
+  covariance-aware residual definition, non-collapse witness, residual-aware
+  comparison law, and a projection into a DASHI defect/residual profile before
+  provider receipts can promote. The residual provider pack applies a
+  first-missing receipt policy so local candidate paths cannot become authority.
+  The HEP-R7/R8/R9 extension adds the generic residual bridge core, provider
+  payload intake filter, and authority gate: these surfaces make the bridge a
+  receipt filter rather than a data bridge, rejecting raw/path/unchecksumed /
+  no-route/no-witness answers. HEP-R10/R11 then add the external witness
+  payload carrier and the current `phistar_50_76` local candidate diagnostic;
+  this records a checksumable non-collapsing evidence pointer but not an
+  accepted provider receipt. HEP-R12 specializes the residual observable-class
+  request to that candidate as a `fluctuationProfile` under an adjacent-bin
+  local-invariance baseline, while keeping `residualObservableClassReceipt` as
+  the first missing provider receipt. HEP-R13 packages that class candidate as
+  an externalizable proto-receipt payload and records that provider intake and
+  the authority gate still reject promotion until the external receipt chain is
+  supplied. HEP-R14 then aligns the internal class with externally legible
+  language: adjacent-bin finite-difference residual / local bin-to-bin
+  variation over the published `phistar_50_76` distribution. It names the
+  non-zero delta and candidate normalized pull, but does not claim statistical
+  significance or provider authority. HEP-R15 collates the CMS-SMP-20-003
+  authority source and fetched raw HEPData artifacts, correcting the table
+  binding to `ins2079374` / `t19` for `phistar mass 50-76` and `t20` for its
+  covariance matrix. It also records that the raw upstream values
+  (`228.59 -> 225.69`) and normalized local artifact values
+  (`188.4 -> 185.09`) are distinct surfaces, so an adapter-transform receipt
+  is now an explicit prerequisite before W3/W4/W5/W8 promotion. HEP-R16..R23
+  add the non-promoting follow-up package: source-authority pointers for t19,
+  t20, t68, and t69 with the paper DOI corrected to `11631-7` and `11680-y`
+  rejected as the wrong pointer; HEP-R21 selects the dimensionless `t43/t44`
+  ratio route; HEP-R22 records the remaining internal freeze/projection run
+  request; HEP-R24 records the ratio-artifact acquisition request and HEP-R28
+  supplies the checksum-bound `t43/t44` CSV artifacts via the name-based
+  HEPData endpoints; HEP-R25 records that no exact digest-bound t43 DASHI
+  projection runner exists yet; HEP-R26 records that the current `HEAD` is
+  named but the dirty worktree blocks an accepted freeze; HEP-R27 records the
+  comparison-law intake prerequisites; HEP-R30 records the clean
+  prediction-freeze policy sequence and certificate shape without accepting the
+  dirty diagnostic `HEAD`; HEP-R31 records the future comparison-law receipt
+  skeleton with chi2, chi2/dof, per-bin two-sigma law, and authority DOI still
+  uninhabited; HEP-R32 records the fail-closed runner implementation-attempt
+  lane that can verify the HEP-R28 digests and emit an incomplete diagnostic
+  projection artifact but cannot set `projectionComplete = true` until the real
+  DASHI phi-star ratio prediction call and clean `predictionFixedAt` receipt
+  exist; HEP-R33 narrows that missing call to an accepted batch API returning
+  one finite DASHI ratio value per t43 bin for
+  `sigma_DASHI(50-76) / sigma_DASHI(76-106)`; HEP-R34 adds a
+  non-promoting CSS/Sudakov baseline hook at
+  `DASHI.Physics.Prediction.phi_star_ratio:predict_ratio` so the runner can be
+  exercised end-to-end, while keeping the accepted repo-native DASHI
+  prediction API, clean freeze, projection receipt, and comparison-law receipt
+  open; HEP-R18 keeps W4 same-record Z-peak / ratio anchors; and HEP-R23
+  expands the W5/W6 high-mass, ratio, response, pT, and theory-adapter
+  inventory.
+- LILA/E8 diagnostic round:
+  `LilaE8RootSystemLocalSourceDiagnostic` inventories in-repo LILA bridge /
+  trace-family material plus sibling DASHIg/DASHIfine evidence pointers, and
+  `LilaE8RootSystemLatticeReceipt` records the proposed E8/Lam-Tung/phi-star
+  projection lane as a non-promoting receipt surface. It does not claim an E8
+  root-system carrier, Lam-Tung derivation, phi-star projection run,
+  comparison law, or physics promotion. `LilaE8InitialisationPriorNote` records
+  the related SPUTNIKAI/sovereign-lila-e8 engineering project and rejects
+  AllenAI/Lila as unrelated provenance, while also rejecting TinyStories/LILA-E8
+  benchmark results as DASHI empirical evidence. LILA-R2/R3/R4 now define
+  request-only surfaces for E8 root enumeration, Lam-Tung/E8 adapter semantics,
+  and E8 theta/J modular-form bridging; LILA-R5 records the parked phi-star
+  projection receipt that remains blocked on accepted R2/R3/R4 receipts.
+- Sibling evidence inventory:
+  `SiblingEvidenceInventory` records useful sibling evidence pointers from
+  `dashifine`, `dashiQ`, `dashitest`, `DASHIg`, and `dashi_lean4`. These
+  artifacts can guide future worker lanes, but they are explicitly
+  non-promoting: no clean freeze, accepted DASHI prediction API, digest-bound
+  projection, comparison law, E8 carrier, Lam-Tung adapter, theta/J bridge, or
+  W3/W4/W5/W6/W8/W9 promotion receipt is constructed from sibling evidence.
+  It now also records sibling video diagnostics: `dashifine` GIF/frame
+  visualizations and `dashitest` codec, Vulkan/VAAPI, live-sheet, and MP4 smoke
+  artifacts. These are documented in `Docs/SiblingVideoEvidenceInventory.md`
+  and remain engineering diagnostics until a local video-continuity receipt
+  binds frames to a trace, observation map, metric, admissibility law, command,
+  and artifact digests.
+  `SiblingEvidenceExtractionDiagnostic` records the worker extraction results:
+  the sibling HEPData scripts are coefficient-flow/proxy diagnostics rather
+  than an accepted `sigma_DASHI` ratio API, the Lyapunov JSON is aggregate
+  support only, the E8 morpheme files are a 2048-entry tokenizer vocabulary,
+  and the Lean moonshine files support arithmetic rather than theta/J closure.
+- Sibling porting/API narrowing:
+  `SiblingMathPortingMatrix` classifies child `dashi*` artifacts into
+  port-to-Agda, projection-candidate, citation-only, diagnostic-only, and
+  ignore-for-closure rows. `HEPDataT43DASHINativeAPIRouteDiagnostic` records
+  HEP-R35: no sibling or CSS/Sudakov surface supplies accepted `sigma_DASHI`
+  for t43, so DashiDynamics phi-star projection construction remains required.
+  HEP-R36 adds the first governed internal construction surface:
+  `DASHI.Physics.Prediction.sigma_dashi:predict_ratio` is runner-callable and
+  computes `sigma_DASHI(m_lo, m_hi, phi_lo, phi_hi)` from deterministic finite
+  trit-state enumeration using only bin edges and mass windows. The matching
+  `HEPDataT43DASHINativeProjectionReceipt` Agda surface records the
+  DashiDynamics/FascisticContraction route and no-observed-ratio boundary, but
+  clean freeze, projection artifact review, covariance-aware comparison law,
+  and W3/W4/W5/W8 promotion remain open.
+  HEP-R37 records the first dirty diagnostic run of this hook:
+  `/tmp/t43_projection_hep_r37_dirty.json` reached `projectionComplete = true`
+  for 18 bins, but the freeze hash is synthetic and the worktree is dirty, so
+  the artifact remains non-promoting and cannot inhabit the comparison-law
+  receipt. HEP-R38 computes the corresponding dirty covariance-aware comparison
+  diagnostic: chi2/dof is `355674.6906162796`, which makes the current finite
+  trit projection a model-gap signal requiring refinement rather than an
+  empirical-adequacy candidate. HEP-R39 applies the v2 refinement with
+  phi-star-dependent depth, Breit-Wigner mass-window normalization, and a
+  smooth finite-carrier phase measure; the dirty diagnostic chi2/dof narrows
+  to `68.41787311159007`. This is still synthetic-freeze, dirty-worktree, and
+  above the comparison-law threshold, so it remains a model-gap diagnostic and
+  not a W3/W4/W5/W8 promotion surface. HEP-R40 adds a bounded diagnostic
+  neutral-current continuum factor; the dirty chi2/dof narrows again to
+  `28.65761549390974`, with first-bin residuals now within the right scale.
+  This is still not accepted because it is synthetic-freeze, dirty-worktree,
+  and above threshold. HEP-R41 adds a posterior shoulder-dip / recovery-bump
+  shape response after inspecting HEP-R40 residuals; the dirty chi2/dof reaches
+  `1.7408778006026118`. This is a numeric-pass / governance-fail diagnostic:
+  posterior residual tuning and synthetic dirty freeze prevent it from
+  inhabiting the accepted comparison-law receipt. HEP-R42 tests that unchanged
+  HEP-R41 model against the independent t45/t46 holdout
+  (`106-170 / 76-106`) and fails with dirty chi2/dof
+  `222.54402462995546`, underpredicting every bin. This shows the t43 numeric
+  pass is not a general empirical adequacy receipt. HEP-R43 records the
+  corrected next obligation: t44 is covariance-only, and a mass-window-general
+  law must predict both `50-76 / 76-106` and `106-170 / 76-106` without
+  observed-table tuning. HEP-R44 runs the fresh
+  `sigma_dashi_mass_general` diagnostic on both surfaces; it fails with
+  t43 chi2/dof `1770377.845008375` and t45 chi2/dof
+  `122.01665676644487`, so the mass-normalization/general-law gap remains
+  open and no comparison-law or W3/W4/W5/W8 promotion is constructed.
+  HEP-R45 then checks the local HEPData CSV headers directly: t43 and t45 are
+  both `DSIG/DPHISTAR / DSIG/DPHISTAR` measured differential-cross-section
+  ratios, with values not normalized by bin width. The
+  normalized-by-total-cross-section explanation is therefore blocked; the
+  remaining gap is model normalization / neutral-current calibration, not a
+  table-convention mismatch.
+  `LilaE8RootEnumerationReceiptR2` records `112 + 128 = 240` as count support
+  only; it is not an E8 carrier theorem or empirical unblocker.
+- Coordination diagrams:
+  `Docs/WorkerCoordinationMap.puml` is the compact current-state board view.
+  `Docs/HEPDataResidualCoordinationMap.puml` is the HEP-R1..R44 plus
+  LILA-R1..R5 plus SIB-R1..R2 plus SIB-MATRIX child graph for the empirical
+  residual bridge.
+- Current coordination plateau:
+  remaining internal worker work should focus on integrating external receipts
+  when supplied. Do not spawn another local surrogate-promotion lane for W3,
+  W4, W5, W6, W8, or W9 without a new upstream authority, calibration,
+  empirical, runtime, origin, or pressure-witness receipt.
+- `W1`: MDL/CR aligned carrier or CR-flat target.
+- `W2`: natural / `p2` bridge or obstruction plus
+  `CanonicalDynamicsLawTheorem` convergence-rate dynamics.
+- `W3`: `EmpiricalAdequacyBridge` or explicit carrier-mismatch diagnostic.
+- `W4`: stronger chemistry-facing law from the landed witness.
+- `W5`: richer GR/QFT consumer gate.
+- `W6`: ITIR/PNF receipt-bearing consumer wiring.
+- `W7`: claim-governance synchronization for higher-structure and cross-scale
+  charts. Current post-HEP-R53 publishable scope is only the bounded t43
+  below-Z Drell-Yan phistar ratio result: formal carrier plus
+  no-free-parameter phistar ratio comparison, `chi2/dof = 2.1565191176`, and
+  runner-side non-collapse evidence. This is not unification and not full W3
+  accepted authority before HEP-R54. The W3 non-collapse runner receipt is
+  hardened by `Docs/W3NonCollapseRunnerReceiptHardening.md` and
+  `scripts/check_w3_noncollapse_receipt.py`; the check binds the JSON witness,
+  checksum, and Agda receipt literals while preserving
+  `providerGradePayloadPresent = false`.
+- `W8`: origin receipt for the minimal-credible closure path.
+- `W9`: cancellation-pressure seam in `DeltaToQuadraticBridgeTheorem`.
+
+Workers must choose one lane from the board, keep file ownership bounded, and
+must not reopen completed checklist items unless an active blocker explicitly
+depends on that surface.
+
+## Diagram Surfaces
+
+- Canonical architecture overview: [architecture.md](architecture.md)
+- Origin traceability and core-spine navigation:
+  `Docs/OriginTraceabilityLedger.md`, `Docs/CoreSpineBridge.md`, and
+  `Docs/ClaimComparisonEngine.md`, `Docs/ITIRPNFResidualLogicBridge.md`
+- Strong claim owners:
+  `UnifiedPhysicsTheorem.agda`,
+  `AtomicChemistryRecoveryTheorem.agda`,
+  `PhysicsUnificationToCanonicalClosureAdapter.agda`
+- Repo reader metasystem: `Docs/RepoMetasystem.puml` and `Docs/RepoMetasystem.svg`
+- Public Paper 1 narrative flow: `Docs/PublicPaperNarrativeFlow.puml` and
+  `Docs/PublicPaperNarrativeFlow.svg`
+- Paper 1 manuscript source: `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md`
+  and `.tex`; full Agda constructor names belong in the reproducibility
+  receipt index, while the body should use human-readable receipt labels. The
+  manuscript glossary records that G2/G3/G6 are DASHI-native lane labels, not
+  standard-object equivalence claims unless explicitly inhabited.
+- Worker coordination map: `Docs/WorkerCoordinationMap.puml` and
+  `Docs/WorkerCoordinationMap.svg`
+- Canonical theorem spine: `Docs/CanonicalProofSpine.puml` and `Docs/CanonicalProofSpine.svg`
+- Physics/unification boundary map: `Docs/PhysicsUnificationMap.puml` and `Docs/PhysicsUnificationMap.svg`
+- Physical reality roadmap: `Docs/PhysicsRealityRoadmap.puml` and `Docs/PhysicsRealityRoadmap.svg`
+- Status-board convention:
+  green = theorem-owned/proved,
+  yellow = bridge or advanced-but-blocked,
+  blue = packaging/interface,
+  red/pink = empirical non-claim or open gate.
+- Observable/signature round: `Docs/ObservableSignatureGaugeEntryRound.puml` and `Docs/ObservableSignatureGaugeEntryRound.svg`
+- Training dynamics bridge: `Docs/TRAINING_DYNAMICS.puml` and `Docs/TRAINING_DYNAMICS.svg`
+- Versioned PlantUML sources: `Docs/*.puml`
+- Versioned rendered previews: `Docs/*.svg` and `Docs/*.png`
+- Re-render command: `./scripts/render_docs_diagrams.sh`
+- Worker routing rule:
+  use `Docs/WorkerCoordinationBoard.md` before assigning parallel workers to
+  red/yellow blocker boxes. Each worker should own one lane, one bounded file
+  surface, one success condition, and one validation rule.
 - The orbit/signature/shell-family story remains the strongest part of the
   repo and is now better supported by sibling-repo and archive material.
 - The wave / psi / graded-series bridge is no longer only aspirational:
@@ -13,6 +642,43 @@ Archive-backed status update:
   prove the invariant quadratic + uniqueness-up-to-scale seams from the
   contraction/projection machinery and then derive the downstream
   signature/Clifford/gauge chain from that theorem.
+- Canonical bottleneck progress this round:
+  `ContractionForcesQuadraticStrong` now records explicit scale-aware
+  uniqueness data (`scaleFactor`, `normalizeToScaledQ̂core`) while keeping the
+  old normalized witness surface stable; it also now carries named
+  `NondegeneracySeam` and `IsotropyCompatibilitySeam` records instead of
+  leaving those bottleneck slots as raw `⊤` placeholders, while preserving the
+  old compatibility fields for downstream consumers.  Those seam records are
+  now theorem-bearing: nondegeneracy records full normalization to `Q̂core`
+  and now reduces the remaining anisotropy requirement through the definitional
+  bridge `Q̂core≡sumSq`, so `CoreAnisotropyAssumption` is no longer a raw
+  `Q̂core` assumption but two narrower local premises on `HFZ.sumSq`
+  recursion (`SquareZeroResidualPremise` and
+  `SumSqZeroDecompositionPremise`), and those local premises are now discharged
+  from the integer / `HFZ.sumSq` machinery already in repo, so strong
+  nondegeneracy no longer depends on a residual anisotropy assumption;
+  isotropy compatibility now carries explicit shell-respecting structure plus
+  an inhabited action-transport package whenever a shell transport boundary
+  witness is present, and the downstream signature/Clifford boundary now states
+  that only normalized quadratic is actually consumed, so unconditional
+  shell-orbit existence is not part of the current theorem contract; and the
+  non-unit scale path now has an explicit `CoreScaleSeam` obstruction theorem
+  in positive dimension, so the honest positive-dimensional non-unit story
+  lives on an explicit restricted carrier (`CoreScaleCarrierSeam`) rather than
+  the full core, while `AdmissibleFor` remains a whole-carrier surface whose
+  positive-dimensional scale factor is forced to unit. The strong closure
+  surface now also exposes `strongNondegeneracy` as the default discharged
+  theorem path, so downstream code can depend on null-cone reflection without
+  threading `CoreAnisotropyAssumption` manually. And
+  `QuadraticToCliffordBridgeTheorem` now replaces the old uniqueness
+  placeholder with an explicit generator-image uniqueness theorem on the
+  factorization surface. The spin/Dirac bridge now also exposes an explicit
+  `spinDiracBridgeBoundary`, confirming that the current downstream path still
+  consumes only the normalized-quadratic contract and does not require a wider
+  nondegeneracy surface. The core/full-closure side now says the same thing
+  explicitly through `closureQuadraticBoundary`, so the canonical closure stack
+  records that it is carrying bridge witnesses, not consuming null-cone
+  reflection.
 - Local merge-prep tooling status:
   the repo now treats a Nix/zkperf surface as acceptable only if it preserves
   the existing authoritative CI route through `DASHI/Everything.agda` and also
@@ -20,25 +686,567 @@ Archive-backed status update:
   Demo DA51/zkperf JSONL witness files are acceptable as illustrative tracked
   artifacts for now, but they must be documented as non-authoritative sample
   outputs rather than as canonical reproducibility inputs.
+- Layer-2 separator search now has an explicit target surface:
+  `Ontology.Hecke.ProfileSummaryFamilySeparation`
+  packages the honest split between
+  `CurrentProfileSummarySeparates`
+  and
+  `CurrentProfileSummaryCollapses`,
+  and
+  `Ontology.Hecke.CurrentSaturatedProfileSummaryFamilySeparation`
+  gives the current saturated-branch specialization of the same question,
+  while
+  `scripts/profile_summary_separation.py`
+  is the Python mirror that searches the current generator taxonomy for a
+  separating pair under the full `profileSummaryFamily` invariant, and
+  `scripts/profile_summary_adapter.py`
+  is now a precomputed-artifact-first seam over
+  `artifacts/hecke/profile_summary_family.json`; the remaining gap is the
+  missing materialized data, not missing Python shape. A schema example lives
+  at `artifacts/hecke/profile_summary_family.example.json`.
+  That gap is now closed locally by
+  `scripts/materialize_profile_summary_family.hs`, which materializes the JSON
+  artifact directly from the compiled MAlonzo bridge
+  `GeneratorCollapseClass -> primeImage -> profileSummaryFamily`.
+  On the current nine-generator taxonomy, the full family already separates,
+  and on the saturated-only slice it also separates. The current materialized
+  families cluster into five classes overall and four classes on the saturated
+  branch. `scripts/minimize_profile_summary_projection.py` now shows that
+  `forcedStableCount`, `totalDrift`, and `contractiveCount` each preserve the
+  same current partition as the full six-field family on both scopes.
+  `Ontology.Hecke.ContractiveCountLayer2Invariant`
+  now promotes `contractiveCount` as the theorem-facing current Layer-2
+  singleton surface, and
+  `Ontology.Hecke.CurrentSaturatedContractiveCountLayer2Invariant`
+  gives the same specialization on the current saturated branch.
+- Closure contract status now lives in `Docs/ClosureContractStatus.md`:
+  the strong layer carries discharged nondegeneracy, but the current
+  signature -> Clifford -> spin/Dirac -> full-closure chain still factors only
+  through the normalized-quadratic boundary.
 - Routine Agda target policy now lives in `Docs/AgdaValidationTargets.md`:
   use focused canonical bridge modules in normal edit loops, treat
   `PhysicsClosureValidationSummary.agda` as heavy/avoid-by-default, and treat
   `Everything.agda` as an occasional bounded checkpoint rather than a routine
   inner-loop command.
+- Representation-language clarification:
+  `Docs/ColourInDashi.md` now fixes the repo-facing split between optical
+  colour, perceptual colour, and QCD colour, and states the safe Dashi claim
+  boundary: colour is a projection-stable observable on a structured latent
+  signal, not a primitive property.
+- Internal-symmetry clarification:
+  `Docs/TriadicCarrierToSU3.md` now fixes the safe bridge from a triadic
+  3-sector carrier to an `SU(3)`-like internal symmetry claim. Ternary
+  counting alone is not enough; the lift requires conserved Hermitian norm,
+  determinant-one admissible mixing, and an observable quotient.
+- MDL toy clarification:
+  `Docs/MusicalSymmetryMDL.md` now states the stronger basin target explicitly:
+  replace direct symmetry reward with a compression/MDL proxy and ask whether
+  symmetric attractor classes still dominate.
+- Antifascistic / three-body / music boundary:
+  `Docs/AntifascisticBoundaryAndMusic.md` records the safe split between
+  invertible entropy-preserving dynamics, three-body carrier-vs-observable
+  predictability, and the maintained music MDL toy. It also fixes the safe
+  pitch-class bridge as `Z/12Z ~= Z/3Z x Z/4Z`, not a perfect-fifth `Z3` orbit.
+- Musical attractor target:
+  `Docs/MusicalAttractorTheorem.md` now names the precise exploratory bridge:
+  carrier `(Z/12Z)^n`, summed chromatic metric, nearest-scale `K_music`,
+  Lyapunov level `L_music`, one-step descent to `S^n`, and explicit quotient
+  boundaries separating CRT `p mod 3`, tonal clustering, and the order-12
+  perfect-fifth map.
 - Canonical closure routing now includes an explicit
   `ContractionForcesQuadraticStrong -> QuadraticToCliffordBridgeTheorem`
   step that builds a canonical bilinear-form interface from normalized
   quadratic data before spin/Dirac layers.
+- Interop/text-pressure sidecars:
+  `DASHI/Combinatorics/NGram.agda` and
+  `DASHI/Interop/ITIRJoinBridge.agda` exist locally and are aggregate-imported
+  by `DASHI/Everything.agda`.
+  `NGram` is a fixed-width ternary-window surface, not text semantics;
+  `ITIRJoinBridge` is a conservative UFTC severity/code to DASHI pressure
+  adapter, not a live ITIR runtime or production join-edge classifier.
+  `DASHI/Interop/SensibLawResidualLattice.agda` adds the four-level
+  `ResidualLevel` join-semilattice, signature-fibred PNF comparison gates,
+  wrapper filtering, `PredicateIndexSurface`, a six-level residual refinement,
+  and a minimal `PredicatePNF` carrier shape;
+  `DASHI/Algebra/TetralemmaBridge.agda` and
+  `DASHI/Algebra/SixfoldLogic.agda` connect the residual/tetralemma/sixfold
+  carriers to `LogicTlurey` and `Base369.HexTruth` without treating parser
+  output as semantic authority. The tetralemma bridge also records the
+  `TriTruth -> ResidualLevel` embedding and proves that `contradiction` is not
+  in the tone image.
+  `Ontology/Hecke/PNFResidualBridge.agda` adds the Hecke-side PNF fibre
+  adapter: quotient projection equality is a candidate-pool fibre, stable /
+  illegal / other defects map to `partial` / `contradiction` / `noTypedMeet`,
+  and illegal defects preserve critical pressure under residual joins.
+  `WrapperState` now includes `performativeEvidence`, which maps to
+  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
+  parser profile, reducer profile, source span, and emitted atom so residual
+  comparison is receipt-driven rather than hand-labelled.
+  `Docs/PNFCaseStudiesWatergateIran.md` records Watergate/Iran as conditional
+  fixtures for this wrapper gate, not as manually labelled examples; it also
+  treats formula posts and attribution-by-response interview exchanges as
+  conditional trace fixtures that require emitted receipts. Formula posts can
+  be tested as operator-level sufficient-statistic fixtures only after a
+  formula-reader receipt emits that structure; they are not proof certificates
+  for market periods, actor classifications, or `AntiFascistSystem` instances
+  without separate model witnesses. The docs also now record
+  domain-incommensurability as an open design fixture: a failed economic-cost
+  to decision-domain measure bridge must be emitted or certified before the
+  repo can classify a comparison as incommensurable.
+  `Docs/ClaimComparisonEngine.md` is the normalized reader surface for the
+  whole path from runtime receipt emission to residual joins, pressure,
+  tetralemma/sixfold carriers, and the Hecke adapter.
+  `Docs/AttractorOrbitClassifier.md` is the downstream design surface for
+  using receipted residual/domain/formula/Hecke features as an
+  attractor-orbit hypothesis generator; it is explicitly not a trading bot,
+  market predictor, or hidden-cause attribution engine without separate
+  empirical and causal validation. State-level political labels are likewise
+  kept outside the operator-class trace unless a separate taxonomy, receipt
+  corpus, scope rule, and validation standard are supplied.
+  Aggressor/responsibility labels likewise require a shared-fibre or
+  cross-fibre responsibility taxonomy, cost/threat/response receipts,
+  third-party burden provenance where relevant, and external validation.
+  Existential-domain and operator-completeness labels likewise require
+  physical-survival witness receipts, provenance, temporal/wrapper/modality
+  fields, an optional warrant-ordering rule, and a typed multi-domain
+  interaction operator before economic/theological/existential fibres can be
+  compared or composed.
+  Enemy-classification operator labels likewise require textual/source-span
+  receipts, interpretive-profile metadata, a classifier-input taxonomy, and
+  inverse/deactivation semantics before the repo can compare lineage-fixed or
+  behaviour-conditional classifiers against operator-duality surfaces.
+  Collapsed-quotient labels likewise remain inside the residual formalism:
+  one-element or coarser quotient lattices can be well-formed, but
+  `noTypedMeet`, product-lattice, and lift/redifferentiation claims require
+  explicit quotient maps, lost-distinction records, receipts, and validation.
+  Protected-identity/conduct-axis and three-body lattice labels likewise
+  require role-binding taxonomies, product-lattice maps, decision-projection
+  rules, decoupling semantics where claimed, source receipts, and validation.
+  Hostile-provenance and four-body theology labels likewise require
+  source-critical receipts, adversarial/indirect witness qualifiers,
+  orientation maps, product-lattice definitions, operator witnesses, and
+  validation; `Ultrametric.agda` exists, but no theological-lattice metric is
+  currently supplied.
+  Non-Abrahamic and N-body comparative-lattice labels likewise require
+  school-level source receipts, interpretive profiles, carrier definitions for
+  identity-map, permanent-distance, telos-free action, process, or
+  perspective-indexed fixtures, typed translations into or away from PNF, and
+  validation before the repo can classify named traditions or doctrines.
+  East Asian and Indigenous living-lattice labels likewise require culturally
+  governed public receipts, place/community provenance where applicable,
+  restricted-knowledge flags, topology-changing carrier definitions for
+  substrate, natural-flow, relation-matrix, immanent-node, fully connected,
+  derivation-graph, or timeless-bundle fixtures, typed morphisms, and
+  validation before the repo can compare them with DASHI carriers, graphs,
+  bundles, scan orders, metrics, or fixed points.
+  Affective-state and feelings-wheel labels likewise require a named emotion
+  taxonomy, source or subject/session receipts, psychometric or clinical
+  validation status, contemplative-source profiles where relevant, typed
+  feeling-tone, naming, perspective, and wrapper carriers, and explicit
+  clinical non-authority flags before the repo can compare them with Base369,
+  Whakapapa, DharmaSystem, Amalek-collapse, trauma-healing, Dreaming, or
+  JFixedPoint fixtures.
+  Mathematical-atlas and higher-structure labels likewise require typed chart
+  interfaces before the repo can promote category-theory, Jain-topos, HoTT,
+  ergodic, information-geometric, coinductive/non-well-founded, tropical,
+  renormalization, or infinity-categorical analogies into theorem claims.
+  Required gates include chart carriers, morphisms from existing
+  PNF/residual/operator surfaces, preservation laws, and validation; the repo
+  does not currently prove a DASHI infinity-topos, a Jain subobject
+  classifier, a checked Amalek adjunction, a HoTT path-space reading of
+  Whakapapa/Dreaming, an ergodic Songline/scan-order theorem, a Fisher/MDL PNF
+  projection, a tropical degeneration, an RG relevance law, or `JFixedPoint` as
+  a terminal object.
+  Cross-scale physics, biology, neuroscience, affective, theological, and
+  consciousness labels likewise require typed scale carriers, explicit scale
+  maps, observable-preservation laws, measurement protocols, empirical
+  validation, and clinical non-authority flags where health-related claims are
+  involved. The repo does not currently prove that quantum superposition is
+  pre-vedana, measurement is vedana, projectors are Amalek, unitaries are
+  AntiFascistSystem, RG relevance governs enemy classifiers, Landauer erasure
+  proves cultural-memory destruction, phase transitions instantiate live
+  conflict triggers, `CRTPeriod` is correlation length, DNA eigenclasses are
+  literal DASHI biology, epigenetics is a Dreaming layer, predictive brain
+  networks are DASHI operator modules, polyvagal states are Base369, IIT Phi is
+  JFixedPoint, or the full chain is reality's self-description.
+  Neurochemical and body-brain-chemistry labels require the same discipline:
+  typed synaptic/electrical, volume-transmission, endocrine/hormonal, and
+  epigenetic or cultural propagation carriers; receptor/context models;
+  biomarker measurement protocols; causal hypotheses; biomedical validation;
+  and clinical non-authority flags before GABA, glutamate, dopamine,
+  serotonin, norepinephrine, oxytocin, cortisol, insulin, or acetylcholine can
+  be compared to DASHI operator classes, Base369, Dreaming, Whakapapa,
+  Amalek-collapse, market behavior, or therapeutic claims.
+  Market self-observation and trader-operator labels likewise require typed
+  trader-state receipts, market-data receipts, cross-scale maps, execution
+  rules, risk controls, cost models, compliance review, and out-of-sample
+  validation before the repo can promote trading psychology, RG-stack,
+  three-conjunct signal, MDL-compression, or `JFixedPoint trade` language into
+  any market signal or investment recommendation.
+  Temporal-sheaf labels likewise require typed Time, Interval, Property,
+  Value, Section, and Global carriers; overlap/restriction/gluing laws;
+  exclusive-property single-valued fibre semantics; pre/post transition
+  sheaves; a proof that a claimed `JFixedPoint` / `+1` transition is not just
+  ordinary `CRTPeriod` recurrence; and a temporal section metric before
+  temporal qualifiers can be promoted from flat metadata into a dimension of
+  the state space. The minimal Agda obligation surface for this is
+  `DASHI.Physics.Closure.TemporalSheafProofObligations`; it is not a discharged
+  temporal semantics theorem.
+  Spacetime-sheaf labels likewise require a typed Space / mereological carrier,
+  containment and spatial-overlap laws, sections over `(Time, Space)`,
+  spacetime gluing, exclusive-property single-valuedness at each coordinate,
+  Cauchy-style slice/delta/admissibility carriers, evolution validity
+  preservation, and pre/post extension-obstruction witnesses before the repo
+  can promote spacetime, 3+1, Cauchy-surface, spacetime-density-matrix, or
+  `JFixedPoint`-as-singularity readings. The current Agda surface only records
+  those proof obligations.
+  Base369-chain interpretations likewise require typed carrier maps,
+  quotient/seam or commutation proofs, operator witnesses, and validation
+  before the repo can promote cyclic carriers into actor-count semantics,
+  Theta operators, strategy windows, resolution conditions, or global
+  attractor claims.
+  Pairwise interaction claims likewise require a product carrier, directed
+  receipts, a coupling/composition law, and a joint attractor theorem before
+  the repo can claim convergence, non-convergence, or terminal dominance.
+  Conditional-trigger claims require emitted trigger receipts, modality and
+  qualifier rules, deactivation semantics, a latent fixed-point witness, and a
+  convergence theorem before a terminal-looking trace can be reclassified as
+  conditional convergence.
+  Bot/source join-domain claims require a typed observation map from operators
+  to receipt streams, an orbit-input bijectivity or canonical-representative
+  theorem, and empirical/causal validation; current Hecke, CRT, and
+  J-fixed-point bridge surfaces do not by themselves provide that.
+  Global phase/bifurcation claims require a global carrier, basin metric,
+  perturbation threshold, typed epistemic interaction operator, and validation
+  standard before the repo can claim a dominant attractor shift or basin exit.
+  The remaining promotion work is consumer wiring, not inventing those
+  surfaces from zero.
 - Active closure seam tightening:
   keep the canonical bridge interface fixed while replacing the internal
   signature source with a causal-classification theorem on the normalized
   quadratic (`Q̂core`) under cone/arrow/isotropy/finite-speed/nondegeneracy
   assumptions.
+- Archive coverage update:
+  `Docs/PhysicsArchiveCoverageMap.md` now records the current high-signal
+  local-DB support threads for the physics-closure spine. The current repo
+  reading is:
+  `Physics Closure in DASHI`,
+  `Branch · Cone monotonicity analysis`,
+  and `Branch · Snap Filtering Analysis`
+  are direct formal support lanes, while
+  `Branch · Topology and MDA/MDL`
+  and the light-transport / phase-sync thread remain support lanes for
+  continuum and physical-realization work.
+- Photonuclear empirical lane visibility:
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalConstantsRegistry.agda`,
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalMeasurementSurface.agda`,
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalEvidenceSummary.agda`, and
+  `DASHI/Physics/Closure/PhotonuclearEmpiricalValidationSummary.agda` now
+  provide the empirical-first owner stack, with
+  `Docs/PhotonuclearEmpiricalRegistry.md` as the canonical map. This lane is
+  explicitly empirical-only and non-claiming.
+- Unifying interface lane:
+  `DASHI/Physics/DashiDynamics.agda`
+  is now the theorem-thin entry surface that binds the current packaged
+  carriers together without claiming derivation between them. Its intended
+  reading is:
+  state/path/observable/scalar interfaces +
+  action/density/amplitude/reduction law slots +
+  photonuclear empirical validation carrier +
+  held/control pressure consumer +
+  explicit non-claim boundary.
+  It is a packaging interface, not a new physics theorem.
+  `DASHI/Physics/DashiDynamicsShiftInstance.agda`
+  is the first minimal inhabitant of that interface over an existing
+  repo-native carrier: the shift pressure-point surface plus the packaged
+  photonuclear validation summary.
+  That instance now owns the first non-placeholder core law surface:
+  density is empirical `densityProxy + pressure rank`,
+  action/amplitude are pressure-rank proxies on equality paths,
+  the exported density law is monotonic under the bounded three-point
+  pressure-advance endomap,
+  and the action law now also carries a bounded least-action witness:
+  among admissible monotone pressure targets on the three-point carrier,
+  `shiftPressureAdvance` chooses the smallest available pressure step.
+- Variational bridge lane:
+  `DASHI/Physics/PressureHamiltonJacobiGap.agda`
+  is now the theorem-thin least-action / Hamilton-Jacobi-facing consumer
+  over `DashiDynamics`.
+  Its intended reading is:
+  variational state +
+  admissible targets +
+  transition cost +
+  value function +
+  local optimality +
+  Bellman / Hamilton-Jacobi presentation,
+  all with explicit non-claim boundaries.
+  `DASHI/Physics/PressureHamiltonJacobiShiftInstance.agda`
+  is the first bounded inhabitant of that lane over the three-point shift
+  pressure carrier.
+  It reuses the existing least-action witness from
+  `DashiDynamicsShiftInstance`
+  and adds one discrete Bellman-style inequality witness, without claiming a
+  continuous-limit PDE or a Schrödinger derivation.
+- Gradient-flow seam:
+  `DASHI/Physics/PressureGradientFlowGap.agda`
+  is now the theorem-thin held-point / potential-descent consumer over
+  `DashiDynamics`.
+  `DASHI/Physics/PressureGradientFlowShiftInstance.agda`
+  is the first bounded inhabitant of that lane over the three-point shift
+  carrier.
+  The core
+  `DashiDynamicsShiftInstance`
+  reduction side now records an explicit held-point fixed point together with
+  a bounded potential-descent witness, so the repo has a local
+  gradient-flow-style seam before any wider continuum or wave-lift claim.
+  That seam is now sharpened one step further:
+  strict descent holds on the explicit non-held slice of the three-point
+  carrier, so the current core package now exposes the minimal Lyapunov-style
+  strengthening that was previously missing, still without claiming a global
+  convergence theorem.
+  The next bounded tightening is now landed too:
+  `DashiDynamicsShiftInstance`
+  carries a constructive convergence theorem to the held point on the
+  three-point carrier, together with an explicit `≤ 2` step bound.
+  That finite terminality story is now packaged explicitly at
+  `DASHI/Physics/PressureGradientFlowTerminalityGap.agda`
+  and
+  `DASHI/Physics/PressureGradientFlowTerminalityShiftInstance.agda`,
+  so the shift lane now records eventual held-entry, bounded convergence,
+  unique fixed point, and unique zero-potential point on the current carrier
+  without pretending this is already a general attractor theorem.
+  Separately,
+  `DASHI/Physics/ShiftPotentialQuadraticEnergy.agda`
+  packages the finite scalar quadratic energy induced by
+  `shiftHeldPotential`
+  and proves monotone descent of
+  `Q(s) = shiftHeldPotential(s)^2`
+  under the same pressure advance map, while staying explicitly short of the
+  full canonical quadratic-form lane.
+  The next handoff is now explicit too:
+  `DASHI/Physics/ShiftPotentialQuadraticBridge.agda`
+  packages that same finite energy surface as a local
+  `ContractionQuadraticBridge.QuadraticOutput`-compatible object, so the
+  pressure lane now has a real bridge into the repo's quadratic interface
+  layer without claiming it has reconstructed the canonical contraction =>
+  quadratic theorem path.
+  The bilinear-facing seam is now bounded too:
+  `DASHI/Physics/ShiftPotentialBilinearBridge.agda`
+  exposes one explicit symmetric pair form on the finite shift carrier whose
+  diagonal matches the pressure-induced quadratic energy exactly.
+  This is recorded as a local bilinear-style handoff, not as a full
+  polarization theorem or vector-space upgrade.
+  That local bilinear seam is now related to the existing Clifford-gate metric
+  interface too:
+  `DASHI/Physics/ShiftPotentialCliffordMetric.agda`
+  packages the same finite bilinear form as a
+  `DASHI.Geometry.CliffordGate.BilinearForm`
+  together with an explicit `RingLike ℤ` carrier and an exact diagonal
+  recovery theorem, still without constructing a Clifford algebra.
+- Schrödinger-facing packaging constraint:
+  the recovered tail of
+  `Classical Quantum Bridge`
+  (`69eb5a54-5f74-839f-96d4-0009db829915`,
+  canonical `d69ca38ba7051141efc5c7245437fe574b6a5057`)
+  should be implemented, if at all, as theorem-thin or assumption-guarded
+  consumers over `DashiDynamics`, not as a fake proof surface.
+  The intended order is:
+  `SchrodingerGap`
+  then
+  `SchrodingerAssumedTheorem`,
+  with any demo-only mock module treated as plumbing-only and non-citable.
+  That bounded packaging round is now landed:
+  `DASHI/Physics/SchrodingerGap.agda`
+  is the theorem-thin Schrödinger-facing consumer over `DashiDynamics`, and
+  `DASHI/Physics/SchrodingerAssumedTheorem.agda`
+  is the assumption-guarded theorem seam that only repackages a supplied
+  `schrodingerForm` witness from the gap surface.
+  The first concrete inhabitant is now also landed:
+  `DASHI/Physics/SchrodingerGapShiftInstance.agda`
+  defines a bounded pressure-ordered endomap on the existing three-point
+  shift carrier, ties density to the empirical `densityProxy` plus pressure
+  rank by reusing the core `DashiDynamicsShiftInstance` helpers, proves
+  monotonicity for density and amplitude proxies, and constructs one
+  assumption-guarded theorem instance from that real witness.
+  A second, more structured inhabitant is now landed too:
+  `DASHI/Physics/SchrodingerGapPhaseWaveShiftInstance.agda`
+  lifts `WaveState` from the raw pressure point to a record carrying
+  carrier point,
+  amplitude,
+  and phase proxy.
+  Its Schrödinger-form witness now packages density monotonicity,
+  amplitude monotonicity,
+  phase descent,
+  and one bounded interference / phase-transport law:
+  exact conservation of `amplitude + phase` on the current carrier.
+  The finite continuum-style follow-on now also exists at
+  `DASHI/Physics/ShiftPhaseWaveContinuumStory.agda`,
+  where the structured wave carrier is packaged with a bounded transport
+  coordinate, a conserved interference charge, and an exact
+  coordinate/phase balance law, all still explicitly below any PDE or
+  scaling-limit claim.
+  The next finite wave-facing layer is now landed too:
+  `DASHI/Physics/ShiftPhaseTableInterference.agda`
+  adds a four-class finite phase table with a symmetric interaction kernel
+  and bounded pair-state interference intensity observable,
+  while
+  `DASHI/Physics/ShiftDiscreteWaveStep.agda`
+  packages the same structured carrier as an integer-pair discrete wave with
+  finite phase encoding, superposition by vector addition, and one
+  Schrödinger-like Euler step under a scalar Hamiltonian proxy.
+  That finite wave package now has its next theorem-thin follow-on layers too:
+  `DASHI/Physics/ShiftWaveScalingInterface.agda`
+  introduces an explicit coarse/fine refinement surface with step
+  compatibility and a discrete second-difference operator, but still no limit
+  or PDE claim;
+  `DASHI/Physics/ShiftWaveRefinementSeam.agda`
+  now enriches that refinement story with coarse/fine observation records,
+  explicit `project` / `embed` maps, and transport/agreement witnesses over
+  the same carrier without claiming any actual limit theorem;
+  `DASHI/Physics/ShiftWaveRefinementHierarchy.agda`
+  now replaces the old same-carrier-only weak point with a genuine finite
+  `3 -> 5` hierarchy whose coarse points embed at interior refined points and
+  whose refined Laplacian agrees with the coarse Laplacian on embedded points
+  under the current projection-based field lift;
+  `DASHI/Physics/ShiftWaveRefinementLevel.agda`
+  now packages that concrete hierarchy as a reusable theorem-thin family
+  surface with named coarse/fine levels, a lift, and explicit refinement
+  boundary text so later `5 -> 9` or `9 -> 17` steps can reuse the same
+  interface without pretending a recursive family theorem;
+  `DASHI/Physics/ShiftWaveGlobalUpdate.agda`
+  now packages the current Euler-style Schrödinger step as a synchronous
+  whole-field one-pass update on both the coarse and refined carriers, with
+  compatibility on lifted coarse fields at embedded coarse points, but still
+  no unitarity, stability, or PDE claim;
+  `DASHI/Physics/ShiftSpatialLaplacian.agda`
+  adds the finite three-point spatial Laplacian with reflected endpoint
+  behavior;
+  `DASHI/Physics/ShiftDiscreteHelmholtzSurface.agda`
+  now packages the corresponding coarse/refined discrete Helmholtz residuals
+  and the modewise Schrödinger-step law
+  `ψ ↦ ψ + i λ ψ`
+  for finite eigenfields, still with no spectral or PDE claim;
+  `DASHI/Physics/ShiftDiscreteWaveEnergy.agda`
+  now makes the Euler-style step boundary explicit as a finite energy package:
+  held-state basis waves are preserved, while non-held basis waves expose
+  concrete growth witnesses instead of a fake stability theorem;
+  `DASHI/Physics/ShiftWaveEnergyHierarchy.agda`
+  now lifts that story across the concrete `3 -> 5` hierarchy with exact
+  coarse/fine field-energy surfaces, an exact lifted-field energy shape
+  theorem, and embedded-window Laplacian-energy control under the current
+  projection lift, while explicitly refusing stronger whole-five-point or
+  scaling-limit claims;
+  `DASHI/Physics/ShiftDiscreteContinuityCurrent.agda`
+  now packages the current finite continuity/current story as an explicit
+  bookkeeping surface: field-local energy, updated energy, Laplacian-stencil
+  current magnitude, pairwise phase/interference currents, and exact
+  conservation of `amplitude + phase` under one finite advance step, with no
+  PDE continuity or Noether overclaim;
+  `DASHI/Physics/ShiftDiscreteActionPrinciple.agda`
+  now packages a theorem-thin finite action surface over the same field:
+  local action density is defined exactly as local energy plus local current
+  magnitude, and the update law is pinned directly to the existing
+  Euler-style Schrödinger step without claiming a variational derivation;
+  `DASHI/Physics/ShiftFiniteEvolutionWitness.agda`
+  now adds a Dashi-style finite witness/search layer with bounded
+  PNF-style evolution obligations, explicit Skolem-style one-pass update
+  witnesses, and finite Herbrand-style candidate histories on both the coarse
+  and refined carriers;
+  `DASHI/Physics/ShiftFinitePathSum.agda`
+  now adds a bounded exact two-history path-sum surface over the existing
+  phase-table and discrete-wave weights, still explicitly below any continuum
+  path integral or analytic propagator claim;
+  `DASHI/Physics/ShiftFieldTheoryConsistency.agda`
+  now ties the current coarse witness, updated-energy view, action/current
+  bookkeeping, and bounded path-sum together as one exact theorem-thin
+  coherence package over the same deterministic one-pass advance, without any
+  path-selection, dominance, Noether, or continuum overclaim;
+  `DASHI/Physics/ShiftFiniteGaugeSymmetry.agda`
+  now packages the first finite local `C4`/`U(1)`-like phase-symmetry
+  surface over the integer-pair wave lane, keeping generic compose/inverse/
+  additive/scale equalities as explicit target-law surfaces rather than fake
+  closed proofs;
+  `DASHI/Physics/ShiftFiniteGaugeCoupling.agda`
+  now adds the first finite matter-plus-static-gauge lift over the current
+  coarse carrier with a bounded covariant Laplacian, Hamiltonian, and
+  one-pass update surface, together with explicit vacuum compatibility and
+  bounded gauge-covariance targets, still below any full local-covariance,
+  dynamic-gauge, or continuum claim;
+  `DASHI/Physics/ShiftGaugeFieldTheoryAgreement.agda`
+  now closes the next honest vacuum-gauge slice by tying the existing
+  field-theory coherence package, the hierarchy-energy package, and the new
+  finite gauge-coupling package to the same coarse one-pass update and its
+  lifted energy surfaces, still without any gauge-energy conservation or full
+  local-covariance overclaim;
+  `DASHI/Physics/ShiftConstantPhaseCovariance.agda`
+  now adds the next bounded symmetry tightening on top of that slice:
+  exact global `C4` constant-phase covariance is witnessed for the vacuum
+  static-gauge covariant operator itself, while the corresponding full
+  one-pass update covariance is kept as an explicit target surface rather
+  than overclaimed as a closed theorem;
+  `DASHI/Physics/ShiftGaugeCurrentConsistency.agda`
+  now packages the next bounded current-sourced gauge-update coherence
+  surface, reusing the existing coarse local-current magnitude pointwise on
+  the coarse carrier and closing exact covariance only for the current
+  intentionally neutral `currentPhase` reducer, while richer edge-current
+  invariance and nontrivial current-to-phase transport remain target-law
+  surfaces;
+  `DASHI/Physics/ShiftFiniteMatrixSymmetry.agda`
+  now repackages the current `Phase4`/`C4` quarter-turn action as a finite
+  matrix-action surface over the integer-pair wave lane and adds one bounded
+  first non-abelian doublet-action analogue with a concrete non-commuting
+  witness, still below any `SU(2)`, Hilbert-space, or analytic claim;
+  `DASHI/Physics/ShiftMinimalGaugeTheory.agda`
+  now packages the first minimal matter-plus-static-gauge world over the same
+  carrier, with one-pass matter evolution, exact vacuum reduction back to the
+  current coarse global update, and explicit vacuum-gauge retention, still
+  below any local-covariance, dynamic-gauge, or full-`U(1)` claim;
+  `DASHI/Physics/ShiftTwoFieldGaugeInteraction.agda`
+  now adds the first theorem-thin two-field gauge-mediated interaction
+  surface over that same static-gauge lane: two matter fields evolve through
+  bounded gauge-mediated nearest-neighbor coupling and a joint current-sourced
+  gauge update, but the active gauge-update reducer remains the neutral
+  inherited one, so the result is symmetry-safe rather than a promoted
+  physically reactive gauge theory;
+  and
+  `DASHI/Physics/ShiftUnitaryLikeConstraint.agda`
+  records the basis-level norm preservation and four-quarter-turn cycle for
+  `mulI`, while explicitly refusing to overclaim unitarity for the Euler-style
+  Schrödinger step.
+- Sibling-repo support surfaces:
+  `../dashitest` contains useful diagnostic and measurement artifacts for
+  wave/interference, MDL, video/codec diagnostics, and regime-style language,
+  but it is currently a support repo rather than a code dependency for this
+  tree. The strongest
+  cross-reference points are
+  `Docs/SiblingVideoEvidenceInventory.md`,
+  `../dashitest/dashiCORE/README.md`,
+  `../dashitest/dashiCORE/docs/dashibrain_core_integration.md`,
+  `../dashitest/compression/video_bench.py`,
+  `../dashitest/vulkan/video_bench_vk.py`,
+  `../dashitest/vulkan_compute/compute_image_preview.py`,
+  `../dashitest/dashifine/newtest/grayscott_krr.py`,
+  `../dashitest/dashifine/newtest/triality_stack.py`,
+  `../dashitest/docs/tree_diffusion_benchmark.md`,
+  `../dashitest/docs/phase3_quotient_learning.md`,
+  `../dashitest/docs/bad_day.md`,
+  `../dashitest/trading/scripts/plot_action_entropy.py`, and
+  `../dashitest/trading/scripts/plot_hysteresis_phase.py`.
+  These are useful documentation-side analogues for measurement and
+  interference language, not theorem evidence for the Agda closure stack.
+  The sibling video artifacts prove executable/recorded diagnostic paths exist;
+  they do not prove video-continuity closure or promotion without an in-repo
+  receipt.
 
 Current theorem status:
 
 - Stage A is complete: the orbit-profile discriminant selects Lorentz signature
   `(3,1)` in the current 4D framework.
+- Arithmetic lane now records canonicalization progress: `normalizeAdd` is
+  nonexpansive and lands in a canonical state, `CanonicalResidueZero`
+  collapses the residue budget there, and `CancellationPressureFromCanonical`
+  bounds the carry-budget pressure by the support proxy so normalized
+  states satisfy the current arithmetic pressure guarantee.
 - Stage B is complete for the current finite 4D realization: the
   cone/arrow/isotropy stack now drives shell enumeration through abstract
   interfaces rather than a shift-specific proof source.
@@ -48,6 +1256,330 @@ Current theorem status:
   distinguish what is already proved from what is only a forward prediction
   claim. The next concrete benchmark is profile rigidity across new 4D
   realizations.
+- Current archive-backed Stage C priority order:
+  1. derived dynamics law;
+  2. realization-independent projection/delta theorem;
+  3. signature forcing / execution-delta interface;
+  4. continuum scaling law;
+  5. physical reality bridge from wavefield / phase synchronization.
+- Current `Δ -> quadratic` status is intentionally split into two lanes:
+  the concrete cancellation-energy transport in
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  now packages its witness surface repo-natively as
+  `CancellationPressureCompatibility theorem dim≡15`,
+  with
+  `canonicalCancellationPressureCompatibility`
+  as the thin concrete constructor from the current pair-pressure witness;
+  that lane is still treated repo-side as an external compatibility input
+  rather than an in-repo derivation from the current tracked-profile
+  transport,
+  and the sole remaining cancellation-side seam in that module is the
+  `pressurePreserved` witness inside
+  `CancellationPressureCompatibility`; the sharper forward proposal is
+  a weighted valuation measurement
+  layer
+  `Φ(x) = (v_p(x) * sqrt(log p))_p`
+  with
+  `Q₊(x) = Σ_p v_p(x)^2 log p`
+  as a positive diagonal surface that should feed, rather than replace,
+  the existing canonical quadratic/signature stack.
+  The first constructive helper surface for that lane now lives in
+  `DASHI/Arithmetic/WeightedValuationEnergy.agda`.
+  The bridge module now also exposes
+  `WeightedValuationTransportCompatibility`
+  plus
+  `WeightedValuationForwardCandidate`
+  so the weighted lane has a record-level admissibility/coherence package
+  without identifying that lane with `Q̂core`.
+  It now also exposes
+  `weightedValuationForwardCandidateToDeltaBridge`
+  and
+  `weightedValuationForwardCandidateNormalizesQuadratic`,
+  so a weighted forward candidate can be promoted into the theorem-side delta
+  bridge once a signature bridge is supplied, without adding any new
+  arithmetic-side identification claim.
+  The weaker profile-side seam now also has its own arithmetic owner:
+  `DASHI/Arithmetic/ArithmeticPrimeProfileBridge.agda`
+  exposes
+  `EmbeddedPrimeProfileMeasurement`,
+  while
+  `DASHI/Physics/Closure/DeltaToQuadraticBridgeTheorem.agda`
+  carries
+  `EmbeddedProfileScoreCompatibility`
+  only as the explicit
+  `deltaSum -> embeddedProfileScore`
+  compatibility lane.
+  The same module now also exposes
+  `DeltaQuadraticSignatureCliffordPackage`
+  so an already-packaged delta bridge can carry its normalized quadratic,
+  inherited signature-31 data,
+  and a specialized Clifford presentation handle
+  without widening the cancellation-side claim.
+  `DASHI/Physics/Closure/CancellationPressureCompatibilityNextObligation.agda`
+  now names the exact next W9 routes: either supply the existing-route
+  `pressureWitness`, or supply the weighted replacement route with
+  cancellation-to-weighted-quadratic identification. It does not inhabit
+  `CancellationPressureCompatibility`.
+  The retarget diagnostic lane is deliberately weaker: `W9WeightedSupportRetargetConsumerReceipt`
+  accepts `canonicalPairPressureRetargetReceipt` through
+  `weightedMaxPressure <= weightedSupport`, but that `<=` surface is not a
+  pressure-equality/Qcore witness. `BlockerKillConditions` now accepts the MDL
+  termination seam route as the W9 kill receipt; this unblocks W9 only on that
+  non-pressure route and does not inhabit `CancellationPressureCompatibility`.
+- Generic pressure algebra owner:
+  `DASHI/Pressure.agda`
+  now exposes a finite five-level pressure carrier with
+  `_⊑p_`,
+  `_⊔p_`,
+  and the basic join-semilattice laws as a reusable algebra surface.
+  This is intentionally generic and separate from the existing
+  `Ontology/Hecke/*Pressure*`
+  modules, which remain domain-specific consumers rather than the owner of the
+  reusable pressure chain.
+  The first thin consumer bridge now lives in
+  `Ontology/Hecke/PressureAdapter.agda`,
+  embedding the current three-tier Hecke `PressureClass`
+  into the generic pressure carrier and proving that the existing Hecke order
+  maps monotonically into `_⊑p_`.
+  The first concrete reuse site is now the Hecke representative-computation
+  layer:
+  `Ontology/Hecke/StaysOneMoreStepRepresentativeComputations.agda`,
+  `Ontology/Hecke/ExitToAnchoredRepresentativeComputations.agda`, and
+  `Ontology/Hecke/ImmediateExitRepresentativeComputations.agda`
+  each now expose both the domain-local `PressureClass` tier and the embedded
+  generic `DASHI.Pressure.Pressure` tier on the same computation record.
+  `Ontology/Hecke/RepresentativePressureOrder.agda`
+  is the current theorem-thin comparison surface over that generic tier.
+  It now also carries one pairwise join collapse
+  (`stay ⊔ anchored = anchored`)
+  plus the three-way envelope
+  (`(stay ⊔ anchored) ⊔ immediate-exit = immediate-exit`)
+  on the embedded generic carrier.
+  Treat this as the stable pressure owner boundary for now:
+  do not add further non-Hecke consumers unless a concrete cross-domain
+  pressure comparison actually needs the generic carrier.
+- The three-body test case is now scaffolded repo-side as a theorem-thin
+  regime-classification surface under `DASHI/Physics/ThreeBody/`.
+  The intended reading is:
+  state carrier + step operator + local energy/action +
+  contractive/boundary/non-contracting regime split +
+  wave-facing admissible path kernel.
+  It does not claim a closed-form solution or a global contraction theorem.
+  The next landed layer now also separates
+  local state/regime improvement
+  from
+  global forecast depth:
+  `Delta3Body`,
+  `EnergyΔ3`,
+  `Action3`,
+  `LocalPredictiveHorizon`,
+  and `ChaosBoundary`
+  live in the same namespace so the three-body lane can express
+  \"better local prediction over time\" without claiming unlimited
+  long-horizon predictability in chaotic regions.
+  `DASHI/Physics/ThreeBody/Bridge.agda`
+  is now also explicitly anchored to the same basin-facing admissibility
+  surface already carried by
+  `DASHI/Physics/ThreeBody/PredictiveBoundary.agda`,
+  rather than introducing a second bridge-local admissibility notion.
+  `DASHI/Physics/ThreeBody/TheoremSurface.agda`
+  now publicly re-exports that bridge surface alongside the theorem-thin
+  predictability and branching surfaces, so downstream consumers can import
+  one entrypoint and still reach the basin-anchored bridge package.
+  The same namespace now also carries an interference/path-family layer:
+  admissible paths aggregate into regime amplitudes, regime weights, regime
+  distributions, and a boundary-generated branching surface.
+  This lets the repo state the intended Dashi reading of chaos more sharply:
+  point prediction degrades, but structured future branch weights can still
+  be modeled as action-weighted interference over regimes.
+
+## Visual Guides
+
+The repo now carries a small figure set for the newer three-body and zeta
+analysis lanes.
+
+Figure provenance:
+
+- the stable repo copies live under `Docs/Images/three-body/` and
+  `Docs/Images/zeta/`;
+- they were imported from the delivered external artifact drop in
+  `temp-DOWNLOADED/`;
+- the associated external Agda sketch is
+  `temp-DOWNLOADED/ThreeBodyPredictability.agda`;
+- the current repo-native formalism surfaces remain the authoritative source
+  for names and claim boundaries.
+
+Paper 1 origins figure pack:
+
+- manifest:
+  `Docs/PaperDraftWorkingFolder/FigureCandidateManifest.md`;
+- stable repo copies:
+  `Docs/Images/paper1-origin-figures/`;
+- LaTeX-facing figures:
+  `Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/` now contains
+  three larger origin figure groups for ultrametric refinement, tree-diffusion
+  rollout, and branch-density/adaptive-refinement intuition. The old composite
+  plate remains archived but is no longer the preferred manuscript figure.
+- claim boundary:
+  the pack is visual provenance for traversal, refinement, ultrametric
+  diagnostics, and sibling engineering experiments. It is not theorem
+  authority, empirical closure, video-continuity closure, codec correctness, or
+  promotion evidence.
+
+### Three-body predictability view
+
+![Illustrative three-body trajectory in a projected admissibility cone](Docs/Images/three-body/threebody_projected_admissibility_cone.png)
+
+What this figure is for:
+
+- It visualizes the current three-body lane as a projected
+  admissibility/cone picture rather than as a closed-form trajectory solver.
+- The lower-left interior region is the intended analogue of a more stable,
+  more locally coherent regime.
+- The orange boundary curve marks the transition surface where predictive
+  horizon is expected to shrink and branching becomes more relevant.
+- The upper/right region is the intended non-contracting or unstable side,
+  where point prediction degrades and branch-structured forecasts matter more.
+
+Relevant formalism sources:
+
+- [`DASHI/Physics/ThreeBody/PredictiveBoundary.agda`](DASHI/Physics/ThreeBody/PredictiveBoundary.agda)
+- [`DASHI/Physics/ThreeBody/Interference.agda`](DASHI/Physics/ThreeBody/Interference.agda)
+- [`DASHI/Physics/ThreeBody/BundleIntensity.agda`](DASHI/Physics/ThreeBody/BundleIntensity.agda)
+- [`DASHI/Physics/ThreeBody/PredictabilityTheorem.agda`](DASHI/Physics/ThreeBody/PredictabilityTheorem.agda)
+- [`temp-DOWNLOADED/ThreeBodyPredictability.agda`](temp-DOWNLOADED/ThreeBodyPredictability.agda)
+
+Interpretation boundary:
+
+- This is an illustrative regime map.
+- It is not a proved cone theorem for Newtonian three-body dynamics.
+- It is useful because it matches the current theorem-thin repo split:
+  cone interior, cone boundary, local contraction, local Lyapunov surfaces,
+  basin-relative predictive horizon, and boundary-generated branching.
+
+### Goldbach formal-object lane
+
+The refreshed `Dashi on Quantum Computing` thread landed the Goldbach lane as
+analysis-side formal objects rather than as a solved number-theory claim.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/GoldbachFormalObjects.agda`](DASHI/Analysis/GoldbachFormalObjects.agda)
+- [`CHANGELOG.md`](CHANGELOG.md)
+- [`TODO.md`](TODO.md)
+
+What this lane is for:
+
+- It records the program surfaces `EnergyΔ`, `GoldbachCone`,
+  `GoldbachAmplitude`, `GoldbachTheoremLadder`, and `GoldbachProgramPack`.
+- It now also carries concrete sample-side witnesses rather than only abstract
+  constructors:
+  `sampleGoldbachExistenceWitness` for `2 + 2 = 4` and
+  `sampleGoldbachExistenceWitness8` for `3 + 5 = 8`.
+- It keeps the intended reading explicit: Goldbach is being formalized as a
+  theorem-thin analysis/program lane, not claimed as a proof of strong
+  Goldbach.
+- It also keeps the zeta/Riemann connection in the same analysis-only
+  boundary class: useful as a program direction, but not a proof of RH.
+
+Interpretation boundary:
+
+- This is a formal-object lane, not a solved Goldbach theorem.
+- It does not claim a proof of strong Goldbach.
+- It does not claim a proof of the Riemann hypothesis.
+- It is intended to make the Goldbach program surface explicit while keeping
+  closure claims out of the README.
+
+### Zeta visualization pack
+
+#### Critical-line magnitude
+
+![Critical line magnitude plot for log absolute zeta](Docs/Images/zeta/zeta_logabs_critical_line.png)
+
+Reading:
+
+- The deep troughs are zero neighborhoods for `ζ(1/2 + it)`.
+- This is the cleanest first visualization of where critical-line structure
+  is concentrated.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/AbelZeta.agda`](DASHI/Analysis/AbelZeta.agda)
+- [`DASHI/Analysis/ZetaVisualization.agda`](DASHI/Analysis/ZetaVisualization.agda)
+
+Interpretation boundary:
+
+- This is a visualization surface, not an RH proof surface.
+- In repo terms it belongs to `Analysis`, not `Physics`.
+- The current repo-native observation family now includes:
+  `ZetaBoundaryContrastView` and `ZetaEtaTransferView`,
+  both derived only from the Abel-summed sample surface.
+
+#### Argument flow near the critical line
+
+![Argument flow of zeta near the critical line](Docs/Images/zeta/zeta_argument_flow_strip.png)
+
+Reading:
+
+- The sharp seam near `σ = 1/2` is the main feature.
+- This is the closest direct visual analogue to a phase-flow or boundary-crossing
+  picture in the current Dashi language.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/ZetaVisualization.agda`](DASHI/Analysis/ZetaVisualization.agda)
+
+Interpretation boundary:
+
+- The current repo only packages a visualization scaffold here.
+- No analytic continuation, zero-density theorem, or spectral closure claim is
+  encoded by this image alone.
+
+#### Consecutive zero spacings
+
+![Spacing of consecutive nontrivial zeta zeros](Docs/Images/zeta/zeta_zero_spacings.png)
+
+Reading:
+
+- The spacing sequence is irregular but visibly structured.
+- This is the simplest figure for talking about local spacing regimes without
+  pretending the repo already carries a canonical zero-statistics theorem.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/ZetaVisualization.agda`](DASHI/Analysis/ZetaVisualization.agda)
+
+Interpretation boundary:
+
+- This is an exploratory spacing plot.
+- It is not a GUE claim, pair-correlation theorem, or RH consequence theorem.
+
+#### Dashi-projected zeta feature plot
+
+![Dashi-projected zeta feature plot](Docs/Images/zeta/zeta_dashi_projected_feature_plot.png)
+
+Reading:
+
+- The x-axis is a phase-velocity-style feature.
+- The y-axis is a zero-neighborhood-style score.
+- Color is a local action-like score.
+- The right-side high-phase cluster is the interesting regime in current
+  Dashi language: it is the nearest analogue to a boundary/action/regime
+  concentration rather than a flat cloud.
+
+Relevant formalism sources:
+
+- [`DASHI/Analysis/ZetaVisualization.agda`](DASHI/Analysis/ZetaVisualization.agda)
+- [`DASHI/Analysis/AbelZeta.agda`](DASHI/Analysis/AbelZeta.agda)
+- external source pack:
+  [`temp-DOWNLOADED/zeta_visualization_pack/`](temp-DOWNLOADED/zeta_visualization_pack/)
+
+Interpretation boundary:
+
+- This figure is intentionally exploratory.
+- It combines phase, local scoring, and zero-neighborhood heuristics.
+- It is useful for regime thinking and visualization design, but it is not yet
+  a canonical theorem object in the repo.
 - Current validation snapshot:
   reference signed-permutation self-check = `exactMatch`,
   synthetic one-minus admissible candidate = `exactMatch`,
@@ -928,3 +2460,20 @@ Merge-prep status:
 the local Nix / zkperf surface is complete and validated, so active work now
 returns to the physics closure spine and the existing tail-boundary follow-up
 track.
+
+## RG Toy Next Phase
+
+The RG toy is now past pure shell/plumbing work.
+It has operator families, mixed coarse/evolve schedules, endpoint and rich
+benchmark layers, and a trace-aware mixed benchmark surface.
+
+The next RG implementation work is split deliberately:
+
+- Phase 2: enrich the operator/state hierarchy.
+  Add multiple coarse schemes, multiple evolve modes, and a less trivial
+  fixed-point/family structure so universality is not being tested against one
+  stylized route.
+- Phase 3: restate the current comparison and benchmark theorems against that
+  richer hierarchy.
+  The target is endpoint agreement with room for path/scale disagreement,
+  rather than more collapse lemmas on the current toy encoding.

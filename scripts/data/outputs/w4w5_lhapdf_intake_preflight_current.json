@@ -1,0 +1,106 @@
+{
+  "artifact_schema": "dashi-w4w5-pdf-lhapdf-intake-preflight-v1",
+  "candidate_ct18_equivalent_table_run": {
+    "path": null,
+    "present": false
+  },
+  "date": "2026-05-13",
+  "environment": {
+    "commands": {
+      "lhapdf": {
+        "found": true,
+        "name": "lhapdf",
+        "path": "/usr/bin/lhapdf"
+      },
+      "lhapdf_config": {
+        "found": true,
+        "name": "lhapdf-config",
+        "path": "/usr/bin/lhapdf-config"
+      }
+    },
+    "python_executable": "/usr/bin/python3",
+    "python_modules": {
+      "lhapdf": {
+        "found": true,
+        "module": "lhapdf",
+        "origin": "/usr/lib/python3.14/site-packages/lhapdf/__init__.py"
+      }
+    },
+    "python_version": "3.14.4 (main, Apr 11 2026, 09:31:02) [GCC 15.2.1 20260209]"
+  },
+  "lhapdf_backed_candidate_run": {
+    "present": false,
+    "status": "not_requested"
+  },
+  "local_pdf_inventory": {
+    "ct18nlo": {
+      "archive": {
+        "path": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NLO.tar.gz",
+        "present": true,
+        "sha256": "c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213",
+        "size_bytes": 18756939
+      },
+      "central_member_grid": {
+        "path": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NLO/CT18NLO_0000.dat",
+        "present": true,
+        "sha256": "375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410",
+        "size_bytes": 1188689
+      },
+      "directory": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NLO",
+      "directory_present": true,
+      "info": {
+        "path": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NLO/CT18NLO.info",
+        "present": true,
+        "sha256": "be60232d8e6c49982c82f5fa990fd5b0fd1050719944f31602bf27cdb16548b0",
+        "size_bytes": 1829
+      },
+      "member_grid_count": 59
+    },
+    "msht20": {
+      "candidates": [],
+      "local_grid_present": false
+    }
+  },
+  "promotion": {
+    "accepted_dy_convention": false,
+    "pdf_carrier": false,
+    "w4": false,
+    "w5": false
+  },
+  "provider_authority": {
+    "accepted_or_replacement_packet_present": false,
+    "first_missing": "missingAcceptedDYLuminosityConventionAuthority",
+    "required_before_w4_w5_runners": [
+      "accepted PDF set/version/member/error prescription",
+      "accepted LHAPDF id or equivalent table identifier",
+      "accepted grid/table checksums",
+      "accepted factorization-scale convention",
+      "accepted rapidity/eta integration convention",
+      "accepted mass-bin integration rule for 50-76, 76-106, and 106-170 GeV",
+      "accepted flavour weights and heavy-flavour policy",
+      "provider luminosities for W5 L43/L45 and W4 per-bin ell_i",
+      "efficiency/acceptance model, systematic budget, normalization-preservation law, and conversion law",
+      "provider command/API, inputs, checksums, timestamp, and no-manual-overfit attestation"
+    ]
+  },
+  "runtime_decision": {
+    "ct18_lhapdf_probe": {
+      "command": "lhapdf show",
+      "data_path": "/usr/share/lhapdf/LHAPDF:/home/c/Documents/code/dashi_agda/scripts/data/pdf",
+      "found": true,
+      "pdf_set": "CT18NLO",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "CT18NLO\n=======\nLHAPDF ID: 14400\nVersion: 1\nCT18NLO, 3-loop PDF evolution with HOPPET and HOPPET alphas_s running solution. This set has 59 member PDFs. mem=0 --> central value; mem=1-58 --> eigenvector sets 90%\nNumber of members: 59\nError type: hessian"
+    },
+    "real_lhapdf_run_possible": true,
+    "real_lhapdf_runtime_available": true,
+    "reason": "LHAPDF runtime is present and resolves repo-local CT18NLO when LHAPDF_DATA_PATH is set to the recorded system-index-plus-repo path. W4/W5 remain non-promoting until accepted DY/PDF convention authority and provider provenance are supplied."
+  },
+  "status": "blocked_missing_accepted_provider_authority",
+  "w4_w5_correction_output_status": {
+    "w4_z_peak": "not emitted: W4 adequacy runner requires accepted DY authority and accepted per-bin luminosity vector",
+    "w5_t45": "not emitted: W5 t45 runner requires accepted/replacement provider packet with L_M45_Y45 and L_M43_Y43"
+  },
+  "worker": "Euler the 2nd / W4W5-PDF-shared-intake"
+}

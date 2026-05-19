@@ -1,5 +1,352 @@
 # Devlog
 
+- 2026-04-29: Extended the finite gauge lane with current-sourced update
+  coherence, finite matrix-action packaging, and the first theorem-thin
+  two-field interaction surface.
+  - `DASHI/Physics/ShiftGaugeCurrentConsistency.agda`
+    now packages a bounded current-sourced gauge-update surface over the
+    finite `C4` lane, with exact covariance only for the intentionally
+    neutral `currentPhase` reducer and richer current invariance left as
+    target-law surfaces.
+  - `DASHI/Physics/ShiftFiniteMatrixSymmetry.agda`
+    now packages the current `Phase4`/`C4` action as a finite matrix-action
+    surface and adds one bounded first non-abelian doublet witness surface.
+  - `DASHI/Physics/ShiftTwoFieldGaugeInteraction.agda`
+    now packages the first theorem-thin two-field gauge-mediated interaction
+    step over the static-gauge lane, with coupled matter evolution,
+    combined-current gauge update, and exact vacuum gauge stability.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftGaugeCurrentConsistency.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftFiniteMatrixSymmetry.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftTwoFieldGaugeInteraction.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed
+
+- 2026-04-29: Tightened the finite symmetry/gauge lane by landing the next
+  bounded constant-phase and two-field surfaces over the current vacuum slice.
+  - `DASHI/Physics/ShiftConstantPhaseCovariance.agda`
+    now witnesses exact global `C4` constant-phase covariance for the vacuum
+    static-gauge covariant operator and keeps the corresponding full one-pass
+    update covariance as an explicit target surface rather than overclaiming
+    a closed theorem.
+  - `DASHI/Physics/ShiftMinimalGaugeTheory.agda`
+    now packages the first theorem-thin matter-plus-static-gauge world over
+    the current coarse carrier, with one-pass matter evolution, exact vacuum
+    reduction to the current coarse global update, and explicit vacuum-gauge
+    retention.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftConstantPhaseCovariance.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftMinimalGaugeTheory.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed
+
+- 2026-04-29: Tightened the finite field-theory/gauge agreement story by
+  closing the vacuum-gauge slice against the existing hierarchy-energy and
+  field-theory coherence surfaces.
+  - `DASHI/Physics/ShiftGaugeFieldTheoryAgreement.agda`
+    now packages exact agreement between the vacuum static-gauge update, the
+    current coarse witness field, and the hierarchy-energy lift/control
+    surfaces on that same updated field.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftGaugeFieldTheoryAgreement.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed
+
+- 2026-04-29: Landed the next two bounded finite follow-on surfaces over the
+  multiscale wave stack: one coherence package for the existing finite
+  field-theory lane and one first finite matter-plus-gauge lift.
+  - `DASHI/Physics/ShiftFieldTheoryConsistency.agda`
+    now packages the current coarse witness, updated-energy view,
+    action/current bookkeeping identity, and bounded two-history path-sum as
+    one exact theorem-thin coherence surface over the same deterministic
+    one-pass advance.
+  - `DASHI/Physics/ShiftFiniteGaugeSymmetry.agda`
+    now packages the first finite local `C4`/`U(1)`-like phase-symmetry
+    surface over the integer-pair wave lane, with compose/inverse/additive/
+    scale equalities exposed as target-law surfaces rather than overclaimed
+    generic proofs.
+  - `DASHI/Physics/ShiftFiniteGaugeCoupling.agda`
+    now packages the first finite matter-plus-static-gauge lift over the
+    current coarse carrier, with a bounded covariant Laplacian, Hamiltonian,
+    one-pass update, explicit vacuum compatibility, and bounded covariance
+    target laws.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftFieldTheoryConsistency.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftFiniteGaugeSymmetry.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftFiniteGaugeCoupling.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed
+
+- 2026-04-28: Landed the next bounded finite field-theory follow-on surfaces
+  over the multiscale wave stack: continuity/current bookkeeping, finite
+  action packaging, finite evolution witnesses, and a bounded path-sum.
+  - `DASHI/Physics/ShiftDiscreteContinuityCurrent.agda`
+    now packages field-local energy, updated energy, Laplacian-stencil
+    current magnitude, pairwise phase/interference currents, and exact
+    conservation of `amplitude + phase` under one finite advance step.
+  - `DASHI/Physics/ShiftDiscreteActionPrinciple.agda`
+    now packages a theorem-thin finite action surface with local action
+    density defined exactly as local energy plus local current magnitude, and
+    an update-law surface pinned directly to the current Euler-style
+    Schrödinger step.
+  - `DASHI/Physics/ShiftFiniteEvolutionWitness.agda`
+    now adds bounded PNF-style evolution obligations, explicit Skolem-style
+    one-pass witnesses, and finite Herbrand-style candidate histories on the
+    current coarse and refined carriers.
+  - `DASHI/Physics/ShiftFinitePathSum.agda`
+    now adds a bounded exact two-history path-sum surface over the current
+    phase-table and discrete-wave weights.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftDiscreteContinuityCurrent.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftDiscreteActionPrinciple.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftFiniteEvolutionWitness.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftFinitePathSum.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    with no new local type failure observed before the bound
+
+- 2026-04-28: Landed the next normalized multiscale follow-on surfaces over
+  the concrete `3 -> 5` hierarchy: a theorem-thin refinement-family package,
+  a synchronous whole-field update package, and a hierarchy-energy package.
+  - `DASHI/Physics/ShiftWaveRefinementLevel.agda`
+    now repackages the current concrete hierarchy as a reusable theorem-thin
+    family surface with named coarse/fine levels, a lift, and explicit
+    refinement boundary text.
+  - `DASHI/Physics/ShiftWaveGlobalUpdate.agda`
+    now packages the current Euler-style Schrödinger step as a synchronous
+    one-pass update on both the coarse and refined fields, with compatibility
+    on lifted coarse fields at embedded coarse points.
+  - `DASHI/Physics/ShiftWaveEnergyHierarchy.agda`
+    now adds exact coarse/fine field-energy surfaces, an exact lifted-field
+    energy shape theorem, and embedded-window Laplacian-energy control for the
+    same `3 -> 5` lift.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftWaveRefinementLevel.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftWaveGlobalUpdate.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftWaveEnergyHierarchy.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed
+
+- 2026-04-28: Replaced the weak same-carrier refinement story with the first
+  genuinely distinct finite hierarchy and added the corresponding discrete
+  Helmholtz surface.
+  - `DASHI/Physics/ShiftWaveRefinementHierarchy.agda`
+    now defines a concrete `3 -> 5` refinement family for the shift-wave
+    lane, with reflected endpoint shadows, interior coarse embeddings, and a
+    Laplacian-consistency witness on embedded coarse points.
+  - `DASHI/Physics/ShiftDiscreteHelmholtzSurface.agda`
+    now packages the coarse/refined Helmholtz residuals together with the
+    modewise Schrödinger-step law
+    `ψ ↦ ψ + i λ ψ`
+    whenever a field satisfies the corresponding finite eigenmode equation.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftWaveRefinementHierarchy.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftDiscreteHelmholtzSurface.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed.
+
+- 2026-04-28: Landed the next two bounded follow-on lanes over the finite
+  wave stack: Euler-step energy/stability packaging and a richer refinement
+  seam.
+  - `DASHI/Physics/ShiftDiscreteWaveEnergy.agda`
+    now packages the finite energy/stability boundary of the current
+    Euler-style discrete wave step, including held-state basis-energy
+    preservation and explicit non-held basis-level growth witnesses.
+  - `DASHI/Physics/ShiftWaveRefinementSeam.agda`
+    now enriches the coarse/fine story with finite observation records,
+    `project` / `embed` maps, and transport/agreement witnesses over the
+    current structured carrier.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftDiscreteWaveEnergy.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftWaveRefinementSeam.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed.
+
+- 2026-04-28: Extended the finite wave lane with explicit refinement,
+  spatial second-difference, and basis-level unitary-like constraint
+  surfaces.
+  - `DASHI/Physics/ShiftWaveScalingInterface.agda`
+    now packages a theorem-thin coarse/fine scaling surface over the
+    current structured wave carrier, together with step compatibility
+    and a discrete second-difference operator.
+  - `DASHI/Physics/ShiftSpatialLaplacian.agda`
+    now adds the finite three-point spatial Laplacian with
+    reflected/Neumann-style endpoint behavior.
+  - `DASHI/Physics/ShiftUnitaryLikeConstraint.agda`
+    now records basis-level norm preservation for `mulI` on the four
+    phase-basis states and the exact four-quarter-turn cycle, without
+    claiming unitarity for the Euler-style Schrödinger step.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftWaveScalingInterface.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftSpatialLaplacian.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftUnitaryLikeConstraint.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed.
+
+- 2026-04-28: Extended the structured phase-wave lane with an explicit finite
+  pair-state interaction layer and a discrete-wave update package.
+  - `DASHI/Physics/ShiftPhaseTableInterference.agda`
+    now adds a four-class phase table, a symmetric finite
+    cosine-analogue interaction kernel, and a bounded pair-state
+    interference intensity observable over the structured phase-wave
+    carrier.
+  - `DASHI/Physics/ShiftDiscreteWaveStep.agda`
+    now packages the same structured carrier as an integer-pair
+    discrete wave with finite phase encoding, vector-additive
+    superposition, and a bounded Schrödinger-like Euler step under the
+    local quadratic-energy Hamiltonian proxy.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/ShiftPhaseTableInterference.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/ShiftDiscreteWaveStep.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no new local type failure observed.
+
+- 2026-04-25: Landed the two bounded Schrödinger-facing packaging lanes opened
+  from the refreshed `Classical Quantum Bridge` recovery.
+  - `DASHI/Physics/SchrodingerGap.agda`
+    now provides the theorem-thin Schrödinger-facing consumer over
+    `DashiDynamics`.
+  - `DASHI/Physics/SchrodingerAssumedTheorem.agda`
+    now consumes the real gap surface and exposes an assumption-guarded
+    theorem seam whose conclusion is definitionally the supplied
+    `schrodingerForm` witness.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/SchrodingerGap.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/SchrodingerAssumedTheorem.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    with no immediate type error emitted before the bound.
+
+- 2026-04-25: Landed the first non-placeholder Schrödinger-gap inhabitant.
+  - `DASHI/Physics/SchrodingerGapShiftInstance.agda`
+    now defines a pressure-ordered shift endomap
+    `shiftStartPoint -> shiftNextPoint -> shiftHeldExitPoint`
+    over the existing three-point carrier.
+  - Density is now tied to the packaged empirical lane at the gap level:
+    empirical `densityProxy` plus an explicit pressure rank on the shift
+    carrier.
+  - Amplitude remains a proxy, but it is now also pressure-ordered rather
+    than a free slot.
+  - The module constructs one concrete
+    `SchrodingerAssumedTheorem`
+    instance from the resulting witness pair.
+  - Follow-on refactor:
+    the canonical pressure-ranked density law now lives in
+    `DASHI/Physics/DashiDynamicsShiftInstance.agda`,
+    and the Schrödinger-gap instance reuses those shared helpers rather than
+    shadowing them.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/DashiDynamicsShiftInstance.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/SchrodingerGapShiftInstance.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/SchrodingerAssumedTheorem.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no immediate type error emitted before the bound.
+
+- 2026-04-25: Strengthened the core dynamics instance with a bounded
+  least-action seam instead of widening the Schrödinger-facing claim surface.
+  - `DASHI/Physics/DashiDynamicsShiftInstance.agda`
+    now defines `ShiftAdmissibleTarget` for the three-point pressure carrier,
+    a bounded `shiftTransitionAction` cost on admissible targets, and a
+    `ShiftLeastActionLaw` witness proving that `shiftPressureAdvance` chooses
+    the smallest admissible monotone pressure step.
+  - `ShiftActionLaw` now packages both the self-action/density bound and the
+    least-action witness.
+  Validation:
+  - `timeout 20s agda -i . DASHI/Physics/DashiDynamicsShiftInstance.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/SchrodingerGapShiftInstance.agda`: pass
+  - `timeout 20s agda -i . DASHI/Physics/SchrodingerAssumedTheorem.agda`: pass
+  - `timeout 20s agda -i . DASHI/Everything.agda`: timeout `124`
+    while checking `DASHI/Physics/Closure/Consumers/WaveRegime.agda`,
+    with no immediate type error emitted before the bound.
+
+- 2026-04-25: Re-ran `robust-context-fetch` on the same Dashi UUID
+  `69eb5a54-5f74-839f-96d4-0009db829915`
+  to refresh the worker framing before the next implementation round.
+  - Exact DB resolution still holds as
+    `Classical Quantum Bridge`
+    (`d69ca38ba7051141efc5c7245437fe574b6a5057`),
+    now with `73` archived messages and latest timestamp
+    `2026-04-24T15:15:26+00:00`.
+  - The newly recovered tail sharpens the repo-facing constraint:
+    do not add a fake Schrödinger proof claim.
+    The safe implementation shapes are
+    `SchrodingerGap`,
+    `SchrodingerAssumedTheorem`,
+    and, only if needed for wiring,
+    a clearly labelled demo-only mock module.
+  - Checked the current repo state before lane assignment:
+    `DASHI/Physics/DashiDynamics.agda`
+    and
+    `DASHI/Physics/DashiDynamicsShiftInstance.agda`
+    exist,
+    but no Schrödinger-facing modules exist yet.
+  - Reopened the implementation-control surface with two active bounded lanes:
+    theorem-thin Schrödinger gap consumer,
+    and assumption-guarded Schrödinger theorem consumer.
+    A third demo-only plumbing lane remains conditional and inactive by
+    default.
+
+- 2026-04-24: Ran `robust-context-fetch` on the requested online Dashi thread
+  `69eb5a54-5f74-839f-96d4-0009db829915` and reconciled the result against the
+  repo's canonical archive notes.
+  - The refreshed credentials repaired the live UUID path.
+    A direct pull inserted `49` messages into the canonical archive, and the
+    exact UUID now resolves from DB as
+    `Classical Quantum Bridge`
+    with canonical thread ID
+    `d69ca38ba7051141efc5c7245437fe574b6a5057`.
+  - Confirmed that the local archive still contains strong nearby Dashi
+    context, especially
+    `Dashi on Quantum Computing`
+    and
+    `Dashi and Physics Insights`,
+    and also confirmed archive-wide hits for
+    `double slit`,
+    `tunneling`,
+    `harmonic oscillator`,
+    and `hydrogen atom`.
+    So the right repo-facing interpretation is no longer
+    "exact UUID unresolved";
+    it is
+    "exact UUID resolved, and the local DB already contains concrete physics
+    content the earlier chat undercounted".
+  - Reopened the implementation-control surface with two bounded worker lanes:
+    empirical/program surface packaging,
+    and a broader consumer for
+    `ObservableSignaturePressureReport`.
+  - Landed both bounded implementation slices.
+    `DASHI/Physics/Closure/ShiftObservableSignaturePressureConsumer.agda`
+    now re-exposes the held/control pressure report through a repo-facing
+    consumer, and
+    `scripts/hepdata_program_surface.py`
+    now promotes one validated HEPData measurement/report path into the named
+    empirical program surface without crossing the deferred
+    `MeasurementSurface -> DashiStateSchema` boundary.
+  Validation:
+  - `agda -i . DASHI/Physics/Closure/ShiftObservableSignaturePressureConsumer.agda`: pass
+  - `pytest tests/test_hepdata_bridge.py`: pass
+  - `python scripts/hepdata_program_surface.py --help`: pass
+  - `timeout 30s agda -i . DASHI/Everything.agda`: timeout `124`
+    with no type error emitted before the bound.
+  - Designed the next theorem-thin unifying surface as
+    `DASHI/Physics/DashiDynamics.agda`.
+    It binds the dynamics-facing interface slots to the current packaged
+    empirical validation and pressure-consumer carriers, while keeping the
+    boundary explicit that this is interface packaging rather than a new
+    derivation claim.
+  - Instantiated that interface minimally in
+    `DASHI/Physics/DashiDynamicsShiftInstance.agda`
+    over the existing shift pressure-point carrier and the packaged
+    photonuclear validation surface.
+
 - 2026-03-25: Post-checklist closure runway opened after the Lemma A/B
   strengthening pass landed in `CausalForcesLorentz31`.
   - Reset repo control state from “milestones complete” to a broader active
@@ -348,3 +695,101 @@
 - 2026-03-11: Added package-first shift helpers in `QuadraticEmergenceShiftInstance` (`projectionParallelogramShift`, `quadraticShiftΣ`, `quadraticShift`) and rewired `Signature31InstanceShiftZ` to consume them instead of importing `QuadraticFormEmergence` directly. Targeted module checks pass. A full `CanonicalStageC` recheck is currently blocked by an unrelated sort mismatch in `DASHI/Physics/CliffordEvenLiftBridge.agda` (`Set₂` vs `Set₁`).
 - 2026-03-11: Completed the canonical import sweep in Stage-C-facing surfaces. Added `DASHI/Geometry/QuadraticCanonical.agda` as a canonical re-export entrypoint; added canonical-boundary comments to projection/quadratic and contraction/signature bridge modules; and confirmed no direct imports of alternate quadratic geometry modules in `Closure`/`Signature`/`Unification` surfaces. Verified `CanonicalStageC` and `CanonicalStageCSummaryBundle` typecheck after the sweep.
 - 2026-03-11: Follow-up compatibility pass after deeper validation-summary rechecks. Restored `localCoherenceSummary` in `CanonicalStageCTheoremBundle` and rewired it from canonical local-coherence theorem surface; renamed `SignatureClassificationBridge.Signature` to `SignatureClassification` to resolve namespace ambiguity; propagated that rename into `CanonicalContractionQuadraticSignatureBridgeTheorem`; rechecked canonical Stage C + theorem/summary bundles successfully. `PhysicsClosureValidationSummary` now progresses past prior scope failures but still exceeds a 300s bounded run.
+## 2026-04-28
+
+- Ran `robust-context-fetch` for
+  `69f03090-b914-8398-b672-4424926a104c`.
+  The canonical pull succeeded, but the resolver still missed on UUID-first
+  lookup in the merged archive shape, so the effective content recovery came
+  from the skill troubleshooting path
+  `python -m re_gpt.cli --view`.
+  Recovered thread:
+  `Pressure Dynamics and Action`.
+  A follow-on title-exact resolver pass then recovered the canonical thread
+  ID from DB as
+  `e02fe1b902e868c01ccf15ed72d6473b97fb96d2`.
+- Landed a bounded variational bridge package rather than widening the
+  Schrödinger surface again:
+  `PressureHamiltonJacobiGap.agda`
+  and
+  `PressureHamiltonJacobiShiftInstance.agda`.
+  The new seam records that the repo now has an explicit
+  `pressure -> least action -> Bellman/Hamilton-Jacobi presentation`
+  package over the existing three-point shift carrier, still with explicit
+  non-claim boundaries around any continuous-limit or Schrödinger reading.
+- Strengthened the next layer down immediately after that:
+  `DashiDynamicsShiftInstance`
+  reduction is no longer only reflexive packaging;
+  it now carries an explicit held-point fixed point together with a bounded
+  potential-descent witness.
+  Theorem-thin consumers for that seam now live at
+  `PressureGradientFlowGap.agda`
+  and
+  `PressureGradientFlowShiftInstance.agda`.
+- Tightened that same seam further:
+  `DashiDynamicsShiftInstance`
+  now also exposes strict potential descent on the explicit non-held slice of
+  the current three-point carrier, and the gradient-flow consumer lane
+  mirrors that stricter witness without widening the theorem claim boundary.
+- Continued that same bounded lane instead of returning to wave lift:
+  `DashiDynamicsShiftInstance`
+  now carries a constructive convergence theorem to
+  `shiftHeldExitPoint`
+  together with an explicit `≤ 2` step bound on the current three-point
+  carrier.
+  Added
+  `DASHI/Physics/ShiftPotentialQuadraticEnergy.agda`
+  as the finite scalar quadratic-energy package induced by
+  `shiftHeldPotential`, proving monotone descent of
+  `Q(s) = shiftHeldPotential(s)^2`
+  under `shiftPressureAdvance`.
+  This was recorded explicitly as a local energy surface rather than a claim
+  that the full canonical quadratic-form lane had already been re-derived
+  from pressure dynamics.
+- Packaged the finite terminality facts separately instead of mutating the
+  lower gradient-flow interface again:
+  `PressureGradientFlowTerminalityGap.agda`
+  and
+  `PressureGradientFlowTerminalityShiftInstance.agda`
+  now package eventual held-entry, bounded `≤ 2` convergence, unique fixed
+  point, and unique zero-potential point on the current three-point carrier.
+  This keeps the attractor reading explicit and finite-carrier-scoped without
+  promoting it to a general dynamical-systems theorem.
+- Connected the finite pressure-induced energy surface into the repo's
+  quadratic interface layer without overclaiming theorem status:
+  `ShiftPotentialQuadraticBridge.agda`
+  packages
+  `ShiftPotentialQuadraticEnergy`
+  as a local
+  `ContractionQuadraticBridge.QuadraticOutput`-compatible object, with an
+  explicit boundary that this is a finite local handoff rather than a
+  re-derivation of the canonical contraction=>quadratic theorem chain.
+- Added the next bounded bilinear-facing seam on top of that local handoff:
+  `ShiftPotentialBilinearBridge.agda`
+  exposes one explicit symmetric pair form on the finite shift carrier whose
+  diagonal matches the pressure-induced quadratic energy exactly.
+  This was recorded explicitly as a local bilinear-style bridge, not a full
+  polarization theorem or vector-space upgrade.
+- Related that same seam to the repo's existing Clifford-gate metric
+  interface:
+  `ShiftPotentialCliffordMetric.agda`
+  packages the finite bilinear form as a
+  `CliffordGate.BilinearForm`
+  together with a `RingLike ℤ` carrier and an exact diagonal recovery theorem,
+  but intentionally stops short of constructing a Clifford algebra.
+- Started the upward wave lift in parallel with that lower relation:
+  `SchrodingerGapPhaseWaveShiftInstance.agda`
+  adds a second Schrödinger-gap inhabitant whose `WaveState` is a structured
+  `carrier + amplitude + phase` record rather than the raw pressure point
+  alone, and its witness surface now packages density monotonicity,
+  amplitude monotonicity, and phase descent together.
+- Extended that same structured carrier with the first bounded interference /
+  phase-transport law:
+  exact conservation of `amplitude + phase` under one finite advance step.
+  Added
+  `ShiftPhaseWaveContinuumStory.agda`
+  as the finite continuum-style packaging layer over that structured carrier,
+  with a bounded transport coordinate,
+  conserved interference charge,
+  and exact coordinate/phase balance law,
+  while keeping explicit no-PDE / no-scaling-limit boundaries.

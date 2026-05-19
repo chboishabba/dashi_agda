@@ -1,7 +1,7 @@
 module DASHI.Physics.Signature31IntrinsicShiftInstance where
 
 open import Relation.Binary.PropositionalEquality using (_≡_)
-open import Data.Unit using (tt)
+open import Data.Unit using (⊤; tt)
 open import DASHI.Geometry.ParallelogramLaw using (AdditiveSpace)
 import DASHI.Geometry.ConeMetricCompatibility as CMC
 
@@ -57,12 +57,21 @@ shiftIntrinsicCoreAxioms =
     { strengthenedContraction = CFQS.canonicalNontrivialInvariantStrong
     ; causalSymmetry =
         record
-          { coneNontrivial = tt
-          ; arrowOrientation = tt
+          { coneNontrivial = ⊤
+          ; coneNontrivialWitness = tt
+          ; arrowOrientation = ⊤
+          ; arrowOrientationWitness = tt
+          ; isotropyEvidence = ⊤
           ; isotropyWitness = tt
+          ; finiteSpeed = ⊤
           ; finiteSpeedWitness = tt
+          ; involution = ⊤
           ; involutionWitness = tt
-          ; nondegenerateQuadratic = tt
+          ; nondegenerateQuadratic = ⊤
+          ; nondegenerateQuadraticWitness =
+              CFQS.ContractionForcesQuadraticStrong.nondegenerate
+                CFQS.canonicalNontrivialInvariantStrong
+          ; quotientContraction = ⊤
           ; quotientContractionWitness = tt
           }
     }

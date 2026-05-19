@@ -1,0 +1,63 @@
+{
+  "@context": "http://schema.org",
+  "@type": "Dataset",
+  "@id": "https://doi.org/10.17182/hepdata.115656.v1/t22",
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "HEPDataRecord",
+      "value": "https://www.hepdata.net/record/ins2079374"
+    },
+    {
+      "@type": "PropertyValue",
+      "propertyID": "HEPDataRecordAlt",
+      "value": "https://www.hepdata.net/record/115656"
+    }
+  ],
+  "url": "https://www.hepdata.net/record/129901",
+  "additionalType": "Dataset",
+  "name": "\"Covariance matrices for phistar mass 76-106\" of \"Measurement of the mass dependence of the transverse momentum of lepton pairs in Drell-Yan production in proton-proton collisions at $\\sqrt{s}$ = 13 TeV\"",
+  "author": {
+    "name": "CMS Collaboration",
+    "@type": "Organization"
+  },
+  "description": "The measured differential cross section in the $76 \\le M_{ll} &lt; 106$ GeV mass window, in bins of the $\\varphi^*$ variable. The values are normalized by the bin width. This entry contains the covariance matrix of the results.",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+  "version": "1",
+  "keywords": "P P --&gt; GAMMA* --&gt; LEPTON+ LEPTON-, P P --&gt; GAMMA* --&gt; E+ E-, P P --&gt; GAMMA* --&gt; MU+ MU-, P P --&gt; Z --&gt; LEPTON+ LEPTON-, P P --&gt; Z --&gt; E+ E-, P P --&gt; Z --&gt; MU+ MU-, 13000, Cross Section, Single Differential Cross Section, Drell Yan, Z Production, Di-Muon Production, Transverse Momentum Dependence, DSIG/DPHISTAR",
+  "inLanguage": "en",
+  "datePublished": "2022",
+  "isPartOf": {
+    "@id": "https://doi.org/10.17182/hepdata.115656.v1",
+    "@type": "Collection"
+  },
+  "@reverse": {
+    "isBasedOn": [
+      {
+        "@type": "ScholarlyArticle",
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "URL",
+          "value": "https://inspirehep.net/literature/2079374"
+        }
+      },
+      {
+        "@id": "https://doi.org/10.1140/epjc/s10052-023-11631-7",
+        "@type": "JournalArticle"
+      }
+    ]
+  },
+  "schemaVersion": "http://datacite.org/schema/kernel-4",
+  "includedInDataCatalog": {
+    "@id": "10.17182/hepdata.115656.v1",
+    "@type": "DataCatalog"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "HEPData"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "datacite"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "artifactSchema": "dashi-w3-authority-token-governance-obstruction-v1",
+  "generatedDate": "2026-05-13T05:10:00+10:00",
+  "lane": "W3",
+  "policyDocument": "Docs/DASHIGovernanceSelfIssuancePolicy.md",
+  "policyAssessment": {
+    "selectedBranch": "public-doi-frozen-commit",
+    "boundedSelfIssuancePermittedByPolicy": true,
+    "tokensConstructedByPolicy": false
+  },
+  "typeAssessment": {
+    "tokenType": "DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate.W3AcceptedEvidenceAuthorityToken",
+    "tokenDatatypeHasLocalConstructor": false,
+    "exactMissingConstructor": "constructor for data W3AcceptedEvidenceAuthorityToken in DASHI.Physics.Closure.W3AcceptedEmpiricalAuthorityGate",
+    "exactMissingProviderField": "Pack.missingAcceptedEvidenceAuthorityToken",
+    "exactTypedReceiptField": "W3AcceptedEvidenceAuthorityTokenReceipt.authorityToken",
+    "w3AcceptedEvidenceAuthorityTokenConstructed": false,
+    "w3AcceptedAuthorityExternalReceiptConstructed": false
+  },
+  "canonicalPayloadAssessment": {
+    "t43CanonicalJsonSha256": "5cfefe5a5a99c415f9225a3515383e8ce5e9a874861ff6c5fc08365871bfd340",
+    "t44CanonicalJsonSha256": "2dfa2abe120981f1f8379d95c8d6e0362394c6f6c8fed01dd45fc76a3e2b660b",
+    "t43SemanticRowsMatched": "18/18",
+    "t44SemanticRowsMatched": "324/324",
+    "canonicalPayloadsBound": true
+  },
+  "nonCollapseAssessment": {
+    "runnerSideWitnessRepresented": true,
+    "runnerReceiptModule": "DASHI.Physics.Closure.HEPDataW3NonCollapseWitnessReceipt",
+    "runnerReceipt": "canonicalHEPDataW3T43RunnerPerBinNonCollapseReceipt",
+    "witnessBinIndex": 12,
+    "witnessPrediction": 0.0486590199823977,
+    "witnessData": 0.049758,
+    "witnessPull": -2.280159308132989,
+    "providerGradeExternalNonCollapseReceiptConstructed": false,
+    "assessment": "The non-collapse witness script is already represented as runner-side evidence; the provider-grade external receipt remains absent and is not the first missing W3 authority-token field."
+  },
+  "activationRequest": [
+    "Add an explicit constructor or governance hook for AUTH.W3AcceptedEvidenceAuthorityToken, or provide an external value of that exact type.",
+    "Add a typed receipt consuming Docs/DASHIGovernanceSelfIssuancePolicy.md and naming the exact W3 t43/t44 evidence packet.",
+    "Populate W3AcceptedEvidenceAuthorityTokenReceipt.authorityToken with the exact token.",
+    "Do not claim W3 promotion until that token is inhabited."
+  ],
+  "promotionStatus": "blocked-no-authority-token-inhabitant"
+}

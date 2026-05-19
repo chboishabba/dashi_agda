@@ -1,0 +1,233 @@
+{
+  "artifactSchema": "dashi-w3-authority-t19-t20-access-route-discovery-v1",
+  "generatedDate": "2026-05-13",
+  "lane": "W3",
+  "status": "canonical-table-payload-download-blocked",
+  "promotionStatus": "candidate-only-no-authority-token",
+  "scope": "Unauthenticated, non-destructive source/access route discovery for HEPData t19/t20 canonical payloads.",
+  "hepDataRecord": {
+    "record": "ins2079374",
+    "datasetDoi": "10.17182/hepdata.104472",
+    "submissionDoi": "10.17182/hepdata.115656.v1",
+    "metadataUrl": "https://www.hepdata.net/record/ins2079374?format=json",
+    "metadataStatus": 200,
+    "metadataSha256PreviouslyRecorded": "fde88f3acf0b07ccf4be9ddbf311249d5eedf81ca43017a71376dd9a5b1fb36d"
+  },
+  "localCandidateChecksums": {
+    "t19": {
+      "path": "scripts/data/hepdata/ins2079374_phistar_mass_50-76_t19.csv",
+      "sha256": "1a1d280da645f4c55aba73aabf1b398a3fd9614532c363d972018f194b653677"
+    },
+    "t20": {
+      "path": "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_t20.csv",
+      "sha256": "fa4b694211862d4b07b761d0dab77c8fe1016d2ccd5015dc6f7bc3272c34201a"
+    }
+  },
+  "metadataDiscoveredTables": {
+    "t19": {
+      "doi": "10.17182/hepdata.115656.v1/t19",
+      "id": 1316203,
+      "name": "phistar mass 50-76",
+      "location": "Figure 19 top left",
+      "tableJsonSha256CanonicalizedForDiagnosticsOnly": "eb7ba8de0dda471267e69e5248c89980832a847fedaaef56f3603a0000798cae",
+      "dataJsonSha256CanonicalizedForDiagnosticsOnly": "882e6c80baf95842cdf2f4926b83f84977f695d7af57e49ee0647b57f3cbf2c9",
+      "matchesLocalCsvSha256": false,
+      "usedForChecksumBinding": false
+    },
+    "t20": {
+      "doi": "10.17182/hepdata.115656.v1/t20",
+      "id": 1316205,
+      "name": "Covariance matrices for phistar mass 50-76",
+      "location": "Figure 19 top left",
+      "tableJsonSha256CanonicalizedForDiagnosticsOnly": "e83964e3b16314a3f7a42ff078c758acd16a45fa025bb59686f9005f5d1a90f1",
+      "dataJsonSha256CanonicalizedForDiagnosticsOnly": "920954017db9315f0bf9607b0b451a8bea42114752ada4dcb45b41bcad36f4e4",
+      "matchesLocalCsvSha256": false,
+      "usedForChecksumBinding": false
+    }
+  },
+  "recordLevelAttempts": [
+    {
+      "url": "https://www.hepdata.net/record/ins2079374?format=csv&version=1",
+      "finalUrl": "https://www.hepdata.net/download/submission/115656/1/csv",
+      "status": 403,
+      "sha256": null,
+      "matchesLocal": false
+    },
+    {
+      "url": "https://www.hepdata.net/record/ins2079374?format=yaml&version=1",
+      "finalUrl": "https://www.hepdata.net/download/submission/115656/1/yaml",
+      "status": 403,
+      "sha256": null,
+      "matchesLocal": false
+    },
+    {
+      "url": "https://www.hepdata.net/record/ins2079374?format=json&version=1",
+      "finalUrl": "https://www.hepdata.net/record/ins2079374?format=json&version=1",
+      "status": 200,
+      "sha256": "d55fa3ccec7335608805088d019eb8f383cc84a0b434fb9802fc72226e9b3528",
+      "matchesLocal": false,
+      "usedForChecksumBinding": false,
+      "reasonNotSufficient": "Full-record JSON exposes table metadata/data subtrees, but it is not the canonical CSV/YAML table payload checksum and does not match either local CSV checksum."
+    },
+    {
+      "url": "https://www.hepdata.net/record/ins2079374?format=original&version=1",
+      "finalUrl": "https://www.hepdata.net/download/submission/115656/1/original",
+      "status": 403,
+      "sha256": null,
+      "matchesLocal": false
+    }
+  ],
+  "tableDownloadAttempts": {
+    "t19": [
+      {
+        "url": "https://www.hepdata.net/record/ins2079374?format=csv&table=phistar%20mass%2050-76&version=1",
+        "finalUrl": "https://www.hepdata.net/download/table/ins2079374/phistar%20mass%2050-76/1/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/record/ins2079374?format=csv&table=Table%2019&version=1",
+        "finalUrl": "https://www.hepdata.net/download/table/ins2079374/Table%2019/1/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/record/ins2079374?format=csv&table=Table19&version=1",
+        "finalUrl": "https://www.hepdata.net/download/table/ins2079374/Table19/1/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/phistar%20mass%2050-76/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/1316203/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/Table%2019/1/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/Table%2019/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/phistar%20mass%2050-76/yaml",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/phistar%20mass%2050-76/json",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://doi.org/10.17182/hepdata.115656.v1/t19",
+        "finalUrl": "https://www.hepdata.net/record/129898",
+        "status": 200,
+        "contentType": "application/json",
+        "sha256": "8af8db64cac28ad11e46d31dcba3cad71cd005c4539cff29c07f0cc227f96b7c",
+        "matchesLocal": false,
+        "usedForChecksumBinding": false,
+        "reasonNotSufficient": "DOI resolution returns JSON-LD metadata, not the canonical table CSV payload."
+      }
+    ],
+    "t20": [
+      {
+        "url": "https://www.hepdata.net/record/ins2079374?format=csv&table=Covariance%20matrices%20for%20phistar%20mass%2050-76&version=1",
+        "finalUrl": "https://www.hepdata.net/download/table/ins2079374/Covariance%20matrices%20for%20phistar%20mass%2050-76/1/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/record/ins2079374?format=csv&table=Table%2020&version=1",
+        "finalUrl": "https://www.hepdata.net/download/table/ins2079374/Table%2020/1/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/record/ins2079374?format=csv&table=Table20&version=1",
+        "finalUrl": "https://www.hepdata.net/download/table/ins2079374/Table20/1/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/Covariance%20matrices%20for%20phistar%20mass%2050-76/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/1316205/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/Table%2020/1/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/Table%2020/csv",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/Covariance%20matrices%20for%20phistar%20mass%2050-76/yaml",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://www.hepdata.net/download/table/ins2079374/Covariance%20matrices%20for%20phistar%20mass%2050-76/json",
+        "status": 403,
+        "sha256": null,
+        "matchesLocal": false
+      },
+      {
+        "url": "https://doi.org/10.17182/hepdata.115656.v1/t20",
+        "finalUrl": "https://www.hepdata.net/record/129899",
+        "status": 200,
+        "contentType": "application/json",
+        "sha256": "4752dcf0244fa530ee7aa4393d3ef1ff72bddd63ebfcd91b4bf87e3012074d42",
+        "matchesLocal": false,
+        "usedForChecksumBinding": false,
+        "reasonNotSufficient": "DOI resolution returns JSON-LD metadata, not the canonical table CSV payload."
+      }
+    ]
+  },
+  "blockedRouteEvidence": {
+    "httpStatus": 403,
+    "contentType": "text/html; charset=UTF-8",
+    "bodyPrefix": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title>",
+    "interpretation": "Unauthenticated canonical table/submission export routes are blocked before payload delivery."
+  },
+  "authorityDecision": {
+    "tableChecksumBound": false,
+    "w3AcceptedEvidenceAuthorityTokenConstructed": false,
+    "w3AcceptedAuthorityExternalReceiptConstructed": false,
+    "exactRemainingGap": "providerCanonicalT19ChecksumOrEquivalent and providerCanonicalT20ChecksumOrEquivalent remain required, or an accepted provider must explicitly treat the local HEP-R28 t19/t20 checksums as canonical-equivalent for the cited HEPData table provenance."
+  },
+  "nextProviderPath": "Ask HEPData/CMS/accepted authority provider to supply canonical t19/t20 table payload checksums or explicitly accept the local t19/t20 CSV checksums as canonical-equivalent, then state tableChecksumBound=true only in that accepted provider response."
+}

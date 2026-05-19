@@ -1,0 +1,87 @@
+{
+  "artifact_schema": "dashi-w5-ct18nnlo-public-fetch-diagnostic-v1",
+  "artifacts": {
+    "archive": {
+      "path": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NNLO.tar.gz",
+      "present": true,
+      "sha256": "ae502040f86f0de9bf8b45f16fb62691f864d1157fd2a902081702550b5413ea",
+      "size_bytes": 18695557
+    },
+    "central_member_grid": {
+      "path": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NNLO/CT18NNLO_0000.dat",
+      "present": true,
+      "sha256": "ed6801f28d2fa7b66ca29364df8125e57b473bebdc9b3f557c0c4cb886cc1501",
+      "size_bytes": 1188689
+    },
+    "diagnostic_output": {
+      "path": "/home/c/Documents/code/dashi_agda/scripts/data/outputs/w5_ct18nnlo_corrected_dy_luminosity.json",
+      "present": true,
+      "sha256": "68845af63f5102952e3c15d8114692ed95cfaecbdccf3fefbf55a2a33ffa9ead",
+      "size_bytes": 2805
+    },
+    "info": {
+      "path": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NNLO/CT18NNLO.info",
+      "present": true,
+      "sha256": "4f545804841ab178cf6887a14b9f7136c503347b4aff35c2ecd015755be044c1",
+      "size_bytes": 1830
+    }
+  },
+  "environment": {
+    "lhapdf_command": "/usr/bin/lhapdf",
+    "lhapdf_config": "/usr/bin/lhapdf-config",
+    "lhapdf_data_path": "/usr/share/lhapdf/LHAPDF:/home/c/Documents/code/dashi_agda/scripts/data/pdf",
+    "python_executable": "/usr/bin/python3"
+  },
+  "extraction": {
+    "attempted": true,
+    "directory": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NNLO",
+    "error": null,
+    "member_grid_count": 59,
+    "status": "extracted"
+  },
+  "fetch": {
+    "archive": {
+      "path": "/home/c/Documents/code/dashi_agda/scripts/data/pdf/CT18NNLO.tar.gz",
+      "present": true,
+      "sha256": "ae502040f86f0de9bf8b45f16fb62691f864d1157fd2a902081702550b5413ea",
+      "size_bytes": 18695557
+    },
+    "attempted": true,
+    "error": null,
+    "http_status": 200,
+    "status": "downloaded",
+    "url": "https://lhapdfsets.web.cern.ch/lhapdfsets/current/CT18NNLO.tar.gz"
+  },
+  "lhapdf_show": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "CT18NNLO\n========\nLHAPDF ID: 14000\nVersion: 1\nCT18NNLO, 3-loop PDF evolution with HOPPET and HOPPET alphas_s running solution. This set has 59 member PDFs. mem=0 --> central value; mem=1-58 --> eigenvector sets 90%\nNumber of members: 59\nError type: hessian",
+    "timeout": false
+  },
+  "numeric_result": {
+    "abs_gap": 0.1084374397465575,
+    "compared_ratio": "mass_window_integral_dtau_ratios.t45_over_z",
+    "correction_factor": 0.9888860465465575,
+    "matches_target": false,
+    "target": 0.8804486068
+  },
+  "promotion": {
+    "accepted_dy_convention": false,
+    "pdf_carrier": false,
+    "w5": false
+  },
+  "residual_blocker": "CT18NNLO is publicly fetchable and LHAPDF-runnable here, but the repo's current local DY luminosity convention remains non-promoting; the W5 runner still requires an accepted/replacement provider packet or a typed convention law before W5 can close.",
+  "runner": {
+    "output_path": "/home/c/Documents/code/dashi_agda/scripts/data/outputs/w5_ct18nnlo_corrected_dy_luminosity.json",
+    "returncode": 0,
+    "stderr": "",
+    "timeout": false
+  },
+  "source": {
+    "member": 0,
+    "pdf_set": "CT18NNLO",
+    "target": 0.8804486068,
+    "url": "https://lhapdfsets.web.cern.ch/lhapdfsets/current/CT18NNLO.tar.gz"
+  },
+  "status": "candidate_diagnostic_non_promoting"
+}

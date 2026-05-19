@@ -12,6 +12,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List
 
+from run_execution_contract_on_closure_csv import evaluate_closure_csv
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_INPUTS = [
@@ -82,6 +83,28 @@ def run_harness(input_path: Path, jmd_table: Path, dasl_source_repo: Path, tmpdi
     }
 
 
+def run_execution_contract(input_path: Path, tmpdir: Path) -> Dict[str, object]:
+    safe_stem = input_path.parts[-3] if len(input_path.parts) >= 3 else input_path.stem
+    receipts_csv = tmpdir / f"{safe_stem}-execution-receipts.csv"
+    _, summary = evaluate_closure_csv(
+        input_path,
+        label_col="label",
+        step_col="step",
+        arrow_col="v_arrow",
+        x_cols=["v_pnorm", "v_dnorm", "v_depth"],
+        mask=[1.0, 1.0, -1.0],
+        eps_arrow=1e-9,
+        eps_cone=1e-9,
+        min_eigen_overlap=0.80,
+        basin_radius=10.0,
+        out_path=receipts_csv,
+    )
+    return {
+        "receipts_csv": str(receipts_csv),
+        "summary": summary,
+    }
+
+
 def summarize_batch(inputs: List[Path], jmd_table: Path, dasl_source_repo: Path) -> Dict[str, object]:
     batch_rows: List[Dict[str, object]] = []
     unique_family_occurrences: Dict[str, List[Dict[str, object]]] = defaultdict(list)
@@ -92,12 +115,14 @@ def summarize_batch(inputs: List[Path], jmd_table: Path, dasl_source_repo: Path)
         tmpdir = Path(raw_tmp)
         for input_path in inputs:
             result = run_harness(input_path, jmd_table, dasl_source_repo, tmpdir)
+            execution_contract = run_execution_contract(input_path, tmpdir)
             family_rows = result["family_rows"]
             tail_summary = result["tail_summary"]
             batch_entry = {
                 "input": str(input_path),
                 "family_count": len(family_rows),
                 "tail_boundary_summary": tail_summary,
+                "execution_contract": execution_contract,
                 "families": family_rows,
             }
             batch_rows.append(batch_entry)

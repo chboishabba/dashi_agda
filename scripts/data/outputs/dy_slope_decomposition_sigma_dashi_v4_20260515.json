@@ -1,0 +1,759 @@
+{
+  "basis": "span_1_log_phiStar",
+  "chi2_corrected_after_shape_removal": 1791.432886882188,
+  "chi2_cross": 6.821210263296962e-12,
+  "chi2_fraction_from_shape": 0.9687052128530348,
+  "chi2_per_dof_corrected_after_shape_removal": 111.96455543013676,
+  "chi2_per_dof_raw": 3180.211733150705,
+  "chi2_raw": 57243.81119671269,
+  "chi2_shape": 55452.378309830514,
+  "covariance_law": "C_log[i,j] = C_raw[i,j] / (R_data[i] * R_data[j])",
+  "existing_runner_log_phi_diagnostic": {
+    "basis": [
+      "1",
+      "log(phiStar)"
+    ],
+    "fitInnerProduct": "inverse propagated log covariance",
+    "fittedChi2": 55452.378309830514,
+    "fittedChi2FractionOfFull": 0.9687052128530349,
+    "intercept": -0.3104937924536695,
+    "logPhiSlope": -0.34242419691254444,
+    "remainingChi2AfterProjection": 1791.432886882188,
+    "remainingChi2FractionOfFull": 0.031294787146965215,
+    "status": "computed"
+  },
+  "extended_basis_decomposition": {
+    "basis_source": "Structural_QCD_log_series",
+    "covariance_bin_kinematic_diagnostics": {
+      "branch_assessment": "distributed_theoretical_model_gap",
+      "chi2_fraction_top5_pull_bins": 1.3470945028924206,
+      "chi2_top5_pull_bins": 77112.82338770326,
+      "kinematic_rescaling": {
+        "chi2_per_dof": 3105.3455095026266,
+        "diagnostic_limitations": [
+          "prediction is interpolated as point values, not re-integrated over bins",
+          "covariance remains tied to the original binning",
+          "artifact has bin edges but no continuous prediction spectrum"
+        ],
+        "log_scale": 0.3867733988783631,
+        "optimal_phi_star_scale": 1.4722228461241493,
+        "optimizer_success": true,
+        "promotability": "blocked",
+        "scale_deviation_from_one": 0.47222284612414933
+      },
+      "n_large_pulls_abs_gt_3": 17,
+      "n_modes_90pct_chi2_eigenvalue_order": 16,
+      "n_modes_90pct_chi2_ranked_by_contribution": 8,
+      "protocol": "strict_log_metric",
+      "top5_pull_bins": [
+        0,
+        1,
+        2,
+        3,
+        8
+      ],
+      "top_chi2_eigenmode_rows": [
+        {
+          "chi2_contribution": 13871.020608167772,
+          "cumulative_chi2_fraction_ranked": 0.24231476413234232,
+          "eigenvalue": 6.088482262271954e-05,
+          "mode": 9,
+          "rank": 0
+        },
+        {
+          "chi2_contribution": 10063.65561143542,
+          "cumulative_chi2_fraction_ranked": 0.4181181462106715,
+          "eigenvalue": 0.0012582772436884552,
+          "mode": 0,
+          "rank": 1
+        },
+        {
+          "chi2_contribution": 7402.5938303621915,
+          "cumulative_chi2_fraction_ranked": 0.5474350745494209,
+          "eigenvalue": 2.4063063506580487e-05,
+          "mode": 15,
+          "rank": 2
+        },
+        {
+          "chi2_contribution": 7209.925201697582,
+          "cumulative_chi2_fraction_ranked": 0.6733862481517757,
+          "eigenvalue": 4.493473170649795e-05,
+          "mode": 10,
+          "rank": 3
+        },
+        {
+          "chi2_contribution": 5122.317618167566,
+          "cumulative_chi2_fraction_ranked": 0.7628687181530345,
+          "eigenvalue": 9.026190678561447e-05,
+          "mode": 8,
+          "rank": 4
+        },
+        {
+          "chi2_contribution": 3574.7658501450414,
+          "cumulative_chi2_fraction_ranked": 0.8253167937687672,
+          "eigenvalue": 0.00022670513441859434,
+          "mode": 1,
+          "rank": 5
+        },
+        {
+          "chi2_contribution": 3314.2141284423687,
+          "cumulative_chi2_fraction_ranked": 0.8832132555723569,
+          "eigenvalue": 9.930178597343804e-05,
+          "mode": 6,
+          "rank": 6
+        },
+        {
+          "chi2_contribution": 1663.4728966801924,
+          "cumulative_chi2_fraction_ranked": 0.9122726920756993,
+          "eigenvalue": 1.994699708523319e-05,
+          "mode": 16,
+          "rank": 7
+        },
+        {
+          "chi2_contribution": 1341.8316124161092,
+          "cumulative_chi2_fraction_ranked": 0.9357133328081102,
+          "eigenvalue": 4.470185761378559e-05,
+          "mode": 11,
+          "rank": 8
+        },
+        {
+          "chi2_contribution": 1012.0502566988029,
+          "cumulative_chi2_fraction_ranked": 0.9533929777433677,
+          "eigenvalue": 9.767098725871901e-05,
+          "mode": 7,
+          "rank": 9
+        }
+      ],
+      "top_eigenmode_rows": [
+        {
+          "chi2_contribution": 10063.65561143542,
+          "cumulative_chi2_fraction": 0.1758033820783292,
+          "eigenvalue": 0.0012582772436884552,
+          "mode": 0
+        },
+        {
+          "chi2_contribution": 3574.7658501450414,
+          "cumulative_chi2_fraction": 0.23825145769406195,
+          "eigenvalue": 0.00022670513441859434,
+          "mode": 1
+        },
+        {
+          "chi2_contribution": 55.67581721332261,
+          "cumulative_chi2_fraction": 0.23922406619180853,
+          "eigenvalue": 0.00012726290919328053,
+          "mode": 2
+        },
+        {
+          "chi2_contribution": 77.24165882641847,
+          "cumulative_chi2_fraction": 0.24057341133867488,
+          "eigenvalue": 0.00012267392598531618,
+          "mode": 3
+        },
+        {
+          "chi2_contribution": 651.6665931716785,
+          "cumulative_chi2_fraction": 0.25195746455854684,
+          "eigenvalue": 0.00011422815677762306,
+          "mode": 4
+        },
+        {
+          "chi2_contribution": 256.08384466589564,
+          "cumulative_chi2_fraction": 0.2564310284130898,
+          "eigenvalue": 0.00010572487018257127,
+          "mode": 5
+        },
+        {
+          "chi2_contribution": 3314.2141284423687,
+          "cumulative_chi2_fraction": 0.31432749021667933,
+          "eigenvalue": 9.930178597343804e-05,
+          "mode": 6
+        },
+        {
+          "chi2_contribution": 1012.0502566988029,
+          "cumulative_chi2_fraction": 0.33200713515193697,
+          "eigenvalue": 9.767098725871901e-05,
+          "mode": 7
+        },
+        {
+          "chi2_contribution": 5122.317618167566,
+          "cumulative_chi2_fraction": 0.4214896051531958,
+          "eigenvalue": 9.026190678561447e-05,
+          "mode": 8
+        },
+        {
+          "chi2_contribution": 13871.020608167772,
+          "cumulative_chi2_fraction": 0.6638043692855381,
+          "eigenvalue": 6.088482262271954e-05,
+          "mode": 9
+        }
+      ],
+      "top_pull_rows": [
+        {
+          "abs_pull": 112.65395270261924,
+          "bin": 0,
+          "phi_star": 0.002,
+          "pull": 112.65395270261924
+        },
+        {
+          "abs_pull": 103.28583760402452,
+          "bin": 1,
+          "phi_star": 0.006,
+          "pull": 103.28583760402452
+        },
+        {
+          "abs_pull": 93.77280328088621,
+          "bin": 2,
+          "phi_star": 0.01,
+          "pull": 93.77280328088621
+        },
+        {
+          "abs_pull": 91.13185835725072,
+          "bin": 3,
+          "phi_star": 0.014,
+          "pull": 91.13185835725072
+        },
+        {
+          "abs_pull": 86.33300748610044,
+          "bin": 8,
+          "phi_star": 0.0395,
+          "pull": 86.33300748610044
+        },
+        {
+          "abs_pull": 84.53881671846183,
+          "bin": 4,
+          "phi_star": 0.018000000000000002,
+          "pull": 84.53881671846183
+        },
+        {
+          "abs_pull": 81.55222540478901,
+          "bin": 6,
+          "phi_star": 0.026500000000000003,
+          "pull": 81.55222540478901
+        },
+        {
+          "abs_pull": 76.46867666207284,
+          "bin": 5,
+          "phi_star": 0.022,
+          "pull": 76.46867666207284
+        },
+        {
+          "abs_pull": 75.2861369769996,
+          "bin": 9,
+          "phi_star": 0.051000000000000004,
+          "pull": 75.2861369769996
+        },
+        {
+          "abs_pull": 75.18167264129414,
+          "bin": 7,
+          "phi_star": 0.0315,
+          "pull": 75.18167264129414
+        },
+        {
+          "abs_pull": 68.67484608882985,
+          "bin": 10,
+          "phi_star": 0.0645,
+          "pull": 68.67484608882985
+        },
+        {
+          "abs_pull": 62.41491694095357,
+          "bin": 11,
+          "phi_star": 0.08149999999999999,
+          "pull": 62.41491694095357
+        },
+        {
+          "abs_pull": 51.35664325952809,
+          "bin": 12,
+          "phi_star": 0.10250000000000001,
+          "pull": 51.35664325952809
+        },
+        {
+          "abs_pull": 43.51490272899713,
+          "bin": 13,
+          "phi_star": 0.1395,
+          "pull": 43.51490272899713
+        },
+        {
+          "abs_pull": 29.185067805867156,
+          "bin": 16,
+          "phi_star": 0.8385,
+          "pull": -29.185067805867156
+        }
+      ],
+      "total_chi2_direct": 57243.81119671269,
+      "total_chi2_eigensum": 57243.811196712755
+    },
+    "css_resummation_basis": {
+      "basis_components": [
+        "phiStar * exp(-phiStar^2 / phiStarNP^2)",
+        "phiStar * (phiStar / phiStarFO)^(-gammaSudakov(phiStar))",
+        "phiStar^(-deltaFO)"
+      ],
+      "basis_name": "CSS_QCD_resummation_three_component",
+      "basis_source": "Causal_QCD_CSS_resummation_proxy",
+      "derivation_path": "CSS factorisation -> Sudakov exponent -> NLL anomalous dimension proxy",
+      "existing_predictor_reuse_note": "DASHI.Physics.Prediction.sigma_dashi contains HEP-R48/HEP-R49 bin-integrated Sudakov predictor diagnostics; this pass is a strict-log decomposition and positive-shape fit, not a replacement predictor",
+      "forward_fit_promotability": "blocked",
+      "forward_positive_shape_fit": {
+        "basis_dim": 3,
+        "chi2": 23668.063777027142,
+        "chi2_per_dof": 1577.8709184684762,
+        "coefficients": [
+          0.016890811585534925,
+          0.07496292273660732,
+          0.022905355446221236
+        ],
+        "dof": 15,
+        "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "optimizer_success": true,
+        "strict_log_residual_convention": "log(css_positive_shape_fit) - log(data)"
+      },
+      "forward_shape_normal_matrix_condition": 4.1034104834379495,
+      "parameters": {
+        "alpha_s_ir_floor_gev": 1.0,
+        "delta_fo": 1.0426083906235053,
+        "gamma_sudakov_at_fo": 0.0638246890157665,
+        "gamma_sudakov_at_np": 0.09468644955930833,
+        "lambda_qcd_gev": 0.2,
+        "phi_fo": 0.8385,
+        "phi_np": 0.1395,
+        "sudakov_a1": 1.3333333333333333,
+        "sudakov_a2": 2.769717540498661,
+        "z_mass_gev": 91.2
+      },
+      "promotable_if_derived": false,
+      "protocol": "strict_log_metric",
+      "residual_projection": {
+        "basis_dim": 3,
+        "chi2_perp": 8745.465453143779,
+        "chi2_perp_per_dof": 583.0310302095853,
+        "coefficients": [
+          -0.05646861716803852,
+          -0.29104543829985646,
+          0.1839077444694179
+        ],
+        "coverage": 0.8472242628449239,
+        "dof_perp": 15
+      },
+      "residual_projection_basis_convention": "centered and RMS-normalized log component directions",
+      "residual_projection_normal_matrix_condition": 258.17507686000937,
+      "residual_projection_promotability": "blocked",
+      "transition_scale_caveat": "transition locations are empirical sign-flip bins; functional form is CSS-derived proxy",
+      "transition_scales_frozen_from_sign_flips": true
+    },
+    "emst_fiducial_power_correction": {
+      "basis_source": "Causal_QCD_EMST_CMS_SMP_20_003",
+      "central_acceptance_A_status": "MISSING",
+      "chi2_derived_kappa": 54793.647553154195,
+      "chi2_per_dof_derived_kappa": 3044.0915307307887,
+      "cms_cuts": {
+        "analysis": "CMS-SMP-20-003",
+        "f_eta": 0.967616225658682,
+        "jet_algorithm": "anti-kt",
+        "jet_pT_min_GeV": 30.0,
+        "jet_radius": 0.4,
+        "jet_rapidity_abs_max": 2.4,
+        "kappa_derivation": "EMST proxy: (pT_lead/(M_Z/2))^2 * (1 - 1/cosh^2(eta_max))",
+        "kappa_derived": 0.2909186609829125,
+        "lepton_eta_max": 2.4,
+        "lepton_pT_lead_GeV": 25.0,
+        "lepton_pT_sub_GeV": 20.0,
+        "m_z_GeV": 91.1876,
+        "source": {
+          "analysis": "CMS-SMP-20-003",
+          "arxiv": "2205.04897",
+          "paper_doi": "10.1140/epjc/s10052-023-11631-7",
+          "source_notes": [
+            "arXiv source SMP-20-003_temp.tex lines 163-197",
+            "particle-level phase-space statement lines 346-352",
+            "jet clustering statement lines 153-154"
+          ],
+          "source_section": "Event selection and unfolding particle-level phase space"
+        },
+        "zero_free_parameters": true
+      },
+      "correction_type": "fiducial_power_correction_proxy",
+      "derived_delta_max": 0.05266371671751496,
+      "derived_delta_min": 0.010953458272766612,
+      "derived_kappa": 0.2909186609829125,
+      "derived_prediction_positive": true,
+      "fitted_kappa_diagnostic": {
+        "chi2_per_dof": 3012.314226386642,
+        "diagnostic_only": true,
+        "kappa": 0.5622166350430581,
+        "optimizer_message": "Solution found.",
+        "optimizer_success": true
+      },
+      "full_tensor_diagnostic": {
+        "angular_grid": {
+          "fiducial_fraction_proxy": 0.18139391235716001,
+          "n_cos_theta": 161,
+          "n_phi_cs": 181
+        },
+        "basis_source": "Causal_QCD_EMST_tensor_structure_proxy",
+        "coefficient_means_fiducial": [
+          0.18139391235716001,
+          0.1602942320270734,
+          -0.0008563745437500823,
+          0.021022582558846384,
+          3.0478652746993074e-20
+        ],
+        "coefficient_means_inclusive": [
+          1.0,
+          0.6666795262528453,
+          -6.7053036043384764e-18,
+          -4.114618120844065e-18,
+          1.2801034153737092e-18
+        ],
+        "component_count_proxy": 5,
+        "cuts": {
+          "lepton_eta_max": 2.4,
+          "lepton_pT_lead_GeV": 25.0,
+          "lepton_pT_sub_GeV": 20.0
+        },
+        "diagnostic_only": true,
+        "dominant_proxy_component": "A2_like_linear_phiStar",
+        "five_component_proxy": {
+          "chi2": 74933.47544644953,
+          "chi2_per_dof": 4162.970858136086,
+          "positive_pre_scale": true,
+          "promotability": "blocked",
+          "scale": 2.2542208148792335
+        },
+        "full_emst_surface_status": "missing_nine_component_fiducial_leptonic_coefficients",
+        "leading_plus_A2_proxy": {
+          "chi2": 85143.02072918935,
+          "chi2_per_dof": 4730.167818288297,
+          "positive_pre_scale": true,
+          "promotability": "blocked",
+          "scale": 2.5975889974371964
+        },
+        "method": "deterministic_five_component_angular_proxy",
+        "promotion_boundary": "proxy result cannot promote; promotion requires the full nine-component EMST fiducial coefficient surface evaluated from the exact CMS cuts",
+        "reference": "arXiv:2006.11382",
+        "structure_function_count_required": 9
+      },
+      "kappa_distance_fit_minus_derived": 0.27129797406014555,
+      "nine_component_quadrature_diagnostic": {
+        "angular_grid": {
+          "fiducial_fraction_max": 0.8607917649996338,
+          "fiducial_fraction_min": 0.7704401088675318,
+          "n_cos_nodes": 100,
+          "n_phi_nodes": 100
+        },
+        "basis_source": "Causal_QCD_EMST_tensor_structure_quadrature_diagnostic",
+        "chi2": 101032.00620571639,
+        "chi2_per_dof": 5612.889233650911,
+        "coefficient_artifact": "scripts/data/outputs/emst_nine_component_C_fid_sigma_dashi_v4_20260515.json",
+        "component_count": 9,
+        "cuts": {
+          "lepton_eta_max": 2.4,
+          "lepton_pT_lead_GeV": 25.0,
+          "lepton_pT_sub_GeV": 20.0
+        },
+        "diagnostic_only": true,
+        "full_emst_surface_status": "nine leptonic coefficients computed by quadrature; hadronic W_i remain proxy power-counted, so this is not yet the full EMST prediction",
+        "method": "deterministic_nine_component_fiducial_angular_quadrature",
+        "positive_pre_scale": true,
+        "promotability": "blocked",
+        "promotion_boundary": "requires full EMST hadronic structure functions and exact fiducial coefficient formulas before this can promote",
+        "reference": "arXiv:2006.11382",
+        "scale": 0.5887631467852398,
+        "structure_function_power_proxy": [
+          0,
+          1,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1
+        ]
+      },
+      "promotability_derived_kappa": "blocked",
+      "promotion_boundary": "derived scalar kappa is not the full fiducial correction surface; do not promote unless strict threshold passes and the acceptance surface contract is complete",
+      "reference": "arXiv:2006.11382",
+      "residual_convention": "log(prediction_with_emst_correction) - log(data)",
+      "strict_log_metric": true,
+      "surface_status": "derived_scalar_kappa_only; central A(M,phi*) and full EMST fiducial surface remain missing",
+      "zero_free_parameter_promotable": false
+    },
+    "log_cubic": {
+      "basis_dim": 4,
+      "chi2_perp": 252.51270887792188,
+      "chi2_perp_per_dof": 18.036622062708705,
+      "coefficients": [
+        -0.261608474568653,
+        -0.19810845664320986,
+        0.08021870293046186,
+        0.010077661408074227
+      ],
+      "coverage": 0.9955888208070182,
+      "dof_perp": 14
+    },
+    "log_cubic_promotability": "partial",
+    "log_linear": {
+      "basis_dim": 2,
+      "chi2_perp": 1791.432886882188,
+      "chi2_perp_per_dof": 111.96455543013676,
+      "coefficients": [
+        -0.3104937924536695,
+        -0.34242419691254444
+      ],
+      "coverage": 0.9687052128530348,
+      "dof_perp": 16
+    },
+    "log_quadratic": {
+      "basis_dim": 3,
+      "chi2_perp": 1745.2876070658738,
+      "chi2_perp_per_dof": 116.35250713772491,
+      "coefficients": [
+        -0.3456040018237741,
+        -0.37520820716245223,
+        -0.005629554053299893
+      ],
+      "coverage": 0.9695113310840124,
+      "dof_perp": 15
+    },
+    "log_quadratic_promotability": "blocked",
+    "mechanism_discrimination": {
+      "piecewise_log_linear_at_peak": {
+        "basis_dim": 3,
+        "chi2_perp": 713.4269036783105,
+        "chi2_perp_per_dof": 47.56179357855403,
+        "coefficients": [
+          -0.32183718319741467,
+          -0.35665806771972786,
+          0.129895135344737
+        ],
+        "coverage": 0.9875370474333602,
+        "dof_perp": 15
+      },
+      "piecewise_log_linear_promotability": "blocked",
+      "pivot_bin": 17,
+      "pivot_phi_star": 2.215,
+      "preferred_diagnostic_basis": "step_at_peak",
+      "step_at_peak": {
+        "basis_dim": 3,
+        "chi2_perp": 713.42690367831,
+        "chi2_perp_per_dof": 47.561793578554,
+        "coefficients": [
+          -0.3218371831974147,
+          -0.3566580677197279,
+          0.3869326041662279
+        ],
+        "coverage": 0.9875370474333602,
+        "dof_perp": 15
+      },
+      "step_promotability": "blocked"
+    },
+    "multi_transition_discrimination": {
+      "bin_integration_correction": {
+        "chi2": 56438.97396077188,
+        "chi2_per_dof": 3135.4985533762156,
+        "promotability": "blocked",
+        "protocol": "second_derivative_point_to_bin_average_correction_in_strict_log_metric"
+      },
+      "lobe_structure_after_linear": [
+        "positive",
+        "negative",
+        "positive"
+      ],
+      "piecewise_log_linear_3_region": {
+        "basis_dim": 6,
+        "chi2_perp": 399.92974131521373,
+        "chi2_perp_per_dof": 33.32747844293448,
+        "coefficients": [
+          -0.20680813044226892,
+          -0.329916043985666,
+          -0.3393780179077595,
+          -0.3548643271110632,
+          -0.2513283238152351,
+          0.008277546221320623
+        ],
+        "coverage": 0.9930135724202412,
+        "dof_perp": 12
+      },
+      "piecewise_promotability": "blocked",
+      "promotable_if_derived": false,
+      "sudakov_matched_gaussian_log_power": {
+        "basis_dim": 4,
+        "chi2_perp": 30075.2653523246,
+        "chi2_perp_per_dof": 2148.233239451757,
+        "coefficients": [
+          -9630.61190571591,
+          0.28766266801032536,
+          -0.7998878655628727,
+          -0.18545634445210896
+        ],
+        "coverage": 0.474611058844878,
+        "dof_perp": 14
+      },
+      "sudakov_promotability": "blocked",
+      "transition_1_bin": 13,
+      "transition_1_interpretation": "non-perturbative to perturbative resummation transition",
+      "transition_1_phi_star": 0.1395,
+      "transition_2_bin": 16,
+      "transition_2_interpretation": "resummation to fixed-order tail transition",
+      "transition_2_phi_star": 0.8385
+    },
+    "peak_residual_bin_after_linear": 17,
+    "peak_residual_per_bin_chi2_after_linear_diag_approx": 643.3263320985052,
+    "peak_residual_phi_star_after_linear": 2.215,
+    "signed_residual_window_after_linear": {
+      "hi_exclusive": 18,
+      "lo": 9,
+      "rows": [
+        {
+          "bin": 9,
+          "per_bin_chi2_after_linear_diag_approx": 135.5393783412039,
+          "phi_star": 0.051000000000000004,
+          "residual_perp_after_linear": 0.08001109759683533,
+          "sign": "+"
+        },
+        {
+          "bin": 10,
+          "per_bin_chi2_after_linear_diag_approx": 126.59719784189154,
+          "phi_star": 0.0645,
+          "residual_perp_after_linear": 0.07358656746973691,
+          "sign": "+"
+        },
+        {
+          "bin": 11,
+          "per_bin_chi2_after_linear_diag_approx": 86.79472297349105,
+          "phi_star": 0.08149999999999999,
+          "residual_perp_after_linear": 0.05806376811849023,
+          "sign": "+"
+        },
+        {
+          "bin": 12,
+          "per_bin_chi2_after_linear_diag_approx": 20.28583591206636,
+          "phi_star": 0.10250000000000001,
+          "residual_perp_after_linear": 0.02794846503820525,
+          "sign": "+"
+        },
+        {
+          "bin": 13,
+          "per_bin_chi2_after_linear_diag_approx": 3.594848401164273,
+          "phi_star": 0.1395,
+          "residual_perp_after_linear": 0.009232504518658091,
+          "sign": "+"
+        },
+        {
+          "bin": 14,
+          "per_bin_chi2_after_linear_diag_approx": 11.461212247543214,
+          "phi_star": 0.21150000000000002,
+          "residual_perp_after_linear": -0.01562938519225454,
+          "sign": "-"
+        },
+        {
+          "bin": 15,
+          "per_bin_chi2_after_linear_diag_approx": 13.498188853508772,
+          "phi_star": 0.391,
+          "residual_perp_after_linear": -0.01641608012433976,
+          "sign": "-"
+        },
+        {
+          "bin": 16,
+          "per_bin_chi2_after_linear_diag_approx": 16.1930676166171,
+          "phi_star": 0.8385,
+          "residual_perp_after_linear": -0.02695855005404868,
+          "sign": "-"
+        },
+        {
+          "bin": 17,
+          "per_bin_chi2_after_linear_diag_approx": 643.3263320985052,
+          "phi_star": 2.215,
+          "residual_perp_after_linear": 0.28659112003293397,
+          "sign": "+"
+        }
+      ],
+      "sign_flip_bins": [
+        13,
+        16
+      ],
+      "sign_flip_count": 2,
+      "sign_flip_phi_star": [
+        0.1395,
+        0.8385
+      ],
+      "window": 8
+    },
+    "smooth_antisymmetric_discrimination": {
+      "erf_mu_log_phi": 0.002672930367290974,
+      "erf_optimizer_success": true,
+      "erf_pivot_phi_star": 1.0026765058306102,
+      "erf_promotability": "blocked",
+      "erf_sigma_log_phi": 0.19866530597209847,
+      "erf_sigmoid": {
+        "basis_dim": 3,
+        "chi2_perp": 684.8061104862752,
+        "chi2_perp_per_dof": 45.65374069908501,
+        "coefficients": [
+          -0.11888718471234148,
+          -0.35935958044401084,
+          0.21236726232114692
+        ],
+        "coverage": 0.9880370280005815,
+        "dof_perp": 15
+      },
+      "multiplicative_correction": {
+        "basis": "log_ratio_quadratic_in_log_phiStar",
+        "chi2_after_correction": 1745.2876070658726,
+        "chi2_per_dof_after_correction": 96.9604226147707,
+        "coefficients": [
+          0.3456040018237741,
+          0.37520820716245223,
+          0.005629554053299893
+        ],
+        "log_ratio_projection_chi2_perp_per_dof": 116.35250713772491,
+        "max_alpha_deviation": 0.9108525598917556,
+        "promotability": "blocked"
+      },
+      "promotable_if_derived": false,
+      "shifted_cubic": {
+        "basis_dim": 4,
+        "chi2_perp": 252.51270887792128,
+        "chi2_perp_per_dof": 18.036622062708663,
+        "coefficients": [
+          -0.10811366203888984,
+          -0.2869148555908943,
+          0.06123853232606521,
+          0.010077661408074598
+        ],
+        "coverage": 0.9955888208070182,
+        "dof_perp": 14
+      },
+      "shifted_cubic_identifiability_note": "diagnostic pivot is not identifiable because span(1, x-mu, (x-mu)^2, (x-mu)^3) equals span(1, x, x^2, x^3)",
+      "shifted_cubic_improvement_vs_unshifted": 4.263256414560601e-14,
+      "shifted_cubic_mu_log_phi": -0.6277967951702398,
+      "shifted_cubic_optimizer_success": true,
+      "shifted_cubic_pivot_phi_star": 0.5337665034149978,
+      "shifted_cubic_promotability": "partial"
+    },
+    "top_residual_bins_after_linear": [
+      17,
+      8,
+      7,
+      9,
+      6
+    ],
+    "top_residual_phi_star_after_linear": [
+      2.215,
+      0.0395,
+      0.0315,
+      0.051000000000000004,
+      0.026500000000000003
+    ]
+  },
+  "intercept_fit_pred_minus_data": -0.3104937924536695,
+  "n_bins": 18,
+  "promotability_assessment": "shape component dominates, but corrected chi2/dof remains above 2; residual obstruction remains",
+  "protocol": "strict_log_covariance_weighted_wls_projection",
+  "residual_convention": "log(prediction) - log(data)",
+  "slope_correction_needed_for_prediction": 0.3424241969125445,
+  "slope_dashi_v4": -0.21843391917080585,
+  "slope_data_observed": 0.12399027774173865,
+  "slope_fit_pred_minus_data": -0.34242419691254444,
+  "source_artifact": "scripts/data/outputs/t43_strict_log_sigma_dashi_v4_20260515.json",
+  "strict_pass_after_shape_removal": false
+}

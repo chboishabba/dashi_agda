@@ -1,0 +1,88 @@
+{
+  "artifactSchema": "dashi-w3-canonical-hepdata-checksum-attempt-v1",
+  "generatedDate": "2026-05-13",
+  "lane": "W3",
+  "status": "canonical-metadata-found-payload-checksum-blocked",
+  "promotionStatus": "candidate-only-no-authority-token",
+  "networkAttempts": [
+    {
+      "target": "https://www.hepdata.net/download/table/ins2079374/Table%2043/1/csv",
+      "result": "http-403-after-network-escalation",
+      "usedForChecksumBinding": false
+    },
+    {
+      "target": "https://www.hepdata.net/download/table/ins2079374/Table%2043/1/json",
+      "result": "http-403-after-network-escalation",
+      "usedForChecksumBinding": false
+    },
+    {
+      "target": "https://www.hepdata.net/download/submission/ins2079374/1",
+      "result": "http-403-after-network-escalation",
+      "usedForChecksumBinding": false
+    },
+    {
+      "target": "https://www.hepdata.net/download/submission/ins2079374/1/json",
+      "result": "http-403-after-network-escalation",
+      "usedForChecksumBinding": false
+    },
+    {
+      "target": "https://www.hepdata.net/record/ins2079374?format=json",
+      "result": "success",
+      "sha256": "fde88f3acf0b07ccf4be9ddbf311249d5eedf81ca43017a71376dd9a5b1fb36d",
+      "usedForChecksumBinding": false,
+      "reasonNotSufficient": "Record metadata identifies table DOIs, ids, names, and download URLs, but it is not the t43/t44 table payload checksum."
+    },
+    {
+      "target": "https://www.hepdata.net/download/table/ins2079374/phistar%20mass%2050-76%20over%20mass%2076-106/csv",
+      "result": "http-403-after-network-escalation",
+      "usedForChecksumBinding": false
+    },
+    {
+      "target": "https://www.hepdata.net/download/table/ins2079374/Covariance%20matrices%20for%20phistar%20mass%2050-76%20over%20mass%2076-106/csv",
+      "result": "http-403-after-network-escalation",
+      "usedForChecksumBinding": false
+    },
+    {
+      "target": "https://www.hepdata.net/download/table/1316250/csv",
+      "result": "http-403-after-network-escalation",
+      "usedForChecksumBinding": false
+    },
+    {
+      "target": "https://www.hepdata.net/download/table/1316252/csv",
+      "result": "http-403-after-network-escalation",
+      "usedForChecksumBinding": false
+    }
+  ],
+  "metadataDiscoveredTables": {
+    "t43": {
+      "doi": "10.17182/hepdata.115656.v1/t43",
+      "id": 1316250,
+      "name": "phistar mass 50-76 over mass 76-106",
+      "csvUrl": "https://www.hepdata.net/download/table/ins2079374/phistar mass 50-76 over mass 76-106/csv",
+      "jsonUrl": "https://www.hepdata.net/download/table/ins2079374/phistar mass 50-76 over mass 76-106/json"
+    },
+    "t44": {
+      "doi": "10.17182/hepdata.115656.v1/t44",
+      "id": 1316252,
+      "name": "Covariance matrices for phistar mass 50-76 over mass 76-106",
+      "csvUrl": "https://www.hepdata.net/download/table/ins2079374/Covariance matrices for phistar mass 50-76 over mass 76-106/csv",
+      "jsonUrl": "https://www.hepdata.net/download/table/ins2079374/Covariance matrices for phistar mass 50-76 over mass 76-106/json"
+    }
+  },
+  "localCandidateChecksums": {
+    "t43": {
+      "path": "scripts/data/hepdata/ins2079374_phistar_mass_50-76_over_mass_76-106_t43.csv",
+      "sha256": "0c46377d8f119abce35e6304c9a88dd03da663833b63848572e062ea532c7d2b"
+    },
+    "t44": {
+      "path": "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_50-76_over_mass_76-106_t44.csv",
+      "sha256": "3526be84e53db1b1ae13d8e17ed3ab724750ae1298ca6b4fa11e9c0253ecb54b"
+    }
+  },
+  "authorityDecision": {
+    "tableChecksumBound": false,
+    "w3AcceptedEvidenceAuthorityTokenConstructed": false,
+    "w3AcceptedAuthorityExternalReceiptConstructed": false,
+    "exactRemainingGap": "providerCanonicalT43ChecksumOrEquivalent and providerCanonicalT44ChecksumOrEquivalent are still required, or an accepted provider must explicitly treat the local HEP-R28 checksums as canonical-equivalent for the cited HEPData t43/t44 table provenance."
+  }
+}

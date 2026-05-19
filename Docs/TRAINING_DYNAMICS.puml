@@ -1,0 +1,83 @@
+@startuml
+left to right direction
+skinparam backgroundColor #0f172a
+skinparam shadowing false
+skinparam RoundCorner 18
+skinparam defaultFontName Arial
+skinparam ArrowColor #8b5cf6
+skinparam ArrowThickness 2
+skinparam packageStyle rectangle
+skinparam rectangleBackgroundColor #111827
+skinparam rectangleBorderColor #334155
+skinparam rectangleFontColor #e2e8f0
+skinparam artifactBackgroundColor #111827
+skinparam artifactBorderColor #334155
+skinparam artifactFontColor #e2e8f0
+skinparam componentBackgroundColor #111827
+skinparam componentBorderColor #334155
+skinparam componentFontColor #e2e8f0
+skinparam packageBackgroundColor #111827
+skinparam packageBorderColor #334155
+skinparam packageFontColor #e2e8f0
+skinparam noteBackgroundColor #f8fafc
+skinparam noteBorderColor #334155
+
+package "LILA execution side" {
+  rectangle "State x_t" as StateT
+  rectangle "State x_(t+1)" as StateNext
+  rectangle "Delta_t := pi(x_(t+1)) - pi(x_t)" as DeltaT
+}
+
+package "DASHI admissibility side" {
+  component "ExecutionContract C" as Contract
+  component "ExecutionContractPhaseSplit C" as PhaseSplit
+  component "ExecutionContractReceipt C x_t x_(t+1)" as Receipt
+  component "AdmissibleStep C x_t x_(t+1)" as Admissible
+}
+
+package "Bridge layer" {
+  component "LilaDashiBridge\nexecution = C\nphaseSplit = canonicalPhaseSplit C" as Bridge
+  component "TraceRow\n(step, current, next, receipt)" as TraceRow
+  component "TraceFamily\n(Row, interpret : Row -> TraceRow C)" as TraceFamily
+}
+
+package "Runtime trace diagnostics" {
+  artifact "training log CSV" as Logs
+  artifact "delta_cone_lila.py" as DeltaScript
+  artifact "checkpoint_prime_vectors.py" as PrimeScript
+}
+
+StateT --> StateNext : live step
+StateT --> DeltaT
+StateNext --> DeltaT
+Contract --> Bridge
+PhaseSplit --> Bridge
+Bridge --> TraceRow
+Receipt --> TraceRow
+TraceRow --> Admissible : receipt->admissible
+TraceFamily --> TraceRow : interpret
+Logs --> DeltaScript
+Logs --> PrimeScript
+DeltaScript --> DeltaT : estimate projected deltas
+Logs --> TraceFamily : row source
+Contract --> Receipt : judges pair
+StateT --> Receipt
+StateNext --> Receipt
+
+note bottom of Bridge
+LILA is the execution system.
+DASHI is the admissibility lens.
+end note
+
+note bottom of DeltaT
+Trace-diagnostic side: test Delta, not absolutes.
+Arrow coordinates stay outside the quadratic.
+end note
+
+note bottom of Admissible
+Formal claim: traces are interpreted inside DASHI.
+Not an equality claim and not a safety proof.
+This supplies no Drell-Yan W3 accepted authority,
+W4 adequacy, W5 correction, or external provider token.
+end note
+@enduml

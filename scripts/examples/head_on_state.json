@@ -1,0 +1,30 @@
+{
+  "admissibility": {
+    "basin_expected": true,
+    "coarse_head_matches_shell1": true,
+    "notes": [
+      "Uses the same coarse-head basin condition as the canonical shell1 source.",
+      "Perturbation is explanatory only; it is not claimed to be a traced execution state."
+    ]
+  },
+  "coarse_head": [
+    1.0
+  ],
+  "delta": [
+    0.2,
+    0.65,
+    0.45,
+    0.25
+  ],
+  "mdl_level": 1.3,
+  "photon_energy": 0.22,
+  "provenance": {
+    "basin_symbol": "ShiftInBasin",
+    "bridge_symbol": "canonicalShiftGeometryBridge",
+    "derivation": "basin-preserving perturbation template from canonical shell1 basis",
+    "module": "DASHI/Geometry/ShiftLorentzEmergenceInstance.agda",
+    "seed_origin": "DASHI/Physics/Signature31InstanceShiftZ.agda::shell1SeedTrit",
+    "state_symbol": "canonicalShiftStateWitness"
+  },
+  "trace_id": "head-on-shell1-emitted"
+}

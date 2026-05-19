@@ -2,6 +2,13 @@
 
 This is the single canonical physics-path proof spine to cite in docs and imports.
 
+Diagram surfaces:
+
+- `Docs/CanonicalProofSpine.puml`
+- `Docs/CanonicalProofSpine.svg`
+- `Docs/RepoMetasystem.puml`
+- `Docs/PhysicsUnificationMap.puml`
+
 ## Naming Standard
 
 - `canonical`: authoritative export surface for current repo claims

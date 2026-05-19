@@ -1,0 +1,83 @@
+{
+  "accepted_dy_luminosity_convention_status": "candidate_local_ct18nlo_lhapdf_convention_not_accepted",
+  "accepted_dy_luminosity_first_missing": "missingAcceptedDYLuminosityConventionAuthority",
+  "artifact_schema": "dashi-w4w5-ct18-corrected-dy-luminosity-diagnostic-v1",
+  "center_dluminosity_dtau": {
+    "t43_center_M61_64": 334083.8129942672,
+    "t45_center_M134_24": 36609.89845535698,
+    "z_center_M91_2": 112302.72502174247
+  },
+  "center_ratios": {
+    "t45_over_t43": 0.10958297598209345,
+    "t45_over_t43_abs_gap": 0.7708656308179066,
+    "t45_over_z": 0.3259929663173275,
+    "t45_over_z_abs_gap": 0.5544556404826726
+  },
+  "decision": {
+    "abs_gap": 0.1127343546316737,
+    "compared_ratio": "mass_window_integral_dtau_ratios.t45_over_z",
+    "correction_factor": 0.9931829614316737,
+    "matches_target": false,
+    "reason": "corrected local CT18 full-x dL/dtau diagnostic does not match the target and no accepted/replacement DY luminosity authority packet is present",
+    "target": 0.8804486068,
+    "target_tolerance": 1e-10
+  },
+  "flavors": [
+    {
+      "charge_weight": 0.4444444444444444,
+      "pid": 2
+    },
+    {
+      "charge_weight": 0.1111111111111111,
+      "pid": 1
+    },
+    {
+      "charge_weight": 0.1111111111111111,
+      "pid": 3
+    }
+  ],
+  "formula": "dL/dtau = integral_tau^1 dx/x sum_q e_q^2 [fq(x,M) f_qbar(tau/x,M) + f_qbar(x,M) fq(tau/x,M)]",
+  "governance": {
+    "blocker_remains": "missingAcceptedDYLuminosityConventionAuthority",
+    "diagnostic_only": true,
+    "do_not_promote_w4_w5_without_accepted_or_replacement_authority_packet": true
+  },
+  "lhapdf_data_path": "/usr/share/lhapdf/LHAPDF:/home/c/Documents/code/dashi_agda/scripts/data/pdf",
+  "lhapdf_version": "6.5.5",
+  "mass_window_integral_dM_diagnostic": {
+    "L43_50_76": 8790157.679271732,
+    "L45_106_170": 2398084.1544686416,
+    "LZ_76_106": 3559039.4515072396
+  },
+  "mass_window_integral_dM_ratios": {
+    "t45_over_t43": 0.272814691381887,
+    "t45_over_t43_abs_gap": 0.607633915418113,
+    "t45_over_z": 0.6738009474587482,
+    "t45_over_z_abs_gap": 0.20664765934125184
+  },
+  "mass_window_integral_dtau": {
+    "L43_50_76": 6.299655772864339,
+    "L45_106_170": 3.7088130192044013,
+    "LZ_76_106": 3.7342696796350046
+  },
+  "mass_window_integral_dtau_ratios": {
+    "t45_over_t43": 0.5887326471360627,
+    "t45_over_t43_abs_gap": 0.2917159596639374,
+    "t45_over_z": 0.9931829614316737,
+    "t45_over_z_abs_gap": 0.1127343546316737
+  },
+  "member": 0,
+  "n_m": 160,
+  "n_x": 400,
+  "pdf_set": "CT18NLO",
+  "promotion": {
+    "accepted_dy_convention": false,
+    "pdf_carrier": false,
+    "w4": false,
+    "w5": false
+  },
+  "scale_choice": "Q = M",
+  "sqrt_s_gev": 13000.0,
+  "status": "candidate_diagnostic_non_promoting",
+  "target_correction_factor": 0.8804486068
+}

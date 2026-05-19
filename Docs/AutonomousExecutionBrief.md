@@ -8,6 +8,20 @@ Phase: `physics-closure execution checklist`
 This file exists to stop autonomous child runs from rediscovering repo context
 that has already been settled. Read it before broad exploration.
 
+For open red/yellow blocker boxes in the main diagrams, use
+`Docs/WorkerCoordinationBoard.md` first. It assigns lane IDs `W0` through `W9`
+with bounded read/write surfaces, success conditions, and validation rules.
+This older brief remains the canonical execution note for the closure-spine
+hardening lane; it is not the complete blocker-routing board.
+
+## Active Blocker Routing
+
+Workers must choose one active blocker lane from `TODO.md` or
+`Docs/WorkerCoordinationBoard.md`. They must not reopen completed checklist
+items unless a downstream blocker explicitly requires that module as its
+assigned file surface. The completed closure checklist is provenance; the
+active queue is the blocker board.
+
 ## Active Objective
 
 Advance the remaining canonical closure milestone:

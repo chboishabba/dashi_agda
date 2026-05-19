@@ -1,0 +1,59 @@
+{
+  "artifactSchema": "dashi-w4-z-peak-t21-t22-public-intake-v1",
+  "date": "2026-05-13",
+  "status": "local-csv-bound-live-download-access-obstructed",
+  "record": "ins2079374",
+  "tables": {
+    "t21": {
+      "doi": "10.17182/hepdata.115656.v1/t21",
+      "doiJsonLdPath": "logs/research/provider_inputs/hepdata_ins2079374/t21_doi_ld.json",
+      "doiJsonLdSha256": "aa89fcf7fc8944a8ebe800e958691103db6c944e28e483d349877d9890a18505",
+      "doiResolvedRecord": "https://www.hepdata.net/record/129900",
+      "localCsvPath": "scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv",
+      "localCsvSha256": "4ece677d0e2640a786351e19d0190454aeb3dc49f7e6fbda4814e3fe88dc3270",
+      "titleDownloadJsonRoute": "https://www.hepdata.net/download/table/ins2079374/phistar%20mass%2076-106/json",
+      "numericDownloadJsonRoute": "https://www.hepdata.net/download/table/129900/json",
+      "numericDownloadCsvRoute": "https://www.hepdata.net/download/table/129900/csv",
+      "liveDownloadStatus": "curl --fail returned HTTP 403 for title JSON, numeric JSON, and numeric CSV routes from this environment"
+    },
+    "t22": {
+      "doi": "10.17182/hepdata.115656.v1/t22",
+      "doiJsonLdPath": "logs/research/provider_inputs/hepdata_ins2079374/t22_doi_ld.json",
+      "doiJsonLdSha256": "ea8b4c1a50fa9e5a099d06f7c84fa0eda4f8012302a7b6416a4dc8f147cba37d",
+      "doiResolvedRecord": "https://www.hepdata.net/record/129901",
+      "localCsvPath": "scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv",
+      "localCsvSha256": "718588d67d3c41195d25a6f01c4ff4bcf2d0d85c193e27ebd22925474a0d9ea7",
+      "titleDownloadJsonRoute": "https://www.hepdata.net/download/table/ins2079374/Covariance%20matrices%20for%20phistar%20mass%2076-106/json",
+      "numericDownloadJsonRoute": "https://www.hepdata.net/download/table/129901/json",
+      "numericDownloadCsvRoute": "https://www.hepdata.net/download/table/129901/csv",
+      "liveDownloadStatus": "curl --fail returned HTTP 403 for title JSON, numeric JSON, and numeric CSV routes from this environment"
+    }
+  },
+  "dirtyZPeakRunner": {
+    "command": "python scripts/run_t43_projection.py --freeze-hash W4-zpeak-anchor-t21-t22-20260513 --mode dirty-z-peak --data scripts/data/hepdata/ins2079374_phistar_mass_76-106_t21.csv --covariance scripts/data/hepdata/ins2079374_Covariance_phistar_mass_76-106_t22.csv --prediction-api DASHI.Physics.Prediction.sigma_dashi:predict_dirty_z_peak_shape --output logs/research/w4_z_peak_anchor_dirty_run_20260513.json",
+    "exit": 0,
+    "outputPath": "logs/research/w4_z_peak_anchor_dirty_run_20260513.json",
+    "outputSha256": "c8db3b690edcd1b4a792cd772651c5d018d04275d2163007fec7bee6a50a0ada",
+    "projectionDigest": "7fa002539fef1dc9bd51b22c1d512b4ed7be85417a3afb6f1e9992bbdc3dbdc1",
+    "rowCount": 18,
+    "covarianceShape": "18 x 18",
+    "scale": 230534508.31238452,
+    "chi2": 5080.386831006523,
+    "dof": 17,
+    "chi2PerDof": 298.8462841768543,
+    "firstPull": -67.35457265472463,
+    "lastPull": -51.62836040061707,
+    "decision": "numeric obstruction: dirty Z-peak shape fit is inadequate and non-promoting"
+  },
+  "acceptedAuthorityHarnessProbe": {
+    "command": "python scripts/run_w4_z_peak_adequacy.py --accepted-dy-authority scripts/data/authority_packet.example.json ...",
+    "exit": 40,
+    "obstruction": "missing accepted DY luminosity convention authority: example packet lacks pdfSet, lhapdfId, gridChecksum, scaleConvention, rapidityConvention, massBinRule, flavourWeights, interpolationIntegration, source, and provenance"
+  },
+  "promotionBoundary": [
+    "no W4 promotion",
+    "no Candidate256 physical calibration authority",
+    "no accepted DY luminosity convention authority",
+    "local t21/t22 CSV artifacts are checksum-bound, but live HEPData download routes returned HTTP 403 from this environment"
+  ]
+}
