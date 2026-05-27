@@ -526,6 +526,35 @@ dashiStateCarrierValue :
 dashiStateCarrierValue =
   DMC.DASHIState.carrierValue
 
+factorVecFromCarrierShape :
+  (σ : DMC.DASHIState) →
+  DMC.DASHIState.Carrier σ ≡ GL.FactorVec →
+  DMC.DASHIState.Carrier σ →
+  GL.FactorVec
+factorVecFromCarrierShape σ refl carrierValue =
+  carrierValue
+
+record G3CarrierShapePermitsFactorVec (σ : DMC.DASHIState) : Setω where
+  field
+    carrierIsFactorVec :
+      DMC.DASHIState.Carrier σ ≡ GL.FactorVec
+
+factorVecWhenCarrierShapePermits :
+  (σ : DMC.DASHIState) →
+  G3CarrierShapePermitsFactorVec σ →
+  DMC.DASHIState.Carrier σ →
+  GL.FactorVec
+factorVecWhenCarrierShapePermits σ permission =
+  factorVecFromCarrierShape
+    σ
+    (G3CarrierShapePermitsFactorVec.carrierIsFactorVec permission)
+
+record G3CarrierShapeFactorVecProjectionWitness : Setω where
+  field
+    carrierShapePermitsFactorVec :
+      (σ : DMC.DASHIState) →
+      G3CarrierShapePermitsFactorVec σ
+
 -- Conditional p2 projection/update surface over the actual DASHIState
 -- accessors.  This is the highest honest rung available locally: once an
 -- inhabitant is supplied, p2 exponent and p2 bump can be typed against the
@@ -633,6 +662,16 @@ G3CarrierToFactorVecProjectionSurface =
   dashiStateCarrier σ →
   GL.FactorVec
 
+factorVecProjectionFromCarrierShapeWitness :
+  G3CarrierShapeFactorVecProjectionWitness →
+  G3CarrierToFactorVecProjectionSurface
+factorVecProjectionFromCarrierShapeWitness witness σ =
+  factorVecWhenCarrierShapePermits
+    σ
+    (G3CarrierShapeFactorVecProjectionWitness.carrierShapePermitsFactorVec
+      witness
+      σ)
+
 G3CarrierToFactorVecP2BumpSurface :
   Set (lsuc lzero)
 G3CarrierToFactorVecP2BumpSurface =
@@ -701,6 +740,34 @@ record G3CarrierToFactorVecMinimalAdapter : Setω where
       G3CarrierToFactorVecP2FiltrationTracksExponentSurface
         factorVec
         p2Filtration
+
+-- Once factorVec and the p2 bump law are supplied, filtration and exponent
+-- tracking are definitional and do not require extra external inhabitants.
+minimalAdapterFromProjectionAndP2BumpLaw :
+  (factorVec : G3CarrierToFactorVecProjectionSurface) →
+  (p2PrimeBumpState : G3CarrierToFactorVecP2BumpSurface) →
+  G3CarrierToFactorVecP2BumpFactorVecLawSurface
+    factorVec
+    p2PrimeBumpState →
+  G3CarrierToFactorVecMinimalAdapter
+minimalAdapterFromProjectionAndP2BumpLaw
+  factorVec
+  p2PrimeBumpState
+  p2PrimeBumpFactorVecLaw =
+  record
+    { factorVec =
+        factorVec
+    ; p2PrimeBumpState =
+        p2PrimeBumpState
+    ; p2PrimeBumpFactorVecLaw =
+        p2PrimeBumpFactorVecLaw
+    ; p2Filtration =
+        λ σ →
+          GL.Vec15.e2 (factorVec σ (dashiStateCarrierValue σ))
+    ; p2FiltrationTracksExponent =
+        λ σ →
+          refl
+    }
 
 minimalAdapterP2BumpExponentLaw :
   (adapter : G3CarrierToFactorVecMinimalAdapter) →
@@ -878,10 +945,13 @@ canonicalG3CarrierToFactorVecExternalInterfaceRequest =
         ∷ "GL.Vec15.e2"
         ∷ "FVI.primeBump p2"
         ∷ "p2ExponentAfterPrimeBump proves e2 (FVI.primeBump p2 v) == suc (e2 v)"
+        ∷ "factorVecFromCarrierShape and factorVecWhenCarrierShapePermits provide a real projection when Carrier sigma is witnessed to be GL.FactorVec"
+        ∷ "factorVecProjectionFromCarrierShapeWitness lifts that per-state carrier-shape witness into G3CarrierToFactorVecProjectionSurface"
         ∷ "minimalAdapterToProjectionInterface derives the full conditional interface from the minimal adapter"
         ∷ []
     ; noLocalInhabitantReason =
         "DMC.DASHIState exposes Carrier and carrierValue only; it has no canonical FactorVec projection field"
+        ∷ "No field or constructor in DMC.DASHIState exposes a per-state witness (sigma : DMC.DASHIState) -> DMC.DASHIState.Carrier sigma == GL.FactorVec"
         ∷ "No existing import inspected here supplies an update DMC.DASHIState -> DMC.DASHIState whose carrier projection is FVI.primeBump p2"
         ∷ "Therefore G3DASHIStateP2ProjectionInterface remains conditional, not inhabited by this module"
         ∷ []
@@ -899,12 +969,6 @@ data G3DASHIStateCarrierFactorVecAdapterMissingLaw : Set where
     G3DASHIStateCarrierFactorVecAdapterMissingLaw
 
   missingP2BumpFactorVecLaw :
-    G3DASHIStateCarrierFactorVecAdapterMissingLaw
-
-  missingP2BumpExponentLaw :
-    G3DASHIStateCarrierFactorVecAdapterMissingLaw
-
-  missingP2FiltrationLaw :
     G3DASHIStateCarrierFactorVecAdapterMissingLaw
 
 record G3DASHIStateCarrierFactorVecAdapterRequest : Setω where
@@ -1020,8 +1084,6 @@ canonicalG3DASHIStateCarrierFactorVecAdapterRequest =
         missingTotalCarrierProjection
         ∷ missingP2StateUpdate
         ∷ missingP2BumpFactorVecLaw
-        ∷ missingP2BumpExponentLaw
-        ∷ missingP2FiltrationLaw
         ∷ []
     ; exactMissingProjectionName =
         "factorVec"
@@ -1030,14 +1092,90 @@ canonicalG3DASHIStateCarrierFactorVecAdapterRequest =
     ; exactMissingLawAgdaTypes =
         "p2PrimeBumpState : DMC.DASHIState -> DMC.DASHIState"
         ∷ "p2PrimeBumpFactorVecLaw : (σ : DMC.DASHIState) -> factorVec (p2PrimeBumpState σ) (DMC.DASHIState.carrierValue (p2PrimeBumpState σ)) == FVI.primeBump p2 (factorVec σ (DMC.DASHIState.carrierValue σ))"
-        ∷ "p2PrimeBumpExponentLaw : (σ : DMC.DASHIState) -> e2 (factorVec (p2PrimeBumpState σ) (DMC.DASHIState.carrierValue (p2PrimeBumpState σ))) == suc (e2 (factorVec σ (DMC.DASHIState.carrierValue σ)))"
-        ∷ "p2Filtration : DMC.DASHIState -> Nat"
-        ∷ "p2FiltrationTracksExponent : (σ : DMC.DASHIState) -> p2Filtration σ == e2 (factorVec σ (DMC.DASHIState.carrierValue σ))"
+        ∷ "p2PrimeBumpExponentLaw is derivable via minimalAdapterP2BumpExponentLaw"
+        ∷ "p2Filtration and p2FiltrationTracksExponent are derivable via minimalAdapterFromProjectionAndP2BumpLaw"
         ∷ []
     ; nonPromotingBoundary =
         "This request exposes the exact typed adapter and law surfaces only; it does not inhabit G3CarrierToFactorVecMinimalAdapter"
         ∷ "No constant, hard-coded, or Carrier-inspecting FactorVec projection is introduced"
         ∷ "DMC.DASHIState.Carrier is an arbitrary Set, so a real projection must be supplied by a carrier-specific adapter with the p2 update laws above"
+        ∷ []
+    }
+
+data G3DASHIStateCarrierFactorVecAdapterQueueVerdict : Set where
+  adapterQueueResolvedToTypedMinimalAdapterContract :
+    G3DASHIStateCarrierFactorVecAdapterQueueVerdict
+
+canonicalG3DASHIStateCarrierFactorVecAdapterRemainingLawsAfterProjection :
+  List G3DASHIStateCarrierFactorVecAdapterMissingLaw
+canonicalG3DASHIStateCarrierFactorVecAdapterRemainingLawsAfterProjection =
+  missingP2StateUpdate
+  ∷ missingP2BumpFactorVecLaw
+  ∷ []
+
+record G3DASHIStateCarrierFactorVecAdapterQueue : Setω where
+  field
+    adapterRequest :
+      G3DASHIStateCarrierFactorVecAdapterRequest
+
+    firstMissingLaw :
+      G3DASHIStateCarrierFactorVecAdapterMissingLaw
+
+    firstMissingLawIsProjection :
+      firstMissingLaw ≡ missingTotalCarrierProjection
+
+    remainingLawsAfterFirstMissing :
+      List G3DASHIStateCarrierFactorVecAdapterMissingLaw
+
+    remainingLawsAfterFirstMissingAreCanonical :
+      remainingLawsAfterFirstMissing
+      ≡
+      canonicalG3DASHIStateCarrierFactorVecAdapterRemainingLawsAfterProjection
+
+    nextLawAfterFirstMissing :
+      G3DASHIStateCarrierFactorVecAdapterMissingLaw
+
+    nextLawAfterFirstMissingIsP2StateUpdate :
+      nextLawAfterFirstMissing ≡ missingP2StateUpdate
+
+    queueVerdict :
+      G3DASHIStateCarrierFactorVecAdapterQueueVerdict
+
+    queueVerdictIsResolvedToMinimalAdapterContract :
+      queueVerdict
+      ≡
+      adapterQueueResolvedToTypedMinimalAdapterContract
+
+    nonPromotingBoundary :
+      List String
+
+canonicalG3DASHIStateCarrierFactorVecAdapterQueue :
+  G3DASHIStateCarrierFactorVecAdapterQueue
+canonicalG3DASHIStateCarrierFactorVecAdapterQueue =
+  record
+    { adapterRequest =
+        canonicalG3DASHIStateCarrierFactorVecAdapterRequest
+    ; firstMissingLaw =
+        missingTotalCarrierProjection
+    ; firstMissingLawIsProjection =
+        refl
+    ; remainingLawsAfterFirstMissing =
+        canonicalG3DASHIStateCarrierFactorVecAdapterRemainingLawsAfterProjection
+    ; remainingLawsAfterFirstMissingAreCanonical =
+        refl
+    ; nextLawAfterFirstMissing =
+        missingP2StateUpdate
+    ; nextLawAfterFirstMissingIsP2StateUpdate =
+        refl
+    ; queueVerdict =
+        adapterQueueResolvedToTypedMinimalAdapterContract
+    ; queueVerdictIsResolvedToMinimalAdapterContract =
+        refl
+    ; nonPromotingBoundary =
+        "Adapter shape is queue-explicit: first missing law is missingTotalCarrierProjection"
+        ∷ "The canonical post-projection queue is missingP2StateUpdate, then missingP2BumpFactorVecLaw"
+        ∷ "p2PrimeBumpExponentLaw and p2 filtration laws are derived once those two laws are supplied"
+        ∷ "No G3CarrierToFactorVecMinimalAdapter inhabitant is claimed by this queue receipt"
         ∷ []
     }
 
@@ -1114,7 +1252,7 @@ canonicalG3CarrierToFactorVecInvestigationReceipt =
     ; exactMissingProjectionAgdaType =
         "(sigma : DMC.DASHIState) -> DMC.DASHIState.Carrier sigma -> GL.FactorVec"
     ; exactMissingSourceFieldOrInterface =
-        "DMC.DASHIState has no factorVec field, no carrierValue-to-FactorVec projection field, and no compatibility interface equivalent to State -> SSP -> Bool from which FactorVec can be derived"
+        "DMC.DASHIState has no factorVec field, no carrierValue-to-FactorVec projection field, no per-state witness (sigma : DMC.DASHIState) -> DMC.DASHIState.Carrier sigma == GL.FactorVec, and no compatibility interface equivalent to State -> SSP -> Bool from which FactorVec can be derived"
     ; exactMissingUpdate =
         "p2PrimeBumpState : DMC.DASHIState -> DMC.DASHIState"
     ; exactMissingUpdateLaw =

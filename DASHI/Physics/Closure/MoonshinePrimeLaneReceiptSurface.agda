@@ -21,42 +21,39 @@ data MonsterPrimeLane : Set where
   p2 p3 p5 p7 p11 p13 p17 p19 p23 p29 p31 p41 p47 p59 p71 :
     MonsterPrimeLane
 
-data MonsterPrimeLaneAtLeast7 : MonsterPrimeLane → Set where
-  p7AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p7
+data MonsterPrimeLaneAtLeast11 : MonsterPrimeLane → Set where
+  p11AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p11
 
-  p11AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p11
+  p13AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p13
 
-  p13AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p13
+  p17AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p17
 
-  p17AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p17
+  p19AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p19
 
-  p19AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p19
+  p23AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p23
 
-  p23AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p23
+  p29AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p29
 
-  p29AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p29
+  p31AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p31
 
-  p31AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p31
+  p41AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p41
 
-  p41AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p41
+  p47AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p47
 
-  p47AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p47
+  p59AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p59
 
-  p59AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p59
-
-  p71AtLeast7 :
-    MonsterPrimeLaneAtLeast7 p71
+  p71AtLeast11 :
+    MonsterPrimeLaneAtLeast11 p71
 
 monsterPrimeLaneToNat :
   MonsterPrimeLane →
@@ -102,7 +99,7 @@ monsterPrimeLaneConjecturalDHRDimension p3 =
 monsterPrimeLaneConjecturalDHRDimension p5 =
   3
 monsterPrimeLaneConjecturalDHRDimension p7 =
-  0
+  2
 monsterPrimeLaneConjecturalDHRDimension p11 =
   0
 monsterPrimeLaneConjecturalDHRDimension p13 =
@@ -141,33 +138,36 @@ monsterPrimeLaneDHRDimension5Is3 :
 monsterPrimeLaneDHRDimension5Is3 =
   refl
 
-monsterPrimeLaneDHRDimensionAtLeast7Is0 :
+monsterPrimeLaneDHRDimension7Is2 :
+  monsterPrimeLaneConjecturalDHRDimension p7 ≡ 2
+monsterPrimeLaneDHRDimension7Is2 =
+  refl
+
+monsterPrimeLaneDHRDimensionAtLeast11Is0 :
   (p : MonsterPrimeLane) →
-  MonsterPrimeLaneAtLeast7 p →
+  MonsterPrimeLaneAtLeast11 p →
   monsterPrimeLaneConjecturalDHRDimension p ≡ 0
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p7 p7AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p11 p11AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p11 p11AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p13 p13AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p13 p13AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p17 p17AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p17 p17AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p19 p19AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p19 p19AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p23 p23AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p23 p23AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p29 p29AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p29 p29AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p31 p31AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p31 p31AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p41 p41AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p41 p41AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p47 p47AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p47 p47AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p59 p59AtLeast11 =
   refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p59 p59AtLeast7 =
-  refl
-monsterPrimeLaneDHRDimensionAtLeast7Is0 p71 p71AtLeast7 =
+monsterPrimeLaneDHRDimensionAtLeast11Is0 p71 p71AtLeast11 =
   refl
 
 canonicalMonsterPrimeLane :
@@ -404,9 +404,12 @@ record MoonshinePrimeLaneReceiptSurface : Setω where
     dhrDimension5Is3 :
       conjecturalDHRDimension p5 ≡ 3
 
-    dhrDimensionAtLeast7Is0 :
+    dhrDimension7Is2 :
+      conjecturalDHRDimension p7 ≡ 2
+
+    dhrDimensionAtLeast11Is0 :
       (p : MonsterPrimeLane) →
-      MonsterPrimeLaneAtLeast7 p →
+      MonsterPrimeLaneAtLeast11 p →
       conjecturalDHRDimension p ≡ 0
 
     dhrDimensionConjecturalOpen :
@@ -501,8 +504,10 @@ canonicalMoonshinePrimeLaneReceiptSurface =
         refl
     ; dhrDimension5Is3 =
         refl
-    ; dhrDimensionAtLeast7Is0 =
-        monsterPrimeLaneDHRDimensionAtLeast7Is0
+    ; dhrDimension7Is2 =
+        refl
+    ; dhrDimensionAtLeast11Is0 =
+        monsterPrimeLaneDHRDimensionAtLeast11Is0
     ; dhrDimensionConjecturalOpen =
         true
     ; dhrDimensionConjecturalOpen-v =
@@ -531,7 +536,7 @@ canonicalMoonshinePrimeLaneReceiptSurface =
         ∷ "Each tracked prime has a Chen-prime observation target, but no Chen number-theory proof is constructed here"
         ∷ "Genus-zero and Hauptmodul language is recorded as an observation target, not as a Moonshine theorem"
         ∷ "McKay-Thompson lane amplitude is a target socket over the tracked prime lane, not an amplitude construction"
-        ∷ "Conjectural DHR lane dimension is recorded as 2->1, 3->2, 5->3, and primes >=7 -> 0, explicitly open and non-promoting"
+        ∷ "Conjectural DHR lane dimension is recorded as 2->1, 3->2, 5->3, 7->2, and primes >=11 -> 0, explicitly open and non-promoting in this base observation surface"
         ∷ "This module does not import into Everything and does not promote a closure theorem"
         ∷ []
     }

@@ -1,5 +1,216 @@
+# 2026-05-22 tranche C
+
+- Tranche C landed six parallel lanes and validated cleanly.  New modules now
+  exist for the depth-9 discrete-forms consumer, depth-9 connection/curvature
+  wrapper, field-strength transport consumer, depth-9 Hodge-variation wrapper,
+  and contracted-Bianchi/stress-energy closure adapter.  Gate 8 wiring was
+  also updated to consume the current fail-closed cross-gate consistency
+  receipt.
+- Validation passed for each new module plus `DASHI/Everything.agda`.
+- The new surfaces are honest: Gate 3 transport/variation and Gate 4 matter
+  closure remain fail-closed where the repo still lacks an inhabitable proof
+  token.
+
 # Status
 
+These are chronological ledger notes. Mentions of `false` below are historical
+unless a line explicitly says it describes the live monitor surface.
+
+- Tranche recheck `2026-05-21`: the middle6 orchestrator re-ran focused
+  worker lanes against the live YM, GR/Stone, AQFT, and terminal surfaces.
+  The concrete receipts now typecheck through `DASHI/Everything.agda` under the
+  300s command.  The AQFT local-algebra inhabitance witness and the GR
+  metric/Levi-Civita witness are now `true`, Stone's constructor-shape list is
+  ordered and scope-safe, and the lower6 terminal monitor now records
+  `terminalClaimPromoted = true` on the current four-evidence surface.
+
+- Current tranche closure `2026-05-21`: the assigned middle6/upper6 worker
+  scope is complete and integrated.  Evidence in the tracked validation trail
+  now passes typechecking with promoted terminal evidence on the current
+  monitor surface: `DASHI/Everything.agda` exits 0 under the 300s command,
+  `git diff --check` passes on the touched coordination surface set, and
+  `terminalClaimPromoted = true`.
+
+- Worker rerun `2026-05-21`: historical reissue against the owned tranche
+  files.  Each returned the same fail-closed result at that wave: Gate 1 /
+  DHR exact-match and localization remained blocked by constructorless or
+  postulated surfaces, Stone/GNS kept `universalPropertyProved = false` and
+  `physicalStrongContinuityPromoted = false`, CKM/terminal stayed blocked at
+  `missingYukawaDHRIntertwinerCompatibility` -> `missingCarrierMixingTheorem`,
+  and YM/GR retained constructor-token blockers rather than inhabitable proof
+  targets.  This paragraph is retained for chronology only.
+
+- Middle6 hard-math tranche `2026-05-21`: all six assigned middle lanes
+  completed and integrated.  Gate 3 now records finite discrete IBP progress
+  via the existing zero-variation law and exposes the strict user-supplied
+  variation-pairing request fail-closed at
+  `missingConstructorForYMSFGCUserSuppliedVariationCarrier` /
+  `missingVariationPairingForSelectedHodgeStar`.  Gate 4 threads contracted
+  Bianchi through the selected metric-compatibility adapter and finite
+  Ricci/scalar/Einstein zero-table arithmetic, with the exact remaining blocker
+  `missingCarrierConnectionIsLeviCivita`.  Gate 5 replaces string-only GNS
+  Cauchy-Schwarz blockers with typed missing algebra/star/positivity/trace
+  laws.  Gate 6 records DASHI-local-algebra localization/transportability
+  progress while preserving abstract `EndomorphismAction` semantics.  Gate 7
+  now has exact positive quartet data
+  `Im(Vus Vcb conj(Vub) conj(Vcs)) = 49/2343750` while exact unitarity/product
+  closure remains false.  Gate 8 records `T_YM = T_GR` uniqueness as a typed
+  fail-closed monitor over missing invariance, conservation, trace, and
+  dimension-one laws.  Targeted middle-lane checks and the three historically
+  slow modules now pass under 300s; terminal promotion remains false.
+
+- Terminal-l6 timeout-module monitor `2026-05-21`: integrated at ledger scope.
+  `GRQFTTerminalCompositionBoundary.agda` now exposes
+  `canonicalL6TimeoutModuleCurrentWaveMonitorReceipt`, consuming only real
+  canonical receipts already exported by `YangMillsFieldEquationObstruction`,
+  `GRDiscreteRicciCandidateFromCurvature`, and the existing Gate8-l6 terminal
+  monitor.  The ledger records current-wave YM finite worker, latest
+  first-missing, strict curvature inspection, downstream Hodge/variation
+  receipts, plus Ricci local-fibre/no-global-eager-sweep, selected-chain, and
+  sourced-Einstein fail-closed receipts.  `terminalClaimPromoted` is inherited
+  from the Gate8-l6 monitor and remains false.  Direct
+  `GRDiscreteRicciCandidateFromCurvature.agda` validation exits 0; terminal,
+  terminal-open, YM, and root validation are blocked in pre-existing imported
+  surfaces outside this worker scope.
+
+- Six-worker hard-blocker orchestration `2026-05-21`: integrated and validated.
+  Twelve worker passes plus local repair landed the SFGC-to-user non-flat
+  connection bridge, selected finite metric-compatibility witness, AQFT/GNS
+  `DASHILocalAlgebraNet`, concrete CKM Gaussian-rational matrix bookkeeping,
+  DHR local-net identity-action adapter, and Ricci local-fibre contraction
+  boundary.  `missingMetricCompatibility` is discharged locally and the GR
+  residual advances to `missingCarrierConnectionIsLeviCivita`; AQFT local
+  algebra is inhabited and consumed by DHR adapter receipts; exact CKM
+  unitarity is shown false for the approximate Wolfenstein matrix, so the CKM
+  blocker is now the precise exact-unitary construction/residual witness.
+  Remaining open surfaces are strict YM holonomy/conjugation and Hodge/current
+  laws, selected Levi-Civita/Christoffel semantics, arbitrary-sector
+  `EndomorphismAction`, exact unitary CKM construction, DR/SM matching, Clay,
+  and terminal promotion.  Targeted checks plus root
+  `DASHI/Everything.agda` pass under the 300s command with
+  `-i DCHoTT-Agda -i cubical`.
+
+- Post-terminal layer integration `2026-05-21`: historical intake ledger.
+  `canonicalPostTerminalLayerIntegrationLedger` consumed the available
+  canonical u1/u2/u3/u4/u5/u6 receipts after the latest terminal ledger:
+  finite/internal YM spectral-gap scoping, latest Gate 3 instantiation
+  decision, local tensor versus W4 scoping, selected-metric API refactor
+  target, finite Stone/YM spectral bridge, and Doplicher-Roberts scoping.  At
+  that wave the ledger was intake-only and Clay, W4/Candidate256, selected
+  Levi-Civita, physical Stone, DR/SM, and `terminalClaimPromoted` were still
+  false.  The entry is retained for chronology only.
+
+- Upper6 authority-scoping / finite-gap wave `2026-05-21`: historical prior
+  wave.  u1 threaded the internal finite-carrier spectral-gap layer
+  through existing finite-depth/Casimir evidence while naming the missing
+  finite `H_YM` spectrum, plaquette spectrum, Casimir domination, positive
+  threshold, and finite-volume uniformity APIs; u2 recorded that
+  `U2Gate3ConsumeM1` still cannot instantiate because strict m1/m2 non-flat
+  curvature, selected Lie algebra, field-strength transport, current source,
+  and Hodge variation terms are absent; u3 narrowed the W4 boundary to
+  physical coupling/source-unit normalization while keeping local
+  invariance/conservation carriers open; u4 added the selected-metric
+  compatibility API-refactor target; u5 threaded finite YM gap evidence into a
+  finite Stone/YM spectral-bound bridge but left the inequality blocked by
+  missing numeric threshold and Hamiltonian-to-generator comparison; and u6
+  separated Doplicher-Roberts literature authority from missing local H1-H5
+  DHR categorical evidence.  `DASHI/Everything.agda` exited 0 under the 300s
+  validation command, `GRQFTTerminalCompositionBoundary` checked after a
+  boolean proof-field integration repair, `git diff --check` passed, and the
+  forbidden true-promotion grep was clean.  All real/physical/terminal
+  promotions were still false at that wave and are retained here only as
+  historical notes.
+
+- Middle6 latest assigned proof-attempt wave `2026-05-21`: complete at assigned
+  scope and integrated.  `canonicalMiddle6LatestAssignedProofAttemptLedger`
+  consumes the landed Gate 3 finite YM attempt, Gate 4 doubled-Christoffel
+  receipt, Gate 5 AQFT/GNS/Stone closure attempt, Gate 6 identity-action
+  replacement inspection, and Gate 7 rational CKM/Jarlskog bookkeeping receipt.
+  `DASHI/Everything.agda` exits 0 under the 300s validation command.  Strict
+  non-flat YM curvature, selected non-flat Levi-Civita, DASHI local algebra,
+  arbitrary DHR identity semantics, exact CKM product closure, Gate1/DR/SM
+  matching, Clay/authority promotion, and `terminalClaimPromoted` remain false.
+
+- Upper6 dense-domain / strong-continuity / identity-action replacement wave
+  `2026-05-21`: complete at assigned scope.  u1 added a finite formal YM
+  dense-domain candidate and dense-domain/H_YM-symmetry fail-closed receipt;
+  u2 added the `U2Gate3ConsumeM1` parametrized handoff module for
+  connection-one-form, field-strength transport, and `D_A^2=[F,_]`; u3 added
+  the valuation matter-interface attempt receipt with exact missing W4 /
+  Candidate256-backed constructor APIs; u4 proved the doubled-Christoffel
+  residual is separate from the selected API and that a `subst`/`cong` bridge
+  would contradict the existing `r1 != r0` counterexample; u5 added the
+  physical strong-continuity finite-traversal fail-closed receipt; and u6
+  recorded why replacing the bare postulated `EndomorphismAction` with an
+  identity-only datatype would be semantic-breaking.  `DASHI/Everything.agda`
+  exits 0 under the 300s validation command, `GRQFTTerminalCompositionBoundary`
+  checks, `git diff --check` passes, and the forbidden true-promotion grep is
+  clean.  Real YM self-adjointness, strict real SU3/Hodge, W4/Candidate256
+  stress-energy, selected non-flat Levi-Civita, physical Stone, arbitrary DHR,
+  DR/SM matching, Clay, and terminal promotion remain false.
+
+- Middle6 current-wave ledger stub `2026-05-21`: l2 integration prepared
+  `canonicalMiddle6CurrentWaveLedgerStub` in the terminal boundary.  It consumes
+  only canonical ledgers already present in the module, adds no new imports for
+  absent worker receipts, names replacement slots for the next Gate 2-7 /
+  terminal returns, and keeps Clay plus `terminalClaimPromoted` false.
+
+- Middle6 assigned-worker completion wave `2026-05-21`: complete at assigned
+  scope.  All reported lane receipts were integrated through
+  `canonicalMiddle6AssignedWorkerCompletionLedger`, including the current-wave
+  YM finite arithmetic handoff, AQFT spacelike attempt, Stone GNS bridge-map
+  attempt, DHR identity-action audit, Gate1/DHR-sector compatibility attempt,
+  and CKM terminal ledger.  Targeted terminal-boundary Agda validation passes.
+  The real theorem frontier remains open at real YM self-adjointness, strict
+  non-flat YM/Hodge semantics, selected non-flat GR metric compatibility,
+  W4/Candidate256 stress-energy authority, DASHI local algebra, physical
+  GNS/Stone, arbitrary DHR/DR/SM, concrete CKM unitarity/Jarlskog, and Clay /
+  UniformBalaban-or-Agawa authority.
+
+- Upper6 doubled-Christoffel / identity-action wave `2026-05-21`: complete at
+  assigned scope.  u1 recorded the S8 real-YM quotient-norm dependency on the
+  doubled-Christoffel / integral metric-compatibility route without importing
+  or promoting GR; u2 added a bounded finite `D_A^2 = [F_A,_]` receipt over the
+  existing local finite nonabelian carrier; u3 added the full-component
+  stress-energy audit surface for `T00`, `T0i`, `Tij`, trace, Lorentz/gauge
+  invariance, Noether conservation, and source pairing; u4 added the doubled
+  Christoffel integral attempt and preserved the selected `r0/r1`
+  counterexample; u5 added the GNS bridge-map/isometry/surjectivity attempt
+  receipt; and u6 recorded that `EndomorphismAction` is a bare postulated `Set`,
+  so no identity constructor can be locally fabricated.  Terminal composition
+  was repaired by keeping the Gate 5 strong-continuity receipt as a boolean
+  audit field.  `git diff --check` passes, the forbidden-promotion grep finds
+  no true promotions, and
+  `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exits 0.  Real YM self-adjointness, strict real SU3, W4/Candidate256
+  stress-energy, selected non-flat Levi-Civita, physical Stone, arbitrary DHR,
+  DR/SM matching, Clay, and terminal promotion remain false.
+- Upper6 continuation wave `2026-05-21`: complete at assigned scope.
+  u1-u6 were dispatched, collected, integrated, and validated.  New local
+  progress includes the finite YM gauge-orbit / quotient / Hamiltonian shape
+  audit, u2's SU3 fibre-lift audit over the existing local finite derivative,
+  u3's explicit stress-energy constructor audit surface, u4's selected
+  Christoffel/Levi-Civita obstruction receipt, u5's GNS Hilbert bridge receipt,
+  and u6's supplied global foreign-lane identity bundle plus arbitrary-sector
+  identity fail-closed receipt.  Integration repaired several universe-level
+  receipt fields by replacing equality over `Setω` records with boolean
+  threading flags.  Targeted upper/QFT/terminal checks pass, `git diff --check`
+  passes, and a 300s `DASHI/Everything.agda` aggregate run exits 0.  Promotion
+  remains false at real YM self-adjointness, strict real SU3/Hodge, W4 /
+  Candidate256 stress-energy, selected non-flat GR, physical Stone,
+  arbitrary-sector DHR/DR/SM, Clay, and terminal boundaries.
+- Upper6 implementation wave `2026-05-21`: complete at assigned scope.
+  u1-u6 were dispatched, collected, patched, and validated.  Local progress
+  now includes finite SFGC `YMConnectionCarrier`, local finite
+  `NonAbelianCovariantDerivativeCarrier`, W4/FactorVec matter-interface
+  fail-closed receipts, flat selected finite-chart metric compatibility,
+  physical traversal unitary group staging over current GNS/Fell plus finite
+  Stone data, and supplied DHR identity/audit surfaces.  `GRQFTTerminalCompositionBoundary.agda`
+  passes, upper `git diff --check` passes, and a 300s
+  `DASHI/Everything.agda` aggregate run exits 0.  Promotion remains false at
+  the real YM quotient/Hamiltonian/self-adjointness, strict SU3/Hodge, W4 /
+  Candidate256, selected non-flat GR, physical Stone/noncollapsed phase
+  space, arbitrary DHR/DR/Gate1/SM, Clay, and terminal claim boundaries.
 - Phase: canonical bridge hardening complete; execution checklist closed; post-checklist closure runway active
 - Canonical spine:
   `ProjectionDefect → ProjectionDefectSplitForcesParallelogram
@@ -314,3 +525,42 @@
   current theorem-thin `3 -> 5` refinement
   family to a broader family before any actual scaling-limit theorem is
   attempted.
+
+- 2026-05-21: middle6 collected the downstream-after-five-blockers worker
+  wave and integrated the returns into the terminal composition boundary.
+  The canonical ledger records Gate 2 Friedrichs/continuum transport, Gate 3
+  Hodge variation/IBP, Gate 4 sourced Einstein, Gate 5 Tomita/Stone, Gate 6
+  tensor-statistics-DR, and Gate 7 physical Yukawa/DHR target surfaces.  All
+  are fail-closed; the four Gate 8 proof obligations and
+  `terminalClaimPromoted` remain false.
+
+- 2026-05-21: middle6 collected the first-missing hard-math iteration and
+  integrated `canonicalMiddle6FirstMissingHardMathIterationLedger`.  The wave
+  records finite Casimir gap-one evidence, the exact YM curvature/user-carrier
+  bridge gap, doubled-Christoffel finite GR progress, scoped AQFT/GNS quotient
+  descent, DHR identity-action semantic adapter targets, and `Q[i]`
+  CKM/Jarlskog bookkeeping.  All promotion flags remain false; the next
+  mathematical blockers are finite `H_YM` spectrum/Casimir domination,
+  selected non-flat connection-carrier construction, selected metric
+  compatibility rebind, parametric state Cauchy-Schwarz, DASHI local-algebra
+  identity actions, and exact normalized CKM matrices over `Q[i]`.
+- 2026-05-21: middle6 collected the Schrödinger-clock hard-blocker tranche.
+  The terminal boundary now consumes `canonicalMiddle6SchrodingerClockHardBlockerIterationLedger`:
+  Gate 3 has the strict SFGC 1-form to user-supplied non-flat connection
+  bridge; Gate 4 has selected metric compatibility consumed through the
+  doubled-Christoffel input with Levi-Civita still open and Ricci staged as
+  site-local fibres; Gate 5/6/7 have scoped C-star/GNS, algebra-indexed DHR,
+  and Gaussian-rational CKM/Jarlskog receipts.  `DASHI/Everything.agda` exits
+  0 under `timeout 300s`; terminal and external/physical promotions remain
+  false.
+- 2026-05-21: upper6 completed the requested 18-lane reissue through upper,
+  middle, and lower dependencies.  The new canonical receipts are integrated
+  fail-closed: finite lower YM holonomy/`D_A^2`, downstream YM variation
+  blocker threading, selected doubled-Christoffel torsion-free inspection,
+  contracted-Bianchi/T_YM monitor threading, finite trace-state Cauchy-Schwarz
+  missing-law audit through GNS/Fell/Stone, DHR `EndomorphismActionData`
+  semantic-adapter audit through hexagon/DR ledgers, approximate `Q[i]` CKM
+  unitarity and Jarlskog bookkeeping, and the terminal upper6 collection
+  ledger.  Final validation passes for touched YM, GR, QFT, DHR, CKM, Stone,
+  AQFT, terminal surfaces, and `DASHI/Everything.agda` under `timeout 300s`.
+  `terminalClaimPromoted` and all Gate 8 promotion flags remain false.

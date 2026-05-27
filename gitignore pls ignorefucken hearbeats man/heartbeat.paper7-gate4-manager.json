@@ -1,0 +1,12 @@
+{
+  "agent_name": "signature-route",
+  "blocker": null,
+  "child_pid": 1499411,
+  "current_step": "No escalation or fallback is needed under the allocation block; ambiguity narrowed to the determinant/rank/inertia proof surface.",
+  "exit_code": 0,
+  "last_heartbeat": "2026-05-19T11:55:41Z",
+  "phase": "done",
+  "progress": null,
+  "skill": "long-running-development",
+  "state": 0
+}

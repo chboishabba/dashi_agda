@@ -1,0 +1,109 @@
+{
+  "allocation_scorecard": {
+    "ambiguity": "medium",
+    "context_width": "medium",
+    "coupling_risk": "high",
+    "failure_cost": "high",
+    "latency_pressure": "low",
+    "lower_tier_failures": "0",
+    "reversibility": "medium"
+  },
+  "architecture": "complete",
+  "audit": "complete",
+  "child_heartbeat": {
+    "agent_name": "implement",
+    "blocker": null,
+    "child_pid": 1773217,
+    "current_step": "- The `child_heartbeat` subobject appears to be concurrently rewritten by an external runner process, so heartbeat text/progress values are not stable; runsh...",
+    "exit_code": 0,
+    "last_heartbeat": "2026-05-19T14:11:59Z",
+    "phase": "done",
+    "progress": null,
+    "skill": "long-running-development",
+    "state": 0
+  },
+  "context": "ready",
+  "current_agent": null,
+  "docs": "ready",
+  "external_reasoning": "off",
+  "fallback_model": "gpt-5.3-codex",
+  "lane": "paper7-gate4-factorvec-gr",
+  "lane_claim": "Paper 7 wave5 Gate 4 implementation-enforcement manager: inhabit missingValuationStressEnergyTensorCandidate or advance it to the next exact typed stress-energy blocker; do not promote global GR; audit-only/docs-only reports fail.",
+  "last_action": "long-running-development",
+  "last_cycle_finished_at": "2026-05-19T14:11:59Z",
+  "last_cycle_started_at": "2026-05-19T14:05:42Z",
+  "last_deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+  "last_escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+  "last_exit_code": 0,
+  "last_selected_model": "gpt-5.1-codex-max",
+  "last_task_stats": {
+    "agent_name": "implement",
+    "allocation_scorecard": {
+      "ambiguity": "medium",
+      "context_width": "medium",
+      "coupling_risk": "high",
+      "failure_cost": "high",
+      "latency_pressure": "low",
+      "lower_tier_failures": "0",
+      "reversibility": "medium"
+    },
+    "dry_run": false,
+    "elapsed_seconds": 377.19,
+    "exit_code": 0,
+    "model_allocation": {
+      "deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+      "escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+      "fallback_model": "gpt-5.3-codex",
+      "reason": "Coding task is coupled or has already shown lower-tier trouble, so deep coding reasoning is warranted.",
+      "selected_model": "gpt-5.1-codex-max"
+    },
+    "output_lines": 16271,
+    "skill": "long-running-development",
+    "timed_out": false
+  },
+  "milestones_remaining": 1,
+  "model_allocation": {
+    "deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+    "escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+    "fallback_model": "gpt-5.3-codex",
+    "reason": "Coding task is coupled or has already shown lower-tier trouble, so deep coding reasoning is warranted.",
+    "selected_model": "gpt-5.1-codex-max"
+  },
+  "orchestrator_id": "paper7-wave5-gate4-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "phase": "implementation-enforcement",
+  "promotion_state": false,
+  "runsheet": [
+    {
+      "status": "done",
+      "subtask": "attempt-missing-valuation-stress-energy-tensor-candidate",
+      "task": "implementation"
+    },
+    {
+      "status": "done",
+      "subtask": "refine-stress-energy-tensor-candidate-to-typed-component-family-blocker",
+      "task": "implementation"
+    },
+    {
+      "status": "done",
+      "subtask": "thread-typed-tensor-candidate-blocker-into-gr-finite-r-sidecar",
+      "task": "implementation"
+    },
+    {
+      "status": "done",
+      "subtask": "targeted-agda-check-factorvec-discrete-metric-tensor-surface",
+      "task": "validation"
+    },
+    {
+      "status": "done",
+      "subtask": "targeted-agda-check-gr-discrete-bianchi-finite-r",
+      "task": "validation"
+    },
+    {
+      "status": "blocked",
+      "subtask": "inhabit-valuation-stress-energy-tensor-component-family",
+      "task": "implementation"
+    }
+  ],
+  "tests": "targeted-pass"
+}

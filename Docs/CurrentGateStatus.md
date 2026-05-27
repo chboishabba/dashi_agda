@@ -1,13 +1,187 @@
 # Current Gate Status
 
-Date: `2026-05-15`
+Date: `2026-05-22`
 Owner: `Worker PaperReadinessIntegrator documentation/audit sidecar`
-Status: `fail-closed coordination summary; non-promoting`
+Status: `fail-closed cross-gate sync; historical notes retained below`
 
 This sidecar records the current gate state after the latest orchestration so a
 future worker can recover the blocker posture without reading the full chat
 history. It is a documentation summary only. It does not close any gate,
 construct any token, or replace targeted Agda validation.
+
+## Current Publishability Boundary Digest 2026-05-27
+
+Second-wave factual state:
+
+- full aggregate validation passed with the full include path:
+  `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`;
+- the CMS HEPData `Results` table for record `ins2616304` v1 / table
+  `1435213` now has a typed SHA256 authority-candidate receipt:
+  `08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb`;
+- the thread-selected LHCb penguin lane remains fail-closed because its exact
+  selected table/checksum authority is still missing;
+- the Doplicher-Roberts authority receipt is recorded and consumable only after
+  evidence; it keeps `drAuthorityConsumedHere = false` and Standard Model
+  matching promotion false;
+- Gate 8 partial composition consumes the new DHR/DR, finite Stone/YM, finite
+  GR/W4, and penguin freeze receipts, but its promotion bit remains false and
+  Paper 7 remains non-constructible.
+
+This tranche improves publishability by narrowing the claim boundary, not by
+promoting the physics program. The repo-facing statement is now:
+
+- local subconditions have been discharged where the Agda surfaces explicitly
+  say so: penguin empirical-contact wiring, conditional residual
+  classification under accepted prerequisites, selected lower Yang-Mills
+  identity/flat-support witnesses, local GR valuation and stress-energy
+  component subconditions, bounded S8 energy-order adapter routes, finite
+  Paper 3 traversal/completeness shadows, and Higgs/CKM request refinements;
+- those discharges are subcondition or adapter discharges only. They do not
+  inhabit the global theorem, accepted authority token, external calibration,
+  or terminal composition objects;
+- the penguin lane now has a clean authority discriminator: an
+  `acceptedResidualCandidate` classification is admissible only after
+  authority, freeze, data, and controlled-theory prerequisites are present.
+  With `authorityMissing`, the canonical outcome remains
+  `insufficientAuthority`.
+
+The exact hard boundaries that still block stronger publication language are:
+
+- W2: no constructor or accepted exact hook for
+  `NaturalP2ConvergencePromotionAuthorityToken`;
+- W3: no constructor, provider token, or accepted exact hook for
+  `W3AcceptedEvidenceAuthorityToken`;
+- W4/W5: no accepted DY luminosity/convention authority, W4 adequacy receipt,
+  Candidate256 physical calibration receipt, or W5 correction authority;
+- penguin: CMS HEPData `Results` checksum is supplied and typed as candidate
+  data, but the selected LHCb thread checksum remains missing; there is still
+  no accepted flavio digest, C9/C10 Wilson digest, CKM source authority, full
+  freeze tuple population, projection-code hash, or no-posterior-tuning
+  attestation;
+- Paper 4/Yang-Mills: no global spectral-gap theorem, non-flat field-strength
+  fibre action, covariant Bianchi transport, Hodge/current coupling, or
+  Euler-Lagrange `D * F = J` theorem;
+- Paper 5/GR: no inhabited non-flat CRT/local boundary semantic realization,
+  Ricci/Einstein continuum convergence, W4 stress-energy interface, sourced
+  Einstein law, or Schwarzschild/weak-field recovery;
+- Paper 3: no physical Hilbert quotient, reversible traversal group, strong
+  continuity, Stone bundle, or self-adjoint generator promotion;
+- Paper 6/7: a DR authority receipt and Gate 8 partial-composition receipt
+  exist, but they are fail-closed for Standard Model matching and terminal
+  promotion; there is still no DHR hexagon closure, Higgs nonzero-VEV/W4
+  calibration, CKM mixing theorem, Standard Model reconstruction, Clay
+  authority, or terminal Paper 7 promotion.
+
+Therefore the current strongest honest packaging is a fail-closed formal
+roadmap with typed subcondition progress and exact blockers. Paper 7 remains
+an obligation/composition ledger only; it is not promoted.
+
+## Current Tranche C Snapshot 2026-05-22
+
+The tranche-C worker lanes landed concrete, fail-closed consumer modules for
+the depth-9 Gate 3 geometry and the Gate 4 contracted-Bianchi/stress-energy
+adapter layer. The new modules are:
+
+- `DASHI/Physics/Closure/DiscreteFormsOnDepth9.agda`
+- `DASHI/Physics/Closure/Depth9ConnectionAndCurvature.agda`
+- `DASHI/Physics/Closure/FieldStrengthTransportOnGaugeBundle.agda`
+- `DASHI/Physics/Closure/HodgeVariationPairingDepth9.agda`
+- `DASHI/Physics/Closure/ContractedBianchiMatterClosure.agda`
+
+`DASHI/Physics/Closure/CrossGateCompositionTheorems.agda` was also updated so
+Gate 8 explicitly consumes the current fail-closed cross-gate consistency
+receipt. `DASHI/Everything.agda` now imports the new tranche-C modules and
+passes after validation. The new surfaces are honest wrappers or consumers,
+not fake promotions: Gate 3 transport/variation remains fail-closed at the
+exact Yang-Mills blockers, and Gate 4 remains fail-closed at the GR/W4
+boundary.
+
+## Current Tranche Snapshot 2026-05-22
+
+The current tranche sync is fail-closed and now matches the local compile
+record. `DASHI/Physics/Closure/CrossGateConsistency.agda` and
+`DASHI/Physics/QFT/DHRGaugeReceiptSurface.agda` typecheck and now thread the
+typed Clay/YM, Higgs/PDG, and DHR thermodynamic-limit boundary receipts as
+explicit integration fields while keeping `gate8Promotable = false` and the
+Gate 1/Gate 6 obstruction open. The current aggregate check is green:
+`DASHI/Everything.agda` now passes after the new boundary-threading receipts
+were added. The Stone tranche modules remain locally validated, but the
+remaining global blockers stay open: `missingExactStandardModelCarrierFunctorMatch`,
+`missingUnitarityResidualWitness`,
+`missingNonFlatSFGCSite2DConnectionCurvature`,
+`missingLieAlgebraCarrierForSelectedFiniteGaugeSector`,
+`missingFieldStrengthTransportActionOnSelectedGaugeBundle`, and
+`missingVariationPairingForSelectedHodgeStar`.
+The new boundary receipt surfaces are now in the build as typed, fail-closed
+anchors: `ClayYMGapBoundary`, `HiggsPDGBoundary`, and
+`DHRThermodynamicLimitBoundary`. The existing
+`DASHI/Physics/QFT/DHRThermodynamicLimit.agda` surface now threads the typed
+thermodynamic-limit boundary receipt as an explicit integration field.
+The current tranche also now carries the boundary-parameter adapter algebra and
+the W3 gauge-sector refinement algebra as typed fail-closed receipts; both are
+recorded as boundary-only, non-promoting surfaces.
+Gate 7 now also exposes explicit exact bridge records in
+`CKMCarrierMixingReceipt.agda` and `HiggsElectroweakBoundary.agda`; they carry
+the exact witness chain and the `v_Higgs` adapter4 bit as typed fail-closed
+witnesses, not promotions.
+Gate 2 now also has a theorem-shaped package:
+`Gate2SpectralGapMath` factors the canonical Bool-model finite coercivity,
+refinement inequality, and Nat-colimit gap lift into reusable lemma records
+while keeping the continuum Yang-Mills mass-gap claim boundary-only.
+The current tranche also adds an actual selected-carrier Gate 2 bundle:
+`Gate2ActualSelectedCarrierBundle` threads the finite coercivity, tower
+refinement, uniform lower bound, self-adjoint wrapper, and Hamiltonian
+colimit lift receipts through the blueprint as typed fail-closed data.
+The current tranche also now carries a four-program blueprint bundle for Gate
+2 spectral-gap refinement, Gate 3 non-flat Yang-Mills geometry, Gate 4
+contracted-Bianchi/stress-energy compatibility, and Gate 7 carrier-derived CKM
+as typed fail-closed program records. These are structure-bearing receipts, not
+promotions.
+Gate 3 now additionally has a concrete `YangMillsGate3DiscreteGeometryReceipt`
+surface that packages the finite SFGC 0/1/2-form carriers, the depth-9
+connection, the non-flat curvature witness, the variation-pairing frontier,
+and the canonical W3/SU3 bridge witnesses as typed fail-closed fields.
+The new reusable math packages now exist as first-class modules:
+`SpectralGapRefinementStability` packages the finite spectral-gap toolkit,
+refinement monotonicity, lower-bound persistence, and Nat colimit transfer;
+`DHRSectorFunctoriality` packages localised endomorphisms, intertwiners,
+transportability, tensor composition, and reconstruction compatibility against
+the thermodynamic-limit boundary.
+The current upstream receipts for DHR identity-action semantics, DHR sector
+decomposition, filtered-colimit preservation, the one-point GNS/Stone bridge,
+the strong-continuity front, and the mod-19 SU(3) clock/shift route remain
+compiled upstream frontiers only; they do not promote the blocker list.
+The SU(3) depth-quotient bridge and the FN/Wolfenstein CKM front-end remain
+compiled witness bundles, not terminal promotions.
+
+## Current Tranche Note 2026-05-18
+
+This read-first update records the last two documentation tranches only and
+does not rewrite older status history.
+
+- W3 is now represented by a governance-action request surface:
+  `DASHI/Physics/Closure/W3AcceptedEvidenceAuthorityTokenGovernanceActionRequest.agda`.
+  It requests either an exact constructor at the canonical definition site or a
+  non-postulated exact policy hook. It does not construct
+  `W3AcceptedEvidenceAuthorityToken`, so accepted W3 empirical authority remains
+  fail-closed.
+- W4/W5 authority accounting has been corrected around the CMS
+  `36.3 fb^-1` luminosity boundary and the accepted/replacement authority packet
+  shape. The worktree includes
+  `scripts/data/authority_packet.accepted_replacement.schema.json` and
+  `tests/test_w4w5_fail_closed_authority_packets.py`; these are fail-closed
+  schema/test surfaces, not accepted DY convention authority. W4/W5 remain
+  blocked on an accepted provider/governance payload.
+- Moonshine/`laneDimension`, W9, G6, and GR now have typechecked surfaces in
+  the current validation round through `DASHI/Everything.agda`. The
+  Moonshine/`laneDimension` wording is limited to the
+  `DASHIPrimeLaneEquivClosureReceiptSurface` / `DASHIPrimeLaneEquiv` bridge
+  route; W9 is limited to the existing MDL-seam-bounded
+  `canonicalMDLTerminationSeamW9KillReceipt` surface; G6 is limited to the
+  tracked `G6OfficialTrackedCrossLaneCommutingTheorem` route; and GR is limited
+  to candidate/sidecar surfaces such as
+  `GRDiscreteRicciCandidateFromCurvature`. No terminal, Clay, W4/W5 authority,
+  full GR, GRQFT, or TOE promotion follows.
 
 ## Formal Model
 
@@ -30,7 +204,7 @@ construct any token, or replace targeted Agda validation.
 - G: governance-first. External tokens are not fabricated. W2/W3 authority-token
   datatypes remain constructorless until an accepted exact hook or external
   value inhabits the required type.
-- F: gaps below are blockers, not prose TODOs.
+- F: gaps below are blockers, not prose task notes.
 
 ## Current Gate Posture
 
@@ -158,6 +332,21 @@ Next-round queue for the shortest Paper 1 path:
 2. For G3, cite the certified subtraction support route, then leave valuation
    invariance, ultrametric, rescaling/min-shift, product support, and bracket
    support as explicit blockers.
+
+## Current Tranche Note 2026-05-22
+
+Gate 8 now has an explicit fail-closed composition surface in
+`DASHI/Physics/Closure/CrossGateConsistency.agda`. The new record threads the
+standalone exact-SM token, the Stone handoff receipt, the CKM exact witness
+chain, and the Higgs dependency receipt, keeps `gate8Promotable = false`, and
+records the open upstream blockers instead of inventing a new promotion layer.
+The composition surface is typed and consumes the existing receipts only.
+`DASHI/Physics/Closure/CrossGateCompositionTheorems.agda` now packages the
+Gate 1/6 DHR-limit, Gate 5 Stone/GNS, and Gate 7 electroweak-mixing
+composition receipts as a reusable fail-closed theorem layer.
+The new Gate 7 bridge records keep `missingCarrierMixingTheorem` and the
+electroweak adapter boundary open while making the exact upstream witnesses
+first-class in the surface.
 3. Keep E8 local semantic completeness as local-only until upstream supplies a
    constructor or promotion API for `E8RootEnumerationComplete`.
 4. Keep GR non-flat out of Paper 1 unless explicitly scoped as future work; at

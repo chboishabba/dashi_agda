@@ -8,6 +8,9 @@ publishable claim of:
 It does not assert that the target claim is true today. It defines the finite
 promotion path that would make the claim defensible.
 
+Roadmap maintenance state for the current wave: complete. This marks the
+status-review tranche as finished, not the physics-unification target itself.
+
 ## Current State
 
 Current status is recorded in `Docs/PhysicsLaneMaturityMatrix.md`:

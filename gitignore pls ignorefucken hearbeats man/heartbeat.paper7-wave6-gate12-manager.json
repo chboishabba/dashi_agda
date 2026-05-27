@@ -1,0 +1,12 @@
+{
+  "agent_name": "implement",
+  "blocker": null,
+  "child_pid": 1808692,
+  "current_step": "- F: missing inhabitant remains `SelfAdjointYangMillsHamiltonianOnCarrierQuotient` (global real-carrier).",
+  "exit_code": 0,
+  "last_heartbeat": "2026-05-19T14:23:13Z",
+  "phase": "done",
+  "progress": null,
+  "skill": "long-running-development",
+  "state": 0
+}

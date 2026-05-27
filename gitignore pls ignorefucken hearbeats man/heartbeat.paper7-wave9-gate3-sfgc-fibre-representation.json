@@ -1,0 +1,12 @@
+{
+  "agent_name": "implement",
+  "blocker": null,
+  "child_pid": 2112932,
+  "current_step": "94,494",
+  "exit_code": 1,
+  "last_heartbeat": "2026-05-19T16:40:39Z",
+  "phase": "done",
+  "progress": null,
+  "skill": "long-running-development",
+  "state": 1
+}

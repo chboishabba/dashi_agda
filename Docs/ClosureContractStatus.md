@@ -1,5 +1,27 @@
 # Closure Contract Status
 
+## Current Tranche Snapshot 2026-05-21
+
+The closure-contract coordination tranche is closed at assigned scope. The
+current evidence remains fail-closed: `DASHI/Everything.agda` exits 0 under
+the 300s command, the terminal ledger is integrated, and
+`terminalClaimPromoted = false`. This records closure of the assigned worker
+scope only; it does not fabricate any promotion.
+
+## Current Tranche Note 2026-05-18
+
+The current docs/status sync is non-promoting. W3 has a governance-action
+request rather than an accepted authority token. W4/W5 now use the corrected
+`36.3 fb^-1` authority boundary plus fail-closed accepted/replacement packet
+schema/tests, but no accepted DY authority is constructed. Moonshine
+`laneDimension`, W9, G6, and GR now have typechecked surface available in the
+current validation round through `DASHI/Everything.agda`: the
+`DASHIPrimeLaneEquiv` bridge route for Moonshine/`laneDimension`, the bounded
+MDL-seam W9 receipt, the tracked `G6OfficialTrackedCrossLaneCommutingTheorem`
+route, and the GR candidate/sidecar surfaces. These are not authority-token,
+full-GR, Clay, GRQFT, TOE, or terminal promotions, and they do not change
+`terminalClaimPromoted = false`.
+
 ## Closed Question
 
 The current closure stack now states one thing consistently:

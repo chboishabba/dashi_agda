@@ -1,0 +1,12 @@
+{
+  "agent_name": "implement",
+  "blocker": null,
+  "child_pid": 2112641,
+  "current_step": "- `F`: Initial frame held. Change from initial state: now explicit typed global promotion receipt exists; remaining gap is upstream scalar-algebra inhabitant...",
+  "exit_code": 0,
+  "last_heartbeat": "2026-05-19T16:41:48Z",
+  "phase": "done",
+  "progress": null,
+  "skill": "long-running-development",
+  "state": 0
+}

@@ -1,7 +1,8 @@
 module DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -156,6 +157,12 @@ candidate256PhysicalCalibrationExternalReceiptImpossibleHere receipt =
     (Candidate256PhysicalCalibrationExternalReceipt.calibrationAuthority
       receipt)
 
+candidate256PhysicalCalibrationExternalReceiptImpossibleWithoutExternalAuthority :
+  Candidate256PhysicalCalibrationExternalReceipt →
+  ⊥
+candidate256PhysicalCalibrationExternalReceiptImpossibleWithoutExternalAuthority =
+  candidate256PhysicalCalibrationExternalReceiptImpossibleHere
+
 canonicalCandidate256PhysicalCalibrationExternalBlockedFields :
   List Candidate256PhysicalCalibrationExternalBlockedField
 canonicalCandidate256PhysicalCalibrationExternalBlockedFields =
@@ -269,5 +276,89 @@ canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus =
     ; impossibleWithoutExternalAuthority =
         candidate256PhysicalCalibrationAuthorityTokenImpossibleHere
     ; impossibleReceiptWithoutExternalAuthority =
-        candidate256PhysicalCalibrationExternalReceiptImpossibleHere
+        candidate256PhysicalCalibrationExternalReceiptImpossibleWithoutExternalAuthority
+    }
+
+record Candidate256PhysicalCalibrationGateReceiptWiringLedger : Setω where
+  field
+    currentStatus :
+      Candidate256PhysicalCalibrationExternalReceiptCurrentStatus
+
+    downstreamReceiptQueue :
+      List W4PhysicalCalibrationExternalReceiptQueueItem
+
+    downstreamReceiptQueueIsCanonical :
+      downstreamReceiptQueue
+      ≡
+      canonicalW4PhysicalCalibrationExternalReceiptQueue
+
+    blockedExternalFields :
+      List Candidate256PhysicalCalibrationExternalBlockedField
+
+    blockedExternalFieldsAreCanonical :
+      blockedExternalFields
+      ≡
+      canonicalCandidate256PhysicalCalibrationExternalBlockedFields
+
+    receiptImpossibleWithoutExternalAuthority :
+      Candidate256PhysicalCalibrationExternalReceipt →
+      ⊥
+
+    acceptedAuthorityTokenLocallyConstructed :
+      Bool
+
+    acceptedAuthorityTokenLocallyConstructedIsFalse :
+      acceptedAuthorityTokenLocallyConstructed ≡ false
+
+    gateReceiptWired :
+      Bool
+
+    gateReceiptWiredIsTrue :
+      gateReceiptWired ≡ true
+
+    physicalCalibrationPromoted :
+      Bool
+
+    physicalCalibrationPromotedIsFalse :
+      physicalCalibrationPromoted ≡ false
+
+    wiringBoundary :
+      List String
+
+open Candidate256PhysicalCalibrationGateReceiptWiringLedger public
+
+canonicalCandidate256PhysicalCalibrationGateReceiptWiringLedger :
+  Candidate256PhysicalCalibrationGateReceiptWiringLedger
+canonicalCandidate256PhysicalCalibrationGateReceiptWiringLedger =
+  record
+    { currentStatus =
+        canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus
+    ; downstreamReceiptQueue =
+        canonicalW4PhysicalCalibrationExternalReceiptQueue
+    ; downstreamReceiptQueueIsCanonical =
+        refl
+    ; blockedExternalFields =
+        canonicalCandidate256PhysicalCalibrationExternalBlockedFields
+    ; blockedExternalFieldsAreCanonical =
+        refl
+    ; receiptImpossibleWithoutExternalAuthority =
+        candidate256PhysicalCalibrationExternalReceiptImpossibleWithoutExternalAuthority
+    ; acceptedAuthorityTokenLocallyConstructed =
+        false
+    ; acceptedAuthorityTokenLocallyConstructedIsFalse =
+        refl
+    ; gateReceiptWired =
+        true
+    ; gateReceiptWiredIsTrue =
+        refl
+    ; physicalCalibrationPromoted =
+        false
+    ; physicalCalibrationPromotedIsFalse =
+        refl
+    ; wiringBoundary =
+        "Gate receipt wiring is recorded from AcceptedDYLuminosityConventionAuthority through W4ZAdequacy to Candidate256PhysicalCalibrationExternalReceipt"
+        ∷ "The canonical blocked fields remain authority, unit carrier, Nat-to-unit map, calibrated quotient map, factorization, and dimensional preservation"
+        ∷ "The receipt eliminator still proves Candidate256PhysicalCalibrationExternalReceipt is impossible without an external authority token"
+        ∷ "No local accepted authority token or physical calibration promotion is constructed"
+        ∷ []
     }

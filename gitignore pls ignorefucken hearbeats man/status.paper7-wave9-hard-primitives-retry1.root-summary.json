@@ -1,0 +1,48 @@
+{
+  "accepted_manager_count": 17,
+  "control_policy": {
+    "no_repeated_refinement_rule": "A lane may refine an ambiguous blocker once; after stable name/path/type, the next result must inhabit/discharge, make material code progress, record a typed compiler failure, or escalate an authority boundary.",
+    "root_overhead_target": "root_overhead_time <= max(2 minutes, 0.33 * worker_wall_time)"
+  },
+  "generated_artifacts": {
+    "next_blockers": "status.paper7-wave9-hard-primitives-retry1.next-blockers.json",
+    "root_summary": "status.paper7-wave9-hard-primitives-retry1.root-summary.json",
+    "root_validation": "status.paper7-wave9-hard-primitives-retry1.root-validation.log",
+    "workers": "status.paper7-wave9-hard-primitives-retry1.workers.json"
+  },
+  "last_worker_done_utc": "2026-05-19T17:04:20Z",
+  "next_runner_file": null,
+  "overhead_ratio": null,
+  "rejected_manager_count": 0,
+  "root_collection_done_utc": "2026-05-19T17:06:12Z",
+  "root_collection_overhead_seconds": 112.0,
+  "root_launch_utc": "2026-05-19T16:53:07Z",
+  "root_overhead_target_met": null,
+  "root_overhead_target_seconds": 222.09,
+  "root_overhead_time_seconds": null,
+  "root_validation_log": "status.paper7-wave9-hard-primitives-retry1.root-validation.log",
+  "runner_file": ".autonomous-orchestrator/runners.paper7-wave9-hard-primitives.retry1.json",
+  "runner_ids": [
+    "paper7-wave9-gate1-gauge-rep-semantics-retry1",
+    "paper7-wave9-gate1-prime-bump-covariance-retry1",
+    "paper7-wave9-gate1-total-carrier-projection-retry1",
+    "paper7-wave9-gate3-sfgc-fibre-representation-retry1",
+    "paper7-wave9-gate4-levicivita-global-retry1",
+    "paper7-wave9-gate5-quotient-inner-product-retry1",
+    "paper7-wave9-gate6-global-foreign-lane-retry1",
+    "paper7-wave9-gate6-tensor-functoriality-retry1",
+    "paper7-wave9-gate6-unit-associator-retry1",
+    "paper7-wave9-gate7-full-yukawa-matrices-retry1",
+    "paper7-wave9-gate7-y32-retry1",
+    "paper7-wave9-mgr-gate1-retry1",
+    "paper7-wave9-mgr-gate3-retry1",
+    "paper7-wave9-mgr-gate45-retry1",
+    "paper7-wave9-mgr-gate6-retry1",
+    "paper7-wave9-mgr-gate78-retry1",
+    "paper7-wave9-w9-canonical-prime-equality-retry1"
+  ],
+  "terminal_worker_count": 17,
+  "wave_id": "paper7-wave9-hard-primitives-retry1",
+  "worker_count": 17,
+  "worker_wall_time_seconds": 673.0
+}

@@ -24,15 +24,19 @@ open import Data.Nat.Properties as NatP using (m≤m+n)
 data W4ResponseMatrixAcceptanceCandidateStatus : Set where
   columnSumAndDiagonalCandidatesComputedNonPromoting :
     W4ResponseMatrixAcceptanceCandidateStatus
-  diagonalConventionAcceptedNonPromoting :
+  diagonalConventionQuarantinedNonPromoting :
+    W4ResponseMatrixAcceptanceCandidateStatus
+  publicTablesDoNotProvideCentralEfficiencyAcceptanceModel :
     W4ResponseMatrixAcceptanceCandidateStatus
 
 data W4ResponseMatrixAcceptanceCandidateFirstMissing : Set where
-  missingAcceptedDiagonalConventionGateConsumer :
+  missingExternalDiagonalConventionGateConsumer :
     W4ResponseMatrixAcceptanceCandidateFirstMissing
   missingTypedGateConsumerForResponseMatrixAcceptanceCandidate :
     W4ResponseMatrixAcceptanceCandidateFirstMissing
   missingW4ZAdequacyConsumer :
+    W4ResponseMatrixAcceptanceCandidateFirstMissing
+  missingSourceCentralEfficiencyAcceptanceModel :
     W4ResponseMatrixAcceptanceCandidateFirstMissing
 
 data W4ResponseMatrixAcceptanceCandidateChoice : Set where
@@ -84,11 +88,15 @@ data W4ResponseMatrixAcceptanceCandidateField : Set where
 data W4ZInternalAdequacyEvidenceStatus : Set where
   computedAdequacyEvidenceNonPromoting :
     W4ZInternalAdequacyEvidenceStatus
+  blockedNoCentralEfficiencyAcceptanceModel :
+    W4ZInternalAdequacyEvidenceStatus
 
 data W4ZInternalAdequacyEvidenceFirstMissing : Set where
   missingScaledDecimalStrictGreaterThanPrimitive :
     W4ZInternalAdequacyEvidenceFirstMissing
   internalAdequacyArithmeticDischargedW4ZAdequacyPending :
+    W4ZInternalAdequacyEvidenceFirstMissing
+  internalAdequacyBlockedBySourceModelGap :
     W4ZInternalAdequacyEvidenceFirstMissing
 
 scaledDecimalStrictGreaterThan9566over9000 :
@@ -212,20 +220,20 @@ record W4ResponseMatrixAcceptanceCandidateReceipt : Set where
     acceptedDiagonalConventionPresent :
       Bool
 
-    acceptedDiagonalConventionPresentIsTrue :
-      acceptedDiagonalConventionPresent ≡ true
+    acceptedDiagonalConventionPresentIsFalse :
+      acceptedDiagonalConventionPresent ≡ false
 
     acceptedChannelCombinationPresent :
       Bool
 
-    acceptedChannelCombinationPresentIsTrue :
-      acceptedChannelCombinationPresent ≡ true
+    acceptedChannelCombinationPresentIsFalse :
+      acceptedChannelCombinationPresent ≡ false
 
     covariancePropagationLawPresent :
       Bool
 
-    covariancePropagationLawPresentIsTrue :
-      covariancePropagationLawPresent ≡ true
+    covariancePropagationLawPresentIsFalse :
+      covariancePropagationLawPresent ≡ false
 
     constructsW4GateReceipt :
       Bool
@@ -280,8 +288,8 @@ record W4ZInternalAdequacyEvidenceReceipt : Set where
     computedPassBoolean :
       Bool
 
-    computedPassBooleanIsTrue :
-      computedPassBoolean ≡ true
+    computedPassBooleanIsFalse :
+      computedPassBoolean ≡ false
 
     constructsW4ZAdequacy :
       Bool
@@ -303,9 +311,9 @@ canonicalW4ResponseMatrixAcceptanceCandidateReceipt :
 canonicalW4ResponseMatrixAcceptanceCandidateReceipt =
   record
     { status =
-        diagonalConventionAcceptedNonPromoting
+        publicTablesDoNotProvideCentralEfficiencyAcceptanceModel
     ; firstMissing =
-        missingW4ZAdequacyConsumer
+        missingSourceCentralEfficiencyAcceptanceModel
     ; sourceRecord =
         "HEPData ins2079374 / CMS-SMP-20-003"
     ; cmsMirror =
@@ -325,11 +333,11 @@ canonicalW4ResponseMatrixAcceptanceCandidateReceipt =
     ; diagonalCandidateFormulaText =
         "A_diag[j] = P[j][j]"
     ; selectedCandidateForGate =
-        diagonalCandidate
+        noAcceptedCandidate
     ; channelCombinationRule =
-        geometricMeanElectronMuonCombination
+        noAcceptedChannelCombinationRule
     ; channelCombinationRuleText =
-        "Accepted W4 convention-layer channel rule: A_geom[j] = sqrt(A_e,j * A_mu,j), geometric mean of the electron and muon same-bin diagonal candidates"
+        "No accepted channel rule: CMS-SMP-20-003 response matrices and Table 2/3 context do not provide a central efficiency/acceptance model"
     ; electronDiagonalMean50to76 =
         "0.9216377777777777"
     ; muonDiagonalMean50to76 =
@@ -365,16 +373,16 @@ canonicalW4ResponseMatrixAcceptanceCandidateReceipt =
     ; directAcceptanceSurfacePresentIsFalse =
         refl
     ; acceptedDiagonalConventionPresent =
-        true
-    ; acceptedDiagonalConventionPresentIsTrue =
+        false
+    ; acceptedDiagonalConventionPresentIsFalse =
         refl
     ; acceptedChannelCombinationPresent =
-        true
-    ; acceptedChannelCombinationPresentIsTrue =
+        false
+    ; acceptedChannelCombinationPresentIsFalse =
         refl
     ; covariancePropagationLawPresent =
-        true
-    ; covariancePropagationLawPresentIsTrue =
+        false
+    ; covariancePropagationLawPresentIsFalse =
         refl
     ; constructsW4GateReceipt =
         false
@@ -382,11 +390,11 @@ canonicalW4ResponseMatrixAcceptanceCandidateReceipt =
         refl
     ; notes =
         "Column sums are numerically one within roundoff, consistent with a normalized migration matrix"
-        ∷ "Diagonal entries are bounded in [0,1] and are accepted here as the W4 convention-layer same-bin retention surface"
+        ∷ "Diagonal entries are bounded in [0,1], but they are same-bin retention/migration-purity diagnostics, not a central efficiency/acceptance model"
         ∷ "The W4-relevant diagonal mean candidates are recorded separately for electron and muon channels in 50-76, 76-106, and 106-170 GeV"
-        ∷ "The accepted convention-layer electron/muon combination is the geometric mean A_geom[j] = sqrt(A_e,j * A_mu,j)"
-        ∷ "The accepted convention-layer covariance propagation is the linearized corrected-ratio Jacobian law recorded in W4DiagonalConventionGateConsumer"
-        ∷ "No W4ZAdequacy consumer accepts this convention layer yet"
+        ∷ "No electron/muon combination law is accepted from these public tables"
+        ∷ "No covariance propagation law is accepted from these public tables"
+        ∷ "Table 2/3 and the response matrices do not supply a central efficiency/acceptance surface; W4 remains fail-closed"
         ∷ []
     ; receiptFields =
         canonicalW4ResponseMatrixAcceptanceCandidateFields
@@ -407,30 +415,30 @@ canonicalW4ZInternalAdequacyEvidenceReceipt :
 canonicalW4ZInternalAdequacyEvidenceReceipt =
   record
     { status =
-        computedAdequacyEvidenceNonPromoting
+        blockedNoCentralEfficiencyAcceptanceModel
     ; firstMissing =
-        internalAdequacyArithmeticDischargedW4ZAdequacyPending
+        internalAdequacyBlockedBySourceModelGap
     ; sourceCandidateReceipt =
         canonicalW4ResponseMatrixAcceptanceCandidateReceipt
     ; massWindow =
         "76-106 GeV"
     ; channelCombinationRule =
-        geometricMeanElectronMuonCombination
+        noAcceptedChannelCombinationRule
     ; combinedDiagonalEfficiency =
-        "0.9566"
+        "not accepted: diagonal retention diagnostic is not central efficiency"
     ; combinedDiagonalEfficiencyScaled1e4 =
-        "9566"
+        "not accepted"
     ; adequacyBound =
         "0.90"
     ; adequacyBoundScaled1e4 =
         "9000"
     ; scaledDecimalStrictGreaterThanPrimitive =
-        "Constructed Agda Nat witness for scaled-decimal strict inequality 9566 > 9000, i.e. 0.9566 > 0.90"
+        "Rejected as W4 adequacy evidence: 9566 > 9000 is arithmetic over a diagonal retention diagnostic, not over a source central efficiency/acceptance model"
     ; scaledDecimalStrictGreaterThanWitness =
         scaledDecimalStrictGreaterThan9566over9000
     ; computedPassBoolean =
-        true
-    ; computedPassBooleanIsTrue =
+        false
+    ; computedPassBooleanIsFalse =
         refl
     ; constructsW4ZAdequacy =
         false
@@ -441,9 +449,9 @@ canonicalW4ZInternalAdequacyEvidenceReceipt =
     ; constructsW4GateReceiptIsFalse =
         refl
     ; evidenceBoundary =
-        "Computed internal adequacy evidence only: 76-106 GeV geometric-mean diagonal efficiency is recorded as 0.9566"
-        ∷ "The adequacy bound is recorded as 0.90 using the same string/scaled-decimal convention"
-        ∷ "An Agda Nat strict-inequality witness for 9566 > 9000 is constructed here"
+        "No internal W4 adequacy evidence is accepted from the public response matrices"
+        ∷ "The prior 0.9566 diagonal-retention arithmetic is retained only as a rejected diagnostic"
+        ∷ "CMS-SMP-20-003 Table 2/3 context and response matrices do not provide central efficiency/acceptance"
         ∷ "This receipt does not construct W4ZAdequacy, accepted DY authority, or a W4 gate receipt"
         ∷ []
     }

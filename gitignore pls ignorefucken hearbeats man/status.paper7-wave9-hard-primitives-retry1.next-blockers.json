@@ -1,0 +1,605 @@
+{
+  "generated_at_utc": "2026-05-19T17:06:12Z",
+  "manager_acceptance": [
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate1/missingGaugeRepresentationSemantics",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate1-gauge-rep-semantics-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate1/primeBumpCovariance",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate1-prime-bump-covariance-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate1/missingTotalCarrierProjection",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate1-total-carrier-projection-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate3/SFGCFieldStrengthFibreRepresentation",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate3-sfgc-fibre-representation-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate4/globalNonFlatLeviCivitaChristoffel",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate4-levicivita-global-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate5/globalPhysicalQuotientInnerProductWellDefinednessField",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate5-quotient-inner-product-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate6/arbitrarySectorGlobalForeignLaneIdentity",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate6-global-foreign-lane-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate6/blockedByMissingTensorMorphismFunctoriality",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate6-tensor-functoriality-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate6/blockedByMissingUnitAssociatorCoherence",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate6-unit-associator-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate7/fullUpDownYukawaMatrices",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate7-full-yukawa-matrices-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate7/y32ConcreteEntry",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-gate7-y32-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate1-carrier-physics",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-mgr-gate1-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate3-yang-mills",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-mgr-gate3-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate4-gate5-gr-hilbert",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-mgr-gate45-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate6-dhr-aqft",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-mgr-gate6-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/gate7-gate8-matter-composition",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-mgr-gate78-retry1",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": true,
+      "has_validation": true,
+      "lane": "paper7-hard-primitives/w9/canonicalStatePrimeEquality",
+      "looks_audit_only": true,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": true,
+      "orchestrator_id": "paper7-wave9-w9-canonical-prime-equality-retry1",
+      "rejection_reasons": []
+    }
+  ],
+  "next_blockers": [
+    {
+      "blocker": null,
+      "current_step": "- F: Remaining local gap is explicit: `missingDepthTransitionNaturality`.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "- Next exact primitive after this retry: missingDepthTransitionNaturality."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate1/missingGaugeRepresentationSemantics",
+      "orchestrator_id": "paper7-wave9-gate1-gauge-rep-semantics-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- **F:** Remaining gap is now explicit and narrower: filtered-colimit preservation and DHR-sector compatibility only.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "Lane-local blocker cleared: prime-bump covariance and depth-transition naturality are semantically inhabited; remaining unresolved functor blockers are missingFilteredColimitPreservation and missingDHRSectorCompatibility."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate1/primeBumpCovariance",
+      "orchestrator_id": "paper7-wave9-gate1-prime-bump-covariance-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- **F:** Remaining gap is still upstream inhabitants for all `DMC.DASHIState`: total projection, bump state update, and bump law.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "Missing upstream inhabitants for full minimal adapter inhabitation: total carrier-to-FactorVec projection, p2PrimeBumpState, and p2PrimeBumpFactorVecLaw for DMC.DASHIState."
+        },
+        {
+          "path": "open_blocker",
+          "value": "Still missing upstream inhabitants: total carrier-to-FactorVec projection, p2PrimeBumpState, and p2PrimeBumpFactorVecLaw for DMC.DASHIState."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate1/missingTotalCarrierProjection",
+      "orchestrator_id": "paper7-wave9-gate1-total-carrier-projection-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- Remaining gap: non-promoting candidate still needs physical/gauge-compatible law surfaces.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "missingConnectionOneFormAsFibreAlgebraElement"
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate3/SFGCFieldStrengthFibreRepresentation",
+      "orchestrator_id": "paper7-wave9-gate3-sfgc-fibre-representation-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- F: Changed from \u201cupstream scalar-algebra inhabitant unclear\u201d to \u201cfinite-r scalar-operations witness explicitly present\u201d; remaining gap is selected non-flat...",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "Global non-flat Levi-Civita promotion remains blocked at selected non-flat metric dependency inhabitant; finite-r scalar operations witness is now explicitly threaded."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate4/globalNonFlatLeviCivitaChristoffel",
+      "orchestrator_id": "paper7-wave9-gate4-levicivita-global-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "Remaining gap: global accepted Hilbert completion witness remains open.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "- F: Remaining gap is the inhabitant for `acceptedHilbertCompletionField` (global accepted Hilbert completion witness); selected-finite local fourth-field socket is now inhabited but non-promoting."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate5/globalPhysicalQuotientInnerProductWellDefinednessField",
+      "orchestrator_id": "paper7-wave9-gate5-quotient-inner-product-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- **F**: Remaining gap is witness supply (not eliminator symbol availability). No model escalation triggered yet; keep current high-tier allocation unless th...",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "- Remaining gap: inhabit arbitrary-sector global foreign-lane identity witness data for selected predicates (general eliminator is now explicit)."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate6/arbitrarySectorGlobalForeignLaneIdentity",
+      "orchestrator_id": "paper7-wave9-gate6-global-foreign-lane-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- `F`: Gap remains at inhabiting `unit/associator coherence` law and downstream DR/Tannaka/gauge reconstruction blockers.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "blockedByMissingUnitAssociatorCoherence"
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate6/blockedByMissingTensorMorphismFunctoriality",
+      "orchestrator_id": "paper7-wave9-gate6-tensor-functoriality-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- Remaining gap: inhabit the concrete unit/associator **law** over these now-witnessed sockets.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "- Remaining gap: inhabit concrete unit/associator law over the now-witnessed associator/unit coherence target sockets."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate6/blockedByMissingUnitAssociatorCoherence",
+      "orchestrator_id": "paper7-wave9-gate6-unit-associator-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- F: Remaining gap is still the inhabited concrete down-type 3x3 matrix (full assembly), then FactorVec-to-entry map and downstream CKM closure surfaces.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "- Remaining gap: `missingConcreteDownYukawa3x3Matrix` remains first arithmetic blocker; staged down-entry progress now records y11 supplied with next down entry y12."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate7/fullUpDownYukawaMatrices",
+      "orchestrator_id": "paper7-wave9-gate7-full-yukawa-matrices-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "Gap remains: full down-type matrix construction chain.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "- Remaining gap: concrete down-type Yukawa progression from y11 to y12 and onward to inhabited full down 3x3 matrix (first arithmetic blocker remains missingConcreteDownYukawa3x3Matrix)."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate7/y32ConcreteEntry",
+      "orchestrator_id": "paper7-wave9-gate7-y32-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "Frame adequacy check: initial frame held; refinement was the concrete next queue head after this landed step. No escalation/deescalation change needed under ...",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "Next exact carrier queue head after this landed step: s8PressureEnergyCoercivityWitnessField."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate1-carrier-physics",
+      "orchestrator_id": "paper7-wave9-mgr-gate1-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- Remaining gap is explicit: Route A `missingCovariantDerivativeExtendsSelectedExteriorDerivative`; Route B `missingVariationPairingForSelectedHodgeStar` (mi...",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "Next Gate3 strict blockers remain Route A covariant-derivative extension and Route B variation pairing."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate3-yang-mills",
+      "orchestrator_id": "paper7-wave9-mgr-gate3-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- F: Remaining gap is explicit: invertible one-parameter physical traversal automorphism group / strong-continuity data for physical Stone bundle route; mile...",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "- Remaining gap: invertible one-parameter physical traversal automorphism group extending selected finite advance after local accepted Hilbert-completion progress."
+        },
+        {
+          "path": "result.changed_files",
+          "value": [
+            "DASHI/Physics/Closure/SchrodingerSelfAdjointEvolutionReceipt.agda"
+          ]
+        },
+        {
+          "path": "result.next_exact_blocker",
+          "value": "Invertible one-parameter physical traversal automorphism group extending selected finite advance after local accepted Hilbert-completion progress"
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate4-gate5-gr-hilbert",
+      "orchestrator_id": "paper7-wave9-mgr-gate45-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "F: Remaining gap is still explicit: arbitrary-sector global foreign-lane identity must be supplied for inhabited arbitrary-sector closure. No model escalatio...",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "- Remaining gap: arbitrary-sector global foreign-lane identity must still be supplied for inhabited arbitrary-sector closure; eliminator plumbing is now explicit."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate6-dhr-aqft",
+      "orchestrator_id": "paper7-wave9-mgr-gate6-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- Remaining gap: still `missingConcreteDownYukawa3x3Matrix` (explicitly preserved).",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "missingConcreteDownYukawa3x3Matrix"
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/gate7-gate8-matter-composition",
+      "orchestrator_id": "paper7-wave9-mgr-gate78-retry1",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- F: Remaining gap is still the missing inhabited canonical15 pressure witness route (or accepted authority route), not a missing diagnostic surface.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "current_named_blocker",
+          "value": "Canonical15 pressure witness remains uninhabited; new typed case-split and B4-bound alias bridge interfaces now have explicit obstruction lemmas."
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-hard-primitives/w9/canonicalStatePrimeEquality",
+      "orchestrator_id": "paper7-wave9-w9-canonical-prime-equality-retry1",
+      "terminal": true
+    }
+  ],
+  "policy": {
+    "audit_only_reports_are_failures": true,
+    "docs_only_reports_are_failures_without_code": true,
+    "repeated_blocker_decomposition_is_failure": true
+  },
+  "wave_id": "paper7-wave9-hard-primitives-retry1"
+}

@@ -127,7 +127,7 @@ record MinimalPostulateSetForFullChainClosure : Setω where
     uniformBalabanOrAgawaIRFixedPointStatus-v :
       uniformBalabanOrAgawaIRFixedPointStatus
       ≡
-      "UniformBalaban-or-AgawaIRFixedPoint-is-genuine-open-Clay-level-gate-candidate-DASHI-recursion-is-not-accepted-authority"
+      "UniformBalaban-or-AgawaIRFixedPoint-is-genuine-open-Clay-external-acceptance-gate-candidate-DASHI-recursion-is-not-accepted-authority"
 
     cStarCompletionStatus :
       String
@@ -211,7 +211,7 @@ canonicalMinimalPostulateSetForFullChainClosure =
     ; bisognanoWichmannUnconditionalTimeSlicePromotionIsFalse =
         refl
     ; uniformBalabanOrAgawaIRFixedPointStatus =
-        "UniformBalaban-or-AgawaIRFixedPoint-is-genuine-open-Clay-level-gate-candidate-DASHI-recursion-is-not-accepted-authority"
+        "UniformBalaban-or-AgawaIRFixedPoint-is-genuine-open-Clay-external-acceptance-gate-candidate-DASHI-recursion-is-not-accepted-authority"
     ; uniformBalabanOrAgawaIRFixedPointStatus-v =
         refl
     ; cStarCompletionStatus =
@@ -242,7 +242,7 @@ canonicalMinimalPostulateSetForFullChainClosure =
         "MinimalPostulateSetForFullChainClosure contains Im-reflect-DASHI, WeakBGCorrespondence, BisognanoWichmann, UniformBalaban-or-AgawaIRFixedPoint, cStarCompletion, and DoplicherRoberts"
         ∷ "the package permits only weak terminal claim promotion modulo these explicit postulates"
         ∷ "BisognanoWichmann feeds the time-slice bridge only modulo net hypotheses, energy positivity, and vacuum authority"
-        ∷ "UniformBalaban-or-AgawaIRFixedPoint is the genuine open Clay-level gate"
+        ∷ "UniformBalaban-or-AgawaIRFixedPoint is the genuine open Clay/external-acceptance gate"
         ∷ "candidate DASHI recursion is recorded as candidate intake, not accepted authority"
         ∷ "the package does not promote the continuum Clay Yang-Mills mass gap"
         ∷ "the package does not promote the unqualified terminal claim"
@@ -321,7 +321,7 @@ record MassGapProofLandscapeUpdateStatus : Setω where
     dashiProObjectMassGapStatus-v :
       dashiProObjectMassGapStatus
       ≡
-      "DASHI-continuum-mass-gap-proved-internally-by-ST3-plus-Banach-receipt-Clay-external-acceptance-open"
+      "DASHI-local-finite-carrier-mass-gap-evidence-recorded-continuum-and-Clay-open"
 
     proObjectMassGapProved :
       Bool
@@ -345,7 +345,7 @@ record MassGapProofLandscapeUpdateStatus : Setω where
     continuumMassGapProvedInDASHI-v :
       continuumMassGapProvedInDASHI
       ≡
-      true
+      false
 
     continuumClayMassGapPromoted :
       Bool
@@ -402,7 +402,7 @@ canonicalMassGapProofLandscapeUpdateStatus =
     ; dissolutionNoGoCampaignStatus-v =
         refl
     ; dashiProObjectMassGapStatus =
-        "DASHI-continuum-mass-gap-proved-internally-by-ST3-plus-Banach-receipt-Clay-external-acceptance-open"
+        "DASHI-local-finite-carrier-mass-gap-evidence-recorded-continuum-and-Clay-open"
     ; dashiProObjectMassGapStatus-v =
         refl
     ; proObjectMassGapProved =
@@ -414,7 +414,7 @@ canonicalMassGapProofLandscapeUpdateStatus =
     ; depthIndexedMassGapPromoted-v =
         refl
     ; continuumMassGapProvedInDASHI =
-        true
+        false
     ; continuumMassGapProvedInDASHI-v =
         refl
     ; continuumClayMassGapPromoted =
@@ -512,7 +512,7 @@ record ExternalMassGapClaimReceipt : Setω where
     continuumMassGapProvedInDASHI-v :
       continuumMassGapProvedInDASHI
       ≡
-      true
+      false
 
     continuumClayMassGapPromoted :
       Bool
@@ -579,7 +579,7 @@ canonicalExternalMassGapClaimReceipt =
     ; depthIndexedMassGapPromoted-v =
         refl
     ; continuumMassGapProvedInDASHI =
-        true
+        false
     ; continuumMassGapProvedInDASHI-v =
         refl
     ; continuumClayMassGapPromoted =
@@ -992,7 +992,7 @@ record DHRStandardModelComputationStatus : Setω where
     exactSMMatchStatus-v :
       exactSMMatchStatus
       ≡
-      "open-GDHR-equals-GSM-requires-carrier-algebra-and-DHR-computation"
+      "open-GDHR-equals-GSM-requires-low-energy-Standard-Model-matching-after-internal-gDHR-computation"
 
     exactSMMatchPromoted :
       Bool
@@ -1045,7 +1045,7 @@ canonicalDHRStandardModelComputationStatus =
     ; p7HighEnergySU2RBridgeSeparateFromLowEnergySMIsTrue =
         refl
     ; exactSMMatchStatus =
-        "open-GDHR-equals-GSM-requires-carrier-algebra-and-DHR-computation"
+        "open-GDHR-equals-GSM-requires-low-energy-Standard-Model-matching-after-internal-gDHR-computation"
     ; exactSMMatchStatus-v =
         refl
     ; exactSMMatchPromoted =
@@ -1571,7 +1571,7 @@ data FinalAdapter4EmpiricalInput : Set where
   fAxionEmpiricalInput :
     FinalAdapter4EmpiricalInput
 
-  compactUniverseFourVolumeInput :
+  v4volEmpiricalInput :
     FinalAdapter4EmpiricalInput
 
 canonicalFinalAdapter4EmpiricalInputs :
@@ -1580,7 +1580,7 @@ canonicalFinalAdapter4EmpiricalInputs =
   gNewtonEmpiricalInput
   ∷ vHiggsEmpiricalInput
   ∷ fAxionEmpiricalInput
-  ∷ compactUniverseFourVolumeInput
+  ∷ v4volEmpiricalInput
   ∷ []
 
 record FinalAdapter4ReceiptGovernance : Setω where
@@ -1599,7 +1599,7 @@ record FinalAdapter4ReceiptGovernance : Setω where
     inventoryShape-v :
       inventoryShape
       ≡
-      "FinalAdapter4={G_Newton-v_Higgs-f_a-compact-universe-four-volume}"
+      "FinalAdapter4={G_Newton-v_Higgs-f_a-V4vol}"
 
     noDerivationExistsTarget :
       String
@@ -1655,7 +1655,7 @@ canonicalFinalAdapter4ReceiptGovernance =
     ; inputsAreCanonical =
         refl
     ; inventoryShape =
-        "FinalAdapter4={G_Newton-v_Higgs-f_a-compact-universe-four-volume}"
+        "FinalAdapter4={G_Newton-v_Higgs-f_a-V4vol}"
     ; inventoryShape-v =
         refl
     ; noDerivationExistsTarget =
@@ -1680,7 +1680,8 @@ canonicalFinalAdapter4ReceiptGovernance =
         refl
     ; receiptBoundary =
         "FinalAdapter4 acceptance is a governance decision about irreducible empirical scale inputs"
-        ∷ "accepting FinalAdapter4 does not by itself prove the continuum mass gap or laneDimension theorem"
+        ∷ "FinalAdapter4 inventory is {G_Newton, v_Higgs, f_a, V4vol}"
+        ∷ "accepting FinalAdapter4 does not by itself prove the continuum mass gap or close DASHIPrimeLaneEquiv"
         ∷ "terminal promotion remains blocked unless all terminal flip conditions are simultaneously satisfied"
         ∷ []
     }
@@ -1695,21 +1696,37 @@ record TerminalClaimPromotionFlipCondition : Setω where
       ≡
       false
 
+    continuumMassGapProvedInDASHI :
+      Bool
+
+    continuumMassGapProvedInDASHIIsFalse :
+      continuumMassGapProvedInDASHI
+      ≡
+      false
+
     continuumMassGapRequirement :
       String
 
     continuumMassGapRequirement-v :
       continuumMassGapRequirement
       ≡
-      "requires-Clay-or-accepted-authority-for-uniform-bound-inf-d-Delta-d-greater-than-epsilon"
+      "DASHI-local-finite-carrier-gap-evidence-recorded-continuum-mass-gap-open"
+
+    continuumClayMassGapPromoted :
+      Bool
+
+    continuumClayMassGapPromotedIsFalse :
+      continuumClayMassGapPromoted
+      ≡
+      false
 
     laneDimensionTheorem :
       Bool
 
-    laneDimensionTheoremIsFalse :
+    laneDimensionTheoremIsTrueAfterP2AB :
       laneDimensionTheorem
       ≡
-      false
+      true
 
     laneDimensionRequirement :
       String
@@ -1717,7 +1734,7 @@ record TerminalClaimPromotionFlipCondition : Setω where
     laneDimensionRequirement-v :
       laneDimensionRequirement
       ≡
-      "requires-ST3-Serre-Tate-Lubin-Tate-lowest-weight-representation-theorem"
+      "DLM-plus-DASHIPrimeLaneEquiv-closure-promotes-laneDimension-internally-but-not-terminal-or-Clay"
 
     finalAdapter4Accepted :
       Bool
@@ -1741,7 +1758,7 @@ record TerminalClaimPromotionFlipCondition : Setω where
     conjunctionShape-v :
       conjunctionShape
       ≡
-      "terminalClaimPromoted=continuumMassGapProved-AND-laneDimensionTheorem-AND-FinalAdapter4Accepted"
+      "terminalClaimPromoted=continuumClayMassGapPromoted-AND-B0-AQFT-DHR-stress-energy-adapter-authorities-with-laneDimension-internally-promoted"
 
     terminalClaimPromotedByFlipCondition :
       Bool
@@ -1761,16 +1778,24 @@ canonicalTerminalClaimPromotionFlipCondition =
         false
     ; continuumMassGapProvedIsFalse =
         refl
+    ; continuumMassGapProvedInDASHI =
+        false
+    ; continuumMassGapProvedInDASHIIsFalse =
+        refl
     ; continuumMassGapRequirement =
-        "requires-Clay-or-accepted-authority-for-uniform-bound-inf-d-Delta-d-greater-than-epsilon"
+        "DASHI-local-finite-carrier-gap-evidence-recorded-continuum-mass-gap-open"
     ; continuumMassGapRequirement-v =
         refl
-    ; laneDimensionTheorem =
+    ; continuumClayMassGapPromoted =
         false
-    ; laneDimensionTheoremIsFalse =
+    ; continuumClayMassGapPromotedIsFalse =
+        refl
+    ; laneDimensionTheorem =
+        true
+    ; laneDimensionTheoremIsTrueAfterP2AB =
         refl
     ; laneDimensionRequirement =
-        "requires-ST3-Serre-Tate-Lubin-Tate-lowest-weight-representation-theorem"
+        "DLM-plus-DASHIPrimeLaneEquiv-closure-promotes-laneDimension-internally-but-not-terminal-or-Clay"
     ; laneDimensionRequirement-v =
         refl
     ; finalAdapter4Accepted =
@@ -1782,7 +1807,7 @@ canonicalTerminalClaimPromotionFlipCondition =
     ; finalAdapter4Requirement-v =
         refl
     ; conjunctionShape =
-        "terminalClaimPromoted=continuumMassGapProved-AND-laneDimensionTheorem-AND-FinalAdapter4Accepted"
+        "terminalClaimPromoted=continuumClayMassGapPromoted-AND-B0-AQFT-DHR-stress-energy-adapter-authorities-with-laneDimension-internally-promoted"
     ; conjunctionShape-v =
         refl
     ; terminalClaimPromotedByFlipCondition =
@@ -1835,7 +1860,7 @@ data TerminalPublicationTier : Set where
   tierCPapers4To5RequireNewMath :
     TerminalPublicationTier
 
-  tierDPapers6To7RequireBreakthroughClayNewTerminalIntegration :
+  tierDPapers6To7RequireClayExternalAcceptanceNewTerminalIntegration :
     TerminalPublicationTier
 
 canonicalTerminalPublicationTiers :
@@ -1844,7 +1869,7 @@ canonicalTerminalPublicationTiers =
   tierAPaper1PublishableNow
   ∷ tierBPapers2To3AfterOneFocusedSprint
   ∷ tierCPapers4To5RequireNewMath
-  ∷ tierDPapers6To7RequireBreakthroughClayNewTerminalIntegration
+  ∷ tierDPapers6To7RequireClayExternalAcceptanceNewTerminalIntegration
   ∷ []
 
 canonicalTerminalPublicationFinalDeltaSummary :
@@ -1853,12 +1878,12 @@ canonicalTerminalPublicationFinalDeltaSummary =
   "Tier-A-Paper-1-publishable-now-current-repo-executable-2-4-weeks-writing"
   ∷ "Tier-B-Papers-2-3-after-one-focused-sprint-current-repo-executable"
   ∷ "Paper-2-delta=flag-split-plus-Wellen-cite-estimate-1-2-weeks"
-  ∷ "Paper-3-delta=quotient-cites-Reeh-estimate-2-4-weeks"
+  ∷ "Paper-3-delta=quotient-cites-Reeh-no-longer-blocker-after-dependent-receipts-accepted-estimate-2-4-weeks"
   ∷ "Tier-C-Papers-4-5-require-new-math-and-remain-open"
-  ∷ "Paper-4-delta=laneDimension-SerreTate-DHR-new-math-estimate-months-years"
+  ∷ "Paper-4-delta=DASHIPrimeLaneEquiv-still-open-before-P2-A-P2-B-DHR-SM-matching-new-math-estimate-months-years"
   ∷ "Paper-5-delta=matter-lanes-Moonshine-Yukawa-new-math-estimate-months-years"
-  ∷ "Tier-D-Papers-6-7-require-breakthrough-Clay-new-terminal-integration-and-remain-open"
-  ∷ "Paper-6-delta=accepted-continuum-mass-gap-or-depth-recursion-theorem-estimate-months-years"
+  ∷ "Tier-D-Papers-6-7-require-Clay-external-acceptance-new-terminal-integration-and-remain-open"
+  ∷ "Paper-6-delta=Clay-external-acceptance-open-DASHI-local-finite-carrier-gap-evidence-only"
   ∷ "Paper-7-delta=terminal-composition-after-all-prior-closures"
   ∷ "Papers-1-3-fully-executable-from-current-repo-state-Papers-4-7-open"
   ∷ []
@@ -1903,7 +1928,7 @@ record TerminalPublicationTierMap : Setω where
     tierDStatus-v :
       tierDStatus
       ≡
-      "Tier-D-Papers-6-7-require-breakthrough-Clay-new-terminal-integration"
+      "Tier-D-Papers-6-7-require-Clay-external-acceptance-new-terminal-integration"
 
     paper1Delta :
       String
@@ -1927,7 +1952,7 @@ record TerminalPublicationTierMap : Setω where
     paper3Delta-v :
       paper3Delta
       ≡
-      "Paper3-current-repo-executable-quotient-cites-Reeh-2-4-weeks"
+      "Paper3-current-repo-executable-quotient-cites-Reeh-no-longer-blocker-after-dependent-receipts-accepted-2-4-weeks"
 
     paper4Delta :
       String
@@ -1935,7 +1960,7 @@ record TerminalPublicationTierMap : Setω where
     paper4Delta-v :
       paper4Delta
       ≡
-      "Paper4-open-new-math-laneDimension-SerreTate-DHR-months-years"
+      "Paper4-DASHIPrimeLaneEquiv-open-before-P2-A-P2-B-DHR-SM-matching-new-math-months-years"
 
     paper5Delta :
       String
@@ -1951,7 +1976,7 @@ record TerminalPublicationTierMap : Setω where
     paper6Delta-v :
       paper6Delta
       ≡
-      "Paper6-open-breakthrough-Clay-or-depth-recursion-continuum-mass-gap-months-years"
+      "Paper6-open-Clay-external-acceptance-DASHI-local-finite-carrier-gap-evidence-only"
 
     paper7Delta :
       String
@@ -2008,7 +2033,7 @@ canonicalTerminalPublicationTierMap =
     ; tierCStatus-v =
         refl
     ; tierDStatus =
-        "Tier-D-Papers-6-7-require-breakthrough-Clay-new-terminal-integration"
+        "Tier-D-Papers-6-7-require-Clay-external-acceptance-new-terminal-integration"
     ; tierDStatus-v =
         refl
     ; paper1Delta =
@@ -2020,11 +2045,11 @@ canonicalTerminalPublicationTierMap =
     ; paper2Delta-v =
         refl
     ; paper3Delta =
-        "Paper3-current-repo-executable-quotient-cites-Reeh-2-4-weeks"
+        "Paper3-current-repo-executable-quotient-cites-Reeh-no-longer-blocker-after-dependent-receipts-accepted-2-4-weeks"
     ; paper3Delta-v =
         refl
     ; paper4Delta =
-        "Paper4-open-new-math-laneDimension-SerreTate-DHR-months-years"
+        "Paper4-DASHIPrimeLaneEquiv-open-before-P2-A-P2-B-DHR-SM-matching-new-math-months-years"
     ; paper4Delta-v =
         refl
     ; paper5Delta =
@@ -2032,7 +2057,7 @@ canonicalTerminalPublicationTierMap =
     ; paper5Delta-v =
         refl
     ; paper6Delta =
-        "Paper6-open-breakthrough-Clay-or-depth-recursion-continuum-mass-gap-months-years"
+        "Paper6-open-Clay-external-acceptance-DASHI-local-finite-carrier-gap-evidence-only"
     ; paper6Delta-v =
         refl
     ; paper7Delta =
@@ -2116,6 +2141,311 @@ canonicalTerminalPaperArchitectureStatus =
         refl
     }
 
+data Paper7PublicationPostulate : Set where
+  cStarCompletionPostulate :
+    Paper7PublicationPostulate
+
+  friedrichsSelfAdjointExtensionPostulate :
+    Paper7PublicationPostulate
+
+  doplicherRobertsPostulate :
+    Paper7PublicationPostulate
+
+  uniformBalabanPostulate :
+    Paper7PublicationPostulate
+
+  bratteliRobinsonModularPostulate :
+    Paper7PublicationPostulate
+
+canonicalPaper7PublicationPostulates :
+  List Paper7PublicationPostulate
+canonicalPaper7PublicationPostulates =
+  cStarCompletionPostulate
+  ∷ friedrichsSelfAdjointExtensionPostulate
+  ∷ doplicherRobertsPostulate
+  ∷ uniformBalabanPostulate
+  ∷ bratteliRobinsonModularPostulate
+  ∷ []
+
+record Paper7PostTerminalPostulateLedger : Setω where
+  field
+    postulates :
+      List Paper7PublicationPostulate
+
+    postulatesAreCanonical :
+      postulates
+      ≡
+      canonicalPaper7PublicationPostulates
+
+    cStarCompletionStatus :
+      String
+
+    cStarCompletionStatus-v :
+      cStarCompletionStatus
+      ≡
+      "cStarCompletion-open-AQFT-completion-target-not-local-DASHI-completion-theorem"
+
+    friedrichsStatus :
+      String
+
+    friedrichsStatus-v :
+      friedrichsStatus
+      ≡
+      "Friedrichs-open-real-analysis-self-adjoint-extension-target-for-YangMills-Hamiltonian"
+
+    doplicherRobertsStatus :
+      String
+
+    doplicherRobertsStatus-v :
+      doplicherRobertsStatus
+      ≡
+      "DoplicherRoberts-open-reconstruction-target-until-DHR-hypotheses-and-local-algebra-close"
+
+    uniformBalabanStatus :
+      String
+
+    uniformBalabanStatus-v :
+      uniformBalabanStatus
+      ≡
+      "UniformBalaban-open-Clay-external-acceptance-target-for-continuum-mass-gap"
+
+    bratteliRobinsonModularStatus :
+      String
+
+    bratteliRobinsonModularStatus-v :
+      bratteliRobinsonModularStatus
+      ≡
+      "BratteliRobinsonModular-open-modular-authority-target-not-local-TomitaTakesaki-proof"
+
+    openPostulateCountShape :
+      String
+
+    openPostulateCountShape-v :
+      openPostulateCountShape
+      ≡
+      "five-open-postulates-currently-recorded-target-is-exactly-one-open-postulate"
+
+    exactlyOneOpenPostulateTarget :
+      Bool
+
+    exactlyOneOpenPostulateTargetIsFalse :
+      exactlyOneOpenPostulateTarget
+      ≡
+      false
+
+    failClosedUntilExactlyOneOpenPostulate :
+      Bool
+
+    failClosedUntilExactlyOneOpenPostulateIsTrue :
+      failClosedUntilExactlyOneOpenPostulate
+      ≡
+      true
+
+    terminalClaimPromoted :
+      Bool
+
+    terminalClaimPromotedIsFalse :
+      terminalClaimPromoted
+      ≡
+      false
+
+    ledgerBoundary :
+      List String
+
+open Paper7PostTerminalPostulateLedger public
+
+canonicalPaper7PostTerminalPostulateLedger :
+  Paper7PostTerminalPostulateLedger
+canonicalPaper7PostTerminalPostulateLedger =
+  record
+    { postulates =
+        canonicalPaper7PublicationPostulates
+    ; postulatesAreCanonical =
+        refl
+    ; cStarCompletionStatus =
+        "cStarCompletion-open-AQFT-completion-target-not-local-DASHI-completion-theorem"
+    ; cStarCompletionStatus-v =
+        refl
+    ; friedrichsStatus =
+        "Friedrichs-open-real-analysis-self-adjoint-extension-target-for-YangMills-Hamiltonian"
+    ; friedrichsStatus-v =
+        refl
+    ; doplicherRobertsStatus =
+        "DoplicherRoberts-open-reconstruction-target-until-DHR-hypotheses-and-local-algebra-close"
+    ; doplicherRobertsStatus-v =
+        refl
+    ; uniformBalabanStatus =
+        "UniformBalaban-open-Clay-external-acceptance-target-for-continuum-mass-gap"
+    ; uniformBalabanStatus-v =
+        refl
+    ; bratteliRobinsonModularStatus =
+        "BratteliRobinsonModular-open-modular-authority-target-not-local-TomitaTakesaki-proof"
+    ; bratteliRobinsonModularStatus-v =
+        refl
+    ; openPostulateCountShape =
+        "five-open-postulates-currently-recorded-target-is-exactly-one-open-postulate"
+    ; openPostulateCountShape-v =
+        refl
+    ; exactlyOneOpenPostulateTarget =
+        false
+    ; exactlyOneOpenPostulateTargetIsFalse =
+        refl
+    ; failClosedUntilExactlyOneOpenPostulate =
+        true
+    ; failClosedUntilExactlyOneOpenPostulateIsTrue =
+        refl
+    ; terminalClaimPromoted =
+        false
+    ; terminalClaimPromotedIsFalse =
+        refl
+    ; ledgerBoundary =
+        "Paper 7 post-terminal ledger has five open postulates, not the target exactly-one-open-postulate shape"
+        ∷ "cStarCompletion, Friedrichs, DoplicherRoberts, UniformBalaban, and BratteliRobinsonModular are recorded as open targets"
+        ∷ "the readiness target is fail-closed until the ledger has exactly one open postulate"
+        ∷ "terminalClaimPromoted remains false"
+        ∷ []
+    }
+
+record Paper7PostTerminalUnificationPaperClaim : Setω where
+  field
+    paperTarget :
+      TerminalPaperTarget
+
+    paperTargetIsPaper7 :
+      paperTarget
+      ≡
+      paper7TerminalReceiptSystem
+
+    postulateLedger :
+      Paper7PostTerminalPostulateLedger
+
+    claimStyle :
+      String
+
+    claimStyle-v :
+      claimStyle
+      ≡
+      "UnificationPaperClaim-style-post-terminal-publication-readiness-surface"
+
+    theoremFacingDependencyObject :
+      String
+
+    theoremFacingDependencyObject-v :
+      theoremFacingDependencyObject
+      ≡
+      "Paper7PostTerminalPostulateLedger"
+
+    publicationReadiness :
+      Bool
+
+    publicationReadinessIsFalse :
+      publicationReadiness
+      ≡
+      false
+
+    exactlyOneOpenPostulateTarget :
+      Bool
+
+    exactlyOneOpenPostulateTargetMatchesLedger :
+      exactlyOneOpenPostulateTarget
+      ≡
+      Paper7PostTerminalPostulateLedger.exactlyOneOpenPostulateTarget
+        postulateLedger
+
+    exactlyOneOpenPostulateTargetIsFalse :
+      exactlyOneOpenPostulateTarget
+      ≡
+      false
+
+    finiteCarrierCaveat :
+      String
+
+    finiteCarrierCaveat-v :
+      finiteCarrierCaveat
+      ≡
+      "finite-carrier-results-are-local-receipts-not-continuum-unification-theorems"
+
+    clayContinuumCaveat :
+      String
+
+    clayContinuumCaveat-v :
+      clayContinuumCaveat
+      ≡
+      "Clay-continuum-YangMills-mass-gap-remains-open-without-external-acceptance"
+
+    w4VHiggsCaveat :
+      String
+
+    w4VHiggsCaveat-v :
+      w4VHiggsCaveat
+      ≡
+      "W4-and-v_Higgs-remain-empirical-authority-or-Adapter4-governance-caveats"
+
+    terminalClaimPromoted :
+      Bool
+
+    terminalClaimPromotedIsFalse :
+      terminalClaimPromoted
+      ≡
+      false
+
+    claimBoundary :
+      List String
+
+open Paper7PostTerminalUnificationPaperClaim public
+
+canonicalPaper7PostTerminalUnificationPaperClaim :
+  Paper7PostTerminalUnificationPaperClaim
+canonicalPaper7PostTerminalUnificationPaperClaim =
+  record
+    { paperTarget =
+        paper7TerminalReceiptSystem
+    ; paperTargetIsPaper7 =
+        refl
+    ; postulateLedger =
+        canonicalPaper7PostTerminalPostulateLedger
+    ; claimStyle =
+        "UnificationPaperClaim-style-post-terminal-publication-readiness-surface"
+    ; claimStyle-v =
+        refl
+    ; theoremFacingDependencyObject =
+        "Paper7PostTerminalPostulateLedger"
+    ; theoremFacingDependencyObject-v =
+        refl
+    ; publicationReadiness =
+        false
+    ; publicationReadinessIsFalse =
+        refl
+    ; exactlyOneOpenPostulateTarget =
+        false
+    ; exactlyOneOpenPostulateTargetMatchesLedger =
+        refl
+    ; exactlyOneOpenPostulateTargetIsFalse =
+        refl
+    ; finiteCarrierCaveat =
+        "finite-carrier-results-are-local-receipts-not-continuum-unification-theorems"
+    ; finiteCarrierCaveat-v =
+        refl
+    ; clayContinuumCaveat =
+        "Clay-continuum-YangMills-mass-gap-remains-open-without-external-acceptance"
+    ; clayContinuumCaveat-v =
+        refl
+    ; w4VHiggsCaveat =
+        "W4-and-v_Higgs-remain-empirical-authority-or-Adapter4-governance-caveats"
+    ; w4VHiggsCaveat-v =
+        refl
+    ; terminalClaimPromoted =
+        false
+    ; terminalClaimPromotedIsFalse =
+        refl
+    ; claimBoundary =
+        "This is a publication/readiness surface, not a theorem promotion"
+        ∷ "Paper 7 remains blocked by the postulate ledger until exactly one open postulate remains"
+        ∷ "finite carrier receipts, Clay continuum mass-gap status, and W4/v_Higgs authority-governance caveats remain in scope"
+        ∷ "terminalClaimPromoted is not set true"
+        ∷ []
+    }
+
 record TerminalOpenProblemStatusSurface : Setω where
   field
     massGapClaim :
@@ -2154,6 +2484,9 @@ record TerminalOpenProblemStatusSurface : Setω where
     paperArchitecture :
       TerminalPaperArchitectureStatus
 
+    paper7PostTerminalPublicationReadiness :
+      Paper7PostTerminalUnificationPaperClaim
+
     publicationTierMap :
       TerminalPublicationTierMap
 
@@ -2186,6 +2519,14 @@ record TerminalOpenProblemStatusSurface : Setω where
 
     continuumClayMassGapPromoted-v :
       continuumClayMassGapPromoted
+      ≡
+      false
+
+    continuumMassGapProvedInDASHI :
+      Bool
+
+    continuumMassGapProvedInDASHI-v :
+      continuumMassGapProvedInDASHI
       ≡
       false
 
@@ -2230,6 +2571,8 @@ canonicalTerminalOpenProblemStatusSurface =
         canonicalTerminalClaimPromotionFlipCondition
     ; paperArchitecture =
         canonicalTerminalPaperArchitectureStatus
+    ; paper7PostTerminalPublicationReadiness =
+        canonicalPaper7PostTerminalUnificationPaperClaim
     ; publicationTierMap =
         canonicalTerminalPublicationTierMap
     ; finalDeltaSummary =
@@ -2248,6 +2591,10 @@ canonicalTerminalOpenProblemStatusSurface =
         false
     ; continuumClayMassGapPromoted-v =
         refl
+    ; continuumMassGapProvedInDASHI =
+        false
+    ; continuumMassGapProvedInDASHI-v =
+        refl
     ; terminalClaimPromoted =
         false
     ; terminalClaimPromoted-v =
@@ -2256,13 +2603,18 @@ canonicalTerminalOpenProblemStatusSurface =
         "weak terminal claim promotion is true only modulo MinimalPostulateSetForFullChainClosure"
         ∷ "terminalClaimPromoted remains false without unqualified authority"
         ∷ "continuumClayMassGapPromoted remains false"
-        ∷ "UniformBalaban-or-AgawaIRFixedPoint is a genuine open Clay-level gate"
+        ∷ "continuumMassGapProvedInDASHI is false; ST3/Banach material is only local finite-carrier evidence"
+        ∷ "UniformBalaban-or-AgawaIRFixedPoint is a genuine open Clay/external-acceptance gate"
         ∷ "candidate DASHI recursion is not accepted authority"
         ∷ "hierarchy strategies are recorded: SUSY stabilizes only, relaxion has no v_Higgs receipt, and v_Higgs is accepted as Adapter4"
-        ∷ "terminalClaimPromoted flip condition is continuumMassGapProved AND laneDimensionTheorem AND FinalAdapter4Accepted"
-        ∷ "FinalAdapter4Accepted is governance, while continuum mass gap and laneDimension remain mathematical gates"
-        ∷ "publication tier map: Tier A Paper 1 publishable now, Tier B Papers 2-3 after one focused sprint, Tier C Papers 4-5 require new math, Tier D Papers 6-7 require breakthrough Clay or new terminal integration"
-        ∷ "final delta summary: Paper1 2-4 weeks writing; Paper2 flag split plus Wellen cite 1-2 weeks; Paper3 quotient/cites/Reeh 2-4 weeks; Paper4 and Paper6 months-years; Paper7 after all prior closures"
+        ∷ "terminalClaimPromoted flip condition is now governed by continuumClayMassGapPromoted plus the remaining B0/AQFT/DHR/stress-energy/adapter authorities"
+        ∷ "terminalClaimPromoted remains false because Clay/external mass-gap promotion and other terminal authorities remain pending"
+        ∷ "FinalAdapter4Accepted is governance, DASHI continuum mass gap remains open, and laneDimension is authority-backed and conditional without terminal or Clay promotion"
+        ∷ "publication tier map: Tier A Paper 1 publishable now, Tier B Papers 2-3 after one focused sprint, Tier C Papers 4-5 require new math, Tier D Papers 6-7 require Clay/external acceptance or new terminal integration"
+        ∷ "Paper 7 post-terminal publication/readiness ledger is fail-closed at five open postulates; target shape is exactly one open postulate"
+        ∷ "Paper 7 scope caveats remain finite carrier only, Clay continuum open, and W4/v_Higgs authority-governance caveats"
+        ∷ "Reeh-Schlieder is no longer a Paper 3 blocker once dependent receipts are accepted"
+        ∷ "final delta summary: Paper1 2-4 weeks writing; Paper2 flag split plus Wellen cite 1-2 weeks; Paper3 quotient/cites/Reeh no longer blocker after dependent receipts; Paper4 and Paper6 months-years; Paper7 after all prior closures"
         ∷ "Papers 1-3 are fully executable from current repo state; Papers 4-7 remain open"
         ∷ []
     }
@@ -2323,6 +2675,14 @@ terminalContinuumClayMassGapStillNotPromoted :
 terminalContinuumClayMassGapStillNotPromoted =
   refl
 
+terminalContinuumMassGapNotProvedInDASHI :
+  TerminalOpenProblemStatusSurface.continuumMassGapProvedInDASHI
+    canonicalTerminalOpenProblemStatusSurface
+  ≡
+  false
+terminalContinuumMassGapNotProvedInDASHI =
+  refl
+
 terminalClaimNotPromoted :
   TerminalOpenProblemStatusSurface.terminalClaimPromoted
     canonicalTerminalOpenProblemStatusSurface
@@ -2345,6 +2705,22 @@ terminalPublicationPapers4To7RemainOpen :
   ≡
   true
 terminalPublicationPapers4To7RemainOpen =
+  refl
+
+terminalPaper7ExactlyOneOpenPostulateTargetFailClosed :
+  Paper7PostTerminalUnificationPaperClaim.exactlyOneOpenPostulateTarget
+    canonicalPaper7PostTerminalUnificationPaperClaim
+  ≡
+  false
+terminalPaper7ExactlyOneOpenPostulateTargetFailClosed =
+  refl
+
+terminalPaper7PublicationClaimNotPromoted :
+  Paper7PostTerminalUnificationPaperClaim.terminalClaimPromoted
+    canonicalPaper7PostTerminalUnificationPaperClaim
+  ≡
+  false
+terminalPaper7PublicationClaimNotPromoted =
   refl
 
 terminalSequesteringStrategyInhabitedModulo :

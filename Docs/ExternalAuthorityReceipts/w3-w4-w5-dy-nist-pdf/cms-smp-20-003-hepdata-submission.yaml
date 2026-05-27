@@ -1,0 +1,2261 @@
+---
+additional_resources:
+- description: Created with hepdata_lib 0.8.1
+  location: https://zenodo.org/record/4946277
+comment: The double differential cross sections of the Drell--Yan lepton pair ($\ell^+\ell^-$,
+  dielectron or dimuon) production are measured, as functions of the invariant mass
+  $M_{\ell\ell}$, transverse momentum $p_T^{\ell\ell}$, and $\varphi^*_\eta$. The
+  $\varphi^*_\eta$ observable, derived from angular measurements of the leptons and
+  highly correlated with $p_T^{\ell\ell}$, is used to probe the low-$p_T^{\ell\ell}$
+  region in a complementary way. Dilepton masses up to 1 TeV are investigated. Additionally,
+  a measurement is performed requiring at least one jet in the final state. To benefit
+  from partial cancellation of the systematic uncertainty, the ratios of the differential
+  cross sections for various $M_{\ell\ell}$ ranges to those in the Z mass peak interval
+  are presented. The collected data correspond to an integrated luminosity of 36.3
+  fb$^{-1}$ of proton--proton collisions recorded with the CMS detector at the LHC
+  at a centre-of-mass energy of 13 TeV. Measurements are compared with predictions
+  based on perturbative quantum chromodynamics, including soft-gluon resummation.
+data_license:
+  description: The content can be shared and adapted but you must             give
+    appropriate credit and cannot restrict access to others.
+  name: cc-by-4.0
+  url: https://creativecommons.org/licenses/by/4.0/
+---
+data_file: pt_ll_mass_50-76.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 top left
+name: pT ll mass 50-76
+---
+data_file: covariance_matrices_for_pt_ll_mass_50-76.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 top left
+name: Covariance matrices for pT ll mass 50-76
+---
+data_file: pt_ll_mass_76-106.yaml
+description: The measured differential cross section in the $76 \le M_{ll} < 106$
+  GeV mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 top center
+name: pT ll mass 76-106
+---
+data_file: covariance_matrices_for_pt_ll_mass_76-106.yaml
+description: The measured differential cross section in the $76 \le M_{ll} < 106$
+  GeV mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 top center
+name: Covariance matrices for pT ll mass 76-106
+---
+data_file: pt_ll_mass_106-170.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 top right
+name: pT ll mass 106-170
+---
+data_file: covariance_matrices_for_pt_ll_mass_106-170.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 top right
+name: Covariance matrices for pT ll mass 106-170
+---
+data_file: pt_ll_mass_170-350.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 bottom left
+name: pT ll mass 170-350
+---
+data_file: covariance_matrices_for_pt_ll_mass_170-350.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 bottom left
+name: Covariance matrices for pT ll mass 170-350
+---
+data_file: pt_ll_mass_350-1000.yaml
+description: The measured differential cross section in the $350 \le M_{ll} < 1000$
+  GeV mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 bottom right
+name: pT ll mass 350-1000
+---
+data_file: covariance_matrices_for_pt_ll_mass_350-1000.yaml
+description: The measured differential cross section in the $350 \le M_{ll} < 1000$
+  GeV mass window, in bins of the dilepton transverse momentum. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 5 bottom right
+name: Covariance matrices for pT ll mass 350-1000
+---
+data_file: pt_ll_mass_50-76_jet.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the dilepton transverse momentum. At least one jet is required.
+  The values are normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 13 top left
+name: pT ll mass 50-76 jet
+---
+data_file: covariance_matrices_for_pt_ll_mass_50-76_jet.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the dilepton transverse momentum. At least one jet is required.
+  The values are normalized by the bin width. This entry contains the covariance matrix
+  of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 13 top left
+name: Covariance matrices for pT ll mass 50-76 jet
+---
+data_file: pt_ll_mass_76-106_jet.yaml
+description: The measured differential cross section in the $76 \le M_{ll} < 106$
+  GeV mass window, in bins of the dilepton transverse momentum. At least one jet is
+  required. The values are normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 13 top right
+name: pT ll mass 76-106 jet
+---
+data_file: covariance_matrices_for_pt_ll_mass_76-106_jet.yaml
+description: The measured differential cross section in the $76 \le M_{ll} < 106$
+  GeV mass window, in bins of the dilepton transverse momentum. At least one jet is
+  required. The values are normalized by the bin width. This entry contains the covariance
+  matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 13 top right
+name: Covariance matrices for pT ll mass 76-106 jet
+---
+data_file: pt_ll_mass_106-170_jet.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the dilepton transverse momentum. At least one jet is
+  required. The values are normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 13 bottom left
+name: pT ll mass 106-170 jet
+---
+data_file: covariance_matrices_for_pt_ll_mass_106-170_jet.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the dilepton transverse momentum. At least one jet is
+  required. The values are normalized by the bin width. This entry contains the covariance
+  matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 13 bottom left
+name: Covariance matrices for pT ll mass 106-170 jet
+---
+data_file: pt_ll_mass_170-350_jet.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the dilepton transverse momentum. At least one jet is
+  required. The values are normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 13 bottom right
+name: pT ll mass 170-350 jet
+---
+data_file: covariance_matrices_for_pt_ll_mass_170-350_jet.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the dilepton transverse momentum. At least one jet is
+  required. The values are normalized by the bin width. This entry contains the covariance
+  matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT
+location: Figure 13 bottom right
+name: Covariance matrices for pT ll mass 170-350 jet
+---
+data_file: phistar_mass_50-76.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the $\varphi^*$ variable. The values are normalized by the
+  bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 top left
+name: phistar mass 50-76
+---
+data_file: covariance_matrices_for_phistar_mass_50-76.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the $\varphi^*$ variable. The values are normalized by the
+  bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 top left
+name: Covariance matrices for phistar mass 50-76
+---
+data_file: phistar_mass_76-106.yaml
+description: The measured differential cross section in the $76 \le M_{ll} < 106$
+  GeV mass window, in bins of the $\varphi^*$ variable. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 top center
+name: phistar mass 76-106
+---
+data_file: covariance_matrices_for_phistar_mass_76-106.yaml
+description: The measured differential cross section in the $76 \le M_{ll} < 106$
+  GeV mass window, in bins of the $\varphi^*$ variable. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 top center
+name: Covariance matrices for phistar mass 76-106
+---
+data_file: phistar_mass_106-170.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the $\varphi^*$ variable. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 top right
+name: phistar mass 106-170
+---
+data_file: covariance_matrices_for_phistar_mass_106-170.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the $\varphi^*$ variable. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 top right
+name: Covariance matrices for phistar mass 106-170
+---
+data_file: phistar_mass_170-350.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the $\varphi^*$ variable. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 bottom left
+name: phistar mass 170-350
+---
+data_file: covariance_matrices_for_phistar_mass_170-350.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the $\varphi^*$ variable. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 bottom left
+name: Covariance matrices for phistar mass 170-350
+---
+data_file: phistar_mass_350-1000.yaml
+description: The measured differential cross section in the $350 \le M_{ll} < 1000$
+  GeV mass window, in bins of the $\varphi^*$ variable. The values are normalized
+  by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 bottom right
+name: phistar mass 350-1000
+---
+data_file: covariance_matrices_for_phistar_mass_350-1000.yaml
+description: The measured differential cross section in the $350 \le M_{ll} < 1000$
+  GeV mass window, in bins of the $\varphi^*$ variable. The values are normalized
+  by the bin width. This entry contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: Figure 19 bottom right
+name: Covariance matrices for phistar mass 350-1000
+---
+data_file: pt_ll_mass_50-76_over_mass_76-106.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. The values
+  are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 9 top left
+name: pT ll mass 50-76 over mass 76-106
+---
+data_file: covariance_matrices_for_pt_ll_mass_50-76_over_mass_76-106.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. The values
+  are not normalized by the bin width. This entry contains the covariance matrix of
+  the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 9 top left
+name: Covariance matrices for pT ll mass 50-76 over mass 76-106
+---
+data_file: pt_ll_mass_106-170_over_mass_76-106.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. The values
+  are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 9 top right
+name: pT ll mass 106-170 over mass 76-106
+---
+data_file: covariance_matrices_for_pt_ll_mass_106-170_over_mass_76-106.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. The values
+  are not normalized by the bin width. This entry contains the covariance matrix of
+  the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 9 top right
+name: Covariance matrices for pT ll mass 106-170 over mass 76-106
+---
+data_file: pt_ll_mass_170-350_over_mass_76-106.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. The values
+  are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 9 bottom left
+name: pT ll mass 170-350 over mass 76-106
+---
+data_file: covariance_matrices_for_pt_ll_mass_170-350_over_mass_76-106.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. The values
+  are not normalized by the bin width. This entry contains the covariance matrix of
+  the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 9 bottom left
+name: Covariance matrices for pT ll mass 170-350 over mass 76-106
+---
+data_file: pt_ll_mass_350-1000_over_mass_76-106.yaml
+description: The measured differential cross section in the $350 \le M_{ll} < 1000$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. The values
+  are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 9 bottom right
+name: pT ll mass 350-1000 over mass 76-106
+---
+data_file: covariance_matrices_for_pt_ll_mass_350-1000_over_mass_76-106.yaml
+description: The measured differential cross section in the $350 \le M_{ll} < 1000$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. The values
+  are not normalized by the bin width. This entry contains the covariance matrix of
+  the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 9 bottom right
+name: Covariance matrices for pT ll mass 350-1000 over mass 76-106
+---
+data_file: pt_ll_mass_50-76_over_mass_76-106_jet.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least
+  one jet is required. The values are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 16 top left
+name: pT ll mass 50-76 over mass 76-106 jet
+---
+data_file: covariance_matrices_for_pt_ll_mass_50-76_over_mass_76-106_jet.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least
+  one jet is required. The values are not normalized by the bin width. This entry
+  contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 16 top left
+name: Covariance matrices for pT ll mass 50-76 over mass 76-106 jet
+---
+data_file: pt_ll_mass_106-170_over_mass_76-106_jet.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least
+  one jet is required. The values are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 16 top left
+name: pT ll mass 106-170 over mass 76-106 jet
+---
+data_file: covariance_matrices_for_pt_ll_mass_106-170_over_mass_76-106_jet.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least
+  one jet is required. The values are not normalized by the bin width. This entry
+  contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 16 top left
+name: Covariance matrices for pT ll mass 106-170 over mass 76-106 jet
+---
+data_file: pt_ll_mass_170-350_over_mass_76-106_jet.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least
+  one jet is required. The values are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 16 top left
+name: pT ll mass 170-350 over mass 76-106 jet
+---
+data_file: covariance_matrices_for_pt_ll_mass_170-350_over_mass_76-106_jet.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the dilepton transverse momentum, divided by the measured
+  differential cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least
+  one jet is required. The values are not normalized by the bin width. This entry
+  contains the covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPT / DSIG/DPT
+location: Figure 16 top left
+name: Covariance matrices for pT ll mass 170-350 over mass 76-106 jet
+---
+data_file: phistar_mass_50-76_over_mass_76-106.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the $\varphi^*$ variable, divided by the measured differential
+  cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least one jet is
+  required. The values are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR / DSIG/DPHISTAR
+location: Figure 22 top left
+name: phistar mass 50-76 over mass 76-106
+---
+data_file: covariance_matrices_for_phistar_mass_50-76_over_mass_76-106.yaml
+description: The measured differential cross section in the $50 \le M_{ll} < 76$ GeV
+  mass window, in bins of the $\varphi^*$ variable, divided by the measured differential
+  cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least one jet is
+  required. The values are not normalized by the bin width. This entry contains the
+  covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR / DSIG/DPHISTAR
+location: Figure 22 top left
+name: Covariance matrices for phistar mass 50-76 over mass 76-106
+---
+data_file: phistar_mass_106-170_over_mass_76-106.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the $\varphi^*$ variable, divided by the measured differential
+  cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least one jet is
+  required. The values are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR / DSIG/DPHISTAR
+location: Figure 22 top right
+name: phistar mass 106-170 over mass 76-106
+---
+data_file: covariance_matrices_for_phistar_mass_106-170_over_mass_76-106.yaml
+description: The measured differential cross section in the $106 \le M_{ll} < 170$
+  GeV mass window, in bins of the $\varphi^*$ variable, divided by the measured differential
+  cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least one jet is
+  required. The values are not normalized by the bin width. This entry contains the
+  covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR / DSIG/DPHISTAR
+location: Figure 22 top right
+name: Covariance matrices for phistar mass 106-170 over mass 76-106
+---
+data_file: phistar_mass_170-350_over_mass_76-106.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the $\varphi^*$ variable, divided by the measured differential
+  cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least one jet is
+  required. The values are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR / DSIG/DPHISTAR
+location: Figure 22 bottom left
+name: phistar mass 170-350 over mass 76-106
+---
+data_file: covariance_matrices_for_phistar_mass_170-350_over_mass_76-106.yaml
+description: The measured differential cross section in the $170 \le M_{ll} < 350$
+  GeV mass window, in bins of the $\varphi^*$ variable, divided by the measured differential
+  cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least one jet is
+  required. The values are not normalized by the bin width. This entry contains the
+  covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR / DSIG/DPHISTAR
+location: Figure 22 bottom left
+name: Covariance matrices for phistar mass 170-350 over mass 76-106
+---
+data_file: phistar_mass_350-1000_over_mass_76-106.yaml
+description: The measured differential cross section in the $350 \le M_{ll} < 1000$
+  GeV mass window, in bins of the $\varphi^*$ variable, divided by the measured differential
+  cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least one jet is
+  required. The values are not normalized by the bin width.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR / DSIG/DPHISTAR
+location: Figure 22 bottom right
+name: phistar mass 350-1000 over mass 76-106
+---
+data_file: covariance_matrices_for_phistar_mass_350-1000_over_mass_76-106.yaml
+description: The measured differential cross section in the $350 \le M_{ll} < 1000$
+  GeV mass window, in bins of the $\varphi^*$ variable, divided by the measured differential
+  cross section in the $76 \le M_{ll} < 106$ GeV mass window. At least one jet is
+  required. The values are not normalized by the bin width. This entry contains the
+  covariance matrix of the results.
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Cross Section
+  - Single Differential Cross Section
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+  - Transverse Momentum Dependence
+- name: observables
+  values:
+  - DSIG/DPHISTAR / DSIG/DPHISTAR
+location: Figure 22 bottom right
+name: Covariance matrices for phistar mass 350-1000 over mass 76-106
+---
+data_file: electron_response_pt_ll_mass_50-76.yaml
+description: Response matrix for pT ll mass 50-76 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 50-76
+---
+data_file: muon_response_pt_ll_mass_50-76.yaml
+description: Response matrix for pT ll mass 50-76 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: muon response pT ll mass 50-76
+---
+data_file: electron_response_pt_ll_mass_76-106.yaml
+description: Response matrix for pT ll mass 76-106 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 76-106
+---
+data_file: muon_response_pt_ll_mass_76-106.yaml
+description: Response matrix for pT ll mass 76-106 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: muon response pT ll mass 76-106
+---
+data_file: electron_response_pt_ll_mass_106-170.yaml
+description: Response matrix for pT ll mass 106-170 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 106-170
+---
+data_file: muon_response_pt_ll_mass_106-170.yaml
+description: Response matrix for pT ll mass 106-170 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: muon response pT ll mass 106-170
+---
+data_file: electron_response_pt_ll_mass_170-350.yaml
+description: Response matrix for pT ll mass 170-350 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 170-350
+---
+data_file: muon_response_pt_ll_mass_170-350.yaml
+description: Response matrix for pT ll mass 170-350 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: muon response pT ll mass 170-350
+---
+data_file: electron_response_pt_ll_mass_350-1000.yaml
+description: Response matrix for pT ll mass 350-1000 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 350-1000
+---
+data_file: electron_response_pt_ll_mass_50-76_jet.yaml
+description: Response matrix for pT ll mass 50-76 jet (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 50-76 jet
+---
+data_file: muon_response_pt_ll_mass_50-76_jet.yaml
+description: Response matrix for pT ll mass 50-76 jet (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: muon response pT ll mass 50-76 jet
+---
+data_file: electron_response_pt_ll_mass_76-106_jet.yaml
+description: Response matrix for pT ll mass 76-106 jet (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 76-106 jet
+---
+data_file: muon_response_pt_ll_mass_76-106_jet.yaml
+description: Response matrix for pT ll mass 76-106 jet (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: muon response pT ll mass 76-106 jet
+---
+data_file: electron_response_pt_ll_mass_106-170_jet.yaml
+description: Response matrix for pT ll mass 106-170 jet (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 106-170 jet
+---
+data_file: muon_response_pt_ll_mass_106-170_jet.yaml
+description: Response matrix for pT ll mass 106-170 jet (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: muon response pT ll mass 106-170 jet
+---
+data_file: electron_response_pt_ll_mass_170-350_jet.yaml
+description: Response matrix for pT ll mass 170-350 jet (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: electron response pT ll mass 170-350 jet
+---
+data_file: muon_response_pt_ll_mass_170-350_jet.yaml
+description: Response matrix for pT ll mass 170-350 jet (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPT
+location: ''
+name: muon response pT ll mass 170-350 jet
+---
+data_file: electron_response_phistar_mass_50-76.yaml
+description: Response matrix for phistar mass 50-76 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: electron response phistar mass 50-76
+---
+data_file: muon_response_phistar_mass_50-76.yaml
+description: Response matrix for phistar mass 50-76 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: muon response phistar mass 50-76
+---
+data_file: electron_response_phistar_mass_76-106.yaml
+description: Response matrix for phistar mass 76-106 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: electron response phistar mass 76-106
+---
+data_file: muon_response_phistar_mass_76-106.yaml
+description: Response matrix for phistar mass 76-106 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: muon response phistar mass 76-106
+---
+data_file: electron_response_phistar_mass_106-170.yaml
+description: Response matrix for phistar mass 106-170 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: electron response phistar mass 106-170
+---
+data_file: muon_response_phistar_mass_106-170.yaml
+description: Response matrix for phistar mass 106-170 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: muon response phistar mass 106-170
+---
+data_file: electron_response_phistar_mass_170-350.yaml
+description: Response matrix for phistar mass 170-350 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: electron response phistar mass 170-350
+---
+data_file: muon_response_phistar_mass_170-350.yaml
+description: Response matrix for phistar mass 170-350 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: muon response phistar mass 170-350
+---
+data_file: electron_response_phistar_mass_350-1000.yaml
+description: Response matrix for phistar mass 350-1000 (electron channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: electron response phistar mass 350-1000
+---
+data_file: muon_response_phistar_mass_350-1000.yaml
+description: Response matrix for phistar mass 350-1000 (muon channel)
+keywords:
+- name: reactions
+  values:
+  - P P --> GAMMA* --> LEPTON+ LEPTON-
+  - P P --> GAMMA* --> E+ E-
+  - P P --> GAMMA* --> MU+ MU-
+  - P P --> Z --> LEPTON+ LEPTON-
+  - P P --> Z --> E+ E-
+  - P P --> Z --> MU+ MU-
+- name: cmenergies
+  values:
+  - 13000
+- name: phrases
+  values:
+  - Response matrix
+  - Drell Yan
+  - Z Production
+  - Di-Muon Production
+- name: observables
+  values:
+  - DSIG/DPHISTAR
+location: ''
+name: muon response phistar mass 350-1000

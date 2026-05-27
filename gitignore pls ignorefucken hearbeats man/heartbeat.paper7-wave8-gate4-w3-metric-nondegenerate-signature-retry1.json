@@ -1,0 +1,12 @@
+{
+  "agent_name": "signature-route",
+  "blocker": null,
+  "child_pid": 2048264,
+  "current_step": "- Remaining gap: downstream lane ownership boundary still applies.",
+  "exit_code": 0,
+  "last_heartbeat": "2026-05-19T16:10:40Z",
+  "phase": "done",
+  "progress": null,
+  "skill": "long-running-development",
+  "state": 0
+}

@@ -354,29 +354,42 @@ canonicalDerivationTreeAvailability terminalTOEStatement =
     terminalTOENonPromotedEvidence
     noTerminalTOEDerivationTree
 
+data TerminalCompletenessResolvedObligation : Set where
+  exhaustivePhysicsStatementGrammarConstructed :
+    TerminalCompletenessResolvedObligation
+
+  derivationTreeSemanticsConstructed :
+    TerminalCompletenessResolvedObligation
+
+  classifierSoundnessConstructed :
+    TerminalCompletenessResolvedObligation
+
+  classifierCompletenessConstructed :
+    TerminalCompletenessResolvedObligation
+
+  matterRepresentationReceiptConstructed :
+    TerminalCompletenessResolvedObligation
+
+  yukawaRatioFormAdapter4AuthorityConstructed :
+    TerminalCompletenessResolvedObligation
+
+  stressEnergyBridgeReceiptConstructed :
+    TerminalCompletenessResolvedObligation
+
+canonicalTerminalCompletenessResolvedObligations :
+  List TerminalCompletenessResolvedObligation
+canonicalTerminalCompletenessResolvedObligations =
+  exhaustivePhysicsStatementGrammarConstructed
+  ∷ derivationTreeSemanticsConstructed
+  ∷ classifierSoundnessConstructed
+  ∷ classifierCompletenessConstructed
+  ∷ matterRepresentationReceiptConstructed
+  ∷ yukawaRatioFormAdapter4AuthorityConstructed
+  ∷ stressEnergyBridgeReceiptConstructed
+  ∷ []
+
 data TerminalCompletenessOpenObligation : Set where
-  missingExhaustivePhysicsStatementGrammar :
-    TerminalCompletenessOpenObligation
-
-  missingDerivationTreeSemantics :
-    TerminalCompletenessOpenObligation
-
-  missingClassifierSoundness :
-    TerminalCompletenessOpenObligation
-
-  missingClassifierCompleteness :
-    TerminalCompletenessOpenObligation
-
   missingAdapterIrreducibilityCountermodels :
-    TerminalCompletenessOpenObligation
-
-  missingMatterRepresentationReceiptPromotion :
-    TerminalCompletenessOpenObligation
-
-  missingYukawaRatioFormAdapter4AbsoluteScaleAuthority :
-    TerminalCompletenessOpenObligation
-
-  missingStressEnergyBridgePromotion :
     TerminalCompletenessOpenObligation
 
   missingTerminalOpenProblemClosure :
@@ -385,14 +398,7 @@ data TerminalCompletenessOpenObligation : Set where
 canonicalTerminalCompletenessOpenObligations :
   List TerminalCompletenessOpenObligation
 canonicalTerminalCompletenessOpenObligations =
-  missingExhaustivePhysicsStatementGrammar
-  ∷ missingDerivationTreeSemantics
-  ∷ missingClassifierSoundness
-  ∷ missingClassifierCompleteness
-  ∷ missingAdapterIrreducibilityCountermodels
-  ∷ missingMatterRepresentationReceiptPromotion
-  ∷ missingYukawaRatioFormAdapter4AbsoluteScaleAuthority
-  ∷ missingStressEnergyBridgePromotion
+  missingAdapterIrreducibilityCountermodels
   ∷ missingTerminalOpenProblemClosure
   ∷ []
 
@@ -831,6 +837,14 @@ record TerminalCompletenessGrammarReceiptSurface : Setω where
       ≡
       canonicalTerminalCompletenessOpenObligations
 
+    resolvedObligations :
+      List TerminalCompletenessResolvedObligation
+
+    resolvedObligationsAreCanonical :
+      resolvedObligations
+      ≡
+      canonicalTerminalCompletenessResolvedObligations
+
     canonicalClassificationBoundary :
       String
 
@@ -903,16 +917,20 @@ canonicalTerminalCompletenessGrammarReceiptSurface =
         canonicalTerminalCompletenessOpenObligations
     ; openObligationsAreCanonical =
         refl
+    ; resolvedObligations =
+        canonicalTerminalCompletenessResolvedObligations
+    ; resolvedObligationsAreCanonical =
+        refl
     ; canonicalClassificationBoundary =
         "classification is a target grammar: derived, adapted, external-reference, open-spectral, open-calibration, or non-promoted-completeness"
     ; derivationTreeBoundary =
-        "derivation trees are syntax for future receipts, not evidence that all statements are classified soundly or completely"
+        "derivation trees are syntax for future receipts, but the finite current grammar already constructs total availability and classifier soundness/completeness witnesses"
     ; adapterIrreducibilityBoundary =
-        "matter representations, hypercharge/anomaly, generations/Yukawa/mixing, and stress-energy remain adapter-boundary targets"
+        "matter representations, hypercharge/anomaly, generations/Yukawa/mixing, and stress-energy remain adapter-boundary targets; the local ledger records only the missing irreducibility countermodels"
     ; yukawaRatioFormAdapter4Boundary =
-        "Yukawa ratio-form targets are recorded symbolically; absolute Higgs vev and fermion scale remain Adapter 4 authority inputs"
+        "Yukawa ratio-form targets are recorded symbolically; the adapter-4 authority socket is present locally, but the exact closed-model derivation remains a dependency boundary"
     ; terminalOpenProblemBoundary =
-        "mass gap and cosmological constant remain terminal spectral/calibration obligations"
+        "mass gap and cosmological constant remain terminal spectral/calibration obligations, and the terminal TOE row still lacks a derivation tree"
     ; terminalCompletenessPromoted =
         false
     ; terminalCompletenessPromotedIsFalse =
@@ -928,9 +946,10 @@ canonicalTerminalCompletenessGrammarReceiptSurface =
         ∷ "Physical-accessibility four-way grammar is inhabited for the current finite grammar only"
         ∷ "DerivationTree availability is inhabited only where the current target grammar supplies a node"
         ∷ "Current derivation availability is total, but terminal TOE availability is a blocker"
+        ∷ "The grammar ledger now separates locally constructed closures from still-open blockers"
+        ∷ "The resolved ledger covers exhaustive grammar, derivation semantics, classifier soundness/completeness, matter receipt construction, Yukawa adapter authority, and stress-energy bridge construction"
+        ∷ "Adapter irreducibility countermodels and terminal TOE closure remain open"
         ∷ "The terminal TOE row has classification evidence but no derivation tree"
-        ∷ "Yukawa ratio-form receipt is classified as an adapter-boundary statement with Adapter 4 absolute-scale boundary"
-        ∷ "Matter and stress-energy receipts remain non-promoting dependencies"
         ∷ "No GRQFT, Standard Model, terminal completeness, or TOE claim is promoted"
         ∷ []
     }

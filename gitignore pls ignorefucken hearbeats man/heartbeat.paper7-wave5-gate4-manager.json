@@ -1,0 +1,12 @@
+{
+  "agent_name": "implement",
+  "blocker": null,
+  "child_pid": 1773217,
+  "current_step": "- The `child_heartbeat` subobject appears to be concurrently rewritten by an external runner process, so heartbeat text/progress values are not stable; runsh...",
+  "exit_code": 0,
+  "last_heartbeat": "2026-05-19T14:11:59Z",
+  "phase": "done",
+  "progress": null,
+  "skill": "long-running-development",
+  "state": 0
+}

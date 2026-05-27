@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.W3AcceptedEvidenceAuthorityTokenGovernanceObstructi
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
 open import Data.Empty using (⊥)
@@ -77,6 +78,18 @@ record W3AcceptedEvidenceAuthorityTokenGovernanceObstruction : Setω where
 
     exactMissingGovernanceHookDescription :
       String
+
+    exactDefinitionSitePath :
+      String
+
+    exactDefinitionSiteLine :
+      Nat
+
+    exactDefinitionSiteForm :
+      String
+
+    exactAuthorityBoundaryReceiptShape :
+      List String
 
     exactMissingProviderField :
       Pack.W3AcceptedAuthorityProviderMissingField
@@ -215,6 +228,21 @@ canonicalW3AcceptedEvidenceAuthorityTokenGovernanceObstruction =
         missingTokenConstructorOrPolicyHook
     ; exactMissingGovernanceHookDescription =
         "missing typed self-issuance hook that consumes Docs/DASHIGovernanceSelfIssuancePolicy.md, the canonical t43/t44 payload checksums, the frozen commit, comparison law, runner non-collapse receipt, audit log, revocation clauses, and no-overreach clauses to produce AUTH.W3AcceptedEvidenceAuthorityToken"
+    ; exactDefinitionSitePath =
+        "DASHI/Physics/Closure/W3AcceptedEmpiricalAuthorityGate.agda"
+    ; exactDefinitionSiteLine =
+        62
+    ; exactDefinitionSiteForm =
+        "data W3AcceptedEvidenceAuthorityToken : Set where"
+    ; exactAuthorityBoundaryReceiptShape =
+        "authorityToken : AUTH.W3AcceptedEvidenceAuthorityToken"
+        ∷ "evidenceBackedEmpiricalTarget : AUTH.W3EvidenceBackedEmpiricalTarget"
+        ∷ "evidenceTargetCarriesAuthority : evidence-backed target authority == authorityToken"
+        ∷ "b4EmpiricalPromotion : W3.B4EmpiricalPromotionObligation"
+        ∷ "originReceiptPromotion : W3.OriginReceiptPromotionObligation"
+        ∷ "bridgeObligations : W3.W3EmpiricalTargetPromotionBridgeObligations"
+        ∷ "bridgeTargetMatchesEvidence : bridge empirical target == evidence-backed empirical target"
+        ∷ []
     ; exactMissingProviderField =
         Pack.missingAcceptedEvidenceAuthorityToken
     ; exactMissingProviderFieldIsAuthorityToken =

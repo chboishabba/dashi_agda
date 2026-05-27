@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-gate6-manager.json",
+  "lane": "paper7-gate6-dhr-aqft",
+  "lane_claim": "Paper 7 Gate 6 manager proof-blocker wave: construct concrete DHR sector/lane constructors or nonempty carrier predicates; may spawn up to six leaf workers",
+  "orchestrator_id": "paper7-gate6-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.paper7-gate6-manager.json",
+  "timestamp": "2026-05-19T11:51:02Z"
+}

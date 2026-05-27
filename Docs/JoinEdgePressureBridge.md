@@ -7,3 +7,21 @@ This canonical note records the current thread connection between the ITIR/Sensi
 - **UFTC lattice & Lyapunov:** the UFTC carrier (`UFTC_Lattice.agda`) is the ambient combinatorics for that severity join, and the Lyapunov/MDL machinery (`DASHI/MDL/MDLLyapunov.agda`, `DASHI/Physics/Closure/MDLLyapunovShiftInstance.agda`) ensures the coarse-step map respects the same descent order that the join test now expects (`MATCH` edges stay low-pressure while `CONFLICT`/`UNRESOLVED` edges feed the `Lyapunov`-monotone defect increase).
 
 This minimal note keeps everything tightly referenced so the next canonical surface can cite these anchors rather than re-deriving them later.
+
+## Fibre Pressure Metric Bridge
+
+`DASHI/Metric/FibrePressureMetricBridge.agda` is the metric-side bridge for this
+join-pressure story.  It packages the already-landed weighted local pressure
+bound and global weighted-support bound as a residual metric suitable for
+transport admissibility:
+
+```text
+join / fibre pressure
+  -> weighted residual budget
+  -> admissible transport candidate
+  -> explicit promotion gate
+```
+
+The canonical gate remains candidate-only.  It does not supply threshold
+calibration, metric-completeness evidence for every domain, or a global
+optimizer.

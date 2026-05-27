@@ -1,0 +1,15 @@
+[2026-05-19T16:02:13Z] root validation log placeholder for paper7-wave8
+No targeted validation has been tee'd into this artifact yet.
+[root validation] json integrity
+usage: python -m json.tool [-h] [--sort-keys] [--no-ensure-ascii]
+                           [--json-lines] [--indent INDENT | --tab |
+                           --no-indent | --compact]
+                           [infile] [outfile]
+python -m json.tool: error: unrecognized arguments: status.paper7-wave8-gate12-w2-prime-lane-rep-semantics.json status.paper7-wave8-gate12-w3-carrier-functor-laws.json status.paper7-wave8-gate12-w4-bump-covariance-depth.json status.paper7-wave8-gate12-w5-s8-nat-hamiltonian.json status.paper7-wave8-gate12-w6-s8-global-spectral.json status.paper7-wave8-gate3-manager.json status.paper7-wave8-gate3-w1-su2-lie-algebra.json status.paper7-wave8-gate3-w2-su3-structure-constants.json status.paper7-wave8-gate3-w3-su3-jacobi-all-slots.json status.paper7-wave8-gate3-w4-lie-forms-curvature.json status.paper7-wave8-gate3-w5-bianchi-hodge.json status.paper7-wave8-gate3-w6-ym-action-ibp-source.json status.paper7-wave8-gate4-manager.json status.paper7-wave8-gate4-w1-gr-carrier-scalars.json status.paper7-wave8-gate4-w2-time-prime-metric.json status.paper7-wave8-gate4-w3-metric-nondegenerate-signature.json status.paper7-wave8-gate4-w4-inverse-christoffel.json status.paper7-wave8-gate4-w5-riemann-ricci-einstein.json status.paper7-wave8-gate4-w6-stress-energy-compat.json status.paper7-wave8-gate5-manager.json status.paper7-wave8-gate5-w1-fixed-depth-hilbert.json status.paper7-wave8-gate5-w2-depth-embeddings.json status.paper7-wave8-gate5-w3-traversal-unitary.json status.paper7-wave8-gate5-w4-traversal-compatibility.json status.paper7-wave8-gate5-w5-filtered-colimit-hilbert.json status.paper7-wave8-gate5-w6-stone-generator.json status.paper7-wave8-gate6-manager.json status.paper7-wave8-gate6-w1-concrete-sector-constructors.json status.paper7-wave8-gate6-w2-localized-endomorphisms.json status.paper7-wave8-gate6-w3-intertwiners-tensor-fusion.json status.paper7-wave8-gate6-w4-duals-frobenius.json status.paper7-wave8-gate6-w5-braiding-hexagon.json status.paper7-wave8-gate6-w6-dr-reconstruction-boundary.json status.paper7-wave8-gate78-manager.json status.paper7-wave8-gate78-w1-matter-representations.json status.paper7-wave8-gate78-w2-higgs-potential.json status.paper7-wave8-gate78-w3-yukawa-matrices.json status.paper7-wave8-gate78-w4-yukawa-spectral-field.json status.paper7-wave8-gate78-w5-ckm-closure.json status.paper7-wave8-gate78-w6-paper7-receipt-composition.json status.paper7-wave8-workers.next-blockers.json status.paper7-wave8-workers.root-summary.json status.paper7-wave8-workers.workers.json status.paper7-wave8.next-blockers.json status.paper7-wave8.root-summary.json status.paper7-wave8.workers.json
+[root validation] git diff --check
+[root validation] json integrity loop
+[root validation] json integrity ok
+[root validation] replay worker-reported targeted Agda checks
+[root validation] replay complete
+[root validation] replay additional touched critical Agda modules
+[root validation] additional replay complete

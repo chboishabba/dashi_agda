@@ -69,6 +69,102 @@ postulate
     Region →
     Set
 
+data AQFTFoundationalSocket : Set where
+  regionCarrierSocket :
+    AQFTFoundationalSocket
+
+  localAlgebraFamilySocket :
+    AQFTFoundationalSocket
+
+  algebraMorphismFamilySocket :
+    AQFTFoundationalSocket
+
+  algebraIsomorphismFamilySocket :
+    AQFTFoundationalSocket
+
+  algebraMorphismSurjectivitySocket :
+    AQFTFoundationalSocket
+
+  regionInclusionRelationSocket :
+    AQFTFoundationalSocket
+
+  causalSeparationRelationSocket :
+    AQFTFoundationalSocket
+
+  timeSliceCoverRelationSocket :
+    AQFTFoundationalSocket
+
+  domainOfDependenceRelationSocket :
+    AQFTFoundationalSocket
+
+  descentCoverFamilySocket :
+    AQFTFoundationalSocket
+
+  descentObjectFamilySocket :
+    AQFTFoundationalSocket
+
+canonicalAQFTFoundationalSockets :
+  List AQFTFoundationalSocket
+canonicalAQFTFoundationalSockets =
+  regionCarrierSocket
+  ∷ localAlgebraFamilySocket
+  ∷ algebraMorphismFamilySocket
+  ∷ algebraIsomorphismFamilySocket
+  ∷ algebraMorphismSurjectivitySocket
+  ∷ regionInclusionRelationSocket
+  ∷ causalSeparationRelationSocket
+  ∷ timeSliceCoverRelationSocket
+  ∷ domainOfDependenceRelationSocket
+  ∷ descentCoverFamilySocket
+  ∷ descentObjectFamilySocket
+  ∷ []
+
+data AQFTRootPostulateBoundaryBlocker : Set where
+  missingConcreteRegionCarrier :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingConcreteLocalAlgebraFamily :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingConcreteAlgebraMorphismFamily :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingConcreteAlgebraIsomorphismFamily :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingConcreteInclusionRelation :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingConcreteCausalSeparationRelation :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingConcreteTimeSliceAndDomainOfDependenceRelations :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingConcreteDescentCoverAndObjectFamilies :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingHaagKastlerLawDerivationsFromConcreteModel :
+    AQFTRootPostulateBoundaryBlocker
+
+  missingInteractingQFTPromotionAuthority :
+    AQFTRootPostulateBoundaryBlocker
+
+canonicalAQFTRootPostulateBoundaryBlockers :
+  List AQFTRootPostulateBoundaryBlocker
+canonicalAQFTRootPostulateBoundaryBlockers =
+  missingConcreteRegionCarrier
+  ∷ missingConcreteLocalAlgebraFamily
+  ∷ missingConcreteAlgebraMorphismFamily
+  ∷ missingConcreteAlgebraIsomorphismFamily
+  ∷ missingConcreteInclusionRelation
+  ∷ missingConcreteCausalSeparationRelation
+  ∷ missingConcreteTimeSliceAndDomainOfDependenceRelations
+  ∷ missingConcreteDescentCoverAndObjectFamilies
+  ∷ missingHaagKastlerLawDerivationsFromConcreteModel
+  ∷ missingInteractingQFTPromotionAuthority
+  ∷ []
+
 data AQFTTypedNetSurfaceStatus : Set where
   typedSurfaceOnlyNoInteractingPromotion :
     AQFTTypedNetSurfaceStatus
@@ -289,5 +385,163 @@ canonicalAQFTTypedNetSurface =
         ∷ "no time-slice theorem or descent/colimit compatibility theorem is constructed here"
         ∷ "no constructive interacting net or Standard Model QFT is constructed here"
         ∷ "this module does not construct GRQFTClosurePromotionReceipt or any interacting-QFT promotion token"
+        ∷ []
+    }
+
+record AQFTRootPostulateBoundaryReceipt : Setω where
+  field
+    typedNetSurface :
+      AQFTTypedNetSurface
+
+    foundationalSockets :
+      List AQFTFoundationalSocket
+
+    foundationalSocketsAreCanonical :
+      foundationalSockets ≡ canonicalAQFTFoundationalSockets
+
+    rootBlockers :
+      List AQFTRootPostulateBoundaryBlocker
+
+    rootBlockersAreCanonical :
+      rootBlockers ≡ canonicalAQFTRootPostulateBoundaryBlockers
+
+    regionSocket :
+      Set
+
+    localAlgebraSocket :
+      regionSocket →
+      Set
+
+    algebraMorphismSocket :
+      regionSocket →
+      regionSocket →
+      Set
+
+    algebraIsomorphismSocket :
+      regionSocket →
+      regionSocket →
+      Set
+
+    algebraMorphismSurjectivityPredicate :
+      {source target : regionSocket} →
+      algebraMorphismSocket source target →
+      Set
+
+    inclusionSocket :
+      regionSocket →
+      regionSocket →
+      Set
+
+    causalSeparationSocket :
+      regionSocket →
+      regionSocket →
+      Set
+
+    timeSliceCoverSocket :
+      regionSocket →
+      regionSocket →
+      Set
+
+    domainOfDependenceSocket :
+      regionSocket →
+      regionSocket →
+      Set
+
+    descentCoverSocket :
+      regionSocket →
+      Set
+
+    descentObjectSocket :
+      regionSocket →
+      Set
+
+    rootOpenObligations :
+      List AQFTTypedNetOpenObligation
+
+    rootOpenObligationsAreCanonical :
+      rootOpenObligations
+      ≡
+      AQFTTypedNetSurface.openObligations canonicalAQFTTypedNetSurface
+
+    rootPostulatesExternallySupplied :
+      Bool
+
+    rootPostulatesExternallySuppliedIsTrue :
+      rootPostulatesExternallySupplied ≡ true
+
+    rootPostulatesEliminatedInternally :
+      Bool
+
+    rootPostulatesEliminatedInternallyIsFalse :
+      rootPostulatesEliminatedInternally ≡ false
+
+    interactingQFTPromotedByRootLedger :
+      Bool
+
+    interactingQFTPromotedByRootLedgerIsFalse :
+      interactingQFTPromotedByRootLedger ≡ false
+
+    rootBoundary :
+      List String
+
+open AQFTRootPostulateBoundaryReceipt public
+
+canonicalAQFTRootPostulateBoundaryReceipt :
+  AQFTRootPostulateBoundaryReceipt
+canonicalAQFTRootPostulateBoundaryReceipt =
+  record
+    { typedNetSurface =
+        canonicalAQFTTypedNetSurface
+    ; foundationalSockets =
+        canonicalAQFTFoundationalSockets
+    ; foundationalSocketsAreCanonical =
+        refl
+    ; rootBlockers =
+        canonicalAQFTRootPostulateBoundaryBlockers
+    ; rootBlockersAreCanonical =
+        refl
+    ; regionSocket =
+        Region
+    ; localAlgebraSocket =
+        LocalAlgebra
+    ; algebraMorphismSocket =
+        AlgebraMorphism
+    ; algebraIsomorphismSocket =
+        AlgebraIsomorphism
+    ; algebraMorphismSurjectivityPredicate =
+        AlgebraMorphismSurjective
+    ; inclusionSocket =
+        _⊆_
+    ; causalSeparationSocket =
+        CausallySeparated
+    ; timeSliceCoverSocket =
+        TimeSliceCover
+    ; domainOfDependenceSocket =
+        DomainOfDependence
+    ; descentCoverSocket =
+        DescentCover
+    ; descentObjectSocket =
+        DescentObject
+    ; rootOpenObligations =
+        AQFTTypedNetSurface.openObligations canonicalAQFTTypedNetSurface
+    ; rootOpenObligationsAreCanonical =
+        refl
+    ; rootPostulatesExternallySupplied =
+        true
+    ; rootPostulatesExternallySuppliedIsTrue =
+        refl
+    ; rootPostulatesEliminatedInternally =
+        false
+    ; rootPostulatesEliminatedInternallyIsFalse =
+        refl
+    ; interactingQFTPromotedByRootLedger =
+        false
+    ; interactingQFTPromotedByRootLedgerIsFalse =
+        refl
+    ; rootBoundary =
+        "AQFT root postulates are recorded as foundational sockets consumed by later AQFT and DHR receipts"
+        ∷ "Region, LocalAlgebra, morphisms, inclusions, causal separation, time-slice coverage, domain of dependence, and descent remain abstract carriers or relations"
+        ∷ "The canonical typed net surface consumes these sockets but does not eliminate them"
+        ∷ "Concrete Haag-Kastler laws, C*-representation data, and interacting-QFT promotion remain blocked"
         ∷ []
     }

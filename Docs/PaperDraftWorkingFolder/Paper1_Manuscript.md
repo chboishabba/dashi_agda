@@ -274,16 +274,50 @@ compression admissibility receipt and used in the compression section below.
 accounting from unqualified closure. The repository records a weak terminal
 claim only modulo an explicit minimal package: B0.1 \(\Im\) reflection, B0.3
 `WeakBG`, Bisognano--Wichmann/time-slice authority,
-Doplicher--Roberts reconstruction, \(C^*\)-completion, and
-pointwise-to-uniform mass-gap transfer. This is not a terminal theorem. The
-unqualified terminal claim remains blocked; continuum mass-gap authority,
-`laneDimension`, DHR-to-Standard-Model matching, final adapter acceptance,
-stress-energy/Wald authority, and GRQFT composition remain open gates. The
+Doplicher--Roberts reconstruction, \(C^*\)-completion, and external/Clay
+mass-gap authority. DASHI-internal ST3/Banach mass-gap closure is recorded
+separately and does not promote Clay authority. This is not a terminal theorem.
+The unqualified terminal claim remains blocked; Clay/external mass-gap
+authority, DHR-to-Standard-Model matching, final adapter acceptance,
+stress-energy/Wald authority, and GRQFT composition remain open gates.
+`laneDimension` has only a conditional internal Moonshine bridge route: Ogg
+genus-zero selects the 15 supersingular primes, no-ghost supplies orbifold
+compatibility, Dong-Li-Mason supplies the weight-1 Lie-algebra table authority,
+and `DASHIPrimeLaneEquiv` must bridge that table to DASHI lane dimensions. The
 repository files `ExternalFormalImportRoadmapReceipt.agda`,
 `BalabanRGMassGapReceiptSurface.agda`,
 `TerminalOpenProblemStatusSurface.agda`, and
 `GRQFTTerminalCompositionBoundary.agda` record these terminal boundaries
 without promoting completed unification.
+
+The downstream Papers 2--7 map is a named obligation ledger. Its current core
+inventory is organized into eight gates: carrier-to-physics functor laws, S8
+spectral-gap witnesses, nonabelian Yang--Mills structure, non-flat FactorVec
+GR, Hilbert/Stone depth limits, DHR/AQFT reconstruction, matter/Higgs/Yukawa
+and CKM arithmetic, and final Paper7Receipt composition. Recent repository
+work has typed target surfaces for these gates, including a Nat S8 witness
+slice, finite `SU(2)` Jacobi support, a p2-time valuation metric candidate,
+finite-support depth-colimit targets, and supplied-sector DHR tensor/fusion
+sockets. These are local proof surfaces, not completed gate receipts.
+
+The active core theorem roadmap is deliberately smaller than the application
+surface inventory. Chemistry, biology, cognition, rendering, culture, and other
+application lanes remain downstream/frozen unless they directly discharge one
+of the eight core gates. The map does not alter
+`terminalClaimPromoted = false`, `continuumClayMassGapPromoted = false`, or
+any external-authority boundary.
+
+The route manifest separates similarly named blockers. Route A `d^2=0` is an
+abelian exterior-derivative nilpotency route from prime-coordinate
+commutativity / boundary-of-boundary cancellation; the current mechanized
+surface also tracks coefficient laws and SFGC action-bridge requests. Route B
+nonabelian Yang-Mills keeps the
+Killing-form Ad-invariance, Hodge/covariant derivative, variation/IBP, and
+current/source residuals visible. The GR boundary is separate again: finite
+Bianchi, CRT, or sidecar surfaces do not supply non-flat Levi-Civita,
+Ricci/Einstein, stress-energy, or continuum GR promotion. Gate 1 now has a
+graph-level carrier-to-physics interpretation map for p2/p3/p5/p7, but physical
+covariance and filtered-colimit preservation remain open.
 
 The honest frontier claim is therefore deliberately weaker than a completed
 unification theorem: DASHI localizes which pieces are derived from carrier
@@ -866,18 +900,23 @@ F_{\mu\nu}=
 This is a target adapter, not a Maxwell or Yang-Mills closure. The residual
 obligations are carrier patches, local sections, transition maps, cocycle
 laws, oriented 0/1/2-cells, finite incidence, \(d_1d_0=0\), a nondegenerate
-curvature carrier, and field-equation witnesses.
+curvature carrier, Killing-form Ad-invariance for the selected nonabelian
+action, Hodge/covariant-derivative data, discrete variation/IBP, current/source
+coupling, and field-equation witnesses.
 
 **Corollary 9.5 (Why the abelian/nonabelian split has this target shape).** If the
 transport group is abelian, the plaquette defect is a boundary-of-boundary
 object: \(F=dA\), gauge change is \(A\mapsto A+d\lambda\), and the homogeneous
-law \(dF=0\) follows from \(d^2=0\). This is the DASHI route to an EM-shaped
-abelian sector. If the transport group is nonabelian, additive boundary
-calculus is not stable under composition; the commutator correction is the
-minimal local term that records the ordering defect, giving the
+law \(dF=0\) follows from \(d^2=0\). In the current route manifest, this
+`d^2=0` claim is an incidence/coefficient cancellation target and must not be
+collapsed into prime-lane commutativity alone. This is the DASHI route to an
+EM-shaped abelian sector. If the transport group is nonabelian, additive
+boundary calculus is not stable under composition; the commutator correction is
+the minimal local term that records the ordering defect, giving the
 Yang-Mills-shaped curvature \(F_A=dA+A\wedge A\). The field equations
 \(d{*F}=J\) and \(d_A{*F_A}=J\) are not obtained from this split alone; they
-require a Hodge/source/action adapter.
+require a Hodge/source/action adapter plus the nonabelian Killing-form and
+variation residuals.
 
 **Derivation Sketch 9.6 (Plaquette ordering motivates the Yang-Mills curvature target).**
 Let \(U_\mu(x)=\exp(\epsilon A_\mu(x))\) and
@@ -1328,7 +1367,7 @@ stronger physical claims.
 | Gate / lane | Current surface | First missing primitive / token | Unsupported stronger claim |
 |---|---|---|---|
 | Constructive physics-unification thesis | Carrier geometry with projection-defect structure, filtrations, lane actions, empirical receipts, and typed closure semantics | Completed empirical closure, accepted physical-lane authority, non-flat GR recovery, full unification receipts | Completed physics, completed physics unification, full downstream closure |
-| G2 | Direction-indexed SFGC schema adoption | Maxwell / curvature / field-equation carrier and promotion receipts | Maxwell closure, gauge-field recovery, physical curvature |
+| G2 / Route A | Direction-indexed SFGC schema adoption plus standalone prime-lattice `d^2=0` targets | Prime-lattice commutativity/boundary-of-boundary law as mechanized through incidence/coefficient witnesses, plus SFGC action bridge, curvature / field-equation carrier and promotion receipts | Maxwell closure, gauge-field recovery, physical curvature; abelian nilpotency alone is not field-equation promotion |
 | G3 | Selected finite-support subtraction support | Associated-graded quotient carrier, kernel-equivalence law, descended norm/product/bracket/isomorphism laws | Arbitrary operator support, global Schrodinger recovery, Galilei/Poincare closure |
 | G6 | Official tracked `GL.FactorVec` commuting route and above-threshold consumer | Migration or split of the old universal `LaneOperator` law | Old full `LaneOperator` promotion, universal cross-lane commuting |
 | E8/LILA | Integer-root completeness and local semantic boundary | Upstream `E8RootEnumerationComplete` constructor or promotion API | Upstream E8 completion, LILA physical closure |
@@ -1338,8 +1377,10 @@ stronger physical claims.
 | W5 | Parked / blocked downstream of accepted DY convention | Accepted W5 correction receipt for the intended observable/regime | W5 correction, CT18/LHAPDF agreement, DY convention closure |
 | DCHoTT bridge | `LeviCivitaBridge.agda` plus B0.1/B0.2/B0.3 sockets; DASHI-side B0.1 pro-object semantics | DCHoTT formal-D-space adapter; real-valued ultrametric completion; refinement-stable frame/metric tower; G-structure reduction; torsion-free/Levi-Civita specialization | Levi-Civita uniqueness, GR promotion |
 | AQFT net | `AQFTNetReceipt.agda`, `KleinGordonAQFTReceipt.agda`, and `AQFTCarrierAlgebraQuotientSurface.agda` target sockets | Constructive local algebra quotient, filtered colimit, Cauchy time-slice receipt, GNS/vacuum adapter, Born-rule derivation | Interacting QFT, Standard Model |
-| GRQFT / terminal boundary | Weak terminal grammar modulo explicit postulates; terminal promotion blocked | B0 plus AQFT net, DHR/SM comparison, continuum mass-gap authority, laneDimension, final adapter acceptance, stress-energy/Wald authority | Unqualified terminal GRQFT/TOE claim |
-| GR | Future adapter path from finite differences to non-flat connection and curvature | Prime-difference-to-Riemann adapter bundle, curvature carrier, Ricci contraction, sourced stress-energy interface | Riemann/Ricci/Einstein tensor, Schwarzschild, continuum GR, GRQFT |
+| GRQFT / terminal boundary | Weak terminal grammar modulo explicit postulates; terminal promotion blocked; DASHI-internal ST3/Banach mass-gap closure and conditional Moonshine `laneDimension` bridge recorded separately | B0 plus AQFT net, DHR/SM comparison, Clay/external mass-gap authority, `DASHIPrimeLaneEquiv`, final adapter acceptance, stress-energy/Wald authority | Unqualified terminal GRQFT/TOE claim |
+| Paper 3 finite/discrete route | Finite-support traversal/operator surfaces | Physical kernel equivalence, quotient Hilbert structure, Stone/self-adjoint evolution, continuum/AQFT authority | Hilbert/Stone/continuum QFT closure beyond physical finite-support claims |
+| YM / Route B | Nonabelian curvature-shape target \(F_A=dA+A\wedge A\) | Killing-form Ad-invariance, Hodge/covariant derivative, variation/IBP, current/source coupling, field-equation law | Yang-Mills field equation, Clay authority, physical gauge theory closure |
+| GR | Distinct future adapter path from finite differences to non-flat connection and curvature | Prime-difference-to-Riemann adapter bundle, non-flat Levi-Civita, curvature carrier, Ricci contraction, sourced stress-energy interface, continuum limit | Riemann/Ricci/Einstein tensor, Schwarzschild, continuum GR, GRQFT |
 | Cross-domain spine | Shared typed projection-defect / MDL schema `(X, delta, pi, defect, gate, observation, symmetry)` | Quantitative calibration, universality, tractability, domain receipts, recovery equivalence | Chemistry closure, biology prediction, perception fit, TOE promotion |
 | Brain/DNA/synthetic lanes | Non-promoting theorem targets and calibration fixtures | Domain datasets, transition laws, inverse-projection proofs, ranking validation | fMRI validation, DNA blueprint, disease-gene validation, synthetic biology closure |
 | JMD / 15 SSP / Monster provenance | Carrier-background context | Typed theorem or receipt promoting the material into Paper 1 inventory | Monster closure, moonshine closure, provenance-as-proof |

@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.gate4-gr-manager.json",
+  "lane": "gate4-factorvec-gr",
+  "lane_claim": "Gate 4 manager: non-flat FactorVec GR metric/Ricci/Bianchi; may spawn up to six leaf workers",
+  "orchestrator_id": "gate4-gr-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.gate4-gr-manager.json",
+  "timestamp": "2026-05-19T10:59:15Z"
+}

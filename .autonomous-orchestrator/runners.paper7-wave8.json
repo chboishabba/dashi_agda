@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 4000,
+    "once": true,
+    "timeout_seconds": 4200
+  },
+  "runners": {
+    "paper7-wave8-gate12-manager": {
+      "claim": "Paper 7 wave8 Manager 1, Gate 1/2 Carrier-to-Physics plus S8. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, a targeted Agda validation result, an exact typed/compiler error naming the missing upstream inhabitant, or a named authority-boundary escalation. No roadmap-only output. Worker lanes: PhysicalCarrierCategory; PrimeLaneRepresentationSemantics; CarrierToPhysicsFunctorLaws; PrimeBumpCovarianceAndDepthNaturality; S8NatEnergyHamiltonian; S8GlobalSpectralBridge / SelfAdjointYangMillsHamiltonianOnCarrierQuotient. First resolve the DASHIState.Carrier / FactorVec adapter shape if still blocking. Promotion bits stay false unless upstream receipts are actually inhabited.",
+      "lane": "paper7-gate1-gate2-carrier-s8",
+      "parent": "paper7-root"
+    },
+    "paper7-wave8-gate3-manager": {
+      "claim": "Paper 7 wave8 Manager 2, Gate 3 Non-Abelian Yang-Mills. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, targeted Agda validation, exact typed/compiler blocker, or authority escalation. No roadmap-only output. Worker lanes: SU2LieAlgebra; SU3StructureConstants; SU3JacobiAllSlots including allSlotCoefficientAwareResidualArithmeticField; LieValuedFormsAndCurvature; BianchiAndHodge; YMActionIBPSource. First diagnostic: inspect SFGC shift edge / directed-edge schema before plaquette work. Route A/B separation must remain explicit.",
+      "lane": "paper7-gate3-yang-mills",
+      "parent": "paper7-root"
+    },
+    "paper7-wave8-gate4-manager": {
+      "claim": "Paper 7 wave8 Manager 3, Gate 4 Non-Flat FactorVec GR. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, targeted Agda validation, exact typed/compiler blocker, or authority escalation. No roadmap-only output. Worker lanes: GRCarrierScalarOperations; TimePrimeMetric; MetricNondegenerateSignature; InverseChristoffel; RiemannRicciEinstein; StressEnergyCompatibility. Do not claim continuum GR; continuum limit remains Authority.ContinuumGR. If CarrierFactorVecAdapter is missing, return the exact typed upstream blocker after attempting implementation.",
+      "lane": "paper7-gate4-factorvec-gr",
+      "parent": "paper7-root"
+    },
+    "paper7-wave8-gate5-manager": {
+      "claim": "Paper 7 wave8 Manager 4, Gate 5 Hilbert / Stone / Depth Limit. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, targeted Agda validation, exact typed/compiler blocker, or authority escalation. No roadmap-only output. Worker lanes: FixedDepthHilbertSpaces; DepthEmbeddings; TraversalUnitary; TraversalCompatibility; quotientInnerProductWellDefinedness / FilteredColimitHilbert; StoneGenerator. Primary open blocker: promote quotientInnerProductWellDefinedness from selected finite progress to a global physical witness, then acceptedHilbertCompletionField.",
+      "lane": "paper7-gate5-hilbert-stone",
+      "parent": "paper7-root"
+    },
+    "paper7-wave8-gate6-manager": {
+      "claim": "Paper 7 wave8 Manager 5, Gate 6 DHR / AQFT. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, targeted Agda validation, exact typed/compiler blocker, or authority escalation. No roadmap-only output. Worker lanes: ConcreteSectorConstructors; LocalizedEndomorphisms; IntertwinersTensorFusion; DualsAndFrobenius; BraidingHexagon; DRReconstructionBoundary. Immediate mechanical targets include p2ReImOrthogonal and primeSectorOrthogonal if still open; arbitrary-sector carrier predicate and global foreign-lane identity remain the main blockers. DR/Tannaka stays authority unless exact receipt is supplied.",
+      "lane": "paper7-gate6-dhr-aqft",
+      "parent": "paper7-root"
+    },
+    "paper7-wave8-gate78-manager": {
+      "claim": "Paper 7 wave8 Manager 6, Gate 7/8 Matter/Higgs/Yukawa/CKM plus Composition. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, targeted Agda validation, exact typed/compiler blocker, or authority escalation. No roadmap-only output. Worker lanes: MatterRepresentations; HiggsPotential; YukawaMatrices; YukawaSpectralField; CKMClosure; Paper7ReceiptComposition. Start Yukawa matrix completion from the current next typed entry, reported as y21 if still current. Gate 8 may compute blocked receipt state but must not set terminalClaimPromoted true unless all upstream receipts and authority boundaries are inhabited.",
+      "lane": "paper7-gate7-gate8-composition",
+      "parent": "paper7-root"
+    }
+  }
+}

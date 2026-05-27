@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.gate5-hilbert-manager.json",
+  "lane": "gate5-hilbert-stone",
+  "lane_claim": "Gate 5 manager: Hilbert depth embeddings/discrete Stone; may spawn up to six leaf workers",
+  "orchestrator_id": "gate5-hilbert-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.gate5-hilbert-manager.json",
+  "timestamp": "2026-05-19T10:59:15Z"
+}

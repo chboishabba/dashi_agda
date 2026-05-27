@@ -188,9 +188,11 @@ missingProviderIdentityAndDate
 ```
 
 The provider must state the luminosity convention for the W4 per-phi-star-bin
-`ell_i` vector, the internal diagonal convention consumed by the W4 adequacy
-formula, the electron/muon channel-combine convention, and the source binding
-for both the Z-window anchor and the below-Z anchor.
+`ell_i` vector and must bind the source luminosity as
+`L_int = 36.3 fb^-1` for CMS-SMP-20-003 / `ins2079374`. Do not substitute
+`137 fb^-1`. The provider must also state any real efficiency/acceptance model
+or accepted observable-conversion law; CMS-SMP-20-003 Table 2/3 and response
+matrix diagonals do not supply that central model.
 
 Provider/date fields are mandatory: provider identity, role/scope, contact or
 trace id, response date, and source citation or artifact retrieval date.
@@ -202,7 +204,7 @@ promotesW4 = false
 authorityTokenConstructedHere = false
 adequacyReceiptConstructedHere = false
 physicalCalibrationReceiptConstructedHere = false
-internalStrictInequalityDischarged = true
+internalStrictInequalityDischarged = false
 ```
 
 No W4 adequacy, physical calibration, matter/stress-energy interface, GR, or
@@ -219,16 +221,16 @@ missingW4ExternalAuthorityTokenConstructor
 missingTokenProducingPolicyHookForPublicCMSPaperAndHEPData
 ```
 
-The strict inequality `9566 > 9000` is discharged internally by
-`W4ResponseMatrixAcceptanceCandidateReceipt.scaledDecimalStrictGreaterThan9566over9000`.
-That witness is non-promoting. Even after a policy hook or constructor exists,
-W4 still requires the accepted per-bin luminosity vector, W4ZAdequacy consumer,
-diagonal/channel/anchor conventions, and provider/date metadata before any W4
-adequacy receipt can be considered.
+The old `9566 > 9000` diagonal-response arithmetic is rejected as W4 adequacy
+evidence because the source does not provide a central efficiency/acceptance
+model. Even after a policy hook or constructor exists, W4 still requires the
+accepted per-bin luminosity vector, W4ZAdequacy consumer, real
+efficiency/acceptance or conversion law, anchor conventions, and provider/date
+metadata before any W4 adequacy receipt can be considered.
 
-The diagonal-convention consumer may record local diagonal arithmetic and a
-non-promoting strict-inequality witness, but it does not alter the external
-authority blocker. Its authority before/after hook fields remain
+The diagonal-convention consumer may record local diagonal arithmetic only as a
+rejected diagnostic; it does not alter the external authority blocker. Its
+authority before/after hook fields remain
 `missingAcceptedDYLuminosityConventionAuthority`.
 
 Current audit result:

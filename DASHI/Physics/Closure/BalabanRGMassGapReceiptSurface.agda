@@ -11,10 +11,10 @@ open import Data.List.Base using (List; _∷_; [])
 ------------------------------------------------------------------------
 -- Balaban/Odusanya Yang-Mills mass-gap receipt intake.
 --
--- This module records the receipt chain that would inhabit the Yang-Mills
--- mass-gap obligation if the external Odusanya 2026 Balaban-RG proof is
--- accepted by the relevant mathematical authority.  It is deliberately an
--- intake surface, not a local DASHI theorem.
+-- This module records two separate receipts: external Yang-Mills mass-gap
+-- authority intake, and the DASHI-internal ST3 depth-recursion/Banach receipt.
+-- The local receipt is finite-depth/finite-carrier only, while continuum,
+-- Clay, journal, community, and terminal promotion remain explicitly false.
 
 data BalabanRGMassGapStatus : Set where
   externalClaimUnderReviewNoDASHIPromotion :
@@ -24,6 +24,9 @@ data BalabanRGMassGapStatus : Set where
     BalabanRGMassGapStatus
 
   dashiInternalContinuumClosedClayReviewPending :
+    BalabanRGMassGapStatus
+
+  verifiedFiniteCarrierOnlyContinuumClayOpen :
     BalabanRGMassGapStatus
 
 data ClayOfficialUnsolvedStatus : Set where
@@ -37,6 +40,13 @@ data OdusanyaClaimSeparateSubmission : Set where
 data ZenodoDissolutionAlternative : Set where
   zenodoDissolutionAlternative :
     ZenodoDissolutionAlternative
+
+data VerifiedMassGapAuthoritySourceStatus : Set where
+  cambridgeOpenEngageWorkingPreprintUnderReview :
+    VerifiedMassGapAuthoritySourceStatus
+
+  zenodoDissolutionAlternativeFiniteDiscreteLatticeCampaign :
+    VerifiedMassGapAuthoritySourceStatus
 
 data YangMillsMassGapClaimStage : Set where
   latticeTransferMatrixGap :
@@ -514,6 +524,129 @@ canonicalMassGapDepthIndexedVsContinuumStatus =
         ∷ []
     }
 
+record VerifiedMassGapAuthorityStatusReceipt : Setω where
+  field
+    cambridgeOpenEngageStatus :
+      VerifiedMassGapAuthoritySourceStatus
+
+    cambridgeOpenEngageStatus-v :
+      cambridgeOpenEngageStatus
+      ≡
+      cambridgeOpenEngageWorkingPreprintUnderReview
+
+    agawaItemsAreWorkingPreprintClaims :
+      Bool
+
+    agawaItemsAreWorkingPreprintClaimsIsTrue :
+      agawaItemsAreWorkingPreprintClaims ≡ true
+
+    agawaAuthorityAccepted :
+      Bool
+
+    agawaAuthorityAcceptedIsFalse :
+      agawaAuthorityAccepted ≡ false
+
+    zenodoDissolutionStatus :
+      VerifiedMassGapAuthoritySourceStatus
+
+    zenodoDissolutionStatus-v :
+      zenodoDissolutionStatus
+      ≡
+      zenodoDissolutionAlternativeFiniteDiscreteLatticeCampaign
+
+    zenodoDissolutionIsAlternativeCampaign :
+      Bool
+
+    zenodoDissolutionIsAlternativeCampaignIsTrue :
+      zenodoDissolutionIsAlternativeCampaign ≡ true
+
+    zenodoDissolutionContinuumClayAuthority :
+      Bool
+
+    zenodoDissolutionContinuumClayAuthorityIsFalse :
+      zenodoDissolutionContinuumClayAuthority ≡ false
+
+    localFiniteDepthCarrierGapAvailable :
+      Bool
+
+    localFiniteDepthCarrierGapAvailableIsTrue :
+      localFiniteDepthCarrierGapAvailable ≡ true
+
+    localFiniteDepthCarrierGapIsContinuumClayTheorem :
+      Bool
+
+    localFiniteDepthCarrierGapIsContinuumClayTheoremIsFalse :
+      localFiniteDepthCarrierGapIsContinuumClayTheorem ≡ false
+
+    continuumClayPromotion :
+      Bool
+
+    continuumClayPromotionIsFalse :
+      continuumClayPromotion ≡ false
+
+    terminalPromotion :
+      Bool
+
+    terminalPromotionIsFalse :
+      terminalPromotion ≡ false
+
+    verifiedStatusBoundary :
+      List String
+
+open VerifiedMassGapAuthorityStatusReceipt public
+
+canonicalVerifiedMassGapAuthorityStatusReceipt :
+  VerifiedMassGapAuthorityStatusReceipt
+canonicalVerifiedMassGapAuthorityStatusReceipt =
+  record
+    { cambridgeOpenEngageStatus =
+        cambridgeOpenEngageWorkingPreprintUnderReview
+    ; cambridgeOpenEngageStatus-v =
+        refl
+    ; agawaItemsAreWorkingPreprintClaims =
+        true
+    ; agawaItemsAreWorkingPreprintClaimsIsTrue =
+        refl
+    ; agawaAuthorityAccepted =
+        false
+    ; agawaAuthorityAcceptedIsFalse =
+        refl
+    ; zenodoDissolutionStatus =
+        zenodoDissolutionAlternativeFiniteDiscreteLatticeCampaign
+    ; zenodoDissolutionStatus-v =
+        refl
+    ; zenodoDissolutionIsAlternativeCampaign =
+        true
+    ; zenodoDissolutionIsAlternativeCampaignIsTrue =
+        refl
+    ; zenodoDissolutionContinuumClayAuthority =
+        false
+    ; zenodoDissolutionContinuumClayAuthorityIsFalse =
+        refl
+    ; localFiniteDepthCarrierGapAvailable =
+        true
+    ; localFiniteDepthCarrierGapAvailableIsTrue =
+        refl
+    ; localFiniteDepthCarrierGapIsContinuumClayTheorem =
+        false
+    ; localFiniteDepthCarrierGapIsContinuumClayTheoremIsFalse =
+        refl
+    ; continuumClayPromotion =
+        false
+    ; continuumClayPromotionIsFalse =
+        refl
+    ; terminalPromotion =
+        false
+    ; terminalPromotionIsFalse =
+        refl
+    ; verifiedStatusBoundary =
+        "Cambridge/Open Engage Agawa items are recorded only as working preprint claims under review"
+        ∷ "Zenodo dissolution is recorded only as an alternative campaign-style finite/discrete-lattice claim"
+        ∷ "local finite-depth finite-carrier spectral-gap receipts do not supply continuum or Clay authority"
+        ∷ "no terminal, continuum, Clay, journal, or community promotion is constructed here"
+        ∷ []
+    }
+
 record CandidateMassGapProofLineageReceipt
   (lineage0 : MassGapProofLineage)
   : Setω where
@@ -640,8 +773,8 @@ dissolutionCampaignLineageReceipt =
     ; perDepthReceiptAlreadyInhabited =
         false
     ; lineageBoundary =
-        "records dissolution-style alternatives as external candidate landscape"
-        ∷ "does not discharge DASHI mass-gap or Clay obligations"
+        "records Zenodo dissolution-style alternatives as campaign-style finite/discrete-lattice candidate landscape"
+        ∷ "does not discharge continuum, terminal, or Clay obligations"
         ∷ []
     }
 
@@ -1673,6 +1806,112 @@ canonicalAlternativeContinuumAuthorityReceiptSurface =
         ∷ []
     }
 
+record UniformBalabanOrAgawaIRFixedPointFailClosedReceipt : Setω where
+  field
+    authoritySurface :
+      AlternativeContinuumAuthorityReceiptSurface
+
+    haltName :
+      String
+
+    haltNameIsUniformBalabanOrAgawaIRFixedPoint :
+      haltName
+      ≡
+      "UniformBalaban-or-AgawaIRFixedPoint"
+
+    uniformBalabanAuthority :
+      AlternativeContinuumAuthorityReceipt UniformBalaban
+
+    agawaIRFixedPointAuthority :
+      AlternativeContinuumAuthorityReceipt AgawaIRFixedPoint
+
+    uniformBalabanTokenSupplied :
+      Bool
+
+    uniformBalabanTokenSuppliedIsFalse :
+      uniformBalabanTokenSupplied ≡ false
+
+    agawaIRFixedPointTokenSupplied :
+      Bool
+
+    agawaIRFixedPointTokenSuppliedIsFalse :
+      agawaIRFixedPointTokenSupplied ≡ false
+
+    acceptedContinuumAuthoritySupplied :
+      Bool
+
+    acceptedContinuumAuthoritySuppliedIsFalse :
+      acceptedContinuumAuthoritySupplied ≡ false
+
+    continuumMassGapProvedInDASHI :
+      Bool
+
+    continuumMassGapProvedInDASHIIsFalse :
+      continuumMassGapProvedInDASHI ≡ false
+
+    continuumClayMassGapPromoted :
+      Bool
+
+    continuumClayMassGapPromotedIsFalse :
+      continuumClayMassGapPromoted ≡ false
+
+    terminalPromotion :
+      Bool
+
+    terminalPromotionIsFalse :
+      terminalPromotion ≡ false
+
+    failClosedBoundary :
+      List String
+
+open UniformBalabanOrAgawaIRFixedPointFailClosedReceipt public
+
+canonicalUniformBalabanOrAgawaIRFixedPointFailClosedReceipt :
+  UniformBalabanOrAgawaIRFixedPointFailClosedReceipt
+canonicalUniformBalabanOrAgawaIRFixedPointFailClosedReceipt =
+  record
+    { authoritySurface =
+        canonicalAlternativeContinuumAuthorityReceiptSurface
+    ; haltName =
+        "UniformBalaban-or-AgawaIRFixedPoint"
+    ; haltNameIsUniformBalabanOrAgawaIRFixedPoint =
+        refl
+    ; uniformBalabanAuthority =
+        uniformBalabanAuthorityReceipt
+    ; agawaIRFixedPointAuthority =
+        agawaIRFixedPointAuthorityReceipt
+    ; uniformBalabanTokenSupplied =
+        false
+    ; uniformBalabanTokenSuppliedIsFalse =
+        refl
+    ; agawaIRFixedPointTokenSupplied =
+        false
+    ; agawaIRFixedPointTokenSuppliedIsFalse =
+        refl
+    ; acceptedContinuumAuthoritySupplied =
+        false
+    ; acceptedContinuumAuthoritySuppliedIsFalse =
+        refl
+    ; continuumMassGapProvedInDASHI =
+        false
+    ; continuumMassGapProvedInDASHIIsFalse =
+        refl
+    ; continuumClayMassGapPromoted =
+        false
+    ; continuumClayMassGapPromotedIsFalse =
+        refl
+    ; terminalPromotion =
+        false
+    ; terminalPromotionIsFalse =
+        refl
+    ; failClosedBoundary =
+        "UniformBalaban-or-AgawaIRFixedPoint is the exact l6 continuum authority halt"
+        ∷ "UniformBalaban requires an authority token for uniform continuum control and that token is not supplied"
+        ∷ "AgawaIRFixedPoint requires an authority token for fixed-point continuum control and that token is not supplied"
+        ∷ "No continuum DASHI proof, Clay promotion, or terminal promotion is derived from these candidate surfaces"
+        ∷ []
+    }
+
 record DASHIDepthRecursionContractionFlipCondition : Setω where
   field
     conditionName :
@@ -2121,11 +2360,17 @@ record ST3DepthRecursionMonotonicityReceipt : Setω where
     st3MonotonicityClosedIsTrue :
       st3MonotonicityClosed ≡ true
 
+    localFiniteCarrierSpectralGapReceipt :
+      Bool
+
+    localFiniteCarrierSpectralGapReceiptIsTrue :
+      localFiniteCarrierSpectralGapReceipt ≡ true
+
     continuumMassGapProvedInDASHI :
       Bool
 
-    continuumMassGapProvedInDASHIIsTrue :
-      continuumMassGapProvedInDASHI ≡ true
+    continuumMassGapProvedInDASHIIsFalse :
+      continuumMassGapProvedInDASHI ≡ false
 
     continuumClayMassGapPromoted :
       Bool
@@ -2204,9 +2449,13 @@ canonicalST3DepthRecursionMonotonicityReceipt =
         true
     ; st3MonotonicityClosedIsTrue =
         refl
-    ; continuumMassGapProvedInDASHI =
+    ; localFiniteCarrierSpectralGapReceipt =
         true
-    ; continuumMassGapProvedInDASHIIsTrue =
+    ; localFiniteCarrierSpectralGapReceiptIsTrue =
+        refl
+    ; continuumMassGapProvedInDASHI =
+        false
+    ; continuumMassGapProvedInDASHIIsFalse =
         refl
     ; continuumClayMassGapPromoted =
         false
@@ -2217,10 +2466,11 @@ canonicalST3DepthRecursionMonotonicityReceipt =
     ; clayReviewPendingIsTrue =
         refl
     ; receiptBoundary =
-        "ST3 closes the DASHI-internal depth-recursion monotonicity receipt under alpha in (0,e^-1/2), one-loop running coupling, A=N^2/(2(4pi)^2), and a_d=alpha^d"
+        "ST3 records a local finite-carrier depth-recursion monotonicity receipt under alpha in (0,e^-1/2), one-loop running coupling, A=N^2/(2(4pi)^2), and a_d=alpha^d"
         ∷ "The closed clauses are invariance R_d([epsilon0,M]) subset [epsilon0,M], contraction with K<1, and Banach fixed-point positivity Delta-star>=epsilon0>0"
         ∷ "The SU(3), alpha=1/2 lower-bound accounting is metadata only: epsilon0~=0.018 Lambda_QCD, about 6 MeV for Lambda_QCD~=332 MeV"
-        ∷ "continuumMassGapProvedInDASHI is true for this internal receipt"
+        ∷ "localFiniteCarrierSpectralGapReceipt is true for this finite-carrier receipt"
+        ∷ "continuumMassGapProvedInDASHI remains false"
         ∷ "continuumClayMassGapPromoted remains false and Clay review remains pending"
         ∷ []
     }
@@ -2679,8 +2929,14 @@ record BalabanRGMassGapReceiptSurface : Setω where
     alternativeContinuumAuthoritySurface :
       AlternativeContinuumAuthorityReceiptSurface
 
+    verifiedAuthorityStatus :
+      VerifiedMassGapAuthorityStatusReceipt
+
     dashiInternalDepthRecursionContractionCandidate :
       DASHIInternalDepthRecursionContractionCandidate
+
+    st3DepthRecursionMonotonicityReceipt :
+      ST3DepthRecursionMonotonicityReceipt
 
     candidateDisproofSurface :
       CandidateMassGapDisproofReceiptSurface
@@ -2728,6 +2984,30 @@ record BalabanRGMassGapReceiptSurface : Setω where
     finiteDepthMassGapPromotedIsTrue :
       finiteDepthMassGapPromoted ≡ true
 
+    localFiniteCarrierSpectralGapPromoted :
+      Bool
+
+    localFiniteCarrierSpectralGapPromotedIsTrue :
+      localFiniteCarrierSpectralGapPromoted ≡ true
+
+    continuumMassGapProvedInDASHI :
+      Bool
+
+    continuumMassGapProvedInDASHIIsFalse :
+      continuumMassGapProvedInDASHI ≡ false
+
+    continuumClayMassGapPromoted :
+      Bool
+
+    continuumClayMassGapPromotedIsFalse :
+      continuumClayMassGapPromoted ≡ false
+
+    clayReviewPending :
+      Bool
+
+    clayReviewPendingIsTrue :
+      clayReviewPending ≡ true
+
     continuumMassGapPromotedByDASHI :
       Bool
 
@@ -2754,7 +3034,7 @@ canonicalBalabanRGMassGapReceiptSurface :
 canonicalBalabanRGMassGapReceiptSurface =
   record
     { status =
-        finiteDepthPromotedContinuumOpen
+        verifiedFiniteCarrierOnlyContinuumClayOpen
     ; stages =
         canonicalYangMillsMassGapClaimStages
     ; stagesAreCanonical =
@@ -2785,8 +3065,12 @@ canonicalBalabanRGMassGapReceiptSurface =
         canonicalCompleteAgawaDASHIMassGapClosureChain
     ; alternativeContinuumAuthoritySurface =
         canonicalAlternativeContinuumAuthorityReceiptSurface
+    ; verifiedAuthorityStatus =
+        canonicalVerifiedMassGapAuthorityStatusReceipt
     ; dashiInternalDepthRecursionContractionCandidate =
         canonicalDASHIInternalDepthRecursionContractionCandidate
+    ; st3DepthRecursionMonotonicityReceipt =
+        canonicalST3DepthRecursionMonotonicityReceipt
     ; candidateDisproofSurface =
         canonicalCandidateMassGapDisproofReceiptSurface
     ; finiteDepthProObjectReceipt =
@@ -2815,6 +3099,22 @@ canonicalBalabanRGMassGapReceiptSurface =
         true
     ; finiteDepthMassGapPromotedIsTrue =
         refl
+    ; localFiniteCarrierSpectralGapPromoted =
+        true
+    ; localFiniteCarrierSpectralGapPromotedIsTrue =
+        refl
+    ; continuumMassGapProvedInDASHI =
+        false
+    ; continuumMassGapProvedInDASHIIsFalse =
+        refl
+    ; continuumClayMassGapPromoted =
+        false
+    ; continuumClayMassGapPromotedIsFalse =
+        refl
+    ; clayReviewPending =
+        true
+    ; clayReviewPendingIsTrue =
+        refl
     ; continuumMassGapPromotedByDASHI =
         false
     ; continuumMassGapPromotedByDASHIIsFalse =
@@ -2828,19 +3128,273 @@ canonicalBalabanRGMassGapReceiptSurface =
     ; receiptBoundary =
         "Finite-depth lattice mass-gap receipts are inhabited at every Nat-indexed lattice depth"
         ∷ "The depth-indexed pro-object receipt is promoted only as a finite-depth/pro-object surface"
-        ∷ "The quantifier exchange from forall d pointwise positivity to exists epsilon uniform positivity is recorded but not discharged"
+        ∷ "The historical quantifier-exchange receipt remains recorded as an open intake surface for older Balaban/Odusanya authority paths"
         ∷ "UniformBalaban and AgawaIRFixedPoint are alternative continuum authority receipts and remain non-Clay-promoting without an authority token"
+        ∷ "Cambridge/Open Engage Agawa items are working/preprint claims under review, not accepted authority"
+        ∷ "Zenodo dissolution is an alternative/campaign-style finite/discrete-lattice claim, not continuum Clay authority"
         ∷ "AgawaCompletionCriticalGapStatus records claimed stable IR fixed-point closure and claimed finite Gribov/Morse closure as Cambridge-preprint authority under review"
         ∷ "IntrinsicIrrelevantOperatorSuppression records the nonlocal effective action, L^-k tree suppression, g^2 ell^k loop correction, and asymptotic-freedom domination target"
         ∷ "AgawaStableIRFixedPointCompletion records transfer-matrix gap preservation from the lattice gap at the claimed nonlocal fixed point"
         ∷ "GeometricCompletenessGribovUnique records G4 prime-lane independence as the loop-homology spanning input and Gribov uniqueness as a Morse-theory claimed receipt"
         ∷ "CompleteAgawaDASHIMassGapClosureChain records LatticeGapReceipt times AgawaIRFixedPoint times GribovUnique to ContinuumMassGapReceipt with the Agawa IR point under review"
         ∷ "The DASHI-internal depth-recursion contraction candidate records the Agawa flow shape, one-loop coefficient receipt, and contraction condition, with candidateClayLevelProofNotAccepted true"
-        ∷ "The depth-recursion contraction proof still has an invariant-interval and monotonicity/order-control gap; this is the real remaining analytic obligation and is not solved here"
+        ∷ "The historical depth-recursion contraction candidate still records invariant-interval and monotonicity/order-control gap flags as false"
+        ∷ "The ST3DepthRecursionMonotonicityReceipt separately records the local finite-carrier monotonicity/Banach fixed-point receipt with invariance, K<1 contraction, and Delta-star>=epsilon0>0"
+        ∷ "SU(3), alpha=1/2 lower-bound accounting is recorded as metadata: epsilon0~=0.018 Lambda_QCD, about 6 MeV when Lambda_QCD~=332 MeV"
+        ∷ "localFiniteCarrierSpectralGapPromoted is true while continuumMassGapProvedInDASHI remains false"
         ∷ "Odusanya/Balaban RG, Agawa holonomy/nonlocal RG, and dissolution campaign entries remain external non-Clay-promoting lineages"
         ∷ "Agawa loop/holonomy/nonlocal terminology is mapped to DASHI depth, plaquette transport, defect, prime-lane cluster, pro-object gap, and gauge-invariant transport targets"
         ∷ "Gribov obstruction, IR slavery, and massless gluon/scaling classify gauge-fixed risks but do not disprove Agawa/DASHI in this receipt surface"
         ∷ "Balaban/Odusanya continuum material is recorded as external proof intake and obligation shape only"
-        ∷ "The continuum Clay Yang-Mills mass gap is not DASHI-promoted without an external Balaban master bound and accepted Odusanya authority"
+        ∷ "continuumClayMassGapPromoted remains false and Clay review remains pending"
         ∷ []
     }
+
+data U1MassGapAuthorityBoundaryKind : Set where
+  u1LocalFiniteCasimirGapEvidence :
+    U1MassGapAuthorityBoundaryKind
+
+  u1ConditionalPreprintAuthority :
+    U1MassGapAuthorityBoundaryKind
+
+  u1ContinuumClayAuthority :
+    U1MassGapAuthorityBoundaryKind
+
+canonicalU1MassGapAuthorityBoundaryKinds :
+  List U1MassGapAuthorityBoundaryKind
+canonicalU1MassGapAuthorityBoundaryKinds =
+  u1LocalFiniteCasimirGapEvidence
+  ∷ u1ConditionalPreprintAuthority
+  ∷ u1ContinuumClayAuthority
+  ∷ []
+
+record U1ConditionalPreprintAuthorityBoundary : Setω where
+  field
+    authorityKinds :
+      List U1MassGapAuthorityBoundaryKind
+
+    authorityKindsAreCanonical :
+      authorityKinds
+      ≡
+      canonicalU1MassGapAuthorityBoundaryKinds
+
+    localFiniteCasimirGapEvidenceAvailable :
+      Bool
+
+    localFiniteCasimirGapEvidenceAvailableIsTrue :
+      localFiniteCasimirGapEvidenceAvailable ≡ true
+
+    conditionalPreprintAuthorityUnderReview :
+      Bool
+
+    conditionalPreprintAuthorityUnderReviewIsTrue :
+      conditionalPreprintAuthorityUnderReview ≡ true
+
+    conditionalPreprintAuthorityAccepted :
+      Bool
+
+    conditionalPreprintAuthorityAcceptedIsFalse :
+      conditionalPreprintAuthorityAccepted ≡ false
+
+    preprintAuthorityPromotesContinuumClay :
+      Bool
+
+    preprintAuthorityPromotesContinuumClayIsFalse :
+      preprintAuthorityPromotesContinuumClay ≡ false
+
+    continuumClayAuthorityAccepted :
+      Bool
+
+    continuumClayAuthorityAcceptedIsFalse :
+      continuumClayAuthorityAccepted ≡ false
+
+    terminalPromotion :
+      Bool
+
+    terminalPromotionIsFalse :
+      terminalPromotion ≡ false
+
+    boundary :
+      List String
+
+open U1ConditionalPreprintAuthorityBoundary public
+
+canonicalU1ConditionalPreprintAuthorityBoundary :
+  U1ConditionalPreprintAuthorityBoundary
+canonicalU1ConditionalPreprintAuthorityBoundary =
+  record
+    { authorityKinds =
+        canonicalU1MassGapAuthorityBoundaryKinds
+    ; authorityKindsAreCanonical =
+        refl
+    ; localFiniteCasimirGapEvidenceAvailable =
+        true
+    ; localFiniteCasimirGapEvidenceAvailableIsTrue =
+        refl
+    ; conditionalPreprintAuthorityUnderReview =
+        true
+    ; conditionalPreprintAuthorityUnderReviewIsTrue =
+        refl
+    ; conditionalPreprintAuthorityAccepted =
+        false
+    ; conditionalPreprintAuthorityAcceptedIsFalse =
+        refl
+    ; preprintAuthorityPromotesContinuumClay =
+        false
+    ; preprintAuthorityPromotesContinuumClayIsFalse =
+        refl
+    ; continuumClayAuthorityAccepted =
+        false
+    ; continuumClayAuthorityAcceptedIsFalse =
+        refl
+    ; terminalPromotion =
+        false
+    ; terminalPromotionIsFalse =
+        refl
+    ; boundary =
+        "u1 distinguishes local finite Casimir-style gap evidence from external preprint authority"
+        ∷ "Cambridge/Open Engage and Agawa-style inputs remain conditional preprint authority under review"
+        ∷ "conditional preprint authority is not accepted continuum Clay authority"
+        ∷ "local finite-carrier spectral evidence does not promote the continuum Clay mass gap"
+        ∷ "terminal promotion remains false"
+        ∷ []
+    }
+
+u1ConditionalPreprintAuthorityDoesNotPromoteClay :
+  preprintAuthorityPromotesContinuumClay
+    canonicalU1ConditionalPreprintAuthorityBoundary
+  ≡
+  false
+u1ConditionalPreprintAuthorityDoesNotPromoteClay =
+  refl
+
+u1ConditionalPreprintAuthorityTerminalFalse :
+  terminalPromotion canonicalU1ConditionalPreprintAuthorityBoundary
+  ≡
+  false
+u1ConditionalPreprintAuthorityTerminalFalse =
+  refl
+
+------------------------------------------------------------------------
+-- u1 next-wave quotient/Hamiltonian authority boundary.
+--
+-- This receipt is intentionally authority-side only: the concrete quotient
+-- and Hamiltonian target shapes live in the Yang-Mills receipt surface, while
+-- this file records that neither local finite evidence nor preprint intake is
+-- accepted continuum authority.
+
+data U1GaugeOrbitHamiltonianAuthorityStatus : Set where
+  u1GaugeOrbitHamiltonianAuthorityFailClosed :
+    U1GaugeOrbitHamiltonianAuthorityStatus
+
+record U1GaugeOrbitHamiltonianAuthorityBoundaryReceipt : Setω where
+  field
+    status :
+      U1GaugeOrbitHamiltonianAuthorityStatus
+
+    conditionalPreprintAuthorityIsCanonical :
+      Bool
+
+    conditionalPreprintAuthorityIsCanonicalIsTrue :
+      conditionalPreprintAuthorityIsCanonical ≡ true
+
+    gaugeOrbitQuotientSurfaceStaged :
+      Bool
+
+    gaugeOrbitQuotientSurfaceStagedIsTrue :
+      gaugeOrbitQuotientSurfaceStaged ≡ true
+
+    hamiltonianShapeSurfaceStaged :
+      Bool
+
+    hamiltonianShapeSurfaceStagedIsTrue :
+      hamiltonianShapeSurfaceStaged ≡ true
+
+    hamiltonianSymmetryAttemptStaged :
+      Bool
+
+    hamiltonianSymmetryAttemptStagedIsTrue :
+      hamiltonianSymmetryAttemptStaged ≡ true
+
+    selfAdjointHamiltonianConstructed :
+      Bool
+
+    selfAdjointHamiltonianConstructedIsFalse :
+      selfAdjointHamiltonianConstructed ≡ false
+
+    uniformBalabanOrAgawaTokenAccepted :
+      Bool
+
+    uniformBalabanOrAgawaTokenAcceptedIsFalse :
+      uniformBalabanOrAgawaTokenAccepted ≡ false
+
+    continuumClayAuthorityAccepted :
+      Bool
+
+    continuumClayAuthorityAcceptedIsFalse :
+      continuumClayAuthorityAccepted ≡ false
+
+    continuumClayMassGapPromoted :
+      Bool
+
+    continuumClayMassGapPromotedIsFalse :
+      continuumClayMassGapPromoted ≡ false
+
+    authorityBoundary :
+      List String
+
+open U1GaugeOrbitHamiltonianAuthorityBoundaryReceipt public
+
+canonicalU1GaugeOrbitHamiltonianAuthorityBoundaryReceipt :
+  U1GaugeOrbitHamiltonianAuthorityBoundaryReceipt
+canonicalU1GaugeOrbitHamiltonianAuthorityBoundaryReceipt =
+  record
+    { status =
+        u1GaugeOrbitHamiltonianAuthorityFailClosed
+    ; conditionalPreprintAuthorityIsCanonical =
+        true
+    ; conditionalPreprintAuthorityIsCanonicalIsTrue =
+        refl
+    ; gaugeOrbitQuotientSurfaceStaged =
+        true
+    ; gaugeOrbitQuotientSurfaceStagedIsTrue =
+        refl
+    ; hamiltonianShapeSurfaceStaged =
+        true
+    ; hamiltonianShapeSurfaceStagedIsTrue =
+        refl
+    ; hamiltonianSymmetryAttemptStaged =
+        true
+    ; hamiltonianSymmetryAttemptStagedIsTrue =
+        refl
+    ; selfAdjointHamiltonianConstructed =
+        false
+    ; selfAdjointHamiltonianConstructedIsFalse =
+        refl
+    ; uniformBalabanOrAgawaTokenAccepted =
+        false
+    ; uniformBalabanOrAgawaTokenAcceptedIsFalse =
+        refl
+    ; continuumClayAuthorityAccepted =
+        false
+    ; continuumClayAuthorityAcceptedIsFalse =
+        refl
+    ; continuumClayMassGapPromoted =
+        false
+    ; continuumClayMassGapPromotedIsFalse =
+        refl
+    ; authorityBoundary =
+        "u1 next-wave authority boundary records gauge-orbit quotient and Hamiltonian surfaces as staged only"
+        ∷ "The Hamiltonian symmetry route does not supply the self-adjoint domain or Friedrichs extension"
+        ∷ "UniformBalaban-or-AgawaIRFixedPoint remains unaccepted as a continuum authority token"
+        ∷ "No continuum Clay mass-gap promotion follows from finite-carrier or preprint evidence"
+        ∷ []
+    }
+
+u1GaugeOrbitHamiltonianAuthorityKeepsClayFalse :
+  continuumClayMassGapPromoted
+    canonicalU1GaugeOrbitHamiltonianAuthorityBoundaryReceipt
+  ≡
+  false
+u1GaugeOrbitHamiltonianAuthorityKeepsClayFalse =
+  refl

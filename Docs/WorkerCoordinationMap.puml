@@ -40,7 +40,7 @@ package "Current P0 Blockers" {
   rectangle "W5 GR/QFT consumer\nowns roadmap W-GR / G4\nblocked on closure-promotion receipt" as W5 #fecaca
   rectangle "W6 ITIR / PNF\nblocked on runtime emission receipts\nand Hecke candidate-pool receipt" as W6 #fecaca
   rectangle "W8 origin receipt\nblocked on empirical adequacy bridge\nor external promoted status authority" as W8 #fecaca
-  rectangle "W9 cancellation-pressure seam\ncurrent route classes exhausted\nneeds pressure-compatible target acceptance" as W9 #fecaca
+  rectangle "W9 cancellation-pressure seam\nMDL seam route accepted\npressure adapter only; not terminal" as W9 #fef3c7
 }
 
 package "Provider Request Index" {
@@ -53,7 +53,7 @@ package "Roadmap To Publishable Claim" {
   rectangle "CompleteVerifiedPhysicsUnificationRoadmap\nG1..G7 future gates" as Roadmap #e0f2fe
   rectangle "G4 / W-GR\nGR curvature + GR-QFT completion\nowner: W5 / Maxwell" as G4 #fef3c7
   rectangle "G5 empirical validation\naccepted residual authority,\ncalibration, projection, comparison" as G5 #fecaca
-  rectangle "G6 cross-lane consistency\ncommuting theorem package\nnot yet represented by proof" as G6 #fecaca
+  rectangle "G6 cross-lane consistency\ntracked route promoted\nold LaneOperator full route blocked" as G6 #fef3c7
   rectangle "G7 publication audit\nclaims, proofs, receipts,\nreproducibility" as G7 #fecaca
 }
 
@@ -106,7 +106,7 @@ package "Sibling Evidence Inventory" {
 }
 
 package "Rules" {
-  rectangle "No-promotion boundary\nW3/W4/W5/W8 stay blocked until\naccepted external receipts exist" as NoPromotion #fee2e2
+  rectangle "No-promotion boundary\nW3/W4/W5/W8 need receipts;\nW9 terminal stays blocked" as NoPromotion #fee2e2
   rectangle "Validation rule\nrender diagrams + targeted Agda\nbefore widening checks" as RuleVerify #dcfce7
 }
 

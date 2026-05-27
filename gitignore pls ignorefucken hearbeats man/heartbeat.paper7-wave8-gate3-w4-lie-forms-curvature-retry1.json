@@ -1,0 +1,12 @@
+{
+  "agent_name": "docs-implement",
+  "blocker": null,
+  "child_pid": 2048270,
+  "current_step": "Root observed stale retry heartbeat: child PID and tmux window gone before terminal report.",
+  "exit_code": null,
+  "last_heartbeat": "2026-05-19T16:23:56Z",
+  "phase": "stalled",
+  "progress": null,
+  "skill": "long-running-development",
+  "state": 5
+}

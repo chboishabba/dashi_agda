@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-gate4-manager.json",
+  "lane": "paper7-gate4-factorvec-gr",
+  "lane_claim": "Paper 7 Gate 4 manager proof-blocker wave: attack nondegenerate p2-time FactorVec metric signature and Lorentzian inertia; may spawn up to six leaf workers",
+  "orchestrator_id": "paper7-gate4-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.paper7-gate4-manager.json",
+  "timestamp": "2026-05-19T11:51:02Z"
+}

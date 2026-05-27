@@ -1,0 +1,102 @@
+{
+  "active_checklist": "paper7-wave10/hard-symbol-manager",
+  "allocation_scorecard": {
+    "ambiguity": "medium",
+    "context_width": "medium",
+    "coupling_risk": "high",
+    "failure_cost": "high",
+    "latency_pressure": "low",
+    "lower_tier_failures": "0",
+    "reversibility": "medium"
+  },
+  "architecture": "complete",
+  "audit": "complete",
+  "child_heartbeat": {
+    "agent_name": "docs-implement",
+    "blocker": null,
+    "child_pid": 2228662,
+    "current_step": "Model-allocation note: no escalation needed yet; follow-up should stay on current tier unless repeated misses occur on Gate 4/W2 constraints.",
+    "exit_code": 0,
+    "last_heartbeat": "2026-05-19T17:24:44Z",
+    "phase": "done",
+    "progress": null,
+    "skill": "long-running-development",
+    "state": 0
+  },
+  "context": "ready",
+  "created_at_utc": "2026-05-19T17:19:17Z",
+  "current_agent": null,
+  "docs": "ready",
+  "external_reasoning": "off",
+  "fallback_model": "gpt-5.3-codex",
+  "lane": "paper7-wave10/hard-symbol-manager",
+  "lane_claim": "Paper 7 wave10 SECTION MANAGER. Enforce strict symbol-inhabitation contract for three leaf workers. Reject docs-only/audit/blocker-map/scaffold outputs. Do not spawn descendants except through AO runner/status files. Manager must inspect worker outputs, run or quote targeted validation, and report only inhabited symbol, exact typed failure, or authority boundary. Targets: NaturalP2ConvergencePromotionAuthorityToken, missingCovariantDerivativeExtendsSelectedExteriorDerivative, missingValuationEinsteinSourceCouplingLaw.",
+  "last_action": "long-running-development",
+  "last_cycle_finished_at": "2026-05-19T17:24:44Z",
+  "last_cycle_started_at": "2026-05-19T17:19:17Z",
+  "last_deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+  "last_escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+  "last_exit_code": 0,
+  "last_selected_model": "gpt-5.1-codex-max",
+  "last_task_stats": {
+    "agent_name": "docs-implement",
+    "allocation_scorecard": {
+      "ambiguity": "medium",
+      "context_width": "medium",
+      "coupling_risk": "high",
+      "failure_cost": "high",
+      "latency_pressure": "low",
+      "lower_tier_failures": "0",
+      "reversibility": "medium"
+    },
+    "dry_run": false,
+    "elapsed_seconds": 327.5,
+    "exit_code": 0,
+    "model_allocation": {
+      "deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+      "escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+      "fallback_model": "gpt-5.3-codex",
+      "reason": "Coding task is coupled or has already shown lower-tier trouble, so deep coding reasoning is warranted.",
+      "selected_model": "gpt-5.1-codex-max"
+    },
+    "output_lines": 11418,
+    "skill": "long-running-development",
+    "timed_out": false
+  },
+  "milestones_remaining": 1,
+  "model_allocation": {
+    "deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+    "escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+    "fallback_model": "gpt-5.3-codex",
+    "reason": "Coding task is coupled or has already shown lower-tier trouble, so deep coding reasoning is warranted.",
+    "selected_model": "gpt-5.1-codex-max"
+  },
+  "notes": "paper7 wave10 strict hard-symbol inhabitation: no docs-only, no blocker-map-only, no scaffold-only outputs",
+  "orchestrator_id": "paper7-wave10-mgr-hard-symbols",
+  "parent_orchestrator_id": null,
+  "phase": "implement",
+  "runsheet": [
+    {
+      "status": "done",
+      "task": "inspect manager + leaf status files and select one hard-symbol implementation target"
+    },
+    {
+      "status": "done",
+      "task": "implement gate3 local discharge: flat covariant-extension primitive recorded as discharged and next local Bianchi primitive advanced to Stokes/Jacobi"
+    },
+    {
+      "status": "done",
+      "task": "run targeted validation: timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda"
+    },
+    {
+      "status": "blocked",
+      "task": "NaturalP2ConvergencePromotionAuthorityToken remains authority-boundary blocked at constructorless definition site unless governance adds explicit constructor or non-postulated exact policy hook"
+    },
+    {
+      "status": "todo",
+      "task": "advance gate4 from Einstein-source coupling progress to an inhabited covariant-divergence compatibility law or return exact typed upstream interface boundary"
+    }
+  ],
+  "tests": "passing",
+  "updated_at_utc": "2026-05-19T17:23:51Z"
+}

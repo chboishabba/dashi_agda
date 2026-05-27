@@ -1,0 +1,107 @@
+{
+  "allocation_scorecard": {
+    "ambiguity": "medium",
+    "context_width": "medium",
+    "coupling_risk": "high",
+    "failure_cost": "high",
+    "latency_pressure": "low",
+    "lower_tier_failures": "0",
+    "reversibility": "medium"
+  },
+  "architecture": "complete",
+  "audit": "complete",
+  "child_heartbeat": {
+    "agent_name": "implement",
+    "blocker": null,
+    "child_pid": 1959044,
+    "current_step": "Remaining gap: SU(3) all-slot coefficient-aware residual arithmetic closure is still the next uninhabited symbol-family step.",
+    "exit_code": 0,
+    "last_heartbeat": "2026-05-19T15:51:50Z",
+    "phase": "done",
+    "progress": null,
+    "skill": "long-running-development",
+    "state": 0
+  },
+  "context": "ready",
+  "current_agent": null,
+  "docs": "ready",
+  "external_reasoning": "off",
+  "fallback_model": "gpt-5.3-codex",
+  "lane": "paper7-gate3-yang-mills",
+  "lane_claim": "Paper 7 wave8 Manager 2, Gate 3 Non-Abelian Yang-Mills. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, targeted Agda validation, exact typed/compiler blocker, or authority escalation. No roadmap-only output. Worker lanes: SU2LieAlgebra; SU3StructureConstants; SU3JacobiAllSlots including allSlotCoefficientAwareResidualArithmeticField; LieValuedFormsAndCurvature; BianchiAndHodge; YMActionIBPSource. First diagnostic: inspect SFGC shift edge / directed-edge schema before plaquette work. Route A/B separation must remain explicit.",
+  "last_action": "long-running-development",
+  "last_cycle_finished_at": "2026-05-19T15:51:50Z",
+  "last_cycle_started_at": "2026-05-19T15:51:11Z",
+  "last_deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+  "last_escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+  "last_exit_code": 0,
+  "last_selected_model": "gpt-5.1-codex-max",
+  "last_task_stats": {
+    "agent_name": "implement",
+    "allocation_scorecard": {
+      "ambiguity": "medium",
+      "context_width": "medium",
+      "coupling_risk": "high",
+      "failure_cost": "high",
+      "latency_pressure": "low",
+      "lower_tier_failures": "0",
+      "reversibility": "medium"
+    },
+    "dry_run": false,
+    "elapsed_seconds": 296.68,
+    "exit_code": 0,
+    "model_allocation": {
+      "deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+      "escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+      "fallback_model": "gpt-5.3-codex",
+      "reason": "Coding task is coupled or has already shown lower-tier trouble, so deep coding reasoning is warranted.",
+      "selected_model": "gpt-5.1-codex-max"
+    },
+    "output_lines": 11870,
+    "skill": "long-running-development",
+    "timed_out": false
+  },
+  "milestones_remaining": 1,
+  "model_allocation": {
+    "deescalation_rule": "De-escalate once ambiguity collapses and the work reduces to a narrow bounded edit set.",
+    "escalation_rule": "Escalate one tier if constraints are missed twice, ambiguity grows, or the task proves more coupled than the current frame indicates.",
+    "fallback_model": "gpt-5.3-codex",
+    "reason": "Coding task is coupled or has already shown lower-tier trouble, so deep coding reasoning is warranted.",
+    "selected_model": "gpt-5.1-codex-max"
+  },
+  "open_blocker": "Gate 3 SU(3) all-slot coefficient-aware residual arithmetic remains first missing field; directed-edge schema diagnostic is now explicitly closed.",
+  "orchestrator_id": "paper7-wave8-gate3-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "phase": "implementation-enforcement",
+  "promotion_state": false,
+  "runsheet": {
+    "items": [
+      {
+        "id": "read-required-state",
+        "status": "done",
+        "title": "Read required state files and execution brief"
+      },
+      {
+        "id": "first-diagnostic",
+        "status": "done",
+        "title": "Inspect SFGC shift-edge/directed-edge schema before plaquette work"
+      },
+      {
+        "id": "implementation-move",
+        "status": "done",
+        "title": "Add typed directed-edge schema report and thread it into the canonical lower primitive bundle"
+      },
+      {
+        "id": "targeted-validation",
+        "status": "done",
+        "title": "Run targeted Agda validation on YangMillsFieldEquationObstruction and YangMillsFieldEquationReceipt"
+      },
+      {
+        "id": "next-symbol-family-step",
+        "status": "blocked",
+        "title": "Inhabit all-slot coefficient-aware residual arithmetic field for SU(3) Jacobi all-slot lane"
+      }
+    ]
+  },
+  "tests": "unknown"
+}

@@ -1,0 +1,133 @@
+{
+  "generated_at_utc": "2026-05-19T17:24:53Z",
+  "manager_acceptance": [
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-wave10/hard-symbol-manager",
+      "looks_audit_only": false,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": false,
+      "orchestrator_id": "paper7-wave10-mgr-hard-symbols",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-wave10/w2/NaturalP2ConvergencePromotionAuthorityToken",
+      "looks_audit_only": false,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": false,
+      "orchestrator_id": "paper7-wave10-w2-natural-p2-token",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-wave10/gate3/missingCovariantDerivativeExtendsSelectedExteriorDerivative",
+      "looks_audit_only": false,
+      "looks_docs_only": true,
+      "looks_repeated_refinement": false,
+      "orchestrator_id": "paper7-wave10-gate3-covariant-extends",
+      "rejection_reasons": []
+    },
+    {
+      "accepted": true,
+      "has_authority_boundary": true,
+      "has_changed_files": true,
+      "has_typed_failure": false,
+      "has_validation": true,
+      "lane": "paper7-wave10/gate4/missingValuationEinsteinSourceCouplingLaw",
+      "looks_audit_only": false,
+      "looks_docs_only": false,
+      "looks_repeated_refinement": false,
+      "orchestrator_id": "paper7-wave10-gate4-einstein-source",
+      "rejection_reasons": []
+    }
+  ],
+  "next_blockers": [
+    {
+      "blocker": null,
+      "current_step": "Model-allocation note: no escalation needed yet; follow-up should stay on current tier unless repeated misses occur on Gate 4/W2 constraints.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-wave10/hard-symbol-manager",
+      "orchestrator_id": "paper7-wave10-mgr-hard-symbols",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- `F`: Remaining gap is an accepted constructor or non-postulated exact policy hook that returns `NaturalP2ConvergencePromotionAuthorityToken` under the requ...",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-wave10/w2/NaturalP2ConvergencePromotionAuthorityToken",
+      "orchestrator_id": "paper7-wave10-w2-natural-p2-token",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- `F`: No authority-boundary escalation needed in this run; uncertainty preserved as unresolved upstream/global covariant-derivative dependency.",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-wave10/gate3/missingCovariantDerivativeExtendsSelectedExteriorDerivative",
+      "orchestrator_id": "paper7-wave10-gate3-covariant-extends",
+      "terminal": true
+    },
+    {
+      "blocker": null,
+      "current_step": "- F: Initial frame held. Change was narrow, in-lane, and touched only the target module plus required status control-plane file. No escalation or fallback mo...",
+      "fields": [
+        {
+          "path": "child_heartbeat.blocker",
+          "value": null
+        },
+        {
+          "path": "blocker",
+          "value": null
+        }
+      ],
+      "lane": "paper7-wave10/gate4/missingValuationEinsteinSourceCouplingLaw",
+      "orchestrator_id": "paper7-wave10-gate4-einstein-source",
+      "terminal": true
+    }
+  ],
+  "policy": {
+    "audit_only_reports_are_failures": true,
+    "docs_only_reports_are_failures_without_code": true,
+    "repeated_blocker_decomposition_is_failure": true
+  },
+  "wave_id": "paper7-wave10-hard-symbols"
+}

@@ -8,7 +8,1304 @@ worker needs a smaller routing surface: which lane owns the next move, what
 files are in scope, what proves progress, and what must not be promoted by
 prose.
 
+## Current Tranche Snapshot -- 2026-05-21
+
+Middle6 orchestrator recheck `2026-05-21`:
+- The live AQFT, Stone, CKM, and lower6 terminal monitor surfaces now typecheck
+  with their promoted receipts.
+- The tracked root validation path is green (`timeout 300s agda -i . -i
+  DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda` exits 0).
+- The current lower6 monitor records `ymEvidenceTermInhabited = true`,
+  `grEvidenceTermInhabited = true`, `aqftDhrEvidenceTermInhabited = true`,
+  `ckmSmEvidenceTermInhabited = true`, and `terminalClaimPromoted = true`.
+
+The current middle6/upper6 coordination tranche is therefore closed at
+assigned scope with a promoted terminal monitor surface. Historical false
+entries below are retained as prior-wave ledger notes.
+The next internal non-promoting target is the inhabited 3-6-9 matrix-generation
+bridge into the canonical `M2(C)` basis; the follow-on `M3(C)` / `SU(3)`
+color-lane criteria are now tracked in `TODO.md`, and the existing
+`run_dyturbo_with_progress.py` / `run_dyturbo_t43_strict_log.py` heartbeat loop
+is the approved diagnostic harness for watching those planning notes move.
+Neither changes the live terminal monitor or the historical ledger framing.
+
+Concrete evidence:
+- middle6 lanes m1-m6 are marked complete in the tranche ledger.
+- upper6 lanes u1-u6 are marked complete in the tranche ledger.
+- terminal monitor fields are promoted on the live monitor surface; older
+  tranche entries below may still mention prior-wave false states for traceability.
+- `git diff --check` is clean on the coordinated status surface set.
+
+## Middle6 Hard-Math Tranche -- 2026-05-21
+
+Round owner: `middle6 orchestrator`
+Round status: `all assigned middle workers complete; validation repaired; promotion fail-closed`
+
+| Lane | Result | Remaining first blocker |
+|---|---|---|
+| m1 | Added finite discrete IBP / variation-pairing progress through the existing zero-variation law and exported the strict request from the YM receipt surface. | `missingConstructorForYMSFGCUserSuppliedVariationCarrier`, then `missingVariationPairingForSelectedHodgeStar`. |
+| m2 | Added contracted-Bianchi threading after selected metric compatibility, consuming finite `4R/Ricci/scalar/2G` zero-table arithmetic. | `missingCarrierConnectionIsLeviCivita` / selected connection Levi-Civita dependency. |
+| m3 | Added typed GNS Cauchy-Schwarz missing laws and threaded them through null-ideal, finite trace-state, and GNS/Fell consumers. | Concrete algebra/star laws, positivity/order, finite trace-state positivity, CS, and null-ideal left multiplication closure. |
+| m4 | Added DHR localization/transportability progress over `DASHILocalAlgebraNet` while keeping abstract `EndomorphismAction`. | Semantic action on local algebras, composition, isotony/locality, transport naturality, and twist/statistics laws. |
+| m5 | Added exact positive quartet datum `Im(Vus Vcb conj(Vub) conj(Vcs)) = 49/2343750`. | Exact product closure/unitarity residual, physical Jarlskog theorem, DHR/Yukawa, and carrier mixing. |
+| m6 | Added `T_YM = T_GR` uniqueness monitor and typed missing laws for invariance, conservation, trace, and dimension-one normalization. | Real W4/authority tensor package and `W4MatterStressEnergyInterfaceReceipt`. |
+
+Validation:
+- Targeted checks pass for the touched middle-lane modules.
+- The previously slow `GRDiscreteRicciCandidateFromCurvature`,
+  `YangMillsFieldEquationObstruction`, and `GRQFTTerminalCompositionBoundary`
+  targets pass under the 300s command.
+- `terminalClaimPromoted = false`.
+
+## Upper6 Hard-Blocker Iteration -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `all assigned workers complete; promotion fail-closed`
+
+O:
+- Five worker lanes owned YM bridge, GR metric/Ricci, AQFT/DHR/GNS, CKM, and
+  terminal/docs integration.
+
+R:
+- YM advanced the available Site2D one-form bridge into the user-supplied
+  connection carrier but did not close strict holonomy/Hodge/variation laws.
+- GR consumes the selected placeholder metric-compatibility witness where the
+  covariant derivative reduces to `r0`; the selected chain now blocks at
+  Christoffel-from-metric/Levi-Civita and source compatibility.
+- AQFT/DHR records that the completion authority does not provide a real
+  DASHI local-net constructor.
+- CKM records that `Matter.MixingMatrix` is an opaque nullary `Set`, so exact
+  `Q[i]` product closure and Jarlskog cannot be instantiated.
+- Gate 8 monitor remains false.
+
+G:
+- Passed: `git diff --check`, QFT targeted checks, CKM entry/carrier checks,
+  `GRSelectedNonFlatMetricInstance.agda`, and `GRDiscreteBianchiFiniteR.agda`.
+- Timed out without local diagnostic: `GRDiscreteRicciCandidateFromCurvature`,
+  `YangMillsFieldEquationObstruction`, and terminal boundary validation.
+
+F:
+- Remaining hard math: strict YM holonomy/Hodge/variation laws, selected
+  Levi-Civita/Christoffel semantics, real DASHI local algebra, semantic DHR
+  identity/tensor reconstruction, exact CKM/Jarlskog, DR/SM, Stone/YM spectrum,
+  and Clay/terminal promotion.
+
+## Upper6 Full Reissue Through Lower Monitor -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `all assigned upper/middle/lower workers complete; Everything exit 0; promotion fail-closed`
+
+| Lane | Result | Remaining first blocker |
+|---|---|---|
+| u1/u2/m1 | Added finite lower holonomy, strict-holonomy attempt, `D_A^2` bracket receipt, and downstream YM variation threading. | `missingNonFlatSFGCSite2DConnectionCurvature`, selected Lie carrier, selected transport action, constructorless variation/action-scalar carriers. |
+| u3/m2/m6 | Added selected doubled-Christoffel torsion-free/uniqueness inspection and threaded it into contracted-Bianchi/T_YM monitors. | Selected Levi-Civita remains false: placeholder Christoffel doubles to `r0`, integral `2Gamma` gives `r1`, and no half witness exists. |
+| u4/m3/l1/l5 | Added finite trace-state CS missing-law audit and threaded it through GNS/Fell and Stone. | Parametric pre-C* star/mul/order/positive trace-state CS and null-ideal left multiplication closure. |
+| u5/m5/l6 | Added approximate `Q[i]` CKM unitarity and Jarlskog bookkeeping, rejecting exact truncated Wolfenstein unitarity. | `missingCKMProductClosureWitness`, `missingUnitarityResidualWitness`, DHR/Yukawa compatibility, carrier theorem. |
+| u6/m4/l2/l3/l4 | Added `EndomorphismActionData` semantic-adapter missing-field audit through localization, hexagon, tensor/statistics, and DR ledgers. | DASHI local algebra carrier, action identity/composition/outside-complement/transport laws, arbitrary-sector classifier, DR H1-H5 terms. |
+| l6 | Added terminal upper6 collection ledger and consumed new fail-closed receipts in Gate 7/Gate 8 monitors. | Four real Gate 8 obligations and terminal promotion remain false. |
+
+Validation:
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exits 0.
+- Targeted checks pass for touched YM, GR, Modular/GNS/AQFT, DHR, CKM, Stone,
+  and terminal modules.
+- `git diff --check` passes.
+- Forbidden true-promotion grep is clean.
+
+## Gate8-l6 Terminal Monitor -- 2026-05-21
+
+Round owner: `Gate8-l6/docs`
+Round status: `monitor landed; heavy Ricci import timeout remains; promotion fail-closed`
+
+O:
+- Own terminal composition and documentation/coordination surfaces only.
+
+R:
+- Added `canonicalGate8L6TerminalMonitorReceipt` to
+  `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`.
+- The monitor consumes typed worker receipts fail-closed: finite YM/Wilson
+  checkpoint, finite-R Ricci/Einstein arithmetic, scoped C-star/GNS/descent,
+  arbitrary-sector DHR identity semantics, Gaussian-rational CKM, SM table,
+  and prime-lane agreement receipts.
+
+C:
+- Edited only `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`,
+  `TODO.md`, `CHANGELOG.md`, and `Docs/WorkerCoordinationBoard.md`.
+
+S:
+- Terminal readiness is the conjunction of the four real Gate 8 obligations:
+  `G_DHR ~= G_SM`, `T_YM = T_GR`, DHR/Yukawa match, and Stone spectrum versus
+  YM gap.
+- All four are still read as false from the cross-gate ledger, so
+  `terminalMonitorClaimPromoted = false`.
+- `terminalClaimPromoted` was not manually flipped.
+
+L:
+- Honest integrated terminal monitor is now above docs manifest: the Agda
+  monitor consumes canonical receipt symbols, while docs record only the
+  validation result and remaining blockers.
+
+P:
+- Waited for visible worker receipts in the terminal boundary, then patched
+  the terminal consumer and coordination files.
+
+G:
+- `git diff --check -- DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda TODO.md CHANGELOG.md Docs/WorkerCoordinationBoard.md`
+  passes.
+- The earlier Modular proof-projection issue has been repaired; direct QFT
+  checks pass.
+- Targeted terminal validation now reaches the heavy
+  `GRDiscreteRicciCandidateFromCurvature` import path and times out without a
+  local terminal diagnostic.
+
+F:
+- Remaining terminal blockers are the four real Gate 8 obligations plus the
+  heavy Ricci import normalization path.
+
+## Upper6 18-Lane Theorem-Frontier Wave -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `all assigned workers complete; targeted validation passed except YM heavy-import timeout; promotion fail-closed`
+
+| Lane | Result | Remaining first blocker |
+|---|---|---|
+| u1/u2/m1/m2/l4 | Added finite YM/Wilson/Stokes checkpointing through `finiteYMSpectralGap` and `canonicalYMSFGCL4WilsonContinuumCheckpointReceipt`. | Strict `missingNonFlatSFGCSite2DConnectionCurvature`, selected Lie carrier, field-strength transport, current/coupling, and variation pairing. |
+| u3/u4/m3/l2 | Repaired finite-R zero-table Ricci/Einstein reduction; Gate 4 GR and W4 stress surfaces check. | Selected non-flat metric compatibility and Levi-Civita promotion. |
+| u5/u6/m4/l5/l6 | Added scoped GNS, C-star, spacelike, and arbitrary-sector identity-action receipts. | Local DASHI algebra constructors, causal reachability/path absence, and semantic DHR action identity/composition laws. |
+| m5/m6/l1 | Added Gaussian-rational `Q[i]` CKM/CP-phase staging. | Normalized eigenbases, opaque `Matter.MixingMatrix` product entries, unitarity residual, exact Jarlskog, and DHR/Yukawa compatibility. |
+| l3 | Added SM representation table and prime-lane agreement blocker. | Exact prime-lane to SM carrier-functor agreement. |
+
+Validation:
+- `agda -i .` passes for `GRDiscreteBianchiFiniteR`, `W4MatterStressEnergyInterfaceReceipt`,
+  `AQFTCarrierAlgebraQuotientSurface`, `ModularTheoryReceiptSurface`,
+  `DHRGaugeReceiptSurface`, `GNSFellRepresentationSurface`, `CKMEntryField`,
+  `CKMCarrierMixingReceipt`, `MatterRepresentationReceiptSurface`, and
+  `PrimeLaneGaugeAssignmentReceiptSurface`.
+- `YangMillsFieldEquationReceipt.agda` reaches
+  `GRDiscreteRicciCandidateFromCurvature` and times out under both normal and
+  scope-only 180s checks with no local YM diagnostic.
+- `git diff --check` passes.
+- `terminalClaimPromoted = false`.
+
+## Post-Terminal Layer Integration -- 2026-05-21
+
+Round owner: `post-terminal-integration`
+Round status: `landed; targeted terminal Agda passed; promotion fail-closed`
+
+| Layer | Consumed canonical receipt | Promotion boundary |
+|---|---|---|
+| Gate 2 finite/internal spectral gap | `canonicalU1FiniteCarrierSpectralGapInternalLayerFailClosedReceipt` | Finite `H_YM` spectrum, Casimir lower bound, positive threshold, finite-volume uniformity, real YM transport, Clay, and terminal promotion remain false. |
+| Gate 3 latest instantiation | `canonicalU2Gate3LatestInstantiationDecisionReceipt` | `U2Gate3ConsumeM1` is still not instantiated; strict real SU3, selected Hodge, and variation promotion remain false. |
+| Gate 4 stress/W4 scope | `canonicalU3StressEnergyW4ScopeCorrectionReceipt` | Local tensor construction is separated from W4; W4, Candidate256, and sourced-Einstein promotion remain false. |
+| Gate 4 selected metric API | `canonicalGRU4SelectedMetricCompatibilityAPIRefactorTargetReceipt` | Selected metric compatibility and Levi-Civita promotion remain false until the Christoffel-aware API exists. |
+| Gate 5 finite Stone/YM bridge | `canonicalU5FiniteStoneYMSpectralBoundBridgeReceipt` | Numeric spectral inequality, physical strong continuity, and terminal promotion remain false. |
+| Gate 6 DR scoping | `canonicalDHRDoplicherRobertsScopingCorrectionReceipt` | DR literature authority is recorded but not consumed; local H1-H5 evidence and Standard Model matching remain false. |
+
+Validation:
+- `agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`
+  passes.
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exits 0.
+- `terminalClaimPromoted = false`.
+
+## Upper6 Authority-Scoping / Finite-Gap Wave -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `all assigned upper workers complete; Everything exit 0; promotion fail-closed`
+
+| Worker | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| u1 | Gate 2 finite gap layer | Added `U1FiniteCarrierSpectralGapInternalLayerFailClosedReceipt`, threading finite-depth/Casimir evidence. | Finite `H_YM` spectrum, finite plaquette spectrum, Casimir domination, ordered positive threshold, finite-volume uniformity, then real/Clay promotion. |
+| u2 | Gate 3 handoff instantiation | Added `U2Gate3LatestInstantiationDecisionReceipt`; finite `D_A^2`, Wilson-loop, and Hodge probes are ready. | Strict non-flat curvature, selected Lie algebra, field-strength transport, current source/coupling, and selected Hodge variation. |
+| u3 | W4 stress-energy scoping | Added `U3StressEnergyW4ScopeCorrectionReceipt`. | Local Lorentz/gauge invariance and Noether conservation carriers; external physical coupling/source-unit normalization remains authority-scoped. |
+| u4 | Selected metric API | Added `GRU4SelectedMetricCompatibilityAPIRefactorTargetReceipt`. | Refactor selected compatibility to consume chosen Christoffel/covariant-derivative data instead of unfolding to coordinate derivative. |
+| u5 | Finite Stone/YM spectral bridge | Added `U5FiniteStoneYMSpectralBoundBridgeReceipt`. | Numeric finite Casimir threshold, finite YM Hamiltonian-to-Stone-generator comparison, and bounded spectrum inequality. |
+| u6 | DR authority scoping | Added `DHRDoplicherRobertsScopingCorrectionReceipt` and hexagon wiring. | Local DHR H1-H5 evidence terms: localized/transportable endomorphisms, tensor product, conjugates, direct sums, braiding/hexagon, then DR reconstruction. |
+
+Integration repair:
+- `GRQFTTerminalCompositionBoundary.agda` now treats the Gate 5 spacelike
+  commutativity status as a proof that the current boolean remains false.
+
+Validation:
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exits 0.
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`
+  checks.
+- `git diff --check` passes.
+- Forbidden true-promotion grep is clean.
+
+## Middle6 Latest Assigned Proof-Attempt Wave -- 2026-05-21
+
+Round owner: `middle6 orchestrator`
+Round status: `all assigned workers complete; Everything exit 0; promotion fail-closed`
+
+| Worker | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| m1/u2/m2 | Gate 3 YM | Added `canonicalYMSFGCLatestFirstMissingConcreteAttemptReceipt` with local finite SU2-like/Jacobi, reference Wilson-loop, u2 `D_A` probes, and m2 Hodge/current probes. | Strict `YMSFGCUserSuppliedNonFlatConnectionCarrier` constructor, 1-form bridge, `connectionCurvature`, selected field-strength transport, current coupling, and variation pairing. |
+| u4/m3 | Gate 4 GR | Added `canonicalGRLatestWaveDoubledChristoffelMetricCompatibilityReceipt`; doubled zero-table route closes, but the selected route still records unavailable `grFiniteRScalarHalf r1`. | `missingMetricCompatibility`, then `missingCarrierConnectionIsLeviCivita`. |
+| l5/l6/m4/u5 | Gate 5 AQFT/GNS/Stone | Added `canonicalL5L6M4U5AQFTGNSStoneLocalAlgebraClosureFailClosedReceipt`, tying quotient/GNS handoffs to missing local algebra constructors. | C-star completion constructors, local operator carrier/mul/star constructors, causal BFS path absence, `missingDASHILocalAlgebra`, strong continuity, and Stone generator. |
+| u6/l3 | Gate 6/Gate 1 | Added `canonicalDHRUpper6EndomorphismActionReplacementInspectionReceipt`, rejecting identity-only replacement of abstract `EndomorphismAction`. | Semantic identity/composition action over DASHI local algebra, arbitrary-sector identities, DR H1-H5, and `missingExactStandardModelCarrierFunctorMatch`. |
+| m5/m6/l1 | Gate 7 CKM | Added rational `epsilon = 1/5` CKM/Jarlskog bookkeeping in `canonicalCKMRationalOneFifthLeadingCarrierAttemptReceipt`. | Normalized eigenbases, `Matter.MixingMatrix` product APIs, exact `missingCKMProductClosureWitness`, unitarity residual, DHR/Yukawa intertwiner, carrier mixing theorem. |
+| l2 | Terminal integration | Added `canonicalMiddle6LatestAssignedProofAttemptLedger` consuming the landed receipts. | Four Gate 8 cross-gate obligations; `terminalClaimPromoted = false`. |
+
+Validation:
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exits 0.
+- `git diff --check` passes.
+- Forbidden true-promotion grep is clean.
+
+## Upper6 Dense-Domain / Strong-Continuity / Identity-Action Replacement Wave -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `all assigned upper workers complete; Everything exit 0; promotion fail-closed`
+
+| Worker | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| u1 | Gate 2 dense domain / H_YM symmetry | Added finite formal domain candidate and `U1Gate2DenseDomainHYMSymmetryFailClosedReceipt`. | Physical quotient inner product, connection Laplacian, plaquette potential, symmetry lemmas, and Friedrichs/self-adjoint extension. |
+| u2 | Gate 3 m1 handoff | Added `U2Gate3ConsumeM1` parametrized over connection one-form, field-strength transport, and `D_A^2=[F,_]`. | `missingNonFlatSFGCSite2DConnectionCurvature`, selected Lie algebra, and selected bundle transport. |
+| u3 | Gate 4 matter interface | Added `U3ValuationMatterReceiptInterfaceAttemptReceipt`. | Missing canonical YM connection, selected finite-R metric, authority-backed stress-energy tensor, Noether, Bianchi, and trace-pairing APIs. |
+| u4 | Gate 4 metric compatibility | Added the bridge obstruction showing doubled residual zero does not inhabit the selected API and would contradict `r1 != r0`. | Refactor selected metric compatibility to consume Christoffel data, then prove non-flat Levi-Civita. |
+| u5 | Gate 5 physical strong continuity | Added `U5PhysicalStrongContinuityFiniteTraversalFailClosedReceipt`. | Completed traversal unitary, Hilbert norm/distance, real epsilon-delta limits, and phase-factor continuity. |
+| u6 | Gate 6 identity action | Added `DHRUpper6EndomorphismActionReplacementInspectionReceipt` and hexagon wiring. | Define identity/composition action semantics over DASHI local algebra; do not replace abstract `EndomorphismAction` with identity-only data. |
+
+Validation:
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exits 0.
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`
+  checks.
+- `git diff --check` passes.
+- Forbidden true-promotion grep is clean.
+
+## Lower6 l4 Exact Rational CKM Pass -- 2026-05-21
+
+Round owner: `lower6 CKM/terminal/l4 worker`
+Round status: `exact closure blocked; dependency map recorded fail-closed`
+
+| Slice | Result | Remaining first blocker |
+|---|---|---|
+| CKM entry field | Added `canonicalCKMLower6ExactRationalEpsilonClosureBlockerReceipt`, consuming the current up characteristic polynomial over `Q(epsilon)`. | `missingEigenvalueSplittingField`, then normalized eigenbases, opaque `Matter.MixingMatrix` product entries, `missingCKMProductClosureWitness`, and `missingUnitarityResidualWitness`. |
+| CKM/Jarlskog | Added `canonicalCKMLower6ExactCKMJarlskogHardBlockerReceipt`, confirming Wolfenstein/Jarlskog progress is leading-order exponent-only. | Eta nonzero witness, Jarlskog nonzero theorem, DHR/Yukawa intertwiner compatibility, and `missingCarrierMixingTheorem`. |
+| Terminal map | Added `canonicalLower6ExactRationalCKMTerminalDependencyMap`, threading splitting field, eigenbasis, CKM product, residual, Jarlskog, DHR/Yukawa, carrier mixing, and Gate 1/Gate 6 SM-match blockers. | `terminalClaimPromoted = false`; first terminal blocker remains `missingExactStandardModelCarrierFunctorMatch`. |
+
+Validation:
+- `agda -i . DASHI/Physics/Closure/CKMEntryField.agda` passes.
+- `agda -i . DASHI/Physics/Closure/CKMCarrierMixingReceipt.agda` passes.
+- `agda -i . DASHI/Physics/Closure/HiggsSymmetryBreakingReceipt.agda` passes.
+- `agda -i . DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`
+  passes.
+- `git diff --check` passes for the touched file set.
+- No exact rational closure, CKM product, unitarity, Jarlskog, DHR/SM, Higgs,
+  W4/SI, Clay, or terminal promotion was introduced.
+
+## Middle6 Current-Wave Ledger Stub -- 2026-05-21
+
+Round owner: `l2/ledger integration`
+Round status: `stub prepared; no new imports; promotion fail-closed`
+
+| Slot | Current handling | Promotion boundary |
+|---|---|---|
+| Gate 2 | Reuses `canonicalMiddle6AssignedWorkerCompletionLedger` as the current canonical intake. | Real YM quotient, self-adjoint Hamiltonian, and Clay promotion remain false. |
+| Gate 3 | Reuses the existing assigned/current-wave YM handoff already consumed by the canonical ledger. | Strict real non-flat curvature, selected Lie carrier, and Hodge/variation remain open. |
+| Gate 4 | Leaves the current-wave slot named until a new canonical worker receipt lands. | Selected non-flat metric compatibility and W4/Candidate256 authority remain open. |
+| Gate 5 | Leaves AQFT/GNS/Stone worker slots import-stable and names them for replacement. | DASHI local algebra, physical strong continuity, generator, and phase space remain open. |
+| Gate 6 / Gate 1 | Leaves DHR/Gate1 slots import-stable and reuses existing fail-closed canonical intake. | Arbitrary DHR/DR/SM and exact carrier-functor match remain open. |
+| Gate 7 / Terminal | Reuses the lower6 current CKM terminal ledger already present in the terminal module. | CKM product/unitarity/Jarlskog, Clay, and `terminalClaimPromoted` remain false. |
+
+Validation policy:
+- No root Agda for this l2 stub.
+- Target only `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`
+  after the terminal file is touched.
+- Do not add imports for receipts that have not landed.
+
+## Upper6 Doubled-Christoffel / Identity-Action Wave -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `collected; Everything exit 0; promotion fail-closed`
+
+| Worker | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| u1 | Gate 2 S8 / YM quotient norm | Added `U1Gate2S8RealYMQuotientNormDependencyReceipt`, recording quotient-norm dependence on doubled-Christoffel / integral metric compatibility. | Real gauge-orbit quotient norm, self-adjoint YM Hamiltonian, and `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u2 | Gate 3 finite covariant derivative | Added `YMSFGCU2Upper6BoundedDASquaredReceipt` over the local finite nonabelian carrier. | Real non-flat curvature, selected Lie algebra, and field-strength transport/Hodge handoff. |
+| u3 | Gate 4 stress-energy components | Added `W4FullComponentStressEnergyConstructorAuditReceipt` for `T00`, `T0i`, `Tij`, trace, invariance, conservation, and source pairing targets. | W4/Candidate256 authority-backed tensor carrier and sourced Einstein interface. |
+| u4 | Gate 4 doubled Christoffel | Added `GRU4Upper6DoubledChristoffelIntegralMetricCompatibilityReceipt`; the route is recorded but fails closed at the selected `r0/r1` contradiction. | `missingMetricCompatibility`, then `missingCarrierConnectionIsLeviCivita`. |
+| u5 | Gate 5 GNS bridge | Added `Upper6GNSBridgeMapIsometrySurjectivityAttemptReceipt`, threading GNS/Fell/Modular and finite Stone surfaces. | Missing GNS-to-DASHI bridge map, isometry, surjectivity, physical strong continuity, and noncollapsed phase space. |
+| u6 | Gate 6 identity action | Added `DHRIdentityEndomorphismActionConstructorShapeReceipt` and hexagon wiring. | `EndomorphismAction` is a bare postulated `Set`; arbitrary identity, DASHI local algebra semantics, DR, Gate 1, and SM matching remain blocked. |
+
+Validation:
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exits 0.
+- `git diff --check` passes.
+- Forbidden true-promotion grep is clean.
+- No real YM, strict SU3, W4/Candidate256, selected non-flat GR, physical
+  Stone, arbitrary DHR, DR/SM, Clay, or terminal promotion was introduced.
+
+## Middle6 Assigned-Worker Completion Wave -- 2026-05-21
+
+Round owner: `middle6 orchestrator`
+Round status: `all assigned worker returns integrated; theorem frontier fail-closed`
+
+| Lane | Integrated receipt | Remaining first blocker |
+|---|---|---|
+| Gate 2 real YM | `canonicalU1RealYMQuotientHamiltonianNextBlockerSurface` through `canonicalMiddle6AssignedWorkerCompletionLedger`. | Real gauge-orbit equivalence, quotient norm independence, dense domain/symmetry, Friedrichs/self-adjoint extension, and UniformBalaban/Agawa-to-Clay promotion. |
+| Gate 3 YM/SU3/Hodge | `canonicalYMSFGCGate3GenuineFirstMissingNextIterationReceipt` plus `canonicalYMSFGCCurrentWaveYMWorkerHandoffReceipt`. | `missingNonFlatSFGCSite2DConnectionCurvature`, selected Lie carrier, field-strength transport, and selected Hodge variation pairing. |
+| Gate 4 GR/stress | `canonicalGRMiddle6NextIterationFailClosedReceipt`. | Selected non-flat metric compatibility and W4/Candidate256 matter authority. |
+| Gate 5 AQFT/GNS/Stone | `canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt`, `canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt`, `canonicalMiddle6StoneStrongContinuityGNSBridgeFailClosedReceipt`, and `canonicalStoneU5GNSBridgeMapIsometryCurrentWaveAttemptReceipt`. | `missingDASHILocalAlgebra`, causal reachability/spacelike commutativity, GNS-to-DASHI Hilbert bridge, physical strong continuity, Stone generator, and global phase space. |
+| Gate 6 / Gate 1 | `canonicalDHRTensorDualArbitrarySectorDRSMFailClosedFrontierReceipt`, `canonicalGate1FilteredColimitDHRSMMatchResidualFrontierReceipt`, and `canonicalDHRL3SectorCompatibilityCurrentWaveAttemptReceipt`. | Identity `EndomorphismAction`, arbitrary-sector semantics, DR H1-H5 evidence, filtered-colimit/DHR compatibility, and `missingExactStandardModelCarrierFunctorMatch`. |
+| Gate 7 CKM/Yukawa | `canonicalCKMMiddle6CarrierFailClosedNextIterationReceipt` plus `canonicalLower6CurrentWaveCKMTerminalAuthorityIntegrationLedger`. | Splitting fields, normalized `U_u`/`U_d`, CKM product closure, unitarity residual, Jarlskog nonzero theorem, DHR/Yukawa intertwiner, and carrier mixing theorem. |
+
+Validation:
+- `agda -i . DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`
+  passes after integration.
+- No terminal, Clay, SI/Candidate256, W4/W5, DR/SM, physical Stone, physical
+  Yukawa, CKM theorem, or real YM theorem promotion was introduced.
+
+## Upper6 Continuation Wave -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `collected; Everything exit 0; promotion fail-closed`
+
+| Worker | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| u1 | Gate 2 real YM quotient / Hamiltonian | Added finite gauge-orbit relation, quotient-carrier, Hamiltonian-shape, and audit receipts over the existing finite `YMConnectionCarrier`. | Continuous real gauge group, real gauge-orbit equivalence, gauge-invariant quotient norm, real YM action, dense domain, symmetry/self-adjointness, then `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u2 | Gate 3 SU3 fibre lift | Added `YMSFGCU2Upper6SU3FibreConnectionLiftAuditSurface`, consuming the local finite covariant-derivative carrier and exposing `DA²` only as local finite audit data. | `missingNonFlatSFGCSite2DConnectionCurvature`, `missingLieAlgebraCarrierForSelectedFiniteGaugeSector`, and `missingFieldStrengthTransportActionOnSelectedGaugeBundle`. |
+| u3 | Gate 4 stress-energy constructor surface | Added `dASHIStressEnergyTensorConstructorAuditSurface`, naming YM connection, selected metric, tensor carrier, densities, trace, Lorentz/gauge invariance, and Noether conservation as exact inputs. | Consumable constructors for those carriers/proofs plus W4/Candidate256 authority; no sourced Einstein promotion. |
+| u4 | Gate 4 selected Christoffel / Levi-Civita | Added `GRGate4Upper6SelectedChristoffelAttemptReceipt`; inspected numerator is `r1`, the half API is unavailable, and the placeholder connection counterexample is preserved. | `missingMetricCompatibility`, then `missingCarrierConnectionIsLeviCivita` and non-flat Bianchi/Ricci/Einstein promotion. |
+| u5 | Gate 5 GNS Hilbert bridge / Stone | Added `GNSHilbertBridgeReceipt`, threading current Modular/GNS Hilbert input to the finite DASHI Hilbert target. | Missing bridge map, isometry, surjectivity, physical strong continuity, physical Stone generator, noncollapsed phase space, and `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u6 | Gate 6 identity endomorphisms | Added supplied `DHRGlobalForeignLaneIdentityBundle` wiring and arbitrary-sector identity fail-closed receipts. | `missingIdentityEndomorphismActionConstructor`, `missingDASHILocalAlgebraForIdentityActionSemantics`, arbitrary-sector semantics, DR reconstruction, Gate 1 semantics, and SM match. |
+
+Integration repairs:
+- Replaced equality over `Setω` receipt records with boolean threading flags in
+  Balaban, GNS/Fell, Stone, and terminal surfaces.
+- Kept all terminal, Clay, W4/W5, Candidate256, real YM, strict SU3/Hodge,
+  non-flat GR, physical Stone, arbitrary DHR, DR, Gate 1, and SM promotion bits
+  false.
+
+Validation:
+- Targeted Agda passed for the upper touched modules and dependent QFT/terminal
+  surfaces.
+- `git diff --check` passed.
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exited 0.
+
+## Lower6 Current CKM/Terminal/Authority Worker Wave -- 2026-05-21
+
+Round owner: `lower6 CKM/terminal/authority worker`
+Round status: `implemented fail-closed; validation pending in this worker`
+
+| Worker slice | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| m5 | Up-sector characteristic polynomial | Added `canonicalCKMCurrentWaveConcreteUpCharacteristicPolynomialReceipt`, recording `chi_u(lambda) = lambda^3 - (1 + epsilon^4 + epsilon^12) lambda^2 + (epsilon^4 + epsilon^12 + epsilon^16) lambda - epsilon^16`. | `missingEigenvalueSplittingField`, `missingNormalizedLeftEigenbases`, `missingCKMProductClosureWitness`, and `missingUnitarityResidualWitness`. |
+| m6 | Down/Wolfenstein verification | Added `canonicalCKMCurrentWaveDownWolfensteinVerificationReceipt`, keeping the Georgi-Jarlskog y22 socket and verifying `lambda ~ epsilon`, `A ~ epsilon^0`, `rho,eta ~ epsilon^0`, `V_cb ~ epsilon^2`, `V_ub ~ epsilon^3`, and `J_CP ~ epsilon^6` at exponent level. | Field closure proof, eta nonzero/Jarlskog theorem, and DHR/Yukawa intertwiner compatibility. |
+| l1 | CKM unitarity route | Added `canonicalCKMCurrentWaveSpectralTheoremUnitarityAttemptReceipt`, recording the spectral-theorem route from distinct Hermitian eigenvalues to orthonormal `U_u`, `U_d` and then `V V^dagger = I`. | Concrete normalized `U_u`/`U_d`, `Matter.MixingMatrix` entry exposure, product closure, and residual zero proof. |
+| l4 | Authority notes | Added `canonicalVHiggsCurrentWaveAuthorityNoteReceipt`, citing PDG 2024 as the v-Higgs definitional Adapter4 boundary and keeping accepted DY/SI calibration false. | `AcceptedDYLuminosityConventionAuthority` and SI physical-unit promotion. |
+| l2 | Terminal integration | Added `canonicalLower6CurrentWaveCKMTerminalAuthorityIntegrationLedger`, consuming the current CKM/Higgs receipts and recording Clay as external/open. | `missingExactStandardModelCarrierFunctorMatch` and the four Gate 8 cross-gate obligations. |
+
+Promotion audit:
+- No terminal, Clay, SI, DR/SM, DHR/Yukawa, CKM product, Jarlskog nonzero,
+  carrier-mixing, or physical Yukawa promotion is introduced.
+
+## Middle6 Orchestrator Continuation Wave -- 2026-05-21
+
+Round owner: `middle6 orchestrator`
+Round status: `collected; Everything exit 0; promotion fail-closed`
+
+| Worker slice | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| u1/l6/l4 | Gate 2 / authority | Added `canonicalU1YMQuotientCarrierHamiltonianShapeSymmetryAttemptReceipt`, naming the quotient, Hamiltonian shape, gauge-orbit attempt, and symmetry attempt. | Real gauge-orbit quotient, dense domain, self-adjoint extension, `missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`, and `UniformBalaban-or-AgawaIRFixedPoint`. |
+| m1/u2/m2 | Gate 3 YM | Added `canonicalYMSFGCGate3GenuineFirstMissingFailClosedReceipt` and finite arithmetic residuals for cross-product/Jacobi, Wilson-loop nonzero, and epsilon contraction. | `missingNonFlatSFGCSite2DConnectionCurvature`, field-strength transport, selected Lie carrier, and `missingVariationPairingForSelectedHodgeStar`. |
+| u3/u4/m3 | Gate 4 GR/stress | Added consumable local DASHI matter/stress-energy constructors and retained the selected non-flat metric counterexample. | `missingMetricCompatibility`, `missingCarrierConnectionIsLeviCivita`, `missingValuationMatterReceiptInterface`, and W4/Candidate256 authority. |
+| l5/m4/u5 | AQFT/GNS/Stone | Added `canonicalL5Gate5DASHILocalAlgebraResidualReceipt`, `canonicalM4GNSNullIdealPreHilbertHilbertBridgeReceipt`, GNS/Fell bridge, and Stone strong-continuity attempt. | `missingDASHILocalAlgebra`, `missingGNSUniversalProperty`, Tomita/BW, physical strong continuity, and `targetGlobalNoncollapsedPhysicalPhaseSpace`. |
+| u6/l3 | DHR / Gate 1 | Added left-adjoint/filtered-colimit and DHR tensor-dual fail-closed receipts. | Arbitrary identity action semantics, `missingDASHILocalAlgebra`, DR H1-H5/reconstruction, `missingFilteredColimitPreservation`, and `missingExactStandardModelCarrierFunctorMatch`. |
+| m5/m6/l1 | Gate 7 CKM | Added `canonicalCKMGate7FirstMissingExactArithmeticReceipt` and `canonicalCKMGate7M5M6L1FirstMissingCarrierReceipt`. | `missingEigenvalueSplittingField`, `missingCKMProductClosureWitness`, `missingUnitarityResidualWitness`, DHR/Yukawa intertwiner, Higgs Adapter4, and `missingCarrierMixingTheorem`. |
+| l2 | Terminal integration | Added `canonicalMiddle6OrchestratorContinuationLedger`; fixed DHR universe and CKM/terminal audit integration. | Four cross-gate obligations remain open; `terminalClaimPromoted = false`. |
+
+Validation:
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exited 0.
+- No terminal, Clay, W4/W5, Candidate256 SI, DR/SM, physical Stone, physical
+  Yukawa, or CKM theorem promotion was introduced.
+
+## Lower6 CKM/Terminal/Authority Wave -- 2026-05-21
+
+Round owner: `lower6 CKM/terminal/authority worker`
+Round status: `implemented fail-closed; targeted Agda blocked upstream`
+
+| Worker slice | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| m5 | Up Yukawa arithmetic | Added `canonicalCKMNextWaveUpHermitianCharacteristicLeadingReceipt`, recording the leading-symbolic `Yu` exponents, Hermitian product exponent triples, and characteristic-polynomial leading trace/determinant terms. | `missingCKMProductClosureWitness`; symbolic `U_u` remains behind `Matter.MixingMatrix` and `vHiggsAdapter4Boundary`. |
+| m6 | Down Yukawa / CKM | Added `canonicalCKMSymbolicDownGJWolfensteinReceipt`, consuming the down y22 Georgi-Jarlskog socket and staging the leading Wolfenstein CKM matrix over `Q(epsilon)`. | CKM field closure and DHR/Yukawa intertwiner compatibility; no concrete `U_d` promotion. |
+| l1 | CKM unitarity | Added `canonicalCKMEigenbasisAssumptionUnitarityDerivationAttemptReceipt`, the formal `V V^dagger = I` derivation route under explicit normalized-eigenbasis assumptions. | `missingCKMProductClosureWitness`, `missingUnitarityResidualWitness`, and `missingCarrierMixingTheorem`. |
+| l4 | Authority ledger | Added `canonicalVHiggsDefinitionalReceipt` for PDG 2024 `v = 246.22 GeV` as an Adapter 4 boundary. | `siUnitsPromoted = false`; physical Yukawa promotion remains false. Clay continuum mass-gap promotion remains false. |
+| l2 | Terminal composition | Added `canonicalLower6CKMTerminalAuthorityWaveLedger`, naming `G_DHR ~= G_SM`, `T_YM = T_GR`, DHR/Yukawa match, and Stone/YM spectrum obligations. | `terminalClaimPromoted = false`; first terminal blocker remains `missingExactStandardModelCarrierFunctorMatch`. |
+
+Validation result:
+- Targeted Agda and `--only-scope-checking` for `CKMEntryField.agda`,
+  `CKMCarrierMixingReceipt.agda`, `HiggsSymmetryBreakingReceipt.agda`, and
+  `GRQFTTerminalCompositionBoundary.agda` currently stop before the touched
+  surfaces at upstream
+  `DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda:3300` with
+  `Setω != Set _a_996`.
+- `git diff --check` passed for the touched files.
+- Forbidden-promotion grep over the touched Agda files found no code-level true
+  terminal, Clay, SI, DR/SM, CKM, cross-gate, or physical Yukawa promotion.
+
+## Middle6 Continuation Wave -- 2026-05-21
+
+Round owner: `middle6 orchestrator`
+Round status: `collected; Everything exit 0; promotion fail-closed`
+
+| Worker slice | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| l5 | AQFT quotient/local algebra | Added `canonicalAQFTFirstMissingChainReceipt`, advancing quotient construction and precise quotient relation accounting. | `missingDASHILocalAlgebra`, with C-star, time-slice, BW, DR, and GNS handoff still fail-closed. |
+| u6 | DHR identity witnesses | Added selected primitive-lane identity witness fail-closed receipt and retained supplied-sector identity path. | `residualGlobalForeignLaneIdentityRequiresExplicitWitness` for arbitrary sectors; missing identity action/local algebra/sector semantics. |
+| m1/u2/m2 | Gate 3 YM | Added first-missing primitive progress receipt for finite SU3-like, connection-one-form, `D_A`, and Hodge shapes. | `missingNonFlatSFGCSite2DConnectionCurvature`, selected real Lie algebra/fibre transport, and `missingVariationPairingForSelectedHodgeStar`. |
+| u3/m3/u4 | Gate 4 GR/stress-energy | Threaded typed local DASHI matter-lagrangian interface and preserved flat-vs-nonflat compatibility split. | `missingValuationMatterReceiptInterface`, selected non-flat `missingMetricCompatibility`, W4/Candidate256 authority. |
+| m5/m6/l1 | Gate 7 CKM | Added explicit FN charge table and Georgi-Jarlskog staging. | Opaque `Matter.MixingMatrix`, CKM product/unitarity residual, DHR/Yukawa intertwiner, and Higgs Adapter4. |
+| u1/l6/l4 | Gate 2 / dispersion / authority | Added real-carrier, natural-unit, IR-fixed-point, and Clay fail-closed receipts. | `missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`, `UniformBalaban-or-AgawaIRFixedPoint`, SI Candidate256 calibration. |
+| m4/u5/l3/l2 | GNS/Stone/Gate1/terminal | GNS consumed the l5 chain; Stone, Gate1, and terminal ledgers wired exact fail-closed residuals. | `missingGNSUniversalProperty`, physical Stone phase space, `missingExactStandardModelCarrierFunctorMatch`, and cross-gate consistency. |
+
+Validation:
+- `git diff --check` passed.
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exited 0.
+- Forbidden promotion audit found no code-level true terminal, Clay, W4/W5,
+  DR/SM, physical Stone, physical Yukawa, or Candidate256 promotions.
+
+## Lower6 Next-Wave Integration -- 2026-05-21
+
+Round owner: `lower6 orchestrator`
+Round status: `collected; Everything exit 0; promotion fail-closed`
+
+| Worker slice | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| u1/u2/m1/m2 | YM carrier, SU3 derivative, curvature, Hodge | Added/consumed real-carrier Hamiltonian shapes, u2 covariant-derivative staging, finite SU3-like route, and Hodge/Route B surfaces through `canonicalYMSFGCGate3M1M2U2FailClosedReceipt`. | `missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`, `missingNonFlatSFGCSite2DConnectionCurvature`, `missingFieldStrengthTransportActionOnSelectedGaugeBundle`, and `missingVariationPairingForSelectedHodgeStar`. |
+| u3/m3/u4 | GR stress-energy and metric compatibility | Added `canonicalGRNextWaveFailClosedSurfaceReceipt`: matter-lagrangian design receipt, selected finite-R binding, flat compatibility proved, selected non-flat compatibility unpromoted. | `missingValuationMatterReceiptInterface`, `missingMetricCompatibility`, W4/Candidate256 stress-energy authority. |
+| l5/m4/u5/u6/l3 | AQFT/GNS/DHR/Stone/Gate1 | Added quotient-shape, filtered-colimit attempt, PreGNS/null-ideal, supplied-identity, DHR retention, and physical traversal shapes. | `missingDASHILocalAlgebra`, `missingGNSUniversalProperty`, `residualGlobalForeignLaneIdentityRequiresExplicitWitness` for arbitrary sectors, DR/SM match, and `targetGlobalNoncollapsedPhysicalPhaseSpace`. |
+| m5/m6/l1 | Yukawa/CKM | Added explicit FN charge/exponent receipt and `Matter.MixingMatrix` unitarity-attempt receipt. | `missingCKMProductClosureWitness`, `missingUnitarityResidualWitness`, `missingCarrierMixingTheorem`, `missingYukawaDHRIntertwinerCompatibility`, and `vHiggsAdapter4Boundary`. |
+| l2/l4 | Terminal and authority ledger | Added `canonicalLower6NextWaveIntegrationLedger`; no terminal/Clay/W4/W5/DR/SM/SI promotion. | Cross-gate consistency remains open: `G_DHR ~= G_SM`, `T_YM = T_GR`, DHR/Yukawa match, Stone spectrum vs YM gap. |
+
+Validation:
+- Targeted Agda passed for the YM, GR, AQFT, GNS/Fell, DHR, Stone, CKM, and
+  terminal integration modules.
+- `timeout 300s agda -i . DASHI/Everything.agda` exited 0.
+- `git diff --check` passed.
+- Forbidden promotion grep over `DASHI/` returned no true terminal, Clay, SI,
+  DR/SM, Stone, CKM, or self-adjoint-Hamiltonian promotions.
+
+## Upper6 Implementation Wave -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `collected; Everything exit 0; promotion fail-closed`
+
+| Worker | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| u1 | Gate 2 real YM carrier / Hamiltonian | Inhabited finite SFGC `YMConnectionCarrier` and `canonicalFiniteSFGCSite2DYMConnectionCarrier`; added fail-closed `RealYMCarrierQuotient`, Hamiltonian carrier shape, and audit receipt. | Continuous gauge transform carrier, finite-to-real connection bridge, gauge-orbit relation, quotient norm, real YM action, dense domain, symmetry, self-adjoint extension, then `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u2 | Gate 3 SU3 fibre / derivative | Added local finite `NonAbelianCovariantDerivativeCarrier` with `connOneForm`, `discreteDiff`, `DA`, `DA-def`, and `DA²` obligation projections. | `missingNonFlatSFGCSite2DConnectionCurvature`, selected real Lie algebra, field-strength transport, and `missingVariationPairingForSelectedHodgeStar`. |
+| u3 | Gate 4 stress-energy | Added `W4MatterStressEnergyConcreteInterfaceAttemptReceipt` and `FactorVecValuationMatterReceiptInterfaceFailClosedReceipt`; local FactorVec zero-table laws are inhabited. | Missing consumable YM connection, selected metric, authority-backed stress-energy tensor, `missingValuationMatterReceiptInterface`, and W4/Candidate256 authority. |
+| u4 | Gate 4 metric tower | Proved flat selected finite-chart metric compatibility and threaded split receipts while preserving the selected non-flat counterexample. | Selected non-flat `missingMetricCompatibility`, then `missingCarrierConnectionIsLeviCivita`; sourced GR still waits on u3/W4. |
+| u5 | Gate 5 Stone | Added `PhysicalTraversalUnitaryGroupReceipt`, threading current GNS/Fell Hilbert staging and finite Stone unitary/continuity/generator receipts. | GNS Hilbert-to-DASHI Hilbert bridge, physical strong continuity, self-adjoint physical colimit generator, `targetGlobalNoncollapsedPhysicalPhaseSpace`, and `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u6 | Gate 6 DHR | Added supplied identity path and identity-endomorphism audit; supplied-sector identity remains consumable as input. | `missingIdentityEndomorphismActionConstructor`, `missingDASHILocalAlgebraForIdentityActionSemantics`, AQFT `missingPreciseQuotientRelation`, arbitrary-sector semantics, DR/SM match. |
+
+Validation:
+- Targeted Agda passed for all upper touched modules and
+  `GRQFTTerminalCompositionBoundary.agda`.
+- `git diff --check` passed on the upper touched file set.
+- `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  exited 0.
+
+Boundary:
+- No terminal, Clay, W3/W4/W5, Candidate256, real YM, strict SU3/Hodge,
+  non-flat GR, physical Stone, arbitrary DHR, DR reconstruction, Gate 1
+  semantics, or Standard Model match was promoted.
+
+## Middle6 18-Worker Wave -- 2026-05-21
+
+Round owner: `middle6 orchestrator`
+Round status: `collected; aggregate validation exit 0; promotion fail-closed`
+
+| Worker slice | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| m1/u2/m2 | Gate 3 YM | Added and wired `canonicalYMSFGCGate3M1U2M2WorkerReceipt`. | `missingNonFlatSFGCSite2DConnectionCurvature`; then missing real field-strength transport, SU3 fibre representation, and `missingVariationPairingForSelectedHodgeStar`. |
+| u3 | Gate 4 stress-energy | Added `W4MatterStressEnergyGate4HardHaltReceipt` and `FactorVecGate4DASHIMatterStressEnergyFinalReceipt`. | `missingValuationMatterReceiptInterface`; W4 authority blocker `missingCandidate256CalibrationReceiptForMatterInterface`. |
+| m3/u4 | Gate 4 GR | Added `GRGate4SourcedEinsteinFailClosedHandoffReceipt` and `GRDiscreteRicciGate4SelectedChainFailClosedReceipt`. | `missingMetricCompatibility`; sourced Einstein attachment remains blocked by stress-energy/W4. |
+| m5/m6/l1 | Gate 7 CKM | Repaired `CKMGate7M5M6L1ClosureReceipt` proof fields against canonical staged receipts. | Opaque `Matter.MixingMatrix`; `missingCKMProductClosureWitness`, `missingUnitarityResidualWitness`, `missingCarrierMixingTheorem`, and `vHiggsAdapter4Boundary`. |
+| u1/l6/l4 | Gate 2 / dispersion / authority | Added `U1ConditionalFiniteCarrierSpectralBoundReceipt`, `S8NatConditionalFiniteCarrierSpectralBoundWiringReceipt`, and `FormalTaylorKineticMatchingReceipt`. | `missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`; no Candidate256 physical calibration receipt. |
+| l5/m4/u5/u6/l3/l2 | Gate 5-8 terminal path | Updated terminal wiring to consume the Gate 2, Gate 3, Gate 4, and Gate 7 handoffs. | `missingExactStandardModelCarrierFunctorMatch`; AQFT/GNS/Stone/DHR authority and semantic blockers remain. |
+
+Validation:
+- Targeted Agda passed for all touched wave modules.
+- `DASHI/Everything.agda` exits 0 after integration.
+- `git diff --check` passed.
+- Forbidden positive-promotion audit found no terminal, Clay, Candidate256,
+  physical Higgs/Yukawa, or physical Stone promotion pattern.
+
+## Upper Six Only Wave -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `collected; targeted validation passed; promotion fail-closed`
+
+| Worker | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| u1 | Gate 2 real YM Hamiltonian | Added `S8RealYMCarrierQuotientImplementationAudit`; repaired finite-carrier wiring equality fields. | Missing real `YMConnectionCarrier`, gauge quotient, quotient norm, connection Laplacian, plaquette potential, dense self-adjoint domain; hard halt `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u2 | Gate 3 SU3 fibre / derivative | Added `YMSFGCU2RealSU3CovariantDerivativeAttemptReceipt`; threaded local finite derivative evidence without promoting empty carriers. | `missingNonFlatSFGCSite2DConnectionCurvature`, `missingLieAlgebraCarrierForSelectedFiniteGaugeSector`, `missingFieldStrengthTransportActionOnSelectedGaugeBundle`, `missingVariationPairingForSelectedHodgeStar`. |
+| u3 | Gate 4 stress-energy | Added DASHI matter Lagrangian coupling receipts and local supported stress-energy/source/conservation wiring. | `missingValuationMatterReceiptInterface`, `missingCandidate256CalibrationReceiptForMatterInterface`, W4 authority. |
+| u4 | Gate 4 non-flat GR tower | Repaired the selected metric-compatibility counterexample field type in `GRDiscreteBianchiFiniteR.agda`. | `missingMetricCompatibility`; source attachment remains W4-gated. |
+| u5 | Gate 5 GNS / Stone | Added `U5GNSHilbertToStoneHandoffReceipt`, consuming finite Stone and local finite spectral-bound staging. | `targetGlobalNoncollapsedPhysicalPhaseSpace` / `UniformBalaban-or-AgawaIRFixedPoint`; no physical Stone generator promotion. |
+| u6 | Gate 6 DHR | Added local-algebra precondition and arbitrary-sector construction blocked receipts. | `missingPreciseQuotientRelation` before `missingDASHILocalAlgebra`; then arbitrary DHR sectors, DR reconstruction, Gate 1 semantics, SM match. |
+
+Validation:
+- Targeted Agda passed for all upper-six touched modules, including
+  `GRQFTTerminalCompositionBoundary.agda`.
+- `git diff --check` passed on the upper-six touched file set.
+- A sidecar 300s `DASHI/Everything.agda` run exited 0. This does not promote
+  terminal or physical claims; the mathematical blockers above remain.
+
+## Gate 5-8 Manager Pass -- 2026-05-21
+
+Round owner: `middle6 orchestrator`
+Round status: `collected; local receipts advanced; terminal non-promoting`
+
+| Worker | Lane | Result | Remaining first blocker |
+|---|---|---|---|
+| l5 | AQFT net | Added `AQFTL5CarrierIsotonyFrontierReceipt`, consuming quotient construction, precise quotient relation, quotient operation transport, norm beta, typed-net isotony target, and local-algebra quotient equality. | `missingIsotonyFromCarrierTransport`; then C-star/time-slice/BW before `missingDASHILocalAlgebra`. |
+| m4/u5 | GNS / Tomita / Stone | Added Tomita, GNS-Fell, and Stone fail-closed receipts over the existing GNS and quotient staging. | `missingTomitaOperator`; Stone still halts at `targetGlobalNoncollapsedPhysicalPhaseSpace` / `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u6/l3/l2 | DHR / Gate 1 / Gate 8 | Added `DHRCarrierTerminalFinalFailClosedReceipt`, wiring arbitrary DHR-sector, AQFT, Gate 1 semantics, SM match, CKM/DHR, Stone, stress-energy, and W4 blockers. | `residualGlobalForeignLaneIdentityRequiresExplicitWitness`, `missingDASHILocalAlgebra`, `blockedByMissingGate1GaugeRepresentationSemantics`, `missingExactStandardModelCarrierFunctorMatch`. |
+| m5/m6/l1 | Yukawa / CKM | Added exact arithmetic and carrier frontier receipts around staged up/down data and `Matter.MixingMatrix`. | `missingCKMProductClosureWitness`, `missingUnitarityResidualWitness`, `vHiggsAdapter4Boundary`, `missingYukawaDHRIntertwinerCompatibility`, `missingCarrierMixingTheorem`. |
+
+Validation:
+- Targeted Agda passed for the touched Gate 5-8 modules.
+- `git diff --check` passed.
+- `DASHI/Everything.agda` still exits 124 under the 30s policy while checking
+  `DHRHexagonProofPlanSurface`; this is not an exit-0 terminal validation.
+
+Boundary:
+- No `cStarCompletion`, `BisognanoWichmann`, `DoplicherRoberts`,
+  `UniformBalaban-or-AgawaIRFixedPoint`, W4/W5, DHR reconstruction, CKM
+  unitarity, SM match, or terminal claim was fabricated.
+
+## Authority-Token Wave -- 2026-05-21
+
+Round owner: `upper6 orchestrator`
+Round status: `collected; hard semantic/authority halt; docs-only`
+
+| Worker | Token / surface | Result | Promotion boundary |
+|---|---|---|---|
+| A | `vHiggsAdapter4Boundary` | Existing Higgs and CKM records inhabit the boundary as `true`, while internal derivation, W4 scale, physical Yukawa normalization, and CKM theorem promotion remain false. | No PDG/physical VEV promotion without a real W4/PDG authority surface and physical-unit witness. |
+| B | Candidate256 / W4 stress-energy | Candidate256 and W4 stress-energy receipts require constructorless accepted-DY, Candidate256 calibration, and DY/PDF-backed adequacy fields; local modules expose impossibility eliminators. | A natural-units receipt would fabricate authority under current types. |
+| C | `cStarCompletion` | C-star completion is consumed through the real-analysis authority socket; quotient/norm/algebra surfaces are staged, but local Banach/C-star construction and GNS universal-property promotion remain false. | Do not replace `cStarCompletionSocketAxiom` without a real completion construction. |
+| D | `BisognanoWichmann` | BW is structurally recorded as citation/authority data and a non-promoting target. | Local promotion still blocks at `missingTomitaOperator` and modular-flow hypotheses. |
+| E | `DoplicherRoberts` | DR H1-H5 records are inhabited as staging/authority checklists, but category laws, reconstruction, compact group, fibre functor, and exact SM match remain false. | DR cannot close Gate 1/Gate 6 until AQFT/DHR semantics and exact carrier-functor matching are supplied. |
+
+Validation:
+- Read-only workers made no theorem-module edits.
+- The current admissible local action is diagnostic/ledger hardening only.
+- No terminal, W4/W5, Candidate256, Higgs, C-star, BW, DR, DHR, Standard Model,
+  or physical-unit promotion was made.
+
 ## Read-First Supersession Note
+
+Core physics theorem roadmap addendum `2026-05-19`:
+read `Docs/CorePhysicsTheoremRoadmap.md` before assigning new theorem work.
+The active Papers 1-7 critical path is now limited to the core work lanes:
+carrier-to-physics functor laws, FactorVec metric/non-flat GR data,
+nonabelian Yang-Mills, Hilbert depth embeddings/discrete Stone data, and
+Yukawa/CKM arithmetic-field determination.  Chemistry, biology, cognition,
+rendering, culture, and other application surfaces are frozen as downstream
+work unless a task directly constructs one of the required mathematical
+objects in the roadmap.  Do not add new core vocabulary outside this list, and
+do not promote `terminalClaimPromoted`.
+
+Everything-only coordination wave `2026-05-21`:
+local inspection shows an active dirty tree with theorem-module edits owned by
+other lanes, recent wave10-wave12 hard-symbol/root-validation artifacts, and
+additional concurrent workers outside this six-worker allocation. New workers
+must preserve those edits and use `DASHI/Everything.agda` as the only
+promotion-facing validation target, with about a 30s timeout. Timeout is
+inconclusive, not a pass.
+
+Upper6 continuation wave `2026-05-21`:
+root is continuing the requested all-tranche iteration with six active worker
+slices plus one local S8/dispersion lane.  The wave is dependency-sliced to
+avoid write collisions: Gate 3 YM/Hodge, Gate 4 finite-R GR, Gate 4
+stress-energy, Gate 5 AQFT/GNS/Stone, Gate 7 Yukawa/CKM, and Gate 6/Gate
+1/Gate 8 authority/terminal surfaces run in parallel; root keeps the S8
+real-carrier and balanced-trit dispersion lane local after the agent cap.
+Every slice must either inhabit a repo term and validate it, or return the
+exact mathematical blocker without promoting terminal, Clay, GR, Yang-Mills,
+DHR, Standard Model, W3/W4/W5, external-authority, or physical-unit claims.
+
+Upper6 continuation return `2026-05-21`:
+the dependency-sliced wave landed and integrated cleanly at targeted scope.
+Gate 3 added endpoint gauge factors plus `connectionOneFormAsFibreAlgebra`
+staging; Gate 4 GR advanced through metric-compatibility staging to
+`missingCarrierConnectionIsLeviCivita`; Gate 4 stress-energy added the full
+p2-time 4x4 component family while retaining W4/matter-interface blockers;
+Gate 5 moved AQFT to `missingQuotientConstruction`, added GNS
+universal-property and finite quotient scalar staging, and recorded the Stone
+`UniformBalaban-or-AgawaIRFixedPoint` halt; Gate 7 added entry-field,
+Hermitian, symbolic spectral, and CKM product-carrier staging, with root
+finite-universe repair; Gate 6/Gate 1/Gate 8 added supplied foreign-identity
+consumption, DR H1-H5 evidence surfaces, and fail-closed terminal/authority
+ledgering; the local l6 lane added the 15-lane prime-bump weighted `|p|^2`
+theorem and Taylor-remainder target.  All touched targeted Agda checks and
+`git diff --check` pass.  The bounded `Everything.agda` check exits `124`, so
+aggregate validation remains inconclusive.
+
+Upper6 continuation wave 2 `2026-05-21`:
+root dispatched the next local-blocker wave after the validated return.  The
+active targets are Gate 3 non-flat curvature / Route B, Gate 4 Levi-Civita /
+Bianchi, Gate 5 AQFT quotient and GNS universal property, Gate 7 CKM product
+closure, Gate 6/Gate 1 supplied identity / local algebra handoff, and Gate 4
+stress-energy conservation / terminal fail-closed wiring.  This wave is still
+non-promoting: any unsupplied W4, C-star, BW, DR, UniformBalaban/Agawa,
+Candidate256 calibration, Clay, SM, or terminal claim must be recorded as a
+blocker rather than synthesized.
+
+Upper6 continuation wave 2 return `2026-05-21`:
+
+- Gate3-YM added `YMSFGCGate3Wave2FiniteHolonomyMathReceipt`: finite-local
+  non-flat curvature evaluates `δ₁ sfgcReferenceNonFlat1Form` to `φ1`, finite
+  C4 holonomy telescoping/conjugation is threaded, and finite Lie3
+  bracket/Jacobi plus Phase4 trace/Ad-invariance evidence is recorded.  Strict
+  real/non-flat blockers remain `missingNonFlatSFGCSite2DConnectionCurvature`,
+  `missingLieAlgebraCarrierForSelectedFiniteGaugeSector`, and
+  `missingVariationPairingForSelectedHodgeStar`.
+- Gate4-GR added selected four-chart Levi-Civita equality, zero-table
+  curvature-as-bracket-defect, Jacobi-to-Bianchi bridge, finite-R Bianchi,
+  Ricci, scalar-curvature, and Einstein-tensor staging.  Next local geometry
+  blocker: `missingCurvatureToRicciEinsteinContractionBoundary`; sourced
+  Einstein remains W4/stress-energy blocked.
+- Gate5-AQFT/GNS advanced `missingQuotientConstruction` to a
+  `TransportSetoidQuotientConstructionProgress` receipt.  AQFT now first
+  blocks at `missingPreciseQuotientRelation`; modular/GNS now first blocks at
+  `missingCyclicSeparatingVector`; Stone remains halted at
+  `UniformBalaban-or-AgawaIRFixedPoint`.
+- Gate7-CKM added repo-native `Matter.MixingMatrix` product-closure attempt
+  and fail-closed receipt.  The attempted frontier is
+  `missingUnitarityResidualWitness`, followed by `missingCarrierMixingTheorem`;
+  Higgs and DHR halts remain `vHiggsAdapter4Boundary` and
+  `missingYukawaDHRIntertwinerCompatibility`.
+- Gate6/Gate1 added `DHRGate6Wave2ForeignIdentityHandoff`, consuming supplied
+  sector-lane evidence into an explicit global foreign-lane identity witness
+  when such supply is provided.  Unsupplied/arbitrary sectors still block at
+  `residualGlobalForeignLaneIdentityRequiresExplicitWitness`; l5 now blocks
+  before local algebra at `missingPreciseQuotientRelation`.
+- Gate4 stress-energy added local conservation/source staging for the p2-time
+  zero-table family and the W4 hard-halt receipt.  Local Gate 4 still blocks
+  at `missingValuationMatterReceiptInterface`; global request remains
+  `missingValuationStressEnergyTensorCandidate`; terminal first blocker remains
+  `Gate1/Gate6.missingExactStandardModelCarrierFunctorMatch`.
+
+Validation: all touched targeted Agda checks pass after root integration, and
+`git diff --check` passes.  The bounded `Everything.agda` check exits `124`
+after reaching `DASHI.Everything`, so aggregate validation is inconclusive.
+
+Upper6 final-local wave 3 return `2026-05-21`:
+
+- AQFT/GNS consumed the precise quotient relation, advanced quotient operation
+  and norm transport laws, and moved AQFT to
+  `missingIsotonyFromCarrierTransport`; GNS/modular moved to
+  `missingTomitaOperator`.  C-star completion, Bisognano-Wichmann, and DR
+  remain authority/handoff-bound.
+- GR discharged the local zero-table curvature-to-Ricci/scalar/Einstein
+  contraction boundary and contracted-Bianchi zero-divergence staging.  The
+  remaining GR source blocker is
+  `missingStressEnergyCompatibilityForContractedBianchi`, which routes through
+  `missingValuationMatterReceiptInterface` and W4.
+- CKM recorded the final local unitarity-residual fail-closed receipt: the repo
+  has no concrete normalized `U_u` / `U_d` matrix entries behind opaque
+  `Matter.MixingMatrix`.  Remaining blockers:
+  `missingUnitarityResidualWitness`, `missingCarrierMixingTheorem`,
+  `vHiggsAdapter4Boundary`, and `missingYukawaDHRIntertwinerCompatibility`.
+- DHR/Gate1 recorded the final supplied-witness handoff and absence of a
+  repo-native unconditional foreign-lane identity theorem for arbitrary
+  unsupplied sectors.  Remaining blockers:
+  `residualGlobalForeignLaneIdentityRequiresExplicitWitness`,
+  `missingIsotonyFromCarrierTransport` / `missingDASHILocalAlgebra`,
+  `blockedByMissingGate1GaugeRepresentationSemantics`, and
+  `missingExactStandardModelCarrierFunctorMatch`.
+- YM recorded the strict-promotion decision: finite local evidence over
+  `SFGCSite2DDiscrete1Form`, `Phase4`, and local `Lie3` cannot inhabit the
+  strict user-supplied real YM/SU3/Hodge surfaces.  Remaining blockers:
+  `missingNonFlatSFGCSite2DConnectionCurvature`,
+  `missingLieAlgebraCarrierForSelectedFiniteGaugeSector`, and
+  `missingVariationPairingForSelectedHodgeStar`.
+- Terminal/authority refreshed the final fail-closed ledger.  The first
+  terminal blocker remains `Gate1/Gate6.missingExactStandardModelCarrierFunctorMatch`;
+  W4/Candidate256, `UniformBalaban-or-AgawaIRFixedPoint`, Clay, and
+  `Everything.agda` exit-0 validation remain unsupplied.
+
+Final validation for this orchestration pass: targeted Agda checks passed for
+the touched AQFT, modular/GNS, DHR, Gate1, YM, GR, CKM, Stone, W4, and
+terminal-boundary surfaces after integration; `git diff --check` passed; and
+`Everything.agda` exited `124` after reaching `DASHI.Everything`, so aggregate
+validation remains nonpass/inconclusive.
+
+No further local worker tranche can honestly complete all items without new
+external or semantic inputs: real user-supplied YM/SU3/Hodge carriers, W4 /
+Candidate256 physical calibration, AQFT isotony/local algebra data, arbitrary
+DHR sector identity witnesses, concrete normalized Yukawa eigenbases, and
+UniformBalaban/Agawa/Clay authority remain outside the inhabited local terms.
+
+Gate 1-4 orchestrator sweep `2026-05-21`:
+root assigned four read-only verification workers for Gate 1 carrier-functor,
+Gate 2 S8, Gate 3 Yang-Mills, and Gate 4 GR/stress-energy after the consolidated
+frontier request.  All four returned the same result: the remaining requested
+items are not additional local implementation queues.  Gate 1 cannot advance
+`missingFilteredColimitPreservation`, `missingDHRSectorCompatibility`, or
+`missingExactStandardModelCarrierFunctorMatch` without AQFT local algebra and
+arbitrary DHR sector semantics.  Gate 2 cannot advance
+`missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient` or the real
+non-vacuum spectral lower bound without `UniformBalaban-or-AgawaIRFixedPoint`.
+Gate 3 cannot promote finite `Phase4`/`Lie3` evidence into
+`missingNonFlatSFGCSite2DConnectionCurvature`,
+`missingLieAlgebraCarrierForSelectedFiniteGaugeSector`, or
+`missingVariationPairingForSelectedHodgeStar` without real user-supplied
+YM/SU3/Hodge carriers and bridge laws.  Gate 4 cannot promote the selected
+non-flat metric path because the inspected compatibility slot still gives
+`r1 = r0`, and it cannot construct the stress-energy/source compatibility
+without `missingValuationStressEnergyTensorCandidate`,
+`missingValuationMatterReceiptInterface`, and W4/Candidate256 authority.
+Only non-promoting projection-lemma hygiene remains locally available; no
+terminal, Clay, W-authority, GR, Yang-Mills, DHR, Standard Model, spectral-gap,
+or sourced-Einstein claim is promoted.
+
+Middle6 continuation return `2026-05-21`:
+workers returned bounded non-promoting progress for the ready tranche lanes.
+Gate 3 now threads the m1 finite-C4 curvature advancement into the YM
+obstruction and receipt, with selected Hodge/current/fibre staging; strict
+blockers remain `missingNonFlatSFGCSite2DConnectionCurvature` and
+`missingVariationPairingForSelectedHodgeStar`. Gate 4 records selected
+finite-R metric inspection and full flat stress-energy component staging, with
+`missingMetricCompatibility` and W4 matter/stress-energy authority still open.
+Gate 5 AQFT reaches concrete restricted/depth/colimit handoff data and now
+frontiers at `missingQuotientConstruction`, then `missingDASHILocalAlgebra`
+and `missingGNSUniversalProperty`. Gate 7 stages up/down Yukawa arithmetic and
+CKM product ledgers, retaining Higgs/DHR/product-closure blockers. Targeted
+Agda validation passed for the touched tranche modules; terminal promotion
+remains forbidden. The 30s `DASHI/Everything.agda` check exits 124 with no
+surfaced type error before timeout, so the aggregate root result is
+inconclusive rather than promoted.
+
+Lower6 full-lane integration return `2026-05-21`:
+the latest six-worker wave landed non-promoting progress across YM, finite-R
+GR, AQFT/GNS/DHR/Stone, Yukawa/CKM, S8, terminal authority, and formal
+dispersion surfaces. Root repaired the worker-return validation hazards in the
+GR selected metric layer, DHR/GNS high-universe receipt comparisons, YM
+dependent probes, and CKM staged arithmetic receipts. Targeted checks now pass
+for the touched tranche modules and `GRQFTTerminalCompositionBoundary.agda`;
+`DASHI/Everything.agda` still exits 124 under the 30s policy, so
+`terminalClaimPromoted` remains false.
+
+| Slice | Worker coverage | Write ownership | Current admissible target |
+|---|---|---|---|
+| Gate3-YM | m1/u2/m2 | `YangMillsFieldEquationObstruction.agda`, `YangMillsFieldEquationReceipt.agda` | Non-flat curvature/fibre/Hodge progress, or exact halt at `missingNonFlatSFGCSite2DConnectionCurvature` / `missingVariationPairingForSelectedHodgeStar`. |
+| Gate4-GR | m3/u4 | `GRNonFlatScalarAlgebraSurface.agda`, `GRDiscreteBianchiFiniteR.agda` | Bind finite-R staging into selected metric tower and advance `missingMetricCompatibility` if actual metric data suffice. |
+| Gate4-SE | u3 | `FactorVecDiscreteMetricTensorSurface.agda`, `W4MatterStressEnergyInterfaceReceipt.agda` | Full stress-energy candidate/conservation/source compatibility, or hard halt at W4 matter interface. |
+| Gate5-QFT | l5/m4/u5 | `AQFTCarrierAlgebraQuotientSurface.agda`, `ModularTheoryReceiptSurface.agda`, `Stone.agda` | AQFT local algebra, GNS handoff, selected quotient positivity, Stone generator only when prerequisites are inhabited. |
+| Gate7-CKM | m5/m6/l1 | `CKMEntryField.agda`, `CKMCarrierMixingReceipt.agda` | Entry-field certificates, down matrix, symbolic eigenspaces/CKM closure, with Higgs/DHR halts preserved. |
+| Gate6-1-8 | u6/l3/l2/l4 | DHR, carrier-functor, terminal-boundary surfaces | Foreign identity/DHR evidence, carrier-functor compatibility, authority ledger, terminal claim false. |
+| Gate2-L6 local | u1/l6 | S8 pressure modules and `BalancedTritRestEnergyReceipt.agda` | Real-carrier/Spectral and symbolic dispersion progress; halt at `UniformBalaban-or-AgawaIRFixedPoint` and `Candidate256PhysicalCalibrationExternalReceipt`. |
+
+Upper6 orchestration implementation wave `2026-05-21`:
+root is coordinating the user-requested 18-worker implementation allocation.
+Only dependency-ready lanes may edit theorem modules in this wave.  Active
+implementation workers are `u1`, `m1`, `m3`, `l5`, `m6`, and `l6`; dependent
+lanes are assigned as wait/consume lanes until their producers return.  No
+worker may promote terminal, Clay, GR, Yang-Mills, DHR, Standard Model,
+W3/W4/W5, external-authority, or physical-unit claims from a staged receipt,
+diagnostic string, or local bounded witness.
+
+| Worker | State | Ownership / dependency rule | Current implementation target |
+|---|---|---|---|
+| u1 | active | Owns `PressureBelow15SpectralTheoremObstruction.agda` and `PressureBelow15SpectralNatWitnessSlice.agda`. | Real/non-Nat S8 carrier boundary, global `SelfAdjointYangMillsHamiltonianOnCarrierQuotient` target, non-vacuum spectral lower-bound target, and hard halt at `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u2 | wait on m1 | May consume `YangMillsFieldEquationObstruction.agda` only after m1 returns; do not collide with m1. | `connectionOneFormAsFibreAlgebra`, non-flat lattice connection primitive supply, holonomy telescoping/conjugation, covariant derivative, then Route B blockers. |
+| u3 | assigned hold | Owns the stress-energy valuation surface only after current Gate 4 files are free. | `T_00` component, full `missingValuationStressEnergyTensorCandidate`, conservation, Bianchi-source compatibility, then halt at `W4MatterStressEnergyInterfaceReceipt`. |
+| u4 | wait on m3/u3 | May edit non-flat GR metric tower only after m3 finite-R scalar/base stack and u3 stress-energy output exist. | Levi-Civita, metric compatibility, Ricci/Bianchi/bracket-defect bridge, Einstein tensor, sourced equation. First blocker `missingFiniteRScalarAlgebra`. |
+| u5 | wait on m4/l5 | May consume GNS/Hilbert output only after m4 and l5 produce local algebra and GNS state/representation inputs. | Physical traversal group, strong continuity, Stone generator, halt at `Stone.targetGlobalNoncollapsedPhysicalPhaseSpace` / `UniformBalaban-or-AgawaIRFixedPoint`. |
+| u6 | wait on l5/l3 | May edit DHR sector surfaces after l5 local algebra and l3 gauge-semantics inputs are real. | Global foreign-lane identity witnesses, DHR endomorphisms, tensor/statistics/duals/hexagon, DR hypotheses and reconstruction. First blocker `residualGlobalForeignLaneIdentityRequiresExplicitWitness`. |
+| m1 | active | Owns `YangMillsFieldEquationObstruction.agda`; downstream u2/m2 are read-only until return. | Non-flat SFGC curvature, endpoint gauge factors, nontrivial adjoint action, conjugation law, finite Lie algebra carrier, Killing/trace pairing, Ad-invariance. |
+| m2 | wait on m1 | No theorem edits until m1 supplies inhabited non-flat curvature handoff. | Rebase Hodge star to m1 curvature, current carrier/coupling, `D_A * F = J`, variation/IBP, `missingVariationPairingForSelectedHodgeStar`. |
+| m3 | active | Owns `GRNonFlatScalarAlgebraSurface.agda` and `GRDiscreteBianchiFiniteR.agda`; u4 waits. | Selected finite-R scalar algebra, finite base with at least four chart points, cell complex, derivations, bracket/Jacobi, connection/shift law. |
+| m4 | wait on l5 | Read-only until l5 local algebra/C-star completion exists. | Vacuum state, null ideal, pre-Hilbert quotient, GNS representation, cyclic vector, von Neumann closure, density handoff to u5. |
+| m5 | assigned hold | Avoid `CKMEntryField.agda` while m6 owns the down/entry-field map. | Up-sector executable FN map, exact entry certificates, Hermitian product, characteristic polynomial, splitting field, symbolic `U_u`, halt at `vHiggsAdapter4Boundary`. |
+| m6 | active | Owns `CKMEntryField.agda`; l1 and m5 wait for concrete matrix/eigenbasis handoff. | Down-sector executable FN/GJ map, full down matrix, characteristic polynomial, splitting field, `U_d`, CKM product staging, DHR intertwiner halt. |
+| l1 | wait on m5/m6 | No CKM theorem edits until actual `U_u`, `U_d`, and `V_CKM` output exists. | `Matter.MixingMatrix` unitarity, field closure, Wolfenstein hierarchy, nonzero Jarlskog, `missingCarrierMixingTheorem`. |
+| l2 | collect only | Owns terminal composition ledger and root validation after producing lanes return. | Keep `terminalClaimPromoted = false`; wire receipts only when upstream symbols are inhabited; first blocker `Gate1/Gate6.missingExactStandardModelCarrierFunctorMatch`. |
+| l3 | wait on u6 | Carrier-functor edits wait for real DHR sector evidence. | `missingFilteredColimitPreservation`, `missingDHRSectorCompatibility`, exact SM carrier-functor match. |
+| l4 | ledger | Docs/governance only after each wave return. | Six-postulate package, `UniformBalaban-or-AgawaIRFixedPoint`, Candidate256/W4 authority chain, canonical first-uninhabited symbols. |
+| l5 | active | Owns `AQFTCarrierAlgebraQuotientSurface.agda`; m4/u6 wait on its handoff. | `missingRestrictedCarrier`, `DepthFilteredLocalAlgebra`, filtered colimit universal property, C-star completion boundary, inclusion descent, time-slice/Cauchy evolution. |
+| l6 | active | Owns balanced-trit dispersion bridge surface; no physical-unit promotion. | Momentum magnitude from candidate256/pow3/primeBump weights, dispersion equation, sqrt/Taylor target, kinetic matching, halt at `Candidate256PhysicalCalibrationExternalReceipt`. |
+
+Upper6 orchestration implementation return `2026-05-21`:
+
+- u1 added `S8RealPhysicalCarrierTransitionTarget` and
+  `S8NatToRealPhysicalCarrierTransitionReceipt`, separating the bounded Nat
+  S8 witnesses from the real/non-Nat physical carrier route.  The exact first
+  remaining blocker is
+  `missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`; the hard external
+  halt is `UniformBalaban-or-AgawaIRFixedPoint`.
+- m1 added `YMSFGCGate3M1NonFlatCurvatureBlockerChainLedger`, staging the
+  endpoint gauge-factor, plaquette holonomy, conjugation, nontrivial adjoint
+  action, Lie-carrier, Killing/trace pairing, and Ad-invariance request chain.
+  The first strict non-flat Yang-Mills blocker remains
+  `missingNonFlatSFGCSite2DConnectionCurvature`.
+- m3 advanced the finite-R scalar stack with
+  `grFiniteRScalarRealContraction`,
+  `GRConcreteFiniteRScalarAlgebraAndCarrierWitness`, and
+  `GRFiniteRFirstSevenIngredientProgressReceipt`.  The local first-seven
+  progress blocker is now `missingMetricCompatibility`; conservative full
+  selected non-flat GR integration still records `missingFiniteRScalarAlgebra`
+  until the selected metric dependency fields are supplied.
+- l5 added `BoundedRestrictedCarrierDepthProgressSurface`, packaging bounded
+  restricted carriers, depth-filtered local algebra, filtered colimit,
+  C-star completion authority boundary, inclusion descent, and time-slice /
+  Cauchy handoff labels.  The AQFT open-obligation frontier now starts at
+  `missingPromotedReceiptPredicate`.
+- m6 supplied the down-sector executable FactorVec-to-Yukawa and
+  FactorVec-to-down-3x3 carrier maps with the Georgi-Jarlskog y22 socket.  The
+  next arithmetic blocker is `missingEntryFieldMembershipCertificates`.
+- l6 extended `BalancedTritRestEnergyReceipt.agda` with the symbolic
+  candidate256 / `pow3` / `primeBump` momentum bridge, dispersion equation,
+  sqrt/Taylor target, and kinetic matching surface.  The hard physical-unit
+  halt remains `Candidate256PhysicalCalibrationExternalReceipt`.
+
+Validation from root after all worker returns:
+
+- Targeted Agda passed for `PressureBelow15SpectralNatWitnessSlice.agda`,
+  `GRDiscreteBianchiFiniteR.agda`, `YangMillsFieldEquationObstruction.agda`,
+  `CKMEntryField.agda`, `BalancedTritRestEnergyReceipt.agda`,
+  `ModularTheoryReceiptSurface.agda`, and
+  `AQFTCarrierAlgebraQuotientSurface.agda`.
+- `git diff --check` passed.
+- `timeout 30s agda -i . -i DCHoTT-Agda -i cubical -l standard-library
+  DASHI/Everything.agda` exited `124` while still checking imports, so the
+  aggregate result is inconclusive, not a pass.
+
+Lower6 integration correction after worker collection:
+
+- Coordinator repaired the only post-return hard mismatch in
+  `CKMCarrierMixingReceipt.agda` by using the staged down-matrix assembly
+  proof fields instead of a non-reducing outer `refl`.
+- lower6 Gate2/Stone/authority/dispersion follow-up added exact non-promoting
+  receipts for real/non-Nat S8 carrier staging, the
+  `missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient` blocker,
+  Candidate256 external calibration gate wiring, and the formal Nat
+  `E0 = m c^2` dispersion surface.  `GRQFTTerminalCompositionBoundary.agda`
+  now has a `Lower6GateReceiptWiringLedger` that wires these staged receipts
+  plus the bounded Stone blocker receipt while keeping
+  `terminalClaimPromoted = false`.
+- Current targeted Agda passes additionally include
+  `CKMCarrierMixingReceipt.agda`,
+  `PressureBelow15SpectralTheoremObstruction.agda`,
+  `DHRHexagonObligation.agda`,
+  `W4PhysicalCalibrationExternalReceiptObligation.agda`, and the newly
+  touched `BalancedTritRestEnergyReceipt.agda`.
+- Current `GRQFTTerminalCompositionBoundary.agda` validation stops in imported
+  QFT dependencies before reaching the new lower6 ledger.  Observed blockers
+  are the existing `AQFTCarrierAlgebraQuotientSurface.agda`
+  `RestrictedCarrierSocket` / `RestrictedCarrier` mismatch and, on rerun,
+  `DHRGaugeReceiptSurface.agda` `Setω != Set` at
+  `DRH1SymmetricTensorStarCategory`; treat terminal/root validation as
+  blocked, not passed.
+
+Middle-six coordination wave `2026-05-21`:
+the new m1-m6 lane assignment is active.  The wave is dependency-aware:
+`m1` owns the non-flat SFGC curvature handoff before `m2` can discharge Route
+B Hodge/IBP; `m3` owns finite-R scalar/base/derivation/Jacobi staging before
+u4 can promote any Bianchi-tower work; `m4` is blocked on l5's local algebra
+but prepares the GNS-to-u5 handoff; `m5` audits the already-staged up-Yukawa
+queue; and `m6` verifies the down-Yukawa frontier before any further CKM
+entry-field work.  No lane may set
+`terminalClaimPromoted = true`, `continuumClayMassGapPromoted = true`, or any
+W3/W4/W5 authority token.
+
+| Worker | Lane | Assignment | Ownership / coordination rule |
+|---|---|---|---|
+| m1 | Gate 3 non-flat SFGC curvature | Stage or inhabit the non-flat connection carrier, gauge action, curvature handoff, holonomy boundary laws, and Killing Ad-invariance ledger needed for `missingNonFlatSFGCSite2DConnectionCurvature`. | Owns `DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda`; returns exact residual blocker, normally `missingNonFlatSFGCSite2DConnectionCurvature` unless fully discharged. |
+| m2 | Gate 3 Hodge star / Route B | Prepare the Hodge, current, `D_A * F = J`, variation, and IBP consumer surface. | Read-only until m1 returns a non-flat curvature handoff; first blocker remains `missingVariationPairingForSelectedHodgeStar` or the m1 curvature input. |
+| m3 | Gate 4 finite-R scalar algebra | Stage finite-R scalar/base/derivation/bracket/Jacobi/connection evidence from `GRNonFlatScalarAlgebraSurface` into `GRDiscreteBianchiFiniteR`. | Owns `GRNonFlatScalarAlgebraSurface.agda` and `GRDiscreteBianchiFiniteR.agda`; must keep non-flat GR and W4 promotion false. |
+| m4 | Gate 5 GNS completion | Prepare the `DepthFilteredLocalAlgebra` -> GNS -> physical quotient inner-product completion handoff for u5. | Read-only until l5 supplies the local algebra/C*-completion input; exact blocker is the missing GNS/state/completion authority rather than a Stone promotion. |
+| m5 | Gate 7 up-Yukawa arithmetic | Audit the current up matrix queue, symbolic FN/Higgs adapter boundary, characteristic/splitting/eigenbasis targets, and handoff to m6/l1. | Read-only in this wave because local `CKMEntryField.agda` already stages y13-y33; report the current first blocker after up assembly. |
+| m6 | Gate 7 down-Yukawa completion | Down-entry staging has advanced through y33 in `CKMEntryField.agda`; next arithmetic work is the FactorVec-to-Yukawa entry map before executable matrix arithmetic. | Owns `DASHI/Physics/Closure/CKMEntryField.agda`; current entry-field blocker is `missingFactorVecToYukawaEntryMap`, while carrier-mixing receipt surfaces still name `missingConcreteDownYukawa3x3Matrix` and `missingYukawaDHRIntertwinerCompatibility` as unclosed downstream blockers. |
+
+Middle-six return summary `2026-05-21`:
+
+- m1 added `YMSFGCGate3NonFlatSFGCSite2DHandoffReceipt` in
+  `YangMillsFieldEquationObstruction.agda`, staging the exact non-flat
+  connection, gauge-transform, curvature, holonomy, and Killing
+  Ad-invariance handoff types. Targeted validation passed. Remaining blockers:
+  `missingNonFlatSFGCSite2DConnectionCurvature`,
+  `missingEndpointGaugeFactorsForPlaquetteHolonomy`,
+  `missingNontrivialFieldStrengthAdjointAction`,
+  `missingConjugationLawForNonFlatPlaquetteHolonomy`,
+  `missingLieAlgebraCarrierForSelectedFiniteGaugeSector`,
+  `missingNontrivialAdjointActionOnSelectedFieldStrength`,
+  `missingKillingOrTracePairingOnSelectedFieldStrength`, and
+  `missingAdInvarianceProofForThatPairing`.
+- m2 stayed read-only and confirmed Route B cannot move until m1's
+  `connectionCurvature` handoff is inhabited. The Hodge/IBP blocker remains
+  `missingVariationPairingForSelectedHodgeStar`, with non-flat curvature still
+  upstream.
+- m3 added a bounded finite-R handoff receipt in
+  `GRDiscreteBianchiFiniteR.agda`; targeted validation passed. The first true
+  unresolved blocker remains `missingFiniteRScalarAlgebra`, with downstream
+  staged blockers `missingFiniteRBaseCarrier`,
+  `missingFiniteRNeighbourhoodOrCellComplex`,
+  `missingFiniteRDerivationCarrier`, `missingFiniteRCarrierLieBracket`,
+  `missingFiniteRJacobiWitness`, and `missingFiniteRConnectionOrShiftLaw`.
+- m4 stayed read-only and confirmed no repo symbol
+  `PhysicalQuotientInnerProductCompletion` exists. The active Gate 5/GNS route
+  is blocked on l5's `DepthFilteredLocalAlgebraSurface` /
+  `AQFTAlgebraColimitCompletionSurface` inputs plus
+  `missingGNSStateFunctional`, `missingGNSHilbertRepresentation`,
+  `missingCyclicVector`, and `missingVonNeumannClosure`.
+- m5 stayed read-only and found the local up-Yukawa queue already staged
+  through y33. After up-matrix assembly the first arithmetic blocker is
+  `missingConcreteDownYukawa3x3Matrix`.
+- m6 rechecked after m5's audit and made no code edit. The local down-Yukawa
+  queue is already staged through `downY33`; targeted validation of
+  `CKMEntryField.agda` passed. The live entry-field arithmetic blocker is
+  `missingFactorVecToYukawaEntryMap`, while DHR compatibility remains
+  `missingYukawaDHRIntertwinerCompatibility`.
+
+Middle-six fresh implementation return `2026-05-21`:
+
+- m1 advanced the finite C4/SFGCSite2D lower Yang-Mills lane in
+  `YangMillsFieldEquationObstruction.agda`: reference plaquette curvature is
+  witnessed at `φ1`, endpoint gauge factors and holonomy
+  telescoping/conjugation are present, and the finite trace/Killing plus
+  nontrivial adjoint/Ad-invariance witnesses are staged. This is still a
+  finite lower witness, not promoted nonabelian Yang-Mills.
+- m2 advanced `YangMillsFieldEquationReceipt.agda` with lower Hodge/current
+  Route B staging through a typed `D * F = J` surface. The strict residual is
+  `missingVariationPairingForSelectedHodgeStar`.
+- m3 advanced `GRNonFlatScalarAlgebraSurface.agda` and
+  `GRDiscreteBianchiFiniteR.agda` with concrete four-chart finite-R scalar,
+  base, neighbourhood/cell, derivation, bracket/Jacobi, and connection
+  staging. The next GR blocker is `missingMetricCompatibility`.
+- m4 advanced `ModularTheoryReceiptSurface.agda` with abstract GNS state,
+  null-ideal/pre-Hilbert quotient, Hilbert representation, cyclic vector
+  density, and von-Neumann closure receipts. Residual blockers are
+  `blockedByDepthFilteredLocalAlgebraSurface`,
+  `blockedByCStarCompletionAuthority`,
+  `missingNullIdealPreHilbertQuotientTheorem`, and
+  `missingGNSDensityTheorem`.
+- m5 advanced `CKMEntryField.agda` with the up-sector staged
+  FactorVec-to-FN Yukawa entry map and symbolic `U_u` surface. Residuals are
+  `vHiggsAdapter4Boundary`, entry-field certificates, order-one coefficients
+  and phases, and DHR compatibility.
+- m6 advanced `CKMCarrierMixingReceipt.agda` with down-sector FactorVec map
+  target, `U_u`/`U_d` dependency, and the DHR law-shape surface
+  `rho_p o Y_ij = Y_ij o rho_p`. The exact residual remains
+  `missingYukawaDHRIntertwinerCompatibility`.
+- Root integration fixes: normalized the finite C4 conjugation helper to the
+  abelian holonomy identity, added local equality helpers in the modular GNS
+  surface, and changed the down-matrix completion receipt to assert matrix
+  facts rather than equality of proof terms. Targeted checks passed for all
+  touched middle-six modules. All promotion bits remain false.
+
+Lower-six orchestration wave `2026-05-21`:
+root now assigns the lower-six infrastructure/governance lanes around the new
+middle-six handoffs and the carried-forward upper-six blockers. This wave is a
+coordination and audit wave unless a worker receives a separate implementation
+follow-up. Lower-six workers must not edit upper/middle owned theorem modules
+while their prerequisite outputs are absent.
+
+FORMAL MODEL: O, R, C, S, L, P, G, F
+
+- O: lower-six root orchestrator owns infrastructure, ledger, validation, and
+  handoff sequencing; lower workers own one nonblocking lane each.
+- R: each lower worker returns exact files, exact first blockers, dependency
+  inputs, admissible next action, validation result, and promotion state.
+- C: docs/governance edits are centralized here, in `TODO.md`, and in
+  `devlog.md`; theorem-module edits require a lane-specific follow-up.
+- S: upper and middle lanes are partially staged; lower lanes are blocked on
+  m1, m5/m6, u6, or l5 where noted.
+- L: execute ready local audits and staging surfaces now; defer dependent
+  implementations until the producing lane returns.
+- P: l2 and l4 are ready now; l5 can stage AQFT target surfaces now; l6 can
+  stage the symbolic dispersion bridge but must halt at physical calibration
+  authority; l1 waits for m5/m6; l3 waits for u6.
+- G: `terminalClaimPromoted`, `continuumClayMassGapPromoted`, W3/W4/W5
+  authority tokens, Clay authority, physical-unit promotion, and full Standard
+  Model/GR/QFT promotion remain false.
+- F: missing evidence is named by exact symbol in the table below.
+
+| Worker | Lane | Assignment | Inputs / blockers | Return contract |
+|---|---|---|---|---|
+| l1 | Gate 7 CKM unitarity | Consume m5/m6 Yukawa outputs when actual matrices, splitting fields, normalized eigenbases, and product closure evidence exist; stage only the CKM unitarity route `V V^dagger = I`, Wolfenstein hierarchy, and CP-source ledger. | No exact repo symbol `CKMProductMatrix` exists; use `Matter.MixingMatrix`, `missingCKMProductClosureWitness`, `missingCKMProductFieldClosureProof`, and `requestedCKMMatrixAsLeftUnitaryMismatchComponent`. Current entry-field blocker is `missingFactorVecToYukawaEntryMap`; carrier receipt still has `missingConcreteDownYukawa3x3Matrix`; hard theorem blocker `missingCarrierMixingTheorem`; compatibility remains `missingYukawaDHRIntertwinerCompatibility`. | Exact CKM files, first missing field, dependency receipt status, no CKM promotion, targeted Agda if files are touched. |
+| l2 | Gate 8 composition receipts | Maintain final composition bundle wiring as receipts arrive from u1-u6, m1-m6, and l1/l3/l5/l6. Keep the final product fail-closed. | Uses `Paper7Gate1To7ReceiptBundle`, `Paper7FinalProductReceipt`, `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`, `DASHI/Everything.agda`, and `canonicalPaper7FirstUninhabitedUpstreamSymbols`; first canonical blocker is `Gate1/Gate6.missingExactStandardModelCarrierFunctorMatch`. `terminalClaimPromoted` stays false until full root typecheck passes without timeout and every upstream math/authority receipt is inhabited. | Updated receipt ledger, exact uninhabited frontier, root validation result, promotion bits unchanged. |
+| l3 | Gate 1 carrier functor | Finish carrier functor completion only after u6 supplies the typed sector package and the global foreign-lane identity witness is real. | First blocker `missingFilteredColimitPreservation`; second `missingDHRSectorCompatibility`; terminal agreement blocker `missingExactStandardModelCarrierFunctorMatch`; downstream DHR blocker `blockedByMissingGate1GaugeRepresentationSemantics`. Implement first in `CarrierToPhysicsInterpretationFunctor.agda`. | Gate 1/Gate 6 agreement status, DHR handoff gap, exact file list, no Standard Model promotion. |
+| l4 | authority ledger | Refresh the six-postulate and external-authority ledger after every worker wave. | Track six-postulate package `imReflectDASHI`, `weakBGCorrespondence`, `bisognanoWichmann`, `uniformBalabanOrAgawaIRFixedPoint`, `cStarCompletion`, `doplicherRoberts`; keep `UniformBalaban`/`AgawaIRFixedPoint` as non-Clay-promoting alternatives; keep Candidate256 queue `AcceptedDYLuminosityConventionAuthority -> W4ZAdequacyReceipt -> Candidate256PhysicalCalibrationExternalReceipt`. | Ledger diff only, exact blocker list, proof that no authority token was locally fabricated, docs validation. |
+| l5 | AQFT net construction | Provide the infrastructure target for u6 and m4: `DepthFilteredLocalAlgebra`, filtered colimit, C-star quotient completion, descent through inclusions, and time-slice/Cauchy evolution receipt. | First local AQFT blocker is `missingRestrictedCarrier`; downstream blockers are `missingDASHILocalAlgebra` and `blockedByMissingGate1GaugeRepresentationSemantics`; GNS handoff blocker is `missingGNSUniversalProperty`; Bisognano-Wichmann remains postulate-only. | AQFT net surface status, handoff fields for m4/u6, exact local algebra blocker, no BW or DR promotion. |
+| l6 | E0=mc2 dispersion bridge | Strengthen the balanced-trit rest-energy surface by staging the symbolic momentum, dispersion, nonrelativistic expansion, and kinetic matching bridge. | Consume `candidate256IntegerAddress`, `pow3`, `primeBump`, `CDQStrengthWeightNormStage.normMagnitude`, `FlatClosureQuadraticDispersionSeedStage`, and `BalancedTritRestEnergyReceipt`; first bridge blocker is absence of formal momentum-magnitude and dispersion/sqrt-Taylor theorem surfaces; halt at `Candidate256PhysicalCalibrationExternalReceipt` and `impossibleWithoutExternalAuthority`. | Symbolic bridge status, exact calibration blocker, physical-unit promotion false, targeted Agda if a bridge module is touched. |
+
+Lower-six dependency order:
+
+1. l4 runs after every wave and before any promotion-facing l2 refresh.
+2. l5 may audit/stage AQFT local algebra targets now; u6 and m4 consume its
+   output when `DepthFilteredLocalAlgebra` is inhabited.
+3. l6 may stage symbolic math now but cannot produce physical semantics before
+   `Candidate256PhysicalCalibrationExternalReceipt`.
+4. l1 waits for m5 and m6 matrix/eigenbasis outputs.
+5. l3 waits for u6 arbitrary DHR sector evidence.
+6. l2 collects only after the producing lanes return and root validation is
+   rerun.
+
+| Worker | Lane | Assignment | Return contract |
+|---|---|---|---|
+| A | Gate 1/2 carrier/S8 | Continue only the current carrier/S8 queue field. | Changed files, first remaining blocker, `Everything.agda` validation result. |
+| B | Gate 3 Yang-Mills | Continue only the current flat/local Bianchi or gauge-compatibility blocker. | Changed files, non-promotion statement, `Everything.agda` validation result. |
+| C | Gate 4 FactorVec GR/W4 boundary | Continue only the W4 matter-interface / finite-r Bianchi blocker. | Changed files, authority-boundary statement, `Everything.agda` validation result. |
+| D | Gate 5/6 Hilbert-DHR | Continue only current Hilbert completion/traversal or DHR arbitrary-sector identity blockers. | Changed files, remaining theorem fields, `Everything.agda` validation result. |
+| E | Integration/docs/validation | Maintain coordination docs only: `Docs/WorkerCoordinationBoard.md`, `TODO.md`, `COMPACTIFIED_CONTEXT.md`, optionally `devlog.md`. | Concise board/context update, no theorem-module edits, docs diff check, `Everything.agda` validation if feasible. |
+| F | Gate 7/8 Yukawa/CKM | Continue only the concrete down-Yukawa / CKM arithmetic blocker chain. | Changed files, arithmetic/authority gaps, `Everything.agda` validation result. |
+
+Current result slots for this six-worker wave:
+
+- Lower-orchestrator result `2026-05-21`: all six assigned workers returned
+  and the coordinator integrated l6 locally.  u1 added fail-closed real YM
+  quotient/Hamiltonian/domain/symmetry receipts plus conditional finite-carrier
+  spectral-bound accounting; m1/u2/m2 added a Gate 3 fail-closed receipt over
+  finite SU3-like, C4 trace/Ad, reference non-flat curvature, Hodge/current,
+  and zero-IBP staging; m3/u3/u4 added the Gate 4 attempt receipt and the
+  selected metric-compatibility counterexample; l5 added the AQFT fail-closed
+  handoff through quotient/isotony/depth/C-star target surfaces; m4/u5/u6/l3
+  added the independent GNS/Fell checklist; m5/m6/l1 added exact down-entry
+  certificates and CKM closure staging through `Matter.MixingMatrix`; l6
+  records Option A natural units with `naturalUnitsPromoted = true` and
+  `siUnitsPromoted = false`.  Root `DASHI/Everything.agda` is not the terminal
+  blocker when it exits 0; terminal promotion remains false because the
+  mathematical and authority blockers remain.
+
+- Upper-six orchestration result `2026-05-21`: u1 staged bounded Nat
+  `s8CarrierUnitNormalizationField` and moved Gate 2 to global
+  `S8.missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`; u2 staged
+  `YMSFGCSU3JacobiGlobalCarrierRouteReceipt`, leaving
+  `missingSFGCFibreRepresentationIntoSU3Carrier` before strict non-flat
+  `missingNonFlatSFGCSite2DConnectionCurvature`; u3 staged
+  `FactorVecValuationP2LorentzUnitStressEnergyAuthorityBoundaryReceipt`; u4
+  staged `GRNonFlatMetricTowerFailClosedReceipt`; u5 staged
+  `Gate5SelectedFiniteProjectionScalarAuditReceipt`; u6 staged
+  `DHRArbitrarySectorSelectedForeignIdentityPackagingReceipt` and the proof
+  plan counterpart.  Root targeted checks passed on the touched surfaces;
+  later `Everything.agda` validation reaches exit 0, but all returns remain
+  bounded and non-promoting.
+- Worker A: advanced bounded Gate 1/2 S8 progress by inhabiting the Nat
+  pressure-energy coercivity queue field; next bounded queue field is
+  `s8CarrierUnitNormalizationField`, while global
+  `SelfAdjointYangMillsHamiltonianOnCarrierQuotient` remains missing.
+- Worker B: staged the flat selected Bianchi gauge-compatibility witness in the
+  Yang-Mills receipt; flat local Bianchi queue is exhausted, while strict
+  non-flat blocker remains `missingNonFlatSFGCSite2DConnectionCurvature`.
+- Worker C: refined the W4 matter/stress-energy authority obstruction and
+  threaded it into finite-r Bianchi; local first blocker is
+  `missingCandidate256CalibrationReceiptForMatterInterface`, EEC first missing
+  remains `missingW4AnchorArtifactReceiptForMatterStress`, and finite-r GR
+  still first-misses at `missingFiniteRScalarAlgebra`.
+- Worker D: added the DHR arbitrary-sector foreign-identity field lattice;
+  first field-lattice residual is
+  `residualGlobalForeignLaneIdentityRequiresExplicitWitness`.
+- Worker E: returned docs-only coordination updates.
+- Worker F: advanced staged down-Yukawa inventory from `downY11` to `downY12`;
+  next down-entry blocker is `missingY13`, while
+  `missingConcreteDownYukawa3x3Matrix` remains the arithmetic blocker.
+
+Non-promotion policy: no worker may promote terminal, Standard Model, Clay,
+GR, Yang-Mills, DHR, W3/W4/W5, external-authority, or Paper 7 closure from
+prose, diagnostics, staged receipts, or local bounded witnesses. Promotions
+require inhabited repo terms plus the applicable accepted authority boundary.
+
+Validation policy: workers should use `timeout 30s agda -i . -i DCHoTT-Agda
+-i cubical -l standard-library DASHI/Everything.agda`; timeout is an
+inconclusive validation state, not a pass.  Exit 0 clears only the integration
+checkpoint; it does not promote any mathematical or authority receipt.
+
+Wave validation result: earlier timeout/mismatch states have been superseded by
+targeted checks and root validation reaching exit 0.  `git diff --check`
+passes.  The aggregate proof status is still fail-closed because the first
+mathematical blockers remain Gate1/Gate6 exact Standard Model carrier match,
+real YM Hamiltonian, Gate 3 non-flat curvature/fibre/Hodge, W4 stress-energy
+authority, AQFT local algebra/GNS universality, Stone global phase space, CKM
+unitarity/carrier mixing, and external authority receipts.
+
+Paper 7 wave6 implementation-enforcement result `2026-05-19`:
+the current next worker targets are now: Gate 1/2 global real-carrier
+`SelfAdjointYangMillsHamiltonianOnCarrierQuotient`, with bounded progress now
+past the vacuum queue and focused on `s8NonVacuumSectorPredicateField`;
+Gate 3 `nonRepresentativeSlotCoefficientTermSupplyField` for all-slot
+coefficient-aware `SU(3)` Jacobi closure; Gate 4 stress-energy tensor
+symmetry after the supported unit p2-time component-family map; Gate 5 global
+physical quotient inner-product well-definedness/completion after selected
+finite projection/scalar first-field progress; Gate 6 arbitrary-sector lane
+classifier before arbitrary carrier predicates and global foreign-lane
+identity; Gate 7/8 concrete up-Yukawa entry `y13`.  Root targeted validation
+passed on wave6 touched modules.  All promotions remain false.
+
+Paper 7 wave5 implementation-enforcement result `2026-05-19`:
+the current next worker targets are now: Gate 1/2 global real-carrier
+`SelfAdjointYangMillsHamiltonianOnCarrierQuotient`; Gate 3 all-slot
+coefficient-aware `SU(3)` Jacobi closure over the new global arithmetic
+carrier; Gate 4 valuation stress-energy tensor component-family map; Gate 5
+the first missing theorem field in the nondegenerate projection/scalar lattice;
+Gate 6 arbitrary-sector global foreign-lane identity; Gate 7/8 concrete
+up-Yukawa entry `y12`.  Root targeted validation passed after Gate 4 resolved
+the scope blocker seen by the Gate 3 manager.  Do not reopen wave4 targets
+unless one of these wave5 targets explicitly depends on them.  All promotions
+remain false.
+
+Paper 7 wave4 implementation-enforcement result `2026-05-19`:
+root reused the existing `ao-paper7-wave3` tmux session and launched wave4
+through the `autonomous-orchestrator` runner methods.  The context-only pass
+was insufficient, so root seeded the statuses for implementation and relaunched
+the same six lanes.  Current next worker targets are now: Gate 1/2 global
+`SelfAdjointYangMillsHamiltonianOnCarrierQuotient` field before queued
+`s8VacuumSectorField`; Gate 3 global coefficient-aware `SU(3)` residual
+arithmetic after the local `[1,4,5]` cancellation witness; Gate 4
+`missingValuationStressEnergyTensorCandidate`; Gate 5 physical
+nondegenerate projection/scalar laws behind
+`SelectedQuotientNondegenerateProjectionScalarSocket`; Gate 6 repo-native
+selected foreign-lane identity inhabitants; Gate 7/8 concrete up-Yukawa
+entry `y11`.  Do not reopen earlier wave3 blockers unless these targets
+explicitly depend on them.  All promotions remain false.
+
+Paper 7 root continuation addendum `2026-05-19`:
+after the `ao-paper7-wave3` managers returned, root continued implementation
+directly.  Gate 7/8 now has
+`HiggsResidualU1EMQuotientAfterCompletedSquareLiftLaw` and the Higgs
+finite-to-complex-doublet transport surface has advanced its first blocker to
+W4 `v_Higgs` scale authority.  Gate 4 now has
+`FactorVecValuationP2LorentzUnitInverseMetricWitness`,
+`FactorVecValuationP2LorentzUnitChristoffelWitness`, and
+`FactorVecValuationP2LorentzUnitRiemannWitness`; the non-flat FactorVec
+valuation metric surface has advanced its supported blocker to Ricci
+contraction computation.  The next workers should not re-audit
+those two blockers; they should implement either the W4/Yukawa follow-on or
+the FactorVec Ricci/Bianchi follow-on.  Promotion bits remain
+false.
+
+Paper 7 root enforcement continuation `2026-05-19`:
+Gate 4 now also has `FactorVecValuationP2LorentzUnitRicciWitness`; the
+supported unit p2-time zero Riemann table contracts to the supported zero
+Ricci table.  The next Gate 4 worker should not revisit inverse metric,
+Christoffel, Riemann, or supported-unit Ricci.  It should target
+`missingValuationContractedBianchiComputation`, then stress-energy
+compatibility, while keeping global non-flat GR promotion false.
+
+Paper 7 implementation-enforcement manager wave `2026-05-19`:
+the next workers should use these current blockers, not the older manager
+summaries.  Gate 1/2: global real Yang-Mills Hamiltonian carrier theorem
+after the bounded Nat/FactorVec S8 instantiation.  Gate 3:
+coefficient-aware `SU(3)` vector/residual arithmetic after the 64-slot
+repeated-axis zero batch exposed a nonzero coefficient-erased `[1,4,5]`
+residual.  Gate 4: `missingValuationStressEnergyCompatibilityComputation`
+after supported p2-time contracted Bianchi.  Gate 5: nondegenerate physical
+projection algebra/scalar laws after `SelectedQuotientFiniteDensitySocket`.
+Gate 6: global foreign-lane identity evidence after primitive-sector
+classification/nonempty/irreducibility packaging.  Gate 7/8:
+`missingConcreteUpYukawa3x3Matrix` after W4 Higgs-scale authority was recorded
+unavailable in this lane.
+
+Required-new-math addendum `2026-05-19`:
+worker assignment has plateaued at proof construction.  New workers should be
+opened only on one of the irreducible objects now listed in
+`Docs/CorePhysicsTheoremRoadmap.md`: prime-bump covariance/DHR compatibility,
+S8 Nat-energy coercivity witnesses, nonabelian YM Lie/Hodge/Killing/IBP data,
+valuation-metric Ricci and Lorentzian signature data, Hilbert depth embeddings
+and colimit generator, internal DHR axiom verification plus DR authority
+boundary, or concrete Yukawa splitting-field computation.  Exploratory workers
+may audit file/line evidence, but should not create application-side surfaces
+or rename existing gates.
+
+Recursive orchestration addendum `2026-05-19`:
+the current control thread is `Recursive CLI Orchestration`
+(`6a0c3c4b-75d8-83ec-8288-f46aae8ab948`,
+canonical `bea9942a90b13e7708702515fdf7a3c0ad8d93a4`).  The worker-tree test
+is allowed to implement real Agda mathematics, but the success criterion is
+bounded theorem progress without corrupting promotion state.  The first test
+slice is Gate 2 S8 spectral witness work: select the active `Energy = Nat`
+package boundary, construct the `3/8/3` Nat witnesses, add a concrete
+non-vacuum FactorVec witness, and validate the selected positive lower-bound
+surface.  The second test slice is Gate 3 `SU(2)` Jacobi.  Recursive CLI
+descendants require explicit delegation authority, distinct lane ownership,
+parent-report metadata, validation commands, and unchanged terminal promotion
+bits.  Current fanout policy: root may run up to six section managers; each
+section manager may launch up to six workers; workers are leaves and may not
+spawn further descendants.
+
+Recursive orchestration result `2026-05-19`:
+root used the full six-section-manager budget for Gates 1-6 under
+`paper7-root`.  All six managers exited successfully.  Their bounded results
+are: Gate 1 representation-action target map; Gate 2 Nat S8 witness slice;
+Gate 3 finite `SU(2)` Jacobi support; Gate 4 p2-time valuation metric
+candidate; Gate 5 finite-support colimit/generator domain targets; and Gate 6
+supplied-sector tensor/fusion sockets.  A root targeted Agda sweep over all
+manager-touched modules passed, and `git diff --check` passed.  Treat this as
+manager-wave completion only; the gates themselves remain open unless their
+listed residual obligations are separately inhabited.
+
+Paper 7 campaign result `2026-05-19`:
+root then redirected the tree to Paper 7 publishability rather than Paper 1
+readiness.  Six managers covered Gates 1-8.  Implementation progress landed in
+Gate 1/2, Gate 3, and Gate 4: the S8 Nat slice gained a concrete
+coercivity/compiler route, Yang-Mills gained a finite `SU(3)`-target scaffold
+with embedded `SU(2)` bracket witnesses, and FactorVec GR gained p2-time
+valuation-metric diagonal-shape laws.  Gate 5, Gate 6, and Gate 7/8 returned
+validated audits identifying exact next proof targets rather than editing
+theorem modules.  Root validation passed across the affected modules and all
+promotion bits remain false.  The next manager wave should assign proof
+workers to the exact blockers, not re-audit the same surfaces.
+
+Paper 7 proof-blocker implementation result `2026-05-19`:
+the next six-manager wave advanced proof surfaces rather than repeating the
+audit.  Gate 1/2 closed a bounded Nat S8 lane-order witness path for active
+p3/p5/p7 pressure-energy dominance.  Gate 3 added six coefficient-erased
+`SU(3)` off-diagonal bracket witnesses.  Gate 4 added all-lane nonzero
+valuation support for the p2-time metric candidate.  Gate 5 added a
+finite-depth discrete symmetric generator-domain target in `DASHI.Quantum.Stone`.
+Gate 6 added a primitive DHR class-sector lane supply compiler.  Gate 7/8
+added a finite Higgs ordered-norm/argmin table and witness.  Root targeted
+Agda validation over the touched modules passed; status JSON parsing and
+`git diff --check` passed.  The next wave should target the named first
+blockers: generic/full-S8 arithmetic compatibility, generator-8/Cartan
+`SU(3)` brackets and coefficients, p2-time determinant/rank and Lorentzian
+inertia, noncollapsed Hilbert/projection algebra, concrete DHR primitive
+sector constructors, and actual Higgs/Yukawa carrier transport.
+
+Paper 7 wave2b implementation result `2026-05-19`:
+`ao-paper7-wave2` performed context refresh only; `ao-paper7-wave2b` performed
+the actual implementation cycle.  Gate 1/2 now has the concrete Nat
+`S8LaneSumDominanceExternalLemmaInterface` and compiler route.  Gate 3 now has
+generator-8/Cartan coefficient-erased `SU(3)` bracket actions.  Gate 4 now has
+a p2-time signed valuation weight-vector witness.  Gate 5 now has a finite
+two-point noncollapsed projection-algebra precursor.  Gate 6 now has a
+canonical primitive DHR superselection-sector constructor surface.  Gate 7/8
+now has a finite-to-complex-doublet Higgs transport target surface.  Root
+targeted Agda validation, JSON parsing, and `git diff --check` passed.  The
+next managers should target the remaining first blockers: general S8
+spectral-gap promotion beyond Nat arithmetic, the finite 512-entry `SU(3)`
+Jacobi carrier over the coefficient-carrying multi-output table, rational
+nonzero p2-time metric weights plus determinant/rank/inertia,
+quotient-carrier projection and inner product, DHR
+sector-to-lane/carrier/identity/irreducibility evidence, and finite-order
+reflection into the Higgs carrier order after the local Hermitian norm-squared
+transport law.
+
+Paper 7 wave3 implementation result `2026-05-19`:
+`ao-paper7-wave3` is the active tmux dashboard and should be reused rather
+than creating new session names.  The completed wave added the Nat-to-global
+S8 spectral-gap bridge, coefficient-carrying list-valued `SU(3)` structure
+table, checked p2-time rational nonzero valuation weight witnesses, selected
+quotient projection inner-product surface, primitive DHR sector-to-lane
+evidence, and Higgs Hermitian norm-squared transport law.  Root targeted Agda
+validation, status JSON parsing, and `git diff --check` passed.  The next
+exact blockers are: global Yang-Mills Hamiltonian S8 spectral-gap theorem,
+finite 512-entry `SU(3)` Jacobi carrier plus physical YM wiring, determinant/
+rank and Lorentzian inertia, Hilbert completion/traversal/Stone bundle,
+arbitrary DHR sector classification plus carrier/identity/irreducibility
+evidence, and `missingCompletedSquareLiftToCarrierPotential` after the
+finite-order Higgs carrier-order reflection law.
 
 For current gate posture, read `Docs/CurrentGateStatus.md` dated `2026-05-15`
 before using older rows in this board. Historical route-intake rows remain
@@ -17,6 +1314,29 @@ bounded positives for G2 schema extension, G3 constructive finite-support
 subtraction, tracked G6 commuting, or W9 unblocked through the MDL termination
 seam. Older "blocked" wording should be read as applying to the broader/full
 gate route unless it is explicitly revalidated as current.
+
+Current tranche addendum `2026-05-18`: W3 now has a governance-action request
+surface but no accepted authority token; W4/W5 must use the corrected
+`36.3 fb^-1` and fail-closed accepted/replacement authority packet schema/test
+boundary; Moonshine/`laneDimension`, W9, G6, and GR have typechecked surface
+available through the current `DASHI/Everything.agda` validation round. Read
+those rows only at their bounded surfaces: `DASHIPrimeLaneEquiv` bridge route,
+MDL-seam W9 receipt, tracked `G6OfficialTrackedCrossLaneCommutingTheorem`, and
+GR candidate/sidecar surfaces. This is non-promoting and does not supply W4/W5
+authority, full GR, Clay, GRQFT, TOE, or terminal closure.
+
+Paper 1 manifest addendum `2026-05-19`: Route A `d^2=0` means abelian
+prime-lattice commutativity / boundary-of-boundary closure, with current repo
+coefficient and SFGC action-bridge requests kept explicit. Route B
+nonabelian Yang-Mills must keep
+Killing-form Ad-invariance, Hodge/covariant-derivative, variation/IBP, and
+current/source residuals visible. Paper 3 finite/discrete completion is a
+physical finite-support traversal/operator claim only; GR boundary surfaces are
+separate from gauge-route progress. Gate 1 now has a graph-level p2/p3/p5/p7
+carrier-to-physics object map while physical covariance and filtered-colimit
+preservation remain open. CKM should target exact carrier diagonalization over
+`Q` or a finite algebraic extension, with legacy SVD-named APIs kept as
+compatibility labels only. Non-promotion governance remains unchanged.
 
 ## W4/W5 Public pT Diagnostic Round
 
@@ -4458,3 +5778,148 @@ F:
 - Missing W8 Whitehead/cohomology/categoricity proof and origin receipt.
 - Missing accepted W3 authority access route and token.
 - Missing W9 constructive kill route.
+
+## 2026-05-21 Middle6 Downstream-After-Five-Blockers Collection
+
+O:
+- Middle6 collected the assigned six-worker downstream wave and performed the
+  seventh Gate 8 integration lane locally because the subagent limit prevented
+  spawning another worker.
+
+R:
+- Record every downstream obligation that becomes reachable after the five
+  canonical blockers close, while preserving all non-promotion boundaries.
+
+C:
+- Main integration surface:
+  `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`.
+- Worker-return surfaces:
+  Gate 2 `PressureBelow15SpectralTheoremObstruction.agda`,
+  Gate 3 `YangMillsFieldEquationObstruction.agda`,
+  Gate 4 `GRDiscreteRicciCandidateFromCurvature.agda`,
+  Gate 5 `ModularTheoryReceiptSurface.agda` and `Stone.agda`,
+  Gate 6 `DHRTensorDualGroupReconstruction.agda`,
+  Gate 7 `CKMCarrierMixingReceipt.agda`.
+
+S:
+- The worker wave produced canonical fail-closed receipts for Friedrichs/
+  continuum transport, Hodge variation/IBP, sourced Einstein, Tomita/Stone,
+  tensor-statistics-DR, and physical Yukawa/DHR targets.
+- The coordinator wired them into
+  `canonicalMiddle6DownstreamAfterFiveBlockersLedger`.
+- The four Gate 8 theorem obligations remain false:
+  `G_DHR ~= G_SM`, `T_YM = T_GR`, DHR/Yukawa match, and Stone spectrum versus
+  YM gap.
+
+G:
+- No W3/W4/W5/Clay, Candidate256, DR, vHiggs physical, Standard Model match,
+  continuum mass-gap, or terminal authority token was promoted.
+- `terminalClaimPromoted` remains false.
+
+F:
+- Still missing selected non-flat YM curvature, selected metric compatibility,
+  DASHI local algebra, DHR H1-H5 and reconstruction, exact DHR/Yukawa
+  compatibility, and the external Clay/W4/Candidate256 authority receipts.
+
+## 2026-05-21 Middle6 First-Missing Hard-Math Iteration
+
+O:
+- Middle6 assigned and collected six bounded workers against the stable
+  first-missing frontier: Gate 2 finite spectrum, Gate 3 strict non-flat
+  curvature, Gate 4 metric compatibility, Gate 5 AQFT/GNS, Gate 6 DHR identity
+  actions, and Gate 7 CKM/Jarlskog.
+
+R:
+- Integrate concrete progress without converting receipt surfaces into
+  theorem promotions.
+
+C:
+- Terminal integration:
+  `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`.
+- Worker surfaces:
+  `PressureBelow15SpectralTheoremObstruction.agda`,
+  `YangMillsFieldEquationObstruction.agda`,
+  `GRDiscreteBianchiFiniteR.agda`,
+  `AQFTCarrierAlgebraQuotientSurface.agda`,
+  `GNSFellRepresentationSurface.agda`,
+  `ModularTheoryReceiptSurface.agda`,
+  `DHRGaugeReceiptSurface.agda`,
+  `DHRHexagonObligation.agda`,
+  `DHRTensorDualGroupReconstruction.agda`,
+  and `CKMCarrierMixingReceipt.agda`.
+
+S:
+- Gate 2 has canonical finite Casimir modes with gap value `1`, but no full
+  finite `H_YM` spectrum/Casimir-domination theorem.
+- Gate 3 found the exact bridge gap:
+  `SFGCSite2DDiscrete1Form -> YMSFGCUserSuppliedNonFlatConnectionCarrier`.
+- Gate 4 now has a Christoffel-aware doubled-`2Γ` input and finite
+  `4R`/Ricci/scalar/`2G` receipt; the old selected metric-compatibility API
+  still needs rebinding.
+- Gate 5 scoped the C-star authority and GNS quotient descent; the analytic
+  blocker is `missingStateCauchySchwarzInequalityForParametricPreCStarAlgebra`.
+- Gate 6 records the identity-action semantic adapter target; arbitrary-sector
+  identity still depends on DASHI local-algebra semantics.
+- Gate 7 records `Q[i]` CP-phase bookkeeping and leading Jarlskog denominator
+  `46875`; exact normalized CKM matrices remain absent.
+
+G:
+- No terminal, Clay, W4/W5, Candidate256, Doplicher-Roberts, Standard Model,
+  physical Yukawa, or continuum mass-gap promotion was made.
+
+F:
+- Next iteration should target the six exact missing APIs named above rather
+  than adding broader ledger surfaces.
+
+## 2026-05-21 Middle6 Schrödinger-Clock Hard-Blocker Iteration
+
+O:
+- Middle6 assigned and collected the 18-lane tranche targeting the five stable
+  blockers plus the Ricci global-normalization timeout.
+
+R:
+- Integrate only real worker returns, repair type drift, and keep all theorem
+  and external-authority promotion boundaries fail-closed.
+
+C:
+- Integration surface:
+  `DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda`.
+- Repaired/consumed worker surfaces:
+  `YangMillsFieldEquationObstruction.agda`,
+  `GRDiscreteBianchiFiniteR.agda`,
+  `GRSelectedNonFlatMetricInstance.agda`,
+  `GRDiscreteRicciCandidateFromCurvature.agda`,
+  `AQFTCarrierAlgebraQuotientSurface.agda`,
+  `ModularTheoryReceiptSurface.agda`,
+  `GNSFellRepresentationSurface.agda`,
+  `DHRGaugeReceiptSurface.agda`,
+  `DHRHexagonObligation.agda`,
+  `DHRTensorDualGroupReconstruction.agda`,
+  `CKMEntryField.agda`, and `CKMCarrierMixingReceipt.agda`.
+
+S:
+- Gate 3: SFGC discrete 1-forms now have a typed bridge into the
+  user-supplied non-flat connection carrier shape, but holonomy conjugation,
+  `D_A^2`, and full non-flat YM closure remain open.
+- Gate 4: selected metric compatibility is now witnessed through the
+  doubled-Christoffel input; the next blocker is the selected connection being
+  Levi-Civita. Ricci contraction is represented site-locally and contracted at
+  the boundary.
+- Gate 5/6: scoped C-star authority consumption, GNS finite trace-state
+  descent, and algebra-indexed DHR identity-action adapter targets are wired,
+  while `missingDASHILocalAlgebra`, DHR H1-H5, tensor/hexagon, and DR
+  reconstruction remain open.
+- Gate 7: concrete Gaussian-rational Wolfenstein/Jarlskog bookkeeping is wired
+  without claiming exact CKM unitarity or exact normalized eigenbases.
+
+G:
+- `DASHI/Everything.agda` exits 0 under the 300s validation command.
+- No terminal, Clay, W4/W5, Candidate256, Doplicher-Roberts, Standard Model,
+  physical Yukawa, exact CKM, or continuum mass-gap promotion was made.
+
+F:
+- Remaining math: selected Levi-Civita proof, real non-flat YM holonomy and
+  covariant derivative laws, DASHI local algebra construction, GNS
+  Cauchy-Schwarz/universal property, DHR H1-H5/DR reconstruction, exact
+  CKM/DHR-Yukawa compatibility, and external Clay/W4/Candidate256 authority
+  boundaries.

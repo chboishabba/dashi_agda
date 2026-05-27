@@ -1,0 +1,36 @@
+{
+  "accepted_manager_count": 4,
+  "control_policy": {
+    "no_repeated_refinement_rule": "A lane may refine an ambiguous blocker once; after stable name/path/type, the next result must inhabit/discharge, make material code progress, record a typed compiler failure, or escalate an authority boundary.",
+    "root_overhead_target": "root_overhead_time <= max(2 minutes, 0.33 * worker_wall_time)"
+  },
+  "generated_artifacts": {
+    "next_blockers": "status.paper7-wave10-hard-symbols.next-blockers.json",
+    "root_summary": "status.paper7-wave10-hard-symbols.root-summary.json",
+    "root_validation": "status.paper7-wave10-hard-symbols.root-validation.log",
+    "workers": "status.paper7-wave10-hard-symbols.workers.json"
+  },
+  "last_worker_done_utc": "2026-05-19T17:24:44Z",
+  "next_runner_file": ".autonomous-orchestrator/runners.paper7-wave11-next-hard-symbols.json",
+  "next_wave_launched_utc": "2026-05-19T17:27:03Z",
+  "overhead_ratio": 0.4251,
+  "rejected_manager_count": 0,
+  "root_collection_done_utc": "2026-05-19T17:24:53Z",
+  "root_collection_overhead_seconds": 9.0,
+  "root_launch_utc": "2026-05-19T17:19:17Z",
+  "root_overhead_target_met": false,
+  "root_overhead_target_seconds": 120,
+  "root_overhead_time_seconds": 139.0,
+  "root_validation_log": "status.paper7-wave10-hard-symbols.root-validation.log",
+  "runner_file": ".autonomous-orchestrator/runners.paper7-wave10-hard-symbols.json",
+  "runner_ids": [
+    "paper7-wave10-mgr-hard-symbols",
+    "paper7-wave10-w2-natural-p2-token",
+    "paper7-wave10-gate3-covariant-extends",
+    "paper7-wave10-gate4-einstein-source"
+  ],
+  "terminal_worker_count": 4,
+  "wave_id": "paper7-wave10-hard-symbols",
+  "worker_count": 4,
+  "worker_wall_time_seconds": 327.0
+}

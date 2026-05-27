@@ -1,0 +1,25 @@
+{
+  "accepted_manager_count": 2,
+  "generated_artifacts": {
+    "next_blockers": "status.paper7-wave7.next-blockers.json",
+    "root_summary": "status.paper7-wave7.root-summary.json",
+    "root_validation": "status.paper7-wave7.root-validation.log",
+    "workers": "status.paper7-wave7.workers.json"
+  },
+  "last_worker_done_utc": "2026-05-19T14:36:17Z",
+  "next_runner_file": ".autonomous-orchestrator/runners.paper7-wave8.json",
+  "overhead_ratio": null,
+  "rejected_manager_count": 4,
+  "root_collection_done_utc": "2026-05-19T14:44:14Z",
+  "root_collection_overhead_seconds": 477.0,
+  "root_launch_utc": "2026-05-19T14:30:53Z",
+  "root_overhead_target_met": null,
+  "root_overhead_target_seconds": 120,
+  "root_overhead_time_seconds": null,
+  "root_validation_log": "status.paper7-wave7.root-validation.log",
+  "runner_file": ".autonomous-orchestrator/runners.paper7-wave7.json",
+  "terminal_worker_count": 6,
+  "wave_id": "paper7-wave7",
+  "worker_count": 6,
+  "worker_wall_time_seconds": 324.0
+}

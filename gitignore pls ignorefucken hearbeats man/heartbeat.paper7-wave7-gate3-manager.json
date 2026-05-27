@@ -1,0 +1,12 @@
+{
+  "agent_name": "implement",
+  "blocker": null,
+  "child_pid": 1841269,
+  "current_step": "- Remaining gap: explicit and recorded in status `open_blocker` and `runsheet`.",
+  "exit_code": 0,
+  "last_heartbeat": "2026-05-19T14:36:17Z",
+  "phase": "done",
+  "progress": null,
+  "skill": "long-running-development",
+  "state": 0
+}
