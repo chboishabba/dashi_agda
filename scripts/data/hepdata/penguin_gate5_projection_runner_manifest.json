@@ -1,8 +1,8 @@
 {
   "artifact": "penguin_gate5_projection_runner_manifest",
-  "status": "candidate_runner_hash_manifest_dirty_worktree",
-  "git_head": "81fc16c11af4f4152410ea9ce9269c68cc223387",
-  "worktree_clean": false,
+  "status": "projection_freeze_head_recorded",
+  "git_head": "e26465e5d535a34879536c045b627b87d4a4a354",
+  "worktree_clean_for_freeze_scope": true,
   "runner_candidates": [
     {
       "path": "scripts/hepdata_projection_contract.py",
@@ -17,5 +17,5 @@
       "sha256": "decba81b1c1e503ca8ea7eaa21e7b61ad0b50fc2fc1315e90239640db88f033f"
     }
   ],
-  "freeze_gate_note": "projection_code_clean_git_head remains unpopulated because the current worktree is dirty; this manifest only freezes candidate runner file hashes"
+  "freeze_gate_note": "projection_code_clean_git_head is the scoped Gate 5 authority commit e26465e5d535a34879536c045b627b87d4a4a354; unrelated pre-existing repository dirt remains outside this freeze scope"
 }

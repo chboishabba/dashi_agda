@@ -521,7 +521,15 @@ record PenguinRuntimeAuthorityArtifactReceipt : Set where
     projectionRunnerManifestSHA256IsCanonical :
       projectionRunnerManifestSHA256
       ≡
-      "3d0ba75bb95899fa59f0bc28043f27653db36ca56acf28deaebf916435716a09"
+      "52b022818e8c9a0ab6169cb4db199dba3392594dbc30b5c7e4907e35bcf429ae"
+
+    projectionCodeCleanGitHead :
+      String
+
+    projectionCodeCleanGitHeadIsCanonical :
+      projectionCodeCleanGitHead
+      ≡
+      "e26465e5d535a34879536c045b627b87d4a4a354"
 
     noPosteriorTuningAttestationPath :
       String
@@ -574,7 +582,9 @@ canonicalPenguinRuntimeAuthorityArtifactReceipt =
     "flavio-2.7.0-wheel-sha256:3d5aaeb5a9df7c479949e4641ccbd2dc662cb010aabf9dda5f725a8a80813b4f"
     refl
     "scripts/data/hepdata/penguin_gate5_projection_runner_manifest.json"
-    "3d0ba75bb95899fa59f0bc28043f27653db36ca56acf28deaebf916435716a09"
+    "52b022818e8c9a0ab6169cb4db199dba3392594dbc30b5c7e4907e35bcf429ae"
+    refl
+    "e26465e5d535a34879536c045b627b87d4a4a354"
     refl
     "scripts/data/hepdata/penguin_gate5_no_posterior_tuning_attestation.txt"
     "596d72909c6d6fb5659b455f21af199c2ca39243edd9b9e2f2e963730961741c"
@@ -611,22 +621,22 @@ record PenguinFreezeHashFormulaSurface : Set where
     worktreeCleanAtFreezePoint :
       Bool
 
-    worktreeCleanAtFreezePointIsFalse :
-      worktreeCleanAtFreezePoint ≡ false
+    worktreeCleanAtFreezePointIsTrue :
+      worktreeCleanAtFreezePoint ≡ true
 
     acceptedFreezeHashPopulated :
       Bool
 
-    acceptedFreezeHashPopulatedIsFalse :
-      acceptedFreezeHashPopulated ≡ false
+    acceptedFreezeHashPopulatedIsTrue :
+      acceptedFreezeHashPopulated ≡ true
 
     populatedFreezeHash :
       String
 
-    populatedFreezeHashIsGap :
+    populatedFreezeHashIsCanonical :
       populatedFreezeHash
       ≡
-      "gap: accepted freeze hash requires clean worktree plus complete canonical preimage"
+      "cc19b7b8450d48212721b80ff128af58429e69a157744407b421e734f260fcf0"
 
 open PenguinFreezeHashFormulaSurface public
 
@@ -653,12 +663,12 @@ canonicalPenguinFreezeHashFormulaSurface =
       ∷ "no_posterior_tuning_attestation"
       ∷ [] )
     "freeze_hash = sha256(canonical UTF-8 LF-delimited preimage over the listed field order)"
-    "81fc16c11af4f4152410ea9ce9269c68cc223387"
-    false
+    "e26465e5d535a34879536c045b627b87d4a4a354"
+    true
     refl
-    false
+    true
     refl
-    "gap: accepted freeze hash requires clean worktree plus complete canonical preimage"
+    "cc19b7b8450d48212721b80ff128af58429e69a157744407b421e734f260fcf0"
     refl
 
 record PenguinExternalAuthorityFreezeInjectionReceipt : Setω where
@@ -747,14 +757,14 @@ record PenguinExternalAuthorityFreezeInjectionReceipt : Setω where
     projectionCodeCleanGitHeadPopulated :
       Bool
 
-    projectionCodeCleanGitHeadPopulatedIsFalse :
-      projectionCodeCleanGitHeadPopulated ≡ false
+    projectionCodeCleanGitHeadPopulatedIsTrue :
+      projectionCodeCleanGitHeadPopulated ≡ true
 
     acceptedFreezeHashPopulated :
       Bool
 
-    acceptedFreezeHashPopulatedIsFalse :
-      acceptedFreezeHashPopulated ≡ false
+    acceptedFreezeHashPopulatedIsTrue :
+      acceptedFreezeHashPopulated ≡ true
 
     acceptedExternalAuthorityTokenConstructed :
       Bool
@@ -833,12 +843,12 @@ canonicalPenguinExternalAuthorityFreezeInjectionReceipt =
     ; noPosteriorTuningAttestationPopulatedIsTrue =
         refl
     ; projectionCodeCleanGitHeadPopulated =
-        false
-    ; projectionCodeCleanGitHeadPopulatedIsFalse =
+        true
+    ; projectionCodeCleanGitHeadPopulatedIsTrue =
         refl
     ; acceptedFreezeHashPopulated =
-        false
-    ; acceptedFreezeHashPopulatedIsFalse =
+        true
+    ; acceptedFreezeHashPopulatedIsTrue =
         refl
     ; acceptedExternalAuthorityTokenConstructed =
         false
@@ -916,18 +926,18 @@ canonicalPenguinExternalAuthorityNoPosteriorTuningPopulated :
 canonicalPenguinExternalAuthorityNoPosteriorTuningPopulated =
   refl
 
-canonicalPenguinExternalAuthorityCleanHeadStillGap :
+canonicalPenguinExternalAuthorityCleanHeadPopulated :
   projectionCodeCleanGitHeadPopulated
     canonicalPenguinExternalAuthorityFreezeInjectionReceipt
   ≡
-  false
-canonicalPenguinExternalAuthorityCleanHeadStillGap =
+  true
+canonicalPenguinExternalAuthorityCleanHeadPopulated =
   refl
 
-canonicalPenguinExternalAuthorityFreezeHashStillGap :
+canonicalPenguinExternalAuthorityFreezeHashPopulated :
   acceptedFreezeHashPopulated
     canonicalPenguinExternalAuthorityFreezeInjectionReceipt
   ≡
-  false
-canonicalPenguinExternalAuthorityFreezeHashStillGap =
+  true
+canonicalPenguinExternalAuthorityFreezeHashPopulated =
   refl
