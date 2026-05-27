@@ -1,0 +1,43 @@
+{
+  "artifact": "penguin_gate5_sm_baseline_flavio_2_7_0",
+  "status": "authority_manifest_with_runtime_prediction_snapshot",
+  "observable": "BR(Bs->mumu)",
+  "selected_dataset_artifact": "HEPData:ins2616304:v1",
+  "constraint_table": {
+    "doi": "10.17182/hepdata.135675.v1/t4",
+    "name": "Figure 4-c",
+    "local_archive": "/home/c/Downloads/HEPData-ins2616304-v1.zip",
+    "local_payload": "contour_hist.yaml",
+    "payload_sha256": "9fb80a95fb4b600e3490e47cf150c537b9b66699536c3caed2abe74f307ccb59"
+  },
+  "sm_baseline_authority": {
+    "mode": "flavio_2_7_0_bundled_data_authority",
+    "flavio_version": "2.7.0",
+    "flavio_wheel_sha256": "3d5aaeb5a9df7c479949e4641ccbd2dc662cb010aabf9dda5f725a8a80813b4f",
+    "flavio_sdist_sha256": "08c9c9608ae2ee76d4097b5836e7ca2479f59f9478d0fdddb2cf01b7da4e796e",
+    "local_venv_runtime_available": true,
+    "runtime_python": "/home/c/Documents/code/dashi_agda/.venv/bin/python",
+    "runtime_packages": {
+      "flavio": "2.7.0",
+      "wilson": "2.5.2",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pyyaml": "6.0.3"
+    },
+    "runtime_snapshot_path": "scripts/data/hepdata/penguin_gate5_sm_prediction_flavio_2_7_0_runtime_snapshot.json",
+    "runtime_snapshot_sha256": "fa690ebff9fa508cf553671e5d8f5fb98e3718c4643fabfb0459dc56a0e8ccda",
+    "runtime_note": "repo-local .venv generated flavio.sm_prediction('BR(Bs->mumu)') after installing flavio==2.7.0 and wilson==2.5.2"
+  },
+  "reference_value_note": {
+    "value": "3.64e-9",
+    "uncertainty": "0.12e-9",
+    "citation_hint": "Czaja and Misiak, arXiv:2407.03810, user-provided context",
+    "used_as_runtime_output": false
+  },
+  "runtime_prediction": {
+    "observable": "BR(Bs->mumu)",
+    "value": 3.6289314570849374e-09,
+    "units": "branching fraction, dimensionless",
+    "snapshot_sha256": "fa690ebff9fa508cf553671e5d8f5fb98e3718c4643fabfb0459dc56a0e8ccda"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "artifact": "penguin_gate5_projection_runner_manifest",
+  "status": "candidate_runner_hash_manifest_dirty_worktree",
+  "git_head": "81fc16c11af4f4152410ea9ce9269c68cc223387",
+  "worktree_clean": false,
+  "runner_candidates": [
+    {
+      "path": "scripts/hepdata_projection_contract.py",
+      "sha256": "b2b5099e45d9fbc57436087f7bce794d316429012eb4d83092d58108524c2dc1"
+    },
+    {
+      "path": "scripts/minimize_profile_summary_projection.py",
+      "sha256": "ab9cf29e1e4ff081e3c301aa0395f6015dbf93b2320b5d1a329bf86550186fb6"
+    },
+    {
+      "path": "scripts/run_t43_projection.py",
+      "sha256": "decba81b1c1e503ca8ea7eaa21e7b61ad0b50fc2fc1315e90239640db88f033f"
+    }
+  ],
+  "freeze_gate_note": "projection_code_clean_git_head remains unpopulated because the current worktree is dirty; this manifest only freezes candidate runner file hashes"
+}
