@@ -3,6 +3,15 @@
 Date: `2026-05-29`
 Status: docs-only substantive draft; fail-closed; non-promoting
 
+Manager A final CKM consolidation is in
+[`Docs/Paper6FinalDraftUpdate.md`](./Paper6FinalDraftUpdate.md), with the
+companion CKM section in [`Docs/Paper6CKMSection.md`](./Paper6CKMSection.md).
+That update records the `y13` bridge formula
+`(Y_d)13 = (24*pi/sqrt6) * exp(i delta_29)`, the Hecke `p=29` phase diagnostic,
+the now-specified diagnostic CKM diagonalisation pipeline, and the deg23
+Faltings-height route.  These additions are diagnostic only: no physical CKM,
+CP-phase, PDG, or Standard Model promotion follows.
+
 Contribution claim: the current repository supports a carrier-side matter
 surface in which Yukawa entries, ultrametric depth slots, symbolic
 off-diagonal up-sector entries, and alpha diagnostics form a suppression
@@ -39,10 +48,14 @@ are derived from fermion-mass ratio diagnostics, not accepted constants.  The
 two alpha estimates currently recorded do not agree as an accepted common-alpha
 receipt.  The off-diagonal up-sector entries are symbolic carrier data with an
 unknown physical coupling scale.  The current carrier CKM matrix remains the
-identity, so nonzero CKM mixing and CP violation are not derived.  The Cabibbo
-target `theta_C = arcsin(alpha1 * g12)` is recorded as a target form only:
-`g12`, an arcsin error bound, PDG authority binding, and a non-identity physical
-CKM diagonalizer remain absent.
+identity, so nonzero CKM mixing and CP violation are not derived.  The older
+`theta_C = arcsin(alpha1 * g12)` parametrization is no longer the intended
+Cabibbo route.  The live Cabibbo diagnostic is
+`|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)`, where the `pi*sqrt(3)` factor is the
+X0(4) modular-volume normalization receipt.  Numerically this is a 0.04%
+diagnostic against the Cabibbo-sized comparison value, but it remains
+normalised by `U1CMOrbitIntegralReceipt`; physical CKM diagonalisation remains open.  The p3-p5/A lane is
+separate Vcb work and is not needed for lambda.
 
 ## 1. Scope and Claim Discipline
 
@@ -98,20 +111,24 @@ physical value promotion, and physical ratio promotion false.
 
 `CKMVusCarrierPredictionTargetReceipt.agda` records the first non-identity CKM
 target.  The current carrier matrix has zero off-diagonal entries, so the
-carrier `v12` entry is zero.  The physical target is stored only as a
-PDG-sized comparison datum for `|V_us|`, together with a symbolic target
-formula `|V_us|_target(alpha,g_12)=alpha*g_12`.  The receipt keeps the
-accepted alpha coupling, off-diagonal coupling evaluation, physical
-eigenbasis, exact physical CKM product, PDG authority binding, and error bound
-open.
+carrier `v12` entry is zero.  Its older symbolic target formula
+`|V_us|_target(alpha,g_12)=alpha*g_12` should be treated as legacy
+bookkeeping, not as the current Cabibbo explanation.  The current intended
+Cabibbo comparison is `|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)`, with the X0(4) modular-volume step now receipted by `U1CMOrbitIntegralReceipt`.  The p3-p5/A receipts remain
+relevant to the separate Vcb lane, not to lambda.  The receipt keeps the
+physical eigenbasis, exact physical CKM product, PDG authority binding, and
+error bound open.
 
 `CabibboAngleCarrierReceipt.agda` binds the ratio and `|V_us|` target surfaces
-into a Cabibbo-angle target.  It records
-`theta_C = arcsin(alpha1 * g12)` as the carrier form and
-`theta_C = arcsin(|V_us|)` as the comparison target.  Its positive statement is
-that the Yukawa suppression pattern is consistent at the carrier-diagnostic
-level.  Its governing negative statement is that `cabibboAngleDerived = false`
-and physical CKM promotion remains false.
+into a Cabibbo-angle target.  Any retained `theta_C = arcsin(alpha1 * g12)`
+language should be read as stale parametrization, not as a promoted or preferred
+derivation path.  The intended Cabibbo comparison is now
+`|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)`.  Its positive statement is now that
+`U1CMOrbitIntegralReceipt` derives the X0(4) p2-p3 sector-angle factor; the
+Yukawa suppression pattern is consistent at the carrier-diagnostic level.  Its
+governing negative statement is that `cabibboAngleDerived = false`,
+`sectorAngleNormalizationDerived = true`, and physical CKM promotion remains
+false until physical diagonalisation and PDG authority binding are inhabited.
 
 ## 3. Carrier-Derived Yukawa Texture
 
@@ -184,23 +201,44 @@ diagnostic rather than promoted.  The third is absent.
 ### 4.1 Modular j Alpha-Geometry Target
 
 `DASHI.Physics.Moonshine.ModularJInvariantAlphaReceipt` records a new
-moonshine-facing alpha target.  It freezes only the classical modular anchors
-`j(i)=1728`, `j(rho)=0`, and the Eisenstein elliptic-point statement.  Its
-negative fields are part of the claim:
+moonshine-facing alpha target.  It freezes the classical modular anchors
+`j(i)=1728`, `j(rho)=0`, `j((1+i*sqrt(7))/2)=-3375`, and the Eisenstein
+elliptic-point statement.  The current numerical check in
+`Docs/AlphaFromJNumericalCheck.md` computes the absolute CM differences
+`1728`, `5103`, and `3375`, then tests simple normalizations against
+`alpha1 = 0.041240` and `alpha2 = 0.085720`.
+
+The honest result is mixed.  The normalization
+`72 / |j(i)-j(rho)| = 1/24 = 0.041666666667` gives
+`alpha1` match `true` under the configured absolute tolerance, with about a
+`1.01%` discrepancy from the readback.  The factor `72 = 3*24` is a modularly
+meaningful signal: `3` is the elliptic stabilizer order at `rho` in
+`PSL_2(Z)`, and `24` is the weight of `Delta = eta^24`.  However, the
+correction factor `alpha1 / (1/24) = 0.98976` is unidentified.  No tested
+normalization matches `alpha2`, so `alpha2` remains a no-hit.
+
+The negative fields are therefore still part of the claim:
 
 ```text
 alphaDerivedFromModularGeometry = false
 alphaOneDerivedFromModularGeometry = false
 alphaTwoDerivedFromModularGeometry = false
+alphaTwoModularNearHit = false
+alphaOneCorrectionIdentified = false
 alphaValuesPromoted = false
 ```
 
-This gives Paper 6 a precise next numerical experiment: define a normalized
-map from supersingular or CM \(j\)-value separations to the carrier alpha
-diagnostics and test whether it reproduces `alpha1 = 0.041240` and
-`alpha2 = 0.085720` with a frozen normalization rule.  The current repository
-has not done that.  Therefore the honest statement is that modular \(j\)
-geometry is a candidate source for the alpha diagnostics, not their derivation.
+This gives Paper 6 a sharper next target: explain, reject, or correct the
+`1/24` near-hit with a frozen modular normalization rule, and separately find
+or rule out an `alpha2` normalization.  The current repository has not done
+that.  Therefore the honest statement is that modular \(j\) geometry contains
+a notable alpha1 signal, not a derivation of the alpha diagnostics.
+
+`DASHI.Physics.Moonshine.KroneckerLimitAlphaCorrectionReceipt` records the
+correction route as a frontier, not a result.  It names the Kronecker-limit /
+eta / Gamma/Petersson normalization target for explaining
+`alpha1 / (1/24) = 0.98976`, while keeping the correction identity, alpha2
+match, formal carrier-alpha map, and modular-alpha derivation false.
 
 `DASHI.Physics.Moonshine.MonsterOrderDepthBoundReceipt` supplies a related but
 separate target: the Monster-order exponent table is recorded as a conjectural
@@ -237,9 +275,10 @@ The same receipt fixes the negative boundary:
 ```text
 cabibboAngleDerived = false
 physicalCKMPromoted = false
+sectorAngleNormalizationDerived = true
 ```
 
-These two fields must appear anywhere the Cabibbo target is presented as a
+These false fields must appear anywhere the Cabibbo target is presented as a
 headline result.  The paper may say that the carrier has a Cabibbo target
 surface.  It may not say that the Cabibbo angle has been derived.
 
@@ -252,8 +291,10 @@ Paper 6.  It combines four carrier-side observations:
 - `alpha_1` and `alpha_1^2` expose a first-generation suppression diagnostic;
 - the upper-triangular off-diagonal entries use smaller inter-lane and
   depth-suppressed carrier values;
-- the Cabibbo target form connects the first mixing lane to the alpha
-  diagnostic rather than to an already-promoted CKM matrix.
+- the Cabibbo target is now routed through the active
+  `pi*sqrt(3)*sqrt(m_u/m_c)` diagnostic, with `U1CMOrbitIntegralReceipt`
+  supplying the X0(4) sector normalization, rather than through an
+  already-promoted CKM matrix.
 
 This is a structural consistency statement.  It is not a calibrated
 phenomenological fit.  It also does not override the fact that
@@ -274,59 +315,73 @@ carrier texture -> physical Yukawa matrix -> CKM prediction
 ## 5. Cabibbo and CKM Target Surfaces
 
 The Cabibbo lane is valuable because it records precisely where a future
-non-identity CKM derivation would have to enter.  The target form is:
+non-identity CKM derivation would have to enter.  The old target form was:
 
 ```text
 theta_C = arcsin(alpha1 * g12)
 ```
 
-This refines the `|V_us|` symbolic target:
+and the matching legacy `|V_us|` symbolic target was:
 
 ```text
 |V_us|_target(alpha,g_12)=alpha*g_12
 ```
 
-The current carrier does not evaluate this target.  `g12` is not supplied as
-an accepted physical coupling.  The arcsin approximation has no accepted error
-bound.  The PDG-sized `|V_us|` datum is a comparison target rather than a
-derived value.  The carrier CKM product is closed only in the diagonal identity
-case, so the current matrix cannot be advertised as a physical CKM prediction.
+That parametrization was wrong as the Cabibbo explanation.  The current path is
+the U(1) CM orbit-integral normalization diagnostic:
+
+```text
+|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)
+```
+
+The current numerical check is a 0.04% diagnostic against the Cabibbo-sized
+comparison value.  The carrier now supplies the X0(4) modular-volume normalization in `U1CMOrbitIntegralReceipt`.  The named blockers are physical CKM diagonalisation and PDG authority binding.  The
+PDG-sized `|V_us|` datum is a comparison target rather than a derived value.
+The carrier CKM product is closed only in the diagonal identity case, so the
+current matrix cannot be advertised as a physical CKM prediction.
 
 Paper 6 should therefore state the Cabibbo result in two parts:
 
-- positive: the carrier has a typed symbolic form for the first CKM mixing
-  target and it is connected to the alpha/Yukawa hierarchy diagnostics;
-- negative: `cabibboAngleDerived = false` and `physicalCKMPromoted = false`.
+- positive: the carrier has a typed X0(4) modular-volume comparison path for
+  the first CKM mixing target, connected to the alpha/Yukawa hierarchy
+  diagnostics by `sqrt(m_u/m_c)`;
+- negative: `cabibboAngleDerived = false`,
+  `sectorAngleNormalizationDerived = true`, and `physicalCKMPromoted =
+  false`.
 
 The negative half is not a caveat after the result; it is part of the result.
 It prevents the carrier hierarchy pattern from being silently promoted into a
 CKM theorem.
 
-### 5.1 Why `alpha_1^2 ~ m_u/m_c` Is Not A Cabibbo Derivation
+### 5.1 Why The U(1) CM Diagnostic Is Not A Cabibbo Derivation
 
-The relation `alpha_1^2 ~ m_u/m_c` is useful because it links the first alpha
-readback to a first/second generation hierarchy diagnostic.  It does not by
+The corrected Cabibbo diagnostic is
+`|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)`.  This is useful because it isolates the
+Cabibbo-sized lambda comparison in the up-ratio readback plus one normalization
+factor.  The current numerical agreement is a 0.04% diagnostic.  It does not by
 itself supply:
 
-- a physical `g12`;
+- the `pi*sqrt(3)` factor derived from `vol(X0(4))=2*pi` in `U1CMOrbitIntegralReceipt`;
 - a physical weak-to-mass basis change;
 - a non-identity diagonalizer pair for the up/down Yukawa matrices;
 - a promoted physical CKM product;
-- an arcsin approximation/error bound accepted for `theta_C`;
+- an accepted sector-angle normalization theorem;
 - an authority-bound PDG comparison receipt.
 
 Therefore the Cabibbo target remains a target:
 
 ```text
-theta_C = arcsin(alpha1 * g12)
+|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)
 ```
 
 not a derived angle.  The most precise prose formulation is:
 
 ```text
-The carrier records a Cabibbo-angle target whose alpha factor is compatible
-with the first-generation Yukawa suppression diagnostic, while the physical
-coupling, diagonalization, and CKM promotion receipts remain absent.
+The carrier records a Cabibbo-angle target whose X0(4) modular-volume
+normalization gives |V_us| = pi*sqrt(3)*sqrt(m_u/m_c) at 0.04% comparison
+accuracy.  `U1CMOrbitIntegralReceipt` derives the p2-p3 sector-angle
+normalization; physical diagonalization, CKM promotion, and PDG authority
+receipts remain absent.
 ```
 
 This sentence keeps all three required facts visible:
@@ -335,36 +390,67 @@ This sentence keeps all three required facts visible:
 yukawaSuppressPatternConsistent = true
 cabibboAngleDerived = false
 physicalCKMPromoted = false
+sectorAngleNormalizationDerived = true
 ```
 
-### 5.2 `g12` Is The Remaining DHR-Sector Parameter
+### 5.2 The Old `g12` Normalization Is Not The Cabibbo Solution
 
-The symbol `g12` should be presented as the remaining free parameter in the
-Cabibbo target, not as a fitted constant and not as a value already derived by
-the carrier.  The current target has the form:
+The symbol `g12` should not be presented as the current remaining Cabibbo
+parameter.  The older target had the form:
 
 ```text
 theta_C = arcsin(alpha1 * g12)
 |V_us|_target(alpha,g_12)=alpha*g_12
 ```
 
-Here `alpha1` is the current first-generation suppression diagnostic, while
-`g12` is the still-missing first/second generation mixing coefficient that
-would have to be determined by DHR sector data.  Honest Paper 6 wording is:
-the carrier has isolated the slot where DHR sector structure must enter the
-Cabibbo/`|V_us|` target, but it has not supplied the sector representation,
-intertwiner normalization, or physical weak-to-mass basis data that would
-determine `g12`.
+This parametrization was wrong for the Cabibbo interpretation.  It may remain
+as a historical diagnostic surface, but it should not be used as the route to a
+Cabibbo derivation.
 
-This keeps the direction of explanation precise.  Future work may try to derive
-`g12` from non-identity DHR sector actions, Higgs/Yukawa intertwiners, and a
-calibrated physical basis.  The present draft may not choose `g12` by matching
-PDG `|V_us|`, may not call it a first-principles prediction, and may not treat
-the symbolic target as an inhabited CKM theorem.  Until the DHR-sector receipt
-for `g12` is inhabited, the governing flags remain:
+`G12FromDHRSectorsReceipt.agda` now records one concrete diagnostic test for
+this slot.  It uses the shared `j=1728` bridge, a Hecke norm diagnostic
+`6/2=3`, and finite point counts `3` and `4` to record
+`g12_diagnostic = sqrt(3)/2`.  Substituting the current
+`alpha1 = 0.041240` gives `|V_us|_diagnostic` approximately `0.0357`.  This is
+a mismatch against the PDG-sized `|V_us|` comparison, with discrepancy factor
+approximately `6.25`.
+
+The same receipt recorded a sector-angle/X0(4) modular-volume normalization.  If the raw
+isogeny amplitude is multiplied by `2*pi`, then
+
+```text
+g12_legacy_2pi_diagnostic = 2*pi*(sqrt(3)/2) = pi*sqrt(3)
+|V_us|_legacy_2pi_diagnostic = alpha1*pi*sqrt(3) approximately 0.2244
+```
+
+This numerical near-hit should be softened to a rejected or deprecated
+diagnostic coincidence for Cabibbo, not a candidate solution.  It is not a
+Cabibbo derivation.  The active formula keeps the same numerical
+`pi*sqrt(3)` shape, but now assigns the remaining formal burden specifically to
+`U1CMOrbitIntegralReceipt`; using the receipted `2*pi` X0(4) sector normalization
+would not by itself inhabit that receipt.  The numerical check is frozen in
+`Docs/G12IsogenyNormalizationDiagnostic.md` as diagnostic history.
+
+Honest Paper 6 wording is: the carrier has isolated the slot where DHR sector
+structure was previously tested for the Cabibbo/`|V_us|` target, but that
+`g12` parametrization was the wrong Cabibbo path.  The raw diagnostic misses,
+and the sector-angle-normalized diagnostic should not be promoted as an
+inhabited solution; neither supplies a physical sector representation, the
+U(1) CM orbit-integral receipt, intertwiner normalization, or physical
+weak-to-mass basis.
+
+This keeps the direction of explanation precise.  Future Cabibbo work should construct the physical diagonalization
+and CKM comparison.  The p3-p5/A lane remains separate work for Vcb and is not
+required for lambda.  The present draft may not choose `g12` by matching PDG
+`|V_us|`, may not call the `sqrt(3)/2` or `2*pi` diagnostic a first-principles
+prediction, and may not treat any symbolic target as an inhabited CKM theorem.
+The governing flags remain:
 
 ```text
 cabibboAngleDerived = false
+sectorAngleNormalizationDerived = true
+angularNormalizedDiagnosticPromoted = false
+matchesPDG = false
 physicalCKMPromoted = false
 ```
 
@@ -444,9 +530,11 @@ fermion masses.
 derive the Cabibbo angle or promote a physical non-identity CKM matrix.
 
 **Proof status.**  `CabibboAngleCarrierReceipt.agda` records
-`cabibboAngleDerived = false`; `CKMVusCarrierPredictionTargetReceipt.agda`
-records `|V_us|` as comparison-only; and the current carrier CKM matrix remains
-identity.
+`cabibboAngleDerived = false` and
+`sectorAngleNormalizationDerived = true`;
+`CKMVusCarrierPredictionTargetReceipt.agda` records `|V_us|` as
+comparison-only; and the current carrier CKM matrix remains identity, so
+physical CKM promotion is false.
 
 ## 9. Validation Protocol for Future Alpha Claims
 
@@ -481,7 +569,13 @@ The current blockers are:
   weak/mass-basis identification, non-identity diagonalizers, exact physical
   CKM product, and CP/Jarlskog derivation;
 - Cabibbo target: missing accepted common alpha, evaluated `g12`, arcsin error
-  bound, and PDG authority binding;
+  bound, and PDG authority binding in the legacy parametrization; in the active
+  U(1) CM path, sector-angle normalization is derived; missing physical diagonalization
+  derivation, physical CKM promotion, and PDG authority binding; p3-p5/A is
+  separate Vcb work and is not needed for lambda;
+- modular alpha: alpha1 has a notable `1/24` near-hit, but the correction
+  factor is unidentified, alpha2 is a no-hit, and
+  `alphaDerivedFromModularGeometry = false`;
 - DHR/Yukawa compatibility: identity and symbolic checks exist, but actual
   physical non-identity DHR sector representations remain absent;
 - Wilson/P5 prime: downstream empirical contact exists in separate receipts,

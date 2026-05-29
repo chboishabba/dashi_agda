@@ -15,12 +15,13 @@ Middle6 orchestrator recheck `2026-05-21`:
   with their promoted receipts.
 - The tracked root validation path is green (`timeout 300s agda -i . -i
   DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda` exits 0).
-- The current lower6 monitor records `ymEvidenceTermInhabited = true`,
-  `grEvidenceTermInhabited = true`, `aqftDhrEvidenceTermInhabited = true`,
-  `ckmSmEvidenceTermInhabited = true`, and `terminalClaimPromoted = true`.
+- The current lower6 monitor may record inhabited component evidence, but this
+  board must not cite a live terminal promotion; `terminalClaimPromoted` remains
+  a fail-closed boundary until the full product receipt and external authority
+  obligations are present.
 
 The current middle6/upper6 coordination tranche is therefore closed at
-assigned scope with a promoted terminal monitor surface. Historical false
+assigned scope without promoting the terminal monitor surface. Historical false
 entries below are retained as prior-wave ledger notes.
 The next internal non-promoting target is the inhabited 3-6-9 matrix-generation
 bridge into the canonical `M2(C)` basis; the follow-on `M3(C)` / `SU(3)`
@@ -32,7 +33,7 @@ Neither changes the live terminal monitor or the historical ledger framing.
 Concrete evidence:
 - middle6 lanes m1-m6 are marked complete in the tranche ledger.
 - upper6 lanes u1-u6 are marked complete in the tranche ledger.
-- terminal monitor fields are promoted on the live monitor surface; older
+- terminal monitor fields are not promoted by this coordination board; older
   tranche entries below may still mention prior-wave false states for traceability.
 - `git diff --check` is clean on the coordinated status surface set.
 

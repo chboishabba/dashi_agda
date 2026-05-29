@@ -26,6 +26,16 @@ ALPHA_TARGETS = {
 }
 MATCH_TOLERANCE = Decimal("0.001000")
 
+MASS_DIAGNOSTIC_INPUTS = {
+    "mu_mev": Decimal("2.16"),
+    "mc_mev": Decimal("1270"),
+    "md_mev": Decimal("2.16"),
+    "delta_md_mev": Decimal("2.5"),
+    "ms_mev": Decimal("93.5"),
+    "pdg_vus": Decimal("0.2243"),
+    "pdg_vus_uncertainty": Decimal("0.0008"),
+}
+
 J_VALUES = {
     "j(i)": 1728,
     "j(rho)": 0,
@@ -52,6 +62,20 @@ class NormalizationResult:
     target: Decimal
     abs_error: Decimal
     match: bool
+
+
+@dataclass(frozen=True)
+class CabibboMassDiagnostic:
+    alpha1_from_mu_mc: Decimal
+    alpha1_target_ratio: Decimal
+    target_alpha1_over_mass_alpha1: Decimal
+    md_over_ms: Decimal
+    sqrt_md_over_ms: Decimal
+    pdg_vus: Decimal
+    pdg_vus_uncertainty: Decimal
+    vus_abs_error: Decimal
+    vus_relative_error: Decimal
+    vus_sigma_offset: Decimal
 
 
 def dec(frac: Fraction) -> Decimal:
@@ -128,10 +152,35 @@ def all_results(differences: list[Difference]) -> list[NormalizationResult]:
     return rows
 
 
+def cabibbo_mass_diagnostic() -> CabibboMassDiagnostic:
+    inputs = MASS_DIAGNOSTIC_INPUTS
+    alpha1_from_mu_mc = (inputs["mu_mev"] / inputs["mc_mev"]).sqrt()
+    md_over_ms = (inputs["md_mev"] + inputs["delta_md_mev"]) / inputs["ms_mev"]
+    sqrt_md_over_ms = md_over_ms.sqrt()
+    vus_abs_error = abs(sqrt_md_over_ms - inputs["pdg_vus"])
+    return CabibboMassDiagnostic(
+        alpha1_from_mu_mc=alpha1_from_mu_mc,
+        alpha1_target_ratio=alpha1_from_mu_mc / ALPHA_TARGETS["alpha1"],
+        target_alpha1_over_mass_alpha1=ALPHA_TARGETS["alpha1"] / alpha1_from_mu_mc,
+        md_over_ms=md_over_ms,
+        sqrt_md_over_ms=sqrt_md_over_ms,
+        pdg_vus=inputs["pdg_vus"],
+        pdg_vus_uncertainty=inputs["pdg_vus_uncertainty"],
+        vus_abs_error=vus_abs_error,
+        vus_relative_error=vus_abs_error / inputs["pdg_vus"],
+        vus_sigma_offset=vus_abs_error / inputs["pdg_vus_uncertainty"],
+    )
+
+
 def markdown_report(differences: list[Difference], rows: list[NormalizationResult]) -> str:
     any_alpha1 = any(row.target_name == "alpha1" and row.match for row in rows)
     any_alpha2 = any(row.target_name == "alpha2" and row.match for row in rows)
     both_targets = any_alpha1 and any_alpha2
+    alpha1_near_hit = Decimal(1) / Decimal(24)
+    alpha1_abs_discrepancy = abs(alpha1_near_hit - ALPHA_TARGETS["alpha1"])
+    alpha1_relative_discrepancy = alpha1_abs_discrepancy / alpha1_near_hit
+    alpha1_correction_factor = ALPHA_TARGETS["alpha1"] / alpha1_near_hit
+    cabibbo = cabibbo_mass_diagnostic()
     lines = [
         "# Alpha From CM j-Values Numerical Check",
         "",
@@ -195,7 +244,62 @@ def markdown_report(differences: list[Difference], rows: list[NormalizationResul
             "within tolerance, and the alpha1 near-hit is not a formal bridge from modular "
             "geometry to the carrier alpha diagnostics.",
             "",
-            "Therefore this check does not justify promoting an alpha derivation from CM j-values.",
+            "The factor `72 = 3 * 24` is modularly meaningful: `3` is the elliptic "
+            "stabilizer order at `rho` in `PSL_2(Z)`, and `24` is the weight of the "
+            "discriminant `Delta = eta^24`.  This records a real signal, but not a "
+            "derivation.",
+            "",
+            "For the alpha1 near-hit, the discrepancy is",
+            "",
+            "```text",
+            f"|1/24 - alpha1| = {fmt_decimal(alpha1_abs_discrepancy, 12)}",
+            f"|1/24 - alpha1| / (1/24) = {fmt_decimal(alpha1_relative_discrepancy, 8)}",
+            f"                               ~= {fmt_decimal(alpha1_relative_discrepancy * Decimal(100), 4)}%",
+            "```",
+            "",
+            f"The correction factor `alpha1 / (1/24) = {fmt_decimal(alpha1_correction_factor, 5)}` "
+            "is not identified as a Gamma/pi/algebraic constant in this check.  The next "
+            "admissible check is a discriminant/Petersson normalization probe of the form",
+            "",
+            "```text",
+            "alpha1 ?= c0 / |j(tau_p2)-j(tau_p3)| * |Delta(tau_p2)/Delta(tau_p3)|^(1/12)",
+            "```",
+            "",
+            "where `c0` would have to be fixed by an independently defined carrier prime-lane "
+            "metric normalization.",
+            "",
+            "## Cabibbo Mass-Ratio Diagnostic",
+            "",
+            "This separate diagnostic records the common first-generation mass-ratio path:",
+            "",
+            "```text",
+            f"alpha1_mass = sqrt(2.16 / 1270) = {fmt_decimal(cabibbo.alpha1_from_mu_mc, 12)}",
+            f"alpha1_mass / alpha1_target = {fmt_decimal(cabibbo.alpha1_target_ratio, 8)}",
+            f"alpha1_target / alpha1_mass = {fmt_decimal(cabibbo.target_alpha1_over_mass_alpha1, 8)}",
+            "",
+            f"md/ms = (2.16 + 2.5) / 93.5 = {fmt_decimal(cabibbo.md_over_ms, 12)}",
+            f"sqrt(md/ms) = {fmt_decimal(cabibbo.sqrt_md_over_ms, 12)}",
+            f"PDG |Vus| comparison = {cabibbo.pdg_vus} +/- {cabibbo.pdg_vus_uncertainty}",
+            f"|sqrt(md/ms) - |Vus|| = {fmt_decimal(cabibbo.vus_abs_error, 12)}",
+            f"relative error = {fmt_decimal(cabibbo.vus_relative_error * Decimal(100), 4)}%",
+            f"sigma offset against quoted PDG uncertainty = {fmt_decimal(cabibbo.vus_sigma_offset, 2)}",
+            "```",
+            "",
+            "The PDG comparison value is the rounded 2024 kaon-sector Cabibbo-angle "
+            "average `|Vus| = 0.22431(85)` from PDG Review of Particle Physics, "
+            "`Vud, Vus, the Cabibbo Angle, and CKM Unitarity`, Eq. 67.18.",
+            "",
+            "The numerical proximity is useful as a diagnostic path: the alpha1 readback "
+            "from `sqrt(2.16/1270)` is essentially the recorded `alpha1 = 0.041240`, "
+            "and the shifted down/strange ratio gives a Cabibbo-scale value near the "
+            "PDG `|Vus|` value.  It is not a derivation, because the additive "
+            "`delta_md = 2.5 MeV` and the strange mass input `ms = 93.5 MeV` are not "
+            "carrier-derived in this check.",
+            "",
+            "Therefore this check does not justify promoting an alpha or Cabibbo "
+            "derivation.  It records one alpha1 near-hit, no alpha2 near-hit, no "
+            "simultaneous CM j-value derivation, and a Cabibbo mass-ratio diagnostic "
+            "whose required `delta_md` and `ms` inputs remain external.",
             "",
         ]
     )
@@ -205,6 +309,7 @@ def markdown_report(differences: list[Difference], rows: list[NormalizationResul
 def main() -> None:
     differences = cm_differences()
     rows = all_results(differences)
+    cabibbo = cabibbo_mass_diagnostic()
     report = markdown_report(differences, rows)
     REPORT_PATH.write_text(report, encoding="utf-8")
 
@@ -212,6 +317,15 @@ def main() -> None:
     for diff in differences:
         print(f"  {diff.label}: signed={diff.signed}, absolute={diff.absolute}")
     print(f"targets: alpha1={ALPHA_TARGETS['alpha1']}, alpha2={ALPHA_TARGETS['alpha2']}")
+    print(
+        "cabibbo mass diagnostic: "
+        f"alpha1_mass={fmt_decimal(cabibbo.alpha1_from_mu_mc)}, "
+        f"target_over_mass={fmt_decimal(cabibbo.target_alpha1_over_mass_alpha1, 8)}, "
+        f"md_over_ms={fmt_decimal(cabibbo.md_over_ms)}, "
+        f"sqrt_md_over_ms={fmt_decimal(cabibbo.sqrt_md_over_ms)}, "
+        f"pdg_vus={cabibbo.pdg_vus}+/-{cabibbo.pdg_vus_uncertainty}, "
+        f"sigma_offset={fmt_decimal(cabibbo.vus_sigma_offset, 2)}"
+    )
     print(f"tolerance: {MATCH_TOLERANCE}")
     for row in rows:
         if row.match:

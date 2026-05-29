@@ -464,6 +464,32 @@ dimensionful mass gap convergence is still missing.  In particular, the
 repository has not constructed a scale-setting and continuum-limit theorem that
 turns finite carrier gap data into a depth-independent positive lower bound for
 the physical dimensionful Yang-Mills Hamiltonian.
+`canonicalRGContractionReceipt` in
+`DASHI.Physics.Closure.RGContractionReceipt` sharpens that statement into the
+fixed-point route: prove that the FactorVec RG map has operator norm
+\(\alpha_1\), hence is a strict contraction on the self-adjoint carrier
+Hamiltonian space, then apply a Banach fixed-point theorem and prove the
+fixed-point Hamiltonian has a positive spectral gap.  The receipt records
+`alphaOneLessThanOneRecorded = true`, but keeps
+`operatorNormEqualsAlphaOneProved = false`, `rgMapContractsProved = false`,
+`banachFixedPointApplied = false`, `positiveFixedPointGapProved = false`, and
+`yangMillsMassGapClayPromoted = false`.
+The present tranche splits that fixed-point route into three smaller receipts.
+`canonicalRGOperatorNormReceipt` in
+`DASHI.Physics.Closure.RGOperatorNormReceipt` isolates the metric eigensystem
+claim \(\|T_d^{RG}\|_{op}=\alpha_1\), records `alphaOneLessThanOneRecorded =
+true`, and keeps `operatorNormEqualityProved = false`.
+`canonicalRGBanachFixedPointReceipt` in
+`DASHI.Physics.Closure.RGBanachFixedPointReceipt` records Banach fixed point
+authority and the conditional lower-bound target
+`gap(H*) >= (1-alpha1)*epsilon_min > 0`, while keeping
+`uniqueFixedPointConstructed = false` and
+`positiveSpectralGapAtFixedPointProved = false`.
+`canonicalOSPositivityFromRGFixedPointReceipt` in
+`DASHI.Physics.Closure.OSPositivityFromRGFixedPoint` records the monotone
+OS-positive-cone route from the finite carrier to a future \(H^*\), while
+keeping the \(H_0\) RG-Hamiltonian OS check, the fixed-point OS proof,
+Wightman reconstruction, and Clay promotion false.
 
 `canonicalCarrierNSSmoothConvergenceReceipt` in
 `DASHI.Physics.Closure.CarrierNSSmoothConvergenceReceipt` consumes the finite
@@ -477,7 +503,25 @@ ultrametric Aubin-Lions/C-infinity NS convergence is still missing.  In
 particular, the repository has not constructed an ultrametric Aubin-Lions
 compactness theorem plus \(C^\infty\) convergence/bootstrapping passage from the
 finite-depth Sobolev, enstrophy, and BKM controls to a continuum smooth
-Navier-Stokes solution.  These four receipts therefore strengthen DASHI's
+Navier-Stokes solution.  `canonicalUltrametricAubinLionsReceipt` in
+`DASHI.Physics.Closure.UltrametricAubinLionsReceipt` packages the three-bound
+route explicitly: finite Leray energy and ultrametric Sobolev are recorded,
+the weak time-derivative estimate is a target, and carrier Aubin-Lions
+compactness, precompactness, smooth-limit bootstrap, continuum NS preservation,
+and Clay promotion remain false.  The present tranche also splits this route:
+`canonicalAubinLionsBound3FullReceipt` in
+`DASHI.Physics.Closure.AubinLionsBound3Full` records the exact
+Ladyzhenskaya/Leray/diffusion/pressure route for
+\(\|\partial_t u_d\|_{L^2H^{-1}}\), consuming the focused
+`NavierStokesBound3TimeDerivativeReceipt` as the receipt-level construction;
+`canonicalUltrametricAubinLionsCompactnessReceipt`
+in `DASHI.Physics.Closure.UltrametricAubinLionsCompactness` records
+Aubin-Lions as CitationAuthority and the \(L^2([0,T];L^2)\) precompact
+subsequence target; and `canonicalEllipticBootstrapReceipt` in
+`DASHI.Physics.Closure.EllipticBootstrapReceipt` records the Evans-style
+\(L^{4/3}\to L^3\to L^6\to C^\infty\) bootstrap path.  Each keeps the
+constructed estimate, compactness, smooth limit, continuum equation passage,
+and Clay promotion false.  These receipts therefore strengthen DASHI's
 fail-closed typed promotion boundaries; they do not supply Clay problem
 solutions.
 
@@ -500,9 +544,24 @@ The Moonshine and flavor diagnostics are kept in the same fail-closed style.
 numerical check in `Docs/AlphaFromJNumericalCheck.md`: among the tested
 normalizations of the CM values `j(i)=1728`, `j(rho)=0`, and
 `j((1+i*sqrt(7))/2)=-3375`, only
-`72 / |j(i)-j(rho)| = 1/24 = 0.041666666667` is an alpha1 near-hit; no alpha2
-match and no simultaneous alpha1/alpha2 derivation is found.  Consequently
-`alphaDerivedFromModularGeometry = false`.  `DASHI.Physics.Moonshine.MonsterOrderDepthBoundReceipt`
+`72 / |j(i)-j(rho)| = 72/1728 = 1/24 = 0.041666666667` is a real alpha1
+near-hit worth keeping as a diagnostic signal against observed
+`alpha1 = 0.041240`, with `1.024%` discrepancy; no alpha2 match and no
+simultaneous alpha1/alpha2 derivation is found.  Consequently
+`alphaDerivedFromModularGeometry = false`.  The factor \(72 = 3 \times 24\) is
+modularly meaningful: \(3\) is the elliptic stabilizer order at \(\rho\), and
+\(24\) is the weight of the discriminant \(\Delta=\eta^{24}\).  This makes the
+near-hit a real diagnostic signal, but not a derivation.  The remaining
+correction factor \(\alpha_1/(1/24)=0.98976\) is typed in
+`canonicalKroneckerLimitAlphaCorrectionReceipt` in
+`DASHI.Physics.Moonshine.KroneckerLimitAlphaCorrectionReceipt` as a
+Kronecker-limit / eta / Gamma normalization target.  The correction factor is
+not identified, no alpha2 Kronecker-limit formula is found, and
+`alphaDerivedFromModularGeometry` remains false.  The next legitimate numerical
+probe is a discriminant/Petersson normalization with an independently defined
+carrier metric constant \(c_0\); until such a map is constructed, the alpha lane
+remains diagnostic rather than derived.
+`DASHI.Physics.Moonshine.MonsterOrderDepthBoundReceipt`
 records the current discoverable carrier-depth readback
 `[1,2,3,1,1,1,1,1,1,1,1,1,1,1,1]` against the Monster exponent target vector
 `[46,20,9,6,2,2,2,2,2,1,1,1,1,1,1]`; the readback respects the bounds, but
@@ -620,6 +679,12 @@ repo.  The receipt can say that the route is conditionally staged on external
 DR authority and finite internal witnesses.  It cannot say that the DR theorem
 is applied internally, that `Aut^tensor(F)` is constructed here, or that the
 compact group has been identified with the Standard Model group.
+`canonicalArbitrarySectorClosureReceipt` in
+`DASHI.Physics.QFT.ArbitrarySectorClosureReceipt` records the exact next DHR
+obligation: arbitrary direct sums, arbitrary tensor products, conjugates for
+all transportable endomorphisms, a full faithful exact fibre functor, and an
+SM representation-ring match.  All of those fields remain false, so
+`conditionalOnDRAuthority` is not reinterpreted as `G_DHR = G_SM`.
 
 The fail-closed invariant is:
 
@@ -702,17 +767,20 @@ derive or fit the diagnostic parameter under a fixed rule, and reject the rule
 if thresholds fail.  The current state does not supply an accepted common-alpha
 theorem, physical fermion-mass receipts, or physical ratio predictions.
 
-The Cabibbo receipt is especially fail-closed about the off-diagonal coupling.
-Its carrier target form is `theta_C = arcsin(alpha1 * g12)`.  Under the
-carrier-natural normalization `g12 = 1`, the readback gives
-`|V_us|_carrier(g12=1) = 0.041`, while the PDG-sized comparison target is about
-`|V_us| = 0.225`.  The mismatch is therefore a factor of about `5.5`, not a
-successful Cabibbo-angle derivation.  Determining `g12` from DHR sector data is
-an open Gate 7 problem.  The corresponding status remains
-`cabibboAngleDerived = false` and
-`yukawaSuppressionPatternConsistent = true` at the paper level; the current
-receipt spells the latter field as `yukawaSuppressPatternConsistent = true`.
-The former blocks physical CKM promotion, while the latter records only a
+The Cabibbo receipt is especially fail-closed about the first mixing angle.  Its
+older carrier target form `theta_C = arcsin(alpha1 * g12)` is now treated as
+the wrong Cabibbo parametrization, not as the live solution route.  The current
+interpretation is the X0(4) modular-volume normalization
+`|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)`.  The current numerical check is a 0.04%
+diagnostic against the Cabibbo-sized comparison value, and
+`U1CMOrbitIntegralReceipt` now inhabits the p2-p3 sector-angle normalization:
+`sectorAngleNormalizationDerived = true`.  Full `cabibboAngleDerived` and
+physical CKM promotion remain false until physical Yukawa diagonalisation and
+PDG authority binding are inhabited.  The p3-p5/A lane remains separate Vcb
+work and is not needed for lambda.  The old raw `sqrt(3)/2` diagnostic remains
+as the isogeny component inside the inhabited X0(4) normalization.  `yukawaSuppressionPatternConsistent = true`
+at the paper level; the current receipt spells the latter field as
+`yukawaSuppressPatternConsistent = true`.  That field records only a
 pattern-level Yukawa diagnostic.
 
 The Gate 7 invariant is:
@@ -764,11 +832,46 @@ Agda module path and the concrete identifier that the paper cites.
 | `DASHI.Physics.Closure.ClayMillenniumClosureTargetReceipt` | `CarrierOSPositivityAndWightmanTargetReceipt`, `canonicalCarrierOSPositivityAndWightmanTargetReceipt`, `clayMillenniumClosureTargetKeepsYangMillsFalse` | exact Yang-Mills closing target: OS positivity, uniform mass gap, interacting continuum limit, and Wightman reconstruction remain false |
 | `DASHI.Physics.Closure.CarrierFactorVecInjectivityOSPositivity` | `CarrierFactorVecInjectivityOSPositivityReceipt`, `canonicalCarrierFactorVecInjectivityOSPositivityReceipt`, `carrierOSPositivityInhabited`, `carrierOSPositivityDoesNotPromoteYangMillsMassGap`, `carrierOSPositivityDoesNotPromoteClayYangMills` | finite FactorVec depth-step injectivity to transfer-matrix strict positivity to carrier OS-positivity receipt; Wightman, uniform mass gap, and Clay promotion remain false |
 | `DASHI.Physics.Closure.CarrierRenormalizationGroupScaleReceipt` | `CarrierRGScaleReceipt`, `canonicalCarrierRGScaleReceipt`, `carrierRGScaleFrontierOpen`, `dimensionfulMassGapConvergenceNotConstructed`, `carrierRGScaleDoesNotPromoteClayYangMills` | open RG scale frontier: dimensionful mass-gap convergence, continuum Yang-Mills construction, and Clay promotion remain false |
+| `DASHI.Physics.Closure.RGContractionReceipt` | `RGContractionReceipt`, `canonicalRGContractionReceipt`, `rgContractionOperatorNormStillOpen`, `rgContractionMapStillOpen`, `rgContractionDoesNotPromoteClayYangMills` | exact fixed-point route for YM: FactorVec operator norm, RG contraction, Banach fixed point, positive fixed-point gap, and Clay promotion remain false |
+| `DASHI.Physics.Closure.RGOperatorNormReceipt` | `canonicalRGOperatorNormReceipt`, `rgOperatorNormAlphaOneLessThanOneRecorded`, `rgOperatorNormEqualityStillOpen`, `rgOperatorNormDoesNotPromoteClay` | isolates \(\|T_d^{RG}\|_{op}=\alpha_1\) from the carrier metric eigensystem; alpha1<1 is recorded, but the equality and Clay promotion remain false |
+| `DASHI.Physics.Closure.FactorVecAverageVsSumReceipt` | `canonicalFactorVecAverageVsSumReceipt`, `factorVecAverageVsSumDoesNotPromoteClay` | audits the RG formula ambiguity: parent-sum language does not prove the alpha1 norm; the normalized child-average map is required |
+| `DASHI.Physics.Closure.RGOperatorNormFormalProof` | `canonicalRGOperatorNormFormalProofReceipt`, `normalizedRGContractionRecorded` | records the finite alpha1 norm computation only for the normalized child-average map; continuum RG and Clay promotion remain false |
+| `DASHI.Physics.Closure.RGBanachFixedPointReceipt` | `canonicalRGBanachFixedPointReceipt`, `rgBanachFixedPointAuthorityAccepted`, `rgBanachFixedPointStillOpen`, `rgBanachFixedPointDoesNotPromoteClay` | Banach fixed-point authority and conditional spectral-gap formula are recorded; the fixed point, positive gap, and Clay promotion remain false |
+| `DASHI.Physics.Closure.OSPositivityFromRGFixedPoint` | `canonicalOSPositivityFromRGFixedPointReceipt`, `osPositivityFromRGConsumesFiniteOS`, `osPositivityFromRGFixedPointStillOpen`, `osPositivityFromRGDoesNotPromoteClay` | finite OS positivity is consumed, but the RG-Hamiltonian OS check, OS-positive cone monotonicity, Wightman reconstruction, and Clay promotion remain false |
+| `DASHI.Physics.Closure.H0OSPositivityBaseCase` | `canonicalH0OSPositivityBaseCaseReceipt`, `h0SelectedMatrixPositiveDefinite`, `h0FullOSBaseCaseStillOpen`, `h0OSBaseDoesNotPromoteClay` | selected depth-1 \(3\times3\) Hamiltonian matrix is positive definite with the p2-p5 coupling set to zero; the full raw H0 OS base case, reflection form, Wightman reconstruction, and Clay promotion remain false |
+| `DASHI.Physics.Closure.H0ExplicitMatrixReceipt` | `canonicalH0ExplicitMatrixReceipt`, `h0ExplicitRawMatrixNotPSD`, `h0ExplicitRawMatrixDoesNotPromoteClay` | full raw H0 matrix with all three couplings fails PSD; this closes the raw branch negatively and leaves the normalized/inverted OS transfer branch open |
+| `DASHI.Physics.Closure.H0SignConventionReceipt` / `DASHI.Physics.Closure.NormalisedH0OSPositivity` | `h0SignConventionRequiresNormalisation`, `normalisedH0StillOpen` | raw transfer eigenvalues exceed 1, so the OS route requires a contractive normalized or inverted transfer operator; that branch is not yet checked |
+| `DASHI.Physics.Closure.RGContractionExplicitReceipt` | `canonicalRGContractionExplicitReceipt`, `rgContractionExplicitStillOpen` | explicit FactorVec RG parent-sum formula and weighted norm target are recorded; operator-norm equality and contraction remain false |
+| `DASHI.Physics.Closure.WightmanReconstructionCandidateReceipt` | `canonicalWightmanReconstructionCandidateReceipt`, `wightmanCandidateDoesNotPromoteClay` | OS axiom status is itemized; temperedness, full \(O(4)\) covariance, reflection positivity, Bose/Fermi symmetry, reconstruction, and Clay promotion remain open |
+| `DASHI.Physics.Closure.VacuumSectorReceipt` | `canonicalVacuumSectorReceipt`, `vacuumSectorDoesNotPromoteClay` | the H0 matrix is reclassified as a one-particle/quark-sector block rather than the full vacuum Hamiltonian; p2 is a chiral-limit zero mode and no OS/Clay promotion follows |
+| `DASHI.Physics.Closure.MassiveSubspaceOSPositivity` | `canonicalMassiveSubspaceOSPositivityReceipt`, `massiveSubspaceBareYukawaNotPSD` | the p3/p5 massive block remains non-PSD with bare Yukawa constants; a VEV-calibrated physical mass matrix is required |
+| `DASHI.Physics.Closure.CarrierVEVReceipt` | `canonicalCarrierVEVReceipt`, `carrierVEVStillOpen` | the W4/Higgs lane is recorded as the carrier VEV candidate; numerical VEV, physical mass matrix, OS3, and Clay promotion remain false |
+| `DASHI.Physics.Closure.RGScaleVsCarrierScaleReceipt` | `canonicalRGScaleVsCarrierScaleReceipt`, `dimensionfulMassGapStillOpen` | carrier RG data remain dimensionless until a scale anchor and Planck-to-QCD running are constructed |
+| `DASHI.Physics.Closure.OSAxiomsContinuumStatus` | `canonicalOSAxiomsContinuumStatusReceipt`, `osAxiomsContinuumStatusDoesNotPromoteClay` | OS3 is blocked on the VEV-calibrated mass matrix; OS2 full \(O(4)\) covariance remains only a fixed-point candidate |
+| `DASHI.Physics.Closure.OSPositivityCorrectObjectReceipt` | `canonicalOSPositivityCorrectObjectReceipt`, `scalarOSPositivityRecorded` | corrects the OS target object: scalar/Higgs/W4 transfer positivity is recorded for the finite scalar sector, but fermion/full OS and Clay promotion remain false |
+| `DASHI.Physics.Closure.ScalarOSTransferMatrixReceipt` | `canonicalScalarOSTransferMatrixReceipt`, `scalarOSTransferMatrixDoesNotPromoteClay` | explicit scalar transfer matrix and scalar reflection positivity are recorded; full gauge/fermion OS, Wightman reconstruction, and Clay YM remain false |
+| `DASHI.Physics.Closure.ClayBothBlockerMapReceipt` | `canonicalClayBothBlockerMapReceipt`, `clayBothBlockerMapKeepsPromotionsFalse` | YM and NS terminal blockers are compiled precisely; both Clay promotion flags remain false |
 | `DASHI.Physics.Closure.ClayMillenniumClosureTargetReceipt` | `CarrierBKMControlTargetReceipt`, `canonicalCarrierBKMControlTargetReceipt`, `clayMillenniumClosureTargetKeepsNavierStokesFalse` | exact Navier-Stokes closing target: uniform enstrophy/BKM control and continuum BKM passage remain false |
 | `DASHI.Physics.Closure.UltrametricSobolevUniformBound` | `UltrametricSobolevUniformBoundReceipt`, `canonicalUltrametricSobolevUniformBoundReceipt`, `canonicalUltrametricSobolevUniformBoundedTrue`, `ultrametricSobolevDoesNotPromoteContinuumBKM`, `ultrametricSobolevDoesNotPromoteClayNavierStokes` | Taibleson/BKM citation-authority surface for a depth-independent ultrametric Sobolev bound; continuum BKM and Clay regularity remain false |
 | `DASHI.Physics.Closure.CarrierNSSmoothConvergenceReceipt` | `CarrierNSSmoothConvergenceReceipt`, `canonicalCarrierNSSmoothConvergenceReceipt`, `carrierNSSmoothConvergenceCauchyFrontierOpen`, `carrierNSSmoothConvergenceContinuumLimitOpen`, `carrierNSSmoothConvergenceDoesNotCloseClay` | open NS smooth-convergence frontier: ultrametric Aubin-Lions compactness, smooth continuum limit, and Clay promotion remain false |
-| `DASHI.Physics.Moonshine.ModularJInvariantAlphaReceipt` | `ModularJInvariantAlphaReceipt`, `canonicalModularJInvariantAlphaReceipt`, `modularJInvariantAlphaReceiptRecordsAlphaOneNearHit`, `modularJInvariantAlphaReceiptRecordsAlphaTwoNoHit`, `modularJInvariantAlphaReceiptKeepsDerivationClosed` | modular-j numerical check: alpha1 near-hit recorded, alpha2 no-hit recorded, alpha derivation remains false |
+| `DASHI.Physics.Closure.UltrametricAubinLionsReceipt` | `UltrametricAubinLionsReceipt`, `canonicalUltrametricAubinLionsReceipt`, `ultrametricAubinLionsCompactnessStillOpen`, `ultrametricAubinLionsDoesNotPromoteClayNS` | exact NS compactness route: time-derivative estimate, Aubin-Lions theorem, smooth limit, continuum NS preservation, and Clay promotion remain false |
+| `DASHI.Physics.Closure.NavierStokesBound3TimeDerivativeReceipt` | `canonicalNavierStokesBound3TimeDerivativeReceipt`, `navierStokesBound3TimeDerivativeBoundConstructed`, `navierStokesBound3AubinLionsCompactnessStillFalse`, `navierStokesBound3ClayStillFalse` | weak time-derivative bound constructed at receipt level; Aubin-Lions compactness and Clay promotion remain false |
+| `DASHI.Physics.Closure.AubinLionsBound3Full` | `canonicalAubinLionsBound3FullReceipt`, `aubinLionsBound3FullRouteRecorded`, `aubinLionsBound3FullEstimateConstructed`, `aubinLionsBound3FullTimeDerivativeReceiptConstructsBound`, `aubinLionsBound3FullDoesNotPromoteClay` | full weak time-derivative route via Leray, Ladyzhenskaya, diffusion, and pressure controls; the estimate is receipt-constructed, while compactness and Clay promotion remain false |
+| `DASHI.Physics.Closure.UltrametricAubinLionsCompactness` | `canonicalUltrametricAubinLionsCompactnessReceipt`, `ultrametricAubinLionsCompactnessAuthorityAccepted`, `ultrametricAubinLionsCompactnessStillOpen`, `ultrametricAubinLionsCompactnessDoesNotPromoteClay` | Aubin-Lions CitationAuthority and \(L^2_tL^2_x\) precompactness target; carrier compactness and Clay promotion remain false |
+| `DASHI.Physics.Closure.NSCarrierContinuumLimitReceipt` | `canonicalNSCarrierContinuumLimitReceipt`, `nsCarrierContinuumLimitDoesNotPromoteClay` | conditional nonlinear-term passage to a distributional NS limit is recorded; unconditional weak limit, smooth limit, BKM passage, and Clay promotion remain false |
+| `DASHI.Physics.Closure.HaarWaveletEmbeddingReceipt` | `canonicalHaarWaveletEmbeddingReceipt`, `haarWaveletEmbeddingDoesNotPromoteClay` | defines the carrier-to-\(L^2(\mathbb{R}^3)\) embedding as a dyadic/triadic/pentadic multi-base wavelet system; standard Haar compactness does not apply |
+| `DASHI.Physics.Closure.MultiBaseWaveletCompactnessReceipt` | `canonicalMultiBaseWaveletCompactnessReceipt`, `multiBaseWaveletCompactnessDoesNotPromoteClay` | records the Riesz/frame-bound route from ultrametric coefficient compactness to Archimedean compactness as a candidate; frame bounds and Clay NS remain open |
+| `DASHI.Physics.Closure.HaarFrameBoundsReceipt` | `canonicalHaarFrameBoundsReceipt`, `haarFrameBoundsDoNotPromoteNS` | records mutual-coherence and dense-spanning diagnostics for the 2/3/5 wavelet system; lower frame bounds and Clay NS remain false |
+| `DASHI.Physics.Closure.EllipticBootstrapReceipt` | `canonicalEllipticBootstrapReceipt`, `ellipticBootstrapRouteRecorded`, `ellipticBootstrapSmoothLimitStillFalse`, `ellipticBootstrapDoesNotPromoteClay` | Evans-style elliptic/parabolic bootstrap route recorded; smooth limit and Clay promotion remain false |
+| `DASHI.Physics.Closure.GoldenRatioNumericsReceipt` | `canonicalGoldenRatioNumericsReceipt`, `goldenRatioNumericsDoesNotPromoteCKM` | phi-corrected CKM-tail diagnostic reduces Jarlskog overshoot but undershoots `|Vub|`; no CKM promotion follows |
+| `DASHI.Physics.Closure.RogersRamanujanP5Receipt` | `canonicalRogersRamanujanP5Receipt`, `rogersRamanujanP5DoesNotDerivePhi` | records Rogers-Ramanujan prime-5/golden-ratio context as candidate-only; no carrier derivation follows |
+| `DASHI.Physics.Closure.CarrierHiggsMassReceipt` | `canonicalCarrierHiggsMassReceipt`, `carrierHiggsMassDoesNotPromotePhysicalHiggs` | records k=4 Higgs-mass and phi-correction diagnostics using PDG VEV input; no Higgs/VEV derivation follows |
+| `DASHI.Physics.Closure.GoldenRatioUnifyingReceipt` | `canonicalGoldenRatioUnifyingReceipt`, `goldenRatioUnifyingReceiptDoesNotPromote` | compiles phi occurrences and leaves pattern-versus-coincidence open |
+| `DASHI.Physics.Moonshine.ModularJInvariantAlphaReceipt` | `ModularJInvariantAlphaReceipt`, `canonicalModularJInvariantAlphaReceipt`, `modularJInvariantAlphaReceiptRecordsAlphaOneNearHit`, `modularJInvariantAlphaReceiptKeepsAlphaOneCorrectionUnidentified`, `modularJInvariantAlphaReceiptRecordsAlphaTwoNoHit`, `modularJInvariantAlphaReceiptKeepsAlphaTwoModularNearHitFalse`, `modularJInvariantAlphaReceiptKeepsDerivationClosed` | modular-j numerical check: real alpha1 near-hit worth keeping, alpha2 no-hit recorded, correction factor unidentified, alpha derivation remains false |
+| `DASHI.Physics.Moonshine.KroneckerLimitAlphaCorrectionReceipt` | `KroneckerLimitAlphaCorrectionReceipt`, `canonicalKroneckerLimitAlphaCorrectionReceipt`, `kroneckerLimitCorrectionStillOpen`, `kroneckerLimitDoesNotDeriveAlpha` | Kronecker-limit correction target for the alpha1 near-hit `72/1728 = 1/24` versus observed `0.041240`; correction `0.98976`, alpha2 formula, and alpha derivation remain false |
 | `DASHI.Physics.Moonshine.MonsterOrderDepthBoundReceipt` | `MonsterOrderDepthBoundReceipt`, `canonicalMonsterOrderDepthBoundReceipt`, `monsterOrderDepthBoundProvedIsFalse`, `monsterOrderPrimeSetForcedFromFirstPrinciplesIsFalse` | Monster-order depth-bound diagnostic: current carrier-depth readback respects exponent targets, but the bound remains conjectural and non-promoting |
+| `DASHI.Physics.Closure.Deg23HeckeEigenvalueReceipt` | `canonicalDeg23HeckeEigenvalueReceipt`, `deg23HeckeComputedA5IsPositiveOne`, `deg23HeckeDoesNotResolveResidual`, `deg23HeckeDoesNotPromoteVcb` | eta-product diagnostic gives \(a_5=+1\), not the quoted \(-2\); the p3-p5 degree residual remains open and no Vcb/Wolfenstein-A promotion follows |
+| `DASHI.Physics.QFT.BraidingMorphismReceipt` | `canonicalBraidingMorphismReceipt`, `finitePrimeLaneBraidingIsBosonicAtCurrentSurface`, `finitePrimeLaneBraidingDoesNotConstructNonAbelianIntertwiners`, `finitePrimeLaneBraidingDoesNotPromoteGSM` | finite p2/p3/p5 CM-character braiding is the bosonic symmetric swap; no fermionic \((-1)^F\), Yang-Baxter, non-abelian intertwiner, or exact SM gauge promotion is constructed |
 | `DASHI.Physics.Closure.MillenniumTowerGRInstanceReceipt` | `MillenniumTowerGRInstanceReceipt`, `canonicalMillenniumTowerGRInstanceReceipt`, `millenniumTowerGRNoPromotion` | split GR/cosmology tower instance, with cosmology and GR promotion false |
 | `DASHI.Physics.Closure.MillenniumTowerGRInstanceReceipt` | `MillenniumTowerGRInstanceReceipt.friedmannInstabilitySaddle` | GR/cosmology split-instance field named in the theorem statement |
 | `DASHI.Physics.Closure.MillenniumTowerDHRSMInstanceReceipt` | `MillenniumTowerDHRSMInstanceReceipt`, `canonicalMillenniumTowerDHRSMInstanceReceipt`, `millenniumTowerDHRSMNoFullPromotion` | split DHR/SM tower instance, with full `G_DHR = G_SM` promotion false |
@@ -791,13 +894,17 @@ Agda module path and the concrete identifier that the paper cites.
 | `DASHI.Physics.QFT.FinitePrimeLaneDHRSMCompatibilityLedger` | `FinitePrimeLaneDHRSMCompatibilityLedger`, `canonicalFinitePrimeLaneDHRSMCompatibilityLedger` | finite `p2`/`p3`/`p5` DHR-SM compatibility ledger |
 | `DASHI.Physics.QFT.ConditionalGDHRSMPromotionReceipt` | `ConditionalGDHRSMPromotionReceipt`, `canonicalConditionalGDHRSMPromotionReceipt` | conditional DHR/SM promotion status, with unconditional reconstruction false |
 | `DASHI.Physics.QFT.ConditionalGDHRSMPromotionReceipt` | `canonicalConditionalGDHRSMPromotionNoFullTheorem`, `fullGDHRSMPromotionTheoremImpossibleHere` | no-full-theorem witnesses cited for DHR/SM promotion closure |
+| `DASHI.Physics.QFT.ArbitrarySectorClosureReceipt` | `DirectSumClosed`, `TensorClosed`, `ConjugateSectors`, `canonicalArbitrarySectorClosureReceipt`, `finitePrimeLaneDirectSumsNowInhabited`, `finitePrimeLaneFrobeniusConjugatesNowInhabited`, `fieldExtensionTensorTargetRecordedForFiniteFusion`, `finiteTensorFusionNowComputedForExplicitPrimePairs`, `arbitrarySectorClosureDoesNotPromoteGDHREqualsGSM` | finite prime-lane direct sums, Frobenius-conjugates, and p2p3/p2p5/p3p5 tensor-fusion rules are inhabited; arbitrary-sector closure and full `G_DHR = G_SM` remain false |
 | `DASHI.Physics.Closure.CrossGateConsistency` | `Gate8CrossGateConsistencyReceipt.gate8PromotableIsFalse`, `canonicalGate8CrossGateConsistencyReceipt` | Gate 8 consistency receipt cited to keep terminal promotion blocked |
 | `DASHI.Physics.Closure.HEPDataResidualBridgeAuthorityGate` | `HEPDataResidualBridgeAuthorityGate`, `canonicalHEPDataResidualBridgeAuthorityGate` | residual empirical bridge as receipt filter, blocking W3/W4/W5/W8 promotion |
 | `DASHI.Physics.Closure.PenguinDecayC9C10P5PrimePredictionTargetReceipt` | `C9C10P5PrimePredictionTargetReceipt`, `canonicalC9C10P5PrimePredictionTargetReceipt` | P5' prediction target frontier |
 | `DASHI.Physics.Closure.PenguinDecayCarrierDerivedC9ConstraintTargetReceipt` | `PenguinDecayCarrierDerivedC9ConstraintTargetReceipt`, `canonicalPenguinDecayCarrierDerivedC9ConstraintTargetReceipt` | carrier-derived C9 constraint target, with empirical promotion false |
 | `DASHI.Physics.Closure.CKMPredictionFrontierReceipt` | `CKMPredictionFrontierReceipt`, `canonicalCKMPredictionFrontierReceipt` | CKM/Yukawa prediction frontier, comparison targets only |
 | `DASHI.Physics.Closure.CarrierYukawaRatioTargetReceipt` | `CarrierYukawaRatioTargetReceipt`, `canonicalCarrierYukawaRatioTargetReceipt` | Yukawa ratio target bookkeeping, with physical ratio promotion false |
-| `DASHI.Physics.Closure.CabibboAngleCarrierReceipt` | `CabibboAngleCarrierReceipt`, `canonicalCabibboAngleCarrierReceipt` | Cabibbo-angle target form and alpha diagnostics, with physical CKM and accepted common-alpha promotion false |
+| `DASHI.Physics.Closure.CabibboAngleCarrierReceipt` | `CabibboAngleCarrierReceipt`, `canonicalCabibboAngleCarrierReceipt` | Cabibbo-angle target form and alpha diagnostics, with physical CKM, sector-angle normalization, and accepted common-alpha promotion false |
+| `DASHI.Physics.Closure.IsospinSplittingFromP3LaneReceipt` | `IsospinSplittingFromP3LaneReceipt`, `canonicalIsospinSplittingFromP3LaneReceipt`, `p3IsospinSplittingReceiptDerivedPhysicalMassFalse` | p3-lane `F9/F3` Frobenius and discriminant diagnostic for the separate p3-p5/A Vcb lane; physical isospin splitting remains underived and is not needed for lambda |
+| `DASHI.Physics.Closure.StrangeMassFromP5LaneReceipt` | `StrangeMassFromP5LaneReceipt`, `canonicalStrangeMassFromP5LaneReceipt`, `p5StrangeMassReceiptDerivedPhysicalMassFalse` | p5-lane `F25/F5` Frobenius and discriminant diagnostic for the separate p3-p5/A Vcb lane; physical strange mass remains underived and is not needed for lambda |
+| `DASHI.Physics.Closure.G12FromDHRSectorsReceipt` | `G12FromDHRSectorsReceipt`, `canonicalG12FromDHRSectorsReceipt`, `g12ReceiptClosesU1CMOrbitIntegral`, `g12ReceiptAngularNormalizationDerived`, `g12ReceiptDoesNotDeriveCabibboAngle` | corrected Cabibbo frontier; `sqrt(m_u/m_c)` is recorded, the old `alpha1*g12` route is rejected history, the active diagnostic is `|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)` at 0.04% comparison accuracy, and Cabibbo angle remains normalised by `U1CMOrbitIntegralReceipt`; physical CKM diagonalisation remains open |
 
 This index is intentionally concrete.  A reader can audit the paper's claims
 against named machine-checkable surfaces.  Where the paper says "available,"

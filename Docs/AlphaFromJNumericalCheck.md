@@ -79,4 +79,43 @@ Targets:
 
 The only near-hit in this tested family is the simple modular-weight normalization `72 / |j(i)-j(rho)| = 1/24 = 0.041666666667`, which is within the configured absolute tolerance of the alpha1 diagnostic.  No tested normalization gives alpha2 within tolerance, and the alpha1 near-hit is not a formal bridge from modular geometry to the carrier alpha diagnostics.
 
-Therefore this check does not justify promoting an alpha derivation from CM j-values.
+The factor `72 = 3 * 24` is modularly meaningful: `3` is the elliptic stabilizer order at `rho` in `PSL_2(Z)`, and `24` is the weight of the discriminant `Delta = eta^24`.  This records a real signal, but not a derivation.
+
+For the alpha1 near-hit, the discrepancy is
+
+```text
+|1/24 - alpha1| = 0.000426666667
+|1/24 - alpha1| / (1/24) = 0.01024000
+                               ~= 1.0240%
+```
+
+The correction factor `alpha1 / (1/24) = 0.98976` is not identified as a Gamma/pi/algebraic constant in this check.  The next admissible check is a discriminant/Petersson normalization probe of the form
+
+```text
+alpha1 ?= c0 / |j(tau_p2)-j(tau_p3)| * |Delta(tau_p2)/Delta(tau_p3)|^(1/12)
+```
+
+where `c0` would have to be fixed by an independently defined carrier prime-lane metric normalization.
+
+## Cabibbo Mass-Ratio Diagnostic
+
+This separate diagnostic records the common first-generation mass-ratio path:
+
+```text
+alpha1_mass = sqrt(2.16 / 1270) = 0.041240603797
+alpha1_mass / alpha1_target = 1.00001464
+alpha1_target / alpha1_mass = 0.99998536
+
+md/ms = (2.16 + 2.5) / 93.5 = 0.049839572193
+sqrt(md/ms) = 0.223247782055
+PDG |Vus| comparison = 0.2243 +/- 0.0008
+|sqrt(md/ms) - |Vus|| = 0.001052217945
+relative error = 0.4691%
+sigma offset against quoted PDG uncertainty = 1.32
+```
+
+The PDG comparison value is the rounded 2024 kaon-sector Cabibbo-angle average `|Vus| = 0.22431(85)` from PDG Review of Particle Physics, `Vud, Vus, the Cabibbo Angle, and CKM Unitarity`, Eq. 67.18.
+
+The numerical proximity is useful as a diagnostic path: the alpha1 readback from `sqrt(2.16/1270)` is essentially the recorded `alpha1 = 0.041240`, and the shifted down/strange ratio gives a Cabibbo-scale value near the PDG `|Vus|` value.  It is not a derivation, because the additive `delta_md = 2.5 MeV` and the strange mass input `ms = 93.5 MeV` are not carrier-derived in this check.
+
+Therefore this check does not justify promoting an alpha or Cabibbo derivation.  It records one alpha1 near-hit, no alpha2 near-hit, no simultaneous CM j-value derivation, and a Cabibbo mass-ratio diagnostic whose required `delta_md` and `ms` inputs remain external.

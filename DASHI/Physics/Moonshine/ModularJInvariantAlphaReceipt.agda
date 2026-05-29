@@ -39,6 +39,9 @@ data ModularJInvariantAlphaAnchor : Set where
   jAtHeegnerSevenEqualsNegative3375Anchor :
     ModularJInvariantAlphaAnchor
 
+  pdg2024MSbarUpCharmMassRatioAnchor :
+    ModularJInvariantAlphaAnchor
+
 data ModularJInvariantAlphaBlocker : Set where
   missingFormalModularJToAlphaMap :
     ModularJInvariantAlphaBlocker
@@ -49,7 +52,13 @@ data ModularJInvariantAlphaBlocker : Set where
   alphaOneNearHitIsOnlyHeuristicNormalization :
     ModularJInvariantAlphaBlocker
 
+  alphaOneCorrectionFactorNotIdentified :
+    ModularJInvariantAlphaBlocker
+
   missingEisensteinNormalizationToCarrierAlphaProof :
+    ModularJInvariantAlphaBlocker
+
+  missingDiscriminantPeterssonCarrierNormalizationProof :
     ModularJInvariantAlphaBlocker
 
   missingAlphaOneAlphaTwoEqualityOrErrorBound :
@@ -71,6 +80,7 @@ canonicalModularJInvariantAlphaAnchors =
   jAtIEquals1728Anchor
   ∷ jAtRhoEqualsZeroAnchor
   ∷ jAtHeegnerSevenEqualsNegative3375Anchor
+  ∷ pdg2024MSbarUpCharmMassRatioAnchor
   ∷ []
 
 canonicalModularJInvariantAlphaBlockers :
@@ -79,7 +89,9 @@ canonicalModularJInvariantAlphaBlockers =
   missingFormalModularJToAlphaMap
   ∷ alphaTwoNumericalMatchNotFoundInTestedNormalizations
   ∷ alphaOneNearHitIsOnlyHeuristicNormalization
+  ∷ alphaOneCorrectionFactorNotIdentified
   ∷ missingEisensteinNormalizationToCarrierAlphaProof
+  ∷ missingDiscriminantPeterssonCarrierNormalizationProof
   ∷ missingAlphaOneAlphaTwoEqualityOrErrorBound
   ∷ missingCarrierYukawaCabibboPromotionBridge
   ∷ []
@@ -114,15 +126,27 @@ alphaFromJNumericalReportPathLabel =
 
 alphaOneNumericalNearHitLabel : String
 alphaOneNumericalNearHitLabel =
-  "72 / |j(i)-j(rho)| = 1/24 = 0.041666666667; target alpha1 = 0.041240; abs error = 0.000426666667; match=true at tolerance 0.001"
+  "72 / |j(i)-j(rho)| = 72/1728 = 1/24 = 0.041666666667; alpha1 = sqrt(mu/mc) = 0.0412406 from PDG 2024 MSbar masses mu=2.16 MeV and mc=1.27 GeV at 2 GeV; discrepancy is about 1.03%; match=true at tolerance 0.001"
+
+alphaOneModularMeaningLabel : String
+alphaOneModularMeaningLabel =
+  "72 = 3 * 24 is modularly meaningful: 3 is the elliptic stabilizer order at rho in PSL2Z, and 24 is the weight of Delta = eta^24"
+
+alphaOneCorrectionLabel : String
+alphaOneCorrectionLabel =
+  "alpha1 / (1/24) = 0.98977 using alpha1=sqrt(mu/mc); correction factor not identified as Gamma/pi/algebraic constant"
 
 alphaTwoNumericalNoHitLabel : String
 alphaTwoNumericalNoHitLabel =
   "No tested normalization matched target alpha2 = 0.085720 at tolerance 0.001; alpha2 match=false"
 
+alphaTwoModularNearHitLabel : String
+alphaTwoModularNearHitLabel =
+  "No modular near-hit for alpha2 is recorded by the tested j/Eisenstein normalizations"
+
 alphaFromJNumericalConclusionLabel : String
 alphaFromJNumericalConclusionLabel =
-  "Partial alpha1 heuristic near-hit only; no simultaneous alpha1/alpha2 derivation from tested CM j-value differences"
+  "PDG mass-ratio alpha1 is numerically near the modular natural value 1/24, but this is not a modular derivation and gives no alpha2 formula"
 
 eisensteinEllipticPointLabel : String
 eisensteinEllipticPointLabel =
@@ -130,11 +154,27 @@ eisensteinEllipticPointLabel =
 
 alphaOneDiagnosticLabel : String
 alphaOneDiagnosticLabel =
-  "alpha1 approximately 0.041 is a carrier-Yukawa/Cabibbo diagnostic, not derived here"
+  "alpha1 equals sqrt(mu/mc) to five significant figures, using PDG 2024 MSbar masses at 2 GeV, and is not derived here from modular geometry"
 
 alphaTwoDiagnosticLabel : String
 alphaTwoDiagnosticLabel =
   "alpha2 approximately 0.086 is a carrier-Yukawa diagnostic, not derived here"
+
+alphaOnePDGMassRatioLabel : String
+alphaOnePDGMassRatioLabel =
+  "alpha1 = sqrt(mu/mc) = 0.0412406 to five significant figures from PDG 2024 MSbar masses mu=2.16 MeV and mc=1.27 GeV at 2 GeV"
+
+alphaOnePDGRatioCheckLabel : String
+alphaOnePDGRatioCheckLabel =
+  "alpha1 / sqrt(mu/mc) = 0.99999 at the recorded precision"
+
+alphaOneModularNaturalComparisonLabel : String
+alphaOneModularNaturalComparisonLabel =
+  "1/24 = 0.041666666667 remains a modular natural value within about 1-2% of alpha1=sqrt(mu/mc)"
+
+alphaOneSquaredModularComparisonLabel : String
+alphaOneSquaredModularComparisonLabel =
+  "(1/24)^2 = 0.001736111111 is within about 2% of mu/mc = 0.001700787402"
 
 modularJClassicalCitationAuthority :
   Authority.CitationAuthorityBoundary
@@ -148,7 +188,7 @@ modularJClassicalCitationAuthority =
     false
     false
     ( "CitationAuthority only: no machine-readable alpha artifact is claimed"
-      ∷ "The receipt records modular anchors j(i)=1728, j(rho)=0, and j((1+i*sqrt(7))/2)=-3375 but does not derive alpha1 or alpha2"
+      ∷ "The receipt records modular anchors j(i)=1728, j(rho)=0, j((1+i*sqrt(7))/2)=-3375, and the PDG 2024 MSbar up/charm mass-ratio alpha1 interpretation, but does not derive alpha1 or alpha2"
       ∷ []
     )
 
@@ -271,6 +311,30 @@ record ModularJInvariantAlphaReceipt : Setω where
     alphaTwoProbeLabelIsCanonical :
       alphaTwoProbeLabel ≡ alphaTwoDiagnosticLabel
 
+    alphaOnePDGMassRatioStatement :
+      String
+
+    alphaOnePDGMassRatioStatementIsCanonical :
+      alphaOnePDGMassRatioStatement ≡ alphaOnePDGMassRatioLabel
+
+    alphaOnePDGRatioCheckStatement :
+      String
+
+    alphaOnePDGRatioCheckStatementIsCanonical :
+      alphaOnePDGRatioCheckStatement ≡ alphaOnePDGRatioCheckLabel
+
+    alphaOneModularNaturalComparison :
+      String
+
+    alphaOneModularNaturalComparisonIsCanonical :
+      alphaOneModularNaturalComparison ≡ alphaOneModularNaturalComparisonLabel
+
+    alphaOneSquaredModularComparison :
+      String
+
+    alphaOneSquaredModularComparisonIsCanonical :
+      alphaOneSquaredModularComparison ≡ alphaOneSquaredModularComparisonLabel
+
     alphaFromJNumericalReportPath :
       String
 
@@ -289,6 +353,24 @@ record ModularJInvariantAlphaReceipt : Setω where
     alphaOneNumericalNearHitStatementIsCanonical :
       alphaOneNumericalNearHitStatement ≡ alphaOneNumericalNearHitLabel
 
+    alphaOneNearHitModularMeaning :
+      String
+
+    alphaOneNearHitModularMeaningIsCanonical :
+      alphaOneNearHitModularMeaning ≡ alphaOneModularMeaningLabel
+
+    alphaOneCorrectionIdentified :
+      Bool
+
+    alphaOneCorrectionIdentifiedIsFalse :
+      alphaOneCorrectionIdentified ≡ false
+
+    alphaOneCorrectionStatement :
+      String
+
+    alphaOneCorrectionStatementIsCanonical :
+      alphaOneCorrectionStatement ≡ alphaOneCorrectionLabel
+
     alphaTwoNumericalMatch :
       Bool
 
@@ -300,6 +382,18 @@ record ModularJInvariantAlphaReceipt : Setω where
 
     alphaTwoNumericalMatchStatementIsCanonical :
       alphaTwoNumericalMatchStatement ≡ alphaTwoNumericalNoHitLabel
+
+    alphaTwoModularNearHit :
+      Bool
+
+    alphaTwoModularNearHitIsFalse :
+      alphaTwoModularNearHit ≡ false
+
+    alphaTwoModularNearHitStatement :
+      String
+
+    alphaTwoModularNearHitStatementIsCanonical :
+      alphaTwoModularNearHitStatement ≡ alphaTwoModularNearHitLabel
 
     simultaneousAlphaOneAlphaTwoNumericalDerivation :
       Bool
@@ -424,6 +518,22 @@ canonicalModularJInvariantAlphaReceipt =
         alphaTwoDiagnosticLabel
     ; alphaTwoProbeLabelIsCanonical =
         refl
+    ; alphaOnePDGMassRatioStatement =
+        alphaOnePDGMassRatioLabel
+    ; alphaOnePDGMassRatioStatementIsCanonical =
+        refl
+    ; alphaOnePDGRatioCheckStatement =
+        alphaOnePDGRatioCheckLabel
+    ; alphaOnePDGRatioCheckStatementIsCanonical =
+        refl
+    ; alphaOneModularNaturalComparison =
+        alphaOneModularNaturalComparisonLabel
+    ; alphaOneModularNaturalComparisonIsCanonical =
+        refl
+    ; alphaOneSquaredModularComparison =
+        alphaOneSquaredModularComparisonLabel
+    ; alphaOneSquaredModularComparisonIsCanonical =
+        refl
     ; alphaFromJNumericalReportPath =
         alphaFromJNumericalReportPathLabel
     ; alphaFromJNumericalReportPathIsCanonical =
@@ -436,6 +546,18 @@ canonicalModularJInvariantAlphaReceipt =
         alphaOneNumericalNearHitLabel
     ; alphaOneNumericalNearHitStatementIsCanonical =
         refl
+    ; alphaOneNearHitModularMeaning =
+        alphaOneModularMeaningLabel
+    ; alphaOneNearHitModularMeaningIsCanonical =
+        refl
+    ; alphaOneCorrectionIdentified =
+        false
+    ; alphaOneCorrectionIdentifiedIsFalse =
+        refl
+    ; alphaOneCorrectionStatement =
+        alphaOneCorrectionLabel
+    ; alphaOneCorrectionStatementIsCanonical =
+        refl
     ; alphaTwoNumericalMatch =
         false
     ; alphaTwoNumericalMatchIsFalse =
@@ -443,6 +565,14 @@ canonicalModularJInvariantAlphaReceipt =
     ; alphaTwoNumericalMatchStatement =
         alphaTwoNumericalNoHitLabel
     ; alphaTwoNumericalMatchStatementIsCanonical =
+        refl
+    ; alphaTwoModularNearHit =
+        false
+    ; alphaTwoModularNearHitIsFalse =
+        refl
+    ; alphaTwoModularNearHitStatement =
+        alphaTwoModularNearHitLabel
+    ; alphaTwoModularNearHitStatementIsCanonical =
         refl
     ; simultaneousAlphaOneAlphaTwoNumericalDerivation =
         false
@@ -473,11 +603,16 @@ canonicalModularJInvariantAlphaReceipt =
     ; blockersAreCanonical =
         refl
     ; receiptBoundary =
-        "The receipt records classical modular anchors j(i)=1728, j(rho)=0, and j((1+i*sqrt(7))/2)=-3375"
+        "The receipt records classical modular anchors j(i)=1728, j(rho)=0, j((1+i*sqrt(7))/2)=-3375, and the PDG 2024 MSbar up/charm mass-ratio alpha1 interpretation"
         ∷ "The computed absolute CM j-value differences are 1728, 5103, and 3375"
-        ∷ "scripts/check_alpha_from_j_values.py finds alpha1 match=true only for 72/|j(i)-j(rho)| = 1/24 within tolerance 0.001"
-        ∷ "The same numerical check finds alpha2 match=false for every tested normalization"
+        ∷ "alpha1 is interpreted as sqrt(mu/mc) = 0.0412406 to five significant figures, with alpha1/sqrt(mu/mc) = 0.99999 against PDG 2024 MSbar masses at 2 GeV"
+        ∷ "scripts/check_alpha_from_j_values.py finds alpha1 match=true only for 72/|j(i)-j(rho)| = 72/1728 = 1/24 within tolerance 0.001, where 1/24 remains a modular natural value about 1.03% above alpha1"
+        ∷ "(1/24)^2 remains within about 2% of mu/mc, but this squared comparison is also numerical bookkeeping rather than a derivation"
+        ∷ "The same numerical check finds alpha2 match=false and alphaTwoModularNearHit=false for every tested normalization"
         ∷ "The numerical conclusion is partial heuristic evidence only, not a simultaneous alpha1/alpha2 derivation"
+        ∷ "The factor 72 = 3 * 24 is modularly meaningful: 3 is the elliptic stabilizer order at rho in PSL2Z, and 24 is the weight of Delta = eta^24"
+        ∷ "The alpha1 correction factor alpha1/(1/24) = 0.98977 is not identified, so the near-hit remains a signal rather than a derivation"
+        ∷ "The next admissible probe is a discriminant/Petersson normalization with an independently defined carrier metric constant c0"
         ∷ "The Eisenstein elliptic-point statement is authority-backed bookkeeping only"
         ∷ "alpha1 and alpha2 remain diagnostics from the carrier-Yukawa/Cabibbo lane, not modular-geometry derivations"
         ∷ "alphaDerivedFromModularGeometry is false because no formal j/Eisenstein-to-alpha bridge is constructed"
@@ -534,11 +669,53 @@ modularJInvariantAlphaReceiptRecordsAlphaOneNearHit :
 modularJInvariantAlphaReceiptRecordsAlphaOneNearHit =
   refl
 
+modularJInvariantAlphaReceiptRecordsPDGMassRatioAlphaOne :
+  alphaOnePDGMassRatioStatement canonicalModularJInvariantAlphaReceipt
+  ≡
+  alphaOnePDGMassRatioLabel
+modularJInvariantAlphaReceiptRecordsPDGMassRatioAlphaOne =
+  refl
+
+modularJInvariantAlphaReceiptRecordsPDGRatioCheck :
+  alphaOnePDGRatioCheckStatement canonicalModularJInvariantAlphaReceipt
+  ≡
+  alphaOnePDGRatioCheckLabel
+modularJInvariantAlphaReceiptRecordsPDGRatioCheck =
+  refl
+
+modularJInvariantAlphaReceiptRecordsModularNaturalComparison :
+  alphaOneModularNaturalComparison canonicalModularJInvariantAlphaReceipt
+  ≡
+  alphaOneModularNaturalComparisonLabel
+modularJInvariantAlphaReceiptRecordsModularNaturalComparison =
+  refl
+
+modularJInvariantAlphaReceiptRecordsSquaredModularComparison :
+  alphaOneSquaredModularComparison canonicalModularJInvariantAlphaReceipt
+  ≡
+  alphaOneSquaredModularComparisonLabel
+modularJInvariantAlphaReceiptRecordsSquaredModularComparison =
+  refl
+
+modularJInvariantAlphaReceiptKeepsAlphaOneCorrectionUnidentified :
+  alphaOneCorrectionIdentified canonicalModularJInvariantAlphaReceipt
+  ≡
+  false
+modularJInvariantAlphaReceiptKeepsAlphaOneCorrectionUnidentified =
+  refl
+
 modularJInvariantAlphaReceiptRecordsAlphaTwoNoHit :
   alphaTwoNumericalMatch canonicalModularJInvariantAlphaReceipt
   ≡
   false
 modularJInvariantAlphaReceiptRecordsAlphaTwoNoHit =
+  refl
+
+modularJInvariantAlphaReceiptKeepsAlphaTwoModularNearHitFalse :
+  alphaTwoModularNearHit canonicalModularJInvariantAlphaReceipt
+  ≡
+  false
+modularJInvariantAlphaReceiptKeepsAlphaTwoModularNearHitFalse =
   refl
 
 modularJInvariantAlphaReceiptKeepsSimultaneousDerivationClosed :

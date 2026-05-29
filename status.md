@@ -1,4 +1,231 @@
+# 2026-05-30 Manager C wavelet/Paper8 closeout tranche
+
+- Manager C closeout tranche is complete.  Added
+  `HaarMutualCoherenceReceipt`, `WaveletOrthogonalityProofReceipt`,
+  `NSWeakSolutionFinalReceipt`, `Paper8CoreThesisReceipt`,
+  `CommitTagPreparationReceipt`, and `ResidualBlockersSummaryReceipt`.
+- The wavelet route was sharpened negatively: scale-zero dyadic/triadic
+  cancellation is recorded, but the standard scale-one dyadic/triadic Haar
+  overlap is `sqrt(6)/6`, so literal all-scale mutual orthogonality is false.
+  The NS Archimedean bridge now requires bounded Gram/frame estimates rather
+  than an orthogonality shortcut.
+- Paper 8 now has a formal core-thesis receipt and end-of-phase blocker
+  summary.  The diagnostic tag message is prepared only; no tag is created
+  until the concurrent worktree is intentionally cleaned and staged.  CKM,
+  SM, YM Clay, NS Clay, and terminal promotions remain false.
+
 # 2026-05-29 pre-submission freeze
+
+- Manager B SU(2) level / charge-normalisation / lepton-gap tranche is
+  complete.  Added `SU2Level4Spin1RepReceipt`,
+  `Spin2FermionInterpretationReceipt`, `KacMoodyLevelReceipt`,
+  `ChargeNormalisationReceipt`, `LeptonSectorGapReceipt`, and
+  `FourthLaneHypothesisReceipt`.
+- The new receipts sharpen the Gate 6 frontier without promotion: the
+  `SU(2)_4` `j=2` object separates WZW weight `1` from the alternate
+  half-spin diagnostic, is five-dimensional rather than an SM weak doublet,
+  and the weak-sector level mismatch is now named as `SU(2)_1` versus the p3
+  conductor-3 `SU(2)_3` surface.  The p3 `Z/6` lane still explains only the
+  hypercharge unit; exact normalisation and carrier-derived anomaly
+  cancellation remain false.
+- Lepton and fourth-lane gaps are now explicit: the next Heegner candidate
+  window is `D=-8,-11,-12`, with `D=-8` conflicting with the conductor-4 p2
+  lane and `D=-11` only a candidate; the p11 fourth-lane hypothesis records
+  `j=-32768`, `vol X0(11)=4*pi`, and the depth-4 lighter-not-heavier
+  hierarchy contradiction.  Exact `U1_Y`, exact `SU3_c`, lepton-sector
+  construction, viable fourth generation, exact `G_DHR ~= G_SM`, and full SM
+  reconstruction remain false.
+
+- Manager C golden-ratio / frame-bound / scalar-OS tranche is complete.  Added
+  `GoldenRatioNumericsReceipt`, `RogersRamanujanP5Receipt`,
+  `HaarFrameBoundsReceipt`, `ScalarOSTransferMatrixReceipt`,
+  `CarrierHiggsMassReceipt`, and `GoldenRatioUnifyingReceipt`.
+- The C1 phi convention is now recorded honestly: it improves the Jarlskog
+  diagnostic from about `11.26x` PDG to about `0.69x` PDG but undershoots
+  `|Vub|` by about `24.8%`, so it is not a physical CKM match.  The
+  Rogers-Ramanujan / p5 connection is candidate context only.
+- The scalar transfer matrix is explicit and scalar-sector OS positivity is
+  recorded; full gauge/fermion OS and Clay YM remain false.  The 2/3/5
+  wavelet frame diagnostic records dense-spanning/mutual-coherence targets
+  while lower frame bounds and Clay NS remain false.
+
+- Manager B conductor/charge-quantisation tranche is complete.  Added
+  `SU2kCSSpinStatisticsReceipt`, `SU2Level4CarrierReceipt`,
+  `LevelRankDualityReceipt`, `ConductorLevelCorrespondenceReceipt`,
+  `U1YFromConductorReceipt`, and `SMChargeQuantisationReceipt`.
+- The new receipts record a structural finite charge-quantisation result:
+  p3-lane `Z/6` accounts for hypercharge units of `1/6`, its `Z/3` subset
+  accounts for electric charge units of `1/3`, and the p3 conductor-3 surface
+  is retained as a candidate weak/colour TQFT interface.  The strict
+  level-rank authority is kept separate from the requested `SU(2)_3/SU(3)_1`
+  candidate, and p5 conductor 7 remains an explicit open role.
+- Exact continuous `U1_Y`, continuous `SU3_c`, exact hypercharge
+  normalization, physical `3+1D` fermion derivation, exact `G_DHR ~= G_SM`,
+  and full SM reconstruction remain false.
+
+- Manager C RG/OS/NS bridge refinement tranche is complete.  Added
+  `FactorVecAverageVsSumReceipt`, `RGOperatorNormFormalProof`,
+  `HaarWaveletEmbeddingReceipt`, `MultiBaseWaveletCompactnessReceipt`,
+  `OSPositivityCorrectObjectReceipt`, and `ClayBlockerUpdateReceipt`.
+- The RG norm target is now honest about aggregation: the existing explicit
+  surface is parent-sum language, while the exact `alpha1` operator norm is
+  recorded only for the normalized child-average map under the uniform `l1`
+  norm.  Continuum RG convergence and Clay Yang-Mills remain false.
+- The NS Archimedean bridge now has a concrete multi-base wavelet/Riesz-frame
+  candidate route, and scalar-sector OS positivity is recorded only for the
+  finite scalar/Higgs/W4 transfer object.  Frame bounds, full OS/Wightman,
+  BKM smooth passage, and both Clay promotions remain false.
+
+- Manager B Clifford/anyon/SU3 boundary tranche is complete.  Added
+  `CliffordFromP2LaneReceipt`, `SpinorRepresentationReceipt`,
+  `CliffordCharZeroLiftReceipt`, `AnyonicSectorPhysicsReceipt`,
+  `SU3FromAnyon3FoldReceipt`, and `BulkBoundarySU3Receipt`.
+- The p2-lane now has a concrete `F4 -> M2(F2)` Clifford candidate, but the
+  same tranche records the key obstruction honestly: characteristic 2 has no
+  fermion sign, the characteristic-zero lift gives anyonic phase
+  `exp(2*pi*i/3)` rather than `-1`, and the prime-lane surface is therefore a
+  `2+1D` anyonic diagnostic rather than a `3+1D` fermion derivation.
+- The colour route is sharpened but not promoted: the three anyonic lanes give
+  a conditional `SU3_1` Chern-Simons / bulk-boundary candidate, while exact
+  continuous `SU3_c`, exact `G_DHR ~= G_SM`, full SM reconstruction, and all
+  arbitrary-sector DHR promotions remain false.
+
+- Manager C vacuum/VEV/Clay blocker-map tranche is complete.  Added
+  `VacuumSectorReceipt`, `MassiveSubspaceOSPositivity`, `CarrierVEVReceipt`,
+  `RGScaleVsCarrierScaleReceipt`, `OSAxiomsContinuumStatus`, and
+  `ClayBothBlockerMapReceipt`.
+- The H0 diagnosis is now sharper: the checked block is a quark-sector block,
+  not the full vacuum Hamiltonian; after projecting the p2 chiral zero mode,
+  the p3/p5 massive block is still not PSD with bare Yukawa constants.  The
+  next admissible OS branch requires a VEV-calibrated physical mass matrix.
+- The YM/NS Clay frontier is now compiled explicitly: YM still needs gauge
+  identification, RG continuum and dimensionful scale anchoring, OS/Wightman
+  completion; NS still needs ultrametric-to-Archimedean translation and BKM
+  smoothness.  Both Clay flags remain false.
+
+- Manager B SU3/U1Y blocker tranche is complete.  Added
+  `ColourFromPrimeLaneExtensionReceipt`, `TrialitySymmetryReceipt`,
+  `GluonSectorFromDepth2Receipt`, `U1YFromCMCharacterReceipt`,
+  `SM3FoldSymmetryReceipt`, and `NonabelianGapNarrowedReceipt`.
+- The receipts sharpen the Gate 6 nonabelian frontier without promoting it:
+  p2/p3/p5 permutations give finite `S3` only, the CM unit orders give a
+  diagonal `Z/12` CRT action rather than triality or full `SU3`, the naive
+  depth-2 spin-1/gluon count is `55` rather than the `SU3` adjoint dimension
+  `8`, and `Z/3` inside `Z/6` is only a finite hypercharge candidate.
+  Continuous `SU3_c`, continuous `U1_Y`, carrier-derived spin, arbitrary DHR
+  closure, and exact `G_DHR ~= G_SM` remain false.
+
+- Manager C H0/RG/Wightman/NS continuum tranche is complete.  Added
+  `H0ExplicitMatrixReceipt`, `H0SignConventionReceipt`,
+  `NormalisedH0OSPositivity`, `RGContractionExplicitReceipt`,
+  `WightmanReconstructionCandidateReceipt`, and
+  `NSCarrierContinuumLimitReceipt`.
+- The raw H0 branch is now closed negatively: with the requested
+  `log(2/3), log(3/4), log(5/6)` diagonals and all three raw couplings, every
+  principal `2x2` minor is negative, so the raw matrix is not PSD.  The
+  normalized/inverted OS transfer branch is named but remains open.
+- The FactorVec RG parent-sum operator and weighted norm target are pinned
+  down, and the OS/Wightman and NS nonlinear-limit passages are itemized.
+  Operator norm equality, RG contraction, Wightman reconstruction,
+  carrier-specialized Aubin-Lions, smooth NS, Clay YM, and Clay NS remain
+  false.
+
+- Manager B DHR spin-sector tranche is complete.  Added
+  `ConformalSpinFromCMReceipt`, `SpinStatisticsConnectionReceipt`,
+  `DiracSpinSectorReceipt`, `TensorProductWithSpinReceipt`,
+  `NonAbelianFusionFromSpin`, and `GaugeSectorFromSpinCMTensor`.
+  The receipts compute the finite CM spin diagnostic `h=1,3/4,7/4`, record
+  that prime-lane CM characters are not direct spin-1/2 quark fields, introduce
+  `rho_spin` only as a CAR-labelled conditional candidate, and thread
+  `rho_q_i = rho_p_i tensor rho_spin` into a conditional nonabelian
+  `SU(2) x (Z/4 x Z/6 x Z/2)` route.
+- Promotion state is unchanged.  The spin sector is not derived from the
+  carrier, full arbitrary DHR closure is not constructed, `SU3_c` and `U1_Y`
+  remain open, and exact `G_DHR ~= G_SM` / Standard Model reconstruction stays
+  false.
+
+- Worker B6 added `DASHI.Physics.QFT.GaugeSectorFromSpinCMTensor`.
+  It records the conditional DR compact-group candidate surface for
+  `C_phys = C_CM boxtimes Rep(SU2)` with
+  `G_DHR,phys candidate = (Z/4 x Z/6 x Z/2) x SU2`.  The receipt sets
+  `su2LFromSpinSector = true` only under the supplied spin-sector condition,
+  while `su3cGapIdentified = false`, `u1yFromZ4Candidate = false`, and
+  `exactSMReconstruction = false`.
+- The new surface is wired into `DASHI/Everything.agda` after the existing
+  spin-tensor receipt.  It consumes the finite abelian DHR reconstruction
+  receipt and the conditional DHR/SM promotion receipt without promoting full
+  DR compact-group reconstruction, SU3c identification, U1Y derivation, or
+  exact Standard Model matching.
+
+- Manager C NS/RG hard-frontier split is complete.  NS now has
+  `NavierStokesBound3TimeDerivativeReceipt` and `AubinLionsBound3Full` for the
+  receipt-level Ladyzhenskaya/Leray/diffusion/pressure construction of
+  `||partial_t u||_{L2 H^{-1}} <= C`,
+  `UltrametricAubinLionsCompactness` for Aubin-Lions CitationAuthority and the
+  `L2_t L2_x` precompactness target, and `EllipticBootstrapReceipt` for the
+  Evans `L^{4/3} -> L^3 -> L^6 -> smooth` route.  YM/RG now has
+  `RGOperatorNormReceipt` for `||T_d^RG||_op = alpha1`,
+  `RGBanachFixedPointReceipt` for Banach fixed-point authority and the
+  conditional `(1-alpha1)*epsilon_min` gap formula, and
+  `OSPositivityFromRGFixedPoint` for conditional OS preservation from finite
+  OS positivity to a future RG fixed point.
+- The new receipts are wired into `DASHI/Everything.agda` and Paper 8
+  governance docs.  Promotion state is unchanged: carrier Aubin-Lions
+  compactness, smooth NS limit, RG operator-norm equality, Banach fixed point,
+  OS/Wightman reconstruction, Clay NS, and Clay YM remain false.
+
+- Manager B DHR tensor-fusion tranche is complete.  The finite tensor receipt
+  now records all three CM-character counts: p2⊗p3 has `Z/4 x Z/6` and 24
+  characters, p2⊗p5 has corrected Heegner p5 `Z/2` and 8 characters, and
+  p3⊗p5 has `Z/6 x Z/2` and 12 characters.  These are finite abelian
+  bookkeeping receipts only; arbitrary tensor closure, full representation
+  ring construction, nonabelian SM reconstruction, and `G_DHR ~= G_SM` remain
+  false.
+- Added `FibreFunctorFaithfulnessReceipt`,
+  `FiniteDHRAbelianReconstructionReceipt`, and
+  `ArbitrarySectorExtensionReceipt`.  The finite p2/p3/p5 fibres are separated
+  by Frobenius/CM lane invariants, the finite abelian surface
+  `Z/4 x Z/6 x Z/2` has character cardinality 48, and the nonabelian gap is
+  explicitly identified.  Full arbitrary-sector fibre functor, DR compact-group
+  construction, and exact Standard Model gauge identification are not promoted.
+
+- Phase 1 target status is now recorded as eight tracked frontier receipts:
+  `RGContractionReceipt`, `UltrametricAubinLionsReceipt`,
+  `FinitePrimeLaneDHRSMCompatibilityLedger`,
+  `FinitePrimeLaneConjugateDualReceipts`, `ArbitrarySectorClosureReceipt`,
+  `G12FromDHRSectorsReceipt`,
+  `PenguinDecayCarrierDerivedC9ConstraintTargetReceipt`, and
+  `KroneckerLimitAlphaCorrectionReceipt`.  They are target/blocker receipts
+  only; no unsafe promotion was made.
+- Updated the current Cabibbo governance readback.  `alpha1` is recorded as the
+  `sqrt(m_u/m_c)` readback at the recorded precision; the old `alpha1 * g12`
+  route and the later down-sector `sqrt((alpha1^2 * m_c + delta) / m_s)` route
+  are legacy diagnostics, not the active path.  The active formula is
+  `|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)`. `U1CMOrbitIntegralReceipt` now derives the X0(4) sector normalization;
+  `cabibboAngleDerived = false`, `matchesPDG = false`, and no CKM promotion
+  follows.
+- Finite p2p3/p2p5/p3p5 tensor fusion is computed; NS Aubin-Lions/smooth
+  convergence remains open; FactorVec RG contraction/fixed-point construction
+  remains open.
+- Added `scripts/check_g12_isogeny_normalization.py` and
+  `Docs/G12IsogenyNormalizationDiagnostic.md`; updated Paper 6, Paper 8,
+  receipt indexes, blocker map, checklist, and claim-governance scan to preserve
+  the near-hit without promoting the Cabibbo angle.
+
+- Five of the eight tracked Phase 1 surfaces are new non-promoting frontier
+  receipts for the requested flag-flip mathematics:
+  `DASHI.Physics.Closure.RGContractionReceipt`,
+  `DASHI.Physics.Closure.UltrametricAubinLionsReceipt`,
+  `DASHI.Physics.QFT.ArbitrarySectorClosureReceipt`,
+  `DASHI.Physics.Closure.G12FromDHRSectorsReceipt`, and
+  `DASHI.Physics.Moonshine.KroneckerLimitAlphaCorrectionReceipt`.
+  These receipts make the exact next mathematical obligations explicit while
+  keeping `yangMillsMassGapClayPromoted`, `clayNavierStokesPromoted`,
+  `gDHREqualsGSMPromoted`, `cabibboAngleDerived`, and
+  `alphaDerivedFromModularGeometry` false.
+- Updated `DASHI/Everything.agda`, `Docs/Paper8ReceiptIndex.md`,
+  `Docs/CrossPaperReceiptIndex.md`, and `Docs/Paper8UnificationDraft.md` to
+  cite the new frontier receipts.
 
 - Final manager freeze pass completed for the Paper 8 / Paper 1
   pre-submission state.  `Docs/PreSubmissionFreeze2026-05-29.md` records the
@@ -13,7 +240,12 @@
   `Docs/CMJAlphaDiagnosticScan.md` for the requested numerical CM
   `j`-invariant alpha diagnostic.  The scan verifies the classical anchors and
   finds nearby values under naive normalizations, but keeps
-  `alphaDerivedFromModularGeometry = false`.
+  `alphaDerivedFromModularGeometry = false`.  Follow-on check
+  `scripts/check_alpha_from_j_values.py` / `Docs/AlphaFromJNumericalCheck.md`
+  sharpens this: `72 / |j(i)-j(rho)| = 1/24` is an `alpha1` near-hit with
+  about `1.01%` discrepancy and `match=true`; `72 = 3*24` is a modularly
+  meaningful signal, but the correction is unidentified and `alpha2` is a
+  no-hit.
 - Gate 5 hash governance is now indexed in the freeze docs: CMS archive
   `561babac...`, CMS `Results.yaml` `08a244d1...`, `ins1486676` record JSON
   `94a6bb5a...`, `ins1486676` Table 3 `d05fbdf6...`, and P5' table
@@ -395,16 +627,18 @@ unless a line explicitly says it describes the live monitor surface.
   worker lanes against the live YM, GR/Stone, AQFT, and terminal surfaces.
   The concrete receipts now typecheck through `DASHI/Everything.agda` under the
   300s command.  The AQFT local-algebra inhabitance witness and the GR
-  metric/Levi-Civita witness are now `true`, Stone's constructor-shape list is
-  ordered and scope-safe, and the lower6 terminal monitor now records
-  `terminalClaimPromoted = true` on the current four-evidence surface.
+  metric/Levi-Civita witness are now `true`, and Stone's constructor-shape list
+  is ordered and scope-safe.  This historical lower6 monitor note is not a live
+  terminal-composition promotion; current governance keeps terminal promotion
+  fail-closed until the full product receipt and external authority obligations
+  are present.
 
 - Current tranche closure `2026-05-21`: the assigned middle6/upper6 worker
   scope is complete and integrated.  Evidence in the tracked validation trail
-  now passes typechecking with promoted terminal evidence on the current
-  monitor surface: `DASHI/Everything.agda` exits 0 under the 300s command,
-  `git diff --check` passes on the touched coordination surface set, and
-  `terminalClaimPromoted = true`.
+  now passes typechecking for its tracked component evidence:
+  `DASHI/Everything.agda` exits 0 under the 300s command, and
+  `git diff --check` passes on the touched coordination surface set.  It is not
+  a live terminal-composition promotion.
 
 - Worker rerun `2026-05-21`: historical reissue against the owned tranche
   files.  Each returned the same fail-closed result at that wave: Gate 1 /
@@ -1007,10 +1241,25 @@ unless a line explicitly says it describes the live monitor surface.
   derivable target, and ultrametric Aubin-Lions/smooth convergence/Clay NS
   remain false.  Added `scripts/check_alpha_from_j_values.py` and
   `Docs/AlphaFromJNumericalCheck.md`; the CM \(j\)-value scan finds one
-  alpha1 near-hit `72 / |j(i)-j(rho)| = 1/24`, no alpha2 match, and no
+  alpha1 near-hit `72 / |j(i)-j(rho)| = 1/24` with about `1.01%` discrepancy.
+  The factor `72 = 3*24` is recorded as a modularly meaningful signal, but the
+  correction to `0.041240` is unidentified; there is no alpha2 match and no
   simultaneous modular derivation, so `alphaDerivedFromModularGeometry`
   remains false.  `MonsterOrderDepthBoundReceipt` now records the current
   carrier-depth readback vector against Monster exponent targets and keeps
   `depthBoundProved = false`.  Paper 2-8 docs, checklists, metadata, and claim
   governance scans were updated; focused Agda checks and full
   `DASHI/Everything.agda` aggregate pass.
+- 2026-05-29: Manager C Hecke/braiding/H0 blocker tranche complete.  Added
+  `DASHI.Physics.Closure.Deg23HeckeEigenvalueReceipt`, recording the explicit
+  eta-product check `q*prod(1-q^n)^2(1-q^(7n))^2 = q - 2q^2 - q^3 + 0q^4 +
+  q^5 + ...`, so `a5 = +1` and the quoted `a5 = -2` normalization is rejected;
+  the `14 -> 14.302` deg23 residual remains open.  Added
+  `DASHI.Physics.QFT.BraidingMorphismReceipt`, which records the finite
+  p2/p3/p5 braiding as the bosonic symmetric swap on the abelian CM-character
+  surface; no `(-1)^F`, Yang-Baxter, nonabelian intertwiner, or
+  `G_DHR ~= G_SM` promotion follows.  Added
+  `DASHI.Physics.Closure.H0OSPositivityBaseCase`, where the selected depth-1
+  3x3 H0 matrix with p2-p5 coupling set to zero is positive definite, while
+  the full raw H0 OS base case, reflection form, Wightman reconstruction, and
+  Clay Yang-Mills promotion remain false.

@@ -10,6 +10,7 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Physics.Closure.CKMVusCarrierPredictionTargetReceipt as Vus
 import DASHI.Physics.Closure.CarrierYukawaRatioTargetReceipt as Ratios
 import DASHI.Physics.Closure.MatterRepresentationReceiptSurface as Matter
+import DASHI.Physics.Closure.U1CMOrbitIntegralReceipt as U1CM
 
 ------------------------------------------------------------------------
 -- Cabibbo-angle carrier receipt.
@@ -27,10 +28,19 @@ data CabibboAngleCarrierBlocker : Set where
   missingAcceptedCommonAlphaForCabibbo :
     CabibboAngleCarrierBlocker
 
-  missingEvaluatedOffDiagonalCouplingG12 :
+  missingIsospinSplittingFromP3Lane :
+    CabibboAngleCarrierBlocker
+
+  missingStrangeMassFromP5Lane :
     CabibboAngleCarrierBlocker
 
   missingArcsinErrorBoundForCarrierForm :
+    CabibboAngleCarrierBlocker
+
+  missingU1CMOrbitIntegralForCabibbo :
+    CabibboAngleCarrierBlocker
+
+  missingSectorAngleNormalizationForCabibbo :
     CabibboAngleCarrierBlocker
 
   missingNonIdentityPhysicalCKMDiagonalizers :
@@ -42,20 +52,17 @@ data CabibboAngleCarrierBlocker : Set where
 canonicalCabibboAngleCarrierBlockers :
   List CabibboAngleCarrierBlocker
 canonicalCabibboAngleCarrierBlockers =
-  missingAcceptedCommonAlphaForCabibbo
-  ∷ missingEvaluatedOffDiagonalCouplingG12
-  ∷ missingArcsinErrorBoundForCarrierForm
-  ∷ missingNonIdentityPhysicalCKMDiagonalizers
+  missingNonIdentityPhysicalCKMDiagonalizers
   ∷ missingPDGAcceptedCabibboAngleAuthority
   ∷ []
 
 cabibboCarrierAngleFormula : String
 cabibboCarrierAngleFormula =
-  "theta_C = arcsin(alpha1 * g12)"
+  "|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)"
 
 cabibboTargetAngleLabel : String
 cabibboTargetAngleLabel =
-  "theta_C = arcsin(|V_us|) approximately 13 degrees"
+  "|V_us| Cabibbo target, with theta_C = arcsin(|V_us|) approximately 13 degrees"
 
 alphaOneApproxLabel : String
 alphaOneApproxLabel =
@@ -118,6 +125,21 @@ record CabibboAlphaDiagnostics : Setω where
 
     alpha1SquaredWithinThreePercentOfMuOverCharmIsTrue :
       alpha1SquaredWithinThreePercentOfMuOverCharm ≡ true
+
+    alpha1ExactMatchesSqrtMuMc :
+      Bool
+
+    alpha1ExactMatchesSqrtMuMcIsTrue :
+      alpha1ExactMatchesSqrtMuMc ≡ true
+
+    alpha1ExactFormula :
+      String
+
+    alpha1ExactFormulaMatchesCanonicalRatioReceipt :
+      alpha1ExactFormula
+      ≡
+      Ratios.upOverCharmAlphaFormula
+        Ratios.canonicalAlphaFromFermionMassRatioEstimateReceipt
 
     derivedFromFermionMasses :
       Bool
@@ -193,6 +215,15 @@ canonicalCabibboAlphaDiagnostics =
     ; alpha1SquaredWithinThreePercentOfMuOverCharm =
         true
     ; alpha1SquaredWithinThreePercentOfMuOverCharmIsTrue =
+        refl
+    ; alpha1ExactMatchesSqrtMuMc =
+        true
+    ; alpha1ExactMatchesSqrtMuMcIsTrue =
+        refl
+    ; alpha1ExactFormula =
+        Ratios.upOverCharmAlphaFormula
+          Ratios.canonicalAlphaFromFermionMassRatioEstimateReceipt
+    ; alpha1ExactFormulaMatchesCanonicalRatioReceipt =
         refl
     ; derivedFromFermionMasses =
         Ratios.derivedFromFermionMasses
@@ -271,11 +302,25 @@ record CabibboAngleCarrierReceipt : Setω where
     carrierThetaFormulaIsCabibboForm :
       carrierThetaFormula ≡ cabibboCarrierAngleFormula
 
-    carrierThetaFormulaRefinesVusAlphaCouplingTarget :
+    carrierThetaFormulaRefinesUpSectorMuMcTarget :
       Bool
 
-    carrierThetaFormulaRefinesVusAlphaCouplingTargetIsTrue :
-      carrierThetaFormulaRefinesVusAlphaCouplingTarget ≡ true
+    carrierThetaFormulaRefinesUpSectorMuMcTargetIsTrue :
+      carrierThetaFormulaRefinesUpSectorMuMcTarget ≡ true
+
+    u1CMOrbitIntegralReceipt :
+      U1CM.U1CMOrbitIntegralReceipt
+
+    sectorAngleNormalizationDerivedFromU1CM :
+      U1CM.sectorAngleNormalizationDerived u1CMOrbitIntegralReceipt
+      ≡
+      true
+
+    p2P3SectorNormalizationDerived :
+      Bool
+
+    p2P3SectorNormalizationDerivedIsTrue :
+      p2P3SectorNormalizationDerived ≡ true
 
     cabibboAngleDerived :
       Bool
@@ -312,6 +357,12 @@ record CabibboAngleCarrierReceipt : Setω where
 
     physicalYukawaRatioPredictionsPromotedIsFalse :
       physicalYukawaRatioPredictionsPromoted ≡ false
+
+    pdgAcceptedCabibboAngleAuthority :
+      Bool
+
+    pdgAcceptedCabibboAngleAuthorityIsFalse :
+      pdgAcceptedCabibboAngleAuthority ≡ false
 
     blockers :
       List CabibboAngleCarrierBlocker
@@ -355,9 +406,17 @@ canonicalCabibboAngleCarrierReceipt =
         cabibboCarrierAngleFormula
     ; carrierThetaFormulaIsCabibboForm =
         refl
-    ; carrierThetaFormulaRefinesVusAlphaCouplingTarget =
+    ; carrierThetaFormulaRefinesUpSectorMuMcTarget =
         true
-    ; carrierThetaFormulaRefinesVusAlphaCouplingTargetIsTrue =
+    ; carrierThetaFormulaRefinesUpSectorMuMcTargetIsTrue =
+        refl
+    ; u1CMOrbitIntegralReceipt =
+        U1CM.canonicalU1CMOrbitIntegralReceipt
+    ; sectorAngleNormalizationDerivedFromU1CM =
+        U1CM.u1CMReceiptSectorAngleNormalizationDerived
+    ; p2P3SectorNormalizationDerived =
+        true
+    ; p2P3SectorNormalizationDerivedIsTrue =
         refl
     ; cabibboAngleDerived =
         false
@@ -383,17 +442,23 @@ canonicalCabibboAngleCarrierReceipt =
     ; physicalYukawaRatioPredictionsPromotedIsFalse =
         Ratios.physicalRatioPredictionsPromotedIsFalse
           Ratios.canonicalCarrierYukawaRatioTargetReceipt
+    ; pdgAcceptedCabibboAngleAuthority =
+        false
+    ; pdgAcceptedCabibboAngleAuthorityIsFalse =
+        refl
     ; blockers =
         canonicalCabibboAngleCarrierBlockers
     ; blockersAreCanonical =
         refl
     ; receiptBoundary =
-        "The Cabibbo target is theta_C = arcsin(|V_us|) approximately 13 degrees from the existing Vus comparison target"
-        ∷ "The carrier form is theta_C = arcsin(alpha1 * g12), refining the existing |V_us|_target(alpha,g_12)=alpha*g_12 target surface"
+        "The active Cabibbo target is |V_us| = pi*sqrt(3)*sqrt(m_u/m_c), compared against the existing Vus target"
+        ∷ "The previous down-sector form sqrt((alpha1^2 * m_c + delta) / m_s) is no longer the active target in this receipt"
+        ∷ "alpha1ExactMatchesSqrtMuMc=true records the inhabited comparison with CarrierYukawaRatioTargetReceipt.upOverCharmAlphaFormula"
         ∷ "alpha1 approximately 0.041, alpha2 approximately 0.086, and alpha1^2 approximately 0.00168 within 3 percent of m_u/m_c are diagnostic readbacks, not accepted physical constants"
-        ∷ "alpha1^2 is recorded as within 3 percent of m_u/m_c while the common-alpha and error-bound receipts remain absent"
+        ∷ "The X0(4) sector-angle normalization is now derived in U1CMOrbitIntegralReceipt"
+        ∷ "alpha1^2 is recorded as within 3 percent of m_u/m_c while common-alpha, full CKM diagonalisation, and accepted PDG authority remain unpromoted"
         ∷ "yukawaSuppressPatternConsistent is true as a pattern-level diagnostic against the existing carrier-Yukawa ratio receipt"
-        ∷ "cabibboAngleDerived is false: no evaluated g12, arcsin error bound, accepted PDG authority binding, or non-identity physical CKM diagonalizer is constructed here"
+        ∷ "cabibboAngleDerived is false: the p2-p3 sector normalization is derived, but accepted PDG authority binding and non-identity physical CKM diagonalizers are not constructed here"
         ∷ []
     }
 
@@ -409,6 +474,22 @@ cabibboAngleCarrierReceiptRecordsYukawaPatternConsistency :
   ≡
   true
 cabibboAngleCarrierReceiptRecordsYukawaPatternConsistency =
+  refl
+
+
+cabibboAngleCarrierReceiptThreadsU1CMSectorNormalization :
+  U1CM.sectorAngleNormalizationDerived
+    (u1CMOrbitIntegralReceipt canonicalCabibboAngleCarrierReceipt)
+  ≡
+  true
+cabibboAngleCarrierReceiptThreadsU1CMSectorNormalization =
+  sectorAngleNormalizationDerivedFromU1CM canonicalCabibboAngleCarrierReceipt
+
+cabibboAngleCarrierReceiptP2P3NormalizationDerived :
+  p2P3SectorNormalizationDerived canonicalCabibboAngleCarrierReceipt
+  ≡
+  true
+cabibboAngleCarrierReceiptP2P3NormalizationDerived =
   refl
 
 cabibboAngleCarrierReceiptThreadsVusPromotionBlocker :
