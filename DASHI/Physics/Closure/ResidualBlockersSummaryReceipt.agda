@@ -173,7 +173,7 @@ canonicalResidualBlockersSummaryReceipt =
         refl
     ; receiptBoundary =
         "The residual blockers are sorted into tractable, extended-research, and Clay-wall tiers"
-        ∷ "The scale-one wavelet counterexample keeps the frame-bound route open"
+        ∷ "Finite scale-zero and scale-one wavelet cancellations do not close the all-scale frame-bound route"
         ∷ "No CKM, SM, YM Clay, NS Clay, or terminal claim is promoted"
         ∷ []
     }
@@ -182,4 +182,3 @@ residualBlockersSummaryKeepsTerminalFalse :
   terminalClaimPromoted canonicalResidualBlockersSummaryReceipt ≡ false
 residualBlockersSummaryKeepsTerminalFalse =
   refl
-

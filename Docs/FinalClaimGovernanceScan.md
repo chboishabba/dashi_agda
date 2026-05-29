@@ -36,14 +36,21 @@ forbidden-reading, or explicit non-claim contexts.
 
 Additional 2026-05-30 Manager C closeout negative boundaries:
 
-- `HaarMutualCoherenceReceipt` and `WaveletOrthogonalityProofReceipt` reject
-  literal all-scale mutual orthogonality for the 2/3/5 Haar bridge; the
-  scale-one dyadic/triadic inner product is recorded as `sqrt(6)/6`.
+- `HaarMutualCoherenceReceipt`, `DyadicTriadicScale1InnerProduct`, and
+  `WaveletOrthogonalityProofReceipt` record finite dyadic/triadic
+  cancellations while keeping literal all-scale mutual orthogonality for the
+  2/3/5 Haar bridge open.  The prior scale-one `sqrt(6)/6` diagnostic is
+  explicitly retired for the stated supported-Haar convention.
 - `NSWeakSolutionFinalReceipt` records only a conditional weak-solution route;
   lower frame bounds, coefficient-to-`L2` continuity, smoothness, BKM passage,
   and Clay NS remain false.
+- `NSFrameBoundImplicationReceipt` records only the conditional bound-3 frame
+  implication; it does not prove the missing all-scale frame theorem.
 - `Paper8CoreThesisReceipt` is a bounded thesis/governance receipt, not a
   full-unification or terminal-physics proof.
+- `Phase1CommitReceipt`, `Paper8AbstractDraftReceipt`, and
+  `NextSessionPriorityReceipt` are governance/prose/queue receipts; they do
+  not commit, tag, or promote CKM, SM, YM Clay, NS Clay, or terminal claims.
 - `CommitTagPreparationReceipt` prepares text for `heegner-ckm-v2-diagnostic`
   and explicitly does not create a tag.
 - `ResidualBlockersSummaryReceipt` is a blocker ledger; it does not promote
@@ -278,3 +285,19 @@ Paper 1 and Paper 8 may cite the depth-bound receipt only as a fail-closed
 diagnostic and governance receipt. They must not describe it as a proof of the
 Monster-depth principle, a first-principles derivation of the supersingular
 prime set, a Standard Model reconstruction, or terminal unification.
+
+## Phase 1 Closeout Scan
+
+- `WaveletOrthogonalityGeneralArgumentReceipt` records only a candidate
+  equidistribution/partition route. It must not be cited as an all-scale
+  wavelet orthogonality proof, Riesz/frame theorem, Archimedean compactness
+  theorem, or Navier-Stokes result.
+- `ZetaK21ComputationReceipt` records the exact arithmetic value
+  `zeta_Q(sqrt(21))(-1)=1/3`. It must not be cited as deriving the p3-p5
+  coupling, CKM `A`, or `Vcb`.
+- `NSDeg23ConnectionReceipt` records that the zeta/Hilbert-volume
+  normalisations tested here do not recover the `14.302` target. Positive
+  perturbative diagnostics remain diagnostic only.
+- `Phase1FinalStateReceipt`, `WorktreeCleanupReceipt`, and
+  `SessionEndProtocolReceipt` are governance records. They do not create a
+  commit, create a tag, freeze the worktree, or promote any physical claim.

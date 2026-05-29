@@ -1,14 +1,182 @@
+- 2026-05-30: Manager A T13 / deg23 residual tranche complete. Added and
+  wired `Deg23FromT13HeckeReceipt`, `CMCorrectionToT13Receipt`,
+  `ThirteenInertInBiquadraticReceipt`,
+  `Deg23CorrectionFrom13CMReceipt`, `Deg23ResidualFinalStatusReceipt`, and
+  `P13LaneHypothesisReceipt`.  The base deg23 integer is now recorded as
+  `deg(T_13)=14` for inert 13 on the Hilbert modular surface over
+  `Q(sqrt(21))`; the local signs are `(-3/13)=+1`, `(-7/13)=-1`,
+  `(21/13)=-1`, giving two degree-2 primes in the biquadratic CM field.
+  The simple CM-correction and p13 point-count routes remain negative
+  diagnostics, and no Vcb/CKM/SM/DHR/Clay/terminal promotion was introduced.
+
+- 2026-05-30: Manager C SM-count / T13 / closeout tranche complete locally.
+  Added closure receipts for `T_13` as the base deg23 Hecke degree,
+  SU(2)-doublet up/down splitting, the 48-Weyl count with right-handed
+  neutrinos included, the final residual blocker map, worktree commit
+  protocol, and next-session opening problems.  The commit receipt records
+  commands only and does not stage, commit, or tag the concurrent worktree.
+  The count/gauge surfaces are fail-closed: no CKM, exact SM, DHR/SM, Clay,
+  or terminal promotion was introduced.
+
+- 2026-05-30: Manager B geometric split / gauge-candidate tranche complete. Six workers added QFT receipts for conductor-level quark/lepton separation, `D=-11` isolation, D=-12 tau overlap ratios, final lepton/quark separation aggregation, p3 `SU(2)_3 -> SU(2)_1` level-flow candidate, chiral-limit `SU(3)` candidate, p3 `Z/6 -> U(1)` candidate, CS-boundary gauge-boson/EWSB candidates, and the aggregate SM gauge-group candidate map. Closure receipts now record the wavelet all-scale orthogonality failure/frame-bound blocker, exact `zeta_{Q(sqrt(21))}(-1)=1/3`, the negative deg23-from-zeta diagnostic, and the Paper 8 geometric split summary. Exact lepton/quark/Yukawa/gauge/SM/G_DHR/CKM/Clay/terminal promotions remain false.
 # 2026-05-30
+
+- Completed Manager B's T13 / gauge-decoupling / count tranche.  Added and
+  wired Closure receipts for the T13 Hecke source of deg23, the local CM
+  splitting/correction diagnostics at 13, the p13 negative point-count
+  diagnostic, SU(2)-doublet up/down splitting, the 48-Weyl count check,
+  the final residual blocker map, and next-session opening problems.
+- Added and wired QFT receipts for the CS-three-lane gauge candidate map,
+  level-rank decoupling candidate, naive W-boson mass failure, lepton-Yukawa
+  overlap hierarchy, no-fourth-generation Heegner-exhaustion candidate, and
+  QFT fermion-count blocker surface.
+- The tranche separates the now-receipted base `deg23=14` from the still-open
+  `14 -> 14.302` residual, and records the gauge/count improvements as
+  structural or candidate-only.  No CKM, exact SM, DHR/SM, Clay, or terminal
+  promotion was introduced.
+
+# 2026-05-30
+
+- Implemented the Paper 8 introduction draft and receipt hook.  Added
+  `Docs/Paper8IntroductionDraft.md` and
+  `Paper8IntroductionDraftReceipt`, then wired the receipt through
+  `DASHI.Everything` and `Docs/Paper8ReceiptIndex.md`.  The introduction
+  frames DASHI as a fail-closed programme, summarizes the bounded lambda,
+  diagnostic `A`, charge-quantisation, and first-six Heegner matter-lane
+  results, and keeps gauge-group origin, quark-lepton separation, and
+  no-fourth-generation as candidate/blocker lanes.  No Clay, full SM,
+  accepted-new-physics, or terminal promotion is asserted.
+
+- Completed Manager C's geometric split / zeta / wavelet revision tranche.
+  Added `ZetaQ21MinusOneReceipt`, `Deg23FromZetaK21Receipt`,
+  `AggregateAndCommitReceipt`, and `GeometricSplitSummaryReceipt`, and wired
+  the existing dyadic/triadic orthogonality and wavelet-frame revision
+  receipts into `DASHI.Everything`.
+- The exact `Q(sqrt(21))` value is now exposed as
+  `zeta_Q(sqrt(21))(-1)=1/3`, while the tested Hilbert-volume and
+  carrier-natural normalisations remain negative for the `14.302` deg23
+  target.
+- The wavelet shortcut is closed negatively: all-scale mutual orthogonality is
+  false because coarser-scale cross terms can be nonzero, so the NS bridge
+  remains blocked on a genuine frame-bound / Gram-spectrum argument.
+- The Paper 8 geometric split summary records the pairwise-coprime quark
+  levels `3,4,7`, lepton overlap factors `1/2`, `1/3`, `1/4`, and the
+  `D=-11` isolation exception.  These are diagnostic/candidate surfaces only;
+  no CKM, SM, DHR/SM, Clay, or terminal promotions were introduced.
+- Refreshed the sidecar publication-control docs for these Manager C receipts:
+  Paper 8 and cross-paper indexes now distinguish exact zeta arithmetic,
+  negative deg23 normalisation diagnostics, the geometric split summary, and
+  aggregate/commit governance without claiming staging, commit, tag, SM,
+  Clay, or terminal promotion.
+
+- Completed Manager A's geometric quark/lepton split tranche.  Implemented
+  six Closure receipts:
+  `QuarkLeptonGeometricSplitReceipt`, `Disc11ExceptionReceipt`,
+  `LeptonYukawaFromLevelOverlapReceipt`,
+  `MuonNeutrinoIsolationReceipt`, `TauLeptonGen3OverlapReceipt`, and
+  `LeptonQuarkSeparationFinalReceipt`.
+- The final receipt aggregates the new Manager-A surfaces and retires the
+  unit-group-only criterion.  It records pairwise-coprime quark levels
+  `3,4,7`, D=-8 level-overlap ratio `1/2`, D=-12 overlap ratios `1/3` and
+  `1/4`, and D=-11 leading direct quark-lepton Yukawa zero.  These are
+  diagnostic structural claims only; all lepton-sector, exact SM, DHR/SM,
+  CKM, and Clay flags remain false.
+- Updated `LeptonSectorGapReceipt` audit text and wired the new receipts into
+  `DASHI.Everything`.
+
+- Completed Manager C's Hilbert modular volume / wavelet proof /
+  session-closeout tranche.  Implemented
+  `WaveletOrthogonalityGeneralArgumentReceipt` as a candidate
+  equidistribution/partition route, leaving all-scale wavelet orthogonality,
+  frame bounds, and Clay NS false.  Implemented `ZetaK21ComputationReceipt`
+  with the exact finite Bernoulli-character value
+  `zeta_Q(sqrt(21))(-1)=1/3`, then updated `NSDeg23ConnectionReceipt` so the
+  zeta route is a negative deg23 diagnostic rather than a missing dependency.
+  Added `Phase1FinalStateReceipt`, `WorktreeCleanupReceipt`, and
+  `SessionEndProtocolReceipt` as governance-only closeout surfaces; none
+  stage, commit, tag, or promote terminal claims.  Wired the receipts into
+  `DASHI.Everything`.
+
+# 2026-05-30
+
+- Completed Manager B's Heegner-ordering / SM-content tranche as six
+  fail-closed QFT receipts: `HeegnerOrderingPrincipleReceipt`,
+  `CSLevelFlowFullReceipt`, `SU3ColourFrom3LanesFusionReceipt`,
+  `HyperchargeNormalisationAnomalyReceipt`,
+  `ColourFromNcThreeLanesReceipt`, and `SMContentSummaryReceipt`.
+- The new receipts record the first-six Heegner-discriminant matter-lane
+  hypothesis, full CS level-flow candidate map, finite `N_c=3` colour
+  diagnostic, standard left-handed Weyl anomaly-cancellation ledger, and
+  aggregate SM-content map.  They deliberately do not derive continuous
+  `U1_Y`, exact `SU3_c`, exact `SU2_L`, lepton-sector construction, physical
+  CKM, no-fourth-generation exclusion, exact SM reconstruction, or
+  `G_DHR ~= G_SM`.
+- Wired the receipts into `DASHI/Everything.agda` and refreshed the
+  cross-paper/Paper 8 receipt indexes plus Gate 6 blocker map.  All terminal
+  and physical promotion flags remain false.
+
+- Implemented Manager A's Hilbert-volume / Vub-NLO / Heegner-position
+  follow-up receipts: `HilbertModularVolumeReceipt`,
+  `Deg23HilbertModularCandidateReceipt`, `VubNLOFromCarrierRGReceipt`,
+  `HeegnerSequenceQuarkLeptonReceipt`, and
+  `CKMHierarchyFromHeegnerPositionReceipt`.
+- Recorded `zeta_{Q(sqrt(21))}(-1)=1/3` as exact Hilbert-route input, kept
+  `deg23` underived after the bounded normalisation sweep, and marked the
+  degree-28 NLO `|Vub|` correction as requiring separate QCD running rather
+  than FactorVec RG.
+- Added `Docs/Paper6StatusAfterPhase1.md`.  The Heegner-position
+  quark/lepton split remains candidate-only, and the naive positional-gap
+  `|Vub|` model is now a negative diagnostic.  No terminal promotions were
+  introduced.
+
+- Completed Manager B's SU(2) level-shift and lepton-lane correction tranche.
+  Added and wired `SU2LevelMismatchResolutionReceipt`,
+  `FermionicLoopCSShiftReceipt`, `D11D12LeptonLanesReceipt`,
+  `LeptonGenerationMappingReceipt`, `QuarkLeptonCMUnitGroupReceipt`, and
+  `ConductorVsDiscriminantReceipt`.
+- Corrected the older lepton-gap surface: `D=-8` is a maximal-order row with
+  order conductor `1` and modular/character level `8`, not a conductor-4 p2
+  collision.  The new unit-group receipt records the negative diagnostic that
+  `Z/2` units alone cannot distinguish quark from lepton lanes because the
+  active `D=-7` p5 lane also has `Z/2`.
+- The p3 `SU(2)_3 -> SU(2)_1` route is now recorded as a conditional
+  Chern-Simons/fermionic-loop shift candidate only.  Exact weak `SU(2)_L`,
+  lepton-sector construction, quark/lepton separation, exact SM
+  reconstruction, and `G_DHR ~= G_SM` remain false.
+
+- Implemented Manager C's Phase 1 wavelet/abstract closeout receipts:
+  `DyadicTriadicScale1InnerProduct`,
+  `MutualOrthogonalityGeneralProofReceipt`,
+  `NSFrameBoundImplicationReceipt`, `Phase1CommitReceipt`,
+  `Paper8AbstractDraftReceipt`, and `NextSessionPriorityReceipt`.
+- Corrected the wavelet diagnostic layer: the prior scale-one `sqrt(6)/6`
+  result is retired for the stated supported-Haar convention, with the direct
+  computation recorded as `sqrt(6)*(1/9-1/9)=0`.  The all-scale 2/3/5
+  orthogonality/frame theorem remains open; no NS promotion follows.
+- Added `Docs/Paper8AbstractDraft.md`, refreshed the Paper 8 receipt index,
+  blocker map, and submission checklist, and kept the Phase 1 commit/tag as a
+  draft only.
+
+- Implemented Manager A's deg23/Vub/lepton-lane diagnostic tranche:
+  `HeckeCorrOnX021Receipt`, `Deg23DirectIsogenyReceipt`,
+  `Deg23ShimuraApproachReceipt`, `Vub28IsogenyReceipt`,
+  `D8LeptonLaneReceipt`, and `LeptonQuarkSeparationReceipt`.
+- Wired the six receipts into `DASHI/Everything.agda`.  The key changes are
+  fail-closed: `X_0(21)` is rejected as the deg23 Heegner surface, the old
+  `deg23=14` point-count sum is marked underived, the Hilbert/Shimura surface
+  route is named but blocked, the degree-28 `|Vub|` route remains an NLO-QCD
+  hypothesis, and `D=-8` is only a lepton-lane candidate.  No CKM, Vub,
+  lepton-sector, SM, YM, or NS promotion was added.
 
 - Implemented Manager C's wavelet/Paper8 closeout receipts:
   `HaarMutualCoherenceReceipt`, `WaveletOrthogonalityProofReceipt`,
   `NSWeakSolutionFinalReceipt`, `Paper8CoreThesisReceipt`,
   `CommitTagPreparationReceipt`, and `ResidualBlockersSummaryReceipt`.
 - Wired the six receipts into `DASHI/Everything.agda` and refreshed the Paper 8
-  receipt index plus blocker map.  The key correction is negative: the
-  scale-one dyadic/triadic Haar inner product is `sqrt(6)/6`, so the simple
-  mutual-orthogonality route is rejected and the multibase wavelet bridge must
-  proceed through frame/Gram bounds.
+  receipt index plus blocker map.  The subsequent follow-up receipt retires
+  the `sqrt(6)/6` scale-one diagnostic for the stated supported-Haar
+  convention; the multibase wavelet bridge still proceeds through frame/Gram
+  bounds.
 - `CommitTagPreparationReceipt` prepares the `heegner-ckm-v2-diagnostic`
   message without creating a tag.  All terminal and physical promotions remain
   false.

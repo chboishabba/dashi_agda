@@ -17,9 +17,10 @@ import DASHI.Physics.QFT.ConductorLevelCorrespondenceReceipt as Conductor
 -- This receipt records the next small class-number-1 discriminants after
 -- the active p2/p3/p5 CM window.  The active window is still {-4,-3,-7}.
 -- The next inspected discriminants -8, -11, and -12 are only lepton-lane
--- candidates.  The -8 row is blocked by a conductor-four collision with the
--- existing p2 lane, the -11 row remains an open candidate, and -12 remains
--- an open candidate.  No lepton sector or exact SM promotion is constructed.
+-- candidates.  The -8 row is no longer treated as a conductor-four
+-- collision: it is the maximal order row with field discriminant -8 and
+-- modular/character level 8.  The -8, -11, and -12 rows all remain open
+-- candidates.  No lepton sector or exact SM promotion is constructed.
 
 data ClassNumberOneDiscriminant : Set where
   D-3 :
@@ -156,14 +157,11 @@ classNumberOneDiscriminantLabel D-163 =
   "D=-163"
 
 data LeptonLaneCandidateStatus : Set where
-  blockedByP2ConductorFourConflict :
-    LeptonLaneCandidateStatus
-
   leptonLaneCandidateOpen :
     LeptonLaneCandidateStatus
 
 data LeptonSectorGapBlocker : Set where
-  dMinusEightConductorFourConflictsWithP2Lane :
+  dMinusEightLevelEightCandidateStillUnconstructed :
     LeptonSectorGapBlocker
 
   dMinusElevenHasNoLeptonSectorConstruction :
@@ -181,7 +179,7 @@ data LeptonSectorGapBlocker : Set where
 canonicalLeptonSectorGapBlockers :
   List LeptonSectorGapBlocker
 canonicalLeptonSectorGapBlockers =
-  dMinusEightConductorFourConflictsWithP2Lane
+  dMinusEightLevelEightCandidateStillUnconstructed
   ∷ dMinusElevenHasNoLeptonSectorConstruction
   ∷ dMinusTwelveHasNoLeptonSectorConstruction
   ∷ missingExactLeptonRepresentationTable
@@ -197,7 +195,7 @@ leptonSectorPromotionFlagImpossibleHere ()
 
 leptonSectorGapBoundaryLabel : String
 leptonSectorGapBoundaryLabel =
-  "Lepton sector remains absent/open: -8 is conductor-four-conflicted with p2, while -11 and -12 are only lepton-lane candidates"
+  "Lepton sector remains absent/open: -8 is corrected to field discriminant -8 with modular level 8, while -11 and -12 are also only lepton-lane candidates"
 
 classNumberOneDiscriminantListLabel : String
 classNumberOneDiscriminantListLabel =
@@ -236,11 +234,11 @@ dMinusEightLeptonLaneCandidate =
     ; discriminantLabelIsCanonical =
         refl
     ; candidateConductor =
-        4
+        8
     ; status =
-        blockedByP2ConductorFourConflict
+        leptonLaneCandidateOpen
     ; statusStatement =
-        "D=-8 candidate is blocked here because its conductor-four lane conflicts with the existing p2 conductor-four lane"
+        "D=-8 candidate is corrected to modular/character level 8; it remains open because no lepton sector is constructed"
     }
 
 dMinusElevenLeptonLaneCandidate :
@@ -340,8 +338,8 @@ record LeptonSectorGapReceipt : Setω where
     dMinusEightDiscriminantIsMinusEight :
       discriminant dMinusEightCandidate ≡ D-8
 
-    dMinusEightCandidateConductorIsFour :
-      candidateConductor dMinusEightCandidate ≡ 4
+    dMinusEightCandidateLevelIsEight :
+      candidateConductor dMinusEightCandidate ≡ 8
 
     p2LaneConductor :
       Nat
@@ -352,13 +350,13 @@ record LeptonSectorGapReceipt : Setω where
     dMinusEightConductorConflictsWithP2Lane :
       Bool
 
-    dMinusEightConductorConflictsWithP2LaneIsTrue :
-      dMinusEightConductorConflictsWithP2Lane ≡ true
+    dMinusEightConductorConflictsWithP2LaneIsFalse :
+      dMinusEightConductorConflictsWithP2Lane ≡ false
 
-    dMinusEightStatusIsBlocked :
+    dMinusEightStatusIsOpenCandidate :
       status dMinusEightCandidate
       ≡
-      blockedByP2ConductorFourConflict
+      leptonLaneCandidateOpen
 
     dMinusElevenCandidate :
       LeptonLaneCandidate
@@ -465,17 +463,17 @@ canonicalLeptonSectorGapReceipt =
         refl
     ; dMinusEightDiscriminantIsMinusEight =
         refl
-    ; dMinusEightCandidateConductorIsFour =
+    ; dMinusEightCandidateLevelIsEight =
         refl
     ; p2LaneConductor =
         4
     ; p2LaneConductorIsFour =
         refl
     ; dMinusEightConductorConflictsWithP2Lane =
-        true
-    ; dMinusEightConductorConflictsWithP2LaneIsTrue =
+        false
+    ; dMinusEightConductorConflictsWithP2LaneIsFalse =
         refl
-    ; dMinusEightStatusIsBlocked =
+    ; dMinusEightStatusIsOpenCandidate =
         refl
     ; dMinusElevenCandidate =
         dMinusElevenLeptonLaneCandidate
@@ -525,9 +523,11 @@ canonicalLeptonSectorGapReceipt =
         "The active p2/p3/p5 class-number-1 CM window remains D=-4,D=-3,D=-7"
         ∷ "The full class-number-1 discriminant list recorded here is -3,-4,-7,-8,-11,-12,-16,-19,-27,-28,-43,-67,-163"
         ∷ "The next inspected discriminants D=-8,D=-11,D=-12 are recorded only as lepton-lane candidates"
-        ∷ "D=-8 has candidate conductor 4 and is blocked by conflict with the existing p2 conductor-four lane"
+        ∷ "D=-8 is corrected to field discriminant -8 with modular/character level 8; it is open because no lepton sector is constructed"
         ∷ "D=-11 is an open lepton-lane candidate"
         ∷ "D=-12 is an open lepton-lane candidate"
+        ∷ "Closure.LeptonQuarkSeparationFinalReceipt now records the geometric-level diagnostic: pairwise-coprime quark levels, D=-8/D=-12 overlap, and D=-11 isolation"
+        ∷ "The geometric split remains candidate-only; it does not construct a lepton sector or promote SM matter"
         ∷ "leptonSectorConstructed=false and leptonSectorAbsentOpen=true"
         ∷ "exactStandardModelPromotion=false and gDHREqualsGSMPromoted=false"
         ∷ []
@@ -547,20 +547,20 @@ leptonSectorGapRecordsNextCandidates :
 leptonSectorGapRecordsNextCandidates =
   refl
 
-leptonSectorGapRecordsDMinusEightConductorFour :
+leptonSectorGapRecordsDMinusEightLevelEight :
   candidateConductor
     (dMinusEightCandidate canonicalLeptonSectorGapReceipt)
   ≡
-  4
-leptonSectorGapRecordsDMinusEightConductorFour =
+  8
+leptonSectorGapRecordsDMinusEightLevelEight =
   refl
 
-leptonSectorGapRecordsDMinusEightP2Conflict :
+leptonSectorGapRecordsDMinusEightNoP2Conflict :
   dMinusEightConductorConflictsWithP2Lane
     canonicalLeptonSectorGapReceipt
   ≡
-  true
-leptonSectorGapRecordsDMinusEightP2Conflict =
+  false
+leptonSectorGapRecordsDMinusEightNoP2Conflict =
   refl
 
 leptonSectorGapRecordsDMinusElevenCandidate :

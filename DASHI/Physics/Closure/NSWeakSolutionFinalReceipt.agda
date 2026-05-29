@@ -174,8 +174,8 @@ canonicalNSWeakSolutionFinalReceipt =
     ; statementIsCanonical =
         refl
     ; receiptBoundary =
-        "This is the conditional final weak-solution route, not an unconditional continuum theorem"
-        ∷ "Literal multibase orthogonality failed; frame bounds remain the required bridge"
+      "This is the conditional final weak-solution route, not an unconditional continuum theorem"
+        ∷ "Literal multibase orthogonality is not proved; frame bounds remain the required bridge"
         ∷ "Smoothness, BKM continuation, and Clay Navier-Stokes promotion remain false"
         ∷ []
     }
@@ -184,4 +184,3 @@ nsWeakSolutionFinalKeepsClayFalse :
   clayNavierStokesPromoted canonicalNSWeakSolutionFinalReceipt ≡ false
 nsWeakSolutionFinalKeepsClayFalse =
   refl
-

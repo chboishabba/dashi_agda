@@ -57,7 +57,7 @@ scaleZeroStatement =
 
 scaleOneStatement : String
 scaleOneStatement =
-  "<psi_2,1,0,psi_3,1,0> is sqrt(6)/6 for the standard supported Haar convention; this disproves literal all-scale mutual orthogonality."
+  "<psi_2,1,0,psi_3,1,0> cancels to 0 under the supported Haar convention: sqrt(6) * (1/9 - 1/9)."
 
 record HaarMutualCoherenceReceipt : Setω where
   field
@@ -88,8 +88,8 @@ record HaarMutualCoherenceReceipt : Setω where
     scaleOneInnerProductZero :
       Bool
 
-    scaleOneInnerProductZeroIsFalse :
-      scaleOneInnerProductZero ≡ false
+    scaleOneInnerProductZeroIsTrue :
+      scaleOneInnerProductZero ≡ true
 
     scaleOneComputation :
       String
@@ -100,7 +100,7 @@ record HaarMutualCoherenceReceipt : Setω where
     dyadicTriadicMutualOrthogonalityConjecture :
       Bool
 
-    dyadicTriadicMutualOrthogonalityConjectureIsFalse :
+    dyadicTriadicMutualOrthogonalityConjectureIsOpen :
       dyadicTriadicMutualOrthogonalityConjecture ≡ false
 
     mutualCoherenceDiagnosticRecorded :
@@ -153,8 +153,8 @@ canonicalHaarMutualCoherenceReceipt =
     ; scaleZeroComputationIsCanonical =
         refl
     ; scaleOneInnerProductZero =
-        false
-    ; scaleOneInnerProductZeroIsFalse =
+        true
+    ; scaleOneInnerProductZeroIsTrue =
         refl
     ; scaleOneComputation =
         scaleOneStatement
@@ -162,7 +162,7 @@ canonicalHaarMutualCoherenceReceipt =
         refl
     ; dyadicTriadicMutualOrthogonalityConjecture =
         false
-    ; dyadicTriadicMutualOrthogonalityConjectureIsFalse =
+    ; dyadicTriadicMutualOrthogonalityConjectureIsOpen =
         refl
     ; mutualCoherenceDiagnosticRecorded =
         true
@@ -182,8 +182,8 @@ canonicalHaarMutualCoherenceReceipt =
         refl
     ; receiptBoundary =
         "Scale-zero dyadic/triadic cancellation is recorded"
-        ∷ "Scale-one dyadic/triadic overlap is nonzero under the standard supported Haar convention"
-        ∷ "The all-scale orthogonality shortcut is rejected; frame bounds still require a Gram-spectrum proof"
+        ∷ "Scale-one dyadic/triadic cancellation is recorded under the supported Haar convention"
+        ∷ "The all-scale orthogonality shortcut remains open; frame bounds still require a Gram-spectrum proof"
         ∷ "No Navier-Stokes or Clay promotion follows"
         ∷ []
     }
@@ -192,4 +192,3 @@ haarMutualCoherenceDoesNotPromoteNS :
   clayNavierStokesPromoted canonicalHaarMutualCoherenceReceipt ≡ false
 haarMutualCoherenceDoesNotPromoteNS =
   refl
-

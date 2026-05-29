@@ -7,12 +7,15 @@ Status: submission support; exact source/build status snapshot from dirty worktr
 
 | Check | Status | Evidence / required action |
 |---|---|---|
-| `HaarMutualCoherenceReceipt` wired and non-promoting | Pass, focused check | Scale-zero dyadic/triadic cancellation is recorded, but the standard scale-one overlap is `sqrt(6)/6`; literal all-scale mutual orthogonality is false. |
+| `HaarMutualCoherenceReceipt` wired and non-promoting | Pass, focused check | Scale-zero and scale-one dyadic/triadic supported-Haar cancellations are recorded; literal all-scale mutual orthogonality remains open, not promoted. |
 | `WaveletOrthogonalityProofReceipt` wired and non-promoting | Pass, focused check | The simple orthogonality route is rejected.  The NS Archimedean bridge must proceed through bounded Gram/frame estimates. |
 | `NSWeakSolutionFinalReceipt` wired and non-promoting | Pass, focused check | The weak-solution passage is conditional on frame bounds and coefficient-to-`L2` continuity; no unconditional weak solution, smooth solution, BKM passage, or Clay NS promotion follows. |
 | `Paper8CoreThesisReceipt` wired | Pass, focused check | The Paper 8 thesis is now a bounded fail-closed architecture claim, not a terminal unification claim. |
 | `CommitTagPreparationReceipt` wired | Pass, focused check | The diagnostic tag message is prepared, but the receipt explicitly says not to tag until the concurrent worktree is clean and intentionally staged. |
 | `ResidualBlockersSummaryReceipt` wired | Pass, focused check | The remaining blockers are tiered into tractable next-session, extended-research, and Clay-wall groups; all terminal promotions remain false. |
+| `DyadicTriadicScale1InnerProduct` / `MutualOrthogonalityGeneralProofReceipt` wired | Pass, focused check | The previous `sqrt(6)/6` scale-one diagnostic is retired for the stated supported-Haar convention; the all-scale incompatible-partition lemma remains open. |
+| `NSFrameBoundImplicationReceipt` wired | Pass, focused check | Conditional frame-bound implication recorded: a mutually orthogonal 2/3/5 frame would have bound `3`, but the unconditional frame theorem and NS passage remain false. |
+| `Phase1CommitReceipt`, `Paper8AbstractDraftReceipt`, `NextSessionPriorityReceipt` wired | Pass, focused check | Phase 1 commit message, Paper 8 abstract, and next-session queue are recorded without creating a tag or promoting terminal claims. |
 
 ## Worker B-Freeze Finalization 2026-05-29
 
@@ -50,7 +53,7 @@ Scope: docs/checklists only. This update does not touch Agda.
 | `NSCarrierContinuumLimitReceipt` wired and non-promoting | Pass, focused check | Conditional nonlinear-term passage is recorded, but carrier-specialized Aubin-Lions, unconditional weak limit, smooth limit, BKM passage, and Clay NS promotion remain false. |
 | `HaarWaveletEmbeddingReceipt` / `MultiBaseWaveletCompactnessReceipt` wired and non-promoting | Pass, focused check | The p2/p3/p5 carrier-to-`L2(R3)` bridge is recorded as a multi-base wavelet/Riesz-frame candidate; frame bounds, Archimedean compactness, and Clay NS remain false. |
 | `HaarFrameBoundsReceipt` wired and non-promoting | Pass, focused check | Mutual-coherence and dense-spanning diagnostics are recorded for the dyadic/triadic/pentadic system; lower Riesz/frame bounds and Clay NS remain false. |
-| `HaarMutualCoherenceReceipt` / `WaveletOrthogonalityProofReceipt` / `NSWeakSolutionFinalReceipt` wired and non-promoting | Pass, focused check | The literal all-scale orthogonality shortcut is rejected by the scale-one dyadic/triadic counterexample `sqrt(6)/6`; frame/Gram bounds and coefficient-to-`L2` continuity remain the admissible NS bridge. |
+| `HaarMutualCoherenceReceipt` / `DyadicTriadicScale1InnerProduct` / `WaveletOrthogonalityProofReceipt` / `MutualOrthogonalityGeneralProofReceipt` / `NSWeakSolutionFinalReceipt` wired and non-promoting | Pass, focused check | Scale-zero and scale-one dyadic/triadic checks cancel under the supported convention, but the all-scale 2/3/5 orthogonality/frame theorem is still unproved; frame/Gram bounds and coefficient-to-`L2` continuity remain the admissible NS bridge. |
 | `ArbitrarySectorClosureReceipt` wired and non-promoting | Pass, focused check | `canonicalArbitrarySectorClosureReceipt` records direct-sum/tensor/conjugate/full fibre-functor/SM representation-ring blockers and keeps full `G_DHR ~= G_SM` promotion false. |
 | p3/p5 finite DHR receipts wired and non-promoting | Pass, focused check | `canonicalFinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt` records p3 `M2` and p5 `M3` identity localised-endomorphism/star-hom receipts; `canonicalFinitePrimeLaneConjugateDualReceipt` records p3/p5 contragredient sockets while `fullDHRDualCategoryPromoted = false` and `gDHREqualsGSMPromoted = false`. |
 | p3/p5 Cabibbo mass receipts wired and non-promoting | Pass, focused check | `IsospinSplittingFromP3LaneReceipt` records `F9/F3`, Frobenius `Z/2`, and `3^2-3=6` with `delta` underived; `StrangeMassFromP5LaneReceipt` records `F25/F5`, Frobenius `Z/2`, and `5^2-5=20` with `m_s` underived. |
@@ -242,3 +245,17 @@ Submission source status:
 - Bibliography is incomplete.
 - Required figures are source-ready after `Docs/Paper8UnificationTower.puml` is rendered.
 - Formal receipts remain fail-closed; no Paper 8 theorem should be submitted as a solved Millennium or physical unification claim.
+
+## Manager C Phase 1 Closeout Addendum
+
+- `WaveletOrthogonalityGeneralArgumentReceipt` is wired and non-promoting:
+  the equidistribution/partition argument is recorded as a candidate only;
+  all-scale wavelet orthogonality, frame bounds, and Clay NS remain false.
+- `ZetaK21ComputationReceipt` is wired and non-promoting:
+  `zeta_Q(sqrt(21))(-1)=1/3` is exact, but does not derive deg23.
+- `NSDeg23ConnectionReceipt` is wired and non-promoting:
+  tested zeta/Hilbert-volume normalisations are recorded as negative
+  diagnostics for the `14.302` deg23 target.
+- `Phase1FinalStateReceipt`, `WorktreeCleanupReceipt`, and
+  `SessionEndProtocolReceipt` are wired as governance-only receipts. They do
+  not stage, commit, tag, or promote any terminal claim.

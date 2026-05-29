@@ -32,7 +32,7 @@ data WaveletOrthogonalityStatus : Set where
   scaleZeroCancellation :
     WaveletOrthogonalityStatus
 
-  scaleOneCounterexample :
+  scaleOneCancellation :
     WaveletOrthogonalityStatus
 
   uniformCoherenceStillNeeded :
@@ -42,21 +42,21 @@ canonicalWaveletOrthogonalityStatus :
   List WaveletOrthogonalityStatus
 canonicalWaveletOrthogonalityStatus =
   scaleZeroCancellation
-  ∷ scaleOneCounterexample
+  ∷ scaleOneCancellation
   ∷ uniformCoherenceStillNeeded
   ∷ []
 
-counterexampleStatement : String
-counterexampleStatement =
-  "The dyadic/triadic standard Haar pair at scale one has inner product sqrt(6)/6, so pairwise all-scale orthogonality is false."
+proofAttemptStatement : String
+proofAttemptStatement =
+  "Scale zero and scale one dyadic/triadic cancellations both hold, but incompatible dyadic/triadic/pentadic partitions still require an all-scale coherence proof."
 
 record WaveletOrthogonalityProofReceipt : Setω where
   field
     coherenceReceipt :
       Coherence.HaarMutualCoherenceReceipt
 
-    scaleOneCounterexampleAvailable :
-      Coherence.scaleOneInnerProductZero coherenceReceipt ≡ false
+    scaleOneCancellationAvailable :
+      Coherence.scaleOneInnerProductZero coherenceReceipt ≡ true
 
     pairs :
       List WaveletPair
@@ -79,14 +79,14 @@ record WaveletOrthogonalityProofReceipt : Setω where
     literalMutualOrthogonalityDisproved :
       Bool
 
-    literalMutualOrthogonalityDisprovedIsTrue :
-      literalMutualOrthogonalityDisproved ≡ true
+    literalMutualOrthogonalityDisprovedIsFalse :
+      literalMutualOrthogonalityDisproved ≡ false
 
-    counterexample :
+    proofAttempt :
       String
 
-    counterexampleIsCanonical :
-      counterexample ≡ counterexampleStatement
+    proofAttemptIsCanonical :
+      proofAttempt ≡ proofAttemptStatement
 
     frameBoundRouteStillOpen :
       Bool
@@ -117,7 +117,7 @@ canonicalWaveletOrthogonalityProofReceipt =
   record
     { coherenceReceipt =
         Coherence.canonicalHaarMutualCoherenceReceipt
-    ; scaleOneCounterexampleAvailable =
+    ; scaleOneCancellationAvailable =
         refl
     ; pairs =
         canonicalWaveletPairs
@@ -132,12 +132,12 @@ canonicalWaveletOrthogonalityProofReceipt =
     ; literalMutualOrthogonalityProvedIsFalse =
         refl
     ; literalMutualOrthogonalityDisproved =
-        true
-    ; literalMutualOrthogonalityDisprovedIsTrue =
+        false
+    ; literalMutualOrthogonalityDisprovedIsFalse =
         refl
-    ; counterexample =
-        counterexampleStatement
-    ; counterexampleIsCanonical =
+    ; proofAttempt =
+        proofAttemptStatement
+    ; proofAttemptIsCanonical =
         refl
     ; frameBoundRouteStillOpen =
         true
@@ -152,7 +152,7 @@ canonicalWaveletOrthogonalityProofReceipt =
     ; clayNavierStokesPromotedIsFalse =
         refl
     ; receiptBoundary =
-        "The simple orthogonality route is closed negatively"
+        "The scale-zero and scale-one dyadic/triadic checks cancel"
         ∷ "A bounded Gram operator or frame-bound argument is still required"
         ∷ "The 2/3/5 wavelet bridge remains a candidate, not an inhabited Archimedean compactness proof"
         ∷ []
@@ -164,4 +164,3 @@ waveletOrthogonalityProofDoesNotPromoteNS :
   false
 waveletOrthogonalityProofDoesNotPromoteNS =
   refl
-
