@@ -15,6 +15,7 @@ import DASHI.Physics.QFT.CarrierFunctorResidualInstances as Gate1Residual
 import DASHI.Physics.QFT.DHRGaugeReceiptSurface as DHR
 import DASHI.Physics.QFT.DHRHexagonObligation as Hexagon
 import DASHI.Physics.QFT.ExactSMMatchToken as ExactSM
+import DASHI.Physics.QFT.FinitePrimeLaneDHRSMCompatibilityLedger as FiniteLedger
 import DASHI.Physics.QFT.LocalAlgebraIdentitySemantics as DHRIdentity
 import DASHI.Physics.SFGC.NonAbelian.DepthQuotientIsoSU3 as SU3DepthQuotient
 import DASHI.Physics.SFGC.NonAbelian.SU3ColorSectorNote as SU3
@@ -1213,6 +1214,979 @@ canonicalDHRUnitAssociatorCoherenceSocketWitness =
         ∷ []
     }
 
+record FinitePair (A B : Set) : Set where
+  constructor finitePair
+  field
+    finiteLeft :
+      A
+
+    finiteRight :
+      B
+
+open FinitePair public
+
+FinitePrimeLaneTensorCarrier :
+  FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind →
+  FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind →
+  Set
+FinitePrimeLaneTensorCarrier left right =
+  FinitePair
+    (FiniteLedger.finitePrimeLaneLocalisedEndomorphismCarrier left)
+    (FiniteLedger.finitePrimeLaneLocalisedEndomorphismCarrier right)
+
+finitePrimeLaneTensorSelectedWiring :
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  FinitePrimeLaneTensorCarrier left right
+finitePrimeLaneTensorSelectedWiring left right =
+  finitePair
+    (FiniteLedger.finitePrimeLaneLocalisedEndomorphismSelectedCarrier left)
+    (FiniteLedger.finitePrimeLaneLocalisedEndomorphismSelectedCarrier right)
+
+finitePrimeLaneTensorSwap :
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  FinitePrimeLaneTensorCarrier left right →
+  FinitePrimeLaneTensorCarrier right left
+finitePrimeLaneTensorSwap left right (finitePair x y) =
+  finitePair y x
+
+finitePrimeLaneTensorSwapInvolutive :
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  (wire : FinitePrimeLaneTensorCarrier left right) →
+  finitePrimeLaneTensorSwap right left
+    (finitePrimeLaneTensorSwap left right wire)
+  ≡
+  wire
+finitePrimeLaneTensorSwapInvolutive left right (finitePair x y) =
+  refl
+
+data FinitePrimeLaneHexagonCoherenceScope : Set where
+  finiteConditionalTargetLevelOnly :
+    FinitePrimeLaneHexagonCoherenceScope
+
+record FinitePrimeLaneTensorObjectTargetWiring
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) :
+  Setω where
+  field
+    leftLaneObject :
+      FiniteLedger.FinitePrimeLaneCarrierLevelLocalisedEndomorphism left
+
+    rightLaneObject :
+      FiniteLedger.FinitePrimeLaneCarrierLevelLocalisedEndomorphism right
+
+    tensorCarrier :
+      Set
+
+    tensorCarrierIsFinitePair :
+      tensorCarrier ≡ FinitePrimeLaneTensorCarrier left right
+
+    selectedTensorWire :
+      FinitePrimeLaneTensorCarrier left right
+
+    selectedTensorWireIsCanonical :
+      selectedTensorWire ≡ finitePrimeLaneTensorSelectedWiring left right
+
+    swappedTensorWire :
+      FinitePrimeLaneTensorCarrier right left
+
+    swappedTensorWireIsCanonical :
+      swappedTensorWire
+      ≡
+      finitePrimeLaneTensorSwap left right selectedTensorWire
+
+    swapInvolutiveOnSelectedWire :
+      finitePrimeLaneTensorSwap right left swappedTensorWire
+      ≡
+      selectedTensorWire
+
+    finiteTensorObjectTargetInhabited :
+      Bool
+
+    finiteTensorObjectTargetInhabitedIsTrue :
+      finiteTensorObjectTargetInhabited ≡ true
+
+    tensorObjectLawProved :
+      Bool
+
+    tensorObjectLawProvedIsFalse :
+      tensorObjectLawProved ≡ false
+
+    targetWiringBoundary :
+      List String
+
+open FinitePrimeLaneTensorObjectTargetWiring public
+
+finitePrimeLaneTensorObjectTargetWiring :
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  FinitePrimeLaneTensorObjectTargetWiring left right
+finitePrimeLaneTensorObjectTargetWiring left right =
+  record
+    { leftLaneObject =
+        FiniteLedger.finitePrimeLaneCarrierLevelLocalisedEndomorphism left
+    ; rightLaneObject =
+        FiniteLedger.finitePrimeLaneCarrierLevelLocalisedEndomorphism right
+    ; tensorCarrier =
+        FinitePrimeLaneTensorCarrier left right
+    ; tensorCarrierIsFinitePair =
+        refl
+    ; selectedTensorWire =
+        finitePrimeLaneTensorSelectedWiring left right
+    ; selectedTensorWireIsCanonical =
+        refl
+    ; swappedTensorWire =
+        finitePrimeLaneTensorSwap left right
+          (finitePrimeLaneTensorSelectedWiring left right)
+    ; swappedTensorWireIsCanonical =
+        refl
+    ; swapInvolutiveOnSelectedWire =
+        finitePrimeLaneTensorSwapInvolutive left right
+          (finitePrimeLaneTensorSelectedWiring left right)
+    ; finiteTensorObjectTargetInhabited =
+        true
+    ; finiteTensorObjectTargetInhabitedIsTrue =
+        refl
+    ; tensorObjectLawProved =
+        false
+    ; tensorObjectLawProvedIsFalse =
+        refl
+    ; targetWiringBoundary =
+        "Finite tensor target wiring pairs two already-inhabited carrier-level prime-lane endomorphism rows"
+        ∷ "The selected tensor wire is a concrete finite pair of the two selected row carriers"
+        ∷ "This inhabits only finite target wiring; it does not prove a DHR tensor-product law or tensor-morphism functoriality"
+        ∷ []
+    }
+
+record FinitePrimeLaneBraidingSwapReceipt
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) :
+  Setω where
+  field
+    tensorObjectTarget :
+      FinitePrimeLaneTensorObjectTargetWiring left right
+
+    swappedTensorObjectTarget :
+      FinitePrimeLaneTensorObjectTargetWiring right left
+
+    braidingSwap :
+      FinitePrimeLaneTensorCarrier left right →
+      FinitePrimeLaneTensorCarrier right left
+
+    braidingSwapIsCanonical :
+      braidingSwap ≡ finitePrimeLaneTensorSwap left right
+
+    inverseBraidingSwap :
+      FinitePrimeLaneTensorCarrier right left →
+      FinitePrimeLaneTensorCarrier left right
+
+    inverseBraidingSwapIsCanonical :
+      inverseBraidingSwap ≡ finitePrimeLaneTensorSwap right left
+
+    braidingSwapInvolutive :
+      (wire : FinitePrimeLaneTensorCarrier left right) →
+      inverseBraidingSwap (braidingSwap wire) ≡ wire
+
+    braidingSymmetryTargetInhabited :
+      Bool
+
+    braidingSymmetryTargetInhabitedIsTrue :
+      braidingSymmetryTargetInhabited ≡ true
+
+    fullBraidingNaturalityProved :
+      Bool
+
+    fullBraidingNaturalityProvedIsFalse :
+      fullBraidingNaturalityProved ≡ false
+
+    symmetricTensorCategoryPromoted :
+      Bool
+
+    symmetricTensorCategoryPromotedIsFalse :
+      symmetricTensorCategoryPromoted ≡ false
+
+    swapReceiptBoundary :
+      List String
+
+open FinitePrimeLaneBraidingSwapReceipt public
+
+finitePrimeLaneBraidingSwapReceipt :
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  FinitePrimeLaneBraidingSwapReceipt left right
+finitePrimeLaneBraidingSwapReceipt left right =
+  record
+    { tensorObjectTarget =
+        finitePrimeLaneTensorObjectTargetWiring left right
+    ; swappedTensorObjectTarget =
+        finitePrimeLaneTensorObjectTargetWiring right left
+    ; braidingSwap =
+        finitePrimeLaneTensorSwap left right
+    ; braidingSwapIsCanonical =
+        refl
+    ; inverseBraidingSwap =
+        finitePrimeLaneTensorSwap right left
+    ; inverseBraidingSwapIsCanonical =
+        refl
+    ; braidingSwapInvolutive =
+        finitePrimeLaneTensorSwapInvolutive left right
+    ; braidingSymmetryTargetInhabited =
+        true
+    ; braidingSymmetryTargetInhabitedIsTrue =
+        refl
+    ; fullBraidingNaturalityProved =
+        false
+    ; fullBraidingNaturalityProvedIsFalse =
+        refl
+    ; symmetricTensorCategoryPromoted =
+        false
+    ; symmetricTensorCategoryPromotedIsFalse =
+        refl
+    ; swapReceiptBoundary =
+        "Braiding is represented only as the finite row-pair swap"
+        ∷ "The swap receipt carries an honest involutive proof on finite tensor wires"
+        ∷ "Naturality, categorical braiding laws, and full symmetric tensor C*-category promotion remain unproved"
+        ∷ []
+    }
+
+finitePrimeLaneTensorIdentityAction :
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  FinitePrimeLaneTensorCarrier left right →
+  FinitePrimeLaneTensorCarrier left right
+finitePrimeLaneTensorIdentityAction left right wire =
+  wire
+
+finitePrimeLaneTensorSwapNaturalitySquare :
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  (wire : FinitePrimeLaneTensorCarrier left right) →
+  finitePrimeLaneTensorSwap left right
+    (finitePrimeLaneTensorIdentityAction left right wire)
+  ≡
+  finitePrimeLaneTensorIdentityAction right left
+    (finitePrimeLaneTensorSwap left right wire)
+finitePrimeLaneTensorSwapNaturalitySquare left right (finitePair x y) =
+  refl
+
+record FinitePrimeLaneBraidingNaturalitySquareReceipt
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) :
+  Setω where
+  field
+    braidingSwapReceipt :
+      FinitePrimeLaneBraidingSwapReceipt left right
+
+    selectedSourceWire :
+      FinitePrimeLaneTensorCarrier left right
+
+    selectedSourceWireIsCanonical :
+      selectedSourceWire
+      ≡
+      finitePrimeLaneTensorSelectedWiring left right
+
+    selectedTargetWire :
+      FinitePrimeLaneTensorCarrier right left
+
+    selectedTargetWireIsCanonicalSwap :
+      selectedTargetWire
+      ≡
+      finitePrimeLaneTensorSwap left right selectedSourceWire
+
+    leftTensorWireAction :
+      FinitePrimeLaneTensorCarrier left right →
+      FinitePrimeLaneTensorCarrier left right
+
+    leftTensorWireActionIsIdentity :
+      leftTensorWireAction
+      ≡
+      finitePrimeLaneTensorIdentityAction left right
+
+    rightTensorWireAction :
+      FinitePrimeLaneTensorCarrier right left →
+      FinitePrimeLaneTensorCarrier right left
+
+    rightTensorWireActionIsIdentity :
+      rightTensorWireAction
+      ≡
+      finitePrimeLaneTensorIdentityAction right left
+
+    naturalitySquareOnSelectedWire :
+      finitePrimeLaneTensorSwap left right
+        (finitePrimeLaneTensorIdentityAction left right selectedSourceWire)
+      ≡
+      finitePrimeLaneTensorIdentityAction right left
+        (finitePrimeLaneTensorSwap left right selectedSourceWire)
+
+    naturalitySquareOnSelectedWireIsCanonical :
+      naturalitySquareOnSelectedWire
+      ≡
+      finitePrimeLaneTensorSwapNaturalitySquare
+        left
+        right
+        selectedSourceWire
+
+    naturalitySquareOnAllFiniteWires :
+      (wire : FinitePrimeLaneTensorCarrier left right) →
+      finitePrimeLaneTensorSwap left right
+        (finitePrimeLaneTensorIdentityAction left right wire)
+      ≡
+      finitePrimeLaneTensorIdentityAction right left
+        (finitePrimeLaneTensorSwap left right wire)
+
+    naturalitySquareOnAllFiniteWiresIsCanonical :
+      naturalitySquareOnAllFiniteWires
+      ≡
+      finitePrimeLaneTensorSwapNaturalitySquare left right
+
+    finiteNaturalitySquareConsumed :
+      Bool
+
+    finiteNaturalitySquareConsumedIsTrue :
+      finiteNaturalitySquareConsumed ≡ true
+
+    fullBraidingNaturalityProved :
+      Bool
+
+    fullBraidingNaturalityProvedIsFalse :
+      fullBraidingNaturalityProved ≡ false
+
+    symmetricTensorCategoryPromoted :
+      Bool
+
+    symmetricTensorCategoryPromotedIsFalse :
+      symmetricTensorCategoryPromoted ≡ false
+
+    drPromotionAsserted :
+      Bool
+
+    drPromotionAssertedIsFalse :
+      drPromotionAsserted ≡ false
+
+    naturalityReceiptBoundary :
+      List String
+
+open FinitePrimeLaneBraidingNaturalitySquareReceipt public
+
+finitePrimeLaneBraidingNaturalitySquareReceipt :
+  (left right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  FinitePrimeLaneBraidingNaturalitySquareReceipt left right
+finitePrimeLaneBraidingNaturalitySquareReceipt left right =
+  record
+    { braidingSwapReceipt =
+        finitePrimeLaneBraidingSwapReceipt left right
+    ; selectedSourceWire =
+        finitePrimeLaneTensorSelectedWiring left right
+    ; selectedSourceWireIsCanonical =
+        refl
+    ; selectedTargetWire =
+        finitePrimeLaneTensorSwap left right
+          (finitePrimeLaneTensorSelectedWiring left right)
+    ; selectedTargetWireIsCanonicalSwap =
+        refl
+    ; leftTensorWireAction =
+        finitePrimeLaneTensorIdentityAction left right
+    ; leftTensorWireActionIsIdentity =
+        refl
+    ; rightTensorWireAction =
+        finitePrimeLaneTensorIdentityAction right left
+    ; rightTensorWireActionIsIdentity =
+        refl
+    ; naturalitySquareOnSelectedWire =
+        finitePrimeLaneTensorSwapNaturalitySquare
+          left
+          right
+          (finitePrimeLaneTensorSelectedWiring left right)
+    ; naturalitySquareOnSelectedWireIsCanonical =
+        refl
+    ; naturalitySquareOnAllFiniteWires =
+        finitePrimeLaneTensorSwapNaturalitySquare left right
+    ; naturalitySquareOnAllFiniteWiresIsCanonical =
+        refl
+    ; finiteNaturalitySquareConsumed =
+        true
+    ; finiteNaturalitySquareConsumedIsTrue =
+        refl
+    ; fullBraidingNaturalityProved =
+        false
+    ; fullBraidingNaturalityProvedIsFalse =
+        refl
+    ; symmetricTensorCategoryPromoted =
+        false
+    ; symmetricTensorCategoryPromotedIsFalse =
+        refl
+    ; drPromotionAsserted =
+        false
+    ; drPromotionAssertedIsFalse =
+        refl
+    ; naturalityReceiptBoundary =
+        "Finite tensor-swap naturality square is consumed over identity actions on finite prime-lane tensor wires"
+        ∷ "The selected source wire is the canonical pair and the selected target wire is its canonical finitePrimeLaneTensorSwap"
+        ∷ "The square commutes by definitional equality: swap (id wire) == id (swap wire)"
+        ∷ "This proves only the finite carrier-level identity-action square, not full DHR braiding naturality or symmetric tensor C*-category laws"
+        ∷ []
+    }
+
+data FinitePrimeLaneStatisticsScope : Set where
+  finiteStatisticsAsBraidingTargetLevelOnly :
+    FinitePrimeLaneStatisticsScope
+
+finitePrimeLaneDoubleBraidingSwap :
+  (lane : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  FinitePrimeLaneTensorCarrier lane lane →
+  FinitePrimeLaneTensorCarrier lane lane
+finitePrimeLaneDoubleBraidingSwap lane wire =
+  finitePrimeLaneTensorSwap lane lane
+    (finitePrimeLaneTensorSwap lane lane wire)
+
+finitePrimeLaneDoubleBraidingSwapIsIdentity :
+  (lane : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  (wire : FinitePrimeLaneTensorCarrier lane lane) →
+  finitePrimeLaneDoubleBraidingSwap lane wire ≡ wire
+finitePrimeLaneDoubleBraidingSwapIsIdentity lane wire =
+  finitePrimeLaneTensorSwapInvolutive lane lane wire
+
+record FinitePrimeLaneStatisticsAsBraidingReceipt
+  (lane : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) :
+  Setω where
+  field
+    rhoTensorRhoTarget :
+      FinitePrimeLaneTensorObjectTargetWiring lane lane
+
+    selectedRhoTensorRhoWire :
+      FinitePrimeLaneTensorCarrier lane lane
+
+    selectedRhoTensorRhoWireIsCanonical :
+      selectedRhoTensorRhoWire
+      ≡
+      finitePrimeLaneTensorSelectedWiring lane lane
+
+    braidingSwap :
+      FinitePrimeLaneTensorCarrier lane lane →
+      FinitePrimeLaneTensorCarrier lane lane
+
+    braidingSwapIsCanonical :
+      braidingSwap ≡ finitePrimeLaneTensorSwap lane lane
+
+    doubleBraidingSwap :
+      FinitePrimeLaneTensorCarrier lane lane →
+      FinitePrimeLaneTensorCarrier lane lane
+
+    doubleBraidingOnSelectedWireIsIdentity :
+      doubleBraidingSwap selectedRhoTensorRhoWire
+      ≡
+      selectedRhoTensorRhoWire
+
+    doubleBraidingOnAllFiniteWiresIsIdentity :
+      (wire : FinitePrimeLaneTensorCarrier lane lane) →
+      doubleBraidingSwap wire ≡ wire
+
+    finiteStatisticsScope :
+      FinitePrimeLaneStatisticsScope
+
+    finiteStatisticsScopeIsTargetLevelOnly :
+      finiteStatisticsScope ≡ finiteStatisticsAsBraidingTargetLevelOnly
+
+    finiteTargetLevelStatisticsReceiptInhabited :
+      Bool
+
+    finiteTargetLevelStatisticsReceiptInhabitedIsTrue :
+      finiteTargetLevelStatisticsReceiptInhabited ≡ true
+
+    arbitraryDHRStatisticsComputed :
+      Bool
+
+    arbitraryDHRStatisticsComputedIsFalse :
+      arbitraryDHRStatisticsComputed ≡ false
+
+    fullSymmetricTensorCategoryPromoted :
+      Bool
+
+    fullSymmetricTensorCategoryPromotedIsFalse :
+      fullSymmetricTensorCategoryPromoted ≡ false
+
+    drTheoremApplied :
+      Bool
+
+    drTheoremAppliedIsFalse :
+      drTheoremApplied ≡ false
+
+    compactGaugeGroupConstructed :
+      Bool
+
+    compactGaugeGroupConstructedIsFalse :
+      compactGaugeGroupConstructed ≡ false
+
+    gDHREqualsGSMPromoted :
+      Bool
+
+    gDHREqualsGSMPromotedIsFalse :
+      gDHREqualsGSMPromoted ≡ false
+
+    statisticsAsBraidingBoundary :
+      List String
+
+open FinitePrimeLaneStatisticsAsBraidingReceipt public
+
+finitePrimeLaneStatisticsAsBraidingReceipt :
+  (lane : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  FinitePrimeLaneStatisticsAsBraidingReceipt lane
+finitePrimeLaneStatisticsAsBraidingReceipt lane =
+  record
+    { rhoTensorRhoTarget =
+        finitePrimeLaneTensorObjectTargetWiring lane lane
+    ; selectedRhoTensorRhoWire =
+        finitePrimeLaneTensorSelectedWiring lane lane
+    ; selectedRhoTensorRhoWireIsCanonical =
+        refl
+    ; braidingSwap =
+        finitePrimeLaneTensorSwap lane lane
+    ; braidingSwapIsCanonical =
+        refl
+    ; doubleBraidingSwap =
+        finitePrimeLaneDoubleBraidingSwap lane
+    ; doubleBraidingOnSelectedWireIsIdentity =
+        finitePrimeLaneDoubleBraidingSwapIsIdentity lane
+          (finitePrimeLaneTensorSelectedWiring lane lane)
+    ; doubleBraidingOnAllFiniteWiresIsIdentity =
+        finitePrimeLaneDoubleBraidingSwapIsIdentity lane
+    ; finiteStatisticsScope =
+        finiteStatisticsAsBraidingTargetLevelOnly
+    ; finiteStatisticsScopeIsTargetLevelOnly =
+        refl
+    ; finiteTargetLevelStatisticsReceiptInhabited =
+        true
+    ; finiteTargetLevelStatisticsReceiptInhabitedIsTrue =
+        refl
+    ; arbitraryDHRStatisticsComputed =
+        false
+    ; arbitraryDHRStatisticsComputedIsFalse =
+        refl
+    ; fullSymmetricTensorCategoryPromoted =
+        false
+    ; fullSymmetricTensorCategoryPromotedIsFalse =
+        refl
+    ; drTheoremApplied =
+        false
+    ; drTheoremAppliedIsFalse =
+        refl
+    ; compactGaugeGroupConstructed =
+        false
+    ; compactGaugeGroupConstructedIsFalse =
+        refl
+    ; gDHREqualsGSMPromoted =
+        false
+    ; gDHREqualsGSMPromotedIsFalse =
+        refl
+    ; statisticsAsBraidingBoundary =
+        "Finite statistics-as-braiding is scoped only to rho_p tensor rho_p for one selected p2/p3/p5 carrier row"
+        ∷ "The statistics operation is the double finite row swap, so swap after swap reduces to identity by finitePrimeLaneTensorSwapInvolutive"
+        ∷ "This is a finite target-level statistics receipt, separate from arbitrary DHR statistics"
+        ∷ "No full symmetric tensor category, DR theorem, compact gauge group, or G_DHR ~= G_SM promotion is asserted"
+        ∷ []
+    }
+
+p2FinitePrimeLaneStatisticsAsBraidingReceipt :
+  FinitePrimeLaneStatisticsAsBraidingReceipt
+    FiniteLedger.p2CarrierLocalisedEndomorphism
+p2FinitePrimeLaneStatisticsAsBraidingReceipt =
+  finitePrimeLaneStatisticsAsBraidingReceipt
+    FiniteLedger.p2CarrierLocalisedEndomorphism
+
+p3FinitePrimeLaneStatisticsAsBraidingReceipt :
+  FinitePrimeLaneStatisticsAsBraidingReceipt
+    FiniteLedger.p3CarrierLocalisedEndomorphism
+p3FinitePrimeLaneStatisticsAsBraidingReceipt =
+  finitePrimeLaneStatisticsAsBraidingReceipt
+    FiniteLedger.p3CarrierLocalisedEndomorphism
+
+p5FinitePrimeLaneStatisticsAsBraidingReceipt :
+  FinitePrimeLaneStatisticsAsBraidingReceipt
+    FiniteLedger.p5CarrierLocalisedEndomorphism
+p5FinitePrimeLaneStatisticsAsBraidingReceipt =
+  finitePrimeLaneStatisticsAsBraidingReceipt
+    FiniteLedger.p5CarrierLocalisedEndomorphism
+
+record FinitePrimeLaneStatisticsAsBraidingTargetReceipt : Setω where
+  field
+    p2StatisticsAsBraiding :
+      FinitePrimeLaneStatisticsAsBraidingReceipt
+        FiniteLedger.p2CarrierLocalisedEndomorphism
+
+    p2StatisticsAsBraidingIsCanonical :
+      Bool
+
+    p2StatisticsAsBraidingIsCanonicalIsTrue :
+      p2StatisticsAsBraidingIsCanonical ≡ true
+
+    p3StatisticsAsBraiding :
+      FinitePrimeLaneStatisticsAsBraidingReceipt
+        FiniteLedger.p3CarrierLocalisedEndomorphism
+
+    p3StatisticsAsBraidingIsCanonical :
+      Bool
+
+    p3StatisticsAsBraidingIsCanonicalIsTrue :
+      p3StatisticsAsBraidingIsCanonical ≡ true
+
+    p5StatisticsAsBraiding :
+      FinitePrimeLaneStatisticsAsBraidingReceipt
+        FiniteLedger.p5CarrierLocalisedEndomorphism
+
+    p5StatisticsAsBraidingIsCanonical :
+      Bool
+
+    p5StatisticsAsBraidingIsCanonicalIsTrue :
+      p5StatisticsAsBraidingIsCanonical ≡ true
+
+    finiteStatisticsScope :
+      FinitePrimeLaneStatisticsScope
+
+    finiteStatisticsScopeIsTargetLevelOnly :
+      finiteStatisticsScope ≡ finiteStatisticsAsBraidingTargetLevelOnly
+
+    p2DoubleBraidingIsIdentity :
+      (wire :
+        FinitePrimeLaneTensorCarrier
+          FiniteLedger.p2CarrierLocalisedEndomorphism
+          FiniteLedger.p2CarrierLocalisedEndomorphism) →
+      finitePrimeLaneDoubleBraidingSwap
+        FiniteLedger.p2CarrierLocalisedEndomorphism
+        wire
+      ≡
+      wire
+
+    p3DoubleBraidingIsIdentity :
+      (wire :
+        FinitePrimeLaneTensorCarrier
+          FiniteLedger.p3CarrierLocalisedEndomorphism
+          FiniteLedger.p3CarrierLocalisedEndomorphism) →
+      finitePrimeLaneDoubleBraidingSwap
+        FiniteLedger.p3CarrierLocalisedEndomorphism
+        wire
+      ≡
+      wire
+
+    p5DoubleBraidingIsIdentity :
+      (wire :
+        FinitePrimeLaneTensorCarrier
+          FiniteLedger.p5CarrierLocalisedEndomorphism
+          FiniteLedger.p5CarrierLocalisedEndomorphism) →
+      finitePrimeLaneDoubleBraidingSwap
+        FiniteLedger.p5CarrierLocalisedEndomorphism
+        wire
+      ≡
+      wire
+
+    finiteTargetLevelStatisticsReceiptsInhabited :
+      Bool
+
+    finiteTargetLevelStatisticsReceiptsInhabitedIsTrue :
+      finiteTargetLevelStatisticsReceiptsInhabited ≡ true
+
+    arbitraryDHRStatisticsPromoted :
+      Bool
+
+    arbitraryDHRStatisticsPromotedIsFalse :
+      arbitraryDHRStatisticsPromoted ≡ false
+
+    fullSymmetricTensorCategoryPromoted :
+      Bool
+
+    fullSymmetricTensorCategoryPromotedIsFalse :
+      fullSymmetricTensorCategoryPromoted ≡ false
+
+    drTheoremApplied :
+      Bool
+
+    drTheoremAppliedIsFalse :
+      drTheoremApplied ≡ false
+
+    compactGaugeGroupConstructed :
+      Bool
+
+    compactGaugeGroupConstructedIsFalse :
+      compactGaugeGroupConstructed ≡ false
+
+    gDHREqualsGSMPromoted :
+      Bool
+
+    gDHREqualsGSMPromotedIsFalse :
+      gDHREqualsGSMPromoted ≡ false
+
+    targetReceiptBoundary :
+      List String
+
+open FinitePrimeLaneStatisticsAsBraidingTargetReceipt public
+
+canonicalFinitePrimeLaneStatisticsAsBraidingTargetReceipt :
+  FinitePrimeLaneStatisticsAsBraidingTargetReceipt
+canonicalFinitePrimeLaneStatisticsAsBraidingTargetReceipt =
+  record
+    { p2StatisticsAsBraiding =
+        p2FinitePrimeLaneStatisticsAsBraidingReceipt
+    ; p2StatisticsAsBraidingIsCanonical =
+        true
+    ; p2StatisticsAsBraidingIsCanonicalIsTrue =
+        refl
+    ; p3StatisticsAsBraiding =
+        p3FinitePrimeLaneStatisticsAsBraidingReceipt
+    ; p3StatisticsAsBraidingIsCanonical =
+        true
+    ; p3StatisticsAsBraidingIsCanonicalIsTrue =
+        refl
+    ; p5StatisticsAsBraiding =
+        p5FinitePrimeLaneStatisticsAsBraidingReceipt
+    ; p5StatisticsAsBraidingIsCanonical =
+        true
+    ; p5StatisticsAsBraidingIsCanonicalIsTrue =
+        refl
+    ; finiteStatisticsScope =
+        finiteStatisticsAsBraidingTargetLevelOnly
+    ; finiteStatisticsScopeIsTargetLevelOnly =
+        refl
+    ; p2DoubleBraidingIsIdentity =
+        finitePrimeLaneDoubleBraidingSwapIsIdentity
+          FiniteLedger.p2CarrierLocalisedEndomorphism
+    ; p3DoubleBraidingIsIdentity =
+        finitePrimeLaneDoubleBraidingSwapIsIdentity
+          FiniteLedger.p3CarrierLocalisedEndomorphism
+    ; p5DoubleBraidingIsIdentity =
+        finitePrimeLaneDoubleBraidingSwapIsIdentity
+          FiniteLedger.p5CarrierLocalisedEndomorphism
+    ; finiteTargetLevelStatisticsReceiptsInhabited =
+        true
+    ; finiteTargetLevelStatisticsReceiptsInhabitedIsTrue =
+        refl
+    ; arbitraryDHRStatisticsPromoted =
+        false
+    ; arbitraryDHRStatisticsPromotedIsFalse =
+        refl
+    ; fullSymmetricTensorCategoryPromoted =
+        false
+    ; fullSymmetricTensorCategoryPromotedIsFalse =
+        refl
+    ; drTheoremApplied =
+        false
+    ; drTheoremAppliedIsFalse =
+        refl
+    ; compactGaugeGroupConstructed =
+        false
+    ; compactGaugeGroupConstructedIsFalse =
+        refl
+    ; gDHREqualsGSMPromoted =
+        false
+    ; gDHREqualsGSMPromotedIsFalse =
+        refl
+    ; targetReceiptBoundary =
+        "Finite p2/p3/p5 statistics-as-braiding receipts are recorded only at target level"
+        ∷ "For each rho_p tensor rho_p lane, the double braiding is swap after swap and returns identity by the definitional involutive swap law"
+        ∷ "This finite receipt is explicitly separate from arbitrary DHR statistics"
+        ∷ "Full arbitrary symmetric tensor category promotion, DR theorem application, compact gauge reconstruction, and G_DHR ~= G_SM remain false"
+        ∷ []
+    }
+
+record FinitePrimeLaneTensorBraidingProgressReceipt : Setω where
+  field
+    finiteLedger :
+      FiniteLedger.FinitePrimeLaneDHRSMCompatibilityLedger
+
+    finiteStatisticsAsBraidingTarget :
+      FinitePrimeLaneStatisticsAsBraidingTargetReceipt
+
+    finiteStatisticsAsBraidingTargetThreaded :
+      Bool
+
+    finiteStatisticsAsBraidingTargetThreadedIsTrue :
+      finiteStatisticsAsBraidingTargetThreaded ≡ true
+
+    p2p3TensorTarget :
+      FinitePrimeLaneTensorObjectTargetWiring
+        FiniteLedger.p2CarrierLocalisedEndomorphism
+        FiniteLedger.p3CarrierLocalisedEndomorphism
+
+    p3p5TensorTarget :
+      FinitePrimeLaneTensorObjectTargetWiring
+        FiniteLedger.p3CarrierLocalisedEndomorphism
+        FiniteLedger.p5CarrierLocalisedEndomorphism
+
+    p5p2TensorTarget :
+      FinitePrimeLaneTensorObjectTargetWiring
+        FiniteLedger.p5CarrierLocalisedEndomorphism
+        FiniteLedger.p2CarrierLocalisedEndomorphism
+
+    p2p3BraidingSwap :
+      FinitePrimeLaneBraidingSwapReceipt
+        FiniteLedger.p2CarrierLocalisedEndomorphism
+        FiniteLedger.p3CarrierLocalisedEndomorphism
+
+    p3p5BraidingSwap :
+      FinitePrimeLaneBraidingSwapReceipt
+        FiniteLedger.p3CarrierLocalisedEndomorphism
+        FiniteLedger.p5CarrierLocalisedEndomorphism
+
+    p5p2BraidingSwap :
+      FinitePrimeLaneBraidingSwapReceipt
+        FiniteLedger.p5CarrierLocalisedEndomorphism
+        FiniteLedger.p2CarrierLocalisedEndomorphism
+
+    p2p3BraidingNaturalitySquare :
+      FinitePrimeLaneBraidingNaturalitySquareReceipt
+        FiniteLedger.p2CarrierLocalisedEndomorphism
+        FiniteLedger.p3CarrierLocalisedEndomorphism
+
+    p3p5BraidingNaturalitySquare :
+      FinitePrimeLaneBraidingNaturalitySquareReceipt
+        FiniteLedger.p3CarrierLocalisedEndomorphism
+        FiniteLedger.p5CarrierLocalisedEndomorphism
+
+    p5p2BraidingNaturalitySquare :
+      FinitePrimeLaneBraidingNaturalitySquareReceipt
+        FiniteLedger.p5CarrierLocalisedEndomorphism
+        FiniteLedger.p2CarrierLocalisedEndomorphism
+
+    hexagonCoherenceScope :
+      FinitePrimeLaneHexagonCoherenceScope
+
+    hexagonCoherenceScopeIsFiniteConditionalTargetLevelOnly :
+      hexagonCoherenceScope ≡ finiteConditionalTargetLevelOnly
+
+    hexagonCoherenceReceipt :
+      Hexagon.DHRHexagonFailClosedCoherenceReceipt
+
+    finiteTargetWiringInhabited :
+      Bool
+
+    finiteTargetWiringInhabitedIsTrue :
+      finiteTargetWiringInhabited ≡ true
+
+    finiteBraidingSwapInvolutive :
+      Bool
+
+    finiteBraidingSwapInvolutiveIsTrue :
+      finiteBraidingSwapInvolutive ≡ true
+
+    finiteBraidingNaturalitySquareConsumed :
+      Bool
+
+    finiteBraidingNaturalitySquareConsumedIsTrue :
+      finiteBraidingNaturalitySquareConsumed ≡ true
+
+    hexagonCoherenceProved :
+      Bool
+
+    hexagonCoherenceProvedIsFalse :
+      hexagonCoherenceProved ≡ false
+
+    fullSymmetricTensorCategoryPromoted :
+      Bool
+
+    fullSymmetricTensorCategoryPromotedIsFalse :
+      fullSymmetricTensorCategoryPromoted ≡ false
+
+    arbitraryDHRStatisticsPromoted :
+      Bool
+
+    arbitraryDHRStatisticsPromotedIsFalse :
+      arbitraryDHRStatisticsPromoted ≡ false
+
+    drPromotionAsserted :
+      Bool
+
+    drPromotionAssertedIsFalse :
+      drPromotionAsserted ≡ false
+
+    finiteTensorBraidingProgressBoundary :
+      List String
+
+open FinitePrimeLaneTensorBraidingProgressReceipt public
+
+canonicalFinitePrimeLaneTensorBraidingProgressReceipt :
+  FinitePrimeLaneTensorBraidingProgressReceipt
+canonicalFinitePrimeLaneTensorBraidingProgressReceipt =
+  record
+    { finiteLedger =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMCompatibilityLedger
+    ; finiteStatisticsAsBraidingTarget =
+        canonicalFinitePrimeLaneStatisticsAsBraidingTargetReceipt
+    ; finiteStatisticsAsBraidingTargetThreaded =
+        true
+    ; finiteStatisticsAsBraidingTargetThreadedIsTrue =
+        refl
+    ; p2p3TensorTarget =
+        finitePrimeLaneTensorObjectTargetWiring
+          FiniteLedger.p2CarrierLocalisedEndomorphism
+          FiniteLedger.p3CarrierLocalisedEndomorphism
+    ; p3p5TensorTarget =
+        finitePrimeLaneTensorObjectTargetWiring
+          FiniteLedger.p3CarrierLocalisedEndomorphism
+          FiniteLedger.p5CarrierLocalisedEndomorphism
+    ; p5p2TensorTarget =
+        finitePrimeLaneTensorObjectTargetWiring
+          FiniteLedger.p5CarrierLocalisedEndomorphism
+          FiniteLedger.p2CarrierLocalisedEndomorphism
+    ; p2p3BraidingSwap =
+        finitePrimeLaneBraidingSwapReceipt
+          FiniteLedger.p2CarrierLocalisedEndomorphism
+          FiniteLedger.p3CarrierLocalisedEndomorphism
+    ; p3p5BraidingSwap =
+        finitePrimeLaneBraidingSwapReceipt
+          FiniteLedger.p3CarrierLocalisedEndomorphism
+          FiniteLedger.p5CarrierLocalisedEndomorphism
+    ; p5p2BraidingSwap =
+        finitePrimeLaneBraidingSwapReceipt
+          FiniteLedger.p5CarrierLocalisedEndomorphism
+          FiniteLedger.p2CarrierLocalisedEndomorphism
+    ; p2p3BraidingNaturalitySquare =
+        finitePrimeLaneBraidingNaturalitySquareReceipt
+          FiniteLedger.p2CarrierLocalisedEndomorphism
+          FiniteLedger.p3CarrierLocalisedEndomorphism
+    ; p3p5BraidingNaturalitySquare =
+        finitePrimeLaneBraidingNaturalitySquareReceipt
+          FiniteLedger.p3CarrierLocalisedEndomorphism
+          FiniteLedger.p5CarrierLocalisedEndomorphism
+    ; p5p2BraidingNaturalitySquare =
+        finitePrimeLaneBraidingNaturalitySquareReceipt
+          FiniteLedger.p5CarrierLocalisedEndomorphism
+          FiniteLedger.p2CarrierLocalisedEndomorphism
+    ; hexagonCoherenceScope =
+        finiteConditionalTargetLevelOnly
+    ; hexagonCoherenceScopeIsFiniteConditionalTargetLevelOnly =
+        refl
+    ; hexagonCoherenceReceipt =
+        Hexagon.canonicalDHRHexagonFailClosedCoherenceReceipt
+    ; finiteTargetWiringInhabited =
+        true
+    ; finiteTargetWiringInhabitedIsTrue =
+        refl
+    ; finiteBraidingSwapInvolutive =
+        true
+    ; finiteBraidingSwapInvolutiveIsTrue =
+        refl
+    ; finiteBraidingNaturalitySquareConsumed =
+        true
+    ; finiteBraidingNaturalitySquareConsumedIsTrue =
+        refl
+    ; hexagonCoherenceProved =
+        false
+    ; hexagonCoherenceProvedIsFalse =
+        refl
+    ; fullSymmetricTensorCategoryPromoted =
+        false
+    ; fullSymmetricTensorCategoryPromotedIsFalse =
+        refl
+    ; arbitraryDHRStatisticsPromoted =
+        false
+    ; arbitraryDHRStatisticsPromotedIsFalse =
+        refl
+    ; drPromotionAsserted =
+        false
+    ; drPromotionAssertedIsFalse =
+        refl
+    ; finiteTensorBraidingProgressBoundary =
+        "A3 finite tensor progress is recorded over the p2, p3, and p5 prime-lane carrier rows"
+        ∷ "Same-lane p2, p3, and p5 statistics-as-braiding receipts are threaded as finite target-level evidence"
+        ∷ "Tensor object targets are inhabited only as finite target wiring: selected carrier pairs for p2/p3, p3/p5, and p5/p2"
+        ∷ "Braiding symmetry is represented by row-pair swap receipts with involutive proofs"
+        ∷ "For rho_p tensor rho_p, double braiding is swap after swap and returns identity by finitePrimeLaneTensorSwapInvolutive"
+        ∷ "Finite braiding naturality squares for p2/p3, p3/p5, and p5/p2 are consumed over identity actions and commute by refl"
+        ∷ "Hexagon coherence is recorded as finite/conditional and target-level through the existing fail-closed DHR hexagon receipt"
+        ∷ "No arbitrary DHR statistics, full symmetric tensor category law, DR promotion, compact gauge reconstruction, or Standard Model gauge equivalence is asserted"
+        ∷ []
+    }
+
 data TannakaFibreFunctor : Set where
   tannakaFibreFunctorTargetOnly :
     TannakaFibreFunctor
@@ -1665,6 +2639,9 @@ record DHRTensorDualGroupReconstructionReceipt : Setω where
     tannakaGaugeIdentificationTarget :
       DRTannakaGaugeIdentificationTargetSurface
 
+    gaugeCategoryDRSMIdentificationReceipt :
+      DHR.DHRCategoryDRSMIdentificationFailClosedReceipt
+
     blockers :
       List DHRTensorDualGroupBlocker
 
@@ -1726,6 +2703,8 @@ canonicalDHRTensorDualGroupReconstructionReceipt =
         canonicalDHRSectorTensorDualTargetSurface
     ; tannakaGaugeIdentificationTarget =
         canonicalDRTannakaGaugeIdentificationTargetSurface
+    ; gaugeCategoryDRSMIdentificationReceipt =
+        DHR.canonicalDHRCategoryDRSMIdentificationFailClosedReceipt
     ; blockers =
         canonicalDHRTensorDualGroupBlockers
     ; blockersAreCanonical =
@@ -1756,6 +2735,7 @@ canonicalDHRTensorDualGroupReconstructionReceipt =
         refl
     ; receiptBoundary =
         "DHR sector object, tensor, dual, and DR/Tannaka group-identification sockets are now represented in one target surface"
+        ∷ "The gauge-side category/DR/SM identification receipt is threaded here as fail-closed evidence, not as a promotion"
         ∷ "The surface is fail-closed: it records G_DHR ~= SU3 x SU2 x U1 as the comparison target, not as a theorem"
         ∷ "First blockers are Gate 1 representation semantics, the exact Standard Model carrier-functor match, Gate 1 DHR-sector compatibility, DHR tensor/dual laws, DR theorem receipt, fibre functor, compact group construction, and SM gauge isomorphism"
         ∷ "No terminal physics, Clay, W3, W4, W5, gauge reconstruction, or Standard Model matching promotion is asserted"
@@ -1977,6 +2957,21 @@ record DHRDoplicherRobertsReconstructionAuthorityReceipt : Setω where
     endUnitComplexScalarsReceiptThreadedFromPackIsTrue :
       endUnitComplexScalarsReceiptThreadedFromPack ≡ true
 
+    finitePrimeLaneNaturalityReceipt :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt
+
+    finitePrimeLaneNaturalityReceiptThreadedFromPack :
+      Bool
+
+    finitePrimeLaneNaturalityReceiptThreadedFromPackIsTrue :
+      finitePrimeLaneNaturalityReceiptThreadedFromPack ≡ true
+
+    arbitrarySectorBraidingNaturalityPromoted :
+      Bool
+
+    arbitrarySectorBraidingNaturalityPromotedIsFalse :
+      arbitrarySectorBraidingNaturalityPromoted ≡ false
+
     fiveAxiomPackConsumed :
       Bool
 
@@ -2104,6 +3099,19 @@ canonicalDHRDoplicherRobertsReconstructionAuthorityReceipt =
         true
     ; endUnitComplexScalarsReceiptThreadedFromPackIsTrue =
         refl
+    ; finitePrimeLaneNaturalityReceipt =
+        DHR.DHRDRInternalAxiomReceiptPack.finitePrimeLaneNaturalityReceipt
+          DHR.canonicalDHRDRInternalAxiomReceiptPack
+    ; finitePrimeLaneNaturalityReceiptThreadedFromPack =
+        DHR.DHRDRInternalAxiomReceiptPack.finiteRowBraidingNaturalityThreaded
+          DHR.canonicalDHRDRInternalAxiomReceiptPack
+    ; finitePrimeLaneNaturalityReceiptThreadedFromPackIsTrue =
+        DHR.DHRDRInternalAxiomReceiptPack.finiteRowBraidingNaturalityThreadedIsTrue
+          DHR.canonicalDHRDRInternalAxiomReceiptPack
+    ; arbitrarySectorBraidingNaturalityPromoted =
+        false
+    ; arbitrarySectorBraidingNaturalityPromotedIsFalse =
+        refl
     ; fiveAxiomPackConsumed =
         true
     ; fiveAxiomPackConsumedIsTrue =
@@ -2153,6 +3161,7 @@ canonicalDHRDoplicherRobertsReconstructionAuthorityReceipt =
     ; authorityReceiptBoundary =
         "Concrete DR authority receipt records the Doplicher-Roberts theorem source, canonical citations, and exact precondition data"
         ∷ "The already inhabited five DHR/DR-consumption axiom receipt pack is consumed by threading all five component receipts from canonicalDHRDRInternalAxiomReceiptPack"
+        ∷ "Finite p2/p3/p5 row naturality is threaded from the pack as conditional finite evidence only; arbitrary-sector braiding naturality remains false"
         ∷ "Consumption of the five receipt pack does not by itself apply the DR theorem, construct the compact gauge group, or promote the category equivalence to Rep(G)"
         ∷ "Exact G_DHR = G_SM remains fail-closed: separate exact SM match evidence is not supplied and the ExactSM blocker receipt is threaded"
         ∷ "The first concrete blocker is still the absence of local DHR category law inhabitants, followed by DR theorem application, compact gauge-group construction, and separate exact SM match evidence"

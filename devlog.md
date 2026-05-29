@@ -1,3 +1,271 @@
+# 2026-05-29 pre-submission freeze
+
+- Completed the final manager freeze pass for the Paper 8 / Paper 1
+  pre-submission state.  Added `Docs/PreSubmissionFreeze2026-05-29.md` as the
+  local freeze record with validation commands, forbidden-claim scan results,
+  and the non-arXiv submission boundary.
+- Rechecked the five forbidden overclaim classes: conditional DHR authority as
+  full `G_DHR ~= G_SM`, finite OS positivity as Clay closure,
+  `yukawaSuppressPatternConsistent` as Cabibbo derivation, Monster depth bound
+  as proved, and alpha as derived from modular geometry.  Live positive claims
+  remain clean; examples and receipt boundaries are intentionally negative.
+- Added a reproducible exploratory CM `j`-invariant scan:
+  `scripts/cm_j_alpha_scan.py`, frozen output
+  `scripts/data/cm_j_alpha_scan_2026-05-29.json`, and
+  `Docs/CMJAlphaDiagnosticScan.md`.  The scan verifies `j(i)=1728` and
+  `j(rho)=0` numerically and records nearby naive-normalization matches while
+  preserving all modular-alpha derivation flags as false.
+- Refreshed Gate 5 hash governance in the cross-paper index and audits:
+  CMS archive `561babac...`, CMS `Results.yaml` `08a244d1...`,
+  `ins1486676` record JSON `94a6bb5a...`, `ins1486676` Table 3
+  `d05fbdf6...`, and P5' table `8ee74f4e...` are verified artifact bindings
+  only, not accepted residual or new-physics promotion.
+- Validation passed for `git diff --check`, the focused Clay/YM/NS/Moonshine
+  Agda checks, full `DASHI/Everything.agda`, and the CM-alpha diagnostic
+  script.
+
+# 2026-05-29 Manager governance tightening / Paper 8 pre-submission
+
+- Added a governance note for the next Paper 8 pass: keep the tower theorem and
+  closure route separate.  The paper may present the inhabited shared
+  Millennium tower schema and instance receipts, but closure language must stay
+  behind the explicit hard-target blockers and false promotion receipts.
+- Required the Gate 3 paragraph to be visible rather than implicit: YM
+  finite-boundary evidence belongs to the finite/local receipt lane; strict
+  nonabelian YM, Hodge/variation/IBP, OS/Wightman, and continuum Clay promotion
+  remain outside the tower result.
+- Recorded the requested `UnificationClaim` reading-ladder discipline: route
+  readers through claim-governance/readiness surfaces before stronger theorem
+  owners, so bridge wording cannot be read as full unification.
+- Validation passed after manager integration: touched-doc `git diff --check`,
+  focused Agda checks for the Paper 8 tower/YM spine, and the full aggregate
+  `DASHI/Everything.agda`.
+
+# 2026-05-29 Manager C Clay closure hard-target receipt
+
+- Implemented `DASHI.Physics.Closure.ClayMillenniumClosureTargetReceipt`.
+  The receipt packages two exact hard-target surfaces:
+  `CarrierOSPositivityAndWightmanTargetReceipt` for Yang-Mills and
+  `CarrierBKMControlTargetReceipt` for Navier-Stokes.
+- YM closure is now typed as requiring carrier OS positivity, a uniform
+  depth-independent positive mass gap, an interacting continuum Yang-Mills
+  construction, Wightman reconstruction, and Clay authority.  The canonical
+  receipt records the candidate formula `Delta_d >= c * alpha_1^d` only as a
+  target and keeps all closure flags false.
+- NS closure is now typed as requiring uniform carrier enstrophy control,
+  uniform `L^\infty` BKM vorticity control on finite horizons, continuum BKM
+  passage, and Clay authority.  The canonical receipt consumes the finite NS
+  tower but keeps all continuum/Clay closure flags false.
+- Wired the targets into the split Millennium tower instances and aggregate:
+  `MillenniumTowerYangMillsInstanceReceipt`,
+  `MillenniumTowerNavierStokesInstanceReceipt`, and `DASHI/Everything.agda`.
+- Updated publication-control docs so Paper 8 points at the new typed blockers:
+  `Docs/Paper8UnificationDraft.md`,
+  `Docs/Paper8UnificationBlockerMap.md`, `Docs/Paper8ReceiptIndex.md`,
+  `Docs/Paper8ClaimGovernanceAudit.md`, `Docs/CrossPaperReceiptIndex.md`, and
+  `Docs/CurrentGateStatus.md`.  `Docs/Paper3YangMillsGeometryDraft.md` now
+  also cites the OS/Wightman target as the exact Yang-Mills closing boundary.
+- Validation passed for the new receipt, both split tower instances,
+  `DASHI/Everything.agda`, and diff whitespace checks on touched files.
+
+# 2026-05-29 Manager C Gate 5 citation authority / papers tranche
+
+- Coordinated six workers for the requested Manager C tranche: Gate 5 authority
+  typing, Papers 2-4, Papers 5-7, 15SSP/Paper 1 verification, cross-paper
+  indexes/checklists, and Gate 5 hash verification.
+- Added/validated `DASHI.Core.AuthorityBoundary` and wired the LHCb
+  `B_s -> mu mu` lane as `CitationAuthority` rather than `ArtifactAuthority`.
+  The CERN repository citation is bound; HEPData absence and no-artifact status
+  are typed facts; empirical and non-SM promotion remain false.
+- Worker docs expanded Paper 2, Paper 3, Paper 4, Paper 5, Paper 6, and Paper 7
+  into honest receipt-bounded drafts, and added cross-paper readiness/checklist
+  surfaces.
+- Validation passed:
+  `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  and `git diff --check` on the touched tranche files.
+- Did not create `gate5-lhcb-closed-citation-authority` because the worktree is
+  intentionally dirty with concurrent uncommitted manager/worker changes; an
+  annotated tag on current `HEAD` would omit this tranche.
+
+# 2026-05-29 Paper 1 15SSP bridge update
+
+- Added `DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge` as the formal
+  DASHI-to-15-supersingular-prime bridge receipt.  It binds the tracked lane
+  set to `P_SS = {2,3,5,7,11,13,17,19,23,29,31,41,47,59,71}`, records Ogg
+  condition (2), supersingular field-completeness over `F_p`, as the
+  DASHI-natural characterization, and keeps `primeSetForcedFromFirstPrinciples`,
+  `oggOriginalQuestionResolved`, `standardModelGaugeGroupDerived`, and terminal
+  promotion false.
+- Wired the new Moonshine receipt into `DASHI/Everything.agda` and updated
+  Paper 1 TeX/Markdown plus bibliography/receipt index to cite Ogg 1975 and
+  Borcherds 1992 as external authority boundaries.
+- Validation passed for the focused new receipt, the aggregate
+  `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library
+  DASHI/Everything.agda`, `git diff --check`, and a Paper 1 `latexmk` build.
+
+# 2026-05-29 Paper 1 / YM authority hygiene audit
+
+- Audited the repo for the disputed withdrawn 5D Yang-Mills arXiv identifier,
+  unverified `B_s -> mu mu` residual-number wording, and recent local PDF/arXiv authority
+  candidates.
+- Kept the withdrawn 5D YM route only as a generic non-promoting route-audit
+  class and removed the exact identifier/DOI strings from DASHI-facing files.
+- Replaced the hard-coded unverified penguin residual-number conditional with an
+  artifact-bound sub-2-sigma conditional theorem shape.  Canonical Gate 5
+  `acceptedResidualCandidate`, selected-thread LHCb checksum authority, and
+  empirical promotion remain false unless the stated artifacts and authority
+  prerequisites are supplied.
+- Verified local recent artifacts: `rspa.2025.0912.pdf` is the Gate 4
+  Friedmann-instability authority boundary; `2504.18131v1.pdf` is unrelated
+  digital forensics; the Clay Jaffe-Witten PDF remains only a problem-statement
+  boundary.
+- Validation passed: focused Agda checks for the touched YM and penguin modules,
+  `ContinuumClayMassGapReceiptObligation`, `YangMillsMassGapBoundary`,
+  `timeout 300s ... DASHI/Everything.agda`, and `git diff --check`.
+
+# 2026-05-29 Manager A Paper 8/unification tranche
+
+- Implemented the Paper 8 formal spine and publication package as a
+  fail-closed unification architecture, not a completed-unification claim.
+- Added/validated the shared Millennium tower schema and lane-instance receipts:
+  `MillenniumTowerSchemaReceipt`, `MillenniumTowerInstancesReceipt`,
+  `MillenniumTowerYangMillsInstanceReceipt`,
+  `MillenniumTowerNavierStokesInstanceReceipt`,
+  `MillenniumTowerGRInstanceReceipt`, and
+  `MillenniumTowerDHRSMInstanceReceipt`.
+- Added/validated `CabibboAngleCarrierReceipt` to preserve the alpha/Yukawa
+  diagnostic and Cabibbo target form while keeping accepted common alpha,
+  physical CKM, and Cabibbo derivation false.
+- Wrote `Docs/Paper8UnificationDraft.md` as a full manuscript draft and added
+  the Paper 8 blocker map, receipt index, claim-governance audit, submission
+  checklist, and PlantUML unification map.
+- Validation:
+  - focused Agda checks passed for each new receipt module;
+  - `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda` passed;
+  - `git diff --check` passed on the touched Paper 8/receipt files.
+
+# 2026-05-29 Manager B integration sidecar
+
+- Wired the landed Manager B formal-spine modules into `DASHI/Everything.agda`:
+  `MillenniumTowerSchemaReceipt`,
+  `MillenniumTowerYangMillsInstanceReceipt`,
+  `MillenniumTowerNavierStokesInstanceReceipt`,
+  `MillenniumTowerInstancesReceipt`,
+  `MillenniumTowerGRInstanceReceipt`,
+  `MillenniumTowerDHRSMInstanceReceipt`, and
+  `CabibboAngleCarrierReceipt`.
+- Recorded the tranche state without promotion: GR/Friedmann are authority
+  boundaries, Stone/GNS/Hilbert remains finite or quotient-level with physical
+  Hilbert colimit open, cross-gate Hamiltonian compatibility is interface
+  bookkeeping rather than a common physical Hamiltonian theorem, and the
+  Millennium tower schema/instances keep continuum discharge, Clay acceptance,
+  GR/cosmology promotion, terminal promotion, full `G_DHR ~= G_SM`, and full
+  unification false.  The Cabibbo receipt records the alpha/Yukawa suppression
+  pattern and `theta_C = arcsin(alpha1 * g12)` target while keeping
+  common-alpha, Cabibbo derivation, `g12`, arcsin error-bound, and physical
+  CKM promotion false.
+- Validation passed for the focused Manager B receipt set and for
+  `DASHI/Everything.agda` with the standard local Agda command.
+
+# 2026-05-29 Gate 4 Temple/Friedmann instability receipt
+
+- Added `DASHI/Physics/Closure/FriedmannInstabilitySaddleReceipt.agda` and
+  imported it from `DASHI/Everything.agda`.
+- Bound the downloaded Proc. R. Soc. A PDF
+  `/home/c/Downloads/rspa.2025.0912.pdf` with SHA256
+  `a105917e23d118c6c41004292c2ecb2a32f042dec738ccd2c380253e0eace6cf`.
+- The new receipt records Alexander, Temple, and Vogler 2026,
+  `10.1098/rspa.2025.0912`, as a fail-closed external authority for the
+  Einstein-Euler self-similar Friedmann saddle/instability statement.  It
+  consumes the contracted-Bianchi matter closure and Wald GR authority receipts
+  while keeping dark-energy removal, LCDM falsification, carrier `xi = r/t`
+  identification, and cosmology promotion false.
+- Focused Agda check passed for
+  `DASHI/Physics/Closure/FriedmannInstabilitySaddleReceipt.agda`.
+
+# 2026-05-29 Manager A paper/package follow-up
+
+- Completed the Manager A Paper 1/Paper 2/Paper 8 follow-up.  The arXiv web
+  submission itself was not attempted because final upload, preview approval,
+  license choice, author identity confirmation, and submitter certification
+  require an authenticated arXiv account session.
+- Prepared
+  `Docs/PaperDraftWorkingFolder/build/paper1-submission-candidate-arxiv-source.tar.gz`
+  as a flattened source archive for Paper 1.  SHA256:
+  `b1092ebf4c68d7dd0547ee92102e0da07ff4abcd2edf2d0209c4cc79ce547573`.
+  Clean extraction build from `/tmp/dashi-paper1-arxiv-test` passes with
+  `latexmk`, producing a 31-page PDF with SHA256
+  `bf70ab306b565b2086b9dffc5d07404535e3c2e9a6871cfb325343aceed73e48`.
+- Added/updated
+  `Docs/PaperDraftWorkingFolder/ArxivSubmissionChecklist.md` and
+  `Docs/PaperDraftWorkingFolder/ArxivSubmissionMetadata.md` with title,
+  author string, abstract, comments, package manifest, `math-ph` primary
+  recommendation, optional `hep-th` cross-list guidance, and the external
+  account-authenticated upload boundary.
+- Added `Docs/Paper2GRGeometryDraft.md` and
+  `Docs/Paper2GRGeometryRoadmap.md` for Paper 2, covering DCHoTT B0 bridge
+  obligations, finite Lorentzian carrier geometry, sourced-Einstein/Wald
+  authority boundary, continuum Levi-Civita fail-closed boundary, and Paper 3
+  non-flat GR blockers.
+- Added `Docs/Paper8NSMillenniumSkeleton.md`, framing the NS/YM
+  structural-isomorphism paper as a formal-methods contribution rather than a
+  Millennium proof.
+
+# 2026-05-29 Gate 7 alpha/Yukawa/Vus memory update
+
+- Updated project memory for the landed Gate 7 target surfaces without
+  promotion.  The alpha receipt records finite mass-ratio readback estimates
+  `0.041240` and `0.085720`, but keeps alpha agreement, accepted target,
+  supplied bound, and physical promotion false.
+- Recorded the off-diagonal Yukawa state as carrier-only: y12/y13/y23 are
+  symbolic inter-lane/depth-suppressed carrier entries, with physical values,
+  physical coupling scale, DHR physical matrices, and CKM promotion still
+  absent.
+- Recorded the Vus target state as comparison-only: current carrier Vus is
+  identity-zero, PDG-sized `0.225` is only a target datum, and physical CKM /
+  exact PDG match claims remain false.
+
+# 2026-05-29 Gate 6 DHR authority/Tannaka memory update
+
+- Recorded the final honest state of the Manager B DHR authority/Tannaka lane.
+  Finite p2/p3/p5 prime-lane axiom/naturality evidence is inhabited at the
+  carrier-receipt level, and the DR reconstruction authority receipt consumes
+  the five DHR/DR axiom receipt pack.
+- `DHROriginalPaperAuthorityReceipt` records DHR 1971/1974 DOI authority, and
+  `TannakaKreinFibreFunctorReceipt` records the finite fibre functor
+  `p2 -> C^1`, `p3 -> C^2`, `p5 -> C^3` with Tannaka/Deligne authority,
+  including `arXiv:math/0206028`, as an external boundary.
+- `ConditionalGDHRSMPromotionReceipt` records the weaker
+  `conditionalOnDRAuthority` status and directly consumes the original
+  DHR-paper authority receipt as part of the external condition.  No full
+  promotion was made: arbitrary-sector DR theorem application, compact group
+  construction, category equivalence to `Rep(G)`, concrete `G_DHR -> G_SM`,
+  exact SM matching, and unconditional `G_DHR ~= G_SM` all remain false.
+
+# 2026-05-28 Gate 5 B6 memory update
+
+- Updated Gate 5 penguin memory after the checksum/residual implementation.
+  The supplied `HEPData:ins2922449` / record `160745` Table 16 YAML hash is
+  `47868e1936dc9f8b4bd20f2aa25ffe2350307737b346394d252d8c5b256ef256`; the
+  companion local JSON hash is
+  `e182f28137dae0f43be0b99c11d728cd9509d09cc47f66cd64462a897738ea43`.
+  Both artifacts are rejected for P5' because they describe normalized
+  b-tagged jet mass, not a P5' value/covariance table.
+- Recorded the residual classification without promoting it:
+  `[4,6] = -2.8 sigma`, `[6,8] = -3.0 sigma`, status
+  `p5PrimeBorderlineAnomalyCandidate`, with accepted residual construction and
+  frozen residual-vector artifact still false.
+- Bound the current full Run 1+2 HEPData value/correlation artifacts:
+  `10.17182/hepdata.167733.v1/t2` with SHA256
+  `8ee74f4e774889eced2090fe60bbdaf681dd327dc1a349add992e038c7f62623`, plus
+  total/stat/syst correlation JSON SHA256 values
+  `d3ce138b3d7a3fe0a2777fe87ebe2e9161f14ff4d1ca66ff576d6e271a03c624`,
+  `452a3252a6648dc1a0bd3d48907c271850f646c2c0339f07c8a151ab16edf5c0`, and
+  `d15787e808c195ce4126483b6f7d524b49f718320728a06555c1cb4f3b05a7d8`.
+- Remaining limitations are unchanged in kind: SM/Wilson/flavio/CKM/projection-code
+  freeze authorities and no-posterior-tuning attestation are still missing, so
+  accepted residual promotion remains false.
+
 # 2026-05-22 tranche C
 
 - Landed the tranche-C worker outputs as concrete Agda modules:
@@ -3264,3 +3532,204 @@
   transport/variation, selected Levi-Civita, finite trace-state positivity/CS,
   DHR local-algebra action laws, exact CKM/Jarlskog, Gate 8, and terminal
   promotion are still blocked by the recorded exact primitives.
+
+- 2026-05-27: Paper7 inventory wave assigned across six workers and integrated
+  with honest promotion boundaries.  A1 landed
+  `CarrierFunctorPrimeLaneLaws.agda`, inhabiting bounded p2/p3/p5/p7 carrier
+  functor laws via existing graph-functor and FactorVec commutation surfaces.
+  A2/A3 added `DHRCategoryDRSMIdentificationFailClosedReceipt` and threaded it
+  through `DHRTensorDualGroupReconstruction`, preserving the missing local DR
+  category laws, symmetric tensor/hexagon, DR authority consumption, compact
+  group, and exact SM match blockers.  B1 added a finite nonzero curvature
+  receipt in `Depth9ConnectionAndCurvature.agda` using the SFGCSite2D
+  reference plaquette where curvature evaluates to `φ1` and is not vacuum
+  `φ0`.  B2/B3 added `ChainB2B3YMEinsteinCompatibilityReceipt`, composing the
+  Gate 4 YM stress-energy substitution and GR compatibility surfaces while
+  keeping sourced Einstein and `T_YM = T_GR` unpromoted.  C1 added
+  `PenguinDecayLHCbChecksumAcceptedResidualReceipt.agda`, binding the LHCb CDS
+  supplementary ZIP SHA256
+  `68bf6ab48ca104c2e37f1edeb64fbde59d4542600adf78c28869f092daef7fb8` while
+  explicitly not constructing a HEPData table receipt or accepted residual.
+  The information-paradox obstruction is now an arXiv:2507.17031v1-anchored
+  typed cross-gate receipt, not a resolution theorem.  Targeted checks,
+  `CrossGateConsistency`, `InformationParadoxCrossGateObstruction`,
+  `DHRTensorDualGroupReconstruction`, `DASHI/Everything.agda`, and
+  `git diff --check` pass.  Paper7/Gate8 remains fail-closed rather than
+  promoted.
+
+- 2026-05-27: prediction-frontier continuation landed the next typed targets
+  without promoting unconstructed physics.  YM mass-gap receipts now thread
+  finite positive evidence, the withdrawn 5D constructive route audit,
+  topological interpretation blockers, colimit/Hamiltonian lift blockers, and
+  the continuum Clay obligation; reflection positivity, polymer-cluster
+  convergence, OS reconstruction, physical Hamiltonian spectral lift, and Clay
+  acceptance remain false.  DHR/SM now records finite p2/p3/p5 matrix targets
+  `C`, `M2`, and `M3` in `FinitePrimeLaneDHRSMCompatibilityLedger`, but actual
+  DHR end-sector algebras, DR compact group reconstruction, and
+  `G_DHR ~= G_SM` remain false.  `CarrierYukawaRatioTargetReceipt`,
+  `CKMPredictionFrontierReceipt`, and
+  `PenguinDecayC9C10P5PrimePredictionTargetReceipt` name the first real
+  prediction targets while keeping physical-Yukawa, exact CKM/CP, Wilson
+  authority, LHCb table, residual-vector, and anomaly-claim promotions false.
+  The information-paradox surface also records dark-sector, Planck-cutoff, and
+  Page-curve frontier targets with quantum-gravity promotion false.  Targeted
+  checks and `DASHI/Everything.agda` pass; `git diff --check` remains clean.
+
+- 2026-05-28: Documentation/status-only prediction-frontier sync.  Recorded
+  a withdrawn 5D constructive YM route as non-promoting evidence only; no
+  YM/Clay route is promoted from it.  Re-stated the Gate 5 penguin blocker as the selected LHCb
+  table/checksum plus freeze-tuple gap, with the 2025 full Run 1+2
+  `LHCb-PAPER-2025-041` / `arXiv:2512.18053` / `CDS:2951844` result as the
+  current public target, the 2020 `HEPData:ins1798504` result as fallback-only,
+  and `HEPData 160745` as mismatch/fail-closed unless P5' table binding is
+  proved.  The Gate 6 DHR/SM next target remains
+  finite end-sector computation rather than endomorphism-algebra or DR
+  reconstruction closure.  `C9/P5'` remains a non-promoting prediction target
+  gated by Wilson authority, selected LHCb data, residual-vector construction,
+  and anomaly-claim promotion false.
+
+- 2026-05-28: Implemented the prediction-frontier follow-up while preserving
+  fail-closed promotion boundaries.  Gate 5 now records the CERN repository
+  route as thesis/value route evidence only and records the direct
+  `ins2101841` route as stale negative provenance.  The penguin receipt now
+  records the 2025 full Run 1+2 public result as the selected P5'/C9 target,
+  records `HEPData:ins1798504` as the stable 2020 fallback route, and rejects
+  the supplied `HEPData 160745` / `ins2922449` Table 16 YAML/JSON artifacts as
+  b-jet-mass data rather than P5' value/covariance data.  No LHCb
+  value/covariance checksum is asserted.  Gate 6
+  adds an inhabited finite carrier matrix
+  computation receipt for p2 scalar `C`, p3 Clifford/M2 round-trip evidence,
+  and p5 W3/M3 clock-shift laws; actual DHR localised endomorphism algebra,
+  DR compact-group reconstruction, and `G_DHR ~= G_SM` remain false.  Added
+  `PenguinDecayCarrierDerivedC9ConstraintTargetReceipt`, wiring the carrier
+  CKM/Yukawa surfaces into the `C9_NP` sign/magnitude target while keeping
+  physical C9 derivation, Wilson authority acceptance, empirical constraint,
+  and anomaly claim false.  Targeted checks and `DASHI/Everything.agda` pass;
+  `git diff --check` is clean.
+
+- 2026-05-28: Manager B Gate 3/4 geometry plus Navier-Stokes regularity
+  tranche completed across six lanes.  Gate 3 now has a depth-9 finite carrier
+  curvature 2-form over all available SFGCSite2D plaquettes, with the
+  reference plaquette computing `φ1`, plus a finite zero-current pure-YM
+  `D * F = J` receipt for `J = 0`; strict real SU3/Hodge/YM promotion remains
+  false behind the recorded transport and variation blockers.  Gate 4 now has
+  `SourcedEinsteinCompatibilityReceipt`, wiring contracted Bianchi divergence
+  zero, finite YM stress-energy substitution, and finite zero-table source
+  compatibility for the target `G^munu = 8pi T^munu_YM`, while full sourced
+  Einstein promotion remains blocked by 8π normalization, coordinate YM
+  tensor construction, on-shell YM Noether conservation, and W4 authority.
+  Navier-Stokes now has finite-depth local existence with `T_n = suc n`,
+  finite-depth L2 energy estimates at every depth, and an explicit finite
+  Leray/Hodge projection `P_sigma u = u - grad phi` with
+  `Delta phi = div u` and `div(P_sigma u) = 0`; continuum regularity remains
+  an explicit obligation.  Targeted Agda checks pass for all six touched
+  Manager B modules.
+
+- 2026-05-28: Manager A Gate 6 DHR-SM tranche completed across six lanes.
+  The finite p2/p3/p5 end-sector path now has carrier-level localised
+  endomorphism star/composition/associativity receipts in
+  `FinitePrimeLaneDHRSMCompatibilityLedger`, a finite lane-local endomorphism
+  category in `Gate6FinitePrimeLaneLocalEndomorphismCategory`, finite
+  conjugate/dual identity-zigzag receipts in
+  `FinitePrimeLaneConjugateDualReceipts`, finite tensor target/braiding-swap
+  progress in `DHRTensorDualGroupReconstruction`, and finite hexagon progress
+  in `DHRHexagonObligation` with the exact first missing law recorded as
+  braiding naturality.  The DR authority receipt already consumes the five
+  internal DHR/DR axiom receipts; DR theorem application, compact gauge-group
+  construction, exact SM matching, and `G_DHR ~= G_SM` remain false.  The new
+  Gate 6 modules are imported by `DASHI.Everything`; targeted Agda checks,
+  `DASHI/Everything.agda`, and `git diff --check` pass.
+
+- 2026-05-28: Gate 6 braiding-naturality tranche completed across six reused
+  worker lanes.  `FinitePrimeLaneDHRSMCompatibilityLedger` now exposes finite
+  carrier-pair identity arrows, pair swap, and inhabited p2/p3/p5
+  pair-swap-braiding naturality receipts.  `DHRTensorDualGroupReconstruction`
+  consumes the definitional finite square
+  `swap (id wire) == id (swap wire)`.  `DHRHexagonObligation` threads that
+  receipt into finite hexagon progress, so the exact next finite blocker moves
+  from `missingFinitePrimeLaneBraidingNaturalitySquareLaw` to
+  `missingFinitePrimeLaneLeftRightHexagonCoherenceLaw`; statistics-as-braiding
+  remains a separate residual target.  `DHRGaugeReceiptSurface` threads the
+  finite-row naturality availability into the DR axiom/authority receipts while
+  preserving DR theorem application, compact gauge-group construction, exact
+  SM matching, and `G_DHR ~= G_SM` as false.  Targeted Gate 6 Agda checks and
+  `git diff --check` pass.  The exact manuscript-facing phrase
+  `no overclaiming, no fake closures` was absent, so no external manuscript
+  prose edit was required.
+
+- 2026-05-28: Worker A5 integrated the latest Manager A Gate 6 finite
+  hexagon/statistics receipts at the aggregate/status boundary.  The Gate 6
+  aggregate imports already include the finite local-endomorphism category and
+  finite conjugate/dual modules, while the newer finite left/right hexagon and
+  statistics receipts live inside the already-imported
+  `DHRHexagonObligation`/`DHRTensorDualGroupReconstruction` surfaces.
+  Documentation now says finite naturality, finite left/right hexagon target
+  receipts, and finite statistics-as-braiding target receipt are inhabited.
+  Arbitrary DHR hexagon closure, statistics-as-braiding in the full DHR
+  category, DR theorem application, compact group construction, and
+  `G_DHR ~= G_SM` remain fail-closed.
+
+- 2026-05-29: Manager A completed the Paper 1 submission-prep tranche across
+  six worker lanes.  Updated `Docs/PaperDraftWorkingFolder/Paper1_Manuscript`
+  in both `.tex` and `.md`: abstract/intro now make \(P_5'\) the lead
+  empirical contact, Section 2 reflects finite depth-9 YM curvature and finite
+  prime-lane DHR progress, Section 11 records the digest-bound
+  `p5PrimeBorderlineAnomalyCandidate` while demoting Drell-Yan to TRBD
+  methodology, Section 13 reflects current gate blockers, and Section 14
+  indexes the new DHR/NS/Wald/Penguin/CKM/Yukawa/YM/frontier receipts.
+  Added `Docs/PaperDraftWorkingFolder/ArxivSubmissionChecklist.md`, verified
+  arXiv `math-ph` as the primary category against the official taxonomy, and
+  rebuilt `Docs/PaperDraftWorkingFolder/build/Paper1_Manuscript.pdf` from repo
+  root with `latexmk`; no unresolved citations, missing figures, or LaTeX
+  errors remain.
+
+- 2026-05-29: Completed the Paper 8 submission-readiness pass.  Six workers
+  tightened `Docs/Paper8UnificationDraft.md` around a theorem-box statement of
+  the inhabited `MillenniumTowerSchemaReceipt`/instance receipts, added the
+  in-manuscript "What This Paper Does Not Claim" section, inserted the honest
+  Cabibbo `g12 = 1` diagnostic and `5.5x` PDG discrepancy, and expanded both
+  the in-paper and standalone receipt indexes so cited receipts have module
+  paths and Agda identifiers.  The final source is Markdown rather than TeX.
+  Marker scans on the Paper 8 source/support docs are clean; the tranche keeps
+  Clay YM, Clay NS, dark-energy/LCDM, full SM reconstruction, full
+  unification, and accepted-new-physics claims closed.
+
+- 2026-05-29: Manager B integrated the Papers 5-7 / Moonshine bridge tranche
+  using six reused workers.  Added the Closure-level
+  `SupersingularPrimeLaneBridge` receipt, kept the richer Moonshine bridge as
+  the Paper 1 citation surface, and imported the new Closure receipt into
+  `DASHI.Everything`.  Paper 5 now states the finite prime-lane DHR theorem
+  and conditional authority boundary in full draft form; Paper 6 now states
+  the carrier Yukawa/alpha/Cabibbo target surface without physical CKM
+  promotion; Paper 7 now states terminal composition as a typed obligation
+  draft rather than a unification proof.  Paper 1 Markdown/TeX now removes
+  first-principles-forcing language for the supersingular prime set and cites
+  `SupersingularPrimeLaneBridge` with `primeSetForcedFromFirstPrinciples =
+  false`.
+
+- 2026-05-29: Manager reused the six existing worker lanes for the
+  YM/NS Clay-frontier receipt tranche.  Added
+  `CarrierRenormalizationGroupScaleReceipt` with the open
+  dimensionful-mass-gap/RG-scale frontier and
+  `CarrierNSSmoothConvergenceReceipt` with the open ultrametric
+  Aubin-Lions/C-infinity convergence frontier.  Updated `DASHI.Everything`,
+  `Docs/CrossPaperReceiptIndex.md`, `Docs/CurrentGateStatus.md`,
+  `Docs/Paper8UnificationBlockerMap.md`, and
+  `Docs/Paper8UnificationDraft.md` so the finite-depth positives and the two
+  open Clay-level frontiers are separated explicitly.  Focused Agda checks for
+  both new receipts, `git diff --check`, and the full `DASHI/Everything.agda`
+  aggregate passed under the standard library/cubical include set.
+
+- 2026-05-29: Manager B completed the pre-submission/frontier deployment using
+  six reused worker lanes.  Paper 2 now keeps Friedmann instability paired
+  with dark-energy/LCDM/cosmology non-promotion, Paper 3 foregrounds the
+  depth-9 finite curvature readback, Paper 4 ties finite Stone staging to
+  `physicalStoneCarrierPromotedIsFalse`, Paper 6 adds the honest `g12`
+  DHR-sector parameter section, and Paper 7 lists full unification as typed
+  obligations rather than a theorem.  Agda additions strengthen the RG and NS
+  frontier receipts without promoting Clay flags, record the modular-j alpha
+  numerical check as non-promoting, and bind the current Monster-depth readback
+  as a conjectural diagnostic.  The final claim-governance scan is documented
+  in `Docs/FinalClaimGovernanceScan.md`, Paper 8 metadata is in
+  `Docs/Paper8ArxivSubmissionMetadata.md`, focused receipt checks pass, and
+  the full `DASHI/Everything.agda` aggregate passes.

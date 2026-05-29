@@ -279,7 +279,7 @@ record SuppliedPenguinDatasetChecksumAuthority : Set where
       ⊎
       sourceCandidate
       ≡
-      Contract.lhcbPRD105012010CDS2779103
+      Contract.lhcbBsMuMuCERN5r7hzC7e34
 
     sourceDiscriminator :
       Contract.PenguinDatasetSourceDiscriminator
@@ -297,6 +297,12 @@ record SuppliedPenguinDatasetChecksumAuthority : Set where
 
     payloadSHA256 :
       String
+
+    payloadSHA256Verified :
+      Bool
+
+    payloadSHA256VerifiedIsTrue :
+      payloadSHA256Verified ≡ true
 
     authorityReceipt :
       String
@@ -320,6 +326,8 @@ canonicalCMSResultsDatasetChecksumAuthority =
     "sha256"
     refl
     "08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb"
+    true
+    refl
     "local artifact /home/c/Downloads/HEPData-ins2616304-v1-Results.yaml; HEPData ins2616304 v1 table 1435213 Results; DOI 10.17182/hepdata.135675.v1/t1"
     true
     refl
@@ -353,7 +361,7 @@ record PenguinFreezeHashPreRegistrationTuple : Set where
     selectedDatasetSourceCandidateIsLHCb :
       selectedDatasetSourceCandidate
       ≡
-      Contract.lhcbPRD105012010CDS2779103
+      Contract.lhcbBsMuMuCERN5r7hzC7e34
 
     selectedDatasetDigestBinding :
       PenguinDigestBinding
@@ -853,21 +861,21 @@ canonicalFreezeHashPreRegistrationTuple :
   PenguinFreezeHashPreRegistrationTuple
 canonicalFreezeHashPreRegistrationTuple =
   mkPenguinFreezeHashPreRegistrationTuple
-    "required: exact selected dataset artifact path or URI"
-    "required: accepted dataset authority binding for the selected observable and bin map"
-    "required: dataset source citation, table, units, covariance, and binning reference"
-    "required: dataset version, record id, or immutable snapshot id"
+    "none: citation-only LHCb slot has no selected machine-readable dataset artifact"
+    "CitationAuthority repository.cern/records/5r7hz-c7e34; artifactAuthority=false"
+    "arXiv:2108.09283; CERN-EP-2021-133; Phys.Rev.D 104 (2021) L091102; HEPData deposited=false"
+    "repository.cern/records/5r7hz-c7e34"
     Contract.canonicalPenguinDatasetSourceDiscriminator
     refl
-    Contract.lhcbPRD105012010CDS2779103
+    Contract.lhcbBsMuMuCERN5r7hzC7e34
     refl
     canonicalInputDatasetDigestBinding
     refl
-    "required: HEPData or equivalent immutable record id for the selected penguin observable"
-    "required: HEPData value table DOI/name for the selected penguin observable"
-    "required: sha256 of selected value table artifact"
-    "required: HEPData covariance table DOI/name for the selected penguin observable"
-    "required: sha256 of selected covariance table artifact"
+    "repository.cern/records/5r7hz-c7e34"
+    "none: HEPData deposited=false; no machine-readable value table"
+    "none: no fabricated SHA; artifactAuthority=false"
+    "none: HEPData deposited=false; no covariance table"
+    "none: no fabricated SHA; artifactAuthority=false"
     "required: frozen Standard Model baseline authority artifact"
     "required: accepted SM baseline source including form factors and uncertainty budget"
     canonicalSMBaselineDigestBinding
@@ -1027,10 +1035,10 @@ canonicalPenguinDecayProjectionArtifactRequest =
     ; providerRequestText =
         "Bind selected decay b -> s lepton pair and angular-coefficient deviation before reading the residual vector"
         ∷ "Populate the freeze-hash pre-registration tuple before any residual comparison is unlocked"
-        ∷ "Dataset-source discriminator records CMS HEPData DOI 10.17182/hepdata.135675.v1/t1 record ins2616304 v1 table 1435213 Results with sha256 08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb while the thread-selected LHCb DOI/CDS checksum remains missing"
+        ∷ "Dataset-source discriminator records CMS HEPData DOI 10.17182/hepdata.135675.v1/t1 record ins2616304 v1 table 1435213 Results with checksum authority, while the thread-selected LHCb record repository.cern/records/5r7hz-c7e34 is CitationAuthority only"
         ∷ "Do not promote the selected thread observable from the CMS checksum candidate; selectedThreadChecksumAuthorityPresent remains false for the LHCb-specific lane"
         ∷ "Supply inputDatasetDigest as a sha256 of the exact empirical dataset artifact, source citation, version/record id, covariance, and bin map"
-        ∷ "Supply HEPData record/table identities and value/covariance table checksums for the selected penguin observable, or keep the lane fail-closed when no such immutable receipt exists"
+        ∷ "For the selected LHCb slot, HEPData deposited=false, artifactAuthority=false, and no machine-readable table or fabricated SHA is accepted"
         ∷ "Supply smBaselineDigest as a sha256 of the frozen Standard Model baseline authority artifact"
         ∷ "Supply flavio provider version 2.7.0 package, parameter-card, and runtime environment digests"
         ∷ "Supply Wilson coefficient authority source, scheme, scale law, Hamiltonian convention, and digest"
@@ -1134,6 +1142,11 @@ record PenguinCMSChecksumPopulatedReadinessReceipt : Setω where
       ≡
       "08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb"
 
+    cmsDatasetPayloadSHA256Verified :
+      payloadSHA256Verified cmsDatasetChecksumAuthority
+      ≡
+      true
+
     cmsDatasetAuthorityPresent :
       Bool
 
@@ -1168,11 +1181,38 @@ record PenguinCMSChecksumPopulatedReadinessReceipt : Setω where
       ≡
       "08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb"
 
+    cmsTableSHA256Verified :
+      Contract.sha256Verified cmsTableArtifact
+      ≡
+      true
+
+    cmsArchivePath :
+      String
+
+    cmsArchivePathIsLocalDownload :
+      cmsArchivePath
+      ≡
+      "/home/c/Downloads/HEPData-ins2616304-v1.zip"
+
+    cmsArchiveSHA256 :
+      String
+
+    cmsArchiveSHA256IsCanonical :
+      cmsArchiveSHA256
+      ≡
+      "561babac1c964306c4c06f1f862d8db3ca4f46fdc3ee071c88eb81887a258bc4"
+
+    cmsArchiveSHA256Verified :
+      Bool
+
+    cmsArchiveSHA256VerifiedIsTrue :
+      cmsArchiveSHA256Verified ≡ true
+
     selectedThreadCandidateIsLHCb :
       Contract.selectedThreadCandidate
         Contract.canonicalPenguinDatasetSourceDiscriminator
       ≡
-      Contract.lhcbPRD105012010CDS2779103
+      Contract.lhcbBsMuMuCERN5r7hzC7e34
 
     readinessSelectedThreadChecksumAuthorityPresent :
       Bool
@@ -1205,7 +1245,7 @@ record PenguinCMSChecksumPopulatedReadinessReceipt : Setω where
       ≡
       canonicalPenguinCMSChecksumReadinessBlockers
 
-    readinessSummary :
+    cmsReadinessSummary :
       List String
 
 open PenguinCMSChecksumPopulatedReadinessReceipt public
@@ -1213,36 +1253,79 @@ open PenguinCMSChecksumPopulatedReadinessReceipt public
 canonicalPenguinCMSChecksumPopulatedReadinessReceipt :
   PenguinCMSChecksumPopulatedReadinessReceipt
 canonicalPenguinCMSChecksumPopulatedReadinessReceipt =
-  mkPenguinCMSChecksumPopulatedReadinessReceipt
-    canonicalPenguinDecayProjectionArtifactRequest
-    canonicalCMSResultsDatasetChecksumAuthority
-    refl
-    refl
-    refl
-    refl
-    true
-    refl
-    Contract.canonicalCMSTableArtifactChecksumCandidate
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
-    false
-    refl
-    refl
-    false
-    refl
-    false
-    refl
-    canonicalPenguinCMSChecksumReadinessBlockers
-    refl
-    ( "CMS checksum readiness is concrete: HEPData ins2616304 v1 Results table DOI 10.17182/hepdata.135675.v1/t1 table id 1435213 has sha256 08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb"
-      ∷ "This receipt is separate from the selected LHCb thread lane; selectedThreadChecksumAuthorityPresent remains false"
-      ∷ "Reduced remaining blockers after the CMS checksum are flavio package digest, runtime environment digest, Wilson authority digest, no-posterior-tuning attestation, projection-code freeze hash, and the LHCb artifact checksum if the lane stays thread-selected"
-      ∷ "No acceptedResidualCandidate is claimed by this readiness receipt"
-      ∷ [] )
+  record
+    { readinessProjectionArtifact =
+        canonicalPenguinDecayProjectionArtifactRequest
+    ; cmsDatasetChecksumAuthority =
+        canonicalCMSResultsDatasetChecksumAuthority
+    ; cmsDatasetChecksumAuthorityIsCanonical =
+        refl
+    ; cmsDatasetSourceCandidateIsCMS =
+        refl
+    ; cmsDatasetDigestAlgorithmIsSHA256 =
+        refl
+    ; cmsDatasetPayloadSHA256IsCanonical =
+        refl
+    ; cmsDatasetPayloadSHA256Verified =
+        refl
+    ; cmsDatasetAuthorityPresent =
+        true
+    ; cmsDatasetAuthorityPresentIsTrue =
+        refl
+    ; cmsTableArtifact =
+        Contract.canonicalCMSTableArtifactChecksumCandidate
+    ; cmsTableArtifactIsCanonical =
+        refl
+    ; cmsTableRecordIsCanonical =
+        refl
+    ; cmsTableDOIIsCanonical =
+        refl
+    ; cmsTableIdentifierIsCanonical =
+        refl
+    ; cmsTableSHA256IsCanonical =
+        refl
+    ; cmsTableSHA256Verified =
+        refl
+    ; cmsArchivePath =
+        "/home/c/Downloads/HEPData-ins2616304-v1.zip"
+    ; cmsArchivePathIsLocalDownload =
+        refl
+    ; cmsArchiveSHA256 =
+        "561babac1c964306c4c06f1f862d8db3ca4f46fdc3ee071c88eb81887a258bc4"
+    ; cmsArchiveSHA256IsCanonical =
+        refl
+    ; cmsArchiveSHA256Verified =
+        true
+    ; cmsArchiveSHA256VerifiedIsTrue =
+        refl
+    ; selectedThreadCandidateIsLHCb =
+        refl
+    ; readinessSelectedThreadChecksumAuthorityPresent =
+        false
+    ; readinessSelectedThreadChecksumAuthorityPresentIsFalse =
+        refl
+    ; readinessSelectedThreadChecksumMatchesProjectionArtifact =
+        refl
+    ; readinessFreezeGateOpen =
+        false
+    ; readinessFreezeGateOpenIsFalse =
+        refl
+    ; readinessAcceptedResidualCandidateClaimedHere =
+        false
+    ; readinessAcceptedResidualCandidateClaimedHereIsFalse =
+        refl
+    ; readinessReducedRemainingBlockers =
+        canonicalPenguinCMSChecksumReadinessBlockers
+    ; readinessReducedRemainingBlockersAreCanonical =
+        refl
+    ; cmsReadinessSummary =
+        "CMS checksum readiness is concrete: HEPData ins2616304 v1 Results table DOI 10.17182/hepdata.135675.v1/t1 table id 1435213 has sha256 08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb"
+        ∷ "CMS archive /home/c/Downloads/HEPData-ins2616304-v1.zip is verified with sha256 561babac1c964306c4c06f1f862d8db3ca4f46fdc3ee071c88eb81887a258bc4"
+        ∷ "This receipt is separate from the selected LHCb thread lane; selectedThreadChecksumAuthorityPresent remains false"
+        ∷ "Reduced remaining blockers after the CMS checksum are flavio package digest, runtime environment digest, Wilson authority digest, no-posterior-tuning attestation, projection-code freeze hash, and the LHCb artifact checksum if the lane stays thread-selected"
+        ∷ "No acceptedResidualCandidate is claimed by this readiness receipt"
+        ∷ []
+    }
 
 canonicalPenguinCMSReadinessDatasetChecksumPresent :
   cmsDatasetAuthorityPresent

@@ -7,11 +7,11 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
 ------------------------------------------------------------------------
--- External candidate: arXiv:2506.00284.
+-- External withdrawn 5D constructive Yang-Mills candidate.
 --
--- Governance lookup records this source as withdrawn by arXiv Admin.  The
--- proof route is recorded as evidence only; it cannot promote Gate 2 or Clay
--- Yang-Mills closure.
+-- Governance lookup records this source class as withdrawn by arXiv Admin.
+-- The proof route is recorded as negative evidence only; it cannot promote
+-- Gate 2 or Clay Yang-Mills closure.
 
 data YMConstructive5DProofBlocker : Set where
   arxivAdminWithdrawn :
@@ -29,6 +29,12 @@ data YMConstructive5DProofBlocker : Set where
   noContinuumWightmanOSCertificate :
     YMConstructive5DProofBlocker
 
+  noConstructedReflectionPositivityCertificate :
+    YMConstructive5DProofBlocker
+
+  noConstructedPolymerClusterConvergenceCertificate :
+    YMConstructive5DProofBlocker
+
   noTransferMatrixSpectralProjectionCertificate :
     YMConstructive5DProofBlocker
 
@@ -40,6 +46,8 @@ canonicalYMConstructive5DProofBlockers =
   ∷ noClayAcceptance
   ∷ noInternalFormalImport
   ∷ noContinuumWightmanOSCertificate
+  ∷ noConstructedReflectionPositivityCertificate
+  ∷ noConstructedPolymerClusterConvergenceCertificate
   ∷ noTransferMatrixSpectralProjectionCertificate
   ∷ []
 
@@ -49,13 +57,13 @@ record YMConstructive5DProofReceipt : Setω where
       String
 
     sourceIdentifierIsCanonical :
-      sourceIdentifier ≡ "arXiv:2506.00284v2 [physics.gen-ph]"
+      sourceIdentifier ≡ "withdrawn 5D constructive YM candidate [identifier not retained as authority]"
 
     sourceDOI :
       String
 
     sourceDOIIsCanonical :
-      sourceDOI ≡ "10.48550/arXiv.2506.00284"
+      sourceDOI ≡ "withdrawn-source DOI not retained as authority"
 
     sourceTitle :
       String
@@ -143,11 +151,11 @@ canonicalYMConstructive5DProofReceipt :
 canonicalYMConstructive5DProofReceipt =
   record
     { sourceIdentifier =
-        "arXiv:2506.00284v2 [physics.gen-ph]"
+        "withdrawn 5D constructive YM candidate [identifier not retained as authority]"
     ; sourceIdentifierIsCanonical =
         refl
     ; sourceDOI =
-        "10.48550/arXiv.2506.00284"
+        "withdrawn-source DOI not retained as authority"
     ; sourceDOIIsCanonical =
         refl
     ; sourceTitle =
@@ -200,3 +208,125 @@ canonicalYMConstructive5DProofReceipt =
         ∷ "No Gate 2 selected-carrier theorem, continuum theorem, or Clay acceptance is introduced"
         ∷ []
     }
+
+record YMConstructive5DRouteAuditReceipt : Setω where
+  field
+    candidateReceipt :
+      YMConstructive5DProofReceipt
+
+    candidateReceiptIsCanonical :
+      Bool
+
+    candidateReceiptIsCanonicalIsTrue :
+      candidateReceiptIsCanonical ≡ true
+
+    finitePositiveEvidenceRecorded :
+      Bool
+
+    finitePositiveEvidenceRecordedIsTrue :
+      finitePositiveEvidenceRecorded ≡ true
+
+    fiveDAuthorityRecorded :
+      Bool
+
+    fiveDAuthorityRecordedIsTrue :
+      fiveDAuthorityRecorded ≡ true
+
+    reflectionPositivityConstructed :
+      Bool
+
+    reflectionPositivityConstructedIsFalse :
+      reflectionPositivityConstructed ≡ false
+
+    polymerClusterConvergenceConstructed :
+      Bool
+
+    polymerClusterConvergenceConstructedIsFalse :
+      polymerClusterConvergenceConstructed ≡ false
+
+    osReconstructionConstructed :
+      Bool
+
+    osReconstructionConstructedIsFalse :
+      osReconstructionConstructed ≡ false
+
+    transferMatrixSpectralProjectionConstructed :
+      Bool
+
+    transferMatrixSpectralProjectionConstructedIsFalse :
+      transferMatrixSpectralProjectionConstructed ≡ false
+
+    clayPromotionFrom5DRoute :
+      Bool
+
+    clayPromotionFrom5DRouteIsFalse :
+      clayPromotionFrom5DRoute ≡ false
+
+    exactBlockers :
+      List YMConstructive5DProofBlocker
+
+    exactBlockersAreCanonical :
+      exactBlockers ≡ canonicalYMConstructive5DProofBlockers
+
+    blockerNotes :
+      List String
+
+open YMConstructive5DRouteAuditReceipt public
+
+canonicalYMConstructive5DRouteAuditReceipt :
+  YMConstructive5DRouteAuditReceipt
+canonicalYMConstructive5DRouteAuditReceipt =
+  record
+    { candidateReceipt =
+        canonicalYMConstructive5DProofReceipt
+    ; candidateReceiptIsCanonical =
+        true
+    ; candidateReceiptIsCanonicalIsTrue =
+        refl
+    ; finitePositiveEvidenceRecorded =
+        true
+    ; finitePositiveEvidenceRecordedIsTrue =
+        refl
+    ; fiveDAuthorityRecorded =
+        true
+    ; fiveDAuthorityRecordedIsTrue =
+        refl
+    ; reflectionPositivityConstructed =
+        false
+    ; reflectionPositivityConstructedIsFalse =
+        refl
+    ; polymerClusterConvergenceConstructed =
+        false
+    ; polymerClusterConvergenceConstructedIsFalse =
+        refl
+    ; osReconstructionConstructed =
+        false
+    ; osReconstructionConstructedIsFalse =
+        refl
+    ; transferMatrixSpectralProjectionConstructed =
+        false
+    ; transferMatrixSpectralProjectionConstructedIsFalse =
+        refl
+    ; clayPromotionFrom5DRoute =
+        false
+    ; clayPromotionFrom5DRouteIsFalse =
+        refl
+    ; exactBlockers =
+        canonicalYMConstructive5DProofBlockers
+    ; exactBlockersAreCanonical =
+        refl
+    ; blockerNotes =
+        "Finite positive evidence is recorded only as candidate-route evidence"
+        ∷ "The 5D source authority is recorded but remains withdrawn and non-promoting"
+        ∷ "No reflection-positivity certificate is constructed in DASHI"
+        ∷ "No polymer-cluster convergence certificate is constructed in DASHI"
+        ∷ "No OS reconstruction or transfer-matrix spectral-projection theorem is constructed"
+        ∷ []
+    }
+
+ymConstructive5DRouteAuditKeepsClayFalse :
+  clayPromotionFrom5DRoute canonicalYMConstructive5DRouteAuditReceipt
+  ≡
+  false
+ymConstructive5DRouteAuditKeepsClayFalse =
+  refl

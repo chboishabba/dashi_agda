@@ -2,6 +2,53 @@
 
 ## Active Blocker Board
 
+Prediction-frontier gate sync `2026-05-28`:
+- [x] Paper 8/unification tranche: add the shared Millennium tower schema,
+  YM/NS/GR/DHR-SM lane-instance receipts, Cabibbo-angle diagnostic receipt,
+  full manuscript draft, blocker map, receipt index, claim-governance audit,
+  submission checklist, and unification PlantUML map.  Keep Paper 8 scoped to
+  a machine-checked fail-closed architecture, not completed unification.
+- [x] Gate 4 Temple/Friedmann authority: add a fail-closed
+  `FriedmannInstabilitySaddleReceipt` for Proc. R. Soc. A 482:20250912,
+  DOI `10.1098/rspa.2025.0912`, consuming the contracted-Bianchi/Wald surfaces
+  and keeping dark-energy removal, LCDM falsification, carrier `xi = r/t`
+  identification, and cosmology promotion false.
+- [x] Record the withdrawn 5D constructive YM candidate as non-promoting route
+  evidence only, without retaining it as a citable authority identifier.
+- [x] Keep Gate 5 penguin contact blocked on selected LHCb
+  value/covariance-table authority and freeze-tuple completion.
+- [x] Gate 6 Manager A tranche: compute finite p2/p3/p5 carrier matrix
+  targets; add finite carrier-level localised endomorphism star/composition/
+  associativity receipts; add finite lane-local category laws; add finite
+  conjugate/dual identity zigzags; add finite tensor target and braiding-swap
+  progress; inhabit finite naturality, finite left/right hexagon target
+  receipts, and finite statistics-as-braiding target receipt; thread the five
+  DR internal axiom receipts into the DR authority receipt without claiming DR
+  theorem application, compact-group reconstruction, or `G_DHR ~= G_SM`.
+- [x] Gate 6 Manager A authority tranche: record DHR 1971/1974 DOI-bound
+  original-paper authority, finite Tannaka-Krein fibre functor
+  `p2 -> C^1`, `p3 -> C^2`, `p5 -> C^3`, and the weaker
+  `conditionalOnDRAuthority` `G_DHR`/SM target without full promotion.
+- [ ] Gate 6 next admissible action: construct actual arbitrary DHR localised
+  endomorphism algebra carriers, arbitrary DHR hexagon closure,
+  statistics-as-braiding in the full DHR category, target-to-DHR equivalence,
+  internal compact gauge group, and exact Standard Model gauge isomorphism.
+- [x] Add a non-promoting carrier-derived `C9_NP` constraint target wired to
+  CKM/Yukawa/Wilson/P5' surfaces.
+- [ ] Treat `C9/P5'` only as a non-promoting prediction target until Wilson
+  authority, selected LHCb data, frozen projection inputs, residual-vector
+  construction, and anomaly-claim authority are present.  The selected public
+  LHCb target is now the 2025 full Run 1+2 `B0 -> K*0 mu+ mu-` result
+  (`LHCb-PAPER-2025-041` / `arXiv:2512.18053` / `CDS:2951844`); the 2020
+  `HEPData:ins1798504` result is fallback-only; `HEPData 160745` remains a
+  mismatch/fail-closed lead unless its record/table identity is proven to bind
+  the selected P5' value/covariance payloads.
+- [ ] Gate 5 next admissible action: obtain an immutable selected LHCb
+  value/covariance table manifest/checksum for the 2025 full Run 1+2 P5'
+  target, or bind the 2020 fallback explicitly without promoting it.  The
+  `ins2101841` route is stale negative provenance, and the supplied
+  `ins2922449` / Table 16 artifacts are rejected b-jet-mass data.
+
 Current tranche closure `2026-05-21`: the middle6/upper6 assigned worker
 scope is complete and integrated. Keep the residual blockers below fail-closed
 and do not infer terminal, Clay, or external-authority promotion from the
@@ -8283,3 +8330,69 @@ Cleanup
   divergence-free Einstein tensor target.
 - [x] Move the origins/trits/Base369/video lineage into appendix-style context
   after the main claim sections.
+
+## 2026-05-29 Paper 1 Submission-Prep Pass
+
+- [x] Rewrite the abstract and introduction opening so \(P_5'\), not the older
+  Drell-Yan `chi2/dof`, is the lead empirical-contact result.
+- [x] Rewrite Section 11 to record `empiricalContactReached = true`,
+  `p5PrimeBorderlineAnomalyCandidate`, the \(-2.8\sigma/-3.0\sigma\) pulls,
+  `hepdata.167733.v1/t2`, SHA256-bound artifacts, and the `flavio 2.7.0` +
+  BSZ baseline while keeping `acceptedResidualCandidate = false`.
+- [x] Update Section 2 bridges, Section 13 closure frontier, and Section 14
+  receipt index to the current Gate 3/4/5/6/7/NS state.
+- [x] Add the arXiv submission checklist, verify `math-ph` as the primary
+  category, and rebuild the final PDF from the repo root.
+- [x] Prepare a flattened arXiv source archive and verify it compiles from a
+  clean temporary extraction root.
+- [x] Draft Paper 2 GR/geometry as a substantive working draft and companion
+  artifact roadmap.
+- [x] Draft Paper 8 NS/Millennium as a substantive skeleton plus introduction
+  and Section 1 structural-isomorphism framing.
+- [ ] Optional final polish: reduce the one overfull empirical-artifact path
+  and dense-table underfull warnings before external upload.
+
+## 2026-05-29 Paper 8 Completion Pass
+
+- [x] Promote `Docs/Paper8UnificationDraft.md` from skeleton-derived draft to
+  final clean Markdown source of record.
+- [x] State the tower schema as Theorem 2.1 with exact module paths and Agda
+  identifiers for `MillenniumTowerSchemaReceipt` plus the YM, NS, GR, and
+  DHR/SM instance receipts.
+- [x] Add the in-paper "What This Paper Does Not Claim" governance section
+  covering Clay YM, Clay NS, dark energy/LCDM, full SM reconstruction, and
+  completed unification.
+- [x] Add the honest Gate 7 Cabibbo treatment:
+  carrier-natural `g12 = 1`, `|V_us| = 0.041`, PDG-sized target `0.225`,
+  discrepancy factor about `5.5`, and DHR-sector determination of `g12` as an
+  open blocker.
+- [x] Synchronize `Docs/Paper8ReceiptIndex.md`,
+  `Docs/Paper8ClaimGovernanceAudit.md`, and the in-paper receipt index so all
+  cited receipts have module paths and Agda identifiers.
+- [x] Validate Paper 8 source/support docs with marker scans and keep all
+  theorem-level promotions fail-closed.
+- [ ] Create `paper8-draft-candidate` only after the Paper 8 changes are on a
+  commit that the tag can honestly identify.
+
+## 2026-05-29 Manager B Papers 5-7 / Moonshine Bridge Pass
+
+- [x] Add a Closure-level `SupersingularPrimeLaneBridge` receipt with
+  Ogg/Borcherds authority tokens, `DASHIPrimeSetIsP_SS = true`,
+  `primeSetForcedFromFirstPrinciples = false`, `oggOriginalQuestionResolved =
+  false`, and depth-1 field completion for `p2`, `p3`, `p5`, and `p7`.
+- [x] Strengthen the existing Moonshine supersingular-prime bridge with the
+  explicit `p7` unique supersingular curve witness.
+- [x] Import the new Closure bridge receipt into `DASHI/Everything.agda`.
+- [x] Expand Paper 5 from DHR skeleton to substantive draft with Theorem 5.1
+  and explicit non-promotion boundary.
+- [x] Expand Paper 6 from matter/Yukawa/CKM skeleton to substantive draft with
+  alpha diagnostics, Cabibbo target, and physical CKM/Yukawa false flags.
+- [x] Create the standalone Paper 7 terminal-composition draft as a typed
+  obligation ledger, not a completed unification claim.
+- [x] Update Paper 1 Markdown/TeX around Theorem 4.15 so the supersingular
+  prime set is framed as a motivated Ogg/Borcherds design choice rather than a
+  first-principles derivation.
+- [ ] Next paper-series pass: reconcile file names that still contain
+  `Skeleton` after their content has become draft-grade, and decide whether
+  the Closure and Moonshine supersingular-prime bridge receipts should remain
+  separate or be folded into one canonical surface.

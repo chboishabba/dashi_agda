@@ -252,6 +252,17 @@ Irreducible choice: commit the time prime.  The current natural candidate is
 - Group identification `G_DHR ~= SU(3) x SU(2) x U(1)` from the internal
   sector/fusion data plus Gate 1 compatibility.
 
+Current memory update `2026-05-29`: finite p2/p3/p5 prime-lane
+axiom/naturality receipts are inhabited at the bounded carrier level.
+`DHROriginalPaperAuthorityReceipt` records DHR 1971/1974 DOI authority,
+`TannakaKreinFibreFunctorReceipt` records the finite fibre functor
+`p2 -> C^1`, `p3 -> C^2`, `p5 -> C^3`, and
+`ConditionalGDHRSMPromotionReceipt` records the weaker
+`conditionalOnDRAuthority` status.  Full arbitrary-sector DR theorem
+application, compact gauge-group construction, category equivalence to
+`Rep(G)`, concrete `G_DHR -> G_SM`, exact Standard Model matching, and
+unconditional `G_DHR ~= G_SM` remain blocked.
+
 ### Gate 7: Yukawa/CKM Arithmetic (19 internal items + 2 external authority items)
 
 Irreducible computation: determine whether CKM entries are rational or require
@@ -265,6 +276,18 @@ polynomials from the committed Yukawa data.
 - CKM product field closure and `V^dagger V = I_3`.
 - Absolute Higgs/VEV scale and empirical CKM phases remain behind the
   `Authority.W4` boundary unless derived internally.
+
+Current memory update `2026-05-29`: the Gate 7 target surfaces are still
+carrier/diagnostic rather than physical promotion.  `CarrierYukawaRatioTargetReceipt`
+records alpha readback diagnostics `0.041240` and `0.085720` from p2-p3 and
+p3-p5 finite DHR/SM carrier-dimension separations, but accepted alpha,
+supplied alpha bound, and physical-value promotion remain false.  `YukawaFromCarrier` records
+symbolic inter-lane/depth-suppressed off-diagonal carrier entries y12/y13/y23,
+while physical Yukawa matrices and DHR physical sector representations remain
+absent.  `CKMVusCarrierPredictionTargetReceipt` records `|V_us|` with
+comparison datum `0.225`; the current carrier CKM matrix is still identity,
+carrier Vus is zero, and exact PDG match plus physical CKM promotion remain
+false.
 
 ### Gate 8: Composition / Paper7Receipt (8 items)
 
@@ -293,7 +316,7 @@ polynomials from the committed Yukawa data.
 | Authority | Mathematical content | Status |
 |---|---|---|
 | `Authority.ContinuumGR` | BCH/Taylor holonomy-to-curvature smooth-limit control. | Permanent authority boundary. |
-| `Authority.DHR` | Doplicher-Roberts/Tannaka reconstruction theorem. | Permanent authority boundary unless internally formalized. |
+| `Authority.DHR` | Doplicher-Roberts/Tannaka reconstruction theorem. | Original-paper authority and Tannaka target receipts are present; theorem application, compact group construction, `Rep(G)` equivalence, and `G_DHR ~= G_SM` remain blocked unless the full AQFT/DHR hypotheses and exact SM matching are supplied. |
 | `Authority.W4` | Higgs scale in GeV and empirical CKM phase data. | External calibration boundary. |
 | `Authority.Clay` | Continuum Yang-Mills mass gap acceptance on `R^4`. | External community/journal/Clay boundary. |
 

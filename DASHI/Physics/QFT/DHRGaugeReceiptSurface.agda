@@ -1718,6 +1718,15 @@ record DHRDRSymmetricTensorStructureReceipt : Setω where
       ≡
       "symmetry-is-statistics-operator-with-involutive-braid-in-spacetime-dimension-at-least-three"
 
+    finitePrimeLaneNaturalityReceipt :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt
+
+    finiteRowBraidingNaturalityAvailable :
+      Bool
+
+    finiteRowBraidingNaturalityAvailableIsTrue :
+      finiteRowBraidingNaturalityAvailable ≡ true
+
     axiomKind :
       DHRDRInternalAxiomKind
 
@@ -1735,6 +1744,12 @@ record DHRDRSymmetricTensorStructureReceipt : Setω where
 
     lawPromotedIsFalse :
       lawPromoted ≡ false
+
+    arbitrarySectorBraidingNaturalityPromoted :
+      Bool
+
+    arbitrarySectorBraidingNaturalityPromotedIsFalse :
+      arbitrarySectorBraidingNaturalityPromoted ≡ false
 
     residualBlocker :
       DHRDRInternalAxiomResidualBlocker
@@ -1978,6 +1993,21 @@ record DHRDRInternalAxiomReceiptPack : Setω where
 
     endUnitComplexScalarsReceipt :
       DHRDREndUnitComplexScalarsReceipt
+
+    finitePrimeLaneNaturalityReceipt :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt
+
+    finiteRowBraidingNaturalityThreaded :
+      Bool
+
+    finiteRowBraidingNaturalityThreadedIsTrue :
+      finiteRowBraidingNaturalityThreaded ≡ true
+
+    arbitrarySectorBraidingNaturalityPromoted :
+      Bool
+
+    arbitrarySectorBraidingNaturalityPromotedIsFalse :
+      arbitrarySectorBraidingNaturalityPromoted ≡ false
 
     axiomKindOrder :
       List DHRDRInternalAxiomKind
@@ -2488,6 +2518,14 @@ canonicalDHRDRSymmetricTensorStructureReceipt =
         "symmetry-is-statistics-operator-with-involutive-braid-in-spacetime-dimension-at-least-three"
     ; symmetryShape-v =
         refl
+    ; finitePrimeLaneNaturalityReceipt =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteRowBraidingNaturalityAvailable =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailable
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteRowBraidingNaturalityAvailableIsTrue =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailableIsTrue
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
     ; axiomKind =
         symmetricTensorStructureAxiom
     ; axiomKind-v =
@@ -2500,6 +2538,10 @@ canonicalDHRDRSymmetricTensorStructureReceipt =
         false
     ; lawPromotedIsFalse =
         refl
+    ; arbitrarySectorBraidingNaturalityPromoted =
+        false
+    ; arbitrarySectorBraidingNaturalityPromotedIsFalse =
+        refl
     ; residualBlocker =
         residualSymmetricTensorNaturalityAndHexagonLaw
     ; residualBlocker-v =
@@ -2507,7 +2549,8 @@ canonicalDHRDRSymmetricTensorStructureReceipt =
     ; receiptBoundary =
         "Concrete receipt for the internal symmetric tensor structure axiom is inhabited from H1"
         ∷ "It records the tensor-as-composition and statistics-symmetry shapes as typed data"
-        ∷ "Naturality, hexagon, and coherence law inhabitants remain fail-closed"
+        ∷ "Finite p2/p3/p5 row naturality is threaded from the finite prime-lane ledger"
+        ∷ "Arbitrary-sector braiding naturality, hexagon, and coherence law inhabitants remain fail-closed"
         ∷ []
     }
 
@@ -2684,6 +2727,18 @@ canonicalDHRDRInternalAxiomReceiptPack =
         canonicalDHRDRDirectSumsSubobjectsReceipt
     ; endUnitComplexScalarsReceipt =
         canonicalDHRDREndUnitComplexScalarsReceipt
+    ; finitePrimeLaneNaturalityReceipt =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteRowBraidingNaturalityThreaded =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailable
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteRowBraidingNaturalityThreadedIsTrue =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailableIsTrue
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; arbitrarySectorBraidingNaturalityPromoted =
+        false
+    ; arbitrarySectorBraidingNaturalityPromotedIsFalse =
+        refl
     ; axiomKindOrder =
         canonicalDHRDRInternalAxiomKindOrder
     ; axiomKindOrderIsCanonical =
@@ -2703,6 +2758,7 @@ canonicalDHRDRInternalAxiomReceiptPack =
     ; receiptPackBoundary =
         "The five internal DHR/DR-consumption axiom receipts are concrete typed inhabitants"
         ∷ "They cover symmetric tensor structure, star structure, conjugates/duals, direct sums/subobjects, and End(1) ~= C"
+        ∷ "Finite p2/p3/p5 row naturality is now threaded as supporting finite H1 data only"
         ∷ "Each receipt records its remaining blocker; DR reconstruction remains an external theorem-authority application"
         ∷ []
     }
@@ -6429,6 +6485,21 @@ record DHRDoplicherRobertsScopingCorrectionReceipt : Setω where
     h1h5LocalEvidenceTermsSuppliedIsFalse :
       h1h5LocalEvidenceTermsSupplied ≡ true
 
+    finitePrimeLaneNaturalityReceipt :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt
+
+    finiteRowBraidingNaturalityThreaded :
+      Bool
+
+    finiteRowBraidingNaturalityThreadedIsTrue :
+      finiteRowBraidingNaturalityThreaded ≡ true
+
+    arbitrarySectorBraidingNaturalityPromoted :
+      Bool
+
+    arbitrarySectorBraidingNaturalityPromotedIsFalse :
+      arbitrarySectorBraidingNaturalityPromoted ≡ false
+
     drAuthorityConsumableAfterEvidence :
       Bool
 
@@ -6508,6 +6579,18 @@ canonicalDHRDoplicherRobertsScopingCorrectionReceipt =
         true
     ; h1h5LocalEvidenceTermsSuppliedIsFalse =
         refl
+    ; finitePrimeLaneNaturalityReceipt =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteRowBraidingNaturalityThreaded =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailable
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteRowBraidingNaturalityThreadedIsTrue =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailableIsTrue
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; arbitrarySectorBraidingNaturalityPromoted =
+        false
+    ; arbitrarySectorBraidingNaturalityPromotedIsFalse =
+        refl
     ; drAuthorityConsumableAfterEvidence =
         true
     ; drAuthorityConsumableAfterEvidenceIsTrue =
@@ -6539,6 +6622,7 @@ canonicalDHRDoplicherRobertsScopingCorrectionReceipt =
     ; scopingBoundary =
         "Doplicher-Roberts is recorded as cited literature authority, not as a local DASHI reconstruction theorem"
         ∷ "The current H1-H5 package is a target/evidence-surface package: it threads sockets and receipts but does not inhabit the local DHR categorical evidence needed to apply DR"
+        ∷ "Finite p2/p3/p5 row naturality is threaded at this scoping boundary, but arbitrary-sector braiding naturality remains unpromoted"
         ∷ "Local DR consumption still needs DASHI local algebra semantics, arbitrary localized transportable endomorphisms, tensor product/associator laws, conjugates with Frobenius reciprocity, direct sums/subobjects, and braiding naturality plus hexagon coherence"
         ∷ "After those H1-H5 evidence terms exist, the literature DR authority can be consumed conditionally to obtain a reconstruction target"
         ∷ "This receipt does not construct a compact gauge group, identify it with the Standard Model group, construct arbitrary identity actions, or close residualGlobalForeignLaneIdentityRequiresExplicitWitness"
@@ -7096,6 +7180,192 @@ canonicalDHRGate8Term1IdentityDRSMBlockerReceipt =
         ∷ "Standard Model carrier-functor matching remains blocked by blockedByNoGate1Gate6CarrierFunctorEquivalence"
         ∷ "The concrete G_DHR -> SU3 x SU2 x U1 homomorphism, laws, faithfulness, kernel, and quotient decision remain obligations"
         ∷ "No G_DHR ~= G_SM theorem is promoted"
+        ∷ []
+    }
+
+data DHRCategoryDRSMIdentificationResidualBlocker : Set where
+  blockedByMissingLocalDASHIDRCategoryEvidence :
+    DHRCategoryDRSMIdentificationResidualBlocker
+
+  blockedByMissingSymmetricTensorNaturalityAndHexagon :
+    DHRCategoryDRSMIdentificationResidualBlocker
+
+  blockedByUnconsumedDRTheoremAuthority :
+    DHRCategoryDRSMIdentificationResidualBlocker
+
+  blockedByNoConstructedCompactGaugeGroup :
+    DHRCategoryDRSMIdentificationResidualBlocker
+
+  blockedByNoGDHRToStandardModelHomomorphism :
+    DHRCategoryDRSMIdentificationResidualBlocker
+
+  blockedByNoExactSMCarrierFunctorMatch :
+    DHRCategoryDRSMIdentificationResidualBlocker
+
+canonicalDHRCategoryDRSMIdentificationResidualBlockers :
+  List DHRCategoryDRSMIdentificationResidualBlocker
+canonicalDHRCategoryDRSMIdentificationResidualBlockers =
+  blockedByMissingLocalDASHIDRCategoryEvidence
+  ∷ blockedByMissingSymmetricTensorNaturalityAndHexagon
+  ∷ blockedByUnconsumedDRTheoremAuthority
+  ∷ blockedByNoConstructedCompactGaugeGroup
+  ∷ blockedByNoGDHRToStandardModelHomomorphism
+  ∷ blockedByNoExactSMCarrierFunctorMatch
+  ∷ []
+
+record DHRCategoryDRSMIdentificationFailClosedReceipt : Setω where
+  field
+    sectorDecomposition :
+      DHRSector.DHRSectorDecomposition
+
+    categoryPrimitiveSurface :
+      DHRCategoryPrimitiveSurface
+
+    symmetricTensorCategoryTarget :
+      SymmetricTensorCStarCategoryTarget
+
+    drInternalAxiomReceiptPack :
+      DHRDRInternalAxiomReceiptPack
+
+    drScopingCorrection :
+      DHRDoplicherRobertsScopingCorrectionReceipt
+
+    exactSMBlockerReceipt :
+      ExactSM.ExactSMMatchBlockerReceipt
+
+    categoryCarrierAvailable :
+      Bool
+
+    categoryCarrierAvailableIsTrue :
+      categoryCarrierAvailable ≡ true
+
+    drHypothesisReceiptPackAvailable :
+      Bool
+
+    drHypothesisReceiptPackAvailableIsTrue :
+      drHypothesisReceiptPackAvailable ≡ true
+
+    firstLocalDRCategoricalBlocker :
+      DRLocalCategoricalEvidenceBlocker
+
+    firstLocalDRCategoricalBlockerIsDASHILocalAlgebra :
+      firstLocalDRCategoricalBlocker ≡ missingDRDASHILocalAlgebra
+
+    firstInternalDRResidualBlocker :
+      DHRDRInternalAxiomResidualBlocker
+
+    firstInternalDRResidualBlockerIsSymmetricHexagon :
+      firstInternalDRResidualBlocker
+      ≡
+      residualSymmetricTensorNaturalityAndHexagonLaw
+
+    firstExactSMBlocker :
+      ExactSM.ExactSMMatchBlocker
+
+    firstExactSMBlockerMatchesReceipt :
+      firstExactSMBlocker
+      ≡
+      ExactSM.ExactSMMatchBlockerReceipt.firstBlocker
+        exactSMBlockerReceipt
+
+    residualBlockers :
+      List DHRCategoryDRSMIdentificationResidualBlocker
+
+    residualBlockersAreCanonical :
+      residualBlockers
+      ≡
+      canonicalDHRCategoryDRSMIdentificationResidualBlockers
+
+    dhrCategoryLawsPromoted :
+      Bool
+
+    dhrCategoryLawsPromotedIsFalse :
+      dhrCategoryLawsPromoted ≡ false
+
+    drReconstructionConsumed :
+      Bool
+
+    drReconstructionConsumedIsFalse :
+      drReconstructionConsumed ≡ false
+
+    compactGaugeGroupConstructed :
+      Bool
+
+    compactGaugeGroupConstructedIsFalse :
+      compactGaugeGroupConstructed ≡ false
+
+    gDHRStandardModelIdentificationPromoted :
+      Bool
+
+    gDHRStandardModelIdentificationPromotedIsFalse :
+      gDHRStandardModelIdentificationPromoted ≡ false
+
+    categoryDRSMIdentificationBoundary :
+      List String
+
+open DHRCategoryDRSMIdentificationFailClosedReceipt public
+
+canonicalDHRCategoryDRSMIdentificationFailClosedReceipt :
+  DHRCategoryDRSMIdentificationFailClosedReceipt
+canonicalDHRCategoryDRSMIdentificationFailClosedReceipt =
+  record
+    { sectorDecomposition =
+        DHRSector.canonicalDHRSectorDecomposition
+    ; categoryPrimitiveSurface =
+        canonicalDHRCategoryPrimitiveSurface
+    ; symmetricTensorCategoryTarget =
+        canonicalSymmetricTensorCStarCategoryTarget
+    ; drInternalAxiomReceiptPack =
+        canonicalDHRDRInternalAxiomReceiptPack
+    ; drScopingCorrection =
+        canonicalDHRDoplicherRobertsScopingCorrectionReceipt
+    ; exactSMBlockerReceipt =
+        ExactSM.canonicalExactSMMatchBlockerReceipt
+    ; categoryCarrierAvailable =
+        true
+    ; categoryCarrierAvailableIsTrue =
+        refl
+    ; drHypothesisReceiptPackAvailable =
+        true
+    ; drHypothesisReceiptPackAvailableIsTrue =
+        refl
+    ; firstLocalDRCategoricalBlocker =
+        missingDRDASHILocalAlgebra
+    ; firstLocalDRCategoricalBlockerIsDASHILocalAlgebra =
+        refl
+    ; firstInternalDRResidualBlocker =
+        residualSymmetricTensorNaturalityAndHexagonLaw
+    ; firstInternalDRResidualBlockerIsSymmetricHexagon =
+        refl
+    ; firstExactSMBlocker =
+        ExactSM.blockedByNoGate1Gate6CarrierFunctorEquivalence
+    ; firstExactSMBlockerMatchesReceipt =
+        refl
+    ; residualBlockers =
+        canonicalDHRCategoryDRSMIdentificationResidualBlockers
+    ; residualBlockersAreCanonical =
+        refl
+    ; dhrCategoryLawsPromoted =
+        false
+    ; dhrCategoryLawsPromotedIsFalse =
+        refl
+    ; drReconstructionConsumed =
+        false
+    ; drReconstructionConsumedIsFalse =
+        refl
+    ; compactGaugeGroupConstructed =
+        false
+    ; compactGaugeGroupConstructedIsFalse =
+        refl
+    ; gDHRStandardModelIdentificationPromoted =
+        false
+    ; gDHRStandardModelIdentificationPromotedIsFalse =
+        refl
+    ; categoryDRSMIdentificationBoundary =
+        "DHR sector decomposition, category primitives, symmetric tensor target, and DR H1-H5 receipt pack are all threaded as existing carriers"
+        ∷ "The first local DR blocker remains missingDRDASHILocalAlgebra; the first internal DR residual remains symmetric tensor naturality plus hexagon"
+        ∷ "The exact Standard Model blocker is the canonical Gate1/Gate6 carrier-functor equivalence blocker"
+        ∷ "No category law, DR reconstruction, compact gauge group, G_DHR-to-SM homomorphism, or G_DHR ~= G_SM identification is promoted"
         ∷ []
     }
 
@@ -8494,6 +8764,15 @@ record DHRGate6LocalizationTransportabilityAfterLocalAlgebraReceipt : Setω₅ w
         AQFTColim.dASHILocalAlgebraNet
         region
 
+    finitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt :
+      FiniteLedger.FinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt
+
+    finitePrimeLaneCarrierLevelLocalisedEndomorphismConstructed :
+      Bool
+
+    finitePrimeLaneCarrierLevelLocalisedEndomorphismConstructedIsTrue :
+      finitePrimeLaneCarrierLevelLocalisedEndomorphismConstructed ≡ true
+
     identityActionLawTargetForConcreteElement :
       (sector : SuperselectionSector) →
       (region : AQFT.Region) →
@@ -8615,6 +8894,12 @@ canonicalDHRGate6LocalizationTransportabilityAfterLocalAlgebraReceipt =
     ; concreteLocalCarrierMatchesDASHILocalNet =
         DHRU6ConcreteLocalAlgebraIdentityActionAdapterReceipt.dashiLocalQuotientCarrierMatchesDASHILocalNet
           canonicalDHRU6ConcreteLocalAlgebraIdentityActionAdapterReceipt
+    ; finitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt =
+        FiniteLedger.canonicalFinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt
+    ; finitePrimeLaneCarrierLevelLocalisedEndomorphismConstructed =
+        true
+    ; finitePrimeLaneCarrierLevelLocalisedEndomorphismConstructedIsTrue =
+        refl
     ; identityActionLawTargetForConcreteElement =
         DHRU6ConcreteLocalAlgebraIdentityActionAdapterReceipt.identityActionLawTargetForConcreteElement
           canonicalDHRU6ConcreteLocalAlgebraIdentityActionAdapterReceipt
@@ -8675,6 +8960,7 @@ canonicalDHRGate6LocalizationTransportabilityAfterLocalAlgebraReceipt =
     ; localizationTransportabilityBoundary =
         "Gate 6 consumes AQFTColim.dASHILocalAlgebraNet for concrete completed local-algebra element indexing"
         ∷ "The reflexive concrete element law is retained only as a law target over a supplied EndomorphismAction; it does not construct the action"
+        ∷ "The finite p2/p3/p5 carrier-level localised endomorphism lane is inhabited from the already-computed matrix target receipt"
         ∷ "The u6 EndomorphismActionData missing-field audit is threaded into the localization/transportability ledger before tensor/statistics/DR use"
         ∷ "Localisation, transportability, and twist/statistics targets remain fail-closed until a semantic EndomorphismAction on DASHI local algebras is supplied"
         ∷ "Exact remaining laws: action composition, isotony/locality compatibility, transport-intertwiner naturality, and twist/statistics action law"

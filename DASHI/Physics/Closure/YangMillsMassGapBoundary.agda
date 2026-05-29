@@ -237,7 +237,7 @@ canonicalYangMillsMassGapBoundaryReceipt =
         ∷ []
     ; boundaryNotes =
         "The finite-depth mass-gap receipt is reused as the upstream anchor"
-        ∷ "arXiv 2506.00284, Cambridge Engage Agawa, and Zenodo 19423313 are recorded as non-promoting external candidate receipts"
+        ∷ "A withdrawn 5D constructive YM route, Cambridge Engage Agawa, and Zenodo 19423313 are recorded as non-promoting external candidate receipts"
         ∷ "The continuum Clay theorem remains outside this boundary module"
         ∷ "The spectral gap is recorded as the target shape, not a terminal promotion"
         ∷ "Physical Stone generator = Yang-Mills Hamiltonian is recorded only as a target"

@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.PenguinDecayProjectionDefectReceipt as R
+import DASHI.Core.AuthorityBoundary as Authority
 
 ------------------------------------------------------------------------
 -- b -> s mu+ mu- observable contract.
@@ -400,14 +401,19 @@ data HEPDataChecksumAuthorityStatus : Set where
 data PenguinDatasetSourceCandidateName : Set where
   cmsHEPData135675ResultsTable :
     PenguinDatasetSourceCandidateName
-  lhcbPRD105012010CDS2779103 :
+  lhcbBsMuMuCERN5r7hzC7e34 :
     PenguinDatasetSourceCandidateName
+
+lhcbPRD105012010CDS2779103 :
+  PenguinDatasetSourceCandidateName
+lhcbPRD105012010CDS2779103 =
+  lhcbBsMuMuCERN5r7hzC7e34
 
 canonicalPenguinDatasetSourceCandidateNames :
   List PenguinDatasetSourceCandidateName
 canonicalPenguinDatasetSourceCandidateNames =
   cmsHEPData135675ResultsTable
-  ∷ lhcbPRD105012010CDS2779103
+  ∷ lhcbBsMuMuCERN5r7hzC7e34
   ∷ []
 
 datasetSourceLabel :
@@ -415,15 +421,15 @@ datasetSourceLabel :
   String
 datasetSourceLabel cmsHEPData135675ResultsTable =
   "CMS Bs0 -> mu+ mu- HEPData Results table"
-datasetSourceLabel lhcbPRD105012010CDS2779103 =
-  "LHCb Bs0 -> mu+ mu- PRD 105.012010 / CERN-CDS 2779103"
+datasetSourceLabel lhcbBsMuMuCERN5r7hzC7e34 =
+  "LHCb Bs0 -> mu+ mu- citation authority / CERN record 5r7hz-c7e34"
 
 datasetSourceCollaboration :
   PenguinDatasetSourceCandidateName →
   String
 datasetSourceCollaboration cmsHEPData135675ResultsTable =
   "CMS"
-datasetSourceCollaboration lhcbPRD105012010CDS2779103 =
+datasetSourceCollaboration lhcbBsMuMuCERN5r7hzC7e34 =
   "LHCb"
 
 datasetSourceCitation :
@@ -431,31 +437,47 @@ datasetSourceCitation :
   String
 datasetSourceCitation cmsHEPData135675ResultsTable =
   "10.17182/hepdata.135675"
-datasetSourceCitation lhcbPRD105012010CDS2779103 =
-  "10.1103/PhysRevD.105.012010; CERN-CDS:2779103"
+datasetSourceCitation lhcbBsMuMuCERN5r7hzC7e34 =
+  "arXiv:2108.09283; CERN-EP-2021-133; Phys.Rev.D 104 (2021) L091102"
 
 datasetSourceRecordIdentifier :
   PenguinDatasetSourceCandidateName →
   String
 datasetSourceRecordIdentifier cmsHEPData135675ResultsTable =
   "HEPData:ins2616304"
-datasetSourceRecordIdentifier lhcbPRD105012010CDS2779103 =
-  "CERN-CDS:2779103"
+datasetSourceRecordIdentifier lhcbBsMuMuCERN5r7hzC7e34 =
+  "repository.cern/records/5r7hz-c7e34"
 
 datasetSourceTableIdentifier :
   PenguinDatasetSourceCandidateName →
   String
 datasetSourceTableIdentifier cmsHEPData135675ResultsTable =
   "Results"
-datasetSourceTableIdentifier lhcbPRD105012010CDS2779103 =
-  "required: exact LHCb HEPData table identifier or authoritative no-HEPData-table attestation"
+datasetSourceTableIdentifier lhcbBsMuMuCERN5r7hzC7e34 =
+  "none: HEPData deposited=false; no machine-readable table"
 
 datasetSourceDirectTableAvailable :
   PenguinDatasetSourceCandidateName →
   Bool
 datasetSourceDirectTableAvailable cmsHEPData135675ResultsTable =
   true
-datasetSourceDirectTableAvailable lhcbPRD105012010CDS2779103 =
+datasetSourceDirectTableAvailable lhcbBsMuMuCERN5r7hzC7e34 =
+  false
+
+datasetSourceNoMachineReadableTable :
+  PenguinDatasetSourceCandidateName →
+  Bool
+datasetSourceNoMachineReadableTable cmsHEPData135675ResultsTable =
+  false
+datasetSourceNoMachineReadableTable lhcbBsMuMuCERN5r7hzC7e34 =
+  true
+
+datasetSourceArtifactAuthority :
+  PenguinDatasetSourceCandidateName →
+  Bool
+datasetSourceArtifactAuthority cmsHEPData135675ResultsTable =
+  true
+datasetSourceArtifactAuthority lhcbBsMuMuCERN5r7hzC7e34 =
   false
 
 datasetSourceExactChecksumBound :
@@ -463,11 +485,13 @@ datasetSourceExactChecksumBound :
   Bool
 datasetSourceExactChecksumBound cmsHEPData135675ResultsTable =
   true
-datasetSourceExactChecksumBound lhcbPRD105012010CDS2779103 =
+datasetSourceExactChecksumBound lhcbBsMuMuCERN5r7hzC7e34 =
   false
 
 data DatasetSourceDiscriminatorOutcome : Set where
   cmsChecksumAuthorityPopulatedNotThreadSelected :
+    DatasetSourceDiscriminatorOutcome
+  lhcbCitationAuthorityClosedNoHEPDataArtifact :
     DatasetSourceDiscriminatorOutcome
   lhcbChecksumMissingFailClosed :
     DatasetSourceDiscriminatorOutcome
@@ -477,8 +501,8 @@ datasetSourceDiscriminatorOutcome :
   DatasetSourceDiscriminatorOutcome
 datasetSourceDiscriminatorOutcome cmsHEPData135675ResultsTable =
   cmsChecksumAuthorityPopulatedNotThreadSelected
-datasetSourceDiscriminatorOutcome lhcbPRD105012010CDS2779103 =
-  lhcbChecksumMissingFailClosed
+datasetSourceDiscriminatorOutcome lhcbBsMuMuCERN5r7hzC7e34 =
+  lhcbCitationAuthorityClosedNoHEPDataArtifact
 
 record PenguinDatasetSourceCandidate : Set where
   constructor mkPenguinDatasetSourceCandidate
@@ -532,6 +556,36 @@ record PenguinDatasetSourceCandidate : Set where
       ≡
       datasetSourceExactChecksumBound candidateName
 
+    authorityKind :
+      Authority.AuthorityKind
+
+    citationAuthority :
+      Authority.CitationAuthorityBoundary
+
+    artifactAuthority :
+      Bool
+
+    artifactAuthorityMatches :
+      artifactAuthority
+      ≡
+      datasetSourceArtifactAuthority candidateName
+
+    hepDataDeposited :
+      Bool
+
+    hepDataDepositedMatchesDirectTable :
+      hepDataDeposited
+      ≡
+      datasetSourceDirectTableAvailable candidateName
+
+    noMachineReadableTable :
+      Bool
+
+    noMachineReadableTableMatches :
+      noMachineReadableTable
+      ≡
+      datasetSourceNoMachineReadableTable candidateName
+
     discriminatorOutcome :
       DatasetSourceDiscriminatorOutcome
 
@@ -561,36 +615,92 @@ cmsHEPData135675ResultsCandidate =
     refl
     true
     refl
+    Authority.CitationAuthority
+    (Authority.mkAuthorityBoundary
+      Authority.CitationAuthority
+      refl
+      "10.17182/hepdata.135675"
+      "CMS Bs0 -> mu+ mu- HEPData Results table"
+      true
+      true
+      true
+      ("HEPData artifact authority is available for the CMS comparison candidate"
+       ∷ []))
+    true
+    refl
+    true
+    refl
+    false
+    refl
     cmsChecksumAuthorityPopulatedNotThreadSelected
+    refl
+
+lhcbBsMuMuCERN5r7hzC7e34CitationAuthority :
+  Authority.CitationAuthorityBoundary
+lhcbBsMuMuCERN5r7hzC7e34CitationAuthority =
+  Authority.mkAuthorityBoundary
+    Authority.CitationAuthority
+    refl
+    "repository.cern/records/5r7hz-c7e34"
+    "arXiv:2108.09283; CERN-EP-2021-133; Phys.Rev.D 104 (2021) L091102"
+    true
+    false
+    false
+    ( "CERN record closes the LHCb Bs->mumu source slot as CitationAuthority"
+      ∷ "HEPData deposited=false"
+      ∷ "artifactAuthority=false; no machine-readable table"
+      ∷ "No fabricated SHA or table checksum is supplied"
+      ∷ [] )
+
+lhcbBsMuMuCERN5r7hzC7e34NoArtifactAuthority :
+  Authority.CitationAuthorityNoArtifact
+lhcbBsMuMuCERN5r7hzC7e34NoArtifactAuthority =
+  Authority.mkCitationAuthorityNoArtifact
+    lhcbBsMuMuCERN5r7hzC7e34CitationAuthority
+    refl
+    refl
+    refl
+
+lhcbBsMuMuCERN5r7hzC7e34Candidate :
+  PenguinDatasetSourceCandidate
+lhcbBsMuMuCERN5r7hzC7e34Candidate =
+  mkPenguinDatasetSourceCandidate
+    lhcbBsMuMuCERN5r7hzC7e34
+    "LHCb Bs0 -> mu+ mu- citation authority / CERN record 5r7hz-c7e34"
+    refl
+    "LHCb"
+    refl
+    "arXiv:2108.09283; CERN-EP-2021-133; Phys.Rev.D 104 (2021) L091102"
+    refl
+    "repository.cern/records/5r7hz-c7e34"
+    refl
+    "none: HEPData deposited=false; no machine-readable table"
+    refl
+    false
+    refl
+    false
+    refl
+    Authority.CitationAuthority
+    lhcbBsMuMuCERN5r7hzC7e34CitationAuthority
+    false
+    refl
+    false
+    refl
+    true
+    refl
+    lhcbCitationAuthorityClosedNoHEPDataArtifact
     refl
 
 lhcbPRD105012010CDS2779103Candidate :
   PenguinDatasetSourceCandidate
 lhcbPRD105012010CDS2779103Candidate =
-  mkPenguinDatasetSourceCandidate
-    lhcbPRD105012010CDS2779103
-    "LHCb Bs0 -> mu+ mu- PRD 105.012010 / CERN-CDS 2779103"
-    refl
-    "LHCb"
-    refl
-    "10.1103/PhysRevD.105.012010; CERN-CDS:2779103"
-    refl
-    "CERN-CDS:2779103"
-    refl
-    "required: exact LHCb HEPData table identifier or authoritative no-HEPData-table attestation"
-    refl
-    false
-    refl
-    false
-    refl
-    lhcbChecksumMissingFailClosed
-    refl
+  lhcbBsMuMuCERN5r7hzC7e34Candidate
 
 canonicalPenguinDatasetSourceCandidates :
   List PenguinDatasetSourceCandidate
 canonicalPenguinDatasetSourceCandidates =
   cmsHEPData135675ResultsCandidate
-  ∷ lhcbPRD105012010CDS2779103Candidate
+  ∷ lhcbBsMuMuCERN5r7hzC7e34Candidate
   ∷ []
 
 record CMSTableArtifactChecksumCandidate : Set where
@@ -611,6 +721,12 @@ record CMSTableArtifactChecksumCandidate : Set where
       sha256
       ≡
       "08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb"
+
+    sha256Verified :
+      Bool
+
+    sha256VerifiedIsTrue :
+      sha256Verified ≡ true
 
     hepDataRecord :
       String
@@ -666,6 +782,8 @@ canonicalCMSTableArtifactChecksumCandidate =
     refl
     "08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb"
     refl
+    true
+    refl
     "HEPData:ins2616304:v1"
     refl
     "10.17182/hepdata.135675.v1/t1"
@@ -700,13 +818,13 @@ record PenguinDatasetSourceDiscriminator : Set where
       PenguinDatasetSourceCandidate
 
     lhcbCandidateIsCanonical :
-      lhcbCandidate ≡ lhcbPRD105012010CDS2779103Candidate
+      lhcbCandidate ≡ lhcbBsMuMuCERN5r7hzC7e34Candidate
 
     selectedThreadCandidate :
       PenguinDatasetSourceCandidateName
 
     selectedThreadCandidateIsLHCb :
-      selectedThreadCandidate ≡ lhcbPRD105012010CDS2779103
+      selectedThreadCandidate ≡ lhcbBsMuMuCERN5r7hzC7e34
 
     cmsTableArtifactChecksumCandidate :
       CMSTableArtifactChecksumCandidate
@@ -737,8 +855,8 @@ record PenguinDatasetSourceDiscriminator : Set where
     lhcbCandidateOutcome :
       DatasetSourceDiscriminatorOutcome
 
-    lhcbCandidateOutcomeIsChecksumMissingFailClosed :
-      lhcbCandidateOutcome ≡ lhcbChecksumMissingFailClosed
+    lhcbCandidateOutcomeIsCitationAuthorityClosed :
+      lhcbCandidateOutcome ≡ lhcbCitationAuthorityClosedNoHEPDataArtifact
 
     exactChecksumAcceptedHere :
       Bool
@@ -752,7 +870,7 @@ record PenguinDatasetSourceDiscriminator : Set where
     currentDiagnosticIsCanonical :
       currentDiagnostic
       ≡
-      "CMS HEPData DOI 10.17182/hepdata.135675.v1/t1 record ins2616304 v1 table 1435213 Results is checksum-populated by sha256 08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb; the thread-selected LHCb DOI 10.1103/PhysRevD.105.012010 / CDS 2779103 checksum is not bound, so the selected dataset lane fails closed"
+      "CMS HEPData DOI 10.17182/hepdata.135675.v1/t1 record ins2616304 v1 table 1435213 Results is checksum-populated; the thread-selected LHCb CERN record repository.cern/records/5r7hz-c7e34 is closed only as CitationAuthority with HEPData deposited=false, artifactAuthority=false, and no machine-readable table"
 
 open PenguinDatasetSourceDiscriminator public
 
@@ -764,9 +882,9 @@ canonicalPenguinDatasetSourceDiscriminator =
     refl
     cmsHEPData135675ResultsCandidate
     refl
-    lhcbPRD105012010CDS2779103Candidate
+    lhcbBsMuMuCERN5r7hzC7e34Candidate
     refl
-    lhcbPRD105012010CDS2779103
+    lhcbBsMuMuCERN5r7hzC7e34
     refl
     canonicalCMSTableArtifactChecksumCandidate
     refl
@@ -776,30 +894,30 @@ canonicalPenguinDatasetSourceDiscriminator =
     refl
     cmsChecksumAuthorityPopulatedNotThreadSelected
     refl
-    lhcbChecksumMissingFailClosed
+    lhcbCitationAuthorityClosedNoHEPDataArtifact
     refl
     false
     refl
-    "CMS HEPData DOI 10.17182/hepdata.135675.v1/t1 record ins2616304 v1 table 1435213 Results is checksum-populated by sha256 08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb; the thread-selected LHCb DOI 10.1103/PhysRevD.105.012010 / CDS 2779103 checksum is not bound, so the selected dataset lane fails closed"
+    "CMS HEPData DOI 10.17182/hepdata.135675.v1/t1 record ins2616304 v1 table 1435213 Results is checksum-populated; the thread-selected LHCb CERN record repository.cern/records/5r7hz-c7e34 is closed only as CitationAuthority with HEPData deposited=false, artifactAuthority=false, and no machine-readable table"
     refl
 
 data HEPDataTableChecksumMissingAuthority : Set where
-  missingHEPDataPublicationRecordIdentifier :
+  hepDataDepositedFalse :
     HEPDataTableChecksumMissingAuthority
-  missingHEPDataValueTableIdentifier :
+  noHEPDataValueTable :
     HEPDataTableChecksumMissingAuthority
-  missingHEPDataPayloadFileName :
+  noHEPDataPayloadFileName :
     HEPDataTableChecksumMissingAuthority
-  missingHEPDataPayloadSHA256 :
+  noHEPDataPayloadSHA256 :
     HEPDataTableChecksumMissingAuthority
 
 canonicalHEPDataTableChecksumMissingAuthorities :
   List HEPDataTableChecksumMissingAuthority
 canonicalHEPDataTableChecksumMissingAuthorities =
-  missingHEPDataPublicationRecordIdentifier
-  ∷ missingHEPDataValueTableIdentifier
-  ∷ missingHEPDataPayloadFileName
-  ∷ missingHEPDataPayloadSHA256
+  hepDataDepositedFalse
+  ∷ noHEPDataValueTable
+  ∷ noHEPDataPayloadFileName
+  ∷ noHEPDataPayloadSHA256
   ∷ []
 
 record HEPDataTableChecksumSlot : Set where
@@ -811,7 +929,7 @@ record HEPDataTableChecksumSlot : Set where
     recordIdentifierSlotIsRequired :
       recordIdentifierSlot
       ≡
-      "required: HEPData publication record identifier for DOI 10.1103/PhysRevD.105.012010"
+      "citation authority: repository.cern/records/5r7hz-c7e34"
 
     valueTableIdentifierSlot :
       String
@@ -819,7 +937,7 @@ record HEPDataTableChecksumSlot : Set where
     valueTableIdentifierSlotIsRequired :
       valueTableIdentifierSlot
       ≡
-      "required: exact HEPData value table identifier for B(Bs0 -> mu+ mu-)"
+      "none: HEPData deposited=false; no machine-readable value table"
 
     payloadFileNameSlot :
       String
@@ -827,7 +945,7 @@ record HEPDataTableChecksumSlot : Set where
     payloadFileNameSlotIsRequired :
       payloadFileNameSlot
       ≡
-      "required: exact HEPData payload file name for selected value table"
+      "none: no HEPData payload file exists for this citation authority slot"
 
     payloadSHA256Slot :
       String
@@ -835,7 +953,7 @@ record HEPDataTableChecksumSlot : Set where
     payloadSHA256SlotIsRequired :
       payloadSHA256Slot
       ≡
-      "required: sha256 digest of exact selected HEPData payload file"
+      "none: no fabricated SHA; artifactAuthority=false"
 
     missingAuthorities :
       List HEPDataTableChecksumMissingAuthority
@@ -851,13 +969,13 @@ canonicalLHCbBs0MuMuHEPDataTableChecksumSlot :
   HEPDataTableChecksumSlot
 canonicalLHCbBs0MuMuHEPDataTableChecksumSlot =
   mkHEPDataTableChecksumSlot
-    "required: HEPData publication record identifier for DOI 10.1103/PhysRevD.105.012010"
+    "citation authority: repository.cern/records/5r7hz-c7e34"
     refl
-    "required: exact HEPData value table identifier for B(Bs0 -> mu+ mu-)"
+    "none: HEPData deposited=false; no machine-readable value table"
     refl
-    "required: exact HEPData payload file name for selected value table"
+    "none: no HEPData payload file exists for this citation authority slot"
     refl
-    "required: sha256 digest of exact selected HEPData payload file"
+    "none: no fabricated SHA; artifactAuthority=false"
     refl
     canonicalHEPDataTableChecksumMissingAuthorities
     refl
@@ -881,13 +999,37 @@ record HEPDataTableBinding : Set where
       String
 
     sourceCDSRecordIdentifierIsCanonical :
-      sourceCDSRecordIdentifier ≡ "CERN-CDS:2779103"
+      sourceCDSRecordIdentifier ≡ "repository.cern/records/5r7hz-c7e34"
 
     sourceJournalDOI :
       String
 
     sourceJournalDOIIsCanonical :
-      sourceJournalDOI ≡ "10.1103/PhysRevD.105.012010"
+      sourceJournalDOI ≡ "Phys.Rev.D 104 (2021) L091102"
+
+    citationAuthority :
+      Authority.CitationAuthorityBoundary
+
+    citationAuthorityNoArtifact :
+      Authority.CitationAuthorityNoArtifact
+
+    hepDataDeposited :
+      Bool
+
+    hepDataDepositedIsFalse :
+      hepDataDeposited ≡ false
+
+    artifactAuthority :
+      Bool
+
+    artifactAuthorityIsFalse :
+      artifactAuthority ≡ false
+
+    machineReadableTablePresent :
+      Bool
+
+    machineReadableTablePresentIsFalse :
+      machineReadableTablePresent ≡ false
 
     hepDataRecordIdentifierObligation :
       String
@@ -895,7 +1037,7 @@ record HEPDataTableBinding : Set where
     hepDataRecordIdentifierObligationIsCanonical :
       hepDataRecordIdentifierObligation
       ≡
-      "bind the HEPData publication record identifier for DOI 10.1103/PhysRevD.105.012010, or bind an authoritative no-HEPData-record attestation"
+      "closed by CitationAuthority repository.cern/records/5r7hz-c7e34; HEPData deposited=false"
 
     hepDataTableIdentifierObligation :
       String
@@ -903,7 +1045,7 @@ record HEPDataTableBinding : Set where
     hepDataTableIdentifierObligationIsCanonical :
       hepDataTableIdentifierObligation
       ≡
-      "bind the exact HEPData table identifier containing B(Bs0 -> mu+ mu-)"
+      "none: no machine-readable HEPData table is deposited for this citation slot"
 
     hepDataPayloadFileObligation :
       String
@@ -911,7 +1053,7 @@ record HEPDataTableBinding : Set where
     hepDataPayloadFileObligationIsCanonical :
       hepDataPayloadFileObligation
       ≡
-      "bind the exact HEPData payload file name for the selected branching-fraction table"
+      "none: no HEPData payload file is available from the citation authority"
 
     hepDataPayloadChecksumObligation :
       String
@@ -919,7 +1061,7 @@ record HEPDataTableBinding : Set where
     hepDataPayloadChecksumObligationIsCanonical :
       hepDataPayloadChecksumObligation
       ≡
-      "bind an authority-supplied checksum or digest for the exact selected HEPData payload file"
+      "none: no fabricated SHA; artifactAuthority=false"
 
     checksumAuthorityStatus :
       HEPDataChecksumAuthorityStatus
@@ -957,17 +1099,25 @@ canonicalLHCbBs0MuMuHEPDataTableBinding =
     refl
     "LHCb"
     refl
-    "CERN-CDS:2779103"
+    "repository.cern/records/5r7hz-c7e34"
     refl
-    "10.1103/PhysRevD.105.012010"
+    "Phys.Rev.D 104 (2021) L091102"
     refl
-    "bind the HEPData publication record identifier for DOI 10.1103/PhysRevD.105.012010, or bind an authoritative no-HEPData-record attestation"
+    lhcbBsMuMuCERN5r7hzC7e34CitationAuthority
+    lhcbBsMuMuCERN5r7hzC7e34NoArtifactAuthority
+    false
     refl
-    "bind the exact HEPData table identifier containing B(Bs0 -> mu+ mu-)"
+    false
     refl
-    "bind the exact HEPData payload file name for the selected branching-fraction table"
+    false
     refl
-    "bind an authority-supplied checksum or digest for the exact selected HEPData payload file"
+    "closed by CitationAuthority repository.cern/records/5r7hz-c7e34; HEPData deposited=false"
+    refl
+    "none: no machine-readable HEPData table is deposited for this citation slot"
+    refl
+    "none: no HEPData payload file is available from the citation authority"
+    refl
+    "none: no fabricated SHA; artifactAuthority=false"
     refl
     checksumAuthorityMissingFailClosed
     refl
@@ -1026,13 +1176,37 @@ record DatasetAuthorityBinding : Set where
       String
 
     cernCDSRecordIdentifierIsCanonical :
-      cernCDSRecordIdentifier ≡ "CERN-CDS:2779103"
+      cernCDSRecordIdentifier ≡ "repository.cern/records/5r7hz-c7e34"
 
     journalDOI :
       String
 
     journalDOIIsCanonical :
-      journalDOI ≡ "10.1103/PhysRevD.105.012010"
+      journalDOI ≡ "Phys.Rev.D 104 (2021) L091102"
+
+    citationAuthority :
+      Authority.CitationAuthorityBoundary
+
+    citationAuthorityNoArtifact :
+      Authority.CitationAuthorityNoArtifact
+
+    citationAuthorityAccepted :
+      Bool
+
+    citationAuthorityAcceptedIsTrue :
+      citationAuthorityAccepted ≡ true
+
+    artifactAuthority :
+      Bool
+
+    artifactAuthorityIsFalse :
+      artifactAuthority ≡ false
+
+    hepDataDeposited :
+      Bool
+
+    hepDataDepositedIsFalse :
+      hepDataDeposited ≡ false
 
     hepDataRecordObligation :
       String
@@ -1065,13 +1239,21 @@ canonicalLHCbBs0MuMuDatasetAuthorityBinding =
     refl
     "LHCb"
     refl
-    "CERN-CDS:2779103"
+    "repository.cern/records/5r7hz-c7e34"
     refl
-    "10.1103/PhysRevD.105.012010"
+    "Phys.Rev.D 104 (2021) L091102"
     refl
-    "HEPData-style public record or explicit no-HEPData-record attestation must be bound before projection"
-    "branching-fraction table/row for B(Bs0 -> mu+ mu-) must be bound before projection"
-    "checksum or digest for the cited table payload must be bound before projection"
+    lhcbBsMuMuCERN5r7hzC7e34CitationAuthority
+    lhcbBsMuMuCERN5r7hzC7e34NoArtifactAuthority
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    "CitationAuthority closes source identification via repository.cern/records/5r7hz-c7e34"
+    "artifactAuthority=false; no HEPData machine-readable table is available"
+    "no fabricated SHA or table checksum is supplied for the LHCb citation slot"
     canonicalLHCbBs0MuMuHEPDataTableBinding
     refl
     false

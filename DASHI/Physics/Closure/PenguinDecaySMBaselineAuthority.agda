@@ -33,17 +33,23 @@ data TargetLeptonPair : Set where
 data SMBaselineComparisonTarget : Set where
   bToSMuPlusMuMinus :
     SMBaselineComparisonTarget
+  bZeroToKStarMuPlusMuMinusP5Prime :
+    SMBaselineComparisonTarget
 
 targetDecay :
   SMBaselineComparisonTarget →
   Penguin.RarePenguinDecay
 targetDecay bToSMuPlusMuMinus =
   Penguin.bToSLeptonPair
+targetDecay bZeroToKStarMuPlusMuMinusP5Prime =
+  Penguin.bToSLeptonPair
 
 targetLeptonPair :
   SMBaselineComparisonTarget →
   TargetLeptonPair
 targetLeptonPair bToSMuPlusMuMinus =
+  muPlusMuMinus
+targetLeptonPair bZeroToKStarMuPlusMuMinusP5Prime =
   muPlusMuMinus
 
 data SMBaselineAuthorityField : Set where
@@ -151,6 +157,347 @@ canonicalSMBaselineProviderPayloadFields =
   ∷ responseStatus
   ∷ []
 
+data P5PrimeSMBaselineAuthorityStatus : Set where
+  p5PrimeFlavioBaselineBoundFailClosed :
+    P5PrimeSMBaselineAuthorityStatus
+
+data P5PrimeQ2Bin : Set where
+  q2Bin4To6 :
+    P5PrimeQ2Bin
+  q2Bin6To8 :
+    P5PrimeQ2Bin
+
+canonicalP5PrimeQ2Bins :
+  List P5PrimeQ2Bin
+canonicalP5PrimeQ2Bins =
+  q2Bin4To6
+  ∷ q2Bin6To8
+  ∷ []
+
+data P5PrimeAuthorityBinding : Set where
+  flavio270RuntimeAuthority :
+    P5PrimeAuthorityBinding
+  c9SMC10SMWilsonCoefficientAuthority :
+    P5PrimeAuthorityBinding
+  bsz2015FormFactorAuthority :
+    P5PrimeAuthorityBinding
+  perBinTheoryUncertaintyAuthority :
+    P5PrimeAuthorityBinding
+  qcdfNonlocalCharmEstimateAuthority :
+    P5PrimeAuthorityBinding
+  noPosteriorTuningAttestationAuthority :
+    P5PrimeAuthorityBinding
+
+canonicalP5PrimeAuthorityBindings :
+  List P5PrimeAuthorityBinding
+canonicalP5PrimeAuthorityBindings =
+  flavio270RuntimeAuthority
+  ∷ c9SMC10SMWilsonCoefficientAuthority
+  ∷ bsz2015FormFactorAuthority
+  ∷ perBinTheoryUncertaintyAuthority
+  ∷ qcdfNonlocalCharmEstimateAuthority
+  ∷ noPosteriorTuningAttestationAuthority
+  ∷ []
+
+data P5PrimeAuthorityIncompleteFlag : Set where
+  noAcceptedC9C10AuthorityToken :
+    P5PrimeAuthorityIncompleteFlag
+  noIndependentEOSCrossCheckBound :
+    P5PrimeAuthorityIncompleteFlag
+  qcdfAboveSixGeVSquaredWarning :
+    P5PrimeAuthorityIncompleteFlag
+  noAcceptedP5PrimeResidualVector :
+    P5PrimeAuthorityIncompleteFlag
+  noAcceptedP5PrimeCovarianceMatrix :
+    P5PrimeAuthorityIncompleteFlag
+
+canonicalP5PrimeAuthorityIncompleteFlags :
+  List P5PrimeAuthorityIncompleteFlag
+canonicalP5PrimeAuthorityIncompleteFlags =
+  noAcceptedC9C10AuthorityToken
+  ∷ noIndependentEOSCrossCheckBound
+  ∷ qcdfAboveSixGeVSquaredWarning
+  ∷ noAcceptedP5PrimeResidualVector
+  ∷ noAcceptedP5PrimeCovarianceMatrix
+  ∷ []
+
+record P5PrimeBinTheoryAuthority : Set where
+  constructor mkP5PrimeBinTheoryAuthority
+  field
+    q2Bin :
+      P5PrimeQ2Bin
+
+    q2RangeGeVSquared :
+      String
+
+    flavioObservableKey :
+      String
+
+    centralValue :
+      String
+
+    oneSigmaTheoryUncertainty :
+      String
+
+    uncertaintySource :
+      String
+
+open P5PrimeBinTheoryAuthority public
+
+p5Prime4To6TheoryAuthority :
+  P5PrimeBinTheoryAuthority
+p5Prime4To6TheoryAuthority =
+  mkP5PrimeBinTheoryAuthority
+    q2Bin4To6
+    "[4,6] GeV^2"
+    "<P5p>(B0->K*mumu)"
+    "-0.7583138786902011"
+    "0.07524646089051247"
+    "flavio.sm_uncertainty('<P5p>(B0->K*mumu)', 4, 6)"
+
+p5Prime6To8TheoryAuthority :
+  P5PrimeBinTheoryAuthority
+p5Prime6To8TheoryAuthority =
+  mkP5PrimeBinTheoryAuthority
+    q2Bin6To8
+    "[6,8] GeV^2"
+    "<P5p>(B0->K*mumu)"
+    "-0.8342430145843444"
+    "0.06092804199708315"
+    "flavio.sm_uncertainty('<P5p>(B0->K*mumu)', 6, 8)"
+
+canonicalP5PrimeBinTheoryAuthorities :
+  List P5PrimeBinTheoryAuthority
+canonicalP5PrimeBinTheoryAuthorities =
+  p5Prime4To6TheoryAuthority
+  ∷ p5Prime6To8TheoryAuthority
+  ∷ []
+
+record P5PrimeSMBaselineAuthorityChain : Set where
+  field
+    p5PrimeBaselineStatus :
+      P5PrimeSMBaselineAuthorityStatus
+
+    p5PrimeBaselineTarget :
+      SMBaselineComparisonTarget
+
+    targetIsP5Prime :
+      p5PrimeBaselineTarget ≡ bZeroToKStarMuPlusMuMinusP5Prime
+
+    p5PrimeTargetProcessText :
+      String
+
+    p5PrimeTargetProcessTextIsCanonical :
+      p5PrimeTargetProcessText ≡ "B0 -> K*0 mu+ mu- P5'"
+
+    p5PrimeFlavioProviderName :
+      String
+
+    p5PrimeFlavioProviderNameIsCanonical :
+      p5PrimeFlavioProviderName ≡ "flavio"
+
+    flavioProviderVersion :
+      String
+
+    flavioProviderVersionIsCanonical :
+      flavioProviderVersion ≡ "2.7.0"
+
+    flavioWheelSHA256 :
+      String
+
+    flavioWheelSHA256IsCanonical :
+      flavioWheelSHA256
+      ≡
+      "3d5aaeb5a9df7c479949e4641ccbd2dc662cb010aabf9dda5f725a8a80813b4f"
+
+    flavioSdistSHA256 :
+      String
+
+    flavioSdistSHA256IsCanonical :
+      flavioSdistSHA256
+      ≡
+      "08c9c9608ae2ee76d4097b5836e7ca2479f59f9478d0fdddb2cf01b7da4e796e"
+
+    wilsonPackageVersion :
+      String
+
+    wilsonPackageVersionIsCanonical :
+      wilsonPackageVersion ≡ "2.5.2"
+
+    wilsonPackageWheelSHA256 :
+      String
+
+    wilsonPackageWheelSHA256IsCanonical :
+      wilsonPackageWheelSHA256
+      ≡
+      "959e3dbd6bfefb43b3769fe07e2d8e59c153abe6796851fb91c4d18b7981799a"
+
+    c9SMKey :
+      String
+
+    c9SMKeyIsCanonical :
+      c9SMKey ≡ "C9_bsll"
+
+    c10SMKey :
+      String
+
+    c10SMKeyIsCanonical :
+      c10SMKey ≡ "C10_bsll"
+
+    p5PrimeFormFactorSourceText :
+      String
+
+    p5PrimeFormFactorSourceTextIsBSZ :
+      p5PrimeFormFactorSourceText
+      ≡
+      "Bharucha-Straub-Zwicky B -> V l+l- LCSR form factors"
+
+    formFactorDOI :
+      String
+
+    formFactorDOIIsBSZ :
+      formFactorDOI ≡ "10.1007/JHEP08(2016)098"
+
+    formFactorArXiv :
+      String
+
+    formFactorArXivIsCanonical :
+      formFactorArXiv ≡ "arXiv:1503.05534"
+
+    q2Bins :
+      List P5PrimeQ2Bin
+
+    q2BinsAreCanonical :
+      q2Bins ≡ canonicalP5PrimeQ2Bins
+
+    binTheoryAuthorities :
+      List P5PrimeBinTheoryAuthority
+
+    binTheoryAuthoritiesAreCanonical :
+      binTheoryAuthorities ≡ canonicalP5PrimeBinTheoryAuthorities
+
+    p5PrimeCharmingPenguinEstimate :
+      String
+
+    p5PrimeCharmingPenguinEstimateIsCanonical :
+      p5PrimeCharmingPenguinEstimate
+      ≡
+      "flavio bvll QCDF/nonlocal-charm interpolation; qcdf_interpolate.py sha256 df2748de08a59a55f6584bf128b65c3a8ce62dcfa0baffc81b1e4c94997304f6; runtime warns QCDF corrections should not be trusted for q2 above 6 GeV^2"
+
+    authorityBindings :
+      List P5PrimeAuthorityBinding
+
+    authorityBindingsAreCanonical :
+      authorityBindings ≡ canonicalP5PrimeAuthorityBindings
+
+    incompleteFlags :
+      List P5PrimeAuthorityIncompleteFlag
+
+    incompleteFlagsAreCanonical :
+      incompleteFlags ≡ canonicalP5PrimeAuthorityIncompleteFlags
+
+    separatedFromBsToMuMuBaseline :
+      Bool
+
+    separatedFromBsToMuMuBaselineIsTrue :
+      separatedFromBsToMuMuBaseline ≡ true
+
+    p5PrimeAcceptedAuthorityTokenConstructedHere :
+      Bool
+
+    p5PrimeAcceptedAuthorityTokenConstructedHereIsFalse :
+      p5PrimeAcceptedAuthorityTokenConstructedHere ≡ false
+
+open P5PrimeSMBaselineAuthorityChain public
+
+canonicalP5PrimeSMBaselineAuthorityChain :
+  P5PrimeSMBaselineAuthorityChain
+canonicalP5PrimeSMBaselineAuthorityChain =
+  record
+    { p5PrimeBaselineStatus =
+        p5PrimeFlavioBaselineBoundFailClosed
+    ; p5PrimeBaselineTarget =
+        bZeroToKStarMuPlusMuMinusP5Prime
+    ; targetIsP5Prime =
+        refl
+    ; p5PrimeTargetProcessText =
+        "B0 -> K*0 mu+ mu- P5'"
+    ; p5PrimeTargetProcessTextIsCanonical =
+        refl
+    ; p5PrimeFlavioProviderName =
+        "flavio"
+    ; p5PrimeFlavioProviderNameIsCanonical =
+        refl
+    ; flavioProviderVersion =
+        "2.7.0"
+    ; flavioProviderVersionIsCanonical =
+        refl
+    ; flavioWheelSHA256 =
+        "3d5aaeb5a9df7c479949e4641ccbd2dc662cb010aabf9dda5f725a8a80813b4f"
+    ; flavioWheelSHA256IsCanonical =
+        refl
+    ; flavioSdistSHA256 =
+        "08c9c9608ae2ee76d4097b5836e7ca2479f59f9478d0fdddb2cf01b7da4e796e"
+    ; flavioSdistSHA256IsCanonical =
+        refl
+    ; wilsonPackageVersion =
+        "2.5.2"
+    ; wilsonPackageVersionIsCanonical =
+        refl
+    ; wilsonPackageWheelSHA256 =
+        "959e3dbd6bfefb43b3769fe07e2d8e59c153abe6796851fb91c4d18b7981799a"
+    ; wilsonPackageWheelSHA256IsCanonical =
+        refl
+    ; c9SMKey =
+        "C9_bsll"
+    ; c9SMKeyIsCanonical =
+        refl
+    ; c10SMKey =
+        "C10_bsll"
+    ; c10SMKeyIsCanonical =
+        refl
+    ; p5PrimeFormFactorSourceText =
+        "Bharucha-Straub-Zwicky B -> V l+l- LCSR form factors"
+    ; p5PrimeFormFactorSourceTextIsBSZ =
+        refl
+    ; formFactorDOI =
+        "10.1007/JHEP08(2016)098"
+    ; formFactorDOIIsBSZ =
+        refl
+    ; formFactorArXiv =
+        "arXiv:1503.05534"
+    ; formFactorArXivIsCanonical =
+        refl
+    ; q2Bins =
+        canonicalP5PrimeQ2Bins
+    ; q2BinsAreCanonical =
+        refl
+    ; binTheoryAuthorities =
+        canonicalP5PrimeBinTheoryAuthorities
+    ; binTheoryAuthoritiesAreCanonical =
+        refl
+    ; p5PrimeCharmingPenguinEstimate =
+        "flavio bvll QCDF/nonlocal-charm interpolation; qcdf_interpolate.py sha256 df2748de08a59a55f6584bf128b65c3a8ce62dcfa0baffc81b1e4c94997304f6; runtime warns QCDF corrections should not be trusted for q2 above 6 GeV^2"
+    ; p5PrimeCharmingPenguinEstimateIsCanonical =
+        refl
+    ; authorityBindings =
+        canonicalP5PrimeAuthorityBindings
+    ; authorityBindingsAreCanonical =
+        refl
+    ; incompleteFlags =
+        canonicalP5PrimeAuthorityIncompleteFlags
+    ; incompleteFlagsAreCanonical =
+        refl
+    ; separatedFromBsToMuMuBaseline =
+        true
+    ; separatedFromBsToMuMuBaselineIsTrue =
+        refl
+    ; p5PrimeAcceptedAuthorityTokenConstructedHere =
+        false
+    ; p5PrimeAcceptedAuthorityTokenConstructedHereIsFalse =
+        refl
+    }
+
 data SMBaselineAcceptedAuthorityToken : Set where
 
 smBaselineAcceptedAuthorityTokenImpossibleHere :
@@ -212,6 +559,20 @@ record SMBaselineAuthorityRequestDiagnostic : Set where
 
     wilsonAuthorityStillFailClosed :
       wilsonAuthorityAcceptedTokenConstructedHere
+      ≡
+      false
+
+    p5PrimeSMBaselineAuthorityChain :
+      P5PrimeSMBaselineAuthorityChain
+
+    p5PrimeSMBaselineAuthorityChainIsCanonical :
+      p5PrimeSMBaselineAuthorityChain
+      ≡
+      canonicalP5PrimeSMBaselineAuthorityChain
+
+    p5PrimeAcceptedAuthorityStillFailClosed :
+      p5PrimeAcceptedAuthorityTokenConstructedHere
+        p5PrimeSMBaselineAuthorityChain
       ≡
       false
 
@@ -340,6 +701,12 @@ canonicalSMBaselineAuthorityRequestDiagnostic =
     ; wilsonAuthorityAcceptedTokenConstructedHere =
         false
     ; wilsonAuthorityStillFailClosed =
+        refl
+    ; p5PrimeSMBaselineAuthorityChain =
+        canonicalP5PrimeSMBaselineAuthorityChain
+    ; p5PrimeSMBaselineAuthorityChainIsCanonical =
+        refl
+    ; p5PrimeAcceptedAuthorityStillFailClosed =
         refl
     ; comparisonTarget =
         bToSMuPlusMuMinus

@@ -11,7 +11,10 @@ import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 import DASHI.Physics.Closure.PressureBelow15SpectralProbe as Pressure
 import DASHI.Physics.Closure.PressureBelow15SpectralTheoremObstruction as S8Obstruction
 import DASHI.Physics.Closure.SchrodingerQuotientDescentReceipt as Schrodinger
+import DASHI.Physics.Closure.ColimitGapLiftOnHamiltonian as ColimitGap
 import DASHI.Physics.Boundaries.ClayYMGap as ClayBoundary
+import DASHI.Physics.Boundaries.TopologicalMassGapInterpretation as Topological
+import DASHI.Physics.Boundaries.YMConstructive5DProofReceipt as YM5D
 
 ------------------------------------------------------------------------
 -- Continuum Clay mass-gap receipt obligation.
@@ -1340,3 +1343,210 @@ canonicalClayBoundaryThreadingReceipt =
         ∷ "The continuum Clay obligation stays open and non-promoting"
         ∷ []
     }
+
+data ContinuumClayYMConstructiveBlocker : Set where
+  finiteGapEvidencePresentButFiniteCarrierOnly :
+    ContinuumClayYMConstructiveBlocker
+
+  fiveDRouteRecordedButAuthorityBlocked :
+    ContinuumClayYMConstructiveBlocker
+
+  reflectionPositivityNotConstructed :
+    ContinuumClayYMConstructiveBlocker
+
+  polymerClusterConvergenceNotConstructed :
+    ContinuumClayYMConstructiveBlocker
+
+  osReconstructionNotConstructed :
+    ContinuumClayYMConstructiveBlocker
+
+  physicalHamiltonianGapLiftNotConstructed :
+    ContinuumClayYMConstructiveBlocker
+
+  clayExternalAcceptanceNotConstructed :
+    ContinuumClayYMConstructiveBlocker
+
+canonicalContinuumClayYMConstructiveBlockers :
+  List ContinuumClayYMConstructiveBlocker
+canonicalContinuumClayYMConstructiveBlockers =
+  finiteGapEvidencePresentButFiniteCarrierOnly
+  ∷ fiveDRouteRecordedButAuthorityBlocked
+  ∷ reflectionPositivityNotConstructed
+  ∷ polymerClusterConvergenceNotConstructed
+  ∷ osReconstructionNotConstructed
+  ∷ physicalHamiltonianGapLiftNotConstructed
+  ∷ clayExternalAcceptanceNotConstructed
+  ∷ []
+
+record ContinuumClayYMConstructiveBlockerThreadReceipt : Setω where
+  field
+    continuumObligation :
+      ContinuumClayMassGapReceiptObligation
+
+    continuumObligationIsCanonical :
+      Bool
+
+    continuumObligationIsCanonicalIsTrue :
+      continuumObligationIsCanonical ≡ true
+
+    colimitHamiltonianGapThread :
+      ColimitGap.ColimitHamiltonianGapThreadReceipt
+
+    colimitHamiltonianGapThreadIsCanonical :
+      Bool
+
+    colimitHamiltonianGapThreadIsCanonicalIsTrue :
+      colimitHamiltonianGapThreadIsCanonical ≡ true
+
+    fiveDRouteAudit :
+      YM5D.YMConstructive5DRouteAuditReceipt
+
+    fiveDRouteAuditIsCanonical :
+      Bool
+
+    fiveDRouteAuditIsCanonicalIsTrue :
+      fiveDRouteAuditIsCanonical ≡ true
+
+    topologicalBlockerThread :
+      Topological.TopologicalMassGapBlockerThreadReceipt
+
+    topologicalBlockerThreadIsCanonical :
+      Bool
+
+    topologicalBlockerThreadIsCanonicalIsTrue :
+      topologicalBlockerThreadIsCanonical ≡ true
+
+    finiteDepthGapEvidencePositive :
+      MassGap.BalabanRGMassGapReceiptSurface.finiteDepthMassGapPromoted
+        (ColimitGap.finiteGapAuthority colimitHamiltonianGapThread)
+      ≡
+      true
+
+    localFiniteCarrierSpectralGapEvidencePositive :
+      MassGap.BalabanRGMassGapReceiptSurface.localFiniteCarrierSpectralGapPromoted
+        (ColimitGap.finiteGapAuthority colimitHamiltonianGapThread)
+      ≡
+      true
+
+    pressureProbeSpectralGapPromotedFalse :
+      Pressure.spectralGapPromoted
+        (pressureSpectralProbe continuumObligation)
+      ≡
+      false
+
+    reflectionPositivityConstructed :
+      Bool
+
+    reflectionPositivityConstructedIsFalse :
+      reflectionPositivityConstructed ≡ false
+
+    polymerClusterConvergenceConstructed :
+      Bool
+
+    polymerClusterConvergenceConstructedIsFalse :
+      polymerClusterConvergenceConstructed ≡ false
+
+    osReconstructionConstructed :
+      Bool
+
+    osReconstructionConstructedIsFalse :
+      osReconstructionConstructed ≡ false
+
+    physicalHamiltonianGapLiftConstructed :
+      Bool
+
+    physicalHamiltonianGapLiftConstructedIsFalse :
+      physicalHamiltonianGapLiftConstructed ≡ false
+
+    continuumClayMassGapPromoted :
+      Bool
+
+    continuumClayMassGapPromotedIsFalse :
+      continuumClayMassGapPromoted ≡ false
+
+    exactBlockers :
+      List ContinuumClayYMConstructiveBlocker
+
+    exactBlockersAreCanonical :
+      exactBlockers ≡ canonicalContinuumClayYMConstructiveBlockers
+
+    receiptBoundary :
+      List String
+
+open ContinuumClayYMConstructiveBlockerThreadReceipt public
+
+canonicalContinuumClayYMConstructiveBlockerThreadReceipt :
+  ContinuumClayYMConstructiveBlockerThreadReceipt
+canonicalContinuumClayYMConstructiveBlockerThreadReceipt =
+  record
+    { continuumObligation =
+        canonicalContinuumClayMassGapReceiptObligation
+    ; continuumObligationIsCanonical =
+        true
+    ; continuumObligationIsCanonicalIsTrue =
+        refl
+    ; colimitHamiltonianGapThread =
+        ColimitGap.canonicalColimitHamiltonianGapThreadReceipt
+    ; colimitHamiltonianGapThreadIsCanonical =
+        true
+    ; colimitHamiltonianGapThreadIsCanonicalIsTrue =
+        refl
+    ; fiveDRouteAudit =
+        YM5D.canonicalYMConstructive5DRouteAuditReceipt
+    ; fiveDRouteAuditIsCanonical =
+        true
+    ; fiveDRouteAuditIsCanonicalIsTrue =
+        refl
+    ; topologicalBlockerThread =
+        Topological.canonicalTopologicalMassGapBlockerThreadReceipt
+    ; topologicalBlockerThreadIsCanonical =
+        true
+    ; topologicalBlockerThreadIsCanonicalIsTrue =
+        refl
+    ; finiteDepthGapEvidencePositive =
+        refl
+    ; localFiniteCarrierSpectralGapEvidencePositive =
+        refl
+    ; pressureProbeSpectralGapPromotedFalse =
+        refl
+    ; reflectionPositivityConstructed =
+        false
+    ; reflectionPositivityConstructedIsFalse =
+        refl
+    ; polymerClusterConvergenceConstructed =
+        false
+    ; polymerClusterConvergenceConstructedIsFalse =
+        refl
+    ; osReconstructionConstructed =
+        false
+    ; osReconstructionConstructedIsFalse =
+        refl
+    ; physicalHamiltonianGapLiftConstructed =
+        false
+    ; physicalHamiltonianGapLiftConstructedIsFalse =
+        refl
+    ; continuumClayMassGapPromoted =
+        false
+    ; continuumClayMassGapPromotedIsFalse =
+        refl
+    ; exactBlockers =
+        canonicalContinuumClayYMConstructiveBlockers
+    ; exactBlockersAreCanonical =
+        refl
+    ; receiptBoundary =
+        "Finite-depth and local finite-carrier spectral-gap evidence is positive but finite-carrier only"
+        ∷ "The 5D route and topological interpretation are threaded only as non-promoting external candidate receipts"
+        ∷ "Reflection positivity is not constructed"
+        ∷ "Polymer-cluster convergence is not constructed"
+        ∷ "OS reconstruction is not constructed"
+        ∷ "The physical Hamiltonian spectral-gap lift and Clay external acceptance remain unconstructed"
+        ∷ []
+    }
+
+continuumClayYMConstructiveBlockerThreadKeepsClayFalse :
+  continuumClayMassGapPromoted
+    canonicalContinuumClayYMConstructiveBlockerThreadReceipt
+  ≡
+  false
+continuumClayYMConstructiveBlockerThreadKeepsClayFalse =
+  refl

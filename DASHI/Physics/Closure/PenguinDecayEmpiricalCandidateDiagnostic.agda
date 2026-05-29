@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.PenguinDecayObservableContract as Contract
 import DASHI.Physics.Closure.PenguinDecaySMBaselineAuthority as Baseline
 import DASHI.Physics.Closure.PenguinDecayProjectionArtifact as Artifact
 import DASHI.Physics.Closure.PenguinDecayResidualComparisonLaw as Law
+import DASHI.Physics.Closure.PenguinDecayLHCbChecksumAcceptedResidualReceipt as LHCb
 import DASHI.Physics.Closure.ResidualComparisonLaw as Residual
 
 ------------------------------------------------------------------------
@@ -207,11 +208,92 @@ record PenguinDecayEmpiricalCandidateDiagnostic : Setω where
       ≡
       Law.canonicalPenguinDecayResidualComparisonLaw
 
+    lhcbChecksumAcceptedResidualReceipt :
+      LHCb.LHCbChecksumAcceptedResidualSurfaceReceipt
+
+    lhcbSelectedThreadChecksumBound :
+      LHCb.selectedThreadSupplementaryChecksumPresent
+        lhcbChecksumAcceptedResidualReceipt
+      ≡
+      true
+
+    lhcbSupplementaryChecksumIsSelectedThread :
+      LHCb.sourceCandidate
+        (LHCb.lhcbSupplementaryChecksumBinding
+          lhcbChecksumAcceptedResidualReceipt)
+      ≡
+      Contract.lhcbPRD105012010CDS2779103
+
+    lhcbHEPDataValueTableChecksumBound :
+      LHCb.hepdataValueTableChecksumReceiptPresent
+        lhcbChecksumAcceptedResidualReceipt
+      ≡
+      true
+
+    lhcbHEPDataCovarianceTableChecksumBound :
+      LHCb.hepdataCovarianceTableChecksumReceiptPresent
+        lhcbChecksumAcceptedResidualReceipt
+      ≡
+      true
+
+    lhcbResidualVectorReceiptBound :
+      LHCb.p5PrimeResidualVectorComparison
+        lhcbChecksumAcceptedResidualReceipt
+      ≡
+      Law.canonicalP5PrimeResidualVectorComparison
+
+    lhcbResidualVectorStatusIsBorderline :
+      LHCb.p5PrimeResidualVectorStatus
+        lhcbChecksumAcceptedResidualReceipt
+      ≡
+      Law.p5PrimeBorderlineAnomalyCandidate
+
+    lhcbAcceptedResidualCandidateConstructedHereIsFalse :
+      LHCb.acceptedResidualCandidateConstructedHere
+        lhcbChecksumAcceptedResidualReceipt
+      ≡
+      false
+
+    lhcbP5PrimeAcceptedResidualCandidateConstructedHereIsFalse :
+      LHCb.p5PrimeResidualVectorAcceptedCandidateConstructedHere
+        lhcbChecksumAcceptedResidualReceipt
+      ≡
+      false
+
+    empiricalContactReached :
+      Bool
+
+    empiricalContactReachedIsTrue :
+      empiricalContactReached ≡ true
+
     residualComparisonOutcomeIsInsufficientAuthority :
       Law.PenguinDecayResidualComparisonLaw.currentOutcome
         residualComparisonLaw
       ≡
       Law.insufficientAuthority
+
+    p5PrimeResidualVectorComparison :
+      Law.P5PrimeResidualVectorComparison
+
+    p5PrimeResidualVectorComparisonIsLawCanonical :
+      p5PrimeResidualVectorComparison
+      ≡
+      Law.PenguinDecayResidualComparisonLaw.p5PrimeResidualVectorComparison
+        residualComparisonLaw
+
+    anomalyCandidateClassified :
+      Law.P5PrimeResidualVectorStatus
+
+    anomalyCandidateClassifiedIsP5PrimeBorderline :
+      anomalyCandidateClassified
+      ≡
+      Law.p5PrimeBorderlineAnomalyCandidate
+
+    anomalyCandidateClassifiedAgreesWithP5PrimeTable :
+      anomalyCandidateClassified
+      ≡
+      Law.P5PrimeResidualVectorComparison.vectorStatus
+        p5PrimeResidualVectorComparison
 
     expectedResidualComparison :
       Law.PenguinExpectedResidualComparison
@@ -222,10 +304,10 @@ record PenguinDecayEmpiricalCandidateDiagnostic : Setω where
       Law.PenguinDecayResidualComparisonLaw.expectedResidualComparison
         residualComparisonLaw
 
-    expectedResidualComparisonIsMinusOnePointTwoSigma :
+    expectedResidualComparisonIsArtifactBoundAtMostTwoSigma :
       expectedResidualComparison
       ≡
-      Law.expectedMinusOnePointTwoSigmaPenguinResidualComparison
+      Law.artifactBoundAtMostTwoSigmaPenguinResidualComparison
 
     acceptedResidualCandidateWhenAuthorityFreezeDataAndTheoryPresent :
       (prerequisites : Law.PenguinResidualAcceptedCandidatePrerequisites) →
@@ -256,7 +338,7 @@ record PenguinDecayEmpiricalCandidateDiagnostic : Setω where
       ≡
       "sha256"
 
-    expectedMinusOnePointTwoSigmaStillInsufficientWithoutAuthority :
+    artifactBoundAtMostTwoSigmaStillInsufficientWithoutAuthority :
       (freeze : Residual.ResidualFreezeState) →
       (dataState : Residual.ResidualDataState) →
       (theory : Residual.ResidualTheoryUncertaintyState) →
@@ -388,13 +470,46 @@ canonicalPenguinDecayEmpiricalCandidateDiagnostic =
         Law.canonicalPenguinDecayResidualComparisonLaw
     ; residualComparisonLawIsCanonical =
         refl
+    ; lhcbChecksumAcceptedResidualReceipt =
+        LHCb.canonicalLHCbChecksumAcceptedResidualSurfaceReceipt
+    ; lhcbSelectedThreadChecksumBound =
+        refl
+    ; lhcbSupplementaryChecksumIsSelectedThread =
+        refl
+    ; lhcbHEPDataValueTableChecksumBound =
+        refl
+    ; lhcbHEPDataCovarianceTableChecksumBound =
+        refl
+    ; lhcbResidualVectorReceiptBound =
+        refl
+    ; lhcbResidualVectorStatusIsBorderline =
+        refl
+    ; lhcbAcceptedResidualCandidateConstructedHereIsFalse =
+        refl
+    ; lhcbP5PrimeAcceptedResidualCandidateConstructedHereIsFalse =
+        refl
+    ; empiricalContactReached =
+        true
+    ; empiricalContactReachedIsTrue =
+        refl
     ; residualComparisonOutcomeIsInsufficientAuthority =
         refl
+    ; p5PrimeResidualVectorComparison =
+        Law.PenguinDecayResidualComparisonLaw.p5PrimeResidualVectorComparison
+          Law.canonicalPenguinDecayResidualComparisonLaw
+    ; p5PrimeResidualVectorComparisonIsLawCanonical =
+        refl
+    ; anomalyCandidateClassified =
+        Law.p5PrimeBorderlineAnomalyCandidate
+    ; anomalyCandidateClassifiedIsP5PrimeBorderline =
+        refl
+    ; anomalyCandidateClassifiedAgreesWithP5PrimeTable =
+        refl
     ; expectedResidualComparison =
-        Law.expectedMinusOnePointTwoSigmaPenguinResidualComparison
+        Law.artifactBoundAtMostTwoSigmaPenguinResidualComparison
     ; expectedResidualComparisonIsLawCanonical =
         refl
-    ; expectedResidualComparisonIsMinusOnePointTwoSigma =
+    ; expectedResidualComparisonIsArtifactBoundAtMostTwoSigma =
         refl
     ; acceptedResidualCandidateWhenAuthorityFreezeDataAndTheoryPresent =
         Law.acceptedResidualCandidateWhenAuthorityFreezeDataAndTheoryPresent
@@ -408,8 +523,8 @@ canonicalPenguinDecayEmpiricalCandidateDiagnostic =
     ; acceptedResidualCandidateBridgeUsesSuppliedChecksum =
         Law.acceptedResidualCandidateBridgeUsesSuppliedChecksum
           Law.canonicalPenguinDecayResidualComparisonLaw
-    ; expectedMinusOnePointTwoSigmaStillInsufficientWithoutAuthority =
-        Law.expectedMinusOnePointTwoSigmaStillInsufficientWithoutAuthority
+    ; artifactBoundAtMostTwoSigmaStillInsufficientWithoutAuthority =
+        Law.artifactBoundAtMostTwoSigmaStillInsufficientWithoutAuthority
           Law.canonicalPenguinDecayResidualComparisonLaw
     ; missingAuthorityBlockers =
         canonicalPenguinEmpiricalMissingAuthorityBlockers
@@ -452,7 +567,10 @@ canonicalPenguinDecayEmpiricalCandidateDiagnostic =
     ; roadmapSummary =
         "empirical contact reached: projection-defect receipt, observable contract, SM baseline authority request, projection artifact envelope, and residual comparison law request are all inhabited"
         ∷ "canonical selected decay is b -> s lepton pair and the residual comparison outcome remains insufficientAuthority"
-        ∷ "expected -1.2 sigma residual comparison has an acceptedResidualCandidate theorem only after a selected-thread sha256 dataset checksum authority plus authority, freeze, data, and theory-control prerequisites are present"
+        ∷ "empiricalContactReached is true only after binding the LHCb checksum/accepted-residual surface receipt"
+        ∷ "the bound P5' residual-vector receipt classifies the anomaly candidate as p5PrimeBorderlineAnomalyCandidate"
+        ∷ "the selected-thread supplementary checksum and the current LHCb P5' HEPData value/correlation-table checksums are bound"
+        ∷ "artifact-bound sub-2-sigma residual comparisons have an acceptedResidualCandidate theorem only after a selected-thread sha256 dataset checksum authority plus authority, freeze, data, and theory-control prerequisites are present"
         ∷ "canonical diagnostic records CMS HEPData DOI 10.17182/hepdata.135675.v1/t1 record ins2616304 v1 table 1435213 Results with sha256 08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb, but the thread-selected LHCb DOI 10.1103/PhysRevD.105.012010 / CDS 2779103 checksum is missing"
         ∷ "CMS checksum authority is populated as a candidate only; selectedThreadChecksumAuthorityPresent is false, so no LHCb-specific promotion occurs"
         ∷ "CMS-readiness reduced blockers are flavio package digest, runtime environment digest, Wilson authority digest, no-posterior-tuning attestation, projection-code freeze hash, and the LHCb artifact checksum if this remains the selected thread lane"
@@ -466,6 +584,20 @@ canonicalPenguinEmpiricalContactState :
   ≡
   empiricalContactReachedPromotionBlocked
 canonicalPenguinEmpiricalContactState =
+  refl
+
+canonicalPenguinEmpiricalContactReached :
+  empiricalContactReached canonicalPenguinDecayEmpiricalCandidateDiagnostic
+  ≡
+  true
+canonicalPenguinEmpiricalContactReached =
+  refl
+
+canonicalPenguinEmpiricalAnomalyCandidateClassified :
+  anomalyCandidateClassified canonicalPenguinDecayEmpiricalCandidateDiagnostic
+  ≡
+  Law.p5PrimeBorderlineAnomalyCandidate
+canonicalPenguinEmpiricalAnomalyCandidateClassified =
   refl
 
 canonicalPenguinEmpiricalPromotionStillBlocked :
@@ -502,7 +634,7 @@ canonicalPenguinEmpiricalExpectedResidualStillInsufficientWithoutAuthority :
   ≡
   Law.insufficientAuthority
 canonicalPenguinEmpiricalExpectedResidualStillInsufficientWithoutAuthority =
-  expectedMinusOnePointTwoSigmaStillInsufficientWithoutAuthority
+  artifactBoundAtMostTwoSigmaStillInsufficientWithoutAuthority
     canonicalPenguinDecayEmpiricalCandidateDiagnostic
 
 canonicalPenguinEmpiricalCMSChecksumAuthorityPresent :

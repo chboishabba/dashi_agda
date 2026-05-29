@@ -37,8 +37,8 @@ statement is narrow:
 - the projection-defect receipt, selected observable contract, SM-baseline
   authority request, projection artifact envelope, Wilson/CKM authority slots,
   and residual comparison law are wired as concrete surfaces;
-- the expected `-1.2 sigma` penguin residual is represented only as an
-  `acceptedResidualCandidate`-shaped conditional theorem under accepted
+- artifact-bound sub-2-sigma penguin residuals are represented only as
+  `acceptedResidualCandidate`-shaped conditional theorems under accepted
   authority, frozen tuple, present data, and controlled theory uncertainty;
 - the live canonical discriminator is authority-first:
   `authorityMissing` still classifies the residual as `insufficientAuthority`,

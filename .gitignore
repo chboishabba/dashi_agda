@@ -17,6 +17,10 @@ result
 
 # Local downloaded/extracted third-party packages and scratch exports
 temp-DOWNLOADED/
+.playwright-mcp/
+scripts/data/hepdata/ins1784890/
+scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/LHCb-PAPER-2020-002-supplementary.zip
+scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/extracted/
 
 
 # Chat history / local DBs

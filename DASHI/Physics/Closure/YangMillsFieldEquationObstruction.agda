@@ -18404,3 +18404,185 @@ yangMillsGate3DownstreamM1LowerYMVariationBlockerIsExact :
   missingVariationPairingForSelectedHodgeStar
 yangMillsGate3DownstreamM1LowerYMVariationBlockerIsExact =
   refl
+
+------------------------------------------------------------------------
+-- Gate 3 pure-YM finite carrier-level D * F = J, with J = 0.
+--
+-- This is deliberately only a finite Site2D carrier surface.  The adapter
+-- maps both the dual-curvature derivative and the pure current to the zero
+-- SFGCSite2D field-strength bridge, so the equation is inhabited by
+-- definitional equality.  It does not promote the strict selected Hodge,
+-- transport, or variation laws.
+
+sfgcZeroFieldStrengthBridge :
+  SFGC.SFGCSite2DFieldStrengthBridge
+sfgcZeroFieldStrengthBridge =
+  SFGC.sfgcSite2DFieldStrengthFromCurvature
+    SFGC.sfgcSite2DZero2Form
+
+sfgcPureZeroHodgeStarCandidate :
+  SFGC.SFGCSite2DFieldStrengthBridge →
+  SFGC.SFGCSite2DFieldStrengthBridge
+sfgcPureZeroHodgeStarCandidate _ =
+  sfgcZeroFieldStrengthBridge
+
+sfgcPureZeroCovariantDerivativeOnFieldStrength :
+  SFGC.GaugeField →
+  SFGC.SFGCSite2DFieldStrengthBridge →
+  SFGC.SFGCSite2DFieldStrengthBridge
+sfgcPureZeroCovariantDerivativeOnFieldStrength _ fieldStrength =
+  fieldStrength
+
+sfgcPureZeroCovariantDerivativeOnDualCurvature :
+  SFGC.GaugeField →
+  SFGC.SFGCSite2DFieldStrengthBridge →
+  SFGC.SFGCSite2DFieldStrengthBridge
+sfgcPureZeroCovariantDerivativeOnDualCurvature _ _ =
+  sfgcZeroFieldStrengthBridge
+
+sfgcPureZeroCurrentSource :
+  SFGC.GaugeField →
+  SFGC.SFGCSite2DFieldStrengthBridge
+sfgcPureZeroCurrentSource _ =
+  sfgcZeroFieldStrengthBridge
+
+sfgcPureZeroDStarFEqualsJLaw :
+  (A : SFGC.GaugeField) →
+  sfgcPureZeroCovariantDerivativeOnDualCurvature
+    A
+    (sfgcPureZeroHodgeStarCandidate
+      (SFGC.sfgcSite2DFieldStrengthFromCurvature
+        (SFGC.sfgcSite2Dδ₁
+          (SFGC.sfgcSite2DConnectionTo1Form A))))
+  ≡
+  sfgcPureZeroCurrentSource A
+sfgcPureZeroDStarFEqualsJLaw A =
+  refl
+
+canonicalYMSFGCPureZeroCurrentDiscreteHodgeCovariantDerivativeSupply :
+  YMSFGCDiscreteHodgeCovariantDerivativePrimitiveSupply
+canonicalYMSFGCPureZeroCurrentDiscreteHodgeCovariantDerivativeSupply =
+  record
+    { DualCurvatureCarrier =
+        SFGC.SFGCSite2DFieldStrengthBridge
+    ; CurrentCarrier =
+        SFGC.SFGCSite2DFieldStrengthBridge
+    ; hodgeStar =
+        sfgcPureZeroHodgeStarCandidate
+    ; covariantDerivativeOnFieldStrength =
+        sfgcPureZeroCovariantDerivativeOnFieldStrength
+    ; covariantDerivativeOnDualCurvature =
+        sfgcPureZeroCovariantDerivativeOnDualCurvature
+    ; currentSource =
+        sfgcPureZeroCurrentSource
+    ; dStarFEqualsJLaw =
+        sfgcPureZeroDStarFEqualsJLaw
+    ; covariantBianchiTarget =
+        λ _ → YangMillsBianchiMissingPrimitive
+    ; supplyBoundary =
+        "Pure finite carrier surface: dual curvature and current both use SFGCSite2DFieldStrengthBridge"
+        ∷ "J is the zero field-strength bridge SFGC.sfgcSite2DZero2Form"
+        ∷ "D * F = J is inhabited definitionally because covariantDerivativeOnDualCurvature and currentSource both collapse to the zero bridge"
+        ∷ "This is not a selected metric Hodge star, sourced matter coupling, or variational Yang-Mills Euler-Lagrange law"
+        ∷ []
+    }
+
+record YMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface : Set₁ where
+  field
+    pureZeroSupply :
+      YMSFGCDiscreteHodgeCovariantDerivativePrimitiveSupply
+
+    pureZeroSupplyIsCanonical :
+      pureZeroSupply
+      ≡
+      canonicalYMSFGCPureZeroCurrentDiscreteHodgeCovariantDerivativeSupply
+
+    zeroCurrentSource :
+      SFGC.GaugeField →
+      SFGC.SFGCSite2DFieldStrengthBridge
+
+    zeroCurrentSourceIsCanonical :
+      zeroCurrentSource
+      ≡
+      sfgcPureZeroCurrentSource
+
+    zeroCurrentSourceIsZeroBridge :
+      (A : SFGC.GaugeField) →
+      zeroCurrentSource A
+      ≡
+      sfgcZeroFieldStrengthBridge
+
+    pureDStarFEqualsZeroCurrentLaw :
+      (A : SFGC.GaugeField) →
+      sfgcPureZeroCovariantDerivativeOnDualCurvature
+        A
+        (sfgcPureZeroHodgeStarCandidate
+          (SFGC.sfgcSite2DFieldStrengthFromCurvature
+            (SFGC.sfgcSite2Dδ₁
+              (SFGC.sfgcSite2DConnectionTo1Form A))))
+      ≡
+      sfgcPureZeroCurrentSource A
+
+    pureDStarFEqualsZeroCurrentLawIsCanonical :
+      pureDStarFEqualsZeroCurrentLaw
+      ≡
+      sfgcPureZeroDStarFEqualsJLaw
+
+    exactStrictHodgeVariationBlocker :
+      YangMillsVariationalEquationMissingPrimitive
+
+    exactStrictHodgeVariationBlockerIsVariationPairing :
+      exactStrictHodgeVariationBlocker
+      ≡
+      missingVariationPairingForSelectedHodgeStar
+
+    strictYMPromoted :
+      Bool
+
+    strictYMPromotedIsFalse :
+      strictYMPromoted ≡ false
+
+    surfaceBoundary :
+      List String
+
+canonicalYMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface :
+  YMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface
+canonicalYMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface =
+  record
+    { pureZeroSupply =
+        canonicalYMSFGCPureZeroCurrentDiscreteHodgeCovariantDerivativeSupply
+    ; pureZeroSupplyIsCanonical =
+        refl
+    ; zeroCurrentSource =
+        sfgcPureZeroCurrentSource
+    ; zeroCurrentSourceIsCanonical =
+        refl
+    ; zeroCurrentSourceIsZeroBridge =
+        λ _ → refl
+    ; pureDStarFEqualsZeroCurrentLaw =
+        sfgcPureZeroDStarFEqualsJLaw
+    ; pureDStarFEqualsZeroCurrentLawIsCanonical =
+        refl
+    ; exactStrictHodgeVariationBlocker =
+        missingVariationPairingForSelectedHodgeStar
+    ; exactStrictHodgeVariationBlockerIsVariationPairing =
+        refl
+    ; strictYMPromoted =
+        false
+    ; strictYMPromotedIsFalse =
+        refl
+    ; surfaceBoundary =
+        "Gate 3 pure-YM finite surface is inhabited only at the Site2D field-strength carrier level with J = 0"
+        ∷ "The dual-curvature derivative is a zero-current adapter, not the strict selected covariant derivative on a metric Hodge dual"
+        ∷ "The exact promotion blocker remains missingVariationPairingForSelectedHodgeStar"
+        ∷ "No strict Yang-Mills, Clay, spectral-gap, terminal, or continuum promotion is introduced"
+        ∷ []
+    }
+
+yangMillsPureZeroCurrentFiniteSurfaceDoesNotPromote :
+  YMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface.strictYMPromoted
+    canonicalYMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface
+  ≡
+  false
+yangMillsPureZeroCurrentFiniteSurfaceDoesNotPromote =
+  refl

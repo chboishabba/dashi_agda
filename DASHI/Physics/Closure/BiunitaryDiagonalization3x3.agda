@@ -1,6 +1,5 @@
 module DASHI.Physics.Closure.BiunitaryDiagonalization3x3 where
 
-open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
@@ -22,7 +21,7 @@ open import DASHI.Physics.YM.BiunitaryDiagonalization
 --   * the exact diagonalization carrier is inherited from the existing
 --     diagonal identity witness in `DASHI.Physics.YM.BiunitaryDiagonalization`.
 
-record ConcreteBiunitaryDiagonalization3x3 : Setω where
+record ConcreteBiunitaryDiagonalization3x3 : Set where
   field
     yukawa : Exact.DiagonalYukawa3x3
 
@@ -168,7 +167,7 @@ canonicalDownLeftIdentityClosure =
 ------------------------------------------------------------------------
 -- Bundle the actual up/down witnesses for downstream CKM/Gate 7 consumers.
 
-record BiunitaryDiagonalization3x3Receipt : Setω where
+record BiunitaryDiagonalization3x3Receipt : Set where
   field
     upDiagonalization :
       ConcreteBiunitaryDiagonalization3x3
@@ -192,4 +191,3 @@ canonicalBiunitaryDiagonalization3x3Receipt = record
       ∷ "The diagonalization carrier is the existing exact diagonal witness"
       ∷ []
   }
-

@@ -21,12 +21,17 @@ through recursive refinement, ultrametric distance, tracked lane commutation,
 projection residuals, and quotient-sensitive filtration; then applies that
 spine to gauge curvature, Yang-Mills ordering defects, QFT commutator targets,
 GR curvature/Bianchi targets, measurement residuals, sector splitting,
-compression admissibility, and a bounded below-Z Drell-Yan `t43` empirical
-contact surface (`chi2/dof = 2.1565191176` under threshold `4.0`). The same
-typed discipline blocks stronger readings: strict `chi2/dof <= 2` and strict
-log-covariance tests fail, upstream E8 completion is not promoted, and accepted
-empirical authority, sourced non-flat GR, continuum recovery, GRQFT closure,
-and completed unification remain open. Conclusion: DASHI proposes a
+compression admissibility, and a P5' anomaly-candidate empirical contact
+surface: `empiricalContactReached = true` for
+`p5PrimeBorderlineAnomalyCandidate`, with residuals \(-2.8\sigma\) and
+\(-3.0\sigma\) in the \(q^2\) bins \([4,6]\) and \([6,8]\)
+\(\mathrm{GeV}^2/c^4\), under digest-bound SHA256 artifact discipline using
+`flavio 2.7.0` and the BSZ baseline. The same typed discipline blocks stronger
+readings: no new physics is claimed, no `acceptedResidualCandidate` is
+inhabited, no full covariance matrix has been found, upstream E8 completion is
+not promoted, and accepted empirical authority, sourced non-flat GR, continuum
+recovery, GRQFT closure, and completed unification remain open. Conclusion:
+DASHI proposes a
 constructive ultrametric carrier geometry in which admissible refinement,
 compression, transport, and quotient structure generate staged physics-facing
 derivation surfaces, while typed closure semantics track the residual
@@ -61,9 +66,13 @@ schemas. Finite-support operators define filtered contraction targets. The
 tracked G6 commuting theorem gives a coordinate-independence law for selected
 prime-lane actions. Local E8/LILA surfaces record bounded root-geometry and
 upstream-promotion boundaries. UFT-style compression records repeated
-refinement motifs and recoverable residual distinctions. The bounded
-Drell-Yan empirical receipt records one comparison against a frozen typed
-surface.
+refinement motifs and recoverable residual distinctions. The primary empirical
+contact in this draft is the P5' anomaly candidate: the receipt records
+`empiricalContactReached = true` for `p5PrimeBorderlineAnomalyCandidate`, with
+\(-2.8\sigma\) and \(-3.0\sigma\) residuals in the \(q^2\) bins \([4,6]\) and
+\([6,8]\) \(\mathrm{GeV}^2/c^4\), bound to SHA256-digested artifacts and a
+frozen `flavio 2.7.0` + BSZ baseline. Drell-Yan remains a methodology
+demonstration for typed empirical receipts, not the lead empirical claim.
 
 ## Target Obligation Surfaces and DASHI Derivation Roles
 
@@ -242,22 +251,28 @@ completion, transport-smooth sheaves, formal-disk-to-DCHoTT equivalence,
 DCHoTT manifold/G-structure promotion, and Levi-Civita specialization are not
 proved here.
 
-**B1 (curvature from nilpotent transport).** The discrete Bianchi and Einstein
-candidate surfaces are downstream of B0. They remain suspended until the
-non-flat metric/Levi-Civita adapter is imported or proved; the current
-manuscript therefore discusses curvature and Einstein tensors as target
-surfaces, not completed GR.
+**B1 (finite curvature and continuum boundary).** The curvature surface is no
+longer only a nilpotent-transport target. The repository has a finite full
+depth-9 connection-and-curvature receipt and a finite Yang--Mills field
+equation surface for the source-free equation \(D\star F=0\). These are finite
+carrier-level receipts for curvature, Bianchi/Yang--Mills algebra, and
+field-equation shape; they do not import continuum physics by themselves. The
+non-flat metric/Levi-Civita, stress-energy, Wald/continuum GR authority, and
+continuum promotion steps remain external bridge boundaries downstream of B0.
 
-**B2 (local quantum field).** The cited Haag-Kastler stack route is recorded
-as identifying a
-locally covariant AQFT as a point of the relevant HK 2-functor. The
-Klein-Gordon free-field witness is recorded in
-`KleinGordonAQFTReceipt.agda`, which cites the stack result as a bounded
-free-field surface while leaving concrete algebra-net reconstruction, GNS
-state selection, and Born-rule derivation open.
-`AQFTCarrierAlgebraQuotientSurface.agda` stages \(A(O)\), \(A_d(O)\), the
-filtered colimit \(\mathrm{colim}_d A_d(O)\), and Cauchy time-slice evolution
-as typed targets only.
+**B2 (local quantum field).** The cited Haag-Kastler stack route is recorded as
+identifying a locally covariant AQFT as a point of the relevant HK 2-functor.
+The finite prime-lane DHR surface has also advanced: local
+endomorphism/category receipts, braiding naturality, left and right hexagon
+laws, statistics-as-braiding, and conjugate zigzags are finite-level inhabited
+receipts. The Klein-Gordon free-field witness is recorded in
+`KleinGordonAQFTReceipt.agda`, and `AQFTCarrierAlgebraQuotientSurface.agda`
+stages \(A(O)\), \(A_d(O)\), the filtered colimit
+\(\mathrm{colim}_d A_d(O)\), and Cauchy time-slice evolution as typed targets
+only. The arbitrary DHR symmetric monoidal structure, Doplicher--Roberts
+theorem application, compact group reconstruction, and exact
+\(G_{\mathrm{DHR}}\cong G_{\mathrm{SM}}\) comparison remain blocked or
+external.
 
 **B3 (interacting boundary).** Interacting QFT, renormalisation, and coupling
 calibration are typed adapter boundaries. The record
@@ -445,13 +460,18 @@ The cases with equal addresses are immediate. \(\square\)
 
 **Definition 4.9 (`FactorVec`).** Let
 \[
-P=\{2,3,5,7,11,13,17,19,23,29,31,41,47,59,71\}
+P_{\mathrm{SS}}=\{2,3,5,7,11,13,17,19,23,29,31,41,47,59,71\}
 \]
 be the tracked supersingular-prime lane set used by the repo-native carrier.
-A `FactorVec` is a function \(\nu:P\to\mathbb{N}\), equivalently a
+The set \(P_{\mathrm{SS}}\) is characterized as the supersingular prime set in
+Ogg's 1975 genus-zero observation. The repo receipt
+`DASHI/Physics/Moonshine/SupersingularPrimeLaneBridge.agda` records this
+bridge and explicitly keeps `primeSetForcedFromFirstPrinciples = false`: the
+choice is a motivated DASHI design decision, not a first-principles derivation.
+A `FactorVec` is a function \(\nu:P_{\mathrm{SS}}\to\mathbb{N}\), equivalently a
 `Vec15 Nat` exponent vector with one coordinate for each tracked prime lane.
 
-For \(p\in P\), define the prime-lane bump
+For \(p\in P_{\mathrm{SS}}\), define the prime-lane bump
 \[
 B_p(\nu)(q)=
 \begin{cases}
@@ -460,12 +480,57 @@ B_p(\nu)(q)=
 \end{cases}
 \]
 
-**Lemma 4.10 (Coordinate bumps commute).** For all \(p,q\in P\),
+**Definition 4.9a (Supersingular-prime lane bridge).** The tracked lane set
+\(P_{\mathrm{SS}}\) is the 15 supersingular-prime set
+\[
+\mathcal{P}_{SS}
+=\{2,3,5,7,11,13,17,19,23,29,31,41,47,59,71\}.
+\]
+The receipt `DASHI/Physics/Moonshine/SupersingularPrimeLaneBridge.agda` records
+Ogg's external authority that three characterizations coincide: \(X_0^+(p)\)
+has genus zero; the supersingular polynomial in characteristic \(p\) splits
+over \(\mathbb{F}_p\); and \(p\) divides the Monster group order. DASHI uses
+the second condition as the carrier-facing entry point: a tracked lane is
+field-complete at local depth \(1\) when all supersingular \(j\)-invariants are
+already defined over \(\mathbb{F}_p\).
+
+The bridge is deliberately weaker than a first-principles derivation. It
+inhabits `DASHIPrimeSetIsP_SS = true`, while keeping
+`primeSetForcedFromFirstPrinciples = false`,
+`oggOriginalQuestionResolved = false`, and
+`standardModelGaugeGroupDerived = false`. Thus Paper 1 may claim that the
+prime set has a precise Ogg-supersingular characterization, but not that DASHI
+derives that set uniquely from the empty carrier or derives the Standard Model
+gauge group from Moonshine.
+
+**Definition 4.9b (Modular-\(j\) and Monster-depth bridge boundary).** The
+classical modular \(j\)-function is generated from Eisenstein modular forms by
+the usual normalized relation
+\[
+j(\tau)=\frac{E_4(\tau)^3}{\Delta(\tau)},\qquad
+\Delta(\tau)=\frac{E_4(\tau)^3-E_6(\tau)^2}{1728}.
+\]
+It classifies complex elliptic curves up to isomorphism and supplies the
+supersingular reduction surface used in Ogg's characterization. The receipt
+`DASHI/Physics/Moonshine/ModularJInvariantAlphaReceipt.agda` records the
+classical anchors \(j(i)=1728\) and \(j(\rho)=0\), but keeps
+`alphaDerivedFromModularGeometry = false`: Paper 1 does not derive the carrier
+alpha diagnostics, physical couplings, or the Cabibbo target from \(j\)-values.
+
+Similarly, `DASHI/Physics/Moonshine/MonsterOrderDepthBoundReceipt.agda` records
+the Monster-order exponent table as a conjectural depth-bound surface for the
+tracked prime lanes. It keeps `depthBoundProved = false`,
+`primeSetForcedFromFirstPrinciples = false`, and both closure and terminal
+promotion flags false. The Monster-order table is therefore a Moonshine-facing
+organizing datum, not a proof that the DASHI carrier depths or prime set are
+internally forced.
+
+**Lemma 4.10 (Coordinate bumps commute).** For all \(p,q\in P_{\mathrm{SS}}\),
 \[
 B_p(B_q(\nu))=B_q(B_p(\nu)).
 \]
 
-**Proof.** Check each coordinate \(r\in P\). If \(r\) is neither \(p\) nor
+**Proof.** Check each coordinate \(r\in P_{\mathrm{SS}}\). If \(r\) is neither \(p\) nor
 \(q\), both sides equal \(\nu(r)\). If \(r=p\neq q\), both sides equal
 \(\nu(p)+1\). If \(r=q\neq p\), both sides equal \(\nu(q)+1\). If
 \(p=q=r\), both sides equal \(\nu(p)+2\). The vectors are equal
@@ -514,8 +579,10 @@ then \(x\sim_n y\). By equivalence preservation, \(A(x)\sim_n A(y)\), so
 \(\square\)
 
 **Theorem 4.15 (Early DASHI carrier spine).** Starting from primitive signed
-state with unresolved residue, the carrier grammar is forced in the restricted
-sense
+state with unresolved residue and the chosen supersingular-prime lane set, the
+carrier grammar follows the staged design spine recorded here. The route is
+constrained by the preceding obligations, but it is not claimed as a
+first-principles forcing theorem:
 \[
 \text{primitive state}
 \to
@@ -537,12 +604,23 @@ turn such states into coordinate-local traversals with update-word addresses.
 Definition 4.5 and Lemma 4.6 give the bounded reading of voxel and hypercube
 traversal. Recursive refinement of those cells is prefix refinement, so
 Definition 4.7 and Lemma 4.8 give ultrametric geometry. When refinement labels
-include tracked prime-lane information, Definition 4.9 and Lemma 4.10 produce
-the `FactorVec` valuation route and its basic coordinate commutation fact.
+include tracked prime-lane information, Definition 4.9a supplies the
+Ogg-supersingular characterization of the selected lane set, and Definition
+4.9 with Lemma 4.10 produces the `FactorVec` valuation route and its basic
+coordinate commutation fact.
 Once a surface observes only part of the richer state, Definition 4.11 and
 Lemma 4.12 require a projection-defect split. Finally, when traversal becomes
 operator language, Definition 4.13 and Lemma 4.14 show that filtration and
 quotient descent are the required path to theorem-facing dynamics. \(\square\)
+
+The prime set itself is not derived from first principles in this theorem.
+`DASHI/Physics/Moonshine/SupersingularPrimeLaneBridge.agda` records
+\(\mathcal{P}_{SS}\) as the supersingular-prime set characterized by Ogg's
+1975 classification, with Borcherds' Moonshine theorem as the external
+Moonshine authority. The receipt keeps
+`primeSetForcedFromFirstPrinciples = false`: the choice of \(\mathcal{P}_{SS}\)
+is a motivated design decision, while the theorem above states only what
+follows once that lane set is selected.
 
 The derivation theorem does not assert that the grammar completes physics. It
 asserts that the listed structures are not a catalog: they arise as successive
@@ -1197,57 +1275,56 @@ group \(G\), subgroup \(H\), representation data, and empirical calibration.
 
 ## 11. Empirical Contact
 
-The empirical result used in this paper is deliberately bounded: a below-\(Z\)
-Drell-Yan comparison against CMS-SMP-20-003 / HEPData `t43`. The receipt binds
-a named observable to a frozen comparison while leaving accepted authority,
-convention, and strict-fit obligations open.
+The primary empirical-contact surface used in this paper is the Gate 5
+penguin-decay \(P_5'\) lane. The canonical diagnostic records
+`empiricalContactReached = true`: the selected \(b\to s\ell\ell\)
+angular-observable lane binds a checksum-backed value-table route, a frozen
+Standard Model baseline request, and a residual-comparison law. This is
+empirical contact, not empirical promotion.
 
-The current positive surface is the bounded W3 below-Z Drell-Yan
-comparison-law receipt over CMS-SMP-20-003 / HEPData `ins2079374/t43`, using
-the `ins2079374/t44` covariance convention. It is attached to the `FactorVec`
-falsification-lane protocol by the Drell-Yan adjacent-ratio lane receipt.
+The bound observable is \(P_5'\) for \(B^0\to K^{*0}\mu^+\mu^-\). The reachable
+machine-readable LHCb route is HEPData `hepdata.167733.v1/t2`, locally bound
+to
+`scripts/data/hepdata/ins3094698/table-config-2-results-record-data-167733-1911073.json`
+with SHA256
+`8ee74f4e774889eced2090fe60bbdaf681dd327dc1a349add992e038c7f62623`. The
+surrounding digest-bound artifacts include the total, statistical, and
+systematic correlation JSON resources, the CDS supplementary archive, and the
+2020 value-table/projection artifacts. The Standard Model baseline is the
+`flavio 2.7.0` \(P_5'\) baseline with the Bharucha-Straub-Zwicky (BSZ)
+form-factor source; its manifest is
+`scripts/data/hepdata/penguin_gate5_p5prime_sm_baseline_flavio_2_7_0.json`.
 
 | Field | Recorded value | Paper interpretation |
 |---|---:|---|
-| HEPData table | `ins2079374/t43` | Below-Z adjacent-ratio observable |
-| Covariance table | `ins2079374/t44` | Covariance convention consumed by the bounded receipt |
-| `chi2/dof` | `2.1565191176` | Passes the bounded comparison-law threshold, not the strict threshold |
-| Bounded threshold | `4.0` | Local W3 comparison-law criterion |
-| Mean prediction/data | `0.9941233097` | Near-unity aggregate ratio under the frozen comparison |
-| Strict `chi2/dof <= 2` | `false` | Strict falsification-lane target is not passed |
-| Above-Z promotion | none | `t45/t46` remains parked behind PDF/convention obligations |
+| Primary lane | Gate 5 \(P_5'\) penguin decay | Main empirical-contact surface |
+| Contact flag | `empiricalContactReached = true` | Checksum/value/baseline/residual surfaces are bound |
+| HEPData table | `hepdata.167733.v1/t2` | Reachable LHCb \(P_5'\) value-table route |
+| Residual status | `p5PrimeBorderlineAnomalyCandidate` | Borderline anomaly candidate, not accepted residual promotion |
+| \([4,6]\,\mathrm{GeV}^2/c^4\) pull | `-2.8 sigma` | Signed residual under the frozen pull formula |
+| \([6,8]\,\mathrm{GeV}^2/c^4\) pull | `-3.0 sigma` | Signed residual under the frozen pull formula |
+| Baseline | `flavio 2.7.0` + BSZ | Frozen SM baseline authority request |
+| Accepted residual | `acceptedResidualCandidate = false` | Promotion prerequisites remain open |
 
-The strongest paper-admissible empirical sentence is therefore: DASHI has an
-inhabited bounded W3 `t43` below-Z Drell-Yan comparison-law receipt with
-`chi2/dof = 2.1565191176` under threshold `4.0` and mean prediction/data
-`0.9941233097`, with no above-Z or accepted-authority promotion.
-
-Two stricter protocols are explicitly negative and remain visible in the
-manuscript. First, the adjacent-ratio receipt records that the stricter
-`chi2/dof <= 2` falsification-lane target is not satisfied:
-
-```text
-2.1565191176 > 2.0
-```
-
-Second, the strict log-covariance diagnostic is a separate stronger protocol
-recorded by the Drell-Yan strict-log diagnostic receipt. It is also negative:
-`phiStarRatioPredictor` has strict log `chi2/dof =
-283.45739523864586`, and `sigmaDashiV4Predictor` has strict log `chi2/dof =
-3180.211733150705`. The strict-log receipt localizes the failure: full
-covariance reduces chi-square relative to diagonal-only covariance, so the
-failure is not explained by covariance inflation. The main obstruction is the
-log-linear residual subspace. Any frozen no-refit route discharging
-`StrictPassOrthogonalityObligation` is downstream of the provider contract:
-the strict-log comparison first requires a native event-level \(\phi^*\)
-provider with the exact CMS \(Z+\geq 1\)-jet selection, not a \(q_T\)-grid
-remapping. Until then, it remains a named theorem target, not a prose
-promotion.
+Using
+\[
+r=(\mathrm{obs}-\mathrm{SM})/
+\sqrt{\mathrm{stat}^2+\mathrm{syst}^2+\mathrm{th}^2},
+\]
+the selected \(q^2\) bins record signed pulls \(-2.8\sigma\) for
+\([4,6]\,\mathrm{GeV}^2/c^4\) and \(-3.0\sigma\) for
+\([6,8]\,\mathrm{GeV}^2/c^4\). These two pulls make the lane a borderline
+anomaly-candidate surface, but the accepted residual predicate is not
+inhabited: `acceptedResidualCandidate = false`. The full \(P_5'\) covariance
+matrix required for covariance-whitened promotion remains missing, and the
+accepted authority, complete freeze, data, and controlled-theory prerequisites
+are not all present.
 
 ### Typed Residual Basis Decomposition
 
-The empirical lane also exposes a reusable method: Typed Residual Basis
-Decomposition (TRBD). A TRBD receipt records
+The Drell-Yan material is retained as a methodology demonstration rather than
+the primary empirical result. Typed Residual Basis Decomposition (TRBD)
+records
 \[
 \text{residual}
 \longrightarrow
@@ -1260,7 +1337,7 @@ Decomposition (TRBD). A TRBD receipt records
 \text{promotion decision}.
 \]
 The reusable core is `DASHI.Core.TypedResidualBasisDecomposition`. The
-Drell-Yan strict-log receipt instantiates it with the structural basis
+Drell-Yan strict-log diagnostic instantiates it with the structural basis
 \(\{1,\log(\varphi^*)\}\). For `sigmaDashiV4Predictor`, the raw strict-log
 `chi2/dof` is `3180.211733150705`, the perpendicular `chi2/dof` is
 `111.96455543013676`, and the basis coverage is `0.968705212853035`. The
@@ -1279,20 +1356,19 @@ surface is `dy_slope_decomposition.py`, while
 keeps the stronger lane blocked on a native Z+jet, event-level \(\varphi^*\)
 provider.
 
-This is a methodological contribution independent of the particular
-Drell-Yan predictor. TRBD distinguishes a typed obstruction from a passing
-shape law: identifying the residual subspace is useful, but it does not
-promote the predictor unless the complement is also discharged.
+The older bounded W3 below-\(Z\) Drell-Yan comparison-law receipt remains a
+non-primary example of bounded contact accounting: over CMS-SMP-20-003 /
+HEPData `ins2079374/t43`, using the `ins2079374/t44` covariance convention,
+it records `chi2/dof = 2.1565191176`, threshold `4.0`, and mean
+prediction/data `0.9941233097`. This is a TRBD and comparison-law
+demonstration, not the paper's primary empirical result, and it has no
+above-\(Z\), strict `chi2/dof <= 2`, or accepted-authority promotion.
 
-The bounded W3 comparison-law receipt is not the same object as accepted W3
-empirical authority. The accepted-authority type remains constructorless at
-the canonical boundary: no accepted provider token, non-postulated policy hook,
-or authority payload currently inhabits `W3AcceptedEvidenceAuthorityToken`.
-W4 and W5 likewise remain blocked by convention and authority. The accepted
-Drell-Yan luminosity/convention authority needed for W4/W5 is still missing.
-Local numeric probes, CT18-style experiments, packet drafts, or self-populated
-convention records are non-promoting unless they are accepted at the canonical
-boundary.
+The shared boundary is fail-closed: \(P_5'\) reaches empirical contact, while
+Drell-Yan illustrates typed residual decomposition. Neither lane constructs an
+accepted external empirical authority token or licenses discovery, new
+physics, full empirical adequacy, W4/W5 convention closure, or physical
+calibration.
 
 ## 12. Compression and Semantic Geometry
 
@@ -1368,8 +1444,13 @@ stronger physical claims.
 |---|---|---|---|
 | Constructive physics-unification thesis | Carrier geometry with projection-defect structure, filtrations, lane actions, empirical receipts, and typed closure semantics | Completed empirical closure, accepted physical-lane authority, non-flat GR recovery, full unification receipts | Completed physics, completed physics unification, full downstream closure |
 | G2 / Route A | Direction-indexed SFGC schema adoption plus standalone prime-lattice `d^2=0` targets | Prime-lattice commutativity/boundary-of-boundary law as mechanized through incidence/coefficient witnesses, plus SFGC action bridge, curvature / field-equation carrier and promotion receipts | Maxwell closure, gauge-field recovery, physical curvature; abelian nilpotency alone is not field-equation promotion |
-| G3 | Selected finite-support subtraction support | Associated-graded quotient carrier, kernel-equivalence law, descended norm/product/bracket/isomorphism laws | Arbitrary operator support, global Schrodinger recovery, Galilei/Poincare closure |
-| G6 | Official tracked `GL.FactorVec` commuting route and above-threshold consumer | Migration or split of the old universal `LaneOperator` law | Old full `LaneOperator` promotion, universal cross-lane commuting |
+| G3 | Full depth-9 curvature and finite `D star F = 0` inhabited | Continuum analytic promotion remains external | Continuum Yang-Mills / PDE authority, arbitrary analytic field-equation closure |
+| G4 | Finite sourced Einstein interface inhabited with Wald authority boundary recorded | Continuum Levi-Civita uniqueness remains external | Continuum Einstein equations, Schwarzschild and GR recovery, unqualified sourced GR |
+| G5 | Empirical contact reached with `empiricalContactReached = true`; P5' -2.8/-3.0 sigma candidate for `hepdata.167733.v1/t2`; accepted residual candidate is false | Full covariance is missing; no accepted residual authority token | Accepted B-anomaly authority, empirical closure, Standard Model deviation claim |
+| G6 | Finite endomorphism, naturality, hexagon, statistics, and conjugate-zigzag receipts inhabited | Arbitrary DHR symmetric monoidal structure plus DR authority/compact reconstruction | Full DHR category, compact gauge group reconstruction, Standard Model sector promotion |
+| G7 | Identity and eigenbasis transport receipts inhabited | Physical Yukawa construction from DHR sector remains blocked | Physical Yukawa matrices, CKM/PMNS derivation, fermion-mass closure |
+| NS | Finite Navier-Stokes ladder inhabited | Continuum BKM/enstrophy lift remains blocked | Clay Navier-Stokes regularity / global smoothness claim |
+| Information paradox | Cross-gate obstruction surface recorded | Joint accepted GR/QFT/thermodynamic authority and adapter alignment | Resolved black-hole information paradox claim |
 | E8/LILA | Integer-root completeness and local semantic boundary | Upstream `E8RootEnumerationComplete` constructor or promotion API | Upstream E8 completion, LILA physical closure |
 | W2 | Request / obstruction surface | `NaturalP2ConvergencePromotionAuthorityToken` | Natural p2-convergence promotion |
 | W3 | Bounded Drell-Yan comparison receipts but constructorless accepted authority | Accepted W3 evidence-authority token | Accepted empirical authority, CMS validation, above-Z promotion |
@@ -1442,14 +1523,43 @@ for the human-readable labels used in the body.
 | DCHoTT import shim | `DASHI.Geometry.DCHoTTImportShim` | `canonicalDCHoTTImportShimReceipt` |
 | DCHoTT Levi-Civita bridge | `DASHI.Geometry.LeviCivitaBridge` | `canonicalLeviCivitaBridgeReceipt` |
 | DCHoTT B0 obligation index | `DASHI.Geometry.DCHoTTBridgeObligationIndex` | `canonicalDCHoTTBridgeObligationIndex` |
+| Supersingular-prime lane bridge | `DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge` | `canonicalSupersingularPrimeLaneBridgeReceipt` |
 | B0.1 pro-object semantics | `DASHI.Geometry.ProObjectSemantics` | `canonicalB01ProObjectSemanticsReceipt` |
 | AQFT carrier algebra quotient surface | `DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface` | `canonicalAQFTCarrierAlgebraQuotientSurface`; `canonicalDepthFilteredLocalAlgebraSurface`; `canonicalCauchyEvolutionReceiptTarget` |
+| DHR gauge receipt surface | `DASHI.Physics.QFT.DHRGaugeReceiptSurface` | `canonicalDHRGaugeReceiptSurface` |
+| DHR finite-prime local endomorphism category ledger | `DASHI.Physics.QFT.Gate6FinitePrimeLaneLocalEndomorphismCategory` | `canonicalGate6FinitePrimeLaneLocalEndomorphismCategoryLedger` |
+| DHR tensor-dual reconstruction boundary | `DASHI.Physics.QFT.DHRTensorDualGroupReconstruction` | `canonicalDHRTensorDualGroupReconstructionReceipt` |
+| DHR finite-prime statistics/braiding progress | `DASHI.Physics.QFT.DHRTensorDualGroupReconstruction` | `canonicalFinitePrimeLaneTensorBraidingProgressReceipt` |
+| DHR hexagon fail-closed coherence | `DASHI.Physics.QFT.DHRHexagonObligation` | `canonicalDHRHexagonFailClosedCoherenceReceipt` |
+| DHR finite-prime hexagon target receipts | `DASHI.Physics.QFT.DHRHexagonObligation` | `canonicalDHRFinitePrimeLaneLeftRightHexagonTargetReceipts` |
+| DHR finite-prime conjugate dual receipt | `DASHI.Physics.QFT.FinitePrimeLaneConjugateDualReceipts` | `canonicalFinitePrimeLaneConjugateDualReceipt` |
+| DHR-SM compatibility ledger boundary | `DASHI.Physics.QFT.FinitePrimeLaneDHRSMCompatibilityLedger` | `canonicalFinitePrimeLaneDHRSMCompatibilityLedger` |
 | Adapter irreducibility no-go index | `DASHI.Physics.Closure.AdapterIrreducibilityNoGoIndex` | `canonicalAdapterIrreducibilityNoGoIndex` |
 | AQFT net receipt | `DASHI.Physics.Closure.AQFTNetReceipt` | `canonicalAQFTNetReceipt` |
 | Klein-Gordon AQFT witness | `DASHI.Physics.Closure.KleinGordonAQFTReceipt` | `canonicalKleinGordonAQFTReceipt` |
 | Interacting QFT boundary | `DASHI.Physics.Closure.InteractingQFTBoundaryReceipt` | `canonicalInteractingQFTBoundaryReceipt` |
 | Terminal open-problem status | `DASHI.Physics.Closure.TerminalOpenProblemStatusSurface` | `canonicalTerminalOpenProblemStatusSurface` |
 | GRQFT terminal composition boundary | `DASHI.Physics.Closure.GRQFTTerminalCompositionBoundary` | `canonicalGRQFTCompositionBoundary` |
+| Navier-Stokes weak solution interface receipt | `DASHI.Physics.Closure.NavierStokesWeakSolutionInterface` | `canonicalNavierStokesWeakSolutionInterfaceReceipt` |
+| Navier-Stokes regularity tower boundary receipt | `DASHI.Physics.Closure.NavierStokesRegularityTowerReceipt` | `canonicalNavierStokesRegularityTowerReceipt` |
+| Wald GR authority fail-closed receipt | `DASHI.Physics.Closure.WaldGRAuthorityReceipt` | `canonicalWaldGRAuthorityReceipt` |
+| P5-prime LHCb checksum/residual surface | `DASHI.Physics.Closure.PenguinDecayLHCbChecksumAcceptedResidualReceipt` | `canonicalLHCbChecksumAcceptedResidualSurfaceReceipt` |
+| P5-prime residual comparison law boundary | `DASHI.Physics.Closure.PenguinDecayResidualComparisonLaw` | `canonicalPenguinDecayResidualComparisonLaw` |
+| P5-prime SM baseline authority request diagnostic | `DASHI.Physics.Closure.PenguinDecaySMBaselineAuthority` | `canonicalSMBaselineAuthorityRequestDiagnostic` |
+| P5-prime Wilson coefficient authority boundary | `DASHI.Physics.Closure.PenguinDecayWilsonCoefficientAuthority` | `canonicalPenguinDecayWilsonCoefficientAuthority` |
+| P5-prime empirical candidate diagnostic | `DASHI.Physics.Closure.PenguinDecayEmpiricalCandidateDiagnostic` | `canonicalPenguinDecayEmpiricalCandidateDiagnostic` |
+| P5-prime C9/C10 prediction target boundary | `DASHI.Physics.Closure.PenguinDecayC9C10P5PrimePredictionTargetReceipt` | `canonicalC9C10P5PrimePredictionTargetReceipt` |
+| P5-prime carrier-derived C9 constraint target | `DASHI.Physics.Closure.PenguinDecayCarrierDerivedC9ConstraintTargetReceipt` | `canonicalPenguinDecayCarrierDerivedC9ConstraintTargetReceipt` |
+| CKM prediction frontier receipt | `DASHI.Physics.Closure.CKMPredictionFrontierReceipt` | `canonicalCKMPredictionFrontierReceipt` |
+| Yukawa carrier receipt boundary | `DASHI.Physics.Closure.YukawaFromCarrier` | `canonicalYukawaFromCarrier` |
+| Carrier Yukawa ratio target receipt | `DASHI.Physics.Closure.CarrierYukawaRatioTargetReceipt` | `canonicalCarrierYukawaRatioTargetReceipt` |
+| Information paradox cross-gate obstruction | `DASHI.Physics.Closure.InformationParadoxCrossGateObstruction` | `canonicalInformationParadoxCrossGateObstruction` |
+| Quantum-gravity prediction frontier receipt | `DASHI.Physics.Closure.InformationParadoxCrossGateObstruction` | `canonicalBeyondCurrentRepoQuantumGravityPredictionFrontierReceipt` |
+| YM depth-9 connection and curvature receipt | `DASHI.Physics.Closure.Depth9ConnectionAndCurvature` | `canonicalDepth9ConnectionAndCurvatureReceipt` |
+| YM finite nonzero curvature computation | `DASHI.Physics.Closure.Depth9ConnectionAndCurvature` | `canonicalChainB1ExplicitNonzeroYMCurvatureFiniteComputation` |
+| YM Gate 3 discrete-geometry receipt | `DASHI.Physics.Closure.YangMillsGate3DiscreteGeometryReceipt` | `canonicalGate3DiscreteGeometryReceipt` |
+| YM field-equation obstruction boundary | `DASHI.Physics.Closure.YangMillsFieldEquationObstruction` | `canonicalYangMillsFieldEquationObstruction` |
+| YM field-equation receipt boundary | `DASHI.Physics.Closure.YangMillsFieldEquationReceipt` | `canonicalYangMillsFieldEquationReceipt` |
 | External formal import roadmap | `DASHI.Physics.Closure.ExternalFormalImportRoadmapReceipt` | `canonicalExternalFormalImportRoadmapReceipt` |
 | Cross-domain variational spine | `DASHI.Physics.Closure.CrossDomainVariationalSpine` | `canonicalCrossDomainVariationalSpineBoundary` |
 

@@ -229,6 +229,224 @@ canonicalTheoryUncertaintyComponents =
   ∷ covariancePropagationUncertainty
   ∷ []
 
+data P5PrimeAuthorityChainComponent : Set where
+  p5PrimeAngularObservableComponent :
+    P5PrimeAuthorityChainComponent
+  c9WilsonCoefficientComponent :
+    P5PrimeAuthorityChainComponent
+  c10WilsonCoefficientComponent :
+    P5PrimeAuthorityChainComponent
+  formFactorAuthorityComponent :
+    P5PrimeAuthorityChainComponent
+  theoryUncertaintyAuthorityComponent :
+    P5PrimeAuthorityChainComponent
+  charmingPenguinSystematicComponent :
+    P5PrimeAuthorityChainComponent
+
+canonicalP5PrimeAuthorityChainComponents :
+  List P5PrimeAuthorityChainComponent
+canonicalP5PrimeAuthorityChainComponents =
+  p5PrimeAngularObservableComponent
+  ∷ c9WilsonCoefficientComponent
+  ∷ c10WilsonCoefficientComponent
+  ∷ formFactorAuthorityComponent
+  ∷ theoryUncertaintyAuthorityComponent
+  ∷ charmingPenguinSystematicComponent
+  ∷ []
+
+data P5PrimeAuthorityChainBlocker : Set where
+  missingAcceptedP5PrimeObservableKeyFreeze :
+    P5PrimeAuthorityChainBlocker
+  missingAcceptedC9C10WilsonAuthorityDigest :
+    P5PrimeAuthorityChainBlocker
+  missingAcceptedFormFactorAuthority :
+    P5PrimeAuthorityChainBlocker
+  missingAcceptedTheoryUncertaintyBudget :
+    P5PrimeAuthorityChainBlocker
+  missingAcceptedCharmingPenguinSystematic :
+    P5PrimeAuthorityChainBlocker
+  missingAcceptedC1C2CurrentCurrentOperatorAuthority :
+    P5PrimeAuthorityChainBlocker
+
+canonicalP5PrimeAuthorityChainBlockers :
+  List P5PrimeAuthorityChainBlocker
+canonicalP5PrimeAuthorityChainBlockers =
+  missingAcceptedP5PrimeObservableKeyFreeze
+  ∷ missingAcceptedC9C10WilsonAuthorityDigest
+  ∷ missingAcceptedFormFactorAuthority
+  ∷ missingAcceptedTheoryUncertaintyBudget
+  ∷ missingAcceptedCharmingPenguinSystematic
+  ∷ missingAcceptedC1C2CurrentCurrentOperatorAuthority
+  ∷ []
+
+record P5PrimeFlavioWilsonAuthorityChain : Set where
+  constructor mkP5PrimeFlavioWilsonAuthorityChain
+  field
+    p5PrimeAuthorityProvider :
+      WilsonAuthorityProvider
+
+    p5PrimeAuthorityProviderIsFlavio :
+      p5PrimeAuthorityProvider ≡ flavio
+
+    p5PrimeSMBaselineRequest :
+      Baseline.SMBaselineAuthorityRequestDiagnostic
+
+    p5PrimeSMBaselineRequestIsCanonical :
+      p5PrimeSMBaselineRequest
+      ≡
+      Baseline.canonicalSMBaselineAuthorityRequestDiagnostic
+
+    p5PrimeObservableKey :
+      String
+
+    p5PrimeObservableKeyIsRequired :
+      p5PrimeObservableKey
+      ≡
+      "required: accepted flavio P5' angular observable key and bin map"
+
+    chainComponents :
+      List P5PrimeAuthorityChainComponent
+
+    chainComponentsAreCanonical :
+      chainComponents
+      ≡
+      canonicalP5PrimeAuthorityChainComponents
+
+    c9WilsonRole :
+      WilsonCoefficientRole
+
+    c9WilsonRoleIsCanonical :
+      c9WilsonRole ≡ C9SM
+
+    c10WilsonRole :
+      WilsonCoefficientRole
+
+    c10WilsonRoleIsCanonical :
+      c10WilsonRole ≡ C10SM
+
+    c9C10AuthorityDigest :
+      C9C10WilsonAuthorityDigest
+
+    c9C10AuthorityDigestIsCanonical :
+      c9C10AuthorityDigest
+      ≡
+      canonicalC9C10WilsonAuthorityDigest
+
+    formFactorAuthorityPayloadField :
+      Baseline.SMBaselineProviderPayloadField
+
+    formFactorAuthorityPayloadFieldIsBaseline :
+      formFactorAuthorityPayloadField
+      ≡
+      Baseline.formFactorSource
+
+    theoryUncertaintyAuthorityField :
+      Baseline.SMBaselineAuthorityField
+
+    theoryUncertaintyAuthorityFieldIsBaseline :
+      theoryUncertaintyAuthorityField
+      ≡
+      Baseline.theoryUncertaintyAuthority
+
+    p5PrimeTheoryUncertaintyComponents :
+      List TheoryUncertaintyComponent
+
+    p5PrimeTheoryUncertaintyComponentsAreCanonical :
+      p5PrimeTheoryUncertaintyComponents
+      ≡
+      canonicalTheoryUncertaintyComponents
+
+    charmingPenguinAuthorityField :
+      Baseline.SMBaselineAuthorityField
+
+    charmingPenguinAuthorityFieldIsBaseline :
+      charmingPenguinAuthorityField
+      ≡
+      Baseline.charmingPenguinAuthority
+
+    charmingPenguinPayloadField :
+      Baseline.SMBaselineProviderPayloadField
+
+    charmingPenguinPayloadFieldIsBaseline :
+      charmingPenguinPayloadField
+      ≡
+      Baseline.charmingPenguinModel
+
+    experimentalSystematicsAuthorityField :
+      Baseline.SMBaselineAuthorityField
+
+    experimentalSystematicsAuthorityFieldIsBaseline :
+      experimentalSystematicsAuthorityField
+      ≡
+      Baseline.systematicsAuthority
+
+    c1C2CurrentCurrentAuthorityComplete :
+      Bool
+
+    c1C2CurrentCurrentAuthorityCompleteIsFalse :
+      c1C2CurrentCurrentAuthorityComplete ≡ false
+
+    chainBlockers :
+      List P5PrimeAuthorityChainBlocker
+
+    chainBlockersAreCanonical :
+      chainBlockers
+      ≡
+      canonicalP5PrimeAuthorityChainBlockers
+
+    p5PrimeAcceptedAuthorityTokenConstructedHere :
+      Bool
+
+    p5PrimeAcceptedAuthorityTokenConstructedHereIsFalse :
+      p5PrimeAcceptedAuthorityTokenConstructedHere ≡ false
+
+    p5PrimeAnomalyPromotionAuthorized :
+      Bool
+
+    p5PrimeAnomalyPromotionAuthorizedIsFalse :
+      p5PrimeAnomalyPromotionAuthorized ≡ false
+
+open P5PrimeFlavioWilsonAuthorityChain public
+
+canonicalP5PrimeFlavioWilsonAuthorityChain :
+  P5PrimeFlavioWilsonAuthorityChain
+canonicalP5PrimeFlavioWilsonAuthorityChain =
+  mkP5PrimeFlavioWilsonAuthorityChain
+    flavio
+    refl
+    Baseline.canonicalSMBaselineAuthorityRequestDiagnostic
+    refl
+    "required: accepted flavio P5' angular observable key and bin map"
+    refl
+    canonicalP5PrimeAuthorityChainComponents
+    refl
+    C9SM
+    refl
+    C10SM
+    refl
+    canonicalC9C10WilsonAuthorityDigest
+    refl
+    Baseline.formFactorSource
+    refl
+    Baseline.theoryUncertaintyAuthority
+    refl
+    canonicalTheoryUncertaintyComponents
+    refl
+    Baseline.charmingPenguinAuthority
+    refl
+    Baseline.charmingPenguinModel
+    refl
+    Baseline.systematicsAuthority
+    refl
+    false
+    refl
+    canonicalP5PrimeAuthorityChainBlockers
+    refl
+    false
+    refl
+    false
+    refl
+
 data WilsonAuthorityMissingDigest : Set where
   missingProviderVersionDigest :
     WilsonAuthorityMissingDigest

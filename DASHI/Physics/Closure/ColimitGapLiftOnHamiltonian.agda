@@ -19,7 +19,9 @@ open import DASHI.Geometry.LCP.FiniteSpectralGap using
 open import DASHI.Geometry.LCP.InductiveLimit using (NatColimitWitness)
 
 import DASHI.Physics.Closure.Gate2SpectralGapMath as Gate2
+import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 import DASHI.Physics.Closure.PressureBelow15SpectralNatWitnessSlice as Pressure
+import DASHI.Physics.Boundaries.YMConstructive5DProofReceipt as YM5D
 
 ------------------------------------------------------------------------
 -- Gate 2 colimit lift receipt.
@@ -72,3 +74,161 @@ canonicalColimitGapLiftOnHamiltonianReceipt =
         ∷ "No real-carrier analytic theorem is promoted by this wrapper"
         ∷ []
     }
+
+data ColimitHamiltonianGapLiftBlocker : Set where
+  finiteGapOnlyAtSelectedFiniteCarrier :
+    ColimitHamiltonianGapLiftBlocker
+
+  missingReflectionPositivityForOSReconstruction :
+    ColimitHamiltonianGapLiftBlocker
+
+  missingPolymerClusterConvergence :
+    ColimitHamiltonianGapLiftBlocker
+
+  missingPhysicalHamiltonianSpectralLift :
+    ColimitHamiltonianGapLiftBlocker
+
+  missingClayContinuumAuthority :
+    ColimitHamiltonianGapLiftBlocker
+
+canonicalColimitHamiltonianGapLiftBlockers :
+  List ColimitHamiltonianGapLiftBlocker
+canonicalColimitHamiltonianGapLiftBlockers =
+  finiteGapOnlyAtSelectedFiniteCarrier
+  ∷ missingReflectionPositivityForOSReconstruction
+  ∷ missingPolymerClusterConvergence
+  ∷ missingPhysicalHamiltonianSpectralLift
+  ∷ missingClayContinuumAuthority
+  ∷ []
+
+record ColimitHamiltonianGapThreadReceipt : Setω where
+  field
+    finiteGapAuthority :
+      MassGap.BalabanRGMassGapReceiptSurface
+
+    finiteGapAuthorityIsCanonical :
+      Bool
+
+    finiteGapAuthorityIsCanonicalIsTrue :
+      finiteGapAuthorityIsCanonical ≡ true
+
+    finiteDepthMassGapPositive :
+      MassGap.BalabanRGMassGapReceiptSurface.finiteDepthMassGapPromoted
+        finiteGapAuthority
+      ≡
+      true
+
+    localFiniteCarrierSpectralGapPositive :
+      MassGap.BalabanRGMassGapReceiptSurface.localFiniteCarrierSpectralGapPromoted
+        finiteGapAuthority
+      ≡
+      true
+
+    fiveDRouteAudit :
+      YM5D.YMConstructive5DRouteAuditReceipt
+
+    fiveDRouteAuditIsCanonical :
+      Bool
+
+    fiveDRouteAuditIsCanonicalIsTrue :
+      fiveDRouteAuditIsCanonical ≡ true
+
+    reflectionPositivityConstructed :
+      Bool
+
+    reflectionPositivityConstructedIsFalse :
+      reflectionPositivityConstructed ≡ false
+
+    polymerClusterConvergenceConstructed :
+      Bool
+
+    polymerClusterConvergenceConstructedIsFalse :
+      polymerClusterConvergenceConstructed ≡ false
+
+    osReconstructionLocallyVerified :
+      MassGap.OsterwalderSchraderReconstructionIntake.locallyVerifiedHere
+        (MassGap.BalabanRGMassGapReceiptSurface.osReconstruction
+          finiteGapAuthority)
+      ≡
+      false
+
+    physicalHamiltonianSpectralLiftConstructed :
+      Bool
+
+    physicalHamiltonianSpectralLiftConstructedIsFalse :
+      physicalHamiltonianSpectralLiftConstructed ≡ false
+
+    continuumClayMassGapPromoted :
+      Bool
+
+    continuumClayMassGapPromotedIsFalse :
+      continuumClayMassGapPromoted ≡ false
+
+    exactBlockers :
+      List ColimitHamiltonianGapLiftBlocker
+
+    exactBlockersAreCanonical :
+      exactBlockers ≡ canonicalColimitHamiltonianGapLiftBlockers
+
+    receiptBoundary :
+      List String
+
+open ColimitHamiltonianGapThreadReceipt public
+
+canonicalColimitHamiltonianGapThreadReceipt :
+  ColimitHamiltonianGapThreadReceipt
+canonicalColimitHamiltonianGapThreadReceipt =
+  record
+    { finiteGapAuthority =
+        MassGap.canonicalBalabanRGMassGapReceiptSurface
+    ; finiteGapAuthorityIsCanonical =
+        true
+    ; finiteGapAuthorityIsCanonicalIsTrue =
+        refl
+    ; finiteDepthMassGapPositive =
+        refl
+    ; localFiniteCarrierSpectralGapPositive =
+        refl
+    ; fiveDRouteAudit =
+        YM5D.canonicalYMConstructive5DRouteAuditReceipt
+    ; fiveDRouteAuditIsCanonical =
+        true
+    ; fiveDRouteAuditIsCanonicalIsTrue =
+        refl
+    ; reflectionPositivityConstructed =
+        false
+    ; reflectionPositivityConstructedIsFalse =
+        refl
+    ; polymerClusterConvergenceConstructed =
+        false
+    ; polymerClusterConvergenceConstructedIsFalse =
+        refl
+    ; osReconstructionLocallyVerified =
+        refl
+    ; physicalHamiltonianSpectralLiftConstructed =
+        false
+    ; physicalHamiltonianSpectralLiftConstructedIsFalse =
+        refl
+    ; continuumClayMassGapPromoted =
+        false
+    ; continuumClayMassGapPromotedIsFalse =
+        refl
+    ; exactBlockers =
+        canonicalColimitHamiltonianGapLiftBlockers
+    ; exactBlockersAreCanonical =
+        refl
+    ; receiptBoundary =
+        "Finite-depth and local finite-carrier gap positives are threaded from BalabanRGMassGapReceiptSurface"
+        ∷ "The 5D constructive route audit is threaded as recorded external candidate evidence"
+        ∷ "Reflection positivity and polymer-cluster convergence remain unconstructed"
+        ∷ "OS reconstruction is explicitly not locally verified on the upstream receipt"
+        ∷ "No physical Hamiltonian spectral lift or continuum Clay promotion is constructed"
+        ∷ []
+    }
+
+colimitHamiltonianGapThreadKeepsClayFalse :
+  continuumClayMassGapPromoted canonicalColimitHamiltonianGapThreadReceipt
+  ≡
+  false
+colimitHamiltonianGapThreadKeepsClayFalse =
+  refl

@@ -1,5 +1,101 @@
 # Current Gate Status
 
+## Manager C Clay Closure Target Sync 2026-05-29
+
+Owner: `Manager C`
+Status: `Agda-backed hard-target sync; fail-closed; non-promoting`
+
+This sync records the exact mathematical targets required before any Clay
+Yang-Mills or Navier-Stokes closure claim could be made in DASHI.
+
+- Four-receipt state for the Paper 8 Millennium lanes:
+  `CarrierFactorVecInjectivityOSPositivityReceipt` records finite-depth
+  carrier OS positivity from FactorVec depth-step injectivity, and
+  `UltrametricSobolevUniformBoundReceipt` records ultrametric Sobolev
+  uniformity under citation authority.  These are positive finite/uniformity
+  receipts only.  The Carrier RG scale / dimensionful mass-gap convergence
+  receipt remains open, and the Carrier NS smooth convergence / ultrametric
+  Aubin-Lions receipt remains open.
+- `DASHI.Physics.Closure.ClayMillenniumClosureTargetReceipt` now records the
+  YM closing target as carrier OS positivity, a uniform depth-independent mass
+  gap, interacting continuum Yang-Mills construction, and Wightman
+  reconstruction.  Current flags keep `osPositivityConstructed = false`,
+  `uniformDepthIndependentGapConstructed = false`,
+  `wightmanReconstructionApplied = false`, and `clayYangMillsClosed = false`.
+  The finite-depth OS positivity receipt does not change those Clay target
+  flags; the missing Carrier RG scale / dimensionful mass-gap convergence
+  theorem remains the exact promotion blocker.
+- The same receipt records the NS closing target as uniform carrier
+  enstrophy/BKM control and the continuum BKM regularity passage.  Current
+  flags keep `uniformEnstrophyControlConstructed = false`,
+  `uniformVorticityLInfinityControlConstructed = false`,
+  `continuumBKMRegularityPassageConstructed = false`, and
+  `clayNavierStokesClosed = false`.
+  The ultrametric Sobolev uniformity receipt does not change those Clay target
+  flags; the missing Carrier NS smooth convergence / ultrametric Aubin-Lions
+  theorem remains the exact promotion blocker.
+- `MillenniumTowerYangMillsInstanceReceipt` and
+  `MillenniumTowerNavierStokesInstanceReceipt` consume these targets, so Paper
+  8 can cite the hard blocker receipts directly rather than relying on prose
+  blocker language.
+- No Paper 1 claim changes are needed from this sync: the change is a Paper 8 /
+  Millennium-tower claim-governance refinement, not a new physics promotion.
+
+## Worker C Docs-Ledger Sync 2026-05-29
+
+Owner: `Worker C-docs-ledger`
+Status: `docs-only Paper 8 ledger refresh; fail-closed; non-promoting`
+
+This sync records the newest read-first posture for Paper 1 and Paper 8
+coordination. It changes no Agda surface, constructs no authority token, and
+does not edit `Docs/Paper8UnificationDraft.md`.
+
+Current package state:
+
+- Paper 1 is now a narrow constructive physics-unification package, not a
+  completed-unification or empirical-closure paper. The current manuscript
+  skeleton is `Docs/Paper1DraftSkeleton.md` and the admissible positive claims
+  remain bounded to exact internal receipts: G2 direction-indexed schema
+  adoption, official tracked G6 commuting/above-threshold consumers, G3
+  constructive finite-support subtraction support, and E8 integer/local
+  boundary status. W2/W3/W4/W5, non-flat GR, Schwarzschild, continuum, GRQFT,
+  limited SM+GR, and full unification remain excluded.
+- The Temple-Alexander-Vogler receipt is present as
+  `DASHI/Physics/Closure/FriedmannInstabilitySaddleReceipt.agda`. It records a
+  literature boundary for pressureless Friedmann instability/saddle behavior.
+  It is not a dark-energy result, does not remove dark energy, does not falsify
+  LCDM, and does not promote sourced GR or cosmology closure.
+- Gate 6 now has a conditional DHR/SM promotion frontier in
+  `DASHI/Physics/QFT/ConditionalGDHRSMPromotionReceipt.agda`: the status moves
+  to `conditionalOnDRAuthority` for the finite prime-lane witnesses, while
+  `unconditionalGDHREqualsGSMPromoted = false`. Actual arbitrary DHR
+  endomorphism algebras, full hexagon/statistics closure, DR compact-group
+  reconstruction, and exact `G_DHR ~= G_SM` remain unpromoted.
+- Gate 7 now carries alpha/Yukawa target receipts in
+  `DASHI/Physics/Closure/CarrierYukawaRatioTargetReceipt.agda`. The alpha
+  readback is explicitly non-promoting: accepted-alpha target value/bound and
+  physical-value promotion are false. Off-diagonal/non-diagonal Yukawa
+  promotion remains blocked by missing charged-lepton Yukawa carriers,
+  physical fermion mass receipts, running/threshold conventions, W4 Higgs-scale
+  calibration, actual DHR sector representations, non-identity intertwiners,
+  and physical Yukawa matrices.
+- Gate 5 P5' is now recorded as a stronger artifact-binding state but still
+  non-promoting. `PenguinDecayLHCbChecksumAcceptedResidualReceipt` records the
+  selected value/covariance checksum receipts and a residual vector status
+  with signed pulls `[4,6] -> -2.8 sigma` and `[6,8] -> -3.0 sigma`, classified
+  only as borderline/anomaly candidate. `acceptedResidualCandidate = false`,
+  anomaly/discovery authority is absent, and carrier-derived C9 remains a
+  prediction target rather than accepted new physics.
+
+Hard overclaim prohibitions for all downstream summaries:
+
+- no Clay Yang-Mills or Navier-Stokes solution claim;
+- no dark-energy removal and no LCDM falsification claim;
+- no full Standard Model reconstruction, full unification, limited SM+GR
+  closure, or GRQFT closure;
+- no accepted new-physics claim from P5', C9/C10, alpha, Yukawa, CKM, DHR, or
+  Temple/Friedmann receipts.
+
 Date: `2026-05-22`
 Owner: `Worker PaperReadinessIntegrator documentation/audit sidecar`
 Status: `fail-closed cross-gate sync; historical notes retained below`
@@ -9,7 +105,107 @@ future worker can recover the blocker posture without reading the full chat
 history. It is a documentation summary only. It does not close any gate,
 construct any token, or replace targeted Agda validation.
 
+## Publication-Readiness Sync 2026-05-29
+
+This sync is documentation-only. It records the newest publication posture for
+the Paper 1 and Paper 8 readiness surfaces and keeps every terminal promotion
+fail-closed.
+
+- Temple/Alexander/Vogler Friedmann receipt: the Gate 4 authority boundary is
+  now recorded through
+  `DASHI.Physics.Closure.FriedmannInstabilitySaddleReceipt.canonicalFriedmannInstabilitySaddleReceipt`.
+  The receipt binds the 2026 Proc. R. Soc. A authority metadata, DOI
+  `10.1098/rspa.2025.0912`, local PDF SHA256
+  `a105917e23d118c6c41004292c2ecb2a32f042dec738ccd2c380253e0eace6cf`,
+  and the external theorem statement that pressureless Friedmann spacetimes
+  are unstable to radial perturbation in Einstein-Euler self-similar variables
+  with the critical Friedmann spacetime an unstable saddle rest point. It
+  consumes the contracted-Bianchi matter closure and Wald GR authority
+  boundary only as fail-closed preconditions. It does not identify
+  `xi = r/t` with DASHI carrier depth, does not complete continuum existence
+  theory or observational cosmology comparison, and keeps
+  `darkEnergyRemoved = false`, `LCDMFalsified = false`, and
+  `cosmologyPromoted = false`.
+- Paper 1 package: Paper 1 remains paper-ready only as a formal
+  receipt-system / constructive physics-unification architecture paper. The
+  admissible positive package is the typed claim ledger, inhabited bounded
+  receipt surfaces, exact blockers, and reproducibility/governance appendix.
+  It may cite G2 schema extension, official tracked G6 commuting and
+  above-threshold consumers, bounded constructive G3 support, E8 local/upstream
+  boundary accounting, Drell-Yan bounded W3 comparison plus strict-log failure
+  diagnosis, and formal bridge-obligation ledgers. It must not claim Clay
+  Yang-Mills, Standard Model derivation, empirical authority, GR recovery,
+  sourced Einstein law, limited SM+GR, GRQFT closure, or completed
+  unification.
+- Gate 6 conditional state: finite p2/p3/p5 prime-lane DHR carrier receipts,
+  finite carrier-level localized endomorphism receipts, finite braiding
+  naturality, the five DHR/DR internal axiom receipt kinds, original DHR
+  authority, and Tannaka fibre-functor authority are now recorded in the
+  conditional package
+  `DASHI.Physics.QFT.ConditionalGDHRSMPromotionReceipt.canonicalConditionalGDHRSMPromotionReceipt`.
+  The current status is `conditionalOnDRAuthority`, not an unconditional
+  theorem. Arbitrary-sector generalization, internal compact gauge-group
+  construction, concrete `G_DHR -> G_SM`, exact Standard Model carrier-functor
+  match, and full theorem-in-repo promotion remain blocked.
+- Gate 7 alpha/off-diagonal Yukawa state: Gate 7 remains a carrier diagnostic
+  frontier. `CarrierYukawaRatioTargetReceipt` records alpha readback
+  diagnostics `0.041240` and `0.085720` from p2-p3 and p3-p5 finite DHR/SM
+  carrier-dimension separations, but accepted alpha, supplied alpha bound, and
+  physical-value promotion remain false. `YukawaFromCarrier` records
+  symbolic upper-triangular up-sector off-diagonal carrier entries
+  `y12 = 1/5`, `y13 = 1/25`, and `y23 = 1/5` as inter-lane/depth-suppressed
+  Gaussian rational data. These entries are not physical Yukawa values:
+  physical coupling scale, physical Yukawa matrices, DHR physical sector
+  representations, physical weak/mass-basis identification, CKM promotion, and
+  W4 Higgs/VEV authority remain missing.
+- Gate 5 P5' state: the active penguin lane is a fail-closed prediction target,
+  not an anomaly or discovery claim. The current target receipt is
+  `DASHI.Physics.Closure.PenguinDecayC9C10P5PrimePredictionTargetReceipt.canonicalC9C10P5PrimePredictionTargetReceipt`.
+  It records P5' as an angular `b -> s mu+ mu-` C9/C10 target, threads CKM-loop
+  and carrier-Yukawa surfaces, records the 2025 full Run 1+2 LHCb public P5'
+  target, rejects the claimed `HEPData 160745` primary route as b-jet-mass data,
+  records the older 2020 LHCb route as fallback provenance, and now threads the
+  current P5' value/correlation checksum surfaces. The residual vector
+  artifact, accepted CKM source authority, physical Yukawa promotion, accepted
+  C9/C10 Wilson digest, C1/C2 charm-loop authority, freeze/no-posterior-tuning
+  authority, and accepted residual prerequisites remain missing. Without
+  authority, the residual law still returns `insufficientAuthority`; no
+  accepted anomaly claim or new-physics promotion is constructed.
+
 ## Current Publishability Boundary Digest 2026-05-27
+
+Prediction-frontier sync `2026-05-28`:
+
+- A withdrawn 5D constructive YM candidate is carried only as non-promoting route evidence for the
+  Yang-Mills mass-gap frontier.  It does not supply reflection positivity,
+  polymer-cluster convergence, OS reconstruction, Hamiltonian spectral lift, or
+  Clay acceptance.
+- Gate 5 penguin contact remains blocked at the selected LHCb
+  value/covariance-table/checksum authority and full freeze-tuple population.
+  CMS checksum data is candidate evidence only and does not promote the
+  selected LHCb lane.  The current public LHCb target is the 2025 full Run 1+2
+  `B0 -> K*0 mu+ mu-` result (`LHCb-PAPER-2025-041` / `arXiv:2512.18053` /
+  `CDS:2951844`).  The 2020 `HEPData:ins1798504` result is fallback-only;
+  `HEPData 160745` is recorded as a mismatch/fail-closed lead because the
+  supplied/reachable artifacts identify `ins2922449` b-jet mass Table 16.  The
+  attempted `ins2101841` route is stale negative provenance; the CERN
+  repository page is route evidence only.
+- Gate 6 DHR/SM work is an end-sector computation target over the finite
+  p2/p3/p5 matrices.  The finite carrier matrix target computation,
+  finite carrier-level star/composition/associativity receipts, finite
+  lane-local category laws, finite conjugate/dual identity zigzags, finite
+  tensor target wiring, finite braiding naturality, finite left/right hexagon
+  target receipts, and finite statistics-as-braiding target receipt are now
+  inhabited.  Actual arbitrary DHR localised endomorphism algebras, arbitrary
+  DHR hexagon closure, statistics-as-braiding in the full DHR category, DR
+  theorem application, compact-group reconstruction, and `G_DHR ~= G_SM`
+  remain unconstructed.
+- `C9/P5'` is a non-promoting prediction target, not a discovery claim.  Wilson
+  authority, selected LHCb data, residual-vector construction, frozen
+  projection inputs, and anomaly-claim authority remain missing.  The
+  carrier-derived `C9_NP` constraint target is wired but cannot consume the
+  2025 public result, 2020 fallback, or rejected 160745 route without those
+  authorities, so it remains non-promoting.
 
 Second-wave factual state:
 
@@ -18,8 +214,11 @@ Second-wave factual state:
 - the CMS HEPData `Results` table for record `ins2616304` v1 / table
   `1435213` now has a typed SHA256 authority-candidate receipt:
   `08a244d15702168288d1bf414423bcbc05c5c176c229280b2e185c5cd0bee9eb`;
-- the thread-selected LHCb penguin lane remains fail-closed because its exact
-  selected table/checksum authority is still missing;
+- the thread-selected LHCb penguin lane remains fail-closed because the 2025
+  Run 1+2 target has no accepted value/covariance HEPData table checksum or
+  residual-vector/freeze authority here; the 2020 HEPData fallback is
+  non-promoting, and `HEPData 160745` is rejected unless record/table binding
+  to P5' is proved;
 - the Doplicher-Roberts authority receipt is recorded and consumable only after
   evidence; it keeps `drAuthorityConsumedHere = false` and Standard Model
   matching promotion false;
@@ -54,9 +253,11 @@ The exact hard boundaries that still block stronger publication language are:
 - W4/W5: no accepted DY luminosity/convention authority, W4 adequacy receipt,
   Candidate256 physical calibration receipt, or W5 correction authority;
 - penguin: CMS HEPData `Results` checksum is supplied and typed as candidate
-  data, but the selected LHCb thread checksum remains missing; there is still
-  no accepted flavio digest, C9/C10 Wilson digest, CKM source authority, full
-  freeze tuple population, projection-code hash, or no-posterior-tuning
+  data, but the selected 2025 LHCb P5' thread checksum remains missing; the
+  2020 HEPData fallback is non-promoting, and the `HEPData 160745` /
+  `ins2922449` Table 16 artifacts are rejected b-jet-mass data.  There is
+  still no accepted flavio digest, C9/C10 Wilson digest, CKM source authority,
+  full freeze tuple population, projection-code hash, or no-posterior-tuning
   attestation;
 - Paper 4/Yang-Mills: no global spectral-gap theorem, non-flat field-strength
   fibre action, covariant Bianchi transport, Hodge/current coupling, or

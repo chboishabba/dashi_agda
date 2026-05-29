@@ -1,0 +1,51 @@
+{
+  "alpha_targets": {
+    "alpha1": 0.04124,
+    "alpha2": 0.08572
+  },
+  "anchors": {
+    "j_i_imag": 0.0,
+    "j_i_real": 1728.0,
+    "j_rho_abs": 3.0116454574113063e-44
+  },
+  "cm_points_scanned": 381,
+  "nearest": {
+    "alpha1": {
+      "nearest_log_ratio": {
+        "left_D": -155,
+        "log_ratio": 0.04123703959733996,
+        "pair_ratio": 1.7063340588219245,
+        "right_D": -164
+      },
+      "nearest_pair_ratio": {
+        "left_D": -99,
+        "log_ratio": 0.00612938051259913,
+        "pair_ratio": 0.04410567761228215,
+        "right_D": -143
+      },
+      "target": 0.04124
+    },
+    "alpha2": {
+      "nearest_log_ratio": {
+        "left_D": -68,
+        "log_ratio": 0.08572428867595441,
+        "pair_ratio": 0.7030960079674967,
+        "right_D": -183
+      },
+      "nearest_pair_ratio": {
+        "left_D": -80,
+        "log_ratio": 0.01197898780076299,
+        "pair_ratio": 0.08740490159196981,
+        "right_D": -168
+      },
+      "target": 0.08572
+    }
+  },
+  "normalization_warning": "No canonical j-to-alpha normalization is defined in the repo; nearest matches under these naive normalizations do not promote alphaDerivedFromModularGeometry.",
+  "promotion": {
+    "alphaDerivedFromModularGeometry": false,
+    "alphaOneDerivedFromModularGeometry": false,
+    "alphaTwoDerivedFromModularGeometry": false
+  },
+  "status": "exploratory_non_promoting"
+}

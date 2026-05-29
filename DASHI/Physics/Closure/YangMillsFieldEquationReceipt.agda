@@ -5828,3 +5828,153 @@ yangMillsReceiptMiddle6IBPVariationDoesNotPromote :
   false
 yangMillsReceiptMiddle6IBPVariationDoesNotPromote =
   refl
+
+------------------------------------------------------------------------
+-- Gate 3 pure-YM finite carrier-level receipt.
+--
+-- This consumes the obstruction-side zero-current surface.  It is a concrete
+-- D * F = J inhabitant with J definitionally equal to the zero Site2D
+-- field-strength bridge, and it remains explicitly non-promoting.
+
+data YMSFGCPureZeroCurrentFiniteReceiptStatus : Set where
+  pureZeroCurrentFiniteDStarFEqualsJInhabitedNoPromotion :
+    YMSFGCPureZeroCurrentFiniteReceiptStatus
+
+record YMSFGCPureZeroCurrentFiniteReceipt : Set₁ where
+  field
+    status :
+      YMSFGCPureZeroCurrentFiniteReceiptStatus
+
+    obstructionPureZeroSurface :
+      YMObs.YMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface
+
+    obstructionPureZeroSurfaceIsCanonical :
+      obstructionPureZeroSurface
+      ≡
+      YMObs.canonicalYMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface
+
+    pureZeroSupply :
+      YMObs.YMSFGCDiscreteHodgeCovariantDerivativePrimitiveSupply
+
+    pureZeroSupplyIsCanonical :
+      pureZeroSupply
+      ≡
+      YMObs.canonicalYMSFGCPureZeroCurrentDiscreteHodgeCovariantDerivativeSupply
+
+    pureZeroCurrentSource :
+      SFGC.GaugeField →
+      SFGC.SFGCSite2DFieldStrengthBridge
+
+    pureZeroCurrentSourceIsCanonical :
+      pureZeroCurrentSource
+      ≡
+      YMObs.sfgcPureZeroCurrentSource
+
+    pureZeroCurrentSourceIsZeroBridge :
+      (A : SFGC.GaugeField) →
+      pureZeroCurrentSource A
+      ≡
+      YMObs.sfgcZeroFieldStrengthBridge
+
+    pureDStarFEqualsJWithJZero :
+      (A : SFGC.GaugeField) →
+      YMObs.sfgcPureZeroCovariantDerivativeOnDualCurvature
+        A
+        (YMObs.sfgcPureZeroHodgeStarCandidate
+          (SFGC.sfgcSite2DFieldStrengthFromCurvature
+            (SFGC.sfgcSite2Dδ₁
+              (SFGC.sfgcSite2DConnectionTo1Form A))))
+      ≡
+      YMObs.sfgcPureZeroCurrentSource A
+
+    pureDStarFEqualsJWithJZeroIsCanonical :
+      pureDStarFEqualsJWithJZero
+      ≡
+      YMObs.sfgcPureZeroDStarFEqualsJLaw
+
+    lowerHodgeCurrentSurface :
+      YMSFGCRouteBLowerHodgeCurrentSurface
+
+    lowerHodgeCurrentSurfaceIsCanonical :
+      lowerHodgeCurrentSurface
+      ≡
+      canonicalYMSFGCRouteBLowerHodgeCurrentSurface
+
+    strictHodgeVariationBlocker :
+      YMObs.YangMillsVariationalEquationMissingPrimitive
+
+    strictHodgeVariationBlockerIsVariationPairing :
+      strictHodgeVariationBlocker
+      ≡
+      YMObs.missingVariationPairingForSelectedHodgeStar
+
+    receiptPromoted :
+      Bool
+
+    receiptPromotedIsFalse :
+      receiptPromoted ≡ false
+
+    receiptBoundary :
+      List String
+
+canonicalYMSFGCPureZeroCurrentFiniteReceipt :
+  YMSFGCPureZeroCurrentFiniteReceipt
+canonicalYMSFGCPureZeroCurrentFiniteReceipt =
+  record
+    { status =
+        pureZeroCurrentFiniteDStarFEqualsJInhabitedNoPromotion
+    ; obstructionPureZeroSurface =
+        YMObs.canonicalYMSFGCPureZeroCurrentDStarFEqualsJFiniteSurface
+    ; obstructionPureZeroSurfaceIsCanonical =
+        refl
+    ; pureZeroSupply =
+        YMObs.canonicalYMSFGCPureZeroCurrentDiscreteHodgeCovariantDerivativeSupply
+    ; pureZeroSupplyIsCanonical =
+        refl
+    ; pureZeroCurrentSource =
+        YMObs.sfgcPureZeroCurrentSource
+    ; pureZeroCurrentSourceIsCanonical =
+        refl
+    ; pureZeroCurrentSourceIsZeroBridge =
+        λ _ → refl
+    ; pureDStarFEqualsJWithJZero =
+        YMObs.sfgcPureZeroDStarFEqualsJLaw
+    ; pureDStarFEqualsJWithJZeroIsCanonical =
+        refl
+    ; lowerHodgeCurrentSurface =
+        canonicalYMSFGCRouteBLowerHodgeCurrentSurface
+    ; lowerHodgeCurrentSurfaceIsCanonical =
+        refl
+    ; strictHodgeVariationBlocker =
+        YMObs.missingVariationPairingForSelectedHodgeStar
+    ; strictHodgeVariationBlockerIsVariationPairing =
+        refl
+    ; receiptPromoted =
+        false
+    ; receiptPromotedIsFalse =
+        refl
+    ; receiptBoundary =
+        "Consumes the obstruction-side pure zero-current finite surface"
+        ∷ "The inhabited finite equation is D * F = J with J definitionally equal to SFGC.sfgcSite2DZero2Form via sfgcZeroFieldStrengthBridge"
+        ∷ "The receipt also points back to the Route B lower Hodge/current surface, but does not reinterpret it as a strict selected Hodge law"
+        ∷ "Strict promotion remains blocked by missingVariationPairingForSelectedHodgeStar and the absent metric Hodge/current variation package"
+        ∷ []
+    }
+
+yangMillsPureZeroCurrentFiniteReceiptInhabitsJZero :
+  (A : SFGC.GaugeField) →
+  YMSFGCPureZeroCurrentFiniteReceipt.pureZeroCurrentSource
+    canonicalYMSFGCPureZeroCurrentFiniteReceipt
+    A
+  ≡
+  YMObs.sfgcZeroFieldStrengthBridge
+yangMillsPureZeroCurrentFiniteReceiptInhabitsJZero A =
+  refl
+
+yangMillsPureZeroCurrentFiniteReceiptDoesNotPromote :
+  YMSFGCPureZeroCurrentFiniteReceipt.receiptPromoted
+    canonicalYMSFGCPureZeroCurrentFiniteReceipt
+  ≡
+  false
+yangMillsPureZeroCurrentFiniteReceiptDoesNotPromote =
+  refl

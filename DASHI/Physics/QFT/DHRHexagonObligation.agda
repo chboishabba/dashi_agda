@@ -17,6 +17,7 @@ import DASHI.Physics.Moonshine.LaneDimensionTheoremReceiptSurface as LaneDimensi
 import DASHI.Physics.QFT.AQFTTypedNetSurface as AQFT
 import DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface as AQFTColim
 import DASHI.Physics.QFT.DHRGaugeReceiptSurface as DHR
+import DASHI.Physics.QFT.FinitePrimeLaneDHRSMCompatibilityLedger as FiniteLedger
 import DASHI.Physics.QFT.ModularTheoryReceiptSurface as Modular
 import DASHI.Quantum.Stone as Stone
 
@@ -9347,5 +9348,866 @@ canonicalDHRHexagonExistingEndomorphismActionAdapterConsumptionReceipt operator 
         ∷ "the projected EndomorphismAction is exactly LocalisedEndomorphism.endomorphismAction, so existing action APIs can receive it"
         ∷ "the local carrier is AQFTColim.dASHILocalAlgebraNet and only reflexive completed-element receipts are threaded"
         ∷ "no identity EndomorphismAction constructor, hexagon law, DR reconstruction, or gauge assignment is promoted"
+        ∷ []
+    }
+
+data DHRFinitePrimeLaneBraidingHexagonMissingLaw : Set where
+  missingFinitePrimeLaneLeftRightHexagonCoherenceLaw :
+    DHRFinitePrimeLaneBraidingHexagonMissingLaw
+
+  missingFinitePrimeLaneDHRStatisticsAsBraidingLaw :
+    DHRFinitePrimeLaneBraidingHexagonMissingLaw
+
+canonicalDHRFinitePrimeLaneBraidingHexagonMissingLaws :
+  List DHRFinitePrimeLaneBraidingHexagonMissingLaw
+canonicalDHRFinitePrimeLaneBraidingHexagonMissingLaws =
+  missingFinitePrimeLaneDHRStatisticsAsBraidingLaw
+  ∷ []
+
+record DHRFinitePrimeLaneBraidingNaturalitySquareReceipt : Setω where
+  field
+    finitePrimeLaneNaturality :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt
+
+    p2NaturalitySquare :
+      FiniteLedger.finitePrimeLaneDHRCompose
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p2Identity
+          finitePrimeLaneNaturality)
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p2Identity
+          finitePrimeLaneNaturality)
+      ≡
+      FiniteLedger.finitePrimeLaneDHRCompose
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p2Identity
+          finitePrimeLaneNaturality)
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p2Identity
+          finitePrimeLaneNaturality)
+
+    p3NaturalitySquare :
+      FiniteLedger.finitePrimeLaneDHRCompose
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p3Identity
+          finitePrimeLaneNaturality)
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p3Identity
+          finitePrimeLaneNaturality)
+      ≡
+      FiniteLedger.finitePrimeLaneDHRCompose
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p3Identity
+          finitePrimeLaneNaturality)
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p3Identity
+          finitePrimeLaneNaturality)
+
+    p5NaturalitySquare :
+      FiniteLedger.finitePrimeLaneDHRCompose
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p5Identity
+          finitePrimeLaneNaturality)
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p5Identity
+          finitePrimeLaneNaturality)
+      ≡
+      FiniteLedger.finitePrimeLaneDHRCompose
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p5Identity
+          finitePrimeLaneNaturality)
+        (FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.p5Identity
+          finitePrimeLaneNaturality)
+
+    finiteLedgerNaturalityAvailable :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailable
+        finitePrimeLaneNaturality
+      ≡
+      true
+
+    naturalitySquareLawInhabited :
+      Bool
+
+    naturalitySquareLawInhabitedIsTrue :
+      naturalitySquareLawInhabited ≡ true
+
+    arbitrarySectorNaturalityPromoted :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.arbitrarySectorNaturalityPromoted
+        finitePrimeLaneNaturality
+      ≡
+      false
+
+    naturalitySquareBoundary :
+      List String
+
+open DHRFinitePrimeLaneBraidingNaturalitySquareReceipt public
+
+canonicalDHRFinitePrimeLaneBraidingNaturalitySquareReceipt :
+  DHRFinitePrimeLaneBraidingNaturalitySquareReceipt
+canonicalDHRFinitePrimeLaneBraidingNaturalitySquareReceipt =
+  record
+    { finitePrimeLaneNaturality =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; p2NaturalitySquare =
+        refl
+    ; p3NaturalitySquare =
+        refl
+    ; p5NaturalitySquare =
+        refl
+    ; finiteLedgerNaturalityAvailable =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailableIsTrue
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; naturalitySquareLawInhabited =
+        true
+    ; naturalitySquareLawInhabitedIsTrue =
+        refl
+    ; arbitrarySectorNaturalityPromoted =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.arbitrarySectorNaturalityPromotedIsFalse
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; naturalitySquareBoundary =
+        "G6-BN3 consumes the finite p2/p3/p5 ledger naturality receipt as an inhabited identity naturality-square law"
+        ∷ "The square is finite-row/identity-only: both paths are the same finite identity-composition expression"
+        ∷ "This does not construct arbitrary-sector DHR braiding naturality or a statistics operator as braiding"
+        ∷ "The next finite blocker at this stage is left/right hexagon coherence, followed by statistics-as-braiding"
+        ∷ []
+    }
+
+record DHRFinitePrimeLaneCarrierTriple
+  (left middle right : FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) :
+  Set where
+  constructor finitePrimeLaneCarrierTriple
+  field
+    firstCarrier :
+      FiniteLedger.finitePrimeLaneLocalisedEndomorphismCarrier left
+
+    secondCarrier :
+      FiniteLedger.finitePrimeLaneLocalisedEndomorphismCarrier middle
+
+    thirdCarrier :
+      FiniteLedger.finitePrimeLaneLocalisedEndomorphismCarrier right
+
+open DHRFinitePrimeLaneCarrierTriple public
+
+finitePrimeLaneCarrierTripleAction :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  DHRFinitePrimeLaneCarrierTriple left middle right →
+  DHRFinitePrimeLaneCarrierTriple left middle right
+finitePrimeLaneCarrierTripleAction left middle right triple =
+  finitePrimeLaneCarrierTriple
+    (FiniteLedger.finitePrimeLaneLocalisedEndomorphismAction left
+      (DHRFinitePrimeLaneCarrierTriple.firstCarrier triple))
+    (FiniteLedger.finitePrimeLaneLocalisedEndomorphismAction middle
+      (DHRFinitePrimeLaneCarrierTriple.secondCarrier triple))
+    (FiniteLedger.finitePrimeLaneLocalisedEndomorphismAction right
+      (DHRFinitePrimeLaneCarrierTriple.thirdCarrier triple))
+
+finitePrimeLaneSwapFirstSecond :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  DHRFinitePrimeLaneCarrierTriple left middle right →
+  DHRFinitePrimeLaneCarrierTriple middle left right
+finitePrimeLaneSwapFirstSecond left middle right triple =
+  let swapped =
+        FiniteLedger.finitePrimeLanePairSwap left middle
+          (FiniteLedger.finitePrimeLaneCarrierPair
+            (DHRFinitePrimeLaneCarrierTriple.firstCarrier triple)
+            (DHRFinitePrimeLaneCarrierTriple.secondCarrier triple))
+  in
+  finitePrimeLaneCarrierTriple
+    (FiniteLedger.FinitePrimeLaneCarrierPair.leftCarrier swapped)
+    (FiniteLedger.FinitePrimeLaneCarrierPair.rightCarrier swapped)
+    (DHRFinitePrimeLaneCarrierTriple.thirdCarrier triple)
+
+finitePrimeLaneSwapSecondThird :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  DHRFinitePrimeLaneCarrierTriple left middle right →
+  DHRFinitePrimeLaneCarrierTriple left right middle
+finitePrimeLaneSwapSecondThird left middle right triple =
+  let swapped =
+        FiniteLedger.finitePrimeLanePairSwap middle right
+          (FiniteLedger.finitePrimeLaneCarrierPair
+            (DHRFinitePrimeLaneCarrierTriple.secondCarrier triple)
+            (DHRFinitePrimeLaneCarrierTriple.thirdCarrier triple))
+  in
+  finitePrimeLaneCarrierTriple
+    (DHRFinitePrimeLaneCarrierTriple.firstCarrier triple)
+    (FiniteLedger.FinitePrimeLaneCarrierPair.leftCarrier swapped)
+    (FiniteLedger.FinitePrimeLaneCarrierPair.rightCarrier swapped)
+
+finitePrimeLaneLeftHexagonDirectPath :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  DHRFinitePrimeLaneCarrierTriple left middle right →
+  DHRFinitePrimeLaneCarrierTriple middle right left
+finitePrimeLaneLeftHexagonDirectPath left middle right triple =
+  finitePrimeLaneCarrierTriple
+    (DHRFinitePrimeLaneCarrierTriple.secondCarrier triple)
+    (DHRFinitePrimeLaneCarrierTriple.thirdCarrier triple)
+    (DHRFinitePrimeLaneCarrierTriple.firstCarrier triple)
+
+finitePrimeLaneLeftHexagonComposedPath :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  DHRFinitePrimeLaneCarrierTriple left middle right →
+  DHRFinitePrimeLaneCarrierTriple middle right left
+finitePrimeLaneLeftHexagonComposedPath left middle right triple =
+  finitePrimeLaneSwapSecondThird middle left right
+    (finitePrimeLaneSwapFirstSecond left middle right triple)
+
+finitePrimeLaneRightHexagonDirectPath :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  DHRFinitePrimeLaneCarrierTriple left middle right →
+  DHRFinitePrimeLaneCarrierTriple right left middle
+finitePrimeLaneRightHexagonDirectPath left middle right triple =
+  finitePrimeLaneCarrierTriple
+    (DHRFinitePrimeLaneCarrierTriple.thirdCarrier triple)
+    (DHRFinitePrimeLaneCarrierTriple.firstCarrier triple)
+    (DHRFinitePrimeLaneCarrierTriple.secondCarrier triple)
+
+finitePrimeLaneRightHexagonComposedPath :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  DHRFinitePrimeLaneCarrierTriple left middle right →
+  DHRFinitePrimeLaneCarrierTriple right left middle
+finitePrimeLaneRightHexagonComposedPath left middle right triple =
+  finitePrimeLaneSwapFirstSecond left right middle
+    (finitePrimeLaneSwapSecondThird left middle right triple)
+
+finitePrimeLaneLeftHexagonCoherenceLaw :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  (triple : DHRFinitePrimeLaneCarrierTriple left middle right) →
+  finitePrimeLaneLeftHexagonDirectPath left middle right
+    (finitePrimeLaneCarrierTripleAction left middle right triple)
+  ≡
+  finitePrimeLaneLeftHexagonComposedPath left middle right
+    (finitePrimeLaneCarrierTripleAction left middle right triple)
+finitePrimeLaneLeftHexagonCoherenceLaw _ _ _ _ =
+  refl
+
+finitePrimeLaneRightHexagonCoherenceLaw :
+  (left middle right :
+    FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+  (triple : DHRFinitePrimeLaneCarrierTriple left middle right) →
+  finitePrimeLaneRightHexagonDirectPath left middle right
+    (finitePrimeLaneCarrierTripleAction left middle right triple)
+  ≡
+  finitePrimeLaneRightHexagonComposedPath left middle right
+    (finitePrimeLaneCarrierTripleAction left middle right triple)
+finitePrimeLaneRightHexagonCoherenceLaw _ _ _ _ =
+  refl
+
+record DHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt : Setω where
+  field
+    pairSwapBraidingNaturalityReceipt :
+      FiniteLedger.FinitePrimeLanePairSwapBraidingNaturalityReceipt
+
+    leftHexagonEquation :
+      (left middle right :
+        FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+      (triple : DHRFinitePrimeLaneCarrierTriple left middle right) →
+      finitePrimeLaneLeftHexagonDirectPath left middle right
+        (finitePrimeLaneCarrierTripleAction left middle right triple)
+      ≡
+      finitePrimeLaneLeftHexagonComposedPath left middle right
+        (finitePrimeLaneCarrierTripleAction left middle right triple)
+
+    rightHexagonEquation :
+      (left middle right :
+        FiniteLedger.FinitePrimeLaneLocalisedEndomorphismKind) →
+      (triple : DHRFinitePrimeLaneCarrierTriple left middle right) →
+      finitePrimeLaneRightHexagonDirectPath left middle right
+        (finitePrimeLaneCarrierTripleAction left middle right triple)
+      ≡
+      finitePrimeLaneRightHexagonComposedPath left middle right
+        (finitePrimeLaneCarrierTripleAction left middle right triple)
+
+    leftRightHexagonCoherenceConstructed :
+      Bool
+
+    leftRightHexagonCoherenceConstructedIsTrue :
+      leftRightHexagonCoherenceConstructed ≡ true
+
+    arbitraryDHRHexagonPromoted :
+      Bool
+
+    arbitraryDHRHexagonPromotedIsFalse :
+      arbitraryDHRHexagonPromoted ≡ false
+
+    doplicherRobertsPromoted :
+      Bool
+
+    doplicherRobertsPromotedIsFalse :
+      doplicherRobertsPromoted ≡ false
+
+    standardModelGaugeAssignmentPromoted :
+      Bool
+
+    standardModelGaugeAssignmentPromotedIsFalse :
+      standardModelGaugeAssignmentPromoted ≡ false
+
+    finiteHexagonCoherenceBoundary :
+      List String
+
+open DHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt public
+
+canonicalDHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt :
+  DHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt
+canonicalDHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt =
+  record
+    { pairSwapBraidingNaturalityReceipt =
+        FiniteLedger.canonicalFinitePrimeLanePairSwapBraidingNaturalityReceipt
+    ; leftHexagonEquation =
+        finitePrimeLaneLeftHexagonCoherenceLaw
+    ; rightHexagonEquation =
+        finitePrimeLaneRightHexagonCoherenceLaw
+    ; leftRightHexagonCoherenceConstructed =
+        true
+    ; leftRightHexagonCoherenceConstructedIsTrue =
+        refl
+    ; arbitraryDHRHexagonPromoted =
+        false
+    ; arbitraryDHRHexagonPromotedIsFalse =
+        refl
+    ; doplicherRobertsPromoted =
+        false
+    ; doplicherRobertsPromotedIsFalse =
+        refl
+    ; standardModelGaugeAssignmentPromoted =
+        false
+    ; standardModelGaugeAssignmentPromotedIsFalse =
+        refl
+    ; finiteHexagonCoherenceBoundary =
+        "Finite p2/p3/p5 left and right hexagon coherence is inhabited for every triple of finite carrier-level lanes"
+        ∷ "Both equations compute by refl from the existing finite pair-swap surface and identity finite localised-endomorphism actions"
+        ∷ "This advances only the finite lane-swap hexagon blocker; arbitrary DHR symmetric hexagon, DR reconstruction, and G_SM promotion remain false"
+        ∷ []
+    }
+
+record DHRFinitePrimeLaneBraidingHexagonProgressReceipt
+  (operator : G6.NontrivialTrackedLaneOperator) :
+  Setω where
+  field
+    finitePrimeLaneLedger :
+      FiniteLedger.FinitePrimeLaneDHRSMCompatibilityLedger
+
+    finitePrimeLaneCarrierLevelEndomorphismReceipt :
+      FiniteLedger.FinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt
+
+    finitePrimeLaneNaturalityReceipt :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt
+
+    finitePrimeLaneBraidingNaturalitySquareReceipt :
+      DHRFinitePrimeLaneBraidingNaturalitySquareReceipt
+
+    finitePrimeLaneLeftRightHexagonCoherenceReceipt :
+      DHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt
+
+    crossLaneExchangeReceipt :
+      G6.G6TrackedCrossLaneCommutationTheorem operator
+
+    suppliedSectorHexagonWiring :
+      DHRSuppliedSectorLaneNaturalityHexagonWiring operator
+
+    finiteP2P3P5CarrierActionsAvailable :
+      Bool
+
+    finiteP2P3P5CarrierActionsAvailableIsTrue :
+      finiteP2P3P5CarrierActionsAvailable ≡ true
+
+    finiteRowNaturalityAvailable :
+      Bool
+
+    finiteRowNaturalityAvailableIsTrue :
+      finiteRowNaturalityAvailable ≡ true
+
+    finitePrimeLaneBraidingNaturalitySquareInhabited :
+      Bool
+
+    finitePrimeLaneBraidingNaturalitySquareInhabitedIsTrue :
+      finitePrimeLaneBraidingNaturalitySquareInhabited ≡ true
+
+    crossLaneExchangeAvailable :
+      Bool
+
+    crossLaneExchangeAvailableIsTrue :
+      crossLaneExchangeAvailable ≡ true
+
+    crossLaneExchangeDefinitionalForDHRBraiding :
+      Bool
+
+    crossLaneExchangeDefinitionalForDHRBraidingIsFalse :
+      crossLaneExchangeDefinitionalForDHRBraiding ≡ false
+
+    finitePrimeLaneBraidingConstructed :
+      Bool
+
+    finitePrimeLaneBraidingConstructedIsFalse :
+      finitePrimeLaneBraidingConstructed ≡ false
+
+    finitePrimeLaneHexagonConstructed :
+      Bool
+
+    finitePrimeLaneHexagonConstructedIsTrue :
+      finitePrimeLaneHexagonConstructed ≡ true
+
+    firstMissingLaw :
+      DHRFinitePrimeLaneBraidingHexagonMissingLaw
+
+    firstMissingLawIsDHRStatisticsAsBraiding :
+      firstMissingLaw
+      ≡
+      missingFinitePrimeLaneDHRStatisticsAsBraidingLaw
+
+    missingLaws :
+      List DHRFinitePrimeLaneBraidingHexagonMissingLaw
+
+    missingLawsAreCanonical :
+      missingLaws
+      ≡
+      canonicalDHRFinitePrimeLaneBraidingHexagonMissingLaws
+
+    progressBoundary :
+      List String
+
+open DHRFinitePrimeLaneBraidingHexagonProgressReceipt public
+
+canonicalDHRFinitePrimeLaneBraidingHexagonProgressReceipt :
+  (operator : G6.NontrivialTrackedLaneOperator) →
+  DHRFinitePrimeLaneBraidingHexagonProgressReceipt operator
+canonicalDHRFinitePrimeLaneBraidingHexagonProgressReceipt operator =
+  record
+    { finitePrimeLaneLedger =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMCompatibilityLedger
+    ; finitePrimeLaneCarrierLevelEndomorphismReceipt =
+        FiniteLedger.canonicalFinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt
+    ; finitePrimeLaneNaturalityReceipt =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finitePrimeLaneBraidingNaturalitySquareReceipt =
+        canonicalDHRFinitePrimeLaneBraidingNaturalitySquareReceipt
+    ; finitePrimeLaneLeftRightHexagonCoherenceReceipt =
+        canonicalDHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt
+    ; crossLaneExchangeReceipt =
+        G6.trackedScalingCrossLaneCommutationFromNontrivialOperator
+          operator
+    ; suppliedSectorHexagonWiring =
+        dhrSuppliedSectorLaneNaturalityHexagonWiring operator
+    ; finiteP2P3P5CarrierActionsAvailable =
+        FiniteLedger.FinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt.carrierLevelLocalisedEndomorphismLaneConstructed
+          FiniteLedger.canonicalFinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt
+    ; finiteP2P3P5CarrierActionsAvailableIsTrue =
+        FiniteLedger.FinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt.carrierLevelLocalisedEndomorphismLaneConstructedIsTrue
+          FiniteLedger.canonicalFinitePrimeLaneCarrierLevelLocalisedEndomorphismReceipt
+    ; finiteRowNaturalityAvailable =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailable
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteRowNaturalityAvailableIsTrue =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailableIsTrue
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finitePrimeLaneBraidingNaturalitySquareInhabited =
+        DHRFinitePrimeLaneBraidingNaturalitySquareReceipt.naturalitySquareLawInhabited
+          canonicalDHRFinitePrimeLaneBraidingNaturalitySquareReceipt
+    ; finitePrimeLaneBraidingNaturalitySquareInhabitedIsTrue =
+        DHRFinitePrimeLaneBraidingNaturalitySquareReceipt.naturalitySquareLawInhabitedIsTrue
+          canonicalDHRFinitePrimeLaneBraidingNaturalitySquareReceipt
+    ; crossLaneExchangeAvailable =
+        true
+    ; crossLaneExchangeAvailableIsTrue =
+        refl
+    ; crossLaneExchangeDefinitionalForDHRBraiding =
+        false
+    ; crossLaneExchangeDefinitionalForDHRBraidingIsFalse =
+        refl
+    ; finitePrimeLaneBraidingConstructed =
+        false
+    ; finitePrimeLaneBraidingConstructedIsFalse =
+        refl
+    ; finitePrimeLaneHexagonConstructed =
+        true
+    ; finitePrimeLaneHexagonConstructedIsTrue =
+        refl
+    ; firstMissingLaw =
+        missingFinitePrimeLaneDHRStatisticsAsBraidingLaw
+    ; firstMissingLawIsDHRStatisticsAsBraiding =
+        refl
+    ; missingLaws =
+        canonicalDHRFinitePrimeLaneBraidingHexagonMissingLaws
+    ; missingLawsAreCanonical =
+        refl
+    ; progressBoundary =
+        "Finite p2/p3/p5 carrier-level localised endomorphism actions and row naturality are available from the finite prime-lane ledger"
+        ∷ "The finite prime-lane braiding naturality square is now inhabited locally as the p2/p3/p5 identity-row square over that ledger"
+        ∷ "The finite p2/p3/p5 left and right pair-swap hexagon equations are now inhabited by definitional computation over finite triples"
+        ∷ "G6 cross-lane exchange is available as tracked valuation commutation for the supplied NontrivialTrackedLaneOperator"
+        ∷ "That exchange is not definitionally a DHR braiding morphism, and finite row naturality is not arbitrary-sector DHR naturality"
+        ∷ "The exact first missing law is now missingFinitePrimeLaneDHRStatisticsAsBraidingLaw"
+        ∷ "No arbitrary DHR braiding, symmetric hexagon closure, DR reconstruction, or gauge assignment is promoted"
+        ∷ []
+    }
+
+data DHRFinitePrimeLaneHexagonSide : Set where
+  finitePrimeLaneLeftHexagonSide :
+    DHRFinitePrimeLaneHexagonSide
+
+  finitePrimeLaneRightHexagonSide :
+    DHRFinitePrimeLaneHexagonSide
+
+data DHRFinitePrimeLaneHexagonTargetResidualBlocker : Set where
+  residualStatisticsOperatorNotComputedAsDHRBraiding :
+    DHRFinitePrimeLaneHexagonTargetResidualBlocker
+
+  residualAssociatorAndTensorProductLawsStillAbstract :
+    DHRFinitePrimeLaneHexagonTargetResidualBlocker
+
+canonicalDHRFinitePrimeLaneHexagonTargetResidualBlockers :
+  List DHRFinitePrimeLaneHexagonTargetResidualBlocker
+canonicalDHRFinitePrimeLaneHexagonTargetResidualBlockers =
+  residualStatisticsOperatorNotComputedAsDHRBraiding
+  ∷ residualAssociatorAndTensorProductLawsStillAbstract
+  ∷ []
+
+record DHRFinitePrimeLaneLeftHexagonTargetReceipt
+  (operator : G6.NontrivialTrackedLaneOperator) :
+  Setω where
+  field
+    progressReceipt :
+      DHRFinitePrimeLaneBraidingHexagonProgressReceipt operator
+
+    finiteNaturalityReceipt :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt
+
+    finiteNaturalityReceiptIsCanonical :
+      Bool
+
+    finiteNaturalityReceiptIsCanonicalIsTrue :
+      finiteNaturalityReceiptIsCanonical ≡ true
+
+    finiteNaturalityAvailable :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailable
+        finiteNaturalityReceipt
+      ≡
+      true
+
+    leftFiniteLeftRightHexagonCoherenceReceipt :
+      DHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt
+
+    hexagonSide :
+      DHRFinitePrimeLaneHexagonSide
+
+    hexagonSideIsLeft :
+      hexagonSide ≡ finitePrimeLaneLeftHexagonSide
+
+    leftHexagonTargetReceipt :
+      DHR.LocalisedEndomorphism →
+      DHR.LocalisedEndomorphism →
+      DHR.LocalisedEndomorphism →
+      Set
+
+    targetReceiptRecorded :
+      Bool
+
+    targetReceiptRecordedIsTrue :
+      targetReceiptRecorded ≡ true
+
+    leftHexagonLawInhabited :
+      Bool
+
+    leftHexagonLawInhabitedIsTrue :
+      leftHexagonLawInhabited ≡ true
+
+    symmetricHexagonPromoted :
+      Bool
+
+    symmetricHexagonPromotedIsFalse :
+      symmetricHexagonPromoted ≡ false
+
+    firstResidualBlocker :
+      DHRFinitePrimeLaneHexagonTargetResidualBlocker
+
+    firstResidualBlockerIsStatisticsAsBraiding :
+      firstResidualBlocker
+      ≡
+      residualStatisticsOperatorNotComputedAsDHRBraiding
+
+    residualBlockers :
+      List DHRFinitePrimeLaneHexagonTargetResidualBlocker
+
+    residualBlockersAreCanonical :
+      residualBlockers
+      ≡
+      canonicalDHRFinitePrimeLaneHexagonTargetResidualBlockers
+
+    leftHexagonTargetBoundary :
+      List String
+
+open DHRFinitePrimeLaneLeftHexagonTargetReceipt public
+
+canonicalDHRFinitePrimeLaneLeftHexagonTargetReceipt :
+  (operator : G6.NontrivialTrackedLaneOperator) →
+  DHRFinitePrimeLaneLeftHexagonTargetReceipt operator
+canonicalDHRFinitePrimeLaneLeftHexagonTargetReceipt operator =
+  record
+    { progressReceipt =
+        canonicalDHRFinitePrimeLaneBraidingHexagonProgressReceipt operator
+    ; finiteNaturalityReceipt =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteNaturalityReceiptIsCanonical =
+        true
+    ; finiteNaturalityReceiptIsCanonicalIsTrue =
+        refl
+    ; finiteNaturalityAvailable =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailableIsTrue
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; leftFiniteLeftRightHexagonCoherenceReceipt =
+        canonicalDHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt
+    ; hexagonSide =
+        finitePrimeLaneLeftHexagonSide
+    ; hexagonSideIsLeft =
+        refl
+    ; leftHexagonTargetReceipt =
+        DHRHexagonFailClosedCoherenceReceipt.leftHexagonTargetReceipt
+          canonicalDHRHexagonFailClosedCoherenceReceipt
+    ; targetReceiptRecorded =
+        true
+    ; targetReceiptRecordedIsTrue =
+        refl
+    ; leftHexagonLawInhabited =
+        true
+    ; leftHexagonLawInhabitedIsTrue =
+        refl
+    ; symmetricHexagonPromoted =
+        false
+    ; symmetricHexagonPromotedIsFalse =
+        refl
+    ; firstResidualBlocker =
+        residualStatisticsOperatorNotComputedAsDHRBraiding
+    ; firstResidualBlockerIsStatisticsAsBraiding =
+        refl
+    ; residualBlockers =
+        canonicalDHRFinitePrimeLaneHexagonTargetResidualBlockers
+    ; residualBlockersAreCanonical =
+        refl
+    ; leftHexagonTargetBoundary =
+        "The finite prime-lane naturality receipt is available and canonical"
+        ∷ "The left hexagon target receipt is definitionally the existing fail-closed coherence socket"
+        ∷ "The finite left p2/p3/p5 pair-swap hexagon law is inhabited by the finite left/right coherence receipt"
+        ∷ "Statistics-as-braiding is now the first residual target blocker, followed by associator/tensor laws"
+        ∷ "No arbitrary DHR symmetric hexagon closure, DR reconstruction, or gauge assignment is promoted"
+        ∷ []
+    }
+
+record DHRFinitePrimeLaneRightHexagonTargetReceipt
+  (operator : G6.NontrivialTrackedLaneOperator) :
+  Setω where
+  field
+    progressReceipt :
+      DHRFinitePrimeLaneBraidingHexagonProgressReceipt operator
+
+    finiteNaturalityReceipt :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt
+
+    finiteNaturalityReceiptIsCanonical :
+      Bool
+
+    finiteNaturalityReceiptIsCanonicalIsTrue :
+      finiteNaturalityReceiptIsCanonical ≡ true
+
+    finiteNaturalityAvailable :
+      FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailable
+        finiteNaturalityReceipt
+      ≡
+      true
+
+    rightFiniteLeftRightHexagonCoherenceReceipt :
+      DHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt
+
+    hexagonSide :
+      DHRFinitePrimeLaneHexagonSide
+
+    hexagonSideIsRight :
+      hexagonSide ≡ finitePrimeLaneRightHexagonSide
+
+    rightHexagonTargetReceipt :
+      DHR.LocalisedEndomorphism →
+      DHR.LocalisedEndomorphism →
+      DHR.LocalisedEndomorphism →
+      Set
+
+    targetReceiptRecorded :
+      Bool
+
+    targetReceiptRecordedIsTrue :
+      targetReceiptRecorded ≡ true
+
+    rightHexagonLawInhabited :
+      Bool
+
+    rightHexagonLawInhabitedIsTrue :
+      rightHexagonLawInhabited ≡ true
+
+    symmetricHexagonPromoted :
+      Bool
+
+    symmetricHexagonPromotedIsFalse :
+      symmetricHexagonPromoted ≡ false
+
+    firstResidualBlocker :
+      DHRFinitePrimeLaneHexagonTargetResidualBlocker
+
+    firstResidualBlockerIsStatisticsAsBraiding :
+      firstResidualBlocker
+      ≡
+      residualStatisticsOperatorNotComputedAsDHRBraiding
+
+    residualBlockers :
+      List DHRFinitePrimeLaneHexagonTargetResidualBlocker
+
+    residualBlockersAreCanonical :
+      residualBlockers
+      ≡
+      canonicalDHRFinitePrimeLaneHexagonTargetResidualBlockers
+
+    rightHexagonTargetBoundary :
+      List String
+
+open DHRFinitePrimeLaneRightHexagonTargetReceipt public
+
+canonicalDHRFinitePrimeLaneRightHexagonTargetReceipt :
+  (operator : G6.NontrivialTrackedLaneOperator) →
+  DHRFinitePrimeLaneRightHexagonTargetReceipt operator
+canonicalDHRFinitePrimeLaneRightHexagonTargetReceipt operator =
+  record
+    { progressReceipt =
+        canonicalDHRFinitePrimeLaneBraidingHexagonProgressReceipt operator
+    ; finiteNaturalityReceipt =
+        FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; finiteNaturalityReceiptIsCanonical =
+        true
+    ; finiteNaturalityReceiptIsCanonicalIsTrue =
+        refl
+    ; finiteNaturalityAvailable =
+        FiniteLedger.FinitePrimeLaneDHRSMNaturalityReceipt.naturalityReceiptsAvailableIsTrue
+          FiniteLedger.canonicalFinitePrimeLaneDHRSMNaturalityReceipt
+    ; rightFiniteLeftRightHexagonCoherenceReceipt =
+        canonicalDHRFinitePrimeLaneLeftRightHexagonCoherenceReceipt
+    ; hexagonSide =
+        finitePrimeLaneRightHexagonSide
+    ; hexagonSideIsRight =
+        refl
+    ; rightHexagonTargetReceipt =
+        DHRHexagonFailClosedCoherenceReceipt.rightHexagonTargetReceipt
+          canonicalDHRHexagonFailClosedCoherenceReceipt
+    ; targetReceiptRecorded =
+        true
+    ; targetReceiptRecordedIsTrue =
+        refl
+    ; rightHexagonLawInhabited =
+        true
+    ; rightHexagonLawInhabitedIsTrue =
+        refl
+    ; symmetricHexagonPromoted =
+        false
+    ; symmetricHexagonPromotedIsFalse =
+        refl
+    ; firstResidualBlocker =
+        residualStatisticsOperatorNotComputedAsDHRBraiding
+    ; firstResidualBlockerIsStatisticsAsBraiding =
+        refl
+    ; residualBlockers =
+        canonicalDHRFinitePrimeLaneHexagonTargetResidualBlockers
+    ; residualBlockersAreCanonical =
+        refl
+    ; rightHexagonTargetBoundary =
+        "The finite prime-lane naturality receipt is available and canonical"
+        ∷ "The right hexagon target receipt is definitionally the existing fail-closed coherence socket"
+        ∷ "The finite right p2/p3/p5 pair-swap hexagon law is inhabited by the finite left/right coherence receipt"
+        ∷ "Statistics-as-braiding is now the first residual target blocker, followed by associator/tensor laws"
+        ∷ "No arbitrary DHR symmetric hexagon closure, DR reconstruction, or gauge assignment is promoted"
+        ∷ []
+    }
+
+record DHRFinitePrimeLaneLeftRightHexagonTargetReceipts
+  (operator : G6.NontrivialTrackedLaneOperator) :
+  Setω where
+  field
+    leftTarget :
+      DHRFinitePrimeLaneLeftHexagonTargetReceipt operator
+
+    rightTarget :
+      DHRFinitePrimeLaneRightHexagonTargetReceipt operator
+
+    leftTargetRecorded :
+      DHRFinitePrimeLaneLeftHexagonTargetReceipt.targetReceiptRecorded
+        leftTarget
+      ≡
+      true
+
+    rightTargetRecorded :
+      DHRFinitePrimeLaneRightHexagonTargetReceipt.targetReceiptRecorded
+        rightTarget
+      ≡
+      true
+
+    leftLawNowInhabited :
+      DHRFinitePrimeLaneLeftHexagonTargetReceipt.leftHexagonLawInhabited
+        leftTarget
+      ≡
+      true
+
+    rightLawNowInhabited :
+      DHRFinitePrimeLaneRightHexagonTargetReceipt.rightHexagonLawInhabited
+        rightTarget
+      ≡
+      true
+
+    hexagonItselfMoved :
+      Bool
+
+    hexagonItselfMovedIsTrue :
+      hexagonItselfMoved ≡ true
+
+    symmetricDHRHexagonPromoted :
+      Bool
+
+    symmetricDHRHexagonPromotedIsFalse :
+      symmetricDHRHexagonPromoted ≡ false
+
+    drPromotionConstructed :
+      Bool
+
+    drPromotionConstructedIsFalse :
+      drPromotionConstructed ≡ false
+
+    leftRightTargetBoundary :
+      List String
+
+open DHRFinitePrimeLaneLeftRightHexagonTargetReceipts public
+
+canonicalDHRFinitePrimeLaneLeftRightHexagonTargetReceipts :
+  (operator : G6.NontrivialTrackedLaneOperator) →
+  DHRFinitePrimeLaneLeftRightHexagonTargetReceipts operator
+canonicalDHRFinitePrimeLaneLeftRightHexagonTargetReceipts operator =
+  record
+    { leftTarget =
+        canonicalDHRFinitePrimeLaneLeftHexagonTargetReceipt operator
+    ; rightTarget =
+        canonicalDHRFinitePrimeLaneRightHexagonTargetReceipt operator
+    ; leftTargetRecorded =
+        refl
+    ; rightTargetRecorded =
+        refl
+    ; leftLawNowInhabited =
+        refl
+    ; rightLawNowInhabited =
+        refl
+    ; hexagonItselfMoved =
+        true
+    ; hexagonItselfMovedIsTrue =
+        refl
+    ; symmetricDHRHexagonPromoted =
+        false
+    ; symmetricDHRHexagonPromotedIsFalse =
+        refl
+    ; drPromotionConstructed =
+        false
+    ; drPromotionConstructedIsFalse =
+        refl
+    ; leftRightTargetBoundary =
+        "Finite left and right hexagon target receipts are now paired around the available finite-row naturality receipt"
+        ∷ "Both target receipts are definitional references to the existing fail-closed DHR hexagon sockets"
+        ∷ "The finite p2/p3/p5 pair-swap hexagon theorem itself is moved: both left and right finite laws are inhabited"
+        ∷ "DR classification, gauge reconstruction, and Standard Model matching remain unpromoted"
         ∷ []
     }

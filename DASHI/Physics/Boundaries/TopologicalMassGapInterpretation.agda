@@ -26,6 +26,15 @@ data TopologicalMassGapInterpretationBlocker : Set where
   discreteTopologicalInterpretationNotContinuumR4Proof :
     TopologicalMassGapInterpretationBlocker
 
+  noReflectionPositivityCertificate :
+    TopologicalMassGapInterpretationBlocker
+
+  noPolymerClusterConvergenceCertificate :
+    TopologicalMassGapInterpretationBlocker
+
+  noOSReconstructionCertificate :
+    TopologicalMassGapInterpretationBlocker
+
   noClayAcceptance :
     TopologicalMassGapInterpretationBlocker
 
@@ -39,6 +48,9 @@ canonicalTopologicalMassGapInterpretationBlockers =
   ∷ proposalDissolutionCampaignNotTheoremClosure
   ∷ aiCollaborativeCampaignNotAcceptedMathematicalAuthority
   ∷ discreteTopologicalInterpretationNotContinuumR4Proof
+  ∷ noReflectionPositivityCertificate
+  ∷ noPolymerClusterConvergenceCertificate
+  ∷ noOSReconstructionCertificate
   ∷ noClayAcceptance
   ∷ noInternalFormalImport
   ∷ []
@@ -210,3 +222,126 @@ canonicalTopologicalMassGapInterpretationReceipt =
         ∷ "Discrete/topological interpretation is not a continuum R4 Yang-Mills proof"
         ∷ []
     }
+
+record TopologicalMassGapBlockerThreadReceipt : Setω where
+  field
+    interpretationReceipt :
+      TopologicalMassGapInterpretationReceipt
+
+    interpretationReceiptIsCanonical :
+      Bool
+
+    interpretationReceiptIsCanonicalIsTrue :
+      interpretationReceiptIsCanonical ≡ true
+
+    finiteDiscreteEvidenceRecorded :
+      Bool
+
+    finiteDiscreteEvidenceRecordedIsTrue :
+      finiteDiscreteEvidenceRecorded ≡ true
+
+    topologicalInterpretationAuthorityRecorded :
+      Bool
+
+    topologicalInterpretationAuthorityRecordedIsTrue :
+      topologicalInterpretationAuthorityRecorded ≡ true
+
+    reflectionPositivityConstructed :
+      Bool
+
+    reflectionPositivityConstructedIsFalse :
+      reflectionPositivityConstructed ≡ false
+
+    polymerClusterConvergenceConstructed :
+      Bool
+
+    polymerClusterConvergenceConstructedIsFalse :
+      polymerClusterConvergenceConstructed ≡ false
+
+    osReconstructionConstructed :
+      Bool
+
+    osReconstructionConstructedIsFalse :
+      osReconstructionConstructed ≡ false
+
+    continuumR4YangMillsProofConstructed :
+      Bool
+
+    continuumR4YangMillsProofConstructedIsFalse :
+      continuumR4YangMillsProofConstructed ≡ false
+
+    clayPromotionFromTopologicalInterpretation :
+      Bool
+
+    clayPromotionFromTopologicalInterpretationIsFalse :
+      clayPromotionFromTopologicalInterpretation ≡ false
+
+    exactBlockers :
+      List TopologicalMassGapInterpretationBlocker
+
+    exactBlockersAreCanonical :
+      exactBlockers ≡ canonicalTopologicalMassGapInterpretationBlockers
+
+    blockerNotes :
+      List String
+
+open TopologicalMassGapBlockerThreadReceipt public
+
+canonicalTopologicalMassGapBlockerThreadReceipt :
+  TopologicalMassGapBlockerThreadReceipt
+canonicalTopologicalMassGapBlockerThreadReceipt =
+  record
+    { interpretationReceipt =
+        canonicalTopologicalMassGapInterpretationReceipt
+    ; interpretationReceiptIsCanonical =
+        true
+    ; interpretationReceiptIsCanonicalIsTrue =
+        refl
+    ; finiteDiscreteEvidenceRecorded =
+        true
+    ; finiteDiscreteEvidenceRecordedIsTrue =
+        refl
+    ; topologicalInterpretationAuthorityRecorded =
+        true
+    ; topologicalInterpretationAuthorityRecordedIsTrue =
+        refl
+    ; reflectionPositivityConstructed =
+        false
+    ; reflectionPositivityConstructedIsFalse =
+        refl
+    ; polymerClusterConvergenceConstructed =
+        false
+    ; polymerClusterConvergenceConstructedIsFalse =
+        refl
+    ; osReconstructionConstructed =
+        false
+    ; osReconstructionConstructedIsFalse =
+        refl
+    ; continuumR4YangMillsProofConstructed =
+        false
+    ; continuumR4YangMillsProofConstructedIsFalse =
+        refl
+    ; clayPromotionFromTopologicalInterpretation =
+        false
+    ; clayPromotionFromTopologicalInterpretationIsFalse =
+        refl
+    ; exactBlockers =
+        canonicalTopologicalMassGapInterpretationBlockers
+    ; exactBlockersAreCanonical =
+        refl
+    ; blockerNotes =
+        "Finite/discrete/topological evidence is recorded only as candidate interpretation evidence"
+        ∷ "No reflection-positivity certificate is supplied by the interpretation route"
+        ∷ "No polymer-cluster convergence certificate is supplied by the interpretation route"
+        ∷ "No OS reconstruction certificate is supplied by the interpretation route"
+        ∷ "No continuum R4 Yang-Mills proof or Clay promotion follows"
+        ∷ []
+    }
+
+topologicalMassGapBlockerThreadKeepsClayFalse :
+  clayPromotionFromTopologicalInterpretation
+    canonicalTopologicalMassGapBlockerThreadReceipt
+  ≡
+  false
+topologicalMassGapBlockerThreadKeepsClayFalse =
+  refl
