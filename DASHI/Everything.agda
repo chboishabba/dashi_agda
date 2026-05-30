@@ -856,6 +856,12 @@ import DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt
 import DASHI.Physics.Closure.NSFinalStateReceipt
 import DASHI.Physics.Closure.NSVorticityNoMechanismReceipt
+import DASHI.Physics.Closure.EnstrophyEquationCarrierReceipt
+import DASHI.Physics.Closure.Constantin1994ApproachReceipt
+import DASHI.Physics.Closure.EnergyEnstrophyInterpolationReceipt
+import DASHI.Physics.Closure.GeometricConstraintOnVorticityReceipt
+import DASHI.Physics.Closure.NSN2EnstrophyOpenStatusReceipt
+import DASHI.Physics.Closure.NSClayFinalHonestStateReceipt
 import DASHI.Physics.Closure.ZetaK21ComputationReceipt
 import DASHI.Physics.Closure.ZetaQ21MinusOneReceipt
 import DASHI.Physics.Closure.Deg23FromZetaK21Receipt
