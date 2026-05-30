@@ -1746,12 +1746,3 @@ unless a line explicitly says it describes the live monitor surface.
   scan, marker scan, and `git diff --check` passed; Clay YM, Clay NS, exact
   SM, `G_DHR ~= G_SM`, physical CKM, VEV derivation, and terminal promotion
   remain false.
-
-- 2026-05-30: Manager B NS enstrophy/vorticity tranche complete.  Added
-  receipts for the carrier enstrophy equation, Constantin-Fefferman-Majda
-  direction candidate, energy-enstrophy/Prodi-Serrin diagnostic, prime-sparse
-  vorticity concentration closure, N2 enstrophy open status, and final honest
-  NS Clay state.  The receipts record that Leray-level structure remains the
-  carrier ceiling, while enstrophy control, `L-infinity` vorticity control,
-  and global smooth regularity require new mathematics.  Clay NS and terminal
-  promotion remain false.

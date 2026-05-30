@@ -4299,15 +4299,3 @@
   level while exact carrier-derived SM reconstruction remains false.  Focused
   Agda checks and the aggregate passed; promotion, marker, and diff scans are
   clean.
-
-- 2026-05-30: Completed the Manager B-only NS enstrophy/vorticity tranche
-  after correcting worker scope back to Manager B.  Implemented
-  `EnstrophyEquationCarrierReceipt`, `Constantin1994ApproachReceipt`,
-  `EnergyEnstrophyInterpolationReceipt`,
-  `GeometricConstraintOnVorticityReceipt`,
-  `NSN2EnstrophyOpenStatusReceipt`, and
-  `NSClayFinalHonestStateReceipt`.  The tranche records the standard
-  enstrophy identity, CFM direction route as a non-uniform candidate,
-  Prodi-Serrin closure for carrier large data, prime-power concentration as a
-  surviving obstruction, and the final honest NS state: Leray-level only, no
-  enstrophy/vorticity regularity closure, and no Clay promotion.
