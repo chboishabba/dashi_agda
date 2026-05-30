@@ -943,6 +943,11 @@ import DASHI.Physics.Closure.YMShimuraTowerUpgradeReceipt
 import DASHI.Physics.Closure.CKMCPPhaseUpgradeReceipt
 import DASHI.Physics.Closure.ProgrammeStateAfterComputationReceipt
 import DASHI.Physics.Closure.ProgrammeStateRevisionReceipt
+import DASHI.Physics.Closure.UltrametricInsightClarificationReceipt
+import DASHI.Physics.Closure.YMProgressSummaryReceipt
+import DASHI.Physics.Closure.NSYMParallelStructureReceipt
+import DASHI.Physics.Closure.Paper8NarrativeUpdateReceipt
+import DASHI.Physics.Closure.SessionCloseStateReceipt
 import DASHI.Physics.Closure.PaperUpdateReceipt
 import DASHI.Physics.Closure.FinalCommitAndTagReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt
