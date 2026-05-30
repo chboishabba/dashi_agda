@@ -16,11 +16,11 @@ open import Data.List.Base using (List; _∷_; [])
 
 phase2FrontierTagName : String
 phase2FrontierTagName =
-  "phase2-ns-ym-ckm-v2"
+  "phase2-final-v1"
 
 phase2FrontierCommitMessage : String
 phase2FrontierCommitMessage =
-  "NS: corrected j_nu = log_p(C0/nu) + 11/8. Cross-lane leakage real but finite by Thue-Mahler -- bounded forcing not feedback. Cascade rate R ~ p^{-2} nu-independent. Global H^{11/8} bound with explicit constants. Remaining gap: Bernstein for prime-scale LP projectors (standard). YM: cusp universality 4-part argument complete. Geometric gap closes as 1/N^2, curvature coupling irrelevant (dim 6). IR stability step is final gap. CKM: |Vub| = alpha1*alpha2 upgraded to carrier adjacent-only chain derivation. Beta derived from two independent carrier structures at 6%. Alpha angle open. All Clay promotions false."
+  "NS global H^{11/8} bound: fully explicit. C_0=sqrt(p), j_nu=log_p(1/nu)+15/8, C(p=2)=1.566. All 8 proof steps complete for carrier-structured data. Carrier-to-general gap open. YM: cusp universality complete at perturbation theory level. Mass gap perturbation O(N^{-4}), negligible for N>31. YM Clay distance = flat YM gap (Clay problem itself). CKM: alpha=pi-beta-gamma=90.8 degrees (0.3%). Vub=alpha1*alpha2 is leading-order U_d-diagonal estimate (4.2%); full next-order fails. Six CKM quantities tabulated with honest labels. Paper 6 draft-complete. No Clay promotion on either problem."
 
 phase2FrontierAggregateCommand : String
 phase2FrontierAggregateCommand =
@@ -229,7 +229,7 @@ canonicalFinalCommitAndTagReceipt =
     ; receiptBoundary =
         "C6 records the final validation, commit, tag, and push protocol"
         ∷ "Runtime git actions are false at receipt construction and executed externally by the manager"
-        ∷ "The requested tag is phase2-ns-ym-ckm-v2"
+        ∷ "The requested tag is phase2-final-v1"
         ∷ "All Clay, exact-SM, physical-CKM, and terminal promotions remain false"
         ∷ []
     }
