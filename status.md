@@ -1,3 +1,22 @@
+# 2026-05-30 Manager B gauge-group closeout tranche
+
+- Added and wired candidate gauge-group closeout receipts for the
+  `SU(2)_3 <-> SU(3)_1` decoupling mechanism, the Hecke-circle `U(1)_Y`
+  extension on `X0(3)`, the full 48-Weyl hypercharge table, explicit
+  left-handed anomaly cancellation verification, gravitational anomaly
+  cancellation, and aggregate SM gauge-group candidate promotion status.
+  These receipts record inherited/candidate gauge structure only: exact SM,
+  `G_DHR ~= G_SM`, CKM, Clay, and terminal promotions remain false.
+- Added honest-closure receipts for the Navier-Stokes vorticity blocker, the
+  VEV-as-PDG-input boundary, carrier dimensionful-prediction anchoring, the
+  final Phase 2 blocker map, next-session priorities, and the session grand
+  summary.  NS remains complete only at the Leray weak-solution boundary;
+  VEV and all dimensionful scales still require external anchors.
+- Added Paper 6 section drafts for the introduction, lambda derivation, and
+  `Vcb` derivation; added Paper 8 section drafts for candidate gauge origin
+  and open problems.  `FinalCommitReceipt` records the final validation,
+  commit, tag, and push protocol for this tranche.
+
 # 2026-05-30 Manager B final integration validation
 
 - Integrated the final tranche receipt imports into `DASHI/Everything.agda`:
@@ -1713,3 +1732,17 @@ unless a line explicitly says it describes the live monitor surface.
   3x3 H0 matrix with p2-p5 coupling set to zero is positive definite, while
   the full raw H0 OS base case, reflection form, Wightman reconstruction, and
   Clay Yang-Mills promotion remain false.
+
+- 2026-05-30: Manager C gauge-group/closure tranche complete.  Added
+  closure receipts for SU(2)-SU(3) decoupling via the lepton/quark split as a
+  SET candidate, continuous `U(1)_Y` from the Hecke circle on `X0(3)`, the
+  full signed-sixth hypercharge table, anomaly-cancellation verification,
+  gravitational anomaly cancellation, SM gauge-group candidate promotion
+  status, NS vorticity no-mechanism closure, VEV-as-PDG-input closure,
+  dimensionful-anchor bookkeeping, the final Phase 2 blocker map, next-session
+  priorities, session grand summary, and final commit/tag protocol.  Paper 6
+  Sections 1-3 and Paper 8 Sections 5-6 are now drafted as complete prose
+  sections.  Focused Agda checks, full `DASHI/Everything.agda`, promotion
+  scan, marker scan, and `git diff --check` passed; Clay YM, Clay NS, exact
+  SM, `G_DHR ~= G_SM`, physical CKM, VEV derivation, and terminal promotion
+  remain false.

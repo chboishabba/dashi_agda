@@ -1,5 +1,27 @@
 # 2026-05-30
 
+- Manager B gauge-group closeout tranche complete locally.  Added candidate
+  closeout receipts for `SU2SU3DecouplingLemmaReceipt`,
+  `HeckeCircleU1YReceipt`, `U1YChargeAssignmentTableReceipt`,
+  `AnomalyCancellationVerificationReceipt`,
+  `GravitationalAnomalyCancellationReceipt`, and
+  `SMGaugeGroupCandidatePromotionReceipt`.  The new anomaly checks use the
+  all-left-handed SM Weyl convention, so `u^c`, `d^c`, `e^c`, and `nu^c`
+  carry the conjugate hypercharges in the cubic and mixed anomaly sums.
+- Added no-current-path and governance receipts:
+  `NSVorticityNoMechanismReceipt`, `VEVAsPDGInputReceipt`,
+  `CarrierDimensionfulPredictionsReceipt`,
+  `Phase2BlockerMapFinalReceipt`, `NextSessionPriorityReceipt`,
+  `SessionGrandSummaryReceipt`, and `FinalCommitReceipt`.  The tower now
+  records NS vorticity and VEV derivation as honest blockers, with no Clay,
+  exact SM, CKM, DHR/SM, or terminal promotion.
+- Added Paper 6 draft sections 1-3 and Paper 8 draft sections 5-6 as prose
+  sidecars.  These document the sub-percent lambda/`Vcb` diagnostic claims,
+  the candidate gauge-factor origin, and the open-problem map without
+  broadening the formal promotion surface.
+
+# 2026-05-30
+
 - Manager B final integration/validation tranche complete.  Wired
   `YukawaNormalisationStructureReceipt`,
   `CKMFullMatrixFromCarrierReceipt`, `AnomalyCancellationTableReceipt`,

@@ -12,6 +12,34 @@ shape for matter/Yukawa/CKM/P5-prime, and
 manuscript shape for the unification tower. Both outlines are documentation
 sidecars only and do not create Agda receipts or promotion claims.
 
+Draft section sidecars: `Docs/Paper8Section3Draft.md` and
+`Docs/Paper8Section4Draft.md` cover the quark/lepton split and 48-Weyl count;
+`Docs/Paper8Section5Draft.md` records the candidate gauge-factor origin; and
+`Docs/Paper8Section6Draft.md` records the precise open-problem map. These are
+paper prose drafts only.
+
+Phase 2 gauge-group closeout receipts:
+`DASHI.Physics.Closure.SU2SU3DecouplingLemmaReceipt`,
+`DASHI.Physics.Closure.HeckeCircleU1YReceipt`,
+`DASHI.Physics.Closure.U1YChargeAssignmentTableReceipt`,
+`DASHI.Physics.Closure.AnomalyCancellationVerificationReceipt`,
+`DASHI.Physics.Closure.GravitationalAnomalyCancellationReceipt`, and
+`DASHI.Physics.Closure.SMGaugeGroupCandidatePromotionReceipt` record the
+candidate SET decoupling mechanism, the Hecke-circle `U(1)_Y` extension, the
+48-Weyl hypercharge table, and inherited anomaly cancellation.  They keep
+exact SM, `G_DHR ~= G_SM`, CKM, Clay, and terminal promotions false.
+
+Phase 2 honest-closure receipts:
+`DASHI.Physics.Closure.NSVorticityNoMechanismReceipt`,
+`DASHI.Physics.Closure.VEVAsPDGInputReceipt`,
+`DASHI.Physics.Closure.CarrierDimensionfulPredictionsReceipt`,
+`DASHI.Physics.Closure.Phase2BlockerMapFinalReceipt`,
+`DASHI.Physics.Closure.NextSessionPriorityReceipt`, and
+`DASHI.Physics.Closure.SessionGrandSummaryReceipt` record the no-current-path
+NS vorticity and VEV closures, the dimensionless/dimensionful boundary, the
+final Phase 2 blocker map, and the next-session priorities.  `FinalCommitReceipt`
+records the validation/commit/tag/push protocol only.
+
 ## Phase 1 Target Status
 
 Phase 1 tracks eight target/frontier receipts in the submission-facing control

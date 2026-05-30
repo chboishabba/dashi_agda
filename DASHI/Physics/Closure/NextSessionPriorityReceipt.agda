@@ -4,49 +4,69 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
-import DASHI.Physics.Closure.ResidualBlockersSummaryReceipt as Blockers
+import DASHI.Physics.Closure.Phase2BlockerMapFinalReceipt as Map
 
 ------------------------------------------------------------------------
 -- Ordered next-session research priorities.
 
+data NextSessionPriorityStatus : Set where
+  nextSessionPrioritiesRecordedNoPromotion :
+    NextSessionPriorityStatus
+
 data NextSessionPriority : Set where
-  vubNLOFromCarrierRG :
+  ymTightness :
     NextSessionPriority
 
-  deg23HilbertModularVol :
+  vubFromCPMechanism :
     NextSessionPriority
 
-  waveletOrthogonalityProof :
+  su2su3FormalDecoupling :
     NextSessionPriority
 
-canonicalNextSessionPriorities : List NextSessionPriority
+canonicalNextSessionPriorities :
+  List NextSessionPriority
 canonicalNextSessionPriorities =
-  vubNLOFromCarrierRG
-  ∷ deg23HilbertModularVol
-  ∷ waveletOrthogonalityProof
+  ymTightness
+  ∷ vubFromCPMechanism
+  ∷ su2su3FormalDecoupling
   ∷ []
+
+ymTightnessPriorityStatement : String
+ymTightnessPriorityStatement =
+  "YM tightness: prove the CS-level lattice measure family mu_k is tight by upgrading the weak-coupling string-tension/dimensional-transmutation argument to a uniform plaquette-action bound."
 
 vubPriorityStatement : String
 vubPriorityStatement =
-  "Confirm whether the alpha_s(m_b)/pi NLO correction in the degree-28 Vub diagnostic is carrier-derived rather than an external PDG insertion."
+  "Vub from CP mechanism: replace the failed direct (1,3) Hecke-degree route by computing Wolfenstein rho and eta from an identified carrier source of CP violation."
 
-deg23PriorityStatement : String
-deg23PriorityStatement =
-  "Compute the Hilbert modular volume for Q(sqrt(21)) or the appropriate Shimura surface to replace the underived deg23 pattern."
+su2su3PriorityStatement : String
+su2su3PriorityStatement =
+  "SU2-SU3 formal decoupling: verify that the SM fermion representations satisfy the SET inequivalence conditions for breaking the SU(2)_3 <-> SU(3)_1 level-rank identification."
 
-waveletPriorityStatement : String
-waveletPriorityStatement =
-  "Prove or disprove the all-scale 2/3/5 wavelet orthogonality/frame-bound claim."
+nextSessionPriorityStatement : String
+nextSessionPriorityStatement =
+  "Next session priorities are YM tightness, Vub from CP mechanism, and SU2-SU3 formal decoupling; all Clay and terminal promotions remain false."
+
+data NextSessionPromotion : Set where
+
+nextSessionPromotionImpossibleHere :
+  NextSessionPromotion →
+  ⊥
+nextSessionPromotionImpossibleHere ()
 
 record NextSessionPriorityReceipt : Setω where
   field
-    blockerSummary :
-      Blockers.ResidualBlockersSummaryReceipt
+    status :
+      NextSessionPriorityStatus
 
-    blockersTerminalStillFalse :
-      Blockers.terminalClaimPromoted blockerSummary ≡ false
+    blockerMap :
+      Map.Phase2BlockerMapFinalReceipt
+
+    blockerMapKeepsTerminalFalse :
+      Map.terminalUnificationPromoted blockerMap ≡ false
 
     priorities :
       List NextSessionPriority
@@ -54,11 +74,11 @@ record NextSessionPriorityReceipt : Setω where
     prioritiesAreCanonical :
       priorities ≡ canonicalNextSessionPriorities
 
-    nextSessionPrioritiesRecorded :
-      Bool
+    ymTightnessPriority :
+      String
 
-    nextSessionPrioritiesRecordedIsTrue :
-      nextSessionPrioritiesRecorded ≡ true
+    ymTightnessPriorityIsCanonical :
+      ymTightnessPriority ≡ ymTightnessPriorityStatement
 
     vubPriority :
       String
@@ -66,17 +86,17 @@ record NextSessionPriorityReceipt : Setω where
     vubPriorityIsCanonical :
       vubPriority ≡ vubPriorityStatement
 
-    deg23Priority :
+    su2su3Priority :
       String
 
-    deg23PriorityIsCanonical :
-      deg23Priority ≡ deg23PriorityStatement
+    su2su3PriorityIsCanonical :
+      su2su3Priority ≡ su2su3PriorityStatement
 
-    waveletPriority :
-      String
+    nextSessionPrioritiesRecorded :
+      Bool
 
-    waveletPriorityIsCanonical :
-      waveletPriority ≡ waveletPriorityStatement
+    nextSessionPrioritiesRecordedIsTrue :
+      nextSessionPrioritiesRecorded ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -90,43 +110,64 @@ record NextSessionPriorityReceipt : Setω where
     clayNavierStokesPromotedIsFalse :
       clayNavierStokesPromoted ≡ false
 
+    exactStandardModelPromoted :
+      Bool
+
+    exactStandardModelPromotedIsFalse :
+      exactStandardModelPromoted ≡ false
+
     terminalUnificationPromoted :
       Bool
 
     terminalUnificationPromotedIsFalse :
       terminalUnificationPromoted ≡ false
 
+    promotionFlags :
+      List NextSessionPromotion
+
+    promotionFlagsAreEmpty :
+      promotionFlags ≡ []
+
+    statement :
+      String
+
+    statementIsCanonical :
+      statement ≡ nextSessionPriorityStatement
+
     receiptBoundary :
       List String
 
 open NextSessionPriorityReceipt public
 
-canonicalNextSessionPriorityReceipt : NextSessionPriorityReceipt
+canonicalNextSessionPriorityReceipt :
+  NextSessionPriorityReceipt
 canonicalNextSessionPriorityReceipt =
   record
-    { blockerSummary =
-        Blockers.canonicalResidualBlockersSummaryReceipt
-    ; blockersTerminalStillFalse =
+    { status =
+        nextSessionPrioritiesRecordedNoPromotion
+    ; blockerMap =
+        Map.canonicalPhase2BlockerMapFinalReceipt
+    ; blockerMapKeepsTerminalFalse =
         refl
     ; priorities =
         canonicalNextSessionPriorities
     ; prioritiesAreCanonical =
         refl
-    ; nextSessionPrioritiesRecorded =
-        true
-    ; nextSessionPrioritiesRecordedIsTrue =
+    ; ymTightnessPriority =
+        ymTightnessPriorityStatement
+    ; ymTightnessPriorityIsCanonical =
         refl
     ; vubPriority =
         vubPriorityStatement
     ; vubPriorityIsCanonical =
         refl
-    ; deg23Priority =
-        deg23PriorityStatement
-    ; deg23PriorityIsCanonical =
+    ; su2su3Priority =
+        su2su3PriorityStatement
+    ; su2su3PriorityIsCanonical =
         refl
-    ; waveletPriority =
-        waveletPriorityStatement
-    ; waveletPriorityIsCanonical =
+    ; nextSessionPrioritiesRecorded =
+        true
+    ; nextSessionPrioritiesRecordedIsTrue =
         refl
     ; clayYangMillsPromoted =
         false
@@ -136,15 +177,34 @@ canonicalNextSessionPriorityReceipt =
         false
     ; clayNavierStokesPromotedIsFalse =
         refl
+    ; exactStandardModelPromoted =
+        false
+    ; exactStandardModelPromotedIsFalse =
+        refl
     ; terminalUnificationPromoted =
         false
     ; terminalUnificationPromotedIsFalse =
         refl
+    ; promotionFlags =
+        []
+    ; promotionFlagsAreEmpty =
+        refl
+    ; statement =
+        nextSessionPriorityStatement
+    ; statementIsCanonical =
+        refl
     ; receiptBoundary =
-        "The list is a next-session queue, not a completed proof"
-        ∷ "All Clay and terminal promotion flags remain false"
+        "Priorities are ordered work targets, not completed theorem claims"
+        ∷ "YM tightness is first because it is the most concrete remaining Clay-adjacent target"
+        ∷ "Vub work is redirected through the unresolved carrier CP mechanism"
+        ∷ "SU2-SU3 formal decoupling stays candidate until the SET representation-theory hypothesis is checked"
         ∷ []
     }
+
+nextSessionPriorityKeepsClayFalse :
+  clayYangMillsPromoted canonicalNextSessionPriorityReceipt ≡ false
+nextSessionPriorityKeepsClayFalse =
+  refl
 
 nextSessionPriorityKeepsTerminalFalse :
   terminalUnificationPromoted canonicalNextSessionPriorityReceipt
@@ -152,4 +212,3 @@ nextSessionPriorityKeepsTerminalFalse :
   false
 nextSessionPriorityKeepsTerminalFalse =
   refl
-

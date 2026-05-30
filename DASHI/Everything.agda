@@ -855,6 +855,7 @@ import DASHI.Physics.Closure.NSRegularityGapReceipt
 import DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt
 import DASHI.Physics.Closure.NSFinalStateReceipt
+import DASHI.Physics.Closure.NSVorticityNoMechanismReceipt
 import DASHI.Physics.Closure.ZetaK21ComputationReceipt
 import DASHI.Physics.Closure.ZetaQ21MinusOneReceipt
 import DASHI.Physics.Closure.Deg23FromZetaK21Receipt
@@ -875,6 +876,12 @@ import DASHI.Physics.Closure.VcbFromTwoLoopDeg23Receipt
 import DASHI.Physics.Closure.YukawaNormalisationStructureReceipt
 import DASHI.Physics.Closure.CKMFullMatrixFromCarrierReceipt
 import DASHI.Physics.Closure.AnomalyCancellationTableReceipt
+import DASHI.Physics.Closure.SU2SU3DecouplingLemmaReceipt
+import DASHI.Physics.Closure.HeckeCircleU1YReceipt
+import DASHI.Physics.Closure.U1YChargeAssignmentTableReceipt
+import DASHI.Physics.Closure.AnomalyCancellationVerificationReceipt
+import DASHI.Physics.Closure.GravitationalAnomalyCancellationReceipt
+import DASHI.Physics.Closure.SMGaugeGroupCandidatePromotionReceipt
 import DASHI.Physics.Closure.VubFromCarrierReceipt
 import DASHI.Physics.Closure.CKMDiagnosticSummaryReceipt
 import DASHI.Physics.Closure.PhysicalCKMPromotionStatusReceipt
@@ -882,6 +889,8 @@ import DASHI.Physics.Closure.P13LaneHypothesisReceipt
 import DASHI.Physics.Closure.VacuumSectorReceipt
 import DASHI.Physics.Closure.MassiveSubspaceOSPositivity
 import DASHI.Physics.Closure.CarrierVEVReceipt
+import DASHI.Physics.Closure.VEVAsPDGInputReceipt
+import DASHI.Physics.Closure.CarrierDimensionfulPredictionsReceipt
 import DASHI.Physics.Closure.CarrierHiggsMassReceipt
 import DASHI.Physics.Closure.RGScaleVsCarrierScaleReceipt
 import DASHI.Physics.Closure.OSAxiomsContinuumStatus
@@ -921,6 +930,7 @@ import DASHI.Physics.Closure.NSRegularityGapReceipt
 import DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt
 import DASHI.Physics.Closure.Phase2ProgrammeReceipt
+import DASHI.Physics.Closure.Phase2BlockerMapFinalReceipt
 import DASHI.Physics.Closure.ClayBothBlockerMapReceipt
 import DASHI.Physics.Closure.ClayBlockerUpdateReceipt
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt
@@ -936,11 +946,13 @@ import DASHI.Physics.Closure.Paper8AbstractDraftReceipt
 import DASHI.Physics.Closure.Paper8IntroductionDraftReceipt
 import DASHI.Physics.Closure.PaperStatusAllPapersReceipt
 import DASHI.Physics.Closure.NextSessionPriorityReceipt
+import DASHI.Physics.Closure.SessionGrandSummaryReceipt
 import DASHI.Physics.Closure.NextSessionOpeningReceipt
 import DASHI.Physics.Closure.Phase1FinalStateReceipt
 import DASHI.Physics.Closure.WorktreeCleanupReceipt
 import DASHI.Physics.Closure.SessionEndProtocolReceipt
 import DASHI.Physics.Closure.CommitAndTagFinalReceipt
+import DASHI.Physics.Closure.FinalCommitReceipt
 import DASHI.Physics.Closure.SessionEndReceipt
 import DASHI.Physics.Closure.AggregateAndCommitReceipt
 import DASHI.Physics.Closure.WorktreeCommitReceipt
