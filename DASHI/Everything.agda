@@ -918,11 +918,6 @@ import DASHI.Physics.Closure.YML4ContinuumLimitReceipt
 import DASHI.Physics.Closure.YML5OSAxiomsForGaugeSectorReceipt
 import DASHI.Physics.Closure.YML6WightmanReconstructionReceipt
 import DASHI.Physics.Closure.YML7L8MassGapSurvivalReceipt
-import DASHI.Physics.Closure.YM1p1DExactSolutionReceipt
-import DASHI.Physics.Closure.YM4DEmbeddingObstructionReceipt
-import DASHI.Physics.Closure.YM4DFromProductCarrierReceipt
-import DASHI.Physics.Closure.YMBalabanApproachStatusReceipt
-import DASHI.Physics.Closure.YMBalabanImportReceipt
 import DASHI.Physics.Closure.YMClayDistanceAfterBalabanReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt
 import DASHI.Physics.Closure.BernsteinInequalityPrimeBandReceipt
