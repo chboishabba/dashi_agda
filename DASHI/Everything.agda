@@ -929,6 +929,12 @@ import DASHI.Physics.Closure.YMClayFinalStateReceipt
 import DASHI.Physics.Closure.ProgrammeHonestSummaryReceipt
 import DASHI.Physics.Closure.FinalPaperSectionTriageReceipt
 import DASHI.Physics.Closure.NextSessionInputRequestReceipt
+import DASHI.Physics.Closure.NSRegularityUpgradeReceipt
+import DASHI.Physics.Closure.YMShimuraTowerUpgradeReceipt
+import DASHI.Physics.Closure.CKMCPPhaseUpgradeReceipt
+import DASHI.Physics.Closure.ProgrammeStateAfterComputationReceipt
+import DASHI.Physics.Closure.PaperUpdateReceipt
+import DASHI.Physics.Closure.FinalCommitAndTagReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt
 import DASHI.Physics.Closure.BernsteinInequalityPrimeBandReceipt
 import DASHI.Physics.Closure.ParaproductDecompositionReceipt
