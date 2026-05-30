@@ -864,6 +864,7 @@ import DASHI.Physics.Closure.NSClayHonestAssessmentReceipt
 import DASHI.Physics.Closure.NSLargeDataContractionInputRequest
 import DASHI.Physics.Closure.ProgrammeUpgradeSummaryReceipt
 import DASHI.Physics.Closure.NSH74StatusCorrectionReceipt
+import DASHI.Physics.Closure.NSClayDistanceFinalReceipt
 import DASHI.Physics.Closure.ZetaK21ComputationReceipt
 import DASHI.Physics.Closure.ZetaQ21MinusOneReceipt
 import DASHI.Physics.Closure.Deg23FromZetaK21Receipt
@@ -882,6 +883,8 @@ import DASHI.Physics.Closure.Deg23Candidate14302Receipt
 import DASHI.Physics.Closure.TwoLoopResummationReceipt
 import DASHI.Physics.Closure.VcbFromTwoLoopDeg23Receipt
 import DASHI.Physics.Closure.YukawaNormalisationStructureReceipt
+import DASHI.Physics.Closure.YukawaCKMUnificationReceipt
+import DASHI.Physics.Closure.AlphaDiagnosticClarificationReceipt
 import DASHI.Physics.Closure.CKMFullMatrixFromCarrierReceipt
 import DASHI.Physics.Closure.AnomalyCancellationTableReceipt
 import DASHI.Physics.Closure.SU2SU3DecouplingLemmaReceipt
@@ -922,6 +925,7 @@ import DASHI.Physics.Closure.YML2CorrectedStatusReceipt
 import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt
 import DASHI.Physics.Closure.CSLevelRunningLawReceipt
 import DASHI.Physics.Closure.YML3TightnessFromDimensionalTransmutationReceipt
+import DASHI.Physics.Closure.YMClayDistanceFinalReceipt
 import DASHI.Physics.Closure.YML4ContinuumLimitReceipt
 import DASHI.Physics.Closure.YML4ContinuumLimitInhabitedReceipt
 import DASHI.Physics.Closure.YML5OSAxiomsForGaugeSectorReceipt
@@ -938,6 +942,7 @@ import DASHI.Physics.Closure.NSRegularityUpgradeReceipt
 import DASHI.Physics.Closure.YMShimuraTowerUpgradeReceipt
 import DASHI.Physics.Closure.CKMCPPhaseUpgradeReceipt
 import DASHI.Physics.Closure.ProgrammeStateAfterComputationReceipt
+import DASHI.Physics.Closure.ProgrammeStateRevisionReceipt
 import DASHI.Physics.Closure.PaperUpdateReceipt
 import DASHI.Physics.Closure.FinalCommitAndTagReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt

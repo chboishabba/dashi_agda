@@ -14,20 +14,20 @@ open import Data.List.Base using (List; _∷_; [])
 -- This receipt records the requested final protocol and keeps all terminal
 -- and Clay/physical promotion claims false at receipt construction.
 
-phase2FlowPreservationTagName : String
-phase2FlowPreservationTagName =
-  "phase2-ns-h118-v1"
+phase2YukawaMillenniumTagName : String
+phase2YukawaMillenniumTagName =
+  "phase2-yukawa-millennium-v1"
 
-phase2FlowPreservationCommitMessage : String
-phase2FlowPreservationCommitMessage =
-  "NS: H^{11/8} threshold identified as optimal for adjacent-only dissipation dominance. Clay NS conditionally reduced to one large-data contraction proof. YM: Shimura tower spatial refinement inhabited but hyperbolic geometry is new blocker; p-adic flat limit candidate. CKM: CP phase within PDG 1sigma. Correct A3 over-claim. NS H^{7/4} superseded by H^{11/8}."
+phase2YukawaMillenniumCommitMessage : String
+phase2YukawaMillenniumCommitMessage =
+  "Yukawa programme opened: alpha1 = sqrt(m_u/m_c) at 0.58%, alpha2 = sqrt(m_c/m_t) at 0.29%. Georgi-Jarlskog explained by carrier depth separation. Millennium Tower Schema for Paper 8: both Clay problems share same T0-T4 type, both blocked at T2. YM: hyperbolic geometric gap dominates, p-adic flat limit is best candidate. NS: Clay distance = one large-data contraction in H^{11/8}. All Clay promotions remain false."
 
-phase2FlowPreservationAggregateCommand : String
-phase2FlowPreservationAggregateCommand =
+phase2YukawaMillenniumAggregateCommand : String
+phase2YukawaMillenniumAggregateCommand =
   "timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda"
 
-phase2FlowPreservationPromotionScanCommand : String
-phase2FlowPreservationPromotionScanCommand =
+phase2YukawaMillenniumPromotionScanCommand : String
+phase2YukawaMillenniumPromotionScanCommand =
   "promotion scan: require no unguarded true-valued Clay, terminal, exact-SM, or physical-CKM promotion fields"
 
 data FinalCommitAndTagStep : Set where
@@ -43,13 +43,13 @@ data FinalCommitAndTagStep : Set where
   runDiffCheck :
     FinalCommitAndTagStep
 
-  stageManagerCFlowPreservationFiles :
+  stageManagerCYukawaMillenniumFiles :
     FinalCommitAndTagStep
 
   createManagerCCommit :
     FinalCommitAndTagStep
 
-  createPhase2FlowPreservationTag :
+  createPhase2YukawaMillenniumTag :
     FinalCommitAndTagStep
 
   pushBranchAndTag :
@@ -62,9 +62,9 @@ canonicalFinalCommitAndTagProtocol =
   ∷ runAggregateAgda
   ∷ runPromotionScan
   ∷ runDiffCheck
-  ∷ stageManagerCFlowPreservationFiles
+  ∷ stageManagerCYukawaMillenniumFiles
   ∷ createManagerCCommit
-  ∷ createPhase2FlowPreservationTag
+  ∷ createPhase2YukawaMillenniumTag
   ∷ pushBranchAndTag
   ∷ []
 
@@ -87,25 +87,25 @@ record FinalCommitAndTagReceipt : Setω where
       String
 
     aggregateCommandIsCanonical :
-      aggregateCommand ≡ phase2FlowPreservationAggregateCommand
+      aggregateCommand ≡ phase2YukawaMillenniumAggregateCommand
 
     promotionScanCommand :
       String
 
     promotionScanCommandIsCanonical :
-      promotionScanCommand ≡ phase2FlowPreservationPromotionScanCommand
+      promotionScanCommand ≡ phase2YukawaMillenniumPromotionScanCommand
 
     commitMessage :
       String
 
     commitMessageIsCanonical :
-      commitMessage ≡ phase2FlowPreservationCommitMessage
+      commitMessage ≡ phase2YukawaMillenniumCommitMessage
 
     tagName :
       String
 
     tagNameIsCanonical :
-      tagName ≡ phase2FlowPreservationTagName
+      tagName ≡ phase2YukawaMillenniumTagName
 
     runtimeCommitExecutedHere :
       Bool
@@ -175,19 +175,19 @@ canonicalFinalCommitAndTagReceipt =
     ; protocolIsCanonical =
         refl
     ; aggregateCommand =
-        phase2FlowPreservationAggregateCommand
+        phase2YukawaMillenniumAggregateCommand
     ; aggregateCommandIsCanonical =
         refl
     ; promotionScanCommand =
-        phase2FlowPreservationPromotionScanCommand
+        phase2YukawaMillenniumPromotionScanCommand
     ; promotionScanCommandIsCanonical =
         refl
     ; commitMessage =
-        phase2FlowPreservationCommitMessage
+        phase2YukawaMillenniumCommitMessage
     ; commitMessageIsCanonical =
         refl
     ; tagName =
-        phase2FlowPreservationTagName
+        phase2YukawaMillenniumTagName
     ; tagNameIsCanonical =
         refl
     ; runtimeCommitExecutedHere =
@@ -229,7 +229,7 @@ canonicalFinalCommitAndTagReceipt =
     ; receiptBoundary =
         "C6 records the final validation, commit, tag, and push protocol"
         ∷ "Runtime git actions are false at receipt construction and executed externally by the manager"
-        ∷ "The requested tag is phase2-flow-preservation-v1"
+        ∷ "The requested tag is phase2-yukawa-millennium-v1"
         ∷ "All Clay, exact-SM, physical-CKM, and terminal promotions remain false"
         ∷ []
     }
