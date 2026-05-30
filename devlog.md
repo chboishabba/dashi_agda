@@ -1,5 +1,13 @@
 # 2026-05-30
 
+- Manager C corrected programme-summary tranche complete.  Added
+  `NSAdjacentOnlyFormalReceipt`, `NSH74RouteStatusReceipt`,
+  `ProgrammeHonestSummaryReceipt`, `FinalPaperSectionTriageReceipt`, and
+  `NextSessionInputRequestReceipt`; wired their imports into
+  `DASHI/Everything.agda`.  The new C receipts keep the adjacent-only
+  arithmetic result, mark the H74 route as conditional/not inhabited, and
+  preserve false Clay/terminal/exact-SM/CKM-final promotions.
+
 - Manager B gauge-group closeout tranche complete locally.  Added candidate
   closeout receipts for `SU2SU3DecouplingLemmaReceipt`,
   `HeckeCircleU1YReceipt`, `U1YChargeAssignmentTableReceipt`,

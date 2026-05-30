@@ -1,3 +1,16 @@
+# 2026-05-30 Manager C corrected programme summary tranche
+
+- Added Manager-C-only receipts for the corrected NS/YM programme boundary:
+  `NSAdjacentOnlyFormalReceipt`, `NSH74RouteStatusReceipt`,
+  `ProgrammeHonestSummaryReceipt`, `FinalPaperSectionTriageReceipt`, and
+  `NextSessionInputRequestReceipt`.
+- The tranche records adjacent-only vortex stretching as a finite arithmetic
+  projection result, keeps the `H^{7/4}` route conditional on a missing
+  prime-LP flow-preservation lemma, and names the required next-session
+  inputs for YM spatial refinement, NS leakage control, and CKM CP phase.
+- Clay YM, Clay NS, exact SM, CKM-final, paper-promotion, and terminal
+  promotion flags remain false.
+
 # 2026-05-30 Manager B gauge-group closeout tranche
 
 - Added and wired candidate gauge-group closeout receipts for the
