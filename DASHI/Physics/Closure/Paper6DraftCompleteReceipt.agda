@@ -12,9 +12,9 @@ open import Data.List.Base using (List; _∷_; [])
 -- Paper 6 draft-complete receipt.
 --
 -- This is an editorial/claim-governance receipt for the Paper 6 CKM/Yukawa
--- draft.  It records the carrier arithmetic now suitable for the draft, with
--- explicit accuracy and derivation-strength labels.  It intentionally does
--- not assert a precision physical CKM derivation.
+-- draft.  This corrected receipt narrows the scope to the Georgi-Jarlskog
+-- lambda connection and the leading-order |Vub| adjacent-chain hypothesis.
+-- It intentionally does not assert a precision physical CKM derivation.
 
 data Paper6DraftStatus : Set where
   draftCompleteCarrierIdentificationOnly :
@@ -53,10 +53,19 @@ data AccuracyLabel : Set where
     AccuracyLabel
 
 data DerivationStrengthLabel : Set where
+  knownStructuralLiteratureConnection :
+    DerivationStrengthLabel
+
   carrierArithmeticIdentification :
     DerivationStrengthLabel
 
   leadingOrderCarrierCalculation :
+    DerivationStrengthLabel
+
+  openFrontier :
+    DerivationStrengthLabel
+
+  candidateDiagnostic :
     DerivationStrengthLabel
 
   diagnosticOnlyComparison :
@@ -73,7 +82,6 @@ canonicalIndependentCarrierMechanisms :
   List CarrierArithmeticMechanism
 canonicalIndependentCarrierMechanisms =
   adjacentOnlyDepthChain
-  ∷ heegnerDMinusSevenCMPoint
   ∷ []
 
 data Paper6Approximation : Set where
@@ -170,9 +178,9 @@ lambdaDraftRow =
     ; accuracy =
         subPercentNumericalAgreement
     ; derivationStrength =
-        carrierArithmeticIdentification
+        knownStructuralLiteratureConnection
     ; rowBoundary =
-        "Vus/lambda is the cleanest carrier identification; still recorded as structural carrier arithmetic, not a certified physical CKM theorem."
+        "Vus/lambda is recorded as the known Georgi-Jarlskog structural connection; Paper 6 does not claim it as a new DASHI CKM derivation."
     }
 
 vcbDraftRow : CKMQuantityDraftRow
@@ -181,7 +189,7 @@ vcbDraftRow =
     { quantity =
         vcbMagnitude
     ; formula =
-        "|Vcb| from degree/isogeny carrier arithmetic"
+        "|Vcb| = A*lambda^2 with A = 0.8086 supplied as PDG/Wolfenstein input"
     ; carrierValue =
         0.04072
     ; comparisonValue =
@@ -191,9 +199,9 @@ vcbDraftRow =
     ; accuracy =
         subPercentNumericalAgreement
     ; derivationStrength =
-        carrierArithmeticIdentification
+        openFrontier
     ; rowBoundary =
-        "|Vcb| is carrier-arithmetic identified; physical normalisation and diagonalisation authority remain outside this receipt."
+        "|Vcb| is demoted: no independent carrier derivation of A is supplied, so this row is an open frontier rather than carrier arithmetic."
     }
 
 vubDraftRow : CKMQuantityDraftRow
@@ -233,9 +241,9 @@ gammaDraftRow =
     ; accuracy =
         fewPercentNumericalAgreement
     ; derivationStrength =
-        leadingOrderCarrierCalculation
+        candidateDiagnostic
     ; rowBoundary =
-        "Gamma is read from the D=-7 CM-point argument with the recorded one-loop carrier correction."
+        "Gamma is a candidate diagnostic only: the D=-7 selection theorem is not proved in the carrier receipts."
     }
 
 betaDraftRow : CKMQuantityDraftRow
@@ -254,9 +262,9 @@ betaDraftRow =
     ; accuracy =
         severalPercentNumericalAgreement
     ; derivationStrength =
-        leadingOrderCarrierCalculation
+        openFrontier
     ; rowBoundary =
-        "Beta combines the independent |Vub| adjacent-chain input and gamma from D=-7; the several-percent residual is explicitly kept."
+        "Beta is open frontier because it inherits the leading-order |Vub| approximation and the unproved D=-7 gamma selection."
     }
 
 jarlskogDraftRow : CKMQuantityDraftRow
@@ -292,7 +300,7 @@ canonicalPaper6CKMQuantityRows =
 
 paper6DraftCompleteStatement : String
 paper6DraftCompleteStatement =
-  "Paper 6 is draft-complete as a leading-order structural carrier-identification paper: six CKM quantities are recorded with honest accuracy labels; adjacent-only depth-chain arithmetic and the D=-7 Heegner CM point are independent carrier mechanisms; higher-order corrections and U_d approximately I remain documented approximations; no precision physical CKM derivation is promoted."
+  "Paper 6 scope is revised: it presents lambda = sqrt(md/ms) as the known Georgi-Jarlskog structural connection and |Vub| approx alpha1*alpha2 as a leading-order adjacent-chain hypothesis in the U_d approximately I approximation; |Vcb|, gamma, beta, alpha, and precision CKM diagonalisation remain open frontier."
 
 record Paper6DraftCompleteReceipt : Set where
   field
@@ -347,14 +355,14 @@ record Paper6DraftCompleteReceipt : Set where
     heegnerDMinusSevenDocumented :
       Bool
 
-    heegnerDMinusSevenDocumentedIsTrue :
-      heegnerDMinusSevenDocumented ≡ true
+    heegnerDMinusSevenDocumentedIsFalse :
+      heegnerDMinusSevenDocumented ≡ false
 
     mechanismsAreIndependent :
       Bool
 
-    mechanismsAreIndependentIsTrue :
-      mechanismsAreIndependent ≡ true
+    mechanismsAreIndependentIsFalse :
+      mechanismsAreIndependent ≡ false
 
     approximations :
       List Paper6Approximation
@@ -464,12 +472,12 @@ canonicalPaper6DraftCompleteReceipt =
     ; adjacentOnlyChainDocumentedIsTrue =
         refl
     ; heegnerDMinusSevenDocumented =
-        true
-    ; heegnerDMinusSevenDocumentedIsTrue =
+        false
+    ; heegnerDMinusSevenDocumentedIsFalse =
         refl
     ; mechanismsAreIndependent =
-        true
-    ; mechanismsAreIndependentIsTrue =
+        false
+    ; mechanismsAreIndependentIsFalse =
         refl
     ; approximations =
         canonicalPaper6Approximations
@@ -516,10 +524,12 @@ canonicalPaper6DraftCompleteReceipt =
     ; statementIsCanonical =
         refl
     ; receiptBoundary =
-        "Paper 6 draft-complete is true only for the structural carrier-identification draft"
-        ∷ "The six CKM quantities are lambda/Vus, |Vcb|, |Vub|, gamma, beta, and J_CP"
+        "Paper 6 scope is revised to lambda/Vus as Georgi-Jarlskog literature connection and |Vub| as leading-order adjacent-chain hypothesis"
+        ∷ "|Vcb| is open frontier because A = 0.8086 is PDG input"
+        ∷ "Gamma is candidate diagnostic only because D=-7 selection is unproved"
+        ∷ "Beta and alpha are downstream/open and are not independent carrier predictions"
         ∷ "Each row carries both an accuracy label and a derivation-strength label"
-        ∷ "Adjacent-only chain arithmetic and D=-7 Heegner CM arithmetic are recorded as independent carrier mechanisms"
+        ∷ "Only the adjacent-only chain is retained as a Paper 6 carrier mechanism"
         ∷ "Higher-order corrections are expected and not derived in this receipt"
         ∷ "The down-sector U_d approximately I simplification is documented as an approximation, not a physical diagonalisation theorem"
         ∷ "Precision physical CKM derivation and physical CKM promotion are false"

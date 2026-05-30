@@ -968,6 +968,12 @@ import DASHI.Physics.Closure.NSBoundCorrectionJNuReceipt
 import DASHI.Physics.Closure.CKMFullHonestyReceipt
 import DASHI.Physics.Closure.ProgrammeFinalStateReceipt
 import DASHI.Physics.Closure.Paper6DraftCompleteReceipt
+import DASHI.Physics.Closure.CKMVcbDemotionReceipt
+import DASHI.Physics.Closure.CKMGammaDemotionReceipt
+import DASHI.Physics.Closure.CKMBetaAlphaDemotionReceipt
+import DASHI.Physics.Closure.CKMFrontierDefinitionReceipt
+import DASHI.Physics.Closure.Paper6ScopeRevisionReceipt
+import DASHI.Physics.Closure.FinalCorrectionCommitReceipt
 import DASHI.Physics.Closure.PaperUpdateReceipt
 import DASHI.Physics.Closure.FinalCommitAndTagReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt

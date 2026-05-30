@@ -11,9 +11,10 @@ open import Data.List.Base using (List; _∷_; [])
 -- Paper 6 CKM full honesty receipt.
 --
 -- This receipt records the six-quantity CKM status without promoting the
--- carrier table to a physical CKM derivation.  Arithmetic rows are marked as
--- carrier arithmetic; alpha-product and unitarity-triangle rows retain their
--- leading-order/derived labels.
+-- carrier table to a physical CKM derivation.  This corrected receipt keeps
+-- only lambda as a structural/literature connection, demotes |Vcb| to a PDG
+-- tautology, demotes gamma to an ungrounded D=-7 hypothesis, and propagates
+-- that demotion to beta and alpha.
 
 data CKMQuantity : Set where
   wolfensteinLambda :
@@ -35,13 +36,28 @@ data CKMQuantity : Set where
     CKMQuantity
 
 data CKMHonestStatus : Set where
+  knownStructuralConnection :
+    CKMHonestStatus
+
   carrierArithmetic :
+    CKMHonestStatus
+
+  pdgTautology :
     CKMHonestStatus
 
   leadingOrderEstimate :
     CKMHonestStatus
 
   leadingOrderDerived :
+    CKMHonestStatus
+
+  ungroundedStructuralHypothesis :
+    CKMHonestStatus
+
+  inheritsDMinusSevenUncertainty :
+    CKMHonestStatus
+
+  tautologicalConsequence :
     CKMHonestStatus
 
   derived :
@@ -100,7 +116,7 @@ lambdaFormulaLabel =
 
 vcbFormulaLabel : String
 vcbFormulaLabel =
-  "|Vcb| from isogeny"
+  "|Vcb| = A * lambda^2 with A = 0.8086 supplied from PDG/Wolfenstein input"
 
 vubFormulaLabel : String
 vubFormulaLabel =
@@ -122,6 +138,14 @@ carrierArithmeticLabel : String
 carrierArithmeticLabel =
   "carrier-arithmetic"
 
+knownStructuralConnectionLabel : String
+knownStructuralConnectionLabel =
+  "known structural connection"
+
+pdgTautologyLabel : String
+pdgTautologyLabel =
+  "pdg-tautology; not a carrier prediction"
+
 leadingOrderEstimateLabel : String
 leadingOrderEstimateLabel =
   "leading-order estimate"
@@ -129,6 +153,18 @@ leadingOrderEstimateLabel =
 leadingOrderDerivedLabel : String
 leadingOrderDerivedLabel =
   "leading-order derived"
+
+ungroundedStructuralHypothesisLabel : String
+ungroundedStructuralHypothesisLabel =
+  "ungrounded structural hypothesis; D=-7 selection unproved"
+
+inheritsDMinusSevenUncertaintyLabel : String
+inheritsDMinusSevenUncertaintyLabel =
+  "inherits D=-7 uncertainty"
+
+tautologicalConsequenceLabel : String
+tautologicalConsequenceLabel =
+  "tautological consequence; not an independent prediction"
 
 derivedLabel : String
 derivedLabel =
@@ -144,11 +180,11 @@ lambdaHonestRow =
     ; relativeErrorPercent =
         0.9
     ; status =
-        carrierArithmetic
+        knownStructuralConnection
     ; statusLabel =
-        carrierArithmeticLabel
+        knownStructuralConnectionLabel
     ; rowBoundary =
-        "Paper 6 records lambda from sqrt(md/ms) at 0.9 percent error as carrier arithmetic"
+        "Paper 6 records lambda from sqrt(md/ms) as the Georgi-Jarlskog structural/literature connection, not as a new DASHI CKM derivation"
     }
 
 vcbHonestRow : CKMHonestQuantityRow
@@ -161,11 +197,11 @@ vcbHonestRow =
     ; relativeErrorPercent =
         0.0
     ; status =
-        carrierArithmetic
+        pdgTautology
     ; statusLabel =
-        carrierArithmeticLabel
+        pdgTautologyLabel
     ; rowBoundary =
-        "Paper 6 records |Vcb| from isogeny at 0.0 percent error as carrier arithmetic"
+        "Paper 6 demotes |Vcb|: A = 0.8086 is PDG input and |Vcb| = A*lambda^2 is a Wolfenstein tautology, not an independent carrier prediction"
     }
 
 vubHonestRow : CKMHonestQuantityRow
@@ -195,11 +231,11 @@ gammaHonestRow =
     ; relativeErrorPercent =
         1.6
     ; status =
-        carrierArithmetic
+        ungroundedStructuralHypothesis
     ; statusLabel =
-        carrierArithmeticLabel
+        ungroundedStructuralHypothesisLabel
     ; rowBoundary =
-        "Paper 6 records gamma = arctan(sqrt7)*(1-alpha1) at 1.6 percent error as carrier arithmetic"
+        "Paper 6 demotes gamma: the arctan(sqrt7)*(1-alpha1) formula depends on an unproved D=-7 selection theorem"
     }
 
 betaHonestRow : CKMHonestQuantityRow
@@ -212,11 +248,11 @@ betaHonestRow =
     ; relativeErrorPercent =
         6.0
     ; status =
-        leadingOrderDerived
+        inheritsDMinusSevenUncertainty
     ; statusLabel =
-        leadingOrderDerivedLabel
+        inheritsDMinusSevenUncertaintyLabel
     ; rowBoundary =
-        "Paper 6 records beta = arctan(eta/(1-rho)) at 6.0 percent error as leading-order derived"
+        "Paper 6 demotes beta: it is downstream of leading-order |Vub| and the ungrounded D=-7 gamma hypothesis"
     }
 
 alphaHonestRow : CKMHonestQuantityRow
@@ -229,11 +265,11 @@ alphaHonestRow =
     ; relativeErrorPercent =
         0.3
     ; status =
-        derived
+        tautologicalConsequence
     ; statusLabel =
-        derivedLabel
+        tautologicalConsequenceLabel
     ; rowBoundary =
-        "Paper 6 records alpha = pi - beta - gamma at 0.3 percent error as derived"
+        "Paper 6 demotes alpha: alpha = pi - beta - gamma is a tautological consequence, not an independent carrier prediction"
     }
 
 canonicalCKMHonestRows :
@@ -251,12 +287,12 @@ canonicalCKMFullHonestyBoundary :
   List String
 canonicalCKMFullHonestyBoundary =
   "Six Paper 6 CKM quantities are recorded with formula, error, and honest status label"
-  ∷ "lambda sqrt(md/ms): 0.9 percent, carrier-arithmetic"
-  ∷ "|Vcb| isogeny: 0.0 percent, carrier-arithmetic"
+  ∷ "lambda sqrt(md/ms): 0.9 percent, Georgi-Jarlskog structural/literature connection"
+  ∷ "|Vcb| = A*lambda^2: pdg-tautology, not a carrier prediction"
   ∷ "|Vub| alpha1*alpha2 with U_d approximately I: 4.2 percent, leading-order estimate"
-  ∷ "gamma arctan(sqrt7)*(1-alpha1): 1.6 percent, carrier-arithmetic"
-  ∷ "beta arctan(eta/(1-rho)): 6.0 percent, leading-order derived"
-  ∷ "alpha pi-beta-gamma: 0.3 percent, derived"
+  ∷ "gamma arctan(sqrt7)*(1-alpha1): ungrounded structural hypothesis, D=-7 selection unproved"
+  ∷ "beta arctan(eta/(1-rho)): inherits D=-7 uncertainty and leading-order |Vub| uncertainty"
+  ∷ "alpha pi-beta-gamma: tautological consequence, not an independent prediction"
   ∷ "No quantity is overstated, and physical CKM promotion remains false"
   ∷ []
 
