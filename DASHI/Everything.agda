@@ -856,6 +856,12 @@ import DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt
 import DASHI.Physics.Closure.NSFinalStateReceipt
 import DASHI.Physics.Closure.NSVorticityNoMechanismReceipt
+import DASHI.Physics.Closure.EnstrophyEquationCarrierReceipt
+import DASHI.Physics.Closure.Constantin1994ApproachReceipt
+import DASHI.Physics.Closure.EnergyEnstrophyInterpolationReceipt
+import DASHI.Physics.Closure.GeometricConstraintOnVorticityReceipt
+import DASHI.Physics.Closure.NSN2EnstrophyOpenStatusReceipt
+import DASHI.Physics.Closure.NSClayFinalHonestStateReceipt
 import DASHI.Physics.Closure.ZetaK21ComputationReceipt
 import DASHI.Physics.Closure.ZetaQ21MinusOneReceipt
 import DASHI.Physics.Closure.Deg23FromZetaK21Receipt
@@ -918,6 +924,12 @@ import DASHI.Physics.Closure.YML4ContinuumLimitReceipt
 import DASHI.Physics.Closure.YML5OSAxiomsForGaugeSectorReceipt
 import DASHI.Physics.Closure.YML6WightmanReconstructionReceipt
 import DASHI.Physics.Closure.YML7L8MassGapSurvivalReceipt
+import DASHI.Physics.Closure.YM1p1DExactSolutionReceipt
+import DASHI.Physics.Closure.YM4DEmbeddingObstructionReceipt
+import DASHI.Physics.Closure.YM4DFromProductCarrierReceipt
+import DASHI.Physics.Closure.YMBalabanApproachStatusReceipt
+import DASHI.Physics.Closure.YMBalabanImportReceipt
+import DASHI.Physics.Closure.YMClayDistanceAfterBalabanReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt
 import DASHI.Physics.Closure.BernsteinInequalityPrimeBandReceipt
 import DASHI.Physics.Closure.ParaproductDecompositionReceipt
