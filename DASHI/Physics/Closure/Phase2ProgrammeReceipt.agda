@@ -4,6 +4,7 @@ open import Agda.Primitive using (Set; Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt as Current
@@ -266,4 +267,162 @@ canonicalPhase2ProgrammeReceipt =
 phase2ProgrammeKeepsClayFalse :
   clayNavierStokesPromoted canonicalPhase2ProgrammeReceipt ≡ false
 phase2ProgrammeKeepsClayFalse =
+  refl
+
+------------------------------------------------------------------------
+-- Manager C clay-reframe governance tranche.
+
+data ManagerCReframePriority : Set where
+  papersSixAndEightFirst : ManagerCReframePriority
+  ymProductLatticeSecond : ManagerCReframePriority
+  smGaugeDerivationThird : ManagerCReframePriority
+  ckmCompletionFourth : ManagerCReframePriority
+  nsClayParkedFifth : ManagerCReframePriority
+
+canonicalManagerCReframePriorities :
+  List ManagerCReframePriority
+canonicalManagerCReframePriorities =
+  papersSixAndEightFirst
+  ∷ ymProductLatticeSecond
+  ∷ smGaugeDerivationThird
+  ∷ ckmCompletionFourth
+  ∷ nsClayParkedFifth
+  ∷ []
+
+data ManagerCExternalInput : Set where
+  nsUniformVorticityDirectionControl : ManagerCExternalInput
+  ymNonperturbativeClusterExpansion : ManagerCExternalInput
+  ckmCPFromComplexCMPeriodRatio : ManagerCExternalInput
+
+canonicalManagerCExternalInputs :
+  List ManagerCExternalInput
+canonicalManagerCExternalInputs =
+  nsUniformVorticityDirectionControl
+  ∷ ymNonperturbativeClusterExpansion
+  ∷ ckmCPFromComplexCMPeriodRatio
+  ∷ []
+
+data ManagerCReframePromotion : Set where
+
+managerCReframePromotionImpossibleHere :
+  ManagerCReframePromotion → ⊥
+managerCReframePromotionImpossibleHere ()
+
+managerCClayReframeCommitMessage : String
+managerCClayReframeCommitMessage =
+  "YM reframed: 1+1D carrier is trivially confining; 4D product lattice + Balaban authority is the correct Clay YM path. NS stopped at Leray ceiling. Programme priorities reordered: Papers 6/8 first, then YM product lattice, then SM gauge group, then CKM CP mechanism, then NS Clay parked."
+
+managerCClayReframeTagName : String
+managerCClayReframeTagName =
+  "phase2-clay-reframed-v1"
+
+record ManagerCClayReframeReceipt : Setω where
+  field
+    phase2Receipt : Phase2ProgrammeReceipt
+    phase2TerminalFalse :
+      terminalClaimPromoted phase2Receipt ≡ false
+    naturalCarrierYMIs1p1D : Bool
+    naturalCarrierYMIs1p1DIsTrue :
+      naturalCarrierYMIs1p1D ≡ true
+    naturalCarrierIsClayYMTarget : Bool
+    naturalCarrierIsClayYMTargetIsFalse :
+      naturalCarrierIsClayYMTarget ≡ false
+    productLatticeBalabanRouteRecorded : Bool
+    productLatticeBalabanRouteRecordedIsTrue :
+      productLatticeBalabanRouteRecorded ≡ true
+    productLatticeUniversalityClassSettled : Bool
+    productLatticeUniversalityClassSettledIsFalse :
+      productLatticeUniversalityClassSettled ≡ false
+    vacuumUniquenessSettled : Bool
+    vacuumUniquenessSettledIsFalse :
+      vacuumUniquenessSettled ≡ false
+    nsStoppedAtLerayCeiling : Bool
+    nsStoppedAtLerayCeilingIsTrue :
+      nsStoppedAtLerayCeiling ≡ true
+    assignFurtherNSClayWorkers : Bool
+    assignFurtherNSClayWorkersIsFalse :
+      assignFurtherNSClayWorkers ≡ false
+    priorities : List ManagerCReframePriority
+    prioritiesAreCanonical :
+      priorities ≡ canonicalManagerCReframePriorities
+    externalInputs : List ManagerCExternalInput
+    externalInputsAreCanonical :
+      externalInputs ≡ canonicalManagerCExternalInputs
+    cpFromComplexCMPeriodRatioCandidate : Bool
+    cpFromComplexCMPeriodRatioCandidateIsTrue :
+      cpFromComplexCMPeriodRatioCandidate ≡ true
+    commitMessage : String
+    commitMessageIsCanonical :
+      commitMessage ≡ managerCClayReframeCommitMessage
+    tagName : String
+    tagNameIsCanonical :
+      tagName ≡ managerCClayReframeTagName
+    clayYangMillsPromoted : Bool
+    clayYangMillsPromotedIsFalse :
+      clayYangMillsPromoted ≡ false
+    clayNavierStokesPromoted : Bool
+    clayNavierStokesPromotedIsFalse :
+      clayNavierStokesPromoted ≡ false
+    ckmFinalPromoted : Bool
+    ckmFinalPromotedIsFalse :
+      ckmFinalPromoted ≡ false
+    exactStandardModelPromoted : Bool
+    exactStandardModelPromotedIsFalse :
+      exactStandardModelPromoted ≡ false
+    terminalClaimPromoted : Bool
+    terminalClaimPromotedIsFalse :
+      terminalClaimPromoted ≡ false
+    promotionFlags : List ManagerCReframePromotion
+    promotionFlagsAreEmpty :
+      promotionFlags ≡ []
+
+open ManagerCClayReframeReceipt public
+
+canonicalManagerCClayReframeReceipt :
+  ManagerCClayReframeReceipt
+canonicalManagerCClayReframeReceipt =
+  record
+    { phase2Receipt = canonicalPhase2ProgrammeReceipt
+    ; phase2TerminalFalse = refl
+    ; naturalCarrierYMIs1p1D = true
+    ; naturalCarrierYMIs1p1DIsTrue = refl
+    ; naturalCarrierIsClayYMTarget = false
+    ; naturalCarrierIsClayYMTargetIsFalse = refl
+    ; productLatticeBalabanRouteRecorded = true
+    ; productLatticeBalabanRouteRecordedIsTrue = refl
+    ; productLatticeUniversalityClassSettled = false
+    ; productLatticeUniversalityClassSettledIsFalse = refl
+    ; vacuumUniquenessSettled = false
+    ; vacuumUniquenessSettledIsFalse = refl
+    ; nsStoppedAtLerayCeiling = true
+    ; nsStoppedAtLerayCeilingIsTrue = refl
+    ; assignFurtherNSClayWorkers = false
+    ; assignFurtherNSClayWorkersIsFalse = refl
+    ; priorities = canonicalManagerCReframePriorities
+    ; prioritiesAreCanonical = refl
+    ; externalInputs = canonicalManagerCExternalInputs
+    ; externalInputsAreCanonical = refl
+    ; cpFromComplexCMPeriodRatioCandidate = true
+    ; cpFromComplexCMPeriodRatioCandidateIsTrue = refl
+    ; commitMessage = managerCClayReframeCommitMessage
+    ; commitMessageIsCanonical = refl
+    ; tagName = managerCClayReframeTagName
+    ; tagNameIsCanonical = refl
+    ; clayYangMillsPromoted = false
+    ; clayYangMillsPromotedIsFalse = refl
+    ; clayNavierStokesPromoted = false
+    ; clayNavierStokesPromotedIsFalse = refl
+    ; ckmFinalPromoted = false
+    ; ckmFinalPromotedIsFalse = refl
+    ; exactStandardModelPromoted = false
+    ; exactStandardModelPromotedIsFalse = refl
+    ; terminalClaimPromoted = false
+    ; terminalClaimPromotedIsFalse = refl
+    ; promotionFlags = []
+    ; promotionFlagsAreEmpty = refl
+    }
+
+managerCClayReframeKeepsTerminalFalse :
+  terminalClaimPromoted canonicalManagerCClayReframeReceipt ≡ false
+managerCClayReframeKeepsTerminalFalse =
   refl

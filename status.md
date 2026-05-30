@@ -1746,3 +1746,13 @@ unless a line explicitly says it describes the live monitor surface.
   scan, marker scan, and `git diff --check` passed; Clay YM, Clay NS, exact
   SM, `G_DHR ~= G_SM`, physical CKM, VEV derivation, and terminal promotion
   remain false.
+
+- 2026-05-30: Manager C Clay-reframe governance tranche complete.  The
+  Manager-C-only receipt is recorded in
+  `DASHI.Physics.Closure.Phase2ProgrammeReceipt` as
+  `ManagerCClayReframeReceipt`.  It records the natural 1+1D carrier YM
+  limitation, the conditional 4D product-lattice plus Balaban route, NS
+  stoppage at the Leray ceiling, reordered priorities
+  `[Papers 6/8, YM product, SM gauge, CKM, NS parked]`, and external inputs
+  needed for NS, YM-without-Balaban, and CKM CP.  All Clay, CKM-final,
+  exact-SM, and terminal promotion flags remain false.

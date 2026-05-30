@@ -4299,3 +4299,12 @@
   level while exact carrier-derived SM reconstruction remains false.  Focused
   Agda checks and the aggregate passed; promotion, marker, and diff scans are
   clean.
+
+- 2026-05-30: Completed the Manager C Clay-reframe governance tranche in the
+  tracked `Phase2ProgrammeReceipt` module after correcting an over-assignment
+  outside Manager C scope.  The final retained surface is
+  `ManagerCClayReframeReceipt`: YM is reframed through a conditional product
+  lattice plus Balaban-authority route, NS is parked at the Leray ceiling,
+  priorities are reordered toward Papers 6/8 first, and CP-from-CM-period
+  remains the CKM external-input candidate.  Out-of-scope A/B worker receipt
+  files are not retained in the final tree.
