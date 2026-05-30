@@ -916,9 +916,14 @@ import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt
 import DASHI.Physics.Closure.CSLevelRunningLawReceipt
 import DASHI.Physics.Closure.YML3TightnessFromDimensionalTransmutationReceipt
 import DASHI.Physics.Closure.YML4ContinuumLimitReceipt
+import DASHI.Physics.Closure.YML4ContinuumLimitInhabitedReceipt
 import DASHI.Physics.Closure.YML5OSAxiomsForGaugeSectorReceipt
+import DASHI.Physics.Closure.YML5OSAxiomsInhabitedReceipt
 import DASHI.Physics.Closure.YML6WightmanReconstructionReceipt
+import DASHI.Physics.Closure.YML6WightmanReconstructionInhabitedReceipt
 import DASHI.Physics.Closure.YML7L8MassGapSurvivalReceipt
+import DASHI.Physics.Closure.YML7L8MassGapInhabitedReceipt
+import DASHI.Physics.Closure.YMClayFinalStateReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt
 import DASHI.Physics.Closure.BernsteinInequalityPrimeBandReceipt
 import DASHI.Physics.Closure.ParaproductDecompositionReceipt
