@@ -1,3 +1,199 @@
+# 2026-05-30 Manager B final integration validation
+
+- Integrated the final tranche receipt imports into `DASHI/Everything.agda`:
+  CKM/Yukawa diagnostics, anomaly table, `Vub`, physical CKM status,
+  CS-level running law, YML3 dimensional-transmutation tightness, YML4-L8
+  continuum/OS/Wightman/mass-gap-survival receipts, NS/YM final-state
+  receipts, and commit/session protocol receipts.
+- Indexed `Docs/Paper6FinalDraftOutline.md` and
+  `Docs/Paper8FinalDraftOutline.md` as non-promoting final-draft outline
+  sidecars.
+- CKM/Yukawa status remains diagnostic only: physical CKM, full CKM, exact SM,
+  anomaly promotion, Clay, and terminal promotion flags remain false.
+- Yang-Mills status remains partial/conditional: L3 dimensional transmutation
+  is evidence only; L4-L8 are continuum/OS/Wightman/mass-gap-survival targets;
+  continuum YM, Wightman reconstruction, uniform mass gap, Clay YM, and
+  terminal promotion remain false.
+- Navier-Stokes and release-protocol status remain fail-closed: the weak/Leray
+  branch is not smooth regularity or Clay NS, and the commit/tag/session
+  receipts are construction-time protocol receipts, not mathematical
+  promotion receipts.
+- After aggregate validation and promotion scans, the manager executed the
+  Phase 2 git commit and moved the local tag `phase2-clay-roadmap-v1` to that
+  commit.  The runtime commit hash is reported in the manager closeout rather
+  than self-referenced inside the committed status file.
+- Validation applied one minimal worker-owned Agda typo fix required for the
+  aggregate: `CKMDiagnosticSummaryReceipt` no longer compares a `Setω`
+  anomaly receipt by builtin equality, and instead witnesses that the anomaly
+  receipt keeps physical CKM promotion false.
+
+# 2026-05-30 Manager C YM/NS Phase 2 tranche
+
+- Implemented and wired the corrected YM coupling chain:
+  `CarrierScaleFromHeegnerReceipt`, `QCDRunningFromCarrierScaleReceipt`,
+  `CarrierGaugeCouplingFromCSLevelReceipt`,
+  `WilsonBetaFromCSLevelReceipt`, `YML2CorrectedStatusReceipt`, and
+  `YML3TightnessFromKRunningReceipt`.  The rejected identification
+  `beta=alpha1` is now separated from the CS-level candidate
+  `alpha_s=1/3`, `beta_SU2=3/pi`, and the finite-lattice mass-gap estimate
+  `2.33 GeV`.  Tightness as `k -> infinity`, continuum YM, Wightman
+  reconstruction, and Clay YM remain false.
+- Implemented and wired the prime-band Littlewood-Paley NS chain:
+  `PrimeBandLPDefinitionReceipt`, `BernsteinInequalityPrimeBandReceipt`,
+  `ParaproductDecompositionReceipt`, `NSCarrierEnergyInequalityReceipt`,
+  `NSCarrierLerayCompactnessReceipt`, `NSW3NonlinearPassageReceipt`,
+  `NSW4WeakSolutionReceipt`, and `NSWeakSolutionSummaryReceipt`.  The
+  weak/Leray branch is recorded as inhabited at prime-LP receipt scope.
+  This is not smoothness, uniqueness, BKM control, or Clay regularity.
+- Added the regularity and Phase 2 surfaces:
+  `NSRegularityGapReceipt`, `NSRegularityRoadmapFilledReceipt`,
+  `ClayNSCurrentStateReceipt`, and `Phase2ProgrammeReceipt`.  The next NS
+  target is the critical Besov estimate; the Clay wall remains uniform
+  `L∞` vorticity control.  Terminal and Clay promotions remain false.
+
+# 2026-05-30 Manager C Phase 2 programme integration
+
+- Added and wired `Phase2ProgrammeReceipt` as a non-promoting aggregate for
+  the next integration frontier.  It consumes the visible YM L2
+  strong-coupling status, CS-level gauge-coupling/level-rank decoupling
+  diagnostics, W-mass RG blocker, NS prime-band Littlewood-Paley carrier
+  candidate, and still-conditional NS weak-solution branch.
+- YM Phase 2 remains open on continuum beta running, tightness, physical scale
+  anchoring, continuum gap survival, and CS-level SU(2)-SU(3) direct-product
+  decoupling.  Exact SM, physical gauge coupling, W mass, Clay YM, and
+  terminal promotion remain false.
+- NS Phase 2 replaces the failed pure Haar-frame route with a prime-band
+  LP/Besov/paraproduct chain.  The weak-solution receipt branch is recorded
+  through the Leray weak formulation, but critical Besov/vorticity control,
+  BKM regularity, Clay NS, and terminal promotion remain false.
+
+# 2026-05-30 Manager A tranche lane 6 integration/docs sidecar
+
+- Updated Paper 8 sidecar docs only.  The corrected coupling posture is now
+  indexed through `CarrierScaleFromHeegnerReceipt`,
+  `QCDRunningFromCarrierScaleReceipt`,
+  `CarrierGaugeCouplingFromCSLevelReceipt`,
+  `WilsonBetaFromCSLevelReceipt`, `YML2CorrectedStatusReceipt`,
+  `YML3TightnessFromKRunningReceipt`, `CSLevelFlowFullReceipt`, and
+  `WBosonMassFromCSReceipt`: CS-level/k-running is a candidate route, not a
+  Wilson beta trajectory or physical coupling derivation.
+- The Navier-Stokes Phase 2 programme is recorded through
+  `NSAlternativeApproachSurveyReceipt`, `NSLittlewoodPaleyCarrierReceipt`,
+  `PrimeBandLPDefinitionReceipt`, `BernsteinInequalityPrimeBandReceipt`,
+  `ParaproductDecompositionReceipt`, `NSCarrierEnergyInequalityReceipt`,
+  `NSCarrierLerayCompactnessReceipt`, `NSW3NonlinearPassageReceipt`,
+  `NSW4WeakSolutionReceipt`, and `NSWeakSolutionSummaryReceipt` as a
+  prime-band Littlewood-Paley/Besov/paraproduct route toward a conditional
+  Leray weak-solution branch.
+- The regularity gap remains explicit via
+  `NSRegularityGapReceipt`, `NSRegularityRoadmapFilledReceipt`,
+  `NavierStokesRegularityTowerReceipt`, `ClayNSProofRoadmapReceipt`, and
+  `EllipticBootstrapReceipt`: weak-solution bookkeeping is not a smooth
+  regularity theorem.  `Phase2ProgrammeReceipt` records the programme only;
+  Clay YM, Clay NS, exact SM, CKM, and terminal promotion stay false.
+
+# 2026-05-30 Manager B A-D YM/NS/deg23 follow-up tranche
+
+- Worker E integrated the existing A-D tranche outputs after the worker receipt
+  files were visible, wiring the receipts into `DASHI/Everything.agda` and
+  publication/status docs without creating replacement receipt files.
+- YM L2 is now recorded at finite strong-coupling scope:
+  `StrongCouplingExpansionReceipt`, `StringTensionCarrierReceipt`,
+  `UniformBoundStrongCouplingReceipt`, `BetaCriticalReceipt`,
+  `CarrierRGTrajectoryYMReceipt`, and `YML2StatusReceipt` record
+  `beta=alpha1`, leading plaquette expectation `alpha1/8`, carrier-unit
+  string tension, finite strong-coupling plaquette-correlator decay, and the
+  fixed-beta/RG-trajectory obstruction.  Continuum YM, physical mass gap,
+  Clay YM, and terminal promotion remain false.
+- NS W2 is now closed for the pure 2/3/5 Haar-frame route:
+  `ZeroMeanSubspaceGramReceipt`, `GramOperatorNormComputationReceipt`,
+  `HilbertSchmidtBoundGramReceipt`, `NSWaveletRouteClosedReceipt`,
+  `NSAlternativeApproachSurveyReceipt`, and
+  `NSLittlewoodPaleyCarrierReceipt` record that zero-mean restriction does
+  not change the Gram entries, the dyadic/triadic cross-scale
+  Hilbert-Schmidt envelope diverges, and the next admissible route is
+  prime-band Littlewood-Paley/Besov/paraproduct analysis.  Clay NS remains
+  false.
+- Deg23 follow-up receipts
+  `Deg23FromFullTraceFormulaReceipt`, `Deg23Candidate14302Receipt`,
+  `TwoLoopResummationReceipt`, and `VcbFromTwoLoopDeg23Receipt` record the
+  full-trace route as open, the two-loop-looking `14.301` effective-degree
+  near-hit as diagnostic-only, and the remaining `Vcb` error as dominated by
+  Yukawa normalisation.  Physical CKM remains false.
+- The tranche also includes `Docs/Paper8Section3Draft.md` and
+  `Docs/Paper8Section4Draft.md` for the geometric split and fermion-count
+  sections.  Both drafts explicitly separate count/structural receipts from
+  exact SM reconstruction.
+
+# 2026-05-30 Manager B validation/status sidecar
+
+- Validated the Manager B Clay/deg23/paper-status tranche after concurrent
+  worker files landed.  Focused Agda checks passed for the visible new Closure
+  receipts, and the full aggregate
+  `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`
+  passed.
+- Applied one mechanical validation fix in `ClayRoadmapAssignmentPrep`: the NS
+  frame restriction field reference now uses
+  `restrictedFrameBoundProved`.
+- NS W2/frame-bound status is fail-closed: raw Haar wavelets without scaling
+  functions have all-L2 lower frame bound `A=0`; the restricted zero-mean /
+  vorticity frame route is recorded as a candidate with the bound still
+  unproved, so Navier-Stokes Clay remains false.
+- YM L1 status is finite/carrier scoped: carrier lattice YM, 3+1 lattice
+  spacing, Wilson-action, reflection-positivity, and transfer-matrix mass-gap
+  receipts are inhabited at finite/lattice scope, while YM L2 uniform bounds,
+  tightness, continuum limit, Wightman reconstruction, Clay YM, and terminal
+  promotion remain false.
+- Deg23 CM eigenvalue status remains diagnostic: the raw Hecke degree
+  `deg(T_13)=14`, the `E_-3(F_13)` count, and the local CM/eigenvalue product
+  are separated from the `14 -> 14.302` residual.  The residual, physical CKM,
+  and terminal promotions remain false.
+- Paper statuses are recorded without promotion: Papers 1-5 have status
+  surfaces, Paper 6 is diagnostic-ready, Paper 8 is conjecture/support-ready,
+  Paper 7 remains internal-only, and the Clay YM/NS papers are not ready.
+
+# 2026-05-30 Manager A Clay-roadmap execution tranche
+
+- Implemented and wired the next Clay-roadmap tranche across NS W2, YM L1,
+  and deg23/T13 diagnostics.  New Closure receipts record explicit 2/3/5
+  Gram-matrix entries, the failed Gershgorin lower-bound route, the
+  operator-norm target, pentadic cross terms, the unrestricted Haar-frame
+  counterexample from constant functions, and the restricted zero-mean /
+  vorticity-frame route.  No Navier-Stokes promotion was introduced.
+- Added finite-lattice Yang-Mills L1 receipts: carrier three-site spatial
+  lattice, depth-as-Euclidean-time candidate, Wilson action on spatial and
+  temporal plaquettes, inherited finite-lattice Wilson reflection positivity,
+  finite-lattice transfer-matrix gap, and `YML1StatusReceipt`.  This inhabits
+  YM L1 only at finite carrier-lattice scope; L2 uniform correlator bounds,
+  L3 tightness, L4 continuum limit, and Clay YM remain open.
+- Added deg23 receipts for the Eichler-Selberg/CM-point diagnostic at
+  `p = 13`: `a_13(E_-3)=2`, `a_13(E_-7)=0`, the local CM eigenvalue is zero,
+  and raw `deg(T_13)=14` is distinct from the CM eigenvalue.  The 2.1%
+  residual remains open after this route.
+- Added `ClayRoadmapAssignmentPrep` and `PaperStatusAllPapersReceipt`.  The
+  next Clay assignments are now explicit: YM L2 uniform plaquette-correlator
+  bounds, NS restricted zero-mean frame lower bound, and NS nonlinear passage
+  after the frame bridge.  Paper 6 and Paper 8 are marked ready only as
+  diagnostic/conjecture papers; Clay YM and Clay NS are not submittable.
+- Validation: focused `PaperStatusAllPapersReceipt` and full
+  `DASHI/Everything.agda` both pass.
+
+# 2026-05-30 Manager A Clay roadmap documentation tranche
+
+- Added `Docs/ClayYMProofRoadmap.md` and `Docs/ClayNSProofRoadmap.md`.
+  These are lemma-chain roadmaps, not Clay claims: YM is decomposed into
+  nine existence/mass-gap lemmas, while NS is decomposed into the weak-solution
+  branch and the separate BKM/global-regularity branch.
+- Added and wired `ClayYMProofRoadmapReceipt` and
+  `ClayNSProofRoadmapReceipt`.  The receipts consume existing blocker,
+  scalar-OS, frame-bound, and weak-solution receipts only to record current
+  status.  They explicitly keep Yang-Mills Clay, Navier-Stokes Clay,
+  Wightman, continuum YM, smooth NS, and terminal promotion false.
+- The roadmap documents clarify that tonight's Paper 6/Paper 8 arithmetic and
+  unification work is not Clay progress.  Future Clay tranches should target a
+  named lemma such as YM L1/L2 or NS W2/N5 rather than the undifferentiated
+  phrase "Clay YM" or "Clay NS."
+
 # 2026-05-30 Manager B T13 / gauge-decoupling / count tranche
 
 - Manager B T13/gauge/count tranche is complete.  Added and wired Closure

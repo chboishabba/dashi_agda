@@ -5,6 +5,13 @@ Status: Paper 8 submission support; non-promoting; fail-closed
 
 This index is the source map for Paper 8.  It records which formal receipts can be cited, what each receipt contributes, and which promotion bit must remain false.  The paper claim is a governance and tower-composition claim, not a solved Millennium, GR, QFT, or Standard Model theorem.
 
+Final draft outline sidecars:
+`Docs/Paper6FinalDraftOutline.md` records the Paper 6 diagnostic manuscript
+shape for matter/Yukawa/CKM/P5-prime, and
+`Docs/Paper8FinalDraftOutline.md` records the Paper 8 conjecture/governance
+manuscript shape for the unification tower. Both outlines are documentation
+sidecars only and do not create Agda receipts or promotion claims.
+
 ## Phase 1 Target Status
 
 Phase 1 tracks eight target/frontier receipts in the submission-facing control
@@ -66,6 +73,23 @@ Every receipt cited in the Paper 8 draft body is anchored here by Agda module pa
 | `DASHI.Physics.Closure.Phase1CommitReceipt` | `canonicalPhase1CommitReceipt`, `phase1CommitReceiptDoesNotTag` | Drafts the definitive Phase 1 commit title, tag name, and commit-message sections while explicitly recording that no commit or tag is created here. |
 | `DASHI.Physics.Closure.Paper8AbstractDraftReceipt` | `canonicalPaper8AbstractDraftReceipt`, `paper8AbstractDraftDoesNotPromote` | Records the Paper 8 abstract as a fail-closed receipt-tower/blocker-map claim; no Clay, CKM, SM, or terminal promotion appears in the abstract. |
 | `DASHI.Physics.Closure.Paper8IntroductionDraftReceipt` | `canonicalPaper8IntroductionDraftReceipt`, `paper8IntroductionDraftDoesNotPromoteClay`, `paper8IntroductionDraftDoesNotPromoteTerminal` | Records the Paper 8 introduction as a fail-closed programme statement: lambda, diagnostic `A`, finite charge quantisation, first-six Heegner matter-lane bookkeeping, and the strongest gauge/quark-lepton/no-fourth-generation candidates are described without Clay, accepted-new-physics, full SM, or terminal promotion. |
+| `DASHI.Physics.Closure.Phase2ProgrammeReceipt` | `canonicalPhase2ProgrammeReceipt`, `phase2ProgrammeKeepsClayFalse` | Records the Phase 2 programme: YM k-to-infinity tightness, NS critical Besov/vorticity control, CKM Yukawa normalisation, and Paper 8 gauge-section completion. Exact SM, Clay YM, Clay NS, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.YukawaNormalisationStructureReceipt` | `canonicalYukawaNormalisationStructureReceipt`, `yukawaNormalisationDoesNotPromoteCKM`, `yukawaNormalisationDoesNotPromoteTerminal` | Records the volume/Yukawa-normalisation structure as a diagnostic target; physical volume authority, physical Yukawa eigenbasis, CKM, Clay, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.CKMFullMatrixFromCarrierReceipt` | `canonicalCKMFullMatrixFromCarrierReceipt`, `ckmFullMatrixFromCarrierDoesNotPromoteCKM`, `ckmFullMatrixFromCarrierDoesNotPromoteFullCKM`, `ckmFullMatrixFromCarrierRecordsDeg12Inconsistency` | Records the full carrier CKM matrix diagnostic and the deg12 non-integer-exponent inconsistency; certified physical diagonalisation, physical CKM, full CKM, Clay, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.AnomalyCancellationTableReceipt` | `canonicalAnomalyCancellationTableReceipt`, `anomalyCancellationTableDoesNotPromoteCKM` | Records the conditional anomaly table inheritance boundary; carrier charges are not proved to match physical SM hypercharge, so anomaly, gauge-matter, CKM, and SM promotion remain false. |
+| `DASHI.Physics.Closure.VubFromCarrierReceipt` | `canonicalVubFromCarrierReceipt`, `vubFromCarrierDoesNotPromoteCKM` | Records the current `Vub` carrier diagnostic and the naive `T5` failure; physical `Vub` and physical CKM promotion remain false. |
+| `DASHI.Physics.Closure.CKMDiagnosticSummaryReceipt` | `canonicalCKMDiagnosticSummaryReceipt`, `ckmDiagnosticSummaryDoesNotPromoteCKM` | Aggregates normalisation, full-matrix, anomaly, and `Vub` diagnostic receipts for this tranche; physical CKM remains false. |
+| `DASHI.Physics.Closure.PhysicalCKMPromotionStatusReceipt` | `canonicalPhysicalCKMPromotionStatusReceipt`, `physicalCKMPromotionStatusIsFalse` | Final CKM promotion status receipt for this tranche; diagnostics are complete for bookkeeping, but physical CKM and terminal promotion remain false. |
+| `DASHI.Physics.Closure.CSLevelRunningLawReceipt` | `canonicalCSLevelRunningLawReceipt`, `csLevelRunningLawKeepsClayFalse`, `csLevelRunningLawKeepsTerminalFalse` | Records the CS-level running-law candidate and dimensional-transmutation route; standard authority, Wilson tightness, continuum YM, Clay YM, and terminal Clay promotion remain false. |
+| `DASHI.Physics.Closure.YML3TightnessFromDimensionalTransmutationReceipt` | `canonicalYML3TightnessFromDimensionalTransmutationReceipt`, `yml3DimensionalTransmutationKeepsFullTightnessFalse`, `yml3DimensionalTransmutationKeepsClayFalse`, `yml3DimensionalTransmutationKeepsTerminalFalse` | Records dimensional transmutation as partial L3 evidence; full tightness, Prokhorov tightness, continuum Wilson measure, continuum YM, Clay YM, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.YML4ContinuumLimitReceipt` | `canonicalYML4ContinuumLimitReceipt`, `yml4ContinuumLimitKeepsClayFalse`, `yml4ContinuumLimitKeepsTerminalFalse` | Records the conditional continuum-limit candidate after L3; cutoff-measure tightness, gauge-invariant weak limit, Schwinger functions, continuum YM, Clay YM, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.YML5OSAxiomsForGaugeSectorReceipt` | `canonicalYML5OSAxiomsForGaugeSectorReceipt`, `yml5OSKeepsClayFalse`, `yml5OSKeepsTerminalFalse` | Records the gauge-sector OS axiom route as conditional; full OS reconstruction, Wightman input, Clay YM, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.YML6WightmanReconstructionReceipt` | `canonicalYML6WightmanReconstructionReceipt`, `yml6WightmanKeepsClayFalse`, `yml6WightmanKeepsTerminalFalse` | Records the Wightman reconstruction route conditional on gauge-sector OS; Wightman fields, positive-energy representation, transferred mass-gap statement, Clay YM, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.YML7L8MassGapSurvivalReceipt` | `canonicalYML7L8MassGapSurvivalReceipt`, `yml7l8MassGapSurvivalKeepsClayFalse`, `yml7l8MassGapSurvivalKeepsTerminalFalse` | Records conditional L7 uniform transfer-gap and L8 continuum mass-gap survival targets; neither is proved, physical mass-gap identification, Clay YM, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.NSFinalStateReceipt` | `canonicalNSFinalStateReceipt`, `nsFinalStateKeepsClayFalse`, `nsFinalStateKeepsTerminalFalse`, `nsFinalStateNoPromotion` | Records the NS final state: W1-W5 weak/Leray chain and closed pure Haar-frame route, with enstrophy, vorticity, global regularity, Clay NS, and terminal promotion still false. |
+| `DASHI.Physics.Closure.YMFinalStateReceipt` | `canonicalYMFinalStateReceipt`, `ymFinalStateKeepsClayFalse`, `ymFinalStateKeepsTerminalFalse`, `ymFinalStateNoPromotion` | Records the YM final state: L1 inhabited, L2/L3 partial, L4-L8 conditional; continuum YM, uniform mass gap, Clay YM, and terminal promotion remain false. |
+| `DASHI.Physics.Closure.CommitAndTagFinalReceipt` | `canonicalCommitAndTagFinalReceipt`, `commitAndTagFinalDoesNotCommit`, `commitAndTagFinalDoesNotTag`, `commitAndTagFinalNoHashClaim`, `commitAndTagFinalNoPromotion` | Records the final commit/tag protocol as a receipt only; it does not stage files, create a commit, create a tag, claim a hash, or promote terminal closure. |
+| `DASHI.Physics.Closure.SessionEndReceipt` | `canonicalSessionEndReceipt`, `sessionEndDoesNotCommit`, `sessionEndDoesNotClaimHash`, `sessionEndKeepsTerminalFalse`, `sessionEndNoPromotion` | Records session-end state as receipt bookkeeping only; aggregate validation, commit, tag, commit-hash existence, and terminal promotion are not executed by the receipt. |
 | `DASHI.Physics.Closure.Deg23FromT13HeckeReceipt` | `canonicalDeg23FromT13HeckeReceipt`, `deg23BaseFromT13HeckeInhabited`, `deg23T13ResidualStillOpen` | Records the base `deg23 = 14` as the inert-prime Hecke degree `deg(T_13)=13+1` on the Hilbert modular surface for `Q(sqrt(21))`; the 2.1% CM-specialisation residual and physical CKM promotion remain open/false. |
 | `DASHI.Physics.Closure.UpDownSplittingFromIsospinReceipt` | `canonicalUpDownSplittingFromIsospinReceipt`, `upDownSplittingFromIsospinInhabited`, `fermionDoublingFromSU2PrimaryInhabited` | Records the count-level SU(2)_1 WZW `j=1/2` doublet splitting of each matter lane into up/down or neutral/charged states; exact SU(2)_L, exact SM representation, DHR/SM, and terminal promotion remain false. |
 | `DASHI.Physics.Closure.FermionCountVerificationReceipt` | `canonicalFermionCountVerificationReceipt`, `fermionCountMatchesSMWithRightNeutrinos`, `fermionCountVerificationNoTerminalPromotion` | Verifies the count `3*2*3*2 + 3*2*1*2 = 48` Weyl fermions when right-handed neutrinos are included; this is count-level governance only, not anomaly cancellation or SM reconstruction. |
@@ -146,6 +170,104 @@ Every receipt cited in the Paper 8 draft body is anchored here by Agda module pa
 | Yang-Mills mass gap | `DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface`, `DASHI.Physics.Closure.YangMillsMassGapBoundary`, `DASHI.Physics.Closure.ColimitGapLiftOnHamiltonian`, `DASHI.Physics.Closure.ContinuumClayMassGapReceiptObligation`, `DASHI.Physics.Closure.ClayMillenniumClosureTargetReceipt`, `DASHI.Physics.Closure.CarrierFactorVecInjectivityOSPositivity`, `DASHI.Physics.Closure.CarrierRenormalizationGroupScaleReceipt`, `DASHI.Physics.Closure.RGContractionReceipt`, `DASHI.Physics.Closure.RGOperatorNormReceipt`, `DASHI.Physics.Closure.RGBanachFixedPointReceipt`, `DASHI.Physics.Closure.OSPositivityFromRGFixedPoint`, `DASHI.Physics.Closure.H0OSPositivityBaseCase`, `DASHI.Physics.Boundaries.YMConstructive5DProofReceipt`, `DASHI.Physics.Boundaries.TopologicalMassGapInterpretation`, `DASHI.Physics.Boundaries.GribovResolutionAuthorityReceipt` | Finite-depth and authority-bound YM tower with a finite FactorVec-injectivity-to-OS receipt plus explicit RG operator-norm, Banach fixed-point, OS-preservation, H0 selected-matrix PSD diagnostic, uniform-gap, Wightman, and Clay-facing blockers. | No FactorVec operator-norm equality proof, no full raw H0 OS base-case proof, no OS reflection-form identification, no uniform depth-independent mass gap, no continuum constructive YM theory, no Wightman reconstruction, no Clay mass-gap promotion. |
 | Navier-Stokes regularity | `DASHI.Physics.Closure.NavierStokesWeakSolutionInterface`, `DASHI.Physics.Closure.NavierStokesRegularityTowerReceipt`, `DASHI.Physics.Closure.ClayMillenniumClosureTargetReceipt`, `DASHI.Physics.Closure.UltrametricSobolevUniformBound`, `DASHI.Physics.Closure.CarrierNSSmoothConvergenceReceipt`, `DASHI.Physics.Closure.UltrametricAubinLionsReceipt`, `DASHI.Physics.Closure.NavierStokesBound3TimeDerivativeReceipt`, `DASHI.Physics.Closure.AubinLionsBound3Full`, `DASHI.Physics.Closure.UltrametricAubinLionsCompactness`, `DASHI.Physics.Closure.EllipticBootstrapReceipt` | Finite weak-solution, energy, enstrophy, vorticity, BKM-style rungs, ultrametric Sobolev authority, constructed weak time-derivative bound, and explicit Aubin-Lions/elliptic-bootstrap route. | No carrier-specialized full p-adic Sobolev proof, no ultrametric Aubin-Lions theorem, no smooth continuum NS limit, no continuum BKM passage, no continuum regularity lift, no Clay regularity promotion. |
 
+Roadmap sidecars: `Docs/ClayYMProofRoadmap.md` /
+`DASHI.Physics.Closure.ClayYMProofRoadmapReceipt` and
+`Docs/ClayNSProofRoadmap.md` /
+`DASHI.Physics.Closure.ClayNSProofRoadmapReceipt` decompose these two Clay
+lanes into lemma dependency chains.  They are governance roadmaps only and do
+not promote Yang-Mills, Navier-Stokes, Wightman reconstruction, continuum
+construction, smooth regularity, or terminal closure.
+
+Focused sidecars: `DASHI.Physics.Closure.WaveletFrameBoundRevisionReceipt`,
+`DASHI.Physics.Closure.FrameBoundByOperatorNormReceipt`,
+`DASHI.Physics.Closure.PentadicCrossTermReceipt`,
+`DASHI.Physics.Closure.GramMatrix2x3BoundsReceipt`,
+`DASHI.Physics.Closure.GramMatrixSpectrumBoundReceipt`,
+`DASHI.Physics.Closure.NegativeFrameBoundRouteReceipt`,
+`DASHI.Physics.Closure.NSFrameRestrictionReceipt`,
+`DASHI.Physics.Closure.ZeroMeanSubspaceGramReceipt`,
+`DASHI.Physics.Closure.GramOperatorNormComputationReceipt`,
+`DASHI.Physics.Closure.HilbertSchmidtBoundGramReceipt`,
+`DASHI.Physics.Closure.NSWaveletRouteClosedReceipt`,
+`DASHI.Physics.Closure.NSAlternativeApproachSurveyReceipt`, and
+`DASHI.Physics.Closure.NSLittlewoodPaleyCarrierReceipt` record the NS W2 negative
+result: all-scale dyadic/triadic mutual orthogonality is rejected, full
+`L2` pure-Haar frame closure is blocked by constants, the zero-mean/vorticity
+restriction does not repair the cross-scale Gram obstruction, and the pure
+2/3/5 Haar-frame bridge is closed.  The replacement route is a prime-band
+Littlewood-Paley/Besov/parabolic-smoothing programme, with all NS regularity
+and Clay promotion still false.
+`DASHI.Physics.Closure.CarrierLatticeYMDefinitionReceipt`,
+`DASHI.Physics.Closure.SpacetimeLatticeFromCarrierDepthReceipt`,
+`DASHI.Physics.Closure.WilsonActionOn3PlusOneLatticeReceipt`,
+`DASHI.Physics.Closure.ReflectionPositivityForWilsonReceipt`,
+`DASHI.Physics.Closure.LatticeMassGapFromTransferMatrixReceipt`, and
+`DASHI.Physics.Closure.YML1StatusReceipt`,
+`DASHI.Physics.Closure.StrongCouplingExpansionReceipt`,
+`DASHI.Physics.Closure.StringTensionCarrierReceipt`,
+`DASHI.Physics.Closure.UniformBoundStrongCouplingReceipt`,
+`DASHI.Physics.Closure.BetaCriticalReceipt`,
+`DASHI.Physics.Closure.CarrierRGTrajectoryYMReceipt`, and
+`DASHI.Physics.Closure.YML2StatusReceipt` record the YM finite-lattice branch:
+L1 is inhabited at finite carrier-lattice Wilson-action scope, and L2 is
+partially inhabited only in the strong-coupling regime `beta=alpha1`, with
+carrier-unit string tension diagnostics.  Fixed beta is not the Wilson
+continuum trajectory; tightness, continuum construction, Wightman
+reconstruction, and Clay mass gap remain false.
+
+Phase 2 YM sidecars:
+`DASHI.Physics.Closure.CarrierScaleFromHeegnerReceipt`,
+`DASHI.Physics.Closure.QCDRunningFromCarrierScaleReceipt`,
+`DASHI.Physics.Closure.CarrierGaugeCouplingFromCSLevelReceipt`,
+`DASHI.Physics.Closure.WilsonBetaFromCSLevelReceipt`,
+`DASHI.Physics.Closure.YML2CorrectedStatusReceipt`, and
+`DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt` replace the rejected
+`beta=alpha1` coupling reading with a CS-level candidate surface:
+`alpha_s=1/3`, `beta_SU2=3/pi`, finite-lattice string tension `2.125`, and a
+`2.33 GeV` mass-gap diagnostic.  They identify the `k -> infinity` measure
+family as the next tightness candidate while keeping tightness, continuum YM,
+Wightman reconstruction, and Clay Yang-Mills false.
+
+Phase 2 NS sidecars:
+`DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt`,
+`DASHI.Physics.Closure.BernsteinInequalityPrimeBandReceipt`,
+`DASHI.Physics.Closure.ParaproductDecompositionReceipt`,
+`DASHI.Physics.Closure.NSCarrierEnergyInequalityReceipt`,
+`DASHI.Physics.Closure.NSCarrierLerayCompactnessReceipt`,
+`DASHI.Physics.Closure.NSW3NonlinearPassageReceipt`,
+`DASHI.Physics.Closure.NSW4WeakSolutionReceipt`,
+`DASHI.Physics.Closure.NSWeakSolutionSummaryReceipt`,
+`DASHI.Physics.Closure.NSRegularityGapReceipt`,
+`DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt`, and
+`DASHI.Physics.Closure.ClayNSCurrentStateReceipt` record the prime-band
+Littlewood-Paley weak-solution branch as inhabited at receipt scope.  The
+regularity branch remains open on critical Besov estimates, enstrophy, BKM,
+and `L-infinity` vorticity control; Clay Navier-Stokes remains false.
+
+`DASHI.Physics.Closure.Phase2ProgrammeReceipt` aggregates these current Phase
+2 targets without creating any terminal or Clay promotion.
+`DASHI.Physics.Closure.Deg23HeckeEigenvalueReceipt`,
+`DASHI.Physics.Closure.EichlerSelbergAtCMPointReceipt`,
+`DASHI.Physics.Closure.Deg23RawVsCMEigenvalueReceipt`, and
+`DASHI.Physics.Closure.Deg23SummaryAndFutureDirectionReceipt`,
+`DASHI.Physics.Closure.Deg23FromFullTraceFormulaReceipt`,
+`DASHI.Physics.Closure.Deg23Candidate14302Receipt`,
+`DASHI.Physics.Closure.TwoLoopResummationReceipt`, and
+`DASHI.Physics.Closure.VcbFromTwoLoopDeg23Receipt` record the
+deg23 CM/Hecke checks: the selected eta product has `a5=+1`, the local CM
+eigenvalue correction is zero, the full trace formula is only a future route,
+and the two-loop-looking denominator is a high-accuracy diagnostic rather
+than a derivation.  `Vcb` remains limited by overall Yukawa normalisation.
+`DASHI.Physics.Closure.PaperStatusAllPapersReceipt` records paper status only:
+Paper 6 is diagnostic-ready, Paper 8 is conjecture-paper-ready, and Clay YM/NS
+papers are not ready.
+
+## Phase 2 Programme
+
+| Scope | Receipt | Status | Boundary |
+| --- | --- | --- | --- |
+| Phase 2 aggregate | `DASHI.Physics.Closure.Phase2ProgrammeReceipt` | Integrates the visible Phase 2 frontier: YM k-to-infinity tightness, NS critical Besov/vorticity control, CKM Yukawa normalisation, and Paper 8 gauge-section completion. | Programme/governance only. Continuum beta running, CS direct-product decoupling, physical scale anchoring, critical Besov/vorticity control, BKM closure, exact SM, Clay YM, Clay NS, and terminal promotion remain false. |
+
 ## GR, Hilbert/Stone, And DHR
 
 | Lane | Primary receipts | Paper role | Closed boundary |
@@ -177,10 +299,13 @@ No receipt in this index authorizes a solved Millennium problem, complete contin
 | Scope | Receipt | Status | Boundary |
 | --- | --- | --- | --- |
 | Wavelet / NS | `DASHI.Physics.Closure.WaveletOrthogonalityGeneralArgumentReceipt` | Candidate equidistribution/partition route recorded. | All-scale 2/3/5 orthogonality, Riesz/frame bounds, Archimedean compactness, and Clay NS remain false. |
+| NS W2 frame restriction | `DASHI.Physics.Closure.WaveletFrameBoundRevisionReceipt`, `DASHI.Physics.Closure.FrameBoundByOperatorNormReceipt`, `DASHI.Physics.Closure.PentadicCrossTermReceipt`, `DASHI.Physics.Closure.GramMatrix2x3BoundsReceipt`, `DASHI.Physics.Closure.GramMatrixSpectrumBoundReceipt`, `DASHI.Physics.Closure.NegativeFrameBoundRouteReceipt`, `DASHI.Physics.Closure.NSFrameRestrictionReceipt` | Negative/frame-bound revision after the all-scale orthogonality shortcut and full-`L2` pure-Haar frame route fail; zero-mean/vorticity restriction is the admissible next route. | Positive Gershgorin lower bound, tighter operator norm, restricted lower frame inequality, BKM barrier closure, Clay NS, and terminal promotion remain false. |
+| YM L1 finite lattice | `DASHI.Physics.Closure.CarrierLatticeYMDefinitionReceipt`, `DASHI.Physics.Closure.SpacetimeLatticeFromCarrierDepthReceipt`, `DASHI.Physics.Closure.WilsonActionOn3PlusOneLatticeReceipt`, `DASHI.Physics.Closure.ReflectionPositivityForWilsonReceipt`, `DASHI.Physics.Closure.LatticeMassGapFromTransferMatrixReceipt`, `DASHI.Physics.Closure.YML1StatusReceipt` | Finite carrier-lattice Wilson-action scope is inhabited, with finite reflection positivity and finite transfer-matrix gap recorded. | L2 uniform plaquette-correlator bounds, tightness, continuum gauge measure, uniform continuum gap, Clay YM, and terminal promotion remain false. |
 | Deg23 arithmetic | `DASHI.Physics.Closure.ZetaK21ComputationReceipt`, `DASHI.Physics.Closure.ZetaQ21MinusOneReceipt` | Exact `zeta_Q(sqrt(21))(-1)=1/3`, with `B_{2,chi_21}=8` and `L(-1,chi_21)=-4`; the wrapper records this as arithmetic-only. | Does not derive Hilbert volume, the p3-p5 coupling, CKM `A`, `Vcb`, deg23, or any physical promotion. |
 | Deg23 scan | `DASHI.Physics.Closure.NSDeg23ConnectionReceipt`, `DASHI.Physics.Closure.Deg23FromZetaK21Receipt` | Audits point-count, perturbative-alpha, RG-running, Faltings, and `zeta_Q(sqrt(21))` normalisations; the natural zeta diagnostics are `1/3`, `7`, `7`, and `28`. | The zeta route is negative under tested natural normalisations; no deg23, CKM, SM, Clay, terminal, or NS promotion follows. |
+| Deg23 CM eigenvalue check | `DASHI.Physics.Closure.Deg23HeckeEigenvalueReceipt`, `DASHI.Physics.Closure.EichlerSelbergAtCMPointReceipt`, `DASHI.Physics.Closure.Deg23RawVsCMEigenvalueReceipt`, `DASHI.Physics.Closure.Deg23SummaryAndFutureDirectionReceipt` | Computes the selected eta-product expansion as `q - 2q^2 - q^3 + 0q^4 + q^5 + 6q^6 + ...`, hence `a5=+1`; separates raw `T13` degree `14` from the local CM eigenvalue `0`. | The CM eigenvalue does not explain the `14 -> 14.302` residual and does not promote `Vcb`, Wolfenstein `A`, CKM, SM, Clay, or terminal closure. |
 | Geometric split summary | `DASHI.Physics.Closure.GeometricSplitSummaryReceipt` | Summarizes quark levels `3,4,7`, lepton candidates `8,11,12/6`, the `D=-8`/`D=-12` overlaps, and the `D=-11` exception. | The split is not a matter-representation theorem; lepton ambiguity, `D=-11`, SM reconstruction, CKM, Clay, and terminal promotion remain false. |
-| Governance | `DASHI.Physics.Closure.Phase1FinalStateReceipt`, `DASHI.Physics.Closure.WorktreeCleanupReceipt`, `DASHI.Physics.Closure.SessionEndProtocolReceipt`, `DASHI.Physics.Closure.AggregateAndCommitReceipt` | Phase 1 final state, cleanup plan, session-end protocol, and aggregate/commit boundary recorded. | No staging, commit, tag, freeze, CKM/SM/Clay/terminal promotion is created by these receipts; parent review and a clean worktree remain required. |
+| Paper/roadmap governance | `DASHI.Physics.Closure.Phase1FinalStateReceipt`, `DASHI.Physics.Closure.WorktreeCleanupReceipt`, `DASHI.Physics.Closure.SessionEndProtocolReceipt`, `DASHI.Physics.Closure.AggregateAndCommitReceipt`, `DASHI.Physics.Closure.ClayYMProofRoadmapReceipt`, `DASHI.Physics.Closure.ClayNSProofRoadmapReceipt`, `DASHI.Physics.Closure.ClayRoadmapAssignmentPrep`, `DASHI.Physics.Closure.PaperStatusAllPapersReceipt` | Phase 1 final state, cleanup plan, session-end protocol, aggregate/commit boundary, YM/NS roadmap dependency graphs, next Clay assignments, and all-paper readiness statuses recorded. | No staging, commit, tag, freeze, CKM/SM/Clay/terminal promotion is created by these receipts; Paper 6 remains diagnostic-only, Paper 8 conjecture-only, and Clay YM/NS papers are not ready. |
 
 ## Manager B T13 / Gauge / Count Receipts
 
@@ -192,3 +317,12 @@ No receipt in this index authorizes a solved Millennium problem, complete contin
 | Gauge-group candidate refinement | `DASHI.Physics.QFT.SMGaugeGroupFromCS3LanesReceipt`, `DASHI.Physics.QFT.LevelRankDecouplingReceipt`, `DASHI.Physics.QFT.WBosonMassFromCSReceipt` | Records candidate origins for `U(1)_Y`, `SU(2)_L`, and `SU(3)_c`, the level-rank decoupling problem, and the naive WZW W-mass failure. | Direct-product independence, exact gauge spectrum, W mass, full SM, and `G_DHR ~= G_SM` remain false. |
 | Matter-count refinement | `DASHI.Physics.QFT.LeptonYukawaHierarchyReceipt`, `DASHI.Physics.QFT.NoFourthGenerationFromHeegnerExhaustionReceipt`, `DASHI.Physics.QFT.SMFermionCountReceipt`, `DASHI.Physics.Closure.UpDownSplittingFromIsospinReceipt`, `DASHI.Physics.Closure.FermionCountVerificationReceipt` | Records level-overlap lepton ratios, no-fourth-generation exhaustion as a candidate, SU(2)-doublet up/down splitting, and the count-level `48` Weyl match with right-handed neutrinos. | Count and hierarchy diagnostics are not a physical representation theorem, anomaly theorem, Yukawa theorem, or SM promotion. |
 | Residual queue | `DASHI.Physics.Closure.ResidualBlockerMapFinalReceipt`, `DASHI.Physics.Closure.NextSessionOpeningReceipt` | Records the final blocker map and next opening problems: T13 CM correction, W-mass RG, and SU(2)/SU(3) decoupling. | Governance/queue only; no terminal promotion. |
+
+## Manager A Tranche Lane 6 Sidecar
+
+| Scope | Receipt | Status | Boundary |
+| --- | --- | --- | --- |
+| Corrected YM/electroweak coupling candidate | `DASHI.Physics.Closure.CarrierScaleFromHeegnerReceipt`, `DASHI.Physics.Closure.QCDRunningFromCarrierScaleReceipt`, `DASHI.Physics.Closure.CarrierGaugeCouplingFromCSLevelReceipt`, `DASHI.Physics.Closure.WilsonBetaFromCSLevelReceipt`, `DASHI.Physics.Closure.YML2CorrectedStatusReceipt`, `DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt`, `DASHI.Physics.QFT.CSLevelFlowFullReceipt`, `DASHI.Physics.QFT.WBosonMassFromCSReceipt` | Records the corrected CS-level/k-running candidate posture: relative Heegner scale, one-loop running diagnostic, inverse-CS-level coupling candidate, and Wilson-beta correction are named, but CS levels do not derive Wilson beta or a physical coupling. | Correct electroweak coupling, physical W mass, continuum YM trajectory/tightness, Clay YM, exact SM, and terminal promotion remain false. |
+| Prime-band LP weak-solution branch | `DASHI.Physics.Closure.NSAlternativeApproachSurveyReceipt`, `DASHI.Physics.Closure.NSLittlewoodPaleyCarrierReceipt`, `DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt`, `DASHI.Physics.Closure.BernsteinInequalityPrimeBandReceipt`, `DASHI.Physics.Closure.ParaproductDecompositionReceipt`, `DASHI.Physics.Closure.NSCarrierEnergyInequalityReceipt`, `DASHI.Physics.Closure.NSCarrierLerayCompactnessReceipt`, `DASHI.Physics.Closure.NSW3NonlinearPassageReceipt`, `DASHI.Physics.Closure.NSW4WeakSolutionReceipt`, `DASHI.Physics.Closure.NSWeakSolutionSummaryReceipt` | After the pure 2/3/5 Haar-frame bridge is closed negatively, the admissible NS route is a prime-band Littlewood-Paley/Besov/paraproduct branch recording the Leray weak-solution passage. | Weak/Leray scope only; smooth regularity, critical Besov/vorticity control, Clay NS, and terminal promotion remain false. |
+| Regularity gap | `DASHI.Physics.Closure.NSRegularityGapReceipt`, `DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt`, `DASHI.Physics.Closure.NavierStokesRegularityTowerReceipt`, `DASHI.Physics.Closure.ClayNSProofRoadmapReceipt`, `DASHI.Physics.Closure.EllipticBootstrapReceipt` | The regularity gap is explicitly separate from the weak-solution branch: W4/W5 weak-solution roadmap items are filled at conditional scope, but BKM/smooth continuation and bootstrap closure are not reached. | No continuum BKM passage, elliptic bootstrap closure, smooth NS theorem, Clay regularity promotion, or terminal closure. |
+| Phase 2 programme | `DASHI.Physics.Closure.Phase2ProgrammeReceipt`, `DASHI.Physics.Closure.ClayRoadmapAssignmentPrep`, `DASHI.Physics.Closure.PaperStatusAllPapersReceipt`, `DASHI.Physics.Closure.ResidualBlockersSummaryReceipt` | Phase 2 is a non-promoting programme: integrate corrected coupling/k-running diagnostics, pursue the prime-band LP weak-solution chain, and keep the regularity gap as the named blocker. | Roadmap/status only; no staging, commit, tag, Clay, exact SM, CKM, or terminal promotion. |
