@@ -953,6 +953,11 @@ import DASHI.Physics.Closure.CKMFNTextureHonestReceip
 import DASHI.Physics.Closure.VubOpenStatusReceipt
 import DASHI.Physics.Closure.ProgrammeFrontierUpdateReceipt
 import DASHI.Physics.Closure.SessionTagFinalReceipt
+import DASHI.Physics.Closure.VubOpenStatusCorrectionReceipt
+import DASHI.Physics.Closure.NSClayDistanceRevisionReceipt
+import DASHI.Physics.Closure.YMClayDistanceRevisionReceipt
+import DASHI.Physics.Closure.ProgrammeFrontierFinalReceipt
+import DASHI.Physics.Closure.YukawaCKMPaperReadinessReceipt
 import DASHI.Physics.Closure.PaperUpdateReceipt
 import DASHI.Physics.Closure.FinalCommitAndTagReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt
