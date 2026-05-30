@@ -859,6 +859,11 @@ import DASHI.Physics.Closure.NSVorticityNoMechanismReceipt
 import DASHI.Physics.Closure.PrimeLPFlowInvarianceObstructionReceipt
 import DASHI.Physics.Closure.NSAdjacentOnlyFormalReceipt
 import DASHI.Physics.Closure.NSH74RouteStatusReceipt
+import DASHI.Physics.Closure.NSSubcriticalDissipationReceipt
+import DASHI.Physics.Closure.NSClayHonestAssessmentReceipt
+import DASHI.Physics.Closure.NSLargeDataContractionInputRequest
+import DASHI.Physics.Closure.ProgrammeUpgradeSummaryReceipt
+import DASHI.Physics.Closure.NSH74StatusCorrectionReceipt
 import DASHI.Physics.Closure.ZetaK21ComputationReceipt
 import DASHI.Physics.Closure.ZetaQ21MinusOneReceipt
 import DASHI.Physics.Closure.Deg23FromZetaK21Receipt

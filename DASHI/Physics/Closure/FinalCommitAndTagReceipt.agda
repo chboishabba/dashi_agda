@@ -16,11 +16,11 @@ open import Data.List.Base using (List; _∷_; [])
 
 phase2FlowPreservationTagName : String
 phase2FlowPreservationTagName =
-  "phase2-flow-preservation-v1"
+  "phase2-ns-h118-v1"
 
 phase2FlowPreservationCommitMessage : String
 phase2FlowPreservationCommitMessage =
-  "NS flow preservation bound: summable for H^s s>0. Dissipation dominates adjacent-only stretching at high frequency for all s>0. NS regularity programme reopened. Shimura tower provides YM spatial refinement. CP phase candidate arctan(sqrt(7))*(1-alpha1) = 1.1596 rad within PDG 1sigma. All Clay promotions remain false."
+  "NS: H^{11/8} threshold identified as optimal for adjacent-only dissipation dominance. Clay NS conditionally reduced to one large-data contraction proof. YM: Shimura tower spatial refinement inhabited but hyperbolic geometry is new blocker; p-adic flat limit candidate. CKM: CP phase within PDG 1sigma. Correct A3 over-claim. NS H^{7/4} superseded by H^{11/8}."
 
 phase2FlowPreservationAggregateCommand : String
 phase2FlowPreservationAggregateCommand =
