@@ -856,6 +856,7 @@ import DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt
 import DASHI.Physics.Closure.NSFinalStateReceipt
 import DASHI.Physics.Closure.NSVorticityNoMechanismReceipt
+import DASHI.Physics.Closure.PrimeLPFlowInvarianceObstructionReceipt
 import DASHI.Physics.Closure.ZetaK21ComputationReceipt
 import DASHI.Physics.Closure.ZetaQ21MinusOneReceipt
 import DASHI.Physics.Closure.Deg23FromZetaK21Receipt
