@@ -14,20 +14,20 @@ open import Data.List.Base using (List; _∷_; [])
 -- This receipt records the requested final protocol and keeps all terminal
 -- and Clay/physical promotion claims false at receipt construction.
 
-phase2AdelicYMTagName : String
-phase2AdelicYMTagName =
-  "phase2-adelic-ym-v1"
+phase2FrontierTagName : String
+phase2FrontierTagName =
+  "phase2-frontier-v1"
 
-phase2AdelicYMCommitMessage : String
-phase2AdelicYMCommitMessage =
-  "Adelic decomposition of carrier YM geometry. p-adic flat limit resolved: Bruhat-Tits product tree T_3xT_2xT_7 is delta=0 hyperbolic, ultrametric boundary P^1(Q_3)xP^1(Q_2)xP^1(Q_7), reflection positivity inherited (Gubser2017), p-adic 4D Wilson lattice fully defined. Archimedean H^3->R^3 flat limit is single remaining YM gap. NS gap remains archimedean H^{11/8} contraction. Both Clay gaps are archimedean, placed at T2 by Millennium Tower Schema. All Clay promotions remain false."
+phase2FrontierCommitMessage : String
+phase2FrontierCommitMessage =
+  "NS large-data gap reframed: per-lane adjacent-only plus cross-lane flow preservation decomposition. Large-data regularity for nu > C_cross (candidate). Small-nu case is single remaining NS gap. YM archimedean flat limit: cusp degeneration of X_0(N) as N->infty is best candidate. CKM/Yukawa: FN texture diagonalisation diagnostic only, carrier arithmetic is correct source. Vub requires beta angle from carrier arithmetic. All Clay promotions remain false."
 
-phase2AdelicYMAggregateCommand : String
-phase2AdelicYMAggregateCommand =
+phase2FrontierAggregateCommand : String
+phase2FrontierAggregateCommand =
   "timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda"
 
-phase2AdelicYMPromotionScanCommand : String
-phase2AdelicYMPromotionScanCommand =
+phase2FrontierPromotionScanCommand : String
+phase2FrontierPromotionScanCommand =
   "promotion scan: require no unguarded true-valued Clay, terminal, exact-SM, or physical-CKM promotion fields"
 
 data FinalCommitAndTagStep : Set where
@@ -43,13 +43,13 @@ data FinalCommitAndTagStep : Set where
   runDiffCheck :
     FinalCommitAndTagStep
 
-  stageManagerCAdelicYMFiles :
+  stageManagerCFrontierFiles :
     FinalCommitAndTagStep
 
   createManagerCCommit :
     FinalCommitAndTagStep
 
-  createPhase2AdelicYMTag :
+  createPhase2FrontierTag :
     FinalCommitAndTagStep
 
   pushBranchAndTag :
@@ -62,9 +62,9 @@ canonicalFinalCommitAndTagProtocol =
   ∷ runAggregateAgda
   ∷ runPromotionScan
   ∷ runDiffCheck
-  ∷ stageManagerCAdelicYMFiles
+  ∷ stageManagerCFrontierFiles
   ∷ createManagerCCommit
-  ∷ createPhase2AdelicYMTag
+  ∷ createPhase2FrontierTag
   ∷ pushBranchAndTag
   ∷ []
 
@@ -87,25 +87,25 @@ record FinalCommitAndTagReceipt : Setω where
       String
 
     aggregateCommandIsCanonical :
-      aggregateCommand ≡ phase2AdelicYMAggregateCommand
+      aggregateCommand ≡ phase2FrontierAggregateCommand
 
     promotionScanCommand :
       String
 
     promotionScanCommandIsCanonical :
-      promotionScanCommand ≡ phase2AdelicYMPromotionScanCommand
+      promotionScanCommand ≡ phase2FrontierPromotionScanCommand
 
     commitMessage :
       String
 
     commitMessageIsCanonical :
-      commitMessage ≡ phase2AdelicYMCommitMessage
+      commitMessage ≡ phase2FrontierCommitMessage
 
     tagName :
       String
 
     tagNameIsCanonical :
-      tagName ≡ phase2AdelicYMTagName
+      tagName ≡ phase2FrontierTagName
 
     runtimeCommitExecutedHere :
       Bool
@@ -175,19 +175,19 @@ canonicalFinalCommitAndTagReceipt =
     ; protocolIsCanonical =
         refl
     ; aggregateCommand =
-        phase2AdelicYMAggregateCommand
+        phase2FrontierAggregateCommand
     ; aggregateCommandIsCanonical =
         refl
     ; promotionScanCommand =
-        phase2AdelicYMPromotionScanCommand
+        phase2FrontierPromotionScanCommand
     ; promotionScanCommandIsCanonical =
         refl
     ; commitMessage =
-        phase2AdelicYMCommitMessage
+        phase2FrontierCommitMessage
     ; commitMessageIsCanonical =
         refl
     ; tagName =
-        phase2AdelicYMTagName
+        phase2FrontierTagName
     ; tagNameIsCanonical =
         refl
     ; runtimeCommitExecutedHere =
@@ -229,7 +229,7 @@ canonicalFinalCommitAndTagReceipt =
     ; receiptBoundary =
         "C6 records the final validation, commit, tag, and push protocol"
         ∷ "Runtime git actions are false at receipt construction and executed externally by the manager"
-        ∷ "The requested tag is phase2-adelic-ym-v1"
+        ∷ "The requested tag is phase2-frontier-v1"
         ∷ "All Clay, exact-SM, physical-CKM, and terminal promotions remain false"
         ∷ []
     }

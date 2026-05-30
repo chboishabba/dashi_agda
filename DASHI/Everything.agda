@@ -948,6 +948,11 @@ import DASHI.Physics.Closure.YMProgressSummaryReceipt
 import DASHI.Physics.Closure.NSYMParallelStructureReceipt
 import DASHI.Physics.Closure.Paper8NarrativeUpdateReceipt
 import DASHI.Physics.Closure.SessionCloseStateReceipt
+import DASHI.Physics.Closure.NSLargeDataGapCorrectionReceipt
+import DASHI.Physics.Closure.CKMFNTextureHonestReceip
+import DASHI.Physics.Closure.VubOpenStatusReceipt
+import DASHI.Physics.Closure.ProgrammeFrontierUpdateReceipt
+import DASHI.Physics.Closure.SessionTagFinalReceipt
 import DASHI.Physics.Closure.PaperUpdateReceipt
 import DASHI.Physics.Closure.FinalCommitAndTagReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt
