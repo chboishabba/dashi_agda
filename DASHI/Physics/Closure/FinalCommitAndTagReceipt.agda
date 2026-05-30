@@ -16,11 +16,11 @@ open import Data.List.Base using (List; _∷_; [])
 
 phase2FrontierTagName : String
 phase2FrontierTagName =
-  "phase2-ckm-ns-bound-v1"
+  "phase2-ns-ym-ckm-v2"
 
 phase2FrontierCommitMessage : String
 phase2FrontierCommitMessage =
-  "NS global H^{11/8} bound candidate: Leray L^2 band bound + dissipation cutoff j_nu + Bernoulli upward cascade + geometric series. Finite for all nu > 0 and arbitrary data norm. NS Clay distance = Bernoulli band rigour. YM: conformal invariance does not resolve archimedean gap (H^3xR+ != H^4). Cusp universality remains. CKM new results: |Vub| = alpha1*alpha2 = sqrt(m_u/m_t) at 4.16%. Beta derived at 6.04%. All five CKM quantities within 10% of PDG. All Clay promotions remain false."
+  "NS: corrected j_nu = log_p(C0/nu) + 11/8. Cross-lane leakage real but finite by Thue-Mahler -- bounded forcing not feedback. Cascade rate R ~ p^{-2} nu-independent. Global H^{11/8} bound with explicit constants. Remaining gap: Bernstein for prime-scale LP projectors (standard). YM: cusp universality 4-part argument complete. Geometric gap closes as 1/N^2, curvature coupling irrelevant (dim 6). IR stability step is final gap. CKM: |Vub| = alpha1*alpha2 upgraded to carrier adjacent-only chain derivation. Beta derived from two independent carrier structures at 6%. Alpha angle open. All Clay promotions false."
 
 phase2FrontierAggregateCommand : String
 phase2FrontierAggregateCommand =
@@ -229,7 +229,7 @@ canonicalFinalCommitAndTagReceipt =
     ; receiptBoundary =
         "C6 records the final validation, commit, tag, and push protocol"
         ∷ "Runtime git actions are false at receipt construction and executed externally by the manager"
-        ∷ "The requested tag is phase2-ckm-ns-bound-v1"
+        ∷ "The requested tag is phase2-ns-ym-ckm-v2"
         ∷ "All Clay, exact-SM, physical-CKM, and terminal promotions remain false"
         ∷ []
     }

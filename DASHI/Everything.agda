@@ -958,6 +958,11 @@ import DASHI.Physics.Closure.NSClayDistanceRevisionReceipt
 import DASHI.Physics.Closure.YMClayDistanceRevisionReceipt
 import DASHI.Physics.Closure.ProgrammeFrontierFinalReceipt
 import DASHI.Physics.Closure.YukawaCKMPaperReadinessReceipt
+import DASHI.Physics.Closure.NSCrossLaneFindingCorrectionReceipt
+import DASHI.Physics.Closure.NSGlobalBoundNuIndependentRateReceipt
+import DASHI.Physics.Closure.YMCuspUniversalityConsolidatedReceipt
+import DASHI.Physics.Closure.VubBetaHardeningReceipt
+import DASHI.Physics.Closure.ProgrammeFrontierUpdateFinalReceipt
 import DASHI.Physics.Closure.PaperUpdateReceipt
 import DASHI.Physics.Closure.FinalCommitAndTagReceipt
 import DASHI.Physics.Closure.PrimeBandLPDefinitionReceipt
