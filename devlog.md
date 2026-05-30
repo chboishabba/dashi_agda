@@ -4285,3 +4285,17 @@
   full raw H0 OS base case and Clay YM false.  Wired all three into
   `DASHI.Everything` and refreshed Paper 8 receipt/checklist/blocker/index
   docs.
+
+- 2026-05-30: Completed Manager C's gauge-group/closure tranche with six
+  reused worker lanes.  Implemented the closure-level decoupling, Hecke-circle
+  `U(1)_Y`, hypercharge table, anomaly verification, gravitational anomaly,
+  SM gauge candidate, NS vorticity no-mechanism, VEV PDG-input,
+  dimensionful-anchor, Phase 2 blocker, next-session priority, session grand
+  summary, and final commit-protocol receipts.  Added complete Paper 6
+  Section 1-3 and Paper 8 Section 5-6 draft sections, and updated the Paper 8
+  receipt index.  The anomaly receipts use the left-handed Weyl convention
+  with conjugated singlet hypercharges, so the cubic, mixed `SU(2)^2-U(1)_Y`,
+  mixed `SU(3)^2-U(1)_Y`, and gravitational sums close at the standard table
+  level while exact carrier-derived SM reconstruction remains false.  Focused
+  Agda checks and the aggregate passed; promotion, marker, and diff scans are
+  clean.
