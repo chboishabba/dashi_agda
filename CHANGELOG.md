@@ -6,6 +6,23 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Worker 4 termination/YM lane governance update for `2026-06-01`: recorded
+  v3/cascade flux as diagnostic-only and removed it from termination energy
+  `E/Q`.  The termination lanes are v2 and v7.  The `NS->EV5` revision remains
+  empirical/fail-closed, and KP/Balaban is only the preferred YM carrier-side
+  next attack; `exactDecorrelation`, KP uniform-volume bounds, large-field
+  tails, and Balaban induction remain open unless proved.
+
+- Worker 4 Balaban/KP/ultrametric YM obligation update for `2026-06-01`:
+  recorded the volume-independent RG induction gap as the concrete
+  KP/uniform-volume obligation and marked it as the competitive Yang-Mills
+  contribution target, not as solved.  `PolymerKPAsMDLReceipt`,
+  `BalabanRGMassGapReceiptSurface`, `CheckerboardUltrametricBridgeReceipt`,
+  `CarrierAreaLawBalabanSeedReceipt`, and `Docs/ClayYMProofRoadmap.md` now
+  distinguish finite bookkeeping support from the open large/small field,
+  large-field tail, counterterm, and volume-independent induction theorem.
+  No continuum YM, OS/Wightman, Clay YM, or terminal promotion was introduced.
+
 - Worker 3 Gate 3/YM spectral bridge update for `2026-06-01`: added an
   explicit Feshbach-Schur fiber-gap boundary.  `Gate3NormDictionary` now
   records that a carrier-fiber spectral gap is evidence only; a full

@@ -29,9 +29,10 @@ The existing `FiniteCarrierSpectralGapZ7Receipt` product-spectrum calculation
 is therefore read as finite Cartesian-product evidence only, not as a physical
 tensor-product Yang-Mills gap.
 
-Balaban/RG induction gap: the current competitive YM contribution target is
-not "Clay YM" as a solved claim.  It is the concrete KP/uniform-volume
-obligation needed for a Balaban-style induction step:
+Balaban/RG induction gap: the preferred carrier-side YM attack is now the
+KP/Balaban route.  This is not "Clay YM" as a solved claim.  It is the
+concrete KP/uniform-volume obligation needed for a Balaban-style induction
+step:
 
 `H_k -> H_{k+1}` with Kotecky-Preiss polymer local-sum constants, small-field
 bounds, large-field tail bounds, counterterm control, and block-averaging
@@ -39,7 +40,8 @@ error terms all uniform in lattice volume and stable under cutoff/depth
 removal.
 
 The repository now records this obligation explicitly in the Balaban,
-polymer/KP, and carrier area-law receipts.  It is not proved or imported.
+polymer/KP, and carrier area-law receipts.  It is not proved or imported, and
+`exactDecorrelation` must remain open unless supplied by a separate proof.
 Finite MDL/Fejer descent, finite strong-coupling bounds, and finite polymer
 bookkeeping are only support surfaces.  The large/small field split is also
 open: the ultrametric small-field sector is the carrier ball controlled by
@@ -190,11 +192,12 @@ as Clay evidence.
 
 More concretely, the target is the KP/uniform-volume induction obligation:
 prove the Kotecky-Preiss polymer bound with constants independent of the
-spatial volume, prove an ultrametric large/small field split with the
-large-field tail suppressed uniformly enough for `H_k -> H_{k+1}`, and show
-that the resulting counterterm and block-averaging errors remain controlled
-through cutoff/depth removal.  This would be a competitive Yang-Mills
-contribution if proved; it is currently only an open obligation.
+spatial volume, prove `exactDecorrelation` if that route consumes it, prove an
+ultrametric large/small field split with the large-field tail suppressed
+uniformly enough for `H_k -> H_{k+1}`, and show that the resulting counterterm
+and block-averaging errors remain controlled through cutoff/depth removal.
+This would be a competitive Yang-Mills contribution if proved; it is currently
+only an open obligation.
 
 Phase 2 update: `StrongCouplingExpansionReceipt`,
 `StringTensionCarrierReceipt`, `UniformBoundStrongCouplingReceipt`,
@@ -240,6 +243,7 @@ authority boundaries are discharged:
 - operator/Hamiltonian convergence from finite carriers to the continuum
 - Balaban volume-independent induction for the continuum constructive route
 - KP/uniform-volume Balaban induction
+- `exactDecorrelation` as a consumed KP/Balaban input
 - ultrametric large/small field split with large-field tail suppression
 - BRST-compatible reflection positivity for the physical gauge sector
 - an operator-valued physical spectral-gap theorem

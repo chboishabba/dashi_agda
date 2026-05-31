@@ -14,6 +14,7 @@ import DASHI.Physics.Closure.LightTransportFibreClosure as Light
 import DASHI.Physics.Closure.MDLFejerAxiomsShift as Fejer
 import DASHI.Physics.Closure.PolymerKPAsMDLReceipt as KP
 import DASHI.Physics.Closure.StringTensionCarrierReceipt as Tension
+import DASHI.Physics.Closure.UltrametricClusterSeparationReceipt as Ultra
 import DASHI.Physics.Closure.UniformBoundStrongCouplingReceipt as Uniform
 import DASHI.Physics.Closure.YMExternal2025To2026ProofClaimsReceipt as External
 
@@ -53,6 +54,9 @@ data CarrierAreaLawSeedComponent : Set where
   balabanRGStrongCouplingSeed :
     CarrierAreaLawSeedComponent
 
+  ultrametricExactDecorrelationConditionalSupport :
+    CarrierAreaLawSeedComponent
+
 canonicalCarrierAreaLawSeedComponents :
   List CarrierAreaLawSeedComponent
 canonicalCarrierAreaLawSeedComponents =
@@ -63,6 +67,7 @@ canonicalCarrierAreaLawSeedComponents =
   ∷ mdlFejerMonotonicitySupport
   ∷ lightTransportFibreClosureSupport
   ∷ balabanRGStrongCouplingSeed
+  ∷ ultrametricExactDecorrelationConditionalSupport
   ∷ []
 
 data CarrierAreaLawProofObligation : Set where
@@ -84,6 +89,9 @@ data CarrierAreaLawProofObligation : Set where
   proveUltrametricLargeSmallFieldSplit :
     CarrierAreaLawProofObligation
 
+  proveExactDecorrelationOnlyFromDisjointPrimeSupports :
+    CarrierAreaLawProofObligation
+
   proveContinuumRGConvergenceSeparately :
     CarrierAreaLawProofObligation
 
@@ -96,6 +104,7 @@ canonicalCarrierAreaLawProofObligations =
   ∷ proveBalabanSeedConsumesCarrierAreaLaw
   ∷ proveKPUniformVolumeBalabanInduction
   ∷ proveUltrametricLargeSmallFieldSplit
+  ∷ proveExactDecorrelationOnlyFromDisjointPrimeSupports
   ∷ proveContinuumRGConvergenceSeparately
   ∷ []
 
@@ -110,6 +119,9 @@ data CarrierAreaLawNonClaim : Set where
     CarrierAreaLawNonClaim
 
   noUltrametricLargeSmallFieldTailProof :
+    CarrierAreaLawNonClaim
+
+  noUnconditionalExactDecorrelationProof :
     CarrierAreaLawNonClaim
 
   noBalabanRGConvergenceProof :
@@ -128,6 +140,7 @@ canonicalCarrierAreaLawNonClaims =
   ∷ noKoteckyPreissPhysicalBetaProof
   ∷ noKPUniformVolumeInductionProof
   ∷ noUltrametricLargeSmallFieldTailProof
+  ∷ noUnconditionalExactDecorrelationProof
   ∷ noBalabanRGConvergenceProof
   ∷ noContinuumEuclideanYMConstruction
   ∷ noClayYangMillsPromotion
@@ -204,6 +217,31 @@ record CarrierAreaLawBalabanSeedReceipt : Setω where
     polymerMDLBookkeepingAvailable :
       KP.mdLFejerBookkeepingAvailable polymerMDLReceipt ≡ true
 
+    polymerExactDecorrelationStillNotKPProof :
+      KP.carrierExactDecorrelationImportedAsKPProof polymerMDLReceipt
+      ≡
+      false
+
+    ultrametricClusterReceipt :
+      Ultra.UltrametricClusterSeparationReceipt
+
+    ultrametricExactDecorrelationConditionalRecorded :
+      Ultra.finiteCarrierExactDecorrelationConditionalRecorded
+        ultrametricClusterReceipt
+      ≡
+      true
+
+    ultrametricUnconditionalExactDecorrelationStillFalse :
+      Ultra.unconditionalExactDecorrelationProved ultrametricClusterReceipt
+      ≡
+      false
+
+    ultrametricGeneralDisjointSupportFactorisationStillOpen :
+      Ultra.generalDisjointSupportFactorisationProved
+        ultrametricClusterReceipt
+      ≡
+      false
+
     mdlFejerWitness :
       Fejer.MDLFejerAxiomsShift
 
@@ -272,6 +310,18 @@ record CarrierAreaLawBalabanSeedReceipt : Setω where
 
     ultrametricLargeSmallFieldSplitSolvedIsFalse :
       ultrametricLargeSmallFieldSplitSolved ≡ false
+
+    exactDecorrelationCarrierConditionalRecorded :
+      Bool
+
+    exactDecorrelationCarrierConditionalRecordedIsTrue :
+      exactDecorrelationCarrierConditionalRecorded ≡ true
+
+    exactDecorrelationPromotedToBalabanInductionProof :
+      Bool
+
+    exactDecorrelationPromotedToBalabanInductionProofIsFalse :
+      exactDecorrelationPromotedToBalabanInductionProof ≡ false
 
     carrierAreaLawProved :
       Bool
@@ -356,6 +406,16 @@ canonicalCarrierAreaLawBalabanSeedReceipt =
         KP.canonicalPolymerKPAsMDLReceipt
     ; polymerMDLBookkeepingAvailable =
         refl
+    ; polymerExactDecorrelationStillNotKPProof =
+        refl
+    ; ultrametricClusterReceipt =
+        Ultra.canonicalUltrametricClusterSeparationReceipt
+    ; ultrametricExactDecorrelationConditionalRecorded =
+        refl
+    ; ultrametricUnconditionalExactDecorrelationStillFalse =
+        refl
+    ; ultrametricGeneralDisjointSupportFactorisationStillOpen =
+        refl
     ; mdlFejerWitness =
         Fejer.mdlFejerShift
     ; lightTransportBoundary =
@@ -402,6 +462,14 @@ canonicalCarrierAreaLawBalabanSeedReceipt =
         false
     ; ultrametricLargeSmallFieldSplitSolvedIsFalse =
         refl
+    ; exactDecorrelationCarrierConditionalRecorded =
+        true
+    ; exactDecorrelationCarrierConditionalRecordedIsTrue =
+        refl
+    ; exactDecorrelationPromotedToBalabanInductionProof =
+        false
+    ; exactDecorrelationPromotedToBalabanInductionProofIsFalse =
+        refl
     ; carrierAreaLawProved =
         false
     ; carrierAreaLawProvedIsFalse =
@@ -437,6 +505,8 @@ canonicalCarrierAreaLawBalabanSeedReceipt =
         ∷ "Uses MDL/Fejer and light-transport surfaces only as monotonicity/gating support, not as a physical identity theorem"
         ∷ "Marks KP/uniform-volume Balaban induction as the competitive YM contribution target, not as a solved theorem"
         ∷ "Marks the ultrametric large/small field split and large-field tail estimate as open obligations"
+        ∷ "Records exactDecorrelation only as a carrier-side conditional requiring finite disjoint-prime-support witnesses"
+        ∷ "Does not promote exactDecorrelation to a Balaban induction, continuum Yang-Mills, or KP proof"
         ∷ "Names the Balaban RG seed role but does not prove RG convergence, continuum Yang-Mills, mass gap, or Clay Yang-Mills"
         ∷ []
     }

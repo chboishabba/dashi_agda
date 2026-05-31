@@ -1,5 +1,24 @@
 # Current Gate Status
 
+## Worker 4 Termination/YM Lane Governance 2026-06-01
+
+Owner: `Worker 4`
+Status: `docs-only; fail-closed; non-promoting`
+
+The current termination-energy decision is fail-closed: v3/cascade flux is
+diagnostic-only and is removed from termination energy `E/Q`.  The live
+termination lanes are v2 and v7.
+
+The `NS->EV5` lane revision remains empirical.  It may produce diagnostics,
+projection targets, and comparison obligations, but it does not transfer
+finite carrier estimates to actual Navier-Stokes flow and does not imply
+Sobolev/Serrin or Clay closure.
+
+For Yang-Mills, KP/Balaban is the preferred carrier-side next attack.  This
+preference does not prove `exactDecorrelation`, KP uniform-volume bounds,
+large-field tails, Balaban induction, continuum OS/Wightman reconstruction,
+or a Clay mass gap.
+
 ## Worker 5 Corrected YM Competitive Path 2026-06-01
 
 Owner: `Worker 5`

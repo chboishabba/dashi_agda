@@ -2,6 +2,32 @@
 
 ## Active Blocker Board
 
+Worker 4 termination/YM lane governance `2026-06-01`:
+- [x] Record v3/cascade flux as diagnostic-only and remove it from
+  termination energy `E/Q`.
+- [x] Keep v2 and v7 as the termination lanes.
+- [x] Record the `NS->EV5` revision as empirical/fail-closed: diagnostics and
+  projection/comparison targets only, not actual-flow or Clay evidence.
+- [x] Mark KP/Balaban as the preferred YM carrier-side next attack without
+  claiming `exactDecorrelation`, KP uniform-volume bounds, or Balaban
+  induction.
+- [ ] Prove `exactDecorrelation` before consuming it in KP/Balaban.
+- [ ] Prove or refute the KP uniform-volume bounds and large-field tail
+  estimates before consuming KP/Balaban as YM progress beyond a preferred
+  attack lane.
+
+Worker 3 Feshbach-Schur fiber-gap route `2026-06-01`:
+- [x] Record the corrected route in Agda: carrier fiber spectral gap is
+  evidence/ingredient only.
+- [x] Add the YM bridge receipt that keeps Z/7 finite product-spectrum evidence
+  below full tensor-product Hamiltonian gap promotion.
+- [x] Update the Clay YM roadmap with the density plus Feshbach-Schur
+  hypotheses.
+- [ ] Prove Gate 3 density of the selected carrier core in the target Hilbert
+  space before consuming any finite fiber gap as a full tensor gap input.
+- [ ] Supply Feshbach projection decomposition, Schur-complement lower control,
+  off-diagonal relative bounds, and tensor-domain compatibility.
+
 Worker 4 Balaban/KP/ultrametric YM obligation `2026-06-01`:
 - [x] Record the volume-independent Balaban induction gap in the roadmap and
   receipts as the concrete `H_k -> H_{k+1}` target, not as a solved theorem.

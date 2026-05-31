@@ -16,8 +16,8 @@ import DASHI.Combinatorics.FractranCOL as FractranCOL
 -- FRACDASH bridge checklist:
 -- source semantics: Navier-Stokes shell/tail modes in H^(11/8);
 -- target semantics: FractranCOL.EV5 over prime lanes 2,3,5,7,11;
--- encode candidate: v2 stores dyadic shell depth j; v3 stores cascade
--- transfer ratio / inertial flux; v5 stores vorticity stretching / helicity
+-- encode candidate: v2 stores dyadic shell depth j; v3 stores diagnostic
+-- cascade flux only; v5 stores vorticity stretching / helicity
 -- proxy; v7 stores enstrophy and is termination-critical; v11 stores
 -- phase/polarisation metadata outside the canonical FractranCOL rules;
 -- decode candidate: approximate cascade depth, inertial-transfer state,
@@ -48,7 +48,7 @@ data ProjectionEncodeItem : Set where
   v2DyadicShellDepthJ :
     ProjectionEncodeItem
 
-  v3CascadeTransferRatioInertialFlux :
+  v3DiagnosticCascadeFlux :
     ProjectionEncodeItem
 
   v5VorticityStretchingHelicityProxy :
@@ -64,7 +64,7 @@ canonicalProjectionEncodeItems :
   List ProjectionEncodeItem
 canonicalProjectionEncodeItems =
   v2DyadicShellDepthJ
-  ∷ v3CascadeTransferRatioInertialFlux
+  ∷ v3DiagnosticCascadeFlux
   ∷ v5VorticityStretchingHelicityProxy
   ∷ v7EnstrophyTerminationCritical
   ∷ v11PhasePolarisationOutsideCanonicalRules
@@ -74,7 +74,7 @@ data ProjectionDecodeItem : Set where
   approximateDepthJFromV2 :
     ProjectionDecodeItem
 
-  approximateCascadeTransferInertialFluxFromV3 :
+  diagnosticCascadeFluxFromV3 :
     ProjectionDecodeItem
 
   approximateVorticityStretchingHelicityProxyFromV5 :
@@ -90,7 +90,7 @@ canonicalProjectionDecodeItems :
   List ProjectionDecodeItem
 canonicalProjectionDecodeItems =
   approximateDepthJFromV2
-  ∷ approximateCascadeTransferInertialFluxFromV3
+  ∷ diagnosticCascadeFluxFromV3
   ∷ approximateVorticityStretchingHelicityProxyFromV5
   ∷ approximateEnstrophyTailStateFromV7
   ∷ externalPhasePolarisationDataFromV11
@@ -122,7 +122,7 @@ data LaneSemantics : Set where
   v2MeansDepthJ :
     LaneSemantics
 
-  v3MeansCascadeTransferRatioInertialFlux :
+  v3MeansDiagnosticCascadeFluxOnly :
     LaneSemantics
 
   v5MeansVorticityStretchingHelicityProxy :
@@ -138,7 +138,7 @@ canonicalLaneSemantics :
   List LaneSemantics
 canonicalLaneSemantics =
   v2MeansDepthJ
-  ∷ v3MeansCascadeTransferRatioInertialFlux
+  ∷ v3MeansDiagnosticCascadeFluxOnly
   ∷ v5MeansVorticityStretchingHelicityProxy
   ∷ v7MeansEnstrophyTerminationCritical
   ∷ v11MeansPhasePolarisationOutsideCanonicalRules
@@ -148,9 +148,6 @@ data TerminationEnergyComponent : Set where
   energyUsesV2DepthJ :
     TerminationEnergyComponent
 
-  energyUsesV3CascadeTransferRatioInertialFlux :
-    TerminationEnergyComponent
-
   energyUsesV7Enstrophy :
     TerminationEnergyComponent
 
@@ -158,9 +155,84 @@ canonicalTerminationEnergyComponents :
   List TerminationEnergyComponent
 canonicalTerminationEnergyComponents =
   energyUsesV2DepthJ
-  ∷ energyUsesV3CascadeTransferRatioInertialFlux
   ∷ energyUsesV7Enstrophy
   ∷ []
+
+data V3CascadeFluxDiagnosticRole : Set where
+  diagnosticOnly_nonMonotone_excludedFromNSTerminationEnergy :
+    V3CascadeFluxDiagnosticRole
+
+record V3CascadeFluxDiagnosticReceipt : Set where
+  field
+    role :
+      V3CascadeFluxDiagnosticRole
+
+    roleIsDiagnosticOnly :
+      role
+      ≡
+      diagnosticOnly_nonMonotone_excludedFromNSTerminationEnergy
+
+    diagnosticOnly :
+      Bool
+
+    diagnosticOnlyIsTrue :
+      diagnosticOnly ≡ true
+
+    excludedFromTerminationEnergy :
+      Bool
+
+    excludedFromTerminationEnergyIsTrue :
+      excludedFromTerminationEnergy ≡ true
+
+    excludedFromLyapunovEnergy :
+      Bool
+
+    excludedFromLyapunovEnergyIsTrue :
+      excludedFromLyapunovEnergy ≡ true
+
+    nonMonotoneByConstruction :
+      Bool
+
+    nonMonotoneByConstructionIsTrue :
+      nonMonotoneByConstruction ≡ true
+
+    nsRegularityProofPromoted :
+      Bool
+
+    nsRegularityProofPromotedIsFalse :
+      nsRegularityProofPromoted ≡ false
+
+open V3CascadeFluxDiagnosticReceipt public
+
+canonicalV3CascadeFluxDiagnosticReceipt :
+  V3CascadeFluxDiagnosticReceipt
+canonicalV3CascadeFluxDiagnosticReceipt =
+  record
+    { role =
+        diagnosticOnly_nonMonotone_excludedFromNSTerminationEnergy
+    ; roleIsDiagnosticOnly =
+        refl
+    ; diagnosticOnly =
+        true
+    ; diagnosticOnlyIsTrue =
+        refl
+    ; excludedFromTerminationEnergy =
+        true
+    ; excludedFromTerminationEnergyIsTrue =
+        refl
+    ; excludedFromLyapunovEnergy =
+        true
+    ; excludedFromLyapunovEnergyIsTrue =
+        refl
+    ; nonMonotoneByConstruction =
+        true
+    ; nonMonotoneByConstructionIsTrue =
+        refl
+    ; nsRegularityProofPromoted =
+        false
+    ; nsRegularityProofPromotedIsFalse =
+        refl
+    }
 
 data CarrierShapeItem : Set where
   ev5Carrier :
@@ -235,12 +307,12 @@ targetSemanticsStatement =
 encodeCandidateStatement :
   String
 encodeCandidateStatement =
-  "Encode candidate: v2 records dyadic depth j; v3 records cascade transfer ratio / inertial flux; v5 records vorticity stretching / helicity proxy; v7 records enstrophy and is termination-critical; v11 records phase/polarisation outside canonical FractranCOL rules."
+  "Encode candidate: v2 records dyadic depth j; v3 records diagnostic cascade flux only; v5 records vorticity stretching / helicity proxy; v7 records enstrophy and is termination-critical; v11 records phase/polarisation outside canonical FractranCOL rules."
 
 decodeCandidateStatement :
   String
 decodeCandidateStatement =
-  "Decode candidate: recover approximate depth j, cascade transfer / inertial flux, vorticity stretching / helicity proxy, enstrophy tail state, and external phase/polarisation data from the projected EV5 carrier."
+  "Decode candidate: recover approximate depth j, diagnostic cascade flux, vorticity stretching / helicity proxy, enstrophy tail state, and external phase/polarisation data from the projected EV5 carrier."
 
 frontierBoundaryStatement :
   String
@@ -250,12 +322,12 @@ frontierBoundaryStatement =
 terminationEnergyStatement :
   String
 terminationEnergyStatement =
-  "Termination energy is FractranCOL.E = v2 + v3 + v7; v5 and v11 are non-energy metadata for this receipt."
+  "NS termination/Lyapunov energy uses v2 and v7 only; v3 cascade flux is diagnostic-only and excluded because it is non-monotone by construction."
 
 falsificationBoundaryStatement :
   String
 falsificationBoundaryStatement =
-  "Falsification boundary: the NS-to-EV5 projection fails if v2 cannot track depth j, v3 cannot track cascade transfer / inertial flux, v5 cannot track vorticity stretching / helicity proxy, v7 cannot track enstrophy descent, v11 cannot remain outside canonical rules, or E differs from v2+v3+v7."
+  "Falsification boundary: the NS-to-EV5 projection fails if v2 cannot track depth j, v3 is promoted beyond diagnostic non-monotone cascade flux, v5 cannot track vorticity stretching / helicity proxy, v7 cannot track enstrophy descent, v11 cannot remain outside canonical rules, or NS termination/Lyapunov energy includes v3."
 
 record NSToEV5ProjectionFrontierReceipt : Set₁ where
   field
@@ -337,13 +409,51 @@ record NSToEV5ProjectionFrontierReceipt : Set₁ where
       List Nat
 
     terminationEnergyActivePrimeLanesAreCanonical :
-      terminationEnergyActivePrimeLanes ≡ (2 ∷ 3 ∷ 7 ∷ [])
+      terminationEnergyActivePrimeLanes ≡ (2 ∷ 7 ∷ [])
 
     terminationEnergyComponents :
       List TerminationEnergyComponent
 
     terminationEnergyComponentsAreCanonical :
       terminationEnergyComponents ≡ canonicalTerminationEnergyComponents
+
+    v3CascadeFluxDiagnosticReceipt :
+      V3CascadeFluxDiagnosticReceipt
+
+    v3CascadeFluxDiagnosticReceiptIsCanonical :
+      v3CascadeFluxDiagnosticReceipt
+      ≡
+      canonicalV3CascadeFluxDiagnosticReceipt
+
+    v3CascadeFluxDiagnosticOnly :
+      Bool
+
+    v3CascadeFluxDiagnosticOnlyIsTrue :
+      v3CascadeFluxDiagnosticOnly ≡ true
+
+    v3ExcludedFromTerminationEnergy :
+      Bool
+
+    v3ExcludedFromTerminationEnergyIsTrue :
+      v3ExcludedFromTerminationEnergy ≡ true
+
+    v3ExcludedFromLyapunovEnergy :
+      Bool
+
+    v3ExcludedFromLyapunovEnergyIsTrue :
+      v3ExcludedFromLyapunovEnergy ≡ true
+
+    v3NonMonotoneByConstruction :
+      Bool
+
+    v3NonMonotoneByConstructionIsTrue :
+      v3NonMonotoneByConstruction ≡ true
+
+    v3PromotedToNSRegularityProof :
+      Bool
+
+    v3PromotedToNSRegularityProofIsFalse :
+      v3PromotedToNSRegularityProof ≡ false
 
     carrierSideEV5FractranCOLShapeClosed :
       Bool
@@ -532,12 +642,36 @@ canonicalNSToEV5ProjectionFrontierReceipt =
     ; fractranEnergyIsFractranCOLE =
         refl
     ; terminationEnergyActivePrimeLanes =
-        2 ∷ 3 ∷ 7 ∷ []
+        2 ∷ 7 ∷ []
     ; terminationEnergyActivePrimeLanesAreCanonical =
         refl
     ; terminationEnergyComponents =
         canonicalTerminationEnergyComponents
     ; terminationEnergyComponentsAreCanonical =
+        refl
+    ; v3CascadeFluxDiagnosticReceipt =
+        canonicalV3CascadeFluxDiagnosticReceipt
+    ; v3CascadeFluxDiagnosticReceiptIsCanonical =
+        refl
+    ; v3CascadeFluxDiagnosticOnly =
+        true
+    ; v3CascadeFluxDiagnosticOnlyIsTrue =
+        refl
+    ; v3ExcludedFromTerminationEnergy =
+        true
+    ; v3ExcludedFromTerminationEnergyIsTrue =
+        refl
+    ; v3ExcludedFromLyapunovEnergy =
+        true
+    ; v3ExcludedFromLyapunovEnergyIsTrue =
+        refl
+    ; v3NonMonotoneByConstruction =
+        true
+    ; v3NonMonotoneByConstructionIsTrue =
+        refl
+    ; v3PromotedToNSRegularityProof =
+        false
+    ; v3PromotedToNSRegularityProofIsFalse =
         refl
     ; carrierSideEV5FractranCOLShapeClosed =
         true
@@ -651,11 +785,39 @@ nsToEV5QuotientCorrectnessRemainsOpen :
 nsToEV5QuotientCorrectnessRemainsOpen =
   refl
 
-nsToEV5TerminationEnergyUsesV2V3V7 :
+nsToEV5TerminationEnergyUsesV2V7 :
   terminationEnergyActivePrimeLanes canonicalNSToEV5ProjectionFrontierReceipt
   ≡
-  (2 ∷ 3 ∷ 7 ∷ [])
-nsToEV5TerminationEnergyUsesV2V3V7 =
+  (2 ∷ 7 ∷ [])
+nsToEV5TerminationEnergyUsesV2V7 =
+  refl
+
+nsToEV5V3CascadeFluxIsDiagnosticOnly :
+  v3CascadeFluxDiagnosticOnly canonicalNSToEV5ProjectionFrontierReceipt
+  ≡
+  true
+nsToEV5V3CascadeFluxIsDiagnosticOnly =
+  refl
+
+nsToEV5V3ExcludedFromTerminationEnergy :
+  v3ExcludedFromTerminationEnergy canonicalNSToEV5ProjectionFrontierReceipt
+  ≡
+  true
+nsToEV5V3ExcludedFromTerminationEnergy =
+  refl
+
+nsToEV5V3NonMonotoneByConstruction :
+  v3NonMonotoneByConstruction canonicalNSToEV5ProjectionFrontierReceipt
+  ≡
+  true
+nsToEV5V3NonMonotoneByConstruction =
+  refl
+
+nsToEV5V3NoRegularityPromotion :
+  v3PromotedToNSRegularityProof canonicalNSToEV5ProjectionFrontierReceipt
+  ≡
+  false
+nsToEV5V3NoRegularityPromotion =
   refl
 
 nsToEV5LyapunovPreservationRemainsOpen :

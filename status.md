@@ -1,3 +1,15 @@
+# 2026-06-01 Worker 4 termination/YM lane governance update
+
+- Governance decision recorded: v3/cascade flux is diagnostic-only and is not
+  part of termination energy `E/Q`.  Termination energy now stays on the v2
+  and v7 lanes only unless a separate proof changes that status.
+- The `NS->EV5` lane revision remains empirical and fail-closed.  It may
+  provide projection/comparison diagnostics, but it does not discharge actual
+  Navier-Stokes flow, Sobolev/Serrin, or Clay obligations.
+- YM next attack: KP/Balaban is the preferred carrier-side route.  This is a
+  priority choice, not a proof: `exactDecorrelation`, KP uniform-volume
+  bounds, large-field tails, and Balaban induction remain open unless proved.
+
 # 2026-06-01 Worker 2 carrier-level YM OS3 boundary
 
 - Updated the L5 gauge-sector OS receipt to separate OS3/reflection positivity

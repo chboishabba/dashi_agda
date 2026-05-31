@@ -40,6 +40,9 @@ data PolymerKPAsMDLSurface : Set where
   finiteStrongCouplingClusterExpansion :
     PolymerKPAsMDLSurface
 
+  carrierExactDecorrelationConditional :
+    PolymerKPAsMDLSurface
+
 canonicalPolymerKPAsMDLSurfaces : List PolymerKPAsMDLSurface
 canonicalPolymerKPAsMDLSurfaces =
   polymerActivityDescriptionLength
@@ -47,15 +50,23 @@ canonicalPolymerKPAsMDLSurfaces =
   ∷ uniformVolumeKoteckyPreissObligation
   ∷ mdlFejerDescentBookkeeping
   ∷ finiteStrongCouplingClusterExpansion
+  ∷ carrierExactDecorrelationConditional
   ∷ []
 
 data PolymerKPObligationStatus : Set where
   competitiveYMContributionTargetNotSolvedHere :
     PolymerKPObligationStatus
 
+  carrierExactDecorrelationConditionalNotKPProof :
+    PolymerKPObligationStatus
+
 uniformVolumeKPObligationLabel : String
 uniformVolumeKPObligationLabel =
   "prove a Kotecky-Preiss local-sum bound with constants uniform in lattice volume and compatible with cutoff/depth removal"
+
+carrierExactDecorrelationObligationLabel : String
+carrierExactDecorrelationObligationLabel =
+  "use exactDecorrelation only as a carrier-side conditional: it requires explicit finite disjoint-prime-support witnesses and does not by itself prove the Kotecky-Preiss condition"
 
 data PolymerKPAsMDLPromotion : Set where
 
@@ -99,6 +110,22 @@ record PolymerKPAsMDLReceipt : Setω where
     uniformVolumeKPObligationIsCanonical :
       uniformVolumeKPObligation ≡ uniformVolumeKPObligationLabel
 
+    carrierExactDecorrelationObligationStatus :
+      PolymerKPObligationStatus
+
+    carrierExactDecorrelationObligationStatusIsConditional :
+      carrierExactDecorrelationObligationStatus
+      ≡
+      carrierExactDecorrelationConditionalNotKPProof
+
+    carrierExactDecorrelationObligation :
+      String
+
+    carrierExactDecorrelationObligationIsCanonical :
+      carrierExactDecorrelationObligation
+      ≡
+      carrierExactDecorrelationObligationLabel
+
     surfaces :
       List PolymerKPAsMDLSurface
 
@@ -122,6 +149,18 @@ record PolymerKPAsMDLReceipt : Setω where
 
     finiteClusterExpansionAvailableIsTrue :
       finiteClusterExpansionAvailable ≡ true
+
+    carrierExactDecorrelationConditionalRecorded :
+      Bool
+
+    carrierExactDecorrelationConditionalRecordedIsTrue :
+      carrierExactDecorrelationConditionalRecorded ≡ true
+
+    carrierExactDecorrelationImportedAsKPProof :
+      Bool
+
+    carrierExactDecorrelationImportedAsKPProofIsFalse :
+      carrierExactDecorrelationImportedAsKPProof ≡ false
 
     koteckyPreissConditionProved :
       Bool
@@ -204,6 +243,14 @@ canonicalPolymerKPAsMDLReceipt =
         uniformVolumeKPObligationLabel
     ; uniformVolumeKPObligationIsCanonical =
         refl
+    ; carrierExactDecorrelationObligationStatus =
+        carrierExactDecorrelationConditionalNotKPProof
+    ; carrierExactDecorrelationObligationStatusIsConditional =
+        refl
+    ; carrierExactDecorrelationObligation =
+        carrierExactDecorrelationObligationLabel
+    ; carrierExactDecorrelationObligationIsCanonical =
+        refl
     ; surfaces =
         canonicalPolymerKPAsMDLSurfaces
     ; surfacesAreCanonical =
@@ -219,6 +266,14 @@ canonicalPolymerKPAsMDLReceipt =
     ; finiteClusterExpansionAvailable =
         true
     ; finiteClusterExpansionAvailableIsTrue =
+        refl
+    ; carrierExactDecorrelationConditionalRecorded =
+        true
+    ; carrierExactDecorrelationConditionalRecordedIsTrue =
+        refl
+    ; carrierExactDecorrelationImportedAsKPProof =
+        false
+    ; carrierExactDecorrelationImportedAsKPProofIsFalse =
         refl
     ; koteckyPreissConditionProved =
         false
@@ -261,6 +316,8 @@ canonicalPolymerKPAsMDLReceipt =
         ∷ "Consumes finite strong-coupling and uniform-bound receipts only"
         ∷ "Does not prove the Kotecky-Preiss condition for continuum Yang-Mills"
         ∷ "The KP/uniform-volume obligation is the competitive YM contribution target: constants must be uniform in lattice volume and stable under cutoff/depth removal"
+        ∷ "exactDecorrelation is recorded only as a carrier-side conditional requiring explicit disjoint-prime-support witnesses"
+        ∷ "Does not import carrier exactDecorrelation as a proof of the Kotecky-Preiss condition"
         ∷ "The KP/uniform-volume obligation is not solved or imported here"
         ∷ "Does not import any external polymer expansion proof"
         ∷ "Keeps all Clay Yang-Mills promotion flags false"

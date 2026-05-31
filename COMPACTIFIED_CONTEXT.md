@@ -2,6 +2,16 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-01 Worker 4 Balaban/KP/ultrametric YM obligation update: the
+  volume-independent RG induction gap is now explicit.  The competitive YM
+  contribution target is the KP/uniform-volume polymer obligation for
+  `H_k -> H_{k+1}`, together with ultrametric large/small field control,
+  large-field tail suppression, counterterm control, and cutoff/depth-stable
+  constants independent of lattice volume.  This is recorded in Balaban,
+  polymer/KP, carrier area-law, ultrametric bridge, and Clay YM roadmap
+  surfaces as open, not solved; no continuum YM, OS/Wightman, Clay YM, or
+  terminal promotion follows.
+
 - 2026-06-01 Worker 6 Clay-proximity governance snapshot: the live
   Clay-proximate order is (1) `NS->EV5` forward simulation, (2) Gate3 finite
   adelic inequality, (3) Gate4 Hecke envelope, and (4) YM continuum external.

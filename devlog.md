@@ -1,3 +1,14 @@
+# 2026-06-01 Worker 4 Balaban/KP/ultrametric YM obligation update
+
+- Updated the Balaban/RG, polymer/KP, carrier area-law, ultrametric bridge,
+  and Clay YM roadmap surfaces to name the exact open induction target:
+  KP/uniform-volume polymer bounds plus ultrametric large/small field control
+  for `H_k -> H_{k+1}` with constants independent of lattice volume.
+- Marked that target as the competitive YM contribution lane.  It remains
+  open: no KP uniform-volume theorem, large-field tail estimate, counterterm
+  control theorem, continuum RG convergence, Clay YM, OS/Wightman, or terminal
+  promotion was introduced.
+
 # 2026-06-01 Worker 6 Clay proximity governance snapshot
 
 - Governance-only status update across the owned root docs.  Recorded the

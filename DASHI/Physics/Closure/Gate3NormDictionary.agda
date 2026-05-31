@@ -920,3 +920,225 @@ gate3FeshbachSchurFullTensorGapStillFalse :
   false
 gate3FeshbachSchurFullTensorGapStillFalse =
   refl
+
+------------------------------------------------------------------------
+-- Large-field / small-field H_k norm story boundary.
+--
+-- The concrete p-adic carrier norm, finite BoundedModel limit71 checker,
+-- and Contractive bridge surfaces already exist elsewhere in the Gate 3/YM
+-- stack.  This receipt only records their intended H_k reading: large-field
+-- and small-field norm bookkeeping are candidate story labels over the
+-- existing finite carrier dictionary.  It deliberately does not construct an
+-- analytic H_k Hilbert scale, prove large/small-field decomposition, or
+-- promote a contractive analytic theorem.
+
+data Gate3HkLargeSmallFieldNormStatus : Set where
+  hkLargeSmallFieldStoryRecorded_failClosed :
+    Gate3HkLargeSmallFieldNormStatus
+
+data Gate3HkLargeSmallFieldNormPiece : Set where
+  pAdicCarrierNormCodePresent :
+    Gate3HkLargeSmallFieldNormPiece
+
+  boundedModelLimit71SurfacePresent :
+    Gate3HkLargeSmallFieldNormPiece
+
+  contractiveBridgeSurfacePresent :
+    Gate3HkLargeSmallFieldNormPiece
+
+  largeFieldHkNormStoryLabel :
+    Gate3HkLargeSmallFieldNormPiece
+
+  smallFieldHkNormStoryLabel :
+    Gate3HkLargeSmallFieldNormPiece
+
+canonicalGate3HkLargeSmallFieldNormPieces :
+  List Gate3HkLargeSmallFieldNormPiece
+canonicalGate3HkLargeSmallFieldNormPieces =
+  pAdicCarrierNormCodePresent
+  ∷ boundedModelLimit71SurfacePresent
+  ∷ contractiveBridgeSurfacePresent
+  ∷ largeFieldHkNormStoryLabel
+  ∷ smallFieldHkNormStoryLabel
+  ∷ []
+
+hkLargeSmallFieldNormReading :
+  String
+hkLargeSmallFieldNormReading =
+  "Large-field/small-field H_k norm story: p-adic carrier norm codes and finite BoundedModel limit71 bounds are available as finite Gate 3 bookkeeping, while Contractive links remain bridge-shape evidence only."
+
+data HkAnalyticPromotionToken : Set where
+
+hkAnalyticPromotionImpossibleHere :
+  HkAnalyticPromotionToken →
+  ⊥
+hkAnalyticPromotionImpossibleHere ()
+
+record Gate3HkLargeSmallFieldNormStoryReceipt : Set where
+  field
+    status :
+      Gate3HkLargeSmallFieldNormStatus
+
+    statusIsFailClosed :
+      status ≡ hkLargeSmallFieldStoryRecorded_failClosed
+
+    normDictionaryReceipt :
+      Gate3NormDictionaryReceipt
+
+    pAdicCarrierNormAlreadyPresent :
+      Gate3NormDictionaryReceipt.normAtPrime normDictionaryReceipt
+      ≡
+      pAdicCarrierNorm
+
+    boundedModelLimit71AlreadyPresent :
+      Gate3NormDictionaryReceipt.limit71InequalitySurface normDictionaryReceipt
+      ≡
+      boundedModelLimit71InequalitySurface
+
+    finiteLimit71SurfaceReachable :
+      Gate3NormDictionaryReceipt.limit71InequalitySurface
+        normDictionaryReceipt
+        (Gate3NormDictionaryReceipt.limit71ReachableFactorVec
+          normDictionaryReceipt)
+        (Gate3NormDictionaryReceipt.limit71ReachableCutoff
+          normDictionaryReceipt)
+      ≡
+      true
+
+    contractiveBridgeSurfaceAlreadyPresent :
+      Bool
+
+    contractiveBridgeSurfaceAlreadyPresentIsTrue :
+      contractiveBridgeSurfaceAlreadyPresent ≡ true
+
+    largeFieldHkNormStoryRecorded :
+      Bool
+
+    largeFieldHkNormStoryRecordedIsTrue :
+      largeFieldHkNormStoryRecorded ≡ true
+
+    smallFieldHkNormStoryRecorded :
+      Bool
+
+    smallFieldHkNormStoryRecordedIsTrue :
+      smallFieldHkNormStoryRecorded ≡ true
+
+    analyticHkHilbertScaleConstructed :
+      Bool
+
+    analyticHkHilbertScaleConstructedIsFalse :
+      analyticHkHilbertScaleConstructed ≡ false
+
+    largeSmallFieldDecompositionProved :
+      Bool
+
+    largeSmallFieldDecompositionProvedIsFalse :
+      largeSmallFieldDecompositionProved ≡ false
+
+    contractiveAnalyticTheoremPromoted :
+      Bool
+
+    contractiveAnalyticTheoremPromotedIsFalse :
+      contractiveAnalyticTheoremPromoted ≡ false
+
+    adelicSobolevProofPromoted :
+      Bool
+
+    adelicSobolevProofPromotedIsFalse :
+      adelicSobolevProofPromoted ≡ false
+
+    clayPromotion :
+      Bool
+
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
+
+    pieces :
+      List Gate3HkLargeSmallFieldNormPiece
+
+    piecesAreCanonical :
+      pieces ≡ canonicalGate3HkLargeSmallFieldNormPieces
+
+    reading :
+      String
+
+    readingIsCanonical :
+      reading ≡ hkLargeSmallFieldNormReading
+
+    promotionFlags :
+      List HkAnalyticPromotionToken
+
+    promotionFlagsAreEmpty :
+      promotionFlags ≡ []
+
+open Gate3HkLargeSmallFieldNormStoryReceipt public
+
+canonicalGate3HkLargeSmallFieldNormStoryReceipt :
+  Gate3HkLargeSmallFieldNormStoryReceipt
+canonicalGate3HkLargeSmallFieldNormStoryReceipt =
+  record
+    { status =
+        hkLargeSmallFieldStoryRecorded_failClosed
+    ; statusIsFailClosed =
+        refl
+    ; normDictionaryReceipt =
+        canonicalGate3NormDictionaryReceipt
+    ; pAdicCarrierNormAlreadyPresent =
+        refl
+    ; boundedModelLimit71AlreadyPresent =
+        refl
+    ; finiteLimit71SurfaceReachable =
+        canonicalLimit71InequalityReachable
+    ; contractiveBridgeSurfaceAlreadyPresent =
+        true
+    ; contractiveBridgeSurfaceAlreadyPresentIsTrue =
+        refl
+    ; largeFieldHkNormStoryRecorded =
+        true
+    ; largeFieldHkNormStoryRecordedIsTrue =
+        refl
+    ; smallFieldHkNormStoryRecorded =
+        true
+    ; smallFieldHkNormStoryRecordedIsTrue =
+        refl
+    ; analyticHkHilbertScaleConstructed =
+        false
+    ; analyticHkHilbertScaleConstructedIsFalse =
+        refl
+    ; largeSmallFieldDecompositionProved =
+        false
+    ; largeSmallFieldDecompositionProvedIsFalse =
+        refl
+    ; contractiveAnalyticTheoremPromoted =
+        false
+    ; contractiveAnalyticTheoremPromotedIsFalse =
+        refl
+    ; adelicSobolevProofPromoted =
+        false
+    ; adelicSobolevProofPromotedIsFalse =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
+        refl
+    ; pieces =
+        canonicalGate3HkLargeSmallFieldNormPieces
+    ; piecesAreCanonical =
+        refl
+    ; reading =
+        hkLargeSmallFieldNormReading
+    ; readingIsCanonical =
+        refl
+    ; promotionFlags =
+        []
+    ; promotionFlagsAreEmpty =
+        refl
+    }
+
+gate3HkLargeSmallFieldNoAnalyticPromotion :
+  contractiveAnalyticTheoremPromoted
+    canonicalGate3HkLargeSmallFieldNormStoryReceipt
+  ≡
+  false
+gate3HkLargeSmallFieldNoAnalyticPromotion =
+  refl

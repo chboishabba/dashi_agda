@@ -787,6 +787,7 @@ import DASHI.Physics.Closure.YangMillsGate3DiscreteGeometryReceipt
 import DASHI.Physics.Closure.YM5DOrbifoldZeroModePolymerAnalogyReceipt
 import DASHI.Physics.Closure.CheckerboardUltrametricBridgeReceipt
 import DASHI.Physics.Closure.ContractiveCorrelationDecayReceipt
+import DASHI.Physics.Closure.UltrametricClusterSeparationReceipt
 import DASHI.Physics.QFT.LocalAlgebraIdentitySemantics
 import DASHI.Physics.QFT.FilteredColimitPreservationInstance
 import DASHI.Physics.QFT.DHRSectorDecomposition
@@ -979,6 +980,7 @@ import DASHI.Physics.Closure.CarrierLatticeYMDefinitionReceipt
 import DASHI.Physics.Closure.SpacetimeLatticeFromCarrierDepthReceipt
 import DASHI.Physics.Closure.WilsonActionOn3PlusOneLatticeReceipt
 import DASHI.Physics.Closure.ReflectionPositivityForWilsonReceipt
+import DASHI.Physics.Closure.CarrierOS3ReflectionPositivityReceipt
 import DASHI.Physics.Closure.LatticeMassGapFromTransferMatrixReceipt
 import DASHI.Physics.Closure.YML1StatusReceipt
 import DASHI.Physics.Closure.BetaCriticalReceipt
