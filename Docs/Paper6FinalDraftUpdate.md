@@ -1,7 +1,16 @@
 # Paper 6 Final Draft Update: CKM Diagnostics
 
 Date: `2026-05-29`
-Status: docs-only synthesis; diagnostic; non-promoting
+Status: superseded historical synthesis; diagnostic; non-promoting
+
+> **Superseded 2026-05-31.** This file is retained as a historical diagnostic
+> snapshot.  The current Paper 6 baseline is
+> [`Paper6FinalDraftOutline.md`](./Paper6FinalDraftOutline.md), backed by
+> `CKMGateAbRetirementReceipt`, `KleinQuarticQMReceipt`, and
+> `NSCarrierKolmogorovSerrinReceipt`.  In the current ledger, `|Vcb|`, `A`,
+> `gamma`, `beta`, `alpha`, `rho`, and `eta` are not carrier predictions.
+> Direct CP-angle shortcuts are retired, and Paper 6 is not a physical CKM
+> promotion.
 
 This update consolidates the Manager A CKM diagnostics for Paper 6.  The
 current result is stronger than the earlier open-texture story, because the

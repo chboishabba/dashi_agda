@@ -1,5 +1,12 @@
 # 3. The Vcb Lane from the T13 Hecke Correspondence
 
+> **Superseded 2026-05-31.** This section is retained as a historical
+> diagnostic route.  The current Paper 6 claim boundary does not treat
+> `|Vcb|` as an independent carrier prediction; `|Vcb|` is open pending a
+> carrier derivation that does not import Wolfenstein `A` or a tuned
+> diagnostic normalisation.  Use `Paper6FinalDraftOutline.md` for the current
+> paper structure.
+
 The \(|V_{cb}|\) diagnostic uses the interaction between the discriminant
 \(-3\) and \(-7\) quark lanes.  Their product field has real quadratic
 subfield

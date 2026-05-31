@@ -1,3 +1,33 @@
+# 2026-05-31
+
+- Paper 6 prewrite implementation pass completed.  Added the corrected NS
+  carrier/Kolmogorov/Serrin receipt and the Kolmogorov-calibrated viscous-tail
+  dominance receipt; both keep Clay NS promotion false and preserve the
+  corrected causal chain: finite depth gives the Serrin route, unbounded depth
+  only blocks that route.
+- Added the corrected `PSL(2,F7)` DHR/Yukawa texture receipt.  The local
+  character check confirms `chi_6=[6,2,0,0,-1,-1]`, rejects the stale
+  `4A=-2` row, and records `V3 tensor V3 = V3' + V6` with no trivial
+  representation.  This constrains textures only; it does not derive `Y_d`.
+- Added the finite `Z/7` carrier spectral-gap receipt.  The unnormalised
+  cycle gap is `2 - 2 cos(2*pi/7) ~= 0.7530203963`; the normalised
+  random-walk gap is half this value.  The product carrier
+  `Z/7 x Z/3 x Z/2` keeps the `Z/7` gap as bottleneck, with the corrected
+  `Z/2` factor gap recorded as `2`, not `4`.  The result is tied to the
+  finite CM-torsion carrier model and explicitly not transported to continuum
+  YM.
+- Refreshed `Docs/Paper6FinalDraftOutline.md`, `Docs/Paper6Section1Draft.md`,
+  and `Docs/Paper6Section6Draft.md` around the new receipts.  Historical
+  CKM diagnostic docs remain superseded unless their local banner says
+  otherwise.
+- Added three bounded side receipts for the writing baseline:
+  `NSAdelicTransferTheoremCandidate` names the Kozyrev/Vladimirov/adelic
+  product-formula transfer route but keeps the comparison unproved;
+  `CKMThreeFactorBilinearLabellingNoGo` separates `Z/3`-level invariants from
+  full `PSL(2,F7)` invariants; and `DHRBraidGroupOriginRemark` records the
+  `B3`/Yang-Baxter/DHR-hexagon and `LogicTlurey` origin vocabulary without
+  theorem promotion.
+
 # 2026-05-30
 
 - Manager C corrected programme-summary tranche complete.  Added

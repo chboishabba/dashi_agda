@@ -1078,9 +1078,16 @@ import DASHI.Physics.Closure.CKMGateAExperimentalStatusReceipt
 import DASHI.Physics.Closure.CKMGateAbRetirementReceipt
 import DASHI.Physics.Closure.YMCuspContinuumClarificationAmendment
 import DASHI.Physics.Closure.NSCarrierZActionFormalisation
+import DASHI.Physics.Closure.NSCarrierKolmogorovSerrinReceipt
+import DASHI.Physics.Closure.NSViscousTailDominanceReceipt
+import DASHI.Physics.Closure.NSAdelicTransferTheoremCandidate
 import DASHI.Physics.Closure.CKMCarrierProfiniteActionReceipt
 import DASHI.Physics.Closure.NSLaneSeparationCandidateReceipt
 import DASHI.Physics.Closure.KleinQuarticQMReceipt
+import DASHI.Physics.Closure.DHRIntertwinerPSL2F7TextureReceipt
+import DASHI.Physics.Closure.CKMThreeFactorBilinearLabellingNoGo
+import DASHI.Physics.Closure.DHRBraidGroupOriginRemark
+import DASHI.Physics.Closure.FiniteCarrierSpectralGapZ7Receipt
 import DASHI.Physics.Closure.CKMBetaAlphaDemotionReceipt
 import DASHI.Physics.Closure.CKMFrontierDefinitionReceipt
 import DASHI.Physics.Closure.Paper6ScopeRevisionReceipt

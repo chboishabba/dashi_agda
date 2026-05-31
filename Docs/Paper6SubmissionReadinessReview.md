@@ -1,5 +1,12 @@
 # Paper 6 Submission Readiness Review
 
+> **Superseded 2026-05-31.** This readiness review is retained as a historical
+> diagnostic snapshot.  The current prewrite baseline is
+> `Paper6FinalDraftOutline.md`, where `|Vcb|`, `A`, the direct CP-angle route,
+> and full CKM quantities are not promoted.  Paper 6 now foregrounds the
+> `p=7` Gate A(a) result, Klein quartic `J(K) ~= X_0(49)^3`, and the
+> Carrier-Kolmogorov/Serrin NS boundary.
+
 Paper 6 is not ready as a derivation paper. It is ready to be shaped as a
 diagnostic/conjecture manuscript if the introduction and abstract are explicit
 that the carrier formulas are fail-closed numerical diagnostics, not physical

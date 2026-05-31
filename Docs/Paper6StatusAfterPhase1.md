@@ -2,6 +2,11 @@
 
 Status date: 2026-05-30
 
+> **Superseded 2026-05-31.** This file records the Phase 1 diagnostic state,
+> not the current prewrite baseline.  The current Paper 6 outline is
+> `Paper6FinalDraftOutline.md`: `|Vcb|`, `A`, direct CP angle readbacks, and
+> full CKM quantities are not promoted carrier predictions.
+
 Paper 6 should be presented as a diagnostic/conjecture paper.  Phase 1 does
 not deliver a physical CKM derivation, a physical quark/lepton derivation, or a
 Standard Model reconstruction.  It delivers a sharpened map of which Heegner
@@ -96,4 +101,3 @@ Paper 6 must not claim:
 The correct Phase 1 conclusion is that the Heegner lane assignment has strong
 diagnostic evidence and useful conjectural structure, but the physical
 mechanism remains open.
-

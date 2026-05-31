@@ -1,3 +1,30 @@
+# 2026-05-31 Paper 6 prewrite baseline update
+
+- Added and wired the Paper 6 frontier receipts
+  `NSCarrierKolmogorovSerrinReceipt`, `NSViscousTailDominanceReceipt`,
+  `DHRIntertwinerPSL2F7TextureReceipt`, and
+  `FiniteCarrierSpectralGapZ7Receipt`.
+- The NS state now records the corrected exponent `25/12`, not `41/12`, plus
+  the Kolmogorov-calibrated viscous cutoff `K*(nu)=3/4 log2(1/nu)`.
+  Unbounded active depth is recorded only as failure of this carrier route to
+  Serrin regularity, not as a blow-up theorem.
+- The CKM state now records the corrected `PSL(2,F7)` tensor constraint
+  `V3 tensor V3 = V3' + V6`; the trivial representation is absent and
+  realistic `Y_d` still needs symmetry breaking/carrier input.
+- The finite spectral state now records the unnormalised `Z/7` carrier gap
+  `2 - 2 cos(2*pi/7) ~= 0.753`, with the normalised random-walk gap half that
+  value and the product carrier still `Z/7`-bottleneck after correcting the
+  `Z/2` factor gap to `2`, as finite evidence only.  No continuum Yang-Mills
+  gap or Clay promotion follows.
+- Paper 6 draft surfaces were refreshed to this fail-closed baseline.  Older
+  CKM receipts and documents with stronger historical candidate language are
+  superseded by the correction receipts and current Paper 6 outline.
+- Additional side receipts now bound the next frontier: the adelic NS transfer
+  route is candidate-only with three verification obligations; the CKM
+  bilinear labelling route is blocked at full `PSL(2,F7)` despite
+  `Z/3`-restricted invariants; and the braid/ternary lineage is recorded only
+  as an origin remark.
+
 # 2026-05-30 Manager C corrected programme summary tranche
 
 - Added Manager-C-only receipts for the corrected NS/YM programme boundary:

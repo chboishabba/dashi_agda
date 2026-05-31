@@ -2,6 +2,37 @@
 
 ## Active Blocker Board
 
+Paper 6 prewrite baseline sync `2026-05-31`:
+- [x] Record the corrected NS carrier/Kolmogorov/Serrin boundary:
+  `alpha_K = 2^{-2/3}`, standard `H^{11/8}` divergence exponent `25/12`,
+  finite-depth Serrin route, and no blow-up/Clay implication from unbounded
+  active depth.
+- [x] Record Kolmogorov-calibrated viscous tail dominance:
+  `K*(nu)=3/4 log2(1/nu)` and `K*(10^-6) ~= 14.95`, with the result scoped to
+  tail-control evidence and no universal NS promotion.
+- [x] Record the corrected `PSL(2,F7)` texture constraint:
+  `chi_6=[6,2,0,0,-1,-1]`, stale `4A=-2` rejected, and
+  `V3 tensor V3 = V3' + V6` with no trivial representation.
+- [x] Record the finite non-toy `Z/7` spectral gap:
+  unnormalised `2 - 2 cos(2*pi/7) ~= 0.753`, normalised random-walk gap half
+  this value, product carrier still `Z/7`-bottleneck with corrected `Z/2` gap
+  `2`, finite evidence only.
+- [ ] Next NS action: connect `TailCollapseProof` and
+  `MDLTradeoffShiftInstance` to an explicit `NSFlowMDLAdmissibility` or
+  dissipative-tail theorem.
+- [ ] Next CKM action: construct the three-factor carrier morphism into
+  `T_7(X_0(49))^3`, then separate the algebraic labelling problem from the
+  dynamical `Y_d` derivation.
+- [ ] Next YM evidence action: replace toy/finite evidence with a genuine
+  finite cusp/Wilson carrier operator before discussing any continuum bridge.
+- [ ] Next NS transfer research action: verify or refute the
+  `NSAdelicTransferTheoremCandidate` obligations: Kozyrev basis equality with
+  carrier depth modes, adelic product formula extension to carrier norms, and
+  authority-backed adelic Sobolev comparison.
+- [ ] Next CKM labelling action: find a non-bilinear or explicitly
+  symmetry-broken three-factor labelling map, since `Z/3` bilinear invariants
+  do not lift to full `PSL(2,F7)` invariants.
+
 Prediction-frontier gate sync `2026-05-28`:
 - [x] Paper 8/unification tranche: add the shared Millennium tower schema,
   YM/NS/GR/DHR-SM lane-instance receipts, Cabibbo-angle diagnostic receipt,

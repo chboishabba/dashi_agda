@@ -1,5 +1,12 @@
 # CKM Diagnostic Results from the Heegner Lane Assignment
 
+> **Superseded 2026-05-31.** This section is a historical CKM diagnostic
+> snapshot.  The current Paper 6 baseline is
+> [`Paper6FinalDraftOutline.md`](./Paper6FinalDraftOutline.md).  Current claim
+> governance demotes `|Vcb|`/`A` to open frontier rather than carrier
+> prediction, retires direct `arctan(sqrt(7))` CP-angle readback, and treats
+> the full CKM matrix as open pending the three-factor morphism and `Y_d`.
+
 Final-draft consolidation: see
 [`Docs/Paper6FinalDraftUpdate.md`](./Paper6FinalDraftUpdate.md) for the
 Manager A update covering the `y13` bridge formula, Hecke `p=29` phase

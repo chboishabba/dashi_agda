@@ -6,6 +6,40 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- added Paper 6 prewrite receipts for the corrected NS/CKM/YM frontier:
+  `NSCarrierKolmogorovSerrinReceipt`, `NSViscousTailDominanceReceipt`,
+  `DHRIntertwinerPSL2F7TextureReceipt`, and
+  `FiniteCarrierSpectralGapZ7Receipt`; wired them into `DASHI/Everything.agda`.
+  The NS receipts record `alpha_K = 2^{-2/3}`, the corrected
+  `H^{11/8}` divergence exponent `25/12`, and the Kolmogorov-calibrated
+  viscous cutoff `K*(nu)=3/4 log2(1/nu)` while keeping Clay NS promotion
+  false.  The CKM receipt records the corrected `PSL(2,F7)` character-table
+  constraint `V3 tensor V3 = V3' + V6` with no trivial representation, so
+  `Y_d` still requires symmetry breaking.  The finite spectral receipt records
+  the non-toy unnormalised `Z/7` carrier gap
+  `2 - 2 cos(2*pi/7) ~= 0.753` as finite evidence only, with no continuum YM
+  or Clay promotion; the normalised random-walk gap is recorded as half this
+  value, and the product carrier `Z/7 x Z/3 x Z/2` keeps `Z/7` as bottleneck
+  after correcting the `Z/2` factor gap to `2`, not `4`.
+
+- refreshed the Paper 6 prewrite prose surfaces to the fail-closed baseline:
+  `Docs/Paper6FinalDraftOutline.md`, `Docs/Paper6Section1Draft.md`, and
+  `Docs/Paper6Section6Draft.md` now include the viscous-tail threshold,
+  corrected `PSL(2,F7)` texture constraint, finite `Z/7` spectral evidence,
+  and the corrected causal boundary that unbounded depth blocks this carrier
+  route only and does not imply blow-up.  Older Paper 6 CKM diagnostic docs
+  remain historical/superseded surfaces unless explicitly marked current.
+
+- added the bounded origin/candidate side receipts
+  `NSAdelicTransferTheoremCandidate`, `CKMThreeFactorBilinearLabellingNoGo`,
+  and `DHRBraidGroupOriginRemark`.  The adelic NS receipt records a possible
+  Kozyrev/Vladimirov/product-formula transfer route while keeping the norm
+  comparison unproved and not Clay-relevant.  The CKM no-go receipt records
+  that `Z/3`-restricted bilinear invariants exist but do not lift to full
+  `PSL(2,F7)` invariants, so non-bilinear labelling or symmetry breaking is
+  still required.  The braid receipt records the `B3`/Yang-Baxter/DHR-hexagon
+  origin vocabulary and `LogicTlurey` resonance join as an origin remark only.
+
 - packaged the inhabited nonabelian witness modules into
   `DASHI.Physics.SFGC.NonAbelian.NonAbelianSFGCCarrier` and wired the wrapper
   into `DASHI/Everything.agda`.  The wrapper is a concrete carrier bundle over
