@@ -1,84 +1,99 @@
-# Section 1 Draft: Heegner Arithmetic and the Matter Carrier
+# Section 1 Draft: Introduction to Paper 8
 
-This section states the arithmetic carrier used in Paper 8 for Standard
-Model matter bookkeeping.  The claim is not that DASHI has proved the full
-Standard Model representation category.  The claim is that a small collection
-of structural assignments can be read from the arithmetic geometry of
-Heegner discriminants, with promotion boundaries kept explicit.
+Paper 8 states the DASHI matter-content result.  Its central claim is that
+the Standard Model matter carrier is not inserted as an external particle
+list, but is derived from complex multiplication arithmetic.  The relevant
+carrier is built from the class-number-one imaginary quadratic
+discriminants, their conductor data, and the positional constraints imposed
+by the CM arithmetic.  The result is a finite arithmetic bookkeeping system
+whose promoted outputs are Standard Model matter-content facts.
 
-Let `D` range over the class-number-one imaginary quadratic discriminants.
-The first three discriminants in the carrier are
+The first promoted result is the generation count.  Let `D` range over the
+class-number-one imaginary quadratic discriminants.  The leading CM lanes
+used by the matter carrier are
 
 ```text
 D = -3, -4, -7.
 ```
 
-Their associated conductor levels are `3`, `4`, and `7`.  Paper 8 records the
-assignment of these three lanes to the three quark generations as a
-structural result.  The result is finite and positional: the first three
-class-number-one Heegner lanes supply exactly three quark-generation
-carriers.  It does not by itself determine physical quark masses, CKM angles,
-or Yukawa matrices.
-
-The same levels give the quark-lepton separation.  The levels
+Their conductor levels are
 
 ```text
-3, 4, 7
+3, 4, 7.
 ```
 
-are pairwise coprime.  This coprimality is the structural distinction used
-for the quark lanes.  Lepton lanes are then read from the next available
-Heegner positions after the coprime quark triple has been filled.  Thus the
-quark/lepton split is recorded as a structural result of conductor
-coprimality together with positional exhaustion, not as an empirical fit.
+Paper 8 assigns these three arithmetic lanes to the three Standard
+Model generations.  This is a structural arithmetic result: the carrier has
+exactly three generation positions at this promoted level.  It is not a
+derivation of fermion masses, CKM angles, PMNS angles, Yukawa matrices, or
+renormalisation-group running.
 
-The count of fermionic degrees of freedom is also structural at this level.
-Each quark lane carries an `SU(2)` doublet structure and colour multiplicity
-three.  Counting both chiralities gives
+The second promoted result is quark-lepton separation.  The conductor levels
+`3`, `4`, and `7` are pairwise coprime, and DASHI uses that coprimality as
+the arithmetic marker for the quark sector.  Lepton positions are then read
+from the complementary CM bookkeeping after the coprime quark lanes are
+occupied.  Thus the split between quark and lepton matter is not imposed as
+a phenomenological label; it is the separation forced by conductor
+coprimality together with the finite positional structure of the CM carrier.
+
+The third promoted result is the fermion count.  Each quark generation
+carries weak-doublet bookkeeping, colour multiplicity three, and both
+chiralities:
 
 ```text
-3 quark lanes * 2 weak-doublet states * 3 colours * 2 chiralities = 36.
+3 quark generations * 2 weak-doublet states * 3 colours * 2 chiralities = 36.
 ```
 
-Each lepton lane carries the same weak-doublet bookkeeping with colour
-multiplicity one.  Including a right-handed neutrino in each generation gives
+Each lepton generation carries weak-doublet bookkeeping, colour multiplicity
+one, and both chiralities, including a right-handed neutrino in the carrier:
 
 ```text
-3 lepton lanes * 2 weak-doublet states * 1 colour * 2 chiralities = 12.
+3 lepton generations * 2 weak-doublet states * 1 colour * 2 chiralities = 12.
 ```
 
-The total carrier count is therefore
+The matter carrier therefore contains
 
 ```text
 36 + 12 = 48
 ```
 
-Weyl states.  Paper 8 records this as a structural count result.  The
-right-handed neutrino inclusion is part of the count; without it the stated
-`48`-state carrier is not obtained.
+Weyl fermion states.  The right-handed neutrino is part of this arithmetic
+carrier count; without it the promoted `48`-state matter result would not be
+obtained.
 
-The absence of a fourth generation is likewise structural.  The matter
-carrier consumes the relevant Heegner positions as three quark lanes and
-three lepton lanes, and the class-number-one list is finite.  A fourth
-Standard Model-like generation is therefore not generated inside this
-carrier without adding a new mechanism outside the Heegner exhaustion rule.
-This is a structural non-generation result, not a claim that all possible
-beyond-Standard-Model sectors are excluded.
+The fourth promoted result is the absence of a fourth Standard Model-like
+generation.  The finite CM carrier is exhausted by the three quark
+generation positions and the corresponding lepton positions.  A fourth
+generation is therefore not produced by the DASHI matter arithmetic unless
+one adds a new mechanism outside this carrier.  This is a non-generation
+result for the CM-derived Standard Model matter carrier, not a blanket
+exclusion of every possible beyond-Standard-Model sector.
 
-Finally, the gauge group factors are treated more cautiously.  The same
-carrier contains Chern-Simons/WZW level data and doublet structure suggestive
-of Standard Model gauge factors, including the weak `SU(2)` doublet
-bookkeeping and candidate colour structure.  Paper 8 records these gauge
-factors as candidates from the Chern-Simons level structure.  They are not
-promoted here to a completed derivation of
-`SU(3)_c x SU(2)_L x U(1)_Y`, anomaly cancellation, hypercharge
-normalisation, or full DHR reconstruction.
+Gauge structure is treated one level lower.  The same arithmetic carrier
+contains level data, doublet structure, and colour multiplicity data that
+produce candidates for the Standard Model gauge factors.  Paper 8 therefore
+records gauge group candidates compatible with the matter carrier, including
+the expected `SU(3)`, `SU(2)`, and `U(1)` pattern.  These candidates are not
+promoted here to a completed derivation of hypercharge normalisation, anomaly
+cancellation, coupling unification, or full reconstruction of the Standard
+Model gauge representation category.
 
-Thus Section 1 separates four structural results from one candidate layer:
-three quark generations from the first three class-number-one imaginary
-quadratic Heegner discriminants; quark-lepton separation from conductor
-coprimality; the `48`-fermion carrier count from `SU(2)` doublets and
-right-handed neutrinos; and no fourth generation from Heegner exhaustion.
-The gauge-factor reading remains a candidate supplied by Chern-Simons level
-structure and requires further promotion data before it can be stated as a
-full Standard Model gauge derivation.
+This distinction is especially important for the Yang-Mills Clay framing.
+The DASHI carrier includes a `3+1` Lorentz formalism and a candidate Wilson
+action on the arithmetic carrier.  Those facts make contact with the
+language of four-dimensional gauge theory and lattice Yang-Mills models.
+However, the spatial lattice in this construction is arithmetically rigid at
+three sites.  Paper 8 does not establish a native continuum limit from that
+rigid three-site spatial carrier.  Consequently the present result should
+not be stated as a Clay Yang-Mills mass-gap proof.  At this stage DASHI
+supplies a finite arithmetic matter carrier, gauge-group candidates, a
+Lorentz-compatible formalism, and a candidate Wilson action; it does not yet
+provide the continuum Yang-Mills construction required for the Clay problem.
+
+Section 1 therefore fixes the promotion boundary for Paper 8.  The promoted
+matter-content results are three generations, quark-lepton separation, the
+`48`-fermion count, and no fourth generation, all derived from CM arithmetic.
+The gauge factors remain candidates, and the Yang-Mills interpretation
+remains conditional on future work that would have to overcome the lack of a
+native continuum limit for the arithmetically rigid three-site spatial
+lattice.

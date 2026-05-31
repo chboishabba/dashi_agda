@@ -9,6 +9,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ReflectionPositivityForWilsonReceipt as RP
 import DASHI.Physics.Closure.YML4ContinuumLimitReceipt as L4
+import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt as L3
 
 data YML5OSGaugeSectorStatus : Set where
   osGaugeSectorConditionallyReceiptedOnL4 :
@@ -43,7 +44,7 @@ yml5OSPromotionImpossibleHere ()
 
 yml5OSAxiomsStatement : String
 yml5OSAxiomsStatement =
-  "YML5 conditionally receipts OS positivity, covariance, symmetry, temperedness, and clustering for the gauge sector on the YML4 continuum candidate; Clay YM remains false."
+  "YML5 records only candidate OS data for the gauge sector, conditional on the YML4 continuum candidate and the still candidate-only L3 tightness input; Clay YM remains false."
 
 record YML5OSAxiomsForGaugeSectorReceipt : Setω where
   field
@@ -62,6 +63,11 @@ record YML5OSAxiomsForGaugeSectorReceipt : Setω where
 
     l4KeepsClayFalse :
       L4.clayYangMillsPromoted continuumLimitReceipt ≡ false
+
+    l4PriorL3StillCandidateOnly :
+      L3.ymL3TightnessConstructed
+        (L4.priorL3Receipt continuumLimitReceipt)
+        ≡ false
 
     reflectionReceipt :
       RP.ReflectionPositivityForWilsonReceipt
@@ -149,6 +155,7 @@ canonicalYML5OSAxiomsForGaugeSectorReceipt =
     ; l4CandidateWeakLimitAvailable = refl
     ; l4ContinuumYMCandidateAvailable = refl
     ; l4KeepsClayFalse = refl
+    ; l4PriorL3StillCandidateOnly = refl
     ; reflectionReceipt = RP.canonicalReflectionPositivityForWilsonReceipt
     ; finiteWilsonReflectionPositive = refl
     ; conditionalOnL4ContinuumLimit = true
@@ -178,8 +185,9 @@ canonicalYML5OSAxiomsForGaugeSectorReceipt =
     ; promotionFlags = []
     ; promotionFlagsAreEmpty = refl
     ; receiptBoundary =
-        "OS positivity, covariance, and clustering are receipted only over the YML4 continuum candidate"
+        "OS positivity, covariance, and clustering are receipted only as candidate data over the YML4 continuum candidate"
         ∷ "Finite Wilson reflection positivity is used as the lattice-side authority input"
+        ∷ "The YML4 input still depends on candidate-only/blocked L3 tightness"
         ∷ "The receipt is not an unconditional OS theorem for the whole repository"
         ∷ "No Clay YM or terminal Clay promotion follows"
         ∷ []

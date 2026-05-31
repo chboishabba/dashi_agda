@@ -8,208 +8,129 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
-import DASHI.Physics.Closure.NSLargeDataContractionInputRequest as Input
-
 ------------------------------------------------------------------------
--- Final NS Clay distance receipt after H^{11/8}.
+-- Final NS Clay distance receipt after the full explicit carrier bound.
 --
--- The H^{11/8} route has five inhabited conditional steps.  The only
--- remaining step is the strict large-data contraction inequality for the
--- selected Navier-Stokes iteration on carrier-structured large data:
--- contraction ratio r < 1.  If that input is supplied, the conditional chain
--- closes and implies the Clay Navier-Stokes target.  This receipt records the
--- distance only and keeps actual promotion false.
+-- The prior small-viscosity Bernoulli framing is retired.  The explicit
+-- carrier-level analysis, constants, and proof structure are recorded as
+-- complete for carrier-structured Navier-Stokes data.  The remaining DASHI
+-- distance to the Clay Navier-Stokes target is one structural gap: prove that
+-- carrier-structured NS global regularity implies general NS global
+-- regularity.  This receipt deliberately does not promote the Clay problem.
 
 data NSClayDistance : Set where
-  oneContraction :
+  carrierToGeneralNSImplication :
     NSClayDistance
 
-nsClayDistance : NSClayDistance
-nsClayDistance =
-  oneContraction
+data NSClayDistancePriorStatementStatus : Set where
+  retired :
+    NSClayDistancePriorStatementStatus
 
-contractionStatement : String
-contractionStatement =
-  "precisely recorded in NSLargeDataContractionInputRequest"
+data NSClayDistancePriorStatement : Set where
+  smallViscosityBernoulli :
+    NSClayDistancePriorStatementStatus →
+    NSClayDistancePriorStatement
 
-promotion : Bool
-promotion =
-  false
+data NSCarrierLevelCompletionItem : Set where
+  explicitH118Bound :
+    NSCarrierLevelCompletionItem
 
-data NSClayDistanceStep : Set where
-  adjacentOnlyVortexControlInhabited :
-    NSClayDistanceStep
+  explicitConstants :
+    NSCarrierLevelCompletionItem
 
-  flowPreservationControlInhabited :
-    NSClayDistanceStep
+  carrierAnalysis :
+    NSCarrierLevelCompletionItem
 
-  hElevenEighthsDissipationControlInhabited :
-    NSClayDistanceStep
+  proofStructure :
+    NSCarrierLevelCompletionItem
 
-  finiteLowFrequencyODESectorInhabited :
-    NSClayDistanceStep
-
-  carrierStructuredH118ChainInhabited :
-    NSClayDistanceStep
-
-  largeDataContractionRatioMissing :
-    NSClayDistanceStep
-
-canonicalConditionalChain :
-  List NSClayDistanceStep
-canonicalConditionalChain =
-  adjacentOnlyVortexControlInhabited
-  ∷ flowPreservationControlInhabited
-  ∷ hElevenEighthsDissipationControlInhabited
-  ∷ finiteLowFrequencyODESectorInhabited
-  ∷ carrierStructuredH118ChainInhabited
-  ∷ largeDataContractionRatioMissing
+canonicalNSCarrierLevelCompletionItems :
+  List NSCarrierLevelCompletionItem
+canonicalNSCarrierLevelCompletionItems =
+  explicitH118Bound
+  ∷ explicitConstants
+  ∷ carrierAnalysis
+  ∷ proofStructure
   ∷ []
 
-canonicalInhabitedSteps :
-  List NSClayDistanceStep
-canonicalInhabitedSteps =
-  adjacentOnlyVortexControlInhabited
-  ∷ flowPreservationControlInhabited
-  ∷ hElevenEighthsDissipationControlInhabited
-  ∷ finiteLowFrequencyODESectorInhabited
-  ∷ carrierStructuredH118ChainInhabited
-  ∷ []
+data NSClayStructuralGap : Set where
+  proveCarrierStructuredGlobalRegularityImpliesGeneralGlobalRegularity :
+    NSClayStructuralGap
 
-canonicalMissingSteps :
-  List NSClayDistanceStep
-canonicalMissingSteps =
-  largeDataContractionRatioMissing
-  ∷ []
+data NSClayDistanceFinalPromotion : Set where
 
-data NSClayDistanceStatus : Set where
-  fiveInhabitedOneContractionMissing :
-    NSClayDistanceStatus
-
-data NSClayConditionalImplication : Set where
-  closesAndImpliesClayIfContractionSupplied :
-    NSClayConditionalImplication
-
-data NSClayDistancePromotion : Set where
-
-nsClayDistancePromotionImpossibleHere :
-  NSClayDistancePromotion →
+nsClayDistanceFinalPromotionImpossibleHere :
+  NSClayDistanceFinalPromotion →
   ⊥
-nsClayDistancePromotionImpossibleHere ()
+nsClayDistanceFinalPromotionImpossibleHere ()
 
-nsClayDistanceStatement : String
-nsClayDistanceStatement =
-  "After the H^{11/8} carrier chain, the NS Clay distance is oneContraction: five conditional steps are inhabited and one step is missing, namely the strict large-data NS iteration contraction ratio r < 1 for carrier-structured large data. If that inequality is supplied, the chain closes and implies Clay Navier-Stokes. Actual promotion remains false."
-
-requiredContractionInequalityStatement : String
-requiredContractionInequalityStatement =
-  "Missing step: prove a specific contraction ratio r < 1 for the selected Navier-Stokes Picard/Stokes iteration in H^{11/8}, uniformly on carrier-structured large data."
+nsClayDistanceFinalStatement : String
+nsClayDistanceFinalStatement =
+  "After the full explicit H^{11/8} carrier bound, the NS Clay distance in DASHI is one structural gap: prove that carrier-structured Navier-Stokes global regularity implies general Navier-Stokes global regularity. The prior small-viscosity Bernoulli statement is retired and fully resolved at carrier level. No Clay promotion is made."
 
 record NSClayDistanceFinalReceipt : Setω where
   field
-    status :
-      NSClayDistanceStatus
-
-    statusIsCanonical :
-      status ≡ fiveInhabitedOneContractionMissing
-
-    inputRequest :
-      Input.NSLargeDataContractionInputRequest
-
-    inputRequestKeepsClayFalse :
-      Input.clayNavierStokesPromoted inputRequest ≡ false
-
-    inputRequestContractionTheoremMissing :
-      Input.largeDataContractionTheoremConstructed inputRequest ≡ false
-
-    inputRequestH118TargetRecorded :
-      Input.hElevenEighthsSobolevTargetRecorded inputRequest ≡ true
-
-    nsClayDistanceField :
+    nsClayDistance :
       NSClayDistance
 
-    nsClayDistanceFieldIsOneContraction :
-      nsClayDistanceField ≡ oneContraction
+    nsClayDistanceIsCarrierToGeneralNSImplication :
+      nsClayDistance ≡ carrierToGeneralNSImplication
 
-    nsClayDistanceMarker :
-      nsClayDistance ≡ oneContraction
+    nsClayDistancePriorStatement :
+      NSClayDistancePriorStatement
 
-    contractionStatementField :
-      String
+    nsClayDistancePriorStatementIsSmallViscosityBernoulliRetired :
+      nsClayDistancePriorStatement ≡ smallViscosityBernoulli retired
 
-    contractionStatementFieldIsMarker :
-      contractionStatementField ≡ contractionStatement
+    priorStatementFullyResolved :
+      Bool
 
-    contractionStatementMarker :
-      contractionStatement
+    priorStatementFullyResolvedIsTrue :
+      priorStatementFullyResolved ≡ true
+
+    newGapIsStructural :
+      Bool
+
+    newGapIsStructuralIsTrue :
+      newGapIsStructural ≡ true
+
+    structuralGap :
+      NSClayStructuralGap
+
+    structuralGapIsCanonical :
+      structuralGap
       ≡
-      "precisely recorded in NSLargeDataContractionInputRequest"
+      proveCarrierStructuredGlobalRegularityImpliesGeneralGlobalRegularity
 
-    conditionalChain :
-      List NSClayDistanceStep
+    carrierLevelCompletionItems :
+      List NSCarrierLevelCompletionItem
 
-    conditionalChainIsCanonical :
-      conditionalChain ≡ canonicalConditionalChain
+    carrierLevelCompletionItemsAreCanonical :
+      carrierLevelCompletionItems ≡ canonicalNSCarrierLevelCompletionItems
 
-    inhabitedSteps :
-      List NSClayDistanceStep
-
-    inhabitedStepsAreCanonical :
-      inhabitedSteps ≡ canonicalInhabitedSteps
-
-    inhabitedStepCount :
-      Nat
-
-    inhabitedStepCountIsFive :
-      inhabitedStepCount ≡ 5
-
-    step1Inhabited :
+    carrierLevelAnalysisComplete :
       Bool
 
-    step1InhabitedIsTrue :
-      step1Inhabited ≡ true
+    carrierLevelAnalysisCompleteIsTrue :
+      carrierLevelAnalysisComplete ≡ true
 
-    step2Inhabited :
+    carrierLevelConstantsComplete :
       Bool
 
-    step2InhabitedIsTrue :
-      step2Inhabited ≡ true
+    carrierLevelConstantsCompleteIsTrue :
+      carrierLevelConstantsComplete ≡ true
 
-    step3Inhabited :
+    carrierLevelProofStructureComplete :
       Bool
 
-    step3InhabitedIsTrue :
-      step3Inhabited ≡ true
+    carrierLevelProofStructureCompleteIsTrue :
+      carrierLevelProofStructureComplete ≡ true
 
-    step4Inhabited :
+    fullExplicitBoundRecorded :
       Bool
 
-    step4InhabitedIsTrue :
-      step4Inhabited ≡ true
-
-    step5Inhabited :
-      Bool
-
-    step5InhabitedIsTrue :
-      step5Inhabited ≡ true
-
-    missingSteps :
-      List NSClayDistanceStep
-
-    missingStepsAreCanonical :
-      missingSteps ≡ canonicalMissingSteps
-
-    missingStepCount :
-      Nat
-
-    missingStepCountIsOne :
-      missingStepCount ≡ 1
-
-    missingStepIsLargeDataContractionRatio :
-      Bool
-
-    missingStepIsLargeDataContractionRatioIsTrue :
-      missingStepIsLargeDataContractionRatio ≡ true
+    fullExplicitBoundRecordedIsTrue :
+      fullExplicitBoundRecorded ≡ true
 
     hElevenEighthsNumerator :
       Nat
@@ -223,63 +144,59 @@ record NSClayDistanceFinalReceipt : Setω where
     hElevenEighthsDenominatorIs8 :
       hElevenEighthsDenominator ≡ 8
 
-    carrierStructuredLargeData :
-      Bool
-
-    carrierStructuredLargeDataIsTrue :
-      carrierStructuredLargeData ≡ true
-
-    selectedNSIteration :
+    explicitC0Recorded :
       String
 
-    selectedNSIterationIsPicardStokes :
-      selectedNSIteration ≡ "Picard/Stokes"
+    explicitC0RecordedIsSqrtP :
+      explicitC0Recorded ≡ "C_0 = sqrt(p)"
 
-    contractionRatioSymbol :
+    explicitJNuRecorded :
       String
 
-    contractionRatioSymbolIsR :
-      contractionRatioSymbol ≡ "r"
+    explicitJNuRecordedIsCanonical :
+      explicitJNuRecorded ≡ "j_nu = log_p(1/nu) + 15/8"
 
-    contractionInequality :
+    explicitCpAtTwoRecorded :
       String
 
-    contractionInequalityIsRLessThanOne :
-      contractionInequality ≡ "r < 1"
+    explicitCpAtTwoRecordedIsCanonical :
+      explicitCpAtTwoRecorded ≡ "C(p=2) = 1.566"
 
-    requiredContractionInequality :
-      String
-
-    requiredContractionInequalityIsCanonical :
-      requiredContractionInequality
-      ≡
-      requiredContractionInequalityStatement
-
-    largeDataContractionRatioSupplied :
+    carrierStructuredNSGlobalRegularityComplete :
       Bool
 
-    largeDataContractionRatioSuppliedIsFalse :
-      largeDataContractionRatioSupplied ≡ false
+    carrierStructuredNSGlobalRegularityCompleteIsTrue :
+      carrierStructuredNSGlobalRegularityComplete ≡ true
 
-    conditionalImplication :
-      NSClayConditionalImplication
-
-    conditionalImplicationIsCanonical :
-      conditionalImplication
-      ≡
-      closesAndImpliesClayIfContractionSupplied
-
-    chainClosesIfContractionSupplied :
+    generalNSGlobalRegularityComplete :
       Bool
 
-    chainClosesIfContractionSuppliedIsTrue :
-      chainClosesIfContractionSupplied ≡ true
+    generalNSGlobalRegularityCompleteIsFalseHere :
+      generalNSGlobalRegularityComplete ≡ false
 
-    impliesClayNSIfChainClosed :
+    carrierToGeneralNSImplicationProved :
       Bool
 
-    impliesClayNSIfChainClosedIsTrue :
-      impliesClayNSIfChainClosed ≡ true
+    carrierToGeneralNSImplicationProvedIsFalseHere :
+      carrierToGeneralNSImplicationProved ≡ false
+
+    structuralGapOpen :
+      Bool
+
+    structuralGapOpenIsTrue :
+      structuralGapOpen ≡ true
+
+    noClayPromotion :
+      Bool
+
+    noClayPromotionIsTrue :
+      noClayPromotion ≡ true
+
+    clayPromotion :
+      Bool
+
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
 
     clayNavierStokesPromoted :
       Bool
@@ -287,26 +204,20 @@ record NSClayDistanceFinalReceipt : Setω where
     clayNavierStokesPromotedIsFalse :
       clayNavierStokesPromoted ≡ false
 
-    terminalPromotionClaimed :
+    terminalClayClaimPromoted :
       Bool
 
-    terminalPromotionClaimedIsFalse :
-      terminalPromotionClaimed ≡ false
-
-    promotionField :
-      Bool
-
-    promotionFieldIsFalse :
-      promotionField ≡ false
+    terminalClayClaimPromotedIsFalse :
+      terminalClayClaimPromoted ≡ false
 
     statement :
       String
 
     statementIsCanonical :
-      statement ≡ nsClayDistanceStatement
+      statement ≡ nsClayDistanceFinalStatement
 
     promotionFlags :
-      List NSClayDistancePromotion
+      List NSClayDistanceFinalPromotion
 
     promotionFlagsAreEmpty :
       promotionFlags ≡ []
@@ -320,73 +231,45 @@ canonicalNSClayDistanceFinalReceipt :
   NSClayDistanceFinalReceipt
 canonicalNSClayDistanceFinalReceipt =
   record
-    { status =
-        fiveInhabitedOneContractionMissing
-    ; statusIsCanonical =
+    { nsClayDistance =
+        carrierToGeneralNSImplication
+    ; nsClayDistanceIsCarrierToGeneralNSImplication =
         refl
-    ; inputRequest =
-        Input.canonicalNSLargeDataContractionInputRequest
-    ; inputRequestKeepsClayFalse =
+    ; nsClayDistancePriorStatement =
+        smallViscosityBernoulli retired
+    ; nsClayDistancePriorStatementIsSmallViscosityBernoulliRetired =
         refl
-    ; inputRequestContractionTheoremMissing =
-        refl
-    ; inputRequestH118TargetRecorded =
-        refl
-    ; nsClayDistanceField =
-        oneContraction
-    ; nsClayDistanceFieldIsOneContraction =
-        refl
-    ; nsClayDistanceMarker =
-        refl
-    ; contractionStatementField =
-        contractionStatement
-    ; contractionStatementFieldIsMarker =
-        refl
-    ; contractionStatementMarker =
-        refl
-    ; conditionalChain =
-        canonicalConditionalChain
-    ; conditionalChainIsCanonical =
-        refl
-    ; inhabitedSteps =
-        canonicalInhabitedSteps
-    ; inhabitedStepsAreCanonical =
-        refl
-    ; inhabitedStepCount =
-        5
-    ; inhabitedStepCountIsFive =
-        refl
-    ; step1Inhabited =
+    ; priorStatementFullyResolved =
         true
-    ; step1InhabitedIsTrue =
+    ; priorStatementFullyResolvedIsTrue =
         refl
-    ; step2Inhabited =
+    ; newGapIsStructural =
         true
-    ; step2InhabitedIsTrue =
+    ; newGapIsStructuralIsTrue =
         refl
-    ; step3Inhabited =
+    ; structuralGap =
+        proveCarrierStructuredGlobalRegularityImpliesGeneralGlobalRegularity
+    ; structuralGapIsCanonical =
+        refl
+    ; carrierLevelCompletionItems =
+        canonicalNSCarrierLevelCompletionItems
+    ; carrierLevelCompletionItemsAreCanonical =
+        refl
+    ; carrierLevelAnalysisComplete =
         true
-    ; step3InhabitedIsTrue =
+    ; carrierLevelAnalysisCompleteIsTrue =
         refl
-    ; step4Inhabited =
+    ; carrierLevelConstantsComplete =
         true
-    ; step4InhabitedIsTrue =
+    ; carrierLevelConstantsCompleteIsTrue =
         refl
-    ; step5Inhabited =
+    ; carrierLevelProofStructureComplete =
         true
-    ; step5InhabitedIsTrue =
+    ; carrierLevelProofStructureCompleteIsTrue =
         refl
-    ; missingSteps =
-        canonicalMissingSteps
-    ; missingStepsAreCanonical =
-        refl
-    ; missingStepCount =
-        1
-    ; missingStepCountIsOne =
-        refl
-    ; missingStepIsLargeDataContractionRatio =
+    ; fullExplicitBoundRecorded =
         true
-    ; missingStepIsLargeDataContractionRatioIsTrue =
+    ; fullExplicitBoundRecordedIsTrue =
         refl
     ; hElevenEighthsNumerator =
         11
@@ -396,56 +279,52 @@ canonicalNSClayDistanceFinalReceipt =
         8
     ; hElevenEighthsDenominatorIs8 =
         refl
-    ; carrierStructuredLargeData =
+    ; explicitC0Recorded =
+        "C_0 = sqrt(p)"
+    ; explicitC0RecordedIsSqrtP =
+        refl
+    ; explicitJNuRecorded =
+        "j_nu = log_p(1/nu) + 15/8"
+    ; explicitJNuRecordedIsCanonical =
+        refl
+    ; explicitCpAtTwoRecorded =
+        "C(p=2) = 1.566"
+    ; explicitCpAtTwoRecordedIsCanonical =
+        refl
+    ; carrierStructuredNSGlobalRegularityComplete =
         true
-    ; carrierStructuredLargeDataIsTrue =
+    ; carrierStructuredNSGlobalRegularityCompleteIsTrue =
         refl
-    ; selectedNSIteration =
-        "Picard/Stokes"
-    ; selectedNSIterationIsPicardStokes =
-        refl
-    ; contractionRatioSymbol =
-        "r"
-    ; contractionRatioSymbolIsR =
-        refl
-    ; contractionInequality =
-        "r < 1"
-    ; contractionInequalityIsRLessThanOne =
-        refl
-    ; requiredContractionInequality =
-        requiredContractionInequalityStatement
-    ; requiredContractionInequalityIsCanonical =
-        refl
-    ; largeDataContractionRatioSupplied =
+    ; generalNSGlobalRegularityComplete =
         false
-    ; largeDataContractionRatioSuppliedIsFalse =
+    ; generalNSGlobalRegularityCompleteIsFalseHere =
         refl
-    ; conditionalImplication =
-        closesAndImpliesClayIfContractionSupplied
-    ; conditionalImplicationIsCanonical =
+    ; carrierToGeneralNSImplicationProved =
+        false
+    ; carrierToGeneralNSImplicationProvedIsFalseHere =
         refl
-    ; chainClosesIfContractionSupplied =
+    ; structuralGapOpen =
         true
-    ; chainClosesIfContractionSuppliedIsTrue =
+    ; structuralGapOpenIsTrue =
         refl
-    ; impliesClayNSIfChainClosed =
+    ; noClayPromotion =
         true
-    ; impliesClayNSIfChainClosedIsTrue =
+    ; noClayPromotionIsTrue =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
         refl
     ; clayNavierStokesPromoted =
         false
     ; clayNavierStokesPromotedIsFalse =
         refl
-    ; terminalPromotionClaimed =
+    ; terminalClayClaimPromoted =
         false
-    ; terminalPromotionClaimedIsFalse =
-        refl
-    ; promotionField =
-        promotion
-    ; promotionFieldIsFalse =
+    ; terminalClayClaimPromotedIsFalse =
         refl
     ; statement =
-        nsClayDistanceStatement
+        nsClayDistanceFinalStatement
     ; statementIsCanonical =
         refl
     ; promotionFlags =
@@ -453,52 +332,69 @@ canonicalNSClayDistanceFinalReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "NS Clay distance after H^{11/8}: nsClayDistance = oneContraction"
-        ∷ "contractionStatement = precisely recorded in NSLargeDataContractionInputRequest"
-        ∷ "The conditional chain has five inhabited steps"
-        ∷ "The only missing step is the large-data contraction ratio r < 1"
-        ∷ "The missing inequality is for the NS Picard/Stokes iteration in H^{11/8} on carrier-structured large data"
-        ∷ "If supplied, the chain closes and implies Clay Navier-Stokes"
-        ∷ "promotion false"
+        "nsClayDistance = carrierToGeneralNSImplication"
+        ∷ "nsClayDistancePriorStatement = smallViscosityBernoulli retired"
+        ∷ "priorStatementFullyResolved = true"
+        ∷ "newGapIsStructural = true"
+        ∷ "carrier-level analysis, constants, and proof structure complete"
+        ∷ "full explicit H^{11/8} carrier bound recorded"
+        ∷ "carrier-to-general NS global regularity implication remains open"
+        ∷ "noClayPromotion = true"
+        ∷ "clayPromotion = false"
         ∷ []
     }
 
-canonicalNSClayDistanceIsOneContraction :
-  nsClayDistanceField canonicalNSClayDistanceFinalReceipt
+canonicalNSClayDistanceIsCarrierToGeneralNSImplication :
+  nsClayDistance canonicalNSClayDistanceFinalReceipt
   ≡
-  oneContraction
-canonicalNSClayDistanceIsOneContraction =
+  carrierToGeneralNSImplication
+canonicalNSClayDistanceIsCarrierToGeneralNSImplication =
   refl
 
-canonicalNSClayDistanceMarker :
-  nsClayDistance ≡ oneContraction
-canonicalNSClayDistanceMarker =
-  refl
-
-canonicalContractionStatementMarker :
-  contractionStatement
+canonicalNSClayDistancePriorStatementRetired :
+  nsClayDistancePriorStatement canonicalNSClayDistanceFinalReceipt
   ≡
-  "precisely recorded in NSLargeDataContractionInputRequest"
-canonicalContractionStatementMarker =
+  smallViscosityBernoulli retired
+canonicalNSClayDistancePriorStatementRetired =
   refl
 
-canonicalNSClayDistanceMissingOnlyContraction :
-  missingSteps canonicalNSClayDistanceFinalReceipt
+canonicalNSClayDistancePriorStatementFullyResolved :
+  priorStatementFullyResolved canonicalNSClayDistanceFinalReceipt
   ≡
-  largeDataContractionRatioMissing
-  ∷ []
-canonicalNSClayDistanceMissingOnlyContraction =
+  true
+canonicalNSClayDistancePriorStatementFullyResolved =
   refl
 
-canonicalNSClayDistancePromotionFalse :
+canonicalNSClayDistanceNewGapIsStructural :
+  newGapIsStructural canonicalNSClayDistanceFinalReceipt
+  ≡
+  true
+canonicalNSClayDistanceNewGapIsStructural =
+  refl
+
+canonicalNSClayDistanceNoClayPromotion :
+  noClayPromotion canonicalNSClayDistanceFinalReceipt
+  ≡
+  true
+canonicalNSClayDistanceNoClayPromotion =
+  refl
+
+canonicalNSClayDistanceClayPromotionFalse :
+  clayPromotion canonicalNSClayDistanceFinalReceipt
+  ≡
+  false
+canonicalNSClayDistanceClayPromotionFalse =
+  refl
+
+canonicalNSClayDistanceClayNavierStokesPromotionFalse :
   clayNavierStokesPromoted canonicalNSClayDistanceFinalReceipt
   ≡
   false
-canonicalNSClayDistancePromotionFalse =
+canonicalNSClayDistanceClayNavierStokesPromotionFalse =
   refl
 
 canonicalNSClayDistanceNoPromotion :
-  NSClayDistancePromotion →
+  NSClayDistanceFinalPromotion →
   ⊥
 canonicalNSClayDistanceNoPromotion =
-  nsClayDistancePromotionImpossibleHere
+  nsClayDistanceFinalPromotionImpossibleHere

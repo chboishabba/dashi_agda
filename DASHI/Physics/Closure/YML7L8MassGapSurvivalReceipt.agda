@@ -10,6 +10,9 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Physics.Closure.LatticeMassGapFromTransferMatrixReceipt as Gap
 import DASHI.Physics.Closure.StringTensionCarrierReceipt as StringTension
 import DASHI.Physics.Closure.YML6WightmanReconstructionReceipt as L6
+import DASHI.Physics.Closure.YML5OSAxiomsForGaugeSectorReceipt as L5
+import DASHI.Physics.Closure.YML4ContinuumLimitReceipt as L4
+import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt as L3
 
 data YML7L8MassGapSurvivalStatus : Set where
   massGapSurvivalConditionallyReceiptedDiagnosticOnly :
@@ -57,7 +60,7 @@ massGapDiagnosticLabel =
 
 yml7L8MassGapStatement : String
 yml7L8MassGapStatement =
-  "YML7/L8 conditionally receipts mass-gap survival for the Wightman YM candidate and records Lambda_c = 1.59 GeV versus 1.720 GeV glueball as an 8 percent diagnostic; Clay YM remains false."
+  "YML7/L8 records only candidate mass-gap survival for the conditional Wightman YM candidate, still conditional on candidate-only L3, plus an 8 percent scale diagnostic; Clay YM remains false."
 
 record YML7L8MassGapSurvivalReceipt : Setω where
   field
@@ -72,6 +75,13 @@ record YML7L8MassGapSurvivalReceipt : Setω where
 
     wightmanKeepsClayFalse :
       L6.clayYangMillsPromoted wightmanReceipt ≡ false
+
+    wightmanPriorL3StillCandidateOnly :
+      L3.ymL3TightnessConstructed
+        (L4.priorL3Receipt
+          (L5.continuumLimitReceipt
+            (L6.osReceipt wightmanReceipt)))
+        ≡ false
 
     latticeGapReceipt :
       Gap.LatticeMassGapFromTransferMatrixReceipt
@@ -163,6 +173,7 @@ canonicalYML7L8MassGapSurvivalReceipt =
     ; wightmanReceipt = L6.canonicalYML6WightmanReconstructionReceipt
     ; wightmanCandidateAvailable = refl
     ; wightmanKeepsClayFalse = refl
+    ; wightmanPriorL3StillCandidateOnly = refl
     ; latticeGapReceipt = Gap.canonicalLatticeMassGapFromTransferMatrixReceipt
     ; finiteLatticeGapPositive = refl
     ; finiteGapDoesNotProveUniformContinuumGap = refl
@@ -195,7 +206,8 @@ canonicalYML7L8MassGapSurvivalReceipt =
     ; promotionFlagsAreEmpty = refl
     ; receiptBoundary =
         "Finite transfer-matrix positivity is retained, but the existing lattice receipt still does not prove an unconditional continuum gap"
-        ∷ "Mass-gap survival is recorded only over the conditional YML6 Wightman YM candidate"
+        ∷ "Mass-gap survival is recorded only over the candidate/conditional YML6 Wightman YM candidate"
+        ∷ "The YML6 candidate still traces back to candidate-only/blocked L3 tightness"
         ∷ "Lambda_c = 1.59 GeV versus 1.720 GeV glueball is an 8 percent scale diagnostic, not a Clay proof"
         ∷ "No unconditional continuum mass gap, Clay YM, or terminal Clay promotion follows"
         ∷ []

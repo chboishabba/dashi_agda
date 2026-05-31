@@ -46,7 +46,7 @@ yml4ContinuumPromotionImpossibleHere ()
 
 yml4ContinuumLimitStatement : String
 yml4ContinuumLimitStatement =
-  "YML4 conditionally receipts Prokhorov tightness, a unique candidate weak limit, and a Wilson-action continuum YM candidate; Clay YM remains false."
+  "YML4 records only a continuum-limit candidate conditional on the L3 tightness gap; L3 remains candidate-only/blocked, and Clay YM remains false."
 
 record YML4ContinuumLimitReceipt : Setω where
   field
@@ -185,9 +185,9 @@ canonicalYML4ContinuumLimitReceipt =
     ; promotionFlags = []
     ; promotionFlagsAreEmpty = refl
     ; receiptBoundary =
-        "The receipt is conditional on a full tightness proof, not a replacement for the blocked YML3 k-running audit"
-        ∷ "Prokhorov tightness yields a candidate weak limit for cutoff Wilson measures"
-        ∷ "Uniqueness and Wilson-action passage are recorded as the rigorous continuum YM candidate package"
+        "The receipt is conditional on a full tightness proof, not a replacement for the blocked/candidate-only YML3 k-running audit"
+        ∷ "Prokhorov tightness yields only a candidate weak limit for cutoff Wilson measures in the L3-conditional scope"
+        ∷ "Uniqueness and Wilson-action passage are recorded only as a conditional continuum YM candidate package"
         ∷ "No unconditional continuum YM, Clay YM, or terminal Clay promotion follows"
         ∷ []
     }

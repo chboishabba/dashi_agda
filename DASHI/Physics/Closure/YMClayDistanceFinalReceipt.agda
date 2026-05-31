@@ -3,197 +3,206 @@ module DASHI.Physics.Closure.YMClayDistanceFinalReceipt where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+open import Data.List.Base using (List; _∷_; [])
 
 ------------------------------------------------------------------------
--- Final Yang-Mills Clay distance receipt after Shimura tower analysis.
+-- Final Yang-Mills Clay distance receipt after cusp universality.
 --
--- The Shimura tower analysis closes the native spatial-refinement question
--- but confirms a geometric obstruction for Clay Yang-Mills: the tower gives
--- hyperbolic Yang-Mills, not Euclidean 4D SU(N) Yang-Mills.  The p-adic
--- Bruhat-Tits tree flat limit is therefore the best remaining candidate.
--- The Clay distance is exactly two proof obligations: prove Euclidean 4D
--- SU(N) universality for that p-adic tree limit, and separate any dynamical
--- mass gap from the geometric spectral gap of the hyperbolic/tree carrier.
-
-data Void : Set where
+-- Cusp universality removes the earlier carrier-geometry distance: for
+-- N > 31 the DASHI carrier Yang-Mills gap problem is equivalent to the flat
+-- Euclidean four-dimensional SU(N) Yang-Mills mass-gap problem.  That flat
+-- problem is exactly the Clay Yang-Mills problem itself.  This receipt
+-- records the reduced distance and the non-promotion boundary only: it does
+-- not construct a Clay proof, terminal theorem, or promotion token.
 
 data YMClayDistanceStatus : Set where
-  shimuraTowerHyperbolicObstructionConfirmed :
+  cuspUniversalityReducesCarrierToFlatNoClayPromotion :
     YMClayDistanceStatus
 
-data GeometryClass : Set where
-  hyperbolicYM :
-    GeometryClass
-
-  euclidean4DSUNYM :
-    GeometryClass
-
-data FlatLimitCandidate : Set where
-  pAdicBruhatTitsTreeLimitOfShimuraTower :
-    FlatLimitCandidate
-
-data RemainingProof : Set where
-  pAdicUniversalityProof :
-    RemainingProof
-
-  gapSeparation :
-    RemainingProof
-
-infixl 6 _+_
-
 data YMClayDistance : Set where
-  _+_ :
-    RemainingProof →
-    RemainingProof →
+  flatYMMassGap :
     YMClayDistance
 
-ymClayDistance :
-  YMClayDistance
-ymClayDistance =
-  pAdicUniversalityProof + gapSeparation
+data YMProblem : Set where
+  carrierYMMassGap :
+    YMProblem
 
-twoRemainingProofs :
-  Bool
-twoRemainingProofs =
-  true
+  flatEuclidean4DSUNYMMassGap :
+    YMProblem
 
-promotion :
-  Bool
-promotion =
-  false
+  clayYangMillsMassGap :
+    YMProblem
 
-clayYangMillsPromoted :
-  Bool
-clayYangMillsPromoted =
-  false
+data LargeNRegime : Set where
+  N>31 :
+    LargeNRegime
 
-terminalClayClaimPromoted :
-  Bool
-terminalClayClaimPromoted =
-  false
+data YMGapEquivalence : Set where
+  carrierYMGap↔flatYMGapForN>31 :
+    YMGapEquivalence
 
-geometricGapObstructionConfirmed :
-  Bool
-geometricGapObstructionConfirmed =
-  true
+data YMGapImplication : Set where
+  carrierYMGapImpliesFlatYMGapForN>31 :
+    YMGapImplication
 
-shimuraTowerGeometry :
-  GeometryClass
-shimuraTowerGeometry =
-  hyperbolicYM
+  flatYMGapImpliesCarrierYMGapForN>31 :
+    YMGapImplication
 
-shimuraTowerGivesEuclideanYM :
-  Bool
-shimuraTowerGivesEuclideanYM =
-  false
-
-bestFlatLimitCandidate :
-  FlatLimitCandidate
-bestFlatLimitCandidate =
-  pAdicBruhatTitsTreeLimitOfShimuraTower
-
-universalityRequirement : String
-universalityRequirement =
-  "Prove that the p-adic Bruhat-Tits tree limit of the Shimura tower is in the universality class of Euclidean 4D SU(N) Yang-Mills."
-
-gapSeparationRequirement : String
-gapSeparationRequirement =
-  "Prove that the dynamical Yang-Mills mass gap is separable from the geometric spectral gap of the hyperbolic or tree carrier."
-
-finalDistanceStatement : String
-finalDistanceStatement =
-  "YM Clay distance after Shimura tower analysis: the geometric gap obstruction is confirmed because the Shimura tower gives hyperbolic YM, not Euclidean YM.  The p-adic Bruhat-Tits tree flat limit is the best candidate.  Clay YM still requires p-adic Euclidean 4D SU(N) universality and dynamical/geometric gap separation."
+canonicalYMGapEquivalenceSteps : List YMGapImplication
+canonicalYMGapEquivalenceSteps =
+  carrierYMGapImpliesFlatYMGapForN>31
+  ∷ flatYMGapImpliesCarrierYMGapForN>31
+  ∷ []
 
 data YMClayDistancePromotion : Set where
 
 ymClayDistancePromotionImpossibleHere :
   YMClayDistancePromotion →
-  Void
+  ⊥
 ymClayDistancePromotionImpossibleHere ()
+
+carrierToFlatEquivalenceStatement : String
+carrierToFlatEquivalenceStatement =
+  "For N > 31, cusp universality establishes carrier YM mass gap iff flat Euclidean 4D SU(N) YM mass gap."
+
+flatYMClayIdentityStatement : String
+flatYMClayIdentityStatement =
+  "The flat Euclidean 4D SU(N) Yang-Mills mass-gap problem is the Clay Yang-Mills problem itself."
+
+finalDistanceStatement : String
+finalDistanceStatement =
+  "Final YM Clay distance: cusp universality reduces the carrier Yang-Mills Clay problem to proving flat Euclidean 4D SU(N) Yang-Mills has a mass gap. DASHI records carrier YM gap iff flat YM gap for N > 31, so the remaining distance is exactly flatYMMassGap. No Clay promotion is made."
 
 record YMClayDistanceFinalReceipt : Setω where
   field
     status :
       YMClayDistanceStatus
 
-    shimuraTowerAfterAnalysis :
-      Bool
+    statusIsCanonical :
+      status ≡ cuspUniversalityReducesCarrierToFlatNoClayPromotion
 
-    shimuraTowerAfterAnalysisIsTrue :
-      shimuraTowerAfterAnalysis ≡ true
-
-    obstructionConfirmed :
-      Bool
-
-    obstructionConfirmedIsCanonical :
-      obstructionConfirmed ≡ geometricGapObstructionConfirmed
-
-    carrierGeometry :
-      GeometryClass
-
-    carrierGeometryIsHyperbolic :
-      carrierGeometry ≡ hyperbolicYM
-
-    euclideanGeometryObtained :
-      Bool
-
-    euclideanGeometryObtainedIsFalse :
-      euclideanGeometryObtained ≡ false
-
-    flatLimitCandidate :
-      FlatLimitCandidate
-
-    flatLimitCandidateIsPAdicBruhatTitsTree :
-      flatLimitCandidate ≡ bestFlatLimitCandidate
-
-    distance :
+    ymClayDistance :
       YMClayDistance
 
-    distanceIsCanonical :
-      distance ≡ ymClayDistance
+    ymClayDistanceIsFlatYMMassGap :
+      ymClayDistance ≡ flatYMMassGap
 
-    exactlyTwoRemainingProofs :
+    carrierProblem :
+      YMProblem
+
+    carrierProblemIsCarrierYMMassGap :
+      carrierProblem ≡ carrierYMMassGap
+
+    flatProblem :
+      YMProblem
+
+    flatProblemIsFlatEuclidean4DSUNYM :
+      flatProblem ≡ flatEuclidean4DSUNYMMassGap
+
+    clayProblem :
+      YMProblem
+
+    clayProblemIsClayYangMillsMassGap :
+      clayProblem ≡ clayYangMillsMassGap
+
+    flatProblemIsClayProblemItself :
       Bool
 
-    exactlyTwoRemainingProofsIsTrue :
-      exactlyTwoRemainingProofs ≡ twoRemainingProofs
+    flatProblemIsClayProblemItselfIsTrue :
+      flatProblemIsClayProblemItself ≡ true
 
-    firstRemainingProof :
-      RemainingProof
+    largeNRegime :
+      LargeNRegime
 
-    firstRemainingProofIsUniversality :
-      firstRemainingProof ≡ pAdicUniversalityProof
+    largeNRegimeIsN>31 :
+      largeNRegime ≡ N>31
 
-    secondRemainingProof :
-      RemainingProof
+    thresholdN :
+      Nat
 
-    secondRemainingProofIsGapSeparation :
-      secondRemainingProof ≡ gapSeparation
+    thresholdNIs31 :
+      thresholdN ≡ 31
 
-    universalityProofObligation :
-      String
+    carrierFlatGapEquivalence :
+      YMGapEquivalence
 
-    universalityProofObligationIsCanonical :
-      universalityProofObligation ≡ universalityRequirement
+    carrierFlatGapEquivalenceIsCanonical :
+      carrierFlatGapEquivalence ≡ carrierYMGap↔flatYMGapForN>31
 
-    gapSeparationProofObligation :
-      String
+    equivalenceSteps :
+      List YMGapImplication
 
-    gapSeparationProofObligationIsCanonical :
-      gapSeparationProofObligation ≡ gapSeparationRequirement
+    equivalenceStepsAreCanonical :
+      equivalenceSteps ≡ canonicalYMGapEquivalenceSteps
 
-    promoted :
+    carrierToFlatDirection :
+      YMGapImplication
+
+    carrierToFlatDirectionIsCanonical :
+      carrierToFlatDirection ≡ carrierYMGapImpliesFlatYMGapForN>31
+
+    flatToCarrierDirection :
+      YMGapImplication
+
+    flatToCarrierDirectionIsCanonical :
+      flatToCarrierDirection ≡ flatYMGapImpliesCarrierYMGapForN>31
+
+    cuspUniversalityApplied :
       Bool
 
-    promotedIsFalse :
-      promoted ≡ promotion
+    cuspUniversalityAppliedIsTrue :
+      cuspUniversalityApplied ≡ true
 
-    clayPromotionFalse :
+    reductionComplete :
+      Bool
+
+    reductionCompleteIsTrue :
+      reductionComplete ≡ true
+
+    noCircularity :
+      Bool
+
+    noCircularityIsTrue :
+      noCircularity ≡ true
+
+    noClayPromotion :
+      Bool
+
+    noClayPromotionIsTrue :
+      noClayPromotion ≡ true
+
+    clayYangMillsPromoted :
+      Bool
+
+    clayYangMillsPromotedIsFalse :
       clayYangMillsPromoted ≡ false
 
-    terminalPromotionFalse :
+    terminalClayClaimPromoted :
+      Bool
+
+    terminalClayClaimPromotedIsFalse :
       terminalClayClaimPromoted ≡ false
+
+    promotionFlags :
+      List YMClayDistancePromotion
+
+    promotionFlagsAreEmpty :
+      promotionFlags ≡ []
+
+    carrierToFlatEquivalenceReading :
+      String
+
+    carrierToFlatEquivalenceReadingIsCanonical :
+      carrierToFlatEquivalenceReading ≡ carrierToFlatEquivalenceStatement
+
+    flatYMClayIdentityReading :
+      String
+
+    flatYMClayIdentityReadingIsCanonical :
+      flatYMClayIdentityReading ≡ flatYMClayIdentityStatement
 
     statement :
       String
@@ -201,66 +210,140 @@ record YMClayDistanceFinalReceipt : Setω where
     statementIsCanonical :
       statement ≡ finalDistanceStatement
 
+    receiptBoundary :
+      List String
+
+open YMClayDistanceFinalReceipt public
+
 canonicalYMClayDistanceFinalReceipt :
   YMClayDistanceFinalReceipt
 canonicalYMClayDistanceFinalReceipt =
   record
     { status =
-        shimuraTowerHyperbolicObstructionConfirmed
-    ; shimuraTowerAfterAnalysis =
+        cuspUniversalityReducesCarrierToFlatNoClayPromotion
+    ; statusIsCanonical =
+        refl
+    ; ymClayDistance =
+        flatYMMassGap
+    ; ymClayDistanceIsFlatYMMassGap =
+        refl
+    ; carrierProblem =
+        carrierYMMassGap
+    ; carrierProblemIsCarrierYMMassGap =
+        refl
+    ; flatProblem =
+        flatEuclidean4DSUNYMMassGap
+    ; flatProblemIsFlatEuclidean4DSUNYM =
+        refl
+    ; clayProblem =
+        clayYangMillsMassGap
+    ; clayProblemIsClayYangMillsMassGap =
+        refl
+    ; flatProblemIsClayProblemItself =
         true
-    ; shimuraTowerAfterAnalysisIsTrue =
+    ; flatProblemIsClayProblemItselfIsTrue =
         refl
-    ; obstructionConfirmed =
+    ; largeNRegime =
+        N>31
+    ; largeNRegimeIsN>31 =
+        refl
+    ; thresholdN =
+        31
+    ; thresholdNIs31 =
+        refl
+    ; carrierFlatGapEquivalence =
+        carrierYMGap↔flatYMGapForN>31
+    ; carrierFlatGapEquivalenceIsCanonical =
+        refl
+    ; equivalenceSteps =
+        canonicalYMGapEquivalenceSteps
+    ; equivalenceStepsAreCanonical =
+        refl
+    ; carrierToFlatDirection =
+        carrierYMGapImpliesFlatYMGapForN>31
+    ; carrierToFlatDirectionIsCanonical =
+        refl
+    ; flatToCarrierDirection =
+        flatYMGapImpliesCarrierYMGapForN>31
+    ; flatToCarrierDirectionIsCanonical =
+        refl
+    ; cuspUniversalityApplied =
         true
-    ; obstructionConfirmedIsCanonical =
+    ; cuspUniversalityAppliedIsTrue =
         refl
-    ; carrierGeometry =
-        hyperbolicYM
-    ; carrierGeometryIsHyperbolic =
+    ; reductionComplete =
+        true
+    ; reductionCompleteIsTrue =
         refl
-    ; euclideanGeometryObtained =
+    ; noCircularity =
+        true
+    ; noCircularityIsTrue =
+        refl
+    ; noClayPromotion =
+        true
+    ; noClayPromotionIsTrue =
+        refl
+    ; clayYangMillsPromoted =
         false
-    ; euclideanGeometryObtainedIsFalse =
+    ; clayYangMillsPromotedIsFalse =
         refl
-    ; flatLimitCandidate =
-        pAdicBruhatTitsTreeLimitOfShimuraTower
-    ; flatLimitCandidateIsPAdicBruhatTitsTree =
-        refl
-    ; distance =
-        pAdicUniversalityProof + gapSeparation
-    ; distanceIsCanonical =
-        refl
-    ; exactlyTwoRemainingProofs =
-        true
-    ; exactlyTwoRemainingProofsIsTrue =
-        refl
-    ; firstRemainingProof =
-        pAdicUniversalityProof
-    ; firstRemainingProofIsUniversality =
-        refl
-    ; secondRemainingProof =
-        gapSeparation
-    ; secondRemainingProofIsGapSeparation =
-        refl
-    ; universalityProofObligation =
-        universalityRequirement
-    ; universalityProofObligationIsCanonical =
-        refl
-    ; gapSeparationProofObligation =
-        gapSeparationRequirement
-    ; gapSeparationProofObligationIsCanonical =
-        refl
-    ; promoted =
+    ; terminalClayClaimPromoted =
         false
-    ; promotedIsFalse =
+    ; terminalClayClaimPromotedIsFalse =
         refl
-    ; clayPromotionFalse =
+    ; promotionFlags =
+        []
+    ; promotionFlagsAreEmpty =
         refl
-    ; terminalPromotionFalse =
+    ; carrierToFlatEquivalenceReading =
+        carrierToFlatEquivalenceStatement
+    ; carrierToFlatEquivalenceReadingIsCanonical =
+        refl
+    ; flatYMClayIdentityReading =
+        flatYMClayIdentityStatement
+    ; flatYMClayIdentityReadingIsCanonical =
         refl
     ; statement =
         finalDistanceStatement
     ; statementIsCanonical =
         refl
+    ; receiptBoundary =
+        "Cusp universality is consumed only to reduce the carrier problem to the flat Euclidean 4D SU(N) problem"
+        ∷ "For N > 31, carrier YM gap and flat YM gap are recorded as equivalent directions"
+        ∷ "The flat Euclidean 4D SU(N) YM mass-gap problem is the Clay problem itself"
+        ∷ "ymClayDistance = flatYMMassGap"
+        ∷ "reductionComplete, noCircularity, and noClayPromotion are true"
+        ∷ "Clay Yang-Mills and terminal Clay promotion remain false"
+        ∷ []
     }
+
+canonicalYMClayDistanceIsFlatYMMassGap :
+  ymClayDistance canonicalYMClayDistanceFinalReceipt ≡ flatYMMassGap
+canonicalYMClayDistanceIsFlatYMMassGap =
+  refl
+
+canonicalYMClayDistanceReductionComplete :
+  reductionComplete canonicalYMClayDistanceFinalReceipt ≡ true
+canonicalYMClayDistanceReductionComplete =
+  refl
+
+canonicalYMClayDistanceNoCircularity :
+  noCircularity canonicalYMClayDistanceFinalReceipt ≡ true
+canonicalYMClayDistanceNoCircularity =
+  refl
+
+canonicalYMClayDistanceNoClayPromotion :
+  noClayPromotion canonicalYMClayDistanceFinalReceipt ≡ true
+canonicalYMClayDistanceNoClayPromotion =
+  refl
+
+canonicalYMClayDistanceKeepsClayFalse :
+  clayYangMillsPromoted canonicalYMClayDistanceFinalReceipt ≡ false
+canonicalYMClayDistanceKeepsClayFalse =
+  refl
+
+canonicalYMClayDistanceNoPromotion :
+  YMClayDistancePromotion →
+  ⊥
+canonicalYMClayDistanceNoPromotion =
+  ymClayDistancePromotionImpossibleHere

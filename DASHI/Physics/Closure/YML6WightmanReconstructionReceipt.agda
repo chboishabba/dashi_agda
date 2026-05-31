@@ -9,6 +9,8 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.WightmanReconstructionCandidateReceipt as Existing
 import DASHI.Physics.Closure.YML5OSAxiomsForGaugeSectorReceipt as L5
+import DASHI.Physics.Closure.YML4ContinuumLimitReceipt as L4
+import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt as L3
 
 data YML6WightmanReconstructionStatus : Set where
   wightmanReconstructionConditionallyReceiptedFromOS :
@@ -39,7 +41,7 @@ yml6WightmanPromotionImpossibleHere ()
 
 yml6WightmanStatement : String
 yml6WightmanStatement =
-  "YML6 accepts the OS reconstruction theorem as conditional authority over the YML5 OS package and records a Wightman YM candidate; Clay YM remains false."
+  "YML6 accepts OS reconstruction only as conditional authority over the YML5 candidate OS package, which remains conditional on candidate-only L3; Clay YM remains false."
 
 record YML6WightmanReconstructionReceipt : Setω where
   field
@@ -54,6 +56,12 @@ record YML6WightmanReconstructionReceipt : Setω where
 
     osReceiptKeepsClayFalse :
       L5.clayYangMillsPromoted osReceipt ≡ false
+
+    osReceiptPriorL3StillCandidateOnly :
+      L3.ymL3TightnessConstructed
+        (L4.priorL3Receipt
+          (L5.continuumLimitReceipt osReceipt))
+        ≡ false
 
     priorCandidateReceipt :
       Existing.WightmanReconstructionCandidateReceipt
@@ -135,6 +143,7 @@ canonicalYML6WightmanReconstructionReceipt =
     ; osReceipt = L5.canonicalYML5OSAxiomsForGaugeSectorReceipt
     ; osAxiomsConditionallyComplete = refl
     ; osReceiptKeepsClayFalse = refl
+    ; osReceiptPriorL3StillCandidateOnly = refl
     ; priorCandidateReceipt =
         Existing.canonicalWightmanReconstructionCandidateReceipt
     ; priorCandidateKeptUnapplied = refl
@@ -163,8 +172,9 @@ canonicalYML6WightmanReconstructionReceipt =
     ; promotionFlags = []
     ; promotionFlagsAreEmpty = refl
     ; receiptBoundary =
-        "The OS reconstruction theorem is accepted as a theorem authority only after the YML5 OS package is supplied"
+        "The OS reconstruction theorem is accepted as a theorem authority only after the candidate/conditional YML5 OS package is supplied"
         ∷ "The reconstructed Hilbert space, vacuum, and Wightman fields are candidate objects in that conditional scope"
+        ∷ "The YML5 package still traces back to candidate-only/blocked L3 tightness"
         ∷ "The older unconditional Wightman candidate receipt remains unapplied"
         ∷ "No Clay YM or terminal Clay promotion follows"
         ∷ []
