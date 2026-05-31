@@ -3,7 +3,7 @@
 Date: `2026-05-29`
 Status: Paper 8 submission support; non-promoting; fail-closed
 
-This index is the source map for Paper 8.  It records which formal receipts can be cited, what each receipt contributes, and which promotion bit must remain false.  The paper claim is a governance and tower-composition claim, not a solved Millennium, GR, QFT, or Standard Model theorem.
+This index is the source map for Paper 8.  It records which formal receipts can be cited, what each receipt contributes, and which promotion bit must remain false.  The paper claim is a governance and tower-composition claim, not a solved Millennium, GR, QFT, or Standard Model theorem.  Here "Clay YM" means the Clay Mathematics Institute continuum Yang-Mills existence and mass-gap problem; finite carrier gaps are evidence only and do not promote that external problem.
 
 Final draft outline sidecars:
 `Docs/Paper6FinalDraftOutline.md` records the Paper 6 diagnostic manuscript
@@ -145,7 +145,7 @@ Every receipt cited in the Paper 8 draft body is anchored here by Agda module pa
 | `DASHI.Physics.Closure.MillenniumTowerGRInstanceReceipt` | `MillenniumTowerGRInstanceReceipt`, `canonicalMillenniumTowerGRInstanceReceipt` | Split GR/cosmology tower instance; `millenniumTowerGRNoPromotion` records no GR/cosmology promotion. |
 | `DASHI.Physics.Closure.MillenniumTowerGRInstanceReceipt` | `MillenniumTowerGRInstanceReceipt.friedmannInstabilitySaddle` | GR/cosmology split-instance field named in the theorem statement. |
 | `DASHI.Physics.Closure.MillenniumTowerDHRSMInstanceReceipt` | `MillenniumTowerDHRSMInstanceReceipt`, `canonicalMillenniumTowerDHRSMInstanceReceipt` | Split DHR/SM tower instance; `millenniumTowerDHRSMNoFullPromotion` records no full `G_DHR ~= G_SM` promotion. |
-| `DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface` | `BalabanRGMassGapReceiptSurface`, `canonicalBalabanRGMassGapReceiptSurface` | Finite-depth and local finite-carrier Yang-Mills mass-gap evidence surface. |
+| `DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface` | `BalabanRGMassGapReceiptSurface`, `canonicalBalabanRGMassGapReceiptSurface` | Finite-depth and local finite-carrier Yang-Mills gap evidence surface only; not the Clay Mathematics Institute continuum Yang-Mills existence/mass-gap problem. |
 | `DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface` | `BalabanRGMassGapReceiptSurface.finiteDepthProObjectReceipt`, `BalabanRGMassGapReceiptSurface.depthIndexedVsContinuumStatus`, `BalabanRGMassGapReceiptSurface.quantifierExchangeReceipt` | Balaban surface fields cited in the Yang-Mills finite-depth discussion. |
 | `DASHI.Physics.Closure.ColimitGapLiftOnHamiltonian` | `ColimitGapLiftOnHamiltonianReceipt`, `canonicalColimitGapLiftOnHamiltonianReceipt`, `ColimitHamiltonianGapThreadReceipt`, `canonicalColimitHamiltonianGapThreadReceipt` | Yang-Mills finite-to-colimit/Hamiltonian lift thread; `colimitHamiltonianGapThreadKeepsClayFalse` keeps Clay promotion false. |
 | `DASHI.Physics.Closure.ContinuumClayMassGapReceiptObligation` | `ContinuumClayMassGapReceiptObligation`, `canonicalContinuumClayMassGapReceiptObligation` | Clay-facing Yang-Mills required components and open obligations. |
@@ -295,6 +295,7 @@ papers are not ready.
 | Scope | Receipt | Status | Boundary |
 | --- | --- | --- | --- |
 | Phase 2 aggregate | `DASHI.Physics.Closure.Phase2ProgrammeReceipt` | Integrates the visible Phase 2 frontier: YM k-to-infinity tightness, NS critical Besov/vorticity control, CKM Yukawa normalisation, and Paper 8 gauge-section completion. | Programme/governance only. Continuum beta running, CS direct-product decoupling, physical scale anchoring, critical Besov/vorticity control, BKM closure, exact SM, Clay YM, Clay NS, and terminal promotion remain false. |
+| Paper 8 Gate 3-5 revision | `DASHI.Physics.Closure.AdelicSobolevWaveObservableTransportGeometryTheorem`; `DASHI.Physics.Closure.Gate3Gate4RoadmapRevisionReceipt`; `DASHI.Physics.Closure.SSPZ3EigenspaceClassificationReceipt` | Gate 3 adelic Sobolev bridge is internal to the PAWOTG tower and currently estimated at 5-10 sessions; Gate 4 is estimated at 3-5 sessions.  PAWOTG/KnownLimits and `Hecke.Scan` `Sig15` saturation are framework surfaces.  The all-SSP eigenspace correction is now formally classified. | No completed analytic Sobolev bridge, no Clay promotion, and no Gate 5 constructive-QFT closure.  Gate 5 remains years-scale and externally authority-dependent; p=7 bottleneck uniqueness remains classification/input structure, not CKM/CP promotion. |
 
 ## GR, Hilbert/Stone, And DHR
 

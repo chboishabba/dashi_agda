@@ -8,11 +8,13 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- Light transport as a receipt-gated fibre closure surface.
 --
--- This module records the stronger DASHI reading of the dashiRTX/light
--- transport discussion: not merely "sample then denoise", but a typed latent
--- transport carrier whose diffuse, specular, spectral, and subsurface fibres
--- may be cached, composed, and discharged only under explicit admissibility
--- receipts.  It is not a global constant-time renderer theorem.
+-- This module records only the DASHI-internal receipt surface adjacent to
+-- light-transport discussion.  dashiRTX is a separate physically-based
+-- raytracing / MDL sparse light-transport prototype, not part of DASHI Agda
+-- and not scaffolding for the adelic Sobolev bridge.  The typed latent
+-- transport carrier below may be cached, composed, and discharged only under
+-- explicit admissibility receipts; it is not a global constant-time renderer
+-- theorem.
 
 data LightTransportLayer : Set where
   sceneStateLayer : LightTransportLayer

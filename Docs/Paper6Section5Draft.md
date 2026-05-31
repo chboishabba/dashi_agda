@@ -1,3 +1,9 @@
+> **Superseded by corrected CKM/Paper 6 frontier discipline.** This draft is
+> retained only as historical working material.  Current discipline demotes the
+> \(V_{cb}\) result to a PDG-tautology diagnostic, keeps \(\gamma\) / \(D=-7\)
+> as Gate-A partial pending carrier architecture, treats \(V_{ub}\) as
+> leading-order only, and makes no physical CKM promotion.
+
 # 5. The Vub and CP-Phase Obstructions
 
 The preceding sections isolate the arithmetic content that is presently

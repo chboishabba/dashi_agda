@@ -108,7 +108,7 @@ fullClayPromotion =
 
 ymClayGapRefinedStatement : String
 ymClayGapRefinedStatement =
-  "Refined Clay YM blocker map: the broad hyperbolicToFlatLimitUniversalityClass is narrowed to archimedeanH3ToR3FlatLimit; the p-adic blocker is resolved by Bruhat-Tits ultrametric structure; only the archimedean H3 -> R3 flat limit remains; candidates are curvatureDeformation, largeLevelDegeneration, and adelicIntegration; full Clay promotion remains false."
+  "Refined internal YM blocker map: the broad hyperbolicToFlatLimitUniversalityClass is narrowed to the archimedean H3 -> R3 flat-limit candidate lane, while the Clay Mathematics Institute continuum YM existence/mass-gap problem remains external; curvatureDeformation, largeLevelDegeneration, and adelicIntegration are candidate mechanisms only, and full Clay promotion remains false."
 
 record YMClayGapRefinedReceipt : Setω where
   field

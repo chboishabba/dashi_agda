@@ -112,7 +112,8 @@ recorded because `canonicalBalabanRGMassGapReceiptSurface` in
 `DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface` has
 `finiteDepthMassGapPromotedIsTrue` and
 `localFiniteCarrierSpectralGapPromotedIsTrue`; it cannot say that the
-continuum Clay mass-gap problem is solved.  This availability is strictly
+Clay Mathematics Institute continuum Yang-Mills existence/mass-gap problem is
+solved.  This finite-carrier availability is strictly
 bounded to the finite carrier; `continuumMassGapProvedInDASHIIsFalse` remains
 the governing flag.  The same receipt has
 `continuumClayMassGapPromotedIsFalse` and

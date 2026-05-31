@@ -935,8 +935,9 @@ depends on that surface.
   and `Branch · Snap Filtering Analysis`
   are direct formal support lanes, while
   `Branch · Topology and MDA/MDL`
-  and the light-transport / phase-sync thread remain support lanes for
-  continuum and physical-realization work.
+  and the light-transport / phase-sync thread remain analogy/provenance lanes
+  for continuum and physical-realization work; they are not DASHI Agda theorem
+  content or adelic Sobolev bridge scaffolding.
 - Photonuclear empirical lane visibility:
   `DASHI/Physics/Closure/PhotonuclearEmpiricalConstantsRegistry.agda`,
   `DASHI/Physics/Closure/PhotonuclearEmpiricalMeasurementSurface.agda`,

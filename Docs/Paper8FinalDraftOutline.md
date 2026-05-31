@@ -24,6 +24,20 @@ The introduction should make the label system part of the theorem statement.
 - `False promotion`: any claim that DASHI has already derived the exact
   physical Standard Model.
 
+Gate-state note for the current Paper 8 draft:
+
+- Gate 3 is an internal PAWOTG tower task, not an external-collaboration
+  dependency.  The adelic Sobolev bridge is still open; the next formal module
+  target is `AdelicSobolevWaveObservableTransportGeometryTheorem`.
+- Gate 3 should be estimated at 5-10 sessions; Gate 4 at 3-5 sessions.
+  Gate 5 remains a years-scale programme requiring external constructive QFT
+  authority.
+- PAWOTG/KnownLimits and `Hecke.Scan` `Sig15` saturation are framework
+  surfaces for the draft, not completed analytic promotion mechanisms.
+- No Clay promotion is made here.  The all-SSP eigenspace correction and the
+  p=7 bottleneck uniqueness claim may be mentioned only as classification
+  status unless a formal receipt is cited.
+
 ## 2. Heegner Discriminant Geometry
 
 This section defines the source geometry used throughout the paper.

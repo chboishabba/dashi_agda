@@ -2,6 +2,23 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-01 Worker 5 governance-only follow-up: the current tranche now
+  explicitly records `LightCodecTransportCorrespondenceTheorem` as binding /
+  correspondence plumbing only; finite FactorVec inequalities as selected
+  finite-carrier evidence only; `NS->EV5` as a projection and norm-comparison
+  obligation lane; and `dashiCFD` as empirical diagnostics only.  These gates
+  are fail-closed: no continuum light transport, actual-flow Navier-Stokes,
+  Sobolev/Serrin, Clay, ontology/physics, Monster/Moonshine physics, or
+  unification promotion follows.
+
+- 2026-06-01 governance-only tranche sync: the active priority stack is
+  `psi2` skeleton cleanup first, `NS->EV5` projection frontier second,
+  `dashiCFD` experiment evidence-only, Gate3 norm dictionary as proof
+  obligation, Moonshine/VOA fixed-point receipt as structural support for the
+  SSP alphabet only, and commit/tag only after validation.  The Agda receipts
+  for this tranche are typechecked and wired into `Everything.agda`; no Clay,
+  CKM, `Y_d`, ontology/physics, or unification promotion follows.
+
 - 2026-05-27 archived ChatGPT thread `Metabolic Pathway Databases`
   (`online_thread_id=6a16a066-0468-83ec-b2b5-cc8bfe1eb810`,
   `canonical_thread_id=0a1dbd297437a569baf428047946dbd4c1dd4528`,
@@ -3547,9 +3564,10 @@
     should orient forwardness while staying outside the quadratic itself;
   - sparse/twist/phase transport remains the strongest missing physical channel
     from the archive side;
-  - the light-transport / MASI-style phase-synchronization material is the
-    strongest current physical bridge for quotient observables and MDL-style
-    representative selection, but it has not yet been formalized locally;
+  - the light-transport / MASI-style phase-synchronization material is an
+    analogy/provenance lane for quotient observables and MDL-style
+    representative selection, not DASHI Agda theorem content or adelic
+    Sobolev bridge scaffolding;
   - the light-transport thread is strong on multi-sensor wavefield recovery
     and phase synchronization, but it is not yet an archived proof of a full
     lensless time-of-flight formalism.

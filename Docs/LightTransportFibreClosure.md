@@ -19,10 +19,11 @@ DASHI.Physics.Closure.LightTransportFibreClosure
 
 ## Reading
 
-The important shift from the current `dashiRTX` prototype is that the transport
-operator itself becomes the retained latent artifact.  The existing prototype
-mostly learns or optimizes where to refresh; this surface names the stronger
-target:
+The separate `dashiRTX` project is a physically-based raytracing / MDL sparse
+light-transport prototype.  It is not part of DASHI Agda and is not scaffolding
+for the adelic Sobolev bridge.  This DASHI note instead names an internal
+receipt-gated transport-closure target in which the transport operator itself
+would be the retained latent artifact:
 
 ```text
 weighted fibre mixing

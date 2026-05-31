@@ -33,11 +33,11 @@ canonicalUpdatedNavierStokesBlockers =
 
 updatedYMStatement : String
 updatedYMStatement =
-  "Updated YM blocker: Clay YM now reduces to SU3/gauge identification plus continuum RG convergence; scalar OS is dissolved only for the scalar sector."
+  "Updated YM blocker map: internal YM work still has SU3/gauge identification and continuum RG convergence blockers; scalar OS is dissolved only for the scalar sector, and the Clay Mathematics Institute continuum YM problem remains external."
 
 updatedNSStatement : String
 updatedNSStatement =
-  "Updated NS blocker: Clay NS now reduces to the multi-base Riesz/wavelet bridge plus nonlinear term passage."
+  "Updated NS blocker map: internal NS work still has the multi-base Riesz/wavelet bridge and nonlinear term passage blockers; no Clay Navier-Stokes promotion follows."
 
 record ClayBlockerUpdateReceipt : Setω where
   field

@@ -2,7 +2,71 @@
 
 ## Active Blocker Board
 
+New tranche governance sync `2026-06-01`:
+- [x] Worker 5 governance-only follow-up: record
+  `LightCodecTransportCorrespondenceTheorem` as theorem-binding /
+  correspondence plumbing only, not new physics transport, continuum operator,
+  ontology, or unification promotion.
+- [x] Record finite FactorVec inequality scope as selected finite-carrier
+  inequality evidence only.  It does not provide a real/continuum norm
+  theorem, Sobolev/Serrin estimate, actual-flow Navier-Stokes transfer, or
+  Clay result.
+- [x] Tighten `NS->EV5` lane semantics and `dashiCFD` empirical gates:
+  `NS->EV5` may produce projection/norm-comparison obligations and lane
+  dictionaries only; `dashiCFD` may supply diagnostics, examples, and
+  regression/acceptance evidence only.
+- [x] Record the current priority stack and promotion boundaries, with the new
+  receipt surfaces wired into `Everything.agda`: first clean the corrected
+  `psi2` skeleton and branch wording; then
+  keep the `NS->EV5` projection as the live frontier; keep `dashiCFD`
+  experiment outputs evidence-only; keep the Gate3 norm dictionary as a
+  proof-obligation surface; treat the Moonshine/VOA fixed-point receipt only
+  as structural support for the SSP alphabet; and require validation before
+  any requested commit/tag.
+- [ ] Priority 1: complete `psi2` skeleton cleanup.  The branch convention is
+  bookkeeping (`phi = psi2` via `Frob_p2 = 4 = 2^2`) and must not be promoted
+  to physical generation labels, CKM entries, `Y_d`, or unification.
+- [ ] Priority 2: advance the `NS->EV5` projection frontier only as a
+  projection/norm-comparison proof obligation.  It does not transfer
+  Navier-Stokes carrier estimates to actual flow and does not imply Clay NS.
+- [ ] `NS->EV5` lane action: keep lane outputs separated into projection
+  maps, finite/empirical comparison dictionaries, and theorem obligations.
+  Do not consume `dashiCFD` plots or finite FactorVec inequalities as proof of
+  an EV5 transfer theorem.
+- [ ] Priority 3: use `dashiCFD` experiments only as empirical/diagnostic
+  evidence.  They may motivate projection tests or regression checks, but
+  they do not discharge the `NS->EV5`, Gate3 norm, or Clay obligations.
+- [ ] LightCodecTransport follow-up: keep the correspondence theorem bindings
+  aligned with the light-transport receipt vocabulary, and block any use as a
+  continuum light transport, NS transport, or unification theorem unless a
+  separate promoted theorem is actually proved.
+- [ ] Gate3 norm dictionary action: define the dictionary and prove the
+  relevant compatibility/norm-comparison lemmas before consuming it in
+  downstream gates.  Until then it remains a proof obligation.
+- [ ] Moonshine/VOA boundary action: keep the fixed-point receipt as
+  structural support for the SSP alphabet only.  It is not ontology promotion,
+  physics promotion, Monster/Moonshine physics, or unification evidence.
+- [ ] Release action: run validation on the touched scope before any requested
+  commit/tag.  No commit/tag should be made from this tranche until validation
+  is reported clean or its failures are explicitly accepted.
+- [x] Preserve non-promotion boundaries for this tranche: no Clay, CKM, `Y_d`,
+  exact SM, ontology/physics, or unification promotion follows from the
+  priority-stack update.
+
 Paper 6 prewrite baseline sync `2026-05-31`:
+- [x] Keep Clay/YM terminology explicit: `Clay YM` means the Clay Mathematics
+  Institute continuum Yang-Mills existence and mass-gap problem, and finite
+  carrier gaps remain evidence only.
+- [x] Worker 6 governance sync `2026-06-01`: record the latest user-math
+  boundaries in Paper 6 prose without Agda changes: the stale zero-branch
+  commutativity wording is superseded by the corrected `psi2` convention,
+  where the existing `phi` branch matches `psi2` via `Frob_p2 = 4 = 2^2`;
+  `floor(log2(p))` is only a depth-grading Yukawa selector candidate; NS needs
+  a cumulative actual-flow tail estimate; FRACTRAN admissibility is only a
+  carrier-side nonresonance sharpening for NS tail dominance; the adelic
+  Sobolev comparison route is now automorphic `GL(1)` / Hecke-character
+  research; and the `p=7` independence criterion supports a structural
+  convergence remark, not a theorem.
 - [x] Record the corrected NS carrier/Kolmogorov/Serrin boundary:
   `alpha_K = 2^{-2/3}`, standard `H^{11/8}` divergence exponent `25/12`,
   finite-depth Serrin route, and no blow-up/Clay implication from unbounded
@@ -10,6 +74,10 @@ Paper 6 prewrite baseline sync `2026-05-31`:
 - [x] Record Kolmogorov-calibrated viscous tail dominance:
   `K*(nu)=3/4 log2(1/nu)` and `K*(10^-6) ~= 14.95`, with the result scoped to
   tail-control evidence and no universal NS promotion.
+- [x] Record FRACTRAN admissibility as carrier-side nonresonance sharpening:
+  it refines which algebraic carrier tails count as nonresonant in the
+  tail-dominance heuristic, but it does not transfer the estimate to actual
+  Navier-Stokes flow and does not imply Clay/global regularity.
 - [x] Record the corrected `PSL(2,F7)` texture constraint:
   `chi_6=[6,2,0,0,-1,-1]`, stale `4A=-2` rejected, and
   `V3 tensor V3 = V3' + V6` with no trivial representation.
@@ -17,21 +85,98 @@ Paper 6 prewrite baseline sync `2026-05-31`:
   unnormalised `2 - 2 cos(2*pi/7) ~= 0.753`, normalised random-walk gap half
   this value, product carrier still `Z/7`-bottleneck with corrected `Z/2` gap
   `2`, finite evidence only.
-- [ ] Next NS action: connect `TailCollapseProof` and
-  `MDLTradeoffShiftInstance` to an explicit `NSFlowMDLAdmissibility` or
-  dissipative-tail theorem.
-- [ ] Next CKM action: construct the three-factor carrier morphism into
+- [x] Connect `TailCollapseProof` and `MDLTradeoffShiftInstance` to an
+  explicit algebraic tail-energy layer:
+  `TailEnergyFunctional` proves `T_r` tail monotonicity and collapse after
+  `k` tail steps.
+- [x] Record the `NSFlowMDLAdmissibility` bridge as candidate-only:
+  active-depth/tail control is the missing forward estimate, MDL decrease above
+  `K*(nu)` remains suggested rather than proved, and Clay/global regularity
+  promotion is blocked.
+- [x] Record the corrected `V3` spurion texture frontier: full
+  `PSL(2,F7)` bilinear invariants remain absent, `V3 tensor V3 tensor V3`
+  has one verified invariant in the exterior determinant channel, and a
+  rank-1 heavy-generation texture requires an additional residual selector
+  rather than following from the pure `V3` character computation.
+- [x] Record the finite cusp/Hecke spectral frontier: the actual Hecke scalar
+  action on `S_2(X_0(49))` has the checked table
+  `a_2=1`, `a_3=0`, `a_5=0`, `a_7=0`, `a_11=4`, `a_13=0`,
+  `a_17=0`, `a_19=0`; because the usual cusp space is one-dimensional, no
+  intrinsic multi-eigenvalue Hecke gap is computed, and the `Z/7` Cayley gap
+  is not reused.
+- [x] Record Warp/Weft/Wax as origin vocabulary only, with OceanGate and
+  longevity metaphors explicitly blocked as evidence.
+- [x] Align the latest origin/analogy tranche in the Paper 6 outline:
+  helical phase generation index is now a partial 7-adic diagram chase rather
+  than canonical labelling; sock knitting is a helix rather than a cylinder;
+  OceanGate is analogy only, with sanding recorded as penetrating up to 15
+  plies and repeating about 8 times as a periodic resonant defect;
+  KAM/Diophantine is NS/three-body analogy only; eclipse/Saros is periodicity
+  bookkeeping only.
+- [x] Add fail-closed receipts for the latest origin/analogy tranche:
+  `CKMHelicalPhaseGenerationIndexReceipt` records the
+  `FactorVec_CKM -> T7(X0(49)) x Z/3Z` helical phase surface and its three
+  original diagram-chase obligations, and `EclipseProjectionDefectSarosRemark` records
+  the eclipse/Saros projection-defect boundary without product-formula or
+  physical-prediction promotion.
+- [x] Correct the helical phase generation-index receipt after the partial
+  diagram chase: `Z/3Z={1,2,4} subset F_7^x` is generated by `2`, the
+  characters `psi_k(2)=omega^k` are distinct, `7 = 1 mod 3` puts `omega` in
+  `Z_7`, and
+  `T7(X_0(49)) tensor_Z7 Z7[Z/3Z] ~= T7(X_0(49))^3` over `Z_7`, but the
+  status is
+  `partialDiagramChaseComplete_commutativityVerificationRequired`, not
+  `canonicalLabellingEstablished`.
+- [x] Record p=7 as a Structural Convergence Remark, not a theorem:
+  uniqueness is verified only because no other checked prime satisfies all
+  seven stated conditions, and independence of those conditions is unproved.
+- [x] Preserve fail-closed boundaries for this tranche:
+  no physical CKM matrix or `Y_d` derivation, no transfer to actual
+  Navier-Stokes flow, no materials/safety theorem from the OceanGate analogy,
+  and no product-formula proof for eclipse prediction.
+- [ ] Next CKM action: update downstream helical-index wording to the
+  corrected `psi2` convention.  The existing single-factor morphism `phi`
+  matches the `psi2` branch because `Frob_p2 = 4 = 2^2`; this fixes the branch
+  convention but does not derive physical generation labels, CKM entries, or
+  `Y_d`.
+- [ ] Next CKM/Yukawa selector action: formalise or reject the
+  `depth(p)=floor(log2(p))` prime-depth grading as a residual Yukawa selector
+  candidate.  It may sort selector hypotheses, but it must not be promoted to
+  a rank-1 texture, `Y_d`, CKM-entry, or generation-labelling theorem.
+- [ ] Follow-on CKM action: after the `psi2` convention is propagated,
+  construct or tighten the remaining three-factor carrier morphism into
   `T_7(X_0(49))^3`, then separate the algebraic labelling problem from the
   dynamical `Y_d` derivation.
+- [ ] Next helical-index action: use the `psi2`/`phi` convention as branch
+  bookkeeping for the helical index; the branch match follows from
+  `Frob_p2 = 4 = 2^2`, but canonical physical labels still require the
+  morphism skeleton and Yukawa dynamics rather than branch naming alone.
 - [ ] Next YM evidence action: replace toy/finite evidence with a genuine
   finite cusp/Wilson carrier operator before discussing any continuum bridge.
-- [ ] Next NS transfer research action: verify or refute the
-  `NSAdelicTransferTheoremCandidate` obligations: Kozyrev basis equality with
-  carrier depth modes, adelic product formula extension to carrier norms, and
-  authority-backed adelic Sobolev comparison.
+- [x] Literature-check the `NSAdelicTransferTheoremCandidate` route:
+  Gubser-Knaute-Parikh-Samberg-Witaszczyk and Kochubei/Khrennikov-style
+  p-adic PDE sources do not supply the required archimedean Sobolev
+  domination theorem.
+- [ ] Next NS transfer research action: prove a cumulative actual-flow tail
+  estimate above `K*(nu)` and compare the summed tail against the standard
+  Sobolev/Serrin norm, or keep the NS route blocked.
+- [ ] Next adelic Sobolev research action: pursue the automorphic `GL(1)` /
+  Hecke-character route for cross-place Sobolev comparison, or keep the route
+  blocked; existing p-adic PDE / p-adic AdS-CFT literature does not close it.
+- [ ] Next p=7 governance action: sharpen the independence criterion for the
+  seven readings.  Current status is only that the readings are recorded as
+  separate input lanes and no checked prime other than `7` satisfies the whole
+  conjunction; full logical independence remains unproved, so no p=7 theorem
+  is available.
+- [ ] Next KAM/Diophantine action: state the NS/three-body analogy as a
+  comparison lemma or exposition note only, with hypotheses that explicitly do
+  not imply active-depth control for actual Navier-Stokes flow.
 - [ ] Next CKM labelling action: find a non-bilinear or explicitly
   symmetry-broken three-factor labelling map, since `Z/3` bilinear invariants
   do not lift to full `PSL(2,F7)` invariants.
+- [ ] Next eclipse/Saros action: keep Saros periodicity as an observational
+  cycle note unless a separate arithmetic product-formula theorem is actually
+  proved.
 
 Prediction-frontier gate sync `2026-05-28`:
 - [x] Paper 8/unification tranche: add the shared Millennium tower schema,
@@ -6811,9 +6956,10 @@ Priority bucket: `P1`
 - [ ] Next follow-up: strengthen the current canonical continuum inhabitant so
   its limit carrier/scaling map go beyond the current first quotient-like
   carrier given by the transported `RGObservable`.
-- [ ] Archive-guided follow-up: use the current physical bridge threads
+- [ ] Archive-guided follow-up: use the current analogy/provenance threads
   (`Branch · Topology and MDA/MDL` and the light-transport / phase-sync lane)
-  to define a more physical scaling object than a finite RG quotient alone.
+  only as external intuition for possible scaling objects.  Do not treat them
+  as DASHI Agda theorem content or adelic Sobolev bridge scaffolding.
 
 ## Track H — Archive-Guided Physics Closure (2026-03-31)
 
@@ -8149,7 +8295,9 @@ Cleanup
   receipt-gated.
 - [ ] If/when editing sibling repos is in scope, port the discharge discipline
   into `../dashitest` codec tests and `/home/c/Documents/code/dashiRTX`
-  runtime prototypes.
+  runtime prototypes.  Treat `dashiRTX` as a separate physically-based
+  raytracing / MDL sparse light-transport prototype, not as DASHI Agda content
+  or adelic Sobolev bridge scaffolding.
 
 ## 2026-05-19 BioAnimalexic Stack Integration
 

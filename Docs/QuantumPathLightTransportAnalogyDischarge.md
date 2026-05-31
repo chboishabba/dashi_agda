@@ -16,10 +16,12 @@ weighted/admissible fibres
   -> receipt-gated reuse
 ```
 
-The canonical discharge does not yet make `dashiRTX` a QED implementation,
-derive a renderer algorithm from quantum optics, or promote global exact `O(1)`
-rendering.  It now explicitly records that promotion is intended once the
-receipts below are supplied.
+The canonical discharge does not make the separate `dashiRTX` physically-based
+raytracing / MDL sparse light-transport prototype part of DASHI Agda, a QED
+implementation, scaffolding for the adelic Sobolev bridge, a renderer algorithm
+derived from quantum optics, or a global exact `O(1)` rendering theorem.  It
+records only a DASHI-internal analogy surface that would require the receipts
+below before any stronger renderer-facing claim could be reused.
 
 Current fail-closed guards:
 

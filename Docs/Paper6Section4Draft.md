@@ -1,10 +1,10 @@
-# 4. The Wolfenstein A Parameter
+> **Superseded by corrected CKM/Paper 6 frontier discipline.** This draft is
+> retained only as historical working material.  Current discipline demotes the
+> \(V_{cb}\) result to a PDG-tautology diagnostic, keeps \(\gamma\) / \(D=-7\)
+> as Gate-A partial pending carrier architecture, treats \(V_{ub}\) as
+> leading-order only, and makes no physical CKM promotion.
 
-> **Superseded 2026-05-31.** This section is retained as a historical
-> diagnostic route.  The current ledger treats `A` as a Wolfenstein input or
-> quotient unless independently derived from carrier arithmetic.  No such
-> carrier derivation is currently promoted.  Use
-> `Paper6FinalDraftOutline.md` for the current Paper 6 boundary.
+# 4. The Wolfenstein A Parameter
 
 The Wolfenstein parameter \(A\) is not introduced here as an independent
 arithmetic carrier.  In the Wolfenstein convention it is defined, to the order

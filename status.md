@@ -1,4 +1,123 @@
+# 2026-06-01 new tranche governance sync
+
+- Worker 5 governance-only follow-up recorded the tranche boundaries for
+  `LightCodecTransportCorrespondenceTheorem`, finite FactorVec inequality
+  scope, and the `NS->EV5` / `dashiCFD` lane.  The LightCodecTransport work is
+  tracked as theorem binding/correspondence plumbing only: it binds the
+  codec/transport surface to the existing light-transport receipt language,
+  but it does not create a new physics transport theorem, continuum operator,
+  ontology promotion, or unification step.
+- The finite FactorVec inequality scope is finite-carrier only.  It may be
+  used as a bounded inequality witness on the selected FactorVec carrier
+  surfaces, but it is not a real/continuum norm theorem, not a Sobolev/Serrin
+  estimate, not an actual-flow Navier-Stokes transfer, and not a Clay result.
+- `NS->EV5` lane semantics are fail-closed: the lane is a projection and
+  norm-comparison frontier whose admissible outputs are typed obligations,
+  lane dictionaries, and comparison targets.  `dashiCFD` remains empirical:
+  diagnostics may suggest regressions, examples, or acceptance gates for
+  experiments, but cannot discharge theorem obligations or promote NS/Clay.
+- Updated the governance surfaces and wired the current priority-stack receipts
+  into the aggregate Agda import.  The live order is: `psi2` skeleton cleanup first; `NS->EV5`
+  projection frontier second; `dashiCFD` experiments as evidence-only;
+  Gate3 norm dictionary as a proof obligation; Moonshine/VOA fixed-point
+  receipt as structural support for the SSP alphabet only; commit/tag only
+  after validation.
+- Boundaries remain fail-closed.  `psi2` cleanup is branch/skeleton hygiene,
+  not physical generation labelling, CKM entries, `Y_d`, or unification.
+  `NS->EV5` is a projection/norm-comparison frontier, not an actual-flow
+  Navier-Stokes transfer and not Clay NS.  `dashiCFD` may provide diagnostics
+  but cannot discharge proof obligations.  The Gate3 norm dictionary must be
+  proved before downstream use.  Moonshine/VOA fixed-point material supports
+  the SSP alphabet structurally only and does not promote ontology, physics,
+  Monster/Moonshine physics, or unification.
+- Commit/tag remains requested only after validation.  No Clay, CKM, `Y_d`,
+  exact SM, ontology/physics, or unification promotion was made.
+
+# 2026-05-31 helical phase diagram chase correction
+
+- 2026-06-01 Worker 6 governance sync complete for Paper 6 docs only.  Updated
+  prose/status surfaces to record the latest boundaries: the stale helical
+  zero-branch commutativity wording is superseded by the corrected `psi2`
+  convention, where the existing `phi` branch matches `psi2` via
+  `Frob_p2 = 4 = 2^2`; `depth(p)=floor(log2(p))` is only a candidate Yukawa
+  residual selector; NS transfer now requires a cumulative actual-flow tail
+  estimate above `K*(nu)`; FRACTRAN admissibility is recorded only as a
+  carrier-side nonresonance sharpening for NS tail dominance; the adelic
+  Sobolev route is an automorphic `GL(1)` / Hecke-character proof obligation;
+  and the `p=7` independence criterion remains structural, with full logical
+  independence unproved.  No Agda files were edited, and no CKM, p=7 theorem,
+  NS/Clay, or unification promotion was made.
+- Current terminology guard: `Clay YM` means the Clay Mathematics Institute
+  continuum Yang-Mills existence and mass-gap problem.  Finite carrier gaps are
+  evidence only and do not promote that external problem.
+
+- Corrected `CKMHelicalPhaseGenerationIndexReceipt` to
+  `partialDiagramChaseComplete_commutativityVerificationRequired`.
+- The receipt now records the arithmetic construction:
+  `Z/3Z={1,2,4} subset F_7^x`, generator `2`, distinct characters
+  `psi_k(2)=omega^k`, and `7 = 1 mod 3`, so `omega` lives in `Z_7`.
+- The helical and three-factor framings are recorded as equivalent over
+  `Z_7`:
+  `T7(X_0(49)) tensor_Z7 Z7[Z/3Z] ~= T7(X_0(49))^3`.
+- Boundary remains fail-closed: physical CKM, `Y_d`, and CP phase are not
+  derived.  The corrected branch convention identifies the existing
+  single-factor morphism `phi` with `psi2`, not the old zero-branch, because
+  `Frob_p2 = 4 = 2^2`; downstream labelling still needs the concrete morphism
+  skeleton and Yukawa dynamics.
+- p=7 remains a Structural Convergence Remark, not a theorem: uniqueness is
+  verified only because no other checked prime satisfies all seven stated
+  conditions, and independence of those conditions is unproved.
+- OceanGate remains analogy only: sanding penetrated up to 15 plies and
+  repeated about 8 times as a periodic resonant defect; no materials/safety
+  theorem follows.
+
+# 2026-05-31 latest helical/eclipses origin tranche
+
+- Added and wired `CKMHelicalPhaseGenerationIndexReceipt` and
+  `EclipseProjectionDefectSarosRemark`.
+- The CKM helical receipt originally recorded a fail-closed candidate:
+  generation index as `Z/3Z` phase of a carrier helix, with proposed shape
+  `FactorVec_CKM -> T7(X0(49)) x Z/3Z`.  This entry is superseded by the
+  diagram-chase correction above: the stage/phase, factor-distinction, and
+  three-factor equivalence checks are now recorded as partial over `Z_7`.
+- The eclipse/Saros receipt records single-eclipse angular overlap as a
+  projection-defect illustration and separates Saros/KAM-style orbital
+  stability from any product-formula or physical prediction proof.
+- The existing weave and NS receipts now carry the corrected boundaries:
+  OceanGate-style wording is a sanding/resonance analogy only, not merely
+  absent Wax/epoxy; KAM/Diophantine language is an explanatory stability
+  analogy, not active-depth control for actual Navier-Stokes flow.
+
 # 2026-05-31 Paper 6 prewrite baseline update
+
+- Added and wired the follow-on unification/frontier receipts:
+  `MultiPrimePAdicCarrierCoordinate`, `ProductFormulaConstraint`,
+  `SectorProjectionType`, `ProjectionContractionOperatorBridgeReceipt`,
+  `MonstrousMoonshineSSPBoundaryReceipt`, `TailEnergyFunctional`,
+  `NSFlowMDLTailDominanceLemmaCandidate`,
+  `NSAdelicTransferLiteratureVerdictReceipt`,
+  `NSFlowMDLAdmissibilityCandidateReceipt`,
+  `B1PSL2F7TripleV3CharacterReceipt`,
+  `CKMV3SpurionTextureFrontierReceipt`,
+  `PSL2F7RankOneYdTextureReceipt`,
+  `FiniteCuspHeckeSpectralFrontierReceipt`, and
+  `CarrierWeaveDefectOriginRemark`.
+- The new NS receipt keeps the MDL/viscous-tail bridge candidate-only:
+  active-depth/tail control for the actual NS evolution is still the missing
+  forward estimate, and neither global regularity nor blow-up is promoted.
+- The new CKM receipts keep the `V3` spurion route fail-closed: the
+  triple-`V3` invariant is now verified, but it is the exterior determinant
+  channel; a pure `V3` spurion gives a generic antisymmetric rank-2 texture,
+  and the rank-1 heavy-generation matrix is recorded only as an additional
+  residual-selector ansatz.  No `Y_d` is derived.
+- The new YM/frontier receipt records the checked `X_0(49)` Hecke table
+  `a_2=1`, `a_3=0`, `a_5=0`, `a_7=0`, `a_11=4`, `a_13=0`,
+  `a_17=0`, `a_19=0`; because the usual cusp space is one-dimensional, no
+  intrinsic multi-eigenvalue Hecke gap is computed.  The weave receipt is
+  origin vocabulary only and carries no theorem promotion.
+- The adelic literature verdict is negative: the checked p-adic AdS/CFT and
+  p-adic PDE sources do not provide the cross-place Sobolev domination theorem
+  required by `NSAdelicTransferTheoremCandidate`.
 
 - Added and wired the Paper 6 frontier receipts
   `NSCarrierKolmogorovSerrinReceipt`, `NSViscousTailDominanceReceipt`,
