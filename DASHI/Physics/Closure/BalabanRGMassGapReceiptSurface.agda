@@ -78,6 +78,12 @@ data BalabanRGMassGapOpenObligation : Set where
   missingPeerReviewOrClayAcceptance :
     BalabanRGMassGapOpenObligation
 
+  missingKPUniformVolumeInductionBound :
+    BalabanRGMassGapOpenObligation
+
+  missingUltrametricLargeSmallFieldSplit :
+    BalabanRGMassGapOpenObligation
+
   missingLocalKernelImport :
     BalabanRGMassGapOpenObligation
 
@@ -94,6 +100,8 @@ canonicalBalabanRGMassGapOpenObligations :
   List BalabanRGMassGapOpenObligation
 canonicalBalabanRGMassGapOpenObligations =
   missingPeerReviewOrClayAcceptance
+  ∷ missingKPUniformVolumeInductionBound
+  ∷ missingUltrametricLargeSmallFieldSplit
   ∷ missingLocalKernelImport
   ∷ missingDASHIWilsonPlaquetteBinding
   ∷ missingOSReconstructionAuthority
@@ -2771,6 +2779,22 @@ record BalabanMasterInductionIntake : Setω where
       ≡
       "H-k-implies-H-suc-k-volume-independent-large-field-small-field-counterterm-bounds"
 
+    kpUniformVolumeObligation :
+      String
+
+    kpUniformVolumeObligation-v :
+      kpUniformVolumeObligation
+      ≡
+      "KP-uniform-volume-obligation-for-H-k-to-H-suc-k-induction"
+
+    largeSmallFieldSplitObligation :
+      String
+
+    largeSmallFieldSplitObligation-v :
+      largeSmallFieldSplitObligation
+      ≡
+      "ultrametric-large-small-field-split-with-volume-independent-tail-and-small-field-bounds"
+
     asymptoticFreedomBoundary :
       String
 
@@ -2784,6 +2808,24 @@ record BalabanMasterInductionIntake : Setω where
 
     locallyVerifiedHereIsFalse :
       locallyVerifiedHere ≡ false
+
+    competitiveYMContributionTarget :
+      Bool
+
+    competitiveYMContributionTargetIsTrue :
+      competitiveYMContributionTarget ≡ true
+
+    kpUniformVolumeSolvedHere :
+      Bool
+
+    kpUniformVolumeSolvedHereIsFalse :
+      kpUniformVolumeSolvedHere ≡ false
+
+    ultrametricLargeSmallFieldSplitSolvedHere :
+      Bool
+
+    ultrametricLargeSmallFieldSplitSolvedHereIsFalse :
+      ultrametricLargeSmallFieldSplitSolvedHere ≡ false
 
 open BalabanMasterInductionIntake public
 
@@ -2803,6 +2845,14 @@ canonicalBalabanMasterInductionIntake =
         "H-k-implies-H-suc-k-volume-independent-large-field-small-field-counterterm-bounds"
     ; masterInductionShape-v =
         refl
+    ; kpUniformVolumeObligation =
+        "KP-uniform-volume-obligation-for-H-k-to-H-suc-k-induction"
+    ; kpUniformVolumeObligation-v =
+        refl
+    ; largeSmallFieldSplitObligation =
+        "ultrametric-large-small-field-split-with-volume-independent-tail-and-small-field-bounds"
+    ; largeSmallFieldSplitObligation-v =
+        refl
     ; asymptoticFreedomBoundary =
         "four-dimensional-control-is-by-asymptotic-freedom-not-a-decaying-superrenormalisable-coupling"
     ; asymptoticFreedomBoundary-v =
@@ -2810,6 +2860,18 @@ canonicalBalabanMasterInductionIntake =
     ; locallyVerifiedHere =
         false
     ; locallyVerifiedHereIsFalse =
+        refl
+    ; competitiveYMContributionTarget =
+        true
+    ; competitiveYMContributionTargetIsTrue =
+        refl
+    ; kpUniformVolumeSolvedHere =
+        false
+    ; kpUniformVolumeSolvedHereIsFalse =
+        refl
+    ; ultrametricLargeSmallFieldSplitSolvedHere =
+        false
+    ; ultrametricLargeSmallFieldSplitSolvedHereIsFalse =
         refl
     }
 

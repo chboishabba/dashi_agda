@@ -8,17 +8,19 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
+import DASHI.Physics.Closure.NSToEV5ProjectionFrontierReceipt as EV5
+
 ------------------------------------------------------------------------
 -- H^{11/8} global regularity candidate for carrier-structured data.
 --
 -- This receipt records the A2 candidate theorem surface only.  The six
--- proof-sketch steps are present as data, the status is candidate theorem,
--- and the only named remaining gap is uniqueness/stability of the limit.
--- It deliberately makes no Clay, arbitrary-data, global-terminal, or
--- terminal-promotion claim.
+-- proof-sketch steps are present as data, but the status is fail-closed:
+-- any Clay-adjacent use is conditional on NS modes projecting into
+-- FRACTRAN-admissible EV5 with forward simulation.  It deliberately makes no
+-- Clay, arbitrary-data, global-terminal, or terminal-promotion claim.
 
 data NSH118TheoremStatus : Set where
-  candidateTheorem :
+  failClosedConditionalOnNSToEV5ForwardSimulation :
     NSH118TheoremStatus
 
 data NSH118ProofSketchStep : Set where
@@ -55,10 +57,30 @@ data NSH118RemainingGap : Set where
   uniquenessStabilityOfLimit :
     NSH118RemainingGap
 
+  nsModesProjectIntoFractranAdmissibleEV5 :
+    NSH118RemainingGap
+
+  nsToEV5ForwardSimulation :
+    NSH118RemainingGap
+
+  nsToEV5QuotientCorrectness :
+    NSH118RemainingGap
+
+  nsToEV5LyapunovPreservation :
+    NSH118RemainingGap
+
+  nsToEV5UltrametricPreservation :
+    NSH118RemainingGap
+
 canonicalNSH118RemainingGaps :
   List NSH118RemainingGap
 canonicalNSH118RemainingGaps =
   uniquenessStabilityOfLimit
+  ∷ nsModesProjectIntoFractranAdmissibleEV5
+  ∷ nsToEV5ForwardSimulation
+  ∷ nsToEV5QuotientCorrectness
+  ∷ nsToEV5LyapunovPreservation
+  ∷ nsToEV5UltrametricPreservation
   ∷ []
 
 data NSH118GlobalRegularityPromotion : Set where
@@ -70,7 +92,7 @@ nsH118GlobalRegularityPromotionImpossibleHere ()
 
 nsH118GlobalRegularityStatement : String
 nsH118GlobalRegularityStatement =
-  "Candidate theorem: for carrier-structured initial data in H^{11/8}, the six-step route records carrier-structured H^{11/8} data, finite-depth smooth carrier approximants, a uniform H^{11/8} a-priori bound, compactness and limit extraction, nonlinear passage to the limit, and inheritance of global H^{11/8} regularity by the limit.  The remaining gap is uniqueness/stability of the limit.  This is not a Clay Navier-Stokes proof, not an arbitrary-data theorem, and not a global terminal promotion."
+  "Fail-closed conditional candidate: for carrier-structured initial data in H^{11/8}, the six-step route records carrier-structured H^{11/8} data, finite-depth smooth carrier approximants, a uniform H^{11/8} a-priori bound, compactness and limit extraction, nonlinear passage to the limit, and inheritance of global H^{11/8} regularity by the limit. DASHI may support conditional NS regularity only if NS modes project into FRACTRAN-admissible EV5 with forward simulation. Open obligations are uniqueness/stability of the limit, NS-to-EV5 forward simulation, quotient correctness, Lyapunov preservation, and ultrametric preservation. This is not a Clay Navier-Stokes proof, not an arbitrary-data theorem, and not a global terminal promotion."
 
 record NSH118GlobalRegularityReceipt : Setω where
   field
@@ -78,7 +100,27 @@ record NSH118GlobalRegularityReceipt : Setω where
       NSH118TheoremStatus
 
     statusIsCandidateTheorem :
-      status ≡ candidateTheorem
+      status ≡ failClosedConditionalOnNSToEV5ForwardSimulation
+
+    nsToEV5FrontierReceipt :
+      EV5.NSToEV5ProjectionFrontierReceipt
+
+    nsToEV5FailClosed :
+      EV5.failClosedConditionalBoundary nsToEV5FrontierReceipt ≡ true
+
+    nsToEV5ForwardSimulationOpen :
+      EV5.forwardSimulationProvedHere nsToEV5FrontierReceipt ≡ false
+
+    nsToEV5QuotientCorrectnessOpen :
+      EV5.quotientCorrectnessProvedHere nsToEV5FrontierReceipt ≡ false
+
+    nsToEV5LyapunovPreservationOpen :
+      EV5.lyapunovPreservationAgainstKStarNuProvedHere nsToEV5FrontierReceipt
+      ≡
+      false
+
+    nsToEV5UltrametricPreservationOpen :
+      EV5.ultrametricPreservationProvedHere nsToEV5FrontierReceipt ≡ false
 
     carrierStructuredInitialData :
       Bool
@@ -162,7 +204,7 @@ record NSH118GlobalRegularityReceipt : Setω where
       NSH118TheoremStatus
 
     nsRegularityAt11/8IsCandidateTheorem :
-      nsRegularityAt11/8 ≡ candidateTheorem
+      nsRegularityAt11/8 ≡ failClosedConditionalOnNSToEV5ForwardSimulation
 
     arbitraryDataTheoremPromoted :
       Bool
@@ -216,8 +258,20 @@ canonicalNSH118GlobalRegularityReceipt :
 canonicalNSH118GlobalRegularityReceipt =
   record
     { status =
-        candidateTheorem
+        failClosedConditionalOnNSToEV5ForwardSimulation
     ; statusIsCandidateTheorem =
+        refl
+    ; nsToEV5FrontierReceipt =
+        EV5.canonicalNSToEV5ProjectionFrontierReceipt
+    ; nsToEV5FailClosed =
+        refl
+    ; nsToEV5ForwardSimulationOpen =
+        refl
+    ; nsToEV5QuotientCorrectnessOpen =
+        refl
+    ; nsToEV5LyapunovPreservationOpen =
+        refl
+    ; nsToEV5UltrametricPreservationOpen =
         refl
     ; carrierStructuredInitialData =
         true
@@ -272,7 +326,7 @@ canonicalNSH118GlobalRegularityReceipt =
     ; uniquenessStabilityOfLimitRemainingGapIsTrue =
         refl
     ; nsRegularityAt11/8 =
-        candidateTheorem
+        failClosedConditionalOnNSToEV5ForwardSimulation
     ; nsRegularityAt11/8IsCandidateTheorem =
         refl
     ; arbitraryDataTheoremPromoted =
@@ -304,11 +358,15 @@ canonicalNSH118GlobalRegularityReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "status = candidate theorem"
-        ∷ "nsRegularityAt11/8 = candidate theorem"
+        "status = fail-closed conditional candidate"
+        ∷ "nsRegularityAt11/8 is conditional on NS modes projecting into FRACTRAN-admissible EV5 with forward simulation"
         ∷ "carrier-structured initial data in H^{11/8} only"
         ∷ "six proof-sketch steps are recorded"
-        ∷ "remaining gap = uniqueness/stability of limit"
+        ∷ "open obligation: forward simulation"
+        ∷ "open obligation: quotient correctness"
+        ∷ "open obligation: Lyapunov preservation"
+        ∷ "open obligation: ultrametric preservation"
+        ∷ "remaining analytic gap: uniqueness/stability of limit"
         ∷ "No Clay Navier-Stokes promotion is made"
         ∷ "No global terminal promotion is made"
         ∷ []
@@ -317,7 +375,7 @@ canonicalNSH118GlobalRegularityReceipt =
 canonicalNSRegularityAt11/8IsCandidateTheorem :
   nsRegularityAt11/8 canonicalNSH118GlobalRegularityReceipt
   ≡
-  candidateTheorem
+  failClosedConditionalOnNSToEV5ForwardSimulation
 canonicalNSRegularityAt11/8IsCandidateTheorem =
   refl
 

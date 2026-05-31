@@ -6,6 +6,54 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Worker 3 Gate 3/YM spectral bridge update for `2026-06-01`: added an
+  explicit Feshbach-Schur fiber-gap boundary.  `Gate3NormDictionary` now
+  records that a carrier-fiber spectral gap is evidence only; a full
+  tensor-product Hamiltonian gap requires Gate 3 density of the carrier core,
+  Feshbach projection data, Schur-complement control, off-diagonal relative
+  bounds, and tensor-domain compatibility.  Added
+  `YMFeshbachSchurFiberGapBridgeReceipt` and tightened the finite Z/7 product
+  spectrum wording so it cannot be read as a Clay or full tensor-product gap.
+  No Clay, terminal, continuum YM, or unconditional mass-gap claim is solved.
+
+- Worker 2 carrier-level OS3/YM boundary update for `2026-06-01`: updated the
+  L5 gauge-sector OS receipt and downstream YM final-state receipts to split
+  reflection positivity into four non-confusable surfaces: finite
+  ungauge-fixed Wilson-loop positivity, BRST gauge-fixed positive-Hilbert
+  obstruction, ghost time-reflection graded-sign boundary, and carrier-only
+  Gribov representative boundary.  The update keeps continuum OS3,
+  continuum/infinite-volume reflection positivity, Wightman reconstruction,
+  Clay YM, and terminal promotion false.
+
+- Worker 5 corrected YM competitive-path governance for `2026-06-01`: updated
+  the Clay YM roadmap/status surfaces to make the live competitive route
+  explicit as three hard problems: Balaban volume-independent induction,
+  BRST reflection positivity, and an operator-valued continuum spectral gap.
+  The dependency graph is Balaban induction -> BRST/OS positivity ->
+  physical operator spectral gap -> Clay YM existence/mass gap.  The update
+  also explicitly rejects the invalid inference "`14 < 15`; therefore
+  Yang-Mills mass gap": pressure-below-15 remains a bounded carrier diagnostic,
+  not a continuum theorem.  Documentation/governance only; no stubs, Agda
+  receipts, Clay promotion, Wightman promotion, Standard Model promotion, or
+  terminal/unification promotion were introduced.
+
+- Worker 2 Gate 3 finite-boundary audit for `2026-06-01`: updated
+  `DASHI.Physics.Closure.Gate3NormDictionary` so the finite limit-71
+  inequality surface has a concrete reachability witness: the zero-exponent
+  `FactorVec` at cutoff `0` checks true.  The update is deliberately bounded
+  to the finite 15-SSP carrier surface.  Schwartz-Bruhat spaces, the adelic
+  Sobolev comparison, adelic Plancherel, full Gate 3 closure, Clay, physics,
+  and unification remain unpromoted.
+
+- Worker 6 Clay-proximity governance snapshot for `2026-06-01`: updated only
+  the root governance/status surfaces to record the live Clay-proximate order:
+  (1) `NS->EV5` forward simulation, (2) Gate3 finite adelic inequality,
+  (3) Gate4 Hecke envelope, and (4) YM continuum external.  `dashiRTX`,
+  Moonshine, and CKM are explicitly not Clay-proximate in the current state.
+  This is documentation-only: no Agda files, stubs, code receipts, commit/tag
+  actions, Clay promotions, CKM promotions, Moonshine promotions, `dashiRTX`
+  promotions, or unification promotions were introduced.
+
 - Worker 5 governance-only follow-up for `2026-06-01`: updated the owned docs
   to record `LightCodecTransportCorrespondenceTheorem` as theorem-binding /
   correspondence plumbing only, finite FactorVec inequalities as selected

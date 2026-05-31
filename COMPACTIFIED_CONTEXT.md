@@ -2,6 +2,16 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-01 Worker 6 Clay-proximity governance snapshot: the live
+  Clay-proximate order is (1) `NS->EV5` forward simulation, (2) Gate3 finite
+  adelic inequality, (3) Gate4 Hecke envelope, and (4) YM continuum external.
+  `dashiRTX`, Moonshine, and CKM are not Clay-proximate in the current state
+  and must not be treated as Clay blockers, Clay evidence, or promotion
+  routes.  This update touched only `status.md`, `TODO.md`, `devlog.md`,
+  `CHANGELOG.md`, and `COMPACTIFIED_CONTEXT.md`; it added no stubs, code
+  receipts, Agda edits, commit/tag actions, or Clay/CKM/Moonshine/`dashiRTX`
+  promotions.
+
 - 2026-06-01 Worker 5 governance-only follow-up: the current tranche now
   explicitly records `LightCodecTransportCorrespondenceTheorem` as binding /
   correspondence plumbing only; finite FactorVec inequalities as selected
@@ -5282,3 +5292,14 @@ Cleanup state:
   promoted because Gate 1 still blocks on filtered-colimit preservation and
   DHR-sector compatibility, and Gate 2 still blocks on the global real
   Yang-Mills spectral-gap carrier theorem.
+- 2026-06-01 Worker 5 corrected YM competitive path governance:
+  Clay Yang-Mills is now governed in the docs by three hard problems:
+  Balaban volume-independent induction, BRST reflection positivity, and an
+  operator-valued physical spectral gap, with dependency graph
+  Balaban induction -> BRST/OS positivity -> operator spectral gap -> Clay YM.
+  The pressure-below-15 fact `14 < 15` is explicitly rejected as a mass-gap
+  proof; it is only a bounded carrier diagnostic and supplies no continuum
+  construction, BRST/OS positivity, Wightman reconstruction, operator
+  convergence, or physical spectrum identification.  Governance-only update;
+  no Agda receipts, stubs, Clay promotion, Wightman promotion, Standard Model
+  promotion, or terminal promotion.

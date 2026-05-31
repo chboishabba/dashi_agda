@@ -1,3 +1,19 @@
+# 2026-06-01 Worker 6 Clay proximity governance snapshot
+
+- Governance-only status update across the owned root docs.  Recorded the
+  current Clay-proximity ranking as:
+  (1) `NS->EV5` forward simulation, (2) Gate3 finite adelic inequality,
+  (3) Gate4 Hecke envelope, and (4) YM continuum external.
+- Clarified that `dashiRTX`, Moonshine, and CKM are not Clay-proximate in the
+  current state.  They remain outside the Clay blocker/evidence ordering even
+  when they are useful as diagnostics, structural support, or separate
+  arithmetic lanes.
+- Boundaries preserved: `NS->EV5` remains an actual-flow comparison target,
+  Gate3 remains a finite adelic inequality obligation, Gate4 remains a Hecke
+  envelope boundary, and YM continuum remains external.  No Agda/code files,
+  stubs, code receipts, Clay promotions, CKM promotions, Moonshine promotions,
+  `dashiRTX` promotions, or commit/tag actions were introduced.
+
 # 2026-06-01 new tranche governance sync
 
 - Worker 5 governance-only follow-up across the owned docs.  Added the current

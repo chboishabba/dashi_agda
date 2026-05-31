@@ -60,7 +60,7 @@ massGapErrorLabel =
 
 yml7L8MassGapInhabitedStatement : String
 yml7L8MassGapInhabitedStatement =
-  "YM L7/L8 mass-gap survival target is recorded as conditionalOnL6, with physicalMassGapFromDimensionalTransmutation = 1.59 GeV carrier estimate, glueballMassPDG = 1.72 GeV, and error = 7.5pct; the local L3 receipt remains uninhabited and Clay/terminal promotions remain false."
+  "YM L7/L8 mass-gap survival target is recorded as conditionalOnL6 and finite-carrier evidence only, with physicalMassGapFromDimensionalTransmutation = 1.59 GeV carrier estimate, glueballMassPDG = 1.72 GeV, and error = 7.5pct; the local L3 receipt remains uninhabited, no operator/infinite-volume convergence is proved, and Clay/terminal promotions remain false."
 
 record YML7L8MassGapInhabitedReceipt : Setω where
   field
@@ -249,7 +249,9 @@ canonicalYML7L8MassGapInhabitedReceipt =
         ∷ "physicalMassGapFromDimensionalTransmutation = 1.59 GeV carrier estimate"
         ∷ "glueballMassPDG = 1.72 GeV"
         ∷ "error = 7.5pct"
+        ∷ "Finite carrier spectral gaps and mass-scale diagnostics are evidence only"
         ∷ "status remains candidate because L3 tightness is uninhabited"
+        ∷ "No infinite-volume limit or operator/Hamiltonian convergence theorem is proved"
         ∷ "Clay and terminal promotions remain false"
         ∷ []
     }

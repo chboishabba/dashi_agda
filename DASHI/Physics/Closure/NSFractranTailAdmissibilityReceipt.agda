@@ -25,7 +25,10 @@ import DASHI.Combinatorics.FractranCOL as FractranCOL
 -- Boundary:
 -- The NS-to-EV5 projection and continuous Navier-Stokes flow transfer remain
 -- open.  This receipt does not prove Navier-Stokes regularity and does not
--- promote a Clay theorem.
+-- promote a Clay theorem.  The latest boundary is fail-closed: conditional NS
+-- regularity requires projection into FRACTRAN-admissible EV5 with forward
+-- simulation, quotient correctness, Lyapunov preservation, and ultrametric
+-- preservation.
 
 data NSFractranTailAdmissibilityStatus : Set where
   carrierSideReceipt_only_missingNSProjectionAndFlowTransfer :
@@ -65,18 +68,26 @@ data OpenTransferObligation : Set where
   defineNSToEV5CarrierProjection :
     OpenTransferObligation
 
-  proveProjectionPreservesCascadeModes :
+  proveNSToEV5ForwardSimulation :
     OpenTransferObligation
 
-  transferContinuousNSFlowToFractranTailStep :
+  proveNSToEV5QuotientCorrectness :
+    OpenTransferObligation
+
+  proveNSToEV5LyapunovPreservation :
+    OpenTransferObligation
+
+  proveNSToEV5UltrametricPreservation :
     OpenTransferObligation
 
 canonicalOpenTransferObligations :
   List OpenTransferObligation
 canonicalOpenTransferObligations =
   defineNSToEV5CarrierProjection
-  ∷ proveProjectionPreservesCascadeModes
-  ∷ transferContinuousNSFlowToFractranTailStep
+  ∷ proveNSToEV5ForwardSimulation
+  ∷ proveNSToEV5QuotientCorrectness
+  ∷ proveNSToEV5LyapunovPreservation
+  ∷ proveNSToEV5UltrametricPreservation
   ∷ []
 
 data PromotionToken : Set where
@@ -114,7 +125,7 @@ sharpenedGate2ConditionStatement =
 openBoundaryStatement :
   String
 openBoundaryStatement =
-  "Open boundary: the NS-to-EV5 projection and continuous Navier-Stokes flow transfer remain unproved, so this receipt does not prove Navier-Stokes regularity."
+  "Fail-closed open boundary: conditional NS regularity requires NS modes to project into FRACTRAN-admissible EV5 with forward simulation. Exact open obligations are forward simulation, quotient correctness, Lyapunov preservation, and ultrametric preservation, so this receipt does not prove Navier-Stokes regularity."
 
 record NSFractranTailAdmissibilityReceipt : Set₁ where
   field
@@ -196,6 +207,18 @@ record NSFractranTailAdmissibilityReceipt : Set₁ where
     openTransferObligationsAreCanonical :
       openTransferObligations ≡ canonicalOpenTransferObligations
 
+    failClosedBoundary :
+      Bool
+
+    failClosedBoundaryIsTrue :
+      failClosedBoundary ≡ true
+
+    conditionalNSRegularityRequiresForwardSimulation :
+      Bool
+
+    conditionalNSRegularityRequiresForwardSimulationIsTrue :
+      conditionalNSRegularityRequiresForwardSimulation ≡ true
+
     nsToEV5ProjectionProvedHere :
       Bool
 
@@ -207,6 +230,24 @@ record NSFractranTailAdmissibilityReceipt : Set₁ where
 
     continuousNSFlowTransferProvedHereIsFalse :
       continuousNSFlowTransferProvedHere ≡ false
+
+    quotientCorrectnessProvedHere :
+      Bool
+
+    quotientCorrectnessProvedHereIsFalse :
+      quotientCorrectnessProvedHere ≡ false
+
+    lyapunovPreservationProvedHere :
+      Bool
+
+    lyapunovPreservationProvedHereIsFalse :
+      lyapunovPreservationProvedHere ≡ false
+
+    ultrametricPreservationProvedHere :
+      Bool
+
+    ultrametricPreservationProvedHereIsFalse :
+      ultrametricPreservationProvedHere ≡ false
 
     nsRegularityProvedHere :
       Bool
@@ -310,6 +351,14 @@ canonicalNSFractranTailAdmissibilityReceipt =
         canonicalOpenTransferObligations
     ; openTransferObligationsAreCanonical =
         refl
+    ; failClosedBoundary =
+        true
+    ; failClosedBoundaryIsTrue =
+        refl
+    ; conditionalNSRegularityRequiresForwardSimulation =
+        true
+    ; conditionalNSRegularityRequiresForwardSimulationIsTrue =
+        refl
     ; nsToEV5ProjectionProvedHere =
         false
     ; nsToEV5ProjectionProvedHereIsFalse =
@@ -317,6 +366,18 @@ canonicalNSFractranTailAdmissibilityReceipt =
     ; continuousNSFlowTransferProvedHere =
         false
     ; continuousNSFlowTransferProvedHereIsFalse =
+        refl
+    ; quotientCorrectnessProvedHere =
+        false
+    ; quotientCorrectnessProvedHereIsFalse =
+        refl
+    ; lyapunovPreservationProvedHere =
+        false
+    ; lyapunovPreservationProvedHereIsFalse =
+        refl
+    ; ultrametricPreservationProvedHere =
+        false
+    ; ultrametricPreservationProvedHereIsFalse =
         refl
     ; nsRegularityProvedHere =
         false

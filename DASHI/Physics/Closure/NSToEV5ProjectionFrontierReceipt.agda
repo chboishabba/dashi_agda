@@ -25,12 +25,15 @@ import DASHI.Combinatorics.FractranCOL as FractranCOL
 -- proof obligations: forward simulation, quotient correctness, Lyapunov
 -- preservation against K*(nu), and ultrametric preservation.
 --
--- This file closes only the carrier-side EV5/FractranCOL shape.  It does not
--- prove an NS transfer theorem, does not prove Navier-Stokes regularity, and
+-- This file closes only the carrier-side EV5/FractranCOL shape.  The latest
+-- Clay-adjacent boundary is conditional and fail-closed: DASHI may support an
+-- NS regularity theorem only if NS modes project into FRACTRAN-admissible EV5
+-- and the projection carries a forward simulation.  This receipt does not
+-- prove that transfer theorem, does not prove Navier-Stokes regularity, and
 -- does not promote any Clay target.
 
 data NSToEV5ProjectionFrontierStatus : Set where
-  frontierChecklistRecorded_carrierShapeOnly :
+  failClosedConditionalBoundary_carrierShapeOnly :
     NSToEV5ProjectionFrontierStatus
 
 data SourceSemantics : Set where
@@ -242,7 +245,7 @@ decodeCandidateStatement =
 frontierBoundaryStatement :
   String
 frontierBoundaryStatement =
-  "Frontier receipt only: carrier-side EV5/FractranCOL shape and NS lane semantics are recorded; forward simulation, quotient correctness, Lyapunov preservation against K*(nu), and ultrametric preservation remain open; no NS theorem or Clay promotion is made."
+  "Fail-closed conditional frontier: carrier-side EV5/FractranCOL shape and NS lane semantics are recorded; DASHI may support conditional NS regularity only if NS modes project into FRACTRAN-admissible EV5 with forward simulation. Open obligations are exactly forward simulation, quotient correctness, Lyapunov preservation against K*(nu), and ultrametric preservation. No unconditional NS theorem or Clay promotion is made."
 
 terminationEnergyStatement :
   String
@@ -260,7 +263,7 @@ record NSToEV5ProjectionFrontierReceipt : Set₁ where
       NSToEV5ProjectionFrontierStatus
 
     statusIsCarrierShapeOnly :
-      status ≡ frontierChecklistRecorded_carrierShapeOnly
+      status ≡ failClosedConditionalBoundary_carrierShapeOnly
 
     sourceSemantics :
       SourceSemantics
@@ -348,6 +351,18 @@ record NSToEV5ProjectionFrontierReceipt : Set₁ where
     carrierSideEV5FractranCOLShapeClosedIsTrue :
       carrierSideEV5FractranCOLShapeClosed ≡ true
 
+    failClosedConditionalBoundary :
+      Bool
+
+    failClosedConditionalBoundaryIsTrue :
+      failClosedConditionalBoundary ≡ true
+
+    conditionalNSRegularityRequiresFractranAdmissibleEV5 :
+      Bool
+
+    conditionalNSRegularityRequiresFractranAdmissibleEV5IsTrue :
+      conditionalNSRegularityRequiresFractranAdmissibleEV5 ≡ true
+
     encodeItems :
       List ProjectionEncodeItem
 
@@ -372,6 +387,12 @@ record NSToEV5ProjectionFrontierReceipt : Set₁ where
     forwardSimulationProvedHereIsFalse :
       forwardSimulationProvedHere ≡ false
 
+    nsModesProjectIntoFractranAdmissibleEV5ProvedHere :
+      Bool
+
+    nsModesProjectIntoFractranAdmissibleEV5ProvedHereIsFalse :
+      nsModesProjectIntoFractranAdmissibleEV5ProvedHere ≡ false
+
     quotientCorrectnessProvedHere :
       Bool
 
@@ -395,6 +416,12 @@ record NSToEV5ProjectionFrontierReceipt : Set₁ where
 
     nsProjectionTheoremProvedHereIsFalse :
       nsProjectionTheoremProvedHere ≡ false
+
+    unconditionalNSRegularityClaimedHere :
+      Bool
+
+    unconditionalNSRegularityClaimedHereIsFalse :
+      unconditionalNSRegularityClaimedHere ≡ false
 
     clayNavierStokesPromoted :
       Bool
@@ -457,7 +484,7 @@ canonicalNSToEV5ProjectionFrontierReceipt :
 canonicalNSToEV5ProjectionFrontierReceipt =
   record
     { status =
-        frontierChecklistRecorded_carrierShapeOnly
+        failClosedConditionalBoundary_carrierShapeOnly
     ; statusIsCarrierShapeOnly =
         refl
     ; sourceSemantics =
@@ -516,6 +543,14 @@ canonicalNSToEV5ProjectionFrontierReceipt =
         true
     ; carrierSideEV5FractranCOLShapeClosedIsTrue =
         refl
+    ; failClosedConditionalBoundary =
+        true
+    ; failClosedConditionalBoundaryIsTrue =
+        refl
+    ; conditionalNSRegularityRequiresFractranAdmissibleEV5 =
+        true
+    ; conditionalNSRegularityRequiresFractranAdmissibleEV5IsTrue =
+        refl
     ; encodeItems =
         canonicalProjectionEncodeItems
     ; encodeItemsAreCanonical =
@@ -532,6 +567,10 @@ canonicalNSToEV5ProjectionFrontierReceipt =
         false
     ; forwardSimulationProvedHereIsFalse =
         refl
+    ; nsModesProjectIntoFractranAdmissibleEV5ProvedHere =
+        false
+    ; nsModesProjectIntoFractranAdmissibleEV5ProvedHereIsFalse =
+        refl
     ; quotientCorrectnessProvedHere =
         false
     ; quotientCorrectnessProvedHereIsFalse =
@@ -547,6 +586,10 @@ canonicalNSToEV5ProjectionFrontierReceipt =
     ; nsProjectionTheoremProvedHere =
         false
     ; nsProjectionTheoremProvedHereIsFalse =
+        refl
+    ; unconditionalNSRegularityClaimedHere =
+        false
+    ; unconditionalNSRegularityClaimedHereIsFalse =
         refl
     ; clayNavierStokesPromoted =
         false

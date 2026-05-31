@@ -1,5 +1,89 @@
+# 2026-06-01 Worker 2 carrier-level YM OS3 boundary
+
+- Updated the L5 gauge-sector OS receipt to separate OS3/reflection positivity
+  into carrier-level cases.  The only positive branch is finite ungauge-fixed
+  Wilson-loop reflection positivity inherited from the Wilson lattice receipt.
+  BRST/Faddeev-Popov gauge-fixed fields remain blocked as positive-Hilbert OS3
+  input by the indefinite/Krein sector, ghost time reflection is behind a
+  graded sign/involution boundary, and the Gribov-free carrier receipt is only
+  a local FactorVec representative boundary.
+- Threaded that split into the YM final-state and Clay final-state blockers.
+  Continuum OS3, continuum/infinite-volume reflection positivity, Wightman
+  reconstruction, Clay YM, and terminal/unification promotion remain false.
+
+# 2026-06-01 Worker 5 corrected YM competitive path governance
+
+- Updated the Clay YM governance boundary to the corrected competitive path:
+  the live hard problems are (1) Balaban volume-independent induction,
+  (2) BRST reflection positivity, and (3) an operator-valued physical spectral
+  gap.  They form a dependency chain, not three interchangeable slogans:
+  volume-independent constructive control must feed the BRST/OS positivity
+  object, which must feed the continuum operator/Hamiltonian spectral theorem.
+- Explicitly rejected the overclaim "`14 < 15`; therefore Yang-Mills mass
+  gap."  The pressure-below-15 surfaces record a bounded carrier diagnostic
+  only.  They do not construct a continuum Yang-Mills measure, a physical
+  Hilbert space, BRST/OS positivity, operator convergence, or a Clay
+  mass-gap theorem.
+- Governance-only update.  No stubs, Agda receipts, Clay promotion,
+  Wightman promotion, Standard Model promotion, or terminal/unification
+  promotion were introduced.
+
+# 2026-06-01 Worker 4 Balaban/KP/ultrametric YM obligation update
+
+- Added the concrete Balaban/RG induction gap to the YM roadmap and receipts:
+  the KP/uniform-volume polymer local-sum bound, volume-independent
+  large/small field and counterterm control, and cutoff/depth-stable
+  `H_k -> H_{k+1}` induction are the competitive YM contribution target.
+- Recorded the ultrametric split honestly: the small-field sector is only the
+  finite carrier ultrametric ball controlled by existing finite Wilson and
+  strong-coupling estimates; the large-field sector still needs a uniform
+  tail-suppression theorem before it can feed Balaban induction.
+- This update marks those obligations as open, not solved.  No Clay YM,
+  continuum YM, Wightman, OS, or terminal promotion follows.
+
+# 2026-06-01 Worker 3 YM Clay boundary audit
+
+- Audited the YM Clay-facing docs/receipt surfaces and tightened the
+  non-promotion boundary: finite carrier spectral gaps, transfer-matrix gaps,
+  carrier string-tension diagnostics, and finite strong-coupling estimates are
+  evidence only.  They do not prove the Clay Mathematics Institute continuum
+  Yang-Mills existence and mass-gap problem.
+- Clay YM still requires a continuum Yang-Mills construction, the
+  Osterwalder-Schrader axioms for the continuum gauge theory, reflection
+  positivity at the continuum/infinite-volume object, an infinite-volume
+  limit, and operator/Hamiltonian convergence identifying a positive physical
+  mass gap.  None of those obligations is proved or promoted here.
+- No stubs, no Clay promotion, and no terminal/unification promotion were
+  introduced.
+
+# 2026-06-01 Worker 6 Clay proximity governance snapshot
+
+- Current Clay-proximity ranking is now recorded as:
+  (1) `NS->EV5` forward simulation, (2) Gate3 finite adelic inequality,
+  (3) Gate4 Hecke envelope, and (4) YM continuum external.
+- Scope boundary: `dashiRTX`, Moonshine, and CKM are not Clay-proximate in the
+  current programme state.  They may remain useful as diagnostics,
+  arithmetic/structural context, or separate exposition lanes, but they must
+  not be treated as Clay-adjacent blockers or evidence.
+- Fail-closed interpretation: `NS->EV5` is the nearest Clay-facing lane only
+  as a forward-simulation / actual-flow comparison target; Gate3 remains a
+  finite adelic inequality obligation; Gate4 remains a Hecke-envelope
+  boundary; YM still requires the external continuum bridge.  No Clay NS,
+  Clay YM, CKM, Moonshine, `dashiRTX`, ontology, physics, or unification
+  promotion follows from this governance update.
+- Governance-only update across `status.md`, `TODO.md`, `devlog.md`,
+  `CHANGELOG.md`, and `COMPACTIFIED_CONTEXT.md`.  No stubs, Agda edits, code
+  receipts, or commit/tag actions were introduced.
+
 # 2026-06-01 new tranche governance sync
 
+- Worker 2 Gate 3 finite-inequality boundary audit updated
+  `Gate3NormDictionary`: the finite limit-71 inequality surface is now
+  explicitly reachable by the zero-exponent `FactorVec` at cutoff `0`.  This
+  is only a bounded finite-carrier witness over the selected 15-SSP set.  The
+  full Schwartz-Bruhat test-function space, adelic Sobolev comparison, and
+  adelic Plancherel bridge remain open and externally hard; no Gate 3, Clay,
+  physics, or unification promotion follows.
 - Worker 5 governance-only follow-up recorded the tranche boundaries for
   `LightCodecTransportCorrespondenceTheorem`, finite FactorVec inequality
   scope, and the `NS->EV5` / `dashiCFD` lane.  The LightCodecTransport work is

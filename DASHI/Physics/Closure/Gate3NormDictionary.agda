@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
-open import Data.Nat.Base using (ℕ; _+_; _*_; _^_; _≤ᵇ_)
+open import Data.Nat.Base using (ℕ; _+_; _*_; _^_; _∸_; _≤ᵇ_)
 
 open import MonsterOntos using
   ( SSP
@@ -284,6 +284,24 @@ boundedModelLimit71InequalitySurface v cutoff =
   && (finiteSSPPrimePowerSum v ≤ᵇ finiteSSPPrimePowerSumLimit71Bound cutoff)
   && (finiteSSPPrimePowerProduct v ≤ᵇ finiteSSPPrimePowerProductLimit71Bound cutoff)
 
+canonicalLimit71ReachableFactorVec :
+  GL.FactorVec
+canonicalLimit71ReachableFactorVec =
+  MP.canonicalVec15PAdicCarrierExponentSkeleton
+
+canonicalLimit71ReachableCutoff :
+  ℕ
+canonicalLimit71ReachableCutoff =
+  0
+
+canonicalLimit71InequalityReachable :
+  boundedModelLimit71InequalitySurface
+    canonicalLimit71ReachableFactorVec
+    canonicalLimit71ReachableCutoff
+  ≡ true
+canonicalLimit71InequalityReachable =
+  refl
+
 sigBit :
   SSP →
   HScan.Sig15 →
@@ -338,20 +356,20 @@ sigAdmissibility σ v cutoff =
 partialZetaDenominator :
   ℕ
 partialZetaDenominator =
+  ((toNat p2  ^ two) ∸ one) * ((toNat p3  ^ two) ∸ one) * ((toNat p5  ^ two) ∸ one) *
+  ((toNat p7  ^ two) ∸ one) * ((toNat p11 ^ two) ∸ one) * ((toNat p13 ^ two) ∸ one) *
+  ((toNat p17 ^ two) ∸ one) * ((toNat p19 ^ two) ∸ one) * ((toNat p23 ^ two) ∸ one) *
+  ((toNat p29 ^ two) ∸ one) * ((toNat p31 ^ two) ∸ one) * ((toNat p41 ^ two) ∸ one) *
+  ((toNat p47 ^ two) ∸ one) * ((toNat p59 ^ two) ∸ one) * ((toNat p71 ^ two) ∸ one)
+
+partialZetaNumerator :
+  ℕ
+partialZetaNumerator =
   (toNat p2  ^ two) * (toNat p3  ^ two) * (toNat p5  ^ two) *
   (toNat p7  ^ two) * (toNat p11 ^ two) * (toNat p13 ^ two) *
   (toNat p17 ^ two) * (toNat p19 ^ two) * (toNat p23 ^ two) *
   (toNat p29 ^ two) * (toNat p31 ^ two) * (toNat p41 ^ two) *
   (toNat p47 ^ two) * (toNat p59 ^ two) * (toNat p71 ^ two)
-
-partialZetaNumerator :
-  ℕ
-partialZetaNumerator =
-  ((toNat p2  ^ two) + one) * ((toNat p3  ^ two) + one) * ((toNat p5  ^ two) + one) *
-  ((toNat p7  ^ two) + one) * ((toNat p11 ^ two) + one) * ((toNat p13 ^ two) + one) *
-  ((toNat p17 ^ two) + one) * ((toNat p19 ^ two) + one) * ((toNat p23 ^ two) + one) *
-  ((toNat p29 ^ two) + one) * ((toNat p31 ^ two) + one) * ((toNat p41 ^ two) + one) *
-  ((toNat p47 ^ two) + one) * ((toNat p59 ^ two) + one) * ((toNat p71 ^ two) + one)
 
 adelicConstant :
   PositiveRationalCode
@@ -394,7 +412,7 @@ dictionaryReading =
 boundedModelLimit71Reading :
   String
 boundedModelLimit71Reading =
-  "Finite BoundedModel limit71 surface: bounded FactorVec exponents over the compact 15-SSP set, finite SSP sum/product bounds, and no Schwartz-Bruhat or full adelic Plancherel promotion."
+  "Finite BoundedModel limit71 surface: the zero-exponent FactorVec reaches the finite inequality checker at cutoff 0; bounded FactorVec exponents over the compact 15-SSP set give finite SSP sum/product bounds only, with no Schwartz-Bruhat, adelic Sobolev, or full adelic Plancherel promotion."
 
 record Gate3NormDictionaryReceipt : Set where
   field
@@ -525,6 +543,24 @@ record Gate3NormDictionaryReceipt : Set where
     limit71InequalitySurfaceIsCanonical :
       limit71InequalitySurface ≡ boundedModelLimit71InequalitySurface
 
+    limit71ReachableFactorVec :
+      GL.FactorVec
+
+    limit71ReachableFactorVecIsCanonical :
+      limit71ReachableFactorVec ≡ canonicalLimit71ReachableFactorVec
+
+    limit71ReachableCutoff :
+      ℕ
+
+    limit71ReachableCutoffIsCanonical :
+      limit71ReachableCutoff ≡ canonicalLimit71ReachableCutoff
+
+    limit71InequalityReachable :
+      limit71InequalitySurface
+        limit71ReachableFactorVec
+        limit71ReachableCutoff
+      ≡ true
+
     boundedModelReading :
       String
 
@@ -632,6 +668,16 @@ canonicalGate3NormDictionaryReceipt =
         boundedModelLimit71InequalitySurface
     ; limit71InequalitySurfaceIsCanonical =
         refl
+    ; limit71ReachableFactorVec =
+        canonicalLimit71ReachableFactorVec
+    ; limit71ReachableFactorVecIsCanonical =
+        refl
+    ; limit71ReachableCutoff =
+        canonicalLimit71ReachableCutoff
+    ; limit71ReachableCutoffIsCanonical =
+        refl
+    ; limit71InequalityReachable =
+        canonicalLimit71InequalityReachable
     ; boundedModelReading =
         boundedModelLimit71Reading
     ; boundedModelReadingIsCanonical =
@@ -650,3 +696,227 @@ canonicalGate3NormDictionaryStatus :
   Gate3NormDictionaryStatus
 canonicalGate3NormDictionaryStatus =
   Gate3NormDictionaryReceipt.status canonicalGate3NormDictionaryReceipt
+
+------------------------------------------------------------------------
+-- Feshbach-Schur / fibre-gap route boundary.
+--
+-- A positive spectral gap on a selected carrier fibre is useful input, but
+-- it is not a tensor-product Hamiltonian gap.  The route below records the
+-- extra hypotheses that must be supplied before any such promotion can even
+-- be asked for: Gate 3 density of the selected core in the target Hilbert
+-- space, a Feshbach projection decomposition, Schur-complement invertibility
+-- on the complement, off-diagonal relative bounds, and domain/core
+-- compatibility for the full operator.  This is a dependency receipt only.
+
+data Gate3FeshbachSchurStatus : Set where
+  fibreGapEvidenceOnly_fullTensorGapRequiresDensityAndFeshbachSchur :
+    Gate3FeshbachSchurStatus
+
+data Gate3FeshbachSchurIngredient : Set where
+  selectedCarrierFibreGapEvidence :
+    Gate3FeshbachSchurIngredient
+
+  gate3DensityOfCarrierCore :
+    Gate3FeshbachSchurIngredient
+
+  feshbachProjectionDecomposition :
+    Gate3FeshbachSchurIngredient
+
+  schurComplementInvertibility :
+    Gate3FeshbachSchurIngredient
+
+  offDiagonalRelativeBound :
+    Gate3FeshbachSchurIngredient
+
+  tensorHamiltonianDomainCompatibility :
+    Gate3FeshbachSchurIngredient
+
+canonicalGate3FeshbachSchurIngredients :
+  List Gate3FeshbachSchurIngredient
+canonicalGate3FeshbachSchurIngredients =
+  selectedCarrierFibreGapEvidence
+  ∷ gate3DensityOfCarrierCore
+  ∷ feshbachProjectionDecomposition
+  ∷ schurComplementInvertibility
+  ∷ offDiagonalRelativeBound
+  ∷ tensorHamiltonianDomainCompatibility
+  ∷ []
+
+data FullTensorProductGapPromotion : Set where
+
+fullTensorProductGapPromotionImpossibleHere :
+  FullTensorProductGapPromotion →
+  ⊥
+fullTensorProductGapPromotionImpossibleHere ()
+
+feshbachSchurRouteReading :
+  String
+feshbachSchurRouteReading =
+  "Feshbach-Schur route boundary: a carrier-fibre spectral gap is evidence/ingredient only; a full tensor-product Hamiltonian gap requires Gate 3 density of the carrier core plus Feshbach projection, Schur-complement invertibility, off-diagonal relative bounds, and domain compatibility."
+
+record Gate3FeshbachSchurFiberGapRouteReceipt : Set where
+  field
+    status :
+      Gate3FeshbachSchurStatus
+
+    statusIsEvidenceOnly :
+      status
+      ≡
+      fibreGapEvidenceOnly_fullTensorGapRequiresDensityAndFeshbachSchur
+
+    normDictionaryReceipt :
+      Gate3NormDictionaryReceipt
+
+    finiteLimit71SurfaceReachable :
+      Gate3NormDictionaryReceipt.limit71InequalitySurface
+        normDictionaryReceipt
+        (Gate3NormDictionaryReceipt.limit71ReachableFactorVec
+          normDictionaryReceipt)
+        (Gate3NormDictionaryReceipt.limit71ReachableCutoff
+          normDictionaryReceipt)
+      ≡
+      true
+
+    carrierFibreGapEvidenceAvailable :
+      Bool
+
+    carrierFibreGapEvidenceAvailableIsTrue :
+      carrierFibreGapEvidenceAvailable ≡ true
+
+    carrierFibreGapOnlyIngredient :
+      Bool
+
+    carrierFibreGapOnlyIngredientIsTrue :
+      carrierFibreGapOnlyIngredient ≡ true
+
+    gate3DensityOfCarrierCoreProved :
+      Bool
+
+    gate3DensityOfCarrierCoreProvedIsFalse :
+      gate3DensityOfCarrierCoreProved ≡ false
+
+    feshbachProjectionHypothesisProved :
+      Bool
+
+    feshbachProjectionHypothesisProvedIsFalse :
+      feshbachProjectionHypothesisProved ≡ false
+
+    schurComplementHypothesisProved :
+      Bool
+
+    schurComplementHypothesisProvedIsFalse :
+      schurComplementHypothesisProved ≡ false
+
+    offDiagonalRelativeBoundProved :
+      Bool
+
+    offDiagonalRelativeBoundProvedIsFalse :
+      offDiagonalRelativeBoundProved ≡ false
+
+    tensorHamiltonianDomainCompatibilityProved :
+      Bool
+
+    tensorHamiltonianDomainCompatibilityProvedIsFalse :
+      tensorHamiltonianDomainCompatibilityProved ≡ false
+
+    fullTensorProductGapPromoted :
+      Bool
+
+    fullTensorProductGapPromotedIsFalse :
+      fullTensorProductGapPromoted ≡ false
+
+    clayYangMillsPromoted :
+      Bool
+
+    clayYangMillsPromotedIsFalse :
+      clayYangMillsPromoted ≡ false
+
+    ingredients :
+      List Gate3FeshbachSchurIngredient
+
+    ingredientsAreCanonical :
+      ingredients ≡ canonicalGate3FeshbachSchurIngredients
+
+    reading :
+      String
+
+    readingIsCanonical :
+      reading ≡ feshbachSchurRouteReading
+
+    promotionFlags :
+      List FullTensorProductGapPromotion
+
+    promotionFlagsAreEmpty :
+      promotionFlags ≡ []
+
+open Gate3FeshbachSchurFiberGapRouteReceipt public
+
+canonicalGate3FeshbachSchurFiberGapRouteReceipt :
+  Gate3FeshbachSchurFiberGapRouteReceipt
+canonicalGate3FeshbachSchurFiberGapRouteReceipt =
+  record
+    { status =
+        fibreGapEvidenceOnly_fullTensorGapRequiresDensityAndFeshbachSchur
+    ; statusIsEvidenceOnly =
+        refl
+    ; normDictionaryReceipt =
+        canonicalGate3NormDictionaryReceipt
+    ; finiteLimit71SurfaceReachable =
+        canonicalLimit71InequalityReachable
+    ; carrierFibreGapEvidenceAvailable =
+        true
+    ; carrierFibreGapEvidenceAvailableIsTrue =
+        refl
+    ; carrierFibreGapOnlyIngredient =
+        true
+    ; carrierFibreGapOnlyIngredientIsTrue =
+        refl
+    ; gate3DensityOfCarrierCoreProved =
+        false
+    ; gate3DensityOfCarrierCoreProvedIsFalse =
+        refl
+    ; feshbachProjectionHypothesisProved =
+        false
+    ; feshbachProjectionHypothesisProvedIsFalse =
+        refl
+    ; schurComplementHypothesisProved =
+        false
+    ; schurComplementHypothesisProvedIsFalse =
+        refl
+    ; offDiagonalRelativeBoundProved =
+        false
+    ; offDiagonalRelativeBoundProvedIsFalse =
+        refl
+    ; tensorHamiltonianDomainCompatibilityProved =
+        false
+    ; tensorHamiltonianDomainCompatibilityProvedIsFalse =
+        refl
+    ; fullTensorProductGapPromoted =
+        false
+    ; fullTensorProductGapPromotedIsFalse =
+        refl
+    ; clayYangMillsPromoted =
+        false
+    ; clayYangMillsPromotedIsFalse =
+        refl
+    ; ingredients =
+        canonicalGate3FeshbachSchurIngredients
+    ; ingredientsAreCanonical =
+        refl
+    ; reading =
+        feshbachSchurRouteReading
+    ; readingIsCanonical =
+        refl
+    ; promotionFlags =
+        []
+    ; promotionFlagsAreEmpty =
+        refl
+    }
+
+gate3FeshbachSchurFullTensorGapStillFalse :
+  fullTensorProductGapPromoted
+    canonicalGate3FeshbachSchurFiberGapRouteReceipt
+  ≡
+  false
+gate3FeshbachSchurFullTensorGapStillFalse =
+  refl

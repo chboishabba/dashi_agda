@@ -11,6 +11,13 @@ NS-to-EV5 projection, not a proof of 3D Navier-Stokes regularity, and not a
 Clay promotion. A 2D CFD/LES diagnostic can falsify or guide a projection
 hypothesis, but it cannot prove the 3D Navier-Stokes Millennium problem.
 
+Latest Clay boundary: DASHI may support only a conditional NS regularity
+theorem, and only after NS modes are proved to project into
+FRACTRAN-admissible EV5 with forward simulation. The current status remains
+fail-closed. The exact open obligations are forward simulation, quotient
+correctness, Lyapunov preservation, and ultrametric preservation. No
+unconditional Clay or global regularity claim follows from this plan.
+
 ## Available dashiCFD Surface
 
 The sibling `../dashiCFD` repo already exposes scripts that can generate 2D
@@ -139,6 +146,9 @@ The desired receipt should certify only the following:
 - the candidate is checked against Q monotonicity, FractranCOL `r17`
   diagnostics, and resonant-forcing cycle behavior;
 - falsifying outcomes are retained as negative evidence;
+- the receipt remains fail-closed unless the projection into
+  FRACTRAN-admissible EV5 has forward simulation, quotient correctness,
+  Lyapunov preservation, and ultrametric preservation;
 - all outcomes are evidence only, with no proof or Clay promotion.
 
 ## Next Artifact

@@ -46,6 +46,7 @@ Scope: docs/checklists only. This update does not touch Agda.
 | `RGContractionExplicitReceipt` / `WightmanReconstructionCandidateReceipt` wired and non-promoting | Pass, focused check | The explicit FactorVec RG formula and OS axiom status are recorded; operator-norm equality, contraction, full O(4) covariance, Wightman reconstruction, and Clay YM promotion remain false. |
 | `FactorVecAverageVsSumReceipt` / `RGOperatorNormFormalProof` wired and non-promoting | Pass, focused check | The parent-sum versus normalized-average distinction is typed; the alpha1 norm/contraction is recorded only for the normalized child-average map, while existing parent-sum, continuum RG, and Clay YM remain non-promoting. |
 | `ScalarOSTransferMatrixReceipt` wired and non-promoting | Pass, focused check | The scalar transfer matrix is explicit and scalar-sector reflection positivity is recorded by Euclidean propagator positivity; full gauge/fermion OS, Wightman reconstruction, and Clay YM remain false. |
+| `GribovFreeCarrierReceipt` wired and non-promoting | Pass, focused check | The carrier-only Gribov receipt records the concrete `FactorVec` identity-quotient representative, uniqueness in the identity fiber, and the existing coordinate-law primitive; continuum Gribov uniqueness, smooth global gauge fixing, OS/Wightman reconstruction, and Clay YM remain false. |
 | `CarrierHiggsMassReceipt` wired and non-promoting | Pass, focused check | The k=4 CS-style Higgs estimate and phi-corrected diagnostic use the PDG VEV input; no carrier VEV or Higgs mass derivation is asserted. |
 | `CarrierNSSmoothConvergenceReceipt` wired and non-promoting | Pass, focused check | `canonicalCarrierNSSmoothConvergenceReceipt` records the Aubin-Lions prerequisite chain while keeping the time-derivative proof, ultrametric Aubin-Lions theorem, smooth continuum limit, and Clay NS promotion false. |
 | `UltrametricAubinLionsReceipt` wired and non-promoting | Pass, focused check | `canonicalUltrametricAubinLionsReceipt` records the three-bound compactness route while keeping time-derivative construction, compactness, smooth limit, continuum NS preservation, and Clay NS promotion false. |
@@ -125,6 +126,7 @@ Focused Agda checks used for this checklist:
 ```sh
 agda DASHI/Physics/Closure/MillenniumTowerSchemaReceipt.agda
 agda DASHI/Physics/Boundaries/GribovResolutionAuthorityReceipt.agda
+agda DASHI/Physics/Closure/GribovFreeCarrierReceipt.agda
 agda DASHI/Physics/Closure/NavierStokesWeakSolutionInterface.agda
 ```
 

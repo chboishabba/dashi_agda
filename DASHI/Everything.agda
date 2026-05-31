@@ -499,6 +499,7 @@ import DASHI.Physics.Closure.BcStarObservableContract
 import DASHI.Physics.Closure.FactorVecConcretePredictionReceipts
 import DASHI.Physics.Closure.FactorVecPhysicalLawProjectionTheorem
 import DASHI.Physics.Closure.FactorVecFalsifiablePredictionLanes
+import DASHI.Physics.Closure.GribovFreeCarrierReceipt
 import DASHI.Physics.Closure.PenguinDecayProjectionDefectReceipt
 import DASHI.Physics.Closure.PenguinDecayObservableContract
 import DASHI.Physics.Closure.PenguinDecayWilsonCoefficientAuthority
@@ -778,10 +779,14 @@ import DASHI.Physics.Closure.MDLFejerAxiomsShift
 import DASHI.Physics.Closure.MDLLyapunovCompatibility
 import DASHI.Physics.Closure.MDLLyapunovShiftInstance
 import DASHI.Physics.Closure.MDLTradeoffShiftInstance
+import DASHI.Physics.Closure.PolymerKPAsMDLReceipt
 import DASHI.Physics.QFT.AQFTTypedNetSurface
 import DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface
 import DASHI.Physics.Closure.BoundaryParameterAdapterAlgebra
 import DASHI.Physics.Closure.YangMillsGate3DiscreteGeometryReceipt
+import DASHI.Physics.Closure.YM5DOrbifoldZeroModePolymerAnalogyReceipt
+import DASHI.Physics.Closure.CheckerboardUltrametricBridgeReceipt
+import DASHI.Physics.Closure.ContractiveCorrelationDecayReceipt
 import DASHI.Physics.QFT.LocalAlgebraIdentitySemantics
 import DASHI.Physics.QFT.FilteredColimitPreservationInstance
 import DASHI.Physics.QFT.DHRSectorDecomposition
@@ -1031,6 +1036,8 @@ import DASHI.Physics.Closure.YMWilsonCoefficientRGReceipt
 import DASHI.Physics.Closure.YMIRStabilityQuantitativeReceipt
 import DASHI.Physics.Closure.YMCuspUniversalityFinalReceipt
 import DASHI.Physics.Closure.YMClayDistanceFinalReceipt
+import DASHI.Physics.Closure.YMExternal2025To2026ProofClaimsReceipt
+import DASHI.Physics.Closure.CarrierAreaLawBalabanSeedReceipt
 import DASHI.Physics.Closure.YML3TightnessInhabitedReceipt
 import DASHI.Physics.Closure.YML4ContinuumLimitReceipt
 import DASHI.Physics.Closure.YML4ContinuumLimitInhabitedReceipt
@@ -1109,6 +1116,7 @@ import DASHI.Physics.Closure.DHRBraidGroupOriginRemark
 import DASHI.Physics.Closure.CarrierWeaveDefectOriginRemark
 import DASHI.Physics.Closure.EclipseProjectionDefectSarosRemark
 import DASHI.Physics.Closure.FiniteCarrierSpectralGapZ7Receipt
+import DASHI.Physics.Closure.YMFeshbachSchurFiberGapBridgeReceipt
 import DASHI.Physics.Closure.FiniteCuspHeckeSpectralFrontierReceipt
 import DASHI.Physics.Closure.MultiPrimePAdicCarrierCoordinate
 import DASHI.Physics.Closure.ProductFormulaConstraint

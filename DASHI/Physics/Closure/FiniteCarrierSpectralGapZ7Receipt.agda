@@ -84,12 +84,12 @@ normalisedGapCaveatStatement =
 productGapStatement :
   String
 productGapStatement =
-  "For the unnormalised product carrier Z/7Z x Z/3Z x Z/2Z with cycle factors, the gap is min(0.7530203963,3,2)=0.7530203963; the Z/2Z factor is K2 with adjacency eigenvalues {1,-1}, so its gap is 2, not 4."
+  "For the finite unnormalised Cartesian product carrier Z/7Z x Z/3Z x Z/2Z with cycle factors, the gap is min(0.7530203963,3,2)=0.7530203963; this is a finite product-spectrum calculation only, not a full tensor-product Yang-Mills Hamiltonian gap."
 
 productSpectrumStatement :
   String
 productSpectrumStatement =
-  "The product statement uses the Cartesian-product spectrum rule sigma(A1 tensor I + I tensor A2) = {lambda_i + mu_j}; hence the smallest factor gap controls the product gap."
+  "The product statement uses the finite Cartesian-product spectrum rule sigma(A1 tensor I + I tensor A2) = {lambda_i + mu_j}; a physical tensor-product gap still needs density, domain, and Feshbach-Schur hypotheses."
 
 algebraicStatement :
   String

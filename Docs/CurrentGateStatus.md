@@ -1,5 +1,36 @@
 # Current Gate Status
 
+## Worker 5 Corrected YM Competitive Path 2026-06-01
+
+Owner: `Worker 5`
+Status: `governance-only; fail-closed; non-promoting`
+
+The current Clay Yang-Mills path is narrowed to three hard mathematical
+problems:
+
+1. Balaban volume-independent induction for the constructive/infinite-volume
+   route.
+2. BRST-compatible reflection positivity for the gauge-fixed continuum
+   physical sector.
+3. An operator-valued continuum spectral-gap theorem for the reconstructed
+   physical Yang-Mills Hamiltonian or transfer generator.
+
+Dependency graph:
+
+```text
+Balaban volume-independent induction
+  -> BRST reflection positivity
+  -> operator-valued spectral gap
+  -> Clay YM existence and mass gap
+```
+
+Finite carrier gaps, scalar pressure inequalities, strong-coupling lattice
+diagnostics, and transfer-matrix gaps remain evidence only.  The specific
+inference "`14 < 15`; therefore Yang-Mills mass gap" is rejected: the
+pressure-below-15 surface is a bounded carrier diagnostic and does not supply
+continuum construction, BRST/OS positivity, Wightman reconstruction, operator
+convergence, or a physical mass spectrum.
+
 ## Manager C Clay Closure Target Sync 2026-05-29
 
 Owner: `Manager C`

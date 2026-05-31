@@ -106,6 +106,15 @@ checks passed for Higgs, CKM, FactorVec metric, and GR finite-R imports.  No
 W4, Higgs/CKM, GR, Standard
 Model, Clay, external-authority, or terminal promotion is constructed.
 
+Current YM governance update `2026-06-01`: the Clay Yang-Mills lane must be
+read through the corrected competitive path
+`Balaban volume-independent induction -> BRST reflection positivity ->
+operator-valued spectral gap`.  The pressure-below-15 fact `14 < 15` remains
+a local carrier diagnostic only; it is explicitly not a proof of a physical
+continuum Yang-Mills mass gap.  Gate 2 may use pressure-below-15 surfaces as
+bounded evidence, but no Clay/Wightman/spectral-gap promotion is admissible
+without the continuum induction, positivity, and operator-spectrum theorems.
+
 ## Active Work Lanes
 
 | Gate | Required new mathematics | Current surface | Promotion boundary |
@@ -117,6 +126,16 @@ Model, Clay, external-authority, or terminal promotion is constructed.
 | Hilbert depth embeddings | Isometric `iota_d : H_d -> H_{d+1}`, traversal compatibility, reversible discrete-time action, quotient inner product, finitely supported colimit domain, and self-adjoint generator/domain data. | `DASHI.Quantum.Stone` now exposes continuous and discrete-time depth embedding surfaces; `SchrodingerSelfAdjointEvolutionReceipt` consumes supplied upgrade data. | Fixed-depth finite completeness and identity shadows do not promote physical Stone evolution. |
 | Yukawa/CKM arithmetic field | Concrete Yukawa matrices from FactorVec/DHR data, characteristic-polynomial splitting fields, eigenbasis normalization over `Q` or a finite algebraic extension, CKM product field closure, and unitarity. | `DASHI.Physics.Closure.CKMCarrierMixingReceipt` records that exact carrier diagonalization may require a finite algebraic extension. | No continuous SVD postulate and no rational-only CKM claim until the specific splitting fields are computed. |
 | Composition / Paper7Receipt | Gate receipt records, cross-gate consistency, Gate 1/Gate 6 agreement, YM/GR stress-energy compatibility, matter-sector agreement, Hilbert-state interpretation, and product receipt construction. | Terminal and GRQFT composition surfaces keep `terminalClaimPromoted = false`. | Pure composition only after Gates 1-7 and authority boundaries are inhabited or ledgered. |
+
+## Corrected Yang-Mills Hard-Problem Split
+
+The Yang-Mills mass-gap lane has three non-substitutable blockers:
+
+| Hard problem | Required content | Not sufficient |
+|---|---|---|
+| Balaban volume-independent induction | Uniform constructive RG/cluster induction adequate for infinite volume and cutoff removal. | Fixed-depth contraction, finite carrier gap, or fixed-volume strong-coupling estimate. |
+| BRST reflection positivity | Gauge-fixed/BRST-compatible positivity for the continuum physical sector, sufficient for OS/Wightman reconstruction. | Scalar transfer positivity or finite Wilson reflection positivity alone. |
+| Operator-valued spectral gap | Positive lower bound for the physical continuum Hamiltonian/transfer generator, stable under limits and identified with the gauge-invariant spectrum. | `14 < 15`, finite eigenvalues, or carrier-unit spectral diagnostics. |
 
 ## Orchestration Policy
 

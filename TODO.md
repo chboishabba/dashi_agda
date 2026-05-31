@@ -2,6 +2,89 @@
 
 ## Active Blocker Board
 
+Worker 4 Balaban/KP/ultrametric YM obligation `2026-06-01`:
+- [x] Record the volume-independent Balaban induction gap in the roadmap and
+  receipts as the concrete `H_k -> H_{k+1}` target, not as a solved theorem.
+- [x] Define the KP/uniform-volume obligation: Kotecky-Preiss local-sum
+  constants, polymer activity bounds, counterterm control, and block-averaging
+  errors must be uniform in lattice volume and stable under cutoff/depth
+  removal.
+- [x] Define the ultrametric large/small field split: small fields are only
+  the finite carrier ultrametric ball currently controlled by existing finite
+  estimates; large fields require a separate uniform tail-suppression theorem.
+- [ ] Prove or refute the KP/uniform-volume bound.  This is the competitive YM
+  contribution target; it remains open and must not be consumed as Clay YM.
+- [ ] Prove the ultrametric large-field tail estimate and show it composes
+  with the small-field bounds inside the Balaban induction.
+- [x] Preserve promotion boundaries: no continuum YM, OS/Wightman, Clay YM, or
+  terminal claim is promoted by these receipts.
+
+Worker 2 carrier-level YM OS3 boundary `2026-06-01`:
+- [x] Split L5 OS3/reflection positivity into finite ungauge-fixed Wilson
+  positivity, BRST gauge-fixed positive-Hilbert obstruction, ghost
+  time-reflection graded-sign boundary, and carrier-only Gribov representative
+  boundary.
+- [x] Thread the split into YM final-state and Clay final-state blocker
+  receipts without Clay promotion.
+- [ ] Prove a continuum/infinite-volume gauge-invariant OS3 theorem or keep
+  `continuumReflectionPositivityOpen` blocked.
+- [ ] Provide a BRST-compatible physical-sector positivity construction before
+  consuming gauge-fixed fields as OS/Wightman input.
+- [ ] Provide a ghost graded-involution/time-reflection theorem before using
+  ghost fields in an ungraded positive reflection form.
+- [ ] Replace the carrier representative Gribov receipt with a genuine
+  continuum Gribov-copy boundary before claiming global gauge fixing.
+
+Worker 5 corrected YM competitive path `2026-06-01`:
+- [x] Record the corrected Clay YM competitive path as three hard problems:
+  Balaban volume-independent induction, BRST reflection positivity, and an
+  operator-valued continuum spectral gap.
+- [x] Record the dependency graph:
+  Balaban volume-independent induction -> BRST reflection positivity ->
+  operator-valued physical spectral gap -> Clay YM existence/mass gap.
+- [x] Explicitly reject "`14 < 15`; therefore Yang-Mills mass gap" as an
+  invalid promotion rule.  The pressure-below-15 result is a bounded carrier
+  diagnostic only.
+- [ ] YM-H1 action: either prove a Balaban-style volume-independent induction
+  with constants adequate for infinite-volume/cutoff removal, or keep the
+  continuum construction route blocked.
+- [ ] YM-H2 action: prove BRST-compatible reflection positivity for the
+  continuum gauge object and physical sector before using OS/Wightman
+  reconstruction language as proof evidence.
+- [ ] YM-H3 action: prove an operator-valued physical spectral-gap theorem
+  that survives the continuum limit and identifies the reconstructed
+  gauge-invariant spectrum.
+- [x] Preserve non-promotion boundaries: no Clay YM, Wightman, Standard Model,
+  physics-unification, or terminal promotion follows from this governance
+  update.
+
+Worker 6 Clay proximity ranking sync `2026-06-01`:
+- [x] Worker 2 Gate 3 finite-boundary audit: make the finite limit-71
+  inequality surface explicitly reachable in `Gate3NormDictionary` via the
+  zero-exponent `FactorVec` at cutoff `0`, while keeping Schwartz-Bruhat,
+  adelic Sobolev, and adelic Plancherel bridge closure open.
+- [x] Record the current Clay-proximity order:
+  (1) `NS->EV5` forward simulation, (2) Gate3 finite adelic inequality,
+  (3) Gate4 Hecke envelope, and (4) YM continuum external.
+- [x] Mark `dashiRTX`, Moonshine, and CKM as not Clay-proximate in the current
+  governance state.  They must not be consumed as Clay-adjacent evidence,
+  Clay blockers, or Clay promotion routes.
+- [ ] Priority 1 Clay-proximate action: advance `NS->EV5` only as a
+  forward-simulation / actual-flow comparison target.  It still does not
+  transfer finite carrier estimates to actual Navier-Stokes flow and does not
+  imply Clay NS.
+- [ ] Priority 2 Clay-proximate action: close or refute the Gate3 finite
+  adelic inequality in its finite/adelic comparison scope before any
+  downstream use.
+- [ ] Priority 3 Clay-proximate action: sharpen the Gate4 Hecke envelope as a
+  bounded envelope/comparison surface only; do not treat it as continuum YM,
+  continuum NS, or Clay evidence.
+- [ ] Priority 4 Clay-proximate action: keep YM continuum work external until
+  a genuine continuum bridge is supplied.  Finite carrier gaps and Hecke
+  tables remain evidence only.
+- [x] Preserve this tranche boundary: no stubs, no code receipts, no Agda
+  edits, and no Clay/CKM/Moonshine/`dashiRTX`/unification promotion.
+
 New tranche governance sync `2026-06-01`:
 - [x] Worker 5 governance-only follow-up: record
   `LightCodecTransportCorrespondenceTheorem` as theorem-binding /
@@ -15,6 +98,12 @@ New tranche governance sync `2026-06-01`:
   `NS->EV5` may produce projection/norm-comparison obligations and lane
   dictionaries only; `dashiCFD` may supply diagnostics, examples, and
   regression/acceptance evidence only.
+- [x] Tighten the latest Clay-adjacent `NS->EV5` boundary: DASHI may support
+  only a conditional NS regularity theorem, and only if NS modes project into
+  FRACTRAN-admissible EV5 with forward simulation.  Status remains
+  fail-closed; exact open obligations are forward simulation, quotient
+  correctness, Lyapunov preservation, and ultrametric preservation.  No
+  unconditional Clay claim is available.
 - [x] Record the current priority stack and promotion boundaries, with the new
   receipt surfaces wired into `Everything.agda`: first clean the corrected
   `psi2` skeleton and branch wording; then
@@ -27,7 +116,9 @@ New tranche governance sync `2026-06-01`:
   bookkeeping (`phi = psi2` via `Frob_p2 = 4 = 2^2`) and must not be promoted
   to physical generation labels, CKM entries, `Y_d`, or unification.
 - [ ] Priority 2: advance the `NS->EV5` projection frontier only as a
-  projection/norm-comparison proof obligation.  It does not transfer
+  projection/norm-comparison proof obligation.  It must prove projection into
+  FRACTRAN-admissible EV5 with forward simulation before it can support even a
+  conditional NS regularity theorem; until then it does not transfer
   Navier-Stokes carrier estimates to actual flow and does not imply Clay NS.
 - [ ] `NS->EV5` lane action: keep lane outputs separated into projection
   maps, finite/empirical comparison dictionaries, and theorem obligations.

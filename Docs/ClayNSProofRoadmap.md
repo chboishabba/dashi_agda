@@ -7,6 +7,14 @@ three-dimensional incompressible Navier-Stokes global regularity problem would
 have to prove. It is not a proof, and it does not promote any Clay,
 smooth-solution, or terminal claim.
 
+Latest NS-to-EV5 boundary: DASHI may support a conditional NS regularity
+theorem only if NS modes project into FRACTRAN-admissible EV5 with forward
+simulation. This boundary is fail-closed. The exact open obligations are
+forward simulation, quotient correctness, Lyapunov preservation, and
+ultrametric preservation. Until those are discharged, no unconditional Clay
+Navier-Stokes claim, arbitrary-data theorem, or global smoothness promotion is
+available.
+
 The current tower contains receipts for finite energy/BKM targets, ultrametric
 Aubin-Lions compactness, a failed 2/3/5 Haar-frame bridge, a carrier weak-form
 interface, and a replacement Littlewood-Paley/Besov/parabolic-smoothing target.
@@ -96,6 +104,12 @@ boundaries are discharged:
 - Clay Navier-Stokes promotion
 - unconditional smooth continuum limit
 - global regularity
+- conditional NS regularity without an NS-to-EV5 projection into
+  FRACTRAN-admissible EV5 with forward simulation
+- treating EV5 lane dictionaries, dashiCFD diagnostics, or FRACTRAN
+  admissibility alone as forward simulation
+- treating the NS-to-EV5 frontier as closed before quotient correctness,
+  Lyapunov preservation, and ultrametric preservation are proved
 - smooth or unique Leray solution from the carrier
 - BKM/enstrophy closure
 - treating weak Navier-Stokes as Clay Navier-Stokes

@@ -55,6 +55,27 @@ canonicalYMClayConditionalLayers =
   ∷ []
 
 data YMClayRemainingGap : Set where
+  continuumConstructionGap :
+    YMClayRemainingGap
+
+  osReflectionPositivityGap :
+    YMClayRemainingGap
+
+  brstGaugeFixedOS3Gap :
+    YMClayRemainingGap
+
+  ghostTimeReflectionSignGap :
+    YMClayRemainingGap
+
+  continuumGribovCopyGap :
+    YMClayRemainingGap
+
+  infiniteVolumeLimitGap :
+    YMClayRemainingGap
+
+  operatorConvergenceGap :
+    YMClayRemainingGap
+
   vacuumUniquenessGap :
     YMClayRemainingGap
 
@@ -67,7 +88,14 @@ data YMClayRemainingGap : Set where
 canonicalYMClayRemainingGaps :
   List YMClayRemainingGap
 canonicalYMClayRemainingGaps =
-  vacuumUniquenessGap
+  continuumConstructionGap
+  ∷ osReflectionPositivityGap
+  ∷ brstGaugeFixedOS3Gap
+  ∷ ghostTimeReflectionSignGap
+  ∷ continuumGribovCopyGap
+  ∷ infiniteVolumeLimitGap
+  ∷ operatorConvergenceGap
+  ∷ vacuumUniquenessGap
   ∷ clusteringGap
   ∷ productLatticeHeegnerDefectGap
   ∷ []
@@ -95,7 +123,7 @@ ymClayPromotionImpossibleHere ()
 
 ymClayFinalStateStatement : String
 ymClayFinalStateStatement =
-  "C5 final Clay YM state: L1-L8 are scaffolded as a conditional chain; vacuum uniqueness/clustering and the product-lattice Heegner defect issue remain open; centre symmetry unbroken is only a lattice-simulation-supported candidate; Heegner sites as defects are unresolved; full Clay promotion is blocked and ymClayPromotion=false."
+  "C5 final Clay YM state: finite carrier spectral gaps are evidence only. L1-L8 are scaffolded as a conditional chain; continuum construction, OS/reflection positivity, BRST gauge-fixed OS3, ghost time-reflection signs, continuum Gribov-copy resolution, infinite-volume limit, operator convergence, vacuum uniqueness/clustering, and the product-lattice Heegner defect issue remain open; full Clay promotion is blocked and ymClayPromotion=false."
 
 record YMClayFinalStateReceipt : Setω where
   field
@@ -335,6 +363,9 @@ canonicalYMClayFinalStateReceipt =
         refl
     ; receiptBoundary =
         "L1-L8 are recorded only as a scaffolded conditional chain consumed from YMFinalStateReceipt"
+        ∷ "Finite carrier spectral gaps are evidence only, not a Clay Yang-Mills proof"
+        ∷ "Continuum construction, OS axioms/reflection positivity, infinite-volume limit, and operator convergence remain unproved"
+        ∷ "Finite ungauge-fixed Wilson positivity is separated from BRST gauge-fixed obstruction, ghost time-reflection sign, and continuum Gribov-copy gaps"
         ∷ "Vacuum uniqueness and clustering remain open gaps"
         ∷ "Centre symmetry unbroken is recorded as a lattice-simulation-supported candidate, not as Clay proof"
         ∷ "Heegner sites as defects and the product-lattice defect compatibility issue remain unresolved"

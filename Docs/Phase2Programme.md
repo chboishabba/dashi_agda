@@ -53,6 +53,9 @@ The open YM branch is the continuum interface:
 
 | Target | Phase 2 task | Non-promotion boundary |
 |---|---|---|
+| YM-H1 | Prove or refute Balaban-style volume-independent induction for the candidate constructive route. | Finite-depth contraction or fixed-volume carrier estimates are not infinite-volume/cutoff-removal control. |
+| YM-H2 | Prove BRST-compatible reflection positivity for the continuum gauge object and physical sector. | Finite Wilson reflection positivity and scalar transfer positivity are not continuum BRST/OS positivity. |
+| YM-H3 | Prove an operator-valued spectral gap for the reconstructed physical Hamiltonian/transfer generator. | `14 < 15`, finite eigenvalue gaps, and carrier-unit pressure bounds are diagnostics, not a physical continuum mass gap. |
 | YM-C1 | Separate depth-uniform finite strong-coupling constants from cutoff-removal claims. | Uniform-in-depth carrier estimates are not continuum tightness. |
 | YM-C2 | Study the candidate `k -> infinity` CS-level family as the Wilson continuum trajectory. | The family is named, not proved tight. |
 | YM-C3 | Identify the exact tightness topology and correlator bounds needed for L3/L4. | No continuum measure is constructed by finite estimates alone. |
@@ -60,7 +63,9 @@ The open YM branch is the continuum interface:
 
 Phase 2 YM success means a sharper L2-to-L3 blocker map. It does not mean
 Clay YM success unless continuum construction, OS/Wightman reconstruction, and
-gap survival are proved.
+gap survival are proved.  In the corrected competitive path, no mass-gap
+promotion is admissible until YM-H1, YM-H2, and YM-H3 are discharged or
+replaced by an equivalently strong continuum theorem.
 
 ## Deliverables
 

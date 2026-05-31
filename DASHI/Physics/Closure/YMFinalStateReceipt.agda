@@ -74,7 +74,25 @@ data YMFinalStateOpenBlocker : Set where
   gaugeSectorOSContinuumOpen :
     YMFinalStateOpenBlocker
 
+  continuumReflectionPositivityOpen :
+    YMFinalStateOpenBlocker
+
+  brstGaugeFixedReflectionPositivityObstructionOpen :
+    YMFinalStateOpenBlocker
+
+  ghostTimeReflectionGradedSignOpen :
+    YMFinalStateOpenBlocker
+
+  continuumGribovCopyBoundaryOpen :
+    YMFinalStateOpenBlocker
+
+  infiniteVolumeLimitOpen :
+    YMFinalStateOpenBlocker
+
   osToWightmanOpen :
+    YMFinalStateOpenBlocker
+
+  operatorConvergenceOpen :
     YMFinalStateOpenBlocker
 
   uniformMassGapOpen :
@@ -94,7 +112,13 @@ canonicalYMFinalStateOpenBlockers =
   ∷ fullCutoffMeasureTightnessOpen
   ∷ continuumYangMillsOpen
   ∷ gaugeSectorOSContinuumOpen
+  ∷ continuumReflectionPositivityOpen
+  ∷ brstGaugeFixedReflectionPositivityObstructionOpen
+  ∷ ghostTimeReflectionGradedSignOpen
+  ∷ continuumGribovCopyBoundaryOpen
+  ∷ infiniteVolumeLimitOpen
   ∷ osToWightmanOpen
+  ∷ operatorConvergenceOpen
   ∷ uniformMassGapOpen
   ∷ continuumUniquenessOpen
   ∷ clayYangMillsOpen
@@ -109,7 +133,7 @@ ymFinalStatePromotionImpossibleHere ()
 
 ymFinalStateStatement : String
 ymFinalStateStatement =
-  "YM final state: L1 is inhabited at finite lattice scope, L2 is partial strong coupling, L3 is partial dimensional-transmutation/CS k-running, L4-L8 are conditional, and full tightness, gauge-sector OS continuum, uniqueness, and Clay YM remain open/false."
+  "YM final state: finite carrier spectral gaps are evidence only.  L1 is inhabited at finite lattice scope, L2 is partial strong coupling, L3 is partial dimensional-transmutation/CS k-running, L4-L8 are conditional, and Clay YM still lacks continuum construction, continuum OS/reflection positivity, BRST gauge-fixed positive-Hilbert OS3 control, ghost time-reflection graded-sign control, continuum Gribov-copy resolution, infinite-volume limit, operator convergence, uniform mass gap, and uniqueness."
 
 record YMFinalStateReceipt : Setω where
   field
@@ -415,8 +439,11 @@ canonicalYMFinalStateReceipt =
     ; receiptBoundary =
         "L1 records the finite carrier-lattice Yang-Mills measure as inhabited"
         ∷ "L2 records only finite strong-coupling partial diagnostics"
+        ∷ "Finite carrier spectral gaps are evidence only, not Clay Yang-Mills"
         ∷ "L3 is partial as a dimensional-transmutation/CS k-running audit; full tightness itself is not constructed"
         ∷ "L4-L8 are conditional chain entries, not unconditional continuum or mass-gap proofs"
+        ∷ "Continuum construction, OS axioms/reflection positivity, infinite-volume limit, and operator convergence are not proved"
+        ∷ "OS3 is separated into finite ungauge-fixed Wilson positivity, BRST gauge-fixed obstruction, ghost graded-sign boundary, and carrier-only Gribov representative boundary"
         ∷ "Gauge-sector OS continuum, uniqueness, Clay Yang-Mills, and terminal Clay promotion remain false"
         ∷ []
     }

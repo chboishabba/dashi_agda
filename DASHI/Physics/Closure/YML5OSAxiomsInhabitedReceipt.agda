@@ -26,7 +26,7 @@ yml5OSAxiomsInhabitedPromotionImpossibleHere ()
 
 yml5OSAxiomsInhabitedStatement : String
 yml5OSAxiomsInhabitedStatement =
-  "YML5 OS data are only candidate/conditional through L4 and candidate-only L3; no conditionallyInhabited promotion follows from the product-lattice receipt, and Clay plus terminal promotions remain false."
+  "YML5 OS data are only candidate/conditional through L4 and candidate-only L3. OS3 positivity is inherited only for the finite ungauge-fixed Wilson loop algebra; BRST gauge fixing, ghost time-reflection signs, and carrier-only Gribov representatives remain explicit non-promoting boundaries."
 
 record YML5OSAxiomsInhabitedReceipt : Setω where
   field
@@ -42,6 +42,22 @@ record YML5OSAxiomsInhabitedReceipt : Setω where
 
     c1KeepsUnconditionalOSFalse :
       L5.unconditionalOSAxiomsPromoted c1GaugeSectorReceipt ≡ false
+
+    c1UngaugeFixedWilsonOS3Positive :
+      L5.ungaugeFixedWilsonLoopAlgebraOS3Positive c1GaugeSectorReceipt
+        ≡ true
+
+    c1BRSTGaugeFixedPositiveOS3False :
+      L5.brstGaugeFixedPositiveHilbertOS3Available c1GaugeSectorReceipt
+        ≡ false
+
+    c1GhostUngradedOS3False :
+      L5.ghostUngradedOS3PositiveFormAvailable c1GaugeSectorReceipt
+        ≡ false
+
+    c1GribovContinuumTheoremFalse :
+      L5.gribovContinuumTheoremAvailable c1GaugeSectorReceipt
+        ≡ false
 
     c1KeepsClayFalse :
       L5.clayYangMillsPromoted c1GaugeSectorReceipt ≡ false
@@ -114,6 +130,14 @@ canonicalYML5OSAxiomsInhabitedReceipt =
         refl
     ; c1KeepsUnconditionalOSFalse =
         refl
+    ; c1UngaugeFixedWilsonOS3Positive =
+        refl
+    ; c1BRSTGaugeFixedPositiveOS3False =
+        refl
+    ; c1GhostUngradedOS3False =
+        refl
+    ; c1GribovContinuumTheoremFalse =
+        refl
     ; c1KeepsClayFalse =
         refl
     ; c1KeepsTerminalFalse =
@@ -153,6 +177,9 @@ canonicalYML5OSAxiomsInhabitedReceipt =
     ; receiptBoundary =
         "Depends on YML5OSAxiomsForGaugeSectorReceipt as the C1 authority surface"
         ∷ "The surface remains candidate/conditional on L4 and candidate-only L3"
+        ∷ "OS3 inheritance is only for finite ungauge-fixed Wilson loop observables"
+        ∷ "BRST gauge-fixed fields and ghost sectors are not consumed as positive Hilbert OS3 data"
+        ∷ "The Gribov carrier representative is not a continuum Gribov-copy resolution"
         ∷ "Product-lattice L3 conditionallyInhabited language is not promoted here"
         ∷ "Euclidean covariance from anisotropy decay is recorded only as candidate"
         ∷ "No Clay YM or terminal Clay promotion follows"

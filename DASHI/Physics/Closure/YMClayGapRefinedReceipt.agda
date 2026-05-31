@@ -108,7 +108,7 @@ fullClayPromotion =
 
 ymClayGapRefinedStatement : String
 ymClayGapRefinedStatement =
-  "Refined internal YM blocker map: the broad hyperbolicToFlatLimitUniversalityClass is narrowed to the archimedean H3 -> R3 flat-limit candidate lane, while the Clay Mathematics Institute continuum YM existence/mass-gap problem remains external; curvatureDeformation, largeLevelDegeneration, and adelicIntegration are candidate mechanisms only, and full Clay promotion remains false."
+  "Refined internal YM blocker map: the broad hyperbolicToFlatLimitUniversalityClass is narrowed to the archimedean H3 -> R3 flat-limit candidate lane, while the Clay Mathematics Institute continuum YM existence/mass-gap problem remains external; any p-adic discharge is internal evidence only, continuum construction, OS/reflection positivity, infinite-volume limit, and operator convergence are not proved, and full Clay promotion remains false."
 
 record YMClayGapRefinedReceipt : Setω where
   field
@@ -304,9 +304,10 @@ canonicalYMClayGapRefinedReceipt =
         refl
     ; receiptBoundary =
         "Broad hyperbolicToFlatLimitUniversalityClass is refined to archimedeanH3ToR3FlatLimit"
-        ∷ "The p-adic blocker is resolved through Bruhat-Tits ultrametric structure"
+        ∷ "The p-adic blocker is resolved only as an internal finite/non-archimedean evidence lane"
         ∷ "Only the archimedean H3 -> R3 flat limit remains open"
         ∷ "Curvature deformation, large-level degeneration, and adelic integration are candidates only"
+        ∷ "Continuum construction, OS axioms/reflection positivity, infinite-volume limit, and operator convergence are not proved"
         ∷ "No full Clay promotion or terminal Clay claim is made here"
         ∷ []
     }

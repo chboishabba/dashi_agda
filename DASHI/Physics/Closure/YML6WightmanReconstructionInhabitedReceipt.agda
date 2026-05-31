@@ -41,7 +41,7 @@ yml6InhabitedPromotionImpossibleHere ()
 
 yml6WightmanReconstructionInhabitedStatement : String
 yml6WightmanReconstructionInhabitedStatement =
-  "YML6 Wightman reconstruction is a candidate conditional theorem target: OS1975 applies only if the candidate L5 OS package is promoted, and that package still depends on uninhabited L3."
+  "YML6 Wightman reconstruction is a candidate conditional theorem target: OS1975 applies only if the candidate L5 OS package is promoted, and that package still depends on uninhabited L3; no continuum OS/reflection-positivity package, infinite-volume limit, or operator convergence theorem is proved."
 
 record YML6WightmanReconstructionInhabitedReceipt : Setω where
   field
@@ -189,6 +189,7 @@ canonicalYML6WightmanReconstructionInhabitedReceipt =
         "ymL6Inhabited is conditionalOnL5"
         ∷ "osReconstructionTheorem is citationAuthority OS1975"
         ∷ "ymL6StatusUpgraded is candidateConditionalTheorem because L5 still depends on uninhabited L3"
+        ∷ "Continuum OS axioms/reflection positivity, infinite-volume limit, and operator convergence remain unproved"
         ∷ "Clay Yang-Mills and terminal Clay promotions remain false"
         ∷ []
     }

@@ -138,6 +138,15 @@ import DASHI.Reasoning.FallacyExamples
 Do not use this document to weaken existing promotion gates in physics,
 empirical adequacy, authority, or paper-claim surfaces.
 
+## Current Physics Fallacy Guard
+
+The inference "`14 < 15`; therefore Yang-Mills mass gap" is explicitly
+rejected.  The pressure-below-15 surfaces record a bounded carrier diagnostic,
+not a continuum theorem.  A Clay-facing Yang-Mills mass-gap route still needs
+Balaban volume-independent induction, BRST-compatible reflection positivity,
+and an operator-valued physical spectral-gap theorem before any Wightman,
+Clay, or terminal promotion can be considered.
+
 ## Worker C Validation Notes
 
 Validation for this documentation step is repository hygiene plus targeted Agda
