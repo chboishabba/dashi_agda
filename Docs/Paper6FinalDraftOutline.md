@@ -79,6 +79,11 @@ The opening section must state the governance line first.
 - FRACTRAN admissibility is a carrier-side nonresonance sharpening of the
   tail-dominance condition.  It refines admissible algebraic carrier tails,
   but it does not transfer the bound to actual Navier-Stokes flow.
+- The dialectical carry wording is allowed only as exposition:
+  `NSTailDominanceCarryAnalogyReceipt` records the one-line analogy that tail
+  dominance means carries above `K*(nu)` are absorbed by viscosity before
+  cycling back as unresolved residuals.  This is not an NS proof, Gate 3
+  closure, or Clay promotion.
 - The adelic Sobolev route should now be stated as an automorphic `GL(1)` /
   Hecke-character comparison programme.  Existing p-adic PDE and p-adic
   AdS/CFT literature checks remain negative; the new route is a proof
@@ -279,6 +284,12 @@ The NS section should use `NSCarrierKolmogorovSerrinReceipt`.
 - FRACTRAN admissibility sharpens this only on the carrier side: it is a
   nonresonance screen for the algebraic tail model and tail-dominance
   heuristic, not an actual-flow transfer theorem.
+- Expository carry language is pinned to
+  `NSTailDominanceCarryAnalogyReceipt`: the safe sentence is that tail
+  dominance says the NS cascade avoids the mod-3 trap because carries above
+  `K*(nu)` are absorbed by viscosity before cycling back as unresolved
+  residuals.  The receipt keeps `nsProofPromoted = false`,
+  `gate3ClosurePromoted = false`, and `clayPromotionMade = false`.
 - `TailEnergyFunctional` proves the algebraic part: the finite ternary
   `T_r` tail energy is monotone and collapses after `k` tail steps.  The
   transfer from actual Navier-Stokes evolution to this algebraic step is not

@@ -2,6 +2,272 @@
 
 ## Active Blocker Board
 
+Clay blocker asymmetry `2026-06-02`:
+- [x] Add docs/governance guidance for
+  `MonsterMoonshineSSPQuotientControl` above YM/Gate3: 15SSP/moonshine is a
+  quotient/compression target, not an entropy multiplier; raw `c2/c1 ~= 109`
+  is not physical polymer entropy `C0`; quotient gives `C0_eff ~= 1` and
+  `beta_abs ~= 12.97`, while sqrt/raw leakage raises thresholds to about
+  `22.66`/`32.35`; no quotient theorem or Clay promotion is claimed.
+- [x] Record the latest computed lemma update in Agda:
+  `Gate3DigitExpansionPAWOTGPartialResultReceipt`,
+  `YMCharacterExpansionContinuumReformulationReceipt`, and
+  `NSThetaPressureMarginCorrectionReceipt`.
+- [x] Record the PAWOTG digit-expansion partial result:
+  `sigma = 1/sqrt(12) ~= 0.2887 < 0.5052` for every prime and every BT level,
+  while keeping the SSP/CM embedding identification open.
+- [x] Reformulate the YM beta bridge around continuum survival:
+  fixed-lattice `m_latt(beta) > 0` is recorded, but survival of
+  `m_latt` through `a(beta)->0`, `beta->infinity` remains open.
+- [x] Retract the stale NS comparison claim: `H^{11/8}` is spatially stronger
+  than `H^{1/2}`.  Keep theta as a tail-localized pressure-margin criterion,
+  not global Serrin/BKM control.
+- [x] Add concrete reduction receipts for each asymmetric blocker:
+  `Gate3AdelicLocalizationReductionReceipt`,
+  `YMBetaBridgeQuantitativeGapReceipt`, and
+  `NSNonCircularObstructionReceipt`.
+- [x] Record PAWOTG as the explicit localization reduction
+  `sigma < 0.5052` at binding prime `p=3`.
+- [x] Record YM beta bridge as nonperturbative with strict gap `6.97` and
+  naive perturbative scale `exp(150) ~= 10^65`.
+- [x] Record NS as high-high paraproduct circularity unless
+  `NonCircularKStarDriftBound` is proved without Serrin/BKM input.
+- [x] Add `NSNonCircularKStarDriftBoundTargetReceipt` as the exact next
+  theorem-target receipt after the high-high obstruction: strict danger-shell
+  absorption/theta preservation without `H^{1/2}`, Serrin, BKM, or stronger
+  regularity.
+- [x] Add `DASHI/Physics/Closure/ClayBlockerAsymmetryReceipt.agda` as the
+  checked ledger for the non-symmetric final blockers.
+- [x] Record `PAWOTGUniformSeparation` as new adelic-localization mathematics,
+  not a finite-frame bookkeeping lemma.
+- [x] Record `BalabanPhysicalBetaBridge` as quantitative completion of the
+  Balaban programme with the measured beta gap, not a solved carrier-threshold
+  comparison.
+- [x] Record `NonCircularKStarDriftBound` as
+  `OpenWithHighHighParaproductObstruction`, not as a neutral `OpenUnknown`
+  lemma.
+- [ ] Draft Papers 1-3 with asymmetric claims: NS conditional obstruction
+  locator, Gate 3 PAWOTG reduction, and YM quantified Balaban-gap reduction.
+
+Computed visualisation synthesis `2026-06-02`:
+- [x] Add `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`
+  as the checked ledger for the four-visualisation reading.
+- [x] Record PAWOTG `p=3` / `sigma_crit = 0.5052` as the documented threshold
+  and distinguish it from the current CSV bundle, which does not include a
+  machine-readable `p/sigma_crit` table.
+- [x] Record YM `beta=6` as divergent with `r = 2.7017782`, strict absorption
+  at `beta ~= 12.97`, sampled safe absorption at `beta=13.64`, and the
+  one-loop `exp(150)` perturbative bridge diagnostic.
+- [x] Record the NS paraproduct visualisation boundary: low-high is not the
+  core obstruction; high-high is load-bearing and any `H^{1/2}`/Serrin/BKM
+  import is circular for Clay.
+- [x] Keep the visualisations as evidence surfaces only: no PAWOTG theorem,
+  Balaban bridge, NS danger-shell bound, Gate 3 closure, YM mass gap, NS
+  regularity, or Clay promotion.
+
+Refined diagnostics `2026-06-02`:
+- [x] Add `scripts/clay_refined_diagnostics.py` and generate
+  `ns_theta_tail_restricted.csv`, `ym_c0_threshold_sensitivity.csv`, and
+  `gate3_sampler_quality.csv`.
+- [x] Add `DASHI/Physics/Closure/ClayRefinedDiagnosticTargetsReceipt.agda` as
+  the checked non-promoting receipt for the second-pass calculations.
+- [x] Record the NS split
+  `Theta_global = sup_k theta(k)` versus
+  `Theta_tail = sup_{k >= K_diss(nu)} theta(k)`.  The sampled global danger
+  shell is low-frequency `k=2`; Paper 1 should consume tail-restricted theta
+  plus `low_shell_warning`.
+- [x] Record YM entropy sensitivity:
+  `beta_abs(C0) = (a + log(2 p C0)) / c_min`; `C0=1` gives `12.9713`, while
+  `C0=1.25` gives `13.8934`.
+- [x] Record Gate 3 sampler quality: current rows are clustered with
+  `mu_N ~= 1`, zero Gershgorin passes, and the target
+  `AtomSamplerPAWOTGQuality : mu_N <= C/N`.
+- [ ] Build a replacement Gate 3 atom sampler and rerun
+  `gate3_sampler_quality.csv` until `mu_N` scales down instead of clustering.
+
+Revised analytic sprint governance `2026-06-02`:
+- [x] Document that the abstract scale-graph barrier algebra is provable once
+  projection, node-margin, edge-influx, and absorber-dominance hypotheses are
+  supplied; the missing work is lane-specific analysis, not the algebra.
+- [x] Record the Gate 3 split: finite `A_N > 0` requires finite separation plus
+  a Gershgorin lower bound, while uniform `A_N` is
+  `PAWOTGUniformSeparation`.
+- [x] Record the YM KP target as contour/action suppression with entropy `C0`
+  and an all-diameter geometric bound, with `BalabanPhysicalBetaBridge` as the
+  physical beta blocker.
+- [x] Record that NS `theta` alone does not give BKM without
+  `NonCircularKStarDriftBound` plus enough tail/Sobolev control.
+- [x] Final blockers for this sprint: `PAWOTGUniformSeparation`,
+  `BalabanPhysicalBetaBridge`, and `NonCircularKStarDriftBound`.
+
+Clay analytic evidence bundle `2026-06-02`:
+- [x] Copy supplied CSV/PNG diagnostics from `/home/c/Downloads` into the repo
+  under `Docs/Images/clay-analytic-sprint/`.
+- [x] Add `Docs/Images/clay-analytic-sprint/README.md` as the artifact
+  manifest with lane-specific readings and no-promotion boundaries.
+- [x] Link the artifact bundle from `README.md`,
+  `Docs/ClayPrizeLemmaRoadmap.md`,
+  `Docs/Gate3AdelicSobolevPAWOTGRoadmap.md`,
+  `Docs/YMPaper3ClayTarget.md`, and `Docs/NSPaper1ClayTarget.md`.
+- [x] Record the literal artifact readings: Gate 3 finite toy dictionaries fail
+  the sampled Gershgorin condition; YM beta 6 is divergent with
+  `r = 2.7017782`; NS full theta sweep includes `Theta > 1` stress/failure
+  regimes.
+- [x] Do not consume these artifacts as theorem inhabitants.  The live blockers
+  remain `PAWOTGUniformSeparation`, `BalabanPhysicalBetaBridge`, and
+  `NonCircularKStarDriftBound`.
+
+Irreducible Clay boundary `2026-06-02`:
+- [x] Document that none of the three final inhabitants is solved by the sprint:
+  the sprint supplies measured constants, exact thresholds, and failure
+  locations.
+- [x] Record why `PAWOTGUniformSeparation` requires new adelic-to-Archimedean
+  localization mathematics, not only Kozyrev-side orthogonality.
+- [x] Record why `BalabanPhysicalBetaBridge` requires nonperturbative RG
+  control, not a perturbative beta-function slogan.
+- [x] Record why `NonCircularKStarDriftBound` is the high-high paraproduct
+  obstruction and cannot assume the regularity criterion it is meant to prove.
+- [ ] Draft Papers 1-3 as reduction papers around these measured blockers
+  before attempting any Clay-promotion language.
+
+Analytic constants tranche `2026-06-02`:
+- [x] Document the PAWOTG series-side condition `sigma < 0.505` as a Gate 3
+  density/Mosco prerequisite, not as a transfer proof.
+- [x] Replace stale live YM `13.64`-only threshold language with
+  `c_min = 0.242`, convergence/absorption thresholds `10.11`/`12.97`,
+  divergent `beta6` ratio `r = 2.70`, and gaps `4.11`/`6.97`.
+- [x] Document the NS `K*` drift condition: prove `K*(t) <= K*(nu)` without
+  defining the danger shell circularly by the moving cutoff.
+- [ ] Prove the PAWOTG density theorem, YM actual activity/Balaban transfer, and
+  NS non-circular danger-shell containment before consuming these constants.
+
+Clay prize lemma roadmap `2026-06-02`:
+- [x] Add `Docs/ClayPrizeLemmaRoadmap.md` as the prize-facing lemma board.
+- [x] Separate current architecture from Clay closure: margin grammar,
+  scale-graph target, theta, rho, and Gate 3 frame surfaces are not prize
+  proofs by themselves.
+- [x] Record the current dependency priority order: Gate 3 transfer first as
+  the shared continuum bridge, YM actual activity/RG second, NS danger-shell
+  maximum principle third, Paper 0 publication in parallel.
+- [x] Name the YM solve chain: actual `p=7` Wilson polymer activity,
+  same-prime KP absorption, carrier area law, Balaban RG contraction,
+  continuum OS/Schwinger construction, Gate 3 mass-shell transfer, and
+  positive continuum mass gap.
+- [x] Name the NS solve chain: fixed-`K` LP identity, theta tail decay,
+  danger-shell edge conservation, danger-shell maximum principle,
+  BKM/Serrin continuation, and global smoothness.
+- [x] Name the Gate 3 solve chain: phase-complete finite frame lower bound,
+  uniform frame lower bound, PAWOTG density, Mosco recovery, no spectral
+  pollution, and mass-shell bridge.
+- [x] Document the shared `DangerNodeEdgeInfluxBound` as the common lemma
+  needed to turn node margins into a scale-graph barrier.
+- [ ] Inhabit the listed analytic lemmas before claiming Clay YM, Clay NS,
+  Gate 3 closure, or full physics unification.
+
+Post-CM-correction Clay priority `2026-06-02`:
+- [x] Document the corrected Clay-priority state in
+  `Docs/PostCMCorrectionClayPriority.md`.
+- [x] Record that CM splitting is `5 split + 9 inert + 1 ramified`, while
+  `7+7+1` is atom grammar only.
+- [x] Route Gate 3 priority to the corrected inert-prime phase-completeness
+  lemma: `A_inert(9) > 0`.
+- [ ] Prove or refute the inert-prime phase-frame lower bound with Mirror-B
+  phase/twist variables.
+- [ ] Lift finite cutoff frame evidence to a uniform cutoff lower bound.
+- [ ] Use Gate 3 to bridge carrier YM area law to continuum mass-shell only
+  after Mosco and no-spectral-pollution obligations are inhabited.
+
+SSP 7+7+1 frame decomposition `2026-06-02`:
+- [x] Add `PressureDepthLengthTripleReceipt` to separate length, depth, and
+  unresolved pressure in the shared margin grammar.
+- [x] Add `SSPSevenSevenOneFrameDecompositionReceipt` linking 7+7+1 carrier
+  organization to Gate 3 frame lower-bound factors.
+- [x] Record the literal `Q(sqrt(-7))` split/inert audit separately from the
+  semantic mirror septets, including the correction that `p71` is split under
+  `(-7/p)`.
+- [x] Record phase-blind inert-factor failure and phase-complete conditional
+  route.
+- [x] Add `HeckeCarrierVsCMSplittingReceipt` to make the correction explicit:
+  CM arithmetic is `5+9+1`, Hecke atom grammar is `7+7+1`, and the two
+  partitions are not the same.
+- [x] Add `P71HeckeMirrorSignLaneReceipt` to record `p71` as terminal SSP
+  sign/carry/reaction-orientation lane, with `p71` split-not-inert and no
+  time-theorem or Clay promotion.
+- [ ] Prove `A_split > 0`, `A_inert > 0`, `A_71 > 0`, and a uniform cutoff
+  lower bound before claiming Gate 3 closure or continuum transfer.
+
+Manager B NS Paper 1 Clay target `2026-06-02`:
+- [x] Add fixed-`K` LP identity analytic receipt with signs, terms, and the
+  Coifman-Meyer/Kato-Ponce commutator obligation named fail-closed.
+- [x] Add danger-shell maximum-principle receipt as the precise NS5 target:
+  danger-shell argmax after the fixed-`K` theta profile, adjacent-shell edge
+  leakage, and hidden-production exclusion.
+- [x] Add the conditional theorem receipt: `theta < 1` plus positive
+  dissipation implies fixed-`K` tail decay.
+- [x] Add the actual NS-to-EV5 projection receipt: lane2 danger shell, lane7
+  tail energy, v3 diagnostic-only, and LP commutator defect boundary.
+- [x] Add `../dashiCFD/scripts/ns_theta_sweep.py` and
+  `Docs/NSPaper1ClayTarget.md`.
+- [ ] Prove the danger-shell maximum principle and edge-leakage bound before
+  claiming theta preservation, BKM closure, global smoothness, or Clay NS.
+
+Local docs / 369 support integration `2026-06-02`:
+- [x] Check local docs/receipts for domain-specific pressure, PNF, RG,
+  wave/spectral formalisms, wave/light transport, refraction/rainbow,
+  simulation/nature, TITAN/Bryan boundaries, and 369 voxel/supervoxel support.
+- [x] Add `LocalDocs369UnificationSupportReceipt` as the local-docs companion
+  to `ITIRPNFPressureUnificationSupportReceipt`.
+- [x] Record 369 as support grammar only: ternary support, six-fold
+  orientation, nine-cell majority, and 27-cell supervoxel boundary.
+- [x] Consume existing codec atom, carry-memory/subvoxel, 7+7+1 carrier, and
+  dialectical atom frontier receipts without promoting them.
+- [ ] Before using 369/voxel language in an analytic lane, supply the concrete
+  runtime codec or Gate 3 density theorem named by the existing open
+  obligations.
+
+ITIR/PNF pressure support integration `2026-06-02`:
+- [x] Check `../ITIR-suite` docs for PNF, domain-specific residual pressure,
+  RG toy completion, and spectral post-selector retrieval contracts.
+- [x] Check local DASHI surfaces for wave formalism, spectral formalism,
+  wave/light transport, stationary-phase refraction/rainbow, simulation/
+  nature transport, anisotropy-pressure, and RG receipts.
+- [x] Add `ITIRPNFPressureUnificationSupportReceipt` as a support-lane receipt
+  for the publishable unification stack.
+- [x] Record PNF/domain-specific pressure as typed residual pressure, not
+  Navier-Stokes pressure and not runtime truth authority.
+- [x] Keep TITAN and Bryan/blueprint material as exposition guards only.
+- [ ] Before consuming ITIR PNF in an analytic theorem, add a receipt-bearing
+  runtime PNF emission/consumer that supplies real domain, provenance,
+  structural signature, and residual payloads.
+
+Manager publishable stack receipt `2026-06-02`:
+- [x] Add `PublishableFullUnificationStackReceipt` as the canonical
+  top-level publication-readiness object for the Papers 0-4 programme.
+- [x] Consume the existing L0, roadmap, NS theta, YM rho/KP/Balaban, Gate 3,
+  unified-margin, and frontier receipts without promoting any lane.
+- [x] Record the positive publication claim: Paper 0 is ready as the shared
+  grammar and the full unification is publishable as a programme.
+- [x] Add `KeyTermCorrespondenceIndexReceipt` as the canonical
+  terminology/promotion-discipline table for Paper 0 and downstream lane
+  prose.
+- [x] Add `UniversalScaleGraphBarrierTargetReceipt` as the checked finish-shape
+  target for Paper 4: projection faithfulness, node margin dynamics,
+  edge conservation/absorbable leakage, danger-node absorber dominance, and
+  worst-scale comparison.  It consumes `ScaleGraphBarrierTargetReceipt` and
+  `DangerScaleEdgeConservationReceipt` as the detailed barrier/edge surfaces.
+- [x] Add `Paper0SharedMarginGrammarConsolidationReceipt` as the Manager-C
+  Paper 0 spine: L0 grammar, key-term index, scale-graph target, and
+  non-promoting NS/YM/Gate 3 instantiations are joined in one fail-closed
+  receipt.
+- [ ] Close the open analytic inhabitants before any stronger claim:
+  NS theta preservation/EV5 forward simulation, actual YM p=7 polymer
+  activity plus Balaban RG transfer, and Gate 3 density/Mosco/no-pollution/
+  mass-shell transfer.
+- [ ] Prove or refute the universal scale-graph barrier target.  This requires
+  a real projection/simulation defect bound, edge accounting conservation law,
+  NS danger-shell absorber dominance, YM actual-rho/Balaban contraction, and
+  Gate 3 projection faithfulness.
+
 Manager publication docs governance `2026-06-02`:
 - [x] Align `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md` with
   `FullUnificationPublicationRoadmapReceipt`.
@@ -13,14 +279,55 @@ Manager publication docs governance `2026-06-02`:
   diagnostic is not theorem, toy ratio is not analytic margin, finite frame is
   not continuum density, observed margin is not proved margin, and carrier gap
   is not continuum gap.
+- [x] Document the universal scale-graph barrier as the Paper 4 finishing
+  theorem shape and link it to the checked Agda receipts for NS, YM, Gate 3,
+  Paper 0, and the key-term index.
+- [x] Add the roadmap Agda citation map for the finish shape: each paper-facing
+  term now points to a module, canonical witness, and false-promotion guard.
+- [x] Extend the roadmap citation map with the Manager-C Gate 3 receipts:
+  finite-cutoff norm binding, precise Mosco recovery, no spectral pollution,
+  Gate 3 scale-graph barrier instantiation, and Paper 0 consolidation.
+- [x] Add `Docs/Paper0SubmissionDraft.md` with the Paper 0 abstract, theorem
+  grammar, non-promoting NS/YM/Gate 3 instantiations, barrier target, and
+  submission boundary.
+- [x] Pin the Paper 6 NS carry-language sentence to
+  `NSTailDominanceCarryAnalogyReceipt`: tail dominance as carries above
+  `K*(nu)` absorbed before cycling back as unresolved residuals, with NS/Gate3/
+  Clay promotion false.
+
+Manager C Gate 3 / Paper 0 integration `2026-06-02`:
+- [x] Add `Gate3AdelicSobolevNormBindingReceipt`: finite-cutoff carrier norm
+  binding with upper bound recorded, lower bound conditional on phase
+  completeness/no-zero-kernel, and uniform continuum bound open.
+- [x] Add `Gate3MoscoRecoveryPreciseReceipt`: Mosco condition II is trivial
+  for the abstract surface, condition I requires density, and PAWOTG transfer
+  remains open.
+- [x] Add `Gate3NoSpectralPollutionReceipt`: no-spectral-pollution is recorded
+  as conditional on phase/twist completeness, Mosco, tightness, and isolated
+  sector; no unconditional theorem is promoted.
+- [x] Add `Gate3ScaleGraphBarrierInstantiationReceipt`: Gate 3 cutoff levels
+  instantiate the scale-graph barrier with uncaptured norm defect, projection
+  error, frame/Mosco recovery strength, and defect/frame ratio.
+- [x] Add `../dashiCFD/scripts/gate3_atom_frame_sweep.py` and generate a
+  smokeable `gate3_atom_frame.csv` diagnostic with `NO_PROMOTION` status.
+- [ ] Prove the PAWOTG density/transfer theorem needed by Gate 3 Mosco
+  condition I.
+- [ ] Prove uniform continuum lower frame control beyond finite cutoff
+  evidence.
+- [ ] Prove no spectral pollution from phase/twist completeness plus Mosco
+  rather than recording it as conditional.
+- [ ] Prove the Gate 3 scale-graph barrier; the current receipt is an
+  instantiation surface only.
 
 Manager YM Paper 3 roadmap implementation `2026-06-02`:
 - [x] Add `YMSamePrimeOverlapReductionReceipt`: KP overlap is reduced to
   retained same-prime polymers without using activity multiplicativity.
 - [x] Add `YMBTPathCountingKPThresholdReceipt`: BT path counting gives
-  `p^n` branching and the `p=7` convergence threshold `beta ~= 10.13`.
+  `p^n` branching and the corrected `p=7` convergence threshold
+  `beta > 10.11` with `c_min = 0.242`.
 - [x] Add `YMKPAbsorptionMarginThresholdReceipt`: strict KP absorption is
-  separated from convergence and records `beta ~= 13.64`.
+  separated from convergence and records the corrected live threshold
+  `beta > 12.97`.
 - [x] Add `YMActualPolymerActivityDefinitionReceipt`: toy rho is rejected as
   actual KP input; actual p=7 edge-rooted Wilson polymer activity is the
   immediate missing definition.
@@ -46,6 +353,9 @@ Manager L full unification roadmap `2026-06-02`:
   downstream papers still need their analytic inhabitants.
 - [x] Correct Gate 3 wording: use cutoff frame bounds `A_N > 0` on finite
   subspaces plus density/Mosco/no-spectral-pollution/mass-shell bridge.
+- [x] Route `scale graph barrier` through `KeyTermCorrespondenceIndexReceipt`
+  as a finish-shape target theorem surface, with forbidden use
+  `noBarrierNameAsMaximumPrincipleProof`.
 - [ ] NS Paper 1: discharge fixed-`K` tail flux identity, theta margin tail
   decay, one-way continuation, and NS-to-EV5 forward simulation.
 - [ ] Gate 3 Paper 2: prove phase-aware carrier density, Mosco recovery,
@@ -72,6 +382,9 @@ NS-only margin roadmap `2026-06-02`:
   bookkeeping in this roadmap.
 - [x] NS1 receipt surface: record fixed-`K` tail flux identity bookkeeping in
   `NSTailFluxAbsorptionMarginReceipt`, with moving cutoffs explicitly excluded.
+- [x] NS1 analytic target surface: add
+  `NSTailFluxIdentityAnalyticTargetReceipt` to name the fixed-`K`
+  Littlewood-Paley proof obligations while keeping the proof open.
 - [ ] NS1: prove the fixed-`K` tail flux identity with exact shell,
   truncation, boundary, and flux terms.
 - [x] NS2 runtime diagnostic: make the theta profile computable across finite
@@ -106,8 +419,10 @@ Margin invariant implementation batch `2026-06-02`:
 - [x] Emit the dashiCFD runtime fields `theta`, `ns_margin`,
   `ns_margin_ratio`, `danger_shell`, and `promotion_status` in the EV5
   theta diagnostic output.
-- [x] Split the YM/KP `p=7` thresholds: `10.13` is only the convergence
-  boundary; the stricter KP activity-absorption margin is `13.64`.
+- [x] Split the YM/KP `p=7` thresholds with the current constants:
+  `c_min = 0.242`, convergence threshold `10.11`, strict KP
+  activity-absorption threshold `12.97`, divergent `beta6` ratio `r = 2.70`,
+  and gaps `4.11`/`6.97`.
 - [ ] Prove the NS analytic inhabitant: `theta < 1` from actual tail-flux
   estimates plus `NS->EV5` forward simulation/quotient/ultrametric
   preservation.
@@ -222,9 +537,10 @@ Fifteen-variable atom schema `2026-06-02`:
 
 KP/RG/atom receipt governance `2026-06-02`:
 - [x] Record `KPCouplingObstruction` as a coupling-boundary receipt: corrected
-  `beta_min` for `p=7` is approximately `10.13`, so the physical Wilson beta
-  route fails absent an RG bridge rather than passing by the finite carrier
-  estimate alone.
+  live constants are `c_min = 0.242`, `p=7` convergence threshold `10.11`,
+  strict absorption threshold `12.97`, divergent `beta6` ratio `r = 2.70`, and
+  gaps `4.11`/`6.97`, so the physical Wilson beta route fails absent an RG
+  bridge rather than passing by the finite carrier estimate alone.
 - [x] Record `BruhatTitsBraidKPReduction` as a conditional carrier reduction:
   the carrier RG beta can pass only under the stated carrier/RG hypotheses and
   does not prove physical beta running, KP closure, or Clay YM.
@@ -9064,3 +9380,47 @@ Cleanup
   `Skeleton` after their content has become draft-grade, and decide whether
   the Closure and Moonshine supersingular-prime bridge receipts should remain
   separate or be folded into one canonical surface.
+## 2026-06-02 Sibling Codec / 369 / Continuous Support Pass
+
+- [x] Use `robust-context-fetch` against the archive threads surfaced by the
+  codec/369 query: `Generator Codec Alignment`, `Optimal Triadic Decomposition
+  RGB`, and `Branch · Topology and MDA/MDL`.
+- [x] Inspect sibling codec implementations in `../dashitest` and
+  `../dashiCFD`, including balanced-ternary video reuse, motion-compensated
+  MDL side bits, `gen_codec_E_seq.py`, the LES vorticity structural codec,
+  and the signed anisotropic residual atom probe.
+- [x] Inspect sibling continuous/369 artifacts in `../dashifine` and
+  `../dashitest/dashifine`, including `Base369.agda`, continuous lens topology
+  probes, lens CSVs, and 369 overlay images.
+- [x] Inspect `../dashiRTX` for PDA-MDL light transport and quadtree
+  ultrametric rendering support.
+- [x] Add
+  `DASHI.Physics.Closure.SiblingCodecFiningContinuousSupportReceipt` and wire
+  it into `DASHI.Everything`.
+- [ ] Future implementation lane: promote the support receipt into concrete
+  runnable codec documentation only after a fresh benchmark run records the
+  exact MP4/video dataset, codec flags, `E_seq` shape, and rate/distortion
+  outputs.
+- [ ] Future proof lane: keep Gate 3 density, continuum lens transfer,
+  NS-tail control, YM RG, and light-transport identity as separate proof
+  obligations rather than consuming sibling artifacts as theorem evidence.
+
+## 2026-06-02 Remaining Archive Thread Review Wave
+
+- [x] Reuse six worker lanes to review the remaining archive candidates from
+  the codec/369 `robust-context-fetch` cross-thread ranking.
+- [x] Classify `DNA Cassette Tape Comeback` as high-value support for DNA
+  UV/Haar detail sheets, supervoxel analogy, codec/369, wave, and RG grammar.
+- [x] Classify `DASHI learner context` and `DASHI learner context2` as
+  high-value support for tree-Haar/detail-band learner observables,
+  codec-plane sheets, MP4/video diagnostics, and quotient-operator learning.
+- [x] Classify the blocker/PUMUL thread as high-value support for Base369,
+  PNF, pressure, wave, and RG routing boundaries.
+- [x] Classify `DASHI MAIN MATH DEC` and `Branch · Math Mysticism Breakdown`
+  as support for triadic-first codec design and 369/supervoxel/anisotropy/twist
+  modeling grammar.
+- [x] Mark `james`, `James Michael`, no-title execution traces, and hygiene
+  threads as reviewed but not consumed as theorem evidence.
+- [x] Extend
+  `DASHI.Physics.Closure.SiblingCodecFiningContinuousSupportReceipt` with the
+  new archive surfaces and explicit non-promotion boundaries.

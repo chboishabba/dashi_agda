@@ -2,6 +2,50 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-02 docs/governance lane: `MonsterMoonshineSSPQuotientControl` is now
+  recorded above YM/Gate3 as a quotient/compression blocker.  15SSP/moonshine
+  is not an entropy multiplier, and raw `c2/c1 ~= 109` is not the physical
+  polymer entropy constant `C0`.  If quotient control is proved, use
+  `C0_eff ~= 1` and `beta_abs ~= 12.97`; if square-root/raw leakage survives,
+  thresholds rise to about `22.66`/`32.35`.  This is non-promoting governance:
+  no quotient theorem, PAWOTG theorem, YM mass gap, Clay, or terminal closure
+  follows.
+
+- 2026-06-02 computed lemma update: added and wired
+  `Gate3DigitExpansionPAWOTGPartialResultReceipt`,
+  `YMCharacterExpansionContinuumReformulationReceipt`, and
+  `NSThetaPressureMarginCorrectionReceipt`.  The Gate 3 lane now has a genuine
+  partial PAWOTG result: `phi_digit` has `Var=1/12` and
+  `sigma=1/sqrt(12) ~= 0.2887 < 0.5052` for every prime and improves with BT
+  depth; the open question is whether the actual SSP/CM/Hecke atoms use this
+  embedding or share its spread.  The YM lane now records fixed-lattice
+  positivity from the character expansion (`m_latt(6) >= 0.183`,
+  `m_latt(12.97) >= 0.080`) and reframes Clay as continuum survival.  The NS
+  lane retracts the stale claim that `H^{11/8}` is weaker than `H^{1/2}` and
+  keeps theta as tail-localized conditional pressure-margin decay only.  No
+  Gate 3, YM, NS, Clay, or terminal promotion follows.
+
+- 2026-06-02 final reduction receipts: added and wired
+  `Gate3AdelicLocalizationReductionReceipt`,
+  `YMBetaBridgeQuantitativeGapReceipt`, and
+  `NSNonCircularObstructionReceipt`.  Gate 3 is reduced to a
+  PAWOTG localization theorem for an explicit adelic embedding with uniform
+  Archimedean spread below `sigma_crit(p=3)=0.5052`; YM is reduced to a
+  nonperturbative beta bridge across the `6.97` strict-absorption gap, with a
+  naive perturbative scale `exp(150) ~= 10^65`; NS is reduced to
+  non-circular high-high paraproduct control at the danger shell.  These are
+  completed non-promoting receipt records.  They do not prove the analytic
+  blockers, Gate 3, YM mass gap, NS regularity, Clay, or terminal closure.
+
+- 2026-06-02 Clay prize lemma roadmap: added
+  `Docs/ClayPrizeLemmaRoadmap.md` as the direct prize-facing dependency board.
+  The documented priority is YM actual `p=7` Wilson polymer activity plus
+  Balaban/RG first, Gate 3 continuum transfer second, NS danger-shell maximum
+  principle third, and Paper 0 publication in parallel.  The doc names the
+  exact YM, NS, and Gate 3 lemma chains required for Clay-level promotion and
+  keeps Clay YM, Clay NS, Gate 3 closure, continuum transfer, and full
+  unification false/open.
+
 - 2026-06-01 Worker 4 Balaban/KP/ultrametric YM obligation update: the
   volume-independent RG induction gap is now explicit.  The competitive YM
   contribution target is the KP/uniform-volume polymer obligation for
@@ -5313,3 +5357,80 @@ Cleanup state:
   convergence, or physical spectrum identification.  Governance-only update;
   no Agda receipts, stubs, Clay promotion, Wightman promotion, Standard Model
   promotion, or terminal promotion.
+- 2026-06-02 Clay analytic sprint evidence bundle:
+  user supplied CSV/PNG diagnostics from `/home/c/Downloads` and the repo now
+  stages copies under `Docs/Images/clay-analytic-sprint/`.  The docs should cite
+  these as non-promoting evidence surfaces linked to the checked Agda receipts:
+  `ScaleGraphBarrierAlgebraProofReceipt`,
+  `Gate3PAWOTGConcreteConditionReceipt`,
+  `Gate3GershgorinFiniteFrameBoundReceipt`,
+  `YMKPThresholdCorrectionReceipt`,
+  `YMActualKPLocalSumDiameter1Receipt`,
+  `YMActualKPLocalSumDiameter2Receipt`,
+  `NSTailFluxLPIdentityFullDerivationReceipt`,
+  `NSAdjacentShellLeakageBoundReceipt`, and
+  `NSThetaTailToBKMBridgeReceipt`.  Artifact readings must remain literal:
+  `ym_p7_polymer_kp.csv` shows beta 6 is divergent (`r = 2.7017782`), beta
+  10.13 is convergent but not strictly absorbing, and beta 13.64 is strictly
+  absorbing in the supplied table; `gate3_frame_extended.csv` shows Gershgorin
+  fails for all sampled rows and finite toy frame lower bounds collapse at
+  larger `N`; `ns_theta_full_sweep.csv` contains stress/failure regimes with
+  `Theta > 1` and negative margins.  These strengthen the final blockers
+  `PAWOTGUniformSeparation`, `BalabanPhysicalBetaBridge`, and
+  `NonCircularKStarDriftBound`; they do not promote Clay, Gate 3, NS, YM,
+  terminal, or full-unification closure.
+- 2026-06-02 irreducible Clay boundary:
+  docs now explicitly state that none of the three final inhabitants is solved
+  by the sprint.  `PAWOTGUniformSeparation` requires a concrete
+  adelic-to-Archimedean atom map plus uniform Archimedean Gaussian localization
+  below `sigma_crit(p=3) = 0.5052`; Kozyrev orthogonality on `Q_p` alone is not
+  enough.  `BalabanPhysicalBetaBridge` requires nonperturbative block-spin/RG
+  control from the physical beta regime to KP-safe beta, not perturbative
+  beta-function wording.  `NonCircularKStarDriftBound` is the high-high
+  paraproduct obstruction and must control tail flux without assuming
+  `H^{1/2}`, Serrin, BKM, or stronger regularity.  The publishable next move is
+  Papers 1-3 as reduction papers with measured constants and exact blockers,
+  not Clay promotion.
+- 2026-06-02 Clay blocker asymmetry ledger:
+  added `DASHI/Physics/Closure/ClayBlockerAsymmetryReceipt.agda` and wired it
+  into `DASHI/Everything.agda`.  Future summaries should not treat the final
+  blockers as symmetric open lemmas.  `PAWOTGUniformSeparation` is new
+  adelic-localization mathematics; `BalabanPhysicalBetaBridge` is quantitative
+  completion of the Balaban RG programme; and `NonCircularKStarDriftBound` is
+  recorded as `OpenWithHighHighParaproductObstruction`, not `OpenUnknown`.
+  Paper 1 may claim a conditional NS reduction and obstruction locator only;
+  Paper 2 may claim the PAWOTG reduction; Paper 3 may claim the quantified
+  Balaban-gap reduction.  All Gate 3, YM, NS, Clay, and terminal promotion
+  flags remain false.
+- 2026-06-02 computed visualisation synthesis:
+  added `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`
+  and wired it into `DASHI/Everything.agda`.  It consumes the Gate 3 PAWOTG,
+  YM KP threshold, NS non-circular `K*`, and Clay blocker asymmetry receipts.
+  It records the four-visualisation reading as a fail-closed ledger only:
+  Gate 3 has the documented PAWOTG `p=3` threshold
+  `sigma_crit = 0.5052` plus a Weil/Kozyrev attack route, but Worker 5
+  verified that the current CSV bundle does not independently include a
+  machine-readable `p/sigma_crit` table; YM has `beta=6` divergent with
+  `r = 2.7017782`, strict absorption near `12.97`, sampled safe absorption at
+  `13.64`, and a one-loop `exp(150) ~= 10^65` perturbative bridge diagnostic;
+  NS has a low-high/high-high split where low-high is not the core obstruction
+  and high-high is load-bearing/circular if `H^{1/2}`, Serrin, or BKM are
+  imported.  The Paper 1 target is now phrased as a conditional comparison
+  theorem route `Theta < 1 -> H^{11/8}` only.  No PAWOTG theorem, Balaban
+  bridge, NS danger-shell bound, Gate 3 closure, YM mass gap, NS regularity,
+  Clay claim, or terminal promotion is introduced.
+- 2026-06-02 refined diagnostics:
+  added `scripts/clay_refined_diagnostics.py`, generated
+  `Docs/Images/clay-analytic-sprint/ns_theta_tail_restricted.csv`,
+  `ym_c0_threshold_sensitivity.csv`, and `gate3_sampler_quality.csv`, and
+  added/wired `DASHI/Physics/Closure/ClayRefinedDiagnosticTargetsReceipt.agda`.
+  Future summaries should distinguish `Theta_global` from `Theta_tail`:
+  sampled `Theta_global` is low-shell dominated at `k=2`, while tail-restricted
+  theta passes for smooth (`0.00399397`) and Kolmogorov (`0.3188379`) and fails
+  for near-critical (`2.01585515`) and rough (`2.76304232`).  YM must treat
+  entropy `C0` as load-bearing: `C0=1` gives `beta_abs=12.97131128`, while
+  `C0=1.25` gives `13.89339207`.  Gate 3's current sampler is clustered:
+  zero Gershgorin-passing rows, `mu_N ~= 1`, target
+  `AtomSamplerPAWOTGQuality : mu_N <= C/N`.  These are diagnostics only and do
+  not promote PAWOTG, Balaban transfer, NS danger-shell preservation, Gate 3,
+  YM, NS, Clay, or terminal closure.

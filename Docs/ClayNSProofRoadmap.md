@@ -16,6 +16,43 @@ preservation gap. Until those are discharged, no unconditional Clay
 Navier-Stokes claim, arbitrary-data theorem, or global smoothness promotion is
 available.
 
+Paper 1 target sidecar: `Docs/NSPaper1ClayTarget.md` now records the
+Manager-B Clay-facing chain: fixed-`K` LP identity, theta as `Flux/Diss`,
+conditional fixed-`K` tail decay under `theta < 1`, danger-shell locator,
+EV5 projection up to an LP commutator defect, and the open danger-shell
+maximum-principle/edge-leakage obligations. It is a target document, not a
+regularity proof.
+
+## 2026-06-02 Theta Comparison Correction
+
+The current comparison correction is checked in:
+
+```text
+DASHI/Physics/Closure/NSThetaPressureMarginCorrectionReceipt.agda
+```
+
+The retracted wording is:
+
+```text
+H^{11/8} is weaker than H^{1/2}.
+```
+
+As a spatial Sobolev exponent this is false: `11/8 > 1/2`, so `H^{11/8}` is
+spatially stronger.  The safe claim is instead:
+
+```text
+theta < 1 gives conditional, tail-localized L2 pressure-margin decay above K*.
+```
+
+That is not the same as global Serrin/BKM control.  The paraproduct split now
+has the honest status:
+
+- low-high is controlled by low-frequency gradient/Bernstein structure;
+- high-high requires an `L3`/`H^{1/2}` route under standard tools;
+- importing that route as an assumption is regularity input and is circular
+  for Clay;
+- the non-circular high-high estimate remains the wall.
+
 The current tower contains receipts for finite energy/BKM targets, ultrametric
 Aubin-Lions compactness, a failed 2/3/5 Haar-frame bridge, a carrier weak-form
 interface, and a replacement Littlewood-Paley/Besov/parabolic-smoothing target.
@@ -53,7 +90,7 @@ not prove global smoothness or the Clay Navier-Stokes statement.
 | Stage | NS-only obligation | Status |
 |---|---|---|
 | L0 | Consume the shared margin grammar only as an NS tail-flux margin interface. | Available as bookkeeping. It does not by itself prove any NS estimate. |
-| NS1 | Prove the fixed-`K` tail flux identity for the selected shell split. | Receipt surface recorded in `NSTailFluxAbsorptionMarginReceipt`: `K` is fixed during differentiation and moving cutoffs are excluded. The full analytic Littlewood-Paley identity remains open. |
+| NS1 | Prove the fixed-`K` tail flux identity for the selected shell split. | Receipt surface recorded in `NSTailFluxAbsorptionMarginReceipt`: `K` is fixed during differentiation and moving cutoffs are excluded. `NSTailFluxIdentityAnalyticTargetReceipt` now names the exact Littlewood-Paley proof obligations; the analytic identity proof remains open. |
 | NS2 | Make the theta profile computable across the relevant shells and times. | Implemented as an evidence-only finite cutoff/time diagnostic in dashiCFD. Computability of the profile is not monotonicity and is not regularity. |
 | NS3 | Prove that a positive NS margin implies tail decay in the actual-flow variables. | Open. This is the first analytic consumption point for the margin. |
 | NS4 | Bind a one-way BKM/Serrin continuation implication from the proved tail decay hypotheses. | Open and one-way only: continuation may follow from the right hypotheses, but the margin is not equivalent to BKM/Serrin control. |
@@ -95,6 +132,57 @@ replacement analytic route: prime-band Littlewood-Paley/Besov/parabolic
 smoothing estimates, especially a paraproduct estimate strong enough to feed
 N5. It must not be described as a Clay NS proof until N3-N6 and the external
 authority boundaries are discharged.
+
+## Non-Circular K-Star Drift Obstruction
+
+The next checked receipt is
+`DASHI/Physics/Closure/NSNonCircularObstructionReceipt.agda`.
+It records the current sharp obstruction:
+
+```text
+High-high paraproduct control at K*(t)
+  through an H^{-1/2} nonlinear-defect estimate
+  without assuming H^{1/2} velocity regularity, Serrin, BKM,
+  or stronger regularity
+```
+
+The forbidden circular route is:
+
+```text
+Flux_{>K*} <= (1-c) Diss_{>K*}
+  -> H^{1/2}-type velocity control
+  -> Serrin/BKM-class regularity
+  -> regularity assumption smuggled into the proof
+```
+
+The admissible replacement route is:
+
+```text
+||P_{>K*}(u.grad u)||_{H^{-1/2}}
+  <= epsilon * nu * ||P_{>K*}u||_{H^{3/2}}
+  -> dual pairing with P_{>K*}u in H^{1/2}
+  -> high-high flux absorbed by tail dissipation
+```
+
+The admissible publication claim is weaker and cleaner:
+
+```text
+Theta < 1 is a computable seam criterion and danger-shell locator.
+Preserving Theta < 1 is equivalent to controlling the high-high obstruction.
+The non-circular high-high estimate is the Clay-level NS step.
+```
+
+This receipt therefore treats `NonCircularKStarDriftBound` as the open
+structural obstruction, not as a partially proved lemma.
+`DASHI/Physics/Closure/NSNonCircularKStarDriftBoundTargetReceipt.agda` records
+the exact next theorem target after that obstruction receipt: at the danger
+shell `K*(t)`, prove `Flux_{>K*(t)} <= (1-c) Diss_{>K*(t)}` or the equivalent
+strict theta-preservation statement, while explicitly forbidding `H^{1/2}`,
+velocity regularity, Serrin, BKM, or stronger regularity as proof inputs.
+`DASHI/Physics/Closure/NSNegativeSobolevDangerShellReceipt.agda` now records
+the sharpened H^{-1/2} nonlinear-defect theorem target.  The receipt keeps that
+defect estimate, `K*(t)<=K*(nu)` drift containment, edge influx, theta
+preservation, and tail-to-continuation bridge as open obligations.
 
 Phase 2 update: the pure 2/3/5 Haar-frame route is now recorded as closed
 negatively by `NSWaveletRouteClosedReceipt`: constants obstruct the

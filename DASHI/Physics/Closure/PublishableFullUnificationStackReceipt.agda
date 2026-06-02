@@ -8,9 +8,11 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.FullUnificationPublicationRoadmapReceipt as Roadmap
+import DASHI.Physics.Closure.FullUnificationJoinedLaneTableReceipt as Joined
 import DASHI.Physics.Closure.Gate3NormDictionaryReceipt as Gate3
 import DASHI.Physics.Closure.MarginInvariantProgrammeFrontierReceipt as Frontier
 import DASHI.Physics.Closure.NSTailFluxAbsorptionMarginReceipt as NS
+import DASHI.Physics.Closure.Paper0SharedMarginDependencyReceipt as Paper0
 import DASHI.Physics.Closure.StrictMarginImpliesAbsorptionReceipt as L0
 import DASHI.Physics.Closure.UnifiedMarginInvariantReceipt as Unified
 import DASHI.Physics.Closure.YMActualPolymerActivityDefinitionReceipt as YM5
@@ -180,6 +182,18 @@ record PublishableFullUnificationStackReceipt : Setω where
     roadmapNoYMClay :
       Roadmap.FullUnificationPublicationRoadmapReceipt.ymClayPromoted roadmapReceipt ≡ false
 
+    paper0DependencyReceipt :
+      Paper0.Paper0SharedMarginDependencyReceipt
+
+    paper0SharedGrammarOnly :
+      Paper0.sharedGrammarOnlyClaim paper0DependencyReceipt ≡ true
+
+    paper0NoLaneSpecificAnalytics :
+      Paper0.laneSpecificAnalyticsProvided paper0DependencyReceipt ≡ false
+
+    paper0NoClay :
+      Paper0.clayPromotion paper0DependencyReceipt ≡ false
+
     l0Receipt :
       L0.StrictMarginImpliesAbsorptionReceipt
 
@@ -261,6 +275,18 @@ record PublishableFullUnificationStackReceipt : Setω where
     frontierGate3Open :
       Frontier.MarginInvariantProgrammeFrontierReceipt.gate3SharedLiftClosed frontierReceipt ≡ false
 
+    joinedLaneTableReceipt :
+      Joined.FullUnificationJoinedLaneTableReceipt
+
+    joinedTableRowsComplete :
+      Joined.allRowsHaveOpenProofObligation joinedLaneTableReceipt ≡ true
+
+    joinedTableObligationsOpen :
+      Joined.allOpenProofObligationsRemainOpen joinedLaneTableReceipt ≡ true
+
+    joinedTableNoClay :
+      Joined.clayPromotionMade joinedLaneTableReceipt ≡ false
+
     layers :
       List PublishableLayer
 
@@ -335,6 +361,14 @@ canonicalPublishableFullUnificationStackReceipt =
         refl
     ; roadmapNoYMClay =
         refl
+    ; paper0DependencyReceipt =
+        Paper0.canonicalPaper0SharedMarginDependencyReceipt
+    ; paper0SharedGrammarOnly =
+        refl
+    ; paper0NoLaneSpecificAnalytics =
+        refl
+    ; paper0NoClay =
+        refl
     ; l0Receipt =
         L0.canonicalStrictMarginImpliesAbsorptionReceipt
     ; l0DynamicsBoundLoadBearing =
@@ -384,6 +418,14 @@ canonicalPublishableFullUnificationStackReceipt =
     ; frontierRhoOpen =
         refl
     ; frontierGate3Open =
+        refl
+    ; joinedLaneTableReceipt =
+        Joined.canonicalFullUnificationJoinedLaneTableReceipt
+    ; joinedTableRowsComplete =
+        refl
+    ; joinedTableObligationsOpen =
+        refl
+    ; joinedTableNoClay =
         refl
     ; layers =
         canonicalPublishableLayers

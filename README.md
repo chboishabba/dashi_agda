@@ -33,6 +33,45 @@ Use one of these reader tracks first:
   `Docs/WorkerCoordinationBoard.md` and `Docs/WorkerCoordinationMap.puml`
 - P0 blocker obligation surface:
   `DASHI/Physics/Closure/P0BlockadeProofObligations.agda`
+- Clay analytic sprint evidence bundle:
+  `Docs/Images/clay-analytic-sprint/README.md`
+  - CSV/PNG diagnostics for the current Gate 3, YM, and NS Clay-target lanes.
+    The bundle is explicitly empirical/non-promoting: it records the PAWOTG
+    spread target, the live `p=7` KP beta sweep, and NS danger-shell theta
+    profiles while keeping Gate 3 closure, YM mass gap, NS regularity, and
+    Clay promotion false.
+- Clay blocker asymmetry ledger:
+  `DASHI/Physics/Closure/ClayBlockerAsymmetryReceipt.agda`
+  - Records that the final three Clay blockers are not symmetric:
+    `PAWOTGUniformSeparation` is new adelic-localization mathematics,
+    `BalabanPhysicalBetaBridge` is quantitative completion of the Balaban RG
+    programme, and `NonCircularKStarDriftBound` is the high-high paraproduct
+    obstruction and may be equivalent to the NS regularity problem.  It keeps
+    all Gate 3, YM, NS, Clay, and terminal promotions false.
+- Clay computed-visualisation synthesis:
+  `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`
+  - Records the current four-plot/CSV synthesis as a checked, non-promoting
+    ledger.  Gate 3 is ordered first with `p=3` PAWOTG
+    `sigma_crit = 0.5052` and a Weil/Kozyrev attack route, while noting the
+    current artifact bundle has PNG support but no machine-readable
+    `p/sigma_crit` table.  YM records `beta=6` divergent with
+    `r = 2.7017782`, strict absorption at `beta ~= 12.97`, and the
+    one-loop `exp(150)` perturbative bridge diagnostic.  NS records the
+    low-high/high-high split: low-high is not the core obstruction, high-high
+    is load-bearing, and importing `H^{1/2}`, Serrin, or BKM control would be
+    circular.  No PAWOTG theorem, Balaban bridge, NS danger-shell bound, Gate 3
+    closure, YM mass gap, NS regularity, or Clay promotion is introduced.
+- Clay refined diagnostic targets:
+  `DASHI/Physics/Closure/ClayRefinedDiagnosticTargetsReceipt.agda`
+  - Records the second-pass calculations from the sprint CSVs.  NS now
+    separates `Theta_global` from `Theta_tail`; the sampled global danger shell
+    is low-frequency `k=2`, so Paper 1 should consume tail-restricted theta and
+    a `low_shell_warning`.  YM now treats the entropy constant `C0` as
+    load-bearing through `beta_abs(C0) = (a + log(2 p C0)) / c_min`.  Gate 3
+    now records the current atom sampler as clustered (`mu_N ~= 1`, zero
+    Gershgorin-passing rows) and names `AtomSamplerPAWOTGQuality : mu_N <= C/N`
+    as the next engineering target.  This is diagnostic only and keeps all
+    closure/promotion flags false.
 - P0 worker-lane obligation index:
   `DASHI/Physics/Closure/P0BlockerObligationIndex.agda`
 - Unified energy-functional coordination surface:

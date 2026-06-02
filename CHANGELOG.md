@@ -6,6 +6,282 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Monster/moonshine SSP quotient governance for `2026-06-02`: updated the
+  docs lane to record `MonsterMoonshineSSPQuotientControl` above YM/Gate3.  The
+  15SSP/moonshine mechanism is a quotient/compression target, not an entropy
+  multiplier; raw `c2/c1 ~= 109` is not the physical polymer entropy constant
+  `C0`.  If quotient control holds, the effective value remains
+  `C0_eff ~= 1` and `beta_abs ~= 12.97`; square-root/raw leakage would raise
+  thresholds to about `22.66`/`32.35`.  This is governance only: no quotient
+  theorem, PAWOTG theorem, YM mass gap, Clay, or terminal promotion was made.
+
+- Computed lemma update for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/Gate3DigitExpansionPAWOTGPartialResultReceipt.agda`,
+  `DASHI/Physics/Closure/YMCharacterExpansionContinuumReformulationReceipt.agda`,
+  and `DASHI/Physics/Closure/NSThetaPressureMarginCorrectionReceipt.agda`.
+  Gate 3 records the digit-expansion PAWOTG partial result
+  `Var=1/12`, `sigma=1/sqrt(12) ~= 0.2887 < 0.5052` for every prime and BT
+  level, while keeping the SSP/CM embedding gap open.  YM records the
+  fixed-lattice character-expansion mass bound with anchors
+  `m_latt(6) >= 0.183` and `m_latt(12.97) >= 0.080`, reformulating the Clay
+  blocker as continuum survival rather than fixed-lattice positivity.  NS
+  retracts the stale `H^{11/8}`-weaker-than-`H^{1/2}` comparison and records
+  theta as conditional tail-localized pressure-margin decay only.  No Gate 3
+  closure, YM mass gap, NS regularity, Clay, or terminal promotion was made.
+
+- Refined Clay diagnostics for `2026-06-02`: added
+  `scripts/clay_refined_diagnostics.py`, generated
+  `ns_theta_tail_restricted.csv`, `ym_c0_threshold_sensitivity.csv`, and
+  `gate3_sampler_quality.csv`, and added/wired
+  `DASHI/Physics/Closure/ClayRefinedDiagnosticTargetsReceipt.agda`.  The NS
+  diagnostic separates `Theta_global` from `Theta_tail`: sampled global danger
+  is low-shell `k=2`, while tail-restricted theta passes for smooth and
+  Kolmogorov rows and fails for near-critical and rough rows.  The YM
+  diagnostic records `beta_abs(C0) = (a + log(2 p C0)) / c_min`, making entropy
+  `C0` load-bearing.  The Gate 3 diagnostic records zero Gershgorin-passing
+  sampler rows and names `AtomSamplerPAWOTGQuality : mu_N <= C/N` as the next
+  engineering target.  No PAWOTG theorem, Balaban bridge, NS danger-shell
+  theorem, Gate 3 closure, YM mass gap, NS regularity, Clay, or terminal
+  promotion was introduced.
+
+- Clay computed visualisation synthesis for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`.  The
+  receipt records the four-visualisation reading as a checked, fail-closed
+  ledger.  Gate 3 now records `p=3` / `sigma_crit = 0.5052` plus the
+  Weil/Kozyrev attack route while preserving the artifact distinction that the
+  copied CSVs do not independently contain a `p/sigma_crit` table.  YM records
+  `beta=6` divergent with `r = 2.7017782`, strict absorption near
+  `beta = 12.97`, sampled safe absorption at `13.64`, and the one-loop
+  `exp(150)` perturbative bridge diagnostic.  NS records low-high as
+  non-core and high-high as the load-bearing paraproduct obstruction; importing
+  `H^{1/2}`, Serrin, or BKM remains circular.  No PAWOTG theorem, Balaban
+  bridge, NS danger-shell bound, Gate 3 closure, YM mass gap, NS regularity,
+  Clay, or terminal promotion was introduced.
+
+- YM Balaban physical beta bridge target for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/YMBalabanPhysicalBetaBridgeTargetReceipt.agda`.  The
+  receipt consumes the quantitative beta-gap, physical bridge-open, Paper 3,
+  KP threshold, actual p=7 Wilson activity, same-prime KP, and Balaban carrier
+  RG receipts, and records the exact next theorem target: physical beta
+  `~= 6` -> nonperturbative block-spin/RG flow -> KP-safe carrier beta
+  `> 12.97` -> strict activity absorption -> carrier area-law connection to
+  the physical lane.  It keeps the quantified gaps `4.11` and `6.97`, the
+  naive perturbative scale `exp(150) ~= 10^65`,
+  `perturbativeBridgeSuffices=false`, `nonperturbativeInputRequired=true`, and
+  all YM/Clay/terminal promotion flags false.
+
+- NS lane target receipt for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/NSNonCircularKStarDriftBoundTargetReceipt.agda`.
+  The receipt records the exact post-obstruction theorem target:
+  `Flux_{>K*(t)} <= (1-c) Diss_{>K*(t)}` at the danger shell, equivalently
+  strict theta preservation, without assuming `H^{1/2}`, Serrin, BKM, or
+  stronger regularity.  It keeps non-circular high-high control,
+  `K*(t)<=K*(nu)` drift containment, edge influx, theta preservation, and
+  tail-to-continuation discharge open.  No NS regularity, Clay, or terminal
+  promotion was introduced.
+
+- Final reduction receipts for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/Gate3AdelicLocalizationReductionReceipt.agda`,
+  `DASHI/Physics/Closure/YMBetaBridgeQuantitativeGapReceipt.agda`, and
+  `DASHI/Physics/Closure/NSNonCircularObstructionReceipt.agda`.  The Gate 3
+  receipt reduces `PAWOTGUniformSeparation` to an explicit adelic embedding
+  with uniform Archimedean spread below `sigma_crit(p=3)=0.5052`; the YM
+  receipt quantifies the physical beta bridge as nonperturbative, with strict
+  gap `6.97` and naive perturbative scale `exp(150) ~= 10^65`; the NS receipt
+  records the high-high paraproduct circularity obstruction for
+  `NonCircularKStarDriftBound`.  No PAWOTG theorem, RG bridge, NS maximum
+  principle, Gate 3 closure, YM mass gap, NS regularity, Clay claim, or
+  terminal claim was introduced.
+
+- Clay blocker asymmetry ledger for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/ClayBlockerAsymmetryReceipt.agda`, then linked it from
+  `README.md`, `Docs/ClayPrizeLemmaRoadmap.md`,
+  `Docs/Gate3AdelicSobolevPAWOTGRoadmap.md`,
+  `Docs/YMPaper3ClayTarget.md`, `Docs/NSPaper1ClayTarget.md`, `TODO.md`, and
+  `status.md`.  The receipt records that the three final Clay blockers are not
+  symmetric: `PAWOTGUniformSeparation` is new adelic-localization mathematics,
+  `BalabanPhysicalBetaBridge` is quantitative completion of the Balaban RG
+  programme, and `NonCircularKStarDriftBound` is the high-high paraproduct
+  obstruction.  NS is now recorded as
+  `OpenWithHighHighParaproductObstruction`, not a neutral `OpenUnknown` lemma.
+  No PAWOTG theorem, physical beta bridge, NS drift proof, Gate 3 closure, YM
+  mass gap, NS regularity, Clay, or terminal promotion was introduced.
+
+- Irreducible Clay boundary clarification for `2026-06-02`: updated
+  `Docs/ClayPrizeLemmaRoadmap.md`,
+  `Docs/Gate3AdelicSobolevPAWOTGRoadmap.md`,
+  `Docs/YMPaper3ClayTarget.md`, `Docs/NSPaper1ClayTarget.md`, `TODO.md`, and
+  `status.md` to record that the three final inhabitants remain genuinely open
+  analytic theorems.  Gate 3 still needs uniform adelic-to-Archimedean
+  localization below `sigma_crit(p=3) = 0.5052`; YM still needs a
+  nonperturbative `BalabanPhysicalBetaBridge`; NS still needs the
+  non-circular high-high paraproduct / `K*` drift bound.  The sprint therefore
+  supplies measured reductions and failure locations, not Clay closure.
+
+- Clay analytic evidence bundle for `2026-06-02`: copied the supplied
+  diagnostics from `/home/c/Downloads` into
+  `Docs/Images/clay-analytic-sprint/` and added
+  `Docs/Images/clay-analytic-sprint/README.md` as the artifact manifest.
+  Updated `README.md`, `Docs/ClayPrizeLemmaRoadmap.md`,
+  `Docs/Gate3AdelicSobolevPAWOTGRoadmap.md`, `Docs/YMPaper3ClayTarget.md`,
+  `Docs/NSPaper1ClayTarget.md`, `TODO.md`, `status.md`, and
+  `COMPACTIFIED_CONTEXT.md` to cite the bundle and the corresponding checked
+  Agda receipts.  The docs now record the literal readings of the supplied
+  files: Gate 3 finite toy dictionaries fail the sampled Gershgorin condition
+  and collapse at larger `N`; YM beta 6 is divergent with
+  `r = 2.7017782`; and the NS full theta sweep includes `Theta > 1` stress
+  regimes.  These artifacts sharpen the blockers
+  `PAWOTGUniformSeparation`, `BalabanPhysicalBetaBridge`, and
+  `NonCircularKStarDriftBound`; they do not promote Gate 3 closure, YM mass
+  gap, NS regularity, Clay, or terminal claims.
+
+- Revised analytic sprint governance for `2026-06-02`: updated
+  `Docs/ClayPrizeLemmaRoadmap.md`, `Docs/PostCMCorrectionClayPriority.md`,
+  `Docs/YMPaper3ClayTarget.md`, `TODO.md`, and `status.md`.  The abstract
+  scale-graph barrier algebra is now documented as provable once its
+  projection, node-margin, edge-influx, and absorber-dominance hypotheses are
+  supplied.  Gate 3 finite `A_N > 0` is pinned to finite separation plus a
+  Gershgorin lower bound, while the uniform/refinement blocker is
+  `PAWOTGUniformSeparation`.  YM KP is pinned to contour/action suppression
+  with entropy `C0` and an all-diameter geometric bound, with
+  `BalabanPhysicalBetaBridge` as the physical beta blocker.  NS now records that
+  `theta` alone does not imply BKM without `NonCircularKStarDriftBound` plus
+  enough tail/Sobolev control.  No Gate 3 closure, YM mass gap, NS regularity,
+  or Clay promotion was introduced.
+
+- Analytic constants docs audit for `2026-06-02`: updated the prize-facing docs
+  and live planning surfaces with the current constants.  Gate 3 PAWOTG/Mosco
+  now records the series-side condition `sigma < 0.505`; YM live planning uses
+  `c_min = 0.242`, thresholds `10.11`/`12.97`, divergent `beta6` ratio
+  `r = 2.70`, and gaps `4.11`/`6.97`; NS records the non-circular
+  `K*(t) <= K*(nu)` drift condition.  This is documentation/governance only:
+  no PAWOTG density theorem, YM KP theorem, Balaban transfer, NS maximum
+  principle, Gate 3 closure, or Clay promotion was introduced.
+
+- Hecke-vs-CM correction for `2026-06-02`: added and wired
+  `HeckeCarrierVsCMSplittingReceipt` and
+  `P71HeckeMirrorSignLaneReceipt`.  The bridge records that CM arithmetic over
+  `Q(sqrt(-7))` is `5 split + 9 inert + 1 ramified`, while DASHI/Hecke atom
+  grammar is `7+7+1`; these are distinct partitions.  The p71 receipt records
+  p71 as split-not-inert in the CM table and terminal SSP
+  sign/carry/reaction-orientation lane in the Hecke grammar, with Hecke mirror
+  pair, BT branching capacity, and moonshine-boundary transparency as
+  operational support only.  It explicitly rejects p71 as inert observer, p71
+  as time theorem, Gate 3 closure, and Clay promotion.
+
+- Clay prize lemma roadmap for `2026-06-02`: added
+  `Docs/ClayPrizeLemmaRoadmap.md` as the direct prize-facing dependency board.
+  It now records the current dependency priority as Gate 3 continuum transfer
+  first, YM actual `p=7` Wilson polymer activity and Balaban/RG second, and NS
+  danger-shell maximum principle third, while keeping Paper 0 publication as
+  the parallel fail-closed grammar output.  The doc names
+  `DangerNodeEdgeInfluxBound` as the shared edge-accounting lemma needed to
+  turn node margins into a scale-graph barrier.  All Clay, continuum, Gate 3,
+  and full-unification promotions remain false.  This is
+  documentation/governance only.
+
+- SSP 7+7+1 frame decomposition for `2026-06-02`: added and wired
+  `SSPSevenSevenOneFrameDecompositionReceipt` and
+  `PressureDepthLengthTripleReceipt`.  The new frame receipt records the
+  useful carrier partition as semantic 7+7+1 frame organization while
+  correcting the literal CM arithmetic audit: the mirror septets are not the
+  literal split/inert partition for `Q(sqrt(-7))`, and `p71` is split under
+  `(-7/p)`, not inert.  Gate 3 lower-bound bookkeeping is decomposed as
+  `A_split * A_inert * A_71`; phase-blind dictionaries fail the inert factor,
+  phase-complete dictionaries are the conditional route, and the uniform lower
+  bound, Mosco/no-pollution transfer, Gate 3 closure, and Clay promotion remain
+  false/open.  The pressure/depth/length receipt separates log path length,
+  resolved carry depth, and unresolved pressure so NS/YM/Gate3 margin prose can
+  stop conflating them.
+
+- Paper 6 NS carry-language pin for `2026-06-02`: updated
+  `Docs/Paper6FinalDraftOutline.md` so the dialectical carry sentence is tied
+  to `NSTailDominanceCarryAnalogyReceipt`.  The approved wording is that tail
+  dominance means carries above `K*(nu)` are absorbed by viscosity before
+  cycling back as unresolved residuals.  This is exposition only; no NS proof,
+  Gate 3 closure, Clay promotion, or terminal promotion was introduced.
+
+- Manager C Gate 3 / Paper 0 integration for `2026-06-02`: added and wired
+  `Gate3AdelicSobolevNormBindingReceipt`,
+  `Gate3MoscoRecoveryPreciseReceipt`,
+  `Gate3NoSpectralPollutionReceipt`,
+  `Gate3ScaleGraphBarrierInstantiationReceipt`, and
+  `Paper0SharedMarginGrammarConsolidationReceipt`.  The Gate 3 receipts now
+  record finite-cutoff norm binding, precise Mosco recovery obligations,
+  conditional no-spectral-pollution, and the Gate 3 specialization of the
+  scale-graph barrier.  Added `../dashiCFD/scripts/gate3_atom_frame_sweep.py`
+  to compute empirical `A_N`/`B_N` frame diagnostics with
+  `promotion_status = NO_PROMOTION`, and added `Docs/Paper0SubmissionDraft.md`
+  as the Paper 0 prose spine.  No Gate 3 closure, no continuum transfer, no
+  NS regularity, no YM mass gap, no full-unification closure, and no Clay
+  promotion was introduced.
+
+- NS Paper 1 Clay target for `2026-06-02`: added and wired
+  `NSTailFluxLPIdentityAnalyticReceipt`,
+  `NSDangerShellMaximumPrincipleReceipt`,
+  `NSThetaImpliesTailDecayReceipt`,
+  `NSToEV5ForwardSimulationActualReceipt`, and
+  `NSPaper1ClayTargetReceipt`.  Added `Docs/NSPaper1ClayTarget.md` and the
+  sibling runtime diagnostic `../dashiCFD/scripts/ns_theta_sweep.py`.  The
+  checked chain is fixed-`K` LP identity surface -> theta as actual
+  `Flux/Diss` seam -> conditional fixed-`K` tail decay under `theta < 1` ->
+  EV5 projection/shadow up to an LP commutator defect -> danger-shell maximum
+  principle open.  No BKM closure, unconditional theta preservation, global
+  smoothness, Clay Navier-Stokes, or terminal promotion was introduced.
+
+- Universal scale-graph barrier target for `2026-06-02`: added and wired
+  `UniversalScaleGraphBarrierTargetReceipt` as the checked citation point for
+  the final theorem shape needed to finish the YM/NS/Gate 3/Paper 4 programme.
+  The universal receipt consumes the existing detailed
+  `ScaleGraphBarrierTargetReceipt` and `DangerScaleEdgeConservationReceipt`,
+  keeping the top-level finish theorem linked to the comparison-principle and
+  edge-accounting surfaces already present in Agda.
+  The receipt records the intended maximum-principle structure: faithful
+  projection to a scale graph, strict node-margin dynamics, conservative or
+  absorbable edge transport, absorber dominance at danger nodes, and a worst
+  ratio that cannot cross `1`.  It links this target to the L0 grammar,
+  key-term index, publishable stack, NS theta/danger-shell receipts, YM
+  rho/KP/Balaban receipts, and Gate 3 atom/norm receipts.  The key-term index
+  now routes `scaleGraphBarrierTerm` and forbids treating the target name as a
+  proved maximum principle.  No NS theta preservation, YM rho contraction,
+  Gate 3 transfer, Clay, terminal, or full-unification promotion was
+  introduced.  The roadmap now also carries an Agda citation map for the
+  finish shape, naming the canonical witnesses and false-promotion guards that
+  Paper 0 and Paper 4 should cite directly.
+
+- Local docs / 369 support integration for `2026-06-02`: rechecked local docs
+  and receipts for domain-specific pressure/PNF, RG, wave/spectral formalisms,
+  wave/light transport, stationary-phase refraction/rainbow,
+  simulation/nature transport, TITAN/Bryan boundaries, and 3-6-9
+  voxel/supervoxel bookkeeping.  Added and wired
+  `LocalDocs369UnificationSupportReceipt`, consuming the ITIR/PNF support,
+  codec atom, carry-memory/subvoxel, 7+7+1 carrier, and dialectical atom
+  frontier receipts.  The 369 lane is support grammar only: ternary support,
+  six-fold orientation, nine-cell majority, and 27-cell supervoxel boundary.
+  No runtime codec, Gate 3 density, p71 time theorem, psychology theorem,
+  NS/YM theorem, Clay, or terminal promotion was introduced.
+
+- ITIR/PNF pressure support integration for `2026-06-02`: checked
+  `../ITIR-suite` PNF/domain-pressure, RG toy, and spectral post-selector docs
+  against local DASHI pressure, RG, wave/light transport, stationary-phase
+  refraction/rainbow, LES/GLES simulation, and evolutionary/nature receipts.
+  Added and wired `ITIRPNFPressureUnificationSupportReceipt`.  It records PNF
+  residual severity as typed domain-specific pressure support, not runtime
+  truth or Navier-Stokes pressure; keeps normalized RG contraction separate
+  from parent-sum/continuum RG; and permits TITAN/Bryan material only as
+  exposition guards.  No NS, YM, Gate 3, continuum, empirical, Clay, or
+  terminal promotion was introduced.
+
+- Manager publishable stack receipt for `2026-06-02`: added and wired
+  `PublishableFullUnificationStackReceipt`, a checked top-level citation
+  point for the publishable full-unification programme.  It consumes the L0,
+  roadmap, NS theta, YM rho/KP/Balaban, Gate 3 norm dictionary,
+  unified-margin, and frontier receipts.  The receipt records Paper 0 as
+  publishable grammar and Papers 1-4 as conditional/programmatic surfaces
+  until the NS theta, YM actual-rho/RG, and Gate 3 transfer inhabitants are
+  supplied.  Full-unification closure, Clay, continuum YM, NS regularity,
+  Gate 3, and terminal promotion remain false.
+
 - Publication docs governance for `2026-06-02`: aligned
   `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md` with
   `FullUnificationPublicationRoadmapReceipt`.  Finished/publishable full
@@ -19,14 +295,31 @@ monitor surface.
 
 - Manager YM Paper 3 roadmap for `2026-06-02`: added and wired the YM-only
   KP/Balaban dependency chain.  Same-prime overlap reduction, BT path
-  counting, the `p=7` convergence threshold `beta ~= 10.13`, and the stricter
-  absorption threshold `beta ~= 13.64` are now explicit receipts.  Actual
+  counting, the live `p=7` convergence threshold `beta > 10.11`, and the
+  stricter absorption threshold `beta > 12.97` are now explicit planning
+  surfaces under `c_min = 0.242`.  Actual
   p=7 Wilson polymer activity is recorded as the immediate missing definition,
   and nonperturbative Balaban RG scale transfer remains the hard open step.
   Supplemental worker receipts for the same activity/BT/KP/Balaban dependency
   graph were also typechecked and wired.  Toy rho, perturbative beta estimates,
   and carrier combinatorics are not promoted to continuum Yang-Mills, mass
   gap, Clay, or terminal claims.  Full aggregate Agda validation passed.
+
+- Added and wired `KeyTermCorrespondenceIndexReceipt` as the canonical
+  terminology/promotion-discipline index requested by the devlog.  It maps
+  strict margin grammar, carry margin, scale graph barrier, theta, danger
+  shell, rho, Gate 3, atom frame, phase, braid/carry, 369, PNF pressure,
+  tetration scale, and codec fining to allowed uses, forbidden uses, and
+  promotion boundaries.  The index consumes existing L0/NS/YM/Gate3/support
+  receipts and keeps NS regularity, continuum YM, Gate 3 closure, Clay, and
+  terminal promotion false.
+
+- Added `NSTailFluxIdentityAnalyticTargetReceipt` as the NS1 fixed-`K`
+  Littlewood-Paley analytic target.  The receipt names the proof obligations
+  for the exact tail-flux identity, consumes the existing margin surface,
+  excludes moving-cutoff differentiation, and keeps dashiCFD theta profiles as
+  diagnostics rather than theorem evidence.  No theta, BKM, regularity, or Clay
+  promotion follows.
 
 - NS-to-EV5 conditional preservation tightening for `2026-06-02`: updated the
   forward-simulation and EV5 admissibility receipts so lane7 dissipation
@@ -55,10 +348,11 @@ monitor surface.
 - Margin invariant implementation for `2026-06-02`: tightened the current
   YM/NS priority surface from metaphor to signed margins.  The runtime NS
   diagnostic emits `theta`, `ns_margin`, `ns_margin_ratio`, `danger_shell`,
-  and `promotion_status`.  The YM/KP receipts now distinguish the
-  `p=7` convergence threshold `beta ~= 10.13` from the stricter KP
-  activity-absorption threshold `beta ~= 13.64`; Balaban/RG transfer remains
-  required before any YM/KP consumption.  No Gate 3, NS regularity, YM mass
+  and `promotion_status`.  The YM/KP live planning surface now distinguishes
+  the `p=7` convergence threshold `10.11` from the stricter KP
+  activity-absorption threshold `12.97`; `beta6` is divergent with `r = 2.70`,
+  so Balaban/RG transfer remains required before any YM/KP consumption.  No
+  Gate 3, NS regularity, YM mass
   gap, Clay, or terminal promotion follows.
 
 - Unified carry / braid receipt for `2026-06-02`: added and wired
@@ -82,12 +376,14 @@ monitor surface.
 
 - KP/RG/atom receipt governance for `2026-06-02`: recorded
   `KPCouplingObstruction`, `BruhatTitsBraidKPReduction`, and
-  `AtomExtendedCarrierFrame` as Agda receipt surfaces and governance entries.  The corrected
-  `p=7` convergence threshold is `beta_min ~= 10.13`, while the stricter
-  activity-absorption threshold is `beta ~= 13.64`; the physical beta route
-  fails absent an RG bridge.  The carrier RG beta branch remains conditional,
-  not physical beta running or Clay YM.  The extended atom carrier frame
-  carries a separate `A > 0` obligation before analytic consumption.
+  `AtomExtendedCarrierFrame` as Agda receipt surfaces and governance entries.
+  Live planning is superseded by the analytic constants tranche:
+  `c_min = 0.242`, convergence threshold `10.11`, strict absorption threshold
+  `12.97`, divergent `beta6` ratio `r = 2.70`, and gaps `4.11`/`6.97`; the
+  physical beta route fails absent an RG bridge.  The carrier RG beta branch
+  remains conditional, not physical beta running or Clay YM.  The extended atom
+  carrier frame carries a separate `A > 0` obligation before analytic
+  consumption.
 
 - Canonical codec atom / phase receipt for `2026-06-01`: added and wired
   `DASHI.Physics.Closure.CanonicalCodecAtomReceipt`.  The receipt records the
@@ -8149,3 +8445,30 @@ monitor surface.
   DASHI/Everything.agda` exits 0. No terminal, Clay, W4/W5, Candidate256,
   Doplicher-Roberts, Standard Model, physical Yukawa, exact CKM, or continuum
   mass-gap promotion was made.
+## 2026-06-02 sibling codec / fining / continuous support
+
+- Added `DASHI.Physics.Closure.SiblingCodecFiningContinuousSupportReceipt`.
+- Recorded local-archive and sibling-repo support for:
+  - triadic quotient video codec context,
+  - balanced ternary residual planes and rANS/context coding,
+  - motion-compensated residuals with MDL side bits,
+  - six-layer codec `E_seq` fining sheets,
+  - signed anisotropic residual atoms with orientation, anisotropy, phase, and
+    twist,
+  - continuous lens topology / 369 overlay artifacts,
+  - dashiRTX PDA-MDL and quadtree ultrametric light transport demos.
+- Wired the new receipt into `DASHI/Everything.agda`.
+- Kept all promotion boundaries closed: production codec, Gate 3 density,
+  continuum theorem, NS regularity, YM mass gap, MP4 generalisation, and Clay
+  claims remain false.
+- Extended the receipt after the remaining archive-thread review wave:
+  - consumed `DNA Cassette Tape Comeback` for DNA UV/Haar detail sheets and
+    4-adic supervoxel analogy,
+  - consumed `DASHI learner context` and `DASHI learner context2` for
+    tree-Haar/detail-band learner observables and video/runtime diagnostics,
+  - consumed `DASHI MAIN MATH DEC` for triadic-first codec design,
+  - consumed the blocker/PUMUL thread for Base369/PNF/pressure/wave/RG routing,
+  - consumed `Branch · Math Mysticism Breakdown` for
+    369/supervoxel/anisotropy/twist modeling grammar,
+  - explicitly classified personal/no-title execution and hygiene traces as
+    reviewed but non-promoting.
