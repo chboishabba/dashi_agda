@@ -1,3 +1,29 @@
+# 2026-06-02 Monster / 15SSP quotient control
+
+- Added and wired `YMC0EntropyThresholdSensitivityReceipt`.
+- It records the YM KP strict absorption formula
+  `beta_abs(C0) = (a + log(2 p C0)) / c_min`, the checked C0 table
+  `0.5/1/2/5 -> 10.107/12.971/15.836/19.622`, and Monster re-2 stress
+  `c1=196884`, `c2=21493760`, `c2/c1 ~= 109.17`, `sqrt ~= 10.45`.
+- It consumes the existing KP threshold and Monster quotient receipts and keeps
+  quotient control, YM mass gap, and Clay promotion false.
+- Added and wired `MonsterMoonshineSSPQuotientControlReceipt`.
+- The receipt consumes the existing FactorVec/SSP carrier, Monster prime-lane,
+  supersingular prime bridge, Monster-to-SSP map, Monster order/j-distribution,
+  YM KP, Gate 3 PAWOTG, NS theta, and Clay asymmetry surfaces.
+- It records raw `c2/c1 ~= 109` as representation multiplicity, not physical
+  polymer/overlap/tail entropy, and keeps quotient entropy control open.
+- All promotion flags remain false.
+- Added and wired `Gate3AtomSamplerPAWOTGQualityReceipt`.
+- Gate 3 sampler obstruction: current finite-frame sampler has
+  `mu_N ~= 0.93--1.00`, `(N-1)mu_N >> 1`, negative Gershgorin bounds,
+  numerical `A_N=0`, and max frame ratio about `2.73e16`.  Phase-complete wins
+  at `N=8` but does not prevent larger-`N` collapse.
+- Replacement target is `AtomSamplerPAWOTGQuality`: `mu_N <= C/N`, or at least
+  `(N-1)mu_N < 1`.  Digit-expansion PAWOTG remains valid; the current atom
+  sampler must be replaced.  Monster leakage would tighten the p=3 threshold
+  to about `0.296`/`0.228`.  No promotion follows.
+
 # 2026-06-02 computed lemma update
 
 - Docs/governance lane: recorded `MonsterMoonshineSSPQuotientControl` above

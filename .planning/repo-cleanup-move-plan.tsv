@@ -1,0 +1,26 @@
+current_path	proposed_path	kind	owner	tracked?	generated?	imported_by	safe_action	validation_required
+all_code*.txt	Docs/archive/generated/2026-06/	source-snapshot	historical-ledger	yes	yes	n/a	archive-first; do-not-delete	git diff --check
+status.paper7-wave*.root-validation.log	Docs/archive/validation/2026-06/	validation-log	historical-ledger	yes	yes	n/a	archive-first; do-not-delete	git diff --check
+TEST_ADD_FILE.tmp	Docs/archive/generated/2026-06/	scratch-test-file	ours	yes	yes	n/a	archive-or-remove-after-confirming-no-reference	git diff --check
+agda_da51_source.jsonl	Docs/archive/generated/2026-06/da51/	DA51-trace-snapshot	ours/evidence	yes	unknown	n/a	index with DA51 shard surface before any move; do-not-delete	git diff --check
+agda_da51_traces.jsonl	Docs/archive/generated/2026-06/da51/	DA51-trace-snapshot	ours/evidence	yes	unknown	n/a	index with DA51 shard surface before any move; do-not-delete	git diff --check
+gitignore pls ignorefucken hearbeats man.7z	Docs/archive/generated/2026-06/	malformed-scratch-archive	unknown	yes	yes	n/a	archive-first; inspect before untracking	git diff --check
+.cache/*.tsv	Docs/archive/generated/2026-06/cache/	closure-hygiene-cache	ours	yes	yes	n/a	archive-if-needed; future cache should be untracked	git diff --check
+*.agdai	n/a	agda-interface-artifact	generated	partial	yes	n/a	git rm --cached only after .gitignore confirmation	git diff --check; targeted Agda if nearby source changes
+temp-DOWNLOADED/**	Docs/archive/generated/2026-06/temp-DOWNLOADED/	downloaded-intake	historical-ledger	partial	yes	n/a	archive/index first; do not delete authority-like material	git diff --check
+Book.pdf	Docs/archive/generated/2026-06/	rendered-book-artifact	ours	yes	yes	n/a	archive if reproducible or keep tracked if release artifact	git diff --check
+da51_shards/*.cbor	n/a	DA51-evidence-runtime-shards	ours/evidence	yes	unknown	n/a	keep tracked until DA51 provenance/reproducibility pass; not a submodule	git diff --check
+status.md	Docs/archive/status/2026-06/	status-ledger	ours	yes	no	n/a	copy old sections first; keep live router under 300 lines	git diff --check
+TODO.md	Docs/archive/todo/2026-06/	task-ledger	ours	yes	no	n/a	copy old closed blocks first; keep live blockers	git diff --check
+Docs/PaperDraftWorkingFolder/**	Docs/papers/	paper-drafts	ours	yes	no	n/a	classify by paper before move; preserve figure/build provenance	git diff --check; rg old paths
+Docs/ExternalAuthorityReceipts/**	Docs/authority/	external-authority	external-evidence	yes	no	n/a	index before any move; preserve citations	git diff --check; rg old paths
+.planning/03-* .planning/04-* .planning/05-* .planning/06-* .planning/07-* .planning/08-*	Docs/archive/old-roadmaps/2026-06/	historical-planning	ours	yes	no	n/a	archive after current roadmap pointers exist	git diff --check
+.autonomous-orchestrator/lane_claims/paper7-*	Docs/archive/orchestrator/2026-05-paper7/	orchestrator-history	ours	yes	no	n/a	archive only after active/closed status classification	git diff --check
+DASHI/Physics/Closure/*.agda	n/a	live-agda-modules	ours	yes	no	see agda-import-map.tsv	do not physically move in Pass 1; add index modules in Pass 2	targeted Agda; Everything aggregate
+DASHI/Physics/Closure/NSTailFluxAbsorptionMarginReceipt.agda	DASHI/Physics/Closure/NS/NSTailFluxAbsorptionMarginReceipt.agda	live-agda-module	ours	yes	no	6	Pass 3 candidate only; requires old-path wrapper	targeted Agda; Everything aggregate
+DASHI/Physics/Closure/YMPaper3RoadmapReceipt.agda	DASHI/Physics/Closure/YM/YMPaper3RoadmapReceipt.agda	live-agda-module	ours	yes	no	2	Pass 3 candidate only; requires old-path wrapper	targeted Agda; Everything aggregate
+DASHI/Physics/Closure/Gate3NormDictionary.agda	DASHI/Physics/Closure/Gate3/Gate3NormDictionary.agda	live-agda-module	ours	yes	no	10	high-use Pass 3 candidate; wrapper required	targeted Agda; Everything aggregate
+DCHoTT-Agda/**	n/a	external-submodule	external	yes	no	n/a	do-not-touch	separate submodule task only
+cubical/**	n/a	external-submodule	external	yes	no	n/a	do-not-touch	separate submodule task only
+Monster-LILA/**	n/a	JMD-submodule	JMD/external	yes	no	n/a	do-not-touch	separate submodule task only
+monster/**	n/a	JMD-submodule	JMD/external	yes	no	n/a	do-not-touch	separate submodule task only

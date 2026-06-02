@@ -2,12 +2,13 @@
 
 ## Current Tranche Closure Snapshot
 
-- 2026-06-02 docs/governance lane: `MonsterMoonshineSSPQuotientControl` is now
-  recorded above YM/Gate3 as a quotient/compression blocker.  15SSP/moonshine
-  is not an entropy multiplier, and raw `c2/c1 ~= 109` is not the physical
-  polymer entropy constant `C0`.  If quotient control is proved, use
-  `C0_eff ~= 1` and `beta_abs ~= 12.97`; if square-root/raw leakage survives,
-  thresholds rise to about `22.66`/`32.35`.  This is non-promoting governance:
+- 2026-06-02 Monster / 15SSP quotient control: added and wired
+  `MonsterMoonshineSSPQuotientControlReceipt`.  `MonsterMoonshineSSPQuotientControl`
+  is now recorded above YM/Gate3 as a quotient/compression blocker.
+  15SSP/moonshine is not an entropy multiplier, and raw `c2/c1 ~= 109` is not
+  the physical polymer entropy constant `C0`.  If quotient control is proved,
+  use `C0_eff ~= 1` and `beta_abs ~= 12.97`; if square-root/raw leakage
+  survives, thresholds rise to about `22.66`/`32.35`.  This is non-promoting:
   no quotient theorem, PAWOTG theorem, YM mass gap, Clay, or terminal closure
   follows.
 
@@ -5429,8 +5430,30 @@ Cleanup state:
   theta passes for smooth (`0.00399397`) and Kolmogorov (`0.3188379`) and fails
   for near-critical (`2.01585515`) and rough (`2.76304232`).  YM must treat
   entropy `C0` as load-bearing: `C0=1` gives `beta_abs=12.97131128`, while
-  `C0=1.25` gives `13.89339207`.  Gate 3's current sampler is clustered:
+  `C0=1.25` gives `13.89339207`; the uploaded compact table also records
+  `C0=0.5 -> 10.10706673` and `C0=0.75 -> 11.78254238`.  Gate 3's current sampler is clustered:
   zero Gershgorin-passing rows, `mu_N ~= 1`, target
   `AtomSamplerPAWOTGQuality : mu_N <= C/N`.  These are diagnostics only and do
   not promote PAWOTG, Balaban transfer, NS danger-shell preservation, Gate 3,
   YM, NS, Clay, or terminal closure.
+  The additional uploaded compact files copied into the evidence bundle are:
+  `computed_margin_summary.txt`, `gate3_frame_sampler_quality.csv`,
+  `ym_beta_threshold_sensitivity_C0.csv`, and
+  `ns_global_vs_tail_theta_summary.csv`.
+
+- 2026-06-02 Monster re-2 entropy stress:
+  copied `ym_monster_re2_C0_thresholds.csv`,
+  `gate3_monster_re2_sigma_crit.csv`,
+  `ns_monster_re2_low_shell_vs_tail_summary.csv`,
+  `monster_re2_recalculation_summary.txt`, and the corresponding PNGs into
+  `Docs/Images/clay-analytic-sprint/`.  The live receipt is
+  `DASHI/Physics/Closure/MonsterMoonshineSSPQuotientControlReceipt.agda`.
+  The shared blocker is now explicit effective multiplicity control:
+  raw Monster `q^2` / second-irrep growth must be quotiented before YM `C0`,
+  Gate 3 PAWOTG overlap entropy, or NS tail theta consume it.  YM stress:
+  baseline `beta_abs=12.9713`, log leakage `19.36`, square-root leakage about
+  `22.66`, raw leakage about `32.35`.  Gate 3 binding `p=3` stress:
+  baseline `sigma_crit=0.505208`, log leakage `0.337460`, square-root leakage
+  about `0.296`, raw leakage about `0.228`.  NS interpretation is unchanged:
+  low-depth/global shell growth is fenced from the tail seam, so use
+  `Theta_tail`.

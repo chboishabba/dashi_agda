@@ -72,6 +72,19 @@ Use one of these reader tracks first:
     Gershgorin-passing rows) and names `AtomSamplerPAWOTGQuality : mu_N <= C/N`
     as the next engineering target.  This is diagnostic only and keeps all
     closure/promotion flags false.
+- Monster / moonshine quotient-control blocker:
+  `DASHI/Physics/Closure/MonsterMoonshineSSPQuotientControlReceipt.agda`
+  - Records the Monster `q^2` / second-irrep growth as an entropy stress
+    model, not as a physical entropy multiplier.  Raw `c2/c1 ~= 109` must be
+    quotiented/compressed before YM `C0`, Gate 3 PAWOTG overlap entropy, or NS
+    tail theta can consume it.  The evidence bundle now includes
+    `ym_monster_re2_C0_thresholds.csv`,
+    `gate3_monster_re2_sigma_crit.csv`, and
+    `ns_monster_re2_low_shell_vs_tail_summary.csv`: square-root/raw leakage
+    would raise YM `beta_abs` to about `22.66`/`32.35` and tighten Gate 3
+    binding `p=3` `sigma_crit` from `0.5052` to about `0.296`/`0.228`.
+    This records an upstream quotient-control blocker and keeps all Clay
+    promotion false.
 - P0 worker-lane obligation index:
   `DASHI/Physics/Closure/P0BlockerObligationIndex.agda`
 - Unified energy-functional coordination surface:

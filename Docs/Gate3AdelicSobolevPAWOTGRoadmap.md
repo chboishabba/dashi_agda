@@ -25,6 +25,7 @@ The current strongest positive PAWOTG calculation is now recorded in:
 
 ```text
 DASHI/Physics/Closure/Gate3DigitExpansionPAWOTGPartialResultReceipt.agda
+DASHI/Physics/Closure/Gate3AtomSamplerPAWOTGQualityReceipt.agda
 ```
 
 For the digit-expansion embedding
@@ -44,6 +45,17 @@ independently of `p`.  Since the binding Gate 3 threshold is
 `sigma_crit(p=3) = 0.5052`, this embedding satisfies the PAWOTG spread bound
 for every prime and every BT level; refinement improves the spread by the
 factor `p^{-j}`.
+
+The current atom sampler used for finite-frame experiments does not realize
+that PAWOTG quality.  The sampler-quality obstruction records
+`mu_N ~= 0.93--1.00`, `(N-1)mu_N >> 1`, always-negative Gershgorin lower
+bounds, numerical `A_N = 0`, and max frame ratio about `2.73e16`.
+Phase-complete beats phase-blind at `N=8`, but both collapse numerically at
+larger `N`.  The replacement target is `AtomSamplerPAWOTGQuality`: construct a
+quasi-uniform sampler with `mu_N <= C/N`, or at least `(N-1)mu_N < 1` for a
+Gershgorin-style lower bound.  The digit-expansion PAWOTG partial result
+remains valid; the current atom sampler is not good enough and must be
+replaced.
 
 This is a genuine partial result: PAWOTG is not vacuous, and a natural
 adelic-to-Archimedean map passes the threshold.  The remaining theorem is
@@ -230,6 +242,10 @@ branches: `C0_eff ~= 1` gives the YM `beta_abs ~= 12.97` target if quotient
 control holds; square-root/raw leakage would raise the threshold to about
 `22.66`/`32.35`.  No PAWOTG theorem, quotient theorem, YM mass gap, or Clay
 promotion follows from this bookkeeping.
+For Gate 3 specifically, Monster multiplicity leakage into overlap entropy
+would tighten the binding `p=3` sigma threshold from `0.5052` to about `0.296`
+under square-root leakage or about `0.228` under raw leakage.  Quotient control
+is therefore load-bearing for the PAWOTG route too.
 
 ## Why This Is Still Open
 

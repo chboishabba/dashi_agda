@@ -6,14 +6,45 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
-- Monster/moonshine SSP quotient governance for `2026-06-02`: updated the
-  docs lane to record `MonsterMoonshineSSPQuotientControl` above YM/Gate3.  The
-  15SSP/moonshine mechanism is a quotient/compression target, not an entropy
-  multiplier; raw `c2/c1 ~= 109` is not the physical polymer entropy constant
-  `C0`.  If quotient control holds, the effective value remains
-  `C0_eff ~= 1` and `beta_abs ~= 12.97`; square-root/raw leakage would raise
-  thresholds to about `22.66`/`32.35`.  This is governance only: no quotient
-  theorem, PAWOTG theorem, YM mass gap, Clay, or terminal promotion was made.
+- Gate 3 atom sampler PAWOTG quality obstruction for `2026-06-02`: added and
+  wired `DASHI/Physics/Closure/Gate3AtomSamplerPAWOTGQualityReceipt.agda`.
+  The receipt records the current sampler failure: `mu_N ~= 0.93--1.00`,
+  `(N-1)mu_N >> 1`, Gershgorin lower bounds always negative, numerical
+  `A_N=0`, and max frame ratio about `2.73e16`; phase-complete beats
+  phase-blind at `N=8` but both collapse at larger `N`.  The replacement target
+  is `AtomSamplerPAWOTGQuality`, i.e. `mu_N <= C/N` or at least
+  `(N-1)mu_N < 1`.  The digit-expansion PAWOTG partial result remains valid;
+  the current atom sampler is not good enough.  Monster leakage would tighten
+  the `p=3` sigma threshold from `0.5052` to about `0.296`/`0.228`.  No PAWOTG
+  theorem, Gate 3 closure, quotient theorem, Clay, or terminal promotion was
+  made.
+
+- YM C0 entropy threshold sensitivity for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/YMC0EntropyThresholdSensitivityReceipt.agda`.  The
+  receipt records `beta_abs(C0) = (a + log(2 p C0)) / c_min` with `p=7`,
+  `a=0.5`, and `c_min=0.242`, the table
+  `C0=0.5/1/2/5 -> beta_abs=10.107/12.971/15.836/19.622`, and Monster re-2
+  stress `c1=196884`, `c2=21493760`, `c2/c1 ~= 109.17`,
+  `sqrt(c2/c1) ~= 10.45`.  Raw Monster multiplicity remains quotiented-only,
+  not physical YM polymer entropy; quotient control, YM mass gap, and Clay
+  promotion remain false.
+
+- Monster/moonshine SSP quotient control for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/MonsterMoonshineSSPQuotientControlReceipt.agda` and
+  updated the docs lane to record `MonsterMoonshineSSPQuotientControl` above
+  YM/Gate3.  The 15SSP/moonshine mechanism is a quotient/compression target,
+  not an entropy multiplier; raw `c2/c1 ~= 109` is not the physical polymer
+  entropy constant `C0`.  If quotient control holds, the effective value
+  remains `C0_eff ~= 1` and `beta_abs ~= 12.97`; square-root/raw leakage would
+  raise thresholds to about `22.66`/`32.35`.  The Monster re-2 artifacts
+  `ym_monster_re2_C0_thresholds.csv`,
+  `gate3_monster_re2_sigma_crit.csv`,
+  `ns_monster_re2_low_shell_vs_tail_summary.csv`, and
+  `monster_re2_recalculation_summary.txt` are now copied into the analytic
+  evidence bundle.  Gate 3 binding `p=3` `sigma_crit` tightens from `0.505208`
+  to `0.337460`, about `0.296`, or about `0.228` under the same stress models.
+  The quotient theorem remains open; no PAWOTG theorem, YM mass gap, Clay, or
+  terminal promotion was made.
 
 - Computed lemma update for `2026-06-02`: added and wired
   `DASHI/Physics/Closure/Gate3DigitExpansionPAWOTGPartialResultReceipt.agda`,
@@ -38,11 +69,23 @@ monitor surface.
   is low-shell `k=2`, while tail-restricted theta passes for smooth and
   Kolmogorov rows and fails for near-critical and rough rows.  The YM
   diagnostic records `beta_abs(C0) = (a + log(2 p C0)) / c_min`, making entropy
-  `C0` load-bearing.  The Gate 3 diagnostic records zero Gershgorin-passing
-  sampler rows and names `AtomSamplerPAWOTGQuality : mu_N <= C/N` as the next
-  engineering target.  No PAWOTG theorem, Balaban bridge, NS danger-shell
-  theorem, Gate 3 closure, YM mass gap, NS regularity, Clay, or terminal
-  promotion was introduced.
+  `C0` load-bearing; the uploaded compact table adds `C0=0.5` and `C0=0.75`
+  absorption thresholds.  The Gate 3 diagnostic records zero
+  Gershgorin-passing sampler rows and names
+  `AtomSamplerPAWOTGQuality : mu_N <= C/N` as the next engineering target.
+  Copied the uploaded compact summaries
+  `computed_margin_summary.txt`, `gate3_frame_sampler_quality.csv`,
+  `ym_beta_threshold_sensitivity_C0.csv`, and
+  `ns_global_vs_tail_theta_summary.csv` into the evidence bundle.  No PAWOTG
+  theorem, Balaban bridge, NS danger-shell theorem, Gate 3 closure, YM mass
+  gap, NS regularity, Clay, or terminal promotion was introduced.
+
+- NS tail-restricted theta receipt for `2026-06-02`: added and wired
+  `DASHI/Physics/Closure/NSTailRestrictedThetaDiagnosticReceipt.agda`.  It
+  records low-shell global dominance at `k=2`, requires `Theta_tail` plus
+  `low_shell_warning`, records smooth/kolmogorov pass rows, near-critical/rough
+  fail rows, and the inviscid no-tail-data boundary.  No theta preservation,
+  BKM/Serrin continuation, NS regularity, or Clay promotion is made.
 
 - Clay computed visualisation synthesis for `2026-06-02`: added and wired
   `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`.  The

@@ -3,12 +3,31 @@
 ## Active Blocker Board
 
 Clay blocker asymmetry `2026-06-02`:
+- [x] Add and wire
+  `Gate3AtomSamplerPAWOTGQualityReceipt` as the checked obstruction for the
+  current atom sampler: `mu_N ~= 0.93--1.00`, `(N-1)mu_N >> 1`, negative
+  Gershgorin bounds, numerical `A_N=0`, max frame ratio about `2.73e16`, and
+  replacement target `mu_N <= C/N` or at least `(N-1)mu_N < 1`.
+- [x] Add and wire
+  `DASHI/Physics/Closure/MonsterMoonshineSSPQuotientControlReceipt.agda` as
+  the checked non-promoting quotient-control receipt.
 - [x] Add docs/governance guidance for
   `MonsterMoonshineSSPQuotientControl` above YM/Gate3: 15SSP/moonshine is a
   quotient/compression target, not an entropy multiplier; raw `c2/c1 ~= 109`
   is not physical polymer entropy `C0`; quotient gives `C0_eff ~= 1` and
   `beta_abs ~= 12.97`, while sqrt/raw leakage raises thresholds to about
   `22.66`/`32.35`; no quotient theorem or Clay promotion is claimed.
+- [x] Copy the Monster re-2 stress artifacts into
+  `Docs/Images/clay-analytic-sprint/` and record the exact cross-lane stress
+  constants: YM `beta_abs` rises from `12.9713` to `19.36`, about `22.66`, or
+  about `32.35` under log/square-root/raw leakage, while Gate 3 binding `p=3`
+  `sigma_crit` tightens from `0.505208` to `0.337460`, about `0.296`, or about
+  `0.228`.
+- [x] Add and wire
+  `DASHI/Physics/Closure/YMC0EntropyThresholdSensitivityReceipt.agda` for the
+  latest C0 table `0.5/1/2/5`, Monster re-2 stress values, and the
+  fail-closed rule that raw Monster multiplicity is not physical YM polymer
+  entropy.
 - [x] Record the latest computed lemma update in Agda:
   `Gate3DigitExpansionPAWOTGPartialResultReceipt`,
   `YMCharacterExpansionContinuumReformulationReceipt`, and
@@ -75,7 +94,8 @@ Refined diagnostics `2026-06-02`:
   `Theta_global = sup_k theta(k)` versus
   `Theta_tail = sup_{k >= K_diss(nu)} theta(k)`.  The sampled global danger
   shell is low-frequency `k=2`; Paper 1 should consume tail-restricted theta
-  plus `low_shell_warning`.
+  plus `low_shell_warning`.  The checked receipt is
+  `DASHI/Physics/Closure/NSTailRestrictedThetaDiagnosticReceipt.agda`.
 - [x] Record YM entropy sensitivity:
   `beta_abs(C0) = (a + log(2 p C0)) / c_min`; `C0=1` gives `12.9713`, while
   `C0=1.25` gives `13.8934`.

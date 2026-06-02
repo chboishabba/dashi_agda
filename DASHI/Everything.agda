@@ -536,6 +536,7 @@ import DASHI.Physics.Closure.GRDiscreteRicciCandidateFromCurvature
 import DASHI.Physics.Closure.GRNonFlatScalarAlgebraSurface
 import DASHI.Physics.Closure.GRSelectedNonFlatMetricInstance
 import DASHI.Physics.Closure.SchwarzschildLimitCandidate
+import DASHI.Physics.Closure.GRWeakFieldPredictionReceipt
 import DASHI.Physics.GR
 import DASHI.Physics.YM.SU2LieAlgebra
 import DASHI.Physics.YM.CovariantDerivative
@@ -1216,6 +1217,7 @@ import DASHI.Physics.Closure.NSToEV5ForwardSimulationActualReceipt
 import DASHI.Physics.Closure.NSPressureVsDepthLPClarificationReceipt
 import DASHI.Physics.Closure.NSPaper1ClayTargetReceipt
 import DASHI.Physics.Closure.EV5ThetaMarginUpgradeReceipt
+import DASHI.Physics.Closure.NSTailRestrictedThetaDiagnosticReceipt
 import DASHI.Physics.Closure.YMKPActivityRatioMarginReceipt
 import DASHI.Physics.Closure.StrictMarginImpliesAbsorptionReceipt
 import DASHI.Physics.Closure.UnifiedMarginInvariantReceipt
@@ -1235,6 +1237,7 @@ import DASHI.Physics.Closure.Gate3PAWOTGConcreteConditionReceipt
 import DASHI.Physics.Closure.Gate3AdelicLocalizationReductionReceipt
 import DASHI.Physics.Closure.Gate3PAWOTGUniformSeparationTargetReceipt
 import DASHI.Physics.Closure.Gate3DigitExpansionPAWOTGPartialResultReceipt
+import DASHI.Physics.Closure.Gate3AtomSamplerPAWOTGQualityReceipt
 import DASHI.Physics.Closure.ITIRPNFPressureUnificationSupportReceipt
 import DASHI.Physics.Closure.LocalDocs369UnificationSupportReceipt
 import DASHI.Physics.Closure.SiblingCodecFiningContinuousSupportReceipt
@@ -1257,6 +1260,7 @@ import DASHI.Physics.Closure.Gate3UniformLowerBoundObstructionReceipt
 import DASHI.Physics.Closure.Gate3MoscoConstructiveSequenceReceipt
 import DASHI.Physics.Closure.Gate3NoSpectralPollutionConditionalProofReceipt
 import DASHI.Physics.Closure.YMKPThresholdCorrectionReceipt
+import DASHI.Physics.Closure.YMC0EntropyThresholdSensitivityReceipt
 import DASHI.Physics.Closure.SSP15CMFieldSplittingCorrectionReceipt
 import DASHI.Physics.Closure.SSP7Plus7Plus1AtomGrammarReceipt
 import DASHI.Physics.Closure.SSP7Plus7Plus1AtomGrammarFrameReceipt

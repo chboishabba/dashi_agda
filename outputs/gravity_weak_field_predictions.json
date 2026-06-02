@@ -1,0 +1,68 @@
+{
+  "calibration_required": true,
+  "carrier_internal": false,
+  "external_gr_baseline": true,
+  "predictions": [
+    {
+      "boundary": "standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction",
+      "calibration_required": true,
+      "carrier_internal": false,
+      "external_gr_baseline": true,
+      "formula": "6*pi*G*M_sun/(a*(1-e^2)*c^2) per orbit",
+      "observable": "mercury_perihelion_advance",
+      "promotion_status": "NO_PROMOTION",
+      "reference_value": "about 42.98 arcsec/century",
+      "unit": "arcsec/century",
+      "value": 42.98197549746712
+    },
+    {
+      "boundary": "standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction",
+      "calibration_required": true,
+      "carrier_internal": false,
+      "external_gr_baseline": true,
+      "formula": "4*G*M_sun/(c^2*R_sun)",
+      "observable": "solar_limb_light_deflection",
+      "promotion_status": "NO_PROMOTION",
+      "reference_value": "about 1.750 arcsec",
+      "unit": "arcsec",
+      "value": 1.7512432813682448
+    },
+    {
+      "boundary": "standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction",
+      "calibration_required": true,
+      "carrier_internal": false,
+      "external_gr_baseline": true,
+      "formula": "2*G*M_sun/c^3",
+      "observable": "solar_shapiro_one_way_scale",
+      "promotion_status": "NO_PROMOTION",
+      "reference_value": "about 9.85 microseconds before logarithmic path factor",
+      "unit": "microseconds",
+      "value": 9.851279787922078
+    },
+    {
+      "boundary": "standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction",
+      "calibration_required": true,
+      "carrier_internal": false,
+      "external_gr_baseline": true,
+      "formula": "G*M_sun/(R_sun*c^2)",
+      "observable": "solar_surface_gravitational_redshift",
+      "promotion_status": "NO_PROMOTION",
+      "reference_value": "about 2.12e-6",
+      "unit": "dimensionless",
+      "value": 2.122566754396204e-06
+    },
+    {
+      "boundary": "standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction",
+      "calibration_required": true,
+      "carrier_internal": false,
+      "external_gr_baseline": true,
+      "formula": "c*G*M_sun/(R_sun*c^2)",
+      "observable": "solar_surface_redshift_velocity_equivalent",
+      "promotion_status": "NO_PROMOTION",
+      "reference_value": "about 636 m/s",
+      "unit": "m/s",
+      "value": 636.3295045695203
+    }
+  ],
+  "status": "NO_PROMOTION"
+}

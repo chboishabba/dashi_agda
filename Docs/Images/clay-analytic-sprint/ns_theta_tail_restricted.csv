@@ -1,0 +1,6 @@
+trace,nu,K_kolmogorov,K_diss,theta_global,danger_shell_global,global_margin,theta_tail,danger_shell_tail,tail_margin,tail_rows,low_shell_warning,tail_barrier_pass,promotion_status
+inviscid,0.001,177.828,178,15.64046319,2,-14.64046319,nan,,nan,0,True,False,NO_PROMOTION
+kolmogorov,0.01,31.623,32,2.06051779,2,-1.06051779,0.3188379,32,0.6811621,33,True,True,NO_PROMOTION
+near_critical,0.01,31.623,32,2.57831615,2,-1.57831615,2.01585515,32,-1.01585515,33,True,False,NO_PROMOTION
+rough,0.01,31.623,32,3.51000629,2,-2.51000629,2.76304232,32,-1.76304232,33,True,False,NO_PROMOTION
+smooth,0.01,31.623,32,8.2826297,2,-7.2826297,0.00399397,32,0.99600603,33,True,True,NO_PROMOTION

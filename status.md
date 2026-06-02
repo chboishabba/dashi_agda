@@ -1,3 +1,70 @@
+# 2026-06-02 Monster re-2 entropy stress artifacts
+
+- Copied the Monster re-2 stress artifacts into
+  `Docs/Images/clay-analytic-sprint/`:
+  `ym_monster_re2_C0_thresholds.csv`,
+  `gate3_monster_re2_sigma_crit.csv`,
+  `ns_monster_re2_low_shell_vs_tail_summary.csv`,
+  `monster_re2_recalculation_summary.txt`,
+  `ym_monster_re2_beta_thresholds.png`,
+  `gate3_monster_re2_sigma_crit_p3.png`,
+  `gate3_monster_re2_sigma_crit_all_inert.png`, and
+  `ns_monster_re2_global_tail_split.png`.
+- Tightened
+  `DASHI/Physics/Closure/MonsterMoonshineSSPQuotientControlReceipt.agda`
+  with the exact stress constants: `c2/c1 ~= 109.17`,
+  `sqrt(c2/c1) ~= 10.45`, `irrep2/irrep1 ~= 108.17`, and
+  `sqrt(irrep2/irrep1) ~= 10.40`.
+- YM stress: baseline `C0=1` keeps `beta_abs=12.9713`; `log(c2/c1)` leakage
+  gives `19.36`; square-root leakage gives about `22.65-22.67`; raw
+  irrep/coefficient leakage gives about `32.33-32.36`.
+- Gate 3 stress: binding `p=3` baseline `sigma_crit=0.505208`; log leakage
+  tightens it to `0.337460`; square-root leakage to about `0.296`; raw
+  leakage to about `0.228`.
+- NS stress: the Monster re-2 model reinforces the low-shell/global warning;
+  it does not change the PDE estimate.  Paper 1 should still consume
+  `Theta_tail`, not `Theta_global`.
+- No quotient theorem, PAWOTG theorem, Balaban bridge, NS danger-shell theorem,
+  Gate 3 closure, YM mass gap, NS regularity, Clay claim, or terminal
+  promotion was introduced.
+
+# 2026-06-02 Monster / 15SSP quotient control
+
+- Added and wired
+  `DASHI/Physics/Closure/Gate3AtomSamplerPAWOTGQualityReceipt.agda`.
+- Gate 3 sampler status: the current finite-frame sampler clusters badly with
+  `mu_N ~= 0.93--1.00`, `(N-1)mu_N >> 1`, always-negative Gershgorin lower
+  bounds, numerical `A_N=0`, and max frame ratio about `2.73e16`.  Phase-
+  complete beats phase-blind at `N=8`, but both collapse at larger `N`.
+- Target criterion: replace the sampler with `AtomSamplerPAWOTGQuality`,
+  `mu_N <= C/N`, or at least `(N-1)mu_N < 1` for Gershgorin-style lower
+  control.
+- The digit-expansion PAWOTG partial result remains valid, but the current atom
+  sampler does not realize it.  If Monster multiplicity leaks into Gate 3
+  overlap entropy, the `p=3` sigma threshold tightens from `0.5052` to about
+  `0.296`/`0.228`.  No Gate 3, PAWOTG, quotient, Clay, or terminal promotion
+  follows.
+
+- Added and wired
+  `DASHI/Physics/Closure/MonsterMoonshineSSPQuotientControlReceipt.agda`.
+- The receipt records `c1=196884`, `c2=21493760`, raw ratio `~=109`, the
+  existing `FactorVec`/15SSP carrier, the Monster-prime-to-SSP quotient map,
+  supersingular prime support, and the no-leak fences into YM `C0`, Gate 3
+  PAWOTG overlap entropy, and NS tail theta.
+- The quotient theorem remains open: prove raw Monster representation
+  multiplicity collapses to bounded SSP/Hecke orbit classes before physical
+  constants are read.
+- Threshold sensitivity is checked in the receipt:
+  `C0_eff~=1 -> beta_abs~=12.97`, `sqrt(109)` leakage -> `22.66`, and raw
+  `109` leakage -> `32.35`.
+- Added and wired
+  `DASHI/Physics/Closure/YMC0EntropyThresholdSensitivityReceipt.agda` for the
+  latest exact C0 sensitivity table: `C0=0.5 -> beta_abs=10.107`,
+  `C0=1 -> 12.971`, `C0=2 -> 15.836`, and `C0=5 -> 19.622`, with Monster
+  re-2 stress `c1=196884`, `c2=21493760`, raw ratio `~=109.17`, and sqrt
+  ratio `~=10.45`.
+- Gate 3, YM, NS, Clay, and terminal promotion remain false.
+
 # 2026-06-02 computed lemma update
 
 - Docs/governance update: `MonsterMoonshineSSPQuotientControl` is now recorded
@@ -31,12 +98,19 @@
 
 # 2026-06-02 refined Clay diagnostics
 
+- Copied the additional uploaded summaries into the evidence bundle:
+  `computed_margin_summary.txt`, `gate3_frame_sampler_quality.csv`,
+  `ym_beta_threshold_sensitivity_C0.csv`, and
+  `ns_global_vs_tail_theta_summary.csv`.
 - Added `scripts/clay_refined_diagnostics.py` and generated:
   `Docs/Images/clay-analytic-sprint/ns_theta_tail_restricted.csv`,
   `Docs/Images/clay-analytic-sprint/ym_c0_threshold_sensitivity.csv`, and
   `Docs/Images/clay-analytic-sprint/gate3_sampler_quality.csv`.
 - Added and wired
   `DASHI/Physics/Closure/ClayRefinedDiagnosticTargetsReceipt.agda`.
+- Added and wired
+  `DASHI/Physics/Closure/NSTailRestrictedThetaDiagnosticReceipt.agda` for the
+  NS-only tail-restricted theta diagnostic.
 - NS: the refined diagnostic separates `Theta_global` from `Theta_tail`.
   `Theta_global` is low-shell dominated at `k=2` in the sampled data, so it is
   not the correct tail theorem variable.  `Theta_tail` with
@@ -46,8 +120,10 @@
   `K_diss = 178 > 64`.
 - YM: the refined diagnostic records
   `beta_abs(C0) = (a + log(2 p C0)) / c_min`.  `C0=1` gives
-  `beta_abs=12.97131128`; `C0=1.25` gives `13.89339207`.  The entropy constant
-  is load-bearing for the Balaban bridge.
+  `beta_abs=12.97131128`; `C0=1.25` gives `13.89339207`.  The uploaded compact
+  table also records `C0=0.5 -> 10.10706673` and
+  `C0=0.75 -> 11.78254238`.  The entropy constant is load-bearing for the
+  Balaban bridge.
 - Gate 3: the refined diagnostic records zero Gershgorin-passing rows.  The
   current atom sampler is clustered with `mu_N ~= 1`; the target is now
   `AtomSamplerPAWOTGQuality : mu_N <= C/N`, or at least `(N-1)mu_N < 1` for the
