@@ -1,0 +1,64 @@
+{
+  "status": "NON_PROMOTING_DIAGNOSTIC",
+  "interpretation": {
+    "carrier_positive_result": "Vladimirov D^alpha has Kozyrev eigenfunctions; finite p-adic and digit-image Haar/Kozyrev contrast Grams are identity.",
+    "failed_object": "Naive radial shell indicators nest under the Archimedean image and do not provide a uniform lower frame bound.",
+    "blocked_prediction": "Schwarzschild matching and precision gravity remain blocked on W4 mass/stress-energy calibration and discrete-to-smooth Ricci."
+  },
+  "rows": [
+    {
+      "model": "padic_kozyrev_exact",
+      "p": 3,
+      "max_level": 5,
+      "atom_count": 242,
+      "grid_size": 243,
+      "alpha": 2.0,
+      "frame_lower_A": 1.0,
+      "frame_upper_B": 1.0,
+      "max_offdiag_mu": 0.0,
+      "condition_number": 1.0,
+      "vladimirov_lambda_min": 1.6935087808430286e-05,
+      "vladimirov_lambda_max": 1.0,
+      "pawotg_sigma": 0.2886751345948129,
+      "pawotg_series": 0.08028462811303172,
+      "naive_parent_child_overlap": 0.5773502691896257,
+      "promotion_status": "NO_PROMOTION"
+    },
+    {
+      "model": "archimedean_digit_haar_kozyrev",
+      "p": 3,
+      "max_level": 5,
+      "atom_count": 242,
+      "grid_size": 243,
+      "alpha": 2.0,
+      "frame_lower_A": 0.9999999999999858,
+      "frame_upper_B": 1.0000000000000062,
+      "max_offdiag_mu": 1.4210854715202004e-14,
+      "condition_number": 1.0000000000000204,
+      "vladimirov_lambda_min": 1.6935087808430286e-05,
+      "vladimirov_lambda_max": 1.0,
+      "pawotg_sigma": 0.2886751345948129,
+      "pawotg_series": 0.08028462811303172,
+      "naive_parent_child_overlap": 0.5773502691896257,
+      "promotion_status": "NO_PROMOTION"
+    },
+    {
+      "model": "naive_radial_shell_nested",
+      "p": 3,
+      "max_level": 5,
+      "atom_count": 6,
+      "grid_size": 243,
+      "alpha": 2.0,
+      "frame_lower_A": 0.2841425228900301,
+      "frame_upper_B": 2.7426733744701512,
+      "max_offdiag_mu": 0.577350269189626,
+      "condition_number": 9.6524566142873,
+      "vladimirov_lambda_min": 1.6935087808430286e-05,
+      "vladimirov_lambda_max": 1.0,
+      "pawotg_sigma": 0.2886751345948129,
+      "pawotg_series": 0.08028462811303172,
+      "naive_parent_child_overlap": 0.5773502691896257,
+      "promotion_status": "NO_PROMOTION"
+    }
+  ]
+}
