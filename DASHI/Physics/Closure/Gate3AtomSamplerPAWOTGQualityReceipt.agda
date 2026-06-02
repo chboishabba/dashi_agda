@@ -18,50 +18,56 @@ import DASHI.Physics.Closure.MonsterMoonshineSSPQuotientControlReceipt
 ------------------------------------------------------------------------
 -- Gate 3 atom-sampler PAWOTG quality receipt.
 --
--- The current finite-frame sampler is not a PAWOTG-quality sampler.  The
--- finite sweeps show max cross-term mu_N close to one, exploding frame ratios,
--- and negative Gershgorin lower bounds at every tested N.  The next sampler
--- target is quasi-uniform phase/twist placement with mu_N <= C/N, or at least
--- (N-1) mu_N < 1 for a Gershgorin-style lower frame bound.
+-- This receipt is the finite-frame diagnostic surface that originally showed
+-- max cross-term mu_N close to one, exploding frame ratios, and negative
+-- Gershgorin lower bounds at every tested N.  The later nesting/taper pass
+-- corrects the interpretation: Kozyrev atoms are orthogonal in L2(Q_p), so
+-- the p-adic atom construction is not the failing object.  The failure is the
+-- un-tapered Archimedean digit-image inner-product model, where parent-child
+-- supports nest and create non-decaying cross-terms.
 
 data Gate3AtomSamplerPAWOTGQualityStatus : Set where
   gate3AtomSamplerQualityObstructionRecorded_noPromotion :
     Gate3AtomSamplerPAWOTGQualityStatus
 
 data AtomSamplerObservation : Set where
-  currentSamplerMuNearOne :
+  archimedeanModelMuNearOne :
     AtomSamplerObservation
 
   gershgorinLowerBoundNegativeEverywhere :
     AtomSamplerObservation
 
-  phaseCompleteHelpsAtSmallNOnly :
+  phaseCompleteDoesNotRemoveNestingLeakage :
     AtomSamplerObservation
 
-  bothToyDictionariesCollapseAtLargerN :
+  archimedeanNestedDictionariesCollapseAtLargerN :
     AtomSamplerObservation
 
   maxFrameRatioLarge :
     AtomSamplerObservation
 
+  pAdicKozyrevGramIsNotTheFailure :
+    AtomSamplerObservation
+
 canonicalAtomSamplerObservations :
   List AtomSamplerObservation
 canonicalAtomSamplerObservations =
-  currentSamplerMuNearOne
+  archimedeanModelMuNearOne
   ∷ gershgorinLowerBoundNegativeEverywhere
-  ∷ phaseCompleteHelpsAtSmallNOnly
-  ∷ bothToyDictionariesCollapseAtLargerN
+  ∷ phaseCompleteDoesNotRemoveNestingLeakage
+  ∷ archimedeanNestedDictionariesCollapseAtLargerN
   ∷ maxFrameRatioLarge
+  ∷ pAdicKozyrevGramIsNotTheFailure
   ∷ []
 
 data AtomSamplerQualityTarget : Set where
-  quasiUniformPhaseTwistPlacement :
+  archimedeanGaussianTaper :
     AtomSamplerQualityTarget
 
-  muNBoundedByConstantOverN :
+  dampParentChildNestingCrossTerm :
     AtomSamplerQualityTarget
 
-  gershgorinProductBelowOne :
+  recoverUniformFrameAfterTaper :
     AtomSamplerQualityTarget
 
   phaseAndTwistIncludedBeforeFrameClaim :
@@ -73,9 +79,9 @@ data AtomSamplerQualityTarget : Set where
 canonicalAtomSamplerQualityTargets :
   List AtomSamplerQualityTarget
 canonicalAtomSamplerQualityTargets =
-  quasiUniformPhaseTwistPlacement
-  ∷ muNBoundedByConstantOverN
-  ∷ gershgorinProductBelowOne
+  archimedeanGaussianTaper
+  ∷ dampParentChildNestingCrossTerm
+  ∷ recoverUniformFrameAfterTaper
   ∷ phaseAndTwistIncludedBeforeFrameClaim
   ∷ monsterMultiplicityQuotientedBeforeOverlapCount
   ∷ []
@@ -120,12 +126,12 @@ monsterRawLeakSigmaCritP3TenThousandths =
 samplerObservationStatement :
   String
 samplerObservationStatement =
-  "Current Gate3 atom sampler clusters badly: mu_N is about 0.93 to 1.00, (N-1)mu_N is far above 1, Gershgorin lower bounds are negative, and A_N collapses numerically."
+  "Gate3 finite-frame diagnostic: the un-tapered Archimedean digit-image model has mu_N about 0.93 to 1.00, (N-1)mu_N far above 1, negative Gershgorin lower bounds, and numerical A_N collapse.  This is nesting leakage, not p-adic Kozyrev atom failure."
 
 samplerTargetStatement :
   String
 samplerTargetStatement =
-  "Replace the sampler with PAWOTG-quality quasi-uniform phase/twist placement satisfying mu_N <= C/N, or at least (N-1)mu_N < 1 for finite-cutoff lower-bound tests."
+  "Use the Gate3 nesting/taper target: Kozyrev L2(Q_p) Gram is identity, while the Archimedean image needs a Gaussian taper that damps parent-child nesting before any uniform lower-frame claim."
 
 monsterEntropyStatement :
   String
@@ -233,8 +239,20 @@ record Gate3AtomSamplerPAWOTGQualityReceipt : Setω where
     replacementSamplerRequired :
       Bool
 
-    replacementSamplerRequiredIsTrue :
-      replacementSamplerRequired ≡ true
+    replacementSamplerRequiredIsFalse :
+      replacementSamplerRequired ≡ false
+
+    pAdicAtomConstructionFailed :
+      Bool
+
+    pAdicAtomConstructionFailedIsFalse :
+      pAdicAtomConstructionFailed ≡ false
+
+    archimedeanNestingDiagnostic :
+      Bool
+
+    archimedeanNestingDiagnosticIsTrue :
+      archimedeanNestingDiagnostic ≡ true
 
     uniformFrameLowerBoundProvedHere :
       Bool
@@ -351,8 +369,16 @@ canonicalGate3AtomSamplerPAWOTGQualityReceipt =
     ; currentSamplerSatisfiesPAWOTGQualityIsFalse =
         refl
     ; replacementSamplerRequired =
+        false
+    ; replacementSamplerRequiredIsFalse =
+        refl
+    ; pAdicAtomConstructionFailed =
+        false
+    ; pAdicAtomConstructionFailedIsFalse =
+        refl
+    ; archimedeanNestingDiagnostic =
         true
-    ; replacementSamplerRequiredIsTrue =
+    ; archimedeanNestingDiagnosticIsTrue =
         refl
     ; uniformFrameLowerBoundProvedHere =
         false

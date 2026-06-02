@@ -26,7 +26,27 @@ The current strongest positive PAWOTG calculation is now recorded in:
 ```text
 DASHI/Physics/Closure/Gate3DigitExpansionPAWOTGPartialResultReceipt.agda
 DASHI/Physics/Closure/Gate3AtomSamplerPAWOTGQualityReceipt.agda
+DASHI/Physics/Closure/Gate3NestingTaperConditionReceipt.agda
 ```
+
+Latest taper refinement:
+
+```text
+sigma_digit = 0.288675
+sigma_taper(p=3) = 0.318022
+sigma_crit(p=3) = 0.5052
+S_p3(sigma_digit) ~= 0.0803
+```
+
+So digit expansion passes the strict depth-1 nesting taper and the full
+PAWOTG series target with headroom.  The remaining Gate 3 theorem is proving
+the actual SSP/Hecke atom embedding has spread below `0.318022`; this document
+does not promote `inf_N A_N > 0`, Mosco, no-pollution, or Clay.
+
+In the four-valued margin governance receipt, this digit-expansion model is
+the `true` example: the taper absorber wins for the model embedding.  The Gate
+3 lane as a whole remains open because the physical SSP/Hecke embedding has
+not yet been proved to satisfy the same spread bound.
 
 For the digit-expansion embedding
 
@@ -46,22 +66,28 @@ independently of `p`.  Since the binding Gate 3 threshold is
 for every prime and every BT level; refinement improves the spread by the
 factor `p^{-j}`.
 
-The current atom sampler used for finite-frame experiments does not realize
-that PAWOTG quality.  The sampler-quality obstruction records
-`mu_N ~= 0.93--1.00`, `(N-1)mu_N >> 1`, always-negative Gershgorin lower
-bounds, numerical `A_N = 0`, and max frame ratio about `2.73e16`.
-Phase-complete beats phase-blind at `N=8`, but both collapse numerically at
-larger `N`.  The replacement target is `AtomSamplerPAWOTGQuality`: construct a
-quasi-uniform sampler with `mu_N <= C/N`, or at least `(N-1)mu_N < 1` for a
-Gershgorin-style lower bound.  The digit-expansion PAWOTG partial result
-remains valid; the current atom sampler is not good enough and must be
-replaced.
+The corrected interpretation is sharper than the first sampler diagnosis.
+Kozyrev wavelets are orthogonal in `L2(Q_p)`, so on the p-adic side the Gram
+matrix is the identity: `A_N = B_N = 1`, `mu_N = 0`.  The clustered CSVs were
+not evidence of bad p-adic atoms.  They were evidence that the Archimedean
+inner-product model after digit expansion contains parent-child nesting:
+`phi(B(x,p^-j))` contains `phi(B(x,p^-(j+1)))`, creating a non-decaying
+nesting term.
 
-This is a genuine partial result: PAWOTG is not vacuous, and a natural
-adelic-to-Archimedean map passes the threshold.  The remaining theorem is
-specificity: prove that the SSP/CM/Hecke atom embedding is `phi_digit` or has
-the same uniform spread.  Until that is shown, `inf_N A_N > 0`, Mosco recovery,
-no spectral pollution, Gate 3 closure, and Clay promotion remain open.
+The replacement theorem target is therefore `Gate3NestingTaperCondition`, not
+"try another sampler."  PAWOTG measures whether the Gaussian taper on the
+Archimedean image damps the nesting leakage:
+
+```text
+sum_{d>=1} p^d exp(-(log p)^2 d^2 / (4 sigma^2)) < 1.
+```
+
+The digit-expansion calculation with `sigma = 1/sqrt(12) ~= 0.2887` satisfies
+the binding `p=3` threshold `sigma_crit = 0.5052`.  The remaining theorem is
+specificity: prove that the actual SSP/CM/Hecke embedding uses this taper or
+has an equally strong uniform taper.  Until that is shown, `inf_N A_N > 0`,
+Mosco recovery, no spectral pollution, Gate 3 closure, and Clay promotion
+remain open.
 
 ## Corrected Target
 
@@ -198,10 +224,12 @@ inert-prime threshold table now recorded in
 | `p=17` | `0.8334` |
 | `p=19-59` | `0.86-1.05` range |
 
-The supplied finite-frame CSV is a diagnostic obstruction, not a proof: the
-sampled dictionaries fail the Gershgorin condition in every row, and `A_N`
-collapses to numerical zero at larger `N`, including the phase-complete toy
-rows.  The correct theorem surface therefore remains conditional:
+The supplied finite-frame CSV is a diagnostic obstruction for the un-tapered
+Archimedean inner-product model, not a proof and not a p-adic atom failure:
+the sampled image dictionaries fail the Gershgorin condition in every row, and
+`A_N` collapses to numerical zero at larger `N`, including the phase-complete
+toy rows.  The p-adic Kozyrev Gram remains identity.  The correct theorem
+surface therefore remains conditional:
 
 ```text
 finite separation -> finite A_N > 0
@@ -209,15 +237,18 @@ PAWOTGUniformSeparation -> uniform lower control -> Mosco/no-pollution route
 ```
 
 The refined sampler-quality file `gate3_sampler_quality.csv` makes the
-engineering failure explicit: the current sampler has `mu_N` near `1`, while
-the strict Gershgorin target is `mu_N < 1/(N-1)`.  The next sampler target is:
+Archimedean nesting failure explicit: the current un-tapered image model has
+`mu_N` near `1`, while the strict Gershgorin target is `mu_N < 1/(N-1)`.
+The next theorem target is:
 
 ```text
-AtomSamplerPAWOTGQuality : mu_N <= C / N
+Gate3NestingTaperCondition : Gaussian taper damps parent-child nesting
 ```
 
-or at least enough quasi-uniform phase/twist placement to keep
-`(N-1)mu_N < 1`.
+with the concrete PAWOTG series
+`sum_{d>=1} p^d exp(-((log p)^2 d^2)/(4 sigma^2)) < 1`.  This is why the
+digit-expansion result `sigma ~= 0.2887 < 0.5052` is the live positive
+calculation.
 
 No Gate 3 closure, Mosco recovery proof, no-spectral-pollution theorem,
 mass-shell transfer, or Clay promotion follows from the artifacts.

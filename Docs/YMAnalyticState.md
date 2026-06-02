@@ -71,6 +71,11 @@ Monster re-2 stress:
 2. Physical beta bridge: prove the non-perturbative RG flow reaches the KP-safe carrier regime.
 3. Monster multiplicity quotient control: prove raw `q^2` / second-irrep
    growth does not leak into the physical polymer entropy constant `C0`.
+   The current positive evidence is the McKay-Thompson `T_7` compression:
+   raw Monster `c2=21493760` is replaced on the `p=7` lane by
+   `T_7(q^2)=204`, giving `C0_eff ~= 2` and `beta_abs ~= 15.836` under the
+   conservative reading.  This sharpens but does not prove the quotient
+   theorem.
 4. Gate3 transfer: carry carrier area law through PAWOTG/Mosco/no-pollution/mass-shell.
 5. OS/Wightman continuum construction remains external to the carrier receipts.
 

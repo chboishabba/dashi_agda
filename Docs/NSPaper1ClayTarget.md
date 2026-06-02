@@ -50,15 +50,23 @@ Checked Agda receipt:
 DASHI/Physics/Closure/NSTailRestrictedThetaDiagnosticReceipt.agda
 ```
 
+In the binary-to-tetralemma margin governance, `Theta_global` is the `neither`
+example: it is a real diagnostic, but it is not the Clay tail seam because the
+argmax is dominated by low `k=2`.  Paper 1 should use `Theta_tail` for
+tail-absorption statements.
+
 ## Open Clay Points
 
 - `NS5`: prove the danger-shell maximum principle.
 - `NS6`: prove an unconditional theta bound.
 - Control adjacent-shell edge leakage at the danger shell.
-- Replace the circular high-high estimate with the negative-Sobolev target:
-  prove `||P_{>K*}(u.grad u)||_{H^{-1/2}} <= epsilon*nu*||P_{>K*}u||_{H^{3/2}}`
-  without importing `H^{1/2}` velocity regularity, Serrin, BKM, or stronger
-  regularity.
+- The local negative-Sobolev route is now an obstruction witness, not the
+  positive route: `NSHminus1Over2ObstructionReceipt` records that the sampled
+  ratio
+  `||P_{>K}(u.grad u)||_{H^{-1/2}} / (nu ||P_{>K}u||_{H^{3/2}})` is above one
+  and diverges as `nu -> 0`.  A Clay route must therefore use a genuinely
+  global pressure redistribution mechanism, not a tail-only local absorption
+  estimate.
 - Eliminate the LP commutator defect or bind it to Serrin/BKM control.
 - Convert conditional tail decay into a full BKM continuation theorem.
 - Prove the comparison theorem target `Theta < 1 -> H^{11/8}` by
@@ -151,6 +159,42 @@ velocity in `H^{1/2}`:
 ||P_{>K*}(u.grad u)||_{H^{-1/2}}
   <= epsilon * nu * ||P_{>K*}u||_{H^{3/2}}
 ```
+
+The latest computation records why this is now an obstruction statement, not a
+closed estimate.  The sampled ratio
+
+```text
+||P_{>K}(u.grad u)||_{H^-1/2}
+/ (nu ||P_{>K}u||_{H^3/2})
+```
+
+is above one and grows as viscosity decreases:
+
+| nu | Kolmogorov | Smooth | Rough |
+| --- | ---: | ---: | ---: |
+| `0.10` | `1.38` | `2.30` | `1.67` |
+| `0.01` | `3.99` | `7.19` | `7.42` |
+| `0.002` | `19.85` | `35.97` | `38.98` |
+
+This is recorded in
+`DASHI/Physics/Closure/NSHminus1Over2ObstructionReceipt.agda`.  It is a
+publishable obstruction witness for the negative-Sobolev route; it does not
+prove uniform absorption, theta preservation, or NS regularity.
+
+The receipt now exposes the theorem-facing ledger fields used by the final
+frontier map:
+
+```text
+status = hMinus1Over2DefectRatioDivergesUnderKolmogorovScaling
+ratio_kolmogorov_nu001 = 3.99
+ratioDivergesAsNuToZero = true
+publishableResult = "ObstructionTheorem"
+clayNSProved = false
+```
+
+The open analytic obligation is deliberately still present: the numerical
+divergence witness must be replaced by a full scaling law before it becomes an
+analytic theorem rather than a checked obstruction surface.
 
 Importing `H^{1/2}` velocity regularity directly would be circular because it
 is already regularity information of the type the programme is trying to

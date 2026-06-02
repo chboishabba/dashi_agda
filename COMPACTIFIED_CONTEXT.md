@@ -2,6 +2,74 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-02 Clay continuum mathematics transition: updated
+  `ClayContinuumMathTransitionReceipt` and `Docs/ClayContinuumMathTransition.md`
+  as the honest post-grammar Clay state.  DASHI has a precision
+  fault-localisation ledger, not the final proofs.  Gate3/gravity requires the
+  physical SSP/Hecke 3D taper `sigma_SSP < 0.3025113508228815`; the digit
+  baseline passes with `sigma ~= 0.2886751345948129` and series
+  `0.7228939450291813`.  YM requires non-perturbative Balaban transfer from
+  `beta ~= 6` to `beta_eff > 15.84`, then OS/Wightman reconstruction.  NS has
+  Path A (`H^-1/2` obstruction paper) and Path B (`H^{11/8}` Bernoulli-band
+  plus density/compactness for Clay).  No PAWOTG theorem, Balaban bridge,
+  OS/Wightman theorem, NS regularity theorem, Clay, or terminal promotion
+  follows.
+  The transition now consumes `SSP7Plus7Plus1AtomGrammarReceipt` directly:
+  `15SSP = 7 Hecke + 7 mirror-Hecke + p71 sign`; each septet is
+  `3D + 3D + sign`; each digit/lane contains depth-many nested 15SSP blocks.
+  This records the symmetry-complexity source of the macroscopic `p^(3d)`
+  density term without adding a proof or promotion.
+
+- 2026-06-02 gravity Vladimirov 3D frame correction: updated the GR Vladimirov
+  receipts/docs to record that `D^alpha` eigenvalue weights cancel in
+  normalized nesting cross-terms, but macroscopic gravity requires an
+  `L2(R^3)` image with depth density `p^(3d)`, not `p^d`.  Gravity is now the
+  binding Archimedean taper target:
+  `sigma_crit_3D(p=3) ~= 0.3025113508228815`,
+  `sigma_digit ~= 0.2886751345948129`, and
+  `S_3D,p3(sigma_digit) ~= 0.7228939450291813`.  Proving
+  `sigma_SSP < 0.3025113508228815` for the physical SSP/Hecke embedding would imply the
+  1D Gate3 taper.  W4 physical mass/source/stress-energy calibration remains
+  independent.  No Schwarzschild, Einstein, precision-gravity, Gate3, Clay,
+  W4, or terminal promotion follows.
+
+- 2026-06-02 binary-to-tetralemma margin governance: added and wired
+  `BinaryTetralemmaMarginStateReceipt` and linked it into
+  `ClayFinalAnalyticFrontierMapReceipt`.  The strict barrier remains binary
+  for promotion (`P+I<A`, equivalently `theta+epsilon<1`), but diagnostics now
+  have four states: true/absorbed, false/leaking, both/mixed, and
+  neither/wrong-seam.  This captures Gate 3 digit expansion as true, NS
+  `H^-1/2` local absorption as false, YM convergence-without-absorption as
+  both, and global low-shell theta as neither.  No Gate 3, YM, NS, Clay, or
+  terminal promotion follows.
+
+- 2026-06-02 Gate3 taper / NS H^-1/2 obstruction update:
+  tightened `Gate3NestingTaperConditionReceipt` with
+  `sigma_taper(p=3)=0.318022`, `sigma_digit=0.2886751345948129`, and
+  `S_p3(sigma_digit)~=0.0803`.  Digit expansion now satisfies the strictest
+  taper condition with headroom, but the actual SSP/Hecke embedding spread
+  remains open.  Added `NSHminus1Over2ObstructionReceipt`: the sampled
+  `H^-1/2` nonlinear-defect ratio is above one and diverges as viscosity
+  decreases (`1.38/2.30/1.67`, `3.99/7.19/7.42`, `19.85/35.97/38.98` for
+  Kolmogorov/smooth/rough rows at `nu=0.10/0.01/0.002`).  The receipt records
+  this as a publishable obstruction witness, not a uniform absorption
+  estimate.  `ClayFinalAnalyticFrontierMapReceipt` now consumes the new NS
+  obstruction surface.  No Gate 3, NS, Clay, or terminal promotion follows.
+
+- 2026-06-02 Gate3 nesting / YM T7 correction:
+  added `DASHI/Physics/Closure/Gate3NestingTaperConditionReceipt.agda` and
+  `DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda`.  Gate 3's
+  current reading is no longer "bad p-adic sampler": Kozyrev wavelets are
+  orthogonal in `L2(Q_p)` with identity Gram, and the finite-frame failure is
+  Archimedean digit-image nesting.  PAWOTG is the Gaussian taper condition that
+  damps that nesting; digit-expansion `sigma=1/sqrt(12) ~= 0.2887` passes the
+  `p=3` threshold `0.5052`, while SSP/CM/Hecke taper remains open.  YM now has
+  McKay-Thompson `T_7` quotient evidence: raw Monster `c2=21493760` compresses
+  to `T_7(q^2)=204`, factor about `105000`; conservative `C0_eff~=2` gives
+  `beta_abs~=15.836`, much softer than raw Monster leakage.  These receipts do
+  not promote PAWOTG, quotient control, Balaban bridge, Gate 3, YM, Clay, or
+  terminal closure.
+
 - 2026-06-02 Monster / 15SSP quotient control: added and wired
   `MonsterMoonshineSSPQuotientControlReceipt`.  `MonsterMoonshineSSPQuotientControl`
   is now recorded above YM/Gate3 as a quotient/compression blocker.
@@ -5457,3 +5525,17 @@ Cleanup state:
   about `0.296`, raw leakage about `0.228`.  NS interpretation is unchanged:
   low-depth/global shell growth is fenced from the tail seam, so use
   `Theta_tail`.
+
+- 2026-06-02 Clay final analytic frontier map:
+  added `DASHI/Physics/Closure/ClayFinalAnalyticFrontierMapReceipt.agda` and
+  wired it into `DASHI/Everything.agda`.  This is the canonical checked answer
+  to "what remains for Clay?" after the shared scale-graph algebra is closed.
+  It links the existing proof/evidence surfaces for Monster quotient control,
+  Gate 3 PAWOTG/Mosco/no-spectral-pollution, YM effective-`C0` KP plus
+  Balaban physical beta bridge plus OS/Wightman transfer, and NS
+  tail-restricted theta plus non-circular high-high/`K*` danger-shell control.
+  It records related proof surfaces only; it does not inhabit
+  `PAWOTGUniformSeparation`, `MonsterMultiplicityQuotientControl`,
+  `BalabanPhysicalBetaBridge`, continuum OS/Wightman mass-gap transfer,
+  `NonCircularKStarDriftBound`, or `NSDangerShellMaximumPrinciple`, and all
+  Clay/promotion channels remain false/empty.

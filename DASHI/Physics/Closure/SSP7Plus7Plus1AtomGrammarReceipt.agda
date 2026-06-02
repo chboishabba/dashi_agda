@@ -19,6 +19,15 @@ import DASHI.Physics.Closure.SSPSevenSevenOneAtomFieldReceipt as SSP771
 -- spare sign/reaction label.  It is explicitly not a CM split/inert
 -- decomposition.
 --
+-- The internal septet refinement is now recorded as:
+--
+--   7 = 3D + 3D + sign
+--
+-- for each Hecke/mirror septet.  This is coordinate semantics, not a new
+-- arithmetic prime partition.  Each digit/lane in the 15SSP carrier also
+-- expands by BT depth into depth-many nested 15SSP blocks; this is the
+-- symmetry-complexity series behind the p^(3d) Archimedean density accounting.
+--
 -- Gate 3 implication recorded here:
 -- nine inert SSP primes require Mirror B phase dynamics for a nonzero inert
 -- frame bound; a phase-blind dictionary fails on those inert primes.  Five
@@ -189,6 +198,16 @@ gate3ImplicationStatement :
 gate3ImplicationStatement =
   "Gate 3: nine inert SSP primes require Mirror B/phase dynamics for a nonzero inert frame bound; phase-blind dictionaries fail there, five split primes can be Mirror-A valuation/amplitude distinguished, and p=7 is ramified/structural."
 
+septetInternalStatement :
+  String
+septetInternalStatement =
+  "Each 7-lane Hecke/mirror septet is internally read as 7 = 3D + 3D + sign: a primary 3D block, a mirrored/dual 3D block, and one local sign/carry lane."
+
+symmetryComplexityStatement :
+  String
+symmetryComplexityStatement =
+  "Each digit within the 15SSP carrier contains depth-many nested 15SSP blocks; this BT depth expansion is the symmetry-complexity series consumed by the p^(3d) Archimedean density calculation."
+
 record SSP7Plus7Plus1AtomGrammarReceipt : Setω where
   field
     status :
@@ -264,6 +283,60 @@ record SSP7Plus7Plus1AtomGrammarReceipt : Setω where
 
     totalAtomFieldsIsFifteen :
       totalAtomFields ≡ 15
+
+    mirrorAInternalPrimary3D :
+      Nat
+
+    mirrorAInternalPrimary3DIsThree :
+      mirrorAInternalPrimary3D ≡ 3
+
+    mirrorAInternalMirror3D :
+      Nat
+
+    mirrorAInternalMirror3DIsThree :
+      mirrorAInternalMirror3D ≡ 3
+
+    mirrorAInternalSign :
+      Nat
+
+    mirrorAInternalSignIsOne :
+      mirrorAInternalSign ≡ 1
+
+    mirrorBInternalPrimary3D :
+      Nat
+
+    mirrorBInternalPrimary3DIsThree :
+      mirrorBInternalPrimary3D ≡ 3
+
+    mirrorBInternalMirror3D :
+      Nat
+
+    mirrorBInternalMirror3DIsThree :
+      mirrorBInternalMirror3D ≡ 3
+
+    mirrorBInternalSign :
+      Nat
+
+    mirrorBInternalSignIsOne :
+      mirrorBInternalSign ≡ 1
+
+    septetsReadAs3D3DSign :
+      Bool
+
+    septetsReadAs3D3DSignIsTrue :
+      septetsReadAs3D3DSign ≡ true
+
+    eachDigitContainsDepthMany15SSPBlocks :
+      Bool
+
+    eachDigitContainsDepthMany15SSPBlocksIsTrue :
+      eachDigitContainsDepthMany15SSPBlocks ≡ true
+
+    symmetryComplexitySeriesRecorded :
+      Bool
+
+    symmetryComplexitySeriesRecordedIsTrue :
+      symmetryComplexitySeriesRecorded ≡ true
 
     gate3PrimeClasses :
       List Gate3PrimeClass
@@ -359,6 +432,18 @@ record SSP7Plus7Plus1AtomGrammarReceipt : Setω where
     gate3ImplicationBoundaryIsCanonical :
       gate3ImplicationBoundary ≡ gate3ImplicationStatement
 
+    septetInternalBoundary :
+      String
+
+    septetInternalBoundaryIsCanonical :
+      septetInternalBoundary ≡ septetInternalStatement
+
+    symmetryComplexityBoundary :
+      String
+
+    symmetryComplexityBoundaryIsCanonical :
+      symmetryComplexityBoundary ≡ symmetryComplexityStatement
+
     receiptBoundary :
       List String
 
@@ -415,6 +500,42 @@ canonicalSSP7Plus7Plus1AtomGrammarReceipt =
     ; totalAtomFields =
         15
     ; totalAtomFieldsIsFifteen =
+        refl
+    ; mirrorAInternalPrimary3D =
+        3
+    ; mirrorAInternalPrimary3DIsThree =
+        refl
+    ; mirrorAInternalMirror3D =
+        3
+    ; mirrorAInternalMirror3DIsThree =
+        refl
+    ; mirrorAInternalSign =
+        1
+    ; mirrorAInternalSignIsOne =
+        refl
+    ; mirrorBInternalPrimary3D =
+        3
+    ; mirrorBInternalPrimary3DIsThree =
+        refl
+    ; mirrorBInternalMirror3D =
+        3
+    ; mirrorBInternalMirror3DIsThree =
+        refl
+    ; mirrorBInternalSign =
+        1
+    ; mirrorBInternalSignIsOne =
+        refl
+    ; septetsReadAs3D3DSign =
+        true
+    ; septetsReadAs3D3DSignIsTrue =
+        refl
+    ; eachDigitContainsDepthMany15SSPBlocks =
+        true
+    ; eachDigitContainsDepthMany15SSPBlocksIsTrue =
+        refl
+    ; symmetryComplexitySeriesRecorded =
+        true
+    ; symmetryComplexitySeriesRecordedIsTrue =
         refl
     ; gate3PrimeClasses =
         canonicalGate3PrimeClasses
@@ -478,8 +599,19 @@ canonicalSSP7Plus7Plus1AtomGrammarReceipt =
         gate3ImplicationStatement
     ; gate3ImplicationBoundaryIsCanonical =
         refl
+    ; septetInternalBoundary =
+        septetInternalStatement
+    ; septetInternalBoundaryIsCanonical =
+        refl
+    ; symmetryComplexityBoundary =
+        symmetryComplexityStatement
+    ; symmetryComplexityBoundaryIsCanonical =
+        refl
     ; receiptBoundary =
         "7+7+1 is an atom grammar, not CM-field splitting"
+        ∷ "Each septet is internally read as 7 = 3D + 3D + sign"
+        ∷ "Each 15SSP digit contains depth-many nested 15SSP blocks"
+        ∷ "The nested digit expansion is the symmetry-complexity series behind p^(3d) density"
         ∷ "Mirror A variables: position, scale, amplitude, orientation, anisotropy, curvature, depth"
         ∷ "Mirror B variables: phase, twist, spin/helicity, torsion, pressure-gradient, transport-direction, memory/carry"
         ∷ "p71 carries the spare source/sink/neutral sign-reaction orientation"
@@ -509,6 +641,30 @@ spareSignCountIs1 =
 totalAtomFieldCountIs15 :
   totalAtomFields canonicalSSP7Plus7Plus1AtomGrammarReceipt ≡ 15
 totalAtomFieldCountIs15 =
+  refl
+
+septetsAre3D3DSign :
+  septetsReadAs3D3DSign
+    canonicalSSP7Plus7Plus1AtomGrammarReceipt
+  ≡
+  true
+septetsAre3D3DSign =
+  refl
+
+digitsCarryNested15SSPBlocks :
+  eachDigitContainsDepthMany15SSPBlocks
+    canonicalSSP7Plus7Plus1AtomGrammarReceipt
+  ≡
+  true
+digitsCarryNested15SSPBlocks =
+  refl
+
+symmetryComplexitySeriesIsRecorded :
+  symmetryComplexitySeriesRecorded
+    canonicalSSP7Plus7Plus1AtomGrammarReceipt
+  ≡
+  true
+symmetryComplexitySeriesIsRecorded =
   refl
 
 gate3RequiresMirrorBForInertPrimes :

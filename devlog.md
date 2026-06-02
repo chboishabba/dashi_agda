@@ -1,3 +1,52 @@
+# 2026-06-02 nested 15SSP coordinate grammar integration
+
+- Updated `SSP7Plus7Plus1AtomGrammarReceipt` so the carrier grammar records
+  the internal refinement `15SSP = 7 Hecke + 7 mirror-Hecke + p71 sign`, with
+  each septet read as `7 = 3D + 3D + sign`.
+- Recorded that each 15SSP digit/lane contains depth-many nested 15SSP blocks.
+  This is the symmetry-complexity series behind the `p^(3d)` Archimedean
+  density term used by the 3D gravity/Gate3 taper calculation.
+- Wired the atom grammar receipt into `ClayContinuumMathTransitionReceipt` so
+  the final Clay ledger consumes the coordinate semantics directly.
+- No Gate3, YM, NS, gravity, Clay, or terminal promotion follows.
+
+# 2026-06-02 gravity Vladimirov 3D frame correction
+
+- Corrected `GRVladimirovFrameDiagnosticReceipt` and
+  `GravityVladimirovFrameReceipt` for the 3D/macroscopic PAWOTG reading:
+  depth density is `p^(3d)`, so the binding condition is
+  `sigma_crit_3D(p=3) ~= 0.3025113508228815`.
+- Digit expansion still passes narrowly at
+  `sigma_digit ~= 0.2886751345948129`, with
+  `S_3D,p3(sigma_digit) ~= 0.7228939450291813`.
+- The gravity trit table remains: p-adic Vladimirov spectrum `+1`,
+  Archimedean 3D frame theorem `0`, Schwarzschild/W4 match `-1`; lane status
+  `0` suspended.
+- No carrier-derived GR or precision-gravity promotion follows.
+
+# 2026-06-02 binary-to-tetralemma margin governance
+
+- Added and wired `BinaryTetralemmaMarginStateReceipt`.
+- It records the diagnostic refinement from a binary pass/fail margin to four
+  states: true/absorbed, false/leaking, both/mixed, and neither/wrong-seam.
+- The final promotion gate remains binary and fail-closed.  The new receipt is
+  consumed by `ClayFinalAnalyticFrontierMapReceipt` as governance only.
+
+# 2026-06-02 Gate3 nesting / YM T7 quotient evidence
+
+- Added and wired `Gate3NestingTaperConditionReceipt`.
+- It corrects the Gate 3 sampler diagnosis: Kozyrev wavelets are orthogonal in
+  `L2(Q_p)` with identity Gram; the finite-frame CSV failure is Archimedean
+  parent-child nesting after digit expansion.  PAWOTG is now the Gaussian
+  taper condition that damps the nesting term.  Digit-expansion
+  `sigma~=0.2887 < 0.5052` remains the positive model; SSP/CM/Hecke taper is
+  still open.
+- Added and wired `YMMonsterQuotientEvidenceReceipt`.
+- It records McKay-Thompson `T_7` compression evidence: raw Monster
+  `c2=21493760`, `T_7(q^2)=204`, compression about `105000`, conservative
+  `C0_eff~=2`, and `beta_abs~=15.836`.  This supports quotient control but
+  does not prove the actual YM polymer entropy theorem.
+
 # 2026-06-02 Monster / 15SSP quotient control
 
 - Added and wired `YMC0EntropyThresholdSensitivityReceipt`.

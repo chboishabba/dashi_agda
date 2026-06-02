@@ -74,6 +74,11 @@ beta_KP_convergence ~= 10.11
 beta_KP_strict_absorption ~= 12.97
 ```
 
+The binary-to-tetralemma margin governance now records the interval
+`10.11 < beta < 12.97` as the `both` state: the KP series is convergent, but
+the sum is not yet strictly absorbing.  That is a real diagnostic distinction,
+not a YM mass-gap theorem.
+
 ## Entropy-Constant Sensitivity
 
 The second-pass calculation generated:
@@ -116,6 +121,17 @@ entropy constant `C0`.  If the quotient theorem holds, the working
 raw leak survives, the effective thresholds rise to about `22.66` or `32.35`.
 This is a non-promoting blocker, not a quotient theorem and not Clay evidence.
 
+The later `T_7` quotient evidence refines the stress model:
+
+```text
+DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda
+```
+
+It records raw Monster `c2=21493760`, McKay-Thompson `T_7(q^2)=204`,
+compression by about `105000`, conservative `C0_eff~=2`, and
+`beta_abs~=15.836`.  This supports a finite positive route but leaves the
+nonperturbative Balaban bridge from physical beta around `6` open.
+
 The Monster re-2 stress table is staged at:
 
 ```text
@@ -147,6 +163,21 @@ C0 = c2/c1                     -> beta_abs = 32.3635
 The checked cross-lane receipt is
 `DASHI/Physics/Closure/MonsterMoonshineSSPQuotientControlReceipt.agda`.  It
 keeps quotient control, YM mass gap, and Clay promotion false.
+
+The newer McKay-Thompson calculation gives positive quotient evidence and is
+recorded in:
+
+```text
+DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda
+```
+
+For the `p=7` lane, the relevant Hauptmodul is the McKay-Thompson series
+`T_7`, not the raw `j`-function.  Its `q^2` coefficient is `204`, compared to
+the raw Monster `c2 = 21493760`, a compression factor of about `105000`.  A
+conservative normalization using the `T_7` ratio gives `C0_eff ~= 2` and
+therefore `beta_abs ~= 15.836`: harder than the baseline `12.971`, but far
+from the raw-Monster stress thresholds `22.66`/`32.35`.  This is evidence for
+the quotient-control route, not the quotient theorem itself.
 
 The physical/lattice diagnostic recorded for the paper target is:
 

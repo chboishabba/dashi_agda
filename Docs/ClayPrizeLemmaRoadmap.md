@@ -12,10 +12,106 @@ NS theta surface, the YM KP/Balaban surface, and the Gate 3 cutoff-frame
 surface.  The missing work is not more vocabulary.  It is a short list of
 analytic inhabitants that turn the margin surfaces into genuine estimates.
 
+## Canonical Final Frontier Map
+
+The checked citation point for "what remains for Clay?" is now:
+
+```text
+DASHI/Physics/Closure/ClayFinalAnalyticFrontierMapReceipt.agda
+```
+
+That receipt records the solved shared component and the exact remaining
+frontier surfaces:
+
+| Layer | Existing Agda surfaces | Clay-level inhabitant still missing |
+| --- | --- | --- |
+| Shared algebra | `ScaleGraphBarrierAlgebraProofReceipt`, `UniversalScaleGraphBarrierTargetReceipt` | Lane-specific edge laws and analytic hypotheses; the algebra alone does not close a lane. |
+| Margin governance | `BinaryTetralemmaMarginStateReceipt` | Nothing analytic: this is a governance refinement.  It records true/false/both/neither diagnostic states while keeping binary fail-closed promotion. |
+| Monster / entropy control | `MonsterMoonshineSSPQuotientControlReceipt` | `MonsterMultiplicityQuotientControl`: raw `q^2`/second-irrep growth must be quotiented before YM `C0` or Gate 3 overlap entropy consume it. |
+| Gate 3 | `Gate3PAWOTGUniformSeparationTargetReceipt`, `Gate3NestingTaperConditionReceipt`, `Gate3MoscoConstructiveSequenceReceipt`, `Gate3NoSpectralPollutionConditionalProofReceipt` | `PAWOTGUniformSeparation`, Gaussian taper damping of Archimedean parent-child nesting below the binding `p=3` threshold, then Mosco/no-pollution/mass-shell transfer. |
+| YM | `YMC0EntropyThresholdSensitivityReceipt`, `YMBalabanPhysicalBetaBridgeTargetReceipt`, `YMPhysicalBetaBridgeOpenReceipt`, `CarrierOS3ReflectionPositivityReceipt`, `WightmanReconstructionCandidateReceipt` | Actual all-diameter KP with the effective quotient-controlled `C0`, the nonperturbative Balaban physical beta bridge, and continuum OS/Wightman mass-gap transfer. |
+| NS | `NSTailRestrictedThetaDiagnosticReceipt`, `NSNegativeSobolevDangerShellReceipt`, `NSNonCircularKStarDriftBoundTargetReceipt`, `NSDangerShellMaximumPrincipleReceipt` | Tail-restricted theta barrier, non-circular high-high `H^{-1/2}` defect control, `K*` drift containment, and the danger-shell maximum principle. |
+
+The receipt keeps all promotion channels empty and all Clay flags false.  It is
+an index of related proof surfaces and remaining theorem targets, not a theorem
+inhabitant for any Clay problem.
+
 ## 2026-06-02 Computed Lemma Update
 
 The latest computation sharpens all three final blockers without promoting
 any of them.
+
+### Binary To Tetralemma Margin Governance
+
+The shared barrier remains binary at the final promotion point:
+
+```text
+P + I < A
+theta + epsilon < 1
+```
+
+But the diagnostics are now recorded as four-valued:
+
+| State | Meaning | Sprint example |
+| --- | --- | --- |
+| True | absorbed; pressure decreases | Gate 3 digit expansion passes the strict taper. |
+| False | leaking; absorber loses | NS local `H^-1/2` absorption ratio diverges as viscosity decreases. |
+| Both | mixed; convergence without strict absorption or split diagnostics | YM beta between convergence and strict absorption. |
+| Neither | wrong seam/out of domain | `Theta_global` dominated by low `k=2` rather than the tail seam. |
+
+Checked receipt:
+
+```text
+DASHI/Physics/Closure/BinaryTetralemmaMarginStateReceipt.agda
+```
+
+This is governance only.  It does not promote PAWOTG, YM, NS, Gate 3, Clay, or
+terminal closure.
+
+### Taper And H^-1/2 Obstruction Refinement
+
+The Gate 3 taper calculation now has a stricter threshold hierarchy:
+
+```text
+sigma_digit = 0.288675
+sigma_taper(p=3) = 0.318022
+sigma_crit(p=3) = 0.5052
+S_p3(sigma_digit) ~= 0.0803
+```
+
+The digit-expansion embedding therefore satisfies the depth-1 nesting taper
+and the full PAWOTG series target with headroom.  The open theorem is narrower
+than before: prove the actual SSP/Hecke embedding spread is below
+`0.318022`, not merely below `0.5052`.
+
+The NS `H^{-1/2}` calculation now records obstruction evidence rather than an
+absorption estimate.  The sampled ratio
+
+```text
+||P_{>K}(u.grad u)||_{H^-1/2}
+/ (nu ||P_{>K}u||_{H^3/2})
+```
+
+is above one in all reported rows and diverges as `nu -> 0`:
+
+| nu | Kolmogorov | Smooth | Rough |
+| --- | ---: | ---: | ---: |
+| `0.10` | `1.38` | `2.30` | `1.67` |
+| `0.01` | `3.99` | `7.19` | `7.42` |
+| `0.002` | `19.85` | `35.97` | `38.98` |
+
+This supports a Paper 1 obstruction theorem: `Theta_tail` needs the
+negative-Sobolev defect ratio bounded, but Kolmogorov scaling drives that
+ratio upward in the small-viscosity regime.  It does not prove
+`NonCircularKStarDriftBound` or NS regularity.
+
+Checked receipts for this refinement:
+
+```text
+DASHI/Physics/Closure/Gate3NestingTaperConditionReceipt.agda
+DASHI/Physics/Closure/NSHminus1Over2ObstructionReceipt.agda
+DASHI/Physics/Closure/ClayFinalAnalyticFrontierMapReceipt.agda
+```
 
 | Lane | New calculation | What advances | Remaining wall |
 | --- | --- | --- | --- |
@@ -62,7 +158,7 @@ These artifacts are linked to the following checked Agda surfaces:
 | Lane | Checked surface | Artifact reading |
 | --- | --- | --- |
 | Universal | `DASHI/Physics/Closure/ScaleGraphBarrierAlgebraProofReceipt.agda` | The abstract algebra closes only after projection, node margin, edge influx, and absorber positivity are supplied. |
-| Gate 3 | `DASHI/Physics/Closure/Gate3PAWOTGConcreteConditionReceipt.agda`, `DASHI/Physics/Closure/Gate3GershgorinFiniteFrameBoundReceipt.agda`, and `DASHI/Physics/Closure/Gate3AtomSamplerPAWOTGQualityReceipt.agda` | The concrete PAWOTG series target is `sigma < 0.5052` at the binding inert prime `p=3`.  The current atom sampler clusters badly: `mu_N ~= 0.93--1.00`, `(N-1)mu_N >> 1`, Gershgorin lower bounds are always negative, `A_N` hits numerical zero, and max frame ratio is about `2.73e16`.  This is sampler-obstruction evidence, not Gate 3 closure. |
+| Gate 3 | `DASHI/Physics/Closure/Gate3PAWOTGConcreteConditionReceipt.agda`, `DASHI/Physics/Closure/Gate3DigitExpansionPAWOTGPartialResultReceipt.agda`, and `DASHI/Physics/Closure/Gate3NestingTaperConditionReceipt.agda` | The concrete PAWOTG series target is `sigma < 0.5052` at the binding prime `p=3`.  Kozyrev wavelets are orthogonal in `L2(Q_p)`, so the p-adic Gram is identity.  The finite-frame CSV failure came from Archimedean digit-image nesting, and PAWOTG is the Gaussian taper condition that must damp that nesting leakage. |
 | YM | `DASHI/Physics/Closure/YMKPThresholdCorrectionReceipt.agda`, `DASHI/Physics/Closure/YMActualKPLocalSumDiameter1Receipt.agda`, and `DASHI/Physics/Closure/YMActualKPLocalSumDiameter2Receipt.agda` | The supplied KP table records `r(beta=6) = 2.7017782 > 1`; beta 6 diverges.  Beta 10.13 is convergent but not strictly absorbing, and beta 13.64 is strictly absorbing in the supplied table. |
 | NS | `DASHI/Physics/Closure/NSTailFluxLPIdentityFullDerivationReceipt.agda`, `DASHI/Physics/Closure/NSAdjacentShellLeakageBoundReceipt.agda`, and `DASHI/Physics/Closure/NSThetaTailToBKMBridgeReceipt.agda` | The supplied theta sweep includes stress/failure regimes with `Theta > 1` and negative margins.  It is a danger-shell locator, not evidence of unconditional theta preservation. |
 
@@ -95,6 +191,14 @@ latest C0 threshold table and Monster re-2 stress calculation.  It records
 non-promoting: raw Monster multiplicity is not physical polymer entropy,
 quotient control remains open, and YM/Clay promotion remains false.
 
+The checked positive evidence surface is
+`DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda`.  It records the
+McKay-Thompson `T_7` compression: raw Monster `c2=21493760` versus
+`T_7(q^2)=204`, a factor of about `105000`.  The conservative `T_7`-based
+reading gives `C0_eff ~= 2` and `beta_abs ~= 15.836`, which is materially
+harder than baseline but much softer than raw Monster leakage.  This is
+quotient evidence only; the actual polymer-entropy theorem remains open.
+
 The cross-lane quotient-control receipt is:
 
 ```text
@@ -119,7 +223,7 @@ The second-pass calculations add three sharper diagnostic targets:
 | --- | --- | --- |
 | NS | `ns_theta_tail_restricted.csv` separates `Theta_global = sup_k theta(k)` from `Theta_tail = sup_{k >= K_diss(nu)} theta(k)`.  The current global maximum is low-shell `k=2`, not a dissipative-tail shell. | Use `Theta_tail`, `danger_shell_tail`, and `low_shell_warning` in Paper 1.  Smooth and Kolmogorov pass the sampled tail barrier; near-critical and rough fail; inviscid has no sampled tail rows because `K_diss` exceeds the CSV range. |
 | YM | `ym_c0_threshold_sensitivity.csv` and uploaded `ym_beta_threshold_sensitivity_C0.csv` show `beta_abs(C0) = (a + log(2 p C0)) / c_min`. | Treat entropy constant `C0` as load-bearing.  `C0=0.5` gives `beta_abs=10.1071`, `C0=0.75` gives `11.7825`, `C0=1` gives `12.9713`, and `C0=1.25` raises it to `13.8934`; larger `C0` worsens the Balaban bridge. |
-| Gate 3 | `gate3_sampler_quality.csv` shows every sampled row has `sampler_quality=FAIL_CLUSTERED`, with `mu_N` near `1` and `(N-1)mu_N >> 1`. | Stop treating the current atom sampler as PAWOTG-like.  The next engineering target is `AtomSamplerPAWOTGQuality : mu_N <= C/N`, or at least `(N-1)mu_N < 1` for the Gershgorin route. |
+| Gate 3 | `gate3_sampler_quality.csv` shows every un-tapered Archimedean image row has `sampler_quality=FAIL_CLUSTERED`, with `mu_N` near `1` and `(N-1)mu_N >> 1`. | Stop treating this as p-adic atom failure.  Kozyrev wavelets are orthogonal in `L2(Q_p)`; the next theorem target is `Gate3NestingTaperCondition`, proving the Gaussian taper damps parent-child nesting and yields uniform frame control. |
 
 The checked receipt for this refinement is:
 

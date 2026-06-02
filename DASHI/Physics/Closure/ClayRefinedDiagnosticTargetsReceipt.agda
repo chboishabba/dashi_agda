@@ -10,6 +10,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ClayComputedVisualizationSynthesisReceipt
   as Sprint
+import DASHI.Physics.Closure.Gate3NestingTaperConditionReceipt as Nesting
 
 ------------------------------------------------------------------------
 -- Refined diagnostics after re-reading the sprint CSVs.
@@ -25,9 +26,9 @@ import DASHI.Physics.Closure.ClayComputedVisualizationSynthesisReceipt
 --     any C0 > 1 raises the Balaban beta bridge target.
 --
 --   Gate 3:
---     the current atom sampler is clustered.  The sampler quality target is
---     mu_N <= C / N, or at least (N - 1) mu_N < 1 for Gershgorin.  The current
---     data has mu_N approximately 1 and fails this target in every sampled row.
+--     the p-adic Kozyrev atom Gram is identity.  The apparent sampler failure
+--     is the Archimedean digit-image nesting cross-term.  The target is the
+--     Gaussian taper condition that damps parent-child nesting leakage.
 --
 -- This is a diagnostics/target receipt only.  It does not prove PAWOTG,
 -- Balaban transfer, NS danger-shell preservation, Gate 3 closure, YM mass
@@ -65,7 +66,7 @@ data RefinedDiagnosticTarget : Set where
   ymEntropyConstantSensitivity :
     RefinedDiagnosticTarget
 
-  atomSamplerPAWOTGQuality :
+  archimedeanNestingTaperPAWOTGQuality :
     RefinedDiagnosticTarget
 
 canonicalRefinedDiagnosticTargets :
@@ -74,7 +75,7 @@ canonicalRefinedDiagnosticTargets =
   tailRestrictedThetaBarrier
   ∷ lowShellWarningSeparatesGlobalFromTailTheta
   ∷ ymEntropyConstantSensitivity
-  ∷ atomSamplerPAWOTGQuality
+  ∷ archimedeanNestingTaperPAWOTGQuality
   ∷ []
 
 data RefinedDiagnosticNonClaim : Set where
@@ -84,7 +85,7 @@ data RefinedDiagnosticNonClaim : Set where
   c0SweepDoesNotProveBalabanBridge :
     RefinedDiagnosticNonClaim
 
-  samplerFailureDoesNotProveGate3Impossible :
+  archimedeanNestingDiagnosticDoesNotProveGate3Impossible :
     RefinedDiagnosticNonClaim
 
   refinedDiagnosticsDoNotPromoteClay :
@@ -95,7 +96,7 @@ canonicalRefinedDiagnosticNonClaims :
 canonicalRefinedDiagnosticNonClaims =
   thetaTailPassOnSampleDoesNotProveNS
   ∷ c0SweepDoesNotProveBalabanBridge
-  ∷ samplerFailureDoesNotProveGate3Impossible
+  ∷ archimedeanNestingDiagnosticDoesNotProveGate3Impossible
   ∷ refinedDiagnosticsDoNotPromoteClay
   ∷ []
 
@@ -171,7 +172,7 @@ ymC0SensitivityStatement =
 gate3SamplerQualityStatement :
   String
 gate3SamplerQualityStatement =
-  "Gate3 refined diagnostic: the current atom sampler is clustered.  The target is mu_N <= C/N, or at least (N-1)*mu_N < 1; the current sweep has zero Gershgorin-passing rows and mu_N approximately 1."
+  "Gate3 refined diagnostic: Kozyrev atoms are orthogonal in L2(Q_p), so the p-adic Gram has A_N=B_N=1 and mu_N=0.  The current Archimedean sweep reports parent-child nesting leakage; PAWOTG is the Gaussian taper condition that must damp it."
 
 record ClayRefinedDiagnosticTargetsReceipt : Setω where
   field
@@ -186,6 +187,15 @@ record ClayRefinedDiagnosticTargetsReceipt : Setω where
 
     sprintKeepsClayFalse :
       Sprint.clayPromoted sprintReceipt ≡ false
+
+    nestingReceipt :
+      Nesting.Gate3NestingTaperConditionReceipt
+
+    nestingRootIsArchimedean :
+      Nesting.archimedeanNestingIsRootProblem nestingReceipt ≡ true
+
+    nestingNoGate3Promotion :
+      Nesting.gate3Promoted nestingReceipt ≡ false
 
     artifacts :
       List RefinedDiagnosticArtifact
@@ -305,6 +315,18 @@ record ClayRefinedDiagnosticTargetsReceipt : Setω where
     gate3CurrentSamplerClusteredIsTrue :
       gate3CurrentSamplerClustered ≡ true
 
+    gate3PAdicAtomFailure :
+      Bool
+
+    gate3PAdicAtomFailureIsFalse :
+      gate3PAdicAtomFailure ≡ false
+
+    gate3ArchimedeanNestingRoot :
+      Bool
+
+    gate3ArchimedeanNestingRootIsTrue :
+      gate3ArchimedeanNestingRoot ≡ true
+
     nsStatement :
       String
 
@@ -358,6 +380,12 @@ canonicalClayRefinedDiagnosticTargetsReceipt =
     ; sprintReceipt =
         Sprint.canonicalClayComputedVisualizationSynthesisReceipt
     ; sprintKeepsClayFalse =
+        refl
+    ; nestingReceipt =
+        Nesting.canonicalGate3NestingTaperConditionReceipt
+    ; nestingRootIsArchimedean =
+        refl
+    ; nestingNoGate3Promotion =
         refl
     ; artifacts =
         canonicalRefinedDiagnosticArtifacts
@@ -434,6 +462,14 @@ canonicalClayRefinedDiagnosticTargetsReceipt =
     ; gate3CurrentSamplerClustered =
         true
     ; gate3CurrentSamplerClusteredIsTrue =
+        refl
+    ; gate3PAdicAtomFailure =
+        false
+    ; gate3PAdicAtomFailureIsFalse =
+        refl
+    ; gate3ArchimedeanNestingRoot =
+        true
+    ; gate3ArchimedeanNestingRootIsTrue =
         refl
     ; nsStatement =
         nsTailRestrictedStatement

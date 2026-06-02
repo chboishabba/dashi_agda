@@ -537,6 +537,9 @@ import DASHI.Physics.Closure.GRNonFlatScalarAlgebraSurface
 import DASHI.Physics.Closure.GRSelectedNonFlatMetricInstance
 import DASHI.Physics.Closure.SchwarzschildLimitCandidate
 import DASHI.Physics.Closure.GRWeakFieldPredictionReceipt
+import DASHI.Physics.Closure.GRPrecisionGravityPredictionTargetReceipt
+import DASHI.Physics.Closure.GRVladimirovFrameDiagnosticReceipt
+import DASHI.Physics.Closure.GravityVladimirovFrameReceipt
 import DASHI.Physics.GR
 import DASHI.Physics.YM.SU2LieAlgebra
 import DASHI.Physics.YM.CovariantDerivative
@@ -1110,6 +1113,7 @@ import DASHI.Physics.Closure.NSGlobalBoundNuIndependentRateReceipt
 import DASHI.Physics.Closure.ClayBlockerAsymmetryReceipt
 import DASHI.Physics.Closure.ClayComputedVisualizationSynthesisReceipt
 import DASHI.Physics.Closure.ClayRefinedDiagnosticTargetsReceipt
+import DASHI.Physics.Closure.ClayFinalAnalyticFrontierMapReceipt
 import DASHI.Physics.Closure.YMCuspUniversalityConsolidatedReceipt
 import DASHI.Physics.Closure.VubBetaHardeningReceipt
 import DASHI.Physics.Closure.ProgrammeFrontierUpdateFinalReceipt
@@ -1211,6 +1215,7 @@ import DASHI.Physics.Closure.NSDangerShellMaxPrincipleConditionalProofReceipt
 import DASHI.Physics.Closure.NSThetaImpliesTailDecayReceipt
 import DASHI.Physics.Closure.NSThetaTailToBKMBridgeReceipt
 import DASHI.Physics.Closure.NSNegativeSobolevDangerShellReceipt
+import DASHI.Physics.Closure.NSHminus1Over2ObstructionReceipt
 import DASHI.Physics.Closure.NSNonCircularKStarDriftBoundTargetReceipt
 import DASHI.Physics.Closure.NSThetaPressureMarginCorrectionReceipt
 import DASHI.Physics.Closure.NSToEV5ForwardSimulationActualReceipt
@@ -1232,12 +1237,14 @@ import DASHI.Physics.Closure.PublishableFullUnificationStackReceipt
 import DASHI.Physics.Closure.KeyTermCorrespondenceIndexReceipt
 import DASHI.Physics.Closure.UniversalScaleGraphBarrierTargetReceipt
 import DASHI.Physics.Closure.ScaleGraphBarrierAlgebraProofReceipt
+import DASHI.Physics.Closure.BinaryTetralemmaMarginStateReceipt
 import DASHI.Physics.Closure.Gate3ScaleGraphBarrierInstantiationReceipt
 import DASHI.Physics.Closure.Gate3PAWOTGConcreteConditionReceipt
 import DASHI.Physics.Closure.Gate3AdelicLocalizationReductionReceipt
 import DASHI.Physics.Closure.Gate3PAWOTGUniformSeparationTargetReceipt
 import DASHI.Physics.Closure.Gate3DigitExpansionPAWOTGPartialResultReceipt
 import DASHI.Physics.Closure.Gate3AtomSamplerPAWOTGQualityReceipt
+import DASHI.Physics.Closure.Gate3NestingTaperConditionReceipt
 import DASHI.Physics.Closure.ITIRPNFPressureUnificationSupportReceipt
 import DASHI.Physics.Closure.LocalDocs369UnificationSupportReceipt
 import DASHI.Physics.Closure.SiblingCodecFiningContinuousSupportReceipt
@@ -1268,6 +1275,9 @@ import DASHI.Physics.Closure.P71HeckeMirrorSignLaneReceipt
 import DASHI.Physics.Closure.HeckeCarrierVsCMSplittingReceipt
 import DASHI.Physics.Closure.MonsterMoonshineJDistributionSupportReceipt
 import DASHI.Physics.Closure.MonsterMoonshineSSPQuotientControlReceipt
+import DASHI.Physics.Closure.YMMonsterQuotientEvidenceReceipt
+import DASHI.Physics.Closure.FinalAnalyticWallsReceipt
+import DASHI.Physics.Closure.ClayContinuumMathTransitionReceipt
 import DASHI.Physics.Closure.Paper0SharedMarginGrammarConsolidationReceipt
 import DASHI.Physics.Closure.MonstrousMoonshineSSPBoundaryReceipt
 import DASHI.Physics.Closure.NSNonCircularObstructionReceipt

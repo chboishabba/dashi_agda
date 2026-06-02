@@ -2,6 +2,100 @@
 
 ## Active Blocker Board
 
+Clay continuum math transition `2026-06-02`:
+- [x] Update `ClayContinuumMathTransitionReceipt` so the final three proof
+  packages are stated as continuum mathematics, not repo grammar:
+  Gate3/gravity 3D taper, YM Balaban bridge, and NS Path A/Path B.
+- [x] Wire `SSP7Plus7Plus1AtomGrammarReceipt` into the transition receipt:
+  `15SSP = 7 Hecke + 7 mirror-Hecke + p71 sign`, each septet is
+  `7 = 3D + 3D + sign`, and each digit/lane contains depth-many nested 15SSP
+  blocks.  This records the symmetry-complexity series behind the `p^(3d)`
+  Archimedean density term.
+- [x] Record exact Gate3/gravity target:
+  `sigma_SSP < 0.3025113508228815`, digit baseline
+  `sigma ~= 0.2886751345948129`, and 3D series `0.7228939450291813 < 1`.
+- [x] Record YM T7-compressed beta target: physical `beta ~= 6` must reach
+  `beta_eff > 15.84`, a gap of about `9.84`, before OS/Wightman transfer.
+- [x] Record NS fork: Path A is the `H^-1/2` obstruction publication; Path B is
+  the `H^{11/8}` Bernoulli-band plus all-data density route required for Clay.
+- [ ] Prove or falsify the physical SSP/Hecke 3D taper calculation.
+- [ ] Prove the non-perturbative Balaban bridge and OS/Wightman package.
+- [ ] Prove the NS Path B density/compactness extension before any NS Clay
+  promotion.
+
+Gravity Vladimirov frame correction `2026-06-02`:
+- [x] Correct `GRVladimirovFrameDiagnosticReceipt` so the gravity lane is
+  suspended, not carrier-positive: p-adic Vladimirov spectrum known,
+  Archimedean image frame theorem open, Schwarzschild/W4 blocked.
+- [x] Add and wire
+  `DASHI/Physics/Closure/GravityVladimirovFrameReceipt.agda` as the compact
+  `+1/0/-1` status table for gravity.
+- [x] Record that `D^alpha` eigenvalue weighting is irrelevant to normalized
+  nesting: the 1D spectral cross-term is not improved by `alpha`, and the 3D
+  gravity overlap accounting is the separate `p^(3d)` density correction.
+- [x] Correct the 1D/3D distinction: macroscopic gravity uses an `L2(R^3)`
+  image with atom density `p^(3d)`, making the effective nesting constant
+  `p^(-3/2)` in the 3D gravity frame.
+- [x] Record the corrected 3D gravity constants:
+  `sigma_crit_3D(p=3) ~= 0.3025113508228815`,
+  `sigma_digit ~= 0.2886751345948129`, and
+  `S_3D,p3(sigma_digit) ~= 0.7228939450291813`.
+- [x] Reclassify the gravity frame as the binding Archimedean taper target:
+  proving `sigma_SSP < 0.3025113508228815` implies the 1D Gate3 `sigma < 0.505`, not the
+  reverse.  Digit expansion passes with narrow but real headroom about
+  `0.0138`.
+- [ ] Prove the actual SSP/Hecke physical embedding satisfies the 3D gravity
+  taper `sigma_SSP < 0.3025113508228815`.
+- [ ] Construct W4 physical mass/stress-energy calibration and a carrier
+  radial valuation before any Schwarzschild or precision-gravity prediction.
+
+Gate3 taper / NS obstruction refinement `2026-06-02`:
+- [x] Add and wire
+  `DASHI/Physics/Closure/BinaryTetralemmaMarginStateReceipt.agda` so the
+  strict binary barrier `P+I<A` is governed by four diagnostic states:
+  true/absorbed, false/leaking, both/mixed, and neither/wrong-seam.  This is
+  governance only; binary fail-closed promotion still controls Clay claims.
+- [x] Tighten `Gate3NestingTaperConditionReceipt` with
+  `sigma_taper(p=3)=0.318022`, `sigma_digit=0.2886751345948129`, and
+  `S_p3(sigma_digit)~=0.0803`.
+- [x] Add and wire
+  `DASHI/Physics/Closure/NSHminus1Over2ObstructionReceipt.agda` as the checked
+  obstruction witness for the negative-Sobolev danger-shell ratio.
+- [x] Update `ClayFinalAnalyticFrontierMapReceipt` to consume the new NS
+  obstruction receipt.
+- [ ] Prove the actual SSP/Hecke embedding spread lies below `0.318022`.
+- [ ] Replace the computed NS H^-1/2 divergence witness with either an
+  analytic scaling obstruction theorem or a non-circular absorption estimate.
+
+Gate3/YM corrected computation pass `2026-06-02`:
+- [x] Add and wire
+  `DASHI/Physics/Closure/Gate3NestingTaperConditionReceipt.agda` to supersede
+  the misleading "bad sampler" reading: Kozyrev wavelets have identity Gram in
+  `L2(Q_p)`, while the finite-frame CSV failure comes from Archimedean
+  digit-image nesting.  PAWOTG is now recorded as the Gaussian taper condition
+  that damps this nesting leakage.
+- [x] Add and wire
+  `DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda` with the
+  McKay-Thompson `T_7` quotient evidence: raw Monster `c2=21493760`,
+  `T_7(q^2)=204`, compression factor about `105000`, conservative
+  `C0_eff~=2`, and `beta_abs~=15.836`.
+- [ ] Prove that the actual SSP/CM/Hecke embedding has the required uniform
+  taper; prove that `T_7` coefficients really bound the actual YM polymer
+  orbit entropy.  Until then these are evidence/reduction surfaces only.
+
+Clay final frontier map `2026-06-02`:
+- [x] Add and wire
+  `DASHI/Physics/Closure/ClayFinalAnalyticFrontierMapReceipt.agda` as the
+  canonical checked answer to "what remains for Clay?" after the
+  scale-graph barrier algebra is closed.
+- [x] Link the receipt to the existing proof/evidence surfaces for Monster
+  quotient control, Gate 3 PAWOTG/Mosco/no-pollution, YM effective-`C0`
+  KP plus Balaban physical beta bridge plus OS/Wightman transfer, and NS
+  tail-restricted theta plus non-circular high-high/`K*` danger-shell control.
+- [ ] Inhabit `MonsterMultiplicityQuotientControl`,
+  `PAWOTGUniformSeparation`, `BalabanPhysicalBetaBridge`, and
+  `NonCircularKStarDriftBound` before any Clay promotion can be considered.
+
 Clay blocker asymmetry `2026-06-02`:
 - [x] Add and wire
   `Gate3AtomSamplerPAWOTGQualityReceipt` as the checked obstruction for the

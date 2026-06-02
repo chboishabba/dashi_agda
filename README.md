@@ -48,6 +48,48 @@ Use one of these reader tracks first:
     programme, and `NonCircularKStarDriftBound` is the high-high paraproduct
     obstruction and may be equivalent to the NS regularity problem.  It keeps
     all Gate 3, YM, NS, Clay, and terminal promotions false.
+- Clay final analytic frontier map:
+  `DASHI/Physics/Closure/ClayFinalAnalyticFrontierMapReceipt.agda`
+  - Canonical answer to "what remains for Clay?" after the shared
+    scale-graph algebra is closed.  It links the existing Agda proof/evidence
+    surfaces for Monster quotient control, Gate 3 PAWOTG/Mosco/no-pollution,
+    YM effective-`C0` KP plus Balaban physical beta bridge plus OS/Wightman
+    transfer, and NS tail-restricted theta plus non-circular high-high/`K*`
+    danger-shell control.  It is a fail-closed map only: no PAWOTG theorem,
+    Balaban bridge, OS/Wightman continuum package, NS danger-shell theorem, or
+    Clay promotion is introduced.
+  - Current refined inputs include
+    `DASHI/Physics/Closure/Gate3NestingTaperConditionReceipt.agda`
+    (`sigma_digit=0.288675 < sigma_taper(p=3)=0.318022`,
+    `S_p3(sigma_digit)~=0.0803`) and
+    `DASHI/Physics/Closure/NSHminus1Over2ObstructionReceipt.agda`, which
+    records the negative-Sobolev defect ratio divergence as an obstruction
+    witness rather than a uniform absorption estimate.
+- Gravity Vladimirov frame correction:
+  `DASHI/Physics/Closure/GravityVladimirovFrameReceipt.agda`
+  - Records that Vladimirov `D^alpha` eigenvalue weights cancel in normalized
+    nesting cross-terms, so they do not improve the Archimedean frame.  The
+    3D gravity image has atom density `p^(3d)`, not `p^d`, making gravity the
+    binding taper condition: `sigma_crit_3D(p=3)~=0.303` with
+    `S_3D,p3(sigma_digit)~=0.7229`.  The digit-expansion baseline
+    `sigma_digit~=0.288675` still passes with narrow headroom.  If this 3D
+    gravity taper is proved for the physical SSP/Hecke embedding, the 1D Gate3
+    condition follows; the independent blocker is still W4 physical
+    mass/source calibration, and no gravity prediction is promoted.
+- Clay continuum mathematics transition:
+  `DASHI/Physics/Closure/ClayContinuumMathTransitionReceipt.agda`
+  - Records the honest post-grammar state.  Gate3/gravity now requires the
+    physical SSP/Hecke 3D taper `sigma_SSP < 0.3025113508228815`; YM requires
+    the non-perturbative Balaban bridge from `beta ~= 6` to
+    `beta_eff > 15.84` plus OS/Wightman transfer; NS splits into Path A
+    obstruction publication and Path B `H^{11/8}` plus density for Clay.  It
+    proves none of these and keeps all Clay promotions false.
+  - The transition now consumes
+    `DASHI/Physics/Closure/SSP7Plus7Plus1AtomGrammarReceipt.agda` directly:
+    `15SSP = 7 Hecke + 7 mirror-Hecke + p71 sign`, each septet is
+    `7 = 3D + 3D + sign`, and each digit/lane contains depth-many nested
+    15SSP blocks.  This symmetry-complexity series is the coordinate source
+    of the `p^(3d)` density term in the 3D Archimedean taper calculation.
 - Clay computed-visualisation synthesis:
   `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`
   - Records the current four-plot/CSV synthesis as a checked, non-promoting
