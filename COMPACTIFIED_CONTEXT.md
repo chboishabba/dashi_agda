@@ -5473,21 +5473,18 @@ Cleanup state:
   flags remain false.
 - 2026-06-02 computed visualisation synthesis:
   added `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`
-  and wired it into `DASHI/Everything.agda`.  It consumes the Gate 3 PAWOTG,
-  YM KP threshold, NS non-circular `K*`, and Clay blocker asymmetry receipts.
-  It records the four-visualisation reading as a fail-closed ledger only:
-  Gate 3 has the documented PAWOTG `p=3` threshold
-  `sigma_crit = 0.5052` plus a Weil/Kozyrev attack route, but Worker 5
-  verified that the current CSV bundle does not independently include a
-  machine-readable `p/sigma_crit` table; YM has `beta=6` divergent with
-  `r = 2.7017782`, strict absorption near `12.97`, sampled safe absorption at
-  `13.64`, and a one-loop `exp(150) ~= 10^65` perturbative bridge diagnostic;
-  NS has a low-high/high-high split where low-high is not the core obstruction
-  and high-high is load-bearing/circular if `H^{1/2}`, Serrin, or BKM are
-  imported.  The Paper 1 target is now phrased as a conditional comparison
-  theorem route `Theta < 1 -> H^{11/8}` only.  No PAWOTG theorem, Balaban
-  bridge, NS danger-shell bound, Gate 3 closure, YM mass gap, NS regularity,
-  Clay claim, or terminal promotion is introduced.
+  and wired it into `DASHI/Everything.agda`.  It now records the locked
+  four-chart capstone as a fail-closed ledger: Chart 1 makes gravity 3D
+  `p=3` the binding PAWOTG hierarchy constraint with
+  `sigma_crit = 0.3025113508228815`, `sigma_digit = 0.2886751345948129`, and
+  `S_3D,p3 = 0.7228939450291813 < 1`; Chart 2 records YM `beta=6` divergent
+  with `r = 2.7017782` and the T7-compressed Balaban bridge target
+  `beta_eff > 15.84`; Chart 3 records NS `H^-1/2` defect divergence as
+  Path A obstruction evidence and the non-circular `H^{11/8}` Bernoulli band
+  as Path B; Chart 4 records Gate3 phase completeness, MirrorA + MirrorB7 +
+  sign, as required for frame stability.  No PAWOTG theorem, Balaban bridge,
+  NS danger-shell bound, Gate 3 closure, YM mass gap, NS regularity, Clay
+  claim, or terminal promotion is introduced.
 - 2026-06-02 refined diagnostics:
   added `scripts/clay_refined_diagnostics.py`, generated
   `Docs/Images/clay-analytic-sprint/ns_theta_tail_restricted.csv`,

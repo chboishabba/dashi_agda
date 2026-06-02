@@ -93,16 +93,16 @@ Use one of these reader tracks first:
 - Clay computed-visualisation synthesis:
   `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`
   - Records the current four-plot/CSV synthesis as a checked, non-promoting
-    ledger.  Gate 3 is ordered first with `p=3` PAWOTG
-    `sigma_crit = 0.5052` and a Weil/Kozyrev attack route, while noting the
-    current artifact bundle has PNG support but no machine-readable
-    `p/sigma_crit` table.  YM records `beta=6` divergent with
-    `r = 2.7017782`, strict absorption at `beta ~= 12.97`, and the
-    one-loop `exp(150)` perturbative bridge diagnostic.  NS records the
-    low-high/high-high split: low-high is not the core obstruction, high-high
-    is load-bearing, and importing `H^{1/2}`, Serrin, or BKM control would be
-    circular.  No PAWOTG theorem, Balaban bridge, NS danger-shell bound, Gate 3
-    closure, YM mass gap, NS regularity, or Clay promotion is introduced.
+    ledger.  Chart 1 locks the PAWOTG hierarchy: gravity 3D `p=3` is the
+    binding constraint with `sigma_crit = 0.3025113508228815`, while
+    `sigma_digit = 0.2886751345948129` gives
+    `S_3D,p3 = 0.7228939450291813 < 1`.  Chart 2 records YM
+    `beta=6` divergent with `r = 2.7017782` and the T7-compressed Balaban
+    gulf toward `beta_eff > 15.84`.  Chart 3 records NS Path A as the
+    `H^-1/2` obstruction and Path B as the `H^{11/8}` Bernoulli-band route.
+    Chart 4 records Gate3 phase completeness: MirrorA + MirrorB7 + sign is
+    structurally required.  No PAWOTG theorem, Balaban bridge, NS regularity,
+    Gate 3 closure, YM mass gap, or Clay promotion is introduced.
 - Clay refined diagnostic targets:
   `DASHI/Physics/Closure/ClayRefinedDiagnosticTargetsReceipt.agda`
   - Records the second-pass calculations from the sprint CSVs.  NS now

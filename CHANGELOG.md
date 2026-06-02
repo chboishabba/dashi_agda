@@ -170,16 +170,17 @@ monitor surface.
 - Clay computed visualisation synthesis for `2026-06-02`: added and wired
   `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`.  The
   receipt records the four-visualisation reading as a checked, fail-closed
-  ledger.  Gate 3 now records `p=3` / `sigma_crit = 0.5052` plus the
-  Weil/Kozyrev attack route while preserving the artifact distinction that the
-  copied CSVs do not independently contain a `p/sigma_crit` table.  YM records
-  `beta=6` divergent with `r = 2.7017782`, strict absorption near
-  `beta = 12.97`, sampled safe absorption at `13.64`, and the one-loop
-  `exp(150)` perturbative bridge diagnostic.  NS records low-high as
-  non-core and high-high as the load-bearing paraproduct obstruction; importing
-  `H^{1/2}`, Serrin, or BKM remains circular.  No PAWOTG theorem, Balaban
-  bridge, NS danger-shell bound, Gate 3 closure, YM mass gap, NS regularity,
-  Clay, or terminal promotion was introduced.
+  ledger.  The receipt now consumes the locked chart constants: Chart 1 makes
+  gravity 3D `p=3` the binding PAWOTG hierarchy constraint with
+  `sigma_crit = 0.3025113508228815`, `sigma_digit = 0.2886751345948129`, and
+  `S_3D,p3 = 0.7228939450291813 < 1`; Chart 2 records YM `beta=6` divergent
+  with `r = 2.7017782` and the T7-compressed Balaban gulf toward
+  `beta_eff > 15.84`; Chart 3 records the NS `H^-1/2` defect divergence as
+  Path A obstruction evidence and the `H^{11/8}` Bernoulli-band route as
+  Path B; Chart 4 records Gate3 phase completeness, MirrorA + MirrorB7 + sign,
+  as structurally required.  No PAWOTG theorem, Balaban bridge, NS
+  danger-shell bound, Gate 3 closure, YM mass gap, NS regularity, Clay, or
+  terminal promotion was introduced.
 
 - YM Balaban physical beta bridge target for `2026-06-02`: added and wired
   `DASHI/Physics/Closure/YMBalabanPhysicalBetaBridgeTargetReceipt.agda`.  The

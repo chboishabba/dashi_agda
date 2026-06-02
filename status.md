@@ -260,23 +260,20 @@
 - Added and wired
   `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`.
 - The receipt records the four-visualisation synthesis as a checked
-  fail-closed ledger, consuming the existing Gate 3 PAWOTG, YM KP threshold,
-  NS non-circular `K*`, and Clay blocker asymmetry receipts.
-- Gate 3: the synthesis records `p=3` as the binding PAWOTG inert prime with
-  `sigma_crit = 0.5052`, plus the Weil/Kozyrev attack route.  The artifact
-  bundle distinction is explicit: current PNGs support the visual reading, but
-  the copied CSVs do not independently provide a machine-readable
-  `p/sigma_crit` table.
-- YM: the synthesis records `beta=6` divergent with `r = 2.7017782`,
-  convergence near `10.11`, strict absorption near `12.97`, sampled safe
-  absorption at `13.64`, and the one-loop `exp(150)` / `~10^65` perturbative
-  bridge diagnostic.  This rules out treating the beta-function slogan as the
-  finite proof; the bridge remains nonperturbative.
-- NS: the synthesis records the low-high/high-high split.  Low-high leakage is
-  not the core obstruction; high-high leakage is load-bearing and cannot be
-  controlled by importing `H^{1/2}`, Serrin, or BKM without circularity.
-  Paper 1 is framed as the conditional comparison target
-  `Theta < 1 -> H^{11/8}` route, not a Clay proof.
+  fail-closed ledger, consuming the current PAWOTG/gravity, YM KP/T7,
+  NS obstruction, and Gate3 phase-completeness surfaces.
+- Chart 1: gravity 3D `p=3` is the binding PAWOTG hierarchy constraint with
+  `sigma_crit = 0.3025113508228815`; the digit baseline
+  `sigma_digit = 0.2886751345948129` gives
+  `S_3D,p3 = 0.7228939450291813 < 1`.
+- Chart 2: YM has physical `beta=6` divergent with `r = 2.7017782`; the
+  T7-compressed Balaban bridge must reach `beta_eff > 15.84`.
+- Chart 3: NS records the `H^-1/2` defect divergence as Path A obstruction
+  evidence; Path B is the non-circular `H^{11/8}` Bernoulli-band plus density
+  route.
+- Chart 4: Gate3 frame stability requires phase completeness:
+  MirrorA + MirrorB7 + sign.  Phase-blind dictionaries lose inert-prime
+  transversal angle and collapse under nesting pressure.
 - No PAWOTG theorem, Balaban bridge, NS danger-shell theorem, Gate 3 closure,
   YM mass gap, NS regularity, Clay claim, or terminal promotion was introduced.
 

@@ -10,6 +10,23 @@
   the final Clay ledger consumes the coordinate semantics directly.
 - No Gate3, YM, NS, gravity, Clay, or terminal promotion follows.
 
+# 2026-06-02 locked four-chart analytic capstone
+
+- Updated `ClayComputedVisualizationSynthesisReceipt` so the chart ledger uses
+  the locked sprint constants: gravity 3D `p=3` is the binding PAWOTG
+  constraint with `sigma_crit = 0.3025113508228815`; the digit baseline
+  `sigma = 0.2886751345948129` gives `S_3D,p3 = 0.7228939450291813 < 1`.
+- Recorded the YM chart as the T7-compressed Balaban gulf:
+  physical `beta=6` has `r = 2.7017782`, while the conservative target is
+  `beta_eff > 15.84`.
+- Recorded the NS chart as a Path A / Path B split: `H^-1/2` defect divergence
+  is the publishable obstruction, while the Clay-facing route is the
+  non-circular `H^{11/8}` Bernoulli band plus density.
+- Recorded the Gate3 chart as phase-completeness evidence:
+  MirrorA + MirrorB7 + sign is required for frame stability.
+- The receipt remains a visual/evidence ledger only; no proof or promotion
+  flags changed.
+
 # 2026-06-02 gravity Vladimirov 3D frame correction
 
 - Corrected `GRVladimirovFrameDiagnosticReceipt` and

@@ -20,24 +20,28 @@ import DASHI.Physics.Closure.YMKPThresholdCorrectionReceipt as YM
 -- existing Clay blocker ledger:
 --
 --   1. PAWOTG sigma-critical chart:
---      p=3 is the binding inert prime with sigma_crit ~= 0.5052.
+--      gravity 3D p=3 is the binding programme constraint with
+--      sigma_crit ~= 0.3025113508228815.  The digit baseline has
+--      sigma ~= 0.2886751345948129 and S_3D,p3 ~= 0.7228939450291813.
+--      The 3D density p^(3d), not the 1D p^d count, is the load-bearing
+--      correction.
 --
 --   2. YM KP beta chart:
---      beta=6 is divergent, beta=10.11 is only convergence, beta=12.97 is
---      the strict-absorption boundary, and beta=13.64 is safely absorbing in
---      the supplied finite diagnostic.  A one-loop bridge over 6.97 beta
---      units would require exp(150) ~= 1e65 in scale, so the bridge must be
---      nonperturbative.
+--      beta=6 is divergent with r ~= 2.70.  T_7 McKay-Thompson entropy
+--      compression makes the Balaban bridge finite and well-posed:
+--      beta_eff must cross the absorption regime beta_abs ~= 12.97/15.84,
+--      depending on the normalized C0 convention consumed by the lane.
 --
---   3. NS theta/paraproduct chart:
---      low-high leakage is not the load-bearing obstruction; high-high
---      leakage is the dangerous term and importing H^{1/2}, Serrin, or BKM
---      control would make the proof circular.
+--   3. NS H^{-1/2} obstruction chart:
+--      the H^{-1/2} defect ratio diverges as viscosity decreases.  This is
+--      Path A obstruction evidence; the Clay-facing route is Path B, the
+--      H^{11/8} Bernoulli-band plus all-data density/compactness programme.
 --
---   4. Blocker asymmetry chart:
---      Gate3 is the most tractable new adelic-localization problem, YM is a
---      quantitative Balaban-program completion, and NS is the high-high
---      paraproduct obstruction.
+--   4. Gate3 phase-completeness chart:
+--      phase-complete dictionaries use MirrorA + MirrorB7 + sign.  Phase-blind
+--      dictionaries are pulled toward zero by inert-prime nesting.  This is
+--      why 15SSP = 7 Hecke + 7 mirror-Hecke + sign and
+--      7 = 3D + 3D + sign are load-bearing coordinate semantics.
 --
 -- It is a checked ledger, not a proof of PAWOTG, Balaban transfer, NS
 -- regularity, Gate 3 closure, YM mass gap, or any Clay theorem.
@@ -56,7 +60,7 @@ data ClayComputedVisualization : Set where
   nsThetaParaproductProfileChart :
     ClayComputedVisualization
 
-  blockerAsymmetryChart :
+  gate3PhaseCompletenessFrameStabilityChart :
     ClayComputedVisualization
 
 canonicalClayComputedVisualizations :
@@ -65,41 +69,53 @@ canonicalClayComputedVisualizations =
   pawotgSigmaCriticalChart
   ∷ ymKPSumVsBetaChart
   ∷ nsThetaParaproductProfileChart
-  ∷ blockerAsymmetryChart
+  ∷ gate3PhaseCompletenessFrameStabilityChart
   ∷ []
 
 data ClayComputedReading : Set where
   p3UniquelyBindingForPAWOTG :
     ClayComputedReading
 
+  gravity3DIsGlobalPAWOTGBindingConstraint :
+    ClayComputedReading
+
+  digitExpansionPasses3DNarrowly :
+    ClayComputedReading
+
   betaSixDivergesForYMCarrierKP :
+    ClayComputedReading
+
+  t7CompressionMakesYMBridgeFinite :
     ClayComputedReading
 
   perturbativeYMBridgeRequiresExp150Scale :
     ClayComputedReading
 
-  nsLowHighNotCoreObstruction :
+  nsHminusHalfDivergenceIsPathAObstruction :
     ClayComputedReading
 
-  nsHighHighCrossesDangerBarrierInStressDiagnostics :
+  nsPathBIsH118BernoulliBand :
     ClayComputedReading
 
-  thetaLessThanOneComparisonTheoremIsPaperOneTarget :
+  gate3MirrorBPhaseCompletenessRequired :
     ClayComputedReading
 
-  blockersRemainAsymmetricAndOpen :
+  lockedProgrammeStateNoPromotion :
     ClayComputedReading
 
 canonicalClayComputedReadings :
   List ClayComputedReading
 canonicalClayComputedReadings =
   p3UniquelyBindingForPAWOTG
+  ∷ gravity3DIsGlobalPAWOTGBindingConstraint
+  ∷ digitExpansionPasses3DNarrowly
   ∷ betaSixDivergesForYMCarrierKP
+  ∷ t7CompressionMakesYMBridgeFinite
   ∷ perturbativeYMBridgeRequiresExp150Scale
-  ∷ nsLowHighNotCoreObstruction
-  ∷ nsHighHighCrossesDangerBarrierInStressDiagnostics
-  ∷ thetaLessThanOneComparisonTheoremIsPaperOneTarget
-  ∷ blockersRemainAsymmetricAndOpen
+  ∷ nsHminusHalfDivergenceIsPathAObstruction
+  ∷ nsPathBIsH118BernoulliBand
+  ∷ gate3MirrorBPhaseCompletenessRequired
+  ∷ lockedProgrammeStateNoPromotion
   ∷ []
 
 data ClayComputedNonClaim : Set where
@@ -165,6 +181,61 @@ sigmaCritP17TenThousand :
 sigmaCritP17TenThousand =
   8334
 
+sigmaCrit3DP3Exact :
+  String
+sigmaCrit3DP3Exact =
+  "0.3025113508228815"
+
+sigmaDigitExact :
+  String
+sigmaDigitExact =
+  "0.2886751345948129"
+
+pawotg3DSeriesAtDigitExact :
+  String
+pawotg3DSeriesAtDigitExact =
+  "0.7228939450291813"
+
+sigmaDigitHeadroomExact :
+  String
+sigmaDigitHeadroomExact =
+  "0.0138"
+
+pawotg3DDensityFactor :
+  String
+pawotg3DDensityFactor =
+  "p^(3d)"
+
+ymPhysicalKPRatioExact :
+  String
+ymPhysicalKPRatioExact =
+  "2.7017782"
+
+ymT7CompressedAbsorptionBetaExact :
+  String
+ymT7CompressedAbsorptionBetaExact =
+  "15.84"
+
+ymBaselineStrictAbsorptionBetaExact :
+  String
+ymBaselineStrictAbsorptionBetaExact =
+  "12.97"
+
+ymT7BridgeGapExact :
+  String
+ymT7BridgeGapExact =
+  "9.84"
+
+nsHminusScalingStatement :
+  String
+nsHminusScalingStatement =
+  "H^{-1/2} defect ratio diverges as viscosity decreases; sprint fit is about nu^{-0.44}, with Kolmogorov-scale obstruction target up to nu^{-3/4}."
+
+gate3PhaseCompletenessStatement :
+  String
+gate3PhaseCompletenessStatement =
+  "Phase-complete dictionaries consume MirrorA + MirrorB7 + sign; phase-blind dictionaries lose the inert-prime transversal angle and are pulled toward zero by parent-child nesting."
+
 ymPerturbativeBridgeExpLog :
   Nat
 ymPerturbativeBridgeExpLog =
@@ -188,22 +259,22 @@ ymBridgeCrossoverUpperBetaHundred =
 pawotgVisualizationStatement :
   String
 pawotgVisualizationStatement =
-  "PAWOTG chart: the inert-prime BT leakage series is binding at p=3 with sigma_crit=0.5052; p=5, p=13, and p=17 have thresholds 0.6225, 0.7891, and 0.8334, and higher inert primes are non-binding."
+  "PAWOTG chart: gravity 3D p=3 is the global binding constraint with sigma_crit=0.3025113508228815; digit expansion sigma=0.2886751345948129 gives S_3D,p3=0.7228939450291813<1 and headroom about 0.0138.  The load-bearing density is p^(3d), not p^d."
 
 ymVisualizationStatement :
   String
 ymVisualizationStatement =
-  "YM chart: beta=6 gives r=2.7017782 and diverges; beta=10.11 is the convergence threshold, beta=12.97 is the strict-absorption boundary, beta=13.64 is safely absorbing in the diagnostic, and a one-loop bridge over 6.97 beta-units requires exp(150) scale growth."
+  "YM chart: beta=6 gives r=2.7017782 and diverges.  T7 McKay-Thompson compression prevents raw Monster entropy leakage; the Balaban bridge must reach beta_eff above the absorption regime, recorded as beta_abs=12.97 baseline and beta_abs~=15.84 under the conservative T7 C0 convention."
 
 nsVisualizationStatement :
   String
 nsVisualizationStatement =
-  "NS chart: low-high paraproduct leakage is not the core obstruction; high-high leakage crosses the barrier in stress diagnostics and cannot be bounded by importing H^{1/2}, Serrin, or BKM without circularity."
+  "NS chart: the H^{-1/2} defect ratio diverges as nu decreases, so local tail-only absorption is Path A obstruction evidence.  The Clay-facing route is Path B: non-circular H^{11/8} Bernoulli band plus density/compactness."
 
 paperOneComparisonTargetStatement :
   String
 paperOneComparisonTargetStatement =
-  "Paper 1 target: prove theta<1 as a comparison criterion controlling the recorded H^{11/8} tail norm route; this remains a conditional reduction and not a Clay proof."
+  "Chart 4 target: phase completeness is structural.  The 15SSP grammar supplies MirrorA + MirrorB7 + sign, with each septet read as 3D + 3D + sign; without MirrorB phase dynamics, inert-prime nesting collapses the frame."
 
 record ClayComputedVisualizationSynthesisReceipt : Setω where
   field
@@ -287,6 +358,76 @@ record ClayComputedVisualizationSynthesisReceipt : Setω where
 
     sigmaP17Is8334TenThousand :
       sigmaP17 ≡ sigmaCritP17TenThousand
+
+    sigmaCrit3DGravityP3 :
+      String
+
+    sigmaCrit3DGravityP3IsCanonical :
+      sigmaCrit3DGravityP3 ≡ sigmaCrit3DP3Exact
+
+    sigmaDigit :
+      String
+
+    sigmaDigitIsCanonical :
+      sigmaDigit ≡ sigmaDigitExact
+
+    pawotg3DSeriesAtDigit :
+      String
+
+    pawotg3DSeriesAtDigitIsCanonical :
+      pawotg3DSeriesAtDigit ≡ pawotg3DSeriesAtDigitExact
+
+    sigmaDigitHeadroom :
+      String
+
+    sigmaDigitHeadroomIsCanonical :
+      sigmaDigitHeadroom ≡ sigmaDigitHeadroomExact
+
+    pawotgDensityFactor :
+      String
+
+    pawotgDensityFactorIsCanonical :
+      pawotgDensityFactor ≡ pawotg3DDensityFactor
+
+    ymPhysicalKPRatio :
+      String
+
+    ymPhysicalKPRatioIsCanonical :
+      ymPhysicalKPRatio ≡ ymPhysicalKPRatioExact
+
+    ymT7CompressedAbsorptionBeta :
+      String
+
+    ymT7CompressedAbsorptionBetaIsCanonical :
+      ymT7CompressedAbsorptionBeta
+      ≡
+      ymT7CompressedAbsorptionBetaExact
+
+    ymBaselineStrictAbsorptionBeta :
+      String
+
+    ymBaselineStrictAbsorptionBetaIsCanonical :
+      ymBaselineStrictAbsorptionBeta
+      ≡
+      ymBaselineStrictAbsorptionBetaExact
+
+    ymT7BridgeGap :
+      String
+
+    ymT7BridgeGapIsCanonical :
+      ymT7BridgeGap ≡ ymT7BridgeGapExact
+
+    nsHminusScaling :
+      String
+
+    nsHminusScalingIsCanonical :
+      nsHminusScaling ≡ nsHminusScalingStatement
+
+    gate3PhaseCompleteness :
+      String
+
+    gate3PhaseCompletenessIsCanonical :
+      gate3PhaseCompleteness ≡ gate3PhaseCompletenessStatement
 
     ymOneLoopBridgeExpLog :
       Nat
@@ -417,6 +558,50 @@ canonicalClayComputedVisualizationSynthesisReceipt =
     ; sigmaP17 =
         sigmaCritP17TenThousand
     ; sigmaP17Is8334TenThousand =
+        refl
+    ; sigmaCrit3DGravityP3 =
+        sigmaCrit3DP3Exact
+    ; sigmaCrit3DGravityP3IsCanonical =
+        refl
+    ; sigmaDigit =
+        sigmaDigitExact
+    ; sigmaDigitIsCanonical =
+        refl
+    ; pawotg3DSeriesAtDigit =
+        pawotg3DSeriesAtDigitExact
+    ; pawotg3DSeriesAtDigitIsCanonical =
+        refl
+    ; sigmaDigitHeadroom =
+        sigmaDigitHeadroomExact
+    ; sigmaDigitHeadroomIsCanonical =
+        refl
+    ; pawotgDensityFactor =
+        pawotg3DDensityFactor
+    ; pawotgDensityFactorIsCanonical =
+        refl
+    ; ymPhysicalKPRatio =
+        ymPhysicalKPRatioExact
+    ; ymPhysicalKPRatioIsCanonical =
+        refl
+    ; ymT7CompressedAbsorptionBeta =
+        ymT7CompressedAbsorptionBetaExact
+    ; ymT7CompressedAbsorptionBetaIsCanonical =
+        refl
+    ; ymBaselineStrictAbsorptionBeta =
+        ymBaselineStrictAbsorptionBetaExact
+    ; ymBaselineStrictAbsorptionBetaIsCanonical =
+        refl
+    ; ymT7BridgeGap =
+        ymT7BridgeGapExact
+    ; ymT7BridgeGapIsCanonical =
+        refl
+    ; nsHminusScaling =
+        nsHminusScalingStatement
+    ; nsHminusScalingIsCanonical =
+        refl
+    ; gate3PhaseCompleteness =
+        gate3PhaseCompletenessStatement
+    ; gate3PhaseCompletenessIsCanonical =
         refl
     ; ymOneLoopBridgeExpLog =
         ymPerturbativeBridgeExpLog
