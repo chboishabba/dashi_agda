@@ -1,5 +1,90 @@
+# 2026-06-02 Manager publication docs governance
+
+- Updated the full-unification roadmap to match
+  `FullUnificationPublicationRoadmapReceipt`: the publication package is Papers
+  0-4, not an implicit claim from older lane-gate prose.
+- Added the exact Paper 0-4 scope: shared margin grammar; NS theta/EV5; Gate 3
+  cutoff-frame/density/Mosco; YM rho/KP/Balaban; and the final full-DASHI
+  composition paper.
+- Added explicit forbidden claims and repeated the live promotion gates so the
+  docs cannot be read as claiming NS regularity, YM mass gap, Gate 3 promotion,
+  Clay, terminal, exact SM/GRQFT, or empirical adequacy beyond accepted
+  receipts.
+
+# 2026-06-02 Manager YM Paper 3 roadmap implementation
+
+- Implemented the YM-only Paper 3 receipt chain:
+  `YMSamePrimeOverlapReductionReceipt`,
+  `YMBTPathCountingKPThresholdReceipt`,
+  `YMKPAbsorptionMarginThresholdReceipt`,
+  `YMActualPolymerActivityDefinitionReceipt`,
+  `YMBalabanRGScaleTransferFrontierReceipt`, and
+  `YMPaper3RoadmapReceipt`.
+- The receipts consume the existing KP coupling and Bruhat-Tits reduction
+  surfaces, split convergence from strict absorption, and make actual
+  p=7 Wilson polymer activity the next concrete missing definition before
+  any `rho < 1` KP claim can be used.
+- The RG frontier records that perturbative beta bookkeeping remains below
+  the strict `p=7` threshold, so the Balaban scale-transfer step is still
+  hard open.  No continuum Yang-Mills, mass gap, Clay, or terminal promotion
+  was introduced.
+- Supplemental worker modules with overlapping detail were typechecked and
+  imported rather than discarded:
+  `ActualPolymerActivityDefinitionReceipt`,
+  `BalabanRGScaleTransferFrontierReceipt`,
+  `Paper3YMDependencyGraphReceipt`,
+  `YMBruhatTitsPathCountingKPThresholdReceipt`, and
+  `YMKPAbsorptionMarginReceipt`.
+- Focused checks passed for the YM receipts and the full aggregate
+  `DASHI/Everything.agda` validation passed with the standard repo flags.
+
+# 2026-06-02 Manager L full unification roadmap
+
+- Added `StrictMarginImpliesAbsorptionReceipt` as the L0.1-L0.4 core.
+  The receipt records the missing dynamical premise explicitly:
+  `R' <= P - A` must be supplied before `P <= theta*A` and `theta < 1`
+  imply absorption.  `A > 0` is recorded as load-bearing for the ratio/signed
+  margin equivalence.
+- Added `FullUnificationPublicationRoadmapReceipt` to make Paper 0 the first
+  publication object and to list the downstream joining lemmas for NS, Gate 3,
+  and YM.  The roadmap keeps all downstream analytic inhabitants open.
+- Corrected the Gate 3 publication wording: finite dictionaries only provide
+  cutoff `A_N > 0` frame bounds on finite subspaces.  Continuum transfer still
+  requires density, Mosco recovery, no spectral pollution, and mass-shell
+  bridge.
+- No NS regularity, YM mass gap, Gate 3 theorem, Clay theorem, or terminal
+  promotion was introduced.
+
+# 2026-06-02 margin invariant implementation batch
+
+- Implemented and imported the six strict-margin receipts:
+  `NSTailFluxAbsorptionMarginReceipt`, `EV5ThetaMarginUpgradeReceipt`,
+  `YMKPActivityRatioMarginReceipt`, `UnifiedMarginInvariantReceipt`,
+  `DashiCFDThetaRuntimeDiagnosticReceipt`, and
+  `MarginInvariantProgrammeFrontierReceipt`.
+- The NS side records `TailCarry`, `Flux`, and `Diss` symbolically and makes
+  `theta < 1` the conditional tail-absorption margin.  EV5 admissibility is
+  now explicitly lane7 non-increasing plus lane2 bounded plus theta-margin
+  evidence; dashiCFD is recorded as support/falsification only.
+- The YM side records the analogous `rho < 1` KP activity-ratio margin, while
+  preserving the corrected blockers: same-prime overlap/cross-term bound,
+  Balaban induction, physical RG bridge, and Gate 3 lift.
+- Focused receipt checks passed and the full aggregate `DASHI/Everything.agda`
+  check passed.  All new receipts remain non-promoting: no Gate 3, NS, YM,
+  Clay, or terminal theorem is introduced.
+
 # 2026-06-02 atom carrier notation sidecar
 
+- Lane 5 docs-only roadmap correction: `Theta < 1` is not `iff BKM`; it is a
+  computable sufficient proxy/seam gauge.  Theta monotonicity is not assumed:
+  compute the whole profile and danger shell.  The YM RG surface remains
+  conditional, `beta_carrier = 16.7` is not theorem evidence, the `beta_min`
+  obstruction remains, and Gate 3 atom-frame `A > 0` is open.  No Clay
+  promotion follows.
+- Lane 5 docs-only pressure correction: previous pressure-as-path-length
+  wording is superseded by depth/count/carry/unresolved-tension semantics.
+  Remaining gaps are concrete pressure functional, friendship/carry absorption
+  theorem, and runtime codec.  No Gate 3 or Clay promotion follows.
 - Added a bounded governance clarification for the atom programme and carrier
   notation.  The interval `0..1` is archimedean; decimal strings are
   TCP/notation/coarse views; SSP primes are multiplicatively independent

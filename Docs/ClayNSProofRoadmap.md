@@ -10,8 +10,9 @@ smooth-solution, or terminal claim.
 Latest NS-to-EV5 boundary: DASHI may support a conditional NS regularity
 theorem only if NS modes project into FRACTRAN-admissible EV5 with forward
 simulation. This boundary is fail-closed. The exact open obligations are
-forward simulation, quotient correctness, Lyapunov preservation, and
-ultrametric preservation. Until those are discharged, no unconditional Clay
+forward simulation, quotient correctness, conditional lane7/lane2 preservation
+witnesses, ultrametric preservation, and the hard theta < 1 maximum-principle
+preservation gap. Until those are discharged, no unconditional Clay
 Navier-Stokes claim, arbitrary-data theorem, or global smoothness promotion is
 available.
 
@@ -42,6 +43,22 @@ carrier/conditional branch audit; weak Navier-Stokes is not Clay
 Navier-Stokes. The Clay regularity branch remains open on N3-N5 and the
 continuum analytic lift.
 ```
+
+## NS-Only Margin Roadmap
+
+This section records the current NS-only use of the margin invariant. Other
+lanes are out of scope here. The roadmap is obligation tracking only; it does
+not prove global smoothness or the Clay Navier-Stokes statement.
+
+| Stage | NS-only obligation | Status |
+|---|---|---|
+| L0 | Consume the shared margin grammar only as an NS tail-flux margin interface. | Available as bookkeeping. It does not by itself prove any NS estimate. |
+| NS1 | Prove the fixed-`K` tail flux identity for the selected shell split. | Receipt surface recorded in `NSTailFluxAbsorptionMarginReceipt`: `K` is fixed during differentiation and moving cutoffs are excluded. The full analytic Littlewood-Paley identity remains open. |
+| NS2 | Make the theta profile computable across the relevant shells and times. | Implemented as an evidence-only finite cutoff/time diagnostic in dashiCFD. Computability of the profile is not monotonicity and is not regularity. |
+| NS3 | Prove that a positive NS margin implies tail decay in the actual-flow variables. | Open. This is the first analytic consumption point for the margin. |
+| NS4 | Bind a one-way BKM/Serrin continuation implication from the proved tail decay hypotheses. | Open and one-way only: continuation may follow from the right hypotheses, but the margin is not equivalent to BKM/Serrin control. |
+| NS5 | Preserve theta under the NS evolution and projection interfaces. | Hard open problem. This is where phase, pressure, quotient, and forward-simulation losses must be controlled. |
+| NS6 | Upgrade preserved theta and continuation to unconditional Clay-level Navier-Stokes regularity. | Uninhabited. Requires all earlier stages plus the external authority boundaries. |
 
 ## Lemma Status
 
@@ -109,7 +126,8 @@ boundaries are discharged:
 - treating EV5 lane dictionaries, dashiCFD diagnostics, or FRACTRAN
   admissibility alone as forward simulation
 - treating the NS-to-EV5 frontier as closed before quotient correctness,
-  Lyapunov preservation, and ultrametric preservation are proved
+  conditional lane7/lane2 preservation witnesses, theta < 1
+  maximum-principle preservation, and ultrametric preservation are proved
 - smooth or unique Leray solution from the carrier
 - BKM/enstrophy closure
 - treating weak Navier-Stokes as Clay Navier-Stokes

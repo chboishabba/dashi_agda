@@ -1,3 +1,155 @@
+# 2026-06-02 Manager publication docs governance
+
+- Aligned `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md` with the live
+  `FullUnificationPublicationRoadmapReceipt` publication scope.
+- The finished/publishable full-unification package is now defined as Papers
+  0-4: Paper 0 shared margin grammar, Paper 1 NS theta/EV5, Paper 2 Gate 3
+  cutoff-frame/density/Mosco, Paper 3 YM rho/KP/Balaban, and Paper 4 full DASHI
+  unification composition.
+- Added the publication forbidden-claim table and kept the canonical promotion
+  gates explicit: diagnostic is not theorem, toy ratio is not analytic margin,
+  finite frame is not continuum density, observed margin is not proved margin,
+  and carrier gap is not continuum gap.
+- No Agda code, Clay, terminal, exact Standard Model, GRQFT, empirical, NS, YM,
+  or Gate 3 promotion was introduced.
+
+# 2026-06-02 Manager YM Paper 3 roadmap implementation
+
+- Added and wired six YM-only receipts for the Paper 3 `rho/KP/Balaban`
+  roadmap: `YMSamePrimeOverlapReductionReceipt`,
+  `YMBTPathCountingKPThresholdReceipt`,
+  `YMKPAbsorptionMarginThresholdReceipt`,
+  `YMActualPolymerActivityDefinitionReceipt`,
+  `YMBalabanRGScaleTransferFrontierReceipt`, and
+  `YMPaper3RoadmapReceipt`.
+- The YM chain is now explicit: YM1 reduces KP overlap to retained
+  same-prime polymers; YM2/YM3 record Bruhat-Tits path counting and the
+  `p=7` convergence threshold `beta ~= 10.13`; YM4 records the stricter
+  activity-absorption threshold `beta ~= 13.64`; YM5 marks actual
+  p=7 Wilson polymer activity as the immediate missing inhabitant; YM6 marks
+  nonperturbative Balaban RG scale transfer as the hard open step.
+- The new receipts enforce the non-promotion boundary: toy `rho(k)=1/(k+2)`
+  is not actual KP activity, perturbative beta estimates do not pass the
+  strict margin, and no continuum Yang-Mills, mass-gap, Clay, or terminal
+  theorem is promoted.
+- Supplemental worker receipts were also checked and wired:
+  `ActualPolymerActivityDefinitionReceipt`,
+  `BalabanRGScaleTransferFrontierReceipt`,
+  `Paper3YMDependencyGraphReceipt`,
+  `YMBruhatTitsPathCountingKPThresholdReceipt`, and
+  `YMKPAbsorptionMarginReceipt`.
+- Full aggregate validation passed:
+  `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`.
+
+# 2026-06-02 NS-to-EV5 conditional preservation tightening
+
+- Tightened the NS-to-EV5 / EV5 receipts so lane7 dissipation preservation and
+  lane2 cutoff boundedness are explicit conditional witnesses, not
+  unconditional forward-simulation facts.
+- Recorded theta < 1 preservation as the hard open maximum-principle gap across
+  NS evolution and projection.  The receipts remain carrier bookkeeping only:
+  no unconditional forward simulation, global smoothness, or Clay
+  Navier-Stokes promotion follows.
+- `NSTailFluxAbsorptionMarginReceipt` now records the NS1 fixed-`K`
+  tail-flux identity surface and explicitly excludes moving-cutoff
+  differentiation.  The full analytic Littlewood-Paley identity proof remains
+  open.
+- dashiCFD now computes the NS2 theta profile as a finite cutoff/time
+  diagnostic using `theta(k,t) = |Flux_tail(k,t)| / Diss_tail(k,t)`, with
+  fail-closed handling for missing or zero dissipation and no monotonicity
+  assumption.
+
+# 2026-06-02 Manager L full unification roadmap
+
+- Added `StrictMarginImpliesAbsorptionReceipt` as the shared L0 core:
+  `R' <= P - A`, `P <= theta*A`, `theta < 1`, and `A > 0` are all
+  load-bearing before residual absorption can be consumed.
+- Added `FullUnificationPublicationRoadmapReceipt` as the publication plan:
+  Paper 0 is the shared margin grammar; Paper 1 is NS theta/EV5; Paper 2 is
+  Gate 3 cutoff-frame/density/Mosco; Paper 3 is YM rho/KP/Balaban; Paper 4 is
+  the full DASHI unification programme.
+- The roadmap explicitly corrects Gate 3: finite dictionaries can only supply
+  cutoff frame bounds `A_N > 0` on finite `H_N`; continuum transfer still
+  requires phase-aware density, Mosco recovery, no-spectral-pollution, and a
+  mass-shell bridge.
+- Promotion gates remain active: diagnostic is not theorem, toy ratio is not
+  analytic margin, finite frame is not continuum density, observed margin is
+  not proved margin, and carrier gap is not continuum gap.
+- No NS regularity, YM mass gap, Gate 3 lift, Clay, or terminal promotion
+  follows from this roadmap.
+
+# 2026-06-02 NS-only margin roadmap
+
+- Added an NS-only roadmap layer to `Docs/ClayNSProofRoadmap.md`.
+- The staged obligations are now explicit: L0 consumes the shared margin
+  grammar only as NS tail-flux bookkeeping; NS1 proves the fixed-`K` tail flux
+  identity; NS2 makes the theta profile computable; NS3 proves that margin
+  implies tail decay; NS4 binds a one-way BKM/Serrin continuation implication;
+  NS5 proves theta preservation and remains hard open; NS6 is the
+  unconditional theta/Clay-level Navier-Stokes regularity upgrade.
+- This is roadmap/governance only.  It does not prove theta preservation,
+  tail decay, BKM/Serrin control, global smoothness, or Clay Navier-Stokes.
+  Non-NS lanes are out of scope for this update.
+
+# 2026-06-02 margin invariant batch
+
+- Tightened the margin semantics to the signed form:
+  `margin = absorber_strength - promoted_activity` and
+  `margin_ratio = 1 - seam_gauge`.  The dashiCFD theta diagnostic now emits
+  `theta`, `ns_margin`, `ns_margin_ratio`, `danger_shell`, and
+  `promotion_status` with fail-closed pass/boundary/fail/unknown readings.
+- Corrected the YM/KP threshold split.  The `p=7` value `beta ~= 10.13`
+  remains only the geometric-series convergence boundary
+  `beta*cMin-a > log p`; the stricter activity-absorption / KP-margin gate is
+  `beta*cMin-a > log(2p)`, recorded as `beta ~= 13.64`.
+  The RG/Balaban bridge is therefore even more explicitly necessary before
+  YM KP progress can be consumed.
+- Added and wired the strict-margin layer for the current YM/NS priority
+  split.  NS now has `NSTailFluxAbsorptionMarginReceipt` for the conditional
+  `theta < 1` tail-flux absorption margin, `EV5ThetaMarginUpgradeReceipt` for
+  the upgraded EV5 admissibility triple, and
+  `DashiCFDThetaRuntimeDiagnosticReceipt` for the runtime theta diagnostic.
+- Added `YMKPActivityRatioMarginReceipt` for the YM analogue: a depth
+  activity-ratio `rho < 1` KP margin with same-prime overlap and physical
+  RG/Balaban transfer still open.
+- Added `UnifiedMarginInvariantReceipt` and
+  `MarginInvariantProgrammeFrontierReceipt` to record the common proof shape:
+  NS `theta < 1`, YM `rho < 1`, dialectical carry absorption, and bounded
+  braid/tension are one margin-invariant grammar, not a discharged analytic
+  theorem.
+- Full aggregate validation passed:
+  `timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda`.
+- No Gate 3, Navier-Stokes regularity, Yang-Mills mass gap, Clay, or terminal
+  promotion follows.  The live priorities remain: prove the NS theta/forward
+  simulation bridge first; prove YM rho/KP/Balaban/RG bridge second; Gate 3
+  remains the shared lift boundary.
+
+# 2026-06-02 unified carry / braid receipt
+
+- Added `UnifiedCarryBraidReceipt` as the fail-closed grammar that relates the
+  balanced-ternary carry rule, NS lane7/tail-energy bookkeeping,
+  distributed braid tension, and KP/polymer activity as one shared
+  unresolved-carry interface.
+- Corrected Lane 5 roadmap semantics: do not claim `Theta < 1 iff BKM`.
+  `Theta < 1` is only a computable sufficient proxy/seam gauge.  Theta
+  monotonicity is not assumed; the whole profile must be computed and the
+  danger shell identified before consuming the proxy.
+- The receipt consumes the existing carry-memory, dialectical-depth,
+  NS lane7, NS-to-EV5 forward-simulation, KP coupling, and BT/KP reduction
+  receipts.  It keeps their blockers active: NS forward simulation remains
+  open, scalar `Q` remains rejected, `p=7 beta_min ~= 10.13` still requires
+  RG/Balaban scale transfer, and Yang-Baxter/tree-contractibility are not
+  KP proofs.
+- YM RG remains conditional.  `beta_carrier = 16.7` is not consumed as a
+  theorem, the `beta_min` obstruction remains active, and the Gate 3
+  atom-frame `A > 0` obligation is still open.
+- The core boundary is explicit: "dropping the carry" is recorded as an
+  analogy to the blowup failure mode, not a proof of an NS blowup theorem;
+  braid stability as bounded tension is vocabulary until a concrete tension
+  functional and KP equivalence are proved.
+- No Gate 3, KP, Balaban, Yang-Mills mass-gap, Navier-Stokes regularity,
+  friendship/social, proof-ordinal, Clay, or terminal promotion follows.
+
 # 2026-06-02 dialectical carry memory / depth accumulation
 
 - Added `CarryMemorySubvoxelReceipt` as the narrow arithmetic-memory surface:
@@ -9,13 +161,18 @@
   transition where the other is included in the evaluator's own basis, and
   three dialectical positions over time are recorded as `9^3` with one time
   axis, i.e. `9^4 / [3,1]`.
-- Pressure is recorded only as a dimension-gap reading: higher-depth
-  dialectical evaluation meeting a lower-depth evaluator can be experienced
-  as invisible complexity.  Voluntary downsampling is recorded as the gentle
-  encounter route.
+- Pressure-as-path-length wording is superseded.  Lane 5 now records pressure
+  as depth/count/carry/unresolved-tension semantics: higher-depth dialectical
+  evaluation meeting a lower-depth evaluator can be experienced as invisible
+  complexity, while unresolved carries/tensions account for the remaining
+  pressure.  Voluntary downsampling is recorded as the gentle encounter route.
+- Remaining proof gaps are explicit: define a concrete pressure functional,
+  prove the friendship/carry absorption theorem, and implement the runtime
+  codec before treating this as executable or theorem content.
 - This is reasoning vocabulary and observer bookkeeping.  It is not a
   friendship theorem, psychology theorem, sociology theorem, ethics theorem,
-  metaphysical theorem, physics theorem, Clay claim, or terminal promotion.
+  metaphysical theorem, physics theorem, Gate 3 theorem, Clay claim, or
+  terminal promotion.
 
 # 2026-06-02 atom carrier notation sidecar
 

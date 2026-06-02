@@ -6,6 +6,71 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Publication docs governance for `2026-06-02`: aligned
+  `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md` with
+  `FullUnificationPublicationRoadmapReceipt`.  Finished/publishable full
+  unification is now defined as the Papers 0-4 bundle: Paper 0 shared margin
+  grammar, Paper 1 NS theta/EV5, Paper 2 Gate 3 cutoff-frame/density/Mosco,
+  Paper 3 YM rho/KP/Balaban, and Paper 4 full DASHI unification composition.
+  The roadmap now includes explicit forbidden claims and the canonical
+  publication promotion gates.  This was docs/governance only: no Agda code,
+  Clay, terminal, Gate 3, NS, YM, exact SM/GRQFT, or empirical promotion was
+  introduced.
+
+- Manager YM Paper 3 roadmap for `2026-06-02`: added and wired the YM-only
+  KP/Balaban dependency chain.  Same-prime overlap reduction, BT path
+  counting, the `p=7` convergence threshold `beta ~= 10.13`, and the stricter
+  absorption threshold `beta ~= 13.64` are now explicit receipts.  Actual
+  p=7 Wilson polymer activity is recorded as the immediate missing definition,
+  and nonperturbative Balaban RG scale transfer remains the hard open step.
+  Supplemental worker receipts for the same activity/BT/KP/Balaban dependency
+  graph were also typechecked and wired.  Toy rho, perturbative beta estimates,
+  and carrier combinatorics are not promoted to continuum Yang-Mills, mass
+  gap, Clay, or terminal claims.  Full aggregate Agda validation passed.
+
+- NS-to-EV5 conditional preservation tightening for `2026-06-02`: updated the
+  forward-simulation and EV5 admissibility receipts so lane7 dissipation
+  preservation and lane2 cutoff boundedness are conditional witnesses only.
+  Theta < 1 preservation is recorded as the hard open maximum-principle gap.
+  No unconditional forward simulation, global smoothness, or Clay
+  Navier-Stokes promotion follows.
+
+- NS fixed-cutoff theta diagnostic for `2026-06-02`: tightened
+  `NSTailFluxAbsorptionMarginReceipt` around the NS1 fixed-`K` tail-flux
+  identity surface and explicitly excluded moving-cutoff differentiation.
+  dashiCFD now computes NS2 theta profiles as finite cutoff/time diagnostics
+  using `theta(k,t) = |Flux_tail(k,t)| / Diss_tail(k,t)`, with fail-closed
+  missing/zero dissipation handling and no monotonicity assumption.
+
+- NS-only margin roadmap for `2026-06-02`: updated
+  `Docs/ClayNSProofRoadmap.md`, `TODO.md`, and `status.md` with an NS-only
+  L0/NS1-NS6 obligation ladder.  L0 consumes the shared margin grammar only as
+  NS tail-flux bookkeeping; NS1 is the fixed-`K` tail flux identity; NS2 is
+  computable theta profile; NS3 is margin-implies-tail-decay; NS4 is one-way
+  BKM/Serrin continuation; NS5 is hard-open theta preservation; NS6 is the
+  unconditional Clay-level Navier-Stokes upgrade.  This is governance only and
+  does not prove tail decay, continuation, global smoothness, or Clay
+  Navier-Stokes.
+
+- Margin invariant implementation for `2026-06-02`: tightened the current
+  YM/NS priority surface from metaphor to signed margins.  The runtime NS
+  diagnostic emits `theta`, `ns_margin`, `ns_margin_ratio`, `danger_shell`,
+  and `promotion_status`.  The YM/KP receipts now distinguish the
+  `p=7` convergence threshold `beta ~= 10.13` from the stricter KP
+  activity-absorption threshold `beta ~= 13.64`; Balaban/RG transfer remains
+  required before any YM/KP consumption.  No Gate 3, NS regularity, YM mass
+  gap, Clay, or terminal promotion follows.
+
+- Unified carry / braid receipt for `2026-06-02`: added and wired
+  `DASHI.Reasoning.UnifiedCarryBraidReceipt`.  The receipt records the shared
+  unresolved-carry grammar across balanced-ternary carry, NS lane7/tail
+  bookkeeping, distributed braid tension, and KP/polymer activity while
+  consuming the existing carry-memory, dialectical-depth, NS lane7,
+  NS-to-EV5, KP coupling, and BT/KP receipts.  It keeps cascade-as-carry,
+  actual-flow tail dominance, braid/KP equivalence, friendship
+  superadditivity, Gate 3, YM mass gap, NS regularity, proof-ordinal, Clay,
+  and terminal promotions false/open.
+
 - Dialectical carry memory / depth accumulation for `2026-06-02`: added and
   wired `DASHI.Reasoning.CarryMemorySubvoxelReceipt` and
   `DASHI.Reasoning.DialecticalDepthAccumulationReceipt`.  The narrow receipt
@@ -18,10 +83,11 @@ monitor surface.
 - KP/RG/atom receipt governance for `2026-06-02`: recorded
   `KPCouplingObstruction`, `BruhatTitsBraidKPReduction`, and
   `AtomExtendedCarrierFrame` as Agda receipt surfaces and governance entries.  The corrected
-  `p=7` threshold is `beta_min ~= 10.13`; the physical beta route fails absent
-  an RG bridge.  The carrier RG beta branch remains a conditional carrier pass,
-  not physical beta running or Clay YM.  The extended atom carrier frame carries
-  a separate `A > 0` obligation before analytic consumption.
+  `p=7` convergence threshold is `beta_min ~= 10.13`, while the stricter
+  activity-absorption threshold is `beta ~= 13.64`; the physical beta route
+  fails absent an RG bridge.  The carrier RG beta branch remains conditional,
+  not physical beta running or Clay YM.  The extended atom carrier frame
+  carries a separate `A > 0` obligation before analytic consumption.
 
 - Canonical codec atom / phase receipt for `2026-06-01`: added and wired
   `DASHI.Physics.Closure.CanonicalCodecAtomReceipt`.  The receipt records the

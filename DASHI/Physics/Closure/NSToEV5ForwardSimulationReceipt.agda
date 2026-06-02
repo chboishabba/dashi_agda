@@ -21,9 +21,11 @@ import DASHI.Physics.Closure.TailEnergyFunctional as Tail
 -- surface.  It supplies an explicit encoding from NS shell diagnostics to
 -- the five EV5 lanes and records the intended conditional shadow statement:
 -- under a dissipation-dominated tail condition, the EV5 candidate may track a
--- finite NS shell shadow.  It does not prove the NS flow projects into EV5,
--- does not prove a turbulent cascade theorem, and does not promote any Clay
--- Navier-Stokes claim.
+-- finite NS shell shadow.  Lane7 and lane2 preservation are conditional
+-- witness obligations.  The theta < 1 preservation step remains the hard
+-- maximum-principle gap.  This receipt does not prove the NS flow projects
+-- into EV5, does not prove a turbulent cascade theorem, and does not promote
+-- any Clay Navier-Stokes claim.
 
 data NSToEV5ForwardSimulationStatus : Set where
   candidateFiniteBookkeeping_conditionalShadow_noForwardSimulationProof :
@@ -73,6 +75,15 @@ data ConditionalShadowComponent : Set where
   usesViscousTailDominanceAsConditionalCutoff :
     ConditionalShadowComponent
 
+  lane7PreservationConditionalWitness :
+    ConditionalShadowComponent
+
+  lane2PreservationConditionalWitness :
+    ConditionalShadowComponent
+
+  thetaLessThanOneMaximumPrincipleGapOpen :
+    ConditionalShadowComponent
+
   excludesFullTurbulentCascadeProof :
     ConditionalShadowComponent
 
@@ -85,6 +96,9 @@ canonicalConditionalShadowComponents =
   assumesDissipationDominatedTail
   ∷ usesTailEnergyFunctionalAsFiniteRank
   ∷ usesViscousTailDominanceAsConditionalCutoff
+  ∷ lane7PreservationConditionalWitness
+  ∷ lane2PreservationConditionalWitness
+  ∷ thetaLessThanOneMaximumPrincipleGapOpen
   ∷ excludesFullTurbulentCascadeProof
   ∷ excludesContinuumRegularityPromotion
   ∷ []
@@ -110,6 +124,10 @@ canonicalEmpiricalTraceStatuses =
 data PromotionStatus : Set where
   notPromoted_candidateReceiptOnly :
     PromotionStatus
+
+data ThetaPreservationStatus : Set where
+  thetaLessThanOneMaximumPrincipleOpen :
+    ThetaPreservationStatus
 
 data PromotionToken : Set where
 
@@ -201,7 +219,12 @@ encodeSurfaceStatement =
 conditionalShadowStatement :
   String
 conditionalShadowStatement =
-  "Conditional shadow only: if the NS tail is dissipation-dominated at the finite cutoff, the encoded EV5 state may track the candidate finite shell shadow; this is not a proof of a full turbulent cascade or continuum regularity."
+  "Conditional shadow only: if the NS tail is dissipation-dominated at the finite cutoff, the encoded EV5 state may track the candidate finite shell shadow; lane7 and lane2 preservation are conditional witness obligations, not unconditional forward simulation."
+
+thetaMaximumPrincipleGapStatement :
+  String
+thetaMaximumPrincipleGapStatement =
+  "Hard open gap: preserving theta < 1 across NS evolution and projection is a maximum-principle obligation; this receipt does not prove it."
 
 traceStatusStatement :
   String
@@ -211,7 +234,7 @@ traceStatusStatement =
 promotionBoundaryStatement :
   String
 promotionBoundaryStatement =
-  "Promotion boundary: forward simulation, quotient correctness, Lyapunov preservation, ultrametric preservation, global smooth regularity, and Clay Navier-Stokes promotion remain false/open here."
+  "Promotion boundary: forward simulation, quotient correctness, lane7/lane2 preservation, theta < 1 maximum-principle preservation, ultrametric preservation, global smooth regularity, and Clay Navier-Stokes promotion remain false/open here."
 
 record NSToEV5ForwardSimulationReceipt (m k : Nat) : Set₁ where
   field
@@ -298,6 +321,32 @@ record NSToEV5ForwardSimulationReceipt (m k : Nat) : Set₁ where
     finiteCandidateShadowRecordedIsTrue :
       finiteCandidateShadowRecorded ≡ true
 
+    lane7PreservationConditional :
+      Bool
+
+    lane7PreservationConditionalIsTrue :
+      lane7PreservationConditional ≡ true
+
+    lane2PreservationConditional :
+      Bool
+
+    lane2PreservationConditionalIsTrue :
+      lane2PreservationConditional ≡ true
+
+    thetaPreservationStatus :
+      ThetaPreservationStatus
+
+    thetaPreservationStatusIsOpen :
+      thetaPreservationStatus
+      ≡
+      thetaLessThanOneMaximumPrincipleOpen
+
+    thetaLessThanOnePreservationProved :
+      Bool
+
+    thetaLessThanOnePreservationProvedIsFalse :
+      thetaLessThanOnePreservationProved ≡ false
+
     fullTurbulentCascadeProof :
       Bool
 
@@ -382,6 +431,12 @@ record NSToEV5ForwardSimulationReceipt (m k : Nat) : Set₁ where
     conditionalShadowSummaryIsCanonical :
       conditionalShadowSummary ≡ conditionalShadowStatement
 
+    thetaMaximumPrincipleGap :
+      String
+
+    thetaMaximumPrincipleGapIsCanonical :
+      thetaMaximumPrincipleGap ≡ thetaMaximumPrincipleGapStatement
+
     traceStatusSummary :
       String
 
@@ -455,6 +510,22 @@ canonicalNSToEV5ForwardSimulationReceipt m k =
         true
     ; finiteCandidateShadowRecordedIsTrue =
         refl
+    ; lane7PreservationConditional =
+        true
+    ; lane7PreservationConditionalIsTrue =
+        refl
+    ; lane2PreservationConditional =
+        true
+    ; lane2PreservationConditionalIsTrue =
+        refl
+    ; thetaPreservationStatus =
+        thetaLessThanOneMaximumPrincipleOpen
+    ; thetaPreservationStatusIsOpen =
+        refl
+    ; thetaLessThanOnePreservationProved =
+        false
+    ; thetaLessThanOnePreservationProvedIsFalse =
+        refl
     ; fullTurbulentCascadeProof =
         false
     ; fullTurbulentCascadeProofIsFalse =
@@ -510,6 +581,10 @@ canonicalNSToEV5ForwardSimulationReceipt m k =
     ; conditionalShadowSummary =
         conditionalShadowStatement
     ; conditionalShadowSummaryIsCanonical =
+        refl
+    ; thetaMaximumPrincipleGap =
+        thetaMaximumPrincipleGapStatement
+    ; thetaMaximumPrincipleGapIsCanonical =
         refl
     ; traceStatusSummary =
         traceStatusStatement

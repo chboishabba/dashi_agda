@@ -10,16 +10,20 @@ open import Data.List.Base using (List; _∷_; [])
 ------------------------------------------------------------------------
 -- Active-lane pressure / energy receipt.
 --
--- This module records a bookkeeping reading only.  Pressure is represented
--- as active-lane path length over active-lane FRACTRAN energy.  Total
--- pressure is the symbolic sum over active axes of
---   v_p * pathLength(p)
--- and is not promoted to a real-arithmetic or continuum theorem.
+-- This module records a bookkeeping reading only.  The older active-lane
+-- path-length interpretation is retained only as a superseded diagnostic
+-- surface.  The corrected reading is:
+--
+--   depth    = integrated braid history / accumulated carry count
+--   pressure = live unresolved braid count / active crossing multiplicity
+--
+-- Total pressure is the symbolic sum over active axes of unresolved carry
+-- multiplicity and is not promoted to a real-arithmetic or continuum theorem.
 --
 -- High intersectional pressure is read as high active-lane energy, high MDL
 -- cost, and distance from a fixed point.  The canonical 0..9 versus 0..1
--- example records path-length ratio / anisotropy 9, with each crossing
--- carrying 9:1 strain as torsion bookkeeping.
+-- example records depth/crossing multiplicity ratio / anisotropy 9, with
+-- each crossing carrying 9:1 strain as torsion bookkeeping.
 --
 -- Non-claims: no pressure PDE recovery, no Navier-Stokes Gate 3 proof, no
 -- physics theorem, and no Clay promotion.
@@ -42,11 +46,17 @@ data SymbolicPressureFormula : Set where
   totalPressureSumVpTimesPathLength :
     SymbolicPressureFormula
 
+  activeUnresolvedCarryMultiplicity :
+    SymbolicPressureFormula
+
+  totalPressureSumActiveCrossingMultiplicity :
+    SymbolicPressureFormula
+
 data PressureEnergyReading : Set where
-  pressureAsActiveLanePathLengthOverFractranEnergy :
+  pressureAsActiveUnresolvedCarryMultiplicity :
     PressureEnergyReading
 
-  totalPressureIsSymbolicSumOverActiveAxes :
+  totalPressureIsSymbolicSumOfActiveCrossings :
     PressureEnergyReading
 
   highIntersectionalPressureIsHighActiveLaneEnergy :
@@ -59,6 +69,9 @@ data PressureEnergyReading : Set where
     PressureEnergyReading
 
   crossingCarriesNineToOneStrainAsTorsionBookkeeping :
+    PressureEnergyReading
+
+  pathLengthPressureReadingSuperseded :
     PressureEnergyReading
 
 data ActiveLaneBoundary : Set where
@@ -176,12 +189,13 @@ canonicalTorsionStrainShort =
 canonicalPressureEnergyReadings :
   List PressureEnergyReading
 canonicalPressureEnergyReadings =
-  pressureAsActiveLanePathLengthOverFractranEnergy
-  ∷ totalPressureIsSymbolicSumOverActiveAxes
+  pressureAsActiveUnresolvedCarryMultiplicity
+  ∷ totalPressureIsSymbolicSumOfActiveCrossings
   ∷ highIntersectionalPressureIsHighActiveLaneEnergy
   ∷ highActiveLaneEnergyIsHighMDLCost
   ∷ highMDLCostIsFarFromFixedPoint
   ∷ crossingCarriesNineToOneStrainAsTorsionBookkeeping
+  ∷ pathLengthPressureReadingSuperseded
   ∷ []
 
 canonicalActiveLaneBoundaries :
@@ -195,12 +209,12 @@ canonicalActiveLaneBoundaries =
 pressureEnergyStatement :
   String
 pressureEnergyStatement =
-  "Pressure is bookkeeping: active-lane path length over active-lane FRACTRAN energy."
+  "Pressure is bookkeeping: active unresolved carry/crossing multiplicity, not literal active-lane path length."
 
 totalPressureStatement :
   String
 totalPressureStatement =
-  "P_total is recorded symbolically as the sum over active axes of v_p * pathLength(p); no real arithmetic theorem is claimed."
+  "P_total is recorded symbolically as the sum over active axes of unresolved crossing multiplicity; no real arithmetic theorem is claimed."
 
 highPressureStatement :
   String
@@ -210,7 +224,7 @@ highPressureStatement =
 exampleStatement :
   String
 exampleStatement =
-  "The 0..9 versus 0..1 example records path-length ratio / anisotropy 9; each crossing carries 9:1 strain as torsion bookkeeping."
+  "The 0..9 versus 0..1 example records layer/crossing multiplicity ratio / anisotropy 9; each crossing carries 9:1 strain as torsion bookkeeping."
 
 boundaryStatement :
   String

@@ -18,12 +18,25 @@ open import Data.List.Base using (List; _∷_; [])
 --
 --   betaMin(p) = (a + log p) / cMin(p).
 --
+-- This is only the geometric-series convergence threshold.  The stricter
+-- activity-absorption / KP-margin gate asks for the local KP sum to be
+-- below one:
+--
+--   r / (1 - r) < 1, where r = p * exp (-(beta*cMin(p) - a)).
+--
+-- Equivalently beta*cMin(p) - a > log(2p).  At p = 7 this records the
+-- stricter betaKPMargin(7) ~= 13.64.  The 10.13 number is therefore a
+-- convergence boundary, not a KP-pass / absorption boundary.
+--
 -- At p = 7, using the narrow a bookkeeping 0.06 and
 -- cMin(7) ~= Re(1 - exp(2 pi i / 7)) ~= 0.198, the recorded threshold is
--- betaMin(7) ~= 10.13.  A fine-lattice physical beta near 6 therefore fails
--- this carrier KP test directly.  The carrier-scale value is recorded as an
--- RG-flowed conditional input, betaCarrier ~= 16.7, which passes the p = 7
--- threshold only if the Balaban/RG scale-transfer obligation is supplied.
+-- betaMin(7) ~= 10.13, while the stricter margin threshold is ~= 13.64.
+-- A one-loop physical beta 6 fails this carrier KP
+-- test directly, and the carrier-scale one-loop translation records only
+-- betaCarrier ~= 7.69, not 16.7.  The two-loop correction surface remains
+-- below the same threshold.  Any betaCarrier ~= 16.7 reading is recorded only
+-- as a conditional/nonperturbative RG input, requiring a Balaban bridge that
+-- is not supplied here.
 --
 -- No continuum KP theorem, no Balaban RG proof, no Yang-Mills construction,
 -- and no Clay promotion are claimed.
@@ -36,6 +49,10 @@ data BetaThresholdFormulaStatus : Set where
   betaMinIncludesTreeBranchingLogP :
     BetaThresholdFormulaStatus
 
+data KPMarginThresholdFormulaStatus : Set where
+  kpMarginIncludesLogTwoP :
+    KPMarginThresholdFormulaStatus
+
 data FlatLatticeBetaVerdict : Set where
   flatBetaPointThreeThreeRejectedForBTTreeKP :
     FlatLatticeBetaVerdict
@@ -45,7 +62,13 @@ data PhysicalCouplingVerdict : Set where
     PhysicalCouplingVerdict
 
 data RGCarrierCouplingVerdict : Set where
-  rgFlowedCarrierBetaPassesConditionally :
+  oneLoopCarrierBetaStillFailsThreshold :
+    RGCarrierCouplingVerdict
+
+  twoLoopCarrierBetaStillFailsThreshold :
+    RGCarrierCouplingVerdict
+
+  nonperturbativeCarrierBetaPassesConditionally :
     RGCarrierCouplingVerdict
 
 data KPRequiresRGFlowStatus : Set where
@@ -59,7 +82,16 @@ data KPCouplingOpenObligation : Set where
   justifyCarrierScaleBetaValue :
     KPCouplingOpenObligation
 
+  proveTwoLoopCarrierScaleStillBelowThreshold :
+    KPCouplingOpenObligation
+
+  proveNonperturbativeCarrierBetaSixteenSevenBridge :
+    KPCouplingOpenObligation
+
   proveSinglePrimeBTKPBoundAtCarrierScale :
+    KPCouplingOpenObligation
+
+  proveStrictKPMarginBelowOneAtCarrierScale :
     KPCouplingOpenObligation
 
   connectCarrierKPToContinuumOnlyAfterGate3 :
@@ -70,7 +102,10 @@ canonicalKPCouplingOpenObligations :
 canonicalKPCouplingOpenObligations =
   proveBalabanRGScaleTransfer
   ∷ justifyCarrierScaleBetaValue
+  ∷ proveTwoLoopCarrierScaleStillBelowThreshold
+  ∷ proveNonperturbativeCarrierBetaSixteenSevenBridge
   ∷ proveSinglePrimeBTKPBoundAtCarrierScale
+  ∷ proveStrictKPMarginBelowOneAtCarrierScale
   ∷ connectCarrierKPToContinuumOnlyAfterGate3
   ∷ []
 
@@ -82,6 +117,12 @@ data KPCouplingNonClaim : Set where
     KPCouplingNonClaim
 
   noBalabanRGProof :
+    KPCouplingNonClaim
+
+  noPerturbativeCarrierBetaPassClaim :
+    KPCouplingNonClaim
+
+  noUnconditionalBetaSixteenSevenClaim :
     KPCouplingNonClaim
 
   noContinuumKPTheorem :
@@ -99,6 +140,8 @@ canonicalKPCouplingNonClaims =
   noFlatLatticeBetaKPClaim
   ∷ noPhysicalBetaDirectPassClaim
   ∷ noBalabanRGProof
+  ∷ noPerturbativeCarrierBetaPassClaim
+  ∷ noUnconditionalBetaSixteenSevenClaim
   ∷ noContinuumKPTheorem
   ∷ noYangMillsMassGapClaim
   ∷ noClayPromotion
@@ -146,6 +189,16 @@ betaMinP7ApproxDenominator :
 betaMinP7ApproxDenominator =
   100
 
+kpMarginP7ApproxNumerator :
+  Nat
+kpMarginP7ApproxNumerator =
+  1364
+
+kpMarginP7ApproxDenominator :
+  Nat
+kpMarginP7ApproxDenominator =
+  100
+
 physicalFineLatticeBetaApproxNumerator :
   Nat
 physicalFineLatticeBetaApproxNumerator =
@@ -159,11 +212,31 @@ physicalFineLatticeBetaApproxDenominator =
 rgFlowedCarrierBetaApproxNumerator :
   Nat
 rgFlowedCarrierBetaApproxNumerator =
-  167
+  769
 
 rgFlowedCarrierBetaApproxDenominator :
   Nat
 rgFlowedCarrierBetaApproxDenominator =
+  100
+
+twoLoopCarrierBetaApproxNumerator :
+  Nat
+twoLoopCarrierBetaApproxNumerator =
+  800
+
+twoLoopCarrierBetaApproxDenominator :
+  Nat
+twoLoopCarrierBetaApproxDenominator =
+  100
+
+conditionalNonperturbativeCarrierBetaNumerator :
+  Nat
+conditionalNonperturbativeCarrierBetaNumerator =
+  167
+
+conditionalNonperturbativeCarrierBetaDenominator :
+  Nat
+conditionalNonperturbativeCarrierBetaDenominator =
   10
 
 betaFormulaSummary :
@@ -174,12 +247,12 @@ betaFormulaSummary =
 p7ObstructionSummary :
   String
 p7ObstructionSummary =
-  "At p=7, with a approximately 0.06 and cMin approximately 0.198, betaMin is recorded as approximately 10.13."
+  "At p=7, with a approximately 0.06 and cMin approximately 0.198, betaMin convergence is approximately 10.13, while the stricter KP margin threshold beta*cMin-a>log(2p) is approximately 13.64."
 
 rgBoundarySummary :
   String
 rgBoundarySummary =
-  "Physical fine-lattice beta approximately 6 fails the p=7 BT-tree KP threshold; RG-flowed carrier beta approximately 16.7 passes only conditionally on Balaban/RG scale transfer."
+  "Physical one-loop beta 6 gives carrier beta approximately 7.69, not 16.7, and still fails the p=7 threshold; the two-loop surface is still below threshold, while betaCarrier approximately 16.7 is conditional on a Balaban/nonperturbative RG bridge."
 
 record KPCouplingObstructionReceipt : Setω where
   field
@@ -194,6 +267,12 @@ record KPCouplingObstructionReceipt : Setω where
 
     betaThresholdFormulaIsBTBranching :
       betaThresholdFormula ≡ betaMinIncludesTreeBranchingLogP
+
+    kpMarginThresholdFormula :
+      KPMarginThresholdFormulaStatus
+
+    kpMarginThresholdFormulaIsLogTwoP :
+      kpMarginThresholdFormula ≡ kpMarginIncludesLogTwoP
 
     flatLatticeBetaVerdict :
       FlatLatticeBetaVerdict
@@ -244,6 +323,18 @@ record KPCouplingObstructionReceipt : Setω where
     betaMinP7DenominatorRecordedIsCanonical :
       betaMinP7DenominatorRecorded ≡ betaMinP7ApproxDenominator
 
+    kpMarginP7NumeratorRecorded :
+      Nat
+
+    kpMarginP7NumeratorRecordedIsCanonical :
+      kpMarginP7NumeratorRecorded ≡ kpMarginP7ApproxNumerator
+
+    kpMarginP7DenominatorRecorded :
+      Nat
+
+    kpMarginP7DenominatorRecordedIsCanonical :
+      kpMarginP7DenominatorRecorded ≡ kpMarginP7ApproxDenominator
+
     physicalCouplingVerdict :
       PhysicalCouplingVerdict
 
@@ -267,8 +358,8 @@ record KPCouplingObstructionReceipt : Setω where
     rgCarrierCouplingVerdict :
       RGCarrierCouplingVerdict
 
-    rgCarrierCouplingPassesConditionally :
-      rgCarrierCouplingVerdict ≡ rgFlowedCarrierBetaPassesConditionally
+    rgCarrierCouplingStillFails :
+      rgCarrierCouplingVerdict ≡ oneLoopCarrierBetaStillFailsThreshold
 
     rgCarrierBetaNumeratorRecorded :
       Nat
@@ -281,6 +372,48 @@ record KPCouplingObstructionReceipt : Setω where
 
     rgCarrierBetaDenominatorRecordedIsCanonical :
       rgCarrierBetaDenominatorRecorded ≡ rgFlowedCarrierBetaApproxDenominator
+
+    twoLoopCarrierCouplingVerdict :
+      RGCarrierCouplingVerdict
+
+    twoLoopCarrierCouplingStillFails :
+      twoLoopCarrierCouplingVerdict ≡ twoLoopCarrierBetaStillFailsThreshold
+
+    twoLoopCarrierBetaNumeratorRecorded :
+      Nat
+
+    twoLoopCarrierBetaNumeratorRecordedIsCanonical :
+      twoLoopCarrierBetaNumeratorRecorded ≡ twoLoopCarrierBetaApproxNumerator
+
+    twoLoopCarrierBetaDenominatorRecorded :
+      Nat
+
+    twoLoopCarrierBetaDenominatorRecordedIsCanonical :
+      twoLoopCarrierBetaDenominatorRecorded ≡ twoLoopCarrierBetaApproxDenominator
+
+    conditionalNonperturbativeCarrierCouplingVerdict :
+      RGCarrierCouplingVerdict
+
+    conditionalNonperturbativeCarrierPassesOnlyConditionally :
+      conditionalNonperturbativeCarrierCouplingVerdict
+      ≡
+      nonperturbativeCarrierBetaPassesConditionally
+
+    conditionalNonperturbativeCarrierBetaNumeratorRecorded :
+      Nat
+
+    conditionalNonperturbativeCarrierBetaNumeratorRecordedIsCanonical :
+      conditionalNonperturbativeCarrierBetaNumeratorRecorded
+      ≡
+      conditionalNonperturbativeCarrierBetaNumerator
+
+    conditionalNonperturbativeCarrierBetaDenominatorRecorded :
+      Nat
+
+    conditionalNonperturbativeCarrierBetaDenominatorRecordedIsCanonical :
+      conditionalNonperturbativeCarrierBetaDenominatorRecorded
+      ≡
+      conditionalNonperturbativeCarrierBetaDenominator
 
     kpRequiresRGFlow :
       KPRequiresRGFlowStatus
@@ -305,6 +438,12 @@ record KPCouplingObstructionReceipt : Setω where
 
     balabanRGProofPresentIsFalse :
       balabanRGProofPresent ≡ false
+
+    nonperturbativeBalabanBridgePresent :
+      Bool
+
+    nonperturbativeBalabanBridgePresentIsFalse :
+      nonperturbativeBalabanBridgePresent ≡ false
 
     continuumKPProved :
       Bool
@@ -371,6 +510,10 @@ canonicalKPCouplingObstructionReceipt =
         betaMinIncludesTreeBranchingLogP
     ; betaThresholdFormulaIsBTBranching =
         refl
+    ; kpMarginThresholdFormula =
+        kpMarginIncludesLogTwoP
+    ; kpMarginThresholdFormulaIsLogTwoP =
+        refl
     ; flatLatticeBetaVerdict =
         flatBetaPointThreeThreeRejectedForBTTreeKP
     ; flatLatticeBetaRejected =
@@ -403,6 +546,14 @@ canonicalKPCouplingObstructionReceipt =
         betaMinP7ApproxDenominator
     ; betaMinP7DenominatorRecordedIsCanonical =
         refl
+    ; kpMarginP7NumeratorRecorded =
+        kpMarginP7ApproxNumerator
+    ; kpMarginP7NumeratorRecordedIsCanonical =
+        refl
+    ; kpMarginP7DenominatorRecorded =
+        kpMarginP7ApproxDenominator
+    ; kpMarginP7DenominatorRecordedIsCanonical =
+        refl
     ; physicalCouplingVerdict =
         physicalFineLatticeBetaFailsP7Threshold
     ; physicalCouplingFailsDirectly =
@@ -416,8 +567,8 @@ canonicalKPCouplingObstructionReceipt =
     ; physicalBetaDenominatorRecordedIsCanonical =
         refl
     ; rgCarrierCouplingVerdict =
-        rgFlowedCarrierBetaPassesConditionally
-    ; rgCarrierCouplingPassesConditionally =
+        oneLoopCarrierBetaStillFailsThreshold
+    ; rgCarrierCouplingStillFails =
         refl
     ; rgCarrierBetaNumeratorRecorded =
         rgFlowedCarrierBetaApproxNumerator
@@ -426,6 +577,30 @@ canonicalKPCouplingObstructionReceipt =
     ; rgCarrierBetaDenominatorRecorded =
         rgFlowedCarrierBetaApproxDenominator
     ; rgCarrierBetaDenominatorRecordedIsCanonical =
+        refl
+    ; twoLoopCarrierCouplingVerdict =
+        twoLoopCarrierBetaStillFailsThreshold
+    ; twoLoopCarrierCouplingStillFails =
+        refl
+    ; twoLoopCarrierBetaNumeratorRecorded =
+        twoLoopCarrierBetaApproxNumerator
+    ; twoLoopCarrierBetaNumeratorRecordedIsCanonical =
+        refl
+    ; twoLoopCarrierBetaDenominatorRecorded =
+        twoLoopCarrierBetaApproxDenominator
+    ; twoLoopCarrierBetaDenominatorRecordedIsCanonical =
+        refl
+    ; conditionalNonperturbativeCarrierCouplingVerdict =
+        nonperturbativeCarrierBetaPassesConditionally
+    ; conditionalNonperturbativeCarrierPassesOnlyConditionally =
+        refl
+    ; conditionalNonperturbativeCarrierBetaNumeratorRecorded =
+        conditionalNonperturbativeCarrierBetaNumerator
+    ; conditionalNonperturbativeCarrierBetaNumeratorRecordedIsCanonical =
+        refl
+    ; conditionalNonperturbativeCarrierBetaDenominatorRecorded =
+        conditionalNonperturbativeCarrierBetaDenominator
+    ; conditionalNonperturbativeCarrierBetaDenominatorRecordedIsCanonical =
         refl
     ; kpRequiresRGFlow =
         balabanRGFlowIsNecessaryInput
@@ -442,6 +617,10 @@ canonicalKPCouplingObstructionReceipt =
     ; balabanRGProofPresent =
         false
     ; balabanRGProofPresentIsFalse =
+        refl
+    ; nonperturbativeBalabanBridgePresent =
+        false
+    ; nonperturbativeBalabanBridgePresentIsFalse =
         refl
     ; continuumKPProved =
         false
@@ -477,10 +656,13 @@ canonicalKPCouplingObstructionReceipt =
         refl
     ; receiptBoundary =
         "Records corrected BT-tree KP threshold betaMin(p) = (a + log p) / cMin(p)"
-        ∷ "Records p=7 threshold approximately 10.13, correcting the earlier flat-lattice 0.33 optimism"
-        ∷ "Records physical fine-lattice beta approximately 6 as failing the direct p=7 tree threshold"
-        ∷ "Records RG-flowed carrier beta approximately 16.7 only as a conditional carrier-scale pass"
-        ∷ "Makes Balaban/RG scale transfer a necessary obligation before any carrier KP claim is promoted"
+        ∷ "Records p=7 convergence threshold approximately 10.13, correcting the earlier flat-lattice 0.33 optimism"
+        ∷ "Records stricter p=7 KP activity-absorption threshold approximately 13.64 from beta*cMin-a > log(2p)"
+        ∷ "Records one-loop physical beta 6 as failing the direct p=7 tree threshold"
+        ∷ "Records one-loop carrier-scale beta approximately 7.69, not 16.7, as still below the p=7 threshold"
+        ∷ "Records the two-loop carrier-scale surface as still below threshold"
+        ∷ "Records betaCarrier approximately 16.7 only as conditional/nonperturbative input requiring a Balaban RG bridge"
+        ∷ "Makes Balaban/nonperturbative RG scale transfer a necessary obligation before any carrier KP claim is promoted"
         ∷ "No continuum KP theorem, Yang-Mills mass gap, or Clay promotion follows"
         ∷ []
     }

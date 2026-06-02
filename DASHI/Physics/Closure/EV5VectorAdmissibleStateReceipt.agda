@@ -20,12 +20,13 @@ import DASHI.Physics.Closure.NSToEV5ProjectionFrontierReceipt as Frontier
 --
 -- This receipt records the finite EV5 vector admissibility surface needed by
 -- the NS-facing closure programme.  It explicitly rejects scalar additive
--- Lyapunov promotion, keeps v7 as the dissipation witness lane, bounds v2 by
--- the viscosity-dependent cascade cutoff K*(nu), and splits the remaining
--- quotient/forward-simulation obligations into tail preservation and shell
--- boundedness.  It is a carrier receipt only: it does not prove an
--- NS-to-EV5 transfer theorem, continuum regularity, or any Clay
--- Navier-Stokes claim.
+-- Lyapunov promotion, keeps v7 as the conditional dissipation witness lane,
+-- treats v2 cutoff boundedness as a conditional shell witness, and splits the
+-- remaining quotient/forward-simulation obligations into tail preservation and
+-- shell boundedness.  Preservation of theta < 1 is a separate hard
+-- maximum-principle gap.  It is a carrier receipt only: it does not prove an
+-- NS-to-EV5 transfer theorem, continuum regularity, or any Clay Navier-Stokes
+-- claim.
 
 lane2 :
   FractranCOL.EV5 →
@@ -71,6 +72,15 @@ data VectorAdmissibilityComponent : Set where
   lane2CascadeCutoffBoundedByKStarNu :
     VectorAdmissibilityComponent
 
+  lane7PreservationConditionalObligation :
+    VectorAdmissibilityComponent
+
+  lane2PreservationConditionalObligation :
+    VectorAdmissibilityComponent
+
+  thetaLessThanOneMaximumPrincipleObligation :
+    VectorAdmissibilityComponent
+
   forwardSimulationTailPreservationObligation :
     VectorAdmissibilityComponent
 
@@ -90,6 +100,9 @@ canonicalVectorAdmissibilityComponents =
   ∷ scalarAdditiveLyapunovRejected
   ∷ lane7DissipationNonIncreasingComponent
   ∷ lane2CascadeCutoffBoundedByKStarNu
+  ∷ lane7PreservationConditionalObligation
+  ∷ lane2PreservationConditionalObligation
+  ∷ thetaLessThanOneMaximumPrincipleObligation
   ∷ forwardSimulationTailPreservationObligation
   ∷ forwardSimulationShellBoundednessObligation
   ∷ quotientTailPreservationObligation
@@ -97,6 +110,10 @@ canonicalVectorAdmissibilityComponents =
   ∷ []
 
 data ScalarLyapunovPromotion : Set where
+
+data ThetaMaximumPrincipleStatus : Set where
+  thetaLessThanOnePreservationMaximumPrincipleOpen :
+    ThetaMaximumPrincipleStatus
 
 scalarLyapunovPromotionImpossibleHere :
   ScalarLyapunovPromotion →
@@ -190,17 +207,22 @@ scalarLyapunovRejectionStatement =
 dissipationWitnessStatement :
   String
 dissipationWitnessStatement =
-  "Dissipation witness: lane7 is required to be non-increasing across the admissible EV5 transition surface."
+  "Conditional dissipation witness: lane7 non-increase is an input obligation for an admissible EV5 transition, not an unconditional NS-to-EV5 preservation theorem."
 
 cascadeTerminationStatement :
   String
 cascadeTerminationStatement =
-  "Cascade termination witness: lane2 shell depth is bounded by the viscosity-dependent cutoff K*(nu)."
+  "Conditional cascade witness: lane2 shell depth below K*(nu) is an input obligation for the transition surface, not an unconditional preservation theorem."
+
+thetaMaximumPrincipleStatement :
+  String
+thetaMaximumPrincipleStatement =
+  "Theta boundary: preserving theta < 1 remains the hard open maximum-principle gap outside this EV5 carrier receipt."
 
 splitObligationStatement :
   String
 splitObligationStatement =
-  "Forward-simulation and quotient obligations are split into tail preservation and shell boundedness; this receipt records the split obligations and does not close the NS transfer theorem."
+  "Forward-simulation and quotient obligations are split into conditional tail preservation and shell boundedness; theta < 1 preservation remains a separate open maximum-principle obligation."
 
 record EV5VectorAdmissibleStateReceipt
     (nu K : Nat)
@@ -243,6 +265,18 @@ record EV5VectorAdmissibleStateReceipt
 
     scalarAdditiveLyapunovRejectedHereIsTrue :
       scalarAdditiveLyapunovRejectedHere ≡ true
+
+    lane7PreservationConditional :
+      Bool
+
+    lane7PreservationConditionalIsTrue :
+      lane7PreservationConditional ≡ true
+
+    lane2PreservationConditional :
+      Bool
+
+    lane2PreservationConditionalIsTrue :
+      lane2PreservationConditional ≡ true
 
     lane7Dissipation :
       Lane7DissipationWitness before after
@@ -324,6 +358,23 @@ record EV5VectorAdmissibleStateReceipt
     quotientCorrectnessStillOpen :
       Forward.quotientCorrectnessProved forwardReceipt ≡ false
 
+    thetaMaximumPrincipleStatus :
+      ThetaMaximumPrincipleStatus
+
+    thetaMaximumPrincipleStatusIsOpen :
+      thetaMaximumPrincipleStatus
+      ≡
+      thetaLessThanOnePreservationMaximumPrincipleOpen
+
+    thetaLessThanOnePreservationProved :
+      Bool
+
+    thetaLessThanOnePreservationProvedIsFalse :
+      thetaLessThanOnePreservationProved ≡ false
+
+    forwardReceiptThetaPreservationOpen :
+      Forward.thetaLessThanOnePreservationProved forwardReceipt ≡ false
+
     clayNavierStokesPromoted :
       Bool
 
@@ -353,6 +404,12 @@ record EV5VectorAdmissibleStateReceipt
 
     cascadeBoundaryIsCanonical :
       cascadeBoundary ≡ cascadeTerminationStatement
+
+    thetaMaximumPrincipleBoundary :
+      String
+
+    thetaMaximumPrincipleBoundaryIsCanonical :
+      thetaMaximumPrincipleBoundary ≡ thetaMaximumPrincipleStatement
 
     splitObligationBoundary :
       String
@@ -397,6 +454,14 @@ canonicalZeroEV5VectorAdmissibleStateReceipt nu K =
         true
     ; scalarAdditiveLyapunovRejectedHereIsTrue =
         refl
+    ; lane7PreservationConditional =
+        true
+    ; lane7PreservationConditionalIsTrue =
+        refl
+    ; lane2PreservationConditional =
+        true
+    ; lane2PreservationConditionalIsTrue =
+        refl
     ; lane7Dissipation =
         canonicalLane7DissipationWitness zeroEV5
     ; lane7DissipationNonIncreasing =
@@ -439,6 +504,16 @@ canonicalZeroEV5VectorAdmissibleStateReceipt nu K =
         refl
     ; quotientCorrectnessStillOpen =
         refl
+    ; thetaMaximumPrincipleStatus =
+        thetaLessThanOnePreservationMaximumPrincipleOpen
+    ; thetaMaximumPrincipleStatusIsOpen =
+        refl
+    ; thetaLessThanOnePreservationProved =
+        false
+    ; thetaLessThanOnePreservationProvedIsFalse =
+        refl
+    ; forwardReceiptThetaPreservationOpen =
+        refl
     ; clayNavierStokesPromoted =
         false
     ; clayNavierStokesPromotedIsFalse =
@@ -458,6 +533,10 @@ canonicalZeroEV5VectorAdmissibleStateReceipt nu K =
     ; cascadeBoundary =
         cascadeTerminationStatement
     ; cascadeBoundaryIsCanonical =
+        refl
+    ; thetaMaximumPrincipleBoundary =
+        thetaMaximumPrincipleStatement
+    ; thetaMaximumPrincipleBoundaryIsCanonical =
         refl
     ; splitObligationBoundary =
         splitObligationStatement

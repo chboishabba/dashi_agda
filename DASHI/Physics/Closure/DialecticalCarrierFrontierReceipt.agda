@@ -8,16 +8,20 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
+import DASHI.Physics.Closure.ActiveLanePressureEnergyReceipt as PressureEnergy
+import DASHI.Physics.Closure.CarrierCarryProjectionDefectReceipt as CarryDefect
+import DASHI.Physics.Closure.CarrierStateVariableMappingReceipt as StateMap
+import DASHI.Physics.Closure.DialecticalCarrierSevenSevenOneReceipt as Sharp771
+import DASHI.Physics.Closure.DialecticalModulusLadderReceipt as Modulus
 import DASHI.Physics.Closure.NSTailDominanceCarryAnalogyReceipt as NSTailCarry
 import DASHI.Physics.Closure.SSPSevenSevenOneAtomFieldReceipt as SSP771
 
 ------------------------------------------------------------------------
 -- Dialectical carrier frontier receipt.
 --
--- This receipt integrates the presently available carrier-frontier batch
--- surfaces and records unavailable siblings as unbound bookkeeping slots.
--- It is a receipt frontier only: no physics theorem, no Gate 3 closure, and
--- no Clay promotion are introduced here.
+-- This receipt integrates the carrier-frontier batch surfaces.  It is a
+-- receipt frontier only: no physics theorem, no Gate 3 closure, and no Clay
+-- promotion are introduced here.
 
 data DialecticalCarrierFrontierStatus : Set where
   dialecticalCarrierFrontierRecorded_bookkeepingOnly :
@@ -57,16 +61,16 @@ data BatchReceiptBinding : Set where
   boundSevenSevenOneReceipt :
     BatchReceiptBinding
 
-  unboundCarryProjectionDefectReceipt :
+  boundCarryProjectionDefectReceipt :
     BatchReceiptBinding
 
-  unboundCarrierStateVariableMappingReceipt :
+  boundCarrierStateVariableMappingReceipt :
     BatchReceiptBinding
 
-  unboundActiveLanePressureEnergyReceipt :
+  boundActiveLanePressureEnergyReceipt :
     BatchReceiptBinding
 
-  unboundModulusLadderReceipt :
+  boundModulusLadderReceipt :
     BatchReceiptBinding
 
   boundNSTailCarryAnalogyReceipt :
@@ -76,10 +80,10 @@ canonicalBatchReceiptBindings :
   List BatchReceiptBinding
 canonicalBatchReceiptBindings =
   boundSevenSevenOneReceipt
-  ∷ unboundCarryProjectionDefectReceipt
-  ∷ unboundCarrierStateVariableMappingReceipt
-  ∷ unboundActiveLanePressureEnergyReceipt
-  ∷ unboundModulusLadderReceipt
+  ∷ boundCarryProjectionDefectReceipt
+  ∷ boundCarrierStateVariableMappingReceipt
+  ∷ boundActiveLanePressureEnergyReceipt
+  ∷ boundModulusLadderReceipt
   ∷ boundNSTailCarryAnalogyReceipt
   ∷ []
 
@@ -115,17 +119,17 @@ dialecticalCarrierFrontierPromotionImpossibleHere ()
 frontierStatement :
   String
 frontierStatement =
-  "The dialectical carrier frontier integrates available batch receipts and records missing siblings as unbound bookkeeping slots."
+  "The dialectical carrier frontier integrates the bound carrier batch receipts."
 
 sevenSevenOneStatement :
   String
 sevenSevenOneStatement =
   "Seven-seven-one is bound through the existing 15SSP 7+7+1 atom-field receipt."
 
-missingSiblingsStatement :
+boundSiblingsStatement :
   String
-missingSiblingsStatement =
-  "Carry projection-defect, carrier state variable mapping, active-lane pressure energy, and modulus ladder receipts are not imported here because matching sibling receipt modules were not present."
+boundSiblingsStatement =
+  "Carry projection-defect, carrier state variable mapping, active-lane pressure energy, and modulus ladder receipts are imported and checked directly."
 
 nsTailCarryStatement :
   String
@@ -150,6 +154,96 @@ record DialecticalCarrierFrontierReceipt : Setω where
 
     sevenSevenOneTotalIsFifteen :
       SSP771.totalSSPLaneCount sevenSevenOneReceipt ≡ 15
+
+    sharpenedSevenSevenOneReceipt :
+      Sharp771.DialecticalCarrierSevenSevenOneReceipt
+
+    sharpenedSevenSevenOneTotalIsFifteen :
+      Sharp771.totalLaneCount sharpenedSevenSevenOneReceipt ≡ 15
+
+    sharpenedSevenSevenOneObserverPrimeIsP71 :
+      Sharp771.observerPrime sharpenedSevenSevenOneReceipt ≡ 71
+
+    sharpenedSevenSevenOneSignNotGeom :
+      Sharp771.signIsGeometricVariable sharpenedSevenSevenOneReceipt
+      ≡
+      false
+
+    sharpenedSevenSevenOneNoClay :
+      Sharp771.clayPromoted sharpenedSevenSevenOneReceipt ≡ false
+
+    carryProjectionDefectReceipt :
+      CarryDefect.CarrierCarryProjectionDefectReceipt
+
+    carryProjectionDefectCarryRetained :
+      CarryDefect.carryRetained carryProjectionDefectReceipt ≡ true
+
+    carryProjectionDefectDroppedCarryRejected :
+      CarryDefect.droppedCarryAccepted carryProjectionDefectReceipt
+      ≡
+      false
+
+    carryProjectionDefectNoClay :
+      CarryDefect.clayPromotionClaimed carryProjectionDefectReceipt
+      ≡
+      false
+
+    carrierStateVariableMappingReceipt :
+      StateMap.CarrierStateVariableMappingReceipt
+
+    carrierStateVariableNoPaperOnePromotion :
+      StateMap.CarrierStateVariableMappingReceipt.paperOneTheoremPromoted
+        carrierStateVariableMappingReceipt
+      ≡
+      false
+
+    carrierStateVariableGate3Open :
+      StateMap.CarrierStateVariableMappingReceipt.gate3Closed
+        carrierStateVariableMappingReceipt
+      ≡
+      false
+
+    carrierStateVariableNoClay :
+      StateMap.CarrierStateVariableMappingReceipt.clayPromoted
+        carrierStateVariableMappingReceipt
+      ≡
+      false
+
+    activeLanePressureEnergyReceipt :
+      PressureEnergy.ActiveLanePressureEnergyReceipt
+
+    activeLanePressureCanonicalTotal :
+      PressureEnergy.canonicalTotal activeLanePressureEnergyReceipt ≡ 10
+
+    activeLanePressureAnisotropyNine :
+      PressureEnergy.anisotropy activeLanePressureEnergyReceipt ≡ 9
+
+    activeLanePressureNoGate3 :
+      PressureEnergy.navierStokesGate3Proved
+        activeLanePressureEnergyReceipt
+      ≡
+      false
+
+    activeLanePressureNoClay :
+      PressureEnergy.clayPromotionPromoted
+        activeLanePressureEnergyReceipt
+      ≡
+      false
+
+    modulusLadderReceipt :
+      Modulus.DialecticalModulusLadderReceipt
+
+    modulusLadderFriendshipIsNine :
+      Modulus.friendshipModulus modulusLadderReceipt ≡ 9
+
+    modulusLadderCurrentKStarIsNine :
+      Modulus.currentKStar modulusLadderReceipt ≡ 9
+
+    modulusLadderNoOrdinal :
+      Modulus.ordinalTheoremClaimed modulusLadderReceipt ≡ false
+
+    modulusLadderNoClay :
+      Modulus.clayPromotionClaimed modulusLadderReceipt ≡ false
 
     nsTailCarryAnalogyReceipt :
       NSTailCarry.NSTailDominanceCarryAnalogyReceipt
@@ -178,14 +272,8 @@ record DialecticalCarrierFrontierReceipt : Setω where
     boundReceiptCount :
       Nat
 
-    boundReceiptCountIsTwo :
-      boundReceiptCount ≡ 2
-
-    unboundReceiptCount :
-      Nat
-
-    unboundReceiptCountIsFour :
-      unboundReceiptCount ≡ 4
+    boundReceiptCountIsSix :
+      boundReceiptCount ≡ 6
 
     frontierSummary :
       String
@@ -199,11 +287,11 @@ record DialecticalCarrierFrontierReceipt : Setω where
     sevenSevenOneSummaryIsCanonical :
       sevenSevenOneSummary ≡ sevenSevenOneStatement
 
-    missingSiblingsSummary :
+    boundSiblingsSummary :
       String
 
-    missingSiblingsSummaryIsCanonical :
-      missingSiblingsSummary ≡ missingSiblingsStatement
+    boundSiblingsSummaryIsCanonical :
+      boundSiblingsSummary ≡ boundSiblingsStatement
 
     nsTailCarrySummary :
       String
@@ -271,6 +359,52 @@ canonicalDialecticalCarrierFrontierReceipt =
         SSP771.canonicalSSPSevenSevenOneAtomFieldReceipt
     ; sevenSevenOneTotalIsFifteen =
         refl
+    ; sharpenedSevenSevenOneReceipt =
+        Sharp771.canonicalDialecticalCarrierSevenSevenOneReceipt
+    ; sharpenedSevenSevenOneTotalIsFifteen =
+        refl
+    ; sharpenedSevenSevenOneObserverPrimeIsP71 =
+        refl
+    ; sharpenedSevenSevenOneSignNotGeom =
+        refl
+    ; sharpenedSevenSevenOneNoClay =
+        refl
+    ; carryProjectionDefectReceipt =
+        CarryDefect.canonicalCarrierCarryProjectionDefectReceipt
+    ; carryProjectionDefectCarryRetained =
+        refl
+    ; carryProjectionDefectDroppedCarryRejected =
+        refl
+    ; carryProjectionDefectNoClay =
+        refl
+    ; carrierStateVariableMappingReceipt =
+        StateMap.canonicalCarrierStateVariableMappingReceipt
+    ; carrierStateVariableNoPaperOnePromotion =
+        refl
+    ; carrierStateVariableGate3Open =
+        refl
+    ; carrierStateVariableNoClay =
+        refl
+    ; activeLanePressureEnergyReceipt =
+        PressureEnergy.canonicalActiveLanePressureEnergyReceipt
+    ; activeLanePressureCanonicalTotal =
+        refl
+    ; activeLanePressureAnisotropyNine =
+        refl
+    ; activeLanePressureNoGate3 =
+        refl
+    ; activeLanePressureNoClay =
+        refl
+    ; modulusLadderReceipt =
+        Modulus.canonicalDialecticalModulusLadderReceipt
+    ; modulusLadderFriendshipIsNine =
+        refl
+    ; modulusLadderCurrentKStarIsNine =
+        refl
+    ; modulusLadderNoOrdinal =
+        refl
+    ; modulusLadderNoClay =
+        refl
     ; nsTailCarryAnalogyReceipt =
         NSTailCarry.canonicalNSTailDominanceCarryAnalogyReceipt
     ; nsTailCarryNoNSProof =
@@ -288,12 +422,8 @@ canonicalDialecticalCarrierFrontierReceipt =
     ; batchBindingsAreCanonical =
         refl
     ; boundReceiptCount =
-        2
-    ; boundReceiptCountIsTwo =
-        refl
-    ; unboundReceiptCount =
-        4
-    ; unboundReceiptCountIsFour =
+        6
+    ; boundReceiptCountIsSix =
         refl
     ; frontierSummary =
         frontierStatement
@@ -303,9 +433,9 @@ canonicalDialecticalCarrierFrontierReceipt =
         sevenSevenOneStatement
     ; sevenSevenOneSummaryIsCanonical =
         refl
-    ; missingSiblingsSummary =
-        missingSiblingsStatement
-    ; missingSiblingsSummaryIsCanonical =
+    ; boundSiblingsSummary =
+        boundSiblingsStatement
+    ; boundSiblingsSummaryIsCanonical =
         refl
     ; nsTailCarrySummary =
         nsTailCarryStatement

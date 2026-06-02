@@ -11,11 +11,13 @@ open import Data.List.Base using (List; _∷_; [])
 ------------------------------------------------------------------------
 -- Intersectional pressure / anisotropy receipt.
 --
--- This receipt records bookkeeping semantics only.  Pressure is accumulated
--- thread/path length over active axes.  Perpendicular axes add their path
--- lengths, so simultaneous axes can create disproportionate pressure.  A
--- scale mismatch is recorded by the anisotropy ratio range(ax1)/range(ax2);
--- the canonical 0..9 versus 0..1 example has anisotropy 9.
+-- This receipt records bookkeeping semantics only.  The older reading
+-- "pressure = accumulated thread/path length" is explicitly superseded:
+-- pressure is active unresolved braid depth/count, while integrated carries
+-- become depth/history.  Perpendicular axes add unresolved crossing
+-- multiplicity, not literal geometric distance.  A scale mismatch is
+-- recorded by the anisotropy ratio range(ax1)/range(ax2); the canonical
+-- 0..9 versus 0..1 example has anisotropy 9.
 --
 -- The receipt links this bookkeeping back to atom pressure/nonlocal coupling
 -- language, but it does not prove pressure recovery, Navier-Stokes Gate 3,
@@ -123,10 +125,10 @@ canonicalAnisotropyRatio =
   9
 
 data PressureBookkeepingReading : Set where
-  pressureIsAccumulatedPathLengthAcrossActiveAxes :
+  pressureIsUnresolvedBraidDepthAcrossActiveAxes :
     PressureBookkeepingReading
 
-  perpendicularAxesAddPathLength :
+  perpendicularAxesAddCrossingMultiplicity :
     PressureBookkeepingReading
 
   multipleAxesCreateDisproportionatePressure :
@@ -138,14 +140,18 @@ data PressureBookkeepingReading : Set where
   atomPressureNonlocalCouplingBookkeepingLink :
     PressureBookkeepingReading
 
+  geometricPathLengthReadingRetired :
+    PressureBookkeepingReading
+
 canonicalPressureBookkeepingReadings :
   List PressureBookkeepingReading
 canonicalPressureBookkeepingReadings =
-  pressureIsAccumulatedPathLengthAcrossActiveAxes
-  ∷ perpendicularAxesAddPathLength
+  pressureIsUnresolvedBraidDepthAcrossActiveAxes
+  ∷ perpendicularAxesAddCrossingMultiplicity
   ∷ multipleAxesCreateDisproportionatePressure
   ∷ anisotropyFromScaleMismatchRatio
   ∷ atomPressureNonlocalCouplingBookkeepingLink
+  ∷ geometricPathLengthReadingRetired
   ∷ []
 
 data OpenPressureBoundary : Set where
@@ -198,7 +204,7 @@ clayPromotionImpossibleHere ()
 pressureStatement :
   String
 pressureStatement =
-  "Pressure is recorded as accumulated thread/path length over active axes; perpendicular active axes add path length and can create disproportionate intersectional pressure."
+  "Pressure is recorded as active unresolved braid depth/count over active axes; perpendicular active axes add crossing multiplicity, not literal path length."
 
 anisotropyStatement :
   String
@@ -208,7 +214,7 @@ anisotropyStatement =
 boundaryStatement :
   String
 boundaryStatement =
-  "This is atom-pressure/nonlocal-coupling bookkeeping only: no pressure recovery, no Navier-Stokes Gate 3 proof, no physics theorem, and no Clay promotion."
+  "This is atom-pressure/nonlocal-coupling bookkeeping only; the path-length reading is retired, and no pressure recovery, Navier-Stokes Gate 3 proof, physics theorem, or Clay promotion is claimed."
 
 record IntersectionalPressureAnisotropyReceipt : Setω where
   field

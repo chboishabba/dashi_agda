@@ -11,6 +11,33 @@ promotion path that would make the claim defensible.
 Roadmap maintenance state for the current wave: complete. This marks the
 status-review tranche as finished, not the physics-unification target itself.
 
+## Publication-Scope Definition: Papers 0-4
+
+The finished and publishable "full unification" package for the current
+publication programme means the ordered Paper 0-4 bundle recorded by
+`DASHI.Physics.Closure.FullUnificationPublicationRoadmapReceipt`.  Older
+G1-G7 lane gates remain useful as long-range theorem/validation gates, but they
+are not a license to claim full unification unless the Paper 0-4 bundle below is
+also coherent, receipt-backed, and fail-closed at every forbidden claim.
+
+| Paper | Publishable scope | Required Agda alignment | Still forbidden |
+|---|---|---|---|
+| Paper 0 | Shared fail-closed margin grammar: dynamics bound, ratio/signed equivalence with `A > 0`, strict absorption rule, and non-promotion grammar. | `StrictMarginImpliesAbsorptionReceipt`, `FullUnificationPublicationRoadmapReceipt` | Treating the grammar as an NS theorem, YM theorem, Gate 3 theorem, Clay result, or terminal result. |
+| Paper 1 | NS theta/EV5 programme: fixed-`K` tail flux bookkeeping, computable theta diagnostics, one-way continuation targets, and NS-to-EV5 forward-simulation obligations. | `NSTailFluxAbsorptionMarginReceipt`, `EV5ThetaMarginUpgradeReceipt`, `ClayNSProofRoadmapReceipt` | Claiming theta preservation, actual-flow tail decay, BKM/Serrin closure, unconditional NS regularity, arbitrary-data regularity, or Clay Navier-Stokes. |
+| Paper 2 | Gate 3 cutoff-frame/density/Mosco programme: finite cutoff frame bounds `A_N > 0` on finite `H_N` plus the required continuum density, Mosco recovery, no-spectral-pollution, and mass-shell bridge targets. | `Gate3NormDictionaryReceipt`, `SpectralConvergenceGate3Receipt`, `FullUnificationPublicationRoadmapReceipt` | Treating a finite dictionary or finite frame bound as continuum density, norm-resolvent convergence, physical spectral identification, or Gate 3 promotion. |
+| Paper 3 | YM rho/KP/Balaban programme: same-prime reduction, BT path counting, convergence threshold, strict absorption threshold, actual polymer activity gap, Balaban RG hard-open bridge, and rho `< 1` non-promotion. | `YMSamePrimeOverlapReductionReceipt`, `YMBTPathCountingKPThresholdReceipt`, `YMKPAbsorptionMarginThresholdReceipt`, `YMActualPolymerActivityDefinitionReceipt`, `YMBalabanRGScaleTransferFrontierReceipt`, `YMPaper3RoadmapReceipt`, `Paper3YMDependencyGraphReceipt`, `ClayYMProofRoadmapReceipt` | Claiming toy rho as actual activity, convergence as strict absorption, perturbative beta estimates as Balaban RG, carrier gaps as continuum gaps, continuum YM, mass gap, or Clay Yang-Mills. |
+| Paper 4 | Full DASHI unification programme: compose Papers 0-3 only after their joining lemmas are coherent, then state the strongest supported unification claim with explicit limitations. | `FullUnificationPublicationRoadmapReceipt` and the Paper 0-3 receipts it lists | Claiming full unification, terminal closure, Clay closure, exact Standard Model/GRQFT closure, or empirical adequacy beyond accepted receipts. |
+
+Promotion gates for this publication package remain the canonical gates named by
+`canonicalPublicationPromotionGates`: diagnostic is not theorem; toy ratio is
+not analytic margin; finite frame is not continuum density; observed margin is
+not proved margin; carrier gap is not continuum gap.
+
+The current publishable boundary is therefore Paper 0 as shared grammar plus
+downstream Papers 1-4 as roadmap/obligation papers.  Full unification becomes
+publishable only when Papers 1-3 have their analytic inhabitants and Paper 4
+composes them without violating the forbidden-claim table above.
+
 ## Current State
 
 Current status is recorded in `Docs/PhysicsLaneMaturityMatrix.md`:

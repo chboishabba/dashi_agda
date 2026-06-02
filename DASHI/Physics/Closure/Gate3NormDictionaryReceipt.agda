@@ -126,6 +126,50 @@ canonicalOpenGate3NormObligations =
   ∷ proveSig15StableCoherence
   ∷ []
 
+data FiniteCutoffFrameBoundary : Set where
+  finiteHNFrameLowerBoundANPositive :
+    FiniteCutoffFrameBoundary
+
+  noUniformInfiniteHLowerFrameBoundA :
+    FiniteCutoffFrameBoundary
+
+  finiteCutoffDoesNotCloseContinuumGate3 :
+    FiniteCutoffFrameBoundary
+
+canonicalFiniteCutoffFrameBoundaries :
+  List FiniteCutoffFrameBoundary
+canonicalFiniteCutoffFrameBoundaries =
+  finiteHNFrameLowerBoundANPositive
+  ∷ noUniformInfiniteHLowerFrameBoundA
+  ∷ finiteCutoffDoesNotCloseContinuumGate3
+  ∷ []
+
+data Gate3PublicationObligation : Set where
+  G1FiniteCutoffCarrierFrame :
+    Gate3PublicationObligation
+
+  G2AdelicSobolevNormBinding :
+    Gate3PublicationObligation
+
+  G3PAWOTGWOTGCoherence :
+    Gate3PublicationObligation
+
+  G4Sig15StableHeckeEnvelope :
+    Gate3PublicationObligation
+
+  G5ContinuumPromotionBlocked :
+    Gate3PublicationObligation
+
+canonicalGate3PublicationObligations :
+  List Gate3PublicationObligation
+canonicalGate3PublicationObligations =
+  G1FiniteCutoffCarrierFrame
+  ∷ G2AdelicSobolevNormBinding
+  ∷ G3PAWOTGWOTGCoherence
+  ∷ G4Sig15StableHeckeEnvelope
+  ∷ G5ContinuumPromotionBlocked
+  ∷ []
+
 data ClosedGate3NormProof : Set where
 
 closedGate3NormProofImpossibleHere :
@@ -162,10 +206,20 @@ openProofSummary :
 openProofSummary =
   "Open: actual analytic inequality, concrete norm bindings, and Sig15-stable coherence proof."
 
+finiteCutoffFrameBoundarySummary :
+  String
+finiteCutoffFrameBoundarySummary =
+  "Finite cutoff frame boundary: for each finite cutoff H_N one may record a finite lower frame bound A_N > 0; this is not a uniform A > 0 lower frame bound on the infinite Hilbert space H and does not close continuum Gate 3."
+
+gate3PublicationObligationsSummary :
+  String
+gate3PublicationObligationsSummary =
+  "G1-G5 obligations: G1 finite cutoff carrier frame A_N>0 on H_N; G2 adelic Sobolev norm binding; G3 PAWOTG/WOTG coherence; G4 Sig15-stable Hecke envelope; G5 continuum promotion remains blocked."
+
 promotionBoundarySummary :
   String
 promotionBoundarySummary =
-  "No transfer, unification, or Clay promotion is made by this receipt."
+  "No transfer, unification, continuum Gate 3, or Clay promotion is made by this receipt."
 
 record Gate3NormDictionaryReceipt : Set where
   field
@@ -222,6 +276,32 @@ record Gate3NormDictionaryReceipt : Set where
     openObligationsAreCanonical :
       openObligations ≡ canonicalOpenGate3NormObligations
 
+    finiteCutoffFrameBoundaries :
+      List FiniteCutoffFrameBoundary
+
+    finiteCutoffFrameBoundariesAreCanonical :
+      finiteCutoffFrameBoundaries ≡ canonicalFiniteCutoffFrameBoundaries
+
+    finiteCutoffHNFrameBoundANPositiveRecorded :
+      Bool
+
+    finiteCutoffHNFrameBoundANPositiveRecordedIsTrue :
+      finiteCutoffHNFrameBoundANPositiveRecorded ≡ true
+
+    uniformInfiniteHLowerFrameBoundAProved :
+      Bool
+
+    uniformInfiniteHLowerFrameBoundAProvedIsFalse :
+      uniformInfiniteHLowerFrameBoundAProved ≡ false
+
+    gate3PublicationObligations :
+      List Gate3PublicationObligation
+
+    gate3PublicationObligationsAreCanonical :
+      gate3PublicationObligations
+      ≡
+      canonicalGate3PublicationObligations
+
     analyticInequalityProved :
       Bool
 
@@ -252,6 +332,12 @@ record Gate3NormDictionaryReceipt : Set where
     unificationPromotedIsFalse :
       unificationPromoted ≡ false
 
+    continuumGate3Promoted :
+      Bool
+
+    continuumGate3PromotedIsFalse :
+      continuumGate3Promoted ≡ false
+
     clayPromoted :
       Bool
 
@@ -269,6 +355,20 @@ record Gate3NormDictionaryReceipt : Set where
 
     openProofBoundaryIsCanonical :
       openProofBoundary ≡ openProofSummary
+
+    finiteCutoffFrameBoundary :
+      String
+
+    finiteCutoffFrameBoundaryIsCanonical :
+      finiteCutoffFrameBoundary ≡ finiteCutoffFrameBoundarySummary
+
+    gate3PublicationObligationsBoundary :
+      String
+
+    gate3PublicationObligationsBoundaryIsCanonical :
+      gate3PublicationObligationsBoundary
+      ≡
+      gate3PublicationObligationsSummary
 
     promotionBoundary :
       String
@@ -314,6 +414,22 @@ canonicalGate3NormDictionaryReceipt =
         canonicalOpenGate3NormObligations
     ; openObligationsAreCanonical =
         refl
+    ; finiteCutoffFrameBoundaries =
+        canonicalFiniteCutoffFrameBoundaries
+    ; finiteCutoffFrameBoundariesAreCanonical =
+        refl
+    ; finiteCutoffHNFrameBoundANPositiveRecorded =
+        true
+    ; finiteCutoffHNFrameBoundANPositiveRecordedIsTrue =
+        refl
+    ; uniformInfiniteHLowerFrameBoundAProved =
+        false
+    ; uniformInfiniteHLowerFrameBoundAProvedIsFalse =
+        refl
+    ; gate3PublicationObligations =
+        canonicalGate3PublicationObligations
+    ; gate3PublicationObligationsAreCanonical =
+        refl
     ; analyticInequalityProved =
         false
     ; analyticInequalityProvedIsFalse =
@@ -334,6 +450,10 @@ canonicalGate3NormDictionaryReceipt =
         false
     ; unificationPromotedIsFalse =
         refl
+    ; continuumGate3Promoted =
+        false
+    ; continuumGate3PromotedIsFalse =
+        refl
     ; clayPromoted =
         false
     ; clayPromotedIsFalse =
@@ -345,6 +465,14 @@ canonicalGate3NormDictionaryReceipt =
     ; openProofBoundary =
         openProofSummary
     ; openProofBoundaryIsCanonical =
+        refl
+    ; finiteCutoffFrameBoundary =
+        finiteCutoffFrameBoundarySummary
+    ; finiteCutoffFrameBoundaryIsCanonical =
+        refl
+    ; gate3PublicationObligationsBoundary =
+        gate3PublicationObligationsSummary
+    ; gate3PublicationObligationsBoundaryIsCanonical =
         refl
     ; promotionBoundary =
         promotionBoundarySummary
@@ -361,6 +489,28 @@ canonicalGate3NormDictionaryOpenObligations :
   List OpenGate3NormObligation
 canonicalGate3NormDictionaryOpenObligations =
   openObligations canonicalGate3NormDictionaryReceipt
+
+canonicalGate3NormDictionaryFiniteCutoffBoundaries :
+  List FiniteCutoffFrameBoundary
+canonicalGate3NormDictionaryFiniteCutoffBoundaries =
+  finiteCutoffFrameBoundaries canonicalGate3NormDictionaryReceipt
+
+canonicalGate3NormDictionaryPublicationObligations :
+  List Gate3PublicationObligation
+canonicalGate3NormDictionaryPublicationObligations =
+  gate3PublicationObligations canonicalGate3NormDictionaryReceipt
+
+canonicalGate3NormDictionaryNoUniformInfiniteFrameBound :
+  uniformInfiniteHLowerFrameBoundAProved canonicalGate3NormDictionaryReceipt
+  ≡
+  false
+canonicalGate3NormDictionaryNoUniformInfiniteFrameBound =
+  refl
+
+canonicalGate3NormDictionaryNoContinuumGate3Promotion :
+  continuumGate3Promoted canonicalGate3NormDictionaryReceipt ≡ false
+canonicalGate3NormDictionaryNoContinuumGate3Promotion =
+  refl
 
 canonicalGate3NormDictionaryNoClosedProof :
   ClosedGate3NormProof →

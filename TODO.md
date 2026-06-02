@@ -2,6 +2,157 @@
 
 ## Active Blocker Board
 
+Manager publication docs governance `2026-06-02`:
+- [x] Align `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md` with
+  `FullUnificationPublicationRoadmapReceipt`.
+- [x] Define finished/publishable full unification as the ordered Paper 0-4
+  bundle: Paper 0 shared margin grammar; Paper 1 NS theta/EV5; Paper 2 Gate 3
+  cutoff-frame/density/Mosco; Paper 3 YM rho/KP/Balaban; Paper 4 full DASHI
+  unification composition.
+- [x] Add the explicit forbidden-claim table and publication promotion gates:
+  diagnostic is not theorem, toy ratio is not analytic margin, finite frame is
+  not continuum density, observed margin is not proved margin, and carrier gap
+  is not continuum gap.
+
+Manager YM Paper 3 roadmap implementation `2026-06-02`:
+- [x] Add `YMSamePrimeOverlapReductionReceipt`: KP overlap is reduced to
+  retained same-prime polymers without using activity multiplicativity.
+- [x] Add `YMBTPathCountingKPThresholdReceipt`: BT path counting gives
+  `p^n` branching and the `p=7` convergence threshold `beta ~= 10.13`.
+- [x] Add `YMKPAbsorptionMarginThresholdReceipt`: strict KP absorption is
+  separated from convergence and records `beta ~= 13.64`.
+- [x] Add `YMActualPolymerActivityDefinitionReceipt`: toy rho is rejected as
+  actual KP input; actual p=7 edge-rooted Wilson polymer activity is the
+  immediate missing definition.
+- [x] Add `YMBalabanRGScaleTransferFrontierReceipt`: one-loop/two-loop beta
+  estimates remain below the strict threshold; nonperturbative Balaban scale
+  transfer is hard open.
+- [x] Add `YMPaper3RoadmapReceipt`: YM1 through YM7 are wired as a fail-closed
+  dependency chain with no continuum YM or Clay promotion.
+- [x] Wire supplemental worker receipts for actual activity, Balaban transfer,
+  dependency graph, BT path counting, and KP absorption margin.
+- [ ] Implement the actual p=7 same-prime Wilson polymer activity functional
+  from the carrier action.
+- [ ] Compute/prove the actual local KP rho margin from that activity, then
+  revisit the Balaban scale-transfer step.
+
+Manager L full unification roadmap `2026-06-02`:
+- [x] Add `StrictMarginImpliesAbsorptionReceipt` for L0.1-L0.4:
+  dynamics bound, ratio/signed equivalence with `A > 0`, strict margin
+  absorption, and fail-closed non-promotion.
+- [x] Add `FullUnificationPublicationRoadmapReceipt` with the publication
+  order Paper 0 through Paper 4 and the joining lemmas for NS, Gate 3, and YM.
+- [x] Record that Paper 0 is publishable as the shared grammar while
+  downstream papers still need their analytic inhabitants.
+- [x] Correct Gate 3 wording: use cutoff frame bounds `A_N > 0` on finite
+  subspaces plus density/Mosco/no-spectral-pollution/mass-shell bridge.
+- [ ] NS Paper 1: discharge fixed-`K` tail flux identity, theta margin tail
+  decay, one-way continuation, and NS-to-EV5 forward simulation.
+- [ ] Gate 3 Paper 2: prove phase-aware carrier density, Mosco recovery,
+  no-spectral-pollution, and mass-shell bridge after finite cutoff evidence.
+- [ ] YM Paper 3: replace toy rho with actual polymer activity, prove
+  same-prime overlap/activity bounds, and discharge Balaban/RG scale transfer.
+- [ ] Paper 4: publish only after Papers 0-3 are coherent; do not claim Clay.
+
+NS-to-EV5 conditional preservation tightening `2026-06-02`:
+- [x] Mark lane7 dissipation preservation as a conditional EV5 witness, not an
+  unconditional NS-to-EV5 preservation theorem.
+- [x] Mark lane2 cutoff boundedness as a conditional EV5 witness, not an
+  unconditional preservation theorem.
+- [x] Record theta < 1 preservation as the hard open maximum-principle gap.
+- [ ] Prove the maximum-principle preservation step before consuming theta
+  margin as an actual-flow continuation input.
+- [ ] Supply the full NS-to-EV5 forward simulation and quotient/ultrametric
+  preservation bridge before any unconditional transfer claim is available.
+
+NS-only margin roadmap `2026-06-02`:
+- [x] Add the NS-only roadmap layer to `Docs/ClayNSProofRoadmap.md` with L0
+  through NS6 separated from non-NS lanes.
+- [x] Record L0 as shared margin grammar consumed only by NS tail-flux
+  bookkeeping in this roadmap.
+- [x] NS1 receipt surface: record fixed-`K` tail flux identity bookkeeping in
+  `NSTailFluxAbsorptionMarginReceipt`, with moving cutoffs explicitly excluded.
+- [ ] NS1: prove the fixed-`K` tail flux identity with exact shell,
+  truncation, boundary, and flux terms.
+- [x] NS2 runtime diagnostic: make the theta profile computable across finite
+  observed cutoff/time vectors without assuming monotonicity.
+- [ ] NS3: prove that the positive NS margin implies tail decay in the
+  actual-flow variables.
+- [ ] NS4: bind only the one-way BKM/Serrin continuation implication from the
+  proved tail-decay hypotheses; do not record an equivalence.
+- [ ] NS5: prove theta preservation under the NS evolution and projection
+  interfaces.  This remains the hard open step.
+- [ ] NS6: discharge the unconditional theta preservation and continuation
+  stack before any Clay-level Navier-Stokes regularity claim is available.
+- [x] Keep this roadmap NS-only; non-NS lift and spectral gates are out of
+  scope for this section.
+
+Margin invariant implementation batch `2026-06-02`:
+- [x] Add `NSTailFluxAbsorptionMarginReceipt`: symbolic `TailCarry`, `Flux`,
+  `Diss`, and conditional `theta < 1` tail-absorption margin.
+- [x] Add `EV5ThetaMarginUpgradeReceipt`: EV5 admissibility is lane7
+  non-increasing plus lane2 bounded plus theta-margin evidence.
+- [x] Add `DashiCFDThetaRuntimeDiagnosticReceipt`: theta profile is a
+  runtime support/falsification diagnostic, not a proof.
+- [x] Add `YMKPActivityRatioMarginReceipt`: YM analogue is `rho < 1` for
+  retained same-prime KP overlap polymers.
+- [x] Add `UnifiedMarginInvariantReceipt` and
+  `MarginInvariantProgrammeFrontierReceipt`: common proof shape recorded
+  without Gate 3/NS/YM/Clay promotion.
+- [x] Tighten the shared semantics to signed margins:
+  `margin = absorber_strength - promoted_activity` and
+  `margin_ratio = 1 - theta/rho`, with fail-closed status
+  `candidate_pass / boundary / fail_leak / unknown`.
+- [x] Emit the dashiCFD runtime fields `theta`, `ns_margin`,
+  `ns_margin_ratio`, `danger_shell`, and `promotion_status` in the EV5
+  theta diagnostic output.
+- [x] Split the YM/KP `p=7` thresholds: `10.13` is only the convergence
+  boundary; the stricter KP activity-absorption margin is `13.64`.
+- [ ] Prove the NS analytic inhabitant: `theta < 1` from actual tail-flux
+  estimates plus `NS->EV5` forward simulation/quotient/ultrametric
+  preservation.
+- [ ] Prove the YM analytic inhabitant: `rho < 1` from same-prime overlap
+  bounds, the strict `log(2p)` activity margin, Balaban induction, and
+  physical RG bridge.
+- [ ] Keep Gate 3 as the shared lift boundary until the norm/density/no-
+  spectral-pollution bridges are proved.
+
+Unified carry / braid receipt `2026-06-02`:
+- [x] Record `UnifiedCarryBraidReceipt` as the shared unresolved-carry grammar
+  across balanced-ternary carry, NS lane7 tail bookkeeping, distributed braid
+  tension, and KP/polymer activity.
+- [x] Consume the existing carry-memory, dialectical-depth, NS lane7,
+  NS-to-EV5 forward-simulation, KP coupling, and BT/KP reduction receipts
+  without promoting their theorem status.
+- [x] Keep `dropCarry = blowupScenario` as analogy/boundary language only:
+  no actual NS blowup or regularity theorem is proved.
+- [x] Correct the roadmap boundary: do not claim `Theta < 1 iff BKM`;
+  `Theta < 1` is a computable sufficient proxy/seam gauge only.
+- [x] Record that theta monotonicity is not assumed; the whole profile and
+  danger shell must be computed.
+- [x] Keep the YM RG surface conditional: `beta_carrier = 16.7` is not
+  consumed as a theorem, the `beta_min` obstruction remains, and Gate 3
+  atom-frame `A > 0` is open.
+- [ ] Define the concrete `cascadeStep : NSMode k -> NSMode k ->
+  Defect k x Promotion (k+1)` map before treating cascade as carry theorem.
+- [ ] Compute the whole theta/profile surface and identify the danger shell
+  before consuming `Theta < 1` as a seam gauge.
+- [ ] Prove actual-flow tail dominance above `K*(nu)` before consuming the
+  NS side of the unified grammar as regularity evidence.
+- [ ] Define a concrete braid tension functional `T(t)` before using
+  bounded-tension language as analytic input.
+- [ ] Prove the friendship/shared-load superadditivity theorem separately
+  before treating it as theorem content.
+- [ ] Prove same-prime KP activity bounds and Balaban/RG scale transfer before
+  consuming KP-as-tension as YM progress.
+- [ ] Prove the physical RG bridge and resolve the `beta_min` obstruction
+  before consuming `beta_carrier = 16.7` as YM theorem evidence.
+- [ ] Prove the Gate 3 atom-frame `A > 0` obligation before using the atom
+  frame as analytic input.
+- [ ] Preserve the non-promotion boundary: no Gate 3, YM mass gap, NS
+  regularity, Clay, social theorem, proof-ordinal theorem, or terminal
+  promotion follows from this unification receipt.
+
 Dialectical carry memory / depth accumulation `2026-06-02`:
 - [x] Record `CarryMemorySubvoxelReceipt`: balanced-ternary agreement can read
   locally as `-1` while the synthesis is held by a `+1` carry at depth `k+1`.
@@ -13,12 +164,22 @@ Dialectical carry memory / depth accumulation `2026-06-02`:
   with shape `[3,1]`.
 - [x] Record pressure as a dimension-gap reading and voluntary downsampling as
   the gentle encounter route.
+- [x] Supersede pressure-as-path-length wording with
+  depth/count/carry/unresolved-tension semantics.
 - [ ] Define an operational observer-depth metric before using the pressure
   reading as more than vocabulary.
+- [ ] Define a concrete pressure functional before consuming pressure as a
+  typed analytic or runtime quantity.
+- [ ] Prove the friendship/carry absorption theorem before treating unresolved
+  carry/tension absorption as theorem content.
+- [ ] Implement the runtime codec before treating pressure notation as
+  executable behavior.
 - [ ] Connect any braid-word discourse record to an actual conversation trace
   before treating the braid language as more than a record target.
 - [ ] Prove any claimed friendship, psychology, sociology, ethics, or
   metaphysics statement separately; the current receipts do not prove those.
+- [ ] Preserve the non-promotion boundary: no Gate 3 or Clay promotion follows
+  from the corrected pressure semantics.
 
 Atom carrier notation sidecar `2026-06-02`:
 - [x] Clarify that `0..1` denotes the archimedean unit interval, not a

@@ -21,6 +21,11 @@ open import Data.List.Base using (List; _∷_; [])
 --
 --   beta * cMin(p) - a > log p.
 --
+-- This is the geometric-series convergence threshold.  The stricter
+-- activity-absorption margin, where the local KP sum is below one, requires
+-- beta * cMin(p) - a > log(2p).  For p = 7 this records the stricter
+-- beta margin threshold ~= 13.64 with the same a/cMin bookkeeping.
+--
 -- No claim is made that B3/Yang-Baxter proves KP here.  That comparison
 -- remains a separate open target outside this receipt.  Tree
 -- contractibility also does not prove KP.  RG/Balaban control remains a
@@ -54,6 +59,10 @@ data BTKPConvergenceCondition : Set where
   localKPConvergesIffBetaCMinMinusAGreaterThanLogP :
     BTKPConvergenceCondition
 
+data BTKPMarginCondition : Set where
+  localKPMarginBelowOneRequiresLogTwoP :
+    BTKPMarginCondition
+
 data YangBaxterComparisonStatus : Set where
   yangBaxterComparisonOpenNotUsedAsKPProof :
     YangBaxterComparisonStatus
@@ -76,6 +85,9 @@ data BTBraidKPOpenObligation : Set where
   boundSamePrimeActivityByTreeLength :
     BTBraidKPOpenObligation
 
+  proveStrictActivityMarginBelowOne :
+    BTBraidKPOpenObligation
+
   supplyRGFlowedCarrierBetaForP7 :
     BTBraidKPOpenObligation
 
@@ -91,6 +103,7 @@ canonicalBTBraidKPOpenObligations =
   provePathIntersectionModelForPolymers
   ∷ proveEdgeSharingOverlapReduction
   ∷ boundSamePrimeActivityByTreeLength
+  ∷ proveStrictActivityMarginBelowOne
   ∷ supplyRGFlowedCarrierBetaForP7
   ∷ supplyBalabanRGInductiveControl
   ∷ relateBraidOrYangBaxterOnlyAfterSeparateProof
@@ -172,6 +185,16 @@ p7BetaMinDenominator :
 p7BetaMinDenominator =
   100
 
+p7KPMarginBetaNumerator :
+  Nat
+p7KPMarginBetaNumerator =
+  1364
+
+p7KPMarginBetaDenominator :
+  Nat
+p7KPMarginBetaDenominator =
+  100
+
 btTreeGeometrySummary :
   String
 btTreeGeometrySummary =
@@ -180,7 +203,7 @@ btTreeGeometrySummary =
 kpBranchingSummary :
   String
 kpBranchingSummary =
-  "The single-prime KP path tail counts p^n branches, so local KP convergence is recorded iff beta*cMin(p)-a > log p."
+  "The single-prime KP path tail counts p^n branches: convergence needs beta*cMin(p)-a > log p; strict activity absorption needs beta*cMin(p)-a > log(2p)."
 
 yangBaxterBoundarySummary :
   String
@@ -257,6 +280,12 @@ record BruhatTitsBraidKPReductionReceipt : Setω where
       convergenceCondition ≡
       localKPConvergesIffBetaCMinMinusAGreaterThanLogP
 
+    marginCondition :
+      BTKPMarginCondition
+
+    marginConditionIsLogTwoP :
+      marginCondition ≡ localKPMarginBelowOneRequiresLogTwoP
+
     treeContractibilityKPStatus :
       TreeContractibilityKPStatus
 
@@ -293,6 +322,18 @@ record BruhatTitsBraidKPReductionReceipt : Setω where
 
     p7BetaMinDenominatorRecordedIsCanonical :
       p7BetaMinDenominatorRecorded ≡ p7BetaMinDenominator
+
+    p7KPMarginBetaNumeratorRecorded :
+      Nat
+
+    p7KPMarginBetaNumeratorRecordedIsCanonical :
+      p7KPMarginBetaNumeratorRecorded ≡ p7KPMarginBetaNumerator
+
+    p7KPMarginBetaDenominatorRecorded :
+      Nat
+
+    p7KPMarginBetaDenominatorRecordedIsCanonical :
+      p7KPMarginBetaDenominatorRecorded ≡ p7KPMarginBetaDenominator
 
     flatLatticeEstimatePromoted :
       Bool
@@ -417,6 +458,10 @@ canonicalBruhatTitsBraidKPReductionReceipt =
         localKPConvergesIffBetaCMinMinusAGreaterThanLogP
     ; convergenceConditionIsBT =
         refl
+    ; marginCondition =
+        localKPMarginBelowOneRequiresLogTwoP
+    ; marginConditionIsLogTwoP =
+        refl
     ; treeContractibilityKPStatus =
         treeContractibilityNotUsedAsKPProof
     ; treeContractibilityNotUsedAsProof =
@@ -440,6 +485,14 @@ canonicalBruhatTitsBraidKPReductionReceipt =
     ; p7BetaMinDenominatorRecorded =
         p7BetaMinDenominator
     ; p7BetaMinDenominatorRecordedIsCanonical =
+        refl
+    ; p7KPMarginBetaNumeratorRecorded =
+        p7KPMarginBetaNumerator
+    ; p7KPMarginBetaNumeratorRecordedIsCanonical =
+        refl
+    ; p7KPMarginBetaDenominatorRecorded =
+        p7KPMarginBetaDenominator
+    ; p7KPMarginBetaDenominatorRecordedIsCanonical =
         refl
     ; flatLatticeEstimatePromoted =
         false
@@ -494,7 +547,8 @@ canonicalBruhatTitsBraidKPReductionReceipt =
         ∷ "Records single-prime polymers as path/subtree objects with overlap through path intersection or edge sharing"
         ∷ "Records p^n branching in the local KP path tail"
         ∷ "Records corrected local KP convergence iff beta*cMin(p)-a > log p"
-        ∷ "Records p=7 threshold approximately 10.13 for a approximately 0.06"
+        ∷ "Records strict local KP activity absorption iff beta*cMin(p)-a > log(2p)"
+        ∷ "Records p=7 convergence threshold approximately 10.13 and margin threshold approximately 13.64 for a approximately 0.06"
         ∷ "Does not use B3, Yang-Baxter, or tree contractibility as a KP proof"
         ∷ "RG/Balaban inductive control remains required"
         ∷ "No continuum KP theorem, Balaban RG theorem, or Clay promotion follows"
