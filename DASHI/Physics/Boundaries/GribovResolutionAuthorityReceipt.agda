@@ -10,7 +10,9 @@ open import Data.List.Base using (List; _∷_; [])
 -- External candidate: Cambridge Open Engage Agawa Gribov addendum.
 --
 -- The source is a retracted, non-peer-reviewed working paper.  It is
--- recorded as a candidate authority receipt and remains non-promoting.
+-- recorded as a candidate authority receipt and remains non-promoting.  It
+-- cannot supply continuum Gribov-copy resolution, defeat Singer's global
+-- smooth-section obstruction, close Gate3/continuum lift, or promote Clay YM.
 
 data GribovResolutionAuthorityBlocker : Set where
   cambridgeEngageRetracted :
@@ -20,6 +22,15 @@ data GribovResolutionAuthorityBlocker : Set where
     GribovResolutionAuthorityBlocker
 
   noAcceptedGribovUniquenessTheorem :
+    GribovResolutionAuthorityBlocker
+
+  continuumGribovCopiesUnresolved :
+    GribovResolutionAuthorityBlocker
+
+  singerGlobalSectionObstructionUnresolved :
+    GribovResolutionAuthorityBlocker
+
+  gate3ContinuumLiftOpen :
     GribovResolutionAuthorityBlocker
 
   supersededRGAndMorseRouteWithdrawn :
@@ -37,6 +48,9 @@ canonicalGribovResolutionAuthorityBlockers =
   cambridgeEngageRetracted
   ∷ workingPaperNotPeerReviewed
   ∷ noAcceptedGribovUniquenessTheorem
+  ∷ continuumGribovCopiesUnresolved
+  ∷ singerGlobalSectionObstructionUnresolved
+  ∷ gate3ContinuumLiftOpen
   ∷ supersededRGAndMorseRouteWithdrawn
   ∷ noClayAcceptance
   ∷ noInternalFormalImport
@@ -86,7 +100,7 @@ record GribovResolutionAuthorityReceipt : Setω where
     gribovRouteIsCanonical :
       gribovRoute
       ≡
-      "finite Gribov copy problem claimed resolved by probabilistic uniqueness"
+      "external finite/candidate Gribov-copy uniqueness claim recorded only; continuum copies remain unresolved"
 
     morseRoute :
       String
@@ -121,6 +135,24 @@ record GribovResolutionAuthorityReceipt : Setω where
 
     gribovResolutionPromotedIsFalse :
       gribovResolutionPromoted ≡ false
+
+    continuumGribovCopiesResolved :
+      Bool
+
+    continuumGribovCopiesResolvedIsFalse :
+      continuumGribovCopiesResolved ≡ false
+
+    singerGlobalSectionObstructionDefeated :
+      Bool
+
+    singerGlobalSectionObstructionDefeatedIsFalse :
+      singerGlobalSectionObstructionDefeated ≡ false
+
+    gate3ContinuumLiftClosed :
+      Bool
+
+    gate3ContinuumLiftClosedIsFalse :
+      gate3ContinuumLiftClosed ≡ false
 
     theoremClosurePromoted :
       Bool
@@ -170,7 +202,7 @@ canonicalGribovResolutionAuthorityReceipt =
     ; authorityStatusIsCanonical =
         refl
     ; gribovRoute =
-        "finite Gribov copy problem claimed resolved by probabilistic uniqueness"
+        "external finite/candidate Gribov-copy uniqueness claim recorded only; continuum copies remain unresolved"
     ; gribovRouteIsCanonical =
         refl
     ; morseRoute =
@@ -193,6 +225,18 @@ canonicalGribovResolutionAuthorityReceipt =
         false
     ; gribovResolutionPromotedIsFalse =
         refl
+    ; continuumGribovCopiesResolved =
+        false
+    ; continuumGribovCopiesResolvedIsFalse =
+        refl
+    ; singerGlobalSectionObstructionDefeated =
+        false
+    ; singerGlobalSectionObstructionDefeatedIsFalse =
+        refl
+    ; gate3ContinuumLiftClosed =
+        false
+    ; gate3ContinuumLiftClosedIsFalse =
+        refl
     ; theoremClosurePromoted =
         false
     ; theoremClosurePromotedIsFalse =
@@ -208,6 +252,9 @@ canonicalGribovResolutionAuthorityReceipt =
     ; receiptNotes =
         "Recorded as external candidate evidence only"
         ∷ "Retraction and non-peer-reviewed working-paper status block Gribov or Clay promotion"
+        ∷ "Continuum Gribov copies persist unless separately handled; this receipt supplies no continuum gauge-slice theorem"
+        ∷ "Singer's theorem/global smooth gauge-section obstruction is not defeated by this authority receipt"
+        ∷ "Gate3/continuum lift remains open"
         ∷ "The prior Morse/RG route is explicitly retained as withdrawn historical route evidence"
         ∷ []
     }

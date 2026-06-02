@@ -1,3 +1,18 @@
+# 2026-06-02 atom carrier notation sidecar
+
+- Added a bounded governance clarification for the atom programme and carrier
+  notation.  The interval `0..1` is archimedean; decimal strings are
+  TCP/notation/coarse views; SSP primes are multiplicatively independent
+  p-adic samplers/lane labels.  The earlier overindexing reading is not a live
+  claim: decimal positions are not one-to-one SSP prime or atom coordinates.
+- Continued the docs-only 15-variable correction: the first seven variables
+  are what/where/shape, the second seven are motion/dynamics/topology, and
+  `p71` is sign/time.  Decimal/TCP strings remain notation/coarse views, not
+  theorem content or carrier coordinates.
+- Documentation-only update in the allowed root docs.  No Agda files,
+  runtime/TCP semantics, Gate 3 analytic promotion, atom positivity promotion,
+  or Clay/continuum promotion was introduced.
+
 # 2026-06-01 Worker 4 Balaban/KP/ultrametric YM obligation update
 
 - Updated the Balaban/RG, polymer/KP, carrier area-law, ultrametric bridge,

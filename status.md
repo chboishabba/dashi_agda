@@ -1,3 +1,217 @@
+# 2026-06-02 dialectical carry memory / depth accumulation
+
+- Added `CarryMemorySubvoxelReceipt` as the narrow arithmetic-memory surface:
+  local `+1 + +1` agreement is recorded as apparent `-1` at the current
+  depth plus a positive carry at the next depth.  Dropping the carry is the
+  perceived-regression reading; keeping it is the synthesis/elevation reading.
+- Added `DialecticalDepthAccumulationReceipt` as the broader discourse surface:
+  mod-6 records the other-as-other friendship surface, mod-9 records the
+  transition where the other is included in the evaluator's own basis, and
+  three dialectical positions over time are recorded as `9^3` with one time
+  axis, i.e. `9^4 / [3,1]`.
+- Pressure is recorded only as a dimension-gap reading: higher-depth
+  dialectical evaluation meeting a lower-depth evaluator can be experienced
+  as invisible complexity.  Voluntary downsampling is recorded as the gentle
+  encounter route.
+- This is reasoning vocabulary and observer bookkeeping.  It is not a
+  friendship theorem, psychology theorem, sociology theorem, ethics theorem,
+  metaphysical theorem, physics theorem, Clay claim, or terminal promotion.
+
+# 2026-06-02 atom carrier notation sidecar
+
+- Clarified the atom-programme carrier notation boundary.  The `0..1`
+  interval is the ordinary archimedean unit interval.  Decimal strings are
+  TCP/notation/coarse views of sampled or serialized carrier data; they are
+  not themselves the p-adic carrier.
+- SSP primes remain multiplicatively independent p-adic samplers/lane labels
+  for the finite carrier bookkeeping.  They should not be read as decimal
+  digit positions, decimal-place atoms, or an overindexed one-prime-per-decimal
+  coordinate claim.
+- This is documentation/governance only.  It does not alter the atom carrier
+  receipts, Gate 3 analytic obligations, positivity obligations, TCP/runtime
+  semantics, or any Clay/continuum promotion boundary.
+
+# 2026-06-02 trit/braid dialectic notation receipt
+
+- Added `TritBraidDialecticNotationReceipt` as the fail-closed formal surface
+  for the corrected notation layer.  It records balanced trits, TCP/decimal
+  notation, `10` as supervoxel pop, `0.1` as subvoxel pull, `3x3` as two
+  positions, `3^3` as dialogue-through-time/synthesis, and adjacent `j` /
+  `j+1` p-adic braid-depth reading.
+- The receipt consumes the existing `SSPSevenSevenOneAtomFieldReceipt` and
+  `CarrierBraidStructureReceipt`: 15SSP remains `7+7+1`, with two mirrored
+  Hecke/transport septets and `p71` as the spare sign/time-reaction lane.
+- The 15-variable reading is corrected as: the first seven variables carry
+  what/where/shape bookkeeping; the second seven carry motion/dynamics/topology
+  bookkeeping; `p71` carries the sign/time-reaction lane.  Decimal/TCP strings
+  remain notation/coarse views only.
+- The correction is explicit: decimal strings are TCP/coarse notation, not the
+  carrier base; SSP primes are multiplicatively independent p-adic samplers,
+  not equally spaced decimal fibres.
+- This is notation/governance only.  Runtime codec behavior, dialogue
+  dynamics, Gate 3 density, proof-theoretic ordinal claims, Clay promotion,
+  and terminal promotion remain false/open.
+
+# 2026-06-02 fifteen-variable atom schema correction
+
+- Added `AtomFifteenVarsReceipt` for the corrected one-variable-per-SSP atom
+  reading.  The first septet records what/where/shape: `x`, `y`, `z`, scale,
+  amplitude, orientation, and anisotropy.  The second septet records
+  phase/motion/topology: phase, twist, spin/helicity, curvature, torsion,
+  pressure, and projected pressure gradient.  The `p71` spare lane records
+  sign as ternary time/reaction direction.
+- The receipt consumes the existing `SSPSevenSevenOneAtomFieldReceipt`,
+  `FullAtomWithSpinPressureReceipt`, and
+  `TritBraidDialecticNotationReceipt`.
+- The stronger statements remain fail-closed: Hecke mirror involution, `p71`
+  self-duality, sign-as-XOR dynamics, and BT travel dynamics are recorded as
+  candidate/bookkeeping until separately proved.  No runtime codec, Gate 3,
+  NS/YM, Clay, or terminal promotion follows.
+
+# 2026-06-02 KP/RG/atom receipt governance
+
+- Recorded three new receipt surfaces without promotion:
+  `KPCouplingObstruction`, `BruhatTitsBraidKPReduction`, and
+  `AtomExtendedCarrierFrame`.
+- `KPCouplingObstruction` corrects the `p=7` physical threshold:
+  `beta_min ~= 10.13`.  The physical Wilson beta route therefore fails absent
+  an RG bridge; finite carrier estimates alone do not discharge KP/Balaban or
+  Clay Yang-Mills.
+- `BruhatTitsBraidKPReduction` keeps the BT/KP reduction conditional.  The
+  carrier RG beta branch may pass under its carrier hypotheses, but that is not
+  physical beta running, continuum tightness, OS/Wightman reconstruction, or a
+  mass-gap theorem.
+- `AtomExtendedCarrierFrame` records the extended atom carrier frame as a
+  governance surface with a separate `A > 0` positivity obligation.  Until that
+  obligation is proved, the atom frame is not analytic input for Gate 3 or Clay.
+
+# 2026-06-01 canonical codec atom / phase receipt
+
+- Added the codec-side unification as a fail-closed formal surface:
+  `CanonicalCodecAtomReceipt` records the common transform pattern across CFD,
+  v4 proxy, RTX light, and PQ storage as coarse field plus sparse signed
+  anisotropic atoms plus an MDL residual budget.
+- Random-phase residual synthesis is now explicitly rejected as the canonical
+  codec path.  The receipt records that the missing phase field is the
+  implementation-level version of the Gate 3 phase obstruction: FactorVec is
+  amplitude-only, while the atom dictionary carries phase, orientation,
+  anisotropy, and twist.
+- The 3-6-9/supervoxel interpretation is recorded as bookkeeping only:
+  ternary support, six-fold orientation, nine-cell majority, and 27-cell
+  supervoxel boundary are codec-atom structure, not a continuum theorem.
+- MDL matching pursuit over signed anisotropic atoms is an encoder target, not
+  an implemented or optimality-proved algorithm.  Gate 3 density,
+  phase-aware decode stability, NS regularity, YM mass gap, and Clay
+  promotion remain false/open.
+
+# 2026-06-01 KP/braid boundary correction
+
+- Corrected the KP theorem boundary: polymer activity is not multiplicative
+  for disjoint-prime polymers.  The usable single-prime reduction is an
+  overlap-set statement only; any cross term must be bounded or recorded
+  before KP/Balaban estimates can consume it.
+- KP remains an open local-sum/Balaban obligation, not a continuum theorem and
+  not Clay YM evidence.
+- Corrected the braid boundary: one BT tree has no braiding.  Products of
+  distinct commuting prime lanes are abelian bookkeeping only.  Same-prime
+  braid/Yang-Baxter remains an open target, not a proved theorem.
+- Documentation/governance only.  No Agda files, continuum YM, Clay YM, or
+  terminal promotion were introduced.
+
+# 2026-06-01 Worker 5 carrier phase/BT-tree governance
+
+- Corrected the carrier phase/Gribov boundary: finite carrier phase and
+  representative choices may support local gauge bookkeeping, but they do not
+  solve the continuum Gribov problem and do not promote a Clay/continuum
+  Gribov-free gauge.
+- Recorded the BT-tree carrier gauge-fixing receipt as a finite-carrier
+  receipt only.  It can name a gauge-fixing witness inside the selected
+  carrier tree, but it is not BRST/OS positivity, continuum gauge fixing,
+  Wightman reconstruction, or Yang-Mills mass-gap evidence.
+- Clarified the finite phase group reading: the `p=7` surface separates
+  amplitude-vs-phase bookkeeping from physical phase.  YM may quotient gauge
+  phase only after the correct physical-sector construction; NS high-prime
+  phase remains physical state data and cannot be discarded as gauge.
+- Gate 3 trivial-sector density is now explicitly open.  Until that density
+  theorem and the surrounding no-spectral-pollution/mass-shell bridges are
+  supplied, finite carrier phase receipts remain evidence only.
+
+# 2026-06-01 Manager wave-pool/Gate3 tranche
+
+- Added the wave-pool/Gate3 receipts as fail-closed Agda surfaces:
+  `NSLyapunovFunctionIsLane7OnlyReceipt`,
+  `CarrierMoscoConvergenceFromPhysicsReceipt`,
+  `GreensFunctionConvergenceRateReceipt`, and
+  `CarrierPhaseStructureReceipt`.
+- The live NS/EV5 interpretation is now sharper: lane7 is the Lyapunov
+  witness, lane2 is a coordinate/boundedness witness, and scalar additive
+  `Q_log` remains falsified rather than demoted into a hidden proof path.
+- Gate 3 is recorded as a Mosco/density and phase-control programme only.
+  Mosco is limited to strong resolvent convergence unless stronger
+  hypotheses are supplied; no norm-resolvent, continuum mass gap, full
+  carrier-to-`S'` theorem, or Clay promotion follows.
+- The phase receipt records the current asymmetry: YM can quotient gauge
+  phase in the physical Hilbert-space reading, while NS cannot discard
+  high-prime phase information as gauge.  This is explanation and scope
+  control, not a proof of Gate 3.
+
+# 2026-06-01 Worker 4 EV5/KP documentation alignment
+
+- Scalar EV5 Lyapunov is rejected as the live criterion.  The current
+  candidate is vector-valued EV5, with lane7 read as the dissipation witness
+  and lane2 read as the bounded migration witness.
+- KP/Balaban remains an open proof lane.  The naive 15-prime series fails, so
+  any KP proof must proceed through a single-prime overlap reduction before
+  its local-sum estimates can be consumed.
+- Documentation-only alignment across the owned governance surfaces.  No Clay
+  NS, Clay YM, continuum, actual-flow, Wightman, or terminal promotion is
+  introduced.
+
+# 2026-06-01 Worker 5 spectral/Mosco and NS diagnostic governance
+
+- Updated the live governance reading for the spectral/Mosco receipt set.
+  Finite spectral receipts, PNF severity surfaces, and tower theorem targets
+  remain organizing evidence only.  Gate 3 is the hard promotion boundary and
+  now must be read as requiring three explicit bridges before any continuum
+  operator use: Mosco upper/density control for the selected carrier core,
+  no-spectral-pollution through the cutoff/depth limit, and a mass-shell
+  bridge identifying the limiting operator spectrum with the physical
+  gauge-invariant mass surface.
+- Recorded the NS two-phase diagnostic boundary.  The current trace falsifies
+  the combined `Q_log` lane2+lane7 reading; lane7 survived only as a narrower
+  diagnostic lane.  This is empirical/evidence-only and does not prove
+  actual-flow Navier-Stokes transfer, a Serrin/BKM estimate, smooth
+  regularity, or Clay NS.
+- Documentation-only update constrained to the owned status/TODO/changelog/YM
+  roadmap surfaces.  No Agda files, theorem receipts, Clay promotion,
+  continuum YM/NS promotion, or terminal promotion were introduced.
+
+# 2026-06-01 Worker 4 spectral tower tranche governance
+
+- Worker 6 docs/status correction: no live status entry should describe the
+  spectral gap as strengthening to `3.0`.  CM/infinite-depth comparisons, when
+  cited, are Selberg-style `lambda1 >= 3/16` targets only.  Gate 3 remains the
+  hard carrier-to-`S'`/Chern-character/norm lift; K-theory/Bott is framing,
+  not proof; PNF spectral severity is finite diagonal and the PNF-to-Z7 arrow
+  remains open/lossy; both Clay reductions stay conditional.
+- Documented the spectral tower tranche surfaces: PNF residual finite diagonal
+  spectral severity, `SpectralTowerTheoremTarget`, and NS FRACTRAN
+  admissibility decidable only for the Kolmogorov-calibrated subclass.
+- Authority levels are now explicit: A0 diagnostic/prose, A1 finite diagonal
+  spectralizable evidence, A2 typed tower theorem target, A3 calibrated
+  subclass decidability, and A4 runtime/semantic/continuum/Clay promotion.
+  This tranche reaches only the bounded levels it explicitly receipts; A4 is
+  uninhabited.
+- The PNF proof is spectralizable finite diagonal evidence only.  It is not
+  runtime behavior, semantic truth, continuum analysis, Clay NS/YM, or terminal
+  promotion.
+- Added the YM conditional spectral reduction surfaces as conditional ledgers:
+  `YMContinuumGapFromCarrierConditionalReceipt` reduces the gap-survival route
+  to Gate 3 plus spectral-measure/infinite-volume obligations, and
+  `YMFourStepsConditionalReceipt` records the self-adjointness, Mourre,
+  ground-state, and infinite-volume steps with all continuum/Clay promotions
+  false.
+
 # 2026-06-01 Worker 4 termination/YM lane governance update
 
 - Governance decision recorded: v3/cascade flux is diagnostic-only and is not

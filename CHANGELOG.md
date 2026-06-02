@@ -6,6 +6,111 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Dialectical carry memory / depth accumulation for `2026-06-02`: added and
+  wired `DASHI.Reasoning.CarryMemorySubvoxelReceipt` and
+  `DASHI.Reasoning.DialecticalDepthAccumulationReceipt`.  The narrow receipt
+  records `+1 + +1` as apparent local `-1` plus next-depth carry, with the
+  lower residue retained as subvoxel memory.  The broader receipt records the
+  mod-6 to mod-9 transition, `9^4 / [3,1]` discourse shape, and pressure as a
+  dimension-gap reading.  No friendship, psychology, sociology, ethics,
+  metaphysics, physics, Clay, or terminal theorem follows.
+
+- KP/RG/atom receipt governance for `2026-06-02`: recorded
+  `KPCouplingObstruction`, `BruhatTitsBraidKPReduction`, and
+  `AtomExtendedCarrierFrame` as Agda receipt surfaces and governance entries.  The corrected
+  `p=7` threshold is `beta_min ~= 10.13`; the physical beta route fails absent
+  an RG bridge.  The carrier RG beta branch remains a conditional carrier pass,
+  not physical beta running or Clay YM.  The extended atom carrier frame carries
+  a separate `A > 0` obligation before analytic consumption.
+
+- Canonical codec atom / phase receipt for `2026-06-01`: added and wired
+  `DASHI.Physics.Closure.CanonicalCodecAtomReceipt`.  The receipt records the
+  shared CFD/v4/RTX/PQ codec pattern as coarse field plus sparse signed
+  anisotropic atoms plus an MDL residual budget, rejects random-phase residual
+  synthesis as canonical, and records the phase-bearing atom dictionary as
+  the finite-unit-group extension of the amplitude-only FactorVec carrier.
+  The 3-6-9/supervoxel reading is kept as codec bookkeeping.  MDL matching
+  pursuit remains an encoder target; no runtime implementation, MDL
+  optimality proof, Gate 3 density theorem, NS regularity, YM mass gap, Clay
+  promotion, or terminal claim follows.
+
+- KP/braid boundary correction for `2026-06-01`: updated `status.md`,
+  `TODO.md`, `CHANGELOG.md`, and `Docs/ClayYMProofRoadmap.md` only.  The
+  correction records that polymer activity is not multiplicative for
+  disjoint-prime polymers; the valid single-prime reduction is only an
+  overlap-set statement, and the remaining cross term must be bounded or
+  recorded before KP/Balaban use.  It also records the braid boundary: one BT
+  tree has no braiding, products of distinct commuting prime lanes are
+  abelian bookkeeping only, and same-prime braid/Yang-Baxter remains open.
+  No Agda files, continuum theorem, Clay YM promotion, or terminal promotion
+  follows.
+
+- Worker 5 carrier phase/BT-tree governance for `2026-06-01`: updated
+  `status.md`, `TODO.md`, and `CHANGELOG.md` only.  The tranche corrects the
+  carrier phase/Gribov boundary, records the BT-tree carrier gauge-fixing
+  receipt as finite-carrier bookkeeping, separates finite phase-group
+  amplitude-vs-phase data at `p=7`, and keeps NS high-prime phase as physical
+  state data rather than gauge.  Gate 3 trivial-sector density remains open,
+  and no Clay YM, continuum Gribov resolution, BRST/OS positivity, Wightman
+  reconstruction, or continuum mass-gap promotion follows.
+
+- Manager wave-pool/Gate3 receipt tranche for `2026-06-01`: added and wired
+  `NSLyapunovFunctionIsLane7OnlyReceipt`,
+  `CarrierMoscoConvergenceFromPhysicsReceipt`,
+  `GreensFunctionConvergenceRateReceipt`, and
+  `CarrierPhaseStructureReceipt`.  The tranche records lane7 as the NS
+  Lyapunov witness while keeping lane2 as a bounded coordinate; records
+  caisson/pattern-space Mosco intuition while keeping formal density and
+  no-spectral-pollution open; records finite-caisson Green's-function
+  convergence rates as heuristic/formal-bound-required; and records finite
+  carrier phase structure as explaining why YM gauge quotienting is easier
+  than NS high-prime phase retention.  No Gate 3 theorem, continuum mass
+  gap, Clay NS/YM, norm-resolvent promotion, or terminal claim follows.
+
+- Worker 4 EV5/KP documentation alignment for `2026-06-01`: updated the owned
+  docs to reject scalar EV5 Lyapunov as the live criterion and record the
+  vector-valued EV5 candidate instead.  Lane7 is the dissipation witness;
+  lane2 is the bounded migration witness.  KP/Balaban remains open: the naive
+  15-prime series fails, so the admissible proof route must use single-prime
+  overlap reduction before any local-sum estimate is consumed.  No Agda files
+  were touched, and no Clay NS, Clay YM, continuum, actual-flow, Wightman, or
+  terminal promotion follows.
+
+- Worker 5 spectral/Mosco and NS diagnostic governance for `2026-06-01`:
+  updated `TODO.md`, `status.md`, `CHANGELOG.md`, and
+  `Docs/ClayYMProofRoadmap.md` only.  The new spectral/Mosco receipt set is
+  recorded as evidence and route organization, not promotion: Gate 3 still
+  requires Mosco upper/density, no-spectral-pollution, and a mass-shell bridge
+  before finite carrier spectral data can be consumed as continuum operator or
+  YM mass evidence.  The NS two-phase diagnostic is recorded as empirical
+  only: the trace falsifies the combined `Q_log` lane2+lane7 reading, while
+  lane7 survives only as a narrower diagnostic lane.  No Agda files were
+  touched, and no Clay YM, Clay NS, continuum, actual-flow, Wightman, or
+  terminal promotion follows.
+
+- Worker 6 docs/status correction for `2026-06-01`: softened the live
+  spectral-gap governance language.  No owned doc should claim that the gap
+  strengthens to `3.0`; the CM/infinite-depth comparison is only a
+  Selberg-style `lambda1 >= 3/16` target.  Gate 3 remains the hard
+  carrier-to-`S'`/Chern-character/norm lift, K-theory/Bott remains framing,
+  PNF spectral severity is finite diagonal with the PNF-to-Z7 arrow
+  open/lossy, and both Clay reductions remain conditional.  No Agda files or
+  promotion bits were changed.
+
+- Worker 4 spectral tower tranche governance for `2026-06-01`: documented
+  three planned/landed receipt surfaces: PNF residual finite diagonal spectral
+  severity, `SpectralTowerTheoremTarget`, and NS FRACTRAN admissibility
+  decidable only for the Kolmogorov-calibrated subclass.  The authority ladder
+  is A0 diagnostic/prose, A1 finite diagonal spectralizable evidence, A2 typed
+  tower theorem target, A3 calibrated subclass decidability, and A4
+  runtime/semantic/continuum/Clay promotion.  A4 remains uninhabited.  The PNF
+  proof is spectralizable finite diagonal evidence only, not runtime behavior,
+  semantic truth, continuum analysis, Clay NS/YM, or terminal promotion.
+  The tranche also adds `YMContinuumGapFromCarrierConditionalReceipt` and
+  `YMFourStepsConditionalReceipt` so the Gate-3 spectral reduction and the
+  four analytic YM steps are represented as conditional ledgers, not proof
+  closure.
+
 - Worker 4 termination/YM lane governance update for `2026-06-01`: recorded
   v3/cascade flux as diagnostic-only and removed it from termination energy
   `E/Q`.  The termination lanes are v2 and v7.  The `NS->EV5` revision remains
@@ -209,8 +314,9 @@ monitor surface.
   comparison unproved and not Clay-relevant.  The CKM no-go receipt records
   that `Z/3`-restricted bilinear invariants exist but do not lift to full
   `PSL(2,F7)` invariants, so non-bilinear labelling or symmetry breaking is
-  still required.  The braid receipt records the `B3`/Yang-Baxter/DHR-hexagon
-  origin vocabulary and `LogicTlurey` resonance join as an origin remark only.
+  still required.  The braid receipt is historical origin vocabulary only:
+  one BT tree has no braiding, distinct commuting prime lanes are abelian
+  bookkeeping, and same-prime braid/Yang-Baxter remains unproved.
 
 - packaged the inhabited nonabelian witness modules into
   `DASHI.Physics.SFGC.NonAbelian.NonAbelianSFGCCarrier` and wired the wrapper

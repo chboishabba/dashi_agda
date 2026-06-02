@@ -16,6 +16,93 @@ continuum/infinite-volume object, an infinite-volume limit, and operator or
 Hamiltonian convergence identifying a positive physical mass gap.  None of
 those Clay-level obligations is proved in the current repository.
 
+KP/RG/atom receipt boundary: `KPCouplingObstruction`,
+`BruhatTitsBraidKPReduction`, and `AtomExtendedCarrierFrame` are governance
+receipts, not Clay progress.  `KPCouplingObstruction` corrects the physical
+`p=7` threshold to `beta_min ~= 10.13`, so the physical Wilson beta route fails
+unless a separate RG bridge is supplied.  `BruhatTitsBraidKPReduction` may keep
+the carrier RG beta branch conditionally passable under carrier hypotheses, but
+that is not physical beta running, continuum tightness, OS/Wightman
+reconstruction, or a mass-gap theorem.  `AtomExtendedCarrierFrame` is blocked by
+an explicit `A > 0` positivity obligation before it can be consumed as analytic
+input.
+
+Spectral tower tranche boundary: the current tower distinguishes five
+authority levels.  A0 is diagnostic/prose, A1 is finite diagonal
+spectralizable evidence, A2 is a typed theorem target, A3 is calibrated
+subclass decidability, and A4 is runtime/semantic/continuum/Clay promotion.
+The PNF residual finite diagonal spectral severity receipt is A1 only: its
+proof is spectralizable finite diagonal evidence, not runtime behavior or
+semantic truth.  `SpectralTowerTheoremTarget` is A2, not theorem closure.  NS
+FRACTRAN admissibility is A3 only for the Kolmogorov-calibrated subclass.  No
+A4 continuum, Clay, runtime-semantic, or terminal claim is promoted here.
+`YMContinuumGapFromCarrierConditionalReceipt` and
+`YMFourStepsConditionalReceipt` record the Gate-3 reduction and four analytic
+steps as conditional ledgers.  They do not construct self-adjoint continuum
+YM, strict Mourre positivity, QFT ground-state uniqueness, weak spectral
+measure survival, or a Clay mass gap.
+
+Corrected math boundary: no current roadmap step may say that a gap
+strengthens to `3.0`.  Where the CM/infinite-depth spectral comparison is
+discussed, the honest Selberg-style lower-bound target is
+`lambda1 >= 3/16`, still below Clay promotion.  Gate 3 remains the hard lift
+from the carrier dictionary to `S'`, Chern-character compatibility, and the
+real norm theorem.  K-theory/Bott language is a framing target only, not a
+proof.  The PNF spectral-severity surface is finite diagonal evidence, and
+any PNF-to-Z7 arrow remains open/lossy.  The two Clay reductions are
+conditional ledgers only.
+
+Spectral/Mosco receipt boundary: the new spectral receipt set must be read as
+route organization and finite evidence, not as a continuum operator theorem.
+For Gate 3, the blocking bridge is not merely "more spectral data."  It has
+three named obligations: Mosco upper/density control for the selected carrier
+core, a no-spectral-pollution theorem through the cutoff/depth limiting
+process, and a mass-shell bridge that identifies the limiting operator
+spectrum with the physical gauge-invariant mass surface.  Until all three are
+proved, finite carrier spectral gaps, PNF spectral severity, and tower targets
+cannot be promoted to L7/L8/L9, Wightman reconstruction, or Clay Yang-Mills.
+
+NS two-phase diagnostic boundary: the current two-phase trace is empirical
+diagnostic evidence only.  It falsifies the combined `Q_log` lane2+lane7
+reading.  Scalar EV5 Lyapunov is rejected as the live criterion.  The current
+candidate is vector-valued EV5, with lane7 read only as the dissipation
+witness and lane2 read only as the bounded migration witness.  Those witnesses
+are not an actual-flow Navier-Stokes transfer theorem, not a Serrin/BKM
+estimate, not smooth regularity, and not Clay NS.  They may motivate future
+projection and comparison tests, but they cannot discharge any YM Gate 3 or NS
+Clay obligation.
+
+Wave-pool/Gate3 boundary: the caisson/standing-wave picture is now recorded
+only as a proof-search dictionary.  `CarrierMoscoConvergenceFromPhysicsReceipt`
+keeps Mosco as a strong-resolvent/density route, not norm-resolvent
+convergence.  `GreensFunctionConvergenceRateReceipt` records the finite
+caisson convergence heuristic and the NS critical-index boundary, but leaves
+the analytic bound open.  `CarrierPhaseStructureReceipt` records that YM can
+quotient gauge phase in the physical Hilbert-space reading while NS cannot
+treat high-prime phase loss as gauge.  These receipts explain why Gate 3 may
+be easier for YM than NS; they do not prove Gate 3, OS/Wightman
+reconstruction, or a Clay mass gap.
+
+Codec atom / phase boundary: `CanonicalCodecAtomReceipt` records the common
+codec form as coarse field plus sparse signed anisotropic atoms plus an MDL
+residual budget.  This is a useful bridge because it identifies random-phase
+residual synthesis as the implementation-level symptom of the same phase loss
+that Gate 3 must control.  The receipt keeps the atom phase, orientation,
+anisotropy, and twist fields visible, but it does not implement the runtime
+codec, prove MDL matching pursuit, prove phase-aware decode stability, prove
+Gate 3 density, or promote any NS/YM/Clay result.
+
+Carrier phase/Gribov/BT-tree boundary: carrier gauge fixing is a
+BT-tree/discrete-resolution statement inside the non-Archimedean carrier.  It
+selects canonical representatives only at that finite/discrete carrier
+authority.  Singer's continuum obstruction and the continuum Gribov-copy
+problem remain open.  The `p=7` amplitude sector has a `Z/7` gap, while the
+phase-unit sector is `Z/6`; these are different, incommensurable sectors and
+must not be identified, divided through each other, or consumed as a single
+phase/gap theorem.  Gate 3 must first prove trivial-sector density and the
+continuum lift before any carrier representative, phase quotient, or finite
+gap can be consumed by the continuum YM route.
+
 Feshbach-Schur / fiber-gap boundary: the finite carrier fiber gap is only an
 ingredient.  It may be used as local spectral evidence, but it does not by
 itself establish a gap for the full tensor-product Hamiltonian.  The full
@@ -42,12 +129,24 @@ removal.
 The repository now records this obligation explicitly in the Balaban,
 polymer/KP, and carrier area-law receipts.  It is not proved or imported, and
 `exactDecorrelation` must remain open unless supplied by a separate proof.
+The naive 15-prime KP series fails; the admissible proof candidate must first
+use a single-prime overlap reduction and then rebuild the KP local-sum bounds
+from that reduced overlap surface.  The corrected reduction is only an
+overlap-set statement: polymer activity is not multiplicative for
+disjoint-prime polymers.  The cross term produced by the overlap split must
+be bounded or recorded as an explicit obstruction before any KP/Balaban
+local-sum estimate consumes the reduction.
 Finite MDL/Fejer descent, finite strong-coupling bounds, and finite polymer
 bookkeeping are only support surfaces.  The large/small field split is also
 open: the ultrametric small-field sector is the carrier ball controlled by
 existing finite estimates, while the large-field sector still needs a
 tail-suppression estimate strong enough to feed the volume-independent RG
 induction.
+
+Braid boundary: there is no braiding inside one BT tree.  A product of
+distinct commuting prime lanes is abelian bookkeeping, not a nonabelian braid
+theorem.  Same-prime braid/Yang-Baxter remains an open target and cannot be
+used as a proved input to the YM roadmap.
 
 The current tower names the blockers through receipts such as
 `ClayMillenniumClosureTargetReceipt`, `CarrierFactorVecInjectivityOSPositivity`,
@@ -134,6 +233,7 @@ result requires both blocks.
 | L4 | Extract a weak continuum limit and prove the limit is nontrivial. | Uninhabited. Continuum RG convergence is named open. | `ContinuumClayMassGapReceiptObligation`, `ClayBlockerUpdateReceipt` | Need interacting continuum YM, not just finite carrier limits or scalar transfer positivity. |
 | L5 | Prove the continuum limit satisfies OS axioms: OS positivity, Euclidean covariance, symmetry, clustering, and regularity. | Partially inhabited only for finite scalar and finite ungauge-fixed Wilson-loop carrier inputs. The OS3 boundary is now explicit: ungauge-fixed Wilson positivity is finite-lattice evidence; BRST/Faddeev-Popov gauge fixing is not a positive-Hilbert OS3 proof because of the indefinite/Krein sector; ghost time reflection requires a graded sign/involution; carrier Gribov-free wording is only a representative choice, not a continuum Gribov-copy theorem. Full gauge OS, continuum reflection positivity, covariance, and infinite-volume OS control remain open. | `ScalarOSTransferMatrixReceipt`, `OSAxiomsContinuumStatus`, `WightmanReconstructionCandidateReceipt`, `YML5OSAxiomsForGaugeSectorReceipt`, `GribovFreeCarrierReceipt` | Need gauge-sector reflection positivity at the continuum/infinite-volume object, a gauge-invariant or quotient-compatible OS3 construction, ghost/BRST handling that lands in a positive physical Hilbert space, a real continuum Gribov-copy boundary, and restoration of full Euclidean covariance. |
 | Gribov carrier guardrail | For any gauge-fixed route, distinguish carrier representative choice from a continuum Gribov-copy theorem. | Inhabited only for the local `FactorVec` identity quotient: the canonical representative is unique in the identity fiber and the coordinate projection primitive is recorded. | `GribovFreeCarrierReceipt`, `GribovResolutionAuthorityReceipt` | Need an accepted continuum theorem for smooth YM connections before making any global gauge-fixing or Gribov-free continuum claim. |
+| Phase/BT-tree guardrail | Keep carrier phase fixing, finite amplitude gaps, and continuum gauge fixing in separate sectors. | Inhabited only as non-Archimedean BT-tree/discrete-resolution bookkeeping.  The `p=7` amplitude `Z/7` gap is not the `Z/6` phase-unit sector. | `CarrierPhaseStructureReceipt`, `GribovFreeCarrierReceipt`, `GribovResolutionAuthorityReceipt` | Need Gate 3 trivial-sector density, a continuum lift, and an independent continuum Gribov/Singer resolution before consuming this data in L5-L9. |
 | L6 | Apply OS reconstruction to obtain a Hilbert space, fields, and Hamiltonian satisfying Wightman axioms. | Uninhabited. Reconstruction is a target/citation boundary only. | `ClayMillenniumClosureTargetReceipt`, `WightmanReconstructionCandidateReceipt` | Need L5 first, plus authority binding for all reconstruction hypotheses. |
 | L7 | Prove the transfer matrix has a positive spectral gap uniformly in cutoff. | Uninhabited. Finite candidate gaps and selected finite PSD diagnostics do not give a uniform gauge gap. | `H0OSPositivityBaseCase`, `H0ExplicitMatrixReceipt`, `NormalisedH0OSPositivity`, `BalabanRGMassGapReceiptSurface` | Need a depth/cutoff-independent lower bound for the physical gauge Hamiltonian. |
 | L8 | Prove the spectral gap survives the continuum limit. | Uninhabited. Requires L3/L4 and L7. Finite carrier gaps are evidence only. | `ColimitGapLiftOnHamiltonian`, `ContinuumClayMassGapReceiptObligation` | Need semicontinuity or a stronger operator/Hamiltonian convergence theorem for the infinite-volume continuum Hamiltonians. |
@@ -192,7 +292,8 @@ as Clay evidence.
 
 More concretely, the target is the KP/uniform-volume induction obligation:
 prove the Kotecky-Preiss polymer bound with constants independent of the
-spatial volume, prove `exactDecorrelation` if that route consumes it, prove an
+spatial volume, prove the corrected single-prime overlap-set reduction and
+its cross-term bound, prove `exactDecorrelation` if that route consumes it, prove an
 ultrametric large/small field split with the large-field tail suppressed
 uniformly enough for `H_k -> H_{k+1}`, and show that the resulting counterterm
 and block-averaging errors remain controlled through cutoff/depth removal.
@@ -239,12 +340,21 @@ authority boundaries are discharged:
 - continuum reflection positivity and infinite-volume OS limit
 - continuum Gribov-free/global gauge-fixing promotion from the carrier
   representative receipt
+- consuming BT-tree/discrete carrier gauge fixing as a continuum Gribov or
+  Singer theorem
+- identifying the `p=7` amplitude `Z/7` gap with the phase-unit `Z/6` sector
+- consuming carrier phase quotients, carrier representatives, or finite gaps
+  before Gate 3 proves trivial-sector density and the continuum lift
 - continuum interacting Yang-Mills construction
 - operator/Hamiltonian convergence from finite carriers to the continuum
 - Balaban volume-independent induction for the continuum constructive route
 - KP/uniform-volume Balaban induction
+- single-prime overlap-set reduction and its cross-term bound for any KP proof
+  after the failed naive 15-prime series
 - `exactDecorrelation` as a consumed KP/Balaban input
 - ultrametric large/small field split with large-field tail suppression
+- same-prime braid/Yang-Baxter theorem, or any nonabelian braid claim from one
+  BT tree or from distinct commuting prime lanes
 - BRST-compatible reflection positivity for the physical gauge sector
 - an operator-valued physical spectral-gap theorem
 - any inference of the form "`14 < 15`; therefore Yang-Mills mass gap"
