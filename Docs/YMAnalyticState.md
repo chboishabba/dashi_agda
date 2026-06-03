@@ -73,9 +73,10 @@ Monster re-2 stress:
    growth does not leak into the physical polymer entropy constant `C0`.
    The current positive evidence is the McKay-Thompson `T_7` compression:
    raw Monster `c2=21493760` is replaced on the `p=7` lane by
-   `T_7(q^2)=204`, giving `C0_eff ~= 2` and `beta_abs ~= 15.836` under the
-   conservative reading.  This sharpens but does not prove the quotient
-   theorem.
+   `T_7(q^2)=204`.  The Rademacher audit gives the T7-envelope candidate
+   `C0 ~= 115.543` and `beta* ~= 32.60`; the stronger `C0 = 2` target remains
+   an open activity-identification lemma.  This sharpens but does not prove
+   the quotient theorem.
 4. Gate3 transfer: carry carrier area law through PAWOTG/Mosco/no-pollution/mass-shell.
 5. OS/Wightman continuum construction remains external to the carrier receipts.
 

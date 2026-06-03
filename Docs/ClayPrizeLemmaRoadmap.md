@@ -194,10 +194,13 @@ quotient control remains open, and YM/Clay promotion remains false.
 The checked positive evidence surface is
 `DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda`.  It records the
 McKay-Thompson `T_7` compression: raw Monster `c2=21493760` versus
-`T_7(q^2)=204`, a factor of about `105000`.  The conservative `T_7`-based
-reading gives `C0_eff ~= 2` and `beta_abs ~= 15.836`, which is materially
-harder than baseline but much softer than raw Monster leakage.  This is
-quotient evidence only; the actual polymer-entropy theorem remains open.
+`T_7(q^2)=204`, a factor of about `105000`.  The later Rademacher audit
+supersedes the old `C0_eff ~= 2` reading: the T7 envelope gives
+`C0 ~= 115.543` and `beta* ~= 32.60`, while the later direct `T7A`
+generating-sum audit gives the live KP threshold `beta* ~= 16.58` with gap
+`10.58` from physical `beta ~= 6`.  The old `C0 = 2` line is heuristic only.
+This is quotient/effective-activity evidence only; the Balaban bridge remains
+open.
 
 The cross-lane quotient-control receipt is:
 

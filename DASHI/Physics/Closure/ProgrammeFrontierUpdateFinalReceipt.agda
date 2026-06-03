@@ -8,6 +8,14 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
+import DASHI.Physics.Closure.CKMAlphaAngleDerivedReceipt as CKMAlpha
+import DASHI.Physics.Closure.CKMBetaCarrierDerivationReceipt as CKMBeta
+import DASHI.Physics.Closure.NSBernsteinConstantExplicitReceipt as NSBernstein
+import DASHI.Physics.Closure.NSGlobalH118BoundReceipt as NSH118
+import DASHI.Physics.Closure.VubBetaHardeningReceipt as VubBeta
+import DASHI.Physics.Closure.YMClayDistanceFinalReceipt as YMDistance
+import DASHI.Physics.Closure.YMIRStabilityUnderDeformationReceipt as YMIR
+
 ------------------------------------------------------------------------
 -- Manager C5: final updated frontier receipt.
 --
@@ -37,19 +45,19 @@ canonicalRemainingFrontierTasks =
 
 nsRemainingTaskStatement : String
 nsRemainingTaskStatement =
-  "NS verify Bernstein inequality for prime-scale LP projectors at carrier scales p^j, standard real analysis, confirm C0 universal/explicit."
+  "NS Bernstein verification is now explicit with C0=sqrt(p); the remaining Clay-facing task is the small-viscosity H^{11/8} Bernoulli-band bound and carrier-structured-to-all-data extension."
 
 ymRemainingTaskStatement : String
 ymRemainingTaskStatement =
-  "YM complete IR stability step, prove mass gap of flat 4D YM implies mass gap of cusp-degenerate YM under universality class identification."
+  "YM IR/cusp universality is recorded as a candidate equivalence surface; the remaining Clay-facing task is the flat Euclidean 4D SU(N) mass-gap proof plus the non-perturbative Balaban/OS-Wightman package."
 
 ckmRemainingTaskStatement : String
 ckmRemainingTaskStatement =
-  "CKM derive alpha angle of unitarity triangle from carrier arithmetic and tighten Vub/beta with first higher-order correction."
+  "CKM alpha is derived from the carrier beta/gamma triangle; the remaining phenomenology task is the first higher-order unitarity correction tightening Vub and beta."
 
 programmeFrontierUpdateFinalStatement : String
 programmeFrontierUpdateFinalStatement =
-  "Updated frontier: exactly three narrow remaining tasks are NS prime-scale LP Bernstein verification with universal/explicit C0, YM IR stability from flat 4D YM mass gap to cusp-degenerate YM mass gap under universality class identification, and CKM alpha plus first higher-order Vub/beta tightening. No Clay promotion is justified."
+  "Updated frontier: NS Bernstein C0=sqrt(p) and CKM alpha are now consumed as recorded subresults; the remaining work is NS H^{11/8} Bernoulli-band plus all-data extension, YM flat 4D mass-gap/Balaban/OS-Wightman continuum construction, and CKM first higher-order Vub/beta tightening. No Clay promotion is justified."
 
 data ProgrammeFrontierUpdateFinalPromotion : Set where
 
@@ -78,6 +86,77 @@ record ProgrammeFrontierUpdateFinalReceipt : Setω where
     remainingTaskCountIsThree :
       remainingTaskCount ≡ 3
 
+    nsBernsteinReceipt :
+      NSBernstein.NSBernsteinConstantExplicitReceipt
+
+    nsBernsteinC0SqrtP :
+      NSBernstein.bernsteinConstant nsBernsteinReceipt
+      ≡
+      NSBernstein.explicitBernsteinConstantFormula
+
+    nsBernsteinDerivationComplete :
+      NSBernstein.derivationComplete nsBernsteinReceipt ≡ true
+
+    nsBernsteinNoClay :
+      NSBernstein.clayNavierStokesPromoted nsBernsteinReceipt ≡ false
+
+    nsH118Receipt :
+      NSH118.NSGlobalH118BoundReceipt
+
+    nsH118BoundStillCandidate :
+      NSH118.globalH118BoundFullyProved nsH118Receipt ≡ false
+
+    nsH118NoClay :
+      NSH118.clayNavierStokesPromoted nsH118Receipt ≡ false
+
+    ymIRReceipt :
+      YMIR.YMIRStabilityUnderDeformationReceipt
+
+    ymIRCandidateRecorded :
+      YMIR.ymClayCuspRouteCandidate ymIRReceipt ≡ true
+
+    ymIRNoClay :
+      YMIR.clayYangMillsPromoted ymIRReceipt ≡ false
+
+    ymDistanceReceipt :
+      YMDistance.YMClayDistanceFinalReceipt
+
+    ymDistanceReducedToFlatYM :
+      YMDistance.ymClayDistance ymDistanceReceipt
+      ≡
+      YMDistance.flatYMMassGap
+
+    ymDistanceNoClay :
+      YMDistance.clayYangMillsPromoted ymDistanceReceipt ≡ false
+
+    ckmAlphaReceipt :
+      CKMAlpha.CKMAlphaAngleDerivedReceipt
+
+    ckmAlphaDerivedFromBetaGamma :
+      CKMAlpha.derivedFromBetaAndGamma ckmAlphaReceipt ≡ true
+
+    ckmBetaReceipt :
+      CKMBeta.CKMBetaCarrierDerivationReceipt
+
+    ckmBetaCarrierArithmeticDerived :
+      CKMBeta.betaFromTwoIndependentCarrierStructures ckmBetaReceipt
+      ≡
+      true
+
+    ckmBetaHigherOrderExpected :
+      CKMBeta.higherOrderCorrectionsExpected ckmBetaReceipt ≡ true
+
+    vubBetaReceipt :
+      VubBeta.VubBetaHardeningReceipt
+
+    vubBetaHigherOrderStillOpen :
+      VubBeta.higherOrderCKMUnitarityCorrections vubBetaReceipt
+      ≡
+      VubBeta.higherOrderCKMUnitarityCorrectionsExpectedOpen
+
+    vubBetaNoCKMPromotion :
+      VubBeta.physicalCKMPromoted vubBetaReceipt ≡ false
+
     nsTask :
       RemainingFrontierTask
 
@@ -105,8 +184,14 @@ record ProgrammeFrontierUpdateFinalReceipt : Setω where
     nsC0UniversalExplicitConfirmed :
       Bool
 
-    nsC0UniversalExplicitConfirmedIsFalse :
-      nsC0UniversalExplicitConfirmed ≡ false
+    nsC0UniversalExplicitConfirmedIsTrue :
+      nsC0UniversalExplicitConfirmed ≡ true
+
+    nsSmallViscosityH118StillOpen :
+      Bool
+
+    nsSmallViscosityH118StillOpenIsTrue :
+      nsSmallViscosityH118StillOpen ≡ true
 
     nsStatement :
       String
@@ -123,8 +208,14 @@ record ProgrammeFrontierUpdateFinalReceipt : Setω where
     ymIRStabilityStepComplete :
       Bool
 
-    ymIRStabilityStepCompleteIsFalse :
-      ymIRStabilityStepComplete ≡ false
+    ymIRStabilityStepCompleteIsCandidate :
+      ymIRStabilityStepComplete ≡ true
+
+    ymFlatClayProblemStillOpen :
+      Bool
+
+    ymFlatClayProblemStillOpenIsTrue :
+      ymFlatClayProblemStillOpen ≡ true
 
     ymFlat4DMassGapImplicationTarget :
       Bool
@@ -153,8 +244,8 @@ record ProgrammeFrontierUpdateFinalReceipt : Setω where
     ckmAlphaAngleDerived :
       Bool
 
-    ckmAlphaAngleDerivedIsFalse :
-      ckmAlphaAngleDerived ≡ false
+    ckmAlphaAngleDerivedIsTrue :
+      ckmAlphaAngleDerived ≡ true
 
     ckmCarrierArithmeticTarget :
       Bool
@@ -243,6 +334,48 @@ canonicalProgrammeFrontierUpdateFinalReceipt =
         3
     ; remainingTaskCountIsThree =
         refl
+    ; nsBernsteinReceipt =
+        NSBernstein.canonicalNSBernsteinConstantExplicitReceipt
+    ; nsBernsteinC0SqrtP =
+        refl
+    ; nsBernsteinDerivationComplete =
+        refl
+    ; nsBernsteinNoClay =
+        refl
+    ; nsH118Receipt =
+        NSH118.canonicalNSGlobalH118BoundReceipt
+    ; nsH118BoundStillCandidate =
+        refl
+    ; nsH118NoClay =
+        refl
+    ; ymIRReceipt =
+        YMIR.canonicalYMIRStabilityUnderDeformationReceipt
+    ; ymIRCandidateRecorded =
+        refl
+    ; ymIRNoClay =
+        refl
+    ; ymDistanceReceipt =
+        YMDistance.canonicalYMClayDistanceFinalReceipt
+    ; ymDistanceReducedToFlatYM =
+        refl
+    ; ymDistanceNoClay =
+        refl
+    ; ckmAlphaReceipt =
+        CKMAlpha.canonicalCKMAlphaAngleDerivedReceipt
+    ; ckmAlphaDerivedFromBetaGamma =
+        refl
+    ; ckmBetaReceipt =
+        CKMBeta.canonicalCKMBetaCarrierDerivationReceipt
+    ; ckmBetaCarrierArithmeticDerived =
+        refl
+    ; ckmBetaHigherOrderExpected =
+        refl
+    ; vubBetaReceipt =
+        VubBeta.canonicalVubBetaHardeningReceipt
+    ; vubBetaHigherOrderStillOpen =
+        refl
+    ; vubBetaNoCKMPromotion =
+        refl
     ; nsTask =
         nsVerifyBernsteinInequalityForPrimeScaleLPProjectors
     ; nsTaskIsCanonical =
@@ -260,8 +393,12 @@ canonicalProgrammeFrontierUpdateFinalReceipt =
     ; nsStandardRealAnalysisIsTrue =
         refl
     ; nsC0UniversalExplicitConfirmed =
-        false
-    ; nsC0UniversalExplicitConfirmedIsFalse =
+        true
+    ; nsC0UniversalExplicitConfirmedIsTrue =
+        refl
+    ; nsSmallViscosityH118StillOpen =
+        true
+    ; nsSmallViscosityH118StillOpenIsTrue =
         refl
     ; nsStatement =
         nsRemainingTaskStatement
@@ -272,8 +409,12 @@ canonicalProgrammeFrontierUpdateFinalReceipt =
     ; ymTaskIsCanonical =
         refl
     ; ymIRStabilityStepComplete =
-        false
-    ; ymIRStabilityStepCompleteIsFalse =
+        true
+    ; ymIRStabilityStepCompleteIsCandidate =
+        refl
+    ; ymFlatClayProblemStillOpen =
+        true
+    ; ymFlatClayProblemStillOpenIsTrue =
         refl
     ; ymFlat4DMassGapImplicationTarget =
         true
@@ -292,8 +433,8 @@ canonicalProgrammeFrontierUpdateFinalReceipt =
     ; ckmTaskIsCanonical =
         refl
     ; ckmAlphaAngleDerived =
-        false
-    ; ckmAlphaAngleDerivedIsFalse =
+        true
+    ; ckmAlphaAngleDerivedIsTrue =
         refl
     ; ckmCarrierArithmeticTarget =
         true
@@ -341,9 +482,9 @@ canonicalProgrammeFrontierUpdateFinalReceipt =
         refl
     ; receiptBoundary =
         "Manager C5 records exactly three remaining frontier tasks"
-        ∷ "The NS task is a standard real-analysis Bernstein verification for prime-scale LP projectors at carrier scales p^j with C0 still to be confirmed universal/explicit"
-        ∷ "The YM task is the IR stability implication from flat 4D YM mass gap to cusp-degenerate YM mass gap under universality class identification"
-        ∷ "The CKM task is alpha from carrier arithmetic plus the first higher-order Vub/beta tightening"
+        ∷ "The NS Bernstein receipt now records C0=sqrt(p); the remaining NS task is the small-viscosity H^{11/8} Bernoulli-band and all-data extension"
+        ∷ "The YM IR/cusp route is recorded as a candidate equivalence; the remaining YM task is the flat Clay mass-gap proof plus non-perturbative Balaban and OS/Wightman construction"
+        ∷ "The CKM alpha receipt now derives alpha from beta/gamma; the remaining CKM task is the first higher-order Vub/beta unitarity correction"
         ∷ "The tasks are narrow and no Clay promotion is justified"
         ∷ "Clay and physical CKM promotion flags remain false"
         ∷ []

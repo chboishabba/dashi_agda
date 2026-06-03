@@ -127,10 +127,12 @@ The later `T_7` quotient evidence refines the stress model:
 DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda
 ```
 
-It records raw Monster `c2=21493760`, McKay-Thompson `T_7(q^2)=204`,
-compression by about `105000`, conservative `C0_eff~=2`, and
-`beta_abs~=15.836`.  This supports a finite positive route but leaves the
-nonperturbative Balaban bridge from physical beta around `6` open.
+It records raw Monster `c2=21493760` and McKay-Thompson `T_7(q^2)=204`, a
+compression by about `105000`.  The later Rademacher audit supersedes the old
+`C0_eff~=2` reading: the T7 envelope gives `C0~=115.543` and
+`beta*~=32.60`; `C0=2` / `beta*~=15.9` is now an open activity-identification
+target.  This supports a finite positive route but leaves the nonperturbative
+Balaban bridge from physical beta around `6` open.
 
 The Monster re-2 stress table is staged at:
 
@@ -173,11 +175,12 @@ DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda
 
 For the `p=7` lane, the relevant Hauptmodul is the McKay-Thompson series
 `T_7`, not the raw `j`-function.  Its `q^2` coefficient is `204`, compared to
-the raw Monster `c2 = 21493760`, a compression factor of about `105000`.  A
-conservative normalization using the `T_7` ratio gives `C0_eff ~= 2` and
-therefore `beta_abs ~= 15.836`: harder than the baseline `12.971`, but far
-from the raw-Monster stress thresholds `22.66`/`32.35`.  This is evidence for
-the quotient-control route, not the quotient theorem itself.
+the raw Monster `c2 = 21493760`, a compression factor of about `105000`.  The
+later audit separates this from the stronger activity target: the T7
+Rademacher envelope gives `C0~=115.543` and `beta*~=32.60`, while
+`C0=2` and `beta*~=15.9` require a separate polymer-activity identification
+lemma.  This is evidence for the quotient-control route, not the quotient
+theorem itself.
 
 The physical/lattice diagnostic recorded for the paper target is:
 

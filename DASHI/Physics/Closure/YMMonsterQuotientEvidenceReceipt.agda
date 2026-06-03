@@ -119,7 +119,7 @@ quotientEvidenceStatement =
 effectiveC0Statement :
   String
 effectiveC0Statement =
-  "A conservative T_7 ratio gives C0_eff about 2 and beta_abs about 15.836, much harder than baseline 12.971 but far below raw Monster stress near 22.66 or 32.35."
+  "The C0_eff about 2 and beta_abs about 15.836 entry is an activity-identification target, not a consequence of the T_7 Rademacher envelope alone; the envelope audit gives a larger C0 candidate."
 
 promotionBoundary :
   String

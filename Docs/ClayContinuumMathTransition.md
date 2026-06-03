@@ -13,6 +13,26 @@ lemmas and their numerical thresholds; it does not prove those lemmas.
 
 Every `clay*Promoted = false` flag remains intentional.
 
+## Parallel Worker Split
+
+- `W-G3`: physical SSP/Hecke 3D taper calibration,
+  `sigma_SSP < 0.3025113508228815`.
+- `W-Frame`: phase-complete frame factors
+  `A_split > 0`, `A_inert > 0`, `A_71 > 0`, then uniform cutoff lift.
+- `W-YM`: use connected-animal KP counting as the standard entropy target:
+  `sum_d d * p^(d-1) exp(-beta*c_min*d) < 1`, with computed threshold
+  `beta* ~= 9.59` and gap `3.59` from physical `beta ~= 6`.  Direct `T7A`
+  KP is proved at `beta* ~= 16.56` but is worse as counting; T7A can help
+  only through a per-polymer activity-suppression theorem.  Then supply the
+  non-perturbative Balaban bridge, followed by OS/Wightman construction.
+- `W-NS-A`: publishable `H^{-1/2}` obstruction theorem.
+- `W-NS-B`: non-circular `H^{11/8}` Bernoulli-band estimate and `K*` drift
+  condition.
+
+Arithmetic guard: the useful `7+7+1` split is the atom/frame grammar.  The
+literal `Q(sqrt(-7))` CM audit remains separate as `5 split + 9 inert + 1
+ramified`, with `p71` split-not-inert but still terminal SSP sign/carry lane.
+
 ## Gate 3 / Gravity 3D Taper
 
 The digit-expansion PAWOTG calculation gives a concrete positive baseline:
@@ -41,21 +61,50 @@ calculation, not a Clay proof by itself.
 
 ## Yang-Mills
 
-The local carrier/KP lane is now sharply quantified, but the physical continuum lane still needs:
+The local carrier/KP lane is now sharply quantified.  Connected-animal
+counting is the corrected standard entropy object:
+
+```text
+sum_{d >= 1} d * p^(d-1) * exp(-beta*c_min*d) < 1
+beta* ~= 9.59
+Delta beta from beta_phys ~= 6 is ~= 3.59
+```
+
+The direct `T7A` coefficient sum is also computed:
+
+```text
+sum_{d >= 1} c7(d) * exp(-beta*c_min*d) < 1
+beta* ~= 16.56
+Delta beta from beta_phys ~= 6 is ~= 10.56
+```
+
+It is a worse counting route because the small-depth T7A coefficients dominate
+the sum.  Its useful role is the still-open per-polymer activity-suppression
+lemma.
+
+The physical continuum lane still needs:
 
 - non-perturbative Balaban block-spin transfer from physical `beta ~= 6`
-- effective carrier coupling above the T7-compressed absorption regime
-  `beta_eff > 15.84`
+- effective carrier coupling above the connected-animal KP threshold
+  `beta_eff > ~9.59`
 - OS reflection positivity through the flow
 - infinite-volume limit
 - Wightman reconstruction `W0-W5`
 
-The measured gap after T7 compression is about `9.84` in beta units. Perturbative
+The measured connected-animal gap is now about `3.59` in beta units.  Perturbative
 beta-running is explicitly insufficient in the current ledger. This is the
-constructive-QFT scale-transfer problem in the Balaban programme.
+constructive-QFT scale-transfer problem in the Balaban programme, followed by
+the OS/Wightman reconstruction problem.  The older `C0 = 2` line and the
+direct `T7A` count are retained as diagnostics; neither is the live standard
+KP theorem.
 
 Honest difficulty: very hard. This is the core Yang-Mills Clay work, not a
 repo-local bookkeeping problem.
+
+The current programme-frontier receipt consumes the IR/cusp equivalence
+surfaces as candidate reductions. That does not close YM: it identifies the
+remaining load-bearing target as the flat Euclidean 4D SU(N) mass-gap problem
+plus the non-perturbative Balaban and OS/Wightman construction package.
 
 ## Navier-Stokes
 
@@ -68,7 +117,7 @@ cannot close NS without importing regularity.
 
 Path B is the Clay route:
 
-- prime-scale Bernstein inequality with `C0 = sqrt(p)`
+- prime-scale Bernstein inequality with `C0 = sqrt(p)` (recorded)
 - Leray `L2` band bound
 - dissipation cutoff
 - upward Bernoulli cascade
@@ -79,18 +128,25 @@ Path B is the Clay route:
 The all-data density step remains conditional: uniform `H^{11/8}` bounds
 independent of projection depth and the compactness passage must be proved.
 
+So Bernstein is no longer the live NS gap. The live NS gap is proving the
+small-viscosity `H^{11/8}` Bernoulli-band estimate without smuggling in global
+regularity, then passing from carrier-structured data to all smooth data.
+
 Honest difficulty: Path A is achievable; Path B is years-level PDE work and
 may be structurally as hard as the full Clay problem.
 
 ## Recommended Sequencing
 
 1. Publish the NS `H^{-1/2}` obstruction theorem.
-2. Compute the physical SSP/Hecke 3D taper over the nested 15SSP coordinate
+2. Attack the small-viscosity `H^{11/8}` Bernoulli-band estimate using the
+   recorded `C0=sqrt(p)` Bernstein constant.
+3. Compute the physical SSP/Hecke 3D taper over the nested 15SSP coordinate
    grammar and decide whether
    `sigma_SSP < 0.3025` holds.
-3. Use the ledger as a collaboration specification for the Balaban programme.
-4. Attempt the NS `H^{11/8}` density route only after the embedding quality is
-   settled.
+4. Use the ledger as a collaboration specification for the Balaban programme:
+   bridge physical `beta ~= 6` to the active KP margin (`9.59`, `10.11`, or
+   safe `13.64`), then prove OS/Wightman.
+5. Work CKM higher-order Vub/beta correction separately from Clay promotion.
 
 ## Promotion Boundary
 

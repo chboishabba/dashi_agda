@@ -1,5 +1,452 @@
 # FOR TODO GO TO '# TODO'
 
+## Clay Requisite Kernel Lemmas
+
+- [x] Add `ClayPromotionFlagFlipLemmaReceipt` and
+  `Docs/ClayPromotionFlagFlipLemmas.md`; filter the Sprint 3 shortest path to
+  only flag-flipping theorem targets, assign six workers to
+  `SSPFrameCarrierEqualsOKTensorZ3`, conditional Gate3 frame/Mosco,
+  `CommutatorLipschitzControlWithoutRegularity`, NS equivalence/counterfamily
+  audit, `YMFortyThreeStepBalabanUniformity` plus leakage, and YM
+  continuum/OS/gap governance.
+- [x] Wire `ClayPromotionFlagFlipLemmaReceipt` through
+  `DASHI/Everything.agda`.
+- [x] Add `ClaySprintThreeShortestPathReceipt` and
+  `Docs/ClaySprintThreeShortestPath.md`; consume the Sprint 3 Gate3, NS, YM,
+  and work-order receipts into the shortest current Clay route with six
+  concrete best-effort worker attempts, first blockers
+  `SSPCarrierEqualsOKHeckeModel`,
+  `CommutatorLipschitzControlWithoutRegularity`, and
+  `YMFortyThreeStepBalabanUniformity`, and all promotion flags false.
+- [x] Wire `ClaySprintThreeShortestPathReceipt` through
+  `DASHI/Everything.agda`.
+- [x] Add `ClayThreeWorkerImplementationAssignmentReceipt` and
+  `Docs/ClayThreeWorkerImplementationAssignment.md`; assign one worker each:
+  W1 Gate3 `SSPCarrierEqualsHeckeModel`, W2 NS HighLow audit/counterfamily,
+  and W3 YM 42-step Balaban target.
+- [x] Wire `ClayThreeWorkerImplementationAssignmentReceipt` through
+  `DASHI/Everything.agda`.
+- [x] Add `ClaySprintThreeSixWorkerAssignmentReceipt` and
+  `Docs/ClaySprintThreeSixWorkerAssignment.md`; assign W1 Gate3
+  `SSPCarrierEqualsOKHeckeModel`, W2 conditional Gate3 frame/Mosco consumer,
+  W3 NS `CommutatorLipschitzControl`, W4 NS HighLow counterfamily/audit,
+  W5 YM 42--43 step Balaban uniformity, and W6 governance.
+- [x] Wire `ClaySprintThreeSixWorkerAssignmentReceipt` through
+  `DASHI/Everything.agda`.
+- [x] Add `ClaySprintThreeImplementationWorkOrderReceipt` and
+  `Docs/ClaySprintThreeImplementationWorkOrders.md`; give all six workers
+  concrete deliverables, acceptance criteria, and kill criteria while keeping
+  `hardBridgeCompletedHere = false`.
+- [x] Wire `ClaySprintThreeImplementationWorkOrderReceipt` through
+  `DASHI/Everything.agda`.
+- [x] Add `PhysicalSSPOKHeckeModelClosureReceipt` and
+  `Docs/PhysicalSSPOKHeckeModelClosure.md`; record the sharpened model-side
+  `O_K` values, including `S_3D(sigma_OK)=0.190298810`, while leaving
+  `SSPCarrierEqualsOKHeckeModel` open.
+- [x] Add `NSHighLowCommutatorObstructionReceipt` and
+  `Docs/NSHighLowCommutatorObstruction.md`; record transport cancellation,
+  HighLow commutator reduction, the `K^(-1/2)` retraction, and
+  `CommutatorLipschitzControlWithoutRegularity` as the live obstruction.
+- [x] Add `YMFortyThreeStepBalabanTargetReceipt` and
+  `Docs/YMFortyThreeStepBalabanTarget.md`; record the exact strict seed,
+  robust `beta_eff>=13.7`, and the `(k : Fin 43) -> rho k < 1` target.
+- [x] Wire the three sharpened Commit 1/2/3 receipts through
+  `DASHI/Everything.agda`.
+- [x] Add `PhysicalSSPHeckeModelClosureReceipt` and
+  `Docs/PhysicalSSPHeckeModelClosure.md`; record the corrected
+  `O_K=Z[(1+sqrt(-7))/2]` model with 118 atoms at norm `<=49`,
+  `sigma_OK=0.246770`, `S_3D(sigma_OK)=0.190000`, Hecke/BT identity Gram
+  support, and the live `SSPCarrierEqualsOKHeckeModel` bridge.
+- [x] Add `NSHighLowFluxControlAuditReceipt` and
+  `Docs/NSHighLowFluxControlAudit.md`; keep HighHigh absorbed, retract the
+  HighLow `K^(-1/2)` estimate, record exact transport cancellation and the
+  pure commutator reduction, and name `CommutatorLipschitzControl` as the live
+  obstruction.
+- [x] Add `YMFortyTwoStepBalabanTargetReceipt` and
+  `Docs/YMFortyTwoStepBalabanTarget.md`; record the exact strict seed target,
+  robust `beta_eff>=13.7` sample, and the 42--43 step non-perturbative Balaban
+  control problem.
+- [x] Wire the three second-iteration worker receipts through
+  `DASHI/Everything.agda`.
+- [x] Add `ClayNumericPrecisionCorrectionReceipt` and
+  `Docs/ClayNumericPrecisionCorrection.md`; record `9.593637`,
+  `10.13086`, `13.631603`, and one-density Gate3 PAWOTG values
+  `0.080284628`, `0.110976368`, `0.505208`.
+- [x] Wire `ClayNumericPrecisionCorrectionReceipt` through
+  `DASHI/Everything.agda`.
+- [x] Add `ClayKPCorrectedSeriesIdentityReceipt` and
+  `Docs/ClayKPCorrectedSeriesIdentity.md`; record
+  `sum d*p^(d-1)*q^d = q/(1-p*q)^2`, reject the legacy
+  `p*q/(1-p*q)^2` route, and keep the formula at KP-convergence scope only.
+- [x] Wire `ClayKPCorrectedSeriesIdentityReceipt` through
+  `DASHI/Everything.agda`.
+- [x] Correct the live BT-tree coarse ledger from `10.11`/gap `4.11` to
+  `10.13`/gap `4.13`; keep connected-animal and strict Balaban seed statements
+  in higher precision/exact-inequality form.
+- [x] Add `ClaySolvedLedgerLemmas` and `Docs/ClaySolvedLedgerLemmas.md` for
+  the honestly inhabitable threshold, gap, route-status, T7A-demotion,
+  live-target, and false-promotion facts.
+- [x] Wire `ClaySolvedLedgerLemmas` through `DASHI/Everything.agda`.
+- [x] Add `PhysicalSSPSpreadBoundAttemptReceipt` and
+  `Docs/PhysicalSSPSpreadBoundAttempt.md`; first missing object is
+  `heckeToArchimedeanCoordinateMap`, next computation is sigma on the explicit
+  3D Hecke image against `0.302511`.
+- [x] Record the Gate3 BT-metric model closure: Gram identity,
+  `A_infty = 1`, `mu_N = 0`, `S_1D(p=3,sigma=0.289)=0.080940589`, and
+  `S_3D(p=3,sigma_digit)=0.722893945`, while keeping physical 3D embedding
+  identification open.
+- [x] Add `NSCumulativeTailDominanceObstructionReceipt` and
+  `Docs/NSCumulativeTailDominanceObstruction.md`; split `HighHigh` from
+  `HighLow`/`LowHigh`, prohibit global-regularity inputs, and require a
+  counterfamily search if cumulative dominance fails.
+- [x] Record NS HighHigh as the absorptive partial result and name
+  `HighLowFluxControlWithoutRegularity` as the live non-circular Clay lemma.
+- [x] Add `YMBalabanMarginSplitReceipt` and
+  `Docs/YMBalabanMarginSplit.md`; record `9.593637` as KP convergence only
+  and `beta*c_min-a>log(2p)` / robust sample `13.7` as the strict Balaban
+  seed.
+- [x] Wire the three execution receipts through `DASHI/Everything.agda`.
+- [x] Add `Docs/ClayRequisiteKernelLemmas.md` with the shortest current YM,
+  NS, and Gate3 requisite lemma lists.
+- [x] Add `ClayRequisiteKernelLemmaReceipt` consuming the kernel,
+  optimal-kernel, and proof-campaign DAG receipts while preserving false
+  promotions.
+- [x] Record the updated proved inputs:
+  `ymT7CoefficientPositive`, `ymConnectedAnimalBound`,
+  `ymBetaStarConnected=9.59`, `ymBetaStarT7ADirect=16.56`,
+  numerical NS shell-flux identity, and synthetic dissipation dominance.
+- [x] Record the corrected open YM lemmas:
+  `T7APerPolymerActivitySuppression` and
+  `BalabanConnectedAnimalBridge`, with `3.593637` reserved for KP convergence
+  and the exact strict inequality reserved for the Balaban seed.
+- [x] Wire `ClayRequisiteKernelLemmaReceipt` through `DASHI/Everything.agda`.
+- [ ] `W1-YM-KP-Activity`: prove or kill
+  `|z(Gamma)| <= (T7A(d)/(d*p^(d-1))) * exp(-beta*c_min*d)`.
+- [ ] `W3-YM-Balaban-RG`: prove or kill the Balaban bridge from
+  `beta_phys ~= 6` to the strict Balaban seed
+  `beta_eff * c_min - a > log(2p)`; keep `beta_eff > 9.593637` as KP
+  convergence only.
+  For robust numeric statements prefer the exact inequality
+  `beta*c_min - a > log(2p)` or a sample such as `beta_eff >= 13.7`.
+  Current finite target: prove or kill 42 uniform non-perturbative block-spin
+  steps with summable leakage.
+- [ ] `W3-YM-Flat-OS-Gap`: prove or kill Shimura-to-flat universality,
+  OS/Wightman reconstruction, uniform continuum mass-gap survival, and
+  nontrivial 4D SU3 YM.
+- [ ] `W2-NS-Tail`: prove or kill continuous-flow projection transport,
+  cumulative tail dissipation dominance, danger-shell maximum principle,
+  non-circular `K*` drift, continuation, and approximation stability.
+  Current audit target: prove `CommutatorLipschitzControl` without hidden
+  `L^infinity`/Serrin/BKM/global `H^(11/8)` input, or produce a
+  Leray-energy-bounded HighLow counterfamily.  The old `K^(-1/2)` suppression
+  claim is retracted.
+- [ ] `W1-Gate3-Support`: prove or kill physical 3D SSP embedding/spread,
+  uniform frame lower bound, and Gate3 Mosco/no-pollution transfer while
+  preserving the `5+9+1` CM / semantic `7+7+1` separation.
+  Current bridge target: prove `SSPCarrierEqualsOKHeckeModel`.
+- [ ] `W6-Governance`: keep threshold normalisation, source maps, kill-tests,
+  finite-computation boundaries, and all promotion flags fail-closed.
+
+## Clay Own-Brain Completion
+
+- [x] Add `Docs/ClayOwnBrainCompletion.md` to separate locally complete ledger
+  work from external analytic theorem targets.
+- [x] Add `ClayOwnBrainCompletionReceipt` consuming the optimal-kernel and
+  requisite-kernel receipts.
+- [x] Record the locally complete items: connected-animal formula correction,
+  four-gap separation, T7A demotion, 30-lemma kernel freeze, six worker kill
+  criteria, and promotion-flag audit.
+- [x] Wire `ClayOwnBrainCompletionReceipt` through `DASHI/Everything.agda`.
+- [ ] Continue only by attacking external blockers: Balaban transfer,
+  Shimura-to-Euclidean universality, OS/Wightman/mass-gap survival, NS
+  cumulative tail dominance, projection-defect absorption, all-smooth-data
+  stability, and Gate3 physical 3D spread/frame bounds.
+
+## Concrete Clay Blocker Attempts
+
+- [x] Add `Docs/PhysicalSSPSpreadBoundAttempt.md` for the Gate3 worker:
+  consume digit-model taper support, list physical 3D SSP spread sublemmas,
+  and keep the first missing step as the actual 3D Hecke embedding map.
+- [x] Add `Docs/NSCumulativeTailDominanceObstruction.md` for the NS worker:
+  consume fixed-K LP identity and conditional danger-shell support, then
+  reject any proof importing Serrin/BKM/global regularity/target `H^{11/8}`.
+- [x] Add `Docs/YMBalabanMarginSplit.md` for the YM worker: keep `9.59`,
+  `10.11`, `13.64`, and `16.56` as distinct route margins, with `13.64`
+  as the active safe Balaban seed margin.
+- [x] Add `PhysicalSSPSpreadBoundAttemptReceipt`,
+  `NSCumulativeTailDominanceObstructionReceipt`, and
+  `YMBalabanMarginSplitReceipt` as concrete fail-closed receipts.
+- [x] Wire the three concrete blocker-attempt receipts through
+  `DASHI/Everything.agda`.
+- [x] Validate the three concrete blocker-attempt receipts standalone.
+- [ ] Add concrete Agda receipts for all three blocker attempts and wire them
+  through `DASHI/Everything.agda`.
+
+## Clay Proof Campaign Dependency DAG
+
+- [x] Add `Docs/ClayProofCampaignDependencyDAG.md` with the expanded
+  dependency graph and the six-worker round.
+- [x] Record the corrected Gate3 CM arithmetic guard in the DAG:
+  `Q(sqrt(-7))` over SSP primes is `5+9+1`, semantic atom/frame grammar is
+  `7+7+1`, and `p71` is split-not-inert.
+- [x] Add `ClayProofCampaignDependencyDAGReceipt` with constructorless
+  theorem targets for the new YM, NS, Gate3, W4, GR, governance, moonshine,
+  empirical, pressure/depth, and AQFT support nodes.
+- [x] Wire `ClayProofCampaignDependencyDAGReceipt` through
+  `DASHI/Everything.agda`.
+- [ ] `W1-YM-Activity`: prove or kill
+  `T7CoefficientAbsoluteEnvelope`, `T7TwiningPhaseCoherence`,
+  `T7ActivityIdentification`, `PolymerDepthSizeEquivalence`, and
+  `DASHIPolymerTreeGraphBound`.
+- [ ] `W2-YM-Balaban`: prove or kill local cluster compatibility, Balaban
+  reblocking, irrelevant-mode contraction, relevant-mode stability, effective
+  beta monotonicity, and lattice-refinement uniformity.
+- [ ] `W3-YM-OS-Geometry`: prove or kill reflection positivity under blocking,
+  BRST physical positivity, infinite-volume tightness, mass-gap preservation,
+  continuum nontriviality, and the non-flat/Hodge/IBP/YM-equation stack.
+- [ ] `W4-NS`: prove or kill H-minus-half obstruction universality, shell flux
+  identity, danger-shell dissipation dominance, non-circular `K*` drift,
+  `H^{11/8}` band pressure control, continuation, and all-smooth density.
+- [ ] `W5-Gate3-W4-GR`: prove or kill CM/grammar separation enforcement,
+  cross-sector overlap, 3D sector overlap, phase frame improvement, uniform
+  frame factors, physical SSP spread, Candidate256 calibration, Wald
+  selection, and Schwarzschild weak-field match.
+- [ ] `W6-Governance`: maintain the non-promotion invariant, finite-computation
+  theorem boundary, external authority no-fabrication, Ogg correction,
+  Rademacher/activity guard, cancellation phase-lock guard, and empirical
+  no-Clay guard.
+
+## Clay Optimal Kernel Lemmas
+
+- [x] Add `Docs/ClayOptimalKernelLemmas.md` to record the corrected 12 YM +
+  13 NS + 5 Gate3 kernel map and the six-worker assignment.
+- [x] Add `ClayOptimalKernelLemmaReceipt` with constructorless missing-target
+  fields for the highest-value YM, NS, and Gate3 kernel obligations.
+- [x] Record all live YM KP thresholds separately: connected-animal
+  `9.593637`, p=7 BT-tree `10.13`, exact strict seed
+  `beta*c_min-a>log(2p)` with robust sample `13.7`, and direct T7A `16.56`.
+- [x] Correct the connected-animal KP closed form to
+  `q/(1-p*q)^2`, not `p*q/(1-p*q)^2`, while preserving the `9.59`
+  threshold.
+- [x] Wire `ClayOptimalKernelLemmaReceipt` through `DASHI/Everything.agda`.
+- [ ] `W1-YM-Counting-Activity-Area`: close or kill
+  `T7APerPolymerActivitySuppression` and `CarrierWilsonAreaLaw`.
+- [ ] `W2-YM-Balaban-RG`: prove `NonperturbativeBalabanScaleTransfer`, naming
+  whether the closed margin is `9.59`, `10.11`, or safe `13.64`.
+- [ ] `W3-YM-Shimura-OS-Gap`: prove the Shimura/hyperbolic-to-Euclidean
+  universality bridge, self-adjoint Hamiltonian, continuum gap survival, and
+  OS/Wightman reconstruction.
+- [ ] `W4-NS-Tail-Projection`: prove cumulative tail dissipation dominance
+  and NS-to-carrier projection/commutator absorption before `H^{11/8}`.
+- [ ] `W5-Gate3-W4-GR`: prove physical 3D SSP spread, uniform frame lower
+  bound, and Mosco/no-pollution support transfer.
+- [ ] `W6-Governance`: maintain threshold normalisation, source maps,
+  kill-tests, and promotion-flag audits.
+
+## Clay Optimal Path Requisite Lemmas
+
+- [x] Add `Docs/ClayOptimalPathRequisiteLemmas.md` to rank the current Clay
+  work order: YM first, NS split second, Gate3/W4/gravity as separate physics
+  infrastructure.
+- [x] Add `ClayOptimalPathRequisiteLemmaReceipt` with constructorless
+  `MissingTheoremTarget` fields for the named lemmas and six parallel worker
+  assignments.
+- [x] Wire `ClayOptimalPathRequisiteLemmaReceipt` through
+  `DASHI/Everything.agda`.
+- [x] Validate the optimal-path receipt and aggregate import.
+- [ ] `W1-YM-Activity`: keep the connected-animal KP bound reproducible and
+  prove/refute the actual Wilson-polymer T7A per-polymer activity-suppression
+  lemma; keep connected-vs-T7A and small-depth kill-tests close to this lane.
+- [ ] `W2-YM-Balaban`: prove `CarrierKPToBalabanContraction`,
+  `PhysicalBetaToEffectiveBetaBridge`, and the uniform continuum mass-gap
+  transfer.  The proof must record whether it closes the connected-animal
+  `9.593637` threshold, the p=7 BT-tree `10.13` threshold, or the exact
+  strict seed inequality `beta*c_min-a>log(2p)`.
+- [ ] `W3-YM-OS-Geometry`: prove gauge-fixed OS positivity, ghost-sector
+  control, OS/Wightman reconstruction, and the non-flat SFGC field-equation
+  prerequisites.
+- [ ] `W4-NS`: publish `NSHMinusHalfObstructionTheorem`; separately attack
+  `H^{11/8}` Bernoulli-band global bound, non-circular `K*` drift,
+  existence/stability before uniqueness, and carrier-to-all-smooth-data.
+- [ ] `W5-Gate3-W4-GR`: prove physical SSP/Hecke spread, frame uniform lower
+  bounds, Mosco/no-pollution/mass-shell transfer, Candidate256 physical
+  calibration, Wald stress-energy selection, and Schwarzschild weak-field
+  match.
+- [ ] `W6-Governance`: maintain source-map, kill-test records, promotion-flag
+  audit, TODO/changelog/status/context alignment.
+
+## Clay Hard-Lemma Reduction
+
+- [x] Add `Docs/ClayKernelReduction.md` to compress the Clay programme into
+  three kernel lemmas plus finite kill-tests: YM route fork, NS danger-shell
+  maximum principle, and Gate3 frame-symbol positivity.
+- [x] Correct `ClayKernelReductionReceipt` after the CSV audit: direct `T7A`
+  KP is proved at `beta* ~= 16.56` but is worse than connected-animal
+  counting; the standard computable YM route is now connected-animal
+  `beta* ~= 9.59`, with Balaban gap `3.59`.
+- [x] Record the shared `ScalePressureSystem` abstraction as a target only:
+  pressure contraction plus absorption/creation dominance and summable
+  leakage; no lane promotion follows from the abstraction receipt.
+- [x] Record six worker kill-tests for the next Clay-facing iteration:
+  connected-vs-T7A KP, small-depth activity suppression, danger-shell
+  derivative, 3D overlap Gram eigenvalues, shared pressure audit, and
+  fail-closed governance.
+- [x] Correct the YM entropy target after the CSV audit: connected-animal
+  counting gives the standard computable threshold `beta* ~= 9.59` and gap
+  `3.59` from `beta_phys ~= 6`; direct `T7A` is proved at `beta* ~= 16.56`
+  but is worse as counting; `C0 = 2` is heuristic only.
+- [x] Correct Gate3 phase-completeness diagnostics: 1D position-orthogonal
+  toy Gram models cannot distinguish phase-blind from phase-complete sectors;
+  the proof target lives in the physical 3D Archimedean overlap model.
+- [x] Record the NS attempt as confirming the Path A obstruction reading for
+  spectra with persistent inertial-range energy, without promoting Clay.
+- [x] Add `Docs/ClayHardLemmaReduction.md` to record the corrected sprint
+  posture: use the analytic ledger to isolate hard lemmas, not to claim Clay
+  closure.
+- [x] Add `Docs/Gate3PhaseCompletenessReduction.md` to record MirrorB7 /
+  phase-completeness as a necessary-condition reduction, not a Gate3 proof.
+- [x] Add `Gate3PhaseCompletenessReductionReceipt`.
+- [x] Add `ClayHardLemmaReductionReceipt`.
+- [x] Wire the new receipts through `DASHI/Everything.agda`.
+- [x] Validate the new receipts and `DASHI/Everything.agda`.
+- [ ] `Paper A / YM`: construct the Balaban bridge from physical
+  `beta ~= 6` to the active KP threshold, recording `9.59`, `10.11`, and
+  safe `13.64` as distinct margins; separately prove or refute T7A
+  per-polymer activity suppression as a possible improvement route.
+- [ ] `Paper B / NS`: prepare the `H^{-1/2}` obstruction theorem as a
+  negative result, with no Clay promotion.
+- [ ] `Paper C / Gate3`: prove phase-complete frame factors
+  `A_split > 0`, `A_inert > 0`, `A_71 > 0`, then the uniform cutoff lower
+  bound and Mosco/no-pollution lift.
+- [ ] `Paper D / gravity`: prove or refute
+  `sigma_physical_SSP < 0.3025113508228815`, keeping W4 mass calibration and
+  Schwarzschild weak-field match separate.
+- [ ] `W-YM-Count`: keep the connected-animal, naive BT, optimal-min, and
+  direct `T7A` KP threshold comparison reproducible from the CSV artifacts.
+- [ ] `W-YM-Activity`: prove or refute the small-depth per-polymer suppression
+  lemma
+  `|z(Gamma)| <= (T7A(d)/(d*p^(d-1))) * exp(-beta*c_min*d)`.
+- [ ] `W-NS-Danger`: prove or refute the non-circular
+  `DangerShellMaximumPrinciple` by checking whether first-danger-shell
+  `dP_K/dt` can become positive in inertial-range synthetic shell models.
+- [ ] `W-G3-Gram`: build the smallest physical 3D overlapping phase-sector
+  dictionary and compare phase-blind versus phase-complete Gram eigenvalues.
+- [ ] `W-Pressure`: formalize the shared scale-pressure kernel and audit
+  which lane already has usable absorption/creation estimates.
+- [ ] `W-Gov`: keep Clay, YM, NS, Gate3, gravity, W4, and terminal promotions
+  false until the relevant kernel lemma is inhabited.
+
+## YM T7 Rademacher Activity Audit
+
+- [x] Add documentation for the T7 coefficient audit and corrected entropy
+  regimes in `Docs/YMT7RademacherActivityAudit.md`.
+- [x] Add documentation for the Monster/Ogg indexing correction in
+  `Docs/MonsterOggPrimeCorrection.md`.
+- [x] Add `MonsterOggPrimeCorrectionReceipt`.
+- [x] Add `YMT7RademacherActivityIdentificationReceipt`.
+- [x] Correct `MonsterIrrepCarrierDecompositionReceipt` so `194` Monster
+  classes and `15` Ogg/supersingular primes are recorded as different
+  indexing sets, not a `15` genus-zero / `179` genus-positive partition.
+- [x] Record the audited ratios:
+  `51/196884`, `204/21493760`, and `681/864299970`, all below the sampled
+  Rademacher suppression envelope.
+- [x] Record the corrected KP regimes:
+  raw Monster `C0 ~= 287000 -> beta* ~= 64.9`; T7 envelope
+  `C0 ~= 115.543 -> beta* ~= 32.60`; old `C0 = 2` heuristic
+  `-> beta* ~= 15.9`; direct `T7A` coefficient KP sum
+  `-> beta* ~= 16.56`; connected-animal counting
+  `-> beta* ~= 9.59`.
+- [x] Replace the live `C0 = 2` theorem target with the corrected statement:
+  connected-animal counting is the standard computable KP count, and T7A can
+  help only through a per-polymer activity-suppression theorem.
+- [ ] If this audit becomes publication-facing, replace the parts-per-billion
+  and milli/hundredth encodings with a checked rational/real table witness.
+
+## Experimental Pressure Frontier Receipt
+
+- [x] Add `ExperimentalPressureFrontierReceipt`.
+- [x] Record `Xi_cc+` as QCD binding-surface pressure only:
+  `mass_MeV = 3620`, `events ~= 915`, `sigma >= 7`, with YM Clay and W4
+  calibration still false.
+- [x] Record one-dimensional anyons as a BT/MirrorB7 exchange-phase analogy
+  only, with Gate3 spectral gap and SSP 3D embedding obligations still false.
+- [x] Record the T7 depth-3 suppression heuristic
+  `exp(-4.47) ~= 0.011` through the corrected Rademacher/direct audit:
+  direct `T7A` KP threshold is `beta* ~= 16.56`, but connected-animal
+  counting is the standard route at `beta* ~= 9.59`; `C0 = 2` is heuristic
+  only.
+- [ ] If this pressure receipt becomes publication-facing, replace the
+  centinat/per-thousand numeric encoding with a checked real-number model or
+  external table witness.
+
+## Mixed Particle Claim Packet Receipt
+
+- [x] Add `MixedParticleClaimPacketReceipt`.
+- [x] Split `Xi_cc+` 2026 LHCb, 2022 LHCb exotic-hadron cluster, and 2026
+  one-dimensional anyon theory into separate receipts.
+- [x] Record binding grammar versus exchange grammar:
+  LHCb hadrons stay in QCD spectroscopy / strong-force binding; anyons stay in
+  low-dimensional exchange statistics.
+- [x] Reject unsupported promotions: new force, Standard Model rewrite,
+  elementary-particle promotion from a hadron state, "three particles today"
+  for the 2026 LHCb result, and LHC anyon discovery.
+- [ ] If this lane becomes publication-facing, add immutable DOI/arXiv/CDS
+  receipt fields rather than source-URI strings.
+
+## Monster Irrep / T7 Quotient Receipt
+
+- [x] Add `MonsterIrrepCarrierDecompositionReceipt`.
+- [x] Record Monster `194` irreps/conjugacy classes and the `15 + 179`
+  carrier quotient bookkeeping.
+- [x] Record T7 compression data: order `7`, coefficient `204 = 1 + 203`,
+  and growth `c7(d) ~ exp(4*pi*sqrt(d)/sqrt(7))` versus raw `j` growth.
+- [x] Preserve correction guards: `15` SSP primes are the Ogg/supersingular
+  prime support, not the only genus-zero McKay-Thompson classes; `179`
+  non-carrier classes are quotient-tail bookkeeping, not a genus-positive
+  theorem; `7+7+1` is semantic atom grammar, not literal CM split/inert.
+- [ ] Prove the T7 coefficient model supplies per-polymer activity suppression
+  rather than replacing the standard connected-animal KP count.
+- [ ] Prove the phase-complete Gate3 frame lower bound from the complex
+  character-resolution model.
+
+## Parallel Worker Assignments
+
+- [ ] `W-G3`: prove or refute the physical SSP/Hecke 3D taper calibration
+  `sigma_SSP < 0.3025113508228815`; W4 mass/source calibration remains a
+  separate external-anchor blocker.
+- [ ] `W-Frame`: prove `A_split > 0`, `A_inert > 0`, `A_71 > 0`, then lift the
+  phase-complete finite frame evidence to a uniform cutoff lower bound.
+- [ ] `W-YM`: construct the non-perturbative Balaban block-spin bridge from
+  physical `beta ~= 6` to the active KP margin (`9.59`, `10.11`, or safe
+  `13.64`), then supply OS reflection positivity, infinite-volume, and
+  Wightman reconstruction data.
+- [ ] `W-NS-A`: prepare the `H^{-1/2}` obstruction result as a publishable
+  theorem surface, preserving the recorded `nu^{-0.44}` divergence evidence
+  as obstruction evidence only.
+- [ ] `W-NS-B`: prove the non-circular small-viscosity `H^{11/8}`
+  Bernoulli-band estimate and `K*` drift condition without importing global
+  regularity.
+
+Arithmetic guard for all workers: `7+7+1` is the semantic atom/frame grammar;
+the literal `Q(sqrt(-7))` CM table remains `5 split + 9 inert + 1 ramified`,
+with `p71` split-not-inert and terminal SSP sign/carry role.
+
+## Current Frontier Correction
+
+- [x] Consume `NSBernsteinConstantExplicitReceipt`: prime-scale LP Bernstein
+  now records `C0=sqrt(p)`.
+- [ ] Prove the small-viscosity `H^{11/8}` Bernoulli-band bound without
+  circular regularity input.
+- [ ] Extend carrier-structured `H^{11/8}` control to all smooth initial data
+  by density/compactness with projection-depth-independent bounds.
+- [x] Consume YM IR/cusp candidate equivalence surfaces.
+- [ ] Prove the flat Euclidean 4D SU(N) Yang-Mills mass gap plus the
+  non-perturbative Balaban and OS/Wightman package.
+- [x] Consume CKM alpha/beta carrier arithmetic receipts.
+- [ ] Derive the first higher-order Vub/beta unitarity correction.
+
+All Clay, terminal, and physical CKM promotions remain false.
+
 While the repository precisely isolates and stages the exact mathematical requirements for these four questions, the codebase itself does not computationally or algebraically solve them. Instead, the DASHI architecture acts as an airtight ledger, recording these exact analytic frontiers as `failClosed` obligations and `false` promotion flags.
 
 Here is the exact state of these four open questions within the current codebase:
@@ -158,7 +605,7 @@ So the threshold is:
 βc_{\min} > a + \log p + \log C_0.
 ]
 
-If (C_0=1), this gives the normalised (a+\log 7\approx2.446). With physical normalisation (c_{\min}\approx0.242), this gives the documented (\approx10.13). If you use the stricter (2p) entropy count, you get the (\approx13.64) absorption threshold.
+If (C_0=1), this gives the normalised (a+\log 7\approx2.446). With physical normalisation (c_{\min}\approx0.242), this gives the documented (\approx10.11). If you use the stricter absorption convention, keep the safe (\approx13.64) threshold separate.
 
 So E1/E2 should prove **counting + action gap ⇒ KP bound**, not rely on (e^{-\beta S}-1).
 
@@ -861,8 +1308,9 @@ Gate3/YM corrected computation pass `2026-06-02`:
 - [x] Add and wire
   `DASHI/Physics/Closure/YMMonsterQuotientEvidenceReceipt.agda` with the
   McKay-Thompson `T_7` quotient evidence: raw Monster `c2=21493760`,
-  `T_7(q^2)=204`, compression factor about `105000`, conservative
-  `C0_eff~=2`, and `beta_abs~=15.836`.
+  `T_7(q^2)=204`, compression factor about `105000`.  The 2026-06-03 audit
+  supersedes the old `C0_eff~=2` reading: T7 envelope `C0~=115.543`,
+  `beta*~=32.60`, with `C0=2` still an open activity target.
 - [ ] Prove that the actual SSP/CM/Hecke embedding has the required uniform
   taper; prove that `T_7` coefficients really bound the actual YM polymer
   orbit entropy.  Until then these are evidence/reduction surfaces only.

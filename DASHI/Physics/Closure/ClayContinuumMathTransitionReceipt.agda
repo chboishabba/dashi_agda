@@ -50,9 +50,11 @@ import DASHI.Physics.Closure.YMBalabanPhysicalBetaBridgeTargetReceipt
 --     depth-many nested 15SSP blocks.  That symmetry-complexity series is the
 --     coordinate reason the macroscopic Archimedean density is p^(3d).
 --
---   * Yang-Mills: prove non-perturbative Balaban block-spin transfer from
---     physical beta ~= 6 into beta_eff > 15.84 after T_7 entropy compression,
---     then construct the OS/Wightman continuum package.
+--   * Yang-Mills: the direct T7A coefficient KP sum is now the live entropy
+--     object, replacing the C0 = 2 shorthand.  Its computed threshold is
+--     beta* ~= 16.58, with gap ~= 10.58 from physical beta ~= 6.  Prove the
+--     non-perturbative Balaban block-spin transfer to that threshold, then
+--     construct the OS/Wightman continuum package.
 --
 --   * Navier-Stokes: the H^{-1/2} localized dual-norm route is recorded as
 --     an obstruction and is publishable as Path A.  The Clay route, Path B,
@@ -194,7 +196,7 @@ pawotg3DSeriesAtDigitExact =
 ymT7CompressedBetaAbs :
   String
 ymT7CompressedBetaAbs =
-  "15.84"
+  "16.58 from the direct T7A coefficient KP generating sum; C0 = 2 is heuristic only"
 
 ymPhysicalBeta :
   String
@@ -204,7 +206,7 @@ ymPhysicalBeta =
 ymT7CompressedBetaGap :
   String
 ymT7CompressedBetaGap =
-  "9.84"
+  "10.58 from beta_physical ~= 6 to the direct T7A KP threshold beta* ~= 16.58"
 
 nsHminusDivergenceStatus :
   String
@@ -224,7 +226,7 @@ gate3ContinuumSignature =
 ymContinuumSignature :
   String
 ymContinuumSignature =
-  "proveNonperturbativeBalabanScaleTransfer : beta_physical ~= 6 -> T7-compressed beta_abs ~= 15.84 -> Balaban block-spin RG -> beta_eff > beta_abs -> rho decreases, then OS positivity, infinite-volume limit, and Wightman W0-W5"
+  "proveDirectT7ActivityThenBalabanScaleTransfer : beta_physical ~= 6 -> direct T7A KP threshold beta* ~= 16.58 via non-perturbative Balaban block-spin RG; then OS positivity, infinite-volume limit, and Wightman W0-W5"
 
 nsContinuumSignature :
   String
@@ -234,7 +236,7 @@ nsContinuumSignature =
 transitionSummary :
   String
 transitionSummary =
-  "The repository is a precision fault-localisation ledger.  After scale-graph algebra, Clay-facing promotion requires three actual proofs: physical SSP/Hecke 3D taper sigma_SSP < 0.3025113508228815 over the nested 15SSP coordinate grammar, YM non-perturbative Balaban beta bridge from 6 to >15.84 plus OS/Wightman, and NS Path B H^{11/8} Bernoulli-band plus density; Path A is an obstruction paper, not Clay closure."
+  "The repository is a precision fault-localisation ledger.  After scale-graph algebra, Clay-facing promotion requires actual proofs: physical SSP/Hecke 3D taper sigma_SSP < 0.3025113508228815 over the nested 15SSP coordinate grammar, YM direct T7A KP activity threshold beta* ~= 16.58 plus non-perturbative Balaban and OS/Wightman, and NS Path B H^{11/8} Bernoulli-band plus density; Path A is an obstruction paper, not Clay closure."
 
 sspNestedCoordinateSignature :
   String

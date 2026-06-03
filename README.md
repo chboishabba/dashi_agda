@@ -78,6 +78,113 @@ Use one of these reader tracks first:
     mass/source calibration, and no gravity prediction is promoted.
 - Clay continuum mathematics transition:
   `DASHI/Physics/Closure/ClayContinuumMathTransitionReceipt.agda`
+- Clay optimal kernel lemma map:
+  `DASHI/Physics/Closure/ClayOptimalKernelLemmaReceipt.agda`
+  - Records the corrected 12 YM + 13 NS + 5 Gate3 support kernel list and the
+    six-worker allocation.  It keeps the T7A correction explicit:
+    connected-animal counting is primary at `beta* ~= 9.593637` with closed form
+    `q/(1-p*q)^2`, T7A direct counting is demoted at `beta* ~= 16.56`, and
+    stricter Balaban/KP transfer statements must also track the `10.13` BT-tree
+    margin and exact strict seed `beta*c_min-a>log(2p)` with robust sample
+    `beta_eff>=13.7`.  All
+    Clay, Gate3, W4, gravity, YM, NS, Schwarzschild, and terminal promotions
+    remain false.
+- Clay requisite kernel lemma receipt:
+  `DASHI/Physics/Closure/ClayRequisiteKernelLemmaReceipt.agda`
+  - Records the narrow terminal lemma surface after the connected-animal
+    correction.  The proved inputs are explicit:
+    `T7A(d)>0`, `count(d)<=d*p^(d-1)`, connected-animal
+    `beta*~=9.593637`, direct `T7A beta*~=16.56`, numerical NS shell-flux
+    verification, and synthetic dissipation-dominates-flux checks.  T7A
+    direct counting is demoted; T7A may re-enter only through
+    `|z(Gamma)| <= (T7A(d)/(d*p^(d-1))) * exp(-beta*c_min*d)`.  The
+    `3.593637` gap is KP convergence only; the strict Balaban seed is tracked
+    separately by `beta*c_min-a>log(2p)`, exact threshold `13.631603`, with
+    robust sample `beta_eff>=13.7`, while Clay promotion stays false.
+- Clay Sprint 3 shortest path:
+  `DASHI/Physics/Closure/ClaySprintThreeShortestPathReceipt.agda`
+  - Consumes the Sprint 3 work-order, Gate3 `O_K`, NS commutator-obstruction,
+    and YM 43-step target receipts to record the current shortest route from
+    existing repo content.  Gate3 support first needs
+    `SSPCarrierEqualsOKHeckeModel`; NS first needs
+    `CommutatorLipschitzControlWithoutRegularity`; YM first needs
+    `YMFortyThreeStepBalabanUniformity` plus leakage summability.  Six workers
+    are assigned to concrete best-effort attempts, and
+    `hardBridgeCompletedHere=false`; all Clay, Gate3, YM, NS, W4, gravity,
+    Schwarzschild, and terminal promotions remain false.
+- Clay promotion flag-flip lemma priorities:
+  `DASHI/Physics/Closure/ClayPromotionFlagFlipLemmaReceipt.agda`
+  - Filters the current shortest path to only theorem targets that can flip
+    flags.  Gate3 needs `SSPFrameCarrierEqualsOKTensorZ3`,
+    `UniformFrameLowerBound`, and `Gate3MoscoNoPollutionTransfer`; NS needs
+    `CommutatorLipschitzControlWithoutRegularity`; YM needs 43-step Balaban
+    control, Shimura-flat transfer, OS/Wightman, mass-gap survival, and
+    nontrivial SU3.  Six workers are assigned to those flag-critical targets.
+    The receipt records that numeric/model/finite receipts do not promote
+    Clay; all promotion flags remain false.
+- Next execution receipts:
+  `DASHI/Physics/Closure/PhysicalSSPOKHeckeModelClosureReceipt.agda`,
+  `DASHI/Physics/Closure/NSHighLowCommutatorObstructionReceipt.agda`, and
+  `DASHI/Physics/Closure/YMFortyThreeStepBalabanTargetReceipt.agda`
+  - Adds the sharpened Commit 1/2/3 surfaces.  Gate3 records the model-side
+    `O_K=Z[(1+sqrt(-7))/2]` pass with `S_3D(sigma_OK)=0.190298810` and leaves
+    `SSPCarrierEqualsOKHeckeModel` open.  NS records transport cancellation,
+    HighLow commutator reduction, and `CommutatorLipschitzControlWithoutRegularity`
+    as the live obstruction.  YM records the exact strict seed inequality,
+    robust `beta_eff>=13.7`, and the `(k : Fin 43) -> rho k < 1` target.
+    No bridge or promotion is proved.
+- Next execution receipts:
+  `DASHI/Physics/Closure/ClaySprintThreeImplementationWorkOrderReceipt.agda`
+  - Converts the Sprint 3 six-worker assignment into implementation work
+    orders with deliverables, acceptance criteria, and kill criteria.  W1 owns
+    `SSPCarrierEqualsOKHeckeModel`; W2 owns the conditional Gate3 frame/Mosco
+    chain; W3 owns `CommutatorLipschitzControl`; W4 owns HighLow
+    counterfamily/audit; W5 owns 42--43 step Balaban uniformity; W6 owns
+    retraction/exact-margin/promotion governance.  The receipt records
+    `allWorkersAssignedToImplementation = true` and
+    `hardBridgeCompletedHere = false`.
+- Next execution receipts:
+  `DASHI/Physics/Closure/ClaySprintThreeSixWorkerAssignmentReceipt.agda`
+  - Assigns the corrected Sprint 3 six-worker split: W1 Gate3 owns
+    `SSPCarrierEqualsOKHeckeModel`, W2 consumes Gate3 frame/Mosco only
+    conditionally, W3 owns `CommutatorLipschitzControl`, W4 owns the
+    HighLow counterfamily/no-hidden-regularity audit, W5 owns the 42--43 step
+    Balaban uniformity target, and W6 owns retraction/exact-margin/promotion
+    governance.  This is an assignment receipt only; all promotions remain
+    false.
+- Next execution receipts:
+  `DASHI/Physics/Closure/ClayThreeWorkerImplementationAssignmentReceipt.agda`
+  - Historical first split, superseded by the Sprint 3 six-worker assignment.
+    It assigned one implementation worker to each then-live bridge: W1 Gate3
+    owns `SSPCarrierEqualsHeckeModel`, W2 NS owns the HighLow flux
+    audit/counterfamily, and W3 YM owns the 42-step Balaban target.  This is
+    an ownership receipt only; all promotions remain false.
+- Next execution receipts:
+  `DASHI/Physics/Closure/PhysicalSSPHeckeModelClosureReceipt.agda`,
+  `DASHI/Physics/Closure/NSHighLowFluxControlAuditReceipt.agda`, and
+  `DASHI/Physics/Closure/YMFortyTwoStepBalabanTargetReceipt.agda`
+  - Records the corrected Sprint 3 lane state.  Gate3 now uses the
+    `O_K=Z[(1+sqrt(-7))/2]` model with 118 atoms at norm `<=49`,
+    `sigma_OK=0.246770`, and `S_3D(sigma_OK)=0.190000`; the live bridge is
+    still `SSPCarrierEqualsOKHeckeModel`.  NS retracts the HighLow
+    `K^(-1/2)` suppression claim, records exact transport cancellation, and
+    names `CommutatorLipschitzControl` as the live obstruction.  YM turns the
+    strict Balaban bridge into a 42--43 step non-perturbative control target
+    toward `beta_eff>=13.7`.  All promotions remain false.
+- Next execution receipts:
+  `DASHI/Physics/Closure/PhysicalSSPSpreadBoundAttemptReceipt.agda`,
+  `DASHI/Physics/Closure/NSCumulativeTailDominanceObstructionReceipt.agda`,
+  and `DASHI/Physics/Closure/YMBalabanMarginSplitReceipt.agda`
+  - Assign W5 to the physical SSP 3D spread computation, W4 to the NS
+    cumulative tail dominance obstruction and counterfamily search, W2 to the
+    strict Balaban seed margin, and W6 to the shared promotion audit.  These
+    receipts record obligations only; all promotions remain false.
+  - The Gate3 BT-metric model is now recorded as closed with identity Gram,
+    `A_infty=1`, `mu_N=0`, `S_1D(p=3,sigma=0.289)=0.080940589`, and
+    `S_3D(p=3,sigma_digit)=0.722893945`; the physical 3D SSP/Hecke embedding
+    identification remains open.  The NS receipt records HighHigh as the
+    absorptive partial result and `HighLowFluxControlWithoutRegularity` as the
+    live non-circular Clay-facing lemma.
   - Records the honest post-grammar state.  Gate3/gravity now requires the
     physical SSP/Hecke 3D taper `sigma_SSP < 0.3025113508228815`; YM requires
     the non-perturbative Balaban bridge from `beta ~= 6` to
@@ -90,6 +197,76 @@ Use one of these reader tracks first:
     `7 = 3D + 3D + sign`, and each digit/lane contains depth-many nested
     15SSP blocks.  This symmetry-complexity series is the coordinate source
     of the `p^(3d)` density term in the 3D Archimedean taper calculation.
+- Clay own-brain completion:
+  `DASHI/Physics/Closure/ClayOwnBrainCompletionReceipt.agda`
+  - Records what is complete without new external analysis: corrected
+    connected-animal formula, four-gap separation, T7A demotion, 30-lemma
+    kernel freeze, six worker kill criteria, and promotion-flag audit.  It
+    explicitly says this buys a coherent Clay attack surface, not a Clay
+    theorem.
+- Concrete Clay blocker attempts:
+  `DASHI/Physics/Closure/PhysicalSSPSpreadBoundAttemptReceipt.agda`,
+  `DASHI/Physics/Closure/NSCumulativeTailDominanceObstructionReceipt.agda`,
+  and `DASHI/Physics/Closure/YMBalabanMarginSplitReceipt.agda`
+  - Records the first concrete worker iteration after the kernel freeze.  The
+    Gate3 receipt consumes digit/taper and conditional no-pollution support
+    while keeping the actual 3D SSP/Hecke spread theorem open.  The NS receipt
+    consumes the fixed-K LP identity and conditional danger-shell support while
+    isolating non-circular paraproduct/defect absorption.  The YM receipt keeps
+    `9.593637`, `10.13086`, legacy `12.97`, exact strict seed `13.631603`, and direct T7A
+    `16.56` distinct.  No promotion follows.
+- Clay solved ledger lemmas:
+  `DASHI/Physics/Closure/ClaySolvedLedgerLemmas.agda`
+  - Inhabits only the solved bookkeeping facts: threshold constants, gap
+    arithmetic, YM route classification, T7A demotion, live-target names, and
+    false Clay/Gate3/W4/gravity promotion flags.  It explicitly does not prove
+    Balaban transfer, Shimura-to-Euclidean universality, OS/Wightman
+    reconstruction, mass-gap survival, NS cumulative tail dominance, projection
+    transport/defect absorption, physical SSP spread, or uniform frame lower
+    bound.
+- Clay numeric precision correction:
+  `DASHI/Physics/Closure/ClayNumericPrecisionCorrectionReceipt.agda`
+  - Records the sharper values behind the coarse ledger:
+    connected-animal `beta_CA = 9.593637`, BT-tree `beta_BT = 10.13086`, and
+    strict Balaban seed `beta_strict = 13.631603`.  It keeps `13.64` as a
+    barely-safe rounded strict seed, updates the live BT-tree coarse ledger to
+    `10.13`/gap `4.13`, recommends exact
+    `beta*c_min - a > log(2p)` or `beta_eff >= 13.7` for robust theorem
+    statements, and records the one-density Gate3 PAWOTG values
+    `S_3(sigma_digit)=0.080284628`,
+    `S_3(0.302511)=0.110976368`, and `sigma_crit=0.505208`.
+    No analytic blocker or promotion is inhabited.
+- Clay KP corrected series identity:
+  `DASHI/Physics/Closure/ClayKPCorrectedSeriesIdentityReceipt.agda`
+  - Mechanically records the connected-animal formula choice
+    `sum d*p^(d-1)*q^d = q/(1-p*q)^2`, rejects the legacy
+    `p*q/(1-p*q)^2` expression for this route, and preserves the rule that
+    `9.593637` is KP convergence support only.  It does not formalise the
+    analytic infinite-series theorem in Agda and does not prove strict Balaban
+    seed, Balaban transfer, or Clay YM.
+- Clay kernel reduction:
+  `DASHI/Physics/Closure/ClayKernelReductionReceipt.agda`
+  - Compresses the current Clay path into three decisive kernels: YM
+    connected-animal KP route, NS `DangerShellMaximumPrinciple`, and Gate3
+    physical 3D frame-symbol positivity.  It records the correction that
+    direct `T7A` KP is proved at `beta* ~= 16.56` but is worse than
+    connected-animal counting; the standard computable YM route is
+    `beta* ~= 9.593637` for KP convergence only; strict Balaban seeding is
+    tracked by `beta*c_min-a>log(2p)` with robust target `beta_eff>=13.7`.
+    T7A can help only as an open
+    per-polymer activity-suppression theorem.  It also records the reusable
+    scale-pressure abstraction and six kill-tests while keeping Clay, YM, NS,
+    Gate3, gravity, W4, and terminal promotion false.
+- Programme frontier final receipt:
+  `DASHI/Physics/Closure/ProgrammeFrontierUpdateFinalReceipt.agda`
+  - Consumes the newer subresults directly.  NS Bernstein is now recorded
+    with `C0=sqrt(p)`, so the live NS gap is the small-viscosity
+    `H^{11/8}` Bernoulli-band plus all-data extension.  YM consumes the
+    IR/cusp equivalence surfaces but still reduces to the flat Euclidean
+    4D SU(N) mass-gap/Balaban/OS-Wightman package.  CKM consumes the
+    alpha/beta carrier arithmetic receipts; the remaining phenomenology gap
+    is the first higher-order `Vub`/`beta` unitarity correction.  Clay,
+    terminal, and physical CKM promotions remain false.
 - Clay computed-visualisation synthesis:
   `DASHI/Physics/Closure/ClayComputedVisualizationSynthesisReceipt.agda`
   - Records the current four-plot/CSV synthesis as a checked, non-promoting
