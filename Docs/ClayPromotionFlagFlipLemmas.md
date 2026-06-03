@@ -10,6 +10,19 @@ It filters the Sprint 3 shortest-path plan down to theorem targets that can
 actually flip a promotion flag.  Everything numeric, model-side, finite, or
 empirical remains support only.
 
+Sprint 6 supersedes the live priority order in this document.  See:
+
+```text
+Docs/ClaySprintSixFlagFlip.md
+DASHI/Physics/Closure/ClaySprintSixFlagFlipReceipt.agda
+```
+
+The main Sprint 6 corrections are: Gate3 only needs the frame-side
+`MirrorBNonDegenerate2D` / `SSPFrameCarrierEqualsOKTensorZ3` path; NS
+commutator control is Clay-equivalent; and YM uses
+`YMBalabanContinuumLimit`, not finite 43-step induction, as the live flag
+target.
+
 ## Priority Order
 
 ```text

@@ -1,0 +1,9 @@
+N,grid_dimension,dictionary,atom_count,gram_positive_eigenvalues,A_N,B_N,frame_ratio,max_crossterm,net_quality,A_N_trend,B_N_trend,max_crossterm_trend,net_quality_trend,phase_included,twist_included,promotion_status,mu_N,(N-1)*mu_N,gershgorin_lower,actual_lambda_min
+8,64,phase_complete,288,63,9.61017700881e-07,41.7324944874,43425313.0293,1,1.15140217795e-08,initial,initial,initial,initial,TRUE,TRUE,NO_PROMOTION,1,287,-286,-1.98198456865e-14
+8,64,phase_blind,48,16,0.0513161088708,14.6553184839,285.58904419,1,0.00175076744074,initial,initial,initial,initial,FALSE,FALSE,NO_PROMOTION,1,47,-46,-4.40422977919e-15
+16,256,phase_complete,288,96,9.7168302646e-08,41.9680844065,431911263.896,1,1.15764519659e-09,declined,declined,flat,declined,TRUE,TRUE,NO_PROMOTION,1,287,-286,-1.58260960664e-14
+16,256,phase_blind,48,16,0.0421455393887,14.8091183879,351.380445065,1,0.00142295909469,declined,declined,flat,declined,FALSE,FALSE,NO_PROMOTION,1,47,-46,-3.62925525562e-15
+32,1024,phase_complete,288,96,1.74747769745e-07,41.9827683716,240247806.498,1,2.08118445403e-09,improved,declined,flat,improved,TRUE,TRUE,NO_PROMOTION,1,287,-286,-2.68016275808e-14
+32,1024,phase_blind,48,16,0.0419219743335,14.8138117932,353.366272193,1,0.00141496243231,declined,declined,flat,declined,FALSE,FALSE,NO_PROMOTION,1,47,-46,-5.34794046797e-15
+64,4096,phase_complete,288,96,2.15260964015e-07,41.9863460224,195048583.075,1,2.56346389252e-09,improved,declined,flat,improved,TRUE,TRUE,NO_PROMOTION,1,287,-286,-2.67534138133e-14
+64,4096,phase_blind,48,16,0.0418686991057,14.8150076504,353.844470137,1,0.00141305020199,declined,declined,flat,declined,FALSE,FALSE,NO_PROMOTION,1,47,-46,-9.13393922648e-15

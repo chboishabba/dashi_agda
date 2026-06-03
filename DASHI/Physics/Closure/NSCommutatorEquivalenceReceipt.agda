@@ -92,35 +92,35 @@ record NSCommutatorEquivalenceReceipt : Setω where
     factsAreCanonical :
       facts ≡ canonicalNSCommutatorEquivalenceFacts
 
-    commutatorLipschitzEquivalentToBlowupPrevention :
+    commutatorLipschitzEquivalentToBlowupPreventionRecorded :
       Bool
 
-    commutatorLipschitzEquivalentToBlowupPreventionIsTrue :
-      commutatorLipschitzEquivalentToBlowupPrevention ≡ true
+    commutatorLipschitzEquivalentToBlowupPreventionRecordedIsTrue :
+      commutatorLipschitzEquivalentToBlowupPreventionRecorded ≡ true
 
-    bernsteinRouteCircular :
+    bernsteinRouteCircularRecorded :
       Bool
 
-    bernsteinRouteCircularIsTrue :
-      bernsteinRouteCircular ≡ true
+    bernsteinRouteCircularRecordedIsTrue :
+      bernsteinRouteCircularRecorded ≡ true
 
-    enstrophyRouteCircular :
+    enstrophyRouteCircularRecorded :
       Bool
 
-    enstrophyRouteCircularIsTrue :
-      enstrophyRouteCircular ≡ true
+    enstrophyRouteCircularRecordedIsTrue :
+      enstrophyRouteCircularRecorded ≡ true
 
-    besovRouteCircular :
+    besovRouteCircularRecorded :
       Bool
 
-    besovRouteCircularIsTrue :
-      besovRouteCircular ≡ true
+    besovRouteCircularRecordedIsTrue :
+      besovRouteCircularRecorded ≡ true
 
-    kMinusHalfClaimRetracted :
+    kMinusHalfClaimRetractedRecorded :
       Bool
 
-    kMinusHalfClaimRetractedIsTrue :
-      kMinusHalfClaimRetracted ≡ true
+    kMinusHalfClaimRetractedRecordedIsTrue :
+      kMinusHalfClaimRetractedRecorded ≡ true
 
     highLowBoundAccepted :
       Bool
@@ -178,25 +178,25 @@ canonicalNSCommutatorEquivalenceReceipt =
         canonicalNSCommutatorEquivalenceFacts
     ; factsAreCanonical =
         refl
-    ; commutatorLipschitzEquivalentToBlowupPrevention =
+    ; commutatorLipschitzEquivalentToBlowupPreventionRecorded =
         true
-    ; commutatorLipschitzEquivalentToBlowupPreventionIsTrue =
+    ; commutatorLipschitzEquivalentToBlowupPreventionRecordedIsTrue =
         refl
-    ; bernsteinRouteCircular =
+    ; bernsteinRouteCircularRecorded =
         true
-    ; bernsteinRouteCircularIsTrue =
+    ; bernsteinRouteCircularRecordedIsTrue =
         refl
-    ; enstrophyRouteCircular =
+    ; enstrophyRouteCircularRecorded =
         true
-    ; enstrophyRouteCircularIsTrue =
+    ; enstrophyRouteCircularRecordedIsTrue =
         refl
-    ; besovRouteCircular =
+    ; besovRouteCircularRecorded =
         true
-    ; besovRouteCircularIsTrue =
+    ; besovRouteCircularRecordedIsTrue =
         refl
-    ; kMinusHalfClaimRetracted =
+    ; kMinusHalfClaimRetractedRecorded =
         true
-    ; kMinusHalfClaimRetractedIsTrue =
+    ; kMinusHalfClaimRetractedRecordedIsTrue =
         refl
     ; highLowBoundAccepted =
         false

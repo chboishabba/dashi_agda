@@ -1,3 +1,869 @@
+# 2026-06-04 Clay Sprint 43 NS 3D truth bridge repair
+
+- Repaired `scripts/ns_diagnostic_harness.py` for 3D dashiCFD truth artifacts:
+  integer-radius shell convention, `meta_json.k_star`, stored
+  `velocity_snapshots`, `k_star_source`, `velocity_source`,
+  `bridge_ratio_status`, and `--progress-every` ETA output.
+- Updated `../dashiCFD/scripts/make_truth_3d.py` progress output to include
+  ETA and generated N64 seed0/seed1 truth artifacts.
+- Added `Docs/ClaySprintFortyThreeNS3DTruthBridgeRepair.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFortyThreeNS3DTruthBridgeRepairReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Repaired runs:
+  - N32 seed0: `K_star = 7`, high-shell support pass,
+    `sup_C_K = 2.5866198098439114e11`,
+    `inf_budget_K = -0.025720401595074865`.
+  - N64 seed0: `K_star = 7`, high-shell support pass,
+    `sup_C_K = 1.8439088483009247e11`,
+    `inf_budget_K = -0.0009951511974450934`.
+  - N64 seed1: `K_star = 7`, high-shell support pass,
+    `sup_C_K = 1.4923579402546648e10`,
+    `inf_budget_K = -0.0017769118671760108`.
+- All repaired NS 3D runs remain `NO_PROMOTION_BUDGET_FAIL`; no Clay, NS,
+  Gate3, YM, or terminal promotion changed.
+
+# 2026-06-03 Clay Sprint 43 YM all-diameter KP/rho/leakage harness
+
+- Added `scripts/ym_all_diameter_kp_rho_leakage_harness.py`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFortyThreeYMAllDiameterHarnessReceipt.agda`.
+- Added `Docs/ClaySprintFortyThreeYMAllDiameterKPRhoLeakageHarness.md`.
+- Added artifact contract
+  `Docs/Images/clay-analytic-sprint/sprint43_ym_all_diameter_kp/README.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- The harness consumes local p=7 KP/C0/leakage CSV evidence or smoke rows,
+  computes the all-diameter geometric KP tail, strict log margin, rho target,
+  leakage tail, connected-animal side diagnostic, and proof-certificate gate.
+- D1-D3 finite diagnostics are predecessor evidence only; Sprint 43 asks for
+  actual all-diameter coverage, uniform constants, actual KP incompatibility,
+  and leakage summability.
+- Continuum-uniform rho/leakage, Balaban transfer, OS/Wightman, mass gap, YM,
+  Gate3, NS, terminal, and Clay promotions remain false.
+
+# 2026-06-03 Clay Sprint 42 NS diagnostic harness
+
+- Added `scripts/ns_diagnostic_harness.py`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFortyTwoNSDiagnosticHarnessReceipt.agda`.
+- Added `Docs/ClaySprintFortyTwoNSDiagnosticHarness.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Implemented the bridge-falsifier table for `Q_K`, ternary
+  `R^-_K/R^0_K/R^+_K`, adjusted `C_K`, transition/source diagnostics,
+  weighted `s_eff`, `rho_K`, and
+  `budget_K = gamma_K + eta_K*log_2(p) - theta*beta_K`.
+- Upgraded the harness to emit `ns_bridge_budget_table.csv` with the Sprint 40
+  bridge-budget field contract and recorded the run in
+  `Docs/ClaySprintFortyBridgeBudgetEstimatorRun.md`.
+- Ran the upgraded harness on the two real N32 tail-resolved dashiCFD traces:
+  `ns_ev5_worker5_N32_seed0_tail2` and
+  `ns_ev5_worker5_N32_seed1_tail2`.  Both resolve `K_star = 2` but only have
+  nonzero high shells `[2,3,4]`, below the five-shell fit gate, and both are
+  2D scalar-vorticity inputs with no literal 3D vortex stretching.
+- Ran the synthetic 3D smoke branch; it executes but is smoke-only and fails
+  the high-shell/budget gates.
+- Current `../dashiCFD` 2D scalar-vorticity truth artifacts are consumed only
+  through a fail-closed branch because they do not supply 3D physical vortex
+  stretching.  The 3D vector branch is available for smoke/future truth data
+  but remains diagnostic-only.
+- Kept actual physical bridge, actual lineage transition/source estimates,
+  high-shell budget, stretch absorption, no-blowup, and all Clay promotion
+  flags false.
+- Validation: 3D smoke harness exits 0, N32 tail2 fail-closed harness exits 0,
+  `python -m py_compile scripts/ns_diagnostic_harness.py` exits 0, and
+  targeted Agda on the Sprint 42 receipt exits 0.
+
+# 2026-06-03 Clay Sprint 40 highest-alpha six-lane attempt
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintFortyHighestAlphaSixLaneAttemptReceipt.agda`.
+- Added `Docs/ClaySprintFortyHighestAlphaSixLaneAttempt.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 39 and `ClayFinalAnalyticFrontierMapReceipt`.
+- Recorded the six active highest-alpha lanes: NS concentration-aware bridge,
+  NS actual concentration/source budget, NS no-replenishment/coherent-tube
+  persistence, Gate3 PAWOTG/Mosco/no-pollution, YM actual activity plus
+  Balaban/OS/Wightman transfer, and governance validation.
+- Added explicit derivation work packets: W1 physical bridge/counterexample,
+  W2 aligned concentration `beta`, W3 braid/angular `gamma`, W4 BT
+  ultrametric `eta`, W5 high-shell budget plus replenishment, and W6
+  governance/side-lane separation.
+- Returned exact uninhabited blockers instead of promoting from receipt
+  algebra: concentration-aware `Q_K` bridge, actual `budget_K > 1/2`,
+  no-replenishment, coherent-tube exclusion, PAWOTG/Mosco/no-pollution,
+  YM actual KP/activity, Balaban physical beta, and OS/Wightman transfer.
+- Kept all Clay, Gate3, NS, YM, Lean-port, and external-artifact governance
+  flags false/context-only.
+- Validation: targeted Agda on the Sprint 40 receipt exits 0, and
+  `timeout 120s agda -i . -i DCHoTT-Agda -i cubical -l standard-library
+  DASHI/Everything.agda` exits 0.
+
+# 2026-06-03 Clay Sprint 39 concentration source budget
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtyNineConcentrationSourceBudgetReceipt.agda`.
+- Added `Docs/ClaySprintThirtyNineConcentrationSourceBudget.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 38.
+- Recorded the master concentration-adjusted source-budget inequality:
+  `gamma + eta*log_2(p) - theta*beta > 1/2`.
+- Recorded source factorization into braid/angular depletion, ultrametric
+  decay, and concentration penalty.
+- Recorded the concentration-aware physical bridge shape
+  `Q_K <= C R_K^+ concentration_K^theta`.
+- Recorded aligned mass concentration as a first-class gate and added the
+  diagnostic budget table.
+- Kept the concentration bound, concentration-aware bridge, actual
+  gamma/eta/beta estimates, replenishment, coherent-tube exclusion, Gate3
+  closure, Yang-Mills uniformity, Lean-port work, and all Clay promotion flags
+  false.
+
+# 2026-06-03 Clay Sprint 38 source-decay / physical-bridge audit
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtyEightSourceDecayPhysicalBridgeAuditReceipt.agda`.
+- Added `Docs/ClaySprintThirtyEightSourceDecayPhysicalBridgeAudit.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 37.
+- Recorded `PolynomialSourceDecayFails`: polynomial source decay cannot beat
+  the `2^(K/2)` weight.
+- Recorded exponential source closure at `sigma > 1/2` and the tail cutoff
+  formula.
+- Recorded positive transition with exponential source as closed algebra under
+  `c*sqrt2 < 1` and `sigma > 1/2`.
+- Recorded ultrametric source closure at `eta > log_p(sqrt2)`.
+- Recorded braid-lineage with amplification closure at
+  `rho*2^(1/2+a) < 1`.
+- Kept physical bridge, actual source decay, no replenishment, non-Beltrami
+  persistence, Gate3 closure, Yang-Mills uniformity, Lean-port work, and all
+  Clay promotion flags false.
+
+# 2026-06-03 Clay Sprint 37 oblique exponent / ultrametric source decay
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtySevenObliqueExponentUltrametricSourceDecayReceipt.agda`.
+- Added `Docs/ClaySprintThirtySevenObliqueExponentUltrametricSourceDecay.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 36.
+- Recorded the oblique source exponent threshold:
+  `s_obl(K) <= C * 2^(-sigma*K)` closes the weighted source budget only when
+  `sigma > 1/2`.
+- Recorded the positive transition with power source:
+  `R^+_(K+1) <= cR^+_K + Csource*2^(-sigma*K)`,
+  `c*sqrt2 < 1`, and `sigma > 1/2`.
+- Recorded the kernel/concentration criterion
+  `mu - theta*beta > 1/2`.
+- Recorded 369 cube bad-state fraction, braid quotient growth, BT ultrametric
+  decay, and tetration scale-jump cost as candidate source-decay mechanisms.
+- Kept `Q_K <= C R_K^+`, actual oblique source decay, actual
+  kernel/concentration bounds, ultrametric-braid source decay for NS, Gate3
+  closure, Yang-Mills uniformity, Lean-port work, and all Clay promotion flags
+  false.
+
+# 2026-06-03 Clay Sprint 36 ternary transition / oblique source budget
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtySixTernaryTransitionObliqueSourceBudgetReceipt.agda`.
+- Added `Docs/ClaySprintThirtySixTernaryTransitionObliqueSourceBudget.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 35.
+- Recorded the correction
+  `per-shell bad fraction != bad-lineage probability`.
+- Recorded the positive transition row
+  `R^+_(K+1) <= M_(+,-)R^- + M_(+,0)R^0 + M_(+,+)R^+ + source`.
+- Recorded the closeable transition/source-budget algebra:
+  `R^+_(K+1) <= cR^+_K + s_K`, `c*sqrt2 < 1`, and weighted source
+  summability imply weighted `R^+` summability.
+- Recorded constant positive oblique fraction as non-closing after the
+  `2^(K/2)` weight.
+- Recorded oblique/effective source functionals and the next diagnostic output
+  table.
+- Kept physical bridge, persistence threshold, weighted source summability for
+  actual NS, no concentration, oblique cross-shell decay, Gate3 closure,
+  Yang-Mills uniformity, Lean-port work, and all Clay promotion flags false.
+
+# 2026-06-03 Clay Sprint 35 no-coherence-replenishment audit
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtyFiveNoCoherenceReplenishmentAuditReceipt.agda`.
+- Added `Docs/ClaySprintThirtyFiveNoCoherenceReplenishmentAudit.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 34.
+- Recorded the forced red-bucket equation
+  `d/dt R_K^+ <= - gamma_K * R_K^+ + F_K`.
+- Recorded the replenishment tolerance
+  `2 * (gamma_K - eta_K) * T_nl > log sqrt2`.
+- Recorded the subquadratic-strain high-shell coercivity condition as
+  conditional/order support.
+- Added `NoAlignedMassConcentration` as an open blocker; 3D Bernstein alone
+  gives the too-weak `beta = 3`.
+- Carried forward Gate3 power-law density and YM safe-scale correction budget
+  without claiming Gate3 Mosco/no-pollution or YM nonperturbative rho/leakage.
+- Kept `Q_K <= C R_K^+`, no coherence replenishment, no aligned-mass
+  concentration, actual dynamic residue decay, Gate3 closure, Yang-Mills
+  uniformity, Lean-port work, and all Clay promotion flags false.
+
+# 2026-06-03 Clay Sprint 34 direction mixing and replenishment frontier
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtyFourDirectionMixingReplenishmentReceipt.agda`.
+- Added `Docs/ClaySprintThirtyFourDirectionMixingReplenishment.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 33.
+- Recorded the frozen-eigenframe alignment formula as a support/toy lemma and
+  corrected the full NS angle equation by adding `FrameRotationTerm`.
+- Recorded direction-diffusion coercivity as conditional on shell direction
+  equation, amplitude-coupling absorption, and
+  `2 * nu * 4^K >= lambda_1_max(K)`.
+- Recorded subquadratic strain growth as a sufficient high-shell coercivity
+  condition.
+- Named `NoCoherenceReplenishmentAtHighShells` as the hard frontier,
+  equivalent on this route to `NonBeltramiCoherentTubeCannotPersist`.
+- Added the next calculation targets: strain growth exponent, replenishment
+  ratio, and red-branch survival ratio.
+- Kept eigenframe rotation control, amplitude-coupling absorption,
+  no-replenishment, dynamic residue decay, Gate3 closure, Yang-Mills
+  uniformity, Lean-port work, and all Clay promotion flags false.
+- Recorded Sprint 34 as an NS-only frontier correction: no new Gate3/YM
+  progress, solved toy/algebraic/conditional items are not promotion evidence,
+  and external artifacts remain context only.
+
+# 2026-06-03 Clay Sprint 33 consolidated micro-closure ledger
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtyThreeConsolidatedMicroClosureLedgerReceipt.agda`.
+- Added `Docs/ClaySprintThirtyThreeConsolidatedMicroClosureLedger.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 32.
+- Consolidated the closed NS pieces: ternary algebra, exact Beltrami neutral,
+  measured pressure downgrade, positive-residue tail summability, and
+  conditional stretch absorption.
+- Consolidated Gate3 power-law fill-distance limit zero and witness table.
+- Consolidated YM correction-budget implication, safe-scale statement, and
+  `k=120` diagnostic row.
+- Named `NonBeltramiCoherentTubeCannotPersist` as the highest-value remaining
+  NS hard gate.
+- Kept the NS physical bridge, actual `R+` decay, Gate3 Mosco/no-pollution,
+  YM nonperturbative uniformity/leakage, constructive QFT, Lean-port work, and
+  all Clay promotion flags false.
+
+# 2026-06-03 Clay Sprint 32 Beltrami coherence falsification
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtyTwoBeltramiCoherenceFalsificationReceipt.agda`.
+- Added `Docs/ClaySprintThirtyTwoBeltramiCoherenceFalsification.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 31.
+- Recorded the surviving adversary: coherent parallel-tube / Beltrami-like
+  high-shell configurations.
+- Recorded three defects: Beltrami defect, direction coherence defect, and
+  pressure decorrelation score.
+- Refined the ternary branches to pressure-decorrelated/cancelling,
+  Beltrami-safe neutral, and coherent non-Beltrami danger.
+- Recorded exact Beltrami as neutral and measured pressure decorrelation as a
+  downgrade from danger to neutral.
+- Named the hard open gate `NonBeltramiCoherentTubeCannotPersist`.
+- Kept pressure decorrelation for all coherent tubes, `Q_K <= C R_K^+`, actual
+  subcritical decay, Gate3 closure, Yang-Mills uniformity, Lean-port work, and
+  all Clay promotion flags false.
+- Recorded the layer as NS-only: it does not consume Gate3 or Yang-Mills
+  evidence, and external artifacts remain context only.
+
+# 2026-06-03 Clay Sprint 31 algebraic micro-closures
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtyOneAlgebraicMicroClosureReceipt.agda`.
+- Added `Docs/ClaySprintThirtyOneAlgebraicMicroClosures.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 30.
+- Recorded closed algebraic micro-lemmas:
+  trit partition, ternary mass conservation, residue bounds, net residue
+  bounds, positive-tail summability arithmetic, Gate3 power-law fill-distance
+  limit zero, YM correction-budget implication, and pressure trit fail-closed
+  combination laws.
+- Added the Gate3 witness row `1e-8 -> 29920357`.
+- Added the YM diagnostic row
+  `k=120; beta_oneLoop=22.26586; etaMax=8.10213; rhoDiagnostic=0.1809`.
+- Kept `R_K^+` physical stretching control, actual-NS `R_K^+` decay, pressure
+  decorrelation, Gate3 Mosco/no-pollution, YM nonperturbative
+  uniformity/leakage, constructive QFT, Lean-port work, and all Clay promotion
+  flags false.
+- Recorded uploaded/preliminary artifacts and tool outputs as context only,
+  not Agda authority or promotion evidence.
+
+# 2026-06-03 Clay Sprint 30 ternary residue refinement
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintThirtyTernaryResidueRefinementReceipt.agda`.
+- Added `Docs/ClaySprintThirtyTernaryResidueRefinement.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 29.
+- Replaced the binary bad-mask reading as primary grammar with ternary
+  `tau_K in {-1,0,+1}`: anti-stretch, neutral, and expansive.
+- Recorded the residue triple `R_K^-`, `R_K^0`, and `R_K^+`.
+- Recorded `R_K^+` as the Clay-facing badness scalar and
+  `R_K^+ - R_K^-` as the DASHI-facing net cancellation scalar.
+- Recorded pressure as ternary and fail-closed: pressure may downgrade danger
+  only when the decorrelation term is measured.
+- Kept simplex boundedness, `Q_K <= C R_K^+`, `R^+` dynamic depletion, net
+  residue improvement, pressure decorrelation, Gate3 closure, Lean-port work,
+  Yang-Mills uniformity, and all Clay promotion flags false.
+- Recorded uploaded/preliminary artifacts and tool outputs as context only,
+  not Agda authority or promotion evidence.
+
+# 2026-06-03 Clay Sprint 29 analytic residue falsification harness
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintTwentyNineAnalyticResidueHarnessReceipt.agda`.
+- Added `Docs/ClaySprintTwentyNineAnalyticResidueHarness.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 28.
+- Recorded the concrete analytic residue candidate
+  `R_K = B_K / (P_K + epsilon)`, where `B_K` is aligned bad stretch mass and
+  `P_K` is positive stretch potential.
+- Recorded the physical shell-stretching ratio `Q_K` and the decisive
+  bridge/falsification test `Q_K <= C R_K`.
+- Recorded the dynamic ratio test `R_(K+1) / R_K < 1 / sqrt(2)`.
+- Recorded the pressure-decorrelation mask and the coherent-tube gate:
+  dangerous coherent tube must imply pressure decorrelation or Beltrami
+  safety.
+- Assigned six workers across Gate3 Mosco consumption, residue formula audit,
+  `Q_K` falsification harness, pressure/coherent-tube audit, governance, and
+  validation.
+- Kept residue boundedness, physical stretching control, dynamic decay,
+  pressure decorrelation, Gate3 closure, Navier-Stokes regularity, and all
+  Clay promotion flags false.
+
+# 2026-06-03 Clay Sprint 28 productive micro-lemmas
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintTwentyEightProductiveMicroLemmaReceipt.agda`.
+- Added `Docs/ClaySprintTwentyEightProductiveMicroLemmas.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 27.
+- Recorded Gate3 power-law fill-distance-to-zero as ledger-level closed with
+  `C = 0.07549`, `alpha = 0.92`, and witness rows through `10^-6`.
+- Recorded NS `r * sqrt(2) < 1` threshold arithmetic as closed, with `1/3`,
+  `1/2`, `2/3`, and `0.70` subcritical, `6/7` failing, and one-percent tail
+  cutoffs `7`, `17`, `127`, and `912`.
+- Recorded the productive geometric weighted `BraidResidue369` candidate and
+  `Q_K <= C R_K` as the decisive falsification test.
+- Recorded YM correction-budget implication as support-only algebra with
+  `betaRho090 = 14.16373`, safe diagnostic scale `k = 67`, and rho
+  diagnostics through `k = 100`.
+- Kept Gate3 Mosco/no-pollution, NS physical bridge/dynamic decay, YM
+  continuum-uniform rho/leakage, Gate3 closure, and all Clay promotion flags
+  false.
+
+# 2026-06-03 Clay Sprint 27 pressure-decorrelation attempt
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintTwentySevenPressureDecorrelationReceipt.agda`.
+- Added `Docs/ClaySprintTwentySevenPressureDecorrelation.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 26 and the single NS analytic braid-residue depletion
+  conjecture receipt.
+- Recorded CFM direction defect and Beltrami defect as non-circular candidate
+  residues, and rejected the tautological stretching ratio as circular.
+- Recorded pressure-Hessian positives:
+  enstrophy isolates stretching, pressure Hessian rotates strain, perfect
+  alignment is a local fixed point, generic nonlocal pressure is nonzero, and
+  generic misaligned two-tube systems decorrelate.
+- Recorded global parallel-tube / Beltrami coherence as the surviving
+  adversary.
+- Recorded nonlinear vorticity-direction mixing as the exact remaining open
+  gate for deterministic decay below `r < 1/sqrt(2)`.
+- Recorded viscous attenuation as diagnostic only and uploaded/preliminary
+  artifacts as context only, not Agda authority.
+- Assigned six workers across residue definition, pressure Hessian, adversary,
+  mixing, governance, and validation.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 NS analytic braid-residue depletion conjecture
+
+- Added
+  `DASHI/Physics/Closure/NSAnalyticBraidResidueDepletionConjectureReceipt.agda`.
+- Added `Docs/NSAnalyticBraidResidueDepletionConjecture.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Confirmed the repo already had the split content across NS analytic residue,
+  dynamic braid depletion, and Sprint 26 closure/falsification receipts.
+- Added the single fused conjecture surface
+  `AnalyticBraidResidueDepletionForNS`.
+- Recorded that the conjecture requires:
+  analytic `BraidResidue369`, physical stretching control, deterministic
+  decay below `1/sqrt(2)`, and the `r * sqrt(2) < 1` half-derivative gate.
+- Added reference checks: Beltrami-null, no-stretching, CFM compatibility, BKM
+  compatibility, and coherent-tube adversary.
+- All Navier-Stokes and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 26 closure/falsification tests
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintTwentySixClosureFalsificationTestReceipt.agda`.
+- Added `Docs/ClaySprintTwentySixClosureFalsificationTests.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 25 and converted the optimal path into pass/fail tests.
+- Gate3 tests: power-law limit, kernel density, Mosco/no-pollution.
+- NS tests: geometric tail summability, analytic residue functional,
+  `Q_K <= C * R_K`, and dynamic ratio below `1/sqrt(2)`.
+- YM tests: correction-budget implication and continuum-uniform rho/leakage.
+- Recorded explicit fail criteria for each lane so routes can be killed cleanly
+  instead of promoted from arithmetic, branch counting, or one-loop evidence.
+- Assigned six workers across Gate3, NS, YM, and governance kill-switches.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 25 shortest/optimal path ledger
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintTwentyFiveShortestOptimalPathReceipt.agda`.
+- Added `Docs/ClaySprintTwentyFiveShortestOptimalPath.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 24, NS analytic residue, NS dynamic vortex, and YM margin
+  receipts.
+- Recorded the route order:
+  Gate3 is the nearest support flag, Navier-Stokes is the shortest
+  Clay-facing route, and Yang-Mills is the longer constructive-QFT route.
+- Added ELI5 lemma surfaces for Gate3 density/Mosco, NS vortex stretching and
+  residue depletion, and YM correction/rho/leakage.
+- Added proposed solution directions and rejected alternatives:
+  direct Archimedean Gate3 Gram only, static NS Sobolev-only, Beltrami identity
+  as dynamic proof, pressure as direct dissipation, branch counting without
+  physical stretching, one-loop as proof, and T7A as continuum proof.
+- Assigned six workers across Gate3 density/Mosco, NS analytic residue and
+  dynamic depletion, YM correction/rho/leakage, and optimality governance.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 24 micro-lemma layer
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintTwentyFourMicroLemmaReceipt.agda`.
+- Added `Docs/ClaySprintTwentyFourMicroLemma.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed Sprint 23 and recorded the three closeable micro-lemma targets:
+  Gate3 `PrunedFillDistanceGoesToZero`, NS
+  `ResidueDecayBeatsHalfDerivative`, and YM
+  `NonperturbativeCorrectionBudget`.
+- Recorded Gate3 constants `alpha = 0.92`, `C ~= 0.07549`, and witness rows
+  through `J = 200479` for `10^-6`.
+- Recorded NS threshold products: `1/3 -> 0.471`, `1/2 -> 0.707`,
+  `2/3 -> 0.943`, and `6/7 -> 1.212`.
+- Recorded YM safe-scale tolerances at `k = 61, 67, 70, 80`.
+- Assigned six workers across Gate3 power-law/density/Mosco, NS summability
+  and physical-residue control, YM correction/rho, and governance.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 23 support-threshold / audit layer
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintTwentyThreeLeanBridgeAuditReceipt.agda`.
+- Added `Docs/ClaySprintTwentyThreeLeanBridgeAudit.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Consumed the Sprint 22 threshold/falsification receipt and preserved all
+  false promotion gates.
+- Recorded threshold theorem targets as support-only:
+  `braid_threshold_closes`, `one_third_beats_half_derivative`,
+  `fill_distance_power_law_goes_to_zero`, and Base369 carrier arithmetic
+  support.  These targets do not import external authority into Agda.
+- Added the NS physical bridge audit surface `Q_K <= C * R_K`, separating
+  transition-count ratios from actual vortex-stretching control.
+- Kept Gate3 open at power-law-to-density, Mosco recovery, and no-pollution
+  transfer.
+- Kept YM open at safe-scale nonperturbative correction, continuum rho, and
+  leakage bounds.
+- Assigned six workers across Gate3 power law/Mosco, NS residue/Q_K, NS
+  dynamic ratio, YM correction/leakage, governance, and validation.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 22 threshold/falsification audit
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintTwentyTwoThresholdFalsificationReceipt.agda`.
+- Added `Docs/ClaySprintTwentyTwoThresholdFalsification.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Recorded Gate3 pruned fill-distance power-law witnesses:
+  `alpha = 0.92`, `C ~= 0.07549`, and
+  `J = 9, 110, 1344, 200479` for `0.01, 0.001, 0.0001, 10^-6`.
+- Recorded NS braid-residue tail thresholds: `r = 1/3`, `1/2`, `2/3`, and
+  `0.70` close with increasing depth; `r >= 1/sqrt2`, including `6/7` and
+  coherent tubes, does not close.
+- Recorded the expanded YM correction budget against `beta >= 14.16373`,
+  with preferred safe scale `k0 >= 67` and tolerance rows through `k = 100`.
+- Quarantined the corrected T7A threshold `beta*_T7A ~= 16.5556`; it remains
+  bookkeeping and does not promote Yang-Mills.
+- Assigned six workers across Gate3 power law/Mosco, NS residue thresholds,
+  NS physical-stretch control, YM correction/rho/leakage, T7A governance, and
+  validation.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 21 frontier audit
+
+- Added `DASHI/Physics/Closure/ClaySprintTwentyOneFrontierAuditReceipt.agda`.
+- Added `Docs/ClaySprintTwentyOneFrontierAudit.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Recorded Gate3 pruned fill-distance exponent `alpha = 0.92 > 0`; the
+  density side is now recorded as a support closure, but Mosco/no-pollution
+  and mass-shell bridge calibration remain open.
+- Recorded NS unchanged hard gates:
+  `BraidResidueControlsPhysicalStretching`,
+  `DynamicBraidResidueDecayForNS` below the critical ratio, and coherent-tube
+  exclusion.
+- Recorded YM diagnostic safe scale `k0 = 61`, with tolerance values carried
+  forward for `k=61`, `k=67`, and `k=70`; nonperturbative correction,
+  continuum rho, and leakage remain open.
+- Assigned six workers: Gate3 Mosco, Gate3 mass-shell bridge, NS residue,
+  NS stretching/dynamic ratio, YM correction/rho/leakage, and governance.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 20 concrete audit
+
+- Added `DASHI/Physics/Closure/ClaySprintTwentyConcreteAuditReceipt.agda`.
+- Added `Docs/ClaySprintTwentyConcreteAudit.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Recorded the Gate3 fill-distance witness table for `h_J <= pi/(38J)`,
+  including `J=9` for `0.01`, `J=83` for `0.001`, and `J=82674` for
+  `10^-6`.
+- Recorded the NS residue-regime product table: `1/3 -> 0.471`,
+  `2/3 -> 0.943`, `6/7 -> 1.212`, and coherent tubes fail.
+- Recorded the YM correction tolerance table around the usable
+  `rho <= 0.90` target `beta >= 14.16373`; the practical safe-scale target is
+  now `k0 >= 67`.
+- Corrected stale docs that still said `(6/7) * sqrt(2) ~= 1.08`; the current
+  value is recorded as `1.212`.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 19 targeted calculations
+
+- Added `DASHI/Physics/Closure/ClaySprintNineteenTargetedCalculationReceipt.agda`.
+- Added `Docs/ClaySprintNineteenTargetedCalculations.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Corrected the braid-correlation frontier BT product from the stale
+  `1.080` recording to `(6/7) * sqrt(2) ~= 1.212`; BT decorrelation still
+  fails the `r * sqrt(2) < 1` criterion.
+- Recorded the Gate3 next calculation:
+  `h_pruned(J) <= C / J^alpha` with `alpha > 0`.
+- Recorded the NS generalized depletion threshold:
+  any deterministic `r < 1 / sqrt(2)` closes the conditional half-derivative
+  arithmetic, provided residue controls physical stretching.
+- Recorded the YM nonperturbative error-budget target against
+  `beta >= 14.1637` / `rho <= 0.90`.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 18 shortest-path completion ledger
+
+- Added `DASHI/Physics/Closure/ClayShortestPathCompletionLedgerReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintEighteenCompletionWorkerAssignmentReceipt.agda`.
+- Added `Docs/ClayShortestPathCompletionLedger.md`.
+- Added `Docs/ClaySprintEighteenCompletionWorkerAssignment.md`.
+- Wired the receipts through `DASHI/Everything.agda`.
+- Recorded the current shortest NS path:
+  `BraidResidueControlsPhysicalStretching`,
+  `DynamicBraidResidueDecayForNS`, and coherent-tube exclusion/Leray
+  enforcement before stretch absorption can close enstrophy.
+- Recorded the current shortest YM path:
+  nonperturbative RG monotonicity plus uniform rho/leakage, then
+  Shimura-flat universality, self-adjoint Hamiltonian, mass-gap survival,
+  OS/Wightman reconstruction, and nontrivial SU3.
+- Assigned six Sprint 18 workers across the NS and YM gates.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay maximal honest push
+
+- Added `DASHI/Physics/Closure/ClayMaximalHonestPushReceipt.agda`.
+- Added `Docs/ClayMaximalHonestPush.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Verified official Clay status pages as governance context: Navier-Stokes
+  remains unsolved and Yang-Mills mass gap has no known proof.
+- Recorded the strongest current split:
+  static NS Leray/Sobolev closure is killed, Beltrami cancellation is real but
+  insufficient, braid-correlation is conditional, YM `BetaForTargetRho`
+  algebra is closed, and Gate3 is the nearest support flag.
+- Assigned six workers: Gate3 Mosco recovery, NS residue functional, NS
+  physical stretching control, NS dynamic residue/coherent tubes, YM uniform
+  rho/leakage/correction, and governance.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay braid-correlation frontier
+
+- Added `DASHI/Physics/Closure/ClayBraidCorrelationFrontierReceipt.agda`.
+- Added `Docs/ClayBraidCorrelationFrontier.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- Recorded the conditional correlation criterion:
+  `BraidResidue369(K) <= C * r^K` and `r * sqrt(2) < 1` imply high-shell
+  stretch absorption.
+- Recorded the four regimes:
+  independent trits close, DNS-like `(2/3)^K` closes, BT `(6/7)^K` does not
+  close alone, and coherent vortex tubes fail.
+- Recorded the classical reading: the 369 proof reproduces a
+  direction-regularity/coherent-tube obstruction rather than bypassing it.
+- The remaining NS terminal is `CoherentTubeFormation`.
+- The shared NS/YM transfer blocker is
+  `HyperbolicShimuraToEuclideanUniversality`.
+- Gate3 remains structurally close but formally false until typed
+  Mosco/no-pollution transfer closes.
+- All Gate3, Navier-Stokes, Yang-Mills, and Clay promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 17 analytic residue control
+
+- Added `DASHI/Physics/Closure/NSAnalyticResidueControlReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintSeventeenAnalyticResidueWorkerAssignmentReceipt.agda`.
+- Added matching docs and wired both through `DASHI/Everything.agda`.
+- The NS braid route is now guarded by the stricter interface
+  `BraidResidueControlsPhysicalStretching`: residue decay matters only if it
+  bounds actual physical shell stretching.
+- Recorded the five audit questions around the residue functional, physical
+  reconstruction, deterministic `1/3` decay, coherent tube adversaries, and
+  Leray/supervoxel enforcement.
+- Six Sprint 17 workers assigned to those surfaces plus carrier transfer and
+  governance.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay remote-thread implementation audit
+
+- Pulled ChatGPT UUID `6a1fe6db-d050-83ec-b6d6-3822402518ce` into
+  `/home/c/chat_archive.sqlite` and resolved it as `DASHI NS Research Update`
+  with canonical thread ID `a3dcc76419b5e8c401fdac5ce541255111c3ab0d`.
+- Added
+  `DASHI/Physics/Closure/ClayRemoteThreadImplementationAuditReceipt.agda`.
+- Added `Docs/ClayRemoteThreadImplementationAudit.md`.
+- Wired the receipt through `DASHI/Everything.agda`.
+- The audit records six lanes: NS Beltrami depletion, NS adjacent-angle
+  absorption, NS pressure geometry, NS fail-closed fallbacks, Gate3 Mosco
+  typing, and YM nonperturbative rho/leakage plus constructive QFT.
+- Gate3 is structurally close but not flag-closed until Mosco/no-pollution
+  transfer is typed.
+- NS conditional depletion identities remain distinct from dynamic
+  half-derivative production.
+- YM now explicitly names `YMNonperturbativeRGMonotonicity` as part of the
+  live route.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 16 braid-depletion worker assignment
+
+- Added `DASHI/Physics/Closure/NSDynamicBraidDepletionReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintSixteenBraidDepletionWorkerAssignmentReceipt.agda`.
+- Added matching docs and wired both through `DASHI/Everything.agda`.
+- NS now records the conditional braid-depletion calculation:
+  `3^-K * 2^(K/2) = (sqrt(2)/3)^K`, hence residue decay at `3^-K` would
+  beat the missing half derivative and imply conditional stretch absorption.
+- Added the governance guard:
+  `BranchCountingDecay` does not imply deterministic
+  `DynamicBraidResidueDecayForNS`.
+- Six Sprint 16 workers assigned to carrier residue counting, transition
+  decay, deterministic promotion guard, carrier density/stability, Gate3
+  Mosco continuation, and YM rho/leakage governance.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 15 dynamic-vortex worker assignment
+
+- Added `DASHI/Physics/Closure/NSDynamicVortexStructureReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintFifteenDynamicWorkerAssignmentReceipt.agda`.
+- Added matching docs and wired both through `DASHI/Everything.agda`.
+- NS now records solved vorticity energy, strain-only stretching, exact
+  Beltrami projection cancellation, approximate angle-defect depletion,
+  conditional adjacent-only absorption, pressure-direct-dissipation no-go,
+  and the `H118` fallback as non-closing.
+- The live Clay-critical NS theorem is
+  `DynamicHalfDerivativeDepletion`.
+- Six Sprint 15 workers assigned across NS dynamic production, conditional
+  absorption, pressure geometry, fallback audit, Gate3 Mosco continuation, and
+  YM rho/leakage continuation.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 14 highest-alpha workers
+
+- Added
+  `DASHI/Physics/Closure/ClaySprintFourteenHighestAlphaWorkerReceipt.agda`.
+- Added `Docs/ClaySprintFourteenHighestAlphaWorker.md`.
+- Wired the Sprint 14 receipt through `DASHI/Everything.agda`.
+- Gate3 remains the nearest positive support closure:
+  `MoscoRecoveryFromPrunedUnionDensity -> UniformContinuumFrameLowerBound ->
+  Gate3MoscoNoPollutionTransfer`.
+- NS records the Leray/Sobolev static route as killed and assigns work to
+  actual-flow vortex/pressure/cascade dynamics.
+- YM records margin algebra as closed and assigns work to
+  `ContinuumUniformRhoBound` at `rho <= 0.90` plus
+  `ContinuumUniformLeakageBound`.
+- Six highest-alpha workers assigned.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 13 attempt ledger
+
+- Added `DASHI/Physics/Closure/ClaySprintThirteenAttemptLedgerReceipt.agda`.
+- Added `Docs/ClaySprintThirteenAttemptLedger.md`.
+- Wired the Sprint 13 attempt ledger through `DASHI/Everything.agda`.
+- Shortest support path: `MoscoRecoveryFromPrunedUnionDensity ->
+  UniformContinuumFrameLowerBound -> Gate3MoscoNoPollutionTransfer ->
+  gate3Closed`.
+- Shortest NS Clay path now requires actual-flow dynamical structure:
+  `NSDynamicVortexOrPressureCascadeStructure -> pointwise enstrophy control ->
+  no blowup -> global smoothness`.
+- YM remains at `ContinuumUniformRhoBound` for `rho <= 0.90`,
+  `ContinuumUniformLeakageBound`, and
+  `HyperbolicShimuraToEuclideanUniversality` before constructive QFT
+  terminals.
+- Six workers assigned across Gate3 Mosco/no-pollution, NS dynamic structure,
+  and YM uniformity/leakage.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 12 bridge assignment
+
+- Added `DASHI/Physics/Closure/Gate3PrunedUnionDensityClosureReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintTwelveBridgeWorkerAssignmentReceipt.agda`.
+- Added matching docs and wired both through `DASHI/Everything.agda`.
+- Gate3: pruned-union density is consumed into the exact bridge
+  `MoscoRecoveryFromPrunedUnionDensity -> UniformContinuumFrameLowerBound ->
+  Gate3MoscoNoPollutionTransfer`, with all three transfer steps still open.
+- NS: Leray/Sobolev-only subcritical absorption remains killed; Sprint 12
+  routes work to packaging that negative theorem and searching for actual
+  dynamical vortex/cascade structure.
+- YM: Sprint 12 targets continuum-uniform `rho <= 0.90` and leakage control.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 11 inventory and worker assignment
+
+- Added `DASHI/Physics/Closure/ClaySprintElevenInventoryReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintElevenWorkerAssignmentReceipt.agda`.
+- Added matching docs and wired both through `DASHI/Everything.agda`.
+- Current inventory: 14 lemmas proved or discharged, 3 close formalisation
+  targets, 5 hard-open lemmas, and 8 downstream Clay-hard terminal closures.
+- Hard-open lemmas: `ContinuumUniformRhoBound`,
+  `ContinuumUniformLeakageBound`, `HyperbolicShimuraToEuclideanUniversality`,
+  `VortexAlignmentDynamical`, and `KStarDriftNonCircular`.
+- Sprint 11 priority order: Gate3 Cesaro/Mosco proof, NS negative-result
+  paper, YM one-loop conditional receipt, and the first precise
+  Hyperbolic-Shimura universality statement.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 10 highest-alpha receipts
+
+- Added `DASHI/Physics/Closure/Gate3PrunedUnionDensityReceipt.agda`.
+- Added `DASHI/Physics/Closure/NSLeraySobolevSharpnessReceipt.agda`.
+- Added `DASHI/Physics/Closure/YMMarginAlgebraClosedUniformityOpenReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintTenWorkerAssignmentReceipt.agda`.
+- Added matching docs and wired all four through `DASHI/Everything.agda`.
+- Gate3: single-level Nyquist remains blocked, but pruned-union density is now
+  discharged via `OKCosetsDenseInS1`, `CumulativeFillDistanceGoesToZero`, and
+  angular `L2` density.  The active support blocker is the Mosco recovery /
+  no-spectral-pollution transfer.
+- NS: the Leray/Sobolev-only route is proved sharply obstructed by the
+  energy-preserving scaling counterfamily; future Clay attempts need a genuine
+  dynamical structure theorem.
+- YM: beta/rho margin algebra is recorded as closed bookkeeping; the live
+  blockers remain continuum-uniform rho and leakage bounds.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 8 split receipts
+
+- Added `DASHI/Physics/Closure/Gate3PrunedDensityMoscoReceipt.agda`.
+- Added `DASHI/Physics/Closure/NSSubcriticalVortexStretchingReceipt.agda`.
+- Added `Docs/Gate3PrunedDensityMosco.md`.
+- Added `Docs/NSSubcriticalVortexStretching.md`.
+- Wired the split receipts through `DASHI/Everything.agda`.
+- Corrected `NSLadyzhenskayaEnstrophyObstructionReceipt.agda` from the
+  historical quadratic wording to the cubic enstrophy surface
+  `dE/dt <= C_nu E^3`.
+- Gate3 split: closed p-adic / finite-pruned model, failed direct
+  Archimedean transfer, live `PrunedSSPSpectralTransfer` density/Mosco lemma.
+- NS split: closed cancellation / commutator identity, failed standard
+  Ladyzhenskaya closure, live `SubcriticalVortexStretchingAbsorption`.
+- YM split remains margin-parametric through
+  `YMMarginParametricBalabanReceipt.agda`; the live theorem is
+  `YMBalabanContinuumLimitWithMargin`.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 8 sharpening receipts
+
+- Added `DASHI/Physics/Closure/Gate3DepthDecoupledFrameReceipt.agda`.
+- Added `DASHI/Physics/Closure/NSLadyzhenskayaCubicObstructionReceipt.agda`.
+- Added `DASHI/Physics/Closure/YMMarginParametricBalabanReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintEightWorkerAssignmentReceipt.agda`.
+- Added matching docs and wired all four through `DASHI/Everything.agda`.
+- Gate3: cross-level depth coupling is the collapse source.  A
+  block-diagonal depth kernel with `min_sep=0.12` angular pruning gives
+  positive tested levelwise lower bounds (`A_j >= 1e-4`) and bounded covering
+  radius (`<= 0.115`), but `MoscoDensityFromBoundedCovering` remains open.
+- NS: the live Ladyzhenskaya obstruction is cubic, not quadratic:
+  `dE/dt <= C_nu E^3`.  `SubcriticalVortexStretchingAbsorption` remains the
+  Clay hinge.
+- YM: the Balaban target is now margin-parametric.  Bare seed has
+  `rho ~= 0.987`; usable `rho <= 0.90` requires `beta ~= 14.1637`, and
+  strong `rho <= 0.75` requires `beta ~= 15.0845`.  Continuum-uniform rho and
+  leakage bounds remain open.
+- Six Sprint 8 workers are assigned.  All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 7 attack-result receipts
+
+- Added `DASHI/Physics/Closure/PrunedSSPSpectralTransferReceipt.agda`.
+- Added `DASHI/Physics/Closure/NSLadyzhenskayaEnstrophyObstructionReceipt.agda`.
+- Added `DASHI/Physics/Closure/YMOneLoopBalaban1to3Receipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintSevenAttackResultReceipt.agda`.
+- Added matching docs and wired all four through `DASHI/Everything.agda`.
+- Gate3: greedy pruning gives a finite frame with `55/120` atoms retained and
+  `A_N >= 0.010` through `N <= 55`; weighted embeddings fail; admissible
+  density remains open.
+- NS: the enstrophy attack reproduces the Ladyzhenskaya/Prodi/Serrin
+  obstruction; the missing input is non-circular `L4_t L4_x` control.
+- YM: one-loop steps 1-3 pass, but nonperturbative continuum uniformity
+  remains open.
+- All promotion flags remain false.
+
+# 2026-06-03 Sprint 6 transfer correction receipts
+
+- Added `DASHI/Physics/Closure/Gate3SpectralTransferOrPruningReceipt.agda`.
+- Added `DASHI/Physics/Closure/NSEnstrophyClayHingeReceipt.agda`.
+- Added `DASHI/Physics/Closure/YMConstructiveQFTFlagRouteReceipt.agda`.
+- Added `DASHI/Physics/Closure/ClaySprintSixTransferWorkerAssignmentReceipt.agda`.
+- Added matching docs and wired all four through `DASHI/Everything.agda`.
+- Gate3 correction: the p-adic `L2(Q_p)` frame evidence is not sufficient
+  after the SSP map into the continuum Hilbert space.  The live support
+  blocker is now `SSPIsometricEmbeddingOrSpectralTransfer`, with
+  `PrunedSSPSpectralTransfer` and `WeightedSSPSpectralTransfer` as the
+  computable branches.
+- NS correction: the live Clay hinge is `VortexStretchingAbsorption`, hence
+  `PointwiseEnstrophyControl`; commutator control is Clay-equivalent, not a
+  shortcut.
+- YM correction: the finite 43-step induction remains retracted; the live
+  route is `YMBalabanContinuumLimit` plus Shimura-flat, Hamiltonian,
+  mass-gap survival, OS/Wightman, and nontrivial SU3.
+- Six workers are assigned to the corrected transfer/enstrophy/constructive
+  QFT targets.  All promotion flags remain false.
+
+# 2026-06-03 Sprint 5 correction receipts
+
+- Added `DASHI/Physics/Closure/Gate3FrameCarrierEquivalenceReceipt.agda`.
+- Added `DASHI/Physics/Closure/YMBalabanContinuumLimitReceipt.agda`.
+- Added `DASHI/Physics/Closure/NSCommutatorEquivalenceReceipt.agda`.
+- Added matching docs and wired all three through `DASHI/Everything.agda`.
+- Gate3: five of six frame-carrier fields are explicit; MirrorB
+  `notDegenerate1D` remains pending. `sigma_frame=0.145230` and
+  `S_3D=0.000017` are recorded, but Gate3 remains false.
+- YM: the 43-step finite induction is retracted. The live target is uniform
+  continuum Balaban control as `a0 -> 0`; `q(beta=6)=4.53>1` blocks starting
+  induction at the physical coupling.
+- NS: commutator Lipschitz control is recorded as equivalent to blowup
+  prevention; Bernstein/enstrophy/Besov shortcuts are circular and the
+  `K^(-1/2)` claim stays retracted.
+- Added `ClaySprintFiveSixWorkerAssignmentReceipt` and matching docs:
+  W1/W2 Gate3, W3/W4 YM, W5 NS, W6 governance.  This is ownership only and
+  records `hardBridgeCompletedHere=false`.
+- All promotion flags remain false.
+
+# 2026-06-03 Clay Sprint 6 flag-flip target receipt
+
+- Added `DASHI/Physics/Closure/ClaySprintSixFlagFlipReceipt.agda`.
+- Added `Docs/ClaySprintSixFlagFlip.md`.
+- Wired `ClaySprintSixFlagFlipReceipt` through `DASHI/Everything.agda`.
+- The receipt consumes the Sprint 5 Gate3 frame-carrier, NS
+  commutator-equivalence, and YM Balaban-continuum receipts.
+- Corrected flag-flip order:
+  Gate3 `MirrorBNonDegenerate2D` plus `SSPFrameCarrierEqualsOKTensorZ3` first;
+  NS `PointwiseEnstrophyControl` /
+  `CommutatorLipschitzControlWithoutRegularity` second and explicitly
+  Clay-equivalent; YM `YMBalabanContinuumLimit` plus downstream constructive
+  QFT closures third.
+- Six workers are assigned to those targets.
+- All promotion flags remain false.
+
 # 2026-06-03 Clay promotion flag-flip lemma priorities
 
 - Added `DASHI/Physics/Closure/ClayPromotionFlagFlipLemmaReceipt.agda`.

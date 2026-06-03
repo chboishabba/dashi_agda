@@ -1,3 +1,14 @@
+# 2026-06-03 Sprint 43 YM all-diameter KP/rho/leakage harness
+
+- Added a within-repo YM harness for the p=7 all-diameter KP/rho/leakage
+  diagnostic surface.
+- The script computes geometric KP tails, strict margin, rho target, leakage
+  tail, connected-animal side diagnostics, and explicit proof-certificate
+  gates from local CSV or smoke rows.
+- Added the Sprint 43 Agda receipt and docs/governance pointers.
+- No continuum YM, mass gap, Balaban transfer, OS/Wightman, Gate3, NS, or Clay
+  promotion follows.
+
 # 2026-06-02 nested 15SSP coordinate grammar integration
 
 - Updated `SSP7Plus7Plus1AtomGrammarReceipt` so the carrier grammar records
