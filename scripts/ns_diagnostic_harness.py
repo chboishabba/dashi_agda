@@ -5,6 +5,8 @@ This is an evidence-only bridge falsifier.  It consumes a truth NPZ with
 ``omega_snapshots`` and ``steps`` and writes:
 
 * ``ns_diagnostic_table.csv`` with one row per shell/time sample
+* ``ns_residue_semantics_audit.csv`` with side-by-side R+ definitions
+* ``ns_residue_semantics_wide.csv`` with one row per shell/time/theta
 * ``ns_diagnostic_checks.json`` with pass/fail summaries
 * ``ns_diagnostic_manifest.json`` with input and governance metadata
 
@@ -90,6 +92,73 @@ class BridgeBudgetRow:
     diagnostic_mode: str
 
 
+@dataclass(frozen=True)
+class ResidueAuditRow:
+    step: int
+    time: float
+    K: int
+    theta: float
+    semantic: str
+    semantic_status: str
+    Q_K: str
+    aligned_concentration_K: str
+    R_plus_K: str
+    adjusted_bridge_ratio: str
+    beta_hat_K: str
+    gamma_hat_K: str
+    eta_hat_K: str
+    budget_hat_K: str
+    zeroR_positiveQ: int
+    ratio_available: int
+    budget_pass: int
+    promotion_status: str
+    note: str
+
+
+@dataclass(frozen=True)
+class ResidueThetaSummaryRow:
+    theta: float
+    semantic: str
+    semantic_status: str
+    rows: int
+    ratio_available_rows: int
+    zeroR_positiveQ_rows: int
+    budget_pass_rows: int
+    sup_adjusted_bridge_ratio: str
+    median_adjusted_bridge_ratio: str
+    p95_adjusted_bridge_ratio: str
+    inf_budget_hat_K: str
+    all_budget_pass: int
+    all_ratios_available: int
+    interpretation: str
+    promotion_status: str
+
+
+@dataclass(frozen=True)
+class ResidueWideRow:
+    step: int
+    time: float
+    K: int
+    theta: float
+    Q_K: str
+    Conc_K: str
+    Rplus_strict: str
+    Rplus_strain: str
+    Rplus_stretchSign: str
+    Rplus_pressureRelaxed: str
+    Rplus_noPressure: str
+    C_strict: str
+    C_strain: str
+    C_stretchSign: str
+    C_pressureRelaxed: str
+    C_noPressure: str
+    zeroR_positiveQ_strict: int
+    zeroR_positiveQ_strain: int
+    zeroR_positiveQ_stretchSign: int
+    zeroR_positiveQ_pressureRelaxed: int
+    zeroR_positiveQ_noPressure: int
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--truth", type=Path, default=None, help="truth NPZ containing omega_snapshots and steps")
@@ -112,10 +181,24 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dt", type=float, default=None, help="override timestep")
     parser.add_argument("--nu", type=float, default=None, help="override viscosity")
     parser.add_argument("--theta", type=float, default=1.0, help="concentration penalty exponent")
+    parser.add_argument(
+        "--theta-grid",
+        type=float,
+        nargs="*",
+        default=None,
+        help="optional Sprint 43 residue-audit theta grid; defaults to --theta unless --residue-semantics-audit is set",
+    )
     parser.add_argument("--p", type=int, default=3, help="prime lane used in budget_K")
+    parser.add_argument("--residue-semantics-audit", action="store_true", help="emit Sprint 43 side-by-side Rplus semantics")
     parser.add_argument("--coherence-threshold", type=float, default=0.65)
     parser.add_argument("--beltrami-threshold", type=float, default=0.15)
     parser.add_argument("--pressure-decorrelation-threshold", type=float, default=0.70)
+    parser.add_argument(
+        "--pressure-high-threshold",
+        type=float,
+        default=0.90,
+        help="Sprint 44 pressure-relaxed downgrade threshold",
+    )
     parser.add_argument("--eps", type=float, default=1e-12, help="diagnostic denominator epsilon")
     parser.add_argument(
         "--progress-every",
@@ -368,6 +451,36 @@ def _concentration(omega: np.ndarray) -> float:
     return float(np.max(density) / mean)
 
 
+def _positive_stretch_share(stretch_density: np.ndarray) -> float:
+    density = np.abs(stretch_density)
+    total = float(np.sum(density))
+    if total <= EPS:
+        return 0.0
+    return float(np.sum(np.maximum(stretch_density, 0.0)) / total)
+
+
+def _principal_positive_strain_residue(strain: np.ndarray, omega: np.ndarray) -> float:
+    omega_sq = np.sum(omega * omega, axis=-1)
+    total_omega = float(np.sum(omega_sq))
+    if total_omega <= EPS:
+        return 0.0
+    vals, vecs = np.linalg.eigh(strain)
+    lam = vals[..., -1]
+    principal = vecs[..., :, -1]
+    omega_norm = np.sqrt(omega_sq)
+    active = omega_norm > EPS
+    alignment = np.zeros_like(omega_sq)
+    if np.any(active):
+        unit_omega = np.zeros_like(omega)
+        unit_omega[active] = omega[active] / omega_norm[active, None]
+        alignment = np.einsum("...i,...i->...", unit_omega, principal) ** 2
+    positive_weight = np.maximum(lam, 0.0) * omega_sq
+    denom = float(np.sum(positive_weight))
+    if denom <= EPS:
+        return 0.0
+    return float(max(0.0, min(1.0, np.sum(alignment * positive_weight) / denom)))
+
+
 def _classify_residue(
     stretch_density: np.ndarray,
     beltrami_defect: float,
@@ -398,6 +511,79 @@ def _classify_residue(
     return rminus, max(0.0, 1.0 - rminus), 0.0
 
 
+def _residue_semantics(
+    stretch_density: np.ndarray,
+    strain_tensor: np.ndarray,
+    omega_k: np.ndarray,
+    beltrami_defect: float,
+    coherence_defect: float,
+    pressure_decorrelation: float,
+    *,
+    strict_rplus: float,
+    beltrami_threshold: float,
+    coherence_threshold: float,
+    pressure_threshold: float,
+    pressure_high_threshold: float,
+) -> dict[str, tuple[float, str, str]]:
+    density = np.abs(stretch_density)
+    total = float(np.sum(density))
+    strain_residue = _principal_positive_strain_residue(strain_tensor, omega_k)
+    if total <= EPS:
+        return {
+            "Rplus_strict": (strict_rplus, "proof_candidate_current", "zero stretching density"),
+            "Rplus_strain": (strain_residue, "diagnostic_physical_strain", "zero signed stretching density"),
+            "Rplus_stretchSign": (0.0, "diagnostic_sign_residue", "zero stretching density"),
+            "Rplus_pressureRelaxed": (0.0, "diagnostic_pressure_relaxed", "zero stretching density"),
+            "Rplus_noPressure": (0.0, "diagnostic_no_pressure", "zero stretching density"),
+        }
+    positive_mass = _positive_stretch_share(stretch_density)
+    coherent = (1.0 - coherence_defect) >= coherence_threshold
+    non_beltrami = beltrami_defect >= beltrami_threshold
+    pressure_decorrelated = pressure_decorrelation >= pressure_threshold
+    pressure_high_decorr = pressure_decorrelation > pressure_high_threshold
+    pressure_relaxed = positive_mass if coherent and non_beltrami and not pressure_high_decorr else 0.0
+    no_pressure = strain_residue if non_beltrami else 0.0
+    note_bits = []
+    if coherent:
+        note_bits.append("coherent")
+    else:
+        note_bits.append("not_coherent")
+    if non_beltrami:
+        note_bits.append("non_beltrami")
+    else:
+        note_bits.append("beltrami_safe")
+    if pressure_decorrelated:
+        note_bits.append("pressure_decorrelated")
+    else:
+        note_bits.append("pressure_coupled")
+    if pressure_high_decorr:
+        note_bits.append("pressure_high_decorrelated")
+    note = ",".join(note_bits)
+    return {
+        "Rplus_strict": (strict_rplus, "proof_candidate_current", note),
+        "Rplus_strain": (
+            strain_residue,
+            "diagnostic_physical_strain",
+            "principal positive-strain alignment; ignores braid and pressure gates",
+        ),
+        "Rplus_stretchSign": (
+            positive_mass,
+            "diagnostic_sign_residue",
+            "direct positive signed stretching share; tautology-adjacent diagnostic",
+        ),
+        "Rplus_pressureRelaxed": (
+            pressure_relaxed,
+            "diagnostic_pressure_relaxed",
+            "strict coherence/non-Beltrami gates; pressure downgrades only above high threshold",
+        ),
+        "Rplus_noPressure": (
+            no_pressure,
+            "diagnostic_no_pressure",
+            "non-Beltrami positive-strain residue; pressure cannot downgrade red",
+        ),
+    }
+
+
 def _finite_slope(xs: list[float], ys: list[float], default: float = 0.0) -> float:
     pairs = [(x, y) for x, y in zip(xs, ys) if math.isfinite(x) and math.isfinite(y) and y > 0.0]
     if len(pairs) < 2:
@@ -424,7 +610,9 @@ def _progress(label: str, done: int, total: int, started: float, every: int) -> 
     )
 
 
-def _rows_for_2d_scalar(omega: np.ndarray, steps: np.ndarray, meta: dict[str, Any], args: argparse.Namespace) -> tuple[list[HarnessRow], dict[str, Any]]:
+def _rows_for_2d_scalar(
+    omega: np.ndarray, steps: np.ndarray, meta: dict[str, Any], args: argparse.Namespace
+) -> tuple[list[HarnessRow], dict[str, Any], list[dict[str, Any]]]:
     dt = float(meta.get("dt", 1.0))
     nu = _effective_nu(meta, args.nu)
     shells = _dyadic_shells(tuple(omega.shape[1:]))
@@ -485,7 +673,7 @@ def _rows_for_2d_scalar(omega: np.ndarray, steps: np.ndarray, meta: dict[str, An
         "shell_convention": "dyadic",
         "velocity_source": "unavailable_2d_scalar",
     }
-    return rows, summary
+    return rows, summary, []
 
 
 def _rows_for_3d_vector(
@@ -494,7 +682,7 @@ def _rows_for_3d_vector(
     steps: np.ndarray,
     meta: dict[str, Any],
     args: argparse.Namespace,
-) -> tuple[list[HarnessRow], dict[str, Any]]:
+) -> tuple[list[HarnessRow], dict[str, Any], list[dict[str, Any]]]:
     dt = float(meta.get("dt", 1.0))
     nu = _effective_nu(meta, args.nu)
     shells, shell_convention = _shells_for_shape(tuple(omega.shape[1:-1]), meta, args)
@@ -533,6 +721,19 @@ def _rows_for_3d_vector(
                 pressure_threshold=float(args.pressure_decorrelation_threshold),
             )
             c_k = float(q_k / (rplus * (concentration ** float(args.theta)) + float(args.eps)))
+            semantic_values = _residue_semantics(
+                stretch_density,
+                s_k_tensor,
+                omega_k,
+                beltrami,
+                coherence_defect,
+                pressure_decorrelation,
+                strict_rplus=rplus,
+                beltrami_threshold=float(args.beltrami_threshold),
+                coherence_threshold=float(args.coherence_threshold),
+                pressure_threshold=float(args.pressure_decorrelation_threshold),
+                pressure_high_threshold=float(args.pressure_high_threshold),
+            )
             preliminary.append(
                 {
                     "K": k,
@@ -550,6 +751,7 @@ def _rows_for_3d_vector(
                     "PressureDecorrelationScore_K": pressure_decorrelation,
                     "AlignedConcentration_K": concentration,
                     "C_K": c_k,
+                    "residue_semantics": semantic_values,
                 }
             )
             done += 1
@@ -620,7 +822,7 @@ def _rows_for_3d_vector(
         "shell_convention": shell_convention,
         "velocity_source": "velocity_snapshots" if velocity is not None else "curl_inverse_from_omega",
     }
-    return enriched, summary
+    return enriched, summary, preliminary
 
 
 def _write_csv(path: Path, rows: Iterable[HarnessRow]) -> None:
@@ -814,6 +1016,298 @@ def _write_bridge_budget_csv(path: Path, rows: Iterable[BridgeBudgetRow]) -> Non
             writer.writerow(row.__dict__)
 
 
+def _theta_grid(args: argparse.Namespace) -> list[float]:
+    if args.theta_grid is not None and len(args.theta_grid) > 0:
+        values = [float(v) for v in args.theta_grid]
+    elif bool(args.residue_semantics_audit):
+        values = [0.0, 0.25, 0.5, 1.0]
+    else:
+        values = [float(args.theta)]
+    out: list[float] = []
+    for value in values:
+        if value not in out:
+            out.append(value)
+    return out
+
+
+def _percentile(values: list[float], q: float) -> float | None:
+    if not values:
+        return None
+    return float(np.percentile(np.asarray(values, dtype=np.float64), q))
+
+
+def _interpret_semantic_summary(
+    semantic: str,
+    zero_rows: int,
+    ratio_rows: int,
+    rows: int,
+    inf_budget: float | None,
+) -> str:
+    if zero_rows > 0:
+        return "FAIL_ZERO_RPLUS_POSITIVE_Q"
+    if ratio_rows < rows:
+        return "FAIL_RATIO_UNAVAILABLE"
+    if inf_budget is None or inf_budget <= 0.5:
+        return "FAIL_BUDGET_BELOW_HALF"
+    if semantic == "Rplus_strict":
+        return "STRICT_DIAGNOSTIC_SURVIVES_OBSERVED_GRID"
+    return "RELAXED_DIAGNOSTIC_SURVIVES_OBSERVED_GRID_NOT_PROOF"
+
+
+def _residue_audit_rows(
+    preliminary: list[dict[str, Any]],
+    meta: dict[str, Any],
+    args: argparse.Namespace,
+) -> tuple[list[ResidueAuditRow], list[ResidueThetaSummaryRow], dict[str, Any]]:
+    if not preliminary:
+        return [], [], {
+            "residue_semantics_audit_available": False,
+            "residue_semantics": [],
+            "residue_theta_grid": [],
+            "residue_semantics_best": None,
+        }
+
+    by_time: dict[float, list[dict[str, Any]]] = {}
+    for row in preliminary:
+        by_time.setdefault(float(row["t"]), []).append(row)
+    times = sorted(by_time)
+    dt_values = [b - a for a, b in zip(times, times[1:]) if b > a]
+    default_dt = min(dt_values) if dt_values else float(meta.get("dt", 1.0))
+
+    semantics = sorted(
+        {
+            semantic
+            for row in preliminary
+            for semantic in dict(row.get("residue_semantics", {})).keys()
+        }
+    )
+    theta_values = _theta_grid(args)
+    per_semantic_slopes: dict[tuple[float, str], tuple[float, float]] = {}
+    for time in times:
+        time_rows = sorted(by_time[time], key=lambda r: int(r["K"]))
+        xs = [float(r["K"]) for r in time_rows]
+        conc_slope = _finite_slope(xs, [float(r["AlignedConcentration_K"]) for r in time_rows])
+        beta = max(0.0, conc_slope)
+        for semantic in semantics:
+            rplus_values = []
+            for row in time_rows:
+                values = dict(row.get("residue_semantics", {}))
+                value = values.get(semantic, (0.0, "", ""))[0]
+                rplus_values.append(float(value) + EPS)
+            rplus_slope = _finite_slope(xs, rplus_values)
+            gamma = max(0.0, -rplus_slope)
+            per_semantic_slopes[(time, semantic)] = (beta, gamma)
+
+    out: list[ResidueAuditRow] = []
+    for time in times:
+        for row in sorted(by_time[time], key=lambda r: int(r["K"])):
+            step = int(round(time / max(default_dt, EPS)))
+            q_k = float(row["Q_K"])
+            concentration = float(row["AlignedConcentration_K"])
+            values = dict(row.get("residue_semantics", {}))
+            for semantic in semantics:
+                rplus, status, note = values.get(semantic, (0.0, "unavailable", "semantic unavailable"))
+                rplus = float(rplus)
+                beta, gamma = per_semantic_slopes[(time, semantic)]
+                for theta in theta_values:
+                    budget = gamma - float(theta) * beta
+                    zero_r_positive_q = int(rplus <= float(args.eps) and q_k > float(args.eps))
+                    adjusted = None
+                    if not zero_r_positive_q and rplus > EPS and concentration > EPS:
+                        adjusted = q_k / (rplus * (concentration ** float(theta)) + EPS)
+                    promotion = "NO_PROMOTION_RESIDUE_SEMANTICS_AUDIT"
+                    if zero_r_positive_q:
+                        promotion = "NO_PROMOTION_ZERO_RPLUS_POSITIVE_Q"
+                    elif budget <= 0.5:
+                        promotion = "NO_PROMOTION_BUDGET_FAIL"
+                    elif adjusted is None:
+                        promotion = "NO_PROMOTION_BRIDGE_RATIO_UNAVAILABLE"
+                    elif status != "proof_candidate_current":
+                        promotion = "NO_PROMOTION_SEMANTIC_NOT_PROOF_BOUNDARY"
+                    out.append(
+                        ResidueAuditRow(
+                            step=step,
+                            time=float(time),
+                            K=int(row["K"]),
+                            theta=float(theta),
+                            semantic=semantic,
+                            semantic_status=status,
+                            Q_K=_fmt(q_k),
+                            aligned_concentration_K=_fmt(concentration),
+                            R_plus_K=_fmt(rplus),
+                            adjusted_bridge_ratio=_fmt(adjusted),
+                            beta_hat_K=_fmt(beta),
+                            gamma_hat_K=_fmt(gamma),
+                            eta_hat_K=_fmt(0.0),
+                            budget_hat_K=_fmt(budget),
+                            zeroR_positiveQ=zero_r_positive_q,
+                            ratio_available=1 if adjusted is not None else 0,
+                            budget_pass=1 if budget > 0.5 else 0,
+                            promotion_status=promotion,
+                            note=str(note),
+                        )
+                    )
+
+    theta_summary_rows: list[ResidueThetaSummaryRow] = []
+    semantic_summary: dict[str, dict[str, Any]] = {}
+    for theta in theta_values:
+        for semantic in semantics:
+            rows = [r for r in out if r.semantic == semantic and abs(r.theta - float(theta)) <= EPS]
+            ratios = [float(r.adjusted_bridge_ratio) for r in rows if r.adjusted_bridge_ratio]
+            budgets = [float(r.budget_hat_K) for r in rows if r.budget_hat_K]
+            inf_budget = min(budgets) if budgets else None
+            interpretation = _interpret_semantic_summary(
+                semantic,
+                sum(r.zeroR_positiveQ for r in rows),
+                sum(r.ratio_available for r in rows),
+                len(rows),
+                inf_budget,
+            )
+            promotion = "NO_PROMOTION_RESIDUE_SEMANTICS_AUDIT"
+            if interpretation.startswith("FAIL_ZERO"):
+                promotion = "NO_PROMOTION_ZERO_RPLUS_POSITIVE_Q"
+            elif interpretation.startswith("FAIL_RATIO"):
+                promotion = "NO_PROMOTION_BRIDGE_RATIO_UNAVAILABLE"
+            elif interpretation.startswith("FAIL_BUDGET"):
+                promotion = "NO_PROMOTION_BUDGET_FAIL"
+            elif semantic != "Rplus_strict":
+                promotion = "NO_PROMOTION_SEMANTIC_NOT_PROOF_BOUNDARY"
+            theta_summary_rows.append(
+                ResidueThetaSummaryRow(
+                    theta=float(theta),
+                    semantic=semantic,
+                    semantic_status=rows[0].semantic_status if rows else "unavailable",
+                    rows=len(rows),
+                    ratio_available_rows=sum(r.ratio_available for r in rows),
+                    zeroR_positiveQ_rows=sum(r.zeroR_positiveQ for r in rows),
+                    budget_pass_rows=sum(r.budget_pass for r in rows),
+                    sup_adjusted_bridge_ratio=_fmt(max(ratios) if ratios else None),
+                    median_adjusted_bridge_ratio=_fmt(_percentile(ratios, 50.0)),
+                    p95_adjusted_bridge_ratio=_fmt(_percentile(ratios, 95.0)),
+                    inf_budget_hat_K=_fmt(inf_budget),
+                    all_budget_pass=1 if budgets and min(budgets) > 0.5 else 0,
+                    all_ratios_available=1 if rows and all(r.ratio_available for r in rows) else 0,
+                    interpretation=interpretation,
+                    promotion_status=promotion,
+                )
+            )
+
+    for semantic in semantics:
+        rows = [r for r in out if r.semantic == semantic]
+        ratios = [float(r.adjusted_bridge_ratio) for r in rows if r.adjusted_bridge_ratio]
+        budgets = [float(r.budget_hat_K) for r in rows if r.budget_hat_K]
+        semantic_summary[semantic] = {
+            "semantic_status": rows[0].semantic_status if rows else "unavailable",
+            "rows": len(rows),
+            "ratio_available_rows": sum(r.ratio_available for r in rows),
+            "zeroR_positiveQ_rows": sum(r.zeroR_positiveQ for r in rows),
+            "budget_pass_rows": sum(r.budget_pass for r in rows),
+            "sup_adjusted_bridge_ratio": max(ratios) if ratios else None,
+            "median_adjusted_bridge_ratio": _percentile(ratios, 50.0),
+            "p95_adjusted_bridge_ratio": _percentile(ratios, 95.0),
+            "inf_budget_hat_K": min(budgets) if budgets else None,
+            "all_budget_pass": bool(budgets and min(budgets) > 0.5),
+            "all_ratios_available": bool(rows and all(r.ratio_available for r in rows)),
+        }
+
+    best = None
+    finite_candidates = [
+        (name, data)
+        for name, data in semantic_summary.items()
+        if data["sup_adjusted_bridge_ratio"] is not None
+        and math.isfinite(float(data["sup_adjusted_bridge_ratio"]))
+    ]
+    if finite_candidates:
+        best = min(finite_candidates, key=lambda item: float(item[1]["sup_adjusted_bridge_ratio"]))[0]
+
+    summary = {
+        "residue_semantics_audit_available": True,
+        "residue_semantics": semantics,
+        "residue_theta_grid": theta_values,
+        "residue_semantics_summary": semantic_summary,
+        "residue_theta_grid_summary": [row.__dict__ for row in theta_summary_rows],
+        "residue_semantics_best": best,
+        "residue_semantics_promotes": False,
+        "residue_semantics_boundary": (
+            "Side-by-side R_plus definitions are diagnostic unless separately proved; "
+            "no semantic can promote without budget > 1/2, bridge ratio availability, "
+            "actual lineage, stretch absorption, and no-blowup proof."
+        ),
+    }
+    return out, theta_summary_rows, summary
+
+
+def _write_residue_audit_csv(path: Path, rows: Iterable[ResidueAuditRow]) -> None:
+    rows = list(rows)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(ResidueAuditRow.__dataclass_fields__.keys()))
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row.__dict__)
+
+
+def _write_residue_theta_summary_csv(path: Path, rows: Iterable[ResidueThetaSummaryRow]) -> None:
+    rows = list(rows)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(ResidueThetaSummaryRow.__dataclass_fields__.keys()))
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row.__dict__)
+
+
+def _write_residue_wide_csv(path: Path, rows: Iterable[ResidueAuditRow]) -> list[ResidueWideRow]:
+    grouped: dict[tuple[int, float, int, float], dict[str, ResidueAuditRow]] = {}
+    for row in rows:
+        grouped.setdefault((row.step, row.time, row.K, row.theta), {})[row.semantic] = row
+    wide_rows: list[ResidueWideRow] = []
+    for key, semantic_rows in sorted(grouped.items()):
+        step, time, k, theta = key
+        exemplar = next(iter(semantic_rows.values()))
+
+        def value(semantic: str, attr: str) -> str:
+            row = semantic_rows.get(semantic)
+            return "" if row is None else str(getattr(row, attr))
+
+        def flag(semantic: str) -> int:
+            row = semantic_rows.get(semantic)
+            return 0 if row is None else int(row.zeroR_positiveQ)
+
+        wide_rows.append(
+            ResidueWideRow(
+                step=step,
+                time=time,
+                K=k,
+                theta=theta,
+                Q_K=exemplar.Q_K,
+                Conc_K=exemplar.aligned_concentration_K,
+                Rplus_strict=value("Rplus_strict", "R_plus_K"),
+                Rplus_strain=value("Rplus_strain", "R_plus_K"),
+                Rplus_stretchSign=value("Rplus_stretchSign", "R_plus_K"),
+                Rplus_pressureRelaxed=value("Rplus_pressureRelaxed", "R_plus_K"),
+                Rplus_noPressure=value("Rplus_noPressure", "R_plus_K"),
+                C_strict=value("Rplus_strict", "adjusted_bridge_ratio"),
+                C_strain=value("Rplus_strain", "adjusted_bridge_ratio"),
+                C_stretchSign=value("Rplus_stretchSign", "adjusted_bridge_ratio"),
+                C_pressureRelaxed=value("Rplus_pressureRelaxed", "adjusted_bridge_ratio"),
+                C_noPressure=value("Rplus_noPressure", "adjusted_bridge_ratio"),
+                zeroR_positiveQ_strict=flag("Rplus_strict"),
+                zeroR_positiveQ_strain=flag("Rplus_strain"),
+                zeroR_positiveQ_stretchSign=flag("Rplus_stretchSign"),
+                zeroR_positiveQ_pressureRelaxed=flag("Rplus_pressureRelaxed"),
+                zeroR_positiveQ_noPressure=flag("Rplus_noPressure"),
+            )
+        )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(ResidueWideRow.__dataclass_fields__.keys()))
+        writer.writeheader()
+        for row in wide_rows:
+            writer.writerow(row.__dict__)
+    return wide_rows
+
+
 def _checks(rows: list[HarnessRow], mode_summary: dict[str, Any]) -> dict[str, Any]:
     finite_c = [r.C_K for r in rows if math.isfinite(r.C_K)]
     finite_mpp = [r.M_plus_plus for r in rows if math.isfinite(r.M_plus_plus)]
@@ -856,9 +1350,9 @@ def main() -> None:
     args = parse_args()
     omega, velocity, steps, meta, source = _load_truth(args)
     if omega.ndim == 3:
-        rows, summary = _rows_for_2d_scalar(omega, steps, meta, args)
+        rows, summary, residue_preliminary = _rows_for_2d_scalar(omega, steps, meta, args)
     elif omega.ndim == 5 and omega.shape[-1] == 3:
-        rows, summary = _rows_for_3d_vector(omega, velocity, steps, meta, args)
+        rows, summary, residue_preliminary = _rows_for_3d_vector(omega, velocity, steps, meta, args)
     else:
         raise SystemExit(
             "omega_snapshots must be 2D scalar (T,N,N) or 3D vector (T,N,N,N,3); "
@@ -868,30 +1362,48 @@ def main() -> None:
     args.out_dir.mkdir(parents=True, exist_ok=True)
     csv_path = args.out_dir / "ns_diagnostic_table.csv"
     bridge_csv_path = args.out_dir / "ns_bridge_budget_table.csv"
+    residue_audit_path = args.out_dir / "ns_residue_semantics_audit.csv"
+    residue_wide_path = args.out_dir / "ns_residue_semantics_wide.csv"
+    residue_theta_summary_path = args.out_dir / "ns_residue_theta_grid_summary.csv"
     checks_path = args.out_dir / "ns_diagnostic_checks.json"
     manifest_path = args.out_dir / "ns_diagnostic_manifest.json"
     _write_csv(csv_path, rows)
     bridge_rows, bridge_summary = _bridge_budget_rows(rows, meta)
     _write_bridge_budget_csv(bridge_csv_path, bridge_rows)
+    residue_audit_rows, residue_theta_summary_rows, residue_audit_summary = _residue_audit_rows(residue_preliminary, meta, args)
+    _write_residue_audit_csv(residue_audit_path, residue_audit_rows)
+    residue_wide_rows = _write_residue_wide_csv(residue_wide_path, residue_audit_rows)
+    _write_residue_theta_summary_csv(residue_theta_summary_path, residue_theta_summary_rows)
     checks = _checks(rows, summary)
     checks.update(bridge_summary)
+    checks.update(residue_audit_summary)
     manifest = {
         "source": source,
         "meta": meta,
         "row_count": len(rows),
         "bridge_budget_row_count": len(bridge_rows),
+        "residue_semantics_audit_row_count": len(residue_audit_rows),
+        "residue_semantics_wide_row_count": len(residue_wide_rows),
+        "residue_theta_grid_summary_row_count": len(residue_theta_summary_rows),
         "outputs": {
             "table": str(csv_path),
             "bridge_budget_table": str(bridge_csv_path),
+            "residue_semantics_audit": str(residue_audit_path),
+            "residue_semantics_wide": str(residue_wide_path),
+            "residue_theta_grid_summary": str(residue_theta_summary_path),
             "checks": str(checks_path),
             "manifest": str(manifest_path),
         },
-        "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFortyTwoNSDiagnosticHarnessReceipt",
+        "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFortyFourResidueSemanticsAuditReceipt",
         "evidence_boundary": "diagnostic harness only; no Navier-Stokes theorem or Clay promotion",
     }
     checks_path.write_text(json.dumps(checks, indent=2, allow_nan=True), encoding="utf-8")
     manifest_path.write_text(json.dumps(manifest, indent=2, allow_nan=True), encoding="utf-8")
-    print(f"[ns-harness] wrote {csv_path}, {bridge_csv_path}, {checks_path}, {manifest_path}")
+    print(
+        f"[ns-harness] wrote {csv_path}, {bridge_csv_path}, "
+        f"{residue_audit_path}, {residue_wide_path}, {residue_theta_summary_path}, "
+        f"{checks_path}, {manifest_path}"
+    )
     print(
         "[ns-harness] "
         f"mode={checks.get('diagnostic_mode')} pass={checks.get('pass')} "

@@ -1,3 +1,44 @@
+# 2026-06-04 Clay Sprint 44 residue semantics audit
+
+- Extended `scripts/ns_diagnostic_harness.py` with the Sprint 44 audit mode:
+  `--residue-semantics-audit`, theta-grid support, pressure-high thresholding,
+  explicit `zeroR_positiveQ` rows, `ns_residue_semantics_wide.csv`, and
+  `ns_residue_theta_grid_summary.csv`.
+- The audited semantics are now the requested named set:
+  `Rplus_strict`, `Rplus_strain`, `Rplus_stretchSign`,
+  `Rplus_pressureRelaxed`, and `Rplus_noPressure`.
+- Added `Docs/ClaySprintFortyFourResidueSemanticsAudit.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFortyFourResidueSemanticsAuditReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Replayed N32 seed0 and N64 seed0/seed1 under
+  `Docs/Images/clay-analytic-sprint/sprint44_residue_semantics_audit/`.
+  Strict red hits `zeroR_positiveQ`; stretch-sign and strain make most ratios
+  finite but remain diagnostic-only and budget-failing.
+- This is a falsification harness only.  It does not prove the physical
+  bridge, ternary lineage, stretch absorption, no-blowup, or Clay NS.
+
+# 2026-06-04 Clay Sprint 43 NS residue semantics audit
+
+- Extended `scripts/ns_diagnostic_harness.py` to emit
+  `ns_residue_semantics_audit.csv`.
+- Added `Docs/ClaySprintFortyThreeNSResidueSemanticsAudit.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFortyThreeNSResidueSemanticsAuditReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Audited six `R_plus_K` semantics on repaired N32/N64 3D truth artifacts:
+  `Rplus_strict`, `Rplus_strain`, `Rplus_stretchSign`,
+  `Rplus_pressureRelaxed`, and `Rplus_noPressure`.
+- Added Sprint 44 wide and theta summary outputs:
+  `ns_residue_semantics_wide.csv` and `ns_residue_theta_grid_summary.csv`.
+- Result on N64 seed0/seed1: strict and pressure-relaxed definitions fail by
+  zero `Rplus` with positive `Q` on 208 / 728 rows. `Rplus_stretchSign`
+  makes ratios finite on 702 / 728 rows, with theta `1` sup adjusted ratio
+  `0.071772764128325409` on seed0 and `0.0056805288947764212` on seed1.
+- Blocker remains: ratio gaps persist, stretch-sign/strain definitions are
+  diagnostic-only, and all audited budgets stay below `1/2`; no Clay, NS,
+  Gate3, YM, or terminal promotion changed.
+
 # 2026-06-04 Clay Sprint 43 NS 3D truth bridge repair
 
 - Repaired `scripts/ns_diagnostic_harness.py` for 3D dashiCFD truth artifacts:

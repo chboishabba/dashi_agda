@@ -92,3 +92,11 @@ Q_K <= C * R_K^+ * concentration_K^theta
 
 and does not supply actual ternary particle lineage estimates.  No NS, Gate3,
 YM, terminal theorem, or Clay promotion flag changes.
+
+## Follow-Up Audit
+
+The next residue-definition pass is recorded in
+`Docs/ClaySprintFortyThreeNSResidueSemanticsAudit.md`.  It shows that relaxed
+positive-stretch semantics make adjusted bridge ratios finite on most repaired
+N32/N64 rows, but those semantics are diagnostic-only and all audited budgets
+still fail the required `> 1/2` gate.

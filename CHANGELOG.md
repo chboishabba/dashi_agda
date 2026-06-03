@@ -6,6 +6,37 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 44 NS residue semantics audit for `2026-06-04`: extended
+  `scripts/ns_diagnostic_harness.py` with `--residue-semantics-audit`,
+  theta-grid rows, pressure-high thresholding, explicit `zeroR_positiveQ`
+  accounting, `ns_residue_semantics_wide.csv`, and
+  `ns_residue_theta_grid_summary.csv`.  Added
+  `Docs/ClaySprintFortyFourResidueSemanticsAudit.md`, added
+  `DASHI/Physics/Closure/ClaySprintFortyFourResidueSemanticsAuditReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`.  The audit compares
+  `Rplus_strict`, `Rplus_strain`, `Rplus_stretchSign`,
+  `Rplus_pressureRelaxed`, and `Rplus_noPressure` under the same physical
+  `Q_K` bridge.  N32 and N64 seed0/seed1 were replayed under the Sprint 44
+  artifact root; strict red hits `zeroR_positiveQ`, while stretch-sign/strain
+  make most ratios finite but remain diagnostic-only and budget-failing.  No
+  promotion flags changed.
+
+- Sprint 43 NS residue semantics audit for `2026-06-04`: extended
+  `scripts/ns_diagnostic_harness.py` to emit
+  `ns_residue_semantics_audit.csv`, `ns_residue_semantics_wide.csv`, and
+  `ns_residue_theta_grid_summary.csv`, added
+  `Docs/ClaySprintFortyThreeNSResidueSemanticsAudit.md`, added
+  `DASHI/Physics/Closure/ClaySprintFortyFourResidueSemanticsAuditReceipt.agda`,
+  added
+  `DASHI/Physics/Closure/ClaySprintFortyThreeNSResidueSemanticsAuditReceipt.agda`,
+  and wired the receipt through `DASHI/Everything.agda`.  The audit compares
+  `Rplus_strict`, `Rplus_strain`, `Rplus_stretchSign`,
+  `Rplus_pressureRelaxed`, and `Rplus_noPressure` over theta
+  `0, 0.25, 0.5, 1`.  On N64 seed0/seed1, strict and pressure-relaxed
+  semantics fail with zero `Rplus` and positive `Q` on 208 / 728 rows;
+  strain/no-pressure/stretch-sign make ratios finite on 702 / 728 rows, but
+  all audited budgets remain `<= 1/2`.  No promotion flags changed.
+
 - Sprint 43 NS 3D truth bridge repair for `2026-06-04`: repaired
   `scripts/ns_diagnostic_harness.py` so 3D `make_truth_3d.py` artifacts use
   integer-radius shell labels, `meta_json.k_star`, and stored

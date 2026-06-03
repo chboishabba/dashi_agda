@@ -3,6 +3,85 @@
 
 # P0 BLOCKERS
 
+• Implemented the Sprint 44 NS residue semantics audit extension.
+
+  Added exact named audit semantics to `scripts/ns_diagnostic_harness.py`:
+  `Rplus_strict`, `Rplus_strain`, `Rplus_stretchSign`,
+  `Rplus_pressureRelaxed`, and `Rplus_noPressure`.
+
+  The harness now supports:
+
+  - `--residue-semantics-audit`
+  - `--theta-grid 0 0.25 0.5 1.0`
+  - `--pressure-high-threshold`
+  - `ns_residue_semantics_audit.csv`
+  - `ns_residue_semantics_wide.csv`
+  - `ns_residue_theta_grid_summary.csv`
+  - `zeroR_positiveQ` accounting.
+
+  Added:
+
+  - Docs/ClaySprintFortyFourResidueSemanticsAudit.md
+  - DASHI/Physics/Closure/ClaySprintFortyFourResidueSemanticsAuditReceipt.agda
+  - Docs/Images/clay-analytic-sprint/sprint44_residue_semantics_audit/
+
+  Remaining P0 analytic gates are unchanged:
+
+  - [ ] Promote one residue semantic only if it has proof authority.
+  - [ ] Replace shell-row ratios with actual ternary lineage estimates.
+  - [ ] Close or falsify `budget_K > 1/2`.
+  - [ ] Prove stretch absorption and no finite-time blowup before any Clay
+        promotion.
+
+• Implemented the Sprint 43 NS residue semantics audit.
+
+  Added:
+
+  - scripts/ns_diagnostic_harness.py
+      - Now emits `ns_residue_semantics_audit.csv`.
+      - Now also emits `ns_residue_semantics_wide.csv` and
+        `ns_residue_theta_grid_summary.csv`.
+      - Audits Sprint 44 candidate semantics: `Rplus_strict`,
+        `Rplus_strain`, `Rplus_stretchSign`, `Rplus_pressureRelaxed`, and
+        `Rplus_noPressure`.
+      - Records per-semantic `R_plus_K`, adjusted bridge ratio,
+        `beta/gamma/eta`, budget, zero-`Rplus`/positive-`Q` flags, ratio
+        availability, budget pass, and proof/diagnostic status across theta
+        grid `0, 0.25, 0.5, 1`.
+
+  - Docs/ClaySprintFortyThreeNSResidueSemanticsAudit.md
+  - DASHI/Physics/Closure/ClaySprintFortyFourResidueSemanticsAuditReceipt.agda
+  - DASHI/Physics/Closure/ClaySprintFortyThreeNSResidueSemanticsAuditReceipt.agda
+  - DASHI/Everything.agda import wiring.
+  - Docs/Images/clay-analytic-sprint/sprint43_ns3d_seed0_residue_audit/
+  - Docs/Images/clay-analytic-sprint/sprint44_residue_semantics_N64_seed0/
+  - Docs/Images/clay-analytic-sprint/sprint44_residue_semantics_N64_seed1/
+
+  Results:
+
+  - N64 seed0: `Rplus_strict` and `Rplus_pressureRelaxed` fail with
+    zero-`Rplus`/positive-`Q` on 208 / 728 rows. `Rplus_stretchSign` makes
+    ratios finite on 702 / 728 rows; at theta `1`, `sup C = 0.071772764128325409`,
+    but `inf_budget = -0.00099515119744580786`.
+  - N64 seed1: same zero-`Rplus`/positive-`Q` failure on 208 / 728 strict and
+    pressure-relaxed rows. `Rplus_stretchSign` makes ratios finite on
+    702 / 728 rows; at theta `1`, `sup C = 0.0056805288947764212`, but
+    `inf_budget = -0.0017769118671767253`.
+  - Theta `0` does not rescue the budget: the budget infimum is `0`, still not
+    greater than `1/2`.
+  - No semantic promotes; the audit remains diagnostic-only.
+
+  Remaining P0 analytic gates:
+
+  - [ ] Decide whether positive-stretch mass can be promoted into a
+        proof-authoritative `R_plus_K`, or record it as only a diagnostic
+        counterfactual.
+  - [ ] Replace shell-row semantics with actual ternary lineage estimates.
+  - [ ] Close or falsify the budget inequality
+        `gamma_K + eta_K log_2(p) - theta beta_K > 1/2`.
+  - [ ] Prove stretch absorption and no finite-time blowup from the audited
+        diagnostics before any promotion.
+
 • Implemented the Sprint 43 NS 3D truth bridge repair.
 
   Added:

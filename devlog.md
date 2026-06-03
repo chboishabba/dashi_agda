@@ -1,3 +1,14 @@
+# 2026-06-04 Sprint 44 NS residue semantics audit
+
+- Extended the NS diagnostic harness with the explicit Sprint 44 residue
+  semantics audit and theta-grid summary.
+- Added `Rplus_strain` as a principal positive-strain alignment residue,
+  separate from the direct `Rplus_stretchSign` proxy.
+- Added `zeroR_positiveQ` accounting so strict/relaxed semantics that miss
+  positive physical stretching fail visibly.
+- Added the Sprint 44 Agda receipt and docs/governance pointers.
+- No NS, Gate3, YM, terminal, or Clay promotion follows.
+
 # 2026-06-03 Sprint 43 YM all-diameter KP/rho/leakage harness
 
 - Added a within-repo YM harness for the p=7 all-diameter KP/rho/leakage

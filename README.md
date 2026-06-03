@@ -17,8 +17,13 @@ Use one of these reader tracks first:
 
 Current Clay sprint correction:
 
+- `Docs/ClaySprintFortyFourResidueSemanticsAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFortyFourResidueSemanticsAuditReceipt.agda`
 - `Docs/ClaySprintFortyThreeNS3DTruthBridgeRepair.md`
 - `DASHI/Physics/Closure/ClaySprintFortyThreeNS3DTruthBridgeRepairReceipt.agda`
+- `Docs/ClaySprintFortyThreeNSResidueSemanticsAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFortyThreeNSResidueSemanticsAuditReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintFortyFourResidueSemanticsAuditReceipt.agda`
 - `Docs/ClaySprintFortyThreeYMAllDiameterKPRhoLeakageHarness.md`
 - `DASHI/Physics/Closure/ClaySprintFortyThreeYMAllDiameterHarnessReceipt.agda`
 - `scripts/ym_all_diameter_kp_rho_leakage_harness.py`
@@ -91,6 +96,15 @@ metadata, uses stored velocity snapshots, records `k_star_source`, and emits
 progress/ETA.  Repaired N32 and two N64 dashiCFD 3D truth runs clear the shell
 metadata and high-shell support blockers, but all still fail the
 `budget_K > 1/2` gate and do not promote NS or Clay.
+
+The Sprint 44 NS residue semantics audit is the current `R_plus_K` blocker
+surface.  It emits `ns_residue_semantics_audit.csv`,
+`ns_residue_semantics_wide.csv`, and `ns_residue_theta_grid_summary.csv`,
+comparing `Rplus_strict`, `Rplus_strain`, `Rplus_stretchSign`,
+`Rplus_pressureRelaxed`, and `Rplus_noPressure` over theta
+`0, 0.25, 0.5, 1`.  On N64 seed0/seed1, strict and pressure-relaxed semantics
+fail with zero `Rplus` and positive `Q`; stretch-sign/strain semantics make
+most ratios finite but remain diagnostic-only and still fail the budget gate.
 
 The Sprint 42 harness is the current NS bridge-falsifier surface.  It computes
 the per-shell diagnostic table for `Q_K`, ternary residue, adjusted `C_K`,

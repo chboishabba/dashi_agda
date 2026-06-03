@@ -2,6 +2,35 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-04 Sprint 44 NS residue semantics audit: extended
+  `scripts/ns_diagnostic_harness.py` with explicit Sprint 44 residue semantics
+  (`Rplus_strict`, `Rplus_strain`, `Rplus_stretchSign`,
+  `Rplus_pressureRelaxed`, `Rplus_noPressure`), theta-grid bridge ratios,
+  pressure-high thresholding, `zeroR_positiveQ`, and
+  `ns_residue_semantics_wide.csv` plus `ns_residue_theta_grid_summary.csv`.
+  Added
+  `ClaySprintFortyFourResidueSemanticsAuditReceipt`,
+  `Docs/ClaySprintFortyFourResidueSemanticsAudit.md`, and aggregate import.
+  Replayed N32 seed0 and N64 seed0/seed1 under the Sprint 44 artifact root.
+  Strict red hits `zeroR_positiveQ`; stretch-sign/strain make most ratios
+  finite but remain diagnostic-only and budget-failing.  No physical bridge
+  theorem, lineage theorem, stretch absorption, no-blowup, or Clay promotion
+  follows.
+
+- 2026-06-04 Sprint 43 NS residue semantics audit: extended
+  `scripts/ns_diagnostic_harness.py` to emit
+  `ns_residue_semantics_audit.csv`, `ns_residue_semantics_wide.csv`, and
+  `ns_residue_theta_grid_summary.csv`, added
+  `ClaySprintFortyThreeNSResidueSemanticsAuditReceipt`, and added
+  `ClaySprintFortyFourResidueSemanticsAuditReceipt`.  The Sprint 44 audit
+  compares `Rplus_strict`, `Rplus_strain`, `Rplus_stretchSign`,
+  `Rplus_pressureRelaxed`, and `Rplus_noPressure` over theta
+  `0, 0.25, 0.5, 1` on repaired N64 seed0/seed1.  Strict and
+  pressure-relaxed definitions fail by zero `Rplus` with positive `Q` on
+  208 / 728 rows.  `Rplus_stretchSign` makes ratios finite on 702 / 728 rows
+  with theta `1` sup adjusted ratios `0.0718` and `0.00568`, but ratio gaps
+  remain and all budgets are `<= 1/2`; no promotion follows.
+
 - 2026-06-04 Sprint 43 NS 3D truth bridge repair: repaired
   `scripts/ns_diagnostic_harness.py` so dashiCFD `make_truth_3d.py` artifacts
   use integer-radius shell labels, `meta_json.k_star`, and stored
