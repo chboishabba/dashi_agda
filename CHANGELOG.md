@@ -6,6 +6,126 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 68 YM temporal support non-creation for `2026-06-04`: added
+  `Docs/ClaySprintSixtyEightYMTemporalSupportNonCreation.md`, added
+  `DASHI/Physics/Closure/ClaySprintSixtyEightYMTemporalSupportNonCreationReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`. The receipt consumes
+  `/home/c/Downloads/ym_temporal_support_noncreation_table.csv`,
+  `/home/c/Downloads/ym_spatial_slab_entropy_count.csv`, and
+  `/home/c/Downloads/ym_slab_geometry.csv`. It records that
+  `SupportNonCreation + KernelLocality(r_K=1)` gives
+  `TemporalSupportNonCreationForSlabs` for every `L >= 2`: an admissible
+  polymer cannot reach both temporal faces of one spatial slab. It also records
+  the notation boundary from the CSVs: the closing row is `L=2,d=3`
+  (`eta=4`, `eta*q=0.92712758`), representing three spatial directions for
+  four-dimensional YM; the `L=2,d=4` row has `eta=8`, `eta*q=1.85425516`, and
+  remains blocked. Temporal face factorisation, anisotropic partition of
+  unity, all-diameter weighted KP, Balaban RG transfer, OS/Wightman, mass gap,
+  and Clay/YM promotion remain open/false.
+
+- Sprint 68 NS research-update falsification ledger for `2026-06-04`: added
+  `Docs/ClaySprintSixtyEightNSResearchUpdateFalsificationLedger.md`, added
+  `DASHI/Physics/Closure/ClaySprintSixtyEightNSResearchUpdateFalsificationLedgerReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`. The receipt records the
+  supplied DASHI-NS research update as a fail-closed falsification ledger:
+  child-state trits were effectively binary, normalized packet action was
+  non-additive, vessel/raw-action correction did not close summability,
+  BT/smoothed reassignment did not move sigma, direction coherence failed, and
+  cross-shell parent credit amplified rather than contracted. The surviving
+  proof gates are the physical bridge `Q_K <= C R_K`, source summability
+  `R_{K+1} <= c R_K` with `c < 1/sqrt(2)`, non-Beltrami coherent-tube
+  depletion, uniform CKN epsilon authority, and the upstream DASHI-to-fluid
+  derivation. No no-blowup theorem or Clay/NS promotion follows.
+
+- Sprint 67B NS CKN uniformity audit for `2026-06-04`: added
+  `Docs/ClaySprintSixtySevenNSCKNUniformityAudit.md`, added
+  `DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNUniformityAuditReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`. The receipt records both the
+  pooled Sprint 66 hot-spot evidence (`80/80` decaying, `0` concentrating,
+  Wilson upper sampled-failure bound `0.0458`) and the bounded Sprint 67B
+  replay over Sprint 64 ascended candidates: `1536/1536` cylinders decay under
+  zoom across `120` clusters, with `flat_count = 0`,
+  `concentrating_count = 0`, `persistent_cluster_count = 0`,
+  `pressure_fraction_max = 0.13074814940071125`, and max `C_total` decreasing
+  from N32 `0.6157542190448191` to N64 `0.2939492011581624`. Uniform CKN
+  epsilon, theorem-level pressure control, suitable weak solution bridge,
+  no-blowup, and Clay/NS promotion remain open/false.
+
+- Sprint 67C YM weighted KP/Balaban algebra for `2026-06-04`: added
+  `Docs/ClaySprintSixtySevenYMWeightedKPBalaban.md`, added
+  `DASHI/Physics/Closure/ClaySprintSixtySevenYMWeightedKPBalabanReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`. The receipt pins the YM gate:
+  `q = 0.23178189475262734`, generic entropy `eta = 8`, and `8q =
+  1.8542551580210187 > 1`. The receipt now demotes the beta-gap framing: the
+  threshold is `eta < 4.31440083388422038`, and a spatial-only anisotropic
+  Balaban `L = 2` entropy count would give `eta_eff = 4.0`, `4q =
+  0.9271275790105094 < 1`, with margin `0.07287242098949064`. The Eriksson
+  February 2026 lattice series is recorded as conditional calibration only:
+  it points to anisotropic Balaban partition identity, temporal transfer-matrix
+  compatibility, small-field bound survival, and reflection positivity under
+  spatial-only blocking. The first gate is now `TemporalIntegralFactors`:
+  carrier admissibility/support non-creation must rule out polymers crossing
+  both a spatial block boundary and a temporal link before Paper II's
+  large-field suppression can be transferred to spatial-only blocking.
+  The sharpened geometric condition is `TemporalFaceSupport`: no polymer may
+  occupy both top and bottom temporal faces of one spatial block.  The receipt
+  also records beta `33/2 = 16.5` as the SU3 one-loop plateau and `9` versus
+  `27` face geometry as calibration only.
+  Weighted KP arithmetic is conditionally closed at `eta = 4`, but temporal
+  factorization, anisotropic compatibility, lattice mass gap, continuum
+  transfer, mass gap, and Clay/YM promotion remain open/false.
+
+- Sprint 67 NS CKN lemma/test ladder for `2026-06-04`: added
+  `Docs/ClaySprintSixtySevenNSCKNLemmaTestLadder.md`, added
+  `DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNLemmaTestLadderReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`. The ledger records the
+  surviving NS route as CKN/local critical concentration, keeps Sprint 65
+  pressure reconstruction as a regression gate, inherits Sprint 66
+  decay-under-zoom diagnostics, and names the remaining proof/test obligations:
+  candidate coverage, persistent ascension, Riesz pressure control, local
+  energy inequality residual, uniform CKN epsilon authority, N-ladder
+  refinement stability, suitable weak solution bridge, and conditional
+  no-blowup. CKN epsilon regularity, suitable weak solution bridge, continuum
+  uniformity, no-finite-time-blowup, and Clay/NS promotion remain open/false.
+
+- Sprint 67 DASHI-to-fluid derivation receipt for `2026-06-04`: added
+  `Docs/ClaySprintSixtySevenDASHIFluidDerivation.md`, added
+  `DASHI/Physics/Closure/ClaySprintSixtySevenDASHIFluidDerivationReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`. The receipt records the
+  first-principles interface ladder from DASHI carrier machinery to an
+  admissible continuum fluid law: carrier-to-field reconstruction, support
+  non-creation, admissibility invariance, mass/incompressibility, momentum
+  advection, pressure as projection defect, isotropic defect descent as the
+  Laplacian/viscosity assumption, and CKN as downstream regularity only.
+  Carrier convergence, conservation-to-PDE passage, pressure multiplier proof,
+  Laplacian limit, derived incompressible Navier-Stokes, CKN theorem
+  application, no-blowup, and Clay/NS promotion remain open/false.
+
+- Sprint 66 NS CKN r-sweep calibration for `2026-06-04`: added
+  `Docs/ClaySprintSixtySixNSCKNRSweepCalibration.md`, added
+  `DASHI/Physics/Closure/ClaySprintSixtySixNSCKNRSweepCalibrationReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`. dashiCFD now samples
+  pressure-inclusive CKN-style hot spots across several radii using
+  `C(r) = r^-2 integral_Q (|u|^3 + |p|^(3/2)) dx dt`. Available artifacts
+  route as `CKN_R_SWEEP_DECAYS_UNDER_ZOOM`: six-run N32/N64 has
+  `decaying_hotspot_count = 60` and `concentrating_hotspot_count = 0`; N128
+  seed0 and dense N64 seed0 each have `decaying_hotspot_count = 10` and
+  `concentrating_hotspot_count = 0`. This is favorable diagnostic evidence
+  only. CKN epsilon regularity, suitable weak solution bridge, continuum
+  uniformity, no-finite-time-blowup, and Clay/NS promotion remain open/false.
+
+- Sprint 64C YM weighted KP/Balaban path for `2026-06-04`: added
+  `Docs/ClaySprintSixtyFourYMWeightedKPBalabanPath.md`, added
+  `DASHI/Physics/Closure/ClaySprintSixtyFourYMWeightedKPBalabanPathReceipt.agda`,
+  and wired it through `DASHI/Everything.agda`. The ledger consumes Sprint 55
+  and records YM as the current clean in-repo analytic lane:
+  `q = 0.23178189475262734 < 1` is insufficient because `8q =
+  1.8542551580210187 > 1`; the weighted KP gate is `8q < 1`, requiring
+  `beta_blocked >= 19.251582989089552` under current constants. Balaban
+  transfer from physical beta `6.0`, activity/leakage preservation,
+  all-diameter KP, continuum rho/leakage, OS/Wightman, mass gap, and Clay/YM
+  promotion remain open/false.
+
 - Sprint 61 pressure-Hessian Q anti-twist gate for `2026-06-04`: added
   `Docs/ClaySprintSixtyOnePressureHessianQAntiTwistGate.md`, added
   `DASHI/Physics/Closure/ClaySprintSixtyOnePressureHessianQAntiTwistGateReceipt.agda`,

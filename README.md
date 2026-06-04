@@ -17,6 +17,26 @@ Use one of these reader tracks first:
 
 Current Clay sprint correction:
 
+- `Docs/ClaySprintSixtyEightNSResearchUpdateFalsificationLedger.md`
+- `DASHI/Physics/Closure/ClaySprintSixtyEightNSResearchUpdateFalsificationLedgerReceipt.agda`
+- `Docs/ClaySprintSixtyEightYMTemporalSupportNonCreation.md`
+- `DASHI/Physics/Closure/ClaySprintSixtyEightYMTemporalSupportNonCreationReceipt.agda`
+- `Docs/ClaySprintSixtySevenDASHIFluidDerivation.md`
+- `DASHI/Physics/Closure/ClaySprintSixtySevenDASHIFluidDerivationReceipt.agda`
+- `Docs/ClaySprintSixtySevenNSCKNLemmaTestLadder.md`
+- `DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNLemmaTestLadderReceipt.agda`
+- `Docs/ClaySprintSixtySevenNSCKNUniformityAudit.md`
+- `DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNUniformityAuditReceipt.agda`
+- `Docs/ClaySprintSixtySevenYMWeightedKPBalaban.md`
+- `DASHI/Physics/Closure/ClaySprintSixtySevenYMWeightedKPBalabanReceipt.agda`
+- `Docs/ClaySprintSixtySixNSCKNRSweepCalibration.md`
+- `DASHI/Physics/Closure/ClaySprintSixtySixNSCKNRSweepCalibrationReceipt.agda`
+- `Docs/ClaySprintSixtyFourYMWeightedKPBalabanPath.md`
+- `DASHI/Physics/Closure/ClaySprintSixtyFourYMWeightedKPBalabanPathReceipt.agda`
+- `Docs/ClaySprintSixtyFiveNSPressureReconstructionCKNContract.md`
+- `DASHI/Physics/Closure/ClaySprintSixtyFiveNSPressureReconstructionCKNContractReceipt.agda`
+- `Docs/ClaySprintSixtyFourNSSourceBudgetExhaustionCKNRoute.md`
+- `DASHI/Physics/Closure/ClaySprintSixtyFourNSSourceBudgetExhaustionCKNRouteReceipt.agda`
 - `Docs/ClaySprintSixtyOnePressureHessianQAntiTwistGate.md`
 - `DASHI/Physics/Closure/ClaySprintSixtyOnePressureHessianQAntiTwistGateReceipt.agda`
 - `Docs/ClaySprintSixtyOneCFMDirectionCoherenceRoute.md`

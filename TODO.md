@@ -3,6 +3,234 @@
 
 # P0 BLOCKERS
 
+• Implemented Sprint 68 YM temporal support non-creation receipt.
+
+  Added:
+
+  - Docs/ClaySprintSixtyEightYMTemporalSupportNonCreation.md
+  - DASHI/Physics/Closure/ClaySprintSixtyEightYMTemporalSupportNonCreationReceipt.agda
+
+  The receipt consumes the three audit CSVs in `/home/c/Downloads`. It records
+  the newly closeable support node:
+
+  - `kernel_range = 1`;
+  - `L >= 2`;
+  - `r_K < L`;
+  - `SupportNonCreation + KernelLocality` gives
+    `TemporalSupportNonCreationForSlabs`.
+
+  It also records the required notation boundary: the closing entropy row is
+  `L=2,d=3` in the CSV (`eta=4`, `eta*q=0.92712758`), i.e. three spatial
+  directions for 4D YM. The `L=2,d=4` row has `eta=8`, `eta*q=1.85425516`,
+  and remains blocked.
+
+  Temporal face factorisation, anisotropic partition of unity, all-diameter
+  weighted KP, Balaban RG transfer, OS/Wightman reconstruction, mass gap, and
+  Clay/YM promotion remain open.
+
+• Implemented Sprint 68 NS research-update falsification ledger.
+
+  Added:
+
+  - Docs/ClaySprintSixtyEightNSResearchUpdateFalsificationLedger.md
+  - DASHI/Physics/Closure/ClaySprintSixtyEightNSResearchUpdateFalsificationLedgerReceipt.agda
+
+  Sprint 68 records the supplied DASHI-NS research update as a falsification
+  ledger, not a proof.  It preserves the named wrong turns from Sprints 49-66:
+  instantaneous child-state trits were effectively binary; normalized packet
+  action was non-additive; vessel/global accounting and raw action corrected
+  the object but did not close summability; BT/smoothed reassignment did not
+  move sigma; raw-red direction coherence failed; cross-shell parent credit
+  amplified instead of contracted.
+
+  The live proof structure is now explicit:
+
+  - Gate A: physical bridge `Q_K <= C R_K`;
+  - Gate B: source summability `R_{K+1} <= c R_K` with `c < 1/sqrt(2)`;
+  - exact Beltrami and strain-only micro-lemmas are recorded as closed
+    micro-lemmas, not global regularity;
+  - pressure feedback is recorded as a negative/delocalized projection fact;
+  - CKN r-sweep is favorable diagnostic evidence only;
+  - the surviving adversary is non-Beltrami coherent tubes.
+
+  No physical bridge theorem, source summability theorem, non-Beltrami tube
+  depletion theorem, uniform CKN epsilon theorem, DASHI-to-NS derivation,
+  no-blowup theorem, or Clay/NS promotion follows.
+
+• Implemented Sprint 67B NS CKN uniformity audit and Sprint 67C YM weighted
+  KP/Balaban algebra receipts.
+
+  Added:
+
+  - Docs/ClaySprintSixtySevenNSCKNUniformityAudit.md
+  - DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNUniformityAuditReceipt.agda
+  - Docs/ClaySprintSixtySevenYMWeightedKPBalaban.md
+  - DASHI/Physics/Closure/ClaySprintSixtySevenYMWeightedKPBalabanReceipt.agda
+
+  Sprint 67B records the proof-facing NS diagnostic target: audit candidate
+  ascended cylinders, not just top hot spots.  The bounded six-run replay is
+  favorable: `1536/1536` cylinders decay under zoom across `120` clusters,
+  `flat_count = 0`, `concentrating_count = 0`,
+  `persistent_cluster_count = 0`, `pressure_fraction_max =
+  0.13074814940071125`, and max `C_total` drops from N32
+  `0.6157542190448191` to N64 `0.2939492011581624`.  Unbounded candidate
+  coverage, theorem pressure control, full N/cadence stability, suitable weak
+  bridge, and no-blowup remain open.
+
+  Sprint 67C now pins the YM algebra as an entropy-counting obstruction, not
+  primarily a beta-gap obstruction: current `q = 0.23178189475262734`,
+  generic entropy `eta = 8`, and `8q = 1.8542551580210187 > 1`.  The threshold
+  is `eta < 4.31440083388422038`.  A spatial-only anisotropic Balaban `L = 2`
+  step would give `eta_eff = 4.0`, `4q = 0.9271275790105094 < 1`, with margin
+  `0.07287242098949064`.  Eriksson February 2026 is recorded as conditional
+  calibration only: the DASHI target is anisotropic Balaban partition identity,
+  temporal transfer-matrix compatibility, small-field bound survival, and
+  reflection positivity under spatial-only blocking.  First lemma target:
+  `TemporalIntegralFactors`, using carrier support non-creation/admissibility
+  to rule out mixed spatial-boundary plus temporal-link polymers.
+  The sharpened check is `TemporalFaceSupport`: no admissible polymer may
+  occupy both temporal faces of one spatial block.  Beta `33/2` and `9` versus
+  `27` face geometry are calibration, not promotion gates.
+
+  No NS CKN theorem, YM weighted KP theorem, Balaban transfer, mass gap, or
+  Clay promotion follows yet.
+
+• Implemented Sprint 67 NS CKN lemma/test ladder receipt.
+
+  Added:
+
+  - Docs/ClaySprintSixtySevenNSCKNLemmaTestLadder.md
+  - DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNLemmaTestLadderReceipt.agda
+
+  The NS route is now explicitly tracked as CKN/local critical concentration.
+  Pressure reconstruction remains a regression gate, and Sprint 66 r-sweep
+  decay remains favorable diagnostic evidence.
+
+  Active Sprint 67 gates:
+
+  - expand candidate coverage across raw action, vorticity, velocity,
+    pressure, large-C, and random controls;
+  - audit persistent ascension across nearby radii, times, and resolutions;
+  - bound the pressure ratio / Riesz pressure contribution;
+  - compute local energy inequality residuals;
+  - calibrate theorem-authorized CKN epsilon use;
+  - test N-ladder and cadence refinement stability;
+  - bridge to suitable weak solutions and conditional no-blowup.
+
+  No CKN epsilon theorem, suitable weak solution bridge, continuum-uniform
+  bound, no-blowup theorem, or Clay/NS promotion follows yet.
+
+• Implemented Sprint 67 DASHI-to-fluid derivation receipt.
+
+  Added:
+
+  - Docs/ClaySprintSixtySevenDASHIFluidDerivation.md
+  - DASHI/Physics/Closure/ClaySprintSixtySevenDASHIFluidDerivationReceipt.agda
+
+  Sprint 67 moves the Navier-Stokes lane upstream: CKN remains the regularity
+  consumer, but the repository must first record the DASHI-to-fluid interface
+  obligations from carrier principles.  The receipt records the derivation
+  ladder:
+
+  - carrier-to-field reconstruction;
+  - support non-creation / no ghost support;
+  - admissibility invariance;
+  - mass conservation and incompressibility;
+  - momentum conservation and advection;
+  - pressure as divergence-free projection defect;
+  - isotropic defect descent as the Laplacian/viscosity limit;
+  - CKN as downstream regularity only.
+
+  This is a first-principles interface contract, not a completed derivation.
+  Carrier-to-continuum convergence, conservation-to-PDE passage, pressure
+  multiplier proof, Laplacian limit, derived incompressible Navier-Stokes,
+  CKN theorem application, no-blowup, and Clay/NS promotion remain unproved.
+
+• Implemented Sprint 66 NS CKN r-sweep calibration receipt.
+
+  Added:
+
+  - Docs/ClaySprintSixtySixNSCKNRSweepCalibration.md
+  - DASHI/Physics/Closure/ClaySprintSixtySixNSCKNRSweepCalibrationReceipt.agda
+
+  dashiCFD now samples pressure-inclusive CKN-style hot spots across several
+  radii using `C(r) = r^-2 integral_Q (|u|^3 + |p|^(3/2)) dx dt`.
+  Available artifacts route as `CKN_R_SWEEP_DECAYS_UNDER_ZOOM`: six-run
+  N32/N64 has `decaying_hotspot_count = 60` and
+  `concentrating_hotspot_count = 0`; N128 seed0 and dense N64 seed0 each have
+  `decaying_hotspot_count = 10` and `concentrating_hotspot_count = 0`.
+
+  This is favorable diagnostic evidence that the sampled hot spots behave like
+  bulk turbulence under zoom.  It is not a CKN epsilon theorem, suitable weak
+  solution bridge, continuum-uniform bound, no-blowup theorem, or Clay/NS
+  promotion.
+
+• Implemented Sprint 65 NS pressure reconstruction / CKN contract receipt.
+
+  Added:
+
+  - Docs/ClaySprintSixtyFiveNSPressureReconstructionCKNContract.md
+  - DASHI/Physics/Closure/ClaySprintSixtyFiveNSPressureReconstructionCKNContractReceipt.agda
+
+  dashiCFD now reconstructs zero-mean periodic pressure snapshots from
+  velocity snapshots using the Poisson contract
+  `Delta p = - sum_ij partial_i u_j partial_j u_i`.
+  The six-run N32/N64 pressure reconstruction reports
+  `max_poisson_relative_residual_rms = 3.5409688067143674e-16`.
+
+  Pressure-present Sprint 64 reruns route as
+  `LOCAL_CRITICAL_CONCENTRATION_MIXED`, not pressure-missing. The full CKN
+  route remains open: threshold calibration, suitable weak solution bridge,
+  continuum uniformity, no finite-time blowup, and Clay/NS promotion are still
+  unproved.
+
+• Implemented Sprint 64 NS source-budget exhaustion / CKN route receipt.
+
+  Added:
+
+  - Docs/ClaySprintSixtyFourNSSourceBudgetExhaustionCKNRoute.md
+  - DASHI/Physics/Closure/ClaySprintSixtyFourNSSourceBudgetExhaustionCKNRouteReceipt.agda
+
+  NS source-budget is now recorded as diagnostically exhausted on current
+  artifacts: normalized packet action is non-additive, raw action is flat,
+  action-preserving shell reassignment is flat, raw-red direction coherence is
+  blocked, and simple cross-shell parent-budget contractivity is
+  noncontractive.
+
+  The open NS lane is now CKN/ESS-style local critical concentration. The
+  dashiCFD Sprint 64 preflight computes velocity-only local L3 concentration,
+  but pressure reconstruction is missing, so no CKN epsilon-regularity
+  certificate, no no-blowup theorem, and no Clay/NS promotion follows.
+
+• Implemented Sprint 64C YM weighted KP/Balaban path ledger.
+
+  Added:
+
+  - Docs/ClaySprintSixtyFourYMWeightedKPBalabanPath.md
+  - DASHI/Physics/Closure/ClaySprintSixtyFourYMWeightedKPBalabanPathReceipt.agda
+
+  YM is now managed as the current clean analytic lane:
+
+  - current blocked beta: `16.7`;
+  - physical bare beta: `6.0`;
+  - `q = 0.23178189475262734 < 1`;
+  - `8q = 1.8542551580210187 > 1`;
+  - weighted KP target: `8q < 1`;
+  - corrected beta threshold: `19.251582989089552`.
+
+  Active YM path:
+
+  - prove or compute weighted KP with `8q(beta) < 1`;
+  - prove Balaban RG scale transfer from `beta_bare = 6.0` to
+    `beta_blocked >= 19.251582989089552`;
+  - preserve polymer activity/leakage under RG;
+  - prove all-diameter KP;
+  - carry continuum rho/leakage;
+  - complete OS/Wightman reconstruction and mass-gap survival.
+
+  No weighted KP theorem, Balaban transfer, continuum theorem, mass gap, or
+  Clay/YM promotion follows yet.
+
 • Implemented Sprint 61 pressure-Hessian Q anti-twist gate ledger.
 
   Added:

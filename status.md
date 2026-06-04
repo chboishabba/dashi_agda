@@ -1,3 +1,86 @@
+# 2026-06-04 Sprint 68 YM temporal support non-creation
+
+- Added `Docs/ClaySprintSixtyEightYMTemporalSupportNonCreation.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintSixtyEightYMTemporalSupportNonCreationReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Audit inputs:
+  `/home/c/Downloads/ym_temporal_support_noncreation_table.csv`,
+  `/home/c/Downloads/ym_spatial_slab_entropy_count.csv`, and
+  `/home/c/Downloads/ym_slab_geometry.csv`.
+- Closed/provable support node: `SupportNonCreation + r_K=1` gives
+  `TemporalSupportNonCreationForSlabs` for `L >= 2`.
+- Critical notation boundary: `L=2,d=3` in the CSV is the closing
+  three-spatial-direction slab row (`eta=4`, `eta*q=0.92712758`); `L=2,d=4`
+  is blocked (`eta=8`, `eta*q=1.85425516`).
+- Temporal face factorisation, anisotropic partition of unity, weighted KP,
+  Balaban RG transfer, mass gap, and Clay/YM promotion remain open.
+
+# 2026-06-04 Sprint 67B/67C split update
+
+- Added `Docs/ClaySprintSixtySevenNSCKNUniformityAudit.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNUniformityAuditReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Added `Docs/ClaySprintSixtySevenYMWeightedKPBalaban.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintSixtySevenYMWeightedKPBalabanReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- NS CKN status: pooled sampled hot spots are `80/80` decaying with Wilson
+  upper sampled-failure bound `0.0458`; the next gate is all-candidate
+  ascended-cylinder uniformity, pressure fraction, cluster persistence, and
+  N/cadence stability.
+- YM status: `q = 0.23178189475262734`, `8q = 1.8542551580210187`,
+  required `q < 0.125`; the next branch is entropy-factor sharpening to
+  `eta < 4.31440083388422` or Balaban transfer to beta
+  `19.251582989089552`.
+- Eriksson February 2026 is recorded as a conditional calibration target only:
+  Holley-Stroock/orbit-Ricci spectral-gap control is useful context, while
+  anisotropic Balaban/temporal transfer compatibility remains open.
+- First YM lemma target: `TemporalIntegralFactors`.  Under carrier
+  admissibility/support non-creation, no admissible polymer may cross both a
+  spatial block boundary and a temporal link; only then can Paper II's
+  isotropic large-field suppression be tested against spatial-only blocking.
+- Sharpened geometry target: `TemporalFaceSupport`, forbidding one polymer
+  from occupying both top and bottom temporal faces of a spatial block.  The
+  beta `33/2` one-loop plateau and `9` versus `27` supervoxel face counts are
+  recorded as calibration only.
+- No uniform CKN theorem, no YM weighted KP theorem, no mass gap, and no
+  Clay promotion follows yet.
+
+# 2026-06-04 Sprint 67 NS CKN lemma/test ladder
+
+- Added `Docs/ClaySprintSixtySevenNSCKNLemmaTestLadder.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNLemmaTestLadderReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- NS is recorded on the CKN/local critical concentration route, not the raw
+  source-budget route.
+- Sprint 65 pressure reconstruction is now a regression gate; Sprint 66
+  r-sweep decay is inherited as favorable diagnostic evidence.
+- Open gates remain: candidate coverage expansion, persistent ascension audit,
+  Riesz pressure-ratio control, local energy inequality residual, uniform CKN
+  epsilon authority, N-ladder refinement stability, suitable weak solution
+  bridge, and conditional no-blowup.
+- No CKN epsilon theorem, suitable weak solution theorem, continuum-uniform
+  bound, no-finite-time-blowup theorem, or Clay/NS promotion follows yet.
+
+# 2026-06-04 Sprint 64C YM weighted KP/Balaban path
+
+- Added `Docs/ClaySprintSixtyFourYMWeightedKPBalabanPath.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintSixtyFourYMWeightedKPBalabanPathReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- YM is recorded as the current clean in-repo analytic lane. The live blocker
+  is crisp: `q = 0.23178189475262734 < 1` is not enough because
+  `8q = 1.8542551580210187 > 1`.
+- The weighted KP gate is `8q < 1`, requiring
+  `beta_blocked >= 19.251582989089552` under the current constants.
+- Open gates remain: Balaban RG transfer from physical beta `6.0` to the
+  threshold, activity/leakage preservation, all-diameter KP, continuum
+  rho/leakage, OS/Wightman reconstruction, mass-gap survival, and Clay/YM
+  promotion.
+
 # 2026-06-04 Sprint 61 pressure-Hessian Q anti-twist gate
 
 - Added `Docs/ClaySprintSixtyOnePressureHessianQAntiTwistGate.md`.
