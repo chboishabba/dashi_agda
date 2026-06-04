@@ -1,3 +1,162 @@
+# 2026-06-04 Sprint 58 normalized packet-action inflation
+
+- Added `../dashiCFD/scripts/ns_sprint58_normalized_action_inflation_audit.py`
+  and a synthetic truth test.
+- Added `--replay-sprint58-normalized-action-inflation-summary` to
+  `scripts/ns_diagnostic_harness.py`, with replay tests and fail-closed
+  promotion flags.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFiftyEightNormalizedActionInflationReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Batch result over the existing Sprint 49 N32/N64 GPU material-parent audits:
+  `NORMALIZED_ACTION_NONADDITIVE_RATIO_INFLATION`; the covered sum-of-local
+  ratios over ratio-of-sums factor is `4904.346096600663`.
+- Current NS packet-normalized source ledger is not additive at vessel level;
+  raw action or energy-weighted normalized action is the next safer object.
+
+# 2026-06-04 Sprint 57 vessel/action reconciliation
+
+- Added `../dashiCFD/scripts/ns_sprint57_vessel_action_reconciliation_audit.py`
+  and a synthetic truth test.
+- Added `--replay-sprint57-vessel-action-summary` to
+  `scripts/ns_diagnostic_harness.py`, with replay tests and fail-closed
+  promotion flags.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFiftySevenVesselActionReconciliationReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Batch result over the existing Sprint 49 N32/N64 GPU material-parent audits:
+  `PACKET_ACTION_UNDERCOUNTS_COVERED_STRETCH`; raw packet positive action is
+  below covered/global raw positive stretch, while normalized packet action is
+  far above normalized global action.
+- Current NS blocker is normalized packet-action inflation versus raw
+  vessel-action reconstruction, not proven Euclidean double-counting.
+
+# 2026-06-04 Sprint 56 packet-local accumulated stretch-action audit
+
+- Added the `dashiCFD` Sprint 56 packet-local accumulated stretch-action
+  producer and `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint56_packet_local_stretch_action_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/`.
+- Result: `PACKET_LOCAL_ACTION_SUMMABILITY_BLOCKED`.
+  Packet-local masks reconstruct from Sprint 49 `K_cell` geometry, but the
+  packet-local action-small fraction is only `0.8108028335301063`, with
+  `dangerous_lineage_count = 641` and `sigma_packet_local_action_fit =
+  -0.4822543927548197`.
+- Direction-change separation is recorded separately:
+  `direction_change_integral_total = 38406.84183964504` and
+  `redirection_without_overwhelm_count = 790`.
+- No NS, Gate3, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 55 Lagrangian accumulated stretch-action audit
+
+- Added the `dashiCFD` Sprint 55 Lagrangian accumulated stretch-action producer
+  and `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint55_lagrangian_stretch_action_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint55_lagrangian_stretch_action_gpu_replay/`.
+- Result: `LAGRANGIAN_STRETCH_ACTION_SMALL_DIAGNOSTIC`.
+  The shell-lineage action audit reports `action_small_fraction =
+  0.9985242030696576`, `dangerous_lineage_count = 5`, and
+  `sigma_action_fit = -0.5102412568825301`.
+- According to Sprint 55, the Sprint 54 stretch diagnostic should be read as
+  Lagrangian accumulated stretch-action evidence, not as color strings or
+  packet-color counts. Packet-local support masks, weighted action summability,
+  cadence/shell-boundary sensitivity, physical bridge, stretch absorption, and
+  no-blowup remain open.
+- No NS, Gate3, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 54 no-2-cycle resolution/cadence audit
+
+- Added the `dashiCFD` Sprint 54 no-2-cycle resolution/cadence producer and
+  `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint54_no2cycle_resolution_cadence_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint54_no2cycle_resolution_cadence_gpu_replay/`.
+- Result: `NO2CYCLE_PROXY_OVERCONSERVATIVE_STRETCH_SMALL`.
+  The material mass proxy remains bad, but shell/time direct `omega dot S omega`
+  evidence marks `8047 / 8252` proxy failures as stretch-small. Cadence is still
+  `single_cadence_unresolved`, packet-local stretch masks are unavailable, and
+  `sigma_stretching_amplitude = -0.6060245931540146`.
+- No NS, Gate3, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 53 no-2-cycle physical amplitude audit
+
+- Added the `dashiCFD` Sprint 53 physical no-2-cycle amplitude producer and
+  `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint53_no2cycle_physical_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint53_no2cycle_physical_gpu_replay/`.
+- Result: `MATERIAL_SOURCE_GATE_CLOSED_PHYSICAL_NO2CYCLE_AMPLITUDE_BLOCKED`.
+  Material true-new source remains absent, but the physical net-residue
+  amplitude proxy does not clear: `5427 / 8252` proxy failures remain large,
+  only `2825` are physical-amplitude-small, and `sigma_physical_cycle_fit =
+  -1.1215088689186317`.
+- No NS, Gate3, YM, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 52 material source / no-2-cycle audit
+
+- Added the `dashiCFD` Sprint 52 material/no-2-cycle producer and
+  `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint52_material_no2cycle_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint52_material_no2cycle_gpu_replay/`.
+- Result: `MATERIAL_SOURCE_GATE_CLOSED_NO2CYCLE_AMPLITUDE_BLOCKED`.
+  Material true-new source is absent under Sprint 49 advected material parents,
+  but no-2-cycle amplitude remains blocked: `6993 / 9126` proxy failures are
+  amplitude-small, below the 90% diagnostic threshold.
+- No NS, Gate3, YM, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 51 signed ternary flip audit
+
+- Added the `dashiCFD` signed ternary flip producer and `dashi_agda` replay
+  mode.
+- The producer keeps Sprint 50 attribution rules but treats minus/plus as an
+  involutive pair, reporting raw flip flow, counter-flow, signed imbalance,
+  net residue Lyapunov proxy, BT proxy signed decay, and no-2-cycle diagnostic.
+- Batch output:
+  `../dashiCFD/outputs/sprint51_signed_ternary_flip_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint51_signed_ternary_flip_gpu_replay/`.
+- Result: `NO2CYCLE_FAILS`. Raw minus-to-plus is substantially balanced by
+  plus-to-minus (`0.048767829281919015` imbalance fraction), and BT proxy
+  signed decay passes; persistent flip-cycle proxy failures are now the active
+  obstruction.
+- No NS, Gate3, YM, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 50 full ternary cross-shell audit
+
+- Added the `dashiCFD` full ternary cross-shell matrix producer and the
+  `dashi_agda` replay mode.
+- The producer derives source kind from `parent_relation` plus shell delta and
+  derives transitions from `parent_state -> child_state`; Sprint 49
+  `classification` is not used for source-kind attribution.
+- Batch output:
+  `../dashiCFD/outputs/sprint50_full_ternary_cross_shell_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint50_full_ternary_cross_shell_gpu_replay/`.
+- Result: `CROSS_PLUS_FROM_MINUS_DOMINATES`; zero-to-plus cross-shell source is
+  absent in the observed prefix, while minus-to-plus exceeds plus-to-plus.
+- No NS, Gate3, YM, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 49 GPU material-parent batch
+
+- Ran and replayed Sprint 49 material-parent summaries from `dashiCFD` GPU
+  truth artifacts for N32/N64 seed0/seed1.
+- `dashiCFD` batch summary:
+  `../dashiCFD/outputs/sprint49_material_parent_gpu_batch/sprint49_material_parent_gpu_batch_summary.json`.
+- Result: true-new material source is zero in the batch; tracking uncertainty
+  does not dominate; weighted cross-shell source dominates and routes to
+  `ADJACENT_PACKET_THEOREM_INSUFFICIENT`.
+- Patched the `dashiCFD` producer route aggregation so a small tracking term
+  cannot override a dominant cross-shell weighted source.
+- No NS, Gate3, YM, terminal, or Clay promotion follows.
+
 # 2026-06-04 Sprint 44 NS residue semantics audit
 
 - Extended the NS diagnostic harness with the explicit Sprint 44 residue

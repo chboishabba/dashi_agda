@@ -1,0 +1,22 @@
+{
+  "source": "../dashiCFD/outputs/sprint52_material_no2cycle_gpu_audit/ns_sprint52_material_no2cycle_summary.json",
+  "parameters": {
+    "replay_mode": "sprint52_material_no2cycle_from_gpu_summary",
+    "sprint52_material_no2cycle_summary_input": "../dashiCFD/outputs/sprint52_material_no2cycle_gpu_audit/ns_sprint52_material_no2cycle_summary.json"
+  },
+  "diagnostic_mode": "sprint52_material_no2cycle_replay_from_gpu_summary",
+  "material_source_resolution_row_count": 29717,
+  "no2cycle_amplitude_row_count": 13920,
+  "outputs": {
+    "sprint52_material_no2cycle_summary": "Docs/Images/clay-analytic-sprint/sprint52_material_no2cycle_gpu_replay/ns_sprint52_material_no2cycle_summary.json",
+    "material_source_resolution_csv": "Docs/Images/clay-analytic-sprint/sprint52_material_no2cycle_gpu_replay/ns_material_source_resolution.csv",
+    "no2cycle_amplitude_csv": "Docs/Images/clay-analytic-sprint/sprint52_material_no2cycle_gpu_replay/ns_no2cycle_amplitude.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint52_material_no2cycle_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint52_material_no2cycle_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyTwoMaterialNo2CycleAuditReceipt",
+  "evidence_boundary": "Sprint 52 replay consumes material-source/no-2-cycle summary artifacts only. It records Sprint 49 material-parent source closure and Sprint 52 material-packet cycle-amplitude calibration. It does not prove theorem-grade physical oscillation amplitude, weighted amplitude summability, physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_SPRINT52_MATERIAL_NO2CYCLE_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

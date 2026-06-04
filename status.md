@@ -1,3 +1,330 @@
+# 2026-06-04 Sprint 61 pressure-Hessian Q anti-twist gate
+
+- Added `Docs/ClaySprintSixtyOnePressureHessianQAntiTwistGate.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintSixtyOnePressureHessianQAntiTwistGateReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Precision update: the load-bearing Sprint 61 observable is now
+  `Q_P = e2 dot Htf e1` on the packet core, not the direction-change integral.
+  Direction-change remains a supporting proxy only.
+- Required Sprint 61 output surface:
+  packet-local `Q_P`, `Q_P_mean` on the `641` high-raw-red packets,
+  `fraction_lambda2_nonpositive`, and `omega_theta_bar_sign` as the anti-twist
+  proxy. The existing `direction_change_integral_total =
+  38406.84183964504` and `redirection_without_overwhelm_count = 790` motivate
+  the route but do not close it.
+- No Hypothesis D, Hypothesis G, Hypothesis S, Kleis-to-CFM bridge, BKM
+  transfer, no-blowup, or Clay/NS promotion follows.
+
+# 2026-06-04 Sprint 61 CFM direction-coherence route
+
+- Added `Docs/ClaySprintSixtyOneCFMDirectionCoherenceRoute.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintSixtyOneCFMDirectionCoherenceRouteReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Sprint 60 diagnosis recorded: `sigma_euclidean = -0.0232`,
+  `sigma_smoothed = -0.0226`, and `sigma_bt_ultrametric = -0.0312`, with raw
+  action conserved. The flat cascade is therefore not a Euclidean
+  shell-assignment artifact under the current N32/N64 diagnostics.
+- Route state: the source-budget reassignment path is exhausted at current
+  resolution; the live NS path is CFM direction coherence on the `641` red
+  packets, using the Sprint 56 `redirection_without_overwhelm_count = 790` and
+  `direction_change_integral_total = 38406.84183964504` as the immediate audit
+  surface.
+- No `AngularRedirectionWithoutStretchHarmless`, CFM Lipschitz bridge,
+  geometric depletion theorem, BKM no-concentration transfer, no-blowup, or
+  Clay/NS promotion follows.
+
+# 2026-06-04 Sprint 58 normalized packet-action inflation
+
+- Added the `dashiCFD` Sprint 58 normalized action inflation producer and
+  replayed its six-run N32/N64 GPU artifact in
+  `Docs/Images/clay-analytic-sprint/sprint58_normalized_action_inflation_gpu_replay/`.
+- Added `Docs/ClaySprintFiftyEightNormalizedActionInflation.md` and
+  `DASHI/Physics/Closure/ClaySprintFiftyEightNormalizedActionInflationReceipt.agda`.
+- Result: `route_decision = NORMALIZED_ACTION_NONADDITIVE_RATIO_INFLATION`,
+  `sum_ratios_over_ratio_of_sums_covered = 4904.346096600663`,
+  `sum_ratios_over_ratio_of_sums_global = 11471.817018880183`, and
+  `low_enstrophy_denominator_fraction = 0.012394729693018202`.
+- Interpretation: Sprint 56 packet-normalized `A+` is not vessel-additive.
+  The issue is structural sum-of-local-ratios inflation, not mostly a
+  low-enstrophy denominator tail.
+- No Clay/NS promotion follows.
+
+# 2026-06-04 Sprint 57 vessel/action reconciliation
+
+- Added the `dashiCFD` Sprint 57 global vessel/action reconciliation producer
+  and replayed its six-run N32/N64 GPU artifact in
+  `Docs/Images/clay-analytic-sprint/sprint57_vessel_action_reconciliation_gpu_replay/`.
+- Added `Docs/ClaySprintFiftySevenVesselActionReconciliation.md` and
+  `DASHI/Physics/Closure/ClaySprintFiftySevenVesselActionReconciliationReceipt.agda`.
+- Result: `route_decision = PACKET_ACTION_UNDERCOUNTS_COVERED_STRETCH`,
+  `epsilon_raw_positive_vs_covered = -0.8161321565334568`,
+  `epsilon_raw_positive_vs_global = -0.9608719590659198`, and
+  `epsilon_normalized_positive_vs_global = 113.58553013012235`.
+- Interpretation: Sprint 56 is not explained by simple Euclidean
+  double-counting. Raw packet stretch under-reconstructs vessel stretch, while
+  normalized packet action is inflated relative to global normalized action.
+- No Clay/NS promotion follows.
+
+# 2026-06-04 Sprint 56 two-lane physical intuition and reality ledger
+
+- Added `Docs/ClaySprintFiftySixTwoLanePhysicalIntuitionRealityLedger.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFiftySixTwoLanePhysicalIntuitionRealityLedgerReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Physical reading:
+  NS danger is packet-local accumulated positive stretch action, not
+  instantaneous red/green/blue flipping; YM danger is the weighted KP
+  energy-vs-entropy competition, not merely whether each activity has `q < 1`.
+- Reality check:
+  Sprint 56 blocks the NS accumulated-action route under current packet-local
+  diagnostics (`action_small_fraction = 0.8108028335301063`,
+  `dangerous_lineage_count = 641`, `sigma_packet_local_action_fit =
+  -0.4822543927548197`), while YM still has `8q = 1.8542551580210187 > 1`
+  and needs beta about `19.251582989089552` plus Balaban transfer.
+- Six bounded worker lanes are recorded for NS audit, YM audit, Agda receipt,
+  algebraic crosswalk, governance docs, and validation.
+- No NS, YM, terminal, or Clay promotion follows.
+
+# 2026-06-04 Clay Sprint 55 two-lane localized lemma ledger
+
+- Added `Docs/ClaySprintFiftyFiveTwoLaneLocalizedLemmaLedger.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFiftyFiveTwoLaneLocalizedLemmaLedgerReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Ledger state:
+  NS has `action_small_fraction = 0.9985242030696576` and
+  `dangerous_lineage_count = 5`, but `sigma_action_fit =
+  -0.5102412568825301` leaves weighted accumulated positive-stretch
+  summability open.
+- YM has `q = 0.23178189475262734 < 1`, but
+  `8q = 1.8542551580210187 > 1`; weighted KP sum convergence requires
+  beta approximately `19.251582989089552`.
+- No NS, YM, terminal, or Clay promotion follows.
+
+# 2026-06-04 Clay Sprint 55 YM KP sum convergence correction
+
+- Updated `scripts/ym_sprint54_blocked_kp_transfer_table.py` with the Sprint
+  55 KP tail fields.
+- Added `Docs/ClaySprintFiftyFiveYMKPSumConvergence.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFiftyFiveYMKPSumConvergenceReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Result at beta `16.7`, p=7, branching=8, c_combo=8:
+  `raw_contour_ratio = 0.028972736844078417`,
+  `q = 0.23178189475262734 < 1`, but
+  `branching*q = 1.8542551580210187 > 1`.
+- The weighted KP sum therefore diverges under the current bound; beta `16.7`
+  is insufficient and the corrected threshold is `19.251582989089552`.
+- No all-diameter KP certificate, Balaban RG transfer, continuum YM, mass gap,
+  or Clay YM promotion follows.
+
+# 2026-06-04 Sprint 56 packet-local accumulated stretch-action audit
+
+- Added the `dashiCFD` Sprint 56 packet-local accumulated stretch-action
+  producer and `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint56_packet_local_stretch_action_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/`.
+- Result: `PACKET_LOCAL_ACTION_SUMMABILITY_BLOCKED`.
+  Packet-local masks are reconstructed for all `3388` lineages, but
+  `action_small_fraction = 0.8108028335301063`, `dangerous_lineage_count =
+  641`, and `sigma_packet_local_action_fit = -0.4822543927548197`.
+- Sprint 56 supersedes the optimistic Sprint 55 shell-lineage action-small
+  reading. Under current N32/N64 `save_every=10` diagnostics, the packet-local
+  accumulated-action route is blocked unless denser cadence/shell-boundary
+  checks or a new analytic bound changes the high-shell action behavior.
+- No NS, Gate3, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 55 Lagrangian accumulated stretch-action audit
+
+- Added the `dashiCFD` Sprint 55 Lagrangian accumulated stretch-action producer
+  and `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint55_lagrangian_stretch_action_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint55_lagrangian_stretch_action_gpu_replay/`.
+- Result: `LAGRANGIAN_STRETCH_ACTION_SMALL_DIAGNOSTIC`.
+  The Sprint 54 direct-stretch evidence is now read through accumulated
+  material-lineage action: `action_small_fraction = 0.9985242030696576`,
+  `dangerous_lineage_count = 5`, and `sigma_action_fit =
+  -0.5102412568825301`.
+- This does not promote NS. Packet-local support masks are unavailable, the
+  finite weighted-action exponent is still subcritical, cadence/shell-boundary
+  sensitivity is unresolved, and physical bridge/stretch absorption/no-blowup
+  remain unproved.
+- No NS, Gate3, terminal, or Clay promotion follows.
+
+# 2026-06-04 Sprint 54 no-2-cycle resolution/cadence audit
+
+- Added the `dashiCFD` Sprint 54 no-2-cycle resolution/cadence producer and
+  `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint54_no2cycle_resolution_cadence_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint54_no2cycle_resolution_cadence_gpu_replay/`.
+- Result: `NO2CYCLE_PROXY_OVERCONSERVATIVE_STRETCH_SMALL`.
+  The Sprint 53 mass proxy remains large-amplitude, but shell/time direct
+  stretch evidence reports `small_fraction_by_stretch = 0.9751575375666505`.
+  This is not a theorem-grade no-2-cycle proof: cadence is unresolved,
+  shell-boundary sensitivity is not tested, packet-local stretch masks are
+  unavailable, and `sigma_stretching_amplitude = -0.6060245931540146`.
+- No NS, Gate3, terminal, or Clay promotion follows.
+
+# 2026-06-04 Clay Sprint 54 NS/YM pivot roadmap
+
+- Added `Docs/ClaySprintFiftyFourNSYMPivotRoadmap.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFiftyFourNSYMPivotRoadmapReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Recorded the NS ternary source-budget route as falsified under current
+  material-packet physical-amplitude diagnostics.
+- Retained NS fallback lanes:
+  `BTStructureForcesDirectionRegularity` and
+  `DASHINoVorticitySupNormConcentration`.
+- Marked YM KP/Balaban as the main analytic lane:
+  `geometricRatioUniform -> AllDiameterKPActivityBound ->
+  BalabanRGScaleTransfer`.
+- No Clay/NS/YM promotion follows.
+
+# 2026-06-04 Clay Sprint 54 YM inductive diameter KP target
+
+- Added `scripts/ym_sprint54_blocked_kp_transfer_table.py`.
+- Added `Docs/ClaySprintFiftyFourYMInductiveDiameterKP.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFiftyFourYMInductiveDiameterKPReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Generated artifacts under
+  `Docs/Images/clay-analytic-sprint/sprint54_ym_blocked_kp_transfer`.
+- Result: literal bare and literal blocked Wilson-defect activity pass zero
+  rows; blocked contour/action activity passes at beta `13.64` and `16.7`.
+  The `16.7` row has `kp_blocked_contour = 0.23178189475262734` and
+  `geometric_ratio_blocked_d2_d1 = 0.028972736844078414`.
+- Open gates remain `geometricRatioUniform`, `qBelowOne`,
+  `AllDiameterKPActivityBound`, and `BalabanRGScaleTransfer`. No YM/Clay
+  promotion follows.
+
+# 2026-06-04 Sprint 53 no-2-cycle physical amplitude audit
+
+- Added the `dashiCFD` Sprint 53 physical no-2-cycle amplitude producer and
+  `dashi_agda` replay mode.
+- Batch output:
+  `../dashiCFD/outputs/sprint53_no2cycle_physical_gpu_audit/`.
+- Replay output:
+  `Docs/Images/clay-analytic-sprint/sprint53_no2cycle_physical_gpu_replay/`.
+- Result: `MATERIAL_SOURCE_GATE_CLOSED_PHYSICAL_NO2CYCLE_AMPLITUDE_BLOCKED`.
+  Material true-new source remains absent, but the material net-residue
+  physical-amplitude proxy does not clear the sign-cycle gate:
+  `2825 / 8252` proxy failures are physical-amplitude-small, fraction
+  `0.3423412506059137`, and `sigma_physical_cycle_fit =
+  -1.1215088689186317`.
+- Interpretation: the DASHI ternary source-budget NS route is falsified under
+  current material-packet physical-amplitude diagnostics. A denser-cadence
+  rerun can test whether the negative result is cadence-sensitive, but this is
+  no longer a near-miss source-budget lane.
+- No NS, Gate3, YM, terminal, or Clay promotion follows.
+
+# 2026-06-04 Clay Sprint 53 YM diameter-1/2 KP activity
+
+- Added `scripts/ym_diameter_kp_activity_estimator.py`.
+- Added `Docs/ClaySprintFiftyThreeYMDiameterOneKP.md`.
+- Added
+  `DASHI/Physics/Closure/ClaySprintFiftyThreeYMDiameterOneKPReceipt.agda`
+  and wired it through `DASHI/Everything.agda`.
+- Generated artifacts under
+  `Docs/Images/clay-analytic-sprint/sprint53_ym_diameter_kp_activity`.
+- The literal Wilson-defect diagnostic fails the branch check at every tested
+  beta, including the unit-plaquette carrier row
+  `8*|exp(-16.7)-1| ~= 7.99999955`. The suppressive carrier weight
+  `8*exp(-16.7) ~= 4.47e-7` passes. The contour/action KP envelope clears
+  same-prime `p=7` at beta `10.13` but still fails `p+1=8`; it clears the p+1
+  finite-prefix branch check at beta `13.64` and `16.7`.
+- Proof gate remains false: no all-diameter KP certificate, no actual
+  incompatibility-neighborhood theorem, no Balaban RG scale transfer, no
+  continuum YM, no mass gap, and no Clay YM promotion.
+
+# 2026-06-04 Clay Sprint 52 material source / no-2-cycle audit
+
+- Added the `dashiCFD` Sprint 52 producer
+  `scripts/ns_sprint52_material_no2cycle_audit.py`, which consumes Sprint 49
+  material-parent artifacts and audits only the material true-new source gate
+  and no-2-cycle amplitude gate.
+- Added `dashi_agda` replay option
+  `--replay-sprint52-material-no2cycle-summary`, with checks/manifest outputs
+  and the receipt
+  `DASHI.Physics.Closure.ClaySprintFiftyTwoMaterialNo2CycleAuditReceipt`.
+- Ran the six-run N32/N64 GPU batch. Result:
+  `MATERIAL_SOURCE_GATE_CLOSED_NO2CYCLE_AMPLITUDE_BLOCKED`.
+- 52A closes under current material parents:
+  `weighted_true_new_material_total = 0`,
+  `material_true_new_source_absent = true`, and
+  `does_material_source_gate_close = true`.
+- 52B remains blocked under the v1 material-packet amplitude proxy:
+  `no2cycle_proxy_failure_count = 9126`,
+  `no2cycle_amplitude_small_failure_count = 6993`, and
+  `no2cycle_amplitude_small_failure_fraction = 0.7662721893491125`, below the
+  90% diagnostic threshold.
+- No theorem-grade physical oscillation amplitude, weighted amplitude
+  summability, physical bridge, stretch absorption, no-blowup, Clay, or
+  Navier-Stokes promotion follows.
+
+# 2026-06-04 Clay Sprint 51 signed ternary flip audit
+
+- Added the `dashiCFD` Sprint 51 producer
+  `scripts/ns_signed_ternary_flip_audit.py`, which consumes Sprint 49
+  `ns_material_parent_table.csv` artifacts and audits cross-shell minus/plus
+  flow as an involutive signed-flip channel.
+- Added `dashi_agda` replay option
+  `--replay-signed-ternary-flip-summary`, with checks/manifest outputs and
+  the receipt
+  `DASHI.Physics.Closure.ClaySprintFiftyOneSignedTernaryFlipAuditReceipt`.
+- Ran the six-run N32/N64 GPU batch. Result: `NO2CYCLE_FAILS`.
+  `weighted_cross_minus_to_plus = 93419828142802.9`,
+  `weighted_cross_plus_to_minus = 84731761817324.95`, and signed imbalance is
+  `8688066325477.953`, only `0.048767829281919015` of paired flip flow.
+- Aggregate signed balance and BT-proxy signed decay pass diagnostically, but
+  net residue Lyapunov fails and the v1 packet-ID no-2-cycle proxy reports
+  `7129` failures among `11211` candidates. The active next theorem pressure is
+  persistent cross-shell sign-cycle damping, not raw plus-only source control.
+- `BT_distance_proxy = abs(K_child - K_parent)` remains only a proxy.
+  Theorem-grade BT distance, signed summability, physical bridge, stretch
+  absorption, and no-blowup remain unproved. No Clay or Navier-Stokes
+  promotion changed.
+
+# 2026-06-04 Clay Sprint 50 full ternary cross-shell audit
+
+- Added the `dashiCFD` Sprint 50 producer
+  `scripts/ns_ternary_cross_shell_matrix.py`, which consumes Sprint 49
+  `ns_material_parent_table.csv` artifacts and derives the full
+  `parent_state -> child_state` ternary matrix by source kind.
+- Added `dashi_agda` replay option
+  `--replay-ternary-cross-shell-summary`, with checks/manifest outputs and
+  the receipt
+  `DASHI.Physics.Closure.ClaySprintFiftyFullTernaryCrossShellAuditReceipt`.
+- Ran the six-run N32/N64 GPU batch. Result:
+  `CROSS_PLUS_FROM_MINUS_DOMINATES`, with weighted cross plus from minus
+  `93419828142802.9`, from zero `0`, and from plus `63297126901733.78`.
+- `BT_distance_proxy = abs(K_child - K_parent)` is recorded only as a proxy.
+  Cross-shell summability, BT-distance decay, the physical bridge, stretch
+  absorption, and no-blowup remain unproved. No Clay or Navier-Stokes
+  promotion changed.
+
+# 2026-06-04 Clay Sprint 49 GPU material-parent batch
+
+- Consumed `dashiCFD` Sprint 49 GPU material-parent summaries for
+  N32/N64 seed0/seed1.
+- Replay outputs live under
+  `Docs/Images/clay-analytic-sprint/sprint49_material_parent_N*_seed*_gpu_replay/`.
+- All four runs route as `ADJACENT_PACKET_THEOREM_INSUFFICIENT`.
+- Observed `weighted_true_new = 0` and `sigma_true_new = 0` across all four
+  runs. Tracking uncertainty is zero or small; weighted cross-shell source
+  dominates the material source split.
+- No Clay or Navier-Stokes promotion changed. The active next proof target is
+  adjacent/cross-shell packet parent control, plus a faster GPU packet-bin
+  producer that avoids full derivative readback.
+
 # 2026-06-04 Clay Sprint 44 residue semantics audit
 
 - Extended `scripts/ns_diagnostic_harness.py` with the Sprint 44 audit mode:

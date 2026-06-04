@@ -1,0 +1,21 @@
+{
+  "source": "../dashiCFD/outputs/sprint49_material_parent_N32_seed0_gpu/ns_material_parent_summary.csv",
+  "parameters": {
+    "replay_mode": "sprint49_material_parent_from_gpu_summary",
+    "material_parent_summary_input": "../dashiCFD/outputs/sprint49_material_parent_N32_seed0_gpu/ns_material_parent_summary.csv",
+    "budget_threshold": 0.5
+  },
+  "diagnostic_mode": "sprint49_material_parent_replay_from_gpu_summary",
+  "material_parent_summary_row_count": 336,
+  "outputs": {
+    "material_parent_summary_csv": "Docs/Images/clay-analytic-sprint/sprint49_material_parent_N32_seed0_gpu_replay/ns_material_parent_summary.csv",
+    "material_parent_summary": "Docs/Images/clay-analytic-sprint/sprint49_material_parent_N32_seed0_gpu_replay/ns_material_parent_summary.json",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint49_material_parent_N32_seed0_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint49_material_parent_N32_seed0_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFortyNineMaterialParentReplayReceipt",
+  "evidence_boundary": "Sprint 49 replay consumes GPU-produced material parent summaries only. It does not recompute N64 packet diagnostics on CPU and does not prove source summability, the physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_MATERIAL_PARENT_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

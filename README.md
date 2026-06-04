@@ -17,6 +17,44 @@ Use one of these reader tracks first:
 
 Current Clay sprint correction:
 
+- `Docs/ClaySprintSixtyOnePressureHessianQAntiTwistGate.md`
+- `DASHI/Physics/Closure/ClaySprintSixtyOnePressureHessianQAntiTwistGateReceipt.agda`
+- `Docs/ClaySprintSixtyOneCFMDirectionCoherenceRoute.md`
+- `DASHI/Physics/Closure/ClaySprintSixtyOneCFMDirectionCoherenceRouteReceipt.agda`
+- `Docs/ClaySprintFiftyEightNormalizedActionInflation.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyEightNormalizedActionInflationReceipt.agda`
+- `Docs/ClaySprintFiftySevenVesselActionReconciliation.md`
+- `DASHI/Physics/Closure/ClaySprintFiftySevenVesselActionReconciliationReceipt.agda`
+- `Docs/ClaySprintFiftySixPacketLocalStretchActionAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFiftySixPacketLocalStretchActionAuditReceipt.agda`
+- `Docs/ClaySprintFiftySixTwoLanePhysicalIntuitionRealityLedger.md`
+- `DASHI/Physics/Closure/ClaySprintFiftySixTwoLanePhysicalIntuitionRealityLedgerReceipt.agda`
+- `Docs/ClaySprintFiftyFiveLagrangianStretchActionAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyFiveLagrangianStretchActionAuditReceipt.agda`
+- `Docs/ClaySprintFiftyFourNo2CycleResolutionCadenceAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyFourNo2CycleResolutionCadenceAuditReceipt.agda`
+- `Docs/ClaySprintFiftyThreeNo2CyclePhysicalAmplitudeAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyThreeNo2CyclePhysicalAmplitudeReceipt.agda`
+- `Docs/ClaySprintFiftyThreeYMDiameterOneKP.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyThreeYMDiameterOneKPReceipt.agda`
+- `scripts/ym_diameter_kp_activity_estimator.py`
+- `Docs/ClaySprintFiftyFourYMInductiveDiameterKP.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyFourYMInductiveDiameterKPReceipt.agda`
+- `scripts/ym_sprint54_blocked_kp_transfer_table.py`
+- `Docs/ClaySprintFiftyFiveYMKPSumConvergence.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyFiveYMKPSumConvergenceReceipt.agda`
+- `Docs/ClaySprintFiftyFiveTwoLaneLocalizedLemmaLedger.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyFiveTwoLaneLocalizedLemmaLedgerReceipt.agda`
+- `Docs/ClaySprintFiftyFourNSYMPivotRoadmap.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyFourNSYMPivotRoadmapReceipt.agda`
+- `Docs/ClaySprintFiftyTwoMaterialNo2CycleAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyTwoMaterialNo2CycleAuditReceipt.agda`
+- `Docs/ClaySprintFiftyOneSignedTernaryFlipAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyOneSignedTernaryFlipAuditReceipt.agda`
+- `Docs/ClaySprintFiftyFullTernaryCrossShellAudit.md`
+- `DASHI/Physics/Closure/ClaySprintFiftyFullTernaryCrossShellAuditReceipt.agda`
+- `Docs/ClaySprintFortyNineMaterialParentReplay.md`
+- `DASHI/Physics/Closure/ClaySprintFortyNineMaterialParentReplayReceipt.agda`
 - `Docs/ClaySprintFortyFourResidueSemanticsAudit.md`
 - `DASHI/Physics/Closure/ClaySprintFortyFourResidueSemanticsAuditReceipt.agda`
 - `Docs/ClaySprintFortyThreeNS3DTruthBridgeRepair.md`
@@ -90,12 +128,59 @@ smoke rows, computes the geometric all-diameter KP tail, strict margin, rho
 target, leakage tail, and proof-certificate gate, and keeps Yang-Mills, mass
 gap, Balaban transfer, OS/Wightman, and Clay promotion false.
 
+Sprint 53 adds the YM diameter-1/2 activity diagnostic surface.  It computes
+literal Wilson-defect activity, unit-plaquette suppressive weight, and the
+contour/action KP envelope side by side for beta
+`6.0, 7.69, 10.13, 13.64, 16.7` at `p=7`.  Literal
+`|exp(-beta*S)-1|` fails the branch check at every row, including the
+unit-plaquette carrier row where `8*|exp(-16.7)-1| ~= 7.99999955`.  The
+suppressive weight `exp(-beta)` passes at carrier scale, and the contour/action
+envelope clears the p+1 finite-prefix branch check at beta `13.64` and `16.7`,
+while beta `10.13` clears same-prime `p=7` but not `p+1=8`.  This is
+conditional finite-prefix evidence only; all-diameter KP, Balaban RG transfer,
+continuum YM, mass gap, and Clay YM remain unproved.
+
+Sprint 54 makes the YM scale split explicit.  The bare and blocked literal
+Wilson-defect activities pass zero KP rows; the blocked contour/action envelope
+passes at beta `13.64` and `16.7`, with the `16.7` row reporting
+`kp_blocked_contour = 0.23178189475262734` and
+`geometric_ratio_blocked_d2_d1 = 0.028972736844078414`.  Those rows require
+Balaban RG scale transfer before they can be used as physical YM evidence.  The
+new receipt records `geometricRatioUniform`, `qBelowOne`,
+`AllDiameterKPActivityBound`, and `BalabanRGScaleTransfer` as the open analytic
+gates.
+
+Sprint 54 also records the route pivot.  The NS ternary source-budget route is
+closed as falsified under current material-packet physical-amplitude
+diagnostics, with CFM direction/coherence and BKM/no-concentration retained as
+NS fallback lanes.  YM KP/Balaban is the current main Clay-facing analytic
+lane, with all-diameter KP and Balaban RG scale transfer still open.
+
 The Sprint 43 NS 3D truth bridge repair is the current NS data-facing evidence
 surface.  The repaired harness reads `make_truth_3d.py` integer-radius shell
 metadata, uses stored velocity snapshots, records `k_star_source`, and emits
 progress/ETA.  Repaired N32 and two N64 dashiCFD 3D truth runs clear the shell
 metadata and high-shell support blockers, but all still fail the
 `budget_K > 1/2` gate and do not promote NS or Clay.
+
+Sprint 53 no-2-cycle physical-amplitude replay makes the current NS
+source-budget route negative rather than merely open: material true-new source
+remains absent, but `sigma_physical_cycle_fit = -1.1215088689186317` and only
+`0.3423412506059137` of proxy failures are physical-amplitude-small. Under
+current material-packet diagnostics, the ternary source-budget route is
+falsified; denser cadence can test whether that result is cadence-sensitive,
+but it is not a proof promotion.
+
+The NS diagnostic harness now has an opt-in GPU hot-loop path:
+`--diagnostic-backend gpu --fft-backend vkfft-vulkan`. It reuses sibling
+`../dashiCFD` Vulkan/vkFFT kernels for 3D FFT/IFFT, exact shell filtering via a
+CPU shell-ID LUT, spectral derivatives, strain inputs, and stretching density;
+CSV/JSON reductions remain CPU-side. The path is fail-fast if Vulkan vkFFT is
+not actually active and records device/ICD/runtime metadata. Use
+`--diagnostic-precision float64` for parity/debug; on the local RX580/RADV host
+complex128 vkFFT is active and the N32 smoke matches CPU `Q_K` at about
+`3e-14` relative error on active rows. This remains diagnostic only and does
+not promote NS or Clay.
 
 The Sprint 44 NS residue semantics audit is the current `R_plus_K` blocker
 surface.  It emits `ns_residue_semantics_audit.csv`,

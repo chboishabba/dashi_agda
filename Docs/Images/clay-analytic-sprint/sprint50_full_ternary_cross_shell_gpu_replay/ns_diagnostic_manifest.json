@@ -1,0 +1,22 @@
+{
+  "source": "../dashiCFD/outputs/sprint50_full_ternary_cross_shell_gpu_audit/ns_ternary_cross_shell_summary.json",
+  "parameters": {
+    "replay_mode": "sprint50_ternary_cross_shell_from_gpu_summary",
+    "ternary_cross_shell_summary_input": "../dashiCFD/outputs/sprint50_full_ternary_cross_shell_gpu_audit/ns_ternary_cross_shell_summary.json"
+  },
+  "diagnostic_mode": "sprint50_ternary_cross_shell_replay_from_gpu_summary",
+  "ternary_cross_shell_matrix_entry_count": 63,
+  "ternary_cross_shell_decomposition_entry_count": 54,
+  "outputs": {
+    "ternary_cross_shell_summary": "Docs/Images/clay-analytic-sprint/sprint50_full_ternary_cross_shell_gpu_replay/ns_ternary_cross_shell_summary.json",
+    "full_ternary_transition_matrix_csv": "Docs/Images/clay-analytic-sprint/sprint50_full_ternary_cross_shell_gpu_replay/ns_full_ternary_transition_matrix.csv",
+    "cross_shell_source_decomposition_csv": "Docs/Images/clay-analytic-sprint/sprint50_full_ternary_cross_shell_gpu_replay/ns_cross_shell_source_decomposition.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint50_full_ternary_cross_shell_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint50_full_ternary_cross_shell_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyFullTernaryCrossShellAuditReceipt",
+  "evidence_boundary": "Sprint 50 replay consumes dashiCFD ternary cross-shell summaries only. It does not recompute material-parent lineage, prove cross-shell summability, upgrade the BT-distance proxy to a theorem-grade metric, prove the physical bridge, prove stretch absorption, prove no finite-time blowup, or promote Clay regularity.",
+  "promotion_status": "NO_PROMOTION_TERNARY_CROSS_SHELL_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}
