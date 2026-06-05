@@ -80,7 +80,7 @@ RELATION_FORMALISM = {
     "relation_roots": ["supports", "invalidates", "non_resolving", "unanswered"],
     "evidence_statuses": ["open", "witnessed", "blocked", "boundary_only"],
     "promotion_states": [
-        "not_promotion_candidate",
+        "promotion_false",
         "promotion_pending",
         "promotion_blocked",
         "promoted_by_separate_contract",

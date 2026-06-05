@@ -60,9 +60,8 @@ layer; the relation fields carry the finite reconciliation algebra. This is a
 proposition/trajectory reconciliation surface, not a legal sufficiency surface
 and not a theorem-promotion surface. In particular, `supports` means typed
 comparison support inside the formalism; it does not mean proved, legally
-sufficient, or promoted. Promotion remains a separate guarded state; structural
-edge relations use `not_promotion_candidate`, while boundary/proof relation
-edges use `promotion_blocked`.
+sufficient, or promoted. Promotion remains a separate guarded state and is
+currently emitted as `promotion_false`.
 
 Current Clay sprint correction:
 
@@ -2871,9 +2870,8 @@ Model summary:
   fields on every edge. The original edge `family` remains the visual/narrative
   layer, while the relation fields carry the finite reconciliation algebra.
 - Relation classification is deliberately separate from proof promotion:
-  edge relations may be `witnessed` or `boundary_only`, while promotion remains
-  either `not_promotion_candidate` or `promotion_blocked` in the current
-  artifacts.
+  edge relations may be `witnessed`, `open`, or `boundary_only`, while
+  `promotion_state` remains `promotion_false`.
 - Non-claims are explicit:
   no Yang-Baxter theorem promotion, no physics promotion, no NS/YM
   promotion, and no `Cl(0,6)` equivalence promotion.

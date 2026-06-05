@@ -83,7 +83,7 @@ data LoomEvidenceStatus : Set where
   unresolved : LoomEvidenceStatus
 
 data LoomPromotionState : Set where
-  notPromotionCandidate : LoomPromotionState
+  promotionFalse : LoomPromotionState
   promotionPending : LoomPromotionState
   promotionBlocked : LoomPromotionState
   promotedBySeparateContract : LoomPromotionState
@@ -171,7 +171,7 @@ record LoomRelationAlgebra : Setω where
     promotionStatesAreCanonical :
       promotionStates
       ≡
-      notPromotionCandidate
+      promotionFalse
       ∷ promotionPending
       ∷ promotionBlocked
       ∷ promotedBySeparateContract
@@ -209,7 +209,7 @@ canonicalSupportRelation =
     supportedBucket
     refl
     witnessed
-    notPromotionCandidate
+    promotionFalse
     "Support is a comparison relation only; it is not theorem promotion."
 
 canonicalBoundaryRelation : LoomTypedRelation
@@ -221,7 +221,7 @@ canonicalBoundaryRelation =
     nonSubstantiveResponseBucket
     refl
     boundaryOnly
-    promotionBlocked
+    promotionFalse
     "Boundary-only material may be relation-bearing while promotion remains blocked."
 
 canonicalLoomRelationAlgebra : LoomRelationAlgebra
@@ -262,7 +262,7 @@ canonicalLoomRelationAlgebra =
     ; evidenceStatusesAreCanonical =
         refl
     ; promotionStates =
-        notPromotionCandidate
+        promotionFalse
         ∷ promotionPending
         ∷ promotionBlocked
         ∷ promotedBySeparateContract
