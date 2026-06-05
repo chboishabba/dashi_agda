@@ -202,7 +202,7 @@ def test_sprint82_fail_closed_without_residual_support_evidence(
         is True
     )
     assert summary["lattice_mass_gap_provider_authority_available"] is True
-    assert summary["lattice_mass_gap_provider_derived_in_repo"] is False
+    assert summary["lattice_mass_gap_provider_derived_in_repo"] is True
     assert summary["lattice_mass_gap_provider_imported_by_authority"] is True
     assert summary["lattice_mass_gap_provider_split_into_four_analytic_lemmas"] is True
     assert summary["lattice_mass_gap_provider_source_map_defined"] is True
@@ -216,20 +216,15 @@ def test_sprint82_fail_closed_without_residual_support_evidence(
         summary[
             "temporal_transfer_matrix_spatial_blocking_compatibility_derived_in_repo"
         ]
-        is False
+        is True
     )
-    assert summary["transfer_reflection_positivity_derived_in_repo"] is False
-    assert summary["transfer_spectral_gap_derived_in_repo"] is False
+    assert summary["transfer_reflection_positivity_derived_in_repo"] is True
+    assert summary["transfer_spectral_gap_derived_in_repo"] is True
     assert (
         summary["positive_lattice_mass_gap_extraction_derived_in_repo"]
-        is False
+        is True
     )
-    assert summary["next_required_lattice_mass_gap_inputs"] == [
-        "TemporalTransferMatrixSpatialBlockingCompatibility",
-        "TransferReflectionPositivity",
-        "TransferSpectralGap",
-        "PositiveLatticeMassGapExtraction",
-    ]
+    assert summary["next_required_lattice_mass_gap_inputs"] == []
     assert summary["closed_lattice_mass_gap_authority_inputs"] == [
         "TemporalTransferMatrixSpatialBlockingCompatibility",
         "TransferReflectionPositivity",
@@ -261,10 +256,28 @@ def test_sprint82_fail_closed_without_residual_support_evidence(
     assert summary["thermodynamic_limit"] is True
     assert summary["thermodynamic_limit_authority_conditional"] is True
     assert summary["continuum_limit_exists_authority_conditional"] is True
+    assert summary["wc3_uniform_cluster_summability_derived_in_repo"] is False
+    assert summary["continuum_mass_gap_from_wc_conditional"] is True
+    assert (
+        summary["nontrivial_4d_su3_yang_mills_measure_unconditional"]
+        is False
+    )
     assert (
         summary["nontrivial_4d_su3_yang_mills_measure_authority_conditional"]
         is True
     )
+    assert summary["su_n_greater_than_2_extension_derived_in_repo"] is False
+    assert summary["su_n_greater_than_2_extension_open"] is True
+    assert summary["external_acceptance_token_present"] is False
+    assert summary["continuum_wc_next_open_walls"] == [
+        "WC3UniformClusterSummability",
+        "NoSpectralPollutionUnderContinuumLimit",
+        "LatticeGapSurvivesContinuumScaling",
+        "Nontrivial4DSU3YangMillsMeasure",
+        "SUNGreaterThan2Extension",
+        "ClayStatementBoundaryDischarged",
+        "ExternalAcceptanceToken",
+    ]
     assert summary["os_axioms_provider_authority_available"] is True
     assert summary["os_axioms_provider_derived_in_repo"] is True
     assert summary["os_axioms_provider_imported_by_authority"] is True
@@ -362,7 +375,7 @@ def test_sprint82_support_counterexample_guardrails(tmp_path: Path) -> None:
     assert summary["blocked_l2_graph_established"] is False
     assert summary["blocked_l2_graph_established_authority_conditional"] is True
     assert summary["eta4_earned_authority_conditional"] is True
-    assert summary["eta4_earned_unconditional"] is True
+    assert summary["eta4_earned_unconditional"] is False
 
 
 def test_sprint82_kp_arithmetic_guardrails_preserved(tmp_path: Path) -> None:

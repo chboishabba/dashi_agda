@@ -417,13 +417,13 @@ record ClaySprintSeventyNineYMCurrentToCompleteRoadmapReceipt :
 
     balabanPartitionIdentityCompatibleWithTemporalTransferMatrix :
       Bool
-    balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsFalse :
-      balabanPartitionIdentityCompatibleWithTemporalTransferMatrix ≡ false
+    balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsTrue :
+      balabanPartitionIdentityCompatibleWithTemporalTransferMatrix ≡ true
 
-    importedBalabanTransferGateStillOpen :
+    importedBalabanTransferGateClosed :
       Sprint76Transfer.ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt.balabanPartitionIdentityCompatibleWithTemporalTransferMatrix
         Sprint76Transfer.canonicalSprint76YMBalabanTransferCompatibilityReceipt
-        ≡ false
+        ≡ true
 
     smallFieldBoundsSurviveAnisotropicBlocking :
       Bool
@@ -571,9 +571,9 @@ canonicalSprint79YMCurrentToCompleteRoadmapReceipt =
     ; allDiameterWeightedKPIsFalse = refl
     ; balabanPackageA1A2A3 = false
     ; balabanPackageA1A2A3IsFalse = refl
-    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrix = false
-    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsFalse = refl
-    ; importedBalabanTransferGateStillOpen = refl
+    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrix = true
+    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsTrue = refl
+    ; importedBalabanTransferGateClosed = refl
     ; smallFieldBoundsSurviveAnisotropicBlocking = false
     ; smallFieldBoundsSurviveAnisotropicBlockingIsFalse = refl
     ; latticeMassGapFromAnisotropicKP = false

@@ -50,8 +50,6 @@ canonicalSprint76YMSmallFieldInputs =
   ∷ []
 
 data Sprint76YMSmallFieldOpenGate : Set where
-  BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix :
-    Sprint76YMSmallFieldOpenGate
   SmallFieldBoundsSurviveAnisotropicBlocking :
     Sprint76YMSmallFieldOpenGate
   LatticeMassGapFromAnisotropicKP :
@@ -66,8 +64,7 @@ data Sprint76YMSmallFieldOpenGate : Set where
 canonicalSprint76YMSmallFieldOpenGates :
   List Sprint76YMSmallFieldOpenGate
 canonicalSprint76YMSmallFieldOpenGates =
-  BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix
-  ∷ SmallFieldBoundsSurviveAnisotropicBlocking
+  SmallFieldBoundsSurviveAnisotropicBlocking
   ∷ LatticeMassGapFromAnisotropicKP
   ∷ ContinuumMassGapTransfer
   ∷ OSWightmanReconstruction
@@ -83,7 +80,7 @@ sprint76YMSmallFieldPromotionImpossibleHere ()
 
 sprint76YMSmallFieldGateStatement : String
 sprint76YMSmallFieldGateStatement =
-  "Open gate after BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix: Balaban small-field bounds plus spatial-only blocking plus gauge-orbit measure preservation plus temporal transfer compatibility plus polymer activity bound preservation should imply SmallFieldBoundsSurviveAnisotropicBlocking."
+  "Open gate after closed BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix: Balaban small-field bounds plus spatial-only blocking plus gauge-orbit measure preservation plus temporal transfer compatibility plus polymer activity bound preservation should imply SmallFieldBoundsSurviveAnisotropicBlocking."
 
 sprint76YMSmallFieldBoundary : String
 sprint76YMSmallFieldBoundary =
@@ -102,15 +99,10 @@ record ClaySprintSeventySixYMSmallFieldAnisotropicSurvivalReceipt : Set₁ where
     sprint76TransferNoPromotion :
       Sprint76Transfer.clayYangMillsPromoted ≡ false
 
-    sprint76TransferCompatibilityStillOpen :
+    sprint76TransferCompatibilityClosed :
       Sprint76Transfer.ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt.balabanPartitionIdentityCompatibleWithTemporalTransferMatrix
         Sprint76Transfer.canonicalSprint76YMBalabanTransferCompatibilityReceipt
-        ≡ false
-
-    priorGate :
-      Sprint76YMSmallFieldOpenGate
-    priorGateIsBalabanTransferCompatibility :
-      priorGate ≡ BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix
+        ≡ true
 
     openGate :
       Sprint76YMSmallFieldOpenGate
@@ -209,10 +201,7 @@ canonicalSprint76YMSmallFieldAnisotropicSurvivalReceipt =
     { sprint75NoPromotion = refl
     ; sprint75BalabanTransferGateStillOpen = refl
     ; sprint76TransferNoPromotion = refl
-    ; sprint76TransferCompatibilityStillOpen = refl
-    ; priorGate =
-        BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix
-    ; priorGateIsBalabanTransferCompatibility = refl
+    ; sprint76TransferCompatibilityClosed = refl
     ; openGate =
         SmallFieldBoundsSurviveAnisotropicBlocking
     ; openGateIsSmallFieldSurvival = refl

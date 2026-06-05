@@ -57,6 +57,15 @@ def test_sprint81a_outputs_and_schema(tmp_path: Path) -> None:
         row["authority_name"] == "BalabanCMP98LocalOscillationBoundForQhp"
         for row in authorities
     )
+    normalized = next(
+        row
+        for row in authorities
+        if row["authority_name"]
+        == "BalabanCMP116AppendixAQhpAuthorityNormalization"
+    )
+    assert normalized["citation_keys"] == "CMP116;2602.0041 Appendix A"
+    assert normalized["proved_in_repo"] == "False"
+    assert normalized["clay_promotion"] == "False"
     assert any(
         row["gate_name"] == "LipschitzToSquaredOscillationForQhp"
         for row in gates
@@ -71,6 +80,22 @@ def test_sprint81a_authority_boundary(tmp_path: Path) -> None:
         "ANISOTROPIC_ASSUMPTION_A_AUTHORITY_ASSEMBLED_NO_CLAY_PROMOTION"
     )
     assert summary["balaban_cmp98_authority_accepted"] is True
+    assert (
+        summary["normalized_balaban_qhp_authority_citation_surface"]
+        == "CMP98/CMP116/2602.0041 Appendix A"
+    )
+    assert (
+        summary["normalized_balaban_qhp_authority_citation_role"]
+        == "external_qhp_local_oscillation_authority_surface"
+    )
+    assert (
+        summary["normalized_balaban_qhp_authority_surface_proved_in_repo"]
+        is False
+    )
+    assert (
+        summary["normalized_balaban_qhp_authority_surface_clay_promotion"]
+        is False
+    )
     assert (
         summary[
             "balaban_cmp98_local_oscillation_bound_for_qhp_proved_in_repo"

@@ -9,6 +9,14 @@ For a new serious reader, the important split is:
 - `empirical`: data-facing and measurement-facing surfaces that stay explicitly non-claiming
 - `speculative`: roadmap or intuition surfaces that are not current repo claims
 
+Current YM boundary: Sprint 89 closes the lattice mass-gap provider in the
+scoped-authority receipt sense. Sprint 90 records the continuum survival
+interface
+`WC3UniformClusterSummability -> NoSpectralPollutionUnderContinuumLimit ->
+PositiveContinuumMassGap` as conditional only. WC3, SU(3) continuum
+nontriviality, SU(N)>2 extension, external acceptance, and
+`clayYangMillsPromoted` remain open or false.
+
 Use one of these reader tracks first:
 
 - Repo track: `Docs/RepoGuide.md`
@@ -62,6 +70,50 @@ and not a theorem-promotion surface. In particular, `supports` means typed
 comparison support inside the formalism; it does not mean proved, legally
 sufficient, or promoted. Promotion remains a separate guarded state and is
 currently emitted as `promotion_false`.
+
+## Larger Object Classification Lattice
+
+`LargerObjectClassificationLattice.agda` classifies repo object families by
+their current formal maturity/status, not by theorem promotion. It is an
+inventory lattice over named carriers such as loom trajectories, affidavit
+relations, claim atoms, contested claims, typed-object assertions,
+Wikidata-style statement rows, PNF residuals, Hecke defects, Hecke candidate
+fibres, Hecke/eigen motifs, eigenspaces, Kolmogorov/NS scale objects,
+Bott/Clifford scaffolds, Monster/moonshine surfaces, DNA/brain eigenclass
+surfaces, and runtime receipt objects.
+
+The status constructors are:
+
+- `classified`: finite relation, local eigenclass, or residual class is already
+  typed in Agda.
+- `bridged`: object has a typed bridge to another classified surface.
+- `receiptSurface`: object is named and evidenced locally but is not globally
+  normalized.
+- `scaffoldOnly`: object is named/structured but not classified enough for
+  promotion use.
+- `runtimePending`: classification depends on external/runtime receipts.
+- `promotionBlocked`: object is explicitly blocked from theorem or physics
+  promotion by missing witnesses.
+- `outsideCurrentClassifier`: object is acknowledged but intentionally outside
+  the current finite classifier.
+
+Current examples:
+
+- Loom relations, claim atoms, contested claims, Wikidata row geometry, PNF
+  residuals, Hecke defects, DNA eigenclasses, and brain eigenbasis phases are
+  `classified` locally.
+- Hecke quotient candidate fibres are `bridged`.
+- Hecke eigen/eigenmotif, eigenspace, Kolmogorov/NS scale, Monster/moonshine,
+  and related analytic objects are `receiptSurface` unless a narrower module
+  supplies a specific local receipt.
+- Morphism typing claims and runtime parser/PNF emissions are `runtimePending`.
+- Wikidata truth/live-edit authority and NS/Serrin promotion are
+  `promotionBlocked`.
+- Bott/K-theory remains `scaffoldOnly`.
+
+This lattice answers "what kind of object is this, and how mature is its
+classification?" It does not answer "is the claim proved?" A `classified` or
+`bridged` object may still have `promotion_false`.
 
 Current Clay sprint correction:
 
@@ -2834,6 +2886,8 @@ Core model modules:
 
 - [`DialecticalJourneyLoom.agda`](DialecticalJourneyLoom.agda)
 - [`LoomRelationAlgebra.agda`](LoomRelationAlgebra.agda)
+- [`ClaimReconciliationObjectLattice.agda`](ClaimReconciliationObjectLattice.agda)
+- [`LargerObjectClassificationLattice.agda`](LargerObjectClassificationLattice.agda)
 - [`ClassificationDiscoveryLattice.agda`](ClassificationDiscoveryLattice.agda)
 - [`ITIRPNFAssessment.agda`](ITIRPNFAssessment.agda)
 
@@ -2872,6 +2926,32 @@ Model summary:
 - Relation classification is deliberately separate from proof promotion:
   edge relations may be `witnessed`, `open`, or `boundary_only`, while
   `promotion_state` remains `promotion_false`.
+- [`ClaimReconciliationObjectLattice.agda`](ClaimReconciliationObjectLattice.agda)
+  adds the bounded affidavit/Wikidata claim carrier layer. It classifies
+  proposition atoms, response units, shared claim roots, typed-object
+  assertions, and Wikidata-style statement rows before relation labels are
+  consumed by the loom.
+- The canonical claim-reconciliation fixture records `X walked the dog` versus
+  `X did not walk the dog` as an `explicit_dispute` relation with disputed
+  bucket projection. This is a reconciliation classification, not a decision
+  about which side is true.
+- The typed-object assertion fixture records `6 is a 1-morphism` as a
+  non-promoting witness-pending claim: the category or bicategory context and
+  typing rule are required before any stronger morphism classification.
+- Wikidata rows are modeled as structured evidence carriers with QID, PID,
+  value, qualifier, reference, and revision/window fields. They carry
+  `truth_claimed = false`, `live_edit_authority = false`, and
+  `promotion_state = promotion_false`.
+- The larger object lattice records broader object maturity:
+  loom relations, claim atoms, contested claim relations, Wikidata statement
+  rows/qualifiers/references/revision windows, PNF residuals, Hecke defects,
+  DNA eigenclasses, and brain eigenbasis phases are local `classified` objects;
+  morphism-typing claims and PNF runtime receipts are `runtimePending`;
+  Wikidata truth/live-edit authority and NS/Serrin promotion are
+  `promotionBlocked`; Hecke candidate fibres are `bridged`; Hecke/eigenmotif,
+  eigenspace, Kolmogorov/NS, Monster/moonshine, and related analytic surfaces
+  remain `scaffoldOnly`, `runtimePending`, or `promotionBlocked` according to
+  their receipts.
 - Non-claims are explicit:
   no Yang-Baxter theorem promotion, no physics promotion, no NS/YM
   promotion, and no `Cl(0,6)` equivalence promotion.
@@ -2879,6 +2959,22 @@ Model summary:
   `Cl(0,6)=64`, six generators, squares to `-1`, anticommutation,
   64-monomial span, forward lift map, surjectivity, rank-nullity bridge, and
   target `M_8(R)`.
+- [`LargerObjectClassificationLattice.agda`](LargerObjectClassificationLattice.agda)
+  records the larger-formalism inventory. It classifies object-family status
+  rather than proving the objects themselves: loom relations, affidavit
+  relations, claim atoms, contested claims, typed-object assertion carriers,
+  Wikidata row geometry, PNF residuals, Hecke defects, DNA eigenclasses, and
+  brain eigenbasis phases are `classified`; Hecke fibres, Clifford bridges,
+  brain semantic transport, and Brain-DNA connectors are `bridged`; morphism
+  typing claims and parser/runtime PNF receipts are `runtimePending`;
+  Wikidata truth/live-edit authority and NS/Serrin promotion are
+  `promotionBlocked`; Hecke/eigen, eigenvalue/eigenbasis/eigenspace,
+  Kolmogorov, and Monster surfaces are `receiptSurface`; Bott/K-theory remains
+  `scaffoldOnly`.
+- The larger inventory answers "what has been classified?" at the object-family
+  status level only. It does not claim a closed taxonomy of every Hecke
+  eigenpacket, Kolmogorov scale, eigenspace, Monster component, DNA eigenclass,
+  or brain eigenbasis inhabitant.
 
 Input provenance is resolved from resolved local files:
 
@@ -2894,6 +2990,10 @@ Scope boundary:
   matching, and operator review buckets.
 - DASHI imports the finite relation algebra shape only. It does not claim legal
   sufficiency, affidavit proof, or theorem promotion from loom bucket labels.
+- DASHI's claim-reconciliation lattice is the formal bridge for
+  proposition/response examples, typed-object assertions, and Wikidata evidence
+  rows. SensibLaw remains responsible for runtime extraction, SQLite
+  persistence, operator review, and legal workflow outputs.
 
 Paper 1 origins figure pack:
 

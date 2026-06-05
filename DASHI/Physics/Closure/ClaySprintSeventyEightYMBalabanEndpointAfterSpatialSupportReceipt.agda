@@ -54,8 +54,6 @@ data Sprint78YMBalabanEndpointAfterSpatialSupportGate : Set where
     Sprint78YMBalabanEndpointAfterSpatialSupportGate
   SmallFieldBoundsSurviveAnisotropicBlocking :
     Sprint78YMBalabanEndpointAfterSpatialSupportGate
-  BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix :
-    Sprint78YMBalabanEndpointAfterSpatialSupportGate
   LatticeMassGapFromAnisotropicKP :
     Sprint78YMBalabanEndpointAfterSpatialSupportGate
   ContinuumMassGapTransfer :
@@ -72,7 +70,6 @@ canonicalSprint78YMBalabanEndpointAfterSpatialSupportGates =
   ∷ B6ClosedConditionalOnA1A2A3
   ∷ KPEntropyFromL2BlockingOrientations
   ∷ SmallFieldBoundsSurviveAnisotropicBlocking
-  ∷ BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix
   ∷ LatticeMassGapFromAnisotropicKP
   ∷ ContinuumMassGapTransfer
   ∷ OSWightmanReconstruction
@@ -115,7 +112,7 @@ conditionalB6SurfaceWitness refl refl refl =
 
 sprint78YMBalabanEndpointAfterSpatialSupportStatement : String
 sprint78YMBalabanEndpointAfterSpatialSupportStatement =
-  "After spatial-only residual effective-action support, Paper 12b closes B6 only conditional on A1-A3. Paper 12a / BalabanPackage_A1_A2_A3 remains open. Downstream open gates are SmallFieldBoundsSurviveAnisotropicBlocking, BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix, LatticeMassGapFromAnisotropicKP, ContinuumMassGapTransfer, OSWightmanReconstruction, and MassGapSurvival."
+  "After spatial-only residual effective-action support, Paper 12b closes B6 only conditional on A1-A3. Paper 12a / BalabanPackage_A1_A2_A3 remains open. BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix is closed upstream; downstream open gates are SmallFieldBoundsSurviveAnisotropicBlocking, LatticeMassGapFromAnisotropicKP, ContinuumMassGapTransfer, OSWightmanReconstruction, and MassGapSurvival."
 
 sprint78YMBalabanEndpointAfterSpatialSupportBoundary : String
 sprint78YMBalabanEndpointAfterSpatialSupportBoundary =
@@ -197,10 +194,10 @@ record ClaySprintSeventyEightYMBalabanEndpointAfterSpatialSupportReceipt :
         Sprint76SmallField.canonicalSprint76YMSmallFieldAnisotropicSurvivalReceipt
         ≡ false
 
-    sprint76BalabanTransferCompatibilityStillOpen :
+    sprint76BalabanTransferCompatibilityClosed :
       Sprint76Transfer.ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt.balabanPartitionIdentityCompatibleWithTemporalTransferMatrix
         Sprint76Transfer.canonicalSprint76YMBalabanTransferCompatibilityReceipt
-        ≡ false
+        ≡ true
 
     sprint76LatticeMassGapStillOpen :
       Sprint76Lattice.ClaySprintSeventySixYMLatticeMassGapFromAnisotropicKPReceipt.latticeMassGapFromAnisotropicKP
@@ -235,8 +232,8 @@ record ClaySprintSeventyEightYMBalabanEndpointAfterSpatialSupportReceipt :
 
     balabanPartitionIdentityCompatibleWithTemporalTransferMatrix :
       Bool
-    balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsFalse :
-      balabanPartitionIdentityCompatibleWithTemporalTransferMatrix ≡ false
+    balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsTrue :
+      balabanPartitionIdentityCompatibleWithTemporalTransferMatrix ≡ true
 
     latticeMassGapFromAnisotropicKP :
       Bool
@@ -312,7 +309,7 @@ canonicalSprint78YMBalabanEndpointAfterSpatialSupportReceipt =
     ; kpEntropyAtBlockedScaleL2 = false
     ; kpEntropyAtBlockedScaleL2IsFalse = refl
     ; sprint76SmallFieldSurvivalStillOpen = refl
-    ; sprint76BalabanTransferCompatibilityStillOpen = refl
+    ; sprint76BalabanTransferCompatibilityClosed = refl
     ; sprint76LatticeMassGapStillOpen = refl
     ; sprint76ContinuumMassGapTransferStillOpen = refl
     ; sprint76OSWightmanReconstructionStillOpen = refl
@@ -322,8 +319,8 @@ canonicalSprint78YMBalabanEndpointAfterSpatialSupportReceipt =
     ; downstreamGatesAreCanonical = refl
     ; smallFieldBoundsSurviveAnisotropicBlocking = false
     ; smallFieldBoundsSurviveAnisotropicBlockingIsFalse = refl
-    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrix = false
-    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsFalse =
+    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrix = true
+    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsTrue =
         refl
     ; latticeMassGapFromAnisotropicKP = false
     ; latticeMassGapFromAnisotropicKPIsFalse = refl
@@ -364,11 +361,11 @@ smallFieldBoundsSurviveAnisotropicBlockingStillOpenCheck :
 smallFieldBoundsSurviveAnisotropicBlockingStillOpenCheck =
   refl
 
-balabanPartitionIdentityCompatibleStillOpenCheck :
+balabanPartitionIdentityCompatibleClosedCheck :
   balabanPartitionIdentityCompatibleWithTemporalTransferMatrix
     canonicalSprint78YMBalabanEndpointAfterSpatialSupportReceipt
-    ≡ false
-balabanPartitionIdentityCompatibleStillOpenCheck =
+    ≡ true
+balabanPartitionIdentityCompatibleClosedCheck =
   refl
 
 latticeMassGapFromAnisotropicKPStillOpenCheck :

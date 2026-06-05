@@ -11,7 +11,9 @@ from typing import Any
 
 
 Q_CURRENT = 0.23178189475262734
-ROUTE_DECISION = "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_THEOREM_STILL_OPEN"
+ROUTE_DECISION = (
+    "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_BALABAN_AUTHORITY_CONDITIONAL"
+)
 
 INTERFACE_FIELDS = [
     "interface_id",
@@ -157,28 +159,28 @@ def gate_rows() -> list[dict[str, Any]]:
             "G1",
             "EffectiveActionPolymersSpatialOnlyForA1",
             "I1-I11 + transfer absorption inputs",
-            "OPEN_TYPED_INTERFACE_AVAILABLE",
+            "AUTHORITY_CONDITIONAL_CMP116_EQS_2_12_2_13",
             False,
         ),
         (
             "G2",
             "PolymerDefinedOnBlockedLattice",
             "G1 + I7",
-            "OPEN_AFTER_G1",
+            "AUTHORITY_CONDITIONAL_AFTER_G1",
             False,
         ),
         (
             "G3",
             "KPEntropyAtBlockedScaleL2",
             "G2 + L=2 face-count convention",
-            "OPEN_AFTER_G2",
+            "AUTHORITY_CONDITIONAL_AFTER_G2",
             False,
         ),
         (
             "G4",
             "AllDiameterWeightedKP",
             "G3 + 4q<1",
-            "ARITHMETIC_READY_BUT_STRUCTURALLY_BLOCKED",
+            "ARITHMETIC_READY_AUTHORITY_CONDITIONAL",
             False,
         ),
         (
@@ -232,9 +234,17 @@ def summary_payload() -> dict[str, Any]:
         "temporal_measure_factorization_lambda_one_reconciled": True,
         "defined_on_blocked_l2_spatial_graph_defined": True,
         "effective_action_polymers_spatial_only_for_a1": False,
+        "effective_action_polymers_spatial_only_for_a1_authority_conditional": True,
+        "cmp116_equations_2_12_2_13_authority_available": True,
+        "cmp116_equations_2_12_2_13_derived_in_repo": False,
         "polymer_defined_on_blocked_lattice": False,
+        "polymer_defined_on_blocked_lattice_authority_conditional": True,
         "kp_entropy_at_blocked_scale_l2": False,
+        "kp_entropy_at_blocked_scale_l2_authority_conditional": True,
         "all_diameter_weighted_kp": False,
+        "all_diameter_weighted_kp_authority_conditional": True,
+        "eta4_earned_authority_conditional": True,
+        "eta4_earned_unconditional": False,
         "mass_gap_promoted": False,
         "clay_yang_mills_promoted": False,
         "q_current": Q_CURRENT,

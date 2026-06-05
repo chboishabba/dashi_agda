@@ -10,7 +10,9 @@ import DASHI.Physics.Closure.ClaySprintSeventyEightYMEffectiveActionSpatialOnlyR
   as Sprint78A1
 import DASHI.Physics.Closure.ClaySprintEightyOneYMAnisotropicAssumptionAAuthorityReceipt
   as Sprint81A
+import DASHI.Physics.Closure.YMBlockedL2KPEntropy as BlockedL2
 import DASHI.Physics.Closure.YMEffectiveActionSupportInterface as SupportInterface
+import DASHI.Physics.Closure.YMResidualSupportBalabanAuthority as ResidualAuthority
 
 ------------------------------------------------------------------------
 -- Sprint 81B YM effective-action support-interface receipt.
@@ -74,14 +76,29 @@ definedOnBlockedL2SpatialGraphDefined = true
 effectiveActionPolymersSpatialOnlyForA1Proved : Bool
 effectiveActionPolymersSpatialOnlyForA1Proved = false
 
+effectiveActionPolymersSpatialOnlyForA1AuthorityConditional : Bool
+effectiveActionPolymersSpatialOnlyForA1AuthorityConditional = true
+
 polymerDefinedOnBlockedLatticeProved : Bool
 polymerDefinedOnBlockedLatticeProved = false
+
+polymerDefinedOnBlockedLatticeAuthorityConditional : Bool
+polymerDefinedOnBlockedLatticeAuthorityConditional = true
 
 kpEntropyAtBlockedScaleL2Proved : Bool
 kpEntropyAtBlockedScaleL2Proved = false
 
+kpEntropyAtBlockedScaleL2AuthorityConditional : Bool
+kpEntropyAtBlockedScaleL2AuthorityConditional = true
+
 allDiameterWeightedKPProved : Bool
 allDiameterWeightedKPProved = false
+
+allDiameterWeightedKPAuthorityConditional : Bool
+allDiameterWeightedKPAuthorityConditional = true
+
+eta4EarnedUnconditional : Bool
+eta4EarnedUnconditional = false
 
 MissingSupportInterface : Scalar
 MissingSupportInterface =
@@ -93,7 +110,7 @@ EffectiveActionSpatialOnlyTarget =
 
 Sprint81BRouteDecision : Scalar
 Sprint81BRouteDecision =
-  "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_THEOREM_STILL_OPEN"
+  "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_BALABAN_AUTHORITY_CONDITIONAL"
 
 missingSupportInterfaceExplicit :
   MissingSupportInterface ≡
@@ -107,7 +124,7 @@ effectiveActionSpatialOnlyTargetExplicit = refl
 
 routeDecisionExplicit :
   Sprint81BRouteDecision ≡
-  "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_THEOREM_STILL_OPEN"
+  "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_BALABAN_AUTHORITY_CONDITIONAL"
 routeDecisionExplicit = refl
 
 data Sprint81BSupportInterfaceInput : Set where
@@ -198,11 +215,11 @@ sprint81BSupportPromotionImpossibleHere ()
 
 sprint81BSupportStatement : String
 sprint81BSupportStatement =
-  "Sprint 81B/81C support-interface audit: BalabanEffectiveAction, Polymer, PolymerIn, link kinds, support predicates, residual terms, activity locality, lambda-one reconciliation, and blocked L2 spatial graph carriers are typed theorem objects; EffectiveActionPolymersSpatialOnlyForA1 remains the next theorem."
+  "Sprint 81B/81C support-interface audit: BalabanEffectiveAction, Polymer, PolymerIn, link kinds, support predicates, residual terms, activity locality, lambda-one reconciliation, and blocked L2 spatial graph carriers are typed theorem objects; CMP116 eqs. 2.12-2.13/Balaban authority conditionally supports EffectiveActionPolymersSpatialOnlyForA1 and the blocked L2 KP lane."
 
 sprint81BSupportBoundary : String
 sprint81BSupportBoundary =
-  "Boundary: this receipt records the defined support interface only. It does not prove EffectiveActionPolymersSpatialOnlyForA1, PolymerDefinedOnBlockedLattice, KPEntropyAtBlockedScaleL2, all-diameter KP, mass gap, or Clay/YM."
+  "Boundary: EffectiveActionPolymersSpatialOnlyForA1, PolymerDefinedOnBlockedLattice, and KPEntropyAtBlockedScaleL2 are authority-conditional only; this receipt does not derive them unconditionally and does not prove all-diameter KP, mass gap, or Clay/YM."
 
 record ClaySprintEightyOneYMEffectiveActionSupportInterfaceReceipt :
   Set₁ where
@@ -227,7 +244,7 @@ record ClaySprintEightyOneYMEffectiveActionSupportInterfaceReceipt :
       "EffectiveActionPolymersSpatialOnlyForA1: forall gamma, PolymerIn S_k gamma -> SpatialSupport gamma"
     routeDecision :
       Sprint81BRouteDecision ≡
-      "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_THEOREM_STILL_OPEN"
+      "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_BALABAN_AUTHORITY_CONDITIONAL"
     balabanEffectiveActionMissing :
       balabanEffectiveActionCarrierDefined ≡ true
     polymerCarrierMissing :
@@ -254,12 +271,27 @@ record ClaySprintEightyOneYMEffectiveActionSupportInterfaceReceipt :
       definedOnBlockedL2SpatialGraphDefined ≡ true
     effectiveActionSpatialOnlyStillOpen :
       effectiveActionPolymersSpatialOnlyForA1Proved ≡ false
+    effectiveActionSpatialOnlyAuthorityConditional :
+      effectiveActionPolymersSpatialOnlyForA1AuthorityConditional ≡ true
+    residualSupportAuthorityBoundary :
+      ResidualAuthority.BalabanResidualSupportAuthorityBoundary
     polymerBlockedLatticeStillOpen :
       polymerDefinedOnBlockedLatticeProved ≡ false
+    polymerBlockedLatticeAuthorityConditional :
+      polymerDefinedOnBlockedLatticeAuthorityConditional ≡
+      BlockedL2.polymerDefinedOnBlockedLatticeAuthorityConditional
     kpEntropyStillOpen :
       kpEntropyAtBlockedScaleL2Proved ≡ false
+    kpEntropyAuthorityConditional :
+      kpEntropyAtBlockedScaleL2AuthorityConditional ≡
+      BlockedL2.kpEntropyAtBlockedScaleL2AuthorityConditionalBool
     allDiameterKPStillOpen :
       allDiameterWeightedKPProved ≡ false
+    allDiameterKPAuthorityConditional :
+      allDiameterWeightedKPAuthorityConditional ≡
+      BlockedL2.allDiameterWeightedKPAuthorityConditional
+    eta4NotEarnedUnconditionally :
+      eta4EarnedUnconditional ≡ BlockedL2.eta4EarnedUnconditional
     massGapStillFalse :
       massGapPromoted ≡ false
     noClayPromotion :
@@ -311,9 +343,16 @@ claySprintEightyOneYMEffectiveActionSupportInterfaceReceipt =
     ; temporalFactorizationReconciliationMissing = refl
     ; blockedGraphMissing = refl
     ; effectiveActionSpatialOnlyStillOpen = refl
+    ; effectiveActionSpatialOnlyAuthorityConditional = refl
+    ; residualSupportAuthorityBoundary =
+        ResidualAuthority.balabanResidualSupportAuthorityBoundary
     ; polymerBlockedLatticeStillOpen = refl
+    ; polymerBlockedLatticeAuthorityConditional = refl
     ; kpEntropyStillOpen = refl
+    ; kpEntropyAuthorityConditional = refl
     ; allDiameterKPStillOpen = refl
+    ; allDiameterKPAuthorityConditional = refl
+    ; eta4NotEarnedUnconditionally = refl
     ; massGapStillFalse = refl
     ; noClayPromotion = refl
     ; inputs = canonicalSprint81BSupportInterfaceInputs

@@ -2,6 +2,29 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-06 Sprint 90 continuum WC boundary:
+  `YMSprint90ContinuumMassGapWCBoundaryReceipt` records the exact conditional
+  interface from `WC3UniformClusterSummability`, tight continuum limit,
+  reflection positivity, and OS reconstruction to no spectral pollution and a
+  positive continuum mass gap.  It keeps WC3, unconditional continuum
+  no-pollution/gap survival, YM quotient Hamiltonian closability/descent,
+  nontrivial SU3 continuum measure, SU(N)>2 extension, external acceptance, and
+  Clay/YM promotion false/open.  The combined audit still reports the next YM gate as
+  `ClayYangMillsPromotionBoundary`; the WC3/no-pollution theorem is the
+  lower-level mathematical wall under that boundary.
+
+- 2026-06-06 Sprint 89 transfer spectral-gap scoped-authority closure:
+  `YMSprint89ScopedAuthorityTransferSpectralGapReceipt` accepts the two Sprint
+  88 hard inputs as scoped authority receipts:
+  `BalabanCMP98LocalOscillationBoundForQhp` for Assumption 5.4 and
+  `EffectiveActionPolymersSpatialOnlyForA1` for Assumption 6.3.  The lattice
+  provider now closes in the receipt/scoped-authority sense, including
+  `TransferSpectralGap` and `PositiveLatticeMassGapExtraction`.  The weak
+  `PolymerIn` Gate-B theorem is not promoted; the operational path is Gate-B
+  packaging authority plus the strong residual-membership KP route.
+  `latticeMassGapFromAnisotropicKPUnconditional`, continuum/OS closure, and
+  Clay/YM promotion remain false.
+
 - 2026-06-05 Sprint 86 YM/NS theorem-gate continuation:
   `YMSprint86BlockedActionTransferKernelSeparationReceipt` reduces
   `BlockedActionSeparatesTransferKernel` to sector-tag completeness,
@@ -24,11 +47,13 @@
   first lattice mass-gap provider slot into five named sublemmas.  The repo
   derives `SpatialBlockingPreservesTimeSlices` and
   `SpatialBlockingPreservesTemporalBoundaryLinks` from the existing
-  spatial-only temporal-link receipt.  `BlockedActionSeparatesTransferKernel`,
-  `BalabanPartitionIdentityCommutesWithTemporalTrace`, and
-  `TransferHilbertSpaceCompatibleWithSpatialBlocking` remain open; therefore
-  the full transfer/spatial-blocking compatibility and lattice mass-gap
-  provider derivation remain false.
+  spatial-only temporal-link receipt, and the closed W3/W4/W5 path now closes
+  `BlockedActionSeparatesTransferKernel`,
+  `BalabanPartitionIdentityCommutesWithTemporalTrace`,
+  `TransferHilbertSpaceCompatibleWithSpatialBlocking`, and full
+  `TemporalTransferMatrixSpatialBlockingCompatibility`.  The lattice mass-gap
+  provider derivation remains false because the spectral-gap/RP/extraction
+  analytic slots are still authority-only.
 
 - 2026-06-05 Sprint 84 NS Qhp correction: the spatial-identity Qhp formal
   commutation package is recorded, but epsilon<1 absorption and the
@@ -75,10 +100,10 @@
   provider on that authority lane.  `YMLatticeMassGapAuthority` then supplies
   `LatticeMassGapFromAnisotropicKP` from an explicit transfer/spectral-gap
   provider on the authority lane, but now also records
-  `LatticeMassGapProviderSourceMap` and keeps the four repo-derivation flags
-  false for `TemporalTransferMatrixSpatialBlockingCompatibility`,
-  `TransferReflectionPositivity`, `TransferSpectralGap`, and
-  `PositiveLatticeMassGapExtraction`; consequently
+  `LatticeMassGapProviderSourceMap`.  The temporal transfer/spatial-blocking
+  flag is repo-derived from Sprint 85/W5, while `TransferReflectionPositivity`,
+  `TransferSpectralGap`, and `PositiveLatticeMassGapExtraction` remain
+  authority-only; consequently
   `latticeMassGapFromAnisotropicKPUnconditional=false`.  These four slots are
   the next exact unconditional YM lemmas.  `YMThermodynamicLimitAuthority` then supplies
   `ThermodynamicLimit`, `ContinuumLimitExists`, and

@@ -70,7 +70,7 @@ def test_sprint81b_support_interface_fail_closed(tmp_path: Path) -> None:
     summary = run_audit(tmp_path / "audit")
 
     assert summary["route_decision"] == (
-        "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_THEOREM_STILL_OPEN"
+        "EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_BALABAN_AUTHORITY_CONDITIONAL"
     )
     assert summary["complete"] is False
     assert summary["support_interface_defined"] is True
@@ -88,9 +88,20 @@ def test_sprint81b_support_interface_fail_closed(tmp_path: Path) -> None:
     assert summary["temporal_measure_factorization_lambda_one_reconciled"] is True
     assert summary["defined_on_blocked_l2_spatial_graph_defined"] is True
     assert summary["effective_action_polymers_spatial_only_for_a1"] is False
+    assert (
+        summary["effective_action_polymers_spatial_only_for_a1_authority_conditional"]
+        is True
+    )
+    assert summary["cmp116_equations_2_12_2_13_authority_available"] is True
+    assert summary["cmp116_equations_2_12_2_13_derived_in_repo"] is False
     assert summary["polymer_defined_on_blocked_lattice"] is False
+    assert summary["polymer_defined_on_blocked_lattice_authority_conditional"] is True
     assert summary["kp_entropy_at_blocked_scale_l2"] is False
+    assert summary["kp_entropy_at_blocked_scale_l2_authority_conditional"] is True
     assert summary["all_diameter_weighted_kp"] is False
+    assert summary["all_diameter_weighted_kp_authority_conditional"] is True
+    assert summary["eta4_earned_authority_conditional"] is True
+    assert summary["eta4_earned_unconditional"] is False
     assert summary["mass_gap_promoted"] is False
     assert summary["clay_yang_mills_promoted"] is False
 

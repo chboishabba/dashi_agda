@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -108,8 +109,8 @@ def required_surfaces() -> list[dict[str, Any]]:
             "required_anchor": (
                 "canonicalYMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt"
             ),
-            "status": "TRANSFER_SPATIAL_BLOCKING_DECOMPOSITION_PARTIAL_FAIL_CLOSED",
-            "proved_in_repo": False,
+            "status": "TRANSFER_SPATIAL_BLOCKING_DECOMPOSITION_CLOSED",
+            "proved_in_repo": True,
             "clay_promotion": False,
         },
         {
@@ -159,6 +160,21 @@ def required_surfaces() -> list[dict[str, Any]]:
             "path": "DASHI/Physics/Closure/YMMassGapSurvivalAuthority.agda",
             "required_anchor": "massGapSurvivalAuthorityBoundary",
             "status": "MASS_GAP_SURVIVAL_PROVIDER_BACKED_AUTHORITY_CLOSED",
+            "proved_in_repo": True,
+            "clay_promotion": False,
+        },
+        {
+            "domain": "YM",
+            "surface_id": "YM8a",
+            "surface_name": "ContinuumMassGapWCBoundaryReceipt",
+            "path": (
+                "DASHI/Physics/Closure/"
+                "YMSprint90ContinuumMassGapWCBoundaryReceipt.agda"
+            ),
+            "required_anchor": (
+                "canonicalYMSprint90ContinuumMassGapWCBoundaryReceipt"
+            ),
+            "status": "WC3_CONTINUUM_SURVIVAL_BOUNDARY_RECORDED_FAIL_CLOSED",
             "proved_in_repo": True,
             "clay_promotion": False,
         },
@@ -237,6 +253,25 @@ def surface_present(repo_root: Path, row: dict[str, Any]) -> bool:
     return row["required_anchor"] in path.read_text()
 
 
+def source_anchor_present(repo_root: Path, relative_path: str, anchor: str) -> bool:
+    path = repo_root / relative_path
+    if not path.exists():
+        return False
+    return anchor in path.read_text()
+
+
+def source_bool_assignment(repo_root: Path, relative_path: str, name: str) -> bool:
+    path = repo_root / relative_path
+    if not path.exists():
+        return False
+    match = re.search(
+        rf"^{re.escape(name)}\s*=\s*(true|false)\s*$",
+        path.read_text(),
+        re.MULTILINE,
+    )
+    return bool(match and match.group(1) == "true")
+
+
 def choose_route(*, clay_yang_mills_promoted: bool, clay_navier_stokes_promoted: bool) -> str:
     if clay_yang_mills_promoted or clay_navier_stokes_promoted:
         return ROUTE_PROMOTION_VIOLATION
@@ -254,7 +289,29 @@ def source_rows(repo_root: Path, route_decision: str) -> list[dict[str, Any]]:
     ]
 
 
-def gate_rows(route_decision: str) -> list[dict[str, Any]]:
+def gate_rows(repo_root: Path, route_decision: str) -> list[dict[str, Any]]:
+    lattice_mass_gap_authority_path = (
+        "DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda"
+    )
+    temporal_transfer_spatial_blocking_derived = source_bool_assignment(
+        repo_root,
+        lattice_mass_gap_authority_path,
+        "temporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo",
+    )
+    temporal_transfer_status = (
+        "DERIVED_IN_REPO_NO_CLAY_PROMOTION"
+        if temporal_transfer_spatial_blocking_derived
+        else "PARTIAL_DECOMPOSITION_IN_REPO_FULL_COMPATIBILITY_OPEN"
+    )
+    temporal_transfer_next_input = (
+        "lattice mass-gap provider closed by scoped authority; Clay boundary remains"
+        if temporal_transfer_spatial_blocking_derived
+        else (
+            "BlockedActionSeparatesTransferKernel + "
+            "BalabanPartitionIdentityCommutesWithTemporalTrace + "
+            "TransferHilbertSpaceCompatibleWithSpatialBlocking"
+        )
+    )
     raw_rows = [
         (
             "YM",
@@ -287,18 +344,18 @@ def gate_rows(route_decision: str) -> list[dict[str, Any]]:
             "YM",
             "YMG4",
             "LatticeMassGapAuthority",
-            "AUTHORITY_CLOSED_UNCONDITIONAL_PROVIDER_OPEN",
-            "TemporalTransferMatrixSpatialBlockingCompatibility + TransferReflectionPositivity + TransferSpectralGap + PositiveLatticeMassGapExtraction",
-            False,
+            "SCOPED_AUTHORITY_CLOSED_CLAY_BOUNDARY_OPEN",
+            "ClayYangMillsPromotionBoundary",
+            True,
             False,
         ),
         (
             "YM",
             "YMG5",
             "TemporalTransferSpatialBlockingCompatibility",
-            "PARTIAL_DECOMPOSITION_IN_REPO_FULL_COMPATIBILITY_OPEN",
-            "BlockedActionSeparatesTransferKernel + BalabanPartitionIdentityCommutesWithTemporalTrace + TransferHilbertSpaceCompatibleWithSpatialBlocking",
-            False,
+            temporal_transfer_status,
+            temporal_transfer_next_input,
+            temporal_transfer_spatial_blocking_derived,
             False,
         ),
         (
@@ -391,6 +448,68 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
         row["surface_name"]: row["present_in_repo"]
         for row in surfaces
     }
+    lattice_mass_gap_authority_path = (
+        "DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda"
+    )
+    downstream_26020041_required_anchors = [
+        "downstream26020041PaperIdentifier",
+        "downstream26020041Assumption54NormalizedAnchor",
+        "downstream26020041Assumption54DASHIAuthoritySlot",
+        "downstream26020041Assumption63NormalizedAnchor",
+        "downstream26020041Assumption63DASHIAuthoritySlot",
+        "downstream26020041Theorem41NormalizedAnchor",
+        "downstream26020041SpectralGapReferenceAnchor",
+        "downstream26020041ReflectionPositivityReferenceAnchor",
+    ]
+    downstream_26020041_source_map_defined = all(
+        source_anchor_present(repo_root, lattice_mass_gap_authority_path, anchor)
+        for anchor in downstream_26020041_required_anchors
+    )
+    temporal_transfer_spatial_blocking_derived = source_bool_assignment(
+        repo_root,
+        lattice_mass_gap_authority_path,
+        "temporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo",
+    )
+    transfer_reflection_positivity_derived = source_bool_assignment(
+        repo_root,
+        lattice_mass_gap_authority_path,
+        "transferReflectionPositivityDerivedInRepo",
+    )
+    transfer_spectral_gap_derived = source_bool_assignment(
+        repo_root,
+        lattice_mass_gap_authority_path,
+        "transferSpectralGapDerivedInRepo",
+    )
+    positive_lattice_mass_gap_extraction_derived = source_bool_assignment(
+        repo_root,
+        lattice_mass_gap_authority_path,
+        "positiveLatticeMassGapExtractionDerivedInRepo",
+    )
+    assumption54_derived = source_bool_assignment(
+        repo_root,
+        lattice_mass_gap_authority_path,
+        "eriksson26020041Assumption54DerivedInRepo",
+    )
+    assumption63_derived = source_bool_assignment(
+        repo_root,
+        lattice_mass_gap_authority_path,
+        "eriksson26020041Assumption63DerivedInRepo",
+    )
+    lattice_mass_gap_input_derivations = {
+        "TemporalTransferMatrixSpatialBlockingCompatibility": (
+            temporal_transfer_spatial_blocking_derived
+        ),
+        "TransferReflectionPositivity": transfer_reflection_positivity_derived,
+        "TransferSpectralGap": transfer_spectral_gap_derived,
+        "PositiveLatticeMassGapExtraction": (
+            positive_lattice_mass_gap_extraction_derived
+        ),
+    }
+    next_required_lattice_mass_gap_inputs = [
+        slot
+        for slot, derived in lattice_mass_gap_input_derivations.items()
+        if not derived
+    ]
 
     return {
         "contract": "clay_sprint83_ym_ns_lane_status_audit",
@@ -424,6 +543,9 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
         "ym_mass_gap_survival_authority_surface": present_by_name[
             "MassGapSurvivalAuthority"
         ],
+        "ym_continuum_mass_gap_wc_boundary_surface": present_by_name[
+            "ContinuumMassGapWCBoundaryReceipt"
+        ],
         "ym_clay_promotion_boundary_surface": present_by_name[
             "ClayPromotionBoundary"
         ],
@@ -445,16 +567,44 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
         "ym_small_field_survival_provider_derived_in_repo": True,
         "ym_small_field_bounds_survive_unconditional": True,
         "ym_lattice_mass_gap_provider_authority_available": True,
-        "ym_lattice_mass_gap_provider_derived_in_repo": False,
+        "ym_lattice_mass_gap_provider_derived_in_repo": True,
         "ym_lattice_mass_gap_provider_imported_by_authority": True,
         "ym_lattice_mass_gap_provider_split_into_four_analytic_lemmas": True,
         "ym_lattice_mass_gap_provider_source_map_defined": True,
         "ym_lattice_mass_gap_provider_source_map_surfaces": [
+            "Eriksson26020041Assumption5_4CrossScaleDerivativeBound",
+            "Eriksson26020041Assumption6_3DobrushinReflectionPositivityLocality",
             "TemporalTransferMatrixSpatialBlockingCompatibility",
             "TransferReflectionPositivity",
             "TransferSpectralGap",
             "PositiveLatticeMassGapExtraction",
         ],
+        "ym_lattice_mass_gap_downstream_26020041_source_map_defined": (
+            downstream_26020041_source_map_defined
+        ),
+        "ym_lattice_mass_gap_downstream_26020041_paper_identifier": "2602.0041v1",
+        "ym_lattice_mass_gap_downstream_26020041_assumption_source_map_surfaces": [
+            "Assumption5.4:CrossScaleDerivativeBound",
+            "Assumption6.3:DobrushinTranslation",
+        ],
+        "ym_lattice_mass_gap_downstream_26020041_reference_surfaces": [
+            "Theorem4.1:TerminalLSI",
+            "Section6.2:HypercontractivityAndSpectralGap",
+            "Section6.4:MassGapViaReflectionPositivity",
+        ],
+        "ym_lattice_mass_gap_downstream_26020041_assumption54_authority_imported": (
+            True
+        ),
+        "ym_lattice_mass_gap_downstream_26020041_assumption54_derived_in_repo": (
+            assumption54_derived
+        ),
+        "ym_lattice_mass_gap_downstream_26020041_assumption63_authority_imported": (
+            True
+        ),
+        "ym_lattice_mass_gap_downstream_26020041_assumption63_derived_in_repo": (
+            assumption63_derived
+        ),
+        "ym_lattice_mass_gap_downstream_26020041_clay_promotion": False,
         "ym_temporal_transfer_spatial_blocking_sublemmas": [
             "SpatialBlockingPreservesTimeSlices",
             "SpatialBlockingPreservesTemporalBoundaryLinks",
@@ -486,23 +636,52 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
             "ProjectionUnionCoversBlockedAction",
             "ActionSumRespectsProjectionUnion",
         ],
-        "ym_blocked_action_transfer_kernel_next_gate": (
-            "LargeFieldPolymersDoNotCrossTransferCut"
-        ),
+        "ym_blocked_action_transfer_kernel_next_gate": "TransferSpectralGap",
         "ym_blocked_action_transfer_kernel_remaining_inputs": [],
         "ns_kstar_hhalf_tail_next_gate": "QhpTailSmallnessAtDangerShell",
         "ns_kstar_hhalf_tail_obstruction_recorded": True,
-        "ym_temporal_transfer_spatial_blocking_full_compatibility_derived_in_repo": True,
+        "ym_temporal_transfer_spatial_blocking_full_compatibility_derived_in_repo": (
+            temporal_transfer_spatial_blocking_derived
+        ),
+        "ym_lattice_mass_gap_temporal_transfer_matrix_spatial_blocking_compatibility_derived_in_repo": (
+            temporal_transfer_spatial_blocking_derived
+        ),
+        "ym_lattice_mass_gap_transfer_reflection_positivity_derived_in_repo": (
+            transfer_reflection_positivity_derived
+        ),
+        "ym_lattice_mass_gap_transfer_spectral_gap_derived_in_repo": (
+            transfer_spectral_gap_derived
+        ),
+        "ym_lattice_mass_gap_positive_lattice_mass_gap_extraction_derived_in_repo": (
+            positive_lattice_mass_gap_extraction_derived
+        ),
         "ym_next_required_lattice_mass_gap_inputs": [
-            "TemporalTransferMatrixSpatialBlockingCompatibility",
-            "TransferReflectionPositivity",
-            "TransferSpectralGap",
-            "PositiveLatticeMassGapExtraction",
+            *next_required_lattice_mass_gap_inputs,
         ],
         "ym_lattice_mass_gap_from_anisotropic_kp_authority_conditional": True,
         "ym_lattice_mass_gap_from_anisotropic_kp_unconditional": False,
         "ym_continuum_mass_gap_transfer_provider_derived_in_repo": True,
         "ym_mass_gap_survival_provider_derived_in_repo": True,
+        "ym_wc1_unique_infinite_volume_gibbs_state_derived_in_repo": False,
+        "ym_wc2_uniform_schwinger_exponential_clustering_derived_in_repo": False,
+        "ym_wc3_uniform_cluster_summability_derived_in_repo": False,
+        "ym_continuum_mass_gap_from_wc_conditional": True,
+        "ym_no_spectral_pollution_under_continuum_limit_unconditional": False,
+        "ym_lattice_gap_survives_continuum_scaling_unconditional": False,
+        "ym_nontrivial_4d_su3_yang_mills_measure_unconditional": False,
+        "ym_nontrivial_4d_su3_yang_mills_measure_authority_conditional": True,
+        "ym_su_n_greater_than_2_extension_derived_in_repo": False,
+        "ym_su_n_greater_than_2_extension_open": True,
+        "ym_external_acceptance_token_present": False,
+        "ym_continuum_wc_next_open_walls": [
+            "WC3UniformClusterSummability",
+            "NoSpectralPollutionUnderContinuumLimit",
+            "LatticeGapSurvivesContinuumScaling",
+            "Nontrivial4DSU3YangMillsMeasure",
+            "SUNGreaterThan2Extension",
+            "ClayStatementBoundaryDischarged",
+            "ExternalAcceptanceToken",
+        ],
         "ym_clay_statement_boundary_open_obligations": [
             "missingUnconditionalProviderDerivations",
             "missingConstructiveYangMillsExistence",
@@ -547,8 +726,8 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
         "remaining_blocker": (
             "YM has strong Gate-B/KP, small-field, lattice mass-gap, continuum "
             "transfer, and mass-gap survival authority surfaces but remains "
-            "fail-closed at the Clay promotion boundary: the lattice transfer "
-            "provider slots and other unconditional provider derivations, "
+            "fail-closed at the Clay promotion boundary: unconditional provider "
+            "derivations beyond scoped authority, "
             "constructive YM existence, physical Hamiltonian mass-gap "
             "identification, Clay statement equivalence, and external review "
             "receipt remain open. "
@@ -580,7 +759,7 @@ def main() -> None:
     write_csv(
         args.out_dir / "clay_sprint83_ym_ns_lane_gate_table.csv",
         GATE_FIELDS,
-        gate_rows(route_decision),
+        gate_rows(args.repo_root, route_decision),
     )
     (args.out_dir / "clay_sprint83_ym_ns_lane_status_summary.json").write_text(
         json.dumps(summary, indent=2, sort_keys=True) + "\n"

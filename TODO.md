@@ -3,6 +3,44 @@
 
 # P0 BLOCKERS
 
+• Sprint 90 continuum WC boundary is implemented.
+
+  Status:
+
+  - conditional theorem shape recorded:
+    `WC3UniformClusterSummability` + tightness + reflection positivity + OS
+    reconstruction -> no spectral pollution -> positive continuum mass gap;
+  - lattice spectral-gap work is no longer the current Clay wall on the
+    scoped-authority lane;
+  - the exact lower-level open theorem is `WC3UniformClusterSummability`,
+    equivalently the continuum no-spectral-pollution / gap-survival
+    quantifier exchange.
+
+  Boundary:
+
+  - WC3 is not derived in repo;
+  - `Nontrivial4DSU3YangMillsMeasure`, `SUNGreaterThan2Extension`,
+    `ClayStatementBoundaryDischarged`, and `ExternalAcceptanceToken` remain open;
+  - Clay/YM promotion remains false.
+
+• Sprint 89 transfer spectral-gap scoped-authority closure is implemented.
+
+  Status:
+
+  - `BalabanCMP98LocalOscillationBoundForQhp` is accepted as scoped authority
+    for Assumption 5.4;
+  - `EffectiveActionPolymersSpatialOnlyForA1` is accepted through Gate-B
+    packaging authority plus the strong residual-membership KP route for
+    Assumption 6.3;
+  - `TransferSpectralGap`, `PositiveLatticeMassGapExtraction`, and the lattice
+    mass-gap provider are closed in the receipt/scoped-authority sense.
+
+  Boundary:
+
+  - the weak `PolymerIn` support theorem is not promoted unconditionally;
+  - `latticeMassGapFromAnisotropicKPUnconditional`, continuum/OS closure, and
+    Clay/YM promotion remain false.
+
 • Sprint 86 YM/NS theorem-gate continuation is implemented.
 
   Added:
@@ -78,9 +116,10 @@
     `TemporalTransferMatrixSpatialBlockingCompatibility`,
     `TransferReflectionPositivity`, `TransferSpectralGap`, and
     `PositiveLatticeMassGapExtraction`;
-  - those four lattice slots are authority-imported and close the candidate
-    authority lane, but their in-repo derivation flags remain false and
-    `latticeMassGapFromAnisotropicKPUnconditional` remains false;
+  - `TemporalTransferMatrixSpatialBlockingCompatibility` is now repo-derived
+    from the closed W3/W5/Sprint 85 path; the other three lattice slots remain
+    authority-imported only, so `latticeMassGapFromAnisotropicKPUnconditional`
+    remains false;
   - `ContinuumMassGapTransferProvider` is now split into four explicit
     citation-backed slots: `UniformGapLowerBoundTransfer`,
     `SpectralConvergence`, `ContinuumTwoPointDecay`, and
@@ -321,7 +360,7 @@
 
   Current Gate-B decision:
 
-  - `EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_THEOREM_STILL_OPEN`.
+  - `EFFECTIVE_ACTION_SUPPORT_INTERFACE_DEFINED_BALABAN_AUTHORITY_CONDITIONAL`.
 
   KP support interface now defined by Sprint 81C:
 
@@ -607,11 +646,12 @@
 
   - W1 packages `SpatialOnlyBlockingPreservesTemporalLinks`;
   - W2 records `TemporalCutsStableUnderBalabanRG` closed;
-  - W3 records `LargeFieldPolymersDoNotCrossTransferCut` false/open under the
-    Eriksson/Balaban large-field authority boundary;
+  - W3 preserves the historical false/open receipt, while
+    `YMLargeFieldTemporalCutSeparationAuthority` closes
+    `LargeFieldPolymersDoNotCrossTransferCut`;
   - W4 records `BalabanPartitionIdentityCommutesWithTemporalTrace` closed;
   - W5 records `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`
-    false/open because W3 remains the blocker;
+    closed on the authority-backed W1/W2/W3/W4 path;
   - W6 records the conditional compatibility -> eta=4 -> KP bridge only.
 
   All lanes keep their load-bearing theorem gates open/false. Clay/YM remains

@@ -117,7 +117,7 @@ sprint76YMPromotionImpossibleHere ()
 
 sprint76YMPrimaryGateStatement : String
 sprint76YMPrimaryGateStatement =
-  "Primary open/conditional gate: BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix. The immediate structural fork is SpatialOnlyBlockingPreservesTemporalLinks; TemporalCutsStableUnderBalabanRG; LargeFieldPolymersDoNotCrossTransferCut; and BalabanPartitionIdentityCommutesWithTemporalTrace. Under those structural lemmas, spatial-only Balaban blocking, time-axis invariance, transfer-trace preservation, temporal support non-creation, product Haar plus face-action bookkeeping, and an external slow-field/small-field interface, one still must prove the Balaban partition identity is compatible with the temporal transfer matrix."
+  "Primary compatibility gate closed: BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix follows from SpatialOnlyBlockingPreservesTemporalLinks, TemporalCutsStableUnderBalabanRG, authority-backed LargeFieldPolymersDoNotCrossTransferCut, and BalabanPartitionIdentityCommutesWithTemporalTrace. Downstream temporal quotient, KP, mass-gap, and Clay/YM gates remain separate."
 
 sprint76YMBoundary : String
 sprint76YMBoundary =

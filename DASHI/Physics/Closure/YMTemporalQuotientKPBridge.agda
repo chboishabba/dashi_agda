@@ -60,8 +60,6 @@ canonicalYMTemporalQuotientKPBridgeSteps =
   ∷ []
 
 data YMTemporalQuotientKPBridgeOpenGate : Set where
-  BalabanTransferCompatibilityGate :
-    YMTemporalQuotientKPBridgeOpenGate
   TemporalEntropyQuotientGate :
     YMTemporalQuotientKPBridgeOpenGate
   AllDiameterWeightedKPGate :
@@ -70,8 +68,7 @@ data YMTemporalQuotientKPBridgeOpenGate : Set where
 canonicalYMTemporalQuotientKPBridgeOpenGates :
   List YMTemporalQuotientKPBridgeOpenGate
 canonicalYMTemporalQuotientKPBridgeOpenGates =
-  BalabanTransferCompatibilityGate
-  ∷ TemporalEntropyQuotientGate
+  TemporalEntropyQuotientGate
   ∷ AllDiameterWeightedKPGate
   ∷ []
 
@@ -168,7 +165,7 @@ ymTemporalQuotientKPBridgeStatement =
 ymTemporalQuotientKPBridgeBoundary :
   String
 ymTemporalQuotientKPBridgeBoundary =
-  "This W6 module reuses Sprint 74/76 arithmetic conditionally. Because W5 has not proved Balaban transfer compatibility, the canonical theorem flags remain false/open and clayYangMillsPromoted=false."
+  "This W6 module reuses Sprint 74/76 arithmetic conditionally. W5 now supplies Balaban transfer compatibility, while TemporalQuotientEntropyHalvingL2 and all-diameter KP remain separate open gates; clayYangMillsPromoted=false."
 
 record YMTemporalQuotientKPBridgeReceipt : Set₁ where
   field

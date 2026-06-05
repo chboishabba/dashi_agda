@@ -28,10 +28,10 @@
   "ns_kstar_hhalf_tail_obstruction_surface": true,
   "ns_kstar_source_surface": true,
   "ns_theta_source_surface": true,
-  "remaining_blocker": "YM has strong Gate-B/KP, small-field, lattice mass-gap, continuum transfer, and mass-gap survival authority surfaces but remains fail-closed at the Clay promotion boundary: the lattice transfer provider slots and other unconditional provider derivations, constructive YM existence, physical Hamiltonian mass-gap identification, Clay statement equivalence, and external review receipt remain open. NS remains blocked at the Hminus/KStar/theta/BKM continuation lane. Both Clay promotions are recorded false.",
+  "remaining_blocker": "YM has strong Gate-B/KP, small-field, lattice mass-gap, continuum transfer, and mass-gap survival authority surfaces but remains fail-closed at the Clay promotion boundary: unconditional provider derivations beyond scoped authority, constructive YM existence, physical Hamiltonian mass-gap identification, Clay statement equivalence, and external review receipt remain open. NS remains blocked at the Hminus/KStar/theta/BKM continuation lane. Both Clay promotions are recorded false.",
   "route_decision": "CLAY_SPRINT83_YM_NS_OPEN_FAIL_CLOSED",
   "source_table": "clay_sprint83_ym_ns_lane_source_surface_table.csv",
-  "ym_blocked_action_transfer_kernel_next_gate": "LargeFieldPolymersDoNotCrossTransferCut",
+  "ym_blocked_action_transfer_kernel_next_gate": "TransferSpectralGap",
   "ym_blocked_action_transfer_kernel_remaining_inputs": [],
   "ym_blocked_action_transfer_kernel_required_inputs": [
     "ActionTermSectorTagComplete",
@@ -58,8 +58,19 @@
     "YMConstructive5DRouteAuditReceipt"
   ],
   "ym_constructive_existence_source_still_blocked": true,
+  "ym_continuum_mass_gap_from_wc_conditional": true,
   "ym_continuum_mass_gap_transfer_authority_surface": true,
   "ym_continuum_mass_gap_transfer_provider_derived_in_repo": true,
+  "ym_continuum_mass_gap_wc_boundary_surface": true,
+  "ym_continuum_wc_next_open_walls": [
+    "WC3UniformClusterSummability",
+    "NoSpectralPollutionUnderContinuumLimit",
+    "LatticeGapSurvivesContinuumScaling",
+    "Nontrivial4DSU3YangMillsMeasure",
+    "SUNGreaterThan2Extension",
+    "ClayStatementBoundaryDischarged",
+    "ExternalAcceptanceToken"
+  ],
   "ym_exact_blocked_action_transfer_residual_sum_required_inputs": [
     "BlockedActionTermEnumeration",
     "TransferKernelActionTermProjection",
@@ -69,29 +80,51 @@
     "ActionSumRespectsProjectionUnion"
   ],
   "ym_exact_blocked_action_transfer_residual_sum_surface": true,
+  "ym_external_acceptance_token_present": false,
   "ym_external_constructive_route_still_blocked": true,
+  "ym_lattice_gap_survives_continuum_scaling_unconditional": false,
   "ym_lattice_mass_gap_authority_surface": true,
+  "ym_lattice_mass_gap_downstream_26020041_assumption54_authority_imported": true,
+  "ym_lattice_mass_gap_downstream_26020041_assumption54_derived_in_repo": true,
+  "ym_lattice_mass_gap_downstream_26020041_assumption63_authority_imported": true,
+  "ym_lattice_mass_gap_downstream_26020041_assumption63_derived_in_repo": true,
+  "ym_lattice_mass_gap_downstream_26020041_assumption_source_map_surfaces": [
+    "Assumption5.4:CrossScaleDerivativeBound",
+    "Assumption6.3:DobrushinTranslation"
+  ],
+  "ym_lattice_mass_gap_downstream_26020041_clay_promotion": false,
+  "ym_lattice_mass_gap_downstream_26020041_paper_identifier": "2602.0041v1",
+  "ym_lattice_mass_gap_downstream_26020041_reference_surfaces": [
+    "Theorem4.1:TerminalLSI",
+    "Section6.2:HypercontractivityAndSpectralGap",
+    "Section6.4:MassGapViaReflectionPositivity"
+  ],
+  "ym_lattice_mass_gap_downstream_26020041_source_map_defined": true,
   "ym_lattice_mass_gap_from_anisotropic_kp_authority_conditional": true,
   "ym_lattice_mass_gap_from_anisotropic_kp_unconditional": false,
+  "ym_lattice_mass_gap_positive_lattice_mass_gap_extraction_derived_in_repo": true,
   "ym_lattice_mass_gap_provider_authority_available": true,
-  "ym_lattice_mass_gap_provider_derived_in_repo": false,
+  "ym_lattice_mass_gap_provider_derived_in_repo": true,
   "ym_lattice_mass_gap_provider_imported_by_authority": true,
   "ym_lattice_mass_gap_provider_source_map_defined": true,
   "ym_lattice_mass_gap_provider_source_map_surfaces": [
+    "Eriksson26020041Assumption5_4CrossScaleDerivativeBound",
+    "Eriksson26020041Assumption6_3DobrushinReflectionPositivityLocality",
     "TemporalTransferMatrixSpatialBlockingCompatibility",
     "TransferReflectionPositivity",
     "TransferSpectralGap",
     "PositiveLatticeMassGapExtraction"
   ],
   "ym_lattice_mass_gap_provider_split_into_four_analytic_lemmas": true,
+  "ym_lattice_mass_gap_temporal_transfer_matrix_spatial_blocking_compatibility_derived_in_repo": true,
+  "ym_lattice_mass_gap_transfer_reflection_positivity_derived_in_repo": true,
+  "ym_lattice_mass_gap_transfer_spectral_gap_derived_in_repo": true,
   "ym_mass_gap_survival_authority_surface": true,
   "ym_mass_gap_survival_provider_derived_in_repo": true,
-  "ym_next_required_lattice_mass_gap_inputs": [
-    "TemporalTransferMatrixSpatialBlockingCompatibility",
-    "TransferReflectionPositivity",
-    "TransferSpectralGap",
-    "PositiveLatticeMassGapExtraction"
-  ],
+  "ym_next_required_lattice_mass_gap_inputs": [],
+  "ym_no_spectral_pollution_under_continuum_limit_unconditional": false,
+  "ym_nontrivial_4d_su3_yang_mills_measure_authority_conditional": true,
+  "ym_nontrivial_4d_su3_yang_mills_measure_unconditional": false,
   "ym_physical_hamiltonian_gap_lift_source_still_blocked": true,
   "ym_physical_stone_hamiltonian_identification_still_blocked": true,
   "ym_physical_stone_spectral_lower_bound_still_blocked": true,
@@ -103,6 +136,8 @@
   "ym_strong_gate_b_kp_source_surface": true,
   "ym_strong_gate_b_source_surface": true,
   "ym_strong_gate_b_to_kp_present": true,
+  "ym_su_n_greater_than_2_extension_derived_in_repo": false,
+  "ym_su_n_greater_than_2_extension_open": true,
   "ym_temporal_transfer_spatial_blocking_decomposition_surface": true,
   "ym_temporal_transfer_spatial_blocking_derived_sublemmas": [
     "SpatialBlockingPreservesTimeSlices",
@@ -120,6 +155,9 @@
     "BalabanPartitionIdentityCommutesWithTemporalTrace",
     "TransferHilbertSpaceCompatibleWithSpatialBlocking"
   ],
+  "ym_wc1_unique_infinite_volume_gibbs_state_derived_in_repo": false,
+  "ym_wc2_uniform_schwinger_exponential_clustering_derived_in_repo": false,
+  "ym_wc3_uniform_cluster_summability_derived_in_repo": false,
   "ym_weak_polymer_in_counterexample_present": true,
   "ym_weak_polymer_in_counterexample_source": true
 }

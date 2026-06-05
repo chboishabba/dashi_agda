@@ -22,7 +22,9 @@ import DASHI.Physics.Closure.ClaySprintEightyOneYMBalabanCMP98QhpLocalOscillatio
 -- authority route: if Balaban CMP 98 local averaging is accepted as an
 -- explicit authority input for Q_hp, then the in-repo spatial link count and
 -- squared-oscillation arithmetic assemble AnisotropicAssumptionA
--- conditionally.  The CMP 98 theorem itself is not derived here.
+-- conditionally.  The CMP98/CMP116/2602.0041 Appendix A citation surface is
+-- normalized for downstream receipts, but those authorities are not derived
+-- here and do not promote Clay/YM.
 
 Scalar : Set
 Scalar = String
@@ -44,6 +46,15 @@ balabanCMP98LocalOscillationBoundForQhpAuthority = true
 
 balabanCMP98LocalOscillationBoundForQhpProvedInRepo : Bool
 balabanCMP98LocalOscillationBoundForQhpProvedInRepo = false
+
+balabanCMP98CMP116AppendixAAuthoritySurfaceNormalized : Bool
+balabanCMP98CMP116AppendixAAuthoritySurfaceNormalized = true
+
+balabanCMP98CMP116AppendixAAuthoritySurfaceProvedInRepo : Bool
+balabanCMP98CMP116AppendixAAuthoritySurfaceProvedInRepo = false
+
+balabanCMP98CMP116AppendixAAuthoritySurfacePromotesClay : Bool
+balabanCMP98CMP116AppendixAAuthoritySurfacePromotesClay = false
 
 lipschitzToSquaredOscillationForQhpPackaged : Bool
 lipschitzToSquaredOscillationForQhpPackaged = true
@@ -77,6 +88,10 @@ UniformAnisotropicAssumptionAAuthorityBound : Scalar
 UniformAnisotropicAssumptionAAuthorityBound =
   "sum_spatial_e osc_e(F o Q_hp)^2 <= 3*C_local^2*C_F^2"
 
+NormalizedBalabanQhpAuthorityCitationSurface : Scalar
+NormalizedBalabanQhpAuthorityCitationSurface =
+  "CMP98/CMP116/2602.0041 Appendix A: external Q_hp local-oscillation authority surface; citation only, not an in-repo derivation"
+
 Sprint81AAuthorityRouteDecision : Scalar
 Sprint81AAuthorityRouteDecision =
   "ANISOTROPIC_ASSUMPTION_A_AUTHORITY_ASSEMBLED_NO_CLAY_PROMOTION"
@@ -90,6 +105,11 @@ uniformAnisotropicAssumptionAAuthorityBoundExplicit :
   UniformAnisotropicAssumptionAAuthorityBound ≡
   "sum_spatial_e osc_e(F o Q_hp)^2 <= 3*C_local^2*C_F^2"
 uniformAnisotropicAssumptionAAuthorityBoundExplicit = refl
+
+normalizedBalabanQhpAuthorityCitationSurfaceExplicit :
+  NormalizedBalabanQhpAuthorityCitationSurface ≡
+  "CMP98/CMP116/2602.0041 Appendix A: external Q_hp local-oscillation authority surface; citation only, not an in-repo derivation"
+normalizedBalabanQhpAuthorityCitationSurfaceExplicit = refl
 
 routeDecisionExplicit :
   Sprint81AAuthorityRouteDecision ≡
@@ -172,6 +192,12 @@ record ClaySprintEightyOneYMAnisotropicAssumptionAAuthorityReceipt :
       balabanCMP98LocalOscillationBoundForQhpAuthority ≡ true
     cmp98LocalOscillationNotProvedInRepo :
       balabanCMP98LocalOscillationBoundForQhpProvedInRepo ≡ false
+    normalizedCitationSurfaceAvailable :
+      balabanCMP98CMP116AppendixAAuthoritySurfaceNormalized ≡ true
+    normalizedCitationSurfaceNotProvedInRepo :
+      balabanCMP98CMP116AppendixAAuthoritySurfaceProvedInRepo ≡ false
+    normalizedCitationSurfaceNoClayPromotion :
+      balabanCMP98CMP116AppendixAAuthoritySurfacePromotesClay ≡ false
     squaredOscillationBridgeClosedConditionally :
       lipschitzToSquaredOscillationForQhpPackaged ≡ true
     anisotropicAssumptionAClosedConditionally :
@@ -198,6 +224,9 @@ record ClaySprintEightyOneYMAnisotropicAssumptionAAuthorityReceipt :
     uniformAssumptionABound :
       UniformAnisotropicAssumptionAAuthorityBound ≡
       "sum_spatial_e osc_e(F o Q_hp)^2 <= 3*C_local^2*C_F^2"
+    normalizedAuthorityCitationSurface :
+      NormalizedBalabanQhpAuthorityCitationSurface ≡
+      "CMP98/CMP116/2602.0041 Appendix A: external Q_hp local-oscillation authority surface; citation only, not an in-repo derivation"
     routeDecision :
       Sprint81AAuthorityRouteDecision ≡
       "ANISOTROPIC_ASSUMPTION_A_AUTHORITY_ASSEMBLED_NO_CLAY_PROMOTION"
@@ -235,6 +264,9 @@ claySprintEightyOneYMAnisotropicAssumptionAAuthorityReceipt =
     ; cmp98AuthorityAccepted = refl
     ; cmp98LocalOscillationAuthority = refl
     ; cmp98LocalOscillationNotProvedInRepo = refl
+    ; normalizedCitationSurfaceAvailable = refl
+    ; normalizedCitationSurfaceNotProvedInRepo = refl
+    ; normalizedCitationSurfaceNoClayPromotion = refl
     ; squaredOscillationBridgeClosedConditionally = refl
     ; anisotropicAssumptionAClosedConditionally = refl
     ; anisotropicAssumptionANotUnconditional = refl
@@ -247,6 +279,7 @@ claySprintEightyOneYMAnisotropicAssumptionAAuthorityReceipt =
     ; noClayPromotion = refl
     ; squaredOscillationBound = refl
     ; uniformAssumptionABound = refl
+    ; normalizedAuthorityCitationSurface = refl
     ; routeDecision = refl
     ; inputs = canonicalSprint81AAuthorityInputs
     ; inputsAreCanonical = refl

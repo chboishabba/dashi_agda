@@ -52,6 +52,7 @@ def test_combined_audit_outputs_and_schema(tmp_path: Path) -> None:
         "ExactBlockedActionTransferResidualSumReceipt",
         "ContinuumMassGapTransferAuthority",
         "MassGapSurvivalAuthority",
+        "ContinuumMassGapWCBoundaryReceipt",
         "ClayPromotionBoundary",
         "HminusHalfGateDecisionPivot",
         "KStarHHalfTailObstructionReceipt",
@@ -91,6 +92,7 @@ def test_combined_audit_records_required_source_surfaces(tmp_path: Path) -> None
     assert summary["ym_exact_blocked_action_transfer_residual_sum_surface"] is True
     assert summary["ym_continuum_mass_gap_transfer_authority_surface"] is True
     assert summary["ym_mass_gap_survival_authority_surface"] is True
+    assert summary["ym_continuum_mass_gap_wc_boundary_surface"] is True
     assert summary["ym_clay_promotion_boundary_surface"] is True
     assert summary["ns_hminus_source_surface"] is True
     assert summary["ns_kstar_hhalf_tail_obstruction_surface"] is True
@@ -120,7 +122,9 @@ def test_combined_audit_fails_closed_and_promotions_false(tmp_path: Path) -> Non
 
 
 def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
-    _out_dir, summary = run_audit(tmp_path)
+    out_dir, summary = run_audit(tmp_path)
+    gate_rows = read_csv(out_dir / "clay_sprint83_ym_ns_lane_gate_table.csv")
+    gates_by_name = {row["gate_name"]: row for row in gate_rows}
 
     assert summary["next_required_ym_gate"] == "ClayYangMillsPromotionBoundary"
     assert summary["next_required_ns_gate"] == "HminusHalfUniformAbsorptionGate"
@@ -128,7 +132,7 @@ def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
     assert summary["ym_small_field_survival_provider_derived_in_repo"] is True
     assert summary["ym_small_field_bounds_survive_unconditional"] is True
     assert summary["ym_lattice_mass_gap_provider_authority_available"] is True
-    assert summary["ym_lattice_mass_gap_provider_derived_in_repo"] is False
+    assert summary["ym_lattice_mass_gap_provider_derived_in_repo"] is True
     assert summary["ym_lattice_mass_gap_provider_imported_by_authority"] is True
     assert (
         summary["ym_lattice_mass_gap_provider_split_into_four_analytic_lemmas"]
@@ -136,11 +140,63 @@ def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
     )
     assert summary["ym_lattice_mass_gap_provider_source_map_defined"] is True
     assert summary["ym_lattice_mass_gap_provider_source_map_surfaces"] == [
+        "Eriksson26020041Assumption5_4CrossScaleDerivativeBound",
+        "Eriksson26020041Assumption6_3DobrushinReflectionPositivityLocality",
         "TemporalTransferMatrixSpatialBlockingCompatibility",
         "TransferReflectionPositivity",
         "TransferSpectralGap",
         "PositiveLatticeMassGapExtraction",
     ]
+    assert (
+        summary["ym_lattice_mass_gap_downstream_26020041_source_map_defined"]
+        is True
+    )
+    assert (
+        summary["ym_lattice_mass_gap_downstream_26020041_paper_identifier"]
+        == "2602.0041v1"
+    )
+    assert (
+        summary[
+            "ym_lattice_mass_gap_downstream_26020041_assumption_source_map_surfaces"
+        ]
+        == [
+            "Assumption5.4:CrossScaleDerivativeBound",
+            "Assumption6.3:DobrushinTranslation",
+        ]
+    )
+    assert summary["ym_lattice_mass_gap_downstream_26020041_reference_surfaces"] == [
+        "Theorem4.1:TerminalLSI",
+        "Section6.2:HypercontractivityAndSpectralGap",
+        "Section6.4:MassGapViaReflectionPositivity",
+    ]
+    assert (
+        summary[
+            "ym_lattice_mass_gap_downstream_26020041_assumption54_authority_imported"
+        ]
+        is True
+    )
+    assert (
+        summary[
+            "ym_lattice_mass_gap_downstream_26020041_assumption54_derived_in_repo"
+        ]
+        is True
+    )
+    assert (
+        summary[
+            "ym_lattice_mass_gap_downstream_26020041_assumption63_authority_imported"
+        ]
+        is True
+    )
+    assert (
+        summary[
+            "ym_lattice_mass_gap_downstream_26020041_assumption63_derived_in_repo"
+        ]
+        is True
+    )
+    assert (
+        summary["ym_lattice_mass_gap_downstream_26020041_clay_promotion"]
+        is False
+    )
     assert summary["ym_temporal_transfer_spatial_blocking_sublemmas"] == [
         "SpatialBlockingPreservesTimeSlices",
         "SpatialBlockingPreservesTemporalBoundaryLinks",
@@ -172,9 +228,28 @@ def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
         "ProjectionUnionCoversBlockedAction",
         "ActionSumRespectsProjectionUnion",
     ]
+    assert summary["ym_blocked_action_transfer_kernel_next_gate"] == "TransferSpectralGap"
     assert (
-        summary["ym_blocked_action_transfer_kernel_next_gate"]
-        == "LargeFieldPolymersDoNotCrossTransferCut"
+        gates_by_name["LatticeMassGapAuthority"]["next_required_input"]
+        == "ClayYangMillsPromotionBoundary"
+    )
+    assert (
+        gates_by_name["LatticeMassGapAuthority"]["status"]
+        == "SCOPED_AUTHORITY_CLOSED_CLAY_BOUNDARY_OPEN"
+    )
+    assert (
+        gates_by_name["LatticeMassGapAuthority"]["proved_in_repo"]
+        == "True"
+    )
+    assert (
+        gates_by_name["TemporalTransferSpatialBlockingCompatibility"]["status"]
+        == "DERIVED_IN_REPO_NO_CLAY_PROMOTION"
+    )
+    assert (
+        gates_by_name["TemporalTransferSpatialBlockingCompatibility"][
+            "proved_in_repo"
+        ]
+        == "True"
     )
     assert summary["ns_kstar_hhalf_tail_next_gate"] == "QhpTailSmallnessAtDangerShell"
     assert summary["ns_kstar_hhalf_tail_obstruction_recorded"] is True
@@ -184,12 +259,26 @@ def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
         ]
         is True
     )
-    assert summary["ym_next_required_lattice_mass_gap_inputs"] == [
-        "TemporalTransferMatrixSpatialBlockingCompatibility",
-        "TransferReflectionPositivity",
-        "TransferSpectralGap",
-        "PositiveLatticeMassGapExtraction",
-    ]
+    assert (
+        summary[
+            "ym_lattice_mass_gap_temporal_transfer_matrix_spatial_blocking_compatibility_derived_in_repo"
+        ]
+        is True
+    )
+    assert (
+        summary[
+            "ym_lattice_mass_gap_transfer_reflection_positivity_derived_in_repo"
+        ]
+        is True
+    )
+    assert summary["ym_lattice_mass_gap_transfer_spectral_gap_derived_in_repo"] is True
+    assert (
+        summary[
+            "ym_lattice_mass_gap_positive_lattice_mass_gap_extraction_derived_in_repo"
+        ]
+        is True
+    )
+    assert summary["ym_next_required_lattice_mass_gap_inputs"] == []
     assert (
         summary["ym_lattice_mass_gap_from_anisotropic_kp_authority_conditional"]
         is True
@@ -197,6 +286,38 @@ def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
     assert summary["ym_lattice_mass_gap_from_anisotropic_kp_unconditional"] is False
     assert summary["ym_continuum_mass_gap_transfer_provider_derived_in_repo"] is True
     assert summary["ym_mass_gap_survival_provider_derived_in_repo"] is True
+    assert summary["ym_wc1_unique_infinite_volume_gibbs_state_derived_in_repo"] is False
+    assert (
+        summary["ym_wc2_uniform_schwinger_exponential_clustering_derived_in_repo"]
+        is False
+    )
+    assert summary["ym_wc3_uniform_cluster_summability_derived_in_repo"] is False
+    assert summary["ym_continuum_mass_gap_from_wc_conditional"] is True
+    assert (
+        summary["ym_no_spectral_pollution_under_continuum_limit_unconditional"]
+        is False
+    )
+    assert summary["ym_lattice_gap_survives_continuum_scaling_unconditional"] is False
+    assert (
+        summary["ym_nontrivial_4d_su3_yang_mills_measure_unconditional"]
+        is False
+    )
+    assert (
+        summary["ym_nontrivial_4d_su3_yang_mills_measure_authority_conditional"]
+        is True
+    )
+    assert summary["ym_su_n_greater_than_2_extension_derived_in_repo"] is False
+    assert summary["ym_su_n_greater_than_2_extension_open"] is True
+    assert summary["ym_external_acceptance_token_present"] is False
+    assert summary["ym_continuum_wc_next_open_walls"] == [
+        "WC3UniformClusterSummability",
+        "NoSpectralPollutionUnderContinuumLimit",
+        "LatticeGapSurvivesContinuumScaling",
+        "Nontrivial4DSU3YangMillsMeasure",
+        "SUNGreaterThan2Extension",
+        "ClayStatementBoundaryDischarged",
+        "ExternalAcceptanceToken",
+    ]
     assert summary["ym_clay_statement_boundary_open_obligations"] == [
         "missingUnconditionalProviderDerivations",
         "missingConstructiveYangMillsExistence",

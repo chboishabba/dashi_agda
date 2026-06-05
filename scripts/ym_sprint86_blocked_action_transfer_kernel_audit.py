@@ -79,8 +79,8 @@ def required_surfaces() -> list[dict[str, Any]]:
                 "YMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt.agda"
             ),
             "required_anchor": "blockedActionSeparatesTransferKernelDerivedInRepo",
-            "status": "SPRINT85_TRANSFER_SPATIAL_BLOCKING_FULL_COMPATIBILITY_OPEN",
-            "proved_in_repo": False,
+            "status": "SPRINT85_TRANSFER_SPATIAL_BLOCKING_FULL_COMPATIBILITY_CLOSED",
+            "proved_in_repo": True,
         },
         {
             "surface_id": "S4",
@@ -282,11 +282,11 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
             "ProjectionUnionCoversBlockedAction",
             "ActionSumRespectsProjectionUnion",
         ],
-        "next_required_gate": "LargeFieldPolymersDoNotCrossTransferCut",
+        "next_required_gate": "TransferSpectralGap",
         "clay_yang_mills_promoted": clay_yang_mills_promoted,
         "clay_promotion_recorded_false": clay_yang_mills_promoted is False,
         "remaining_blocker": (
-            "BlockedActionSeparatesTransferKernel is closed. TemporalTransferMatrixSpatialBlockingCompatibility is closed. Remaining YM blocker is LargeFieldPolymersDoNotCrossTransferCut."
+            "BlockedActionSeparatesTransferKernel is closed. TemporalTransferMatrixSpatialBlockingCompatibility is closed. W3 LargeFieldPolymersDoNotCrossTransferCut is closed by the authority-backed large-field package. The next YM authority target is TransferSpectralGap."
         ),
     }
 

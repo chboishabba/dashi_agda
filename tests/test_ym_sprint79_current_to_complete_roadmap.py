@@ -299,14 +299,9 @@ def test_current_to_complete_fail_closed_status(tmp_path: Path) -> None:
         is True
     )
     assert summary["lattice_mass_gap_provider_authority_available"] is True
-    assert summary["lattice_mass_gap_provider_derived_in_repo"] is False
+    assert summary["lattice_mass_gap_provider_derived_in_repo"] is True
     assert summary["lattice_mass_gap_provider_split_into_four_analytic_lemmas"] is True
-    assert summary["next_required_lattice_mass_gap_inputs"] == [
-        "TemporalTransferMatrixSpatialBlockingCompatibility",
-        "TransferReflectionPositivity",
-        "TransferSpectralGap",
-        "PositiveLatticeMassGapExtraction",
-    ]
+    assert summary["next_required_lattice_mass_gap_inputs"] == []
     assert (
         summary[
             "temporal_transfer_matrix_compatible_with_spatial_blocking_authority_conditional"
@@ -330,10 +325,28 @@ def test_current_to_complete_fail_closed_status(tmp_path: Path) -> None:
     assert summary["thermodynamic_limit"] is False
     assert summary["thermodynamic_limit_authority_conditional"] is True
     assert summary["continuum_limit_exists_authority_conditional"] is True
+    assert summary["wc3_uniform_cluster_summability_derived_in_repo"] is False
+    assert summary["continuum_mass_gap_from_wc_conditional"] is True
+    assert (
+        summary["nontrivial_4d_su3_yang_mills_measure_unconditional"]
+        is False
+    )
     assert (
         summary["nontrivial_4d_su3_yang_mills_measure_authority_conditional"]
         is True
     )
+    assert summary["su_n_greater_than_2_extension_derived_in_repo"] is False
+    assert summary["su_n_greater_than_2_extension_open"] is True
+    assert summary["external_acceptance_token_present"] is False
+    assert summary["continuum_wc_next_open_walls"] == [
+        "WC3UniformClusterSummability",
+        "NoSpectralPollutionUnderContinuumLimit",
+        "LatticeGapSurvivesContinuumScaling",
+        "Nontrivial4DSU3YangMillsMeasure",
+        "SUNGreaterThan2Extension",
+        "ClayStatementBoundaryDischarged",
+        "ExternalAcceptanceToken",
+    ]
     assert summary["os_axioms_provider_authority_available"] is True
     assert summary["os_axioms_provider_derived_in_repo"] is False
     assert summary["os_axioms_provider_split_into_five_analytic_lemmas"] is True
@@ -427,16 +440,16 @@ def test_current_to_complete_fail_closed_status(tmp_path: Path) -> None:
     )
     assert (
         summary["lemma_status"]["YMLatticeMassGapAuthority"]
-        == "authority_conditional"
+        == "scoped_authority_closed"
     )
     assert (
         summary["lemma_status"]["TemporalTransferMatrixCompatibleWithSpatialBlocking"]
-        == "authority_conditional"
+        == "derived_in_repo"
     )
-    assert summary["lemma_status"]["TransferSpectralGap"] == "authority_conditional"
+    assert summary["lemma_status"]["TransferSpectralGap"] == "scoped_authority_closed"
     assert (
         summary["lemma_status"]["LatticeMassGapFromAnisotropicKP"]
-        == "authority_conditional"
+        == "scoped_authority_closed"
     )
     assert (
         summary["lemma_status"]["YMThermodynamicLimitAuthority"]
@@ -445,10 +458,17 @@ def test_current_to_complete_fail_closed_status(tmp_path: Path) -> None:
     assert summary["lemma_status"]["UniformLatticeMassGap"] == "authority_conditional"
     assert summary["lemma_status"]["ThermodynamicLimit"] == "authority_conditional"
     assert summary["lemma_status"]["ContinuumLimitExists"] == "authority_conditional"
+    assert summary["lemma_status"]["WC3UniformClusterSummability"] == "open"
+    assert (
+        summary["lemma_status"]["NoSpectralPollutionUnderContinuumLimit"]
+        == "conditional_on_wc3"
+    )
+    assert summary["lemma_status"]["ContinuumMassGapFromWC"] == "conditional_closed"
     assert (
         summary["lemma_status"]["Nontrivial4DSU3YangMillsMeasure"]
         == "authority_conditional"
     )
+    assert summary["lemma_status"]["SUNGreaterThan2Extension"] == "open"
     assert (
         summary["lemma_status"]["YMOSAxiomsAuthority"]
         == "authority_conditional"

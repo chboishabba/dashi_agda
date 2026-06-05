@@ -1,3 +1,37 @@
+# 2026-06-06 Sprint 90 continuum WC boundary
+
+- Added `YMSprint90ContinuumMassGapWCBoundaryReceipt`.  It records the
+  conditional theorem shape:
+  `WC3UniformClusterSummability` + tight continuum limit + uniform reflection
+  positivity + OS reconstruction imply no spectral pollution at zero and a
+  positive continuum mass gap.
+- The receipt keeps the actual mathematical wall fail-closed:
+  `WC3UniformClusterSummability`, unconditional
+  `NoSpectralPollutionUnderContinuumLimit`,
+  `LatticeGapSurvivesContinuumScaling`,
+  `Nontrivial4DSU3YangMillsMeasure`, `SUNGreaterThan2Extension`, and
+  `ExternalAcceptanceToken` are not derived in repo.
+- The combined audit keeps `next_required_ym_gate =
+  ClayYangMillsPromotionBoundary`, with the Sprint 90 WC3/no-pollution wall
+  recorded as the lower-level continuum sub-boundary.  Clay/YM promotion
+  remains false.
+
+# 2026-06-06 Sprint 89 transfer spectral-gap scoped-authority closure
+
+- Added `YMSprint89ScopedAuthorityTransferSpectralGapReceipt`.  It accepts the
+  two Sprint 88 hard inputs as scoped authority receipts:
+  `BalabanCMP98LocalOscillationBoundForQhp` for Assumption 5.4 and
+  `EffectiveActionPolymersSpatialOnlyForA1` for Assumption 6.3.
+- `YMLatticeMassGapAuthority` now records Assumption 5.4, Assumption 6.3,
+  transfer reflection positivity, `TransferSpectralGap`,
+  `PositiveLatticeMassGapExtraction`, and
+  `latticeMassGapProviderDerivedInRepo` as closed in the receipt/scoped
+  authority sense.
+- The weak `PolymerIn` Gate-B surface remains unproved; Sprint 89 uses the
+  packaging authority plus the strong residual-membership KP route.
+- `latticeMassGapFromAnisotropicKPUnconditional`,
+  thermodynamic/continuum/OS closure, and `clayYangMillsPromoted` remain false.
+
 # 2026-06-05 Sprint 86 YM/NS theorem-gate continuation
 
 - Added `YMSprint86BlockedActionTransferKernelSeparationReceipt`.  It refines
@@ -55,13 +89,15 @@
   `clayYangMillsPromoted` remains false.
 - Corrected the lattice mass-gap provider boundary:
   `YMLatticeMassGapAuthority` now has `LatticeMassGapProviderSourceMap`,
-  threading the four transfer slots
+  threading the four transfer/source-map slots
   `TemporalTransferMatrixSpatialBlockingCompatibility`,
   `TransferReflectionPositivity`, `TransferSpectralGap`, and
-  `PositiveLatticeMassGapExtraction`.  These are authority-imported and
-  authority-conditional, but their repo-derivation flags and
-  `latticeMassGapFromAnisotropicKPUnconditional` are false.  Sprint 82/83
-  audits now expose those four slots as the next unconditional YM work.
+  `PositiveLatticeMassGapExtraction`.  The temporal transfer/spatial-blocking
+  slot is now repo-derived from the closed W3/W5/Sprint 85 path.  The
+  remaining analytic transfer/mass-gap slots stay authority-only, and
+  `latticeMassGapFromAnisotropicKPUnconditional` remains false.  Sprint 82/83
+  audits now expose `TransferReflectionPositivity`, `TransferSpectralGap`,
+  and `PositiveLatticeMassGapExtraction` as the next unconditional YM work.
 - Continued the same lane through `YMClayPromotionBoundary`: the promotion
   requirements record now typechecks at `Set2`, and the Clay-statement
   boundary is split into five open obligations: unconditional provider
@@ -170,7 +206,9 @@
   receipts do not discharge these continuum analytic inputs. Clay/YM promotion
   remains false.
 - Split the next downstream authority providers as well:
-  `YMLatticeMassGapAuthority` now exposes four transfer/spectral-gap slots,
+  `YMLatticeMassGapAuthority` now exposes four transfer/spectral-gap source
+  slots, with temporal transfer/spatial-blocking repo-derived and the other
+  three authority-only.
   `YMThermodynamicLimitAuthority` exposes five volume/continuum slots, and
   `YMOSAxiomsAuthority` exposes five OS axiom slots. These are authority
   imports, not in-repo analytic proofs.
@@ -363,11 +401,13 @@
 - W1 packages `SpatialOnlyBlockingPreservesTemporalLinks` and
   `SpatialRGLeavesTimeAxisInvariant` at receipt level.
 - W2 records `TemporalCutsStableUnderBalabanRG` closed.
-- W3 keeps `LargeFieldPolymersDoNotCrossTransferCut` false/open because the
-  repo lacks Eriksson/Balaban large-field machinery as an in-repo proof object.
+- W3 keeps the historical receipt false/open, but
+  `YMLargeFieldTemporalCutSeparationAuthority` closes
+  `LargeFieldPolymersDoNotCrossTransferCut` by scoped Balaban/Eriksson
+  authority import.
 - W4 records `BalabanPartitionIdentityCommutesWithTemporalTrace` closed.
-- W5 keeps `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`
-  false/open because W3 remains the blocker.
+- W5 records `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`
+  closed on the authority-backed W1/W2/W3/W4 path.
 - W6 records only the conditional bridge from Balaban compatibility to temporal
   quotient entropy halving, `etaEff = 4`, and all-diameter KP.
 - No KP theorem, lattice mass gap, continuum transfer, OS/Wightman

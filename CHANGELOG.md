@@ -6,6 +6,28 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 90 continuum WC boundary for `2026-06-06`: added
+  `YMSprint90ContinuumMassGapWCBoundaryReceipt`, recording the conditional
+  implication from WC3/tightness/reflection positivity/OS reconstruction to
+  no spectral pollution and positive continuum mass gap.  The receipt leaves
+  `WC3UniformClusterSummability`, unconditional
+  `NoSpectralPollutionUnderContinuumLimit`,
+  `LatticeGapSurvivesContinuumScaling`,
+  `Nontrivial4DSU3YangMillsMeasure`, `SUNGreaterThan2Extension`,
+  `ExternalAcceptanceToken`, and `clayYangMillsPromoted` false/open.  The combined audit now includes the
+  Sprint 90 surface while keeping the top-level YM gate at the Clay promotion
+  boundary.
+
+- Sprint 89 transfer spectral-gap scoped-authority closure for `2026-06-06`:
+  added `YMSprint89ScopedAuthorityTransferSpectralGapReceipt`, accepting
+  `BalabanCMP98LocalOscillationBoundForQhp` for Assumption 5.4 and
+  `EffectiveActionPolymersSpatialOnlyForA1` for Assumption 6.3 as scoped
+  authority inputs.  `YMLatticeMassGapAuthority` now records
+  `TransferSpectralGap`, `PositiveLatticeMassGapExtraction`, and the lattice
+  mass-gap provider closed in the receipt/scoped-authority sense.  The weak
+  `PolymerIn` Gate-B theorem remains unpromoted, and continuum/OS/Clay gates
+  remain false.
+
 - Sprint 86 YM/NS theorem-gate continuation for `2026-06-05`: added
   `YMSprint86BlockedActionTransferKernelSeparationReceipt` and
   `NSSprint86KStarHHalfTailObstructionReceipt`, wired them through
@@ -26,11 +48,11 @@ monitor surface.
   wired it through `DASHI/Everything.agda`.  The receipt splits
   `TemporalTransferMatrixSpatialBlockingCompatibility` into five sublemmas,
   derives the time-slice and temporal-boundary-link preservation pieces from
-  the spatial-only temporal-link receipt, and records transfer-kernel
-  separation, Balaban temporal-trace commutation, and transfer-Hilbert-space
-  compatibility as still open.  The combined YM/NS audit now exposes this
-  decomposition while keeping the lattice mass-gap provider and Clay/YM
-  promotion fail-closed.
+  the spatial-only temporal-link receipt.  The later W3/W4/W5 closure now
+  closes transfer-kernel separation, Balaban temporal-trace commutation,
+  transfer-Hilbert-space compatibility, and full temporal transfer/spatial-
+  blocking compatibility.  The combined YM/NS audit exposes this closure while
+  keeping the lattice mass-gap provider and Clay/YM promotion fail-closed.
 
 - Sprint 84 NS Qhp semantic correction for `2026-06-05`: the
   spatial-identity Qhp formal commutation package remains recorded, but
@@ -367,11 +389,11 @@ monitor surface.
   `YMBalabanPartitionTemporalTraceCommutation`,
   `YMBalabanTransferCompatibilityTheorem`, and
   `YMTemporalQuotientKPBridge`. W1 packages
-  `SpatialOnlyBlockingPreservesTemporalLinks`; W2-W4 keep temporal-cut
-  stability, large-field transfer-cut separation, and Balaban trace
-  commutation false/open; W5 therefore keeps
-  `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix` false/open;
-  W6 records only the conditional compatibility -> eta=4 -> KP bridge. The
+  `SpatialOnlyBlockingPreservesTemporalLinks`; W2-W4 now close temporal-cut
+  stability, large-field transfer-cut separation on the authority-backed W3
+  path, and Balaban trace commutation; W5 therefore closes
+  `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`. W6 records
+  the remaining compatibility -> eta=4 -> KP bridge boundary. The
   receipts form a normalized theorem ladder but keep every load-bearing gate
   false: temporal entropy quotient, Balaban compatibility, all-diameter KP,
   small-field survival, lattice mass gap, continuum transfer, OS/Wightman,

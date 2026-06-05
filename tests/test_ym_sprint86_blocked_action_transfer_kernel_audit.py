@@ -76,7 +76,7 @@ def test_ym_sprint86_records_open_blocked_action_route(tmp_path: Path) -> None:
         summary["route_decision"]
         == "YM_SPRINT86_BLOCKED_ACTION_TRANSFER_KERNEL_OPEN"
     )
-    assert summary["next_required_gate"] == "LargeFieldPolymersDoNotCrossTransferCut"
+    assert summary["next_required_gate"] == "TransferSpectralGap"
     assert summary["blocked_action_transfer_kernel_required_inputs"] == []
     assert summary["exact_blocked_action_transfer_residual_sum_required_inputs"] == [
         "BlockedActionTermEnumeration",

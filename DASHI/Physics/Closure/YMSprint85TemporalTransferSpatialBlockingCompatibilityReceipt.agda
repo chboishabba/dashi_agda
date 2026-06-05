@@ -206,7 +206,7 @@ temporalTransferSpatialBlockingDecompositionStatement =
 
 temporalTransferSpatialBlockingDecompositionBoundary : String
 temporalTransferSpatialBlockingDecompositionBoundary =
-  "Sprint 85 now closes the full transfer/spatial-blocking compatibility package from the spatial-only temporal-link receipt.  The lattice mass-gap authority provider still depends on the authority lane, and Clay/YM promotion remains false."
+  "Sprint 85 closes the full transfer/spatial-blocking compatibility package from the spatial-only temporal-link receipt.  Sprint 89 later closes the lattice mass-gap provider by scoped authority; unconditional continuum/Clay promotion remains false."
 
 data TemporalTransferSpatialBlockingPromotion : Set where
 
@@ -219,8 +219,8 @@ record YMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt : Set₁ wh
   field
     latticeAuthorityBoundary :
       Lattice.LatticeMassGapAuthorityBoundary
-    latticeProviderStillNotDerived :
-      Lattice.latticeMassGapProviderDerivedInRepo ≡ false
+    latticeProviderDerivedByScopedAuthority :
+      Lattice.latticeMassGapProviderDerivedInRepo ≡ true
     latticeMassGapUnconditionalStillFalse :
       Lattice.latticeMassGapFromAnisotropicKPUnconditional ≡ false
 
@@ -300,7 +300,7 @@ canonicalYMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt =
   record
     { latticeAuthorityBoundary =
         Lattice.latticeMassGapAuthorityBoundary
-    ; latticeProviderStillNotDerived = refl
+    ; latticeProviderDerivedByScopedAuthority = refl
     ; latticeMassGapUnconditionalStillFalse = refl
     ; spatialOnlyBlockingReceipt =
         SpatialLinks.canonicalYMSpatialOnlyBlockingTemporalLinksReceipt
