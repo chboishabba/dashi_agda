@@ -13,6 +13,8 @@ import DASHI.Physics.Closure.DialecticalBraidDepthReceipt as Braid
 import ClassificationDiscoveryLattice
 import ITIRPNFAssessment
 import LoomRelationAlgebra
+import LargerObjectClassificationLattice
+import ClaimReconciliationObjectLattice
 
 ------------------------------------------------------------------------
 -- Canonical Sweetgrass thread identifier.
@@ -345,6 +347,12 @@ record DialecticalJourneyLoom : Setω where
     relationAlgebra :
       LoomRelationAlgebra.LoomRelationAlgebra
 
+    claimReconciliationObjectLattice :
+      ClaimReconciliationObjectLattice.ClaimReconciliationObjectLattice
+
+    largerObjectClassificationLattice :
+      LargerObjectClassificationLattice.LargerObjectClassificationLattice
+
     itirPnfAssessment :
       ITIRPNFAssessment.ITIRPNFAssessment
 
@@ -394,6 +402,10 @@ canonicalDialecticalJourneyLoom =
         ClassificationDiscoveryLattice.canonicalClassificationDiscoveryLattice
     ; relationAlgebra =
         LoomRelationAlgebra.canonicalLoomRelationAlgebra
+    ; claimReconciliationObjectLattice =
+        ClaimReconciliationObjectLattice.canonicalClaimReconciliationObjectLattice
+    ; largerObjectClassificationLattice =
+        LargerObjectClassificationLattice.canonicalLargerObjectClassificationLattice
     ; itirPnfAssessment =
         ITIRPNFAssessment.canonicalITIRPNFAssessment
     ; proofObligations =
