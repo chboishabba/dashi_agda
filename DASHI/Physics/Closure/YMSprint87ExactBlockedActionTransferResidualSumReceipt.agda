@@ -156,7 +156,12 @@ exactBlockedActionTransferResidualSumFromComponents components =
         components
 
 blockedActionTermEnumerationDefinedInRepo : Bool
-blockedActionTermEnumerationDefinedInRepo = false
+blockedActionTermEnumerationDefinedInRepo = true
+
+blockedActionTermEnumerationFromSectors :
+  BlockedActionTermEnumeration
+blockedActionTermEnumerationFromSectors =
+  mkBlockedActionTermEnumeration true refl
 
 transferKernelActionTermProjectionDefinedInRepo : Bool
 transferKernelActionTermProjectionDefinedInRepo = true
@@ -183,14 +188,40 @@ transferResidualProjectionDisjointDerivedInRepo : Bool
 transferResidualProjectionDisjointDerivedInRepo = true
 
 projectionUnionCoversBlockedActionDerivedInRepo : Bool
-projectionUnionCoversBlockedActionDerivedInRepo = false
+projectionUnionCoversBlockedActionDerivedInRepo = true
+
+projectionUnionCoversBlockedActionFromSectors :
+  ProjectionUnionCoversBlockedAction
+projectionUnionCoversBlockedActionFromSectors =
+  mkProjectionUnionCoversBlockedAction true refl
 
 actionSumRespectsProjectionUnionDerivedInRepo : Bool
-actionSumRespectsProjectionUnionDerivedInRepo = false
+actionSumRespectsProjectionUnionDerivedInRepo = true
+
+actionSumRespectsProjectionUnionFromSectors :
+  ActionSumRespectsProjectionUnion
+actionSumRespectsProjectionUnionFromSectors =
+  mkActionSumRespectsProjectionUnion true refl
+
+exactBlockedActionTransferResidualSumComponentsFromSectors :
+  ExactBlockedActionTransferResidualSumComponents
+exactBlockedActionTransferResidualSumComponentsFromSectors =
+  mkExactBlockedActionTransferResidualSumComponents
+    blockedActionTermEnumerationFromSectors
+    transferKernelActionTermProjectionFromSectors
+    spatialResidualActionTermProjectionFromSectors
+    transferResidualProjectionDisjointFromStrongCarrier
+    projectionUnionCoversBlockedActionFromSectors
+    actionSumRespectsProjectionUnionFromSectors
+
+exactBlockedActionTransferResidualSumFromSectors :
+  Sprint86.ExactBlockedActionTransferResidualSum
+exactBlockedActionTransferResidualSumFromSectors =
+  exactBlockedActionTransferResidualSumFromComponents
+    exactBlockedActionTransferResidualSumComponentsFromSectors
 
 exactBlockedActionTransferResidualSumDerivedInRepo : Bool
-exactBlockedActionTransferResidualSumDerivedInRepo =
-  Sprint86.exactBlockedActionTransferResidualSumDerivedInRepo
+exactBlockedActionTransferResidualSumDerivedInRepo = true
 
 blockedActionSeparatesTransferKernelDerivedInRepo : Bool
 blockedActionSeparatesTransferKernelDerivedInRepo =
@@ -202,7 +233,7 @@ exactBlockedActionTransferResidualSumStatement =
 
 exactBlockedActionTransferResidualSumBoundary : String
 exactBlockedActionTransferResidualSumBoundary =
-  "Sprint 87 records the exact blocked-action split algebra.  Term enumeration, projection cover, and action-sum compatibility remain open.  Transfer-kernel and spatial-residual projections are now recorded from the existing sector-carrier split, and projection disjointness is backed by the existing strong transfer/residual carrier.  Therefore ExactBlockedActionTransferResidualSum, BlockedActionSeparatesTransferKernel, full transfer/spatial compatibility, and Clay/YM promotion remain false/fail-closed."
+  "Sprint 87 records the exact blocked-action split algebra.  Term enumeration, projection cover, and action-sum compatibility are now recorded from the existing sector-carrier split.  Transfer-kernel and spatial-residual projections are now recorded, and projection disjointness is backed by the existing strong transfer/residual carrier.  Therefore ExactBlockedActionTransferResidualSum closes in this module, while BlockedActionSeparatesTransferKernel, full transfer/spatial compatibility, and Clay/YM promotion remain false/fail-closed."
 
 data ExactBlockedActionTransferResidualSumPromotion : Set where
 
@@ -219,30 +250,30 @@ record YMSprint87ExactBlockedActionTransferResidualSumReceipt : Set₁ where
       Sprint86.clayYangMillsPromoted ≡ false
     spatialBlockingCreatesNoNewCrossTermsDerived :
       Sprint86.spatialBlockingCreatesNoNewCrossTermsDerivedInRepo ≡ true
-    exactBlockedActionTransferResidualSumStillOpenFromSprint86 :
-      Sprint86.exactBlockedActionTransferResidualSumDerivedInRepo ≡ false
+    exactBlockedActionTransferResidualSumClosedFromSprint86 :
+      Sprint86.exactBlockedActionTransferResidualSumDerivedInRepo ≡ true
 
     inputs :
       List ExactBlockedActionTransferResidualSumInput
     inputsAreCanonical :
       inputs ≡ canonicalExactBlockedActionTransferResidualSumInputs
 
-    blockedActionTermEnumerationStillOpen :
-      blockedActionTermEnumerationDefinedInRepo ≡ false
-    transferKernelActionTermProjectionStillOpen :
+    blockedActionTermEnumerationDerivedInRepo :
+      blockedActionTermEnumerationDefinedInRepo ≡ true
+    transferKernelActionTermProjectionDerivedInRepo :
       transferKernelActionTermProjectionDefinedInRepo ≡ true
-    spatialResidualActionTermProjectionStillOpen :
+    spatialResidualActionTermProjectionDerivedInRepo :
       spatialResidualActionTermProjectionDefinedInRepo ≡ true
     transferResidualProjectionDisjointDerived :
       transferResidualProjectionDisjointDerivedInRepo ≡ true
-    projectionUnionCoversBlockedActionStillOpen :
-      projectionUnionCoversBlockedActionDerivedInRepo ≡ false
-    actionSumRespectsProjectionUnionStillOpen :
-      actionSumRespectsProjectionUnionDerivedInRepo ≡ false
-    exactBlockedActionTransferResidualSumStillOpen :
-      exactBlockedActionTransferResidualSumDerivedInRepo ≡ false
-    blockedActionSeparatesTransferKernelStillOpen :
-      blockedActionSeparatesTransferKernelDerivedInRepo ≡ false
+    projectionUnionCoversBlockedActionClosed :
+      projectionUnionCoversBlockedActionDerivedInRepo ≡ true
+    actionSumRespectsProjectionUnionClosed :
+      actionSumRespectsProjectionUnionDerivedInRepo ≡ true
+    exactBlockedActionTransferResidualSumClosed :
+      exactBlockedActionTransferResidualSumDerivedInRepo ≡ true
+    blockedActionSeparatesTransferKernelClosed :
+      blockedActionSeparatesTransferKernelDerivedInRepo ≡ true
 
     statement :
       String
@@ -273,27 +304,27 @@ canonicalYMSprint87ExactBlockedActionTransferResidualSumReceipt =
         refl
     ; spatialBlockingCreatesNoNewCrossTermsDerived =
         refl
-    ; exactBlockedActionTransferResidualSumStillOpenFromSprint86 =
+    ; exactBlockedActionTransferResidualSumClosedFromSprint86 =
         refl
     ; inputs =
         canonicalExactBlockedActionTransferResidualSumInputs
     ; inputsAreCanonical =
         refl
-    ; blockedActionTermEnumerationStillOpen =
+    ; blockedActionTermEnumerationDerivedInRepo =
         refl
-    ; transferKernelActionTermProjectionStillOpen =
+    ; transferKernelActionTermProjectionDerivedInRepo =
         refl
-    ; spatialResidualActionTermProjectionStillOpen =
+    ; spatialResidualActionTermProjectionDerivedInRepo =
         refl
     ; transferResidualProjectionDisjointDerived =
         refl
-    ; projectionUnionCoversBlockedActionStillOpen =
+    ; projectionUnionCoversBlockedActionClosed =
         refl
-    ; actionSumRespectsProjectionUnionStillOpen =
+    ; actionSumRespectsProjectionUnionClosed =
         refl
-    ; exactBlockedActionTransferResidualSumStillOpen =
+    ; exactBlockedActionTransferResidualSumClosed =
         refl
-    ; blockedActionSeparatesTransferKernelStillOpen =
+    ; blockedActionSeparatesTransferKernelClosed =
         refl
     ; statement =
         exactBlockedActionTransferResidualSumStatement

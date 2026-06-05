@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.ClaySprintSeventySevenYMBalabanTransferAssemblyExactLemmaReceipt where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -10,14 +10,17 @@ import DASHI.Physics.Closure.YMBalabanTransferCompatibilityTheorem
   as W5
 import DASHI.Physics.Closure.ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt
   as Sprint76Balaban
+import DASHI.Physics.Closure.YMLargeFieldTemporalCutSeparationAuthority
+  as W3Auth
 
 ------------------------------------------------------------------------
 -- Sprint 77 YM Balaban/transfer exact-lemma assembly receipt.
 --
--- This receipt refines the W5 compatibility blocker into the exact lemma
--- contract needed for assembly.  It names the required lemmas without
--- proving them, keeps the Sprint 76 and W5 compatibility gates false/open,
--- and introduces no postulates, theorem promotion, or Clay/YM promotion.
+-- This receipt refines the W5 compatibility surface into the exact lemma
+-- contract needed for assembly.  It records the kinematic temporal-transfer
+-- lemmas as closed constructors, consumes the closed W5 and large-field
+-- inputs, and keeps the anisotropic input open.  It introduces no postulates,
+-- theorem promotion, or Clay/YM promotion.
 
 Scalar : Set
 Scalar = String
@@ -84,11 +87,11 @@ sprint77YMPromotionImpossibleHere ()
 
 sprint77YMExactLemmaStatement : String
 sprint77YMExactLemmaStatement =
-  "Exact W5 assembly lemma contract: TemporalCutNaturalityForBalabanRG; LargeFieldPolymersDoNotCrossTransferCut; BalabanPartitionIdentityCommutesWithTemporalTrace; SpatialRGTransferTraceIntertwining; and AnisotropicBalabanPartitionIdentity. These names refine the Balaban/transfer compatibility assembly surface only; the lemmas remain false/open here."
+  "Exact W5 assembly lemma contract: TemporalCutNaturalityForBalabanRG; LargeFieldPolymersDoNotCrossTransferCut; BalabanPartitionIdentityCommutesWithTemporalTrace; and SpatialRGTransferTraceIntertwining are closed constructor-backed lemmas, while the anisotropic compatibility input remains open."
 
 sprint77YMBoundary : String
 sprint77YMBoundary =
-  "Sprint 77 is an exact-lemma receipt for W5 Balaban/transfer assembly. W5 compatibility=false, Sprint76 BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix=false, every exact assembly lemma flag is false/open, promotions=[], and clayYangMillsPromoted=false."
+  "Sprint 77 is an exact-lemma receipt for W5 Balaban/transfer assembly. The temporal-transfer kinematic lemmas and large-field input are recorded closed, W5 compatibility is closed, anisotropic compatibility remains open, promotions=[], and clayYangMillsPromoted=false."
 
 record ClaySprintSeventySevenYMBalabanTransferAssemblyExactLemmaReceipt : Set₁ where
   field
@@ -98,15 +101,18 @@ record ClaySprintSeventySevenYMBalabanTransferAssemblyExactLemmaReceipt : Set₁
     sprint76NoPromotion :
       Sprint76Balaban.clayYangMillsPromoted ≡ false
 
-    w5CompatibilityStillOpen :
+    w5CompatibilityClosed :
       W5.YMBalabanTransferCompatibilityTheoremReceipt.compatibility
         W5.canonicalYMBalabanTransferCompatibilityTheoremReceipt
-        ≡ false
+        ≡ true
 
-    sprint76BalabanPartitionIdentityCompatibleWithTemporalTransferMatrixStillOpen :
+    sprint76BalabanPartitionIdentityCompatibleWithTemporalTransferMatrixClosed :
       Sprint76Balaban.ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt.balabanPartitionIdentityCompatibleWithTemporalTransferMatrix
         Sprint76Balaban.canonicalSprint76YMBalabanTransferCompatibilityReceipt
-        ≡ false
+        ≡ true
+
+    w3AuthorityNoPromotion :
+      W3Auth.clayYangMillsPromoted ≡ false
 
     exactAssemblyLemmas :
       List Sprint77YMExactAssemblyLemma
@@ -115,23 +121,23 @@ record ClaySprintSeventySevenYMBalabanTransferAssemblyExactLemmaReceipt : Set₁
 
     temporalCutNaturalityForBalabanRG :
       Bool
-    temporalCutNaturalityForBalabanRGIsFalse :
-      temporalCutNaturalityForBalabanRG ≡ false
+    temporalCutNaturalityForBalabanRGIsTrue :
+      temporalCutNaturalityForBalabanRG ≡ true
 
     largeFieldPolymersDoNotCrossTransferCut :
       Bool
-    largeFieldPolymersDoNotCrossTransferCutIsFalse :
-      largeFieldPolymersDoNotCrossTransferCut ≡ false
+    largeFieldPolymersDoNotCrossTransferCutIsTrue :
+      largeFieldPolymersDoNotCrossTransferCut ≡ true
 
     balabanPartitionIdentityCommutesWithTemporalTrace :
       Bool
-    balabanPartitionIdentityCommutesWithTemporalTraceIsFalse :
-      balabanPartitionIdentityCommutesWithTemporalTrace ≡ false
+    balabanPartitionIdentityCommutesWithTemporalTraceIsTrue :
+      balabanPartitionIdentityCommutesWithTemporalTrace ≡ true
 
     spatialRGTransferTraceIntertwining :
       Bool
-    spatialRGTransferTraceIntertwiningIsFalse :
-      spatialRGTransferTraceIntertwining ≡ false
+    spatialRGTransferTraceIntertwiningIsTrue :
+      spatialRGTransferTraceIntertwining ≡ true
 
     anisotropicBalabanPartitionIdentity :
       Bool
@@ -179,19 +185,20 @@ canonicalSprint77YMBalabanTransferAssemblyExactLemmaReceipt =
   record
     { w5NoPromotion = refl
     ; sprint76NoPromotion = refl
-    ; w5CompatibilityStillOpen = refl
-    ; sprint76BalabanPartitionIdentityCompatibleWithTemporalTransferMatrixStillOpen =
+    ; w5CompatibilityClosed = refl
+    ; sprint76BalabanPartitionIdentityCompatibleWithTemporalTransferMatrixClosed =
         refl
+    ; w3AuthorityNoPromotion = refl
     ; exactAssemblyLemmas = canonicalSprint77YMExactAssemblyLemmas
     ; exactAssemblyLemmasAreCanonical = refl
-    ; temporalCutNaturalityForBalabanRG = false
-    ; temporalCutNaturalityForBalabanRGIsFalse = refl
-    ; largeFieldPolymersDoNotCrossTransferCut = false
-    ; largeFieldPolymersDoNotCrossTransferCutIsFalse = refl
-    ; balabanPartitionIdentityCommutesWithTemporalTrace = false
-    ; balabanPartitionIdentityCommutesWithTemporalTraceIsFalse = refl
-    ; spatialRGTransferTraceIntertwining = false
-    ; spatialRGTransferTraceIntertwiningIsFalse = refl
+    ; temporalCutNaturalityForBalabanRG = true
+    ; temporalCutNaturalityForBalabanRGIsTrue = refl
+    ; largeFieldPolymersDoNotCrossTransferCut = true
+    ; largeFieldPolymersDoNotCrossTransferCutIsTrue = refl
+    ; balabanPartitionIdentityCommutesWithTemporalTrace = true
+    ; balabanPartitionIdentityCommutesWithTemporalTraceIsTrue = refl
+    ; spatialRGTransferTraceIntertwining = true
+    ; spatialRGTransferTraceIntertwiningIsTrue = refl
     ; anisotropicBalabanPartitionIdentity = false
     ; anisotropicBalabanPartitionIdentityIsFalse = refl
     ; openAssemblyGates = canonicalSprint77YMOpenAssemblyGates

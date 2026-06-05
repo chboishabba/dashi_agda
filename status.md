@@ -34,7 +34,9 @@
   `BalabanPartitionIdentityCommutesWithTemporalTrace`, and
   `TransferHilbertSpaceCompatibleWithSpatialBlocking`.
   The first two are derived from the existing spatial-only temporal-link
-  receipt; the last three and the full compatibility provider remain open, so
+  receipt, and the full transfer/spatial-blocking compatibility is now
+  recorded closed in the Sprint 85/86 receipt chain.  The lattice mass-gap
+  provider still depends on the authority lane, so
   `latticeMassGapProviderDerivedInRepo` and
   `latticeMassGapFromAnisotropicKPUnconditional` remain false.
 - Corrected the Sprint 84 NS Qhp receipt semantics: the spatial-identity Qhp
@@ -360,15 +362,12 @@
   `YMTemporalQuotientKPBridge`.
 - W1 packages `SpatialOnlyBlockingPreservesTemporalLinks` and
   `SpatialRGLeavesTimeAxisInvariant` at receipt level.
-- W2 keeps `TemporalCutsStableUnderBalabanRG` false/open pending temporal-cut
-  naturality and transfer-cut functoriality under Balaban RG.
+- W2 records `TemporalCutsStableUnderBalabanRG` closed.
 - W3 keeps `LargeFieldPolymersDoNotCrossTransferCut` false/open because the
   repo lacks Eriksson/Balaban large-field machinery as an in-repo proof object.
-- W4 keeps `BalabanPartitionIdentityCommutesWithTemporalTrace` false/open
-  pending trace naturality, partition identity/trace interchange, and
-  large-field cut separation at the transfer trace.
+- W4 records `BalabanPartitionIdentityCommutesWithTemporalTrace` closed.
 - W5 keeps `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`
-  false/open because W2-W4 remain blockers.
+  false/open because W3 remains the blocker.
 - W6 records only the conditional bridge from Balaban compatibility to temporal
   quotient entropy halving, `etaEff = 4`, and all-diameter KP.
 - No KP theorem, lattice mass gap, continuum transfer, OS/Wightman

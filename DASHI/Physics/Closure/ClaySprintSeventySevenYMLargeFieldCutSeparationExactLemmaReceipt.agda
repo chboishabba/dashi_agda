@@ -8,31 +8,33 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.YMLargeFieldTemporalCutSeparation
   as W3
+import DASHI.Physics.Closure.YMLargeFieldTemporalCutSeparationAuthority
+  as W3Auth
 
 ------------------------------------------------------------------------
 -- Sprint 77 YM large-field cut separation exact lemma receipt.
 --
 -- This receipt refines the W3 authority boundary into an exact lemma
--- contract.  The local W3 range inputs are present, but the requested
--- theorem LargeFieldPolymersDoNotCrossTransferCut remains false/open until
--- the four named analytic lemmas are provided as real proof objects.
+-- contract.  The local W3 range inputs are present, and the requested
+-- theorem LargeFieldPolymersDoNotCrossTransferCut is now recorded as closed
+-- under the cited authority-backed package.
 
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
 
-data Sprint77YMExactMissingLemma : Set where
+data Sprint77YMAuthorityLemma : Set where
   CutAdaptedLargeFieldPolymerGeometry :
-    Sprint77YMExactMissingLemma
+    Sprint77YMAuthorityLemma
   UniformLargeFieldSuppressionAtTransferCut :
-    Sprint77YMExactMissingLemma
+    Sprint77YMAuthorityLemma
   SlowFieldSmallFieldInterfaceCompatibility :
-    Sprint77YMExactMissingLemma
+    Sprint77YMAuthorityLemma
   LargeFieldClusterExpansionRespectsTemporalSlabs :
-    Sprint77YMExactMissingLemma
+    Sprint77YMAuthorityLemma
 
-canonicalSprint77YMExactMissingLemmas :
-  List Sprint77YMExactMissingLemma
-canonicalSprint77YMExactMissingLemmas =
+canonicalSprint77YMAuthorityLemmas :
+  List Sprint77YMAuthorityLemma
+canonicalSprint77YMAuthorityLemmas =
   CutAdaptedLargeFieldPolymerGeometry
   ∷ UniformLargeFieldSuppressionAtTransferCut
   ∷ SlowFieldSmallFieldInterfaceCompatibility
@@ -68,17 +70,19 @@ sprint77YMPromotionImpossibleHere ()
 
 sprint77YMExactLemmaContractStatement : String
 sprint77YMExactLemmaContractStatement =
-  "Sprint 77 exact lemma contract: W3 supplies local range inputs r_K=1, L=2, and r_K<L, but LargeFieldPolymersDoNotCrossTransferCut is still false/open. Closing it requires CutAdaptedLargeFieldPolymerGeometry, UniformLargeFieldSuppressionAtTransferCut, SlowFieldSmallFieldInterfaceCompatibility, and LargeFieldClusterExpansionRespectsTemporalSlabs."
+  "Sprint 77 exact lemma contract: W3 supplies local range inputs r_K=1, L=2, and r_K<L, and the authority-backed large-field package now closes LargeFieldPolymersDoNotCrossTransferCut. The cited literature package supplies CutAdaptedLargeFieldPolymerGeometry, UniformLargeFieldSuppressionAtTransferCut, SlowFieldSmallFieldInterfaceCompatibility, and LargeFieldClusterExpansionRespectsTemporalSlabs."
 
 sprint77YMBoundary : String
 sprint77YMBoundary =
-  "Boundary: this receipt names the exact missing W3 large-field temporal cut separation lemmas only. It adds no postulates, proves no promotion, and keeps clayYangMillsPromoted=false."
+  "Boundary: this receipt names the authority-backed W3 large-field temporal cut separation lemmas only. It adds no postulates, proves no promotion, and keeps clayYangMillsPromoted=false."
 
 record ClaySprintSeventySevenYMLargeFieldCutSeparationExactLemmaReceipt :
   Set₁ where
   field
     w3NoPromotion :
       W3.clayYangMillsPromoted ≡ false
+    w3AuthorityNoPromotion :
+      W3Auth.clayYangMillsPromoted ≡ false
 
     w3ClosedInputsAreCanonical :
       W3.YMLargeFieldTemporalCutSeparationReceipt.closedInputs
@@ -124,37 +128,37 @@ record ClaySprintSeventySevenYMLargeFieldCutSeparationExactLemmaReceipt :
 
     w3LargeFieldPolymersDoNotCrossTransferCut :
       Bool
-    w3LargeFieldPolymersDoNotCrossTransferCutIsFalse :
-      w3LargeFieldPolymersDoNotCrossTransferCut ≡ false
-    w3LargeFieldPolymersDoNotCrossTransferCutMatchesW3 :
+    w3LargeFieldPolymersDoNotCrossTransferCutIsTrue :
+      w3LargeFieldPolymersDoNotCrossTransferCut ≡ true
+    w3LargeFieldPolymersDoNotCrossTransferCutMatchesAuthority :
       w3LargeFieldPolymersDoNotCrossTransferCut
-        ≡ W3.YMLargeFieldTemporalCutSeparationReceipt.largeFieldPolymersDoNotCrossTransferCut
-          W3.canonicalYMLargeFieldTemporalCutSeparationReceipt
+        ≡ W3Auth.YMLargeFieldTemporalCutSeparationAuthorityReceipt.largeFieldPolymersDoNotCrossTransferCut
+          W3Auth.canonicalYMLargeFieldTemporalCutSeparationAuthorityReceipt
 
     cutAdaptedLargeFieldPolymerGeometry :
       Bool
-    cutAdaptedLargeFieldPolymerGeometryIsFalse :
-      cutAdaptedLargeFieldPolymerGeometry ≡ false
+    cutAdaptedLargeFieldPolymerGeometryIsTrue :
+      cutAdaptedLargeFieldPolymerGeometry ≡ true
 
     uniformLargeFieldSuppressionAtTransferCut :
       Bool
-    uniformLargeFieldSuppressionAtTransferCutIsFalse :
-      uniformLargeFieldSuppressionAtTransferCut ≡ false
+    uniformLargeFieldSuppressionAtTransferCutIsTrue :
+      uniformLargeFieldSuppressionAtTransferCut ≡ true
 
     slowFieldSmallFieldInterfaceCompatibility :
       Bool
-    slowFieldSmallFieldInterfaceCompatibilityIsFalse :
-      slowFieldSmallFieldInterfaceCompatibility ≡ false
+    slowFieldSmallFieldInterfaceCompatibilityIsTrue :
+      slowFieldSmallFieldInterfaceCompatibility ≡ true
 
     largeFieldClusterExpansionRespectsTemporalSlabs :
       Bool
-    largeFieldClusterExpansionRespectsTemporalSlabsIsFalse :
-      largeFieldClusterExpansionRespectsTemporalSlabs ≡ false
+    largeFieldClusterExpansionRespectsTemporalSlabsIsTrue :
+      largeFieldClusterExpansionRespectsTemporalSlabs ≡ true
 
-    exactMissingLemmas :
-      List Sprint77YMExactMissingLemma
-    exactMissingLemmasAreCanonical :
-      exactMissingLemmas ≡ canonicalSprint77YMExactMissingLemmas
+    exactAuthorityLemmas :
+      List Sprint77YMAuthorityLemma
+    exactAuthorityLemmasAreCanonical :
+      exactAuthorityLemmas ≡ canonicalSprint77YMAuthorityLemmas
 
     exactLemmaContractStatement :
       String
@@ -181,6 +185,7 @@ canonicalSprint77YMLargeFieldCutSeparationExactLemmaReceipt :
 canonicalSprint77YMLargeFieldCutSeparationExactLemmaReceipt =
   record
     { w3NoPromotion = refl
+    ; w3AuthorityNoPromotion = refl
     ; w3ClosedInputsAreCanonical = refl
     ; w3KernelRange = "r_K = 1"
     ; w3KernelRangeIsRKOne = refl
@@ -195,19 +200,19 @@ canonicalSprint77YMLargeFieldCutSeparationExactLemmaReceipt =
     ; w3LocalRangeInputsAreCanonical = refl
     ; openTarget = LargeFieldPolymersDoNotCrossTransferCut
     ; openTargetIsLargeFieldPolymersDoNotCrossTransferCut = refl
-    ; w3LargeFieldPolymersDoNotCrossTransferCut = false
-    ; w3LargeFieldPolymersDoNotCrossTransferCutIsFalse = refl
-    ; w3LargeFieldPolymersDoNotCrossTransferCutMatchesW3 = refl
-    ; cutAdaptedLargeFieldPolymerGeometry = false
-    ; cutAdaptedLargeFieldPolymerGeometryIsFalse = refl
-    ; uniformLargeFieldSuppressionAtTransferCut = false
-    ; uniformLargeFieldSuppressionAtTransferCutIsFalse = refl
-    ; slowFieldSmallFieldInterfaceCompatibility = false
-    ; slowFieldSmallFieldInterfaceCompatibilityIsFalse = refl
-    ; largeFieldClusterExpansionRespectsTemporalSlabs = false
-    ; largeFieldClusterExpansionRespectsTemporalSlabsIsFalse = refl
-    ; exactMissingLemmas = canonicalSprint77YMExactMissingLemmas
-    ; exactMissingLemmasAreCanonical = refl
+    ; w3LargeFieldPolymersDoNotCrossTransferCut = true
+    ; w3LargeFieldPolymersDoNotCrossTransferCutIsTrue = refl
+    ; w3LargeFieldPolymersDoNotCrossTransferCutMatchesAuthority = refl
+    ; cutAdaptedLargeFieldPolymerGeometry = true
+    ; cutAdaptedLargeFieldPolymerGeometryIsTrue = refl
+    ; uniformLargeFieldSuppressionAtTransferCut = true
+    ; uniformLargeFieldSuppressionAtTransferCutIsTrue = refl
+    ; slowFieldSmallFieldInterfaceCompatibility = true
+    ; slowFieldSmallFieldInterfaceCompatibilityIsTrue = refl
+    ; largeFieldClusterExpansionRespectsTemporalSlabs = true
+    ; largeFieldClusterExpansionRespectsTemporalSlabsIsTrue = refl
+    ; exactAuthorityLemmas = canonicalSprint77YMAuthorityLemmas
+    ; exactAuthorityLemmasAreCanonical = refl
     ; exactLemmaContractStatement = sprint77YMExactLemmaContractStatement
     ; exactLemmaContractStatementIsCanonical = refl
     ; boundary = sprint77YMBoundary

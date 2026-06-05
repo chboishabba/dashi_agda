@@ -30,6 +30,40 @@ Use one of these reader tracks first:
   receipted metric-correction operators downstream of body/ROM/fabric fields
   and upstream of manufacturing allowances.
 
+## Dialectical-Loom Relation Formalism
+
+`DialecticalJourneyLoom.agda` now imports `LoomRelationAlgebra.agda`, a small
+finite relation algebra aligned with the SensibLaw affidavit reconciliation
+shape. The relation constructors are:
+
+- `exactSupport`
+- `equivalentSupport`
+- `explicitDispute`
+- `implicitDispute`
+- `partialOverlap`
+- `adjacentEvent`
+- `substitution`
+- `proceduralNonanswer`
+- `unrelated`
+
+These project to relation roots:
+
+- `supports`
+- `invalidates`
+- `nonResolving`
+- `unanswered`
+
+The loom generator emits `formal_relation` metadata and top-level
+`relation_type`, `relation_root`, `evidence_status`, and `promotion_state`
+fields on graph edges. The original edge `family` remains the visual/narrative
+layer; the relation fields carry the finite reconciliation algebra. This is a
+proposition/trajectory reconciliation surface, not a legal sufficiency surface
+and not a theorem-promotion surface. In particular, `supports` means typed
+comparison support inside the formalism; it does not mean proved, legally
+sufficient, or promoted. Promotion remains a separate guarded state; structural
+edge relations use `not_promotion_candidate`, while boundary/proof relation
+edges use `promotion_blocked`.
+
 Current Clay sprint correction:
 
 - `DASHI/Physics/Closure/ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt.agda`
@@ -300,11 +334,9 @@ transfer.
 first lattice mass-gap slot.  It derives
 `SpatialBlockingPreservesTimeSlices` and
 `SpatialBlockingPreservesTemporalBoundaryLinks` from the spatial-only
-temporal-link receipt, while leaving `BlockedActionSeparatesTransferKernel`,
-`BalabanPartitionIdentityCommutesWithTemporalTrace`, and
-`TransferHilbertSpaceCompatibleWithSpatialBlocking` open.  The full
-`TemporalTransferMatrixSpatialBlockingCompatibility` provider is still not
-derived in repo.
+temporal-link receipt, and now records the full
+`TemporalTransferMatrixSpatialBlockingCompatibility` receipt as closed.  The
+lattice mass-gap authority provider is still not derived in repo.
 
 `YMSprint86BlockedActionTransferKernelSeparationReceipt` refines the first
 open Sprint 85 gate.  It records sector-tag completeness,
@@ -618,11 +650,12 @@ structural gate remains `BalabanPartitionIdentityCompatibleWithTemporalTransferM
 
 Sprint 76 adds the structural fork around that gate. W1 packages
 `SpatialOnlyBlockingPreservesTemporalLinks` and time-axis invariance at receipt
-level. W2 records `TemporalCutsStableUnderBalabanRG` as still open, W3 records
+level. W2 records `TemporalCutsStableUnderBalabanRG` as closed, W3 records
 `LargeFieldPolymersDoNotCrossTransferCut` as blocked on missing in-repo
 Eriksson/Balaban large-field machinery, and W4 records
-`BalabanPartitionIdentityCommutesWithTemporalTrace` as still open. W5 therefore
-keeps `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix` false.
+`BalabanPartitionIdentityCommutesWithTemporalTrace` as closed. W5 therefore
+keeps `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix` false
+because W3 remains the open analytic blocker.
 W6 packages only the conditional bridge from compatibility to `etaEff = 4` and
 `AllDiameterWeightedKP`. No KP theorem, mass gap, continuum transfer,
 OS/Wightman reconstruction, or Clay/YM promotion follows.
@@ -2789,6 +2822,80 @@ Figure provenance:
   `temp-DOWNLOADED/ThreeBodyPredictability.agda`;
 - the current repo-native formalism surfaces remain the authoritative source
   for names and claim boundaries.
+
+### Dialectical-loom assessment pack
+
+Artifacts (Sweetgrass thread) are now produced from local `chat_archive.sqlite`
+through
+[`dialectical_loom_visual.py`](dialectical_loom_visual.py)
+with schema
+`dashi.itir.dialectical_loom_graph.v0_2` and no live-web dependency.
+
+Core model modules:
+
+- [`DialecticalJourneyLoom.agda`](DialecticalJourneyLoom.agda)
+- [`LoomRelationAlgebra.agda`](LoomRelationAlgebra.agda)
+- [`ClassificationDiscoveryLattice.agda`](ClassificationDiscoveryLattice.agda)
+- [`ITIRPNFAssessment.agda`](ITIRPNFAssessment.agda)
+
+Generated visuals are:
+
+- `artifacts/dialectical_loom/sweetgrass_dialectical_weave.json`,
+  `.dot`, `.png`
+- `artifacts/dialectical_loom/sweetgrass_three_strand_braid.json`,
+  `.dot`, `.png`
+- `artifacts/dialectical_loom/sweetgrass_loom_receipt_summary.json`
+
+Model summary:
+
+- The `2x3` weave projection, `2x9` weave projection, and `three-strand braid`
+  projection are recorded as equivalent v1 views of the same two-position-plus
+  synthesis carrier.
+- The hypercube blanket trajectory is documented as a v2 materialization.
+- Canonical Sweetgrass seed chain is `369/Tlurey -> Sweetgrass three-strand braid ->
+  loom blanket -> pressure-carried thread -> NS/YM fail-closed boundary ->
+  Bott/Clifford scaffold boundary`.
+- Blanket visuals are materialized trajectories over typed carriers and are not a
+  theorem promotion object.
+- The relation formalism mirrors the SensibLaw affidavit lane's finite
+  classifier shape without importing the legal workflow. The typed relation set
+  is:
+  `exact_support`, `equivalent_support`, `explicit_dispute`,
+  `implicit_dispute`, `partial_overlap`, `adjacent_event`, `substitution`,
+  `procedural_nonanswer`, and `unrelated`.
+- Relation roots are projected separately as `supports`, `invalidates`,
+  `non_resolving`, and `unanswered`; operator buckets are a further projection,
+  not a promotion signal.
+- The generator emits `formal_relation` metadata and top-level
+  `relation_type`, `relation_root`, `evidence_status`, and `promotion_state`
+  fields on every edge. The original edge `family` remains the visual/narrative
+  layer, while the relation fields carry the finite reconciliation algebra.
+- Relation classification is deliberately separate from proof promotion:
+  edge relations may be `witnessed` or `boundary_only`, while promotion remains
+  either `not_promotion_candidate` or `promotion_blocked` in the current
+  artifacts.
+- Non-claims are explicit:
+  no Yang-Baxter theorem promotion, no physics promotion, no NS/YM
+  promotion, and no `Cl(0,6)` equivalence promotion.
+- Clifford obligations remain explicit receipts:
+  `Cl(0,6)=64`, six generators, squares to `-1`, anticommutation,
+  64-monomial span, forward lift map, surjectivity, rank-nullity bridge, and
+  target `M_8(R)`.
+
+Input provenance is resolved from resolved local files:
+
+- resolved Sweetgrass thread context:
+  `/home/c/Documents/20260604_070337_allm_20260604_070337.txt`
+- optional local doc paths passed to `dialectical_loom_visual.py`
+
+Scope boundary:
+
+- The loom pack is a provenance-oriented trajectory/reconciliation model.
+- SensibLaw's affidavit lane remains the workflow authority for legal
+  affidavit coverage, local-first SQLite persistence, proposition/response
+  matching, and operator review buckets.
+- DASHI imports the finite relation algebra shape only. It does not claim legal
+  sufficiency, affidavit proof, or theorem promotion from loom bucket labels.
 
 Paper 1 origins figure pack:
 

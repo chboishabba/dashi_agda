@@ -31,7 +31,8 @@
   "remaining_blocker": "YM has strong Gate-B/KP, small-field, lattice mass-gap, continuum transfer, and mass-gap survival authority surfaces but remains fail-closed at the Clay promotion boundary: the lattice transfer provider slots and other unconditional provider derivations, constructive YM existence, physical Hamiltonian mass-gap identification, Clay statement equivalence, and external review receipt remain open. NS remains blocked at the Hminus/KStar/theta/BKM continuation lane. Both Clay promotions are recorded false.",
   "route_decision": "CLAY_SPRINT83_YM_NS_OPEN_FAIL_CLOSED",
   "source_table": "clay_sprint83_ym_ns_lane_source_surface_table.csv",
-  "ym_blocked_action_transfer_kernel_next_gate": "ExactBlockedActionTransferResidualSum",
+  "ym_blocked_action_transfer_kernel_next_gate": "LargeFieldPolymersDoNotCrossTransferCut",
+  "ym_blocked_action_transfer_kernel_remaining_inputs": [],
   "ym_blocked_action_transfer_kernel_required_inputs": [
     "ActionTermSectorTagComplete",
     "MixedPlaquettesAbsorbedIntoTransfer",
@@ -105,14 +106,13 @@
   "ym_temporal_transfer_spatial_blocking_decomposition_surface": true,
   "ym_temporal_transfer_spatial_blocking_derived_sublemmas": [
     "SpatialBlockingPreservesTimeSlices",
-    "SpatialBlockingPreservesTemporalBoundaryLinks"
-  ],
-  "ym_temporal_transfer_spatial_blocking_full_compatibility_derived_in_repo": false,
-  "ym_temporal_transfer_spatial_blocking_open_sublemmas": [
+    "SpatialBlockingPreservesTemporalBoundaryLinks",
     "BlockedActionSeparatesTransferKernel",
     "BalabanPartitionIdentityCommutesWithTemporalTrace",
     "TransferHilbertSpaceCompatibleWithSpatialBlocking"
   ],
+  "ym_temporal_transfer_spatial_blocking_full_compatibility_derived_in_repo": true,
+  "ym_temporal_transfer_spatial_blocking_open_sublemmas": [],
   "ym_temporal_transfer_spatial_blocking_sublemmas": [
     "SpatialBlockingPreservesTimeSlices",
     "SpatialBlockingPreservesTemporalBoundaryLinks",

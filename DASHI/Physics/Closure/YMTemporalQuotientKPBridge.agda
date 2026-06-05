@@ -26,10 +26,10 @@ import DASHI.Physics.Closure.ClaySprintSeventySixYMAnisotropicAllDiameterKPRecei
 --   -> etaEff == 4
 --   -> AllDiameterWeightedKP.
 --
--- The Sprint 74/76 arithmetic is reused as a closed input, but W5 has not
--- supplied Balaban/transfer compatibility here.  Consequently the canonical
--- bridge keeps the theorem flags false/open and introduces no Clay/YM
--- promotion.
+-- The Sprint 74/76 arithmetic is reused as a closed input, and W5 now
+-- supplies Balaban/transfer compatibility here.  The bridge remains
+-- conditional because the temporal-quotient and all-diameter KP inputs are
+-- still separate, and it introduces no Clay/YM promotion.
 
 Scalar : Set
 Scalar = String
@@ -181,10 +181,10 @@ record YMTemporalQuotientKPBridgeReceipt : Set₁ where
     sprint76KPNoPromotion :
       KP76.clayYangMillsPromoted ≡ false
 
-    balabanCompatibilityStillOpen :
+    balabanCompatibilityClosed :
       Balaban76.ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt.balabanPartitionIdentityCompatibleWithTemporalTransferMatrix
         Balaban76.canonicalSprint76YMBalabanTransferCompatibilityReceipt
-        ≡ false
+        ≡ true
 
     temporalQuotientStillOpen :
       Balaban76.ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt.temporalQuotientEntropyHalvingL2
@@ -281,7 +281,7 @@ canonicalYMTemporalQuotientKPBridgeReceipt =
     ; sprint76BalabanNoPromotion = refl
     ; sprint76EntropyNoPromotion = refl
     ; sprint76KPNoPromotion = refl
-    ; balabanCompatibilityStillOpen = refl
+    ; balabanCompatibilityClosed = refl
     ; temporalQuotientStillOpen = refl
     ; entropyQuotientStillOpen = refl
     ; allDiameterWeightedKPStillOpen = refl

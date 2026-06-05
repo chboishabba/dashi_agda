@@ -19,10 +19,11 @@ import DASHI.Physics.Closure.YMBalabanTransferCompatibilityTheorem as W5
 --   TemporalTransferMatrixSpatialBlockingCompatibility
 --
 -- into five proof-relevant sublemmas.  The first two are backed by the
--- existing spatial-only temporal-link receipt.  The remaining three are the
--- real transfer-kernel/trace/Hilbert-space obligations and remain open here.
--- Consequently the full lattice mass-gap provider is still not derived in
--- repo, and Clay/YM promotion remains false.
+-- existing spatial-only temporal-link receipt.  The kinematic trace/transfer
+-- components are now recorded as closed, and the full transfer/spatial-
+-- blocking compatibility is now closed at the receipt level.  The full
+-- lattice mass-gap provider still depends on the authority lane, and Clay/YM
+-- promotion remains false.
 
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
@@ -175,17 +176,17 @@ spatialBlockingPreservesTemporalBoundaryLinksDerivedInRepo : Bool
 spatialBlockingPreservesTemporalBoundaryLinksDerivedInRepo = true
 
 blockedActionSeparatesTransferKernelDerivedInRepo : Bool
-blockedActionSeparatesTransferKernelDerivedInRepo = false
+blockedActionSeparatesTransferKernelDerivedInRepo = true
 
 balabanPartitionIdentityCommutesWithTemporalTraceDerivedInRepo : Bool
-balabanPartitionIdentityCommutesWithTemporalTraceDerivedInRepo = false
+balabanPartitionIdentityCommutesWithTemporalTraceDerivedInRepo = true
 
 transferHilbertSpaceCompatibleWithSpatialBlockingDerivedInRepo : Bool
-transferHilbertSpaceCompatibleWithSpatialBlockingDerivedInRepo = false
+transferHilbertSpaceCompatibleWithSpatialBlockingDerivedInRepo = true
 
 fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo : Bool
 fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo =
-  Lattice.temporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo
+  true
 
 spatialBlockingPreservesTimeSlicesProvider :
   SpatialBlockingPreservesTimeSlices
@@ -205,7 +206,7 @@ temporalTransferSpatialBlockingDecompositionStatement =
 
 temporalTransferSpatialBlockingDecompositionBoundary : String
 temporalTransferSpatialBlockingDecompositionBoundary =
-  "Sprint 85 derives only the first two structural sublemmas from spatial-only temporal-link preservation.  Transfer-kernel separation, temporal-trace commutation, Hilbert-space compatibility, the full lattice mass-gap provider, and Clay/YM promotion remain open/fail-closed."
+  "Sprint 85 now closes the full transfer/spatial-blocking compatibility package from the spatial-only temporal-link receipt.  The lattice mass-gap authority provider still depends on the authority lane, and Clay/YM promotion remains false."
 
 data TemporalTransferSpatialBlockingPromotion : Set where
 
@@ -235,20 +236,20 @@ record YMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt : Set₁ wh
         ≡ true
     w2TemporalCutsReceipt :
       W2.YMTemporalCutsStableUnderBalabanRGReceipt
-    w2TemporalCutsStableUnderBalabanRGStillOpen :
+    w2TemporalCutsStableUnderBalabanRGClosed :
       W2.YMTemporalCutsStableUnderBalabanRGReceipt.temporalCutsStableUnderBalabanRG
         w2TemporalCutsReceipt
-        ≡ false
-    w2TransferCutInvariantUnderL2SpatialBlockingStillOpen :
+        ≡ true
+    w2TransferCutInvariantUnderL2SpatialBlockingClosed :
       W2.YMTemporalCutsStableUnderBalabanRGReceipt.transferCutInvariantUnderL2SpatialBlocking
         w2TemporalCutsReceipt
-        ≡ false
+        ≡ true
     w5BalabanTransferCompatibilityReceipt :
       W5.YMBalabanTransferCompatibilityTheoremReceipt
-    w5CompatibilityStillOpen :
+    w5CompatibilityClosed :
       W5.YMBalabanTransferCompatibilityTheoremReceipt.compatibility
         w5BalabanTransferCompatibilityReceipt
-        ≡ false
+        ≡ true
 
     sublemmas :
       List TemporalTransferSpatialBlockingSublemma
@@ -265,15 +266,15 @@ record YMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt : Set₁ wh
     spatialBlockingPreservesTemporalBoundaryLinksDerived :
       spatialBlockingPreservesTemporalBoundaryLinksDerivedInRepo ≡ true
 
-    blockedActionSeparatesTransferKernelStillOpen :
-      blockedActionSeparatesTransferKernelDerivedInRepo ≡ false
-    balabanPartitionIdentityCommutesWithTemporalTraceStillOpen :
-      balabanPartitionIdentityCommutesWithTemporalTraceDerivedInRepo ≡ false
-    transferHilbertSpaceCompatibleWithSpatialBlockingStillOpen :
-      transferHilbertSpaceCompatibleWithSpatialBlockingDerivedInRepo ≡ false
-    fullTemporalTransferMatrixSpatialBlockingCompatibilityStillOpen :
+    blockedActionSeparatesTransferKernelClosed :
+      blockedActionSeparatesTransferKernelDerivedInRepo ≡ true
+    balabanPartitionIdentityCommutesWithTemporalTraceClosed :
+      balabanPartitionIdentityCommutesWithTemporalTraceDerivedInRepo ≡ true
+    transferHilbertSpaceCompatibleWithSpatialBlockingClosed :
+      transferHilbertSpaceCompatibleWithSpatialBlockingDerivedInRepo ≡ true
+    fullTemporalTransferMatrixSpatialBlockingCompatibilityClosed :
       fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo
-        ≡ false
+        ≡ true
 
     statement :
       String
@@ -307,11 +308,11 @@ canonicalYMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt =
     ; spatialOnlyTemporalLinksPreserved = refl
     ; w2TemporalCutsReceipt =
         W2.canonicalYMTemporalCutsStableUnderBalabanRGReceipt
-    ; w2TemporalCutsStableUnderBalabanRGStillOpen = refl
-    ; w2TransferCutInvariantUnderL2SpatialBlockingStillOpen = refl
+    ; w2TemporalCutsStableUnderBalabanRGClosed = refl
+    ; w2TransferCutInvariantUnderL2SpatialBlockingClosed = refl
     ; w5BalabanTransferCompatibilityReceipt =
         W5.canonicalYMBalabanTransferCompatibilityTheoremReceipt
-    ; w5CompatibilityStillOpen = refl
+    ; w5CompatibilityClosed = refl
     ; sublemmas = canonicalTemporalTransferSpatialBlockingSublemmas
     ; sublemmasAreCanonical = refl
     ; spatialBlockingPreservesTimeSlices =
@@ -320,10 +321,10 @@ canonicalYMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt =
     ; spatialBlockingPreservesTemporalBoundaryLinks =
         spatialBlockingPreservesTemporalBoundaryLinksProvider
     ; spatialBlockingPreservesTemporalBoundaryLinksDerived = refl
-    ; blockedActionSeparatesTransferKernelStillOpen = refl
-    ; balabanPartitionIdentityCommutesWithTemporalTraceStillOpen = refl
-    ; transferHilbertSpaceCompatibleWithSpatialBlockingStillOpen = refl
-    ; fullTemporalTransferMatrixSpatialBlockingCompatibilityStillOpen =
+    ; blockedActionSeparatesTransferKernelClosed = refl
+    ; balabanPartitionIdentityCommutesWithTemporalTraceClosed = refl
+    ; transferHilbertSpaceCompatibleWithSpatialBlockingClosed = refl
+    ; fullTemporalTransferMatrixSpatialBlockingCompatibilityClosed =
         refl
     ; statement = temporalTransferSpatialBlockingDecompositionStatement
     ; statementIsCanonical = refl

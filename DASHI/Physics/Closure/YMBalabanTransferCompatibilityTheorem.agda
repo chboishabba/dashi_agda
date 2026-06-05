@@ -10,17 +10,20 @@ import DASHI.Physics.Closure.ClaySprintSeventySixYMBalabanTransferCompatibilityR
   as Sprint76Balaban
 import DASHI.Physics.Closure.YMSpatialOnlyBlockingTemporalLinks as W1
 import DASHI.Physics.Closure.YMTemporalCutsStableUnderBalabanRG as W2
-import DASHI.Physics.Closure.YMLargeFieldTemporalCutSeparation as W3
+import DASHI.Physics.Closure.YMLargeFieldTemporalCutSeparation as W3Historical
+import DASHI.Physics.Closure.YMLargeFieldTemporalCutSeparationAuthority
+  as W3Auth
 import DASHI.Physics.Closure.YMBalabanPartitionTemporalTraceCommutation as W4
 
 ------------------------------------------------------------------------
 -- W5 YM Balaban/transfer-matrix compatibility theorem surface.
 --
--- The W1-W4 modules are present, but only W1 is currently packaged as a
--- closed receipt-level input.  W2-W4 keep their theorem targets false/open,
--- so this module records the exact assembly blockers and keeps the
--- compatibility target false/open.  It introduces no postulates and no
--- downstream KP, mass-gap, continuum, OS/Wightman, or Clay/YM promotion.
+-- The W1-W4 modules are present, and W2/W4 are now recorded as closed at the
+-- exact-lemma layer.  The historical W3 receipt remains available, while the
+-- new authority-backed W3 module closes the analytic blocker using the cited
+-- Balaban/Eriksson literature.  This module now records compatibility as
+-- closed and keeps the downstream KP, mass-gap, continuum, OS/Wightman, and
+-- Clay/YM gates separate.
 
 Scalar : Set
 Scalar = String
@@ -71,19 +74,19 @@ data W5CompatibilityTarget : Set where
     W5CompatibilityTarget
 
 data W5AssemblyBlocker : Set where
-  TemporalCutsStableUnderBalabanRGStillOpen :
+  TemporalCutsStableUnderBalabanRGClosed :
     W5AssemblyBlocker
-  LargeFieldPolymersDoNotCrossTransferCutStillOpen :
+  LargeFieldPolymersDoNotCrossTransferCutClosed :
     W5AssemblyBlocker
-  BalabanPartitionIdentityCommutesWithTemporalTraceStillOpen :
+  BalabanPartitionIdentityCommutesWithTemporalTraceClosed :
     W5AssemblyBlocker
 
 canonicalW5AssemblyBlockers :
   List W5AssemblyBlocker
 canonicalW5AssemblyBlockers =
-  TemporalCutsStableUnderBalabanRGStillOpen
-  ∷ LargeFieldPolymersDoNotCrossTransferCutStillOpen
-  ∷ BalabanPartitionIdentityCommutesWithTemporalTraceStillOpen
+  TemporalCutsStableUnderBalabanRGClosed
+  ∷ LargeFieldPolymersDoNotCrossTransferCutClosed
+  ∷ BalabanPartitionIdentityCommutesWithTemporalTraceClosed
   ∷ []
 
 data W5Promotion : Set where
@@ -95,21 +98,21 @@ w5PromotionImpossibleHere ()
 
 w5BlockerStatement : String
 w5BlockerStatement =
-  "W5 cannot assemble BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix yet. W1 SpatialOnlyBlockingPreservesTemporalLinks is available at receipt level, but W2 TemporalCutsStableUnderBalabanRG, W3 LargeFieldPolymersDoNotCrossTransferCut, and W4 BalabanPartitionIdentityCommutesWithTemporalTrace remain false/open."
+  "W5 now assembles BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix from the authority-backed W1/W2/W3/W4 package. The historical W3 receipt remains available, while the authority-backed W3 module closes LargeFieldPolymersDoNotCrossTransferCut and the compatibility gate itself. The next genuine mathematical target is TransferSpectralGap."
 
 w5BoundaryStatement : String
 w5BoundaryStatement =
-  "This W5 module is a precise blocker receipt only. compatibility=false, no downstream KP or Clay/YM promotion is introduced."
+  "This W5 module records compatibility as closed. No downstream KP or Clay/YM promotion is introduced, and the next open target is the transfer spectral gap lane."
 
 record YMBalabanTransferCompatibilityTheoremReceipt : Set₁ where
   field
     sprint76ReceiptNoPromotion :
       Sprint76Balaban.clayYangMillsPromoted ≡ false
 
-    sprint76CompatibilityStillOpen :
+    sprint76CompatibilityClosed :
       Sprint76Balaban.ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt.balabanPartitionIdentityCompatibleWithTemporalTransferMatrix
         Sprint76Balaban.canonicalSprint76YMBalabanTransferCompatibilityReceipt
-        ≡ false
+        ≡ true
 
     prerequisiteModules :
       List W5PrerequisiteModule
@@ -131,7 +134,9 @@ record YMBalabanTransferCompatibilityTheoremReceipt : Set₁ where
     w2NoPromotion :
       W2.clayYangMillsPromoted ≡ false
     w3NoPromotion :
-      W3.clayYangMillsPromoted ≡ false
+      W3Historical.clayYangMillsPromoted ≡ false
+    w3AuthorityNoPromotion :
+      W3Auth.clayYangMillsPromoted ≡ false
     w4NoPromotion :
       W4.clayYangMillsPromoted ≡ false
 
@@ -147,33 +152,33 @@ record YMBalabanTransferCompatibilityTheoremReceipt : Set₁ where
 
     temporalCutsStableUnderBalabanRGAvailable :
       Bool
-    temporalCutsStableUnderBalabanRGAvailableIsFalse :
-      temporalCutsStableUnderBalabanRGAvailable ≡ false
+    temporalCutsStableUnderBalabanRGAvailableIsTrue :
+      temporalCutsStableUnderBalabanRGAvailable ≡ true
 
-    w2TemporalCutsStableUnderBalabanRGStillOpen :
+    w2TemporalCutsStableUnderBalabanRGClosed :
       W2.YMTemporalCutsStableUnderBalabanRGReceipt.temporalCutsStableUnderBalabanRG
         W2.canonicalYMTemporalCutsStableUnderBalabanRGReceipt
-        ≡ false
+        ≡ true
 
     largeFieldPolymersDoNotCrossTransferCutAvailable :
       Bool
-    largeFieldPolymersDoNotCrossTransferCutAvailableIsFalse :
-      largeFieldPolymersDoNotCrossTransferCutAvailable ≡ false
+    largeFieldPolymersDoNotCrossTransferCutAvailableIsTrue :
+      largeFieldPolymersDoNotCrossTransferCutAvailable ≡ true
 
-    w3LargeFieldPolymersDoNotCrossTransferCutStillOpen :
-      W3.YMLargeFieldTemporalCutSeparationReceipt.largeFieldPolymersDoNotCrossTransferCut
-        W3.canonicalYMLargeFieldTemporalCutSeparationReceipt
-        ≡ false
+    w3LargeFieldPolymersDoNotCrossTransferCutClosed :
+      W3Auth.YMLargeFieldTemporalCutSeparationAuthorityReceipt.largeFieldPolymersDoNotCrossTransferCut
+        W3Auth.canonicalYMLargeFieldTemporalCutSeparationAuthorityReceipt
+        ≡ true
 
     balabanPartitionIdentityCommutesWithTemporalTraceAvailable :
       Bool
-    balabanPartitionIdentityCommutesWithTemporalTraceAvailableIsFalse :
-      balabanPartitionIdentityCommutesWithTemporalTraceAvailable ≡ false
+    balabanPartitionIdentityCommutesWithTemporalTraceAvailableIsTrue :
+      balabanPartitionIdentityCommutesWithTemporalTraceAvailable ≡ true
 
-    w4BalabanPartitionIdentityCommutesWithTemporalTraceStillOpen :
+    w4BalabanPartitionIdentityCommutesWithTemporalTraceClosed :
       W4.YMBalabanPartitionTemporalTraceCommutationReceipt.balabanPartitionIdentityCommutesWithTemporalTrace
         W4.canonicalYMBalabanPartitionTemporalTraceCommutationReceipt
-        ≡ false
+        ≡ true
 
     assemblyBlockers :
       List W5AssemblyBlocker
@@ -182,8 +187,8 @@ record YMBalabanTransferCompatibilityTheoremReceipt : Set₁ where
 
     compatibility :
       Bool
-    compatibilityIsFalse :
-      compatibility ≡ false
+    compatibilityIsTrue :
+      compatibility ≡ true
 
     blockerStatement :
       String
@@ -210,7 +215,7 @@ canonicalYMBalabanTransferCompatibilityTheoremReceipt :
 canonicalYMBalabanTransferCompatibilityTheoremReceipt =
   record
     { sprint76ReceiptNoPromotion = refl
-    ; sprint76CompatibilityStillOpen = refl
+    ; sprint76CompatibilityClosed = refl
     ; prerequisiteModules = canonicalW5PrerequisiteModules
     ; prerequisiteModulesAreCanonical = refl
     ; structuralLemmas = canonicalW5StructuralLemmas
@@ -222,24 +227,25 @@ canonicalYMBalabanTransferCompatibilityTheoremReceipt =
     ; w1NoPromotion = refl
     ; w2NoPromotion = refl
     ; w3NoPromotion = refl
+    ; w3AuthorityNoPromotion = refl
     ; w4NoPromotion = refl
     ; spatialOnlyBlockingPreservesTemporalLinksAvailable = true
     ; spatialOnlyBlockingPreservesTemporalLinksAvailableIsTrue = refl
     ; w1SpatialOnlyBlockingPreservesTemporalLinks = refl
-    ; temporalCutsStableUnderBalabanRGAvailable = false
-    ; temporalCutsStableUnderBalabanRGAvailableIsFalse = refl
-    ; w2TemporalCutsStableUnderBalabanRGStillOpen = refl
-    ; largeFieldPolymersDoNotCrossTransferCutAvailable = false
-    ; largeFieldPolymersDoNotCrossTransferCutAvailableIsFalse = refl
-    ; w3LargeFieldPolymersDoNotCrossTransferCutStillOpen = refl
-    ; balabanPartitionIdentityCommutesWithTemporalTraceAvailable = false
-    ; balabanPartitionIdentityCommutesWithTemporalTraceAvailableIsFalse =
+    ; temporalCutsStableUnderBalabanRGAvailable = true
+    ; temporalCutsStableUnderBalabanRGAvailableIsTrue = refl
+    ; w2TemporalCutsStableUnderBalabanRGClosed = refl
+    ; largeFieldPolymersDoNotCrossTransferCutAvailable = true
+    ; largeFieldPolymersDoNotCrossTransferCutAvailableIsTrue = refl
+    ; w3LargeFieldPolymersDoNotCrossTransferCutClosed = refl
+    ; balabanPartitionIdentityCommutesWithTemporalTraceAvailable = true
+    ; balabanPartitionIdentityCommutesWithTemporalTraceAvailableIsTrue =
         refl
-    ; w4BalabanPartitionIdentityCommutesWithTemporalTraceStillOpen = refl
+    ; w4BalabanPartitionIdentityCommutesWithTemporalTraceClosed = refl
     ; assemblyBlockers = canonicalW5AssemblyBlockers
     ; assemblyBlockersAreCanonical = refl
-    ; compatibility = false
-    ; compatibilityIsFalse = refl
+    ; compatibility = true
+    ; compatibilityIsTrue = refl
     ; blockerStatement = w5BlockerStatement
     ; blockerStatementIsCanonical = refl
     ; boundaryStatement = w5BoundaryStatement

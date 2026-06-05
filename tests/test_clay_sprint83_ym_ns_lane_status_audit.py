@@ -151,12 +151,11 @@ def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
     assert summary["ym_temporal_transfer_spatial_blocking_derived_sublemmas"] == [
         "SpatialBlockingPreservesTimeSlices",
         "SpatialBlockingPreservesTemporalBoundaryLinks",
-    ]
-    assert summary["ym_temporal_transfer_spatial_blocking_open_sublemmas"] == [
         "BlockedActionSeparatesTransferKernel",
         "BalabanPartitionIdentityCommutesWithTemporalTrace",
         "TransferHilbertSpaceCompatibleWithSpatialBlocking",
     ]
+    assert summary["ym_temporal_transfer_spatial_blocking_open_sublemmas"] == []
     assert summary["ym_blocked_action_transfer_kernel_required_inputs"] == [
         "ActionTermSectorTagComplete",
         "MixedPlaquettesAbsorbedIntoTransfer",
@@ -175,7 +174,7 @@ def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
     ]
     assert (
         summary["ym_blocked_action_transfer_kernel_next_gate"]
-        == "ExactBlockedActionTransferResidualSum"
+        == "LargeFieldPolymersDoNotCrossTransferCut"
     )
     assert summary["ns_kstar_hhalf_tail_next_gate"] == "QhpTailSmallnessAtDangerShell"
     assert summary["ns_kstar_hhalf_tail_obstruction_recorded"] is True
@@ -183,7 +182,7 @@ def test_combined_audit_records_next_open_gates(tmp_path: Path) -> None:
         summary[
             "ym_temporal_transfer_spatial_blocking_full_compatibility_derived_in_repo"
         ]
-        is False
+        is True
     )
     assert summary["ym_next_required_lattice_mass_gap_inputs"] == [
         "TemporalTransferMatrixSpatialBlockingCompatibility",

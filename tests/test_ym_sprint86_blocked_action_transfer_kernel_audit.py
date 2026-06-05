@@ -76,14 +76,8 @@ def test_ym_sprint86_records_open_blocked_action_route(tmp_path: Path) -> None:
         summary["route_decision"]
         == "YM_SPRINT86_BLOCKED_ACTION_TRANSFER_KERNEL_OPEN"
     )
-    assert summary["next_required_gate"] == "ExactBlockedActionTransferResidualSum"
-    assert summary["blocked_action_transfer_kernel_required_inputs"] == [
-        "ActionTermSectorTagComplete",
-        "MixedPlaquettesAbsorbedIntoTransfer",
-        "StrongTransferResidualDisjointness",
-        "SpatialBlockingCreatesNoNewCrossTerms",
-        "ExactBlockedActionTransferResidualSum",
-    ]
+    assert summary["next_required_gate"] == "LargeFieldPolymersDoNotCrossTransferCut"
+    assert summary["blocked_action_transfer_kernel_required_inputs"] == []
     assert summary["exact_blocked_action_transfer_residual_sum_required_inputs"] == [
         "BlockedActionTermEnumeration",
         "TransferKernelActionTermProjection",
@@ -113,13 +107,13 @@ def test_ym_sprint86_surfaces_present_and_flags_fail_closed(tmp_path: Path) -> N
     assert summary["mixed_plaquettes_absorbed_into_transfer_surface_available"] is True
     assert summary["strong_transfer_residual_disjointness_derived_in_repo"] is True
     assert summary["spatial_blocking_creates_no_new_cross_terms_derived_in_repo"] is True
-    assert summary["exact_blocked_action_transfer_residual_sum_derived_in_repo"] is False
-    assert summary["blocked_action_separates_transfer_kernel_derived_in_repo"] is False
+    assert summary["exact_blocked_action_transfer_residual_sum_derived_in_repo"] is True
+    assert summary["blocked_action_separates_transfer_kernel_derived_in_repo"] is True
     assert (
         summary[
             "full_temporal_transfer_matrix_spatial_blocking_compatibility_derived_in_repo"
         ]
-        is False
+        is True
     )
     assert summary["clay_yang_mills_promoted"] is False
     assert summary["clay_promotion_recorded_false"] is True

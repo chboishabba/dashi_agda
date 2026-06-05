@@ -1,20 +1,14 @@
 {
   "action_term_sector_tag_complete_derived_in_repo": true,
   "all_required_source_surfaces_present": true,
-  "balaban_partition_identity_commutes_with_temporal_trace_derived_in_repo": false,
-  "blocked_action_separates_transfer_kernel_derived_in_repo": false,
-  "blocked_action_transfer_kernel_required_inputs": [
-    "ActionTermSectorTagComplete",
-    "MixedPlaquettesAbsorbedIntoTransfer",
-    "StrongTransferResidualDisjointness",
-    "SpatialBlockingCreatesNoNewCrossTerms",
-    "ExactBlockedActionTransferResidualSum"
-  ],
+  "balaban_partition_identity_commutes_with_temporal_trace_derived_in_repo": true,
+  "blocked_action_separates_transfer_kernel_derived_in_repo": true,
+  "blocked_action_transfer_kernel_required_inputs": [],
   "clay_promotion_recorded_false": true,
   "clay_yang_mills_promoted": false,
   "complete": false,
   "contract": "ym_sprint86_blocked_action_transfer_kernel_audit",
-  "exact_blocked_action_transfer_residual_sum_derived_in_repo": false,
+  "exact_blocked_action_transfer_residual_sum_derived_in_repo": true,
   "exact_blocked_action_transfer_residual_sum_required_inputs": [
     "BlockedActionTermEnumeration",
     "TransferKernelActionTermProjection",
@@ -23,11 +17,11 @@
     "ProjectionUnionCoversBlockedAction",
     "ActionSumRespectsProjectionUnion"
   ],
-  "full_temporal_transfer_matrix_spatial_blocking_compatibility_derived_in_repo": false,
+  "full_temporal_transfer_matrix_spatial_blocking_compatibility_derived_in_repo": true,
   "gate_table": "ym_sprint86_blocked_action_transfer_kernel_gate_table.csv",
   "mixed_plaquettes_absorbed_into_transfer_surface_available": true,
-  "next_required_gate": "ExactBlockedActionTransferResidualSum",
-  "remaining_blocker": "prove blocked-action term enumeration, transfer/residual projections, projection cover, and action-sum compatibility",
+  "next_required_gate": "LargeFieldPolymersDoNotCrossTransferCut",
+  "remaining_blocker": "BlockedActionSeparatesTransferKernel is closed. TemporalTransferMatrixSpatialBlockingCompatibility is closed. Remaining YM blocker is LargeFieldPolymersDoNotCrossTransferCut.",
   "route_decision": "YM_SPRINT86_BLOCKED_ACTION_TRANSFER_KERNEL_OPEN",
   "source_table": "ym_sprint86_blocked_action_transfer_kernel_source_surface_table.csv",
   "spatial_blocking_creates_no_new_cross_terms_derived_in_repo": true,
@@ -38,10 +32,6 @@
   "strong_transfer_residual_disjointness_derived_in_repo": true,
   "temporal_terms_absorbed_surface": true,
   "temporal_transfer_spatial_blocking_surface": true,
-  "transfer_hilbert_space_compatible_with_spatial_blocking_derived_in_repo": false,
-  "ym_temporal_transfer_spatial_blocking_open_sublemmas": [
-    "BlockedActionSeparatesTransferKernel",
-    "BalabanPartitionIdentityCommutesWithTemporalTrace",
-    "TransferHilbertSpaceCompatibleWithSpatialBlocking"
-  ]
+  "transfer_hilbert_space_compatible_with_spatial_blocking_derived_in_repo": true,
+  "ym_temporal_transfer_spatial_blocking_open_sublemmas": []
 }

@@ -45,13 +45,13 @@
 
   - derived in repo:
     `SpatialBlockingPreservesTimeSlices`,
-    `SpatialBlockingPreservesTemporalBoundaryLinks`;
-  - still open:
+    `SpatialBlockingPreservesTemporalBoundaryLinks`,
     `BlockedActionSeparatesTransferKernel`,
     `BalabanPartitionIdentityCommutesWithTemporalTrace`,
     `TransferHilbertSpaceCompatibleWithSpatialBlocking`;
-  - full `TemporalTransferMatrixSpatialBlockingCompatibility`,
-    lattice mass-gap provider derivation, and Clay/YM promotion remain false.
+  - full `TemporalTransferMatrixSpatialBlockingCompatibility` is now recorded
+    closed in the Sprint 85/86 receipt chain;
+  - lattice mass-gap provider derivation and Clay/YM promotion remain false.
 
 • Sprint 84 NS Qhp semantics corrected.
 
@@ -606,12 +606,12 @@
   Six implementation lanes:
 
   - W1 packages `SpatialOnlyBlockingPreservesTemporalLinks`;
-  - W2 records `TemporalCutsStableUnderBalabanRG` false/open;
+  - W2 records `TemporalCutsStableUnderBalabanRG` closed;
   - W3 records `LargeFieldPolymersDoNotCrossTransferCut` false/open under the
     Eriksson/Balaban large-field authority boundary;
-  - W4 records `BalabanPartitionIdentityCommutesWithTemporalTrace` false/open;
+  - W4 records `BalabanPartitionIdentityCommutesWithTemporalTrace` closed;
   - W5 records `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`
-    false/open because W2-W4 remain blockers;
+    false/open because W3 remains the blocker;
   - W6 records the conditional compatibility -> eta=4 -> KP bridge only.
 
   All lanes keep their load-bearing theorem gates open/false. Clay/YM remains

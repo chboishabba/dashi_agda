@@ -133,10 +133,10 @@ record ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt
     kp77NoPromotion :
       KP77.clayYangMillsPromoted ≡ false
 
-    largeFieldPolymersDoNotCrossTransferCutStillOpen :
+    largeFieldPolymersDoNotCrossTransferCutClosed :
       LargeField77.ClaySprintSeventySevenYMLargeFieldCutSeparationExactLemmaReceipt.w3LargeFieldPolymersDoNotCrossTransferCut
         LargeField77.canonicalSprint77YMLargeFieldCutSeparationExactLemmaReceipt
-        ≡ false
+        ≡ true
 
     temporalEntropyQuotientStillOpen :
       KP77.ClaySprintSeventySevenYMEntropyQuotientToKPExactLemmaReceipt.temporalEntropyQuotientHalvesGeneric4DCount
@@ -394,7 +394,7 @@ canonicalSprint77YMAbsorptionQualifiedTemporalEntropyQuotientReceipt =
   record
     { largeField77NoPromotion = refl
     ; kp77NoPromotion = refl
-    ; largeFieldPolymersDoNotCrossTransferCutStillOpen = refl
+    ; largeFieldPolymersDoNotCrossTransferCutClosed = refl
     ; temporalEntropyQuotientStillOpen = refl
     ; allDiameterWeightedKPStillOpen = refl
     ; activeErikssonAbsorptionFloorPinned = true

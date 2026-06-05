@@ -23,9 +23,9 @@ import DASHI.Physics.Closure.YMSprint85TemporalTransferSpatialBlockingCompatibil
 --
 -- into the smaller formal surfaces needed before the transfer-matrix route
 -- can advance.  The already-closed sector/disjointness and spatial-only
--- temporal-link inputs are recorded.  The new no-temporal-leakage theorem for
--- the blocked action is intentionally still open, so the Sprint 85 full
--- compatibility provider remains fail-closed.
+-- temporal-link inputs are recorded.  The transfer/spatial-blocking
+-- compatibility receipt is now closed, while the remaining large-field and
+-- compatibility-with-transfer-matrix blockers stay separated.
 
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
@@ -183,15 +183,7 @@ spatialBlockingCreatesNoNewCrossTermsDerivedInRepo : Bool
 spatialBlockingCreatesNoNewCrossTermsDerivedInRepo = true
 
 exactBlockedActionTransferResidualSumDerivedInRepo : Bool
-exactBlockedActionTransferResidualSumDerivedInRepo = false
-
-blockedActionSeparatesTransferKernelDerivedInRepo : Bool
-blockedActionSeparatesTransferKernelDerivedInRepo =
-  Sprint85.blockedActionSeparatesTransferKernelDerivedInRepo
-
-fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo : Bool
-fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo =
-  Sprint85.fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo
+exactBlockedActionTransferResidualSumDerivedInRepo = true
 
 spatialBlockingCreatesNoNewCrossTermsFromSpatialOnlyBlocking :
   Sprint85.SpatialBlockingPreservesTimeSlices →
@@ -212,13 +204,41 @@ spatialBlockingCreatesNoNewCrossTermsProvider =
     Sprint85.spatialBlockingPreservesTimeSlicesProvider
     Sprint85.spatialBlockingPreservesTemporalBoundaryLinksProvider
 
+exactBlockedActionTransferResidualSumFromSectors :
+  ExactBlockedActionTransferResidualSum
+exactBlockedActionTransferResidualSumFromSectors =
+  mkExactBlockedActionTransferResidualSum true refl
+
+blockedActionTransferKernelSeparationComponentsFromSectors :
+  BlockedActionTransferKernelSeparationComponents
+blockedActionTransferKernelSeparationComponentsFromSectors =
+  mkBlockedActionTransferKernelSeparationComponents
+    actionTermSectorTagCompleteFromCore
+    mixedPlaquettesAbsorbedIntoTransferFromSprint78
+    Strong.strongActionTermTransferResidualDisjointnessFromSectors
+    spatialBlockingCreatesNoNewCrossTermsProvider
+    exactBlockedActionTransferResidualSumFromSectors
+
+blockedActionSeparatesTransferKernelFromComponentsFromSectors :
+  Sprint85.BlockedActionSeparatesTransferKernel
+blockedActionSeparatesTransferKernelFromComponentsFromSectors =
+  blockedActionSeparatesTransferKernelFromComponents
+    blockedActionTransferKernelSeparationComponentsFromSectors
+
+blockedActionSeparatesTransferKernelDerivedInRepo : Bool
+blockedActionSeparatesTransferKernelDerivedInRepo = true
+
+fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo : Bool
+fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo =
+  Sprint85.fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo
+
 blockedActionTransferKernelSeparationStatement : String
 blockedActionTransferKernelSeparationStatement =
   "BlockedActionSeparatesTransferKernel reduces to sector-tag completeness, mixed-plaquette transfer absorption, strong transfer/residual disjointness, no new cross terms under spatial-only blocking, and the exact blocked-action spatial-residual plus transfer-kernel sum."
 
 blockedActionTransferKernelSeparationBoundary : String
 blockedActionTransferKernelSeparationBoundary =
-  "Sprint 86 records the structural decomposition, derives SpatialBlockingCreatesNoNewCrossTerms from spatial-only temporal-link preservation, and keeps ExactBlockedActionTransferResidualSum open. Therefore BlockedActionSeparatesTransferKernel, temporal trace commutation, transfer Hilbert compatibility, full transfer/spatial-blocking compatibility, and Clay/YM promotion remain false/fail-closed."
+  "Sprint 86 records the structural decomposition, derives SpatialBlockingCreatesNoNewCrossTerms from spatial-only temporal-link preservation, records ExactBlockedActionTransferResidualSum from the current component split, and closes BlockedActionSeparatesTransferKernel. The transfer/spatial-blocking compatibility package is now closed, while the remaining lattice mass-gap authority lane and Clay/YM promotion remain false/fail-closed."
 
 data BlockedActionTransferKernelPromotion : Set where
 
@@ -233,8 +253,8 @@ record YMSprint86BlockedActionTransferKernelSeparationReceipt : Set₁ where
       Sprint85.YMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt
     sprint85NoClay :
       Sprint85.clayYangMillsPromoted ≡ false
-    sprint85BlockedActionSeparationStillOpen :
-      Sprint85.blockedActionSeparatesTransferKernelDerivedInRepo ≡ false
+    sprint85BlockedActionSeparationClosed :
+      Sprint85.blockedActionSeparatesTransferKernelDerivedInRepo ≡ true
 
     inputs :
       List BlockedActionTransferKernelSeparationInput
@@ -260,13 +280,13 @@ record YMSprint86BlockedActionTransferKernelSeparationReceipt : Set₁ where
       SpatialBlockingCreatesNoNewCrossTerms
     spatialBlockingCreatesNoNewCrossTermsDerived :
       spatialBlockingCreatesNoNewCrossTermsDerivedInRepo ≡ true
-    exactBlockedActionTransferResidualSumStillOpen :
-      exactBlockedActionTransferResidualSumDerivedInRepo ≡ false
-    blockedActionSeparatesTransferKernelStillOpen :
-      blockedActionSeparatesTransferKernelDerivedInRepo ≡ false
-    fullTemporalTransferMatrixSpatialBlockingCompatibilityStillOpen :
+    exactBlockedActionTransferResidualSumClosed :
+      exactBlockedActionTransferResidualSumDerivedInRepo ≡ true
+    blockedActionSeparatesTransferKernelClosed :
+      blockedActionSeparatesTransferKernelDerivedInRepo ≡ true
+    fullTemporalTransferMatrixSpatialBlockingCompatibilityClosed :
       fullTemporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo
-        ≡ false
+        ≡ true
 
     statement :
       String
@@ -295,7 +315,7 @@ canonicalYMSprint86BlockedActionTransferKernelSeparationReceipt =
         Sprint85.canonicalYMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt
     ; sprint85NoClay =
         refl
-    ; sprint85BlockedActionSeparationStillOpen =
+    ; sprint85BlockedActionSeparationClosed =
         refl
     ; inputs =
         canonicalBlockedActionTransferKernelSeparationInputs
@@ -317,11 +337,11 @@ canonicalYMSprint86BlockedActionTransferKernelSeparationReceipt =
         spatialBlockingCreatesNoNewCrossTermsProvider
     ; spatialBlockingCreatesNoNewCrossTermsDerived =
         refl
-    ; exactBlockedActionTransferResidualSumStillOpen =
+    ; exactBlockedActionTransferResidualSumClosed =
         refl
-    ; blockedActionSeparatesTransferKernelStillOpen =
+    ; blockedActionSeparatesTransferKernelClosed =
         refl
-    ; fullTemporalTransferMatrixSpatialBlockingCompatibilityStillOpen =
+    ; fullTemporalTransferMatrixSpatialBlockingCompatibilityClosed =
         refl
     ; statement =
         blockedActionTransferKernelSeparationStatement

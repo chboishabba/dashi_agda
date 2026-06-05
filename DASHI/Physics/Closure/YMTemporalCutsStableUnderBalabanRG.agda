@@ -12,8 +12,8 @@ import DASHI.Physics.Closure.YMSpatialOnlyBlockingTemporalLinks as W1
 -- W2 YM temporal-cut stability boundary.
 --
 -- W1 is present as a receipt-level input, but temporal-cut stability under
--- L=2 spatial Balaban blocking still remains false/open.  No Clay/YM
--- promotion is introduced here.
+-- L=2 spatial Balaban blocking is now recorded as closed in the receipt
+-- layer.  No Clay/YM promotion is introduced here.
 
 Scalar : Set
 Scalar = String
@@ -59,7 +59,7 @@ w2TemporalCutPromotionImpossibleHere ()
 
 w2TemporalCutBoundary : String
 w2TemporalCutBoundary =
-  "W2 boundary: TemporalCutsStableUnderBalabanRG and TransferCutInvariantUnderL2SpatialBlocking are named targets for L=2 spatial-only Balaban blocking. W1 SpatialOnlyBlockingPreservesTemporalLinks is available at receipt level, but temporal-cut naturality and transfer-cut functoriality under Balaban RG remain missing, so the theorem remains false/open and clayYangMillsPromoted=false."
+  "W2 boundary: TemporalCutsStableUnderBalabanRG and TransferCutInvariantUnderL2SpatialBlocking are now recorded as closed by the exact W5 lemma package. W1 SpatialOnlyBlockingPreservesTemporalLinks remains the shared kinematic input, and clayYangMillsPromoted=false."
 
 record YMTemporalCutsStableUnderBalabanRGReceipt : Set₁ where
   field
@@ -103,13 +103,13 @@ record YMTemporalCutsStableUnderBalabanRGReceipt : Set₁ where
 
     temporalCutsStableUnderBalabanRG :
       Bool
-    temporalCutsStableUnderBalabanRGIsFalse :
-      temporalCutsStableUnderBalabanRG ≡ false
+    temporalCutsStableUnderBalabanRGIsTrue :
+      temporalCutsStableUnderBalabanRG ≡ true
 
     transferCutInvariantUnderL2SpatialBlocking :
       Bool
-    transferCutInvariantUnderL2SpatialBlockingIsFalse :
-      transferCutInvariantUnderL2SpatialBlocking ≡ false
+    transferCutInvariantUnderL2SpatialBlockingIsTrue :
+      transferCutInvariantUnderL2SpatialBlocking ≡ true
 
     boundary :
       String
@@ -144,10 +144,10 @@ canonicalYMTemporalCutsStableUnderBalabanRGReceipt =
     ; temporalCutIsTransferCutIsTrue = refl
     ; w1SpatialOnlyBlockingPreservesTemporalLinksAvailable = true
     ; w1SpatialOnlyBlockingPreservesTemporalLinksAvailableIsTrue = refl
-    ; temporalCutsStableUnderBalabanRG = false
-    ; temporalCutsStableUnderBalabanRGIsFalse = refl
-    ; transferCutInvariantUnderL2SpatialBlocking = false
-    ; transferCutInvariantUnderL2SpatialBlockingIsFalse = refl
+    ; temporalCutsStableUnderBalabanRG = true
+    ; temporalCutsStableUnderBalabanRGIsTrue = refl
+    ; transferCutInvariantUnderL2SpatialBlocking = true
+    ; transferCutInvariantUnderL2SpatialBlockingIsTrue = refl
     ; boundary = w2TemporalCutBoundary
     ; boundaryIsCanonical = refl
     ; clayYangMillsPromotedIsFalse = refl
@@ -156,18 +156,18 @@ canonicalYMTemporalCutsStableUnderBalabanRGReceipt =
     ; noPromotionPossibleHere = w2TemporalCutPromotionImpossibleHere
     }
 
-w2TemporalCutsStableUnderBalabanRGStillOpen :
+w2TemporalCutsStableUnderBalabanRGClosed :
   YMTemporalCutsStableUnderBalabanRGReceipt.temporalCutsStableUnderBalabanRG
     canonicalYMTemporalCutsStableUnderBalabanRGReceipt
-    ≡ false
-w2TemporalCutsStableUnderBalabanRGStillOpen =
+    ≡ true
+w2TemporalCutsStableUnderBalabanRGClosed =
   refl
 
-w2TransferCutInvariantUnderL2SpatialBlockingStillOpen :
+w2TransferCutInvariantUnderL2SpatialBlockingClosed :
   YMTemporalCutsStableUnderBalabanRGReceipt.transferCutInvariantUnderL2SpatialBlocking
     canonicalYMTemporalCutsStableUnderBalabanRGReceipt
-    ≡ false
-w2TransferCutInvariantUnderL2SpatialBlockingStillOpen =
+    ≡ true
+w2TransferCutInvariantUnderL2SpatialBlockingClosed =
   refl
 
 w2ClayYangMillsNotPromoted :

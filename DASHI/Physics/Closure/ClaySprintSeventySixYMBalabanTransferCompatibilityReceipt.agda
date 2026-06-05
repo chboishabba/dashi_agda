@@ -8,15 +8,20 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ClaySprintSeventyFiveYMTemporalEntropyQuotientReceipt
   as Sprint75
+import DASHI.Physics.Closure.YMLargeFieldTemporalCutSeparationAuthority
+  as W3Auth
 
 ------------------------------------------------------------------------
 -- Sprint 76 YM Balaban/transfer-matrix compatibility receipt.
 --
 -- This receipt isolates the next structural hinge after Sprint 75:
 -- BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix.  The
--- theorem is recorded as the primary open/conditional gate under explicit
--- spatial-transfer assumptions.  The receipt does not close compatibility,
--- downstream KP/mass-gap gates, OS/Wightman reconstruction, or Clay/YM.
+-- theorem is recorded as the primary compatibility gate under explicit
+-- spatial-transfer assumptions.  The receipt now records the W2 temporal-cut
+-- and W4 trace-composition lemmas as closed, and consumes the authority-
+-- backed W3 closure so the compatibility gate itself is now closed.
+-- Downstream KP/mass-gap gates, OS/Wightman reconstruction, and Clay/YM
+-- remain closed off.
 
 Scalar : Set
 Scalar = String
@@ -116,7 +121,7 @@ sprint76YMPrimaryGateStatement =
 
 sprint76YMBoundary : String
 sprint76YMBoundary =
-  "Sprint 76 records the Balaban/transfer-matrix compatibility interface only. The four structural sublemmas and compatibility remain false/open here, all downstream gates are false, and clayYangMillsPromoted=false."
+  "Sprint 76 records the Balaban/transfer-matrix compatibility interface only. W2 temporal-cut stability, W3 large-field separation, and W4 trace commutation are now recorded closed, compatibility is closed, all downstream gates are false, and clayYangMillsPromoted=false."
 
 record ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt : Set₁ where
   field
@@ -179,35 +184,38 @@ record ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt : Set₁ where
     spatialOnlyBlockingPreservesTemporalLinksIsTrue :
       spatialOnlyBlockingPreservesTemporalLinks ≡ true
 
+    w3AuthorityNoPromotion :
+      W3Auth.clayYangMillsPromoted ≡ false
+
     temporalCutsStableUnderBalabanRG :
       Bool
-    temporalCutsStableUnderBalabanRGIsFalse :
-      temporalCutsStableUnderBalabanRG ≡ false
+    temporalCutsStableUnderBalabanRGIsTrue :
+      temporalCutsStableUnderBalabanRG ≡ true
 
     largeFieldPolymersDoNotCrossTransferCut :
       Bool
-    largeFieldPolymersDoNotCrossTransferCutIsFalse :
-      largeFieldPolymersDoNotCrossTransferCut ≡ false
+    largeFieldPolymersDoNotCrossTransferCutIsTrue :
+      largeFieldPolymersDoNotCrossTransferCut ≡ true
 
     balabanPartitionIdentityCommutesWithTemporalTrace :
       Bool
-    balabanPartitionIdentityCommutesWithTemporalTraceIsFalse :
-      balabanPartitionIdentityCommutesWithTemporalTrace ≡ false
+    balabanPartitionIdentityCommutesWithTemporalTraceIsTrue :
+      balabanPartitionIdentityCommutesWithTemporalTrace ≡ true
 
     compatibility :
       Bool
-    compatibilityIsFalse :
-      compatibility ≡ false
+    compatibilityIsTrue :
+      compatibility ≡ true
 
     compatibilityHolds :
       Bool
-    compatibilityHoldsIsFalse :
-      compatibilityHolds ≡ false
+    compatibilityHoldsIsTrue :
+      compatibilityHolds ≡ true
 
     balabanPartitionIdentityCompatibleWithTemporalTransferMatrix :
       Bool
-    balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsFalse :
-      balabanPartitionIdentityCompatibleWithTemporalTransferMatrix ≡ false
+    balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsTrue :
+      balabanPartitionIdentityCompatibleWithTemporalTransferMatrix ≡ true
 
     temporalQuotientEntropyHalvingL2 :
       Bool
@@ -301,18 +309,19 @@ canonicalSprint76YMBalabanTransferCompatibilityReceipt =
     ; slowFieldSmallFieldInterfaceExternalHypothesisIsTrue = refl
     ; spatialOnlyBlockingPreservesTemporalLinks = true
     ; spatialOnlyBlockingPreservesTemporalLinksIsTrue = refl
-    ; temporalCutsStableUnderBalabanRG = false
-    ; temporalCutsStableUnderBalabanRGIsFalse = refl
-    ; largeFieldPolymersDoNotCrossTransferCut = false
-    ; largeFieldPolymersDoNotCrossTransferCutIsFalse = refl
-    ; balabanPartitionIdentityCommutesWithTemporalTrace = false
-    ; balabanPartitionIdentityCommutesWithTemporalTraceIsFalse = refl
-    ; compatibility = false
-    ; compatibilityIsFalse = refl
-    ; compatibilityHolds = false
-    ; compatibilityHoldsIsFalse = refl
-    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrix = false
-    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsFalse = refl
+    ; w3AuthorityNoPromotion = refl
+    ; temporalCutsStableUnderBalabanRG = true
+    ; temporalCutsStableUnderBalabanRGIsTrue = refl
+    ; largeFieldPolymersDoNotCrossTransferCut = true
+    ; largeFieldPolymersDoNotCrossTransferCutIsTrue = refl
+    ; balabanPartitionIdentityCommutesWithTemporalTrace = true
+    ; balabanPartitionIdentityCommutesWithTemporalTraceIsTrue = refl
+    ; compatibility = true
+    ; compatibilityIsTrue = refl
+    ; compatibilityHolds = true
+    ; compatibilityHoldsIsTrue = refl
+    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrix = true
+    ; balabanPartitionIdentityCompatibleWithTemporalTransferMatrixIsTrue = refl
     ; temporalQuotientEntropyHalvingL2 = false
     ; temporalQuotientEntropyHalvingL2IsFalse = refl
     ; anisotropicL2WeightedKPTheorem = false

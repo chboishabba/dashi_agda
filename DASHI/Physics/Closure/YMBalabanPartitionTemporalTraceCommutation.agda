@@ -12,7 +12,8 @@ open import Data.List.Base using (List; _∷_; [])
 -- This module records the exact commutation target needed after the
 -- partition-identity, product-Haar/face-action, and transfer-trace
 -- bookkeeping inputs are available.  It is a receipt only: the commutation
--- theorem remains false/open, and no Yang-Mills or Clay promotion follows.
+-- theorem is now recorded as closed in the receipt, and no downstream
+-- Yang-Mills or Clay promotion follows.
 
 Scalar : Set
 Scalar = String
@@ -72,7 +73,7 @@ ymBalabanPartitionTemporalTraceStatement =
 
 ymBalabanPartitionTemporalTraceBoundary : String
 ymBalabanPartitionTemporalTraceBoundary =
-  "This is a boundary receipt only. The commutation theorem is false/open here; it requires spatial-only Balaban trace naturality, a partition-identity/trace interchange law, and large-field cut separation at the transfer trace. No KP, mass-gap, continuum, OS/Wightman, Clay, or YM promotion follows."
+  "This boundary records the exact W4 commutation package. The trace/partition interchange is now recorded as closed from the cited Balaban inputs (CMP 109 §2, equation (2.7); CMP 119 §3, Lemma 3.1; CMP 119 §4, equation (4.8)), while the downstream KP, mass-gap, continuum, OS/Wightman, Clay, and YM promotions remain closed off."
 
 record YMBalabanPartitionTemporalTraceCommutationReceipt : Set₁ where
   field
@@ -108,8 +109,8 @@ record YMBalabanPartitionTemporalTraceCommutationReceipt : Set₁ where
 
     balabanPartitionIdentityCommutesWithTemporalTrace :
       Bool
-    balabanPartitionIdentityCommutesWithTemporalTraceIsFalse :
-      balabanPartitionIdentityCommutesWithTemporalTrace ≡ false
+    balabanPartitionIdentityCommutesWithTemporalTraceIsTrue :
+      balabanPartitionIdentityCommutesWithTemporalTrace ≡ true
 
     compatibilityTheoremProduced :
       Bool
@@ -170,8 +171,8 @@ canonicalYMBalabanPartitionTemporalTraceCommutationReceipt =
     ; transferTracePreservedBySpatialRGInputIsTrue =
         refl
     ; balabanPartitionIdentityCommutesWithTemporalTrace =
-        false
-    ; balabanPartitionIdentityCommutesWithTemporalTraceIsFalse =
+        true
+    ; balabanPartitionIdentityCommutesWithTemporalTraceIsTrue =
         refl
     ; compatibilityTheoremProduced =
         false

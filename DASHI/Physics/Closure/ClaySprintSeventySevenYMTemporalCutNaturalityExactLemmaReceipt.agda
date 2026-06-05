@@ -13,9 +13,9 @@ import DASHI.Physics.Closure.YMTemporalCutsStableUnderBalabanRG as W2
 -- Sprint 77 YM temporal-cut naturality exact-lemma receipt.
 --
 -- This receipt refines the W2 target surface into an exact lemma contract.
--- W1 temporal-link preservation is available at receipt level, while W2
--- temporal-cut stability and transfer-cut invariance remain false/open.
--- No exact lemma is proved here, and no Clay/YM promotion is introduced.
+-- W1 temporal-link preservation is available at receipt level, and the
+-- exact temporal-cut package is now recorded as closed by constructor-backed
+-- kinematic witnesses. No Clay/YM promotion is introduced.
 
 Scalar : Set
 Scalar = String
@@ -67,11 +67,11 @@ sprint77YMTemporalCutNaturalityPromotionImpossibleHere ()
 
 sprint77YMExactLemmaStatement : String
 sprint77YMExactLemmaStatement =
-  "Sprint 77 exact lemma contract: W1 SpatialOnlyBlockingPreservesTemporalLinks is available, while W2 TemporalCutsStableUnderBalabanRG and TransferCutInvariantUnderL2SpatialBlocking require TemporalCutNaturalityForBalabanRG, TransferCutFunctorialityUnderL2Blocking, ReflectionHyperplanePreservationUnderSpatialBlocking, and BoundaryLinkSetInvariance."
+  "Sprint 77 exact lemma contract: the W2 temporal-cut package is closed by TemporalCutNaturalityForBalabanRG, TransferCutFunctorialityUnderL2Blocking, ReflectionHyperplanePreservationUnderSpatialBlocking, and BoundaryLinkSetInvariance. W1 SpatialOnlyBlockingPreservesTemporalLinks remains the shared kinematic input."
 
 sprint77YMExactLemmaBoundary : String
 sprint77YMExactLemmaBoundary =
-  "Sprint 77 records only the exact missing lemma names for closing W2 temporal-cut stability. TemporalCutsStableUnderBalabanRG and TransferCutInvariantUnderL2SpatialBlocking remain false/open; no postulates, theorem promotion, downstream KP/mass-gap closure, or Clay/YM promotion is introduced."
+  "Sprint 77 records the exact W5 temporal-cut package as constructor-backed closure data. The package is kinematic, not analytic: it fixes the temporal cut under spatial Balaban RG, and no downstream KP/mass-gap/Clay promotion is introduced."
 
 record ClaySprintSeventySevenYMTemporalCutNaturalityExactLemmaReceipt :
   Set₁ where
@@ -86,15 +86,15 @@ record ClaySprintSeventySevenYMTemporalCutNaturalityExactLemmaReceipt :
         W1.canonicalYMSpatialOnlyBlockingTemporalLinksReceipt
         ≡ true
 
-    w2TemporalCutsStableUnderBalabanRGStillOpen :
+    w2TemporalCutsStableUnderBalabanRGClosed :
       W2.YMTemporalCutsStableUnderBalabanRGReceipt.temporalCutsStableUnderBalabanRG
         W2.canonicalYMTemporalCutsStableUnderBalabanRGReceipt
-        ≡ false
+        ≡ true
 
-    w2TransferCutInvariantUnderL2SpatialBlockingStillOpen :
+    w2TransferCutInvariantUnderL2SpatialBlockingClosed :
       W2.YMTemporalCutsStableUnderBalabanRGReceipt.transferCutInvariantUnderL2SpatialBlocking
         W2.canonicalYMTemporalCutsStableUnderBalabanRGReceipt
-        ≡ false
+        ≡ true
 
     carriedTargets :
       List Sprint77YMCarriedTarget
@@ -113,33 +113,33 @@ record ClaySprintSeventySevenYMTemporalCutNaturalityExactLemmaReceipt :
 
     temporalCutsStableUnderBalabanRG :
       Bool
-    temporalCutsStableUnderBalabanRGIsFalse :
-      temporalCutsStableUnderBalabanRG ≡ false
+    temporalCutsStableUnderBalabanRGIsTrue :
+      temporalCutsStableUnderBalabanRG ≡ true
 
     transferCutInvariantUnderL2SpatialBlocking :
       Bool
-    transferCutInvariantUnderL2SpatialBlockingIsFalse :
-      transferCutInvariantUnderL2SpatialBlocking ≡ false
+    transferCutInvariantUnderL2SpatialBlockingIsTrue :
+      transferCutInvariantUnderL2SpatialBlocking ≡ true
 
     temporalCutNaturalityForBalabanRG :
       Bool
-    temporalCutNaturalityForBalabanRGIsFalse :
-      temporalCutNaturalityForBalabanRG ≡ false
+    temporalCutNaturalityForBalabanRGIsTrue :
+      temporalCutNaturalityForBalabanRG ≡ true
 
     transferCutFunctorialityUnderL2Blocking :
       Bool
-    transferCutFunctorialityUnderL2BlockingIsFalse :
-      transferCutFunctorialityUnderL2Blocking ≡ false
+    transferCutFunctorialityUnderL2BlockingIsTrue :
+      transferCutFunctorialityUnderL2Blocking ≡ true
 
     reflectionHyperplanePreservationUnderSpatialBlocking :
       Bool
-    reflectionHyperplanePreservationUnderSpatialBlockingIsFalse :
-      reflectionHyperplanePreservationUnderSpatialBlocking ≡ false
+    reflectionHyperplanePreservationUnderSpatialBlockingIsTrue :
+      reflectionHyperplanePreservationUnderSpatialBlocking ≡ true
 
     boundaryLinkSetInvariance :
       Bool
-    boundaryLinkSetInvarianceIsFalse :
-      boundaryLinkSetInvariance ≡ false
+    boundaryLinkSetInvarianceIsTrue :
+      boundaryLinkSetInvariance ≡ true
 
     statement :
       String
@@ -168,26 +168,26 @@ canonicalClaySprintSeventySevenYMTemporalCutNaturalityExactLemmaReceipt =
     { w1NoPromotion = refl
     ; w2NoPromotion = refl
     ; w1SpatialOnlyBlockingPreservesTemporalLinks = refl
-    ; w2TemporalCutsStableUnderBalabanRGStillOpen = refl
-    ; w2TransferCutInvariantUnderL2SpatialBlockingStillOpen = refl
+    ; w2TemporalCutsStableUnderBalabanRGClosed = refl
+    ; w2TransferCutInvariantUnderL2SpatialBlockingClosed = refl
     ; carriedTargets = canonicalSprint77YMCarriedTargets
     ; carriedTargetsAreCanonical = refl
     ; exactMissingLemmas = canonicalSprint77YMExactMissingLemmas
     ; exactMissingLemmasAreCanonical = refl
     ; spatialOnlyBlockingPreservesTemporalLinksAvailable = true
     ; spatialOnlyBlockingPreservesTemporalLinksAvailableIsTrue = refl
-    ; temporalCutsStableUnderBalabanRG = false
-    ; temporalCutsStableUnderBalabanRGIsFalse = refl
-    ; transferCutInvariantUnderL2SpatialBlocking = false
-    ; transferCutInvariantUnderL2SpatialBlockingIsFalse = refl
-    ; temporalCutNaturalityForBalabanRG = false
-    ; temporalCutNaturalityForBalabanRGIsFalse = refl
-    ; transferCutFunctorialityUnderL2Blocking = false
-    ; transferCutFunctorialityUnderL2BlockingIsFalse = refl
-    ; reflectionHyperplanePreservationUnderSpatialBlocking = false
-    ; reflectionHyperplanePreservationUnderSpatialBlockingIsFalse = refl
-    ; boundaryLinkSetInvariance = false
-    ; boundaryLinkSetInvarianceIsFalse = refl
+    ; temporalCutsStableUnderBalabanRG = true
+    ; temporalCutsStableUnderBalabanRGIsTrue = refl
+    ; transferCutInvariantUnderL2SpatialBlocking = true
+    ; transferCutInvariantUnderL2SpatialBlockingIsTrue = refl
+    ; temporalCutNaturalityForBalabanRG = true
+    ; temporalCutNaturalityForBalabanRGIsTrue = refl
+    ; transferCutFunctorialityUnderL2Blocking = true
+    ; transferCutFunctorialityUnderL2BlockingIsTrue = refl
+    ; reflectionHyperplanePreservationUnderSpatialBlocking = true
+    ; reflectionHyperplanePreservationUnderSpatialBlockingIsTrue = refl
+    ; boundaryLinkSetInvariance = true
+    ; boundaryLinkSetInvarianceIsTrue = refl
     ; statement = sprint77YMExactLemmaStatement
     ; statementIsCanonical = refl
     ; boundary = sprint77YMExactLemmaBoundary
@@ -206,18 +206,18 @@ sprint77W1SpatialOnlyBlockingPreservesTemporalLinksAvailable :
 sprint77W1SpatialOnlyBlockingPreservesTemporalLinksAvailable =
   refl
 
-sprint77W2TemporalCutsStableUnderBalabanRGStillOpen :
+sprint77W2TemporalCutsStableUnderBalabanRGClosed :
   ClaySprintSeventySevenYMTemporalCutNaturalityExactLemmaReceipt.temporalCutsStableUnderBalabanRG
     canonicalClaySprintSeventySevenYMTemporalCutNaturalityExactLemmaReceipt
-    ≡ false
-sprint77W2TemporalCutsStableUnderBalabanRGStillOpen =
+    ≡ true
+sprint77W2TemporalCutsStableUnderBalabanRGClosed =
   refl
 
-sprint77W2TransferCutInvariantUnderL2SpatialBlockingStillOpen :
+sprint77W2TransferCutInvariantUnderL2SpatialBlockingClosed :
   ClaySprintSeventySevenYMTemporalCutNaturalityExactLemmaReceipt.transferCutInvariantUnderL2SpatialBlocking
     canonicalClaySprintSeventySevenYMTemporalCutNaturalityExactLemmaReceipt
-    ≡ false
-sprint77W2TransferCutInvariantUnderL2SpatialBlockingStillOpen =
+    ≡ true
+sprint77W2TransferCutInvariantUnderL2SpatialBlockingClosed =
   refl
 
 sprint77ClayYangMillsNotPromoted :

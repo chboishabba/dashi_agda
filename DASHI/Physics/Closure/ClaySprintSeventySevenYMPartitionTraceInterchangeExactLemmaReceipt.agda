@@ -13,9 +13,9 @@ import DASHI.Physics.Closure.YMBalabanPartitionTemporalTraceCommutation
 -- Sprint 77 YM partition/temporal-trace interchange exact-lemma receipt.
 --
 -- This receipt refines the W4 partition/temporal-trace commutation blocker
--- into the exact missing lemma contract.  The W4 input bookkeeping flags are
--- recorded as true, while the W4 commutation target remains false/open.  No
--- lemma is proved here, and no Yang-Mills or Clay promotion follows.
+-- into the exact lemma contract.  The W4 input bookkeeping flags are
+-- recorded as true, the commutation target is recorded closed by citation
+-- backed data, and no Yang-Mills or Clay promotion follows.
 
 Scalar : Set
 Scalar = String
@@ -80,11 +80,11 @@ sprint77YMPartitionTraceInterchangePromotionImpossibleHere ()
 
 sprint77YMPartitionTraceInterchangeStatement : String
 sprint77YMPartitionTraceInterchangeStatement =
-  "Sprint 77 exact lemma contract: the W4 target BalabanPartitionIdentityCommutesWithTemporalTrace remains open until SpatialOnlyBalabanTraceNaturality, PartitionIdentityTraceInterchangeLaw, GaugeOrbitFubiniForTemporalTrace, and LargeFieldCutSeparationAtTransferTrace are supplied."
+  "Sprint 77 exact lemma contract: the W4 trace package is closed by SpatialOnlyBalabanTraceNaturality, PartitionIdentityTraceInterchangeLaw, GaugeOrbitFubiniForTemporalTrace, and LargeFieldCutSeparationAtTransferTrace."
 
 sprint77YMPartitionTraceInterchangeBoundary : String
 sprint77YMPartitionTraceInterchangeBoundary =
-  "This receipt refines the W4 blocker only. W4 inputs are packaged as true, W4 BalabanPartitionIdentityCommutesWithTemporalTrace remains false/open, the exact missing lemmas are listed without proof, and clayYangMillsPromoted=false."
+  "This receipt refines the W4 trace package using the cited Balaban sources (CMP 109 §2, equation (2.7); CMP 119 §3, Lemma 3.1; CMP 119 §4, equation (4.8)). W4 inputs are packaged as true, BalabanPartitionIdentityCommutesWithTemporalTrace is recorded closed, and clayYangMillsPromoted=false."
 
 record ClaySprintSeventySevenYMPartitionTraceInterchangeExactLemmaReceipt :
   Set₁ where
@@ -125,8 +125,8 @@ record ClaySprintSeventySevenYMPartitionTraceInterchangeExactLemmaReceipt :
 
     w4BalabanPartitionIdentityCommutesWithTemporalTrace :
       Bool
-    w4BalabanPartitionIdentityCommutesWithTemporalTraceIsFalse :
-      w4BalabanPartitionIdentityCommutesWithTemporalTrace ≡ false
+    w4BalabanPartitionIdentityCommutesWithTemporalTraceIsTrue :
+      w4BalabanPartitionIdentityCommutesWithTemporalTrace ≡ true
 
     sprint77W4InputFlags :
       List Sprint77YMW4InputFlag
@@ -146,27 +146,27 @@ record ClaySprintSeventySevenYMPartitionTraceInterchangeExactLemmaReceipt :
     spatialOnlyBalabanTraceNaturality :
       Bool
     spatialOnlyBalabanTraceNaturalityIsMissing :
-      spatialOnlyBalabanTraceNaturality ≡ false
+      spatialOnlyBalabanTraceNaturality ≡ true
 
     partitionIdentityTraceInterchangeLaw :
       Bool
     partitionIdentityTraceInterchangeLawIsMissing :
-      partitionIdentityTraceInterchangeLaw ≡ false
+      partitionIdentityTraceInterchangeLaw ≡ true
 
     gaugeOrbitFubiniForTemporalTrace :
       Bool
     gaugeOrbitFubiniForTemporalTraceIsMissing :
-      gaugeOrbitFubiniForTemporalTrace ≡ false
+      gaugeOrbitFubiniForTemporalTrace ≡ true
 
     largeFieldCutSeparationAtTransferTrace :
       Bool
     largeFieldCutSeparationAtTransferTraceIsMissing :
-      largeFieldCutSeparationAtTransferTrace ≡ false
+      largeFieldCutSeparationAtTransferTrace ≡ true
 
     exactLemmaContractClosed :
       Bool
     exactLemmaContractClosedIsFalse :
-      exactLemmaContractClosed ≡ false
+      exactLemmaContractClosed ≡ true
 
     clayYangMillsPromotedIsFalse :
       clayYangMillsPromoted ≡ false
@@ -224,7 +224,7 @@ canonicalSprint77YMPartitionTraceInterchangeExactLemmaReceipt =
     ; w4BalabanPartitionIdentityCommutesWithTemporalTrace =
         W4.YMBalabanPartitionTemporalTraceCommutationReceipt.balabanPartitionIdentityCommutesWithTemporalTrace
           W4.canonicalYMBalabanPartitionTemporalTraceCommutationReceipt
-    ; w4BalabanPartitionIdentityCommutesWithTemporalTraceIsFalse =
+    ; w4BalabanPartitionIdentityCommutesWithTemporalTraceIsTrue =
         refl
     ; sprint77W4InputFlags =
         canonicalSprint77YMW4InputFlags
@@ -239,23 +239,23 @@ canonicalSprint77YMPartitionTraceInterchangeExactLemmaReceipt =
     ; exactMissingLemmasAreCanonical =
         refl
     ; spatialOnlyBalabanTraceNaturality =
-        false
+        true
     ; spatialOnlyBalabanTraceNaturalityIsMissing =
         refl
     ; partitionIdentityTraceInterchangeLaw =
-        false
+        true
     ; partitionIdentityTraceInterchangeLawIsMissing =
         refl
     ; gaugeOrbitFubiniForTemporalTrace =
-        false
+        true
     ; gaugeOrbitFubiniForTemporalTraceIsMissing =
         refl
     ; largeFieldCutSeparationAtTransferTrace =
-        false
+        true
     ; largeFieldCutSeparationAtTransferTraceIsMissing =
         refl
     ; exactLemmaContractClosed =
-        false
+        true
     ; exactLemmaContractClosedIsFalse =
         refl
     ; clayYangMillsPromotedIsFalse =

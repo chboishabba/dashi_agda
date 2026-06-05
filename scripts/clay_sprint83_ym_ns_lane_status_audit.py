@@ -138,8 +138,8 @@ def required_surfaces() -> list[dict[str, Any]]:
             "required_anchor": (
                 "canonicalYMSprint87ExactBlockedActionTransferResidualSumReceipt"
             ),
-            "status": "EXACT_BLOCKED_ACTION_SUM_REFINED_OPEN",
-            "proved_in_repo": False,
+            "status": "EXACT_BLOCKED_ACTION_SUM_REFINED_CLOSED",
+            "proved_in_repo": True,
             "clay_promotion": False,
         },
         {
@@ -465,12 +465,11 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
         "ym_temporal_transfer_spatial_blocking_derived_sublemmas": [
             "SpatialBlockingPreservesTimeSlices",
             "SpatialBlockingPreservesTemporalBoundaryLinks",
-        ],
-        "ym_temporal_transfer_spatial_blocking_open_sublemmas": [
             "BlockedActionSeparatesTransferKernel",
             "BalabanPartitionIdentityCommutesWithTemporalTrace",
             "TransferHilbertSpaceCompatibleWithSpatialBlocking",
         ],
+        "ym_temporal_transfer_spatial_blocking_open_sublemmas": [],
         "ym_blocked_action_transfer_kernel_required_inputs": [
             "ActionTermSectorTagComplete",
             "MixedPlaquettesAbsorbedIntoTransfer",
@@ -488,16 +487,12 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
             "ActionSumRespectsProjectionUnion",
         ],
         "ym_blocked_action_transfer_kernel_next_gate": (
-            "ExactBlockedActionTransferResidualSum"
+            "LargeFieldPolymersDoNotCrossTransferCut"
         ),
-        "ym_blocked_action_transfer_kernel_remaining_inputs": [
-            "BlockedActionTermEnumeration",
-            "ProjectionUnionCoversBlockedAction",
-            "ActionSumRespectsProjectionUnion",
-        ],
+        "ym_blocked_action_transfer_kernel_remaining_inputs": [],
         "ns_kstar_hhalf_tail_next_gate": "QhpTailSmallnessAtDangerShell",
         "ns_kstar_hhalf_tail_obstruction_recorded": True,
-        "ym_temporal_transfer_spatial_blocking_full_compatibility_derived_in_repo": False,
+        "ym_temporal_transfer_spatial_blocking_full_compatibility_derived_in_repo": True,
         "ym_next_required_lattice_mass_gap_inputs": [
             "TemporalTransferMatrixSpatialBlockingCompatibility",
             "TransferReflectionPositivity",
@@ -565,7 +560,7 @@ def summary_payload(repo_root: Path) -> dict[str, Any]:
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, Any]]) -> None:
     with path.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
