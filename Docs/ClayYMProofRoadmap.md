@@ -7,6 +7,143 @@ Jaffe-Witten Yang-Mills existence and mass-gap problem would have to prove.
 It is not a proof, and it does not promote any Clay, Wightman, Standard Model,
 or terminal claim.
 
+## Sprint 79 Current Fork
+
+The live in-repo YM fork now has two ordered lanes. The UV-continuum lane comes
+from Eriksson 2602.0077:
+
+```text
+Eriksson26020077Theorem16Conditional
+-> BalabanCMP98LocalOscillationBoundForQhp
+-> LipschitzToSquaredOscillationForQhp
+-> AnisotropicAssumptionA
+-> SquaredOscillationSummabilityForHalfPlaneBlocking
+-> FixedFiniteVolumeBlockedObservableContinuumLimit
+```
+
+The open DASHI target in this lane is `AnisotropicAssumptionA`: the
+squared-oscillation summability bound for the half-plane/spatial Balaban
+blocking map `Q_hp`. The favorable spatial link count `3*L^(3k)` is only an
+arithmetic balance until that bound is proved. This lane does not prove OS
+reflection positivity, the thermodynamic limit, or a mass gap.
+
+Sprint 80 narrows the immediate proof target to:
+
+```text
+BalabanCMP98LocalOscillationBoundForQhp
+-> LipschitzToSquaredOscillationForQhp
+-> AnisotropicAssumptionA
+```
+
+The conditional product is
+`3*L^(3k)*C_local^2*L^(-4k)=3*C_local^2*L^(-k)<=3*C_local^2`. At `L=2,k=9`,
+the anisotropic factor is `0.005859375` relative to `C_local^2`, and
+`0.00146484375` relative to the isotropic `4*C^2` baseline.
+
+Sprint 81 attempts the first item above from in-repo material and keeps it
+fail-closed. Before `BalabanCMP98LocalOscillationBoundForQhp` can become a
+proof object, the repo must define or import:
+
+```text
+FormalOscillationSeminormForGaugeLinks
+FormalQhpBlockingMapDefinition
+BalabanCMP98AveragingLocalityImported
+QhpPerLinkInfluenceConeLMinus2k
+```
+
+Sprint 81A adds a conditional authority branch. Relative to an explicit
+Balaban CMP 98 local-oscillation authority input, the in-repo arithmetic closes
+`LipschitzToSquaredOscillationForQhp` and `AnisotropicAssumptionA`. The CMP 98
+locality theorem itself remains an external authority input, so this does not
+promote Clay/YM or a mass gap.
+
+Sprint 81B records the support-interface blocker for the KP lane, and Sprint
+81C defines the typed carriers for
+`BalabanEffectiveAction`, `Polymer`, `PolymerIn`, `LinkKind`, `TemporalLink`,
+`SpatialLink`, `PolymerSupport`, `SpatialSupport`,
+`ResidualEffectiveActionTerm`, `ActivityDependsOnlyOnLinksInsidePolymer`,
+`TemporalMeasureFactorizationLambdaOneReconciled`, and
+`DefinedOnBlockedL2SpatialGraph`. The next theorem is
+`EffectiveActionPolymersSpatialOnlyForA1`; only after that can the blocked
+`eta=4` count be earned.
+
+The separate KP/mass-gap lane has moved to the strong Gate-B carrier path.
+The legacy weak `PolymerIn` bridge is refuted for the current carrier and is
+kept only as a diagnostic guardrail.  The proof-critical lane is now:
+
+```text
+StrongActionTermTransferResidualDisjointness
+-> StrongResidualPolymerMembership
+-> StrongGateBToKPTheorem
+-> KPEntropyAtBlockedScaleL2
+-> AnisotropicL2WeightedKPCloses
+-> AllDiameterWeightedKP
+-> SmallFieldBoundsSurviveAnisotropicBlocking
+-> BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix
+-> LatticeMassGapFromAnisotropicKP
+-> ContinuumMassGapTransfer
+-> OSWightmanReconstruction
+-> ClayYangMills
+```
+
+The current route decisions are:
+
+```text
+UV: ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+KP: STRONG_GATE_B_TO_KP_CLOSED; NEXT_BLOCKER_SMALL_FIELD_SURVIVAL
+```
+
+```text
+q  = 0.23178189475262734
+4q = 0.9271275790105094   closes on the strong blocked L=2 eta=4 lane
+6q = 1.390691368515764    blocks fine-lattice spatial eta=6
+8q = 1.8542551580210187   blocks generic 4D eta=8
+```
+
+`YMSmallFieldSurvivalAuthority` now splits the next gate into three in-repo
+structural inputs, six imported analytic theorem slots, and one native
+spatial-orbit slot.  Spatial-only blocking
+compatibility, temporal-transfer compatibility, and polymer-activity
+preservation are derived from the strong sector/KP stack.  The remaining
+small-field blockers are `BalabanSmallFieldRegionStability`,
+`BalabanFluctuationCovarianceBound`,
+`BalabanPolymerActivityExponentialDecay`, `BalabanScaleUniformConstants`,
+`GaugeFixingJacobianBound`, and `GaugeOrbitVolumeUniform`; the
+`SpatialBlockingPreservesGaugeOrbit` slot is native/derived. Clay/YM promotion
+remains false.
+
+The downstream authority lane is decomposed rather than opaque:
+`YMLatticeMassGapAuthority` now exposes four transfer/spectral-gap theorem
+slots, `YMThermodynamicLimitAuthority` exposes five volume/continuum theorem
+slots, `YMOSAxiomsAuthority` exposes five OS axiom theorem slots, and
+`YMContinuumMassGapTransferAuthority` exposes four continuum spectral-transfer
+slots.  These slots are the current authority lane; they are not internal
+analytic proofs.
+
+The immediate UV tranche is to prove or falsify:
+
+```text
+FormalOscillationSeminormForGaugeLinks
+FormalQhpBlockingMapDefinition
+BalabanCMP98AveragingLocalityImported
+QhpPerLinkInfluenceConeLMinus2k
+BalabanCMP98LocalOscillationBoundForQhp
+LipschitzToSquaredOscillationForQhp
+AnisotropicAssumptionA
+SquaredOscillationSummabilityForHalfPlaneBlocking
+```
+
+The immediate KP tranche is to prove or falsify:
+
+```text
+EffectiveActionPolymersSpatialOnlyForA1
+PolymerDefinedOnBlockedLattice
+KPEntropyAtBlockedScaleL2
+```
+
+All later Balaban, small-field, lattice, continuum, OS/Wightman, and Clay
+endpoint obligations remain open.
+
 Audit boundary: finite carrier spectral gaps, finite transfer-matrix gaps,
 carrier string-tension diagnostics, and finite strong-coupling estimates are
 evidence only.  They are not the Clay Yang-Mills theorem.  A Clay-level result
@@ -165,7 +302,7 @@ map. The roadmap below decomposes the blocker into lemmas.
 
 ## Corrected Competitive Path
 
-The current competitive route is not "finite carrier pressure is below the
+Historical broad roadmap context: the current competitive route is not "finite carrier pressure is below the
 canonical dimension, therefore Yang-Mills has a mass gap."  In particular,
 the local fact recorded by the pressure-below-15 surfaces,
 `pressureBound = 14`, `canonicalDim = 15`, and `14 < 15`, is only a bounded
@@ -182,7 +319,9 @@ H1 Balaban volume-independent induction
   -> Clay YM existence and mass gap
 ```
 
-`H1` means a genuine volume-independent constructive RG/cluster induction,
+After Sprint 79, the immediate H1 subproblem is narrower: prove the residual
+KP graph is blocked-spatial, not fine-lattice spatial. `H1` still means a
+genuine volume-independent constructive RG/cluster induction,
 not a fixed finite-depth contraction receipt.  It must supply bounds uniform
 enough for infinite volume and cutoff removal.
 

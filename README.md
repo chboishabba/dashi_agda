@@ -14,9 +14,95 @@ Use one of these reader tracks first:
 - Repo track: `Docs/RepoGuide.md`
 - Physics/unification track: `Docs/PhysicsGuide.md`
 - Physics lane maturity matrix: `Docs/PhysicsLaneMaturityMatrix.md`
+- SeaMeInIt interop track:
+  `Docs/SeaMeInItROMKernelFormalism.md`,
+  `DASHI/Interop/SeaMeInItROMKernelFormalism.agda`,
+  `DASHI/Interop/SeaMeInItBT369SphereUnwrap.agda`, and
+  `DASHI/Interop/SeaMeInIt/Unwrap/Competitor/Everything.agda` via
+  `DASHI/Interop/SeaMeInItUnwrapCompetitors.agda`
+  plus the executable deterministic receipt runner
+  `scripts/sphere_unwrap_benchmark.py`, which records adversarial spherical
+  field benchmark JSON without strengthening the no-global/no-isometry/no-fake
+  inverse claim boundary.
+  The seam derivation surface `DASHI/Interop/SeaMeInItSeamDerivationFormalism.agda`
+  reads ROM as an admissible movement-derivation language, not a pose list.
+  Seam topology, panels, darts, ease, gussets, and splits are treated as
+  receipted metric-correction operators downstream of body/ROM/fabric fields
+  and upstream of manufacturing allowances.
 
 Current Clay sprint correction:
 
+- `DASHI/Physics/Closure/ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventySevenYMNcAbsorptionFloorAuthorityReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventySevenYMAbsorptionQualifiedEntropyQuotientReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMTemporalTermsAbsorbedReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMResidualEffectiveActionSpatialSupportReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMKPSpatialAdjacencyReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMEffectiveActionSpatialOnlyReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMTemporalEntropyFromSpatialSupportReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMAllDiameterKPFromSpatialSupportReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMBalabanEndpointAfterSpatialSupportReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMKPEntropyFromL2BlockingOrientationsReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyEightYMPaper12bA1EntropyCorrectionReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyNineYMCurrentToCompleteRoadmapReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyNineYMAnisotropicAssumptionAReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintEightyYMAnisotropicAssumptionAProofPlanReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintEightyOneYMAnisotropicAssumptionAAuthorityReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintEightyOneYMEffectiveActionSupportInterfaceReceipt.agda`
+- `DASHI/Physics/Closure/YMEffectiveActionSupportInterface.agda`
+- `DASHI/Physics/Closure/YMEffectiveActionSpatialOnlyBridge.agda`
+- `DASHI/Physics/Closure/YMResidualSpatialSupportCore.agda`
+- `DASHI/Physics/Closure/YMResidualSpatialSupportCounterexample.agda`
+- `DASHI/Physics/Closure/YMResidualTermMembershipResolver.agda`
+- `DASHI/Physics/Closure/YMResidualSupportEvidenceProvider.agda`
+- `DASHI/Physics/Closure/YMResidualSupportBalabanAuthority.agda`
+- `DASHI/Physics/Closure/YMBlockedL2KPEntropy.agda`
+- `DASHI/Physics/Closure/YMSmallFieldSurvivalAuthority.agda`
+- `DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda`
+- `DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda`
+- `DASHI/Physics/Closure/YMOSAxiomsAuthority.agda`
+- `DASHI/Physics/Closure/YMOSWightmanReconstructionAuthority.agda`
+- `DASHI/Physics/Closure/YMContinuumMassGapTransferAuthority.agda`
+- `DASHI/Physics/Closure/YMMassGapSurvivalAuthority.agda`
+- `DASHI/Physics/Closure/YMClayPromotionBoundary.agda`
+- `DASHI/Physics/Closure/YMSprint86BlockedActionTransferKernelSeparationReceipt.agda`
+- `DASHI/Physics/Closure/YMSprint87ExactBlockedActionTransferResidualSumReceipt.agda`
+- `DASHI/Physics/Closure/NSSprint86KStarHHalfTailObstructionReceipt.agda`
+- `Docs/ClaySprintSeventyNineYMCurrentToCompleteRoadmap.md`
+- `Docs/ClaySprintSeventySixYMBalabanTransferCompatibility.md`
+- `Docs/ClaySprintSeventySixYMTemporalEntropyQuotientCore.md`
+- `Docs/ClaySprintSeventySixYMAnisotropicAllDiameterKP.md`
+- `Docs/ClaySprintSeventySixYMSmallFieldAnisotropicSurvival.md`
+- `Docs/ClaySprintSeventySixYMLatticeMassGapFromAnisotropicKP.md`
+- `Docs/ClaySprintSeventySixYMContinuumOSMassGapSurvival.md`
+- `DASHI/Physics/Closure/ClaySprintSeventySixYMTemporalEntropyQuotientCoreReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventySixYMBalabanTransferCompatibilityReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventySixYMAnisotropicAllDiameterKPReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventySixYMSmallFieldAnisotropicSurvivalReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventySixYMLatticeMassGapFromAnisotropicKPReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventySixYMContinuumOSMassGapSurvivalReceipt.agda`
+- `DASHI/Physics/Closure/YMSpatialOnlyBlockingTemporalLinks.agda`
+- `DASHI/Physics/Closure/YMTemporalCutsStableUnderBalabanRG.agda`
+- `DASHI/Physics/Closure/YMLargeFieldTemporalCutSeparation.agda`
+- `DASHI/Physics/Closure/YMBalabanPartitionTemporalTraceCommutation.agda`
+- `DASHI/Physics/Closure/YMBalabanTransferCompatibilityTheorem.agda`
+- `DASHI/Physics/Closure/YMTemporalQuotientKPBridge.agda`
+- `Docs/ClaySprintSeventyFiveYMTemporalEntropyQuotient.md`
+- `DASHI/Physics/Closure/ClaySprintSeventyFiveYMTemporalEntropyQuotientReceipt.agda`
+- `Docs/ClaySprintSeventyThreeYMTransferMatrixCompatibilityGate.md`
+- `DASHI/Physics/Closure/ClaySprintSeventyThreeYMTransferMatrixCompatibilityGateReceipt.agda`
+- `Docs/ClaySprintSeventyFourYMKPThresholdArithmetic.md`
+- `DASHI/Physics/Closure/ClaySprintSeventyFourYMKPThresholdArithmeticReceipt.agda`
+- `Docs/ClaySprintSeventyTwoYMMixedPlaquetteAbsorption.md`
+- `DASHI/Physics/Closure/ClaySprintSeventyTwoYMMixedPlaquetteAbsorptionReceipt.agda`
+- `Docs/ClaySprintSeventyOneYMMixedPlaquetteFork.md`
+- `DASHI/Physics/Closure/ClaySprintSeventyOneYMMixedPlaquetteForkReceipt.agda`
+- `DASHI/Physics/Closure/ClaySprintSeventyYMBoundaryLeakageLemmaReceipt.agda`
+- `Docs/ClaySprintSeventyClayRoadmapLemmaStack.md`
+- `DASHI/Physics/Closure/ClaySprintSeventyClayRoadmapLemmaStackReceipt.agda`
+- `Docs/ClaySprintSixtyNineYMTemporalFaceFactorizationWorkplan.md`
+- `DASHI/Physics/Closure/ClaySprintSixtyNineYMTemporalFaceFactorizationWorkplanReceipt.agda`
 - `Docs/ClaySprintSixtyEightNSResearchUpdateFalsificationLedger.md`
 - `DASHI/Physics/Closure/ClaySprintSixtyEightNSResearchUpdateFalsificationLedgerReceipt.agda`
 - `Docs/ClaySprintSixtyEightYMTemporalSupportNonCreation.md`
@@ -55,6 +141,309 @@ Current Clay sprint correction:
 - `DASHI/Physics/Closure/ClaySprintFiftyFourNo2CycleResolutionCadenceAuditReceipt.agda`
 - `Docs/ClaySprintFiftyThreeNo2CyclePhysicalAmplitudeAudit.md`
 - `DASHI/Physics/Closure/ClaySprintFiftyThreeNo2CyclePhysicalAmplitudeReceipt.agda`
+
+Live YM correction: Sprint 78/80 now keeps two tracks separate. The active
+Paper12b-style UV framing is B6 conditional on A1-A3, with DASHI contributing
+to A1 by trying to prove spatial-local effective-action polymer support after
+temporal transfer absorption. The older spacetime-floor audit remains recorded
+as a diagnostic side track: `p0(k=8)=3.057 < 3.079` and
+`p0(k=9)=3.124 > 3.079`; the `NcAbsorptionFloorAuthority` lane remains a
+cited/assumed receipt surface, not an in-repo theorem input or promotion.
+
+Sprint 79 now splits the YM path into two live lanes after the 2602.0077
+correction:
+
+- UV-continuum lane: Eriksson 2602.0077 records fixed-finite-volume continuum
+  convergence on blocked observables conditional on Assumption A. The repo's
+  DASHI-native target is `AnisotropicAssumptionA`, the squared-oscillation
+  summability bound for the half-plane/spatial Balaban blocking map `Q_hp`.
+- KP/mass-gap lane: `EffectiveActionPolymersSpatialOnlyForA1` remains the
+  residual support/entropy gate needed to earn blocked-scale `eta=4`; it is not
+  Eriksson 2602.0077's open Assumption A.
+
+All promotion flags remain false.
+
+Sprint 80 records the exact Gate-A proof plan without promoting it. The
+three-step audit is:
+
+1. `Q_hp` averages spatial links only, so the link-count factor is
+   `3*L^(3k)`.
+2. The needed Balaban CMP 98 input is a formal per-link locality/oscillation
+   bound `osc_e(Q_hp) <= C_local*L^(-2k)`.
+3. If that input is available, the squared sum becomes
+   `3*L^(3k)*C_local^2*L^(-4k)=3*C_local^2*L^(-k) <= 3*C_local^2`.
+
+This is the shortest current UV-continuum move, but the repo still treats
+`BalabanCMP98LocalOscillationBoundForQhp`,
+`LipschitzToSquaredOscillationForQhp`, and `AnisotropicAssumptionA` as
+false/open theorem gates.
+
+Sprint 81 attempts the first UV blocker from in-repo material. It confirms that
+W1 gives only receipt-level spatial blocking/temporal-link preservation; the
+repo still lacks the formal surfaces needed to derive the CMP 98 locality
+lemma:
+
+- `FormalOscillationSeminormForGaugeLinks`;
+- `FormalQhpBlockingMapDefinition`;
+- `BalabanCMP98AveragingLocalityImported`;
+- `QhpPerLinkInfluenceConeLMinus2k`.
+
+Therefore `BalabanCMP98LocalOscillationBoundForQhp` remains false/open. The
+next implementation move is not more arithmetic; it is importing or defining
+the actual half-plane Balaban averaging map and its per-link oscillation
+seminorm.
+
+Sprint 81A adds a conditional authority lane: if the Balaban CMP 98
+half-plane/local oscillation bound is accepted as an explicit cited authority
+input, the in-repo spatial link-count arithmetic packages
+`LipschitzToSquaredOscillationForQhp` and `AnisotropicAssumptionA`
+conditionally. The repo still records the CMP 98 derivation itself as external,
+and it does not promote fixed-volume UV closure, mass gap, or Clay/YM.
+
+Sprint 81C implements the typed support interface for
+`EffectiveActionPolymersSpatialOnlyForA1`: `BalabanEffectiveAction`,
+`Polymer`, `PolymerIn`, `LinkKind`, `TemporalLink`, `SpatialLink`,
+`PolymerSupport`, `SpatialSupport`, `ResidualEffectiveActionTerm`,
+`ActivityDependsOnlyOnLinksInsidePolymer`,
+`TemporalMeasureFactorizationLambdaOneReconciled`, and
+`DefinedOnBlockedL2SpatialGraph` are now theorem-level objects. The actual
+support theorem remains open.
+
+Sprint 81D implements the first typed Gate-B bridge.  If a residual-support
+evidence object supplies spatial support for every `PolymerIn S gamma`, the
+repo can assemble an `EffectiveActionPolymersSpatialOnlyForA1Theorem` and then
+derive blocked-`L=2` graph membership from that theorem plus a
+`PolymerDefinedOnBlockedLatticeTheorem`.  This is a conditional assembly
+result, not the analytic residual-support proof itself.  The live missing input
+is now `ResidualEffectiveActionSpatialSupportEvidence`, i.e. the typed proof
+that the transfer-absorbed residual effective-action terms exclude temporal
+links.
+
+Sprint 82 implements the residual-support core decomposition.  It defines typed
+term predicates for temporal/mixed terms, transfer-matrix terms, residual
+terms, and term/link use; proves that temporal-term absorption plus temporal
+link-use classification implies residual terms have no temporal support; and
+proves that residual-term no-temporal-support plus polymer/term support
+semantics yields `ResidualEffectiveActionSpatialSupportEvidence`.  The hard
+blocker is now sharply named: the repo still lacks an in-repo proof of
+`TemporalTermAbsorbedNotResidualEvidence` and
+`TemporalLinkUseClassifiesTemporalTerm` from the receipt-level transfer
+absorption and Balaban support machinery.
+
+A follow-up counterexample module confirms why the four evidence objects cannot
+be implemented unconditionally over the current `PolymerIn`: `PolymerIn` only
+contains an identifier witness, so a temporal-link polymer can be declared
+member of an empty effective action.  Any unconditional
+`ResidualEffectiveActionSpatialSupportEvidence` would then prove a temporal
+link is spatial.  The next implementation is therefore not to flip the evidence
+flags; it is to replace or refine `PolymerIn` with a residual-term membership
+resolver that ties a polymer to an actual residual effective-action term and
+its support links.
+
+The resolver refinement is now a separate theorem layer:
+`YMResidualTermMembershipResolver` defines
+`PolymerInResidualTermResolver` and converts any such resolver into the
+`ResidualPolymerTermSupportSemantics` required by the Sprint 82 core.  This
+removes the missing resolver as an interface gap.  It does not by itself prove
+that the real Balaban residual effective action supplies such a resolver, and
+it does not supply transfer/residual disjointness for temporal terms.
+`YMResidualSupportEvidenceProvider` then assembles the four evidence objects
+from two remaining provider instances: a temporal transfer/residual disjointness
+provider and a Balaban residual membership resolver.
+`YMResidualSupportBalabanAuthority` provides those two instances as explicit
+postulated Balaban authority assumptions and assembles the residual spatial
+support and A1 theorem surfaces conditionally.  This advances the
+authority-conditional lane to `PolymerDefinedOnBlockedLattice`; it does not
+derive the provider instances internally.
+
+`YMBlockedL2KPEntropy` closes the next authority-conditional fork:
+spatial residual polymers are promoted to the blocked `L=2` spatial graph,
+`KPEntropyAtBlockedScaleL2` yields `eta4`, and the stored KP arithmetic
+`4q=0.9271275790105094<1` becomes proof-bearing on that authority-conditional
+lane.  The unconditional lane remains blocked until the Balaban provider
+instances are derived in repo.
+
+`YMStrongGateBKP` is now the canonical KP lane: it bypasses the legacy weak
+`PolymerIn` bridge, consumes strong residual membership and sector
+disjointness directly, and closes blocked `L=2` `eta=4` plus all-diameter KP
+in repo.  The weak route remains diagnostic only.
+
+`YMSmallFieldSurvivalAuthority` advances the next gate with a narrower
+boundary.  Spatial-only blocking compatibility, temporal-transfer
+compatibility, and polymer-activity bound preservation are derived from the
+strong KP/sector stack.  The remaining small-field blockers are now first-class
+analytic theorem slots: `BalabanSmallFieldRegionStability`,
+`BalabanFluctuationCovarianceBound`,
+`BalabanPolymerActivityExponentialDecay`, `BalabanScaleUniformConstants`,
+`GaugeFixingJacobianBound`, and `GaugeOrbitVolumeUniform`; the
+`SpatialBlockingPreservesGaugeOrbit` slot is derived from the strong
+sector/spatial-blocking lane.  Existing carrier Balaban/gauge receipts
+record useful bookkeeping but explicitly do not construct the continuum
+analytic decay theorem, continuum gauge slice, or continuum gauge measure.
+Under those six imported inputs plus the native spatial-orbit slot,
+`SmallFieldBoundsSurviveAnisotropicBlocking` is
+available conditionally.  This is not an internal derivation of Balaban
+small-field estimates, and the next authority-conditional gate is
+`LatticeMassGapFromAnisotropicKP`.
+
+`YMLatticeMassGapAuthority` advances the authority-conditional lane through
+`LatticeMassGapFromAnisotropicKP` from four exact theorem slots:
+`TemporalTransferMatrixSpatialBlockingCompatibility`,
+`TransferReflectionPositivity`, `TransferSpectralGap`, and
+`PositiveLatticeMassGapExtraction`.  This does not derive the transfer
+spectral gap in repo and does not promote the continuum theorem.  The next
+hard downstream gates are the
+thermodynamic limit, OS/Wightman reconstruction, and continuum mass-gap
+transfer.
+
+`YMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt` decomposes the
+first lattice mass-gap slot.  It derives
+`SpatialBlockingPreservesTimeSlices` and
+`SpatialBlockingPreservesTemporalBoundaryLinks` from the spatial-only
+temporal-link receipt, while leaving `BlockedActionSeparatesTransferKernel`,
+`BalabanPartitionIdentityCommutesWithTemporalTrace`, and
+`TransferHilbertSpaceCompatibleWithSpatialBlocking` open.  The full
+`TemporalTransferMatrixSpatialBlockingCompatibility` provider is still not
+derived in repo.
+
+`YMSprint86BlockedActionTransferKernelSeparationReceipt` refines the first
+open Sprint 85 gate.  It records sector-tag completeness,
+mixed-plaquette transfer absorption, and strong transfer/residual
+disjointness as available inputs, and derives
+`SpatialBlockingCreatesNoNewCrossTerms` from spatial-only temporal-link
+preservation.  `ExactBlockedActionTransferResidualSum` remains open, so
+`BlockedActionSeparatesTransferKernel` and full transfer/spatial-blocking
+compatibility remain unproved in repo.
+
+`YMSprint87ExactBlockedActionTransferResidualSumReceipt` refines the remaining
+exact-split gate into blocked-action term enumeration, transfer-kernel
+projection, spatial-residual projection, projection disjointness,
+projection-cover, and action-sum compatibility.  Only disjointness is backed by
+the existing strong transfer/residual carrier; the other algebraic surfaces
+remain open.
+
+`YMThermodynamicLimitAuthority` advances the authority-conditional lane through
+`ThermodynamicLimit`, `ContinuumLimitExists`, and a nontrivial 4D SU(3)
+Yang-Mills measure from five exact theorem slots: `UniformLatticeMassGap`,
+`FiniteVolumeTightness`, `InfiniteVolumeThermodynamicLimit`,
+`ContinuumLimitExists`, and `Nontrivial4DSU3YangMillsMeasure`.  It does not
+derive those slots in repo.  The next hard downstream gate is now
+`OsterwalderSchraderAxioms`, followed by OS/Wightman reconstruction and
+continuum mass-gap transfer.
+
+`YMOSAxiomsAuthority` advances the authority-conditional lane through
+`OsterwalderSchraderAxioms` from five exact theorem slots:
+`ReflectionPositivity`, `EuclideanCovariance`, `OSSymmetry`, `OSRegularity`,
+and `OSClustering`.  It does not derive reflection positivity or the other OS
+conditions internally.  The next hard
+downstream gate is now `OSWightmanReconstruction`, followed by continuum
+mass-gap transfer.
+
+`YMOSWightmanReconstructionAuthority` advances the authority-conditional lane
+through `OSWightmanReconstruction` and `WightmanQFT` from an explicit
+reconstruction provider.  It does not derive the reconstruction theorem in
+repo.  The next hard downstream gate is now `ContinuumMassGapTransfer`.
+
+`YMContinuumMassGapTransferAuthority` advances the authority-conditional lane
+through `ContinuumMassGapTransfer` and `PositiveContinuumMassGap` from an
+explicit transfer provider.  It does not derive spectral convergence or
+uniform lower-bound transfer internally.  The next hard downstream gate is now
+`MassGapSurvival`.
+
+`YMMassGapSurvivalAuthority` advances the authority-conditional lane through
+`MassGapSurvival` and records a `ClayYangMillsCandidate` surface from an
+explicit survival provider.  It deliberately keeps `clayYangMillsPromoted`
+false.  The remaining authority-lane boundary is the explicit
+`ClayYangMillsPromotionBoundary`, and the unconditional lane still requires the
+provider derivations in repo.
+
+`YMClayPromotionBoundary` defines that final boundary in fail-closed form:
+the authority-conditional candidate is recorded, but promotion remains false
+because the provider assumptions are not derived in repo and the Clay statement
+boundary is not discharged unconditionally.  The next real work is
+the pair of semantic provider inputs:
+`ProveTemporalTransferResidualDisjointnessSemantics` and
+`ProveResidualMembershipSemantics`.
+
+`YMProviderDerivationInRepo` now supplies the in-repo constructors that turn
+those two semantic inputs into the required
+`TemporalTransferResidualDisjointnessProvider` and
+`PolymerInResidualTermResolver`, then assemble
+`ResidualEffectiveActionSpatialSupportEvidence` and
+`EffectiveActionPolymersSpatialOnlyForA1`.  This removes the provider
+constructor gap.  It does not prove the two semantic inputs from the current
+receipt-level machinery or from the weak identifier-only `PolymerIn` relation.
+
+`YMProviderSemanticObligations` splits those semantic inputs into the three
+typed subobligations now needed for the unconditional Gate-B proof:
+`ProveTemporalAbsorptionSemantics`,
+`ProveTransferResidualExclusionSemantics`, and
+`ProveEveryPolymerInHasResolvedResidualTerm`.  The first two are the typed
+version of transfer-matrix absorption and transfer/residual disjointness; the
+third is the missing upgrade from weak identifier-only `PolymerIn` to a
+resolved residual term whose term-use links are the polymer support links.
+
+`YMTemporalTransferSemanticBridge` and `YMResolvedMembershipSemantics` narrow
+that again.  The transfer bridge shows that Sprint 71/78 receipt flags become
+the first two semantic sublemmas only after a typed interpretation over
+`ActionTerm` is supplied.  The resolved-membership layer defines actual
+membership in the `residualTerms` list and proves that a weak `PolymerIn`
+refinement into this strong membership yields
+`EveryPolymerInHasResolvedResidualTerm`.  The next blockers are therefore
+`DeriveTypedTemporalTransferInterpretation` and
+`ProvePolymerInRefinesToStrongResidualMembership`.
+
+`YMGateBPackagingResolutionBoundary` audits the proposed Sprint-83 shortcut
+that these two blockers are only packaging.  Under the current types that
+shortcut is not discharged: receipt booleans do not construct
+`TransferMatrixTerm t -> ResidualActionTerm t -> ⊥`, and the weak
+identifier-only `PolymerIn` relation does not imply membership in
+`S.residualTerms`.  The module defines the exact stronger
+`GateBPackagingResolutionEvidence` bundle that would close Gate B from those
+two inputs, while keeping unconditional eta=4 false and Clay/YM promotion
+false.
+`YMGateBPackagingResolutionAuthority` now supplies that bundle on a scoped
+authority lane from a Sprint 71/78 typed-transfer interpretation import and an
+Eriksson/Balaban Prop 3.1 weak-to-strong membership-refinement import.  This is
+more precise than the older coarse Balaban provider postulates, but it is still
+authority-conditional; the in-repo derivation blockers remain the two typed
+refinements above.
+
+`YMGateBInRepoDerivationAttempts` pushes those blockers against the current
+carriers.  It proves the positive part:
+`TemporalAbsorptionSemantics` is constructible from the existing
+`TemporalOrMixedTerm` witness.  It also proves the negative part:
+`TransferResidualExclusionSemantics` and the full
+`TypedTemporalTransferInterpretation` are impossible for the current independent
+`TransferMatrixTerm` / `ResidualActionTerm` records, and weak `PolymerIn`
+cannot refine to strong residual-term membership because it can witness a
+polymer in an empty effective action.  The next implementation move is carrier
+strengthening, not another receipt.
+
+`YMStrongGateBCarriers` lands that strengthening as a parallel strong path.  It
+adds transfer/residual disjointness as a first-class action-term invariant and
+uses `StrongResidualPolymerMembership` as the replacement for weak
+identifier-only `PolymerIn`.  On those carriers, spatial support assembles
+directly.  The remaining work is to bridge or refactor the legacy weak Gate-B
+theorem records (`EffectiveActionPolymersSpatialOnlyForA1`,
+`PolymerDefinedOnBlockedLattice`) onto the strong-membership path.
+
+Sprint 79 adds a fail-closed support audit and UV Assumption-A target:
+`outputs/ym_sprint79_effective_action_support/ym_sprint79_effective_action_support_table.csv`,
+`outputs/ym_sprint79_effective_action_support/ym_sprint79_kp_graph_entropy_table.csv`,
+and
+`outputs/ym_sprint79_effective_action_support/ym_sprint79_effective_action_spatial_a1_summary.json`.
+Current route decision is `ANISOTROPIC_KP_ROUTE_BLOCKED` because the residual
+effective-action A1 graph is not yet proved spatial-only on the blocked
+lattice. The UV route decision is
+`ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED` until the half-plane
+squared-oscillation bound is proved.
+
+Entropy convention: fine-lattice spatial counting gives `eta_sp=6` and
+`6q=1.390691368515764>1`, so the favorable blocked `eta=4` line is valid only
+after `KPEntropyAtBlockedScaleL2` proves the `L=2` orientation count. The
+blocked arithmetic is real but conditional: `4q=0.9271275790105094<1`, while
+generic 4D has `8q=1.8542551580210187>1`.
 - `Docs/ClaySprintFiftyThreeYMDiameterOneKP.md`
 - `DASHI/Physics/Closure/ClaySprintFiftyThreeYMDiameterOneKPReceipt.agda`
 - `scripts/ym_diameter_kp_activity_estimator.py`
@@ -170,11 +559,106 @@ new receipt records `geometricRatioUniform`, `qBelowOne`,
 `AllDiameterKPActivityBound`, and `BalabanRGScaleTransfer` as the open analytic
 gates.
 
+Sprint 70 adds the YM boundary-correction plaquette audit
+`scripts/ym_sprint70_boundary_correction_audit.py`. It now uses corrected
+transfer-matrix bookkeeping: mixed spatial-temporal plaquettes touching a
+temporal face are face action, not residual correction. The corrected default
+has `bookkeeping_lambda = 1.0`, `residual_correction_action_total = 0.0`, and
+`total_leakage_times_4q = 0.9271275790105094`; the old
+`1.7130035863183526` leakage value is retained only as a legacy
+correction-bucket diagnostic. This is still not a measure-factorization proof;
+no Clay/YM promotion follows.
+
+Sprint 71 recasts the next gate as
+`BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`. The mixed
+plaquette issue closes at action-bookkeeping level, while exact temporal
+measure factorization, link-variable disjointness, Balaban/transfer-matrix
+compatibility, all-diameter KP, mass gap, and continuum transfer remain open.
+Sprint 79 supersedes this as the immediate live fork: the next proof-bearing
+gate is now `EffectiveActionPolymersSpatialOnlyForA1` plus
+`PolymerDefinedOnBlockedLattice`, before `KPEntropyAtBlockedScaleL2` can make
+`eta=4` proof-bearing.
+
+Sprint 72 adds `scripts/ym_sprint72_mixed_plaquette_absorption_audit.py` as a
+residual-leakage fallback audit for the same mixed-plaquette issue. Default
+face absorption gives `effective_total_leakage_times_4q =
+0.9271275790105094` and route `MIXED_PLAQUETTE_ABSORPTION_CONFIRMED`. A
+ten-percent residual leakage control still passes with
+`effective_total_leakage_times_4q = 0.994944290301034`; twenty percent
+reblocks with `1.0651545325782825`. This quantifies the fallback target:
+absorb about ninety percent of the legacy mixed correction, or prove directly
+that mixed plaquettes are transfer-matrix face action rather than
+entropy-producing leakage.
+
+Sprint 73 packages the shortest current YM path after the bookkeeping
+correction. `LinkVariableDisjointnessForTemporalFaces` is recorded from the
+Sprint 68 `r_K = 1 < L = 2` temporal support certificate, and
+`TemporalMeasureFactorizationWithLeakageLambdaOne` is recorded from that
+disjointness, product Haar measure, and corrected face-action bookkeeping. The
+active proof fork is now
+`BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`. Downstream
+gates remain open: temporal quotient entropy halving, anisotropic weighted KP,
+all-diameter KP, small-field survival, lattice mass gap, continuum transfer,
+and OS/Wightman reconstruction. The arXiv SU(3) claim `2506.00284v2` is
+withdrawn and not live competitive evidence; Eriksson-style slow-field /
+Balaban-interface machinery is tracked as an external source obligation, not an
+in-repo proof. Clay still lists Yang-Mills as unsolved.
+Sprint 79 keeps this as downstream context but moves the current blocker to
+the residual effective-action support graph: fine-lattice spatial `eta=6`
+blocks, while blocked `L=2` `eta=4` remains conditional.
+
+Sprint 74 adds `scripts/ym_sprint74_kp_threshold_plots.py` to reproduce the
+KP threshold artifacts: `sprint72_kp_constants.csv`,
+`sprint72_kp_summary.json`, `sprint72_residual_leakage_tolerance.png`, and
+`sprint72_eta_threshold.png`. It records closed arithmetic only: generic
+`eta=8` gives `8q = 1.8542551580210187 > 1`, spatial transfer-matrix
+`eta=4` gives `4q = 0.9271275790105094 < 1`, and ten-percent residual
+leakage gives `0.994944290301034 < 1` while twenty percent reblocks. The
+structural gate remains `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix`.
+
+Sprint 76 adds the structural fork around that gate. W1 packages
+`SpatialOnlyBlockingPreservesTemporalLinks` and time-axis invariance at receipt
+level. W2 records `TemporalCutsStableUnderBalabanRG` as still open, W3 records
+`LargeFieldPolymersDoNotCrossTransferCut` as blocked on missing in-repo
+Eriksson/Balaban large-field machinery, and W4 records
+`BalabanPartitionIdentityCommutesWithTemporalTrace` as still open. W5 therefore
+keeps `BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix` false.
+W6 packages only the conditional bridge from compatibility to `etaEff = 4` and
+`AllDiameterWeightedKP`. No KP theorem, mass gap, continuum transfer,
+OS/Wightman reconstruction, or Clay/YM promotion follows.
+
 Sprint 54 also records the route pivot.  The NS ternary source-budget route is
 closed as falsified under current material-packet physical-amplitude
 diagnostics, with CFM direction/coherence and BKM/no-concentration retained as
 NS fallback lanes.  YM KP/Balaban is the current main Clay-facing analytic
 lane, with all-diameter KP and Balaban RG scale transfer still open.
+
+As of the `2026-06-05` NS fastest-path receipt, the current Clay-facing NS
+route no longer tries to consume Sprint 56 packet-normalized action as a proof
+source.  Sprint 58 records that ledger as structurally non-additive at vessel
+level, so it remains diagnostic anatomy only.  The active decision gate is the
+non-circular `H^-1/2` high-high defect estimate at the danger shell:
+`||P_{>K*}(u.grad u)||_{H^-1/2} <= epsilon*nu*||P_{>K*}u||_{H^3/2}` without
+`H^1/2`, Serrin, BKM, or stronger regularity inputs.  If that gate passes, the
+next gates are `NonCircularKStarDriftBound`, edge-influx absorption, theta
+preservation, and tail-to-BKM/Serrin continuation; if it fails, the honest
+output is an obstruction theorem and pivot.  `NSFastestClayPathReceipt` records
+this route selection and keeps Clay Navier-Stokes promotion false.
+
+`NSHminusHalfGateDecisionPivotReceipt` records that current pivot: Path A is
+the `H^-1/2` obstruction-theorem output, not the Clay closure lane.  The active
+Clay-facing Path B is the `H^{11/8}` Bernoulli-band route plus uniform
+regularity across dense prime-LP approximations, limit stability, and
+NS-to-EV5 forward simulation/preservation.  The density gap is closed only at
+receipt scope; Bernoulli rigour and uniform regularity remain open, so Clay NS
+promotion stays false.
+
+`NSSprint86KStarHHalfTailObstructionReceipt` records the next analytic
+obstruction inside the Qhp route: KStar admissibility alone does not currently
+provide the small `H^{1/2}` tail bound needed for epsilon<1 absorption without
+hidden `H^1`, `H^{1/2}`, Serrin, BKM, or stronger regularity input.
+`QhpTailSmallnessAtDangerShell`, `EpsilonBelowOneCoefficient`, and
+`HminusHalfHighHighDefectTheorem` remain open.
 
 The Sprint 43 NS 3D truth bridge repair is the current NS data-facing evidence
 surface.  The repaired harness reads `make_truth_3d.py` integer-radius shell

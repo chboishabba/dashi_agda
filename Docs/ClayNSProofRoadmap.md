@@ -133,6 +133,50 @@ smoothing estimates, especially a paraproduct estimate strong enough to feed
 N5. It must not be described as a Clay NS proof until N3-N6 and the external
 authority boundaries are discharged.
 
+## 2026-06-05 Fastest Honest Clay-NS Path
+
+`DASHI/Physics/Closure/NSFastestClayPathReceipt.agda` records the current
+route-selection decision after Sprints 56-58 and the negative-Sobolev
+danger-shell receipts:
+
+```text
+retire packet-normalized action as a proof source
+-> decide the H^{-1/2} high-high defect gate
+-> if the gate passes, prove non-circular K* absorption and theta preservation
+-> feed only a proved tail bound to BKM/Serrin
+```
+
+If the `H^{-1/2}` gate fails analytically, the correct next product is an
+obstruction theorem plus a pivot, not Clay promotion. The exact next
+mathematical decision is therefore to prove or analytically refute
+
+```text
+|| P_{>K*}(u . grad u) ||_{H^{-1/2}}
+  <= epsilon * nu * || P_{>K*} u ||_{H^{3/2}}
+```
+
+without `H^{1/2}`, Serrin, BKM, or stronger regularity as inputs. Packet-local
+normalized action remains useful as diagnostic anatomy only; Sprint 58
+prevents it from being consumed as a vessel-additive proof source.
+
+`DASHI/Physics/Closure/NSHminusHalfGateDecisionPivotReceipt.agda` records the
+current gate decision: the repo has obstruction/divergence evidence and no
+uniform absorption proof, so Path A is an obstruction-theorem output rather than
+the Clay route.  The active Clay-facing Path B is now:
+
+```text
+H^{11/8} Bernoulli-band rigour
+-> uniform regularity across dense prime-LP approximations
+-> limit uniqueness/stability
+-> NS-to-EV5 forward simulation and preservation
+-> continuation only after those gates
+```
+
+The density gap is recorded as closed at receipt scope, but uniform regularity
+across the approximating sequence remains open.  The `H^{11/8}` bound is still
+candidate/pending Bernoulli rigour, and no arbitrary-data, smoothness, or Clay
+promotion follows.
+
 ## Non-Circular K-Star Drift Obstruction
 
 The next checked receipt is

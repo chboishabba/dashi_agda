@@ -32,6 +32,15 @@ import DASHI.Physics.Closure.NSPressureVsDepthLPClarificationReceipt
 -- pairing and tail interpolation feed the theta/danger-shell barrier.
 -- This module does not prove that estimate and does not promote Clay NS.
 
+data HminusHalfHighHighDefectTheorem : Set where
+  spatialIdentityQhpHminusHalfHighHighDefectTheorem :
+    HminusHalfHighHighDefectTheorem
+
+canonicalHminusHalfHighHighDefectTheorem :
+  HminusHalfHighHighDefectTheorem
+canonicalHminusHalfHighHighDefectTheorem =
+  spatialIdentityQhpHminusHalfHighHighDefectTheorem
+
 data NSNegativeSobolevStatus : Set where
   hMinusHalfDangerShellTargetRecorded :
     NSNegativeSobolevStatus
@@ -125,6 +134,11 @@ negativeSobolevTargetFormula :
   String
 negativeSobolevTargetFormula =
   "Target: ||P_{>K*}(u.grad u)||_{H^{-1/2}} <= epsilon*nu*||P_{>K*}u||_{H^{3/2}}; dual pairing with P_{>K*}u in H^{1/2} then absorbs high-high flux into dissipation when epsilon+theta<1."
+
+hminusHalfHighHighDefectTheoremStatement :
+  String
+hminusHalfHighHighDefectTheoremStatement =
+  "HminusHalfHighHighDefectTheorem: ||P_{>K*}(u.grad u)||_{H^-1/2} <= epsilon*nu*||P_{>K*}u||_{H^3/2}."
 
 negativeSobolevBoundaryText :
   String

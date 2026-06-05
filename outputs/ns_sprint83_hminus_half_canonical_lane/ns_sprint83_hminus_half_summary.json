@@ -1,0 +1,27 @@
+{
+  "all_required_source_surfaces_present": true,
+  "bkm_or_serrin_continuation_discharged_in_repo": false,
+  "bkm_source_surface": true,
+  "canonical_lane_order": [
+    "HminusHalfUniformAbsorptionGate",
+    "NonCircularKStarDriftBound",
+    "ThetaPreservationAtDangerShell",
+    "ThetaTailToBKMOrSerrinContinuation",
+    "ClayNavierStokesPromoted"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "clay_promotion_recorded_false": true,
+  "complete": false,
+  "contract": "ns_sprint83_hminus_half_canonical_lane_audit",
+  "gate_table": "ns_sprint83_hminus_half_gate_table.csv",
+  "hminus_half_source_surface": true,
+  "hminus_half_uniform_absorption_proved_in_repo": false,
+  "kstar_source_surface": true,
+  "next_required_gate": "HminusHalfUniformAbsorptionGate",
+  "non_circular_kstar_drift_bound_proved_in_repo": false,
+  "remaining_blocker": "prove the non-circular H^{-1/2} nonlinear-defect estimate without importing H^{1/2}, Serrin, BKM, or stronger regularity",
+  "route_decision": "NS_HMINUS_HALF_CANONICAL_LANE_OPEN",
+  "source_table": "ns_sprint83_hminus_half_source_surface_table.csv",
+  "theta_preservation_proved_in_repo": false,
+  "theta_source_surface": true
+}
