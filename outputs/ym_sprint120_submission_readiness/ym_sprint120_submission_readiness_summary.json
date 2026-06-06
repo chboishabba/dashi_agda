@@ -1,0 +1,380 @@
+{
+  "generated_at_utc": "2026-06-06T08:03:44.177233+00:00",
+  "obligations": [
+    {
+      "blocked_by_flags": [
+        "externalCommonCarrierConstructionTheoremProvedHere",
+        "commonCarrierConstructionTheoremProvedHere",
+        "externalCommonCarrierConstructionClosedHere",
+        "commonCarrierFeedThroughClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "externalCommonCarrierConstructionTheoremProvedHere",
+        "commonCarrierConstructionTheoremProvedHere",
+        "externalCommonCarrierConstructionClosedHere",
+        "commonCarrierFeedThroughClosedHere"
+      ],
+      "category": "hard",
+      "depends_on": [],
+      "evidence_link": "YMSprint120ExternalCommonCarrierConstructionCertificate.agda",
+      "name": "ExternalCommonCarrierConstruction",
+      "obligation_id": "CC1",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "weakCompactnessCertificateClosedHere",
+        "weakCompactnessClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "weakCompactnessCertificateClosedHere",
+        "weakCompactnessClosedHere"
+      ],
+      "category": "hard",
+      "depends_on": [
+        "CC1"
+      ],
+      "evidence_link": "YMSprint120WeakCompactnessCertificateInterface.agda",
+      "name": "WeakCompactnessExtraction",
+      "obligation_id": "WC1",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "allMoscoCompactnessObligationsClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "allMoscoCompactnessObligationsClosedHere"
+      ],
+      "category": "hard",
+      "depends_on": [
+        "WC1",
+        "CC2",
+        "CC3",
+        "CC4"
+      ],
+      "evidence_link": "YMSprint120MoscoAggregateClosureCertificate.agda",
+      "name": "ClosedFormLowerSemicontinuityMoscoLiminf",
+      "obligation_id": "MC1",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "transferLowerBoundTheoremProvedHere",
+        "allTransferCalculusObligationsClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "transferLowerBoundTheoremProvedHere",
+        "allTransferCalculusObligationsClosedHere"
+      ],
+      "category": "hard",
+      "depends_on": [
+        "MC1",
+        "MC3"
+      ],
+      "evidence_link": "YMSprint120TransferCalculusClosureCertificate.agda",
+      "name": "LogGeneratorFunctionalCalculusClosure",
+      "obligation_id": "SC1",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "transferLowerBoundTheoremProvedHere"
+      ],
+      "blocked_by_reasons": [
+        "transferLowerBoundTheoremProvedHere"
+      ],
+      "category": "hard",
+      "depends_on": [
+        "SC1",
+        "MC1"
+      ],
+      "evidence_link": "YMSprint120TransferCalculusClosureCertificate.agda",
+      "name": "TransferLowerBoundTheorem",
+      "obligation_id": "SC3",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "externalCommonCarrierConstructionTheoremProvedHere"
+      ],
+      "blocked_by_reasons": [
+        "externalCommonCarrierConstructionTheoremProvedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "CC1"
+      ],
+      "evidence_link": "YMSprint120CommonCarrierFeedThroughClosureReducer.agda",
+      "name": "gauge covariance of carrier maps",
+      "obligation_id": "CC2",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "externalCommonCarrierConstructionTheoremProvedHere"
+      ],
+      "blocked_by_reasons": [
+        "externalCommonCarrierConstructionTheoremProvedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "CC1"
+      ],
+      "evidence_link": "YMSprint120CommonCarrierFeedThroughClosureReducer.agda",
+      "name": "uniform norm window",
+      "obligation_id": "CC3",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "externalCommonCarrierConstructionTheoremProvedHere"
+      ],
+      "blocked_by_reasons": [
+        "externalCommonCarrierConstructionTheoremProvedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "CC1"
+      ],
+      "evidence_link": "YMSprint120CommonCarrierFeedThroughClosureReducer.agda",
+      "name": "approximate inverse residuals vanish",
+      "obligation_id": "CC4",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "weakCompactnessClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "weakCompactnessClosedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "CC1",
+        "WC1"
+      ],
+      "evidence_link": "YMSprint120WeakCompactnessCertificateInterface.agda",
+      "name": "null sector escape exclusion",
+      "obligation_id": "WC2",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "weakCompactnessClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "weakCompactnessClosedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "CC1",
+        "WC1"
+      ],
+      "evidence_link": "YMSprint120WeakCompactnessCertificateInterface.agda",
+      "name": "projection sector stability",
+      "obligation_id": "WC3p",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "allMoscoCompactnessObligationsClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "allMoscoCompactnessObligationsClosedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "MC1"
+      ],
+      "evidence_link": "YMSprint120MoscoAggregateClosureCertificate.agda",
+      "name": "Mosco recovery limsup",
+      "obligation_id": "MC2",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "allMoscoCompactnessObligationsClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "allMoscoCompactnessObligationsClosedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "WC1"
+      ],
+      "evidence_link": "YMSprint120MoscoAggregateClosureCertificate.agda",
+      "name": "uniform form lower bound",
+      "obligation_id": "MC3",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "allMoscoCompactnessObligationsClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "allMoscoCompactnessObligationsClosedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "MC1"
+      ],
+      "evidence_link": "YMSprint120MoscoAggregateClosureCertificate.agda",
+      "name": "no bottom spectrum pollution",
+      "obligation_id": "MC4",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "transferLowerBoundTheoremProvedHere",
+        "allTransferCalculusObligationsClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "transferLowerBoundTheoremProvedHere",
+        "allTransferCalculusObligationsClosedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "SC1"
+      ],
+      "evidence_link": "YMSprint120TransferCalculusClosureCertificate.agda",
+      "name": "spectral gap transport under Mosco",
+      "obligation_id": "SC2",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "allTransferCalculusObligationsClosedHere",
+        "transferLowerBoundTheoremProvedHere"
+      ],
+      "blocked_by_reasons": [
+        "allTransferCalculusObligationsClosedHere",
+        "transferLowerBoundTheoremProvedHere"
+      ],
+      "category": "medium",
+      "depends_on": [
+        "SC3"
+      ],
+      "evidence_link": "YMSprint120TransferCalculusClosureCertificate.agda",
+      "name": "full OS\u2192Wightman",
+      "obligation_id": "OS1",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [
+        "allTransferCalculusObligationsClosedHere"
+      ],
+      "blocked_by_reasons": [
+        "allTransferCalculusObligationsClosedHere"
+      ],
+      "category": "easy",
+      "depends_on": [
+        "SC3"
+      ],
+      "evidence_link": "DASHI/Physics/Closure/YMSprint105SymmetryRestorationContinuumLimit.agda",
+      "name": "SymmetryRestorationInContinuumLimit",
+      "obligation_id": "SY1",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [],
+      "blocked_by_reasons": [
+        "not supplied as repo theorem witness"
+      ],
+      "category": "easy",
+      "depends_on": [
+        "SC3"
+      ],
+      "evidence_link": "YMSprint104ClayCandidateDossierBuilder.agda",
+      "name": "CompactSimpleGroupParameterTable",
+      "obligation_id": "GG1",
+      "status": "blocked"
+    },
+    {
+      "blocked_by_flags": [],
+      "blocked_by_reasons": [
+        "not supplied as repo theorem witness"
+      ],
+      "category": "easy",
+      "depends_on": [
+        "SY1",
+        "GG1",
+        "OS1"
+      ],
+      "evidence_link": "DASHI/Physics/Closure/YMSprint120ExternalCommonCarrierConstructionCertificate.agda",
+      "name": "Final Clay assembly",
+      "obligation_id": "FIN",
+      "status": "blocked"
+    }
+  ],
+  "rounds_of_six": [
+    {
+      "count": 1,
+      "lanes": [
+        "CC1"
+      ],
+      "round": 1,
+      "status": "partial"
+    },
+    {
+      "count": 4,
+      "lanes": [
+        "WC1",
+        "CC2",
+        "CC3",
+        "CC4"
+      ],
+      "round": 2,
+      "status": "partial"
+    },
+    {
+      "count": 4,
+      "lanes": [
+        "MC1",
+        "WC2",
+        "WC3p",
+        "MC3"
+      ],
+      "round": 3,
+      "status": "partial"
+    },
+    {
+      "count": 3,
+      "lanes": [
+        "SC1",
+        "MC2",
+        "MC4"
+      ],
+      "round": 4,
+      "status": "partial"
+    },
+    {
+      "count": 2,
+      "lanes": [
+        "SC3",
+        "SC2"
+      ],
+      "round": 5,
+      "status": "partial"
+    },
+    {
+      "count": 3,
+      "lanes": [
+        "OS1",
+        "SY1",
+        "GG1"
+      ],
+      "round": 6,
+      "status": "partial"
+    },
+    {
+      "count": 1,
+      "lanes": [
+        "FIN"
+      ],
+      "round": 7,
+      "status": "partial"
+    }
+  ],
+  "route_decision": "fail-closed"
+}

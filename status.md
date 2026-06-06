@@ -1,3 +1,145 @@
+# 2026-06-06 Sprint 127 final submission-readiness fail-closed round
+
+- Added checked Sprint 127 modules:
+  `YMSprint127FinalSubmissionReadinessLedger`,
+  `YMSprint127HardTheoremDependencyCutset`, and
+  `YMSprint127ClaySubmissionBoundaryLedger`.
+- Added `scripts/ym_sprint127_final_readiness_audit.py` and generated
+  `outputs/ym_sprint127_final_readiness_audit/`.
+- Added focused Sprint 127 tests for the final-readiness audit and
+  no-promotion/no-incomplete-surface production guards.
+- The final-readiness audit route decision is `fail-closed`.  It inventories
+  Sprint 121-127 Agda surfaces, Sprint 121-126 generated audit summaries, and
+  the exact open gates `CC1`, `WC1`, `MC1`, `SC1`, `SC3`, `SC2`, `OS1`,
+  `SY1`, `GG1`, and `FIN`.
+- The hard-theorem cutset is now explicit: the minimal analytic cutset remains
+  `CC1`, `WC1`, `MC1`, `SC1`, and `SC3`; all downstream closure rows are
+  recorded as blocked feed-through rather than promoted theorem claims.
+- The submission-boundary ledger records candidate packet sections only when
+  they carry inhabited evidence rows, plus external Clay/CMI governance
+  boundaries.  `finalSubmissionPacketReady` and `clayYangMillsPromoted`
+  remain false.
+
+# 2026-06-06 Sprint 126 OS1/SY1/GG1 terminal-route fail-closed round
+
+- Added checked Sprint 126 modules:
+  `YMSprint126OSToWightmanRouteLedger`,
+  `YMSprint126SymmetryRestorationCitationInterface`, and
+  `YMSprint126CompactSimpleGroupCompletenessLedger`.
+- Added `scripts/ym_sprint126_os_symmetry_group_audit.py` and generated
+  `outputs/ym_sprint126_os_symmetry_group_audit/`.
+- Added focused Sprint 126 tests for the OS/symmetry/group audit and
+  no-promotion/no-incomplete-surface production guards.
+- OS1 now records the full OS-to-Wightman route as concrete evidence rows:
+  Sprint105 OS3 spatial-only blocking pivot, scoped OS 1975 authority,
+  Wightman distributions, Poincare covariance, spectrum condition, and the
+  SC1/SC2/SC3 blocker feed-through.  The route remains fail-closed.
+- SY1 now records the H3 anisotropic lattice to SO4 restoration citation
+  interface and downstream Poincare/spectrum consumers.  The in-repo theorem
+  flags remain false.
+- GG1 now records Sprint121 compact-simple-group parameter evidence and the
+  all compact simple `G` classification/exhaustive-family gap.  Parameter-table
+  evidence is not promoted to Clay-complete group coverage.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 125 SC1/SC2/SC3 transfer-calculus fail-closed round
+
+- Added checked Sprint 125 modules:
+  `YMSprint125LogGeneratorFunctionalCalculusClosureLedger`,
+  `YMSprint125SpectralGapTransportUnderMoscoInterface`, and
+  `YMSprint125TransferLowerBoundPrepLedger`.
+- Added `scripts/ym_sprint125_log_generator_audit.py` and generated
+  `outputs/ym_sprint125_log_generator_audit/`.
+- Added focused Sprint 125 tests for the log-generator audit and
+  no-promotion/no-incomplete-surface production guards.
+- The SC1 audit route decision is `fail-closed`: functional calculus,
+  spectral mapping, common-core/domain stability, normalization, and physical
+  Hamiltonian closure are recorded as concrete evidence rows, but the proof
+  flags remain false.
+- SC2 spectral-gap transport under Mosco is recorded as an inhabited interface
+  downstream of MC1/MC2/MC4 and SC1; SC3 transfer lower-bound prep records the
+  `gap(T(a)) >= c * m_eff(a) * a` circularity boundary and required
+  DASHI-native theorem.  Neither theorem is promoted.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 124 MC1/MC2/MC4 Mosco fail-closed round
+
+- Added checked Sprint 124 modules:
+  `YMSprint124MoscoLiminfObligationLedger`,
+  `YMSprint124WeakCompactnessSectorFeedthrough`, and
+  `YMSprint124MoscoRecoveryNoPollutionInterface`.
+- Added `scripts/ym_sprint124_mosco_liminf_audit.py` and generated
+  `outputs/ym_sprint124_mosco_liminf_audit/`.
+- Added focused Sprint 124 tests for the MC1 Mosco-liminf audit and
+  no-promotion/no-skeleton production guards.
+- The MC1 audit route decision is `fail-closed`: common-carrier closure,
+  weak compactness extraction, uniform lower-bound feed-through, and Mosco
+  liminf route evidence are recorded as concrete rows, but the closure flags
+  remain false while CC1/WC1 are unproved.
+- WC2/WC3p sector feed-through into MC1, MC2 recovery limsup, and MC4
+  no-bottom spectrum pollution now have inhabited obligation ledgers.  They
+  remain downstream of CC1/WC1/MC1 and do not promote the Clay claim.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 123 WC1/WC2/WC3p/MC3 fail-closed round
+
+- Added checked Sprint 123 modules:
+  `YMSprint123WeakCompactnessExtractionInterface`,
+  `YMSprint123SectorStabilityObligationLedger`, and
+  `YMSprint123UniformFormLowerBoundInterface`.
+- Added `scripts/ym_sprint123_wc1_weak_compactness_audit.py` and generated
+  `outputs/ym_sprint123_wc1_weak_compactness_audit/`.
+- Added focused Sprint 123 tests for WC1 audit behavior and production
+  no-skeleton/no-promotion guards.
+- The WC1 audit route decision is `fail-closed`: tightness, diagonal
+  subsequence extraction, spectral-measure compactness, and common-carrier
+  dependence are recorded as concrete evidence rows, but WC1 closure flags
+  remain false because Sprint121 `cc1ProvedHere=false`.
+- WC2 null-sector escape exclusion, WC3p projection-sector stability, and MC3
+  uniform form lower bound now have inhabited obligation ledgers.  They remain
+  downstream of CC1/WC1 and do not promote the Clay claim.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 122 CC2-CC4 carrier feed-through round
+
+- Added checked Sprint 122 modules:
+  `YMSprint122CarrierGaugeCovarianceFeedthrough`,
+  `YMSprint122UniformCarrierNormWindow`, and
+  `YMSprint122ApproximateInverseResiduals`.
+- Added `scripts/ym_sprint122_cc2_gauge_covariance_audit.py` and generated
+  `outputs/ym_sprint122_cc2_gauge_covariance_audit/`.
+- Added focused Sprint 122 tests for the CC2 gauge-covariance audit and
+  no-promotion/no-skeleton Sprint122 surface guards.
+- The CC2 audit route decision is `fail-closed`: the new CC2 surface is
+  recorded, but `cc2GaugeCovarianceProvedHere` and
+  `carrierGaugeCovarianceFeedthroughClosedHere` remain false; precursor
+  Sprint113 marker evidence is reported as historical risk rather than a
+  Sprint122 hard failure.
+- CC3 and CC4 now have inhabited norm-window and approximate-inverse residual
+  ledgers, respectively, but both remain blocked on Sprint121 `cc1ProvedHere=false`.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 121 CC1 kernel and GG1 parameter round
+
+- Added checked Sprint 121 CC1 kernel module:
+  `YMSprint121ExternalCommonCarrierAnalyticKernel`.
+- Added `scripts/ym_sprint121_cc1_kernel_audit.py` and generated
+  `outputs/ym_sprint121_cc1_kernel_audit/`.
+- Added `scripts/ym_sprint121_compact_group_parameter_table.py` and generated
+  `outputs/ym_sprint121_compact_group_parameter_table/` for the GG1 finite
+  compact-simple-group parameter table.
+- Strengthened Sprint 120 submission-readiness tests so the 7-round dependency
+  order, `5/10/3` hard/medium/easy split, `<=6` lanes per round, and unique
+  `CC1` root are executable invariants.
+- The CC1 audit route decision is `fail-closed`: `cc1ProvedHere`,
+  `externalCommonCarrierConstructionTheoremProvedHere`,
+  `commonCarrierConstructionTheoremProvedHere`,
+  `externalCommonCarrierConstructionClosedHere`, and
+  `commonCarrierFeedThroughClosedHere` remain false.
+- GG1 now has a deterministic finite parameter artifact, but this is a table
+  computation only; it does not close the analytic Clay route.
+- `clayYangMillsPromoted` remains false.
+
 # 2026-06-06 Sprint 120 certificate audit
 
 - Added checked Sprint 120 modules:
@@ -16,6 +158,15 @@
 - The certificate rows are complete as records, but the external analytic
   certificates and closure theorems are not supplied in repo.
 - `clayYangMillsPromoted` remains false.
+
+## Sprint120 submission-readiness dispatch (repo-grounded)
+
+- Added generated artifact: `outputs/ym_sprint120_submission_readiness/ym_sprint120_submission_readiness_plan.md`.
+- Current in-repo Clay-facing open obligations are exactly the 18 theorem items below: 
+  `CC1, CC2, CC3, CC4, WC1, WC2, WC3p, MC1, MC2, MC3, MC4, SC1, SC2, SC3, OS1, SY1, GG1, FIN`.
+- Hard/medium/easy breakdown: `5 + 10 + 3`.
+- Dispatch ordering constrained by declared dependencies currently yields **7 rounds** with a `max 6` worker cap.
+- Round 1 is only `CC1`; the route remains `fail-closed` while those 18 lanes are blocked.
 
 # 2026-06-06 Sprint 119 unlock audit
 
