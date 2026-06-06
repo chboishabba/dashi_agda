@@ -97,6 +97,17 @@ for all eight of those obligations and implements inhabited proof-argument
 receipts for them in the repo receipt layer.  This changes the internal
 proof-argument status only: external Clay acceptance remains outside repo
 authority and `clayYangMillsPromoted=false`.
+Sprint 104 freezes the Sprint 91-103 state at tag
+`sprint-103-receipt-freeze` and adds a no-placeholder Clay dossier builder.
+`YMSprint104ClayCandidateDossierBuilder` and
+`outputs/ym_sprint104_clay_dossier_builder/` assemble only evidence found in
+the repo: a Sprint 91-103 dependency graph, an SU(3) candidate dossier, and a
+red-team checklist.  Open Clay requirements are explicit blocked gaps:
+Wightman distributions, Poincare covariance, spectrum condition, all compact
+simple gauge groups, and a non-circular mass-gap proof.  The required
+non-circular route is WC3-controlled small-field expansion proving
+`m_eff(a) > 0`, followed by asymptotic-freedom scale behavior; Sprint 104
+records that route as blocked until proved.  Clay promotion remains false.
 
 Use one of these reader tracks first:
 

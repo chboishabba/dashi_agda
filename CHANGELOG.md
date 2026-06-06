@@ -6,6 +6,18 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 104 no-placeholder Clay dossier builder for `2026-06-06`: committed
+  and tagged the Sprint 91-103 freeze as `sprint-103-receipt-freeze`, then
+  added `YMSprint104ClayCandidateDossierBuilder`.  The new module and generated
+  artifacts build an evidence-backed dependency graph, candidate dossier, and
+  red-team checklist from actual Sprint 91-103 modules and summaries.  Open
+  Clay requirements are concrete blocked-gap records:
+  `blockedWightmanDistributions`, `blockedPoincareCovariance`,
+  `blockedSpectrumCondition`, `blockedAllCompactSimpleG`, and
+  `blockedNonCircularMassGapProof`.  The current lane remains SU(3)-candidate
+  only, external Clay gates remain outside repo authority, and
+  `clayYangMillsPromoted` remains false.
+
 - Sprint 103 YM inhabited proof-argument receipts for `2026-06-06`: records
   that the user supplied math for all eight Sprint 102 obligations and that
   Sprint 103 implements inhabited proof-argument receipts for them in the repo

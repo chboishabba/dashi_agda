@@ -2,6 +2,18 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-06 Sprint 104 no-placeholder Clay dossier builder:
+  freeze commit `16369ca` is tagged `sprint-103-receipt-freeze`.
+  `YMSprint104ClayCandidateDossierBuilder` consumes Sprint 103 and records an
+  evidence-backed SU(3) candidate dossier lane only.  Generated artifacts live
+  under `outputs/ym_sprint104_clay_dossier_builder/`.  Open Clay requirements
+  are blocked records rather than theorem placeholders:
+  `blockedWightmanDistributions`, `blockedPoincareCovariance`,
+  `blockedSpectrumCondition`, `blockedAllCompactSimpleG`, and
+  `blockedNonCircularMassGapProof`.  The required non-circular route is
+  WC3-controlled small-field expansion proving `m_eff(a) > 0`, with asymptotic
+  freedom used for physical scale behavior.  Clay promotion remains false.
+
 - 2026-06-06 Sprint 103 YM inhabited proof-argument receipts:
   user supplied math for all eight Sprint 102 obligations: CMP98 local
   oscillation, CMP98 Haar/probability constant, CMP116 polymer mass,

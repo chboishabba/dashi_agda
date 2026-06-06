@@ -1507,6 +1507,7 @@ import DASHI.Physics.Closure.YMSprint103ContinuumMassGapObligation7
 import DASHI.Physics.Closure.YMSprint103DobrushinWC3Receipt
 import DASHI.Physics.Closure.YMSprint103NontrivialSU3ContinuumMeasureObligation8
 import DASHI.Physics.Closure.YMSprint103UserMathCompletionReceipt
+import DASHI.Physics.Closure.YMSprint104ClayCandidateDossierBuilder
 import DASHI.Physics.Closure.YMMassGapSurvivalAuthority
 import DASHI.Physics.Closure.YMClayPromotionBoundary
 import DASHI.Physics.Closure.ClaySprintFortySevenYMAllDiameterKPReceipt

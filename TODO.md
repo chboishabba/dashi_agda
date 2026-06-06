@@ -3,6 +3,20 @@
 
 # P0 BLOCKERS
 
+• Sprint 104 no-placeholder Clay dossier builder is implemented.
+
+  Status:
+
+  - freeze commit `16369ca` is tagged `sprint-103-receipt-freeze`;
+  - adds `YMSprint104ClayCandidateDossierBuilder`;
+  - generates `outputs/ym_sprint104_clay_dossier_builder/` with dependency
+    graph, Clay candidate dossier, red-team checklist, and summary JSON;
+  - records the current manuscript lane as SU(3) candidate evidence only;
+  - records Wightman distributions, Poincare covariance, spectrum condition,
+    all compact simple gauge groups, and non-circular mass-gap proof as blocked
+    Clay requirements;
+  - keeps `clayYangMillsPromoted` false.
+
 • Sprint 103 YM inhabited proof-argument receipts are implemented.
 
   Status:

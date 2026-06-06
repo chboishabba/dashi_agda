@@ -1,3 +1,21 @@
+# 2026-06-06 Sprint 104 no-placeholder Clay dossier builder
+
+- Added `YMSprint104ClayCandidateDossierBuilder`.
+- Created the requested freeze point before Sprint 104:
+  commit `16369ca` and tag `sprint-103-receipt-freeze`.
+- Generated real artifacts in `outputs/ym_sprint104_clay_dossier_builder/`:
+  dependency graph JSON/Markdown, Clay candidate dossier, red-team checklist,
+  and summary JSON.
+- The dossier records the current lane as SU(3) candidate evidence only.
+- Clay-facing open areas are represented as blocked records:
+  `blockedWightmanDistributions`, `blockedPoincareCovariance`,
+  `blockedSpectrumCondition`, `blockedAllCompactSimpleG`, and
+  `blockedNonCircularMassGapProof`.
+- The required non-circular route is stated as: WC3-controlled small-field
+  expansion gives `m_eff(a) > 0`; asymptotic freedom supplies physical scale
+  behavior.  This route is blocked until proved without circular dependence.
+- `clayYangMillsPromoted` remains false.
+
 # 2026-06-06 Sprint 103 YM inhabited proof-argument receipts
 
 - User supplied math for all eight Sprint 102 obligations:
