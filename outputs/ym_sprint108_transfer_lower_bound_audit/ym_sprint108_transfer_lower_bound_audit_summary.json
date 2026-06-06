@@ -1,0 +1,5637 @@
+{
+  "clay_promotion_flags": [
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "transferGapLowerBoundPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "value": false
+    }
+  ],
+  "fail_reasons": [],
+  "generated_at_utc": "2026-06-06T04:17:07.387646+00:00",
+  "logarithmic_generator_calculus_evidence": [
+    {
+      "flags": {
+        "logarithmicGeneratorRelationRecorded": true
+      },
+      "line_evidence": [
+        {
+          "line": 25,
+          "text": "-- gap.  The formal relation between transfer matrix and generator is"
+        },
+        {
+          "line": 26,
+          "text": "-- recorded as logarithmic status text.  The physical Yang-Mills Hamiltonian"
+        },
+        {
+          "line": 47,
+          "text": "logarithmicGeneratorRelationRecorded : Bool"
+        },
+        {
+          "line": 48,
+          "text": "logarithmicGeneratorRelationRecorded = true"
+        },
+        {
+          "line": 66,
+          "text": "logarithmicGeneratorRelationStatement : String"
+        },
+        {
+          "line": 67,
+          "text": "logarithmicGeneratorRelationStatement ="
+        },
+        {
+          "line": 68,
+          "text": "\"Formal generator relation recorded: H(a) = - a^-1 log T(a), so a transfer eigenvalue separation would translate to a Hamiltonian energy separation after a validated logarithm, domain, and normalization package.\""
+        },
+        {
+          "line": 72,
+          "text": "\"Physical Hamiltonian spectral gap still requires self-adjoint physical Hamiltonian evidence, common domain control, spectrum-preserving transfer-to-generator identification, and continuum normalization.\""
+        },
+        {
+          "line": 80,
+          "text": "\"All Sprint107 bridge promotion fields are false; finite transfer data and logarithmic status text do not promote Clay Yang-Mills.\""
+        },
+        {
+          "line": 98,
+          "text": "record LogarithmicGeneratorRelationStatus : Set where"
+        },
+        {
+          "line": 99,
+          "text": "constructor mkLogarithmicGeneratorRelationStatus"
+        },
+        {
+          "line": 105,
+          "text": "logarithmFunctionalCalculusRequired :"
+        },
+        {
+          "line": 107,
+          "text": "generatorDomainEvidenceRequired :"
+        },
+        {
+          "line": 165,
+          "text": "stoneGeneratorIdentifiedWithPhysicalYM :"
+        },
+        {
+          "line": 206,
+          "text": "logarithmicGeneratorRelationStatus :"
+        },
+        {
+          "line": 207,
+          "text": "LogarithmicGeneratorRelationStatus"
+        }
+      ],
+      "line_numbers": [
+        25,
+        26,
+        47,
+        48,
+        66,
+        67,
+        68,
+        72,
+        80,
+        98,
+        99,
+        105,
+        107,
+        165,
+        206,
+        207,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        290,
+        302,
+        326,
+        327,
+        350
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "hamiltonianEvidenceBoundaryStatement": "Physical Hamiltonian spectral gap still requires self-adjoint physical Hamiltonian evidence, common domain control, spectrum-preserving transfer-to-generator identification, and continuum normalization.",
+        "logarithmicGeneratorRelationStatement": "Formal generator relation recorded: H(a) = - a^-1 log T(a), so a transfer eigenvalue separation would translate to a Hamiltonian energy separation after a validated logarithm, domain, and normalization package.",
+        "nonPromotionBoundaryStatement": "All Sprint107 bridge promotion fields are false; finite transfer data and logarithmic status text do not promote Clay Yang-Mills."
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 84,
+          "text": "\"H = -a^-1 log T(a), with spectral gap(H) controlled by the transfer gap\""
+        },
+        {
+          "line": 112,
+          "text": "\"Hamiltonian spectral bridge lane: relate the finite transfer matrix to H = -a^-1 log T(a) and preserve the positive spectral lower bound.\""
+        },
+        {
+          "line": 424,
+          "text": "\"m_eff(a_k) >= -log(18*C_local(a_k)) > 0\""
+        }
+      ],
+      "line_numbers": [
+        84,
+        112,
+        424
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "hamiltonianBridgeText": "Hamiltonian spectral bridge lane: relate the finite transfer matrix to H = -a^-1 log T(a) and preserve the positive spectral lower bound.",
+        "hamiltonianTargetFormula": "H = -a^-1 log T(a), with spectral gap(H) controlled by the transfer gap"
+      }
+    },
+    {
+      "flags": {
+        "logGeneratorCalculusBridgeRecorded": true
+      },
+      "line_evidence": [
+        {
+          "line": 1,
+          "text": "module DASHI.Physics.Closure.YMSprint108LogGeneratorCalculusBridge where"
+        },
+        {
+          "line": 17,
+          "text": "-- Sprint 108 logarithmic generator calculus bridge."
+        },
+        {
+          "line": 20,
+          "text": "-- finite transfer matrix T(a) to the candidate generator"
+        },
+        {
+          "line": 22,
+          "text": "--   H(a) = - a^-1 log T(a)."
+        },
+        {
+          "line": 32,
+          "text": "logGeneratorCalculusBridgeRecorded : Bool"
+        },
+        {
+          "line": 33,
+          "text": "logGeneratorCalculusBridgeRecorded = true"
+        },
+        {
+          "line": 96,
+          "text": "logGeneratorFormulaText : String"
+        },
+        {
+          "line": 97,
+          "text": "logGeneratorFormulaText ="
+        },
+        {
+          "line": 98,
+          "text": "\"Candidate generator formula: H(a) = - a^-1 log T(a).\""
+        },
+        {
+          "line": 102,
+          "text": "\"Input required: T(a) must be positive with spectrum in (0,1] on the selected Hilbert space, so the real logarithm branch and the sign convention for -log are valid.\""
+        },
+        {
+          "line": 106,
+          "text": "\"Spectral mapping target: transfer eigenvalues 0 < lambda1 < lambda0 <= 1 map monotonically to energies -a^-1 log lambda1 > -a^-1 log lambda0 for fixed positive a.\""
+        },
+        {
+          "line": 110,
+          "text": "\"Domain requirement: log T(a), H(a), and the physical Hamiltonian identification must act on a common invariant core with self-adjoint closure control.\""
+        },
+        {
+          "line": 118,
+          "text": "\"Finite transfer gap input gives only a candidate energy separation after the logarithmic calculus, monotonicity, common-core, and a-normalization inputs are supplied.\""
+        },
+        {
+          "line": 126,
+          "text": "\"Sprint108 records the logarithmic generator calculus bridge only; all theorem and Clay promotion flags remain false.\""
+        },
+        {
+          "line": 143,
+          "text": "logarithmBranchRequirementRecorded :"
+        },
+        {
+          "line": 163,
+          "text": "monotoneLogCalculusRequired :"
+        }
+      ],
+      "line_numbers": [
+        1,
+        17,
+        20,
+        22,
+        32,
+        33,
+        96,
+        97,
+        98,
+        102,
+        106,
+        110,
+        118,
+        126,
+        143,
+        163,
+        177,
+        219,
+        259,
+        286,
+        290,
+        321,
+        343,
+        409,
+        418,
+        426,
+        427,
+        428,
+        432,
+        433,
+        451,
+        462,
+        474,
+        476
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "domainCommonCoreText": "Domain requirement: log T(a), H(a), and the physical Hamiltonian identification must act on a common invariant core with self-adjoint closure control.",
+        "finiteGapToEnergySeparationText": "Finite transfer gap input gives only a candidate energy separation after the logarithmic calculus, monotonicity, common-core, and a-normalization inputs are supplied.",
+        "logGeneratorFormulaText": "Candidate generator formula: H(a) = - a^-1 log T(a).",
+        "nonPromotionBoundaryText": "Sprint108 records the logarithmic generator calculus bridge only; all theorem and Clay promotion flags remain false.",
+        "positivityContractivityText": "Input required: T(a) must be positive with spectrum in (0,1] on the selected Hilbert space, so the real logarithm branch and the sign convention for -log are valid.",
+        "spectralMappingMonotonicityText": "Spectral mapping target: transfer eigenvalues 0 < lambda1 < lambda0 <= 1 map monotonically to energies -a^-1 log lambda1 > -a^-1 log lambda0 for fixed positive a."
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 90,
+          "text": "hamiltonianGeneratorFormula : String"
+        },
+        {
+          "line": 91,
+          "text": "hamiltonianGeneratorFormula ="
+        },
+        {
+          "line": 92,
+          "text": "\"H(a) = - a^-1 log T(a)\""
+        },
+        {
+          "line": 108,
+          "text": "\"The lower bound must survive uniformly through a -> 0 after the transfer normalization and Hamiltonian generator identification.\""
+        },
+        {
+          "line": 287,
+          "text": "generatorIdentificationRequired :"
+        },
+        {
+          "line": 481,
+          "text": "hamiltonianGeneratorFormula"
+        }
+      ],
+      "line_numbers": [
+        90,
+        91,
+        92,
+        108,
+        287,
+        481
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "hamiltonianGeneratorFormula": "H(a) = - a^-1 log T(a)",
+        "uniformGapSurvivalConditionText": "The lower bound must survive uniformly through a -> 0 after the transfer normalization and Hamiltonian generator identification."
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 11,
+          "text": "import DASHI.Physics.Closure.YMSprint108LogGeneratorCalculusBridge"
+        },
+        {
+          "line": 12,
+          "text": "as LogGenerator108"
+        },
+        {
+          "line": 24,
+          "text": "-- Mosco/no-pollution, logarithmic generator calculus, uniform form lower"
+        },
+        {
+          "line": 46,
+          "text": "logGeneratorCalculusClosedHere : Bool"
+        },
+        {
+          "line": 47,
+          "text": "logGeneratorCalculusClosedHere ="
+        },
+        {
+          "line": 48,
+          "text": "LogGenerator108.functionalCalculusTheoremProvedHere"
+        },
+        {
+          "line": 64,
+          "text": "\"Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.\""
+        },
+        {
+          "line": 72,
+          "text": "\"Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.\""
+        },
+        {
+          "line": 95,
+          "text": "logGeneratorReceipt :"
+        },
+        {
+          "line": 96,
+          "text": "LogGenerator108.YMSprint108LogGeneratorCalculusBridgeReceipt"
+        },
+        {
+          "line": 103,
+          "text": "logGeneratorModulePath :"
+        },
+        {
+          "line": 117,
+          "text": "logGeneratorCalculusClosed :"
+        },
+        {
+          "line": 185,
+          "text": "LogGenerator108.canonicalYMSprint108LogGeneratorCalculusBridgeReceipt"
+        },
+        {
+          "line": 189,
+          "text": "\"DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda\""
+        },
+        {
+          "line": 198,
+          "text": "logGeneratorCalculusClosedHere"
+        }
+      ],
+      "line_numbers": [
+        11,
+        12,
+        24,
+        46,
+        47,
+        48,
+        64,
+        72,
+        95,
+        96,
+        103,
+        117,
+        185,
+        189,
+        198
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "assemblyStatusText": "Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.",
+        "nextProofPackageText": "Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport."
+      }
+    }
+  ],
+  "mosco_no_pollution_evidence": [
+    {
+      "flags": {
+        "moscoStyleBoundaryRecorded": true,
+        "noSpectralPollutionBoundaryRecorded": true
+      },
+      "line_evidence": [
+        {
+          "line": 22,
+          "text": "-- a-window, the needed c > 0 witness status, and the no-spectral-pollution /"
+        },
+        {
+          "line": 23,
+          "text": "-- Mosco-style passage boundary as obligations.  Finite transfer positivity is"
+        },
+        {
+          "line": 52,
+          "text": "noSpectralPollutionBoundaryRecorded : Bool"
+        },
+        {
+          "line": 53,
+          "text": "noSpectralPollutionBoundaryRecorded = true"
+        },
+        {
+          "line": 55,
+          "text": "moscoStyleBoundaryRecorded : Bool"
+        },
+        {
+          "line": 56,
+          "text": "moscoStyleBoundaryRecorded = true"
+        },
+        {
+          "line": 79,
+          "text": "noSpectralPollutionText : String"
+        },
+        {
+          "line": 80,
+          "text": "noSpectralPollutionText ="
+        },
+        {
+          "line": 81,
+          "text": "\"The finite transfer spectra must pass to the continuum without spectral pollution at the bottom of the physical Hamiltonian spectrum.\""
+        },
+        {
+          "line": 83,
+          "text": "moscoStyleBoundaryText : String"
+        },
+        {
+          "line": 84,
+          "text": "moscoStyleBoundaryText ="
+        },
+        {
+          "line": 85,
+          "text": "\"A Mosco-style or equivalent quadratic-form convergence boundary must identify the continuum operator and preserve the relevant lower bound.\""
+        },
+        {
+          "line": 156,
+          "text": "noSpectralPollutionStatement :"
+        },
+        {
+          "line": 158,
+          "text": "moscoStyleStatement :"
+        },
+        {
+          "line": 160,
+          "text": "noSpectralPollutionRecorded :"
+        },
+        {
+          "line": 162,
+          "text": "moscoStyleEvidenceRecorded :"
+        }
+      ],
+      "line_numbers": [
+        22,
+        23,
+        52,
+        53,
+        55,
+        56,
+        79,
+        80,
+        81,
+        83,
+        84,
+        85,
+        156,
+        158,
+        160,
+        162,
+        275,
+        276,
+        277,
+        278
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "moscoStyleBoundaryText": "A Mosco-style or equivalent quadratic-form convergence boundary must identify the continuum operator and preserve the relevant lower bound.",
+        "noSpectralPollutionText": "The finite transfer spectra must pass to the continuum without spectral pollution at the bottom of the physical Hamiltonian spectrum."
+      }
+    },
+    {
+      "flags": {
+        "moscoBridgeProvedHere": false,
+        "noBottomSpectrumPollutionProvedHere": false
+      },
+      "line_evidence": [
+        {
+          "line": 1,
+          "text": "module DASHI.Physics.Closure.YMSprint108MoscoNoPollutionBridge where"
+        },
+        {
+          "line": 22,
+          "text": "-- Sprint 108 Mosco and no-spectral-pollution bridge."
+        },
+        {
+          "line": 30,
+          "text": "-- that are still required for a Mosco/no-bottom-spectrum-pollution passage:"
+        },
+        {
+          "line": 32,
+          "text": "-- recovery sequences, exclusion of bottom-spectrum pollution, and the explicit"
+        },
+        {
+          "line": 42,
+          "text": "moscoBridgeProvedHere : Bool"
+        },
+        {
+          "line": 43,
+          "text": "moscoBridgeProvedHere = false"
+        },
+        {
+          "line": 54,
+          "text": "noBottomSpectrumPollutionProvedHere : Bool"
+        },
+        {
+          "line": 55,
+          "text": "noBottomSpectrumPollutionProvedHere = false"
+        },
+        {
+          "line": 71,
+          "text": "moscoBridgeStatementText : String"
+        },
+        {
+          "line": 72,
+          "text": "moscoBridgeStatementText ="
+        },
+        {
+          "line": 73,
+          "text": "\"The finite transfer quadratic forms must converge to the continuum closed semibounded form in the Mosco sense on the physical carrier domain.\""
+        },
+        {
+          "line": 77,
+          "text": "\"Mosco liminf side: weakly convergent finite-energy approximants must not lose energy below the continuum quadratic form.\""
+        },
+        {
+          "line": 85,
+          "text": "\"Mosco recovery side: every continuum finite-energy vector needs finite transfer approximants with matching norm and energy limit.\""
+        },
+        {
+          "line": 87,
+          "text": "noBottomPollutionStatementText : String"
+        },
+        {
+          "line": 88,
+          "text": "noBottomPollutionStatementText ="
+        },
+        {
+          "line": 89,
+          "text": "\"No bottom-spectrum pollution: no spurious finite-transfer eigenvalue branch may converge below the continuum physical Hamiltonian bottom.\""
+        }
+      ],
+      "line_numbers": [
+        1,
+        22,
+        30,
+        32,
+        42,
+        43,
+        54,
+        55,
+        71,
+        72,
+        73,
+        77,
+        85,
+        87,
+        88,
+        89,
+        93,
+        97,
+        101,
+        127,
+        129,
+        131,
+        133,
+        135,
+        137,
+        139,
+        141,
+        143,
+        145,
+        147,
+        148,
+        149,
+        151,
+        153,
+        159,
+        170,
+        211,
+        214,
+        221,
+        227,
+        232,
+        239,
+        245,
+        248,
+        257,
+        259,
+        260,
+        263,
+        277,
+        283,
+        294,
+        299,
+        305,
+        316,
+        318,
+        325,
+        340,
+        349,
+        351,
+        352,
+        364,
+        365,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        440,
+        467,
+        468,
+        482,
+        488,
+        489,
+        490,
+        491,
+        497,
+        504,
+        506,
+        511,
+        514,
+        515,
+        516,
+        517,
+        523,
+        528
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "bridgeToTargetStatementText": "When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.",
+        "finiteSupportInsufficientStatementText": "Finite transfer positivity is imported support, but by itself it gives no uniform continuum lower bound and no no-pollution theorem.",
+        "lowerSemicontinuityStatementText": "Mosco liminf side: weakly convergent finite-energy approximants must not lose energy below the continuum quadratic form.",
+        "moscoBridgeStatementText": "The finite transfer quadratic forms must converge to the continuum closed semibounded form in the Mosco sense on the physical carrier domain.",
+        "noBottomPollutionStatementText": "No bottom-spectrum pollution: no spurious finite-transfer eigenvalue branch may converge below the continuum physical Hamiltonian bottom.",
+        "openTheoremBoundaryText": "The target lower-bound theorem remains open in Sprint108 because this file records required statuses rather than a DASHI-native Mosco/no-pollution proof.",
+        "recoverySequenceStatementText": "Mosco recovery side: every continuum finite-energy vector needs finite transfer approximants with matching norm and energy limit."
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 13,
+          "text": "import DASHI.Physics.Closure.YMSprint108MoscoNoPollutionBridge"
+        },
+        {
+          "line": 14,
+          "text": "as Mosco108"
+        },
+        {
+          "line": 24,
+          "text": "-- Mosco/no-pollution, logarithmic generator calculus, uniform form lower"
+        },
+        {
+          "line": 42,
+          "text": "moscoNoPollutionClosedHere : Bool"
+        },
+        {
+          "line": 43,
+          "text": "moscoNoPollutionClosedHere ="
+        },
+        {
+          "line": 44,
+          "text": "Mosco108.uniformTransferTargetProvedHere"
+        },
+        {
+          "line": 64,
+          "text": "\"Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.\""
+        },
+        {
+          "line": 72,
+          "text": "\"Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.\""
+        },
+        {
+          "line": 93,
+          "text": "moscoNoPollutionReceipt :"
+        },
+        {
+          "line": 94,
+          "text": "Mosco108.YMSprint108MoscoNoPollutionBridgeReceipt"
+        },
+        {
+          "line": 101,
+          "text": "moscoModulePath :"
+        },
+        {
+          "line": 115,
+          "text": "moscoNoPollutionClosed :"
+        },
+        {
+          "line": 184,
+          "text": "Mosco108.canonicalYMSprint108MoscoNoPollutionBridgeReceipt"
+        },
+        {
+          "line": 188,
+          "text": "\"DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda\""
+        },
+        {
+          "line": 197,
+          "text": "moscoNoPollutionClosedHere"
+        }
+      ],
+      "line_numbers": [
+        13,
+        14,
+        24,
+        42,
+        43,
+        44,
+        64,
+        72,
+        93,
+        94,
+        101,
+        115,
+        184,
+        188,
+        197
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "assemblyStatusText": "Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.",
+        "nextProofPackageText": "Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport."
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 115,
+          "text": "\"Blocker: prove no-spectral-pollution and Mosco-style quadratic-form passage to the continuum operator.\""
+        }
+      ],
+      "line_numbers": [
+        115
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "continuumPassageBlockerText": "Blocker: prove no-spectral-pollution and Mosco-style quadratic-form passage to the continuum operator."
+      }
+    }
+  ],
+  "repo_root": "/home/c/Documents/code/dashi_agda",
+  "required_transfer_lower_bound_theorem_flags": [
+    {
+      "name": "uniformAWindowProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "continuumPassageProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "targetLowerBoundTheoremProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "physicalHamiltonianSpectralGapProvedHereStatus",
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "transferToHamiltonianTheoremLocallyProved",
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "transferGapLowerBoundPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "hamiltonianSpectralBridgeProved",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "finiteContinuumUniformityProved",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "targetLowerBoundProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "transferComparisonProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "spectralMappingMonotonicityProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "normalizationContinuumLimitProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "physicalHamiltonianTheoremLocallyClosed",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "moscoBridgeProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "lowerSemicontinuityProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "liminfSpectralLowerBoundProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "noBottomSpectrumPollutionProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "uniformTransferTargetProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "continuumHamiltonianGapProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "uniformGapSurvivalConditionProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "transferLowerBoundTheoremProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "continuumHamiltonianGapProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "uniformFormLowerBoundTheoremProved",
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "value": false
+    }
+  ],
+  "route_decision": "transfer lower-bound theorem still open",
+  "scanned_surfaces": {
+    "sprint107": [
+      "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda"
+    ],
+    "sprint108": [
+      "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda"
+    ]
+  },
+  "spectral_gap_transport_evidence": [
+    {
+      "flags": {
+        "noSpectralPollutionBoundaryRecorded": true
+      },
+      "line_evidence": [
+        {
+          "line": 19,
+          "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+        },
+        {
+          "line": 22,
+          "text": "-- a-window, the needed c > 0 witness status, and the no-spectral-pollution /"
+        },
+        {
+          "line": 52,
+          "text": "noSpectralPollutionBoundaryRecorded : Bool"
+        },
+        {
+          "line": 53,
+          "text": "noSpectralPollutionBoundaryRecorded = true"
+        },
+        {
+          "line": 69,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 79,
+          "text": "noSpectralPollutionText : String"
+        },
+        {
+          "line": 80,
+          "text": "noSpectralPollutionText ="
+        },
+        {
+          "line": 81,
+          "text": "\"The finite transfer spectra must pass to the continuum without spectral pollution at the bottom of the physical Hamiltonian spectrum.\""
+        },
+        {
+          "line": 93,
+          "text": "\"The target lower-bound theorem remains open unless an actual DASHI-native proof of the uniform window, c > 0, and continuum spectral passage is supplied.\""
+        },
+        {
+          "line": 114,
+          "text": "required-continuum-spectral-passage :"
+        },
+        {
+          "line": 153,
+          "text": "record ContinuumSpectralPassageBoundary : Set where"
+        },
+        {
+          "line": 154,
+          "text": "constructor mkContinuumSpectralPassageBoundary"
+        },
+        {
+          "line": 156,
+          "text": "noSpectralPollutionStatement :"
+        },
+        {
+          "line": 160,
+          "text": "noSpectralPollutionRecorded :"
+        },
+        {
+          "line": 240,
+          "text": "continuumSpectralPassage :"
+        },
+        {
+          "line": 241,
+          "text": "ContinuumSpectralPassageBoundary"
+        }
+      ],
+      "line_numbers": [
+        19,
+        22,
+        52,
+        53,
+        69,
+        79,
+        80,
+        81,
+        93,
+        114,
+        153,
+        154,
+        156,
+        160,
+        240,
+        241,
+        271,
+        272,
+        273,
+        274,
+        275,
+        277,
+        281,
+        326
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "noSpectralPollutionText": "The finite transfer spectra must pass to the continuum without spectral pollution at the bottom of the physical Hamiltonian spectrum.",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a",
+        "theoremOpenUnlessProofText": "The target lower-bound theorem remains open unless an actual DASHI-native proof of the uniform window, c > 0, and continuum spectral passage is supplied."
+      }
+    },
+    {
+      "flags": {
+        "hamiltonianSpectralGapBridgeRecorded": true,
+        "physicalHamiltonianSpectralGapProvedHereStatus": false,
+        "transferToHamiltonianTheoremLocallyProved": false
+      },
+      "line_evidence": [
+        {
+          "line": 1,
+          "text": "module DASHI.Physics.Closure.YMSprint107HamiltonianSpectralGapBridge where"
+        },
+        {
+          "line": 9,
+          "text": "import DASHI.Physics.Closure.CrossGateHamiltonianCompatibilityReceipt"
+        },
+        {
+          "line": 10,
+          "text": "as CrossHamiltonian"
+        },
+        {
+          "line": 13,
+          "text": "import DASHI.Physics.Closure.SelfAdjointYangMillsHamiltonianOnCarrierQuotient"
+        },
+        {
+          "line": 14,
+          "text": "as CarrierHamiltonian"
+        },
+        {
+          "line": 21,
+          "text": "-- Sprint 107 Hamiltonian spectral-gap bridge."
+        },
+        {
+          "line": 23,
+          "text": "-- The bridge records the precise status of the transfer-matrix to"
+        },
+        {
+          "line": 24,
+          "text": "-- Hamiltonian route.  The finite transfer matrix has a positive receipt-level"
+        },
+        {
+          "line": 25,
+          "text": "-- gap.  The formal relation between transfer matrix and generator is"
+        },
+        {
+          "line": 26,
+          "text": "-- recorded as logarithmic status text.  The physical Yang-Mills Hamiltonian"
+        },
+        {
+          "line": 27,
+          "text": "-- spectral gap still needs self-adjointness, domain identification, and"
+        },
+        {
+          "line": 34,
+          "text": "hamiltonianSpectralGapBridgeRecorded : Bool"
+        },
+        {
+          "line": 35,
+          "text": "hamiltonianSpectralGapBridgeRecorded = true"
+        },
+        {
+          "line": 50,
+          "text": "physicalHamiltonianSpectralGapProvedHereStatus : Bool"
+        },
+        {
+          "line": 51,
+          "text": "physicalHamiltonianSpectralGapProvedHereStatus = false"
+        },
+        {
+          "line": 59,
+          "text": "transferToHamiltonianTheoremLocallyProved : Bool"
+        }
+      ],
+      "line_numbers": [
+        1,
+        9,
+        10,
+        13,
+        14,
+        21,
+        23,
+        24,
+        25,
+        26,
+        27,
+        34,
+        35,
+        50,
+        51,
+        59,
+        60,
+        64,
+        68,
+        70,
+        71,
+        72,
+        76,
+        95,
+        114,
+        115,
+        119,
+        131,
+        152,
+        153,
+        155,
+        156,
+        157,
+        158,
+        159,
+        161,
+        169,
+        197,
+        199,
+        202,
+        208,
+        209,
+        212,
+        213,
+        224,
+        226,
+        227,
+        231,
+        253,
+        255,
+        256,
+        257,
+        258,
+        259,
+        266,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        301,
+        302,
+        303,
+        315,
+        316,
+        317,
+        318,
+        320,
+        321,
+        322,
+        328,
+        329,
+        332,
+        333,
+        339,
+        344,
+        345,
+        346,
+        351,
+        358,
+        360,
+        367,
+        368,
+        369
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "finiteTransferGapStatement": "Finite-lattice transfer matrix T(a) is defined and has positive receipt-level gap by the imported lattice transfer receipt.",
+        "hamiltonianEvidenceBoundaryStatement": "Physical Hamiltonian spectral gap still requires self-adjoint physical Hamiltonian evidence, common domain control, spectrum-preserving transfer-to-generator identification, and continuum normalization.",
+        "localTheoremBoundaryStatement": "Sprint107 records the bridge status but does not locally prove the transfer-matrix-to-Hamiltonian spectral-gap theorem.",
+        "logarithmicGeneratorRelationStatement": "Formal generator relation recorded: H(a) = - a^-1 log T(a), so a transfer eigenvalue separation would translate to a Hamiltonian energy separation after a validated logarithm, domain, and normalization package."
+      }
+    },
+    {
+      "flags": {
+        "hamiltonianSpectralBridgeProved": false
+      },
+      "line_evidence": [
+        {
+          "line": 24,
+          "text": "-- uniformity/constant ledgers. The Hamiltonian bridge is tracked by path and"
+        },
+        {
+          "line": 27,
+          "text": "-- lower-bound theorem, Hamiltonian bridge theorem, uniform continuum theorem,"
+        },
+        {
+          "line": 42,
+          "text": "hamiltonianSpectralBridgeProved : Bool"
+        },
+        {
+          "line": 43,
+          "text": "hamiltonianSpectralBridgeProved = false"
+        },
+        {
+          "line": 70,
+          "text": "hamiltonianBridge107Path : String"
+        },
+        {
+          "line": 71,
+          "text": "hamiltonianBridge107Path ="
+        },
+        {
+          "line": 72,
+          "text": "\"DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda\""
+        },
+        {
+          "line": 80,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 82,
+          "text": "hamiltonianTargetFormula : String"
+        },
+        {
+          "line": 83,
+          "text": "hamiltonianTargetFormula ="
+        },
+        {
+          "line": 84,
+          "text": "\"H = -a^-1 log T(a), with spectral gap(H) controlled by the transfer gap\""
+        },
+        {
+          "line": 88,
+          "text": "\"Sprint107 critical path assembled from Sprint106 typed receipts plus Sprint107 uniformity and constant ledgers; Hamiltonian bridge remains path/status tracked because its canonical receipt is Set-omega.\""
+        },
+        {
+          "line": 92,
+          "text": "\"Open boundary: prove the uniform transfer-gap lower bound and Hamiltonian spectral bridge before any continuum mass-gap promotion.\""
+        },
+        {
+          "line": 100,
+          "text": "\"Transfer matrix finite positivity lane: Sprint106 records finite transfer-matrix definition and finite-lattice gap positivity only.\""
+        },
+        {
+          "line": 104,
+          "text": "\"Finite-continuum uniformity lane: the constants in gap(T(a)) >= c * m_eff(a) * a must remain uniform through the continuum passage.\""
+        },
+        {
+          "line": 110,
+          "text": "hamiltonianBridgeText : String"
+        }
+      ],
+      "line_numbers": [
+        24,
+        27,
+        42,
+        43,
+        70,
+        71,
+        72,
+        80,
+        82,
+        83,
+        84,
+        88,
+        92,
+        100,
+        104,
+        110,
+        111,
+        112,
+        135,
+        141,
+        180,
+        212,
+        214,
+        216,
+        217,
+        221,
+        222,
+        256,
+        440,
+        505,
+        506,
+        523,
+        524,
+        525,
+        526,
+        527,
+        530,
+        532,
+        533,
+        577,
+        591,
+        611,
+        612,
+        639
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "assemblyStatusText": "Sprint107 critical path assembled from Sprint106 typed receipts plus Sprint107 uniformity and constant ledgers; Hamiltonian bridge remains path/status tracked because its canonical receipt is Set-omega.",
+        "criticalTargetFormula": "gap(T(a)) >= c * m_eff(a) * a",
+        "finiteTransferPositivityText": "Transfer matrix finite positivity lane: Sprint106 records finite transfer-matrix definition and finite-lattice gap positivity only.",
+        "hamiltonianBridge107Path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+        "hamiltonianBridgeText": "Hamiltonian spectral bridge lane: relate the finite transfer matrix to H = -a^-1 log T(a) and preserve the positive spectral lower bound.",
+        "hamiltonianTargetFormula": "H = -a^-1 log T(a), with spectral gap(H) controlled by the transfer gap",
+        "openTheoremBoundaryText": "Open boundary: prove the uniform transfer-gap lower bound and Hamiltonian spectral bridge before any continuum mass-gap promotion.",
+        "uniformityBoundaryText": "Finite-continuum uniformity lane: the constants in gap(T(a)) >= c * m_eff(a) * a must remain uniform through the continuum passage."
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 19,
+          "text": "--   gap(T(a)) >= c * m_eff(a) * a."
+        },
+        {
+          "line": 86,
+          "text": "\"gap(T(a)) >= c_transfer * m_eff(a) * a\""
+        },
+        {
+          "line": 94,
+          "text": "\"Open: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with the recorded uniform constant.\""
+        },
+        {
+          "line": 98,
+          "text": "\"Sprint106 transfer-matrix comparison imports finite transfer-matrix definition and finite positive gap status only.\""
+        }
+      ],
+      "line_numbers": [
+        19,
+        86,
+        94,
+        98
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "finiteTransferInputText": "Sprint106 transfer-matrix comparison imports finite transfer-matrix definition and finite positive gap status only.",
+        "targetFormulaText": "gap(T(a)) >= c_transfer * m_eff(a) * a",
+        "transferComparisonOpenText": "Open: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with the recorded uniform constant."
+      }
+    },
+    {
+      "flags": {
+        "physicalHamiltonianTheoremLocallyClosed": false,
+        "spectralMappingMonotonicityProvedHere": false,
+        "spectralMappingMonotonicityRecorded": true
+      },
+      "line_evidence": [
+        {
+          "line": 11,
+          "text": "import DASHI.Physics.Closure.YMSprint107HamiltonianSpectralGapBridge"
+        },
+        {
+          "line": 12,
+          "text": "as HamiltonianBridge107"
+        },
+        {
+          "line": 20,
+          "text": "-- finite transfer matrix T(a) to the candidate generator"
+        },
+        {
+          "line": 25,
+          "text": "-- contractivity, spectral-mapping, domain/common-core, normalization, and"
+        },
+        {
+          "line": 27,
+          "text": "-- Hamiltonian theorem and does not promote the Clay Yang-Mills claim."
+        },
+        {
+          "line": 38,
+          "text": "spectralMappingMonotonicityRecorded : Bool"
+        },
+        {
+          "line": 39,
+          "text": "spectralMappingMonotonicityRecorded = true"
+        },
+        {
+          "line": 53,
+          "text": "spectralMappingMonotonicityProvedHere : Bool"
+        },
+        {
+          "line": 54,
+          "text": "spectralMappingMonotonicityProvedHere = false"
+        },
+        {
+          "line": 65,
+          "text": "physicalHamiltonianTheoremLocallyClosed : Bool"
+        },
+        {
+          "line": 66,
+          "text": "physicalHamiltonianTheoremLocallyClosed = false"
+        },
+        {
+          "line": 84,
+          "text": "hamiltonianBridgeAlreadyProvedInSprint107 : Bool"
+        },
+        {
+          "line": 85,
+          "text": "hamiltonianBridgeAlreadyProvedInSprint107 ="
+        },
+        {
+          "line": 86,
+          "text": "HamiltonianBridge107.transferToHamiltonianTheoremLocallyProved"
+        },
+        {
+          "line": 88,
+          "text": "physicalHamiltonianGapProvedInSprint107 : Bool"
+        },
+        {
+          "line": 89,
+          "text": "physicalHamiltonianGapProvedInSprint107 ="
+        }
+      ],
+      "line_numbers": [
+        11,
+        12,
+        20,
+        25,
+        27,
+        38,
+        39,
+        53,
+        54,
+        65,
+        66,
+        84,
+        85,
+        86,
+        88,
+        89,
+        90,
+        94,
+        104,
+        105,
+        106,
+        110,
+        122,
+        150,
+        151,
+        161,
+        181,
+        228,
+        229,
+        235,
+        241,
+        243,
+        251,
+        252,
+        255,
+        261,
+        263,
+        275,
+        294,
+        295,
+        302,
+        303,
+        310,
+        312,
+        313,
+        337,
+        338,
+        339,
+        340,
+        341,
+        347,
+        348,
+        380,
+        388,
+        389,
+        390,
+        391,
+        394,
+        397,
+        398,
+        405,
+        407,
+        409,
+        410,
+        411,
+        412,
+        418,
+        420,
+        436,
+        437,
+        444,
+        445,
+        452,
+        453,
+        454,
+        464,
+        483,
+        484,
+        485
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "domainCommonCoreText": "Domain requirement: log T(a), H(a), and the physical Hamiltonian identification must act on a common invariant core with self-adjoint closure control.",
+        "localClosureBoundaryText": "The physical Hamiltonian theorem is not locally closed because positivity/contractivity, spectral mapping, common-core/domain, and normalization supplies are recorded as requirements rather than proved here.",
+        "spectralMappingMonotonicityText": "Spectral mapping target: transfer eigenvalues 0 < lambda1 < lambda0 <= 1 map monotonically to energies -a^-1 log lambda1 > -a^-1 log lambda0 for fixed positive a.",
+        "transferOperatorText": "T(a) is the finite-lattice transfer matrix supplied by the Sprint106 transfer comparison receipt."
+      }
+    },
+    {
+      "flags": {
+        "liminfSpectralLowerBoundProvedHere": false
+      },
+      "line_evidence": [
+        {
+          "line": 22,
+          "text": "-- Sprint 108 Mosco and no-spectral-pollution bridge."
+        },
+        {
+          "line": 24,
+          "text": "-- This module records the continuum spectral-passage part of the uniform"
+        },
+        {
+          "line": 27,
+          "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+        },
+        {
+          "line": 31,
+          "text": "-- lower semicontinuity of quadratic forms, liminf lower spectral control,"
+        },
+        {
+          "line": 48,
+          "text": "liminfSpectralLowerBoundProvedHere : Bool"
+        },
+        {
+          "line": 49,
+          "text": "liminfSpectralLowerBoundProvedHere = false"
+        },
+        {
+          "line": 69,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 79,
+          "text": "liminfSpectralStatementText : String"
+        },
+        {
+          "line": 80,
+          "text": "liminfSpectralStatementText ="
+        },
+        {
+          "line": 81,
+          "text": "\"Spectral liminf side: bottom spectral values of the finite transfer operators must have continuum lower bounds in the physical sector.\""
+        },
+        {
+          "line": 89,
+          "text": "\"No bottom-spectrum pollution: no spurious finite-transfer eigenvalue branch may converge below the continuum physical Hamiltonian bottom.\""
+        },
+        {
+          "line": 97,
+          "text": "\"When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.\""
+        },
+        {
+          "line": 144,
+          "text": "liminf-spectral-lower-bound :"
+        },
+        {
+          "line": 166,
+          "text": "liminf-spectral-lower-bound"
+        },
+        {
+          "line": 223,
+          "text": "record LiminfSpectralLowerBoundStatus : Set where"
+        },
+        {
+          "line": 224,
+          "text": "constructor mkLiminfSpectralLowerBoundStatus"
+        }
+      ],
+      "line_numbers": [
+        22,
+        24,
+        27,
+        31,
+        48,
+        49,
+        69,
+        79,
+        80,
+        81,
+        89,
+        97,
+        144,
+        166,
+        223,
+        224,
+        336,
+        360,
+        361,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        415,
+        480,
+        495
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "bridgeToTargetStatementText": "When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.",
+        "liminfSpectralStatementText": "Spectral liminf side: bottom spectral values of the finite transfer operators must have continuum lower bounds in the physical sector.",
+        "noBottomPollutionStatementText": "No bottom-spectrum pollution: no spurious finite-transfer eigenvalue branch may converge below the continuum physical Hamiltonian bottom.",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      }
+    },
+    {
+      "flags": {
+        "continuumHamiltonianGapProvedHere": false,
+        "finiteTransferLowerBoundEnoughForContinuumHamiltonian": false,
+        "firstExcitedThresholdTransportProvedHere": false,
+        "firstExcitedThresholdTransportRecorded": true,
+        "spectralGapTransportRecorded": true,
+        "transportTheoremProvedHere": false
+      },
+      "line_evidence": [
+        {
+          "line": 1,
+          "text": "module DASHI.Physics.Closure.YMSprint108SpectralGapTransport where"
+        },
+        {
+          "line": 17,
+          "text": "import DASHI.Physics.Closure.YMSprint107HamiltonianSpectralGapBridge"
+        },
+        {
+          "line": 18,
+          "text": "as HamiltonianBridge107"
+        },
+        {
+          "line": 23,
+          "text": "-- Sprint 108 spectral-gap transport boundary."
+        },
+        {
+          "line": 25,
+          "text": "-- This module records the spectral convergence package needed to move a"
+        },
+        {
+          "line": 26,
+          "text": "-- finite transfer-gap lower bound through the continuum Hamiltonian route."
+        },
+        {
+          "line": 30,
+          "text": "-- required/open records.  No continuum Hamiltonian spectral-gap theorem or"
+        },
+        {
+          "line": 36,
+          "text": "spectralGapTransportRecorded : Bool"
+        },
+        {
+          "line": 37,
+          "text": "spectralGapTransportRecorded = true"
+        },
+        {
+          "line": 42,
+          "text": "continuumHamiltonianGapProvedHere : Bool"
+        },
+        {
+          "line": 43,
+          "text": "continuumHamiltonianGapProvedHere = false"
+        },
+        {
+          "line": 49,
+          "text": "finiteTransferLowerBoundEnoughForContinuumHamiltonian : Bool"
+        },
+        {
+          "line": 50,
+          "text": "finiteTransferLowerBoundEnoughForContinuumHamiltonian = false"
+        },
+        {
+          "line": 82,
+          "text": "spectralTransportTargetFormula : String"
+        },
+        {
+          "line": 83,
+          "text": "spectralTransportTargetFormula ="
+        },
+        {
+          "line": 84,
+          "text": "\"finite gap(T(a)) lower bounds transport to a positive continuum physical Hamiltonian spectral gap\""
+        }
+      ],
+      "line_numbers": [
+        1,
+        17,
+        18,
+        23,
+        25,
+        26,
+        30,
+        36,
+        37,
+        42,
+        43,
+        49,
+        50,
+        82,
+        83,
+        84,
+        88,
+        90,
+        91,
+        96,
+        100,
+        108,
+        112,
+        116,
+        120,
+        138,
+        139,
+        140,
+        146,
+        148,
+        150,
+        152,
+        154,
+        156,
+        158,
+        160,
+        162,
+        191,
+        192,
+        197,
+        203,
+        217,
+        220,
+        238,
+        256,
+        272,
+        279,
+        294,
+        314,
+        337,
+        342,
+        355,
+        360,
+        362,
+        390,
+        392,
+        393,
+        401,
+        422,
+        425,
+        428,
+        438,
+        440,
+        481,
+        507,
+        516,
+        528,
+        529,
+        533,
+        534,
+        535,
+        558,
+        563,
+        564,
+        565,
+        583,
+        585,
+        592,
+        593,
+        594
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "finiteTransferGapFormula": "gap(T(a)) >= c * m_eff(a) * a",
+        "firstExcitedThresholdTransportText": "The first excited threshold must be transported under the finite-to-continuum spectral convergence, not merely recorded as finite-lattice positivity.",
+        "hamiltonianGeneratorFormula": "H(a) = - a^-1 log T(a)",
+        "isolatedBottomSectorText": "The finite and limiting physical Hamiltonians need an isolated bottom sector so the vacuum projection remains separated from the first excited threshold.",
+        "nonPromotionBoundaryText": "Sprint108 spectral transport does not promote Clay Yang-Mills and does not infer the continuum Hamiltonian gap from finite transfer positivity alone.",
+        "openTransportTheoremBoundaryText": "The spectral-gap transport theorem remains open here; the recorded conditions are required boundaries, not a proof.",
+        "physicalSpectrumConditionBoundaryText": "The limiting operator must be identified with the physical Yang-Mills Hamiltonian on the physical spectrum, including domain and sector restrictions.",
+        "spectralTransportTargetFormula": "finite gap(T(a)) lower bounds transport to a positive continuum physical Hamiltonian spectral gap",
+        "sprint107HamiltonianBridgePath": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+        "uniformGapSurvivalConditionText": "The lower bound must survive uniformly through a -> 0 after the transfer normalization and Hamiltonian generator identification."
+      }
+    },
+    {
+      "flags": {
+        "continuumHamiltonianGapProvedHere": false
+      },
+      "line_evidence": [
+        {
+          "line": 15,
+          "text": "import DASHI.Physics.Closure.YMSprint108SpectralGapTransport"
+        },
+        {
+          "line": 16,
+          "text": "as SpectralTransport108"
+        },
+        {
+          "line": 25,
+          "text": "-- bound, and spectral-gap transport.  It records that the package is now"
+        },
+        {
+          "line": 28,
+          "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+        },
+        {
+          "line": 39,
+          "text": "continuumHamiltonianGapProvedHere : Bool"
+        },
+        {
+          "line": 40,
+          "text": "continuumHamiltonianGapProvedHere = false"
+        },
+        {
+          "line": 54,
+          "text": "spectralGapTransportClosedHere : Bool"
+        },
+        {
+          "line": 55,
+          "text": "spectralGapTransportClosedHere ="
+        },
+        {
+          "line": 56,
+          "text": "SpectralTransport108.transportTheoremProvedHere"
+        },
+        {
+          "line": 60,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 64,
+          "text": "\"Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.\""
+        },
+        {
+          "line": 72,
+          "text": "\"Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.\""
+        },
+        {
+          "line": 99,
+          "text": "spectralGapTransportReceipt :"
+        },
+        {
+          "line": 100,
+          "text": "SpectralTransport108.YMSprint108SpectralGapTransportReceipt"
+        },
+        {
+          "line": 107,
+          "text": "spectralGapTransportModulePath :"
+        },
+        {
+          "line": 121,
+          "text": "spectralGapTransportClosed :"
+        }
+      ],
+      "line_numbers": [
+        15,
+        16,
+        25,
+        28,
+        39,
+        40,
+        54,
+        55,
+        56,
+        60,
+        64,
+        72,
+        99,
+        100,
+        107,
+        121,
+        125,
+        187,
+        191,
+        200,
+        202
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "assemblyStatusText": "Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.",
+        "nextProofPackageText": "Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 21,
+          "text": "--   gap(T(a)) >= c_transfer * m_eff(a) * a"
+        },
+        {
+          "line": 43,
+          "text": "continuumSpectralPassageProvedHere : Bool"
+        },
+        {
+          "line": 44,
+          "text": "continuumSpectralPassageProvedHere ="
+        },
+        {
+          "line": 75,
+          "text": "\"gap(T(a)) >= c_transfer * m_eff(a) * a\""
+        },
+        {
+          "line": 81,
+          "text": "spectralGapStatementText : String"
+        },
+        {
+          "line": 82,
+          "text": "spectralGapStatementText ="
+        },
+        {
+          "line": 83,
+          "text": "\"The spectral-gap form of the same ledger is gap(T(a)) >= c_transfer * m_eff(a) * a.\""
+        },
+        {
+          "line": 107,
+          "text": "\"Blocker: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with constant c_transfer.\""
+        },
+        {
+          "line": 115,
+          "text": "\"Blocker: prove no-spectral-pollution and Mosco-style quadratic-form passage to the continuum operator.\""
+        },
+        {
+          "line": 121,
+          "text": "hamiltonianBridgeBlockerText : String"
+        },
+        {
+          "line": 122,
+          "text": "hamiltonianBridgeBlockerText ="
+        },
+        {
+          "line": 123,
+          "text": "\"Blocker: bridge the transfer lower bound to the Hamiltonian spectral gap without losing the uniform positive factor.\""
+        },
+        {
+          "line": 192,
+          "text": "spectralGapStatement :"
+        },
+        {
+          "line": 228,
+          "text": "hamiltonian-bridge-blocker :"
+        },
+        {
+          "line": 330,
+          "text": "spectralGapStatementText"
+        },
+        {
+          "line": 368,
+          "text": "continuumSpectralPassageProvedHere"
+        }
+      ],
+      "line_numbers": [
+        21,
+        43,
+        44,
+        75,
+        81,
+        82,
+        83,
+        107,
+        115,
+        121,
+        122,
+        123,
+        192,
+        228,
+        330,
+        368,
+        378,
+        379,
+        381,
+        382,
+        396,
+        404
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "continuumPassageBlockerText": "Blocker: prove no-spectral-pollution and Mosco-style quadratic-form passage to the continuum operator.",
+        "hamiltonianBridgeBlockerText": "Blocker: bridge the transfer lower bound to the Hamiltonian spectral gap without losing the uniform positive factor.",
+        "spectralGapStatementText": "The spectral-gap form of the same ledger is gap(T(a)) >= c_transfer * m_eff(a) * a.",
+        "targetFormLowerBoundText": "gap(T(a)) >= c_transfer * m_eff(a) * a",
+        "transferComparisonBlockerText": "Blocker: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with constant c_transfer."
+      }
+    }
+  ],
+  "sprint108_fail_closed_scan": [
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "domainCommonCoreConstructedHere": false,
+        "domainCommonCoreRequirementRecorded": true,
+        "finiteGapConvertedToPhysicalEnergyGapHere": false,
+        "finiteTransferGapToEnergySeparationRecorded": true,
+        "functionalCalculusTheoremProvedHere": false,
+        "logGeneratorCalculusBridgeRecorded": true,
+        "normalizationByARecorded": true,
+        "normalizationContinuumLimitProvedHere": false,
+        "physicalHamiltonianTheoremLocallyClosed": false,
+        "positivityContractivityInputRecorded": true,
+        "spectralMappingMonotonicityProvedHere": false,
+        "spectralMappingMonotonicityRecorded": true
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "evidence_lines": {
+        "logarithmic_generator_calculus": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint108LogGeneratorCalculusBridge where"
+          },
+          {
+            "line": 17,
+            "text": "-- Sprint 108 logarithmic generator calculus bridge."
+          },
+          {
+            "line": 20,
+            "text": "-- finite transfer matrix T(a) to the candidate generator"
+          },
+          {
+            "line": 22,
+            "text": "--   H(a) = - a^-1 log T(a)."
+          },
+          {
+            "line": 32,
+            "text": "logGeneratorCalculusBridgeRecorded : Bool"
+          },
+          {
+            "line": 33,
+            "text": "logGeneratorCalculusBridgeRecorded = true"
+          },
+          {
+            "line": 96,
+            "text": "logGeneratorFormulaText : String"
+          },
+          {
+            "line": 97,
+            "text": "logGeneratorFormulaText ="
+          },
+          {
+            "line": 98,
+            "text": "\"Candidate generator formula: H(a) = - a^-1 log T(a).\""
+          },
+          {
+            "line": 102,
+            "text": "\"Input required: T(a) must be positive with spectrum in (0,1] on the selected Hilbert space, so the real logarithm branch and the sign convention for -log are valid.\""
+          },
+          {
+            "line": 106,
+            "text": "\"Spectral mapping target: transfer eigenvalues 0 < lambda1 < lambda0 <= 1 map monotonically to energies -a^-1 log lambda1 > -a^-1 log lambda0 for fixed positive a.\""
+          },
+          {
+            "line": 110,
+            "text": "\"Domain requirement: log T(a), H(a), and the physical Hamiltonian identification must act on a common invariant core with self-adjoint closure control.\""
+          },
+          {
+            "line": 118,
+            "text": "\"Finite transfer gap input gives only a candidate energy separation after the logarithmic calculus, monotonicity, common-core, and a-normalization inputs are supplied.\""
+          },
+          {
+            "line": 126,
+            "text": "\"Sprint108 records the logarithmic generator calculus bridge only; all theorem and Clay promotion flags remain false.\""
+          },
+          {
+            "line": 143,
+            "text": "logarithmBranchRequirementRecorded :"
+          },
+          {
+            "line": 163,
+            "text": "monotoneLogCalculusRequired :"
+          }
+        ],
+        "mosco_no_pollution": [],
+        "spectral_gap_transport": [
+          {
+            "line": 11,
+            "text": "import DASHI.Physics.Closure.YMSprint107HamiltonianSpectralGapBridge"
+          },
+          {
+            "line": 12,
+            "text": "as HamiltonianBridge107"
+          },
+          {
+            "line": 20,
+            "text": "-- finite transfer matrix T(a) to the candidate generator"
+          },
+          {
+            "line": 25,
+            "text": "-- contractivity, spectral-mapping, domain/common-core, normalization, and"
+          },
+          {
+            "line": 27,
+            "text": "-- Hamiltonian theorem and does not promote the Clay Yang-Mills claim."
+          },
+          {
+            "line": 38,
+            "text": "spectralMappingMonotonicityRecorded : Bool"
+          },
+          {
+            "line": 39,
+            "text": "spectralMappingMonotonicityRecorded = true"
+          },
+          {
+            "line": 53,
+            "text": "spectralMappingMonotonicityProvedHere : Bool"
+          },
+          {
+            "line": 54,
+            "text": "spectralMappingMonotonicityProvedHere = false"
+          },
+          {
+            "line": 65,
+            "text": "physicalHamiltonianTheoremLocallyClosed : Bool"
+          },
+          {
+            "line": 66,
+            "text": "physicalHamiltonianTheoremLocallyClosed = false"
+          },
+          {
+            "line": 84,
+            "text": "hamiltonianBridgeAlreadyProvedInSprint107 : Bool"
+          },
+          {
+            "line": 85,
+            "text": "hamiltonianBridgeAlreadyProvedInSprint107 ="
+          },
+          {
+            "line": 86,
+            "text": "HamiltonianBridge107.transferToHamiltonianTheoremLocallyProved"
+          },
+          {
+            "line": 88,
+            "text": "physicalHamiltonianGapProvedInSprint107 : Bool"
+          },
+          {
+            "line": 89,
+            "text": "physicalHamiltonianGapProvedInSprint107 ="
+          }
+        ],
+        "uniform_form_lower_bound": [
+          {
+            "line": 13,
+            "text": "import DASHI.Physics.Closure.YMSprint107UniformTransferConstantLedger"
+          },
+          {
+            "line": 76,
+            "text": "uniformTransferConstantPositiveInput : Bool"
+          },
+          {
+            "line": 77,
+            "text": "uniformTransferConstantPositiveInput ="
+          },
+          {
+            "line": 78,
+            "text": "ConstantLedger107.uniformConstantPositive"
+          },
+          {
+            "line": 80,
+            "text": "uniformTransferConstantIndependentOfAInput : Bool"
+          },
+          {
+            "line": 81,
+            "text": "uniformTransferConstantIndependentOfAInput ="
+          },
+          {
+            "line": 82,
+            "text": "ConstantLedger107.uniformConstantIndependentOfA"
+          },
+          {
+            "line": 114,
+            "text": "\"Normalization requirement: the positive lattice spacing factor a^-1 must be fixed in the finite bridge and controlled uniformly in the continuum passage.\""
+          },
+          {
+            "line": 197,
+            "text": "uniformContinuumControlRequired :"
+          },
+          {
+            "line": 253,
+            "text": "uniformTransferConstantLedger :"
+          },
+          {
+            "line": 254,
+            "text": "ConstantLedger107.UniformTransferTargetLedger"
+          },
+          {
+            "line": 257,
+            "text": "uniformTransferConstantLedgerModulePath :"
+          },
+          {
+            "line": 370,
+            "text": "uniformTransferConstantPositiveInput"
+          },
+          {
+            "line": 371,
+            "text": "uniformTransferConstantIndependentOfAInput"
+          },
+          {
+            "line": 406,
+            "text": "ConstantLedger107.canonicalUniformTransferTargetLedger"
+          },
+          {
+            "line": 408,
+            "text": "\"DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda\""
+          }
+        ]
+      },
+      "incomplete_surface_token_hits": [],
+      "logarithmic_generator_line_numbers": [
+        1,
+        17,
+        20,
+        22,
+        32,
+        33,
+        96,
+        97,
+        98,
+        102,
+        106,
+        110,
+        118,
+        126,
+        143,
+        163,
+        177,
+        219,
+        259,
+        286,
+        290,
+        321,
+        343,
+        409,
+        418,
+        426,
+        427,
+        428,
+        432,
+        433,
+        451,
+        462,
+        474,
+        476
+      ],
+      "mosco_no_pollution_line_numbers": [],
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "spectral_gap_transport_line_numbers": [
+        11,
+        12,
+        20,
+        25,
+        27,
+        38,
+        39,
+        53,
+        54,
+        65,
+        66,
+        84,
+        85,
+        86,
+        88,
+        89,
+        90,
+        94,
+        104,
+        105,
+        106,
+        110,
+        122,
+        150,
+        151,
+        161,
+        181,
+        228,
+        229,
+        235,
+        241,
+        243,
+        251,
+        252,
+        255,
+        261,
+        263,
+        275,
+        294,
+        295,
+        302,
+        303,
+        310,
+        312,
+        313,
+        337,
+        338,
+        339,
+        340,
+        341,
+        347,
+        348,
+        380,
+        388,
+        389,
+        390,
+        391,
+        394,
+        397,
+        398,
+        405,
+        407,
+        409,
+        410,
+        411,
+        412,
+        418,
+        420,
+        436,
+        437,
+        444,
+        445,
+        452,
+        453,
+        454,
+        464,
+        483,
+        484,
+        485
+      ],
+      "sprint": "Sprint108",
+      "string_assignments": {
+        "domainCommonCoreText": "Domain requirement: log T(a), H(a), and the physical Hamiltonian identification must act on a common invariant core with self-adjoint closure control.",
+        "finiteGapToEnergySeparationText": "Finite transfer gap input gives only a candidate energy separation after the logarithmic calculus, monotonicity, common-core, and a-normalization inputs are supplied.",
+        "localClosureBoundaryText": "The physical Hamiltonian theorem is not locally closed because positivity/contractivity, spectral mapping, common-core/domain, and normalization supplies are recorded as requirements rather than proved here.",
+        "logGeneratorFormulaText": "Candidate generator formula: H(a) = - a^-1 log T(a).",
+        "nonPromotionBoundaryText": "Sprint108 records the logarithmic generator calculus bridge only; all theorem and Clay promotion flags remain false.",
+        "normalizationByAText": "Normalization requirement: the positive lattice spacing factor a^-1 must be fixed in the finite bridge and controlled uniformly in the continuum passage.",
+        "positivityContractivityText": "Input required: T(a) must be positive with spectrum in (0,1] on the selected Hilbert space, so the real logarithm branch and the sign convention for -log are valid.",
+        "spectralMappingMonotonicityText": "Spectral mapping target: transfer eigenvalues 0 < lambda1 < lambda0 <= 1 map monotonically to energies -a^-1 log lambda1 > -a^-1 log lambda0 for fixed positive a.",
+        "transferOperatorText": "T(a) is the finite-lattice transfer matrix supplied by the Sprint106 transfer comparison receipt."
+      },
+      "target_line_numbers": [],
+      "theorem_line_numbers": [
+        27,
+        29,
+        30,
+        50,
+        51,
+        53,
+        54,
+        59,
+        60,
+        65,
+        66,
+        84,
+        85,
+        86,
+        88,
+        89,
+        90,
+        122,
+        126,
+        145,
+        161,
+        165,
+        203,
+        241,
+        243,
+        261,
+        263,
+        265,
+        268,
+        269,
+        271,
+        273,
+        275,
+        277,
+        279,
+        280,
+        281,
+        282,
+        306,
+        307,
+        310,
+        312,
+        313,
+        314,
+        316,
+        317,
+        334,
+        347,
+        372,
+        393,
+        394,
+        396,
+        397,
+        398,
+        410,
+        411,
+        412,
+        414,
+        415,
+        416,
+        417,
+        419,
+        420,
+        421,
+        448,
+        449,
+        452,
+        453,
+        454,
+        456,
+        457,
+        458,
+        478,
+        479,
+        480,
+        483,
+        484,
+        485,
+        488,
+        489,
+        490,
+        491
+      ],
+      "uniform_lower_bound_line_numbers": [
+        13,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        114,
+        197,
+        253,
+        254,
+        257,
+        370,
+        371,
+        406,
+        408
+      ]
+    },
+    {
+      "bool_assignments": {
+        "bridgeReceiptRecorded": true,
+        "clayYangMillsPromoted": false,
+        "finiteTransferSupportEnoughAlone": false,
+        "liminfSpectralLowerBoundProvedHere": false,
+        "lowerSemicontinuityProvedHere": false,
+        "moscoBridgeProvedHere": false,
+        "noBottomSpectrumPollutionProvedHere": false,
+        "recoverySequenceConstructedHere": false,
+        "uniformTransferTargetProvedHere": false
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "evidence_lines": {
+        "logarithmic_generator_calculus": [],
+        "mosco_no_pollution": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint108MoscoNoPollutionBridge where"
+          },
+          {
+            "line": 22,
+            "text": "-- Sprint 108 Mosco and no-spectral-pollution bridge."
+          },
+          {
+            "line": 30,
+            "text": "-- that are still required for a Mosco/no-bottom-spectrum-pollution passage:"
+          },
+          {
+            "line": 32,
+            "text": "-- recovery sequences, exclusion of bottom-spectrum pollution, and the explicit"
+          },
+          {
+            "line": 42,
+            "text": "moscoBridgeProvedHere : Bool"
+          },
+          {
+            "line": 43,
+            "text": "moscoBridgeProvedHere = false"
+          },
+          {
+            "line": 54,
+            "text": "noBottomSpectrumPollutionProvedHere : Bool"
+          },
+          {
+            "line": 55,
+            "text": "noBottomSpectrumPollutionProvedHere = false"
+          },
+          {
+            "line": 71,
+            "text": "moscoBridgeStatementText : String"
+          },
+          {
+            "line": 72,
+            "text": "moscoBridgeStatementText ="
+          },
+          {
+            "line": 73,
+            "text": "\"The finite transfer quadratic forms must converge to the continuum closed semibounded form in the Mosco sense on the physical carrier domain.\""
+          },
+          {
+            "line": 77,
+            "text": "\"Mosco liminf side: weakly convergent finite-energy approximants must not lose energy below the continuum quadratic form.\""
+          },
+          {
+            "line": 85,
+            "text": "\"Mosco recovery side: every continuum finite-energy vector needs finite transfer approximants with matching norm and energy limit.\""
+          },
+          {
+            "line": 87,
+            "text": "noBottomPollutionStatementText : String"
+          },
+          {
+            "line": 88,
+            "text": "noBottomPollutionStatementText ="
+          },
+          {
+            "line": 89,
+            "text": "\"No bottom-spectrum pollution: no spurious finite-transfer eigenvalue branch may converge below the continuum physical Hamiltonian bottom.\""
+          }
+        ],
+        "spectral_gap_transport": [
+          {
+            "line": 22,
+            "text": "-- Sprint 108 Mosco and no-spectral-pollution bridge."
+          },
+          {
+            "line": 24,
+            "text": "-- This module records the continuum spectral-passage part of the uniform"
+          },
+          {
+            "line": 27,
+            "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+          },
+          {
+            "line": 31,
+            "text": "-- lower semicontinuity of quadratic forms, liminf lower spectral control,"
+          },
+          {
+            "line": 48,
+            "text": "liminfSpectralLowerBoundProvedHere : Bool"
+          },
+          {
+            "line": 49,
+            "text": "liminfSpectralLowerBoundProvedHere = false"
+          },
+          {
+            "line": 69,
+            "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+          },
+          {
+            "line": 79,
+            "text": "liminfSpectralStatementText : String"
+          },
+          {
+            "line": 80,
+            "text": "liminfSpectralStatementText ="
+          },
+          {
+            "line": 81,
+            "text": "\"Spectral liminf side: bottom spectral values of the finite transfer operators must have continuum lower bounds in the physical sector.\""
+          },
+          {
+            "line": 89,
+            "text": "\"No bottom-spectrum pollution: no spurious finite-transfer eigenvalue branch may converge below the continuum physical Hamiltonian bottom.\""
+          },
+          {
+            "line": 97,
+            "text": "\"When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.\""
+          },
+          {
+            "line": 144,
+            "text": "liminf-spectral-lower-bound :"
+          },
+          {
+            "line": 166,
+            "text": "liminf-spectral-lower-bound"
+          },
+          {
+            "line": 223,
+            "text": "record LiminfSpectralLowerBoundStatus : Set where"
+          },
+          {
+            "line": 224,
+            "text": "constructor mkLiminfSpectralLowerBoundStatus"
+          }
+        ],
+        "uniform_form_lower_bound": [
+          {
+            "line": 14,
+            "text": "import DASHI.Physics.Closure.YMSprint107FiniteContinuumUniformityBoundary"
+          },
+          {
+            "line": 15,
+            "text": "as Uniformity107"
+          },
+          {
+            "line": 18,
+            "text": "import DASHI.Physics.Closure.YMSprint107UniformTransferConstantLedger"
+          },
+          {
+            "line": 24,
+            "text": "-- This module records the continuum spectral-passage part of the uniform"
+          },
+          {
+            "line": 25,
+            "text": "-- transfer lower-bound package:"
+          },
+          {
+            "line": 27,
+            "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+          },
+          {
+            "line": 34,
+            "text": "-- target lower-bound promotion is made here."
+          },
+          {
+            "line": 57,
+            "text": "uniformTransferTargetProvedHere : Bool"
+          },
+          {
+            "line": 58,
+            "text": "uniformTransferTargetProvedHere = false"
+          },
+          {
+            "line": 69,
+            "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+          },
+          {
+            "line": 81,
+            "text": "\"Spectral liminf side: bottom spectral values of the finite transfer operators must have continuum lower bounds in the physical sector.\""
+          },
+          {
+            "line": 93,
+            "text": "\"Finite transfer positivity is imported support, but by itself it gives no uniform continuum lower bound and no no-pollution theorem.\""
+          },
+          {
+            "line": 97,
+            "text": "\"When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.\""
+          },
+          {
+            "line": 101,
+            "text": "\"The target lower-bound theorem remains open in Sprint108 because this file records required statuses rather than a DASHI-native Mosco/no-pollution proof.\""
+          },
+          {
+            "line": 115,
+            "text": "sprint107UniformityPath : String"
+          },
+          {
+            "line": 116,
+            "text": "sprint107UniformityPath ="
+          }
+        ]
+      },
+      "incomplete_surface_token_hits": [],
+      "logarithmic_generator_line_numbers": [],
+      "mosco_no_pollution_line_numbers": [
+        1,
+        22,
+        30,
+        32,
+        42,
+        43,
+        54,
+        55,
+        71,
+        72,
+        73,
+        77,
+        85,
+        87,
+        88,
+        89,
+        93,
+        97,
+        101,
+        127,
+        129,
+        131,
+        133,
+        135,
+        137,
+        139,
+        141,
+        143,
+        145,
+        147,
+        148,
+        149,
+        151,
+        153,
+        159,
+        170,
+        211,
+        214,
+        221,
+        227,
+        232,
+        239,
+        245,
+        248,
+        257,
+        259,
+        260,
+        263,
+        277,
+        283,
+        294,
+        299,
+        305,
+        316,
+        318,
+        325,
+        340,
+        349,
+        351,
+        352,
+        364,
+        365,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        440,
+        467,
+        468,
+        482,
+        488,
+        489,
+        490,
+        491,
+        497,
+        504,
+        506,
+        511,
+        514,
+        515,
+        516,
+        517,
+        523,
+        528
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "spectral_gap_transport_line_numbers": [
+        22,
+        24,
+        27,
+        31,
+        48,
+        49,
+        69,
+        79,
+        80,
+        81,
+        89,
+        97,
+        144,
+        166,
+        223,
+        224,
+        336,
+        360,
+        361,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        415,
+        480,
+        495
+      ],
+      "sprint": "Sprint108",
+      "string_assignments": {
+        "bridgeToTargetStatementText": "When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.",
+        "finiteSupportInsufficientStatementText": "Finite transfer positivity is imported support, but by itself it gives no uniform continuum lower bound and no no-pollution theorem.",
+        "liminfSpectralStatementText": "Spectral liminf side: bottom spectral values of the finite transfer operators must have continuum lower bounds in the physical sector.",
+        "lowerSemicontinuityStatementText": "Mosco liminf side: weakly convergent finite-energy approximants must not lose energy below the continuum quadratic form.",
+        "moscoBridgeStatementText": "The finite transfer quadratic forms must converge to the continuum closed semibounded form in the Mosco sense on the physical carrier domain.",
+        "noBottomPollutionStatementText": "No bottom-spectrum pollution: no spurious finite-transfer eigenvalue branch may converge below the continuum physical Hamiltonian bottom.",
+        "openTheoremBoundaryText": "The target lower-bound theorem remains open in Sprint108 because this file records required statuses rather than a DASHI-native Mosco/no-pollution proof.",
+        "recoverySequenceStatementText": "Mosco recovery side: every continuum finite-energy vector needs finite transfer approximants with matching norm and energy limit.",
+        "sprint106AssemblyPath": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+        "sprint106EffectiveMassPath": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "sprint106TransferMatrixPath": "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda",
+        "sprint107ConstantLedgerPath": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+        "sprint107CriticalPathPath": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+        "sprint107UniformityPath": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      },
+      "target_line_numbers": [
+        27,
+        69,
+        97
+      ],
+      "theorem_line_numbers": [
+        36,
+        37,
+        42,
+        43,
+        45,
+        46,
+        48,
+        49,
+        54,
+        55,
+        57,
+        58,
+        73,
+        93,
+        99,
+        100,
+        101,
+        132,
+        218,
+        236,
+        274,
+        316,
+        318,
+        322,
+        327,
+        328,
+        334,
+        336,
+        338,
+        340,
+        344,
+        346,
+        370,
+        371,
+        374,
+        403,
+        404,
+        415,
+        416,
+        428,
+        440,
+        441,
+        467,
+        468,
+        470,
+        473,
+        474,
+        475,
+        476,
+        478,
+        479,
+        480,
+        482,
+        484,
+        485,
+        500,
+        502,
+        514,
+        515,
+        516,
+        520,
+        521,
+        522,
+        523,
+        526,
+        527,
+        528
+      ],
+      "uniform_lower_bound_line_numbers": [
+        14,
+        15,
+        18,
+        24,
+        25,
+        27,
+        34,
+        57,
+        58,
+        69,
+        81,
+        93,
+        97,
+        101,
+        115,
+        116,
+        117,
+        121,
+        144,
+        166,
+        184,
+        185,
+        187,
+        196,
+        234,
+        301,
+        302,
+        310,
+        311,
+        313,
+        320,
+        369,
+        383,
+        384,
+        389,
+        410,
+        457,
+        458,
+        459,
+        460,
+        464,
+        465,
+        470,
+        484,
+        499
+      ]
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "continuumHamiltonianGapProvedHere": false,
+        "finiteTransferLowerBoundEnoughForContinuumHamiltonian": false,
+        "firstExcitedThresholdTransportProvedHere": false,
+        "firstExcitedThresholdTransportRecorded": true,
+        "isolatedBottomSectorProvedHere": false,
+        "isolatedBottomSectorRecorded": true,
+        "noEigenvalueCollapseAtZeroProvedHere": false,
+        "noEigenvalueCollapseAtZeroRecorded": true,
+        "physicalSpectrumConditionBoundaryProvedHere": false,
+        "physicalSpectrumConditionBoundaryRecorded": true,
+        "spectralGapTransportRecorded": true,
+        "transportTheoremProvedHere": false,
+        "uniformGapSurvivalConditionProvedHere": false,
+        "uniformGapSurvivalConditionRecorded": true
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "evidence_lines": {
+        "logarithmic_generator_calculus": [
+          {
+            "line": 90,
+            "text": "hamiltonianGeneratorFormula : String"
+          },
+          {
+            "line": 91,
+            "text": "hamiltonianGeneratorFormula ="
+          },
+          {
+            "line": 92,
+            "text": "\"H(a) = - a^-1 log T(a)\""
+          },
+          {
+            "line": 108,
+            "text": "\"The lower bound must survive uniformly through a -> 0 after the transfer normalization and Hamiltonian generator identification.\""
+          },
+          {
+            "line": 287,
+            "text": "generatorIdentificationRequired :"
+          },
+          {
+            "line": 481,
+            "text": "hamiltonianGeneratorFormula"
+          }
+        ],
+        "mosco_no_pollution": [],
+        "spectral_gap_transport": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint108SpectralGapTransport where"
+          },
+          {
+            "line": 17,
+            "text": "import DASHI.Physics.Closure.YMSprint107HamiltonianSpectralGapBridge"
+          },
+          {
+            "line": 18,
+            "text": "as HamiltonianBridge107"
+          },
+          {
+            "line": 23,
+            "text": "-- Sprint 108 spectral-gap transport boundary."
+          },
+          {
+            "line": 25,
+            "text": "-- This module records the spectral convergence package needed to move a"
+          },
+          {
+            "line": 26,
+            "text": "-- finite transfer-gap lower bound through the continuum Hamiltonian route."
+          },
+          {
+            "line": 30,
+            "text": "-- required/open records.  No continuum Hamiltonian spectral-gap theorem or"
+          },
+          {
+            "line": 36,
+            "text": "spectralGapTransportRecorded : Bool"
+          },
+          {
+            "line": 37,
+            "text": "spectralGapTransportRecorded = true"
+          },
+          {
+            "line": 42,
+            "text": "continuumHamiltonianGapProvedHere : Bool"
+          },
+          {
+            "line": 43,
+            "text": "continuumHamiltonianGapProvedHere = false"
+          },
+          {
+            "line": 49,
+            "text": "finiteTransferLowerBoundEnoughForContinuumHamiltonian : Bool"
+          },
+          {
+            "line": 50,
+            "text": "finiteTransferLowerBoundEnoughForContinuumHamiltonian = false"
+          },
+          {
+            "line": 82,
+            "text": "spectralTransportTargetFormula : String"
+          },
+          {
+            "line": 83,
+            "text": "spectralTransportTargetFormula ="
+          },
+          {
+            "line": 84,
+            "text": "\"finite gap(T(a)) lower bounds transport to a positive continuum physical Hamiltonian spectral gap\""
+          }
+        ],
+        "uniform_form_lower_bound": [
+          {
+            "line": 15,
+            "text": "import DASHI.Physics.Closure.YMSprint107FiniteContinuumUniformityBoundary"
+          },
+          {
+            "line": 16,
+            "text": "as Uniformity107"
+          },
+          {
+            "line": 26,
+            "text": "-- finite transfer-gap lower bound through the continuum Hamiltonian route."
+          },
+          {
+            "line": 28,
+            "text": "-- excited threshold transport, no-collapse-at-zero condition, uniform gap"
+          },
+          {
+            "line": 70,
+            "text": "uniformGapSurvivalConditionRecorded : Bool"
+          },
+          {
+            "line": 71,
+            "text": "uniformGapSurvivalConditionRecorded = true"
+          },
+          {
+            "line": 73,
+            "text": "uniformGapSurvivalConditionProvedHere : Bool"
+          },
+          {
+            "line": 74,
+            "text": "uniformGapSurvivalConditionProvedHere = false"
+          },
+          {
+            "line": 84,
+            "text": "\"finite gap(T(a)) lower bounds transport to a positive continuum physical Hamiltonian spectral gap\""
+          },
+          {
+            "line": 88,
+            "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+          },
+          {
+            "line": 106,
+            "text": "uniformGapSurvivalConditionText : String"
+          },
+          {
+            "line": 107,
+            "text": "uniformGapSurvivalConditionText ="
+          },
+          {
+            "line": 108,
+            "text": "\"The lower bound must survive uniformly through a -> 0 after the transfer normalization and Hamiltonian generator identification.\""
+          },
+          {
+            "line": 134,
+            "text": "sprint107UniformityPath : String"
+          },
+          {
+            "line": 135,
+            "text": "sprint107UniformityPath ="
+          },
+          {
+            "line": 136,
+            "text": "\"DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda\""
+          }
+        ]
+      },
+      "incomplete_surface_token_hits": [],
+      "logarithmic_generator_line_numbers": [
+        90,
+        91,
+        92,
+        108,
+        287,
+        481
+      ],
+      "mosco_no_pollution_line_numbers": [],
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "spectral_gap_transport_line_numbers": [
+        1,
+        17,
+        18,
+        23,
+        25,
+        26,
+        30,
+        36,
+        37,
+        42,
+        43,
+        49,
+        50,
+        82,
+        83,
+        84,
+        88,
+        90,
+        91,
+        96,
+        100,
+        108,
+        112,
+        116,
+        120,
+        138,
+        139,
+        140,
+        146,
+        148,
+        150,
+        152,
+        154,
+        156,
+        158,
+        160,
+        162,
+        191,
+        192,
+        197,
+        203,
+        217,
+        220,
+        238,
+        256,
+        272,
+        279,
+        294,
+        314,
+        337,
+        342,
+        355,
+        360,
+        362,
+        390,
+        392,
+        393,
+        401,
+        422,
+        425,
+        428,
+        438,
+        440,
+        481,
+        507,
+        516,
+        528,
+        529,
+        533,
+        534,
+        535,
+        558,
+        563,
+        564,
+        565,
+        583,
+        585,
+        592,
+        593,
+        594
+      ],
+      "sprint": "Sprint108",
+      "string_assignments": {
+        "finiteTransferGapFormula": "gap(T(a)) >= c * m_eff(a) * a",
+        "firstExcitedThresholdTransportText": "The first excited threshold must be transported under the finite-to-continuum spectral convergence, not merely recorded as finite-lattice positivity.",
+        "hamiltonianGeneratorFormula": "H(a) = - a^-1 log T(a)",
+        "isolatedBottomSectorText": "The finite and limiting physical Hamiltonians need an isolated bottom sector so the vacuum projection remains separated from the first excited threshold.",
+        "noEigenvalueCollapseAtZeroText": "No sequence of non-vacuum finite eigenvalues may collapse to zero in the continuum physical spectrum.",
+        "nonPromotionBoundaryText": "Sprint108 spectral transport does not promote Clay Yang-Mills and does not infer the continuum Hamiltonian gap from finite transfer positivity alone.",
+        "openTransportTheoremBoundaryText": "The spectral-gap transport theorem remains open here; the recorded conditions are required boundaries, not a proof.",
+        "physicalSpectrumConditionBoundaryText": "The limiting operator must be identified with the physical Yang-Mills Hamiltonian on the physical spectrum, including domain and sector restrictions.",
+        "spectralTransportTargetFormula": "finite gap(T(a)) lower bounds transport to a positive continuum physical Hamiltonian spectral gap",
+        "sprint106EffectiveMassPath": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "sprint106TransferAssemblyPath": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+        "sprint106TransferMatrixPath": "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda",
+        "sprint107CriticalPathPath": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+        "sprint107HamiltonianBridgePath": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+        "sprint107UniformityPath": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+        "uniformGapSurvivalConditionText": "The lower bound must survive uniformly through a -> 0 after the transfer normalization and Hamiltonian generator identification."
+      },
+      "target_line_numbers": [
+        88
+      ],
+      "theorem_line_numbers": [
+        30,
+        33,
+        34,
+        39,
+        40,
+        42,
+        43,
+        55,
+        56,
+        61,
+        62,
+        67,
+        68,
+        73,
+        74,
+        79,
+        80,
+        114,
+        115,
+        116,
+        159,
+        181,
+        183,
+        201,
+        203,
+        205,
+        235,
+        253,
+        269,
+        291,
+        311,
+        316,
+        317,
+        325,
+        327,
+        329,
+        331,
+        333,
+        335,
+        337,
+        339,
+        349,
+        351,
+        353,
+        355,
+        357,
+        380,
+        381,
+        386,
+        388,
+        389,
+        390,
+        392,
+        393,
+        394,
+        396,
+        397,
+        414,
+        415,
+        427,
+        428,
+        429,
+        450,
+        462,
+        473,
+        487,
+        500,
+        503,
+        504,
+        505,
+        506,
+        508,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        525,
+        526,
+        527,
+        528,
+        530,
+        553,
+        554,
+        559,
+        560,
+        561,
+        563,
+        564,
+        565,
+        567,
+        568,
+        569,
+        577,
+        587,
+        588,
+        589,
+        592,
+        593,
+        594,
+        597,
+        598,
+        599
+      ],
+      "uniform_lower_bound_line_numbers": [
+        15,
+        16,
+        26,
+        28,
+        70,
+        71,
+        73,
+        74,
+        84,
+        88,
+        106,
+        107,
+        108,
+        134,
+        135,
+        136,
+        155,
+        189,
+        190,
+        195,
+        201,
+        274,
+        275,
+        283,
+        331,
+        353,
+        376,
+        377,
+        415,
+        421,
+        424,
+        427,
+        476,
+        477,
+        478,
+        479,
+        482,
+        486,
+        487,
+        488,
+        513,
+        527,
+        549,
+        550,
+        575
+      ]
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "continuumHamiltonianGapProvedHere": false,
+        "transferLowerBoundAssemblyRecorded": true,
+        "transferLowerBoundTheoremProvedHere": false
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "evidence_lines": {
+        "logarithmic_generator_calculus": [
+          {
+            "line": 11,
+            "text": "import DASHI.Physics.Closure.YMSprint108LogGeneratorCalculusBridge"
+          },
+          {
+            "line": 12,
+            "text": "as LogGenerator108"
+          },
+          {
+            "line": 24,
+            "text": "-- Mosco/no-pollution, logarithmic generator calculus, uniform form lower"
+          },
+          {
+            "line": 46,
+            "text": "logGeneratorCalculusClosedHere : Bool"
+          },
+          {
+            "line": 47,
+            "text": "logGeneratorCalculusClosedHere ="
+          },
+          {
+            "line": 48,
+            "text": "LogGenerator108.functionalCalculusTheoremProvedHere"
+          },
+          {
+            "line": 64,
+            "text": "\"Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.\""
+          },
+          {
+            "line": 72,
+            "text": "\"Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.\""
+          },
+          {
+            "line": 95,
+            "text": "logGeneratorReceipt :"
+          },
+          {
+            "line": 96,
+            "text": "LogGenerator108.YMSprint108LogGeneratorCalculusBridgeReceipt"
+          },
+          {
+            "line": 103,
+            "text": "logGeneratorModulePath :"
+          },
+          {
+            "line": 117,
+            "text": "logGeneratorCalculusClosed :"
+          },
+          {
+            "line": 185,
+            "text": "LogGenerator108.canonicalYMSprint108LogGeneratorCalculusBridgeReceipt"
+          },
+          {
+            "line": 189,
+            "text": "\"DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda\""
+          },
+          {
+            "line": 198,
+            "text": "logGeneratorCalculusClosedHere"
+          }
+        ],
+        "mosco_no_pollution": [
+          {
+            "line": 13,
+            "text": "import DASHI.Physics.Closure.YMSprint108MoscoNoPollutionBridge"
+          },
+          {
+            "line": 14,
+            "text": "as Mosco108"
+          },
+          {
+            "line": 24,
+            "text": "-- Mosco/no-pollution, logarithmic generator calculus, uniform form lower"
+          },
+          {
+            "line": 42,
+            "text": "moscoNoPollutionClosedHere : Bool"
+          },
+          {
+            "line": 43,
+            "text": "moscoNoPollutionClosedHere ="
+          },
+          {
+            "line": 44,
+            "text": "Mosco108.uniformTransferTargetProvedHere"
+          },
+          {
+            "line": 64,
+            "text": "\"Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.\""
+          },
+          {
+            "line": 72,
+            "text": "\"Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.\""
+          },
+          {
+            "line": 93,
+            "text": "moscoNoPollutionReceipt :"
+          },
+          {
+            "line": 94,
+            "text": "Mosco108.YMSprint108MoscoNoPollutionBridgeReceipt"
+          },
+          {
+            "line": 101,
+            "text": "moscoModulePath :"
+          },
+          {
+            "line": 115,
+            "text": "moscoNoPollutionClosed :"
+          },
+          {
+            "line": 184,
+            "text": "Mosco108.canonicalYMSprint108MoscoNoPollutionBridgeReceipt"
+          },
+          {
+            "line": 188,
+            "text": "\"DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda\""
+          },
+          {
+            "line": 197,
+            "text": "moscoNoPollutionClosedHere"
+          }
+        ],
+        "spectral_gap_transport": [
+          {
+            "line": 15,
+            "text": "import DASHI.Physics.Closure.YMSprint108SpectralGapTransport"
+          },
+          {
+            "line": 16,
+            "text": "as SpectralTransport108"
+          },
+          {
+            "line": 25,
+            "text": "-- bound, and spectral-gap transport.  It records that the package is now"
+          },
+          {
+            "line": 28,
+            "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+          },
+          {
+            "line": 39,
+            "text": "continuumHamiltonianGapProvedHere : Bool"
+          },
+          {
+            "line": 40,
+            "text": "continuumHamiltonianGapProvedHere = false"
+          },
+          {
+            "line": 54,
+            "text": "spectralGapTransportClosedHere : Bool"
+          },
+          {
+            "line": 55,
+            "text": "spectralGapTransportClosedHere ="
+          },
+          {
+            "line": 56,
+            "text": "SpectralTransport108.transportTheoremProvedHere"
+          },
+          {
+            "line": 60,
+            "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+          },
+          {
+            "line": 64,
+            "text": "\"Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.\""
+          },
+          {
+            "line": 72,
+            "text": "\"Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.\""
+          },
+          {
+            "line": 99,
+            "text": "spectralGapTransportReceipt :"
+          },
+          {
+            "line": 100,
+            "text": "SpectralTransport108.YMSprint108SpectralGapTransportReceipt"
+          },
+          {
+            "line": 107,
+            "text": "spectralGapTransportModulePath :"
+          },
+          {
+            "line": 121,
+            "text": "spectralGapTransportClosed :"
+          }
+        ],
+        "uniform_form_lower_bound": [
+          {
+            "line": 17,
+            "text": "import DASHI.Physics.Closure.YMSprint108UniformFormLowerBound"
+          },
+          {
+            "line": 18,
+            "text": "as UniformForm108"
+          },
+          {
+            "line": 21,
+            "text": "-- Sprint 108 transfer lower-bound assembly."
+          },
+          {
+            "line": 24,
+            "text": "-- Mosco/no-pollution, logarithmic generator calculus, uniform form lower"
+          },
+          {
+            "line": 28,
+            "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+          },
+          {
+            "line": 44,
+            "text": "Mosco108.uniformTransferTargetProvedHere"
+          },
+          {
+            "line": 50,
+            "text": "uniformFormLowerBoundClosedHere : Bool"
+          },
+          {
+            "line": 51,
+            "text": "uniformFormLowerBoundClosedHere ="
+          },
+          {
+            "line": 52,
+            "text": "UniformForm108.uniformFormLowerBoundTheoremProved"
+          },
+          {
+            "line": 60,
+            "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+          },
+          {
+            "line": 64,
+            "text": "\"Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.\""
+          },
+          {
+            "line": 68,
+            "text": "\"The transfer lower-bound theorem remains open because each analytic closure flag in the Sprint108 proof package is still false.\""
+          },
+          {
+            "line": 72,
+            "text": "\"Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.\""
+          },
+          {
+            "line": 97,
+            "text": "uniformFormReceipt :"
+          },
+          {
+            "line": 98,
+            "text": "UniformForm108.YMSprint108UniformFormLowerBoundReceipt"
+          },
+          {
+            "line": 105,
+            "text": "uniformFormModulePath :"
+          }
+        ]
+      },
+      "incomplete_surface_token_hits": [],
+      "logarithmic_generator_line_numbers": [
+        11,
+        12,
+        24,
+        46,
+        47,
+        48,
+        64,
+        72,
+        95,
+        96,
+        103,
+        117,
+        185,
+        189,
+        198
+      ],
+      "mosco_no_pollution_line_numbers": [
+        13,
+        14,
+        24,
+        42,
+        43,
+        44,
+        64,
+        72,
+        93,
+        94,
+        101,
+        115,
+        184,
+        188,
+        197
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "spectral_gap_transport_line_numbers": [
+        15,
+        16,
+        25,
+        28,
+        39,
+        40,
+        54,
+        55,
+        56,
+        60,
+        64,
+        72,
+        99,
+        100,
+        107,
+        121,
+        125,
+        187,
+        191,
+        200,
+        202
+      ],
+      "sprint": "Sprint108",
+      "string_assignments": {
+        "assemblyStatusText": "Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.",
+        "nextProofPackageText": "Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.",
+        "nonPromotionBoundaryText": "No continuum mass-gap or Clay Yang-Mills promotion follows from this Sprint108 assembly.",
+        "openTheoremBoundaryText": "The transfer lower-bound theorem remains open because each analytic closure flag in the Sprint108 proof package is still false.",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      },
+      "target_line_numbers": [
+        28,
+        60
+      ],
+      "theorem_line_numbers": [
+        26,
+        30,
+        31,
+        36,
+        37,
+        39,
+        40,
+        42,
+        43,
+        44,
+        46,
+        47,
+        48,
+        50,
+        51,
+        52,
+        54,
+        55,
+        56,
+        66,
+        67,
+        68,
+        85,
+        87,
+        115,
+        117,
+        119,
+        121,
+        123,
+        125,
+        127,
+        137,
+        143,
+        145,
+        160,
+        162,
+        163,
+        164,
+        166,
+        167,
+        178,
+        179,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        210,
+        214,
+        230,
+        231,
+        232,
+        234,
+        235,
+        236,
+        241,
+        251,
+        252,
+        253,
+        256,
+        257,
+        258
+      ],
+      "uniform_lower_bound_line_numbers": [
+        17,
+        18,
+        21,
+        24,
+        28,
+        44,
+        50,
+        51,
+        52,
+        60,
+        64,
+        68,
+        72,
+        97,
+        98,
+        105,
+        119,
+        186,
+        190,
+        199
+      ]
+    },
+    {
+      "bool_assignments": {
+        "canonicalCTransferIsOneOverSixtyFour": true,
+        "canonicalTheoremStillOpen": true,
+        "clayYangMillsPromoted": false,
+        "quadraticFormCoercivityProvedHere": false,
+        "uniformFormLedgerRecorded": true,
+        "uniformFormLowerBoundTheoremProved": false
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "evidence_lines": {
+        "logarithmic_generator_calculus": [],
+        "mosco_no_pollution": [
+          {
+            "line": 115,
+            "text": "\"Blocker: prove no-spectral-pollution and Mosco-style quadratic-form passage to the continuum operator.\""
+          }
+        ],
+        "spectral_gap_transport": [
+          {
+            "line": 21,
+            "text": "--   gap(T(a)) >= c_transfer * m_eff(a) * a"
+          },
+          {
+            "line": 43,
+            "text": "continuumSpectralPassageProvedHere : Bool"
+          },
+          {
+            "line": 44,
+            "text": "continuumSpectralPassageProvedHere ="
+          },
+          {
+            "line": 75,
+            "text": "\"gap(T(a)) >= c_transfer * m_eff(a) * a\""
+          },
+          {
+            "line": 81,
+            "text": "spectralGapStatementText : String"
+          },
+          {
+            "line": 82,
+            "text": "spectralGapStatementText ="
+          },
+          {
+            "line": 83,
+            "text": "\"The spectral-gap form of the same ledger is gap(T(a)) >= c_transfer * m_eff(a) * a.\""
+          },
+          {
+            "line": 107,
+            "text": "\"Blocker: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with constant c_transfer.\""
+          },
+          {
+            "line": 115,
+            "text": "\"Blocker: prove no-spectral-pollution and Mosco-style quadratic-form passage to the continuum operator.\""
+          },
+          {
+            "line": 121,
+            "text": "hamiltonianBridgeBlockerText : String"
+          },
+          {
+            "line": 122,
+            "text": "hamiltonianBridgeBlockerText ="
+          },
+          {
+            "line": 123,
+            "text": "\"Blocker: bridge the transfer lower bound to the Hamiltonian spectral gap without losing the uniform positive factor.\""
+          },
+          {
+            "line": 192,
+            "text": "spectralGapStatement :"
+          },
+          {
+            "line": 228,
+            "text": "hamiltonian-bridge-blocker :"
+          },
+          {
+            "line": 330,
+            "text": "spectralGapStatementText"
+          },
+          {
+            "line": 368,
+            "text": "continuumSpectralPassageProvedHere"
+          }
+        ],
+        "uniform_form_lower_bound": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint108UniformFormLowerBound where"
+          },
+          {
+            "line": 10,
+            "text": "import DASHI.Physics.Closure.YMSprint107FiniteContinuumUniformityBoundary"
+          },
+          {
+            "line": 11,
+            "text": "as Uniformity107"
+          },
+          {
+            "line": 12,
+            "text": "import DASHI.Physics.Closure.YMSprint107UniformTransferConstantLedger"
+          },
+          {
+            "line": 16,
+            "text": "-- Sprint 108 uniform quadratic/form lower-bound ledger."
+          },
+          {
+            "line": 19,
+            "text": "-- the uniform-in-a form target"
+          },
+          {
+            "line": 21,
+            "text": "--   gap(T(a)) >= c_transfer * m_eff(a) * a"
+          },
+          {
+            "line": 23,
+            "text": "-- with c_transfer fixed as 1/64.  It is an inhabited ledger of constants,"
+          },
+          {
+            "line": 24,
+            "text": "-- normalization, lower-bound form status, and exact theorem blockers.  The"
+          },
+          {
+            "line": 25,
+            "text": "-- analytic lower-bound theorem and Clay Yang-Mills promotion remain open."
+          },
+          {
+            "line": 30,
+            "text": "uniformFormLedgerRecorded : Bool"
+          },
+          {
+            "line": 31,
+            "text": "uniformFormLedgerRecorded = true"
+          },
+          {
+            "line": 33,
+            "text": "uniformFormLowerBoundTheoremProved : Bool"
+          },
+          {
+            "line": 34,
+            "text": "uniformFormLowerBoundTheoremProved = false"
+          },
+          {
+            "line": 45,
+            "text": "Uniformity107.continuumPassageProvedHere"
+          },
+          {
+            "line": 49,
+            "text": "Uniformity107.uniformAWindowProvedHere"
+          }
+        ]
+      },
+      "incomplete_surface_token_hits": [],
+      "logarithmic_generator_line_numbers": [],
+      "mosco_no_pollution_line_numbers": [
+        115
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "spectral_gap_transport_line_numbers": [
+        21,
+        43,
+        44,
+        75,
+        81,
+        82,
+        83,
+        107,
+        115,
+        121,
+        122,
+        123,
+        192,
+        228,
+        330,
+        368,
+        378,
+        379,
+        381,
+        382,
+        396,
+        404
+      ],
+      "sprint": "Sprint108",
+      "string_assignments": {
+        "cTransferNameText": "c_transfer",
+        "cTransferValueText": "c_transfer = 1/64",
+        "continuumPassageBlockerText": "Blocker: prove no-spectral-pollution and Mosco-style quadratic-form passage to the continuum operator.",
+        "formDomainBlockerText": "Blocker: identify the physical normalized form domain and norm N_a used by Q_a without changing constants with a.",
+        "hamiltonianBridgeBlockerText": "Blocker: bridge the transfer lower bound to the Hamiltonian spectral gap without losing the uniform positive factor.",
+        "nonPromotionBoundaryText": "No Clay Yang-Mills promotion is made: clayYangMillsPromoted remains false.",
+        "normalizationWindowText": "Normalization window: 0 < a <= a0, canonical a0 index 16, one normalized transfer block B = 4, and transfer-charge factor c_transfer = 1/64.",
+        "notATheoremText": "This Sprint108 surface records the uniform form lower-bound ledger; it does not prove the analytic lower-bound theorem.",
+        "quadraticFormStatementText": "For normalized transfer block forms Q_a, the recorded target is Q_a(v) >= c_transfer * m_eff(a) * a * N_a(v) on the physical normalized domain.",
+        "spectralGapStatementText": "The spectral-gap form of the same ledger is gap(T(a)) >= c_transfer * m_eff(a) * a.",
+        "targetFormLowerBoundText": "gap(T(a)) >= c_transfer * m_eff(a) * a",
+        "transferComparisonBlockerText": "Blocker: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with constant c_transfer.",
+        "uniformInAStatementText": "The constants c_transfer, block size, and WC3 effective-mass independence are recorded uniformly for 0 < a <= a0.",
+        "uniformWindowBlockerText": "Blocker: prove the normalization window and all constants are uniform throughout 0 < a <= a0.",
+        "wc3IndependenceText": "Sprint106 records desiredMassGapUsed = false, so the WC3 effective-mass lower-bound surface is independent of the desired continuum mass gap."
+      },
+      "target_line_numbers": [
+        21,
+        75,
+        83
+      ],
+      "theorem_line_numbers": [
+        24,
+        25,
+        27,
+        28,
+        33,
+        34,
+        36,
+        37,
+        39,
+        40,
+        41,
+        43,
+        44,
+        45,
+        47,
+        48,
+        49,
+        97,
+        98,
+        99,
+        103,
+        182,
+        200,
+        202,
+        238,
+        254,
+        256,
+        258,
+        260,
+        262,
+        284,
+        323,
+        334,
+        335,
+        352,
+        360,
+        368,
+        376,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        420,
+        435,
+        436,
+        438,
+        439,
+        440
+      ],
+      "uniform_lower_bound_line_numbers": [
+        1,
+        10,
+        11,
+        12,
+        16,
+        19,
+        21,
+        23,
+        24,
+        25,
+        30,
+        31,
+        33,
+        34,
+        45,
+        49,
+        68,
+        71,
+        75,
+        79,
+        83,
+        85,
+        86,
+        87,
+        91,
+        95,
+        99,
+        107,
+        109,
+        110,
+        111,
+        123,
+        130,
+        131,
+        133,
+        136,
+        145,
+        146,
+        180,
+        267,
+        268,
+        272,
+        273,
+        293,
+        294,
+        301,
+        302,
+        303,
+        308,
+        309,
+        312,
+        322,
+        334,
+        358,
+        406,
+        409,
+        410,
+        411,
+        412,
+        414,
+        419,
+        423,
+        425,
+        440
+      ]
+    }
+  ],
+  "status_note": "The audit reads actual Sprint 107 and Sprint 108 Agda text. Sprint 108 is the fail-closed promotion surface. The transfer lower-bound route remains open unless all extracted required proof flags are true.",
+  "theorem_proved_flags": [
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "uniformAWindowProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "positiveCProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "continuumPassageProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "targetLowerBoundTheoremProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "physicalHamiltonianSpectralGapProvedHereStatus",
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "transferToHamiltonianTheoremLocallyProved",
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "criticalPathTheoremProved",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "transferGapLowerBoundPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "hamiltonianSpectralBridgeProved",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "finiteContinuumUniformityProved",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "symmetryLaneClosedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "groupLaneClosedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "targetLowerBoundProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "transferComparisonProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "functionalCalculusTheoremProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "spectralMappingMonotonicityProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "normalizationContinuumLimitProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "physicalHamiltonianTheoremLocallyClosed",
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "moscoBridgeProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "lowerSemicontinuityProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "liminfSpectralLowerBoundProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "noBottomSpectrumPollutionProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "uniformTransferTargetProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "transportTheoremProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "continuumHamiltonianGapProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "isolatedBottomSectorProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "firstExcitedThresholdTransportProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "noEigenvalueCollapseAtZeroProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "uniformGapSurvivalConditionProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "physicalSpectrumConditionBoundaryProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "transferLowerBoundTheoremProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "continuumHamiltonianGapProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "uniformFormLowerBoundTheoremProved",
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "quadraticFormCoercivityProvedHere",
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "value": false
+    },
+    {
+      "name": "canonicalTheoremStillOpen",
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "value": true
+    }
+  ],
+  "transfer_lower_bound_target_evidence": [
+    {
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      },
+      "target_formula_detected": true,
+      "target_line_numbers": [
+        19,
+        69
+      ]
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "criticalTargetFormula": "gap(T(a)) >= c * m_eff(a) * a",
+        "uniformityBoundaryText": "Finite-continuum uniformity lane: the constants in gap(T(a)) >= c * m_eff(a) * a must remain uniform through the continuum passage."
+      },
+      "target_formula_detected": true,
+      "target_line_numbers": [
+        80,
+        104,
+        440
+      ]
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "targetFormulaText": "gap(T(a)) >= c_transfer * m_eff(a) * a"
+      },
+      "target_formula_detected": true,
+      "target_line_numbers": [
+        19,
+        86
+      ]
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "bridgeToTargetStatementText": "When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      },
+      "target_formula_detected": true,
+      "target_line_numbers": [
+        27,
+        69,
+        97
+      ]
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "finiteTransferGapFormula": "gap(T(a)) >= c * m_eff(a) * a"
+      },
+      "target_formula_detected": true,
+      "target_line_numbers": [
+        88
+      ]
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      },
+      "target_formula_detected": true,
+      "target_line_numbers": [
+        28,
+        60
+      ]
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "spectralGapStatementText": "The spectral-gap form of the same ledger is gap(T(a)) >= c_transfer * m_eff(a) * a.",
+        "targetFormLowerBoundText": "gap(T(a)) >= c_transfer * m_eff(a) * a"
+      },
+      "target_formula_detected": true,
+      "target_line_numbers": [
+        21,
+        75,
+        83
+      ]
+    }
+  ],
+  "uniform_form_lower_bound_evidence": [
+    {
+      "flags": {
+        "boundaryReceiptRecorded": true,
+        "moscoStyleBoundaryRecorded": true,
+        "noSpectralPollutionBoundaryRecorded": true,
+        "targetLowerBoundTheoremProvedHere": false,
+        "uniformAWindowProvedHere": false,
+        "uniformAWindowRecorded": true
+      },
+      "line_evidence": [
+        {
+          "line": 1,
+          "text": "module DASHI.Physics.Closure.YMSprint107FiniteContinuumUniformityBoundary where"
+        },
+        {
+          "line": 14,
+          "text": "-- Sprint 107 finite-to-continuum uniformity boundary."
+        },
+        {
+          "line": 17,
+          "text": "-- positivity toward a continuum lower bound:"
+        },
+        {
+          "line": 19,
+          "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+        },
+        {
+          "line": 21,
+          "text": "-- The receipt is intentionally status-level.  It records the required uniform"
+        },
+        {
+          "line": 40,
+          "text": "uniformAWindowRecorded : Bool"
+        },
+        {
+          "line": 41,
+          "text": "uniformAWindowRecorded = true"
+        },
+        {
+          "line": 43,
+          "text": "uniformAWindowProvedHere : Bool"
+        },
+        {
+          "line": 44,
+          "text": "uniformAWindowProvedHere = false"
+        },
+        {
+          "line": 69,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 71,
+          "text": "uniformAWindowText : String"
+        },
+        {
+          "line": 72,
+          "text": "uniformAWindowText ="
+        },
+        {
+          "line": 73,
+          "text": "\"There must be an a-window 0 < a <= a0 on which the comparison constants and effective-mass lower-bound surface are uniform.\""
+        },
+        {
+          "line": 77,
+          "text": "\"The continuum comparison needs a single constant c with c > 0 that is independent of a throughout the uniform a-window.\""
+        },
+        {
+          "line": 85,
+          "text": "\"A Mosco-style or equivalent quadratic-form convergence boundary must identify the continuum operator and preserve the relevant lower bound.\""
+        },
+        {
+          "line": 89,
+          "text": "\"Finite transfer positivity is necessary support, but it does not by itself imply a uniform continuum mass-gap lower bound.\""
+        }
+      ],
+      "line_numbers": [
+        1,
+        14,
+        17,
+        19,
+        21,
+        40,
+        41,
+        43,
+        44,
+        69,
+        71,
+        72,
+        73,
+        77,
+        85,
+        89,
+        93,
+        110,
+        121,
+        122,
+        216,
+        231,
+        232,
+        236,
+        237,
+        251,
+        252,
+        253,
+        254,
+        255,
+        257,
+        258,
+        311,
+        319,
+        320,
+        321,
+        322,
+        324,
+        332,
+        334,
+        339,
+        345,
+        350
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "finiteTransferNotEnoughText": "Finite transfer positivity is necessary support, but it does not by itself imply a uniform continuum mass-gap lower bound.",
+        "moscoStyleBoundaryText": "A Mosco-style or equivalent quadratic-form convergence boundary must identify the continuum operator and preserve the relevant lower bound.",
+        "positiveCStatusText": "The continuum comparison needs a single constant c with c > 0 that is independent of a throughout the uniform a-window.",
+        "sprint106AssemblyPath": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+        "sprint106EffectiveMassPath": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a",
+        "theoremOpenUnlessProofText": "The target lower-bound theorem remains open unless an actual DASHI-native proof of the uniform window, c > 0, and continuum spectral passage is supplied.",
+        "uniformAWindowText": "There must be an a-window 0 < a <= a0 on which the comparison constants and effective-mass lower-bound surface are uniform."
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 149,
+          "text": "uniformContinuumLowerBoundStillOpen :"
+        },
+        {
+          "line": 278,
+          "text": "TransferComparison106.uniformContinuumLowerBoundProved"
+        },
+        {
+          "line": 302,
+          "text": "\"positive gap(T(a)) plus validated H(a) = - a^-1 log T(a) should yield a positive physical Hamiltonian spectral gap after all Hamiltonian and continuum evidence is supplied\""
+        }
+      ],
+      "line_numbers": [
+        149,
+        278,
+        302
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107HamiltonianSpectralGapBridge.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "hamiltonianEvidenceBoundaryStatement": "Physical Hamiltonian spectral gap still requires self-adjoint physical Hamiltonian evidence, common domain control, spectrum-preserving transfer-to-generator identification, and continuum normalization.",
+        "localTheoremBoundaryStatement": "Sprint107 records the bridge status but does not locally prove the transfer-matrix-to-Hamiltonian spectral-gap theorem.",
+        "nonPromotionBoundaryStatement": "All Sprint107 bridge promotion fields are false; finite transfer data and logarithmic status text do not promote Clay Yang-Mills."
+      }
+    },
+    {
+      "flags": {
+        "finiteContinuumUniformityProved": false,
+        "transferGapLowerBoundPromoted": false
+      },
+      "line_evidence": [
+        {
+          "line": 15,
+          "text": "import DASHI.Physics.Closure.YMSprint107FiniteContinuumUniformityBoundary"
+        },
+        {
+          "line": 16,
+          "text": "as Uniformity107"
+        },
+        {
+          "line": 17,
+          "text": "import DASHI.Physics.Closure.YMSprint107UniformTransferConstantLedger"
+        },
+        {
+          "line": 24,
+          "text": "-- uniformity/constant ledgers. The Hamiltonian bridge is tracked by path and"
+        },
+        {
+          "line": 27,
+          "text": "-- lower-bound theorem, Hamiltonian bridge theorem, uniform continuum theorem,"
+        },
+        {
+          "line": 45,
+          "text": "finiteContinuumUniformityProved : Bool"
+        },
+        {
+          "line": 46,
+          "text": "finiteContinuumUniformityProved = false"
+        },
+        {
+          "line": 62,
+          "text": "finiteContinuumUniformity107Path : String"
+        },
+        {
+          "line": 63,
+          "text": "finiteContinuumUniformity107Path ="
+        },
+        {
+          "line": 64,
+          "text": "\"DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda\""
+        },
+        {
+          "line": 68,
+          "text": "\"DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda\""
+        },
+        {
+          "line": 80,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 88,
+          "text": "\"Sprint107 critical path assembled from Sprint106 typed receipts plus Sprint107 uniformity and constant ledgers; Hamiltonian bridge remains path/status tracked because its canonical receipt is Set-omega.\""
+        },
+        {
+          "line": 92,
+          "text": "\"Open boundary: prove the uniform transfer-gap lower bound and Hamiltonian spectral bridge before any continuum mass-gap promotion.\""
+        },
+        {
+          "line": 96,
+          "text": "\"Effective mass lane: Sprint106 records a WC3 lower-bound surface m_eff(a_k) >= m_k > 0 independent of the desired mass gap.\""
+        },
+        {
+          "line": 102,
+          "text": "uniformityBoundaryText : String"
+        }
+      ],
+      "line_numbers": [
+        15,
+        16,
+        17,
+        24,
+        27,
+        45,
+        46,
+        62,
+        63,
+        64,
+        68,
+        80,
+        88,
+        92,
+        96,
+        102,
+        103,
+        104,
+        108,
+        112,
+        133,
+        137,
+        168,
+        188,
+        190,
+        192,
+        193,
+        198,
+        252,
+        300,
+        301,
+        302,
+        303,
+        304,
+        308,
+        312,
+        323,
+        324,
+        325,
+        329,
+        381,
+        382,
+        392,
+        397,
+        398,
+        399,
+        400,
+        401,
+        403,
+        406,
+        423,
+        432,
+        440,
+        489,
+        575,
+        590,
+        607,
+        608,
+        637
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107TransferGapCriticalPathAssembly.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "assemblyStatusText": "Sprint107 critical path assembled from Sprint106 typed receipts plus Sprint107 uniformity and constant ledgers; Hamiltonian bridge remains path/status tracked because its canonical receipt is Set-omega.",
+        "constantLedger107Path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+        "constantLedgerText": "Constant ledger lane: record c, m_eff(a), a, SU(3) k_G=11, and WC3 smallness constants without converting them into a proved theorem.",
+        "criticalTargetFormula": "gap(T(a)) >= c * m_eff(a) * a",
+        "effectiveMass107Path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "effectiveMassLaneText": "Effective mass lane: Sprint106 records a WC3 lower-bound surface m_eff(a_k) >= m_k > 0 independent of the desired mass gap.",
+        "finiteContinuumUniformity107Path": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+        "hamiltonianBridgeText": "Hamiltonian spectral bridge lane: relate the finite transfer matrix to H = -a^-1 log T(a) and preserve the positive spectral lower bound.",
+        "openTheoremBoundaryText": "Open boundary: prove the uniform transfer-gap lower bound and Hamiltonian spectral bridge before any continuum mass-gap promotion.",
+        "uniformityBoundaryText": "Finite-continuum uniformity lane: the constants in gap(T(a)) >= c * m_eff(a) * a must remain uniform through the continuum passage."
+      }
+    },
+    {
+      "flags": {
+        "targetLowerBoundProvedHere": false,
+        "uniformConstantIndependentOfA": true,
+        "uniformConstantPositive": true
+      },
+      "line_evidence": [
+        {
+          "line": 1,
+          "text": "module DASHI.Physics.Closure.YMSprint107UniformTransferConstantLedger where"
+        },
+        {
+          "line": 14,
+          "text": "-- Sprint 107 uniform transfer-constant ledger."
+        },
+        {
+          "line": 17,
+          "text": "-- target lower bound"
+        },
+        {
+          "line": 19,
+          "text": "--   gap(T(a)) >= c * m_eff(a) * a."
+        },
+        {
+          "line": 24,
+          "text": "-- effective-mass input remains the Sprint 106 WC3 lower-bound surface and"
+        },
+        {
+          "line": 39,
+          "text": "uniformConstantPositive : Bool"
+        },
+        {
+          "line": 40,
+          "text": "uniformConstantPositive = true"
+        },
+        {
+          "line": 42,
+          "text": "uniformConstantIndependentOfA : Bool"
+        },
+        {
+          "line": 43,
+          "text": "uniformConstantIndependentOfA = true"
+        },
+        {
+          "line": 55,
+          "text": "constantNameText = \"c_transfer\""
+        },
+        {
+          "line": 58,
+          "text": "constantConcreteValueText = \"c_transfer = 1/64\""
+        },
+        {
+          "line": 62,
+          "text": "\"c_transfer is recorded as 1/64, hence positive in the constants ledger.\""
+        },
+        {
+          "line": 66,
+          "text": "\"c_transfer is fixed once for the Sprint107 transfer ledger and does not vary with lattice spacing a.\""
+        },
+        {
+          "line": 78,
+          "text": "\"Block-size normalization: transfer steps are measured in one normalized time block and the comparison factor is charged to c_transfer.\""
+        },
+        {
+          "line": 86,
+          "text": "\"gap(T(a)) >= c_transfer * m_eff(a) * a\""
+        },
+        {
+          "line": 94,
+          "text": "\"Open: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with the recorded uniform constant.\""
+        }
+      ],
+      "line_numbers": [
+        1,
+        14,
+        17,
+        19,
+        24,
+        39,
+        40,
+        42,
+        43,
+        55,
+        58,
+        62,
+        66,
+        78,
+        86,
+        94,
+        104,
+        105,
+        151,
+        191,
+        194,
+        195,
+        197,
+        198,
+        218,
+        219,
+        220,
+        225,
+        226,
+        273,
+        275,
+        276,
+        277,
+        278,
+        279,
+        290,
+        292,
+        294,
+        295,
+        296,
+        303,
+        304
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+      "sprint": "Sprint107",
+      "strings": {
+        "aWindowBoundaryText": "The window is a status boundary for the comparison target; no continuum a -> 0 theorem is inferred from this ledger alone.",
+        "blockSizeNormalizationText": "Block-size normalization: transfer steps are measured in one normalized time block and the comparison factor is charged to c_transfer.",
+        "constantConcreteValueText": "c_transfer = 1/64",
+        "constantIndependenceText": "c_transfer is fixed once for the Sprint107 transfer ledger and does not vary with lattice spacing a.",
+        "constantNameText": "c_transfer",
+        "constantPositivityText": "c_transfer is recorded as 1/64, hence positive in the constants ledger.",
+        "nonPromotionBoundaryText": "This Sprint107 ledger records constants for the target inequality; it does not promote the Clay Yang-Mills mass gap.",
+        "targetFormulaText": "gap(T(a)) >= c_transfer * m_eff(a) * a",
+        "transferComparisonOpenText": "Open: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with the recorded uniform constant."
+      }
+    },
+    {
+      "flags": {},
+      "line_evidence": [
+        {
+          "line": 13,
+          "text": "import DASHI.Physics.Closure.YMSprint107UniformTransferConstantLedger"
+        },
+        {
+          "line": 76,
+          "text": "uniformTransferConstantPositiveInput : Bool"
+        },
+        {
+          "line": 77,
+          "text": "uniformTransferConstantPositiveInput ="
+        },
+        {
+          "line": 78,
+          "text": "ConstantLedger107.uniformConstantPositive"
+        },
+        {
+          "line": 80,
+          "text": "uniformTransferConstantIndependentOfAInput : Bool"
+        },
+        {
+          "line": 81,
+          "text": "uniformTransferConstantIndependentOfAInput ="
+        },
+        {
+          "line": 82,
+          "text": "ConstantLedger107.uniformConstantIndependentOfA"
+        },
+        {
+          "line": 114,
+          "text": "\"Normalization requirement: the positive lattice spacing factor a^-1 must be fixed in the finite bridge and controlled uniformly in the continuum passage.\""
+        },
+        {
+          "line": 197,
+          "text": "uniformContinuumControlRequired :"
+        },
+        {
+          "line": 253,
+          "text": "uniformTransferConstantLedger :"
+        },
+        {
+          "line": 254,
+          "text": "ConstantLedger107.UniformTransferTargetLedger"
+        },
+        {
+          "line": 257,
+          "text": "uniformTransferConstantLedgerModulePath :"
+        },
+        {
+          "line": 370,
+          "text": "uniformTransferConstantPositiveInput"
+        },
+        {
+          "line": 371,
+          "text": "uniformTransferConstantIndependentOfAInput"
+        },
+        {
+          "line": 406,
+          "text": "ConstantLedger107.canonicalUniformTransferTargetLedger"
+        },
+        {
+          "line": 408,
+          "text": "\"DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda\""
+        }
+      ],
+      "line_numbers": [
+        13,
+        76,
+        77,
+        78,
+        80,
+        81,
+        82,
+        114,
+        197,
+        253,
+        254,
+        257,
+        370,
+        371,
+        406,
+        408
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "localClosureBoundaryText": "The physical Hamiltonian theorem is not locally closed because positivity/contractivity, spectral mapping, common-core/domain, and normalization supplies are recorded as requirements rather than proved here.",
+        "nonPromotionBoundaryText": "Sprint108 records the logarithmic generator calculus bridge only; all theorem and Clay promotion flags remain false.",
+        "normalizationByAText": "Normalization requirement: the positive lattice spacing factor a^-1 must be fixed in the finite bridge and controlled uniformly in the continuum passage."
+      }
+    },
+    {
+      "flags": {
+        "liminfSpectralLowerBoundProvedHere": false,
+        "lowerSemicontinuityProvedHere": false,
+        "uniformTransferTargetProvedHere": false
+      },
+      "line_evidence": [
+        {
+          "line": 14,
+          "text": "import DASHI.Physics.Closure.YMSprint107FiniteContinuumUniformityBoundary"
+        },
+        {
+          "line": 15,
+          "text": "as Uniformity107"
+        },
+        {
+          "line": 18,
+          "text": "import DASHI.Physics.Closure.YMSprint107UniformTransferConstantLedger"
+        },
+        {
+          "line": 24,
+          "text": "-- This module records the continuum spectral-passage part of the uniform"
+        },
+        {
+          "line": 25,
+          "text": "-- transfer lower-bound package:"
+        },
+        {
+          "line": 27,
+          "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+        },
+        {
+          "line": 34,
+          "text": "-- target lower-bound promotion is made here."
+        },
+        {
+          "line": 57,
+          "text": "uniformTransferTargetProvedHere : Bool"
+        },
+        {
+          "line": 58,
+          "text": "uniformTransferTargetProvedHere = false"
+        },
+        {
+          "line": 69,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 81,
+          "text": "\"Spectral liminf side: bottom spectral values of the finite transfer operators must have continuum lower bounds in the physical sector.\""
+        },
+        {
+          "line": 93,
+          "text": "\"Finite transfer positivity is imported support, but by itself it gives no uniform continuum lower bound and no no-pollution theorem.\""
+        },
+        {
+          "line": 97,
+          "text": "\"When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.\""
+        },
+        {
+          "line": 101,
+          "text": "\"The target lower-bound theorem remains open in Sprint108 because this file records required statuses rather than a DASHI-native Mosco/no-pollution proof.\""
+        },
+        {
+          "line": 115,
+          "text": "sprint107UniformityPath : String"
+        },
+        {
+          "line": 116,
+          "text": "sprint107UniformityPath ="
+        }
+      ],
+      "line_numbers": [
+        14,
+        15,
+        18,
+        24,
+        25,
+        27,
+        34,
+        57,
+        58,
+        69,
+        81,
+        93,
+        97,
+        101,
+        115,
+        116,
+        117,
+        121,
+        144,
+        166,
+        184,
+        185,
+        187,
+        196,
+        234,
+        301,
+        302,
+        310,
+        311,
+        313,
+        320,
+        369,
+        383,
+        384,
+        389,
+        410,
+        457,
+        458,
+        459,
+        460,
+        464,
+        465,
+        470,
+        484,
+        499
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "bridgeToTargetStatementText": "When Mosco liminf, recovery, no bottom-spectrum pollution, and uniform constants are all supplied, the bridge targets gap(T(a)) >= c * m_eff(a) * a.",
+        "finiteSupportInsufficientStatementText": "Finite transfer positivity is imported support, but by itself it gives no uniform continuum lower bound and no no-pollution theorem.",
+        "liminfSpectralStatementText": "Spectral liminf side: bottom spectral values of the finite transfer operators must have continuum lower bounds in the physical sector.",
+        "lowerSemicontinuityStatementText": "Mosco liminf side: weakly convergent finite-energy approximants must not lose energy below the continuum quadratic form.",
+        "moscoBridgeStatementText": "The finite transfer quadratic forms must converge to the continuum closed semibounded form in the Mosco sense on the physical carrier domain.",
+        "openTheoremBoundaryText": "The target lower-bound theorem remains open in Sprint108 because this file records required statuses rather than a DASHI-native Mosco/no-pollution proof.",
+        "sprint106AssemblyPath": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+        "sprint106EffectiveMassPath": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "sprint107ConstantLedgerPath": "DASHI/Physics/Closure/YMSprint107UniformTransferConstantLedger.agda",
+        "sprint107UniformityPath": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      }
+    },
+    {
+      "flags": {
+        "finiteTransferLowerBoundEnoughForContinuumHamiltonian": false,
+        "physicalSpectrumConditionBoundaryProvedHere": false,
+        "physicalSpectrumConditionBoundaryRecorded": true,
+        "uniformGapSurvivalConditionProvedHere": false,
+        "uniformGapSurvivalConditionRecorded": true
+      },
+      "line_evidence": [
+        {
+          "line": 15,
+          "text": "import DASHI.Physics.Closure.YMSprint107FiniteContinuumUniformityBoundary"
+        },
+        {
+          "line": 16,
+          "text": "as Uniformity107"
+        },
+        {
+          "line": 26,
+          "text": "-- finite transfer-gap lower bound through the continuum Hamiltonian route."
+        },
+        {
+          "line": 28,
+          "text": "-- excited threshold transport, no-collapse-at-zero condition, uniform gap"
+        },
+        {
+          "line": 70,
+          "text": "uniformGapSurvivalConditionRecorded : Bool"
+        },
+        {
+          "line": 71,
+          "text": "uniformGapSurvivalConditionRecorded = true"
+        },
+        {
+          "line": 73,
+          "text": "uniformGapSurvivalConditionProvedHere : Bool"
+        },
+        {
+          "line": 74,
+          "text": "uniformGapSurvivalConditionProvedHere = false"
+        },
+        {
+          "line": 84,
+          "text": "\"finite gap(T(a)) lower bounds transport to a positive continuum physical Hamiltonian spectral gap\""
+        },
+        {
+          "line": 88,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 106,
+          "text": "uniformGapSurvivalConditionText : String"
+        },
+        {
+          "line": 107,
+          "text": "uniformGapSurvivalConditionText ="
+        },
+        {
+          "line": 108,
+          "text": "\"The lower bound must survive uniformly through a -> 0 after the transfer normalization and Hamiltonian generator identification.\""
+        },
+        {
+          "line": 134,
+          "text": "sprint107UniformityPath : String"
+        },
+        {
+          "line": 135,
+          "text": "sprint107UniformityPath ="
+        },
+        {
+          "line": 136,
+          "text": "\"DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda\""
+        }
+      ],
+      "line_numbers": [
+        15,
+        16,
+        26,
+        28,
+        70,
+        71,
+        73,
+        74,
+        84,
+        88,
+        106,
+        107,
+        108,
+        134,
+        135,
+        136,
+        155,
+        189,
+        190,
+        195,
+        201,
+        274,
+        275,
+        283,
+        331,
+        353,
+        376,
+        377,
+        415,
+        421,
+        424,
+        427,
+        476,
+        477,
+        478,
+        479,
+        482,
+        486,
+        487,
+        488,
+        513,
+        527,
+        549,
+        550,
+        575
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "finiteTransferGapFormula": "gap(T(a)) >= c * m_eff(a) * a",
+        "nonPromotionBoundaryText": "Sprint108 spectral transport does not promote Clay Yang-Mills and does not infer the continuum Hamiltonian gap from finite transfer positivity alone.",
+        "openTransportTheoremBoundaryText": "The spectral-gap transport theorem remains open here; the recorded conditions are required boundaries, not a proof.",
+        "physicalSpectrumConditionBoundaryText": "The limiting operator must be identified with the physical Yang-Mills Hamiltonian on the physical spectrum, including domain and sector restrictions.",
+        "spectralTransportTargetFormula": "finite gap(T(a)) lower bounds transport to a positive continuum physical Hamiltonian spectral gap",
+        "sprint106EffectiveMassPath": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "sprint106TransferAssemblyPath": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+        "sprint107UniformityPath": "DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda",
+        "uniformGapSurvivalConditionText": "The lower bound must survive uniformly through a -> 0 after the transfer normalization and Hamiltonian generator identification."
+      }
+    },
+    {
+      "flags": {
+        "transferLowerBoundAssemblyRecorded": true,
+        "transferLowerBoundTheoremProvedHere": false
+      },
+      "line_evidence": [
+        {
+          "line": 17,
+          "text": "import DASHI.Physics.Closure.YMSprint108UniformFormLowerBound"
+        },
+        {
+          "line": 18,
+          "text": "as UniformForm108"
+        },
+        {
+          "line": 21,
+          "text": "-- Sprint 108 transfer lower-bound assembly."
+        },
+        {
+          "line": 24,
+          "text": "-- Mosco/no-pollution, logarithmic generator calculus, uniform form lower"
+        },
+        {
+          "line": 28,
+          "text": "--   gap(T(a)) >= c * m_eff(a) * a"
+        },
+        {
+          "line": 44,
+          "text": "Mosco108.uniformTransferTargetProvedHere"
+        },
+        {
+          "line": 50,
+          "text": "uniformFormLowerBoundClosedHere : Bool"
+        },
+        {
+          "line": 51,
+          "text": "uniformFormLowerBoundClosedHere ="
+        },
+        {
+          "line": 52,
+          "text": "UniformForm108.uniformFormLowerBoundTheoremProved"
+        },
+        {
+          "line": 60,
+          "text": "\"gap(T(a)) >= c * m_eff(a) * a\""
+        },
+        {
+          "line": 64,
+          "text": "\"Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.\""
+        },
+        {
+          "line": 68,
+          "text": "\"The transfer lower-bound theorem remains open because each analytic closure flag in the Sprint108 proof package is still false.\""
+        },
+        {
+          "line": 72,
+          "text": "\"Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.\""
+        },
+        {
+          "line": 97,
+          "text": "uniformFormReceipt :"
+        },
+        {
+          "line": 98,
+          "text": "UniformForm108.YMSprint108UniformFormLowerBoundReceipt"
+        },
+        {
+          "line": 105,
+          "text": "uniformFormModulePath :"
+        }
+      ],
+      "line_numbers": [
+        17,
+        18,
+        21,
+        24,
+        28,
+        44,
+        50,
+        51,
+        52,
+        60,
+        64,
+        68,
+        72,
+        97,
+        98,
+        105,
+        119,
+        186,
+        190,
+        199
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "assemblyStatusText": "Sprint108 assembles typed Mosco/no-pollution, logarithmic generator, uniform form lower-bound, and spectral transport ledgers.",
+        "nextProofPackageText": "Next proof package: inhabit the Mosco liminf/recovery/no-pollution lemmas, log-generator spectral mapping on a common core, uniform form coercivity, and spectral threshold transport.",
+        "nonPromotionBoundaryText": "No continuum mass-gap or Clay Yang-Mills promotion follows from this Sprint108 assembly.",
+        "openTheoremBoundaryText": "The transfer lower-bound theorem remains open because each analytic closure flag in the Sprint108 proof package is still false.",
+        "targetFormulaText": "gap(T(a)) >= c * m_eff(a) * a"
+      }
+    },
+    {
+      "flags": {
+        "uniformFormLedgerRecorded": true,
+        "uniformFormLowerBoundTheoremProved": false
+      },
+      "line_evidence": [
+        {
+          "line": 1,
+          "text": "module DASHI.Physics.Closure.YMSprint108UniformFormLowerBound where"
+        },
+        {
+          "line": 10,
+          "text": "import DASHI.Physics.Closure.YMSprint107FiniteContinuumUniformityBoundary"
+        },
+        {
+          "line": 11,
+          "text": "as Uniformity107"
+        },
+        {
+          "line": 12,
+          "text": "import DASHI.Physics.Closure.YMSprint107UniformTransferConstantLedger"
+        },
+        {
+          "line": 16,
+          "text": "-- Sprint 108 uniform quadratic/form lower-bound ledger."
+        },
+        {
+          "line": 19,
+          "text": "-- the uniform-in-a form target"
+        },
+        {
+          "line": 21,
+          "text": "--   gap(T(a)) >= c_transfer * m_eff(a) * a"
+        },
+        {
+          "line": 23,
+          "text": "-- with c_transfer fixed as 1/64.  It is an inhabited ledger of constants,"
+        },
+        {
+          "line": 24,
+          "text": "-- normalization, lower-bound form status, and exact theorem blockers.  The"
+        },
+        {
+          "line": 25,
+          "text": "-- analytic lower-bound theorem and Clay Yang-Mills promotion remain open."
+        },
+        {
+          "line": 30,
+          "text": "uniformFormLedgerRecorded : Bool"
+        },
+        {
+          "line": 31,
+          "text": "uniformFormLedgerRecorded = true"
+        },
+        {
+          "line": 33,
+          "text": "uniformFormLowerBoundTheoremProved : Bool"
+        },
+        {
+          "line": 34,
+          "text": "uniformFormLowerBoundTheoremProved = false"
+        },
+        {
+          "line": 45,
+          "text": "Uniformity107.continuumPassageProvedHere"
+        },
+        {
+          "line": 49,
+          "text": "Uniformity107.uniformAWindowProvedHere"
+        }
+      ],
+      "line_numbers": [
+        1,
+        10,
+        11,
+        12,
+        16,
+        19,
+        21,
+        23,
+        24,
+        25,
+        30,
+        31,
+        33,
+        34,
+        45,
+        49,
+        68,
+        71,
+        75,
+        79,
+        83,
+        85,
+        86,
+        87,
+        91,
+        95,
+        99,
+        107,
+        109,
+        110,
+        111,
+        123,
+        130,
+        131,
+        133,
+        136,
+        145,
+        146,
+        180,
+        267,
+        268,
+        272,
+        273,
+        293,
+        294,
+        301,
+        302,
+        303,
+        308,
+        309,
+        312,
+        322,
+        334,
+        358,
+        406,
+        409,
+        410,
+        411,
+        412,
+        414,
+        419,
+        423,
+        425,
+        440
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+      "sprint": "Sprint108",
+      "strings": {
+        "cTransferNameText": "c_transfer",
+        "cTransferValueText": "c_transfer = 1/64",
+        "hamiltonianBridgeBlockerText": "Blocker: bridge the transfer lower bound to the Hamiltonian spectral gap without losing the uniform positive factor.",
+        "nonPromotionBoundaryText": "No Clay Yang-Mills promotion is made: clayYangMillsPromoted remains false.",
+        "normalizationWindowText": "Normalization window: 0 < a <= a0, canonical a0 index 16, one normalized transfer block B = 4, and transfer-charge factor c_transfer = 1/64.",
+        "notATheoremText": "This Sprint108 surface records the uniform form lower-bound ledger; it does not prove the analytic lower-bound theorem.",
+        "quadraticFormStatementText": "For normalized transfer block forms Q_a, the recorded target is Q_a(v) >= c_transfer * m_eff(a) * a * N_a(v) on the physical normalized domain.",
+        "spectralGapStatementText": "The spectral-gap form of the same ledger is gap(T(a)) >= c_transfer * m_eff(a) * a.",
+        "targetFormLowerBoundText": "gap(T(a)) >= c_transfer * m_eff(a) * a",
+        "transferComparisonBlockerText": "Blocker: prove the DASHI-native transfer comparison from WC3 effective mass to the transfer-matrix spectral gap with constant c_transfer.",
+        "uniformInAStatementText": "The constants c_transfer, block size, and WC3 effective-mass independence are recorded uniformly for 0 < a <= a0.",
+        "uniformWindowBlockerText": "Blocker: prove the normalization window and all constants are uniform throughout 0 < a <= a0.",
+        "wc3IndependenceText": "Sprint106 records desiredMassGapUsed = false, so the WC3 effective-mass lower-bound surface is independent of the desired continuum mass gap."
+      }
+    }
+  ]
+}

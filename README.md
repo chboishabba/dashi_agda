@@ -108,6 +108,256 @@ simple gauge groups, and a non-circular mass-gap proof.  The required
 non-circular route is WC3-controlled small-field expansion proving
 `m_eff(a) > 0`, followed by asymptotic-freedom scale behavior; Sprint 104
 records that route as blocked until proved.  Clay promotion remains false.
+Sprint 105 consumes the new five-gap math and converts the Sprint 104 blockers
+into four checked bridge modules plus generated closure-plan artifacts.
+`YMSprint105NonCircularMassGapBridge` separates WC3-only effective-mass
+positivity from the Gross-Wilczek-Politzer asymptotic-freedom scale input and
+leaves `gap(T(a)) >= c * m_eff(a) * a` as the remaining DASHI-native theorem.
+`YMSprint105OSToWightmanBridge` records the OS3 spatial-only blocking pivot:
+`Q_hp` leaves temporal links untouched, so time reflection is preserved at the
+local bridge, while OS 1975 Theorem 1 remains scoped external authority.
+`YMSprint105SymmetryRestorationContinuumLimit` records
+`SymmetryRestorationInContinuumLimit` as the route from `H3 x id_time` to
+continuum `SO4`, with Poincare covariance and spectrum still downstream.
+`YMSprint105CompactSimpleGroupParameterTable` records the supplied SU(2),
+SU(3), SU(N), G2, and E8 parameter rows and keeps the full all-compact-simple-G
+audit open.  The generated `outputs/ym_sprint105_gap_closure_plan/` summary has
+route decision `SPRINT105_GAP_CLOSURE_PLAN_READY`: the remaining internal
+mathematics is transfer-gap lower bound, symmetry restoration, and compact
+simple group parameter-table completeness.  Clay promotion remains false.
+Sprint 106 attacks the highest-alpha transfer-gap lane.  It adds
+`YMSprint106EffectiveMassLowerBound`, which records the WC3/Dobrushin
+smallness chain `18*C_local(a_k) < 1 -> m_k > 0` and keeps that lower bound
+independent of the desired mass gap; `YMSprint106TransferMatrixGapComparison`,
+which imports the finite transfer-matrix receipts and keeps the uniform
+continuum lower bound open; and `YMSprint106TransferGapLowerBoundAssembly`,
+which consumes those typed Sprint 106 receipts and assembles the target
+`gap(T(a)) >= c * m_eff(a) * a`.  `YMSprint106SymmetryAndGroupAuditAdvance`
+also sharpens the symmetry-restoration and compact-simple-G audit lanes.  The
+generated `outputs/ym_sprint106_transfer_gap_audit/` route decision is
+`theorem still open`: route data is assembled, but the DASHI-native transfer
+comparison theorem is not proved.  Clay promotion remains false.
+Sprint 107 advances the finite-to-continuum part of that same critical path.
+`YMSprint107FiniteContinuumUniformityBoundary` records the required uniform
+`a`-window, positive comparison constant, and no-spectral-pollution/Mosco-style
+continuum passage as checked status data.  `YMSprint107UniformTransferConstantLedger`
+records the concrete ledger constant `c_transfer = 1/64`, its independence
+from `a`, the block normalization, and the WC3 effective-mass independence
+boundary.  `YMSprint107HamiltonianSpectralGapBridge` records the finite
+transfer gap plus the `H(a) = - a^-1 log T(a)` bridge status, while keeping
+self-adjoint/domain/continuum-normalization evidence open.  The generated
+`outputs/ym_sprint107_uniformity_audit/` route decision is
+`uniformity theorem still open`: the bridge is sharper and evidence-backed,
+but the uniform continuum lower-bound theorem is not yet proved.  Clay
+promotion remains false.
+Sprint 108 turns that open theorem into a typed proof-package audit.
+`YMSprint108MoscoNoPollutionBridge` records the Mosco liminf, recovery, and
+no-bottom-spectrum-pollution requirements.  `YMSprint108LogGeneratorCalculusBridge`
+records the functional-calculus requirements for `H(a) = - a^-1 log T(a)`,
+including positivity/contractivity, spectral mapping, common-core/domain, and
+normalization inputs.  `YMSprint108UniformFormLowerBound` records the
+uniform-in-`a` quadratic/form lower-bound ledger using `c_transfer = 1/64`.
+`YMSprint108SpectralGapTransport` records the isolated bottom sector,
+first-excited threshold transport, no-collapse-at-zero, uniform gap survival,
+and physical spectrum boundary.  `YMSprint108TransferLowerBoundAssembly`
+consumes those ledgers.  The generated
+`outputs/ym_sprint108_transfer_lower_bound_audit/` route decision is
+`transfer lower-bound theorem still open`; the exact analytic closure package
+is indexed, but not proved.  Clay promotion remains false.
+Sprint 109 advances the Mosco/no-pollution part of that package without
+promoting the theorem.  `YMSprint109MoscoLiminfLowerSemicontinuity` records the
+weak-compactness, closed-form lower-semicontinuity, domain-identification,
+spectral-projection, lower-edge no-pollution, and uniform-constant
+compatibility requirements.  `YMSprint109MoscoRecoverySequence` records the
+finite approximant, norm convergence, energy limsup, carrier-density, and
+renormalization requirements.  `YMSprint109NoBottomSpectrumPollutionCompactness`
+records the tightness/compactness route excluding spurious bottom spectral
+branches and no-collapse-at-zero.  `YMSprint109MoscoSpectralLiminfAssembly` and
+`YMSprint109TransferLowerBoundCriticalAssembly` assemble the fail-closed route
+back to `gap(T(a)) >= c * m_eff(a) * a`.  The generated
+`outputs/ym_sprint109_mosco_closure_audit/` route decision is `fail-closed`
+because the analytic Mosco closure flags remain false.  Clay promotion remains
+false.
+Sprint 110 advances the common-carrier/compactness layer under Sprint 109.
+`YMSprint110CommonCarrierHilbertIdentification` records the finite carrier,
+continuum carrier, embedding/projection, gauge quotient, and norm-window
+requirements shared by liminf and recovery.  `YMSprint110WeakCompactnessEnergyCore`
+records normalized finite-energy sequences, uniform form-energy bounds,
+tightness, weak extraction, and Mosco-liminf feed-through.  `YMSprint110ClosedFormLowerSemicontinuityCriterion`
+records the closed semibounded form-domain criterion.  `YMSprint110RecoveryCoreDensityEnergyLimsup`
+records dense finite physical core, interpolation/sampling maps, strong norm
+recovery, energy limsup, and renormalized carrier/form comparison.
+`YMSprint110BottomSectorThresholdNoCollapse` records isolated bottom-sector,
+threshold, projection-convergence, spurious-branch exclusion, and
+no-collapse-at-zero criteria.  The generated
+`outputs/ym_sprint110_common_carrier_compactness_audit/` route decision is
+`fail-closed`: the criteria are now typed and auditable, but the analytic
+common-carrier compactness theorem is not proved.  Clay promotion remains
+false.
+Sprint 111 advances that layer from carrier identification to construction
+criteria.  `YMSprint111FiniteContinuumEmbeddingProjectionMaps` records the
+finite-to-continuum map specifications for `E_a` and `P_a`.
+`YMSprint111GaugeQuotientPhysicalSectorCompatibility` records quotient,
+physical projection, sector-preservation, and leakage-control criteria.
+`YMSprint111NormEquivalenceUniformAWindow` records the admissible `a`-window
+and uniform norm-comparison requirements.  `YMSprint111EmbeddingProjectionAdjointnessLedger`
+records adjointness, approximate-inverse, physical-projection stability, and
+vacuum-projection stability criteria.  `YMSprint111CommonCarrierConstructionAssembly`
+assembles those lanes into a fail-closed construction route.  The generated
+`outputs/ym_sprint111_common_carrier_construction_audit/` route decision is
+`fail-closed`: the construction evidence is now auditable, but the
+common-carrier construction theorem, transfer lower-bound theorem, and Clay
+promotion remain open/false.
+Sprint 112 turns the Sprint111 construction criteria into concrete map
+candidate and estimate-reduction ledgers.  `YMSprint112RenormalizedInterpolationMapCandidate`
+records the `E_a` candidate route from finite physical vectors through lattice
+cell fields, parallel-transported local sections, mollified continuum
+representatives, and renormalized physical carrier vectors.
+`YMSprint112ContinuumSamplingProjectionMapCandidate` records the `P_a`
+candidate route from continuum finite-energy vectors through local gauge
+representatives, plaquette/edge holonomy sampling, finite lattice vectors,
+physical projection, and quotient output.
+`YMSprint112QuotientIndependenceDiagramLedger` records representative
+independence and quotient-descent diagrams.  `YMSprint112UniformNormBoundReduction`
+reduces uniform upper/lower norm bounds to local Jacobian, partition
+multiplicity, and quotient-norm comparison estimates.
+`YMSprint112AdjointnessApproxInverseReduction` reduces adjointness and
+approximate-inverse claims to quadrature, left/right inverse, and projection
+stability residual estimates.  The generated
+`outputs/ym_sprint112_map_candidate_reduction_audit/` route decision is
+`fail-closed`: candidate recipes and reduction obligations are now auditable,
+but the analytic estimates, common-carrier construction theorem, transfer
+lower-bound theorem, and Clay promotion remain open/false.
+Sprint 113 sharpens those reductions into concrete estimate-package ledgers.
+`YMSprint113GaugeCovarianceLocalSectionEstimate` records local-section
+transition, holonomy naturality, mollifier/renormalization covariance, and
+physical-projection quotient compatibility obligations.
+`YMSprint113LocalJacobianPartitionEstimate` records the local Jacobian,
+chart-volume/density, finite-overlap, derivative-loss, and quotient-compatible
+bookkeeping constants.  `YMSprint113QuotientNormComparisonEstimate`,
+`YMSprint113QuadratureResidualEstimate`, and
+`YMSprint113InverseProjectionResidualAssembly` record quotient norm comparison,
+quadrature residual, inverse residual, projection stability, sector stability,
+and common-carrier feed-through packages.  The generated
+`outputs/ym_sprint113_estimate_package_audit/` route decision is
+`fail-closed`: the estimate package is auditable, but the analytic estimates
+and transfer lower-bound theorem are not proved.  Clay promotion remains
+false.
+Sprint 114 converts the Sprint113 estimate packages into closure criteria and
+constant assemblies.  `YMSprint114GaugeQuotientClosureCriterion` proves the
+internal implication from supplied gauge/local-section and quotient feeds to a
+gauge-quotient closure criterion.  `YMSprint114UniformNormConstantAssembly`
+consumes the Sprint113 constants `16`, `32`, `12`, `15`, and `7`, records
+`645120` as their product, and packages the supplied-estimate criterion for
+uniform upper/lower norm bounds.
+`YMSprint114QuadratureResidualClosureCriterion` records the conditional
+adjointness-residual closure from cell quadrature, smoothing, holonomy,
+renormalized inner-product, and vanishing-rate supplies.
+`YMSprint114InverseProjectionClosureCriterion` records the supplied
+left/right inverse, projection, sector-stability, and norm-window feed-through
+criterion.  `YMSprint114CommonCarrierEstimateClosureAssembly` assembles these
+criteria into the common-carrier estimate closure route.  The generated
+`outputs/ym_sprint114_closure_criterion_audit/` route decision is
+`fail-closed`: the criteria are explicit and checked, but the external
+analytic supplies and transfer lower-bound theorem are not proved.  Clay
+promotion remains false.
+Sprint 115 advances those closure criteria into analytic-supply criterion
+surfaces.  `YMSprint115VanishingRateLedger` records component residual rate
+supplies, a common exponent/window criterion, and the internal implication to
+combined residual closure when all supplies are present.
+`YMSprint115NormWindowClosureCriterion` carries the Sprint114 package constant
+`645120` into a supplied upper/lower norm-window criterion.
+`YMSprint115ProjectionSectorStabilityCriterion` records projection
+commutator, physical-sector, vacuum-sector, leakage-exclusion, and quotient
+descent criteria.  `YMSprint115ApproximateInverseResidualCriterion` keeps
+left/right approximate-inverse residual closure separate from quadrature
+adjointness closure.  `YMSprint115CommonCarrierFeedThroughCriterion` records
+weak compactness, closed-form lower-semicontinuity, recovery-limsup, and
+norm/residual/sector feed-through gates for the common carrier.  The generated
+`outputs/ym_sprint115_analytic_supply_audit/` route decision is
+`fail-closed`: all Sprint115 surfaces are inhabited and auditable, but the
+external analytic supplies, common-carrier construction theorem, transfer
+lower-bound theorem, continuum Hamiltonian gap theorem, and Clay promotion
+remain open/false.
+Sprint 116 compresses the Sprint115 false analytic flags into closure-reducer
+surfaces.  `YMSprint116ResidualConvergenceClosureReducer` reduces residual
+closure to supplied convergence feeds while preserving the missing external
+convergence theorems as blocked false flags.  `YMSprint116NormGaugeWindowClosureReducer`
+records the conditional norm/gauge reducer, carries the `645120` package
+constant, and closes only the supplied norm criterion, not the unconditional
+norm-window theorem.  `YMSprint116SectorStabilityClosureReducer` packages
+projection commutator, physical/vacuum sector, leakage, and quotient descent
+feeds.  `YMSprint116ApproximateInverseClosureReducer` collects approximate
+inverse, residual, and common-carrier estimate inputs without promoting their
+analytic closure.  `YMSprint116CommonCarrierTransferClosureReducer` records
+the weak compactness, closed-form lower-semicontinuity, recovery limsup, and
+norm/residual/sector dependencies needed before transfer readiness can reopen.
+The generated `outputs/ym_sprint116_closure_reducer_audit/` route decision is
+`fail-closed`: reducer evidence is complete and auditable, but common-carrier
+construction, transfer lower-bound, continuum Hamiltonian gap, and Clay
+promotion remain open/false.
+Sprint 117 propagates those reducer surfaces into explicit feed and readiness
+records.  `YMSprint117NormCriterionClosurePropagator`,
+`YMSprint117ResidualCriterionClosurePropagator`, and
+`YMSprint117SectorCriterionClosurePropagator` record conditional feed closure
+for the norm, residual, and sector lanes without promoting the external
+analytic theorems.  `YMSprint117CommonCarrierFeedThroughPropagator` records
+the common-carrier feed-through route by source-path dependencies, avoiding
+sibling import circularity.  `YMSprint117TransferReadinessObligationReducer`
+reduces transfer lower-bound readiness to exact common-carrier,
+no-pollution/no-collapse, weak compactness, closed-form lower-semicontinuity,
+recovery-limsup, uniform-form, log-generator, and spectral-transport
+obligations.  The generated `outputs/ym_sprint117_propagation_audit/` route
+decision is `fail-closed`; transfer lower-bound, continuum mass gap, and Clay
+promotion remain false.
+Sprint 118 aggregates the Sprint117 feed closures and narrows the remaining
+transfer route.  `YMSprint118CriterionFeedAggregator` records
+`normFeedClosedHere`, `residualFeedClosedHere`, and `sectorFeedClosedHere` as
+true in one typed package while keeping common-carrier and transfer gates
+false.  `YMSprint118CommonCarrierConstructionReadiness` reduces external
+common-carrier construction to E_a/P_a maps, quotient compatibility, norm
+window, adjointness/approximate inverse, projection stability, weak/recovery
+feed-through, and Sprint114 estimate closure.  `YMSprint118MoscoCompactnessReadinessAggregator`
+and `YMSprint118TransferCalculusReadinessAggregator` assemble the compactness
+and calculus obligation packages.  `YMSprint118TransferBlockerMatrix` maps the
+remaining false flags to owner lanes and required resolutions.  The generated
+`outputs/ym_sprint118_readiness_audit/` route decision is `fail-closed`;
+common-carrier construction/feed-through, weak compactness, transfer
+readiness, transfer lower-bound, continuum mass gap, and Clay promotion remain
+false.
+Sprint 119 turns those Sprint118 blockers into normalized unlock reducers.
+`YMSprint119CommonCarrierFeedThroughUnlockAttempt` consumes the true
+criterion-feed package and construction-readiness assembly while keeping
+external common-carrier construction and feed-through false.
+`YMSprint119WeakCompactnessObligationReducer` reduces weak compactness to
+bounded-energy tightness, common-carrier identification, subsequence
+extraction, gauge-quotient sector compatibility, no escape to the null sector,
+and Mosco-liminf feed-through.  `YMSprint119MoscoAllObligationsReducer` and
+`YMSprint119TransferCalculusAllObligationsReducer` normalize the aggregate
+Mosco and transfer-calculus gates, and
+`YMSprint119TransferReadinessUnlockReducer` records the five inputs required
+before transfer lower-bound readiness can turn true.  The generated
+`outputs/ym_sprint119_unlock_audit/` route decision is `fail-closed`;
+common-carrier feed-through, weak compactness, aggregate Mosco/calculus
+closure, transfer readiness, transfer lower-bound, continuum mass gap, and
+Clay promotion remain false.
+Sprint 120 converts the Sprint119 unlock blockers into explicit certificate
+surfaces.  `YMSprint120ExternalCommonCarrierConstructionCertificate` records
+the required E_a/P_a construction, quotient descent, norm window,
+adjointness/approximate-inverse, projection stability, weak/recovery
+feed-through, and estimate-closure certificate rows.
+`YMSprint120WeakCompactnessCertificateInterface` records bounded-energy
+tightness, uniform carrier norm, diagonal subsequence extraction, physical
+sector/gauge quotient stability, null-sector escape exclusion, and
+Mosco-liminf feed-through rows.  `YMSprint120CommonCarrierFeedThroughClosureReducer`
+connects those certificate surfaces back to common-carrier feed-through, while
+`YMSprint120MoscoAggregateClosureCertificate` and
+`YMSprint120TransferCalculusClosureCertificate` record the aggregate Mosco and
+transfer-calculus certificate requirements.  The generated
+`outputs/ym_sprint120_certificate_audit/` route decision is `fail-closed`;
+the certificate interfaces are complete as records, but no external analytic
+certificate, transfer lower-bound theorem, continuum mass gap, or Clay
+promotion is claimed.
 
 Use one of these reader tracks first:
 

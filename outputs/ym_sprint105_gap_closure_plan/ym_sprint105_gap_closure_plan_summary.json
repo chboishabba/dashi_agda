@@ -1,0 +1,205 @@
+{
+  "extracted_blocked_gaps": [
+    {
+      "clay_requirement": "Construct Wightman distributions for the four-dimensional Yang-Mills theory from the Euclidean candidate.",
+      "current_evidence": "Repo contains OS/Wightman authority and boundary receipts, but Sprint 104 finds no complete distribution-level reconstruction proof for the current candidate.",
+      "definition": "blockedWightmanDistributions",
+      "gap_id": "blocked-wightman-distributions",
+      "reason_not_closed": "The dossier cannot infer Wightman distributions from partial OS material alone.",
+      "required_resolution": "Provide a full OS-to-Wightman reconstruction proof for the candidate Schwinger functions, including temperedness, locality, covariance, and positivity consequences.",
+      "source_path": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda"
+    },
+    {
+      "clay_requirement": "Establish Poincare covariance of the resulting Wightman theory.",
+      "current_evidence": "Repo contains Euclidean and transfer-boundary receipts but no complete Minkowski covariance reconstruction for the Clay lane.",
+      "definition": "blockedPoincareCovariance",
+      "gap_id": "blocked-poincare-covariance",
+      "reason_not_closed": "Partial Euclidean invariance receipts do not close the Lorentzian Wightman covariance requirement.",
+      "required_resolution": "Derive Poincare covariance after reconstruction and bind it to the candidate field algebra.",
+      "source_path": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda"
+    },
+    {
+      "clay_requirement": "Establish the positive-energy spectrum condition.",
+      "current_evidence": "Repo records transfer-gap and OS boundary material, but not a complete Wightman-spectrum theorem for the candidate.",
+      "definition": "blockedSpectrumCondition",
+      "gap_id": "blocked-spectrum-condition",
+      "reason_not_closed": "A transfer-gap receipt is not itself the Wightman spectrum condition.",
+      "required_resolution": "Prove the reconstructed Hilbert-space energy-momentum spectrum lies in the closed forward cone and bind the mass gap to that spectrum.",
+      "source_path": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda"
+    },
+    {
+      "clay_requirement": "Prove existence and mass gap for any compact simple gauge group G.",
+      "current_evidence": "The current manuscript evidence is SU(3)-scoped.",
+      "definition": "blockedAllCompactSimpleG",
+      "gap_id": "blocked-all-compact-simple-g",
+      "reason_not_closed": "The Jaffe-Witten statement is not limited to SU(3).",
+      "required_resolution": "Generalize every group-dependent estimate and nontriviality witness from SU(3) to arbitrary compact simple G.",
+      "source_path": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda"
+    },
+    {
+      "clay_requirement": "Prove the mass gap without assuming the physical mass scale being proved.",
+      "current_evidence": "Sprint 103 records a continuum bridge using WC3, RG effective mass, transfer comparison, and asymptotic freedom.",
+      "definition": "blockedNonCircularMassGapProof",
+      "gap_id": "blocked-noncircular-mass-gap-proof",
+      "reason_not_closed": "Sprint 104 cannot certify that this route has been proved without circular dependence on the desired gap.",
+      "required_resolution": "Prove that WC3-controlled small-field expansion gives m_eff(a) > 0 independently, then use asymptotic freedom only for physical scale behavior.",
+      "source_path": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda"
+    }
+  ],
+  "extracted_evidence_items": [
+    {
+      "claim_recorded": "Sprint 103 records inhabited proof-argument receipts for Dobrushin, uniform polymer activity, and WC3 uniform cluster summability.",
+      "declared_in": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda",
+      "definition": "wc3Evidence",
+      "evidence_id": "wc3-uniform-cluster-summability",
+      "source_path_recorded": "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "status": "evidence-recorded-not-clay-complete"
+    },
+    {
+      "claim_recorded": "Sprint 103 records a continuum mass-gap proof-argument lane using WC3 control, RG generated mass, transfer comparison, and physical-scale behavior.",
+      "declared_in": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda",
+      "definition": "continuumGapEvidence",
+      "evidence_id": "continuum-limit-mass-gap",
+      "source_path_recorded": "DASHI/Physics/Closure/YMSprint103ContinuumMassGapObligation7.agda",
+      "status": "candidate-evidence-with-noncircular-route-blocker"
+    },
+    {
+      "claim_recorded": "Sprint 103 records a nontrivial SU(3) continuum measure witness from the non-Abelian curvature self-interaction structure.",
+      "declared_in": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda",
+      "definition": "su3MeasureEvidence",
+      "evidence_id": "nontrivial-su3-measure",
+      "source_path_recorded": "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda",
+      "status": "su3-only-candidate-evidence"
+    },
+    {
+      "claim_recorded": "Sprint 101 separates the local candidate lane from external Clay acceptance and completeness gates.",
+      "declared_in": "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda",
+      "definition": "clayBoundaryEvidence",
+      "evidence_id": "clay-boundary",
+      "source_path_recorded": "DASHI/Physics/Closure/YMSprint101ClayBoundaryReconciliationReceipt.agda",
+      "status": "boundary-recorded"
+    }
+  ],
+  "fail_reasons": [],
+  "generated_at_utc": "2026-06-06T03:44:01.778502+00:00",
+  "promotion_state": {
+    "clay_yang_mills_promoted_in_sprint104": false,
+    "sprint105_promotion_true_detected": false
+  },
+  "remaining_dashi_native_theorem_obligations": [
+    {
+      "closure_input": "A DASHI-native lower bound that separates the transfer gap from the mass scale being established.",
+      "evidence_links": [
+        "blocked-noncircular-mass-gap-proof"
+      ],
+      "obligation_id": "transfer-gap-lower-bound",
+      "title": "Transfer-gap lower bound"
+    },
+    {
+      "closure_input": "A DASHI-native restoration theorem carrying the OS3 spatial route into Poincare covariance and the spectrum condition.",
+      "evidence_links": [
+        "blocked-poincare-covariance",
+        "blocked-spectrum-condition"
+      ],
+      "obligation_id": "symmetry-restoration",
+      "title": "Symmetry restoration"
+    },
+    {
+      "closure_input": "A DASHI-native parameter table and audit proving every group-dependent estimate for any compact simple G.",
+      "evidence_links": [
+        "blocked-all-compact-simple-g"
+      ],
+      "obligation_id": "compact-simple-group-parameter-table-completeness-audit",
+      "title": "Compact simple group parameter table/completeness audit"
+    }
+  ],
+  "repo_root": "/home/c/Documents/code/dashi_agda",
+  "route_decision": "SPRINT105_GAP_CLOSURE_PLAN_READY",
+  "scanned_surfaces": {
+    "sprint104": [
+      "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda"
+    ],
+    "sprint105": [
+      "DASHI/Physics/Closure/YMSprint105CompactSimpleGroupParameterTable.agda",
+      "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+      "DASHI/Physics/Closure/YMSprint105SymmetryRestorationContinuumLimit.agda"
+    ]
+  },
+  "sprint104_bool_assignments": {
+    "DASHI/Physics/Closure/YMSprint104ClayCandidateDossierBuilder.agda": {
+      "allCompactSimpleGaugeGroupsComplete": false,
+      "clayYangMillsPromoted": false,
+      "fullOSToWightmanRouteComplete": false,
+      "nonCircularContinuumMassGapRouteComplete": false,
+      "sprint103FreezeTagPresent": true,
+      "su3CandidateManuscriptLaneCurrent": true
+    }
+  },
+  "sprint105_scan": [
+    {
+      "path": "DASHI/Physics/Closure/YMSprint105CompactSimpleGroupParameterTable.agda",
+      "promotion_true": false,
+      "surface_token_hit_count": 0,
+      "surface_tokens_clear": true
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "promotion_true": false,
+      "surface_token_hit_count": 0,
+      "surface_tokens_clear": true
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+      "promotion_true": false,
+      "surface_token_hit_count": 0,
+      "surface_tokens_clear": true
+    },
+    {
+      "path": "DASHI/Physics/Closure/YMSprint105SymmetryRestorationContinuumLimit.agda",
+      "promotion_true": false,
+      "surface_token_hit_count": 0,
+      "surface_tokens_clear": true
+    }
+  ],
+  "supplied_gap_reductions": [
+    {
+      "decision": "Convert the Sprint 104 circularity objection into the transfer-gap lower-bound obligation.",
+      "evidence_links": [
+        "blocked-noncircular-mass-gap-proof",
+        "continuum-limit-mass-gap"
+      ],
+      "reduction_id": "noncircular-mass-gap"
+    },
+    {
+      "decision": "Keep WC3 and uniform polymer activity constants as the quantitative input lane for the transfer comparison.",
+      "evidence_links": [
+        "wc3-uniform-cluster-summability"
+      ],
+      "reduction_id": "uniform-polymer-activity-constants"
+    },
+    {
+      "decision": "Treat OS3 spatial-only blocking as the Euclidean route input that must be paired with restoration.",
+      "evidence_links": [
+        "blocked-wightman-distributions"
+      ],
+      "reduction_id": "os3-spatial-only-blocking-route"
+    },
+    {
+      "decision": "Merge Poincare covariance and spectrum condition into the symmetry-restoration obligation.",
+      "evidence_links": [
+        "blocked-poincare-covariance",
+        "blocked-spectrum-condition"
+      ],
+      "reduction_id": "poincare-spectrum-via-symmetry-restoration"
+    },
+    {
+      "decision": "Replace SU(3)-only closure with a compact-simple-G parameter table and completeness audit.",
+      "evidence_links": [
+        "blocked-all-compact-simple-g",
+        "nontrivial-su3-measure"
+      ],
+      "reduction_id": "any-compact-simple-g-via-parameter-table"
+    }
+  ]
+}

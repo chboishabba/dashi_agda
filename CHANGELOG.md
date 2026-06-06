@@ -6,6 +6,182 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 120 certificate audit for `2026-06-06`: adds checked modules for
+  external common-carrier construction certificates, weak compactness
+  certificates, common-carrier feed-through closure reduction, Mosco aggregate
+  closure certificates, and transfer-calculus closure certificates.  The
+  generator `scripts/ym_sprint120_certificate_audit.py` emits
+  `outputs/ym_sprint120_certificate_audit/` with route decision
+  `fail-closed`.  Sprint 120 converts the Sprint119 unlock blockers into exact
+  certificate rows with source paths, upstream false flags, and
+  absent-certificate reasons.  External analytic certificates, transfer
+  lower-bound theorem, continuum mass gap, and Clay/YM promotion remain false.
+
+- Sprint 119 unlock audit for `2026-06-06`: adds checked modules for
+  common-carrier feed-through unlock, weak compactness obligation reduction,
+  Mosco all-obligations reduction, transfer-calculus all-obligations
+  reduction, and transfer-readiness unlock reduction.  The generator
+  `scripts/ym_sprint119_unlock_audit.py` emits
+  `outputs/ym_sprint119_unlock_audit/` with route decision `fail-closed`.
+  Sprint 119 normalizes the Sprint118 readiness blockers into exact unlock
+  inputs and keeps common-carrier feed-through, weak compactness, aggregate
+  Mosco/calculus obligation closure, transfer readiness, transfer theorem,
+  continuum mass gap, and Clay/YM promotion false.
+
+- Sprint 118 readiness audit for `2026-06-06`: adds checked modules for
+  criterion-feed aggregation, common-carrier construction readiness, Mosco
+  compactness readiness, transfer-calculus readiness, and the transfer blocker
+  matrix.  The generator `scripts/ym_sprint118_readiness_audit.py` emits
+  `outputs/ym_sprint118_readiness_audit/` with route decision `fail-closed`.
+  Sprint 118 aggregates Sprint117 norm/residual/sector feed closures into one
+  positive feed package and narrows the fail-closed transfer route to
+  common-carrier construction/feed-through, weak compactness, aggregate
+  Mosco/calculus obligations, transfer readiness, and transfer theorem flags.
+  Clay/YM promotion remains false.
+
+- Sprint 117 propagation audit for `2026-06-06`: adds checked modules for
+  norm criterion propagation, residual criterion propagation, sector criterion
+  propagation, common-carrier feed-through propagation, and transfer-readiness
+  obligation reduction.  The generator
+  `scripts/ym_sprint117_propagation_audit.py` emits
+  `outputs/ym_sprint117_propagation_audit/` with route decision
+  `fail-closed`.  Sprint 117 propagates the Sprint116 conditional reducer
+  closures into explicit feed records and reduces transfer readiness to a
+  precise obligation ledger, but external common-carrier construction,
+  common-carrier feed-through, transfer lower-bound, and continuum Hamiltonian
+  gap theorems are not proved.  Clay/YM promotion remains false.
+
+- Sprint 116 closure-reducer audit for `2026-06-06`: adds checked modules for
+  residual convergence closure reduction, norm/gauge window closure reduction,
+  sector-stability closure reduction, approximate-inverse closure reduction,
+  and common-carrier transfer closure reduction.  The generator
+  `scripts/ym_sprint116_closure_reducer_audit.py` emits
+  `outputs/ym_sprint116_closure_reducer_audit/` with route decision
+  `fail-closed`.  Sprint 116 compresses the Sprint115 false analytic flags
+  into five auditable reducer surfaces and carries the `645120` package
+  constant forward, but the external analytic convergence theorems,
+  common-carrier construction theorem, and transfer lower-bound theorem are
+  not proved.  Clay/YM promotion remains false.
+
+- Sprint 115 analytic-supply audit for `2026-06-06`: adds checked modules for
+  vanishing-rate ledgers, norm-window closure criteria, projection-sector
+  stability criteria, approximate-inverse residual criteria, and common-carrier
+  feed-through criteria.  The generator
+  `scripts/ym_sprint115_analytic_supply_audit.py` emits
+  `outputs/ym_sprint115_analytic_supply_audit/` with route decision
+  `fail-closed`.  Sprint 115 proves internal criterion implications from
+  supplied analytic fields and carries the Sprint114 package constant `645120`
+  forward, but the external analytic supplies, common-carrier construction
+  theorem, and transfer lower-bound theorem are not proved.  Clay/YM promotion
+  remains false.
+
+- Sprint 114 closure-criterion audit for `2026-06-06`: adds checked modules
+  for gauge-quotient closure criteria, uniform norm constant assembly,
+  quadrature residual closure criteria, inverse/projection closure criteria,
+  and common-carrier estimate closure assembly.  The generator
+  `scripts/ym_sprint114_closure_criterion_audit.py` emits
+  `outputs/ym_sprint114_closure_criterion_audit/` with route decision
+  `fail-closed`.  Sprint 114 proves internal criterion implications from
+  supplied analytic fields and records `645120` as the local uniform-norm
+  package constant, but the external analytic supplies and transfer
+  lower-bound theorem are not proved.  Clay/YM promotion remains false.
+
+- Sprint 113 estimate-package audit for `2026-06-06`: adds checked modules for
+  gauge-covariance/local-section estimates, local Jacobian and
+  partition/multiplicity estimates, quotient norm comparison, quadrature
+  residual estimates, and inverse/projection residual assembly.  The generator
+  `scripts/ym_sprint113_estimate_package_audit.py` emits
+  `outputs/ym_sprint113_estimate_package_audit/` with route decision
+  `fail-closed`.  The Sprint112 map-candidate reductions now have a concrete
+  estimate package with exact blockers, but the analytic estimates and
+  transfer lower-bound theorem are not proved.  Clay/YM promotion remains
+  false.
+
+- Sprint 112 map-candidate reduction audit for `2026-06-06`: adds checked
+  modules for the renormalized interpolation candidate, continuum
+  sampling/projection candidate, quotient-independence diagrams, uniform
+  norm-bound reduction, and adjointness/approximate-inverse reduction.  The
+  generator `scripts/ym_sprint112_map_candidate_reduction_audit.py` emits
+  `outputs/ym_sprint112_map_candidate_reduction_audit/` with route decision
+  `fail-closed`.  The common-carrier construction path now has concrete
+  candidate recipes and estimate-reduction obligations, but the analytic
+  estimates and transfer lower-bound theorem are not proved.  Clay/YM
+  promotion remains false.
+
+- Sprint 111 common-carrier construction audit for `2026-06-06`: adds checked
+  modules for finite-to-continuum embedding/projection maps, gauge quotient and
+  physical-sector compatibility, uniform-in-a norm equivalence,
+  embedding/projection adjointness and projection stability, and
+  common-carrier construction assembly.  The generator
+  `scripts/ym_sprint111_common_carrier_construction_audit.py` emits
+  `outputs/ym_sprint111_common_carrier_construction_audit/` with route decision
+  `fail-closed`.  The common-carrier layer is now sharpened at the construction
+  criteria level, but the analytic construction theorem and transfer
+  lower-bound theorem are not proved.  Clay/YM promotion remains false.
+
+- Sprint 110 common-carrier compactness audit for `2026-06-06`: adds checked
+  modules for common carrier Hilbert identification, weak compactness energy
+  core, closed-form lower-semicontinuity criterion, recovery core density and
+  energy limsup, and bottom-sector threshold/no-collapse.  The generator
+  `scripts/ym_sprint110_common_carrier_compactness_audit.py` emits
+  `outputs/ym_sprint110_common_carrier_compactness_audit/` with route decision
+  `fail-closed`.  The Mosco/no-pollution package is now split into typed
+  common-carrier compactness criteria, but the analytic theorem is not proved.
+  Clay/YM promotion remains false.
+
+- Sprint 109 Mosco closure audit for `2026-06-06`: adds checked modules for
+  Mosco liminf/lower semicontinuity, recovery sequences,
+  no-bottom-spectrum-pollution compactness, Mosco spectral-liminf assembly, and
+  transfer lower-bound critical assembly.  The generator
+  `scripts/ym_sprint109_mosco_closure_audit.py` emits
+  `outputs/ym_sprint109_mosco_closure_audit/` with route decision
+  `fail-closed`.  The target `gap(T(a)) >= c * m_eff(a) * a` is now sharpened
+  at the Mosco/no-pollution layer, but the analytic theorem is not proved.
+  Clay/YM promotion remains false.
+
+- Sprint 108 transfer lower-bound proof-package audit for `2026-06-06`: adds
+  checked modules for Mosco/no-pollution, logarithmic generator calculus,
+  uniform form lower bound, spectral-gap transport, and transfer lower-bound
+  assembly.  The generator
+  `scripts/ym_sprint108_transfer_lower_bound_audit.py` emits
+  `outputs/ym_sprint108_transfer_lower_bound_audit/` with route decision
+  `transfer lower-bound theorem still open`.  The target
+  `gap(T(a)) >= c * m_eff(a) * a` is now split into exact typed proof-package
+  ledgers, but the analytic theorem is not proved.  Clay/YM promotion remains
+  false.
+
+- Sprint 107 finite-continuum uniformity audit for `2026-06-06`: adds checked
+  modules for the finite-continuum uniformity boundary, uniform transfer
+  constant ledger, Hamiltonian spectral-gap bridge, and transfer-gap
+  critical-path assembly.  The generator
+  `scripts/ym_sprint107_uniformity_audit.py` emits
+  `outputs/ym_sprint107_uniformity_audit/` with route decision
+  `uniformity theorem still open`.  Sprint 107 records `c_transfer = 1/64`,
+  the uniform `a`-window, finite transfer positivity, continuum spectral
+  passage boundaries, and the `H(a) = - a^-1 log T(a)` bridge status.  The
+  uniform continuum transfer lower-bound theorem remains open.  Clay/YM
+  promotion remains false.
+
+- Sprint 106 transfer-gap audit for `2026-06-06`: adds checked modules for
+  WC3 effective-mass lower bound, transfer-matrix comparison, transfer-gap
+  lower-bound assembly, and symmetry/group audit advance.  The generator
+  `scripts/ym_sprint106_transfer_gap_audit.py` emits
+  `outputs/ym_sprint106_transfer_gap_audit/` with route decision
+  `theorem still open`.  The route data for
+  `gap(T(a)) >= c * m_eff(a) * a` is assembled from WC3 effective-mass
+  positivity and finite transfer-matrix support, but the uniform continuum
+  transfer comparison theorem remains open.  Clay/YM promotion remains false.
+
+- Sprint 105 gap-closure plan for `2026-06-06`: consumes the user-supplied
+  five-gap math and adds checked bridge modules for non-circular mass-gap
+  separation, OS3 spatial-only blocking into Wightman reconstruction status,
+  continuum symmetry restoration, and compact simple group parameter rows.
+  The generator `scripts/ym_sprint105_gap_closure_plan.py` emits
+  `outputs/ym_sprint105_gap_closure_plan/` with route decision
+  `SPRINT105_GAP_CLOSURE_PLAN_READY`.  The remaining DASHI-native theorem
+  obligations are transfer-gap lower bound, symmetry restoration, and compact
+  simple group parameter-table completeness.  Clay/YM promotion remains false.
+
 - Sprint 104 no-placeholder Clay dossier builder for `2026-06-06`: committed
   and tagged the Sprint 91-103 freeze as `sprint-103-receipt-freeze`, then
   added `YMSprint104ClayCandidateDossierBuilder`.  The new module and generated

@@ -1,3 +1,314 @@
+# 2026-06-06 Sprint 120 certificate audit
+
+- Added checked Sprint 120 modules:
+  `YMSprint120ExternalCommonCarrierConstructionCertificate`,
+  `YMSprint120WeakCompactnessCertificateInterface`,
+  `YMSprint120CommonCarrierFeedThroughClosureReducer`,
+  `YMSprint120MoscoAggregateClosureCertificate`, and
+  `YMSprint120TransferCalculusClosureCertificate`.
+- Added `scripts/ym_sprint120_certificate_audit.py` and generated
+  `outputs/ym_sprint120_certificate_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 120 turns the Sprint119 unlock blockers into exact analytic
+  certificate rows for common-carrier construction, weak compactness,
+  feed-through closure, aggregate Mosco closure, and aggregate
+  transfer-calculus closure.
+- The certificate rows are complete as records, but the external analytic
+  certificates and closure theorems are not supplied in repo.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 119 unlock audit
+
+- Added checked Sprint 119 modules:
+  `YMSprint119CommonCarrierFeedThroughUnlockAttempt`,
+  `YMSprint119WeakCompactnessObligationReducer`,
+  `YMSprint119MoscoAllObligationsReducer`,
+  `YMSprint119TransferCalculusAllObligationsReducer`, and
+  `YMSprint119TransferReadinessUnlockReducer`.
+- Added `scripts/ym_sprint119_unlock_audit.py` and generated
+  `outputs/ym_sprint119_unlock_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 119 consumes the Sprint118 criterion-feed and readiness packages,
+  reduces weak compactness to exact analytic inputs, normalizes aggregate
+  Mosco and transfer-calculus obligation closure, and records the five inputs
+  required before transfer lower-bound readiness can be reopened.
+- The remaining false flags are concentrated on common-carrier feed-through,
+  external common-carrier construction, weak compactness, aggregate
+  Mosco/calculus obligation closure, transfer lower-bound readiness, and the
+  transfer lower-bound theorem.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 118 readiness audit
+
+- Added checked Sprint 118 modules:
+  `YMSprint118CriterionFeedAggregator`,
+  `YMSprint118CommonCarrierConstructionReadiness`,
+  `YMSprint118MoscoCompactnessReadinessAggregator`,
+  `YMSprint118TransferCalculusReadinessAggregator`, and
+  `YMSprint118TransferBlockerMatrix`.
+- Added `scripts/ym_sprint118_readiness_audit.py` and generated
+  `outputs/ym_sprint118_readiness_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 118 aggregates the Sprint117 norm, residual, and sector feed
+  closures into one positive criterion-feed package, then isolates the
+  remaining transfer route into common-carrier construction readiness, Mosco
+  compactness readiness, transfer-calculus readiness, and a blocker matrix with
+  concrete owner lanes and required resolutions.
+- The remaining false flags are concentrated on common-carrier construction,
+  common-carrier feed-through, weak compactness, aggregate Mosco/calculus
+  obligation closure, transfer lower-bound readiness, and the transfer
+  lower-bound theorem.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 117 propagation audit
+
+- Added checked Sprint 117 modules:
+  `YMSprint117NormCriterionClosurePropagator`,
+  `YMSprint117ResidualCriterionClosurePropagator`,
+  `YMSprint117SectorCriterionClosurePropagator`,
+  `YMSprint117CommonCarrierFeedThroughPropagator`, and
+  `YMSprint117TransferReadinessObligationReducer`.
+- Added `scripts/ym_sprint117_propagation_audit.py` and generated
+  `outputs/ym_sprint117_propagation_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 117 propagates Sprint116 conditional reducer closures into explicit
+  norm, residual, and sector feed surfaces; records the common-carrier
+  feed-through route by source-path dependency rather than sibling imports;
+  and reduces transfer lower-bound readiness to exact obligations across
+  common carrier, no-pollution/no-collapse, weak compactness, closed-form
+  lower semicontinuity, recovery limsup, uniform form, log-generator calculus,
+  and spectral transport.
+- External analytic convergence, common-carrier construction, common-carrier
+  feed-through, transfer lower-bound, continuum Hamiltonian gap, and Clay
+  promotion remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 116 closure-reducer audit
+
+- Added checked Sprint 116 modules:
+  `YMSprint116ResidualConvergenceClosureReducer`,
+  `YMSprint116NormGaugeWindowClosureReducer`,
+  `YMSprint116SectorStabilityClosureReducer`,
+  `YMSprint116ApproximateInverseClosureReducer`, and
+  `YMSprint116CommonCarrierTransferClosureReducer`.
+- Added `scripts/ym_sprint116_closure_reducer_audit.py` and generated
+  `outputs/ym_sprint116_closure_reducer_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 116 turns Sprint115 analytic-supply false flags into closure-reducer
+  surfaces: residual convergence is reduced to supplied component feeds;
+  norm/gauge window closure carries the `645120` package constant and closes
+  the supplied norm criterion only; sector stability packages projection
+  commutator, physical/vacuum sector, leakage, and quotient descent feeds;
+  approximate-inverse closure collects residual and common-carrier estimate
+  compatibility inputs; and common-carrier transfer closure records weak
+  compactness, closed-form lower semicontinuity, recovery limsup, and
+  norm/residual/sector dependencies.
+- The external analytic convergence theorems, common-carrier construction
+  theorem, transfer lower-bound theorem, continuum Hamiltonian gap theorem, and
+  Clay promotion remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 115 analytic-supply audit
+
+- Added checked Sprint 115 modules:
+  `YMSprint115VanishingRateLedger`,
+  `YMSprint115NormWindowClosureCriterion`,
+  `YMSprint115ProjectionSectorStabilityCriterion`,
+  `YMSprint115ApproximateInverseResidualCriterion`, and
+  `YMSprint115CommonCarrierFeedThroughCriterion`.
+- Added `scripts/ym_sprint115_analytic_supply_audit.py` and generated
+  `outputs/ym_sprint115_analytic_supply_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 115 turns Sprint114 closure criteria into analytic-supply criterion
+  surfaces: component residual rates share one exponent/window ledger;
+  upper/lower norm estimates share the `645120` package constant and one
+  admissible window; projection commutator, physical/vacuum sector stability,
+  leakage exclusion, and quotient descent are packaged together; left/right
+  approximate-inverse residuals remain separate from quadrature adjointness
+  closure; and weak compactness, closed-form lower semicontinuity, recovery
+  limsup, and norm/residual/sector inputs feed the common-carrier route.
+- The external analytic supplies, common-carrier construction theorem, transfer
+  lower-bound theorem, continuum Hamiltonian gap theorem, and Clay promotion
+  remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 114 closure-criterion audit
+
+- Added checked Sprint 114 modules:
+  `YMSprint114GaugeQuotientClosureCriterion`,
+  `YMSprint114UniformNormConstantAssembly`,
+  `YMSprint114QuadratureResidualClosureCriterion`,
+  `YMSprint114InverseProjectionClosureCriterion`, and
+  `YMSprint114CommonCarrierEstimateClosureAssembly`.
+- Added `scripts/ym_sprint114_closure_criterion_audit.py` and generated
+  `outputs/ym_sprint114_closure_criterion_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 114 turns Sprint113 estimate packages into conditional closure
+  criteria: gauge/local-section plus quotient feeds imply gauge-quotient
+  closure criteria; local constants assemble to package constant `645120`;
+  quadrature supplies imply adjointness-residual closure criteria; inverse,
+  projection, sector, and norm-window supplies feed common-carrier criteria.
+- The external analytic supplies, common-carrier construction theorem, transfer
+  lower-bound theorem, continuum Hamiltonian gap theorem, and Clay promotion
+  remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 113 estimate-package audit
+
+- Added checked Sprint 113 modules:
+  `YMSprint113GaugeCovarianceLocalSectionEstimate`,
+  `YMSprint113LocalJacobianPartitionEstimate`,
+  `YMSprint113QuotientNormComparisonEstimate`,
+  `YMSprint113QuadratureResidualEstimate`, and
+  `YMSprint113InverseProjectionResidualAssembly`.
+- Added `scripts/ym_sprint113_estimate_package_audit.py` and generated
+  `outputs/ym_sprint113_estimate_package_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 113 turns Sprint112 estimate reductions into named estimate packages
+  for gauge covariance/local sections, local Jacobian and partition control,
+  quotient norm comparison, quadrature residuals, inverse residuals, projection
+  stability, sector stability, and common-carrier feed-through.
+- The analytic estimate package, common-carrier construction theorem, transfer
+  lower-bound theorem, continuum Hamiltonian gap theorem, and Clay promotion
+  remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 112 map-candidate reduction audit
+
+- Added checked Sprint 112 modules:
+  `YMSprint112RenormalizedInterpolationMapCandidate`,
+  `YMSprint112ContinuumSamplingProjectionMapCandidate`,
+  `YMSprint112QuotientIndependenceDiagramLedger`,
+  `YMSprint112UniformNormBoundReduction`, and
+  `YMSprint112AdjointnessApproxInverseReduction`.
+- Added `scripts/ym_sprint112_map_candidate_reduction_audit.py` and generated
+  `outputs/ym_sprint112_map_candidate_reduction_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 112 turns Sprint111 construction criteria into concrete `E_a` and
+  `P_a` candidate recipes plus reductions to quotient-independence diagrams,
+  local norm estimates, quadrature residuals, inverse residuals, and projection
+  stability estimates.
+- The analytic estimates, common-carrier construction theorem, transfer
+  lower-bound theorem, continuum Hamiltonian gap theorem, and Clay promotion
+  remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 111 common-carrier construction audit
+
+- Added checked Sprint 111 modules:
+  `YMSprint111FiniteContinuumEmbeddingProjectionMaps`,
+  `YMSprint111GaugeQuotientPhysicalSectorCompatibility`,
+  `YMSprint111NormEquivalenceUniformAWindow`,
+  `YMSprint111EmbeddingProjectionAdjointnessLedger`, and
+  `YMSprint111CommonCarrierConstructionAssembly`.
+- Added `scripts/ym_sprint111_common_carrier_construction_audit.py` and
+  generated `outputs/ym_sprint111_common_carrier_construction_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 111 turns the Sprint110 carrier-identification criteria into typed
+  construction criteria for maps, quotient compatibility, norm comparison,
+  adjointness/projection stability, and weak/recovery feed-through.
+- The common-carrier construction theorem, transfer lower-bound theorem,
+  continuum Hamiltonian gap theorem, and Clay promotion remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 110 common-carrier compactness audit
+
+- Added checked Sprint 110 modules:
+  `YMSprint110CommonCarrierHilbertIdentification`,
+  `YMSprint110WeakCompactnessEnergyCore`,
+  `YMSprint110ClosedFormLowerSemicontinuityCriterion`,
+  `YMSprint110RecoveryCoreDensityEnergyLimsup`, and
+  `YMSprint110BottomSectorThresholdNoCollapse`.
+- Added `scripts/ym_sprint110_common_carrier_compactness_audit.py` and
+  generated `outputs/ym_sprint110_common_carrier_compactness_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 110 turns the Sprint109 Mosco/no-pollution requirements into typed
+  common-carrier, weak-compactness, lower-semicontinuity, recovery-limsup, and
+  threshold/no-collapse criteria.
+- The common-carrier compactness theorem, transfer lower-bound theorem,
+  continuum Hamiltonian gap theorem, and Clay promotion remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 109 Mosco closure audit
+
+- Added checked Sprint 109 modules:
+  `YMSprint109MoscoLiminfLowerSemicontinuity`,
+  `YMSprint109MoscoRecoverySequence`,
+  `YMSprint109NoBottomSpectrumPollutionCompactness`,
+  `YMSprint109MoscoSpectralLiminfAssembly`, and
+  `YMSprint109TransferLowerBoundCriticalAssembly`.
+- Added `scripts/ym_sprint109_mosco_closure_audit.py` and generated
+  `outputs/ym_sprint109_mosco_closure_audit/`.
+- The route decision is `fail-closed`.
+- Sprint 109 sharpens the Mosco/no-pollution package for
+  `gap(T(a)) >= c * m_eff(a) * a`, but the analytic lower-bound theorem,
+  continuum Hamiltonian gap theorem, and Clay promotion remain open/false.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 108 transfer lower-bound proof-package audit
+
+- Added checked Sprint 108 modules:
+  `YMSprint108MoscoNoPollutionBridge`,
+  `YMSprint108LogGeneratorCalculusBridge`,
+  `YMSprint108UniformFormLowerBound`,
+  `YMSprint108SpectralGapTransport`, and
+  `YMSprint108TransferLowerBoundAssembly`.
+- Added `scripts/ym_sprint108_transfer_lower_bound_audit.py` and generated
+  `outputs/ym_sprint108_transfer_lower_bound_audit/`.
+- The route decision is `transfer lower-bound theorem still open`.
+- The remaining analytic package is now explicitly indexed: Mosco
+  liminf/recovery/no-pollution, log-generator functional calculus on a common
+  core, uniform form coercivity, and spectral threshold transport.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 107 finite-continuum uniformity audit
+
+- Added checked Sprint 107 modules:
+  `YMSprint107FiniteContinuumUniformityBoundary`,
+  `YMSprint107UniformTransferConstantLedger`,
+  `YMSprint107HamiltonianSpectralGapBridge`, and
+  `YMSprint107TransferGapCriticalPathAssembly`.
+- Added `scripts/ym_sprint107_uniformity_audit.py` and generated
+  `outputs/ym_sprint107_uniformity_audit/`.
+- The route decision is `uniformity theorem still open`.
+- The actual uniform continuum transfer lower-bound theorem and physical
+  Hamiltonian spectral-gap proof remain open.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 106 transfer-gap audit
+
+- Added checked Sprint 106 bridge modules:
+  `YMSprint106EffectiveMassLowerBound`,
+  `YMSprint106TransferMatrixGapComparison`,
+  `YMSprint106TransferGapLowerBoundAssembly`, and
+  `YMSprint106SymmetryAndGroupAuditAdvance`.
+- Added `scripts/ym_sprint106_transfer_gap_audit.py` and generated
+  `outputs/ym_sprint106_transfer_gap_audit/`.
+- The route decision is `theorem still open`.
+- WC3 effective-mass positivity and finite transfer-matrix support are now
+  assembled around `gap(T(a)) >= c * m_eff(a) * a`.
+- The missing theorem is the uniform continuum transfer comparison from WC3
+  effective mass to physical Hamiltonian spectral gap.
+- `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 105 gap-closure plan
+
+- Added checked Sprint 105 bridge modules:
+  `YMSprint105NonCircularMassGapBridge`,
+  `YMSprint105OSToWightmanBridge`,
+  `YMSprint105SymmetryRestorationContinuumLimit`, and
+  `YMSprint105CompactSimpleGroupParameterTable`.
+- Added `scripts/ym_sprint105_gap_closure_plan.py` and generated
+  `outputs/ym_sprint105_gap_closure_plan/`.
+- The route decision is `SPRINT105_GAP_CLOSURE_PLAN_READY`.
+- The five Sprint 104 blockers are reduced to three DASHI-native obligations:
+  transfer-gap lower bound, symmetry restoration, and compact simple group
+  parameter-table completeness.
+- WC3-only `m_eff(a) > 0`, asymptotic-freedom scale behavior, OS3 spatial-only
+  blocking, Poincare/spectrum via symmetry restoration, and compact simple
+  group parameter rows are recorded as concrete bridge data.
+- `clayYangMillsPromoted` remains false.
+
 # 2026-06-06 Sprint 104 no-placeholder Clay dossier builder
 
 - Added `YMSprint104ClayCandidateDossierBuilder`.
