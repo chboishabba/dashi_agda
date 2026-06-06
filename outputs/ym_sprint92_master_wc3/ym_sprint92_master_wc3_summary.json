@@ -1,0 +1,54 @@
+{
+  "clay_yang_mills_promoted": false,
+  "continuum_wall": "CONTINUUM_LIMIT_MASS_GAP_NOT_KP_SPECTRAL_CONTINUITY",
+  "eta4_passes": true,
+  "eta4_q": 0.9271275790105094,
+  "eta6_fails": true,
+  "eta6_q": 1.390691368515764,
+  "eta8_fails": true,
+  "eta8_q": 1.8542551580210187,
+  "exp_minus_4": 0.01831563888873418,
+  "q": 0.23178189475262734,
+  "remaining_open_lemmas": [
+    "BalabanCMP98AveragingKernelIsProbability",
+    "BalabanCMP116PolymerMassBound",
+    "ContractionDeltaLowerBound",
+    "UniformBoundForAllA",
+    "WC3UniformInA",
+    "UniformConnectedSchwingerDecay",
+    "ContinuumLimitMassGap"
+  ],
+  "route_decision": "MASTER_WC3_SU3_CONSERVATIVE_CLOSES_ARITHMETICALLY_AT_K11",
+  "su2_first_safe_k": 9,
+  "su3_first_safe_k": 11,
+  "typed_proof_obligations": [
+    {
+      "derived_in_repo": false,
+      "field": "contractionDeltaLowerBound",
+      "record": "GaugeCovariantDobrushinComparison",
+      "sprint": "93",
+      "type": "ContractionDeltaLowerBound"
+    },
+    {
+      "derived_in_repo": false,
+      "field": "uniformBoundForAllA",
+      "record": "UniformPolymerActivityFromDobrushin",
+      "sprint": "94",
+      "type": "UniformBoundForAllA"
+    },
+    {
+      "derived_in_repo": false,
+      "field": "uniformInA",
+      "record": "WC3UniformClusterSummability",
+      "sprint": "95",
+      "type": "WC3UniformInA"
+    },
+    {
+      "derived_in_repo": false,
+      "field": "continuumLimitMassGap",
+      "record": "NoSpectralPollutionUnderContinuumLimit",
+      "sprint": "95-96",
+      "type": "ContinuumLimitMassGap"
+    }
+  ]
+}

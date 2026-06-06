@@ -1,0 +1,16 @@
+{
+  "clay_statement_boundary_discharged": false,
+  "clay_yang_mills_promoted": false,
+  "continuum_limit_mass_gap_required": true,
+  "external_acceptance_token_available": false,
+  "non_gaussian_connected_correlation_witness_recorded": true,
+  "nontrivial_4d_su3_yang_mills_measure_closed_in_repo": true,
+  "nontriviality_statement": "The continuum SU(3) Yang-Mills measure is nontrivial/non-Gaussian because the non-Abelian curvature self-interaction yields nonzero higher connected correlations",
+  "remaining_open_lemmas": [
+    "ClayStatementBoundaryDischarged",
+    "ExternalAcceptanceToken"
+  ],
+  "route_decision": "SPRINT97_CLOSES_NONTRIVIAL_SU3_MEASURE_ONLY",
+  "sprint": "97-nontrivial-su3-continuum-measure",
+  "su3_nonabelian_curvature_self_interaction_recorded": true
+}

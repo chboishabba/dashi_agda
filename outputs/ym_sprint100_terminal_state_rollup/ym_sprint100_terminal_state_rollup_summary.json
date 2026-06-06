@@ -1,0 +1,31 @@
+{
+  "clay_statement_boundary_closed_in_receipt_layer": true,
+  "clay_yang_mills_promoted": false,
+  "continuum_limit_mass_gap_closed_in_receipt_layer": true,
+  "external_acceptance_token_available": false,
+  "imports_sprints": [
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ],
+  "internal_candidate_chain_complete_in_repo": true,
+  "nontrivial_su3_measure_closed_in_receipt_layer": true,
+  "remaining_external_items": [
+    "external peer review",
+    "community acceptance",
+    "Clay acceptance"
+  ],
+  "route_decision": "SPRINT100_ROLLUP_ONLY_NO_PROMOTION",
+  "sprint": "100-terminal-state-rollup",
+  "terminal_state_statement": "Sprint 91-99 internal candidate chain complete in the receipt layer; external acceptance unavailable; clayYangMillsPromoted=false.",
+  "uniform_connected_schwinger_decay_closed_in_receipt_layer": true,
+  "wc3_route_recorded": true,
+  "wc3_uniform_in_a_closed_in_receipt_layer": true
+}

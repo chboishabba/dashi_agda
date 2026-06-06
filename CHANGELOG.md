@@ -6,6 +6,117 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 103 YM inhabited proof-argument receipts for `2026-06-06`: records
+  that the user supplied math for all eight Sprint 102 obligations and that
+  Sprint 103 implements inhabited proof-argument receipts for them in the repo
+  receipt layer.  The eight obligations are CMP98 local oscillation, CMP98
+  Haar/probability constant, CMP116 polymer mass, gauge-covariant Dobrushin
+  comparison, uniform polymer activity, WC3 uniform cluster summability,
+  continuum-limit mass-gap RG bridge, and nontrivial SU(3) continuum measure
+  formalisation.  External Clay acceptance remains outside repo authority and
+  `clayYangMillsPromoted` remains false.
+
+- Sprint 102 YM proof-obligation index for `2026-06-06`: separates the
+  Sprint 91-101 receipt layer from the remaining analytic proof layer.  It
+  records eight remaining mathematical obligations plus the external acceptance
+  boundary and keeps Clay/YM promotion false.
+
+- Sprint 101 Clay boundary reconciliation for `2026-06-06`: reconciles the
+  Sprint 100 terminal rollup with the older `YMClayPromotionBoundary`, keeping
+  both surfaces fail-closed for Clay/YM promotion.
+
+- Sprint 100 YM terminal-state rollup for `2026-06-06`: packages the
+  Sprint 91-99 chain into one queryable receipt with the internal candidate
+  chain complete and Clay/YM promotion still false.
+
+- Sprint 99 external-acceptance terminal boundary for `2026-06-06`: records
+  that the remaining `ExternalAcceptanceToken` is not repo-internal and cannot
+  be self-issued.  Clay/YM promotion remains false.
+
+- Sprint 98 Clay statement boundary candidate receipt for `2026-06-06`:
+  starts the final internal-boundary assembly from the Sprint 97 nontrivial
+  SU(3) continuum-measure receipt.  This is not an external Clay promotion.
+
+- Sprint 97 nontrivial SU(3) continuum-measure receipt for `2026-06-06`:
+  records the structural non-Gaussianity witness from non-Abelian curvature
+  self-interaction after the Sprint 96 continuum mass-gap receipt.  It does not
+  discharge the Clay statement or provide external acceptance.
+
+- Sprint 96 continuum-limit mass-gap receipt for `2026-06-06`: records the
+  narrow bridge from uniform connected Schwinger decay to the candidate
+  continuum mass-gap statement using an RG-generated effective mass,
+  transfer-gap/effective-mass comparison, and RG-invariant physical scale.
+  It does not derive nontrivial SU(3) continuum measure, Clay statement
+  discharge, external acceptance, or Clay/YM promotion.
+
+- Sprint 95 uniform connected Schwinger decay for `2026-06-06`: added
+  `YMSprint95UniformConnectedSchwingerDecayReceipt` plus a focused audit
+  script and test.  The receipt consumes uniform WC3 and records the connected
+  Schwinger/Mayer expansion implication to uniform connected Schwinger decay.
+  It does not derive `ContinuumLimitMassGap` or Clay/YM promotion.
+
+- Sprint 95 WC3 uniform-in-a summability for `2026-06-06`: added
+  `YMSprint95WC3UniformInAReceipt` plus a focused audit script and test.  The
+  receipt consumes Sprint 94 and the existing blocked `L=2` eta=4 KP carrier,
+  records `4q = 0.9271275790105094 < 1`, and closes `WC3UniformInA` in the
+  receipt layer.  It does not derive `UniformConnectedSchwingerDecay`,
+  `ContinuumLimitMassGap`, or Clay/YM promotion.
+
+- Sprint 94 uniform activity bound for `2026-06-06`: added
+  `YMSprint94UniformBoundForAllAReceipt` plus a focused audit script and test.
+  The receipt consumes the Sprint 93 contraction lower bound and records
+  `UniformBoundForAllA` with constants `C = 1/(1-delta_min)` and
+  `m = delta_min/2`, where `delta_min = 1 - exp(-4)`.  It does not derive
+  `WC3UniformInA`, `UniformConnectedSchwingerDecay`,
+  `ContinuumLimitMassGap`, or Clay/YM promotion.
+
+- Sprint 93 contraction-delta lower-bound correction for `2026-06-06`: added
+  `YMSprint93ContractionDeltaLowerBoundReceipt` plus a focused audit script and
+  test.  The receipt accepts `BalabanCMP98AveragingKernelIsProbability` and
+  `BalabanCMP116PolymerMassBound` as scoped authority inputs, retires the
+  incorrect contraction-delta independence framing, and records the corrected
+  lower-bound statement `delta(a) >= delta_min = 1 - exp(-4)` for sufficiently
+  small `a`.  It does not derive `UniformBoundForAllA`, `WC3UniformInA`,
+  `UniformConnectedSchwingerDecay`, `ContinuumLimitMassGap`, or Clay/YM
+  promotion.
+
+- Sprint 92 master-WC3 adjoint correction for `2026-06-06`: added
+  `YMSprint92MasterWC3AdjointCorrectionReceipt`, replacing the earlier
+  SU(3) `k=10` arithmetic candidate.  The corrected row-sum condition applies
+  the adjoint factor before testing `18*C_local < exp(-4)`: SU(2) `k=9`
+  passes, SU(3) `k=9` fails, SU(3) `k=10` still fails, and SU(3) `k=11`
+  passes arithmetically.  The receipt deliberately leaves
+  `BalabanQhpLocalConstantBound`, `BalabanCMP116PolymerMassBound`,
+  `AdjointRepresentationSharperBound-or-BlockingDepthK11PhysicalValidation`,
+  `WeakCouplingWindowSU3`, WC3, no spectral pollution, and
+  `clayYangMillsPromoted` false/open.
+
+- Sprint 92 master-WC3 theorem interface for `2026-06-06`: added
+  `YMSprint92MasterWC3Condition`, making the remaining continuum jump explicit:
+  `MasterWC3ConditionSU3AtK11` feeds `GaugeCovariantDobrushinComparison`,
+  `UniformPolymerActivityFromDobrushin`, `WC3UniformClusterSummability`, and
+  `UniformConnectedSchwingerDecay`, then
+  `ContinuumLimitMassGap`.  Added
+  `scripts/ym_sprint92_master_wc3_condition.py` and focused tests; the
+  generated summary records `eta4_q = 0.9271275790105094`,
+  `eta6_q = 1.390691368515764`, `eta8_q = 1.8542551580210187`,
+  `su2_first_safe_k = 9`, and `su3_first_safe_k = 11`.  The module now names
+  the corrected proof obligations as uninhabited types:
+  `ContractionDeltaLowerBound`, `UniformBoundForAllA`, `WC3UniformInA`,
+  `UniformConnectedSchwingerDecay`, and `ContinuumLimitMassGap`; the two
+  Balaban authority inputs remain `BalabanCMP98AveragingKernelIsProbability`
+  and `BalabanCMP116PolymerMassBound`.
+
+- Sprint 91 WC3 new-math program for `2026-06-06`: added
+  `YMSprint91WC3NewMathReceipt`, recording the Cauchy-Schwarz conversion from
+  Sprint-80 quadratic anisotropic oscillation control to a linear Dobrushin
+  coefficient.  The receipt calculates the master thresholds
+  `exp(-4)/18 = 0.0010175354938185654`,
+  `512*exp(-4)/18 = 0.5209781728351055`, and the SU(3) adjoint-adjusted
+  threshold `0.23154585459338023`.  It keeps the actual master weak-coupling
+  inequality `g^2 < threshold/(C_avg*sqrt(m))`, WC3, no spectral pollution,
+  SU(N) extension, and `clayYangMillsPromoted` false/open.
+
 - Sprint 90 continuum WC boundary for `2026-06-06`: added
   `YMSprint90ContinuumMassGapWCBoundaryReceipt`, recording the conditional
   implication from WC3/tightness/reflection positivity/OS reconstruction to

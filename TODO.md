@@ -3,6 +3,205 @@
 
 # P0 BLOCKERS
 
+• Sprint 103 YM inhabited proof-argument receipts are implemented.
+
+  Status:
+
+  - user supplied math for all eight Sprint 102 obligations;
+  - implements inhabited proof-argument receipts for CMP98 local oscillation,
+    CMP98 Haar/probability constant, CMP116 polymer mass,
+    gauge-covariant Dobrushin comparison, uniform polymer activity, WC3 uniform
+    cluster summability, continuum-limit mass-gap RG bridge, and nontrivial
+    SU(3) continuum measure formalisation;
+  - records internal receipt-layer closure of those proof arguments;
+  - keeps external Clay acceptance outside repo authority;
+  - keeps `clayYangMillsPromoted` false.
+
+• Sprint 102 YM proof-obligation index is implemented.
+
+  Status:
+
+  - consumes `YMSprint101ClayBoundaryReconciliationReceipt`;
+  - separates receipt-layer availability from real analytic proof obligations;
+  - records the eight remaining mathematical items plus the external
+    acceptance boundary;
+  - keeps `clayYangMillsPromoted` false.
+
+• Sprint 101 Clay boundary reconciliation receipt is implemented.
+
+  Status:
+
+  - consumes `YMSprint100TerminalStateRollupReceipt`;
+  - consumes the legacy `YMClayPromotionBoundary`;
+  - records that the two surfaces are compatible and non-promoting.
+
+• Sprint 100 terminal rollup receipt is implemented.
+
+  Status:
+
+  - consumes `YMSprint91WC3NewMathReceipt` through
+    `YMSprint99ExternalAcceptanceTerminalBoundaryReceipt`;
+  - records the current terminal state in one queryable module;
+  - keeps `clayYangMillsPromoted` false.
+
+• Sprint 99 external-acceptance terminal boundary is implemented.
+
+  Status:
+
+  - consumes `YMSprint98ClayStatementBoundaryCandidateReceipt`;
+  - records that `ExternalAcceptanceToken` is not repo-internal;
+  - keeps `clayYangMillsPromoted` false.
+
+• Sprint 98 Clay statement boundary candidate receipt is implemented.
+
+  Status:
+
+  - consumes `YMSprint97NontrivialSU3ContinuumMeasureReceipt`;
+  - targets internal `ClayStatementBoundaryDischarged` for the new sprint chain;
+  - keeps `ExternalAcceptanceToken` and `clayYangMillsPromoted` open/false.
+
+• Sprint 97 nontrivial SU(3) continuum-measure receipt is implemented.
+
+  Status:
+
+  - consumes `YMSprint96ContinuumLimitMassGapReceipt`;
+  - records non-Abelian curvature self-interaction as the structural
+    non-Gaussianity witness;
+  - targets `Nontrivial4DSU3YangMillsMeasure`;
+  - keeps `ClayStatementBoundaryDischarged`, `ExternalAcceptanceToken`, and
+    `clayYangMillsPromoted` open/false.
+
+• Sprint 96 continuum-limit mass-gap receipt is implemented.
+
+  Status:
+
+  - consumes `YMSprint95UniformConnectedSchwingerDecayReceipt`;
+  - records the RG bridge:
+    `RGGeneratedMassTerm` + `TransferGapTracksEffectiveMass` +
+    `RGInvariantPhysicalScale`;
+  - targets `ContinuumLimitMassGap` as the candidate statement
+    `lim_{a->0} gap(T(a))*block_size(a) = m_phys > 0`;
+  - keeps `Nontrivial4DSU3YangMillsMeasure`,
+    `ClayStatementBoundaryDischarged`, `ExternalAcceptanceToken`, and
+    `clayYangMillsPromoted` open/false.
+
+• Sprint 95 uniform connected Schwinger decay from WC3 is implemented.
+
+  Status:
+
+  - consumes `YMSprint95WC3UniformInAReceipt`;
+  - closes `UniformConnectedSchwingerDecay` via the connected Schwinger/Mayer
+    expansion using the uniform WC3 constants;
+  - keeps `ContinuumLimitMassGap` and `clayYangMillsPromoted` open/false.
+
+• Sprint 95 WC3 uniform summability from Sprint 94 and blocked-L2 KP is
+  implemented.
+
+  Status:
+
+  - consumes `YMSprint94UniformBoundForAllAReceipt`;
+  - consumes the existing blocked `L=2` eta=4 KP carrier;
+  - closes `WC3UniformInA` using `4q = 0.9271275790105094 < 1`;
+  - keeps `UniformConnectedSchwingerDecay`, `ContinuumLimitMassGap`, and
+    `clayYangMillsPromoted` open/false.
+
+• Sprint 94 uniform activity bound from Dobrushin lower bound is implemented.
+
+  Status:
+
+  - consumes `YMSprint93ContractionDeltaLowerBoundReceipt`;
+  - defines uniform constants from the lower bound:
+    `C = 1/(1-delta_min)` and `m = delta_min/2`;
+  - closes `UniformBoundForAllA` as the physical-diameter bound
+    `|zeta_a(X)| <= C * exp(-m * diam_phys(a,X))` for all `a < a0`;
+  - keeps `WC3UniformInA`, `UniformConnectedSchwingerDecay`,
+    `ContinuumLimitMassGap`, and `clayYangMillsPromoted` open/false.
+
+• Sprint 93 scoped Balaban inputs and contraction lower-bound correction is
+  implemented.
+
+  Status:
+
+  - accepts `BalabanCMP98AveragingKernelIsProbability` as a scoped authority
+    input for `Cavg <= 1`;
+  - accepts `BalabanCMP116PolymerMassBound` as a scoped authority input for the
+    positive polymer-mass slot;
+  - replaces the old independence claim with `ContractionDeltaLowerBound`:
+    for sufficiently small `a`, `delta(a) >= delta_min = 1 - exp(-4)`;
+  - keeps `UniformBoundForAllA`, `WC3UniformInA`,
+    `UniformConnectedSchwingerDecay`, `ContinuumLimitMassGap`, and
+    `clayYangMillsPromoted` open/false.
+
+• Sprint 92 master-WC3 adjoint correction is implemented.
+
+  Status:
+
+  - the row-sum condition is represented as `18*C_local < exp(-4)`;
+  - SU(2) `k=9` passes: `18*C = 0.017578125 < exp(-4)`;
+  - SU(3) `k=9` fails: `18*C = 0.03955078125`;
+  - SU(3) `k=10` also fails: `18*C = 0.019775390625`;
+  - SU(3) `k=11` passes arithmetically:
+    `18*C = 0.0098876953125 < exp(-4)`.
+
+  Boundary:
+
+  - the arithmetic does not prove the analytic CMP98/CMP116 inputs;
+  - the remaining open lemmas are `BalabanQhpLocalConstantBound`,
+    `BalabanCMP116PolymerMassBound`,
+    `AdjointRepresentationSharperBound-or-BlockingDepthK11PhysicalValidation`,
+    and `WeakCouplingWindowSU3`;
+  - WC3, no spectral pollution, and Clay/YM promotion remain false.
+
+• Sprint 92 master-WC3 theorem interface is implemented.
+
+  Status:
+
+  - `YMSprint92MasterWC3Condition` exposes the conditional theorem route:
+    `MasterWC3ConditionSU3AtK11` ->
+    `GaugeCovariantDobrushinComparison` ->
+    `UniformPolymerActivityFromDobrushin` ->
+    `WC3UniformClusterSummability` ->
+    `UniformConnectedSchwingerDecay` ->
+    `ContinuumLimitMassGap`;
+  - the companion script records `eta4_q = 0.9271275790105094`,
+    `eta6_q = 1.390691368515764`, `eta8_q = 1.8542551580210187`,
+    `su2_first_safe_k = 9`, and `su3_first_safe_k = 11`.
+
+  Next proof attempts:
+
+  - inhabit `BalabanCMP98AveragingKernelIsProbability` to get `Cavg <= 1`;
+  - inhabit `BalabanCMP116PolymerMassBound`;
+  - Sprint 93: inhabit `ContractionDeltaLowerBound` inside
+    `GaugeCovariantDobrushinComparison`;
+  - Sprint 94: `UniformBoundForAllA` is now inhabited in the receipt layer;
+  - Sprint 95: `WC3UniformInA` is now inhabited in the receipt layer;
+  - Sprint 95: `UniformConnectedSchwingerDecay` is now inhabited in the
+    receipt layer;
+  - Sprint 95/96: inhabit `ContinuumLimitMassGap` inside the continuum
+    mass-gap boundary.  The KP decay bound alone scales to zero; this theorem
+    must identify the RG-generated physical mass instead.
+
+• Sprint 91 WC3 new-math program is implemented.
+
+  Status:
+
+  - the Cauchy-Schwarz step from quadratic anisotropic oscillation control to
+    the linear Dobrushin coefficient is recorded closed conditionally;
+  - threshold arithmetic is calculated:
+    `512*exp(-4)/18 = 0.5209781728351055`, with SU(3) adjoint adjustment
+    `0.23154585459338023`;
+  - T1-T5 are represented as a new theorem architecture conditional on the
+    master weak-coupling inequality.
+
+  Boundary:
+
+  - the remaining theorem is `MasterWC3Condition`, concretely
+    `g^2 < threshold/(C_avg*sqrt(m))`;
+  - no `MasterWC3ConditionWitness` or `WC3UniformClusterSummabilityWitness` is
+    exported;
+  - WC3, no spectral pollution, SU(N) extension, and Clay/YM promotion remain
+    false.
+
 • Sprint 90 continuum WC boundary is implemented.
 
   Status:

@@ -1,0 +1,92 @@
+[
+  {
+    "adjoint_penalty": 1.0,
+    "group": "SU2",
+    "k": 8,
+    "m0": 3.347952867143343,
+    "margin_m0_minus_4": -0.6520471328566568,
+    "passes_exp_minus_4": false,
+    "row_sum": 0.03515625
+  },
+  {
+    "adjoint_penalty": 1.0,
+    "group": "SU2",
+    "k": 9,
+    "m0": 4.041100047703289,
+    "margin_m0_minus_4": 0.04110004770328857,
+    "passes_exp_minus_4": true,
+    "row_sum": 0.017578125
+  },
+  {
+    "adjoint_penalty": 1.0,
+    "group": "SU2",
+    "k": 10,
+    "m0": 4.734247228263234,
+    "margin_m0_minus_4": 0.734247228263234,
+    "passes_exp_minus_4": true,
+    "row_sum": 0.0087890625
+  },
+  {
+    "adjoint_penalty": 1.0,
+    "group": "SU2",
+    "k": 11,
+    "m0": 5.427394408823179,
+    "margin_m0_minus_4": 1.4273944088231794,
+    "passes_exp_minus_4": true,
+    "row_sum": 0.00439453125
+  },
+  {
+    "adjoint_penalty": 1.0,
+    "group": "SU2",
+    "k": 12,
+    "m0": 6.120541589383125,
+    "margin_m0_minus_4": 2.1205415893831248,
+    "passes_exp_minus_4": true,
+    "row_sum": 0.002197265625
+  },
+  {
+    "adjoint_penalty": 2.25,
+    "group": "SU3_conservative",
+    "k": 8,
+    "m0": 2.5370226509270144,
+    "margin_m0_minus_4": -1.4629773490729856,
+    "passes_exp_minus_4": false,
+    "row_sum": 0.0791015625
+  },
+  {
+    "adjoint_penalty": 2.25,
+    "group": "SU3_conservative",
+    "k": 9,
+    "m0": 3.23016983148696,
+    "margin_m0_minus_4": -0.7698301685130402,
+    "passes_exp_minus_4": false,
+    "row_sum": 0.03955078125
+  },
+  {
+    "adjoint_penalty": 2.25,
+    "group": "SU3_conservative",
+    "k": 10,
+    "m0": 3.9233170120469048,
+    "margin_m0_minus_4": -0.07668298795309525,
+    "passes_exp_minus_4": false,
+    "row_sum": 0.019775390625
+  },
+  {
+    "adjoint_penalty": 2.25,
+    "group": "SU3_conservative",
+    "k": 11,
+    "m0": 4.61646419260685,
+    "margin_m0_minus_4": 0.6164641926068501,
+    "passes_exp_minus_4": true,
+    "row_sum": 0.0098876953125
+  },
+  {
+    "adjoint_penalty": 2.25,
+    "group": "SU3_conservative",
+    "k": 12,
+    "m0": 5.3096113731667955,
+    "margin_m0_minus_4": 1.3096113731667955,
+    "passes_exp_minus_4": true,
+    "row_sum": 0.00494384765625
+  }
+]

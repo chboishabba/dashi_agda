@@ -1,0 +1,59 @@
+{
+  "analytic_proof_layer_complete": false,
+  "clay_yang_mills_promoted": false,
+  "external_acceptance_token_available": false,
+  "receipt_layer_present": true,
+  "remaining_analytic_obligation_count": 8,
+  "remaining_analytic_obligations": [
+    {
+      "analytic_proof_in_repo": false,
+      "kind": "scoped authority / analytic local-estimate formalisation",
+      "lemma": "BalabanCMP98LocalOscillationBound",
+      "receipt_or_interface_in_repo": true
+    },
+    {
+      "analytic_proof_in_repo": false,
+      "kind": "scoped authority import",
+      "lemma": "BalabanCMP98AveragingKernelIsProbability",
+      "receipt_or_interface_in_repo": true
+    },
+    {
+      "analytic_proof_in_repo": false,
+      "kind": "scoped authority import",
+      "lemma": "BalabanCMP116PolymerMassBound",
+      "receipt_or_interface_in_repo": true
+    },
+    {
+      "analytic_proof_in_repo": false,
+      "kind": "new DASHI analytic theorem",
+      "lemma": "GaugeCovariantDobrushinComparison",
+      "receipt_or_interface_in_repo": true
+    },
+    {
+      "analytic_proof_in_repo": false,
+      "kind": "analytic quantifier exchange",
+      "lemma": "UniformPolymerActivityFromDobrushin",
+      "receipt_or_interface_in_repo": true
+    },
+    {
+      "analytic_proof_in_repo": false,
+      "kind": "uniform cluster expansion theorem",
+      "lemma": "WC3UniformClusterSummability",
+      "receipt_or_interface_in_repo": true
+    },
+    {
+      "analytic_proof_in_repo": false,
+      "kind": "new RG/transfer-matrix continuum theorem",
+      "lemma": "ContinuumLimitMassGap",
+      "receipt_or_interface_in_repo": true
+    },
+    {
+      "analytic_proof_in_repo": false,
+      "kind": "continuum measure non-Gaussianity formalisation",
+      "lemma": "Nontrivial4DSU3YangMillsMeasure",
+      "receipt_or_interface_in_repo": true
+    }
+  ],
+  "route_decision": "SPRINT102_INDEXES_RECEIPTS_VS_REAL_PROOFS_NO_PROMOTION",
+  "sprint": "102-proof-obligation-index"
+}

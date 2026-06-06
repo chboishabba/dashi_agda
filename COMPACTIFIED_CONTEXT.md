@@ -2,6 +2,143 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-06 Sprint 103 YM inhabited proof-argument receipts:
+  user supplied math for all eight Sprint 102 obligations: CMP98 local
+  oscillation, CMP98 Haar/probability constant, CMP116 polymer mass,
+  gauge-covariant Dobrushin comparison, uniform polymer activity, WC3
+  uniformity, continuum-limit mass-gap RG bridge, and nontrivial SU(3)
+  continuum measure formalisation.  Sprint 103 implements inhabited
+  proof-argument receipts for those obligations in the repo receipt layer.
+  External Clay acceptance remains outside repo authority and
+  `clayYangMillsPromoted` remains false.
+
+- 2026-06-06 Sprint 102 YM proof-obligation index:
+  `YMSprint102ProofObligationIndexReceipt` records the distinction between the
+  Sprint 91-101 receipt architecture and the real analytic proof obligations.
+  Remaining obligations are CMP98 local oscillation, CMP98 Haar/probability
+  constant, CMP116 polymer mass, gauge-covariant Dobrushin comparison, uniform
+  polymer activity, WC3 uniformity, continuum-limit mass-gap RG bridge, and
+  nontrivial SU(3) continuum measure formalisation.  External acceptance
+  remains outside repo authority and Clay promotion remains false.
+
+- 2026-06-06 Sprint 101 Clay boundary reconciliation:
+  `YMSprint101ClayBoundaryReconciliationReceipt` is a compatibility receipt between
+  `YMSprint100TerminalStateRollupReceipt` and the older
+  `YMClayPromotionBoundary`.  It records that the legacy fail-closed authority
+  boundary and the new receipt-layer candidate chain are compatible because
+  both keep Clay promotion false.
+
+- 2026-06-06 Sprint 100 YM terminal-state rollup:
+  `YMSprint100TerminalStateRollupReceipt` imports Sprints 91-99 and exposes
+  the current terminal state: internal candidate chain complete in the receipt
+  layer, external acceptance unavailable, Clay promotion false.
+
+- 2026-06-06 Sprint 99 external-acceptance terminal boundary:
+  `YMSprint99ExternalAcceptanceTerminalBoundaryReceipt` consumes
+  `YMSprint98ClayStatementBoundaryCandidateReceipt` and records that
+  `ExternalAcceptanceToken` cannot be self-issued by the repo.
+  The internal candidate chain is complete in the receipt layer; Clay promotion
+  remains false.
+
+- 2026-06-06 Sprint 98 Clay statement boundary candidate:
+  `YMSprint98ClayStatementBoundaryCandidateReceipt` consumes
+  `YMSprint97NontrivialSU3ContinuumMeasureReceipt` and assembles the internal
+  Clay statement boundary for the current
+  Sprint 91-97 chain.  Intended closure: `ClayStatementBoundaryDischarged`
+  only.  `ExternalAcceptanceToken` and Clay promotion remain unavailable/false.
+
+- 2026-06-06 Sprint 97 nontrivial SU(3) continuum-measure receipt:
+  `YMSprint97NontrivialSU3ContinuumMeasureReceipt` consumes
+  `YMSprint96ContinuumLimitMassGapReceipt` and
+  records a structural non-Gaussianity witness from the non-Abelian SU(3)
+  curvature self-interaction.  Intended closure: only
+  `Nontrivial4DSU3YangMillsMeasure`.  Remaining open: Clay statement discharge,
+  external acceptance, and Clay promotion.
+
+- 2026-06-06 Sprint 96 continuum-limit mass-gap receipt:
+  `YMSprint96ContinuumLimitMassGapReceipt` consumes
+  `YMSprint95UniformConnectedSchwingerDecayReceipt`
+  and records the RG bridge from uniform connected decay to the candidate
+  continuum mass-gap statement
+  `lim_{a->0} gap(T(a))*block_size(a) = m_phys > 0`.  The intended closure is
+  `ContinuumLimitMassGap` only.  Remaining open after this layer:
+  `Nontrivial4DSU3YangMillsMeasure`, `ClayStatementBoundaryDischarged`,
+  `ExternalAcceptanceToken`, and Clay promotion.
+
+- 2026-06-06 Sprint 95 uniform connected Schwinger decay:
+  `YMSprint95UniformConnectedSchwingerDecayReceipt` consumes uniform WC3 and
+  records the connected Schwinger/Mayer implication.  The closed receipt
+  statement is
+  `|S_n^T(x_1,...,x_n;a)| <= C_n * exp(-m * tree_dist(x_1,...,x_n))`
+  uniformly for `a < a0`.  Remaining open: `ContinuumLimitMassGap`,
+  nontrivial SU(3) continuum measure, Clay boundary, and external acceptance.
+
+- 2026-06-06 Sprint 95 WC3 uniform-in-a summability:
+  `YMSprint95WC3UniformInAReceipt` consumes Sprint 94 and the existing blocked
+  `L=2` eta=4 KP carrier.  It pins `4q = 0.9271275790105094 < 1` and closes
+  `WC3UniformInA` in the receipt layer.  Remaining open:
+  `UniformConnectedSchwingerDecay`, `ContinuumLimitMassGap`, nontrivial SU(3)
+  continuum measure, Clay boundary, and external acceptance.
+
+- 2026-06-06 Sprint 94 uniform bound for all lattice spacings:
+  `YMSprint94UniformBoundForAllAReceipt` consumes Sprint 93 and closes
+  `UniformBoundForAllA` in the receipt layer.  It records uniform constants
+  `C = 1/(1-delta_min)` and `m = delta_min/2`, with
+  `delta_min = 1 - exp(-4)`, giving
+  `|zeta_a(X)| <= C * exp(-m * diam_phys(a,X))` for every `a < a0`.
+  Remaining open: `WC3UniformInA`, `UniformConnectedSchwingerDecay`,
+  `ContinuumLimitMassGap`, nontrivial SU(3) continuum measure, Clay boundary,
+  and external acceptance.
+
+- 2026-06-06 Sprint 93 contraction-delta lower-bound correction:
+  `YMSprint93ContractionDeltaLowerBoundReceipt` accepts
+  `BalabanCMP98AveragingKernelIsProbability` and
+  `BalabanCMP116PolymerMassBound` as scoped authority inputs and closes the
+  corrected `ContractionDeltaLowerBound` receipt layer.  The old independence
+  framing is retired: `C_local(a) = C_avg * g^{2*} * m_phys * a`, so
+  `C_local(a) -> 0` and `delta(a) -> 1` as `a -> 0`; the binding condition is
+  the weak-coupling entry scale.  Remaining open:
+  `UniformBoundForAllA`, `WC3UniformInA`, `UniformConnectedSchwingerDecay`,
+  `ContinuumLimitMassGap`, nontrivial SU(3) continuum measure, Clay boundary,
+  and external acceptance.
+
+- 2026-06-06 Sprint 92 master-WC3 adjoint correction:
+  `YMSprint92MasterWC3AdjointCorrectionReceipt` records the corrected row-sum
+  arithmetic.  The SU(3) adjoint factor is applied to `C_local` before testing
+  `18*C_local < exp(-4)`.  SU(2) `k=9` passes with
+  `18*C = 0.017578125`; SU(3) `k=9` fails with `18*C = 0.03955078125`;
+  SU(3) `k=10` also fails with `18*C = 0.019775390625`; SU(3) `k=11` passes
+  arithmetically with `18*C = 0.0098876953125`.  The analytic witnesses
+  `BalabanQhpLocalConstantBound`, `BalabanCMP116PolymerMassBound`,
+  `AdjointRepresentationSharperBound-or-BlockingDepthK11PhysicalValidation`,
+  and `WeakCouplingWindowSU3` remain uninhabited.  WC3, no spectral pollution,
+  and Clay/YM promotion remain false/open.
+  `YMSprint92MasterWC3Condition` now exposes the conditional theorem route
+  from `MasterWC3ConditionSU3AtK11` to
+  `WC3UniformClusterSummability`, `UniformConnectedSchwingerDecay`, and
+  `ContinuumLimitMassGap`.  The companion calculation script
+  pins `eta4_q = 0.9271275790105094`, `eta6_q = 1.390691368515764`,
+  `eta8_q = 1.8542551580210187`, `su2_first_safe_k = 9`, and
+  `su3_first_safe_k = 11`.
+  The live typed proof obligations are `ContractionDeltaLowerBound`,
+  `UniformBoundForAllA`, `WC3UniformInA`, `UniformConnectedSchwingerDecay`,
+  and `ContinuumLimitMassGap`; none are inhabited in repo.  The two authority
+  inputs immediately upstream are `BalabanCMP98AveragingKernelIsProbability`
+  and `BalabanCMP116PolymerMassBound`.
+
+- 2026-06-06 Sprint 91 WC3 new-math program:
+  `YMSprint91WC3NewMathReceipt` records the elementary Cauchy-Schwarz
+  conversion from the Sprint-80 quadratic oscillation sum to a linear
+  Dobrushin coefficient and row-sum formula.  The master threshold arithmetic
+  is now explicit:
+  `exp(-4)/18 = 0.0010175354938185654`,
+  `512*exp(-4)/18 = 0.5209781728351055`, and the SU(3) adjoint-adjusted value
+  is `0.23154585459338023`.  The unproved gate is still the actual
+  weak-coupling inequality `g^2 < threshold/(C_avg*sqrt(m))`; Sprint 91 does
+  not export a `MasterWC3ConditionWitness` or
+  `WC3UniformClusterSummabilityWitness`.  WC3, unconditional no spectral
+  pollution, SU(N) extension, and Clay/YM promotion remain false/open.
+
 - 2026-06-06 Sprint 90 continuum WC boundary:
   `YMSprint90ContinuumMassGapWCBoundaryReceipt` records the exact conditional
   interface from `WC3UniformClusterSummability`, tight continuum limit,

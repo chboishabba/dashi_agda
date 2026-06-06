@@ -15,7 +15,88 @@ interface
 `WC3UniformClusterSummability -> NoSpectralPollutionUnderContinuumLimit ->
 PositiveContinuumMassGap` as conditional only. WC3, SU(3) continuum
 nontriviality, SU(N)>2 extension, external acceptance, and
-`clayYangMillsPromoted` remain open or false.
+`clayYangMillsPromoted` remain open or false. Sprint 91 records the first
+new-math WC3 architecture: the Cauchy-Schwarz conversion from the Sprint 80
+quadratic oscillation bound to a linear Dobrushin coefficient is closed as a
+receipt. Sprint 92 corrects the SU(3) adjoint-scaling arithmetic: the row-sum
+condition is `18*C_local < exp(-4)`, and the SU(3) adjoint factor must be
+applied before that row sum. Under the naive
+`C_local_SU3(k) = 2.25/(2*2^k)` bound, SU(3) fails at `k=10`
+(`18*C = 0.019775390625 > exp(-4)`) and only passes arithmetically at `k=11`
+(`18*C = 0.0098876953125 < exp(-4)`). The remaining live gates are
+`BalabanQhpLocalConstantBound`, `BalabanCMP116PolymerMassBound`, and either
+`AdjointRepresentationSharperBound` or `BlockingDepthK11PhysicalValidation`,
+plus `WeakCouplingWindowSU3`; they are not derived in repo.  The companion
+`YMSprint92MasterWC3Condition` module now exposes the full conditional theorem
+interface from `MasterWC3ConditionSU3AtK11` through
+`WC3UniformClusterSummability` and `UniformConnectedSchwingerDecay` to
+`ContinuumLimitMassGap`, with the calculation script reporting
+`eta4_q = 0.9271275790105094`, `eta6_q = 1.390691368515764`, and conservative
+SU(3) first safe depth `k=11`. Sprint 93 corrects the Dobrushin gap wording:
+the needed statement is `ContractionDeltaLowerBound`, since
+`C_local(a) -> 0` and the contraction gap improves as `a -> 0`. The current
+typed proof obligations are `BalabanCMP98AveragingKernelIsProbability`,
+`BalabanCMP116PolymerMassBound`, `ContractionDeltaLowerBound`,
+`UniformBoundForAllA`, `WC3UniformInA`, `UniformConnectedSchwingerDecay`, and
+`ContinuumLimitMassGap`; each remains uninhabited.
+Sprint 93 closes the first three in the receipt/scoped-authority sense: the
+two Balaban items are scoped authority imports, while
+`ContractionDeltaLowerBound` is the corrected definitional Dobrushin
+statement.  This does not close WC3; it moves the live mathematical work to
+`UniformBoundForAllA`, `WC3UniformInA`, `UniformConnectedSchwingerDecay`, and
+`ContinuumLimitMassGap`.
+Sprint 94 closes `UniformBoundForAllA` in the receipt layer: from a fixed
+`delta_min > 0`, it defines uniform constants `C = 1/(1-delta_min)` and
+`m = delta_min/2`, yielding a physical-diameter activity bound uniform for
+all `a < a0`.
+Sprint 95 closes `WC3UniformInA` in the receipt layer by combining that
+uniform activity bound with the existing blocked `L=2` eta=4 KP carrier, where
+`4q = 0.9271275790105094 < 1`.  The live mathematical work moves to
+`UniformConnectedSchwingerDecay` and `ContinuumLimitMassGap`.
+The Sprint 95 subgate closes `UniformConnectedSchwingerDecay` from WC3 via the
+connected Schwinger/Mayer expansion; the remaining mathematical wall is now
+`ContinuumLimitMassGap`.
+Sprint 96 closes that wall in the receipt layer by adding a narrow
+continuum-limit mass-gap receipt:
+uniform connected Schwinger decay plus an RG-generated effective mass,
+transfer-gap/effective-mass comparison, and RG-invariant physical scale witness
+the candidate theorem
+`lim_{a->0} gap(T(a))*block_size(a) = m_phys > 0`.  This is not a Clay
+promotion: `Nontrivial4DSU3YangMillsMeasure`, `ClayStatementBoundaryDischarged`,
+`ExternalAcceptanceToken`, and `clayYangMillsPromoted` remain open or false.
+Sprint 97 closes the next internal blocker in the receipt layer by adding a structural
+nontriviality receipt for the continuum SU(3) Yang-Mills measure: the
+non-Abelian curvature term supplies cubic/quartic self-interaction and a
+non-Gaussian connected-correlation witness.  This closes only
+`Nontrivial4DSU3YangMillsMeasure` in the receipt layer; Clay statement
+discharge, external acceptance, and promotion stay false.
+Sprint 98 closes the internal Clay statement boundary for the new chain:
+existence, nontriviality, positive continuum mass gap, and SU(3) gauge group
+are assembled into a `ClayStatementBoundaryDischarged` candidate receipt.  This
+is still not a Clay promotion because no `ExternalAcceptanceToken` is available
+inside the repo.
+Sprint 99 records that final fact as a terminal fail-closed boundary:
+`ExternalAcceptanceToken` is an external governance/review artifact that the
+repo cannot self-issue.  Therefore the internal candidate chain is complete in
+the receipt layer, while `clayYangMillsPromoted` remains false.
+Sprint 100 packages Sprints 91-99 into one queryable terminal-state receipt:
+WC3 route, continuum mass gap, nontrivial SU(3) measure, internal Clay boundary,
+and external-acceptance fail-closed status are all visible from one module.
+Sprint 101 reconciles that rollup with the older `YMClayPromotionBoundary`:
+the legacy authority boundary remains fail-closed, while the new Sprint 91-100
+candidate chain is complete only in the receipt layer.  There is no
+contradiction because both surfaces keep `clayYangMillsPromoted=false`.
+Sprint 102 adds the proof-obligation index for that distinction.  The repo now
+has a queryable split between receipt-layer artifacts and the real analytic
+proofs still needed: CMP98 local oscillation, CMP98 Haar/probability constant,
+CMP116 polymer mass, gauge-covariant Dobrushin comparison, uniform polymer
+activity, WC3 uniformity, the continuum-limit mass-gap RG bridge, and
+nontrivial SU(3) continuum measure formalisation.  `ExternalAcceptanceToken`
+remains outside repo authority. Sprint 103 records that the user supplied math
+for all eight of those obligations and implements inhabited proof-argument
+receipts for them in the repo receipt layer.  This changes the internal
+proof-argument status only: external Clay acceptance remains outside repo
+authority and `clayYangMillsPromoted=false`.
 
 Use one of these reader tracks first:
 

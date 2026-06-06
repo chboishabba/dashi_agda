@@ -1,0 +1,39 @@
+{
+  "clay_promotion_recorded_false": true,
+  "clay_yang_mills_promoted": false,
+  "complete": false,
+  "contract": "ym_sprint91_wc3_new_math_audit",
+  "expected_theorem_anchors": [
+    "t1CauchySchwarzContractionClosedConditionally",
+    "t2MasterConditionOpen",
+    "t3WC3DerivedFalse",
+    "t4ClayPromotedFalse",
+    "t5TheoremListT1ToT5Present"
+  ],
+  "expected_theorem_ids": [
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5"
+  ],
+  "gate_table": "ym_sprint91_wc3_new_math_gate_table.csv",
+  "master_condition_open": true,
+  "next_required_gate": "MasterCondition",
+  "present_theorem_anchors": [
+    "t1CauchySchwarzContractionClosedConditionally",
+    "t2MasterConditionOpen",
+    "t3WC3DerivedFalse",
+    "t4ClayPromotedFalse",
+    "t5TheoremListT1ToT5Present"
+  ],
+  "receipt_path": "DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda",
+  "receipt_present": true,
+  "remaining_blocker": "Sprint 91 WC3 new-math receipt is fail-closed: T1 may be closed conditionally, but the master condition remains open, WC3 is not derived, and Clay promotion stays false.",
+  "route_decision": "YM_SPRINT91_WC3_NEW_MATH_OPEN_FAIL_CLOSED",
+  "t1_cauchy_schwarz_contraction_closed_conditionally": true,
+  "theorem_list_t1_to_t5_present": true,
+  "theorem_table": "ym_sprint91_wc3_new_math_theorem_table.csv",
+  "wc3_derived": false,
+  "wc3_derived_false": true
+}
