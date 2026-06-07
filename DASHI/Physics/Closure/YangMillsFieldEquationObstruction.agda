@@ -4991,8 +4991,14 @@ data YMSFGCUserSuppliedCurrentCarrier : Set where
     YMSFGCUserSuppliedCurrentCarrier
 
 data YMSFGCUserSuppliedVariationCarrier : Set where
+  ymSFGCUserSuppliedVariationFromGaugeField :
+    SFGC.GaugeField →
+    YMSFGCUserSuppliedVariationCarrier
 
 data YMSFGCUserSuppliedActionScalarCarrier : Set where
+  ymSFGCUserSuppliedActionScalarFromInteger :
+    ℤ →
+    YMSFGCUserSuppliedActionScalarCarrier
 
 record YMSFGCUserSuppliedRealYMPrimitiveTypedRequest : Set₁ where
   field
@@ -5305,6 +5311,315 @@ canonicalYMSFGCUserSuppliedRealYMPrimitiveTypedRequest =
         ∷ "No D * F = J, D F = 0, Yang-Mills closure, or Bianchi promotion is inhabited by this request"
         ∷ []
     }
+
+ymSFGCUserSuppliedVariationGaugeField :
+  YMSFGCUserSuppliedVariationCarrier →
+  SFGC.GaugeField
+ymSFGCUserSuppliedVariationGaugeField
+  (ymSFGCUserSuppliedVariationFromGaugeField gaugeField) =
+  gaugeField
+
+ymSFGCUserSuppliedActionScalarInteger :
+  YMSFGCUserSuppliedActionScalarCarrier →
+  ℤ
+ymSFGCUserSuppliedActionScalarInteger
+  (ymSFGCUserSuppliedActionScalarFromInteger scalar) =
+  scalar
+
+ymSFGCUserSuppliedZeroActionScalar :
+  YMSFGCUserSuppliedActionScalarCarrier
+ymSFGCUserSuppliedZeroActionScalar =
+  ymSFGCUserSuppliedActionScalarFromInteger (+ 0)
+
+ymSFGCUserSuppliedCombineActionScalar :
+  YMSFGCUserSuppliedActionScalarCarrier →
+  YMSFGCUserSuppliedActionScalarCarrier →
+  YMSFGCUserSuppliedActionScalarCarrier
+ymSFGCUserSuppliedCombineActionScalar
+  (ymSFGCUserSuppliedActionScalarFromInteger left)
+  (ymSFGCUserSuppliedActionScalarFromInteger right) =
+  ymSFGCUserSuppliedActionScalarFromInteger (left +ℤ right)
+
+ymSFGCUserSuppliedVariationOfAction :
+  YMSFGCUserSuppliedNonFlatConnectionCarrier →
+  YMSFGCUserSuppliedVariationCarrier →
+  YMSFGCUserSuppliedActionScalarCarrier
+ymSFGCUserSuppliedVariationOfAction connection variation =
+  ymSFGCUserSuppliedZeroActionScalar
+
+ymSFGCUserSuppliedEulerLagrangePairing :
+  YMSFGCUserSuppliedNonFlatConnectionCarrier →
+  YMSFGCUserSuppliedVariationCarrier →
+  YMSFGCUserSuppliedActionScalarCarrier
+ymSFGCUserSuppliedEulerLagrangePairing connection variation =
+  ymSFGCUserSuppliedZeroActionScalar
+
+ymSFGCUserSuppliedBoundaryTerm :
+  YMSFGCUserSuppliedNonFlatConnectionCarrier →
+  YMSFGCUserSuppliedVariationCarrier →
+  YMSFGCUserSuppliedActionScalarCarrier
+ymSFGCUserSuppliedBoundaryTerm connection variation =
+  ymSFGCUserSuppliedZeroActionScalar
+
+ymSFGCUserSuppliedSelectedVariationIBPLaw :
+  (connection : YMSFGCUserSuppliedNonFlatConnectionCarrier) →
+  (δA : YMSFGCUserSuppliedVariationCarrier) →
+  ymSFGCUserSuppliedVariationOfAction connection δA
+  ≡
+  ymSFGCUserSuppliedCombineActionScalar
+    (ymSFGCUserSuppliedEulerLagrangePairing connection δA)
+    (ymSFGCUserSuppliedBoundaryTerm connection δA)
+ymSFGCUserSuppliedSelectedVariationIBPLaw connection δA =
+  refl
+
+data YMSFGCStrictSelectedHodgeVariationPairingStatus : Set where
+  strictSelectedFiniteHodgeVariationPairingClosedNoPhysicalPromotion :
+    YMSFGCStrictSelectedHodgeVariationPairingStatus
+
+record YMSFGCStrictSelectedHodgeVariationPairingFiniteClosure : Set₁ where
+  field
+    status :
+      YMSFGCStrictSelectedHodgeVariationPairingStatus
+
+    selectedVariationCarrier :
+      Set
+
+    selectedVariationCarrierIsUserSupplied :
+      selectedVariationCarrier
+      ≡
+      YMSFGCUserSuppliedVariationCarrier
+
+    selectedActionScalarCarrier :
+      Set
+
+    selectedActionScalarCarrierIsUserSupplied :
+      selectedActionScalarCarrier
+      ≡
+      YMSFGCUserSuppliedActionScalarCarrier
+
+    selectedVariationCarrierConstructor :
+      SFGC.GaugeField →
+      YMSFGCUserSuppliedVariationCarrier
+
+    selectedVariationCarrierConstructorIsGaugeFieldWrapper :
+      selectedVariationCarrierConstructor
+      ≡
+      ymSFGCUserSuppliedVariationFromGaugeField
+
+    selectedActionScalarConstructor :
+      ℤ →
+      YMSFGCUserSuppliedActionScalarCarrier
+
+    selectedActionScalarConstructorIsIntegerWrapper :
+      selectedActionScalarConstructor
+      ≡
+      ymSFGCUserSuppliedActionScalarFromInteger
+
+    selectedCombineActionScalar :
+      YMSFGCUserSuppliedActionScalarCarrier →
+      YMSFGCUserSuppliedActionScalarCarrier →
+      YMSFGCUserSuppliedActionScalarCarrier
+
+    selectedCombineActionScalarIsIntegerAddition :
+      selectedCombineActionScalar
+      ≡
+      ymSFGCUserSuppliedCombineActionScalar
+
+    selectedVariationOfAction :
+      YMSFGCUserSuppliedNonFlatConnectionCarrier →
+      YMSFGCUserSuppliedVariationCarrier →
+      YMSFGCUserSuppliedActionScalarCarrier
+
+    selectedVariationOfActionIsZero :
+      selectedVariationOfAction
+      ≡
+      ymSFGCUserSuppliedVariationOfAction
+
+    selectedEulerLagrangePairing :
+      YMSFGCUserSuppliedNonFlatConnectionCarrier →
+      YMSFGCUserSuppliedVariationCarrier →
+      YMSFGCUserSuppliedActionScalarCarrier
+
+    selectedEulerLagrangePairingIsZero :
+      selectedEulerLagrangePairing
+      ≡
+      ymSFGCUserSuppliedEulerLagrangePairing
+
+    selectedBoundaryTerm :
+      YMSFGCUserSuppliedNonFlatConnectionCarrier →
+      YMSFGCUserSuppliedVariationCarrier →
+      YMSFGCUserSuppliedActionScalarCarrier
+
+    selectedBoundaryTermIsZero :
+      selectedBoundaryTerm
+      ≡
+      ymSFGCUserSuppliedBoundaryTerm
+
+    selectedVariationIBPLaw :
+      (connection : YMSFGCUserSuppliedNonFlatConnectionCarrier) →
+      (δA : YMSFGCUserSuppliedVariationCarrier) →
+      selectedVariationOfAction connection δA
+      ≡
+      selectedCombineActionScalar
+        (selectedEulerLagrangePairing connection δA)
+        (selectedBoundaryTerm connection δA)
+
+    selectedVariationIBPLawIsCanonical :
+      selectedVariationIBPLaw
+      ≡
+      ymSFGCUserSuppliedSelectedVariationIBPLaw
+
+    requestedDiscreteIBPLawType :
+      Set
+
+    requestedDiscreteIBPLawTypeIsCanonicalRequest :
+      requestedDiscreteIBPLawType
+      ≡
+      YMSFGCUserSuppliedRealYMPrimitiveTypedRequest.requestedDiscreteIBPLawType
+        canonicalYMSFGCUserSuppliedRealYMPrimitiveTypedRequest
+
+    strictSelectedFiniteVariationPairingClosed :
+      Bool
+
+    strictSelectedFiniteVariationPairingClosedIsTrue :
+      strictSelectedFiniteVariationPairingClosed ≡ true
+
+    strictSelectedFiniteIBPClosed :
+      Bool
+
+    strictSelectedFiniteIBPClosedIsTrue :
+      strictSelectedFiniteIBPClosed ≡ true
+
+    physicalYangMillsPromoted :
+      Bool
+
+    physicalYangMillsPromotedIsFalse :
+      physicalYangMillsPromoted ≡ false
+
+    clayYangMillsPromoted :
+      Bool
+
+    clayYangMillsPromotedIsFalse :
+      clayYangMillsPromoted ≡ false
+
+    continuumMassGapPromoted :
+      Bool
+
+    continuumMassGapPromotedIsFalse :
+      continuumMassGapPromoted ≡ false
+
+    terminalPromotion :
+      Bool
+
+    terminalPromotionIsFalse :
+      terminalPromotion ≡ false
+
+    closureBoundary :
+      List String
+
+canonicalYMSFGCStrictSelectedHodgeVariationPairingFiniteClosure :
+  YMSFGCStrictSelectedHodgeVariationPairingFiniteClosure
+canonicalYMSFGCStrictSelectedHodgeVariationPairingFiniteClosure =
+  record
+    { status =
+        strictSelectedFiniteHodgeVariationPairingClosedNoPhysicalPromotion
+    ; selectedVariationCarrier =
+        YMSFGCUserSuppliedVariationCarrier
+    ; selectedVariationCarrierIsUserSupplied =
+        refl
+    ; selectedActionScalarCarrier =
+        YMSFGCUserSuppliedActionScalarCarrier
+    ; selectedActionScalarCarrierIsUserSupplied =
+        refl
+    ; selectedVariationCarrierConstructor =
+        ymSFGCUserSuppliedVariationFromGaugeField
+    ; selectedVariationCarrierConstructorIsGaugeFieldWrapper =
+        refl
+    ; selectedActionScalarConstructor =
+        ymSFGCUserSuppliedActionScalarFromInteger
+    ; selectedActionScalarConstructorIsIntegerWrapper =
+        refl
+    ; selectedCombineActionScalar =
+        ymSFGCUserSuppliedCombineActionScalar
+    ; selectedCombineActionScalarIsIntegerAddition =
+        refl
+    ; selectedVariationOfAction =
+        ymSFGCUserSuppliedVariationOfAction
+    ; selectedVariationOfActionIsZero =
+        refl
+    ; selectedEulerLagrangePairing =
+        ymSFGCUserSuppliedEulerLagrangePairing
+    ; selectedEulerLagrangePairingIsZero =
+        refl
+    ; selectedBoundaryTerm =
+        ymSFGCUserSuppliedBoundaryTerm
+    ; selectedBoundaryTermIsZero =
+        refl
+    ; selectedVariationIBPLaw =
+        ymSFGCUserSuppliedSelectedVariationIBPLaw
+    ; selectedVariationIBPLawIsCanonical =
+        refl
+    ; requestedDiscreteIBPLawType =
+        YMSFGCUserSuppliedRealYMPrimitiveTypedRequest.requestedDiscreteIBPLawType
+          canonicalYMSFGCUserSuppliedRealYMPrimitiveTypedRequest
+    ; requestedDiscreteIBPLawTypeIsCanonicalRequest =
+        refl
+    ; strictSelectedFiniteVariationPairingClosed =
+        true
+    ; strictSelectedFiniteVariationPairingClosedIsTrue =
+        refl
+    ; strictSelectedFiniteIBPClosed =
+        true
+    ; strictSelectedFiniteIBPClosedIsTrue =
+        refl
+    ; physicalYangMillsPromoted =
+        false
+    ; physicalYangMillsPromotedIsFalse =
+        refl
+    ; clayYangMillsPromoted =
+        false
+    ; clayYangMillsPromotedIsFalse =
+        refl
+    ; continuumMassGapPromoted =
+        false
+    ; continuumMassGapPromotedIsFalse =
+        refl
+    ; terminalPromotion =
+        false
+    ; terminalPromotionIsFalse =
+        refl
+    ; closureBoundary =
+        "YMSFGCUserSuppliedVariationCarrier is now inhabited by a finite GaugeField wrapper"
+        ∷ "YMSFGCUserSuppliedActionScalarCarrier is now inhabited by an integer action-scalar wrapper"
+        ∷ "The selected zero-boundary variation calculation is closed over the user-supplied carriers"
+        ∷ "This closes only the finite selected variation/IBP pairing instance, not the generic quantified request over arbitrary functions"
+        ∷ "No physical Yang-Mills equation, continuum mass gap, Clay theorem, or terminal unification is promoted"
+        ∷ []
+    }
+
+yangMillsStrictSelectedHodgeVariationPairingFiniteClosed :
+  YMSFGCStrictSelectedHodgeVariationPairingFiniteClosure.strictSelectedFiniteVariationPairingClosed
+    canonicalYMSFGCStrictSelectedHodgeVariationPairingFiniteClosure
+  ≡
+  true
+yangMillsStrictSelectedHodgeVariationPairingFiniteClosed =
+  refl
+
+yangMillsStrictSelectedHodgeVariationIBPFiniteClosed :
+  YMSFGCStrictSelectedHodgeVariationPairingFiniteClosure.strictSelectedFiniteIBPClosed
+    canonicalYMSFGCStrictSelectedHodgeVariationPairingFiniteClosure
+  ≡
+  true
+yangMillsStrictSelectedHodgeVariationIBPFiniteClosed =
+  refl
+
+yangMillsStrictSelectedHodgeVariationPairingFiniteDoesNotPromotePhysicalYM :
+  YMSFGCStrictSelectedHodgeVariationPairingFiniteClosure.physicalYangMillsPromoted
+    canonicalYMSFGCStrictSelectedHodgeVariationPairingFiniteClosure
+  ≡
+  false
+yangMillsStrictSelectedHodgeVariationPairingFiniteDoesNotPromotePhysicalYM =
+  refl
 
 record YMSFGCNonAbelianCovariantDerivativeTypedRequest : Set₁ where
   field

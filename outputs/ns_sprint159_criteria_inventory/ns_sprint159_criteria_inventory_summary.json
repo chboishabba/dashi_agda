@@ -1,0 +1,33 @@
+{
+  "GeneralSmoothFiniteEnergyNSRegularity": false,
+  "MechanismExhaustionForFullClayNS": false,
+  "SymmetricAxisymmetricWithSwirlGlobalRegularity": true,
+  "SymmetricHouLuoRegularityClassClosure": true,
+  "clay_navier_stokes_promoted": false,
+  "closed_scoped_class_count": 1,
+  "contract": "ns_sprint159_criteria_inventory",
+  "control_card": {
+    "C": "Python stdlib emitter writes criteria rows to JSON, CSV, Markdown, and manifest.",
+    "F": "MechanismExhaustionForFullClayNS remains false for full 3D Navier-Stokes.",
+    "G": "Every general criterion row must remain support-only; only the symmetric class row is closed in scope.",
+    "L": "criterion support -> non-exhaustive inventory guard -> scoped symmetric class closure -> full Clay flags false.",
+    "O": "Worker 4 owns the Sprint159 criteria inventory emitter.",
+    "P": "Use this inventory as evidence of partial support and scoped closure boundaries.",
+    "R": "Inventory known partial regularity and singularity-control criteria without promoting full Clay NS.",
+    "S": "Class-specific symmetric Hou-Luo closure is available; general NS mechanism exhaustion is absent."
+  },
+  "decision": "criteria_inventory_support_only_except_symmetric_scoped_class_closure",
+  "fullClay": false,
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay": false,
+  "full_clay_flags_false": true,
+  "full_clay_ns_solved": false,
+  "lane": 4,
+  "promotion_allowed": false,
+  "row_count": 6,
+  "sprint": 159,
+  "summary_hash": "825bbfaca40ac5b295417dbd4e402117306299bd0c79de607de043dea2a130ab",
+  "support_not_exhaustive_count": 5,
+  "validation_passed": true
+}

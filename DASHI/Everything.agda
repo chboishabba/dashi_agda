@@ -167,6 +167,8 @@ import DASHI.Promotion.BiologyFiniteScopeClarification
 import DASHI.Promotion.ChemistryAuthorityBinding
 import DASHI.Promotion.ChemistryFiniteComputationSurface
 import DASHI.Promotion.ChemistryFiniteRuleTargets
+import DASHI.Promotion.DefectQuadraticClosureDependencyIndex
+import DASHI.Promotion.DownloadedNewAdditionsReferenceIndex
 import DASHI.Promotion.FiniteQuantumPhysicalScopeDecision
 import DASHI.Promotion.FiniteQuantumQFTScopedClosure
 import DASHI.Promotion.GRBoundaryClarification
@@ -186,6 +188,9 @@ import DASHI.Promotion.StandardModelHiggsYukawaParameterFrontier
 import DASHI.Promotion.StandardModelObservableAuthorityBridge
 import DASHI.Promotion.StandardModelPrototypeSourceIntake
 import DASHI.Promotion.StandardModelUniquenessCountermodelBoundary
+import DASHI.Promotion.UnificationCriticalPathReceipt
+import DASHI.Promotion.YMStrictHodgeVariationBlockerIndex
+import DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt
 import DASHI.Interop.SeaMeInIt.Unwrap.Competitor.Everything
 import DASHI.Interop.SeaMeInItUnwrapCompetitors
 import DASHI.Interop.SemanticOperatorAlignmentDischarge

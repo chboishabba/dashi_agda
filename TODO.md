@@ -3,6 +3,34 @@
 
 # P0 BLOCKERS
 
+• Sprint 159 NS full-Clay external-authority boundary round is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt`;
+  - adds `scripts/ns_sprint159_external_authority_boundary.py`,
+    `scripts/ns_sprint159_mechanism_exhaustion_gap.py`, and
+    `scripts/ns_sprint159_criteria_inventory.py`;
+  - generates `outputs/ns_sprint159_external_authority_boundary/`,
+    `outputs/ns_sprint159_mechanism_exhaustion_gap/`, and
+    `outputs/ns_sprint159_criteria_inventory/`;
+  - adds the Sprint 159 full-Clay external-authority boundary layer to
+    `DASHI.Promotion.ObligationIndex`;
+  - records Sprint 158 symmetric Hou-Luo regularity as scoped support only;
+  - records `ExternalAuthorityBoundary=true`;
+  - keeps `MechanismExhaustionForFullClayNS`,
+    `GeneralDataReductionToCriticalProfiles`,
+    `CriticalProfileCompactnessForNS`,
+    `AxisymmetricOrSymmetricReductionExclusion`,
+    `NonAxisymmetricVortexStretchingControl`,
+    `PressureNonlocalityClosureForGeneralData`,
+    `CriticalNormExhaustionCriterion`,
+    `FullNavierStokesContinuationBridge`,
+    `ClaySubmissionPromotionPacket`, `full_clay_ns_solved`,
+    `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+    `clayNavierStokesPromoted` false/open.
+
 • Sprint 158 NS symmetric Hou-Luo theorem-class closure round is implemented.
 
   Status:

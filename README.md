@@ -90,6 +90,30 @@ checks and `(d - m)^T Sigma^-1 (d - m)`. Fixture baseline authority, raw
 provider vector binding, authority token, holdout, empirical validation, and
 SM promotion remain false.
 
+Downloaded new-additions context boundary:
+`DASHI.Promotion.DownloadedNewAdditionsReferenceIndex` records the 36 local
+files under `temp-DOWNLOADED/new additions` as checksum-bound context only.
+The executable surfaces `scripts/downloaded_new_additions_manifest.py`,
+`scripts/downloaded_ym_hodge_artifact_summary.py`, and
+`scripts/downloaded_pdf_context_probe.py` emit manifests under `outputs/`.
+They are useful for Hodge/Maxwell/YM/string/quantum lane routing, especially
+the finite SFGC Hodge-star/current/variation/IBP target and the downloaded
+YM Sprint 82/93 WC3 arithmetic, but they do not promote theorem authority,
+empirical authority, YM Clay, Maxwell field equations, or terminal unification.
+
+Current unification critical path:
+`DASHI.Promotion.UnificationCriticalPathReceipt` consumes the checked
+contraction/quadratic/signature spine, `DefectQuadraticClosureDependencyIndex`,
+`HodgeVariationPairingDepth9`, `YMStrictHodgeVariationBlockerIndex`, the
+SM/Higgs covariant comparison law, finite chemistry computation, finite quantum
+scope, known-input population, and downloaded context intake. The key correction
+is that finite Hodge/current support is already present: Route-B and pure
+zero-current `D * F = J` are checked. The exact YM proof calculation is now the
+strict selected-Hodge variation pairing over the user-supplied variation/action
+carriers; the broader defect/admissibility/hierarchy route to the
+projection-defect/parallelogram package, empirical authority, measured
+metrology, continuum physics, and terminal promotion remain false.
+
 Current NS Sprint 158 boundary: the repo records
 `SymmetricHouLuoRegularityClassClosure=true` and
 `SymmetricAxisymmetricWithSwirlGlobalRegularity=true` for the scoped symmetric
@@ -108,6 +132,22 @@ symmetric result. `MechanismExhaustionForFullClayNS`,
 `GeneralSmoothFiniteEnergyNSRegularity`, `full_clay_ns_solved`,
 `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
 `clayNavierStokesPromoted` remain false.
+
+Current NS Sprint 159 boundary: the repo records the full-Clay jump from the
+scoped symmetric Hou-Luo theorem as an external-authority boundary, not as an
+internal proof obligation. The checked receipt
+`DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt`
+anchors to Sprint 158, keeps the symmetric support true, records
+`ExternalAuthorityBoundary=true`, and keeps
+`MechanismExhaustionForFullClayNS`, general-data critical-profile reduction,
+non-axisymmetric vortex-stretching control, pressure nonlocality closure,
+critical-norm exhaustion, full NS continuation, Clay submission promotion,
+`full_clay_ns_solved`, `fullClayNSSolved`,
+`fullNavierStokesSolutionConstructed`, and `clayNavierStokesPromoted` false.
+The executable surfaces `scripts/ns_sprint159_external_authority_boundary.py`,
+`scripts/ns_sprint159_mechanism_exhaustion_gap.py`, and
+`scripts/ns_sprint159_criteria_inventory.py` emit the authority-boundary,
+mechanism-gap, and known-criteria inventory ledgers.
 
 Previous NS Sprint 157 boundary: the repo records
 `SymmetricHouLuoBKMFinite=true` for the symmetric Hou-Luo route only. The

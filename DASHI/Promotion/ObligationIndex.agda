@@ -53,6 +53,7 @@ import DASHI.Promotion.StandardModelArchiveContextBinding as SMArchive
 import DASHI.Promotion.StandardModelPrototypeSourceIntake as SMPrototype
 import DASHI.Promotion.StandardModelHiggsHEPDataReceiptAdapter as SMHiggsHEPData
 import DASHI.Promotion.StandardModelHiggsCovariantComparisonLaw as SMHiggsComparison
+import DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt as NS159
 
 ------------------------------------------------------------------------
 -- Unified promotion obligation index.
@@ -120,6 +121,10 @@ data SMFirstPrinciplesBoundaryLane : Set where
   smPrototypeSourceIntakeLane : SMFirstPrinciplesBoundaryLane
   smHiggsHEPDataReceiptAdapterLane : SMFirstPrinciplesBoundaryLane
   smHiggsCovariantComparisonLawLane : SMFirstPrinciplesBoundaryLane
+
+data FullClayExternalAuthorityBoundaryLane : Set where
+  nsFullClayExternalAuthorityBoundaryLane :
+    FullClayExternalAuthorityBoundaryLane
 
 record PromotionLaneSummary : Set where
   field
@@ -323,6 +328,34 @@ record SMFirstPrinciplesBoundarySummary : Set where
 
 open SMFirstPrinciplesBoundarySummary public
 
+record FullClayExternalAuthorityBoundarySummary : Set where
+  field
+    clayBoundaryLane :
+      FullClayExternalAuthorityBoundaryLane
+
+    clayBoundaryModule :
+      String
+
+    canonicalClayBoundarySurface :
+      String
+
+    resolvedLocalSupport :
+      String
+
+    remainingExternalBoundary :
+      String
+
+    validationCommand :
+      String
+
+    promotesClay :
+      Bool
+
+    promotesClayIsFalse :
+      promotesClay ≡ false
+
+open FullClayExternalAuthorityBoundarySummary public
+
 mkLaneSummary :
   PromotionImplementationLane →
   String →
@@ -465,6 +498,26 @@ mkSMFirstPrinciplesBoundarySummary lane owner surface advance gap command =
     ; validationCommand = command
     ; promotesStandardModel = false
     ; promotesStandardModelIsFalse = refl
+    }
+
+mkFullClayExternalAuthorityBoundarySummary :
+  FullClayExternalAuthorityBoundaryLane →
+  String →
+  String →
+  String →
+  String →
+  String →
+  FullClayExternalAuthorityBoundarySummary
+mkFullClayExternalAuthorityBoundarySummary lane owner surface support boundary command =
+  record
+    { clayBoundaryLane = lane
+    ; clayBoundaryModule = owner
+    ; canonicalClayBoundarySurface = surface
+    ; resolvedLocalSupport = support
+    ; remainingExternalBoundary = boundary
+    ; validationCommand = command
+    ; promotesClay = false
+    ; promotesClayIsFalse = refl
     }
 
 canonicalPromotionLaneSummaries : List PromotionLaneSummary
@@ -825,6 +878,18 @@ canonicalSMFirstPrinciplesBoundarySummaries =
     "python scripts/sm_higgs_covariant_comparison_law.py --generated-at 2026-06-07T00:00:00+00:00 && agda -i . DASHI/Promotion/StandardModelHiggsCovariantComparisonLaw.agda"
   ∷ []
 
+canonicalFullClayExternalAuthorityBoundarySummaries :
+  List FullClayExternalAuthorityBoundarySummary
+canonicalFullClayExternalAuthorityBoundarySummaries =
+  mkFullClayExternalAuthorityBoundarySummary
+    nsFullClayExternalAuthorityBoundaryLane
+    "DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt"
+    "canonicalNSSprint159FullClayExternalAuthorityBoundaryReceipt"
+    "Sprint 158 symmetric Hou-Luo global regularity remains available as scoped local support"
+    "MechanismExhaustionForFullClayNS, general-data reduction, non-axisymmetric vortex stretching control, pressure nonlocality closure, and Clay submission promotion remain external-authority blocked"
+    "agda -i . DASHI/Physics/Closure/NSSprint159FullClayExternalAuthorityBoundaryReceipt.agda && pytest -q tests/test_ns_sprint159_emitters.py tests/test_ns_sprint159_agda_and_obligation_index.py"
+  ∷ []
+
 record UnifiedPromotionObligationIndex : Setω where
   field
     sourceKnownInputsPopulation :
@@ -968,6 +1033,9 @@ record UnifiedPromotionObligationIndex : Setω where
     standardModelHiggsCovariantComparisonLaw :
       SMHiggsComparison.StandardModelHiggsCovariantComparisonLaw
 
+    nsSprint159FullClayExternalAuthorityBoundary :
+      NS159.NSSprint159FullClayExternalAuthorityBoundaryReceipt
+
     laneSummaries :
       List PromotionLaneSummary
 
@@ -988,6 +1056,9 @@ record UnifiedPromotionObligationIndex : Setω where
 
     smFirstPrinciplesBoundarySummaries :
       List SMFirstPrinciplesBoundarySummary
+
+    fullClayExternalAuthorityBoundarySummaries :
+      List FullClayExternalAuthorityBoundarySummary
 
     laneSummaryCount :
       Nat
@@ -1031,11 +1102,17 @@ record UnifiedPromotionObligationIndex : Setω where
     smFirstPrinciplesBoundaryCountIs9 :
       smFirstPrinciplesBoundaryCount ≡ 9
 
+    fullClayExternalAuthorityBoundaryCount :
+      Nat
+
+    fullClayExternalAuthorityBoundaryCountIs1 :
+      fullClayExternalAuthorityBoundaryCount ≡ 1
+
     aggregateOpenObligationCount :
       Nat
 
-    aggregateOpenObligationCountIs73 :
-      aggregateOpenObligationCount ≡ 73
+    aggregateOpenObligationCountIs81 :
+      aggregateOpenObligationCount ≡ 81
 
     validationTarget :
       String
@@ -1155,6 +1232,8 @@ canonicalUnifiedPromotionObligationIndex =
         SMHiggsHEPData.canonicalStandardModelHiggsHEPDataReceiptAdapter
     ; standardModelHiggsCovariantComparisonLaw =
         SMHiggsComparison.canonicalStandardModelHiggsCovariantComparisonLaw
+    ; nsSprint159FullClayExternalAuthorityBoundary =
+        NS159.canonicalNSSprint159FullClayExternalAuthorityBoundaryReceipt
     ; laneSummaries =
         canonicalPromotionLaneSummaries
     ; adapterAdvancementSummaries =
@@ -1169,6 +1248,8 @@ canonicalUnifiedPromotionObligationIndex =
         canonicalClosureComputationSummaries
     ; smFirstPrinciplesBoundarySummaries =
         canonicalSMFirstPrinciplesBoundarySummaries
+    ; fullClayExternalAuthorityBoundarySummaries =
+        canonicalFullClayExternalAuthorityBoundarySummaries
     ; laneSummaryCount =
         6
     ; laneSummaryCountIs6 =
@@ -1197,9 +1278,13 @@ canonicalUnifiedPromotionObligationIndex =
         9
     ; smFirstPrinciplesBoundaryCountIs9 =
         refl
+    ; fullClayExternalAuthorityBoundaryCount =
+        1
+    ; fullClayExternalAuthorityBoundaryCountIs1 =
+        refl
     ; aggregateOpenObligationCount =
-        73
-    ; aggregateOpenObligationCountIs73 =
+        81
+    ; aggregateOpenObligationCountIs81 =
         refl
     ; validationTarget =
         "DASHI/Promotion/ObligationIndex.agda"
@@ -1221,11 +1306,11 @@ canonicalUnifiedPromotionLaneCountIs6 :
   ≡ 6
 canonicalUnifiedPromotionLaneCountIs6 = refl
 
-canonicalUnifiedPromotionOpenObligationCountIs73 :
+canonicalUnifiedPromotionOpenObligationCountIs81 :
   UnifiedPromotionObligationIndex.aggregateOpenObligationCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 73
-canonicalUnifiedPromotionOpenObligationCountIs73 = refl
+  ≡ 81
+canonicalUnifiedPromotionOpenObligationCountIs81 = refl
 
 canonicalUnifiedPromotionAdapterAdvancementCountIs6 :
   UnifiedPromotionObligationIndex.adapterAdvancementCount
@@ -1262,6 +1347,12 @@ canonicalUnifiedPromotionSMFirstPrinciplesBoundaryCountIs9 :
     canonicalUnifiedPromotionObligationIndex
   ≡ 9
 canonicalUnifiedPromotionSMFirstPrinciplesBoundaryCountIs9 = refl
+
+canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs1 :
+  UnifiedPromotionObligationIndex.fullClayExternalAuthorityBoundaryCount
+    canonicalUnifiedPromotionObligationIndex
+  ≡ 1
+canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs1 = refl
 
 canonicalUnifiedPromotionTerminalPromotionIsFalse :
   UnifiedPromotionObligationIndex.terminalPromotion

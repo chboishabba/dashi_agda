@@ -1,0 +1,210 @@
+{
+  "allm_bytes": 77395,
+  "allm_path": "/home/c/Documents/20260604_070337_allm_20260604_070337.txt",
+  "allm_sha256": "d3a05039273441ce755f51c0c0fd2d542d422e1dd9860d36f5a77251b457b67a",
+  "claimed_lake_build_jobs": 8046,
+  "claimed_standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "current_checkout": {
+    "aggregate_admit_token_count": 0,
+    "aggregate_axiom_token_count": 0,
+    "aggregate_sorry_token_count": 0,
+    "aggregate_unsafe_token_count": 0,
+    "lean_file_count": 10,
+    "lean_files": [
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 29954,
+        "path": "DashiPerf/Audit.lean",
+        "sha256": "f331a4eeb546efd2468d4925a52d152d664c020bed0d4f6fa27893819f1d9085",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 21,
+        "path": "DashiPerf/Basic.lean",
+        "sha256": "a88fef4d3efa63c9f9f5c948dd5ba1de3ea09d828ce8388ee83fa3d039e734a4",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 2516,
+        "path": "DashiPerf/Sample100.lean",
+        "sha256": "6354980a8d938237c214921711288d15d9a57750678384e64e8e0d42f1847d70",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 2516,
+        "path": "DashiPerf/Sample101.lean",
+        "sha256": "20dae978e14ced9dcfdce335b954c813367f1e5db9c116f5153e18040068745a",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 2502,
+        "path": "DashiPerf/Sample102.lean",
+        "sha256": "8378b3e24f4f289783d7c857b304bb129da76b5d61979a2c3aec8b3d018156c9",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 3267,
+        "path": "DashiPerf/Schema.lean",
+        "sha256": "7b8167139d0ae432815f479fb042db1e4312fae03a64e2a376e03bc51889963c",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 128,
+        "path": "DashiPerf.lean",
+        "sha256": "ef1d5c19c9acebaae7d4738c6a904424bc9134987242562b3d8cbf86af6b988d",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 871,
+        "path": "Main.lean",
+        "sha256": "9d9e713f56921bb2e4f0ba2fb055556d93fc6d9589391f73b9b0a0068dd70941",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 4937,
+        "path": "MoonshineEarn.lean",
+        "sha256": "62343c34a138a66e5374c17ee92b07104023b1c13d651f56ea17ab2e271d268a",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      },
+      {
+        "admit_token_count": 0,
+        "axiom_token_count": 0,
+        "bytes": 2285,
+        "path": "MoonshineFractran.lean",
+        "sha256": "f726b34dc1050eddfe25eda8ddeaca8fbd3935644f30b9b115c5803c556c5a77",
+        "sorry_token_count": 0,
+        "unsafe_token_count": 0
+      }
+    ]
+  },
+  "gates": {
+    "archived_main_import_count_is_19": true,
+    "archived_main_imports_match_selected_modules": true,
+    "archived_request_project_formal_module_count_is_19": true,
+    "archived_request_project_lean_file_count_is_20_including_main": true,
+    "authority_promoted": false,
+    "current_checkout_inspected": true,
+    "current_checkout_is_same_as_archived_request_project": false,
+    "lean_build_rerun": false,
+    "unification_promoted": false,
+    "zero_sorry_claim_rerun": false
+  },
+  "generated_at_utc": "2026-06-07T00:00:00+00:00",
+  "intake_digest": "04a581840badc68c1b39a6550801f76c6e44584c327c5ad08438e59ac2bc323b",
+  "lean_repo_exists": true,
+  "lean_repo_path": "/home/c/Documents/code/dashi_lean4",
+  "main_import_module_count": 19,
+  "main_import_modules": [
+    "Base369",
+    "KernelAlgebra",
+    "UltrametricSpace",
+    "LogicTlurey",
+    "Overflow",
+    "FascisticSystem",
+    "MonsterMask",
+    "SupersingularPrimes",
+    "MonsterMoonshine",
+    "CRTPeriod",
+    "TenfoldBridges",
+    "MoonshineEarn",
+    "BottPeriodicity",
+    "DashiCarrier",
+    "DashiKernel",
+    "DashiDefect",
+    "DashiAdmissibility",
+    "DashiAnnihilation",
+    "DashiHierarchy"
+  ],
+  "receipt_kind": "lean-aristotle-intake",
+  "remaining_obligations": [
+    "extract or recover the archived RequestProject Lean source tree if build rerun is required",
+    "rerun lake build over the recovered Aristotle project before promoting compile status",
+    "run a Lean no-sorry/no-admit audit over recovered source before promoting zero-sorry status",
+    "bind the Lean receipt to an Agda promotion surface only after rerun evidence exists"
+  ],
+  "schema": "dashi-lean-aristotle-intake-v1",
+  "schema_version": "1.0.0",
+  "section_count": 27,
+  "selected_request_project_formal_module_count": 19,
+  "selected_request_project_formal_modules_excluding_main": [
+    "Base369.lean",
+    "BottPeriodicity.lean",
+    "CRTPeriod.lean",
+    "DashiAdmissibility.lean",
+    "DashiAnnihilation.lean",
+    "DashiCarrier.lean",
+    "DashiDefect.lean",
+    "DashiHierarchy.lean",
+    "DashiKernel.lean",
+    "FascisticSystem.lean",
+    "KernelAlgebra.lean",
+    "LogicTlurey.lean",
+    "MonsterMask.lean",
+    "MonsterMoonshine.lean",
+    "MoonshineEarn.lean",
+    "Overflow.lean",
+    "SupersingularPrimes.lean",
+    "TenfoldBridges.lean",
+    "UltrametricSpace.lean"
+  ],
+  "selected_request_project_lean_file_count": 20,
+  "selected_request_project_modules": [
+    "Base369.lean",
+    "BottPeriodicity.lean",
+    "CRTPeriod.lean",
+    "DashiAdmissibility.lean",
+    "DashiAnnihilation.lean",
+    "DashiCarrier.lean",
+    "DashiDefect.lean",
+    "DashiHierarchy.lean",
+    "DashiKernel.lean",
+    "FascisticSystem.lean",
+    "KernelAlgebra.lean",
+    "LogicTlurey.lean",
+    "Main.lean",
+    "MonsterMask.lean",
+    "MonsterMoonshine.lean",
+    "MoonshineEarn.lean",
+    "Overflow.lean",
+    "SupersingularPrimes.lean",
+    "TenfoldBridges.lean",
+    "UltrametricSpace.lean"
+  ],
+  "source_archive": "360d39a0-6c5e-49d6-8ff0-8fefe5d8ba01-aristotle.tar.gz",
+  "summary_claims": {
+    "allm_claims_19_modules_compile": true,
+    "allm_claims_main_imports_all_19": true,
+    "allm_claims_standard_axioms": true,
+    "allm_claims_zero_sorry": true
+  }
+}

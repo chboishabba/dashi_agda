@@ -178,6 +178,36 @@ For the finite exterior-chain route, also cite
 rows from `A`, `F=dA`, and `dF=0` through Hodge, source current, `d*F=J`,
 `dJ=0`, `divJ=0`, unit calibration, empirical observables, and the Maxwell
 promotion guard.
+Downloaded Hodge/YM/string context artifacts should cite
+`DASHI.Promotion.DownloadedNewAdditionsReferenceIndex`. It indexes the 36 files
+under `temp-DOWNLOADED/new additions`, with checksum-bound generated manifests
+at `outputs/downloaded_new_additions_reference_index/`,
+`outputs/downloaded_ym_hodge_artifact_summary/`, and
+`outputs/downloaded_pdf_context_probe/`. The useful Hodge/YM boundary pulled
+from these artifacts is concrete but non-promoting.  The repo already has
+finite Route-B/current and pure zero-current `D * F = J` support, recorded by
+`DASHI.Promotion.YMStrictHodgeVariationBlockerIndex` and consumed by
+`DASHI.Promotion.UnificationCriticalPathReceipt`. The exact remaining YM
+calculation is the strict selected-Hodge variation pairing, currently blocked
+at `missingVariationPairingForSelectedHodgeStar`; physical source coupling,
+continuum mass gap, YM Clay, Maxwell field equations, and terminal unification
+remain false. The downloaded Sprint 82/93 YM tables record
+`q = 0.23178189475262734`, `eta4_q < 1`, `eta8_q > 1`,
+`su3_first_safe_k = 11`, and a conditional Master WC3 route decision; they do
+not accept YM Clay, continuum mass gap, Maxwell field equations, or terminal
+unification.
+
+Whole-unification consumers should cite
+`DASHI.Promotion.UnificationCriticalPathReceipt`. It consumes the checked
+contraction/quadratic/signature spine, the defect/quadratic dependency index,
+the depth-9 Hodge variation receipt, the strict YM Hodge blocker index, the
+SM/Higgs covariant comparison law, finite chemistry computation, finite
+quantum scope, exact known-input population, and the downloaded context index.
+Its positive corrections are narrow: the internal shift-carrier quadratic
+spine is checked, and finite Hodge/current support exists. The broader theorem
+from strict contraction plus defect monotonicity/admissibility/hierarchy to a
+projection-defect/parallelogram package, strict selected YM variation pairing,
+empirical authority, measured metrology, and terminal promotion remain open.
 
 NS-facing consumers should cite
 `DASHI.Physics.Closure.NSMigrationInitiationThresholdConstantsReceipt` for the

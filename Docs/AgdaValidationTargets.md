@@ -53,6 +53,8 @@ canonical closure spine:
 - `DASHI/Promotion/MaxwellHodgeSourceConservationObligations.agda`
 - `DASHI/Promotion/NumericMeasuredAuthorityTokenNormalization.agda`
 - `DASHI/Promotion/ChemistryAuthorityBinding.agda`
+- `DASHI/Promotion/DefectQuadraticClosureDependencyIndex.agda`
+- `DASHI/Promotion/DownloadedNewAdditionsReferenceIndex.agda`
 - `DASHI/Physics/Closure/NSSprint150SourceViscosityBalanceReceipt.agda`
 - `DASHI/Promotion/ChemistryFiniteComputationSurface.agda`
 - `DASHI/Promotion/StandardModelFiniteAnomalyHyperchargeCheck.agda`
@@ -66,6 +68,8 @@ canonical closure spine:
 - `DASHI/Promotion/StandardModelHiggsHEPDataReceiptAdapter.agda`
 - `DASHI/Promotion/StandardModelHiggsCovariantComparisonLaw.agda`
 - `DASHI/Promotion/MaxwellFiniteExteriorChainStrengthening.agda`
+- `DASHI/Promotion/UnificationCriticalPathReceipt.agda`
+- `DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda`
 - `DASHI/Promotion/NumericAuthorityPayloadValidator.agda`
 - `DASHI/Promotion/FiniteQuantumQFTScopedClosure.agda`
 - `DASHI/Promotion/ObligationIndex.agda`

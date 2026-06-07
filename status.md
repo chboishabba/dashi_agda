@@ -1,3 +1,28 @@
+# 2026-06-07 Sprint 159 NS full-Clay external-authority boundary round
+
+- Added checked Sprint 159 module:
+  `NSSprint159FullClayExternalAuthorityBoundaryReceipt`.
+- Added `scripts/ns_sprint159_external_authority_boundary.py`,
+  `scripts/ns_sprint159_mechanism_exhaustion_gap.py`, and
+  `scripts/ns_sprint159_criteria_inventory.py`, with focused tests.
+- Integrated a one-row full-Clay external-authority boundary layer into
+  `DASHI.Promotion.ObligationIndex`.
+- Recorded Sprint 158 symmetric Hou-Luo global regularity as scoped support
+  only and set `ExternalAuthorityBoundary=true`.
+- Kept the full-Clay blockers false/open:
+  `MechanismExhaustionForFullClayNS`,
+  `GeneralDataReductionToCriticalProfiles`,
+  `CriticalProfileCompactnessForNS`,
+  `AxisymmetricOrSymmetricReductionExclusion`,
+  `NonAxisymmetricVortexStretchingControl`,
+  `PressureNonlocalityClosureForGeneralData`,
+  `CriticalNormExhaustionCriterion`,
+  `FullNavierStokesContinuationBridge`, and
+  `ClaySubmissionPromotionPacket`.
+- Kept `full_clay_ns_solved`, `fullClayNSSolved`,
+  `fullNavierStokesSolutionConstructed`, and `clayNavierStokesPromoted`
+  false.
+
 # 2026-06-07 Sprint 158 NS symmetric Hou-Luo theorem-class closure round
 
 - Added checked Sprint 158 module:
@@ -162,6 +187,41 @@
   covariance and computes `(d - m)^T Sigma^-1 (d - m)`, while keeping fixture
   baseline authority, raw provider vector binding, accepted authority token,
   holdout, empirical validation, and Standard Model promotion false.
+- Follow-up downloaded reference intake: added
+  `DASHI.Promotion.DownloadedNewAdditionsReferenceIndex`,
+  `scripts/downloaded_new_additions_manifest.py`,
+  `scripts/downloaded_ym_hodge_artifact_summary.py`, and
+  `scripts/downloaded_pdf_context_probe.py`. The intake records 36 files under
+  `temp-DOWNLOADED/new additions` as checksum-bound context only: 11 PDFs, 12
+  images, 10 CSV/JSON data artifacts, 2 code artifacts, and 1 HTML artifact.
+  The YM/Hodge summary extracts `q = 0.23178189475262734`, `eta4_q < 1`,
+  `eta8_q > 1`, `su3_first_safe_k = 11`, `su3_k11_delta =
+  0.9901123046875`, and the conditional
+  `MASTER_WC3_SU3_CONSERVATIVE_CLOSES_AT_K11_CONDITIONALLY` route decision.
+  The PDF probe records 11 PDFs and 574 known pages. These artifacts support
+  future Hodge/Maxwell/YM/string routing but do not promote theorem authority,
+  empirical authority, YM Clay, Maxwell field equations, or terminal
+  unification.
+- Follow-up critical-path consolidation: added
+  `DASHI.Promotion.DefectQuadraticClosureDependencyIndex`,
+  `DASHI.Promotion.YMStrictHodgeVariationBlockerIndex`, and
+  `DASHI.Promotion.UnificationCriticalPathReceipt`. The defect/quadratic index
+  records the checked integer shift-carrier spine
+  `ProjectionDefect -> ParallelogramPackage -> QuadraticForm ->
+  StrongContractionQuadratic`, while keeping the broader strict-contraction
+  plus defect-monotonicity/admissibility/hierarchy theorem open. The YM Hodge
+  index records that pure finite `D * F = J` with `J = 0` and the finite
+  zero-variation IBP lower law are inhabited; the exact strict blocker remains
+  `missingVariationPairingForSelectedHodgeStar`. The unified receipt consumes
+  both indexes plus the Higgs comparison, finite chemistry, finite quantum,
+  constants, and downloaded-context surfaces, with terminal promotion false.
+- Follow-up Lean Aristotle intake: added
+  `scripts/lean_aristotle_intake.py`, `tests/test_lean_aristotle_intake.py`,
+  and `outputs/lean_aristotle_intake/`. The intake parses the uploaded allm
+  archive evidence as 19 formal `RequestProject` modules plus `Main.lean`, but
+  records that the local `dashi_lean4` checkout has 10 Lean files and no
+  `lake build` rerun was performed. It is context evidence, not theorem
+  authority or unification promotion.
 
 # 2026-06-07 cross-lane closure-computation round
 

@@ -6,6 +6,19 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 159 NS full-Clay external-authority boundary round for
+  `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt`,
+  three Sprint 159 emitters, generated outputs, and focused tests. The round
+  anchors to Sprint 158, records symmetric Hou-Luo regularity as scoped
+  support only, adds a one-row full-Clay external-authority boundary layer to
+  `DASHI.Promotion.ObligationIndex`, and records
+  `ExternalAuthorityBoundary=true`. `MechanismExhaustionForFullClayNS`,
+  general-data critical-profile reduction, non-axisymmetric vortex-stretching
+  control, pressure nonlocality closure, full NS continuation, Clay submission
+  promotion, full Clay Navier-Stokes, full general Navier-Stokes construction,
+  and `clayNavierStokesPromoted` remain false.
+
 - Sprint 158 NS symmetric Hou-Luo theorem-class closure round for
   `2026-06-07`: adds
   `DASHI.Physics.Closure.NSSprint158SymmetricHouLuoRegularityClassClosureReceipt`,
