@@ -647,6 +647,263 @@ terminalPromotionIsFalse =
   refl
 
 ------------------------------------------------------------------------
+-- Fail-closed criterion policy.
+
+data GreatCircleCriterionGate : Set where
+  gateExternalTheoremRecorded :
+    GreatCircleCriterionGate
+
+  gateAuthorityTokenAccepted :
+    GreatCircleCriterionGate
+
+  gateZeroModeAvoidanceClassified :
+    GreatCircleCriterionGate
+
+  gateConeTrapBinding :
+    GreatCircleCriterionGate
+
+  gateDirectionSetMeasureTransfer :
+    GreatCircleCriterionGate
+
+  gateQuantitativeMassOutsideZeroModes :
+    GreatCircleCriterionGate
+
+  gateLeakageResidualClosure :
+    GreatCircleCriterionGate
+
+  gateClayPromotion :
+    GreatCircleCriterionGate
+
+canonicalGreatCircleCriterionGates :
+  List GreatCircleCriterionGate
+canonicalGreatCircleCriterionGates =
+  gateExternalTheoremRecorded
+  ∷ gateAuthorityTokenAccepted
+  ∷ gateZeroModeAvoidanceClassified
+  ∷ gateConeTrapBinding
+  ∷ gateDirectionSetMeasureTransfer
+  ∷ gateQuantitativeMassOutsideZeroModes
+  ∷ gateLeakageResidualClosure
+  ∷ gateClayPromotion
+  ∷ []
+
+greatCircleCriterionGateCount : Nat
+greatCircleCriterionGateCount =
+  listLength canonicalGreatCircleCriterionGates
+
+greatCircleCriterionGateCountIs8 :
+  greatCircleCriterionGateCount ≡ 8
+greatCircleCriterionGateCountIs8 =
+  refl
+
+data GreatCircleGateDisposition : Set where
+  gateRecordedAsExternalDeterministicBoundary :
+    GreatCircleCriterionGate →
+    GreatCircleGateDisposition
+
+  gateClosedUntilAuthorityTokenNormalized :
+    GreatCircleCriterionGate →
+    GreatCircleCriterionBlocker →
+    GreatCircleGateDisposition
+
+  gateClosedUntilZeroModeGeometrySupplied :
+    GreatCircleCriterionGate →
+    GreatCircleCriterionBlocker →
+    GreatCircleGateDisposition
+
+  gateClosedUntilMeasureTransferSupplied :
+    GreatCircleCriterionGate →
+    GreatCircleCriterionBlocker →
+    GreatCircleCriterionBlocker →
+    GreatCircleGateDisposition
+
+  gateClosedUntilLeakageResidualSupplied :
+    GreatCircleCriterionGate →
+    GreatCircleCriterionBlocker →
+    GreatCircleCriterionBlocker →
+    GreatCircleCriterionBlocker →
+    GreatCircleGateDisposition
+
+  gateClosedToClayPromotion :
+    GreatCircleCriterionGate →
+    GreatCircleCriterionBlocker →
+    GreatCircleGateDisposition
+
+greatCircleCriterionGateDisposition :
+  GreatCircleCriterionGate →
+  GreatCircleGateDisposition
+greatCircleCriterionGateDisposition gateExternalTheoremRecorded =
+  gateRecordedAsExternalDeterministicBoundary
+    gateExternalTheoremRecorded
+greatCircleCriterionGateDisposition gateAuthorityTokenAccepted =
+  gateClosedUntilAuthorityTokenNormalized
+    gateAuthorityTokenAccepted
+    missingAuthorityTokenNormalization
+greatCircleCriterionGateDisposition gateZeroModeAvoidanceClassified =
+  gateClosedUntilZeroModeGeometrySupplied
+    gateZeroModeAvoidanceClassified
+    missingZeroModeGreatCircleAvoidanceClassification
+greatCircleCriterionGateDisposition gateConeTrapBinding =
+  gateClosedUntilZeroModeGeometrySupplied
+    gateConeTrapBinding
+    missingConeTrapToZeroModeTrapBinding
+greatCircleCriterionGateDisposition gateDirectionSetMeasureTransfer =
+  gateClosedUntilMeasureTransferSupplied
+    gateDirectionSetMeasureTransfer
+    missingDirectionSetIToMicrolocalMeasureTransfer
+    missingQuantitativePositiveMassOutsideZeroModes
+greatCircleCriterionGateDisposition gateQuantitativeMassOutsideZeroModes =
+  gateClosedUntilMeasureTransferSupplied
+    gateQuantitativeMassOutsideZeroModes
+    missingQuantitativePositiveMassOutsideZeroModes
+    missingDirectionSetIToMicrolocalMeasureTransfer
+greatCircleCriterionGateDisposition gateLeakageResidualClosure =
+  gateClosedUntilLeakageResidualSupplied
+    gateLeakageResidualClosure
+    missingLeakageAwayFromZeroModes
+    missingNSCriticalResidualNonPositive
+    missingFullLocalDefectMonotonicity
+greatCircleCriterionGateDisposition gateClayPromotion =
+  gateClosedToClayPromotion
+    gateClayPromotion
+    clayNavierStokesPromotionClosed
+
+record NSLeiRenTianGreatCircleCriterionFailClosedReceipt : Setω where
+  constructor nsLeiRenTianGreatCircleCriterionFailClosedReceipt
+  field
+    criterionGates :
+      List GreatCircleCriterionGate
+    criterionGatesAreCanonical :
+      criterionGates ≡ canonicalGreatCircleCriterionGates
+    criterionGateCount :
+      Nat
+    criterionGateCountIsCanonical :
+      criterionGateCount ≡ greatCircleCriterionGateCount
+    criterionGateCountProof :
+      criterionGateCount ≡ 8
+
+    externalTheoremGateDisposition :
+      greatCircleCriterionGateDisposition gateExternalTheoremRecorded
+      ≡
+      gateRecordedAsExternalDeterministicBoundary
+        gateExternalTheoremRecorded
+    authorityTokenGateDisposition :
+      greatCircleCriterionGateDisposition gateAuthorityTokenAccepted
+      ≡
+      gateClosedUntilAuthorityTokenNormalized
+        gateAuthorityTokenAccepted
+        missingAuthorityTokenNormalization
+    zeroModeAvoidanceGateDisposition :
+      greatCircleCriterionGateDisposition gateZeroModeAvoidanceClassified
+      ≡
+      gateClosedUntilZeroModeGeometrySupplied
+        gateZeroModeAvoidanceClassified
+        missingZeroModeGreatCircleAvoidanceClassification
+    coneTrapBindingGateDisposition :
+      greatCircleCriterionGateDisposition gateConeTrapBinding
+      ≡
+      gateClosedUntilZeroModeGeometrySupplied
+        gateConeTrapBinding
+        missingConeTrapToZeroModeTrapBinding
+    directionSetTransferGateDisposition :
+      greatCircleCriterionGateDisposition gateDirectionSetMeasureTransfer
+      ≡
+      gateClosedUntilMeasureTransferSupplied
+        gateDirectionSetMeasureTransfer
+        missingDirectionSetIToMicrolocalMeasureTransfer
+        missingQuantitativePositiveMassOutsideZeroModes
+    quantitativeMassGateDisposition :
+      greatCircleCriterionGateDisposition gateQuantitativeMassOutsideZeroModes
+      ≡
+      gateClosedUntilMeasureTransferSupplied
+        gateQuantitativeMassOutsideZeroModes
+        missingQuantitativePositiveMassOutsideZeroModes
+        missingDirectionSetIToMicrolocalMeasureTransfer
+    leakageResidualGateDisposition :
+      greatCircleCriterionGateDisposition gateLeakageResidualClosure
+      ≡
+      gateClosedUntilLeakageResidualSupplied
+        gateLeakageResidualClosure
+        missingLeakageAwayFromZeroModes
+        missingNSCriticalResidualNonPositive
+        missingFullLocalDefectMonotonicity
+    clayPromotionGateDisposition :
+      greatCircleCriterionGateDisposition gateClayPromotion
+      ≡
+      gateClosedToClayPromotion
+        gateClayPromotion
+        clayNavierStokesPromotionClosed
+
+    theoremRecordedStillTrue :
+      ExternalDeterministicTheoremBoundaryRecorded ≡ true
+    criterionTypedStillTrue :
+      GreatCircleHittingCriterionTyped ≡ true
+    doubleConeTypedStillTrue :
+      DoubleConeAvoidanceCriterionTyped ≡ true
+    internalFormalizationStillFalse :
+      LeiRenTianTheoremInternallyFormalized ≡ false
+    authorityTokenStillFalse :
+      LeiRenTianAuthorityTokenAccepted ≡ false
+    zeroModeAvoidanceStillFalse :
+      ZeroModeGreatCircleAvoidanceClassified ≡ false
+    coneTrapBindingStillFalse :
+      ConeTrapToZeroModeTrapBindingProved ≡ false
+    directionSetTransferStillFalse :
+      DirectionSetIToMicrolocalMeasureTransferProved ≡ false
+    quantitativeMassStillFalse :
+      QuantitativePositiveMassOutsideZeroModesProved ≡ false
+    leakageStillFalse :
+      LeakageAwayFromZeroModesProved ≡ false
+    residualStillFalse :
+      NSCriticalResidualNonPositive ≡ false
+    monotonicityStillFalse :
+      FullLocalDefectMonotonicity ≡ false
+    mechanismExhaustionStillFalse :
+      MechanismExhaustionForFullClayNS ≡ false
+    clayPromotionStillFalse :
+      clayNavierStokesPromoted ≡ false
+    terminalPromotionStillFalse :
+      terminalPromotion ≡ false
+    promotionWitnesses :
+      List GreatCircleCriterionPromotion
+    promotionWitnessesAreEmpty :
+      promotionWitnesses ≡ []
+
+open NSLeiRenTianGreatCircleCriterionFailClosedReceipt public
+
+canonicalNSLeiRenTianGreatCircleCriterionFailClosedReceipt :
+  NSLeiRenTianGreatCircleCriterionFailClosedReceipt
+canonicalNSLeiRenTianGreatCircleCriterionFailClosedReceipt =
+  nsLeiRenTianGreatCircleCriterionFailClosedReceipt
+    canonicalGreatCircleCriterionGates
+    refl
+    greatCircleCriterionGateCount
+    refl
+    greatCircleCriterionGateCountIs8
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    []
+    refl
+
+------------------------------------------------------------------------
 -- ORCSLPGF.
 
 organizationString : String
@@ -659,7 +916,7 @@ requirementString =
 
 codeArtifactString : String
 codeArtifactString =
-  "C: The module exports source metadata, direction/great-circle/cone carriers, contrapositive boundary, zero-mode trap hooks, support/blocker/status rows, false promotion guards, ORCSLPGF, and a canonical receipt."
+  "C: The module exports source metadata, direction/great-circle/cone carriers, contrapositive boundary, zero-mode trap hooks, support/blocker/status rows, fail-closed gates, false promotion guards, ORCSLPGF, and canonical receipts."
 
 stateString : String
 stateString =
@@ -940,6 +1197,13 @@ record NSLeiRenTianGreatCircleCriterionBoundaryReceipt : Setω where
     promotionFlagsAreEmpty :
       promotionFlags ≡ []
 
+    failClosedReceipt :
+      NSLeiRenTianGreatCircleCriterionFailClosedReceipt
+    failClosedReceiptIsCanonical :
+      failClosedReceipt
+      ≡
+      canonicalNSLeiRenTianGreatCircleCriterionFailClosedReceipt
+
     orcslpgf :
       NSLeiRenTianGreatCircleCriterionORCSLPGF
     orcslpgfIsCanonical :
@@ -1043,6 +1307,8 @@ canonicalNSLeiRenTianGreatCircleCriterionBoundaryReceipt =
     refl
     refl
     []
+    refl
+    canonicalNSLeiRenTianGreatCircleCriterionFailClosedReceipt
     refl
     canonicalNSLeiRenTianGreatCircleCriterionORCSLPGF
     refl

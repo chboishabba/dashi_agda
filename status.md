@@ -1,29 +1,44 @@
 # 2026-06-08 defect-Laplacian zero-mode boundary round
 
-- Added checked shared P0 module:
+- Extended the shared P0 module:
   `DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf`.
   It records
   `Delta_{Pi,N} = Pi N^dagger (1-Pi) N Pi` and the current alternative:
   leakage-positive or zero-mode-rigid.
-- Added checked NS zero-mode modules:
+- Extended NS zero-mode modules:
   `DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary`,
-  `DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary`, and
+  `DASHI.Physics.Closure.NSLeiRenTianGreatCircleCriterionBoundary`,
+  `DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary`,
+  `DASHI.Physics.Closure.NSGreatCircleZeroModeTrapExclusionBoundary`,
+  `DASHI.Physics.Closure.NSZeroModeGreatCircleGeometryTheorem`, and
   `DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary`.
   The NS zero-mode split is now recorded as `Z_NS = Z_rad union Z_tan`.
   Lei-Ren-Tian arXiv:2501.08976 is recorded as an external great-circle
   authority boundary for the radial route; Buaria/Bodenschatz/Pumir
   arXiv:2006.01312 is recorded as DNS evidence only for the tangential
-  pressure-starvation target.
-- Added checked YM module:
-  `DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`.
+  pressure-starvation target. The great-circle modules add fail-closed
+  envelopes for trap exclusion and intrinsic zero-mode geometry; the missing
+  steps remain level-set regularity, great-circle component classification,
+  defect-measure transfer, microlocal mass, and residual monotonicity.
+- Extended YM modules:
+  `DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary`,
+  `DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`,
+  `DASHI.Physics.Closure.FiniteGaugeHodgeAdjointCompatibility`, and
+  `DASHI.Physics.Closure.YMWeightedBTAdjointKappaCalculation`.
   The next YM theorem target is now the domination inequality from the
   transfer-matrix Hamiltonian on the gauge quotient to the finite Hodge/gauge
-  defect Laplacian, with OS/reflection positivity, accepted finite-a authority,
-  spectral lift, and continuum transfer still open.
-- Added checked core module:
+  defect Laplacian, plus zero-mode vacuum rigidity on the finite gauge
+  quotient. Finite gauge quotient construction, flat-to-vacuum proof,
+  topological sector classification, OS/reflection positivity, accepted
+  finite-a authority, spectral lift, and continuum transfer remain open.
+- Extended core module:
   `DASHI.Physics.Closure.DefectFourPointParallelogramLawBoundary`. It replaces
   hidden smoothness assumptions with the exact four-point target
   `HierarchyConsistencyKillsFourPointDefect`.
+- Validation note: per the current sprint rule, focused Agda checks were run
+  with `timeout 10s`. The new heavy zero-mode/YM/core modules timed out rather
+  than returning type errors under that cap, so promotion remains
+  verification-limited until longer targeted Agda checks complete.
 - NS Clay, YM Clay, deterministic DNS-to-ancient-profile depletion,
   microlocal defect mass construction, Hamiltonian domination, quadratic
   emergence, continuum transfer, and terminal promotion remain false.

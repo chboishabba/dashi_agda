@@ -11,6 +11,7 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary as Micro
 import DASHI.Physics.Closure.NSNonRadialityQuantificationAverage as NonRadial
 import DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula as RankOne
+import DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary as ZeroMode
 
 ------------------------------------------------------------------------
 -- Tangential zero-mode pressure-starvation boundary for the NS P0 lane.
@@ -25,10 +26,10 @@ import DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula as RankOne
 -- evidence for the depletion direction, not as a deterministic theorem
 -- and not as a Clay proof.
 --
--- There is no in-repo NSZeroModeSetClassificationBoundary at the time this
--- worker lane was written, so this module consumes the fallback anchors
--- requested by the task: the corrected rank-one formula, finite
--- non-radiality average, and microlocal defect-mass boundary.
+-- The in-repo NSZeroModeSetClassificationBoundary is consumed as a
+-- fail-closed boundary receipt.  It records Z_rad union Z_tan and the
+-- tangential starvation target, but it does not promote DNS evidence,
+-- pressure-starvation, residual depletion, Clay NS, or terminal unification.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -145,6 +146,8 @@ data TangentialStarvationSupportRow : Set where
     TangentialStarvationSupportRow
   fallbackNonRadialAverageSupport :
     TangentialStarvationSupportRow
+  zeroModeClassificationBoundarySupport :
+    TangentialStarvationSupportRow
   microlocalDefectMeasureSupportTarget :
     TangentialStarvationSupportRow
   dnsEvidenceSupportOnly :
@@ -157,6 +160,7 @@ canonicalTangentialStarvationSupportRows :
 canonicalTangentialStarvationSupportRows =
   rankOneDefectZeroModeFormulaSupport
   ∷ fallbackNonRadialAverageSupport
+  ∷ zeroModeClassificationBoundarySupport
   ∷ microlocalDefectMeasureSupportTarget
   ∷ dnsEvidenceSupportOnly
   ∷ deterministicAncientProfileEstimateStillMissing
@@ -166,13 +170,13 @@ tangentialStarvationSupportRowCount : Nat
 tangentialStarvationSupportRowCount =
   listLength canonicalTangentialStarvationSupportRows
 
-tangentialStarvationSupportRowCountIs5 :
-  tangentialStarvationSupportRowCount ≡ 5
-tangentialStarvationSupportRowCountIs5 =
+tangentialStarvationSupportRowCountIs6 :
+  tangentialStarvationSupportRowCount ≡ 6
+tangentialStarvationSupportRowCountIs6 =
   refl
 
 data TangentialStarvationBlocker : Set where
-  missingNSZeroModeSetClassificationBoundary :
+  zeroModeClassificationConsumedButNotPromoted :
     TangentialStarvationBlocker
   missingDeterministicMaximalEigenvectorDepletion :
     TangentialStarvationBlocker
@@ -194,7 +198,7 @@ data TangentialStarvationBlocker : Set where
 canonicalTangentialStarvationBlockers :
   List TangentialStarvationBlocker
 canonicalTangentialStarvationBlockers =
-  missingNSZeroModeSetClassificationBoundary
+  zeroModeClassificationConsumedButNotPromoted
   ∷ missingDeterministicMaximalEigenvectorDepletion
   ∷ missingAncientProfileBlowupRescalingSurvival
   ∷ missingPressureFluxLittleOEstimate
@@ -269,6 +273,14 @@ DNSEvidencePromotedAsProof : Bool
 DNSEvidencePromotedAsProof =
   false
 
+ZeroModeClassificationConsumedAsBoundary : Bool
+ZeroModeClassificationConsumedAsBoundary =
+  true
+
+ZeroModeClassificationPromotedAsStarvationProof : Bool
+ZeroModeClassificationPromotedAsStarvationProof =
+  false
+
 DeterministicDepletionLemmaProved : Bool
 DeterministicDepletionLemmaProved =
   false
@@ -315,7 +327,7 @@ terminalPromotion =
 
 organizationString : String
 organizationString =
-  "O: Worker lane 4 owns only the tangential NS zero-mode pressure-starvation boundary."
+  "O: Worker lane 3 owns only the tangential NS zero-mode pressure-starvation boundary."
 
 requirementString : String
 requirementString =
@@ -323,11 +335,11 @@ requirementString =
 
 codeArtifactString : String
 codeArtifactString =
-  "C: DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary defines zero-mode sectors, tangential conditions, pressure-starvation targets, DNS evidence rows, blocker rows, imported fallback anchors, booleans, and equality receipts."
+  "C: DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary defines zero-mode sectors, tangential conditions, pressure-starvation targets, DNS evidence rows, blocker rows, the consumed zero-mode classification boundary, fallback anchors, booleans, and equality receipts."
 
 stateString : String
 stateString =
-  "S: Rank-one zero-mode algebra, finite non-radial averaging, and microlocal defect-mass boundary support are consumed; deterministic ancient-profile depletion and pressure flux little-o estimates remain unproved."
+  "S: Rank-one zero-mode algebra, the zero-mode classification boundary, finite non-radial averaging, and microlocal defect-mass boundary support are consumed; deterministic ancient-profile depletion and pressure flux little-o estimates remain unproved."
 
 latticeString : String
 latticeString =
@@ -405,6 +417,21 @@ record NSTangentialZeroModePressureStarvationBoundaryReceipt : Setω where
     rankOneTerminalStillFalse :
       RankOne.terminalPromotion rankOneFormulaAnchor ≡ false
 
+    zeroModeClassificationAnchor :
+      ZeroMode.NSZeroModeSetClassificationBoundaryReceipt
+    zeroModeClassificationBoundaryRecorded :
+      ZeroMode.NSZeroModeSetClassificationBoundaryRecorded ≡ true
+    zeroModeClassificationTangentialTargetRecorded :
+      ZeroMode.TangentialZeroModePressureStarvationTargetRecorded ≡ true
+    zeroModeClassificationStarvationStillFalse :
+      ZeroMode.TangentialZeroModePressureStarvationProved ≡ false
+    zeroModeClassificationSupportExhaustionStillFalse :
+      ZeroMode.SupportClassificationExhausted ≡ false
+    zeroModeClassificationClayStillFalse :
+      ZeroMode.clayNavierStokesPromoted ≡ false
+    zeroModeClassificationTerminalStillFalse :
+      ZeroMode.terminalPromotion ≡ false
+
     nonRadialAverageAnchor :
       NonRadial.NSNonRadialityQuantificationAverageReceipt
     nonRadialAverageFiniteSupportRecorded :
@@ -467,8 +494,8 @@ record NSTangentialZeroModePressureStarvationBoundaryReceipt : Setω where
       supportRows ≡ canonicalTangentialStarvationSupportRows
     recordedSupportRowCount :
       Nat
-    supportRowCountIsFive :
-      recordedSupportRowCount ≡ 5
+    supportRowCountIsSix :
+      recordedSupportRowCount ≡ 6
 
     blockers :
       List TangentialStarvationBlocker
@@ -515,6 +542,10 @@ record NSTangentialZeroModePressureStarvationBoundaryReceipt : Setω where
       DNSEvidenceRecorded ≡ true
     dnsEvidencePromotedAsProofFalse :
       DNSEvidencePromotedAsProof ≡ false
+    zeroModeClassificationConsumedAsBoundaryTrue :
+      ZeroModeClassificationConsumedAsBoundary ≡ true
+    zeroModeClassificationPromotedAsStarvationProofFalse :
+      ZeroModeClassificationPromotedAsStarvationProof ≡ false
     deterministicDepletionLemmaProvedFalse :
       DeterministicDepletionLemmaProved ≡ false
     ancientProfileSurvivalProvedFalse :
@@ -555,6 +586,13 @@ canonicalNSTangentialZeroModePressureStarvationBoundaryReceipt =
     theoremName
     refl
     RankOne.canonicalNSRankOneProjectionCommutatorFormula
+    refl
+    refl
+    refl
+    ZeroMode.canonicalNSZeroModeSetClassificationBoundaryReceipt
+    refl
+    refl
+    refl
     refl
     refl
     refl
@@ -599,6 +637,8 @@ canonicalNSTangentialZeroModePressureStarvationBoundaryReceipt =
     tangentialZeroModeText
     refl
     nonPromotionBoundaryText
+    refl
+    refl
     refl
     refl
     refl

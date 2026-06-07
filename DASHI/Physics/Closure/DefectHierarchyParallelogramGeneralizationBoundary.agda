@@ -9,11 +9,13 @@ module DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary 
 --   -> quadratic form.
 --
 -- The repository already checks concrete identity/shift instances.  This
--- module records the exact generalization boundary: Jordan-von Neumann is a
--- trusted external mathematics theorem once the parallelogram law is supplied,
--- but the broad hierarchy-consistency-to-parallelogram theorem is not proved
--- here.  No signature, Clifford, Standard Model, Clay, or terminal promotion
--- follows from this receipt.
+-- module records the exact generalization boundary: hidden Gateaux
+-- differentiability is rejected unless supplied as an explicit hypothesis,
+-- Jordan-von Neumann is a trusted external mathematics theorem once the
+-- four-point/parallelogram law is supplied, but the broad
+-- hierarchy-consistency-to-parallelogram theorem is not proved here.  No
+-- signature, Clifford, Standard Model, Clay, or terminal promotion follows
+-- from this receipt.
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -38,6 +40,9 @@ listLength (_ ∷ xs) = suc (listLength xs)
 -- The theorem chain and its exact boundary status.
 
 data CoreGeneralizationStep : Set where
+  gateauxDifferentiabilityAssumptionBoundary :
+    CoreGeneralizationStep
+
   defectMonotonicityPremise :
     CoreGeneralizationStep
 
@@ -47,19 +52,19 @@ data CoreGeneralizationStep : Set where
   hierarchyConsistencyPremise :
     CoreGeneralizationStep
 
-  parallelogramIdentityTarget :
+  fourPointParallelogramIdentityTarget :
     CoreGeneralizationStep
 
   jordanVonNeumannQuadraticBoundary :
     CoreGeneralizationStep
 
-  signatureCliffordConsumerBoundary :
-    CoreGeneralizationStep
-
-  terminalUnificationBoundary :
+  downstreamConsumerBoundary :
     CoreGeneralizationStep
 
 data CoreGeneralizationStatus : Set where
+  hiddenAssumptionRejected :
+    CoreGeneralizationStatus
+
   concreteInstanceChecked :
     CoreGeneralizationStatus
 
@@ -73,6 +78,9 @@ data CoreGeneralizationStatus : Set where
     CoreGeneralizationStatus
 
 data CoreGeneralizationBlocker : Set where
+  missingExplicitGateauxDifferentiabilityHypothesis :
+    CoreGeneralizationBlocker
+
   noBlockerForConcreteInstance :
     CoreGeneralizationBlocker
 
@@ -91,43 +99,43 @@ data CoreGeneralizationBlocker : Set where
   missingRealOperatorStack :
     CoreGeneralizationBlocker
 
-  missingDownstreamSignatureCliffordSMTransfer :
+  missingDownstreamQuadraticSignatureCliffordSMTransfer :
     CoreGeneralizationBlocker
 
   terminalPromotionBlockedByCoreSeam :
     CoreGeneralizationBlocker
 
 statusForStep : CoreGeneralizationStep → CoreGeneralizationStatus
+statusForStep gateauxDifferentiabilityAssumptionBoundary =
+  hiddenAssumptionRejected
 statusForStep defectMonotonicityPremise =
   concreteInstanceChecked
 statusForStep admissibilityQuotientPremise =
   concreteInstanceChecked
 statusForStep hierarchyConsistencyPremise =
   exactGeneralPremiseOpen
-statusForStep parallelogramIdentityTarget =
+statusForStep fourPointParallelogramIdentityTarget =
   exactGeneralPremiseOpen
 statusForStep jordanVonNeumannQuadraticBoundary =
   externalMathematicsBoundary
-statusForStep signatureCliffordConsumerBoundary =
-  downstreamConsumerBlocked
-statusForStep terminalUnificationBoundary =
+statusForStep downstreamConsumerBoundary =
   downstreamConsumerBlocked
 
 blockerForStep : CoreGeneralizationStep → CoreGeneralizationBlocker
+blockerForStep gateauxDifferentiabilityAssumptionBoundary =
+  missingExplicitGateauxDifferentiabilityHypothesis
 blockerForStep defectMonotonicityPremise =
   noBlockerForConcreteInstance
 blockerForStep admissibilityQuotientPremise =
   noBlockerForConcreteInstance
 blockerForStep hierarchyConsistencyPremise =
   missingGeneralHierarchyConsistency
-blockerForStep parallelogramIdentityTarget =
+blockerForStep fourPointParallelogramIdentityTarget =
   missingDefectAdmissibilityHierarchyToParallelogram
 blockerForStep jordanVonNeumannQuadraticBoundary =
   jordanVonNeumannExternalTheoremBoundary
-blockerForStep signatureCliffordConsumerBoundary =
-  missingDownstreamSignatureCliffordSMTransfer
-blockerForStep terminalUnificationBoundary =
-  terminalPromotionBlockedByCoreSeam
+blockerForStep downstreamConsumerBoundary =
+  missingDownstreamQuadraticSignatureCliffordSMTransfer
 
 record CoreGeneralizationRow : Set where
   field
@@ -157,6 +165,12 @@ record CoreGeneralizationRow : Set where
 
     concreteIdentityShiftSupportIsExpected :
       concreteIdentityShiftSupport ≡ true
+
+    hiddenGateauxDifferentiabilityAssumed :
+      Bool
+
+    hiddenGateauxDifferentiabilityAssumedIsFalse :
+      hiddenGateauxDifferentiabilityAssumed ≡ false
 
     generalTheoremProved :
       Bool
@@ -197,6 +211,10 @@ mkCoreGeneralizationRow step checkedInput requiredCalculation =
         true
     ; concreteIdentityShiftSupportIsExpected =
         refl
+    ; hiddenGateauxDifferentiabilityAssumed =
+        false
+    ; hiddenGateauxDifferentiabilityAssumedIsFalse =
+        refl
     ; generalTheoremProved =
         false
     ; generalTheoremProvedIsFalse =
@@ -211,6 +229,10 @@ canonicalCoreGeneralizationRows :
   List CoreGeneralizationRow
 canonicalCoreGeneralizationRows =
   mkCoreGeneralizationRow
+    gateauxDifferentiabilityAssumptionBoundary
+    "user-supplied P0.2 proof sketch proposed a Gateaux derivative formula"
+    "do not derive bilinearity, polarization, or a remainder identity from hidden differentiability; add an explicit differentiability theorem before using that route"
+  ∷ mkCoreGeneralizationRow
     defectMonotonicityPremise
     "DASHI.Physics.Closure.DefectCriticalSeamIdentityDynamicsInstance: canonicalIdentityDefectMonotonicityEvidence4"
     "generalize defect monotonicity beyond identity dynamics without assuming the shift reducer"
@@ -223,21 +245,17 @@ canonicalCoreGeneralizationRows =
     "DASHI.Physics.Closure.DefectCriticalSeamIdentityQuotientHierarchy: identityHierarchyLiftProjectConsistency"
     "prove hierarchy coupling factors vanish or are controlled for arbitrary admissible families"
   ∷ mkCoreGeneralizationRow
-    parallelogramIdentityTarget
+    fourPointParallelogramIdentityTarget
     "DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam: CriticalSeamTheoremType"
-    "prove defect monotonicity plus quotient plus general hierarchy consistency implies parallelogram identity"
+    "prove defect monotonicity plus quotient plus general hierarchy consistency implies the four-point/parallelogram identity without a hidden Gateaux derivative"
   ∷ mkCoreGeneralizationRow
     jordanVonNeumannQuadraticBoundary
     "external mathematics: Jordan-von Neumann parallelogram theorem"
     "after parallelogram is proved, cite the external theorem to obtain a quadratic form from the induced norm"
   ∷ mkCoreGeneralizationRow
-    signatureCliffordConsumerBoundary
+    downstreamConsumerBoundary
     "DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam: downstream transfer blocker"
-    "supply Real AgreementUltrametric, RealOperatorStack, and signature/Clifford consumers only after the broad seam closes"
-  ∷ mkCoreGeneralizationRow
-    terminalUnificationBoundary
-    "DASHI.Physics.Closure.UnificationNextAnalyticCalculationIndex"
-    "terminal unification remains blocked until the core seam and downstream physical consumers are promoted"
+    "supply Real AgreementUltrametric, RealOperatorStack, quadratic emergence, signature/Clifford/Standard Model consumers, Clay consumers, and terminal unification only after the broad seam closes"
   ∷ []
 
 ------------------------------------------------------------------------
@@ -298,6 +316,12 @@ record DefectHierarchyParallelogramGeneralizationBoundary : Setω where
 
     concreteCriticalSeamOutputCheckedIsTrue :
       concreteCriticalSeamOutputChecked ≡ true
+
+    hiddenGateauxDifferentiabilityAssumed :
+      Bool
+
+    hiddenGateauxDifferentiabilityAssumedIsFalse :
+      hiddenGateauxDifferentiabilityAssumed ≡ false
 
     generalHierarchyConsistencyProved :
       Bool
@@ -431,6 +455,10 @@ canonicalDefectHierarchyParallelogramGeneralizationBoundary =
         true
     ; concreteCriticalSeamOutputCheckedIsTrue =
         Composite.canonicalIdentityCompositeOutputComesFromReducer
+    ; hiddenGateauxDifferentiabilityAssumed =
+        false
+    ; hiddenGateauxDifferentiabilityAssumedIsFalse =
+        refl
     ; generalHierarchyConsistencyProved =
         false
     ; generalHierarchyConsistencyProvedIsFalse =
@@ -489,9 +517,10 @@ canonicalDefectHierarchyParallelogramGeneralizationBoundary =
         Seam.canonicalCriticalSeamTerminalPromotionFalse
     ; decisionNotes =
         "Concrete support is checked: identity dynamics, identity quotient/hierarchy, and the m=4 shift reducer."
+        ∷ "Hidden Gateaux differentiability is not an accepted assumption; it must be supplied as a separate theorem before any derivative-based polarization route is used."
         ∷ "The broad theorem is not checked: arbitrary hierarchy consistency has not been generalized."
         ∷ "The exact next calculation is defectAdmissibilityHierarchyToParallelogramTheoremCalculation."
-        ∷ "Jordan-von-Neumann is an external mathematics boundary that is usable only after the parallelogram identity is proved."
+        ∷ "Jordan-von-Neumann is an external mathematics boundary that is usable only after the four-point/parallelogram identity is proved."
         ∷ "Quadratic emergence, signature, Clifford, Standard Model, Clay, and terminal promotion remain false."
         ∷ []
     }
@@ -513,6 +542,12 @@ canonicalBoundaryConcretePremisesChecked :
     canonicalDefectHierarchyParallelogramGeneralizationBoundary
   ≡ true
 canonicalBoundaryConcretePremisesChecked = refl
+
+canonicalBoundaryHiddenGateauxDifferentiabilityRejected :
+  hiddenGateauxDifferentiabilityAssumed
+    canonicalDefectHierarchyParallelogramGeneralizationBoundary
+  ≡ false
+canonicalBoundaryHiddenGateauxDifferentiabilityRejected = refl
 
 canonicalBoundaryGeneralHierarchyStillOpen :
   generalHierarchyConsistencyProved

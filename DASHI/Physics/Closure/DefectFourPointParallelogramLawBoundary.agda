@@ -27,10 +27,11 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
-import DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary as Gen
 import DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam as Seam
+import DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary as Gen
 import DASHI.Physics.Closure.DefectCriticalSeamIdentityDynamicsInstance as Dyn
 import DASHI.Physics.Closure.DefectCriticalSeamIdentityQuotientHierarchy as Quot
 import DASHI.Physics.Closure.DefectCriticalSeamConcreteShiftReducer as Red
@@ -224,6 +225,85 @@ data FourPointCoreBlocker : Set where
   terminalPromotionBlocked :
     FourPointCoreBlocker
 
+data FourPointBoundaryObligation : Set where
+  hierarchyConsistencyKillsFourPointDefectObligation :
+    FourPointBoundaryObligation
+
+  quotientWellDefinednessObligation :
+    FourPointBoundaryObligation
+
+  evennessSymmetryObligation :
+    FourPointBoundaryObligation
+
+  polarizationJordanVonNeumannExternalObligation :
+    FourPointBoundaryObligation
+
+data FourPointBoundaryObligationStatus : Set where
+  obligationOpen :
+    FourPointBoundaryObligationStatus
+
+  concreteSupportOnly :
+    FourPointBoundaryObligationStatus
+
+  externalTheoremBoundary :
+    FourPointBoundaryObligationStatus
+
+data FourPointBoundaryObligationGate : Set where
+  missingHierarchyConsistencyKillsFourPointDefect :
+    FourPointBoundaryObligationGate
+
+  missingQuotientRepresentativeInvariance :
+    FourPointBoundaryObligationGate
+
+  missingEvennessAndSymmetryOnQuotient :
+    FourPointBoundaryObligationGate
+
+  requiresParallelogramLawBeforePolarization :
+    FourPointBoundaryObligationGate
+
+data HierarchyConsistencyKillsFourPointDefectAuthority : Set where
+
+hierarchyConsistencyKillsFourPointDefectAuthorityImpossibleHere :
+  HierarchyConsistencyKillsFourPointDefectAuthority →
+  ⊥
+hierarchyConsistencyKillsFourPointDefectAuthorityImpossibleHere ()
+
+data QuotientFourPointWellDefinednessAuthority : Set where
+
+quotientFourPointWellDefinednessAuthorityImpossibleHere :
+  QuotientFourPointWellDefinednessAuthority →
+  ⊥
+quotientFourPointWellDefinednessAuthorityImpossibleHere ()
+
+data DownstreamQuadraticPromotionAuthority : Set where
+
+downstreamQuadraticPromotionAuthorityImpossibleHere :
+  DownstreamQuadraticPromotionAuthority →
+  ⊥
+downstreamQuadraticPromotionAuthorityImpossibleHere ()
+
+obligationStatusFor :
+  FourPointBoundaryObligation → FourPointBoundaryObligationStatus
+obligationStatusFor hierarchyConsistencyKillsFourPointDefectObligation =
+  obligationOpen
+obligationStatusFor quotientWellDefinednessObligation =
+  obligationOpen
+obligationStatusFor evennessSymmetryObligation =
+  concreteSupportOnly
+obligationStatusFor polarizationJordanVonNeumannExternalObligation =
+  externalTheoremBoundary
+
+obligationGateFor :
+  FourPointBoundaryObligation → FourPointBoundaryObligationGate
+obligationGateFor hierarchyConsistencyKillsFourPointDefectObligation =
+  missingHierarchyConsistencyKillsFourPointDefect
+obligationGateFor quotientWellDefinednessObligation =
+  missingQuotientRepresentativeInvariance
+obligationGateFor evennessSymmetryObligation =
+  missingEvennessAndSymmetryOnQuotient
+obligationGateFor polarizationJordanVonNeumannExternalObligation =
+  requiresParallelogramLawBeforePolarization
+
 statusForStage : FourPointCoreStage → FourPointCoreStatus
 statusForStage abelianQuotientDefectSurface =
   interfaceNormalized
@@ -289,6 +369,84 @@ record FourPointCoreRow : Set where
 
 open FourPointCoreRow public
 
+record FourPointBoundaryObligationRow : Set where
+  field
+    obligation :
+      FourPointBoundaryObligation
+
+    obligationStatus :
+      FourPointBoundaryObligationStatus
+
+    obligationStatusIsCanonical :
+      obligationStatus ≡ obligationStatusFor obligation
+
+    obligationGate :
+      FourPointBoundaryObligationGate
+
+    obligationGateIsCanonical :
+      obligationGate ≡ obligationGateFor obligation
+
+    normalizedNeed :
+      String
+
+    proofSurface :
+      String
+
+    provedHere :
+      Bool
+
+    provedHereIsFalse :
+      provedHere ≡ false
+
+    promotesQuadraticForm :
+      Bool
+
+    promotesQuadraticFormIsFalse :
+      promotesQuadraticForm ≡ false
+
+    promotesTerminalClaim :
+      Bool
+
+    promotesTerminalClaimIsFalse :
+      promotesTerminalClaim ≡ false
+
+open FourPointBoundaryObligationRow public
+
+mkFourPointBoundaryObligationRow :
+  FourPointBoundaryObligation →
+  String →
+  String →
+  FourPointBoundaryObligationRow
+mkFourPointBoundaryObligationRow obligation normalizedNeed proofSurface =
+  record
+    { obligation =
+        obligation
+    ; obligationStatus =
+        obligationStatusFor obligation
+    ; obligationStatusIsCanonical =
+        refl
+    ; obligationGate =
+        obligationGateFor obligation
+    ; obligationGateIsCanonical =
+        refl
+    ; normalizedNeed =
+        normalizedNeed
+    ; proofSurface =
+        proofSurface
+    ; provedHere =
+        false
+    ; provedHereIsFalse =
+        refl
+    ; promotesQuadraticForm =
+        false
+    ; promotesQuadraticFormIsFalse =
+        refl
+    ; promotesTerminalClaim =
+        false
+    ; promotesTerminalClaimIsFalse =
+        refl
+    }
+
 mkFourPointCoreRow :
   FourPointCoreStage →
   String →
@@ -349,6 +507,27 @@ canonicalFourPointCoreRows =
     "all downstream consumers remain blocked until the broad four-point seam is proved"
   ∷ []
 
+canonicalFourPointBoundaryObligationLedger :
+  List FourPointBoundaryObligationRow
+canonicalFourPointBoundaryObligationLedger =
+  mkFourPointBoundaryObligationRow
+    hierarchyConsistencyKillsFourPointDefectObligation
+    "prove that general hierarchy consistency cancels the four-point defect Delta^2 Q on the admissibility quotient"
+    "open analytic theorem: HierarchyConsistencyKillsFourPointDefect"
+  ∷ mkFourPointBoundaryObligationRow
+    quotientWellDefinednessObligation
+    "prove Q and the four-point expression are invariant under admissible representative replacement"
+    "open quotient well-definedness boundary for arbitrary admissible carriers"
+  ∷ mkFourPointBoundaryObligationRow
+    evennessSymmetryObligation
+    "promote qNegSymmetric and the x+y/x-y symmetry from concrete identity-shift receipts to the full quotient surface"
+    "concrete support imported; broad quotient evenness/symmetry still unproved here"
+  ∷ mkFourPointBoundaryObligationRow
+    polarizationJordanVonNeumannExternalObligation
+    "apply polarization and Jordan-von-Neumann only after the parallelogram law is available"
+    "external mathematics boundary; not an internal quadratic-form promotion"
+  ∷ []
+
 ------------------------------------------------------------------------
 -- Canonical receipt.
 
@@ -356,6 +535,12 @@ record DefectFourPointParallelogramLawBoundary : Setω where
   field
     generalizationBoundary :
       Gen.DefectHierarchyParallelogramGeneralizationBoundary
+
+    generalizationBoundaryConcretePremisesChecked :
+      Gen.concreteIdentityShiftPremisesChecked generalizationBoundary ≡ true
+
+    generalizationBoundaryBroadParallelogramStillOpen :
+      Gen.broadParallelogramIdentityProved generalizationBoundary ≡ false
 
     criticalSeam :
       Seam.DefectQuadraticParallelogramCriticalSeam
@@ -395,6 +580,18 @@ record DefectFourPointParallelogramLawBoundary : Setω where
     rowCountMatchesRows :
       rowCount ≡ listLength rows
 
+    obligationLedger :
+      List FourPointBoundaryObligationRow
+
+    obligationLedgerCount :
+      Nat
+
+    obligationLedgerCountIs4 :
+      obligationLedgerCount ≡ 4
+
+    obligationLedgerCountMatches :
+      obligationLedgerCount ≡ listLength obligationLedger
+
     concreteIdentityShiftSupportChecked :
       Bool
 
@@ -412,6 +609,18 @@ record DefectFourPointParallelogramLawBoundary : Setω where
 
     hierarchyConsistencyKillsFourPointDefectProvedIsFalse :
       hierarchyConsistencyKillsFourPointDefectProved ≡ false
+
+    quotientWellDefinednessProved :
+      Bool
+
+    quotientWellDefinednessProvedIsFalse :
+      quotientWellDefinednessProved ≡ false
+
+    evennessSymmetryOnFullQuotientProved :
+      Bool
+
+    evennessSymmetryOnFullQuotientProvedIsFalse :
+      evennessSymmetryOnFullQuotientProved ≡ false
 
     fourPointParallelogramLawProved :
       Bool
@@ -436,6 +645,12 @@ record DefectFourPointParallelogramLawBoundary : Setω where
 
     jordanVonNeumannBoundaryAcceptedIsTrue :
       jordanVonNeumannBoundaryAccepted ≡ true
+
+    polarizationJordanVonNeumannApplied :
+      Bool
+
+    polarizationJordanVonNeumannAppliedIsFalse :
+      polarizationJordanVonNeumannApplied ≡ false
 
     quadraticFormEmergencePromoted :
       Bool
@@ -468,6 +683,18 @@ record DefectFourPointParallelogramLawBoundary : Setω where
     terminalPromotionIsFalse :
       terminalPromotion ≡ false
 
+    hierarchyConsistencyAuthorityImpossible :
+      HierarchyConsistencyKillsFourPointDefectAuthority →
+      ⊥
+
+    quotientWellDefinednessAuthorityImpossible :
+      QuotientFourPointWellDefinednessAuthority →
+      ⊥
+
+    downstreamQuadraticPromotionAuthorityImpossible :
+      DownstreamQuadraticPromotionAuthority →
+      ⊥
+
     decisionNotes :
       List String
 
@@ -479,6 +706,10 @@ canonicalDefectFourPointParallelogramLawBoundary =
   record
     { generalizationBoundary =
         Gen.canonicalDefectHierarchyParallelogramGeneralizationBoundary
+    ; generalizationBoundaryConcretePremisesChecked =
+        Gen.canonicalBoundaryConcretePremisesChecked
+    ; generalizationBoundaryBroadParallelogramStillOpen =
+        Gen.canonicalBoundaryBroadParallelogramStillOpen
     ; criticalSeam =
         Seam.canonicalDefectQuadraticParallelogramCriticalSeam
     ; identityDynamicsInstance =
@@ -503,6 +734,14 @@ canonicalDefectFourPointParallelogramLawBoundary =
         refl
     ; rowCountMatchesRows =
         refl
+    ; obligationLedger =
+        canonicalFourPointBoundaryObligationLedger
+    ; obligationLedgerCount =
+        4
+    ; obligationLedgerCountIs4 =
+        refl
+    ; obligationLedgerCountMatches =
+        refl
     ; concreteIdentityShiftSupportChecked =
         true
     ; concreteIdentityShiftSupportCheckedIsTrue =
@@ -515,6 +754,14 @@ canonicalDefectFourPointParallelogramLawBoundary =
         false
     ; hierarchyConsistencyKillsFourPointDefectProvedIsFalse =
         Obstruction.canonicalGeneralizationHierarchyNotGeneralized
+    ; quotientWellDefinednessProved =
+        false
+    ; quotientWellDefinednessProvedIsFalse =
+        refl
+    ; evennessSymmetryOnFullQuotientProved =
+        false
+    ; evennessSymmetryOnFullQuotientProvedIsFalse =
+        refl
     ; fourPointParallelogramLawProved =
         false
     ; fourPointParallelogramLawProvedIsFalse =
@@ -530,6 +777,10 @@ canonicalDefectFourPointParallelogramLawBoundary =
     ; jordanVonNeumannBoundaryAccepted =
         true
     ; jordanVonNeumannBoundaryAcceptedIsTrue =
+        refl
+    ; polarizationJordanVonNeumannApplied =
+        false
+    ; polarizationJordanVonNeumannAppliedIsFalse =
         refl
     ; quadraticFormEmergencePromoted =
         false
@@ -551,12 +802,20 @@ canonicalDefectFourPointParallelogramLawBoundary =
         false
     ; terminalPromotionIsFalse =
         Seam.canonicalCriticalSeamTerminalPromotionFalse
+    ; hierarchyConsistencyAuthorityImpossible =
+        hierarchyConsistencyKillsFourPointDefectAuthorityImpossibleHere
+    ; quotientWellDefinednessAuthorityImpossible =
+        quotientFourPointWellDefinednessAuthorityImpossibleHere
+    ; downstreamQuadraticPromotionAuthorityImpossible =
+        downstreamQuadraticPromotionAuthorityImpossibleHere
     ; decisionNotes =
         "This surface replaces differentiability/Gateaux wording with a quotient four-point identity."
         ∷ "The required identity is Q(x+y)+Q(x-y)=2Q(x)+2Q(y), equivalently Delta^2 Q = 0."
+        ∷ "The obligation ledger separates HierarchyConsistencyKillsFourPointDefect, quotient well-definedness, evenness/symmetry, and polarization/Jordan-von-Neumann."
         ∷ "The exact missing lemma is HierarchyConsistencyKillsFourPointDefect."
+        ∷ "Quotient representative invariance and full quotient evenness/symmetry are not promoted from the concrete identity/shift receipts."
         ∷ "Concrete identity/shift support is checked elsewhere but does not prove the arbitrary quotient theorem."
-        ∷ "Polarization and Jordan-von Neumann are accepted external mathematics boundaries only after the four-point law is proved."
+        ∷ "Polarization and Jordan-von Neumann are accepted external mathematics boundaries only after the four-point law is proved; they are not applied here."
         ∷ "Quadratic emergence, Standard Model, Clay, and terminal promotion remain false."
         ∷ []
     }
@@ -570,6 +829,18 @@ canonicalFourPointBoundaryRowsMatch :
   ≡
   listLength (rows canonicalDefectFourPointParallelogramLawBoundary)
 canonicalFourPointBoundaryRowsMatch = refl
+
+canonicalFourPointBoundaryObligationLedgerCountIs4 :
+  obligationLedgerCount canonicalDefectFourPointParallelogramLawBoundary
+  ≡ 4
+canonicalFourPointBoundaryObligationLedgerCountIs4 = refl
+
+canonicalFourPointBoundaryObligationLedgerMatches :
+  obligationLedgerCount canonicalDefectFourPointParallelogramLawBoundary
+  ≡
+  listLength
+    (obligationLedger canonicalDefectFourPointParallelogramLawBoundary)
+canonicalFourPointBoundaryObligationLedgerMatches = refl
 
 canonicalFourPointBoundaryTheoremName :
   theoremName canonicalDefectFourPointParallelogramLawBoundary
@@ -589,6 +860,18 @@ canonicalFourPointBoundaryMissingLemmaStillOpen :
   ≡ false
 canonicalFourPointBoundaryMissingLemmaStillOpen = refl
 
+canonicalFourPointBoundaryQuotientWellDefinednessStillOpen :
+  quotientWellDefinednessProved
+    canonicalDefectFourPointParallelogramLawBoundary
+  ≡ false
+canonicalFourPointBoundaryQuotientWellDefinednessStillOpen = refl
+
+canonicalFourPointBoundaryEvennessSymmetryStillOpen :
+  evennessSymmetryOnFullQuotientProved
+    canonicalDefectFourPointParallelogramLawBoundary
+  ≡ false
+canonicalFourPointBoundaryEvennessSymmetryStillOpen = refl
+
 canonicalFourPointBoundaryParallelogramStillOpen :
   fourPointParallelogramLawProved
     canonicalDefectFourPointParallelogramLawBoundary
@@ -600,6 +883,18 @@ canonicalFourPointBoundaryBroadSeamStillOpen :
     canonicalDefectFourPointParallelogramLawBoundary
   ≡ false
 canonicalFourPointBoundaryBroadSeamStillOpen = refl
+
+canonicalFourPointBoundaryPolarizationExternalNotApplied :
+  polarizationJordanVonNeumannApplied
+    canonicalDefectFourPointParallelogramLawBoundary
+  ≡ false
+canonicalFourPointBoundaryPolarizationExternalNotApplied = refl
+
+canonicalFourPointBoundaryQuadraticFormPromotionFalse :
+  quadraticFormEmergencePromoted
+    canonicalDefectFourPointParallelogramLawBoundary
+  ≡ false
+canonicalFourPointBoundaryQuadraticFormPromotionFalse = refl
 
 canonicalFourPointBoundaryStandardModelPromotionFalse :
   standardModelPromoted canonicalDefectFourPointParallelogramLawBoundary

@@ -5,12 +5,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary as Micro
 import DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula as RankOne
 import DASHI.Physics.Closure.NSSigmaNonRadialCommutatorLowerBoundTarget as Sigma
 import DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt as S163
+import DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary as ZeroMode
 
 ------------------------------------------------------------------------
 -- Lei-Ren-Tian radial zero-mode authority boundary.
@@ -28,14 +30,13 @@ import DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryR
 --   pressure bootstrap, does not prove NSCriticalResidualNonPositive, and
 --   does not promote Clay Navier-Stokes.
 --
--- The requested NSZeroModeSetClassificationBoundary module is not present
--- in this repository at this sprint.  This surface therefore consumes the
--- available boundary anchors:
+-- This surface consumes the available boundary anchors:
 --
 --   * NSMicrolocalDefectMassConstructionBoundary;
 --   * NSSprint163TopologicalAlignmentObstructionBoundaryReceipt;
 --   * NSSigmaNonRadialCommutatorLowerBoundTarget;
---   * NSRankOneProjectionCommutatorFormula.
+--   * NSRankOneProjectionCommutatorFormula;
+--   * NSZeroModeSetClassificationBoundary.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -162,6 +163,8 @@ data RadialZeroModeAuthoritySupportRow : Set where
     RadialZeroModeAuthoritySupportRow
   sprint163TopologicalAlignmentVocabularySupport :
     RadialZeroModeAuthoritySupportRow
+  zeroModeSetClassificationBoundarySupport :
+    RadialZeroModeAuthoritySupportRow
   microlocalDefectMassBoundarySupport :
     RadialZeroModeAuthoritySupportRow
   leiRenTianGreatCircleAuthoritySupport :
@@ -175,6 +178,7 @@ canonicalRadialZeroModeAuthoritySupportRows =
   rankOneDefectFormulaZeroModesSupport
   ∷ sigmaNonRadialTargetSupport
   ∷ sprint163TopologicalAlignmentVocabularySupport
+  ∷ zeroModeSetClassificationBoundarySupport
   ∷ microlocalDefectMassBoundarySupport
   ∷ leiRenTianGreatCircleAuthoritySupport
   ∷ radialZeroModeExclusionTargetSupport
@@ -184,13 +188,13 @@ radialZeroModeAuthoritySupportRowCount : Nat
 radialZeroModeAuthoritySupportRowCount =
   listLength canonicalRadialZeroModeAuthoritySupportRows
 
-radialZeroModeAuthoritySupportRowCountIs6 :
-  radialZeroModeAuthoritySupportRowCount ≡ 6
-radialZeroModeAuthoritySupportRowCountIs6 =
+radialZeroModeAuthoritySupportRowCountIs7 :
+  radialZeroModeAuthoritySupportRowCount ≡ 7
+radialZeroModeAuthoritySupportRowCountIs7 =
   refl
 
 data RadialZeroModeAuthorityBlocker : Set where
-  zeroModeSetClassificationModuleAbsent :
+  zeroModeSetClassificationBoundaryNotSufficient :
     RadialZeroModeAuthorityBlocker
   leiRenTianTheoremNotInternallyFormalized :
     RadialZeroModeAuthorityBlocker
@@ -216,7 +220,7 @@ data RadialZeroModeAuthorityBlocker : Set where
 canonicalRadialZeroModeAuthorityBlockers :
   List RadialZeroModeAuthorityBlocker
 canonicalRadialZeroModeAuthorityBlockers =
-  zeroModeSetClassificationModuleAbsent
+  zeroModeSetClassificationBoundaryNotSufficient
   ∷ leiRenTianTheoremNotInternallyFormalized
   ∷ missingRadialZeroModeNowhereDenseProof
   ∷ missingMicrolocalMeasureSupportTransfer
@@ -245,6 +249,8 @@ data RadialZeroModeAuthorityStatusRow : Set where
     RadialZeroModeAuthorityStatusRow
   radialZeroModeExclusionBoundaryTypedStatus :
     RadialZeroModeAuthorityStatusRow
+  zeroModeSetClassificationImportedStatus :
+    RadialZeroModeAuthorityStatusRow
   internalFormalizationFalseStatus :
     RadialZeroModeAuthorityStatusRow
   microlocalMeasureFalseStatus :
@@ -260,6 +266,7 @@ canonicalRadialZeroModeAuthorityStatusRows =
   leiRenTianSourceMetadataRecordedStatus
   ∷ greatCircleObstructionAuthorityBoundaryRecordedStatus
   ∷ radialZeroModeExclusionBoundaryTypedStatus
+  ∷ zeroModeSetClassificationImportedStatus
   ∷ internalFormalizationFalseStatus
   ∷ microlocalMeasureFalseStatus
   ∷ nsCriticalResidualFalseStatus
@@ -270,9 +277,9 @@ radialZeroModeAuthorityStatusRowCount : Nat
 radialZeroModeAuthorityStatusRowCount =
   listLength canonicalRadialZeroModeAuthorityStatusRows
 
-radialZeroModeAuthorityStatusRowCountIs7 :
-  radialZeroModeAuthorityStatusRowCount ≡ 7
-radialZeroModeAuthorityStatusRowCountIs7 =
+radialZeroModeAuthorityStatusRowCountIs8 :
+  radialZeroModeAuthorityStatusRowCount ≡ 8
+radialZeroModeAuthorityStatusRowCountIs8 =
   refl
 
 ------------------------------------------------------------------------
@@ -304,6 +311,10 @@ Sprint163TopologicalAlignmentAnchorImported =
 
 MicrolocalDefectMassBoundaryAnchorImported : Bool
 MicrolocalDefectMassBoundaryAnchorImported =
+  true
+
+ZeroModeSetClassificationAnchorImported : Bool
+ZeroModeSetClassificationAnchorImported =
   true
 
 LeiRenTianTheoremInternallyFormalized : Bool
@@ -381,6 +392,11 @@ microlocalDefectMassBoundaryAnchorImportedIsTrue :
 microlocalDefectMassBoundaryAnchorImportedIsTrue =
   refl
 
+zeroModeSetClassificationAnchorImportedIsTrue :
+  ZeroModeSetClassificationAnchorImported ≡ true
+zeroModeSetClassificationAnchorImportedIsTrue =
+  refl
+
 leiRenTianTheoremInternallyFormalizedIsFalse :
   LeiRenTianTheoremInternallyFormalized ≡ false
 leiRenTianTheoremInternallyFormalizedIsFalse =
@@ -432,11 +448,217 @@ terminalPromotionIsFalse =
   refl
 
 ------------------------------------------------------------------------
+-- Fail-closed authority policy.
+
+data RadialZeroModeAuthorityGate : Set where
+  gateExternalSourceRecorded :
+    RadialZeroModeAuthorityGate
+  gateZeroModeClassificationImported :
+    RadialZeroModeAuthorityGate
+  gateRadialAvoidanceGeometry :
+    RadialZeroModeAuthorityGate
+  gateDirectionSetSupportTransfer :
+    RadialZeroModeAuthorityGate
+  gateResidualClosure :
+    RadialZeroModeAuthorityGate
+  gateClayPromotion :
+    RadialZeroModeAuthorityGate
+
+canonicalRadialZeroModeAuthorityGates :
+  List RadialZeroModeAuthorityGate
+canonicalRadialZeroModeAuthorityGates =
+  gateExternalSourceRecorded
+  ∷ gateZeroModeClassificationImported
+  ∷ gateRadialAvoidanceGeometry
+  ∷ gateDirectionSetSupportTransfer
+  ∷ gateResidualClosure
+  ∷ gateClayPromotion
+  ∷ []
+
+radialZeroModeAuthorityGateCount : Nat
+radialZeroModeAuthorityGateCount =
+  listLength canonicalRadialZeroModeAuthorityGates
+
+radialZeroModeAuthorityGateCountIs6 :
+  radialZeroModeAuthorityGateCount ≡ 6
+radialZeroModeAuthorityGateCountIs6 =
+  refl
+
+data RadialZeroModeGateDisposition : Set where
+  gateRecordedAsExternalAuthorityOnly :
+    RadialZeroModeAuthorityGate →
+    RadialZeroModeGateDisposition
+  gateBlockedByMissingZeroModeClassificationUse :
+    RadialZeroModeAuthorityGate →
+    RadialZeroModeAuthorityBlocker →
+    RadialZeroModeGateDisposition
+  gateBlockedByMissingMeasureTransfer :
+    RadialZeroModeAuthorityGate →
+    RadialZeroModeAuthorityBlocker →
+    RadialZeroModeGateDisposition
+  gateBlockedByResidualAndMonotonicity :
+    RadialZeroModeAuthorityGate →
+    RadialZeroModeAuthorityBlocker →
+    RadialZeroModeAuthorityBlocker →
+    RadialZeroModeGateDisposition
+  gateClosedToClayPromotion :
+    RadialZeroModeAuthorityGate →
+    RadialZeroModeAuthorityBlocker →
+    RadialZeroModeGateDisposition
+
+radialZeroModeGateDisposition :
+  RadialZeroModeAuthorityGate →
+  RadialZeroModeGateDisposition
+radialZeroModeGateDisposition gateExternalSourceRecorded =
+  gateRecordedAsExternalAuthorityOnly gateExternalSourceRecorded
+radialZeroModeGateDisposition gateZeroModeClassificationImported =
+  gateBlockedByMissingZeroModeClassificationUse
+    gateZeroModeClassificationImported
+    zeroModeSetClassificationBoundaryNotSufficient
+radialZeroModeGateDisposition gateRadialAvoidanceGeometry =
+  gateBlockedByMissingZeroModeClassificationUse
+    gateRadialAvoidanceGeometry
+    missingRadialZeroModeNowhereDenseProof
+radialZeroModeGateDisposition gateDirectionSetSupportTransfer =
+  gateBlockedByMissingMeasureTransfer
+    gateDirectionSetSupportTransfer
+    missingMicrolocalMeasureSupportTransfer
+radialZeroModeGateDisposition gateResidualClosure =
+  gateBlockedByResidualAndMonotonicity
+    gateResidualClosure
+    missingNSCriticalResidualNonPositive
+    missingFullLocalDefectMonotonicity
+radialZeroModeGateDisposition gateClayPromotion =
+  gateClosedToClayPromotion
+    gateClayPromotion
+    clayNavierStokesPromotionClosed
+
+data RadialZeroModeAuthorityPromotion : Set where
+
+radialZeroModeAuthorityPromotionImpossibleHere :
+  RadialZeroModeAuthorityPromotion →
+  ⊥
+radialZeroModeAuthorityPromotionImpossibleHere ()
+
+record NSLeiRenTianRadialZeroModeFailClosedReceipt : Setω where
+  constructor nsLeiRenTianRadialZeroModeFailClosedReceipt
+  field
+    authorityGates :
+      List RadialZeroModeAuthorityGate
+    authorityGatesAreCanonical :
+      authorityGates ≡ canonicalRadialZeroModeAuthorityGates
+    authorityGateCount :
+      Nat
+    authorityGateCountIsCanonical :
+      authorityGateCount ≡ radialZeroModeAuthorityGateCount
+    authorityGateCountProof :
+      authorityGateCount ≡ 6
+
+    zeroModeClassificationAnchor :
+      ZeroMode.NSZeroModeSetClassificationBoundaryReceipt
+    zeroModeClassificationAnchorImported :
+      ZeroModeSetClassificationAnchorImported ≡ true
+    zeroModeClassificationBoundaryRecorded :
+      ZeroMode.NSZeroModeSetClassificationBoundaryRecorded ≡ true
+    zeroModeClassificationLRTAuthorityStillFalse :
+      ZeroMode.LeiRenTianAuthorityAccepted ≡ false
+    zeroModeClassificationClayStillFalse :
+      ZeroMode.clayNavierStokesPromoted ≡ false
+
+    externalGateDisposition :
+      radialZeroModeGateDisposition gateExternalSourceRecorded
+      ≡
+      gateRecordedAsExternalAuthorityOnly gateExternalSourceRecorded
+    classificationGateDisposition :
+      radialZeroModeGateDisposition gateZeroModeClassificationImported
+      ≡
+      gateBlockedByMissingZeroModeClassificationUse
+        gateZeroModeClassificationImported
+        zeroModeSetClassificationBoundaryNotSufficient
+    radialGeometryGateDisposition :
+      radialZeroModeGateDisposition gateRadialAvoidanceGeometry
+      ≡
+      gateBlockedByMissingZeroModeClassificationUse
+        gateRadialAvoidanceGeometry
+        missingRadialZeroModeNowhereDenseProof
+    measureTransferGateDisposition :
+      radialZeroModeGateDisposition gateDirectionSetSupportTransfer
+      ≡
+      gateBlockedByMissingMeasureTransfer
+        gateDirectionSetSupportTransfer
+        missingMicrolocalMeasureSupportTransfer
+    residualGateDisposition :
+      radialZeroModeGateDisposition gateResidualClosure
+      ≡
+      gateBlockedByResidualAndMonotonicity
+        gateResidualClosure
+        missingNSCriticalResidualNonPositive
+        missingFullLocalDefectMonotonicity
+    clayGateDisposition :
+      radialZeroModeGateDisposition gateClayPromotion
+      ≡
+      gateClosedToClayPromotion
+        gateClayPromotion
+        clayNavierStokesPromotionClosed
+
+    internalFormalizationStillFalse :
+      LeiRenTianTheoremInternallyFormalized ≡ false
+    radialZeroModeExclusionStillBoundaryOnly :
+      RadialZeroModeInternallyExcluded ≡ false
+    microlocalDefectMassStillFalse :
+      MicrolocalDefectMassConstructed ≡ false
+    nsCriticalResidualStillFalse :
+      NSCriticalResidualNonPositive ≡ false
+    fullLocalDefectMonotonicityStillFalse :
+      FullLocalDefectMonotonicity ≡ false
+    mechanismExhaustionStillFalse :
+      MechanismExhaustionForFullClayNS ≡ false
+    clayNavierStokesPromotionStillFalse :
+      clayNavierStokesPromoted ≡ false
+    terminalPromotionStillFalse :
+      terminalPromotion ≡ false
+    promotionWitnesses :
+      List RadialZeroModeAuthorityPromotion
+    promotionWitnessesAreEmpty :
+      promotionWitnesses ≡ []
+
+open NSLeiRenTianRadialZeroModeFailClosedReceipt public
+
+canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt :
+  NSLeiRenTianRadialZeroModeFailClosedReceipt
+canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt =
+  nsLeiRenTianRadialZeroModeFailClosedReceipt
+    canonicalRadialZeroModeAuthorityGates
+    refl
+    radialZeroModeAuthorityGateCount
+    refl
+    radialZeroModeAuthorityGateCountIs6
+    ZeroMode.canonicalNSZeroModeSetClassificationBoundaryReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    []
+    refl
+
+------------------------------------------------------------------------
 -- ORCSLPGF.
 
 organizationString : String
 organizationString =
-  "O: NSLeiRenTianRadialZeroModeAuthorityBoundary is worker lane 3's external-authority boundary for radial NS zero modes."
+  "O: NSLeiRenTianRadialZeroModeAuthorityBoundary is worker lane 1's external-authority boundary for radial NS zero modes."
 
 requirementString : String
 requirementString =
@@ -444,11 +666,11 @@ requirementString =
 
 codeArtifactString : String
 codeArtifactString =
-  "C: The module exports source metadata, zero-mode carriers, radial exclusion boundary target, support/status/blocker rows, booleans, and equality receipts."
+  "C: The module exports source metadata, zero-mode carriers, radial exclusion boundary target, support/status/blocker rows, fail-closed gates, booleans, and equality receipts."
 
 stateString : String
 stateString =
-  "S: Rank-one zero-mode algebra, Sprint163 topology vocabulary, Sigma target, and microlocal defect-mass boundary are consumed; internal proof and microlocal measure construction remain open."
+  "S: Rank-one zero-mode algebra, zero-mode classification, Sprint163 topology vocabulary, Sigma target, and microlocal defect-mass boundary are consumed; internal proof and microlocal measure construction remain open."
 
 latticeString : String
 latticeString =
@@ -559,6 +781,14 @@ record NSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt : Setω where
       Sprint163TopologicalAlignmentAnchorImported ≡ true
     microlocalBoundaryAnchorImported :
       MicrolocalDefectMassBoundaryAnchorImported ≡ true
+    zeroModeClassificationAnchorImported :
+      ZeroModeSetClassificationAnchorImported ≡ true
+    zeroModeClassificationFailClosedReceipt :
+      NSLeiRenTianRadialZeroModeFailClosedReceipt
+    zeroModeClassificationFailClosedReceiptIsCanonical :
+      zeroModeClassificationFailClosedReceipt
+      ≡
+      canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt
 
     rankOneStatusRows :
       List RankOne.RankOneProjectionCommutatorStatus
@@ -614,7 +844,7 @@ record NSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt : Setω where
     supportRowCountIsCanonical :
       supportRowCount ≡ radialZeroModeAuthoritySupportRowCount
     supportRowCountProof :
-      supportRowCount ≡ 6
+      supportRowCount ≡ 7
 
     blockerRows :
       List RadialZeroModeAuthorityBlocker
@@ -636,7 +866,7 @@ record NSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt : Setω where
     statusRowCountIsCanonical :
       statusRowCount ≡ radialZeroModeAuthorityStatusRowCount
     statusRowCountProof :
-      statusRowCount ≡ 7
+      statusRowCount ≡ 8
 
     leiRenTianTheoremInternallyFormalizedFalse :
       LeiRenTianTheoremInternallyFormalized ≡ false
@@ -687,6 +917,8 @@ canonicalNSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt =
     refl
     refl
     refl
+    canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt
+    refl
     RankOne.canonicalRankOneProjectionCommutatorStatus
     refl
     refl
@@ -709,7 +941,7 @@ canonicalNSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt =
     refl
     radialZeroModeAuthoritySupportRowCount
     refl
-    radialZeroModeAuthoritySupportRowCountIs6
+    radialZeroModeAuthoritySupportRowCountIs7
     canonicalRadialZeroModeAuthorityBlockers
     refl
     radialZeroModeAuthorityBlockerCount
@@ -719,7 +951,7 @@ canonicalNSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt =
     refl
     radialZeroModeAuthorityStatusRowCount
     refl
-    radialZeroModeAuthorityStatusRowCountIs7
+    radialZeroModeAuthorityStatusRowCountIs8
     refl
     refl
     refl

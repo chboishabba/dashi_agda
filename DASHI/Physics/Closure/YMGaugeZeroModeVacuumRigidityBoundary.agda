@@ -23,6 +23,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.FiniteGaugeHodgeAdjointCompatibility as Adj
@@ -994,4 +995,266 @@ canonicalYMGaugeZeroModeVacuumRigidityNoTerminalPromotion :
   ≡
   false
 canonicalYMGaugeZeroModeVacuumRigidityNoTerminalPromotion =
+  refl
+
+------------------------------------------------------------------------
+-- Fail-closed substantial receipt.
+
+data YMGaugeZeroModeVacuumRigidityPromotionToken : Set where
+
+yMGaugeZeroModeVacuumRigidityPromotionTokenImpossibleHere :
+  YMGaugeZeroModeVacuumRigidityPromotionToken →
+  ⊥
+yMGaugeZeroModeVacuumRigidityPromotionTokenImpossibleHere ()
+
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedFindings :
+  List String
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedFindings =
+  "Typed target only: gauge-compatible zero modes, flat-connection sector, vacuum-modulo-gauge sector, and non-vacuum topological boundary are named for a finite contractible BT/tree carrier"
+  ∷ "Fail-closed first blocker: the finite gauge quotient carrier is still missing"
+  ∷ "Rigidity blocker: no flat-connection-to-vacuum-modulo-gauge proof is constructed here"
+  ∷ "Topological blocker: non-vacuum charge sectors require separate classification and uniformly positive energy before zero-energy exclusion"
+  ∷ "Hamiltonian input is consumed through its fail-closed domination boundary; domination is not imported as proof"
+  ∷ "OS/reflection positivity, continuum no-pollution transfer, finite YM mass-gap, Clay Yang-Mills, and terminal promotion remain false"
+  ∷ []
+
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedNonPromotions :
+  List YMGaugeZeroModeVacuumRigidityBlocker
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedNonPromotions =
+  missingFiniteGaugeQuotientCarrier
+  ∷ missingFlatConnectionToVacuumModuloGaugeProof
+  ∷ missingTopologicalSectorClassification
+  ∷ missingPositiveEnergyForNonVacuumTopologicalSectors
+  ∷ missingHamiltonianDominatesFiniteHodgeDefect
+  ∷ missingReflectionPositivityOSOnGaugeQuotient
+  ∷ missingContinuumTransferNoSpectralPollution
+  ∷ missingClayYangMillsAuthorityToken
+  ∷ []
+
+record YMGaugeZeroModeVacuumRigidityFailClosedReceipt : Setω where
+  field
+    theoremBoundary :
+      YMGaugeZeroModeVacuumRigidityBoundary
+
+    theoremBoundaryIsCanonical :
+      theoremBoundary
+      ≡
+      canonicalYMGaugeZeroModeVacuumRigidityBoundary
+
+    consumedHamiltonianFailClosedReceipt :
+      Ham.YMHamiltonianDominationFailClosedReceipt
+
+    consumedHamiltonianFailClosedReceiptIsCanonical :
+      consumedHamiltonianFailClosedReceipt
+      ≡
+      Ham.canonicalYMHamiltonianDominationFailClosedReceipt
+
+    target :
+      ZeroModeVacuumRigidityTarget
+
+    targetIsCanonical :
+      target ≡ canonicalZeroModeVacuumRigidityTarget
+
+    nonVacuumExclusionTarget :
+      NonVacuumZeroEnergyExclusionTarget
+
+    nonVacuumExclusionTargetIsCanonical :
+      nonVacuumExclusionTarget
+      ≡
+      canonicalNonVacuumZeroEnergyExclusionTarget
+
+    targetRecorded :
+      zeroModeVacuumRigidityTargetRecordedField theoremBoundary ≡ true
+
+    theoremStillMissing :
+      zeroModeVacuumRigidityProvedField theoremBoundary ≡ false
+
+    nonVacuumZeroEnergyExclusionStillMissing :
+      nonVacuumZeroEnergyModesExcludedField theoremBoundary ≡ false
+
+    finiteGaugeQuotientStillMissing :
+      finiteGaugeQuotientCarrierConstructedField theoremBoundary ≡ false
+
+    flatToVacuumProofStillMissing :
+      flatConnectionToVacuumModuloGaugeProvedField theoremBoundary ≡ false
+
+    topologicalClassificationStillMissing :
+      topologicalSectorClassificationProvedField theoremBoundary ≡ false
+
+    positiveTopologicalEnergyStillMissing :
+      positiveEnergyForNonVacuumTopologicalSectorsProvedField theoremBoundary
+      ≡
+      false
+
+    hamiltonianDominationStillMissing :
+      hamiltonianDominationImportedAsProofField theoremBoundary ≡ false
+
+    hamiltonianFailClosedTheoremStillMissing :
+      Ham.theoremStillMissing consumedHamiltonianFailClosedReceipt
+      ≡
+      refl
+
+    osOnGaugeQuotientStillMissing :
+      reflectionPositivityOSOnGaugeQuotientProvedField theoremBoundary
+      ≡
+      false
+
+    continuumNoPollutionStillMissing :
+      continuumTransferNoSpectralPollutionProvedField theoremBoundary
+      ≡
+      false
+
+    finiteYMMassGapStillFalse :
+      finiteYMMassGapPromotedField theoremBoundary ≡ false
+
+    clayPromotionStillFalse :
+      clayYangMillsPromotedField theoremBoundary ≡ false
+
+    terminalPromotionStillFalse :
+      terminalPromotionField theoremBoundary ≡ false
+
+    blockerLedger :
+      List YMGaugeZeroModeVacuumRigidityBlocker
+
+    blockerLedgerIsCanonical :
+      blockerLedger ≡ canonicalYMGaugeZeroModeVacuumRigidityBlockers
+
+    exactFailClosedNonPromotions :
+      List YMGaugeZeroModeVacuumRigidityBlocker
+
+    exactFailClosedNonPromotionsAreCanonical :
+      exactFailClosedNonPromotions
+      ≡
+      canonicalYMGaugeZeroModeVacuumRigidityFailClosedNonPromotions
+
+    firstFailClosedBlocker :
+      YMGaugeZeroModeVacuumRigidityBlocker
+
+    firstFailClosedBlockerIsFiniteGaugeQuotient :
+      firstFailClosedBlocker ≡ missingFiniteGaugeQuotientCarrier
+
+    rigidityFailClosedBlocker :
+      YMGaugeZeroModeVacuumRigidityBlocker
+
+    rigidityFailClosedBlockerIsFlatToVacuum :
+      rigidityFailClosedBlocker
+      ≡
+      missingFlatConnectionToVacuumModuloGaugeProof
+
+    noPromotionTokenEliminator :
+      YMGaugeZeroModeVacuumRigidityPromotionToken →
+      ⊥
+
+    findings :
+      List String
+
+    findingsAreCanonical :
+      findings
+      ≡
+      canonicalYMGaugeZeroModeVacuumRigidityFailClosedFindings
+
+open YMGaugeZeroModeVacuumRigidityFailClosedReceipt public
+
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt :
+  YMGaugeZeroModeVacuumRigidityFailClosedReceipt
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt =
+  record
+    { theoremBoundary =
+        canonicalYMGaugeZeroModeVacuumRigidityBoundary
+    ; theoremBoundaryIsCanonical =
+        refl
+    ; consumedHamiltonianFailClosedReceipt =
+        Ham.canonicalYMHamiltonianDominationFailClosedReceipt
+    ; consumedHamiltonianFailClosedReceiptIsCanonical =
+        refl
+    ; target =
+        canonicalZeroModeVacuumRigidityTarget
+    ; targetIsCanonical =
+        refl
+    ; nonVacuumExclusionTarget =
+        canonicalNonVacuumZeroEnergyExclusionTarget
+    ; nonVacuumExclusionTargetIsCanonical =
+        refl
+    ; targetRecorded =
+        refl
+    ; theoremStillMissing =
+        refl
+    ; nonVacuumZeroEnergyExclusionStillMissing =
+        refl
+    ; finiteGaugeQuotientStillMissing =
+        refl
+    ; flatToVacuumProofStillMissing =
+        refl
+    ; topologicalClassificationStillMissing =
+        refl
+    ; positiveTopologicalEnergyStillMissing =
+        refl
+    ; hamiltonianDominationStillMissing =
+        refl
+    ; hamiltonianFailClosedTheoremStillMissing =
+        refl
+    ; osOnGaugeQuotientStillMissing =
+        refl
+    ; continuumNoPollutionStillMissing =
+        refl
+    ; finiteYMMassGapStillFalse =
+        refl
+    ; clayPromotionStillFalse =
+        refl
+    ; terminalPromotionStillFalse =
+        refl
+    ; blockerLedger =
+        canonicalYMGaugeZeroModeVacuumRigidityBlockers
+    ; blockerLedgerIsCanonical =
+        refl
+    ; exactFailClosedNonPromotions =
+        canonicalYMGaugeZeroModeVacuumRigidityFailClosedNonPromotions
+    ; exactFailClosedNonPromotionsAreCanonical =
+        refl
+    ; firstFailClosedBlocker =
+        missingFiniteGaugeQuotientCarrier
+    ; firstFailClosedBlockerIsFiniteGaugeQuotient =
+        refl
+    ; rigidityFailClosedBlocker =
+        missingFlatConnectionToVacuumModuloGaugeProof
+    ; rigidityFailClosedBlockerIsFlatToVacuum =
+        refl
+    ; noPromotionTokenEliminator =
+        yMGaugeZeroModeVacuumRigidityPromotionTokenImpossibleHere
+    ; findings =
+        canonicalYMGaugeZeroModeVacuumRigidityFailClosedFindings
+    ; findingsAreCanonical =
+        refl
+    }
+
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceiptKeepsTheoremFalse :
+  theoremStillMissing
+    canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt
+  ≡
+  refl
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceiptKeepsTheoremFalse =
+  refl
+
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceiptKeepsExclusionFalse :
+  nonVacuumZeroEnergyExclusionStillMissing
+    canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt
+  ≡
+  refl
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceiptKeepsExclusionFalse =
+  refl
+
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceiptKeepsClayFalse :
+  clayPromotionStillFalse
+    canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt
+  ≡
+  refl
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceiptKeepsClayFalse =
+  refl
+
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceiptKeepsTerminalFalse :
+  terminalPromotionStillFalse
+    canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt
+  ≡
+  refl
+canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceiptKeepsTerminalFalse =
   refl

@@ -157,7 +157,7 @@ data YMHamiltonianQuotientGapBlocker : Set where
   missingDenseSelfAdjointHamiltonianDomain :
     YMHamiltonianQuotientGapBlocker
 
-  missingUniformKappaInfimumPositive :
+  missingUniformKappaInfimumPositiveTheoremDespiteRecordedTarget :
     YMHamiltonianQuotientGapBlocker
 
   missingSpectralGapLiftThroughSelfAdjointQuotient :
@@ -176,7 +176,7 @@ canonicalYMHamiltonianQuotientGapBlockers =
   ∷ missingGaugeQuotientHilbertCarrier
   ∷ missingReflectionPositivityOnGaugeQuotient
   ∷ missingDenseSelfAdjointHamiltonianDomain
-  ∷ missingUniformKappaInfimumPositive
+  ∷ missingUniformKappaInfimumPositiveTheoremDespiteRecordedTarget
   ∷ missingSpectralGapLiftThroughSelfAdjointQuotient
   ∷ missingContinuumTransferFromQuotientGap
   ∷ missingClayYangMillsAuthorityToken
@@ -344,6 +344,153 @@ terminalPromotionIsFalse =
   refl
 
 ------------------------------------------------------------------------
+-- Narrow obligation record for the remaining YM analytic gap.
+--
+-- Finite kappa support is available as a recorded upstream target.  This is
+-- deliberately weaker than proving the uniform positive infimum theorem or
+-- lifting that support through the self-adjoint gauge quotient.
+
+record YMSelfAdjointHamiltonianQuotientGapObligation : Set where
+  field
+    transferMatrixQuotientObligation :
+      TransferMatrixQuotientTarget
+
+    transferMatrixQuotientObligationIsCanonical :
+      transferMatrixQuotientObligation
+      ≡
+      canonicalTransferMatrixQuotientTarget
+
+    osCompatibilityObligationRecorded :
+      Bool
+
+    osCompatibilityObligationRecordedIsTrue :
+      osCompatibilityObligationRecorded ≡ true
+
+    gaugeQuotientObligation :
+      GaugeQuotientHilbertCarrierTarget
+
+    gaugeQuotientObligationIsCanonical :
+      gaugeQuotientObligation
+      ≡
+      canonicalGaugeQuotientHilbertCarrierTarget
+
+    selfAdjointDomainObligation :
+      SelfAdjointHamiltonianDomainTarget
+
+    selfAdjointDomainObligationIsCanonical :
+      selfAdjointDomainObligation
+      ≡
+      canonicalSelfAdjointHamiltonianDomainTarget
+
+    spectralLiftObligation :
+      SpectralGapLiftTarget
+
+    spectralLiftObligationIsCanonical :
+      spectralLiftObligation
+      ≡
+      canonicalSpectralGapLiftTarget
+
+    continuumTransferObligation :
+      ContinuumTransferTarget
+
+    continuumTransferObligationIsCanonical :
+      continuumTransferObligation
+      ≡
+      canonicalContinuumTransferTarget
+
+    finiteKappaSupportAvailable :
+      Bool
+
+    finiteKappaSupportAvailableIsTrue :
+      finiteKappaSupportAvailable ≡ true
+
+    finiteKappaTargetRecordedNotUniformTheorem :
+      Kappa.DepthIndexedKappaFamilyTargetRecorded ≡ true
+
+    uniformKappaInfimumTheoremStillUnproved :
+      Kappa.UniformInfimumKappaPositiveProved ≡ false
+
+    selfAdjointHamiltonianConstructed :
+      Bool
+
+    selfAdjointHamiltonianConstructedIsFalse :
+      selfAdjointHamiltonianConstructed ≡ false
+
+    spectralGapLifted :
+      Bool
+
+    spectralGapLiftedIsFalse :
+      spectralGapLifted ≡ false
+
+    continuumTransfer :
+      Bool
+
+    continuumTransferIsFalse :
+      continuumTransfer ≡ false
+
+    clayYangMillsPromotedObligation :
+      Bool
+
+    clayYangMillsPromotedObligationIsFalse :
+      clayYangMillsPromotedObligation ≡ false
+
+canonicalYMSelfAdjointHamiltonianQuotientGapObligation :
+  YMSelfAdjointHamiltonianQuotientGapObligation
+canonicalYMSelfAdjointHamiltonianQuotientGapObligation =
+  record
+    { transferMatrixQuotientObligation =
+        canonicalTransferMatrixQuotientTarget
+    ; transferMatrixQuotientObligationIsCanonical =
+        refl
+    ; osCompatibilityObligationRecorded =
+        true
+    ; osCompatibilityObligationRecordedIsTrue =
+        refl
+    ; gaugeQuotientObligation =
+        canonicalGaugeQuotientHilbertCarrierTarget
+    ; gaugeQuotientObligationIsCanonical =
+        refl
+    ; selfAdjointDomainObligation =
+        canonicalSelfAdjointHamiltonianDomainTarget
+    ; selfAdjointDomainObligationIsCanonical =
+        refl
+    ; spectralLiftObligation =
+        canonicalSpectralGapLiftTarget
+    ; spectralLiftObligationIsCanonical =
+        refl
+    ; continuumTransferObligation =
+        canonicalContinuumTransferTarget
+    ; continuumTransferObligationIsCanonical =
+        refl
+    ; finiteKappaSupportAvailable =
+        true
+    ; finiteKappaSupportAvailableIsTrue =
+        refl
+    ; finiteKappaTargetRecordedNotUniformTheorem =
+        Kappa.depthIndexedKappaFamilyTargetRecordedIsTrue
+    ; uniformKappaInfimumTheoremStillUnproved =
+        Kappa.uniformInfimumKappaPositiveProvedIsFalse
+    ; selfAdjointHamiltonianConstructed =
+        false
+    ; selfAdjointHamiltonianConstructedIsFalse =
+        refl
+    ; spectralGapLifted =
+        false
+    ; spectralGapLiftedIsFalse =
+        refl
+    ; continuumTransfer =
+        false
+    ; continuumTransferIsFalse =
+        refl
+    ; clayYangMillsPromotedObligation =
+        false
+    ; clayYangMillsPromotedObligationIsFalse =
+        refl
+    }
+
+open YMSelfAdjointHamiltonianQuotientGapObligation public
+
+------------------------------------------------------------------------
 -- Boundary receipt.
 
 record YMSelfAdjointHamiltonianQuotientGapBoundary : Setω where
@@ -509,6 +656,14 @@ record YMSelfAdjointHamiltonianQuotientGapBoundary : Setω where
     kappaUniformInfimumStillFalse :
       Kappa.UniformInfimumKappaPositiveProved ≡ false
 
+    analyticGapObligation :
+      YMSelfAdjointHamiltonianQuotientGapObligation
+
+    analyticGapObligationIsCanonical :
+      analyticGapObligation
+      ≡
+      canonicalYMSelfAdjointHamiltonianQuotientGapObligation
+
     exactFirstBlocker :
       YMHamiltonianQuotientGapBlocker
 
@@ -520,10 +675,10 @@ record YMSelfAdjointHamiltonianQuotientGapBoundary : Setω where
     exactKappaBlocker :
       YMHamiltonianQuotientGapBlocker
 
-    exactKappaBlockerIsUniformKappaInfimum :
+    exactKappaBlockerIsUniformKappaInfimumTheoremUnproved :
       exactKappaBlocker
       ≡
-      missingUniformKappaInfimumPositive
+      missingUniformKappaInfimumPositiveTheoremDespiteRecordedTarget
 
     stageCount :
       Nat
@@ -690,13 +845,17 @@ canonicalYMSelfAdjointHamiltonianQuotientGapBoundary =
         Kappa.depthIndexedKappaFamilyTargetRecordedIsTrue
     ; kappaUniformInfimumStillFalse =
         Kappa.uniformInfimumKappaPositiveProvedIsFalse
+    ; analyticGapObligation =
+        canonicalYMSelfAdjointHamiltonianQuotientGapObligation
+    ; analyticGapObligationIsCanonical =
+        refl
     ; exactFirstBlocker =
         missingDenseSelfAdjointHamiltonianDomain
     ; exactFirstBlockerIsDenseSelfAdjointHamiltonianDomain =
         refl
     ; exactKappaBlocker =
-        missingUniformKappaInfimumPositive
-    ; exactKappaBlockerIsUniformKappaInfimum =
+        missingUniformKappaInfimumPositiveTheoremDespiteRecordedTarget
+    ; exactKappaBlockerIsUniformKappaInfimumTheoremUnproved =
         refl
     ; stageCount =
         7
@@ -748,7 +907,7 @@ canonicalYMSelfAdjointHamiltonianQuotientGapBoundary =
         ∷ "The gauge-quotient Hilbert carrier remains a target: gauge equivalence classes, positive inner product, completion, and quotient domain are not constructed here"
         ∷ "OS compatibility must be proved after quotienting, not only on a finite unquotiented transfer-matrix receipt"
         ∷ "The first local analytic blocker here is missingDenseSelfAdjointHamiltonianDomain"
-        ∷ "The finite selected kappa route is recorded, but the uniform positive infimum remains false upstream"
+        ∷ "The finite selected/depth-indexed kappa target is recorded and finiteKappaSupportAvailable=true, but the uniform positive infimum theorem remains false upstream"
         ∷ "A spectral gap lift requires the self-adjoint quotient Hamiltonian plus the uniform kappa/finite-building lower bound"
         ∷ "Continuum transfer, Clay Yang-Mills, and terminal promotion remain false"
         ∷ []
@@ -779,8 +938,53 @@ canonicalYMHamiltonianQuotientGapFirstBlocker =
 canonicalYMHamiltonianQuotientGapKappaBlocker :
   exactKappaBlocker canonicalYMSelfAdjointHamiltonianQuotientGapBoundary
   ≡
-  missingUniformKappaInfimumPositive
+  missingUniformKappaInfimumPositiveTheoremDespiteRecordedTarget
 canonicalYMHamiltonianQuotientGapKappaBlocker =
+  refl
+
+canonicalYMHamiltonianQuotientGapFiniteKappaSupportAvailable :
+  finiteKappaSupportAvailable
+    (analyticGapObligation
+      canonicalYMSelfAdjointHamiltonianQuotientGapBoundary)
+  ≡
+  true
+canonicalYMHamiltonianQuotientGapFiniteKappaSupportAvailable =
+  refl
+
+canonicalYMHamiltonianQuotientGapObligationSelfAdjointFalse :
+  selfAdjointHamiltonianConstructed
+    (analyticGapObligation
+      canonicalYMSelfAdjointHamiltonianQuotientGapBoundary)
+  ≡
+  false
+canonicalYMHamiltonianQuotientGapObligationSelfAdjointFalse =
+  refl
+
+canonicalYMHamiltonianQuotientGapObligationSpectralLiftFalse :
+  spectralGapLifted
+    (analyticGapObligation
+      canonicalYMSelfAdjointHamiltonianQuotientGapBoundary)
+  ≡
+  false
+canonicalYMHamiltonianQuotientGapObligationSpectralLiftFalse =
+  refl
+
+canonicalYMHamiltonianQuotientGapObligationContinuumTransferFalse :
+  continuumTransfer
+    (analyticGapObligation
+      canonicalYMSelfAdjointHamiltonianQuotientGapBoundary)
+  ≡
+  false
+canonicalYMHamiltonianQuotientGapObligationContinuumTransferFalse =
+  refl
+
+canonicalYMHamiltonianQuotientGapObligationClayYMFalse :
+  clayYangMillsPromotedObligation
+    (analyticGapObligation
+      canonicalYMSelfAdjointHamiltonianQuotientGapBoundary)
+  ≡
+  false
+canonicalYMHamiltonianQuotientGapObligationClayYMFalse =
   refl
 
 canonicalYMHamiltonianQuotientGapFiniteSourceAvailable :

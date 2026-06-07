@@ -142,9 +142,13 @@ data AverageWitnessKind : Set where
 data AverageSupportStatus : Set where
   finiteFourSampleAverageRecorded :
     AverageSupportStatus
+  transverseAnnulusHalfAverageTargetRecorded :
+    AverageSupportStatus
   halfMinusErrorInequalityRecordedAsTarget :
     AverageSupportStatus
   rankOneFormulaConsumedForHalfTransfer :
+    AverageSupportStatus
+  piOverEightCommutatorBoundaryRecorded :
     AverageSupportStatus
   analyticAnnularIntegralStillFalse :
     AverageSupportStatus
@@ -161,13 +165,56 @@ canonicalAverageSupportStatuses :
   List AverageSupportStatus
 canonicalAverageSupportStatuses =
   finiteFourSampleAverageRecorded
+  ∷ transverseAnnulusHalfAverageTargetRecorded
   ∷ halfMinusErrorInequalityRecordedAsTarget
   ∷ rankOneFormulaConsumedForHalfTransfer
+  ∷ piOverEightCommutatorBoundaryRecorded
   ∷ analyticAnnularIntegralStillFalse
   ∷ sanniAuthorityStillFalse
   ∷ microlocalMassStillFalse
   ∷ pressureGainStillFalse
   ∷ clayPromotionStillFalse
+  ∷ []
+
+data TransverseAnnulusBoundaryRow : Set where
+  transverseAnnulusHalfAverageTargetRow :
+    TransverseAnnulusBoundaryRow
+  rankOneHalfTransferToCommutatorMassRow :
+    TransverseAnnulusBoundaryRow
+  symbolicPiOverEightBoundaryRow :
+    TransverseAnnulusBoundaryRow
+  finiteOnlyNoAnalyticIntegralPromotionRow :
+    TransverseAnnulusBoundaryRow
+
+canonicalTransverseAnnulusBoundaryRows :
+  List TransverseAnnulusBoundaryRow
+canonicalTransverseAnnulusBoundaryRows =
+  transverseAnnulusHalfAverageTargetRow
+  ∷ rankOneHalfTransferToCommutatorMassRow
+  ∷ symbolicPiOverEightBoundaryRow
+  ∷ finiteOnlyNoAnalyticIntegralPromotionRow
+  ∷ []
+
+data NonRadialFalseGate : Set where
+  sanniAuthorityFalseGate :
+    NonRadialFalseGate
+  analyticIntegralFalseGate :
+    NonRadialFalseGate
+  microlocalMassFalseGate :
+    NonRadialFalseGate
+  pressureBootstrapFalseGate :
+    NonRadialFalseGate
+  clayPromotionFalseGate :
+    NonRadialFalseGate
+
+canonicalNonRadialFalseGates :
+  List NonRadialFalseGate
+canonicalNonRadialFalseGates =
+  sanniAuthorityFalseGate
+  ∷ analyticIntegralFalseGate
+  ∷ microlocalMassFalseGate
+  ∷ pressureBootstrapFalseGate
+  ∷ clayPromotionFalseGate
   ∷ []
 
 data NonRadialAverageBlocker : Set where
@@ -217,6 +264,22 @@ commutatorHalfTransferText : String
 commutatorHalfTransferText =
   "Rank-one formula transfers non-radial mass to commutator mass with a factor one-half"
 
+transverseAnnulusHalfAverageTargetText : String
+transverseAnnulusHalfAverageTargetText =
+  "transverse Sigma annulus target records average sin^2(2 alpha) >= 1/2 minus analytic error"
+
+commutatorMassPiOverEightBoundaryText : String
+commutatorMassPiOverEightBoundaryText =
+  "symbolic c0 boundary: half-transfer applied to the annular pi/4 target gives c0 = pi/8"
+
+c0PiOverEightSymbolicName : String
+c0PiOverEightSymbolicName =
+  "c0 = pi/8"
+
+c0PiOverEightRatioBoundary : Ratio
+c0PiOverEightRatioBoundary =
+  ratio 1 8
+
 finiteFourSampleText : String
 finiteFourSampleText =
   "four equally spaced half-angle samples 0,1,0,1 have average 2/4 = 1/2"
@@ -233,8 +296,16 @@ HalfMinusErrorTargetRecorded : Bool
 HalfMinusErrorTargetRecorded =
   true
 
+TransverseAnnulusHalfAverageTargetRecorded : Bool
+TransverseAnnulusHalfAverageTargetRecorded =
+  true
+
 CommutatorMassHalfTransferTargetRecorded : Bool
 CommutatorMassHalfTransferTargetRecorded =
+  true
+
+CommutatorMassPiOverEightBoundaryRecorded : Bool
+CommutatorMassPiOverEightBoundaryRecorded =
   true
 
 RankOneProjectionFormulaConsumed : Bool
@@ -249,12 +320,20 @@ SanniExternalAuthorityAccepted : Bool
 SanniExternalAuthorityAccepted =
   false
 
+SanniAuthorityFalseGateClosed : Bool
+SanniAuthorityFalseGateClosed =
+  false
+
 TransverseGeometryAnalyticProofImported : Bool
 TransverseGeometryAnalyticProofImported =
   false
 
 AnalyticAnnularIntegralLowerBoundProved : Bool
 AnalyticAnnularIntegralLowerBoundProved =
+  false
+
+AnalyticIntegralFalseGateClosed : Bool
+AnalyticIntegralFalseGateClosed =
   false
 
 ErrorControlAsDeltaTendsZeroProved : Bool
@@ -265,8 +344,16 @@ MicrolocalDefectMassConstructed : Bool
 MicrolocalDefectMassConstructed =
   false
 
+MicrolocalMassFalseGateClosed : Bool
+MicrolocalMassFalseGateClosed =
+  false
+
 PressureCommutatorGainProved : Bool
 PressureCommutatorGainProved =
+  false
+
+PressureBootstrapFalseGateClosed : Bool
+PressureBootstrapFalseGateClosed =
   false
 
 SigmaNonRadialCommutatorLowerBoundProved : Bool
@@ -279,6 +366,10 @@ MechanismExhaustionForFullClayNS =
 
 clayNavierStokesPromoted : Bool
 clayNavierStokesPromoted =
+  false
+
+ClayPromotionFalseGateClosed : Bool
+ClayPromotionFalseGateClosed =
   false
 
 terminalPromotion : Bool
@@ -441,6 +532,38 @@ record NSNonRadialityQuantificationAverageReceipt : Setω where
       String
     halfMinusErrorDescriptionIsCanonical :
       halfMinusErrorDescription ≡ halfMinusErrorTargetText
+    transverseAnnulusHalfAverageDescription :
+      String
+    transverseAnnulusHalfAverageDescriptionIsCanonical :
+      transverseAnnulusHalfAverageDescription
+      ≡
+      transverseAnnulusHalfAverageTargetText
+
+    c0SymbolicName :
+      String
+    c0SymbolicNameIsPiOverEight :
+      c0SymbolicName ≡ c0PiOverEightSymbolicName
+    c0SymbolicRatioBoundary :
+      Ratio
+    c0SymbolicRatioBoundaryIsOneOverEight :
+      c0SymbolicRatioBoundary ≡ c0PiOverEightRatioBoundary
+    c0BoundaryNumerator :
+      ratioNumerator c0SymbolicRatioBoundary ≡ 1
+    c0BoundaryDenominator :
+      ratioDenominator c0SymbolicRatioBoundary ≡ 8
+    c0BoundaryDescription :
+      String
+    c0BoundaryDescriptionIsCanonical :
+      c0BoundaryDescription ≡ commutatorMassPiOverEightBoundaryText
+
+    transverseAnnulusRows :
+      List TransverseAnnulusBoundaryRow
+    transverseAnnulusRowsAreCanonical :
+      transverseAnnulusRows ≡ canonicalTransverseAnnulusBoundaryRows
+    transverseAnnulusRowCount :
+      Nat
+    transverseAnnulusRowCountIsFour :
+      transverseAnnulusRowCount ≡ 4
 
     statuses :
       List AverageSupportStatus
@@ -448,8 +571,8 @@ record NSNonRadialityQuantificationAverageReceipt : Setω where
       statuses ≡ canonicalAverageSupportStatuses
     statusCount :
       Nat
-    statusCountIsEight :
-      statusCount ≡ 8
+    statusCountIsTen :
+      statusCount ≡ 10
 
     blockers :
       List NonRadialAverageBlocker
@@ -471,8 +594,12 @@ record NSNonRadialityQuantificationAverageReceipt : Setω where
       FiniteFourSampleAverageRecorded ≡ true
     halfMinusErrorTargetRecordedFlag :
       HalfMinusErrorTargetRecorded ≡ true
+    transverseAnnulusHalfAverageTargetRecordedFlag :
+      TransverseAnnulusHalfAverageTargetRecorded ≡ true
     commutatorMassHalfTransferTargetRecordedFlag :
       CommutatorMassHalfTransferTargetRecorded ≡ true
+    commutatorMassPiOverEightBoundaryRecordedFlag :
+      CommutatorMassPiOverEightBoundaryRecorded ≡ true
     rankOneProjectionFormulaConsumedFlag :
       RankOneProjectionFormulaConsumed ≡ true
     sigmaLowerBoundTargetConsumedFlag :
@@ -480,22 +607,32 @@ record NSNonRadialityQuantificationAverageReceipt : Setω where
 
     sanniExternalAuthorityAccepted :
       SanniExternalAuthorityAccepted ≡ false
+    sanniAuthorityFalseGateClosed :
+      SanniAuthorityFalseGateClosed ≡ false
     transverseGeometryAnalyticProofImported :
       TransverseGeometryAnalyticProofImported ≡ false
     analyticAnnularIntegralLowerBoundProved :
       AnalyticAnnularIntegralLowerBoundProved ≡ false
+    analyticIntegralFalseGateClosed :
+      AnalyticIntegralFalseGateClosed ≡ false
     errorControlAsDeltaTendsZeroProved :
       ErrorControlAsDeltaTendsZeroProved ≡ false
     microlocalDefectMassConstructed :
       MicrolocalDefectMassConstructed ≡ false
+    microlocalMassFalseGateClosed :
+      MicrolocalMassFalseGateClosed ≡ false
     pressureCommutatorGainProved :
       PressureCommutatorGainProved ≡ false
+    pressureBootstrapFalseGateClosed :
+      PressureBootstrapFalseGateClosed ≡ false
     sigmaNonRadialCommutatorLowerBoundProved :
       SigmaNonRadialCommutatorLowerBoundProved ≡ false
     mechanismExhaustionForFullClayNSFalse :
       MechanismExhaustionForFullClayNS ≡ false
     clayNavierStokesPromotedFalse :
       clayNavierStokesPromoted ≡ false
+    clayPromotionFalseGateClosed :
+      ClayPromotionFalseGateClosed ≡ false
     terminalPromotionFalse :
       terminalPromotion ≡ false
 
@@ -503,6 +640,14 @@ record NSNonRadialityQuantificationAverageReceipt : Setω where
       List NonRadialAveragePromotion
     promotionFlagsAreEmpty :
       promotionFlags ≡ []
+    falseGates :
+      List NonRadialFalseGate
+    falseGatesAreCanonical :
+      falseGates ≡ canonicalNonRadialFalseGates
+    falseGateCount :
+      Nat
+    falseGateCountIsFive :
+      falseGateCount ≡ 5
     nonPromotionBoundary :
       String
     nonPromotionBoundaryIsCanonical :
@@ -584,13 +729,41 @@ canonicalNSNonRadialityQuantificationAverageReceipt =
         halfMinusErrorTargetText
     ; halfMinusErrorDescriptionIsCanonical =
         refl
+    ; transverseAnnulusHalfAverageDescription =
+        transverseAnnulusHalfAverageTargetText
+    ; transverseAnnulusHalfAverageDescriptionIsCanonical =
+        refl
+    ; c0SymbolicName =
+        c0PiOverEightSymbolicName
+    ; c0SymbolicNameIsPiOverEight =
+        refl
+    ; c0SymbolicRatioBoundary =
+        c0PiOverEightRatioBoundary
+    ; c0SymbolicRatioBoundaryIsOneOverEight =
+        refl
+    ; c0BoundaryNumerator =
+        refl
+    ; c0BoundaryDenominator =
+        refl
+    ; c0BoundaryDescription =
+        commutatorMassPiOverEightBoundaryText
+    ; c0BoundaryDescriptionIsCanonical =
+        refl
+    ; transverseAnnulusRows =
+        canonicalTransverseAnnulusBoundaryRows
+    ; transverseAnnulusRowsAreCanonical =
+        refl
+    ; transverseAnnulusRowCount =
+        listCount canonicalTransverseAnnulusBoundaryRows
+    ; transverseAnnulusRowCountIsFour =
+        refl
     ; statuses =
         canonicalAverageSupportStatuses
     ; statusesAreCanonical =
         refl
     ; statusCount =
         listCount canonicalAverageSupportStatuses
-    ; statusCountIsEight =
+    ; statusCountIsTen =
         refl
     ; blockers =
         canonicalNonRadialAverageBlockers
@@ -608,7 +781,11 @@ canonicalNSNonRadialityQuantificationAverageReceipt =
         refl
     ; halfMinusErrorTargetRecordedFlag =
         refl
+    ; transverseAnnulusHalfAverageTargetRecordedFlag =
+        refl
     ; commutatorMassHalfTransferTargetRecordedFlag =
+        refl
+    ; commutatorMassPiOverEightBoundaryRecordedFlag =
         refl
     ; rankOneProjectionFormulaConsumedFlag =
         refl
@@ -616,15 +793,23 @@ canonicalNSNonRadialityQuantificationAverageReceipt =
         refl
     ; sanniExternalAuthorityAccepted =
         refl
+    ; sanniAuthorityFalseGateClosed =
+        refl
     ; transverseGeometryAnalyticProofImported =
         refl
     ; analyticAnnularIntegralLowerBoundProved =
+        refl
+    ; analyticIntegralFalseGateClosed =
         refl
     ; errorControlAsDeltaTendsZeroProved =
         refl
     ; microlocalDefectMassConstructed =
         refl
+    ; microlocalMassFalseGateClosed =
+        refl
     ; pressureCommutatorGainProved =
+        refl
+    ; pressureBootstrapFalseGateClosed =
         refl
     ; sigmaNonRadialCommutatorLowerBoundProved =
         refl
@@ -632,11 +817,21 @@ canonicalNSNonRadialityQuantificationAverageReceipt =
         refl
     ; clayNavierStokesPromotedFalse =
         refl
+    ; clayPromotionFalseGateClosed =
+        refl
     ; terminalPromotionFalse =
         refl
     ; promotionFlags =
         []
     ; promotionFlagsAreEmpty =
+        refl
+    ; falseGates =
+        canonicalNonRadialFalseGates
+    ; falseGatesAreCanonical =
+        refl
+    ; falseGateCount =
+        listCount canonicalNonRadialFalseGates
+    ; falseGateCountIsFive =
         refl
     ; nonPromotionBoundary =
         nonPromotionBoundaryText

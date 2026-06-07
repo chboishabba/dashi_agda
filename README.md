@@ -164,6 +164,29 @@ commutator gain, real selected Hodge variation, BT finite Hodge theorem,
 continuum mass gap, Clay/YM/NS promotion, semantic unification, and terminal
 promotion remain false/open.
 
+Current defect-Laplacian zero-mode boundary: the repo records the shared P0
+object `Delta_{Pi,N} = Pi N^dagger (1-Pi) N Pi` in
+`DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf`.
+For NS, `DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary` records
+`Z_NS = Z_rad union Z_tan`; `NSLeiRenTianGreatCircleCriterionBoundary`,
+`NSLeiRenTianRadialZeroModeAuthorityBoundary`,
+`NSGreatCircleZeroModeTrapExclusionBoundary`, and
+`NSZeroModeGreatCircleGeometryTheorem` record the Lei-Ren-Tian 2025
+great-circle route as an external authority boundary plus fail-closed
+geometry/trap obligations.  `NSTangentialZeroModePressureStarvationBoundary`
+keeps Buaria/Bodenschatz/Pumir as DNS evidence only.  For YM,
+`YMGaugeZeroModeVacuumRigidityBoundary` names the finite gauge-compatible
+zero-mode vacuum-rigidity target and
+`YMHamiltonianDominatesFiniteHodgeDefectBoundary` names the Hamiltonian
+domination target.  For core unification,
+`DefectFourPointParallelogramLawBoundary` normalizes the exact four-point
+identity target.  The 2026-06-08 sprint verification policy used
+`timeout 10s agda ...`; these heavy modules timed out under that cap rather
+than returning type errors, so longer targeted Agda checks are still required.
+Microlocal defect mass, deterministic depletion, radial/tangential/wedge
+exclusion as internal PDE proofs, YM Hamiltonian domination, continuum
+transfer, Clay promotion, and terminal promotion remain false.
+
 Current NS Sprint 158 boundary: the repo records
 `SymmetricHouLuoRegularityClassClosure=true` and
 `SymmetricAxisymmetricWithSwirlGlobalRegularity=true` for the scoped symmetric

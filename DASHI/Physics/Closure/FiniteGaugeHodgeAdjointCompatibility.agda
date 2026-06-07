@@ -129,6 +129,117 @@ canonicalFiniteGaugeHodgeCompatibilityBlockers =
   ∷ realDStarFEqualsJLawMissing
   ∷ []
 
+data FiniteAdjointFailClosedGate : Set where
+  selectedIBPOnlyGate :
+    FiniteAdjointFailClosedGate
+
+  metricPairingIdentificationGate :
+    FiniteAdjointFailClosedGate
+
+  formalAdjointEqualityGate :
+    FiniteAdjointFailClosedGate
+
+  defectZeroGate :
+    FiniteAdjointFailClosedGate
+
+  fieldEquationPromotionGate :
+    FiniteAdjointFailClosedGate
+
+canonicalFiniteAdjointFailClosedGates :
+  List FiniteAdjointFailClosedGate
+canonicalFiniteAdjointFailClosedGates =
+  selectedIBPOnlyGate
+  ∷ metricPairingIdentificationGate
+  ∷ formalAdjointEqualityGate
+  ∷ defectZeroGate
+  ∷ fieldEquationPromotionGate
+  ∷ []
+
+data FiniteAdjointReceiptSupport : Set where
+  selectedBTWeightAndPairingSupport :
+    FiniteAdjointReceiptSupport
+
+  selectedHodgeCarrierSupport :
+    FiniteAdjointReceiptSupport
+
+  selectedConnectionCarrierSupport :
+    FiniteAdjointReceiptSupport
+
+  selectedBoundaryTermSupport :
+    FiniteAdjointReceiptSupport
+
+  selectedDiscreteIBPLawSupport :
+    FiniteAdjointReceiptSupport
+
+canonicalFiniteAdjointReceiptSupport :
+  List FiniteAdjointReceiptSupport
+canonicalFiniteAdjointReceiptSupport =
+  selectedBTWeightAndPairingSupport
+  ∷ selectedHodgeCarrierSupport
+  ∷ selectedConnectionCarrierSupport
+  ∷ selectedBoundaryTermSupport
+  ∷ selectedDiscreteIBPLawSupport
+  ∷ []
+
+record FiniteAdjointFailClosedLedger : Set where
+  constructor mkFiniteAdjointFailClosedLedger
+  field
+    supportRows :
+      List FiniteAdjointReceiptSupport
+    supportRowsAreCanonical :
+      supportRows ≡ canonicalFiniteAdjointReceiptSupport
+    supportRowCount :
+      Nat
+    supportRowCountIs5 :
+      supportRowCount ≡ 5
+    gates :
+      List FiniteAdjointFailClosedGate
+    gatesAreCanonical :
+      gates ≡ canonicalFiniteAdjointFailClosedGates
+    gateCount :
+      Nat
+    gateCountIs5 :
+      gateCount ≡ 5
+    selectedFiniteIBPRecorded :
+      Bool
+    selectedFiniteIBPRecordedIsTrue :
+      selectedFiniteIBPRecorded ≡ true
+    metricBTAdjointnessClosed :
+      Bool
+    metricBTAdjointnessClosedIsFalse :
+      metricBTAdjointnessClosed ≡ false
+    compatibilityDefectClosed :
+      Bool
+    compatibilityDefectClosedIsFalse :
+      compatibilityDefectClosed ≡ false
+    fieldEquationPromotedFromLedger :
+      Bool
+    fieldEquationPromotedFromLedgerIsFalse :
+      fieldEquationPromotedFromLedger ≡ false
+
+open FiniteAdjointFailClosedLedger public
+
+canonicalFiniteAdjointFailClosedLedger :
+  FiniteAdjointFailClosedLedger
+canonicalFiniteAdjointFailClosedLedger =
+  mkFiniteAdjointFailClosedLedger
+    canonicalFiniteAdjointReceiptSupport
+    refl
+    5
+    refl
+    canonicalFiniteAdjointFailClosedGates
+    refl
+    5
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+
 data WeightedFinitePairing : Set where
   weightedFinitePairingFromBTObligation :
     BTHodge.BTCellWeight →
@@ -365,6 +476,27 @@ record FiniteGaugeHodgeAdjointCompatibility : Set₂ where
     exactBlockerCountIs6 :
       exactBlockerCount ≡ 6
 
+    failClosedLedger :
+      FiniteAdjointFailClosedLedger
+
+    failClosedLedgerIsCanonical :
+      failClosedLedger ≡ canonicalFiniteAdjointFailClosedLedger
+
+    failClosedLedgerSupportRowCount :
+      supportRowCount failClosedLedger ≡ 5
+
+    failClosedLedgerGateCount :
+      gateCount failClosedLedger ≡ 5
+
+    failClosedLedgerMetricAdjointFalse :
+      metricBTAdjointnessClosed failClosedLedger ≡ false
+
+    failClosedLedgerDefectFalse :
+      compatibilityDefectClosed failClosedLedger ≡ false
+
+    failClosedLedgerFieldEquationFalse :
+      fieldEquationPromotedFromLedger failClosedLedger ≡ false
+
     rows :
       List FiniteGaugeHodgeAdjointCompatibilityRow
 
@@ -488,6 +620,20 @@ canonicalFiniteGaugeHodgeAdjointCompatibility =
         6
     ; exactBlockerCountIs6 =
         refl
+    ; failClosedLedger =
+        canonicalFiniteAdjointFailClosedLedger
+    ; failClosedLedgerIsCanonical =
+        refl
+    ; failClosedLedgerSupportRowCount =
+        refl
+    ; failClosedLedgerGateCount =
+        refl
+    ; failClosedLedgerMetricAdjointFalse =
+        refl
+    ; failClosedLedgerDefectFalse =
+        refl
+    ; failClosedLedgerFieldEquationFalse =
+        refl
     ; rows =
         canonicalFiniteGaugeHodgeAdjointCompatibilityRows
     ; rowsAreCanonical =
@@ -518,6 +664,7 @@ canonicalFiniteGaugeHodgeAdjointCompatibility =
         ∷ "Names finite Hodge star from the BT effective-action boundary selected Hodge carrier"
         ∷ "Names the formal adjoint target <d_A alpha,beta> = <alpha,+/- * d_A * beta> + boundary"
         ∷ "Consumes the selected finite IBP law, but does not prove metric weighted adjointness on BT primal/dual cells"
+        ∷ "Fail-closed ledger records five supports and five gates: selected IBP only, metric pairing identification, formal adjoint equality, defect zero, and field-equation promotion"
         ∷ "Compatibility defect is named but not shown zero"
         ∷ "Maxwell, Yang-Mills, Clay Yang-Mills, and terminal promotion remain false"
         ∷ []
@@ -531,6 +678,40 @@ canonicalFiniteGaugeHodgeAdjointCompatibilityRowCountIs14 =
 canonicalFiniteGaugeHodgeAdjointCompatibilityBlockerCountIs6 :
   listCount canonicalFiniteGaugeHodgeCompatibilityBlockers ≡ 6
 canonicalFiniteGaugeHodgeAdjointCompatibilityBlockerCountIs6 =
+  refl
+
+canonicalFiniteAdjointFailClosedLedgerSupportCountIs5 :
+  listCount canonicalFiniteAdjointReceiptSupport ≡ 5
+canonicalFiniteAdjointFailClosedLedgerSupportCountIs5 =
+  refl
+
+canonicalFiniteAdjointFailClosedLedgerGateCountIs5 :
+  listCount canonicalFiniteAdjointFailClosedGates ≡ 5
+canonicalFiniteAdjointFailClosedLedgerGateCountIs5 =
+  refl
+
+canonicalFiniteGaugeHodgeAdjointCompatibilityLedgerMetricFalse :
+  metricBTAdjointnessClosed
+    (failClosedLedger canonicalFiniteGaugeHodgeAdjointCompatibility)
+  ≡
+  false
+canonicalFiniteGaugeHodgeAdjointCompatibilityLedgerMetricFalse =
+  refl
+
+canonicalFiniteGaugeHodgeAdjointCompatibilityLedgerDefectFalse :
+  compatibilityDefectClosed
+    (failClosedLedger canonicalFiniteGaugeHodgeAdjointCompatibility)
+  ≡
+  false
+canonicalFiniteGaugeHodgeAdjointCompatibilityLedgerDefectFalse =
+  refl
+
+canonicalFiniteGaugeHodgeAdjointCompatibilityLedgerFieldEquationFalse :
+  fieldEquationPromotedFromLedger
+    (failClosedLedger canonicalFiniteGaugeHodgeAdjointCompatibility)
+  ≡
+  false
+canonicalFiniteGaugeHodgeAdjointCompatibilityLedgerFieldEquationFalse =
   refl
 
 canonicalFiniteGaugeHodgeAdjointCompatibilityDefectFalse :

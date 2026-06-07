@@ -204,15 +204,24 @@ bootstrap.  The zero-mode refinement is
 `DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary`: every obstruction
 is either leakage-positive or lives in the zero-mode sheaf.  Lei-Ren-Tian 2025
 is recorded by
+`DASHI.Physics.Closure.NSLeiRenTianGreatCircleCriterionBoundary` and
 `DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary` as an
-external great-circle authority boundary for the radial zero-mode route, while
+external great-circle authority boundary for the radial zero-mode route.  The
+follow-on trap/geometry targets are
+`DASHI.Physics.Closure.NSGreatCircleZeroModeTrapExclusionBoundary` and
+`DASHI.Physics.Closure.NSZeroModeGreatCircleGeometryTheorem`; they record the
+fail-closed obligations to prove zero-mode level-set regularity, classify
+which components miss great circles, transfer vorticity-direction information
+to defect-measure support, and prove quantitative mass outside zero modes.
 `DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary` records
 Buaria/Bodenschatz/Pumir as DNS evidence only, not a deterministic ancient
 profile theorem.  The shared governance surface is
 `DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy`; the YM
 spectral next theorem is
-`DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`; and
-the core unification bottleneck is now normalized by
+`DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`, with
+`DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary` naming the
+finite gauge-compatible zero-mode vacuum-rigidity target before any mass-gap
+promotion; and the core unification bottleneck is now normalized by
 `DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary` and
 `DASHI.Physics.Closure.DefectFourPointParallelogramLawBoundary`.
 Downloaded Hodge/YM/string context artifacts should cite

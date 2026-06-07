@@ -880,3 +880,217 @@ canonicalNSZeroModeGreatCircleGeometryTheoremReceipt =
     refl
     canonicalNSZeroModeGreatCircleGeometryORCSLPGF
     refl
+
+------------------------------------------------------------------------
+-- Explicit fail-closed boundary envelope.
+
+canonicalNSZeroModeGreatCircleGeometryObligations :
+  List String
+canonicalNSZeroModeGreatCircleGeometryObligations =
+  "formalize the intrinsic tangential tensor-channel angle alpha"
+  ∷ "prove regularity of the zero-mode level set sin(2 alpha) equals zero"
+  ∷ "prove the finite-union-of-closed-curves theorem target"
+  ∷ "classify which zero-mode components miss some great circle"
+  ∷ "exclude or deplete great-circle-hitting zero-mode components"
+  ∷ "transfer LRT direction-set information to quantitative defect-measure support"
+  ∷ "prove quantitative mass outside the NS zero-mode set"
+  ∷ "construct microlocal defect mass and leakage away from zero modes"
+  ∷ "derive NSCriticalResidualNonPositive and FullLocalDefectMonotonicity"
+  ∷ "keep Clay Navier-Stokes and terminal promotion false"
+  ∷ []
+
+zeroModeGreatCircleGeometryObligationCount : Nat
+zeroModeGreatCircleGeometryObligationCount =
+  listLength canonicalNSZeroModeGreatCircleGeometryObligations
+
+zeroModeGreatCircleGeometryObligationCountIs10 :
+  zeroModeGreatCircleGeometryObligationCount ≡ 10
+zeroModeGreatCircleGeometryObligationCountIs10 =
+  refl
+
+record NSZeroModeGreatCircleGeometryFailClosedEnvelope : Setω where
+  constructor nsZeroModeGreatCircleGeometryFailClosedEnvelope
+  field
+    receipt :
+      NSZeroModeGreatCircleGeometryTheoremReceipt
+    receiptIsCanonical :
+      receipt ≡ canonicalNSZeroModeGreatCircleGeometryTheoremReceipt
+
+    scalarLawRecorded :
+      DefectLaplacianScalarLaw
+    scalarLawRecordedIsCanonical :
+      scalarLawRecorded ≡ canonicalDefectLaplacianScalarLaw
+
+    naiveFrameRejected :
+      AngleFrameGovernance
+    naiveFrameRejectedIsCanonical :
+      naiveFrameRejected ≡ canonicalNaiveFrameRejection
+
+    intrinsicFrameSelected :
+      AngleFrameGovernance
+    intrinsicFrameSelectedIsCanonical :
+      intrinsicFrameSelected ≡ canonicalIntrinsicFrameSelection
+
+    intrinsicAlpha :
+      IntrinsicAngleSlot
+    intrinsicAlphaIsCanonical :
+      intrinsicAlpha ≡ canonicalIntrinsicAlpha
+
+    zeroModeLevelSet :
+      ZeroModeLevelSetEquation
+    zeroModeLevelSetIsCanonical :
+      zeroModeLevelSet ≡ canonicalZeroModeLevelSetEquation
+
+    finiteClosedCurveTarget :
+      LevelSetRegularityStatus
+    finiteClosedCurveTargetIsCanonical :
+      finiteClosedCurveTarget ≡ canonicalFiniteClosedCurveTarget
+
+    levelSetRegularityOpen :
+      LevelSetRegularityStatus
+    levelSetRegularityOpenIsCanonical :
+      levelSetRegularityOpen ≡ canonicalLevelSetRegularityOpen
+
+    greatCircleClassificationTarget :
+      GreatCircleClassification
+    greatCircleClassificationTargetIsCanonical :
+      greatCircleClassificationTarget
+      ≡
+      canonicalGreatCircleHittingClassificationTarget
+
+    lrtTrapTransferTarget :
+      LeiRenTianTransferTarget
+    lrtTrapTransferTargetIsCanonical :
+      lrtTrapTransferTarget ≡ canonicalLeiRenTianZeroModeTrapTarget
+
+    defectMeasureTransferTarget :
+      LeiRenTianTransferTarget
+    defectMeasureTransferTargetIsCanonical :
+      defectMeasureTransferTarget
+      ≡
+      canonicalDefectMeasureSupportTransferTarget
+
+    geometryRows :
+      List NSZeroModeGreatCircleGeometryRow
+    geometryRowsAreCanonical :
+      geometryRows ≡ canonicalNSZeroModeGreatCircleGeometryRows
+    geometryRowCountProof :
+      listLength geometryRows ≡ 14
+
+    blockers :
+      List NSZeroModeGreatCircleGeometryBlocker
+    blockersAreCanonical :
+      blockers ≡ canonicalNSZeroModeGreatCircleGeometryBlockers
+    blockerCountProof :
+      listLength blockers ≡ 14
+
+    statuses :
+      List NSZeroModeGreatCircleGeometryStatus
+    statusesAreCanonical :
+      statuses ≡ canonicalNSZeroModeGreatCircleGeometryStatuses
+    statusCountProof :
+      listLength statuses ≡ 10
+
+    obligations :
+      List String
+    obligationsAreCanonical :
+      obligations ≡ canonicalNSZeroModeGreatCircleGeometryObligations
+    obligationCountProof :
+      listLength obligations ≡ 10
+
+    promotionFlags :
+      List NSZeroModeGreatCircleGeometryPromotion
+    promotionFlagsAreEmpty :
+      promotionFlags ≡ []
+    noPromotionPossibleHere :
+      NSZeroModeGreatCircleGeometryPromotion →
+      ⊥
+
+    intrinsicTensorChannelStillFalse :
+      IntrinsicTensorChannelFormalized ≡ false
+    levelSetRegularityStillFalse :
+      LevelSetRegularityProved ≡ false
+    finiteCurvesStillFalse :
+      FiniteUnionClosedCurvesProved ≡ false
+    greatCircleComponentExclusionStillFalse :
+      GreatCircleHittingComponentsExcluded ≡ false
+    zeroModeTrapMissesGreatCircleStillFalse :
+      ZeroModeTrapMissesGreatCircleProved ≡ false
+    defectMeasureTransferStillFalse :
+      VorticityDirectionSetToDefectMeasureTransferProved ≡ false
+    quantitativeMassStillFalse :
+      QuantitativeMassOutsideZeroModeSetProved ≡ false
+    microlocalMassStillFalse :
+      MicrolocalDefectMassConstructed ≡ false
+    criticalResidualStillFalse :
+      NSCriticalResidualNonPositive ≡ false
+    fullLocalMonotonicityStillFalse :
+      FullLocalDefectMonotonicity ≡ false
+    claySolvedStillFalse :
+      full_clay_ns_solved ≡ false
+    clayPromotionStillFalse :
+      clayNavierStokesPromoted ≡ false
+    terminalPromotionStillFalse :
+      terminalPromotion ≡ false
+
+open NSZeroModeGreatCircleGeometryFailClosedEnvelope public
+
+canonicalNSZeroModeGreatCircleGeometryFailClosedEnvelope :
+  NSZeroModeGreatCircleGeometryFailClosedEnvelope
+canonicalNSZeroModeGreatCircleGeometryFailClosedEnvelope =
+  nsZeroModeGreatCircleGeometryFailClosedEnvelope
+    canonicalNSZeroModeGreatCircleGeometryTheoremReceipt
+    refl
+    canonicalDefectLaplacianScalarLaw
+    refl
+    canonicalNaiveFrameRejection
+    refl
+    canonicalIntrinsicFrameSelection
+    refl
+    canonicalIntrinsicAlpha
+    refl
+    canonicalZeroModeLevelSetEquation
+    refl
+    canonicalFiniteClosedCurveTarget
+    refl
+    canonicalLevelSetRegularityOpen
+    refl
+    canonicalGreatCircleHittingClassificationTarget
+    refl
+    canonicalLeiRenTianZeroModeTrapTarget
+    refl
+    canonicalDefectMeasureSupportTransferTarget
+    refl
+    canonicalNSZeroModeGreatCircleGeometryRows
+    refl
+    zeroModeGreatCircleGeometryRowCountIs14
+    canonicalNSZeroModeGreatCircleGeometryBlockers
+    refl
+    zeroModeGreatCircleGeometryBlockerCountIs14
+    canonicalNSZeroModeGreatCircleGeometryStatuses
+    refl
+    zeroModeGreatCircleGeometryStatusCountIs10
+    canonicalNSZeroModeGreatCircleGeometryObligations
+    refl
+    zeroModeGreatCircleGeometryObligationCountIs10
+    []
+    refl
+    nsZeroModeGreatCircleGeometryPromotionImpossibleHere
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalNSZeroModeGreatCircleGeometryFailClosedSummary :
+  String
+canonicalNSZeroModeGreatCircleGeometryFailClosedSummary =
+  "Fail-closed: the corrected intrinsic zero-mode great-circle geometry target is recorded, while regularity, classification, quantitative transfer, microlocal mass, residual monotonicity, Clay NS, and terminal promotion remain blocked."

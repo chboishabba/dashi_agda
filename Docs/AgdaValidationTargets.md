@@ -4,6 +4,32 @@ Purpose: record which Agda modules are safe for routine targeted validation and
 which ones should be avoided in normal loops because they are known to be
 runtime-heavy or aggregate too much of the closure surface at once.
 
+## Timeout-Limited Clay P0 Targets
+
+The current zero-mode/YM/core P0 modules are substantial Agda receipt surfaces
+with heavy imports.  In rapid iteration loops, validate them with a hard cap:
+
+```bash
+timeout 10s agda <module>.agda
+```
+
+Exit code `124` means the module exceeded the sprint verification budget, not
+that Agda found a type error.  Longer checks are still required before marking
+these surfaces as fully checked:
+
+- `DASHI/Physics/Closure/ProjectionNonlocalityDefectLaplacianZeroModeSheaf.agda`
+- `DASHI/Physics/Closure/NSZeroModeSetClassificationBoundary.agda`
+- `DASHI/Physics/Closure/NSLeiRenTianGreatCircleCriterionBoundary.agda`
+- `DASHI/Physics/Closure/NSLeiRenTianRadialZeroModeAuthorityBoundary.agda`
+- `DASHI/Physics/Closure/NSGreatCircleZeroModeTrapExclusionBoundary.agda`
+- `DASHI/Physics/Closure/NSZeroModeGreatCircleGeometryTheorem.agda`
+- `DASHI/Physics/Closure/NSTangentialZeroModePressureStarvationBoundary.agda`
+- `DASHI/Physics/Closure/YMGaugeZeroModeVacuumRigidityBoundary.agda`
+- `DASHI/Physics/Closure/YMHamiltonianDominatesFiniteHodgeDefectBoundary.agda`
+- `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
+- `DASHI/Physics/Closure/YMWeightedBTAdjointKappaCalculation.agda`
+- `DASHI/Physics/Closure/DefectFourPointParallelogramLawBoundary.agda`
+
 ## Safe Routine Targets
 
 These are the preferred modules for focused validation while working on the

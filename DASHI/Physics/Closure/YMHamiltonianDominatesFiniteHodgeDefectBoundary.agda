@@ -25,6 +25,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.BTFiniteMetricGaugeCompatibilityKappaBoundary as Kappa
@@ -966,4 +967,223 @@ canonicalYMHamiltonianDominationTerminalFalse :
   ≡
   false
 canonicalYMHamiltonianDominationTerminalFalse =
+  refl
+
+------------------------------------------------------------------------
+-- Fail-closed substantial receipt.
+
+data YMHamiltonianDominationPromotionToken : Set where
+
+yMHamiltonianDominationPromotionTokenImpossibleHere :
+  YMHamiltonianDominationPromotionToken →
+  ⊥
+yMHamiltonianDominationPromotionTokenImpossibleHere ()
+
+canonicalYMHamiltonianDominationFailClosedFindings :
+  List String
+canonicalYMHamiltonianDominationFailClosedFindings =
+  "Typed target only: the finite quotient, transfer-matrix Hamiltonian, Hodge/gauge defect Laplacian, domination inequality, and controlled error are named but not proved as a physical theorem"
+  ∷ "Fail-closed first blocker: the actual domination inequality H_d >= c * Delta_YM,d - E_d is still missing"
+  ∷ "Finite-a source blocker: strong-coupling input is recorded as a source boundary but is not accepted as Clay authority"
+  ∷ "Upstream quotient, OS/reflection positivity, uniform kappa infimum, spectral lift, and continuum no-pollution gates remain false"
+  ∷ "No spectral-gap, continuum Yang-Mills, Clay Yang-Mills, or terminal promotion token is constructed"
+  ∷ []
+
+canonicalYMHamiltonianDominationFailClosedNonPromotions :
+  List YMHamiltonianDominationBlocker
+canonicalYMHamiltonianDominationFailClosedNonPromotions =
+  missingHamiltonianDominatesFiniteHodgeDefectInequality
+  ∷ missingControlledErrorAbsorption
+  ∷ missingAcceptedFiniteAStrongCouplingGapSource
+  ∷ missingUniformKappaInfimumPositive
+  ∷ missingSelfAdjointSpectralGapLift
+  ∷ missingContinuumTransferNoSpectralPollution
+  ∷ missingClayYangMillsAuthorityToken
+  ∷ []
+
+record YMHamiltonianDominationFailClosedReceipt : Setω where
+  field
+    theoremBoundary :
+      YMHamiltonianDominatesFiniteHodgeDefectBoundary
+
+    theoremBoundaryIsCanonical :
+      theoremBoundary
+      ≡
+      canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
+
+    target :
+      HamiltonianDominationInequalityTarget
+
+    targetIsCanonical :
+      target ≡ canonicalHamiltonianDominationInequalityTarget
+
+    targetRecorded :
+      dominationInequalityTargetRecordedField theoremBoundary ≡ true
+
+    theoremStillMissing :
+      hamiltonianDominatesFiniteHodgeDefectProvedField theoremBoundary
+      ≡
+      false
+
+    quotientStillMissing :
+      finiteGaugeQuotientCarrierConstructedField theoremBoundary ≡ false
+
+    transferMatrixPhysicalIdentificationStillMissing :
+      transferMatrixIdentifiedWithPhysicalHamiltonianField theoremBoundary
+      ≡
+      false
+
+    osOnGaugeQuotientStillMissing :
+      reflectionPositivityOSOnGaugeQuotientProvedField theoremBoundary
+      ≡
+      false
+
+    finiteHodgeDefectOperatorStillMissing :
+      finiteHodgeDefectLaplacianConstructedField theoremBoundary ≡ false
+
+    controlledErrorAbsorptionStillMissing :
+      controlledErrorAbsorbedField theoremBoundary ≡ false
+
+    finiteASourceNotClayAuthority :
+      finiteAStrongCouplingGapAcceptedAsClayAuthorityField theoremBoundary
+      ≡
+      false
+
+    selfAdjointSpectralLiftStillMissing :
+      selfAdjointSpectralGapLiftProvedField theoremBoundary ≡ false
+
+    continuumNoPollutionStillMissing :
+      continuumTransferNoSpectralPollutionProvedField theoremBoundary
+      ≡
+      false
+
+    clayPromotionStillFalse :
+      clayYangMillsPromotedField theoremBoundary ≡ false
+
+    terminalPromotionStillFalse :
+      terminalPromotionField theoremBoundary ≡ false
+
+    blockerLedger :
+      List YMHamiltonianDominationBlocker
+
+    blockerLedgerIsCanonical :
+      blockerLedger ≡ canonicalYMHamiltonianDominationBlockers
+
+    exactFailClosedNonPromotions :
+      List YMHamiltonianDominationBlocker
+
+    exactFailClosedNonPromotionsAreCanonical :
+      exactFailClosedNonPromotions
+      ≡
+      canonicalYMHamiltonianDominationFailClosedNonPromotions
+
+    firstFailClosedBlocker :
+      YMHamiltonianDominationBlocker
+
+    firstFailClosedBlockerIsDominationInequality :
+      firstFailClosedBlocker
+      ≡
+      missingHamiltonianDominatesFiniteHodgeDefectInequality
+
+    finiteASourceFailClosedBlocker :
+      YMHamiltonianDominationBlocker
+
+    finiteASourceFailClosedBlockerIsAuthority :
+      finiteASourceFailClosedBlocker
+      ≡
+      missingAcceptedFiniteAStrongCouplingGapSource
+
+    noPromotionTokenEliminator :
+      YMHamiltonianDominationPromotionToken →
+      ⊥
+
+    findings :
+      List String
+
+    findingsAreCanonical :
+      findings
+      ≡
+      canonicalYMHamiltonianDominationFailClosedFindings
+
+open YMHamiltonianDominationFailClosedReceipt public
+
+canonicalYMHamiltonianDominationFailClosedReceipt :
+  YMHamiltonianDominationFailClosedReceipt
+canonicalYMHamiltonianDominationFailClosedReceipt =
+  record
+    { theoremBoundary =
+        canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
+    ; theoremBoundaryIsCanonical =
+        refl
+    ; target =
+        canonicalHamiltonianDominationInequalityTarget
+    ; targetIsCanonical =
+        refl
+    ; targetRecorded =
+        refl
+    ; theoremStillMissing =
+        refl
+    ; quotientStillMissing =
+        refl
+    ; transferMatrixPhysicalIdentificationStillMissing =
+        refl
+    ; osOnGaugeQuotientStillMissing =
+        refl
+    ; finiteHodgeDefectOperatorStillMissing =
+        refl
+    ; controlledErrorAbsorptionStillMissing =
+        refl
+    ; finiteASourceNotClayAuthority =
+        refl
+    ; selfAdjointSpectralLiftStillMissing =
+        refl
+    ; continuumNoPollutionStillMissing =
+        refl
+    ; clayPromotionStillFalse =
+        refl
+    ; terminalPromotionStillFalse =
+        refl
+    ; blockerLedger =
+        canonicalYMHamiltonianDominationBlockers
+    ; blockerLedgerIsCanonical =
+        refl
+    ; exactFailClosedNonPromotions =
+        canonicalYMHamiltonianDominationFailClosedNonPromotions
+    ; exactFailClosedNonPromotionsAreCanonical =
+        refl
+    ; firstFailClosedBlocker =
+        missingHamiltonianDominatesFiniteHodgeDefectInequality
+    ; firstFailClosedBlockerIsDominationInequality =
+        refl
+    ; finiteASourceFailClosedBlocker =
+        missingAcceptedFiniteAStrongCouplingGapSource
+    ; finiteASourceFailClosedBlockerIsAuthority =
+        refl
+    ; noPromotionTokenEliminator =
+        yMHamiltonianDominationPromotionTokenImpossibleHere
+    ; findings =
+        canonicalYMHamiltonianDominationFailClosedFindings
+    ; findingsAreCanonical =
+        refl
+    }
+
+canonicalYMHamiltonianDominationFailClosedReceiptKeepsTheoremFalse :
+  theoremStillMissing canonicalYMHamiltonianDominationFailClosedReceipt
+  ≡
+  refl
+canonicalYMHamiltonianDominationFailClosedReceiptKeepsTheoremFalse =
+  refl
+
+canonicalYMHamiltonianDominationFailClosedReceiptKeepsClayFalse :
+  clayPromotionStillFalse canonicalYMHamiltonianDominationFailClosedReceipt
+  ≡
+  refl
+canonicalYMHamiltonianDominationFailClosedReceiptKeepsClayFalse =
+  refl
+
+canonicalYMHamiltonianDominationFailClosedReceiptKeepsTerminalFalse :
+  terminalPromotionStillFalse canonicalYMHamiltonianDominationFailClosedReceipt
+  ≡
+  refl
+canonicalYMHamiltonianDominationFailClosedReceiptKeepsTerminalFalse =
   refl

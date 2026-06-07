@@ -78,6 +78,20 @@ data PressureNonlocalityBootstrap : Set where
     PositiveMassTarget →
     PressureNonlocalityBootstrap
 
+data MicrolocalDefectMassDependencyLink : Set where
+  criticalResidualSelectsBlowupSequence :
+    MicrolocalDefectMassDependencyLink
+  reciprocalScaleSelectsLPShell :
+    MicrolocalDefectMassDependencyLink
+  lpShellFeedsSemiclassicalMeasure :
+    MicrolocalDefectMassDependencyLink
+  defectMeasureMustChargeLMaxGraph :
+    MicrolocalDefectMassDependencyLink
+  positiveLMaxMassFeedsPressureBootstrap :
+    MicrolocalDefectMassDependencyLink
+  pressureBootstrapFeedsResidualDepletion :
+    MicrolocalDefectMassDependencyLink
+
 canonicalBlowupSequence : NSBlowupSequenceCarrier
 canonicalBlowupSequence =
   suitableBlowupSequence
@@ -112,6 +126,91 @@ canonicalPositiveMassTarget =
 canonicalPressureBootstrap : PressureNonlocalityBootstrap
 canonicalPressureBootstrap =
   pressureRieszNonlocalityBootstrap canonicalPositiveMassTarget
+
+canonicalMicrolocalDefectMassDependencyLinks :
+  List MicrolocalDefectMassDependencyLink
+canonicalMicrolocalDefectMassDependencyLinks =
+  criticalResidualSelectsBlowupSequence
+  ∷ reciprocalScaleSelectsLPShell
+  ∷ lpShellFeedsSemiclassicalMeasure
+  ∷ defectMeasureMustChargeLMaxGraph
+  ∷ positiveLMaxMassFeedsPressureBootstrap
+  ∷ pressureBootstrapFeedsResidualDepletion
+  ∷ []
+
+microlocalDefectMassDependencyLinkCount : Nat
+microlocalDefectMassDependencyLinkCount =
+  listLength canonicalMicrolocalDefectMassDependencyLinks
+
+microlocalDefectMassDependencyLinkCountIs6 :
+  microlocalDefectMassDependencyLinkCount ≡ 6
+microlocalDefectMassDependencyLinkCountIs6 =
+  refl
+
+record NSMicrolocalDefectMassAdmissibilityQuotientBoundary : Set where
+  constructor nsMicrolocalDefectMassAdmissibilityQuotientBoundary
+  field
+    admissibleCarrierRepresentative :
+      LocalizedVorticityCarrier
+    admissibleCarrierRepresentativeIsCanonical :
+      admissibleCarrierRepresentative ≡ canonicalLocalizedVorticity
+    quotientDefectMeasure :
+      SemiclassicalDefectMeasureCarrier
+    quotientDefectMeasureIsCanonical :
+      quotientDefectMeasure ≡ canonicalDefectMeasure
+    quotientMaximalStrainGraph :
+      MaximalStrainGraphCarrier
+    quotientMaximalStrainGraphIsCanonical :
+      quotientMaximalStrainGraph ≡ canonicalMaximalStrainGraph
+    quotientPositiveMassTarget :
+      PositiveMassTarget
+    quotientPositiveMassTargetIsCanonical :
+      quotientPositiveMassTarget ≡ canonicalPositiveMassTarget
+    dependencyLinks :
+      List MicrolocalDefectMassDependencyLink
+    dependencyLinksAreCanonical :
+      dependencyLinks ≡ canonicalMicrolocalDefectMassDependencyLinks
+    dependencyLinkCount :
+      Nat
+    dependencyLinkCountIs6 :
+      dependencyLinkCount ≡ 6
+    positiveMassTargetRecorded :
+      Bool
+    positiveMassTargetRecordedIsTrue :
+      positiveMassTargetRecorded ≡ true
+    positiveMassConstructed :
+      Bool
+    positiveMassConstructedIsFalse :
+      positiveMassConstructed ≡ false
+    pressureBootstrapClosed :
+      Bool
+    pressureBootstrapClosedIsFalse :
+      pressureBootstrapClosed ≡ false
+
+open NSMicrolocalDefectMassAdmissibilityQuotientBoundary public
+
+canonicalNSMicrolocalDefectMassAdmissibilityQuotientBoundary :
+  NSMicrolocalDefectMassAdmissibilityQuotientBoundary
+canonicalNSMicrolocalDefectMassAdmissibilityQuotientBoundary =
+  nsMicrolocalDefectMassAdmissibilityQuotientBoundary
+    canonicalLocalizedVorticity
+    refl
+    canonicalDefectMeasure
+    refl
+    canonicalMaximalStrainGraph
+    refl
+    canonicalPositiveMassTarget
+    refl
+    canonicalMicrolocalDefectMassDependencyLinks
+    refl
+    microlocalDefectMassDependencyLinkCount
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
 
 data MicrolocalDefectMassConstructionStep : Set where
   chooseSuitableBlowupSequenceWithPositiveCriticalResidual :
@@ -259,11 +358,17 @@ data MicrolocalDefectMassStatusRow : Set where
     MicrolocalDefectMassStatusRow
   pressureNonlocalityBootstrapBlockerTypedStatus :
     MicrolocalDefectMassStatusRow
+  admissibilityQuotientBoundaryTypedStatus :
+    MicrolocalDefectMassStatusRow
+  positiveMassTargetRecordedTrueStatus :
+    MicrolocalDefectMassStatusRow
   sigmaLowerBoundConsumerTypedStatus :
     MicrolocalDefectMassStatusRow
   btBoundaryLeakageConsumerTypedStatus :
     MicrolocalDefectMassStatusRow
   microlocalDefectMassConstructedFalseStatus :
+    MicrolocalDefectMassStatusRow
+  positiveMassConstructedFalseStatus :
     MicrolocalDefectMassStatusRow
   noPersistentPositiveResidualFalseStatus :
     MicrolocalDefectMassStatusRow
@@ -278,9 +383,12 @@ canonicalMicrolocalDefectMassStatusRows =
   ∷ lpVorticityToDefectMeasureTypedStatus
   ∷ maximalStrainGraphMassTargetTypedStatus
   ∷ pressureNonlocalityBootstrapBlockerTypedStatus
+  ∷ admissibilityQuotientBoundaryTypedStatus
+  ∷ positiveMassTargetRecordedTrueStatus
   ∷ sigmaLowerBoundConsumerTypedStatus
   ∷ btBoundaryLeakageConsumerTypedStatus
   ∷ microlocalDefectMassConstructedFalseStatus
+  ∷ positiveMassConstructedFalseStatus
   ∷ noPersistentPositiveResidualFalseStatus
   ∷ clayPromotionFalseStatus
   ∷ []
@@ -289,9 +397,9 @@ microlocalDefectMassStatusRowCount : Nat
 microlocalDefectMassStatusRowCount =
   listLength canonicalMicrolocalDefectMassStatusRows
 
-microlocalDefectMassStatusRowCountIs10 :
-  microlocalDefectMassStatusRowCount ≡ 10
-microlocalDefectMassStatusRowCountIs10 =
+microlocalDefectMassStatusRowCountIs13 :
+  microlocalDefectMassStatusRowCount ≡ 13
+microlocalDefectMassStatusRowCountIs13 =
   refl
 
 NSMicrolocalDefectMassConstructionBoundaryRecorded : Bool
@@ -388,7 +496,7 @@ requirementString =
 
 codeArtifactString : String
 codeArtifactString =
-  "C: The module exports carriers for the construction chain, canonical step/support/status/blocker rows, imported anchors, equality receipts, and false Clay promotion guards."
+  "C: The module exports carriers for the LP-shell -> defect-measure -> L_max-mass -> pressure-bootstrap chain, an admissibility/quotient boundary, canonical rows, imported anchors, equality receipts, and false Clay promotion guards."
 
 stateString : String
 stateString =
@@ -396,7 +504,7 @@ stateString =
 
 latticeString : String
 latticeString =
-  "L: critical residual -> blowup profile -> LP vorticity shell -> defect measure -> maximal-strain graph mass near Sigma -> pressure bootstrap -> commutator/leakage consumers -> full local monotonicity blocker."
+  "L: critical residual -> blowup profile -> LP vorticity shell -> semiclassical defect measure -> positive mass target on L_max graph near Sigma -> pressure nonlocality bootstrap -> commutator/leakage consumers -> full local monotonicity blocker."
 
 proposalString : String
 proposalString =
@@ -524,6 +632,12 @@ record NSMicrolocalDefectMassConstructionBoundaryReceipt : Setω where
       PressureNonlocalityBootstrap
     pressureBootstrapIsCanonical :
       pressureBootstrap ≡ canonicalPressureBootstrap
+    admissibilityQuotientBoundary :
+      NSMicrolocalDefectMassAdmissibilityQuotientBoundary
+    admissibilityQuotientBoundaryIsCanonical :
+      admissibilityQuotientBoundary
+      ≡
+      canonicalNSMicrolocalDefectMassAdmissibilityQuotientBoundary
 
     orcslpgf :
       NSMicrolocalDefectMassConstructionORCSLPGF
@@ -544,6 +658,10 @@ record NSMicrolocalDefectMassConstructionBoundaryReceipt : Setω where
       List MicrolocalDefectMassStatusRow
     statusRowsAreCanonical :
       statusRows ≡ canonicalMicrolocalDefectMassStatusRows
+    dependencyLinks :
+      List MicrolocalDefectMassDependencyLink
+    dependencyLinksAreCanonical :
+      dependencyLinks ≡ canonicalMicrolocalDefectMassDependencyLinks
     blockerRows :
       List MicrolocalDefectMassBlocker
     blockerRowsAreCanonical :
@@ -559,8 +677,12 @@ record NSMicrolocalDefectMassConstructionBoundaryReceipt : Setω where
       supportRowCount ≡ 7
     statusRowCount :
       Nat
-    statusRowCountIs10 :
-      statusRowCount ≡ 10
+    statusRowCountIs13 :
+      statusRowCount ≡ 13
+    dependencyLinkCount :
+      Nat
+    dependencyLinkCountIs6 :
+      dependencyLinkCount ≡ 6
     blockerRowCount :
       Nat
     blockerRowCountIs12 :
@@ -599,6 +721,21 @@ record NSMicrolocalDefectMassConstructionBoundaryReceipt : Setω where
       MaximalStrainGraphMassTargetTyped ≡ true
     pressureNonlocalityBootstrapBlockerTyped :
       PressureNonlocalityBootstrapBlockerTyped ≡ true
+    admissibilityQuotientPositiveMassTargetRecorded :
+      positiveMassTargetRecorded
+        canonicalNSMicrolocalDefectMassAdmissibilityQuotientBoundary
+      ≡
+      true
+    admissibilityQuotientPositiveMassConstructedFalse :
+      positiveMassConstructed
+        canonicalNSMicrolocalDefectMassAdmissibilityQuotientBoundary
+      ≡
+      false
+    admissibilityQuotientPressureBootstrapClosedFalse :
+      pressureBootstrapClosed
+        canonicalNSMicrolocalDefectMassAdmissibilityQuotientBoundary
+      ≡
+      false
     sigmaNonRadialLowerBoundConsumerTyped :
       SigmaNonRadialLowerBoundConsumerTyped ≡ true
     btBoundaryDefectLeakageConsumerTyped :
@@ -691,6 +828,10 @@ canonicalNSMicrolocalDefectMassConstructionBoundaryReceipt =
         canonicalPressureBootstrap
     ; pressureBootstrapIsCanonical =
         refl
+    ; admissibilityQuotientBoundary =
+        canonicalNSMicrolocalDefectMassAdmissibilityQuotientBoundary
+    ; admissibilityQuotientBoundaryIsCanonical =
+        refl
     ; orcslpgf =
         canonicalNSMicrolocalDefectMassConstructionORCSLPGF
     ; orcslpgfIsCanonical =
@@ -707,6 +848,10 @@ canonicalNSMicrolocalDefectMassConstructionBoundaryReceipt =
         canonicalMicrolocalDefectMassStatusRows
     ; statusRowsAreCanonical =
         refl
+    ; dependencyLinks =
+        canonicalMicrolocalDefectMassDependencyLinks
+    ; dependencyLinksAreCanonical =
+        refl
     ; blockerRows =
         canonicalMicrolocalDefectMassBlockers
     ; blockerRowsAreCanonical =
@@ -721,7 +866,11 @@ canonicalNSMicrolocalDefectMassConstructionBoundaryReceipt =
         refl
     ; statusRowCount =
         microlocalDefectMassStatusRowCount
-    ; statusRowCountIs10 =
+    ; statusRowCountIs13 =
+        refl
+    ; dependencyLinkCount =
+        microlocalDefectMassDependencyLinkCount
+    ; dependencyLinkCountIs6 =
         refl
     ; blockerRowCount =
         microlocalDefectMassBlockerCount
@@ -758,6 +907,12 @@ canonicalNSMicrolocalDefectMassConstructionBoundaryReceipt =
     ; maximalStrainGraphMassTargetTyped =
         refl
     ; pressureNonlocalityBootstrapBlockerTyped =
+        refl
+    ; admissibilityQuotientPositiveMassTargetRecorded =
+        refl
+    ; admissibilityQuotientPositiveMassConstructedFalse =
+        refl
+    ; admissibilityQuotientPressureBootstrapClosedFalse =
         refl
     ; sigmaNonRadialLowerBoundConsumerTyped =
         refl

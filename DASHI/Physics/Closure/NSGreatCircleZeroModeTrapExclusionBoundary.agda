@@ -977,3 +977,143 @@ nsGreatCircleZeroModeTrapBoundaryKeepsTerminalFalse :
   terminalPromotion ≡ false
 nsGreatCircleZeroModeTrapBoundaryKeepsTerminalFalse =
   terminalPromotionIsFalse
+
+------------------------------------------------------------------------
+-- Explicit fail-closed boundary envelope.
+
+canonicalGreatCircleTrapRemainingObligations :
+  List String
+canonicalGreatCircleTrapRemainingObligations =
+  "classify which NS zero-mode components miss a great circle"
+  ∷ "prove depletion or rigidity for any great-circle-hitting zero-mode subset"
+  ∷ "prove leakage away from zero modes"
+  ∷ "prove sector-switching compactness or microlocal stabilization"
+  ∷ "construct nontrivial microlocal defect mass from arbitrary blowup sequences"
+  ∷ "derive NSCriticalResidualNonPositive and FullLocalDefectMonotonicity"
+  ∷ "keep Clay Navier-Stokes and terminal promotion false until mechanism exhaustion is proved"
+  ∷ []
+
+greatCircleTrapRemainingObligationCount : Nat
+greatCircleTrapRemainingObligationCount =
+  listLength canonicalGreatCircleTrapRemainingObligations
+
+greatCircleTrapRemainingObligationCountIs7 :
+  greatCircleTrapRemainingObligationCount ≡ 7
+greatCircleTrapRemainingObligationCountIs7 =
+  refl
+
+record NSGreatCircleZeroModeTrapFailClosedEnvelope : Setω where
+  constructor nsGreatCircleZeroModeTrapFailClosedEnvelope
+  field
+    receipt :
+      NSGreatCircleZeroModeTrapExclusionBoundaryReceipt
+    receiptIsCanonical :
+      receipt ≡ canonicalNSGreatCircleZeroModeTrapExclusionBoundaryReceipt
+
+    externalAuthorityAcceptedAsBoundaryOnly :
+      LRT.LeiRenTianGreatCircleAuthorityBoundaryRecorded ≡ true
+    internalLeiRenTianProofAbsent :
+      LeiRenTianTheoremInternallyFormalized ≡ false
+
+    typedCriterionRecorded :
+      TrapExclusionBoundary
+    typedCriterionRecordedIsCanonical :
+      typedCriterionRecorded ≡ canonicalTrapExclusionBoundary
+
+    branches :
+      List GreatCircleTrapMechanismBranch
+    branchesAreCanonical :
+      branches ≡ canonicalGreatCircleTrapBranches
+    branchCountProof :
+      listLength branches ≡ 4
+
+    supportRows :
+      List GreatCircleTrapSupportRow
+    supportRowsAreCanonical :
+      supportRows ≡ canonicalGreatCircleTrapSupportRows
+    supportRowCountProof :
+      listLength supportRows ≡ 7
+
+    statusRows :
+      List GreatCircleTrapStatusRow
+    statusRowsAreCanonical :
+      statusRows ≡ canonicalGreatCircleTrapStatusRows
+    statusRowCountProof :
+      listLength statusRows ≡ 9
+
+    blockers :
+      List GreatCircleTrapBlocker
+    blockersAreCanonical :
+      blockers ≡ canonicalGreatCircleTrapBlockers
+    blockerCountProof :
+      listLength blockers ≡ 10
+
+    remainingObligations :
+      List String
+    remainingObligationsAreCanonical :
+      remainingObligations ≡ canonicalGreatCircleTrapRemainingObligations
+    remainingObligationCountProof :
+      listLength remainingObligations ≡ 7
+
+    promotionFlags :
+      List NSGreatCircleZeroModeTrapPromotion
+    promotionFlagsAreEmpty :
+      promotionFlags ≡ []
+    noPromotionPossibleHere :
+      NSGreatCircleZeroModeTrapPromotion →
+      ⊥
+
+    microlocalMassStillFalse :
+      MicrolocalDefectMassConstructed ≡ false
+    criticalResidualStillFalse :
+      NSCriticalResidualNonPositive ≡ false
+    fullLocalMonotonicityStillFalse :
+      FullLocalDefectMonotonicity ≡ false
+    claySolvedStillFalse :
+      full_clay_ns_solved ≡ false
+    clayPromotionStillFalse :
+      clayNavierStokesPromoted ≡ false
+    terminalPromotionStillFalse :
+      terminalPromotion ≡ false
+
+open NSGreatCircleZeroModeTrapFailClosedEnvelope public
+
+canonicalNSGreatCircleZeroModeTrapFailClosedEnvelope :
+  NSGreatCircleZeroModeTrapFailClosedEnvelope
+canonicalNSGreatCircleZeroModeTrapFailClosedEnvelope =
+  nsGreatCircleZeroModeTrapFailClosedEnvelope
+    canonicalNSGreatCircleZeroModeTrapExclusionBoundaryReceipt
+    refl
+    LRT.leiRenTianGreatCircleAuthorityBoundaryRecordedIsTrue
+    refl
+    canonicalTrapExclusionBoundary
+    refl
+    canonicalGreatCircleTrapBranches
+    refl
+    greatCircleTrapBranchCountIs4
+    canonicalGreatCircleTrapSupportRows
+    refl
+    greatCircleTrapSupportRowCountIs7
+    canonicalGreatCircleTrapStatusRows
+    refl
+    greatCircleTrapStatusRowCountIs9
+    canonicalGreatCircleTrapBlockers
+    refl
+    greatCircleTrapBlockerCountIs10
+    canonicalGreatCircleTrapRemainingObligations
+    refl
+    greatCircleTrapRemainingObligationCountIs7
+    []
+    refl
+    nsGreatCircleZeroModeTrapPromotionImpossibleHere
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalNSGreatCircleZeroModeTrapFailClosedSummary :
+  String
+canonicalNSGreatCircleZeroModeTrapFailClosedSummary =
+  "Fail-closed: the great-circle trap criterion is typed from external LRT authority, but classification, depletion, leakage, compactness, microlocal mass, residual monotonicity, Clay NS, and terminal promotion remain blocked."

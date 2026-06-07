@@ -391,6 +391,57 @@ nsZeroModeSetClassificationPromotionImpossibleHere :
   ⊥
 nsZeroModeSetClassificationPromotionImpossibleHere ()
 
+data NSZeroModeClassificationFailClosedGuard : Set where
+  classificationIsBoundaryNotTheoremGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+  zeroModeUnionDoesNotExhaustDefectMeasureGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+  rankOneFormulaDoesNotProveLeakageGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+  tangentialTargetDoesNotProveStarvationGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+  radialTargetDoesNotProveRigidityGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+  sigmaWedgeTargetDoesNotProveExclusionGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+  microlocalBoundaryDoesNotConstructMassGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+  supportClassificationStillOpenGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+  clayPromotionExplicitlyClosedGuard :
+    NSZeroModeClassificationFailClosedGuard
+
+canonicalNSZeroModeClassificationFailClosedGuards :
+  List NSZeroModeClassificationFailClosedGuard
+canonicalNSZeroModeClassificationFailClosedGuards =
+  classificationIsBoundaryNotTheoremGuard
+  ∷ zeroModeUnionDoesNotExhaustDefectMeasureGuard
+  ∷ rankOneFormulaDoesNotProveLeakageGuard
+  ∷ tangentialTargetDoesNotProveStarvationGuard
+  ∷ radialTargetDoesNotProveRigidityGuard
+  ∷ sigmaWedgeTargetDoesNotProveExclusionGuard
+  ∷ microlocalBoundaryDoesNotConstructMassGuard
+  ∷ supportClassificationStillOpenGuard
+  ∷ clayPromotionExplicitlyClosedGuard
+  ∷ []
+
+zeroModeClassificationFailClosedGuardCount : Nat
+zeroModeClassificationFailClosedGuardCount =
+  listLength canonicalNSZeroModeClassificationFailClosedGuards
+
+zeroModeClassificationFailClosedGuardCountIs9 :
+  zeroModeClassificationFailClosedGuardCount ≡ 9
+zeroModeClassificationFailClosedGuardCountIs9 =
+  refl
+
 zeroModeClassificationName : String
 zeroModeClassificationName =
   "NSZeroModeSetClassificationBoundary"
@@ -505,7 +556,7 @@ terminalPromotion =
 
 organizationString : String
 organizationString =
-  "O: Worker lane 2 owns the NS zero-mode classification boundary module only."
+  "O: Worker lane 3 owns the NS zero-mode classification boundary module only."
 
 requirementString : String
 requirementString =
@@ -718,6 +769,15 @@ record NSZeroModeSetClassificationBoundaryReceipt : Setω where
     statusCountIs10 :
       statusCount ≡ 10
 
+    failClosedGuards :
+      List NSZeroModeClassificationFailClosedGuard
+    failClosedGuardsAreCanonical :
+      failClosedGuards ≡ canonicalNSZeroModeClassificationFailClosedGuards
+    failClosedGuardCount :
+      Nat
+    failClosedGuardCountIs9 :
+      failClosedGuardCount ≡ 9
+
     boundaryRecorded :
       NSZeroModeSetClassificationBoundaryRecorded ≡ true
     rankOneDefectLaplacianFormulaImported :
@@ -910,6 +970,14 @@ canonicalNSZeroModeSetClassificationBoundaryReceipt =
     ; statusCount =
         zeroModeSetClassificationStatusCount
     ; statusCountIs10 =
+        refl
+    ; failClosedGuards =
+        canonicalNSZeroModeClassificationFailClosedGuards
+    ; failClosedGuardsAreCanonical =
+        refl
+    ; failClosedGuardCount =
+        zeroModeClassificationFailClosedGuardCount
+    ; failClosedGuardCountIs9 =
         refl
     ; boundaryRecorded =
         refl

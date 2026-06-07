@@ -16,6 +16,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Setω)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy as CLC
@@ -165,6 +166,27 @@ laneBlocker yangMillsZeroModeLane =
   missingYMHamiltonianDominationAndGaugeQuotientRigidity
 laneBlocker coreUnificationZeroModeLane =
   missingCoreFourPointDefectElimination
+
+data DefectLaplacianZeroModePromotionAuthority : Set where
+
+defectLaplacianZeroModePromotionAuthorityImpossibleHere :
+  DefectLaplacianZeroModePromotionAuthority →
+  ⊥
+defectLaplacianZeroModePromotionAuthorityImpossibleHere ()
+
+data ZeroModeRigidityReceiptAuthority : Set where
+
+zeroModeRigidityReceiptAuthorityImpossibleHere :
+  ZeroModeRigidityReceiptAuthority →
+  ⊥
+zeroModeRigidityReceiptAuthorityImpossibleHere ()
+
+data ContinuumZeroModeTransferAuthority : Set where
+
+continuumZeroModeTransferAuthorityImpossibleHere :
+  ContinuumZeroModeTransferAuthority →
+  ⊥
+continuumZeroModeTransferAuthorityImpossibleHere ()
 
 data ZeroModeInstanceRowKind : Set where
   nsRadialTangentialZeroModeRow :
@@ -742,6 +764,18 @@ record ProjectionNonlocalityDefectLaplacianZeroModeSheafReceipt : Setω where
     terminalPromotionFalseField :
       terminalPromotion ≡ false
 
+    defectLaplacianPromotionAuthorityImpossible :
+      DefectLaplacianZeroModePromotionAuthority →
+      ⊥
+
+    zeroModeRigidityReceiptAuthorityImpossible :
+      ZeroModeRigidityReceiptAuthority →
+      ⊥
+
+    continuumZeroModeTransferAuthorityImpossible :
+      ContinuumZeroModeTransferAuthority →
+      ⊥
+
 open ProjectionNonlocalityDefectLaplacianZeroModeSheafReceipt public
 
 canonicalProjectionNonlocalityDefectLaplacianZeroModeSheafReceipt :
@@ -807,6 +841,9 @@ canonicalProjectionNonlocalityDefectLaplacianZeroModeSheafReceipt =
     refl
     refl
     refl
+    defectLaplacianZeroModePromotionAuthorityImpossibleHere
+    zeroModeRigidityReceiptAuthorityImpossibleHere
+    continuumZeroModeTransferAuthorityImpossibleHere
     refl
     refl
     refl
