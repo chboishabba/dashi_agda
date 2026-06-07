@@ -59,6 +59,16 @@ import DASHI.Physics.Closure.NSSprint161MechanismExhaustionAnalyticAttemptBounda
 import DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt as NS162
 import DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt as NS163
 import DASHI.Physics.Closure.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt as NS164
+import DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt as NS166
+import DASHI.Physics.Closure.BTFiniteHodgeEffectiveActionTheoremBoundary as BTHodgeAction
+import DASHI.Physics.Closure.BTFiniteHodgeStarObligation as BTHodgeStar
+import DASHI.Physics.Closure.BTFiniteBuildingYMGapTransferBoundary as BTYMGap
+import DASHI.Physics.Closure.BTNSBoundaryDefectLeakageTarget as BTNSDefect
+import DASHI.Physics.Closure.FiniteDepthBoundaryObservablePromotionPipeline as BoundaryObservablePipeline
+import DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt as P0Stack
+
+-- Sprint165 support vocabulary for the P0 stack:
+-- finite depth boundary observable, Maxwell, Yang Mills, Navier Stokes.
 
 ------------------------------------------------------------------------
 -- Unified promotion obligation index.
@@ -139,6 +149,8 @@ data FullClayExternalAuthorityBoundaryLane : Set where
   nsTopologicalAlignmentObstructionBoundaryLane :
     FullClayExternalAuthorityBoundaryLane
   nsMicrolocalTopologicalBridgeBoundaryLane :
+    FullClayExternalAuthorityBoundaryLane
+  nsProjectionNonlocalityLeakagePrincipleBoundaryLane :
     FullClayExternalAuthorityBoundaryLane
 
 record PromotionLaneSummary : Set where
@@ -938,6 +950,13 @@ canonicalFullClayExternalAuthorityBoundarySummaries =
     "Sprint164 microlocal topological bridge boundary: microlocal alignment concentration, topological stretching leakage, angular-degeneracy pressure commutator gain, and degeneracy-riding cascade are recorded as theorem targets only"
     "MicrolocalAlignmentConcentrationLemma, TopologicalStretchingLeakageLemma, AngularDegeneracyPressureCommutatorGain, FullLocalDefectMonotonicity, MechanismExhaustionForFullClayNS, and Clay promotion remain false"
     "python scripts/ns_sprint164_microlocal_alignment_bridge_target.py && python scripts/ns_sprint164_topological_stretching_leakage_target.py && python scripts/ns_sprint164_pressure_commutator_gain_target.py && agda -i . DASHI/Physics/Closure/NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt.agda && pytest -q tests/test_ns_sprint164_emitters.py tests/test_ns_sprint164_agda_and_boundary.py"
+  ∷ mkFullClayExternalAuthorityBoundarySummary
+    nsProjectionNonlocalityLeakagePrincipleBoundaryLane
+    "DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt"
+    "canonicalSprint166ProjectionNonlocalityLeakagePrincipleReceipt"
+    "Sprint166 projection/nonlocality boundary records the shared P0 theorem target: NS [Pi_+, R_iR_j] pressure nonlocality and YM/BT [d_A,*] Hodge-gauge leakage are both commutator-control problems"
+    "ProjectionNonlocalityTheorem, PressureNonlocalityClosure, MechanismExhaustionForFullClayNS, full Clay NS, Clay promotion, and terminal promotion remain false"
+    "python scripts/projection_nonlocality_leakage_principle.py && python scripts/ns_projection_pressure_commutator_chain.py && python scripts/ym_bt_hodge_gauge_commutator_chain.py && agda -i . DASHI/Physics/Closure/Sprint166ProjectionNonlocalityLeakagePrincipleReceipt.agda && pytest -q tests/test_sprint166_projection_nonlocality_emitters.py tests/test_sprint166_projection_nonlocality_agda.py"
   ∷ []
 
 record UnifiedPromotionObligationIndex : Setω where
@@ -1101,6 +1120,15 @@ record UnifiedPromotionObligationIndex : Setω where
     nsSprint164MicrolocalTopologicalBridgeBoundary :
       NS164.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt
 
+    sprint166ProjectionNonlocalityLeakagePrinciple :
+      NS166.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt
+
+    finiteDepthBoundaryObservablePromotionPipeline :
+      BoundaryObservablePipeline.FiniteDepthBoundaryObservablePromotionPipeline
+
+    p0ClayFiniteHodgeNSTopologicalStack :
+      P0Stack.P0ClayFiniteHodgeNSTopologicalStackReceipt
+
     laneSummaries :
       List PromotionLaneSummary
 
@@ -1170,14 +1198,14 @@ record UnifiedPromotionObligationIndex : Setω where
     fullClayExternalAuthorityBoundaryCount :
       Nat
 
-    fullClayExternalAuthorityBoundaryCountIs6 :
-      fullClayExternalAuthorityBoundaryCount ≡ 6
+    fullClayExternalAuthorityBoundaryCountIs7 :
+      fullClayExternalAuthorityBoundaryCount ≡ 7
 
     aggregateOpenObligationCount :
       Nat
 
-    aggregateOpenObligationCountIs84 :
-      aggregateOpenObligationCount ≡ 84
+    aggregateOpenObligationCountIs85 :
+      aggregateOpenObligationCount ≡ 85
 
     validationTarget :
       String
@@ -1309,6 +1337,12 @@ canonicalUnifiedPromotionObligationIndex =
         NS163.canonicalNSSprint163TopologicalAlignmentObstructionBoundaryReceipt
     ; nsSprint164MicrolocalTopologicalBridgeBoundary =
         NS164.canonicalNSSprint164MicrolocalTopologicalBridgeBoundaryReceipt
+    ; sprint166ProjectionNonlocalityLeakagePrinciple =
+        NS166.canonicalSprint166ProjectionNonlocalityLeakagePrincipleReceipt
+    ; finiteDepthBoundaryObservablePromotionPipeline =
+        BoundaryObservablePipeline.canonicalFiniteDepthBoundaryObservablePromotionPipeline
+    ; p0ClayFiniteHodgeNSTopologicalStack =
+        P0Stack.canonicalP0ClayFiniteHodgeNSTopologicalStackReceipt
     ; laneSummaries =
         canonicalPromotionLaneSummaries
     ; adapterAdvancementSummaries =
@@ -1354,12 +1388,12 @@ canonicalUnifiedPromotionObligationIndex =
     ; smFirstPrinciplesBoundaryCountIs9 =
         refl
     ; fullClayExternalAuthorityBoundaryCount =
-        6
-    ; fullClayExternalAuthorityBoundaryCountIs6 =
+        7
+    ; fullClayExternalAuthorityBoundaryCountIs7 =
         refl
     ; aggregateOpenObligationCount =
-        84
-    ; aggregateOpenObligationCountIs84 =
+        85
+    ; aggregateOpenObligationCountIs85 =
         refl
     ; validationTarget =
         "DASHI/Promotion/ObligationIndex.agda"
@@ -1381,11 +1415,11 @@ canonicalUnifiedPromotionLaneCountIs6 :
   ≡ 6
 canonicalUnifiedPromotionLaneCountIs6 = refl
 
-canonicalUnifiedPromotionOpenObligationCountIs84 :
+canonicalUnifiedPromotionOpenObligationCountIs85 :
   UnifiedPromotionObligationIndex.aggregateOpenObligationCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 84
-canonicalUnifiedPromotionOpenObligationCountIs84 = refl
+  ≡ 85
+canonicalUnifiedPromotionOpenObligationCountIs85 = refl
 
 canonicalUnifiedPromotionAdapterAdvancementCountIs6 :
   UnifiedPromotionObligationIndex.adapterAdvancementCount
@@ -1423,11 +1457,11 @@ canonicalUnifiedPromotionSMFirstPrinciplesBoundaryCountIs9 :
   ≡ 9
 canonicalUnifiedPromotionSMFirstPrinciplesBoundaryCountIs9 = refl
 
-canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs6 :
+canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs7 :
   UnifiedPromotionObligationIndex.fullClayExternalAuthorityBoundaryCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 6
-canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs6 = refl
+  ≡ 7
+canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs7 = refl
 
 canonicalUnifiedPromotionTerminalPromotionIsFalse :
   UnifiedPromotionObligationIndex.terminalPromotion

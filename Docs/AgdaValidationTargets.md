@@ -78,6 +78,21 @@ canonical closure spine:
 - `DASHI/Physics/Closure/UnificationNextAnalyticCalculationIndex.agda`
 - `DASHI/Physics/Closure/YMStrictSelectedHodgeAlgebraLaws.agda`
 - `DASHI/Physics/Closure/YMStrictSelectedHodgeVariationPairing.agda`
+- `DASHI/Physics/Closure/BTFiniteHodgeStarObligation.agda`
+- `DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda`
+- `DASHI/Physics/Closure/BTFiniteBuildingYMGapTransferBoundary.agda`
+- `DASHI/Physics/Closure/BTNSBoundaryDefectLeakageTarget.agda`
+- `DASHI/Physics/Closure/ClopenHolographicEffectiveFieldTheoryBoundary.agda`
+- `DASHI/Physics/Closure/FiniteDepthBoundaryObservablePromotionPipeline.agda`
+- `DASHI/Physics/Closure/NSRankOneProjectionCommutatorFormula.agda`
+- `DASHI/Physics/Closure/NSSigmaNonRadialCommutatorLowerBoundTarget.agda`
+- `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
+- `DASHI/Physics/Closure/BTFiniteMetricGaugeCompatibilityKappaBoundary.agda`
+- `DASHI/Physics/Closure/CompatibilityLeakageCoercivityTrichotomy.agda`
+- `DASHI/Physics/Closure/DNAClifford256StructuralCoincidenceReceipt.agda`
+- `DASHI/Physics/Closure/P0ClayFiniteHodgeNSTopologicalStackReceipt.agda`
+- `DASHI/Physics/Closure/ProjectionNonlocalityLeakagePrincipleBoundary.agda`
+- `DASHI/Physics/Closure/Sprint166ProjectionNonlocalityLeakagePrincipleReceipt.agda`
 - `DASHI/Physics/Closure/YMStrictSelectedBoundaryCancellationCriterion.agda`
 - `DASHI/Physics/Closure/YMStrictSelectedNonzeroActionVariation.agda`
 - `DASHI/Physics/Closure/YMStrictSelectedSourceCurrentCoupling.agda`
@@ -87,6 +102,24 @@ canonical closure spine:
 - `DASHI/Physics/Closure/YMRealSourcedDStarFEquationBoundary.agda`
 - `DASHI/Physics/Closure/YMConditionalMatterAuthorityToRealDStarF.agda`
 - `DASHI/Physics/Closure/YMSourcedEquationToHamiltonianQuotientBoundary.agda`
+
+Sprint165 P0 stack executable ledgers:
+
+- `scripts/p0_clay_finite_hodge_ns_stack.py`
+- `scripts/ns_clay_microlocal_gap_chain.py`
+- `scripts/finite_hodge_variation_gap_chain.py`
+- `scripts/projection_nonlocality_leakage_principle.py`
+- `scripts/ns_projection_pressure_commutator_chain.py`
+- `scripts/ym_bt_hodge_gauge_commutator_chain.py`
+
+The P0 stack records `BTFiniteHodgeVariationTheorem` as the next overall
+analytic calculation and `AngularDegeneracyPressureCommutatorGain` as the
+next NS-only Clay calculation. Maxwell, YM/Yang-Mills, NS/Navier-Stokes,
+observable, continuum, Clay, and terminal promotion flags remain false.
+Sprint166 records the shared projection/nonlocality leakage frontier:
+`[Pi_+, R_i R_j]` is the NS matrix/eigenbundle pressure commutator target,
+`[d_A,*]F_A` is the YM/BT finite Hodge-gauge compatibility defect target, and
+scalar Fourier cutoffs are explicitly not the source of the pressure gain.
 - `DASHI/Physics/Closure/YMSelfAdjointHamiltonianQuotientRequirementNormalizer.agda`
 - `DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda`
 - `DASHI/Promotion/NumericAuthorityPayloadValidator.agda`

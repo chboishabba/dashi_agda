@@ -1,0 +1,38 @@
+{
+  "closure_guards_fail_closed": true,
+  "contract": "ym_bt_hodge_gauge_commutator_chain",
+  "decision": "fail_closed_compatibility_chain_no_promotion",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ym_bt_hodge_gauge_commutator_chain/ym_bt_hodge_gauge_commutator_chain_manifest.json",
+      "sha256": "18495b4375e0ceb1d6bc5673449b4f0c93cce712dbbd3067b3cd349f81f9c780"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ym_bt_hodge_gauge_commutator_chain/ym_bt_hodge_gauge_commutator_chain.md",
+      "sha256": "0723c58401e715bc5b3b34eca4e54c2ed435e853491276cab9001e715635db43"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ym_bt_hodge_gauge_commutator_chain/ym_bt_hodge_gauge_commutator_chain_rows.csv",
+      "sha256": "9b719de6c88f58a2cbc8139dbc362361c579866dc20a80258e5ed5d4f520a87d"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ym_bt_hodge_gauge_commutator_chain/ym_bt_hodge_gauge_commutator_chain_rows.json",
+      "sha256": "5da70268ded8f3381d0c5081b22b96c68e4b26d9fc1406228bc74e2735e6c7e4"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ym_bt_hodge_gauge_commutator_chain/ym_bt_hodge_gauge_commutator_chain_summary.json",
+      "sha256": "f7d7541adc7f39294611601ccfedeb41f1c75a17e0534006dcc2a6199ff93880"
+    }
+  },
+  "generated_at": "2026-06-08T00:00:00+10:00",
+  "manifest_hash": "84d90d88b07b6165ac4e3a5fa8c0b784653be1408384b19db80d1adbabc66dd4",
+  "repo_root": "/home/c/Documents/code/dashi_agda",
+  "sprint": 166,
+  "validation_passed": true,
+  "worker": 4
+}

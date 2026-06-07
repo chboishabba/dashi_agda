@@ -6,6 +6,83 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Finite projection/nonlocality spectral tranche for `2026-06-08`: adds
+  `DASHI.Physics.Closure.NSDefectLaplacianRankOneSpectrum`,
+  `DASHI.Physics.Closure.NSMonodromyIntegralBoundFinite`,
+  `DASHI.Physics.Closure.YMBTMetricRatioDefectGapFinite`,
+  `DASHI.Physics.Closure.YMStrictSelectedHodgeVariationToyPairing`,
+  `DASHI.Physics.Closure.NSThreeCaseDefectResidualExhaustionFinite`, and
+  `DASHI.Physics.Closure.UniformProjectionNonlocalityGapFinite`, plus focused
+  tests and `DASHI.Everything` imports. The tranche turns the current
+  projection/nonlocality sketch into checked finite arithmetic: NS
+  `lambda_delta = cos^2(alpha) sin^2(alpha)` samples `0,3,4,3,0` over `16`,
+  a four-point monodromy average `1/2`, finite YM/BT
+  `kappa_p = (p - 1)^2 / p^2` for `p = 2,3,5`, a non-vacuous toy selected
+  Hodge variation pairing, a finite NS three-case residual table, and a finite
+  uniform projection/nonlocality receipt. The continuum semiclassical measure,
+  topological stretching leakage, pressure commutator gain, real selected
+  Hodge variation, BT finite Hodge theorem, YM continuum mass gap, Clay/YM/NS
+  promotions, semantic unification, and terminal promotion remain false/open.
+
+- Sprint166 projection/nonlocality leakage frontier for `2026-06-08`: adds
+  `DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary`,
+  `DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt`,
+  three deterministic emitters, output bundles, focused tests, and
+  `DASHI.Promotion.ObligationIndex` integration as the seventh full-Clay
+  external-authority boundary row. The round records the shared commutator
+  frontier: NS pressure leakage would require a non-scalar matrix/eigenbundle
+  `[Pi_+, R_i R_j]` commutator, while YM/BT Hodge variation exposes
+  `[d_A,*]F_A` as the finite Hodge-gauge compatibility defect. It explicitly
+  rejects scalar Fourier cutoff/Riesz noncommutation as the NS pressure-gain
+  source and keeps `ProjectionNonlocalityTheorem`,
+  `PressureNonlocalityClosure`, `NSCriticalResidualNonPositive`,
+  `FullLocalDefectMonotonicity`, finite Hodge variation closure, Clay/YM/NS
+  promotions, and terminal promotion false.
+
+- Sprint165 P0 Clay finite-Hodge / NS stack for `2026-06-08`: adds
+  `DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt`, three
+  deterministic emitters, generated output bundles, focused tests, and
+  `DASHI.Promotion.ObligationIndex` integration for both the finite-depth
+  boundary observable pipeline and the new P0 stack. The round makes the
+  current proof order explicit: `BTFiniteHodgeVariationTheorem` is the next
+  overall analytic calculation, while `AngularDegeneracyPressureCommutatorGain`
+  is the next NS-only Clay calculation. Maxwell, YM/Yang-Mills,
+  NS/Navier-Stokes, empirical observable, continuum, Clay, and terminal
+  promotions remain false.
+
+- Semantic/fiber bridge finite theorem round for `2026-06-08`: adds
+  `DASHI.Interop.FiberedCrankDASHISystem`,
+  `DASHI.Interop.ABIVerticalLiftBoundary`,
+  `DASHI.Interop.FiniteSelectionMiningTermination`,
+  `DASHI.Physics.Closure.ScaleLocalObservableCriterion`,
+  `DASHI.Physics.Closure.BruhatTitsHolographicCoordinateBoundary`, and
+  `DASHI.Physics.Closure.NSSheafTopologicalObstructionBridge`, plus focused
+  tests and `DASHI.Everything` imports. The round closes concrete finite
+  surfaces for artifact/semantic fibration, ABI vertical-lift accounting,
+  finite Nat-valued selection descent, scale-local observables, BT coordinate
+  projection, and the Sprint-163-anchored NS sheaf obstruction bridge. It keeps
+  JMD crank/protagonist/crank-mining terminology as imported bridge vocabulary
+  only and keeps semantic entropy grounding, physical ontology, continuum
+  observables, holographic QFT promotion, topological stretching leakage,
+  sheaf gluing, pressure commutator gain, mechanism exhaustion, Clay promotion,
+  and terminal unification false/open.
+
+- Sprint 164 NS microlocal/topological bridge boundary for `2026-06-08`: adds
+  `DASHI.Physics.Closure.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt`,
+  three Sprint 164 emitters, generated outputs, and focused tests. The round
+  anchors to Sprint 163 and records microlocal alignment concentration,
+  topological stretching leakage, angular-degeneracy pressure commutator gain,
+  and degeneracy-riding cascade as theorem targets only. It records
+  `MicrolocalAlignmentConcentrationTargetRecorded=true`,
+  `TopologicalStretchingLeakageTargetRecorded=true`,
+  `AngularDegeneracyPressureCommutatorGainTargetRecorded=true`, and
+  `DegeneracyRidingCascadeTargetRecorded=true`, while keeping
+  `MicrolocalAlignmentConcentrationLemma`,
+  `TopologicalStretchingLeakageLemma`,
+  `AngularDegeneracyPressureCommutatorGain`, `FullLocalDefectMonotonicity`,
+  `MechanismExhaustionForFullClayNS`, `full_clay_ns_solved`,
+  `fullClayNSSolved`, and `clayNavierStokesPromoted` false.
+
 - Semantic compression invariance target for `2026-06-08`: adds
   `DASHI.Interop.SemanticCompressionInvarianceTarget`, imports it through
   `DASHI.Everything`, and adds a focused regression test. The receipt names

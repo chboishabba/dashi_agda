@@ -1,3 +1,120 @@
+# 2026-06-08 Corrected P0 compatibility/leakage/coercivity round
+
+- Added checked modules:
+  `DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula`,
+  `DASHI.Physics.Closure.NSSigmaNonRadialCommutatorLowerBoundTarget`,
+  `DASHI.Physics.Closure.FiniteGaugeHodgeAdjointCompatibility`,
+  `DASHI.Physics.Closure.BTFiniteMetricGaugeCompatibilityKappaBoundary`,
+  `DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy`, and
+  `DASHI.Physics.Closure.DNAClifford256StructuralCoincidenceReceipt`.
+- Corrected the shared P0 theorem family:
+  compatibility gives equations, leakage gives depletion, and uniform
+  coercivity gives gaps.
+- Recorded the exact NS algebraic calculation
+  `||[Ptheta,Pplus]||_F^2 = 2 cos^2(alpha) sin^2(alpha)` while keeping
+  pressure control, Sigma lower bound, mechanism exhaustion, and Clay NS false.
+- Refined the YM/Hodge hinge to finite weighted adjoint compatibility
+  `<d_A alpha,beta> = <alpha,+/- * d_A * beta> + boundary`; the normalized YM
+  gap blocker is now the uniform `inf_d kappa_d > 0` target.
+- Recorded that DNA has real local `DNA256`/`FlatDNA256` support, but the
+  `Cl(7)` basis-dimension-is-256 claim is false locally (`2^7 = 128`);
+  Clifford-adjacent 256 arithmetic is structural coincidence only.
+- Maxwell, Yang-Mills, Navier-Stokes, Standard Model empirical, continuum,
+  Clay, and terminal promotions remain false.
+
+# 2026-06-08 finite projection/nonlocality spectral tranche
+
+- Added checked finite analytic modules:
+  `DASHI.Physics.Closure.NSDefectLaplacianRankOneSpectrum`,
+  `DASHI.Physics.Closure.NSMonodromyIntegralBoundFinite`,
+  `DASHI.Physics.Closure.YMBTMetricRatioDefectGapFinite`,
+  `DASHI.Physics.Closure.YMStrictSelectedHodgeVariationToyPairing`,
+  `DASHI.Physics.Closure.NSThreeCaseDefectResidualExhaustionFinite`, and
+  `DASHI.Physics.Closure.UniformProjectionNonlocalityGapFinite`.
+- Concrete finite calculations now checked:
+  NS rank-one defect Laplacian samples encode
+  `lambda_delta = cos^2(alpha) sin^2(alpha)` as `0,3,4,3,0` over denominator
+  `16`, with the `pi/4` sample recording `1/4`; the four-point monodromy
+  loop records `[0,1,0,1]` with average `1/2`; the finite YM/BT sample records
+  `kappa_p = (p - 1)^2 / p^2` for `p = 2,3,5` and depth-independence across
+  two finite depths; the toy selected-Hodge variation pairing is non-vacuous
+  on a small finite carrier; the three NS residual cases close only as a
+  finite table; and the finite uniform projection/nonlocality receipt unifies
+  the NS and YM/BT nonzero samples.
+- Imported the tranche through `DASHI.Everything`.
+- Governance remains fail-closed: `MicrolocalAlignmentConcentrationLemma`,
+  `TopologicalStretchingLeakageLemma`,
+  `AngularDegeneracyPressureCommutatorGain`,
+  `MechanismExhaustionForFullClayNS`, real selected Hodge variation,
+  `BTFiniteHodgeVariationTheorem`, continuum uniform projection/nonlocality,
+  continuum YM mass gap, Clay/YM/NS promotions, semantic unification, and
+  terminal promotion remain false/open.
+
+# 2026-06-08 Sprint166 projection/nonlocality leakage frontier
+
+- Added checked modules:
+  `DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary` and
+  `DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt`.
+- Added deterministic emitters and output bundles:
+  `scripts/projection_nonlocality_leakage_principle.py`,
+  `scripts/ns_projection_pressure_commutator_chain.py`, and
+  `scripts/ym_bt_hodge_gauge_commutator_chain.py`.
+- Integrated the Sprint166 receipt into `DASHI.Promotion.ObligationIndex` as
+  the seventh full-Clay external-authority boundary row and imported it through
+  `DASHI.Everything`.
+- Recorded the shared P0 frontier:
+  `[Pi,N] != 0 -> leakage/gain` as a theorem target only.
+  NS instantiation: matrix/eigenbundle `[Pi_+, R_i R_j]`, with scalar Fourier
+  cutoff/Riesz commutator explicitly rejected.
+  YM/BT instantiation: finite Hodge-gauge compatibility defect, later corrected
+  to weighted adjoint/IBP compatibility rather than raw `[d_A,*]F_A`.
+- Kept `ProjectionNonlocalityTheorem`, `PressureNonlocalityClosure`,
+  `NSCriticalResidualNonPositive`, `FullLocalDefectMonotonicity`,
+  `BTFiniteHodgeVariationTheorem`, Clay/YM/NS promotions, and terminal
+  promotion false.
+
+# 2026-06-08 Sprint165 P0 Clay finite-Hodge / NS stack
+
+- Added checked P0 stack module:
+  `DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt`.
+- Added deterministic emitters and output bundles:
+  `scripts/p0_clay_finite_hodge_ns_stack.py`,
+  `scripts/ns_clay_microlocal_gap_chain.py`, and
+  `scripts/finite_hodge_variation_gap_chain.py`.
+- Integrated the finite-depth boundary observable pipeline and P0 stack into
+  `DASHI.Promotion.ObligationIndex` and imported the P0 stack through
+  `DASHI.Everything`.
+- Current proof order is explicit:
+  `BTFiniteHodgeVariationTheorem` is the next overall analytic calculation;
+  `AngularDegeneracyPressureCommutatorGain` is the next NS-only Clay
+  calculation.
+- Governance remains fail-closed: Maxwell, YM/Yang-Mills, NS/Navier-Stokes,
+  empirical observable, continuum, Clay, and terminal promotions remain false.
+
+# 2026-06-08 Semantic/fiber bridge finite theorem round
+
+- Added checked interop modules:
+  `DASHI.Interop.FiberedCrankDASHISystem`,
+  `DASHI.Interop.ABIVerticalLiftBoundary`, and
+  `DASHI.Interop.FiniteSelectionMiningTermination`.
+- Added checked physics bridge modules:
+  `DASHI.Physics.Closure.ScaleLocalObservableCriterion`,
+  `DASHI.Physics.Closure.BruhatTitsHolographicCoordinateBoundary`, and
+  `DASHI.Physics.Closure.NSSheafTopologicalObstructionBridge`.
+- Integrated the six modules through `DASHI.Everything` and added focused
+  tests for each.
+- Substantial finite progress: artifact/semantic fibration with vertical
+  preservation, ABI bounded-overhead rows, three-state Nat-valued finite
+  selection descent, scale-local observable iff fiber-constant criterion,
+  finite BT bulk-to-boundary coordinate projection, and Sprint-163-anchored
+  NS sheaf/topological obstruction rows.
+- Governance remains fail-closed: JMD crank/protagonist/crank-mining terms are
+  imported bridge vocabulary only; semantic-AIT/Kolmogorov and BT/QFT sources
+  are context-only; no semantic entropy grounding theorem, continuum
+  observable, holographic QFT bridge, physical ontology, topological
+  stretching leakage, sheaf gluing, pressure commutator gain, mechanism
+  exhaustion, Clay claim, or terminal unification is promoted.
+
 # 2026-06-08 Semantic compression invariance target
 
 - Added checked module:
@@ -14,6 +131,27 @@
   `epsilonPostEntropyInvarianceProved=false`,
   `physicalProjectionPromoted=false`, and
   `terminalUnificationPromoted=false`.
+
+# 2026-06-08 Sprint 164 NS microlocal/topological bridge boundary
+
+- Added checked Sprint 164 module:
+  `NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt`.
+- Added `scripts/ns_sprint164_microlocal_alignment_bridge_target.py`,
+  `scripts/ns_sprint164_topological_stretching_leakage_target.py`, and
+  `scripts/ns_sprint164_pressure_commutator_gain_target.py`, with focused
+  tests.
+- Extended the full-Clay external-authority boundary layer in
+  `DASHI.Promotion.ObligationIndex` from five rows to six rows.
+- Recorded `MicrolocalAlignmentConcentrationTargetRecorded=true`,
+  `TopologicalStretchingLeakageTargetRecorded=true`,
+  `AngularDegeneracyPressureCommutatorGainTargetRecorded=true`,
+  `DegeneracyRidingCascadeTargetRecorded=true`, and
+  `SanniSymbolLevelOnlyAnchorRecorded=true`.
+- Kept `MicrolocalAlignmentConcentrationLemma`,
+  `TopologicalStretchingLeakageLemma`,
+  `AngularDegeneracyPressureCommutatorGain`, `FullLocalDefectMonotonicity`,
+  `MechanismExhaustionForFullClayNS`, `full_clay_ns_solved`,
+  `fullClayNSSolved`, and `clayNavierStokesPromoted` false.
 
 # 2026-06-08 Sprint 163 NS topological-alignment obstruction boundary
 
@@ -380,6 +518,21 @@
   authority, real sourced `D * F = J`, the self-adjoint real-carrier YM
   Hamiltonian, continuum mass gap, Clay YM, terminal promotion, and the general
   `missingDefectAdmissibilityHierarchyToParallelogram` theorem remain false.
+- Follow-up clopen/BT physics bridge: added
+  `DASHI.Physics.Closure.ClopenHolographicEffectiveFieldTheoryBoundary`,
+  `DASHI.Physics.Closure.BTFiniteHodgeStarObligation`,
+  `DASHI.Physics.Closure.BTFiniteHodgeEffectiveActionTheoremBoundary`,
+  `DASHI.Physics.Closure.BTFiniteBuildingYMGapTransferBoundary`,
+  `DASHI.Physics.Closure.BTNSBoundaryDefectLeakageTarget`, and
+  `DASHI.Physics.Closure.FiniteDepthBoundaryObservablePromotionPipeline`.
+  The checked bridge records clopen hyperfabric and Bruhat-Tits tree/building
+  data as a finite-depth holographic scaffold, not a p-adic-spacetime proof. It
+  names BT finite Hodge-star obligations, finite Hodge effective-action and
+  Euler-Lagrange targets, finite-building YM gap-transfer blockers, finite-depth
+  NS boundary-defect leakage targets, and the SM/Higgs boundary-observable
+  promotion pipeline. Maxwell, Yang-Mills, NS Clay, Standard Model empirical
+  promotion, continuum transfer, p-adic physical ontology, and terminal
+  promotion remain false.
 - Follow-up Lean Aristotle intake: added
   `scripts/lean_aristotle_intake.py`, `tests/test_lean_aristotle_intake.py`,
   and `outputs/lean_aristotle_intake/`. The intake parses the uploaded allm

@@ -146,6 +146,24 @@ replacement, and metrology authority binding. The broader
 authority, real `D * F = J`, empirical authority, measured metrology, continuum
 physics, and terminal promotion remain false.
 
+Current finite projection/nonlocality spectral tranche:
+`DASHI.Physics.Closure.NSDefectLaplacianRankOneSpectrum`,
+`DASHI.Physics.Closure.NSMonodromyIntegralBoundFinite`,
+`DASHI.Physics.Closure.YMBTMetricRatioDefectGapFinite`,
+`DASHI.Physics.Closure.YMStrictSelectedHodgeVariationToyPairing`,
+`DASHI.Physics.Closure.NSThreeCaseDefectResidualExhaustionFinite`, and
+`DASHI.Physics.Closure.UniformProjectionNonlocalityGapFinite` are imported
+through `DASHI.Everything`. They check the finite arithmetic frontier behind
+the projection/nonlocality program: NS rank-one defect Laplacian samples
+`0,3,4,3,0` over denominator `16`, a four-point monodromy average `1/2`,
+finite YM/BT `kappa_p = (p - 1)^2 / p^2` for `p = 2,3,5`, a non-vacuous toy
+selected-Hodge variation pairing, a finite NS three-case residual table, and a
+finite uniform projection/nonlocality receipt. These are finite surfaces only:
+semiclassical concentration, topological stretching leakage, pressure
+commutator gain, real selected Hodge variation, BT finite Hodge theorem,
+continuum mass gap, Clay/YM/NS promotion, semantic unification, and terminal
+promotion remain false/open.
+
 Current NS Sprint 158 boundary: the repo records
 `SymmetricHouLuoRegularityClassClosure=true` and
 `SymmetricAxisymmetricWithSwirlGlobalRegularity=true` for the scoped symmetric
@@ -251,6 +269,99 @@ anchors to Sprint 162 and records
 and `scripts/ns_sprint163_sigma_local_analysis_gap.py` emit the source-bound
 symbol support, the critical-alignment theorem target, and the Sigma-local
 analysis gap near angular strain symbol degeneracies.
+
+Current NS Sprint 164 microlocal/topological bridge boundary: the repo records
+the next Clay-shaped analytic targets without promoting them. The checked
+receipt
+`DASHI.Physics.Closure.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt`
+anchors to Sprint 163 and records
+`MicrolocalAlignmentConcentrationTargetRecorded=true`,
+`TopologicalStretchingLeakageTargetRecorded=true`,
+`AngularDegeneracyPressureCommutatorGainTargetRecorded=true`,
+`DegeneracyRidingCascadeTargetRecorded=true`, and
+`SanniSymbolLevelOnlyAnchorRecorded=true`. It keeps
+`MicrolocalAlignmentConcentrationLemma`,
+`TopologicalStretchingLeakageLemma`,
+`AngularDegeneracyPressureCommutatorGain`, `FullLocalDefectMonotonicity`,
+`MechanismExhaustionForFullClayNS`, `full_clay_ns_solved`,
+`fullClayNSSolved`, and `clayNavierStokesPromoted` false. The executable
+surfaces `scripts/ns_sprint164_microlocal_alignment_bridge_target.py`,
+`scripts/ns_sprint164_topological_stretching_leakage_target.py`, and
+`scripts/ns_sprint164_pressure_commutator_gain_target.py` emit the microlocal
+alignment bridge target, the topological stretching leakage target, and the
+pressure commutator gain target.
+
+Current semantic/fiber bridge layer: `DASHI.Everything` imports
+`DASHI.Interop.SemanticCompressionInvarianceTarget`,
+`DASHI.Interop.FiberedCrankDASHISystem`,
+`DASHI.Interop.ABIVerticalLiftBoundary`,
+`DASHI.Interop.FiniteSelectionMiningTermination`,
+`DASHI.Physics.Closure.ScaleLocalObservableCriterion`,
+`DASHI.Physics.Closure.BruhatTitsHolographicCoordinateBoundary`, and
+`DASHI.Physics.Closure.NSSheafTopologicalObstructionBridge`. These checked
+surfaces add finite bridge/theorem content: artifact-to-semantics projection
+with vertical-transform preservation, ABI vertical-lift rows with bounded
+overhead, finite Nat-valued selection descent, a finite scale-local observable
+iff fiber-constant criterion, a finite Bruhat-Tits coordinate projection, and a
+Sprint-163-anchored NS sheaf obstruction bridge. JMD crank/protagonist and
+crank-mining terms remain imported bridge vocabulary only; semantic-AIT,
+Kolmogorov, and BT/QFT sources are context-only; no exact semantic entropy
+grounding, continuum observable, holographic QFT bridge, physical ontology,
+mechanism exhaustion, Clay claim, or terminal unification is promoted.
+
+Current clopen/BT finite-depth physics bridge: `DASHI.Everything` also imports
+`DASHI.Physics.Closure.ClopenHolographicEffectiveFieldTheoryBoundary`,
+`DASHI.Physics.Closure.BTFiniteHodgeStarObligation`,
+`DASHI.Physics.Closure.BTFiniteHodgeEffectiveActionTheoremBoundary`,
+`DASHI.Physics.Closure.BTFiniteBuildingYMGapTransferBoundary`,
+`DASHI.Physics.Closure.BTNSBoundaryDefectLeakageTarget`, and
+`DASHI.Physics.Closure.FiniteDepthBoundaryObservablePromotionPipeline`.
+Sprint165 also adds
+`DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt` plus
+deterministic ledgers under `outputs/p0_clay_finite_hodge_ns_stack/`,
+`outputs/ns_clay_microlocal_gap_chain/`, and
+`outputs/finite_hodge_variation_gap_chain/`.
+These modules record the safe physics reading: clopen hyperfabric and
+Bruhat-Tits tree/building data are finite-depth holographic scaffolds, not
+proof that physical spacetime is p-adic. The checked target chain now names
+BT finite Hodge-star obligations, finite Hodge effective-action/Euler-Lagrange
+targets, finite-building YM gap-transfer blockers, finite-depth NS boundary
+defect leakage targets, finite-depth boundary-observable promotion gates, and
+the P0 priority order: calculate `BTFiniteHodgeVariationTheorem` first for
+the finite field-theory bridge, while the NS-only Clay lane remains blocked on
+`AngularDegeneracyPressureCommutatorGain`. Maxwell, Yang-Mills, Navier-Stokes,
+observable, continuum, Clay, and terminal promotions remain false.
+Sprint166 adds
+`DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary` and
+`DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt`,
+plus ledgers under `outputs/projection_nonlocality_leakage_principle/`,
+`outputs/ns_projection_pressure_commutator_chain/`, and
+`outputs/ym_bt_hodge_gauge_commutator_chain/`. These record the shared P0
+commutator-control insight: NS pressure leakage would require a non-scalar
+matrix/eigenbundle projection commutator `[Pi_+, R_i R_j]`, while YM/BT Hodge
+variation must prove finite gauge-Hodge adjoint compatibility rather than
+treating raw `[d_A,*]F_A` as the field equation.
+The scalar cutoff/Riesz commutator route is explicitly rejected; all theorem,
+Clay, YM, NS, continuum, and terminal promotion flags remain false.
+The follow-up corrected P0 calculation round adds
+`DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula`,
+`DASHI.Physics.Closure.NSSigmaNonRadialCommutatorLowerBoundTarget`,
+`DASHI.Physics.Closure.FiniteGaugeHodgeAdjointCompatibility`,
+`DASHI.Physics.Closure.BTFiniteMetricGaugeCompatibilityKappaBoundary`,
+`DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy`, and
+`DASHI.Physics.Closure.DNAClifford256StructuralCoincidenceReceipt`.  These
+separate the exact algebra from the analytic estimates: the NS rank-one
+projection formula records
+`||[Ptheta,Pplus]||_F^2 = 2 cos^2(alpha) sin^2(alpha)`, the Sigma target
+requires non-radiality plus microlocal defect mass before any pressure gain,
+the finite Hodge/YM hinge is the weighted adjoint/IBP compatibility
+`<d_A alpha,beta> = <alpha,+/- * d_A * beta> + boundary`, and the YM gap
+route is normalized to the uniform `inf_d kappa_d > 0` blocker.  The DNA
+receipt records real `DNA256`/`FlatDNA256` and Clifford-adjacent 256 arithmetic
+as structural coincidence only; it explicitly rejects a local `Cl(7)` basis
+dimension equals 256 claim because `2^7 = 128`.
+Maxwell, Yang-Mills, NS Clay, Standard Model empirical promotion, p-adic
+physical ontology, continuum transfer, and terminal unification remain false.
 
 Previous NS Sprint 157 boundary: the repo records
 `SymmetricHouLuoBKMFinite=true` for the symmetric Hou-Luo route only. The

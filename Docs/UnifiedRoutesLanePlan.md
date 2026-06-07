@@ -178,6 +178,17 @@ For the finite exterior-chain route, also cite
 rows from `A`, `F=dA`, and `dF=0` through Hodge, source current, `d*F=J`,
 `dJ=0`, `divJ=0`, unit calibration, empirical observables, and the Maxwell
 promotion guard.
+The corrected P0 Hodge/YM route should cite
+`DASHI.Physics.Closure.FiniteGaugeHodgeAdjointCompatibility` before any
+`d_A^*F=J` claim: the next exact finite proof is weighted adjoint/IBP
+compatibility, not a raw `[d_A,*]` commutator identity.  YM gap consumers
+should cite `DASHI.Physics.Closure.BTFiniteMetricGaugeCompatibilityKappaBoundary`
+for the normalized `inf_d kappa_d > 0` blocker, while NS consumers should cite
+`DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula` for the checked
+rank-one algebra and
+`DASHI.Physics.Closure.NSSigmaNonRadialCommutatorLowerBoundTarget` for the
+non-radial Sigma/microlocal-mass theorem target.  The shared governance surface
+is `DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy`.
 Downloaded Hodge/YM/string context artifacts should cite
 `DASHI.Promotion.DownloadedNewAdditionsReferenceIndex`. It indexes the 36 files
 under `temp-DOWNLOADED/new additions`, with checksum-bound generated manifests
@@ -212,6 +223,37 @@ conditional real `D * F = J` target, and the Hamiltonian quotient requirement
 normalizer. Physical matter/source authority, real sourced `D * F = J`,
 `missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`, continuum mass gap,
 YM Clay, Maxwell field equations, and terminal unification remain false. The
+clopen/BT finite-depth extension is now typed by
+`DASHI.Physics.Closure.ClopenHolographicEffectiveFieldTheoryBoundary`,
+`DASHI.Physics.Closure.BTFiniteHodgeStarObligation`,
+`DASHI.Physics.Closure.BTFiniteHodgeEffectiveActionTheoremBoundary`,
+`DASHI.Physics.Closure.BTFiniteBuildingYMGapTransferBoundary`,
+`DASHI.Physics.Closure.BTNSBoundaryDefectLeakageTarget`,
+`DASHI.Physics.Closure.FiniteDepthBoundaryObservablePromotionPipeline`, and
+`DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt`. These
+records make the finite-depth physics path explicit: BT/clopen scaffold,
+weighted primal/dual Hodge target, finite selected effective action, YM
+finite-building gap-transfer boundary, NS boundary-defect leakage target, and
+SM/Higgs boundary-observable promotion pipeline. Sprint165 normalizes the P0
+order: calculate `BTFiniteHodgeVariationTheorem` first for the finite
+field-equation bridge; calculate `AngularDegeneracyPressureCommutatorGain`
+first on the NS-only Clay lane. The remaining calculational
+blockers are metric BT Hodge star plus pairing/IBP, real matter-current
+coupling, real `D * F = J`, self-adjoint YM Hamiltonian quotient, uniform
+finite-building mass-gap lower bound, NS leakage-or-commutator-cost proof, and
+accepted empirical authority/holdout receipts. Maxwell, YM/Yang-Mills,
+NS/Navier-Stokes, observable, continuum, Clay, and terminal promotions remain
+false. The
+Sprint166 projection/nonlocality boundary adds
+`DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary` and
+`DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt`.
+It records the shared commutator frontier: NS needs a matrix/eigenbundle
+`[Pi_+, R_i R_j]` pressure nonlocality gain, not a scalar Fourier cutoff
+commutator; YM/BT needs weighted finite Hodge adjoint/IBP compatibility, with
+any `[d_A,*]` defect treated only as a compatibility diagnostic rather than the
+field equation. Both remain theorem targets only, with local defect
+monotonicity, finite Hodge variation closure, YM gap, Clay, and terminal
+promotion false. The
 downloaded Sprint 82/93 YM tables record
 `q = 0.23178189475262734`, `eta4_q < 1`, `eta8_q > 1`,
 `su3_first_safe_k = 11`, and a conditional Master WC3 route decision; they do

@@ -1,0 +1,57 @@
+{
+  "artifact_id": "projection_nonlocality_leakage_principle",
+  "artifacts": [
+    {
+      "path": "outputs/projection_nonlocality_leakage_principle/projection_nonlocality_leakage_principle_summary.json",
+      "sha256": "0e36fe865b0cf6c40914cd23ae3bf138fcf46d92c9281ad6fcfb220f7711c655",
+      "size_bytes": 7201
+    },
+    {
+      "path": "outputs/projection_nonlocality_leakage_principle/projection_nonlocality_leakage_principle_rows.json",
+      "sha256": "98e1d032a9744ba77d5e63b756b0391ef83f60e695192f2a858843ea5c32c9ec",
+      "size_bytes": 3856
+    },
+    {
+      "path": "outputs/projection_nonlocality_leakage_principle/projection_nonlocality_leakage_principle_rows.csv",
+      "sha256": "fd57684cc99f84523aaea1da5664dcfe89ba2992c9ed0e8e0ab68d0f64e5965d",
+      "size_bytes": 2275
+    },
+    {
+      "path": "outputs/projection_nonlocality_leakage_principle/projection_nonlocality_leakage_principle.md",
+      "sha256": "09e3d88d62763ea574686e0b7c685dbd4761968830b3fd140733be1c27dce3b3",
+      "size_bytes": 2419
+    }
+  ],
+  "contract": "projection_nonlocality_leakage_principle",
+  "files": {
+    "markdown": {
+      "exists": true,
+      "path": "outputs/projection_nonlocality_leakage_principle/projection_nonlocality_leakage_principle.md",
+      "sha256": "09e3d88d62763ea574686e0b7c685dbd4761968830b3fd140733be1c27dce3b3",
+      "size_bytes": 2419
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "outputs/projection_nonlocality_leakage_principle/projection_nonlocality_leakage_principle_rows.csv",
+      "sha256": "fd57684cc99f84523aaea1da5664dcfe89ba2992c9ed0e8e0ab68d0f64e5965d",
+      "size_bytes": 2275
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "outputs/projection_nonlocality_leakage_principle/projection_nonlocality_leakage_principle_rows.json",
+      "sha256": "98e1d032a9744ba77d5e63b756b0391ef83f60e695192f2a858843ea5c32c9ec",
+      "size_bytes": 3856
+    },
+    "summary": {
+      "exists": true,
+      "path": "outputs/projection_nonlocality_leakage_principle/projection_nonlocality_leakage_principle_summary.json",
+      "sha256": "0e36fe865b0cf6c40914cd23ae3bf138fcf46d92c9281ad6fcfb220f7711c655",
+      "size_bytes": 7201
+    }
+  },
+  "generated_at": "2026-06-08T00:00:00+10:00",
+  "manifest_hash": "9eda43c19d6200b33db049e265e9ad79b9795f9c171cfb9bc897394bd9191216",
+  "output_dir": "outputs/projection_nonlocality_leakage_principle",
+  "sprint": 166,
+  "validation_passed": true
+}

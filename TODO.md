@@ -3,6 +3,70 @@
 
 # P0 BLOCKERS
 
+• Sprint166 projection/nonlocality leakage frontier is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary` and
+    `DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt`;
+  - adds `scripts/projection_nonlocality_leakage_principle.py`,
+    `scripts/ns_projection_pressure_commutator_chain.py`, and
+    `scripts/ym_bt_hodge_gauge_commutator_chain.py`;
+  - generates `outputs/projection_nonlocality_leakage_principle/`,
+    `outputs/ns_projection_pressure_commutator_chain/`, and
+    `outputs/ym_bt_hodge_gauge_commutator_chain/`;
+  - records the shared commutator target:
+    NS `[Pi_+, R_i R_j]` pressure nonlocality and YM/BT `[d_A,*]F_A`
+    Hodge-gauge compatibility defect;
+  - rejects scalar Fourier cutoff/Riesz noncommutation as the NS pressure-gain
+    source;
+  - keeps `ProjectionNonlocalityTheorem`, `PressureNonlocalityClosure`,
+    `NSCriticalResidualNonPositive`, `FullLocalDefectMonotonicity`,
+    finite Hodge variation closure, Clay/YM/NS promotions, and terminal
+    promotion false.
+
+• Sprint165 P0 Clay finite-Hodge / NS stack is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt`;
+  - adds `scripts/p0_clay_finite_hodge_ns_stack.py`,
+    `scripts/ns_clay_microlocal_gap_chain.py`, and
+    `scripts/finite_hodge_variation_gap_chain.py`;
+  - generates `outputs/p0_clay_finite_hodge_ns_stack/`,
+    `outputs/ns_clay_microlocal_gap_chain/`, and
+    `outputs/finite_hodge_variation_gap_chain/`;
+  - integrates the finite-depth boundary observable pipeline and P0 stack into
+    `DASHI.Promotion.ObligationIndex`;
+  - records `BTFiniteHodgeVariationTheorem` as the next overall analytic
+    calculation and `AngularDegeneracyPressureCommutatorGain` as the next
+    NS-only Clay calculation;
+  - keeps Maxwell, YM/Yang-Mills, NS/Navier-Stokes, empirical observable,
+    continuum, Clay, and terminal promotions false.
+
+• Sprint 164 NS microlocal/topological bridge boundary is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt`;
+  - adds `scripts/ns_sprint164_microlocal_alignment_bridge_target.py`,
+    `scripts/ns_sprint164_topological_stretching_leakage_target.py`, and
+    `scripts/ns_sprint164_pressure_commutator_gain_target.py`;
+  - generates `outputs/ns_sprint164_microlocal_alignment_bridge_target/`,
+    `outputs/ns_sprint164_topological_stretching_leakage_target/`, and
+    `outputs/ns_sprint164_pressure_commutator_gain_target/`;
+  - records microlocal alignment concentration, topological stretching
+    leakage, angular-degeneracy pressure commutator gain, and
+    degeneracy-riding cascade as theorem targets only;
+  - keeps `MicrolocalAlignmentConcentrationLemma`,
+    `TopologicalStretchingLeakageLemma`,
+    `AngularDegeneracyPressureCommutatorGain`, `FullLocalDefectMonotonicity`,
+    `MechanismExhaustionForFullClayNS`, `full_clay_ns_solved`,
+    `fullClayNSSolved`, and `clayNavierStokesPromoted` false.
+
 • Sprint 163 NS topological-alignment obstruction boundary is implemented.
 
   Status:
