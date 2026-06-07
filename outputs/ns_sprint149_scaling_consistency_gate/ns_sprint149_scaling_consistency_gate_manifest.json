@@ -1,0 +1,51 @@
+{
+  "artifact_complete": true,
+  "beta_positive_scaling_proved": false,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint149_scaling_consistency_gate",
+  "control_card": {
+    "C": "A single Python stdlib emitter writes rows JSON, rows CSV, summary JSON, Markdown, and manifest artifacts through an atomic directory swap.",
+    "F": "Missing: proof of beta-positive concentration scaling, self-similar profile analysis, energy-width lower bound, and finite symmetric Hou-Luo BKM closure.",
+    "G": "Validation passes only if all nine rows exist, all requested global flags match exactly, and Clay/Navier-Stokes promotion flags are false.",
+    "L": "Rows are fixed, sorted by gate order, hashed deterministically, and validated against required IDs plus fail-closed promotion invariants.",
+    "O": "Lane 2 owns only scripts/ns_sprint149_scaling_consistency_gate.py and outputs/ns_sprint149_scaling_consistency_gate/.",
+    "P": "Use the artifact as Sprint 149 route-state evidence, not as an Agda theorem, numerical proof, BKM closure, or Clay promotion.",
+    "R": "Emit a deterministic ScalingConsistencyForHouLuoConcentration gate with the requested normalized rows and fail-closed proof flags.",
+    "S": "Explicit initial data, the corrected growth ODE, and a conditional migration threshold are recorded as support, while beta-positive scaling and full scaling consistency remain unproved."
+  },
+  "correct_growth_ode_closable": true,
+  "decision": "hold_scaling_consistency_unproved_fail_closed",
+  "explicit_initial_data_class": true,
+  "files": [
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate_rows.json",
+      "sha256": "19f165e7b11c4193046c4406b23f6c508feae97ad11c44b9dc64582d3f7069aa"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate_rows.csv",
+      "sha256": "af7afa2b17ae770e8e49059c0896c98c47e178c1a498000475ca2862b8077ced"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate_summary.json",
+      "sha256": "38301630a369d1b11abdf802cb31dfd2a1175af4fb812ebb7de7ba0de19c0227"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate.md",
+      "sha256": "a31440edcacf98933880659f1ca228acf30663ac65be328e88e83e35ee603c84"
+    }
+  ],
+  "full_clay_ns_solved": false,
+  "gate": "ScalingConsistencyForHouLuoConcentration",
+  "invariant_valid": true,
+  "lane": 2,
+  "manifest_hash": "e7408ed385ebdaae06384c5039db7c42bf1711e70e5edf8d19b3a44587b1e456",
+  "migration_threshold_conditionally_established": true,
+  "row_count": 9,
+  "scaling_consistency_proved": false,
+  "sprint": 149,
+  "symmetric_hou_luo_bkm_finite": false
+}

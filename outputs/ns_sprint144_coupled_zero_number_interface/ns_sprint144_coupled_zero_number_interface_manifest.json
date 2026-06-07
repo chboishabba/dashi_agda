@@ -1,0 +1,18 @@
+{
+  "artifact_complete": true,
+  "contract": "ns_sprint144_coupled_zero_number_interface",
+  "files": {
+    "markdown": "outputs/ns_sprint144_coupled_zero_number_interface/ns_sprint144_coupled_zero_number_interface.md",
+    "rows_csv": "outputs/ns_sprint144_coupled_zero_number_interface/ns_sprint144_coupled_zero_number_interface_rows.csv",
+    "rows_json": "outputs/ns_sprint144_coupled_zero_number_interface/ns_sprint144_coupled_zero_number_interface_rows.json",
+    "summary": "outputs/ns_sprint144_coupled_zero_number_interface/ns_sprint144_coupled_zero_number_interface_summary.json"
+  },
+  "invariants_passed": true,
+  "sha256": {
+    "markdown": "1908014fb39c813c435883aac7d4fde254ce6d378827eb1013e63882d7676455",
+    "rows_csv": "19c481f5a66577d96cf7fb9c7a7d5701e71937c7f706534b9e0e87dc39941024",
+    "rows_json": "d845c4705352ab22421667d5801c2e0a3b21824ea632a4ce9bb94f4b18df54b0",
+    "summary": "03fb612789389d5d75c528fe5ab2e30c822b31155bb7f362e24d62f4466a6ee7"
+  },
+  "temp_publish_strategy": "sibling_temp_dir_then_move"
+}

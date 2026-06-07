@@ -1,0 +1,43 @@
+{
+  "assertions": [
+    "LogLossSourceLowerBound",
+    "SourceAtZEqualsZero",
+    "SourceNonpositiveUnderAxialMonotonicity",
+    "InteriorMaximumViscousTermNonpositive",
+    "BKMFiniteConditionalOnAxialMonotonicity"
+  ],
+  "axial_monotonicity_gate": "AxialMonotonicityOfSwirlProfile",
+  "axial_monotonicity_required": true,
+  "axial_monotonicity_required_open_boundary": "Axial monotonicity is required for the signed source nonpositivity branch and remains open.",
+  "axial_monotonicity_status": "open",
+  "bkm_finite_conditional": true,
+  "bkm_finite_conditional_on": "AxialMonotonicityOfSwirlProfile",
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint136_hou_luo_symmetric_source_sign",
+  "control_card": {
+    "C": "stdlib dataclass emitter with deterministic JSON/CSV/Markdown surfaces",
+    "F": "Conditional on AxialMonotonicityOfSwirlProfile; no global Navier-Stokes theorem or nonmonotone branch closure is claimed.",
+    "G": "full_clay_ns_solved=false; clay_navier_stokes_promoted=false",
+    "L": "z-reflection parity -> source sign -> interior maximum viscosity sign -> conditional BKM finiteness",
+    "O": "Worker owns scripts/ns_sprint136_hou_luo_symmetric_source_sign.py and outputs/ns_sprint136_hou_luo_symmetric_source_sign/.",
+    "P": "Use this as the Sprint 136 branch ledger separating the symmetric monotone Hou-Luo scenario from unresolved nonsymmetric or nonmonotone scenarios.",
+    "R": "Record the Sprint 136 signed symmetric Hou-Luo result without promoting Clay.",
+    "S": "In the canonical z-reflection symmetric scenario, the source lower-bound blowup gate is false; the source is zero on z=0 and nonpositive under axial monotonicity away from z=0."
+  },
+  "exit_code": 0,
+  "exit_reason": "Sprint 136 symmetric source-sign ledger emitted: LogLossSourceLowerBound is false in the canonical z-reflection symmetric Hou-Luo branch; source is zero at z=0 and nonpositive under axial monotonicity; viscosity is nonpositive at interior maxima; BKM is finite conditional on axial monotonicity.",
+  "full_clay_ns_solved": false,
+  "hou_luo_route_status": "canonical_symmetric_branch_has_no_positive_source_lower_bound",
+  "log_loss_source_lower_bound": false,
+  "log_loss_source_lower_bound_false_in_symmetric_scenario": true,
+  "route": "HouLuoAxisymmetricNSRoute",
+  "row_count": 5,
+  "scenario": "CanonicalZReflectionSymmetricHouLuo",
+  "source_at_z_equals_0": "zero",
+  "source_formula": "S = 2 u1 partial_z u1",
+  "source_sign_under_axial_monotonicity": "nonpositive_away_from_z_equals_0",
+  "viscous_term_at_interior_max": "nonpositive"
+}

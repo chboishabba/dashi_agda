@@ -1,0 +1,150 @@
+{
+  "adverse_load_rows": [
+    "sign_changing_nonlocal_source",
+    "radial_commutator_uncontrolled",
+    "log_loss_margin",
+    "boundary_annular_constants"
+  ],
+  "after_sprint": 144,
+  "artifact_complete": true,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "comparison_envelope_available": false,
+  "comparison_envelope_closed": false,
+  "comparison_envelope_constructed": false,
+  "comparison_envelope_exists": false,
+  "comparison_envelope_proved": false,
+  "comparison_envelope_proven": false,
+  "contract": "ns_sprint145_comparison_envelope_inequality",
+  "control_card": {
+    "C": "Deterministic stdlib emitter producing JSON summary, JSON rows, CSV, Markdown report, and manifest with stable hashes.",
+    "F": "Missing ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators; without it CoupledAxisymmetricZeroNumberForVBarrier, SecondaryPeakExclusion, global axial monotonicity, and Clay promotion remain blocked.",
+    "G": "Validation passes only if comparison_envelope_available/proved, coupled_zero_number_theorem_proved, full_clay_ns_solved, and clay_navier_stokes_promoted all remain false while artifact_complete is true.",
+    "L": "Local source margin -> nonlocal source load -> radial/log load -> boundary/annular load -> missing Delta_env residual -> no coupled zero-number theorem.",
+    "O": "Sprint 145 worker lane 2 owns only scripts/ns_sprint145_comparison_envelope_inequality.py and outputs/ns_sprint145_comparison_envelope_inequality/.",
+    "P": "Emit a fail-closed obligation ledger for the next analytic proof; do not promote it to a theorem.",
+    "R": "Normalize the desired comparison-envelope inequality for 2*u1*partial_z^2 psi1 - (partial_z u^r)*partial_r u1.",
+    "S": "Local favorable source support exists only locally; sign-changing nonlocal source, uncontrolled radial commutator, log-loss margin, and boundary/annular constants block the simultaneous residual."
+  },
+  "coupled_zero_number_theorem_available": false,
+  "coupled_zero_number_theorem_closed": false,
+  "coupled_zero_number_theorem_proved": false,
+  "coupled_zero_number_theorem_proven": false,
+  "decision": "fail_closed_comparison_envelope_not_available",
+  "exit_code": 0,
+  "extra_row_ids": [],
+  "favorable_margin_rows": [
+    "local_favorable_source"
+  ],
+  "full_clay_ns_solved": false,
+  "global_axial_monotonicity_proved": false,
+  "global_barrier_closed": false,
+  "global_proof": false,
+  "global_proof_closed": false,
+  "invariant_checked": true,
+  "invariant_failures": [],
+  "invariant_valid": true,
+  "invariants_passed": true,
+  "lane": 2,
+  "missing_comparison_envelope": "ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators",
+  "missing_coupled_zero_number_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+  "missing_required_row_ids": [],
+  "no_promotion": true,
+  "normalized_desired_inequality": "Q_env(t,r,z) := 2*u1*partial_z^2 psi1 - (partial_z u^r)*partial_r u1 <= -kappa_env*EnvelopeControl(t,r,z) + LowerOrderAbsorbableTerms(t,r,z) on every point of AdmissibleCoupledVFirstCrossingSet",
+  "observed_row_ids": [
+    "local_favorable_source",
+    "sign_changing_nonlocal_source",
+    "radial_commutator_uncontrolled",
+    "log_loss_margin",
+    "boundary_annular_constants",
+    "simultaneous_residual_missing"
+  ],
+  "open_rows": [
+    "local_favorable_source",
+    "sign_changing_nonlocal_source",
+    "radial_commutator_uncontrolled",
+    "log_loss_margin",
+    "boundary_annular_constants",
+    "simultaneous_residual_missing"
+  ],
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "q_env": "2*u1*partial_z^2 psi1 - (partial_z u^r)*partial_r u1",
+  "required_row_ids": [
+    "boundary_annular_constants",
+    "local_favorable_source",
+    "log_loss_margin",
+    "radial_commutator_uncontrolled",
+    "sign_changing_nonlocal_source",
+    "simultaneous_residual_missing"
+  ],
+  "row_count": 6,
+  "row_hashes": {
+    "boundary_annular_constants": "ae6036bf2054f7a28dd33bc2d6b67d5f5a610ecf532f3da94494fccdb96671ca",
+    "local_favorable_source": "1d62dac8a7dbd0d59b9778f237ed8c76c32fd801ccc5125892cfdb000f565f33",
+    "log_loss_margin": "86a9d3a2403a2ce310d45e49f817f35c043b7a7a0c72c6366a0bd1e4d507171d",
+    "radial_commutator_uncontrolled": "2eabbebd94afaa351ce218bebf4ef57f38ff6282a2dd71e6f1846ec3b38c31a5",
+    "sign_changing_nonlocal_source": "a0bd80bfd2d27d888169cbb7f6f9df34eab4664f6cd4009648a7abaeb5fe4a95",
+    "simultaneous_residual_missing": "6fc51fe100a4c5f8828d7d90b8f8ba653c0656a0c5abc4d9f404e3793a435a59"
+  },
+  "rows_hash": "24844d5262825b85cd49df05eb814a3018bd3a6a3bd7f676d07d3b17dc26b3aa",
+  "secondary_peak_exclusion_proved": false,
+  "source_artifact_state": {
+    "sprint141_biot_savart_log_commutator_sampler": {
+      "clay_navier_stokes_promoted": false,
+      "commutator_domination_closed": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "path": "outputs/ns_sprint141_biot_savart_log_commutator_sampler/ns_sprint141_biot_savart_log_commutator_sampler_summary.json",
+      "sha256": "01b2496debdb90b7c131332da79732d76c4fc1967138bdf22a97f5428e3afd55"
+    },
+    "sprint141_commutator_domination_inequality": {
+      "clay_navier_stokes_promoted": false,
+      "commutator_domination_closed": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "log_biot_savart_loss_absorbed": false,
+      "path": "outputs/ns_sprint141_commutator_domination_inequality/ns_sprint141_commutator_domination_inequality_summary.json",
+      "sha256": "a2ba4bde678d59c267a46d7f9347db2e0084a2362667a43c2dfa851848c11aec"
+    },
+    "sprint141_radial_gradient_coupling_ledger": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "path": "outputs/ns_sprint141_radial_gradient_coupling_ledger/ns_sprint141_radial_gradient_coupling_ledger_summary.json",
+      "sha256": "2edca5f6fd0d22f6996518407d8da8d2169dd27f0c58246b025c83afab9151ec"
+    },
+    "sprint142_boundary_annulus_concavity_ledger": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "global_concavity_closed": false,
+      "path": "outputs/ns_sprint142_boundary_annulus_concavity_ledger/ns_sprint142_boundary_annulus_concavity_ledger_summary.json",
+      "sha256": "854441f932791e464dfa88ffef41dd86dafe205f11fdff3c158e1a8d1db0f134"
+    },
+    "sprint142_global_concavity_inequality": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "global_concavity_closed": false,
+      "path": "outputs/ns_sprint142_global_concavity_inequality/ns_sprint142_global_concavity_inequality_summary.json",
+      "sha256": "74fec44e9296ca95c3336193b18d09809fb9e597884fa96b0a889d162924a875"
+    },
+    "sprint144_nonlocal_source_zero_number_failure": {
+      "clay_navier_stokes_promoted": false,
+      "comparison_envelope_available": false,
+      "coupled_zero_number_theorem_proved": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "path": "outputs/ns_sprint144_nonlocal_source_zero_number_failure/ns_sprint144_nonlocal_source_zero_number_failure_summary.json",
+      "sha256": "5eba61fb48e2f8efdb4f1818a77f8973d9b3754825faa83e4f8ab1b29e9a0400"
+    }
+  },
+  "sprint": 145,
+  "strict_residual_form": "kappa_local_source - C_nonlocal_source - C_radial_commutator*Log_BS(active_scale) - C_boundary_annular - C_lower_order >= slack_env > 0",
+  "summary_payload_hash_without_self": "43321021bb56c378b5635057ba90138b856ab6499989faab5c2a36b9be6e50c1",
+  "target_gate": "ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators",
+  "target_variable": "v = partial_z u1",
+  "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+  "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+}

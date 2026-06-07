@@ -24,7 +24,283 @@ The broader route/lane joining plan is `Docs/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
 
-Current NS Sprint 135 boundary: the repo treats Hou-Luo axisymmetric
+Current cross-lane scope-resolution boundary: `DASHI.Promotion.ObligationIndex`
+now includes a six-row `scopeResolutionSummaries` layer. The checked surfaces
+are `DASHI.Promotion.FiniteQuantumPhysicalScopeDecision`,
+`DASHI.Promotion.GRBoundaryClarification`,
+`DASHI.Promotion.BiologyFiniteScopeClarification`,
+`DASHI.Promotion.ChemistryFiniteRuleTargets`,
+`DASHI.Promotion.EmpiricalReplayAcceptanceCriteria` via
+`canonicalEmpiricalReplayInfrastructureTokenSummary`, and
+`DASHI.Physics.Closure.YMCompletionBoundaryTightening`. They resolve finite or
+authority-bound scope decisions for quantum, GR, biology, chemistry,
+empirical/runtime, and YM. They do not promote infinite-dimensional quantum
+mechanics, non-flat GR, physical chemistry/wet-lab chemistry, biological
+causation/clinical validity, empirical adequacy, YM Clay, NS Clay, or terminal
+unification.
+
+Current cross-lane hard-gate boundary: `DASHI.Promotion.ObligationIndex` also
+includes a six-row `hardGateAdvancementSummaries` layer. The checked surfaces
+are `DASHI.Physics.Closure.NSMigrationInitiationThresholdConstantsReceipt`,
+`DASHI.Physics.Closure.YMExternalAcceptancePacketNormalization`,
+`DASHI.Promotion.StandardModelFiniteRepresentationNarrowing`,
+`DASHI.Promotion.MaxwellHodgeSourceConservationObligations`,
+`DASHI.Promotion.NumericMeasuredAuthorityTokenNormalization`, and
+`DASHI.Promotion.ChemistryAuthorityBinding`. These normalize the next proof or
+authority gates for NS, YM, finite SM content, Maxwell, measured constants, and
+chemistry. They do not promote NS Clay, YM Clay, broad Standard Model,
+Maxwell field equations, measured numeric values, physical chemistry, or full
+unification.
+
+Current cross-lane closure-computation boundary: `DASHI.Promotion.ObligationIndex`
+also includes a six-row `closureComputationSummaries` layer. The checked
+surfaces are `DASHI.Physics.Closure.NSSprint150SourceViscosityBalanceReceipt`,
+`DASHI.Promotion.ChemistryFiniteComputationSurface`,
+`DASHI.Promotion.StandardModelFiniteAnomalyHyperchargeCheck`,
+`DASHI.Promotion.MaxwellFiniteExteriorChainStrengthening`,
+`DASHI.Promotion.NumericAuthorityPayloadValidator`, and
+`DASHI.Promotion.FiniteQuantumQFTScopedClosure`. They add concrete finite or
+ledger-checked work: NS source/viscosity balance decomposition, first-18
+chemistry computations, finite SM hypercharge/anomaly checks, a 13-row Maxwell
+exterior chain, a 20-field numeric authority payload validator, and finite-mode
+Schrodinger/Born closure. They still do not promote NS Clay, physical chemistry
+or wet-lab chemistry, broad Standard Model, Maxwell field equations, measured
+numeric values, infinite-dimensional quantum/QFT, or terminal unification.
+
+Current NS Sprint 153 boundary: the repo records
+`LocalizedVortexStretchingSourceBound` as the live Hou-Luo scale-delta source
+gate. The checked receipt
+`DASHI.Physics.Closure.NSSprint153LocalizedVortexStretchingSourceReceipt`
+anchors to the Sprint 151 localized-enstrophy receipt and records the supplied
+Sprint 152 annular-leakage domination as support/conditional only. The
+executable surfaces
+`scripts/ns_sprint153_localized_vortex_stretching_source.py`,
+`scripts/ns_sprint153_core_source_constant_scan.py`, and
+`scripts/ns_sprint153_source_dissipation_balance.py` emit the core
+vortex-stretching source ledger, a 540-row constant scan, and the
+source/dissipation/leakage balance. The core source shape
+`2*u1*v*Omega*delta^2` is normalized as evidence, but the constant scan still
+contains support/open/blocker rows and the balance still has residual/open
+rows. `LocalizedVortexStretchingSourceBound`,
+`BiotSavartNonlocalClosureAtScaleDelta`,
+`SimultaneousConstantsCompatibility`, `ModelValidityForWidthODE`,
+`SymmetricHouLuoBKMFinite`, full Navier-Stokes, and Clay promotion remain
+false.
+
+Current NS Sprint 151 boundary: the repo records
+`LocalizedEnstrophyIdentityAtScaleDelta` as the live Hou-Luo scale-delta gate.
+The checked receipt
+`DASHI.Physics.Closure.NSSprint151LocalizedEnstrophyIdentityReceipt` anchors to
+`DASHI.Physics.Closure.NSSprint149ScalingConsistencyGateReceipt` and records
+Sprint 150 width-equilibrium, subcritical ODE, and Gronwall closure support as
+conditional only. The executable surfaces
+`scripts/ns_sprint151_localized_enstrophy_identity.py`,
+`scripts/ns_sprint151_cutoff_error_budget.py`, and
+`scripts/ns_sprint151_width_ode_extraction.py` emit the localized enstrophy
+identity ledger, cutoff error budget, and reduced width-ODE extraction evidence.
+The identity ledger keeps cutoff transport, diffusion-boundary,
+vortex-stretching/source, Biot-Savart/nonlocal, annular/boundary, and constants
+compatibility rows open. The cutoff budget records absorbed transport/diffusion
+sample rows but keeps source localization, annular leakage, and joint
+annular/source absorption unresolved. The width-ODE extractor supports only the
+reduced equilibrium model; it does not derive the model from full NS.
+`LocalizedEnstrophyIdentityAtScaleDelta`, `ModelValidityForWidthODE`,
+`ScalingCouplingConsistency`, `SymmetricHouLuoBKMFinite`, full Navier-Stokes,
+and Clay promotion remain false.
+
+Current NS Sprint 149 boundary: the repo records
+`ScalingConsistencyForHouLuoConcentration` as the live Hou-Luo concentration
+gate.  The checked receipt
+`DASHI.Physics.Closure.NSSprint149ScalingConsistencyGateReceipt` anchors to
+`DASHI.Physics.Closure.NSMigrationInitiationThresholdReceipt` and records the
+Sprint 148 support rows as support only: explicit initial data class,
+corrected crossing geometry, numerical source-lower-bound support, conditional
+migration threshold, and a corrected growth ODE that is Gronwall-closable only
+under beta-positive scaling.  The executable surfaces
+`scripts/ns_sprint149_scaling_consistency_gate.py`,
+`scripts/ns_sprint149_linearization_spectrum_probe.py`, and
+`scripts/ns_sprint149_energy_width_lower_bound.py` emit the gate ledger, a
+finite-difference linearization evidence probe, and an energy-width lower-bound
+obligation ledger.  The linearization probe sees positive beta candidates in a
+toy spectrum, while the energy ledger records that energy/enstrophy heuristics
+do not by themselves prove `alpha < 1`.  `ScalingConsistencyForHouLuoConcentration`,
+`betaPositiveScalingProved`, `selfSimilarProfileAnalysisProved`,
+`energyWidthLowerBoundProved`, `alphaLessThanOneProved`,
+`SymmetricHouLuoBKMFinite`, full Navier-Stokes, and Clay promotion remain
+false.
+
+Current NS Sprint 147 boundary: the repo records
+`MigrationInitiationThresholdForLargeData` as the highest-alpha live
+post-Sprint146 gate.  The checked receipt
+`DASHI.Physics.Closure.NSMigrationInitiationThresholdReceipt` anchors to
+`DASHI.Physics.Closure.NSMaximumLocationMigrationLemmaReceipt` and records
+`PureDiffusionAtSymmetryPlane` as exact true, while
+`MaximumLocationMigrationExclusionForVBarrier`,
+`MigrationInitiationThresholdForLargeData`, blowup existence, full
+Navier-Stokes, and Clay promotion remain false.  The executable surfaces
+`scripts/ns_sprint147_migration_initiation_threshold.py`,
+`scripts/ns_sprint147_migration_threshold_ode_scan.py`, and
+`scripts/ns_sprint147_blowup_route_classifier.py` emit the large-data
+threshold ledger, a reduced ODE evidence-only scan, and a post-Sprint146 route
+classifier.  The ODE scan finds deterministic toy regimes where migration
+initiates before suppression, but the artifacts explicitly do not promote this
+to a Navier-Stokes theorem.  The current analytic proof to calculate is the
+large-data source-integral threshold with constants strong enough to beat
+viscosity before the off-axis feedback shuts down.
+
+Current NS Sprint 145 boundary: the repo has attacked
+`ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators` and kept it
+fail-closed.  The checked receipt
+`DASHI.Physics.Closure.NSSprint145ComparisonEnvelopeObstructionReceipt`
+anchors to Sprint 144 and records local first-crossing, local favorable
+source, bounded commutator, and boundary/annular bookkeeping support as
+accepted only locally.  The executable surfaces
+`scripts/ns_sprint145_comparison_envelope_inequality.py`,
+`scripts/ns_sprint145_envelope_constant_budget.py`, and
+`scripts/ns_sprint145_source_commutator_alignment_sampler.py` normalize the
+desired joint inequality for
+`2*u1*partial_z^2 psi1 - (partial_z u^r)*partial_r u1`, the missing
+simultaneous constant budget, and favorable-cancellation/adverse-reinforcement
+alignment cases.  The round records sign-changing nonlocal `psi1`, off-peak
+forcing, radial/log Biot-Savart commutators, boundary/annular constants, and
+missing signed residual slack as blockers.  The comparison envelope, coupled
+zero-number theorem, `SecondaryPeakExclusion`, global axial monotonicity, full
+Navier-Stokes, and Clay promotion remain false.
+
+Sprint 144 boundary: the repo has attacked
+`CoupledAxisymmetricZeroNumberForVBarrier` and kept it fail-closed.  The
+checked receipt
+`DASHI.Physics.Closure.NSSprint144CoupledZeroNumberObstructionReceipt`
+anchors to Sprint 143 and records scalar one-dimensional zero-number/Sturm
+intuition as locally useful only, while transfer to the coupled
+axisymmetric `v = partial_z u1` barrier is invalid.  The executable surfaces
+`scripts/ns_sprint144_coupled_zero_number_interface.py`,
+`scripts/ns_sprint144_rz_crossing_topology_sampler.py`, and
+`scripts/ns_sprint144_nonlocal_source_zero_number_failure.py` normalize the
+missing theorem interface, show fixed z-line zero counts do not control full
+r-z first crossings, and record why sign-changing nonlocal `psi1` source,
+off-peak forcing, radial/log commutator hazards, moving boundary/annular
+windows, and absent compatible constants block a scalar comparison envelope.
+`SecondaryPeakExclusion`, global axial monotonicity, full Navier-Stokes, and
+Clay promotion remain false.
+
+Sprint 143 boundary: the repo has attacked the Sprint 140
+`SecondaryPeakExclusion` input and kept it fail-closed.  The checked receipt
+`DASHI.Physics.Closure.NSSprint143SecondaryPeakExclusionObstructionReceipt`
+anchors to Sprint 142 and records local single-peak, symmetry, and parabolic
+support as accepted, while global secondary-peak exclusion remains unproved
+because nonlinear shoulder formation, off-center positive `v = partial_z u1`
+crossings, the missing coupled axisymmetric zero-number/Sturm theorem,
+boundary/annular migration, and compatible constants/theorem are absent.  The
+executable surfaces `scripts/ns_sprint143_secondary_peak_exclusion_ledger.py`,
+`scripts/ns_sprint143_offcenter_crossing_scenarios.py`, and
+`scripts/ns_sprint143_zero_number_obstruction.py` normalize the required
+no-secondary-peak theorem, classify centered support alongside adverse
+off-center/boundary/annular/delayed crossing scenarios, and record why scalar
+one-dimensional zero-number intuition does not transfer to the coupled
+axisymmetric barrier.  No global axial monotonicity theorem, full
+Navier-Stokes solution, or Clay promotion is claimed.
+
+Sprint 142 boundary: the repo has attacked the Sprint 140
+`GlobalConcavityOfPsi1` input and kept it fail-closed.  The checked receipt
+`DASHI.Physics.Closure.NSSprint142GlobalConcavityObstructionReceipt` anchors
+to Sprint 141 and records local Taylor concavity support as accepted, while
+global concavity remains unproved because nonlocal elliptic kernel signs,
+boundary/annular/tail contributions, scale-window persistence, and a
+constant-compatible theorem are absent.  The executable surfaces
+`scripts/ns_sprint142_global_concavity_inequality.py`,
+`scripts/ns_sprint142_kernel_sign_stress_sampler.py`, and
+`scripts/ns_sprint142_boundary_annulus_concavity_ledger.py` normalize the
+required full crossing-set inequality, stress sample favorable local rows
+alongside adverse axial/annular/boundary/tail rows, and record the missing
+boundary-compatible kernel/sign/cancellation theorem.  No global axial
+monotonicity theorem, full Navier-Stokes solution, or Clay promotion is
+claimed.
+
+Sprint 141 boundary: the repo has attacked the Sprint 140
+`TransportCommutatorDominationForVBarrier` input and kept it fail-closed.  The
+checked receipt
+`DASHI.Physics.Closure.NSSprint141CommutatorDominationObstructionReceipt`
+anchors to the Sprint 140 conditional barrier assembly and records that the
+commutator positive part is nonhomogeneous, the log Biot-Savart margin is not
+absorbed by available constants, radial-gradient coupling at a first axial
+positive crossing is uncontrolled, and the domination theorem/constants are
+absent.  The executable surfaces
+`scripts/ns_sprint141_commutator_domination_inequality.py`,
+`scripts/ns_sprint141_biot_savart_log_commutator_sampler.py`, and
+`scripts/ns_sprint141_radial_gradient_coupling_ledger.py` normalize the
+required simultaneous inequality, sample local bounded rows alongside
+near-coincident/off-axis log-loss hazards, and record why axial crossing
+geometry plus Gamma control do not determine `partial_r u1`.  No global axial
+monotonicity theorem, full Navier-Stokes solution, or Clay promotion is
+claimed.
+
+Sprint 140 boundary: the repo assembled the Sprint 139 conditional barrier
+interface without promoting it.  The checked receipt
+`DASHI.Physics.Closure.NSSprint140ConditionalBarrierAssemblyReceipt` anchors
+to the Sprint 139 route fork and records that, if
+`GlobalConcavityOfPsi1`, `SecondaryPeakExclusion`, and
+`TransportCommutatorDominationForVBarrier` are supplied compatibly, then local
+`v = partial_z u1` barrier support feeds a conditional monitored-route
+regularity/BKM-finite surface for the symmetric Hou-Luo route.  The executable
+surfaces `scripts/ns_sprint140_conditional_barrier_assembly.py`,
+`scripts/ns_sprint140_constant_compatibility_ledger.py`, and
+`scripts/ns_sprint140_failure_mode_matrix.py` keep all analytic inputs and
+constant compatibility external/absent, inventory the failure modes for any
+false assumption or incompatible constants, and keep the monitored-route to
+full Clay translation absent.  No unconditional global axial monotonicity
+theorem, full Navier-Stokes solution, or Clay promotion is claimed.
+
+Sprint 139 boundary: the repo has forked the Sprint 138 axial
+barrier route without promoting it.  The checked receipt
+`DASHI.Physics.Closure.NSSprint139AxialBarrierRouteForkReceipt` anchors to the
+Sprint 138 blocker-reduction receipt and records that local `v = partial_z u1`
+barrier support remains true, while `GlobalConcavityOfPsi1`,
+`SecondaryPeakExclusion`, and `TransportCommutatorDominationForVBarrier`
+remain open.  The executable surfaces
+`scripts/ns_sprint139_barrier_route_fork_classifier.py`,
+`scripts/ns_sprint139_localized_kernel_sign_sampler.py`, and
+`scripts/ns_sprint139_commutator_sign_route.py` rank the conditional assembly
+as the next artifact, sample the localized kernel sign ledger showing local
+support but nonlocal sign-indefinite obstruction rows, and isolate the
+pointwise commutator sign/dominance route for
+`-(partial_z u^r) partial_r u1`.  No global axial monotonicity theorem,
+conditional regularity theorem, full Clay Navier-Stokes solution, or Clay
+promotion is claimed.
+
+Sprint 138 boundary: the repo has reduced the Sprint 137 axial
+monotonicity gate into three explicit fail-closed blockers.  The checked
+receipt `DASHI.Physics.Closure.NSSprint138AxialMonotonicityBlockerReductionReceipt`
+records that the local `v = partial_z u1` barrier is supported, while
+`GlobalConcavityOfPsi1`, `SecondaryPeakExclusion`, and
+`TransportCommutatorDominationForVBarrier` remain open.  The executable
+surfaces `scripts/ns_sprint138_global_concavity_blocker.py`,
+`scripts/ns_sprint138_secondary_peak_exclusion.py`, and
+`scripts/ns_sprint138_transport_commutator_budget.py` separate local Taylor
+concavity from nonlocal elliptic/kernel/boundary persistence obstructions,
+record that secondary shoulders are not excluded by single-peak data or
+parabolic smoothing, and expose the nonhomogeneous transport commutator
+`-(partial_z u^r) partial_r u1` plus log Biot-Savart strain hazard.  No global
+axial monotonicity theorem is claimed, and full Clay Navier-Stokes remains
+unsolved.
+
+Sprint 137 boundary: the repo has pivoted the symmetric Hou-Luo
+route from blowup-source lower-bound pursuit to a conditional regularity-side
+sign barrier.  `scripts/ns_sprint136_hou_luo_symmetric_source_sign.py` records
+that `LogLossSourceLowerBound` is false in the canonical z-reflection
+symmetric scenario: the source `S = 2 u1 partial_z u1` is zero on `z=0` and
+nonpositive away from the symmetry plane under
+`AxialMonotonicityOfSwirlProfile`, while the viscous term is nonpositive at an
+interior vorticity maximum.  The checked receipt
+`DASHI.Physics.Closure.NSSprint136HouLuoSymmetricSourceSignReceipt` exposes the
+same fail-closed boundary.  `scripts/ns_sprint137_axial_monotonicity_gate.py`
+records the remaining gate for `v = partial_z u1`: the local first-positive
+crossing barrier is supported, but global concavity of `psi1` and secondary
+peak exclusion remain open blockers.  Full Clay Navier-Stokes remains
+unsolved, `full_clay_ns_solved=false`, and `clayNavierStokesPromoted` remains
+false.
+
+Sprint 135 boundary: the repo treats Hou-Luo axisymmetric
 Navier-Stokes with swirl as a live candidate under the corrected Sprint 134
 equations and logarithmic Biot-Savart loss.  The phase map
 `scripts/ns_sprint135_hou_luo_source_viscosity_phase.py` records that the old

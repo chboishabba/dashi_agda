@@ -1,0 +1,151 @@
+[
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "commutator": "-(partial_z u^r) partial_r u1",
+    "commutator_sign_determined": false,
+    "consequence": "The commutator sign is not fixed by the standard first-crossing maximum-principle ledger.",
+    "crossing_conditions": [
+      "v(t*, r*, z*) = 0 at the first attempted positive crossing",
+      "partial_r v(t*, r*, z*) = 0 for an interior crossing",
+      "partial_z v(t*, r*, z*) = 0 for an interior crossing",
+      "Ltilde v(t*, r*, z*) <= 0 at an interior maximum"
+    ],
+    "global_proof": false,
+    "layer": "maximum_principle_geometry",
+    "missing_input": [
+      "identity or theorem linking partial_r u1 to the axial crossing data"
+    ],
+    "missing_theorem": "RadialGradientCouplingAtFirstAxialPositiveCrossing",
+    "obstruction": "Since partial_r v = partial_r partial_z u1, the condition fixes a mixed derivative at the crossing but does not determine partial_r u1 itself.",
+    "partial_r_u1_controlled_by_axial_crossing": false,
+    "radial_gradient_controlled": false,
+    "role": "first_positive_v_crossing",
+    "row_hash": "69bf0fff3fbd61edab03370f8319356160768f5a7cefb3df5300d88d1d55eebf",
+    "row_id": "axial_crossing_geometry",
+    "statement": "The first-crossing geometry constrains v and derivatives of v, not the independent radial slope partial_r u1.",
+    "status": "open_gap",
+    "target_variable": "v = partial_z u1"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "commutator": "-(partial_z u^r) partial_r u1",
+    "commutator_sign_determined": false,
+    "consequence": "The factor partial_r u1 remains free enough to flip the sign of -(partial_z u^r) partial_r u1 when partial_z u^r is nonzero.",
+    "crossing_conditions": [
+      "u1 has the same axial first-crossing jet for v",
+      "partial_z u1 vanishes at the crossing point",
+      "partial_r partial_z u1 is fixed at the crossing point"
+    ],
+    "global_proof": false,
+    "layer": "local_jet_freedom",
+    "missing_input": [
+      "radial monotonicity or radial-gradient coupling assumption",
+      "compatibility with the axisymmetric Biot-Savart/transport system"
+    ],
+    "missing_theorem": "RadialGradientCouplingAtFirstAxialPositiveCrossing",
+    "obstruction": "Adding a radial-only perturbation with zero z-derivative leaves the v crossing unchanged but changes partial_r u1.",
+    "partial_r_u1_controlled_by_axial_crossing": false,
+    "radial_gradient_controlled": false,
+    "role": "radial_gradient_counterledger",
+    "row_hash": "b391788b084478ebf8618c4a9f534043574ff7c45cdfedd9afc3e1d6dd44f57b",
+    "row_id": "radial_slope_freedom",
+    "statement": "Two local profiles can share the same v-crossing data while having opposite signs of partial_r u1 at the same point.",
+    "status": "open_gap",
+    "target_variable": "v = partial_z u1"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "commutator": "-(partial_z u^r) partial_r u1",
+    "commutator_sign_determined": false,
+    "consequence": "Gamma control is insufficient to make the commutator favorable or dominated in the v barrier equation.",
+    "crossing_conditions": [
+      "Gamma = r u^theta = r^2 u1 obeys a maximum-principle-type bound",
+      "Gamma amplitude control is available along the monitored route"
+    ],
+    "global_proof": false,
+    "layer": "auxiliary_maximum_principle",
+    "missing_input": [
+      "gradient estimate strong enough at first v crossings",
+      "sign-preserving conversion from Gamma control to partial_r u1 control"
+    ],
+    "missing_theorem": "RadialGradientCouplingAtFirstAxialPositiveCrossing",
+    "obstruction": "Bounds on Gamma or u1 do not prevent steep local radial slopes, nor do they align partial_r u1 with partial_z u^r at a v crossing.",
+    "partial_r_u1_controlled_by_axial_crossing": false,
+    "radial_gradient_controlled": false,
+    "role": "gamma_does_not_close_radial_slope",
+    "row_hash": "83cb2b0f02e6668fe4eacb716949959d3a7049bdb5c5df4a87b6427b1da8f46c",
+    "row_id": "gamma_max_principle_insufficiency",
+    "statement": "A maximum principle for Gamma supplies amplitude control but does not supply pointwise sign control of partial_r u1.",
+    "status": "insufficient_input",
+    "target_variable": "v = partial_z u1"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "commutator": "-(partial_z u^r) partial_r u1",
+    "commutator_sign_determined": false,
+    "consequence": "The commutator remains a hazard outside any purely axial/local crossing argument.",
+    "crossing_conditions": [
+      "first positive crossing may occur away from the axis",
+      "annular mass and boundary layers may influence the local velocity gradient",
+      "interior axial crossing data do not exhaust boundary-adjacent geometry"
+    ],
+    "global_proof": false,
+    "layer": "domain_geometry",
+    "missing_input": [
+      "boundary-compatible radial-gradient estimate",
+      "annular exclusion or domination theorem for the commutator"
+    ],
+    "missing_theorem": "RadialGradientCouplingAtFirstAxialPositiveCrossing",
+    "obstruction": "Boundary and annular contributions can change partial_r u1 or partial_z u^r without violating the axial first-crossing data for v.",
+    "partial_r_u1_controlled_by_axial_crossing": false,
+    "radial_gradient_controlled": false,
+    "role": "off_axis_and_boundary_hazard",
+    "row_hash": "5f391163dcca950464aa8c4febc346c4661022c064b02bb1fb01222b18ef52fa",
+    "row_id": "boundary_annulus_hazard",
+    "statement": "Annular or boundary-adjacent crossings can inherit radial slopes from domain geometry that are invisible to axial crossing conditions.",
+    "status": "open_hazard",
+    "target_variable": "v = partial_z u1"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "commutator": "-(partial_z u^r) partial_r u1",
+    "commutator_sign_determined": false,
+    "consequence": "The v-barrier route cannot be globally promoted; the commutator is recorded as sign-indefinite pending the missing theorem.",
+    "crossing_conditions": [
+      "all admissible first positive v crossings on the monitored route",
+      "including interior, annular, and boundary-compatible cases"
+    ],
+    "global_proof": false,
+    "layer": "required_theorem_interface",
+    "missing_input": [
+      "RadialGradientCouplingAtFirstAxialPositiveCrossing",
+      "constants compatible with the v-barrier margin",
+      "coverage of annular and boundary crossing regimes"
+    ],
+    "missing_theorem": "RadialGradientCouplingAtFirstAxialPositiveCrossing",
+    "obstruction": "No such theorem is supplied by this ledger, and the previous rows show why it is not a formal consequence of axial crossing geometry or Gamma amplitude control.",
+    "partial_r_u1_controlled_by_axial_crossing": false,
+    "radial_gradient_controlled": false,
+    "role": "promotion_blocker",
+    "row_hash": "83ee68e9b0d5ecbe89ad7839c53acde318a3cec661a98351944761cecec32137",
+    "row_id": "missing_radial_gradient_coupling_theorem",
+    "statement": "A separate theorem must couple first axial positive-crossing conditions to partial_r u1 strongly enough to sign or dominate -(partial_z u^r) partial_r u1.",
+    "status": "required_theorem_missing",
+    "target_variable": "v = partial_z u1"
+  }
+]

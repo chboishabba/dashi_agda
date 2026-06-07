@@ -187,6 +187,10 @@ Promotion-gated simulator slices should cite
 `DASHI.Promotion.ObligationIndex.canonicalUnifiedPromotionObligationIndex`.
 That receipt joins the six obligation lanes and records 73 open promotion
 obligations while keeping terminal/full-unification promotion false.
+It also records 6 non-promoting adapter advancements for measured authority,
+Maxwell exterior calculus, finite quantum/Born semantics, chemistry
+quantitative adapters, empirical/runtime replay, and Gate 3/SM/Clay evidence
+reduction.
 
 Simulator slices may consume exact SI defining constants from that registry as
 reference inputs, and may consume exact derived SI expressions such as `hbar`,

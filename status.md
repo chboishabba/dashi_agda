@@ -1,3 +1,373 @@
+# 2026-06-07 Sprint 153 NS localized vortex-stretching source gate round
+
+- Added checked Sprint 153 module:
+  `NSSprint153LocalizedVortexStretchingSourceReceipt`.
+- Added `scripts/ns_sprint153_localized_vortex_stretching_source.py`,
+  `scripts/ns_sprint153_core_source_constant_scan.py`, and
+  `scripts/ns_sprint153_source_dissipation_balance.py`, with generated output
+  directories and focused tests.
+- Recorded Sprint 152 annular leakage domination as support/conditional only;
+  no theorem-level annular promotion is made.
+- The localized source ledger records the omega1 source input, core ball scale,
+  cutoff support, source sign orientation, constant normalization, delta-square
+  dimensional scaling, and fail-closed theorem flags.
+- The constant scan emits 540 rows: 216 support, 216 open, and 108 blocker
+  rows, so expected-scale control is evidence-only.
+- The source/dissipation/leakage balance emits 10 rows: 3 absorbed, 4
+  residual, and 3 open. Young gradient pieces are absorbed numerically, but
+  amplitude/leakage/comparison rows remain unclosed.
+- `LocalizedVortexStretchingSourceBound`,
+  `BiotSavartNonlocalClosureAtScaleDelta`,
+  `SimultaneousConstantsCompatibility`, `ModelValidityForWidthODE`,
+  `SymmetricHouLuoBKMFinite`, full Clay Navier-Stokes, and
+  `clayNavierStokesPromoted` remain false.
+
+# 2026-06-07 cross-lane closure-computation round
+
+- Added or integrated six checked closure-computation surfaces:
+  `NSSprint150SourceViscosityBalanceReceipt`,
+  `ChemistryFiniteComputationSurface`,
+  `StandardModelFiniteAnomalyHyperchargeCheck`,
+  `MaxwellFiniteExteriorChainStrengthening`,
+  `NumericAuthorityPayloadValidator`, and
+  `FiniteQuantumQFTScopedClosure`.
+- Integrated them into `DASHI.Promotion.ObligationIndex` as a separate
+  six-row `closureComputationSummaries` layer. Existing promotion-obligation,
+  scope-resolution, and hard-gate counts remain distinct.
+- Wired the new modules into `DASHI.Everything`.
+- Added the Sprint 150 NS source/viscosity balance executable ledger and
+  focused test. The ledger emits ten rows and keeps source lower bound,
+  retained viscosity lower bound, localized balance, migration threshold,
+  scaling consistency, BKM, full Clay NS, and Clay promotion false.
+- Added finite chemistry computation over the first eighteen elements:
+  Aufbau occupations, Pauli capacity checks, Hund multiplicity checks, six
+  Rydberg rational projections, and five Gibbs integer projections.
+- Added finite SM hypercharge/anomaly check: six multiplet rows, four anomaly
+  balance rows, four zero anomaly numerators, and seven broad-promotion guards.
+- Added Maxwell finite exterior-chain strengthening: thirteen rows from
+  `A`, `F=dA`, and `dF=0` through Hodge, source current, `d*F=J`, `dJ=0`,
+  `divJ=0`, units, observables, and promotion guard.
+- Added numeric authority payload validator: twenty schema fields, three
+  source-family coverage rows, eighteen payload envelopes, and zero
+  accepted/loaded payloads.
+- Added finite quantum/QFT scoped closure: finite Schrodinger/Born closure over
+  two Hilbert rows, two identity-evolution rows, one zero-Hamiltonian row, four
+  observable probability rows, and two Born-normalization rows.
+- Still false: NS Clay, measured numeric values, Maxwell field equations, broad
+  Standard Model, physical chemistry/spectroscopy/bonding/wet-lab chemistry,
+  infinite-dimensional quantum/QFT, and terminal/full unification.
+
+# 2026-06-07 Sprint 151 NS localized-enstrophy identity gate round
+
+- Added checked Sprint 151 module:
+  `NSSprint151LocalizedEnstrophyIdentityReceipt`.
+- Added `scripts/ns_sprint151_localized_enstrophy_identity.py`,
+  `scripts/ns_sprint151_cutoff_error_budget.py`, and
+  `scripts/ns_sprint151_width_ode_extraction.py`, with generated output
+  directories and focused tests.
+- Recorded Sprint 150 width-equilibrium, subcritical ODE, and Gronwall closure
+  support as conditional only; no model-validity theorem is promoted.
+- The localized identity ledger records 11 rows covering the localized
+  enstrophy definition, omega1 equation input, cutoff derivative, transport
+  flux, diffusion coercive term, boundary/annular leakage, vortex-stretching
+  source, Biot-Savart/nonlocal closure, constants compatibility, width-ODE
+  extraction, and Clay guard.
+- The cutoff budget records absorbed transport/diffusion sample rows, support
+  derivative-scale rows, open source-localization and annular/source margin
+  rows, and a blocker annular-leakage row.
+- The width-ODE extractor records reduced equilibrium evidence for
+  `delta_dot = -Omega log Omega + nu/delta` and conditional subcritical Omega
+  projection only.
+- `LocalizedEnstrophyIdentityAtScaleDelta`, `ModelValidityForWidthODE`,
+  `ScalingCouplingConsistency`, `SymmetricHouLuoBKMFinite`, full Clay
+  Navier-Stokes, and `clayNavierStokesPromoted` remain false.
+
+# 2026-06-07 cross-lane hard-gate advancement round
+
+- Added or integrated six checked hard-gate surfaces:
+  `NSMigrationInitiationThresholdConstantsReceipt`,
+  `YMExternalAcceptancePacketNormalization`,
+  `StandardModelFiniteRepresentationNarrowing`,
+  `MaxwellHodgeSourceConservationObligations`,
+  `NumericMeasuredAuthorityTokenNormalization`, and
+  `ChemistryAuthorityBinding`.
+- Integrated them into `DASHI.Promotion.ObligationIndex` as a separate
+  six-row `hardGateAdvancementSummaries` layer. Existing promotion-obligation
+  and scope-resolution counts remain distinct.
+- Wired the new modules into `DASHI.Everything`.
+- Added a fail-closed NS constants surface for the live
+  `MigrationInitiationThresholdForLargeData` gate: seven constants, four
+  inequality directions, five required estimates, and five fail-closed flags.
+- Added YM external-acceptance packet normalization: six external authority
+  tokens, five reproducibility artifacts, eight packet components, and six
+  false-promotion guards.
+- Added finite Standard Model narrowing: three gauge rows, p2/p3/p5 surfaces,
+  five one-generation targets, five conductor hypercharge rows, and eight
+  blockers.
+- Added Maxwell Hodge/source-current conservation obligations: ten rows
+  covering metric/Hodge authority, source current `J`, `d*F=J`, `dJ=0`,
+  `div J=0`, unit calibration, empirical observables, and false promotion.
+- Added measured numeric authority normalization: eighteen authority-token
+  rows across CODATA, PDG, CODATA/PDG, mass, electromagnetic-vacuum, and
+  particle/SM families, with seven required metadata fields.
+- Added chemistry authority binding: three authority tokens, three spectral
+  rows, four thermochemistry rows, two calibration rows, and four provenance
+  rows.
+- Still false: NS/Clay promotion, YM Clay promotion, broad Standard Model
+  promotion, Maxwell field-equation promotion, numeric measured-value
+  promotion, physical chemistry/spectroscopy/wet-lab promotion, and
+  terminal/full unification.
+
+# 2026-06-07 Sprint 149 NS scaling-consistency gate round
+
+- Added checked Sprint 149 module:
+  `NSSprint149ScalingConsistencyGateReceipt`.
+- Added `scripts/ns_sprint149_scaling_consistency_gate.py`,
+  `scripts/ns_sprint149_linearization_spectrum_probe.py`, and
+  `scripts/ns_sprint149_energy_width_lower_bound.py`, with generated output
+  directories and focused tests.
+- Recorded Sprint 148 support rows as support only: explicit initial data,
+  corrected crossing geometry, numerical source-lower-bound support,
+  conditional migration threshold under beta-positive scaling, and corrected
+  growth ODE Gronwall closure under beta-positive scaling.
+- The scaling gate ledger records `ScalingConsistencyForHouLuoConcentration`
+  as the live target and keeps beta-positive scaling, self-similar profile
+  analysis, energy-width lower bound, `alpha < 1`, and symmetric Hou-Luo BKM
+  finiteness unproved.
+- The linearization spectrum probe emits 11 beta rows and sees positive beta
+  candidates in the toy finite-difference model, but keeps
+  `self_similar_profile_analysis_proved=false`.
+- The energy-width ledger records energy/enstrophy/viscous width candidate
+  inequalities and the key obstruction: energy monotonicity gives candidate
+  lower-exponent constraints, not the needed proved `alpha < 1` theorem.
+- `ScalingConsistencyForHouLuoConcentration`, `SymmetricHouLuoBKMFinite`,
+  full Clay Navier-Stokes, and `clayNavierStokesPromoted` remain false.
+
+# 2026-06-07 cross-lane scope-resolution round
+
+- Added six checked scope-resolution/code surfaces:
+  `FiniteQuantumPhysicalScopeDecision`, `GRBoundaryClarification`,
+  `BiologyFiniteScopeClarification`, `ChemistryFiniteRuleTargets`,
+  empirical/runtime gate summaries in `EmpiricalRuntimeReplayAdapter` and
+  `EmpiricalReplayAcceptanceCriteria`, and
+  `YMCompletionBoundaryTightening`.
+- Integrated them into `DASHI.Promotion.ObligationIndex` as a separate
+  six-row `scopeResolutionSummaries` layer, preserving the existing
+  73-obligation promotion count and the false terminal-promotion guard.
+- Wired the new modules into `DASHI.Everything`.
+- Positive boundaries now checked: finite-mode quantum computations; bounded
+  flat/GR recovery scope; finite genetic-code/supervoxel/checksum structure;
+  finite first-ten-element chemistry rule targets plus Rydberg/Gibbs formula
+  slots; empirical/runtime infrastructure-token gates; and YM
+  authority-conditional completion boundary with 369/supervoxel support.
+- Still false: infinite-dimensional quantum promotion, QFT, non-flat GR,
+  physical chemistry/spectroscopy/wet-lab promotion, biology causation,
+  clinical validity, empirical adequacy, YM Clay, NS Clay, and terminal/full
+  unification.
+
+# 2026-06-07 Sprint 147 NS migration-initiation threshold round
+
+- Added checked Sprint 147 module:
+  `NSMigrationInitiationThresholdReceipt`.
+- Added `scripts/ns_sprint147_migration_initiation_threshold.py`,
+  `scripts/ns_sprint147_migration_threshold_ode_scan.py`, and
+  `scripts/ns_sprint147_blowup_route_classifier.py`, with generated output
+  directories and focused tests.
+- Recorded `PureDiffusionAtSymmetryPlane` as exact true while
+  `MaximumLocationMigrationExclusionForVBarrier` remains false/open after
+  Sprint 146.
+- Normalized the new gate
+  `MigrationInitiationThresholdForLargeData`: the threshold ledger records the
+  source-integral target, symmetry-plane diffusion baseline, off-axis gain,
+  viscosity suppression, log-supercritical feedback, smooth finite-energy
+  admissibility, and Clay promotion guard.
+- Added a reduced ODE evidence-only scan: 14 of 42 toy regime/variant rows
+  initiate migration before suppression, but theorem/proof/promotion flags
+  remain false.
+- The route classifier records WBF publishable, Gamma exact, pure diffusion
+  exact, migration exclusion failed, migration-driven structure identified,
+  and `MigrationInitiationThresholdForLargeData` as the highest-alpha next
+  gate.
+- `MigrationInitiationThresholdForLargeData`, blowup existence, full Clay
+  Navier-Stokes, and `clayNavierStokesPromoted` remain false.
+
+# 2026-06-07 Sprint 145 NS comparison-envelope obstruction round
+
+- Added checked Sprint 145 module:
+  `NSSprint145ComparisonEnvelopeObstructionReceipt`.
+- Added `scripts/ns_sprint145_comparison_envelope_inequality.py`,
+  `scripts/ns_sprint145_envelope_constant_budget.py`, and
+  `scripts/ns_sprint145_source_commutator_alignment_sampler.py`, with
+  generated output directories and focused tests.
+- Attacked `ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators` and
+  recorded it as still obstructed: local first-crossing, local favorable
+  source, bounded commutator, and boundary/annular bookkeeping rows are
+  support only, not a global comparison theorem.
+- Recorded the desired joint envelope inequality for
+  `2*u1*partial_z^2 psi1 - (partial_z u^r)*partial_r u1`, the missing
+  simultaneous constant budget, and source/commutator alignment cases.
+- Recorded sign-changing nonlocal `psi1`, off-peak forcing, radial/log
+  Biot-Savart commutators, boundary/annular constants, adverse reinforcement
+  rows, and absent signed residual slack as blockers.
+- `CoupledAxisymmetricZeroNumberForVBarrier`, `SecondaryPeakExclusion`,
+  global axial monotonicity, full Clay Navier-Stokes, and
+  `clayNavierStokesPromoted` remain false.
+
+# 2026-06-07 Sprint 144 NS coupled zero-number obstruction round
+
+- Added checked Sprint 144 module:
+  `NSSprint144CoupledZeroNumberObstructionReceipt`.
+- Added `scripts/ns_sprint144_coupled_zero_number_interface.py`,
+  `scripts/ns_sprint144_rz_crossing_topology_sampler.py`, and
+  `scripts/ns_sprint144_nonlocal_source_zero_number_failure.py`, with
+  generated output directories and focused tests.
+- Attacked `CoupledAxisymmetricZeroNumberForVBarrier` and recorded it as still
+  obstructed: scalar one-dimensional zero-number/Sturm intuition is useful as
+  a template only and does not transfer to the coupled axisymmetric barrier.
+- Recorded r-z topology blockers, nonlocal `psi1` source blockers, radial/log
+  commutator hazards, moving boundary/annular interval blockers, absent
+  comparison envelope, and missing compatible constants.
+- `SecondaryPeakExclusion`, global axial monotonicity, full Clay
+  Navier-Stokes, and `clayNavierStokesPromoted` remain false.
+
+# 2026-06-07 Sprint 143 NS secondary-peak exclusion obstruction round
+
+- Added checked Sprint 143 module:
+  `NSSprint143SecondaryPeakExclusionObstructionReceipt`.
+- Added `scripts/ns_sprint143_secondary_peak_exclusion_ledger.py`,
+  `scripts/ns_sprint143_offcenter_crossing_scenarios.py`, and
+  `scripts/ns_sprint143_zero_number_obstruction.py`, with generated output
+  directories and focused tests.
+- Attacked the Sprint 140 `SecondaryPeakExclusion` input and recorded it as
+  still obstructed: local single-peak, symmetry, and parabolic support are
+  present, but no global no-secondary-peak theorem is supplied.
+- Recorded centered monotone support but adverse off-center shoulder,
+  boundary-layer, annular, and delayed first-crossing scenarios.
+- Recorded that scalar one-dimensional zero-number/Sturm intuition does not
+  transfer to the coupled axisymmetric `v = partial_z u1` barrier without the
+  missing `CoupledAxisymmetricZeroNumberForVBarrier` theorem and compatible
+  constants.
+- Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted=false`.
+
+# 2026-06-07 Sprint 142 NS global-concavity obstruction round
+
+- Added checked Sprint 142 module:
+  `NSSprint142GlobalConcavityObstructionReceipt`.
+- Added `scripts/ns_sprint142_global_concavity_inequality.py`,
+  `scripts/ns_sprint142_kernel_sign_stress_sampler.py`, and
+  `scripts/ns_sprint142_boundary_annulus_concavity_ledger.py`, with generated
+  output directories and focused tests.
+- Attacked the Sprint 140 `GlobalConcavityOfPsi1` input and recorded it as
+  still obstructed: local Taylor concavity support is present, but the global
+  crossing-set inequality with Sprint 140 compatible constants is absent.
+- Recorded favorable local kernel rows but adverse axial-offset, annular,
+  boundary-image, and far-tail stress rows, so no uniform global negative sign
+  theorem is supplied.
+- Recorded boundary/annular blockers and the missing
+  `BoundaryCompatibleKernelSignCancellationForPsi1Concavity` theorem.
+- Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted=false`.
+
+# 2026-06-07 Sprint 141 NS commutator-domination obstruction round
+
+- Added checked Sprint 141 module:
+  `NSSprint141CommutatorDominationObstructionReceipt`.
+- Added `scripts/ns_sprint141_commutator_domination_inequality.py`,
+  `scripts/ns_sprint141_biot_savart_log_commutator_sampler.py`, and
+  `scripts/ns_sprint141_radial_gradient_coupling_ledger.py`, with generated
+  output directories and focused tests.
+- Attacked the Sprint 140 `TransportCommutatorDominationForVBarrier` input and
+  recorded it as still obstructed: the positive commutator part is
+  nonhomogeneous, a simultaneous log-aware inequality is absent, and the log
+  Biot-Savart factor is not absorbed by available constants.
+- Recorded local bounded Biot-Savart rows alongside near-coincident
+  ring/off-axis annulus hazard rows.
+- Recorded that first axial positive-crossing geometry controls derivatives
+  of `v = partial_z u1`, but does not control `partial_r u1`; Gamma amplitude
+  control is also insufficient for radial-gradient sign/dominance.
+- Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted=false`.
+
+# 2026-06-07 Sprint 140 NS conditional barrier-assembly round
+
+- Added checked Sprint 140 module:
+  `NSSprint140ConditionalBarrierAssemblyReceipt`.
+- Added `scripts/ns_sprint140_conditional_barrier_assembly.py`,
+  `scripts/ns_sprint140_constant_compatibility_ledger.py`, and
+  `scripts/ns_sprint140_failure_mode_matrix.py`, with generated output
+  directories and focused tests.
+- Assembled the conditional theorem interface selected by Sprint 139:
+  compatible inputs for `GlobalConcavityOfPsi1`,
+  `SecondaryPeakExclusion`, and
+  `TransportCommutatorDominationForVBarrier` imply only conditional
+  monitored-route regularity and conditional BKM finiteness.
+- Recorded all compatibility constants as required but absent/not proved:
+  concavity margin, peak-exclusion radius/window, commutator/log-loss margin,
+  diffusion/strain budget, and a simultaneous assembly inequality.
+- Recorded fail-closed failure modes for false assumptions, incompatible
+  constants, off-center crossings, boundary/annular kernel signs, commutator
+  Biot-Savart log loss, and absent monitored-route to full Clay translation.
+- Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted=false`.
+
+# 2026-06-07 Sprint 139 NS axial-barrier route-fork round
+
+- Added checked Sprint 139 module:
+  `NSSprint139AxialBarrierRouteForkReceipt`.
+- Added `scripts/ns_sprint139_barrier_route_fork_classifier.py`,
+  `scripts/ns_sprint139_localized_kernel_sign_sampler.py`, and
+  `scripts/ns_sprint139_commutator_sign_route.py`, with generated output
+  directories and focused tests.
+- Forked the Sprint 138 axial barrier route without promotion: local
+  `v = partial_z u1` barrier support remains true, but
+  `GlobalConcavityOfPsi1`, `SecondaryPeakExclusion`, and
+  `TransportCommutatorDominationForVBarrier` remain open.
+- Recorded that localized kernel signs support the local concavity intuition
+  only in selected rows; axial-offset, annular, boundary, and tail samples keep
+  global concavity sign-indefinite.
+- Recorded the pointwise commutator sign/dominance route for
+  `-(partial_z u^r) partial_r u1` as open and fail-closed under the restored
+  log Biot-Savart strain hazard.
+- Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted=false`.
+
+# 2026-06-07 Sprint 138 NS axial monotonicity blocker-reduction round
+
+- Added checked Sprint 138 module:
+  `NSSprint138AxialMonotonicityBlockerReductionReceipt`.
+- Added `scripts/ns_sprint138_global_concavity_blocker.py`,
+  `scripts/ns_sprint138_secondary_peak_exclusion.py`, and
+  `scripts/ns_sprint138_transport_commutator_budget.py`, with generated
+  output directories and focused tests.
+- Reduced the Sprint 137 `AxialMonotonicityOfSwirlProfile` gate to three
+  explicit open blockers: `GlobalConcavityOfPsi1`,
+  `SecondaryPeakExclusion`, and `TransportCommutatorDominationForVBarrier`.
+- Recorded that local Taylor concavity and the local first-crossing barrier
+  are not enough: nonlocal elliptic sign, boundary/annular persistence,
+  nonlinear shoulders, missing coupled zero-number control, and the
+  nonhomogeneous transport commutator remain unresolved.
+- Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted=false`.
+
+# 2026-06-07 Sprint 136/137 NS symmetric Hou-Luo sign-barrier round
+
+- Added checked Sprint 136 module:
+  `NSSprint136HouLuoSymmetricSourceSignReceipt`.
+- Encoded the canonical z-reflection symmetric Hou-Luo source-sign result:
+  `LogLossSourceLowerBound=false`, source zero on `z=0`, source nonpositive
+  under the required/open `AxialMonotonicityOfSwirlProfile` gate, and viscous
+  nonpositivity at an interior vorticity maximum.
+- Added `scripts/ns_sprint136_hou_luo_symmetric_source_sign.py` and
+  `scripts/ns_sprint137_axial_monotonicity_gate.py`, generated
+  `outputs/ns_sprint136_hou_luo_symmetric_source_sign/` and
+  `outputs/ns_sprint137_axial_monotonicity_gate/`, and added focused tests.
+- Sprint 137 records local support for the `v = partial_z u1` barrier but
+  keeps the global proof open on `global_concavity_blocker` and
+  `secondary_peak_blocker`.
+- Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted=false`.
+
 # 2026-06-06 Sprint 133 submission-readiness/docket normalization round
 
 - Added checked Sprint 133 modules:

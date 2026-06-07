@@ -1,0 +1,64 @@
+{
+  "Omega0_values": [
+    1.5,
+    4.0,
+    10.0
+  ],
+  "Omega_values": [
+    1.25,
+    2.0,
+    5.0,
+    12.0
+  ],
+  "all_scan_signs_match_equilibrium_rule": true,
+  "beta_values": [
+    0.05,
+    0.2,
+    0.75
+  ],
+  "bkm_finite": false,
+  "contract": "ns_sprint151_width_ode_extraction",
+  "control_card": {
+    "C": "The artifact is a Python stdlib emitter producing JSON, CSV, Markdown, and manifest files with stable hashes and fail-closed flags.",
+    "F": "Gaps remain: no rigorous extraction from localized Navier-Stokes enstrophy identities, no BKM finite integral theorem, and no full Clay Navier-Stokes solution.",
+    "G": "Validation requires exact theorem flags, positive scan parameters, Omega > 1 for equilibrium rows, beta > 0 for subcritical rows, and the expected sign relation to delta_eq.",
+    "L": "Localized stretching is represented by the compressive term -Omega log Omega and viscosity by +nu/delta; this is a reduced scalar projection, not a derivation from the full Navier-Stokes system.",
+    "O": "Worker 4 owns scripts/ns_sprint151_width_ode_extraction.py and outputs/ns_sprint151_width_ode_extraction/.",
+    "P": "Use the ledger as evidence for reduced-model bookkeeping and for conditional beta-positive subcritical projection only.",
+    "R": "Create a deterministic evidence ledger for the reduced width ODE dot(delta) = -Omega log Omega + nu/delta from localized enstrophy term accounting.",
+    "S": "For Omega > 1 the equilibrium model delta_eq = nu/(Omega log Omega) is supported algebraically, and the scan confirms dot(delta) is positive below equilibrium, zero at equilibrium, and negative above it."
+  },
+  "delta_factors": [
+    0.5,
+    0.9,
+    1.0,
+    1.2,
+    2.0
+  ],
+  "derivation_row_count": 4,
+  "equilibrium_formula": "delta_eq = nu/(Omega*log(Omega))",
+  "equilibrium_model_supported": true,
+  "evidence_only": true,
+  "full_clay_ns_solved": false,
+  "lane": 4,
+  "ledger_hash": "88e2b37689155089f6770f4f195dbd0972056e38c960a6fca9a92f4d41949f99",
+  "model_name": "WidthODEFromLocalizedEnstrophyTerms",
+  "nu_values": [
+    0.005,
+    0.02,
+    0.08
+  ],
+  "ode_formula": "delta_dot = -Omega*log(Omega) + nu/delta",
+  "program": "LocalizedEnstrophyWidthODEEvidenceProgram",
+  "scan_row_count": 60,
+  "scan_sign_counts": {
+    "negative": 24,
+    "positive": 24,
+    "zero": 12
+  },
+  "sprint": 151,
+  "subcritical_ode_conditional": true,
+  "subcritical_projection_row_count": 36,
+  "theorem_flags_fail_closed": true,
+  "width_ode_extracted_from_ns": false
+}

@@ -3,6 +3,299 @@
 
 # P0 BLOCKERS
 
+• Sprint 153 NS localized vortex-stretching source gate round is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint153LocalizedVortexStretchingSourceReceipt`;
+  - adds `scripts/ns_sprint153_localized_vortex_stretching_source.py`,
+    `scripts/ns_sprint153_core_source_constant_scan.py`, and
+    `scripts/ns_sprint153_source_dissipation_balance.py`;
+  - generates `outputs/ns_sprint153_localized_vortex_stretching_source/`,
+    `outputs/ns_sprint153_core_source_constant_scan/`, and
+    `outputs/ns_sprint153_source_dissipation_balance/`;
+  - records Sprint 152 annular leakage domination as support/conditional only,
+    not as an unconditional theorem;
+  - records the localized source shape `2*u1*v*Omega*delta^2` as deterministic
+    evidence;
+  - records the constant scan split as support/open/blocker and the
+    source-dissipation balance split as absorbed/residual/open;
+  - keeps `LocalizedVortexStretchingSourceBound`,
+    `BiotSavartNonlocalClosureAtScaleDelta`,
+    `SimultaneousConstantsCompatibility`, `ModelValidityForWidthODE`,
+    `SymmetricHouLuoBKMFinite`, `full_clay_ns_solved`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 151 NS localized-enstrophy identity gate round is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint151LocalizedEnstrophyIdentityReceipt`;
+  - adds `scripts/ns_sprint151_localized_enstrophy_identity.py`,
+    `scripts/ns_sprint151_cutoff_error_budget.py`, and
+    `scripts/ns_sprint151_width_ode_extraction.py`;
+  - generates `outputs/ns_sprint151_localized_enstrophy_identity/`,
+    `outputs/ns_sprint151_cutoff_error_budget/`, and
+    `outputs/ns_sprint151_width_ode_extraction/`;
+  - records Sprint 150 width-equilibrium, subcritical ODE, and Gronwall
+    closure support as conditional only;
+  - records the localized identity term ledger with cutoff transport,
+    diffusion-boundary, vortex-stretching/source, Biot-Savart/nonlocal,
+    annular/boundary, and constants compatibility rows still open;
+  - records cutoff-budget evidence with transport and diffusion sample rows
+    absorbed, while source localization, annular leakage, and joint
+    annular/source absorption remain unresolved;
+  - records width-ODE equilibrium evidence, but keeps
+    `width_ode_extracted_from_ns=false`;
+  - keeps `LocalizedEnstrophyIdentityAtScaleDelta`,
+    `ModelValidityForWidthODE`, `ScalingCouplingConsistency`,
+    `SymmetricHouLuoBKMFinite`, `full_clay_ns_solved`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 149 NS scaling-consistency gate round is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint149ScalingConsistencyGateReceipt`;
+  - adds `scripts/ns_sprint149_scaling_consistency_gate.py`,
+    `scripts/ns_sprint149_linearization_spectrum_probe.py`, and
+    `scripts/ns_sprint149_energy_width_lower_bound.py`;
+  - generates `outputs/ns_sprint149_scaling_consistency_gate/`,
+    `outputs/ns_sprint149_linearization_spectrum_probe/`, and
+    `outputs/ns_sprint149_energy_width_lower_bound/`;
+  - records Sprint 148 support rows as support/conditional only:
+    explicit initial data, corrected crossing geometry, numerical source lower
+    bound support, conditional migration threshold, and corrected
+    Gronwall-closable growth ODE;
+  - records linearization toy-spectrum beta-positive candidates, but no
+    self-similar profile theorem;
+  - records energy/enstrophy/viscous width candidate inequalities, but keeps
+    `energyWidthLowerBoundProved=false` and
+    `alphaLessThanOneProved=false`;
+  - keeps `ScalingConsistencyForHouLuoConcentration`,
+    `SymmetricHouLuoBKMFinite`, `full_clay_ns_solved`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 147 NS migration-initiation threshold round is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSMigrationInitiationThresholdReceipt`;
+  - adds `scripts/ns_sprint147_migration_initiation_threshold.py`,
+    `scripts/ns_sprint147_migration_threshold_ode_scan.py`, and
+    `scripts/ns_sprint147_blowup_route_classifier.py`;
+  - generates `outputs/ns_sprint147_migration_initiation_threshold/`,
+    `outputs/ns_sprint147_migration_threshold_ode_scan/`, and
+    `outputs/ns_sprint147_blowup_route_classifier/`;
+  - records exact `PureDiffusionAtSymmetryPlane=true`, failed
+    `MaximumLocationMigrationExclusionForVBarrier=false`, identified
+    migration-driven blowup structure, and
+    `MigrationInitiationThresholdForLargeData` as the highest-alpha next gate;
+  - records reduced ODE evidence where some toy regimes initiate migration
+    before suppression, but keeps this as evidence only;
+  - keeps `MigrationInitiationThresholdForLargeData`,
+    `blowup_existence_proved`, `full_clay_ns_solved`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 145 NS comparison-envelope obstruction is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint145ComparisonEnvelopeObstructionReceipt`;
+  - adds `scripts/ns_sprint145_comparison_envelope_inequality.py`,
+    `scripts/ns_sprint145_envelope_constant_budget.py`, and
+    `scripts/ns_sprint145_source_commutator_alignment_sampler.py`;
+  - generates `outputs/ns_sprint145_comparison_envelope_inequality/`,
+    `outputs/ns_sprint145_envelope_constant_budget/`, and
+    `outputs/ns_sprint145_source_commutator_alignment_sampler/`;
+  - records local first-crossing and local favorable-source support, but keeps
+    the simultaneous envelope absent;
+  - records sign-changing nonlocal `psi1`, off-peak forcing, radial/log
+    commutator hazards, boundary/annular constants, adverse alignment rows,
+    and missing signed residual slack as blockers;
+  - keeps `ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators`,
+    `CoupledAxisymmetricZeroNumberForVBarrier`, `SecondaryPeakExclusion`,
+    `globalAxialMonotonicity`, `full_clay_ns_solved`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 144 NS coupled zero-number obstruction is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint144CoupledZeroNumberObstructionReceipt`;
+  - adds `scripts/ns_sprint144_coupled_zero_number_interface.py`,
+    `scripts/ns_sprint144_rz_crossing_topology_sampler.py`, and
+    `scripts/ns_sprint144_nonlocal_source_zero_number_failure.py`;
+  - generates `outputs/ns_sprint144_coupled_zero_number_interface/`,
+    `outputs/ns_sprint144_rz_crossing_topology_sampler/`, and
+    `outputs/ns_sprint144_nonlocal_source_zero_number_failure/`;
+  - records scalar zero-number/Sturm support only as a one-dimensional
+    template, while transfer to the coupled axisymmetric barrier remains
+    invalid;
+  - records coupled r-z topology, nonlocal `psi1` source, radial/log
+    commutator, moving boundary/annular interval, and constant compatibility
+    blockers;
+  - keeps `SecondaryPeakExclusion`, `globalAxialMonotonicity`,
+    `full_clay_ns_solved`, and `clayNavierStokesPromoted` false.
+
+• Sprint 143 NS secondary-peak exclusion obstruction is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint143SecondaryPeakExclusionObstructionReceipt`;
+  - adds `scripts/ns_sprint143_secondary_peak_exclusion_ledger.py`,
+    `scripts/ns_sprint143_offcenter_crossing_scenarios.py`, and
+    `scripts/ns_sprint143_zero_number_obstruction.py`;
+  - generates `outputs/ns_sprint143_secondary_peak_exclusion_ledger/`,
+    `outputs/ns_sprint143_offcenter_crossing_scenarios/`, and
+    `outputs/ns_sprint143_zero_number_obstruction/`;
+  - records local single-peak, symmetry, and parabolic support, but keeps
+    `SecondaryPeakExclusion` false/open globally;
+  - records nonlinear shoulder formation, off-center positive `v` crossings,
+    missing coupled axisymmetric zero-number/Sturm control, and
+    boundary/annular migration blockers;
+  - records that compatible constants and a closing secondary-peak theorem are
+    absent;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 142 NS global-concavity obstruction is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint142GlobalConcavityObstructionReceipt`;
+  - adds `scripts/ns_sprint142_global_concavity_inequality.py`,
+    `scripts/ns_sprint142_kernel_sign_stress_sampler.py`, and
+    `scripts/ns_sprint142_boundary_annulus_concavity_ledger.py`;
+  - generates `outputs/ns_sprint142_global_concavity_inequality/`,
+    `outputs/ns_sprint142_kernel_sign_stress_sampler/`, and
+    `outputs/ns_sprint142_boundary_annulus_concavity_ledger/`;
+  - records local Taylor concavity support, but keeps
+    `GlobalConcavityOfPsi1` false/open globally;
+  - records nonlocal elliptic kernel sign, boundary/annular/tail, and
+    scale-window persistence blockers;
+  - records that a constant-compatible global concavity theorem and
+    boundary-compatible kernel/sign/cancellation theorem are absent;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 141 NS commutator-domination obstruction is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint141CommutatorDominationObstructionReceipt`;
+  - adds `scripts/ns_sprint141_commutator_domination_inequality.py`,
+    `scripts/ns_sprint141_biot_savart_log_commutator_sampler.py`, and
+    `scripts/ns_sprint141_radial_gradient_coupling_ledger.py`;
+  - generates `outputs/ns_sprint141_commutator_domination_inequality/`,
+    `outputs/ns_sprint141_biot_savart_log_commutator_sampler/`, and
+    `outputs/ns_sprint141_radial_gradient_coupling_ledger/`;
+  - records that the positive radial commutator term remains uncontrolled
+    without one simultaneous log-aware domination inequality;
+  - records local bounded Biot-Savart rows but also near-coincident/off-axis
+    log-loss hazard rows, so the log-aware theorem is absent;
+  - records that first axial crossing geometry and Gamma amplitude control do
+    not determine `partial_r u1`, leaving radial-gradient coupling open;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 140 NS conditional barrier assembly is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint140ConditionalBarrierAssemblyReceipt`;
+  - adds `scripts/ns_sprint140_conditional_barrier_assembly.py`,
+    `scripts/ns_sprint140_constant_compatibility_ledger.py`, and
+    `scripts/ns_sprint140_failure_mode_matrix.py`;
+  - generates `outputs/ns_sprint140_conditional_barrier_assembly/`,
+    `outputs/ns_sprint140_constant_compatibility_ledger/`, and
+    `outputs/ns_sprint140_failure_mode_matrix/`;
+  - records conditional monitored-route regularity and conditional BKM
+    finiteness only under compatible external inputs for
+    `GlobalConcavityOfPsi1`, `SecondaryPeakExclusion`, and
+    `TransportCommutatorDominationForVBarrier`;
+  - records concavity, peak-exclusion, commutator, diffusion/strain, and
+    assembly constants as required but absent/not proved in repo;
+  - inventories failure modes for false assumptions, incompatible constants,
+    off-center crossings, boundary/annular kernel signs, commutator log loss,
+    and absent monitored-route to full Clay translation;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 139 NS axial-barrier route fork is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint139AxialBarrierRouteForkReceipt`;
+  - adds `scripts/ns_sprint139_barrier_route_fork_classifier.py`,
+    `scripts/ns_sprint139_localized_kernel_sign_sampler.py`, and
+    `scripts/ns_sprint139_commutator_sign_route.py`;
+  - generates `outputs/ns_sprint139_barrier_route_fork_classifier/`,
+    `outputs/ns_sprint139_localized_kernel_sign_sampler/`, and
+    `outputs/ns_sprint139_commutator_sign_route/`;
+  - keeps local `v = partial_z u1` barrier support true but records
+    `GlobalConcavityOfPsi1`, `SecondaryPeakExclusion`, and
+    `TransportCommutatorDominationForVBarrier` open;
+  - ranks conditional assembly as the next artifact and transport commutator
+    domination as the next analytic fork, while keeping the global proof open;
+  - records localized kernel sign-indefiniteness and the pointwise
+    commutator sign/dominance theorem as fail-closed blockers;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 138 NS axial monotonicity blocker reduction is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint138AxialMonotonicityBlockerReductionReceipt`;
+  - adds `scripts/ns_sprint138_global_concavity_blocker.py`,
+    `scripts/ns_sprint138_secondary_peak_exclusion.py`, and
+    `scripts/ns_sprint138_transport_commutator_budget.py`;
+  - generates `outputs/ns_sprint138_global_concavity_blocker/`,
+    `outputs/ns_sprint138_secondary_peak_exclusion/`, and
+    `outputs/ns_sprint138_transport_commutator_budget/`;
+  - records local Taylor concavity support but keeps
+    `GlobalConcavityOfPsi1` open on nonlocal elliptic dependence,
+    sign-indefinite kernels, boundary/annular effects, and persistence;
+  - records `SecondaryPeakExclusion` open because single-peak initial data,
+    parabolic smoothing, and Gamma control do not prevent nonlinear shoulders
+    or secondary positive `v` crossings;
+  - records `TransportCommutatorDominationForVBarrier` open because
+    `-(partial_z u^r) partial_r u1` is a nonhomogeneous hazard and the
+    restored log Biot-Savart strain loss is not dominated;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 137 NS axial monotonicity gate is implemented.
+
+  Status:
+
+  - adds `scripts/ns_sprint137_axial_monotonicity_gate.py`;
+  - generates `outputs/ns_sprint137_axial_monotonicity_gate/`;
+  - records the maximum-principle/barrier ledger for
+    `v = partial_z u1`, including symmetry inheritance, initial sign,
+    first-positive-crossing geometry, the differentiated source term
+    `2 u1 partial_z^2 psi1`, local concavity support, and diffusion sign;
+  - records local barrier support but keeps the global proof open on
+    `global_concavity_blocker` and `secondary_peak_blocker`;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 136 NS symmetric Hou-Luo source-sign result is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint136HouLuoSymmetricSourceSignReceipt`
+    and `scripts/ns_sprint136_hou_luo_symmetric_source_sign.py`;
+  - generates `outputs/ns_sprint136_hou_luo_symmetric_source_sign/`;
+  - records `LogLossSourceLowerBound = false` in the canonical
+    z-reflection symmetric Hou-Luo scenario;
+  - records source zero on `z=0`, source nonpositive under the open/required
+    `AxialMonotonicityOfSwirlProfile` gate, and viscous nonpositivity at an
+    interior vorticity maximum;
+  - records conditional BKM finiteness for the symmetric monotone branch only,
+    with no global Navier-Stokes theorem and no Clay promotion.
+
 • Sprint 135 NS corrected Hou-Luo phase map and gate classifier is
   implemented.
 

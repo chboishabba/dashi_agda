@@ -1,0 +1,64 @@
+{
+  "annular_shoulder_theorem_exists": false,
+  "artifact_hashes": {
+    "markdown": "7852512555b873c556e5c010fbbca51316f88639cb6412c2eba66c9d6a65820a",
+    "rows_csv": "2ae9767b257d92d64e946772acf06ad9bb1eaab644c5a7a9879d7ea45f87e932",
+    "rows_json": "a7342236ec4b8fed6f045343eca62f3cd952c31a3df222dd976390c532f6adef",
+    "summary_json": "baa1fbaa0f8e6bdbea9420b0d6a193bdd79e38fa4605c96ac5feacce008adafa"
+  },
+  "artifacts": {
+    "markdown": "outputs/ns_sprint142_boundary_annulus_concavity_ledger/ns_sprint142_boundary_annulus_concavity_ledger.md",
+    "rows_csv": "outputs/ns_sprint142_boundary_annulus_concavity_ledger/ns_sprint142_boundary_annulus_concavity_ledger_rows.csv",
+    "rows_json": "outputs/ns_sprint142_boundary_annulus_concavity_ledger/ns_sprint142_boundary_annulus_concavity_ledger_rows.json",
+    "summary_json": "outputs/ns_sprint142_boundary_annulus_concavity_ledger/ns_sprint142_boundary_annulus_concavity_ledger_summary.json"
+  },
+  "blocker": "GlobalConcavityOfPsi1",
+  "blocker_open": true,
+  "boundary_compatible_kernel_sign_or_cancellation_theorem_exists": false,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint142_boundary_annulus_concavity_ledger",
+  "decision": "fail_closed_boundary_annulus_concavity_blocker_open",
+  "elliptic_relation": "-Ltilde psi1 = omega1",
+  "full_clay_ns_solved": false,
+  "global_concavity_closed": false,
+  "global_proof": false,
+  "lane": 4,
+  "local_support_rows": [
+    "interior_local_support"
+  ],
+  "open_hazard_rows": [
+    "interior_local_support",
+    "boundary_image_sign_hazard",
+    "annular_shoulder_hazard",
+    "axis_regularity_compatibility",
+    "missing_theorem"
+  ],
+  "parent_gate": "AxialMonotonicityOfSwirlProfile",
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "required_rows_present": [
+    "annular_shoulder_hazard",
+    "axis_regularity_compatibility",
+    "boundary_image_sign_hazard",
+    "interior_local_support",
+    "missing_theorem"
+  ],
+  "required_theorem": "BoundaryCompatibleKernelSignCancellationForPsi1Concavity",
+  "required_theorem_available": false,
+  "row_count": 5,
+  "row_hashes": {
+    "annular_shoulder_hazard": "877cf64b957eb4ef404f5e79a5d8018064010f7eb8256d7d85a4ad153efb20e3",
+    "axis_regularity_compatibility": "265ea3af185d97e88f007995f2d67cc98a8eb1da11d346ba35ce410ee2bfed92",
+    "boundary_image_sign_hazard": "13ffeb581aff87f1902a76e4da9bdd540b16a54d5a55c1be8480558921f20bc3",
+    "interior_local_support": "95d1bf05489dfcde6e2636fb2d3b77c3240ff96446d345d8bc481bf264c7a35f",
+    "missing_theorem": "eb7e21cbebe3eeadb5d5722821d80a1d282b58917be9fe462b2eee774d4e1c3f"
+  },
+  "sprint": 142,
+  "target_term": "2 u1 partial_z^2 psi1",
+  "validation": {
+    "fail_closed": true,
+    "no_claim_closure": true,
+    "no_global_proof": true,
+    "no_promotion": true
+  }
+}

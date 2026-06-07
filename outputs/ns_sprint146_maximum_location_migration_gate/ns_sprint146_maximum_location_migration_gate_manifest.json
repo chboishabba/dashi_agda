@@ -1,0 +1,29 @@
+{
+  "contract": "ns_sprint146_maximum_location_migration_gate",
+  "files": [
+    {
+      "bytes": 5616,
+      "path": "outputs/.ns_sprint146_maximum_location_migration_gate.9ccg_057/ns_sprint146_maximum_location_migration_gate_summary.json",
+      "sha256": "cd3e7116d0f890f0af36bfdc4c16d4113bd94d8ae7cb01920cbdb9c6d6aba416"
+    },
+    {
+      "bytes": 11092,
+      "path": "outputs/.ns_sprint146_maximum_location_migration_gate.9ccg_057/ns_sprint146_maximum_location_migration_gate_rows.json",
+      "sha256": "14b5025b18ea31a756ccfc348ddf3c04b90747bb0545c913f16b5f9ceff2aa80"
+    },
+    {
+      "bytes": 6319,
+      "path": "outputs/.ns_sprint146_maximum_location_migration_gate.9ccg_057/ns_sprint146_maximum_location_migration_gate_rows.csv",
+      "sha256": "8ab1fb441f7685eecf599ab3e9a159df304a1b0415b00cf04a57cd0996964d61"
+    },
+    {
+      "bytes": 3188,
+      "path": "outputs/.ns_sprint146_maximum_location_migration_gate.9ccg_057/ns_sprint146_maximum_location_migration_gate.md",
+      "sha256": "bc5f51997f934216fdc4d2f07c54e752ea5071e9c99163fa09205579c21d9ed1"
+    }
+  ],
+  "lane": 4,
+  "manifest_hash": "526643bcb753b1639b16d8e12acd1f4b4d08f6f9f7dd90373f36d37488f16e2b",
+  "out_dir": "outputs/ns_sprint146_maximum_location_migration_gate",
+  "sprint": 146
+}

@@ -1,0 +1,27 @@
+{
+  "artifact_complete": true,
+  "contract": "ns_sprint145_comparison_envelope_inequality",
+  "decision": "fail_closed_comparison_envelope_not_available",
+  "files": {
+    "report": {
+      "path": "outputs/ns_sprint145_comparison_envelope_inequality/ns_sprint145_comparison_envelope_inequality.md",
+      "sha256": "23e26b78a5da5802421bfb1b761e197d380c399ec3cdff002ca294c587b2464c"
+    },
+    "rows_csv": {
+      "path": "outputs/ns_sprint145_comparison_envelope_inequality/ns_sprint145_comparison_envelope_inequality_rows.csv",
+      "sha256": "0499c86ccede06b857ddbc683bb6ed497a877f460e3f0d58aa4df0cfccfc662b"
+    },
+    "rows_json": {
+      "path": "outputs/ns_sprint145_comparison_envelope_inequality/ns_sprint145_comparison_envelope_inequality_rows.json",
+      "sha256": "70ebbe9ba46cbf9f97c719beee64a8718568b83c21f2985ff448b71a1f82e785"
+    },
+    "summary": {
+      "path": "outputs/ns_sprint145_comparison_envelope_inequality/ns_sprint145_comparison_envelope_inequality_summary.json",
+      "sha256": "c49b3d81073ebd04c9f3b945fbe5229590f79e46bcac9c1e1b8a0bf7c4d761ba"
+    }
+  },
+  "invariants_passed": true,
+  "lane": 2,
+  "manifest_payload_hash_without_self": "6faf8ba7354713b1cb4c69e3c02b51b78a897002678071977ae5ea93f1e02546",
+  "sprint": 145
+}

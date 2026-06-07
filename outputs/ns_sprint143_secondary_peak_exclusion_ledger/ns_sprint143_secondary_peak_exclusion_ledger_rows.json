@@ -1,0 +1,289 @@
+[
+  {
+    "barrier_consequence": "Initial support can start the barrier argument but cannot close secondary peak exclusion.",
+    "blocker": "SecondaryPeakExclusion",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "global_proof": false,
+    "ledger_role": "initial_shape_support",
+    "monitored_interval": "barrier-monitoring interval shared by the axial monotonicity route",
+    "monitored_variable": "v = partial_z u1",
+    "normalized_claim_fragment": "The monitored half-profile may begin with one primary axial peak and no off-route positive local maximum of v.",
+    "normalized_theorem_needed": "No secondary axial peak, shoulder, or off-route positive local maximum of v=partial_z u1 forms on the monitored interval.",
+    "obstruction": [
+      "initial single-peak shape is not a propagated invariant",
+      "the v equation is coupled and nonhomogeneous rather than scalar heat flow",
+      "no time-persistence theorem keeps the first crossing on the primary route"
+    ],
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "promotion_decision": "hold_no_clay_promotion",
+    "required_input": [
+      "single-peak persistence theorem over the monitored interval",
+      "proof that all first positive v maxima remain on the primary axial route"
+    ],
+    "row_hash": "b8288cf128373fa7c03d8bf19b1b870fd05a4f2944e40d817d5c807fedc09374",
+    "row_id": "initial_single_peak_support",
+    "secondary_peak_exclusion_closed": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "support_recorded_not_persistent",
+    "support_available": [
+      "Sprint 138 single-peak initial profile row",
+      "smooth classical initial data",
+      "initial sign pattern v<=0 away from the symmetry-center peak"
+    ],
+    "theorem_fragment_closed": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "barrier_consequence": "Symmetry helps locate the intended route but does not exclude secondary axial shoulders.",
+    "blocker": "SecondaryPeakExclusion",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "global_proof": false,
+    "ledger_role": "symmetry_axis_support",
+    "monitored_interval": "barrier-monitoring interval shared by the axial monotonicity route",
+    "monitored_variable": "v = partial_z u1",
+    "normalized_claim_fragment": "Symmetry identifies the primary axial route and can force structured behavior at the center plane.",
+    "normalized_theorem_needed": "No secondary axial peak, shoulder, or off-route positive local maximum of v=partial_z u1 forms on the monitored interval.",
+    "obstruction": [
+      "symmetry at the primary center does not order the full monitored interval",
+      "symmetric pairs of off-center shoulders are still compatible with parity",
+      "off-route local maxima can appear without violating center-plane symmetry"
+    ],
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "promotion_decision": "hold_no_clay_promotion",
+    "required_input": [
+      "symmetry-to-global-unimodality theorem",
+      "proof excluding symmetric off-center shoulder pairs for v"
+    ],
+    "row_hash": "a18f6c8cd9b9c63534b866f5e241e42d027e308a0a8fe5b1e4a8eecbdd35fc20",
+    "row_id": "symmetry_support",
+    "secondary_peak_exclusion_closed": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "support_recorded_local_only",
+    "support_available": [
+      "Hou-Luo symmetric branch bookkeeping",
+      "center-plane parity constraints",
+      "primary local barrier region from earlier axial monotonicity ledgers"
+    ],
+    "theorem_fragment_closed": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "barrier_consequence": "Diffusion alone cannot be used as the secondary-peak exclusion theorem.",
+    "blocker": "SecondaryPeakExclusion",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "global_proof": false,
+    "ledger_role": "regularization_limit",
+    "monitored_interval": "barrier-monitoring interval shared by the axial monotonicity route",
+    "monitored_variable": "v = partial_z u1",
+    "normalized_claim_fragment": "Parabolic smoothing controls regularity but is insufficient to prove no new positive local maximum of v forms off route.",
+    "normalized_theorem_needed": "No secondary axial peak, shoulder, or off-route positive local maximum of v=partial_z u1 forms on the monitored interval.",
+    "obstruction": [
+      "smoothing does not preserve unimodality in the coupled equation",
+      "source and transport-gradient terms can offset diffusion",
+      "boundary and annular localization can move the relevant maximum"
+    ],
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "promotion_decision": "hold_no_clay_promotion",
+    "required_input": [
+      "comparison principle adapted to the full v equation",
+      "strict residual inequality after source, transport, boundary, and annular terms"
+    ],
+    "row_hash": "3eb9af003e2c21138205a624ef23903b7b01bc1091f181498170aace077f234c",
+    "row_id": "parabolic_smoothing_insufficiency",
+    "secondary_peak_exclusion_closed": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "support_insufficient",
+    "support_available": [
+      "viscous term nu Ltilde v",
+      "classical smoothing for positive viscosity",
+      "nonpositive diffusion sign at an interior positive maximum"
+    ],
+    "theorem_fragment_closed": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "barrier_consequence": "A shoulder can become the first positive local maximum outside the controlled primary patch.",
+    "blocker": "SecondaryPeakExclusion",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "global_proof": false,
+    "ledger_role": "nonlinear_shoulder_failure_mode",
+    "monitored_interval": "barrier-monitoring interval shared by the axial monotonicity route",
+    "monitored_variable": "v = partial_z u1",
+    "normalized_claim_fragment": "The nonlinear source can raise an off-route shoulder of v before the primary local barrier yields a contradiction.",
+    "normalized_theorem_needed": "No secondary axial peak, shoulder, or off-route positive local maximum of v=partial_z u1 forms on the monitored interval.",
+    "obstruction": [
+      "2 u1 partial_z^2 psi1 is not globally signed on the monitored interval",
+      "transport-gradient terms can reinforce off-route growth",
+      "local concavity support does not cover every possible first positive maximum"
+    ],
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "promotion_decision": "hold_no_clay_promotion",
+    "required_input": [
+      "global sign, domination, or cancellation theorem for the active nonlinear source",
+      "proof that nonlinear forcing cannot create a secondary shoulder of v"
+    ],
+    "row_hash": "7c38d002732029fef6394004dce805fd986d1067e99ff3b1a3fa46dd7acc2920",
+    "row_id": "nonlinear_source_shoulder",
+    "secondary_peak_exclusion_closed": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "open_failure_mode",
+    "support_available": [
+      "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v",
+      "Sprint 138 nonlinear shoulder row",
+      "Sprint 140 constant ledger requires a secondary exclusion radius/window"
+    ],
+    "theorem_fragment_closed": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "barrier_consequence": "The first positive v maximum may occur where the global barrier constants are unavailable.",
+    "blocker": "SecondaryPeakExclusion",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "global_proof": false,
+    "ledger_role": "off_route_migration_failure_mode",
+    "monitored_interval": "barrier-monitoring interval shared by the axial monotonicity route",
+    "monitored_variable": "v = partial_z u1",
+    "normalized_claim_fragment": "A candidate positive maximum can migrate toward boundary or annular regions not covered by the primary axial route.",
+    "normalized_theorem_needed": "No secondary axial peak, shoulder, or off-route positive local maximum of v=partial_z u1 forms on the monitored interval.",
+    "obstruction": [
+      "Gamma amplitude control does not control axial zero counts of v",
+      "boundary-compatible elliptic effects can change the active source sign",
+      "annular shoulders can sit outside the local primary route"
+    ],
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "promotion_decision": "hold_no_clay_promotion",
+    "required_input": [
+      "boundary-compatible secondary-peak exclusion theorem",
+      "annular migration exclusion or signed-kernel domination theorem",
+      "proof that the monitored interval stays inside one common barrier window"
+    ],
+    "row_hash": "f438d8cbc98c04afe8db132123bfe018a071e8c743d8d72eafed5d2427cf8310",
+    "row_id": "boundary_annular_migration",
+    "secondary_peak_exclusion_closed": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "open_boundary_annular_hazard",
+    "support_available": [
+      "Sprint 142 boundary/annulus concavity ledger",
+      "annular Hou-Luo scaling window",
+      "Gamma maximum-principle amplitude support"
+    ],
+    "theorem_fragment_closed": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "barrier_consequence": "The ledger cannot infer preservation of the initial sign-change pattern on the monitored interval.",
+    "blocker": "SecondaryPeakExclusion",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "global_proof": false,
+    "ledger_role": "zero_number_gap",
+    "monitored_interval": "barrier-monitoring interval shared by the axial monotonicity route",
+    "monitored_variable": "v = partial_z u1",
+    "normalized_claim_fragment": "No coupled zero-number theorem is available to prevent creation of new zeros or positive local maxima of v.",
+    "normalized_theorem_needed": "No secondary axial peak, shoulder, or off-route positive local maximum of v=partial_z u1 forms on the monitored interval.",
+    "obstruction": [
+      "the equation is axisymmetric in (r,z) and coupled through psi1",
+      "nonlocal elliptic feedback is outside scalar Sturmian theory",
+      "source terms can create or move zeros of v"
+    ],
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "promotion_decision": "hold_no_clay_promotion",
+    "required_input": [
+      "coupled axisymmetric zero-number or shape-persistence theorem",
+      "formal bridge from that theorem to no secondary positive local maximum of v"
+    ],
+    "row_hash": "102ba2175cf2cb9320c0b94c1636a365fc833c0fd0f246637d1f7a06c8c1d90b",
+    "row_id": "missing_coupled_zero_number_theorem",
+    "secondary_peak_exclusion_closed": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "missing_theorem",
+    "support_available": [
+      "scalar one-dimensional parabolic zero-number theory is a known template",
+      "v is the axial derivative of u1"
+    ],
+    "theorem_fragment_closed": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "barrier_consequence": "The normalized theorem remains an obligation rather than a usable barrier input.",
+    "blocker": "SecondaryPeakExclusion",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "global_proof": false,
+    "ledger_role": "constant_gap",
+    "monitored_interval": "barrier-monitoring interval shared by the axial monotonicity route",
+    "monitored_variable": "v = partial_z u1",
+    "normalized_claim_fragment": "Even a conditional exclusion route needs explicit compatible constants for radius, time window, source dominance, and margins.",
+    "normalized_theorem_needed": "No secondary axial peak, shoulder, or off-route positive local maximum of v=partial_z u1 forms on the monitored interval.",
+    "obstruction": [
+      "no scale-uniform exclusion radius is supplied",
+      "no monitored time window is matched to concavity and commutator constants",
+      "no strict combined inequality closes all source, diffusion, strain, boundary, and annular terms"
+    ],
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "promotion_decision": "hold_no_clay_promotion",
+    "required_input": [
+      "R_excl and T_excl for the monitored interval",
+      "quantitative margin budget compatible with all barrier ledgers",
+      "source, boundary, annular, diffusion, strain, and commutator constants on one crossing set"
+    ],
+    "row_hash": "0cd5c554a8109ab52a6fcd9568c2e9c5fee438514de238b499e04f34369dcf5d",
+    "row_id": "missing_constants",
+    "secondary_peak_exclusion_closed": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "missing_constants",
+    "support_available": [
+      "Sprint 140 constant compatibility ledger names the required windows",
+      "secondary-peak exclusion radius/window is an explicit assembly input"
+    ],
+    "theorem_fragment_closed": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  }
+]

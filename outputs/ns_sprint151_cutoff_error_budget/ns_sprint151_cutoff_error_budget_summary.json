@@ -1,0 +1,70 @@
+{
+  "absorbed_rows": [
+    "transport_flux_cutoff_boundary",
+    "diffusion_leakage_cutoff_laplacian",
+    "absorption_margin_transport_diffusion"
+  ],
+  "absorption_margins_close_all_errors": false,
+  "annular_leakage_closed": false,
+  "claim_closed": false,
+  "claim_proved": false,
+  "claim_proven": false,
+  "classification_counts": {
+    "absorbed": 3,
+    "blocker": 1,
+    "open": 2,
+    "support": 2
+  },
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint151_cutoff_error_budget",
+  "cutoff_gradient_scale_recorded": true,
+  "cutoff_laplacian_scale_recorded": true,
+  "decision": "fail_closed_cutoff_budget_has_open_and_blocker_rows",
+  "delta_sample": "1/16",
+  "delta_symbol": "delta",
+  "diffusion_leakage_absorbed_numerically": true,
+  "extra_row_ids": [],
+  "global_proof": false,
+  "lane": 3,
+  "ledger": "ScaleDeltaCutoffErrorBudget",
+  "missing_required_row_ids": [],
+  "observed_row_ids": [
+    "cutoff_gradient_scale_delta_inverse",
+    "cutoff_laplacian_scale_delta_inverse_square",
+    "transport_flux_cutoff_boundary",
+    "diffusion_leakage_cutoff_laplacian",
+    "source_localization_core_window",
+    "annular_leakage_outer_shell",
+    "absorption_margin_transport_diffusion",
+    "absorption_margin_annular_source"
+  ],
+  "open_or_blocker_rows": [
+    "source_localization_core_window",
+    "annular_leakage_outer_shell",
+    "absorption_margin_annular_source"
+  ],
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "proof_flags_true": [],
+  "required_row_ids": [
+    "absorption_margin_annular_source",
+    "absorption_margin_transport_diffusion",
+    "annular_leakage_outer_shell",
+    "cutoff_gradient_scale_delta_inverse",
+    "cutoff_laplacian_scale_delta_inverse_square",
+    "diffusion_leakage_cutoff_laplacian",
+    "source_localization_core_window",
+    "transport_flux_cutoff_boundary"
+  ],
+  "row_count": 8,
+  "source_localization_closed": false,
+  "sprint": 151,
+  "summary_hash": "e6707fb1757dec896b884220976229d1d83608c8132c8a0a26349602def19230",
+  "support_rows": [
+    "cutoff_gradient_scale_delta_inverse",
+    "cutoff_laplacian_scale_delta_inverse_square"
+  ],
+  "theorem_level_true": [],
+  "transport_flux_absorbed_numerically": true,
+  "validation_errors": [],
+  "validation_passed": true
+}

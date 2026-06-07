@@ -1,0 +1,27 @@
+{
+  "artifact_complete": true,
+  "contract": "ns_sprint149_energy_width_lower_bound",
+  "decision": "fail_closed_energy_width_lower_bound_not_proved",
+  "files": {
+    "report": {
+      "path": "outputs/ns_sprint149_energy_width_lower_bound/ns_sprint149_energy_width_lower_bound.md",
+      "sha256": "af7220dba948e1965e24fe81bdc0a24dcb8db3e136e2e3bd982a0f878a31f635"
+    },
+    "rows_csv": {
+      "path": "outputs/ns_sprint149_energy_width_lower_bound/ns_sprint149_energy_width_lower_bound_rows.csv",
+      "sha256": "998ebba326a3d584593d167958a76ccd276b23e26431ccd6c864a7f46ddfdbb0"
+    },
+    "rows_json": {
+      "path": "outputs/ns_sprint149_energy_width_lower_bound/ns_sprint149_energy_width_lower_bound_rows.json",
+      "sha256": "0eadf802d76eb805887bfb7a2cbf76a0f94cf502f45e4af225e01831cdba76b6"
+    },
+    "summary": {
+      "path": "outputs/ns_sprint149_energy_width_lower_bound/ns_sprint149_energy_width_lower_bound_summary.json",
+      "sha256": "1cb1ad89d8dc75fb03ef7cabf9d3fb5211123c2be4dbb3c9f90fd6845c6faa10"
+    }
+  },
+  "invariants_passed": true,
+  "lane": 4,
+  "manifest_payload_hash_without_self": "e755a1ca6a1cde8171e2426135a740e8b180aa9ffd7cc87dee18613015e7ce7d",
+  "sprint": 149
+}

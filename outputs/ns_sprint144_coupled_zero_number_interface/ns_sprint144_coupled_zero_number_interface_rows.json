@@ -1,0 +1,271 @@
+[
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The scalar zero-number theorem cannot be used directly for secondary peak exclusion.",
+    "coupled_equation_mismatch": "The v barrier is a differentiated component of a coupled axisymmetric r-z system, not a closed scalar 1D equation.",
+    "coupled_operator": "Ltilde = partial_r^2 + 3/r partial_r + partial_z^2",
+    "coupled_zero_number_theorem_proved": false,
+    "global_barrier_closed": false,
+    "hypotheses_needed": [
+      "identify an admissible one-dimensional comparison variable",
+      "prove the v dynamics restrict to a closed scalar equation on that variable",
+      "show all source, transport, and boundary terms satisfy scalar theorem assumptions"
+    ],
+    "interface_layer": "scalar_template",
+    "obstruction": [
+      "scalar theorem input is valid only as a 1D template",
+      "no transfer theorem maps that template onto the coupled v barrier"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "required_constants": [
+      "coefficient regularity margin for the scalar template",
+      "boundary compatibility margin for the comparison interval"
+    ],
+    "row_hash": "127267c9a1eb8d73d9eb963538dd69b03a13ef5ed6d87b4f8e63801170ae2b6c",
+    "row_id": "scalar_template_valid_only_1d",
+    "scalar_template": "one-dimensional scalar parabolic zero-number theorem on a fixed interval with closed local operator, admissible boundary data, regular coefficients, and no sign-indefinite external source capable of creating new zeros",
+    "scalar_template_component": "Classical zero-number control applies to a scalar one-dimensional parabolic equation with closed local dynamics on a fixed interval.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "scalar_template_not_transferable",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_interface": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The coupled operator gap leaves the theorem interface open.",
+    "coupled_equation_mismatch": "The v equation uses Ltilde = partial_r^2 + 3/r partial_r + partial_z^2, so radial diffusion and radial first-crossing geometry interact with axial zeros.",
+    "coupled_operator": "Ltilde = partial_r^2 + 3/r partial_r + partial_z^2",
+    "coupled_zero_number_theorem_proved": false,
+    "global_barrier_closed": false,
+    "hypotheses_needed": [
+      "dimension-reduction theorem from r-z crossings to axial zero counts",
+      "control of radial jets at every admissible v-barrier crossing",
+      "maximum-principle compatibility for the coupled r-z operator"
+    ],
+    "interface_layer": "coupled_operator",
+    "obstruction": [
+      "a fixed z-line zero count does not control the full r-z operator",
+      "radial terms can move the first crossing outside scalar theorem scope"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "required_constants": [
+      "radial diffusion domination margin",
+      "axis/annulus regularity constants for 3/r partial_r",
+      "r-z localization constants compatible with the barrier scale"
+    ],
+    "row_hash": "51f04c4b55aaa083eb78fcdaebd421454e3644eff4d3f08bb5094f717a44fa81",
+    "row_id": "coupled_rz_operator_gap",
+    "scalar_template": "one-dimensional scalar parabolic zero-number theorem on a fixed interval with closed local operator, admissible boundary data, regular coefficients, and no sign-indefinite external source capable of creating new zeros",
+    "scalar_template_component": "The template counts sign changes along one spatial coordinate under a scalar parabolic operator.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "coupled_rz_operator_unmatched",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_interface": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The nonlocal source term blocks scalar zero-number transfer.",
+    "coupled_equation_mismatch": "The v equation contains 2 u1 partial_z^2 psi1, where psi1 is determined by the global elliptic/Biot-Savart structure.",
+    "coupled_operator": "Ltilde = partial_r^2 + 3/r partial_r + partial_z^2",
+    "coupled_zero_number_theorem_proved": false,
+    "global_barrier_closed": false,
+    "hypotheses_needed": [
+      "sign or domination theorem for partial_z^2 psi1 in the barrier region",
+      "nonlocal feedback bound that cannot create secondary positive peaks",
+      "compatibility between elliptic estimates and zero-number decay"
+    ],
+    "interface_layer": "nonlocal_source",
+    "obstruction": [
+      "partial_z^2 psi1 is nonlocal and not globally signed",
+      "known bounds do not prevent source-driven zero creation"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "required_constants": [
+      "global psi1 second-axial-derivative bound",
+      "u1-weighted nonlocal source absorption margin",
+      "off-peak shoulder suppression constant"
+    ],
+    "row_hash": "138a1ce29a0c942be6eec0d33df1fa798953cc1953b3700aa2a2f32ef4488bf7",
+    "row_id": "nonlocal_source_gap",
+    "scalar_template": "one-dimensional scalar parabolic zero-number theorem on a fixed interval with closed local operator, admissible boundary data, regular coefficients, and no sign-indefinite external source capable of creating new zeros",
+    "scalar_template_component": "The scalar template requires source terms that preserve or fit the zero-number monotonicity hypotheses.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "nonlocal_source_uncontrolled",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_interface": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The theorem interface cannot close without commutator transport constants.",
+    "coupled_equation_mismatch": "The differentiated equation includes -(partial_z u^r) partial_r u1 and -(partial_z u^z) v in addition to transported diffusion.",
+    "coupled_operator": "Ltilde = partial_r^2 + 3/r partial_r + partial_z^2",
+    "coupled_zero_number_theorem_proved": false,
+    "global_barrier_closed": false,
+    "hypotheses_needed": [
+      "radial-gradient coupling control for partial_r u1",
+      "nonlocal velocity-gradient bounds for partial_z u^r and partial_z u^z",
+      "commutator domination inequality at first positive v crossings"
+    ],
+    "interface_layer": "transport_commutator",
+    "obstruction": [
+      "commutator signs are not fixed by axial zero-count data",
+      "transport-gradient terms can oppose the desired barrier inequality"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "required_constants": [
+      "partial_z u^r times partial_r u1 absorption constant",
+      "velocity-gradient reaction bound",
+      "transport commutator margin compatible with the global barrier"
+    ],
+    "row_hash": "6e30531cb9bc67be0825ed1f56e3d284353dcbe2b3bec2637a80529559a0ebf6",
+    "row_id": "commutator_transport_gap",
+    "scalar_template": "one-dimensional scalar parabolic zero-number theorem on a fixed interval with closed local operator, admissible boundary data, regular coefficients, and no sign-indefinite external source capable of creating new zeros",
+    "scalar_template_component": "The scalar template needs transport and reaction coefficients that do not introduce sign-indefinite forcing outside the theorem.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "commutator_transport_open",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_interface": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "Moving boundary and annular regimes remain outside the normalized interface.",
+    "coupled_equation_mismatch": "The v barrier is monitored in annular and boundary-adjacent r-z regions whose localization may move with the route.",
+    "coupled_operator": "Ltilde = partial_r^2 + 3/r partial_r + partial_z^2",
+    "coupled_zero_number_theorem_proved": false,
+    "global_barrier_closed": false,
+    "hypotheses_needed": [
+      "zero-number theorem on moving annular comparison domains",
+      "boundary jet compatibility for the axisymmetric r-z barrier",
+      "proof that localization changes do not reset or hide zero counts"
+    ],
+    "interface_layer": "domain_geometry",
+    "obstruction": [
+      "fixed-interval scalar hypotheses do not cover annular moving windows",
+      "boundary-adjacent crossings can depend on radial jets not counted axially"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "required_constants": [
+      "annular boundary trace constant",
+      "moving-window speed and curvature margin",
+      "boundary layer absorption constant"
+    ],
+    "row_hash": "ccf9e81d48a0894b17c936b6dd4db9b5f96313ed1ce22778766586014631e92a",
+    "row_id": "moving_boundary_annular_gap",
+    "scalar_template": "one-dimensional scalar parabolic zero-number theorem on a fixed interval with closed local operator, admissible boundary data, regular coefficients, and no sign-indefinite external source capable of creating new zeros",
+    "scalar_template_component": "The scalar template assumes a fixed interval with boundary conditions compatible with zero-number monotonicity.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "moving_annular_domain_open",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_interface": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The interface cannot be consumed by the global v-barrier route.",
+    "coupled_equation_mismatch": "The coupled theorem would need simultaneous margins for r-z operator terms, nonlocal psi1 forcing, commutators, transport, and moving annular boundaries.",
+    "coupled_operator": "Ltilde = partial_r^2 + 3/r partial_r + partial_z^2",
+    "coupled_zero_number_theorem_proved": false,
+    "global_barrier_closed": false,
+    "hypotheses_needed": [
+      "single constants ledger spanning all theorem assumptions",
+      "monotone implication from theorem constants to secondary peak exclusion",
+      "compatibility proof with existing global barrier constants"
+    ],
+    "interface_layer": "quantitative_constants",
+    "obstruction": [
+      "no compatible constants are supplied",
+      "qualitative scalar intuition is insufficient for promotion"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "required_constants": [
+      "operator gap constant",
+      "nonlocal source constant",
+      "commutator transport constant",
+      "moving annular boundary constant",
+      "global barrier closure margin"
+    ],
+    "row_hash": "8069928e278e4d8ee41b5ae2ff3a5997be2fbfabacf67ba4c19ef75e10798046",
+    "row_id": "constants_compatibility_gap",
+    "scalar_template": "one-dimensional scalar parabolic zero-number theorem on a fixed interval with closed local operator, admissible boundary data, regular coefficients, and no sign-indefinite external source capable of creating new zeros",
+    "scalar_template_component": "A usable theorem interface must expose constants that compose with the surrounding barrier and domination ledgers.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "constants_not_compatible",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_interface": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The artifact stays fail-closed with no Clay Navier-Stokes promotion.",
+    "coupled_equation_mismatch": "CoupledAxisymmetricZeroNumberForVBarrier is not present with hypotheses and constants covering every normalized interface gap.",
+    "coupled_operator": "Ltilde = partial_r^2 + 3/r partial_r + partial_z^2",
+    "coupled_zero_number_theorem_proved": false,
+    "global_barrier_closed": false,
+    "hypotheses_needed": [
+      "CoupledAxisymmetricZeroNumberForVBarrier",
+      "proof that scalar transfer is valid for the coupled v equation",
+      "proof that the theorem excludes secondary positive v peaks",
+      "proof that the resulting exclusion closes the global barrier"
+    ],
+    "interface_layer": "required_theorem",
+    "obstruction": [
+      "CoupledAxisymmetricZeroNumberForVBarrier is absent",
+      "secondary peak exclusion remains unproved",
+      "the global barrier remains open"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "required_constants": [
+      "complete theorem constants tuple",
+      "constants compatibility certificate",
+      "promotion-safe global barrier margin"
+    ],
+    "row_hash": "c8e545d66c79012be43665c1007bbdcd2d3d210a8c83fcca53e5c33d736152ce",
+    "row_id": "theorem_absent",
+    "scalar_template": "one-dimensional scalar parabolic zero-number theorem on a fixed interval with closed local operator, admissible boundary data, regular coefficients, and no sign-indefinite external source capable of creating new zeros",
+    "scalar_template_component": "The intended route would require a proved theorem matching the actual coupled v-barrier dynamics.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "required_theorem_absent",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_interface": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  }
+]

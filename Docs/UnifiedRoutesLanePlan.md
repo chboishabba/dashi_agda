@@ -121,6 +121,17 @@ Current checked counts are 40 known constant slots, 33 known law slots, and 11
 authority-source slots, witnessed by `canonicalKnownConstantSlotCountIs40`,
 `canonicalKnownLawSlotCountIs33`, and
 `canonicalAuthoritySourceSlotCountIs11`.
+Measured-value consumers should also cite
+`DASHI.Promotion.NumericMeasuredAuthorityTokenNormalization`. It normalizes 18
+authority-token rows across CODATA, PDG, CODATA/PDG, mass,
+electromagnetic-vacuum, and particle/SM families, including `Z_0`, with seven
+required metadata fields. Accepted authority tokens, value ingestion, and
+numeric promotion remain false.
+The payload-consumer validator is
+`DASHI.Promotion.NumericAuthorityPayloadValidator`. It records 20 payload
+schema fields, 3 authority-family coverage rows, 18 payload envelopes, and 0
+accepted or loaded payloads. It is the current receipt surface for deciding
+whether a measured-value authority artifact is ready for ingestion.
 
 Physics-adapter consumers outside the quantum-only view should cite
 `DASHI.Constants.Registry.canonicalPhysicsAdapterKnownInputsReferenceReceipt`.
@@ -131,6 +142,29 @@ Gate 3, Navier-Stokes, and Yang-Mills. Its positive promotion is only
 `boundedPhysicsTargetsPopulated=true`. Maxwell field equations, GR field
 equations, Standard Model promotion, Gate 3 closure, Navier-Stokes Clay,
 Yang-Mills Clay, and known-physics translation completion remain false.
+Maxwell-facing consumers should cite
+`DASHI.Promotion.MaxwellHodgeSourceConservationObligations` for the current
+inhomogeneous-side gate. It records ten Hodge/source-current conservation
+rows, including metric/Hodge authority, source current `J`, `d*F=J`, `dJ=0`,
+`div J=0`, unit calibration, empirical observables, and false Maxwell
+promotion.
+For the finite exterior-chain route, also cite
+`DASHI.Promotion.MaxwellFiniteExteriorChainStrengthening`. It records 13 chain
+rows from `A`, `F=dA`, and `dF=0` through Hodge, source current, `d*F=J`,
+`dJ=0`, `divJ=0`, unit calibration, empirical observables, and the Maxwell
+promotion guard.
+
+NS-facing consumers should cite
+`DASHI.Physics.Closure.NSMigrationInitiationThresholdConstantsReceipt` for the
+Sprint 147/149 migration-threshold constant gate. It records seven constants,
+four inequality directions, five required estimates, and five fail-closed
+flags. The source/viscosity/off-axis/log estimates are normalized, not proved.
+The current Sprint 150 balance surface is
+`DASHI.Physics.Closure.NSSprint150SourceViscosityBalanceReceipt`. It decomposes
+the source/viscosity problem into source components, retained-viscosity
+components, nine analytic lemmas, six inequality rows, and fail-closed Clay
+guards. The paired executable ledger is
+`scripts/ns_sprint150_source_viscosity_balance.py`.
 
 Arithmetic, moonshine, and Gate 3 consumers should cite
 `DASHI.Constants.Registry.canonicalArithmeticGate3KnownInputsReferenceReceipt`.
@@ -151,6 +185,19 @@ Higgs, and couplings; and the law targets for Schrodinger, Born, Dirac,
 Klein-Gordon, CCR/CAR, Hilbert/GNS, AQFT, DHR/DR, and Standard Model sector
 work. Its promotion guards keep quantum dynamics, Born-rule semantics, QFT,
 and quantum empirical adequacy false.
+The finite-mode scope decision is now checked at
+`DASHI.Promotion.FiniteQuantumPhysicalScopeDecision`. It records two finite
+states, two normalized basis states, five accepted finite-mode computations,
+seven general blockers, and eight finite-to-general lift obligations. The
+positive boundary is finite Schrodinger/Born computation over the existing
+finite carrier; infinite Hilbert completion, unbounded operators, Stone and
+spectral theorems, general Born semantics, QFT, and terminal promotion remain
+false.
+The finite closure receipt is
+`DASHI.Promotion.FiniteQuantumQFTScopedClosure`: two finite Hilbert rows, two
+identity-evolution rows, one zero-Hamiltonian row, four observable-probability
+rows, two Born-normalization rows, and hard-false guards for general quantum,
+QFT, and terminal promotion.
 
 Chemistry-facing consumers should cite
 `DASHI.Constants.Registry.canonicalChemistryKnownInputsReferenceReceipt`. It
@@ -161,6 +208,17 @@ activity data; and the local chemistry/DNA/supervoxel owner surfaces. Its
 positive promotion is only `localDefinitionalChemistryPopulated=true`.
 Physical chemistry, spectroscopy, bonding interpretation, and wet-lab
 validation remain false.
+`DASHI.Promotion.ChemistryFiniteRuleTargets` now adds the finite computation
+targets: first-ten-element Aufbau/Pauli/Hund shell rows, plus Rydberg and
+Gibbs formula slots. These are finite/symbolic targets only; measured
+constants, spectra, thermochemistry, physical chemistry promotion, and wet-lab
+validation remain authority gated.
+`DASHI.Promotion.ChemistryAuthorityBinding` now binds the next external
+chemistry authority gate: three authority-token rows, three spectral-line
+rows, four thermochemistry rows, two calibration rows, and four provenance
+rows. NIST/CODATA/WebBook authority tokens, instrument calibration,
+uncertainty/provenance acceptance, physical chemistry, spectroscopy, and
+wet-lab promotion remain false.
 
 Biology-facing consumers should cite
 `DASHI.Constants.Registry.canonicalBiologyKnownInputsReferenceReceipt`. It
@@ -173,6 +231,12 @@ potentials, population dynamics, ecology, and binding/regulation. Its positive
 promotion is only `structuredBiologyBridgePopulated=true`. Biology causation,
 intervention, clinical validity, genome-to-connectome closure, and brain-state
 recovery remain false.
+`DASHI.Promotion.BiologyFiniteScopeClarification` now records the legitimate
+finite biology surface: 4 DNA bases, 64 codons, 20 amino-acid symbols, 3 stop
+signals, 23 protein target symbols, standard start/stop cases, supervoxel
+carriers, streaming encoder surface, and checksum law. It also records six
+external authority requirements. Causation, intervention, clinical validity,
+connectome closure, and brain-state recovery remain false.
 
 Empirical and runtime consumers should cite
 `DASHI.Constants.Registry.canonicalEmpiricalRuntimeKnownInputsReferenceReceipt`.
@@ -182,6 +246,37 @@ owner surfaces. Its positive promotion is only
 `receiptInfrastructurePopulated=true`. Accepted provider authority,
 comparison-law promotion, covariance/calibration, holdout validation, runtime
 replay authority, semantic adequacy, and empirical adequacy remain false.
+`DASHI.Promotion.EmpiricalReplayAcceptanceCriteria` now also exposes
+`canonicalEmpiricalReplayInfrastructureTokenSummary`: six empirical/runtime
+gate rows for provider authority, covariance-aware chi-square, covariance
+calibration, holdout validation, runtime replay, and semantic adequacy. All
+six infrastructures are populated; all six acceptance tokens remain false.
+
+GR-facing consumers should cite
+`DASHI.Promotion.GRBoundaryClarification` for the current scope decision. It
+separates two bounded internal rows, Minkowski/flat recovery and flat tangent
+bookkeeping, from six blocked continuum rows: non-flat Einstein equations,
+Bianchi identity, stress-energy/source coupling, Schwarzschild, cosmology, and
+continuum GR. GR field-equation promotion remains false.
+
+YM-facing consumers should cite
+`DASHI.Physics.Closure.YMCompletionBoundaryTightening`. It records nine
+advanced YM lanes, including finite/support, small-field, lattice,
+thermodynamic, OS, Wightman, continuum-transfer, and survival surfaces, plus
+369/supervoxel support counts. This is an authority-conditional candidate
+chain, not Clay promotion: external acceptance, all-provider derivation, Clay
+statement discharge, and `clayYangMillsPromoted` remain false.
+`DASHI.Physics.Closure.YMExternalAcceptancePacketNormalization` now records
+the external-acceptance packet gate: six external authority tokens, five
+reproducibility artifacts, eight packet components, and six false-promotion
+guards. Internal packet readiness is not external Clay acceptance.
+
+Standard-Model-facing consumers should cite
+`DASHI.Promotion.StandardModelFiniteRepresentationNarrowing` for the narrowed
+finite claim surface. It records three gauge rows, p2/p3/p5 surfaces, five
+one-generation targets, five conductor hypercharge rows, and eight blockers.
+Continuous gauge reconstruction, exact physical representation content,
+PDG/empirical authority, and broad Standard Model promotion remain false.
 
 Exact SI defining constants are already populated as reference-only slots:
 
@@ -301,6 +396,16 @@ promotion obligations, witnessed by
 `canonicalUnifiedPromotionLaneCountIs6` and
 `canonicalUnifiedPromotionOpenObligationCountIs73`; terminal promotion remains
 false by `canonicalUnifiedPromotionTerminalPromotionIsFalse`.
+The same aggregate now also records 6 non-promoting adapter advancements via
+`canonicalUnifiedPromotionAdapterAdvancementCountIs6`: measured authority
+binding, Maxwell exterior calculus, finite Schrodinger/Born, chemistry
+quantitative adapters, empirical/runtime replay, and the Gate 3/SM/Clay
+evidence reducer.
+It additionally records 6 token/reducer advancements by
+`canonicalUnifiedPromotionTokenReducerAdvancementCountIs6`: numeric authority
+token intake, Maxwell Hodge/source calibration, finite-to-general quantum
+boundary, chemistry/spectroscopy authority intake, empirical replay
+acceptance criteria, and Clay proof/translation reduction.
 
 | Stage | Required evidence | Promotion reading |
 |---|---|---|

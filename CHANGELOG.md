@@ -6,6 +6,184 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 153 NS localized vortex-stretching source gate round for
+  `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint153LocalizedVortexStretchingSourceReceipt`,
+  three Sprint 153 emitters, generated outputs, and focused tests. The round
+  records Sprint 152 annular leakage domination as support/conditional only.
+  The localized source ledger normalizes the evidence shape
+  `2*u1*v*Omega*delta^2`; the constant scan emits 540 rows with 216 support,
+  216 open, and 108 blocker rows; and the source/dissipation/leakage balance
+  emits 10 rows with 3 absorbed, 4 residual, and 3 open rows.
+  `LocalizedVortexStretchingSourceBound`,
+  `BiotSavartNonlocalClosureAtScaleDelta`,
+  `SimultaneousConstantsCompatibility`, `ModelValidityForWidthODE`,
+  `SymmetricHouLuoBKMFinite`, full Clay Navier-Stokes, and
+  `clayNavierStokesPromoted` remain false.
+
+- Sprint 151 NS localized-enstrophy identity gate round for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint151LocalizedEnstrophyIdentityReceipt`, three
+  Sprint 151 emitters, generated outputs, and focused tests. The round records
+  Sprint 150 width-equilibrium, subcritical ODE, and Gronwall closure support
+  as conditional only. The localized identity ledger keeps cutoff transport,
+  diffusion-boundary, vortex-stretching/source, Biot-Savart/nonlocal,
+  annular/boundary, constants compatibility, and width-ODE extraction open.
+  The cutoff budget records absorbed transport/diffusion sample rows but keeps
+  source localization, annular leakage, and joint annular/source absorption
+  unresolved. The width-ODE extractor supports only reduced-model equilibrium
+  evidence; it does not derive the model from full Navier-Stokes.
+  `LocalizedEnstrophyIdentityAtScaleDelta`, `ModelValidityForWidthODE`,
+  `ScalingCouplingConsistency`, `SymmetricHouLuoBKMFinite`, full Clay
+  Navier-Stokes, and `clayNavierStokesPromoted` remain false.
+
+- Sprint 149 NS scaling-consistency gate round for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint149ScalingConsistencyGateReceipt`, three
+  Sprint 149 emitters, generated outputs, and focused tests.  The round
+  records Sprint 148 explicit-data/crossing/source support as support only,
+  with corrected growth and migration-threshold closure conditional on
+  beta-positive scaling.  The scaling gate ledger keeps
+  `ScalingConsistencyForHouLuoConcentration` false/open; the linearization
+  probe records toy beta-positive candidates without proving a self-similar
+  profile; the energy-width ledger records candidate width inequalities while
+  keeping `energyWidthLowerBoundProved=false` and
+  `alphaLessThanOneProved=false`.  `SymmetricHouLuoBKMFinite`, full Clay
+  Navier-Stokes, and `clayNavierStokesPromoted` remain false.
+
+- Sprint 147 NS migration-initiation threshold round for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSMigrationInitiationThresholdReceipt`, three Sprint
+  147 emitters, generated outputs, and focused tests.  The round records exact
+  `PureDiffusionAtSymmetryPlane=true`, failed
+  `MaximumLocationMigrationExclusionForVBarrier=false`, identified
+  migration-driven blowup structure, and
+  `MigrationInitiationThresholdForLargeData` as the highest-alpha next gate.
+  The threshold ledger normalizes source-integral, symmetry-plane diffusion,
+  off-axis gain, viscosity suppression, log-feedback, finite-energy
+  admissibility, and Clay guard rows.  The reduced ODE scan records some toy
+  regimes where migration initiates before suppression, but theorem, blowup
+  existence, full Clay Navier-Stokes, and `clayNavierStokesPromoted` remain
+  false.
+
+- Sprint 145 NS comparison-envelope obstruction for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint145ComparisonEnvelopeObstructionReceipt`,
+  three Sprint 145 emitters, generated outputs, and focused tests.  The round
+  attacks `ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators` and keeps it
+  fail-closed: the desired joint inequality for
+  `2*u1*partial_z^2 psi1 - (partial_z u^r)*partial_r u1` is normalized, but
+  sign-changing nonlocal `psi1`, off-peak forcing, radial/log Biot-Savart
+  commutator hazards, boundary/annular constants, adverse reinforcement
+  source/commutator alignment rows, and absent signed residual slack prevent a
+  simultaneous comparison envelope.  The coupled zero-number theorem,
+  secondary-peak exclusion, global axial monotonicity, full Clay
+  Navier-Stokes, and `clayNavierStokesPromoted` remain false.
+
+- Sprint 144 NS coupled zero-number obstruction for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint144CoupledZeroNumberObstructionReceipt`,
+  three Sprint 144 emitters, generated outputs, and focused tests.  The round
+  attacks `CoupledAxisymmetricZeroNumberForVBarrier` and keeps it fail-closed:
+  scalar one-dimensional zero-number/Sturm support is recorded only as a
+  template, while coupled r-z topology, nonlocal `psi1` source, radial/log
+  commutator hazards, moving boundary/annular intervals, absent comparison
+  envelope, and missing compatible constants prevent transfer to the actual
+  `v = partial_z u1` barrier.  Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted` remains false.
+
+- Sprint 143 NS secondary-peak exclusion obstruction for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint143SecondaryPeakExclusionObstructionReceipt`,
+  three Sprint 143 emitters, generated outputs, and focused tests.  The round
+  attacks the Sprint 140 `SecondaryPeakExclusion` input and keeps it
+  fail-closed: local single-peak, symmetry, and parabolic support are
+  accepted, but nonlinear shoulder formation, off-center positive
+  `v = partial_z u1` crossings, missing coupled axisymmetric zero-number/Sturm
+  control, boundary/annular migration, and absent compatible constants/theorem
+  keep the global barrier open.  Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted` remains false.
+
+- Sprint 142 NS global-concavity obstruction for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint142GlobalConcavityObstructionReceipt`, three
+  Sprint 142 emitters, generated outputs, and focused tests.  The round
+  attacks the Sprint 140 `GlobalConcavityOfPsi1` input and keeps it
+  fail-closed: local Taylor concavity support is accepted, but the normalized
+  crossing-set inequality remains missing; the kernel stress sampler records
+  favorable local same-z rows alongside adverse axial-offset, annular,
+  boundary-image, and far-tail rows; the boundary/annulus ledger records the
+  missing boundary-compatible kernel/sign/cancellation theorem.  Full Clay
+  Navier-Stokes remains unsolved and `clayNavierStokesPromoted` remains false.
+
+- Sprint 141 NS commutator-domination obstruction for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint141CommutatorDominationObstructionReceipt`,
+  three Sprint 141 emitters, generated outputs, and focused tests.  The round
+  attacks the Sprint 140 `TransportCommutatorDominationForVBarrier` input and
+  keeps it fail-closed: the normalized inequality ledger records the positive
+  nonhomogeneous commutator term, missing simultaneous constants, and absent
+  log-aware theorem; the Biot-Savart sampler records local bounded rows but
+  also near-coincident ring/off-axis annulus log-loss hazards; the radial
+  coupling ledger records that axial first-crossing geometry and Gamma control
+  do not determine `partial_r u1`.  Full Clay Navier-Stokes remains unsolved
+  and `clayNavierStokesPromoted` remains false.
+
+- Sprint 140 NS conditional barrier assembly for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint140ConditionalBarrierAssemblyReceipt`, three
+  Sprint 140 emitters, generated outputs, and focused tests.  The tranche
+  assembles the conditional interface selected by Sprint 139: if
+  `GlobalConcavityOfPsi1`, `SecondaryPeakExclusion`, and
+  `TransportCommutatorDominationForVBarrier` are externally supplied with
+  compatible constants, then the local `v = partial_z u1` barrier feeds
+  conditional monitored-route regularity and conditional BKM finiteness for
+  the symmetric Hou-Luo route.  The constants ledger records all required
+  margins/windows/log budgets as absent, and the failure matrix keeps the
+  route open under false assumptions, incompatible constants, off-center
+  crossings, boundary/annular kernel sign defects, commutator log loss, and
+  absent full Clay translation.  Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted` remains false.
+
+- Sprint 139 NS axial-barrier route fork for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint139AxialBarrierRouteForkReceipt`, three
+  Sprint 139 emitters, generated outputs, and focused tests.  The tranche
+  records a fail-closed fork after Sprint 138: local `v = partial_z u1`
+  barrier support remains true, while `GlobalConcavityOfPsi1`,
+  `SecondaryPeakExclusion`, and
+  `TransportCommutatorDominationForVBarrier` remain open.  The route
+  classifier ranks conditional assembly first and transport commutator
+  domination second; the kernel sampler records favorable local rows but
+  nonlocal annular/boundary/tail sign-indefinite obstruction rows; the
+  commutator route records the required pointwise sign or log-aware dominance
+  theorem as unavailable.  Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted` remains false.
+
+- Sprint 138 NS axial monotonicity blocker reduction for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint138AxialMonotonicityBlockerReductionReceipt`,
+  three Sprint 138 emitters, generated outputs, and focused tests.  The round
+  records local support for the `v = partial_z u1` barrier while keeping
+  `GlobalConcavityOfPsi1`, `SecondaryPeakExclusion`, and
+  `TransportCommutatorDominationForVBarrier` open.  Global concavity is blocked
+  by nonlocal elliptic/kernel/boundary persistence issues; secondary peak
+  exclusion is blocked by nonlinear shoulder and missing coupled zero-number
+  control; commutator domination is blocked by the nonhomogeneous
+  `-(partial_z u^r) partial_r u1` term and the restored log Biot-Savart strain
+  hazard.  Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted` remains false.
+
+- Sprint 137 NS axial monotonicity gate for `2026-06-07`: adds
+  `scripts/ns_sprint137_axial_monotonicity_gate.py`, generated outputs, and
+  focused tests.  The emitter records the `v = partial_z u1` barrier ledger:
+  symmetry inheritance, initial sign, first-positive-crossing geometry,
+  differentiated source term, local concavity support, and diffusion sign are
+  explicit.  The local barrier is supported, but the global theorem remains
+  fail-closed on `global_concavity_blocker` and `secondary_peak_blocker`.
+  Full Clay Navier-Stokes remains unsolved and
+  `clayNavierStokesPromoted` remains false.
+
+- Sprint 136 NS symmetric Hou-Luo source-sign result for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint136HouLuoSymmetricSourceSignReceipt`,
+  `scripts/ns_sprint136_hou_luo_symmetric_source_sign.py`, generated outputs,
+  and focused tests.  The tranche records `LogLossSourceLowerBound=false` in
+  the canonical z-reflection symmetric Hou-Luo scenario: source is zero on
+  `z=0`, nonpositive under the required/open
+  `AxialMonotonicityOfSwirlProfile` gate away from the symmetry plane, and
+  viscosity is nonpositive at an interior maximum.  The BKM-finite statement is
+  conditional on axial monotonicity only; there is no global NS theorem and no
+  Clay promotion.
+
 - Sprint 135 NS corrected Hou-Luo phase map and gate classifier for
   `2026-06-07`: adds
   `scripts/ns_sprint135_hou_luo_source_viscosity_phase.py`,

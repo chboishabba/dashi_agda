@@ -1,0 +1,35 @@
+{
+  "contract": "ns_sprint153_core_source_constant_scan",
+  "files": [
+    {
+      "path": "outputs/ns_sprint153_core_source_constant_scan/ns_sprint153_core_source_constant_scan.md",
+      "sha256": "0267714651b6966530cbf96acb3378f3f86c0f213a2098d1aaa398d4ee346acb"
+    },
+    {
+      "path": "outputs/ns_sprint153_core_source_constant_scan/ns_sprint153_core_source_constant_scan_parameter_scan.csv",
+      "sha256": "6f242e27cb0d137612d7e0d16396ba26ee379da3c34ad381816bf758ba148bf0"
+    },
+    {
+      "path": "outputs/ns_sprint153_core_source_constant_scan/ns_sprint153_core_source_constant_scan_parameter_scan.json",
+      "sha256": "3af92d0267ae04bac6b78e257e35ca5ebc34d036b460d41760ff2f83f6fda251"
+    },
+    {
+      "path": "outputs/ns_sprint153_core_source_constant_scan/ns_sprint153_core_source_constant_scan_rows.csv",
+      "sha256": "6f242e27cb0d137612d7e0d16396ba26ee379da3c34ad381816bf758ba148bf0"
+    },
+    {
+      "path": "outputs/ns_sprint153_core_source_constant_scan/ns_sprint153_core_source_constant_scan_rows.json",
+      "sha256": "3af92d0267ae04bac6b78e257e35ca5ebc34d036b460d41760ff2f83f6fda251"
+    },
+    {
+      "path": "outputs/ns_sprint153_core_source_constant_scan/ns_sprint153_core_source_constant_scan_summary.json",
+      "sha256": "d8f3f36eca70f144ecf90c5fd3d47a5e2b0ee071439979a05fa24e4832191f24"
+    }
+  ],
+  "gate": "CoreSourceExpectedScaleControl",
+  "lane": 3,
+  "manifest_hash": "3daaafca4c247745f0ecbb3db0a366442902321f77e9e6984550c33538b0109d",
+  "output_dir": "outputs/ns_sprint153_core_source_constant_scan",
+  "program": "CoreLocalizedSourceConstantScanProgram",
+  "sprint": 153
+}

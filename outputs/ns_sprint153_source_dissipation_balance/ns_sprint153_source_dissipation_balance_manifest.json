@@ -1,0 +1,41 @@
+{
+  "all_required_rows_closed": false,
+  "bkm_guard_closed": false,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint153_source_dissipation_balance",
+  "decision": "fail_closed_source_dissipation_balance_has_residual_and_open_rows",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "outputs/ns_sprint153_source_dissipation_balance/ns_sprint153_source_dissipation_balance_manifest.json",
+      "sha256": "6a124edc3456c850594f073140c22b685289f5a56c604415ee6a0f881e947c93"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "outputs/ns_sprint153_source_dissipation_balance/ns_sprint153_source_dissipation_balance.md",
+      "sha256": "695756df1417ecbb84098a09fa44dad5184515cdb88e67911102f2be163dbb99"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "outputs/ns_sprint153_source_dissipation_balance/ns_sprint153_source_dissipation_balance_rows.csv",
+      "sha256": "b1bce93c628b6442e16969057f8457f52e94453460f0d0b165b3f3a92c2bb76d"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "outputs/ns_sprint153_source_dissipation_balance/ns_sprint153_source_dissipation_balance_rows.json",
+      "sha256": "9cd0239d9da4f6a8fe4e4a7e0deeca018976761b3e233fdbda15dacdf05ea96d"
+    },
+    "summary": {
+      "exists": true,
+      "path": "outputs/ns_sprint153_source_dissipation_balance/ns_sprint153_source_dissipation_balance_summary.json",
+      "sha256": "a89d63ad7377780a0a9ec677752e5aa4257e69bffeb6ca150b214dd2e7c1e247"
+    }
+  },
+  "lane": 4,
+  "manifest_hash": "3a5e9e79ed42e0c76b4d80402457bf2790683dc3c2be7ac538134a0b93a6071b",
+  "model_validity_closed": false,
+  "promotion_allowed": false,
+  "simultaneous_constants_valid": false,
+  "sprint": 153,
+  "validation_passed": true
+}
