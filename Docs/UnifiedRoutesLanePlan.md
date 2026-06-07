@@ -187,11 +187,32 @@ at `outputs/downloaded_new_additions_reference_index/`,
 from these artifacts is concrete but non-promoting.  The repo already has
 finite Route-B/current and pure zero-current `D * F = J` support, recorded by
 `DASHI.Promotion.YMStrictHodgeVariationBlockerIndex` and consumed by
-`DASHI.Promotion.UnificationCriticalPathReceipt`. The exact remaining YM
-calculation is the strict selected-Hodge variation pairing, currently blocked
-at `missingVariationPairingForSelectedHodgeStar`; physical source coupling,
-continuum mass gap, YM Clay, Maxwell field equations, and terminal unification
-remain false. The downloaded Sprint 82/93 YM tables record
+`DASHI.Promotion.UnificationCriticalPathReceipt`. The exact next YM calculation
+is now checked in
+`DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing`: selected zero
+action variation equals selected zero Euler-Lagrange pairing plus selected zero
+boundary term over the user-supplied variation/action carriers. The same
+critical path now consumes
+`DASHI.Physics.Closure.YMStrictSelectedHodgeAlgebraLaws`,
+`DASHI.Physics.Closure.YMStrictSelectedBoundaryCancellationCriterion`,
+`DASHI.Physics.Closure.YMStrictSelectedNonzeroActionVariation`,
+`DASHI.Physics.Closure.YMStrictSelectedSourceCurrentCoupling`, and
+`DASHI.Physics.Closure.YMFiniteSelectedPairingToRealCarrierBoundary`,
+`DASHI.Physics.Closure.YMStrictSelectedMatterCurrentAuthorityBridge`,
+`DASHI.Physics.Closure.YMMatterCurrentConservationAuthorityBoundary`,
+`DASHI.Physics.Closure.YMRealSourcedDStarFEquationBoundary`,
+`DASHI.Physics.Closure.YMConditionalMatterAuthorityToRealDStarF`,
+`DASHI.Physics.Closure.YMSourcedEquationToHamiltonianQuotientBoundary`, and
+`DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientRequirementNormalizer`.
+These
+check the selected finite Hodge algebra, zero-boundary IBP reduction, nonzero
+finite action split, selected source-current carrier coupling, matter-current
+authority/conservation boundary, real sourced `D * F = J` wrappers,
+conditional real `D * F = J` target, and the Hamiltonian quotient requirement
+normalizer. Physical matter/source authority, real sourced `D * F = J`,
+`missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`, continuum mass gap,
+YM Clay, Maxwell field equations, and terminal unification remain false. The
+downloaded Sprint 82/93 YM tables record
 `q = 0.23178189475262734`, `eta4_q < 1`, `eta8_q > 1`,
 `su3_first_safe_k = 11`, and a conditional Master WC3 route decision; they do
 not accept YM Clay, continuum mass gap, Maxwell field equations, or terminal
@@ -200,14 +221,25 @@ unification.
 Whole-unification consumers should cite
 `DASHI.Promotion.UnificationCriticalPathReceipt`. It consumes the checked
 contraction/quadratic/signature spine, the defect/quadratic dependency index,
-the depth-9 Hodge variation receipt, the strict YM Hodge blocker index, the
-SM/Higgs covariant comparison law, finite chemistry computation, finite
-quantum scope, exact known-input population, and the downloaded context index.
-Its positive corrections are narrow: the internal shift-carrier quadratic
-spine is checked, and finite Hodge/current support exists. The broader theorem
+`DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam`, the depth-9
+Hodge variation receipt, the strict YM Hodge blocker index, the strict selected
+YM finite calculations, the SM/Higgs covariant comparison law, finite chemistry
+computation, finite quantum scope, exact known-input population, and the
+downloaded context index. Its positive corrections are narrow: the internal
+shift-carrier quadratic spine is checked, identity dynamics and identity
+quotient/hierarchy premises are inhabited, a concrete m=4 shift reducer is
+calculated, the identity composite and generalization obstruction are checked,
+finite Hodge/current support exists, and the selected finite YM package is now
+calculated through the Hamiltonian quotient requirement normalizer. The checked
+`DASHI.Physics.Closure.UnificationNextAnalyticCalculationIndex` records the six
+current calculations: matter-current coupling, real `D * F = J`, self-adjoint
+YM Hamiltonian quotient, broad defect seam, Higgs authority replacement, and
+metrology authority binding.
+The broader theorem
 from strict contraction plus defect monotonicity/admissibility/hierarchy to a
-projection-defect/parallelogram package, strict selected YM variation pairing,
-empirical authority, measured metrology, and terminal promotion remain open.
+projection-defect/parallelogram package, physical matter/source YM authority,
+real sourced `D * F = J`, empirical authority, measured metrology, and terminal
+promotion remain open.
 
 NS-facing consumers should cite
 `DASHI.Physics.Closure.NSMigrationInitiationThresholdConstantsReceipt` for the

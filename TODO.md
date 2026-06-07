@@ -3,6 +3,102 @@
 
 # P0 BLOCKERS
 
+• Sprint 163 NS topological-alignment obstruction boundary is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt`;
+  - adds `scripts/ns_sprint163_sanni_symbol_obstruction_source.py`,
+    `scripts/ns_sprint163_critical_alignment_topological_exhaustion_target.py`,
+    and `scripts/ns_sprint163_sigma_local_analysis_gap.py`;
+  - generates `outputs/ns_sprint163_sanni_symbol_obstruction_source/`,
+    `outputs/ns_sprint163_critical_alignment_topological_exhaustion_target/`,
+    and `outputs/ns_sprint163_sigma_local_analysis_gap/`;
+  - records source-bound symbol support from Sanni 2025/protocols.io and the
+    critical-alignment topological-exhaustion target;
+  - keeps `CriticalAlignmentTopologicalExhaustion`,
+    `BlowupImpliesSigmaConcentration`, `SigmaConcentrationImpossible`,
+    `PressureStretchingDepletionLemma`, `MechanismExhaustionForFullClayNS`,
+    `full_clay_ns_solved`, `fullClayNSSolved`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 162 NS critical-residual boundary is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt`;
+  - adds `scripts/ns_sprint162_critical_residual_boundary.py`,
+    `scripts/ns_sprint162_pressure_stretching_depletion_gap.py`, and
+    `scripts/ns_sprint162_residual_positive_profile_fork.py`;
+  - generates `outputs/ns_sprint162_critical_residual_boundary/`,
+    `outputs/ns_sprint162_pressure_stretching_depletion_gap/`, and
+    `outputs/ns_sprint162_residual_positive_profile_fork/`;
+  - records `CriticalResidualBoundaryRecorded=true`,
+    `LocalDefectIterationRouteScoped=true`,
+    `PressureFluxResidualTyped=true`, and
+    `StretchingAlignmentResidualTyped=true`;
+  - keeps `NoPersistentPositiveNSCriticalResidual`,
+    `PressureStretchingDepletionLemma`, `MechanismExhaustionForFullClayNS`,
+    `full_clay_ns_solved`, `fullClayNSSolved`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 161 NS mechanism-exhaustion analytic-attempt boundary is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt`;
+  - adds `scripts/ns_sprint161_analytic_attempt_boundary.py`,
+    `scripts/ns_sprint161_defect_monotonicity_gap.py`, and
+    `scripts/ns_sprint161_critical_profile_taxonomy.py`;
+  - generates `outputs/ns_sprint161_analytic_attempt_boundary/`,
+    `outputs/ns_sprint161_defect_monotonicity_gap/`, and
+    `outputs/ns_sprint161_critical_profile_taxonomy/`;
+  - records the ancient-solution / local-defect-monotonicity route as a
+    fail-closed research map;
+  - records `AnalyticAttemptRecorded=true`,
+    `AncientSolutionLiouvilleRouteScoped=true`,
+    `LocalDefectMonotonicityAttemptRecorded=true`, and
+    `SymmetricHouLuoSupportAvailable=true`;
+  - keeps `MechanismExhaustionForFullClayNS`,
+    `CriticalProfileExtractionClosed`,
+    `AncientSolutionLiouvilleForGeneralData`,
+    `NonAxisymmetricVortexStretchingDepletion`,
+    `PressureNonlocalityClosureForGeneralData`,
+    `FiniteCriticalProfileTaxonomy`,
+    `CriticalNormExhaustionCriterion`,
+    `FullBKMContinuationBridgeForGeneralData`,
+    `full_clay_ns_solved`, `fullClayNSSolved`,
+    `fullNavierStokesSolutionConstructed`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 160 NS no-local-Clay-mechanism sprint rule is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSSprint160NoLocalClayMechanismSprintRuleReceipt`;
+  - adds `scripts/ns_sprint160_clay_governance_rule.py`,
+    `scripts/ns_sprint160_symmetric_publication_isolation.py`, and
+    `scripts/ns_sprint160_unification_gap_tier_map.py`;
+  - generates `outputs/ns_sprint160_clay_governance_rule/`,
+    `outputs/ns_sprint160_symmetric_publication_isolation/`, and
+    `outputs/ns_sprint160_unification_gap_tier_map/`;
+  - records `NoLocalClayMechanismSprintWithoutNewPDEMath=true`,
+    `SymmetricHouLuoPublicationIsolation=true`,
+    `NewPDEMathematicsRequired=true`, and
+    `ExternalAuthorityArtifactRequired=true`;
+  - records `MoreLocalizedEnstrophySprintsAuthorized=false`;
+  - keeps `MechanismExhaustionForFullClayNS`,
+    `full_clay_ns_solved`, `fullClayNSSolved`,
+    `fullNavierStokesSolutionConstructed`, and `clayNavierStokesPromoted`
+    false/open;
+  - tier map next action: SM/Higgs observable bridge first, Hodge/Maxwell
+    finite-geometry bridge second, Clay NS and continuum YM mass gap as
+    external-boundary targets.
+
 • Sprint 159 NS full-Clay external-authority boundary round is implemented.
 
   Status:

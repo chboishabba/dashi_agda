@@ -104,15 +104,47 @@ empirical authority, YM Clay, Maxwell field equations, or terminal unification.
 Current unification critical path:
 `DASHI.Promotion.UnificationCriticalPathReceipt` consumes the checked
 contraction/quadratic/signature spine, `DefectQuadraticClosureDependencyIndex`,
-`HodgeVariationPairingDepth9`, `YMStrictHodgeVariationBlockerIndex`, the
-SM/Higgs covariant comparison law, finite chemistry computation, finite quantum
-scope, known-input population, and downloaded context intake. The key correction
-is that finite Hodge/current support is already present: Route-B and pure
-zero-current `D * F = J` are checked. The exact YM proof calculation is now the
-strict selected-Hodge variation pairing over the user-supplied variation/action
-carriers; the broader defect/admissibility/hierarchy route to the
-projection-defect/parallelogram package, empirical authority, measured
-metrology, continuum physics, and terminal promotion remain false.
+`DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam`,
+`HodgeVariationPairingDepth9`,
+`DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing`,
+`DASHI.Physics.Closure.YMStrictSelectedHodgeAlgebraLaws`,
+`DASHI.Physics.Closure.YMStrictSelectedBoundaryCancellationCriterion`,
+`DASHI.Physics.Closure.YMStrictSelectedNonzeroActionVariation`,
+`DASHI.Physics.Closure.YMStrictSelectedSourceCurrentCoupling`,
+`DASHI.Physics.Closure.YMFiniteSelectedPairingToRealCarrierBoundary`,
+`DASHI.Physics.Closure.YMStrictSelectedMatterCurrentAuthorityBridge`,
+`DASHI.Physics.Closure.YMMatterCurrentConservationAuthorityBoundary`,
+`DASHI.Physics.Closure.YMRealSourcedDStarFEquationBoundary`,
+`DASHI.Physics.Closure.YMConditionalMatterAuthorityToRealDStarF`,
+`DASHI.Physics.Closure.YMSourcedEquationToHamiltonianQuotientBoundary`,
+`DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientRequirementNormalizer`,
+`DASHI.Physics.Closure.DefectCriticalSeamIdentityDynamicsInstance`,
+`DASHI.Physics.Closure.DefectCriticalSeamIdentityQuotientHierarchy`,
+`DASHI.Physics.Closure.DefectCriticalSeamConcreteShiftReducer`,
+`DASHI.Physics.Closure.DefectCriticalSeamIdentityCompositeReceipt`,
+`DASHI.Physics.Closure.DefectCriticalSeamGeneralizationObstruction`,
+`DASHI.Physics.Closure.UnificationNextAnalyticCalculationIndex`,
+`YMStrictHodgeVariationBlockerIndex`, the SM/Higgs covariant comparison law,
+finite chemistry computation, finite quantum scope, known-input population, and
+downloaded context intake. The key correction is that finite Hodge/current
+support is already present: Route-B and pure zero-current `D * F = J` are
+checked, and the strict selected finite variation/IBP instance over the
+user-supplied variation/action carriers is now checked. The strict selected
+finite package now also includes selected Hodge algebra laws, zero-boundary
+IBP reduction, a nonzero finite action split, selected source-current carrier
+coupling, matter-current authority boundary, real sourced `D * F = J`
+wrappers, a conditional real `D * F = J` target, and the Hamiltonian quotient
+dependency/requirement normalizer naming
+`missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`. The defect seam now
+also has checked identity dynamics, identity quotient/hierarchy premises, a
+concrete m=4 shift reducer, a composite receipt, and an obstruction matrix for
+generalization beyond identity. The next analytic calculation index names the
+six live calculations: matter-current coupling, real `D * F = J`,
+self-adjoint YM Hamiltonian quotient, broad defect seam, Higgs authority
+replacement, and metrology authority binding. The broader
+`missingDefectAdmissibilityHierarchyToParallelogram` theorem, physical matter
+authority, real `D * F = J`, empirical authority, measured metrology, continuum
+physics, and terminal promotion remain false.
 
 Current NS Sprint 158 boundary: the repo records
 `SymmetricHouLuoRegularityClassClosure=true` and
@@ -148,6 +180,77 @@ The executable surfaces `scripts/ns_sprint159_external_authority_boundary.py`,
 `scripts/ns_sprint159_mechanism_exhaustion_gap.py`, and
 `scripts/ns_sprint159_criteria_inventory.py` emit the authority-boundary,
 mechanism-gap, and known-criteria inventory ledgers.
+
+Current NS Sprint 160 governance rule: the repo records
+`NoLocalClayMechanismSprintWithoutNewPDEMath=true` and
+`SymmetricHouLuoPublicationIsolation=true`. The checked receipt
+`DASHI.Physics.Closure.NSSprint160NoLocalClayMechanismSprintRuleReceipt`
+anchors to Sprint 159 and formalizes the rule that the full Clay NS route may
+not be reopened by another localized-enstrophy or mechanism-exhaustion receipt
+unless a new PDE theorem or an external authority artifact is supplied. The
+executable surfaces `scripts/ns_sprint160_clay_governance_rule.py`,
+`scripts/ns_sprint160_symmetric_publication_isolation.py`, and
+`scripts/ns_sprint160_unification_gap_tier_map.py` emit the stop-rule,
+symmetric publication-isolation packet, and tier map. The tier map prioritizes
+the SM/Higgs observable bridge, then the Hodge/Maxwell finite-geometry bridge,
+while keeping Clay NS and continuum YM mass gap as external-boundary targets.
+
+Current NS Sprint 161 analytic-attempt boundary: the repo records the proposed
+ancient-solution / local-defect-monotonicity route as a fail-closed research
+map, not as a reopened local Clay sprint. The checked receipt
+`DASHI.Physics.Closure.NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt`
+anchors to Sprint 160, records `AnalyticAttemptRecorded=true`,
+`AncientSolutionLiouvilleRouteScoped=true`, and
+`LocalDefectMonotonicityAttemptRecorded=true`, and keeps
+`MechanismExhaustionForFullClayNS`, critical-profile extraction,
+general-data ancient Liouville, non-axisymmetric vortex-stretching depletion,
+pressure nonlocality closure, finite critical-profile taxonomy, critical-norm
+exhaustion, full general-data BKM continuation, `full_clay_ns_solved`,
+`fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+`clayNavierStokesPromoted` false. The executable surfaces
+`scripts/ns_sprint161_analytic_attempt_boundary.py`,
+`scripts/ns_sprint161_defect_monotonicity_gap.py`, and
+`scripts/ns_sprint161_critical_profile_taxonomy.py` emit the route map,
+defect-monotonicity gap ledger, and critical-profile taxonomy inventory.
+
+Current NS Sprint 162 critical-residual boundary: the repo sharpens the
+Sprint 161 analytic attempt into the exact residual fork without promoting
+Clay. The checked receipt
+`DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt` anchors to
+Sprint 161, records `CriticalResidualBoundaryRecorded=true`,
+`LocalDefectIterationRouteScoped=true`, `PressureFluxResidualTyped=true`, and
+`StretchingAlignmentResidualTyped=true`, while keeping
+`NoPersistentPositiveNSCriticalResidual`,
+`PressureStretchingDepletionLemma`, `MechanismExhaustionForFullClayNS`,
+`full_clay_ns_solved`, `fullClayNSSolved`, and
+`clayNavierStokesPromoted` false. The executable surfaces
+`scripts/ns_sprint162_critical_residual_boundary.py`,
+`scripts/ns_sprint162_pressure_stretching_depletion_gap.py`, and
+`scripts/ns_sprint162_residual_positive_profile_fork.py` emit the residual
+component ledger, the alpha-positive pressure/stretching depletion gap, and
+the route-A/route-B residual-positive profile fork.
+
+Current NS Sprint 163 topological-alignment obstruction boundary: the repo
+records Sanni 2025/protocols.io as source-bound symbol-level support only,
+not as a PDE theorem or Clay proof. The checked receipt
+`DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt`
+anchors to Sprint 162 and records
+`TopologicalAlignmentObstructionSourceRecorded=true`,
+`AngularStrainSymbolDegeneracyRecorded=true`,
+`MaximalEigenbundleNonOrientabilityRecorded=true`,
+`CriticalAlignmentTopologicalExhaustionTargetRecorded=true`,
+`SanniSymbolLevelNoPDEClaimRecorded=true`, and
+`PressureFluxSubcriticalGainOpen=true`. It keeps
+`CriticalAlignmentTopologicalExhaustion`,
+`BlowupImpliesSigmaConcentration`, `SigmaConcentrationImpossible`,
+`PressureStretchingDepletionLemma`, `MechanismExhaustionForFullClayNS`,
+`full_clay_ns_solved`, `fullClayNSSolved`, and
+`clayNavierStokesPromoted` false. The executable surfaces
+`scripts/ns_sprint163_sanni_symbol_obstruction_source.py`,
+`scripts/ns_sprint163_critical_alignment_topological_exhaustion_target.py`,
+and `scripts/ns_sprint163_sigma_local_analysis_gap.py` emit the source-bound
+symbol support, the critical-alignment theorem target, and the Sigma-local
+analysis gap near angular strain symbol degeneracies.
 
 Previous NS Sprint 157 boundary: the repo records
 `SymmetricHouLuoBKMFinite=true` for the symmetric Hou-Luo route only. The

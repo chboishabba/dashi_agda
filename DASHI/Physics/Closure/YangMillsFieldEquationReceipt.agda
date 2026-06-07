@@ -1811,10 +1811,10 @@ record YangMillsFieldEquationReceipt : Set₂ where
     middle6VariationPairingFirstMissingDependency :
       YMObs.YMSFGCMiddle6VariationPairingFirstMissingDependency
 
-    middle6VariationPairingFirstMissingDependencyIsVariationCarrier :
+    middle6VariationPairingFirstMissingDependencyIsSelectedActionPairing :
       middle6VariationPairingFirstMissingDependency
       ≡
-      YMObs.missingConstructorForYMSFGCUserSuppliedVariationCarrier
+      YMObs.missingSelectedActionVariationPairingIntoUserActionScalarCarrier
 
     finalPrimitiveLowerLawCandidate :
       YMObs.YMSFGCFinalPrimitiveLowerLawCandidate
@@ -2214,7 +2214,7 @@ canonicalYangMillsFieldEquationReceipt =
     ; middle6VariationPairingFirstMissingDependency =
         YMObs.YMSFGCMiddle6DiscreteIBPVariationPairingProgressReceipt.firstMissingDependency
           YMObs.canonicalYMSFGCMiddle6DiscreteIBPVariationPairingProgressReceipt
-    ; middle6VariationPairingFirstMissingDependencyIsVariationCarrier =
+    ; middle6VariationPairingFirstMissingDependencyIsSelectedActionPairing =
         refl
     ; finalPrimitiveLowerLawCandidate =
         YMObs.canonicalYMSFGCFinalPrimitiveLowerLawCandidate
@@ -3309,11 +3309,11 @@ record YMSFGCU2RealSU3CovariantDerivativeAttemptReceipt : Set₁ where
       ≡
       YMObs.missingVariationPairingForSelectedHodgeStar
 
-    vacuousEmptyCarrierRouteRejected :
+    emptyPatternRouteRejected :
       Bool
 
-    vacuousEmptyCarrierRouteRejectedIsTrue :
-      vacuousEmptyCarrierRouteRejected ≡ true
+    emptyPatternRouteRejectedIsTrue :
+      emptyPatternRouteRejected ≡ true
 
     nonAbelianCovariantDerivativePromoted :
       Bool
@@ -3381,9 +3381,9 @@ canonicalYMSFGCU2RealSU3CovariantDerivativeAttemptReceipt =
         YMObs.missingVariationPairingForSelectedHodgeStar
     ; firstM2HandoffBlockerIsVariationPairing =
         refl
-    ; vacuousEmptyCarrierRouteRejected =
+    ; emptyPatternRouteRejected =
         true
-    ; vacuousEmptyCarrierRouteRejectedIsTrue =
+    ; emptyPatternRouteRejectedIsTrue =
         refl
     ; nonAbelianCovariantDerivativePromoted =
         false
@@ -3397,7 +3397,7 @@ canonicalYMSFGCU2RealSU3CovariantDerivativeAttemptReceipt =
         "u2 consumed the existing local connectionOneFormAsFibreAlgebra receipt and the local finite Lie3 D_A^2=[F_A,_] law"
         ∷ "The receipt-local NonAbelianCovariantDerivativeCarrier records connOneForm, discreteDiff, DA, DA-def, and DA^2-obligation from that local finite supply"
         ∷ "Those terms are not a real SU3 proof: the strict connectionOneForm target is from the user-supplied non-flat connection carrier to the user-supplied Lie algebra carrier"
-        ∷ "The strict non-flat connection and dual-curvature/current carriers have finite Site2D adapters, while holonomy, Lie algebra, transport, and variation laws remain request surfaces; using empty-pattern functions over the remaining carriers would be vacuous"
+        ∷ "The strict non-flat connection, dual-curvature/current, variation, and action-scalar carriers now have finite wrappers; physical holonomy, Lie algebra transport, and nontrivial selected action variation remain request surfaces"
         ∷ "Gauge covariance still needs a field-strength transport action on the selected gauge bundle"
         ∷ "m2 handoff remains blocked until missingVariationPairingForSelectedHodgeStar is inhabited"
         ∷ []
@@ -5812,12 +5812,12 @@ yangMillsSingleEdgeT3Gate3InspectionNonPromoting :
 yangMillsSingleEdgeT3Gate3InspectionNonPromoting =
   refl
 
-yangMillsReceiptMiddle6IBPVariationFirstMissingIsVariationCarrier :
+yangMillsReceiptMiddle6IBPVariationFirstMissingIsSelectedActionPairing :
   YangMillsFieldEquationReceipt.middle6VariationPairingFirstMissingDependency
     canonicalYangMillsFieldEquationReceipt
   ≡
-  YMObs.missingConstructorForYMSFGCUserSuppliedVariationCarrier
-yangMillsReceiptMiddle6IBPVariationFirstMissingIsVariationCarrier =
+  YMObs.missingSelectedActionVariationPairingIntoUserActionScalarCarrier
+yangMillsReceiptMiddle6IBPVariationFirstMissingIsSelectedActionPairing =
   refl
 
 yangMillsReceiptMiddle6IBPVariationDoesNotPromote :

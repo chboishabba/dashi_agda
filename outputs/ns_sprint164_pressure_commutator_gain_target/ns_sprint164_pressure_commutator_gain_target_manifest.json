@@ -1,0 +1,35 @@
+{
+  "contract": "ns_sprint164_pressure_commutator_gain_target",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_pressure_commutator_gain_target/ns_sprint164_pressure_commutator_gain_target_manifest.json",
+      "sha256": "cadab72ece17c2900749d33bbda81bf9f9babe70d103f546c6dfab5fc3ab8718"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_pressure_commutator_gain_target/ns_sprint164_pressure_commutator_gain_target.md",
+      "sha256": "9dae27ab4766f91fe09fe040343520804f609a38017a58e2de5cb65f0c8b48a0"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_pressure_commutator_gain_target/ns_sprint164_pressure_commutator_gain_target_rows.csv",
+      "sha256": "a24361b2629f52bff4b13f7ed3a31973741ab641a723c3fa175541e0c9861358"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_pressure_commutator_gain_target/ns_sprint164_pressure_commutator_gain_target_rows.json",
+      "sha256": "dd32afaf3b504cebf171ec235172969530c73d347c908971d649471cc5f749cf"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_pressure_commutator_gain_target/ns_sprint164_pressure_commutator_gain_target_summary.json",
+      "sha256": "1df42227688f0d8c69d545a6422af81031c18ebe7261efc59f5429bae2751b9f"
+    }
+  },
+  "generated_at": "2026-06-08T00:00:00Z",
+  "lane": 4,
+  "manifest_hash": "0289cb2074d9bd5e71e5ba23b44de15597bf1fddcd483f45fb783718318d24d5",
+  "sprint": 164,
+  "validation_passed": true
+}

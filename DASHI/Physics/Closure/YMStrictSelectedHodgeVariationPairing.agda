@@ -14,18 +14,12 @@ import DASHI.Physics.ShiftFiniteGaugeCoupling as SFGC
 ------------------------------------------------------------------------
 -- Strict selected-Hodge variation pairing calculation.
 --
--- The repo already has substantial Hodge-star/YM machinery.  The exact strict
--- requested variation type is also visible:
---
---   YMSFGCUserSuppliedNonFlatConnectionCarrier →
---   YMSFGCUserSuppliedVariationCarrier →
---   YMSFGCUserSuppliedActionScalarCarrier
---
--- At the current boundary, the variation and action-scalar carriers are empty
--- request carriers.  Therefore the strict function type and the requested
--- discrete IBP law are inhabited by empty elimination over the variation
--- argument.  This is a real type-theoretic calculation, but it is vacuous and
--- deliberately non-promoting.
+-- The repo already has substantial Hodge-star/YM machinery: depth-9
+-- selected geometry, Route-B selected D * F = J on the finite carrier, and
+-- a zero finite IBP lower law.  This module records the next exact
+-- calculation over the user-supplied variation/action carriers now exposed by
+-- YangMillsFieldEquationObstruction: selected zero action variation equals
+-- selected zero Euler-Lagrange pairing plus selected zero boundary term.
 
 listCount : {A : Set} → List A → Nat
 listCount [] =
@@ -34,7 +28,7 @@ listCount (_ ∷ xs) =
   suc (listCount xs)
 
 data StrictSelectedHodgeVariationPairingStatus : Set where
-  vacuousStrictPairingCalculatedNonVacuousPhysicsBlocked :
+  strictFiniteSelectedPairingCalculatedPhysicalYMBlocked :
     StrictSelectedHodgeVariationPairingStatus
 
 data StrictSelectedHodgeVariationPairingRow : Set where
@@ -44,13 +38,19 @@ data StrictSelectedHodgeVariationPairingRow : Set where
   selectedCovariantDerivativeToCurrentRow :
     StrictSelectedHodgeVariationPairingRow
 
-  vacuousVariationPairingRow :
+  finiteVariationCarrierRow :
     StrictSelectedHodgeVariationPairingRow
 
-  vacuousDiscreteIBPLawRow :
+  finiteActionScalarCarrierRow :
     StrictSelectedHodgeVariationPairingRow
 
-  nonVacuousPromotionBlockedRow :
+  finiteSelectedVariationPairingRow :
+    StrictSelectedHodgeVariationPairingRow
+
+  finiteSelectedDiscreteIBPLawRow :
+    StrictSelectedHodgeVariationPairingRow
+
+  physicalPromotionBlockedRow :
     StrictSelectedHodgeVariationPairingRow
 
 canonicalStrictSelectedHodgeVariationPairingRows :
@@ -58,9 +58,11 @@ canonicalStrictSelectedHodgeVariationPairingRows :
 canonicalStrictSelectedHodgeVariationPairingRows =
   selectedHodgeToDualCarrierRow
   ∷ selectedCovariantDerivativeToCurrentRow
-  ∷ vacuousVariationPairingRow
-  ∷ vacuousDiscreteIBPLawRow
-  ∷ nonVacuousPromotionBlockedRow
+  ∷ finiteVariationCarrierRow
+  ∷ finiteActionScalarCarrierRow
+  ∷ finiteSelectedVariationPairingRow
+  ∷ finiteSelectedDiscreteIBPLawRow
+  ∷ physicalPromotionBlockedRow
   ∷ []
 
 strictSelectedHodgeStarToDual :
@@ -114,84 +116,40 @@ strictSelectedHodgeVariationPairing :
   YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
   YMObs.YMSFGCUserSuppliedVariationCarrier →
   YMObs.YMSFGCUserSuppliedActionScalarCarrier
-strictSelectedHodgeVariationPairing connection ()
+strictSelectedHodgeVariationPairing =
+  YMObs.ymSFGCUserSuppliedEulerLagrangePairing
 
 strictSelectedActionVariation :
   YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
   YMObs.YMSFGCUserSuppliedVariationCarrier →
   YMObs.YMSFGCUserSuppliedActionScalarCarrier
-strictSelectedActionVariation connection ()
+strictSelectedActionVariation =
+  YMObs.ymSFGCUserSuppliedVariationOfAction
 
 strictSelectedBoundaryTerm :
   YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
   YMObs.YMSFGCUserSuppliedVariationCarrier →
   YMObs.YMSFGCUserSuppliedActionScalarCarrier
-strictSelectedBoundaryTerm connection ()
+strictSelectedBoundaryTerm =
+  YMObs.ymSFGCUserSuppliedBoundaryTerm
 
 strictActionScalarCombine :
   YMObs.YMSFGCUserSuppliedActionScalarCarrier →
   YMObs.YMSFGCUserSuppliedActionScalarCarrier →
   YMObs.YMSFGCUserSuppliedActionScalarCarrier
-strictActionScalarCombine ()
+strictActionScalarCombine =
+  YMObs.ymSFGCUserSuppliedCombineActionScalar
 
-strictVacuousDiscreteIBPLaw :
-  (variationOfAction :
-    YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
-    YMObs.YMSFGCUserSuppliedVariationCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier) →
-  (eulerLagrangePairing :
-    YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
-    YMObs.YMSFGCUserSuppliedVariationCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier) →
-  (boundaryTerm :
-    YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
-    YMObs.YMSFGCUserSuppliedVariationCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier) →
-  (combineActionScalar :
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier) →
+strictSelectedDiscreteIBPLaw :
   (connection : YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier) →
   (δA : YMObs.YMSFGCUserSuppliedVariationCarrier) →
-  variationOfAction connection δA
+  strictSelectedActionVariation connection δA
   ≡
-  combineActionScalar
-    (eulerLagrangePairing connection δA)
-    (boundaryTerm connection δA)
-strictVacuousDiscreteIBPLaw
-  variationOfAction
-  eulerLagrangePairing
-  boundaryTerm
-  combineActionScalar
-  connection
-  ()
-
-strictVacuousDiscreteIBPLawIsRequestedType :
-  (variationOfAction :
-    YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
-    YMObs.YMSFGCUserSuppliedVariationCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier) →
-  (eulerLagrangePairing :
-    YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
-    YMObs.YMSFGCUserSuppliedVariationCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier) →
-  (boundaryTerm :
-    YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
-    YMObs.YMSFGCUserSuppliedVariationCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier) →
-  (combineActionScalar :
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier →
-    YMObs.YMSFGCUserSuppliedActionScalarCarrier) →
-  (connection : YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier) →
-  (δA : YMObs.YMSFGCUserSuppliedVariationCarrier) →
-  variationOfAction connection δA
-  ≡
-  combineActionScalar
-    (eulerLagrangePairing connection δA)
-    (boundaryTerm connection δA)
-strictVacuousDiscreteIBPLawIsRequestedType =
-  strictVacuousDiscreteIBPLaw
+  strictActionScalarCombine
+    (strictSelectedHodgeVariationPairing connection δA)
+    (strictSelectedBoundaryTerm connection δA)
+strictSelectedDiscreteIBPLaw =
+  YMObs.ymSFGCUserSuppliedSelectedVariationIBPLaw
 
 record StrictSelectedHodgeVariationPairingCalculation : Set₁ where
   field
@@ -213,6 +171,14 @@ record StrictSelectedHodgeVariationPairingCalculation : Set₁ where
       consumedGate3VariationPairing
       ≡
       Gate3.canonicalVariationPairing
+
+    selectedFiniteClosure :
+      YMObs.YMSFGCStrictSelectedHodgeVariationPairingFiniteClosure
+
+    selectedFiniteClosureIsCanonical :
+      selectedFiniteClosure
+      ≡
+      YMObs.canonicalYMSFGCStrictSelectedHodgeVariationPairingFiniteClosure
 
     selectedHodgeStar :
       SFGC.SFGCSite2DFieldStrengthBridge →
@@ -250,34 +216,51 @@ record StrictSelectedHodgeVariationPairingCalculation : Set₁ where
       YMObs.YMSFGCUserSuppliedVariationCarrier →
       YMObs.YMSFGCUserSuppliedActionScalarCarrier
 
-    strictVariationPairingIsRequestedType :
-      Set
-
-    strictVariationPairingTypeMatchesRequest :
-      strictVariationPairingIsRequestedType
+    strictVariationPairingIsSelected :
+      strictVariationPairing
       ≡
-      (YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
-       YMObs.YMSFGCUserSuppliedVariationCarrier →
-       YMObs.YMSFGCUserSuppliedActionScalarCarrier)
+      strictSelectedHodgeVariationPairing
 
-    strictDiscreteIBPLaw :
-      YMObs.YMSFGCUserSuppliedRealYMPrimitiveTypedRequest.requestedDiscreteIBPLawType
-        YMObs.canonicalYMSFGCUserSuppliedRealYMPrimitiveTypedRequest
+    strictActionVariation :
+      YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
+      YMObs.YMSFGCUserSuppliedVariationCarrier →
+      YMObs.YMSFGCUserSuppliedActionScalarCarrier
 
-    strictDiscreteIBPLawIsVacuous :
-      strictDiscreteIBPLaw ≡ strictVacuousDiscreteIBPLaw
+    strictActionVariationIsSelected :
+      strictActionVariation
+      ≡
+      strictSelectedActionVariation
+
+    strictBoundaryTerm :
+      YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
+      YMObs.YMSFGCUserSuppliedVariationCarrier →
+      YMObs.YMSFGCUserSuppliedActionScalarCarrier
+
+    strictBoundaryTermIsSelected :
+      strictBoundaryTerm
+      ≡
+      strictSelectedBoundaryTerm
+
+    selectedDiscreteIBPLawInReceipt :
+      (connection : YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier) →
+      (δA : YMObs.YMSFGCUserSuppliedVariationCarrier) →
+      strictActionVariation connection δA
+      ≡
+      strictActionScalarCombine
+        (strictVariationPairing connection δA)
+        (strictBoundaryTerm connection δA)
 
     variationCarrierNonempty :
       Bool
 
-    variationCarrierNonemptyIsFalse :
-      variationCarrierNonempty ≡ false
+    variationCarrierNonemptyIsTrue :
+      variationCarrierNonempty ≡ true
 
     actionScalarCarrierNonempty :
       Bool
 
-    actionScalarCarrierNonemptyIsFalse :
-      actionScalarCarrierNonempty ≡ false
+    actionScalarCarrierNonemptyIsTrue :
+      actionScalarCarrierNonempty ≡ true
 
     strictPairingCalculated :
       Bool
@@ -285,11 +268,11 @@ record StrictSelectedHodgeVariationPairingCalculation : Set₁ where
     strictPairingCalculatedIsTrue :
       strictPairingCalculated ≡ true
 
-    nonVacuousVariationPairingPromoted :
+    physicalVariationPairingPromoted :
       Bool
 
-    nonVacuousVariationPairingPromotedIsFalse :
-      nonVacuousVariationPairingPromoted ≡ false
+    physicalVariationPairingPromotedIsFalse :
+      physicalVariationPairingPromoted ≡ false
 
     strictYMPromoted :
       Bool
@@ -306,8 +289,8 @@ record StrictSelectedHodgeVariationPairingCalculation : Set₁ where
     rowCount :
       Nat
 
-    rowCountIs5 :
-      rowCount ≡ 5
+    rowCountIs7 :
+      rowCount ≡ 7
 
     calculationBoundary :
       List String
@@ -319,7 +302,7 @@ canonicalStrictSelectedHodgeVariationPairingCalculation :
 canonicalStrictSelectedHodgeVariationPairingCalculation =
   record
     { status =
-        vacuousStrictPairingCalculatedNonVacuousPhysicsBlocked
+        strictFiniteSelectedPairingCalculatedPhysicalYMBlocked
     ; consumedDepth9Pairing =
         HV9.canonicalHodgeVariationPairingDepth9Receipt
     ; consumedDepth9PairingIsCanonical =
@@ -327,6 +310,10 @@ canonicalStrictSelectedHodgeVariationPairingCalculation =
     ; consumedGate3VariationPairing =
         Gate3.canonicalVariationPairing
     ; consumedGate3VariationPairingIsCanonical =
+        refl
+    ; selectedFiniteClosure =
+        YMObs.canonicalYMSFGCStrictSelectedHodgeVariationPairingFiniteClosure
+    ; selectedFiniteClosureIsCanonical =
         refl
     ; selectedHodgeStar =
         strictSelectedHodgeStarToDual
@@ -342,31 +329,33 @@ canonicalStrictSelectedHodgeVariationPairingCalculation =
         strictSelectedDStarFEqualsSelectedCurrentLaw
     ; strictVariationPairing =
         strictSelectedHodgeVariationPairing
-    ; strictVariationPairingIsRequestedType =
-        YMObs.YMSFGCUserSuppliedNonFlatConnectionCarrier →
-        YMObs.YMSFGCUserSuppliedVariationCarrier →
-        YMObs.YMSFGCUserSuppliedActionScalarCarrier
-    ; strictVariationPairingTypeMatchesRequest =
+    ; strictVariationPairingIsSelected =
         refl
-    ; strictDiscreteIBPLaw =
-        strictVacuousDiscreteIBPLaw
-    ; strictDiscreteIBPLawIsVacuous =
+    ; strictActionVariation =
+        strictSelectedActionVariation
+    ; strictActionVariationIsSelected =
         refl
+    ; strictBoundaryTerm =
+        strictSelectedBoundaryTerm
+    ; strictBoundaryTermIsSelected =
+        refl
+    ; selectedDiscreteIBPLawInReceipt =
+        strictSelectedDiscreteIBPLaw
     ; variationCarrierNonempty =
-        false
-    ; variationCarrierNonemptyIsFalse =
+        true
+    ; variationCarrierNonemptyIsTrue =
         refl
     ; actionScalarCarrierNonempty =
-        false
-    ; actionScalarCarrierNonemptyIsFalse =
+        true
+    ; actionScalarCarrierNonemptyIsTrue =
         refl
     ; strictPairingCalculated =
         true
     ; strictPairingCalculatedIsTrue =
         refl
-    ; nonVacuousVariationPairingPromoted =
+    ; physicalVariationPairingPromoted =
         false
-    ; nonVacuousVariationPairingPromotedIsFalse =
+    ; physicalVariationPairingPromotedIsFalse =
         refl
     ; strictYMPromoted =
         false
@@ -377,22 +366,23 @@ canonicalStrictSelectedHodgeVariationPairingCalculation =
     ; rowIndexIsCanonical =
         refl
     ; rowCount =
-        5
-    ; rowCountIs5 =
+        7
+    ; rowCountIs7 =
         refl
     ; calculationBoundary =
         "Selected Hodge-to-dual carrier is computed by applying sfgcSelectedHodgeStarLowerCandidate and wrapping the result in YMSFGCUserSuppliedDualCurvatureCarrier"
         ∷ "A selected current carrier is computed from the selected dual-curvature carrier, giving a definitional selected D * F equals selected-current law"
-        ∷ "The strict requested variation pairing type is inhabited by empty elimination over YMSFGCUserSuppliedVariationCarrier"
-        ∷ "The strict requested discrete IBP law is also inhabited by empty elimination over YMSFGCUserSuppliedVariationCarrier"
-        ∷ "This calculation is vacuous because YMSFGCUserSuppliedVariationCarrier and YMSFGCUserSuppliedActionScalarCarrier still have no constructors"
-        ∷ "Non-vacuous selected Hodge variation, sourced Euler-Lagrange D * F = J, strict Yang-Mills, Clay, and terminal promotion remain false"
+        ∷ "YMSFGCUserSuppliedVariationCarrier is inhabited by a finite GaugeField wrapper"
+        ∷ "YMSFGCUserSuppliedActionScalarCarrier is inhabited by an integer action-scalar wrapper"
+        ∷ "The selected finite variation law closes as zero action variation equals zero Euler-Lagrange pairing plus zero boundary term"
+        ∷ "This is the selected finite instance, not the generic quantified IBP request over arbitrary functions"
+        ∷ "Sourced Euler-Lagrange D * F = J, physical Yang-Mills, Clay, and terminal promotion remain false"
         ∷ []
     }
 
-canonicalStrictSelectedHodgeVariationPairingRowCountIs5 :
-  listCount canonicalStrictSelectedHodgeVariationPairingRows ≡ 5
-canonicalStrictSelectedHodgeVariationPairingRowCountIs5 =
+canonicalStrictSelectedHodgeVariationPairingRowCountIs7 :
+  listCount canonicalStrictSelectedHodgeVariationPairingRows ≡ 7
+canonicalStrictSelectedHodgeVariationPairingRowCountIs7 =
   refl
 
 canonicalStrictSelectedHodgeVariationPairingCalculated :
@@ -403,12 +393,12 @@ canonicalStrictSelectedHodgeVariationPairingCalculated :
 canonicalStrictSelectedHodgeVariationPairingCalculated =
   refl
 
-canonicalStrictSelectedHodgeVariationPairingNonVacuousPromotionFalse :
-  StrictSelectedHodgeVariationPairingCalculation.nonVacuousVariationPairingPromoted
+canonicalStrictSelectedHodgeVariationPairingPhysicalPromotionFalse :
+  StrictSelectedHodgeVariationPairingCalculation.physicalVariationPairingPromoted
     canonicalStrictSelectedHodgeVariationPairingCalculation
   ≡
   false
-canonicalStrictSelectedHodgeVariationPairingNonVacuousPromotionFalse =
+canonicalStrictSelectedHodgeVariationPairingPhysicalPromotionFalse =
   refl
 
 canonicalStrictSelectedHodgeVariationPairingYMPromotionFalse :

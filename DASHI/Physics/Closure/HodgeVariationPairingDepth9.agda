@@ -15,8 +15,9 @@ import DASHI.Physics.ShiftFiniteGaugeCoupling as SFGC
 --
 -- This module does not invent a selected variation pairing inhabitant.  It
 -- packages the existing Gate 3 depth-9 geometry witness together with the
--- route-B Hodge/current and zero-IBP receipts, and it records the exact
--- blocker token that remains open: missingVariationPairingForSelectedHodgeStar.
+-- route-B Hodge/current and zero-IBP receipts.  Later strict selected modules
+-- inhabit finite user-supplied variation/action carriers; this depth-9 wrapper
+-- remains a historical non-promoting boundary over the original Gate 3 blocker.
 
 data HodgeVariationPairingDepth9Status : Set where
   failClosedWithExactVariationBlocker :
@@ -164,8 +165,8 @@ canonicalHodgeVariationPairingDepth9Receipt =
         ∷ "Route B Hodge/current is consumed from YangMillsFieldEquationReceipt as canonicalYMSFGCRouteBLowerHodgeCurrentSurface"
         ∷ "The zero discrete IBP supply is consumed from YangMillsFieldEquationReceipt as canonicalRouteBZeroDiscreteVariationIBPPrimitiveSupply"
         ∷ "The finite zero-variation IBP law and selected lower D * F = J source-current law are recorded as concrete definitional witnesses"
-        ∷ "The exact variation blocker remains missingVariationPairingForSelectedHodgeStar"
-        ∷ "No honest selected variation pairing inhabitant is introduced here; promotion stays false"
+        ∷ "This depth-9 wrapper preserves the original Gate 3 blocker token missingVariationPairingForSelectedHodgeStar"
+        ∷ "Later strict selected modules inhabit finite selected variation/action carriers; this wrapper itself remains non-promoting"
         ∷ []
     }
 

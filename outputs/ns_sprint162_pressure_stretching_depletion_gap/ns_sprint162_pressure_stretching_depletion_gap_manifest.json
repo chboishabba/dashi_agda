@@ -1,0 +1,35 @@
+{
+  "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_pressure_stretching_depletion_gap/ns_sprint162_pressure_stretching_depletion_gap_manifest.json",
+      "sha256": "082317a9093ff532f1a2a9ea1f701da7711c5ddd41c670fd251798abdd4f6075"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_pressure_stretching_depletion_gap/ns_sprint162_pressure_stretching_depletion_gap.md",
+      "sha256": "be658b90cd6f628884e67369e837e22fadedb78cbaece790bd1d61fb3864095c"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_pressure_stretching_depletion_gap/ns_sprint162_pressure_stretching_depletion_gap_rows.csv",
+      "sha256": "99a9d7e4ca98f862278d027417c735f90a41a8470862b79b114738c6938fac47"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_pressure_stretching_depletion_gap/ns_sprint162_pressure_stretching_depletion_gap_rows.json",
+      "sha256": "28e563e83a69533ba75dc063d7d431929c65f5f2a8186de90c1be0494afa0944"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_pressure_stretching_depletion_gap/ns_sprint162_pressure_stretching_depletion_gap_summary.json",
+      "sha256": "ce8f3eeed10b55f90cf21daa5e8e9f4b23d30749d9d91deb6a8cf4616aec13dd"
+    }
+  },
+  "generated_at": "2026-06-07T00:00:00Z",
+  "lane": 2,
+  "manifest_hash": "599f448b523f41a94fc854eea7dd255039d9613e99f60063e4e426737d0fbdb4",
+  "sprint": 162,
+  "validation_passed": true
+}

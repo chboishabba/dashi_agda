@@ -54,6 +54,11 @@ import DASHI.Promotion.StandardModelPrototypeSourceIntake as SMPrototype
 import DASHI.Promotion.StandardModelHiggsHEPDataReceiptAdapter as SMHiggsHEPData
 import DASHI.Promotion.StandardModelHiggsCovariantComparisonLaw as SMHiggsComparison
 import DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt as NS159
+import DASHI.Physics.Closure.NSSprint160NoLocalClayMechanismSprintRuleReceipt as NS160
+import DASHI.Physics.Closure.NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt as NS161
+import DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt as NS162
+import DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt as NS163
+import DASHI.Physics.Closure.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt as NS164
 
 ------------------------------------------------------------------------
 -- Unified promotion obligation index.
@@ -124,6 +129,16 @@ data SMFirstPrinciplesBoundaryLane : Set where
 
 data FullClayExternalAuthorityBoundaryLane : Set where
   nsFullClayExternalAuthorityBoundaryLane :
+    FullClayExternalAuthorityBoundaryLane
+  nsNoLocalClayMechanismSprintRuleLane :
+    FullClayExternalAuthorityBoundaryLane
+  nsMechanismExhaustionAnalyticAttemptBoundaryLane :
+    FullClayExternalAuthorityBoundaryLane
+  nsCriticalResidualBoundaryLane :
+    FullClayExternalAuthorityBoundaryLane
+  nsTopologicalAlignmentObstructionBoundaryLane :
+    FullClayExternalAuthorityBoundaryLane
+  nsMicrolocalTopologicalBridgeBoundaryLane :
     FullClayExternalAuthorityBoundaryLane
 
 record PromotionLaneSummary : Set where
@@ -888,6 +903,41 @@ canonicalFullClayExternalAuthorityBoundarySummaries =
     "Sprint 158 symmetric Hou-Luo global regularity remains available as scoped local support"
     "MechanismExhaustionForFullClayNS, general-data reduction, non-axisymmetric vortex stretching control, pressure nonlocality closure, and Clay submission promotion remain external-authority blocked"
     "agda -i . DASHI/Physics/Closure/NSSprint159FullClayExternalAuthorityBoundaryReceipt.agda && pytest -q tests/test_ns_sprint159_emitters.py tests/test_ns_sprint159_agda_and_obligation_index.py"
+  ∷ mkFullClayExternalAuthorityBoundarySummary
+    nsNoLocalClayMechanismSprintRuleLane
+    "DASHI.Physics.Closure.NSSprint160NoLocalClayMechanismSprintRuleReceipt"
+    "canonicalNSSprint160NoLocalClayMechanismSprintRuleReceipt"
+    "Sprint160 governance summary: NoLocalClayMechanismSprintWithoutNewPDEMath=true, publication isolation=true, and no local Clay sprint may continue without new PDE math"
+    "MechanismExhaustionForFullClayNS may be reopened only by new PDE math or an external authority artifact, not by more localized enstrophy receipt churn"
+    "agda -i . DASHI/Physics/Closure/NSSprint160NoLocalClayMechanismSprintRuleReceipt.agda && pytest -q tests/test_ns_sprint160_emitters.py tests/test_ns_sprint160_agda_and_governance.py"
+  ∷ mkFullClayExternalAuthorityBoundarySummary
+    nsMechanismExhaustionAnalyticAttemptBoundaryLane
+    "DASHI.Physics.Closure.NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt"
+    "canonicalNSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt"
+    "Sprint161 analytic attempt boundary: ancient-solution and local-defect-monotonicity route recorded as research map only"
+    "MechanismExhaustionForFullClayNS, critical-profile extraction, non-axisymmetric vortex-stretching depletion, pressure closure, finite taxonomy, and Clay promotion remain false"
+    "python scripts/ns_sprint161_analytic_attempt_boundary.py && python scripts/ns_sprint161_defect_monotonicity_gap.py && python scripts/ns_sprint161_critical_profile_taxonomy.py && agda -i . DASHI/Physics/Closure/NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt.agda && pytest -q tests/test_ns_sprint161_emitters.py tests/test_ns_sprint161_agda_and_boundary.py"
+  ∷ mkFullClayExternalAuthorityBoundarySummary
+    nsCriticalResidualBoundaryLane
+    "DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt"
+    "canonicalNSSprint162CriticalResidualBoundaryReceipt"
+    "Sprint162 critical residual boundary: LocalDefect, PressureFlux, StretchingAlignment, Dissipation, and NSCriticalResidual are typed as the narrowed residual fork"
+    "NoPersistentPositiveNSCriticalResidual, PressureStretchingDepletionLemma, MechanismExhaustionForFullClayNS, and Clay promotion remain false"
+    "python scripts/ns_sprint162_critical_residual_boundary.py && python scripts/ns_sprint162_pressure_stretching_depletion_gap.py && python scripts/ns_sprint162_residual_positive_profile_fork.py && agda -i . DASHI/Physics/Closure/NSSprint162CriticalResidualBoundaryReceipt.agda && pytest -q tests/test_ns_sprint162_emitters.py tests/test_ns_sprint162_agda_and_boundary.py"
+  ∷ mkFullClayExternalAuthorityBoundarySummary
+    nsTopologicalAlignmentObstructionBoundaryLane
+    "DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt"
+    "canonicalNSSprint163TopologicalAlignmentObstructionBoundaryReceipt"
+    "Sprint163 topological alignment obstruction boundary: Sanni 2025 source-bound symbol support, angular strain symbol degeneracy, and maximal eigenbundle non-orientability are recorded as vocabulary for the Sigma target"
+    "CriticalAlignmentTopologicalExhaustion, BlowupImpliesSigmaConcentration, SigmaConcentrationImpossible, PressureStretchingDepletionLemma, MechanismExhaustionForFullClayNS, and Clay promotion remain false"
+    "python scripts/ns_sprint163_sanni_symbol_obstruction_source.py && python scripts/ns_sprint163_critical_alignment_topological_exhaustion_target.py && python scripts/ns_sprint163_sigma_local_analysis_gap.py && agda -i . DASHI/Physics/Closure/NSSprint163TopologicalAlignmentObstructionBoundaryReceipt.agda && pytest -q tests/test_ns_sprint163_emitters.py tests/test_ns_sprint163_agda_and_boundary.py"
+  ∷ mkFullClayExternalAuthorityBoundarySummary
+    nsMicrolocalTopologicalBridgeBoundaryLane
+    "DASHI.Physics.Closure.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt"
+    "canonicalNSSprint164MicrolocalTopologicalBridgeBoundaryReceipt"
+    "Sprint164 microlocal topological bridge boundary: microlocal alignment concentration, topological stretching leakage, angular-degeneracy pressure commutator gain, and degeneracy-riding cascade are recorded as theorem targets only"
+    "MicrolocalAlignmentConcentrationLemma, TopologicalStretchingLeakageLemma, AngularDegeneracyPressureCommutatorGain, FullLocalDefectMonotonicity, MechanismExhaustionForFullClayNS, and Clay promotion remain false"
+    "python scripts/ns_sprint164_microlocal_alignment_bridge_target.py && python scripts/ns_sprint164_topological_stretching_leakage_target.py && python scripts/ns_sprint164_pressure_commutator_gain_target.py && agda -i . DASHI/Physics/Closure/NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt.agda && pytest -q tests/test_ns_sprint164_emitters.py tests/test_ns_sprint164_agda_and_boundary.py"
   ∷ []
 
 record UnifiedPromotionObligationIndex : Setω where
@@ -1036,6 +1086,21 @@ record UnifiedPromotionObligationIndex : Setω where
     nsSprint159FullClayExternalAuthorityBoundary :
       NS159.NSSprint159FullClayExternalAuthorityBoundaryReceipt
 
+    nsSprint160NoLocalClayMechanismSprintRule :
+      NS160.NSSprint160NoLocalClayMechanismSprintRuleReceipt
+
+    nsSprint161MechanismExhaustionAnalyticAttemptBoundary :
+      NS161.NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt
+
+    nsSprint162CriticalResidualBoundary :
+      NS162.NSSprint162CriticalResidualBoundaryReceipt
+
+    nsSprint163TopologicalAlignmentObstructionBoundary :
+      NS163.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt
+
+    nsSprint164MicrolocalTopologicalBridgeBoundary :
+      NS164.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt
+
     laneSummaries :
       List PromotionLaneSummary
 
@@ -1105,14 +1170,14 @@ record UnifiedPromotionObligationIndex : Setω where
     fullClayExternalAuthorityBoundaryCount :
       Nat
 
-    fullClayExternalAuthorityBoundaryCountIs1 :
-      fullClayExternalAuthorityBoundaryCount ≡ 1
+    fullClayExternalAuthorityBoundaryCountIs6 :
+      fullClayExternalAuthorityBoundaryCount ≡ 6
 
     aggregateOpenObligationCount :
       Nat
 
-    aggregateOpenObligationCountIs81 :
-      aggregateOpenObligationCount ≡ 81
+    aggregateOpenObligationCountIs84 :
+      aggregateOpenObligationCount ≡ 84
 
     validationTarget :
       String
@@ -1234,6 +1299,16 @@ canonicalUnifiedPromotionObligationIndex =
         SMHiggsComparison.canonicalStandardModelHiggsCovariantComparisonLaw
     ; nsSprint159FullClayExternalAuthorityBoundary =
         NS159.canonicalNSSprint159FullClayExternalAuthorityBoundaryReceipt
+    ; nsSprint160NoLocalClayMechanismSprintRule =
+        NS160.canonicalNSSprint160NoLocalClayMechanismSprintRuleReceipt
+    ; nsSprint161MechanismExhaustionAnalyticAttemptBoundary =
+        NS161.canonicalNSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt
+    ; nsSprint162CriticalResidualBoundary =
+        NS162.canonicalNSSprint162CriticalResidualBoundaryReceipt
+    ; nsSprint163TopologicalAlignmentObstructionBoundary =
+        NS163.canonicalNSSprint163TopologicalAlignmentObstructionBoundaryReceipt
+    ; nsSprint164MicrolocalTopologicalBridgeBoundary =
+        NS164.canonicalNSSprint164MicrolocalTopologicalBridgeBoundaryReceipt
     ; laneSummaries =
         canonicalPromotionLaneSummaries
     ; adapterAdvancementSummaries =
@@ -1279,12 +1354,12 @@ canonicalUnifiedPromotionObligationIndex =
     ; smFirstPrinciplesBoundaryCountIs9 =
         refl
     ; fullClayExternalAuthorityBoundaryCount =
-        1
-    ; fullClayExternalAuthorityBoundaryCountIs1 =
+        6
+    ; fullClayExternalAuthorityBoundaryCountIs6 =
         refl
     ; aggregateOpenObligationCount =
-        81
-    ; aggregateOpenObligationCountIs81 =
+        84
+    ; aggregateOpenObligationCountIs84 =
         refl
     ; validationTarget =
         "DASHI/Promotion/ObligationIndex.agda"
@@ -1306,11 +1381,11 @@ canonicalUnifiedPromotionLaneCountIs6 :
   ≡ 6
 canonicalUnifiedPromotionLaneCountIs6 = refl
 
-canonicalUnifiedPromotionOpenObligationCountIs81 :
+canonicalUnifiedPromotionOpenObligationCountIs84 :
   UnifiedPromotionObligationIndex.aggregateOpenObligationCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 81
-canonicalUnifiedPromotionOpenObligationCountIs81 = refl
+  ≡ 84
+canonicalUnifiedPromotionOpenObligationCountIs84 = refl
 
 canonicalUnifiedPromotionAdapterAdvancementCountIs6 :
   UnifiedPromotionObligationIndex.adapterAdvancementCount
@@ -1348,11 +1423,11 @@ canonicalUnifiedPromotionSMFirstPrinciplesBoundaryCountIs9 :
   ≡ 9
 canonicalUnifiedPromotionSMFirstPrinciplesBoundaryCountIs9 = refl
 
-canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs1 :
+canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs6 :
   UnifiedPromotionObligationIndex.fullClayExternalAuthorityBoundaryCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 1
-canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs1 = refl
+  ≡ 6
+canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs6 = refl
 
 canonicalUnifiedPromotionTerminalPromotionIsFalse :
   UnifiedPromotionObligationIndex.terminalPromotion

@@ -1,0 +1,35 @@
+{
+  "contract": "ns_sprint162_residual_positive_profile_fork",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_residual_positive_profile_fork/ns_sprint162_residual_positive_profile_fork_manifest.json",
+      "sha256": "2fcc5159d3628a63490846074a6633bbf1435c524bce49ea7a968cd90edf2ca1"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_residual_positive_profile_fork/ns_sprint162_residual_positive_profile_fork.md",
+      "sha256": "f78b3a7521add582dee80e46f04bae90110ad85a5787d8f370d123a5f300f1b0"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_residual_positive_profile_fork/ns_sprint162_residual_positive_profile_fork_rows.csv",
+      "sha256": "bc34d44f82e768c5f84eb3e7ec28517043c6d2e2f15e25cdf501bcb1ee234f33"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_residual_positive_profile_fork/ns_sprint162_residual_positive_profile_fork_rows.json",
+      "sha256": "cb2a2d81a243512ae9b3fa129d7630beb431606509e93f8ad0c91dff76865bbe"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_residual_positive_profile_fork/ns_sprint162_residual_positive_profile_fork_summary.json",
+      "sha256": "bbfbc28c57214c4650a87dbc37d48702976c4bbb2f64e40ea615e359960f72f6"
+    }
+  },
+  "generated_at": "2026-06-07T00:00:00Z",
+  "lane": 3,
+  "manifest_hash": "4a599c7d26209e929733b312a639192a4b4c8ad40097707bf6605181c8e3342b",
+  "sprint": 162,
+  "validation_passed": true
+}

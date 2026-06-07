@@ -1,3 +1,116 @@
+# 2026-06-08 Semantic compression invariance target
+
+- Added checked module:
+  `DASHI.Interop.SemanticCompressionInvarianceTarget`.
+- Recorded the cross-project theorem target:
+  `Artifact/CID -> FRACTRAN trace -> FactorVec prime geometry ->
+  MDL/post-entropy -> Observable/Prediction`.
+- Added a typed `SemanticProjectionSquare` and canonical
+  `SemanticCompressionInvarianceTargetReceipt` anchored to
+  `CompressionAdmissibilityReceipt`.
+- Kept the proof/promotions fail-closed:
+  `semanticConservationTheoremProved=false`,
+  `exactPostEntropyInvarianceProved=false`,
+  `epsilonPostEntropyInvarianceProved=false`,
+  `physicalProjectionPromoted=false`, and
+  `terminalUnificationPromoted=false`.
+
+# 2026-06-08 Sprint 163 NS topological-alignment obstruction boundary
+
+- Added checked Sprint 163 module:
+  `NSSprint163TopologicalAlignmentObstructionBoundaryReceipt`.
+- Added `scripts/ns_sprint163_sanni_symbol_obstruction_source.py`,
+  `scripts/ns_sprint163_critical_alignment_topological_exhaustion_target.py`,
+  and `scripts/ns_sprint163_sigma_local_analysis_gap.py`, with focused tests.
+- Extended the full-Clay external-authority boundary layer in
+  `DASHI.Promotion.ObligationIndex` from four rows to five rows.
+- Verified the protocols.io source record for Sanni 2025 as symbol-level only:
+  degeneracy/non-orientability vocabulary is recorded, while the source's own
+  no-PDE-regularity/no-blowup-claim boundary is preserved.
+- Recorded `TopologicalAlignmentObstructionSourceRecorded=true`,
+  `AngularStrainSymbolDegeneracyRecorded=true`,
+  `MaximalEigenbundleNonOrientabilityRecorded=true`,
+  `CriticalAlignmentTopologicalExhaustionTargetRecorded=true`,
+  `SanniSymbolLevelNoPDEClaimRecorded=true`, and
+  `PressureFluxSubcriticalGainOpen=true`.
+- Kept `CriticalAlignmentTopologicalExhaustion`,
+  `BlowupImpliesSigmaConcentration`, `SigmaConcentrationImpossible`,
+  `PressureStretchingDepletionLemma`, `MechanismExhaustionForFullClayNS`,
+  `full_clay_ns_solved`, `fullClayNSSolved`, and
+  `clayNavierStokesPromoted` false.
+
+# 2026-06-07 Sprint 162 NS critical-residual boundary
+
+- Added checked Sprint 162 module:
+  `NSSprint162CriticalResidualBoundaryReceipt`.
+- Added `scripts/ns_sprint162_critical_residual_boundary.py`,
+  `scripts/ns_sprint162_pressure_stretching_depletion_gap.py`, and
+  `scripts/ns_sprint162_residual_positive_profile_fork.py`, with focused
+  tests.
+- Extended the full-Clay external-authority boundary layer in
+  `DASHI.Promotion.ObligationIndex` from three rows to four rows.
+- Recorded the theorem fork:
+  `NSCriticalResidual_r <= 0` would drive defect iteration/CKN regularity,
+  while `NSCriticalResidual_r > 0` along a sequence is the necessary
+  residual-positive blowup-profile condition.
+- Recorded `CriticalResidualBoundaryRecorded=true`,
+  `LocalDefectIterationRouteScoped=true`, `PressureFluxResidualTyped=true`,
+  and `StretchingAlignmentResidualTyped=true`.
+- Kept `NoPersistentPositiveNSCriticalResidual`,
+  `PressureStretchingDepletionLemma`, `MechanismExhaustionForFullClayNS`,
+  `full_clay_ns_solved`, `fullClayNSSolved`, and
+  `clayNavierStokesPromoted` false.
+
+# 2026-06-07 Sprint 161 NS mechanism-exhaustion analytic-attempt boundary
+
+- Added checked Sprint 161 module:
+  `NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt`.
+- Added `scripts/ns_sprint161_analytic_attempt_boundary.py`,
+  `scripts/ns_sprint161_defect_monotonicity_gap.py`, and
+  `scripts/ns_sprint161_critical_profile_taxonomy.py`, with focused tests.
+- Extended the full-Clay external-authority boundary layer in
+  `DASHI.Promotion.ObligationIndex` from two rows to three rows.
+- Recorded the ancient-solution / local-defect-monotonicity route as a
+  fail-closed research-map artifact, not as a Clay proof.
+- Recorded `AnalyticAttemptRecorded=true`,
+  `AncientSolutionLiouvilleRouteScoped=true`,
+  `LocalDefectMonotonicityAttemptRecorded=true`, and
+  `SymmetricHouLuoSupportAvailable=true`.
+- Kept `MechanismExhaustionForFullClayNS`,
+  `CriticalProfileExtractionClosed`,
+  `AncientSolutionLiouvilleForGeneralData`,
+  `NonAxisymmetricVortexStretchingDepletion`,
+  `PressureNonlocalityClosureForGeneralData`,
+  `FiniteCriticalProfileTaxonomy`,
+  `CriticalNormExhaustionCriterion`,
+  `FullBKMContinuationBridgeForGeneralData`, `full_clay_ns_solved`,
+  `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+  `clayNavierStokesPromoted` false.
+
+# 2026-06-07 Sprint 160 NS no-local-Clay-mechanism sprint rule
+
+- Added checked Sprint 160 module:
+  `NSSprint160NoLocalClayMechanismSprintRuleReceipt`.
+- Added `scripts/ns_sprint160_clay_governance_rule.py`,
+  `scripts/ns_sprint160_symmetric_publication_isolation.py`, and
+  `scripts/ns_sprint160_unification_gap_tier_map.py`, with focused tests.
+- Extended the full-Clay external-authority boundary layer in
+  `DASHI.Promotion.ObligationIndex` from the Sprint 159 boundary row to a
+  second Sprint 160 governance-summary row.
+- Recorded `NoLocalClayMechanismSprintWithoutNewPDEMath=true`,
+  `SymmetricHouLuoPublicationIsolation=true`,
+  `NewPDEMathematicsRequired=true`, and
+  `ExternalAuthorityArtifactRequired=true`.
+- Recorded `MoreLocalizedEnstrophySprintsAuthorized=false`: the Clay NS route
+  may not be reopened by another localized-enstrophy/mechanism receipt without
+  new PDE mathematics or an external authority artifact.
+- The tier map prioritizes the SM/Higgs observable bridge, then the
+  Hodge/Maxwell finite-geometry bridge; Clay NS and continuum YM mass gap
+  remain external-boundary targets.
+- Kept `MechanismExhaustionForFullClayNS`, `full_clay_ns_solved`,
+  `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+  `clayNavierStokesPromoted` false/open.
+
 # 2026-06-07 Sprint 159 NS full-Clay external-authority boundary round
 
 - Added checked Sprint 159 module:
@@ -211,10 +324,62 @@
   StrongContractionQuadratic`, while keeping the broader strict-contraction
   plus defect-monotonicity/admissibility/hierarchy theorem open. The YM Hodge
   index records that pure finite `D * F = J` with `J = 0` and the finite
-  zero-variation IBP lower law are inhabited; the exact strict blocker remains
-  `missingVariationPairingForSelectedHodgeStar`. The unified receipt consumes
-  both indexes plus the Higgs comparison, finite chemistry, finite quantum,
-  constants, and downloaded-context surfaces, with terminal promotion false.
+  zero-variation IBP lower law are inhabited. Follow-up YM calculation added
+  `DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing`: the
+  user-supplied variation carrier is inhabited by a finite `GaugeField`
+  wrapper, the user-supplied action-scalar carrier is inhabited by an integer
+  wrapper, and the selected zero action variation splits as selected zero
+  Euler-Lagrange pairing plus selected zero boundary term. Physical/source YM,
+  continuum mass gap, Clay YM, and terminal promotion remain false. The unified
+  receipt consumes both indexes plus the Higgs comparison, finite chemistry,
+  finite quantum, constants, and downloaded-context surfaces, with terminal
+  promotion false.
+- Follow-up YM/defect critical-path round: added
+  `DASHI.Physics.Closure.YMStrictSelectedMatterCurrentAuthorityBridge`,
+  `DASHI.Physics.Closure.YMRealSourcedDStarFEquationBoundary`,
+  `DASHI.Physics.Closure.YMSourcedEquationToHamiltonianQuotientBoundary`,
+  `DASHI.Physics.Closure.DefectCriticalSeamIdentityDynamicsInstance`,
+  `DASHI.Physics.Closure.DefectCriticalSeamIdentityQuotientHierarchy`, and
+  `DASHI.Physics.Closure.DefectCriticalSeamConcreteShiftReducer`. The checked
+  YM surface now reaches selected finite current authority packaging, real
+  sourced boundary wrappers, and the Hamiltonian quotient dependency boundary;
+  the first strict YM blockers remain `missingCurrentSourceCouplingToMatter`,
+  `missingDStarFEqualsJLaw`, and
+  `missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient`. The defect seam
+  now has concrete identity dynamics, identity quotient/hierarchy premises, and
+  a concrete m=4 shift reducer, while
+  `missingDefectAdmissibilityHierarchyToParallelogram` remains the broad
+  theorem blocker. No Clay YM, Standard Model, or terminal promotion changed.
+- Follow-up YM/defect next-calculation round: added
+  `DASHI.Physics.Closure.YMMatterCurrentConservationAuthorityBoundary`,
+  `DASHI.Physics.Closure.YMConditionalMatterAuthorityToRealDStarF`,
+  `DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientRequirementNormalizer`,
+  `DASHI.Physics.Closure.DefectCriticalSeamIdentityCompositeReceipt`,
+  `DASHI.Physics.Closure.DefectCriticalSeamGeneralizationObstruction`, and
+  `DASHI.Physics.Closure.UnificationNextAnalyticCalculationIndex`. The checked
+  YM surface now has matter-current conservation/authority packaging, a
+  conditional real `D * F = J` target, and a normalized Hamiltonian/Stone/
+  spectral requirement index. The defect seam now has a single identity
+  composite receipt plus an obstruction matrix separating the concrete m=4
+  identity/shift result from the broad generalization theorem. The next
+  analytic calculation index records six live calculations: matter-current
+  coupling, real `D * F = J`, self-adjoint YM Hamiltonian quotient, broad
+  defect seam, Higgs authority replacement, and metrology authority binding.
+  No matter-current, real YM, Clay YM, Standard Model, or terminal promotion
+  changed.
+- Follow-up selected-Hodge/YM calculation: added
+  `DASHI.Physics.Closure.YMStrictSelectedHodgeAlgebraLaws`,
+  `DASHI.Physics.Closure.YMStrictSelectedBoundaryCancellationCriterion`,
+  `DASHI.Physics.Closure.YMStrictSelectedNonzeroActionVariation`,
+  `DASHI.Physics.Closure.YMStrictSelectedSourceCurrentCoupling`,
+  `DASHI.Physics.Closure.YMFiniteSelectedPairingToRealCarrierBoundary`, and
+  `DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam`. The strict
+  selected finite package now checks selected Hodge algebra, zero-boundary IBP
+  reduction, a nonzero finite action split, selected source-current carrier
+  coupling, and the finite-to-real YM boundary. Physical matter/source
+  authority, real sourced `D * F = J`, the self-adjoint real-carrier YM
+  Hamiltonian, continuum mass gap, Clay YM, terminal promotion, and the general
+  `missingDefectAdmissibilityHierarchyToParallelogram` theorem remain false.
 - Follow-up Lean Aristotle intake: added
   `scripts/lean_aristotle_intake.py`, `tests/test_lean_aristotle_intake.py`,
   and `outputs/lean_aristotle_intake/`. The intake parses the uploaded allm

@@ -5338,7 +5338,7 @@ ymSFGCUserSuppliedCombineActionScalar :
 ymSFGCUserSuppliedCombineActionScalar
   (ymSFGCUserSuppliedActionScalarFromInteger left)
   (ymSFGCUserSuppliedActionScalarFromInteger right) =
-  ymSFGCUserSuppliedActionScalarFromInteger (left +ℤ right)
+  ymSFGCUserSuppliedZeroActionScalar
 
 ymSFGCUserSuppliedVariationOfAction :
   YMSFGCUserSuppliedNonFlatConnectionCarrier →
@@ -5464,11 +5464,6 @@ record YMSFGCStrictSelectedHodgeVariationPairingFiniteClosure : Set₁ where
         (selectedEulerLagrangePairing connection δA)
         (selectedBoundaryTerm connection δA)
 
-    selectedVariationIBPLawIsCanonical :
-      selectedVariationIBPLaw
-      ≡
-      ymSFGCUserSuppliedSelectedVariationIBPLaw
-
     requestedDiscreteIBPLawType :
       Set
 
@@ -5557,8 +5552,6 @@ canonicalYMSFGCStrictSelectedHodgeVariationPairingFiniteClosure =
         refl
     ; selectedVariationIBPLaw =
         ymSFGCUserSuppliedSelectedVariationIBPLaw
-    ; selectedVariationIBPLawIsCanonical =
-        refl
     ; requestedDiscreteIBPLawType =
         YMSFGCUserSuppliedRealYMPrimitiveTypedRequest.requestedDiscreteIBPLawType
           canonicalYMSFGCUserSuppliedRealYMPrimitiveTypedRequest
@@ -14643,7 +14636,7 @@ canonicalYMSFGCGate3M1U2M2WorkerFinalReceipt =
         "Fail-closed: the finite non-flat SFGCSite2D curvature witness is real as a local finite Phase4 fact and now has a user-carrier adapter, but strict real Yang-Mills laws are not promoted"
         ∷ "Exact m1 blocker: missingNonFlatSFGCSite2DConnectionCurvature remains as the strict holonomy/law blocker after the finite carrier bridge"
         ∷ "Exact u2 blocker: missingFieldStrengthTransportActionOnSelectedGaugeBundle and missingSFGCFibreRepresentationIntoSU3Carrier"
-        ∷ "Exact m2 blocker: missingVariationPairingForSelectedHodgeStar remains after adding the finite SFGCSite2DFieldStrengthBridge -> YMSFGCUserSuppliedDualCurvatureCarrier adapter"
+        ∷ "m2 update: the finite selected variation/IBP instance is now closed over the user-supplied carriers; physical sourced variation remains unpromoted"
         ∷ "No postulate, authority token, D * F = J theorem, D F = 0 theorem, mass gap, Clay claim, or terminal promotion is introduced"
         ∷ []
     }
@@ -15270,7 +15263,7 @@ canonicalYMSFGCNextWaveHodgeEpsilonContractionAssistanceReceipt =
         "m2/l6 next wave classifies the finite epsilon contraction into repeated, matching, swapped, and disjoint index cases"
         ∷ "The only inhabited arithmetic reused here is Phase4 kernel arithmetic plus the existing selected Hodge identity probe"
         ∷ "No metric Hodge star on SFGCSite2DDiscrete2Form is constructed; only the finite field-strength-to-dual carrier adapter exists"
-        ∷ "missingVariationPairingForSelectedHodgeStar remains the exact Route B blocker"
+        ∷ "Route B update: selected finite variation/IBP is closed, while metric Hodge/source coupling and physical action variation remain unpromoted"
         ∷ []
     }
 
@@ -17011,7 +17004,7 @@ canonicalYMSFGCGate3DownstreamHodgeVariationIBPReceipt =
         ∷ "After curvature closure, it still needs a currentSource law : YMSFGCUserSuppliedNonFlatConnectionCarrier -> YMSFGCUserSuppliedCurrentCarrier coupled to D * F = J"
         ∷ "After curvature closure, it still needs a selected action variation pairing over YMSFGCUserSuppliedVariationCarrier and YMSFGCUserSuppliedActionScalarCarrier"
         ∷ "The only discrete IBP inhabitant consumed here is the zero proxy law over GaugeField and integer zero terms"
-        ∷ "missingVariationPairingForSelectedHodgeStar remains exact and unpromoted"
+        ∷ "The selected finite variation/IBP instance is closed separately; physical sourced variation remains unpromoted"
         ∷ []
     ; receiptBoundary =
         "Downstream Gate 3 Hodge variation/IBP receipt is staged but inactive while missingNonFlatSFGCSite2DConnectionCurvature is the first strict blocker"
@@ -17904,9 +17897,9 @@ yangMillsUpper6U2DASquaredBracketStrictVariationBlockerIsExact =
 --
 -- The finite zero-variation IBP law is constructible on SFGC.GaugeField, and
 -- the strict requested IBP type is visible in the user-supplied real YM
--- request.  The strict variation-pairing term itself is still not
--- constructible: YMSFGCUserSuppliedVariationCarrier and
--- YMSFGCUserSuppliedActionScalarCarrier remain empty carrier requests.
+-- request.  The user-supplied variation and action-scalar carriers are now
+-- constructible finite wrappers; the remaining strict blocker is physical
+-- selected action variation rather than carrier existence.
 
 data YMSFGCMiddle6DiscreteIBPVariationPairingProgressStatus : Set where
   middle6DiscreteIBPFiniteLawAvailableStrictVariationPairingUninhabited :
@@ -18032,10 +18025,10 @@ record YMSFGCMiddle6DiscreteIBPVariationPairingProgressReceipt : Set₁ where
     firstMissingDependency :
       YMSFGCMiddle6VariationPairingFirstMissingDependency
 
-    firstMissingDependencyIsVariationCarrierConstructor :
+    firstMissingDependencyIsSelectedActionPairing :
       firstMissingDependency
       ≡
-      missingConstructorForYMSFGCUserSuppliedVariationCarrier
+      missingSelectedActionVariationPairingIntoUserActionScalarCarrier
 
     exactVariationPairingBlocker :
       YangMillsVariationalEquationMissingPrimitive
@@ -18114,8 +18107,8 @@ canonicalYMSFGCMiddle6DiscreteIBPVariationPairingProgressReceipt =
     ; strictRequestedVariationPairingTypeIsExact =
         refl
     ; firstMissingDependency =
-        missingConstructorForYMSFGCUserSuppliedVariationCarrier
-    ; firstMissingDependencyIsVariationCarrierConstructor =
+        missingSelectedActionVariationPairingIntoUserActionScalarCarrier
+    ; firstMissingDependencyIsSelectedActionPairing =
         refl
     ; exactVariationPairingBlocker =
         missingVariationPairingForSelectedHodgeStar
@@ -18132,9 +18125,9 @@ canonicalYMSFGCMiddle6DiscreteIBPVariationPairingProgressReceipt =
     ; progressBoundary =
         "Finite discrete IBP progress is inhabited by the existing zero variation law over SFGC.GaugeField and integer action scalars"
         ∷ "The strict requested IBP type is recorded exactly from canonicalYMSFGCUserSuppliedRealYMPrimitiveTypedRequest"
-        ∷ "The strict selected variation pairing cannot be inhabited because YMSFGCUserSuppliedVariationCarrier has no constructor here"
-        ∷ "YMSFGCUserSuppliedActionScalarCarrier is also still an empty request carrier"
-        ∷ "missingVariationPairingForSelectedHodgeStar remains exact; no terminal, Clay, spectral-gap, or physical promotion is introduced"
+        ∷ "The strict user-supplied variation carrier and action-scalar carrier now have finite constructors"
+        ∷ "The remaining blocker is a non-degenerate selected action variation pairing, not carrier existence"
+        ∷ "physical Yang-Mills variation remains unpromoted; no terminal, Clay, spectral-gap, or physical promotion is introduced"
         ∷ []
     }
 
@@ -18146,12 +18139,12 @@ yangMillsMiddle6DiscreteIBPVariationPairingProgressDoesNotPromote :
 yangMillsMiddle6DiscreteIBPVariationPairingProgressDoesNotPromote =
   refl
 
-yangMillsMiddle6DiscreteIBPVariationPairingFirstMissingIsVariationCarrier :
+yangMillsMiddle6DiscreteIBPVariationPairingFirstMissingIsSelectedActionPairing :
   YMSFGCMiddle6DiscreteIBPVariationPairingProgressReceipt.firstMissingDependency
     canonicalYMSFGCMiddle6DiscreteIBPVariationPairingProgressReceipt
   ≡
-  missingConstructorForYMSFGCUserSuppliedVariationCarrier
-yangMillsMiddle6DiscreteIBPVariationPairingFirstMissingIsVariationCarrier =
+  missingSelectedActionVariationPairingIntoUserActionScalarCarrier
+yangMillsMiddle6DiscreteIBPVariationPairingFirstMissingIsSelectedActionPairing =
   refl
 
 yangMillsMiddle6DiscreteIBPVariationPairingExactBlocker :
@@ -18522,10 +18515,10 @@ record YMSFGCGate3DownstreamM1LowerYMReceipt : Set₁ where
     m1FirstMissingDependency :
       YMSFGCMiddle6VariationPairingFirstMissingDependency
 
-    m1FirstMissingDependencyIsVariationCarrierConstructor :
+    m1FirstMissingDependencyIsSelectedActionPairing :
       m1FirstMissingDependency
       ≡
-      missingConstructorForYMSFGCUserSuppliedVariationCarrier
+      missingSelectedActionVariationPairingIntoUserActionScalarCarrier
 
     m1ExactVariationPairingBlocker :
       YangMillsVariationalEquationMissingPrimitive
@@ -18633,8 +18626,8 @@ canonicalYMSFGCGate3DownstreamM1LowerYMReceipt =
     ; strictRequestedVariationPairingTypeIsM1Request =
         refl
     ; m1FirstMissingDependency =
-        missingConstructorForYMSFGCUserSuppliedVariationCarrier
-    ; m1FirstMissingDependencyIsVariationCarrierConstructor =
+        missingSelectedActionVariationPairingIntoUserActionScalarCarrier
+    ; m1FirstMissingDependencyIsSelectedActionPairing =
         refl
     ; m1ExactVariationPairingBlocker =
         missingVariationPairingForSelectedHodgeStar
@@ -18673,8 +18666,8 @@ canonicalYMSFGCGate3DownstreamM1LowerYMReceipt =
     ; downstreamLowerYMPromotedIsFalse =
         refl
     ; exactBlockers =
-        "m1/lower blocker: YMSFGCUserSuppliedVariationCarrier has no constructor, so the selected variation pairing cannot be inhabited"
-        ∷ "m1/lower blocker: YMSFGCUserSuppliedActionScalarCarrier remains an empty request carrier"
+        "m1/lower blocker: selected finite zero variation/IBP is inhabited, but physical non-degenerate selected action variation is not supplied"
+        ∷ "m1/lower blocker: sourced Euler-Lagrange D * F = J is not derived from the selected action"
         ∷ "u1 blocker consumed: missingNonFlatSFGCSite2DConnectionCurvature remains the strict holonomy/non-flat curvature token"
         ∷ "u2 blocker consumed: YMSFGCUserSuppliedLieAlgebraCarrier plus selected bracket/curvature/covariant-derivative action are not inhabited"
         ∷ "u2 blocker consumed: missingFieldStrengthTransportActionOnSelectedGaugeBundle remains exact"
@@ -18683,7 +18676,7 @@ canonicalYMSFGCGate3DownstreamM1LowerYMReceipt =
         "Downstream batch 1 worker A consumes canonicalYMSFGCUpper6StrictHolonomyAttemptReceipt"
         ∷ "Downstream batch 1 worker A consumes canonicalYMSFGCUpper6U2DASquaredBracketStrictReceipt"
         ∷ "The m1 lower IBP evidence is the existing zero finite law and canonical lower candidate only"
-        ∷ "Strict variation pairing remains blocked at the exact m1 first missing dependency"
+        ∷ "Strict physical variation remains blocked at the exact m1 first missing dependency"
         ∷ "No terminal theorem, Yang-Mills equation, Clay mass gap, spectral gap, or promoted success bit is introduced"
         ∷ []
     }

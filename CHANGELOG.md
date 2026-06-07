@@ -6,6 +6,74 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Semantic compression invariance target for `2026-06-08`: adds
+  `DASHI.Interop.SemanticCompressionInvarianceTarget`, imports it through
+  `DASHI.Everything`, and adds a focused regression test. The receipt names
+  the central cross-project chain
+  `Artifact/CID -> FRACTRAN trace -> FactorVec prime geometry ->
+  MDL/post-entropy -> Observable/Prediction`, records a typed commuting-square
+  target, and anchors to `CompressionAdmissibilityReceipt`. It keeps
+  `semanticConservationTheoremProved`,
+  `exactPostEntropyInvarianceProved`,
+  `epsilonPostEntropyInvarianceProved`, `physicalProjectionPromoted`, and
+  `terminalUnificationPromoted` false.
+
+- Sprint 163 NS topological-alignment obstruction boundary for `2026-06-08`:
+  adds
+  `DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt`,
+  three Sprint 163 emitters, generated outputs, and focused tests. The round
+  anchors to Sprint 162 and records Sanni 2025/protocols.io as source-bound
+  symbol-level support only: angular strain symbol degeneracy and maximal
+  eigenbundle non-orientability are vocabulary for the Sigma target, not a PDE
+  theorem. It records `TopologicalAlignmentObstructionSourceRecorded=true`,
+  `CriticalAlignmentTopologicalExhaustionTargetRecorded=true`, and
+  `PressureFluxSubcriticalGainOpen=true`, while keeping
+  `CriticalAlignmentTopologicalExhaustion`,
+  `BlowupImpliesSigmaConcentration`, `SigmaConcentrationImpossible`,
+  `PressureStretchingDepletionLemma`, `MechanismExhaustionForFullClayNS`,
+  `full_clay_ns_solved`, `fullClayNSSolved`, and
+  `clayNavierStokesPromoted` false.
+
+- Sprint 162 NS critical-residual boundary for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt`,
+  three Sprint 162 emitters, generated outputs, and focused tests. The round
+  anchors to Sprint 161 and narrows the Clay-closing estimate to the
+  pressure-flux / stretching-alignment / dissipation residual fork. It records
+  `CriticalResidualBoundaryRecorded=true`,
+  `LocalDefectIterationRouteScoped=true`, `PressureFluxResidualTyped=true`,
+  and `StretchingAlignmentResidualTyped=true`, while keeping
+  `NoPersistentPositiveNSCriticalResidual`,
+  `PressureStretchingDepletionLemma`, `MechanismExhaustionForFullClayNS`,
+  `full_clay_ns_solved`, `fullClayNSSolved`, and
+  `clayNavierStokesPromoted` false.
+
+- Sprint 161 NS mechanism-exhaustion analytic-attempt boundary for
+  `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt`,
+  three Sprint 161 emitters, generated outputs, and focused tests. The round
+  anchors to Sprint 160 and records the ancient-solution /
+  local-defect-monotonicity route, local defect-energy gap, and critical-profile
+  taxonomy as fail-closed analytic attempt artifacts. It keeps
+  `MechanismExhaustionForFullClayNS`, general-data critical-profile extraction,
+  non-axisymmetric vortex-stretching depletion, pressure nonlocality closure,
+  finite critical-profile taxonomy, full general-data BKM continuation,
+  `full_clay_ns_solved`, `fullClayNSSolved`,
+  `fullNavierStokesSolutionConstructed`, and `clayNavierStokesPromoted` false.
+
+- Sprint 160 NS no-local-Clay-mechanism sprint rule for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint160NoLocalClayMechanismSprintRuleReceipt`,
+  three Sprint 160 emitters, generated outputs, and focused tests. The round
+  anchors to Sprint 159, records
+  `NoLocalClayMechanismSprintWithoutNewPDEMath=true`,
+  `SymmetricHouLuoPublicationIsolation=true`,
+  `NewPDEMathematicsRequired=true`, and
+  `ExternalAuthorityArtifactRequired=true`, while setting
+  `MoreLocalizedEnstrophySprintsAuthorized=false`. The tier map makes the next
+  local priority SM/Higgs observable promotion, then Hodge/Maxwell finite
+  geometry, with Clay NS and continuum YM mass gap retained as
+  external-boundary targets. Full Clay NS, mechanism exhaustion, full general
+  Navier-Stokes construction, and `clayNavierStokesPromoted` remain false.
+
 - Sprint 159 NS full-Clay external-authority boundary round for
   `2026-06-07`: adds
   `DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt`,

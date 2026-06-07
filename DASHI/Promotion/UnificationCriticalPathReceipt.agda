@@ -10,7 +10,25 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Constants.Registry as Registry
 import DASHI.Physics.Closure.ContractionForcesQuadraticTheorem as CFQT
 import DASHI.Physics.Closure.ContractionQuadraticToSignatureBridgeTheorem as CQSB
+import DASHI.Physics.Closure.DefectCriticalSeamGeneralizationObstruction as GeneralizationObstruction
+import DASHI.Physics.Closure.DefectCriticalSeamConcreteShiftReducer as ShiftReducer
+import DASHI.Physics.Closure.DefectCriticalSeamIdentityCompositeReceipt as IdentityComposite
+import DASHI.Physics.Closure.DefectCriticalSeamIdentityDynamicsInstance as IdentityDynamics
+import DASHI.Physics.Closure.DefectCriticalSeamIdentityQuotientHierarchy as IdentityQuotient
+import DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam as CriticalSeam
 import DASHI.Physics.Closure.HodgeVariationPairingDepth9 as HV9
+import DASHI.Physics.Closure.YMConditionalMatterAuthorityToRealDStarF as ConditionalDStarF
+import DASHI.Physics.Closure.YMFiniteSelectedPairingToRealCarrierBoundary as RealYMBoundary
+import DASHI.Physics.Closure.YMRealSourcedDStarFEquationBoundary as RealDStarF
+import DASHI.Physics.Closure.YMStrictSelectedBoundaryCancellationCriterion as BoundaryCriterion
+import DASHI.Physics.Closure.YMStrictSelectedHodgeAlgebraLaws as HodgeAlgebra
+import DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing as StrictPairing
+import DASHI.Physics.Closure.YMMatterCurrentConservationAuthorityBoundary as MatterConservation
+import DASHI.Physics.Closure.YMStrictSelectedMatterCurrentAuthorityBridge as MatterAuthority
+import DASHI.Physics.Closure.YMStrictSelectedNonzeroActionVariation as NonzeroVariation
+import DASHI.Physics.Closure.YMStrictSelectedSourceCurrentCoupling as SourceCoupling
+import DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientRequirementNormalizer as HamiltonianNormalizer
+import DASHI.Physics.Closure.YMSourcedEquationToHamiltonianQuotientBoundary as HamiltonianBoundary
 import DASHI.Physics.Closure.YangMillsFieldEquationObstruction as YMObs
 import DASHI.Promotion.ChemistryFiniteComputationSurface as Chemistry
 import DASHI.Promotion.DefectQuadraticClosureDependencyIndex as DefectIndex
@@ -27,7 +45,7 @@ import DASHI.Promotion.YMStrictHodgeVariationBlockerIndex as YMHodgeIndex
 -- corpus review: the contraction/quadratic/signature spine is already
 -- inhabited on the internal carrier, and YM/Hodge has a finite Route-B /
 -- pure-zero current surface.  The remaining blockers are stricter:
--- real/authority metrology, strict selected YM variation pairing, empirical
+-- real/authority metrology, physical/source YM variation, empirical
 -- authority, and continuum/terminal promotion.
 
 data CriticalPathLayer : Set where
@@ -94,7 +112,7 @@ data CriticalPathBlocker : Set where
   noBlockerForInternalQuadraticSpine :
     CriticalPathBlocker
 
-  missingStrictSelectedYMVariationPairing :
+  missingPhysicalYMMatterSourceAndRealCarrier :
     CriticalPathBlocker
 
   missingAcceptedHiggsAuthorityAndHoldout :
@@ -116,7 +134,7 @@ layerBlocker : CriticalPathLayer → CriticalPathBlocker
 layerBlocker formalQuadraticLayer =
   noBlockerForInternalQuadraticSpine
 layerBlocker hodgeYangMillsLayer =
-  missingStrictSelectedYMVariationPairing
+  missingPhysicalYMMatterSourceAndRealCarrier
 layerBlocker standardModelHiggsLayer =
   missingAcceptedHiggsAuthorityAndHoldout
 layerBlocker chemistryMetrologyLayer =
@@ -186,17 +204,17 @@ formalQuadraticRow : CriticalPathRow
 formalQuadraticRow =
   mkCriticalPathRow
     formalQuadraticLayer
-    "DASHI.Physics.Closure.ContractionForcesQuadraticTheorem"
-    "canonicalRealStackContractionForcesQuadraticTheorem and canonicalContractionQuadraticToSignatureBridgeTheorem are inhabited"
-    "real-world physics/metrology consumers must still cite their own authority and validation gates"
+    "DASHI.Physics.Closure.ContractionForcesQuadraticTheorem / DefectCriticalSeamConcreteShiftReducer"
+    "real-stack contraction/quadratic theorem, signature bridge, identity dynamics, identity quotient/hierarchy, and concrete m=4 shift reducer are checked"
+    "the broad missingDefectAdmissibilityHierarchyToParallelogram theorem remains open beyond the concrete identity/shift instances"
 
 hodgeYangMillsRow : CriticalPathRow
 hodgeYangMillsRow =
   mkCriticalPathRow
     hodgeYangMillsLayer
-    "DASHI.Physics.Closure.HodgeVariationPairingDepth9"
-    "Route-B selected D * F = J and pure zero-current finite D * F = J are inhabited on the finite carrier"
-    "missingVariationPairingForSelectedHodgeStar remains the strict selected YM variation blocker"
+    "DASHI.Physics.Closure.YMStrictSelectedSourceCurrentCoupling / YMRealSourcedDStarFEquationBoundary / YMSourcedEquationToHamiltonianQuotientBoundary"
+    "finite selected Hodge algebra, nonzero finite action split, selected source-current carrier coupling, real sourced boundary wrappers, and Hamiltonian quotient dependency boundary are checked"
+    "physical matter source authority, real D * F = J, self-adjoint carrier-quotient YM Hamiltonian, continuum mass gap, Clay YM, and terminal promotion remain false"
 
 standardModelHiggsRow : CriticalPathRow
 standardModelHiggsRow =
@@ -260,11 +278,65 @@ record UnificationCriticalPathReceipt : Setω where
     defectQuadraticDependencyIndex :
       DefectIndex.DefectQuadraticClosureDependencyIndex
 
+    defectQuadraticCriticalSeam :
+      CriticalSeam.DefectQuadraticParallelogramCriticalSeam
+
+    defectIdentityDynamicsInstance :
+      IdentityDynamics.DefectCriticalSeamIdentityDynamicsInstance
+
+    defectIdentityQuotientHierarchy :
+      IdentityQuotient.DefectCriticalSeamIdentityQuotientHierarchy
+
+    defectConcreteShiftReducer :
+      ShiftReducer.DefectCriticalSeamConcreteShiftReducer
+
+    defectIdentityCompositeReceipt :
+      IdentityComposite.DefectCriticalSeamIdentityCompositeReceipt
+
+    defectGeneralizationObstruction :
+      GeneralizationObstruction.DefectCriticalSeamGeneralizationObstruction
+
     hodgeVariationDepth9 :
       HV9.HodgeVariationPairingDepth9Receipt
 
     ymStrictHodgeVariationBlockerIndex :
       YMHodgeIndex.YMStrictHodgeVariationBlockerIndex
+
+    strictSelectedHodgeVariationPairing :
+      StrictPairing.StrictSelectedHodgeVariationPairingCalculation
+
+    strictSelectedHodgeAlgebraLaws :
+      HodgeAlgebra.StrictSelectedHodgeAlgebraLaws
+
+    strictSelectedBoundaryCancellationCriterion :
+      BoundaryCriterion.StrictSelectedBoundaryCancellationCriterion
+
+    strictSelectedNonzeroActionVariation :
+      NonzeroVariation.StrictSelectedNonzeroActionVariationCalculation
+
+    strictSelectedSourceCurrentCoupling :
+      SourceCoupling.StrictSelectedSourceCurrentCouplingReceipt
+
+    finiteSelectedPairingToRealCarrierBoundary :
+      RealYMBoundary.YMFiniteSelectedPairingToRealCarrierBoundary
+
+    strictSelectedMatterCurrentAuthorityBridge :
+      MatterAuthority.StrictSelectedMatterCurrentAuthorityBridge
+
+    matterCurrentConservationAuthorityBoundary :
+      MatterConservation.YMMatterCurrentConservationAuthorityBoundary
+
+    realSourcedDStarFEquationBoundary :
+      RealDStarF.YMRealSourcedDStarFEquationBoundary
+
+    conditionalMatterAuthorityToRealDStarF :
+      ConditionalDStarF.YMConditionalMatterAuthorityToRealDStarF
+
+    sourcedEquationToHamiltonianQuotientBoundary :
+      HamiltonianBoundary.YMSourcedEquationToHamiltonianQuotientBoundary
+
+    selfAdjointHamiltonianQuotientRequirementNormalizer :
+      HamiltonianNormalizer.YMSelfAdjointHamiltonianQuotientRequirementNormalizer
 
     exactHodgeVariationBlocker :
       YMObs.YangMillsVariationalEquationMissingPrimitive
@@ -273,6 +345,22 @@ record UnificationCriticalPathReceipt : Setω where
       exactHodgeVariationBlocker
       ≡
       YMObs.missingVariationPairingForSelectedHodgeStar
+
+    exactPhysicalYMMatterSourceBlocker :
+      YMObs.YangMillsVariationalEquationMissingPrimitive
+
+    exactPhysicalYMMatterSourceBlockerIsCurrentSource :
+      exactPhysicalYMMatterSourceBlocker
+      ≡
+      YMObs.missingCurrentSourceCouplingToMatter
+
+    exactRealSourcedYMDStarFBlocker :
+      YMObs.YangMillsFieldEquationMissingPrerequisite
+
+    exactRealSourcedYMDStarFBlockerIsMissingDStarFEqualsJLaw :
+      exactRealSourcedYMDStarFBlocker
+      ≡
+      YMObs.missingDStarFEqualsJLaw
 
     higgsCovariantComparison :
       Higgs.StandardModelHiggsCovariantComparisonLaw
@@ -316,6 +404,42 @@ record UnificationCriticalPathReceipt : Setω where
     strictYMVariationPairingPromotedIsFalse :
       strictYMVariationPairingPromoted ≡ false
 
+    strictYMSelectedFiniteVariationPairingChecked :
+      Bool
+
+    strictYMSelectedFiniteVariationPairingCheckedIsTrue :
+      strictYMSelectedFiniteVariationPairingChecked ≡ true
+
+    strictYMSelectedHodgeAlgebraChecked :
+      Bool
+
+    strictYMSelectedHodgeAlgebraCheckedIsTrue :
+      strictYMSelectedHodgeAlgebraChecked ≡ true
+
+    strictYMSelectedNonzeroActionVariationChecked :
+      Bool
+
+    strictYMSelectedNonzeroActionVariationCheckedIsTrue :
+      strictYMSelectedNonzeroActionVariationChecked ≡ true
+
+    strictYMSelectedSourceCurrentCouplingChecked :
+      Bool
+
+    strictYMSelectedSourceCurrentCouplingCheckedIsTrue :
+      strictYMSelectedSourceCurrentCouplingChecked ≡ true
+
+    strictYMRealCarrierBoundaryChecked :
+      Bool
+
+    strictYMRealCarrierBoundaryCheckedIsTrue :
+      strictYMRealCarrierBoundaryChecked ≡ true
+
+    defectCriticalSeamTheoremPromoted :
+      Bool
+
+    defectCriticalSeamTheoremPromotedIsFalse :
+      defectCriticalSeamTheoremPromoted ≡ false
+
     higgsEmpiricalPromotion :
       Bool
 
@@ -355,13 +479,57 @@ canonicalUnificationCriticalPathReceipt =
         CQSB.canonicalContractionQuadraticToSignatureBridgeTheorem
     ; defectQuadraticDependencyIndex =
         DefectIndex.canonicalDefectQuadraticClosureDependencyIndex
+    ; defectQuadraticCriticalSeam =
+        CriticalSeam.canonicalDefectQuadraticParallelogramCriticalSeam
+    ; defectIdentityDynamicsInstance =
+        IdentityDynamics.canonicalDefectCriticalSeamIdentityDynamicsInstance
+    ; defectIdentityQuotientHierarchy =
+        IdentityQuotient.canonicalDefectCriticalSeamIdentityQuotientHierarchy
+    ; defectConcreteShiftReducer =
+        ShiftReducer.canonicalDefectCriticalSeamConcreteShiftReducer
+    ; defectIdentityCompositeReceipt =
+        IdentityComposite.canonicalDefectCriticalSeamIdentityCompositeReceipt
+    ; defectGeneralizationObstruction =
+        GeneralizationObstruction.canonicalDefectCriticalSeamGeneralizationObstruction
     ; hodgeVariationDepth9 =
         HV9.canonicalHodgeVariationPairingDepth9Receipt
     ; ymStrictHodgeVariationBlockerIndex =
         YMHodgeIndex.canonicalYMStrictHodgeVariationBlockerIndex
+    ; strictSelectedHodgeVariationPairing =
+        StrictPairing.canonicalStrictSelectedHodgeVariationPairingCalculation
+    ; strictSelectedHodgeAlgebraLaws =
+        HodgeAlgebra.canonicalStrictSelectedHodgeAlgebraLaws
+    ; strictSelectedBoundaryCancellationCriterion =
+        BoundaryCriterion.canonicalStrictSelectedBoundaryCancellationCriterion
+    ; strictSelectedNonzeroActionVariation =
+        NonzeroVariation.canonicalStrictSelectedNonzeroActionVariationCalculation
+    ; strictSelectedSourceCurrentCoupling =
+        SourceCoupling.canonicalStrictSelectedSourceCurrentCouplingReceipt
+    ; finiteSelectedPairingToRealCarrierBoundary =
+        RealYMBoundary.canonicalYMFiniteSelectedPairingToRealCarrierBoundary
+    ; strictSelectedMatterCurrentAuthorityBridge =
+        MatterAuthority.canonicalStrictSelectedMatterCurrentAuthorityBridge
+    ; matterCurrentConservationAuthorityBoundary =
+        MatterConservation.canonicalYMMatterCurrentConservationAuthorityBoundary
+    ; realSourcedDStarFEquationBoundary =
+        RealDStarF.canonicalYMRealSourcedDStarFEquationBoundary
+    ; conditionalMatterAuthorityToRealDStarF =
+        ConditionalDStarF.canonicalYMConditionalMatterAuthorityToRealDStarF
+    ; sourcedEquationToHamiltonianQuotientBoundary =
+        HamiltonianBoundary.canonicalYMSourcedEquationToHamiltonianQuotientBoundary
+    ; selfAdjointHamiltonianQuotientRequirementNormalizer =
+        HamiltonianNormalizer.canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
     ; exactHodgeVariationBlocker =
         YMObs.missingVariationPairingForSelectedHodgeStar
     ; exactHodgeVariationBlockerIsSelectedPairing =
+        refl
+    ; exactPhysicalYMMatterSourceBlocker =
+        YMObs.missingCurrentSourceCouplingToMatter
+    ; exactPhysicalYMMatterSourceBlockerIsCurrentSource =
+        refl
+    ; exactRealSourcedYMDStarFBlocker =
+        YMObs.missingDStarFEqualsJLaw
+    ; exactRealSourcedYMDStarFBlockerIsMissingDStarFEqualsJLaw =
         refl
     ; higgsCovariantComparison =
         Higgs.canonicalStandardModelHiggsCovariantComparisonLaw
@@ -388,11 +556,47 @@ canonicalUnificationCriticalPathReceipt =
     ; finiteHodgeCurrentCheckedIsTrue =
         refl
     ; strictYMVariationPairingPromoted =
-        HV9.HodgeVariationPairingDepth9Receipt.variationPairingPromoted
-          HV9.canonicalHodgeVariationPairingDepth9Receipt
+        StrictPairing.StrictSelectedHodgeVariationPairingCalculation.physicalVariationPairingPromoted
+          StrictPairing.canonicalStrictSelectedHodgeVariationPairingCalculation
     ; strictYMVariationPairingPromotedIsFalse =
-        HV9.HodgeVariationPairingDepth9Receipt.variationPairingPromotedIsFalse
-          HV9.canonicalHodgeVariationPairingDepth9Receipt
+        StrictPairing.StrictSelectedHodgeVariationPairingCalculation.physicalVariationPairingPromotedIsFalse
+          StrictPairing.canonicalStrictSelectedHodgeVariationPairingCalculation
+    ; strictYMSelectedFiniteVariationPairingChecked =
+        StrictPairing.StrictSelectedHodgeVariationPairingCalculation.strictPairingCalculated
+          StrictPairing.canonicalStrictSelectedHodgeVariationPairingCalculation
+    ; strictYMSelectedFiniteVariationPairingCheckedIsTrue =
+        StrictPairing.StrictSelectedHodgeVariationPairingCalculation.strictPairingCalculatedIsTrue
+          StrictPairing.canonicalStrictSelectedHodgeVariationPairingCalculation
+    ; strictYMSelectedHodgeAlgebraChecked =
+        HodgeAlgebra.StrictSelectedHodgeAlgebraLaws.selectedFiniteAlgebraCalculated
+          HodgeAlgebra.canonicalStrictSelectedHodgeAlgebraLaws
+    ; strictYMSelectedHodgeAlgebraCheckedIsTrue =
+        HodgeAlgebra.StrictSelectedHodgeAlgebraLaws.selectedFiniteAlgebraCalculatedIsTrue
+          HodgeAlgebra.canonicalStrictSelectedHodgeAlgebraLaws
+    ; strictYMSelectedNonzeroActionVariationChecked =
+        NonzeroVariation.StrictSelectedNonzeroActionVariationCalculation.nonzeroActionVariationCalculated
+          NonzeroVariation.canonicalStrictSelectedNonzeroActionVariationCalculation
+    ; strictYMSelectedNonzeroActionVariationCheckedIsTrue =
+        NonzeroVariation.StrictSelectedNonzeroActionVariationCalculation.nonzeroActionVariationCalculatedIsTrue
+          NonzeroVariation.canonicalStrictSelectedNonzeroActionVariationCalculation
+    ; strictYMSelectedSourceCurrentCouplingChecked =
+        SourceCoupling.StrictSelectedSourceCurrentCouplingReceipt.finiteSourceCurrentCoupled
+          SourceCoupling.canonicalStrictSelectedSourceCurrentCouplingReceipt
+    ; strictYMSelectedSourceCurrentCouplingCheckedIsTrue =
+        SourceCoupling.StrictSelectedSourceCurrentCouplingReceipt.finiteSourceCurrentCoupledIsTrue
+          SourceCoupling.canonicalStrictSelectedSourceCurrentCouplingReceipt
+    ; strictYMRealCarrierBoundaryChecked =
+        RealYMBoundary.YMFiniteSelectedPairingToRealCarrierBoundary.selectedPairingCalculated
+          RealYMBoundary.canonicalYMFiniteSelectedPairingToRealCarrierBoundary
+    ; strictYMRealCarrierBoundaryCheckedIsTrue =
+        RealYMBoundary.YMFiniteSelectedPairingToRealCarrierBoundary.selectedPairingCalculatedIsTrue
+          RealYMBoundary.canonicalYMFiniteSelectedPairingToRealCarrierBoundary
+    ; defectCriticalSeamTheoremPromoted =
+        CriticalSeam.DefectQuadraticParallelogramCriticalSeam.criticalSeamTheoremProved
+          CriticalSeam.canonicalDefectQuadraticParallelogramCriticalSeam
+    ; defectCriticalSeamTheoremPromotedIsFalse =
+        CriticalSeam.DefectQuadraticParallelogramCriticalSeam.criticalSeamTheoremProvedIsFalse
+          CriticalSeam.canonicalDefectQuadraticParallelogramCriticalSeam
     ; higgsEmpiricalPromotion =
         Higgs.StandardModelHiggsCovariantComparisonLaw.empiricalValidationPromoted
           Higgs.canonicalStandardModelHiggsCovariantComparisonLaw
@@ -416,10 +620,11 @@ canonicalUnificationCriticalPathReceipt =
     ; terminalPromotionIsFalse =
         refl
     ; sprintDecision =
-        "Do not spend another sprint rediscovering Hodge: finite Route-B and pure zero-current D * F = J are already checked"
-        ∷ "The YM proof calculation is now the strict selected variation pairing over the user-supplied variation/action carriers"
-        ∷ "Do not spend another sprint asking whether contraction gives a quadratic spine on the shift carrier: the internal theorem and dependency index are already inhabited"
-        ∷ "The broader open theorem is strict contraction plus defect monotonicity plus admissibility quotient plus hierarchy consistency forcing the projection-defect/parallelogram package"
+        "Do not spend another sprint rediscovering Hodge: finite Route-B, selected source-current coupling, matter-current conservation boundary, conditional real D * F = J target, and Hamiltonian quotient normalizer are now checked"
+        ∷ "The exact next physical YM blockers remain missingCurrentSourceCouplingToMatter, missingDStarFEqualsJLaw, and missingSelfAdjointYangMillsHamiltonianOnCarrierQuotient"
+        ∷ "Do not spend another sprint asking whether contraction gives a quadratic spine on the shift carrier: the internal theorem, dependency index, identity composite, concrete shift reducer, and generalization obstruction matrix are inhabited"
+        ∷ "The broader open theorem remains missingDefectAdmissibilityHierarchyToParallelogram, with real agreement/operator/downstream transfer as subsequent blockers"
+        ∷ "The checked next analytic calculation index names six current calculations: matter-current coupling, real D * F = J, self-adjoint YM Hamiltonian quotient, broad defect seam, Higgs authority replacement, and metrology authority binding"
         ∷ "The next empirical calculation is authority replacement for the Higgs fixture baseline and raw HEPData vector binding"
         ∷ "Terminal unification remains false until lane promotions or authority boundaries compose without contradiction"
         ∷ []
@@ -435,6 +640,67 @@ canonicalUnificationCriticalPathHodgeBlockerIsVariationPairing :
   ≡
   YMObs.missingVariationPairingForSelectedHodgeStar
 canonicalUnificationCriticalPathHodgeBlockerIsVariationPairing =
+  refl
+
+canonicalUnificationCriticalPathStrictSelectedFiniteVariationPairingChecked :
+  strictYMSelectedFiniteVariationPairingChecked
+    canonicalUnificationCriticalPathReceipt
+  ≡
+  true
+canonicalUnificationCriticalPathStrictSelectedFiniteVariationPairingChecked =
+  refl
+
+canonicalUnificationCriticalPathStrictSelectedHodgeAlgebraChecked :
+  strictYMSelectedHodgeAlgebraChecked
+    canonicalUnificationCriticalPathReceipt
+  ≡
+  true
+canonicalUnificationCriticalPathStrictSelectedHodgeAlgebraChecked =
+  refl
+
+canonicalUnificationCriticalPathStrictSelectedNonzeroActionVariationChecked :
+  strictYMSelectedNonzeroActionVariationChecked
+    canonicalUnificationCriticalPathReceipt
+  ≡
+  true
+canonicalUnificationCriticalPathStrictSelectedNonzeroActionVariationChecked =
+  refl
+
+canonicalUnificationCriticalPathStrictSelectedSourceCurrentCouplingChecked :
+  strictYMSelectedSourceCurrentCouplingChecked
+    canonicalUnificationCriticalPathReceipt
+  ≡
+  true
+canonicalUnificationCriticalPathStrictSelectedSourceCurrentCouplingChecked =
+  refl
+
+canonicalUnificationCriticalPathStrictYMRealCarrierBoundaryChecked :
+  strictYMRealCarrierBoundaryChecked
+    canonicalUnificationCriticalPathReceipt
+  ≡
+  true
+canonicalUnificationCriticalPathStrictYMRealCarrierBoundaryChecked =
+  refl
+
+canonicalUnificationCriticalPathPhysicalYMMatterSourceBlocker :
+  exactPhysicalYMMatterSourceBlocker canonicalUnificationCriticalPathReceipt
+  ≡
+  YMObs.missingCurrentSourceCouplingToMatter
+canonicalUnificationCriticalPathPhysicalYMMatterSourceBlocker =
+  refl
+
+canonicalUnificationCriticalPathRealSourcedYMDStarFBlocker :
+  exactRealSourcedYMDStarFBlocker canonicalUnificationCriticalPathReceipt
+  ≡
+  YMObs.missingDStarFEqualsJLaw
+canonicalUnificationCriticalPathRealSourcedYMDStarFBlocker =
+  refl
+
+canonicalUnificationCriticalPathDefectCriticalSeamTheoremOpen :
+  defectCriticalSeamTheoremPromoted canonicalUnificationCriticalPathReceipt
+  ≡
+  false
+canonicalUnificationCriticalPathDefectCriticalSeamTheoremOpen =
   refl
 
 canonicalUnificationCriticalPathQuadraticSpineChecked :

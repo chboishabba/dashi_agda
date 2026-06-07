@@ -7,16 +7,20 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.YangMillsFieldEquationObstruction as YM
+import DASHI.Physics.Closure.YMStrictSelectedBoundaryCancellationCriterion as BoundaryCriterion
+import DASHI.Physics.Closure.YMStrictSelectedHodgeAlgebraLaws as HodgeAlgebra
 import DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing as StrictPairing
+import DASHI.Physics.Closure.YMStrictSelectedNonzeroActionVariation as NonzeroVariation
+import DASHI.Physics.Closure.YMStrictSelectedSourceCurrentCoupling as SourceCoupling
 
 ------------------------------------------------------------------------
 -- Strict Hodge/variation blocker index.
 --
 -- This receipt is intentionally disjoint from the large obstruction module.
 -- It records the strongest currently inhabited finite Route-B evidence and
--- consumes the strict selected-Hodge variation calculation.  The strict
--- pairing function type is now inhabited vacuously; non-vacuous selected
--- action variation remains blocked.
+-- consumes the strict selected-Hodge variation calculation.  The finite
+-- selected zero-boundary pairing is now inhabited over the user-supplied
+-- variation/action carriers; physical Yang-Mills promotion remains blocked.
 
 listCount : {A : Set} → List A → Nat
 listCount [] =
@@ -34,7 +38,19 @@ data YMStrictHodgeVariationRow : Set where
   strictSelectedHodgeVariationBlockerRow :
     YMStrictHodgeVariationRow
 
-  vacuousStrictSelectedHodgeVariationCalculatedRow :
+  strictSelectedFiniteHodgeVariationCalculatedRow :
+    YMStrictHodgeVariationRow
+
+  strictSelectedHodgeAlgebraCalculatedRow :
+    YMStrictHodgeVariationRow
+
+  strictSelectedBoundaryCancellationCalculatedRow :
+    YMStrictHodgeVariationRow
+
+  strictSelectedNonzeroActionVariationCalculatedRow :
+    YMStrictHodgeVariationRow
+
+  strictSelectedSourceCurrentCouplingCalculatedRow :
     YMStrictHodgeVariationRow
 
   nonPromotingBoundaryRow :
@@ -46,7 +62,11 @@ canonicalYMStrictHodgeVariationRows =
   pureZeroCurrentDStarFEqualsJFiniteRow
   ∷ finiteDiscreteIBPLowerLawRow
   ∷ strictSelectedHodgeVariationBlockerRow
-  ∷ vacuousStrictSelectedHodgeVariationCalculatedRow
+  ∷ strictSelectedFiniteHodgeVariationCalculatedRow
+  ∷ strictSelectedHodgeAlgebraCalculatedRow
+  ∷ strictSelectedBoundaryCancellationCalculatedRow
+  ∷ strictSelectedNonzeroActionVariationCalculatedRow
+  ∷ strictSelectedSourceCurrentCouplingCalculatedRow
   ∷ nonPromotingBoundaryRow
   ∷ []
 
@@ -96,11 +116,43 @@ record YMStrictHodgeVariationBlockerIndex : Set₁ where
       ≡
       StrictPairing.canonicalStrictSelectedHodgeVariationPairingCalculation
 
-    vacuousStrictPairingCalculated :
+    strictSelectedHodgeAlgebraLaws :
+      HodgeAlgebra.StrictSelectedHodgeAlgebraLaws
+
+    strictSelectedHodgeAlgebraLawsIsCanonical :
+      strictSelectedHodgeAlgebraLaws
+      ≡
+      HodgeAlgebra.canonicalStrictSelectedHodgeAlgebraLaws
+
+    strictSelectedBoundaryCancellationCriterion :
+      BoundaryCriterion.StrictSelectedBoundaryCancellationCriterion
+
+    strictSelectedBoundaryCancellationCriterionIsCanonical :
+      strictSelectedBoundaryCancellationCriterion
+      ≡
+      BoundaryCriterion.canonicalStrictSelectedBoundaryCancellationCriterion
+
+    strictSelectedNonzeroActionVariation :
+      NonzeroVariation.StrictSelectedNonzeroActionVariationCalculation
+
+    strictSelectedNonzeroActionVariationIsCanonical :
+      strictSelectedNonzeroActionVariation
+      ≡
+      NonzeroVariation.canonicalStrictSelectedNonzeroActionVariationCalculation
+
+    strictSelectedSourceCurrentCoupling :
+      SourceCoupling.StrictSelectedSourceCurrentCouplingReceipt
+
+    strictSelectedSourceCurrentCouplingIsCanonical :
+      strictSelectedSourceCurrentCoupling
+      ≡
+      SourceCoupling.canonicalStrictSelectedSourceCurrentCouplingReceipt
+
+    strictSelectedFinitePairingCalculated :
       Bool
 
-    vacuousStrictPairingCalculatedIsTrue :
-      vacuousStrictPairingCalculated ≡ true
+    strictSelectedFinitePairingCalculatedIsTrue :
+      strictSelectedFinitePairingCalculated ≡ true
 
     exactStrictVariationBlocker :
       YM.YangMillsVariationalEquationMissingPrimitive
@@ -109,6 +161,14 @@ record YMStrictHodgeVariationBlockerIndex : Set₁ where
       exactStrictVariationBlocker
       ≡
       YM.missingVariationPairingForSelectedHodgeStar
+
+    exactPhysicalSourceBlocker :
+      YM.YangMillsVariationalEquationMissingPrimitive
+
+    exactPhysicalSourceBlockerIsCurrentSourceCoupling :
+      exactPhysicalSourceBlocker
+      ≡
+      YM.missingCurrentSourceCouplingToMatter
 
     pureZeroCurrentDStarFEqualsJInhabited :
       Bool
@@ -143,8 +203,8 @@ record YMStrictHodgeVariationBlockerIndex : Set₁ where
     rowCount :
       Nat
 
-    rowCountIs5 :
-      rowCount ≡ 5
+    rowCountIs9 :
+      rowCount ≡ 9
 
     receiptBoundary :
       List String
@@ -175,13 +235,33 @@ canonicalYMStrictHodgeVariationBlockerIndex =
         StrictPairing.canonicalStrictSelectedHodgeVariationPairingCalculation
     ; strictSelectedHodgeVariationPairingCalculationIsCanonical =
         refl
-    ; vacuousStrictPairingCalculated =
+    ; strictSelectedHodgeAlgebraLaws =
+        HodgeAlgebra.canonicalStrictSelectedHodgeAlgebraLaws
+    ; strictSelectedHodgeAlgebraLawsIsCanonical =
+        refl
+    ; strictSelectedBoundaryCancellationCriterion =
+        BoundaryCriterion.canonicalStrictSelectedBoundaryCancellationCriterion
+    ; strictSelectedBoundaryCancellationCriterionIsCanonical =
+        refl
+    ; strictSelectedNonzeroActionVariation =
+        NonzeroVariation.canonicalStrictSelectedNonzeroActionVariationCalculation
+    ; strictSelectedNonzeroActionVariationIsCanonical =
+        refl
+    ; strictSelectedSourceCurrentCoupling =
+        SourceCoupling.canonicalStrictSelectedSourceCurrentCouplingReceipt
+    ; strictSelectedSourceCurrentCouplingIsCanonical =
+        refl
+    ; strictSelectedFinitePairingCalculated =
         true
-    ; vacuousStrictPairingCalculatedIsTrue =
+    ; strictSelectedFinitePairingCalculatedIsTrue =
         refl
     ; exactStrictVariationBlocker =
         YM.missingVariationPairingForSelectedHodgeStar
     ; exactStrictVariationBlockerIsMissingSelectedHodgePairing =
+        refl
+    ; exactPhysicalSourceBlocker =
+        YM.missingCurrentSourceCouplingToMatter
+    ; exactPhysicalSourceBlockerIsCurrentSourceCoupling =
         refl
     ; pureZeroCurrentDStarFEqualsJInhabited =
         true
@@ -204,21 +284,23 @@ canonicalYMStrictHodgeVariationBlockerIndex =
     ; rowIndexIsCanonical =
         refl
     ; rowCount =
-        5
-    ; rowCountIs5 =
+        9
+    ; rowCountIs9 =
         refl
     ; receiptBoundary =
         "Inhabited: Gate 3 pure-YM finite carrier-level D * F = J with J = 0, via the canonical zero-current supply"
         ∷ "Inhabited: finite discrete IBP lower law, where zero variation splits as zero Euler-Lagrange pairing plus zero boundary term"
-        ∷ "Calculated: the strict selected-Hodge variation pairing function type is inhabited by empty elimination over YMSFGCUserSuppliedVariationCarrier"
-        ∷ "Still blocked: non-vacuous selected action variation and non-empty user variation/action-scalar carriers are not supplied"
+        ∷ "Calculated: the strict selected finite Hodge variation pairing is inhabited over YMSFGCUserSuppliedVariationCarrier and YMSFGCUserSuppliedActionScalarCarrier"
+        ∷ "Calculated: selected finite Hodge algebra, zero-boundary cancellation, nonzero finite action split, and selected source-current carrier coupling are inhabited"
+        ∷ "Boundary: the finite-to-real carrier boundary is intentionally consumed by the critical-path receipt, not imported back here"
+        ∷ "Still blocked: physical matter/source authority, real sourced D * F = J, self-adjoint real-carrier YM Hamiltonian, and continuum mass-gap promotion are not supplied"
         ∷ "Non-promoting: this receipt does not assert strict D * F = J, physical Yang-Mills, continuum mass gap, Clay, or terminal unification"
         ∷ []
     }
 
-canonicalYMStrictHodgeVariationRowCountIs5 :
-  listCount canonicalYMStrictHodgeVariationRows ≡ 5
-canonicalYMStrictHodgeVariationRowCountIs5 =
+canonicalYMStrictHodgeVariationRowCountIs9 :
+  listCount canonicalYMStrictHodgeVariationRows ≡ 9
+canonicalYMStrictHodgeVariationRowCountIs9 =
   refl
 
 canonicalYMStrictHodgeVariationPureZeroCurrentIsInhabited :
@@ -237,12 +319,12 @@ canonicalYMStrictHodgeVariationFiniteIBPIsInhabited :
 canonicalYMStrictHodgeVariationFiniteIBPIsInhabited =
   refl
 
-canonicalYMStrictHodgeVariationVacuousPairingCalculated :
-  YMStrictHodgeVariationBlockerIndex.vacuousStrictPairingCalculated
+canonicalYMStrictHodgeVariationSelectedFinitePairingCalculated :
+  YMStrictHodgeVariationBlockerIndex.strictSelectedFinitePairingCalculated
     canonicalYMStrictHodgeVariationBlockerIndex
   ≡
   true
-canonicalYMStrictHodgeVariationVacuousPairingCalculated =
+canonicalYMStrictHodgeVariationSelectedFinitePairingCalculated =
   refl
 
 canonicalYMStrictHodgeVariationBlockerIsExact :
@@ -251,6 +333,14 @@ canonicalYMStrictHodgeVariationBlockerIsExact :
   ≡
   YM.missingVariationPairingForSelectedHodgeStar
 canonicalYMStrictHodgeVariationBlockerIsExact =
+  refl
+
+canonicalYMStrictHodgeVariationPhysicalSourceBlockerIsExact :
+  YMStrictHodgeVariationBlockerIndex.exactPhysicalSourceBlocker
+    canonicalYMStrictHodgeVariationBlockerIndex
+  ≡
+  YM.missingCurrentSourceCouplingToMatter
+canonicalYMStrictHodgeVariationPhysicalSourceBlockerIsExact =
   refl
 
 canonicalYMStrictHodgeVariationDoesNotPromote :
