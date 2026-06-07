@@ -12,10 +12,32 @@ For a new serious reader, the important split is:
 For the current "DASHI as simulator" orientation, start with
 `Docs/SimulatorRoadmap.md`. It explains the checked unified facade, the
 cross-scale matter ladder, and the first recommended quantitative slice:
-composition vector -> toy matter/force carrier -> stability observable ->
+composition vector -> bounded matter/force proxy carrier -> stability observable ->
 receipt -> fail-closed Agda guard. This is a simulator scaffold and roadmap,
 not a claim that the repo already derives arbitrary physics, chemistry,
 biology, stellar, or clinical predictions.
+The first executable slice is now present as
+`scripts/run_stellar_composition_proxy_diagnostic.py` with the Agda guard
+`DASHI.Unified.StellarCompositionProxyReceipt`; it remains proxy-only and
+non-promoting.
+The broader route/lane joining plan is `Docs/UnifiedRoutesLanePlan.md`, which
+extends the same receipt-gated architecture across physics, empirical,
+biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
+
+Current NS Sprint 129 boundary: the axisymmetric-with-swirl route is now
+recorded in executable fail-closed surfaces.  The audit
+`scripts/ns_sprint129_advective_concentration_audit.py` encodes the exact
+system `D u1/Dt = nu * L~ u1` and
+`D omega1/Dt = partial_z(u1^2) + nu * L~ omega1`, the no-log
+axisymmetric Biot-Savart status, and the strict viscous feasibility window
+`1 < alpha < 3/2`, `beta = alpha - 1`.  The sampler
+`scripts/ns_sprint129_feasibility_window_sampler.py` checks that window on a
+fixed rational grid, and
+`scripts/ns_sprint129_source_balance_classifier.py` separates the formal
+quadratic-source case from the source-collapse obstruction.  The single live
+gate is `AdvectiveConcentrationVsDiffusionBound`, namely whether
+`||u1||_inf >= c ||omega1||_inf` can be proved before diffusion collapses the
+source.  `clayNavierStokesPromoted` remains false.
 
 Current YM boundary: Sprint 89 closes the lattice mass-gap provider in the
 scoped-authority receipt sense. Sprint 90 records the continuum survival

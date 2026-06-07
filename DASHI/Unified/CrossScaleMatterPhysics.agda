@@ -11,6 +11,7 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.UnifiedMathLanguageAssertedProofs as Asserted
 import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Unified.StellarCompositionProxyReceipt as StellarProxy
 
 ------------------------------------------------------------------------
 -- Cross-scale matter/physics parent.
@@ -97,6 +98,9 @@ record CrossScaleMatterPhysicsSurface : Setω where
     physicsChemistryBiologyDNADischargePromotedIsFalse :
       physicsChemistryBiologyDNADischargePromoted ≡ false
 
+    stellarCompositionProxyReceipt :
+      StellarProxy.StellarCompositionProxyReceipt
+
     matterScales :
       List MatterScale
 
@@ -149,6 +153,8 @@ canonicalCrossScaleMatterPhysicsSurface =
         false
     ; physicsChemistryBiologyDNADischargePromotedIsFalse =
         refl
+    ; stellarCompositionProxyReceipt =
+        StellarProxy.canonicalStellarCompositionProxyReceipt
     ; matterScales =
         canonicalMatterScales
     ; matterScalesAreCanonical =

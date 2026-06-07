@@ -22,6 +22,9 @@ canonical closure spine:
 - `DASHI/Physics/Closure/Canonical/LocalProgramBundle.agda`
 - `DASHI/Physics/Closure/Canonical/Ladder.agda`
 - `DASHI/Physics/Closure/PhysicsClosureSummary.agda`
+- `DASHI/Unified/StellarCompositionProxyReceipt.agda`
+- `DASHI/Unified/CrossScaleMatterPhysics.agda`
+- `DASHI/Unified/Everything.agda`
 - `DASHI/Algebra/TritTriTruthBridge.agda`
 - `DASHI/Algebra/MoonshineBridge.agda`
 - `DASHI/Algebra/StageQuotient.agda`

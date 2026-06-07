@@ -3,6 +3,23 @@
 
 # P0 BLOCKERS
 
+• Sprint 129 NS advective concentration versus diffusion audit is implemented.
+
+  Status:
+
+  - adds executable fail-closed surfaces for the exact axisymmetric-with-swirl
+    PDE facts, the strict viscous feasibility window, and the source-balance
+    alternatives;
+  - generates `outputs/ns_sprint129_advective_concentration_audit/`,
+    `outputs/ns_sprint129_feasibility_window_sampler/`, and
+    `outputs/ns_sprint129_source_balance_classifier/`;
+  - records `D u1/Dt = nu * L~ u1`, the exact
+    `partial_z(u1^2) = 2 u1 partial_z u1` source for omega1, and the no-log
+    axisymmetric Biot-Savart status;
+  - keeps the single live gate
+    `AdvectiveConcentrationVsDiffusionBound` open and keeps
+    `clayNavierStokesPromoted` false.
+
 • Sprint 120 certificate audit is implemented.
 
   Status:

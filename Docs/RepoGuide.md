@@ -18,6 +18,13 @@ It is the entrypoint for interpreting DASHI as a receipt-gated simulator
 scaffold: objects inherit parent lane structure, speak the unified carrier
 grammar, and only become quantitative through explicit receipts and
 fail-closed promotion guards.
+The first executable simulator slice is the bounded stellar-composition proxy
+diagnostic in `scripts/run_stellar_composition_proxy_diagnostic.py`, guarded by
+`DASHI.Unified.StellarCompositionProxyReceipt`; it does not promote stellar
+evolution or solar-instability claims.
+The repo-wide route joining plan is `Docs/UnifiedRoutesLanePlan.md`; it extends
+the same carrier -> observable -> receipt -> guard pattern across physics,
+empirical, biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
 
 Use claim-level language carefully:
 
@@ -48,6 +55,7 @@ Read these as authoritative or near-authoritative:
 - `README.md` for current repo-facing orientation and diagram pointers.
 - `Docs/SimulatorRoadmap.md` for the simulator scaffold, first quantitative
   slice, and cross-scale matter prediction boundary.
+- `Docs/UnifiedRoutesLanePlan.md` for the route/lane unification plan.
 - `architecture.md` for the canonical theorem route and diagram entrypoints.
 - `Docs/CanonicalProofSpine.md` for the single proof spine to cite in docs and
   imports.

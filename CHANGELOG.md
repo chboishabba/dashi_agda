@@ -6,6 +6,16 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 129 NS advective concentration audit for `2026-06-07`: adds
+  `scripts/ns_sprint129_advective_concentration_audit.py`,
+  `scripts/ns_sprint129_feasibility_window_sampler.py`, and
+  `scripts/ns_sprint129_source_balance_classifier.py`, with matching generated
+  output receipts.  The tranche records the exact axisymmetric-with-swirl
+  amplification system, the no-log Biot-Savart status, and the strict
+  `1 < alpha < 3/2`, `beta = alpha - 1` feasibility window.  The remaining
+  gate is `AdvectiveConcentrationVsDiffusionBound`; Clay Navier-Stokes
+  promotion remains false.
+
 - Sprint 120 certificate audit for `2026-06-06`: adds checked modules for
   external common-carrier construction certificates, weak compactness
   certificates, common-carrier feed-through closure reduction, Mosco aggregate

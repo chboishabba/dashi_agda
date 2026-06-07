@@ -5,6 +5,8 @@ Declared surface level: `packaging` and `roadmap`.
 This note is the entry surface for the word "simulator" in this repo. It
 records what is already structurally available, what the first executable
 slice should be, and which claims remain blocked.
+For the broader plan that extends this receipt-gated route pattern across the
+other lanes, read `Docs/UnifiedRoutesLanePlan.md`.
 
 ## Current Simulator Meaning
 
@@ -71,7 +73,7 @@ stability and transition parents.
 
 The current state is therefore a typed simulator scaffold: objects can be put
 on the common carrier/projection spine, but most quantitative predictions are
-still external-baseline, toy, empirical, or blocked surfaces.
+still external-baseline, bounded proxy, empirical, or blocked surfaces.
 
 ## First Quantitative Slice
 
@@ -79,27 +81,28 @@ The first simulator slice should be narrow and non-promoting:
 
 ```text
 stellar composition vector
-  -> toy matter/force carrier
+  -> bounded matter/force proxy carrier
   -> stability observable
   -> JSON/CSV/Markdown numerical receipt
   -> Agda receipt with blocked promotion guards
 ```
 
-The recommended first target is a toy stellar-composition diagnostic, not a
-full Sun model.
+The first target is now an executable bounded stellar-composition diagnostic,
+not a full Sun model.
 
 Inputs:
 
 - hydrogen mass fraction;
 - helium mass fraction;
 - metal mass fraction;
-- optional normalized total-composition check.
+- optional normalized total-composition check;
+- repeatable named composition rows from the CLI.
 
-Toy observables:
+Bounded proxy observables:
 
 - mean-molecular-weight proxy;
-- central-pressure or support proxy;
-- energy-generation proxy;
+- support proxy ratio versus the reference composition;
+- energy-generation proxy ratio versus the reference composition;
 - stability score or regime label.
 
 Required output shape:
@@ -109,16 +112,26 @@ Required output shape:
 - Markdown report;
 - explicit booleans for `carrierInternalPrediction = false`,
   `stellarEvolutionPromoted = false`, `solarInstabilityClaimPromoted = false`,
-  and `externalBaselineOrToyOnly = true`.
+  and `externalBaselineOrProxyOnly = true`.
+
+Implemented surfaces:
+
+- `scripts/run_stellar_composition_proxy_diagnostic.py`
+- `tests/test_stellar_composition_proxy_diagnostic.py`
+- `DASHI.Unified.StellarCompositionProxyReceipt`
+- `DASHI.Unified.CrossScaleMatterPhysics`
 
 The implementation pattern should match existing audit lanes:
 
 - Python script in `scripts/`;
 - focused pytest file in `tests/`;
-- Agda receipt module under `DASHI/Unified` or
-  `DASHI/Physics/Closure`, depending on whether the receipt is treated as a
-  facade object or a physics closure support surface;
+- Agda receipt module under `DASHI/Unified`;
 - documentation update in this roadmap and the validation manifest.
+
+The staged real-model adapter path remains blocked until the proxy lane can be
+connected to accepted EOS, opacity, reaction-network, hydrostatic-solver, and
+empirical validation receipts without changing the fail-closed promotion
+guards.
 
 ## Blocked Claims
 

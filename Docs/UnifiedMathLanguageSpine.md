@@ -18,6 +18,10 @@ This is also the grammar for the simulator roadmap in
 because it has evocative vocabulary. It is useful when it can be put on this
 carrier grammar, projected to observables, compared by residual, and tied to a
 formal or numerical receipt with explicit promotion guards.
+The first executable simulator slice follows that grammar as a bounded
+stellar-composition proxy diagnostic with an Agda receipt guard; it remains
+non-promoting while the real EOS, opacity, reaction-network, hydrostatic, and
+validation authorities are absent.
 
 The checked Agda inhabitant is:
 
@@ -36,6 +40,7 @@ The checked facade invariant layer is:
 - `DASHI.Unified.InvariantSpine`
 - `DASHI.Unified.FormalObjectParents`
 - `DASHI.Unified.CrossScaleMatterPhysics`
+- `DASHI.Unified.StellarCompositionProxyReceipt`
 - `DASHI.Unified.Everything`
 
 The immediate carrier spine it builds on is:

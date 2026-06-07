@@ -8,9 +8,17 @@ empirical lane sits, and what remains speculative.
 
 If the question is "where is the simulator surface?", read
 `SimulatorRoadmap.md` before this guide. The simulator roadmap explains the
-unified parent/facade scaffold and the first proposed quantitative slice. This
+unified parent/facade scaffold and the first bounded quantitative slice. This
 physics guide then explains which physics claims are theorem-bearing,
 bridge-only, empirical, or still speculative.
+
+The current executable simulator slice is a stellar-composition proxy
+diagnostic, not a promoted stellar model. Its Agda receipt records the missing
+real-model authorities: carrier-derived matter/force law, EOS, opacity,
+reaction network, hydrostatic solver, and empirical validation.
+The route/lane joining plan is `UnifiedRoutesLanePlan.md`; it generalizes the
+same fail-closed receipt pattern to Maxwell/gauge, Yang-Mills, Schrodinger,
+GR, empirical, biology, runtime, arithmetic, and Gate 3 surfaces.
 
 ## Canonical Claim Owners
 
