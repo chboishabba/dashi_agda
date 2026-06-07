@@ -1,3 +1,39 @@
+# 2026-06-08 transfer-hardening boundary round
+
+- Added checked NS hardening modules:
+  `DASHI.Physics.Closure.NSTrueLerayTriadicZeroModeClassificationBoundary`,
+  `DASHI.Physics.Closure.NSAbelTriadicDefectMeasureConstructionBoundary`, and
+  `DASHI.Physics.Closure.NSTriadicCompensatedLeakageIdentityBoundary`.
+  They separate the finite symbolic gate
+  `TrueLerayTriadicZeroModeClassification` from the analytic gates
+  `AbelTriadicDefectMeasureConstruction`,
+  `PlancherelTriadicToSquareFunction`, `LeakageSquareFunctionIdentity`, and
+  `TriadicLeakageSquareFunctionCoercivity`.
+- The NS P0 calculation is now explicit and fail-closed:
+  first compute/prove
+  `CascadeClosedZeroModeOutputWidth`; then prove the signed compensated
+  leakage identity
+  `P_r + S_r <= C D_r - c (int_R lambda_NS^triad d mu_r) D_r + lower order`.
+  Ordinary CZ/LP/Coifman-Meyer boundedness remains tooling only, not a strict
+  depletion theorem.
+- Added checked YM transfer boundary
+  `DASHI.Physics.Closure.YMBruhatTitsToOSLatticeTransferBoundary`.  It records
+  external 2026 OS/mass-gap preprints as candidate authorities only and keeps
+  BT-to-Wilson action comparison, reflection positivity, DS/clustering
+  hypotheses, observable-class inclusion, no spectral pollution, and Clay YM
+  promotion open/false.
+- Added checked unification boundary
+  `DASHI.Physics.Closure.DefectSheafGluingFourPointParallelogramBoundary`.
+  It records the sheafified route from local defect sections and gluing
+  residuals to `HierarchyConsistencyKillsFourPointDefect`, then
+  parallelogram/quadratic emergence.  The broad hierarchy-consistency theorem,
+  quadratic emergence, signature/Clifford consumers, Clay promotion, and
+  terminal promotion remain false.
+- `DASHI/Everything.agda` now imports the new hardening modules and keeps the
+  historical single-angle `NSZeroModeGreatCircleGeometryTheorem` quarantined
+  from aggregate validation until its old `Setω`/canonical-equality style is
+  ported.  The module file remains intact as an archived support surface.
+
 # 2026-06-08 triadic NS / holonomy YM correction round
 
 - Added checked NS triadic boundary modules:

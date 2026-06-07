@@ -208,12 +208,14 @@ import DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy
 import DASHI.Physics.Closure.DNAClifford256StructuralCoincidenceReceipt
 import DASHI.Physics.Closure.DefectFourPointParallelogramLawBoundary
 import DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary
+import DASHI.Physics.Closure.DefectSheafGluingFourPointParallelogramBoundary
 import DASHI.Physics.Closure.FiniteGaugeHodgeAdjointCompatibility
 import DASHI.Physics.Closure.FiniteDepthBoundaryObservablePromotionPipeline
 import DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary
 import DASHI.Physics.Closure.NSLeiRenTianGreatCircleCriterionBoundary
 import DASHI.Physics.Closure.NSDefectLaplacianRankOneSpectrum
 import DASHI.Physics.Closure.NSGreatCircleZeroModeTrapExclusionBoundary
+import DASHI.Physics.Closure.NSAbelTriadicDefectMeasureConstructionBoundary
 import DASHI.Physics.Closure.NSCascadeClosedZeroModeOutputWidthBoundary
 import DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary
 import DASHI.Physics.Closure.NSMonodromyIntegralBoundFinite
@@ -226,8 +228,10 @@ import DASHI.Physics.Closure.NSThreeCaseDefectResidualExhaustionFinite
 import DASHI.Physics.Closure.NSTransverseSigmaNeighborhoodGeometry
 import DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary
 import DASHI.Physics.Closure.NSTriadicAngularDefectSheafLeakageBoundary
+import DASHI.Physics.Closure.NSTriadicCompensatedLeakageIdentityBoundary
 import DASHI.Physics.Closure.NSTriadicLeakageSquareFunctionCoercivityBoundary
 import DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol
+import DASHI.Physics.Closure.NSTrueLerayTriadicZeroModeClassificationBoundary
 -- Archived legacy single-angle great-circle geometry receipt.
 -- Superseded for aggregate validation by the true triadic Leray route above.
 -- Keep the module file intact, but do not import it through Everything until
@@ -239,6 +243,7 @@ import DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary
 import DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt
 import DASHI.Physics.Closure.UniformProjectionNonlocalityGapFinite
 import DASHI.Physics.Closure.YMBTMetricRatioDefectGapFinite
+import DASHI.Physics.Closure.YMBruhatTitsToOSLatticeTransferBoundary
 import DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary
 import DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary
 import DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientGapBoundary

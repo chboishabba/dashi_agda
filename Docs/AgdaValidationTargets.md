@@ -24,11 +24,16 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/NSGreatCircleZeroModeTrapExclusionBoundary.agda`
 - `DASHI/Physics/Closure/NSZeroModeGreatCircleGeometryTheorem.agda`
 - `DASHI/Physics/Closure/NSTangentialZeroModePressureStarvationBoundary.agda`
+- `DASHI/Physics/Closure/NSTrueLerayTriadicZeroModeClassificationBoundary.agda`
+- `DASHI/Physics/Closure/NSAbelTriadicDefectMeasureConstructionBoundary.agda`
+- `DASHI/Physics/Closure/NSTriadicCompensatedLeakageIdentityBoundary.agda`
 - `DASHI/Physics/Closure/YMGaugeZeroModeVacuumRigidityBoundary.agda`
 - `DASHI/Physics/Closure/YMHamiltonianDominatesFiniteHodgeDefectBoundary.agda`
+- `DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda`
 - `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
 - `DASHI/Physics/Closure/YMWeightedBTAdjointKappaCalculation.agda`
 - `DASHI/Physics/Closure/DefectFourPointParallelogramLawBoundary.agda`
+- `DASHI/Physics/Closure/DefectSheafGluingFourPointParallelogramBoundary.agda`
 
 ## Safe Routine Targets
 
@@ -115,6 +120,9 @@ canonical closure spine:
 - `DASHI/Physics/Closure/NSTransverseSigmaNeighborhoodGeometry.agda`
 - `DASHI/Physics/Closure/NSNonRadialityQuantificationAverage.agda`
 - `DASHI/Physics/Closure/NSMicrolocalDefectMassConstructionBoundary.agda`
+- `DASHI/Physics/Closure/NSTrueLerayTriadicZeroModeClassificationBoundary.agda`
+- `DASHI/Physics/Closure/NSAbelTriadicDefectMeasureConstructionBoundary.agda`
+- `DASHI/Physics/Closure/NSTriadicCompensatedLeakageIdentityBoundary.agda`
 - `DASHI/Physics/Closure/ProjectionNonlocalityDefectLaplacianZeroModeSheaf.agda`
 - `DASHI/Physics/Closure/NSZeroModeSetClassificationBoundary.agda`
 - `DASHI/Physics/Closure/NSLeiRenTianRadialZeroModeAuthorityBoundary.agda`

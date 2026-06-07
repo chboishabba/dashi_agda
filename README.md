@@ -181,23 +181,43 @@ defect sheaf with Lei-Ren-Tian output condition, and the corrected
 square-function/coercivity transfer target.  Tao averaged-NS is recorded as a
 falsifiability guard, and ordinary Calderon-Zygmund/Littlewood-Paley
 boundedness is explicitly rejected as a source of strict depletion by itself.
+The hardening receipts
+`DASHI.Physics.Closure.NSTrueLerayTriadicZeroModeClassificationBoundary`,
+`DASHI.Physics.Closure.NSAbelTriadicDefectMeasureConstructionBoundary`, and
+`DASHI.Physics.Closure.NSTriadicCompensatedLeakageIdentityBoundary` now split
+the current NS P0 into the finite symbolic gate
+`CascadeClosedZeroModeOutputWidth` and the analytic signed-transfer gate
+`TriadicCompensatedLeakageIdentity`.  The next analytic proof to calculate is
+not an improved generic multiplier norm; it is the compensated leakage
+identity that makes
+`int_R lambda_NS^triad d mu_r` enter the local pressure/stretching residual
+with a negative square-function correction.
 `NSLeiRenTianGreatCircleCriterionBoundary`,
 `NSLeiRenTianRadialZeroModeAuthorityBoundary`,
 `NSGreatCircleZeroModeTrapExclusionBoundary`, and
-`NSZeroModeGreatCircleGeometryTheorem` record the Lei-Ren-Tian 2025
-great-circle route as an external authority boundary plus fail-closed
-geometry/trap obligations.  `NSTangentialZeroModePressureStarvationBoundary`
+the archived `NSZeroModeGreatCircleGeometryTheorem` record the Lei-Ren-Tian
+2025 great-circle route as an external authority boundary plus fail-closed
+geometry/trap obligations.  The archived single-angle geometry module is no
+longer imported through `DASHI.Everything` until its historical
+`Setomega`/canonical-equality style is ported.  `NSTangentialZeroModePressureStarvationBoundary`
 keeps Buaria/Bodenschatz/Pumir as DNS evidence only.  For YM,
 `YMGaugeZeroModeVacuumRigidityBoundary` names the finite gauge-compatible
 zero-mode sheaf-rigidity target with holonomy classification, and
 `YMHamiltonianDominatesFiniteHodgeDefectBoundary` names the strengthened
 Hamiltonian domination target
-`H_d | Omega^perp >= c Delta_YM,d + c' Hol_d - E_d`.  Level-zero/cuspidal and
+`H_d | Omega^perp >= c Delta_YM,d + c' Hol_d - E_d`.
+`YMBruhatTitsToOSLatticeTransferBoundary` records external 2026
+OS/mass-gap preprints as candidate authorities only; DASHI still has to prove
+BT-to-Wilson action comparison, reflection positivity, clustering/DS
+hypotheses, observable-class inclusion, and no spectral pollution.  Level-zero/cuspidal and
 BT-building cohomology inputs are external-boundary rows only; the actual
 sheaf-rigidity, holonomy-action, self-adjoint quotient, OS, and continuum
 transfer proofs remain open.  For core unification,
 `DefectFourPointParallelogramLawBoundary` normalizes the exact four-point
-identity target.  The 2026-06-08 sprint verification policy used
+identity target, and
+`DefectSheafGluingFourPointParallelogramBoundary` records the sheafified
+route from local defect sections and gluing residuals to
+`HierarchyConsistencyKillsFourPointDefect`.  The 2026-06-08 sprint verification policy used
 `timeout 10s agda ...`; these heavy modules timed out under that cap rather
 than returning type errors, so longer targeted Agda checks are still required.
 Microlocal defect mass, deterministic depletion, radial/tangential/wedge

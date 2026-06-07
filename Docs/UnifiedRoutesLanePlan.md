@@ -83,6 +83,41 @@ and empirical authority. NS and YM have the highest analytic proof priority,
 but their receipts must still commute back into known PDE/QFT language before
 any Clay-facing or physical claim can be promoted.
 
+## Current Clay P0 Hardening Map
+
+The current Navier-Stokes route is no longer the historical single-angle
+zero-mode route.  Its live finite calculation is
+`CascadeClosedZeroModeOutputWidth`, supported by
+`NSTrueLerayTriadicDefectSymbol`,
+`NSTrueLerayTriadicZeroModeClassificationBoundary`,
+`NSCascadeClosedZeroModeOutputWidthBoundary`, and
+`NSTriadicAngularDefectSheafLeakageBoundary`.  Its live analytic calculation
+is `TriadicCompensatedLeakageIdentity`, supported by
+`NSAbelTriadicDefectMeasureConstructionBoundary`,
+`NSTriadicCompensatedLeakageIdentityBoundary`, and
+`NSTriadicLeakageSquareFunctionCoercivityBoundary`.  Ordinary CZ/LP and
+Coifman-Meyer estimates remain decomposition and boundedness tools only; the
+strict residual depletion must come from a signed leakage square-function
+identity for the true non-averaged Leray bilinear symbol.
+
+The current Yang-Mills route has two live calculations:
+`HamiltonianDominatesDefectPlusHolonomy`, recorded by
+`YMHamiltonianDominatesFiniteHodgeDefectBoundary`, and
+`BruhatTitsToOSLatticeTransfer`, recorded by
+`YMBruhatTitsToOSLatticeTransferBoundary`.  External 2026 OS/mass-gap
+preprints are candidate authority inputs only.  They do not discharge the
+DASHI BT-to-Wilson action comparison, reflection positivity, clustering,
+observable inclusion, no spectral pollution, or Clay-promotion gates.
+
+The current unification route is the sheafified four-point path:
+local defect sections plus gluing residual control must prove
+`HierarchyConsistencyKillsFourPointDefect`.  The governing surfaces are
+`DefectSheafGluingFourPointParallelogramBoundary`,
+`DefectFourPointParallelogramLawBoundary`, and
+`DefectHierarchyParallelogramGeneralizationBoundary`.  Quadratic emergence,
+signature/Clifford consumers, terminal unification, and Clay promotion remain
+blocked until that four-point law is actually proved.
+
 ## Known Constants And Laws Population
 
 Known constants and textbook/domain law references are populated through
