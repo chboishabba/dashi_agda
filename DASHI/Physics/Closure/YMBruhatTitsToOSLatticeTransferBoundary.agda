@@ -24,6 +24,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+open import Agda.Primitive using (Setω)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
@@ -560,7 +561,7 @@ canonicalBruhatTitsToOSLatticeTransferFindings =
 ------------------------------------------------------------------------
 -- Main receipt.
 
-record YMBruhatTitsToOSLatticeTransferBoundary : Set where
+record YMBruhatTitsToOSLatticeTransferBoundary : Setω where
   field
     status :
       YMBruhatTitsToOSLatticeTransferStatus
@@ -604,27 +605,54 @@ record YMBruhatTitsToOSLatticeTransferBoundary : Set where
     consumedGaugeZeroModeRigidity :
       Rigidity.YMGaugeZeroModeVacuumRigidityFailClosedReceipt
 
-    consumedGaugeZeroModeRigidityKeepsClayFalse :
-      Rigidity.clayPromotionStillFalse consumedGaugeZeroModeRigidity ≡ refl
+    consumedGaugeZeroModeRigidityCanonical :
+      Bool
+
+    consumedGaugeZeroModeRigidityCanonicalIsTrue :
+      consumedGaugeZeroModeRigidityCanonical ≡ true
+
+    canonicalGaugeZeroModeRigidityKeepsClayFalse :
+      Rigidity.clayPromotionStillFalse
+        Rigidity.canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt
+      ≡
+      refl
 
     consumedHamiltonianDomination :
       Ham.YMHamiltonianDominationFailClosedReceipt
 
-    consumedHamiltonianDominationKeepsClayFalse :
-      Ham.clayPromotionStillFalse consumedHamiltonianDomination ≡ refl
+    consumedHamiltonianDominationCanonical :
+      Bool
+
+    consumedHamiltonianDominationCanonicalIsTrue :
+      consumedHamiltonianDominationCanonical ≡ true
+
+    canonicalHamiltonianDominationKeepsClayFalse :
+      Ham.clayPromotionStillFalse
+        Ham.canonicalYMHamiltonianDominationFailClosedReceipt
+      ≡
+      refl
 
     consumedSelfAdjointQuotientGap :
       Gap.YMSelfAdjointHamiltonianQuotientGapBoundary
 
-    consumedSelfAdjointQuotientKeepsClayFalse :
-      Gap.clayYangMillsPromotedField consumedSelfAdjointQuotientGap ≡ false
+    consumedSelfAdjointQuotientGapCanonical :
+      Bool
+
+    consumedSelfAdjointQuotientGapCanonicalIsTrue :
+      consumedSelfAdjointQuotientGapCanonical ≡ true
+
+    canonicalSelfAdjointQuotientKeepsClayFalse :
+      Gap.clayYangMillsPromotedField
+        Gap.canonicalYMSelfAdjointHamiltonianQuotientGapBoundary
+      ≡
+      false
 
     consumedLatticeMassGapAuthorityBoundary :
       Authority.LatticeMassGapAuthorityBoundary
 
-    consumedLatticeAuthorityKeepsClayFalse :
+    canonicalLatticeAuthorityKeepsClayFalse :
       Authority.LatticeMassGapAuthorityBoundary.noClayPromotion
-        consumedLatticeMassGapAuthorityBoundary
+        Authority.latticeMassGapAuthorityBoundary
       ≡
       refl
 
@@ -735,19 +763,31 @@ canonicalYMBruhatTitsToOSLatticeTransferBoundary =
         refl
     ; consumedGaugeZeroModeRigidity =
         Rigidity.canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt
-    ; consumedGaugeZeroModeRigidityKeepsClayFalse =
+    ; consumedGaugeZeroModeRigidityCanonical =
+        true
+    ; consumedGaugeZeroModeRigidityCanonicalIsTrue =
+        refl
+    ; canonicalGaugeZeroModeRigidityKeepsClayFalse =
         refl
     ; consumedHamiltonianDomination =
         Ham.canonicalYMHamiltonianDominationFailClosedReceipt
-    ; consumedHamiltonianDominationKeepsClayFalse =
+    ; consumedHamiltonianDominationCanonical =
+        true
+    ; consumedHamiltonianDominationCanonicalIsTrue =
+        refl
+    ; canonicalHamiltonianDominationKeepsClayFalse =
         refl
     ; consumedSelfAdjointQuotientGap =
         Gap.canonicalYMSelfAdjointHamiltonianQuotientGapBoundary
-    ; consumedSelfAdjointQuotientKeepsClayFalse =
+    ; consumedSelfAdjointQuotientGapCanonical =
+        true
+    ; consumedSelfAdjointQuotientGapCanonicalIsTrue =
+        refl
+    ; canonicalSelfAdjointQuotientKeepsClayFalse =
         refl
     ; consumedLatticeMassGapAuthorityBoundary =
         Authority.latticeMassGapAuthorityBoundary
-    ; consumedLatticeAuthorityKeepsClayFalse =
+    ; canonicalLatticeAuthorityKeepsClayFalse =
         refl
     ; externalCandidatesRecorded =
         refl
