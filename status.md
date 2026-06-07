@@ -1,3 +1,33 @@
+# 2026-06-08 triadic NS / holonomy YM correction round
+
+- Added checked NS triadic boundary modules:
+  `DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol`,
+  `DASHI.Physics.Closure.NSCascadeClosedZeroModeOutputWidthBoundary`,
+  `DASHI.Physics.Closure.NSTriadicAngularDefectSheafLeakageBoundary`, and
+  `DASHI.Physics.Closure.NSTriadicLeakageSquareFunctionCoercivityBoundary`.
+- Corrected the NS zero-mode object: the Clay-facing obstruction is no longer
+  only a subset of `S^2`; it is a cascade-closed zero-mode sheaf over the true
+  non-averaged Leray bilinear interaction phase space with output projection
+  `pi_out`.  The old `Z_rad union Z_tan` single-angle split remains a
+  historical/fail-closed support surface only.
+- Recorded Tao averaged NS as a falsifiability guard: a theorem inherited by
+  ordinary averaged operators is too coarse.  Recorded Lei-Ren-Tian as an
+  external output great-circle condition.  Recorded that ordinary
+  Calderon-Zygmund/Littlewood-Paley boundedness does not by itself yield a
+  strict `C - c` depletion; the remaining analytic target is a bilinear
+  leakage square-function/coercivity estimate plus Carleson/angular embedding.
+- Extended YM boundaries:
+  `DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary` now records
+  `GaugeZeroModeSheafRigidity` with holonomy/cocycle classification targets,
+  and `DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`
+  now records the strengthened target
+  `H_d | Omega^perp >= c Delta_YM,d + c' Hol_d - E_d`.
+- Level-zero/cuspidal and BT-building cohomology inputs, as well as 2026
+  OS/Wightman-style continuum claims, remain external-boundary material only.
+  NS Clay, YM Clay, bilinear Carleson embedding, leakage-to-residual transfer,
+  GaugeZeroModeSheafRigidity, Hamiltonian domination, self-adjoint quotient,
+  continuum transfer, and terminal promotion remain false.
+
 # 2026-06-08 defect-Laplacian zero-mode boundary round
 
 - Extended the shared P0 module:

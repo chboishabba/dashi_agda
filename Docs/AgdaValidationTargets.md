@@ -119,6 +119,10 @@ canonical closure spine:
 - `DASHI/Physics/Closure/NSZeroModeSetClassificationBoundary.agda`
 - `DASHI/Physics/Closure/NSLeiRenTianRadialZeroModeAuthorityBoundary.agda`
 - `DASHI/Physics/Closure/NSTangentialZeroModePressureStarvationBoundary.agda`
+- `DASHI/Physics/Closure/NSTrueLerayTriadicDefectSymbol.agda`
+- `DASHI/Physics/Closure/NSCascadeClosedZeroModeOutputWidthBoundary.agda`
+- `DASHI/Physics/Closure/NSTriadicAngularDefectSheafLeakageBoundary.agda`
+- `DASHI/Physics/Closure/NSTriadicLeakageSquareFunctionCoercivityBoundary.agda`
 - `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
 - `DASHI/Physics/Closure/BTFiniteMetricGaugeCompatibilityKappaBoundary.agda`
 - `DASHI/Physics/Closure/YMWeightedBTAdjointKappaCalculation.agda`
@@ -153,6 +157,11 @@ Sprint165 P0 stack executable ledgers:
 The P0 stack originally recorded `BTFiniteHodgeVariationTheorem` and
 `AngularDegeneracyPressureCommutatorGain` as broad next calculations. The
 current narrowed validation frontier is
+`NSTrueLerayTriadicDefectSymbol`,
+`NSCascadeClosedZeroModeOutputWidthBoundary`,
+`NSTriadicAngularDefectSheafLeakageBoundary`, and
+`NSTriadicLeakageSquareFunctionCoercivityBoundary` for the corrected NS
+triadic interaction-symbol/sheaf/square-function route,
 `NSMicrolocalDefectMassConstructionBoundary` for the NS LP/semiclassical
 measure bootstrap, `YMSelfAdjointHamiltonianQuotientGapBoundary` for YM
 transfer/OS/self-adjoint quotient work, and
@@ -163,6 +172,10 @@ Sprint166 records the shared projection/nonlocality leakage frontier:
 `[Pi_+, R_i R_j]` is the NS matrix/eigenbundle pressure commutator target,
 `[d_A,*]F_A` is the YM/BT finite Hodge-gauge compatibility defect target, and
 scalar Fourier cutoffs are explicitly not the source of the pressure gain.
+The triadic correction also rejects ordinary Calderon-Zygmund/Littlewood-Paley
+boundedness as a source of strict `C - c` depletion; the strict target is a
+bilinear leakage square-function/coercivity estimate with a separate
+Carleson/angular embedding gap.
 - `DASHI/Physics/Closure/YMSelfAdjointHamiltonianQuotientRequirementNormalizer.agda`
 - `DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda`
 - `DASHI/Promotion/NumericAuthorityPayloadValidator.agda`

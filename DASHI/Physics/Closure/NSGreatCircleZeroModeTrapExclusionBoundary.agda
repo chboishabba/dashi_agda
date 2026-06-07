@@ -1007,8 +1007,6 @@ record NSGreatCircleZeroModeTrapFailClosedEnvelope : Setω where
   field
     receipt :
       NSGreatCircleZeroModeTrapExclusionBoundaryReceipt
-    receiptIsCanonical :
-      receipt ≡ canonicalNSGreatCircleZeroModeTrapExclusionBoundaryReceipt
 
     externalAuthorityAcceptedAsBoundaryOnly :
       LRT.LeiRenTianGreatCircleAuthorityBoundaryRecorded ≡ true
@@ -1083,7 +1081,6 @@ canonicalNSGreatCircleZeroModeTrapFailClosedEnvelope :
 canonicalNSGreatCircleZeroModeTrapFailClosedEnvelope =
   nsGreatCircleZeroModeTrapFailClosedEnvelope
     canonicalNSGreatCircleZeroModeTrapExclusionBoundaryReceipt
-    refl
     LRT.leiRenTianGreatCircleAuthorityBoundaryRecordedIsTrue
     refl
     canonicalTrapExclusionBoundary

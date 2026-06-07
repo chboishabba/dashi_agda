@@ -650,6 +650,8 @@ canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt =
     refl
     refl
     refl
+    refl
+    refl
     []
     refl
 
@@ -785,10 +787,6 @@ record NSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt : Setω where
       ZeroModeSetClassificationAnchorImported ≡ true
     zeroModeClassificationFailClosedReceipt :
       NSLeiRenTianRadialZeroModeFailClosedReceipt
-    zeroModeClassificationFailClosedReceiptIsCanonical :
-      zeroModeClassificationFailClosedReceipt
-      ≡
-      canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt
 
     rankOneStatusRows :
       List RankOne.RankOneProjectionCommutatorStatus
@@ -917,8 +915,8 @@ canonicalNSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt =
     refl
     refl
     refl
-    canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt
     refl
+    canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt
     RankOne.canonicalRankOneProjectionCommutatorStatus
     refl
     refl

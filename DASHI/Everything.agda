@@ -214,6 +214,7 @@ import DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary
 import DASHI.Physics.Closure.NSLeiRenTianGreatCircleCriterionBoundary
 import DASHI.Physics.Closure.NSDefectLaplacianRankOneSpectrum
 import DASHI.Physics.Closure.NSGreatCircleZeroModeTrapExclusionBoundary
+import DASHI.Physics.Closure.NSCascadeClosedZeroModeOutputWidthBoundary
 import DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary
 import DASHI.Physics.Closure.NSMonodromyIntegralBoundFinite
 import DASHI.Physics.Closure.NSNonRadialityQuantificationAverage
@@ -224,7 +225,13 @@ import DASHI.Physics.Closure.NSShrinkingWedgeExclusionByGreatCircleCriterion
 import DASHI.Physics.Closure.NSThreeCaseDefectResidualExhaustionFinite
 import DASHI.Physics.Closure.NSTransverseSigmaNeighborhoodGeometry
 import DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary
-import DASHI.Physics.Closure.NSZeroModeGreatCircleGeometryTheorem
+import DASHI.Physics.Closure.NSTriadicAngularDefectSheafLeakageBoundary
+import DASHI.Physics.Closure.NSTriadicLeakageSquareFunctionCoercivityBoundary
+import DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol
+-- Archived legacy single-angle great-circle geometry receipt.
+-- Superseded for aggregate validation by the true triadic Leray route above.
+-- Keep the module file intact, but do not import it through Everything until
+-- its historical Setω/canonical-equality style is ported.
 import DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary
 import DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt
 import DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf

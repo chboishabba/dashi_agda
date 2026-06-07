@@ -167,8 +167,21 @@ promotion remain false/open.
 Current defect-Laplacian zero-mode boundary: the repo records the shared P0
 object `Delta_{Pi,N} = Pi N^dagger (1-Pi) N Pi` in
 `DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf`.
-For NS, `DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary` records
-`Z_NS = Z_rad union Z_tan`; `NSLeiRenTianGreatCircleCriterionBoundary`,
+For NS, the older single-output-angle split in
+`DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary` records
+`Z_NS = Z_rad union Z_tan` as a historical/fail-closed support surface, but
+the current corrected Clay-facing object is triadic.  The checked boundaries
+`DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol`,
+`DASHI.Physics.Closure.NSCascadeClosedZeroModeOutputWidthBoundary`,
+`DASHI.Physics.Closure.NSTriadicAngularDefectSheafLeakageBoundary`, and
+`DASHI.Physics.Closure.NSTriadicLeakageSquareFunctionCoercivityBoundary`
+record the true non-averaged Leray bilinear interaction symbol, the
+cascade-closed zero-mode output-width target, the Abel triadic interaction
+defect sheaf with Lei-Ren-Tian output condition, and the corrected
+square-function/coercivity transfer target.  Tao averaged-NS is recorded as a
+falsifiability guard, and ordinary Calderon-Zygmund/Littlewood-Paley
+boundedness is explicitly rejected as a source of strict depletion by itself.
+`NSLeiRenTianGreatCircleCriterionBoundary`,
 `NSLeiRenTianRadialZeroModeAuthorityBoundary`,
 `NSGreatCircleZeroModeTrapExclusionBoundary`, and
 `NSZeroModeGreatCircleGeometryTheorem` record the Lei-Ren-Tian 2025
@@ -176,9 +189,13 @@ great-circle route as an external authority boundary plus fail-closed
 geometry/trap obligations.  `NSTangentialZeroModePressureStarvationBoundary`
 keeps Buaria/Bodenschatz/Pumir as DNS evidence only.  For YM,
 `YMGaugeZeroModeVacuumRigidityBoundary` names the finite gauge-compatible
-zero-mode vacuum-rigidity target and
-`YMHamiltonianDominatesFiniteHodgeDefectBoundary` names the Hamiltonian
-domination target.  For core unification,
+zero-mode sheaf-rigidity target with holonomy classification, and
+`YMHamiltonianDominatesFiniteHodgeDefectBoundary` names the strengthened
+Hamiltonian domination target
+`H_d | Omega^perp >= c Delta_YM,d + c' Hol_d - E_d`.  Level-zero/cuspidal and
+BT-building cohomology inputs are external-boundary rows only; the actual
+sheaf-rigidity, holonomy-action, self-adjoint quotient, OS, and continuum
+transfer proofs remain open.  For core unification,
 `DefectFourPointParallelogramLawBoundary` normalizes the exact four-point
 identity target.  The 2026-06-08 sprint verification policy used
 `timeout 10s agda ...`; these heavy modules timed out under that cap rather

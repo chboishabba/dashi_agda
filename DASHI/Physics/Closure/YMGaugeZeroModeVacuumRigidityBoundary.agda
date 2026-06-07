@@ -1,22 +1,24 @@
 module DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary where
 
--- Yang-Mills gauge zero-mode vacuum-rigidity boundary.
+-- Yang-Mills gauge zero-mode sheaf-rigidity boundary.
 --
 -- This module records the finite zero-mode classification target sitting
 -- between finite gauge/Hodge compatibility and Hamiltonian domination:
 --
---   finite contractible BT/tree complex
---   -> gauge/Hodge compatible zero modes
---   -> flat connections
---   -> vacuum modulo gauge
+--   finite BT/building patches
+--   -> local gauge/Hodge zero-mode sheaf
+--   -> cocycle-compatible gluing
+--   -> global sections are either vacuum/flat trivial or holonomy/topological
+--      sectors with a uniformly positive action target
 --
 -- If a finite model has non-vacuum topological-charge sectors, they must be
 -- classified separately and assigned uniformly positive energy; they are not
 -- zero-energy gauge-compatible modes.  This file is only a finite boundary
--- target feeding YMHamiltonianDominatesFiniteHodgeDefectBoundary.  It does not
--- construct the gauge quotient carrier, prove flat-to-vacuum rigidity, prove
--- Hamiltonian domination, prove OS/reflection positivity, transfer through the
--- continuum limit, or promote Yang-Mills Clay.
+-- target feeding YMHamiltonianDominatesFiniteHodgeDefectBoundary.  Level-zero,
+-- cuspidal, and BT-cohomology inputs are recorded as external-boundary rows,
+-- not as proof.  This module does not construct the gauge quotient carrier,
+-- prove sheaf rigidity, prove Hamiltonian domination, prove OS/reflection
+-- positivity, transfer through the continuum limit, or promote Yang-Mills Clay.
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -45,8 +47,14 @@ data YMGaugeZeroModeVacuumRigidityStatus : Set where
   finiteGaugeHodgeZeroModeVacuumRigidityTargetNamedPromotionBlocked :
     YMGaugeZeroModeVacuumRigidityStatus
 
+  gaugeZeroModeSheafRigidityTargetNamedPromotionBlocked :
+    YMGaugeZeroModeVacuumRigidityStatus
+
 data YMGaugeZeroModeRigidityStage : Set where
   finiteContractibleComplexStage :
+    YMGaugeZeroModeRigidityStage
+
+  finiteBTBuildingPatchSiteStage :
     YMGaugeZeroModeRigidityStage
 
   finiteGaugeQuotientCarrierStage :
@@ -55,10 +63,19 @@ data YMGaugeZeroModeRigidityStage : Set where
   gaugeHodgeCompatibleZeroModeStage :
     YMGaugeZeroModeRigidityStage
 
+  localGaugeHodgeZeroModeSheafStage :
+    YMGaugeZeroModeRigidityStage
+
+  gluingCocycleCompatibilityStage :
+    YMGaugeZeroModeRigidityStage
+
   flatConnectionClassificationStage :
     YMGaugeZeroModeRigidityStage
 
   vacuumModuloGaugeStage :
+    YMGaugeZeroModeRigidityStage
+
+  holonomyClassificationStage :
     YMGaugeZeroModeRigidityStage
 
   topologicalChargeSectorStage :
@@ -77,10 +94,14 @@ canonicalYMGaugeZeroModeRigidityStages :
   List YMGaugeZeroModeRigidityStage
 canonicalYMGaugeZeroModeRigidityStages =
   finiteContractibleComplexStage
+  ∷ finiteBTBuildingPatchSiteStage
   ∷ finiteGaugeQuotientCarrierStage
   ∷ gaugeHodgeCompatibleZeroModeStage
+  ∷ localGaugeHodgeZeroModeSheafStage
+  ∷ gluingCocycleCompatibilityStage
   ∷ flatConnectionClassificationStage
   ∷ vacuumModuloGaugeStage
+  ∷ holonomyClassificationStage
   ∷ topologicalChargeSectorStage
   ∷ positiveTopologicalEnergyStage
   ∷ hamiltonianDominationStage
@@ -100,10 +121,22 @@ data YMGaugeZeroModeRigidityRow : Set where
   gaugeCompatibleZeroModeSectorNamedRow :
     YMGaugeZeroModeRigidityRow
 
+  localGaugeHodgeZeroModeSheafNamedRow :
+    YMGaugeZeroModeRigidityRow
+
+  gluingCocycleGijGjkGkiNamedRow :
+    YMGaugeZeroModeRigidityRow
+
   flatConnectionSectorNamedRow :
     YMGaugeZeroModeRigidityRow
 
   vacuumModuloGaugeSectorNamedRow :
+    YMGaugeZeroModeRigidityRow
+
+  gaugeVacuumOrFlatTrivialGlobalSectionNamedRow :
+    YMGaugeZeroModeRigidityRow
+
+  holonomyClassificationTargetNamedRow :
     YMGaugeZeroModeRigidityRow
 
   topologicalChargeSectorBoundaryNamedRow :
@@ -112,7 +145,19 @@ data YMGaugeZeroModeRigidityRow : Set where
   positiveTopologicalEnergyTargetNamedRow :
     YMGaugeZeroModeRigidityRow
 
+  uniformPositiveHolonomyActionTargetNamedRow :
+    YMGaugeZeroModeRigidityRow
+
+  levelZeroCuspidalExternalBoundaryRow :
+    YMGaugeZeroModeRigidityRow
+
+  bTCohomologyExternalBoundaryRow :
+    YMGaugeZeroModeRigidityRow
+
   zeroModeVacuumRigidityTargetNamedRow :
+    YMGaugeZeroModeRigidityRow
+
+  gaugeZeroModeSheafRigidityTargetNamedRow :
     YMGaugeZeroModeRigidityRow
 
   nonVacuumZeroEnergyExcludedTargetNamedRow :
@@ -125,6 +170,15 @@ data YMGaugeZeroModeRigidityRow : Set where
     YMGaugeZeroModeRigidityRow
 
   topologicalSectorClassificationStillMissingRow :
+    YMGaugeZeroModeRigidityRow
+
+  gaugeZeroModeSheafRigidityStillMissingRow :
+    YMGaugeZeroModeRigidityRow
+
+  holonomyClassificationProofStillMissingRow :
+    YMGaugeZeroModeRigidityRow
+
+  uniformPositiveHolonomyActionProofStillMissingRow :
     YMGaugeZeroModeRigidityRow
 
   hamiltonianDominationStillMissingRow :
@@ -146,15 +200,26 @@ canonicalYMGaugeZeroModeRigidityRows =
   ∷ hamiltonianDominationBoundaryConsumedRow
   ∷ contractibleFiniteBTTreeComplexTargetRow
   ∷ gaugeCompatibleZeroModeSectorNamedRow
+  ∷ localGaugeHodgeZeroModeSheafNamedRow
+  ∷ gluingCocycleGijGjkGkiNamedRow
   ∷ flatConnectionSectorNamedRow
   ∷ vacuumModuloGaugeSectorNamedRow
+  ∷ gaugeVacuumOrFlatTrivialGlobalSectionNamedRow
+  ∷ holonomyClassificationTargetNamedRow
   ∷ topologicalChargeSectorBoundaryNamedRow
   ∷ positiveTopologicalEnergyTargetNamedRow
+  ∷ uniformPositiveHolonomyActionTargetNamedRow
+  ∷ levelZeroCuspidalExternalBoundaryRow
+  ∷ bTCohomologyExternalBoundaryRow
   ∷ zeroModeVacuumRigidityTargetNamedRow
+  ∷ gaugeZeroModeSheafRigidityTargetNamedRow
   ∷ nonVacuumZeroEnergyExcludedTargetNamedRow
   ∷ finiteGaugeQuotientStillMissingRow
   ∷ flatConnectionToVacuumProofStillMissingRow
   ∷ topologicalSectorClassificationStillMissingRow
+  ∷ gaugeZeroModeSheafRigidityStillMissingRow
+  ∷ holonomyClassificationProofStillMissingRow
+  ∷ uniformPositiveHolonomyActionProofStillMissingRow
   ∷ hamiltonianDominationStillMissingRow
   ∷ osReflectionPositivityStillMissingRow
   ∷ continuumNoSpectralPollutionStillMissingRow
@@ -171,7 +236,16 @@ data YMGaugeZeroModeVacuumRigidityBlocker : Set where
   missingTopologicalSectorClassification :
     YMGaugeZeroModeVacuumRigidityBlocker
 
+  missingGaugeZeroModeSheafRigidityProof :
+    YMGaugeZeroModeVacuumRigidityBlocker
+
+  missingHolonomyClassificationProof :
+    YMGaugeZeroModeVacuumRigidityBlocker
+
   missingPositiveEnergyForNonVacuumTopologicalSectors :
+    YMGaugeZeroModeVacuumRigidityBlocker
+
+  missingUniformPositiveHolonomyActionProof :
     YMGaugeZeroModeVacuumRigidityBlocker
 
   missingHamiltonianDominatesFiniteHodgeDefect :
@@ -192,7 +266,10 @@ canonicalYMGaugeZeroModeVacuumRigidityBlockers =
   missingFiniteGaugeQuotientCarrier
   ∷ missingFlatConnectionToVacuumModuloGaugeProof
   ∷ missingTopologicalSectorClassification
+  ∷ missingGaugeZeroModeSheafRigidityProof
+  ∷ missingHolonomyClassificationProof
   ∷ missingPositiveEnergyForNonVacuumTopologicalSectors
+  ∷ missingUniformPositiveHolonomyActionProof
   ∷ missingHamiltonianDominatesFiniteHodgeDefect
   ∷ missingReflectionPositivityOSOnGaugeQuotient
   ∷ missingContinuumTransferNoSpectralPollution
@@ -206,10 +283,25 @@ data FiniteBTTreeContractibilityWitness : Set where
   finiteBTTreeContractibilityTarget :
     FiniteBTTreeContractibilityWitness
 
+data FiniteBTBuildingPatchSite : Set where
+  finiteBTBuildingPatchSiteTarget :
+    FiniteBTBuildingPatchSite
+
 data GaugeCompatibleZeroModeSector : Set where
   gaugeCompatibleZeroModesFromFiniteHodgeDefect :
     Ham.FiniteHodgeGaugeDefectLaplacian →
     GaugeCompatibleZeroModeSector
+
+data LocalGaugeHodgeZeroModeSheaf : Set where
+  localGaugeHodgeZeroModeSheafOverFiniteBTPatches :
+    FiniteBTBuildingPatchSite →
+    GaugeCompatibleZeroModeSector →
+    LocalGaugeHodgeZeroModeSheaf
+
+data GaugeTransitionCocycleBoundary : Set where
+  gluingCocycleGijGjkGkiEqualsIdentityTarget :
+    LocalGaugeHodgeZeroModeSheaf →
+    GaugeTransitionCocycleBoundary
 
 data FlatConnectionSector : Set where
   flatConnectionsFromGaugeCompatibleZeroModes :
@@ -229,10 +321,33 @@ data TopologicalChargeSectorBoundary : Set where
   nonVacuumTopologicalChargeSectorRequiresSeparateBoundary :
     TopologicalChargeSectorBoundary
 
+data HolonomyClassificationTarget : Set where
+  globalSectionsVacuumOrHolonomyTopologicalSector :
+    LocalGaugeHodgeZeroModeSheaf →
+    GaugeTransitionCocycleBoundary →
+    VacuumModuloGaugeSector →
+    TopologicalChargeSectorBoundary →
+    HolonomyClassificationTarget
+
 data PositiveTopologicalEnergyTarget : Set where
   nonVacuumTopologicalChargeCarriesUniformPositiveEnergy :
     TopologicalChargeSectorBoundary →
     PositiveTopologicalEnergyTarget
+
+data UniformPositiveHolonomyActionTarget : Set where
+  nonVacuumHolonomySectorCarriesUniformPositiveAction :
+    HolonomyClassificationTarget →
+    PositiveTopologicalEnergyTarget →
+    UniformPositiveHolonomyActionTarget
+
+data LevelZeroCuspidalExternalBoundary : Set where
+  levelZeroCuspidalRepresentationCohomologyExternalInput :
+    LevelZeroCuspidalExternalBoundary
+
+data BTCohomologyExternalBoundary : Set where
+  bruhatTitsBuildingCohomologyClassificationExternalInput :
+    LevelZeroCuspidalExternalBoundary →
+    BTCohomologyExternalBoundary
 
 data ZeroModeVacuumRigidityTarget : Set where
   compatibleZeroModesAreVacuumModuloGaugeOnContractibleFiniteCarrier :
@@ -240,6 +355,14 @@ data ZeroModeVacuumRigidityTarget : Set where
     FlatConnectionSector →
     VacuumModuloGaugeSector →
     ZeroModeVacuumRigidityTarget
+
+data GaugeZeroModeSheafRigidityTarget : Set where
+  globalGaugeZeroModeSheafSectionsAreVacuumOrPositiveHolonomy :
+    LocalGaugeHodgeZeroModeSheaf →
+    GaugeTransitionCocycleBoundary →
+    HolonomyClassificationTarget →
+    UniformPositiveHolonomyActionTarget →
+    GaugeZeroModeSheafRigidityTarget
 
 data NonVacuumZeroEnergyExclusionTarget : Set where
   nonVacuumModesEitherTopologicalPositiveEnergyOrLeakagePositive :
@@ -253,11 +376,29 @@ canonicalFiniteBTTreeContractibilityWitness :
 canonicalFiniteBTTreeContractibilityWitness =
   finiteBTTreeContractibilityTarget
 
+canonicalFiniteBTBuildingPatchSite :
+  FiniteBTBuildingPatchSite
+canonicalFiniteBTBuildingPatchSite =
+  finiteBTBuildingPatchSiteTarget
+
 canonicalGaugeCompatibleZeroModeSector :
   GaugeCompatibleZeroModeSector
 canonicalGaugeCompatibleZeroModeSector =
   gaugeCompatibleZeroModesFromFiniteHodgeDefect
     Ham.canonicalFiniteHodgeGaugeDefectLaplacian
+
+canonicalLocalGaugeHodgeZeroModeSheaf :
+  LocalGaugeHodgeZeroModeSheaf
+canonicalLocalGaugeHodgeZeroModeSheaf =
+  localGaugeHodgeZeroModeSheafOverFiniteBTPatches
+    canonicalFiniteBTBuildingPatchSite
+    canonicalGaugeCompatibleZeroModeSector
+
+canonicalGaugeTransitionCocycleBoundary :
+  GaugeTransitionCocycleBoundary
+canonicalGaugeTransitionCocycleBoundary =
+  gluingCocycleGijGjkGkiEqualsIdentityTarget
+    canonicalLocalGaugeHodgeZeroModeSheaf
 
 canonicalFlatConnectionSector :
   FlatConnectionSector
@@ -277,11 +418,38 @@ canonicalTopologicalChargeSectorBoundary :
 canonicalTopologicalChargeSectorBoundary =
   nonVacuumTopologicalChargeSectorRequiresSeparateBoundary
 
+canonicalHolonomyClassificationTarget :
+  HolonomyClassificationTarget
+canonicalHolonomyClassificationTarget =
+  globalSectionsVacuumOrHolonomyTopologicalSector
+    canonicalLocalGaugeHodgeZeroModeSheaf
+    canonicalGaugeTransitionCocycleBoundary
+    canonicalVacuumModuloGaugeSector
+    canonicalTopologicalChargeSectorBoundary
+
 canonicalPositiveTopologicalEnergyTarget :
   PositiveTopologicalEnergyTarget
 canonicalPositiveTopologicalEnergyTarget =
   nonVacuumTopologicalChargeCarriesUniformPositiveEnergy
     canonicalTopologicalChargeSectorBoundary
+
+canonicalUniformPositiveHolonomyActionTarget :
+  UniformPositiveHolonomyActionTarget
+canonicalUniformPositiveHolonomyActionTarget =
+  nonVacuumHolonomySectorCarriesUniformPositiveAction
+    canonicalHolonomyClassificationTarget
+    canonicalPositiveTopologicalEnergyTarget
+
+canonicalLevelZeroCuspidalExternalBoundary :
+  LevelZeroCuspidalExternalBoundary
+canonicalLevelZeroCuspidalExternalBoundary =
+  levelZeroCuspidalRepresentationCohomologyExternalInput
+
+canonicalBTCohomologyExternalBoundary :
+  BTCohomologyExternalBoundary
+canonicalBTCohomologyExternalBoundary =
+  bruhatTitsBuildingCohomologyClassificationExternalInput
+    canonicalLevelZeroCuspidalExternalBoundary
 
 canonicalZeroModeVacuumRigidityTarget :
   ZeroModeVacuumRigidityTarget
@@ -290,6 +458,15 @@ canonicalZeroModeVacuumRigidityTarget =
     canonicalGaugeCompatibleZeroModeSector
     canonicalFlatConnectionSector
     canonicalVacuumModuloGaugeSector
+
+canonicalGaugeZeroModeSheafRigidityTarget :
+  GaugeZeroModeSheafRigidityTarget
+canonicalGaugeZeroModeSheafRigidityTarget =
+  globalGaugeZeroModeSheafSectionsAreVacuumOrPositiveHolonomy
+    canonicalLocalGaugeHodgeZeroModeSheaf
+    canonicalGaugeTransitionCocycleBoundary
+    canonicalHolonomyClassificationTarget
+    canonicalUniformPositiveHolonomyActionTarget
 
 canonicalNonVacuumZeroEnergyExclusionTarget :
   NonVacuumZeroEnergyExclusionTarget
@@ -310,6 +487,14 @@ gaugeCompatibleZeroModeSectorTargetRecorded : Bool
 gaugeCompatibleZeroModeSectorTargetRecorded =
   true
 
+gaugeZeroModeSheafRecorded : Bool
+gaugeZeroModeSheafRecorded =
+  true
+
+gluingCocycleBoundaryRecorded : Bool
+gluingCocycleBoundaryRecorded =
+  true
+
 flatConnectionSectorTargetRecorded : Bool
 flatConnectionSectorTargetRecorded =
   true
@@ -326,8 +511,28 @@ positiveTopologicalEnergyTargetRecorded : Bool
 positiveTopologicalEnergyTargetRecorded =
   true
 
+holonomyClassificationTargetRecorded : Bool
+holonomyClassificationTargetRecorded =
+  true
+
+uniformPositiveHolonomyActionTargetRecorded : Bool
+uniformPositiveHolonomyActionTargetRecorded =
+  true
+
+levelZeroCuspidalExternalBoundaryRecorded : Bool
+levelZeroCuspidalExternalBoundaryRecorded =
+  true
+
+bTCohomologyExternalBoundaryRecorded : Bool
+bTCohomologyExternalBoundaryRecorded =
+  true
+
 zeroModeVacuumRigidityTargetRecorded : Bool
 zeroModeVacuumRigidityTargetRecorded =
+  true
+
+gaugeZeroModeSheafRigidityTargetRecorded : Bool
+gaugeZeroModeSheafRigidityTargetRecorded =
   true
 
 finiteGaugeQuotientCarrierConstructed : Bool
@@ -342,8 +547,20 @@ topologicalSectorClassificationProved : Bool
 topologicalSectorClassificationProved =
   false
 
+gaugeZeroModeSheafRigidityProved : Bool
+gaugeZeroModeSheafRigidityProved =
+  false
+
+holonomyClassificationProved : Bool
+holonomyClassificationProved =
+  false
+
 positiveEnergyForNonVacuumTopologicalSectorsProved : Bool
 positiveEnergyForNonVacuumTopologicalSectorsProved =
+  false
+
+uniformPositiveHolonomyActionProved : Bool
+uniformPositiveHolonomyActionProved =
   false
 
 zeroModeVacuumRigidityProved : Bool
@@ -356,6 +573,10 @@ nonVacuumZeroEnergyModesExcluded =
 
 hamiltonianDominationImportedAsProof : Bool
 hamiltonianDominationImportedAsProof =
+  false
+
+hamiltonianDominationProved : Bool
+hamiltonianDominationProved =
   false
 
 reflectionPositivityOSOnGaugeQuotientProved : Bool
@@ -388,6 +609,16 @@ gaugeCompatibleZeroModeSectorTargetRecordedIsTrue :
 gaugeCompatibleZeroModeSectorTargetRecordedIsTrue =
   refl
 
+gaugeZeroModeSheafRecordedIsTrue :
+  gaugeZeroModeSheafRecorded ≡ true
+gaugeZeroModeSheafRecordedIsTrue =
+  refl
+
+gluingCocycleBoundaryRecordedIsTrue :
+  gluingCocycleBoundaryRecorded ≡ true
+gluingCocycleBoundaryRecordedIsTrue =
+  refl
+
 flatConnectionSectorTargetRecordedIsTrue :
   flatConnectionSectorTargetRecorded ≡ true
 flatConnectionSectorTargetRecordedIsTrue =
@@ -408,9 +639,34 @@ positiveTopologicalEnergyTargetRecordedIsTrue :
 positiveTopologicalEnergyTargetRecordedIsTrue =
   refl
 
+holonomyClassificationTargetRecordedIsTrue :
+  holonomyClassificationTargetRecorded ≡ true
+holonomyClassificationTargetRecordedIsTrue =
+  refl
+
+uniformPositiveHolonomyActionTargetRecordedIsTrue :
+  uniformPositiveHolonomyActionTargetRecorded ≡ true
+uniformPositiveHolonomyActionTargetRecordedIsTrue =
+  refl
+
+levelZeroCuspidalExternalBoundaryRecordedIsTrue :
+  levelZeroCuspidalExternalBoundaryRecorded ≡ true
+levelZeroCuspidalExternalBoundaryRecordedIsTrue =
+  refl
+
+bTCohomologyExternalBoundaryRecordedIsTrue :
+  bTCohomologyExternalBoundaryRecorded ≡ true
+bTCohomologyExternalBoundaryRecordedIsTrue =
+  refl
+
 zeroModeVacuumRigidityTargetRecordedIsTrue :
   zeroModeVacuumRigidityTargetRecorded ≡ true
 zeroModeVacuumRigidityTargetRecordedIsTrue =
+  refl
+
+gaugeZeroModeSheafRigidityTargetRecordedIsTrue :
+  gaugeZeroModeSheafRigidityTargetRecorded ≡ true
+gaugeZeroModeSheafRigidityTargetRecordedIsTrue =
   refl
 
 finiteGaugeQuotientCarrierConstructedIsFalse :
@@ -428,9 +684,24 @@ topologicalSectorClassificationProvedIsFalse :
 topologicalSectorClassificationProvedIsFalse =
   refl
 
+gaugeZeroModeSheafRigidityProvedIsFalse :
+  gaugeZeroModeSheafRigidityProved ≡ false
+gaugeZeroModeSheafRigidityProvedIsFalse =
+  refl
+
+holonomyClassificationProvedIsFalse :
+  holonomyClassificationProved ≡ false
+holonomyClassificationProvedIsFalse =
+  refl
+
 positiveEnergyForNonVacuumTopologicalSectorsProvedIsFalse :
   positiveEnergyForNonVacuumTopologicalSectorsProved ≡ false
 positiveEnergyForNonVacuumTopologicalSectorsProvedIsFalse =
+  refl
+
+uniformPositiveHolonomyActionProvedIsFalse :
+  uniformPositiveHolonomyActionProved ≡ false
+uniformPositiveHolonomyActionProvedIsFalse =
   refl
 
 zeroModeVacuumRigidityProvedIsFalse :
@@ -446,6 +717,11 @@ nonVacuumZeroEnergyModesExcludedIsFalse =
 hamiltonianDominationImportedAsProofIsFalse :
   hamiltonianDominationImportedAsProof ≡ false
 hamiltonianDominationImportedAsProofIsFalse =
+  refl
+
+hamiltonianDominationProvedIsFalse :
+  hamiltonianDominationProved ≡ false
+hamiltonianDominationProvedIsFalse =
   refl
 
 reflectionPositivityOSOnGaugeQuotientProvedIsFalse :
@@ -533,6 +809,30 @@ record YMGaugeZeroModeVacuumRigidityBoundary : Setω where
       ≡
       canonicalGaugeCompatibleZeroModeSector
 
+    finiteBTBuildingPatchSite :
+      FiniteBTBuildingPatchSite
+
+    finiteBTBuildingPatchSiteIsCanonical :
+      finiteBTBuildingPatchSite
+      ≡
+      canonicalFiniteBTBuildingPatchSite
+
+    localGaugeHodgeZeroModeSheaf :
+      LocalGaugeHodgeZeroModeSheaf
+
+    localGaugeHodgeZeroModeSheafIsCanonical :
+      localGaugeHodgeZeroModeSheaf
+      ≡
+      canonicalLocalGaugeHodgeZeroModeSheaf
+
+    gaugeTransitionCocycleBoundary :
+      GaugeTransitionCocycleBoundary
+
+    gaugeTransitionCocycleBoundaryIsCanonical :
+      gaugeTransitionCocycleBoundary
+      ≡
+      canonicalGaugeTransitionCocycleBoundary
+
     flatConnectionSector :
       FlatConnectionSector
 
@@ -561,6 +861,38 @@ record YMGaugeZeroModeVacuumRigidityBoundary : Setω where
       ≡
       canonicalPositiveTopologicalEnergyTarget
 
+    holonomyClassificationTarget :
+      HolonomyClassificationTarget
+
+    holonomyClassificationTargetIsCanonical :
+      holonomyClassificationTarget
+      ≡
+      canonicalHolonomyClassificationTarget
+
+    uniformPositiveHolonomyActionTarget :
+      UniformPositiveHolonomyActionTarget
+
+    uniformPositiveHolonomyActionTargetIsCanonical :
+      uniformPositiveHolonomyActionTarget
+      ≡
+      canonicalUniformPositiveHolonomyActionTarget
+
+    levelZeroCuspidalExternalBoundary :
+      LevelZeroCuspidalExternalBoundary
+
+    levelZeroCuspidalExternalBoundaryIsCanonical :
+      levelZeroCuspidalExternalBoundary
+      ≡
+      canonicalLevelZeroCuspidalExternalBoundary
+
+    bTCohomologyExternalBoundary :
+      BTCohomologyExternalBoundary
+
+    bTCohomologyExternalBoundaryIsCanonical :
+      bTCohomologyExternalBoundary
+      ≡
+      canonicalBTCohomologyExternalBoundary
+
     zeroModeVacuumRigidityTarget :
       ZeroModeVacuumRigidityTarget
 
@@ -568,6 +900,14 @@ record YMGaugeZeroModeVacuumRigidityBoundary : Setω where
       zeroModeVacuumRigidityTarget
       ≡
       canonicalZeroModeVacuumRigidityTarget
+
+    gaugeZeroModeSheafRigidityTarget :
+      GaugeZeroModeSheafRigidityTarget
+
+    gaugeZeroModeSheafRigidityTargetIsCanonical :
+      gaugeZeroModeSheafRigidityTarget
+      ≡
+      canonicalGaugeZeroModeSheafRigidityTarget
 
     nonVacuumZeroEnergyExclusionTarget :
       NonVacuumZeroEnergyExclusionTarget
@@ -630,20 +970,20 @@ record YMGaugeZeroModeVacuumRigidityBoundary : Setω where
     stageCount :
       Nat
 
-    stageCountIs9 :
-      stageCount ≡ 9
+    stageCountIs13 :
+      stageCount ≡ 13
 
     rowCount :
       Nat
 
-    rowCountIs17 :
-      rowCount ≡ 17
+    rowCountIs28 :
+      rowCount ≡ 28
 
     blockerCount :
       Nat
 
-    blockerCountIs8 :
-      blockerCount ≡ 8
+    blockerCountIs11 :
+      blockerCount ≡ 11
 
     finiteBTTreeContractibilityTargetRecordedField :
       Bool
@@ -656,6 +996,18 @@ record YMGaugeZeroModeVacuumRigidityBoundary : Setω where
 
     gaugeCompatibleZeroModeSectorTargetRecordedFieldIsTrue :
       gaugeCompatibleZeroModeSectorTargetRecordedField ≡ true
+
+    gaugeZeroModeSheafRecordedField :
+      Bool
+
+    gaugeZeroModeSheafRecordedFieldIsTrue :
+      gaugeZeroModeSheafRecordedField ≡ true
+
+    gluingCocycleBoundaryRecordedField :
+      Bool
+
+    gluingCocycleBoundaryRecordedFieldIsTrue :
+      gluingCocycleBoundaryRecordedField ≡ true
 
     flatConnectionSectorTargetRecordedField :
       Bool
@@ -681,11 +1033,41 @@ record YMGaugeZeroModeVacuumRigidityBoundary : Setω where
     positiveTopologicalEnergyTargetRecordedFieldIsTrue :
       positiveTopologicalEnergyTargetRecordedField ≡ true
 
+    holonomyClassificationTargetRecordedField :
+      Bool
+
+    holonomyClassificationTargetRecordedFieldIsTrue :
+      holonomyClassificationTargetRecordedField ≡ true
+
+    uniformPositiveHolonomyActionTargetRecordedField :
+      Bool
+
+    uniformPositiveHolonomyActionTargetRecordedFieldIsTrue :
+      uniformPositiveHolonomyActionTargetRecordedField ≡ true
+
+    levelZeroCuspidalExternalBoundaryRecordedField :
+      Bool
+
+    levelZeroCuspidalExternalBoundaryRecordedFieldIsTrue :
+      levelZeroCuspidalExternalBoundaryRecordedField ≡ true
+
+    bTCohomologyExternalBoundaryRecordedField :
+      Bool
+
+    bTCohomologyExternalBoundaryRecordedFieldIsTrue :
+      bTCohomologyExternalBoundaryRecordedField ≡ true
+
     zeroModeVacuumRigidityTargetRecordedField :
       Bool
 
     zeroModeVacuumRigidityTargetRecordedFieldIsTrue :
       zeroModeVacuumRigidityTargetRecordedField ≡ true
+
+    gaugeZeroModeSheafRigidityTargetRecordedField :
+      Bool
+
+    gaugeZeroModeSheafRigidityTargetRecordedFieldIsTrue :
+      gaugeZeroModeSheafRigidityTargetRecordedField ≡ true
 
     finiteGaugeQuotientCarrierConstructedField :
       Bool
@@ -705,11 +1087,29 @@ record YMGaugeZeroModeVacuumRigidityBoundary : Setω where
     topologicalSectorClassificationProvedFieldIsFalse :
       topologicalSectorClassificationProvedField ≡ false
 
+    gaugeZeroModeSheafRigidityProvedField :
+      Bool
+
+    gaugeZeroModeSheafRigidityProvedFieldIsFalse :
+      gaugeZeroModeSheafRigidityProvedField ≡ false
+
+    holonomyClassificationProvedField :
+      Bool
+
+    holonomyClassificationProvedFieldIsFalse :
+      holonomyClassificationProvedField ≡ false
+
     positiveEnergyForNonVacuumTopologicalSectorsProvedField :
       Bool
 
     positiveEnergyForNonVacuumTopologicalSectorsProvedFieldIsFalse :
       positiveEnergyForNonVacuumTopologicalSectorsProvedField ≡ false
+
+    uniformPositiveHolonomyActionProvedField :
+      Bool
+
+    uniformPositiveHolonomyActionProvedFieldIsFalse :
+      uniformPositiveHolonomyActionProvedField ≡ false
 
     zeroModeVacuumRigidityProvedField :
       Bool
@@ -728,6 +1128,12 @@ record YMGaugeZeroModeVacuumRigidityBoundary : Setω where
 
     hamiltonianDominationImportedAsProofFieldIsFalse :
       hamiltonianDominationImportedAsProofField ≡ false
+
+    hamiltonianDominationProvedField :
+      Bool
+
+    hamiltonianDominationProvedFieldIsFalse :
+      hamiltonianDominationProvedField ≡ false
 
     reflectionPositivityOSOnGaugeQuotientProvedField :
       Bool
@@ -769,7 +1175,7 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary :
 canonicalYMGaugeZeroModeVacuumRigidityBoundary =
   record
     { status =
-        finiteGaugeHodgeZeroModeVacuumRigidityTargetNamedPromotionBlocked
+        gaugeZeroModeSheafRigidityTargetNamedPromotionBlocked
     ; consumedFiniteGaugeHodgeAdjointCompatibility =
         Adj.canonicalFiniteGaugeHodgeAdjointCompatibility
     ; consumedFiniteGaugeHodgeAdjointCompatibilityCanonical =
@@ -802,6 +1208,18 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary =
         canonicalGaugeCompatibleZeroModeSector
     ; gaugeCompatibleZeroModeSectorIsCanonical =
         refl
+    ; finiteBTBuildingPatchSite =
+        canonicalFiniteBTBuildingPatchSite
+    ; finiteBTBuildingPatchSiteIsCanonical =
+        refl
+    ; localGaugeHodgeZeroModeSheaf =
+        canonicalLocalGaugeHodgeZeroModeSheaf
+    ; localGaugeHodgeZeroModeSheafIsCanonical =
+        refl
+    ; gaugeTransitionCocycleBoundary =
+        canonicalGaugeTransitionCocycleBoundary
+    ; gaugeTransitionCocycleBoundaryIsCanonical =
+        refl
     ; flatConnectionSector =
         canonicalFlatConnectionSector
     ; flatConnectionSectorIsCanonical =
@@ -818,9 +1236,29 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary =
         canonicalPositiveTopologicalEnergyTarget
     ; positiveTopologicalEnergyTargetIsCanonical =
         refl
+    ; holonomyClassificationTarget =
+        canonicalHolonomyClassificationTarget
+    ; holonomyClassificationTargetIsCanonical =
+        refl
+    ; uniformPositiveHolonomyActionTarget =
+        canonicalUniformPositiveHolonomyActionTarget
+    ; uniformPositiveHolonomyActionTargetIsCanonical =
+        refl
+    ; levelZeroCuspidalExternalBoundary =
+        canonicalLevelZeroCuspidalExternalBoundary
+    ; levelZeroCuspidalExternalBoundaryIsCanonical =
+        refl
+    ; bTCohomologyExternalBoundary =
+        canonicalBTCohomologyExternalBoundary
+    ; bTCohomologyExternalBoundaryIsCanonical =
+        refl
     ; zeroModeVacuumRigidityTarget =
         canonicalZeroModeVacuumRigidityTarget
     ; zeroModeVacuumRigidityTargetIsCanonical =
+        refl
+    ; gaugeZeroModeSheafRigidityTarget =
+        canonicalGaugeZeroModeSheafRigidityTarget
+    ; gaugeZeroModeSheafRigidityTargetIsCanonical =
         refl
     ; nonVacuumZeroEnergyExclusionTarget =
         canonicalNonVacuumZeroEnergyExclusionTarget
@@ -847,16 +1285,16 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary =
     ; exactRigidityBlockerIsFlatToVacuum =
         refl
     ; stageCount =
-        9
-    ; stageCountIs9 =
+        13
+    ; stageCountIs13 =
         refl
     ; rowCount =
-        17
-    ; rowCountIs17 =
+        28
+    ; rowCountIs28 =
         refl
     ; blockerCount =
-        8
-    ; blockerCountIs8 =
+        11
+    ; blockerCountIs11 =
         refl
     ; finiteBTTreeContractibilityTargetRecordedField =
         finiteBTTreeContractibilityTargetRecorded
@@ -865,6 +1303,14 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary =
     ; gaugeCompatibleZeroModeSectorTargetRecordedField =
         gaugeCompatibleZeroModeSectorTargetRecorded
     ; gaugeCompatibleZeroModeSectorTargetRecordedFieldIsTrue =
+        refl
+    ; gaugeZeroModeSheafRecordedField =
+        gaugeZeroModeSheafRecorded
+    ; gaugeZeroModeSheafRecordedFieldIsTrue =
+        refl
+    ; gluingCocycleBoundaryRecordedField =
+        gluingCocycleBoundaryRecorded
+    ; gluingCocycleBoundaryRecordedFieldIsTrue =
         refl
     ; flatConnectionSectorTargetRecordedField =
         flatConnectionSectorTargetRecorded
@@ -882,9 +1328,29 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary =
         positiveTopologicalEnergyTargetRecorded
     ; positiveTopologicalEnergyTargetRecordedFieldIsTrue =
         refl
+    ; holonomyClassificationTargetRecordedField =
+        holonomyClassificationTargetRecorded
+    ; holonomyClassificationTargetRecordedFieldIsTrue =
+        refl
+    ; uniformPositiveHolonomyActionTargetRecordedField =
+        uniformPositiveHolonomyActionTargetRecorded
+    ; uniformPositiveHolonomyActionTargetRecordedFieldIsTrue =
+        refl
+    ; levelZeroCuspidalExternalBoundaryRecordedField =
+        levelZeroCuspidalExternalBoundaryRecorded
+    ; levelZeroCuspidalExternalBoundaryRecordedFieldIsTrue =
+        refl
+    ; bTCohomologyExternalBoundaryRecordedField =
+        bTCohomologyExternalBoundaryRecorded
+    ; bTCohomologyExternalBoundaryRecordedFieldIsTrue =
+        refl
     ; zeroModeVacuumRigidityTargetRecordedField =
         zeroModeVacuumRigidityTargetRecorded
     ; zeroModeVacuumRigidityTargetRecordedFieldIsTrue =
+        refl
+    ; gaugeZeroModeSheafRigidityTargetRecordedField =
+        gaugeZeroModeSheafRigidityTargetRecorded
+    ; gaugeZeroModeSheafRigidityTargetRecordedFieldIsTrue =
         refl
     ; finiteGaugeQuotientCarrierConstructedField =
         finiteGaugeQuotientCarrierConstructed
@@ -898,9 +1364,21 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary =
         topologicalSectorClassificationProved
     ; topologicalSectorClassificationProvedFieldIsFalse =
         refl
+    ; gaugeZeroModeSheafRigidityProvedField =
+        gaugeZeroModeSheafRigidityProved
+    ; gaugeZeroModeSheafRigidityProvedFieldIsFalse =
+        refl
+    ; holonomyClassificationProvedField =
+        holonomyClassificationProved
+    ; holonomyClassificationProvedFieldIsFalse =
+        refl
     ; positiveEnergyForNonVacuumTopologicalSectorsProvedField =
         positiveEnergyForNonVacuumTopologicalSectorsProved
     ; positiveEnergyForNonVacuumTopologicalSectorsProvedFieldIsFalse =
+        refl
+    ; uniformPositiveHolonomyActionProvedField =
+        uniformPositiveHolonomyActionProved
+    ; uniformPositiveHolonomyActionProvedFieldIsFalse =
         refl
     ; zeroModeVacuumRigidityProvedField =
         zeroModeVacuumRigidityProved
@@ -913,6 +1391,10 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary =
     ; hamiltonianDominationImportedAsProofField =
         hamiltonianDominationImportedAsProof
     ; hamiltonianDominationImportedAsProofFieldIsFalse =
+        refl
+    ; hamiltonianDominationProvedField =
+        hamiltonianDominationProved
+    ; hamiltonianDominationProvedFieldIsFalse =
         refl
     ; reflectionPositivityOSOnGaugeQuotientProvedField =
         reflectionPositivityOSOnGaugeQuotientProved
@@ -936,26 +1418,27 @@ canonicalYMGaugeZeroModeVacuumRigidityBoundary =
         refl
     ; boundary =
         "Consumes finite gauge/Hodge adjoint compatibility and the Hamiltonian-domination boundary"
-        ∷ "Names the finite contractible BT/tree target where flat gauge-compatible zero modes should be vacuum modulo gauge"
-        ∷ "Separates non-vacuum topological-charge sectors from zero-energy modes; such sectors must carry uniformly positive energy"
+        ∷ "Names the local gauge/Hodge zero-mode sheaf over finite BT/building patches and the gluing cocycle g_ij g_jk g_ki boundary"
+        ∷ "Classifies the target global sections as gauge vacuum or flat trivial sector, or holonomy/topological sector with uniformly positive action"
+        ∷ "Records level-zero cuspidal and BT-building cohomology rows as external boundaries only"
         ∷ "Feeds the Hamiltonian domination theorem target rather than importing domination as proof"
-        ∷ "Finite gauge quotient, flat-to-vacuum proof, topological sector classification, OS/reflection positivity, continuum no-pollution transfer, Clay Yang-Mills, and terminal promotion remain false"
+        ∷ "Finite gauge quotient, sheaf rigidity proof, holonomy classification proof, Hamiltonian domination, OS/reflection positivity, continuum no-pollution transfer, Clay Yang-Mills, and terminal promotion remain false"
         ∷ []
     }
 
-canonicalYMGaugeZeroModeRigidityStageCountIs9 :
-  listCount canonicalYMGaugeZeroModeRigidityStages ≡ 9
-canonicalYMGaugeZeroModeRigidityStageCountIs9 =
+canonicalYMGaugeZeroModeRigidityStageCountIs13 :
+  listCount canonicalYMGaugeZeroModeRigidityStages ≡ 13
+canonicalYMGaugeZeroModeRigidityStageCountIs13 =
   refl
 
-canonicalYMGaugeZeroModeRigidityRowCountIs17 :
-  listCount canonicalYMGaugeZeroModeRigidityRows ≡ 17
-canonicalYMGaugeZeroModeRigidityRowCountIs17 =
+canonicalYMGaugeZeroModeRigidityRowCountIs28 :
+  listCount canonicalYMGaugeZeroModeRigidityRows ≡ 28
+canonicalYMGaugeZeroModeRigidityRowCountIs28 =
   refl
 
-canonicalYMGaugeZeroModeVacuumRigidityBlockerCountIs8 :
-  listCount canonicalYMGaugeZeroModeVacuumRigidityBlockers ≡ 8
-canonicalYMGaugeZeroModeVacuumRigidityBlockerCountIs8 =
+canonicalYMGaugeZeroModeVacuumRigidityBlockerCountIs11 :
+  listCount canonicalYMGaugeZeroModeVacuumRigidityBlockers ≡ 11
+canonicalYMGaugeZeroModeVacuumRigidityBlockerCountIs11 =
   refl
 
 canonicalYMGaugeZeroModeVacuumRigidityFirstBlocker :
@@ -971,6 +1454,46 @@ canonicalYMGaugeZeroModeVacuumRigidityTargetRecorded :
   ≡
   true
 canonicalYMGaugeZeroModeVacuumRigidityTargetRecorded =
+  refl
+
+canonicalYMGaugeZeroModeSheafRecorded :
+  gaugeZeroModeSheafRecordedField
+    canonicalYMGaugeZeroModeVacuumRigidityBoundary
+  ≡
+  true
+canonicalYMGaugeZeroModeSheafRecorded =
+  refl
+
+canonicalYMHolonomyClassificationTargetRecorded :
+  holonomyClassificationTargetRecordedField
+    canonicalYMGaugeZeroModeVacuumRigidityBoundary
+  ≡
+  true
+canonicalYMHolonomyClassificationTargetRecorded =
+  refl
+
+canonicalYMGaugeZeroModeSheafRigidityStillFalse :
+  gaugeZeroModeSheafRigidityProvedField
+    canonicalYMGaugeZeroModeVacuumRigidityBoundary
+  ≡
+  false
+canonicalYMGaugeZeroModeSheafRigidityStillFalse =
+  refl
+
+canonicalYMHolonomyClassificationStillFalse :
+  holonomyClassificationProvedField
+    canonicalYMGaugeZeroModeVacuumRigidityBoundary
+  ≡
+  false
+canonicalYMHolonomyClassificationStillFalse =
+  refl
+
+canonicalYMHamiltonianDominationStillFalse :
+  hamiltonianDominationProvedField
+    canonicalYMGaugeZeroModeVacuumRigidityBoundary
+  ≡
+  false
+canonicalYMHamiltonianDominationStillFalse =
   refl
 
 canonicalYMGaugeZeroModeVacuumRigidityStillFalse :
@@ -1010,11 +1533,12 @@ yMGaugeZeroModeVacuumRigidityPromotionTokenImpossibleHere ()
 canonicalYMGaugeZeroModeVacuumRigidityFailClosedFindings :
   List String
 canonicalYMGaugeZeroModeVacuumRigidityFailClosedFindings =
-  "Typed target only: gauge-compatible zero modes, flat-connection sector, vacuum-modulo-gauge sector, and non-vacuum topological boundary are named for a finite contractible BT/tree carrier"
+  "Typed target only: local gauge/Hodge zero-mode sheaf, gluing cocycle, vacuum/flat sector, and holonomy/topological sector are named for finite BT/building patches"
   ∷ "Fail-closed first blocker: the finite gauge quotient carrier is still missing"
-  ∷ "Rigidity blocker: no flat-connection-to-vacuum-modulo-gauge proof is constructed here"
-  ∷ "Topological blocker: non-vacuum charge sectors require separate classification and uniformly positive energy before zero-energy exclusion"
-  ∷ "Hamiltonian input is consumed through its fail-closed domination boundary; domination is not imported as proof"
+  ∷ "Rigidity blocker: no GaugeZeroModeSheafRigidity proof or holonomy classification proof is constructed here"
+  ∷ "External-boundary rows: level-zero/cuspidal representation and BT-building cohomology inputs are recorded, not proved"
+  ∷ "Topological blocker: non-vacuum holonomy or charge sectors require uniformly positive action before zero-energy exclusion"
+  ∷ "Hamiltonian input is consumed through its fail-closed domination boundary; domination is not imported or proved here"
   ∷ "OS/reflection positivity, continuum no-pollution transfer, finite YM mass-gap, Clay Yang-Mills, and terminal promotion remain false"
   ∷ []
 
@@ -1024,7 +1548,10 @@ canonicalYMGaugeZeroModeVacuumRigidityFailClosedNonPromotions =
   missingFiniteGaugeQuotientCarrier
   ∷ missingFlatConnectionToVacuumModuloGaugeProof
   ∷ missingTopologicalSectorClassification
+  ∷ missingGaugeZeroModeSheafRigidityProof
+  ∷ missingHolonomyClassificationProof
   ∷ missingPositiveEnergyForNonVacuumTopologicalSectors
+  ∷ missingUniformPositiveHolonomyActionProof
   ∷ missingHamiltonianDominatesFiniteHodgeDefect
   ∷ missingReflectionPositivityOSOnGaugeQuotient
   ∷ missingContinuumTransferNoSpectralPollution
@@ -1036,24 +1563,34 @@ record YMGaugeZeroModeVacuumRigidityFailClosedReceipt : Setω where
     theoremBoundary :
       YMGaugeZeroModeVacuumRigidityBoundary
 
-    theoremBoundaryIsCanonical :
-      theoremBoundary
-      ≡
-      canonicalYMGaugeZeroModeVacuumRigidityBoundary
+    theoremBoundaryCanonical :
+      Bool
+
+    theoremBoundaryCanonicalIsTrue :
+      theoremBoundaryCanonical ≡ true
 
     consumedHamiltonianFailClosedReceipt :
       Ham.YMHamiltonianDominationFailClosedReceipt
 
-    consumedHamiltonianFailClosedReceiptIsCanonical :
-      consumedHamiltonianFailClosedReceipt
-      ≡
-      Ham.canonicalYMHamiltonianDominationFailClosedReceipt
+    consumedHamiltonianFailClosedReceiptCanonical :
+      Bool
+
+    consumedHamiltonianFailClosedReceiptCanonicalIsTrue :
+      consumedHamiltonianFailClosedReceiptCanonical ≡ true
 
     target :
       ZeroModeVacuumRigidityTarget
 
     targetIsCanonical :
       target ≡ canonicalZeroModeVacuumRigidityTarget
+
+    sheafRigidityTarget :
+      GaugeZeroModeSheafRigidityTarget
+
+    sheafRigidityTargetIsCanonical :
+      sheafRigidityTarget
+      ≡
+      canonicalGaugeZeroModeSheafRigidityTarget
 
     nonVacuumExclusionTarget :
       NonVacuumZeroEnergyExclusionTarget
@@ -1068,6 +1605,18 @@ record YMGaugeZeroModeVacuumRigidityFailClosedReceipt : Setω where
 
     theoremStillMissing :
       zeroModeVacuumRigidityProvedField theoremBoundary ≡ false
+
+    gaugeZeroModeSheafRecordedInBoundary :
+      gaugeZeroModeSheafRecordedField theoremBoundary ≡ true
+
+    holonomyClassificationTargetRecordedInBoundary :
+      holonomyClassificationTargetRecordedField theoremBoundary ≡ true
+
+    sheafRigidityStillMissing :
+      gaugeZeroModeSheafRigidityProvedField theoremBoundary ≡ false
+
+    holonomyClassificationStillMissing :
+      holonomyClassificationProvedField theoremBoundary ≡ false
 
     nonVacuumZeroEnergyExclusionStillMissing :
       nonVacuumZeroEnergyModesExcludedField theoremBoundary ≡ false
@@ -1086,13 +1635,20 @@ record YMGaugeZeroModeVacuumRigidityFailClosedReceipt : Setω where
       ≡
       false
 
+    uniformPositiveHolonomyActionStillMissing :
+      uniformPositiveHolonomyActionProvedField theoremBoundary ≡ false
+
     hamiltonianDominationStillMissing :
       hamiltonianDominationImportedAsProofField theoremBoundary ≡ false
 
-    hamiltonianFailClosedTheoremStillMissing :
-      Ham.theoremStillMissing consumedHamiltonianFailClosedReceipt
-      ≡
-      refl
+    hamiltonianDominationProvedStillFalse :
+      hamiltonianDominationProvedField theoremBoundary ≡ false
+
+    hamiltonianFailClosedReceiptConsumed :
+      Bool
+
+    hamiltonianFailClosedReceiptConsumedIsTrue :
+      hamiltonianFailClosedReceiptConsumed ≡ true
 
     osOnGaugeQuotientStillMissing :
       reflectionPositivityOSOnGaugeQuotientProvedField theoremBoundary
@@ -1161,15 +1717,23 @@ canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt =
   record
     { theoremBoundary =
         canonicalYMGaugeZeroModeVacuumRigidityBoundary
-    ; theoremBoundaryIsCanonical =
+    ; theoremBoundaryCanonical =
+        true
+    ; theoremBoundaryCanonicalIsTrue =
         refl
     ; consumedHamiltonianFailClosedReceipt =
         Ham.canonicalYMHamiltonianDominationFailClosedReceipt
-    ; consumedHamiltonianFailClosedReceiptIsCanonical =
+    ; consumedHamiltonianFailClosedReceiptCanonical =
+        true
+    ; consumedHamiltonianFailClosedReceiptCanonicalIsTrue =
         refl
     ; target =
         canonicalZeroModeVacuumRigidityTarget
     ; targetIsCanonical =
+        refl
+    ; sheafRigidityTarget =
+        canonicalGaugeZeroModeSheafRigidityTarget
+    ; sheafRigidityTargetIsCanonical =
         refl
     ; nonVacuumExclusionTarget =
         canonicalNonVacuumZeroEnergyExclusionTarget
@@ -1178,6 +1742,14 @@ canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt =
     ; targetRecorded =
         refl
     ; theoremStillMissing =
+        refl
+    ; gaugeZeroModeSheafRecordedInBoundary =
+        refl
+    ; holonomyClassificationTargetRecordedInBoundary =
+        refl
+    ; sheafRigidityStillMissing =
+        refl
+    ; holonomyClassificationStillMissing =
         refl
     ; nonVacuumZeroEnergyExclusionStillMissing =
         refl
@@ -1189,9 +1761,15 @@ canonicalYMGaugeZeroModeVacuumRigidityFailClosedReceipt =
         refl
     ; positiveTopologicalEnergyStillMissing =
         refl
+    ; uniformPositiveHolonomyActionStillMissing =
+        refl
     ; hamiltonianDominationStillMissing =
         refl
-    ; hamiltonianFailClosedTheoremStillMissing =
+    ; hamiltonianDominationProvedStillFalse =
+        refl
+    ; hamiltonianFailClosedReceiptConsumed =
+        true
+    ; hamiltonianFailClosedReceiptConsumedIsTrue =
         refl
     ; osOnGaugeQuotientStillMissing =
         refl

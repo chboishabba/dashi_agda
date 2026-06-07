@@ -841,14 +841,14 @@ canonicalProjectionNonlocalityDefectLaplacianZeroModeSheafReceipt =
     refl
     refl
     refl
+    refl
+    refl
+    refl
+    refl
+    refl
     defectLaplacianZeroModePromotionAuthorityImpossibleHere
     zeroModeRigidityReceiptAuthorityImpossibleHere
     continuumZeroModeTransferAuthorityImpossibleHere
-    refl
-    refl
-    refl
-    refl
-    refl
 
 zeroModeSheafReceiptKeepsNSClayFalse :
   clayNavierStokesPromoted

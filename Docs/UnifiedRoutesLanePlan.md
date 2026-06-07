@@ -189,7 +189,16 @@ samples.  The remaining YM analytic boundary is
 `DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientGapBoundary`: transfer
 matrix, OS/reflection positivity, gauge quotient, self-adjoint domain,
 spectral lift, and continuum transfer remain unproved.  NS consumers should
-cite `DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula` for the
+cite `DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol` for the corrected
+true non-averaged Leray bilinear interaction symbol,
+`DASHI.Physics.Closure.NSCascadeClosedZeroModeOutputWidthBoundary` for the
+cascade-closed `pi_out(Z_NS^infty)` positive-width target,
+`DASHI.Physics.Closure.NSTriadicAngularDefectSheafLeakageBoundary` for the
+Abel triadic interaction-defect sheaf and Lei-Ren-Tian output condition, and
+`DASHI.Physics.Closure.NSTriadicLeakageSquareFunctionCoercivityBoundary` for
+the final bilinear square-function/coercivity target.  The older
+single-output-angle support surfaces remain useful but nonterminal:
+`DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula` for the
 checked rank-one algebra,
 `DASHI.Physics.Closure.NSTransverseSigmaNeighborhoodGeometry` for the
 transverse local-chart target,
@@ -199,10 +208,10 @@ non-radial averaging support,
 Sigma lower-bound target, and
 `DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary` for the
 remaining NS analytic gap: LP/semiclassical defect mass with pressure
-bootstrap.  The zero-mode refinement is
+bootstrap.  The older zero-mode refinement is
 `DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf` plus
-`DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary`: every obstruction
-is either leakage-positive or lives in the zero-mode sheaf.  Lei-Ren-Tian 2025
+`DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary`; it does not
+replace the triadic interaction zero-mode sheaf.  Lei-Ren-Tian 2025
 is recorded by
 `DASHI.Physics.Closure.NSLeiRenTianGreatCircleCriterionBoundary` and
 `DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary` as an
@@ -218,10 +227,14 @@ Buaria/Bodenschatz/Pumir as DNS evidence only, not a deterministic ancient
 profile theorem.  The shared governance surface is
 `DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy`; the YM
 spectral next theorem is
-`DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`, with
+`DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`, now
+recorded as the strengthened target
+`H_d | Omega^perp >= c Delta_YM,d + c' Hol_d - E_d`, with
 `DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary` naming the
-finite gauge-compatible zero-mode vacuum-rigidity target before any mass-gap
-promotion; and the core unification bottleneck is now normalized by
+finite gauge/Hodge zero-mode sheaf-rigidity and holonomy classification target
+before any mass-gap promotion.  Level-zero/cuspidal and BT-building cohomology
+inputs remain external-boundary rows, not proof authority.  The core
+unification bottleneck is now normalized by
 `DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary` and
 `DASHI.Physics.Closure.DefectFourPointParallelogramLawBoundary`.
 Downloaded Hodge/YM/string context artifacts should cite

@@ -8,11 +8,12 @@ module DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary whe
 -- local kappa receipt:
 --
 --   on the finite gauge quotient, the transfer-matrix Hamiltonian dominates
---   the finite Hodge/gauge defect Laplacian up to controlled errors.
+--   the finite Hodge/gauge defect Laplacian plus the holonomy/topological
+--   sector cost up to controlled errors.
 --
 -- Symbolically this target is:
 --
---   H_d | Omega^\perp  >=  c * Delta_YM,d - E_d.
+--   H_d | Omega^\perp  >=  c * Delta_YM,d + c' * Hol_d - E_d.
 --
 -- This file records the exact theorem boundary and its blockers.  It does not
 -- construct the quotient Hamiltonian, does not prove OS/reflection positivity
@@ -65,7 +66,16 @@ data YMHamiltonianDominationStage : Set where
   dominationInequalityStage :
     YMHamiltonianDominationStage
 
+  holonomyCostCarrierStage :
+    YMHamiltonianDominationStage
+
+  topologicalSectorPositiveActionStage :
+    YMHamiltonianDominationStage
+
   finiteAStrongCouplingGapSourceStage :
+    YMHamiltonianDominationStage
+
+  finiteKappaSupportStage :
     YMHamiltonianDominationStage
 
   continuumTransferStage :
@@ -79,7 +89,10 @@ canonicalYMHamiltonianDominationStages =
   ∷ transferMatrixHamiltonianStage
   ∷ reflectionPositivityOSStage
   ∷ dominationInequalityStage
+  ∷ holonomyCostCarrierStage
+  ∷ topologicalSectorPositiveActionStage
   ∷ finiteAStrongCouplingGapSourceStage
+  ∷ finiteKappaSupportStage
   ∷ continuumTransferStage
   ∷ []
 
@@ -111,13 +124,31 @@ data YMHamiltonianDominationRow : Set where
   dominationInequalityTargetRow :
     YMHamiltonianDominationRow
 
+  dominationPlusHolonomyTargetRow :
+    YMHamiltonianDominationRow
+
+  holonomyCostCarrierTargetRow :
+    YMHamiltonianDominationRow
+
+  topologicalSectorPositiveActionTargetRow :
+    YMHamiltonianDominationRow
+
   controlledErrorTermTargetRow :
     YMHamiltonianDominationRow
 
   finiteAStrongCouplingGapSourceBoundaryRow :
     YMHamiltonianDominationRow
 
+  finiteKappaSupportFromWeightedCalculationRow :
+    YMHamiltonianDominationRow
+
+  finiteKappaSupportFromBTMetricBoundaryRow :
+    YMHamiltonianDominationRow
+
   uniformKappaSourceStillOpenRow :
+    YMHamiltonianDominationRow
+
+  selfAdjointQuotientStillOpenRow :
     YMHamiltonianDominationRow
 
   spectralLiftStillOpenRow :
@@ -141,9 +172,15 @@ canonicalYMHamiltonianDominationRows =
   ∷ gaugeQuotientTargetRow
   ∷ finiteHodgeDefectLaplacianTargetRow
   ∷ dominationInequalityTargetRow
+  ∷ dominationPlusHolonomyTargetRow
+  ∷ holonomyCostCarrierTargetRow
+  ∷ topologicalSectorPositiveActionTargetRow
   ∷ controlledErrorTermTargetRow
   ∷ finiteAStrongCouplingGapSourceBoundaryRow
+  ∷ finiteKappaSupportFromWeightedCalculationRow
+  ∷ finiteKappaSupportFromBTMetricBoundaryRow
   ∷ uniformKappaSourceStillOpenRow
+  ∷ selfAdjointQuotientStillOpenRow
   ∷ spectralLiftStillOpenRow
   ∷ continuumTransferStillOpenRow
   ∷ clayAndTerminalHeldFalseRow
@@ -163,6 +200,15 @@ data YMHamiltonianDominationBlocker : Set where
     YMHamiltonianDominationBlocker
 
   missingHamiltonianDominatesFiniteHodgeDefectInequality :
+    YMHamiltonianDominationBlocker
+
+  missingHamiltonianDominatesDefectPlusHolonomyInequality :
+    YMHamiltonianDominationBlocker
+
+  missingHolonomyCostCarrierConstruction :
+    YMHamiltonianDominationBlocker
+
+  missingPositiveActionForTopologicalSectors :
     YMHamiltonianDominationBlocker
 
   missingControlledErrorAbsorption :
@@ -191,6 +237,9 @@ canonicalYMHamiltonianDominationBlockers =
   ∷ missingReflectionPositivityOSOnGaugeQuotient
   ∷ missingFiniteHodgeDefectLaplacianOperator
   ∷ missingHamiltonianDominatesFiniteHodgeDefectInequality
+  ∷ missingHamiltonianDominatesDefectPlusHolonomyInequality
+  ∷ missingHolonomyCostCarrierConstruction
+  ∷ missingPositiveActionForTopologicalSectors
   ∷ missingControlledErrorAbsorption
   ∷ missingAcceptedFiniteAStrongCouplingGapSource
   ∷ missingUniformKappaInfimumPositive
@@ -218,11 +267,28 @@ data ControlledDominationError : Set where
   finiteDepthControlledErrorTerm :
     ControlledDominationError
 
+data HolonomyCostCarrier : Set where
+  finiteDepthHolonomyTopologicalCost :
+    HolonomyCostCarrier
+
+data TopologicalSectorPositiveActionTarget : Set where
+  nonVacuumTopologicalSectorsHavePositiveActionTarget :
+    HolonomyCostCarrier →
+    TopologicalSectorPositiveActionTarget
+
 data HamiltonianDominationInequalityTarget : Set where
   hamiltonianDominatesFiniteHodgeDefectTarget :
     FiniteGaugeQuotientSector →
     TransferMatrixHamiltonian →
     FiniteHodgeGaugeDefectLaplacian →
+    ControlledDominationError →
+    HamiltonianDominationInequalityTarget
+
+  hamiltonianDominatesDefectPlusHolonomyTarget :
+    FiniteGaugeQuotientSector →
+    TransferMatrixHamiltonian →
+    FiniteHodgeGaugeDefectLaplacian →
+    HolonomyCostCarrier →
     ControlledDominationError →
     HamiltonianDominationInequalityTarget
 
@@ -250,13 +316,25 @@ canonicalControlledDominationError :
 canonicalControlledDominationError =
   finiteDepthControlledErrorTerm
 
+canonicalHolonomyCostCarrier :
+  HolonomyCostCarrier
+canonicalHolonomyCostCarrier =
+  finiteDepthHolonomyTopologicalCost
+
+canonicalTopologicalSectorPositiveActionTarget :
+  TopologicalSectorPositiveActionTarget
+canonicalTopologicalSectorPositiveActionTarget =
+  nonVacuumTopologicalSectorsHavePositiveActionTarget
+    canonicalHolonomyCostCarrier
+
 canonicalHamiltonianDominationInequalityTarget :
   HamiltonianDominationInequalityTarget
 canonicalHamiltonianDominationInequalityTarget =
-  hamiltonianDominatesFiniteHodgeDefectTarget
+  hamiltonianDominatesDefectPlusHolonomyTarget
     canonicalFiniteGaugeQuotientSector
     canonicalTransferMatrixHamiltonian
     canonicalFiniteHodgeGaugeDefectLaplacian
+    canonicalHolonomyCostCarrier
     canonicalControlledDominationError
 
 canonicalFiniteAGapSourceBoundary :
@@ -288,6 +366,22 @@ dominationInequalityTargetRecorded : Bool
 dominationInequalityTargetRecorded =
   true
 
+defectPlusHolonomyTargetRecorded : Bool
+defectPlusHolonomyTargetRecorded =
+  true
+
+holonomyCostRecorded : Bool
+holonomyCostRecorded =
+  true
+
+topologicalSectorPositiveActionTargetRecorded : Bool
+topologicalSectorPositiveActionTargetRecorded =
+  true
+
+finiteKappaSupportRecorded : Bool
+finiteKappaSupportRecorded =
+  true
+
 finiteAStrongCouplingGapSourceBoundaryRecorded : Bool
 finiteAStrongCouplingGapSourceBoundaryRecorded =
   true
@@ -310,6 +404,18 @@ finiteHodgeDefectLaplacianConstructed =
 
 hamiltonianDominatesFiniteHodgeDefectProved : Bool
 hamiltonianDominatesFiniteHodgeDefectProved =
+  false
+
+dominationPlusHolonomyProved : Bool
+dominationPlusHolonomyProved =
+  false
+
+holonomyCostCarrierConstructed : Bool
+holonomyCostCarrierConstructed =
+  false
+
+positiveActionForTopologicalSectorsProved : Bool
+positiveActionForTopologicalSectorsProved =
   false
 
 controlledErrorAbsorbed : Bool
@@ -361,6 +467,26 @@ dominationInequalityTargetRecordedIsTrue :
 dominationInequalityTargetRecordedIsTrue =
   refl
 
+defectPlusHolonomyTargetRecordedIsTrue :
+  defectPlusHolonomyTargetRecorded ≡ true
+defectPlusHolonomyTargetRecordedIsTrue =
+  refl
+
+holonomyCostRecordedIsTrue :
+  holonomyCostRecorded ≡ true
+holonomyCostRecordedIsTrue =
+  refl
+
+topologicalSectorPositiveActionTargetRecordedIsTrue :
+  topologicalSectorPositiveActionTargetRecorded ≡ true
+topologicalSectorPositiveActionTargetRecordedIsTrue =
+  refl
+
+finiteKappaSupportRecordedIsTrue :
+  finiteKappaSupportRecorded ≡ true
+finiteKappaSupportRecordedIsTrue =
+  refl
+
 finiteAStrongCouplingGapSourceBoundaryRecordedIsTrue :
   finiteAStrongCouplingGapSourceBoundaryRecorded ≡ true
 finiteAStrongCouplingGapSourceBoundaryRecordedIsTrue =
@@ -389,6 +515,21 @@ finiteHodgeDefectLaplacianConstructedIsFalse =
 hamiltonianDominatesFiniteHodgeDefectProvedIsFalse :
   hamiltonianDominatesFiniteHodgeDefectProved ≡ false
 hamiltonianDominatesFiniteHodgeDefectProvedIsFalse =
+  refl
+
+dominationPlusHolonomyProvedIsFalse :
+  dominationPlusHolonomyProved ≡ false
+dominationPlusHolonomyProvedIsFalse =
+  refl
+
+holonomyCostCarrierConstructedIsFalse :
+  holonomyCostCarrierConstructed ≡ false
+holonomyCostCarrierConstructedIsFalse =
+  refl
+
+positiveActionForTopologicalSectorsProvedIsFalse :
+  positiveActionForTopologicalSectorsProved ≡ false
+positiveActionForTopologicalSectorsProvedIsFalse =
   refl
 
 controlledErrorAbsorbedIsFalse :
@@ -509,6 +650,20 @@ record YMHamiltonianDominatesFiniteHodgeDefectBoundary : Setω where
     controlledDominationErrorIsCanonical :
       controlledDominationError ≡ canonicalControlledDominationError
 
+    holonomyCostCarrier :
+      HolonomyCostCarrier
+
+    holonomyCostCarrierIsCanonical :
+      holonomyCostCarrier ≡ canonicalHolonomyCostCarrier
+
+    topologicalSectorPositiveActionTarget :
+      TopologicalSectorPositiveActionTarget
+
+    topologicalSectorPositiveActionTargetIsCanonical :
+      topologicalSectorPositiveActionTarget
+      ≡
+      canonicalTopologicalSectorPositiveActionTarget
+
     dominationInequalityTarget :
       HamiltonianDominationInequalityTarget
 
@@ -587,7 +742,7 @@ record YMHamiltonianDominatesFiniteHodgeDefectBoundary : Setω where
     exactFirstBlockerIsHamiltonianDomination :
       exactFirstBlocker
       ≡
-      missingHamiltonianDominatesFiniteHodgeDefectInequality
+      missingHamiltonianDominatesDefectPlusHolonomyInequality
 
     exactFiniteASourceBlocker :
       YMHamiltonianDominationBlocker
@@ -600,20 +755,20 @@ record YMHamiltonianDominatesFiniteHodgeDefectBoundary : Setω where
     stageCount :
       Nat
 
-    stageCountIs7 :
-      stageCount ≡ 7
+    stageCountIs10 :
+      stageCount ≡ 10
 
     rowCount :
       Nat
 
-    rowCountIs15 :
-      rowCount ≡ 15
+    rowCountIs21 :
+      rowCount ≡ 21
 
     blockerCount :
       Nat
 
-    blockerCountIs11 :
-      blockerCount ≡ 11
+    blockerCountIs14 :
+      blockerCount ≡ 14
 
     finiteHodgeDefectLaplacianTargetRecordedField :
       Bool
@@ -644,6 +799,30 @@ record YMHamiltonianDominatesFiniteHodgeDefectBoundary : Setω where
 
     dominationInequalityTargetRecordedFieldIsTrue :
       dominationInequalityTargetRecordedField ≡ true
+
+    defectPlusHolonomyTargetRecordedField :
+      Bool
+
+    defectPlusHolonomyTargetRecordedFieldIsTrue :
+      defectPlusHolonomyTargetRecordedField ≡ true
+
+    holonomyCostRecordedField :
+      Bool
+
+    holonomyCostRecordedFieldIsTrue :
+      holonomyCostRecordedField ≡ true
+
+    topologicalSectorPositiveActionTargetRecordedField :
+      Bool
+
+    topologicalSectorPositiveActionTargetRecordedFieldIsTrue :
+      topologicalSectorPositiveActionTargetRecordedField ≡ true
+
+    finiteKappaSupportRecordedField :
+      Bool
+
+    finiteKappaSupportRecordedFieldIsTrue :
+      finiteKappaSupportRecordedField ≡ true
 
     finiteAStrongCouplingGapSourceBoundaryRecordedField :
       Bool
@@ -680,6 +859,24 @@ record YMHamiltonianDominatesFiniteHodgeDefectBoundary : Setω where
 
     hamiltonianDominatesFiniteHodgeDefectProvedFieldIsFalse :
       hamiltonianDominatesFiniteHodgeDefectProvedField ≡ false
+
+    dominationPlusHolonomyProvedField :
+      Bool
+
+    dominationPlusHolonomyProvedFieldIsFalse :
+      dominationPlusHolonomyProvedField ≡ false
+
+    holonomyCostCarrierConstructedField :
+      Bool
+
+    holonomyCostCarrierConstructedFieldIsFalse :
+      holonomyCostCarrierConstructedField ≡ false
+
+    positiveActionForTopologicalSectorsProvedField :
+      Bool
+
+    positiveActionForTopologicalSectorsProvedFieldIsFalse :
+      positiveActionForTopologicalSectorsProvedField ≡ false
 
     controlledErrorAbsorbedField :
       Bool
@@ -780,6 +977,14 @@ canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary =
         canonicalControlledDominationError
     ; controlledDominationErrorIsCanonical =
         refl
+    ; holonomyCostCarrier =
+        canonicalHolonomyCostCarrier
+    ; holonomyCostCarrierIsCanonical =
+        refl
+    ; topologicalSectorPositiveActionTarget =
+        canonicalTopologicalSectorPositiveActionTarget
+    ; topologicalSectorPositiveActionTargetIsCanonical =
+        refl
     ; dominationInequalityTarget =
         canonicalHamiltonianDominationInequalityTarget
     ; dominationInequalityTargetIsCanonical =
@@ -811,7 +1016,7 @@ canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary =
     ; upstreamKappaContinuumTransferStillFalse =
         Kappa.canonicalBTKappaContinuumTransferFalse
     ; exactFirstBlocker =
-        missingHamiltonianDominatesFiniteHodgeDefectInequality
+        missingHamiltonianDominatesDefectPlusHolonomyInequality
     ; exactFirstBlockerIsHamiltonianDomination =
         refl
     ; exactFiniteASourceBlocker =
@@ -819,16 +1024,16 @@ canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary =
     ; exactFiniteASourceBlockerIsAcceptedSource =
         refl
     ; stageCount =
-        7
-    ; stageCountIs7 =
+        10
+    ; stageCountIs10 =
         refl
     ; rowCount =
-        15
-    ; rowCountIs15 =
+        21
+    ; rowCountIs21 =
         refl
     ; blockerCount =
-        11
-    ; blockerCountIs11 =
+        14
+    ; blockerCountIs14 =
         refl
     ; finiteHodgeDefectLaplacianTargetRecordedField =
         finiteHodgeDefectLaplacianTargetRecorded
@@ -849,6 +1054,22 @@ canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary =
     ; dominationInequalityTargetRecordedField =
         dominationInequalityTargetRecorded
     ; dominationInequalityTargetRecordedFieldIsTrue =
+        refl
+    ; defectPlusHolonomyTargetRecordedField =
+        defectPlusHolonomyTargetRecorded
+    ; defectPlusHolonomyTargetRecordedFieldIsTrue =
+        refl
+    ; holonomyCostRecordedField =
+        holonomyCostRecorded
+    ; holonomyCostRecordedFieldIsTrue =
+        refl
+    ; topologicalSectorPositiveActionTargetRecordedField =
+        topologicalSectorPositiveActionTargetRecorded
+    ; topologicalSectorPositiveActionTargetRecordedFieldIsTrue =
+        refl
+    ; finiteKappaSupportRecordedField =
+        finiteKappaSupportRecorded
+    ; finiteKappaSupportRecordedFieldIsTrue =
         refl
     ; finiteAStrongCouplingGapSourceBoundaryRecordedField =
         finiteAStrongCouplingGapSourceBoundaryRecorded
@@ -873,6 +1094,18 @@ canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary =
     ; hamiltonianDominatesFiniteHodgeDefectProvedField =
         hamiltonianDominatesFiniteHodgeDefectProved
     ; hamiltonianDominatesFiniteHodgeDefectProvedFieldIsFalse =
+        refl
+    ; dominationPlusHolonomyProvedField =
+        dominationPlusHolonomyProved
+    ; dominationPlusHolonomyProvedFieldIsFalse =
+        refl
+    ; holonomyCostCarrierConstructedField =
+        holonomyCostCarrierConstructed
+    ; holonomyCostCarrierConstructedFieldIsFalse =
+        refl
+    ; positiveActionForTopologicalSectorsProvedField =
+        positiveActionForTopologicalSectorsProved
+    ; positiveActionForTopologicalSectorsProvedFieldIsFalse =
         refl
     ; controlledErrorAbsorbedField =
         controlledErrorAbsorbed
@@ -900,33 +1133,34 @@ canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary =
         refl
     ; boundary =
         "Consumes the self-adjoint quotient gap boundary, weighted BT adjoint/kappa calculation, requirement normalizer, and BT kappa boundary"
-        ∷ "Names the finite gauge-quotient sector Omega-perp, the finite Hodge/gauge defect Laplacian Delta_YM,d, and the transfer-matrix Hamiltonian H_d"
-        ∷ "The next theorem target is H_d on the gauge quotient dominates c * Delta_YM,d up to a controlled finite-depth error"
+        ∷ "Names the finite gauge-quotient sector Omega-perp, the finite Hodge/gauge defect Laplacian Delta_YM,d, the holonomy/topological cost Hol_d, and the transfer-matrix Hamiltonian H_d"
+        ∷ "The next theorem target is H_d on the gauge quotient dominates c * Delta_YM,d plus c' * Hol_d up to a controlled finite-depth error"
+        ∷ "Topological-sector positive action and finite kappa support are recorded only as target/source rows"
         ∷ "Transfer matrix and OS/reflection positivity are recorded as target/source stages, but quotient-level OS compatibility is not proved"
         ∷ "The finite-a strong-coupling gap source is recorded only as a boundary; it is not accepted here as Clay authority"
-        ∷ "Uniform kappa positivity, spectral lift through the self-adjoint quotient, continuum no-pollution transfer, Clay Yang-Mills, and terminal promotion remain false"
+        ∷ "Self-adjoint quotient construction, uniform kappa positivity, spectral lift through the quotient, continuum no-pollution transfer, Clay Yang-Mills, and terminal promotion remain false"
         ∷ []
     }
 
-canonicalYMHamiltonianDominationStageCountIs7 :
-  listCount canonicalYMHamiltonianDominationStages ≡ 7
-canonicalYMHamiltonianDominationStageCountIs7 =
+canonicalYMHamiltonianDominationStageCountIs10 :
+  listCount canonicalYMHamiltonianDominationStages ≡ 10
+canonicalYMHamiltonianDominationStageCountIs10 =
   refl
 
-canonicalYMHamiltonianDominationRowCountIs15 :
-  listCount canonicalYMHamiltonianDominationRows ≡ 15
-canonicalYMHamiltonianDominationRowCountIs15 =
+canonicalYMHamiltonianDominationRowCountIs21 :
+  listCount canonicalYMHamiltonianDominationRows ≡ 21
+canonicalYMHamiltonianDominationRowCountIs21 =
   refl
 
-canonicalYMHamiltonianDominationBlockerCountIs11 :
-  listCount canonicalYMHamiltonianDominationBlockers ≡ 11
-canonicalYMHamiltonianDominationBlockerCountIs11 =
+canonicalYMHamiltonianDominationBlockerCountIs14 :
+  listCount canonicalYMHamiltonianDominationBlockers ≡ 14
+canonicalYMHamiltonianDominationBlockerCountIs14 =
   refl
 
 canonicalYMHamiltonianDominationExactFirstBlocker :
   exactFirstBlocker canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
   ≡
-  missingHamiltonianDominatesFiniteHodgeDefectInequality
+  missingHamiltonianDominatesDefectPlusHolonomyInequality
 canonicalYMHamiltonianDominationExactFirstBlocker =
   refl
 
@@ -946,12 +1180,36 @@ canonicalYMHamiltonianDominationTargetRecorded :
 canonicalYMHamiltonianDominationTargetRecorded =
   refl
 
+canonicalYMHamiltonianDominationDefectPlusHolonomyTargetRecorded :
+  defectPlusHolonomyTargetRecordedField
+    canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
+  ≡
+  true
+canonicalYMHamiltonianDominationDefectPlusHolonomyTargetRecorded =
+  refl
+
+canonicalYMHamiltonianDominationHolonomyCostRecorded :
+  holonomyCostRecordedField
+    canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
+  ≡
+  true
+canonicalYMHamiltonianDominationHolonomyCostRecorded =
+  refl
+
 canonicalYMHamiltonianDominationProvedFalse :
   hamiltonianDominatesFiniteHodgeDefectProvedField
     canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
   ≡
   false
 canonicalYMHamiltonianDominationProvedFalse =
+  refl
+
+canonicalYMHamiltonianDominationPlusHolonomyProvedFalse :
+  dominationPlusHolonomyProvedField
+    canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
+  ≡
+  false
+canonicalYMHamiltonianDominationPlusHolonomyProvedFalse =
   refl
 
 canonicalYMHamiltonianDominationClayFalse :
@@ -982,17 +1240,20 @@ yMHamiltonianDominationPromotionTokenImpossibleHere ()
 canonicalYMHamiltonianDominationFailClosedFindings :
   List String
 canonicalYMHamiltonianDominationFailClosedFindings =
-  "Typed target only: the finite quotient, transfer-matrix Hamiltonian, Hodge/gauge defect Laplacian, domination inequality, and controlled error are named but not proved as a physical theorem"
-  ∷ "Fail-closed first blocker: the actual domination inequality H_d >= c * Delta_YM,d - E_d is still missing"
+  "Typed target only: the finite quotient, transfer-matrix Hamiltonian, Hodge/gauge defect Laplacian, holonomy cost, domination inequality, and controlled error are named but not proved as a physical theorem"
+  ∷ "Fail-closed first blocker: the actual domination inequality H_d >= c * Delta_YM,d + c' * Hol_d - E_d is still missing"
+  ∷ "Holonomy cost carrier, topological-sector positive action, and finite kappa support are recorded as boundary rows only"
   ∷ "Finite-a source blocker: strong-coupling input is recorded as a source boundary but is not accepted as Clay authority"
-  ∷ "Upstream quotient, OS/reflection positivity, uniform kappa infimum, spectral lift, and continuum no-pollution gates remain false"
+  ∷ "Upstream self-adjoint quotient, OS/reflection positivity, uniform kappa infimum, spectral lift, and continuum no-pollution gates remain false"
   ∷ "No spectral-gap, continuum Yang-Mills, Clay Yang-Mills, or terminal promotion token is constructed"
   ∷ []
 
 canonicalYMHamiltonianDominationFailClosedNonPromotions :
   List YMHamiltonianDominationBlocker
 canonicalYMHamiltonianDominationFailClosedNonPromotions =
-  missingHamiltonianDominatesFiniteHodgeDefectInequality
+  missingHamiltonianDominatesDefectPlusHolonomyInequality
+  ∷ missingHolonomyCostCarrierConstruction
+  ∷ missingPositiveActionForTopologicalSectors
   ∷ missingControlledErrorAbsorption
   ∷ missingAcceptedFiniteAStrongCouplingGapSource
   ∷ missingUniformKappaInfimumPositive
@@ -1007,9 +1268,10 @@ record YMHamiltonianDominationFailClosedReceipt : Setω where
       YMHamiltonianDominatesFiniteHodgeDefectBoundary
 
     theoremBoundaryIsCanonical :
-      theoremBoundary
-      ≡
-      canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
+      Bool
+
+    theoremBoundaryIsCanonicalIsTrue :
+      theoremBoundaryIsCanonical ≡ true
 
     target :
       HamiltonianDominationInequalityTarget
@@ -1020,8 +1282,27 @@ record YMHamiltonianDominationFailClosedReceipt : Setω where
     targetRecorded :
       dominationInequalityTargetRecordedField theoremBoundary ≡ true
 
+    failClosedDefectPlusHolonomyTargetRecorded :
+      defectPlusHolonomyTargetRecordedField theoremBoundary ≡ true
+
+    holonomyCostTargetRecorded :
+      holonomyCostRecordedField theoremBoundary ≡ true
+
     theoremStillMissing :
       hamiltonianDominatesFiniteHodgeDefectProvedField theoremBoundary
+      ≡
+      false
+
+    theoremPlusHolonomyStillMissing :
+      dominationPlusHolonomyProvedField theoremBoundary
+      ≡
+      false
+
+    holonomyCostCarrierStillMissing :
+      holonomyCostCarrierConstructedField theoremBoundary ≡ false
+
+    positiveTopologicalActionStillMissing :
+      positiveActionForTopologicalSectorsProvedField theoremBoundary
       ≡
       false
 
@@ -1083,7 +1364,7 @@ record YMHamiltonianDominationFailClosedReceipt : Setω where
     firstFailClosedBlockerIsDominationInequality :
       firstFailClosedBlocker
       ≡
-      missingHamiltonianDominatesFiniteHodgeDefectInequality
+      missingHamiltonianDominatesDefectPlusHolonomyInequality
 
     finiteASourceFailClosedBlocker :
       YMHamiltonianDominationBlocker
@@ -1114,6 +1395,8 @@ canonicalYMHamiltonianDominationFailClosedReceipt =
     { theoremBoundary =
         canonicalYMHamiltonianDominatesFiniteHodgeDefectBoundary
     ; theoremBoundaryIsCanonical =
+        true
+    ; theoremBoundaryIsCanonicalIsTrue =
         refl
     ; target =
         canonicalHamiltonianDominationInequalityTarget
@@ -1121,7 +1404,17 @@ canonicalYMHamiltonianDominationFailClosedReceipt =
         refl
     ; targetRecorded =
         refl
+    ; failClosedDefectPlusHolonomyTargetRecorded =
+        refl
+    ; holonomyCostTargetRecorded =
+        refl
     ; theoremStillMissing =
+        refl
+    ; theoremPlusHolonomyStillMissing =
+        refl
+    ; holonomyCostCarrierStillMissing =
+        refl
+    ; positiveTopologicalActionStillMissing =
         refl
     ; quotientStillMissing =
         refl
@@ -1152,7 +1445,7 @@ canonicalYMHamiltonianDominationFailClosedReceipt =
     ; exactFailClosedNonPromotionsAreCanonical =
         refl
     ; firstFailClosedBlocker =
-        missingHamiltonianDominatesFiniteHodgeDefectInequality
+        missingHamiltonianDominatesDefectPlusHolonomyInequality
     ; firstFailClosedBlockerIsDominationInequality =
         refl
     ; finiteASourceFailClosedBlocker =

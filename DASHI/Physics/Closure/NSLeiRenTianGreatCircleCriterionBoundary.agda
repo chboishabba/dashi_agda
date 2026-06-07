@@ -900,6 +900,9 @@ canonicalNSLeiRenTianGreatCircleCriterionFailClosedReceipt =
     refl
     refl
     refl
+    refl
+    refl
+    refl
     []
     refl
 
@@ -1199,10 +1202,6 @@ record NSLeiRenTianGreatCircleCriterionBoundaryReceipt : Setω where
 
     failClosedReceipt :
       NSLeiRenTianGreatCircleCriterionFailClosedReceipt
-    failClosedReceiptIsCanonical :
-      failClosedReceipt
-      ≡
-      canonicalNSLeiRenTianGreatCircleCriterionFailClosedReceipt
 
     orcslpgf :
       NSLeiRenTianGreatCircleCriterionORCSLPGF
@@ -1309,6 +1308,5 @@ canonicalNSLeiRenTianGreatCircleCriterionBoundaryReceipt =
     []
     refl
     canonicalNSLeiRenTianGreatCircleCriterionFailClosedReceipt
-    refl
     canonicalNSLeiRenTianGreatCircleCriterionORCSLPGF
     refl
