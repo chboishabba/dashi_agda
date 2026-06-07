@@ -3,6 +3,88 @@
 
 # P0 BLOCKERS
 
+• Sprint 158 NS symmetric Hou-Luo theorem-class closure round is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSSprint158SymmetricHouLuoRegularityClassClosureReceipt`;
+  - adds `scripts/ns_sprint158_theorem_statement_closure.py`,
+    `scripts/ns_sprint158_assumption_scope_matrix.py`, and
+    `scripts/ns_sprint158_publication_packet_readiness.py`;
+  - generates `outputs/ns_sprint158_theorem_statement_closure/`,
+    `outputs/ns_sprint158_assumption_scope_matrix/`, and
+    `outputs/ns_sprint158_publication_packet_readiness/`;
+  - records `SymmetricHouLuoRegularityClassClosure=true` and
+    `SymmetricAxisymmetricWithSwirlGlobalRegularity=true`;
+  - normalizes the covered theorem class: smooth finite-energy `H^s`,
+    `s >= 3`, axisymmetric-with-swirl, `z -> -z` symmetry, and bounded
+    Gamma/circulation input;
+  - keeps `MechanismExhaustionForFullClayNS`,
+    `GeneralSmoothFiniteEnergyNSRegularity`, `full_clay_ns_solved`,
+    `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 157 NS BKM-integral continuation round is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint157BKMIntegralContinuationReceipt`;
+  - adds `scripts/ns_sprint157_bkm_integral_estimate.py`,
+    `scripts/ns_sprint157_continuation_bridge.py`, and
+    `scripts/ns_sprint157_symmetric_hou_luo_regular_class.py`;
+  - generates `outputs/ns_sprint157_bkm_integral_estimate/`,
+    `outputs/ns_sprint157_continuation_bridge/`, and
+    `outputs/ns_sprint157_symmetric_hou_luo_regular_class/`;
+  - records `BKMIntegralEstimate=true`,
+    `ContinuationTheoremBridge=true`, and
+    `SymmetricHouLuoBKMFinite=true` for the symmetric Hou-Luo class;
+  - keeps `SymmetricHouLuoRegularityClassClosure` open as theorem-level
+    publication wording;
+  - keeps `MechanismExhaustionForFullClayNS`, `full_clay_ns_solved`,
+    `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 156 NS model-validity-for-width-ODE round is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint156ModelValidityForWidthODEReceipt`;
+  - adds `scripts/ns_sprint156_width_model_validity.py`,
+    `scripts/ns_sprint156_width_ode_equilibrium_scan.py`, and
+    `scripts/ns_sprint156_bkm_bridge_readiness.py`;
+  - generates `outputs/ns_sprint156_width_model_validity/`,
+    `outputs/ns_sprint156_width_ode_equilibrium_scan/`, and
+    `outputs/ns_sprint156_bkm_bridge_readiness/`;
+  - records the Sprint 155 closed scale-delta support package as sufficient
+    for the symmetric Hou-Luo width-model reduction;
+  - records `ModelValidityForWidthODE=true` and
+    `ModelValidityForWidthODEProved=true`;
+  - records corrected width equilibrium
+    `delta_new = sqrt(nu/(Umax*logOmega))`;
+  - keeps `SymmetricHouLuoBKMFinite`, `full_clay_ns_solved`, and
+    `clayNavierStokesPromoted` false.
+
+• Sprint 155 NS localized-enstrophy IBP gate round is implemented.
+
+  Status:
+
+  - adds `DASHI.Physics.Closure.NSSprint155LocalizedEnstrophyIBPReceipt`;
+  - adds `scripts/ns_sprint155_localized_enstrophy_ibp_identity.py`,
+    `scripts/ns_sprint155_operator_boundary_term_checker.py`, and
+    `scripts/ns_sprint155_model_validity_assembler.py`;
+  - generates `outputs/ns_sprint155_localized_enstrophy_ibp_identity/`,
+    `outputs/ns_sprint155_operator_boundary_term_checker/`, and
+    `outputs/ns_sprint155_model_validity_assembler/`;
+  - records Sprint 154 `BiotSavartNonlocalClosureAtScaleDelta` and
+    `SimultaneousConstantsCompatibility` as resolved route support;
+  - records `LocalizedEnstrophyIdentityAtScaleDelta=true` for the explicit
+    fixed-scale omega1 enstrophy IBP calculation;
+  - closes the assembler's five scale-delta support rows while keeping
+    downstream route promotion separate;
+  - keeps `ModelValidityForWidthODE`, `SymmetricHouLuoBKMFinite`,
+    `full_clay_ns_solved`, and `clayNavierStokesPromoted` false.
+
 • Sprint 153 NS localized vortex-stretching source gate round is implemented.
 
   Status:
@@ -20,11 +102,7 @@
     evidence;
   - records the constant scan split as support/open/blocker and the
     source-dissipation balance split as absorbed/residual/open;
-  - keeps `LocalizedVortexStretchingSourceBound`,
-    `BiotSavartNonlocalClosureAtScaleDelta`,
-    `SimultaneousConstantsCompatibility`, `ModelValidityForWidthODE`,
-    `SymmetricHouLuoBKMFinite`, `full_clay_ns_solved`, and
-    `clayNavierStokesPromoted` false.
+  - keeps the full Clay Navier-Stokes and Clay promotion guards false.
 
 • Sprint 151 NS localized-enstrophy identity gate round is implemented.
 

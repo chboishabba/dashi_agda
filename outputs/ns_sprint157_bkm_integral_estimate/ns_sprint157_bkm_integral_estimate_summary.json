@@ -1,0 +1,31 @@
+{
+  "BKMIntegralEstimate": true,
+  "ContinuationTheoremBridge": false,
+  "CorrectedOmegaODE": true,
+  "SymmetricHouLuoBKMFinite": false,
+  "all_bkm_integrals_finite": true,
+  "all_omega_bounds_finite": true,
+  "bkm_integral_estimate": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint157_bkm_integral_estimate",
+  "control_card": {
+    "C": "One stdlib Python emitter writes JSON, CSV, Markdown, and manifest artifacts.",
+    "F": "The continuation theorem bridge and theorem-level class closure are handled by separate Sprint157 surfaces.",
+    "G": "Do not promote full_clay_ns_solved, fullClayNSSolved, or clayNavierStokesPromoted.",
+    "L": "corrected Omega ODE -> double exponential Omega bound -> finite BKM integral on finite T.",
+    "O": "Worker 2 owns the Sprint157 BKM integral estimate emitter and output directory.",
+    "P": "Promote BKMIntegralEstimate for the symmetric Hou-Luo class only.",
+    "R": "Separate and integrate dOmega/(Omega log Omega) <= C*Umax dt and certify finite BKM integral rows.",
+    "S": "Sprint156 provides ModelValidityForWidthODE and corrected Omega ODE readiness."
+  },
+  "decision": "bkm_integral_estimate_promoted_for_symmetric_class_only",
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay_ns_solved": false,
+  "lane": 2,
+  "promotion_allowed": false,
+  "row_count": 5,
+  "sprint": 157,
+  "summary_hash": "eccb53032114fb4f49cd4e56e2e2b8de6769279d87302a38f685fcbcad3227dd",
+  "validation_passed": true
+}

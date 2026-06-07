@@ -67,25 +67,64 @@ Schrodinger/Born closure. They still do not promote NS Clay, physical chemistry
 or wet-lab chemistry, broad Standard Model, Maxwell field equations, measured
 numeric values, infinite-dimensional quantum/QFT, or terminal unification.
 
-Current NS Sprint 153 boundary: the repo records
-`LocalizedVortexStretchingSourceBound` as the live Hou-Luo scale-delta source
-gate. The checked receipt
-`DASHI.Physics.Closure.NSSprint153LocalizedVortexStretchingSourceReceipt`
-anchors to the Sprint 151 localized-enstrophy receipt and records the supplied
-Sprint 152 annular-leakage domination as support/conditional only. The
-executable surfaces
-`scripts/ns_sprint153_localized_vortex_stretching_source.py`,
-`scripts/ns_sprint153_core_source_constant_scan.py`, and
-`scripts/ns_sprint153_source_dissipation_balance.py` emit the core
-vortex-stretching source ledger, a 540-row constant scan, and the
-source/dissipation/leakage balance. The core source shape
-`2*u1*v*Omega*delta^2` is normalized as evidence, but the constant scan still
-contains support/open/blocker rows and the balance still has residual/open
-rows. `LocalizedVortexStretchingSourceBound`,
-`BiotSavartNonlocalClosureAtScaleDelta`,
-`SimultaneousConstantsCompatibility`, `ModelValidityForWidthODE`,
-`SymmetricHouLuoBKMFinite`, full Navier-Stokes, and Clay promotion remain
-false.
+Current Standard Model first-principles boundary:
+`DASHI.Promotion.ObligationIndex` now includes a nine-row
+`smFirstPrinciplesBoundarySummaries` layer. The checked surfaces are
+`DASHI.Promotion.StandardModelFirstPrinciplesGapIndex`,
+`DASHI.Promotion.StandardModelUniquenessCountermodelBoundary`,
+`DASHI.Promotion.StandardModelHiggsYukawaParameterFrontier`,
+`DASHI.Promotion.StandardModelGaugeCouplingAuthorityFrontier`,
+`DASHI.Promotion.StandardModelObservableAuthorityBridge`,
+`DASHI.Promotion.StandardModelArchiveContextBinding`, and
+`DASHI.Promotion.StandardModelPrototypeSourceIntake`, plus
+`DASHI.Promotion.StandardModelHiggsHEPDataReceiptAdapter` and
+`DASHI.Promotion.StandardModelHiggsCovariantComparisonLaw`. They preserve the
+positive finite SM content and anomaly/hypercharge checks while making the
+broad first-principles gap typed: uniqueness, generation count, Higgs/Yukawa,
+CKM/PMNS, gauge couplings/running, QFT observables, empirical authority, and
+archive/prototype/HEPData context all remain non-promoting boundaries. The
+Higgs/HEPData adapter emits checksum-bound JSON receipts from `dashiQ/13tev.py`
+and `dashiQ/pseudo_data_harness.py`; the covariant comparison adapter then
+computes four fixture-baseline Higgs rows with positive-definite covariance
+checks and `(d - m)^T Sigma^-1 (d - m)`. Fixture baseline authority, raw
+provider vector binding, authority token, holdout, empirical validation, and
+SM promotion remain false.
+
+Current NS Sprint 158 boundary: the repo records
+`SymmetricHouLuoRegularityClassClosure=true` and
+`SymmetricAxisymmetricWithSwirlGlobalRegularity=true` for the scoped symmetric
+Hou-Luo theorem. The checked receipt
+`DASHI.Physics.Closure.NSSprint158SymmetricHouLuoRegularityClassClosureReceipt`
+anchors to `DASHI.Physics.Closure.NSSprint157BKMIntegralContinuationReceipt`,
+keeps `BKMIntegralEstimate=true`, `ContinuationTheoremBridge=true`, and
+`SymmetricHouLuoBKMFinite=true`, and normalizes the theorem class: smooth
+finite-energy `H^s`, `s >= 3`, axisymmetric-with-swirl data with
+`z -> -z` symmetry and bounded Gamma/circulation input. The executable
+surfaces `scripts/ns_sprint158_theorem_statement_closure.py`,
+`scripts/ns_sprint158_assumption_scope_matrix.py`, and
+`scripts/ns_sprint158_publication_packet_readiness.py` emit the theorem
+statement, assumption/scope matrix, and publication-readiness packet for the
+symmetric result. `MechanismExhaustionForFullClayNS`,
+`GeneralSmoothFiniteEnergyNSRegularity`, `full_clay_ns_solved`,
+`fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+`clayNavierStokesPromoted` remain false.
+
+Previous NS Sprint 157 boundary: the repo records
+`SymmetricHouLuoBKMFinite=true` for the symmetric Hou-Luo route only. The
+checked receipt
+`DASHI.Physics.Closure.NSSprint157BKMIntegralContinuationReceipt` anchors to
+`DASHI.Physics.Closure.NSSprint156ModelValidityForWidthODEReceipt`, promotes
+`BKMIntegralEstimate=true`, `ContinuationTheoremBridge=true`, and
+`SymmetricHouLuoBKMFinite=true`, and keeps general Navier-Stokes, full Clay
+mechanism exhaustion, and Clay promotion fail-closed.
+
+Previous NS Sprint 156 boundary: the repo records
+`ModelValidityForWidthODE=true` for the symmetric Hou-Luo width-model
+reduction, while keeping the BKM and Clay gates fail-closed. The checked
+receipt `DASHI.Physics.Closure.NSSprint156ModelValidityForWidthODEReceipt`
+anchors to `DASHI.Physics.Closure.NSSprint155LocalizedEnstrophyIBPReceipt`,
+carries the closed scale-delta support package, and promotes only the reduced
+width-model validity surface.
 
 Current NS Sprint 151 boundary: the repo records
 `LocalizedEnstrophyIdentityAtScaleDelta` as the live Hou-Luo scale-delta gate.

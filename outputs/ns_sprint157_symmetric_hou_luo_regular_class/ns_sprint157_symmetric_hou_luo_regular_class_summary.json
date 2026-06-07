@@ -1,0 +1,31 @@
+{
+  "MechanismExhaustionForFullClayNS": false,
+  "SymmetricHouLuoBKMFinite": true,
+  "SymmetricHouLuoRegularityClassClosure": false,
+  "all_covered_assumptions_true": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint157_symmetric_hou_luo_regular_class",
+  "control_card": {
+    "C": "Python ledger plus JSON, CSV, Markdown, and manifest outputs.",
+    "F": "The remaining non-code item is theorem-level prose for SymmetricHouLuoRegularityClassClosure.",
+    "G": "Do not strengthen to general smooth finite-energy 3D Navier-Stokes data.",
+    "L": "assumption row -> covered class -> symmetric theorem closed -> class-statement doc still open -> full Clay separate.",
+    "O": "Worker 4 owns the symmetric Hou-Luo regularity class boundary emitter.",
+    "P": "Use this as the exact publication-boundary ledger for the symmetric route.",
+    "R": "Normalize which initial-data assumptions are covered and which Clay-scale claims remain out of scope.",
+    "S": "Sprint157 BKM and continuation are closed for the symmetric axisymmetric-with-swirl route."
+  },
+  "covered_assumption_count": 4,
+  "decision": "symmetric_route_closed_publication_class_statement_still_open",
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay_ns_solved": false,
+  "lane": 4,
+  "promotion_allowed": false,
+  "row_count": 8,
+  "sprint": 157,
+  "summary_hash": "c370fe75ab4601c4568a6ef26a12cab7395fded52b9e748872ec5170a690ad6c",
+  "symmetric_hou_luo_bkm_finite": true,
+  "symmetric_hou_luo_regularity_class_closure": false,
+  "validation_passed": true
+}

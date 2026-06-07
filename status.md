@@ -1,3 +1,93 @@
+# 2026-06-07 Sprint 158 NS symmetric Hou-Luo theorem-class closure round
+
+- Added checked Sprint 158 module:
+  `NSSprint158SymmetricHouLuoRegularityClassClosureReceipt`.
+- Added `scripts/ns_sprint158_theorem_statement_closure.py`,
+  `scripts/ns_sprint158_assumption_scope_matrix.py`, and
+  `scripts/ns_sprint158_publication_packet_readiness.py`, with generated
+  output directories and focused tests.
+- Promoted the publication-facing symmetric route boundary:
+  `SymmetricHouLuoRegularityClassClosure=true` and
+  `SymmetricAxisymmetricWithSwirlGlobalRegularity=true`.
+- Normalized the theorem assumptions: smooth finite-energy `H^s`, `s >= 3`,
+  axisymmetric-with-swirl, `z -> -z` symmetric, bounded Gamma/circulation
+  input.
+- Kept `BKMIntegralEstimate=true`, `ContinuationTheoremBridge=true`, and
+  `SymmetricHouLuoBKMFinite=true` through the Sprint 157 anchor.
+- Kept `MechanismExhaustionForFullClayNS`,
+  `GeneralSmoothFiniteEnergyNSRegularity`, `full_clay_ns_solved`,
+  `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+  `clayNavierStokesPromoted` false.
+
+# 2026-06-07 Sprint 157 NS BKM-integral continuation round
+
+- Added checked Sprint 157 module:
+  `NSSprint157BKMIntegralContinuationReceipt`.
+- Added `scripts/ns_sprint157_bkm_integral_estimate.py`,
+  `scripts/ns_sprint157_continuation_bridge.py`, and
+  `scripts/ns_sprint157_symmetric_hou_luo_regular_class.py`, with generated
+  output directories and focused tests.
+- Promoted the symmetric Hou-Luo BKM bridge:
+  `BKMIntegralEstimate=true`, `ContinuationTheoremBridge=true`, and
+  `SymmetricHouLuoBKMFinite=true`.
+- Recorded the separated corrected Omega inequality and finite BKM integral
+  bound on five finite horizons, then recorded the bootstrap continuation
+  bridge for the symmetric class.
+- Kept `SymmetricHouLuoRegularityClassClosure` open as theorem-level
+  publication wording, not a new PDE calculation.
+- Kept `MechanismExhaustionForFullClayNS`, `full_clay_ns_solved`,
+  `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
+  `clayNavierStokesPromoted` false.
+
+# 2026-06-07 Sprint 156 NS model-validity-for-width-ODE round
+
+- Added checked Sprint 156 module:
+  `NSSprint156ModelValidityForWidthODEReceipt`.
+- Added `scripts/ns_sprint156_width_model_validity.py`,
+  `scripts/ns_sprint156_width_ode_equilibrium_scan.py`, and
+  `scripts/ns_sprint156_bkm_bridge_readiness.py`, with generated output
+  directories and focused tests.
+- Promoted the reduced symmetric Hou-Luo width-model validity surface:
+  `ModelValidityForWidthODE=true` and `ModelValidityForWidthODEProved=true`.
+- Carried the Sprint 155 closed support package:
+  `LocalizedEnstrophyIdentity`, `BiotSavartNonlocalClosure`,
+  `SimultaneousConstants`, `AnnularLeakage`, and `SourceBound`.
+- Recorded the corrected equilibrium
+  `delta_new = sqrt(nu/(Umax*logOmega))` and a 4,320-row scalar scan with
+  finite double-exponential Omega bounds.
+- Added the next BKM bridge-readiness ledger: `ModelValidityForWidthODE=true`
+  and `CorrectedOmegaODE=true`, while `BKMIntegralEstimate`,
+  `ContinuationTheoremBridge`, and `FullClayMechanismExhaustion` remain
+  blocked.
+- `SymmetricHouLuoBKMFinite`, full Clay Navier-Stokes, and
+  `clayNavierStokesPromoted` remain false.
+
+# 2026-06-07 Sprint 155 NS localized-enstrophy IBP gate round
+
+- Added checked Sprint 155 module:
+  `NSSprint155LocalizedEnstrophyIBPReceipt`.
+- Added `scripts/ns_sprint155_localized_enstrophy_ibp_identity.py`,
+  `scripts/ns_sprint155_operator_boundary_term_checker.py`, and
+  `scripts/ns_sprint155_model_validity_assembler.py`, with generated output
+  directories and focused tests.
+- Recorded the supplied Sprint 154
+  `BiotSavartNonlocalClosureAtScaleDelta` and
+  `SimultaneousConstantsCompatibility` closures as route support.
+- Recorded the fixed-scale localized omega1 enstrophy integration-by-parts
+  calculation as closed:
+  `LocalizedEnstrophyIdentityAtScaleDelta=true`.
+- The localized IBP emitter records 11 rows. Ten route/accounting rows are
+  closed as identity or Sprint 154 support, while the model-validity guard row
+  remains false.
+- The weighted `Ltilde` operator checker records 12 rows for divergence form,
+  radial measure, boundary signs, cutoff commutators, and Poincare absorption;
+  it remains an accounting/checker surface, not a Clay proof.
+- The model-validity assembler closes the five scale-delta support rows:
+  `LocalizedEnstrophyIdentity`, `BiotSavartNonlocalClosure`,
+  `SimultaneousConstants`, `AnnularLeakage`, and `SourceBound`.
+- `ModelValidityForWidthODE`, `SymmetricHouLuoBKMFinite`, full Clay
+  Navier-Stokes, and `clayNavierStokesPromoted` remain false.
+
 # 2026-06-07 Sprint 153 NS localized vortex-stretching source gate round
 
 - Added checked Sprint 153 module:
@@ -21,6 +111,57 @@
   `SimultaneousConstantsCompatibility`, `ModelValidityForWidthODE`,
   `SymmetricHouLuoBKMFinite`, full Clay Navier-Stokes, and
   `clayNavierStokesPromoted` remain false.
+
+# 2026-06-07 SM first-principles boundary round
+
+- Pulled the nine user-supplied ChatGPT thread UUIDs into
+  `~/chat_archive.sqlite` with the robust context fetch path: 9/9 threads,
+  1,626 new messages inserted. Added
+  `DASHI.Promotion.StandardModelArchiveContextBinding` so the archive context
+  is typed as metadata only, not theorem authority.
+- Added and integrated six checked SM first-principles boundary surfaces:
+  `StandardModelFirstPrinciplesGapIndex`,
+  `StandardModelUniquenessCountermodelBoundary`,
+  `StandardModelHiggsYukawaParameterFrontier`,
+  `StandardModelGaugeCouplingAuthorityFrontier`,
+  `StandardModelObservableAuthorityBridge`, and
+  `StandardModelArchiveContextBinding`.
+- The positive SM boundary remains finite gauge,
+  representation, hypercharge, and anomaly bookkeeping. Broad SM derivation
+  from first principles remains false: uniqueness, generation count,
+  Higgs/Yukawa, CKM/PMNS, gauge couplings/running, QFT observables, empirical
+  authority, and terminal unification are still explicit blockers.
+- Follow-up intake: added
+  `DASHI.Promotion.StandardModelPrototypeSourceIntake` and extended
+  `smFirstPrinciplesBoundarySummaries` in that round. It recorded twenty
+  `/home/c/Documents/code/dashiQ` Higgs/MSSM/HEPData/MDL rows, including
+  `naw.py`, `naw2.py`, `13tev.py`, `pseudo_data_harness.py`, HEPData helpers,
+  methods/context notes, and saved MSSM/Higgs geometry artifacts, plus seven
+  `/home/c/Documents/code/FRACDASH` bridge/prototype rows. These are now
+  discoverable support surfaces, but remain toy/proxy, covariance-analysis, or
+  bridge-local evidence only; they do not promote Standard Model, empirical,
+  chemistry, stellar, or terminal claims.
+- Follow-up adapter: added
+  `DASHI.Promotion.StandardModelHiggsHEPDataReceiptAdapter` and
+  `scripts/sm_higgs_hepdata_receipt_adapter.py`, bringing
+  `smFirstPrinciplesBoundarySummaries` to count 8. The adapter emits
+  checksum-bound JSON/Markdown receipts for the observed ATLAS H to gamma gamma
+  full-covariance MDL shape surface, the covariance-aware pseudo-data
+  detectability surface, and their aggregate gate summary. It marks source
+  checksums, full covariance, and pseudo-detectability present while keeping
+  SM-relative baseline, accepted authority token, holdout, comparison law,
+  empirical validation, and Standard Model promotion false.
+- Follow-up covariant comparison: added
+  `DASHI.Promotion.StandardModelHiggsCovariantComparisonLaw`,
+  `scripts/sm_higgs_covariant_comparison_law.py`, and
+  `scripts/sm_higgs_covariance_math.py`, bringing
+  `smFirstPrinciplesBoundarySummaries` to count 9. The adapter consumes the
+  observed-shape receipt plus `tests/fixtures/sm_higgs_baseline_fixture.json`
+  and emits four fixture-baseline covariance-aware Higgs comparison rows under
+  `outputs/sm_higgs_covariant_comparison/`. It checks positive-definite
+  covariance and computes `(d - m)^T Sigma^-1 (d - m)`, while keeping fixture
+  baseline authority, raw provider vector binding, accepted authority token,
+  holdout, empirical validation, and Standard Model promotion false.
 
 # 2026-06-07 cross-lane closure-computation round
 

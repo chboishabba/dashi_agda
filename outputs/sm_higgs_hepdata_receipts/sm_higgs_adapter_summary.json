@@ -1,0 +1,31 @@
+{
+  "gates": {
+    "accepted_authority_token_present": false,
+    "empirical_validation_promoted": false,
+    "full_covariance_surface_present": true,
+    "holdout_protocol_accepted": false,
+    "pseudo_detectability_surface_present": true,
+    "sm_relative_baseline_present": false,
+    "source_checksums_bound": true,
+    "standard_model_promoted": false
+  },
+  "generated_at_utc": "2026-06-07T00:00:00+00:00",
+  "next_required_receipts": [
+    "SM-relative theory baseline table or generator replay digest",
+    "HEPData/provider source checksum and version token accepted by repo authority policy",
+    "covariance comparison law with predeclared pass/fail criterion",
+    "holdout or frozen-prediction protocol separating discovery from validation"
+  ],
+  "observed_shape_receipt": "sm_higgs_observed_shape_receipt.json",
+  "pseudo_detectability_receipt": "sm_higgs_pseudo_detectability_receipt.json",
+  "receipt_files": [
+    "sm_higgs_observed_shape_receipt.json",
+    "sm_higgs_pseudo_detectability_receipt.json",
+    "sm_higgs_adapter_summary.json"
+  ],
+  "receipt_kind": "adapter-summary",
+  "schema": "dashi-sm-higgs-hepdata-receipt-v1",
+  "schema_version": "1.0.0",
+  "source_file_count": 4,
+  "source_root": "/home/c/Documents/code/dashiQ"
+}

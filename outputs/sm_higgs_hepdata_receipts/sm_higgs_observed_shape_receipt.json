@@ -1,0 +1,175 @@
+{
+  "accepted_authority_token_present": false,
+  "analysis_mode": "Path C shape-complexity over flat y_ref",
+  "authority_provider": "HEPData",
+  "empirical_validation_promoted": false,
+  "experiment_authority": "ATLAS",
+  "full_covariance_surface_present": true,
+  "generated_at_utc": "2026-06-07T00:00:00+00:00",
+  "hepdata_record": "137886",
+  "hepdata_record_url": "https://www.hepdata.net/record/137886",
+  "live_observed_results": [
+    {
+      "basis": "log",
+      "best_model": "B",
+      "correlation_table": "pT_yy_corr",
+      "mdl_margin_to_second": 5.652399028433706,
+      "models": [
+        {
+          "chi2": 160.32488223172749,
+          "mdl": 163.32061450528147,
+          "model": "A"
+        },
+        {
+          "chi2": 151.67675092973977,
+          "mdl": 157.66821547684776,
+          "model": "B"
+        },
+        {
+          "chi2": 158.8547430156447,
+          "mdl": 167.84193983630666,
+          "model": "C"
+        }
+      ],
+      "observable": "pT_yy",
+      "status": "ok"
+    },
+    {
+      "basis": "linear",
+      "best_model": "C",
+      "correlation_table": "yAbs_yy_corr",
+      "mdl_margin_to_second": 5.30033986522119,
+      "models": [
+        {
+          "chi2": 92.35172844967305,
+          "mdl": 94.6543135426671,
+          "model": "A"
+        },
+        {
+          "chi2": 13.79361833250793,
+          "mdl": 18.39878851849602,
+          "model": "B"
+        },
+        {
+          "chi2": 6.1906933742926915,
+          "mdl": 13.09844865327483,
+          "model": "C"
+        }
+      ],
+      "observable": "yAbs_yy",
+      "status": "ok"
+    },
+    {
+      "basis": "log",
+      "best_model": "C",
+      "correlation_table": "N_j_30_corr",
+      "mdl_margin_to_second": 0.4995747086214193,
+      "models": [
+        {
+          "chi2": 60.144780448743475,
+          "mdl": 61.53107480986336,
+          "model": "A"
+        },
+        {
+          "chi2": 2.0831969887882655,
+          "mdl": 4.855785711028046,
+          "model": "B"
+        },
+        {
+          "chi2": 0.19732791904695535,
+          "mdl": 4.356211002406627,
+          "model": "C"
+        }
+      ],
+      "observable": "N_j_30",
+      "status": "ok"
+    },
+    {
+      "basis": "ordinal",
+      "best_model": "B",
+      "correlation_table": "N_j_30_corr",
+      "mdl_margin_to_second": 1.3845380086435237,
+      "models": [
+        {
+          "chi2": 60.144780448743475,
+          "mdl": 61.53107480986336,
+          "model": "A"
+        },
+        {
+          "chi2": 0.2807240163844291,
+          "mdl": 3.0533127386242103,
+          "model": "B"
+        },
+        {
+          "chi2": 0.27896766390806277,
+          "mdl": 4.437850747267734,
+          "model": "C"
+        }
+      ],
+      "observable": "N_j_30",
+      "status": "ok"
+    }
+  ],
+  "model_family": [
+    "A normalization",
+    "B tilt",
+    "C curvature"
+  ],
+  "observable_count": 4,
+  "observables": [
+    {
+      "basis": "log",
+      "correlation_table": "pT_yy_corr",
+      "covariance_required": true,
+      "table": "pT_yy"
+    },
+    {
+      "basis": "linear",
+      "correlation_table": "yAbs_yy_corr",
+      "covariance_required": true,
+      "table": "yAbs_yy"
+    },
+    {
+      "basis": "log",
+      "correlation_table": "N_j_30_corr",
+      "covariance_required": true,
+      "table": "N_j_30"
+    },
+    {
+      "basis": "ordinal",
+      "correlation_table": "N_j_30_corr",
+      "covariance_required": true,
+      "table": "N_j_30"
+    }
+  ],
+  "receipt_kind": "observed-shape-complexity",
+  "schema": "dashi-sm-higgs-hepdata-receipt-v1",
+  "schema_version": "1.0.0",
+  "sm_relative_baseline_present": false,
+  "source_files": [
+    {
+      "path": "/home/c/Documents/code/dashiQ/13tev.py",
+      "role": "observed full-covariance MDL shape-complexity analysis",
+      "sha256": "8a07248e3f24df57710c22c811b5c623a4058a31966203b8e362ded4d76dbb39",
+      "size_bytes": 11609
+    },
+    {
+      "path": "/home/c/Documents/code/dashiQ/pseudo_data_harness.py",
+      "role": "pseudo-data detectability harness using published covariance",
+      "sha256": "7ba553c2060815e2afea7e7031aa7d7c0a6ae212586883f37fbc8e6919483ac8",
+      "size_bytes": 28994
+    },
+    {
+      "path": "/home/c/Documents/code/dashiQ/reusable_query.py",
+      "role": "HEPData query helper",
+      "sha256": "564f7b721bc20e895d0a496b8fa85491ca4bd0a7d2f62bf1094673dfd9e40471",
+      "size_bytes": 7485
+    },
+    {
+      "path": "/home/c/Documents/code/dashiQ/resolve_hepdata_record.py",
+      "role": "HEPData record resolver",
+      "sha256": "da5e952adc502ba157beba80d17da9763a3c136365f7179d70b218726b0195ae",
+      "size_bytes": 2173
+    }
+  ]
+}

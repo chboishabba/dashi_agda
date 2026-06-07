@@ -44,6 +44,15 @@ import DASHI.Promotion.StandardModelFiniteAnomalyHyperchargeCheck as SMAnomaly
 import DASHI.Promotion.MaxwellFiniteExteriorChainStrengthening as MaxwellChain
 import DASHI.Promotion.NumericAuthorityPayloadValidator as NumericPayload
 import DASHI.Promotion.FiniteQuantumQFTScopedClosure as QuantumClosure
+import DASHI.Promotion.StandardModelFirstPrinciplesGapIndex as SMFirstPrinciples
+import DASHI.Promotion.StandardModelUniquenessCountermodelBoundary as SMUniqueness
+import DASHI.Promotion.StandardModelHiggsYukawaParameterFrontier as SMHiggsYukawa
+import DASHI.Promotion.StandardModelGaugeCouplingAuthorityFrontier as SMGaugeCoupling
+import DASHI.Promotion.StandardModelObservableAuthorityBridge as SMObservable
+import DASHI.Promotion.StandardModelArchiveContextBinding as SMArchive
+import DASHI.Promotion.StandardModelPrototypeSourceIntake as SMPrototype
+import DASHI.Promotion.StandardModelHiggsHEPDataReceiptAdapter as SMHiggsHEPData
+import DASHI.Promotion.StandardModelHiggsCovariantComparisonLaw as SMHiggsComparison
 
 ------------------------------------------------------------------------
 -- Unified promotion obligation index.
@@ -100,6 +109,17 @@ data ClosureComputationLane : Set where
   maxwellFiniteExteriorChainLane : ClosureComputationLane
   numericAuthorityPayloadValidatorLane : ClosureComputationLane
   finiteQuantumQFTScopedClosureLane : ClosureComputationLane
+
+data SMFirstPrinciplesBoundaryLane : Set where
+  smFirstPrinciplesGapIndexLane : SMFirstPrinciplesBoundaryLane
+  smUniquenessCountermodelBoundaryLane : SMFirstPrinciplesBoundaryLane
+  smHiggsYukawaParameterFrontierLane : SMFirstPrinciplesBoundaryLane
+  smGaugeCouplingAuthorityFrontierLane : SMFirstPrinciplesBoundaryLane
+  smObservableAuthorityBridgeLane : SMFirstPrinciplesBoundaryLane
+  smArchiveContextBindingLane : SMFirstPrinciplesBoundaryLane
+  smPrototypeSourceIntakeLane : SMFirstPrinciplesBoundaryLane
+  smHiggsHEPDataReceiptAdapterLane : SMFirstPrinciplesBoundaryLane
+  smHiggsCovariantComparisonLawLane : SMFirstPrinciplesBoundaryLane
 
 record PromotionLaneSummary : Set where
   field
@@ -275,6 +295,34 @@ record ClosureComputationSummary : Set where
 
 open ClosureComputationSummary public
 
+record SMFirstPrinciplesBoundarySummary : Set where
+  field
+    smBoundaryLane :
+      SMFirstPrinciplesBoundaryLane
+
+    smBoundaryModule :
+      String
+
+    canonicalSMBoundarySurface :
+      String
+
+    concreteSMBoundaryAdvance :
+      String
+
+    remainingSMFirstPrinciplesGap :
+      String
+
+    validationCommand :
+      String
+
+    promotesStandardModel :
+      Bool
+
+    promotesStandardModelIsFalse :
+      promotesStandardModel ≡ false
+
+open SMFirstPrinciplesBoundarySummary public
+
 mkLaneSummary :
   PromotionImplementationLane →
   String →
@@ -397,6 +445,26 @@ mkClosureComputationSummary lane owner surface advance gap command =
     ; validationCommand = command
     ; promotesClaim = false
     ; promotesClaimIsFalse = refl
+    }
+
+mkSMFirstPrinciplesBoundarySummary :
+  SMFirstPrinciplesBoundaryLane →
+  String →
+  String →
+  String →
+  String →
+  String →
+  SMFirstPrinciplesBoundarySummary
+mkSMFirstPrinciplesBoundarySummary lane owner surface advance gap command =
+  record
+    { smBoundaryLane = lane
+    ; smBoundaryModule = owner
+    ; canonicalSMBoundarySurface = surface
+    ; concreteSMBoundaryAdvance = advance
+    ; remainingSMFirstPrinciplesGap = gap
+    ; validationCommand = command
+    ; promotesStandardModel = false
+    ; promotesStandardModelIsFalse = refl
     }
 
 canonicalPromotionLaneSummaries : List PromotionLaneSummary
@@ -689,6 +757,74 @@ canonicalClosureComputationSummaries =
     "agda -i . DASHI/Promotion/FiniteQuantumQFTScopedClosure.agda"
   ∷ []
 
+canonicalSMFirstPrinciplesBoundarySummaries :
+  List SMFirstPrinciplesBoundarySummary
+canonicalSMFirstPrinciplesBoundarySummaries =
+  mkSMFirstPrinciplesBoundarySummary
+    smFirstPrinciplesGapIndexLane
+    "DASHI.Promotion.StandardModelFirstPrinciplesGapIndex"
+    "canonicalStandardModelFirstPrinciplesGapIndexReceipt"
+    "indexes ten first-principles SM targets while preserving finite gauge, representation, hypercharge, and anomaly checks"
+    "gauge/representation uniqueness, generations, Yukawa/Higgs/CKM/PMNS, couplings, QFT observables, and empirical authority remain open"
+    "agda -i . -l standard-library DASHI/Promotion/StandardModelFirstPrinciplesGapIndex.agda"
+  ∷ mkSMFirstPrinciplesBoundarySummary
+    smUniquenessCountermodelBoundaryLane
+    "DASHI.Promotion.StandardModelUniquenessCountermodelBoundary"
+    "canonicalStandardModelUniquenessCountermodelBoundaryReceipt"
+    "records seven consistency-vs-uniqueness countermodel-boundary rows with zero adopted alternatives and zero uniqueness proofs"
+    "a theorem that the DASHI carrier uniquely forces the SM gauge/representation/generation content remains missing"
+    "agda -i . -l standard-library DASHI/Promotion/StandardModelUniquenessCountermodelBoundary.agda"
+  ∷ mkSMFirstPrinciplesBoundarySummary
+    smHiggsYukawaParameterFrontierLane
+    "DASHI.Promotion.StandardModelHiggsYukawaParameterFrontier"
+    "canonicalStandardModelHiggsYukawaParameterFrontierReceipt"
+    "normalizes fourteen Higgs/Yukawa/eigenbasis/mixing/neutrino/scheme rows, nine matrix slots, six finite arithmetic surfaces, and five authority deficits"
+    "Higgs, Yukawa, CKM, PMNS, mass-basis transfer, and scheme/scale authority promotion remain false"
+    "agda -i . -l standard-library DASHI/Promotion/StandardModelHiggsYukawaParameterFrontier.agda"
+  ∷ mkSMFirstPrinciplesBoundarySummary
+    smGaugeCouplingAuthorityFrontierLane
+    "DASHI.Promotion.StandardModelGaugeCouplingAuthorityFrontier"
+    "canonicalStandardModelGaugeCouplingAuthorityReceipt"
+    "normalizes six coupling inputs, five running boundaries, four beta-function authority rows, five electroweak inputs, and six collider consumers"
+    "numeric coupling derivation, calibration, physical SM promotion, and empirical adequacy remain false"
+    "agda -i . -l standard-library DASHI/Promotion/StandardModelGaugeCouplingAuthorityFrontier.agda"
+  ∷ mkSMFirstPrinciplesBoundarySummary
+    smObservableAuthorityBridgeLane
+    "DASHI.Promotion.StandardModelObservableAuthorityBridge"
+    "canonicalStandardModelObservableAuthorityBridgeReceipt"
+    "records fifteen finite-SM-to-observable bridge rows, five QFT rows, nine empirical rows, one terminal comparison row, and three guard statuses"
+    "QFT construction, renormalized amplitudes, cross sections, decay rates, detector unfolding, covariance, holdout, and authority acceptance remain missing"
+    "agda -i . -l standard-library DASHI/Promotion/StandardModelObservableAuthorityBridge.agda"
+  ∷ mkSMFirstPrinciplesBoundarySummary
+    smArchiveContextBindingLane
+    "DASHI.Promotion.StandardModelArchiveContextBinding"
+    "canonicalStandardModelArchiveContextRows"
+    "binds nine pulled prior-chat thread UUIDs as context metadata tagged Higgs/Yukawa/CKM/PMNS/hypercharge/anomaly/first-principles"
+    "archive context is not theorem authority and does not promote any Standard Model or terminal claim"
+    "agda -i . DASHI/Promotion/StandardModelArchiveContextBinding.agda"
+  ∷ mkSMFirstPrinciplesBoundarySummary
+    smPrototypeSourceIntakeLane
+    "DASHI.Promotion.StandardModelPrototypeSourceIntake"
+    "canonicalStandardModelPrototypeSourceIntakeReceipt"
+    "intakes twenty dashiQ Higgs/MSSM/HEPData/MDL prototype rows and seven FRACDASH bridge/prototype rows"
+    "prototype scans, covariance analyses, saved artifacts, and bridge artifacts remain toy/proxy or bridge-local evidence, not SM theorem authority"
+    "agda -i . DASHI/Promotion/StandardModelPrototypeSourceIntake.agda"
+  ∷ mkSMFirstPrinciplesBoundarySummary
+    smHiggsHEPDataReceiptAdapterLane
+    "DASHI.Promotion.StandardModelHiggsHEPDataReceiptAdapter"
+    "canonicalStandardModelHiggsHEPDataReceiptAdapter"
+    "binds four dashiQ Higgs/HEPData source files to four emitted JSON/Markdown artifacts and eight explicit empirical gates"
+    "accepted SM baseline authority, raw provider vector binding, authority token, holdout protocol, empirical validation, and SM promotion remain false"
+    "python scripts/sm_higgs_hepdata_receipt_adapter.py --generated-at 2026-06-07T00:00:00+00:00 && agda -i . DASHI/Promotion/StandardModelHiggsHEPDataReceiptAdapter.agda"
+  ∷ mkSMFirstPrinciplesBoundarySummary
+    smHiggsCovariantComparisonLawLane
+    "DASHI.Promotion.StandardModelHiggsCovariantComparisonLaw"
+    "canonicalStandardModelHiggsCovariantComparisonLaw"
+    "computes four fixture-baseline covariance-aware Higgs comparison rows with positive-definite covariance checks and chi-square law"
+    "fixture baseline is not authority, raw HEPData measured vectors are not bound, holdout is false, empirical validation is false, and SM promotion remains false"
+    "python scripts/sm_higgs_covariant_comparison_law.py --generated-at 2026-06-07T00:00:00+00:00 && agda -i . DASHI/Promotion/StandardModelHiggsCovariantComparisonLaw.agda"
+  ∷ []
+
 record UnifiedPromotionObligationIndex : Setω where
   field
     sourceKnownInputsPopulation :
@@ -805,6 +941,33 @@ record UnifiedPromotionObligationIndex : Setω where
     finiteQuantumQFTScopedClosure :
       QuantumClosure.FiniteQuantumQFTScopedClosure
 
+    standardModelFirstPrinciplesGapIndex :
+      SMFirstPrinciples.StandardModelFirstPrinciplesGapIndexReceipt
+
+    standardModelUniquenessCountermodelBoundary :
+      SMUniqueness.StandardModelUniquenessCountermodelBoundaryReceipt
+
+    standardModelHiggsYukawaParameterFrontier :
+      SMHiggsYukawa.StandardModelHiggsYukawaParameterFrontierReceipt
+
+    standardModelGaugeCouplingAuthority :
+      SMGaugeCoupling.StandardModelGaugeCouplingAuthorityReceipt
+
+    standardModelObservableAuthorityBridge :
+      SMObservable.StandardModelObservableAuthorityBridgeReceipt
+
+    standardModelArchiveContextRows :
+      List SMArchive.StandardModelArchiveContextRow
+
+    standardModelPrototypeSourceIntake :
+      SMPrototype.StandardModelPrototypeSourceIntakeReceipt
+
+    standardModelHiggsHEPDataReceiptAdapter :
+      SMHiggsHEPData.StandardModelHiggsHEPDataReceiptAdapter
+
+    standardModelHiggsCovariantComparisonLaw :
+      SMHiggsComparison.StandardModelHiggsCovariantComparisonLaw
+
     laneSummaries :
       List PromotionLaneSummary
 
@@ -822,6 +985,9 @@ record UnifiedPromotionObligationIndex : Setω where
 
     closureComputationSummaries :
       List ClosureComputationSummary
+
+    smFirstPrinciplesBoundarySummaries :
+      List SMFirstPrinciplesBoundarySummary
 
     laneSummaryCount :
       Nat
@@ -858,6 +1024,12 @@ record UnifiedPromotionObligationIndex : Setω where
 
     closureComputationCountIs6 :
       closureComputationCount ≡ 6
+
+    smFirstPrinciplesBoundaryCount :
+      Nat
+
+    smFirstPrinciplesBoundaryCountIs9 :
+      smFirstPrinciplesBoundaryCount ≡ 9
 
     aggregateOpenObligationCount :
       Nat
@@ -965,6 +1137,24 @@ canonicalUnifiedPromotionObligationIndex =
         NumericPayload.canonicalNumericAuthorityPayloadValidatorReceipt
     ; finiteQuantumQFTScopedClosure =
         QuantumClosure.canonicalFiniteQuantumQFTScopedClosure
+    ; standardModelFirstPrinciplesGapIndex =
+        SMFirstPrinciples.canonicalStandardModelFirstPrinciplesGapIndexReceipt
+    ; standardModelUniquenessCountermodelBoundary =
+        SMUniqueness.canonicalStandardModelUniquenessCountermodelBoundaryReceipt
+    ; standardModelHiggsYukawaParameterFrontier =
+        SMHiggsYukawa.canonicalStandardModelHiggsYukawaParameterFrontierReceipt
+    ; standardModelGaugeCouplingAuthority =
+        SMGaugeCoupling.canonicalStandardModelGaugeCouplingAuthorityReceipt
+    ; standardModelObservableAuthorityBridge =
+        SMObservable.canonicalStandardModelObservableAuthorityBridgeReceipt
+    ; standardModelArchiveContextRows =
+        SMArchive.canonicalStandardModelArchiveContextRows
+    ; standardModelPrototypeSourceIntake =
+        SMPrototype.canonicalStandardModelPrototypeSourceIntakeReceipt
+    ; standardModelHiggsHEPDataReceiptAdapter =
+        SMHiggsHEPData.canonicalStandardModelHiggsHEPDataReceiptAdapter
+    ; standardModelHiggsCovariantComparisonLaw =
+        SMHiggsComparison.canonicalStandardModelHiggsCovariantComparisonLaw
     ; laneSummaries =
         canonicalPromotionLaneSummaries
     ; adapterAdvancementSummaries =
@@ -977,6 +1167,8 @@ canonicalUnifiedPromotionObligationIndex =
         canonicalHardGateAdvancementSummaries
     ; closureComputationSummaries =
         canonicalClosureComputationSummaries
+    ; smFirstPrinciplesBoundarySummaries =
+        canonicalSMFirstPrinciplesBoundarySummaries
     ; laneSummaryCount =
         6
     ; laneSummaryCountIs6 =
@@ -1000,6 +1192,10 @@ canonicalUnifiedPromotionObligationIndex =
     ; closureComputationCount =
         6
     ; closureComputationCountIs6 =
+        refl
+    ; smFirstPrinciplesBoundaryCount =
+        9
+    ; smFirstPrinciplesBoundaryCountIs9 =
         refl
     ; aggregateOpenObligationCount =
         73
@@ -1060,6 +1256,12 @@ canonicalUnifiedPromotionClosureComputationCountIs6 :
     canonicalUnifiedPromotionObligationIndex
   ≡ 6
 canonicalUnifiedPromotionClosureComputationCountIs6 = refl
+
+canonicalUnifiedPromotionSMFirstPrinciplesBoundaryCountIs9 :
+  UnifiedPromotionObligationIndex.smFirstPrinciplesBoundaryCount
+    canonicalUnifiedPromotionObligationIndex
+  ≡ 9
+canonicalUnifiedPromotionSMFirstPrinciplesBoundaryCountIs9 = refl
 
 canonicalUnifiedPromotionTerminalPromotionIsFalse :
   UnifiedPromotionObligationIndex.terminalPromotion

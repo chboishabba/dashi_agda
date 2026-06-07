@@ -1,0 +1,27 @@
+{
+  "GeneralSmoothFiniteEnergyNSRegularity": false,
+  "MechanismExhaustionForFullClayNS": false,
+  "SymmetricHouLuoPublicationPacketReady": true,
+  "SymmetricHouLuoRegularityClassClosure": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint158_publication_packet_readiness",
+  "control_card": {
+    "C": "Python emitter writes readiness rows to JSON, CSV, Markdown, and manifest.",
+    "F": "MechanismExhaustionForFullClayNS remains the sole full-Clay structural blocker.",
+    "G": "A packet-ready symmetric result cannot submit or promote Clay without mechanism exhaustion.",
+    "L": "theorem statement -> dependency spine -> artifact index -> scope disclaimers -> packet-ready.",
+    "O": "Worker 4 owns publication packet readiness.",
+    "P": "Promote publication packet readiness for the symmetric result only.",
+    "R": "Check that theorem statement, assumptions, proof dependencies, scope guards, and artifact index are packet-ready.",
+    "S": "Class theorem closure is now explicit; full Clay remains open."
+  },
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay_ns_solved": false,
+  "lane": 4,
+  "promotion_allowed": false,
+  "row_count": 7,
+  "sprint": 158,
+  "summary_hash": "fc55d98b7e0b4dbc5f3aef331d9fb06fb158774a010b57125fa5534b1ffc54a6",
+  "validation_passed": true
+}

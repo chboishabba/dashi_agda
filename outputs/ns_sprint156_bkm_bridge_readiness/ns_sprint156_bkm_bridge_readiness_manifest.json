@@ -1,0 +1,37 @@
+{
+  "bkm_finite": false,
+  "contract": "ns_sprint156_bkm_bridge_readiness",
+  "decision": "ready_for_next_bkm_translation_not_promoted",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_bkm_bridge_readiness/ns_sprint156_bkm_bridge_readiness_manifest.json",
+      "sha256": "bf2e7f6d97cd58b5f9e340bd4cb574a7cee9438b8b56b7a7defb22ed38b16907"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_bkm_bridge_readiness/ns_sprint156_bkm_bridge_readiness.md",
+      "sha256": "7faad225c32f1f827a3a19eb2fad4b86769b71474c221a388c17d59e08522c87"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_bkm_bridge_readiness/ns_sprint156_bkm_bridge_readiness_rows.csv",
+      "sha256": "a9a5b304485dffdfd1fa849bce34cf05c6ea740900e09e7eecbd731494691e2e"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_bkm_bridge_readiness/ns_sprint156_bkm_bridge_readiness_rows.json",
+      "sha256": "b7a41f9223858bae030e804e97f9b742ad68051c48cc6f674d3accbe99920392"
+    },
+    "summary": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_bkm_bridge_readiness/ns_sprint156_bkm_bridge_readiness_summary.json",
+      "sha256": "36658a5597cc74a428fc081438cc2118ec0a99dc9a734d7844eaee11623f8f57"
+    }
+  },
+  "full_clay_ns_solved": false,
+  "lane": 4,
+  "manifest_hash": "4ae726637f3a01dff0a3f635234aaed49b819b419f2de39497671b3d000f438f",
+  "sprint": 156,
+  "validation_passed": true
+}

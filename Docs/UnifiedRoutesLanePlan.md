@@ -142,6 +142,31 @@ Gate 3, Navier-Stokes, and Yang-Mills. Its positive promotion is only
 `boundedPhysicsTargetsPopulated=true`. Maxwell field equations, GR field
 equations, Standard Model promotion, Gate 3 closure, Navier-Stokes Clay,
 Yang-Mills Clay, and known-physics translation completion remain false.
+Standard Model consumers asking whether the repo derives the SM from first
+principles should cite
+`DASHI.Promotion.StandardModelFirstPrinciplesGapIndex` and the companion
+nine-row `smFirstPrinciplesBoundarySummaries` layer in
+`DASHI.Promotion.ObligationIndex`. The positive boundary is finite SM
+gauge/representation/hypercharge/anomaly bookkeeping. The typed non-promoting
+frontier is uniqueness, generation count, Higgs/Yukawa, CKM/PMNS, gauge
+couplings/running, QFT observables, empirical authority, and prior-chat
+context as metadata rather than theorem authority. The prototype-source intake
+row additionally records `/home/c/Documents/code/dashiQ/naw.py` and
+related `/home/c/Documents/code/dashiQ` Higgs/MSSM/HEPData/MDL surfaces plus
+`/home/c/Documents/code/FRACDASH` as useful toy/proxy, covariance-analysis, and
+bridge-local surfaces for future authority-backed consumers, not as Standard
+Model promotion. `DASHI.Promotion.StandardModelHiggsHEPDataReceiptAdapter`
+is the consumable Higgs/HEPData surface: it emits checksum-bound observed-shape,
+pseudo-detectability, and adapter-summary JSON from `dashiQ/13tev.py` and
+`dashiQ/pseudo_data_harness.py`. The paired
+`DASHI.Promotion.StandardModelHiggsCovariantComparisonLaw` surface consumes the
+observed-shape receipt and `tests/fixtures/sm_higgs_baseline_fixture.json` to
+emit four covariance-aware comparison rows under
+`outputs/sm_higgs_covariant_comparison/`. It checks square/symmetric/positive
+definite fixture covariance and computes `(d - m)^T Sigma^-1 (d - m)`, while
+keeping fixture baseline authority, raw provider vector binding, accepted
+authority token, holdout, empirical validation, and Standard Model promotion
+false.
 Maxwell-facing consumers should cite
 `DASHI.Promotion.MaxwellHodgeSourceConservationObligations` for the current
 inhomogeneous-side gate. It records ten Hodge/source-current conservation

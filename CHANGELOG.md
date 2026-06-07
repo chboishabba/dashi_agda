@@ -6,6 +6,54 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 158 NS symmetric Hou-Luo theorem-class closure round for
+  `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint158SymmetricHouLuoRegularityClassClosureReceipt`,
+  three Sprint 158 emitters, generated outputs, and focused tests. The round
+  anchors to Sprint 157 BKM/continuation closure, records the publication
+  theorem assumptions, and promotes
+  `SymmetricHouLuoRegularityClassClosure=true` and
+  `SymmetricAxisymmetricWithSwirlGlobalRegularity=true` for smooth
+  finite-energy `H^s`, `s >= 3`, axisymmetric-with-swirl, `z -> -z`
+  symmetric data with bounded Gamma/circulation input. The full Clay
+  mechanism-exhaustion gate, general smooth finite-energy Navier-Stokes,
+  full Clay Navier-Stokes, full general Navier-Stokes construction, and
+  `clayNavierStokesPromoted` remain false.
+
+- Sprint 157 NS BKM-integral continuation round for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint157BKMIntegralContinuationReceipt`, three
+  Sprint 157 emitters, generated outputs, and focused tests. The round anchors
+  to Sprint 156 model validity, records the corrected Omega ODE integration
+  into finite BKM-integral bounds on finite horizons, records the classical
+  BKM continuation bootstrap, and promotes `BKMIntegralEstimate=true`,
+  `ContinuationTheoremBridge=true`, and `SymmetricHouLuoBKMFinite=true` for
+  the symmetric Hou-Luo route only. `SymmetricHouLuoRegularityClassClosure`
+  remains open as theorem-level publication wording; `MechanismExhaustionForFullClayNS`,
+  full Clay Navier-Stokes, full general Navier-Stokes construction, and
+  `clayNavierStokesPromoted` remain false.
+
+- Sprint 156 NS model-validity-for-width-ODE round for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint156ModelValidityForWidthODEReceipt`, three
+  Sprint 156 emitters, generated outputs, and focused tests. The round carries
+  the closed Sprint 155 scale-delta support package into
+  `ModelValidityForWidthODE=true` for the symmetric Hou-Luo width-model
+  reduction, records the corrected equilibrium
+  `delta_new = sqrt(nu/(Umax*logOmega))`, and emits a BKM bridge-readiness
+  ledger where `ModelValidityForWidthODE=true` and `CorrectedOmegaODE=true`.
+  `SymmetricHouLuoBKMFinite`, full Clay Navier-Stokes, and
+  `clayNavierStokesPromoted` remain false.
+
+- Sprint 155 NS localized-enstrophy IBP gate round for `2026-06-07`: adds
+  `DASHI.Physics.Closure.NSSprint155LocalizedEnstrophyIBPReceipt`, three
+  Sprint 155 emitters, generated outputs, and focused tests. The round records
+  Sprint 154 Biot-Savart/nonlocal and simultaneous-constants closures as route
+  support, records the fixed-scale localized omega1 enstrophy IBP identity as
+  closed, and emits an assembler where `LocalizedEnstrophyIdentity`,
+  `BiotSavartNonlocalClosure`, `SimultaneousConstants`, `AnnularLeakage`, and
+  `SourceBound` are closed support rows. `ModelValidityForWidthODE`,
+  `SymmetricHouLuoBKMFinite`, full Clay Navier-Stokes, and
+  `clayNavierStokesPromoted` remain false.
+
 - Sprint 153 NS localized vortex-stretching source gate round for
   `2026-06-07`: adds
   `DASHI.Physics.Closure.NSSprint153LocalizedVortexStretchingSourceReceipt`,

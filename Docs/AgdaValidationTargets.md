@@ -56,6 +56,15 @@ canonical closure spine:
 - `DASHI/Physics/Closure/NSSprint150SourceViscosityBalanceReceipt.agda`
 - `DASHI/Promotion/ChemistryFiniteComputationSurface.agda`
 - `DASHI/Promotion/StandardModelFiniteAnomalyHyperchargeCheck.agda`
+- `DASHI/Promotion/StandardModelFirstPrinciplesGapIndex.agda`
+- `DASHI/Promotion/StandardModelUniquenessCountermodelBoundary.agda`
+- `DASHI/Promotion/StandardModelHiggsYukawaParameterFrontier.agda`
+- `DASHI/Promotion/StandardModelGaugeCouplingAuthorityFrontier.agda`
+- `DASHI/Promotion/StandardModelObservableAuthorityBridge.agda`
+- `DASHI/Promotion/StandardModelArchiveContextBinding.agda`
+- `DASHI/Promotion/StandardModelPrototypeSourceIntake.agda`
+- `DASHI/Promotion/StandardModelHiggsHEPDataReceiptAdapter.agda`
+- `DASHI/Promotion/StandardModelHiggsCovariantComparisonLaw.agda`
 - `DASHI/Promotion/MaxwellFiniteExteriorChainStrengthening.agda`
 - `DASHI/Promotion/NumericAuthorityPayloadValidator.agda`
 - `DASHI/Promotion/FiniteQuantumQFTScopedClosure.agda`
