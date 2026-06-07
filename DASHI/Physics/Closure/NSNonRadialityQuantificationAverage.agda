@@ -684,14 +684,14 @@ commutatorHalfTransferWitnessIsOneOverFour :
 commutatorHalfTransferWitnessIsOneOverFour =
   refl
 
-analyticIntegralStillFalse :
+analyticIntegralFlagStillFalse :
   AnalyticAnnularIntegralLowerBoundProved ≡ false
-analyticIntegralStillFalse =
+analyticIntegralFlagStillFalse =
   refl
 
-sanniAuthorityStillFalse :
+sanniAuthorityFlagStillFalse :
   SanniExternalAuthorityAccepted ≡ false
-sanniAuthorityStillFalse =
+sanniAuthorityFlagStillFalse =
   refl
 
 nonRadialAverageKeepsNSClayFalse :

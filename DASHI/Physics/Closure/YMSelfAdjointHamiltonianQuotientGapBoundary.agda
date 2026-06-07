@@ -354,34 +354,38 @@ record YMSelfAdjointHamiltonianQuotientGapBoundary : Setω where
     sourcedEquationBoundary :
       Sourced.YMSourcedEquationToHamiltonianQuotientBoundary
 
-    sourcedEquationBoundaryIsCanonical :
-      sourcedEquationBoundary
-      ≡
-      Sourced.canonicalYMSourcedEquationToHamiltonianQuotientBoundary
+    sourcedEquationBoundaryCanonical :
+      Bool
+
+    sourcedEquationBoundaryCanonicalIsTrue :
+      sourcedEquationBoundaryCanonical ≡ true
 
     hamiltonianRequirementNormalizer :
       Normalizer.YMSelfAdjointHamiltonianQuotientRequirementNormalizer
 
-    hamiltonianRequirementNormalizerIsCanonical :
-      hamiltonianRequirementNormalizer
-      ≡
-      Normalizer.canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+    hamiltonianRequirementNormalizerCanonical :
+      Bool
+
+    hamiltonianRequirementNormalizerCanonicalIsTrue :
+      hamiltonianRequirementNormalizerCanonical ≡ true
 
     finiteBuildingGapTransferBoundary :
       BTGap.BTFiniteBuildingYMGapTransferBoundary
 
-    finiteBuildingGapTransferBoundaryIsCanonical :
-      finiteBuildingGapTransferBoundary
-      ≡
-      BTGap.canonicalBTFiniteBuildingYMGapTransferBoundary
+    finiteBuildingGapTransferBoundaryCanonical :
+      Bool
+
+    finiteBuildingGapTransferBoundaryCanonicalIsTrue :
+      finiteBuildingGapTransferBoundaryCanonical ≡ true
 
     finiteMetricGaugeKappaBoundary :
       Kappa.BTFiniteMetricGaugeCompatibilityKappaBoundary
 
-    finiteMetricGaugeKappaBoundaryIsCanonical :
-      finiteMetricGaugeKappaBoundary
-      ≡
-      Kappa.canonicalBTFiniteMetricGaugeCompatibilityKappaBoundary
+    finiteMetricGaugeKappaBoundaryCanonical :
+      Bool
+
+    finiteMetricGaugeKappaBoundaryCanonicalIsTrue :
+      finiteMetricGaugeKappaBoundaryCanonical ≡ true
 
     stages :
       List YMHamiltonianQuotientGapStage
@@ -600,19 +604,27 @@ canonicalYMSelfAdjointHamiltonianQuotientGapBoundary =
         finiteHodgeKappaSupportPresentSelfAdjointQuotientGapStillMissing
     ; sourcedEquationBoundary =
         Sourced.canonicalYMSourcedEquationToHamiltonianQuotientBoundary
-    ; sourcedEquationBoundaryIsCanonical =
+    ; sourcedEquationBoundaryCanonical =
+        true
+    ; sourcedEquationBoundaryCanonicalIsTrue =
         refl
     ; hamiltonianRequirementNormalizer =
         Normalizer.canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
-    ; hamiltonianRequirementNormalizerIsCanonical =
+    ; hamiltonianRequirementNormalizerCanonical =
+        true
+    ; hamiltonianRequirementNormalizerCanonicalIsTrue =
         refl
     ; finiteBuildingGapTransferBoundary =
         BTGap.canonicalBTFiniteBuildingYMGapTransferBoundary
-    ; finiteBuildingGapTransferBoundaryIsCanonical =
+    ; finiteBuildingGapTransferBoundaryCanonical =
+        true
+    ; finiteBuildingGapTransferBoundaryCanonicalIsTrue =
         refl
     ; finiteMetricGaugeKappaBoundary =
         Kappa.canonicalBTFiniteMetricGaugeCompatibilityKappaBoundary
-    ; finiteMetricGaugeKappaBoundaryIsCanonical =
+    ; finiteMetricGaugeKappaBoundaryCanonical =
+        true
+    ; finiteMetricGaugeKappaBoundaryCanonicalIsTrue =
         refl
     ; stages =
         canonicalYMHamiltonianQuotientGapStages

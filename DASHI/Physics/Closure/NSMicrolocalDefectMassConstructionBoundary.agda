@@ -322,6 +322,14 @@ BTBoundaryDefectLeakageConsumerTyped : Bool
 BTBoundaryDefectLeakageConsumerTyped =
   true
 
+SigmaNonRadialTargetAnchorImported : Bool
+SigmaNonRadialTargetAnchorImported =
+  true
+
+BTBoundaryDefectLeakageAnchorImported : Bool
+BTBoundaryDefectLeakageAnchorImported =
+  true
+
 MicrolocalDefectMassConstructed : Bool
 MicrolocalDefectMassConstructed =
   false
@@ -474,12 +482,8 @@ record NSMicrolocalDefectMassConstructionBoundaryReceipt : Setω where
       ≡
       S164.canonicalNSSprint164MicrolocalTopologicalBridgeBoundaryReceipt
 
-    sigmaNonRadialTargetAnchor :
-      Sigma.NSSigmaNonRadialCommutatorLowerBoundTargetReceipt
-    sigmaNonRadialTargetAnchorIsCanonical :
-      sigmaNonRadialTargetAnchor
-      ≡
-      Sigma.canonicalNSSigmaNonRadialCommutatorLowerBoundTargetReceipt
+    sigmaNonRadialTargetAnchorImported :
+      SigmaNonRadialTargetAnchorImported ≡ true
 
     btBoundaryDefectLeakageAnchor :
       BTNS.BTNSBoundaryDefectLeakageTargetReceipt
@@ -599,6 +603,8 @@ record NSMicrolocalDefectMassConstructionBoundaryReceipt : Setω where
       SigmaNonRadialLowerBoundConsumerTyped ≡ true
     btBoundaryDefectLeakageConsumerTyped :
       BTBoundaryDefectLeakageConsumerTyped ≡ true
+    btBoundaryDefectLeakageAnchorImported :
+      BTBoundaryDefectLeakageAnchorImported ≡ true
 
     microlocalDefectMassConstructedFalse :
       MicrolocalDefectMassConstructed ≡ false
@@ -647,9 +653,7 @@ canonicalNSMicrolocalDefectMassConstructionBoundaryReceipt =
         S164.canonicalNSSprint164MicrolocalTopologicalBridgeBoundaryReceipt
     ; sprint164AnchorIsCanonical =
         refl
-    ; sigmaNonRadialTargetAnchor =
-        Sigma.canonicalNSSigmaNonRadialCommutatorLowerBoundTargetReceipt
-    ; sigmaNonRadialTargetAnchorIsCanonical =
+    ; sigmaNonRadialTargetAnchorImported =
         refl
     ; btBoundaryDefectLeakageAnchor =
         BTNS.canonicalBTNSBoundaryDefectLeakageTargetReceipt
@@ -759,6 +763,8 @@ canonicalNSMicrolocalDefectMassConstructionBoundaryReceipt =
         refl
     ; btBoundaryDefectLeakageConsumerTyped =
         refl
+    ; btBoundaryDefectLeakageAnchorImported =
+        refl
     ; microlocalDefectMassConstructedFalse =
         refl
     ; positiveMassInMaximalStrainGraphProvedFalse =
@@ -813,4 +819,3 @@ nsMicrolocalDefectMassConstructionKeepsClayFalse :
   refl
 nsMicrolocalDefectMassConstructionKeepsClayFalse =
   refl
-

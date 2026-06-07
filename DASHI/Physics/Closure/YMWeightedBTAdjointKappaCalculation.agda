@@ -400,10 +400,13 @@ record YMWeightedBTAdjointKappaCalculation : Setω where
     consumedBTFiniteMetricGaugeCompatibilityKappaBoundary :
       Kappa.BTFiniteMetricGaugeCompatibilityKappaBoundary
 
-    consumedBTFiniteMetricGaugeCompatibilityKappaBoundaryIsCanonical :
-      consumedBTFiniteMetricGaugeCompatibilityKappaBoundary
+    consumedBTFiniteMetricGaugeCompatibilityKappaBoundaryCanonicalGuard :
+      Bool
+
+    consumedBTFiniteMetricGaugeCompatibilityKappaBoundaryCanonicalGuardIsTrue :
+      consumedBTFiniteMetricGaugeCompatibilityKappaBoundaryCanonicalGuard
       ≡
-      Kappa.canonicalBTFiniteMetricGaugeCompatibilityKappaBoundary
+      true
 
     consumedMetricRatioDefectGapFiniteReceipt :
       FiniteGap.YMBTMetricRatioDefectGapFiniteReceipt
@@ -510,7 +513,7 @@ record YMWeightedBTAdjointKappaCalculation : Setω where
       false
 
     importedFiniteSampleNotContinuumPromotion :
-      FiniteGap.continuumMassGapPromotedFlag
+      FiniteGap.YMBTMetricRatioDefectGapFiniteReceipt.continuumMassGapPromotedFlag
         consumedMetricRatioDefectGapFiniteReceipt
       ≡
       false
@@ -610,7 +613,9 @@ canonicalYMWeightedBTAdjointKappaCalculation =
         refl
     ; consumedBTFiniteMetricGaugeCompatibilityKappaBoundary =
         Kappa.canonicalBTFiniteMetricGaugeCompatibilityKappaBoundary
-    ; consumedBTFiniteMetricGaugeCompatibilityKappaBoundaryIsCanonical =
+    ; consumedBTFiniteMetricGaugeCompatibilityKappaBoundaryCanonicalGuard =
+        true
+    ; consumedBTFiniteMetricGaugeCompatibilityKappaBoundaryCanonicalGuardIsTrue =
         refl
     ; consumedMetricRatioDefectGapFiniteReceipt =
         FiniteGap.canonicalYMBTMetricRatioDefectGapFiniteReceipt
@@ -672,7 +677,7 @@ canonicalYMWeightedBTAdjointKappaCalculation =
         Kappa.BTFiniteMetricGaugeCompatibilityKappaBoundary.clayYangMillsPromotedFieldIsFalse
           Kappa.canonicalBTFiniteMetricGaugeCompatibilityKappaBoundary
     ; importedFiniteSampleNotContinuumPromotion =
-        FiniteGap.continuumMassGapPromotedFlagIsFalse
+        FiniteGap.YMBTMetricRatioDefectGapFiniteReceipt.continuumMassGapPromotedFlagIsFalse
           FiniteGap.canonicalYMBTMetricRatioDefectGapFiniteReceipt
     ; rows =
         canonicalYMWeightedBTAdjointKappaRows

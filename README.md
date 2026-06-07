@@ -329,8 +329,11 @@ targets, finite-building YM gap-transfer blockers, finite-depth NS boundary
 defect leakage targets, finite-depth boundary-observable promotion gates, and
 the P0 priority order: calculate `BTFiniteHodgeVariationTheorem` first for
 the finite field-theory bridge, while the NS-only Clay lane remains blocked on
-`AngularDegeneracyPressureCommutatorGain`. Maxwell, Yang-Mills, Navier-Stokes,
-observable, continuum, Clay, and terminal promotions remain false.
+`AngularDegeneracyPressureCommutatorGain`. The current narrowed follow-up
+frontier below refines those broad blockers to NS microlocal defect-mass
+construction, YM self-adjoint Hamiltonian quotient, and core hierarchy
+consistency. Maxwell, Yang-Mills, Navier-Stokes, observable, continuum, Clay,
+and terminal promotions remain false.
 Sprint166 adds
 `DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary` and
 `DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt`,
@@ -346,17 +349,39 @@ Clay, YM, NS, continuum, and terminal promotion flags remain false.
 The follow-up corrected P0 calculation round adds
 `DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula`,
 `DASHI.Physics.Closure.NSSigmaNonRadialCommutatorLowerBoundTarget`,
+`DASHI.Physics.Closure.NSTransverseSigmaNeighborhoodGeometry`,
+`DASHI.Physics.Closure.NSNonRadialityQuantificationAverage`,
+`DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary`,
+`DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf`,
+`DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary`,
+`DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary`,
+`DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary`,
 `DASHI.Physics.Closure.FiniteGaugeHodgeAdjointCompatibility`,
 `DASHI.Physics.Closure.BTFiniteMetricGaugeCompatibilityKappaBoundary`,
+`DASHI.Physics.Closure.YMWeightedBTAdjointKappaCalculation`,
+`DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientGapBoundary`,
+`DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`,
 `DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy`, and
-`DASHI.Physics.Closure.DNAClifford256StructuralCoincidenceReceipt`.  These
+`DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary`,
+`DASHI.Physics.Closure.DefectFourPointParallelogramLawBoundary`,
+plus `DASHI.Physics.Closure.DNAClifford256StructuralCoincidenceReceipt`. These
 separate the exact algebra from the analytic estimates: the NS rank-one
 projection formula records
 `||[Ptheta,Pplus]||_F^2 = 2 cos^2(alpha) sin^2(alpha)`, the Sigma target
-requires non-radiality plus microlocal defect mass before any pressure gain,
+now has transverse-neighborhood and finite non-radial averaging support, and
+the zero-mode refinement records `Z_NS = Z_rad union Z_tan`. Lei-Ren-Tian
+2025 is recorded as an external great-circle authority boundary for radial
+zero-mode exclusion, while Buaria/Bodenschatz/Pumir depletion is recorded as
+DNS evidence only for the tangential pressure-starvation target. The remaining
+NS analytic gap is still LP/semiclassical defect-mass construction with
+pressure bootstrap before residual depletion,
 the finite Hodge/YM hinge is the weighted adjoint/IBP compatibility
-`<d_A alpha,beta> = <alpha,+/- * d_A * beta> + boundary`, and the YM gap
-route is normalized to the uniform `inf_d kappa_d > 0` blocker.  The DNA
+`<d_A alpha,beta> = <alpha,+/- * d_A * beta> + boundary`, the YM gap
+route now records weighted BT/kappa sample arithmetic and is blocked on the
+self-adjoint Hamiltonian quotient, Hamiltonian domination of the finite Hodge
+defect, and continuum transfer, and the core unification route is blocked on
+`HierarchyConsistencyKillsFourPointDefect` before parallelogram/quadratic
+emergence. The DNA
 receipt records real `DNA256`/`FlatDNA256` and Clifford-adjacent 256 arithmetic
 as structural coincidence only; it explicitly rejects a local `Cl(7)` basis
 dimension equals 256 claim because `2^7 = 128`.

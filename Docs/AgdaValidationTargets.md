@@ -86,9 +86,21 @@ canonical closure spine:
 - `DASHI/Physics/Closure/FiniteDepthBoundaryObservablePromotionPipeline.agda`
 - `DASHI/Physics/Closure/NSRankOneProjectionCommutatorFormula.agda`
 - `DASHI/Physics/Closure/NSSigmaNonRadialCommutatorLowerBoundTarget.agda`
+- `DASHI/Physics/Closure/NSTransverseSigmaNeighborhoodGeometry.agda`
+- `DASHI/Physics/Closure/NSNonRadialityQuantificationAverage.agda`
+- `DASHI/Physics/Closure/NSMicrolocalDefectMassConstructionBoundary.agda`
+- `DASHI/Physics/Closure/ProjectionNonlocalityDefectLaplacianZeroModeSheaf.agda`
+- `DASHI/Physics/Closure/NSZeroModeSetClassificationBoundary.agda`
+- `DASHI/Physics/Closure/NSLeiRenTianRadialZeroModeAuthorityBoundary.agda`
+- `DASHI/Physics/Closure/NSTangentialZeroModePressureStarvationBoundary.agda`
 - `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
 - `DASHI/Physics/Closure/BTFiniteMetricGaugeCompatibilityKappaBoundary.agda`
+- `DASHI/Physics/Closure/YMWeightedBTAdjointKappaCalculation.agda`
+- `DASHI/Physics/Closure/YMSelfAdjointHamiltonianQuotientGapBoundary.agda`
+- `DASHI/Physics/Closure/YMHamiltonianDominatesFiniteHodgeDefectBoundary.agda`
 - `DASHI/Physics/Closure/CompatibilityLeakageCoercivityTrichotomy.agda`
+- `DASHI/Physics/Closure/DefectHierarchyParallelogramGeneralizationBoundary.agda`
+- `DASHI/Physics/Closure/DefectFourPointParallelogramLawBoundary.agda`
 - `DASHI/Physics/Closure/DNAClifford256StructuralCoincidenceReceipt.agda`
 - `DASHI/Physics/Closure/P0ClayFiniteHodgeNSTopologicalStackReceipt.agda`
 - `DASHI/Physics/Closure/ProjectionNonlocalityLeakagePrincipleBoundary.agda`
@@ -112,10 +124,15 @@ Sprint165 P0 stack executable ledgers:
 - `scripts/ns_projection_pressure_commutator_chain.py`
 - `scripts/ym_bt_hodge_gauge_commutator_chain.py`
 
-The P0 stack records `BTFiniteHodgeVariationTheorem` as the next overall
-analytic calculation and `AngularDegeneracyPressureCommutatorGain` as the
-next NS-only Clay calculation. Maxwell, YM/Yang-Mills, NS/Navier-Stokes,
-observable, continuum, Clay, and terminal promotion flags remain false.
+The P0 stack originally recorded `BTFiniteHodgeVariationTheorem` and
+`AngularDegeneracyPressureCommutatorGain` as broad next calculations. The
+current narrowed validation frontier is
+`NSMicrolocalDefectMassConstructionBoundary` for the NS LP/semiclassical
+measure bootstrap, `YMSelfAdjointHamiltonianQuotientGapBoundary` for YM
+transfer/OS/self-adjoint quotient work, and
+`DefectHierarchyParallelogramGeneralizationBoundary` for the core hierarchy
+consistency seam. Maxwell, YM/Yang-Mills, NS/Navier-Stokes, observable,
+continuum, Clay, and terminal promotion flags remain false.
 Sprint166 records the shared projection/nonlocality leakage frontier:
 `[Pi_+, R_i R_j]` is the NS matrix/eigenbundle pressure commutator target,
 `[d_A,*]F_A` is the YM/BT finite Hodge-gauge compatibility defect target, and

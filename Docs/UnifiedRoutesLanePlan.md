@@ -183,12 +183,38 @@ The corrected P0 Hodge/YM route should cite
 `d_A^*F=J` claim: the next exact finite proof is weighted adjoint/IBP
 compatibility, not a raw `[d_A,*]` commutator identity.  YM gap consumers
 should cite `DASHI.Physics.Closure.BTFiniteMetricGaugeCompatibilityKappaBoundary`
-for the normalized `inf_d kappa_d > 0` blocker, while NS consumers should cite
-`DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula` for the checked
-rank-one algebra and
+and `DASHI.Physics.Closure.YMWeightedBTAdjointKappaCalculation` for the
+weighted `w/wDual = p^((n-2k)*d)` target and finite `kappa_p = (p-1)^2/p^2`
+samples.  The remaining YM analytic boundary is
+`DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientGapBoundary`: transfer
+matrix, OS/reflection positivity, gauge quotient, self-adjoint domain,
+spectral lift, and continuum transfer remain unproved.  NS consumers should
+cite `DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula` for the
+checked rank-one algebra,
+`DASHI.Physics.Closure.NSTransverseSigmaNeighborhoodGeometry` for the
+transverse local-chart target,
+`DASHI.Physics.Closure.NSNonRadialityQuantificationAverage` for the finite
+non-radial averaging support,
 `DASHI.Physics.Closure.NSSigmaNonRadialCommutatorLowerBoundTarget` for the
-non-radial Sigma/microlocal-mass theorem target.  The shared governance surface
-is `DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy`.
+Sigma lower-bound target, and
+`DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary` for the
+remaining NS analytic gap: LP/semiclassical defect mass with pressure
+bootstrap.  The zero-mode refinement is
+`DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf` plus
+`DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary`: every obstruction
+is either leakage-positive or lives in the zero-mode sheaf.  Lei-Ren-Tian 2025
+is recorded by
+`DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary` as an
+external great-circle authority boundary for the radial zero-mode route, while
+`DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary` records
+Buaria/Bodenschatz/Pumir as DNS evidence only, not a deterministic ancient
+profile theorem.  The shared governance surface is
+`DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy`; the YM
+spectral next theorem is
+`DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`; and
+the core unification bottleneck is now normalized by
+`DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary` and
+`DASHI.Physics.Closure.DefectFourPointParallelogramLawBoundary`.
 Downloaded Hodge/YM/string context artifacts should cite
 `DASHI.Promotion.DownloadedNewAdditionsReferenceIndex`. It indexes the 36 files
 under `temp-DOWNLOADED/new additions`, with checksum-bound generated manifests
@@ -237,11 +263,11 @@ finite-building gap-transfer boundary, NS boundary-defect leakage target, and
 SM/Higgs boundary-observable promotion pipeline. Sprint165 normalizes the P0
 order: calculate `BTFiniteHodgeVariationTheorem` first for the finite
 field-equation bridge; calculate `AngularDegeneracyPressureCommutatorGain`
-first on the NS-only Clay lane. The remaining calculational
-blockers are metric BT Hodge star plus pairing/IBP, real matter-current
-coupling, real `D * F = J`, self-adjoint YM Hamiltonian quotient, uniform
-finite-building mass-gap lower bound, NS leakage-or-commutator-cost proof, and
-accepted empirical authority/holdout receipts. Maxwell, YM/Yang-Mills,
+first on the NS-only Clay lane. The current narrowed blockers are weighted
+Hodge adjoint/IBP to real `D * F = J`, self-adjoint YM Hamiltonian quotient,
+uniform finite-building mass-gap transfer, NS LP/semiclassical defect-mass
+construction with pressure bootstrap, and accepted empirical authority/holdout
+receipts. Maxwell, YM/Yang-Mills,
 NS/Navier-Stokes, observable, continuum, Clay, and terminal promotions remain
 false. The
 Sprint166 projection/nonlocality boundary adds

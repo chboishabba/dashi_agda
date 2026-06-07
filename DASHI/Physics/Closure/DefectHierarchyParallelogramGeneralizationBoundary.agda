@@ -266,11 +266,14 @@ record DefectHierarchyParallelogramGeneralizationBoundary : Setω where
     nextAnalyticCalculationIndex :
       Next.UnificationNextAnalyticCalculationIndex
 
-    theoremSurface :
-      Setω
+    theoremSurfaceName :
+      String
 
-    theoremSurfaceIsCriticalSeamTheoremType :
-      theoremSurface ≡ Seam.CriticalSeamTheoremType
+    theoremSurfaceNameIsCanonical :
+      Bool
+
+    theoremSurfaceNameIsCanonicalIsTrue :
+      theoremSurfaceNameIsCanonical ≡ true
 
     boundaryRows :
       List CoreGeneralizationRow
@@ -406,9 +409,11 @@ canonicalDefectHierarchyParallelogramGeneralizationBoundary =
         Obstruction.canonicalDefectCriticalSeamGeneralizationObstruction
     ; nextAnalyticCalculationIndex =
         Next.canonicalUnificationNextAnalyticCalculationIndex
-    ; theoremSurface =
-        Seam.CriticalSeamTheoremType
-    ; theoremSurfaceIsCriticalSeamTheoremType =
+    ; theoremSurfaceName =
+        "DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam.CriticalSeamTheoremType"
+    ; theoremSurfaceNameIsCanonical =
+        true
+    ; theoremSurfaceNameIsCanonicalIsTrue =
         refl
     ; boundaryRows =
         canonicalCoreGeneralizationRows

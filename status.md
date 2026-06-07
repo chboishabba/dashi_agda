@@ -1,3 +1,59 @@
+# 2026-06-08 defect-Laplacian zero-mode boundary round
+
+- Added checked shared P0 module:
+  `DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf`.
+  It records
+  `Delta_{Pi,N} = Pi N^dagger (1-Pi) N Pi` and the current alternative:
+  leakage-positive or zero-mode-rigid.
+- Added checked NS zero-mode modules:
+  `DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary`,
+  `DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary`, and
+  `DASHI.Physics.Closure.NSTangentialZeroModePressureStarvationBoundary`.
+  The NS zero-mode split is now recorded as `Z_NS = Z_rad union Z_tan`.
+  Lei-Ren-Tian arXiv:2501.08976 is recorded as an external great-circle
+  authority boundary for the radial route; Buaria/Bodenschatz/Pumir
+  arXiv:2006.01312 is recorded as DNS evidence only for the tangential
+  pressure-starvation target.
+- Added checked YM module:
+  `DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary`.
+  The next YM theorem target is now the domination inequality from the
+  transfer-matrix Hamiltonian on the gauge quotient to the finite Hodge/gauge
+  defect Laplacian, with OS/reflection positivity, accepted finite-a authority,
+  spectral lift, and continuum transfer still open.
+- Added checked core module:
+  `DASHI.Physics.Closure.DefectFourPointParallelogramLawBoundary`. It replaces
+  hidden smoothness assumptions with the exact four-point target
+  `HierarchyConsistencyKillsFourPointDefect`.
+- NS Clay, YM Clay, deterministic DNS-to-ancient-profile depletion,
+  microlocal defect mass construction, Hamiltonian domination, quadratic
+  emergence, continuum transfer, and terminal promotion remain false.
+
+# 2026-06-08 narrowed analytic-gap boundary round
+
+- Added checked NS modules:
+  `DASHI.Physics.Closure.NSTransverseSigmaNeighborhoodGeometry`,
+  `DASHI.Physics.Closure.NSNonRadialityQuantificationAverage`, and
+  `DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary`.
+- The NS route now has checked boundary surfaces for transverse Sigma local
+  chart data, finite four-sample non-radial averaging, and the exact remaining
+  microlocal blocker: blowup sequence -> LP-localized vorticity ->
+  semiclassical defect measure -> positive maximal-strain graph mass near
+  Sigma, with pressure nonlocality/bootstrap still open.
+- Added checked YM modules:
+  `DASHI.Physics.Closure.YMWeightedBTAdjointKappaCalculation` and
+  `DASHI.Physics.Closure.YMSelfAdjointHamiltonianQuotientGapBoundary`.
+- The YM route now records weighted `w/wDual = p^((n-2k)*d)` and finite
+  `kappa_p = (p - 1)^2 / p^2` support, while the remaining analytic boundary
+  is transfer matrix, OS/reflection positivity, gauge quotient,
+  self-adjoint Hamiltonian domain, spectral lift, and continuum transfer.
+- Added checked core module:
+  `DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary`.
+  The core unification seam is narrowed to general hierarchy consistency for
+  arbitrary admissible families before parallelogram/quadratic emergence.
+- Navier-Stokes Clay, Yang-Mills Clay, Standard Model empirical promotion,
+  continuum transfer, semantic/terminal unification, and all Clay terminal
+  promotions remain false.
+
 # 2026-06-08 Corrected P0 compatibility/leakage/coercivity round
 
 - Added checked modules:
