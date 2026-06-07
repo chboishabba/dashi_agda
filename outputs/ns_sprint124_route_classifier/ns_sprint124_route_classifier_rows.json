@@ -1,0 +1,47 @@
+[
+  {
+    "classification": "closed",
+    "clay": false,
+    "complete": true,
+    "next_action": "retain as a closed Sprint123 input",
+    "rationale": "The favorable phase-lag window lower bound is treated as closed for Sprint124 routing, but it does not by itself complete the Navier-Stokes Clay route.",
+    "recommendation_rank": 4,
+    "route_id": "favorable_phase_lag_window_lower_bound"
+  },
+  {
+    "classification": "closed_obstruction",
+    "clay": false,
+    "complete": false,
+    "next_action": "record as the controlling rotation-cycle obstruction",
+    "rationale": "Zero mean flux over a rotation cycle closes the averaged-flux lane as an obstruction rather than as a positive route.",
+    "recommendation_rank": 5,
+    "route_id": "zero_mean_flux_over_rotation_cycle"
+  },
+  {
+    "classification": "obstructed_by_zero_mean",
+    "clay": false,
+    "complete": false,
+    "next_action": "do not promote without defeating the zero-mean obstruction",
+    "rationale": "The rotating strain flux budget remains blocked because the cycle-averaged contribution has zero mean.",
+    "recommendation_rank": 3,
+    "route_id": "rotating_strain_flux_budget"
+  },
+  {
+    "classification": "live_primary_next",
+    "clay": false,
+    "complete": false,
+    "next_action": "prove VortexStretchingAmplificationVsDepletionBound",
+    "rationale": "Vortex stretching is the live primary next route because it can target a nonzero amplification-versus-depletion imbalance after the rotating-flux obstruction.",
+    "recommendation_rank": 1,
+    "route_id": "vortex_stretching"
+  },
+  {
+    "classification": "partial_open",
+    "clay": false,
+    "complete": false,
+    "next_action": "keep as a secondary partial route after vortex stretching",
+    "rationale": "Non-resonant triads remain partially open, but they do not yet supply the primary amplification bound needed for promotion.",
+    "recommendation_rank": 2,
+    "route_id": "non_resonant_triads"
+  }
+]

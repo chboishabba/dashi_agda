@@ -1,0 +1,32 @@
+{
+  "candidate_routes": [
+    "rotating_strain_phase_lag",
+    "constant_linear_strain",
+    "nonlinear_feedback",
+    "imposed_phase_lag",
+    "numerical_rotation_evidence"
+  ],
+  "classifications": {
+    "constant_linear_strain": "obstructed_by_sprint120",
+    "imposed_phase_lag": "rejected_circular",
+    "nonlinear_feedback": "open_secondary",
+    "numerical_rotation_evidence": "empirical_not_proof",
+    "rotating_strain_phase_lag": "conditional_open_requires_persistence"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint121_rotating_route_classifier",
+  "empirical_route_count": 1,
+  "exit_code": 1,
+  "exit_reason": "rotating route remains conditional and not Clay-complete",
+  "obstructed_route_count": 1,
+  "open_route_count": 2,
+  "primary_route": "rotating_strain_phase_lag",
+  "recommended_classification": "conditional_open_requires_persistence",
+  "recommended_next_lemma": "NonCircularRotatingStrainPersistenceBound",
+  "recommended_route_id": "rotating_strain_phase_lag",
+  "rejected_route_count": 1,
+  "route_count": 5
+}

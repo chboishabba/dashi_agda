@@ -1,0 +1,65 @@
+[
+  {
+    "classification": "live_primary_open",
+    "clay": false,
+    "complete": false,
+    "next_action": "keep as the live primary route",
+    "rationale": "The axisymmetric boundary vortex-stretching gate remains the primary open route, but it needs a boundary amplification law before any Clay promotion.",
+    "recommendation_rank": 2,
+    "route_id": "axisymmetric_boundary_vortex_stretching_gate"
+  },
+  {
+    "classification": "open_required",
+    "clay": false,
+    "complete": false,
+    "next_action": "prove BoundaryVorticityAmplificationLaw",
+    "rationale": "Boundary vorticity amplification is the required next lemma for turning the live axisymmetric gate into a usable estimate.",
+    "recommendation_rank": 1,
+    "route_id": "boundary_vorticity_amplification_law"
+  },
+  {
+    "classification": "open_required",
+    "clay": false,
+    "complete": false,
+    "next_action": "prove after the amplification law is framed",
+    "rationale": "Near-axis or near-boundary strain alignment remains required to control the sign and geometry of the amplification mechanism.",
+    "recommendation_rank": 3,
+    "route_id": "strain_alignment_near_axis_or_boundary"
+  },
+  {
+    "classification": "open_required",
+    "clay": false,
+    "complete": false,
+    "next_action": "check viscous dominance against boundary amplification",
+    "rationale": "The viscous boundary layer could dominate or suppress the candidate amplification, so the dominance check remains open.",
+    "recommendation_rank": 4,
+    "route_id": "viscous_boundary_layer_dominance_check"
+  },
+  {
+    "classification": "recorded_compatible",
+    "clay": false,
+    "complete": false,
+    "next_action": "retain as compatible scaling evidence",
+    "rationale": "Hou-Luo scaling is recorded as compatible context for the live boundary route, not as an independent closure.",
+    "recommendation_rank": 5,
+    "route_id": "hou_luo_scaling_compatibility"
+  },
+  {
+    "classification": "secondary_open",
+    "clay": false,
+    "complete": false,
+    "next_action": "keep as a secondary open route",
+    "rationale": "Nonresonant pressure triads remain a secondary open route behind the boundary-vorticity amplification lemma.",
+    "recommendation_rank": 6,
+    "route_id": "nonresonant_pressure_triads"
+  },
+  {
+    "classification": "not_promoted",
+    "clay": false,
+    "complete": false,
+    "next_action": "do not promote until required open lemmas close",
+    "rationale": "The Clay Navier-Stokes claim is not promoted because the primary boundary route and required supporting lemmas remain open.",
+    "recommendation_rank": 7,
+    "route_id": "clay_navier_stokes"
+  }
+]

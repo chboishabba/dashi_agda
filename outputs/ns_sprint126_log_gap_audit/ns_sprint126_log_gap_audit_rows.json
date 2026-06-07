@@ -1,0 +1,58 @@
+[
+  {
+    "actual": "present",
+    "check": "input surface present",
+    "evidence": "/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSSprint126LogGapAuditAndAxisymmetricPivot.agda",
+    "expected": "DASHI/Physics/Closure/NSSprint126LogGapAuditAndAxisymmetricPivot.agda",
+    "passed": true
+  },
+  {
+    "actual": "true",
+    "check": "conditional log gap closure",
+    "evidence": "vortexStretchingLogGapConditional=true",
+    "expected": "true",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "check": "unconditional log gap closure",
+    "evidence": "vortexStretchingLogGapUnconditional=false, vortexStretchingLogGapUnconditionalOpen=true",
+    "expected": "false",
+    "passed": true
+  },
+  {
+    "actual": "open",
+    "check": "unconditional log gap state",
+    "evidence": "surface-text",
+    "expected": "open",
+    "passed": true
+  },
+  {
+    "actual": "true",
+    "check": "hidden regularity record",
+    "evidence": "extraRegularityRequiredForLogGap=true",
+    "expected": "true",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "check": "clay Navier-Stokes promotion",
+    "evidence": "clayNavierStokesPromoted",
+    "expected": "false",
+    "passed": true
+  },
+  {
+    "actual": "next",
+    "check": "axisymmetric boundary gate",
+    "evidence": "surface-text",
+    "expected": "next",
+    "passed": true
+  },
+  {
+    "actual": "0",
+    "check": "blocked marker scan",
+    "evidence": "[]",
+    "expected": "zero hits",
+    "passed": true
+  }
+]

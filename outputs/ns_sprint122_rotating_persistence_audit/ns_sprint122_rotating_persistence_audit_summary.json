@@ -1,0 +1,472 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint122NonCircularRotatingStrainPersistenceBound.agda",
+  "assigned_bools": {
+    "blowupCriterionBridgeClosed": "false",
+    "circularImposedPhaseLagRejectionRecorded": "true",
+    "clay": "false",
+    "clayNavierStokesPromoted": "false",
+    "complete": "false",
+    "dissipationDriftCompetitionRecorded": "true",
+    "globalLerayCompatibleRotatingStrainDataClosed": "false",
+    "kStarCollapseFromRotatingStrainClosed": "false",
+    "navierStokesClayAssemblyClosed": "false",
+    "nonCircularRotatingStrainPersistenceBoundClosed": "false",
+    "phaseLagDynamicsProblemRecorded": "true",
+    "rotatingFrameODERecorded": "true",
+    "rotatingStrainFluxBudgetBeatsKStarClosed": "false",
+    "sourceClassifierRecorded": "true",
+    "sprint121RotatingStrainImported": "true",
+    "sprint122NonCircularRotatingStrainPersistenceLedgerClosed": "true"
+  },
+  "blowup_criterion_bridge_closed": false,
+  "bool_checks": {
+    "blowupCriterionBridgeClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "circularImposedPhaseLagRejectionRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "dissipationDriftCompetitionRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "globalLerayCompatibleRotatingStrainDataClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "kStarCollapseFromRotatingStrainClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "navierStokesClayAssemblyClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularRotatingStrainPersistenceBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "phaseLagDynamicsProblemRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "rotatingFrameODERecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "rotatingStrainFluxBudgetBeatsKStarClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "sourceClassifierRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint121RotatingStrainImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint122NonCircularRotatingStrainPersistenceLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "circular_imposed_phase_lag_rejection_recorded": true,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint122_rotating_persistence_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, anchors, required strings, exact booleans, or marker hits block audit passage",
+    "G": "Navier-Stokes Clay promotion remains false; process success is reserved for a coherent fail-closed receipt",
+    "L": "all required anchors, literals, exact booleans, keyword-consistency gates, and marker checks must pass before coherence",
+    "O": "Worker 2 owns only scripts/ns_sprint122_rotating_persistence_audit.py and outputs/ns_sprint122_rotating_persistence_audit files",
+    "P": "SPRINT122_ROTATING_PERSISTENCE_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "R": "verify the Sprint122 rotating-persistence receipt closes only a fail-closed ledger: ledger and receipt evidence true, analytic and Clay gates false",
+    "S": "target Agda module is inspected when present; missing target blocks coherence but still emits outputs"
+  },
+  "dissipation_drift_competition_recorded": true,
+  "downstream_closed": false,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "SPRINT122_ROTATING_PERSISTENCE_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint122NonCircularRotatingStrainPersistenceLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint121RotatingStrainImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "phaseLagDynamicsProblemRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "rotatingFrameODERecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "dissipationDriftCompetitionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sourceClassifierRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "circularImposedPhaseLagRejectionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularRotatingStrainPersistenceBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "rotatingStrainFluxBudgetBeatsKStarClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "kStarCollapseFromRotatingStrainClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "globalLerayCompatibleRotatingStrainDataClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint122NonCircularRotatingStrainPersistenceLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint121RotatingStrainImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:phaseLagDynamicsProblemRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:rotatingFrameODERecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:dissipationDriftCompetitionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sourceClassifierRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:circularImposedPhaseLagRejectionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:nonCircularRotatingStrainPersistenceBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:rotatingStrainFluxBudgetBeatsKStarClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:kStarCollapseFromRotatingStrainClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:globalLerayCompatibleRotatingStrainDataClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:clay",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint122 imports Sprint121 rotating-strain assessment",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:NonCircularRotatingStrainPersistenceBound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:phase lag dynamics must be derived from NSE, not imposed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:requires lower bound on favorable phase-lag duration",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:rotating-frame ODE for phase lag is recorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:NSE-derived polarization and amplitude dynamics required",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:dissipation and strain drift compete with phase locking",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:RotatingStrainFluxBudgetBeatsKStar remains open",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:imposed phase lag is circular",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:clayNavierStokesPromoted remains false",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint122NonCircularRotatingStrainPersistenceBound.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "SPRINT122_ROTATING_PERSISTENCE_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+      "expected": "SPRINT122_ROTATING_PERSISTENCE_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "global_leray_compatible_rotating_strain_data_closed": false,
+  "keyword_false_flags_coherent": true,
+  "keyword_true_flags_coherent": true,
+  "kstar_collapse_from_rotating_strain_closed": false,
+  "ledger_coherent_fail_closed": true,
+  "mechanism_closed": false,
+  "missing_anchors": [],
+  "missing_required_strings": [],
+  "navier_stokes_clay_assembly_closed": false,
+  "non_circular_rotating_strain_persistence_bound_closed": false,
+  "phase_lag_dynamics_problem_recorded": true,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint122NonCircularRotatingStrainPersistenceBound",
+    "canonicalNSSprint122NonCircularRotatingStrainPersistenceBound",
+    "ImportedSprint121RotatingStrain",
+    "canonicalImportedSprint121RotatingStrain",
+    "PhaseLagDynamicsProblem",
+    "canonicalPhaseLagDynamicsProblem",
+    "RotatingFrameODEReceipt",
+    "canonicalRotatingFrameODEReceipt",
+    "DissipationDriftCompetition",
+    "canonicalDissipationDriftCompetition",
+    "SourceClassifier",
+    "canonicalSourceClassifier",
+    "CircularImposedPhaseLagRejection",
+    "canonicalCircularImposedPhaseLagRejection",
+    "NonCircularRotatingStrainPersistenceBound",
+    "canonicalNonCircularRotatingStrainPersistenceBound",
+    "sprint122ReceiptSummary"
+  ],
+  "required_false_flags": true,
+  "required_strings": [
+    "Sprint122 imports Sprint121 rotating-strain assessment",
+    "NonCircularRotatingStrainPersistenceBound",
+    "phase lag dynamics must be derived from NSE, not imposed",
+    "requires lower bound on favorable phase-lag duration",
+    "rotating-frame ODE for phase lag is recorded",
+    "NSE-derived polarization and amplitude dynamics required",
+    "dissipation and strain drift compete with phase locking",
+    "RotatingStrainFluxBudgetBeatsKStar remains open",
+    "imposed phase lag is circular",
+    "clayNavierStokesPromoted remains false"
+  ],
+  "required_true_flags": true,
+  "rotating_frame_ode_recorded": true,
+  "rotating_strain_flux_budget_beats_kstar_closed": false,
+  "route_decision": "SPRINT122_ROTATING_PERSISTENCE_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "source_classifier_recorded": true,
+  "sprint121_rotating_strain_imported": true,
+  "sprint122_rotating_persistence_ledger_closed": true,
+  "target_present": true
+}

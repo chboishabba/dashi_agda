@@ -1,0 +1,45 @@
+{
+  "clay": false,
+  "complete": true,
+  "contract": "ns_sprint122_phase_lag_dynamics_sampler",
+  "damping_values": [
+    0.0,
+    0.05,
+    0.1
+  ],
+  "drift_values": [
+    0.0,
+    0.125,
+    0.25,
+    0.5
+  ],
+  "duration_values": [
+    1.0,
+    2.0,
+    4.0
+  ],
+  "exit_code": 0,
+  "favorable_duration_fraction_max": 1.0,
+  "favorable_duration_fraction_min": 0.0,
+  "favorable_duration_integral_max": 4.0,
+  "favorable_duration_integral_min": 0.0,
+  "favorable_dynamic_rows_count": 482,
+  "favorable_rule": "cos(2*theta)>0 and sin(2*theta)>0",
+  "non_circular_dynamic_bound_established": false,
+  "omega_values": [
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "persistence_bound_closed": false,
+  "row_count": 576,
+  "sample_count_per_row": 257,
+  "theta0_values": [
+    0.0,
+    0.19634954084936207,
+    0.39269908169872414,
+    0.7853981633974483
+  ],
+  "theta_formula": "theta(t)=theta0+omega*t-drift*t-damping*t"
+}

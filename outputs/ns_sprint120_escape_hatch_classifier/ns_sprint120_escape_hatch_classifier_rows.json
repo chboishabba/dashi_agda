@@ -1,0 +1,47 @@
+[
+  {
+    "classification": "obstructed_closed",
+    "clay": false,
+    "complete": false,
+    "next_action": "retain only as a closed obstruction record",
+    "rationale": "After the anti-correlation finding, constant linear strain cannot supply a non-circular positive route and is treated as closed.",
+    "recommendation_rank": 5,
+    "route_id": "constant_linear_strain_route"
+  },
+  {
+    "classification": "remaining_open_requires_new_mechanism",
+    "clay": false,
+    "complete": false,
+    "next_action": "prove RotatingStrainDecorrelationMechanism",
+    "rationale": "Rotating strain is the only primary remaining lane because it could decorrelate the obstructing sign, but it needs a new mechanism rather than reuse of the anti-correlated route.",
+    "recommendation_rank": 1,
+    "route_id": "rotating_strain"
+  },
+  {
+    "classification": "self_interacting_packet_open",
+    "clay": false,
+    "complete": false,
+    "next_action": "analyze self-interacting packet closure without imposed flux",
+    "rationale": "Nonlinear packet feedback remains open as an internal mechanism, but it has not been promoted to a closed Clay route.",
+    "recommendation_rank": 2,
+    "route_id": "nonlinear_feedback"
+  },
+  {
+    "classification": "open_secondary",
+    "clay": false,
+    "complete": false,
+    "next_action": "keep as a secondary coupling route",
+    "rationale": "Vorticity coupling may support a later construction, but it is secondary to the rotating-strain decorrelation gate.",
+    "recommendation_rank": 3,
+    "route_id": "vorticity_coupling"
+  },
+  {
+    "classification": "rejected_circular",
+    "clay": false,
+    "complete": false,
+    "next_action": "exclude from post-anti-correlation route accounting",
+    "rationale": "Imposing positive flux assumes the sign the escape hatch must derive, so it is circular.",
+    "recommendation_rank": 4,
+    "route_id": "imposed_positive_flux"
+  }
+]

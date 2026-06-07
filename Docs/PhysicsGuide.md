@@ -6,6 +6,12 @@ This note is the shortest serious entry surface for an expert reader who wants
 to know what the repo currently proves, what it only packages, where the
 empirical lane sits, and what remains speculative.
 
+If the question is "where is the simulator surface?", read
+`SimulatorRoadmap.md` before this guide. The simulator roadmap explains the
+unified parent/facade scaffold and the first proposed quantitative slice. This
+physics guide then explains which physics claims are theorem-bearing,
+bridge-only, empirical, or still speculative.
+
 ## Canonical Claim Owners
 
 Read these code owners before treating this note as authoritative:
@@ -72,46 +78,51 @@ theorem surface names its carrier, map, certificate, and consumer.
 
 ## Staged Reading Ladder
 
-1. Start with [CanonicalProofSpine.md](CanonicalProofSpine.md).
+1. Start with [SimulatorRoadmap.md](SimulatorRoadmap.md).
+   This fixes what "simulator" means: a receipt-gated scaffold, not a finished
+   all-scale prediction engine.
+2. Read [UnifiedMathLanguageSpine.md](UnifiedMathLanguageSpine.md).
+   This is the common carrier grammar used by the simulator facade.
+3. Read [CanonicalProofSpine.md](CanonicalProofSpine.md).
    This is the canonical theorem route and naming standard.
-2. Read [ClosureContractStatus.md](ClosureContractStatus.md).
+4. Read [ClosureContractStatus.md](ClosureContractStatus.md).
    This fixes what the downstream chain actually consumes today.
-3. Read [MinimalCrediblePhysicsClosure.md](MinimalCrediblePhysicsClosure.md).
+5. Read [MinimalCrediblePhysicsClosure.md](MinimalCrediblePhysicsClosure.md).
    This is the best compact statement of what counts as the current milestone.
-4. Read [CoreSpineBridge.md](CoreSpineBridge.md).
+6. Read [CoreSpineBridge.md](CoreSpineBridge.md).
    This is the compact map from `Base369` / `LogicTlurey` / CRT/J surfaces into
    the current ternary physics carrier and agreement ultrametric.
-5. Read [CoreSpineReviewerFormalisms.md](CoreSpineReviewerFormalisms.md).
+7. Read [CoreSpineReviewerFormalisms.md](CoreSpineReviewerFormalisms.md).
    This is the reviewer-facing theorem/gap inventory for the six core-spine
    formalisms.
-6. Read [OriginTraceabilityLedger.md](OriginTraceabilityLedger.md).
+8. Read [OriginTraceabilityLedger.md](OriginTraceabilityLedger.md).
    This reconciles origin-traceability claims with local repo truth and records
    the promotion gates for empirical adequacy, dynamics, and atom/chemistry.
-7. Read [AntifascisticBoundaryAndMusic.md](AntifascisticBoundaryAndMusic.md).
+9. Read [AntifascisticBoundaryAndMusic.md](AntifascisticBoundaryAndMusic.md).
    This records the safe antifascistic/three-body/music boundary examples and
    keeps them out of the canonical proof spine.
-8. Read [MusicalAttractorTheorem.md](MusicalAttractorTheorem.md).
+10. Read [MusicalAttractorTheorem.md](MusicalAttractorTheorem.md).
    This names the exploratory music bridge target over `(Z/12Z)^n` without
    promoting it into a physics-closure theorem.
-9. Read [NaturalDynamicsLaw.md](NaturalDynamicsLaw.md).
+11. Read [NaturalDynamicsLaw.md](NaturalDynamicsLaw.md).
    This explains why the present dynamics-facing story is still too engineered
    to call a natural physical law.
-10. Read [PhotonuclearEmpiricalRegistry.md](PhotonuclearEmpiricalRegistry.md).
+12. Read [PhotonuclearEmpiricalRegistry.md](PhotonuclearEmpiricalRegistry.md).
    This isolates the empirical lane and its non-claim boundary.
-11. Read [PhysicsArchiveCoverageMap.md](PhysicsArchiveCoverageMap.md).
+13. Read [PhysicsArchiveCoverageMap.md](PhysicsArchiveCoverageMap.md).
    This shows which archived threads actually reduce current theorem risk.
-12. Read `Docs/PhysicsRealityRoadmap.svg`.
+14. Read `Docs/PhysicsRealityRoadmap.svg`.
    This is the plain-language map from repo surfaces to familiar physics.
-13. Read `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`.
+15. Read `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`.
    These settle which recovery lanes are repo-native, archive-backed, or still open.
-14. Read `Docs/PhysicsUnificationMap.svg`.
+16. Read `Docs/PhysicsUnificationMap.svg`.
    This now includes the adjacent DNA / brain / crossover lanes and marks them
    explicitly as adjacent rather than theorem-closing.
-15. Read `DASHI.Physics.Closure.UnifiedPhysicsTheorem`,
+17. Read `DASHI.Physics.Closure.UnifiedPhysicsTheorem`,
    `DASHI.Physics.Closure.AtomicChemistryRecoveryTheorem`, and
    `DASHI.Physics.Closure.PhysicsUnificationToCanonicalClosureAdapter`.
    These are the current theorem-owner claim surfaces.
-16. Read [Docs/AtomAndWaveRecoveryStatus.md](AtomAndWaveRecoveryStatus.md).
+18. Read [Docs/AtomAndWaveRecoveryStatus.md](AtomAndWaveRecoveryStatus.md).
    This is the canonical public status surface for shell/orbit/profile and
    wave/regime progress, plus the remaining chemistry/quantum gap.
 

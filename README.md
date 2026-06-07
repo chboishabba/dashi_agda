@@ -9,6 +9,14 @@ For a new serious reader, the important split is:
 - `empirical`: data-facing and measurement-facing surfaces that stay explicitly non-claiming
 - `speculative`: roadmap or intuition surfaces that are not current repo claims
 
+For the current "DASHI as simulator" orientation, start with
+`Docs/SimulatorRoadmap.md`. It explains the checked unified facade, the
+cross-scale matter ladder, and the first recommended quantitative slice:
+composition vector -> toy matter/force carrier -> stability observable ->
+receipt -> fail-closed Agda guard. This is a simulator scaffold and roadmap,
+not a claim that the repo already derives arbitrary physics, chemistry,
+biology, stellar, or clinical predictions.
+
 Current YM boundary: Sprint 89 closes the lattice mass-gap provider in the
 scoped-authority receipt sense. Sprint 90 records the continuum survival
 interface

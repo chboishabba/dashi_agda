@@ -6625,3 +6625,138 @@ unless a line explicitly says it describes the live monitor surface.
   `navierStokesClayAssemblyClosed = false`, and
   `clayNavierStokesPromoted = false`.  The classifier recommends
   `PersistentAlignmentExistenceLowerBound` as the next analytic theorem.
+
+- 2026-06-07: NS Sprint 120 general-linear-strain anti-correlation ledger
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint120GeneralLinearStrainAntiCorrelation`,
+  wired into `DASHI.Everything`, plus deterministic anti-correlation audit,
+  polarization sign sampler, and escape-hatch classifier scripts with focused
+  tests.  This receipt imports Sprint119 and records the corrected pressure
+  projection/polarization calculation:
+  `sign(Pi_HH_to_L) = - sign(strain amplification)` for linear
+  divergence-free strain with incompressible wavepacket polarization.  The
+  constant linear strain and hyperbolic-template route is therefore recorded
+  as obstructed: positive HH-to-low flux depletes the packet amplitude.  The
+  receipt keeps `hyperbolicBackReactionBoundClosed = false`,
+  `pressureCorrectionBoundClosed = false`,
+  `globalLerayDataConstructed = false`,
+  `kStarCollapseFromCorrelationSourceClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier recommends
+  `RotatingStrainDecorrelationMechanism` as the next analytic theorem.
+
+- 2026-06-07: NS Sprint 121 rotating-strain decorrelation mechanism ledger
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint121RotatingStrainDecorrelationMechanism`,
+  wired into `DASHI.Everything`, plus deterministic rotating-strain audit,
+  rotating phase-lag sampler, and rotating-route classifier scripts with
+  focused tests.  This receipt imports Sprint120's constant-linear-strain
+  anti-correlation obstruction and records rotating strain as an open
+  phase-lag candidate: the relevant surface is the phase lag between packet
+  amplification and the instantaneous flux eigenframe.  The sampler finds
+  favorable algebraic rows, but no non-circular rotating-strain persistence
+  source is established.  The receipt keeps
+  `rotatingStrainDecorrelationMechanismClosed = false`,
+  `nonCircularRotatingPersistenceClosed = false`,
+  `kStarCollapseFromRotatingStrainClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier recommends
+  `NonCircularRotatingStrainPersistenceBound` as the next analytic theorem.
+
+- 2026-06-07: NS Sprint 122 non-circular rotating-strain persistence ledger
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint122NonCircularRotatingStrainPersistenceBound`,
+  wired into `DASHI.Everything`, plus deterministic rotating-persistence
+  audit, phase-lag dynamics sampler, and persistence-source classifier
+  scripts with focused tests.  This receipt imports Sprint121 and records
+  that phase-lag dynamics must be derived from NSE, not imposed.  The sampler
+  finds favorable dynamic rows, but no analytic lower bound on favorable
+  phase-lag duration is established.  The receipt keeps
+  `nonCircularRotatingStrainPersistenceBoundClosed = false`,
+  `rotatingStrainFluxBudgetBeatsKStarClosed = false`,
+  `kStarCollapseFromRotatingStrainClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `globalLerayCompatibleRotatingStrainDataClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier recommends
+  `RotatingFramePhaseLockingEstimate` as the next analytic theorem.
+
+- 2026-06-07: NS Sprint 123 rotating-frame phase-locking estimate ledger
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint123RotatingFramePhaseLockingEstimate`,
+  wired into `DASHI.Everything`, plus deterministic phase-locking audit,
+  dwell-window sampler, and source classifier scripts with focused tests.
+  This receipt imports Sprint122 and records that phase locking must follow
+  from NSE-derived frame dynamics, not from an imposed phase relation.  The
+  dwell sampler finds favorable rows, but no analytic lower bound on the
+  favorable phase-lag window is established.  The receipt keeps
+  `rotatingFramePhaseLockingEstimateClosed = false`,
+  `favorablePhaseLagWindowLowerBoundClosed = false`,
+  `rotatingStrainFluxBudgetBeatsKStarClosed = false`,
+  `kStarCollapseFromRotatingStrainClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `globalLerayCompatibleRotatingStrainDataClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier recommends
+  `FavorablePhaseLagWindowLowerBound` as the next analytic theorem.
+
+- 2026-06-07: NS Sprint 124 zero-mean-flux-over-rotation-cycle ledger
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint124ZeroMeanFluxOverRotationCycle`,
+  wired into `DASHI.Everything`, plus deterministic zero-mean-flux audit,
+  rotation-cycle integral sampler, and route classifier scripts with focused
+  tests.  This receipt imports Sprint123 and records the supplied rotating
+  strain calculation: `FavorablePhaseLagWindowLowerBound` is closed as a
+  positive local dwell bound, but
+  `ZeroMeanFluxOverRotationCycle` cancels the signed HH-to-low flux over a
+  full rotating-strain period.  The rotating-strain route is therefore closed
+  as an obstruction, not promoted.  The receipt keeps
+  `rotatingStrainFluxBudgetBeatsKStarClosed = false`,
+  `kStarCollapseFromRotatingStrainClosed = false`,
+  `vortexStretchingContinuumControlClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier recommends
+  `VortexStretchingAmplificationVsDepletionBound` as the next analytic
+  theorem.
+
+- 2026-06-07: NS Sprint 126 log-gap audit and axisymmetric pivot ledger
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint126LogGapAuditAndAxisymmetricPivot`,
+  wired into `DASHI.Everything`, plus deterministic log-gap audit,
+  axisymmetric boundary scaling sampler, and route classifier scripts with
+  focused tests.  This receipt corrects the Sprint125 vortex-stretching
+  log-gap overreach: `VortexStretchingLogGapConditional` is recorded as true
+  only under extra regularity, while
+  `VortexStretchingLogGapUnconditional` remains false/open.  The
+  `NSWavepacketMechanismNoGoTower` is recorded as exact for HH-to-low
+  wavepacket routes, not as full Navier-Stokes regularity.  The scaling
+  sampler records a Hou-Luo/Hou-Li compatible exponent window including
+  `alpha = 1`, `beta = 0`, `gamma = 4/3`, but does not treat scaling
+  compatibility as proof.  The receipt keeps
+  `axisymmetricBoundaryVortexStretchingGateClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier recommends
+  `AxisymmetricBoundaryVortexStretchingGate` as the next analytic theorem.
+
+- 2026-06-07: NS Sprint 127 axisymmetric boundary vortex-stretching gate
+  ledger complete.  Added
+  `DASHI.Physics.Closure.NSSprint127AxisymmetricBoundaryVortexStretchingGate`,
+  wired into `DASHI.Everything`, plus deterministic axisymmetric boundary
+  audit, boundary-layer balance sampler, and route classifier scripts with
+  focused tests.  This receipt imports Sprint126 and records
+  `AxisymmetricBoundaryVortexStretchingGate` as the live primary NS route.
+  Closed evidence is limited to route recording,
+  `HouLuoScalingCompatibility` from the deterministic scaling samplers, and
+  `EnergyObstructionAbsent`; no analytic amplification theorem is promoted.
+  The receipt keeps `BoundaryVorticityAmplificationLaw`,
+  `StrainAlignmentNearAxisOrBoundary`,
+  `ViscousBoundaryLayerDominanceCheck`,
+  `GeometricDepletionForAxisymmetricBoundary`,
+  `BKMBridgeFromAxisymmetricBoundary`,
+  `GlobalSmoothDataBoundaryConstruction`,
+  `NavierStokesClayAssembly`, and `clayNavierStokesPromoted` false/open.
+  The classifier recommends `BoundaryVorticityAmplificationLaw` as the next
+  analytic theorem.
