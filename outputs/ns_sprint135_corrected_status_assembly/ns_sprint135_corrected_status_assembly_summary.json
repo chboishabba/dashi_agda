@@ -1,0 +1,51 @@
+{
+  "axs_viscous_dominance_obstruction_retracted": true,
+  "clay": false,
+  "clayNavierStokesPromoted": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint135_corrected_status_assembly",
+  "control_card": {
+    "C": "deterministic status rows, optional Sprint 134 summary reads, JSON/CSV/Markdown outputs",
+    "F": "No full Clay proof; analytic gap is source-vs-viscosity under log-loss dynamics.",
+    "G": "full_clay_ns_solved=false; clay_navier_stokes_promoted=false",
+    "L": "Sprint 134 corrections -> Sprint 135 canonical status assembly -> promotion hold",
+    "O": "Worker 3 owns scripts/ns_sprint135_corrected_status_assembly.py and outputs/ns_sprint135_corrected_status_assembly only.",
+    "P": "Use the corrected assembly as the current NS programme boundary and route the next work toward Hou-Luo as a live candidate.",
+    "R": "Assemble the corrected current NS programme status after the Sprint 134 equation correction, no-log falsification, and Hou-Luo obstruction retraction.",
+    "S": "WBF exact rows intact; pure-u1 diffusion and AXS viscous dominance are retracted; uniform no-log is false; Hou-Luo with swirl is open/live."
+  },
+  "deterministic_if_upstream_absent": true,
+  "exit_code": 0,
+  "false_lemmas": [
+    "NoLogAxisymmetricBiotSavartUniform"
+  ],
+  "full_clay_ns_solved": false,
+  "gamma_circulation_maximum_principle_replacement": true,
+  "hou_luo_axisymmetric_ns_route_status": "open_live_candidate",
+  "hou_luo_axisymmetric_with_swirl_open_candidate": true,
+  "live_ns_boundary": "hou_luo_axisymmetric_with_swirl_open_candidate",
+  "next_action": "model corrected Hou-Luo source-vs-viscosity dynamics with the restored logarithmic Biot-Savart loss",
+  "no_log_axisymmetric_biot_savart_uniform": false,
+  "pure_u1_diffusion_retracted": true,
+  "retracted_claims": [
+    "PureDiffusionU1MaximumPrinciple",
+    "AxisymmetricHouLuoNSViscousDominanceObstruction"
+  ],
+  "row_count": 7,
+  "unsupported_rows_when_upstream_present": [],
+  "upstream_observation_count": 3,
+  "upstream_sprint134_summaries_present": {
+    "axisymmetric_equation_correction": true,
+    "biot_savart_log_singularity_audit": true,
+    "hou_luo_retraction_status": true
+  },
+  "wbf_exact_intact": true,
+  "wbf_exact_results": [
+    "WBF-L",
+    "WBF-S",
+    "WBF-MP",
+    "WBF-R"
+  ]
+}

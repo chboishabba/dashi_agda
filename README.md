@@ -24,22 +24,34 @@ The broader route/lane joining plan is `Docs/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
 
-Current NS Sprint 133 boundary: the repo now records why the Sprint 132
-obstruction tower is route-specific and why closing
-`NoLogAxisymmetricBiotSavartUniform` alone advances full Clay completion by
-approximately 0%.  `scripts/ns_sprint133_universal_strategy_classifier.py`
-classifies the six universal regularity strategies and selects the
-axisymmetric-with-swirl structure-theorem target as the most concrete
-Clay-adjacent lane.  `scripts/ns_sprint133_no_log_biot_savart_scope.py` records
-that the no-log lemma would close only the `AXS beta>0 moderate-Re` subcase,
-leaving beta-zero, large-Re, outside-class, and universal-exhaustion gaps open.
-`scripts/ns_sprint133_axisymmetric_swirl_target.py` defines the finite target
-`AxisymmetricNSWithSwirlGlobalRegularity` with four gates:
-`large_re_axisymmetric_transient_control`,
-`marginal_beta_zero_analysis`, `axisymmetric_symmetry_class_exhaustion`, and
-`axisymmetric_swirl_global_assembly`.  Full Clay Navier-Stokes remains
+Current NS Sprint 135 boundary: the repo treats Hou-Luo axisymmetric
+Navier-Stokes with swirl as a live candidate under the corrected Sprint 134
+equations and logarithmic Biot-Savart loss.  The phase map
+`scripts/ns_sprint135_hou_luo_source_viscosity_phase.py` records that the old
+polynomial source model loses to viscosity and is not a PDE obstruction, while
+the corrected log-Gronwall source model can beat polynomial viscous damping;
+the actual PDE source remains unresolved because sign, alignment,
+localization, and lower/upper bounds are missing.  The gate classifier
+`scripts/ns_sprint135_hou_luo_blowup_gate_classifier.py` records 21 open gates:
+the highest-alpha blowup-side gate is `LogLossSourceLowerBound`, and the
+fallback regularity-side gate is `LogLossSourceUpperControl`.
+`scripts/ns_sprint135_corrected_status_assembly.py` preserves the live
+boundary `hou_luo_axisymmetric_with_swirl_open_candidate`, with
+`PureDiffusionU1MaximumPrinciple` and
+`AxisymmetricHouLuoNSViscousDominanceObstruction` retracted and
+`NoLogAxisymmetricBiotSavartUniform` false.  Full Clay Navier-Stokes remains
 unsolved, `full_clay_ns_solved=false`, and `clayNavierStokesPromoted` remains
 false.
+
+Sprint 134 is the correction/retraction layer underneath Sprint 135.  It
+corrected the Hou-Luo equations, moved the maximum-principle quantity from
+`u1` to `Gamma = r u^theta = r^2 u1`, falsified the uniform no-log
+axisymmetric Biot-Savart lemma away from the axis, and retracted the prior
+axisymmetric viscous-dominance obstruction.
+
+Sprint 133 is now a prior pivot surface: it classified universal strategies
+and proposed the axisymmetric-with-swirl target, but its hypothetical no-log
+promotion path has been superseded by the Sprint 134 falsification/retraction.
 
 Sprint 132 remains the prior route-specific partial theorem surface:
 `scripts/ns_sprint132_partial_obstruction_theorem.py` assembles six obstruction

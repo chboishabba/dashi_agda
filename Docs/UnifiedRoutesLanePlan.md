@@ -292,6 +292,16 @@ registry-lane bindings, witnessed by
 `canonicalLaneMorphismCountIs16`, and
 `canonicalRegistryBindingCountIs14`.
 
+The sprint-facing promotion queue is
+`DASHI.Promotion.ObligationIndex.canonicalUnifiedPromotionObligationIndex`.
+It imports the six code-owner lanes for numeric/authority, classical fields,
+quantum/QFT, chemistry/biology, Gate 3/Clay, and Standard Model/terminal
+unification obligations. The aggregate records 6 lane summaries and 73 open
+promotion obligations, witnessed by
+`canonicalUnifiedPromotionLaneCountIs6` and
+`canonicalUnifiedPromotionOpenObligationCountIs73`; terminal promotion remains
+false by `canonicalUnifiedPromotionTerminalPromotionIsFalse`.
+
 | Stage | Required evidence | Promotion reading |
 |---|---|---|
 | S0 carrier named | Lane has a named carrier, owner, and target vocabulary. | Not a theorem claim. |

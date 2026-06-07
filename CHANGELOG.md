@@ -6,6 +6,37 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 135 NS corrected Hou-Luo phase map and gate classifier for
+  `2026-06-07`: adds
+  `scripts/ns_sprint135_hou_luo_source_viscosity_phase.py`,
+  `scripts/ns_sprint135_hou_luo_blowup_gate_classifier.py`, and
+  `scripts/ns_sprint135_corrected_status_assembly.py`, with matching generated
+  output receipts and tests.  The tranche records that polynomial
+  source/viscosity bookkeeping is insufficient as an obstruction, while the
+  corrected log-Gronwall source scale can beat polynomial viscous damping.
+  It still does not prove blowup or regularity: the actual PDE source requires
+  sign, alignment, localization, lower/upper bounds, and smooth-data bootstrap
+  control.  The classifier records 21 open gates, with
+  `LogLossSourceLowerBound` as the highest-alpha blowup-side gate and
+  `LogLossSourceUpperControl` as the fallback regularity-side gate.  Full Clay
+  Navier-Stokes remains unsolved and `clayNavierStokesPromoted` remains false.
+
+- Sprint 134 NS axisymmetric correction and Hou-Luo retraction for
+  `2026-06-07`: adds
+  `scripts/ns_sprint134_axisymmetric_equation_correction.py`,
+  `scripts/ns_sprint134_biot_savart_log_singularity_audit.py`, and
+  `scripts/ns_sprint134_hou_luo_retraction_status.py`, with matching generated
+  output receipts and tests.  The tranche corrects the Hou-Luo equations:
+  `u1` is not pure diffusion, while `Gamma = r u^theta = r^2 u1` is the
+  maximum-principle quantity on which annular `u1` bounds must rest.  It also
+  falsifies `NoLogAxisymmetricBiotSavartUniform` uniformly away from the axis
+  using the elliptic-integral logarithmic asymptotic
+  `K(k) ~ log(4/sqrt(1-k^2))`.  Consequently
+  `AxisymmetricHouLuoNSViscousDominanceObstruction` is retracted, and the
+  Hou-Luo axisymmetric-with-swirl Navier-Stokes route is recorded as
+  `open_live_candidate`, neither obstructed nor confirmed.  Full Clay
+  Navier-Stokes remains unsolved and `clayNavierStokesPromoted` remains false.
+
 - Sprint 133 NS universal-strategy and axisymmetric-with-swirl pivot for
   `2026-06-07`: adds
   `scripts/ns_sprint133_universal_strategy_classifier.py`,

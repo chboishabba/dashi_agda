@@ -163,6 +163,7 @@ import DASHI.Interop.SeaMeInItBT369SphereUnwrap
 import DASHI.Interop.SeaMeInItROMKernelFormalism
 import DASHI.Interop.SeaMeInItROMSeamAtlas
 import DASHI.Interop.SeaMeInItSeamDerivationFormalism
+import DASHI.Promotion.ObligationIndex
 import DASHI.Interop.SeaMeInIt.Unwrap.Competitor.Everything
 import DASHI.Interop.SeaMeInItUnwrapCompetitors
 import DASHI.Interop.SemanticOperatorAlignmentDischarge

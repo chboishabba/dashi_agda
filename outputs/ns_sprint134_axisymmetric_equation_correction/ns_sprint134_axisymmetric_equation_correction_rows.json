@@ -1,0 +1,129 @@
+[
+  {
+    "assertion_type": "definitions",
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Local equation correction only; no full 3D regularity claim.",
+    "corrected_statement": "Use u1 = u^theta/r, omega1 = omega^theta/r, psi1 = psi^theta/r, Gamma = r u^theta = r^2 u1, and Ltilde = partial_r^2 + (3/r)partial_r + partial_z^2.",
+    "full_clay_ns_solved": false,
+    "lemma": "StandardAxisymmetricSwirlVariables",
+    "proof_role": "Pins the exact variables before any maximum-principle or source-gradient estimate is invoked.",
+    "row_id": "axisymmetric_variable_definitions",
+    "status": "corrected",
+    "supersedes_or_supports": [
+      "Sprint130:PureDiffusionU1MaximumPrinciple",
+      "Sprint131:HouLuoObstructionAssembly"
+    ],
+    "variables_used": [
+      "u1",
+      "omega1",
+      "psi1",
+      "Gamma",
+      "Ltilde"
+    ]
+  },
+  {
+    "assertion_type": "pde_identity",
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Prevents downstream proofs from using a false u1 maximum principle.",
+    "corrected_statement": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+    "full_clay_ns_solved": false,
+    "lemma": "AxisymmetricSwirlEquationCorrection.U1EquationHasStretchingSource",
+    "proof_role": "Records that u1 is not a pure diffusion variable; it contains the stretching source 2 u1 partial_z psi1.",
+    "row_id": "u1_equation_has_stretching_source",
+    "status": "corrected",
+    "supersedes_or_supports": [
+      "retracts:PureDiffusionU1MaximumPrinciple",
+      "supports:AxisymmetricHouLuoNSCorrectedObstruction"
+    ],
+    "variables_used": [
+      "u1",
+      "psi1",
+      "Ltilde",
+      "nu"
+    ]
+  },
+  {
+    "assertion_type": "pde_identity",
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Axisymmetric mechanism surface only.",
+    "corrected_statement": "D_t omega1 = partial_z(u1^2) + nu Ltilde omega1",
+    "full_clay_ns_solved": false,
+    "lemma": "AxisymmetricSwirlEquationCorrection.Omega1EquationHasQuadraticSource",
+    "proof_role": "Keeps the exact Hou-Luo amplification source as partial_z(u1^2)=2 u1 partial_z u1.",
+    "row_id": "omega1_equation_has_quadratic_source",
+    "status": "intact_corrected_surface",
+    "supersedes_or_supports": [
+      "supports:QuadraticSourceGradientUpperBound",
+      "supports:CorrectedViscousDominanceNearBlowup"
+    ],
+    "variables_used": [
+      "omega1",
+      "u1",
+      "Ltilde",
+      "nu"
+    ]
+  },
+  {
+    "assertion_type": "retraction",
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Retraction narrows the proven axisymmetric support.",
+    "corrected_statement": "The statement D_t u1 = nu Ltilde u1 is false in the standard Hou-Luo variables; u1 has the source 2 u1 partial_z psi1.",
+    "full_clay_ns_solved": false,
+    "lemma": "PureDiffusionU1MaximumPrinciple",
+    "proof_role": "Explicitly blocks promotion of any proof depending on a pure diffusion maximum principle for u1.",
+    "row_id": "old_u1_pure_diffusion_retraction",
+    "status": "retracted_superseded",
+    "supersedes_or_supports": [
+      "superseded_by:AxisymmetricSwirlEquationCorrection",
+      "superseded_by:SwirlCirculationMaximumPrinciple"
+    ],
+    "variables_used": [
+      "u1",
+      "psi1",
+      "Ltilde",
+      "nu"
+    ]
+  },
+  {
+    "assertion_type": "maximum_principle",
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Useful only after localization away from r=0; not a global 3D regularity theorem.",
+    "corrected_statement": "(partial_t + u^r partial_r + u^z partial_z) Gamma = nu (Delta - 2/r partial_r) Gamma; hence ||Gamma(t)||_inf <= ||Gamma(0)||_inf.",
+    "full_clay_ns_solved": false,
+    "lemma": "SwirlCirculationMaximumPrinciple",
+    "proof_role": "Identifies the true maximum-principle quantity: swirl circulation Gamma, not u1.",
+    "row_id": "gamma_maximum_principle",
+    "status": "replacement_gate",
+    "supersedes_or_supports": [
+      "replaces:PureDiffusionU1MaximumPrinciple",
+      "supports:BoundaryAnnulusU1Bound"
+    ],
+    "variables_used": [
+      "Gamma",
+      "u^r",
+      "u^z",
+      "nu"
+    ]
+  },
+  {
+    "assertion_type": "annulus_conversion",
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Hou-Luo boundary-annulus support only.",
+    "corrected_statement": "r in [r0, 1], r0 > 0, ||Gamma(t)||_inf <= M0 => ||u1(t)||_inf <= M0 / r0^2",
+    "full_clay_ns_solved": false,
+    "lemma": "BoundaryAnnulusU1Bound",
+    "proof_role": "Converts the Gamma maximum principle into a bounded u1 amplitude only on a boundary annulus r >= r0 > 0.",
+    "row_id": "boundary_annulus_u1_bound",
+    "status": "replacement_gate",
+    "supersedes_or_supports": [
+      "supports:QuadraticSourceGradientUpperBound",
+      "supports:AxisymmetricHouLuoNSCorrectedObstruction"
+    ],
+    "variables_used": [
+      "Gamma",
+      "u1",
+      "r0",
+      "M0"
+    ]
+  }
+]

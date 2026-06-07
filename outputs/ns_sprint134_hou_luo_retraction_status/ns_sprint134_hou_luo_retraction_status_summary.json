@@ -1,0 +1,39 @@
+{
+  "axs_viscous_dominance_obstruction_retracted": true,
+  "clayNavierStokesPromoted": false,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint134_hou_luo_retraction_status",
+  "corrected_maximum_principle_quantity": "Gamma = r u_theta = r^2 u1",
+  "corrected_source_gradient_with_log_gronwall": true,
+  "corrected_u1_equation_has_stretching_source": true,
+  "exit_code": 0,
+  "false_uniform_lemmas": [
+    "NoLogAxisymmetricBiotSavartUniform"
+  ],
+  "full_clay_ns_solved": false,
+  "hou_luo_axisymmetric_ns_confirmed_blowup": false,
+  "hou_luo_axisymmetric_ns_obstructed": false,
+  "hou_luo_axisymmetric_ns_route_status": "open_live_candidate",
+  "open_live_row_count": 6,
+  "retracted_results": [
+    "AxisymmetricHouLuoNSViscousDominanceObstruction"
+  ],
+  "retraction_reason_dependencies": [
+    "NoLogAxisymmetricBiotSavartUniform is false as a uniform cylinder estimate",
+    "u1 is not a pure-diffusion maximum-principle variable",
+    "the source requires gradient accounting: partial_z(u1^2)=2u1 partial_z u1"
+  ],
+  "row_count": 6,
+  "source_can_be_super_exponential_in_log_tau_inverse": true,
+  "source_can_be_super_polynomial_in_tau_inverse": true,
+  "source_gradient_rows": [
+    "CorrectedHouLuoSourceGradientAccounting"
+  ],
+  "source_may_beat_viscosity": true,
+  "theorem_retracted": "AxisymmetricHouLuoNSViscousDominanceObstruction",
+  "wbf_exact_results_intact": true,
+  "wbf_intact_results": [
+    "WBF-L/WBF-S/WBF-MP/WBF-R"
+  ]
+}

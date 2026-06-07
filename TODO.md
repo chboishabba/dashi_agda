@@ -3,6 +3,51 @@
 
 # P0 BLOCKERS
 
+• Sprint 135 NS corrected Hou-Luo phase map and gate classifier is
+  implemented.
+
+  Status:
+
+  - adds executable surfaces for the corrected source-vs-viscosity phase map,
+    the Hou-Luo blowup/regularity gate classifier, and the corrected live
+    status assembly;
+  - generates `outputs/ns_sprint135_hou_luo_source_viscosity_phase/`,
+    `outputs/ns_sprint135_hou_luo_blowup_gate_classifier/`, and
+    `outputs/ns_sprint135_corrected_status_assembly/`;
+  - records that polynomial source models lose to viscosity, but the corrected
+    log-Gronwall source model can beat polynomial viscous damping;
+  - keeps the actual PDE route unresolved because source sign, alignment,
+    localization, lower bounds, upper bounds, and smooth-data bootstrap gates
+    remain open;
+  - records 21 open Hou-Luo gates, with `LogLossSourceLowerBound` as the
+    highest-alpha next blowup-side calculation and `LogLossSourceUpperControl`
+    as the fallback regularity-side calculation;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 134 NS axisymmetric correction and Hou-Luo retraction is
+  implemented.
+
+  Status:
+
+  - adds executable surfaces for corrected axisymmetric equations, the
+    Biot-Savart logarithmic singularity audit, and downstream Hou-Luo
+    retraction status;
+  - generates `outputs/ns_sprint134_axisymmetric_equation_correction/`,
+    `outputs/ns_sprint134_biot_savart_log_singularity_audit/`, and
+    `outputs/ns_sprint134_hou_luo_retraction_status/`;
+  - retracts the old `PureDiffusionU1MaximumPrinciple` for `u1` and replaces
+    it with the swirl circulation maximum principle for
+    `Gamma = r u^theta = r^2 u1` plus the boundary-annulus bound
+    `||u1|| <= M0/r0^2`;
+  - records `NoLogAxisymmetricBiotSavartUniform = false` uniformly away from
+    the axis by the elliptic-integral logarithmic asymptotic
+    `K(k) ~ log(4/sqrt(1-k^2))`;
+  - retracts `AxisymmetricHouLuoNSViscousDominanceObstruction` and records the
+    Hou-Luo axisymmetric-with-swirl NS route as `open_live_candidate`;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
 • Sprint 133 NS universal-strategy and axisymmetric-with-swirl pivot is
   implemented.
 

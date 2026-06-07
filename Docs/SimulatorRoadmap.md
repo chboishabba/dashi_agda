@@ -183,6 +183,10 @@ Systematic lane interlinks should cite
 That receipt records the promotion ladder, lane objects, lane morphisms, and
 registry bindings while keeping theorem, empirical, Clay, full Standard Model,
 and terminal promotion false.
+Promotion-gated simulator slices should cite
+`DASHI.Promotion.ObligationIndex.canonicalUnifiedPromotionObligationIndex`.
+That receipt joins the six obligation lanes and records 73 open promotion
+obligations while keeping terminal/full-unification promotion false.
 
 Simulator slices may consume exact SI defining constants from that registry as
 reference inputs, and may consume exact derived SI expressions such as `hbar`,

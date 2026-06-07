@@ -24,6 +24,13 @@ canonical closure spine:
 - `DASHI/Physics/Closure/PhysicsClosureSummary.agda`
 - `DASHI/Constants/Registry.agda`
 - `DASHI/Interop/CategoricalInterlinkLayer.agda`
+- `DASHI/Promotion/NumericAndAuthorityObligations.agda`
+- `DASHI/Promotion/ClassicalFieldObligations.agda`
+- `DASHI/Promotion/QuantumQFTObligations.agda`
+- `DASHI/Promotion/ChemistryBiologyObligations.agda`
+- `DASHI/Promotion/Gate3ClayObligations.agda`
+- `DASHI/Promotion/StandardModelTerminalObligations.agda`
+- `DASHI/Promotion/ObligationIndex.agda`
 - `DASHI/Unified/StellarCompositionProxyReceipt.agda`
 - `DASHI/Unified/CrossScaleMatterPhysics.agda`
 - `DASHI/Unified/Everything.agda`
