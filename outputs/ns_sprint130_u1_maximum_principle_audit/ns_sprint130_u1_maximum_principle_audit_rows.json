@@ -1,0 +1,79 @@
+[
+  {
+    "actual": "PureDiffusionU1MaximumPrinciple",
+    "evidence": "records the receipt-level pure-diffusion U1 maximum-principle lemma",
+    "expected": "PureDiffusionU1MaximumPrinciple",
+    "gate": "ReceiptLemma",
+    "passed": true
+  },
+  {
+    "actual": "(1/r^3) partial_r(r^3 partial_r) + partial_z^2",
+    "evidence": "expanded form: partial_r^2 + (3/r) partial_r + partial_z^2",
+    "expected": "L_tilde = (1/r^3) partial_r(r^3 partial_r) + partial_z^2",
+    "gate": "OperatorIdentity",
+    "passed": true
+  },
+  {
+    "actual": "r^3 dr dz",
+    "evidence": "this is the radial 4D axisymmetric weight paired with L_tilde",
+    "expected": "r^3 dr dz",
+    "gate": "WeightedMeasure",
+    "passed": true
+  },
+  {
+    "actual": "negative_semidefinite",
+    "evidence": "{\"boundary_terms\": \"zero by the receipt classical solution and stated decay/axis conditions\", \"identity\": \"int f L_tilde f r^3 dr dz = - int ((partial_r f)^2 + (partial_z f)^2) r^3 dr dz\", \"passed\": true, \"sign\": \"negative_semidefinite\", \"weighted_measure\": \"r^3 dr dz\"}",
+    "expected": "int f L_tilde f r^3 dr dz <= 0",
+    "gate": "NegativeSemidefiniteIBP",
+    "passed": true
+  },
+  {
+    "actual": "divergence-form parabolic maximum principle",
+    "evidence": "{\"bound\": \"||u1(t)||_inf <= ||u1(0)||_inf = M0\", \"equation\": \"D_t u1 = partial_t u1 + u^r partial_r u1 + u^z partial_z u1 = nu L_tilde u1\", \"operator_divergence_form\": \"(1/r^3) partial_r(r^3 partial_r) + partial_z^2\", \"passed\": true, \"principle\": \"divergence-form parabolic maximum principle\", \"source_term\": \"0\", \"transport_term\": \"material derivative drift\", \"viscosity_condition\": \"nu > 0\"}",
+    "expected": "applies to partial_t u1 = nu L_tilde u1 with nu > 0",
+    "gate": "DivergenceFormParabolicMaximumPrinciple",
+    "passed": true
+  },
+  {
+    "actual": "||u1(t)||_inf <= ||u1(0)||_inf = M0",
+    "evidence": "pure diffusion has no positive interior maximum growth",
+    "expected": "||u1(t)||_inf <= ||u1(0)||_inf = M0",
+    "gate": "U1LinfNonincreasing",
+    "passed": true
+  },
+  {
+    "actual": "source=0, transport=material derivative drift",
+    "evidence": "D_t u1 = partial_t u1 + u^r partial_r u1 + u^z partial_z u1 = nu L_tilde u1",
+    "expected": "source=0; drift is only the material derivative transport",
+    "gate": "NoHiddenSource",
+    "passed": true
+  },
+  {
+    "actual": "uses only the receipt classical solution level needed to justify pointwise maximum principle and integration by parts",
+    "evidence": "the audit does not add a stronger smoothness assumption",
+    "expected": "no regularity beyond the receipt classical solution level",
+    "gate": "NoHiddenRegularity",
+    "passed": true
+  },
+  {
+    "actual": "true",
+    "evidence": "U1 amplitude cannot grow past M0 inside the pure-diffusion lemma",
+    "expected": "true",
+    "gate": "SupportsViscousDominanceObstruction",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "evidence": "closing this obstruction lemma is not a Clay Navier-Stokes promotion",
+    "expected": "false",
+    "gate": "ClayNavierStokesPromotion",
+    "passed": true
+  },
+  {
+    "actual": "0",
+    "evidence": "[]",
+    "expected": "zero hits",
+    "gate": "forbidden marker scan",
+    "passed": true
+  }
+]

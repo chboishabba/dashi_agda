@@ -112,6 +112,7 @@ import DASHI.Combinatorics.StrictContractionFinite
 import DASHI.Combinatorics.TriadicVideoCodecObservationQuotient
 import DASHI.Computation.LESGLESWorldTransportBridge
 import DASHI.Computation.PersistentTransportMotifs
+import DASHI.Constants.Registry
 import DASHI.Culture.InverseBidirectionalCultureOperators
 import DASHI.Culture.KnotWeaveTopologyCultureBridge
 import DASHI.Combinatorics.String.Compatibility
@@ -151,6 +152,7 @@ import DASHI.Execution.ShiftGeometryBridge
 import DASHI.Examples.ConcreteInstances
 import DASHI.Interop.ITIRJoinBridge
 import DASHI.Interop.AggregateBidirectionalTranslationDischarge
+import DASHI.Interop.CategoricalInterlinkLayer
 import DASHI.Interop.LightCodecTransportDischarge
 import DASHI.Interop.LightCodecTransportCorrespondenceTheorem
 import DASHI.Interop.ObserverCultureEvolutionThreadDischarge

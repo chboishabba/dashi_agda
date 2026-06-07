@@ -24,20 +24,29 @@ The broader route/lane joining plan is `Docs/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
 
-Current NS Sprint 129 boundary: the axisymmetric-with-swirl route is now
-recorded in executable fail-closed surfaces.  The audit
-`scripts/ns_sprint129_advective_concentration_audit.py` encodes the exact
-system `D u1/Dt = nu * L~ u1` and
-`D omega1/Dt = partial_z(u1^2) + nu * L~ omega1`, the no-log
-axisymmetric Biot-Savart status, and the strict viscous feasibility window
-`1 < alpha < 3/2`, `beta = alpha - 1`.  The sampler
-`scripts/ns_sprint129_feasibility_window_sampler.py` checks that window on a
-fixed rational grid, and
-`scripts/ns_sprint129_source_balance_classifier.py` separates the formal
-quadratic-source case from the source-collapse obstruction.  The single live
-gate is `AdvectiveConcentrationVsDiffusionBound`, namely whether
-`||u1||_inf >= c ||omega1||_inf` can be proved before diffusion collapses the
-source.  `clayNavierStokesPromoted` remains false.
+Current NS Sprint 133 boundary: the repo now records why the Sprint 132
+obstruction tower is route-specific and why closing
+`NoLogAxisymmetricBiotSavartUniform` alone advances full Clay completion by
+approximately 0%.  `scripts/ns_sprint133_universal_strategy_classifier.py`
+classifies the six universal regularity strategies and selects the
+axisymmetric-with-swirl structure-theorem target as the most concrete
+Clay-adjacent lane.  `scripts/ns_sprint133_no_log_biot_savart_scope.py` records
+that the no-log lemma would close only the `AXS beta>0 moderate-Re` subcase,
+leaving beta-zero, large-Re, outside-class, and universal-exhaustion gaps open.
+`scripts/ns_sprint133_axisymmetric_swirl_target.py` defines the finite target
+`AxisymmetricNSWithSwirlGlobalRegularity` with four gates:
+`large_re_axisymmetric_transient_control`,
+`marginal_beta_zero_analysis`, `axisymmetric_symmetry_class_exhaustion`, and
+`axisymmetric_swirl_global_assembly`.  Full Clay Navier-Stokes remains
+unsolved, `full_clay_ns_solved=false`, and `clayNavierStokesPromoted` remains
+false.
+
+Sprint 132 remains the prior route-specific partial theorem surface:
+`scripts/ns_sprint132_partial_obstruction_theorem.py` assembles six obstruction
+rows for the analyzed `CLASS_WBF union CLASS_AXS` mechanisms, while
+`scripts/ns_sprint132_mechanism_exhaustion_audit.py` records why enumeration,
+Lyapunov, comparison-principle, and probabilistic bridges do not turn that
+tower into global Navier-Stokes regularity.
 
 Current YM boundary: Sprint 89 closes the lattice mass-gap provider in the
 scoped-authority receipt sense. Sprint 90 records the continuum survival

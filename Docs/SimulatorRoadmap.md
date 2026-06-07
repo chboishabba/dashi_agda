@@ -133,6 +133,84 @@ connected to accepted EOS, opacity, reaction-network, hydrostatic-solver, and
 empirical validation receipts without changing the fail-closed promotion
 guards.
 
+## Known Constants And Laws Inputs
+
+Known constants and law names are not left implicit. The repo-wide owner is
+`DASHI.Constants.Registry`, and the route-level map is
+`Docs/UnifiedRoutesLanePlan.md#known-constants-and-laws-population`.
+The registry is imported by `DASHI.Everything` for discoverability, but it is
+still a non-promoting input registry rather than a theorem owner.
+The receipt to cite from simulator slices is
+`DASHI.Constants.Registry.canonicalKnownInputsPopulationReceipt`.
+It currently checks 40 constant slots, 33 law slots, and 11 authority-source
+slots.
+Numeric or law-consuming simulator slices should also cite
+`DASHI.Constants.Registry.canonicalAuthorityConsumptionPolicyReceipt`, which
+requires source version, checksum, access date, uncertainty, rounding, unit,
+validity-regime, URI, and provider-receipt metadata before a measured value or
+rounded expression can support a promoted consumer.
+Physics-adapter slices should cite
+`DASHI.Constants.Registry.canonicalPhysicsAdapterKnownInputsReferenceReceipt`,
+which promotes only bounded physics target population and keeps Maxwell, GR,
+Standard Model, Gate 3, Navier-Stokes Clay, Yang-Mills Clay, and
+known-physics translation completion unpromoted.
+Arithmetic/Gate 3 slices should cite
+`DASHI.Constants.Registry.canonicalArithmeticGate3KnownInputsReferenceReceipt`,
+which promotes only finite route population and density/fill-distance evidence
+while keeping Gate 3 closure, Mosco recovery, no-spectral-pollution,
+continuum transfer, mass-shell bridging, and physics claims unpromoted.
+Quantum-facing slices should cite
+`DASHI.Constants.Registry.canonicalQuantumKnownInputsReferenceReceipt`, which
+keeps Schrodinger dynamics, Born-rule semantics, QFT, and quantum empirical
+adequacy unpromoted while naming the exact and measured quantum inputs.
+Chemistry-facing slices should cite
+`DASHI.Constants.Registry.canonicalChemistryKnownInputsReferenceReceipt`, which
+promotes only local definitional chemistry population and keeps physical
+chemistry, spectroscopy, bonding interpretation, and wet-lab validation
+unpromoted.
+Biology-facing slices should cite
+`DASHI.Constants.Registry.canonicalBiologyKnownInputsReferenceReceipt`, which
+promotes only structured biology bridge population and keeps causation,
+intervention, clinical validity, genome-to-connectome closure, and brain-state
+recovery unpromoted.
+Empirical/runtime slices should cite
+`DASHI.Constants.Registry.canonicalEmpiricalRuntimeKnownInputsReferenceReceipt`,
+which promotes only receipt-infrastructure population and keeps provider
+authority, comparison law, covariance/calibration, holdout validation, runtime
+replay authority, semantic adequacy, and empirical adequacy unpromoted.
+Systematic lane interlinks should cite
+`DASHI.Interop.CategoricalInterlinkLayer.canonicalCategoricalInterlinkReceipt`.
+That receipt records the promotion ladder, lane objects, lane morphisms, and
+registry bindings while keeping theorem, empirical, Clay, full Standard Model,
+and terminal promotion false.
+
+Simulator slices may consume exact SI defining constants from that registry as
+reference inputs, and may consume exact derived SI expressions such as `hbar`,
+`R`, and `F` with an explicit rounding policy. Measured constants, physical
+laws, chemistry laws, and biology laws must still arrive with
+source/version/unit/uncertainty or domain-validation receipts before a
+real-model claim can use them.
+
+Every constants/laws input artifact must remain fail-closed unless a consuming
+authority receipt is supplied:
+
+```text
+constantCarrierDerived = false
+physicalLawDerived = false
+calibrationPromoted = false
+empiricalAdequacyAccepted = false
+externalInputOnly = true
+```
+
+This prevents a populated input table from being mistaken for a derivation of
+constants, physical law, wet-lab chemistry, biology causation, clinical
+validity, or empirical adequacy.
+
+Authority-source slots in the registry identify where a future adapter must
+obtain source/version/checksum/uncertainty or protocol data. A source URI in
+that list is not an accepted authority token until a lane-specific receipt
+consumes it.
+
 ## Blocked Claims
 
 This roadmap does not promote:

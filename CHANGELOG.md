@@ -6,6 +6,61 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sprint 133 NS universal-strategy and axisymmetric-with-swirl pivot for
+  `2026-06-07`: adds
+  `scripts/ns_sprint133_universal_strategy_classifier.py`,
+  `scripts/ns_sprint133_no_log_biot_savart_scope.py`, and
+  `scripts/ns_sprint133_axisymmetric_swirl_target.py`, with matching generated
+  output receipts and tests.  The tranche records that the full Clay
+  obstruction-tower exhaustion gap is not closed by mechanism enumeration, that
+  `NoLogAxisymmetricBiotSavartUniform` alone closes only the
+  `AXS beta>0 moderate-Re` subcase with
+  `clay_progress_estimate_percent = 0`, and that the concrete Clay-adjacent
+  target is `AxisymmetricNSWithSwirlGlobalRegularity`.  Its four finite gates
+  are `large_re_axisymmetric_transient_control`,
+  `marginal_beta_zero_analysis`,
+  `axisymmetric_symmetry_class_exhaustion`, and
+  `axisymmetric_swirl_global_assembly`; full Clay Navier-Stokes remains
+  unsolved and `clayNavierStokesPromoted` remains false.
+
+- Sprint 132 NS partial obstruction theorem and complete gap map for
+  `2026-06-07`: adds
+  `scripts/ns_sprint132_partial_obstruction_theorem.py`,
+  `scripts/ns_sprint132_mechanism_exhaustion_audit.py`, and
+  `scripts/ns_sprint132_gap_inventory_classifier.py`, with matching generated
+  output receipts.  The tranche records
+  `NSPartialRegularityFromObstructionTower` for analyzed
+  `CLASS_WBF union CLASS_AXS` routes only, enumerates four failed
+  mechanism-exhaustion bridges from the obstruction tower to Clay, and
+  classifies the programme state as four exact closed WBF gaps, two
+  conditionally closed gaps, and five open regimes.  The next analytic proof is
+  `NoLogAxisymmetricBiotSavartUniform`; full Clay Navier-Stokes remains
+  unsolved and `clayNavierStokesPromoted` remains false.
+
+- Sprint 131 NS Hou-Luo obstruction assembly for `2026-06-07`: adds
+  `scripts/ns_sprint131_source_upper_bound_audit.py`,
+  `scripts/ns_sprint131_localized_viscous_comparison_audit.py`, and
+  `scripts/ns_sprint131_hou_luo_obstruction_assembly.py`, with matching
+  generated output receipts.  The tranche records `RigorousSourceUpperBound`,
+  `LocalizedViscousLowerComparison`, candidate scaling, axis/boundary
+  conditions, and the assembled
+  `AxisymmetricHouLuoNSViscousDominanceObstruction` for the Hou-Luo viscous
+  Navier-Stokes route only.  It does not solve full Clay Navier-Stokes and
+  keeps `clayNavierStokesPromoted` false.
+
+- Sprint 130 NS viscous dominance obstruction for `2026-06-07`: adds
+  `scripts/ns_sprint130_u1_maximum_principle_audit.py`,
+  `scripts/ns_sprint130_viscous_dominance_sampler.py`, and
+  `scripts/ns_sprint130_route_fork_classifier.py`, with matching generated
+  output receipts.  The tranche records the pure-diffusion maximum principle
+  `||u1(t)||_inf <= M0` and the viscous/source ratio
+  `nu * tau^(-3 beta)`, which diverges throughout the strict
+  `1 < alpha < 3/2`, `beta = alpha - 1` window.  The Hou-Luo route is
+  therefore obstructed for viscous Navier-Stokes; Euler remains separate/open
+  on `NoLogAxisymmetricBiotSavartUniform` and
+  `SourceAlignmentWithVorticityMaximum`; Clay Navier-Stokes promotion remains
+  false.
+
 - Sprint 129 NS advective concentration audit for `2026-06-07`: adds
   `scripts/ns_sprint129_advective_concentration_audit.py`,
   `scripts/ns_sprint129_feasibility_window_sampler.py`, and

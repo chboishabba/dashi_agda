@@ -3,6 +3,84 @@
 
 # P0 BLOCKERS
 
+• Sprint 133 NS universal-strategy and axisymmetric-with-swirl pivot is
+  implemented.
+
+  Status:
+
+  - adds executable surfaces for the six universal proof-strategy classifier,
+    the no-log Biot-Savart scope audit, and the finite
+    `AxisymmetricNSWithSwirlGlobalRegularity` target;
+  - generates `outputs/ns_sprint133_universal_strategy_classifier/`,
+    `outputs/ns_sprint133_no_log_biot_savart_scope/`, and
+    `outputs/ns_sprint133_axisymmetric_swirl_target/`;
+  - records that `NoLogAxisymmetricBiotSavartUniform` alone closes only the
+    `AXS beta>0 moderate-Re` subcase and has
+    `clay_progress_estimate_percent = 0`;
+  - replaces open-ended full-3D mechanism enumeration with a finite
+    axisymmetric-with-swirl target containing four gates:
+    `large_re_axisymmetric_transient_control`,
+    `marginal_beta_zero_analysis`,
+    `axisymmetric_symmetry_class_exhaustion`, and
+    `axisymmetric_swirl_global_assembly`;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 132 NS partial obstruction theorem and gap map are implemented.
+
+  Status:
+
+  - adds executable surfaces for `NSPartialRegularityFromObstructionTower`,
+    the mechanism-exhaustion audit, and the complete programme gap inventory;
+  - generates `outputs/ns_sprint132_partial_obstruction_theorem/`,
+    `outputs/ns_sprint132_mechanism_exhaustion_audit/`, and
+    `outputs/ns_sprint132_gap_inventory_classifier/`;
+  - records six analyzed-route obstruction rows: four exact WBF rows and two
+    conditional WBF/AXS rows, with no global Clay regularity claim;
+  - identifies the failed routes from obstruction tower to Clay as enumeration,
+    Lyapunov functional, comparison principle, and probabilistic/generic
+    reasoning;
+  - classifies the current NS programme as four exact closed WBF gaps, two
+    conditionally closed gaps, and five open regimes; the next analytic proof
+    to calculate is `NoLogAxisymmetricBiotSavartUniform`;
+  - keeps `full_clay_ns_solved` false and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 131 NS Hou-Luo viscous obstruction assembly is implemented.
+
+  Status:
+
+  - adds executable surfaces for `RigorousSourceUpperBound`,
+    `LocalizedViscousLowerComparison`, and
+    `AxisymmetricHouLuoNSViscousDominanceObstruction`;
+  - generates `outputs/ns_sprint131_source_upper_bound_audit/`,
+    `outputs/ns_sprint131_localized_viscous_comparison_audit/`, and
+    `outputs/ns_sprint131_hou_luo_obstruction_assembly/`;
+  - records candidate scaling and axis/boundary conditions inside the assembly
+    surface, with Sprint 130 maximum-principle and viscous-dominance receipts
+    as dependencies;
+  - concludes only the Hou-Luo viscous Navier-Stokes route obstruction, keeps
+    full Clay Navier-Stokes unsolved, and keeps
+    `clayNavierStokesPromoted` false.
+
+• Sprint 130 NS viscous dominance obstruction is implemented.
+
+  Status:
+
+  - adds executable surfaces for `PureDiffusionU1MaximumPrinciple`,
+    `ViscousDominanceNearBlowup`, and the Sprint 131 fork classifier;
+  - generates `outputs/ns_sprint130_u1_maximum_principle_audit/`,
+    `outputs/ns_sprint130_viscous_dominance_sampler/`, and
+    `outputs/ns_sprint130_route_fork_classifier/`;
+  - records `||u1(t)||_inf <= ||u1(0)||_inf = M0` and the viscous/source
+    ratio `nu * tau^(-3 beta)`, which diverges for every `beta > 0`,
+    `nu > 0`;
+  - marks the Hou-Luo route obstructed for viscous Navier-Stokes in
+    `1 < alpha < 3/2`, keeps Euler separate/open on
+    `NoLogAxisymmetricBiotSavartUniform` and
+    `SourceAlignmentWithVorticityMaximum`, recommends the partial
+    `RegularityConclusion` fork, and keeps `clayNavierStokesPromoted` false.
+
 • Sprint 129 NS advective concentration versus diffusion audit is implemented.
 
   Status:

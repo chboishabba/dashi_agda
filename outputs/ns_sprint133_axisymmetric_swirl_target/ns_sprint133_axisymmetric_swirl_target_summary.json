@@ -1,0 +1,73 @@
+{
+  "axisymmetric_class_only": true,
+  "axisymmetric_gap_list": [
+    "large_re_axisymmetric_transient_control",
+    "marginal_beta_zero_analysis",
+    "axisymmetric_symmetry_class_exhaustion",
+    "axisymmetric_swirl_global_assembly"
+  ],
+  "axisymmetric_swirl_target_defined": true,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint133_axisymmetric_swirl_target",
+  "exit_code": 0,
+  "finite_gap_list": [
+    "large_re_axisymmetric_transient_control",
+    "marginal_beta_zero_analysis",
+    "axisymmetric_symmetry_class_exhaustion",
+    "axisymmetric_swirl_global_assembly"
+  ],
+  "finite_gap_list_defined": true,
+  "finite_gate_count": 4,
+  "finite_gates": [
+    "large_re_axisymmetric_transient_control",
+    "marginal_beta_zero_analysis",
+    "axisymmetric_symmetry_class_exhaustion",
+    "axisymmetric_swirl_global_assembly"
+  ],
+  "full_3d_mechanism_exhaustion_claim": false,
+  "full_clay_ns_solved": false,
+  "highest_alpha_next_lanes": [
+    "NoLogAxisymmetricBiotSavartUniform",
+    "LargeReAxisymmetricTransientControl",
+    "MarginalScalingCaseAnalysis",
+    "LargeScaleShearCannotForceBKM",
+    "AxisymmetricScalingDichotomy",
+    "AxisymmetricContinuationAssembly"
+  ],
+  "load_bearing_missing_lemmas": [
+    "AxisymmetricClassExhaustionTheorem",
+    "AxisymmetricContinuationAssembly",
+    "AxisymmetricScalingDichotomy",
+    "LargeReAxisymmetricTransientControl",
+    "LargeScaleShearCannotForceBKM",
+    "MarginalScalingCaseAnalysis",
+    "NoLogAxisymmetricBiotSavartUniform"
+  ],
+  "mechanism_enumeration_claim": false,
+  "sprint_dependencies": {
+    "sprint130": [
+      "PureDiffusionU1MaximumPrinciple",
+      "ViscousDominanceNearBlowup",
+      "RouteForkClassifier"
+    ],
+    "sprint131": [
+      "RigorousSourceUpperBound",
+      "LocalizedViscousLowerComparison",
+      "HouLuoObstructionAssembly"
+    ],
+    "sprint132": [
+      "NSPartialRegularityFromObstructionTower",
+      "MechanismExhaustionAudit",
+      "GapInventoryClassifier"
+    ]
+  },
+  "status_counts": {
+    "blocked_on_prior_gates": 1,
+    "open": 3
+  },
+  "target": "axisymmetric_ns_with_swirl_global_regularity",
+  "target_defined": true,
+  "target_name": "AxisymmetricNSWithSwirlGlobalRegularity",
+  "target_scope": "axisymmetric_NS_with_swirl_only"
+}
