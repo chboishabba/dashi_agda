@@ -7,6 +7,7 @@ open import Data.List.Base using (List; _∷_; [])
 open import Agda.Primitive using (Setω)
 
 import Ontology.Hecke.PNFResidualBridge as Hecke
+import DASHI.Interop.SenateFormalizationPNFAdapter as Senate
 
 ------------------------------------------------------------------------
 -- Typed ITIR/PNF assessment surface used by the journey loom.
@@ -17,6 +18,7 @@ import Ontology.Hecke.PNFResidualBridge as Hecke
 data ITIRPNFAssessmentLane : Set where
   runtimeLane : ITIRPNFAssessmentLane
   heckeBridgeLane : ITIRPNFAssessmentLane
+  senateFormalizationLane : ITIRPNFAssessmentLane
   residualLane : ITIRPNFAssessmentLane
   boundaryLane : ITIRPNFAssessmentLane
 
@@ -37,6 +39,7 @@ record ITIRPNFAssessment : Setω where
       ≡
       runtimeLane
       ∷ heckeBridgeLane
+      ∷ senateFormalizationLane
       ∷ residualLane
       ∷ boundaryLane
       ∷ []
@@ -52,6 +55,20 @@ record ITIRPNFAssessment : Setω where
 
     bridgeSurfaceIsCanonical :
       bridgeSurface ≡ Hecke.heckePNFResidualBridgeSurface
+
+    senateFormalizationSurface :
+      Senate.SenateFormalizationPNFAdapterSurface
+
+    senateFormalizationSurfaceIsCanonical :
+      senateFormalizationSurface
+      ≡
+      Senate.canonicalSenateFormalizationPNFAdapterSurface
+
+    senateFormalizationPromotion :
+      Bool
+
+    senateFormalizationPromotionIsFalse :
+      senateFormalizationPromotion ≡ false
 
     itirPromotion :
       Bool
@@ -84,6 +101,7 @@ canonicalITIRPNFAssessment =
     ; lanes =
         runtimeLane
         ∷ heckeBridgeLane
+        ∷ senateFormalizationLane
         ∷ residualLane
         ∷ boundaryLane
         ∷ []
@@ -96,6 +114,14 @@ canonicalITIRPNFAssessment =
     ; bridgeSurface =
         Hecke.heckePNFResidualBridgeSurface
     ; bridgeSurfaceIsCanonical =
+        refl
+    ; senateFormalizationSurface =
+        Senate.canonicalSenateFormalizationPNFAdapterSurface
+    ; senateFormalizationSurfaceIsCanonical =
+        refl
+    ; senateFormalizationPromotion =
+        false
+    ; senateFormalizationPromotionIsFalse =
         refl
     ; itirPromotion =
         false
@@ -112,6 +138,7 @@ canonicalITIRPNFAssessment =
     ; boundaryStatements =
         "Runtime parser output is required for full PNF emissions and residual residue fields"
         ∷ "Hecke quotient projection equality is a candidate-fibre notion, not final proof authority"
+        ∷ "Senate Lean declarations enter as source-side PredicatePNF review evidence, not legal authority"
         ∷ "ITIR/PNF path does not license any Navier-Stokes or Yang-Baxter theorem promotion claim"
         ∷ []
     }

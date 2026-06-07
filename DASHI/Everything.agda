@@ -165,6 +165,7 @@ import DASHI.Interop.SeaMeInIt.Unwrap.Competitor.Everything
 import DASHI.Interop.SeaMeInItUnwrapCompetitors
 import DASHI.Interop.SemanticOperatorAlignmentDischarge
 import DASHI.Interop.SensibLawResidualLattice
+import DASHI.Interop.SenateFormalizationPNFAdapter
 import DASHI.Interop.StationaryPhaseMirrorGratingToyReceipt
 import DASHI.Ontology.WikidataAnimalSemanticJoinLayer
 import DASHI.Geometry.BanachFixedPoint
@@ -1257,6 +1258,13 @@ import DASHI.Physics.Closure.NSSprint109SmoothCompactSupportWitness
 import DASHI.Physics.Closure.NSSprint110BaseExpSmoothFunction
 import DASHI.Physics.Closure.NSSprint111LPGrafakosInfrastructureAndStrainRefocus
 import DASHI.Physics.Closure.NSSprint112ThickCoreCrowDominanceRegime
+import DASHI.Physics.Closure.NSSprint113CrowPersistenceUnderNSEvolution
+import DASHI.Physics.Closure.NSSprint114ThinCoreCrowReconnectionWindow
+import DASHI.Physics.Closure.NSSprint115ReconnectionFluxBudget
+import DASHI.Physics.Closure.NSSprint116OptionBCrowObstruction
+import DASHI.Physics.Closure.NSSprint117GeneralVolumeSuppression
+import DASHI.Physics.Closure.NSSprint118NonCircularGeometricCorrelation
+import DASHI.Physics.Closure.NSSprint119PersistentAlignmentExistence
 import DASHI.Physics.Closure.YMKPActivityRatioMarginReceipt
 import DASHI.Physics.Closure.StrictMarginImpliesAbsorptionReceipt
 import DASHI.Physics.Closure.UnifiedMarginInvariantReceipt

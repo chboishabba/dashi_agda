@@ -27,6 +27,12 @@ initialCrowDominanceImported = true
 crowGrowthPersistenceUnderNSEvolutionClosed : Bool
 crowGrowthPersistenceUnderNSEvolutionClosed = false
 
+analyticRegularityUnderNSEvolutionClosed : Bool
+analyticRegularityUnderNSEvolutionClosed = false
+
+downstreamRegularityGatesClosed : Bool
+downstreamRegularityGatesClosed = false
+
 nonlinearDeformationControlClosed : Bool
 nonlinearDeformationControlClosed = false
 
@@ -111,7 +117,7 @@ canonicalPersistenceTimescaleStatement =
   persistenceTimescaleStatementReceipt
     "T_persist >= c / gamma_Crow"
     refl
-    "Initial linear Crow dominance is not yet NSE persistence."
+    "initial linear Crow dominance is not yet NSE persistence."
 
 record PersistenceSubgateStatuses : Set where
   constructor persistenceSubgateStatusesReceipt
@@ -122,6 +128,10 @@ record PersistenceSubgateStatuses : Set where
       initialCrowDominanceImported ≡ true
     crowGrowthPersistenceUnderNSEvolutionClosedField :
       crowGrowthPersistenceUnderNSEvolutionClosed ≡ false
+    analyticRegularityUnderNSEvolutionClosedField :
+      analyticRegularityUnderNSEvolutionClosed ≡ false
+    downstreamRegularityGatesClosedField :
+      downstreamRegularityGatesClosed ≡ false
     nonlinearDeformationControlClosedField :
       nonlinearDeformationControlClosed ≡ false
     viscousDecayWindowClosedField :
@@ -160,12 +170,16 @@ canonicalPersistenceSubgateStatuses =
     refl
     refl
     refl
+    refl
+    refl
     "Initial linear Crow dominance is not yet NSE persistence."
 
 canonicalCrowPersistenceUnderNSEvolutionFlags :
   (crowPersistenceUnderNSEvolutionLedgerClosed ≡ true)
   × (initialCrowDominanceImported ≡ true)
   × (crowGrowthPersistenceUnderNSEvolutionClosed ≡ false)
+  × (analyticRegularityUnderNSEvolutionClosed ≡ false)
+  × (downstreamRegularityGatesClosed ≡ false)
   × (nonlinearDeformationControlClosed ≡ false)
   × (viscousDecayWindowClosed ≡ false)
   × (ellipticModeLeakageControlClosed ≡ false)
@@ -177,7 +191,7 @@ canonicalCrowPersistenceUnderNSEvolutionFlags :
   × (clayNavierStokesPromoted ≡ false)
 canonicalCrowPersistenceUnderNSEvolutionFlags =
   refl , refl , refl , refl , refl , refl , refl , refl , refl , refl ,
-  refl , refl
+  refl , refl , refl , refl
 
 record NSSprint113CrowPersistenceUnderNSEvolution : Set where
   constructor nsSprint113CrowPersistenceUnderNSEvolutionReceipt
@@ -198,6 +212,8 @@ record NSSprint113CrowPersistenceUnderNSEvolution : Set where
       (crowPersistenceUnderNSEvolutionLedgerClosed ≡ true)
       × (initialCrowDominanceImported ≡ true)
       × (crowGrowthPersistenceUnderNSEvolutionClosed ≡ false)
+      × (analyticRegularityUnderNSEvolutionClosed ≡ false)
+      × (downstreamRegularityGatesClosed ≡ false)
       × (nonlinearDeformationControlClosed ≡ false)
       × (viscousDecayWindowClosed ≡ false)
       × (ellipticModeLeakageControlClosed ≡ false)

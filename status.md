@@ -6478,3 +6478,150 @@ unless a line explicitly says it describes the live monitor surface.
   initial-rate-only thick-core vortex pair as partial, rejects all candidate
   mechanisms as Clay sources, and keeps accepted source count at zero.  No
   Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 113 Crow persistence-under-NSE ledger complete.
+  Added
+  `DASHI.Physics.Closure.NSSprint113CrowPersistenceUnderNSEvolution`, wired
+  into `DASHI.Everything`, plus deterministic Crow-persistence audit and
+  persistence-timescale classifier scripts with focused tests.  This receipt
+  imports Sprint112's thick-core initial-rate comparison and closes only
+  `crowPersistenceUnderNSEvolutionLedgerClosed = true` plus
+  `initialCrowDominanceImported = true`.  It records the required timescale
+  target `T_persist >= c / gamma_Crow`, but keeps
+  `crowGrowthPersistenceUnderNSEvolutionClosed = false`,
+  `nonlinearDeformationControlClosed = false`,
+  `viscousDecayWindowClosed = false`,
+  `ellipticModeLeakageControlClosed = false`,
+  `persistenceTimescaleLowerBoundClosed = false`,
+  `positiveFluxAccumulationWindowClosed = false`,
+  `ellipticBackreactionBound = false`,
+  `FiniteTimeFluxSurplusFromCrowDominance = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier records the imported
+  thick-core initial-rate mechanism as partial and accepts no persistence
+  source.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 114 thin-core Crow reconnection-window correction
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint114ThinCoreCrowReconnectionWindow`, wired
+  into `DASHI.Everything`, plus deterministic thin-core reconnection audit
+  and reconnection-window source classifier scripts with focused tests.  This
+  receipt corrects the Sprint112 thick-core condition to the thin-core regime
+  `delta / b in (0, 0.4825)`, closes the ledger-level
+  `thinCoreCrowDominanceRegimeClosed = true` and
+  `ellipticBackreactionBoundClosed = true` comparison bound
+  `|Pi_elliptic(t)| <= C * (delta / b)^4 * |Pi_Crow(t)|`, and records the
+  live quantitative blocker as `ReconnectionWindowLowerBound / finite flux
+  surplus`.  It keeps `reconnectionWindowLowerBoundClosed = false`,
+  `viscousDecayWindowClosed = false`,
+  `nonlinearDeformationControlClosed = false`,
+  `positiveFluxAccumulationWindowClosed = false`,
+  `finiteTimeFluxSurplusFromCrowDominance = false`,
+  `finiteKStarCollapseClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier records the thin-core
+  rate correction and elliptic backreaction as partial supporting evidence,
+  accepts zero reconnection-window sources, and keeps the NS Clay route
+  fail-closed.
+
+- 2026-06-07: NS Sprint 115 reconnection flux-budget ledger complete.
+  Added `DASHI.Physics.Closure.NSSprint115ReconnectionFluxBudget`, wired into
+  `DASHI.Everything`, plus deterministic reconnection flux-budget audit and
+  scaling calculator scripts with focused tests.  This receipt imports the
+  Sprint114 thin-core correction and records the quantitative budget surface:
+  `FluxBudget = integral_0_to_T_reconnect Pi_HH_to_L(t) dt`,
+  `T_reconnect ~ b^2 / Gamma`, `T_grow ~ 7.9 * b^2 / Gamma`,
+  `Re_delta = Gamma / nu >> b^2 / delta^2`, and
+  `FluxBudget >= KStarCollapseThreshold`.  It closes only the recording
+  ledger flags
+  `sprint115ReconnectionFluxBudgetLedgerClosed = true`,
+  `sprint114ThinCoreCorrectionImported = true`,
+  `fluxIntegralFormulaRecorded = true`,
+  `reconnectionTimescaleRecorded = true`,
+  `viscousReynoldsConditionRecorded = true`, and
+  `kstarCollapseThresholdRecorded = true`.  It keeps
+  `reconnectionWindowLowerBoundClosed = false`,
+  `viscousDecayWindowClosed = false`,
+  `nonlinearDeformationControlClosed = false`,
+  `positiveFluxAccumulationWindowClosed = false`,
+  `finiteTimeFluxSurplusFromCrowDominance = false`,
+  `finiteKStarCollapseClosed = false`,
+  `blowupCriterionBridgeClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The scaling calculator evaluates the
+  thin-core `delta / b` and core-Reynolds grid, but exits fail-closed because
+  the KStar collapse threshold is not analytically proved.
+
+- 2026-06-07: NS Sprint 116 Option B Crow obstruction complete.  Added
+  `DASHI.Physics.Closure.NSSprint116OptionBCrowObstruction`, wired into
+  `DASHI.Everything`, plus deterministic obstruction audit, obstruction
+  scaling, and route-pivot classifier scripts with focused tests.  This
+  receipt imports Sprint115 and records the negative thin-core Crow scaling
+  law `FluxBudget / E0 ~ (delta / b)^2 / log(b / delta)`, closing the
+  thin-core Crow Option B lane as obstructed with
+  `thinCoreCrowRouteObstructed = true` and `optionBCrowLaneClosed = true`.
+  It keeps `finiteKStarCollapseClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The route-pivot classifier records
+  `axisymmetric_with_swirl_option_a` as the next high-value open route and
+  `SwirlingVelocityStrainSign` as the next analytic lemma; Burgers vortex
+  concentration remains open as a longer-shot Option B route.
+
+- 2026-06-07: NS Sprint 117 general volume-suppression obstruction complete.
+  Added `DASHI.Physics.Closure.NSSprint117GeneralVolumeSuppression`, wired
+  into `DASHI.Everything`, plus deterministic general-volume audit, finite
+  energy swirl scaling, and correlation-route classifier scripts with focused
+  tests.  This receipt imports Sprint116 and records the supplied general
+  HH-to-low bound `Pi_HH_to_L <= E_H * ||e(u_L)||_L_infinity`, the finite
+  energy swirl scaling `u_phi ~ r^alpha` gives `r_H^(alpha + 1)`, and the
+  singular `u_phi ~ 1/r` profile is rejected for infinite L2 energy.  It
+  closes concentration-based Option B and the finite-energy swirl lane as
+  obstructed with `swirlOptionBRouteObstructed = true` and
+  `concentrationBasedOptionBClosed = true`.  It keeps
+  `nonCircularGeometricCorrelationSourceOpen = true`,
+  `kStarCollapseFromCorrelationSourceClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The route classifier now recommends
+  `NonCircularGeometricCorrelationSource` and the sign of `Pi_HH_to_L` for
+  kinematically forced compressive alignment as the next analytic calculation.
+
+- 2026-06-07: NS Sprint 118 non-circular geometric-correlation sign ledger
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint118NonCircularGeometricCorrelation`, wired
+  into `DASHI.Everything`, plus deterministic geometric-correlation audit,
+  alignment sign sampler, and correlation-source classifier scripts with
+  focused tests.  This receipt imports Sprint117 and records the conditional
+  sign calculation
+  `Pi_HH_to_L = - integral (u_H tensor u_H) : e(u_L)`: if `u_H` aligns with
+  a compressive eigenvector of `e(u_L)`, then `Pi_HH_to_L` is positive.  It
+  closes only the pointwise conditional sign surface with
+  `hhtolSignFormulaRecorded = true`,
+  `kinematicCompressiveAlignmentConditionRecorded = true`, and
+  `pointwiseSignUnderAlignmentRecorded = true`.  It keeps
+  `persistentAlignmentExistenceClosed = false`,
+  `nonCircularGeometricCorrelationSourceClosed = false`,
+  `kStarCollapseFromCorrelationSourceClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The source classifier rejects imposed
+  alignment as circular and recommends `PersistentAlignmentExistence` as the
+  next analytic theorem.
+
+- 2026-06-07: NS Sprint 119 persistent-alignment existence ledger complete.
+  Added `DASHI.Physics.Closure.NSSprint119PersistentAlignmentExistence`,
+  wired into `DASHI.Everything`, plus deterministic persistent-alignment
+  audit, alignment persistence-budget, and persistence-source classifier
+  scripts with focused tests.  This receipt imports Sprint118 and records
+  the persistence budget surface
+  `alignment integral = integral_0^T compressive_alignment_strength(t) dt`,
+  requiring a non-circular lower bound on alignment duration and strength.
+  It rejects imposed alignment as circular, records that no non-circular
+  persistence source is established, and keeps
+  `persistentAlignmentExistenceClosed = false`,
+  `nonCircularGeometricCorrelationSourceClosed = false`,
+  `kStarCollapseFromCorrelationSourceClosed = false`,
+  `blowupCriterionBridgeClosed = false`,
+  `navierStokesClayAssemblyClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier recommends
+  `PersistentAlignmentExistenceLowerBound` as the next analytic theorem.

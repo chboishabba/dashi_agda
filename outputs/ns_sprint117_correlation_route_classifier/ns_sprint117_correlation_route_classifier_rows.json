@@ -1,0 +1,58 @@
+[
+  {
+    "classification": "obstructed_by_sprint116",
+    "clay_complete": false,
+    "clay_promoted": false,
+    "next_action": "do not promote through the Sprint116 Crow lane",
+    "rationale": "Sprint116 records the thin-core Crow Option B route as blocked before it supplies a Clay-level correlation source.",
+    "route_id": "thin_core_crow_option_b"
+  },
+  {
+    "classification": "obstructed_by_volume_suppression",
+    "clay_complete": false,
+    "clay_promoted": false,
+    "next_action": "keep as an obstruction record",
+    "rationale": "Finite-energy swirl localization suppresses the needed volume contribution before the high-to-low transfer sign is closed.",
+    "route_id": "finite_energy_swirl_option_b"
+  },
+  {
+    "classification": "rejected_infinite_l2",
+    "clay_complete": false,
+    "clay_promoted": false,
+    "next_action": "exclude from Leray admissible route accounting",
+    "rationale": "The singular swirl source falls outside the finite L2 data class needed for a Clay Navier-Stokes route.",
+    "route_id": "singular_swirl_option_b"
+  },
+  {
+    "classification": "closed",
+    "clay_complete": false,
+    "clay_promoted": false,
+    "next_action": "treat as closed unless a non-circular source is derived",
+    "rationale": "The concentration-only route does not independently derive the geometric correlation needed for promotion.",
+    "route_id": "concentration_based_option_b"
+  },
+  {
+    "classification": "open_primary_gate",
+    "clay_complete": false,
+    "clay_promoted": false,
+    "next_action": "prove NonCircularGeometricCorrelationSource",
+    "rationale": "This is the primary remaining gate because it targets the missing non-circular mechanism rather than assuming concentration closure.",
+    "route_id": "non_circular_geometric_correlation_source"
+  },
+  {
+    "classification": "open",
+    "clay_complete": false,
+    "clay_promoted": false,
+    "next_action": "compute sign of Pi_HH_to_L for kinematically forced compressive alignment",
+    "rationale": "The regular Option A route remains viable only after the decisive high-high to low-mode sign calculation is fixed.",
+    "route_id": "option_a_sign_regular_route"
+  },
+  {
+    "classification": "open_secondary",
+    "clay_complete": false,
+    "clay_promoted": false,
+    "next_action": "hold as a secondary comparison route",
+    "rationale": "The Burgers vortex lane can test concentration heuristics but does not outrank the non-circular geometric gate.",
+    "route_id": "burgers_vortex_concentration"
+  }
+]

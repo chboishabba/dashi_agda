@@ -1,0 +1,35 @@
+{
+  "candidate_routes": [
+    "thin_core_crow_option_b",
+    "finite_energy_swirl_option_b",
+    "singular_swirl_option_b",
+    "concentration_based_option_b",
+    "non_circular_geometric_correlation_source",
+    "option_a_sign_regular_route",
+    "burgers_vortex_concentration"
+  ],
+  "classifications": {
+    "burgers_vortex_concentration": "open_secondary",
+    "concentration_based_option_b": "closed",
+    "finite_energy_swirl_option_b": "obstructed_by_volume_suppression",
+    "non_circular_geometric_correlation_source": "open_primary_gate",
+    "option_a_sign_regular_route": "open",
+    "singular_swirl_option_b": "rejected_infinite_l2",
+    "thin_core_crow_option_b": "obstructed_by_sprint116"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint117_correlation_route_classifier",
+  "exit_code": 1,
+  "exit_reason": "no Clay-complete route",
+  "primary_open_route": "non_circular_geometric_correlation_source",
+  "recommended_next_calculation": "sign of Pi_HH_to_L for kinematically forced compressive alignment",
+  "recommended_next_lemma": "NonCircularGeometricCorrelationSource",
+  "route_count": 7,
+  "secondary_open_routes": [
+    "option_a_sign_regular_route",
+    "burgers_vortex_concentration"
+  ]
+}

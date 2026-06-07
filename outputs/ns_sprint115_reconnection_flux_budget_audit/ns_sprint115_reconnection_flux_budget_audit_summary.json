@@ -1,0 +1,444 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint115ReconnectionFluxBudget.agda",
+  "assigned_bools": {
+    "blowupCriterionBridgeClosed": "false",
+    "clayNavierStokesPromoted": "false",
+    "finiteKStarCollapseClosed": "false",
+    "finiteTimeFluxSurplusFromCrowDominance": "false",
+    "fluxIntegralFormulaRecorded": "true",
+    "kstarCollapseThresholdRecorded": "true",
+    "nonlinearDeformationControlClosed": "false",
+    "positiveFluxAccumulationWindowClosed": "false",
+    "reconnectionTimescaleRecorded": "true",
+    "reconnectionWindowLowerBoundClosed": "false",
+    "sprint114ThinCoreCorrectionImported": "true",
+    "sprint115ReconnectionFluxBudgetLedgerClosed": "true",
+    "viscousDecayWindowClosed": "false",
+    "viscousReynoldsConditionRecorded": "true"
+  },
+  "blowup_criterion_bridge": false,
+  "bool_checks": {
+    "blowupCriterionBridgeClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "finiteKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "finiteTimeFluxSurplusFromCrowDominance": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "fluxIntegralFormulaRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "kstarCollapseThresholdRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "nonlinearDeformationControlClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "positiveFluxAccumulationWindowClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "reconnectionTimescaleRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "reconnectionWindowLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "sprint114ThinCoreCorrectionImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint115ReconnectionFluxBudgetLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "viscousDecayWindowClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "viscousReynoldsConditionRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "clay": false,
+  "complete": true,
+  "contract": "ns_sprint115_reconnection_flux_budget_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, anchors, required strings, exact booleans, or forbidden-marker hits block audit passage",
+    "G": "Clay promotion remains false; this audit succeeds only for a coherent fail-closed ledger",
+    "L": "all required anchors, literals, exact booleans, and keyword-consistency gates must match before the audit exits successfully",
+    "O": "Worker 2 owns the Sprint115 reconnection flux-budget audit script only",
+    "P": "RECONNECTION_FLUX_BUDGET_LEDGER_CLOSED_FAIL_CLOSED_NO_CLAY_PROMOTION",
+    "R": "verify the Sprint115 Agda ledger records only ledger/import/formula/timescale/Reynolds/threshold evidence and keeps downstream reconnection, flux-surplus, collapse, bridge, and Clay gates false",
+    "S": "target Agda module is inspected when present; missing target fails closed"
+  },
+  "downstream_flags_false": true,
+  "evidence_audit_passed": true,
+  "fail_closed": false,
+  "final_decision": "RECONNECTION_FLUX_BUDGET_LEDGER_CLOSED_FAIL_CLOSED_NO_CLAY_PROMOTION",
+  "finite_kstar_collapse": false,
+  "finite_time_flux_surplus": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint115ReconnectionFluxBudgetLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint114ThinCoreCorrectionImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "fluxIntegralFormulaRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "reconnectionTimescaleRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "viscousReynoldsConditionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "kstarCollapseThresholdRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "reconnectionWindowLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "viscousDecayWindowClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonlinearDeformationControlClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "positiveFluxAccumulationWindowClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteTimeFluxSurplusFromCrowDominance",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint115ReconnectionFluxBudgetLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint114ThinCoreCorrectionImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:fluxIntegralFormulaRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:reconnectionTimescaleRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:viscousReynoldsConditionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:kstarCollapseThresholdRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:reconnectionWindowLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:viscousDecayWindowClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:nonlinearDeformationControlClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:positiveFluxAccumulationWindowClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:finiteTimeFluxSurplusFromCrowDominance",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint 115 quantitative reconnection-window flux budget.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:It closes only the formula ledger.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:FluxBudget = integral_0_to_T_reconnect Pi_HH_to_L(t) dt",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Re_delta = Gamma / nu >> b^2 / delta^2",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:FluxBudget >= KStarCollapseThreshold",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:No finite KStar collapse or Clay Navier-Stokes promotion follows from this Sprint115 quantitative receipt alone.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint115ReconnectionFluxBudget.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "RECONNECTION_FLUX_BUDGET_LEDGER_CLOSED_FAIL_CLOSED_NO_CLAY_PROMOTION",
+      "expected": "RECONNECTION_FLUX_BUDGET_LEDGER_CLOSED_FAIL_CLOSED_NO_CLAY_PROMOTION",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "keyword_false_flags_coherent": true,
+  "keyword_flag_checks": {
+    "false": {
+      "blowupCriterionBridgeClosed": true,
+      "clayNavierStokesPromoted": true,
+      "finiteKStarCollapseClosed": true,
+      "finiteTimeFluxSurplusFromCrowDominance": true,
+      "nonlinearDeformationControlClosed": true,
+      "positiveFluxAccumulationWindowClosed": true,
+      "reconnectionWindowLowerBoundClosed": true,
+      "viscousDecayWindowClosed": true
+    },
+    "true": {
+      "fluxIntegralFormulaRecorded": true,
+      "kstarCollapseThresholdRecorded": true,
+      "reconnectionTimescaleRecorded": true,
+      "sprint114ThinCoreCorrectionImported": true,
+      "sprint115ReconnectionFluxBudgetLedgerClosed": true,
+      "viscousReynoldsConditionRecorded": true
+    }
+  },
+  "keyword_true_flags_coherent": true,
+  "kstar_collapse_threshold_recorded": true,
+  "ledger_coherent_fail_closed": true,
+  "missing_anchors": [],
+  "missing_required_strings": [],
+  "nonlinear_deformation_control": false,
+  "positive_flux_accumulation_window": false,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "reconnection_flux_budget_formula_recorded": true,
+  "reconnection_timescale_recorded": true,
+  "reconnection_window_lower_bound": false,
+  "required_anchors": [
+    "NSSprint115ReconnectionFluxBudget",
+    "canonicalNSSprint115ReconnectionFluxBudget",
+    "nsSprint115ReconnectionFluxBudgetReceipt",
+    "canonicalNSSprint115ReconnectionFluxBudgetReceipt",
+    "canonicalReconnectionFluxBudgetReceipt",
+    "ImportedSprint114ThinCoreCorrection",
+    "canonicalImportedSprint114ThinCoreCorrection",
+    "ReconnectionFluxBudgetFormulaLedger",
+    "canonicalReconnectionFluxBudgetFormulaLedger",
+    "Sprint115GateStatuses",
+    "canonicalSprint115GateStatuses",
+    "canonicalSprint115ReconnectionFluxBudgetFlags"
+  ],
+  "required_strings": [
+    "Sprint 115 quantitative reconnection-window flux budget.",
+    "It closes only the formula ledger.",
+    "FluxBudget = integral_0_to_T_reconnect Pi_HH_to_L(t) dt",
+    "Re_delta = Gamma / nu >> b^2 / delta^2",
+    "FluxBudget >= KStarCollapseThreshold",
+    "No finite KStar collapse or Clay Navier-Stokes promotion follows from this Sprint115 quantitative receipt alone."
+  ],
+  "required_true_flags": true,
+  "route_decision": "RECONNECTION_FLUX_BUDGET_LEDGER_CLOSED_FAIL_CLOSED_NO_CLAY_PROMOTION",
+  "sprint114_thin_core_correction_imported": true,
+  "sprint115_reconnection_flux_budget_ledger_closed": true,
+  "target_present": true,
+  "viscous_decay_window": false,
+  "viscous_reynolds_condition_recorded": true
+}

@@ -1,0 +1,402 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint116OptionBCrowObstruction.agda",
+  "alternative_route_open": true,
+  "assigned_bools": {
+    "axisymmetricSwirlRouteOpen": "true",
+    "blowupCriterionBridgeClosed": "false",
+    "burgersVortexRouteOpen": "true",
+    "clayNavierStokesPromoted": "false",
+    "finiteKStarCollapseClosed": "false",
+    "navierStokesClayAssemblyClosed": "false",
+    "optionBCrowLaneClosed": "true",
+    "sprint115FluxBudgetImported": "true",
+    "sprint116OptionBCrowObstructionLedgerClosed": "true",
+    "thinCoreCrowRouteObstructed": "true",
+    "thinCoreCrowScalingLawRecorded": "true"
+  },
+  "axisymmetric_swirl_route_open": true,
+  "blowup_assembly": false,
+  "blowup_criterion_bridge": false,
+  "bool_checks": {
+    "axisymmetricSwirlRouteOpen": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "blowupCriterionBridgeClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "burgersVortexRouteOpen": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "finiteKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "navierStokesClayAssemblyClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "optionBCrowLaneClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint115FluxBudgetImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint116OptionBCrowObstructionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "thinCoreCrowRouteObstructed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "thinCoreCrowScalingLawRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "burgers_vortex_route_open": true,
+  "clay": false,
+  "complete": true,
+  "contract": "ns_sprint116_option_b_crow_obstruction_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, anchors, required strings, exact booleans, or forbidden-marker hits block audit passage",
+    "G": "Clay promotion remains false; this audit succeeds only for a coherent fail-closed obstruction ledger",
+    "L": "all required anchors, literals, exact booleans, and keyword-consistency gates must match before coherent passage",
+    "O": "Worker 2 owns the Sprint116 Option B Crow obstruction audit script only",
+    "P": "OPTION_B_CROW_OBSTRUCTION_LEDGER_CLOSED_FAIL_CLOSED_ALTERNATIVE_ROUTE_OPEN",
+    "R": "verify the Sprint116 Agda ledger closes ledger/import/scaling/obstruction/lane/alternative-route evidence while keeping finite KStar, blowup, assembly, and Clay gates false",
+    "S": "target Agda module is inspected when present; missing target fails closed"
+  },
+  "crow_scaling_obstruction_recorded": true,
+  "downstream_flags_false": true,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "OPTION_B_CROW_OBSTRUCTION_LEDGER_CLOSED_FAIL_CLOSED_ALTERNATIVE_ROUTE_OPEN",
+  "finite_kstar_collapse": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint116OptionBCrowObstructionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint115FluxBudgetImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "thinCoreCrowScalingLawRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "thinCoreCrowRouteObstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "optionBCrowLaneClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "axisymmetricSwirlRouteOpen",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "burgersVortexRouteOpen",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint116OptionBCrowObstructionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint115FluxBudgetImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:thinCoreCrowScalingLawRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:thinCoreCrowRouteObstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:optionBCrowLaneClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:axisymmetricSwirlRouteOpen",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:burgersVortexRouteOpen",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint 116 Option B thin-core Crow obstruction.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:This receipt imports the Sprint115 reconnection flux budget and records",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:that the thin-core Crow Option B lane is closed by the budget scaling.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:FluxBudget / E0 ~ (delta / b)^2 / log(b / delta)",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Option B thin-core Crow route is obstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:axisymmetric with swirl remains open",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Burgers vortex concentration remains open",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint116 records the Option B obstruction without closing finite KStar collapse, the blowup bridge, or the Clay assembly.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint116OptionBCrowObstruction.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "OPTION_B_CROW_OBSTRUCTION_LEDGER_CLOSED_FAIL_CLOSED_ALTERNATIVE_ROUTE_OPEN",
+      "expected": "OPTION_B_CROW_OBSTRUCTION_LEDGER_CLOSED_FAIL_CLOSED_ALTERNATIVE_ROUTE_OPEN",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "keyword_false_flags_coherent": true,
+  "keyword_flag_checks": {
+    "false": {
+      "blowupCriterionBridgeClosed": true,
+      "clayNavierStokesPromoted": true,
+      "finiteKStarCollapseClosed": true,
+      "navierStokesClayAssemblyClosed": true
+    },
+    "true": {
+      "axisymmetricSwirlRouteOpen": true,
+      "burgersVortexRouteOpen": true,
+      "optionBCrowLaneClosed": true,
+      "sprint115FluxBudgetImported": true,
+      "sprint116OptionBCrowObstructionLedgerClosed": true,
+      "thinCoreCrowRouteObstructed": true,
+      "thinCoreCrowScalingLawRecorded": true
+    }
+  },
+  "keyword_true_flags_coherent": true,
+  "ledger_coherent_fail_closed": true,
+  "missing_anchors": [],
+  "missing_required_strings": [],
+  "navier_stokes_clay_assembly": false,
+  "option_b_crow_lane_closed": true,
+  "option_b_crow_obstructed": true,
+  "option_b_lane_closed": true,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint116OptionBCrowObstruction",
+    "canonicalNSSprint116OptionBCrowObstruction",
+    "nsSprint116OptionBCrowObstructionReceipt",
+    "canonicalNSSprint116OptionBCrowObstructionReceipt",
+    "canonicalOptionBCrowObstructionReceipt",
+    "ImportedSprint115FluxBudget",
+    "canonicalImportedSprint115FluxBudget",
+    "ThinCoreCrowScalingObstruction",
+    "canonicalThinCoreCrowScalingObstruction",
+    "AlternateRouteStatus",
+    "canonicalAlternateRouteStatus",
+    "Sprint116GateStatuses",
+    "canonicalSprint116GateStatuses",
+    "canonicalSprint116OptionBCrowObstructionFlags"
+  ],
+  "required_strings": [
+    "Sprint 116 Option B thin-core Crow obstruction.",
+    "This receipt imports the Sprint115 reconnection flux budget and records",
+    "that the thin-core Crow Option B lane is closed by the budget scaling.",
+    "FluxBudget / E0 ~ (delta / b)^2 / log(b / delta)",
+    "Option B thin-core Crow route is obstructed",
+    "axisymmetric with swirl remains open",
+    "Burgers vortex concentration remains open",
+    "Sprint116 records the Option B obstruction without closing finite KStar collapse, the blowup bridge, or the Clay assembly."
+  ],
+  "required_true_flags": true,
+  "route_decision": "OPTION_B_CROW_OBSTRUCTION_LEDGER_CLOSED_FAIL_CLOSED_ALTERNATIVE_ROUTE_OPEN",
+  "sprint115_flux_budget_imported": true,
+  "sprint115_reconnection_flux_budget_imported": true,
+  "sprint116_option_b_crow_obstruction_ledger_closed": true,
+  "target_present": true,
+  "thin_core_crow_route_obstructed": true,
+  "thin_core_crow_scaling_law_recorded": true
+}

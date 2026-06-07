@@ -1,0 +1,6 @@
+delta_over_b,obstruction_ratio,reference_flux_budget_over_e0,obstruction_ratio_normalized_to_delta_0_40,reference_normalized_to_delta_0_40,formula
+0.4,0.17461706686996667,0.175,1.0,1.0,(delta_over_b ** 2) / log(1 / delta_over_b)
+0.3,0.07475251905742836,0.075,0.42809400247854834,0.4285714285714286,(delta_over_b ** 2) / log(1 / delta_over_b)
+0.2,0.024853397382384478,0.025,0.14233086048165172,0.14285714285714288,(delta_over_b ** 2) / log(1 / delta_over_b)
+0.1,0.0043429448190325185,0.004,0.024871250542002347,0.02285714285714286,(delta_over_b ** 2) / log(1 / delta_over_b)
+0.05,0.0008345205017383353,0.0008,0.004779146258136288,0.004571428571428572,(delta_over_b ** 2) / log(1 / delta_over_b)

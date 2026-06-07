@@ -1,0 +1,474 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint117GeneralVolumeSuppression.agda",
+  "alternative_route_open": true,
+  "assigned_bools": {
+    "blowupCriterionBridgeClosed": "false",
+    "burgersVortexRouteOpen": "true",
+    "clayNavierStokesPromoted": "false",
+    "concentrationBasedOptionBClosed": "true",
+    "generalHHTOLVolumeSuppressionRecorded": "true",
+    "kStarCollapseFromCorrelationSourceClosed": "false",
+    "navierStokesClayAssemblyClosed": "false",
+    "nonCircularGeometricCorrelationSourceOpen": "true",
+    "singularSwirlInfiniteEnergyRejected": "true",
+    "sprint116CrowObstructionImported": "true",
+    "sprint117GeneralVolumeSuppressionLedgerClosed": "true",
+    "swirlFiniteEnergyScalingRecorded": "true",
+    "swirlOptionBRouteObstructed": "true"
+  },
+  "blowup_criterion_bridge_closed": false,
+  "bool_checks": {
+    "blowupCriterionBridgeClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "burgersVortexRouteOpen": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "concentrationBasedOptionBClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "generalHHTOLVolumeSuppressionRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "kStarCollapseFromCorrelationSourceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "navierStokesClayAssemblyClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularGeometricCorrelationSourceOpen": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "singularSwirlInfiniteEnergyRejected": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint116CrowObstructionImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint117GeneralVolumeSuppressionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "swirlFiniteEnergyScalingRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "swirlOptionBRouteObstructed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "burgers_vortex_route_open": true,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "concentration_based_option_b_closed": true,
+  "contract": "ns_sprint117_general_volume_suppression_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, anchors, required strings, exact booleans, or marker hits block audit passage",
+    "G": "Clay promotion remains false; this audit succeeds only for a coherent fail-closed suppression ledger",
+    "L": "all required anchors, literals, exact booleans, and keyword-consistency gates must match before coherent passage",
+    "O": "Worker 2 owns the Sprint117 general volume suppression audit script only",
+    "P": "SPRINT117_GENERAL_VOLUME_SUPPRESSION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "R": "verify the Sprint117 Agda ledger closes ledger/import/HHTOL/swirl-rejection/Option-B evidence while keeping finite KStar, blowup, assembly, and Clay gates false",
+    "S": "target Agda module is inspected when present; missing target blocks the ledger"
+  },
+  "downstream_flags_false": true,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "SPRINT117_GENERAL_VOLUME_SUPPRESSION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint117GeneralVolumeSuppressionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint116CrowObstructionImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "generalHHTOLVolumeSuppressionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "swirlFiniteEnergyScalingRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "singularSwirlInfiniteEnergyRejected",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "swirlOptionBRouteObstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "concentrationBasedOptionBClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "nonCircularGeometricCorrelationSourceOpen",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "burgersVortexRouteOpen",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "kStarCollapseFromCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint117GeneralVolumeSuppressionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint116CrowObstructionImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:generalHHTOLVolumeSuppressionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:swirlFiniteEnergyScalingRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:singularSwirlInfiniteEnergyRejected",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:concentrationBasedOptionBClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:swirlOptionBRouteObstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:nonCircularGeometricCorrelationSourceOpen",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:burgersVortexRouteOpen",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:kStarCollapseFromCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint117 imports NSSprint116OptionBCrowObstruction as Sprint116.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:General HH-to-low volume-suppression theorem",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Pi_HH_to_L <= E_H * ||e(u_L)||_L_infinity",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:finite-energy swirl profile u_phi ~ r^alpha gives r_H^(alpha + 1)",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:singular swirl u_phi ~ 1/r is rejected because it has infinite L2 energy",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:General HH-to-low suppression closes the concentration-based Option B swirl lane without promoting NS.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:NonCircularGeometricCorrelationSource remains open",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Burgers vortex route remains open",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint117 closes only the supplied general HH-to-low volume-suppression/swirl obstruction lane.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:clayNavierStokesPromoted remains false",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint117 records volume suppression and swirl obstruction while leaving KStar collapse, the blowup bridge, and the Clay assembly closed flags false.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:General HH-to-low volume suppression and finite-energy swirl obstruction are recorded; NonCircularGeometricCorrelationSource remains open; clayNavierStokesPromoted remains false.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint117GeneralVolumeSuppression.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "SPRINT117_GENERAL_VOLUME_SUPPRESSION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+      "expected": "SPRINT117_GENERAL_VOLUME_SUPPRESSION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "general_hhtol_volume_suppression_recorded": true,
+  "keyword_false_flags_coherent": true,
+  "keyword_flag_checks": {
+    "false": {
+      "blowupCriterionBridgeClosed": true,
+      "clayNavierStokesPromoted": true,
+      "kStarCollapseFromCorrelationSourceClosed": true,
+      "navierStokesClayAssemblyClosed": true
+    },
+    "true": {
+      "burgersVortexRouteOpen": true,
+      "concentrationBasedOptionBClosed": true,
+      "generalHHTOLVolumeSuppressionRecorded": true,
+      "nonCircularGeometricCorrelationSourceOpen": true,
+      "singularSwirlInfiniteEnergyRejected": true,
+      "sprint116CrowObstructionImported": true,
+      "sprint117GeneralVolumeSuppressionLedgerClosed": true,
+      "swirlFiniteEnergyScalingRecorded": true,
+      "swirlOptionBRouteObstructed": true
+    }
+  },
+  "keyword_true_flags_coherent": true,
+  "kstar_collapse_from_correlation_source_closed": false,
+  "ledger_coherent_fail_closed": true,
+  "missing_anchors": [],
+  "missing_required_strings": [],
+  "navier_stokes_clay_assembly_closed": false,
+  "non_circular_geometric_correlation_source_open": true,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint117GeneralVolumeSuppression",
+    "canonicalNSSprint117GeneralVolumeSuppression",
+    "nsSprint117GeneralVolumeSuppressionReceipt",
+    "canonicalNSSprint117GeneralVolumeSuppressionReceipt",
+    "canonicalGeneralVolumeSuppressionReceipt",
+    "ImportedSprint116CrowObstruction",
+    "canonicalImportedSprint116CrowObstruction",
+    "GeneralHHTOLVolumeSuppression",
+    "canonicalGeneralHHTOLVolumeSuppression",
+    "generalHHTOLVolumeSuppressionReceipt",
+    "Sprint117OpenRouteStatus",
+    "canonicalSprint117OpenRouteStatus",
+    "Sprint117GateStatuses",
+    "canonicalSprint117GateStatuses",
+    "canonicalSprint117GeneralVolumeSuppressionFlags"
+  ],
+  "required_strings": [
+    "Sprint117 imports NSSprint116OptionBCrowObstruction as Sprint116.",
+    "General HH-to-low volume-suppression theorem",
+    "Pi_HH_to_L <= E_H * ||e(u_L)||_L_infinity",
+    "finite-energy swirl profile u_phi ~ r^alpha gives r_H^(alpha + 1)",
+    "singular swirl u_phi ~ 1/r is rejected because it has infinite L2 energy",
+    "General HH-to-low suppression closes the concentration-based Option B swirl lane without promoting NS.",
+    "NonCircularGeometricCorrelationSource remains open",
+    "Burgers vortex route remains open",
+    "Sprint117 closes only the supplied general HH-to-low volume-suppression/swirl obstruction lane.",
+    "clayNavierStokesPromoted remains false",
+    "Sprint117 records volume suppression and swirl obstruction while leaving KStar collapse, the blowup bridge, and the Clay assembly closed flags false.",
+    "General HH-to-low volume suppression and finite-energy swirl obstruction are recorded; NonCircularGeometricCorrelationSource remains open; clayNavierStokesPromoted remains false."
+  ],
+  "required_true_flags": true,
+  "route_decision": "SPRINT117_GENERAL_VOLUME_SUPPRESSION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "singular_swirl_infinite_energy_rejected": true,
+  "sprint116_crow_obstruction_imported": true,
+  "sprint117_general_volume_suppression_ledger_closed": true,
+  "swirl_finite_energy_scaling_recorded": true,
+  "swirl_option_b_route_obstructed": true,
+  "target_present": true
+}
