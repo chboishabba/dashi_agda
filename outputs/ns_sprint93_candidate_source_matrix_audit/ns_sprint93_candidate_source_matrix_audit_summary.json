@@ -1,0 +1,60 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "all_declared_surfaces_present": true,
+  "all_referenced_summaries_present": true,
+  "any_allowed_dominance": false,
+  "any_allowed_independent_coefficient": false,
+  "any_allowed_pointwise_h1_tail": false,
+  "candidate_source_count": 15,
+  "clay_navier_stokes_promoted": false,
+  "clay_promotion": false,
+  "complete": false,
+  "contract": "ns_sprint93_candidate_source_matrix_audit",
+  "fail_closed": true,
+  "fail_closed_reason": "No allowed same-source Sprint87-92/local-enstrophy/dissipation source supplies dominance, pointwise H1 tail, and independent coefficient while avoiding forbidden dependencies.",
+  "final_decision": "FAIL_CLOSED",
+  "forbidden_dependencies": [
+    "target_absorption",
+    "bkm",
+    "serrin",
+    "h1_continuation",
+    "theta_preservation",
+    "desired_conclusion",
+    "epsilon_from_absorption"
+  ],
+  "open_obligations": [
+    "supply dominance before using target absorption",
+    "supply pointwise H1 tail without BKM/Serrin/H1 continuation/theta preservation",
+    "supply an independent coefficient not derived from absorption",
+    "record dominance, tail, and coefficient on the same allowed source"
+  ],
+  "rejected_for_forbidden_dependencies": [
+    {
+      "candidate_source": "Adjacent leakage / target absorption reuse",
+      "forbidden_hits": "target_absorption; epsilon_from_absorption"
+    },
+    {
+      "candidate_source": "Target conclusion / continuation shortcuts",
+      "forbidden_hits": "target_absorption; bkm; serrin; h1_continuation; theta_preservation; desired_conclusion; epsilon_from_absorption"
+    }
+  ],
+  "rejects_bkm": true,
+  "rejects_desired_conclusion": true,
+  "rejects_epsilon_from_absorption": true,
+  "rejects_h1_continuation": true,
+  "rejects_serrin": true,
+  "rejects_target_absorption": true,
+  "rejects_theta_preservation": true,
+  "report": "ns_sprint93_candidate_source_matrix_audit.md",
+  "required_residual_gate": "DominanceWithPointwiseTailAndIndependentCoefficient",
+  "requires_dominance": true,
+  "requires_independent_coefficient": true,
+  "requires_pointwise_h1_tail": true,
+  "requires_same_source_completeness": true,
+  "residual_gate": "DominanceWithPointwiseTailAndIndependentCoefficient",
+  "route_decision": "fail-closed",
+  "rows_csv": "ns_sprint93_candidate_source_matrix_audit.csv",
+  "rows_json": "ns_sprint93_candidate_source_matrix_audit_rows.json",
+  "same_source_complete_count": 0
+}

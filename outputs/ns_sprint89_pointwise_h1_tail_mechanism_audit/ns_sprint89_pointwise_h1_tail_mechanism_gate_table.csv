@@ -1,0 +1,12 @@
+gate_id,gate_name,field_name,actual_value,expected_value,passed,status,clay_promotion,next_required_input
+G1,LocalEnstrophyDangerShellDissipationMechanismClassified,localEnstrophyDangerShellDissipationMechanismClassified,True,True,True,CLOSED_RECORDED,False,local enstrophy danger-shell dissipation mechanism is classified
+G2,TimeIntegratedToPointwiseConversionClassified,timeIntegratedToPointwiseConversionClassified,True,True,True,CLOSED_RECORDED,False,time-integrated to pointwise conversion mechanism is classified
+G3,CoefficientIndependenceClassified,coefficientIndependenceClassified,True,True,True,CLOSED_RECORDED,False,coefficient independence mechanism is classified
+G4,NoSelfUseOfAbsorptionClassified,noSelfUseOfAbsorptionClassified,True,True,True,CLOSED_RECORDED,False,no self-use of absorption is classified as a governance constraint
+G5,LocalEnstrophyDangerShellDissipationClosed,localEnstrophyDangerShellDissipationClosed,False,False,True,OPEN_FAIL_CLOSED,False,derive local enstrophy danger-shell dissipation before closing the mechanism
+G6,TimeIntegratedToPointwiseConversionClosed,timeIntegratedToPointwiseConversionClosed,False,False,True,OPEN_FAIL_CLOSED,False,derive non-circular time localization before closing the mechanism
+G7,IndependentEpsilonCoefficientClosed,independentEpsilonCoefficientClosed,False,False,True,OPEN_FAIL_CLOSED,False,derive an epsilon<1 coefficient independent of the target absorption inequality
+G8,NoSelfUseOfAbsorptionClosed,noSelfUseOfAbsorptionClosed,True,True,True,CLOSED_RECORDED,False,enforce that absorption is not used to prove its own coefficient
+G9,PointwiseH1TailWithIndependentEpsilonCoefficientClosed,pointwiseH1TailWithIndependentEpsilonCoefficientClosed,False,False,True,OPEN_FAIL_CLOSED,False,close both the pointwise H1 tail and independent epsilon coefficient
+G10,ClayNavierStokesPromoted,clayNavierStokesPromoted,False,False,True,FALSE_NO_PROMOTION,False,keep Clay Navier-Stokes promotion false
+G11,NoPostulateTodoStubFutureProofLanguage,forbidden_terms,0,0,True,PASS,False,remove postulate/TODO/stub/future proof language from Sprint89

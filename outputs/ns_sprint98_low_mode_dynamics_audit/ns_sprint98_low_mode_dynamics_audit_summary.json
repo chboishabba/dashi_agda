@@ -1,0 +1,171 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint98LowModeEnergyConcentrationDynamics.agda",
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "finiteTimeKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "lowModeEnergyConcentrationDynamicsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "lowModeEnergyConcentrationDynamicsLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint98_low_mode_dynamics_audit",
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_LOW_MODE_DYNAMICS",
+  "finite_time_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "forbidden_markers": [
+    "postulate",
+    "TODO",
+    "stub",
+    "skeleton",
+    "admit"
+  ],
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "lowModeEnergyConcentrationDynamicsLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "lowModeEnergyConcentrationDynamicsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteTimeKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "QuantitativeLowModeFluxLowerBound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "ResidenceTimeAgainstViscosity",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "CoherentInverseCascadeMechanism",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "NonCircularKStarForcing",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "low_mode_energy_concentration_dynamics_closed": false,
+  "missing_analytic_object_checks": {
+    "CoherentInverseCascadeMechanism": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "NonCircularKStarForcing": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "QuantitativeLowModeFluxLowerBound": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "ResidenceTimeAgainstViscosity": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    }
+  },
+  "missing_analytic_object_count": 4,
+  "missing_analytic_objects": [
+    "QuantitativeLowModeFluxLowerBound",
+    "ResidenceTimeAgainstViscosity",
+    "CoherentInverseCascadeMechanism",
+    "NonCircularKStarForcing"
+  ],
+  "missing_analytic_objects_recorded": [
+    "QuantitativeLowModeFluxLowerBound",
+    "ResidenceTimeAgainstViscosity",
+    "CoherentInverseCascadeMechanism",
+    "NonCircularKStarForcing"
+  ],
+  "missing_anchors": [],
+  "promotion_decision": "hold",
+  "required_anchors": [
+    "NSSprint98LowModeEnergyConcentrationDynamics",
+    "canonicalNSSprint98LowModeEnergyConcentrationDynamics",
+    "requiredLowModeDynamicsObjects",
+    "LowModeEnergyConcentrationDynamics",
+    "InterShellFluxToLowModes",
+    "LowModeResidenceTime",
+    "InverseCascadeCoherence",
+    "LerayEnergyBudgetCompatibility",
+    "KStarCollapseForcingInequality",
+    "MissingLowModeDynamicsObject",
+    "QuantitativeLowModeFluxLowerBound",
+    "ResidenceTimeAgainstViscosity",
+    "CoherentInverseCascadeMechanism",
+    "NonCircularKStarForcing",
+    "failClosedLowModeEnergyConcentrationDynamics",
+    "lowModeEnergyConcentrationDynamicsLedgerClosed",
+    "lowModeEnergyConcentrationDynamicsClosed",
+    "finiteTimeKStarCollapseClosed",
+    "clayNavierStokesPromoted"
+  ],
+  "route_decision": "FAIL_CLOSED_LOW_MODE_DYNAMICS",
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint98LowModeEnergyConcentrationDynamics.agda",
+      "status": "PASS"
+    }
+  ],
+  "surface": "NSSprint98 Sprint98 low-mode energy concentration dynamics fail_closed Clay Navier-Stokes",
+  "unrecorded_missing_analytic_objects": []
+}

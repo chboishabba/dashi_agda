@@ -1,0 +1,33 @@
+{
+  "all_candidates_fail_closed": true,
+  "candidate_count": 5,
+  "candidate_source_names": [
+    "KStarL2Tail",
+    "LerayEnergyPointwise",
+    "TimeIntegratedDissipation",
+    "DangerShellLocalMechanism",
+    "CriticalCoefficientSmallness"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "clay_promotion_recorded_false": true,
+  "complete": false,
+  "contract": "ns_sprint88_tail_source_classifier",
+  "gate_table": "ns_sprint88_tail_source_classifier_gate_table.csv",
+  "next_required_gate": "PointwiseH1TailWithIndependentEpsilonCoefficient",
+  "open_obligations": [
+    "derive pointwise H1 tail at the danger shell from non-circular NS inputs",
+    "derive an independent epsilon<1 absorption coefficient",
+    "verify the tail and coefficient are not obtained from the target absorption inequality"
+  ],
+  "pointwise_absorption_rule": "sufficient iff one source supplies pointwise H1 tail and an independent epsilon coefficient",
+  "report": "ns_sprint88_tail_source_classifier_report.md",
+  "requires_independent_epsilon_coefficient": true,
+  "requires_pointwise_h1_tail": true,
+  "route_decision": "NS_SPRINT88_TAIL_SOURCE_CLASSIFIER_OPEN",
+  "source_count": 5,
+  "source_table": "ns_sprint88_tail_source_classifier_sources.csv",
+  "sufficient_for_pointwise_absorption": false,
+  "sufficient_source_count": 0,
+  "sufficient_sources": [],
+  "unconditional_closure": false
+}

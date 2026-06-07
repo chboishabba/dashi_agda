@@ -1,0 +1,38 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "all_gates_passed": false,
+  "allowed_source_with_both_inputs": false,
+  "any_forbidden_dependency_detected": true,
+  "any_source_supplies_independent_coefficient": false,
+  "any_source_supplies_pointwise_h1_tail": false,
+  "candidate_source_count": 5,
+  "complete": false,
+  "contract": "ns_sprint91_coefficient_independence_audit",
+  "fail_closed": true,
+  "fail_closed_reason": "No allowed non-forbidden source supplies both pointwise H1 tail and an independent coefficient.",
+  "final_decision": "FAIL_CLOSED",
+  "forbidden_dependencies": [
+    "h1_continuation",
+    "serrin",
+    "bkm",
+    "target_absorption",
+    "theta_preservation",
+    "clay_regularities",
+    "desired_conclusion",
+    "epsilon_from_absorption"
+  ],
+  "gate_csv": "ns_sprint91_coefficient_independence_gate_table.csv",
+  "open_obligations": [
+    "prove a pointwise-in-time danger-shell H1 tail without continuation/Serrin/BKM/theta/Clay inputs",
+    "fix an epsilon coefficient before and independently of target absorption",
+    "record both facts on one allowed source surface before promoting the absorption route"
+  ],
+  "positive_gate_rule": "The route opens only if one allowed source avoids forbidden dependencies and supplies both pointwise H1 tail and an epsilon coefficient independent of target absorption.",
+  "report": "ns_sprint91_coefficient_independence_audit.md",
+  "required_residual_gate": "PointwiseH1TailWithIndependentEpsilonCoefficient",
+  "route_decision": "fail-closed",
+  "rows_csv": "ns_sprint91_coefficient_independence_rows.csv",
+  "rows_json": "ns_sprint91_coefficient_independence_rows.json",
+  "single_source_evidence_rule_required": true
+}

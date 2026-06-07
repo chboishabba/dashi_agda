@@ -1,0 +1,148 @@
+{
+  "accepted_candidates": [],
+  "accepted_source_count": 0,
+  "candidate_count": 4,
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint96_collapse_scaling_sanity",
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED",
+  "forbidden_dependencies": [
+    "clay_claim",
+    "target_absorption",
+    "desired_conclusion",
+    "h1_continuation",
+    "theta_preservation",
+    "option_c_conditional",
+    "conditional_regular",
+    "general_data_regular",
+    "blowup_construction_assumed",
+    "target_blowup",
+    "bkm_failure_assumed",
+    "serrin_failure_assumed",
+    "desired_singularity",
+    "negated_conditional_criterion_without_mechanism"
+  ],
+  "option_b_closed": false,
+  "proof_claimed": false,
+  "required_gates": [
+    "finite_time_collapse",
+    "leray_energy_compatible",
+    "excludes_conditional_lower_bound",
+    "singularity_extraction",
+    "no_forbidden_dependency"
+  ],
+  "route_decision": "FAIL_CLOSED",
+  "rows": [
+    {
+      "accepted": false,
+      "candidate_id": "C0",
+      "excludes_conditional_lower_bound": false,
+      "failed_gates": [
+        "finite_time_collapse",
+        "excludes_conditional_lower_bound",
+        "singularity_extraction"
+      ],
+      "finite_time_collapse": false,
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "excludes_conditional_lower_bound": false,
+        "finite_time_collapse": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": true,
+        "singularity_extraction": false
+      },
+      "law": "K*(t) = K0 > 0 for 0 <= t < T",
+      "leray_energy_compatible": true,
+      "limit_as_t_to_T": "K0",
+      "monotonicity": "constant",
+      "name": "constant lower-bound",
+      "no_forbidden_dependency": true,
+      "note": "Compatible with a lower-bound picture but does not collapse to zero; it therefore cannot drive Option B.",
+      "singularity_extraction": false
+    },
+    {
+      "accepted": false,
+      "candidate_id": "A1",
+      "excludes_conditional_lower_bound": false,
+      "failed_gates": [
+        "leray_energy_compatible",
+        "excludes_conditional_lower_bound",
+        "singularity_extraction"
+      ],
+      "finite_time_collapse": true,
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "excludes_conditional_lower_bound": false,
+        "finite_time_collapse": true,
+        "leray_energy_compatible": false,
+        "no_forbidden_dependency": true,
+        "singularity_extraction": false
+      },
+      "law": "K*(t) = c (T - t)^alpha, alpha > 0",
+      "leray_energy_compatible": false,
+      "limit_as_t_to_T": "0",
+      "monotonicity": "strictly decreasing for alpha > 0",
+      "name": "algebraic collapse to 0",
+      "no_forbidden_dependency": true,
+      "note": "Supplies a formal collapse rate, but this sanity ledger has no independent Leray-compatible construction, lower-bound exclusion, or singularity extraction.",
+      "singularity_extraction": false
+    },
+    {
+      "accepted": false,
+      "candidate_id": "L1",
+      "excludes_conditional_lower_bound": false,
+      "failed_gates": [
+        "leray_energy_compatible",
+        "excludes_conditional_lower_bound",
+        "singularity_extraction"
+      ],
+      "finite_time_collapse": true,
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "excludes_conditional_lower_bound": false,
+        "finite_time_collapse": true,
+        "leray_energy_compatible": false,
+        "no_forbidden_dependency": true,
+        "singularity_extraction": false
+      },
+      "law": "K*(t) = c / log(e + 1/(T - t))",
+      "leray_energy_compatible": false,
+      "limit_as_t_to_T": "0",
+      "monotonicity": "decreasing near T",
+      "name": "logarithmic slow collapse",
+      "no_forbidden_dependency": true,
+      "note": "A slower collapse ansatz still lacks an independent energy compatibility mechanism and does not defeat conditional lower-bound criteria.",
+      "singularity_extraction": false
+    },
+    {
+      "accepted": false,
+      "candidate_id": "O1",
+      "excludes_conditional_lower_bound": false,
+      "failed_gates": [
+        "leray_energy_compatible",
+        "excludes_conditional_lower_bound",
+        "singularity_extraction",
+        "no_forbidden_dependency"
+      ],
+      "finite_time_collapse": true,
+      "forbidden_dependencies": "desired_singularity",
+      "gate_results": {
+        "excludes_conditional_lower_bound": false,
+        "finite_time_collapse": true,
+        "leray_energy_compatible": false,
+        "no_forbidden_dependency": false,
+        "singularity_extraction": false
+      },
+      "law": "K*(t) = c (T - t)^alpha (1 + beta sin(omega log(1/(T - t))))",
+      "leray_energy_compatible": false,
+      "limit_as_t_to_T": "0 only under amplitude restrictions",
+      "monotonicity": "oscillatory",
+      "name": "oscillatory candidate",
+      "no_forbidden_dependency": false,
+      "note": "Oscillation adds no accepted extraction mechanism here and is rejected for relying on a target singularity dependency.",
+      "singularity_extraction": false
+    }
+  ],
+  "scope": "deterministic scaling sanity ledger for Option B candidate K*(t) laws"
+}

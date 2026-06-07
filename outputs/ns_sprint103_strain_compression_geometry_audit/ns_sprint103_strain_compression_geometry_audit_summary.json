@@ -1,0 +1,329 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint103StrainCompressionGeometryGate.agda",
+  "alignment_geometry_gate_open": true,
+  "all_subgates_closed": false,
+  "all_subgates_false": true,
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "concentrationCompressionColocationClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "energyStrainEigenframeAlignmentClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "failClosedStrainCompressionGeometryDecomposition": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "finiteKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "highFrequencyConcentrationMeasureClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "lowModeCompressiveStrainLocusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularGeometricCorrelationSourceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionGeometryDecompositionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "timeIntegratedFluxSurplusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "closed_subgate_count": 0,
+  "complete": false,
+  "contract": "ns_sprint103_strain_compression_geometry_audit",
+  "control_card": {
+    "C": "Agda receipt surface plus deterministic Python audit",
+    "F": "the remaining gap is the full geometry subgate family",
+    "G": "no promotion until each geometry subgate has admissible evidence",
+    "L": "ledger true, subgates false, accepted source count zero, Clay promotion false",
+    "O": "Navier-Stokes Sprint 103 strain-compression geometry audit",
+    "P": "FAIL_CLOSED_STRAIN_COMPRESSION_GEOMETRY",
+    "R": "verify the decomposition ledger and keep every geometry subgate false",
+    "S": "Sprint 102's strain-compression gate is decomposed into five named geometry subgates"
+  },
+  "decomposition_ledger_closed": true,
+  "decomposition_ledger_true": true,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_STRAIN_COMPRESSION_GEOMETRY",
+  "finite_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "strainCompressionGeometryDecompositionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "highFrequencyConcentrationMeasureClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "lowModeCompressiveStrainLocusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "energyStrainEigenframeAlignmentClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "concentrationCompressionColocationClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularGeometricCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "signedLowModeFluxLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "timeIntegratedFluxSurplusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "failClosedStrainCompressionGeometryDecomposition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "HighFrequencyConcentrationMeasure",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "LowModeCompressiveStrainLocus",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "EnergyStrainEigenframeAlignment",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "ConcentrationCompressionColocation",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "NonCircularGeometricCorrelationSource",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "geometry_gate_decomposed": true,
+  "missing_anchors": [],
+  "non_circular_amplification_gate_open": true,
+  "open_subgate_count": 5,
+  "pressure_strain_correlation_gate_open": true,
+  "promotion_decision": "hold",
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint103StrainCompressionGeometryGate",
+    "canonicalNSSprint103StrainCompressionGeometryGate",
+    "canonicalNSSprint103StrainCompressionGeometryGateReceipt",
+    "canonicalSprint103StrainCompressionGeometryFlags",
+    "StrainCompressionGeometryDecomposition",
+    "StrainCompressionGeometryDecomposesIntoFiveSubgates",
+    "Sprint102StrainCompressionAnchor",
+    "canonicalSprint102StrainCompressionAnchor",
+    "GeometrySubgateStatus",
+    "canonicalStrainCompressionGeometryDecompositionStatus",
+    "requiredStrainCompressionGeometrySubgates",
+    "HighFrequencyConcentrationMeasure",
+    "LowModeCompressiveStrainLocus",
+    "EnergyStrainEigenframeAlignment",
+    "ConcentrationCompressionColocation",
+    "NonCircularGeometricCorrelationSource",
+    "HighFrequencyConcentrationMeasureOpen",
+    "LowModeCompressiveStrainLocusOpen",
+    "EnergyStrainEigenframeAlignmentOpen",
+    "ConcentrationCompressionColocationOpen",
+    "NonCircularGeometricCorrelationSourceOpen",
+    "strainCompressionGeometryDecompositionLedgerClosed",
+    "highFrequencyConcentrationMeasureClosed",
+    "lowModeCompressiveStrainLocusClosed",
+    "energyStrainEigenframeAlignmentClosed",
+    "concentrationCompressionColocationClosed",
+    "nonCircularGeometricCorrelationSourceClosed",
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "signedLowModeFluxLowerBoundClosed",
+    "timeIntegratedFluxSurplusClosed",
+    "finiteKStarCollapseClosed",
+    "clayNavierStokesPromoted",
+    "failClosedStrainCompressionGeometryDecomposition"
+  ],
+  "route_decision": "FAIL_CLOSED_STRAIN_COMPRESSION_GEOMETRY",
+  "scale_localized_compression_gate_open": true,
+  "signed_low_mode_flux_lower_bound_closed": false,
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint103StrainCompressionGeometryGate.agda",
+      "status": "PASS"
+    }
+  ],
+  "strain_compression_at_high_frequency_concentration_points_closed": false,
+  "strain_compression_geometry_subgates": [
+    "alignment_geometry_gate",
+    "vortex_stretching_sign_gate",
+    "pressure_strain_correlation_gate",
+    "scale_localized_compression_gate",
+    "non_circular_amplification_gate"
+  ],
+  "subgate_alignment_geometry_gate_open": true,
+  "subgate_checks": {
+    "ConcentrationCompressionColocation": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "EnergyStrainEigenframeAlignment": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "HighFrequencyConcentrationMeasure": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "LowModeCompressiveStrainLocus": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "NonCircularGeometricCorrelationSource": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    }
+  },
+  "subgate_non_circular_amplification_gate_open": true,
+  "subgate_pressure_strain_correlation_gate_open": true,
+  "subgate_scale_localized_compression_gate_open": true,
+  "subgate_vortex_stretching_sign_gate_open": true,
+  "subgates": [
+    "HighFrequencyConcentrationMeasure",
+    "LowModeCompressiveStrainLocus",
+    "EnergyStrainEigenframeAlignment",
+    "ConcentrationCompressionColocation",
+    "NonCircularGeometricCorrelationSource"
+  ],
+  "time_integrated_flux_surplus_closed": false,
+  "vortex_stretching_sign_gate_open": true
+}

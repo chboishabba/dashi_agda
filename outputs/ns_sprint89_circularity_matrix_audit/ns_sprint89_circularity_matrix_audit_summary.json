@@ -1,0 +1,31 @@
+{
+  "allowed_route_count": 0,
+  "allowed_routes": [],
+  "any_candidate_supplies_independent_epsilon_coefficient": false,
+  "any_candidate_supplies_pointwise_h1_tail": false,
+  "any_forbidden_dependency_detected": true,
+  "candidate_count": 5,
+  "complete": false,
+  "contract": "ns_sprint89_circularity_matrix_audit",
+  "fail_closed": true,
+  "forbidden_dependencies": [
+    "h1_continuation",
+    "serrin",
+    "bkm",
+    "target_absorption",
+    "theta_preservation",
+    "clay_regularities",
+    "desired_conclusion"
+  ],
+  "matrix_csv": "ns_sprint89_circularity_matrix.csv",
+  "matrix_json": "ns_sprint89_circularity_matrix_rows.json",
+  "open_obligations": [
+    "supply a pointwise H1 tail theorem independent of continuation/Serrin/BKM/theta/Clay regularity",
+    "supply an epsilon absorption coefficient not derived from target absorption",
+    "verify both inputs occur on the same allowed route before opening the NS pointwise H1 tail gate"
+  ],
+  "positive_gate_rule": "route opens only when a candidate avoids H1 continuation, Serrin, BKM, target absorption, theta preservation, Clay regularity, and desired conclusion dependencies while supplying both pointwise H1 tail and an independent epsilon coefficient",
+  "report": "ns_sprint89_circularity_matrix_audit.md",
+  "requires_single_allowed_route_with_both_inputs": true,
+  "route_decision": "fail-closed"
+}

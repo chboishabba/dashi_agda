@@ -1,0 +1,393 @@
+{
+  "audit_id": "ym_sprint131_final_claim_audit",
+  "claim_status": {
+    "CC1": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+      "source_sprint": "Sprint128",
+      "state": "closed"
+    },
+    "FIN": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint130_os_fin_audit/ym_sprint130_os_fin_audit_summary.json",
+      "source_sprint": "Sprint130",
+      "state": "closed"
+    },
+    "GG1": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+      "source_sprint": "Sprint128",
+      "state": "closed"
+    },
+    "MC1": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json",
+      "source_sprint": "Sprint129",
+      "state": "closed"
+    },
+    "MC2": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json",
+      "source_sprint": "Sprint129",
+      "state": "closed"
+    },
+    "MC3": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json",
+      "source_sprint": "Sprint129",
+      "state": "closed"
+    },
+    "MC4": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json",
+      "source_sprint": "Sprint129",
+      "state": "closed"
+    },
+    "OS1": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint130_os_fin_audit/ym_sprint130_os_fin_audit_summary.json",
+      "source_sprint": "Sprint130",
+      "state": "closed"
+    },
+    "SC1": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+      "source_sprint": "Sprint128",
+      "state": "closed"
+    },
+    "SC2": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json",
+      "source_sprint": "Sprint129",
+      "state": "closed"
+    },
+    "SC3": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+      "source_sprint": "Sprint128",
+      "state": "closed"
+    },
+    "SY1": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+      "source_sprint": "Sprint128",
+      "state": "closed"
+    },
+    "WC1": {
+      "evidence": [
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+        },
+        {
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        }
+      ],
+      "source_path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+      "source_sprint": "Sprint128",
+      "state": "closed"
+    }
+  },
+  "clay_promotion_false": {
+    "flags": [
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+        "sprint": "Sprint128",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "sprint": "Sprint128",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+        "sprint": "Sprint128",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+        "sprint": "Sprint128",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "sprint": "Sprint129",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "sprint": "Sprint129",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+        "sprint": "Sprint129",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+        "sprint": "Sprint129",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "sprint": "Sprint130",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+        "sprint": "Sprint130",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+        "sprint": "Sprint130",
+        "value": false
+      }
+    ],
+    "present": false,
+    "true_rows": [],
+    "true_source_hits": []
+  },
+  "external_acceptance_absent": {
+    "evidence": [
+      {
+        "name": "externalAcceptanceTokenPresent",
+        "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "value": false
+      }
+    ],
+    "present": false
+  },
+  "fail_reasons": [],
+  "forbidden_marker_assertions": {
+    "Sprint128": {
+      "closed": true,
+      "hits": []
+    },
+    "Sprint129": {
+      "closed": true,
+      "hits": []
+    },
+    "Sprint130": {
+      "closed": true,
+      "hits": []
+    }
+  },
+  "internal_gate_rows": [
+    {
+      "gate": "CC1",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "WC1",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "MC1",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "MC2",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "MC3",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "MC4",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "SC1",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "SC2",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "SC3",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "SY1",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "GG1",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "OS1",
+      "internal_gate_closed": true
+    },
+    {
+      "gate": "FIN",
+      "internal_gate_closed": true
+    }
+  ],
+  "prior_summary_paths": {
+    "Sprint128": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+    "Sprint129": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json",
+    "Sprint130": "outputs/ym_sprint130_os_fin_audit/ym_sprint130_os_fin_audit_summary.json"
+  },
+  "route_decision": "pass",
+  "scanned_surfaces": {
+    "Sprint128": [
+      "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+      "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+      "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+      "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+    ],
+    "Sprint129": [
+      "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+      "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+      "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+      "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+    ],
+    "Sprint130": [
+      "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+      "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+      "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+    ]
+  }
+}

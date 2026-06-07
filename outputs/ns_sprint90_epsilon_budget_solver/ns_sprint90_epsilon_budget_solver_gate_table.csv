@@ -1,0 +1,6 @@
+gate_id,gate_name,passed,status,next_required_input
+G1,AllowedCandidateSupplied,True,PASS,Supply an allowed candidate law rather than an inadmissible energy/time-integrated proxy.
+G2,PointwiseH1TailSupplied,True,PASS,Supply a pointwise-in-time danger-shell H1-tail estimate.
+G3,IndependentEpsilonCoefficientSupplied,False,FAIL_CLOSED,Supply a coefficient source independent of the target absorption epsilon.
+G4,EvidenceComplete,False,FAIL_CLOSED,Provide both pointwise H1 tail and independent epsilon coefficient in one allowed supplied candidate.
+G5,ScalarAbsorptionAccepted,False,FAIL_CLOSED,Re-run after an allowed evidence-complete candidate is supplied.

@@ -1,0 +1,5 @@
+gate_id,gate_name,passed,status,next_required_input
+G1,AllowedSourceConsidered,True,PASS,enumerate at least one allowed source surface
+G2,AllowedPointwiseH1Tail,False,FAIL_CLOSED,supply pointwise H1 tail from an allowed non-forbidden source
+G3,AllowedIndependentCoefficient,False,FAIL_CLOSED,supply epsilon coefficient independent of target absorption
+G4,SameSourceEvidenceComplete,False,FAIL_CLOSED,provide both required inputs in one allowed source

@@ -1,0 +1,147 @@
+[
+  {
+    "accepted": false,
+    "annulus_cover": true,
+    "ansatz": "use a smooth radial bump and dyadic rescalings to cover Fourier annuli",
+    "classification": "standard partition algebra without independent cutoff-source closure",
+    "failed_gates": [
+      "non_circular_normalization",
+      "no_forbidden_dependency"
+    ],
+    "family": "standard_radial_bump_partition",
+    "family_id": "SRB",
+    "forbidden_dependencies": "desired_conclusion",
+    "gate_results": {
+      "annulus_cover": true,
+      "no_forbidden_dependency": false,
+      "non_circular_normalization": false,
+      "overlap_bound": true,
+      "partition_identity": true,
+      "radial_bump": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_normalization": false,
+    "note": "The usual radial bump package supplies the formal partition checks, but its normalization is useful here only after the desired cutoff-source role is assumed.",
+    "overlap_bound": true,
+    "partition_identity": true,
+    "radial_bump": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "annulus_cover": true,
+    "ansatz": "choose compactly supported annular cutoffs with finite overlap",
+    "classification": "annular cover with support imposed as source data",
+    "failed_gates": [
+      "partition_identity",
+      "non_circular_normalization",
+      "no_forbidden_dependency"
+    ],
+    "family": "compact_annulus_partition",
+    "family_id": "CAP",
+    "forbidden_dependencies": "imposed_cutoff_support",
+    "gate_results": {
+      "annulus_cover": true,
+      "no_forbidden_dependency": false,
+      "non_circular_normalization": false,
+      "overlap_bound": true,
+      "partition_identity": false,
+      "radial_bump": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_normalization": false,
+    "note": "Compact annuli give a finite-overlap cover, but the exact identity and source-bearing support are not derived without imposing the cutoff support.",
+    "overlap_bound": true,
+    "partition_identity": false,
+    "radial_bump": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "annulus_cover": true,
+    "ansatz": "use heat-kernel differences to define scale-local smooth cutoffs",
+    "classification": "scale smoothing without compact annular bump partition",
+    "failed_gates": [
+      "radial_bump",
+      "partition_identity",
+      "non_circular_normalization",
+      "no_forbidden_dependency"
+    ],
+    "family": "heat_kernel_scale_partition",
+    "family_id": "HKS",
+    "forbidden_dependencies": "non_leray_regularization",
+    "gate_results": {
+      "annulus_cover": true,
+      "no_forbidden_dependency": false,
+      "non_circular_normalization": false,
+      "overlap_bound": true,
+      "partition_identity": false,
+      "radial_bump": false
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_normalization": false,
+    "note": "Heat-kernel differences provide smooth scale localization, but they are a regularization route rather than a radial bump partition with a closed identity.",
+    "overlap_bound": true,
+    "partition_identity": false,
+    "radial_bump": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "annulus_cover": true,
+    "ansatz": "mollify sharp annular indicators to build a smooth partition",
+    "classification": "mollified annuli with endpoint identity and overlap leakage",
+    "failed_gates": [
+      "partition_identity",
+      "overlap_bound",
+      "non_circular_normalization",
+      "no_forbidden_dependency"
+    ],
+    "family": "sharp_to_smooth_mollified_partition",
+    "family_id": "STM",
+    "forbidden_dependencies": "target_kstar_collapse",
+    "gate_results": {
+      "annulus_cover": true,
+      "no_forbidden_dependency": false,
+      "non_circular_normalization": false,
+      "overlap_bound": false,
+      "partition_identity": false,
+      "radial_bump": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_normalization": false,
+    "note": "Mollification removes sharp edges, but the exact partition identity and uniform overlap bound are not obtained without tuning to the target shell collapse.",
+    "overlap_bound": false,
+    "partition_identity": false,
+    "radial_bump": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "annulus_cover": true,
+    "ansatz": "declare the cutoff supports and partition identity directly",
+    "classification": "forbidden imposed cutoff partition",
+    "failed_gates": [
+      "non_circular_normalization",
+      "no_forbidden_dependency"
+    ],
+    "family": "imposed_cutoff_partition",
+    "family_id": "ICP",
+    "forbidden_dependencies": "imposed_cutoff_support;imposed_partition_identity;target_blowup;desired_conclusion",
+    "gate_results": {
+      "annulus_cover": true,
+      "no_forbidden_dependency": false,
+      "non_circular_normalization": false,
+      "overlap_bound": true,
+      "partition_identity": true,
+      "radial_bump": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_normalization": false,
+    "note": "The candidate passes formal partition checks only by placing the support and identity in the hypotheses, so it is circular.",
+    "overlap_bound": true,
+    "partition_identity": true,
+    "radial_bump": true,
+    "verdict": "reject"
+  }
+]

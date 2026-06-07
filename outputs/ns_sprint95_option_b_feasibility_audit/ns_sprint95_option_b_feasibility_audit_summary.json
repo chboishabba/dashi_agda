@@ -1,0 +1,182 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint95OptionBBlowupFeasibilityLedger.agda",
+  "blowup_construction_closed": false,
+  "bool_checks": {
+    "blowupConstructionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "compatibilityWithLerayEnergyClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "exclusionOfConditionalKStarLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "finiteTimeSingularityExtractionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "kStarCollapseMechanismClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "optionBBlowupConstructionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "optionBBlowupFeasibilityLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "optionBFeasibilityLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "compatibility_with_leray_energy_closed": false,
+  "complete": false,
+  "conditional_criterion": false,
+  "contract": "ns_sprint95_option_b_feasibility_audit",
+  "exclusion_of_conditional_kstar_lower_bound_closed": false,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_OPTION_B_FEASIBILITY",
+  "finite_time_singularity_extraction_closed": false,
+  "forbidden_hits": [],
+  "forbidden_term_count": 0,
+  "four_open_gates_false": true,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "optionBBlowupFeasibilityLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "optionBFeasibilityLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "optionBBlowupConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "kStarCollapseMechanismClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "compatibilityWithLerayEnergyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "exclusionOfConditionalKStarLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteTimeSingularityExtractionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint94ObstructionInherited",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint94ConditionalKStarInherited",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "general_data": false,
+  "inherited_checks": {
+    "sprint94ConditionalKStarInherited": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint94ObstructionInherited": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "inherited_sprint94_conditional_obstruction_true": true,
+  "kstar_collapse_mechanism_closed": false,
+  "missing_anchors": [],
+  "open_gate_names": [
+    "kStarCollapseMechanismClosed",
+    "compatibilityWithLerayEnergyClosed",
+    "exclusionOfConditionalKStarLowerBoundClosed",
+    "finiteTimeSingularityExtractionClosed"
+  ],
+  "optionBFeasibilityLedgerClosed": true,
+  "option_b_blowup_construction_closed": false,
+  "option_b_feasibility_ledger_closed": true,
+  "promotion_decision": "hold",
+  "required_residual_gate": "finite-time K* collapse mechanism",
+  "route_decision": "FAIL_CLOSED",
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint95OptionBBlowupFeasibilityLedger.agda",
+      "status": "PASS"
+    }
+  ],
+  "sprint94_conditional_kstar_inherited": true,
+  "sprint94_inherited": true,
+  "sprint94_obstruction_inherited": true,
+  "surface": "NSSprint95 Sprint95 OptionB Feasibility fail_closed Clay blowup Sprint94"
+}

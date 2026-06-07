@@ -1,0 +1,145 @@
+[
+  {
+    "accepted": false,
+    "ansatz": "use exp(-1/x) on the positive domain as the base exponential seed",
+    "classification": "classical smooth positive-domain seed without a derived Navier-Stokes source role",
+    "derivative_hierarchy": false,
+    "exp_negative_inverse_seed": true,
+    "failed_gates": [
+      "derivative_hierarchy",
+      "non_circular_source"
+    ],
+    "family": "classical_exp_negative_inverse_seed",
+    "family_id": "CEN",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "derivative_hierarchy": false,
+      "exp_negative_inverse_seed": true,
+      "no_forbidden_dependency": true,
+      "non_circular_source": false,
+      "positive_interior_nonzero": true,
+      "smoothness_on_positive_domain": true
+    },
+    "no_forbidden_dependency": true,
+    "non_circular_source": false,
+    "note": "The seed is smooth and positive on x > 0, but the full derivative hierarchy needed by the closure ledger is not derived, and no non-circular Navier-Stokes source is produced.",
+    "positive_interior_nonzero": true,
+    "smoothness_on_positive_domain": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "replace the base exponent with exp(-1/x^p) for a selected p > 0",
+    "classification": "parametric reciprocal-power variant with unproven hierarchy transfer",
+    "derivative_hierarchy": false,
+    "exp_negative_inverse_seed": false,
+    "failed_gates": [
+      "exp_negative_inverse_seed",
+      "derivative_hierarchy",
+      "non_circular_source"
+    ],
+    "family": "reciprocal_power_exp_seed",
+    "family_id": "RPE",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "derivative_hierarchy": false,
+      "exp_negative_inverse_seed": false,
+      "no_forbidden_dependency": true,
+      "non_circular_source": false,
+      "positive_interior_nonzero": true,
+      "smoothness_on_positive_domain": true
+    },
+    "no_forbidden_dependency": true,
+    "non_circular_source": false,
+    "note": "The reciprocal-power variant is smooth on the positive domain, but it is not the required exp(-1/x) seed and does not derive the hierarchy or a non-circular source.",
+    "positive_interior_nonzero": true,
+    "smoothness_on_positive_domain": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "patch the base exponential seed and declare the required derivatives as available",
+    "classification": "patched source with hierarchy supplied by declaration",
+    "derivative_hierarchy": true,
+    "exp_negative_inverse_seed": true,
+    "failed_gates": [
+      "smoothness_on_positive_domain",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "patched_exp_seed_with_declared_derivatives",
+    "family_id": "PDD",
+    "forbidden_dependencies": "imposed_derivative_hierarchy",
+    "gate_results": {
+      "derivative_hierarchy": true,
+      "exp_negative_inverse_seed": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "positive_interior_nonzero": true,
+      "smoothness_on_positive_domain": false
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "The derivative ledger is declared rather than derived, the patching does not prove smoothness across the positive-domain construction, and the source role remains circular.",
+    "positive_interior_nonzero": true,
+    "smoothness_on_positive_domain": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "import a smooth bump package and use its exponential-looking witness",
+    "classification": "external bump witness with imported analytic obligations",
+    "derivative_hierarchy": true,
+    "exp_negative_inverse_seed": false,
+    "failed_gates": [
+      "exp_negative_inverse_seed",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "imported_smooth_bump_seed",
+    "family_id": "ISB",
+    "forbidden_dependencies": "imported_bump_package;desired_conclusion",
+    "gate_results": {
+      "derivative_hierarchy": true,
+      "exp_negative_inverse_seed": false,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "positive_interior_nonzero": true,
+      "smoothness_on_positive_domain": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "The smooth bump behavior is imported from an external package and specialized toward the desired conclusion, so it does not supply an internal non-circular base exponential source.",
+    "positive_interior_nonzero": true,
+    "smoothness_on_positive_domain": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "assume the base exponential smooth function, interior positivity, and source witness",
+    "classification": "forbidden witness assembled by assumptions",
+    "derivative_hierarchy": true,
+    "exp_negative_inverse_seed": true,
+    "failed_gates": [
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "imposed_base_exp_smooth_function",
+    "family_id": "IBS",
+    "forbidden_dependencies": "imposed_derivative_hierarchy;imposed_positive_interior;target_blowup;desired_conclusion",
+    "gate_results": {
+      "derivative_hierarchy": true,
+      "exp_negative_inverse_seed": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "positive_interior_nonzero": true,
+      "smoothness_on_positive_domain": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "The candidate has the requested analytic labels only because the hierarchy, interior positivity, and target role are imposed as assumptions.",
+    "positive_interior_nonzero": true,
+    "smoothness_on_positive_domain": true,
+    "verdict": "reject"
+  }
+]

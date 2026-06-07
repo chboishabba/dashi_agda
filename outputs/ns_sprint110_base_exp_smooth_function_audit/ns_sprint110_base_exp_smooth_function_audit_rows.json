@@ -1,0 +1,219 @@
+[
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "baseExpSmoothFunctionDecompositionLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "expNegativeInverseSeedDefinitionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "smoothnessOnPositiveRadiusDomainClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "derivativeHierarchyPolynomialOverPowerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "positiveInteriorNonzeroWitnessClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "nonCircularBaseExpSourceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "baseExpSmoothFunctionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "boundaryFlatnessAtUnitRadiusClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "compactSupportCutoffDefinitionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "smoothnessAcrossSupportBoundaryClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "nonCircularCompactSupportSourceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "smoothCompactSupportWitnessClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "radialBumpFunctionConstructionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "smoothDyadicCutoffPartitionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "littlewoodPaleyShellProjectorClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "dyadicShellEnergyDensityClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "highFrequencyConcentrationMeasureClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "signedLowModeFluxLowerBoundClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "timeIntegratedFluxSurplusClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "finiteKStarCollapseClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "failClosedBaseExpSmoothFunctionDecomposition",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "ExpNegativeInverseSeedDefinition",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "SmoothnessOnPositiveRadiusDomain",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "DerivativeHierarchyPolynomialOverPower",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "PositiveInteriorNonzeroWitness",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "NonCircularBaseExpSource",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "all present",
+    "expected": "all present",
+    "gate": "required_anchors",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint109SmoothCompactSupportWitness.agda",
+    "gate": "sprint109_anchor_file",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "none",
+    "expected": "none",
+    "gate": "forbidden_markers",
+    "passed": true,
+    "status": "PASS"
+  }
+]

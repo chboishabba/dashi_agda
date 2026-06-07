@@ -1,0 +1,176 @@
+{
+  "all_analytic_gates_false": true,
+  "all_required_receipt_anchors_present": true,
+  "analytic_gate_values": {
+    "analyticDominanceGateClosed": false,
+    "dangerShellDissipationDominatesInfluxClosed": false,
+    "dominancePointwiseCoefficientClosed": false,
+    "dominanceWithPointwiseTailAndIndependentCoefficientClosed": false,
+    "highHighDominanceClosed": false,
+    "independentCoefficientBudgetClosed": false,
+    "pointwiseIndependentCoefficientClosed": false,
+    "pointwiseTailFromLocalDissipationClosed": false
+  },
+  "clay_gate_values": {
+    "clayNavierStokesPromoted": false
+  },
+  "clay_navier_stokes_promoted": false,
+  "clay_promotion": false,
+  "complete": false,
+  "contract": "ns_sprint93_dominance_pointwise_coefficient_audit",
+  "fail_closed": false,
+  "final_decision": "BOUNDARY_AUDIT_PASS",
+  "forbidden_term_count": 0,
+  "forbidden_terms_detected": [],
+  "gate_failures": [],
+  "gate_results": [
+    {
+      "actual_value": "sprint92BookkeepingInheritedClosed; fixedDangerTimeFrozenKBookkeepingClosed",
+      "expected_value": "at least one true inherited bookkeeping gate",
+      "field_name": "inheritedBookkeepingClosed; sprint92BookkeepingInherited; sprint92BookkeepingInheritedClosed; sprint92FrozenKBookkeepingInherited; sprint92FrozenKBookkeepingClosed; fixedDangerTimeFrozenKBookkeepingClosed",
+      "gate_id": "G1",
+      "gate_name": "InheritedBookkeepingTrue",
+      "next_required_input": "record inherited Sprint92 bookkeeping as true",
+      "passed": true,
+      "status": "TRUE_BOOKKEEPING_RECORDED"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "false_or_not_exported",
+      "field_name": "dangerShellDissipationDominatesInfluxClosed",
+      "gate_id": "G2",
+      "gate_name": "AnalyticGateFalse:dangerShellDissipationDominatesInfluxClosed",
+      "next_required_input": "keep analytic gates false until a non-circular proof is supplied",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "false_or_not_exported",
+      "field_name": "pointwiseTailFromLocalDissipationClosed",
+      "gate_id": "G3",
+      "gate_name": "AnalyticGateFalse:pointwiseTailFromLocalDissipationClosed",
+      "next_required_input": "keep analytic gates false until a non-circular proof is supplied",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "false_or_not_exported",
+      "field_name": "highHighDominanceClosed",
+      "gate_id": "G4",
+      "gate_name": "AnalyticGateFalse:highHighDominanceClosed",
+      "next_required_input": "keep analytic gates false until a non-circular proof is supplied",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "false_or_not_exported",
+      "field_name": "independentCoefficientBudgetClosed",
+      "gate_id": "G5",
+      "gate_name": "AnalyticGateFalse:independentCoefficientBudgetClosed",
+      "next_required_input": "keep analytic gates false until a non-circular proof is supplied",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "false_or_not_exported",
+      "field_name": "dominanceWithPointwiseTailAndIndependentCoefficientClosed",
+      "gate_id": "G6",
+      "gate_name": "AnalyticGateFalse:dominanceWithPointwiseTailAndIndependentCoefficientClosed",
+      "next_required_input": "keep analytic gates false until a non-circular proof is supplied",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": "not_exported",
+      "expected_value": "false_or_not_exported",
+      "field_name": "dominancePointwiseCoefficientClosed",
+      "gate_id": "G7",
+      "gate_name": "AnalyticGateFalse:dominancePointwiseCoefficientClosed",
+      "next_required_input": "keep analytic gates false until a non-circular proof is supplied",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": "not_exported",
+      "expected_value": "false_or_not_exported",
+      "field_name": "analyticDominanceGateClosed",
+      "gate_id": "G8",
+      "gate_name": "AnalyticGateFalse:analyticDominanceGateClosed",
+      "next_required_input": "keep analytic gates false until a non-circular proof is supplied",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": "not_exported",
+      "expected_value": "false_or_not_exported",
+      "field_name": "pointwiseIndependentCoefficientClosed",
+      "gate_id": "G9",
+      "gate_name": "AnalyticGateFalse:pointwiseIndependentCoefficientClosed",
+      "next_required_input": "keep analytic gates false until a non-circular proof is supplied",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "false_or_not_exported",
+      "field_name": "clayNavierStokesPromoted",
+      "gate_id": "G10",
+      "gate_name": "ClayFalse:clayNavierStokesPromoted",
+      "next_required_input": "keep Clay promotion false",
+      "passed": true,
+      "status": "FALSE_NO_CLAY_PROMOTION"
+    },
+    {
+      "actual_value": "DominanceWithPointwiseTailAndIndependentCoefficient",
+      "expected_value": "DominanceWithPointwiseTailAndIndependentCoefficient",
+      "field_name": "required_residual_gate",
+      "gate_id": "G11",
+      "gate_name": "ResidualGateExact",
+      "next_required_input": "record residual gate exactly DominanceWithPointwiseTailAndIndependentCoefficient",
+      "passed": true,
+      "status": "EXACT_RESIDUAL_GATE_RECORDED"
+    },
+    {
+      "actual_value": 0,
+      "expected_value": 0,
+      "field_name": "forbidden_terms",
+      "gate_id": "G12",
+      "gate_name": "NoForbiddenMarkers",
+      "next_required_input": "remove forbidden markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "gate_table": "ns_sprint93_dominance_pointwise_coefficient_gate_table.csv",
+  "high_high_anchor_phrase": "high-high",
+  "inherited_bookkeeping_true": true,
+  "open_obligations": [
+    "preserve inherited Sprint92 bookkeeping as true",
+    "keep all dominance, pointwise-tail, independent-coefficient, and analytic closure gates false",
+    "record residual gate exactly DominanceWithPointwiseTailAndIndependentCoefficient",
+    "keep Clay Navier-Stokes promotion false"
+  ],
+  "receipt_path": "DASHI/Physics/Closure/NSSprint93DominancePointwiseCoefficientLedger.agda",
+  "report": "ns_sprint93_dominance_pointwise_coefficient_audit.md",
+  "required_residual_gate": "DominanceWithPointwiseTailAndIndependentCoefficient",
+  "residual_gate_exactly_recorded": "DominanceWithPointwiseTailAndIndependentCoefficient",
+  "residual_gate_present": true,
+  "route_decision": "open",
+  "rows_json": "ns_sprint93_dominance_pointwise_coefficient_audit_rows.json",
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint93DominancePointwiseCoefficientLedger.agda",
+      "present_in_repo": true,
+      "required_anchors": "NSSprint93; Sprint93; DominanceWithPointwiseTailAndIndependentCoefficient; canonical; Sprint92; inherited; Bookkeeping; dangerShellDissipationDominatesInfluxClosed; pointwiseTailFromLocalDissipationClosed; highHighDominanceClosed; independentCoefficientBudgetClosed; clayNavierStokesPromoted",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "NSSprint93 dominance pointwise coefficient receipt"
+    }
+  ],
+  "source_table": "ns_sprint93_dominance_pointwise_coefficient_source_table.csv"
+}

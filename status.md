@@ -1,3 +1,125 @@
+# 2026-06-06 Sprint 133 submission-readiness/docket normalization round
+
+- Added checked Sprint 133 modules:
+  `YMSprint133SubmissionReadinessIndex` and
+  `YMSprint133ExternalReviewDocketBoundary`.
+- Encoded a canonical submission-readiness index over the Sprint131 packet
+  manifest and Sprint132 red-team/reproducibility ledgers.  Internal packet
+  readiness is recorded true; external governance and acceptance remain absent
+  and `clayYangMillsPromoted=false`.
+- Encoded the external review docket boundary for qualifying publication,
+  peer/community review, two-year waiting interval, CMI decision, acceptance
+  token, and human submission handoff.  Every external gate remains absent in
+  repo authority.
+- Added `scripts/ym_sprint133_submission_readiness_index.py` and
+  `scripts/ym_sprint133_external_review_docket.py`, generated
+  `outputs/ym_sprint133_submission_readiness_index/` and
+  `outputs/ym_sprint133_external_review_docket/`, and added focused Sprint 133
+  tests for artifact hashes, required evidence, external docket rows,
+  no-promotion, no incomplete surfaces, and `Everything.agda` imports.
+
+# 2026-06-06 Sprint 132 red-team/reproducibility hardening round
+
+- Added checked Sprint 132 modules:
+  `YMSprint132RedTeamObjectionResolutionLedger` and
+  `YMSprint132ReproducibilityBoundaryLedger`.
+- Encoded concrete red-team objection resolution rows for the circular
+  mass-gap route, common carrier, Mosco/strong-resolvent path, log generator,
+  transfer lower bound, OS-to-Wightman route, Poincare/spectrum consumers,
+  compact simple `G`, and final external Clay/CMI governance boundary.
+- Encoded reproducibility rows for Agda verification commands, generated
+  output surfaces, prohibited-marker checks, no-promotion checks, and the
+  external acceptance boundary.  Internal reproducibility is recorded true;
+  external governance remains false and `clayYangMillsPromoted=false`.
+- Added `scripts/ym_sprint132_submission_bundle_index.py` and
+  `scripts/ym_sprint132_red_team_audit.py`, generated
+  `outputs/ym_sprint132_submission_bundle_index/` and
+  `outputs/ym_sprint132_red_team_audit/`, and added focused Sprint 132 tests
+  for bundle hashes, concrete red-team rows, no incomplete surfaces, and
+  `Everything.agda` imports.
+
+# 2026-06-06 Sprint 131 submission packet hardening round
+
+- Added checked Sprint 131 modules:
+  `YMSprint131SubmissionPacketManifest` and
+  `YMSprint131ExternalGovernanceBoundary`.
+- Encoded the Sprint128-130 evidence packet manifest as concrete imported
+  receipt rows with internal candidate/submission readiness true,
+  external acceptance absent, and `clayYangMillsPromoted=false`.
+- Encoded the external Clay/CMI governance boundary: publication, review,
+  waiting interval, community validation, and CMI decision gates are all
+  recorded absent inside the repository, so promotion remains false.
+- Added `scripts/ym_sprint131_submission_packet_builder.py` and
+  `scripts/ym_sprint131_final_claim_audit.py`, generated
+  `outputs/ym_sprint131_submission_packet/` and
+  `outputs/ym_sprint131_final_claim_audit/`, and added focused Sprint 131
+  tests for packet generation, final-claim auditing, no incomplete surfaces,
+  and `Everything.agda` imports.
+
+# 2026-06-06 Sprint 130 OS1/FIN internal readiness round
+
+- Added checked Sprint 130 modules:
+  `YMSprint130OSToWightmanDistributionsClosure`,
+  `YMSprint130PoincareSpectrumWightmanClosure`, and
+  `YMSprint130FinalClayAssemblyLedger`.
+- Encoded OS1 Wightman-distributions closure from the Sprint126 OS route
+  context, Sprint128 Poincare/spectrum closure, and Sprint129 spectral-gap
+  transport.
+- Encoded the OS1-facing Poincare covariance, Wightman spectrum-condition,
+  and SC2 spectral-transport consumers as concrete Sprint130 rows.
+- Encoded final internal candidate and internal submission-packet readiness
+  from imported Sprint128, Sprint129, and Sprint130 gates.  The external Clay
+  acceptance token remains absent and `clayYangMillsPromoted=false`.
+- Added `scripts/ym_sprint130_os_fin_audit.py`, generated
+  `outputs/ym_sprint130_os_fin_audit/`, and added focused Sprint130 tests.
+
+# 2026-06-06 Sprint 129 Mosco/spectral route closure round
+
+- Added checked Sprint 129 modules:
+  `YMSprint129MoscoLiminfStrongResolventClosure`,
+  `YMSprint129MoscoRecoveryNoPollutionClosure`,
+  `YMSprint129SpectralGapTransportClosure`, and
+  `YMSprint129MoscoSpectralRouteLedger`.
+- Encoded MC1 by the supplied Kuwae-Shioya variable-Hilbert framework plus
+  the Symanzik `O(a)` lattice-artifact bound adapted to the Balaban
+  anisotropic setup.  The local MC1, Mosco-liminf, strong-resolvent,
+  Symanzik-bound, and Kuwae-Shioya flags are true.
+- Encoded MC2 recovery limsup, MC3 uniform form lower-bound feed-through, and
+  MC4 no bottom-spectrum pollution as concrete Sprint 129 closure records.
+- Encoded SC2 spectral-gap transport under Mosco from Sprint 128 SC1/SC3 and
+  Sprint 129 Mosco closure rows.  The continuum Hamiltonian spectral-gap and
+  continuum mass-gap transport flags are true locally.
+- Added `scripts/ym_sprint129_mosco_spectral_audit.py`, generated
+  `outputs/ym_sprint129_mosco_spectral_audit/`, and added focused Sprint 129
+  tests.  The Sprint 129 audit closes `MC1`, `MC2`, `MC3`, `MC4`, and `SC2`
+  locally, while the route remains `fail-closed` because `OS1` and `FIN` are
+  not closed in this round.  `clayYangMillsPromoted` remains false.
+
+# 2026-06-06 Sprint 128 supplied-math closure candidate round
+
+- Added checked Sprint 128 modules:
+  `YMSprint128WilsonCarrierConstruction`,
+  `YMSprint128CompactnessAndLogGeneratorClosure`,
+  `YMSprint128TransferLowerBoundClosure`, and
+  `YMSprint128SymmetryAndGroupClosure`.
+- Encoded the user-supplied CC1 Wilson link-log / parallel-transport carrier
+  construction as concrete evidence rows with local CC1 candidate closure flags
+  true and `clayYangMillsPromoted=false`.
+- Encoded WC1 by Banach-Alaoglu/diagonal extraction on the CC1 physical carrier
+  and SC1 by spectral-theorem/log-functional-calculus closure for the positive
+  transfer contraction.
+- Encoded SC3 as the cutoff transfer lower bound
+  `gap(T(a)) >= (1/4) * m_eff(a) * a` from spectral calculus plus the WC3
+  polymer two-point Hamiltonian lower bound, with non-circularity recorded.
+- Encoded SY1/SO4 restoration and GG1 compact-simple-group coverage as
+  Sprint 128 candidate closures with concrete symmetry and parameter-table
+  evidence rows.
+- Added `scripts/ym_sprint128_closure_audit.py`, generated
+  `outputs/ym_sprint128_closure_audit/`, and added focused Sprint 128 tests.
+  The Sprint 128 audit closes `CC1`, `WC1`, `SC1`, `SC3`, `SY1`, and `GG1`
+  locally, but remains `fail-closed` because `MC1`, `SC2`, `OS1`, and `FIN`
+  are not closed in this round.
+
 # 2026-06-06 Sprint 127 final submission-readiness fail-closed round
 
 - Added checked Sprint 127 modules:
@@ -733,6 +855,120 @@
   from KStar admissibility alone is not available without hidden `H^1`,
   `H^{1/2}`, Serrin, BKM, or stronger regularity input.  `EpsilonBelowOneCoefficient`,
   `HminusHalfHighHighDefectTheorem`, and Clay/NS promotion remain false/open.
+- Added `NSSprint87DangerShellSupFactorizationReceipt` plus two focused audits.
+  Sprint 87 records the supplied dyadic sup-factorization, the shell-sup
+  control by the `H^1` tail surface, and the formal `H^{-1/2}` high-high
+  reduction as closed receipt steps.  It deliberately leaves
+  `DangerShellAbsorptionCondition` false: the remaining scalar gate is
+  `(K*)^-1/2 * ||P_{>K*}u||_{H^1} <= epsilon * nu`, to be proved from
+  non-circular danger-shell inputs rather than hidden Serrin/BKM/continuation
+  regularity.  The scaling audit checks `K*(nu)=nu^-1`, `nu^-4/3`, and
+  `nu^-2`; unconditional absorption and Clay/NS promotion remain false.
+- Added `NSSprint88DangerShellH1TailSmallnessDecisionReceipt` plus the
+  Sprint 88 decision audit and tail-source classifier.  Sprint 88 records the
+  exact residual source gate for the scalar absorption condition:
+  `PointwiseH1TailWithIndependentEpsilonCoefficient`.  `KStar` admissibility
+  alone, Leray energy alone, time-integrated dissipation alone, the named local
+  mechanism target, and critical coefficient bookkeeping all fail closed as
+  current sources because none supplies both pointwise `H^1` tail smallness
+  and an independent epsilon coefficient.  `nonCircularDangerShellH1TailSmallnessClosed`,
+  `DangerShellAbsorptionCondition`, unconditional absorption, and Clay/NS
+  promotion remain false.
+- Added `NSSprint89PointwiseH1TailCandidateMechanismReceipt` plus pointwise
+  mechanism and circularity-matrix audits.  Sprint 89 records the next exact
+  NS gate as `PointwiseH1TailWithIndependentEpsilonCoefficient` and splits it
+  into local enstrophy/danger-shell dissipation, time-integrated-to-pointwise
+  conversion, independent epsilon coefficient, and no-self-use-of-absorption
+  sub-mechanisms.  The first three remain open, the no-self-use governance
+  constraint is enforced, and the circularity matrix rejects routes that use
+  `H^1` continuation, Serrin, BKM, target absorption, theta preservation, Clay
+  regularity, or the desired conclusion.  `pointwiseH1TailWithIndependentEpsilonCoefficientClosed`,
+  `DangerShellAbsorptionCondition`, and Clay/NS promotion remain false.
+- Added `NSSprint90LocalEnstrophyDangerShellReductionReceipt` plus local
+  enstrophy and epsilon-budget audits.  Sprint 90 selects the local-enstrophy
+  danger-shell route and reduces the Sprint 89 gate to
+  `LocalizedEnstrophyFluxIdentity`, `DangerShellDissipationDominatesInflux`,
+  `PointwiseTailFromLocalDissipation`, and `IndependentCoefficientBudget`,
+  while closing only the no-forbidden-dependency-reuse governance gate.  The
+  epsilon-budget solver checks `K*(nu)=nu^-1`, `nu^-4/3`, and `nu^-2` against
+  Leray-only, time-integrated-only, local-enstrophy-candidate, and required
+  independent-coefficient laws; it fails closed because no supplied route
+  provides both pointwise `H^1` tail smallness and an independent epsilon
+  coefficient.  Clay/NS promotion remains false.
+- Added `NSSprint91LocalizedFluxIdentityAndCoefficientBudget` plus localized
+  flux identity and coefficient-independence audits.  Sprint 91 imports the
+  existing full fixed-`K` Littlewood-Paley identity as bookkeeping for the
+  localized flux identity gate and records adjacent leakage budget evidence
+  as conditional only.  It deliberately leaves moving `K*(t)` localization,
+  danger-shell dissipation dominance, pointwise tail extraction, high-high
+  dominance, and independent coefficient budgeting open.  The coefficient
+  audit rejects fixed-`K` identity, adjacent leakage, local enstrophy, scalar
+  epsilon solving, and target absorption as complete sources because no
+  allowed non-circular source supplies both pointwise `H^1` tail smallness and
+  an independent epsilon coefficient.  Clay/NS promotion remains false.
+- Added `NSSprint92MovingKStarLocalizationBoundary` plus moving-boundary and
+  high-high dominance budget audits.  Sprint 92 separates the honest
+  fixed-danger-time/frozen-`K` reuse of the Sprint 91 fixed-`K` identity from
+  the still-open moving `K*(t)` localization theorem.  The moving-boundary
+  audit confirms frozen-`K` bookkeeping only; the high-high dominance audit
+  rejects all current sources as complete because no allowed non-circular
+  source closes high-high/danger-shell dominance while also supplying a
+  pointwise `H^1` tail and an independent coefficient.  Clay/NS promotion
+  remains false.
+- Added `NSSprint93DominancePointwiseCoefficientLedger` plus dominance-ledger
+  and candidate-source matrix audits.  Sprint 93 records the exact residual
+  gate `DominanceWithPointwiseTailAndIndependentCoefficient` and splits it
+  into three evidence slots: danger-shell dominance, pointwise `H^1` tail
+  extraction, and independent coefficient budgeting.  The candidate matrix
+  checks Sprint 87-92 and local-enstrophy/dissipation surfaces under the
+  same-source rule and rejects all current sources as incomplete or
+  forbidden.  The moving boundary, dominance, pointwise, independent
+  coefficient, high-high dominance, combined residual, and Clay/NS promotion
+  gates remain false.
+- Added `NSSprint94KStarForkObstructionAndConditionalRegularity` plus K-star
+  fork and scaling audits.  Sprint 94 records the supplied calculation that
+  high-high absorption requires `K*(t) >= C/(epsilon*nu)`, while Leray-class
+  control supplies no general-data lower bound of that form.  Combining the
+  available bounds reduces the route to a small-data regime, so the
+  general-data Clay regularity lane is obstructed rather than merely missing a
+  receipt.  The repo now keeps Option A blocked, Option B blowup construction
+  open, and Option C closed only as the conditional criterion
+  `GlobalRegularityUnderKStarLowerBound` under `KStarLowerBoundHypothesis`.
+  Clay/NS promotion remains false.
+- Added `NSSprint95OptionBBlowupFeasibilityLedger` plus Option B feasibility
+  and K-star-collapse source-matrix audits.  Sprint 95 follows the only
+  remaining Clay-eligible NS branch after Sprint 94: a blowup construction.
+  It records the exact same-source evidence package needed for Option B:
+  finite-time `K*(t)` collapse, compatibility with smooth finite-energy/Leray
+  data, exclusion of the Sprint 94 conditional K-star lower bound along the
+  candidate trajectory, and extraction of a finite-time singularity without
+  assuming BKM/Serrin failure or the desired blowup conclusion.  The current
+  source matrix accepts zero sources, so Option B remains open,
+  `blowupConstructionClosed=false`, and Clay/NS promotion remains false.
+- Added `NSSprint96KStarCollapseMechanismConstraints` plus constraint and
+  scaling-sanity audits for the finite-time `K*(t)` collapse branch.  Sprint
+  96 closes only the constraint ledger for Option B: any candidate must supply
+  a low-mode energy-concentration mechanism, a way to overcome viscous damping
+  while respecting Leray energy, scaling-compatible self-similarity, and a
+  singularity-extraction bridge that does not rely on failing the Sprint 94
+  conditional criterion.  The deterministic scaling ledger rejects the current
+  constant, algebraic, logarithmic, and oscillatory candidate laws as
+  incomplete or forbidden-dependent.  The route remains fail-closed:
+  `kStarCollapseMechanismClosed=false`, accepted collapse sources remain zero,
+  and Clay/NS promotion remains false.
+- Added `NSSprint97KStarCollapseSourceBarrier` plus source-barrier and
+  collapse-mechanism classifier audits.  Sprint 97 tests the current Option B
+  mechanism families under a same-source rule: constant lower bound, pure
+  algebraic collapse, logarithmic collapse, oscillatory ansatz, imposed
+  self-similarity, and an energy-transfer ODE sketch are all rejected as
+  incomplete or forbidden-dependent.  The exact analytic objects still needed
+  are `LowModeEnergyConcentrationDynamics`,
+  `ViscousDampingDefeatEstimate`, `LerayCompatibleCollapseTrajectory`, and
+  `SingularityExtractionWithoutBKMOrSerrin`.  The source-barrier ledger is
+  closed only as a negative diagnostic:
+  `sameSourceCollapseMechanismAvailable=false`,
+  `finiteTimeKStarCollapseClosed=false`, accepted sources remain zero, and
+  Clay/NS promotion remains false.
 
 # 2026-06-05 NS fastest Clay path route selection
 
@@ -5915,3 +6151,330 @@ unless a line explicitly says it describes the live monitor surface.
   modeling grammar.  `james`, `James Michael`, no-title execution traces, and
   hygiene threads are classified as noise/provenance unless a future narrower
   query extracts a specific artifact.  No new theorem promotion follows.
+
+- 2026-06-07: NS Sprint 98 low-mode concentration route audit complete.
+  Added `DASHI.Physics.Closure.NSSprint98LowModeEnergyConcentrationDynamics`,
+  wired into `DASHI.Everything`, plus deterministic audit/classifier scripts
+  and focused tests.  The receipt records the first remaining Option B object
+  from Sprint 97 as a fail-closed low-mode dynamics ledger:
+  `lowModeEnergyConcentrationDynamicsLedgerClosed = true`,
+  `lowModeEnergyConcentrationDynamicsClosed = false`,
+  `finiteTimeKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The exact recorded missing analytic
+  objects are `QuantitativeLowModeFluxLowerBound`,
+  `ResidenceTimeAgainstViscosity`, `CoherentInverseCascadeMechanism`, and
+  `NonCircularKStarForcing`.  The low-mode flux-budget classifier rejects
+  direct forcing, inverse-cascade ansatz, shell-local transfer,
+  pressure-mediated transfer, vortex-stretching concentration, and an
+  energy-transfer ODE sketch; accepted source count remains zero.  No
+  Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 99 residence-time against viscosity audit complete.
+  Added `DASHI.Physics.Closure.NSSprint99ResidenceTimeAgainstViscosity`,
+  wired into `DASHI.Everything`, plus deterministic residence-time audit and
+  viscous-residence classifier scripts with focused tests.  The receipt
+  consumes the Sprint 98 `ResidenceTimeAgainstViscosity` blocker and records
+  the next precise Option B deficit as fail-closed:
+  `lowModeResidenceTimeLedgerClosed = true`,
+  `residenceTimeAgainstViscosityClosed = false`,
+  `finiteTimeKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The recorded missing analytic objects
+  are `LowModeResidenceWindow`, `ViscousDampingDefeatEstimate`,
+  `PersistentLowModeEnergyReservoir`, `TimeIntegratedFluxSurplus`, and
+  `LerayCompatibleResidenceTrajectory`.  The classifier rejects persistent
+  reservoir, burst-window, inverse-cascade residence, pressure-trapping,
+  vortex-stretching residence, and imposed-residence-interval mechanisms;
+  accepted source count remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 100 time-integrated flux surplus audit complete.
+  Added `DASHI.Physics.Closure.NSSprint100TimeIntegratedFluxSurplus`, wired
+  into `DASHI.Everything`, plus deterministic time-integrated flux audit and
+  flux-surplus classifier scripts with focused tests.  The receipt consumes
+  the Sprint 99 `TimeIntegratedFluxSurplus` blocker and records the next
+  precise Option B deficit as fail-closed:
+  `timeIntegratedFluxSurplusLedgerClosed = true`,
+  `timeIntegratedFluxSurplusClosed = false`,
+  `residenceTimeAgainstViscosityClosed = false`,
+  `finiteTimeKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The recorded missing analytic objects
+  are `SignedLowModeFluxLowerBound`, `FluxDissipationBalance`,
+  `PositiveSurplusWindow`, `LerayEnergyFluxBudget`, and
+  `NonCircularSurplusSource`.  The classifier rejects signed triadic
+  transfer, shell-local flux surplus, pressure-nonlocal flux,
+  burst-integrated surplus, inverse-cascade surplus, and imposed-surplus-window
+  mechanisms; accepted source count remains zero.  No Navier-Stokes Clay
+  promotion follows.
+
+- 2026-06-07: NS Sprint 101 signed low-mode flux lower-bound audit complete.
+  Added `DASHI.Physics.Closure.NSSprint101SignedLowModeFluxLowerBound`, wired
+  into `DASHI.Everything`, plus deterministic signed-flux audit and flux-sign
+  source classifier scripts with focused tests.  The receipt consumes the
+  Sprint 100 `SignedLowModeFluxLowerBound` blocker and records the next
+  precise Option B deficit as fail-closed:
+  `signedLowModeFluxLowerBoundLedgerClosed = true`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `timeIntegratedFluxSurplusClosed = false`,
+  `finiteTimeKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The recorded missing analytic objects
+  are `TriadicSignCoherence`, `LowModeProjectionSignControl`,
+  `CancellationDefectBound`, `PressureTransportSignAccounting`, and
+  `NonCircularFluxSignSource`.  The classifier rejects coherent triad
+  alignment, shell-local sign bias, pressure-projection sign,
+  helical-alignment sign, intermittent-burst sign, and imposed-flux-orientation
+  mechanisms; accepted source count remains zero.  No Navier-Stokes Clay
+  promotion follows.
+
+- 2026-06-07: NS Sprint 102 strain-compression reduction audit complete.
+  Added `DASHI.Physics.Closure.NSSprint102StrainCompressionReduction`, wired
+  into `DASHI.Everything`, plus deterministic strain-compression reduction
+  audit and strain-geometry classifier scripts with focused tests.  The
+  receipt consumes the Sprint 101 five-gate sign-accounting surface and records
+  the structural simplification as closed:
+  `llToLowChannelVanishesClosed = true`,
+  `lhToLowChannelVanishesClosed = true`,
+  `hhToLowStrainContractionIdentityClosed = true`, and
+  `fiveGateCollapseToStrainCompressionClosed = true`.  The single remaining
+  irreducible Option B gate is
+  `StrainCompressionAtHighFrequencyConcentrationPoints`, with
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteTimeKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects vortex-core
+  compression, strain-energy-density alignment, spectral-localization geometry,
+  pressure-mediated alignment, and imposed-compression-locus mechanisms;
+  accepted source count remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 103 strain-compression geometry gate audit complete.
+  Added `DASHI.Physics.Closure.NSSprint103StrainCompressionGeometryGate`, wired
+  into `DASHI.Everything`, plus deterministic geometry-gate audit and
+  compression-locus classifier scripts with focused tests.  The receipt
+  consumes the Sprint 102 `StrainCompressionAtHighFrequencyConcentrationPoints`
+  gate and decomposes it into five concrete subgates:
+  `HighFrequencyConcentrationMeasure`, `LowModeCompressiveStrainLocus`,
+  `EnergyStrainEigenframeAlignment`, `ConcentrationCompressionColocation`, and
+  `NonCircularGeometricCorrelationSource`.  The decomposition ledger is closed
+  with `strainCompressionGeometryGateLedgerClosed = true` and
+  `strainCompressionGeometryGateDecomposed = true`, while all five analytic
+  subgates remain false, `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects measured
+  concentration locus, low-strain eigenvalue barrier, eigenframe-alignment
+  transport, vortex-tube self-alignment, and imposed-colocation mechanisms;
+  accepted source count remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 104 high-frequency concentration measure audit
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint104HighFrequencyConcentrationMeasure`, wired
+  into `DASHI.Everything`, plus deterministic measure audit and concentration
+  measure classifier scripts with focused tests.  The receipt consumes the
+  Sprint 103 `HighFrequencyConcentrationMeasure` gate and decomposes it into
+  five concrete subgates: `DyadicShellEnergyDensity`,
+  `ConcentrationThresholdSelection`, `ConcentrationLocusMeasurability`,
+  `ScaleLocalizedTightness`, and `NonCircularConcentrationMeasureSource`.
+  The measure-decomposition ledger is closed with
+  `highFrequencyConcentrationMeasureDecompositionLedgerClosed = true`, while
+  all five analytic measure subgates remain false,
+  `highFrequencyConcentrationMeasureClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects shell-energy
+  density threshold, maximal-function locus, defect-measure extraction,
+  intermittency-profile measure, and imposed-concentration-locus mechanisms;
+  accepted source count remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 105 dyadic shell energy-density audit complete.  Added
+  `DASHI.Physics.Closure.NSSprint105DyadicShellEnergyDensity`, wired into
+  `DASHI.Everything`, plus deterministic dyadic-density audit and shell-density
+  source classifier scripts with focused tests.  The receipt consumes the
+  Sprint 104 `DyadicShellEnergyDensity` blocker and decomposes it into five
+  concrete subgates: `LittlewoodPaleyShellProjector`,
+  `LocalEnergyDensityDefinition`, `LerayClassIntegrability`,
+  `ShellEnergyLocalizationBound`, and `NonCircularDensityConstruction`.  The
+  decomposition ledger is closed with
+  `dyadicShellEnergyDensityDecompositionLedgerClosed = true`, while all five
+  analytic density subgates remain false,
+  `dyadicShellEnergyDensityClosed = false`,
+  `highFrequencyConcentrationMeasureClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects LP-projector
+  density, mollified local-energy density, dyadic square-function density,
+  weak Leray density extraction, and imposed shell-density mechanisms;
+  accepted source count remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 106 Littlewood-Paley shell-projector audit complete.
+  Added `DASHI.Physics.Closure.NSSprint106LittlewoodPaleyShellProjector`,
+  wired into `DASHI.Everything`, plus deterministic projector audit and
+  projector-source classifier scripts with focused tests.  The receipt
+  consumes the Sprint 105 `LittlewoodPaleyShellProjector` blocker and
+  decomposes it into five concrete subgates:
+  `SmoothDyadicCutoffPartition`, `FourierMultiplierBoundedness`,
+  `LerayCompatibleProjection`, `DivergenceFreeProjectionCommutation`, and
+  `NonCircularProjectorConstruction`.  The decomposition ledger is closed with
+  `littlewoodPaleyShellProjectorDecompositionLedgerClosed = true`, while all
+  five analytic projector subgates remain false,
+  `littlewoodPaleyShellProjectorClosed = false`,
+  `dyadicShellEnergyDensityClosed = false`,
+  `highFrequencyConcentrationMeasureClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects smooth dyadic
+  cutoff, sharp frequency annulus, heat semigroup projector, Leray-LP composed
+  projector, and imposed active-shell projector mechanisms; accepted source
+  count remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 107 smooth dyadic cutoff-partition audit complete.
+  Added `DASHI.Physics.Closure.NSSprint107SmoothDyadicCutoffPartition`,
+  wired into `DASHI.Everything`, plus deterministic cutoff-partition audit and
+  cutoff-source classifier scripts with focused tests.  The receipt consumes
+  the Sprint 106 `SmoothDyadicCutoffPartition` blocker and decomposes it into
+  five concrete subgates: `RadialBumpFunctionConstruction`,
+  `DyadicSupportAnnulusCover`, `PartitionOfUnityIdentity`,
+  `SmoothOverlapMultiplicityBound`, and `NonCircularCutoffNormalization`.
+  The decomposition ledger is closed with
+  `smoothDyadicCutoffPartitionDecompositionLedgerClosed = true`, while all
+  five analytic cutoff subgates remain false,
+  `smoothDyadicCutoffPartitionClosed = false`,
+  `littlewoodPaleyShellProjectorClosed = false`,
+  `dyadicShellEnergyDensityClosed = false`,
+  `highFrequencyConcentrationMeasureClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects standard radial
+  bump partition, compact annulus partition, heat-kernel scale partition,
+  sharp-to-smooth mollified partition, and imposed cutoff partition sources;
+  accepted source count remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 108 radial bump-function construction audit complete.
+  Added `DASHI.Physics.Closure.NSSprint108RadialBumpFunctionConstruction`,
+  wired into `DASHI.Everything`, plus deterministic radial-bump audit and
+  radial-bump source classifier scripts with focused tests.  The receipt
+  consumes the Sprint 107 `RadialBumpFunctionConstruction` blocker and
+  decomposes it into five concrete subgates: `SmoothCompactSupportWitness`,
+  `RadialProfileDefinition`, `NonnegativeBumpWitness`,
+  `AnnularDifferenceBump`, and `NonCircularRadialBumpSource`.  The
+  decomposition ledger is closed with
+  `radialBumpFunctionConstructionDecompositionLedgerClosed = true`, while all
+  five analytic bump subgates remain false,
+  `radialBumpFunctionConstructionClosed = false`,
+  `smoothDyadicCutoffPartitionClosed = false`,
+  `littlewoodPaleyShellProjectorClosed = false`,
+  `dyadicShellEnergyDensityClosed = false`,
+  `highFrequencyConcentrationMeasureClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects standard exp
+  cutoff bump, mollified ball indicator, Gaussian truncation bump, imported
+  partition bump, and imposed radial profile sources; accepted source count
+  remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 109 smooth compact-support witness audit complete.
+  Added `DASHI.Physics.Closure.NSSprint109SmoothCompactSupportWitness`,
+  wired into `DASHI.Everything`, plus deterministic smooth compact-support
+  audit and compact-support source classifier scripts with focused tests.  The
+  receipt consumes the Sprint 108 `SmoothCompactSupportWitness` blocker and
+  decomposes it into five concrete subgates: `BaseExpSmoothFunction`,
+  `BoundaryFlatnessAtUnitRadius`, `CompactSupportCutoffDefinition`,
+  `SmoothnessAcrossSupportBoundary`, and
+  `NonCircularCompactSupportSource`.  The decomposition ledger is closed with
+  `smoothCompactSupportWitnessDecompositionLedgerClosed = true`, while all
+  five analytic compact-support subgates remain false,
+  `smoothCompactSupportWitnessClosed = false`,
+  `radialBumpFunctionConstructionClosed = false`,
+  `smoothDyadicCutoffPartitionClosed = false`,
+  `littlewoodPaleyShellProjectorClosed = false`,
+  `dyadicShellEnergyDensityClosed = false`,
+  `highFrequencyConcentrationMeasureClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects standard exp
+  negative-inverse bump, piecewise polynomial cutoff, mollified indicator
+  bump, imported Schwartz cutoff, and imposed compact-support witness sources;
+  accepted source count remains zero.  No Navier-Stokes Clay promotion follows.
+
+- 2026-06-07: NS Sprint 110 base exp smooth-function audit complete.
+  Added `DASHI.Physics.Closure.NSSprint110BaseExpSmoothFunction`, wired into
+  `DASHI.Everything`, plus deterministic base-exp audit and base-exp source
+  classifier scripts with focused tests.  The receipt consumes the Sprint 109
+  `BaseExpSmoothFunction` blocker and decomposes it into five concrete
+  subgates: `ExpNegativeInverseSeedDefinition`,
+  `SmoothnessOnPositiveRadiusDomain`,
+  `DerivativeHierarchyPolynomialOverPower`,
+  `PositiveInteriorNonzeroWitness`, and `NonCircularBaseExpSource`.  The
+  decomposition ledger is closed with
+  `baseExpSmoothFunctionDecompositionLedgerClosed = true`, while all five
+  analytic base-exp subgates remain false,
+  `baseExpSmoothFunctionClosed = false`,
+  `boundaryFlatnessAtUnitRadiusClosed = false`,
+  `compactSupportCutoffDefinitionClosed = false`,
+  `smoothnessAcrossSupportBoundaryClosed = false`,
+  `nonCircularCompactSupportSourceClosed = false`,
+  `smoothCompactSupportWitnessClosed = false`,
+  `radialBumpFunctionConstructionClosed = false`,
+  `smoothDyadicCutoffPartitionClosed = false`,
+  `littlewoodPaleyShellProjectorClosed = false`,
+  `dyadicShellEnergyDensityClosed = false`,
+  `highFrequencyConcentrationMeasureClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects classical exp
+  negative-inverse seed, reciprocal-power exp seed, patched exp seed with
+  declared derivatives, imported smooth bump seed, and imposed base-exp smooth
+  function sources; accepted source count remains zero.  No Navier-Stokes Clay
+  promotion follows.
+
+- 2026-06-07: NS Sprint 111 proof-drift correction and strain refocus
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint111LPGrafakosInfrastructureAndStrainRefocus`,
+  wired into `DASHI.Everything`, plus deterministic LP-refocus audit and
+  strain-compression candidate classifier scripts with focused tests.  This
+  receipt stops the Sprint 107-110 LP micro-decomposition path by recording
+  the standard smooth bump and Littlewood-Paley infrastructure as scoped
+  external authority: Rudin Exercise 8.1 for the smooth bump seed and
+  Grafakos Classical Fourier Analysis Theorem 6.1.7 for the smooth dyadic
+  partition.  The LP authority gates
+  `lpGrafakosInfrastructureReceiptClosed`,
+  `LittlewoodPaleyInfrastructureConstructionClosed`,
+  `RudinSmoothBumpAuthorityClosed`, `GrafakosDyadicPartitionAuthorityClosed`,
+  and `LittlewoodPaleyBumpInfrastructureClosed` are closed true.  The
+  Clay-relevant
+  gate is explicitly refocused to
+  `StrainCompressionAtHighFrequencyConcentrationPoints`, which remains false
+  together with `lowModeCompressiveStrainLocusClosed = false`,
+  `energyStrainEigenframeAlignmentClosed = false`,
+  `concentrationCompressionColocationClosed = false`,
+  `nonCircularGeometricCorrelationSourceClosed = false`,
+  `signedLowModeFluxLowerBoundClosed = false`,
+  `finiteKStarCollapseClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier rejects axisymmetric
+  vortex ring data, anti-parallel vortex tube pair, strained shear layer
+  packet, numerically observed vortex stretching, and imposed colocation
+  ansatz sources; accepted source count remains zero.  No Navier-Stokes Clay
+  promotion follows.
+
+- 2026-06-07: NS Sprint 112 thick-core Crow dominance regime audit
+  complete.  Added
+  `DASHI.Physics.Closure.NSSprint112ThickCoreCrowDominanceRegime`, wired
+  into `DASHI.Everything`, plus deterministic thick-core Crow dominance audit
+  and Crow-regime candidate classifier scripts with focused tests.  This
+  receipt records the supplied initial-time thick-core rate comparison:
+  `thickCoreCrowDominanceRegimeClosed = true` for the initial Crow-over-
+  elliptic comparison only, under the `delta / b >= 1/2` regime.  It keeps
+  `CrowGrowthPersistenceUnderNSEvolution = false`,
+  `EllipticBackreactionBound = false`,
+  `ThickCoreLerayCompatibility = false`,
+  `FiniteTimeFluxSurplusFromCrowDominance = false`,
+  `finiteKStarCollapseClosed = false`,
+  `downstreamRegularityGatesClosed = false`,
+  `strainCompressionAtHighFrequencyConcentrationPointsClosed = false`, and
+  `clayNavierStokesPromoted = false`.  The classifier records the
+  initial-rate-only thick-core vortex pair as partial, rejects all candidate
+  mechanisms as Clay sources, and keeps accepted source count at zero.  No
+  Navier-Stokes Clay promotion follows.

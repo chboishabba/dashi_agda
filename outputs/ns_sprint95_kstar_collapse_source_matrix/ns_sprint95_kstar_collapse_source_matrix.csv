@@ -1,0 +1,6 @@
+source_id,source,supplies_finite_time_kstar_collapse,supplies_smooth_finite_energy_compatibility,excludes_conditional_kstar_lower_bound,extracts_singularity,forbidden_dependencies,note,accepted,forbidden_dependency_count
+S87,Sprint87 high-high factorization,False,False,False,False,none,Supports conditional absorption estimates only; supplies no finite-time K* collapse mechanism.,False,0
+S90,Sprint90 local enstrophy route,False,False,False,False,none,Records local-enstrophy reduction surfaces but no collapse trajectory.,False,0
+S94,Sprint94 K-star fork,False,False,False,False,none,Records Option B as open and Option C as conditional.,False,0
+HYP1,low-frequency cascade hypothesis,True,False,False,False,none,Names the candidate direction but lacks smooth finite-energy compatibility and singularity extraction.,False,0
+HYP2,conditional K* lower-bound negation,False,False,True,False,negated_conditional_criterion_without_mechanism,Negating the conditional criterion is not a mechanism and cannot be accepted.,False,1

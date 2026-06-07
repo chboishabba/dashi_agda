@@ -1,0 +1,325 @@
+{
+  "accepted_authorities": [
+    "rudinExerciseEightOneAuthorityRow",
+    "grafakosClassicalFourierAnalysisTheoremSixOneSevenAuthorityRow"
+  ],
+  "accepted_authority_count": 2,
+  "accepted_authority_hits": [
+    "rudinExerciseEightOneAuthorityRow",
+    "grafakosClassicalFourierAnalysisTheoremSixOneSevenAuthorityRow"
+  ],
+  "agda_path": "DASHI/Physics/Closure/NSSprint111LPGrafakosInfrastructureAndStrainRefocus.agda",
+  "anchor_file_checks": {
+    "sprint102": {
+      "path": "DASHI/Physics/Closure/NSSprint102StrainCompressionReduction.agda",
+      "present": true
+    },
+    "sprint103": {
+      "path": "DASHI/Physics/Closure/NSSprint103StrainCompressionGeometryGate.agda",
+      "present": true
+    },
+    "sprint107": {
+      "path": "DASHI/Physics/Closure/NSSprint107SmoothDyadicCutoffPartition.agda",
+      "present": true
+    },
+    "sprint108": {
+      "path": "DASHI/Physics/Closure/NSSprint108RadialBumpFunctionConstruction.agda",
+      "present": true
+    },
+    "sprint109": {
+      "path": "DASHI/Physics/Closure/NSSprint109SmoothCompactSupportWitness.agda",
+      "present": true
+    },
+    "sprint110": {
+      "path": "DASHI/Physics/Closure/NSSprint110BaseExpSmoothFunction.agda",
+      "present": true
+    }
+  },
+  "bool_checks": {
+    "GrafakosDyadicPartitionAuthorityClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "LittlewoodPaleyBumpInfrastructureClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "LittlewoodPaleyInfrastructureConstructionClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "RudinSmoothBumpAuthorityClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "lpGrafakosInfrastructureReceiptClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "proofDriftCorrectionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "closed_lp_gate_count": 5,
+  "complete": true,
+  "contract": "ns_sprint111_lp_grafakos_refocus_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing route, anchors, authorities, booleans, files, or forbidden-marker hits block audit passage",
+    "G": "Clay Navier-Stokes promotion remains false and strain compression closure remains false",
+    "L": "missing target or failed gate keeps evidence unpromoted; all structural gates passing promotes only the audit evidence",
+    "O": "Worker 2 owns the Sprint111 LP Grafakos refocus audit script only",
+    "P": "LP_INFRASTRUCTURE_CLOSED_STRAIN_COMPRESSION_REFOCUSED",
+    "R": "verify the LP infrastructure route, Sprint102/103/107/108/109/110 anchors, exact booleans, two authorities, and forbidden-marker absence",
+    "S": "target Agda module is inspected when present; anchor files are checked independently"
+  },
+  "evidence_audit_passed": true,
+  "fail_closed": false,
+  "final_decision": "LP_INFRASTRUCTURE_CLOSED_STRAIN_COMPRESSION_REFOCUSED",
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "lpGrafakosInfrastructureReceiptClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "LittlewoodPaleyInfrastructureConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "RudinSmoothBumpAuthorityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "GrafakosDyadicPartitionAuthorityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "LittlewoodPaleyBumpInfrastructureClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "proofDriftCorrectionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "closed true",
+      "expected": "closed true",
+      "gate": "lpGrafakosInfrastructureReceiptClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "closed true",
+      "expected": "closed true",
+      "gate": "LittlewoodPaleyInfrastructureConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "closed true",
+      "expected": "closed true",
+      "gate": "RudinSmoothBumpAuthorityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "closed true",
+      "expected": "closed true",
+      "gate": "GrafakosDyadicPartitionAuthorityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "closed true",
+      "expected": "closed true",
+      "gate": "LittlewoodPaleyBumpInfrastructureClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint102StrainCompressionReduction.agda",
+      "gate": "sprint102_anchor_file",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint103StrainCompressionGeometryGate.agda",
+      "gate": "sprint103_anchor_file",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint107SmoothDyadicCutoffPartition.agda",
+      "gate": "sprint107_anchor_file",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint108RadialBumpFunctionConstruction.agda",
+      "gate": "sprint108_anchor_file",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint109SmoothCompactSupportWitness.agda",
+      "gate": "sprint109_anchor_file",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint110BaseExpSmoothFunction.agda",
+      "gate": "sprint110_anchor_file",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "LP_INFRASTRUCTURE_CLOSED_STRAIN_COMPRESSION_REFOCUSED",
+      "expected": "LP_INFRASTRUCTURE_CLOSED_STRAIN_COMPRESSION_REFOCUSED",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "2",
+      "expected": "2",
+      "gate": "accepted_authority_count",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "lp_gate_checks": {
+    "GrafakosDyadicPartitionAuthorityClosed": {
+      "closed": true,
+      "passed": true
+    },
+    "LittlewoodPaleyBumpInfrastructureClosed": {
+      "closed": true,
+      "passed": true
+    },
+    "LittlewoodPaleyInfrastructureConstructionClosed": {
+      "closed": true,
+      "passed": true
+    },
+    "RudinSmoothBumpAuthorityClosed": {
+      "closed": true,
+      "passed": true
+    },
+    "lpGrafakosInfrastructureReceiptClosed": {
+      "closed": true,
+      "passed": true
+    }
+  },
+  "lp_gate_count": 5,
+  "lp_gates": [
+    "lpGrafakosInfrastructureReceiptClosed",
+    "LittlewoodPaleyInfrastructureConstructionClosed",
+    "RudinSmoothBumpAuthorityClosed",
+    "GrafakosDyadicPartitionAuthorityClosed",
+    "LittlewoodPaleyBumpInfrastructureClosed"
+  ],
+  "lp_infrastructure_construction_closed": true,
+  "missing_anchors": [],
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "proof_drift_correction_ledger_closed": true,
+  "required_anchors": [
+    "NSSprint111LPGrafakosInfrastructureAndStrainRefocus",
+    "canonicalNSSprint111LPGrafakosInfrastructureAndStrainRefocus",
+    "nsSprint111LPGrafakosInfrastructureAndStrainRefocusReceipt",
+    "canonicalSprint111LPGrafakosInfrastructureAndStrainRefocusFlags",
+    "LittlewoodPaleyInfrastructureConstructionClosed",
+    "proofDriftCorrectionLedgerClosed",
+    "strainCompressionRefocusLedgerClosed",
+    "ImportedSprintChain",
+    "canonicalImportedSprintChain",
+    "LPClosedGateStatuses",
+    "canonicalLPClosedGateStatuses",
+    "StrainRefocusStatuses",
+    "canonicalStrainRefocusStatuses",
+    "NSSprint102StrainCompressionReduction",
+    "NSSprint103StrainCompressionGeometryGate",
+    "NSSprint107SmoothDyadicCutoffPartition",
+    "NSSprint108RadialBumpFunctionConstruction",
+    "NSSprint109SmoothCompactSupportWitness",
+    "NSSprint110BaseExpSmoothFunction",
+    "rudinExerciseEightOneAuthorityRow",
+    "grafakosClassicalFourierAnalysisTheoremSixOneSevenAuthorityRow"
+  ],
+  "route_decision": "LP_INFRASTRUCTURE_CLOSED_STRAIN_COMPRESSION_REFOCUSED",
+  "strain_compression_at_high_frequency_concentration_points_closed": false,
+  "target_present": true
+}

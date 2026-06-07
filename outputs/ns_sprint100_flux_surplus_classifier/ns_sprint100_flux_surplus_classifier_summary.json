@@ -1,0 +1,224 @@
+{
+  "accepted_families": [],
+  "accepted_source_count": 0,
+  "candidate_family_count": 6,
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "computed_fail_closed_from_rows": true,
+  "contract": "ns_sprint100_flux_surplus_classifier",
+  "fail_closed": true,
+  "fail_closed_reason": "No candidate family satisfies every flux-surplus source gate without a forbidden dependency.",
+  "final_decision": "FAIL_CLOSED_FLUX_SURPLUS",
+  "forbidden_dependencies": [
+    "assumed_bkm_failure",
+    "assumed_serrin_failure",
+    "assumed_singularity",
+    "target_blowup",
+    "desired_conclusion",
+    "external_forcing",
+    "imposed_flux_sign",
+    "target_kstar_collapse",
+    "imposed_surplus_window"
+  ],
+  "option_b_closed": false,
+  "proof_claimed": false,
+  "rejected_families": [
+    "signed_triadic_transfer",
+    "shell_local_flux_surplus",
+    "pressure_nonlocal_flux",
+    "burst_integrated_surplus",
+    "inverse_cascade_surplus",
+    "imposed_surplus_window"
+  ],
+  "required_gates": [
+    "signed_low_mode_flux_lower_bound",
+    "time_integrated_positive_surplus",
+    "beats_dissipation_budget",
+    "leray_energy_compatible",
+    "non_circular_source",
+    "no_forbidden_dependency"
+  ],
+  "route_decision": "FAIL_CLOSED_FLUX_SURPLUS",
+  "rows": [
+    {
+      "accepted": false,
+      "ansatz": "derive a favorable low-mode sign from selected Fourier triads",
+      "beats_dissipation_budget": false,
+      "classification": "triadic sign mechanism",
+      "failed_gates": [
+        "signed_low_mode_flux_lower_bound",
+        "time_integrated_positive_surplus",
+        "beats_dissipation_budget",
+        "non_circular_source",
+        "no_forbidden_dependency"
+      ],
+      "family": "signed_triadic_transfer",
+      "family_id": "T1",
+      "forbidden_dependencies": "imposed_flux_sign",
+      "gate_results": {
+        "beats_dissipation_budget": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": false,
+        "non_circular_source": false,
+        "signed_low_mode_flux_lower_bound": false,
+        "time_integrated_positive_surplus": false
+      },
+      "leray_energy_compatible": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "note": "Triadic transfer is an admissible nonlinear channel, but the favorable sign is selected rather than derived and no time-integrated surplus is closed.",
+      "signed_low_mode_flux_lower_bound": false,
+      "time_integrated_positive_surplus": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "nearest-neighbor shell transfer produces surplus into low modes",
+      "beats_dissipation_budget": false,
+      "classification": "local shell flux channel",
+      "failed_gates": [
+        "signed_low_mode_flux_lower_bound",
+        "time_integrated_positive_surplus",
+        "beats_dissipation_budget"
+      ],
+      "family": "shell_local_flux_surplus",
+      "family_id": "S1",
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "beats_dissipation_budget": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": true,
+        "non_circular_source": true,
+        "signed_low_mode_flux_lower_bound": false,
+        "time_integrated_positive_surplus": false
+      },
+      "leray_energy_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_source": true,
+      "note": "Shell-local transfer is non-circular and energy-budget compatible, but it does not supply a signed lower bound or a comparison that beats dissipation.",
+      "signed_low_mode_flux_lower_bound": false,
+      "time_integrated_positive_surplus": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "pressure nonlocality redirects energy across separated Fourier scales",
+      "beats_dissipation_budget": false,
+      "classification": "nonlocal pressure flux sketch",
+      "failed_gates": [
+        "signed_low_mode_flux_lower_bound",
+        "time_integrated_positive_surplus",
+        "beats_dissipation_budget"
+      ],
+      "family": "pressure_nonlocal_flux",
+      "family_id": "P1",
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "beats_dissipation_budget": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": true,
+        "non_circular_source": true,
+        "signed_low_mode_flux_lower_bound": false,
+        "time_integrated_positive_surplus": false
+      },
+      "leray_energy_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_source": true,
+      "note": "Pressure coupling is compatible with incompressible Navier-Stokes, but the sketch lacks a quantitative signed surplus and a dissipation budget win.",
+      "signed_low_mode_flux_lower_bound": false,
+      "time_integrated_positive_surplus": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "a short nonlinear burst gives positive integrated surplus",
+      "beats_dissipation_budget": false,
+      "classification": "transient burst surplus",
+      "failed_gates": [
+        "signed_low_mode_flux_lower_bound",
+        "beats_dissipation_budget"
+      ],
+      "family": "burst_integrated_surplus",
+      "family_id": "B1",
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "beats_dissipation_budget": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": true,
+        "non_circular_source": true,
+        "signed_low_mode_flux_lower_bound": false,
+        "time_integrated_positive_surplus": true
+      },
+      "leray_energy_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_source": true,
+      "note": "A burst can model a positive integral, but this family has no pointwise signed lower bound and does not close the dissipation comparison.",
+      "signed_low_mode_flux_lower_bound": false,
+      "time_integrated_positive_surplus": true,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "an inverse cascade persistently feeds low modes with surplus energy",
+      "beats_dissipation_budget": false,
+      "classification": "inverse-cascade surplus unsupported premise",
+      "failed_gates": [
+        "signed_low_mode_flux_lower_bound",
+        "time_integrated_positive_surplus",
+        "beats_dissipation_budget",
+        "leray_energy_compatible",
+        "non_circular_source",
+        "no_forbidden_dependency"
+      ],
+      "family": "inverse_cascade_surplus",
+      "family_id": "I1",
+      "forbidden_dependencies": "target_kstar_collapse;desired_conclusion",
+      "gate_results": {
+        "beats_dissipation_budget": false,
+        "leray_energy_compatible": false,
+        "no_forbidden_dependency": false,
+        "non_circular_source": false,
+        "signed_low_mode_flux_lower_bound": false,
+        "time_integrated_positive_surplus": false
+      },
+      "leray_energy_compatible": false,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "note": "The surplus is tied to the desired cascade endpoint, so it supplies no independent source and remains outside a closed Leray-compatible budget.",
+      "signed_low_mode_flux_lower_bound": false,
+      "time_integrated_positive_surplus": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "choose an interval where signed flux surplus exceeds dissipation",
+      "beats_dissipation_budget": true,
+      "classification": "imposed surplus interval",
+      "failed_gates": [
+        "leray_energy_compatible",
+        "non_circular_source",
+        "no_forbidden_dependency"
+      ],
+      "family": "imposed_surplus_window",
+      "family_id": "W1",
+      "forbidden_dependencies": "imposed_surplus_window;desired_conclusion",
+      "gate_results": {
+        "beats_dissipation_budget": true,
+        "leray_energy_compatible": false,
+        "no_forbidden_dependency": false,
+        "non_circular_source": false,
+        "signed_low_mode_flux_lower_bound": true,
+        "time_integrated_positive_surplus": true
+      },
+      "leray_energy_compatible": false,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "note": "The window directly assumes the needed surplus and budget victory, so the mechanism is circular and uses a forbidden dependency.",
+      "signed_low_mode_flux_lower_bound": true,
+      "time_integrated_positive_surplus": true,
+      "verdict": "reject"
+    }
+  ],
+  "scope": "deterministic classifier for candidate flux-surplus sources",
+  "sprint100_flux_surplus_closed": false
+}

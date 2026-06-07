@@ -1,0 +1,343 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint106LittlewoodPaleyShellProjector.agda",
+  "all_subgates_closed": false,
+  "all_subgates_false": true,
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "divergenceFreeProjectionCommutationClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "dyadicShellEnergyDensityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "failClosedLittlewoodPaleyShellProjectorDecomposition": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "finiteKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "fourierMultiplierBoundednessClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "highFrequencyConcentrationMeasureClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "lerayCompatibleProjectionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "littlewoodPaleyShellProjectorClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "littlewoodPaleyShellProjectorDecompositionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "nonCircularProjectorConstructionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "smoothDyadicCutoffPartitionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "timeIntegratedFluxSurplusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "closed_subgate_count": 0,
+  "complete": false,
+  "contract": "ns_sprint106_littlewood_paley_projector_audit",
+  "decomposition_ledger_closed": true,
+  "dyadic_shell_energy_density_closed": false,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_LITTLEWOOD_PALEY_SHELL_PROJECTOR",
+  "finite_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "littlewoodPaleyShellProjectorDecompositionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "smoothDyadicCutoffPartitionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "fourierMultiplierBoundednessClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "lerayCompatibleProjectionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "divergenceFreeProjectionCommutationClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularProjectorConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "littlewoodPaleyShellProjectorClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "dyadicShellEnergyDensityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "highFrequencyConcentrationMeasureClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "signedLowModeFluxLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "timeIntegratedFluxSurplusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "failClosedLittlewoodPaleyShellProjectorDecomposition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "SmoothDyadicCutoffPartition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "FourierMultiplierBoundedness",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "LerayCompatibleProjection",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "DivergenceFreeProjectionCommutation",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "NonCircularProjectorConstruction",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "high_frequency_concentration_measure_closed": false,
+  "littlewood_paley_shell_projector_closed": false,
+  "littlewood_paley_shell_projector_decomposition_ledger_closed": true,
+  "missing_anchors": [],
+  "open_subgate_count": 5,
+  "projector_ledger_closed": true,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint106LittlewoodPaleyShellProjector",
+    "canonicalNSSprint106LittlewoodPaleyShellProjector",
+    "canonicalNSSprint106LittlewoodPaleyShellProjectorReceipt",
+    "canonicalSprint106LittlewoodPaleyShellProjectorFlags",
+    "LittlewoodPaleyShellProjectorDecomposition",
+    "LittlewoodPaleyShellProjectorSplitsIntoFiveSubgates",
+    "Sprint105LittlewoodPaleyShellProjectorAnchor",
+    "canonicalSprint105LittlewoodPaleyShellProjectorAnchor",
+    "LittlewoodPaleyProjectorSubgateStatus",
+    "canonicalLittlewoodPaleyShellProjectorDecompositionStatus",
+    "requiredLittlewoodPaleyShellProjectorSubgates",
+    "SmoothDyadicCutoffPartition",
+    "FourierMultiplierBoundedness",
+    "LerayCompatibleProjection",
+    "DivergenceFreeProjectionCommutation",
+    "NonCircularProjectorConstruction",
+    "SmoothDyadicCutoffPartitionOpen",
+    "FourierMultiplierBoundednessOpen",
+    "LerayCompatibleProjectionOpen",
+    "DivergenceFreeProjectionCommutationOpen",
+    "NonCircularProjectorConstructionOpen",
+    "littlewoodPaleyShellProjectorDecompositionLedgerClosed",
+    "smoothDyadicCutoffPartitionClosed",
+    "fourierMultiplierBoundednessClosed",
+    "lerayCompatibleProjectionClosed",
+    "divergenceFreeProjectionCommutationClosed",
+    "nonCircularProjectorConstructionClosed",
+    "littlewoodPaleyShellProjectorClosed",
+    "dyadicShellEnergyDensityClosed",
+    "highFrequencyConcentrationMeasureClosed",
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "signedLowModeFluxLowerBoundClosed",
+    "timeIntegratedFluxSurplusClosed",
+    "finiteKStarCollapseClosed",
+    "clayNavierStokesPromoted",
+    "failClosedLittlewoodPaleyShellProjectorDecomposition"
+  ],
+  "route_decision": "FAIL_CLOSED_LITTLEWOOD_PALEY_SHELL_PROJECTOR",
+  "signed_low_mode_flux_lower_bound_closed": false,
+  "strain_compression_at_high_frequency_concentration_points_closed": false,
+  "subgate_checks": {
+    "DivergenceFreeProjectionCommutation": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "FourierMultiplierBoundedness": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "LerayCompatibleProjection": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "NonCircularProjectorConstruction": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "SmoothDyadicCutoffPartition": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    }
+  },
+  "subgate_divergence_free_projection_commutation_open": true,
+  "subgate_fourier_multiplier_boundedness_open": true,
+  "subgate_leray_compatible_projection_open": true,
+  "subgate_non_circular_projector_construction_open": true,
+  "subgate_smooth_dyadic_cutoff_partition_open": true,
+  "subgates": [
+    "SmoothDyadicCutoffPartition",
+    "FourierMultiplierBoundedness",
+    "LerayCompatibleProjection",
+    "DivergenceFreeProjectionCommutation",
+    "NonCircularProjectorConstruction"
+  ],
+  "target_present": true,
+  "time_integrated_flux_surplus_closed": false
+}
