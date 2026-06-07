@@ -2477,3 +2477,6 @@ The next RG implementation work is split deliberately:
   richer hierarchy.
   The target is endpoint agreement with room for path/scale disagreement,
   rather than more collapse lemmas on the current toy encoding.
+
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/chboishabba/dashi_agda)
