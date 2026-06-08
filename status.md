@@ -1,3 +1,625 @@
+# 2026-06-08 A6.2 Biot-Savart shell localization and first-rung hardening
+
+- Added `DASHI.Physics.Closure.NSBiotSavartShellLocalizationBoundary` as the
+  explicit A6.2 theorem-contract surface for the remaining Biot-Savart shell
+  localization estimate: same-shell strain multiplier identification,
+  off-shell leakage decay, Calderon-Zygmund kernel control, Type-I
+  `L^{3,inf}` dependence, and diagonal-to-Abel compatibility.  The estimate,
+  A6, residual depletion, NS Clay, and terminal promotion all remain false.
+- Added `scripts/ns_biot_savart_shell_localization_proxy_harness.py` and
+  `DASHI.Physics.Closure.NSBiotSavartShellLocalizationProxyHarnessResult`.
+  The harness separates same-shell/Abel-localized good profiles from
+  separated-tail and nonlocal-plateau bad profiles; it is diagnostic only.
+- Added `DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessDomainContract`
+  for the first YM finite-domain rung after boundary sensitivity: full-degree
+  Killing convention, finite BT cell domain closure, boundary flux
+  cancellation, gauge-domain invariance, quotient descent, and finite
+  self-adjointness.  No Hamiltonian domination, OS transfer, continuum mass
+  gap, YM Clay, or terminal promotion follows.
+- Added `scripts/ym_killing_boundary_self_adjointness_proxy_harness.py` as a
+  finite diagnostic for symmetry defect, gauge-null leakage, nonorthogonal
+  projection, induced-collapse, and spectral-margin separation.
+- Added `DASHI.Physics.Closure.UnificationGluingCrossTermNullClassBoundary`
+  to isolate the next U-1a sub-obligation:
+  `G(s1+s2)-G(s1)-G(s2)` must lie in the null class of the admissible defect
+  quotient before gluing linearity can feed four-point cancellation.
+  Parallelogram, quadratic emergence, signature/Clifford, and terminal
+  promotion remain blocked.
+
+# 2026-06-08 component sensitivity receipts and four-point stress composite
+
+- Added `scripts/ns_pressure_subbudget_component_sensitivity_harness.py`,
+  routed it through `scripts/local_clay_harness_manifest.py`, and added
+  `DASHI.Physics.Closure.NSPressureSubBudgetComponentSensitivityProxyHarnessResult`.
+  It sweeps seven pressure/localization sub-budget components and separates
+  stable good regimes from single-component blockers.  This is diagnostic
+  only; component sensitivity, pressure sub-budget closure, A6, residual
+  nonpositivity, NS Clay, and terminal promotion remain false.
+- Added `scripts/ym_spectral_margin_boundary_sensitivity_harness.py`, routed it
+  through the manifest, and added
+  `DASHI.Physics.Closure.YMSpectralMarginBoundarySensitivityProxyHarnessResult`.
+  It sweeps `c_delta`, `c_hol`, `E_d`, holonomy, kinetic, and pollution
+  margins around the finite YM spectral-margin proxy.  Boundary sensitivity,
+  spectral margin, Hamiltonian domination, OS/continuum transfer, YM Clay, and
+  terminal promotion remain false.
+- Added `DASHI.Physics.Closure.UnificationQuotientFourPointStressProxyHarnessResult`
+  and `DASHI.Physics.Closure.UnificationFourPointStressCompositeBoundary`.  The
+  composite now directly imports the stress receipt and records the chain from
+  quotient admissibility through four-point cancellation, parallelogram,
+  quadratic emergence, and signature/Clifford consumers.  All theorem and
+  promotion flags remain false.
+
+# 2026-06-08 pressure sub-budget, YM spectral receipt, and four-point stress
+
+- Added `DASHI.Physics.Closure.NSPressureLocalizationSubBudgetCompositeBoundary`
+  to compose the pressure/localization A6 sub-budget across cutoff/Riesz
+  commutator, local Calderon-Zygmund pressure core, harmonic pressure tail,
+  pressure-tail proxy, annular cutoff, epsilon-gradient absorption, and Abel
+  recentering/lower-order routing.  The pressure sub-budget, localization
+  theorem, triadic compensated leakage identity, residual nonpositivity, NS
+  Clay, and terminal promotion remain false.
+- Added `scripts/ns_pressure_localization_subbudget_proxy_harness.py`, routed it
+  through the local manifest, and added
+  `DASHI.Physics.Closure.NSPressureLocalizationSubBudgetProxyHarnessResult`.
+  The harness aggregates seven synthetic pressure-localization budget
+  components, separates decaying/separated good profiles from single-component
+  blocker bad profiles, and keeps `promotion=false`.
+- Added `DASHI.Physics.Closure.YMDominationSpectralMarginProxyHarnessResult`
+  for `scripts/ym_domination_spectral_margin_proxy_harness.py`, then added
+  `DASHI.Physics.Closure.YMSpectralMarginErrorBudgetCompositeBoundary` as the
+  spectral-margin composite budget.  The composite now imports the direct
+  spectral receipt and keeps spectral-margin, Hamiltonian-domination,
+  reflection-positive transfer, OS/continuum transfer, no-spectral-pollution,
+  YM Clay, and terminal promotion flags false.
+- Added `scripts/unification_quotient_four_point_stress_harness.py` and routed
+  it through the manifest.  It stresses representative shifts, nonlinear
+  quotient gluing, p-norm near misses, and asymmetric cross-terms against a
+  quadratic quotient good case.  It does not prove quotient admissibility,
+  four-point cancellation, parallelogram, quadratic emergence, or terminal
+  unification.
+
+# 2026-06-08 A6 commutator/tail and YM margin diagnostics
+
+- Added `scripts/ns_cutoff_riesz_commutator_kernel_proxy_harness.py` and
+  `DASHI.Physics.Closure.NSCutoffRieszCommutatorKernelProxyHarnessResult`.
+  The harness models the `[P_j, phi] R_i R_l` kernel estimate with dyadic
+  scale, cutoff smoothness, annulus separation, cancellation/moment gain, and
+  epsilon-gradient absorption.  Smooth compact, separated-annulus, and
+  shell-recentered profiles pass; rough-cutoff, no-cancellation, and
+  touching-core profiles fail.  It is routed through the manifest and remains
+  diagnostic only.
+- Added `DASHI.Physics.Closure.NSHarmonicPressureTailAbsorptionEstimateBoundary`
+  and `scripts/ns_harmonic_pressure_tail_decay_proxy_harness.py`.  The
+  boundary records harmonic pressure decomposition, exterior annulus decay,
+  mean subtraction on `Q_r`, scale-separated absorption, epsilon-gradient
+  split, and pressure-tail budget routing.  The harness separates
+  mean-subtracted / annular-separated / high-moment good cases from monopole,
+  nearby-source, and persistent-plateau bad cases.  No pressure-tail theorem,
+  A6 theorem, NS Clay, or terminal promotion is proved.
+- Added `scripts/ym_domination_spectral_margin_proxy_harness.py` and routed it
+  through the manifest.  It checks finite symmetric-matrix spectral margins
+  for dominated quotient, holonomy-controlled gap, and stable `E_d` cases
+  against weak kinetic, missing-holonomy, and near-zero pollution bad cases.
+  It does not prove Hamiltonian domination, OS transfer, continuum gap, YM
+  Clay, or terminal promotion.
+- Added `DASHI.Physics.Closure.UnificationGluingQuotientAdmissibilityProxyHarnessResult`
+  to bind the quotient-admissibility proxy harness to Agda.  Quotient
+  admissibility, gluing linearity, four-point cancellation, parallelogram,
+  quadratic emergence, and terminal promotion all remain false.
+
+# 2026-06-08 A6 pressure-tail and quotient-admissibility hardening
+
+- Added `DASHI.Physics.Closure.NSPressureCommutatorEstimateContractBoundary`
+  as the theorem-contract layer above the A6 localization/pressure child.  It
+  names the `[P_j, phi] R_i R_l` commutator, local Calderon-Zygmund pressure
+  term, harmonic pressure tail, annular cutoff error, epsilon-gradient
+  absorption, and lower-order routing into the existing A6 budget.  The
+  pressure commutator estimate, pressure-tail absorption, localization
+  theorem, triadic compensated leakage identity, NS Clay, and terminal
+  promotion remain false.
+- Added `scripts/ns_pressure_tail_absorption_proxy_harness.py`, routed it
+  through the local manifest, and added
+  `DASHI.Physics.Closure.NSPressureTailAbsorptionProxyHarnessResult`.  The
+  harness separates compact/Schwartz/localized annular good profiles from bad
+  harmonic-tail, annular-plateau, and nonabsorbed-gradient profiles.  It is a
+  diagnostic only.
+- Added `DASHI.Physics.Closure.NSA6TheoremLadderBoundary` to record the
+  seven-rung theorem ladder: child estimates, aggregate budget,
+  pointwise-to-Abel, triadic compensated leakage identity, critical residual
+  nonpositive, local defect monotonicity, and CKN/BKM closure.  All theorem
+  and promotion flags remain false.
+- Added `DASHI.Physics.Closure.YMHamiltonianDominationErrorBudgetBoundary` for
+  the YM finite domination budget: self-adjoint defect, quotient-domain
+  residual, holonomy/action residuals, negative `E_d` budget, spectral margin,
+  reflection-positive transfer residual, and OS/continuum no-pollution
+  residual.  It does not prove Hamiltonian domination, OS transfer, continuum
+  transfer, YM Clay, or terminal promotion.
+- Added `scripts/unification_gluing_quotient_admissibility_proxy_harness.py`
+  and routed it through the local manifest.  The harness checks a
+  representative-invariant linear quotient example against representative
+  leakage, nonlinear gluing, and two-homogeneous norm-like near-miss bad
+  cases.  It does not prove quotient admissibility, four-point cancellation,
+  quadratic emergence, or terminal unification.
+
+# 2026-06-08 A6/YM/unification composite proof contracts
+
+- Added `DASHI.Physics.Closure.NSA6ErrorBudgetCompositeBoundary` to turn the
+  A6 child split into a seven-line aggregate budget: diagonal residual,
+  off-diagonal absorption, Abel LLN variance, localization cutoff, pressure
+  commutator, pressure tail, and Abel tail/recentering.  Each line is assigned
+  to its child owner; the aggregate error-budget theorem, A6, residual
+  depletion, local monotonicity, NS Clay, and terminal promotion remain false.
+- Added `scripts/ns_a6_error_budget_proxy_harness.py` and routed it through
+  the local manifest.  The harness combines the seven synthetic component
+  errors, reports good decaying profiles below tolerance, and rejects bad
+  single-component obstruction profiles.  It is a diagnostic only.
+- Added `DASHI.Physics.Closure.NSLocalizationPressureCommutatorProxyHarnessResult`
+  to bind the localization/pressure proxy harness to Agda.  It records the
+  good compact/Schwartz profile split and the bad pressure-tail /
+  cutoff-commutator plateau split without proving PDE localization,
+  pressure-commutator control, A6, or residual depletion.
+- Added `DASHI.Physics.Closure.YMHamiltonianDominationProxyHarnessResult` for
+  the finite matrix domination proxy and
+  `DASHI.Physics.Closure.YMHamiltonianDominationCompositeBoundary` for the YM
+  dependency chain: admissible boundary -> finite self-adjoint operator ->
+  holonomy/action sector -> domination inequality -> reflection positivity/OS
+  -> continuum no spectral pollution.  The domination theorem, OS transfer,
+  continuum transfer, YM Clay, and terminal promotion remain false.
+- Added `DASHI.Physics.Closure.UnificationGluingLinearityCompositeBoundary` to
+  compose the unification first rung: admissible defect quotient, gluing
+  operator compatibility, four-point cancellation, parallelogram, quadratic
+  emergence, and signature/Clifford consumers.  Gluing linearity, four-point
+  cancellation, parallelogram, quadratic emergence, and terminal promotion
+  remain false.
+
+# 2026-06-08 A6 localization child and YM domination proxies
+
+- Added `DASHI.Physics.Closure.NSLocalizationPressureCommutatorBoundary` as
+  the fourth A6 child receipt under `NSPointwiseToAbelAveragingBoundary`.  It
+  records localized cutoff, Leray pressure reconstruction, pressure
+  commutator, boundary/cutoff, and pressure-tail control obligations.  The
+  localized cutoff theorem, pressure commutator theorem, A6, residual
+  depletion, local monotonicity, NS Clay, and terminal promotion remain false.
+- Added `DASHI.Physics.Closure.NSPointwiseToAbelCompositeA6Boundary` as the
+  composite A6 dependency receipt.  It imports the parent plus diagonal,
+  off-diagonal, Abel-window LLN, and localization/pressure child surfaces,
+  while keeping the composite pointwise-to-Abel theorem and downstream
+  triadic compensated leakage identity open.
+- Added `DASHI.Physics.Closure.NSPointwiseToAbelAveragingProxyHarnessResult`
+  for the existing pointwise-to-Abel proxy harness, and added
+  `scripts/ns_localization_pressure_commutator_proxy_harness.py` to test
+  refinement-decaying cutoff/pressure errors against bad persistent pressure
+  tail and cutoff commutator profiles.  Both are diagnostic only and keep
+  `promotion=false`.
+- Added `DASHI.Physics.Closure.YMFiniteSelfAdjointHamiltonianProxyHarnessResult`
+  for the finite self-adjoint Hamiltonian proxy harness, and added
+  `scripts/ym_hamiltonian_domination_proxy_harness.py` for a finite matrix
+  proxy of `H >= c1 Delta + c2 Hol - E` with good dominated and bad weak /
+  near-zero sector cases.  These do not prove YM finite self-adjointness,
+  Hamiltonian domination, OS transfer, continuum transfer, YM Clay, or
+  terminal promotion.
+- Current exact NS analytic proof split:
+  A1 bounded Abel mass; A2 true Leray shell observable estimate; A3
+  quantitative stationarity `delta_r -> 0`; A4 LRT output-support transfer;
+  A5 kappa-bias vanishing conditional on A1-A3 and NS-F7; A6
+  pointwise-to-Abel averaging with four child blockers now typed; A7 residual
+  nonpositive; A8 local defect monotonicity; A9 CKN/BKM closure.  A6 remains
+  the hardest open transfer theorem.
+
+# 2026-06-08 A6 child-split and finite-operator diagnostics
+
+- Added three child receipts under the hard NS A6
+  `NSPointwiseToAbelAveragingBoundary`:
+  `NSDiagonalStretchingToAbelMeanBoundary` for diagonal shell identification,
+  `NSOffDiagonalShellAbsorptionBoundary` for high-low / high-high /
+  pressure-cutoff / Abel-tail absorption targets, and
+  `NSAbelShellMixingLLNBoundary` for the Abel-window mixing and
+  `O(N_eff^-1/2)` LLN target.  Each is a boundary receipt only; the actual
+  localized PDE estimates, residual depletion, local monotonicity, NS Clay,
+  and terminal promotion remain false.
+- Added `scripts/ns_pointwise_to_abel_averaging_proxy_harness.py` and routed it
+  through `scripts/local_clay_harness_manifest.py`.  The harness simulates
+  diagonal `lambda(c)(2 kappa^2 - 1)` shell contributions, centered
+  off-diagonal noise, Abel windows, LLN-like good profiles, and a deliberately
+  correlated positive-bias bad profile.  The smoke split reports good residuals
+  below tolerance and the bad profile visibly failing; `promotion=false`.
+- Added `DASHI.Physics.Closure.GluingOperatorLinearityProxyHarnessResult` to
+  bind the quotient-linearity diagnostic to Agda.  It records the passing
+  quotient-linear proxy and the failing nonlinear representative-dependent
+  counterexample while keeping four-point cancellation, parallelogram,
+  quadratic emergence, and terminal unification false.
+- Added `scripts/ym_finite_selfadjoint_hamiltonian_proxy_harness.py` and
+  registered it in the local manifest.  It compares a symmetric
+  quotient-stable finite matrix against bad nonsymmetric and domain-unstable
+  cases, reports finite eigenvalue/discrete-spectrum proxy data, and keeps
+  YM Hamiltonian domination, OS transfer, continuum transfer, YM Clay, and
+  terminal promotion false.
+- Current A6 proof split after this round:
+  diagonal identification + off-diagonal absorption + Abel mixing LLN +
+  localization/pressure commutator control -> pointwise-to-Abel averaging ->
+  triadic compensated leakage identity -> residual nonpositive -> local
+  defect monotonicity -> CKN/BKM.  The first three child blockers are now
+  separately typed; the theorem itself remains open.
+
+# 2026-06-08 six-lane analytic hardening follow-up
+
+- Added `DASHI.Physics.Closure.NSBoundedAbelMassEstimateBoundary` for NS A1.
+  It records the Type-I / `L^{3,infty}` input, Littlewood-Paley shell mass,
+  Abel log-window averaging, uniform finite-variation target, and the
+  constant-tracking blockers.  The actual Lorentz-to-shell-to-Abel mass
+  theorem, CKN-scale PDE measure construction, NS Clay, and terminal
+  promotion remain false.
+- Added `scripts/ns_bounded_abel_mass_proxy_harness.py` and routed it through
+  `scripts/local_clay_harness_manifest.py`.  The harness separates bounded
+  Type-I-like proxy profiles from a deliberately bad mass-growth profile and
+  keeps `promotion=false`; it is a diagnostic only.
+- Added `DASHI.Physics.Closure.NSPointwiseToAbelAveragingBoundary` as the
+  A6 hard-subtheorem receipt inside `TriadicCompensatedLeakageIdentity`.  It
+  records the shell-weight decomposition, diagonal/off-diagonal split, Abel
+  LLN/mixing obligation, localized pointwise-stretching replacement target,
+  and blockers.  Residual depletion, local monotonicity, and Clay NS remain
+  unproved.
+- Added `DASHI.Physics.Closure.NSQuantitativeStationarityRateProxyHarnessResult`
+  to bind `scripts/ns_stationarity_rate_proxy_harness.py` to an Agda receipt.
+  It records the log-rate good profiles, bad nondecaying counterprofile, and
+  synthetic `delta_r * sqrt(11/60)` bias-bound proxy while leaving Seregin/ESS
+  stationarity, PDE Abel construction, and leakage transfer false.
+- Added `DASHI.Physics.Closure.YMSelfAdjointFiniteHamiltonianBoundary` as the
+  next YM finite-operator receipt after the gauge quotient preconditions:
+  full-degree/Killing boundary, finite domain, symmetric form, gauge quotient
+  descent, self-adjoint matrix/operator, and discrete spectrum.  Hamiltonian
+  domination, OS transfer, continuum transfer, YM Clay, and terminal promotion
+  remain false.
+- Added `scripts/gluing_operator_linearity_proxy_harness.py` and manifest
+  routing for the U-1a gluing-operator quotient-linearity diagnostic.  The
+  linear quotient proxy passes, the nonlinear representative-dependent
+  counterexample fails additivity/scalar/representative/four-point checks, and
+  `promotion=false`.
+- Current NS proof list after this follow-up:
+  A1 bounded Abel mass estimate; A2 tight triadic shell estimate; A3
+  quantitative `T_NS` stationarity with `delta_r -> 0`; A4 LRT
+  physical-to-Fourier output support transfer; A5 kappa-bias vanishing
+  conditional on A1-A3 plus NS-F7; A6 pointwise-to-Abel averaging /
+  triadic compensated leakage identity; A7 residual nonpositive; A8 local
+  defect monotonicity; A9 CKN/BKM closure.  A6 remains the hardest analytic
+  transfer theorem.
+
+# 2026-06-08 six-lane analytic frontier split
+
+- Added `DASHI.Physics.Closure.NSQuantitativeStationarityRateBoundary` for the
+  A3.3 stationarity-rate proof target.  It records the
+  `W_r = U_r - U_infty` energy-ODE route, Seregin/ESS compactness-rate input,
+  and the still-open `delta_r -> 0` theorem.  The downstream
+  `|Bias(mu_r)| <= delta_r * sqrt(11/60)` consequence is recorded only as a
+  conditional use of `NSTransferOperatorBiasNeutralityBoundary`; quantitative
+  stationarity, residual depletion, NS Clay, and terminal promotion remain
+  false.
+- Added `DASHI.Physics.Closure.NSTriadicShellBernsteinHolderBoundary` for the
+  A2 observable-recording estimate.  The target is the tight dyadic shell
+  bound
+  `||P_j u dot grad P_k omega||_L2 <= C 2^min(j,k)||P_j u||_L2||P_k omega||_L2`.
+  The naive `L4 x L4` Bernstein route is now explicitly recorded as
+  insufficient without the near-diagonal true-Leray/Coifman-Meyer shell
+  argument.
+- Added `DASHI.Physics.Closure.NSLeiRenTianOutputSupportTransferBoundary` for
+  the A4 coupling target: physical-space vorticity-direction great-circle
+  richness must transfer to Fourier triadic output-direction great-circle
+  richness for Abel triadic measures.  The Whitney/frame/localization and
+  no-angular-collapse coupling theorem is open.
+- Added `scripts/ns_stationarity_rate_proxy_harness.py` and routed it through
+  `scripts/local_clay_harness_manifest.py` as `ns_stationarity_rate_proxy`.
+  The harness simulates `theta_r ~= log(1/r)^(-1/2)`, a Gronwall/Lipschitz
+  stationarity defect, the `sqrt(11/60)` bias-bound proxy, and a deliberately
+  bad nondecaying control profile.  It is diagnostic only and keeps
+  `promotion=false`.
+- Added `DASHI.Physics.Closure.YMFiniteGaugeQuotientHamiltonianPreconditionBoundary`
+  for the first YM operator-theoretic preconditions after the BT boundary
+  convention: full-degree/Killing boundary domain, finite gauge quotient,
+  self-adjoint finite Hamiltonian, holonomy/action sector split, and
+  `H_d | Omega^perp >= c1 Delta_YM + c2 Hol - E_d`.  The quotient,
+  self-adjointness, Hamiltonian domination, OS transfer, YM Clay, and terminal
+  promotion flags remain false.
+- Added `DASHI.Physics.Closure.GluingOperatorLinearityOnDefectQuotientBoundary`
+  for the unification U-1a blocker.  It records the admissible defect quotient
+  `V`, gluing operator `G`, and the open additivity/scalar/representative
+  compatibility obligations needed before four-point cancellation,
+  parallelogram, quadratic emergence, or terminal promotion can be attempted.
+- Current exact analytic proof list after this split:
+  A1 bounded Abel mass constant tracking; A2 tight triadic shell
+  Bernstein/Coifman-Meyer estimate; A3 quantitative approximate
+  `T_NS`-stationarity with `delta_r -> 0`; A4 LRT physical-to-Fourier output
+  support transfer; A5 kappa-bias vanishing conditional on A1-A3 plus NS-F7;
+  A6 triadic compensated leakage identity / pointwise-to-Abel averaging; A7
+  residual nonpositive; A8 local defect monotonicity; A9 CKN/BKM closure.
+  A6 remains the hardest PDE transfer theorem.
+
+# 2026-06-08 NS Abel/stationarity analytic-rung integration
+
+- Added `DASHI.Physics.Closure.NSAbelTriadicStationarityConstructionBoundary`
+  as the first checked receipt for the live NS analytic rung after the finite
+  kappa-bias package.  It records A1 bounded Abel mass, A2 true Leray triadic
+  observable recording, A3 approximate `T_NS` stationarity with
+  `delta_r -> 0`, and A4 Lei-Ren-Tian output-support transfer.  All proof,
+  residual, CKN/BKM, NS Clay, and terminal-promotion booleans remain false.
+- Added `scripts/ns_abel_triadic_stationarity_proxy_harness.py` as a
+  pure-stdlib synthetic shell/triadic proxy.  It normalizes bounded mass,
+  computes a pushforward stationarity defect `delta`, reports
+  `delta * sqrt(11/60)` as the kappa-bias bound proxy, emits JSON, and keeps
+  `promotion=false`.  This is diagnostic only; it is not a PDE Abel measure
+  construction and does not prove approximate stationarity for blowup
+  rescalings.
+- Added `DASHI.Physics.Closure.NSAbelTriadicStationarityProxyHarnessResult`
+  and routed the new harness through `scripts/local_clay_harness_manifest.py`
+  under `ns_abel_triadic_stationarity_proxy`.  The receipt records observed
+  proxy mass/stationarity/bias-bound fields while keeping PDE construction,
+  Clay promotion, and terminal promotion false.
+- Added a narrow `StationaryBiasAlignmentReceipt` adjunct in
+  `DASHI.Physics.Closure.UnificationNextAnalyticCalculationIndex`.  It aligns
+  the NS stationary-bias reading, the YM finite BT boundary-convention bias
+  precondition, and the unification gluing frontier as analogy-only; it adds
+  no proof row and keeps NS Clay, YM Clay, and terminal unification false.
+- The current shortest NS proof path is now explicitly:
+  `NSAbelTriadicStationarityConstructionBoundary` -> quantitative
+  `delta_r -> 0` theorem -> `NSTransferOperatorBiasNeutralityBoundary` ->
+  `NSTypeIBlowupKappaBiasBoundBoundary` -> compensated leakage identity ->
+  local monotonicity -> CKN/BKM.  The first genuine missing analytic
+  calculation is still the CKN-scale Abel triadic measure/stationarity proof,
+  especially the quantitative stationarity defect decay.
+
+# 2026-06-08 docs integration: honest Clay/unification frontier
+
+- Added `DASHI.Physics.Closure.NSTransferOperatorBiasNeutralityBoundary` as
+  the NS-F7 conditional finite-statistical receipt.  It records that, if the
+  transfer output has the arcsine kappa law and lambda/kappa independence at
+  residual scale, then `|Bias(mu_r)| <= delta_r * sqrt(11/60)`.  The receipt
+  explicitly leaves the arcsine-output proof, independence proof, Type-I PDE
+  transfer, residual depletion, CKN/BKM closure, NS Clay, and terminal
+  promotion false/open.
+- Updated `DASHI.Physics.Closure.NSTypeIBlowupKappaBiasBoundBoundary` so the
+  Type-I kappa-bias target is collapsed to three upstream dependencies:
+  `AbelTriadicDefectMeasureConstruction`, approximate transfer-operator
+  stationarity, and the conditional `NSTransferOperatorBiasNeutralityBoundary`.
+  The next live analytic proof remains the CKN-scale Abel triadic measure and
+  stationarity construction, not another finite cascade calculation.
+- Added `scripts/ns_transfer_operator_bias_neutrality_harness.py` and routed
+  it through `scripts/local_clay_harness_manifest.py`.  The harness checks the
+  independent-lambda neutral baseline and a deliberately correlated
+  counterexample; it is diagnostic only and keeps promotion false.
+- Recorded the corrected Gaussian self-similar NS balance as the current
+  Type-I kappa-bias hardening state: for
+  `G(y)=exp(-|y|^2/4)`,
+  `2 int |grad omega|^2 G - 1/2 int |omega|^2 G =
+  4 Bias_G Omega_G + Drift_G Omega_G`, so any nontrivial self-similar profile
+  must satisfy `1 <= 4 Bias_G + Drift_G` after the OU Poincare lower bound.
+  Under arcsine neutrality this reduces to a drift-only obstruction, matching
+  the classical self-similar nonexistence direction rather than creating a new
+  Clay proof.
+- Tightened the live NS gap label: the variational harness says stationarity,
+  not LRT alone, is the decisive proxy constraint (`stationary ~= -0.035`,
+  `LRT+stationary ~= -0.025` in the current receipt).  The next named PDE gap
+  is `AbelTriadicDefectMeasureConstruction`: prove that CKN-scale Type-I /
+  ancient blowup rescalings produce Abel triadic defect measures with the
+  approximate `T_NS`-stationarity needed by `NSTypeIBlowupKappaBiasBound`.
+  LRT remains an angular-collapse guard, not the source of the negative bias.
+- No docs update promotes Clay NS, Clay YM, unification, continuum transfer,
+  Hamiltonian domination, OS/Wightman transfer, the Abel measure construction,
+  CKN-scale stationarity, or the compensated leakage identity.
+- Normalized the finite NS cascade package as a five-result finite/statistical
+  normal form, not a Clay proof: sign antisymmetry, exact stretching identity,
+  kappa arcsine law, finite stretching neutrality, and Biot-Savart strain
+  mean-square `<lambda^2> = 11/60`.  These receipts characterize the finite
+  S2 cascade baseline and keep the PDE/Type-I question separate.
+- Integrated the corrected finite NS statistical package.  The previous
+  informal "uniform kappa" reading is replaced by the arcsine law recorded in
+  `DASHI.Physics.Closure.NSCascadeKappaArcsineLawBoundary`: sampled kappa
+  moments match `E[k^2]=1/2`, `E[k^4]=3/8`, and
+  `P(|k|<epsilon)=2/pi asin(epsilon)` under the finite S2 model.
+- Added the exact finite stretching identity receipt
+  `DASHI.Physics.Closure.NSCoherentStretchingExactFormulaBoundary`, backed by
+  `scripts/ns_stretching_formula_harness.py`: the checked diagnostic gives
+  `max_abs_error ~= 9.44e-16` for
+  `omega . S omega = lambda(c)(2 kappa^2 - 1)`, with the sign threshold at
+  `|kappa| = 1/sqrt(2)`.
+- Added `DASHI.Physics.Closure.NSFiniteCascadeStretchingNeutralityBoundary`
+  and `DASHI.Physics.Closure.NSBiotSavartStrainMeanSquareExactFormulaBoundary`.
+  The finite random cascade is now recorded as stretching-neutral against the
+  arcsine baseline, and the angular mean-square strain coefficient is checked
+  as `<lambda^2> = 11/60`; the RMS coefficient is not conflated with the
+  L1 mean `<lambda>`.
+- Added `scripts/ns_kappa_bias_variational_harness.py`.  Its 12k-sample proxy
+  run reports baseline mean bias `-0.00061`, unconstrained/LRT top-tail mean
+  bias `0.24075`, and one-step stationarity-proxy mean bias `-0.03522`.  This
+  is diagnostic only: the live PDE gate is now the Type-I/self-similar
+  `NSTypeIBlowupKappaBiasBound`, asking whether an admissible blowup/ancient
+  Abel triadic measure can create persistent positive
+  `lambda(c)(kappa^2 - 1/2)` bias against viscosity.  This replaces finite
+  coherent-triad domination as the live NS target.
+- Added `scripts/ns_typeI_selfsimilar_kappa_bias_harness.py` as the first
+  10s-safe synthetic shell proxy for that PDE gate.  The 6k-per-profile smoke
+  run reports neutral mean net bias after diffusion/drift penalty `-0.02387`,
+  depleted `-0.14041`, and deliberately forward-biased `0.09056`.  This shows
+  the diagnostic can detect a positive kappa-bias construction, not that such
+  a construction is available to actual Type-I/self-similar NS profiles.
+- Added `scripts/gray_scott_transfer_operator_calibration.py` as a pure-stdlib
+  P1 calibration surface.  The quick synthetic transfer run separates spots,
+  mitosis, and chaos with `separation_score=1.0` and `clay_promotion=false`;
+  it is measurement calibration, not NS/YM/Clay evidence.
+- Integrated the current fail-closed frontier after the latest code lanes.  The
+  exact sign antisymmetry identity is now a proved finite-algebra receipt, not
+  a PDE proof: `DASHI.Physics.Closure.NSSignAntisymmetryExactIdentityBoundary`
+  records `(a . omega_c) + (b . omega_c) = 0` under the true-triad tangent
+  condition.
+- The older output-only zero-mode route is superseded as a live theorem
+  target.  Exact-strain diagnostics showed output-only / Family-I-II residuals
+  are too permissive, and the live finite NS target is now propagated
+  polarization/coherence transversality:
+  `NSCascadeTransversalityCollapse` /
+  `PropagatedPolarizationCascadeClosedOutputWidth`, with the angular S2 lane
+  narrowing this further to `CascadeDepth2DegreeComputation` /
+  transversality rather than a sampling claim.
+- The live NS analytic wall remains the signed leakage identity:
+  `TriadicCompensatedLeakageIdentity` /
+  `TriadicLeakageSquareFunctionCoercivity`.  Ordinary CZ/LP/Coifman-Meyer
+  boundedness remains tooling only; the missing theorem is the negative
+  square-function correction in the local pressure/stretching residual.
+- The YM finite route now has an explicit boundary-convention precondition in
+  `DASHI.Physics.Closure.YMAdmissibleBTBoundaryConventionBoundary`: induced
+  finite-ball truncations can collapse the finite-tree gap signal, while
+  full-degree/killing-style conventions are the current admissible candidate.
+  This is a precondition for `HamiltonianDominatesDefectPlusHolonomy` and OS
+  transfer, not a YM mass-gap proof.
+- The unification live target is now the gluing-residual route recorded by
+  `DASHI.Physics.Closure.GluingResidualForcesFourPointCancellationBoundary`:
+  coarse two-homogeneity/monotonicity/subadditivity is insufficient, so a
+  gluing/polarization residual must force the four-point parallelogram defect
+  to vanish before quadratic, signature/Clifford, or terminal consumers can
+  promote.
+- No docs update promotes Clay NS, Clay YM, terminal unification, continuum
+  transfer, Hamiltonian domination, OS/Wightman transfer, or the signed PDE
+  leakage identity.  All promotion gates remain false.
+
+# 2026-06-08 angular S2 Biot-Savart cascade diagnostic round
+
+- Added `scripts/ns_s2_biot_savart_eigenbundle.py`, a pure-stdlib local
+  angular S2 eigenbundle diagnostic implementing the supplied `m11/m12`
+  formula, `omega_hat(c) = normalize (c x e_plus)`, the corrected
+  `lambda_NS` triad diagnostic, residual families, and depth-2 helper.
+  `timeout 10s python scripts/ns_s2_biot_savart_eigenbundle.py --self-test`
+  passes.
+- Extended `scripts/ns_triadic_output_width_harness.py` and
+  `scripts/ns_cascade_depth2_harness.py` with `--frame-model s2-biot-savart`.
+  This mode consumes `scripts/ns_s2_biot_savart_eigenbundle.py`, uses the
+  independent angular `omega_hat(c)`, and avoids the prior output-built
+  tautology.  The 2000-sample output-width smoke gives lambda median
+  `0.04138`, p95 `0.19430`, `486 / 2000` near-zero hits at threshold `0.01`,
+  and `336 / 486` depth-2 continuations under four random trials per hit.
+- Added `scripts/ns_s2_cascade_width_harness.py` for the dedicated angular
+  cascade-width diagnostic.  Under
+  `timeout 10s python scripts/ns_s2_cascade_width_harness.py --samples 12000
+  --continuations 120 --json`, it reports lambda mean/median/p95
+  `0.06369 / 0.04150 / 0.19444`, strict threshold `0.01` depth-1 zeros
+  `2966 / 12000`, random first-valid depth-2 survival `932 / 2966`
+  (`0.31423`), and existential best-of-120 survival `2966 / 2966`.  Strict
+  sampled width is `0.00273` at depth 1 and `0.00334` for the existential
+  depth-2 survivor set; random survivor width is `0.03908`.
+- Added checked receipt
+  `DASHI.Physics.Closure.NSS2BiotSavartEigenbundleCascadeDiagnosticBoundary`
+  and imported it through `DASHI.Everything`.  It records the
+  Cantarella-DeTurck-Gluck-Teytel Biot-Savart/curl eigenfield paper as an
+  external authority boundary only, the local `m11/m12` angular formula as a
+  diagnostic input, and `CascadeDepth2DegreeComputation` as the live proof
+  target.  Finite sampling, NS Clay, and terminal promotion remain false.
+- Gray-Scott remains P1 calibration only.  The quick regime sweep now runs
+  under the 10s policy across `spots`, `mitosis`, and `chaos`; all outputs
+  include `clay_promotion=false`.  The quick metrics do not sharply separate
+  stable from chaotic regimes yet, so this is calibration plumbing, not a
+  validated measurement layer.
+
+# 2026-06-08 propagated-coherence sign/transversality harness round
+
+- Added checked finite-algebra receipt
+  `DASHI.Physics.Closure.NSSignAntisymmetryExactIdentityBoundary` and wired it
+  through `DASHI/Everything.agda`.  It records the exact true-triad identity
+  `(a . omega_c) + (b . omega_c) = 0` from
+  `c = normalize (a + b)` and `omega_c` tangent to the output sphere.  The
+  identity is promoted only as finite algebra; `CascadeClosedZeroModeOutputWidth`,
+  compensated leakage, local monotonicity, NS Clay, and terminal promotion
+  remain false.
+- Added local calculation harnesses
+  `scripts/ns_sign_antisymmetry_depth_sweep.py` and
+  `scripts/ns_propagated_coherence_jacobian_harness.py`.  The depth sweep
+  checked the sign identity to roundoff with max absolute error
+  `1.33e-15`, while survivor counts decayed `447,243,135,65,30` through
+  depth 5 and sampled output width grew
+  `0.0146,0.0311,0.0402,0.0741,0.1327` under the selected propagated
+  velocity-mean leakage channel.  This is diagnostic evidence for a repaired
+  finite theorem, not a proof.
+- The Jacobian harness records the repaired finite target explicitly: depth-1
+  output-only residual remains rank-zero/tautological, while propagated
+  coherence constraints had sampled rank distributions `0`, `2`, `4`, and `6`
+  through depth 4 on the 48-state integration run.  The live finite theorem is
+  now `NSCascadeTransversalityCollapse` /
+  `PropagatedPolarizationCascadeClosedOutputWidth`, not the older
+  output-only `CascadeClosedZeroModeOutputWidth` statement.
+- Added checked YM boundary receipt
+  `DASHI.Physics.Closure.YMAdmissibleBTBoundaryConventionBoundary`.  It records
+  that induced-ball truncations can collapse the finite BT gap signal while
+  full-degree conventions are the current admissible candidate.  This is a
+  theorem precondition for `HamiltonianDominatesDefectPlusHolonomy`, not a YM
+  mass-gap proof.
+- Added checked unification receipt
+  `DASHI.Physics.Closure.GluingResidualForcesFourPointCancellationBoundary`.
+  It records that two-homogeneous/monotone/subadditive near-misses remain
+  insufficient; the live target is a gluing/polarization residual forcing the
+  four-point parallelogram defect to vanish.
+- Updated `scripts/local_clay_harness_manifest.py`; the manifest now executes
+  15 smoke harnesses, writes stable child receipts under
+  `outputs/local_clay_harness_manifest_children/`, and still reports
+  `promotion=false`, `executed=15`, `skipped=0`, `failures=[]`.
+
+# 2026-06-08 exact-strain local falsification harness round
+
+- Added the fail-closed exact-strain boundary
+  `DASHI.Physics.Closure.NSExactStrainEigenbundleHarnessBoundary` and wired it
+  through `DASHI/Everything.agda`.  It records that proxy tangent-frame
+  evidence cannot prove `CascadeClosedZeroModeOutputWidth`, and that exact
+  finite-symbol harnesses still do not prove analytic transfer or Clay NS.
+- Added local diagnostic scripts for the current P0 calculation layer:
+  `scripts/ns_exact_strain_eigenbundle.py`,
+  `scripts/ns_exact_strain_symbol_sanity_harness.py`,
+  `scripts/ns_exact_strain_width_comparison_harness.py`,
+  `scripts/ns_leray_rank_one_symbol_audit.py`,
+  `scripts/gray_scott_triadic_defect_harness.py`, and
+  `scripts/local_clay_harness_manifest.py`.
+- Local exact finite-symbol checks passed: the strain-symbol sanity harness
+  checked 2000 nonzero-output triads with maximum invariant error
+  `5.83e-13`, and the rank-one Leray audit checked 1000 sampled rows with all
+  image/kernel/determinant/trace classification residuals below `1e-9`.
+- The decisive numerical signal is negative for the current zero-mode-width
+  formulation: the exact-strain comparison harness found `1000 / 1000`
+  single-depth zero hits and `1000 / 1000` depth-2 continuations under the
+  current Family-I/II residual definition, while the synthetic Mobius proxy
+  found only `17 / 1000` zero hits.  This means the existing
+  `CascadeClosedZeroModeOutputWidth` route cannot rely on the current
+  single-depth zero-mode classification; it needs a strengthened propagated
+  polarization/coherence condition or a redesigned finite theorem target.
+- Added the Gray-Scott triadic defect diagnostic harness as a P1 calibration
+  surface only.  The manifest runner executed eight local smoke harnesses and
+  wrote `outputs/local_clay_harness_manifest.json` with `promotion=false`,
+  `clay_promoted=false`, `executed=8`, and no failures.
+
+# 2026-06-08 exact NS strain-eigenbundle harness round
+
+- Added the exact finite-symbol utility
+  `scripts/ns_exact_strain_eigenbundle.py`.  It implements divergence-free
+  input vorticity polarizations, Biot-Savart velocity recovery, the
+  Leray-projected equal-scale triadic bilinear output, and the output strain
+  eigenbundle.  `timeout 10s python scripts/ns_exact_strain_eigenbundle.py
+  --self-test` passes.
+- Extended the NS falsification harnesses:
+  `scripts/ns_triadic_output_width_harness.py` and
+  `scripts/ns_cascade_depth2_harness.py` now have an `exact-strain` model, and
+  the new `scripts/ns_exact_strain_width_comparison_harness.py` compares the
+  old synthetic proxy against the exact finite-symbol branch.  The new
+  `scripts/ns_exact_strain_symbol_sanity_harness.py` is pure stdlib plus the
+  local exact-symbol provider; under `timeout 10s` it checks 2000 sampled
+  triads with maximum invariant error about `9.59e-12`.
+- The decisive diagnostic result is negative for the current
+  `CascadeClosedZeroModeOutputWidth` residual criterion: exact-strain sampled
+  runs produce near-tautological Family-I zero residuals.  The capped
+  output-width probe reports `800 / 800` single-depth zero hits and `800 / 800`
+  depth-2 continuations; the capped depth-2 probe reports `1000 / 1000` and
+  sampled width about `0.00576`, not a positive-width obstruction.  The A/B
+  comparison reports proxy `1` zero hit versus exact-strain `1200` zero hits
+  for the small capped run.  This is falsification evidence for the old
+  residual target, not support for a theorem.
+- Added checked receipt
+  `DASHI.Physics.Closure.NSExactStrainEigenbundleHarnessBoundary` and imported
+  it through `DASHI.Everything`.  It records the exact-symbol harness as
+  diagnostic only, keeps `CascadeClosedZeroModeOutputWidth`, analytic transfer,
+  `NSCriticalResidualNonPositive`, Clay NS, and terminal promotion false, and
+  notes that the positive-width theorem target must be sharpened.
+
 # 2026-06-08 transfer-hardening boundary round
 
 - Added checked NS hardening modules:

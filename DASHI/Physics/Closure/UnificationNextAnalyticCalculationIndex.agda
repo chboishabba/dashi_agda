@@ -8,7 +8,9 @@ open import Agda.Primitive using (Setω)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.DefectQuadraticParallelogramCriticalSeam as Seam
+import DASHI.Physics.Closure.NSTransferOperatorBiasNeutralityBoundary as NSBias
 import DASHI.Physics.Closure.PressureBelow15SpectralTheoremObstruction as S8
+import DASHI.Physics.Closure.YMAdmissibleBTBoundaryConventionBoundary as YMBT
 import DASHI.Physics.Closure.YMRealSourcedDStarFEquationBoundary as RealDStarF
 import DASHI.Physics.Closure.YMStrictSelectedMatterCurrentAuthorityBridge as Matter
 import DASHI.Physics.Closure.YMSourcedEquationToHamiltonianQuotientBoundary as Hamiltonian
@@ -619,4 +621,161 @@ canonicalNextAnalyticTerminalFalse :
   ≡
   false
 canonicalNextAnalyticTerminalFalse =
+  refl
+
+------------------------------------------------------------------------
+-- Stationary-bias alignment adjunct.
+--
+-- This records one analogy only: a stationary-bias reading appears in the
+-- NS finite-statistical transfer receipt, the YM finite-boundary convention
+-- receipt, and the unification frontier as a blocked next-calculation
+-- discipline.  It does not add a proof row to the six-row frontier above.
+
+data StationaryBiasAlignmentSurface : Set where
+  nsFiniteStatisticalBiasNeutrality :
+    StationaryBiasAlignmentSurface
+
+  ymFiniteBTBoundaryConventionBias :
+    StationaryBiasAlignmentSurface
+
+  unificationFrontierCalculationDiscipline :
+    StationaryBiasAlignmentSurface
+
+canonicalStationaryBiasAlignmentSurfaces :
+  List StationaryBiasAlignmentSurface
+canonicalStationaryBiasAlignmentSurfaces =
+  nsFiniteStatisticalBiasNeutrality
+  ∷ ymFiniteBTBoundaryConventionBias
+  ∷ unificationFrontierCalculationDiscipline
+  ∷ []
+
+canonicalStationaryBiasAlignmentSurfaceCountIs3 :
+  listCount canonicalStationaryBiasAlignmentSurfaces ≡ 3
+canonicalStationaryBiasAlignmentSurfaceCountIs3 =
+  refl
+
+stationaryBiasAnalogyOnly : Bool
+stationaryBiasAnalogyOnly =
+  true
+
+record StationaryBiasAlignmentReceipt : Setω where
+  field
+    nsBiasNeutralityBoundaryImported :
+      Bool
+
+    nsBiasNeutralityBoundaryImportedIsTrue :
+      nsBiasNeutralityBoundaryImported ≡ true
+
+    ymBTBoundaryConventionBoundaryImported :
+      Bool
+
+    ymBTBoundaryConventionBoundaryImportedIsTrue :
+      ymBTBoundaryConventionBoundaryImported ≡ true
+
+    unificationFrontierImported :
+      Bool
+
+    unificationFrontierImportedIsTrue :
+      unificationFrontierImported ≡ true
+
+    alignmentSurfaces :
+      List StationaryBiasAlignmentSurface
+
+    alignmentSurfacesAreCanonical :
+      alignmentSurfaces ≡ canonicalStationaryBiasAlignmentSurfaces
+
+    alignmentSurfaceCountIs3 :
+      listCount alignmentSurfaces ≡ 3
+
+    analogyOnly :
+      Bool
+
+    analogyOnlyIsTrue :
+      analogyOnly ≡ true
+
+    nsClayPromoted :
+      Bool
+
+    nsClayPromotedIsFalse :
+      nsClayPromoted ≡ false
+
+    ymClayPromoted :
+      Bool
+
+    ymClayPromotedIsFalse :
+      ymClayPromoted ≡ false
+
+    unificationTerminalPromoted :
+      Bool
+
+    unificationTerminalPromotedIsFalse :
+      unificationTerminalPromoted ≡ false
+
+    alignmentPolicy :
+      List String
+
+open StationaryBiasAlignmentReceipt public
+
+canonicalStationaryBiasAlignmentReceipt :
+  StationaryBiasAlignmentReceipt
+canonicalStationaryBiasAlignmentReceipt =
+  record
+    { nsBiasNeutralityBoundaryImported =
+        true
+    ; nsBiasNeutralityBoundaryImportedIsTrue =
+        refl
+    ; ymBTBoundaryConventionBoundaryImported =
+        true
+    ; ymBTBoundaryConventionBoundaryImportedIsTrue =
+        refl
+    ; unificationFrontierImported =
+        true
+    ; unificationFrontierImportedIsTrue =
+        refl
+    ; alignmentSurfaces =
+        canonicalStationaryBiasAlignmentSurfaces
+    ; alignmentSurfacesAreCanonical =
+        refl
+    ; alignmentSurfaceCountIs3 =
+        refl
+    ; analogyOnly =
+        stationaryBiasAnalogyOnly
+    ; analogyOnlyIsTrue =
+        refl
+    ; nsClayPromoted =
+        NSBias.clayNavierStokesPromoted
+    ; nsClayPromotedIsFalse =
+        NSBias.NSTransferOperatorBiasNeutralityBoundary.clayNavierStokesPromotedIsFalse
+          NSBias.canonicalNSTransferOperatorBiasNeutralityBoundary
+    ; ymClayPromoted =
+        YMBT.clayYangMillsPromoted
+    ; ymClayPromotedIsFalse =
+        YMBT.clayYangMillsPromotedIsFalse
+    ; unificationTerminalPromoted =
+        terminalPromotion canonicalUnificationNextAnalyticCalculationIndex
+    ; unificationTerminalPromotedIsFalse =
+        terminalPromotionIsFalse canonicalUnificationNextAnalyticCalculationIndex
+    ; alignmentPolicy =
+        "Stationary bias is analogy-only across NS finite statistics, YM finite-boundary conventions, and the unification frontier"
+        ∷ "The NS side keeps arcsine-output, lambda/kappa independence, PDE transfer, Clay regularity, and terminal promotion unproved"
+        ∷ "The YM side keeps finite gauge quotient, Hamiltonian domination, OS transfer, Clay mass gap, and terminal promotion unproved"
+        ∷ "The unification side remains a blocked calculation discipline and does not promote the frontier to a terminal theorem"
+        ∷ []
+    }
+
+canonicalStationaryBiasAlignmentNSClayFalse :
+  nsClayPromoted canonicalStationaryBiasAlignmentReceipt ≡ false
+canonicalStationaryBiasAlignmentNSClayFalse =
+  refl
+
+canonicalStationaryBiasAlignmentYMClayFalse :
+  ymClayPromoted canonicalStationaryBiasAlignmentReceipt ≡ false
+canonicalStationaryBiasAlignmentYMClayFalse =
+  refl
+
+canonicalStationaryBiasAlignmentTerminalFalse :
+  unificationTerminalPromoted canonicalStationaryBiasAlignmentReceipt
+  ≡
+  false
+canonicalStationaryBiasAlignmentTerminalFalse =
   refl

@@ -1,0 +1,194 @@
+{
+  "clay_promotion": false,
+  "exact_constants": {
+    "coherent_fraction": "P(|kappa|<eps)=2/pi*asin(eps)",
+    "density": "1/(pi*sqrt(1-kappa^2))",
+    "fourth_moment": 0.375,
+    "mean": 0.0,
+    "mean_abs": 0.6366197723675814,
+    "second_moment": 0.5
+  },
+  "promotion": {
+    "finite_statistical_diagnostic": true,
+    "pde_or_clay_promotion": false,
+    "terminal_promotion": false
+  },
+  "promotion_false": true,
+  "provider": "/home/c/Documents/code/dashi_agda/scripts/ns_s2_biot_savart_eigenbundle.py",
+  "reference_law": {
+    "abs_cdf": "P(|kappa|<eps)=2/pi*asin(eps)",
+    "density": "1/(pi*sqrt(1-kappa^2))",
+    "fourth_moment": 0.375,
+    "mean_abs": 0.6366197723675814,
+    "name": "arcsine_on_minus_one_one",
+    "second_moment": 0.5
+  },
+  "requested_samples": 256,
+  "scope": "finite_s2_biot_savart_symbol_diagnostic_not_pde_proof",
+  "script": "scripts/ns_kappa_arcsine_law_harness.py",
+  "seed": 20260608,
+  "summaries": {
+    "random_tangent_output": {
+      "abs_cdf": {
+        "0.01": {
+          "abs_error": 0.002460053831746142,
+          "arcsine_expected": 0.006366303831746142,
+          "empirical": 0.00390625,
+          "epsilon": 0.01,
+          "error": -0.002460053831746142
+        },
+        "0.02": {
+          "abs_error": 0.0049207444265399174,
+          "arcsine_expected": 0.012733244426539917,
+          "empirical": 0.0078125,
+          "epsilon": 0.02,
+          "error": -0.0049207444265399174
+        },
+        "0.05": {
+          "abs_error": 0.02012551647332069,
+          "arcsine_expected": 0.03184426647332069,
+          "empirical": 0.01171875,
+          "epsilon": 0.05,
+          "error": -0.02012551647332069
+        },
+        "0.1": {
+          "abs_error": 0.036424810858519854,
+          "arcsine_expected": 0.06376856085851985,
+          "empirical": 0.02734375,
+          "epsilon": 0.1,
+          "error": -0.036424810858519854
+        },
+        "0.2": {
+          "abs_error": 0.022719683697949883,
+          "arcsine_expected": 0.12818843369794988,
+          "empirical": 0.10546875,
+          "epsilon": 0.2,
+          "error": -0.022719683697949883
+        },
+        "0.5": {
+          "abs_error": 0.04427083333333337,
+          "arcsine_expected": 0.33333333333333337,
+          "empirical": 0.2890625,
+          "epsilon": 0.5,
+          "error": -0.04427083333333337
+        },
+        "0.707106781187": {
+          "abs_error": 0.039062499999999944,
+          "arcsine_expected": 0.49999999999999994,
+          "empirical": 0.4609375,
+          "epsilon": 0.7071067811865475,
+          "error": -0.039062499999999944
+        }
+      },
+      "clay_promotion": false,
+      "count": 256,
+      "failures": 0,
+      "fourth_moment": 0.42222530105382305,
+      "max_abs": 0.9999997866967925,
+      "mean": -0.05418128377855175,
+      "mean_abs": 0.6722563784211043,
+      "moment_errors": {
+        "fourth_minus_3_over_8": 0.047225301053823054,
+        "mean_abs_minus_2_over_pi": 0.03563660605352292,
+        "mean_minus_0": -0.05418128377855175,
+        "second_minus_1_over_2": 0.04212091430127929
+      },
+      "name": "random_tangent_output",
+      "quantiles": {
+        "abs_q50": 0.7458835801922739,
+        "abs_q95": 0.9983628692768627,
+        "q01": -0.9997828994460827,
+        "q05": -0.9944824568615338,
+        "q25": -0.7547720272328922,
+        "q50": -0.1447929139081343,
+        "q75": 0.7269028846331786,
+        "q95": 0.9868680010236757,
+        "q99": 0.9972022216355227
+      },
+      "second_moment": 0.5421209143012793,
+      "variance": 0.5391853027893874
+    },
+    "random_triad_projected_b_proxy": {
+      "abs_cdf": {
+        "0.01": {
+          "abs_error": 0.006366303831746142,
+          "arcsine_expected": 0.006366303831746142,
+          "empirical": 0.0,
+          "epsilon": 0.01,
+          "error": -0.006366303831746142
+        },
+        "0.02": {
+          "abs_error": 0.0049207444265399174,
+          "arcsine_expected": 0.012733244426539917,
+          "empirical": 0.0078125,
+          "epsilon": 0.02,
+          "error": -0.0049207444265399174
+        },
+        "0.05": {
+          "abs_error": 0.007218233526679309,
+          "arcsine_expected": 0.03184426647332069,
+          "empirical": 0.0390625,
+          "epsilon": 0.05,
+          "error": 0.007218233526679309
+        },
+        "0.1": {
+          "abs_error": 0.006543939141480146,
+          "arcsine_expected": 0.06376856085851985,
+          "empirical": 0.0703125,
+          "epsilon": 0.1,
+          "error": 0.006543939141480146
+        },
+        "0.2": {
+          "abs_error": 0.028061566302050117,
+          "arcsine_expected": 0.12818843369794988,
+          "empirical": 0.15625,
+          "epsilon": 0.2,
+          "error": 0.028061566302050117
+        },
+        "0.5": {
+          "abs_error": 0.02994791666666663,
+          "arcsine_expected": 0.33333333333333337,
+          "empirical": 0.36328125,
+          "epsilon": 0.5,
+          "error": 0.02994791666666663
+        },
+        "0.707106781187": {
+          "abs_error": 0.0078124999999999445,
+          "arcsine_expected": 0.49999999999999994,
+          "empirical": 0.4921875,
+          "epsilon": 0.7071067811865475,
+          "error": -0.0078124999999999445
+        }
+      },
+      "clay_promotion": false,
+      "count": 256,
+      "failures": 0,
+      "fourth_moment": 0.3754397929432406,
+      "max_abs": 0.9999617917284013,
+      "mean": 0.023541795777428185,
+      "mean_abs": 0.6254587210196207,
+      "moment_errors": {
+        "fourth_minus_3_over_8": 0.00043979294324059115,
+        "mean_abs_minus_2_over_pi": -0.011161051347960638,
+        "mean_minus_0": 0.023541795777428185,
+        "second_minus_1_over_2": -0.005285211203363727
+      },
+      "name": "random_triad_projected_b_proxy",
+      "quantiles": {
+        "abs_q50": 0.7266048252673063,
+        "abs_q95": 0.9923982320706077,
+        "q01": -0.9993150381257982,
+        "q05": -0.9787943078232758,
+        "q25": -0.6756093942340342,
+        "q50": 0.08489660632429083,
+        "q75": 0.737702397382006,
+        "q95": 0.9850337282801195,
+        "q99": 0.9949620868648599
+      },
+      "second_moment": 0.4947147887966363,
+      "variance": 0.4941605726482101
+    }
+  },
+  "theorem_label": "NS-F3",
+  "theorem_name": "NSCascadeKappaArcsineLaw"
+}

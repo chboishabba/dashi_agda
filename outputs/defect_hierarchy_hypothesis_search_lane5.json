@@ -1,0 +1,1319 @@
+{
+  "diagnostic": "defect_hierarchy_hypothesis_search",
+  "dim": 5,
+  "promotion": false,
+  "results": [
+    {
+      "classification": "retained_quadratic_candidate",
+      "expected": "passes: inner-product quadratic, residual should be roundoff",
+      "failed_hypotheses": [],
+      "hypotheses": [
+        {
+          "failures": 0,
+          "max_abs": 7.579499120465812e-16,
+          "mean_abs": 1.3629972312354383e-16,
+          "name": "parallelogram",
+          "p95_abs": 3.4805524281251647e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.7287807113013208e-16,
+          "mean_abs": 2.76931808721425e-17,
+          "name": "midpoint_additivity",
+          "p95_abs": 1.0163506643527357e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 7.046298875549261e-16,
+          "mean_abs": 1.1814879324413555e-16,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 3.149673833675254e-16,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 4.893430479558377e-16,
+          "mean_abs": 7.748363379293187e-17,
+          "name": "second_difference_translation",
+          "p95_abs": 2.116595889205942e-16,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 7.579499120465812e-16,
+          "mean_abs": 1.3629972312354383e-16,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 3.4805524281251647e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.5068425987673953e-16,
+          "mean_abs": 2.3323658637138342e-17,
+          "name": "polarization_additivity",
+          "p95_abs": 6.528301622356762e-17,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.3910160192488985e-16,
+          "mean_abs": 2.3351648088293096e-17,
+          "name": "jensen_quadraticity",
+          "p95_abs": 6.84494546594068e-17,
+          "passed": true,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": true,
+      "name": "quadratic_l2_squared",
+      "notes": [],
+      "passed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "rejection_power": 0
+    },
+    {
+      "classification": "retained_quadratic_candidate",
+      "expected": "passes: coupling is allowed when still quadratic/SPD",
+      "failed_hypotheses": [],
+      "hypotheses": [
+        {
+          "failures": 0,
+          "max_abs": 8.481128080945768e-16,
+          "mean_abs": 1.8760436959639217e-16,
+          "name": "parallelogram",
+          "p95_abs": 4.74937388729749e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 2.40726136640089e-16,
+          "mean_abs": 4.289898097994963e-17,
+          "name": "midpoint_additivity",
+          "p95_abs": 1.282944035890099e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 8.575879245793964e-16,
+          "mean_abs": 1.4665681463339588e-16,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 3.867583675734392e-16,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 5.144968379535562e-16,
+          "mean_abs": 9.624767986479361e-17,
+          "name": "second_difference_translation",
+          "p95_abs": 2.5447714882588336e-16,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 8.481128080945768e-16,
+          "mean_abs": 1.8760436959639217e-16,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 4.74937388729749e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.4998560450145835e-16,
+          "mean_abs": 2.932355987294419e-17,
+          "name": "polarization_additivity",
+          "p95_abs": 7.929930023542557e-17,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 2.164795682044566e-16,
+          "mean_abs": 2.8934576327688764e-17,
+          "name": "jensen_quadraticity",
+          "p95_abs": 8.002936776732033e-17,
+          "passed": true,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": true,
+      "name": "coupled_quadratic_spd",
+      "notes": [],
+      "passed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "rejection_power": 0
+    },
+    {
+      "classification": "retained_quadratic_candidate",
+      "expected": "passes: random seeded SPD quadratic remains parallelogram",
+      "failed_hypotheses": [],
+      "hypotheses": [
+        {
+          "failures": 0,
+          "max_abs": 1.0978783942009607e-15,
+          "mean_abs": 2.248690050119794e-16,
+          "name": "parallelogram",
+          "p95_abs": 5.625729720104345e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 2.9276757178692286e-16,
+          "mean_abs": 5.2789939777330977e-17,
+          "name": "midpoint_additivity",
+          "p95_abs": 1.4995739956439293e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.2078407596354537e-15,
+          "mean_abs": 1.7381586971309268e-16,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 4.855781209602053e-16,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 6.846260541554249e-16,
+          "mean_abs": 1.199703486110609e-16,
+          "name": "second_difference_translation",
+          "p95_abs": 3.256973690604617e-16,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.0978783942009607e-15,
+          "mean_abs": 2.248690050119794e-16,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 5.625729720104345e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 0,
+          "max_abs": 2.347952160384976e-16,
+          "mean_abs": 3.4779740525596e-17,
+          "name": "polarization_additivity",
+          "p95_abs": 9.76992868691553e-17,
+          "passed": true,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 3.0640101056051208e-16,
+          "mean_abs": 3.505215650490326e-17,
+          "name": "jensen_quadraticity",
+          "p95_abs": 1.0385906881000502e-16,
+          "passed": true,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": true,
+      "name": "random_spd_quadratic",
+      "notes": [],
+      "passed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "rejection_power": 0
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "expected": "fails four-point: norm-like hierarchy checks do not force Hilbert structure",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "hypotheses": [
+        {
+          "failures": 1986,
+          "max_abs": 1.3108361026004616,
+          "mean_abs": 0.24841051841560458,
+          "name": "parallelogram",
+          "p95_abs": 0.6302150842890707,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 1986,
+          "max_abs": 0.32770902565011545,
+          "mean_abs": 0.062102629603901144,
+          "name": "midpoint_additivity",
+          "p95_abs": 0.15755377107226765,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.6442948870704598,
+          "mean_abs": 0.12929005260798163,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 0.3368684979697192,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.8580682262924136,
+          "mean_abs": 0.1290295099778335,
+          "name": "second_difference_translation",
+          "p95_abs": 0.3310534249608932,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1986,
+          "max_abs": 1.3108361026004616,
+          "mean_abs": 0.24841051841560458,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 0.6302150842890707,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.3608777578189846e-16,
+          "mean_abs": 6.804388789094923e-20,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 8.420574066857633e-16,
+          "mean_abs": 1.6128868381452366e-18,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 1996,
+          "max_abs": 0.14750515249954302,
+          "mean_abs": 0.03266994991209567,
+          "name": "polarization_additivity",
+          "p95_abs": 0.08308572510257094,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1973,
+          "max_abs": 0.1293620395731455,
+          "mean_abs": 0.022730470046540698,
+          "name": "jensen_quadraticity",
+          "p95_abs": 0.06491715338454038,
+          "passed": false,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": false,
+      "name": "l1_like_squared",
+      "notes": [
+        "strong signal: four-point failure appears as polarization non-additivity"
+      ],
+      "passed_hypotheses": [
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy"
+      ],
+      "rejection_power": 7
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "expected": "fails four-point: p != 2 is not parallelogram/Hilbert",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "hypotheses": [
+        {
+          "failures": 2000,
+          "max_abs": 0.5002331867938756,
+          "mean_abs": 0.1296123935800064,
+          "name": "parallelogram",
+          "p95_abs": 0.31719661997084436,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.125058296698469,
+          "mean_abs": 0.0324030983950016,
+          "name": "midpoint_additivity",
+          "p95_abs": 0.07929915499271109,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 1999,
+          "max_abs": 0.3705374135700331,
+          "mean_abs": 0.061468481309827495,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 0.16264078748745894,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.339628516036533,
+          "mean_abs": 0.06472794773590883,
+          "name": "second_difference_translation",
+          "p95_abs": 0.16461954284493793,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.5002331867938756,
+          "mean_abs": 0.1296123935800064,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 0.31719661997084436,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 2.2197659622916119e-16,
+          "mean_abs": 7.736580624878197e-17,
+          "name": "polarization_diagonal",
+          "p95_abs": 2.0481690740025212e-16,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.07768682115045045,
+          "mean_abs": 0.015677048031988192,
+          "name": "polarization_additivity",
+          "p95_abs": 0.040939980267220115,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.056686202415652386,
+          "mean_abs": 0.011207626923845125,
+          "name": "jensen_quadraticity",
+          "p95_abs": 0.03317030353665719,
+          "passed": false,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": false,
+      "name": "p_norm_squared_p3",
+      "notes": [
+        "strong signal: four-point failure appears as polarization non-additivity"
+      ],
+      "passed_hypotheses": [
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy"
+      ],
+      "rejection_power": 7
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "expected": "fails four-point: max norm squared is two-homogeneous but non-Hilbert",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "hypotheses": [
+        {
+          "failures": 1952,
+          "max_abs": 1.8359273789997685,
+          "mean_abs": 0.3861437779257246,
+          "name": "parallelogram",
+          "p95_abs": 0.9326139766070288,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 1952,
+          "max_abs": 0.45898184474994214,
+          "mean_abs": 0.09653594448143114,
+          "name": "midpoint_additivity",
+          "p95_abs": 0.2331534941517572,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 1.1214596616428205,
+          "mean_abs": 0.17844510636809446,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 0.4786067517526554,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1980,
+          "max_abs": 0.9719335594086949,
+          "mean_abs": 0.187304512910569,
+          "name": "second_difference_translation",
+          "p95_abs": 0.48273835766921436,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1952,
+          "max_abs": 1.8359273789997685,
+          "mean_abs": 0.3861437779257246,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 0.9326139766070288,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 2.0553582633314433e-16,
+          "mean_abs": 1.622094602370485e-19,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 6.633100976708632e-16,
+          "mean_abs": 3.3377659686946198e-18,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 1961,
+          "max_abs": 0.2786433613299151,
+          "mean_abs": 0.04581438886564516,
+          "name": "polarization_additivity",
+          "p95_abs": 0.12094951145343788,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1912,
+          "max_abs": 0.15069669839863065,
+          "mean_abs": 0.0337084451617403,
+          "name": "jensen_quadraticity",
+          "p95_abs": 0.09552323258650708,
+          "passed": false,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": false,
+      "name": "max_norm_squared",
+      "notes": [
+        "strong signal: four-point failure appears as polarization non-additivity"
+      ],
+      "passed_hypotheses": [
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy"
+      ],
+      "rejection_power": 7
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "expected": "fails four-point: random polyhedral norm squared is a seeded near-miss",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "hypotheses": [
+        {
+          "failures": 1990,
+          "max_abs": 1.2941884147992513,
+          "mean_abs": 0.21801124728730736,
+          "name": "parallelogram",
+          "p95_abs": 0.5506372623776477,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 1990,
+          "max_abs": 0.3235471036998128,
+          "mean_abs": 0.05450281182182684,
+          "name": "midpoint_additivity",
+          "p95_abs": 0.1376593155944119,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.7529187877343737,
+          "mean_abs": 0.11815788180363081,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 0.32078583257066723,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.6024751458822384,
+          "mean_abs": 0.10890225652238038,
+          "name": "second_difference_translation",
+          "p95_abs": 0.28338646501277565,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1990,
+          "max_abs": 1.2941884147992513,
+          "mean_abs": 0.21801124728730736,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 0.5506372623776477,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.0151617829931962e-15,
+          "mean_abs": 1.4338806220943017e-18,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 1997,
+          "max_abs": 0.15432833272245605,
+          "mean_abs": 0.027914071508424492,
+          "name": "polarization_additivity",
+          "p95_abs": 0.07531593136172819,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1981,
+          "max_abs": 0.1134692177115531,
+          "mean_abs": 0.020668530792439962,
+          "name": "jensen_quadraticity",
+          "p95_abs": 0.058477831161329576,
+          "passed": false,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": false,
+      "name": "random_polyhedral_norm_squared",
+      "notes": [
+        "strong signal: four-point failure appears as polarization non-additivity"
+      ],
+      "passed_hypotheses": [
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy"
+      ],
+      "rejection_power": 7
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "expected": "fails four-point despite two-homogeneity and nonnegative coupling",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "hypotheses": [
+        {
+          "failures": 1992,
+          "max_abs": 0.596860727700465,
+          "mean_abs": 0.14005150462345534,
+          "name": "parallelogram",
+          "p95_abs": 0.34618316309960495,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 1992,
+          "max_abs": 0.14921518192511624,
+          "mean_abs": 0.035012876155863834,
+          "name": "midpoint_additivity",
+          "p95_abs": 0.08654579077490124,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.43074803192214667,
+          "mean_abs": 0.07137208686871511,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 0.18658150315306912,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.37503796881163465,
+          "mean_abs": 0.07461281884456485,
+          "name": "second_difference_translation",
+          "p95_abs": 0.19397875432747766,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1992,
+          "max_abs": 0.596860727700465,
+          "mean_abs": 0.14005150462345534,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 0.34618316309960495,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 1998,
+          "max_abs": 0.09341481046632323,
+          "mean_abs": 0.01733658015826122,
+          "name": "polarization_additivity",
+          "p95_abs": 0.0445379594347875,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1981,
+          "max_abs": 0.0699683720778731,
+          "mean_abs": 0.013092113284119529,
+          "name": "jensen_quadraticity",
+          "p95_abs": 0.03740862251812785,
+          "passed": false,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": false,
+      "name": "coupled_l1_l2_two_homogeneous",
+      "notes": [
+        "strong signal: four-point failure appears as polarization non-additivity"
+      ],
+      "passed_hypotheses": [
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy"
+      ],
+      "rejection_power": 7
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "expected": "fails four-point: quadratic plus non-Hilbert two-homogeneous terms",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "hypotheses": [
+        {
+          "failures": 1997,
+          "max_abs": 0.4145982226900885,
+          "mean_abs": 0.09478655744553142,
+          "name": "parallelogram",
+          "p95_abs": 0.23160443737235942,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 1997,
+          "max_abs": 0.10364955567252213,
+          "mean_abs": 0.023696639361382856,
+          "name": "midpoint_additivity",
+          "p95_abs": 0.057901109343089854,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.2973648345349434,
+          "mean_abs": 0.049101244819708,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 0.12720879543750888,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.3193362605988783,
+          "mean_abs": 0.04768247796816343,
+          "name": "second_difference_translation",
+          "p95_abs": 0.12347566758665673,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1997,
+          "max_abs": 0.4145982226900885,
+          "mean_abs": 0.09478655744553142,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 0.23160443737235942,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 1.7384860719778717e-16,
+          "mean_abs": 8.692430359889359e-20,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.052267600166444245,
+          "mean_abs": 0.011803855035031143,
+          "name": "polarization_additivity",
+          "p95_abs": 0.03152759527956708,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 1994,
+          "max_abs": 0.05158813358149053,
+          "mean_abs": 0.008542728529962046,
+          "name": "jensen_quadraticity",
+          "p95_abs": 0.024241075048498102,
+          "passed": false,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": false,
+      "name": "mixed_two_homogeneous",
+      "notes": [
+        "strong signal: four-point failure appears as polarization non-additivity"
+      ],
+      "passed_hypotheses": [
+        "polarization_symmetry",
+        "polarization_psd",
+        "polarization_diagonal",
+        "polarization_cauchy"
+      ],
+      "rejection_power": 7
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "expected": "fails scaling and four-point: coupling can break quadraticity directly",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_diagonal",
+        "polarization_cauchy",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "hypotheses": [
+        {
+          "failures": 2000,
+          "max_abs": 2.1183369252474376,
+          "mean_abs": 0.2927117778811987,
+          "name": "parallelogram",
+          "p95_abs": 0.8225760481588373,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.1971810448968698,
+          "mean_abs": 0.03616703132972449,
+          "name": "midpoint_additivity",
+          "p95_abs": 0.0931409570151438,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 2.180937886820774,
+          "mean_abs": 0.19136606022755684,
+          "name": "second_difference_bilinearity",
+          "p95_abs": 0.5998035786789768,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 1.1852769039953706,
+          "mean_abs": 0.1425152312822007,
+          "name": "second_difference_translation",
+          "p95_abs": 0.4547493710976822,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 2.1183369252474376,
+          "mean_abs": 0.2927117778811987,
+          "name": "clarkson_hilbert_residual",
+          "p95_abs": 0.8225760481588373,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_symmetry",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "name": "polarization_psd",
+          "p95_abs": 0.0,
+          "passed": true,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 1.5307953693716103,
+          "mean_abs": 0.3574045891301217,
+          "name": "polarization_diagonal",
+          "p95_abs": 0.881697694831569,
+          "passed": false,
+          "tolerance": 1e-08
+        },
+        {
+          "failures": 194,
+          "max_abs": 2.5648326035496374,
+          "mean_abs": 0.04629160767967657,
+          "name": "polarization_cauchy",
+          "p95_abs": 0.3575409091449435,
+          "passed": false,
+          "tolerance": 1e-07
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.44721712079976206,
+          "mean_abs": 0.04495204555706735,
+          "name": "polarization_additivity",
+          "p95_abs": 0.15223745672945918,
+          "passed": false,
+          "tolerance": 2e-08
+        },
+        {
+          "failures": 2000,
+          "max_abs": 0.08344115648098599,
+          "mean_abs": 0.014104029783388412,
+          "name": "jensen_quadraticity",
+          "p95_abs": 0.04200773642209057,
+          "passed": false,
+          "tolerance": 2e-08
+        }
+      ],
+      "keeps_quadratic_candidate": false,
+      "name": "coupled_nonquadratic_quartic",
+      "notes": [
+        "strong signal: four-point failure appears as polarization non-additivity"
+      ],
+      "passed_hypotheses": [
+        "polarization_symmetry",
+        "polarization_psd"
+      ],
+      "rejection_power": 9
+    }
+  ],
+  "samples": 2000,
+  "seed": 20260608,
+  "summary": {
+    "interpretation": "A useful extra hypothesis should reject non-Hilbert two-homogeneous near-misses without rejecting quadratic/SPD candidates. Numerical success is diagnostic only.",
+    "near_miss_survivors": [],
+    "promotion": false,
+    "quadratic_false_rejects": [],
+    "ranked_hypotheses_by_near_miss_rejection": [
+      {
+        "hypothesis": "clarkson_hilbert_residual",
+        "rejected_near_miss_count": 7
+      },
+      {
+        "hypothesis": "jensen_quadraticity",
+        "rejected_near_miss_count": 7
+      },
+      {
+        "hypothesis": "midpoint_additivity",
+        "rejected_near_miss_count": 7
+      },
+      {
+        "hypothesis": "parallelogram",
+        "rejected_near_miss_count": 7
+      },
+      {
+        "hypothesis": "polarization_additivity",
+        "rejected_near_miss_count": 7
+      },
+      {
+        "hypothesis": "second_difference_bilinearity",
+        "rejected_near_miss_count": 7
+      },
+      {
+        "hypothesis": "second_difference_translation",
+        "rejected_near_miss_count": 7
+      },
+      {
+        "hypothesis": "polarization_cauchy",
+        "rejected_near_miss_count": 1
+      },
+      {
+        "hypothesis": "polarization_diagonal",
+        "rejected_near_miss_count": 1
+      }
+    ],
+    "terminal_unification_promoted": false
+  },
+  "terminal_unification_promoted": false,
+  "tolerances": {
+    "clarkson_hilbert_residual": 1e-08,
+    "jensen_quadraticity": 2e-08,
+    "midpoint_additivity": 1e-08,
+    "parallelogram": 1e-08,
+    "polarization_additivity": 2e-08,
+    "polarization_cauchy": 1e-07,
+    "polarization_diagonal": 1e-08,
+    "polarization_psd": 1e-08,
+    "polarization_symmetry": 1e-08,
+    "second_difference_bilinearity": 2e-08,
+    "second_difference_translation": 2e-08
+  }
+}

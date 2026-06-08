@@ -1,0 +1,259 @@
+{
+  "cases": [
+    {
+      "checks": {
+        "additivity": true,
+        "quadratic_four_point_output": true,
+        "representative_compatibility": true,
+        "scalar_compatibility": true
+      },
+      "description": "Applies a fixed matrix to observable quotient coordinates and ignores null representatives.",
+      "max_errors": {
+        "additivity": 1.0175362097255202e-15,
+        "combined": 1.4210854715202004e-14,
+        "quadratic_four_point_output": 1.4210854715202004e-14,
+        "representative_compatibility": 0.0,
+        "scalar_compatibility": 1.0877919644084146e-15
+      },
+      "mean_errors": {
+        "additivity": 2.1903105338182007e-16,
+        "quadratic_four_point_output": 1.5152267461571167e-15,
+        "representative_compatibility": 0.0,
+        "scalar_compatibility": 1.7039531342692712e-16
+      },
+      "name": "quotient_linear",
+      "passed_all_proxy_checks": true,
+      "promotion": false,
+      "worst_examples": [
+        {
+          "additivity_error": 6.304854800243424e-16,
+          "alpha": 0.63892713757344,
+          "combined_error": 1.4210854715202004e-14,
+          "four_point_error": 1.4210854715202004e-14,
+          "quotient_x": [
+            -0.7572369584425813,
+            0.7462338693868042,
+            0.33462602268389374,
+            0.08749931906536124
+          ],
+          "quotient_y": [
+            0.6272911113598625,
+            0.9566393236221462,
+            0.5991099253005756,
+            0.7392008057967236
+          ],
+          "representative_error": 0.0,
+          "sample": 223,
+          "scalar_error": 1.1102230246251565e-16
+        },
+        {
+          "additivity_error": 8.899114524108741e-16,
+          "alpha": 0.29835821927157813,
+          "combined_error": 8.881784197001252e-15,
+          "four_point_error": 8.881784197001252e-15,
+          "quotient_x": [
+            0.0507695874302212,
+            0.1855621152750746,
+            0.9043178248225026,
+            0.9909161182616837
+          ],
+          "quotient_y": [
+            0.4624432330098367,
+            0.5569718616039248,
+            0.538714394557732,
+            0.6785789131953617
+          ],
+          "representative_error": 0.0,
+          "sample": 5,
+          "scalar_error": 1.249000902703301e-16
+        },
+        {
+          "additivity_error": 1.9229626863835638e-16,
+          "alpha": -1.1268971145606907,
+          "combined_error": 8.881784197001252e-15,
+          "four_point_error": 8.881784197001252e-15,
+          "quotient_x": [
+            0.6455546406379977,
+            -0.08361942503976705,
+            0.37094677939438725,
+            0.7381140335242964
+          ],
+          "quotient_y": [
+            0.1979712614655882,
+            -0.7322550643894989,
+            -0.8624026039069554,
+            -0.3550133505926494
+          ],
+          "representative_error": 0.0,
+          "sample": 18,
+          "scalar_error": 4.440892098500626e-16
+        },
+        {
+          "additivity_error": 4.965068306494546e-16,
+          "alpha": -0.34886863268088675,
+          "combined_error": 8.881784197001252e-15,
+          "four_point_error": 8.881784197001252e-15,
+          "quotient_x": [
+            0.6948454415799008,
+            0.14480861113478083,
+            -0.47261545693286644,
+            -0.7657418779105181
+          ],
+          "quotient_y": [
+            -0.08133125727603718,
+            -0.9838450977038453,
+            -0.49788154717667754,
+            -0.6666998623094647
+          ],
+          "representative_error": 0.0,
+          "sample": 51,
+          "scalar_error": 6.206335383118183e-17
+        }
+      ]
+    },
+    {
+      "checks": {
+        "additivity": false,
+        "quadratic_four_point_output": false,
+        "representative_compatibility": false,
+        "scalar_compatibility": false
+      },
+      "description": "Adds coordinate squares and null-energy dependence; expected to fail quotient-linearity.",
+      "max_errors": {
+        "additivity": 1.2002470053778314,
+        "combined": 13.568828334286165,
+        "quadratic_four_point_output": 13.568828334286165,
+        "representative_compatibility": 1.5605136012918015,
+        "scalar_compatibility": 4.488710075726505
+      },
+      "mean_errors": {
+        "additivity": 0.4178114240483206,
+        "quadratic_four_point_output": 2.4125870746114044,
+        "representative_compatibility": 0.3148464150372395,
+        "scalar_compatibility": 0.49920650797932875
+      },
+      "name": "nonlinear_representative_dependent",
+      "passed_all_proxy_checks": false,
+      "promotion": false,
+      "worst_examples": [
+        {
+          "additivity_error": 1.0691797044796862,
+          "alpha": 1.384115375605655,
+          "combined_error": 13.568828334286165,
+          "four_point_error": 13.568828334286165,
+          "quotient_x": [
+            0.8590354499907793,
+            -0.20874070961031754,
+            0.8676985674908873,
+            0.8157151097267865
+          ],
+          "quotient_y": [
+            -0.4404025731004857,
+            -0.5847005295692609,
+            0.14615056700290463,
+            -0.9606379386129049
+          ],
+          "representative_error": 0.2936454931135546,
+          "sample": 43,
+          "scalar_error": 0.3518978699944595
+        },
+        {
+          "additivity_error": 0.6431495450844922,
+          "alpha": -0.15474878597688013,
+          "combined_error": 11.686272530041297,
+          "four_point_error": 11.686272530041297,
+          "quotient_x": [
+            0.8648748664617056,
+            0.6567374087074922,
+            0.1780485895025259,
+            -0.22066826749212298
+          ],
+          "quotient_y": [
+            -0.8470689131735574,
+            -0.7824098604247933,
+            -0.7302664192697088,
+            0.9436605709603381
+          ],
+          "representative_error": 0.10828118289687905,
+          "sample": 407,
+          "scalar_error": 0.04692012785146525
+        },
+        {
+          "additivity_error": 0.5830775583297619,
+          "alpha": -1.124194290284115,
+          "combined_error": 10.966349755142566,
+          "four_point_error": 10.966349755142566,
+          "quotient_x": [
+            0.869714033699087,
+            -0.19319719717702277,
+            -0.21524506361812223,
+            0.5666633746093881
+          ],
+          "quotient_y": [
+            -0.8405437363137558,
+            -0.14114282408828327,
+            0.9279278336608683,
+            0.6285515345454402
+          ],
+          "representative_error": 0.3687332191899675,
+          "sample": 315,
+          "scalar_error": 1.4279676068580618
+        },
+        {
+          "additivity_error": 0.6996574596726248,
+          "alpha": 0.4911522120695251,
+          "combined_error": 10.482662723018972,
+          "four_point_error": 10.482662723018972,
+          "quotient_x": [
+            0.8334146820778283,
+            0.35030759863122407,
+            0.6504819687038479,
+            -0.24795263021886438
+          ],
+          "quotient_y": [
+            -0.9389053598537009,
+            0.4209408877711307,
+            -0.7598739045356981,
+            -0.02395006308557157
+          ],
+          "representative_error": 0.034240180975459555,
+          "sample": 330,
+          "scalar_error": 0.06724203249961452
+        }
+      ]
+    }
+  ],
+  "clay_promotion": false,
+  "control": {
+    "C": "scripts/gluing_operator_linearity_proxy_harness.py",
+    "F": "Does not define the real quotient V or prove GluingResidualForcesFourPointCancellation.",
+    "G": "promotion=false always; diagnostics cannot prove unification or Clay claims.",
+    "L": "construct quotient proxy -> test linear gluing -> test nonlinear counterexample -> emit fail-closed JSON",
+    "O": "Lane 6 unification gluing diagnostic harness.",
+    "P": "Use deterministic finite-dimensional operators with randomized samples.",
+    "R": "Test additivity, scalar compatibility, and representative compatibility for finite defect-section quotient proxies.",
+    "S": "Pure finite proxy only; the admissible defect quotient theorem remains open."
+  },
+  "interpretation": {
+    "rejects": "Nonlinear or representative-dependent gluing operators can satisfy neither quotient compatibility nor four-point cancellation in this proxy.",
+    "residual_gap": "The repo still needs the actual admissible defect quotient V and a proof that the true gluing operator acts linearly on it.",
+    "supports": "Linearity plus representative independence is checkable on finite quotient proxies."
+  },
+  "ok": true,
+  "parameters": {
+    "ambient_dim": 6,
+    "counterexample_min_error": 0.001,
+    "quotient_dim": 4,
+    "samples": 512,
+    "seed": 20260608,
+    "tolerance": 1e-10
+  },
+  "promotion": false,
+  "summary": {
+    "all_expected_outcomes_observed": true,
+    "linear_case_passed": true,
+    "nonlinear_counterexample_failed": true,
+    "nonlinear_counterexample_visible": true
+  },
+  "unification_promotion": false
+}

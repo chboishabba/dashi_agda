@@ -86,19 +86,151 @@ any Clay-facing or physical claim can be promoted.
 ## Current Clay P0 Hardening Map
 
 The current Navier-Stokes route is no longer the historical single-angle
-zero-mode route.  Its live finite calculation is
-`CascadeClosedZeroModeOutputWidth`, supported by
+zero-mode route.  The output-only finite calculation
+`CascadeClosedZeroModeOutputWidth` is retained as a fail-closed historical
+boundary, but the exact-strain harnesses showed it is too permissive.  The
+live finite calculation is now `NSCascadeTransversalityCollapse` /
+`PropagatedPolarizationCascadeClosedOutputWidth`, supported by
 `NSTrueLerayTriadicDefectSymbol`,
 `NSTrueLerayTriadicZeroModeClassificationBoundary`,
 `NSCascadeClosedZeroModeOutputWidthBoundary`, and
-`NSTriadicAngularDefectSheafLeakageBoundary`.  Its live analytic calculation
-is `TriadicCompensatedLeakageIdentity`, supported by
+`NSTriadicAngularDefectSheafLeakageBoundary`, with
+`NSSignAntisymmetryExactIdentityBoundary` providing the exact true-triad
+identity `(a . omega_c) + (b . omega_c) = 0` as the algebraic seed.  Its live
+analytic calculation is `TriadicCompensatedLeakageIdentity`, supported by
 `NSAbelTriadicDefectMeasureConstructionBoundary`,
 `NSTriadicCompensatedLeakageIdentityBoundary`, and
 `NSTriadicLeakageSquareFunctionCoercivityBoundary`.  Ordinary CZ/LP and
 Coifman-Meyer estimates remain decomposition and boundedness tools only; the
 strict residual depletion must come from a signed leakage square-function
 identity for the true non-averaged Leray bilinear symbol.
+The 2026-06-08 exact finite-symbol harness round is now recorded by
+`NSExactStrainEigenbundleHarnessBoundary`: exact Biot-Savart/Leray/strain
+bookkeeping passes locally, but the current Family-I/II zero-mode residual is
+too permissive in that model.  Under the capped local probes, exact-strain
+reports `800/800` single-depth and depth-2 output-width hits, `1000/1000`
+depth-2 closure hits, and an A/B comparison of proxy `1` zero hit versus exact
+`1200` zero hits.  The finite route must therefore strengthen the
+cascade-closed propagated-polarization/coherence condition, or replace the
+present output-width theorem target, before the analytic transfer can be
+treated as the next NS closing step.
+The angular S2 Biot-Savart/curl diagnostic is recorded by
+`NSS2BiotSavartEigenbundleCascadeDiagnosticBoundary` and implemented in
+`scripts/ns_s2_biot_savart_eigenbundle.py` plus
+`scripts/ns_s2_cascade_width_harness.py`.  It uses the local `m11/m12`
+angular eigenline and corrected lambda diagnostic instead of the output-built
+tautology.  The capped run separates two notions that must not be conflated:
+random first-valid depth-2 survival at threshold `0.01` is `932 / 2966`, while
+best-of-120 existential survival is `2966 / 2966`.  This keeps
+`CascadeDepth2DegreeComputation` / transversality as the live finite proof
+target; finite sampling is not a proof of cascade-closed exclusion.
+The corrected finite NS statistics now move the live route away from
+coherent-triad domination and toward a kappa-bias PDE gate.  The governing
+five-result finite/statistical normal-form receipts are
+`NSSignAntisymmetryExactIdentityBoundary`,
+`NSCascadeKappaArcsineLawBoundary`,
+`NSCoherentStretchingExactFormulaBoundary`,
+`NSFiniteCascadeStretchingNeutralityBoundary`, and
+`NSBiotSavartStrainMeanSquareExactFormulaBoundary`.  They record true-triad
+sign antisymmetry, the arcsine baseline, the exact stretching law
+`omega . S omega = lambda(c)(2 kappa^2 - 1)`, conditional finite neutrality,
+and `<lambda^2>_{S2} = 11/60`.  The next NS analytic target is therefore
+`NSTypeIBlowupKappaBiasBound`: a Type-I/self-similar blowup profile must not
+create persistent positive `lambda(c)(kappa^2 - 1/2)` bias in its Abel
+triadic defect measure.  The finite harness
+`scripts/ns_kappa_bias_variational_harness.py` is a proxy falsification tool
+only; positive top-tail finite bias under weak proxies is not a PDE
+counterexample, stationarity/LRT proxies do not prove the Type-I bias bound,
+and Clay NS remains false.
+The corrected Gaussian self-similar balance is the current bridge from this
+finite kappa package to the PDE layer:
+`2 int |grad omega|^2 G - 1/2 int |omega|^2 G =
+4 Bias_G Omega_G + Drift_G Omega_G`, hence `1 <= 4 Bias_G + Drift_G` for a
+nontrivial profile after OU Poincare.  The latest variational receipt makes
+stationarity the decisive proxy constraint; LRT alone does not suppress
+positive kappa-bias and is retained as the separate angular-collapse guard.
+The next named gap is `AbelTriadicDefectMeasureConstruction` / CKN-scale
+approximate stationarity: show Type-I or ancient blowup rescalings generate
+Abel triadic defect measures approximately invariant under the true Leray
+transfer operator.  Without that weak-limit/stationarity step, the kappa-bias
+bound, compensated leakage identity, local monotonicity, and Clay NS all stay
+unpromoted.
+This rung is now typed explicitly by
+`NSAbelTriadicStationarityConstructionBoundary`, which splits the proof into
+A1 bounded mass, A2 observable recording, A3 approximate `T_NS` stationarity
+with `delta_r -> 0`, and A4 LRT output-support transfer.  The paired
+`scripts/ns_abel_triadic_stationarity_proxy_harness.py` and
+`NSAbelTriadicStationarityProxyHarnessResult` are synthetic diagnostics only;
+they measure a finite pushforward defect and the proxy
+`delta * sqrt(11/60)` bound, but they do not prove PDE stationarity or Clay NS.
+The next split refines those obligations into separate owner surfaces:
+`NSBoundedAbelMassEstimateBoundary` records the A1
+Type-I / `L^{3,infty}` -> Littlewood-Paley shell mass -> Abel finite-variation
+target and its constant-tracking blockers;
+`NSQuantitativeStationarityRateBoundary` records the A3.3
+`W_r = U_r - U_infty` energy-ODE / Seregin-ESS compactness-rate route and the
+still-open `delta_r -> 0` proof; `NSTriadicShellBernsteinHolderBoundary`
+records the A2 tight dyadic shell estimate and rejects the naive `L4 x L4`
+Bernstein shortcut as insufficient; and
+`NSLeiRenTianOutputSupportTransferBoundary` records the A4 physical
+vorticity-direction to Fourier triadic output-direction support transfer.
+`NSQuantitativeStationarityRateProxyHarnessResult` binds
+`scripts/ns_stationarity_rate_proxy_harness.py` to a checked proxy receipt,
+and `scripts/ns_bounded_abel_mass_proxy_harness.py` supplies the matching A1
+bounded-mass diagnostic.  The hard A6 split is now isolated by
+`NSPointwiseToAbelAveragingBoundary`, which records the diagonal,
+off-diagonal, localization, pressure, and Abel LLN/mixing obligations needed
+to replace pointwise stretching by the Abel/shell mean.  The child split is:
+`NSDiagonalStretchingToAbelMeanBoundary` for localized diagonal
+identification, `NSOffDiagonalShellAbsorptionBoundary` for non-diagonal
+LP/Coifman-Meyer/epsilon-gradient absorption, and
+`NSAbelShellMixingLLNBoundary` for Abel-window decorrelation and the
+`O(N_eff^-1/2)` error target.  The fourth child,
+`NSLocalizationPressureCommutatorBoundary`, records localization, Leray
+pressure reconstruction, pressure commutators, cutoff/boundary annuli, and
+pressure-tail absorption.  `NSPointwiseToAbelCompositeA6Boundary` now ties the
+four children to the parent A6 boundary, while
+`NSPointwiseToAbelAveragingProxyHarnessResult` records the existing proxy
+harness.  The diagnostics
+`scripts/ns_pointwise_to_abel_averaging_proxy_harness.py` and
+`scripts/ns_localization_pressure_commutator_proxy_harness.py` now test the
+same good/bad split locally.  `NSA6ErrorBudgetCompositeBoundary` records the
+current seven-line A6 budget taxonomy and
+`scripts/ns_a6_error_budget_proxy_harness.py` now tests synthetic aggregate
+good/bad budget separation.  The pressure/localization child is now sharpened
+by `NSPressureCommutatorEstimateContractBoundary`, which names the exact
+`[P_j, phi] R_i R_l`, local Calderon-Zygmund, harmonic pressure-tail, annular
+cutoff, epsilon-gradient absorption, and lower-order residual-routing
+obligations.  The companion
+`scripts/ns_pressure_tail_absorption_proxy_harness.py` and
+`NSPressureTailAbsorptionProxyHarnessResult` separate compact/Schwartz/
+localized good profiles from harmonic-tail, annular-plateau, and
+nonabsorbed-gradient bad cases.  `NSA6TheoremLadderBoundary` records the
+child-estimate -> budget -> pointwise-to-Abel -> leakage -> residual ->
+monotonicity -> CKN/BKM ladder.  The cutoff/Riesz sub-lane is now backed by
+`scripts/ns_cutoff_riesz_commutator_kernel_proxy_harness.py` and
+`NSCutoffRieszCommutatorKernelProxyHarnessResult`, separating smooth compact,
+separated-annulus, and shell-recentered good cases from rough cutoff,
+no-cancellation, and touching-core bad cases.  The harmonic-tail sub-lane is
+now recorded by `NSHarmonicPressureTailAbsorptionEstimateBoundary` and
+`scripts/ns_harmonic_pressure_tail_decay_proxy_harness.py`, with
+mean-subtraction, annular-separation, and moment-cancellation diagnostics.
+`NSPressureLocalizationSubBudgetCompositeBoundary` normalizes the pressure
+child stack into one sub-budget composite, and
+`scripts/ns_pressure_localization_subbudget_proxy_harness.py` plus
+`NSPressureLocalizationSubBudgetProxyHarnessResult` record the finite
+aggregate diagnostic only.
+`NSBiotSavartShellLocalizationBoundary` now isolates the A6.2 sub-lemma
+needed by the diagonal side of pointwise-to-Abel: same-shell Biot-Savart
+strain multiplier ownership, off-shell shell-tail decay, Calderon-Zygmund
+kernel control, Type-I `L^{3,inf}` dependence, and diagonal-to-Abel
+compatibility.  The paired diagnostic
+`scripts/ns_biot_savart_shell_localization_proxy_harness.py` and
+`NSBiotSavartShellLocalizationProxyHarnessResult` separate same-shell /
+Abel-localized good profiles from separated-tail and nonlocal-plateau bad
+profiles.  The next NS proof to calculate is A6.2; the estimate, A6,
+residual depletion, local monotonicity, CKN/BKM closure, and Clay NS remain
+unproved.
 
 The current Yang-Mills route has two live calculations:
 `HamiltonianDominatesDefectPlusHolonomy`, recorded by
@@ -108,15 +240,91 @@ The current Yang-Mills route has two live calculations:
 preprints are candidate authority inputs only.  They do not discharge the
 DASHI BT-to-Wilson action comparison, reflection positivity, clustering,
 observable inclusion, no spectral pollution, or Clay-promotion gates.
+`YMAdmissibleBTBoundaryConventionBoundary` records the current finite-tree
+boundary-convention precondition: induced finite-ball truncations can collapse
+the tested BT gap signal, while full-degree / killing-style boundary
+conventions are the current admissible candidate.  This condition must be
+carried into the finite gauge quotient before any Hamiltonian domination or OS
+transfer step can promote.
+`YMFiniteGaugeQuotientHamiltonianPreconditionBoundary` now records that
+carry-through as the first operator-theoretic checklist: full-degree/Killing
+domain, finite gauge quotient carrier, self-adjoint finite Hamiltonian,
+holonomy/action split, and
+`H_d | Omega^perp >= c1 Delta_YM + c2 Hol - E_d`.  It is a precondition
+receipt, not a Hamiltonian-domination proof or YM mass-gap proof.
+`YMSelfAdjointFiniteHamiltonianBoundary` now separates the finite
+self-adjointness theorem from that checklist: finite domain, symmetric form,
+gauge-invariant subspace, quotient descent, finite self-adjoint
+matrix/operator, and discrete spectrum remain open proof obligations before
+Hamiltonian domination can use the finite operator.  The diagnostic
+`scripts/ym_finite_selfadjoint_hamiltonian_proxy_harness.py` checks this
+finite-operator shape against nonsymmetric and domain-unstable bad cases, and
+`YMFiniteSelfAdjointHamiltonianProxyHarnessResult` binds it to Agda.  The
+diagnostic `scripts/ym_hamiltonian_domination_proxy_harness.py` checks the
+finite matrix inequality shape for `H >= c1 Delta + c2 Hol - E` against weak-H
+and near-zero-sector failures; `YMHamiltonianDominationProxyHarnessResult` and
+`YMHamiltonianDominationCompositeBoundary` bind that diagnostic and chain to
+Agda.  `YMHamiltonianDominationErrorBudgetBoundary` now records the finite
+self-adjoint, quotient-domain, holonomy/action, negative `E_d`,
+spectral-margin, reflection-positive, and OS/continuum residual budgets.  These
+diagnostics and budgets are not YM theorems.
+`scripts/ym_domination_spectral_margin_proxy_harness.py` is the current finite
+symmetric-matrix spectral-margin diagnostic for that budget and separates
+dominated quotient / holonomy gap / stable `E_d` cases from weak kinetic,
+missing-holonomy, and spectral-pollution bad cases.
+`YMDominationSpectralMarginProxyHarnessResult` and
+`YMSpectralMarginErrorBudgetCompositeBoundary` now bind that diagnostic and
+its spectral-margin error budget directly into the YM operator chain.
+`YMKillingBoundarySelfAdjointnessDomainContract` now records the first YM
+finite-domain theorem contract after boundary sensitivity: full-degree /
+Killing boundary convention, finite BT cell domain closure, boundary flux
+cancellation, gauge-domain invariance, quotient descent, symmetric finite
+matrix, and finite self-adjointness.  The paired
+`scripts/ym_killing_boundary_self_adjointness_proxy_harness.py` is diagnostic
+only and checks symmetry defect, gauge-null leakage, induced collapse,
+nonorthogonal projection, and spectral margin.  Hamiltonian domination,
+OS/continuum transfer, no spectral pollution, YM Clay, and terminal promotion
+remain unproved.
 
 The current unification route is the sheafified four-point path:
 local defect sections plus gluing residual control must prove
 `HierarchyConsistencyKillsFourPointDefect`.  The governing surfaces are
 `DefectSheafGluingFourPointParallelogramBoundary`,
-`DefectFourPointParallelogramLawBoundary`, and
-`DefectHierarchyParallelogramGeneralizationBoundary`.  Quadratic emergence,
-signature/Clifford consumers, terminal unification, and Clay promotion remain
-blocked until that four-point law is actually proved.
+`DefectFourPointParallelogramLawBoundary`,
+`DefectHierarchyParallelogramGeneralizationBoundary`, and
+`GluingResidualForcesFourPointCancellationBoundary`.  The local numerical
+counterexample lane showed that coarse two-homogeneous / monotone /
+subadditive conditions are not enough; the missing proof is a
+gluing/polarization residual theorem that kills the four-point defect.
+`GluingOperatorLinearityOnDefectQuotientBoundary` now isolates U-1a before
+that theorem: define the admissible defect quotient `V` and prove the gluing
+operator `G` respects zero, addition, scalars, and quotient representatives.
+`scripts/gluing_operator_linearity_proxy_harness.py` is the matching local
+diagnostic: quotient-linear proxies pass, nonlinear representative-dependent
+counterexamples fail, and promotion stays false.
+`GluingOperatorLinearityProxyHarnessResult` binds that diagnostic to Agda
+without proving the real admissible quotient theorem.
+`scripts/unification_gluing_quotient_admissibility_proxy_harness.py` now tests
+the next quotient-admissibility proxy split: representative-invariant linear
+quotient gluing passes, while representative leakage, nonlinear gluing, and a
+two-homogeneous norm-like near-miss fail.  It is diagnostic only.
+`UnificationGluingQuotientAdmissibilityProxyHarnessResult` binds that
+diagnostic to Agda without proving quotient admissibility.
+`scripts/unification_quotient_four_point_stress_harness.py` adds a
+manifest-routed four-point stress diagnostic for representative-shift,
+nonlinear-gluing, p-norm, and asymmetric-cross-term near misses.  It is not a
+four-point theorem.
+`UnificationQuotientFourPointStressProxyHarnessResult` binds that diagnostic
+to Agda, and `UnificationFourPointStressCompositeBoundary` records the
+quotient-admissibility -> representative-invariance -> gluing-linearity ->
+four-point-cancellation -> parallelogram -> quadratic-emergence ->
+signature/Clifford chain with all theorem and promotion flags false.
+`UnificationGluingCrossTermNullClassBoundary` now isolates the next U-1a
+sub-obligation: the cross-term `G(s1+s2)-G(s1)-G(s2)` must lie in the null
+class of the admissible defect quotient before gluing linearity can feed
+four-point cancellation.
+Quadratic emergence, signature/Clifford consumers, terminal unification, and
+Clay promotion remain blocked until that four-point law is actually proved.
 
 ## Known Constants And Laws Population
 

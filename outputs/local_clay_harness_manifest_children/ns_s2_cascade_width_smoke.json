@@ -1,0 +1,266 @@
+{
+  "clay_promoted": false,
+  "counts": {
+    "accepted": 192,
+    "anti_parallel_rejects": 0,
+    "degenerate_or_missing_frame": 0,
+    "family_nearest_split_all": {
+      "both": 0,
+      "family_i": 89,
+      "family_ii": 103
+    }
+  },
+  "family_i_factor_distribution": {
+    "count": 192,
+    "max": 0.9999603267794502,
+    "mean": 0.5241491248190345,
+    "median": 0.5388951216290716,
+    "min": 0.0001171268630862476,
+    "p05": 0.010100003821511095,
+    "p25": 0.14400471823303504,
+    "p75": 0.881435731002707,
+    "p95": 0.997581696236199
+  },
+  "family_ii_factor_distribution": {
+    "count": 192,
+    "max": 0.8383861381483375,
+    "mean": 0.2446212132335215,
+    "median": 0.16509768359208374,
+    "min": 1.4417587908309972e-05,
+    "p05": 0.0007902834010726144,
+    "p25": 0.035496136522793785,
+    "p75": 0.39464397999045836,
+    "p95": 0.6921570696761734
+  },
+  "interpretation": "Depth-2 survivor counts are based on the best lambda over the sampled continuation pool; random_depth2_* counts use only the first valid continuation in that pool. Width is estimated as sup_n inf_c |n.c| over sampled candidate normals.",
+  "lambda_distribution": {
+    "count": 192,
+    "max": 0.24020759759236027,
+    "mean": 0.06309195850414744,
+    "median": 0.041614187719938064,
+    "min": 1.4414641873938666e-05,
+    "p05": 0.00031614495026234323,
+    "p25": 0.009830284859364675,
+    "p75": 0.10488080712355898,
+    "p95": 0.19496793035496057
+  },
+  "parameters": {
+    "continuations": 16,
+    "normals": 64,
+    "polarization_model": "canonical",
+    "samples": 192,
+    "seed": 20260608,
+    "thresholds": [
+      0.02,
+      0.05,
+      0.1
+    ]
+  },
+  "promotion": false,
+  "provider": {
+    "fallback_provider_used": false,
+    "notes": [
+      "loaded requested S2 Biot-Savart eigenbundle provider"
+    ],
+    "requested_provider_present": true,
+    "source": "/home/c/Documents/code/dashi_agda/scripts/ns_s2_biot_savart_eigenbundle.py"
+  },
+  "scope": "finite_sampled_ns_s2_biot_savart_leray_cascade_diagnostic_not_proof",
+  "threshold_reports": {
+    "0.02": {
+      "best_depth2_lambda_distribution": {
+        "count": 71,
+        "max": 0.019012509469873064,
+        "mean": 0.006235120972749124,
+        "median": 0.0044307838899751446,
+        "min": 2.1465968728564454e-07,
+        "p05": 0.00020669501237649958,
+        "p25": 0.000995371583932486,
+        "p75": 0.01045136072675557,
+        "p95": 0.016955306317860106
+      },
+      "depth1_output_width": {
+        "best_normal": [
+          0.48333253,
+          0.84347971,
+          0.234375
+        ],
+        "estimated_width": 0.08290648792836236,
+        "point_count": 71
+      },
+      "depth1_zero_count": 71,
+      "depth1_zero_fraction": 0.3697916666666667,
+      "depth2_attempted_continuations": 192,
+      "depth2_degenerate_continuations": 0,
+      "depth2_output_width": {
+        "best_normal": [
+          -0.11957042,
+          0.36857753,
+          -0.921875
+        ],
+        "estimated_width": 0.10270521799558402,
+        "point_count": 71
+      },
+      "depth2_survival_fraction_of_depth1": 1.0,
+      "depth2_survivor_count": 71,
+      "family_hit_split": {
+        "both": 0,
+        "family_i": 15,
+        "family_ii": 39
+      },
+      "first_valid_depth2_lambda_distribution": {
+        "count": 71,
+        "max": 0.19340102816297414,
+        "mean": 0.05671923528129969,
+        "median": 0.04519564788615876,
+        "min": 0.00021635351686191253,
+        "p05": 0.002215087650798481,
+        "p25": 0.016955306317860106,
+        "p75": 0.0840906831584098,
+        "p95": 0.15481715781982258
+      },
+      "random_depth2_output_width_first_valid": {
+        "best_normal": [
+          0.47296152,
+          -0.30085941,
+          0.828125
+        ],
+        "estimated_width": 0.3230532141101017,
+        "point_count": 20
+      },
+      "random_depth2_survival_fraction_first_valid": 0.28169014084507044,
+      "random_depth2_survivor_count_first_valid": 20,
+      "threshold": 0.02
+    },
+    "0.05": {
+      "best_depth2_lambda_distribution": {
+        "count": 104,
+        "max": 0.019432794778974936,
+        "mean": 0.005882650773044076,
+        "median": 0.004224475765391474,
+        "min": 2.1465968728564454e-07,
+        "p05": 9.589093488700747e-05,
+        "p25": 0.000995371583932486,
+        "p75": 0.009879487905166856,
+        "p95": 0.017252683501733625
+      },
+      "depth1_output_width": {
+        "best_normal": [
+          -0.93283181,
+          -0.29759879,
+          0.203125
+        ],
+        "estimated_width": 0.05522546055420198,
+        "point_count": 104
+      },
+      "depth1_zero_count": 104,
+      "depth1_zero_fraction": 0.5416666666666666,
+      "depth2_attempted_continuations": 296,
+      "depth2_degenerate_continuations": 0,
+      "depth2_output_width": {
+        "best_normal": [
+          -0.11957042,
+          0.36857753,
+          -0.921875
+        ],
+        "estimated_width": 0.08994429880122692,
+        "point_count": 104
+      },
+      "depth2_survival_fraction_of_depth1": 1.0,
+      "depth2_survivor_count": 104,
+      "family_hit_split": {
+        "both": 1,
+        "family_i": 25,
+        "family_ii": 52
+      },
+      "first_valid_depth2_lambda_distribution": {
+        "count": 104,
+        "max": 0.2365754496951975,
+        "mean": 0.06309611797059143,
+        "median": 0.05141276338157956,
+        "min": 2.697465512380288e-05,
+        "p05": 0.0015100414967479797,
+        "p25": 0.01353173027089175,
+        "p75": 0.09300920162512198,
+        "p95": 0.15876485331294232
+      },
+      "random_depth2_output_width_first_valid": {
+        "best_normal": [
+          0.47296152,
+          -0.30085941,
+          0.828125
+        ],
+        "estimated_width": 0.3230532141101017,
+        "point_count": 51
+      },
+      "random_depth2_survival_fraction_first_valid": 0.49038461538461536,
+      "random_depth2_survivor_count_first_valid": 51,
+      "threshold": 0.05
+    },
+    "0.1": {
+      "best_depth2_lambda_distribution": {
+        "count": 141,
+        "max": 0.01997876617957297,
+        "mean": 0.00595393755960434,
+        "median": 0.004204442372884267,
+        "min": 2.1465968728564454e-07,
+        "p05": 3.58194171282471e-05,
+        "p25": 0.0009862637887527287,
+        "p75": 0.009879487905166856,
+        "p95": 0.017252683501733625
+      },
+      "depth1_output_width": {
+        "best_normal": [
+          -0.93283181,
+          -0.29759879,
+          0.203125
+        ],
+        "estimated_width": 0.04058261761045959,
+        "point_count": 141
+      },
+      "depth1_zero_count": 141,
+      "depth1_zero_fraction": 0.734375,
+      "depth2_attempted_continuations": 404,
+      "depth2_degenerate_continuations": 0,
+      "depth2_output_width": {
+        "best_normal": [
+          -0.11957042,
+          0.36857753,
+          -0.921875
+        ],
+        "estimated_width": 0.06279111951076366,
+        "point_count": 141
+      },
+      "depth2_survival_fraction_of_depth1": 1.0,
+      "depth2_survivor_count": 141,
+      "family_hit_split": {
+        "both": 3,
+        "family_i": 45,
+        "family_ii": 78
+      },
+      "first_valid_depth2_lambda_distribution": {
+        "count": 141,
+        "max": 0.23749289157238757,
+        "mean": 0.06124812904642214,
+        "median": 0.04606819626327172,
+        "min": 7.031042734366614e-07,
+        "p05": 0.0007095804479694679,
+        "p25": 0.01353173027089175,
+        "p75": 0.09095484128301573,
+        "p95": 0.17852082393032825
+      },
+      "random_depth2_output_width_first_valid": {
+        "best_normal": [
+          0.27668058,
+          0.36088082,
+          0.890625
+        ],
+        "estimated_width": 0.10347437087366418,
+        "point_count": 111
+      },
+      "random_depth2_survival_fraction_first_valid": 0.7872340425531915,
+      "random_depth2_survivor_count_first_valid": 111,
+      "threshold": 0.1
+    }
+  }
+}

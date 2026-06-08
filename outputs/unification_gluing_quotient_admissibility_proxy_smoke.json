@@ -1,0 +1,833 @@
+{
+  "aggregate": {
+    "all_expected_outcomes_observed": true,
+    "bad_case_count": 3,
+    "case_count": 4,
+    "good_case_count": 1,
+    "max_good_combined_error": 3.1086244689504383e-15,
+    "min_bad_combined_error": 3.857062716049377,
+    "observed_fail_count": 3,
+    "observed_pass_count": 1
+  },
+  "bad_cases": [
+    {
+      "additivity": false,
+      "expected": "Fails because null representatives leak into gluing output.",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "representative_invariance",
+        "additivity",
+        "scalar_compatibility",
+        "two_homogeneity_energy",
+        "four_point_residual_cancellation"
+      ],
+      "four_point_residual_cancellation": false,
+      "kind": "bad",
+      "max_errors": {
+        "additivity": 0.6422222222222219,
+        "four_point_residual_cancellation": 3.0964681481481486,
+        "representative_invariance": 1.258166410316768,
+        "scalar_compatibility": 1.586666666666667,
+        "two_homogeneity_energy": 6.954567187500004
+      },
+      "mean_errors": {
+        "additivity": 0.26444444444444437,
+        "four_point_residual_cancellation": 1.42303012345679,
+        "representative_invariance": 0.6923135598685135,
+        "scalar_compatibility": 0.5558730158730159,
+        "two_homogeneity_energy": 1.8618742923280427
+      },
+      "name": "representative_dependent_leak",
+      "observed_pass": false,
+      "representative_invariance": false,
+      "scalar_compatibility": false,
+      "two_homogeneity_energy": false,
+      "witness_count": 6,
+      "worst_witnesses": [
+        {
+          "additivity_error": 0.33999999999999986,
+          "alpha": 2.25,
+          "combined_error": 6.954567187500004,
+          "four_point_residual_error": 2.140186666666665,
+          "null_shift": [
+            -1.0,
+            -0.6666666666666666,
+            -0.3333333333333333
+          ],
+          "quotient_x": [
+            -0.6666666666666666,
+            -0.6666666666666666,
+            0.0,
+            -1.0
+          ],
+          "quotient_y": [
+            -1.0,
+            0.0,
+            -0.6666666666666666,
+            -0.6666666666666666
+          ],
+          "representative_error": 1.0443238701087953,
+          "sample": 6,
+          "scalar_error": 0.9562499999999998,
+          "two_homogeneity_energy_error": 6.954567187500004
+        },
+        {
+          "additivity_error": 0.33999999999999986,
+          "alpha": 2.25,
+          "combined_error": 6.954567187500004,
+          "four_point_residual_error": 2.140186666666665,
+          "null_shift": [
+            -1.0,
+            -0.6666666666666666,
+            -0.3333333333333333
+          ],
+          "quotient_x": [
+            -0.6666666666666666,
+            -0.6666666666666666,
+            0.0,
+            -1.0
+          ],
+          "quotient_y": [
+            -1.0,
+            0.0,
+            -0.6666666666666666,
+            -0.6666666666666666
+          ],
+          "representative_error": 1.0443238701087953,
+          "sample": 13,
+          "scalar_error": 0.9562499999999998,
+          "two_homogeneity_energy_error": 6.954567187500004
+        },
+        {
+          "additivity_error": 0.33999999999999986,
+          "alpha": 2.25,
+          "combined_error": 6.954567187500004,
+          "four_point_residual_error": 2.140186666666665,
+          "null_shift": [
+            -1.0,
+            -0.6666666666666666,
+            -0.3333333333333333
+          ],
+          "quotient_x": [
+            -0.6666666666666666,
+            -0.6666666666666666,
+            0.0,
+            -1.0
+          ],
+          "quotient_y": [
+            -1.0,
+            0.0,
+            -0.6666666666666666,
+            -0.6666666666666666
+          ],
+          "representative_error": 1.0443238701087953,
+          "sample": 20,
+          "scalar_error": 0.9562499999999998,
+          "two_homogeneity_energy_error": 6.954567187500004
+        },
+        {
+          "additivity_error": 0.33999999999999986,
+          "alpha": 2.25,
+          "combined_error": 6.954567187500004,
+          "four_point_residual_error": 2.140186666666665,
+          "null_shift": [
+            -1.0,
+            -0.6666666666666666,
+            -0.3333333333333333
+          ],
+          "quotient_x": [
+            -0.6666666666666666,
+            -0.6666666666666666,
+            0.0,
+            -1.0
+          ],
+          "quotient_y": [
+            -1.0,
+            0.0,
+            -0.6666666666666666,
+            -0.6666666666666666
+          ],
+          "representative_error": 1.0443238701087953,
+          "sample": 27,
+          "scalar_error": 0.9562499999999998,
+          "two_homogeneity_energy_error": 6.954567187500004
+        },
+        {
+          "additivity_error": 0.33999999999999986,
+          "alpha": 2.25,
+          "combined_error": 6.954567187500004,
+          "four_point_residual_error": 2.140186666666665,
+          "null_shift": [
+            -1.0,
+            -0.6666666666666666,
+            -0.3333333333333333
+          ],
+          "quotient_x": [
+            -0.6666666666666666,
+            -0.6666666666666666,
+            0.0,
+            -1.0
+          ],
+          "quotient_y": [
+            -1.0,
+            0.0,
+            -0.6666666666666666,
+            -0.6666666666666666
+          ],
+          "representative_error": 1.0443238701087953,
+          "sample": 34,
+          "scalar_error": 0.9562499999999998,
+          "two_homogeneity_energy_error": 6.954567187500004
+        },
+        {
+          "additivity_error": 0.33999999999999986,
+          "alpha": 2.25,
+          "combined_error": 6.954567187500004,
+          "four_point_residual_error": 2.140186666666665,
+          "null_shift": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "quotient_x": [
+            -0.6666666666666666,
+            -0.6666666666666666,
+            0.0,
+            -1.0
+          ],
+          "quotient_y": [
+            -1.0,
+            0.0,
+            -0.6666666666666666,
+            -0.6666666666666666
+          ],
+          "representative_error": 0.6225842200948488,
+          "sample": 41,
+          "scalar_error": 0.9562499999999998,
+          "two_homogeneity_energy_error": 6.954567187500004
+        }
+      ]
+    },
+    {
+      "additivity": false,
+      "expected": "Fails additivity, scalar compatibility, and four-point cancellation.",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "additivity",
+        "scalar_compatibility",
+        "two_homogeneity_energy",
+        "four_point_residual_cancellation"
+      ],
+      "four_point_residual_cancellation": false,
+      "kind": "bad",
+      "max_errors": {
+        "additivity": 0.36287092559472894,
+        "four_point_residual_cancellation": 3.857062716049377,
+        "representative_invariance": 0.0,
+        "scalar_compatibility": 0.6533333333333333,
+        "two_homogeneity_energy": 2.817754074074074
+      },
+      "mean_errors": {
+        "additivity": 0.1846476590012193,
+        "four_point_residual_cancellation": 1.0452594708994702,
+        "representative_invariance": 0.0,
+        "scalar_compatibility": 0.26523598541323345,
+        "two_homogeneity_energy": 0.6091966348379634
+      },
+      "name": "nonlinear_quotient_gluing",
+      "observed_pass": false,
+      "representative_invariance": true,
+      "scalar_compatibility": false,
+      "two_homogeneity_energy": false,
+      "witness_count": 6,
+      "worst_witnesses": [
+        {
+          "additivity_error": 0.1887973634467505,
+          "alpha": -2.0,
+          "combined_error": 3.857062716049377,
+          "four_point_residual_error": 3.857062716049377,
+          "null_shift": [
+            0.0,
+            0.6666666666666666,
+            -1.0
+          ],
+          "quotient_x": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "quotient_y": [
+            1.0,
+            0.6666666666666666,
+            1.0,
+            -0.3333333333333333
+          ],
+          "representative_error": 0.0,
+          "sample": 0,
+          "scalar_error": 0.6533333333333333,
+          "two_homogeneity_energy_error": 2.817754074074074
+        },
+        {
+          "additivity_error": 0.1887973634467505,
+          "alpha": -2.0,
+          "combined_error": 3.857062716049377,
+          "four_point_residual_error": 3.857062716049377,
+          "null_shift": [
+            0.0,
+            0.6666666666666666,
+            -1.0
+          ],
+          "quotient_x": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "quotient_y": [
+            1.0,
+            0.6666666666666666,
+            1.0,
+            -0.3333333333333333
+          ],
+          "representative_error": 0.0,
+          "sample": 7,
+          "scalar_error": 0.6533333333333333,
+          "two_homogeneity_energy_error": 2.817754074074074
+        },
+        {
+          "additivity_error": 0.1887973634467505,
+          "alpha": -2.0,
+          "combined_error": 3.857062716049377,
+          "four_point_residual_error": 3.857062716049377,
+          "null_shift": [
+            0.0,
+            0.6666666666666666,
+            -1.0
+          ],
+          "quotient_x": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "quotient_y": [
+            1.0,
+            0.6666666666666666,
+            1.0,
+            -0.3333333333333333
+          ],
+          "representative_error": 0.0,
+          "sample": 14,
+          "scalar_error": 0.6533333333333333,
+          "two_homogeneity_energy_error": 2.817754074074074
+        },
+        {
+          "additivity_error": 0.1887973634467505,
+          "alpha": -2.0,
+          "combined_error": 3.857062716049377,
+          "four_point_residual_error": 3.857062716049377,
+          "null_shift": [
+            0.0,
+            0.6666666666666666,
+            -1.0
+          ],
+          "quotient_x": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "quotient_y": [
+            1.0,
+            0.6666666666666666,
+            1.0,
+            -0.3333333333333333
+          ],
+          "representative_error": 0.0,
+          "sample": 21,
+          "scalar_error": 0.6533333333333333,
+          "two_homogeneity_energy_error": 2.817754074074074
+        },
+        {
+          "additivity_error": 0.1887973634467505,
+          "alpha": -2.0,
+          "combined_error": 3.857062716049377,
+          "four_point_residual_error": 3.857062716049377,
+          "null_shift": [
+            0.0,
+            0.6666666666666666,
+            -1.0
+          ],
+          "quotient_x": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "quotient_y": [
+            1.0,
+            0.6666666666666666,
+            1.0,
+            -0.3333333333333333
+          ],
+          "representative_error": 0.0,
+          "sample": 28,
+          "scalar_error": 0.6533333333333333,
+          "two_homogeneity_energy_error": 2.817754074074074
+        },
+        {
+          "additivity_error": 0.1887973634467505,
+          "alpha": -2.0,
+          "combined_error": 3.857062716049377,
+          "four_point_residual_error": 3.857062716049377,
+          "null_shift": [
+            0.0,
+            0.6666666666666666,
+            -1.0
+          ],
+          "quotient_x": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "quotient_y": [
+            1.0,
+            0.6666666666666666,
+            1.0,
+            -0.3333333333333333
+          ],
+          "representative_error": 0.0,
+          "sample": 35,
+          "scalar_error": 0.6533333333333333,
+          "two_homogeneity_energy_error": 2.817754074074074
+        }
+      ]
+    },
+    {
+      "additivity": true,
+      "expected": "Passes quotient-linearity and two-homogeneity but fails the parallelogram/four-point law.",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "four_point_residual_cancellation"
+      ],
+      "four_point_residual_cancellation": false,
+      "kind": "bad",
+      "max_errors": {
+        "additivity": 4.652682298944613e-16,
+        "four_point_residual_cancellation": 12.407985777777775,
+        "representative_invariance": 0.0,
+        "scalar_compatibility": 4.440892098500626e-16,
+        "two_homogeneity_energy": 1.7763568394002505e-15
+      },
+      "mean_errors": {
+        "additivity": 1.7664004809730385e-16,
+        "four_point_residual_cancellation": 6.233549714285715,
+        "representative_invariance": 0.0,
+        "scalar_compatibility": 1.2785887924302941e-16,
+        "two_homogeneity_energy": 2.5376526277146434e-16
+      },
+      "name": "two_homogeneous_norm_like_near_miss",
+      "observed_pass": false,
+      "representative_invariance": true,
+      "scalar_compatibility": true,
+      "two_homogeneity_energy": true,
+      "witness_count": 6,
+      "worst_witnesses": [
+        {
+          "additivity_error": 4.652682298944613e-16,
+          "alpha": 0.0,
+          "combined_error": 12.407985777777775,
+          "four_point_residual_error": 12.407985777777775,
+          "null_shift": [
+            0.6666666666666666,
+            0.0,
+            -0.6666666666666666
+          ],
+          "quotient_x": [
+            -0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ],
+          "quotient_y": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "representative_error": 0.0,
+          "sample": 3,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        },
+        {
+          "additivity_error": 4.652682298944613e-16,
+          "alpha": 0.0,
+          "combined_error": 12.407985777777775,
+          "four_point_residual_error": 12.407985777777775,
+          "null_shift": [
+            0.6666666666666666,
+            0.0,
+            -0.6666666666666666
+          ],
+          "quotient_x": [
+            -0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ],
+          "quotient_y": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "representative_error": 0.0,
+          "sample": 10,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        },
+        {
+          "additivity_error": 4.652682298944613e-16,
+          "alpha": 0.0,
+          "combined_error": 12.407985777777775,
+          "four_point_residual_error": 12.407985777777775,
+          "null_shift": [
+            0.6666666666666666,
+            0.0,
+            -0.6666666666666666
+          ],
+          "quotient_x": [
+            -0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ],
+          "quotient_y": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "representative_error": 0.0,
+          "sample": 17,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        },
+        {
+          "additivity_error": 4.652682298944613e-16,
+          "alpha": 0.0,
+          "combined_error": 12.407985777777775,
+          "four_point_residual_error": 12.407985777777775,
+          "null_shift": [
+            0.6666666666666666,
+            0.0,
+            -0.6666666666666666
+          ],
+          "quotient_x": [
+            -0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ],
+          "quotient_y": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "representative_error": 0.0,
+          "sample": 24,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        },
+        {
+          "additivity_error": 4.652682298944613e-16,
+          "alpha": 0.0,
+          "combined_error": 12.407985777777775,
+          "four_point_residual_error": 12.407985777777775,
+          "null_shift": [
+            0.6666666666666666,
+            0.0,
+            -0.6666666666666666
+          ],
+          "quotient_x": [
+            -0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ],
+          "quotient_y": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "representative_error": 0.0,
+          "sample": 31,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        },
+        {
+          "additivity_error": 4.652682298944613e-16,
+          "alpha": 0.0,
+          "combined_error": 12.407985777777775,
+          "four_point_residual_error": 12.407985777777775,
+          "null_shift": [
+            -0.3333333333333333,
+            1.0,
+            0.0
+          ],
+          "quotient_x": [
+            -0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ],
+          "quotient_y": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "representative_error": 0.0,
+          "sample": 38,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        }
+      ]
+    }
+  ],
+  "control": {
+    "C": "scripts/unification_gluing_quotient_admissibility_proxy_harness.py",
+    "F": "Does not construct the real defect quotient or prove admissibility beyond these finite proxy examples.",
+    "G": "promotion=false and diagnostic_only=true always; this cannot certify the true unification quotient.",
+    "L": "construct quotient examples -> run good linear case -> run three obstruction cases -> aggregate fail-closed validation flags",
+    "O": "Worker Lane 6 Dewey unification gluing quotient admissibility proxy harness.",
+    "P": "Use explicit finite matrices, representative shifts, and scalar tests to separate admissible and inadmissible quotient proxies.",
+    "R": "Finite quotient representatives must support representative-invariant linear gluing and quadratic four-point residual cancellation.",
+    "S": "Pure stdlib deterministic finite-dimensional diagnostic; no Agda, docs, manifest, or persistent outputs are required."
+  },
+  "diagnostic_only": true,
+  "good_cases": [
+    {
+      "additivity": true,
+      "expected": "Representative-invariant linear quotient operator with quadratic four-point residual cancellation.",
+      "expected_outcome_observed": true,
+      "failed_checks": [],
+      "four_point_residual_cancellation": true,
+      "kind": "good",
+      "max_errors": {
+        "additivity": 4.652682298944613e-16,
+        "four_point_residual_cancellation": 3.1086244689504383e-15,
+        "representative_invariance": 0.0,
+        "scalar_compatibility": 4.440892098500626e-16,
+        "two_homogeneity_energy": 1.7763568394002505e-15
+      },
+      "mean_errors": {
+        "additivity": 1.7664004809730385e-16,
+        "four_point_residual_cancellation": 1.2053849981644557e-15,
+        "representative_invariance": 0.0,
+        "scalar_compatibility": 1.2785887924302941e-16,
+        "two_homogeneity_energy": 3.1720657846433045e-16
+      },
+      "name": "linear_quotient_gluing",
+      "observed_pass": true,
+      "representative_invariance": true,
+      "scalar_compatibility": true,
+      "two_homogeneity_energy": true,
+      "witness_count": 6,
+      "worst_witnesses": [
+        {
+          "additivity_error": 3.1401849173675503e-16,
+          "alpha": -0.5,
+          "combined_error": 3.1086244689504383e-15,
+          "four_point_residual_error": 3.1086244689504383e-15,
+          "null_shift": [
+            -0.3333333333333333,
+            1.0,
+            0.0
+          ],
+          "quotient_x": [
+            -1.0,
+            0.0,
+            -0.6666666666666666,
+            -0.6666666666666666
+          ],
+          "quotient_y": [
+            0.3333333333333333,
+            -0.3333333333333333,
+            -0.3333333333333333,
+            0.3333333333333333
+          ],
+          "representative_error": 0.0,
+          "sample": 2,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        },
+        {
+          "additivity_error": 1.1102230246251565e-16,
+          "alpha": -2.0,
+          "combined_error": 1.7763568394002505e-15,
+          "four_point_residual_error": 1.7763568394002505e-15,
+          "null_shift": [
+            0.0,
+            0.6666666666666666,
+            -1.0
+          ],
+          "quotient_x": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "quotient_y": [
+            1.0,
+            0.6666666666666666,
+            1.0,
+            -0.3333333333333333
+          ],
+          "representative_error": 0.0,
+          "sample": 0,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        },
+        {
+          "additivity_error": 4.652682298944613e-16,
+          "alpha": 0.0,
+          "combined_error": 1.7763568394002505e-15,
+          "four_point_residual_error": 1.7763568394002505e-15,
+          "null_shift": [
+            0.6666666666666666,
+            0.0,
+            -0.6666666666666666
+          ],
+          "quotient_x": [
+            -0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ],
+          "quotient_y": [
+            0.0,
+            0.3333333333333333,
+            -1.0,
+            0.6666666666666666
+          ],
+          "representative_error": 0.0,
+          "sample": 3,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        },
+        {
+          "additivity_error": 0.0,
+          "alpha": 1.5,
+          "combined_error": 1.7763568394002505e-15,
+          "four_point_residual_error": 1.7763568394002505e-15,
+          "null_shift": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "quotient_x": [
+            1.0,
+            0.6666666666666666,
+            1.0,
+            -0.3333333333333333
+          ],
+          "quotient_y": [
+            -0.6666666666666666,
+            -0.6666666666666666,
+            0.0,
+            -1.0
+          ],
+          "representative_error": 0.0,
+          "sample": 5,
+          "scalar_error": 2.220446049250313e-16,
+          "two_homogeneity_energy_error": 1.7763568394002505e-15
+        },
+        {
+          "additivity_error": 0.0,
+          "alpha": -1.25,
+          "combined_error": 4.440892098500626e-16,
+          "four_point_residual_error": 0.0,
+          "null_shift": [
+            1.0,
+            -0.3333333333333333,
+            0.6666666666666666
+          ],
+          "quotient_x": [
+            0.6666666666666666,
+            -1.0,
+            0.3333333333333333,
+            0.0
+          ],
+          "quotient_y": [
+            0.6666666666666666,
+            -1.0,
+            0.3333333333333333,
+            0.0
+          ],
+          "representative_error": 0.0,
+          "sample": 1,
+          "scalar_error": 2.2887833992611187e-16,
+          "two_homogeneity_energy_error": 4.440892098500626e-16
+        },
+        {
+          "additivity_error": 1.2412670766236366e-16,
+          "alpha": 0.5,
+          "combined_error": 1.2412670766236366e-16,
+          "four_point_residual_error": 0.0,
+          "null_shift": [
+            -0.6666666666666666,
+            -1.0,
+            1.0
+          ],
+          "quotient_x": [
+            0.3333333333333333,
+            -0.3333333333333333,
+            -0.3333333333333333,
+            0.3333333333333333
+          ],
+          "quotient_y": [
+            -0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0
+          ],
+          "representative_error": 0.0,
+          "sample": 4,
+          "scalar_error": 0.0,
+          "two_homogeneity_energy_error": 0.0
+        }
+      ]
+    }
+  ],
+  "ok": true,
+  "parameters": {
+    "ambient_dim": 7,
+    "counterexample_min_error": 0.001,
+    "null_dim": 3,
+    "null_shift_count": 36,
+    "output_dim": 4,
+    "quotient_dim": 4,
+    "radius": 3,
+    "representative_count": 168,
+    "tolerance": 1e-10
+  },
+  "promotion": false,
+  "validation_flags": {
+    "all_bad_cases_fail": true,
+    "all_bad_cases_visible": true,
+    "all_good_cases_pass": true,
+    "diagnostic_only_is_true": true,
+    "has_one_good_case": true,
+    "has_three_bad_cases": true,
+    "nonlinear_gluing_detected": true,
+    "promotion_is_false": true,
+    "representative_leak_detected": true,
+    "two_homogeneous_near_miss_is_isolated": true
+  }
+}

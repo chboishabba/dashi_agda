@@ -26,14 +26,305 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/NSTangentialZeroModePressureStarvationBoundary.agda`
 - `DASHI/Physics/Closure/NSTrueLerayTriadicZeroModeClassificationBoundary.agda`
 - `DASHI/Physics/Closure/NSAbelTriadicDefectMeasureConstructionBoundary.agda`
+- `DASHI/Physics/Closure/NSAbelTriadicStationarityConstructionBoundary.agda`
+- `DASHI/Physics/Closure/NSAbelTriadicStationarityProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSBoundedAbelMassEstimateBoundary.agda`
+- `DASHI/Physics/Closure/NSQuantitativeStationarityRateBoundary.agda`
+- `DASHI/Physics/Closure/NSQuantitativeStationarityRateProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSTriadicShellBernsteinHolderBoundary.agda`
+- `DASHI/Physics/Closure/NSLeiRenTianOutputSupportTransferBoundary.agda`
+- `DASHI/Physics/Closure/NSBiotSavartShellLocalizationBoundary.agda`
+- `DASHI/Physics/Closure/NSBiotSavartShellLocalizationProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSPointwiseToAbelAveragingBoundary.agda`
+- `DASHI/Physics/Closure/NSDiagonalStretchingToAbelMeanBoundary.agda`
+- `DASHI/Physics/Closure/NSOffDiagonalShellAbsorptionBoundary.agda`
+- `DASHI/Physics/Closure/NSAbelShellMixingLLNBoundary.agda`
+- `DASHI/Physics/Closure/NSLocalizationPressureCommutatorBoundary.agda`
+- `DASHI/Physics/Closure/NSLocalizationPressureCommutatorProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSPressureCommutatorEstimateContractBoundary.agda`
+- `DASHI/Physics/Closure/NSCutoffRieszCommutatorKernelProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSHarmonicPressureTailAbsorptionEstimateBoundary.agda`
+- `DASHI/Physics/Closure/NSPressureTailAbsorptionProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSPressureLocalizationSubBudgetCompositeBoundary.agda`
+- `DASHI/Physics/Closure/NSPressureLocalizationSubBudgetProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSPressureSubBudgetComponentSensitivityProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSPointwiseToAbelCompositeA6Boundary.agda`
+- `DASHI/Physics/Closure/NSPointwiseToAbelAveragingProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSA6ErrorBudgetCompositeBoundary.agda`
+- `DASHI/Physics/Closure/NSA6TheoremLadderBoundary.agda`
 - `DASHI/Physics/Closure/NSTriadicCompensatedLeakageIdentityBoundary.agda`
+- `DASHI/Physics/Closure/NSExactStrainEigenbundleHarnessBoundary.agda`
+- `DASHI/Physics/Closure/NSS2BiotSavartEigenbundleCascadeDiagnosticBoundary.agda`
+- `DASHI/Physics/Closure/NSSignAntisymmetryExactIdentityBoundary.agda`
+- `DASHI/Physics/Closure/NSCascadeKappaArcsineLawBoundary.agda`
+- `DASHI/Physics/Closure/NSCoherentStretchingExactFormulaBoundary.agda`
+- `DASHI/Physics/Closure/NSFiniteCascadeStretchingNeutralityBoundary.agda`
+- `DASHI/Physics/Closure/NSTransferOperatorBiasNeutralityBoundary.agda`
+- `DASHI/Physics/Closure/NSBiotSavartStrainMeanSquareExactFormulaBoundary.agda`
 - `DASHI/Physics/Closure/YMGaugeZeroModeVacuumRigidityBoundary.agda`
 - `DASHI/Physics/Closure/YMHamiltonianDominatesFiniteHodgeDefectBoundary.agda`
 - `DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda`
+- `DASHI/Physics/Closure/YMAdmissibleBTBoundaryConventionBoundary.agda`
+- `DASHI/Physics/Closure/YMFiniteGaugeQuotientHamiltonianPreconditionBoundary.agda`
+- `DASHI/Physics/Closure/YMSelfAdjointFiniteHamiltonianBoundary.agda`
+- `DASHI/Physics/Closure/YMFiniteSelfAdjointHamiltonianProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/YMHamiltonianDominationProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/YMHamiltonianDominationCompositeBoundary.agda`
+- `DASHI/Physics/Closure/YMHamiltonianDominationErrorBudgetBoundary.agda`
+- `DASHI/Physics/Closure/YMDominationSpectralMarginProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/YMSpectralMarginErrorBudgetCompositeBoundary.agda`
+- `DASHI/Physics/Closure/YMSpectralMarginBoundarySensitivityProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessDomainContract.agda`
 - `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
 - `DASHI/Physics/Closure/YMWeightedBTAdjointKappaCalculation.agda`
 - `DASHI/Physics/Closure/DefectFourPointParallelogramLawBoundary.agda`
 - `DASHI/Physics/Closure/DefectSheafGluingFourPointParallelogramBoundary.agda`
+- `DASHI/Physics/Closure/GluingResidualForcesFourPointCancellationBoundary.agda`
+- `DASHI/Physics/Closure/GluingOperatorLinearityOnDefectQuotientBoundary.agda`
+- `DASHI/Physics/Closure/GluingOperatorLinearityProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/UnificationGluingCrossTermNullClassBoundary.agda`
+- `DASHI/Physics/Closure/UnificationGluingLinearityCompositeBoundary.agda`
+- `DASHI/Physics/Closure/UnificationGluingQuotientAdmissibilityProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/UnificationQuotientFourPointStressProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/UnificationFourPointStressCompositeBoundary.agda`
+
+Current frontier receipts:
+
+- `DASHI/Physics/Closure/NSSignAntisymmetryExactIdentityBoundary.agda` is a
+  finite-algebra identity receipt for the repaired NS target.  It does not
+  prove output-width exclusion or PDE leakage transfer.
+- `DASHI/Physics/Closure/NSCascadeKappaArcsineLawBoundary.agda`,
+  `DASHI/Physics/Closure/NSCoherentStretchingExactFormulaBoundary.agda`,
+  `DASHI/Physics/Closure/NSFiniteCascadeStretchingNeutralityBoundary.agda`,
+  `DASHI/Physics/Closure/NSTransferOperatorBiasNeutralityBoundary.agda`,
+  and
+  `DASHI/Physics/Closure/NSBiotSavartStrainMeanSquareExactFormulaBoundary.agda`
+  together with `DASHI/Physics/Closure/NSSignAntisymmetryExactIdentityBoundary.agda`
+  record the corrected five-result finite NS normal form: true-triad sign
+  antisymmetry, the kappa arcsine law, the exact stretching formula, finite
+  cascade stretching neutrality, and the mean-square strain coefficient.
+  `NSTransferOperatorBiasNeutralityBoundary` records conditional
+  finite-statistical neutrality for the transfer operator; it does not prove
+  PDE stationarity, approximate `T_NS`-stationarity, or any Clay promotion.
+  The live PDE gate is `NSTypeIBlowupKappaBiasBound`, namely ruling out
+  persistent positive `lambda(c)(kappa^2 - 1/2)` bias for admissible Type-I /
+  self-similar Abel triadic measures.  These receipts do not prove that
+  bound, the leakage identity, local defect monotonicity, CKN/BKM closure, or
+  Clay NS.
+  The corrected Gaussian self-similar balance currently records the analytic
+  shape to be formalized in the next receipt:
+  `2 int |grad omega|^2 G - 1/2 int |omega|^2 G =
+  4 Bias_G Omega_G + Drift_G Omega_G`, forcing
+  `1 <= 4 Bias_G + Drift_G` for any nontrivial profile after OU Poincare.
+  The variational harness points to approximate `T_NS`-stationarity as the
+  decisive constraint; the next named proof gap is
+  `AbelTriadicDefectMeasureConstruction`, not a new finite cascade
+  calculation.
+- `DASHI/Physics/Closure/NSAbelTriadicStationarityConstructionBoundary.agda`
+  records the A1-A4 analytic stationarity rung now sitting directly above the
+  Abel measure boundary: bounded mass, observable recording, approximate
+  `T_NS` stationarity with `delta_r -> 0`, and LRT output-support transfer.
+  `DASHI/Physics/Closure/NSAbelTriadicStationarityProxyHarnessResult.agda`
+  records only the synthetic proxy harness surface
+  `scripts/ns_abel_triadic_stationarity_proxy_harness.py`.  These surfaces do
+  not prove the PDE Abel measure construction, the quantitative stationarity
+  rate, the Type-I kappa-bias theorem, the compensated leakage identity,
+  local monotonicity, or Clay NS.
+- `DASHI/Physics/Closure/NSBoundedAbelMassEstimateBoundary.agda` records A1:
+  Type-I / `L^{3,infty}` control -> Littlewood-Paley shell mass -> Abel
+  log-window finite-variation target.  The paired diagnostic
+  `scripts/ns_bounded_abel_mass_proxy_harness.py` checks bounded proxy
+  profiles and a deliberately bad profile only; neither surface proves the
+  CKN-scale bounded Abel mass theorem.
+- `DASHI/Physics/Closure/NSQuantitativeStationarityRateBoundary.agda` records
+  the A3.3 `W_r = U_r - U_infty` energy-ODE route, Seregin/ESS rate input,
+  and the still-open `delta_r -> 0` proof.  The
+  `delta_r * sqrt(11/60)` bias consequence is conditional only.
+- `DASHI/Physics/Closure/NSQuantitativeStationarityRateProxyHarnessResult.agda`
+  records the executable proxy receipt for
+  `scripts/ns_stationarity_rate_proxy_harness.py`: log-rate good profiles,
+  a bad nondecaying counterprofile, and the synthetic
+  `delta_r * sqrt(11/60)` bias-bound calculation.  It is not a Seregin/ESS
+  proof.
+- `DASHI/Physics/Closure/NSTriadicShellBernsteinHolderBoundary.agda` records
+  the A2 dyadic estimate target and explicitly marks the naive `L4 x L4`
+  Bernstein route as insufficient without the near-diagonal Leray/Coifman-
+  Meyer shell argument.
+- `DASHI/Physics/Closure/NSLeiRenTianOutputSupportTransferBoundary.agda`
+  records the A4 physical-vorticity-direction to Fourier-output-direction
+  support coupling target.  Whitney/frame/localization and no-angular-
+  collapse transfer remain unproved.
+- `DASHI/Physics/Closure/NSBiotSavartShellLocalizationBoundary.agda` records
+  the A6.2 theorem contract for same-shell Biot-Savart strain multiplier
+  ownership, off-shell leakage decay, Calderon-Zygmund kernel control,
+  Type-I `L^{3,inf}` dependence, and diagonal-to-Abel compatibility.
+  `NSBiotSavartShellLocalizationProxyHarnessResult.agda` binds the paired
+  finite diagnostic harness.  These do not prove the CZ localization
+  estimate, A6, residual depletion, or Clay NS.
+- `DASHI/Physics/Closure/NSPointwiseToAbelAveragingBoundary.agda` records the
+  A6 hard subtheorem: replace localized pointwise `omega . S omega` by the
+  Abel/shell mean `int lambda(c)(2 kappa^2 - 1) dmu_r` with diagonal,
+  off-diagonal, localization, pressure, and shell-mixing errors controlled.
+  This is the current hardest NS transfer theorem and remains unproved.
+- The A6 split now has three child boundary receipts:
+  `NSDiagonalStretchingToAbelMeanBoundary.agda` for diagonal shell
+  identification, `NSOffDiagonalShellAbsorptionBoundary.agda` for LP /
+  Coifman-Meyer / epsilon-gradient absorption of non-diagonal terms, and
+  `NSAbelShellMixingLLNBoundary.agda` for the Abel-window mixing /
+  `O(N_eff^-1/2)` LLN target.  The paired diagnostic
+  `scripts/ns_pointwise_to_abel_averaging_proxy_harness.py` is routed through
+  the manifest and rejects a correlated positive-bias counterprofile; it is
+  not a PDE proof.
+- The A6 split now also has
+  `NSLocalizationPressureCommutatorBoundary.agda` for cutoff, Leray pressure,
+  commutator, boundary annulus, and pressure-tail controls, plus
+  `NSPointwiseToAbelCompositeA6Boundary.agda` tying the four child blockers
+  back to `NSPointwiseToAbelAveragingBoundary`.  The receipt
+  `NSPointwiseToAbelAveragingProxyHarnessResult.agda` records the existing
+  pointwise-to-Abel proxy harness.  The new diagnostic
+  `scripts/ns_localization_pressure_commutator_proxy_harness.py` is routed
+  through the manifest and separates refinement-decaying localized profiles
+  from persistent pressure-tail/cutoff-commutator bad profiles.  These are
+  diagnostics and dependency receipts only; A6, residual depletion, local
+  monotonicity, and Clay NS remain unproved.
+- `DASHI/Physics/Closure/NSPressureCommutatorEstimateContractBoundary.agda`
+  sharpens the localization/pressure child into the explicit theorem contract
+  for `[P_j, phi] R_i R_l`, local Calderon-Zygmund pressure, harmonic pressure
+  tail, annular cutoff, epsilon-gradient absorption, and lower-order residual
+  routing.  `DASHI/Physics/Closure/NSPressureTailAbsorptionProxyHarnessResult.agda`
+  records the diagnostic split from
+  `scripts/ns_pressure_tail_absorption_proxy_harness.py`.  These do not prove
+  pressure-tail absorption, pressure commutator estimates, A6, residual
+  depletion, or Clay NS.
+- `DASHI/Physics/Closure/NSCutoffRieszCommutatorKernelProxyHarnessResult.agda`
+  records the finite kernel diagnostic for
+  `scripts/ns_cutoff_riesz_commutator_kernel_proxy_harness.py`: smooth
+  compact, separated-annulus, and shell-recentered profiles pass, while rough
+  cutoff, no-cancellation, and annulus-touching-core profiles fail.  This is
+  not a cutoff/Riesz commutator theorem.
+- `DASHI/Physics/Closure/NSHarmonicPressureTailAbsorptionEstimateBoundary.agda`
+  records the harmonic pressure-tail theorem contract: decomposition,
+  exterior annulus decay, `Q_r` mean subtraction, scale-separated absorption,
+  epsilon-gradient split, pressure-tail budget routing, and no pressure sign
+  claim.  `scripts/ns_harmonic_pressure_tail_decay_proxy_harness.py` is the
+  paired diagnostic only.
+- `DASHI/Physics/Closure/NSPressureLocalizationSubBudgetCompositeBoundary.agda`
+  composes the pressure/localization sub-budget across cutoff/Riesz
+  commutator, local Calderon-Zygmund core, harmonic tail, pressure tail,
+  annular cutoff, epsilon-gradient absorption, and Abel recentering /
+  lower-order routing.  `NSPressureLocalizationSubBudgetProxyHarnessResult`
+  records the synthetic aggregate harness only.  These do not prove the
+  pressure sub-budget, localization theorem, A6, residual nonpositivity, or
+  Clay NS.
+- `DASHI/Physics/Closure/NSPressureSubBudgetComponentSensitivityProxyHarnessResult.agda`
+  records the component-sensitivity sweep for the same seven pressure /
+  localization sub-budgets.  It is routed through the manifest as diagnostic
+  evidence only and does not prove component sensitivity, localization, A6,
+  residual depletion, or Clay NS.
+- `DASHI/Physics/Closure/NSA6ErrorBudgetCompositeBoundary.agda` records the
+  current aggregate A6 budget taxonomy: diagonal residual, off-diagonal
+  absorption, Abel LLN variance, localization cutoff, pressure commutator,
+  pressure tail, and Abel tail/recentering.  The diagnostic
+  `scripts/ns_a6_error_budget_proxy_harness.py` is routed through the manifest
+  and separates decaying aggregate profiles from bad single-component
+  obstructions.  It is not an aggregate PDE estimate.
+- `DASHI/Physics/Closure/NSA6TheoremLadderBoundary.agda` records the theorem
+  ladder from A6 child estimates through aggregate budget,
+  pointwise-to-Abel, compensated leakage, residual nonpositivity, local
+  monotonicity, and CKN/BKM closure.  Every theorem and promotion flag remains
+  false.
+- `DASHI/Physics/Closure/YMAdmissibleBTBoundaryConventionBoundary.agda`
+  records the finite BT boundary-convention precondition exposed by local
+  calcs.  It does not prove the Hamiltonian domination, reflection positivity,
+  OS transfer, or mass gap.
+- `DASHI/Physics/Closure/YMFiniteGaugeQuotientHamiltonianPreconditionBoundary.agda`
+  records the first YM operator-theoretic preconditions after the boundary
+  convention: full-degree/Killing domain, finite gauge quotient, self-adjoint
+  finite Hamiltonian, holonomy/action sector split, and the Hamiltonian
+  domination inequality.  It is not a YM mass-gap proof.
+- `DASHI/Physics/Closure/YMSelfAdjointFiniteHamiltonianBoundary.agda` records
+  the next YM operator proof target: finite domain, symmetric form, gauge
+  quotient descent, self-adjoint matrix/operator, and discrete spectrum.  It
+  does not prove Hamiltonian domination, OS transfer, continuum transfer, or
+  YM Clay.
+- `DASHI/Physics/Closure/YMFiniteSelfAdjointHamiltonianProxyHarnessResult.agda`
+  records the diagnostic for
+  `scripts/ym_finite_selfadjoint_hamiltonian_proxy_harness.py`: one symmetric
+  quotient-stable finite matrix proxy passes, while nonsymmetric and
+  domain-unstable cases fail.  The paired finite domination diagnostic
+  `scripts/ym_hamiltonian_domination_proxy_harness.py` is routed through the
+  manifest and checks a good matrix inequality margin against weak-H and
+  near-zero-sector failures.  Neither proves YM self-adjointness,
+  Hamiltonian domination, OS transfer, continuum transfer, or Clay YM.
+- `DASHI/Physics/Closure/YMHamiltonianDominationProxyHarnessResult.agda` and
+  `DASHI/Physics/Closure/YMHamiltonianDominationCompositeBoundary.agda` record
+  the finite domination diagnostic and dependency chain.  The chain is
+  admissible boundary -> finite self-adjoint operator -> holonomy/action
+  sector -> domination inequality -> reflection positivity/OS -> continuum no
+  spectral pollution, all fail-closed.
+- `DASHI/Physics/Closure/YMHamiltonianDominationErrorBudgetBoundary.agda`
+  records the finite domination error budget: self-adjoint defect,
+  quotient-domain residual, holonomy/action residuals, negative `E_d` budget,
+  spectral margin, reflection-positive transfer residual, and OS/continuum
+  no-spectral-pollution residual.  It does not prove Hamiltonian domination,
+  reflection-positive transfer, OS/continuum transfer, or YM Clay.
+- `DASHI/Physics/Closure/YMDominationSpectralMarginProxyHarnessResult.agda`
+  records the finite symmetric-matrix spectral-margin diagnostic for the YM
+  domination budget.  `YMSpectralMarginErrorBudgetCompositeBoundary.agda`
+  imports that receipt and records the spectral margin -> domination ->
+  reflection positivity -> OS/continuum -> no-spectral-pollution chain while
+  keeping all theorem and promotion flags false.
+- `DASHI/Physics/Closure/YMSpectralMarginBoundarySensitivityProxyHarnessResult.agda`
+  records the finite boundary-sensitivity sweep around that spectral-margin
+  proxy.  It varies kinetic, holonomy, `E_d`, and pollution budgets and keeps
+  boundary sensitivity, spectral margin, Hamiltonian domination,
+  OS/continuum transfer, YM Clay, and terminal promotion false.
+- `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessDomainContract.agda`
+  records the first finite-domain theorem contract after YM boundary
+  sensitivity: full-degree/Killing boundary convention, BT cell domain
+  closure, boundary flux cancellation, gauge-domain invariance, quotient
+  descent, symmetric finite matrix, and finite self-adjointness.  It does not
+  prove Hamiltonian domination, OS transfer, continuum no-pollution, YM Clay,
+  or terminal promotion.
+- `DASHI/Physics/Closure/GluingResidualForcesFourPointCancellationBoundary.agda`
+  records the unification gluing-residual target.  It does not prove the
+  four-point law or quadratic emergence.
+- `DASHI/Physics/Closure/GluingOperatorLinearityOnDefectQuotientBoundary.agda`
+  records the U-1a quotient-linearity blocker: define the admissible defect
+  quotient and prove the gluing operator respects zero, addition, scalars, and
+  representatives before four-point cancellation can be attempted.
+- `DASHI/Physics/Closure/GluingOperatorLinearityProxyHarnessResult.agda`
+  records the finite diagnostic for `scripts/gluing_operator_linearity_proxy_harness.py`:
+  quotient-linear proxies pass and nonlinear representative-dependent
+  counterexamples fail additivity/scalar/representative/four-point checks.
+  It does not prove the real quotient theorem.
+- `DASHI/Physics/Closure/UnificationGluingLinearityCompositeBoundary.agda`
+  records the unification first-rung dependency chain from admissible defect
+  quotient and gluing-operator compatibility to four-point cancellation,
+  parallelogram, quadratic emergence, and signature/Clifford consumers.  It
+  does not prove any of those theorem steps.
+- `scripts/unification_gluing_quotient_admissibility_proxy_harness.py` is the
+  current finite proxy for quotient admissibility.  It separates a
+  representative-invariant linear quotient case from representative leakage,
+  nonlinear gluing, and two-homogeneous norm-like near-miss bad cases; it is
+  not an Agda proof of quotient admissibility or four-point cancellation.
+- `DASHI/Physics/Closure/UnificationGluingQuotientAdmissibilityProxyHarnessResult.agda`
+  binds that quotient-admissibility diagnostic to Agda while keeping quotient
+  admissibility, gluing linearity, four-point cancellation, parallelogram,
+  quadratic emergence, and terminal promotion false.
+- `DASHI/Physics/Closure/UnificationGluingCrossTermNullClassBoundary.agda`
+  records the next U-1a sub-obligation: prove
+  `G(s1+s2)-G(s1)-G(s2)` lies in the null class of the admissible defect
+  quotient.  Four-point cancellation, parallelogram, quadratic emergence,
+  signature/Clifford consumers, and terminal promotion remain blocked.
+- `DASHI/Physics/Closure/UnificationQuotientFourPointStressProxyHarnessResult.agda`
+  records the four-point stress diagnostic for representative-shift,
+  nonlinear-gluing, p-norm, and asymmetric-cross-term near misses.
+  `DASHI/Physics/Closure/UnificationFourPointStressCompositeBoundary.agda`
+  imports that receipt and records the quotient-admissibility ->
+  representative-invariance -> gluing-linearity -> four-point-cancellation ->
+  parallelogram -> quadratic-emergence -> signature/Clifford chain.  It does
+  not prove any theorem step.
 
 ## Safe Routine Targets
 
@@ -122,7 +413,18 @@ canonical closure spine:
 - `DASHI/Physics/Closure/NSMicrolocalDefectMassConstructionBoundary.agda`
 - `DASHI/Physics/Closure/NSTrueLerayTriadicZeroModeClassificationBoundary.agda`
 - `DASHI/Physics/Closure/NSAbelTriadicDefectMeasureConstructionBoundary.agda`
+- `DASHI/Physics/Closure/NSBoundedAbelMassEstimateBoundary.agda`
+- `DASHI/Physics/Closure/NSAbelShellMixingLLNBoundary.agda`
+- `DASHI/Physics/Closure/NSDiagonalStretchingToAbelMeanBoundary.agda`
+- `DASHI/Physics/Closure/NSOffDiagonalShellAbsorptionBoundary.agda`
+- `DASHI/Physics/Closure/NSQuantitativeStationarityRateBoundary.agda`
+- `DASHI/Physics/Closure/NSQuantitativeStationarityRateProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSTriadicShellBernsteinHolderBoundary.agda`
+- `DASHI/Physics/Closure/NSLeiRenTianOutputSupportTransferBoundary.agda`
+- `DASHI/Physics/Closure/NSPointwiseToAbelAveragingBoundary.agda`
 - `DASHI/Physics/Closure/NSTriadicCompensatedLeakageIdentityBoundary.agda`
+- `DASHI/Physics/Closure/NSSignAntisymmetryExactIdentityBoundary.agda`
+- `DASHI/Physics/Closure/NSCascadeTransversalityCollapseBoundary.agda`
 - `DASHI/Physics/Closure/ProjectionNonlocalityDefectLaplacianZeroModeSheaf.agda`
 - `DASHI/Physics/Closure/NSZeroModeSetClassificationBoundary.agda`
 - `DASHI/Physics/Closure/NSLeiRenTianRadialZeroModeAuthorityBoundary.agda`
@@ -135,7 +437,13 @@ canonical closure spine:
 - `DASHI/Physics/Closure/BTFiniteMetricGaugeCompatibilityKappaBoundary.agda`
 - `DASHI/Physics/Closure/YMWeightedBTAdjointKappaCalculation.agda`
 - `DASHI/Physics/Closure/YMSelfAdjointHamiltonianQuotientGapBoundary.agda`
+- `DASHI/Physics/Closure/YMSelfAdjointFiniteHamiltonianBoundary.agda`
 - `DASHI/Physics/Closure/YMHamiltonianDominatesFiniteHodgeDefectBoundary.agda`
+- `DASHI/Physics/Closure/YMAdmissibleBTBoundaryConventionBoundary.agda`
+- `DASHI/Physics/Closure/YMFiniteGaugeQuotientHamiltonianPreconditionBoundary.agda`
+- `DASHI/Physics/Closure/GluingResidualForcesFourPointCancellationBoundary.agda`
+- `DASHI/Physics/Closure/GluingOperatorLinearityOnDefectQuotientBoundary.agda`
+- `DASHI/Physics/Closure/GluingOperatorLinearityProxyHarnessResult.agda`
 - `DASHI/Physics/Closure/CompatibilityLeakageCoercivityTrichotomy.agda`
 - `DASHI/Physics/Closure/DefectHierarchyParallelogramGeneralizationBoundary.agda`
 - `DASHI/Physics/Closure/DefectFourPointParallelogramLawBoundary.agda`

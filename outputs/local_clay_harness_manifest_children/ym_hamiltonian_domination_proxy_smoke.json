@@ -1,0 +1,198 @@
+{
+  "cases": [
+    {
+      "checks": {
+        "domination_psd_margin": true,
+        "holonomy_controlled_or_no_near_zero_h_sector": true,
+        "quotient_stable": true,
+        "symmetric_forms": true
+      },
+      "comparison_min_eigenvalue": 0.87,
+      "delta_min_eigenvalue": 1.0,
+      "description": "PSD surplus over c1*Delta + c2*Hol - E on the quotient; expected to pass.",
+      "dimension": 5,
+      "domination_margin": 0.31336295346538023,
+      "eigenvalue_margins": {
+        "comparison_min": 0.87,
+        "delta_min": 1.0,
+        "domination_eigenvalues": [
+          0.31336295346538023,
+          0.4550322087646655,
+          0.7016048377699544
+        ],
+        "h_min": 1.1892039822164084,
+        "h_min_minus_comparison_min": 0.31920398221640844,
+        "h_minus_comparison_min": 0.31336295346538023,
+        "hol_min": 0.4
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "h_min_eigenvalue": 1.1892039822164084,
+      "hol_min_eigenvalue": 0.4,
+      "holonomy_controlled": true,
+      "max_symmetry_error": 0.0,
+      "name": "good_psd_dominated",
+      "near_zero_h_sector": false,
+      "passed_proxy_checks": true,
+      "quotient_commutator_error": 0.0,
+      "quotient_dimension": 3
+    },
+    {
+      "checks": {
+        "domination_psd_margin": false,
+        "holonomy_controlled_or_no_near_zero_h_sector": true,
+        "quotient_stable": true,
+        "symmetric_forms": true
+      },
+      "comparison_min_eigenvalue": 0.87,
+      "delta_min_eigenvalue": 1.0,
+      "description": "Hamiltonian weakened in one quotient direction so H - comparison has a negative eigenvalue.",
+      "dimension": 5,
+      "domination_margin": -0.3517201729403478,
+      "eigenvalue_margins": {
+        "comparison_min": 0.87,
+        "delta_min": 1.0,
+        "domination_eigenvalues": [
+          -0.3517201729403478,
+          0.3213384992430388,
+          0.700381673697309
+        ],
+        "h_min": 1.1872935470848966,
+        "h_min_minus_comparison_min": 0.31729354708489665,
+        "h_minus_comparison_min": -0.3517201729403478,
+        "hol_min": 0.4
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "domination_psd_margin"
+      ],
+      "h_min_eigenvalue": 1.1872935470848966,
+      "hol_min_eigenvalue": 0.4,
+      "holonomy_controlled": true,
+      "max_symmetry_error": 0.0,
+      "name": "bad_weak_h",
+      "near_zero_h_sector": false,
+      "passed_proxy_checks": false,
+      "quotient_commutator_error": 0.0,
+      "quotient_dimension": 3
+    },
+    {
+      "checks": {
+        "domination_psd_margin": false,
+        "holonomy_controlled_or_no_near_zero_h_sector": false,
+        "quotient_stable": true,
+        "symmetric_forms": true
+      },
+      "comparison_min_eigenvalue": 0.5500000079999999,
+      "delta_min_eigenvalue": 1.0,
+      "description": "Near-zero Hamiltonian direction with tiny holonomy floor; expected to fail control and domination.",
+      "dimension": 5,
+      "domination_margin": -0.5300000079999999,
+      "eigenvalue_margins": {
+        "comparison_min": 0.5500000079999999,
+        "delta_min": 1.0,
+        "domination_eigenvalues": [
+          -0.5300000079999999,
+          0.44841011098827827,
+          0.7015898890117217
+        ],
+        "h_min": 0.02,
+        "h_min_minus_comparison_min": -0.5300000079999999,
+        "h_minus_comparison_min": -0.5300000079999999,
+        "hol_min": 1e-08
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "domination_psd_margin",
+        "holonomy_controlled_or_no_near_zero_h_sector"
+      ],
+      "h_min_eigenvalue": 0.02,
+      "hol_min_eigenvalue": 1e-08,
+      "holonomy_controlled": false,
+      "max_symmetry_error": 0.0,
+      "name": "bad_non_holonomy_controlled_near_zero",
+      "near_zero_h_sector": true,
+      "passed_proxy_checks": false,
+      "quotient_commutator_error": 0.0,
+      "quotient_dimension": 3
+    }
+  ],
+  "checks": {
+    "bad_cases_fail": true,
+    "good_cases_pass": true,
+    "non_holonomy_controlled_near_zero_sector_fails": true,
+    "promotion_false": true,
+    "weak_h_case_fails": true
+  },
+  "claim_scope": "finite quotient matrix diagnostic proxy only",
+  "constants": {
+    "c1": 0.6,
+    "c2": 0.8,
+    "energy_shift": 0.05,
+    "holonomy_floor": 0.05,
+    "near_zero_floor": 0.05,
+    "tolerance": 1e-09
+  },
+  "dimension": 5,
+  "eigenvalue_margins": {
+    "bad_non_holonomy_controlled_near_zero": {
+      "comparison_min": 0.5500000079999999,
+      "delta_min": 1.0,
+      "domination_eigenvalues": [
+        -0.5300000079999999,
+        0.44841011098827827,
+        0.7015898890117217
+      ],
+      "h_min": 0.02,
+      "h_min_minus_comparison_min": -0.5300000079999999,
+      "h_minus_comparison_min": -0.5300000079999999,
+      "hol_min": 1e-08
+    },
+    "bad_weak_h": {
+      "comparison_min": 0.87,
+      "delta_min": 1.0,
+      "domination_eigenvalues": [
+        -0.3517201729403478,
+        0.3213384992430388,
+        0.700381673697309
+      ],
+      "h_min": 1.1872935470848966,
+      "h_min_minus_comparison_min": 0.31729354708489665,
+      "h_minus_comparison_min": -0.3517201729403478,
+      "hol_min": 0.4
+    },
+    "good_psd_dominated": {
+      "comparison_min": 0.87,
+      "delta_min": 1.0,
+      "domination_eigenvalues": [
+        0.31336295346538023,
+        0.4550322087646655,
+        0.7016048377699544
+      ],
+      "h_min": 1.1892039822164084,
+      "h_min_minus_comparison_min": 0.31920398221640844,
+      "h_minus_comparison_min": 0.31336295346538023,
+      "hol_min": 0.4
+    }
+  },
+  "harness": "ym_hamiltonian_domination_proxy",
+  "jacobi_sweeps": 80,
+  "notes": [
+    "All operators are deterministic finite real symmetric matrices.",
+    "The quotient is modeled by the leading coordinate projector.",
+    "Passing this harness is not promotion and does not establish continuum YM domination."
+  ],
+  "ok": true,
+  "promotion": false,
+  "quotient_dimension": 3,
+  "validation_flags": {
+    "bad": {
+      "bad_non_holonomy_controlled_near_zero": true,
+      "bad_weak_h": true
+    },
+    "good": {
+      "good_psd_dominated": true
+    }
+  },
+  "version": 1
+}
