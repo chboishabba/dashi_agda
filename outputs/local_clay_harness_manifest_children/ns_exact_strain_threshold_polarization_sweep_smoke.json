@@ -1,0 +1,160 @@
+{
+  "cases": [
+    {
+      "case": {
+        "polarization": "canonical",
+        "samples": 96,
+        "seed": 20260608,
+        "tolerance": 0.05
+      },
+      "classification": "very_permissive_family_i_ii",
+      "degeneracy": {
+        "anti_parallel_rejects": 0,
+        "exact_degenerate_outputs": 0,
+        "frame_model": "exact-strain",
+        "frame_source": "external:ns_exact_strain_eigenbundle.py"
+      },
+      "elapsed_seconds": 0.07143166195601225,
+      "metrics": {
+        "both_family_hits": 0,
+        "depth2_continuation_hits": 96,
+        "depth2_survival_fraction": 1.0,
+        "estimated_output_width": 0.052465619620051765,
+        "family_i_hits": 96,
+        "family_ii_hits": 0,
+        "median_single_residual": 1.7833762448388222e-16,
+        "min_single_residual": 0.0,
+        "p95_single_residual": 9.438198554942758e-16,
+        "triads_accepted": 96,
+        "zero_hit_fraction": 1.0,
+        "zero_hits": 96
+      },
+      "status": "ok"
+    },
+    {
+      "case": {
+        "polarization": "seeded",
+        "samples": 96,
+        "seed": 20260608,
+        "tolerance": 0.05
+      },
+      "classification": "very_permissive_family_i_ii",
+      "degeneracy": {
+        "anti_parallel_rejects": 0,
+        "exact_degenerate_outputs": 0,
+        "frame_model": "exact-strain",
+        "frame_source": "external:ns_exact_strain_eigenbundle.py"
+      },
+      "elapsed_seconds": 0.06793335301335901,
+      "metrics": {
+        "both_family_hits": 0,
+        "depth2_continuation_hits": 96,
+        "depth2_survival_fraction": 1.0,
+        "estimated_output_width": 0.052465619620051765,
+        "family_i_hits": 96,
+        "family_ii_hits": 0,
+        "median_single_residual": 2.1400564707311122e-16,
+        "min_single_residual": 0.0,
+        "p95_single_residual": 9.364040533824686e-16,
+        "triads_accepted": 96,
+        "zero_hit_fraction": 1.0,
+        "zero_hits": 96
+      },
+      "status": "ok"
+    }
+  ],
+  "clay_promoted": false,
+  "family_i_ii_current_formulation_promoted": false,
+  "groups": {
+    "by_polarization": {
+      "canonical": {
+        "cases": 1,
+        "classifications": {
+          "very_permissive_family_i_ii": 1
+        },
+        "mean_depth2_survival_fraction": 1.0,
+        "mean_output_width": 0.052465619620051765,
+        "mean_zero_hit_fraction": 1.0,
+        "median_zero_hit_fraction": 1.0,
+        "ok_cases": 1
+      },
+      "seeded": {
+        "cases": 1,
+        "classifications": {
+          "very_permissive_family_i_ii": 1
+        },
+        "mean_depth2_survival_fraction": 1.0,
+        "mean_output_width": 0.052465619620051765,
+        "mean_zero_hit_fraction": 1.0,
+        "median_zero_hit_fraction": 1.0,
+        "ok_cases": 1
+      }
+    },
+    "by_samples": {
+      "96": {
+        "cases": 2,
+        "classifications": {
+          "very_permissive_family_i_ii": 2
+        },
+        "mean_depth2_survival_fraction": 1.0,
+        "mean_output_width": 0.052465619620051765,
+        "mean_zero_hit_fraction": 1.0,
+        "median_zero_hit_fraction": 1.0,
+        "ok_cases": 2
+      }
+    },
+    "by_tolerance": {
+      "0.05": {
+        "cases": 2,
+        "classifications": {
+          "very_permissive_family_i_ii": 2
+        },
+        "mean_depth2_survival_fraction": 1.0,
+        "mean_output_width": 0.052465619620051765,
+        "mean_zero_hit_fraction": 1.0,
+        "median_zero_hit_fraction": 1.0,
+        "ok_cases": 2
+      }
+    }
+  },
+  "parameters": {
+    "axis": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "bins": 48,
+    "child_script": "/home/c/Documents/code/dashi_agda/scripts/ns_triadic_output_width_harness.py",
+    "depth2_trials_per_hit": 1,
+    "normals": 48,
+    "polarizations": [
+      "canonical",
+      "seeded"
+    ],
+    "sample_counts": [
+      96
+    ],
+    "seeds": [
+      20260608
+    ],
+    "timeout_seconds": 20.0,
+    "tolerances": [
+      0.05
+    ]
+  },
+  "promotion": false,
+  "scope": "local_exact_strain_threshold_polarization_sweep_diagnostic_only",
+  "summary": {
+    "cases_failed": 0,
+    "cases_ok": 2,
+    "cases_requested": 2,
+    "current_family_i_ii_formulation_permissive": true,
+    "diagnostic_conclusion": "current Family-I/II exact-strain formulation is permissive under at least one sweep case; strengthen propagated polarization/coherence",
+    "elapsed_seconds": 0.13951860298402607,
+    "mean_depth2_survival_fraction": 1.0,
+    "mean_output_width": 0.052465619620051765,
+    "mean_zero_hit_fraction": 1.0,
+    "permissive_or_moderate_cases": 2,
+    "very_permissive_cases": 2
+  }
+}

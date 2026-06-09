@@ -1,0 +1,123 @@
+{
+  "absent_theorems": [
+    "EnergyWidthLowerBoundForHouLuoConcentration",
+    "AlphaLessThanOneForHouLuoConcentration"
+  ],
+  "alpha_less_than_one_obstruction": "Energy monotonicity supplies an exponent lower bound such as alpha >= 2/5; it does not supply an upper bound alpha < 1 without a separate viscous, transport, or concentration-persistence theorem",
+  "alpha_less_than_one_proved": false,
+  "artifact_complete": true,
+  "blockers": [
+    "EnergyWidthLowerBoundForHouLuoConcentration",
+    "AlphaLessThanOneForHouLuoConcentration",
+    "ScalingConsistencyForHouLuoConcentration",
+    "energy_monotonicity_does_not_imply_alpha_less_than_one",
+    "viscous_lower_width_theorem_absent"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "concentration_ansatz": "active width delta(t), vorticity scale Omega(t) ~ tau^-1, velocity increment U_delta(t) ~ Omega(t)*delta(t)",
+  "contract": "ns_sprint149_energy_width_lower_bound",
+  "control_card": {
+    "C": "Single stdlib Python emitter writes rows JSON, rows CSV, summary JSON, Markdown report, and manifest with stable hashes.",
+    "F": "Missing EnergyWidthLowerBoundForHouLuoConcentration, AlphaLessThanOneForHouLuoConcentration, and a proved ScalingConsistencyForHouLuoConcentration closure.",
+    "G": "Validation passes only when all required rows are present, requested proof/promotion flags remain false, gronwall_closure_conditional and artifact_complete are true, and absent-theorem blockers are explicit.",
+    "L": "delta >= c*tau^alpha normalization -> energy lower exponent candidate -> enstrophy/dissipation candidate -> viscous lower-width candidate -> alpha < 1 gap -> missing scaling-consistency theorem.",
+    "O": "Sprint 149 worker lane 4 owns only scripts/ns_sprint149_energy_width_lower_bound.py and outputs/ns_sprint149_energy_width_lower_bound/.",
+    "P": "Use this artifact as an obligation ledger for future proof work, not as a closed analytic theorem or a Clay promotion surface.",
+    "R": "Emit a deterministic analytic ledger for the energy monotonicity route to ScalingConsistencyForHouLuoConcentration, including explicit absent-theorem blockers.",
+    "S": "The current state is fail-closed: energy/enstrophy formulas normalize candidate exponent bounds, but no proved lower-width or alpha < 1 theorem is present."
+  },
+  "decision": "fail_closed_energy_width_lower_bound_not_proved",
+  "delta_lower_bound_form": "delta(t) >= c_delta * tau^alpha",
+  "energy_width_inequality": "E_delta(t) ~ Omega(t)^2 * delta(t)^5 <= E0 implies delta(t) >= C_E * tau^(2/5) only under the active localized ansatz",
+  "energy_width_lower_bound_proved": false,
+  "enstrophy_width_inequality": "Z_delta(t) ~ Omega(t)^2 * delta(t)^3; pointwise bounded enstrophy would force alpha >= 2/3, while finite dissipation integral only gives alpha > 1/3 under the same ansatz",
+  "exit_code": 0,
+  "extra_row_ids": [],
+  "full_clay_ns_solved": false,
+  "gronwall_closure_conditional": true,
+  "gronwall_closure_statement": "Gronwall closure is conditional on importing a proved lower-width theorem with constants compatible with the Hou-Luo concentration bootstrap",
+  "invariant_checked": true,
+  "invariant_failures": [],
+  "invariant_valid": true,
+  "invariants_passed": true,
+  "lane": 4,
+  "missing_required_row_ids": [],
+  "no_promotion": true,
+  "observed_row_ids": [
+    "delta_power_law_normalization",
+    "energy_monotonicity_width_constraint",
+    "enstrophy_width_constraint",
+    "viscous_lower_width_candidate",
+    "energy_alone_alpha_less_than_one_gap",
+    "scaling_consistency_theorem_absent",
+    "conditional_gronwall_closure"
+  ],
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "required_row_ids": [
+    "conditional_gronwall_closure",
+    "delta_power_law_normalization",
+    "energy_alone_alpha_less_than_one_gap",
+    "energy_monotonicity_width_constraint",
+    "enstrophy_width_constraint",
+    "scaling_consistency_theorem_absent",
+    "viscous_lower_width_candidate"
+  ],
+  "row_count": 7,
+  "row_hashes": {
+    "conditional_gronwall_closure": "23955390cd899cbfb142042da055871b51e82a9a3f0c162b4d020c1c4652c169",
+    "delta_power_law_normalization": "e6a6fc2f0e6ff16c4a0d1f06154b13ee628138d5a083506feaff2db43918b143",
+    "energy_alone_alpha_less_than_one_gap": "2d9f02db33a7966a6abb0ce7a3e05f76ece7bcdd47b1218808f9a62e1ae1bb3d",
+    "energy_monotonicity_width_constraint": "2b1e171f41da6d67cf58743b0a995887e03c4ff6bc06b63476ccd431ac4cb68d",
+    "enstrophy_width_constraint": "f7ae5977ff7b31fc51f3dcf0d4bce1bd2462d873046edd31fb87050ade78ba87",
+    "scaling_consistency_theorem_absent": "067e7608899051731a8a13e8df451abfbd6fa51913270c7060ed0935e91ac332",
+    "viscous_lower_width_candidate": "609a37b03b0f8b1c82327229334545c40b348682d4fef846dcfd79f2f7716cde"
+  },
+  "rows_hash": "10b025b55184e1d90ba0529c6dd21c135ebe3f0053bec1289bf76be2b10c72a8",
+  "scaling_consistency_proved": false,
+  "sprint": 149,
+  "summary_payload_hash_without_self": "0697ed102d8e6b8c859e8adbf31135f75dd7f17b5668cb2042d6cab2ac8824ed",
+  "target_theorem": "ScalingConsistencyForHouLuoConcentration",
+  "tau_definition": "tau = T - t",
+  "theorem_presence_state": {
+    "AlphaLessThanOneForHouLuoConcentration": {
+      "match_count": 0,
+      "matches": [],
+      "present_outside_this_emitter": false,
+      "proved_false_witness_seen": false,
+      "proved_false_witnesses": []
+    },
+    "EnergyWidthLowerBoundForHouLuoConcentration": {
+      "match_count": 0,
+      "matches": [],
+      "present_outside_this_emitter": false,
+      "proved_false_witness_seen": false,
+      "proved_false_witnesses": []
+    },
+    "ScalingConsistencyForHouLuoConcentration": {
+      "match_count": 12,
+      "matches": [
+        "DASHI/Physics/Closure/NSSprint149ScalingConsistencyGateReceipt.agda",
+        "scripts/ns_sprint149_linearization_spectrum_probe.py",
+        "scripts/ns_sprint149_scaling_consistency_gate.py",
+        "outputs/ns_sprint149_linearization_spectrum_probe/ns_sprint149_linearization_spectrum_probe.md",
+        "outputs/ns_sprint149_linearization_spectrum_probe/ns_sprint149_linearization_spectrum_probe_rows.csv",
+        "outputs/ns_sprint149_linearization_spectrum_probe/ns_sprint149_linearization_spectrum_probe_rows.json",
+        "outputs/ns_sprint149_linearization_spectrum_probe/ns_sprint149_linearization_spectrum_probe_summary.json",
+        "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate.md",
+        "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate_manifest.json",
+        "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate_rows.csv",
+        "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate_rows.json",
+        "outputs/ns_sprint149_scaling_consistency_gate/ns_sprint149_scaling_consistency_gate_summary.json"
+      ],
+      "present_outside_this_emitter": true,
+      "proved_false_witness_seen": true,
+      "proved_false_witnesses": [
+        "DASHI/Physics/Closure/NSSprint149ScalingConsistencyGateReceipt.agda"
+      ]
+    }
+  },
+  "viscous_width_inequality": "delta(t) >= C_nu * sqrt(nu*tau) corresponds to alpha <= 1/2 for small tau when constants are uniform and c_delta is positive"
+}

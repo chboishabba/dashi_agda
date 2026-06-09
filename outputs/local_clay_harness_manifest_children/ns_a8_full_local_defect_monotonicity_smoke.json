@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "alpha": 0.5,
+      "final_D": 7.446847368356494e-14,
+      "higher_C": 0.05,
+      "initial_D": 0.02,
+      "monotone_nonincreasing": true,
+      "q": 0.3333333333333333,
+      "q_lt_one": true,
+      "steps": 24,
+      "structural_C": 1.0,
+      "theta": 0.5,
+      "type_i_M": 0.125
+    },
+    {
+      "alpha": 0.5,
+      "final_D": 1.1932957477734218e-14,
+      "higher_C": 0.04,
+      "initial_D": 0.01,
+      "monotone_nonincreasing": true,
+      "q": 0.3181818181818181,
+      "q_lt_one": true,
+      "steps": 24,
+      "structural_C": 1.0,
+      "theta": 0.5,
+      "type_i_M": 0.1
+    },
+    {
+      "alpha": 0.5,
+      "final_D": 5.174775304482085e-12,
+      "higher_C": 0.03,
+      "initial_D": 0.015,
+      "monotone_nonincreasing": true,
+      "q": 0.40298507462686567,
+      "q_lt_one": true,
+      "steps": 24,
+      "structural_C": 0.9,
+      "theta": 0.6,
+      "type_i_M": 0.08
+    }
+  ],
+  "contract": "A8 full local defect monotonicity diagnostic",
+  "diagnostic_only": true,
+  "promotion": {
+    "a8_proved": false,
+    "a9_proved": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "summary": {
+    "all_monotone_nonincreasing": true,
+    "all_q_lt_one": true,
+    "theta_half_cm_one_eighth_q": 0.3333333333333333,
+    "theta_half_cm_one_eighth_q_le_one_third": true
+  }
+}

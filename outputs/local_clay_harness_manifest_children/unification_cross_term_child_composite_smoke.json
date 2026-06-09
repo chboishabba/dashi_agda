@@ -1,0 +1,8 @@
+{
+  "all_good_paths_ok": true,
+  "bad_family_detected": true,
+  "child_null_class_ok": true,
+  "consumer_transport_ok": true,
+  "modulo_null_input_ok": true,
+  "promotion": false
+}

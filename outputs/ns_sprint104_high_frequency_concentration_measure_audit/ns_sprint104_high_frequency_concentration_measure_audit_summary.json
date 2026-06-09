@@ -1,0 +1,312 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint104HighFrequencyConcentrationMeasure.agda",
+  "all_subgates_closed": false,
+  "all_subgates_false": true,
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "concentrationLocusMeasurabilityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "concentrationThresholdSelectionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "dyadicShellEnergyDensityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "failClosedHighFrequencyConcentrationMeasureDecomposition": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "finiteKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "highFrequencyConcentrationMeasureClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "highFrequencyConcentrationMeasureDecompositionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "nonCircularConcentrationMeasureSourceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "scaleLocalizedTightnessClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "timeIntegratedFluxSurplusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "closed_subgate_count": 0,
+  "complete": false,
+  "contract": "ns_sprint104_high_frequency_concentration_measure_audit",
+  "decomposition_ledger_closed": true,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_HIGH_FREQUENCY_CONCENTRATION_MEASURE",
+  "finite_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "highFrequencyConcentrationMeasureDecompositionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "dyadicShellEnergyDensityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "concentrationThresholdSelectionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "concentrationLocusMeasurabilityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "scaleLocalizedTightnessClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularConcentrationMeasureSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "highFrequencyConcentrationMeasureClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "signedLowModeFluxLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "timeIntegratedFluxSurplusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "failClosedHighFrequencyConcentrationMeasureDecomposition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "DyadicShellEnergyDensity",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "ConcentrationThresholdSelection",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "ConcentrationLocusMeasurability",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "ScaleLocalizedTightness",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "NonCircularConcentrationMeasureSource",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "high_frequency_concentration_measure_closed": false,
+  "measure_decomposition_ledger_closed": true,
+  "missing_anchors": [],
+  "open_subgate_count": 5,
+  "promotion_decision": "hold",
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint104HighFrequencyConcentrationMeasure",
+    "canonicalNSSprint104HighFrequencyConcentrationMeasure",
+    "canonicalNSSprint104HighFrequencyConcentrationMeasureReceipt",
+    "canonicalSprint104HighFrequencyConcentrationMeasureFlags",
+    "HighFrequencyConcentrationMeasureDecomposition",
+    "HighFrequencyConcentrationMeasureSplitsIntoFiveSubgates",
+    "Sprint103HighFrequencyConcentrationAnchor",
+    "canonicalSprint103HighFrequencyConcentrationAnchor",
+    "ConcentrationMeasureSubgateStatus",
+    "canonicalHighFrequencyConcentrationMeasureDecompositionStatus",
+    "requiredHighFrequencyConcentrationMeasureSubgates",
+    "DyadicShellEnergyDensity",
+    "ConcentrationThresholdSelection",
+    "ConcentrationLocusMeasurability",
+    "ScaleLocalizedTightness",
+    "NonCircularConcentrationMeasureSource",
+    "DyadicShellEnergyDensityOpen",
+    "ConcentrationThresholdSelectionOpen",
+    "ConcentrationLocusMeasurabilityOpen",
+    "ScaleLocalizedTightnessOpen",
+    "NonCircularConcentrationMeasureSourceOpen",
+    "highFrequencyConcentrationMeasureDecompositionLedgerClosed",
+    "dyadicShellEnergyDensityClosed",
+    "concentrationThresholdSelectionClosed",
+    "concentrationLocusMeasurabilityClosed",
+    "scaleLocalizedTightnessClosed",
+    "nonCircularConcentrationMeasureSourceClosed",
+    "highFrequencyConcentrationMeasureClosed",
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "signedLowModeFluxLowerBoundClosed",
+    "timeIntegratedFluxSurplusClosed",
+    "finiteKStarCollapseClosed",
+    "clayNavierStokesPromoted",
+    "failClosedHighFrequencyConcentrationMeasureDecomposition"
+  ],
+  "route_decision": "FAIL_CLOSED_HIGH_FREQUENCY_CONCENTRATION_MEASURE",
+  "signed_low_mode_flux_lower_bound_closed": false,
+  "strain_compression_at_high_frequency_concentration_points_closed": false,
+  "subgate_checks": {
+    "ConcentrationLocusMeasurability": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "ConcentrationThresholdSelection": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "DyadicShellEnergyDensity": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "NonCircularConcentrationMeasureSource": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "ScaleLocalizedTightness": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    }
+  },
+  "subgate_concentration_locus_measurability_open": true,
+  "subgate_concentration_threshold_selection_open": true,
+  "subgate_dyadic_shell_energy_density_open": true,
+  "subgate_non_circular_concentration_measure_source_open": true,
+  "subgate_scale_localized_tightness_open": true,
+  "subgates": [
+    "DyadicShellEnergyDensity",
+    "ConcentrationThresholdSelection",
+    "ConcentrationLocusMeasurability",
+    "ScaleLocalizedTightness",
+    "NonCircularConcentrationMeasureSource"
+  ],
+  "time_integrated_flux_surplus_closed": false
+}

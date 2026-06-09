@@ -1,0 +1,61 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "all_gates_passed": false,
+  "allowed_non_circular_sources_considered": [
+    "Sprint87 high-high factorization",
+    "Sprint91 localized identity",
+    "Sprint90 local enstrophy",
+    "Sprint91 coefficient independence audit"
+  ],
+  "any_allowed_independent_coefficient_for_target": false,
+  "any_allowed_pointwise_h1_tail_for_target": false,
+  "any_allowed_target_closure": false,
+  "candidate_source_count": 6,
+  "clay_navier_stokes_promoted": false,
+  "clay_promotion": false,
+  "complete": false,
+  "contract": "ns_sprint92_high_high_dominance_budget_audit",
+  "dominance_gate_closed": false,
+  "fail_closed": true,
+  "fail_closed_reason": "No allowed non-circular source closes a target dominance obligation with both pointwise H1 tail and an independent coefficient.",
+  "final_decision": "FAIL_CLOSED",
+  "forbidden_dependencies": [
+    "target_absorption",
+    "bkm",
+    "serrin",
+    "h1_continuation",
+    "theta_preservation",
+    "desired_conclusion",
+    "epsilon_from_absorption"
+  ],
+  "gate_table": "ns_sprint92_high_high_dominance_budget_gate_table.csv",
+  "high_high_gate_closed": false,
+  "open_obligations": [
+    "prove HighHighDominanceAtDangerShell or DangerShellDissipationDominatesInflux before using absorption",
+    "supply a pointwise-in-time H1 tail not derived from BKM/Serrin/H1 continuation/theta preservation",
+    "fix the epsilon coefficient independently of target absorption",
+    "record all three facts on one allowed source surface"
+  ],
+  "rejected_for_forbidden_dependencies": [
+    {
+      "candidate_source": "Adjacent leakage",
+      "forbidden_hits": "target_absorption; epsilon_from_absorption"
+    },
+    {
+      "candidate_source": "Effect of target absorption",
+      "forbidden_hits": "target_absorption; desired_conclusion; epsilon_from_absorption"
+    }
+  ],
+  "report": "ns_sprint92_high_high_dominance_budget_audit.md",
+  "required_residual_gate": "exactly PointwiseH1TailWithIndependentEpsilonCoefficient",
+  "residual_gate_exactly_recorded": "exactly PointwiseH1TailWithIndependentEpsilonCoefficient",
+  "route_decision": "fail-closed",
+  "rows_json": "ns_sprint92_high_high_dominance_budget_audit_rows.json",
+  "single_source_evidence_rule_required": true,
+  "source_table": "ns_sprint92_high_high_dominance_budget_source_table.csv",
+  "target_obligations": [
+    "HighHighDominanceAtDangerShell",
+    "DangerShellDissipationDominatesInflux"
+  ]
+}

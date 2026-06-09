@@ -131,8 +131,12 @@ What is not real today:
 4. [MinimalCrediblePhysicsClosure.md](MinimalCrediblePhysicsClosure.md)
 5. [OriginTraceabilityLedger.md](OriginTraceabilityLedger.md)
 6. [NaturalDynamicsLaw.md](NaturalDynamicsLaw.md)
-7. [PhotonuclearEmpiricalRegistry.md](PhotonuclearEmpiricalRegistry.md)
-8. `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`
+7. [LimitedSMGRUnificationClaimBoundary.md](LimitedSMGRUnificationClaimBoundary.md)
+8. [DASHIGovernanceSelfIssuancePolicy.md](DASHIGovernanceSelfIssuancePolicy.md)
+9. [Paper8UnificationBlockerMap.md](Paper8UnificationBlockerMap.md)
+10. [Paper8ClaimGovernanceAudit.md](Paper8ClaimGovernanceAudit.md)
+11. `Docs/PhysicsRecoveryLedger.md` and `Docs/ArchiveRecoveryCrosswalk.md`
+12. [PhotonuclearEmpiricalRegistry.md](PhotonuclearEmpiricalRegistry.md)
 
 ## Canonical Theorem Route
 
@@ -158,6 +162,10 @@ For the strongest current repo-native statement, cite:
 3. `DASHI.Physics.Closure.PhysicsUnificationToCanonicalClosureAdapter`
 
 Those modules own the present strong claim more directly than this note.
+
+The Millennium tower route and the canonical closure route should be read as
+distinct contributions: the tower route is proof-obligation architecture,
+while the closure route is algebraic and packaging structure.
 
 ## Current Bottleneck
 

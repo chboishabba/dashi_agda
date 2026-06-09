@@ -1,0 +1,299 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint102StrainCompressionReduction.agda",
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "failClosedStrainCompressionReduction": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "finiteTimeKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "fiveGateCollapseToStrainCompressionClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "hhToLowStrainContractionIdentityClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "lhToLowChannelVanishesClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "llToLowChannelVanishesClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionReductionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "timeIntegratedFluxSurplusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "closed_reduction_identities": [
+    "LLToLowVanishesByIncompressibility",
+    "LHToLowVanishesByIncompressibility",
+    "HHToLowEqualsLowStrainContraction",
+    "FiveSprint101GatesReduceToStrainCompression"
+  ],
+  "closed_reduction_identity_count": 4,
+  "complete": false,
+  "contract": "ns_sprint102_strain_compression_reduction_audit",
+  "control_card": {
+    "C": "Agda receipt plus deterministic Python audit",
+    "F": "the remaining evidence deficit is StrainCompressionAtHighFrequencyConcentrationPoints",
+    "G": "promotion is held until the single geometric gate is proved without forbidden dependencies",
+    "L": "closed structural reduction, open geometric correlation, no Clay promotion",
+    "O": "Navier-Stokes Sprint 102 reduction audit",
+    "P": "FAIL_CLOSED_STRAIN_COMPRESSION_REDUCTION",
+    "R": "record the LL/LH cancellations and HH strain identity while leaving the geometric sign gate open",
+    "S": "five Sprint 101 sign gates collapse to one strain-compression gate"
+  },
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_STRAIN_COMPRESSION_REDUCTION",
+  "finite_time_kstar_collapse_closed": false,
+  "five_gate_collapse_to_strain_compression_closed": true,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "strainCompressionReductionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "llToLowChannelVanishesClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "lhToLowChannelVanishesClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "hhToLowStrainContractionIdentityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "fiveGateCollapseToStrainCompressionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "signedLowModeFluxLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "timeIntegratedFluxSurplusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteTimeKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "failClosedStrainCompressionReduction",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "LLToLowVanishesByIncompressibility",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "LHToLowVanishesByIncompressibility",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "HHToLowEqualsLowStrainContraction",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "FiveSprint101GatesReduceToStrainCompression",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "StrainCompressionAtHighFrequencyConcentrationPoints",
+      "expected": "StrainCompressionAtHighFrequencyConcentrationPoints",
+      "gate": "single_irreducible_gate",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "hh_to_low_strain_contraction_identity_closed": true,
+  "identity_checks": {
+    "FiveSprint101GatesReduceToStrainCompression": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "HHToLowEqualsLowStrainContraction": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "LHToLowVanishesByIncompressibility": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "LLToLowVanishesByIncompressibility": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    }
+  },
+  "lh_to_low_channel_vanishes_closed": true,
+  "ll_to_low_channel_vanishes_closed": true,
+  "missing_anchors": [],
+  "missing_gate_count": 1,
+  "missing_gate_recorded": true,
+  "missing_single_gate": "StrainCompressionAtHighFrequencyConcentrationPoints",
+  "promotion_decision": "hold",
+  "proof_claimed": false,
+  "reduction_gates_closed": true,
+  "required_anchors": [
+    "NSSprint102StrainCompressionReduction",
+    "canonicalNSSprint102StrainCompressionReduction",
+    "canonicalNSSprint102StrainCompressionReductionReceipt",
+    "canonicalSprint102StrainCompressionReductionFlags",
+    "LowModeFluxChannelIdentity",
+    "LLToLowVanishesByIncompressibility",
+    "LHToLowVanishesByIncompressibility",
+    "HHToLowEqualsLowStrainContraction",
+    "Sprint101FiveGateReduction",
+    "FiveSprint101GatesReduceToStrainCompression",
+    "StrainCompressionAtHighFrequencyConcentrationPoints",
+    "StrainCompressionAtHighFrequencyConcentrationPointsOpen",
+    "canonicalStrainCompressionGateStatus",
+    "requiredStrainCompressionReductionObjects",
+    "strainCompressionReductionLedgerClosed",
+    "llToLowChannelVanishesClosed",
+    "lhToLowChannelVanishesClosed",
+    "hhToLowStrainContractionIdentityClosed",
+    "fiveGateCollapseToStrainCompressionClosed",
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "signedLowModeFluxLowerBoundClosed",
+    "timeIntegratedFluxSurplusClosed",
+    "finiteTimeKStarCollapseClosed",
+    "clayNavierStokesPromoted",
+    "failClosedStrainCompressionReduction"
+  ],
+  "route_decision": "FAIL_CLOSED_STRAIN_COMPRESSION_REDUCTION",
+  "signed_low_mode_flux_lower_bound_closed": false,
+  "single_irreducible_gate": "StrainCompressionAtHighFrequencyConcentrationPoints",
+  "single_irreducible_gate_closed": false,
+  "single_irreducible_gate_open": true,
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint102StrainCompressionReduction.agda",
+      "status": "PASS"
+    }
+  ],
+  "strain_compression_at_high_frequency_concentration_points_closed": false,
+  "strain_compression_reduction_ledger_closed": true,
+  "structure_evidence_flags": {
+    "five_gate_collapse_to_strain_compression_closed": true,
+    "hh_to_low_strain_contraction_identity_closed": true,
+    "lh_to_low_channel_vanishes_closed": true,
+    "ll_to_low_channel_vanishes_closed": true,
+    "strain_compression_at_high_frequency_concentration_points_closed": false
+  },
+  "time_integrated_flux_surplus_closed": false
+}

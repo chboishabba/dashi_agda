@@ -1,0 +1,172 @@
+[
+  {
+    "assembled": true,
+    "axis_boundary_conditions_recorded": false,
+    "candidate_scaling_formalized": true,
+    "clay_navier_stokes_promoted": false,
+    "conclusion": "support recorded for the final Hou-Luo NS obstruction assembly",
+    "dependency_classification": "sprint131_siblings_expected_current_round",
+    "dependency_paths": [
+      "outputs/ns_sprint130_route_fork_classifier",
+      "outputs/ns_sprint130_route_fork_classifier/ns_sprint130_route_fork_classifier_summary.json",
+      "outputs/ns_sprint130_u1_maximum_principle_audit",
+      "outputs/ns_sprint130_u1_maximum_principle_audit/ns_sprint130_u1_maximum_principle_audit_summary.json",
+      "outputs/ns_sprint130_viscous_dominance_sampler",
+      "outputs/ns_sprint130_viscous_dominance_sampler/ns_sprint130_viscous_dominance_sampler_summary.json",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit/ns_sprint131_localized_viscous_comparison_audit_summary.json",
+      "outputs/ns_sprint131_source_upper_bound_audit",
+      "outputs/ns_sprint131_source_upper_bound_audit/ns_sprint131_source_upper_bound_audit_summary.json"
+    ],
+    "expected_current_round_paths": [
+      "outputs/ns_sprint131_axis_boundary_regularity_conditions",
+      "outputs/ns_sprint131_candidate_scaling_hypothesis_formalization"
+    ],
+    "full_clay_ns_solved": false,
+    "hou_luo_ns_obstruction_theorem": false,
+    "lemma_name": "CandidateScalingHypothesisFormalization",
+    "requirements": [
+      "record alpha in (1, 3/2) with beta=alpha-1",
+      "bind source scaling surface to tau^-1",
+      "keep candidate scaling local to the Hou-Luo NS ansatz"
+    ],
+    "route_scope": "Hou-Luo viscous Navier-Stokes route",
+    "row_kind": "supporting_lemma"
+  },
+  {
+    "assembled": true,
+    "axis_boundary_conditions_recorded": false,
+    "candidate_scaling_formalized": false,
+    "clay_navier_stokes_promoted": false,
+    "conclusion": "support recorded for the final Hou-Luo NS obstruction assembly",
+    "dependency_classification": "sprint131_siblings_expected_current_round",
+    "dependency_paths": [
+      "outputs/ns_sprint130_route_fork_classifier",
+      "outputs/ns_sprint130_route_fork_classifier/ns_sprint130_route_fork_classifier_summary.json",
+      "outputs/ns_sprint130_u1_maximum_principle_audit",
+      "outputs/ns_sprint130_u1_maximum_principle_audit/ns_sprint130_u1_maximum_principle_audit_summary.json",
+      "outputs/ns_sprint130_viscous_dominance_sampler",
+      "outputs/ns_sprint130_viscous_dominance_sampler/ns_sprint130_viscous_dominance_sampler_summary.json",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit/ns_sprint131_localized_viscous_comparison_audit_summary.json",
+      "outputs/ns_sprint131_source_upper_bound_audit",
+      "outputs/ns_sprint131_source_upper_bound_audit/ns_sprint131_source_upper_bound_audit_summary.json"
+    ],
+    "expected_current_round_paths": [
+      "outputs/ns_sprint131_axis_boundary_regularity_conditions",
+      "outputs/ns_sprint131_candidate_scaling_hypothesis_formalization"
+    ],
+    "full_clay_ns_solved": false,
+    "hou_luo_ns_obstruction_theorem": false,
+    "lemma_name": "RigorousSourceUpperBound",
+    "requirements": [
+      "use Sprint130 U1 maximum-principle support",
+      "record no hidden U1 amplification source",
+      "upper-bound source growth at the candidate tau^-1 scale"
+    ],
+    "route_scope": "Hou-Luo viscous Navier-Stokes route",
+    "row_kind": "supporting_lemma"
+  },
+  {
+    "assembled": true,
+    "axis_boundary_conditions_recorded": false,
+    "candidate_scaling_formalized": false,
+    "clay_navier_stokes_promoted": false,
+    "conclusion": "support recorded for the final Hou-Luo NS obstruction assembly",
+    "dependency_classification": "sprint131_siblings_expected_current_round",
+    "dependency_paths": [
+      "outputs/ns_sprint130_route_fork_classifier",
+      "outputs/ns_sprint130_route_fork_classifier/ns_sprint130_route_fork_classifier_summary.json",
+      "outputs/ns_sprint130_u1_maximum_principle_audit",
+      "outputs/ns_sprint130_u1_maximum_principle_audit/ns_sprint130_u1_maximum_principle_audit_summary.json",
+      "outputs/ns_sprint130_viscous_dominance_sampler",
+      "outputs/ns_sprint130_viscous_dominance_sampler/ns_sprint130_viscous_dominance_sampler_summary.json",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit/ns_sprint131_localized_viscous_comparison_audit_summary.json",
+      "outputs/ns_sprint131_source_upper_bound_audit",
+      "outputs/ns_sprint131_source_upper_bound_audit/ns_sprint131_source_upper_bound_audit_summary.json"
+    ],
+    "expected_current_round_paths": [
+      "outputs/ns_sprint131_axis_boundary_regularity_conditions",
+      "outputs/ns_sprint131_candidate_scaling_hypothesis_formalization"
+    ],
+    "full_clay_ns_solved": false,
+    "hou_luo_ns_obstruction_theorem": false,
+    "lemma_name": "LocalizedViscousLowerComparison",
+    "requirements": [
+      "use Sprint130 viscous-dominance sampler",
+      "record nu * tau^(-3*beta) dominance for beta>0, nu>0",
+      "localize comparison to the Hou-Luo near-axis blowup route"
+    ],
+    "route_scope": "Hou-Luo viscous Navier-Stokes route",
+    "row_kind": "supporting_lemma"
+  },
+  {
+    "assembled": true,
+    "axis_boundary_conditions_recorded": true,
+    "candidate_scaling_formalized": false,
+    "clay_navier_stokes_promoted": false,
+    "conclusion": "support recorded for the final Hou-Luo NS obstruction assembly",
+    "dependency_classification": "sprint131_siblings_expected_current_round",
+    "dependency_paths": [
+      "outputs/ns_sprint130_route_fork_classifier",
+      "outputs/ns_sprint130_route_fork_classifier/ns_sprint130_route_fork_classifier_summary.json",
+      "outputs/ns_sprint130_u1_maximum_principle_audit",
+      "outputs/ns_sprint130_u1_maximum_principle_audit/ns_sprint130_u1_maximum_principle_audit_summary.json",
+      "outputs/ns_sprint130_viscous_dominance_sampler",
+      "outputs/ns_sprint130_viscous_dominance_sampler/ns_sprint130_viscous_dominance_sampler_summary.json",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit/ns_sprint131_localized_viscous_comparison_audit_summary.json",
+      "outputs/ns_sprint131_source_upper_bound_audit",
+      "outputs/ns_sprint131_source_upper_bound_audit/ns_sprint131_source_upper_bound_audit_summary.json"
+    ],
+    "expected_current_round_paths": [
+      "outputs/ns_sprint131_axis_boundary_regularity_conditions",
+      "outputs/ns_sprint131_candidate_scaling_hypothesis_formalization"
+    ],
+    "full_clay_ns_solved": false,
+    "hou_luo_ns_obstruction_theorem": false,
+    "lemma_name": "AxisBoundaryRegularityConditions",
+    "requirements": [
+      "record axis compatibility and boundary-term cancellation",
+      "use the Sprint130 weighted-measure/IBP audit surface",
+      "avoid adding a global Clay regularity conclusion"
+    ],
+    "route_scope": "Hou-Luo viscous Navier-Stokes route",
+    "row_kind": "supporting_lemma"
+  },
+  {
+    "assembled": true,
+    "axis_boundary_conditions_recorded": false,
+    "candidate_scaling_formalized": false,
+    "clay_navier_stokes_promoted": false,
+    "conclusion": "Axisymmetric Hou-Luo Navier-Stokes viscous-dominance route is obstructed",
+    "dependency_classification": "sprint131_siblings_expected_current_round",
+    "dependency_paths": [
+      "outputs/ns_sprint130_route_fork_classifier",
+      "outputs/ns_sprint130_route_fork_classifier/ns_sprint130_route_fork_classifier_summary.json",
+      "outputs/ns_sprint130_u1_maximum_principle_audit",
+      "outputs/ns_sprint130_u1_maximum_principle_audit/ns_sprint130_u1_maximum_principle_audit_summary.json",
+      "outputs/ns_sprint130_viscous_dominance_sampler",
+      "outputs/ns_sprint130_viscous_dominance_sampler/ns_sprint130_viscous_dominance_sampler_summary.json",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit",
+      "outputs/ns_sprint131_localized_viscous_comparison_audit/ns_sprint131_localized_viscous_comparison_audit_summary.json",
+      "outputs/ns_sprint131_source_upper_bound_audit",
+      "outputs/ns_sprint131_source_upper_bound_audit/ns_sprint131_source_upper_bound_audit_summary.json"
+    ],
+    "expected_current_round_paths": [
+      "outputs/ns_sprint131_axis_boundary_regularity_conditions",
+      "outputs/ns_sprint131_candidate_scaling_hypothesis_formalization"
+    ],
+    "full_clay_ns_solved": false,
+    "hou_luo_ns_obstruction_theorem": true,
+    "lemma_name": "AxisymmetricHouLuoNSViscousDominanceObstruction",
+    "requirements": [
+      "assemble the four Sprint131 lemma names",
+      "conclude only the Hou-Luo viscous NS route obstruction",
+      "hold full Clay Navier-Stokes promotion false"
+    ],
+    "route_scope": "Hou-Luo viscous Navier-Stokes route",
+    "row_kind": "obstruction_theorem"
+  }
+]

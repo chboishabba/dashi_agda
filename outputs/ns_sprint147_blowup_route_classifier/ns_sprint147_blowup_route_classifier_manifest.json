@@ -1,0 +1,32 @@
+{
+  "artifact_complete": true,
+  "contract": "ns_sprint147_blowup_route_classifier",
+  "decision": "classify_post_sprint146_blowup_routes_fail_closed",
+  "files": [
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint147_blowup_route_classifier/ns_sprint147_blowup_route_classifier_rows.json",
+      "sha256": "ee3b00d75bddd9e65c6dac9d2e39dca203954069a6e4e1fe3f5af02b0e1b2672"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint147_blowup_route_classifier/ns_sprint147_blowup_route_classifier_rows.csv",
+      "sha256": "5e04a061dc6543f98273a85dc7f990e2be67472a96b2c4d97240c0c1fc9d8e11"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint147_blowup_route_classifier/ns_sprint147_blowup_route_classifier_summary.json",
+      "sha256": "f2618f6775cf9b44ece578d45b7a6f4e9d17c8c58f0d0f48a431c119b08d38fa"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint147_blowup_route_classifier/ns_sprint147_blowup_route_classifier.md",
+      "sha256": "7d7e3f822647d0671f20b43eb575ea883a1b5647bd14625d75baf27e877e445b"
+    }
+  ],
+  "invariant_valid": true,
+  "lane": 6,
+  "manifest_hash": "73743665d2454b694617644c4fe85d4911b2de2dd9d95d1b4227acaa05c61637",
+  "row_count": 7,
+  "sprint": 147
+}

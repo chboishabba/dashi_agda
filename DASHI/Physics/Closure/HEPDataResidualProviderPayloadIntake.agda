@@ -118,6 +118,14 @@ record HEPDataResidualProviderPayloadIntakeFilter : Setω where
       ≡
       Pack.canonicalHEPDataResidualProviderRequiredReceipts
 
+    empiricalCalibrationChecklist :
+      List Pack.HEPDataResidualEmpiricalCalibrationChecklistItem
+
+    empiricalCalibrationChecklistIsCanonical :
+      empiricalCalibrationChecklist
+      ≡
+      Pack.canonicalHEPDataResidualEmpiricalCalibrationChecklist
+
     firstMissingPolicy :
       List Pack.HEPDataResidualProviderFirstMissingReceipt
 
@@ -174,6 +182,10 @@ canonicalHEPDataResidualProviderPayloadIntakeFilter =
         Pack.canonicalHEPDataResidualProviderRequiredReceipts
     ; residualRequiredReceiptsAreCanonical =
         refl
+    ; empiricalCalibrationChecklist =
+        Pack.canonicalHEPDataResidualEmpiricalCalibrationChecklist
+    ; empiricalCalibrationChecklistIsCanonical =
+        refl
     ; firstMissingPolicy =
         Pack.canonicalHEPDataResidualProviderFirstMissingPolicy
     ; firstMissingPolicyIsCanonical =
@@ -181,7 +193,7 @@ canonicalHEPDataResidualProviderPayloadIntakeFilter =
     ; firstMissingOutcomes =
         canonicalHEPDataResidualProviderPayloadFirstMissingOutcomes
     ; intakeFilterRule =
-        "A provider payload may pass residual intake only after every residual-specific required receipt in Pack.canonicalHEPDataResidualProviderRequiredReceipts is present and mutually bound"
+        "A provider payload may pass residual intake only after every residual-specific required receipt in Pack.canonicalHEPDataResidualProviderRequiredReceipts is present and mutually bound, including the empirical calibration checklist"
     ; providerPayloadFieldNames =
         Pack.HEPDataResidualProviderPayloadRequest.exactRequiredPayloadFields
           Pack.canonicalHEPDataResidualProviderPayloadRequest

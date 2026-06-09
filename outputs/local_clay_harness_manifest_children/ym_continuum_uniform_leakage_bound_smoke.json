@@ -1,0 +1,58 @@
+{
+  "contract": "YM continuum uniform leakage bound smoke",
+  "diagnostic_only": true,
+  "promotion": {
+    "leakage_bound_proved": false,
+    "terminal_promoted": false,
+    "ym_clay_promoted": false
+  },
+  "rows": [
+    {
+      "c_g": 0.8,
+      "decays_from_previous": true,
+      "depth": 1,
+      "leakage_bound": 0.26666666666666666,
+      "p": 3
+    },
+    {
+      "c_g": 0.8,
+      "decays_from_previous": true,
+      "depth": 2,
+      "leakage_bound": 0.08888888888888889,
+      "p": 3
+    },
+    {
+      "c_g": 0.8,
+      "decays_from_previous": true,
+      "depth": 3,
+      "leakage_bound": 0.02962962962962963,
+      "p": 3
+    },
+    {
+      "c_g": 0.8,
+      "decays_from_previous": true,
+      "depth": 4,
+      "leakage_bound": 0.009876543209876543,
+      "p": 3
+    },
+    {
+      "c_g": 0.8,
+      "decays_from_previous": true,
+      "depth": 5,
+      "leakage_bound": 0.003292181069958848,
+      "p": 3
+    },
+    {
+      "c_g": 0.8,
+      "decays_from_previous": true,
+      "depth": 6,
+      "leakage_bound": 0.0010973936899862826,
+      "p": 3
+    }
+  ],
+  "summary": {
+    "all_rows_decay": true,
+    "final_leakage_bound": 0.0010973936899862826,
+    "formula": "L_d <= C_G * p^(-d)"
+  }
+}

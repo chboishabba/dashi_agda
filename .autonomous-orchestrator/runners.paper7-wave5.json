@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3200,
+    "once": true,
+    "timeout_seconds": 3000
+  },
+  "runners": {
+    "paper7-wave5-gate12-manager": {
+      "claim": "Paper 7 wave5 Gate 1/2 implementation-enforcement manager: inhabit the global SelfAdjointYangMillsHamiltonianOnCarrierQuotient theorem field over the real Yang-Mills Hamiltonian carrier, then advance to s8VacuumSectorField; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate1-gate2",
+      "parent": "paper7-root"
+    },
+    "paper7-wave5-gate3-manager": {
+      "claim": "Paper 7 wave5 Gate 3 implementation-enforcement manager: generalize the local coefficient-aware [1,4,5] cancellation witness to global coefficient-aware SU(3) vector/residual arithmetic and advance the finite 512-entry Jacobi carrier; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate3-yang-mills",
+      "parent": "paper7-root"
+    },
+    "paper7-wave5-gate4-manager": {
+      "claim": "Paper 7 wave5 Gate 4 implementation-enforcement manager: inhabit missingValuationStressEnergyTensorCandidate or advance it to the next exact typed stress-energy blocker; do not promote global GR; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate4-factorvec-gr",
+      "parent": "paper7-root"
+    },
+    "paper7-wave5-gate5-manager": {
+      "claim": "Paper 7 wave5 Gate 5 implementation-enforcement manager: inhabit physical nondegenerate projection/scalar laws behind SelectedQuotientNondegenerateProjectionScalarSocket or advance to the next exact typed Hilbert/Stone blocker; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate5-hilbert-stone",
+      "parent": "paper7-root"
+    },
+    "paper7-wave5-gate6-manager": {
+      "claim": "Paper 7 wave5 Gate 6 implementation-enforcement manager: construct repo-native global foreign-lane identity inhabitants for selected predicates, then advance DHRSuperselectionSectorLaneSupply; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate6-dhr-aqft",
+      "parent": "paper7-root"
+    },
+    "paper7-wave5-gate78-manager": {
+      "claim": "Paper 7 wave5 Gate 7/8 implementation-enforcement manager: construct the concrete up-Yukawa 3x3 carrier matrix starting at entry y11, then advance down-Yukawa/CKM/DHR compatibility blockers; do not promote terminal composition; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate7-gate8-composition",
+      "parent": "paper7-root"
+    }
+  }
+}

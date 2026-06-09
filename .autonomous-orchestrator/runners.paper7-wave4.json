@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3200,
+    "once": true,
+    "timeout_seconds": 3000
+  },
+  "runners": {
+    "paper7-wave4-gate12-manager": {
+      "claim": "Paper 7 wave4 Gate 1/2 implementation-enforcement manager: implement the global real Yang-Mills Hamiltonian carrier theorem field, starting with s8SelfAdjointHamiltonianOnCarrierQuotientField / SelfAdjointYangMillsHamiltonianOnCarrierQuotient, or advance to the next exact typed theorem blocker; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate1-gate2",
+      "parent": "paper7-root"
+    },
+    "paper7-wave4-gate3-manager": {
+      "claim": "Paper 7 wave4 Gate 3 implementation-enforcement manager: implement coefficient-aware SU(3) vector/residual arithmetic needed to close nonzero Jacobi triples such as [1,4,5], then extend the finite Jacobi carrier; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate3-yang-mills",
+      "parent": "paper7-root"
+    },
+    "paper7-wave4-gate4-manager": {
+      "claim": "Paper 7 wave4 Gate 4 implementation-enforcement manager: implement missingValuationStressEnergyCompatibilityComputation or the next exact typed stress-energy compatibility blocker after supported unit p2-time Ricci/contracted-Bianchi; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate4-factorvec-gr",
+      "parent": "paper7-root"
+    },
+    "paper7-wave4-gate5-manager": {
+      "claim": "Paper 7 wave4 Gate 5 implementation-enforcement manager: implement the nondegenerate physical projection algebra/scalar law blocker needed after selected quotient finite-density, or advance it to the next exact typed Hilbert/Stone blocker; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate5-hilbert-stone",
+      "parent": "paper7-root"
+    },
+    "paper7-wave4-gate6-manager": {
+      "claim": "Paper 7 wave4 Gate 6 implementation-enforcement manager: implement global foreign-lane identity evidence for DHRSuperselectionSectorLaneSupply or advance to the next exact selected-sector inhabitant blocker; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate6-dhr-aqft",
+      "parent": "paper7-root"
+    },
+    "paper7-wave4-gate78-manager": {
+      "claim": "Paper 7 wave4 Gate 7/8 implementation-enforcement manager: implement missingConcreteUpYukawa3x3Matrix or the next exact typed Yukawa/CKM carrier blocker; do not promote terminal composition; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate7-gate8-composition",
+      "parent": "paper7-root"
+    }
+  }
+}

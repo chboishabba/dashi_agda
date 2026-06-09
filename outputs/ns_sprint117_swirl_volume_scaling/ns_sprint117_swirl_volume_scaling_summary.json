@@ -1,0 +1,31 @@
+{
+  "alpha_values": [
+    0.25,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": true,
+  "concentration_based_option_b_closed": true,
+  "contract": "ns_sprint117_swirl_volume_scaling",
+  "exit_code": 0,
+  "finite_energy_row_count": 16,
+  "non_circular_geometric_correlation_source_open": true,
+  "obstruction_ledger_complete": true,
+  "r_h_values": [
+    0.5,
+    0.25,
+    0.125,
+    0.0625
+  ],
+  "ratio_formula": "r_H ** (alpha + 1)",
+  "rejected_row_count": 1,
+  "row_count": 17,
+  "singular_profile": "u_phi ~ 1/r",
+  "singular_profile_decision": "rejected_infinite_l2_energy",
+  "singular_profile_finite_energy": false,
+  "swirl_option_b_route_obstructed": true
+}

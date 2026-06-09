@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "bilinear_expansion_ok": true,
+  "cross_term_cancellation_ok": true,
+  "jordan_von_neumann_socket_ok": true,
+  "parallelogram_error": 1.4e-14,
+  "promotion": false
+}

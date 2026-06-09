@@ -1,0 +1,7 @@
+[2026-05-19T17:33:27Z] root validation log placeholder for paper7-wave11-next-hard-symbols
+No targeted validation has been tee'd into this artifact yet.
+### Wave11 root validation
+2026-05-19T17:33:27Z
+$ agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda
+$ agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda
+$ git diff --check

@@ -1,0 +1,36 @@
+{
+  "candidate_forks": [
+    "MarginalScalingCaseAnalysis",
+    "EulerBlowupIsolation",
+    "RegularityConclusion"
+  ],
+  "classifications": {
+    "EulerBlowupIsolation": "open_with_two_gap_lemmas",
+    "MarginalScalingCaseAnalysis": "open_unclear",
+    "RegularityConclusion": "defensible_partial_obstruction_result"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint130_route_fork_classifier",
+  "euler_gap_lemma_count": 2,
+  "euler_gap_lemmas": [
+    "NoLogAxisymmetricBiotSavartUniform",
+    "SourceAlignmentWithVorticityMaximum"
+  ],
+  "euler_open_fork_count": 1,
+  "euler_route_open_not_ns": true,
+  "exit_code": 1,
+  "exit_reason": "Full Clay Navier-Stokes remains unsolved; only the Hou-Luo NS route is recorded as obstructed, and the Euler route remains separate/open",
+  "fork_count": 3,
+  "hou_luo_ns_obstruction": "ViscousDominanceNearBlowup",
+  "hou_luo_ns_route_obstructed": true,
+  "ns_obstructed_fork_count": 1,
+  "open_fork_count": 2,
+  "partial_obstruction_result_count": 1,
+  "recommended_classification": "defensible_partial_obstruction_result",
+  "recommended_fork_id": "RegularityConclusion",
+  "recommended_next_fork": "RegularityConclusion",
+  "required_classifications_met": true
+}

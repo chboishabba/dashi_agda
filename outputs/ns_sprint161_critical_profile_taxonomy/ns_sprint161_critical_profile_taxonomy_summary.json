@@ -1,0 +1,96 @@
+{
+  "ClaySubmissionPromotionPacket": false,
+  "ClaySubmissionReady": false,
+  "FullClay": false,
+  "FullClayMechanismExhaustion": false,
+  "GeneralSmoothFiniteEnergyNSRegularity": false,
+  "MechanismExhaustionForFullClayNS": false,
+  "clayNavierStokesPromoted": false,
+  "clay_navier_stokes_promoted": false,
+  "closed_profile_ids": [
+    "zero",
+    "type_i_self_similar",
+    "axisymmetric_no_swirl",
+    "axisymmetric_with_swirl_gamma_bounded_symmetric"
+  ],
+  "closure_groups": {
+    "KNOWN_CLOSED": 2,
+    "OPEN": 4,
+    "SYMMETRIC_CLOSED": 2
+  },
+  "contract": "ns_sprint161_critical_profile_taxonomy",
+  "control_card": {
+    "C": "Python stdlib emitter writes normalized rows, summary, CSV, Markdown, and manifest.",
+    "F": "Open non-symmetric and Type-II/DSS profile classes remain non-exhausted for full Clay.",
+    "G": "Validation requires exactly eight profile classes, closed/open separation, and every Full Clay flag false.",
+    "L": "profile class -> closure group -> evidence boundary -> Full Clay false guard.",
+    "O": "Worker 4 owns the Sprint161 critical-profile taxonomy emitter.",
+    "P": "Use this artifact as the lane 4 taxonomy for critical-profile accounting.",
+    "R": "Separate closed profile classes from open critical-profile classes without promoting full Clay NS.",
+    "S": "Sprint160 governance keeps full Clay false while scoped symmetric classes may be isolated as closed."
+  },
+  "decision": "critical_profile_taxonomy_inventory_with_closed_rows_separated_from_open_rows",
+  "fullClay": false,
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay": false,
+  "full_clay_ns_solved": false,
+  "lane": 4,
+  "open_profile_ids": [
+    "non_axisymmetric_type_i",
+    "non_axisymmetric_type_ii",
+    "discretely_self_similar",
+    "ancient_bounded_non_symmetric"
+  ],
+  "profile_exhaustion_for_full_clay": false,
+  "profile_taxonomy_complete_as_inventory": true,
+  "promotionAllowed": false,
+  "promotion_allowed": false,
+  "row_count": 8,
+  "sprint": 161,
+  "summary_full_clay_flags_false": true,
+  "summary_hash": "65c8f1331935b09d26f4b8555d31fcb10852eff7adc24ec04af96e64bf170965",
+  "validation": {
+    "closed_count": 4,
+    "closed_open_consistent": true,
+    "closed_profile_ids": [
+      "zero",
+      "type_i_self_similar",
+      "axisymmetric_no_swirl",
+      "axisymmetric_with_swirl_gamma_bounded_symmetric"
+    ],
+    "expected_profile_classes": [
+      "zero",
+      "Type-I self-similar",
+      "axisymmetric no swirl",
+      "axisymmetric with swirl Gamma-bounded/symmetric",
+      "non-axisymmetric Type-I",
+      "non-axisymmetric Type-II",
+      "discretely self-similar",
+      "ancient bounded non-symmetric"
+    ],
+    "known_closed_count": 2,
+    "no_full_clay_profile_exhaustion": true,
+    "open_count": 4,
+    "open_profile_ids": [
+      "non_axisymmetric_type_i",
+      "non_axisymmetric_type_ii",
+      "discretely_self_similar",
+      "ancient_bounded_non_symmetric"
+    ],
+    "profile_class_set_exact": true,
+    "profile_classes": [
+      "zero",
+      "Type-I self-similar",
+      "axisymmetric no swirl",
+      "axisymmetric with swirl Gamma-bounded/symmetric",
+      "non-axisymmetric Type-I",
+      "non-axisymmetric Type-II",
+      "discretely self-similar",
+      "ancient bounded non-symmetric"
+    ],
+    "row_full_clay_flags_false": true,
+    "symmetric_closed_count": 2
+  },
+  "validation_passed": true
+}

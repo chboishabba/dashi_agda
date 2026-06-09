@@ -1,0 +1,335 @@
+[
+  {
+    "affected_assumptions": [
+      "GlobalConcavityOrKernelDominance"
+    ],
+    "assumption_set_satisfied": false,
+    "barrier_effect": "The conditional v-barrier implication is unavailable even if the other two assumptions hold.",
+    "blocked_claim": "ConditionalRegularityAssembly",
+    "blocker_id": "assumption_false_global_concavity_or_kernel_dominance",
+    "blocker_status": "open_fail_closed",
+    "category": "single_assumption_false",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "constants_compatible": false,
+    "failure_condition": "partial_z^2 psi1 is not controlled with the sign or dominance margin needed at every admissible first positive maximum of v.",
+    "failure_id": "assumption_false_global_concavity_or_kernel_dominance",
+    "failure_mode": "conditional_barrier_assumption_unproved",
+    "failure_mode_id": "conditional_barrier_assumption_unproved",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "local_effect": "The source 2 u1 partial_z^2 psi1 can contribute with the wrong sign at a crossing.",
+    "missing_input": [
+      "global signed kernel theorem",
+      "or quantitative kernel dominance theorem",
+      "compatibility with boundary and annular source geometry"
+    ],
+    "mode_id": "conditional_barrier_assumption_unproved",
+    "monitored_route_closed": false,
+    "promotion_allowed": false,
+    "required_repair": [
+      "global signed kernel theorem",
+      "or quantitative kernel dominance theorem",
+      "compatibility with boundary and annular source geometry"
+    ],
+    "route_decision": "fail_closed",
+    "route_decision_detail": "fail_closed_failure_modes_open",
+    "row_hash": "b8f86af623b8bdecc095eef1922a4f00ca744080fffe688ac9bc2754d6f3e979",
+    "status": "open_fail_closed",
+    "trigger": "The global concavity or kernel-dominance assumption is false."
+  },
+  {
+    "affected_assumptions": [
+      "SecondaryPeakExclusion"
+    ],
+    "assumption_set_satisfied": false,
+    "barrier_effect": "Primary-region estimates do not rule out the first positive v crossing.",
+    "blocked_claim": "ConditionalRegularityAssembly",
+    "blocker_id": "assumption_false_secondary_peak_exclusion",
+    "blocker_status": "open_fail_closed",
+    "category": "single_assumption_false",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "constants_compatible": false,
+    "failure_condition": "A shoulder, secondary axial peak, or off-primary positive maximum of v can form during the monitored barrier window.",
+    "failure_id": "assumption_false_secondary_peak_exclusion",
+    "failure_mode": "axisymmetric_barrier_route_open",
+    "failure_mode_id": "axisymmetric_barrier_route_open",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "local_effect": "The first positive crossing may occur outside the region where the conditional sign and constant ledger was assembled.",
+    "missing_input": [
+      "persistent no-secondary-peak theorem",
+      "or crossing-set localization theorem",
+      "or a barrier valid at every off-primary maximum"
+    ],
+    "mode_id": "axisymmetric_barrier_route_open",
+    "monitored_route_closed": false,
+    "promotion_allowed": false,
+    "required_repair": [
+      "persistent no-secondary-peak theorem",
+      "or crossing-set localization theorem",
+      "or a barrier valid at every off-primary maximum"
+    ],
+    "route_decision": "fail_closed",
+    "route_decision_detail": "fail_closed_failure_modes_open",
+    "row_hash": "fb866b0049b9fc22de341dd434398875ef41deb1c2cc8c4bf76bcf14cd9c54d8",
+    "status": "open_fail_closed",
+    "trigger": "The secondary-peak exclusion assumption is false."
+  },
+  {
+    "affected_assumptions": [
+      "TransportCommutatorDomination"
+    ],
+    "assumption_set_satisfied": false,
+    "barrier_effect": "The maximum-principle inequality can be violated by an uncontrolled positive commutator burst.",
+    "blocked_claim": "ConditionalRegularityAssembly",
+    "blocker_id": "assumption_false_transport_commutator_domination",
+    "blocker_status": "open_fail_closed",
+    "category": "single_assumption_false",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "constants_compatible": false,
+    "failure_condition": "The positive part of -(partial_z u^r) partial_r u1 is not absorbed at every admissible first positive maximum.",
+    "failure_id": "assumption_false_transport_commutator_domination",
+    "failure_mode": "pointwise_commutator_domination_open",
+    "failure_mode_id": "pointwise_commutator_domination_open",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "local_effect": "The radial commutator remains a nonhomogeneous source for v.",
+    "missing_input": [
+      "pointwise favorable commutator sign theorem",
+      "or log-aware quantitative domination theorem",
+      "or structural cancellation on the crossing set"
+    ],
+    "mode_id": "pointwise_commutator_domination_open",
+    "monitored_route_closed": false,
+    "promotion_allowed": false,
+    "required_repair": [
+      "pointwise favorable commutator sign theorem",
+      "or log-aware quantitative domination theorem",
+      "or structural cancellation on the crossing set"
+    ],
+    "route_decision": "fail_closed",
+    "route_decision_detail": "fail_closed_failure_modes_open",
+    "row_hash": "bc884aa20bd276bcab28801093afb4015c4aedb6adc4bbc5dacbed91ebf0d4a6",
+    "status": "open_fail_closed",
+    "trigger": "The transport-commutator domination assumption is false."
+  },
+  {
+    "affected_assumptions": [
+      "GlobalConcavityOrKernelDominance",
+      "SecondaryPeakExclusion",
+      "TransportCommutatorDomination"
+    ],
+    "assumption_set_satisfied": true,
+    "barrier_effect": "The conditional assembly fails at the interface between analytic gates.",
+    "blocked_claim": "ConditionalRegularityAssembly",
+    "blocker_id": "constants_incompatible_across_assumptions",
+    "blocker_status": "open_fail_closed",
+    "category": "interface_failure",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "constants_compatible": false,
+    "failure_condition": "The concavity margin, peak-localization scale, commutator budget, viscosity scale, and log-loss constants do not close one common inequality.",
+    "failure_id": "constants_incompatible_across_assumptions",
+    "failure_mode": "barrier_assembly_receipt_conditional_only",
+    "failure_mode_id": "barrier_assembly_receipt_conditional_only",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "local_effect": "Each input can be true in isolation while the assembled barrier has a positive remainder.",
+    "missing_input": [
+      "single normalized constant ledger",
+      "scale-uniform inequalities",
+      "strict positive margin after all losses are included"
+    ],
+    "mode_id": "barrier_assembly_receipt_conditional_only",
+    "monitored_route_closed": false,
+    "promotion_allowed": false,
+    "required_repair": [
+      "single normalized constant ledger",
+      "scale-uniform inequalities",
+      "strict positive margin after all losses are included"
+    ],
+    "route_decision": "fail_closed",
+    "route_decision_detail": "fail_closed_failure_modes_open",
+    "row_hash": "b5e767541f85111b9693eca9d960c7d8371386a7a1955aff8e5826cdef14b7fb",
+    "status": "open_fail_closed",
+    "trigger": "All three assumptions are stated, but their constants cannot be made simultaneous."
+  },
+  {
+    "affected_assumptions": [
+      "GlobalConcavityOrKernelDominance",
+      "SecondaryPeakExclusion"
+    ],
+    "assumption_set_satisfied": false,
+    "barrier_effect": "A monitored-route barrier cannot exclude unmonitored off-center first crossings.",
+    "blocked_claim": "ConditionalRegularityAssembly",
+    "blocker_id": "off_center_first_positive_crossing",
+    "blocker_status": "open_fail_closed",
+    "category": "crossing_geometry",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "constants_compatible": false,
+    "failure_condition": "The crossing point is not covered by the local center expansion or the primary-peak localization assumptions.",
+    "failure_id": "off_center_first_positive_crossing",
+    "failure_mode": "global_regular_boundary_missing",
+    "failure_mode_id": "global_regular_boundary_missing",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "local_effect": "Axis or center sign data does not determine the crossing-set source sign.",
+    "missing_input": [
+      "crossing-set localization",
+      "global replacement for center expansion",
+      "boundary-compatible first-crossing theorem"
+    ],
+    "mode_id": "global_regular_boundary_missing",
+    "monitored_route_closed": false,
+    "promotion_allowed": false,
+    "required_repair": [
+      "crossing-set localization",
+      "global replacement for center expansion",
+      "boundary-compatible first-crossing theorem"
+    ],
+    "route_decision": "fail_closed",
+    "route_decision_detail": "fail_closed_failure_modes_open",
+    "row_hash": "ec9e2d445335f00bb4f443343aa5998ddd9e1adc1ef53214e81aa0329883d254",
+    "status": "open_fail_closed",
+    "trigger": "The first positive v crossing occurs off-center or outside the monitored core."
+  },
+  {
+    "affected_assumptions": [
+      "GlobalConcavityOrKernelDominance"
+    ],
+    "assumption_set_satisfied": false,
+    "barrier_effect": "The concavity input cannot be promoted from local support to global barrier closure.",
+    "blocked_claim": "ConditionalRegularityAssembly",
+    "blocker_id": "boundary_or_annular_kernel_sign",
+    "blocker_status": "open_fail_closed",
+    "category": "kernel_sign_failure",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "constants_compatible": false,
+    "failure_condition": "Nonlocal elliptic contributions to partial_z^2 psi1 include annular or boundary rows with unfavorable sign.",
+    "failure_id": "boundary_or_annular_kernel_sign",
+    "failure_mode": "localized_kernel_sign_open",
+    "failure_mode_id": "localized_kernel_sign_open",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "local_effect": "A favorable local Taylor sign does not control the full elliptic source.",
+    "missing_input": [
+      "signed global Green-kernel dominance",
+      "boundary leakage exclusion",
+      "annular source cancellation or quantitative absorption"
+    ],
+    "mode_id": "localized_kernel_sign_open",
+    "monitored_route_closed": false,
+    "promotion_allowed": false,
+    "required_repair": [
+      "signed global Green-kernel dominance",
+      "boundary leakage exclusion",
+      "annular source cancellation or quantitative absorption"
+    ],
+    "route_decision": "fail_closed",
+    "route_decision_detail": "fail_closed_failure_modes_open",
+    "row_hash": "5328c747500a215815d4e4e97f98569b43b8c7ba9b1ad0687ab9682a2713966c",
+    "status": "open_fail_closed",
+    "trigger": "Boundary-sensitive or annular kernel contributions have the wrong sign."
+  },
+  {
+    "affected_assumptions": [
+      "TransportCommutatorDomination"
+    ],
+    "assumption_set_satisfied": false,
+    "barrier_effect": "Transport-commutator domination remains open until the log loss is absorbed, canceled, or avoided.",
+    "blocked_claim": "ConditionalRegularityAssembly",
+    "blocker_id": "commutator_biot_savart_log_loss",
+    "blocker_status": "open_fail_closed",
+    "category": "commutator_budget_failure",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "constants_compatible": false,
+    "failure_condition": "The strain term partial_z u^r inherits a coincident-ring log factor not covered by the barrier margin.",
+    "failure_id": "commutator_biot_savart_log_loss",
+    "failure_mode": "pointwise_commutator_domination_open",
+    "failure_mode_id": "pointwise_commutator_domination_open",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "local_effect": "A nominal pointwise commutator bound can exceed the available source or weight margin.",
+    "missing_input": [
+      "no-log localized strain estimate",
+      "log-aware dominance with strict constants",
+      "structural cancellation of the coincident-ring contribution"
+    ],
+    "mode_id": "pointwise_commutator_domination_open",
+    "monitored_route_closed": false,
+    "promotion_allowed": false,
+    "required_repair": [
+      "no-log localized strain estimate",
+      "log-aware dominance with strict constants",
+      "structural cancellation of the coincident-ring contribution"
+    ],
+    "route_decision": "fail_closed",
+    "route_decision_detail": "fail_closed_failure_modes_open",
+    "row_hash": "8839e2edccafede9de58f09c452c43e3bc24064600e82e5601da92b01ad063c9",
+    "status": "open_fail_closed",
+    "trigger": "The commutator estimate carries an unabsorbed Biot-Savart logarithmic loss."
+  },
+  {
+    "affected_assumptions": [
+      "GlobalConcavityOrKernelDominance",
+      "SecondaryPeakExclusion",
+      "TransportCommutatorDomination"
+    ],
+    "assumption_set_satisfied": false,
+    "barrier_effect": "No global Clay Navier-Stokes theorem or promotion can be emitted from the conditional assembly.",
+    "blocked_claim": "ConditionalRegularityAssembly",
+    "blocker_id": "monitored_route_to_full_clay_translation_absent",
+    "blocker_status": "open_fail_closed",
+    "category": "promotion_boundary",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "constants_compatible": false,
+    "failure_condition": "Even a closed monitored Hou-Luo-style conditional route would not by itself cover arbitrary smooth finite-energy three-dimensional Navier-Stokes data.",
+    "failure_id": "monitored_route_to_full_clay_translation_absent",
+    "failure_mode": "clay_problem_promotion_blocked",
+    "failure_mode_id": "clay_problem_promotion_blocked",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "local_effect": "Route-local regularity evidence stays inside the monitored axisymmetric-with-swirl framework.",
+    "missing_input": [
+      "formal monitored-route to full-class translation theorem",
+      "coverage of arbitrary Clay initial data",
+      "independent proof that route restrictions are exhaustive"
+    ],
+    "mode_id": "clay_problem_promotion_blocked",
+    "monitored_route_closed": false,
+    "promotion_allowed": false,
+    "required_repair": [
+      "formal monitored-route to full-class translation theorem",
+      "coverage of arbitrary Clay initial data",
+      "independent proof that route restrictions are exhaustive"
+    ],
+    "route_decision": "fail_open",
+    "route_decision_detail": "fail_closed_failure_modes_open",
+    "row_hash": "7a5aeb76fc69042155312fc63373a322f1c42d9edf58d32447986325e6d2d8b3",
+    "status": "open_fail_closed",
+    "trigger": "The monitored conditional route is not translated to the full Clay class."
+  }
+]

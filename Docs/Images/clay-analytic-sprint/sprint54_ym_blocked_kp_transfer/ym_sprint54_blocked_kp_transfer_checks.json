@@ -1,0 +1,18 @@
+{
+  "pass": false,
+  "literal_bare_rows_passing": 0,
+  "literal_blocked_rows_passing": 0,
+  "blocked_contour_rows_passing": 2,
+  "requires_rg_transfer_rows": 2,
+  "carrier_label": "rg_flowed_carrier",
+  "carrier_kp_literal_blocked": 7.999999552933488,
+  "carrier_kp_suppressive_unit_blocked": 4.470665114014614e-07,
+  "carrier_kp_blocked_contour": 0.23178189475262734,
+  "carrier_geometric_ratio_blocked_d2_d1": 0.028972736844078414,
+  "all_diameter_certified": false,
+  "balaban_rg_transfer_certified": false,
+  "proof_gate_pass": false,
+  "clay_yang_mills_promoted": false,
+  "promotion_status": "NO_PROMOTION_DIAGNOSTIC_ONLY",
+  "boundary": "Sprint 54 makes bare-vs-blocked YM KP activity explicit. It does not prove all-diameter KP or Balaban RG scale transfer."
+}

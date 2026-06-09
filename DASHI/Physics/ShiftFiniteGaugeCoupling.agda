@@ -508,6 +508,10 @@ sfgcSite2DShiftEdgeAt p3Transverse site =
   sfgcSite2DP3TransverseEdgeAt site
 
 data SFGCSite2DEdge : Set where
+  sfgcSite2DIdentityEdge :
+    SFGCSite2D →
+    SFGCSite2DEdge
+
   sfgcSite2DOrientedEdge :
     (dir : SFGCPrimeDirection) →
     (site : SFGCSite2D) →
@@ -524,14 +528,36 @@ sfgcSite2DEdgeAt dir site =
 sfgcSite2DEdgeSourceTotal :
   SFGCSite2DEdge →
   SFGCSite2D
+sfgcSite2DEdgeSourceTotal (sfgcSite2DIdentityEdge site) =
+  site
 sfgcSite2DEdgeSourceTotal (sfgcSite2DOrientedEdge dir site edge) =
   sfgcSite2DEdgeSource edge
 
 sfgcSite2DEdgeTargetTotal :
   SFGCSite2DEdge →
   SFGCSite2D
+sfgcSite2DEdgeTargetTotal (sfgcSite2DIdentityEdge site) =
+  site
 sfgcSite2DEdgeTargetTotal (sfgcSite2DOrientedEdge dir site edge) =
   sfgcSite2DEdgeTarget edge
+
+sfgcSite2DIdentityEdgeAt :
+  SFGCSite2D →
+  SFGCSite2DEdge
+sfgcSite2DIdentityEdgeAt =
+  sfgcSite2DIdentityEdge
+
+sfgcSite2DIdentityEdgeSourceLaw :
+  (site : SFGCSite2D) →
+  sfgcSite2DEdgeSourceTotal (sfgcSite2DIdentityEdgeAt site) ≡ site
+sfgcSite2DIdentityEdgeSourceLaw site =
+  refl
+
+sfgcSite2DIdentityEdgeTargetLaw :
+  (site : SFGCSite2D) →
+  sfgcSite2DEdgeTargetTotal (sfgcSite2DIdentityEdgeAt site) ≡ site
+sfgcSite2DIdentityEdgeTargetLaw site =
+  refl
 
 sfgcSite2DEdgeAtSourceLaw :
   (dir : SFGCPrimeDirection) →
@@ -715,6 +741,10 @@ sfgcSite2DEvaluate1 (sfgcSite2DExact1Form f) edge =
   SFGS.phaseAdd4
     (f (sfgcSite2DEdgeTargetTotal edge))
     (SFGS.phaseInv4 (f (sfgcSite2DEdgeSourceTotal edge)))
+sfgcSite2DEvaluate1
+  (sfgcSite2DConnection1Form A)
+  (sfgcSite2DIdentityEdge site) =
+  SPTI4.φ0
 sfgcSite2DEvaluate1
   (sfgcSite2DConnection1Form A)
   (sfgcSite2DOrientedEdge p2Right site edge) =

@@ -1,0 +1,221 @@
+[
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "Scalar zero-number intuition is recorded as motivation only; it cannot be promoted into a transfer theorem for the v barrier.",
+    "coupled_barrier_feature": "The v barrier is a differentiated component of a coupled axisymmetric r-z system rather than a closed scalar 1D equation.",
+    "global_barrier_closed": false,
+    "layer": "scalar_template",
+    "missing_input": [
+      "CoupledAxisymmetricZeroNumberForVBarrier"
+    ],
+    "missing_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "obstruction": [
+      "v is coupled to u1, psi1, u^r, and u^z",
+      "the equation has nonhomogeneous source and transport-gradient terms",
+      "the scalar theorem's closed-order structure is absent"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "role": "intuition_boundary",
+    "row_hash": "b2b1e7f2a2d22e1361acc05ff530c396c183a9a9d29bfce3aa783879a393027c",
+    "row_id": "scalar_sturm_intuition_scope",
+    "scalar_1d_input": "A scalar one-dimensional parabolic equation can sometimes enforce monotone zero-number behavior under suitable regularity and boundary hypotheses.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "transfer_invalid",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_available": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "A one-dimensional sign-change count does not exclude a secondary positive v maximum in the coupled r-z barrier domain.",
+    "coupled_barrier_feature": "The monitored geometry evolves in coupled radial and axial coordinates with Ltilde = partial_r^2 + 3/r partial_r + partial_z^2.",
+    "global_barrier_closed": false,
+    "layer": "geometry",
+    "missing_input": [
+      "dimension-reduction theorem for admissible r-z barrier crossings",
+      "CoupledAxisymmetricZeroNumberForVBarrier"
+    ],
+    "missing_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "obstruction": [
+      "radial derivatives influence the same maximum-principle ledger",
+      "axial zeros can move under radial diffusion and radial transport",
+      "a fixed z-line count does not control the full r-z first crossing"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "role": "dimension_and_coupling_gap",
+    "row_hash": "50737335dd724fd4cfaec26eedc9b5542e6fbd08f5fcdb44334c1c34c531de05",
+    "row_id": "coupled_rz_geometry_obstruction",
+    "scalar_1d_input": "The scalar zero-number route counts sign changes along a single spatial variable.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "coupled_geometry_open",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_available": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The source term can move or create axial sign changes outside the scalar zero-number template.",
+    "coupled_barrier_feature": "The v equation contains 2 u1 partial_z^2 psi1, with psi1 tied to the global axisymmetric elliptic/Biot-Savart structure.",
+    "global_barrier_closed": false,
+    "layer": "elliptic_feedback",
+    "missing_input": [
+      "global sign or domination theorem for partial_z^2 psi1",
+      "CoupledAxisymmetricZeroNumberForVBarrier"
+    ],
+    "missing_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "obstruction": [
+      "partial_z^2 psi1 is nonlocal and not globally signed",
+      "off-peak elliptic feedback can support secondary shoulders",
+      "known amplitude controls do not yield zero-count monotonicity"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "role": "nonlocal_source_gap",
+    "row_hash": "2a4391c0c93521d98463427bb576caf1bce115afdc4f9796e7b0a8141fa29a36",
+    "row_id": "nonlocal_psi1_feedback",
+    "scalar_1d_input": "Closed scalar equations use coefficients and sources that fit the hypotheses of the zero-number theorem.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "nonlocal_feedback_uncontrolled",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_available": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "Radial transport and commutators prevent a direct Sturmian transfer from closing secondary peak exclusion.",
+    "coupled_barrier_feature": "The differentiated v equation includes radial transport and the commutator -(partial_z u^r) partial_r u1.",
+    "global_barrier_closed": false,
+    "layer": "transport_commutator",
+    "missing_input": [
+      "radial-gradient coupling theorem at first positive v crossings",
+      "commutator domination constants compatible with the barrier",
+      "CoupledAxisymmetricZeroNumberForVBarrier"
+    ],
+    "missing_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "obstruction": [
+      "partial_r u1 is not fixed by axial first-crossing data",
+      "partial_z u^r is coupled nonlocally to the flow",
+      "commutator signs can oppose the desired barrier inequality"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "role": "sign_indefinite_terms",
+    "row_hash": "3bdea2a6870bd70bea28b872cf7de2bc6a1adcc35b8582f4e095f9047340e671",
+    "row_id": "radial_transport_commutators",
+    "scalar_1d_input": "The scalar route relies on a closed parabolic operator whose transport and reaction terms preserve the zero-number argument.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "commutator_gap_open",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_available": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The scalar fixed-domain zero-count mechanism does not rule out secondary positive crossings in the annular barrier regime.",
+    "coupled_barrier_feature": "The Hou-Luo route monitors annular, boundary-adjacent, and possibly moving localization windows in r-z geometry.",
+    "global_barrier_closed": false,
+    "layer": "domain_geometry",
+    "missing_input": [
+      "boundary-compatible zero-number theorem for the monitored annulus",
+      "CoupledAxisymmetricZeroNumberForVBarrier"
+    ],
+    "missing_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "obstruction": [
+      "first crossings may occur near annular or boundary layers",
+      "local axial counts do not determine boundary-compatible radial jets",
+      "moving localization can shift the relevant comparison interval"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "role": "boundary_and_annular_hazard",
+    "row_hash": "a4da8d06a4d5d5fa0f5751a606efdee90f76b821ea43eed905f3da1c9786085f",
+    "row_id": "moving_boundary_annulus",
+    "scalar_1d_input": "Classical zero-number statements depend on controlled boundary conditions on a fixed one-dimensional interval.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "annular_boundary_gap_open",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_available": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The ledger cannot close even a conditional quantitative transfer from scalar zero-number intuition.",
+    "coupled_barrier_feature": "The global v barrier needs margins for nonlocal psi1 feedback, radial transport, commutators, and annular boundary terms.",
+    "global_barrier_closed": false,
+    "layer": "quantitative_interface",
+    "missing_input": [
+      "barrier-compatible constants for the missing theorem",
+      "global margin ledger for the coupled terms",
+      "CoupledAxisymmetricZeroNumberForVBarrier"
+    ],
+    "missing_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "obstruction": [
+      "no numerical or analytic constants are supplied for the coupled theorem",
+      "no domination margin absorbs all source and commutator hazards",
+      "no compatibility proof ties zero-number decay to the global barrier"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "role": "constant_compatibility_gap",
+    "row_hash": "ecf734b817a11b2d04d7a4fc6b08eb800e95a85ac6f686d458c8252f79dad919",
+    "row_id": "absent_constants",
+    "scalar_1d_input": "Even when a qualitative scalar theorem exists, promotion into a barrier proof requires constants compatible with the route.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "constants_absent",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_available": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "claim_closed": false,
+    "claim_proved": false,
+    "clay_navier_stokes_promoted": false,
+    "consequence": "The Sprint 143 ledger remains fail-closed and cannot promote the Hou-Luo barrier route or Clay Navier-Stokes.",
+    "coupled_barrier_feature": "The required theorem must cover coupled r-z geometry, nonlocal psi1, radial transport and commutators, moving boundary or annular regimes, and explicit constants.",
+    "global_barrier_closed": false,
+    "layer": "required_theorem_interface",
+    "missing_input": [
+      "CoupledAxisymmetricZeroNumberForVBarrier",
+      "proof obligations for all row-level obstructions",
+      "constants sufficient for promotion into the v barrier route"
+    ],
+    "missing_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+    "obstruction": [
+      "CoupledAxisymmetricZeroNumberForVBarrier is not supplied",
+      "secondary peak exclusion remains unproved",
+      "the global barrier remains open"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "role": "promotion_blocker",
+    "row_hash": "0a473c16b6a41dd01063fd1f7e98e85c72ab2db3cc57ea699d4ebf6f5af3710d",
+    "row_id": "missing_coupled_zero_number_theorem",
+    "scalar_1d_input": "The intended proof would need a valid zero-number theorem for the actual coupled v-barrier dynamics.",
+    "scalar_transfer_valid": false,
+    "secondary_peak_exclusion_proved": false,
+    "status": "required_theorem_missing",
+    "target_gate": "SecondaryPeakExclusionForVBarrier",
+    "target_variable": "v = partial_z u1",
+    "theorem_available": false,
+    "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  }
+]

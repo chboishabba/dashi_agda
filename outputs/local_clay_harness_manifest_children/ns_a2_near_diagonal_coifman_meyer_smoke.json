@@ -1,0 +1,45 @@
+{
+  "contract": "NS A2 near-diagonal Coifman-Meyer proxy",
+  "diagnostic_only": true,
+  "promotion": {
+    "a2_proved": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "regimes": [
+    {
+      "j": 3,
+      "k": 4,
+      "lhs_proxy": 7.6,
+      "naive_rhs_proxy": 4.8,
+      "naive_route_passes": false,
+      "regime": "near_diagonal",
+      "tight_rhs_proxy": 8.8,
+      "tight_route_passes": true
+    },
+    {
+      "j": 5,
+      "k": 5,
+      "lhs_proxy": 32.0,
+      "naive_rhs_proxy": 8.96,
+      "naive_route_passes": false,
+      "regime": "near_diagonal",
+      "tight_rhs_proxy": 35.2,
+      "tight_route_passes": true
+    },
+    {
+      "j": 2,
+      "k": 7,
+      "lhs_proxy": 4.32,
+      "naive_rhs_proxy": 11.52,
+      "naive_route_passes": true,
+      "regime": "off_diagonal_loss",
+      "tight_rhs_proxy": 4.4,
+      "tight_route_passes": true
+    }
+  ],
+  "summary": {
+    "naive_route_fails_some": true,
+    "tight_route_passes_all": true
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "clay_yang_mills_promoted": false,
+  "diagnostic_mode": "sprint72_mixed_plaquette_absorption_audit",
+  "outputs": {
+    "absorption_table_csv": "ym_sprint72_mixed_plaquette_absorption_table.csv",
+    "summary_json": "ym_sprint72_mixed_plaquette_absorption_summary.json"
+  },
+  "promotion_status": "NO_PROMOTION_SPRINT72_MIXED_PLAQUETTE_ABSORPTION_DIAGNOSTIC",
+  "route_decision": "MIXED_PLAQUETTES_TRUE_LEAKAGE_REBLOCKS_KP"
+}

@@ -1,0 +1,6 @@
+attempt_id,lemma_name,depends_on,candidate_statement,in_repo_support,proved_in_repo,blocks_kp_lane,route_decision
+B1,ReceiptInputsForTemporalAbsorptionAndW1,Sprint 71/68/78 + YMSpatialOnlyBlockingTemporalLinks,mixed plaquettes and temporal support are packaged at receipt level,RECEIPT_LEVEL_AVAILABLE,True,False,EFFECTIVE_ACTION_SUPPORT_INTERFACE_MISSING_FAIL_CLOSED
+B2,EffectiveActionPolymersSpatialOnlyForA1,I1+I2+I3+I4+I5+I6+I7+I8+I9+I10+I11,"forall gamma, PolymerIn Sk gamma -> SpatialSupport gamma",BLOCKED_BY_MISSING_TYPED_SUPPORT_INTERFACE,False,True,EFFECTIVE_ACTION_SUPPORT_INTERFACE_MISSING_FAIL_CLOSED
+B3,PolymerDefinedOnBlockedLattice,EffectiveActionPolymersSpatialOnlyForA1 + I12,residual polymers are defined on the blocked L=2 spatial graph,OPEN_AFTER_B2_AND_BLOCKED_GRAPH_CARRIER,False,True,EFFECTIVE_ACTION_SUPPORT_INTERFACE_MISSING_FAIL_CLOSED
+B4,KPEntropyAtBlockedScaleL2,PolymerDefinedOnBlockedLattice,six spatial faces minus two transfer faces gives eta=4,OPEN_AFTER_B3,False,True,EFFECTIVE_ACTION_SUPPORT_INTERFACE_MISSING_FAIL_CLOSED
+B5,AllDiameterWeightedKP,KPEntropyAtBlockedScaleL2 + 4q<1,blocked eta=4 consumes q=0.23178189475262734,ARITHMETIC_READY_BUT_PROOF_BLOCKED,False,True,EFFECTIVE_ACTION_SUPPORT_INTERFACE_MISSING_FAIL_CLOSED

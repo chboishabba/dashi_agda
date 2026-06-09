@@ -1,0 +1,32 @@
+{
+  "amplification_survives_formula": "sin(2*phase_lag)>0",
+  "clay": false,
+  "complete": true,
+  "contract": "ns_sprint121_rotating_phase_lag_sampler",
+  "exit_code": 0,
+  "favorable_row_count": 14,
+  "favorable_rows_are_partial_grid_only": true,
+  "favorable_rule": "positive_flux_window and amplification_survives",
+  "non_circular_persistence_established": false,
+  "non_circular_persistence_source_established": false,
+  "omega_values": [
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    4.0
+  ],
+  "only_some_parameter_rows_are_favorable": true,
+  "packet_memory_lag": "tau",
+  "phase_lag_formula": "omega*tau",
+  "phi_formula": "phi(t)=omega*t",
+  "positive_flux_window_formula": "cos(2*phase_lag)>0",
+  "rotating_strain_decorrelation_mechanism_closed": false,
+  "row_count": 20,
+  "tau_values": [
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ]
+}

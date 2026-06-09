@@ -1,0 +1,113 @@
+{
+  "artifact_complete": true,
+  "clay_navier_stokes_promoted": false,
+  "comparison_envelope_available": false,
+  "comparison_envelope_constructed": false,
+  "comparison_envelope_exists": false,
+  "contract": "ns_sprint144_nonlocal_source_zero_number_failure",
+  "control_card": {
+    "C": "Deterministic Python ledger/sampler emitting summary JSON, row JSON, CSV, Markdown, and manifest through an atomic temp staging directory.",
+    "F": "Missing: CoupledAxisymmetricZeroNumberForVBarrier and ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators; secondary peak exclusion, global barrier closure, and Clay Navier-Stokes promotion remain false.",
+    "G": "Validation passes only if all proof, envelope, barrier, Clay, and promotion flags remain false while artifact_complete is true.",
+    "L": "Scalar zero-number template -> nonlocal source gaps -> radial/log commutator gaps -> no comparison envelope -> no coupled theorem.",
+    "O": "Worker lane 4 owns only scripts/ns_sprint144_nonlocal_source_zero_number_failure.py and outputs/ns_sprint144_nonlocal_source_zero_number_failure/.",
+    "P": "Use as a fail-closed obstruction ledger only; do not use as a comparison proof or zero-number theorem.",
+    "R": "Record why nonlocal psi1 source and commutator terms break scalar zero-number transfer for v = partial_z u1.",
+    "S": "partial_z^2 psi1 is sign-changing, off-peak source remains live, radial commutators and log Biot-Savart hazards are unabsorbed, and no comparison envelope is available."
+  },
+  "coupled_zero_number_proved": false,
+  "coupled_zero_number_theorem_available": false,
+  "coupled_zero_number_theorem_proved": false,
+  "decision": "fail_closed_nonlocal_source_zero_number_control_unavailable",
+  "extra_row_ids": [],
+  "full_clay_ns_solved": false,
+  "global_barrier_closed": false,
+  "global_proof": false,
+  "global_proof_closed": false,
+  "hazard_rows": [
+    "off_peak_nonlocal_source",
+    "log_biot_savart_hazard",
+    "comparison_envelope_absent",
+    "secondary_peak_exclusion_unproved"
+  ],
+  "invariant_checked": true,
+  "invariant_failures": [],
+  "invariant_valid": true,
+  "invariants_passed": true,
+  "lane": 4,
+  "log_biot_savart_hazard_recorded": true,
+  "missing_comparison_envelope": "ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators",
+  "missing_required_row_ids": [],
+  "missing_theorem": "CoupledAxisymmetricZeroNumberForVBarrier",
+  "no_global_proof": true,
+  "no_promotion": true,
+  "nonlocal_source_zero_number_control": false,
+  "observed_row_ids": [
+    "sign_changing_partial_z2_psi1",
+    "off_peak_nonlocal_source",
+    "radial_commutator_zero_creation",
+    "log_biot_savart_hazard",
+    "comparison_envelope_absent",
+    "secondary_peak_exclusion_unproved"
+  ],
+  "off_peak_source_recorded": true,
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "radial_commutator_recorded": true,
+  "required_row_ids": [
+    "comparison_envelope_absent",
+    "log_biot_savart_hazard",
+    "off_peak_nonlocal_source",
+    "radial_commutator_zero_creation",
+    "secondary_peak_exclusion_unproved",
+    "sign_changing_partial_z2_psi1"
+  ],
+  "row_count": 6,
+  "secondary_peak_exclusion_proved": false,
+  "sign_changing_partial_z2_psi1_recorded": true,
+  "source_artifact_state": {
+    "sprint141_log_commutator": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "log_aware_commutator_domination_proved": false,
+      "path": "outputs/ns_sprint141_biot_savart_log_commutator_sampler/ns_sprint141_biot_savart_log_commutator_sampler_summary.json",
+      "sha256": "01b2496debdb90b7c131332da79732d76c4fc1967138bdf22a97f5428e3afd55"
+    },
+    "sprint141_radial_gradient_coupling": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "path": "outputs/ns_sprint141_radial_gradient_coupling_ledger/ns_sprint141_radial_gradient_coupling_ledger_summary.json",
+      "sha256": "2edca5f6fd0d22f6996518407d8da8d2169dd27f0c58246b025c83afab9151ec"
+    },
+    "sprint142_boundary_annulus": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "global_concavity_closed": false,
+      "path": "outputs/ns_sprint142_boundary_annulus_concavity_ledger/ns_sprint142_boundary_annulus_concavity_ledger_summary.json",
+      "sha256": "854441f932791e464dfa88ffef41dd86dafe205f11fdff3c158e1a8d1db0f134"
+    },
+    "sprint143_secondary_peak": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "global_barrier_closed": false,
+      "path": "outputs/ns_sprint143_secondary_peak_exclusion_ledger/ns_sprint143_secondary_peak_exclusion_ledger_summary.json",
+      "secondary_peak_exclusion_proved": false,
+      "sha256": "128f70b13553c21b5070de0c21198b5bcca9a55aa84bf059677b10ad88bc8de1"
+    },
+    "sprint143_zero_number": {
+      "clay_navier_stokes_promoted": false,
+      "coupled_zero_number_theorem_available": false,
+      "exists": true,
+      "global_barrier_closed": false,
+      "path": "outputs/ns_sprint143_zero_number_obstruction/ns_sprint143_zero_number_obstruction_summary.json",
+      "secondary_peak_exclusion_proved": false,
+      "sha256": "62490f08f8d5afc94d9bd93092a73bcd994af518c47bf67aa36cd7bdb1935b31"
+    }
+  },
+  "sprint": 144,
+  "summary_hash": "aef6998ca9cb9c2a80f11cb98a78a6d736068e6db6f98e943d118ba1ff7d00ac",
+  "target_gate": "ScalarZeroNumberTransferForVBarrier",
+  "target_variable": "v = partial_z u1",
+  "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+  "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+}

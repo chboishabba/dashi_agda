@@ -1,0 +1,241 @@
+{
+  "comparison_row_count": 4,
+  "comparison_rows": [
+    {
+      "authority_status": "fixture-not-authority",
+      "baseline_row_digest": "9f8a4c3e429a039f8e448e8413d66838a2fa87cfc12652104bf036d5c5767f9c",
+      "bin_ids": [
+        "n_j_30_bin_0",
+        "n_j_30_bin_1",
+        "n_j_30_bin_2",
+        "n_j_30_bin_ge_3"
+      ],
+      "chi2": 85.72550186610619,
+      "correlation_table": "N_j_30_corr",
+      "covariance_determinant_from_cholesky": 4.12830952e-12,
+      "covariance_dimension": 4,
+      "covariance_max_asymmetry": 0.0,
+      "covariance_positive_definite": true,
+      "dof": 4,
+      "expected_vector": [
+        0.512,
+        0.285,
+        0.132,
+        0.071
+      ],
+      "input_semantics": "adapter-level observed vector from upstream MDL row; raw HEPData bins absent",
+      "labels": [
+        "0 jets",
+        "1 jet",
+        "2 jets",
+        ">=3 jets"
+      ],
+      "observable": "N_j_30",
+      "observable_key": "N_j_30:log",
+      "observed_vector": [
+        0.2423576120204171,
+        0.24745253734013903,
+        0.25254746265986106,
+        0.25764238797958294
+      ],
+      "reduced_chi2": 21.431375466526546,
+      "residual_vector": [
+        -0.2696423879795829,
+        -0.03754746265986095,
+        0.12054746265986105,
+        0.18664238797958294
+      ],
+      "row_digest": "b9228513adea3efcb686e81c9737d9c99ff3ec3db264f44014a5856c56eeab9b",
+      "transform": "log",
+      "upstream_best_model": "C",
+      "upstream_mdl_margin_to_second": 0.4995747086214193,
+      "upstream_status": "ok"
+    },
+    {
+      "authority_status": "fixture-not-authority",
+      "baseline_row_digest": "f70751bf1b54247d9a1e320bee3f736738bf851986fe079a624fee19df356c6b",
+      "bin_ids": [
+        "n_j_30_bin_0",
+        "n_j_30_bin_1",
+        "n_j_30_bin_2",
+        "n_j_30_bin_ge_3"
+      ],
+      "chi2": 88.27826041092968,
+      "correlation_table": "N_j_30_corr",
+      "covariance_determinant_from_cholesky": 3.3673585199999996e-12,
+      "covariance_dimension": 4,
+      "covariance_max_asymmetry": 0.0,
+      "covariance_positive_definite": true,
+      "dof": 4,
+      "expected_vector": [
+        0.502,
+        0.291,
+        0.137,
+        0.07
+      ],
+      "input_semantics": "adapter-level observed vector from upstream MDL row; raw HEPData bins absent",
+      "labels": [
+        "0 jets",
+        "1 jet",
+        "2 jets",
+        ">=3 jets"
+      ],
+      "observable": "N_j_30",
+      "observable_key": "N_j_30:ordinal",
+      "observed_vector": [
+        0.24157590491650355,
+        0.24587744436687045,
+        0.2541225556331295,
+        0.2584240950834964
+      ],
+      "reduced_chi2": 22.06956510273242,
+      "residual_vector": [
+        -0.26042409508349645,
+        -0.04512255563312953,
+        0.11712255563312951,
+        0.1884240950834964
+      ],
+      "row_digest": "a81c7c279d7fe56a287846b46c566751019ae4eb4cb8d3c4bd6fb542e6974b72",
+      "transform": "ordinal",
+      "upstream_best_model": "B",
+      "upstream_mdl_margin_to_second": 1.3845380086435237,
+      "upstream_status": "ok"
+    },
+    {
+      "authority_status": "fixture-not-authority",
+      "baseline_row_digest": "ddba62fcc0bfc690bec46367a761fd7325ff3b86c9987cecfd5f072c4c300129",
+      "bin_ids": [
+        "pt_yy_bin_00",
+        "pt_yy_bin_01",
+        "pt_yy_bin_02",
+        "pt_yy_bin_03",
+        "pt_yy_bin_04",
+        "pt_yy_bin_05",
+        "pt_yy_bin_06",
+        "pt_yy_bin_07"
+      ],
+      "chi2": 60.63494381722686,
+      "correlation_table": "pT_yy_corr",
+      "covariance_determinant_from_cholesky": 4.1536123192106836e-24,
+      "covariance_dimension": 8,
+      "covariance_max_asymmetry": 0.0,
+      "covariance_positive_definite": true,
+      "dof": 8,
+      "expected_vector": [
+        0.305,
+        0.245,
+        0.178,
+        0.117,
+        0.072,
+        0.042,
+        0.025,
+        0.016
+      ],
+      "input_semantics": "adapter-level observed vector from upstream MDL row; raw HEPData bins absent",
+      "labels": [
+        "fixture pT_yy bin 0",
+        "fixture pT_yy bin 1",
+        "fixture pT_yy bin 2",
+        "fixture pT_yy bin 3",
+        "fixture pT_yy bin 4",
+        "fixture pT_yy bin 5",
+        "fixture pT_yy bin 6",
+        "fixture pT_yy bin 7"
+      ],
+      "observable": "pT_yy",
+      "observable_key": "pT_yy:log",
+      "observed_vector": [
+        0.11975748956991793,
+        0.12172715641082019,
+        0.12369682325172243,
+        0.12377926322053802,
+        0.1257489300614403,
+        0.12771859690234252,
+        0.12780103687115815,
+        0.1297707037120604
+      ],
+      "reduced_chi2": 7.579367977153358,
+      "residual_vector": [
+        -0.18524251043008205,
+        -0.12327284358917981,
+        -0.05430317674827756,
+        0.006779263220538012,
+        0.05374893006144031,
+        0.08571859690234251,
+        0.10280103687115816,
+        0.1137707037120604
+      ],
+      "row_digest": "5afaf59f3d5a3c010e81dc08f95fbf979fa250bc1c6a49d8fe977214a97a8d8d",
+      "transform": "log",
+      "upstream_best_model": "B",
+      "upstream_mdl_margin_to_second": 5.652399028433706,
+      "upstream_status": "ok"
+    },
+    {
+      "authority_status": "fixture-not-authority",
+      "baseline_row_digest": "fe2e28e9b3af5b93a7b5c00ed14fa8e93d6e1b1b15d9a66779a0362a1fe64077",
+      "bin_ids": [
+        "yabs_yy_bin_00",
+        "yabs_yy_bin_01",
+        "yabs_yy_bin_02",
+        "yabs_yy_bin_03",
+        "yabs_yy_bin_04",
+        "yabs_yy_bin_05"
+      ],
+      "chi2": 15.896396771398942,
+      "correlation_table": "yAbs_yy_corr",
+      "covariance_determinant_from_cholesky": 2.732613025614e-18,
+      "covariance_dimension": 6,
+      "covariance_max_asymmetry": 0.0,
+      "covariance_positive_definite": true,
+      "dof": 6,
+      "expected_vector": [
+        0.226,
+        0.214,
+        0.192,
+        0.159,
+        0.121,
+        0.088
+      ],
+      "input_semantics": "adapter-level observed vector from upstream MDL row; raw HEPData bins absent",
+      "labels": [
+        "fixture |y_yy| bin 0",
+        "fixture |y_yy| bin 1",
+        "fixture |y_yy| bin 2",
+        "fixture |y_yy| bin 3",
+        "fixture |y_yy| bin 4",
+        "fixture |y_yy| bin 5"
+      ],
+      "observable": "yAbs_yy",
+      "observable_key": "yAbs_yy:linear",
+      "observed_vector": [
+        0.1595730083499764,
+        0.16241047167665248,
+        0.16524793500332863,
+        0.16808539833000471,
+        0.17092286165668083,
+        0.17376032498335692
+      ],
+      "reduced_chi2": 2.6493994618998236,
+      "residual_vector": [
+        -0.06642699165002361,
+        -0.05158952832334751,
+        -0.026752064996671376,
+        0.009085398330004713,
+        0.049922861656680834,
+        0.08576032498335692
+      ],
+      "row_digest": "36193c005991f53ed72c1f3d4659dd738a6c4c867f466dbe0fecc91288074feb",
+      "transform": "linear",
+      "upstream_best_model": "C",
+      "upstream_mdl_margin_to_second": 5.30033986522119,
+      "upstream_status": "ok"
+    }
+  ],
+  "generated_at_utc": "2026-06-07T00:00:00+00:00",
+  "non_promoting": true,
+  "receipt_kind": "covariant-comparison-rows",
+  "rows_digest": "c3c7bf8fba3d53e9dfad9a26c501569958740e979f9bf092c57b266d9431deeb",
+  "schema": "dashi-sm-higgs-covariant-comparison-law-v1",
+  "schema_version": "1.0.0"
+}

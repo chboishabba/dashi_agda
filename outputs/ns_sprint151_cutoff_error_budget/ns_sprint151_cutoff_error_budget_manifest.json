@@ -1,0 +1,17 @@
+{
+  "contract": "ns_sprint151_cutoff_error_budget",
+  "files": {
+    "manifest": "outputs/ns_sprint151_cutoff_error_budget/ns_sprint151_cutoff_error_budget_manifest.json",
+    "markdown": "outputs/ns_sprint151_cutoff_error_budget/ns_sprint151_cutoff_error_budget.md",
+    "rows_csv": "outputs/ns_sprint151_cutoff_error_budget/ns_sprint151_cutoff_error_budget_rows.csv",
+    "rows_json": "outputs/ns_sprint151_cutoff_error_budget/ns_sprint151_cutoff_error_budget_rows.json",
+    "summary": "outputs/ns_sprint151_cutoff_error_budget/ns_sprint151_cutoff_error_budget_summary.json"
+  },
+  "sha256": {
+    "markdown": "9e0f814ec285590217bae4049ebe0ee4094c48290a325f4ec99b44db2ee446c5",
+    "rows_csv": "f965787699792fe096b214653e920a6eb82aff5c5840648c7c40bda1db79c47d",
+    "rows_json": "2c3d62a1d668ffecc5d4425b03c280f5e8c2d615cf22f427a17be06c0ac3c815",
+    "summary": "201618b1f8b18d771070c416611e09e6d0879ae745ae48599f9064c8e021c07e"
+  },
+  "validation_passed": true
+}

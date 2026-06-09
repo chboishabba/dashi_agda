@@ -1,0 +1,171 @@
+{
+  "channels": {
+    "canonical_output_tangent": {
+      "attempted_rows": 128,
+      "coherent_energy_sum": 18.546238038602237,
+      "energy_sum": 45.42403668020534,
+      "lambda_identity_error": 0.0,
+      "lambda_weighted_energy_sum": 26.877798641603107,
+      "leakage_energy_sum": 26.877798641603107,
+      "max_lambda": 0.9999848124739117,
+      "max_split_error": 3.3306690738754696e-16,
+      "mean_lambda": 0.525792465960304,
+      "median_lambda": 0.5860605238866262,
+      "min_lambda": 2.0876905399433623e-05,
+      "missing_channel_rows": 0,
+      "nontrivial_leakage_fraction": 0.953125,
+      "nontrivial_leakage_rows": 122,
+      "p95_lambda": 0.9839149401788203,
+      "split_identity_error": 3.552713678800501e-15,
+      "usable_rows": 128
+    },
+    "output_locked_velocity": {
+      "attempted_rows": 128,
+      "coherent_energy_sum": 45.424036680205354,
+      "energy_sum": 45.42403668020534,
+      "lambda_identity_error": 0.0,
+      "lambda_weighted_energy_sum": 2.2994315194175095e-30,
+      "leakage_energy_sum": 2.2994315194175095e-30,
+      "max_lambda": 2.9699185051281833e-31,
+      "max_split_error": 6.66133814775094e-16,
+      "mean_lambda": 5.32796567011037e-32,
+      "median_lambda": 3.0022623330498005e-32,
+      "min_lambda": 0.0,
+      "missing_channel_rows": 0,
+      "nontrivial_leakage_fraction": 0.0,
+      "nontrivial_leakage_rows": 0,
+      "p95_lambda": 2.074085811922011e-31,
+      "split_identity_error": 1.4210854715202007e-14,
+      "usable_rows": 128
+    },
+    "propagated_input_vorticity_cross": {
+      "attempted_rows": 128,
+      "coherent_energy_sum": 18.923312390322547,
+      "energy_sum": 45.42403668020534,
+      "lambda_identity_error": 0.0,
+      "lambda_weighted_energy_sum": 26.5007242898828,
+      "leakage_energy_sum": 26.5007242898828,
+      "max_lambda": 0.9995915103902925,
+      "max_split_error": 5.551115123125783e-16,
+      "mean_lambda": 0.6238503555598901,
+      "median_lambda": 0.7295312958257152,
+      "min_lambda": 0.00038969612129422394,
+      "missing_channel_rows": 0,
+      "nontrivial_leakage_fraction": 0.9921875,
+      "nontrivial_leakage_rows": 127,
+      "p95_lambda": 0.9942037088895692,
+      "split_identity_error": 7.105427357601002e-15,
+      "usable_rows": 128
+    },
+    "propagated_velocity_mean": {
+      "attempted_rows": 128,
+      "coherent_energy_sum": 32.47801144455548,
+      "energy_sum": 45.42403668020534,
+      "lambda_identity_error": 0.0,
+      "lambda_weighted_energy_sum": 12.946025235649875,
+      "leakage_energy_sum": 12.946025235649875,
+      "max_lambda": 0.999461144108548,
+      "max_split_error": 9.124645483638005e-16,
+      "mean_lambda": 0.35425886553933544,
+      "median_lambda": 0.24221830494697644,
+      "min_lambda": 0.00014598683723335905,
+      "missing_channel_rows": 0,
+      "nontrivial_leakage_fraction": 0.9765625,
+      "nontrivial_leakage_rows": 125,
+      "p95_lambda": 0.9800350828052602,
+      "split_identity_error": 1.2434497875801753e-14,
+      "usable_rows": 128
+    },
+    "propagated_vorticity_mean_velocity": {
+      "attempted_rows": 128,
+      "coherent_energy_sum": 23.7052358423697,
+      "energy_sum": 45.42403668020534,
+      "lambda_identity_error": 0.0,
+      "lambda_weighted_energy_sum": 21.718800837835648,
+      "leakage_energy_sum": 21.718800837835648,
+      "max_lambda": 0.9999961376847833,
+      "max_split_error": 6.453171330633722e-16,
+      "mean_lambda": 0.4483348857495396,
+      "median_lambda": 0.40998033673554435,
+      "min_lambda": 0.0004631725266126026,
+      "missing_channel_rows": 0,
+      "nontrivial_leakage_fraction": 0.984375,
+      "nontrivial_leakage_rows": 126,
+      "p95_lambda": 0.9688660604818548,
+      "split_identity_error": 7.105427357601002e-15,
+      "usable_rows": 128
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "comparisons": {
+    "nontrivial_leakage_under_some_propagated_choice": true,
+    "output_locked_mean_lambda": 5.32796567011037e-32,
+    "propagated_mean_lambdas": {
+      "propagated_input_vorticity_cross": 0.6238503555598901,
+      "propagated_velocity_mean": 0.35425886553933544,
+      "propagated_vorticity_mean_velocity": 0.4483348857495396
+    },
+    "propagated_nontrivial_leakage_fractions": {
+      "propagated_input_vorticity_cross": 0.9921875,
+      "propagated_velocity_mean": 0.9765625,
+      "propagated_vorticity_mean_velocity": 0.984375
+    }
+  },
+  "contract": "ns_exact_leakage_coherence_audit",
+  "interpretation": "output_locked_velocity is a tautological non-propagated channel; propagated channels are finite input-memory coherence diagnostics. Nontrivial propagated leakage is evidence the audit can distinguish coherence choices, not evidence of an NS PDE sign theorem.",
+  "invariants": {
+    "max_output_divergence_abs": 2.498001805406602e-16,
+    "max_output_vorticity_dot_c_abs": 1.1102230246251565e-16,
+    "max_output_vorticity_dot_u_abs": 1.6653345369377348e-16,
+    "plancherel_style_splits_pass": true
+  },
+  "parameters": {
+    "leakage_threshold": 0.001,
+    "near_resonance_threshold": 1e-08,
+    "rho_max": 4.0,
+    "rho_min": 0.25,
+    "samples": 128,
+    "symmetrized": true
+  },
+  "pde_residual_sign_proved": false,
+  "promotion": false,
+  "rows": {
+    "accepted": 128,
+    "degenerate_or_resampled_out": 0
+  },
+  "sample_rows": [
+    {
+      "c_norm": 4.802963647887382,
+      "index": 0,
+      "output_energy": 0.006151162024789384,
+      "output_locked_lambda": 6.274234099290987e-32,
+      "output_vorticity_norm": 1.0,
+      "propagated_velocity_mean_lambda": 0.9800350828052602,
+      "propagated_vorticity_mean_velocity_lambda": 0.9688660604818548,
+      "rho": 3.903165708393038
+    },
+    {
+      "c_norm": 1.0124731939348006,
+      "index": 1,
+      "output_energy": 0.14588425017603085,
+      "output_locked_lambda": 2.1452872094505685e-32,
+      "output_vorticity_norm": 1.0,
+      "propagated_velocity_mean_lambda": 0.9905539006305135,
+      "propagated_vorticity_mean_velocity_lambda": 0.1447575800127481,
+      "rho": 1.765402888142162
+    },
+    {
+      "c_norm": 2.6983299467314956,
+      "index": 2,
+      "output_energy": 0.7895323965364573,
+      "output_locked_lambda": 0.0,
+      "output_vorticity_norm": 1.0,
+      "propagated_velocity_mean_lambda": 0.12566415035860723,
+      "propagated_vorticity_mean_velocity_lambda": 0.7435655167258091,
+      "rho": 2.4201719539073805
+    }
+  ],
+  "scope": "finite_exact_leray_vorticity_triad_diagnostic_only_not_pde_proof",
+  "seed": 20260608,
+  "triadic_compensated_leakage_identity_proved": false
+}

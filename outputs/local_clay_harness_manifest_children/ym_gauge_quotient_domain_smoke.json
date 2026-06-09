@@ -1,0 +1,49 @@
+{
+  "contract": "YM gauge quotient domain diagnostic",
+  "orcf": {
+    "C": "scripts/ym_gauge_quotient_domain_harness.py",
+    "F": "missing analytic boundary proof, domain closure proof, full Hodge/gauge quotient proof, and continuum transfer",
+    "G": "promotion=false always; this artifact cannot certify YM-1, spectral gap, or Clay Yang-Mills",
+    "L": "diagnostic harness -> local validation -> possible repo integration; no Clay/YM proof authority",
+    "O": "single-file pure-stdlib harness for the YM-1 quotient-domain rung",
+    "P": "weighted projection plus finite Hamiltonian on quotient basis",
+    "R": "model gauge constant mode, gauge-orthogonal projection, quotient-domain preservation, and quotient self-adjointness",
+    "S": "finite weighted cycle model only; no theorem promotion"
+  },
+  "promotion": {
+    "clay_promotion": false,
+    "promotion": false,
+    "ym_1_promotion": false
+  },
+  "result": {
+    "checks": {
+      "hamiltonian_is_weighted_symmetric": true,
+      "hamiltonian_kills_constant_mode": true,
+      "hamiltonian_preserves_quotient_domain": true,
+      "projected_sample_is_gauge_orthogonal": true,
+      "projection_is_idempotent": true,
+      "projection_kills_constant_mode": true,
+      "promotion_false": true,
+      "quotient_basis_is_weighted_orthonormal": true,
+      "quotient_matrix_is_self_adjoint": true,
+      "sample_rayleigh_is_nonnegative": true
+    },
+    "clay_promotion": false,
+    "edge_count": 6,
+    "gauge_orbit_description": "constant scalar mode on finite weighted cycle",
+    "gauge_orthogonality_error": 1.3877787807814457e-16,
+    "h_constant_mode_residual": 2.220446049250313e-16,
+    "nodes": 6,
+    "projection_annihilates_constant_error": 5.551115123125783e-17,
+    "projection_idempotence_error": 2.7755575615628914e-17,
+    "promotion": false,
+    "quotient_dimension": 5,
+    "quotient_matrix_difference_error": 2.220446049250313e-16,
+    "quotient_preservation_error": 2.220446049250313e-16,
+    "quotient_self_adjoint_error": 2.220446049250313e-16,
+    "quotient_symmetry_error": 0.0,
+    "sample_rayleigh_quotient": 2.8700437420629323,
+    "weighted_inner_product": "sum_i w_i x_i y_i",
+    "ym_1_promotion": false
+  }
+}

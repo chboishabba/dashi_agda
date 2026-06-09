@@ -1,0 +1,156 @@
+[
+  {
+    "blocker": false,
+    "clay_navier_stokes_promoted": false,
+    "gate": "AxialMonotonicityOfSwirlProfile",
+    "global_proof_closed": false,
+    "ledger_role": "symmetry",
+    "local_barrier_supported": true,
+    "maximum_principle_effect": "The monitored half-profile can impose a zero barrier at the symmetry plane before searching for a first positive crossing.",
+    "missing_evidence": [],
+    "row_id": "symmetry_inheritance",
+    "statement": "If u1 is even about the axial symmetry plane z=0, then v=partial_z u1 is odd and v=0 on the symmetry plane.",
+    "status": "supported_local",
+    "support": [
+      "Sprint134:corrected axisymmetric variables",
+      "Hou-Luo symmetric profile ansatz"
+    ]
+  },
+  {
+    "blocker": false,
+    "clay_navier_stokes_promoted": false,
+    "gate": "AxialMonotonicityOfSwirlProfile",
+    "global_proof_closed": false,
+    "ledger_role": "initial_barrier",
+    "local_barrier_supported": true,
+    "maximum_principle_effect": "A sign-preservation proof may begin only after this initial barrier is explicitly part of the data class.",
+    "missing_evidence": [
+      "construction of smooth finite-energy data satisfying the sign condition globally"
+    ],
+    "row_id": "v_initial_sign",
+    "statement": "The candidate monotone half-profile starts with v<=0 on the chosen side of the symmetry plane, with compatible boundary and decay conditions.",
+    "status": "assumption_tracked",
+    "support": [
+      "profile-level monotonicity input",
+      "classical solution regularity for pointwise differentiation"
+    ]
+  },
+  {
+    "blocker": false,
+    "clay_navier_stokes_promoted": false,
+    "gate": "AxialMonotonicityOfSwirlProfile",
+    "global_proof_closed": false,
+    "ledger_role": "first_crossing",
+    "local_barrier_supported": true,
+    "maximum_principle_effect": "At a first positive interior maximum, the transport drift is harmless and the parabolic contradiction reduces to the sign of source and commutator terms.",
+    "missing_evidence": [
+      "global compactness or boundary exclusion for every possible first crossing location"
+    ],
+    "row_id": "first_positive_crossing_criterion",
+    "statement": "At the first time when v becomes positive in the monitored half-profile, the interior positive maximum has v>0, partial_r v=partial_z v=0, and Ltilde v<=0.",
+    "status": "supported_local",
+    "support": [
+      "classical parabolic maximum-principle geometry",
+      "Ltilde commutes with partial_z"
+    ]
+  },
+  {
+    "blocker": false,
+    "clay_navier_stokes_promoted": false,
+    "gate": "AxialMonotonicityOfSwirlProfile",
+    "global_proof_closed": false,
+    "ledger_role": "differentiated_source",
+    "local_barrier_supported": true,
+    "maximum_principle_effect": "The dangerous nonhomogeneous term at a first positive maximum is 2 u1 partial_z^2 psi1; it must be nonpositive or dominated to close the barrier.",
+    "missing_evidence": [
+      "global sign control for partial_z^2 psi1",
+      "uniform domination of transport commutators"
+    ],
+    "row_id": "source_derivative_term",
+    "statement": "Differentiating the corrected u1 equation gives the source ledger term 2 v partial_z psi1 + 2 u1 partial_z^2 psi1, plus transport commutators.",
+    "status": "conditional",
+    "support": [
+      "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+      "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+    ]
+  },
+  {
+    "blocker": false,
+    "clay_navier_stokes_promoted": false,
+    "gate": "AxialMonotonicityOfSwirlProfile",
+    "global_proof_closed": false,
+    "ledger_role": "local_barrier_closure",
+    "local_barrier_supported": true,
+    "maximum_principle_effect": "On this local patch, 2 u1 partial_z^2 psi1 is nonpositive, so the first-crossing contradiction is locally plausible.",
+    "missing_evidence": [
+      "propagation of the concavity patch for the full time window",
+      "uniform lower margin away from the peak"
+    ],
+    "row_id": "local_concavity_support",
+    "statement": "Near the symmetric axial maximum, local concavity of the stream profile supports partial_z^2 psi1<=0 in the active barrier region when u1>=0.",
+    "status": "supported_local",
+    "support": [
+      "symmetric axial peak geometry",
+      "local Taylor expansion at the axial maximum"
+    ]
+  },
+  {
+    "blocker": false,
+    "clay_navier_stokes_promoted": false,
+    "gate": "AxialMonotonicityOfSwirlProfile",
+    "global_proof_closed": false,
+    "ledger_role": "diffusion_sign",
+    "local_barrier_supported": true,
+    "maximum_principle_effect": "The viscosity term nu Ltilde v cannot create the first positive maximum in the local barrier calculation.",
+    "missing_evidence": [
+      "axis boundary handling if the first crossing approaches r=0"
+    ],
+    "row_id": "diffusion_at_positive_max_sign",
+    "statement": "At an interior positive maximum of v away from r=0, Ltilde v = partial_r^2 v + (3/r)partial_r v + partial_z^2 v is nonpositive because partial_r v=0 and the Hessian is negative semidefinite.",
+    "status": "supported_local",
+    "support": [
+      "interior maximum Hessian sign",
+      "axisymmetric Ltilde operator from Sprint134"
+    ]
+  },
+  {
+    "blocker": true,
+    "clay_navier_stokes_promoted": false,
+    "gate": "AxialMonotonicityOfSwirlProfile",
+    "global_proof_closed": false,
+    "ledger_role": "global_concavity",
+    "local_barrier_supported": false,
+    "maximum_principle_effect": "Without global concavity, the source derivative can be positive at an off-peak crossing and the barrier does not close.",
+    "missing_evidence": [
+      "GlobalConcavityOfPsi1",
+      "transport-stable concavity region",
+      "nonlocal Biot-Savart sign preservation"
+    ],
+    "row_id": "global_concavity_blocker",
+    "statement": "The route lacks a global theorem that partial_z^2 psi1 keeps the sign needed to make 2 u1 partial_z^2 psi1 harmless at every possible first positive maximum of v.",
+    "status": "open_blocker",
+    "support": [
+      "local concavity near the primary axial maximum only"
+    ]
+  },
+  {
+    "blocker": true,
+    "clay_navier_stokes_promoted": false,
+    "gate": "AxialMonotonicityOfSwirlProfile",
+    "global_proof_closed": false,
+    "ledger_role": "secondary_peaks",
+    "local_barrier_supported": false,
+    "maximum_principle_effect": "A secondary positive crossing can evade the local barrier even if the primary symmetry-center calculation is valid.",
+    "missing_evidence": [
+      "SecondaryPeakExclusion",
+      "single-peak persistence",
+      "global monotone rearrangement or comparison principle"
+    ],
+    "row_id": "secondary_peak_blocker",
+    "statement": "The route lacks an exclusion theorem for secondary axial peaks or shoulders where v may form a positive local maximum outside the locally concave primary region.",
+    "status": "open_blocker",
+    "support": [
+      "none beyond local primary-peak barrier support"
+    ]
+  }
+]

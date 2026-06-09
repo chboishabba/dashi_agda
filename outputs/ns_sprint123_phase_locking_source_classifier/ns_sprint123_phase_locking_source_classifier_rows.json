@@ -1,0 +1,56 @@
+[
+  {
+    "classification": "live_primary_requires_estimate",
+    "clay": false,
+    "complete": false,
+    "next_action": "prove FavorablePhaseLagWindowLowerBound",
+    "rationale": "The NSE-derived rotating-frame ODE is the leading phase-locking source, but it still needs a favorable phase-lag window lower bound before route promotion.",
+    "recommendation_rank": 1,
+    "route_id": "nse_derived_rotating_frame_ode"
+  },
+  {
+    "classification": "rejected_circular",
+    "clay": false,
+    "complete": false,
+    "next_action": "exclude from source accounting",
+    "rationale": "Imposed phase locking assumes the phase relation that the route must derive, so it cannot serve as an independent source.",
+    "recommendation_rank": 6,
+    "route_id": "imposed_phase_locking"
+  },
+  {
+    "classification": "empirical_not_proof",
+    "clay": false,
+    "complete": false,
+    "next_action": "use only as empirical guidance for the window estimate",
+    "rationale": "Sampled dwell windows can identify a plausible target interval, but they do not replace an analytic lower bound.",
+    "recommendation_rank": 4,
+    "route_id": "sampled_dwell_windows"
+  },
+  {
+    "classification": "conditional_bound_missing",
+    "clay": false,
+    "complete": false,
+    "next_action": "derive the missing bound after the primary estimate",
+    "rationale": "The damping-drift balance is structurally relevant, but it remains conditional until the required inequality is proved.",
+    "recommendation_rank": 2,
+    "route_id": "damping_drift_balance"
+  },
+  {
+    "classification": "open_downstream",
+    "clay": false,
+    "complete": false,
+    "next_action": "defer until the local phase-locking source is bounded",
+    "rationale": "Global data realization depends on a validated local source, so it remains downstream of the phase-lag window bound.",
+    "recommendation_rank": 3,
+    "route_id": "global_data_realization"
+  },
+  {
+    "classification": "open_downstream",
+    "clay": false,
+    "complete": false,
+    "next_action": "defer until the phase-locking lower bound is available",
+    "rationale": "The k-star budget bridge can only transfer a locked window after the favorable phase-lag lower bound has been established.",
+    "recommendation_rank": 5,
+    "route_id": "kstar_budget_bridge"
+  }
+]

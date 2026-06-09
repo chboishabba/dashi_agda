@@ -1,0 +1,162 @@
+[
+  {
+    "accepted": false,
+    "ansatz": "derive a high-frequency concentration measure from shell energy",
+    "classification": "measure extraction without sign geometry",
+    "colocation_estimate": false,
+    "compressive_strain_locus": false,
+    "concentration_measure": true,
+    "eigenframe_alignment": false,
+    "failed_gates": [
+      "compressive_strain_locus",
+      "eigenframe_alignment",
+      "colocation_estimate",
+      "non_circular_source"
+    ],
+    "family": "measured_concentration_locus",
+    "family_id": "M1",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "colocation_estimate": false,
+      "compressive_strain_locus": false,
+      "concentration_measure": true,
+      "eigenframe_alignment": false,
+      "leray_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_source": false
+    },
+    "leray_compatible": true,
+    "no_forbidden_dependency": true,
+    "non_circular_source": false,
+    "note": "A concentration measure does not locate compressive low-mode strain or align the high-frequency energy tensor with that strain.",
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "use negative low-strain eigenvalues as a compression barrier",
+    "classification": "strain-sign locus without high-frequency colocation",
+    "colocation_estimate": false,
+    "compressive_strain_locus": true,
+    "concentration_measure": false,
+    "eigenframe_alignment": false,
+    "failed_gates": [
+      "concentration_measure",
+      "eigenframe_alignment",
+      "colocation_estimate",
+      "non_circular_source"
+    ],
+    "family": "low_strain_eigenvalue_barrier",
+    "family_id": "E1",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "colocation_estimate": false,
+      "compressive_strain_locus": true,
+      "concentration_measure": false,
+      "eigenframe_alignment": false,
+      "leray_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_source": false
+    },
+    "leray_compatible": true,
+    "no_forbidden_dependency": true,
+    "non_circular_source": false,
+    "note": "A compressive strain region alone does not show high-frequency energy concentrates there or in the compressive eigendirections.",
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "transport high-frequency eigenframes into compressive low-strain directions",
+    "classification": "alignment transport without closed colocation",
+    "colocation_estimate": false,
+    "compressive_strain_locus": true,
+    "concentration_measure": true,
+    "eigenframe_alignment": false,
+    "failed_gates": [
+      "eigenframe_alignment",
+      "colocation_estimate",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "eigenframe_alignment_transport",
+    "family_id": "A1",
+    "forbidden_dependencies": "imposed_eigenframe_alignment",
+    "gate_results": {
+      "colocation_estimate": false,
+      "compressive_strain_locus": true,
+      "concentration_measure": true,
+      "eigenframe_alignment": false,
+      "leray_compatible": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false
+    },
+    "leray_compatible": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "The needed eigenframe alignment is imposed at the step where it must be derived from unforced dynamics.",
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "vortex tubes self-align high-frequency energy with compressive strain",
+    "classification": "vortex-geometry narrative",
+    "colocation_estimate": false,
+    "compressive_strain_locus": true,
+    "concentration_measure": false,
+    "eigenframe_alignment": false,
+    "failed_gates": [
+      "concentration_measure",
+      "eigenframe_alignment",
+      "colocation_estimate",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "vortex_tube_self_alignment",
+    "family_id": "V1",
+    "forbidden_dependencies": "desired_conclusion",
+    "gate_results": {
+      "colocation_estimate": false,
+      "compressive_strain_locus": true,
+      "concentration_measure": false,
+      "eigenframe_alignment": false,
+      "leray_compatible": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false
+    },
+    "leray_compatible": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "Vortex-tube geometry is compatible with the intended picture, but the self-alignment mechanism is not derived without the desired collapse geometry.",
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "select the high-frequency locus to coincide with compressive strain",
+    "classification": "forbidden imposed colocation",
+    "colocation_estimate": true,
+    "compressive_strain_locus": true,
+    "concentration_measure": true,
+    "eigenframe_alignment": true,
+    "failed_gates": [
+      "leray_compatible",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "imposed_colocation",
+    "family_id": "I1",
+    "forbidden_dependencies": "imposed_colocation;imposed_compressive_locus;desired_conclusion",
+    "gate_results": {
+      "colocation_estimate": true,
+      "compressive_strain_locus": true,
+      "concentration_measure": true,
+      "eigenframe_alignment": true,
+      "leray_compatible": false,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false
+    },
+    "leray_compatible": false,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "This builds the required colocation into the candidate and is therefore circular for the unforced Leray route.",
+    "verdict": "reject"
+  }
+]

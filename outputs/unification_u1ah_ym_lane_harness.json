@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "exact_l2_cross_term_ok": true,
+  "max_error": 3.6e-15,
+  "nonlinear_cubic_remainder_budget_ok": true,
+  "promotion": false,
+  "vacuum_linearization_ok": true
+}

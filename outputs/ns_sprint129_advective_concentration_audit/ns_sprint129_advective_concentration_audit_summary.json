@@ -1,0 +1,70 @@
+{
+  "audit_id": "ns_sprint129_advective_concentration_audit",
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "control_card": {
+    "C": "deterministic Python audit emitting rows JSON, summary JSON, and Markdown",
+    "F": "any added open gate, marker hit, window failure, or Clay promotion would violate the fail-closed audit",
+    "G": "process exit code is 1 by design while the primary open gate is unresolved",
+    "L": "the ledger has exactly one failing row, the lower-bound gate AdvectiveConcentrationVsDiffusionBound",
+    "O": "Worker 1 owns only the Sprint129 advective concentration audit script and output directory",
+    "P": "hold Navier-Stokes promotion until ||u1||_inf >= c ||omega1||_inf is proved in the required regime",
+    "R": "record exact axisymmetric swirl PDE facts and isolate the advective concentration versus diffusion blocker",
+    "S": "all local PDE and parameter-window checks close; Clay promotion stays false"
+  },
+  "deterministic": true,
+  "exact_fact_rows_passed": true,
+  "exit_code": 1,
+  "fail_closed": true,
+  "failed_count": 1,
+  "forbidden_hit_count": 0,
+  "forbidden_hits": [],
+  "no_log_axisymmetric_biot_savart": true,
+  "omega1_source_term": "partial_z(u1^2) = 2 u1 partial_z u1",
+  "only_primary_open_gate": true,
+  "open_gates": [
+    "AdvectiveConcentrationVsDiffusionBound"
+  ],
+  "open_question_count": 1,
+  "passed": false,
+  "passed_count": 8,
+  "pde_facts": {
+    "biot_savart_kernel": "axisymmetric 5D Poisson kernel for psi1 with no logarithmic loss recorded",
+    "no_log_axisymmetric_biot_savart": true,
+    "omega1_equation": "partial_t omega1 + u^r partial_r omega1 + u^z partial_z omega1 = nu (partial_r^2 + (3/r) partial_r + partial_z^2) omega1 + partial_z(u1^2)",
+    "omega1_source": "partial_z(u1^2)",
+    "omega1_source_term": "partial_z(u1^2) = 2 u1 partial_z u1",
+    "pure_diffusion_u1": true,
+    "stream_equation": "-(partial_r^2 + (3/r) partial_r + partial_z^2) psi1 = omega1",
+    "transport_velocity": {
+      "u_r": "-r partial_z psi1",
+      "u_z": "2 psi1 + r partial_r psi1"
+    },
+    "u1_equation": "partial_t u1 + u^r partial_r u1 + u^z partial_z u1 = nu (partial_r^2 + (3/r) partial_r + partial_z^2) u1",
+    "u1_source": "0",
+    "variables": {
+      "omega1": "omega^theta / r",
+      "psi1": "psi^theta / r",
+      "u1": "u^theta / r"
+    }
+  },
+  "primary_open_gate": "AdvectiveConcentrationVsDiffusionBound",
+  "promotion_decision": "hold",
+  "proof_claimed": false,
+  "pure_diffusion_u1": true,
+  "row_count": 9,
+  "single_remaining_open_question": "||u1||_inf >= c ||omega1||_inf",
+  "viscous_feasibility_window": {
+    "alpha": "4/3",
+    "alpha_float": 1.3333333333333333,
+    "alpha_window": "1 < alpha < 3/2",
+    "alpha_window_passed": true,
+    "beta": "1/3",
+    "beta_float": 0.3333333333333333,
+    "beta_relation": "beta = alpha - 1",
+    "beta_relation_passed": true,
+    "beta_window": "0 < beta < 1/2",
+    "beta_window_passed": true,
+    "passed": true
+  }
+}

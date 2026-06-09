@@ -1,0 +1,21 @@
+{
+  "blocked_l2_eta": 4,
+  "clay_yang_mills_promoted": false,
+  "continuum_limit_mass_gap_derived_in_repo": false,
+  "eta4_kp_arithmetic_closes": true,
+  "eta4_margin": 0.07287242098949065,
+  "eta4_q": 0.9271275790105094,
+  "q_current": 0.23178189475262734,
+  "remaining_open_lemmas": [
+    "UniformConnectedSchwingerDecay",
+    "ContinuumLimitMassGap",
+    "Nontrivial4DSU3YangMillsMeasure",
+    "ClayStatementBoundaryDischarged",
+    "ExternalAcceptanceToken"
+  ],
+  "route_decision": "SPRINT95_CLOSES_WC3_UNIFORM_IN_A_ONLY",
+  "sprint": 95,
+  "uniform_bound_for_all_a_required": true,
+  "uniform_connected_schwinger_decay_derived_in_repo": false,
+  "wc3_uniform_in_a_closed_in_repo": true
+}

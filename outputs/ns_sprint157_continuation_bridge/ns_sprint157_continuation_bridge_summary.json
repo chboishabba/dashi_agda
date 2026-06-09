@@ -1,0 +1,31 @@
+{
+  "BKMIntegralEstimate": true,
+  "ContinuationTheoremBridge": true,
+  "MechanismExhaustionForFullClayNS": false,
+  "SymmetricHouLuoBKMFinite": true,
+  "SymmetricHouLuoRegularityClassClosure": false,
+  "clay_navier_stokes_promoted": false,
+  "continuation_theorem_bridge": true,
+  "contract": "ns_sprint157_continuation_bridge",
+  "control_card": {
+    "C": "Python ledger plus JSON, CSV, Markdown, and manifest outputs.",
+    "F": "The theorem-level initial-data class statement remains a separate documentation closure.",
+    "G": "Promotion is scoped; full Clay and general 3D NS remain false.",
+    "L": "smooth local solution -> finite BKM integral -> extension epsilon -> arbitrary finite horizon.",
+    "O": "Worker 3 owns the BKM-to-continuation bridge ledger.",
+    "P": "Promote ContinuationTheoremBridge and SymmetricHouLuoBKMFinite for the symmetric class.",
+    "R": "Encode the bootstrap: smooth interval -> finite BKM integral -> classical continuation -> repeat.",
+    "S": "BKMIntegralEstimate is available from the Sprint157 integral surface; constants are uniform by Gamma control."
+  },
+  "decision": "continuation_bridge_closes_symmetric_hou_luo_bkm_finiteness",
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay_ns_solved": false,
+  "lane": 3,
+  "promotion_allowed": false,
+  "row_count": 7,
+  "sprint": 157,
+  "summary_hash": "77c4149d4f02d256b646dae709639be5cb1b320792ba811adc8055ee9a08a4d7",
+  "symmetric_hou_luo_bkm_finite": true,
+  "validation_passed": true
+}

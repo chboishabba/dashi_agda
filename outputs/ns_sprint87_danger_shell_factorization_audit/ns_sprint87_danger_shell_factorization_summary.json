@@ -1,0 +1,21 @@
+{
+  "all_required_receipt_anchors_present": true,
+  "clay_navier_stokes_promoted": false,
+  "clay_promotion_recorded_false": true,
+  "complete": false,
+  "contract": "ns_sprint87_danger_shell_factorization_audit",
+  "danger_shell_absorption_closed": false,
+  "danger_shell_absorption_proved_in_repo": false,
+  "dyadic_sup_factorization_closed": true,
+  "factorization_support_closed": true,
+  "high_high_hminus_half_bound_closed": true,
+  "next_required_gate": "DangerShellAbsorptionCondition",
+  "open_obligations": [
+    "prove DangerShellH1TailSmallness from non-circular NS inputs",
+    "prove the scalar absorption inequality at K*(t)",
+    "close KStar drift containment and theta/BKM continuation after absorption"
+  ],
+  "receipt_path": "DASHI/Physics/Closure/NSSprint87DangerShellSupFactorizationReceipt.agda",
+  "route_decision": "NS_SPRINT87_DANGER_SHELL_FACTORIZATION_ABSORPTION_OPEN",
+  "shell_sup_controlled_by_h1_tail_closed": true
+}

@@ -1,0 +1,24 @@
+DASHI margin calculation summary
+
+NS global vs tail theta:
+        trace    nu  K_kolmogorov  K_diss  theta_global  danger_shell_global  margin_global  max_k_available  theta_tail  danger_shell_tail  margin_tail  tail_has_data
+   kolmogorov 0.010        31.623      32      2.060518                    2      -1.060518               64    0.318838               32.0     0.681162           True
+       smooth 0.010        31.623      32      8.282630                    2      -7.282630               64    0.003994               32.0     0.996006           True
+near_critical 0.010        31.623      32      2.578316                    2      -1.578316               64    2.015855               32.0    -1.015855           True
+     inviscid 0.001       177.828     178     15.640463                    2     -14.640463               64         NaN                NaN          NaN          False
+        rough 0.010        31.623      32      3.510006                    2      -2.510006               64    2.763042               32.0    -1.763042           True
+
+YM beta threshold sensitivity to C0:
+  C0  beta_convergence_r_eq_1  beta_absorption_r_eq_0_5  beta_strong_r_eq_0_25  gap_from_beta6_to_absorption
+0.50                 7.242822                 10.107067              12.971311                      4.107067
+0.75                 8.918298                 11.782542              14.646787                      5.782542
+1.00                10.107067                 12.971311              15.835556                      6.971311
+1.25                11.029148                 13.893392              16.757637                      7.893392
+1.50                11.782542                 14.646787              17.511031                      8.646787
+2.00                12.971311                 15.835556              18.699800                      9.835556
+3.00                14.646787                 17.511031              20.375276                     11.511031
+5.00                16.757637                 19.621881              22.486126                     13.621881
+
+Gate3 sampler notes:
+Current sampler has mu_N near 1 and (N-1)*mu_N >> 1, so Gershgorin certification fails.
+Phase-complete helps at N=8 but A_N collapses numerically at larger N in the current sampler.

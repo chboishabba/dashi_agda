@@ -1,0 +1,11 @@
+{
+  "legacy_all_providers_derived_in_repo": false,
+  "legacy_clay_statement_boundary_discharged": false,
+  "legacy_clay_yang_mills_promoted": false,
+  "reconciliation_statement": "Legacy authority boundary remains fail-closed; Sprint 91-100 candidate chain is complete only in the receipt layer; both keep clayYangMillsPromoted=false.",
+  "route_decision": "SPRINT101_RECONCILES_BOUNDARIES_NO_PROMOTION",
+  "sprint": "101-clay-boundary-reconciliation",
+  "sprint100_clay_yang_mills_promoted": false,
+  "sprint100_external_acceptance_available": false,
+  "sprint100_internal_candidate_chain_complete": true
+}

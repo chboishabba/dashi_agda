@@ -1,0 +1,129 @@
+{
+  "clay_navier_stokes_promoted": false,
+  "compensated_leakage_identity_proved": false,
+  "contract": "ns_propagated_coherence_jacobian_harness",
+  "depths": [
+    {
+      "condition_number_median": 1.0,
+      "constraint_dimension": 1,
+      "depth": 1,
+      "invalid_count": 0,
+      "max_singular_value_median": 7.850462293418874e-12,
+      "min_singular_value_median": 7.850462293418874e-12,
+      "output_count": 16,
+      "output_width": 0.23399182831217624,
+      "parameter_dimension": 12,
+      "rank_distribution": {
+        "0": 16
+      },
+      "rank_mean": 0.0,
+      "rank_median": 0.0,
+      "residual_norm_median": 0.0,
+      "residual_norm_p90": 1.1102230246251565e-16,
+      "valid_count": 16
+    },
+    {
+      "condition_number_median": 516059267225.52484,
+      "constraint_dimension": 7,
+      "depth": 2,
+      "invalid_count": 0,
+      "max_singular_value_median": 1.940224691007824,
+      "min_singular_value_median": 0.0,
+      "output_count": 16,
+      "output_width": 0.24304554417309393,
+      "parameter_dimension": 12,
+      "rank_distribution": {
+        "2": 16
+      },
+      "rank_mean": 2.0,
+      "rank_median": 2.0,
+      "residual_norm_median": 0.5527110262696986,
+      "residual_norm_p90": 1.266844383487995,
+      "valid_count": 16
+    },
+    {
+      "condition_number_median": 2744080860209.099,
+      "constraint_dimension": 13,
+      "depth": 3,
+      "invalid_count": 0,
+      "max_singular_value_median": 3.762231731180022,
+      "min_singular_value_median": 8.358300263596184e-28,
+      "output_count": 16,
+      "output_width": 0.1615739796047061,
+      "parameter_dimension": 12,
+      "rank_distribution": {
+        "4": 16
+      },
+      "rank_mean": 4.0,
+      "rank_median": 4.0,
+      "residual_norm_median": 1.51106481207002,
+      "residual_norm_p90": 1.8758734892539095,
+      "valid_count": 16
+    }
+  ],
+  "interpretation": "Ranks and singular values estimate local codimension of the sampled propagated-coherence constraint map K_k. Nonzero rank is diagnostic evidence only; it is not a transversality theorem or PDE proof.",
+  "output_width_theorem_proved": false,
+  "parameters": {
+    "finite_diff_step": 1e-05,
+    "max_depth": 3,
+    "near_resonance_threshold": 1e-07,
+    "normals": 64,
+    "parameter_dimension": 12,
+    "rank_tol": 1e-06,
+    "samples": 16
+  },
+  "promotion": false,
+  "sample_rows": [
+    {
+      "depth_1": {
+        "constraint_dimension": 1,
+        "constraint_norm": 0.0
+      },
+      "depth_2": {
+        "constraint_dimension": 7,
+        "constraint_norm": 0.8529178402629258
+      },
+      "depth_3": {
+        "constraint_dimension": 13,
+        "constraint_norm": 1.4605641036048411
+      },
+      "index": 0
+    },
+    {
+      "depth_1": {
+        "constraint_dimension": 1,
+        "constraint_norm": 0.0
+      },
+      "depth_2": {
+        "constraint_dimension": 7,
+        "constraint_norm": 0.4046498172361448
+      },
+      "depth_3": {
+        "constraint_dimension": 13,
+        "constraint_norm": 1.2395330002517038
+      },
+      "index": 1
+    },
+    {
+      "depth_1": {
+        "constraint_dimension": 1,
+        "constraint_norm": 0.0
+      },
+      "depth_2": {
+        "constraint_dimension": 7,
+        "constraint_norm": 0.9582661321008151
+      },
+      "depth_3": {
+        "constraint_dimension": 13,
+        "constraint_norm": 1.8758734892539095
+      },
+      "index": 2
+    }
+  ],
+  "scope": "finite_exact_leray_vorticity_jacobian_diagnostic_only_not_pde_proof",
+  "seed": 20260608,
+  "states": {
+    "sampled": 16,
+    "state_failures": 0
+  }
+}

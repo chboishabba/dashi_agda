@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "timeout_seconds": 2400,
+    "heartbeat_seconds": 30,
+    "max_log_lines": 2600,
+    "once": true
+  },
+  "runners": {
+    "paper7-wave2-gate12-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate1-gate2",
+      "claim": "Paper 7 wave2 Gate 1/2 manager: implement S8LaneSumDominanceExternalLemmaInterface / s8WeightedPressureFiniteLaneOrderArithmeticCompatibilityPrimitive or exact first blocker; may spawn up to six leaf workers"
+    },
+    "paper7-wave2-gate3-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate3-yang-mills",
+      "claim": "Paper 7 wave2 Gate 3 manager: implement generator-8/Cartan SU(3) brackets, coefficient constants, or finite Jacobi carrier while preserving Route A/B separation; may spawn up to six leaf workers"
+    },
+    "paper7-wave2-gate4-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate4-factorvec-gr",
+      "claim": "Paper 7 wave2 Gate 4 manager: prove p2-time valuation metric nonzero weights, determinant/rank, or Lorentzian inertia; may spawn up to six leaf workers"
+    },
+    "paper7-wave2-gate5-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate5-hilbert-stone",
+      "claim": "Paper 7 wave2 Gate 5 manager: implement nondegenerate projection algebra, quotient inner-product well-definedness, or noncollapsed Hilbert carrier precursor; may spawn up to six leaf workers"
+    },
+    "paper7-wave2-gate6-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate6-dhr-aqft",
+      "claim": "Paper 7 wave2 Gate 6 manager: inhabit DHR primitive sector constructors, arbitrary sector-to-lane predicates, or sector-specific nonempty carrier predicates; may spawn up to six leaf workers"
+    },
+    "paper7-wave2-gate78-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate7-gate8-composition",
+      "claim": "Paper 7 wave2 Gate 7/8 manager: transport finite Higgs norm/order to actual doublet, prove completing-square law there, or construct concrete Yukawa matrix input; may spawn up to six leaf workers"
+    }
+  }
+}

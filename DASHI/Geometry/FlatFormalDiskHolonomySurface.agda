@@ -6,7 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
-open import Data.List.Base using (List; _∷_; [])
+open import Data.List.Base using (List; _∷_; []; _++_)
 open import Data.Nat.Base using (ℕ; zero; suc; _+_; _≤_)
 open import Data.Nat.Properties as NatP using (≤-refl; ≤-trans)
 
@@ -339,10 +339,40 @@ canonicalB02LocalDiscreteNonabelianStokesProofSurface P =
           tt
     ; BoundaryWordAtDepth =
         λ _ _ →
-          ⊤
+          List ⊤
     ; canonicalBoundaryWordAtDepth =
         λ _ →
-          tt
+          []
+    ; boundaryWordAppendAtDepth =
+        λ _ _ left right →
+          left ++ right
+    ; BoundaryEdgeLabelAtDepth =
+        λ _ _ →
+          ⊤
+    ; boundaryWordFromEdgeLabelsAtDepth =
+        λ _ _ labels →
+          labels
+    ; boundaryWordEdgeLabelsAtDepth =
+        λ _ _ word →
+          word
+    ; boundaryWordEdgeLabelsFromConstructedAtDepth =
+        λ _ _ _ →
+          refl
+    ; boundaryWordEdgeLabelsAppendAtDepth =
+        λ _ _ _ _ →
+          refl
+    ; boundaryWordFoldAtDepth =
+        λ _ _ _ step seed word →
+          step word seed
+    ; boundaryWordFoldComputesEdgeLabelListAtDepth =
+        λ _ _ left right →
+          RA.listAppendRightIdentity (left ++ right)
+    ; boundaryWordFoldComputesMappedEdgeLabelListAtDepth =
+        λ _ _ _ labelMap left right →
+          RA.trans
+            (RA.listAppendRightIdentity
+              (RA.mapList labelMap (left ++ right)))
+            (RA.mapListAppend labelMap left right)
     ; telescopingBoundData =
         canonicalB02DiscreteTelescopingBoundData P
     ; productBoundData =

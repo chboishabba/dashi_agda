@@ -1,0 +1,72 @@
+[
+  {
+    "classification": "conditional_sign_closed_not_source",
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_action": "use only as a conditional sign lemma",
+    "rationale": "The compressive alignment condition closes the sign after the condition is granted, but it does not derive the condition from unforced Leray-admissible Navier-Stokes evolution.",
+    "recommendation_rank": 5,
+    "source_id": "kinematic_compressive_alignment_condition"
+  },
+  {
+    "classification": "open_primary_gate",
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_action": "prove PersistentAlignmentExistence",
+    "rationale": "This is the primary source target because it would derive a persistent non-circular alignment mechanism rather than assuming the correlation needed by the transfer sign.",
+    "recommendation_rank": 1,
+    "source_id": "persistent_alignment_existence"
+  },
+  {
+    "classification": "magnitude_only_no_sign_source",
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_action": "retain as admissibility bookkeeping",
+    "rationale": "The Leray energy class supplies magnitude and compactness control, but it does not determine the high-high to low-mode sign.",
+    "recommendation_rank": 6,
+    "source_id": "leray_energy_class"
+  },
+  {
+    "classification": "closed_by_sprint117",
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_action": "do not reopen without a new independent mechanism",
+    "rationale": "Sprint117 closed the concentration-only route because geometry and concentration accounting did not independently supply the needed non-circular source.",
+    "recommendation_rank": 7,
+    "source_id": "concentration_geometry"
+  },
+  {
+    "classification": "rejected_circular",
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_action": "exclude from promotion accounting",
+    "rationale": "Imposing the alignment inserts the target correlation and is therefore circular for a Clay-level Navier-Stokes route.",
+    "recommendation_rank": 8,
+    "source_id": "imposed_alignment_assumption"
+  },
+  {
+    "classification": "open_alternative",
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_action": "compare after the primary persistence gate is tested",
+    "rationale": "A global sign nonpositivity proof remains an alternative regular route, but it is less direct than deriving persistent alignment.",
+    "recommendation_rank": 2,
+    "source_id": "option_a_global_sign_nonpositivity"
+  },
+  {
+    "classification": "open_secondary_comparison",
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_action": "hold as a secondary model comparison",
+    "rationale": "The Burgers vortex lane can compare concentration heuristics against the primary source gate, but it does not yet supply a general unforced sign source.",
+    "recommendation_rank": 3,
+    "source_id": "burgers_vortex_concentration"
+  }
+]

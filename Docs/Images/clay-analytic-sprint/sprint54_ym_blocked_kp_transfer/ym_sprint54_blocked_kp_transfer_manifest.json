@@ -1,0 +1,10 @@
+{
+  "script": "ym_sprint54_blocked_kp_transfer_table.py",
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyFourYMInductiveDiameterKPReceipt",
+  "outputs": {
+    "table": "Docs/Images/clay-analytic-sprint/sprint54_ym_blocked_kp_transfer/ym_sprint54_blocked_kp_transfer_table.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint54_ym_blocked_kp_transfer/ym_sprint54_blocked_kp_transfer_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint54_ym_blocked_kp_transfer/ym_sprint54_blocked_kp_transfer_manifest.json"
+  },
+  "promotion_status": "NO_PROMOTION_DIAGNOSTIC_ONLY"
+}

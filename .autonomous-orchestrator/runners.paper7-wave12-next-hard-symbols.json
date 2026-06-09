@@ -1,0 +1,25 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3000,
+    "once": true,
+    "timeout_seconds": 3600
+  },
+  "runners": {
+    "paper7-wave12-mgr-next-hard-symbols": {
+      "parent": null,
+      "lane": "paper7-wave12/next-hard-symbol-manager",
+      "claim": "Paper 7 wave12 SECTION MANAGER. Enforce strict symbol-inhabitation contract. W2 is parked as policy authority boundary. Supervise Gate3 missingGaugeCompatibilityOfBianchiLaw and Gate4 missingValuationMatterReceiptInterface. Reject docs-only/audit/scaffold output."
+    },
+    "paper7-wave12-gate3-gauge-compat": {
+      "parent": "paper7-wave12-mgr-next-hard-symbols",
+      "lane": "paper7-wave12/gate3/missingGaugeCompatibilityOfBianchiLaw",
+      "claim": "STRICT SYMBOL-INHABITATION CONTRACT. Use $autonomous-orchestrator only; do not use Codex built-in subagents. Leaf worker unless SECTION MANAGER. Own exactly the named target. Allowed exits only: (1) Agda source diff + targeted validation passes; (2) Agda source diff + exact Agda stderr naming missing upstream type/symbol; (3) empty diff + named authority-boundary escalation with exact receipt shape. Forbidden: docs-only, audit-only, blocker-map-only, scaffold-only, new postulate, weakened theorem, false promotion. Touch only target module and direct imports. Include exact validation command.\nTARGET: DASHI.Physics.Closure.YangMillsFieldEquationObstruction.missingGaugeCompatibilityOfBianchiLaw. Module: DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda. Attempt to inhabit/advance the gauge-compatibility Bianchi law from existing flat plaquette Stokes/Jacobi witness, selected exterior derivative squared-zero witness, finite SU(3) Jacobi residual, and SFGC transport/gauge compatibility records. If blocked, exact Agda stderr naming missing upstream symbol. Validation: agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda"
+    },
+    "paper7-wave12-gate4-matter-interface": {
+      "parent": "paper7-wave12-mgr-next-hard-symbols",
+      "lane": "paper7-wave12/gate4/missingValuationMatterReceiptInterface",
+      "claim": "STRICT SYMBOL-INHABITATION CONTRACT. Use $autonomous-orchestrator only; do not use Codex built-in subagents. Leaf worker unless SECTION MANAGER. Own exactly the named target. Allowed exits only: (1) Agda source diff + targeted validation passes; (2) Agda source diff + exact Agda stderr naming missing upstream type/symbol; (3) empty diff + named authority-boundary escalation with exact receipt shape. Forbidden: docs-only, audit-only, blocker-map-only, scaffold-only, new postulate, weakened theorem, false promotion. Touch only target module and direct imports. Include exact validation command.\nTARGET: DASHI.Physics.Closure.FactorVecDiscreteMetricTensorSurface.missingValuationMatterReceiptInterface / W4MatterStressEnergyInterfaceReceipt boundary. Module: DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda; W4MatterStressEnergyInterfaceReceipt may be touched only if directly necessary. Attempt to connect the local unit stress-energy progress to an inhabited matter receipt interface. If the interface is external/authority-only, return exact authority boundary and receipt shape. Validation: agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda"
+    }
+  }
+}

@@ -1,0 +1,1158 @@
+{
+  "checks": {
+    "all_bounded_profiles_pass": true,
+    "all_profile_local_checks_pass": true,
+    "bad_profile_included": true,
+    "bad_profile_violates_boundedness": true,
+    "promotion_false": true
+  },
+  "clay_promoted": false,
+  "control": {
+    "C": "scripts/ns_bounded_abel_mass_proxy_harness.py",
+    "F": "Does not prove A1 bounded mass for CKN-scale rescalings or any Clay claim.",
+    "G": "promotion=false regardless of diagnostic outcome.",
+    "L": "shell envelope -> proxy mass atoms -> Abel/log windows -> fail-closed classification",
+    "O": "Local NS A1 bounded Abel-mass proxy diagnostic.",
+    "P": "Bounded Type-I profiles must pass; deliberate bad profile must visibly fail.",
+    "R": "Simulate Type-I-like shell energies and detect Abel/log-window boundedness.",
+    "S": "Synthetic shell model only; no PDE Abel measure is constructed."
+  },
+  "diagnostic_only": true,
+  "harness": "ns_bounded_abel_mass_proxy",
+  "interpretation": {
+    "bad_profile_meaning": "The supercritical profile violates the envelope and the Abel/log-window mass bound, so the diagnostic is fail-closed rather than permissive.",
+    "bounded_mass_proxy_meaning": "For profiles satisfying ||P_j U||_2 <= M 2^(-j/2), 2^j||P_j U||_2^2 and its normalized Abel/log-window averages stay <= M^2.",
+    "non_claims": "No CKN-scale PDE defect measure, stationarity theorem, compensated leakage identity, NS Clay result, YM result, or unification promotion is proved."
+  },
+  "parameters": {
+    "abel_rho": 0.78,
+    "bad_growth": 0.18,
+    "shells": 18,
+    "type_i_bound": 1.0,
+    "window": 7
+  },
+  "profiles": [
+    {
+      "allowed_atom_mass_bound": 1.0,
+      "allowed_window_mass_bound": 1.0,
+      "bounded_by_abel_windows": true,
+      "bounded_by_envelope": true,
+      "checks": {
+        "bad_profile_violation_visible": true,
+        "expected_bounded_classification": true,
+        "finite_nonnegative_shell_masses": true,
+        "promotion_false": true,
+        "window_rows_present": true
+      },
+      "classification": "bounded_type_i_proxy",
+      "description": "Saturates the model envelope ||P_j U||_2 = M 2^(-j/2).",
+      "expected_bounded": true,
+      "max_abel_window_mass": 1.0000000000000002,
+      "max_arithmetic_window_mass": 1.0000000000000002,
+      "max_envelope_ratio": 1.0,
+      "max_proxy_mass_atom": 1.0000000000000002,
+      "mean_abel_window_mass": 1.0000000000000002,
+      "name": "critical_type_i_envelope",
+      "shell_rows": [
+        {
+          "depth": 0,
+          "envelope_l2": 1.0,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1,
+          "shell_l2_energy": 1.0
+        },
+        {
+          "depth": 1,
+          "envelope_l2": 0.7071067811865476,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2,
+          "shell_l2_energy": 0.7071067811865476
+        },
+        {
+          "depth": 2,
+          "envelope_l2": 0.5,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4,
+          "shell_l2_energy": 0.5
+        },
+        {
+          "depth": 3,
+          "envelope_l2": 0.3535533905932738,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 8,
+          "shell_l2_energy": 0.3535533905932738
+        },
+        {
+          "depth": 4,
+          "envelope_l2": 0.25,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 16,
+          "shell_l2_energy": 0.25
+        },
+        {
+          "depth": 5,
+          "envelope_l2": 0.1767766952966369,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 32,
+          "shell_l2_energy": 0.1767766952966369
+        },
+        {
+          "depth": 6,
+          "envelope_l2": 0.125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 64,
+          "shell_l2_energy": 0.125
+        },
+        {
+          "depth": 7,
+          "envelope_l2": 0.08838834764831845,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 128,
+          "shell_l2_energy": 0.08838834764831845
+        },
+        {
+          "depth": 8,
+          "envelope_l2": 0.0625,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 256,
+          "shell_l2_energy": 0.0625
+        },
+        {
+          "depth": 9,
+          "envelope_l2": 0.04419417382415922,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 512,
+          "shell_l2_energy": 0.04419417382415922
+        },
+        {
+          "depth": 10,
+          "envelope_l2": 0.03125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1024,
+          "shell_l2_energy": 0.03125
+        },
+        {
+          "depth": 11,
+          "envelope_l2": 0.02209708691207961,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2048,
+          "shell_l2_energy": 0.02209708691207961
+        },
+        {
+          "depth": 12,
+          "envelope_l2": 0.015625,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4096,
+          "shell_l2_energy": 0.015625
+        },
+        {
+          "depth": 13,
+          "envelope_l2": 0.011048543456039806,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 8192,
+          "shell_l2_energy": 0.011048543456039806
+        },
+        {
+          "depth": 14,
+          "envelope_l2": 0.0078125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 16384,
+          "shell_l2_energy": 0.0078125
+        },
+        {
+          "depth": 15,
+          "envelope_l2": 0.005524271728019903,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 32768,
+          "shell_l2_energy": 0.005524271728019903
+        },
+        {
+          "depth": 16,
+          "envelope_l2": 0.00390625,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 65536,
+          "shell_l2_energy": 0.00390625
+        },
+        {
+          "depth": 17,
+          "envelope_l2": 0.0027621358640099515,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 131072,
+          "shell_l2_energy": 0.0027621358640099515
+        }
+      ],
+      "window_rows": [
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 3,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 0,
+          "stop_depth": 6,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 4,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 1,
+          "stop_depth": 7,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 5,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 2,
+          "stop_depth": 8,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 6,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 3,
+          "stop_depth": 9,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 7,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 4,
+          "stop_depth": 10,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 8,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 5,
+          "stop_depth": 11,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 9,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 6,
+          "stop_depth": 12,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 10,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 7,
+          "stop_depth": 13,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 11,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 8,
+          "stop_depth": 14,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 12,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 9,
+          "stop_depth": 15,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 13,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 10,
+          "stop_depth": 16,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0000000000000002,
+          "center_depth": 14,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 11,
+          "stop_depth": 17,
+          "window_width": 7
+        }
+      ]
+    },
+    {
+      "allowed_atom_mass_bound": 1.0,
+      "allowed_window_mass_bound": 1.0,
+      "bounded_by_abel_windows": true,
+      "bounded_by_envelope": true,
+      "checks": {
+        "bad_profile_violation_visible": true,
+        "expected_bounded_classification": true,
+        "finite_nonnegative_shell_masses": true,
+        "promotion_false": true,
+        "window_rows_present": true
+      },
+      "classification": "bounded_type_i_proxy",
+      "description": "Strictly bounded Type-I-like profile with mild logarithmic depletion.",
+      "expected_bounded": true,
+      "max_abel_window_mass": 0.23515274235665512,
+      "max_arithmetic_window_mass": 0.24540816326530615,
+      "max_envelope_ratio": 0.7071067811865475,
+      "max_proxy_mass_atom": 0.4999999999999999,
+      "mean_abel_window_mass": 0.11543977895049573,
+      "name": "log_depleted_type_i",
+      "shell_rows": [
+        {
+          "depth": 0,
+          "envelope_l2": 1.0,
+          "envelope_ratio": 0.7071067811865475,
+          "proxy_mass_atom": 0.4999999999999999,
+          "shell": 1,
+          "shell_l2_energy": 0.7071067811865475
+        },
+        {
+          "depth": 1,
+          "envelope_l2": 0.7071067811865476,
+          "envelope_ratio": 0.5773502691896258,
+          "proxy_mass_atom": 0.3333333333333334,
+          "shell": 2,
+          "shell_l2_energy": 0.4082482904638631
+        },
+        {
+          "depth": 2,
+          "envelope_l2": 0.5,
+          "envelope_ratio": 0.5,
+          "proxy_mass_atom": 0.25,
+          "shell": 4,
+          "shell_l2_energy": 0.25
+        },
+        {
+          "depth": 3,
+          "envelope_l2": 0.3535533905932738,
+          "envelope_ratio": 0.4472135954999579,
+          "proxy_mass_atom": 0.2,
+          "shell": 8,
+          "shell_l2_energy": 0.15811388300841897
+        },
+        {
+          "depth": 4,
+          "envelope_l2": 0.25,
+          "envelope_ratio": 0.4082482904638631,
+          "proxy_mass_atom": 0.1666666666666667,
+          "shell": 16,
+          "shell_l2_energy": 0.10206207261596577
+        },
+        {
+          "depth": 5,
+          "envelope_l2": 0.1767766952966369,
+          "envelope_ratio": 0.3779644730092272,
+          "proxy_mass_atom": 0.14285714285714288,
+          "shell": 32,
+          "shell_l2_energy": 0.0668153104781061
+        },
+        {
+          "depth": 6,
+          "envelope_l2": 0.125,
+          "envelope_ratio": 0.35355339059327373,
+          "proxy_mass_atom": 0.12499999999999997,
+          "shell": 64,
+          "shell_l2_energy": 0.044194173824159216
+        },
+        {
+          "depth": 7,
+          "envelope_l2": 0.08838834764831845,
+          "envelope_ratio": 0.3333333333333333,
+          "proxy_mass_atom": 0.1111111111111111,
+          "shell": 128,
+          "shell_l2_energy": 0.02946278254943948
+        },
+        {
+          "depth": 8,
+          "envelope_l2": 0.0625,
+          "envelope_ratio": 0.31622776601683794,
+          "proxy_mass_atom": 0.1,
+          "shell": 256,
+          "shell_l2_energy": 0.01976423537605237
+        },
+        {
+          "depth": 9,
+          "envelope_l2": 0.04419417382415922,
+          "envelope_ratio": 0.30151134457776363,
+          "proxy_mass_atom": 0.09090909090909091,
+          "shell": 512,
+          "shell_l2_energy": 0.013325044772225653
+        },
+        {
+          "depth": 10,
+          "envelope_l2": 0.03125,
+          "envelope_ratio": 0.2886751345948129,
+          "proxy_mass_atom": 0.08333333333333336,
+          "shell": 1024,
+          "shell_l2_energy": 0.009021097956087904
+        },
+        {
+          "depth": 11,
+          "envelope_l2": 0.02209708691207961,
+          "envelope_ratio": 0.2773500981126146,
+          "proxy_mass_atom": 0.07692307692307693,
+          "shell": 2048,
+          "shell_l2_energy": 0.006128629223068251
+        },
+        {
+          "depth": 12,
+          "envelope_l2": 0.015625,
+          "envelope_ratio": 0.2672612419124244,
+          "proxy_mass_atom": 0.07142857142857144,
+          "shell": 4096,
+          "shell_l2_energy": 0.004175956904881631
+        },
+        {
+          "depth": 13,
+          "envelope_l2": 0.011048543456039806,
+          "envelope_ratio": 0.2581988897471611,
+          "proxy_mass_atom": 0.06666666666666665,
+          "shell": 8192,
+          "shell_l2_energy": 0.00285272165367274
+        },
+        {
+          "depth": 14,
+          "envelope_l2": 0.0078125,
+          "envelope_ratio": 0.25,
+          "proxy_mass_atom": 0.0625,
+          "shell": 16384,
+          "shell_l2_energy": 0.001953125
+        },
+        {
+          "depth": 15,
+          "envelope_l2": 0.005524271728019903,
+          "envelope_ratio": 0.24253562503633297,
+          "proxy_mass_atom": 0.05882352941176471,
+          "shell": 32768,
+          "shell_l2_energy": 0.0013398326964258504
+        },
+        {
+          "depth": 16,
+          "envelope_l2": 0.00390625,
+          "envelope_ratio": 0.23570226039551587,
+          "proxy_mass_atom": 0.055555555555555566,
+          "shell": 65536,
+          "shell_l2_energy": 0.0009207119546699839
+        },
+        {
+          "depth": 17,
+          "envelope_l2": 0.0027621358640099515,
+          "envelope_ratio": 0.22941573387056174,
+          "proxy_mass_atom": 0.052631578947368425,
+          "shell": 131072,
+          "shell_l2_energy": 0.0006336774262920412
+        }
+      ],
+      "window_rows": [
+        {
+          "abel_weighted_mass": 0.23515274235665512,
+          "arithmetic_window_mass": 0.24540816326530615,
+          "center_depth": 3,
+          "max_atom_mass": 0.4999999999999999,
+          "start_depth": 0,
+          "stop_depth": 6,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.18475983390590206,
+          "arithmetic_window_mass": 0.1898526077097506,
+          "center_depth": 4,
+          "max_atom_mass": 0.3333333333333334,
+          "start_depth": 1,
+          "stop_depth": 7,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.1535643430034006,
+          "arithmetic_window_mass": 0.15651927437641724,
+          "center_depth": 5,
+          "max_atom_mass": 0.25,
+          "start_depth": 2,
+          "stop_depth": 8,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.1319084621702703,
+          "arithmetic_window_mass": 0.1337920016491445,
+          "center_depth": 6,
+          "max_atom_mass": 0.2,
+          "start_depth": 3,
+          "stop_depth": 9,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.11584502938157182,
+          "arithmetic_window_mass": 0.11712533498247786,
+          "center_depth": 7,
+          "max_atom_mass": 0.1666666666666667,
+          "start_depth": 4,
+          "stop_depth": 10,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.10339247272752483,
+          "arithmetic_window_mass": 0.10430482216196502,
+          "center_depth": 8,
+          "max_atom_mass": 0.14285714285714288,
+          "start_depth": 5,
+          "stop_depth": 11,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.09342649836680186,
+          "arithmetic_window_mass": 0.09410074052931196,
+          "center_depth": 9,
+          "max_atom_mass": 0.12499999999999997,
+          "start_depth": 6,
+          "stop_depth": 12,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.08525445440693825,
+          "arithmetic_window_mass": 0.08576740719597863,
+          "center_depth": 10,
+          "max_atom_mass": 0.1111111111111111,
+          "start_depth": 7,
+          "stop_depth": 13,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.07842333520665117,
+          "arithmetic_window_mass": 0.07882296275153419,
+          "center_depth": 11,
+          "max_atom_mass": 0.1,
+          "start_depth": 8,
+          "stop_depth": 14,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.07262303378720222,
+          "arithmetic_window_mass": 0.0729406098103577,
+          "center_depth": 12,
+          "max_atom_mass": 0.09090909090909091,
+          "start_depth": 9,
+          "stop_depth": 15,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.06763344910837589,
+          "arithmetic_window_mass": 0.06789010475985266,
+          "center_depth": 13,
+          "max_atom_mass": 0.08333333333333336,
+          "start_depth": 10,
+          "stop_depth": 16,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.06329369298465456,
+          "arithmetic_window_mass": 0.06350413984757196,
+          "center_depth": 14,
+          "max_atom_mass": 0.07692307692307693,
+          "start_depth": 11,
+          "stop_depth": 17,
+          "window_width": 7
+        }
+      ]
+    },
+    {
+      "allowed_atom_mass_bound": 1.0,
+      "allowed_window_mass_bound": 1.0,
+      "bounded_by_abel_windows": true,
+      "bounded_by_envelope": true,
+      "checks": {
+        "bad_profile_violation_visible": true,
+        "expected_bounded_classification": true,
+        "finite_nonnegative_shell_masses": true,
+        "promotion_false": true,
+        "window_rows_present": true
+      },
+      "classification": "bounded_type_i_proxy",
+      "description": "Bounded envelope with deterministic low-amplitude shell oscillation.",
+      "expected_bounded": true,
+      "max_abel_window_mass": 0.7218412336995522,
+      "max_arithmetic_window_mass": 0.6828496709884778,
+      "max_envelope_ratio": 0.9563386683229473,
+      "max_proxy_mass_atom": 0.9145836485297083,
+      "mean_abel_window_mass": 0.6762860226137247,
+      "name": "oscillatory_bounded_type_i",
+      "shell_rows": [
+        {
+          "depth": 0,
+          "envelope_l2": 1.0,
+          "envelope_ratio": 0.82,
+          "proxy_mass_atom": 0.6723999999999999,
+          "shell": 1,
+          "shell_l2_energy": 0.82
+        },
+        {
+          "depth": 1,
+          "envelope_l2": 0.7071067811865476,
+          "envelope_ratio": 0.9296657673478477,
+          "proxy_mass_atom": 0.8642784389784625,
+          "shell": 2,
+          "shell_l2_energy": 0.6573729683286583
+        },
+        {
+          "depth": 2,
+          "envelope_l2": 0.5,
+          "envelope_ratio": 0.9563386683229473,
+          "proxy_mass_atom": 0.9145836485297083,
+          "shell": 4,
+          "shell_l2_energy": 0.47816933416147367
+        },
+        {
+          "depth": 3,
+          "envelope_l2": 0.3535533905932738,
+          "envelope_ratio": 0.8798331832327362,
+          "proxy_mass_atom": 0.7741064303174495,
+          "shell": 8,
+          "shell_l2_energy": 0.311068005088407
+        },
+        {
+          "depth": 4,
+          "envelope_l2": 0.25,
+          "envelope_ratio": 0.7580471379387206,
+          "proxy_mass_atom": 0.5746354633370857,
+          "shell": 16,
+          "shell_l2_energy": 0.18951178448468015
+        },
+        {
+          "depth": 5,
+          "envelope_l2": 0.1767766952966369,
+          "envelope_ratio": 0.6831457835268864,
+          "proxy_mass_atom": 0.4666881615505636,
+          "shell": 32,
+          "shell_l2_energy": 0.12076425401771466
+        },
+        {
+          "depth": 6,
+          "envelope_l2": 0.125,
+          "envelope_ratio": 0.7118129717421617,
+          "proxy_mass_atom": 0.5066777067404076,
+          "shell": 64,
+          "shell_l2_energy": 0.08897662146777022
+        },
+        {
+          "depth": 7,
+          "envelope_l2": 0.08838834764831845,
+          "envelope_ratio": 0.8223539460678089,
+          "proxy_mass_atom": 0.6762660126132967,
+          "shell": 128,
+          "shell_l2_energy": 0.072686506475008
+        },
+        {
+          "depth": 8,
+          "envelope_l2": 0.0625,
+          "envelope_ratio": 0.9311135009388813,
+          "proxy_mass_atom": 0.8669723516306602,
+          "shell": 256,
+          "shell_l2_energy": 0.058194593808680084
+        },
+        {
+          "depth": 9,
+          "envelope_l2": 0.04419417382415922,
+          "envelope_ratio": 0.955784573518312,
+          "proxy_mass_atom": 0.9135241509755818,
+          "shell": 512,
+          "shell_l2_energy": 0.04224010958051817
+        },
+        {
+          "depth": 10,
+          "envelope_l2": 0.03125,
+          "envelope_ratio": 0.8776965879338459,
+          "proxy_mass_atom": 0.7703513004707152,
+          "shell": 1024,
+          "shell_l2_energy": 0.027428018372932683
+        },
+        {
+          "depth": 11,
+          "envelope_l2": 0.02209708691207961,
+          "envelope_ratio": 0.755944974871455,
+          "proxy_mass_atom": 0.5714528050334048,
+          "shell": 2048,
+          "shell_l2_energy": 0.01670418181048438
+        },
+        {
+          "depth": 12,
+          "envelope_l2": 0.015625,
+          "envelope_ratio": 0.6826689277906911,
+          "proxy_mass_atom": 0.4660368649708918,
+          "shell": 4096,
+          "shell_l2_energy": 0.010666701996729549
+        },
+        {
+          "depth": 13,
+          "envelope_l2": 0.011048543456039806,
+          "envelope_ratio": 0.7133222982513354,
+          "proxy_mass_atom": 0.5088287011825672,
+          "shell": 8192,
+          "shell_l2_energy": 0.007881172410392066
+        },
+        {
+          "depth": 14,
+          "envelope_l2": 0.0078125,
+          "envelope_ratio": 0.8247072266109591,
+          "proxy_mass_atom": 0.6801420096243398,
+          "shell": 16384,
+          "shell_l2_energy": 0.006443025207898118
+        },
+        {
+          "depth": 15,
+          "envelope_l2": 0.005524271728019903,
+          "envelope_ratio": 0.9325298197172269,
+          "proxy_mass_atom": 0.8696118646618439,
+          "shell": 32768,
+          "shell_l2_energy": 0.005151548118599374
+        },
+        {
+          "depth": 16,
+          "envelope_l2": 0.00390625,
+          "envelope_ratio": 0.9551920887168988,
+          "proxy_mass_atom": 0.9123919263473518,
+          "shell": 65536,
+          "shell_l2_energy": 0.0037312190965503858
+        },
+        {
+          "depth": 17,
+          "envelope_l2": 0.0027621358640099515,
+          "envelope_ratio": 0.8755436802382857,
+          "proxy_mass_atom": 0.7665767360052016,
+          "shell": 131072,
+          "shell_l2_energy": 0.00241837059969343
+        }
+      ],
+      "window_rows": [
+        {
+          "abel_weighted_mass": 0.6993352173942768,
+          "arithmetic_window_mass": 0.6819099784933824,
+          "center_depth": 3,
+          "max_atom_mass": 0.9145836485297083,
+          "start_depth": 0,
+          "stop_depth": 6,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.6640463082052126,
+          "arithmetic_window_mass": 0.6824622660095676,
+          "center_depth": 4,
+          "max_atom_mass": 0.9145836485297083,
+          "start_depth": 1,
+          "stop_depth": 7,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.6428315072583315,
+          "arithmetic_window_mass": 0.6828471106741674,
+          "center_depth": 5,
+          "max_atom_mass": 0.9145836485297083,
+          "start_depth": 2,
+          "stop_depth": 8,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.650907133286746,
+          "arithmetic_window_mass": 0.6826957538807207,
+          "center_depth": 6,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 3,
+          "stop_depth": 9,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.6825573240214267,
+          "arithmetic_window_mass": 0.6821593067597587,
+          "center_depth": 7,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 4,
+          "stop_depth": 10,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.714488698710678,
+          "arithmetic_window_mass": 0.6817046412878043,
+          "center_depth": 8,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 5,
+          "stop_depth": 11,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.7218412336995522,
+          "arithmetic_window_mass": 0.6816115989192797,
+          "center_depth": 9,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 6,
+          "stop_depth": 12,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.6987076335362217,
+          "arithmetic_window_mass": 0.6819188838395883,
+          "center_depth": 10,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 7,
+          "stop_depth": 13,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.6634458219407671,
+          "arithmetic_window_mass": 0.6824725976983087,
+          "center_depth": 11,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 8,
+          "stop_depth": 14,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.6426976367217686,
+          "arithmetic_window_mass": 0.6828496709884778,
+          "center_depth": 12,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 9,
+          "stop_depth": 15,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.6513338256939635,
+          "arithmetic_window_mass": 0.6826879246130163,
+          "center_depth": 13,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 10,
+          "stop_depth": 16,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 0.6832399308957509,
+          "arithmetic_window_mass": 0.682148701117943,
+          "center_depth": 14,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 11,
+          "stop_depth": 17,
+          "window_width": 7
+        }
+      ]
+    },
+    {
+      "allowed_atom_mass_bound": 1.0,
+      "allowed_window_mass_bound": 1.0,
+      "bounded_by_abel_windows": false,
+      "bounded_by_envelope": false,
+      "checks": {
+        "bad_profile_violation_visible": true,
+        "expected_bounded_classification": true,
+        "finite_nonnegative_shell_masses": true,
+        "promotion_false": true,
+        "window_rows_present": true
+      },
+      "classification": "bad_unbounded_counterprofile",
+      "description": "Deliberately bad profile: envelope ratio grows exponentially with depth.",
+      "expected_bounded": false,
+      "max_abel_window_mass": 36.255926863703046,
+      "max_arithmetic_window_mass": 37.14809011635521,
+      "max_envelope_ratio": 8.339726086728971,
+      "max_proxy_mass_atom": 69.55103120166774,
+      "mean_abel_window_mass": 12.996370075749551,
+      "name": "bad_supercritical_growth",
+      "shell_rows": [
+        {
+          "depth": 0,
+          "envelope_l2": 1.0,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1,
+          "shell_l2_energy": 1.0
+        },
+        {
+          "depth": 1,
+          "envelope_l2": 0.7071067811865476,
+          "envelope_ratio": 1.1328838852957985,
+          "proxy_mass_atom": 1.2834258975629043,
+          "shell": 2,
+          "shell_l2_energy": 0.8010698775896221
+        },
+        {
+          "depth": 2,
+          "envelope_l2": 0.5,
+          "envelope_ratio": 1.2834258975629043,
+          "proxy_mass_atom": 1.6471820345351464,
+          "shell": 4,
+          "shell_l2_energy": 0.6417129487814521
+        },
+        {
+          "depth": 3,
+          "envelope_l2": 0.3535533905932738,
+          "envelope_ratio": 1.4539725173203106,
+          "proxy_mass_atom": 2.114036081122761,
+          "shell": 8,
+          "shell_l2_energy": 0.5140569133280333
+        },
+        {
+          "depth": 4,
+          "envelope_l2": 0.25,
+          "envelope_ratio": 1.6471820345351462,
+          "proxy_mass_atom": 2.7132086548953436,
+          "shell": 16,
+          "shell_l2_energy": 0.41179550863378656
+        },
+        {
+          "depth": 5,
+          "envelope_l2": 0.1767766952966369,
+          "envelope_ratio": 1.8660659830736148,
+          "proxy_mass_atom": 3.4822022531844974,
+          "shell": 32,
+          "shell_l2_energy": 0.3298769776932236
+        },
+        {
+          "depth": 6,
+          "envelope_l2": 0.125,
+          "envelope_ratio": 2.114036081122761,
+          "proxy_mass_atom": 4.469148552288881,
+          "shell": 64,
+          "shell_l2_energy": 0.2642545101403451
+        },
+        {
+          "depth": 7,
+          "envelope_l2": 0.08838834764831845,
+          "envelope_ratio": 2.394957409237857,
+          "proxy_mass_atom": 5.735820992063309,
+          "shell": 128,
+          "shell_l2_energy": 0.2116863280906318
+        },
+        {
+          "depth": 8,
+          "envelope_l2": 0.0625,
+          "envelope_ratio": 2.7132086548953436,
+          "proxy_mass_atom": 7.361501204999,
+          "shell": 256,
+          "shell_l2_energy": 0.16957554093095897
+        },
+        {
+          "depth": 9,
+          "envelope_l2": 0.04419417382415922,
+          "envelope_ratio": 3.0737503625760243,
+          "proxy_mass_atom": 9.44794129143624,
+          "shell": 512,
+          "shell_l2_energy": 0.13584185781575725
+        },
+        {
+          "depth": 10,
+          "envelope_l2": 0.03125,
+          "envelope_ratio": 3.482202253184496,
+          "proxy_mass_atom": 12.12573253208318,
+          "shell": 1024,
+          "shell_l2_energy": 0.1088188204120155
+        },
+        {
+          "depth": 11,
+          "envelope_l2": 0.02209708691207961,
+          "envelope_ratio": 3.944930817973437,
+          "proxy_mass_atom": 15.562479158596572,
+          "shell": 2048,
+          "shell_l2_energy": 0.08717147914690035
+        },
+        {
+          "depth": 12,
+          "envelope_l2": 0.015625,
+          "envelope_ratio": 4.46914855228888,
+          "proxy_mass_atom": 19.973288782425794,
+          "shell": 4096,
+          "shell_l2_energy": 0.06983044612951375
+        },
+        {
+          "depth": 13,
+          "envelope_l2": 0.011048543456039806,
+          "envelope_ratio": 5.063026375881119,
+          "proxy_mass_atom": 25.6342360828679,
+          "shell": 8192,
+          "shell_l2_energy": 0.05593906693299827
+        },
+        {
+          "depth": 14,
+          "envelope_l2": 0.0078125,
+          "envelope_ratio": 5.735820992063309,
+          "proxy_mass_atom": 32.89964245299412,
+          "shell": 16384,
+          "shell_l2_energy": 0.0448111015004946
+        },
+        {
+          "depth": 15,
+          "envelope_l2": 0.005524271728019903,
+          "envelope_ratio": 6.498019170849883,
+          "proxy_mass_atom": 42.22425314473261,
+          "shell": 32768,
+          "shell_l2_energy": 0.03589682359365734
+        },
+        {
+          "depth": 16,
+          "envelope_l2": 0.00390625,
+          "envelope_ratio": 7.3615012049990005,
+          "proxy_mass_atom": 54.19169999120174,
+          "shell": 65536,
+          "shell_l2_energy": 0.028755864082027346
+        },
+        {
+          "depth": 17,
+          "envelope_l2": 0.0027621358640099515,
+          "envelope_ratio": 8.339726086728971,
+          "proxy_mass_atom": 69.55103120166774,
+          "shell": 131072,
+          "shell_l2_energy": 0.02303545652017346
+        }
+      ],
+      "window_rows": [
+        {
+          "abel_weighted_mass": 2.329701231675264,
+          "arithmetic_window_mass": 2.3870290676556474,
+          "center_depth": 3,
+          "max_atom_mass": 4.469148552288881,
+          "start_depth": 0,
+          "stop_depth": 6,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 2.989998894316229,
+          "arithmetic_window_mass": 3.063574923664692,
+          "center_depth": 4,
+          "max_atom_mass": 5.735820992063309,
+          "start_depth": 1,
+          "stop_depth": 7,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 3.837442014649897,
+          "arithmetic_window_mass": 3.9318713961555622,
+          "center_depth": 5,
+          "max_atom_mass": 7.361501204999,
+          "start_depth": 2,
+          "stop_depth": 8,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 4.925072461997643,
+          "arithmetic_window_mass": 5.046265575712861,
+          "center_depth": 6,
+          "max_atom_mass": 9.44794129143624,
+          "start_depth": 3,
+          "stop_depth": 9,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 6.320965545101667,
+          "arithmetic_window_mass": 6.476507925850065,
+          "center_depth": 7,
+          "max_atom_mass": 12.12573253208318,
+          "start_depth": 4,
+          "stop_depth": 10,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 8.112490878186298,
+          "arithmetic_window_mass": 8.312117997807382,
+          "center_depth": 8,
+          "max_atom_mass": 15.562479158596572,
+          "start_depth": 5,
+          "stop_depth": 11,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 10.411780886807124,
+          "arithmetic_window_mass": 10.667987501984712,
+          "center_depth": 9,
+          "max_atom_mass": 19.973288782425794,
+          "start_depth": 6,
+          "stop_depth": 12,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 13.362749229878723,
+          "arithmetic_window_mass": 13.69157143492457,
+          "center_depth": 10,
+          "max_atom_mass": 25.6342360828679,
+          "start_depth": 7,
+          "stop_depth": 13,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 17.150098424265106,
+          "arithmetic_window_mass": 17.57211735791469,
+          "center_depth": 11,
+          "max_atom_mass": 32.89964245299412,
+          "start_depth": 8,
+          "stop_depth": 14,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 22.010880463454594,
+          "arithmetic_window_mass": 22.552510492162348,
+          "center_depth": 12,
+          "max_atom_mass": 42.22425314473261,
+          "start_depth": 9,
+          "stop_depth": 15,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 28.249334014959004,
+          "arithmetic_window_mass": 28.944476020700275,
+          "center_depth": 13,
+          "max_atom_mass": 54.19169999120174,
+          "start_depth": 10,
+          "stop_depth": 16,
+          "window_width": 7
+        },
+        {
+          "abel_weighted_mass": 36.255926863703046,
+          "arithmetic_window_mass": 37.14809011635521,
+          "center_depth": 14,
+          "max_atom_mass": 69.55103120166774,
+          "start_depth": 11,
+          "stop_depth": 17,
+          "window_width": 7
+        }
+      ]
+    }
+  ],
+  "promotion": false,
+  "summary": {
+    "allowed_window_mass_bound": 1.0,
+    "bad_profiles": 1,
+    "bounded_profiles": 3,
+    "max_bad_abel_window_mass": 36.255926863703046,
+    "max_bounded_abel_window_mass": 1.0000000000000002,
+    "ok": true,
+    "profiles": 4
+  }
+}

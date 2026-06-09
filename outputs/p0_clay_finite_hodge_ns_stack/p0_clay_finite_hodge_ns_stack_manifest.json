@@ -1,0 +1,35 @@
+{
+  "contract": "p0_clay_finite_hodge_ns_stack",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/p0_clay_finite_hodge_ns_stack/p0_clay_finite_hodge_ns_stack_manifest.json",
+      "sha256": "0e01b060f58876811a64e506fbd535e8c231d558b619015ef63a148f96d1e1fa"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/p0_clay_finite_hodge_ns_stack/p0_clay_finite_hodge_ns_stack.md",
+      "sha256": "dcd3398bc1c5f61672cc839df5ec1036793e51a57a5eecfbdff22c82ad2b8c8f"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/p0_clay_finite_hodge_ns_stack/p0_clay_finite_hodge_ns_stack_rows.csv",
+      "sha256": "a529b987dc15bf27dfadd4ad8968c6c5919fa0296c7501af9c22f7de32f21a70"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/p0_clay_finite_hodge_ns_stack/p0_clay_finite_hodge_ns_stack_rows.json",
+      "sha256": "0174b3756be763deffccf048c810e7be2ffa92c097498c8983769663bb1a9afd"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/p0_clay_finite_hodge_ns_stack/p0_clay_finite_hodge_ns_stack_summary.json",
+      "sha256": "b530d62119bdf72e420895990ab3c82795fc0418699820ebbf5441ef33550f48"
+    }
+  },
+  "generated_at": "2026-06-08T00:00:00+10:00",
+  "manifest_hash": "aeb9a4d9309ce626c569ecdc351bda681e91b4a704e167e3f94129ea1a88f051",
+  "sprint": 165,
+  "validation_passed": true,
+  "worker": 2
+}

@@ -1,0 +1,189 @@
+[
+  {
+    "accepted": true,
+    "alpha": 0.25,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^0.25",
+    "r_h": 0.5,
+    "ratio": 0.42044820762685725,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 0.25,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^0.25",
+    "r_h": 0.25,
+    "ratio": 0.1767766952966369,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 0.25,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^0.25",
+    "r_h": 0.125,
+    "ratio": 0.07432544468767006,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 0.25,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^0.25",
+    "r_h": 0.0625,
+    "ratio": 0.03125,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 0.5,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^0.5",
+    "r_h": 0.5,
+    "ratio": 0.3535533905932738,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 0.5,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^0.5",
+    "r_h": 0.25,
+    "ratio": 0.125,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 0.5,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^0.5",
+    "r_h": 0.125,
+    "ratio": 0.04419417382415922,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 0.5,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^0.5",
+    "r_h": 0.0625,
+    "ratio": 0.015625,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 1.0,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^1",
+    "r_h": 0.5,
+    "ratio": 0.25,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 1.0,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^1",
+    "r_h": 0.25,
+    "ratio": 0.0625,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 1.0,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^1",
+    "r_h": 0.125,
+    "ratio": 0.015625,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 1.0,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^1",
+    "r_h": 0.0625,
+    "ratio": 0.00390625,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 2.0,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^2",
+    "r_h": 0.5,
+    "ratio": 0.125,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 2.0,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^2",
+    "r_h": 0.25,
+    "ratio": 0.015625,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 2.0,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^2",
+    "r_h": 0.125,
+    "ratio": 0.001953125,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": true,
+    "alpha": 2.0,
+    "decision": "accepted_finite_energy_swirl_profile",
+    "finite_energy": true,
+    "formula": "r_H ** (alpha + 1)",
+    "profile": "u_phi ~ r^2",
+    "r_h": 0.0625,
+    "ratio": 0.000244140625,
+    "reason": "alpha-positive swirl profile has finite L2 energy near the axis"
+  },
+  {
+    "accepted": false,
+    "alpha": null,
+    "decision": "rejected_infinite_l2_energy",
+    "finite_energy": false,
+    "formula": "singular swirl profile",
+    "profile": "u_phi ~ 1/r",
+    "r_h": null,
+    "ratio": null,
+    "reason": "axis singularity makes the L2 energy integral diverge"
+  }
+]

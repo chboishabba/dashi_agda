@@ -1,0 +1,203 @@
+[
+  {
+    "accepted": false,
+    "ansatz": "K*(t) >= k0 > 0",
+    "classification": "non-collapse lower-bound family",
+    "excludes_option_c_lower_bound": false,
+    "failed_gates": [
+      "finite_time_kstar_to_zero",
+      "low_mode_energy_concentration_dynamics",
+      "viscous_damping_defeat_estimate",
+      "excludes_option_c_lower_bound",
+      "singularity_extraction_without_bkm_or_serrin"
+    ],
+    "family": "constant lower bound",
+    "family_id": "C0",
+    "finite_time_kstar_to_zero": false,
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "excludes_option_c_lower_bound": false,
+      "finite_time_kstar_to_zero": false,
+      "leray_compatible_trajectory": true,
+      "low_mode_energy_concentration_dynamics": false,
+      "no_forbidden_dependency": true,
+      "singularity_extraction_without_bkm_or_serrin": false,
+      "viscous_damping_defeat_estimate": false
+    },
+    "leray_compatible_trajectory": true,
+    "low_mode_energy_concentration_dynamics": false,
+    "no_forbidden_dependency": true,
+    "note": "This family preserves a positive K* floor, so it cannot supply finite-time K* collapse or exclude the lower-bound alternative.",
+    "singularity_extraction_without_bkm_or_serrin": false,
+    "verdict": "reject",
+    "viscous_damping_defeat_estimate": false
+  },
+  {
+    "accepted": false,
+    "ansatz": "K*(t) = c (T - t)^alpha, alpha > 0",
+    "classification": "rate ansatz without dynamics",
+    "excludes_option_c_lower_bound": false,
+    "failed_gates": [
+      "low_mode_energy_concentration_dynamics",
+      "viscous_damping_defeat_estimate",
+      "leray_compatible_trajectory",
+      "excludes_option_c_lower_bound",
+      "singularity_extraction_without_bkm_or_serrin"
+    ],
+    "family": "pure algebraic collapse",
+    "family_id": "A1",
+    "finite_time_kstar_to_zero": true,
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "excludes_option_c_lower_bound": false,
+      "finite_time_kstar_to_zero": true,
+      "leray_compatible_trajectory": false,
+      "low_mode_energy_concentration_dynamics": false,
+      "no_forbidden_dependency": true,
+      "singularity_extraction_without_bkm_or_serrin": false,
+      "viscous_damping_defeat_estimate": false
+    },
+    "leray_compatible_trajectory": false,
+    "low_mode_energy_concentration_dynamics": false,
+    "no_forbidden_dependency": true,
+    "note": "The rate tends to zero but supplies no independent concentration dynamics, viscous defeat estimate, Leray trajectory, or singularity extraction.",
+    "singularity_extraction_without_bkm_or_serrin": false,
+    "verdict": "reject",
+    "viscous_damping_defeat_estimate": false
+  },
+  {
+    "accepted": false,
+    "ansatz": "K*(t) = c / log(e + 1/(T - t))",
+    "classification": "slow rate ansatz without dynamics",
+    "excludes_option_c_lower_bound": false,
+    "failed_gates": [
+      "low_mode_energy_concentration_dynamics",
+      "viscous_damping_defeat_estimate",
+      "leray_compatible_trajectory",
+      "excludes_option_c_lower_bound",
+      "singularity_extraction_without_bkm_or_serrin"
+    ],
+    "family": "logarithmic collapse",
+    "family_id": "L1",
+    "finite_time_kstar_to_zero": true,
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "excludes_option_c_lower_bound": false,
+      "finite_time_kstar_to_zero": true,
+      "leray_compatible_trajectory": false,
+      "low_mode_energy_concentration_dynamics": false,
+      "no_forbidden_dependency": true,
+      "singularity_extraction_without_bkm_or_serrin": false,
+      "viscous_damping_defeat_estimate": false
+    },
+    "leray_compatible_trajectory": false,
+    "low_mode_energy_concentration_dynamics": false,
+    "no_forbidden_dependency": true,
+    "note": "The logarithmic profile is still only a prescribed rate; it does not derive the required energy-transfer and damping gates.",
+    "singularity_extraction_without_bkm_or_serrin": false,
+    "verdict": "reject",
+    "viscous_damping_defeat_estimate": false
+  },
+  {
+    "accepted": false,
+    "ansatz": "K*(t) = c (T - t)^alpha (1 + beta sin(omega log(1/(T - t))))",
+    "classification": "oscillatory rate ansatz",
+    "excludes_option_c_lower_bound": false,
+    "failed_gates": [
+      "low_mode_energy_concentration_dynamics",
+      "viscous_damping_defeat_estimate",
+      "leray_compatible_trajectory",
+      "excludes_option_c_lower_bound",
+      "singularity_extraction_without_bkm_or_serrin",
+      "no_forbidden_dependency"
+    ],
+    "family": "oscillatory ansatz",
+    "family_id": "O1",
+    "finite_time_kstar_to_zero": true,
+    "forbidden_dependencies": "assumed_singularity",
+    "gate_results": {
+      "excludes_option_c_lower_bound": false,
+      "finite_time_kstar_to_zero": true,
+      "leray_compatible_trajectory": false,
+      "low_mode_energy_concentration_dynamics": false,
+      "no_forbidden_dependency": false,
+      "singularity_extraction_without_bkm_or_serrin": false,
+      "viscous_damping_defeat_estimate": false
+    },
+    "leray_compatible_trajectory": false,
+    "low_mode_energy_concentration_dynamics": false,
+    "no_forbidden_dependency": false,
+    "note": "Oscillation does not provide a closed low-mode transfer mechanism and relies on the singular endpoint as an input.",
+    "singularity_extraction_without_bkm_or_serrin": false,
+    "verdict": "reject",
+    "viscous_damping_defeat_estimate": false
+  },
+  {
+    "accepted": false,
+    "ansatz": "u(x,t) = (T - t)^(-a) U((x - x0)/(T - t)^b)",
+    "classification": "imposed self-similar profile",
+    "excludes_option_c_lower_bound": false,
+    "failed_gates": [
+      "low_mode_energy_concentration_dynamics",
+      "viscous_damping_defeat_estimate",
+      "leray_compatible_trajectory",
+      "excludes_option_c_lower_bound",
+      "singularity_extraction_without_bkm_or_serrin",
+      "no_forbidden_dependency"
+    ],
+    "family": "imposed self-similar ansatz",
+    "family_id": "S1",
+    "finite_time_kstar_to_zero": true,
+    "forbidden_dependencies": "self_similarity_imposed_as_proof;target_blowup",
+    "gate_results": {
+      "excludes_option_c_lower_bound": false,
+      "finite_time_kstar_to_zero": true,
+      "leray_compatible_trajectory": false,
+      "low_mode_energy_concentration_dynamics": false,
+      "no_forbidden_dependency": false,
+      "singularity_extraction_without_bkm_or_serrin": false,
+      "viscous_damping_defeat_estimate": false
+    },
+    "leray_compatible_trajectory": false,
+    "low_mode_energy_concentration_dynamics": false,
+    "no_forbidden_dependency": false,
+    "note": "A profile imposed at the outset is not an extracted Leray-compatible trajectory and is rejected as a forbidden dependency.",
+    "singularity_extraction_without_bkm_or_serrin": false,
+    "verdict": "reject",
+    "viscous_damping_defeat_estimate": false
+  },
+  {
+    "accepted": false,
+    "ansatz": "dE_low/dt = Phi_high_to_low(t) - D_low(t)",
+    "classification": "formal transfer sketch",
+    "excludes_option_c_lower_bound": false,
+    "failed_gates": [
+      "finite_time_kstar_to_zero",
+      "viscous_damping_defeat_estimate",
+      "leray_compatible_trajectory",
+      "excludes_option_c_lower_bound",
+      "singularity_extraction_without_bkm_or_serrin",
+      "no_forbidden_dependency"
+    ],
+    "family": "energy-transfer ODE sketch",
+    "family_id": "E1",
+    "finite_time_kstar_to_zero": false,
+    "forbidden_dependencies": "target_absorption",
+    "gate_results": {
+      "excludes_option_c_lower_bound": false,
+      "finite_time_kstar_to_zero": false,
+      "leray_compatible_trajectory": false,
+      "low_mode_energy_concentration_dynamics": true,
+      "no_forbidden_dependency": false,
+      "singularity_extraction_without_bkm_or_serrin": false,
+      "viscous_damping_defeat_estimate": false
+    },
+    "leray_compatible_trajectory": false,
+    "low_mode_energy_concentration_dynamics": true,
+    "no_forbidden_dependency": false,
+    "note": "The ODE sketch names a transfer channel but lacks a quantitative damping defeat estimate, K* collapse law, Leray construction, and extraction bridge.",
+    "singularity_extraction_without_bkm_or_serrin": false,
+    "verdict": "reject",
+    "viscous_damping_defeat_estimate": false
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "contract": "ns_sprint162_critical_residual_boundary",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_critical_residual_boundary/ns_sprint162_critical_residual_boundary_manifest.json",
+      "sha256": "ae3cd800c203b60af10fbd8ac6b0edf9a0fc117be5102f20eecb61b5132f4a00"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_critical_residual_boundary/ns_sprint162_critical_residual_boundary.md",
+      "sha256": "d49ea570c7c0076947979c6347ab13a58cec0514774d68306d9ed7cff769ed42"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_critical_residual_boundary/ns_sprint162_critical_residual_boundary_rows.csv",
+      "sha256": "014e685ba9292b7258cf212470a6ad16b9d36ff057b27983cf4610bb43bfad7a"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_critical_residual_boundary/ns_sprint162_critical_residual_boundary_rows.json",
+      "sha256": "ae93477d53af4dbb008a0d0856d4eedcc2f1eeacf75c71063c1bf5e1295f776d"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint162_critical_residual_boundary/ns_sprint162_critical_residual_boundary_summary.json",
+      "sha256": "577ef4abe66070ddfe4b88791c9823e5e62334e993cc92f2ccf5f83d65587dac"
+    }
+  },
+  "generated_at": "2026-06-07T00:00:00Z",
+  "lane": 1,
+  "manifest_hash": "e33c6fe2074502a5a71759a8f219f2cbe4e71253772e73d2436b049d4330130a",
+  "sprint": 162,
+  "validation_passed": true
+}

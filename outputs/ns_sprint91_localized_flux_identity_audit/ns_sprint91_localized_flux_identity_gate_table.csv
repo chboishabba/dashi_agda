@@ -1,0 +1,12 @@
+gate_id,gate_name,field_name,exported,actual_value,expected_value,passed,status,next_required_input
+G1,LocalizedEnstrophyFluxIdentityClosed,localizedEnstrophyFluxIdentityClosed,True,True,True,True,TRUE_BOOKKEEPING_RECORDED,localized enstrophy flux identity bookkeeping is closed
+G2,FullIdentityFixedK,fullIdentityFixedK,True,True,True,True,TRUE_BOOKKEEPING_RECORDED,fixed-K identity import proof field is exported as true
+G3,LocalizedFluxIdentityClosedHere,localizedFluxIdentityClosedHere,True,True,True,True,TRUE_BOOKKEEPING_RECORDED,coefficient ledger records localized flux identity closure as true
+G4,ClayNavierStokesPromoted,clayNavierStokesPromoted,True,False,False,True,FALSE_NO_PROMOTION,keep Clay Navier-Stokes promotion false
+G5,DominanceGateClosed,dangerShellDissipationDominatesInfluxClosed,True,False,False,True,FALSE_ANALYTIC_GATE_OPEN,keep dominance gate false
+G6,PointwiseTailFromLocalDissipationClosed,pointwiseTailFromLocalDissipationClosed,True,False,False,True,FALSE_ANALYTIC_GATE_OPEN,keep pointwise extraction gate false
+G7,PointwiseH1TailWithIndependentEpsilonCoefficientClosed,pointwiseH1TailWithIndependentEpsilonCoefficientClosed,False,False,not_exported_or_false,True,NOT_EXPORTED,keep pointwise/independent coefficient gate false
+G8,IndependentCoefficientBudgetClosed,independentCoefficientBudgetClosed,True,False,False,True,FALSE_ANALYTIC_GATE_OPEN,keep independent coefficient budget gate false
+G9,IndependentEpsilonCoefficientClosed,independentEpsilonCoefficientClosed,False,False,not_exported_or_false,True,NOT_EXPORTED,keep independent epsilon coefficient gate false
+G10,LocalizedFluxIdentityAliasClosed,localizedFluxIdentityClosed,False,False,not_exported_or_false,True,NOT_EXPORTED,keep unexported localized flux identity alias false if introduced
+G11,NoForbiddenStubOrHoleLanguage,forbidden_terms,True,0,0,True,PASS,remove postulate/TODO/stub/placeholder/future proof/hole wording

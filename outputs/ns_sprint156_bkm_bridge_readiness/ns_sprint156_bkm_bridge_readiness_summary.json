@@ -1,0 +1,79 @@
+{
+  "bkm_finite": false,
+  "blocked_promotions": [
+    "BKMIntegralEstimate",
+    "ContinuationTheoremBridge",
+    "FullClayMechanismExhaustion"
+  ],
+  "contract": "ns_sprint156_bkm_bridge_readiness",
+  "control_card": {
+    "C": "A deterministic Python stdlib checker reads Sprint 155 receipts when available, encodes the Sprint 156 bridge state, and writes JSON, CSV, Markdown, and manifest artifacts.",
+    "F": "Open blockers: BKM integral estimate promotion, continuation theorem bridge, and full Clay mechanism exhaustion.",
+    "G": "bkm_finite and full_clay_ns_solved are hard-guarded false. BKM promotion requires a future integral-estimate receipt plus a future continuation-theorem bridge.",
+    "L": "Only rows marked readiness_closed=true are inputs for the next BKM translation. Promotion gates remain false until separate theorem receipts close them.",
+    "O": "Worker 4 owns scripts/ns_sprint156_bkm_bridge_readiness.py and outputs/ns_sprint156_bkm_bridge_readiness/.",
+    "P": "Use this artifact as a normalized bridge-readiness ledger, not as an analytic proof, Agda theorem, BKM finite proof, continuation theorem, or Clay solution.",
+    "R": "Emit readiness rows for the next BKM translation after Sprint 155/156: ModelValidityForWidthODE closed, corrected Omega ODE available, BKM integral estimate not promoted, continuation theorem bridge pending, and full Clay mechanism exhaustion absent.",
+    "S": "Sprint 155 closed the upstream model-validity support ledger. Sprint 156 records readiness for BKM translation, not a BKM finiteness proof or a Clay Navier-Stokes solution."
+  },
+  "decision": "ready_for_next_bkm_translation_not_promoted",
+  "encoded_sprint156_state": {
+    "BKMIntegralEstimate": "not_promoted",
+    "ContinuationTheoremBridge": "pending",
+    "CorrectedOmegaODE": "available",
+    "FullClayMechanismExhaustion": "absent",
+    "ModelValidityForWidthODE": "closed"
+  },
+  "full_clay_hard_guard": true,
+  "full_clay_ns_solved": false,
+  "lane": 4,
+  "next_bkm_translation_inputs": [
+    "ModelValidityForWidthODE",
+    "CorrectedOmegaODE"
+  ],
+  "program": "BKMBridgeReadinessAssembler",
+  "promotion_allowed": false,
+  "promotion_status": {
+    "BKMIntegralEstimate": false,
+    "ContinuationTheoremBridge": false,
+    "FullClayMechanismExhaustion": false,
+    "bkm_finite": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_can_promote": false,
+    "full_clay_ns_solved": false
+  },
+  "readiness_status": {
+    "BKMIntegralEstimate": false,
+    "ContinuationTheoremBridge": false,
+    "CorrectedOmegaODE": true,
+    "FullClayMechanismExhaustion": false,
+    "ModelValidityForWidthODE": true
+  },
+  "row_count": 5,
+  "source_presence": {
+    "s155_localized_ibp": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_summary.json",
+      "sha256": "b8bea99fa28c3e92e8959d8982fb4fb10f8831cbdf5de464e1ba4713328b6694"
+    },
+    "s155_model_validity": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_summary.json",
+      "sha256": "273c705e3a69b06ba080ca567c7b9fc4d3dc1137f9aad6a450657b821589849c"
+    },
+    "s155_model_validity_rows": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_rows.json",
+      "sha256": "3274991f5ec6727a2d940c24bf5f18167f47a303b12d4ca447a9e505dcc7ec06"
+    },
+    "s155_operator_boundary": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_operator_boundary_term_checker/ns_sprint155_operator_boundary_term_checker_summary.json",
+      "sha256": "e4687135a1b954b58fc9f4bff7bd09b3d272334eed1a8d0c5725f7478dbcd29b"
+    }
+  },
+  "sprint": 156,
+  "summary_hash": "8522325f7f018360977cb27973c02c9b150db768b7fc8ee6daaaa04aeae3f4a3",
+  "validation_errors": [],
+  "validation_passed": true
+}

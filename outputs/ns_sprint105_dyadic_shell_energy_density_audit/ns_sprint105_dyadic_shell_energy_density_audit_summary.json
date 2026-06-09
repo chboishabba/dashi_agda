@@ -1,0 +1,327 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint105DyadicShellEnergyDensity.agda",
+  "all_subgates_closed": false,
+  "all_subgates_false": true,
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "dyadicShellEnergyDensityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "dyadicShellEnergyDensityDecompositionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "failClosedDyadicShellEnergyDensityDecomposition": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "finiteKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "highFrequencyConcentrationMeasureClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "lerayClassIntegrabilityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "littlewoodPaleyShellProjectorClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "localEnergyDensityDefinitionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularDensityConstructionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "shellEnergyLocalizationBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "timeIntegratedFluxSurplusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "closed_subgate_count": 0,
+  "complete": false,
+  "contract": "ns_sprint105_dyadic_shell_energy_density_audit",
+  "decomposition_ledger_closed": true,
+  "dyadic_shell_energy_density_closed": false,
+  "dyadic_shell_energy_density_decomposition_ledger_closed": true,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_DYADIC_SHELL_ENERGY_DENSITY",
+  "finite_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "dyadicShellEnergyDensityDecompositionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "littlewoodPaleyShellProjectorClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "localEnergyDensityDefinitionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "lerayClassIntegrabilityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "shellEnergyLocalizationBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularDensityConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "dyadicShellEnergyDensityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "highFrequencyConcentrationMeasureClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "signedLowModeFluxLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "timeIntegratedFluxSurplusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "failClosedDyadicShellEnergyDensityDecomposition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "LittlewoodPaleyShellProjector",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "LocalEnergyDensityDefinition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "LerayClassIntegrability",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "ShellEnergyLocalizationBound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded and false",
+      "expected": "recorded and false",
+      "gate": "NonCircularDensityConstruction",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "high_frequency_concentration_measure_closed": false,
+  "missing_anchors": [],
+  "open_subgate_count": 5,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint105DyadicShellEnergyDensity",
+    "canonicalNSSprint105DyadicShellEnergyDensity",
+    "canonicalNSSprint105DyadicShellEnergyDensityReceipt",
+    "canonicalSprint105DyadicShellEnergyDensityFlags",
+    "DyadicShellEnergyDensityDecomposition",
+    "DyadicShellEnergyDensitySplitsIntoFiveSubgates",
+    "Sprint104DyadicShellEnergyDensityAnchor",
+    "canonicalSprint104DyadicShellEnergyDensityAnchor",
+    "DyadicShellSubgateStatus",
+    "canonicalDyadicShellEnergyDensityDecompositionStatus",
+    "requiredDyadicShellEnergyDensitySubgates",
+    "LittlewoodPaleyShellProjector",
+    "LocalEnergyDensityDefinition",
+    "LerayClassIntegrability",
+    "ShellEnergyLocalizationBound",
+    "NonCircularDensityConstruction",
+    "LittlewoodPaleyShellProjectorOpen",
+    "LocalEnergyDensityDefinitionOpen",
+    "LerayClassIntegrabilityOpen",
+    "ShellEnergyLocalizationBoundOpen",
+    "NonCircularDensityConstructionOpen",
+    "dyadicShellEnergyDensityDecompositionLedgerClosed",
+    "littlewoodPaleyShellProjectorClosed",
+    "localEnergyDensityDefinitionClosed",
+    "lerayClassIntegrabilityClosed",
+    "shellEnergyLocalizationBoundClosed",
+    "nonCircularDensityConstructionClosed",
+    "dyadicShellEnergyDensityClosed",
+    "highFrequencyConcentrationMeasureClosed",
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "signedLowModeFluxLowerBoundClosed",
+    "timeIntegratedFluxSurplusClosed",
+    "finiteKStarCollapseClosed",
+    "clayNavierStokesPromoted",
+    "failClosedDyadicShellEnergyDensityDecomposition"
+  ],
+  "route_decision": "FAIL_CLOSED_DYADIC_SHELL_ENERGY_DENSITY",
+  "signed_low_mode_flux_lower_bound_closed": false,
+  "strain_compression_at_high_frequency_concentration_points_closed": false,
+  "subgate_checks": {
+    "LerayClassIntegrability": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "LittlewoodPaleyShellProjector": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "LocalEnergyDensityDefinition": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "NonCircularDensityConstruction": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    },
+    "ShellEnergyLocalizationBound": {
+      "closed_false": true,
+      "closed_true": false,
+      "recorded": true
+    }
+  },
+  "subgate_leray_class_integrability_open": true,
+  "subgate_littlewood_paley_shell_projector_open": true,
+  "subgate_local_energy_density_definition_open": true,
+  "subgate_non_circular_density_construction_open": true,
+  "subgate_shell_energy_localization_bound_open": true,
+  "subgates": [
+    "LittlewoodPaleyShellProjector",
+    "LocalEnergyDensityDefinition",
+    "LerayClassIntegrability",
+    "ShellEnergyLocalizationBound",
+    "NonCircularDensityConstruction"
+  ],
+  "time_integrated_flux_surplus_closed": false
+}

@@ -1,0 +1,163 @@
+[
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "lpGrafakosInfrastructureReceiptClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "LittlewoodPaleyInfrastructureConstructionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "RudinSmoothBumpAuthorityClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "GrafakosDyadicPartitionAuthorityClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "LittlewoodPaleyBumpInfrastructureClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "proofDriftCorrectionLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "closed true",
+    "expected": "closed true",
+    "gate": "lpGrafakosInfrastructureReceiptClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "closed true",
+    "expected": "closed true",
+    "gate": "LittlewoodPaleyInfrastructureConstructionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "closed true",
+    "expected": "closed true",
+    "gate": "RudinSmoothBumpAuthorityClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "closed true",
+    "expected": "closed true",
+    "gate": "GrafakosDyadicPartitionAuthorityClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "closed true",
+    "expected": "closed true",
+    "gate": "LittlewoodPaleyBumpInfrastructureClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint102StrainCompressionReduction.agda",
+    "gate": "sprint102_anchor_file",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint103StrainCompressionGeometryGate.agda",
+    "gate": "sprint103_anchor_file",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint107SmoothDyadicCutoffPartition.agda",
+    "gate": "sprint107_anchor_file",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint108RadialBumpFunctionConstruction.agda",
+    "gate": "sprint108_anchor_file",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint109SmoothCompactSupportWitness.agda",
+    "gate": "sprint109_anchor_file",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint110BaseExpSmoothFunction.agda",
+    "gate": "sprint110_anchor_file",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "LP_INFRASTRUCTURE_CLOSED_STRAIN_COMPRESSION_REFOCUSED",
+    "expected": "LP_INFRASTRUCTURE_CLOSED_STRAIN_COMPRESSION_REFOCUSED",
+    "gate": "route",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "all present",
+    "expected": "all present",
+    "gate": "required_anchors",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "2",
+    "expected": "2",
+    "gate": "accepted_authority_count",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "none",
+    "expected": "none",
+    "gate": "forbidden_markers",
+    "passed": true,
+    "status": "PASS"
+  }
+]

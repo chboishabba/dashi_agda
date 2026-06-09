@@ -1,0 +1,23 @@
+{
+  "source": "../dashiCFD/outputs/sprint53_no2cycle_physical_gpu_audit/ns_sprint53_no2cycle_summary.json",
+  "parameters": {
+    "replay_mode": "sprint53_no2cycle_physical_from_gpu_summary",
+    "sprint53_no2cycle_physical_summary_input": "../dashiCFD/outputs/sprint53_no2cycle_physical_gpu_audit/ns_sprint53_no2cycle_summary.json"
+  },
+  "diagnostic_mode": "sprint53_no2cycle_physical_replay_from_gpu_summary",
+  "physical_no2cycle_row_count": 12600,
+  "physical_amplitude_row_count": 12600,
+  "outputs": {
+    "sprint53_no2cycle_physical_summary": "Docs/Images/clay-analytic-sprint/sprint53_no2cycle_physical_gpu_replay/ns_sprint53_no2cycle_summary.json",
+    "no2cycle_physical_amplitude_csv": "Docs/Images/clay-analytic-sprint/sprint53_no2cycle_physical_gpu_replay/ns_no2cycle_physical_amplitude.csv",
+    "no2cycle_cadence_comparison_csv": "Docs/Images/clay-analytic-sprint/sprint53_no2cycle_physical_gpu_replay/ns_no2cycle_cadence_comparison.csv",
+    "net_residue_physical_lyapunov_csv": "Docs/Images/clay-analytic-sprint/sprint53_no2cycle_physical_gpu_replay/ns_net_residue_physical_lyapunov.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint53_no2cycle_physical_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint53_no2cycle_physical_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyThreeNo2CyclePhysicalAmplitudeReceipt",
+  "evidence_boundary": "Sprint 53 replay consumes physical no-2-cycle amplitude summary artifacts only. It does not recompute truth snapshots, FFTs, material lineage, theorem-grade physical oscillation amplitude, weighted amplitude summability, physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_SPRINT53_NO2CYCLE_PHYSICAL_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

@@ -1,0 +1,47 @@
+{
+  "axisymmetric_equation_correction": {
+    "clay_navier_stokes_promoted": false,
+    "complete": true,
+    "contract": "ns_sprint134_axisymmetric_equation_correction",
+    "exit_code": 0,
+    "full_clay_ns_solved": false,
+    "path": "outputs/ns_sprint134_axisymmetric_equation_correction/ns_sprint134_axisymmetric_equation_correction_summary.json",
+    "present": true,
+    "selected_fields": {
+      "boundary_annulus_u1_bound": true,
+      "gamma_maximum_principle_replacement": true,
+      "old_u1_pure_diffusion_retracted": true,
+      "u1_equation_has_stretching_source": true
+    }
+  },
+  "biot_savart_log_singularity_audit": {
+    "clay_navier_stokes_promoted": false,
+    "complete": true,
+    "contract": "ns_sprint134_biot_savart_log_singularity_audit",
+    "exit_code": 0,
+    "full_clay_ns_solved": false,
+    "path": "outputs/ns_sprint134_biot_savart_log_singularity_audit/ns_sprint134_biot_savart_log_singularity_audit_summary.json",
+    "present": true,
+    "selected_fields": {
+      "last_ratio": 1.0000000000000466,
+      "no_log_axisymmetric_biot_savart_uniform": false,
+      "standard_log_singularity_persists": true,
+      "uniform_away_from_axis_claim_retracted": true
+    }
+  },
+  "hou_luo_retraction_status": {
+    "clay_navier_stokes_promoted": false,
+    "complete": true,
+    "contract": "ns_sprint134_hou_luo_retraction_status",
+    "exit_code": 0,
+    "full_clay_ns_solved": false,
+    "path": "outputs/ns_sprint134_hou_luo_retraction_status/ns_sprint134_hou_luo_retraction_status_summary.json",
+    "present": true,
+    "selected_fields": {
+      "axs_viscous_dominance_obstruction_retracted": true,
+      "hou_luo_axisymmetric_ns_route_status": "open_live_candidate",
+      "source_may_beat_viscosity": true,
+      "wbf_exact_results_intact": true
+    }
+  }
+}

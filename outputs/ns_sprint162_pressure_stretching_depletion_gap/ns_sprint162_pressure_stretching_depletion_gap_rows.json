@@ -1,0 +1,110 @@
+[
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "velocity",
+    "role": "3D incompressible Navier-Stokes velocity field",
+    "row_hash": "35c0c48f05e584bc6f173077966fc8442ecbfd527e9a676c8f438a5825907cb8",
+    "row_id": "V01",
+    "scale_status": "critical_input",
+    "sprint": 162,
+    "symbol": "u"
+  },
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "pressure",
+    "role": "nonlocal Riesz-transform pressure p = R_i R_j(u_i u_j)",
+    "row_hash": "0b68181d5a991f60b07460d79dbb0aebdb5327863429d5ca6d71658e80fd5191",
+    "row_id": "V02",
+    "scale_status": "critical_not_depleting",
+    "sprint": 162,
+    "symbol": "p"
+  },
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "vorticity",
+    "role": "curl u, source carrier for vortex stretching",
+    "row_hash": "04d5423cb2c9f3208d2ee721f4d845ccf2a9df16bf1d65bff35967d181656075",
+    "row_id": "V03",
+    "scale_status": "critical_concentration_carrier",
+    "sprint": 162,
+    "symbol": "omega"
+  },
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "strain tensor",
+    "role": "symmetric part of grad u controlling omega dot S omega",
+    "row_hash": "9fec99f9f7163e6e33e8f30fd11d613a7f086c090cedf0b9a351c9351521864f",
+    "row_id": "V04",
+    "scale_status": "alignment_sensitive",
+    "sprint": 162,
+    "symbol": "S"
+  },
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "maximal strain eigenvector",
+    "role": "direction of strongest stretching",
+    "row_hash": "7a29274df8717cd1eff446152480948a7717ab454f82b2258eb57bb90c2e67c5",
+    "row_id": "V05",
+    "scale_status": "alignment_sensitive",
+    "sprint": 162,
+    "symbol": "e_max"
+  },
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "alignment defect",
+    "role": "localized integral of |omega|^2 positive alignment with e_max(S)",
+    "row_hash": "15fc1413e743135c7bc254827963c4df80e03a8003a27d1e4e96a7201f1c7c07",
+    "row_id": "V06",
+    "scale_status": "missing_depletion",
+    "sprint": 162,
+    "symbol": "A_r"
+  },
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "local defect",
+    "role": "scale-critical local |u|^3 + |p|^(3/2) defect",
+    "row_hash": "2bef269d91c783421dec1170793cb085952a1d795a5d7d8dddd7b6e2d0862c27",
+    "row_id": "V07",
+    "scale_status": "critical_quantity",
+    "sprint": 162,
+    "symbol": "D_r"
+  },
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "pressure flux",
+    "role": "localized pressure flux integral p u dot grad phi_r",
+    "row_hash": "147c4391f04901ce2d0a3f1271c724b1edd509d07921bf7030145268a33fbddb",
+    "row_id": "V08",
+    "scale_status": "critical_not_depleting",
+    "sprint": 162,
+    "symbol": "Phi_r"
+  },
+  {
+    "contract": "ns_sprint162_pressure_stretching_depletion_gap",
+    "included_in_missing_estimate": true,
+    "lane": 2,
+    "name": "dissipation",
+    "role": "localized viscous control term",
+    "row_hash": "91b1f2020d6837c3e9c6e9c28254df787a7896de24fc07898c380cd77bc42364",
+    "row_id": "V09",
+    "scale_status": "absorbing_term_if_gain_exists",
+    "sprint": 162,
+    "symbol": "E_r"
+  }
+]

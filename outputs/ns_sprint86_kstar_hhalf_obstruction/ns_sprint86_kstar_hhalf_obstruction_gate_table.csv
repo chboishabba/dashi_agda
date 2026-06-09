@@ -1,0 +1,8 @@
+gate_id,gate_name,status,next_required_input,proved_in_repo,clay_promotion,route_decision
+G1,QhpHighHighProductEstimate,OPEN_NOT_PROVED_IN_REPO,non-circular Q_hp high-high product estimate,False,False,NS_SPRINT86_KSTAR_HHALF_OBSTRUCTION_OPEN
+G2,QhpTailSmallnessAtDangerShell,OPEN_NOT_PROVED_IN_REPO,small H^{1/2} tail at danger shell,False,False,NS_SPRINT86_KSTAR_HHALF_OBSTRUCTION_OPEN
+G3,KStarAdmissibilityAloneControlsHHalfTail,OPEN_NOT_PROVED_IN_REPO,derive H^{1/2} tail control from KStar admissibility alone,False,False,NS_SPRINT86_KSTAR_HHALF_OBSTRUCTION_OPEN
+G4,KStarAdmissibilityAloneObstruction,OBSTRUCTION_RECORDED,"avoid hidden H^1, H^{1/2}, Serrin, BKM, or stronger regularity",True,False,NS_SPRINT86_KSTAR_HHALF_OBSTRUCTION_OPEN
+G5,EpsilonBelowOneCoefficient,OPEN_NOT_PROVED_IN_REPO,epsilon < 1 high-high absorption coefficient,False,False,NS_SPRINT86_KSTAR_HHALF_OBSTRUCTION_OPEN
+G6,HminusHalfHighHighDefectTheorem,OPEN_NOT_PROVED_IN_REPO,H^{-1/2} high-high nonlinear-defect theorem,False,False,NS_SPRINT86_KSTAR_HHALF_OBSTRUCTION_OPEN
+G7,ClayNavierStokesPromoted,FALSE_NO_PROMOTION,Hminus/KStar/theta/BKM continuation chain,False,False,NS_SPRINT86_KSTAR_HHALF_OBSTRUCTION_OPEN

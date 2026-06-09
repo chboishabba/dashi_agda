@@ -1,0 +1,170 @@
+[
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "radialBumpFunctionConstructionDecompositionLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "smoothCompactSupportWitnessClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "radialProfileDefinitionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "nonnegativeBumpWitnessClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "annularDifferenceBumpClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "nonCircularRadialBumpSourceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "radialBumpFunctionConstructionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "smoothDyadicCutoffPartitionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "littlewoodPaleyShellProjectorClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "dyadicShellEnergyDensityClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "highFrequencyConcentrationMeasureClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "signedLowModeFluxLowerBoundClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "timeIntegratedFluxSurplusClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "finiteKStarCollapseClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "failClosedRadialBumpFunctionConstructionDecomposition",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "SmoothCompactSupportWitness",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "RadialProfileDefinition",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "NonnegativeBumpWitness",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "AnnularDifferenceBump",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded, open constructor, and false",
+    "expected": "name, open constructor, and false closure flag",
+    "gate": "NonCircularRadialBumpSource",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "all present",
+    "expected": "all present",
+    "gate": "required_anchors",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "none",
+    "expected": "none",
+    "gate": "forbidden_markers",
+    "passed": true,
+    "status": "PASS"
+  }
+]

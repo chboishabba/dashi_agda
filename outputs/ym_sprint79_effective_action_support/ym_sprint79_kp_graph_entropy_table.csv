@@ -1,0 +1,4 @@
+graph_id,graph_convention,eta,q,eta_q,kp_closes,route_decision
+generic_4d_baseline,fine_lattice_4d_2d,8,0.23178189475262734,1.8542551580210187,False,ANISOTROPIC_KP_ROUTE_BLOCKED
+fine_lattice_spatial_d3,fine_lattice_3d_2d_sp,6,0.23178189475262734,1.390691368515764,False,KP_GRAPH_IS_FINE_LATTICE_ETA6_BLOCKED
+blocked_l2_spatial_transfer,blocked_l2_faces_2d_sp_minus_2,4,0.23178189475262734,0.9271275790105094,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED

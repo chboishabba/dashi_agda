@@ -2,6 +2,10 @@ module DASHI.Physics.GR where
 
 -- GR-side adapter boundary: placeholders expressed as parameters.
 
+import DASHI.Physics.GR.RiemannTensor
+import DASHI.Physics.GR.EinsteinTensor
+import DASHI.Physics.GR.StressEnergyCompatibility
+
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 open import DASHI.Physics.Bridge using (BridgeSurface)

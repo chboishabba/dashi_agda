@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "orientations_cancel": true,
+    "paired_flux_sums_to_zero": true,
+    "weights_match": true
+  },
+  "depth": 3,
+  "max_flux_pair_error": 0.0,
+  "max_orientation_sum": 0.0,
+  "max_weight_mismatch": 0.0,
+  "paired_faces": 6,
+  "promotion": false
+}

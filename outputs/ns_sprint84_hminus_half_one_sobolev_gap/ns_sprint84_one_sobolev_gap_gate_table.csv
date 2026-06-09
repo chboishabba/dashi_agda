@@ -1,0 +1,8 @@
+gate_id,gate_name,status,next_required_input,proved_in_repo,clay_promotion,route_decision
+G1,FormalQhpMapForNSBridge,FORMAL_WITNESS_IN_REPO,formal spatial-only Q_hp map usable against NS danger-shell data,True,False,NS_HMINUS_HALF_ONE_SOBOLEV_GAP_QHP_OPEN
+G2,QhpDangerShellProjectionCommutation,FORMAL_WITNESS_IN_REPO,Q_hp commutes with P_{>K*} / danger-shell projection,True,False,NS_HMINUS_HALF_ONE_SOBOLEV_GAP_QHP_OPEN
+G3,QhpKStarCutoffCommutation,FORMAL_WITNESS_IN_REPO,Q_hp commutes with K*(t) cutoff selection,True,False,NS_HMINUS_HALF_ONE_SOBOLEV_GAP_QHP_OPEN
+G4,QhpTailFluxPairingCommutation,FORMAL_WITNESS_IN_REPO,Q_hp preserves the H^{-1/2} x H^{1/2} tail-flux pairing,True,False,NS_HMINUS_HALF_ONE_SOBOLEV_GAP_QHP_OPEN
+G5,EpsilonBelowOneCoefficient,OPEN_NOT_PROVED_IN_REPO,epsilon < 1 high-high absorption coefficient,False,False,NS_HMINUS_HALF_ONE_SOBOLEV_GAP_QHP_OPEN
+G6,HminusHalfHighHighDefectTheorem,OPEN_NOT_PROVED_IN_REPO,||P_{>K*}(u.grad u)||_{H^-1/2} <= epsilon*nu*||P_{>K*}u||_{H^3/2},False,False,NS_HMINUS_HALF_ONE_SOBOLEV_GAP_QHP_OPEN
+G7,ClayNavierStokesPromoted,FALSE_NO_PROMOTION,Hminus/KStar/theta/BKM chain plus no finite-time blowup,False,False,NS_HMINUS_HALF_ONE_SOBOLEV_GAP_QHP_OPEN

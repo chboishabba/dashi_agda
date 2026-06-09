@@ -1,0 +1,12 @@
+gate,expected,actual,passed,status
+optionBBlowupFeasibilityLedgerClosed,true,true,True,PASS
+optionBFeasibilityLedgerClosed,true,true,True,PASS
+blowupConstructionClosed,false,false,True,PASS
+optionBBlowupConstructionClosed,false,false,True,PASS
+kStarCollapseMechanismClosed,false,false,True,PASS
+compatibilityWithLerayEnergyClosed,false,false,True,PASS
+exclusionOfConditionalKStarLowerBoundClosed,false,false,True,PASS
+finiteTimeSingularityExtractionClosed,false,false,True,PASS
+clayNavierStokesPromoted,false,false,True,PASS
+sprint94ObstructionInherited,true,true,True,PASS
+sprint94ConditionalKStarInherited,true,true,True,PASS

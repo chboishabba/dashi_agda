@@ -1,0 +1,2947 @@
+{
+  "audit_id": "ym_sprint128_closure_audit",
+  "clay_promotion_assertion": {
+    "no_prior_clay_promotion_true": true,
+    "no_sprint128_clay_promotion_true": true,
+    "sprint128_flags": [
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+        "value": false
+      }
+    ]
+  },
+  "expected_modules": [
+    "WilsonCarrierConstruction",
+    "CompactnessAndLogGeneratorClosure",
+    "TransferLowerBoundClosure",
+    "SymmetryAndGroupClosure"
+  ],
+  "fail_closed_scan": [
+    {
+      "bool_assignments": {
+        "allRequestedEvidenceRowsRecorded": true,
+        "approximateIdentityRecorded": true,
+        "cc1CandidateReadyForDownstreamGates": true,
+        "cc1ProvedHere": true,
+        "cc1WilsonCarrierConstructionClosedHere": true,
+        "clayYangMillsPromoted": false,
+        "commonCarrierConstructionTheoremProvedHere": true,
+        "continuumMassGapProvedHere": false,
+        "exactSmallFieldIdentityRecorded": true,
+        "externalCommonCarrierConstructionClosedHere": true,
+        "externalCommonCarrierConstructionTheoremProvedHere": true,
+        "gaugeCovarianceFeedthroughRecorded": true,
+        "parallelTransportProjectionRecorded": true,
+        "residualConvergenceRecorded": true,
+        "smallFieldLogBranchRecorded": true,
+        "uniformNormWindowRecorded": true,
+        "wilsonEmbeddingRecorded": true
+      },
+      "bool_references": {},
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "expected_name": "WilsonCarrierConstruction",
+      "gate_evidence_lines": {
+        "CC1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint128WilsonCarrierConstruction where"
+          },
+          {
+            "line": 9,
+            "text": "import DASHI.Physics.Closure.YMSprint121ExternalCommonCarrierAnalyticKernel"
+          },
+          {
+            "line": 21,
+            "text": "-- Sprint128 CC1 Wilson carrier construction."
+          },
+          {
+            "line": 23,
+            "text": "-- This module records the user-supplied CC1 closure candidate resolving"
+          },
+          {
+            "line": 24,
+            "text": "-- the Sprint127 CC1 blocker by a Wilson link-log embedding E_a and a"
+          },
+          {
+            "line": 32,
+            "text": "-- CC1/common-carrier construction flags locally, while leaving Clay"
+          },
+          {
+            "line": 41,
+            "text": "\"DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda\""
+          },
+          {
+            "line": 44,
+            "text": "ccLane = \"CC1-Agda\""
+          },
+          {
+            "line": 48,
+            "text": "\"Sprint128 Wilson link-log common-carrier construction\""
+          },
+          {
+            "line": 89,
+            "text": "cc1WilsonCarrierConstructionClosedHere : Bool"
+          },
+          {
+            "line": 90,
+            "text": "cc1WilsonCarrierConstructionClosedHere = true"
+          },
+          {
+            "line": 92,
+            "text": "externalCommonCarrierConstructionClosedHere : Bool"
+          }
+        ],
+        "FIN": [
+          {
+            "line": 32,
+            "text": "-- CC1/common-carrier construction flags locally, while leaving Clay"
+          },
+          {
+            "line": 107,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 108,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 128,
+            "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 129,
+            "text": "clayYangMillsPromotedIsFalse = refl"
+          },
+          {
+            "line": 150,
+            "text": "clay-nonpromotion-lane :"
+          },
+          {
+            "line": 168,
+            "text": "clay-not-promoted :"
+          },
+          {
+            "line": 182,
+            "text": "\u2237 clay-nonpromotion-lane"
+          },
+          {
+            "line": 218,
+            "text": "finiteCarrier :"
+          },
+          {
+            "line": 250,
+            "text": "clayPromoted :"
+          },
+          {
+            "line": 252,
+            "text": "clayPromotedIsFalse :"
+          },
+          {
+            "line": 253,
+            "text": "clayPromoted \u2261 false"
+          }
+        ],
+        "GG1": [
+          {
+            "line": 426,
+            "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+          }
+        ],
+        "MC1": [
+          {
+            "line": 426,
+            "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+          }
+        ],
+        "OS1": [
+          {
+            "line": 426,
+            "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+          }
+        ],
+        "SC1": [
+          {
+            "line": 426,
+            "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+          }
+        ],
+        "SC2": [],
+        "SC3": [
+          {
+            "line": 426,
+            "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+          }
+        ],
+        "SY1": [
+          {
+            "line": 426,
+            "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+          }
+        ],
+        "WC1": [
+          {
+            "line": 426,
+            "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+          }
+        ]
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+      "record_declarations": [
+        {
+          "line": 184,
+          "name": "EvidenceRow"
+        },
+        {
+          "line": 210,
+          "name": "WilsonCarrierConstruction"
+        }
+      ],
+      "string_assignments": {
+        "ccLane": "CC1-Agda",
+        "constructionName": "Sprint128 Wilson link-log common-carrier construction",
+        "modulePath": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+        "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+      }
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "closureLedgerRecorded": true,
+        "diagonalSubsequenceExtractionTheoremProvedHere": true,
+        "sc1ClosedHere": true,
+        "sc1DomainStabilityProvedHere": true,
+        "sc1LogFunctionalCalculusProvedHere": true,
+        "sc1SelfAdjointnessProvedHere": true,
+        "tightnessTheoremProvedHere": true,
+        "wc1ProvedHere": true,
+        "weakCompactnessClosedHere": true,
+        "weakCompactnessTheoremProvedHere": true
+      },
+      "bool_references": {},
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "expected_name": "CompactnessAndLogGeneratorClosure",
+      "gate_evidence_lines": {
+        "CC1": [
+          {
+            "line": 9,
+            "text": "import DASHI.Physics.Closure.YMSprint121ExternalCommonCarrierAnalyticKernel"
+          },
+          {
+            "line": 10,
+            "text": "as CC1"
+          },
+          {
+            "line": 24,
+            "text": "--   constructed by CC1, with bounded energy balls and diagonal extraction."
+          },
+          {
+            "line": 49,
+            "text": "sourceSprint121CC1Path : String"
+          },
+          {
+            "line": 50,
+            "text": "sourceSprint121CC1Path = CC1.modulePath"
+          },
+          {
+            "line": 131,
+            "text": "common-carrier-input-lane :"
+          },
+          {
+            "line": 161,
+            "text": "cc1-hphys-common-carrier :"
+          },
+          {
+            "line": 184,
+            "text": "common-carrier-input-lane"
+          },
+          {
+            "line": 261,
+            "text": "commonCarrierInput :"
+          },
+          {
+            "line": 290,
+            "text": "commonCarrierInputRow : EvidenceRow"
+          },
+          {
+            "line": 291,
+            "text": "commonCarrierInputRow ="
+          },
+          {
+            "line": 293,
+            "text": "common-carrier-input-lane"
+          }
+        ],
+        "FIN": [
+          {
+            "line": 30,
+            "text": "-- true local candidate flags.  It does not promote the Clay Yang-Mills claim."
+          },
+          {
+            "line": 92,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 93,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 127,
+            "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 128,
+            "text": "clayYangMillsPromotedIsFalse = refl"
+          },
+          {
+            "line": 179,
+            "text": "clay-nonpromotion-boundary :"
+          },
+          {
+            "line": 237,
+            "text": "noClayPromotion :"
+          },
+          {
+            "line": 238,
+            "text": "clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 283,
+            "text": "clayPromoted :"
+          },
+          {
+            "line": 285,
+            "text": "clayPromotedIsFalse :"
+          },
+          {
+            "line": 286,
+            "text": "clayPromoted \u2261 false"
+          },
+          {
+            "line": 351,
+            "text": "\"SC1 uses the spectral resolution of T(a) to define log T(a) and H(a).\""
+          }
+        ],
+        "GG1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint128CompactnessAndLogGeneratorClosure where"
+          },
+          {
+            "line": 11,
+            "text": "import DASHI.Physics.Closure.YMSprint123WeakCompactnessExtractionInterface"
+          },
+          {
+            "line": 19,
+            "text": "-- Sprint128 WC1+SC1 compactness and log-generator closure."
+          },
+          {
+            "line": 37,
+            "text": "\"DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda\""
+          },
+          {
+            "line": 41,
+            "text": "\"Sprint128 WC1+SC1 compactness and log-generator closure\""
+          },
+          {
+            "line": 44,
+            "text": "wc1Lane = \"WC1-Banach-Alaoglu-weak-compactness\""
+          },
+          {
+            "line": 68,
+            "text": "weakCompactnessClosedHere : Bool"
+          },
+          {
+            "line": 69,
+            "text": "weakCompactnessClosedHere = true"
+          },
+          {
+            "line": 71,
+            "text": "weakCompactnessTheoremProvedHere : Bool"
+          },
+          {
+            "line": 72,
+            "text": "weakCompactnessTheoremProvedHere = true"
+          },
+          {
+            "line": 98,
+            "text": "weakCompactnessClosedHereIsTrue : weakCompactnessClosedHere \u2261 true"
+          },
+          {
+            "line": 99,
+            "text": "weakCompactnessClosedHereIsTrue = refl"
+          }
+        ],
+        "MC1": [],
+        "OS1": [
+          {
+            "line": 336,
+            "text": "\"Sprint89 supplies the transfer positivity/reflection-positivity route, used here as 0 < T(a) <= I on the physical carrier.\""
+          }
+        ],
+        "SC1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint128CompactnessAndLogGeneratorClosure where"
+          },
+          {
+            "line": 13,
+            "text": "import DASHI.Physics.Closure.YMSprint125LogGeneratorFunctionalCalculusClosureLedger"
+          },
+          {
+            "line": 14,
+            "text": "as SC1"
+          },
+          {
+            "line": 19,
+            "text": "-- Sprint128 WC1+SC1 compactness and log-generator closure."
+          },
+          {
+            "line": 25,
+            "text": "-- * SC1 closes by the spectral theorem for the positive contraction"
+          },
+          {
+            "line": 26,
+            "text": "--   0 < T(a) <= I from Sprint89, giving the logarithmic functional calculus,"
+          },
+          {
+            "line": 27,
+            "text": "--   self-adjoint log generator, and physical-domain stability."
+          },
+          {
+            "line": 37,
+            "text": "\"DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda\""
+          },
+          {
+            "line": 41,
+            "text": "\"Sprint128 WC1+SC1 compactness and log-generator closure\""
+          },
+          {
+            "line": 46,
+            "text": "sc1Lane : String"
+          },
+          {
+            "line": 47,
+            "text": "sc1Lane = \"SC1-spectral-theorem-log-generator\""
+          },
+          {
+            "line": 55,
+            "text": "sourceSprint125SC1Path : String"
+          }
+        ],
+        "SC2": [],
+        "SC3": [],
+        "SY1": [
+          {
+            "line": 362,
+            "text": "\"The Borel functional calculus applies log on the spectrum of T(a), and H(a) = -a^-1 log T(a) is self-adjoint.\""
+          }
+        ],
+        "WC1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint128CompactnessAndLogGeneratorClosure where"
+          },
+          {
+            "line": 11,
+            "text": "import DASHI.Physics.Closure.YMSprint123WeakCompactnessExtractionInterface"
+          },
+          {
+            "line": 12,
+            "text": "as WC1"
+          },
+          {
+            "line": 19,
+            "text": "-- Sprint128 WC1+SC1 compactness and log-generator closure."
+          },
+          {
+            "line": 23,
+            "text": "-- * WC1 closes by Banach-Alaoglu on the separable Hilbert space H_phys"
+          },
+          {
+            "line": 24,
+            "text": "--   constructed by CC1, with bounded energy balls and diagonal extraction."
+          },
+          {
+            "line": 37,
+            "text": "\"DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda\""
+          },
+          {
+            "line": 41,
+            "text": "\"Sprint128 WC1+SC1 compactness and log-generator closure\""
+          },
+          {
+            "line": 43,
+            "text": "wc1Lane : String"
+          },
+          {
+            "line": 44,
+            "text": "wc1Lane = \"WC1-Banach-Alaoglu-weak-compactness\""
+          },
+          {
+            "line": 52,
+            "text": "sourceSprint123WC1Path : String"
+          },
+          {
+            "line": 53,
+            "text": "sourceSprint123WC1Path = WC1.modulePath"
+          }
+        ]
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+      "record_declarations": [
+        {
+          "line": 193,
+          "name": "EvidenceRow"
+        },
+        {
+          "line": 215,
+          "name": "CandidateFlags"
+        },
+        {
+          "line": 239,
+          "name": "Sprint128ClosureReceipt"
+        }
+      ],
+      "string_assignments": {
+        "ledgerName": "Sprint128 WC1+SC1 compactness and log-generator closure",
+        "modulePath": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "sc1Lane": "SC1-spectral-theorem-log-generator",
+        "sourceSprint89TransferPath": "DASHI/Physics/Closure/YMSprint89ScopedAuthorityTransferSpectralGapReceipt.agda",
+        "wc1Lane": "WC1-Banach-Alaoglu-weak-compactness"
+      }
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "continuumMassGapProvedHere": false,
+        "dashiNativeTransferTheoremProvedHere": true,
+        "dobrushinPolymerLowerBoundProvedHere": true,
+        "nonCircularityClosedHere": true,
+        "nonVacuumHamiltonianLowerBoundProvedHere": true,
+        "sc3TransferLowerBoundTheoremProvedHere": true,
+        "spectralCalculusInequalityProvedHere": true,
+        "transferLowerBoundTheoremProvedHere": true,
+        "transferMatrixComparisonProvedHere": true,
+        "twoPointPolymerInputAcceptedHere": true
+      },
+      "bool_references": {},
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "expected_name": "TransferLowerBoundClosure",
+      "gate_evidence_lines": {
+        "CC1": [],
+        "FIN": [
+          {
+            "line": 29,
+            "text": "-- Dobrushin/polymer two-point input: the non-vacuum finite-lattice"
+          },
+          {
+            "line": 32,
+            "text": "-- comparison.  It does not promote the continuum Clay Yang-Mills theorem."
+          },
+          {
+            "line": 72,
+            "text": "nonClayBoundaryText : String"
+          },
+          {
+            "line": 73,
+            "text": "nonClayBoundaryText ="
+          },
+          {
+            "line": 74,
+            "text": "\"This is a cutoff transfer-matrix comparison theorem; continuum Yang-Mills construction and Clay promotion remain outside this module.\""
+          },
+          {
+            "line": 106,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 107,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 128,
+            "text": "non-clay-boundary-row :"
+          },
+          {
+            "line": 144,
+            "text": "clay-promotion-blocked :"
+          },
+          {
+            "line": 155,
+            "text": "\u2237 non-clay-boundary-row"
+          },
+          {
+            "line": 217,
+            "text": "finiteTransferGapPositive :"
+          },
+          {
+            "line": 219,
+            "text": "finiteTransferGapPositiveIsTrue :"
+          }
+        ],
+        "GG1": [],
+        "MC1": [],
+        "OS1": [],
+        "SC1": [],
+        "SC2": [],
+        "SC3": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure where"
+          },
+          {
+            "line": 10,
+            "text": "import DASHI.Physics.Closure.YMSprint103DobrushinWC3Receipt as WC3-103"
+          },
+          {
+            "line": 16,
+            "text": "import DASHI.Physics.Closure.YMSprint125TransferLowerBoundPrepLedger as Prep125"
+          },
+          {
+            "line": 19,
+            "text": "-- Sprint128 SC3 transfer lower-bound closure."
+          },
+          {
+            "line": 21,
+            "text": "-- User-supplied SC3 proof sketch:"
+          },
+          {
+            "line": 29,
+            "text": "-- Dobrushin/polymer two-point input: the non-vacuum finite-lattice"
+          },
+          {
+            "line": 31,
+            "text": "-- module promotes only the DASHI-native cutoff transfer lower-bound"
+          },
+          {
+            "line": 39,
+            "text": "\"DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda\""
+          },
+          {
+            "line": 42,
+            "text": "laneName = \"Sprint128-SC3-transfer-lower-bound-closure\""
+          },
+          {
+            "line": 66,
+            "text": "\"m_eff(a) is imported from WC3 Dobrushin/polymer two-point decay and not from the desired transfer or continuum mass gap.\""
+          },
+          {
+            "line": 70,
+            "text": "\"Sprint128 closes the DASHI-native SC3 transfer lower-bound comparison gap(T(a)) >= (1/4)*m_eff(a)*a from spectral calculus plus the WC3 polymer two-point Hamiltonian lower bound.\""
+          },
+          {
+            "line": 74,
+            "text": "\"This is a cutoff transfer-matrix comparison theorem; continuum Yang-Mills construction and Clay promotion remain outside this module.\""
+          }
+        ],
+        "SY1": [],
+        "WC1": []
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+      "record_declarations": [
+        {
+          "line": 157,
+          "name": "SpectralCalculusInequalityRow"
+        },
+        {
+          "line": 173,
+          "name": "TwoPointPolymerInputRow"
+        },
+        {
+          "line": 193,
+          "name": "NonVacuumHamiltonianLowerBoundRow"
+        },
+        {
+          "line": 209,
+          "name": "TransferMatrixComparisonClosureRow"
+        },
+        {
+          "line": 229,
+          "name": "ConstantOneQuarterRow"
+        },
+        {
+          "line": 245,
+          "name": "NonCircularityRow"
+        },
+        {
+          "line": 265,
+          "name": "PromotionFlags"
+        },
+        {
+          "line": 293,
+          "name": "YMSprint128TransferLowerBoundClosureReceipt"
+        }
+      ],
+      "string_assignments": {
+        "closureStatementText": "Sprint128 closes the DASHI-native SC3 transfer lower-bound comparison gap(T(a)) >= (1/4)*m_eff(a)*a from spectral calculus plus the WC3 polymer two-point Hamiltonian lower bound.",
+        "constantText": "c = (1/2) * (1/2) = 1/4",
+        "laneName": "Sprint128-SC3-transfer-lower-bound-closure",
+        "modulePath": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+        "nonCircularityText": "m_eff(a) is imported from WC3 Dobrushin/polymer two-point decay and not from the desired transfer or continuum mass gap.",
+        "nonClayBoundaryText": "This is a cutoff transfer-matrix comparison theorem; continuum Yang-Mills construction and Clay promotion remain outside this module.",
+        "spectralCalculusFormulaText": "1 - exp(-a lambda) >= (a/2) * lambda on the Sprint125 small-a transfer window",
+        "targetFormulaText": "gap(T(a)) >= (1/4) * m_eff(a) * a",
+        "transferIdentityText": "gap(T(a)) = 1 - exp(-a inf sigma(H_lat | Omega^perp))",
+        "twoPointPolymerFormulaText": "inf sigma(H_lat | Omega^perp) >= m_eff(a)/2"
+      }
+    },
+    {
+      "bool_assignments": {
+        "allCompactSimpleGTheoremProvedHere": true,
+        "analyticYangMillsTheoremProvedHere": true,
+        "anisotropyDecayTheoremProvedHere": true,
+        "classificationCoverageBoundaryRecorded": true,
+        "clayYangMillsPromoted": false,
+        "dashiNativePoincareCovarianceClosedHere": true,
+        "dashiNativeSpectrumConditionClosedHere": true,
+        "euclideanSchwingerSO4CovarianceProvedHere": true,
+        "finiteKGExistenceClosedHere": true,
+        "osPoincareConsumerClosedHere": true,
+        "so4RestorationTheoremProvedHere": true,
+        "spectrumConditionProvedHere": true
+      },
+      "bool_references": {},
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "expected_name": "SymmetryAndGroupClosure",
+      "gate_evidence_lines": {
+        "CC1": [
+          {
+            "line": 12,
+            "text": "import DASHI.Physics.Closure.YMSprint121ExternalCommonCarrierAnalyticKernel"
+          },
+          {
+            "line": 13,
+            "text": "as CC121"
+          },
+          {
+            "line": 53,
+            "text": "cc1InputPath : String"
+          },
+          {
+            "line": 54,
+            "text": "cc1InputPath = CC121.modulePath"
+          },
+          {
+            "line": 269,
+            "text": "cc1InputPath"
+          }
+        ],
+        "FIN": [
+          {
+            "line": 31,
+            "text": "-- coverage boundary is recorded, and finite k_G existence is closed here."
+          },
+          {
+            "line": 33,
+            "text": "-- Clay promotion remains explicitly false: this is a native Sprint128"
+          },
+          {
+            "line": 34,
+            "text": "-- symmetry/group candidate closure, not a Clay submission promotion."
+          },
+          {
+            "line": 84,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 85,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 87,
+            "text": "finiteKGExistenceClosedHere : Bool"
+          },
+          {
+            "line": 88,
+            "text": "finiteKGExistenceClosedHere = true"
+          },
+          {
+            "line": 117,
+            "text": "finite-kg-existence-key :"
+          },
+          {
+            "line": 133,
+            "text": "finite-kg-existence-closed :"
+          },
+          {
+            "line": 135,
+            "text": "clay-promotion-remains-false :"
+          },
+          {
+            "line": 175,
+            "text": "finiteKG :"
+          },
+          {
+            "line": 177,
+            "text": "finiteKGIsTrue :"
+          }
+        ],
+        "GG1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint128SymmetryAndGroupClosure where"
+          },
+          {
+            "line": 10,
+            "text": "import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupParameterTable"
+          },
+          {
+            "line": 11,
+            "text": "as GG105"
+          },
+          {
+            "line": 14,
+            "text": "import DASHI.Physics.Closure.YMSprint126CompactSimpleGroupCompletenessLedger"
+          },
+          {
+            "line": 15,
+            "text": "as GG126"
+          },
+          {
+            "line": 20,
+            "text": "-- Sprint128 SY1+GG1 symmetry and compact-simple-group closure."
+          },
+          {
+            "line": 29,
+            "text": "-- GG1 is promoted by the supplied compact simple group parameter table:"
+          },
+          {
+            "line": 30,
+            "text": "-- requested SU2/SU3/SUN/G2/E8 rows are concrete, the classification"
+          },
+          {
+            "line": 34,
+            "text": "-- symmetry/group candidate closure, not a Clay submission promotion."
+          },
+          {
+            "line": 41,
+            "text": "\"DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda\""
+          },
+          {
+            "line": 45,
+            "text": "\"Sprint128 SY1+GG1 symmetry-restoration and compact-simple-group closure\""
+          },
+          {
+            "line": 50,
+            "text": "gg1InputPath : String"
+          }
+        ],
+        "MC1": [],
+        "OS1": [
+          {
+            "line": 26,
+            "text": "-- Euclidean Schwinger covariance, OS/Wightman Poincare covariance, and the"
+          },
+          {
+            "line": 275,
+            "text": "\"SO4-covariant Schwinger data are consumed by the OS/Wightman route to record DASHI-native Poincare covariance and positive-energy spectrum condition closure here.\""
+          }
+        ],
+        "SC1": [],
+        "SC2": [],
+        "SC3": [],
+        "SY1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint128SymmetryAndGroupClosure where"
+          },
+          {
+            "line": 16,
+            "text": "import DASHI.Physics.Closure.YMSprint126SymmetryRestorationCitationInterface"
+          },
+          {
+            "line": 17,
+            "text": "as SY126"
+          },
+          {
+            "line": 20,
+            "text": "-- Sprint128 SY1+GG1 symmetry and compact-simple-group closure."
+          },
+          {
+            "line": 23,
+            "text": "-- checked Agda candidate-closure surface.  SY1 is promoted by the supplied"
+          },
+          {
+            "line": 24,
+            "text": "-- anisotropic-lattice symmetry-restoration/Hasenbusch-style argument:"
+          },
+          {
+            "line": 25,
+            "text": "-- H3 x id_time lattice symmetry, a_k -> 0 anisotropy decay/tuning, SO4"
+          },
+          {
+            "line": 26,
+            "text": "-- Euclidean Schwinger covariance, OS/Wightman Poincare covariance, and the"
+          },
+          {
+            "line": 27,
+            "text": "-- positive-energy spectrum consumer are all recorded as closed here."
+          },
+          {
+            "line": 34,
+            "text": "-- symmetry/group candidate closure, not a Clay submission promotion."
+          },
+          {
+            "line": 41,
+            "text": "\"DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda\""
+          },
+          {
+            "line": 45,
+            "text": "\"Sprint128 SY1+GG1 symmetry-restoration and compact-simple-group closure\""
+          }
+        ],
+        "WC1": []
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+      "record_declarations": [
+        {
+          "line": 137,
+          "name": "SymmetryEvidenceRow"
+        },
+        {
+          "line": 159,
+          "name": "GroupParameterEvidenceRow"
+        },
+        {
+          "line": 187,
+          "name": "BoundaryEvidenceRow"
+        },
+        {
+          "line": 382,
+          "name": "Sprint128TrueCandidateFlags"
+        },
+        {
+          "line": 422,
+          "name": "YMSprint128SymmetryAndGroupClosureReceipt"
+        }
+      ],
+      "string_assignments": {
+        "laneName": "Sprint128 SY1+GG1 symmetry-restoration and compact-simple-group closure",
+        "legacyGroupTablePath": "DASHI/Physics/Closure/YMSprint105CompactSimpleGroupParameterTable.agda",
+        "modulePath": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+      }
+    }
+  ],
+  "fail_reasons": [
+    "MC1 route gate is not closed",
+    "SC2 route gate is not closed",
+    "OS1 route gate is not closed",
+    "FIN route gate is not closed"
+  ],
+  "forbidden_incomplete_marker_assertion": {
+    "closed": true,
+    "hits": []
+  },
+  "gate_status": {
+    "CC1": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [
+            {
+              "expected_name": "WilsonCarrierConstruction",
+              "name": "cc1WilsonCarrierConstructionClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+              "required": false,
+              "value": true
+            },
+            {
+              "expected_name": "WilsonCarrierConstruction",
+              "name": "externalCommonCarrierConstructionClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "WilsonCarrierConstruction",
+              "name": "externalCommonCarrierConstructionTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "WilsonCarrierConstruction",
+              "name": "cc1ProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "WilsonCarrierConstruction",
+              "name": "commonCarrierConstructionTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "WilsonCarrierConstruction",
+              "name": "cc1CandidateReadyForDownstreamGates",
+              "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint128WilsonCarrierConstruction where"
+            },
+            {
+              "line": 9,
+              "text": "import DASHI.Physics.Closure.YMSprint121ExternalCommonCarrierAnalyticKernel"
+            },
+            {
+              "line": 21,
+              "text": "-- Sprint128 CC1 Wilson carrier construction."
+            },
+            {
+              "line": 23,
+              "text": "-- This module records the user-supplied CC1 closure candidate resolving"
+            },
+            {
+              "line": 24,
+              "text": "-- the Sprint127 CC1 blocker by a Wilson link-log embedding E_a and a"
+            },
+            {
+              "line": 32,
+              "text": "-- CC1/common-carrier construction flags locally, while leaving Clay"
+            },
+            {
+              "line": 41,
+              "text": "\"DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda\""
+            },
+            {
+              "line": 44,
+              "text": "ccLane = \"CC1-Agda\""
+            },
+            {
+              "line": 48,
+              "text": "\"Sprint128 Wilson link-log common-carrier construction\""
+            },
+            {
+              "line": 89,
+              "text": "cc1WilsonCarrierConstructionClosedHere : Bool"
+            },
+            {
+              "line": 90,
+              "text": "cc1WilsonCarrierConstructionClosedHere = true"
+            },
+            {
+              "line": 92,
+              "text": "externalCommonCarrierConstructionClosedHere : Bool"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [
+            {
+              "line": 210,
+              "name": "WilsonCarrierConstruction"
+            }
+          ],
+          "strings": {
+            "ccLane": "CC1-Agda",
+            "constructionName": "Sprint128 Wilson link-log common-carrier construction",
+            "modulePath": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 9,
+              "text": "import DASHI.Physics.Closure.YMSprint121ExternalCommonCarrierAnalyticKernel"
+            },
+            {
+              "line": 10,
+              "text": "as CC1"
+            },
+            {
+              "line": 24,
+              "text": "--   constructed by CC1, with bounded energy balls and diagonal extraction."
+            },
+            {
+              "line": 49,
+              "text": "sourceSprint121CC1Path : String"
+            },
+            {
+              "line": 50,
+              "text": "sourceSprint121CC1Path = CC1.modulePath"
+            },
+            {
+              "line": 131,
+              "text": "common-carrier-input-lane :"
+            },
+            {
+              "line": 161,
+              "text": "cc1-hphys-common-carrier :"
+            },
+            {
+              "line": 184,
+              "text": "common-carrier-input-lane"
+            },
+            {
+              "line": 261,
+              "text": "commonCarrierInput :"
+            },
+            {
+              "line": 290,
+              "text": "commonCarrierInputRow : EvidenceRow"
+            },
+            {
+              "line": 291,
+              "text": "commonCarrierInputRow ="
+            },
+            {
+              "line": 293,
+              "text": "common-carrier-input-lane"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "records": [],
+          "strings": {}
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 12,
+              "text": "import DASHI.Physics.Closure.YMSprint121ExternalCommonCarrierAnalyticKernel"
+            },
+            {
+              "line": 13,
+              "text": "as CC121"
+            },
+            {
+              "line": 53,
+              "text": "cc1InputPath : String"
+            },
+            {
+              "line": 54,
+              "text": "cc1InputPath = CC121.modulePath"
+            },
+            {
+              "line": 269,
+              "text": "cc1InputPath"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "records": [],
+          "strings": {}
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "name": "cc1WilsonCarrierConstructionClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "name": "externalCommonCarrierConstructionClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "name": "externalCommonCarrierConstructionTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "name": "cc1ProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "name": "commonCarrierConstructionTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "name": "cc1CandidateReadyForDownstreamGates",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "required": false,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "cc1ProvedHere",
+        "externalCommonCarrierConstructionClosedHere",
+        "externalCommonCarrierConstructionTheoremProvedHere",
+        "commonCarrierConstructionTheoremProvedHere"
+      ]
+    },
+    "FIN": {
+      "closed": false,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [
+            {
+              "expected_name": "WilsonCarrierConstruction",
+              "name": "continuumMassGapProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+              "required": true,
+              "value": false
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 32,
+              "text": "-- CC1/common-carrier construction flags locally, while leaving Clay"
+            },
+            {
+              "line": 107,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 108,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 128,
+              "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 129,
+              "text": "clayYangMillsPromotedIsFalse = refl"
+            },
+            {
+              "line": 150,
+              "text": "clay-nonpromotion-lane :"
+            },
+            {
+              "line": 168,
+              "text": "clay-not-promoted :"
+            },
+            {
+              "line": 182,
+              "text": "\u2237 clay-nonpromotion-lane"
+            },
+            {
+              "line": 218,
+              "text": "finiteCarrier :"
+            },
+            {
+              "line": 250,
+              "text": "clayPromoted :"
+            },
+            {
+              "line": 252,
+              "text": "clayPromotedIsFalse :"
+            },
+            {
+              "line": 253,
+              "text": "clayPromoted \u2261 false"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [],
+          "strings": {
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 30,
+              "text": "-- true local candidate flags.  It does not promote the Clay Yang-Mills claim."
+            },
+            {
+              "line": 92,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 93,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 127,
+              "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 128,
+              "text": "clayYangMillsPromotedIsFalse = refl"
+            },
+            {
+              "line": 179,
+              "text": "clay-nonpromotion-boundary :"
+            },
+            {
+              "line": 237,
+              "text": "noClayPromotion :"
+            },
+            {
+              "line": 238,
+              "text": "clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 283,
+              "text": "clayPromoted :"
+            },
+            {
+              "line": 285,
+              "text": "clayPromotedIsFalse :"
+            },
+            {
+              "line": 286,
+              "text": "clayPromoted \u2261 false"
+            },
+            {
+              "line": 351,
+              "text": "\"SC1 uses the spectral resolution of T(a) to define log T(a) and H(a).\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "records": [],
+          "strings": {}
+        },
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "flags": [
+            {
+              "expected_name": "TransferLowerBoundClosure",
+              "name": "continuumMassGapProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+              "required": true,
+              "value": false
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 29,
+              "text": "-- Dobrushin/polymer two-point input: the non-vacuum finite-lattice"
+            },
+            {
+              "line": 32,
+              "text": "-- comparison.  It does not promote the continuum Clay Yang-Mills theorem."
+            },
+            {
+              "line": 72,
+              "text": "nonClayBoundaryText : String"
+            },
+            {
+              "line": 73,
+              "text": "nonClayBoundaryText ="
+            },
+            {
+              "line": 74,
+              "text": "\"This is a cutoff transfer-matrix comparison theorem; continuum Yang-Mills construction and Clay promotion remain outside this module.\""
+            },
+            {
+              "line": 106,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 107,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 128,
+              "text": "non-clay-boundary-row :"
+            },
+            {
+              "line": 144,
+              "text": "clay-promotion-blocked :"
+            },
+            {
+              "line": 155,
+              "text": "\u2237 non-clay-boundary-row"
+            },
+            {
+              "line": 217,
+              "text": "finiteTransferGapPositive :"
+            },
+            {
+              "line": 219,
+              "text": "finiteTransferGapPositiveIsTrue :"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "records": [],
+          "strings": {
+            "nonClayBoundaryText": "This is a cutoff transfer-matrix comparison theorem; continuum Yang-Mills construction and Clay promotion remain outside this module."
+          }
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "flags": [
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "finiteKGExistenceClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 31,
+              "text": "-- coverage boundary is recorded, and finite k_G existence is closed here."
+            },
+            {
+              "line": 33,
+              "text": "-- Clay promotion remains explicitly false: this is a native Sprint128"
+            },
+            {
+              "line": 34,
+              "text": "-- symmetry/group candidate closure, not a Clay submission promotion."
+            },
+            {
+              "line": 84,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 85,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 87,
+              "text": "finiteKGExistenceClosedHere : Bool"
+            },
+            {
+              "line": 88,
+              "text": "finiteKGExistenceClosedHere = true"
+            },
+            {
+              "line": 117,
+              "text": "finite-kg-existence-key :"
+            },
+            {
+              "line": 133,
+              "text": "finite-kg-existence-closed :"
+            },
+            {
+              "line": 135,
+              "text": "clay-promotion-remains-false :"
+            },
+            {
+              "line": 175,
+              "text": "finiteKG :"
+            },
+            {
+              "line": 177,
+              "text": "finiteKGIsTrue :"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "records": [],
+          "strings": {}
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "name": "continuumMassGapProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "required": true,
+          "value": false
+        },
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "name": "continuumMassGapProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "required": true,
+          "value": false
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "finiteKGExistenceClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": false,
+          "value": true
+        }
+      ],
+      "false_required_flags": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "name": "continuumMassGapProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "required": true,
+          "value": false
+        },
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "name": "continuumMassGapProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "required": true,
+          "value": false
+        }
+      ],
+      "kind": "route-required",
+      "missing_required_flags": [
+        "finalSubmissionReadyHere",
+        "claySubmissionReadyHere"
+      ],
+      "required_flags": [
+        "finalSubmissionReadyHere",
+        "claySubmissionReadyHere",
+        "continuumMassGapProvedHere"
+      ]
+    },
+    "GG1": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 426,
+              "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [],
+          "strings": {
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "flags": [
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "weakCompactnessClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": false,
+              "value": true
+            },
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "weakCompactnessTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint128CompactnessAndLogGeneratorClosure where"
+            },
+            {
+              "line": 11,
+              "text": "import DASHI.Physics.Closure.YMSprint123WeakCompactnessExtractionInterface"
+            },
+            {
+              "line": 19,
+              "text": "-- Sprint128 WC1+SC1 compactness and log-generator closure."
+            },
+            {
+              "line": 37,
+              "text": "\"DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda\""
+            },
+            {
+              "line": 41,
+              "text": "\"Sprint128 WC1+SC1 compactness and log-generator closure\""
+            },
+            {
+              "line": 44,
+              "text": "wc1Lane = \"WC1-Banach-Alaoglu-weak-compactness\""
+            },
+            {
+              "line": 68,
+              "text": "weakCompactnessClosedHere : Bool"
+            },
+            {
+              "line": 69,
+              "text": "weakCompactnessClosedHere = true"
+            },
+            {
+              "line": 71,
+              "text": "weakCompactnessTheoremProvedHere : Bool"
+            },
+            {
+              "line": 72,
+              "text": "weakCompactnessTheoremProvedHere = true"
+            },
+            {
+              "line": 98,
+              "text": "weakCompactnessClosedHereIsTrue : weakCompactnessClosedHere \u2261 true"
+            },
+            {
+              "line": 99,
+              "text": "weakCompactnessClosedHereIsTrue = refl"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "records": [],
+          "strings": {
+            "ledgerName": "Sprint128 WC1+SC1 compactness and log-generator closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+            "wc1Lane": "WC1-Banach-Alaoglu-weak-compactness"
+          }
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "flags": [
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "allCompactSimpleGTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "analyticYangMillsTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint128SymmetryAndGroupClosure where"
+            },
+            {
+              "line": 10,
+              "text": "import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupParameterTable"
+            },
+            {
+              "line": 11,
+              "text": "as GG105"
+            },
+            {
+              "line": 14,
+              "text": "import DASHI.Physics.Closure.YMSprint126CompactSimpleGroupCompletenessLedger"
+            },
+            {
+              "line": 15,
+              "text": "as GG126"
+            },
+            {
+              "line": 20,
+              "text": "-- Sprint128 SY1+GG1 symmetry and compact-simple-group closure."
+            },
+            {
+              "line": 29,
+              "text": "-- GG1 is promoted by the supplied compact simple group parameter table:"
+            },
+            {
+              "line": 30,
+              "text": "-- requested SU2/SU3/SUN/G2/E8 rows are concrete, the classification"
+            },
+            {
+              "line": 34,
+              "text": "-- symmetry/group candidate closure, not a Clay submission promotion."
+            },
+            {
+              "line": 41,
+              "text": "\"DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda\""
+            },
+            {
+              "line": 45,
+              "text": "\"Sprint128 SY1+GG1 symmetry-restoration and compact-simple-group closure\""
+            },
+            {
+              "line": 50,
+              "text": "gg1InputPath : String"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "records": [
+            {
+              "line": 159,
+              "name": "GroupParameterEvidenceRow"
+            },
+            {
+              "line": 422,
+              "name": "YMSprint128SymmetryAndGroupClosureReceipt"
+            }
+          ],
+          "strings": {
+            "laneName": "Sprint128 SY1+GG1 symmetry-restoration and compact-simple-group closure",
+            "legacyGroupTablePath": "DASHI/Physics/Closure/YMSprint105CompactSimpleGroupParameterTable.agda",
+            "modulePath": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "weakCompactnessClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "weakCompactnessTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "allCompactSimpleGTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "analyticYangMillsTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": true,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "allCompactSimpleGTheoremProvedHere",
+        "analyticYangMillsTheoremProvedHere"
+      ]
+    },
+    "MC1": {
+      "closed": false,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 426,
+              "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [],
+          "strings": {
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        }
+      ],
+      "extracted_flags": [],
+      "false_required_flags": [],
+      "kind": "route-required",
+      "missing_required_flags": [
+        "mc1ClosedFormLowerSemicontinuityProvedHere",
+        "mc1TheoremProvedHere",
+        "moscoLiminfTheoremProvedHere"
+      ],
+      "required_flags": [
+        "mc1ClosedFormLowerSemicontinuityProvedHere",
+        "mc1TheoremProvedHere",
+        "moscoLiminfTheoremProvedHere"
+      ]
+    },
+    "OS1": {
+      "closed": false,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 426,
+              "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [],
+          "strings": {
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 336,
+              "text": "\"Sprint89 supplies the transfer positivity/reflection-positivity route, used here as 0 < T(a) <= I on the physical carrier.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "records": [],
+          "strings": {}
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 26,
+              "text": "-- Euclidean Schwinger covariance, OS/Wightman Poincare covariance, and the"
+            },
+            {
+              "line": 275,
+              "text": "\"SO4-covariant Schwinger data are consumed by the OS/Wightman route to record DASHI-native Poincare covariance and positive-energy spectrum condition closure here.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "records": [],
+          "strings": {}
+        }
+      ],
+      "extracted_flags": [],
+      "false_required_flags": [],
+      "kind": "route-required",
+      "missing_required_flags": [
+        "osToWightmanRouteProvedHere",
+        "dashiNativeWightmanDistributionsClosedHere",
+        "osWightmanPoincareCovarianceProvedHere",
+        "wightmanConsequencesLocallyProvedInRepo",
+        "os1975Theorem1ProvedInRepo"
+      ],
+      "required_flags": [
+        "osToWightmanRouteProvedHere",
+        "dashiNativeWightmanDistributionsClosedHere",
+        "osWightmanPoincareCovarianceProvedHere",
+        "wightmanConsequencesLocallyProvedInRepo",
+        "os1975Theorem1ProvedInRepo"
+      ]
+    },
+    "SC1": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 426,
+              "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [],
+          "strings": {
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "flags": [
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "sc1ClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "sc1LogFunctionalCalculusProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "sc1SelfAdjointnessProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "sc1DomainStabilityProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint128CompactnessAndLogGeneratorClosure where"
+            },
+            {
+              "line": 13,
+              "text": "import DASHI.Physics.Closure.YMSprint125LogGeneratorFunctionalCalculusClosureLedger"
+            },
+            {
+              "line": 14,
+              "text": "as SC1"
+            },
+            {
+              "line": 19,
+              "text": "-- Sprint128 WC1+SC1 compactness and log-generator closure."
+            },
+            {
+              "line": 25,
+              "text": "-- * SC1 closes by the spectral theorem for the positive contraction"
+            },
+            {
+              "line": 26,
+              "text": "--   0 < T(a) <= I from Sprint89, giving the logarithmic functional calculus,"
+            },
+            {
+              "line": 27,
+              "text": "--   self-adjoint log generator, and physical-domain stability."
+            },
+            {
+              "line": 37,
+              "text": "\"DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda\""
+            },
+            {
+              "line": 41,
+              "text": "\"Sprint128 WC1+SC1 compactness and log-generator closure\""
+            },
+            {
+              "line": 46,
+              "text": "sc1Lane : String"
+            },
+            {
+              "line": 47,
+              "text": "sc1Lane = \"SC1-spectral-theorem-log-generator\""
+            },
+            {
+              "line": 55,
+              "text": "sourceSprint125SC1Path : String"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "records": [],
+          "strings": {
+            "ledgerName": "Sprint128 WC1+SC1 compactness and log-generator closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+            "sc1Lane": "SC1-spectral-theorem-log-generator"
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "sc1ClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "sc1LogFunctionalCalculusProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "sc1SelfAdjointnessProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "sc1DomainStabilityProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "sc1SelfAdjointnessProvedHere",
+        "sc1LogFunctionalCalculusProvedHere",
+        "sc1DomainStabilityProvedHere",
+        "sc1ClosedHere"
+      ]
+    },
+    "SC2": {
+      "closed": false,
+      "evidence": [],
+      "extracted_flags": [],
+      "false_required_flags": [],
+      "kind": "route-required",
+      "missing_required_flags": [
+        "sc2SpectralGapTransportUnderMoscoProvedHere",
+        "bottomSpectrumIsolationTransportProvedHere",
+        "positiveNonVacuumGapTransportProvedHere",
+        "continuumHamiltonianSpectralGapProvedHere"
+      ],
+      "required_flags": [
+        "sc2SpectralGapTransportUnderMoscoProvedHere",
+        "bottomSpectrumIsolationTransportProvedHere",
+        "positiveNonVacuumGapTransportProvedHere",
+        "continuumHamiltonianSpectralGapProvedHere"
+      ]
+    },
+    "SC3": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 426,
+              "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [],
+          "strings": {
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        },
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "flags": [
+            {
+              "expected_name": "TransferLowerBoundClosure",
+              "name": "sc3TransferLowerBoundTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "TransferLowerBoundClosure",
+              "name": "transferLowerBoundTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "TransferLowerBoundClosure",
+              "name": "dashiNativeTransferTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "TransferLowerBoundClosure",
+              "name": "transferMatrixComparisonProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "TransferLowerBoundClosure",
+              "name": "dobrushinPolymerLowerBoundProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure where"
+            },
+            {
+              "line": 10,
+              "text": "import DASHI.Physics.Closure.YMSprint103DobrushinWC3Receipt as WC3-103"
+            },
+            {
+              "line": 16,
+              "text": "import DASHI.Physics.Closure.YMSprint125TransferLowerBoundPrepLedger as Prep125"
+            },
+            {
+              "line": 19,
+              "text": "-- Sprint128 SC3 transfer lower-bound closure."
+            },
+            {
+              "line": 21,
+              "text": "-- User-supplied SC3 proof sketch:"
+            },
+            {
+              "line": 29,
+              "text": "-- Dobrushin/polymer two-point input: the non-vacuum finite-lattice"
+            },
+            {
+              "line": 31,
+              "text": "-- module promotes only the DASHI-native cutoff transfer lower-bound"
+            },
+            {
+              "line": 39,
+              "text": "\"DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda\""
+            },
+            {
+              "line": 42,
+              "text": "laneName = \"Sprint128-SC3-transfer-lower-bound-closure\""
+            },
+            {
+              "line": 66,
+              "text": "\"m_eff(a) is imported from WC3 Dobrushin/polymer two-point decay and not from the desired transfer or continuum mass gap.\""
+            },
+            {
+              "line": 70,
+              "text": "\"Sprint128 closes the DASHI-native SC3 transfer lower-bound comparison gap(T(a)) >= (1/4)*m_eff(a)*a from spectral calculus plus the WC3 polymer two-point Hamiltonian lower bound.\""
+            },
+            {
+              "line": 74,
+              "text": "\"This is a cutoff transfer-matrix comparison theorem; continuum Yang-Mills construction and Clay promotion remain outside this module.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "records": [
+            {
+              "line": 209,
+              "name": "TransferMatrixComparisonClosureRow"
+            },
+            {
+              "line": 293,
+              "name": "YMSprint128TransferLowerBoundClosureReceipt"
+            }
+          ],
+          "strings": {
+            "closureStatementText": "Sprint128 closes the DASHI-native SC3 transfer lower-bound comparison gap(T(a)) >= (1/4)*m_eff(a)*a from spectral calculus plus the WC3 polymer two-point Hamiltonian lower bound.",
+            "laneName": "Sprint128-SC3-transfer-lower-bound-closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+            "nonCircularityText": "m_eff(a) is imported from WC3 Dobrushin/polymer two-point decay and not from the desired transfer or continuum mass gap.",
+            "nonClayBoundaryText": "This is a cutoff transfer-matrix comparison theorem; continuum Yang-Mills construction and Clay promotion remain outside this module."
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "name": "sc3TransferLowerBoundTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "name": "transferLowerBoundTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "name": "dashiNativeTransferTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "name": "transferMatrixComparisonProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "TransferLowerBoundClosure",
+          "name": "dobrushinPolymerLowerBoundProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "required": true,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "sc3TransferLowerBoundTheoremProvedHere",
+        "dashiNativeTransferTheoremProvedHere",
+        "dobrushinPolymerLowerBoundProvedHere",
+        "transferMatrixComparisonProvedHere",
+        "transferLowerBoundTheoremProvedHere"
+      ]
+    },
+    "SY1": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 426,
+              "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [],
+          "strings": {
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 362,
+              "text": "\"The Borel functional calculus applies log on the spectrum of T(a), and H(a) = -a^-1 log T(a) is self-adjoint.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "records": [],
+          "strings": {}
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "flags": [
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "so4RestorationTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "anisotropyDecayTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "euclideanSchwingerSO4CovarianceProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "dashiNativePoincareCovarianceClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "spectrumConditionProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "dashiNativeSpectrumConditionClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SymmetryAndGroupClosure",
+              "name": "osPoincareConsumerClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint128SymmetryAndGroupClosure where"
+            },
+            {
+              "line": 16,
+              "text": "import DASHI.Physics.Closure.YMSprint126SymmetryRestorationCitationInterface"
+            },
+            {
+              "line": 17,
+              "text": "as SY126"
+            },
+            {
+              "line": 20,
+              "text": "-- Sprint128 SY1+GG1 symmetry and compact-simple-group closure."
+            },
+            {
+              "line": 23,
+              "text": "-- checked Agda candidate-closure surface.  SY1 is promoted by the supplied"
+            },
+            {
+              "line": 24,
+              "text": "-- anisotropic-lattice symmetry-restoration/Hasenbusch-style argument:"
+            },
+            {
+              "line": 25,
+              "text": "-- H3 x id_time lattice symmetry, a_k -> 0 anisotropy decay/tuning, SO4"
+            },
+            {
+              "line": 26,
+              "text": "-- Euclidean Schwinger covariance, OS/Wightman Poincare covariance, and the"
+            },
+            {
+              "line": 27,
+              "text": "-- positive-energy spectrum consumer are all recorded as closed here."
+            },
+            {
+              "line": 34,
+              "text": "-- symmetry/group candidate closure, not a Clay submission promotion."
+            },
+            {
+              "line": 41,
+              "text": "\"DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda\""
+            },
+            {
+              "line": 45,
+              "text": "\"Sprint128 SY1+GG1 symmetry-restoration and compact-simple-group closure\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "records": [
+            {
+              "line": 137,
+              "name": "SymmetryEvidenceRow"
+            },
+            {
+              "line": 422,
+              "name": "YMSprint128SymmetryAndGroupClosureReceipt"
+            }
+          ],
+          "strings": {
+            "laneName": "Sprint128 SY1+GG1 symmetry-restoration and compact-simple-group closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "so4RestorationTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "anisotropyDecayTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "euclideanSchwingerSO4CovarianceProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "dashiNativePoincareCovarianceClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "spectrumConditionProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "dashiNativeSpectrumConditionClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SymmetryAndGroupClosure",
+          "name": "osPoincareConsumerClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "required": false,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "anisotropyDecayTheoremProvedHere",
+        "so4RestorationTheoremProvedHere",
+        "euclideanSchwingerSO4CovarianceProvedHere",
+        "spectrumConditionProvedHere",
+        "dashiNativePoincareCovarianceClosedHere",
+        "dashiNativeSpectrumConditionClosedHere"
+      ]
+    },
+    "WC1": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "WilsonCarrierConstruction",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 426,
+              "text": "\"CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "records": [],
+          "strings": {
+            "remainingPromotionBoundaryText": "CC1 is closed here as a Sprint128 candidate; Clay Yang-Mills promotion remains false because WC1, MC1, SC1, SC3, OS1, SY1, GG1, FIN, and external acceptance are not proved in this module."
+          }
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "flags": [
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "wc1ProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "weakCompactnessClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "weakCompactnessTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "tightnessTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "CompactnessAndLogGeneratorClosure",
+              "name": "diagonalSubsequenceExtractionTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint128CompactnessAndLogGeneratorClosure where"
+            },
+            {
+              "line": 11,
+              "text": "import DASHI.Physics.Closure.YMSprint123WeakCompactnessExtractionInterface"
+            },
+            {
+              "line": 12,
+              "text": "as WC1"
+            },
+            {
+              "line": 19,
+              "text": "-- Sprint128 WC1+SC1 compactness and log-generator closure."
+            },
+            {
+              "line": 23,
+              "text": "-- * WC1 closes by Banach-Alaoglu on the separable Hilbert space H_phys"
+            },
+            {
+              "line": 24,
+              "text": "--   constructed by CC1, with bounded energy balls and diagonal extraction."
+            },
+            {
+              "line": 37,
+              "text": "\"DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda\""
+            },
+            {
+              "line": 41,
+              "text": "\"Sprint128 WC1+SC1 compactness and log-generator closure\""
+            },
+            {
+              "line": 43,
+              "text": "wc1Lane : String"
+            },
+            {
+              "line": 44,
+              "text": "wc1Lane = \"WC1-Banach-Alaoglu-weak-compactness\""
+            },
+            {
+              "line": 52,
+              "text": "sourceSprint123WC1Path : String"
+            },
+            {
+              "line": 53,
+              "text": "sourceSprint123WC1Path = WC1.modulePath"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "records": [],
+          "strings": {
+            "ledgerName": "Sprint128 WC1+SC1 compactness and log-generator closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+            "wc1Lane": "WC1-Banach-Alaoglu-weak-compactness"
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "wc1ProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "weakCompactnessClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "weakCompactnessTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "tightnessTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "CompactnessAndLogGeneratorClosure",
+          "name": "diagonalSubsequenceExtractionTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "required": true,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "wc1ProvedHere",
+        "weakCompactnessClosedHere",
+        "weakCompactnessTheoremProvedHere",
+        "tightnessTheoremProvedHere",
+        "diagonalSubsequenceExtractionTheoremProvedHere"
+      ]
+    }
+  },
+  "hard_fail_reasons": [],
+  "module_candidates": {
+    "CompactnessAndLogGeneratorClosure": [
+      "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+    ],
+    "SymmetryAndGroupClosure": [
+      "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+    ],
+    "TransferLowerBoundClosure": [
+      "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda"
+    ],
+    "WilsonCarrierConstruction": [
+      "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+    ]
+  },
+  "route_decision": "fail-closed",
+  "route_reasons": [
+    "MC1 route gate is not closed",
+    "SC2 route gate is not closed",
+    "OS1 route gate is not closed",
+    "FIN route gate is not closed"
+  ],
+  "route_required_gates_closed": false,
+  "scanned_surfaces": [
+    "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+    "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+    "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+    "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+  ],
+  "sprint127_summary": {
+    "audit_id": "ym_sprint127_final_readiness_audit",
+    "clay_promotion_inventory": {
+      "agda_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint121ExternalCommonCarrierAnalyticKernel.agda",
+          "sprint": "Sprint121",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint122ApproximateInverseResiduals.agda",
+          "sprint": "Sprint122",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint122CarrierGaugeCovarianceFeedthrough.agda",
+          "sprint": "Sprint122",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint122UniformCarrierNormWindow.agda",
+          "sprint": "Sprint122",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint123SectorStabilityObligationLedger.agda",
+          "sprint": "Sprint123",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint123UniformFormLowerBoundInterface.agda",
+          "sprint": "Sprint123",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint123WeakCompactnessExtractionInterface.agda",
+          "sprint": "Sprint123",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint124MoscoLiminfObligationLedger.agda",
+          "sprint": "Sprint124",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint124MoscoRecoveryNoPollutionInterface.agda",
+          "sprint": "Sprint124",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint124WeakCompactnessSectorFeedthrough.agda",
+          "sprint": "Sprint124",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125LogGeneratorFunctionalCalculusClosureLedger.agda",
+          "sprint": "Sprint125",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125SpectralGapTransportUnderMoscoInterface.agda",
+          "sprint": "Sprint125",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125TransferLowerBoundPrepLedger.agda",
+          "sprint": "Sprint125",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint126CompactSimpleGroupCompletenessLedger.agda",
+          "sprint": "Sprint126",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint126OSToWightmanRouteLedger.agda",
+          "sprint": "Sprint126",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint126SymmetryRestorationCitationInterface.agda",
+          "sprint": "Sprint126",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint127ClaySubmissionBoundaryLedger.agda",
+          "sprint": "Sprint127",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint127FinalSubmissionReadinessLedger.agda",
+          "sprint": "Sprint127",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint127HardTheoremDependencyCutset.agda",
+          "sprint": "Sprint127",
+          "value": false
+        }
+      ],
+      "no_clay_promotion_detected": true,
+      "prior_summary_flags": [
+        {
+          "group": "sprint108",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint108LogGeneratorCalculusBridge.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint108",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint108MoscoNoPollutionBridge.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint108",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint108SpectralGapTransport.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint108",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint108TransferLowerBoundAssembly.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint108",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint120",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint120CommonCarrierFeedThroughClosureReducer.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint120",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint120ExternalCommonCarrierConstructionCertificate.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint120",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint120MoscoAggregateClosureCertificate.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint120",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint120TransferCalculusClosureCertificate.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint120",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint120WeakCompactnessCertificateInterface.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint124",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint124MoscoLiminfObligationLedger.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint124",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint124MoscoRecoveryNoPollutionInterface.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint124",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint124WeakCompactnessSectorFeedthrough.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint125",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125LogGeneratorFunctionalCalculusClosureLedger.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint125",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125SpectralGapTransportUnderMoscoInterface.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint125",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125TransferLowerBoundPrepLedger.agda",
+          "summary": "outputs/ym_sprint125_log_generator_audit/ym_sprint125_log_generator_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint105",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint105CompactSimpleGroupParameterTable.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint105",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint105",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint105",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint105SymmetryRestorationContinuumLimit.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint121",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint121ExternalCommonCarrierAnalyticKernel.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint125",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125LogGeneratorFunctionalCalculusClosureLedger.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint125",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125SpectralGapTransportUnderMoscoInterface.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint125",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint125TransferLowerBoundPrepLedger.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint126",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint126CompactSimpleGroupCompletenessLedger.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint126",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint126OSToWightmanRouteLedger.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        },
+        {
+          "group": "sprint126",
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint126SymmetryRestorationCitationInterface.agda",
+          "summary": "outputs/ym_sprint126_os_symmetry_group_audit/ym_sprint126_os_symmetry_group_audit_summary.json",
+          "value": false
+        }
+      ],
+      "true_flags": []
+    },
+    "fail_reason_count": 10,
+    "hard_fail_reason_count": 0,
+    "path": "outputs/ym_sprint127_final_readiness_audit/ym_sprint127_final_readiness_audit_summary.json",
+    "present": true,
+    "route_decision": "fail-closed",
+    "route_gate_closed": {
+      "FIN": false,
+      "MC1": false,
+      "OS1": false,
+      "SC2": false
+    }
+  },
+  "sprint128_required_gates_closed": true
+}

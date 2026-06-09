@@ -1,0 +1,9 @@
+{
+  "all_checks_ok": true,
+  "boundary_sum_zero_ok": true,
+  "killing_weight_equality_ok": true,
+  "opposite_face_pairing_ok": true,
+  "orientation_reversal_ok": true,
+  "paired_cancellation_ok": true,
+  "promotion": false
+}

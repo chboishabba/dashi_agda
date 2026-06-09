@@ -1,0 +1,6 @@
+gate_id,gate_name,status,next_required_input,proved_in_repo,clay_promotion,route_decision
+G1,HminusHalfUniformAbsorptionGate,OPEN_NOT_PROVED_IN_REPO,H^{-1/2} nonlinear-defect estimate at the danger shell,False,False,NS_HMINUS_HALF_CANONICAL_LANE_OPEN
+G2,NonCircularKStarDriftBound,OPEN_AFTER_HMINUS_HALF_GATE,non-circular high-high control plus K*(t) drift containment,False,False,NS_HMINUS_HALF_CANONICAL_LANE_OPEN
+G3,ThetaPreservationAtDangerShell,OPEN_AFTER_KSTAR_DRIFT,edge influx absorption and tail-restricted theta barrier,False,False,NS_HMINUS_HALF_CANONICAL_LANE_OPEN
+G4,ThetaTailToBKMOrSerrinContinuation,CONDITIONAL_BRIDGE_ONLY_OPEN_BOUNDARIES_REMAIN,"uniform K* bound, Sobolev tail control, and BKM/Serrin discharge",False,False,NS_HMINUS_HALF_CANONICAL_LANE_OPEN
+G5,ClayNavierStokesPromoted,FALSE_NO_PROMOTION,all prior NS continuation and smoothness obligations,False,False,NS_HMINUS_HALF_CANONICAL_LANE_OPEN

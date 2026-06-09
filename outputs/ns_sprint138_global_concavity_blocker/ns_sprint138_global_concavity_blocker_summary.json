@@ -1,0 +1,59 @@
+{
+  "artifact_complete": true,
+  "axial_monotonicity_closed": false,
+  "blocker": "GlobalConcavityOfPsi1",
+  "blocker_open": true,
+  "blocker_status": "open_blocker",
+  "boundary_persistence": "boundary_annular_contribution_and_persistence_failure_open",
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint138_global_concavity_blocker",
+  "control_card": {
+    "C": "Deterministic stdlib Python emitter with dataclass rows, JSON, CSV, Markdown, validate(), and main().",
+    "F": "Missing required rows, closing global concavity, claiming axial monotonicity, flipping the full Clay NS guard, or promoting Clay fails validation.",
+    "G": "Validation passes only if local concavity is recorded, global concavity remains unclosed, the blocker remains open, and Clay flags stay false.",
+    "L": "local center expansion -> nonlocal psi1 dependence -> sign-indefinite kernel and boundary annulus -> persistence failure -> missing required theorem",
+    "O": "Worker owns only scripts/ns_sprint138_global_concavity_blocker.py and outputs/ns_sprint138_global_concavity_blocker/.",
+    "P": "Keep the Sprint 138 route fail-closed until a global concavity theorem for psi1 is proved.",
+    "R": "Analyze GlobalConcavityOfPsi1 as the first Sprint 138 blocker for AxialMonotonicityOfSwirlProfile.",
+    "S": "Local Taylor concavity near the symmetry center is supported; elliptic nonlocality, sign-indefinite kernels, boundary/annular terms, and persistence keep the global theorem open."
+  },
+  "decision": "fail_closed_blocker_open",
+  "exit_code": 0,
+  "fail_closed": true,
+  "full_clay_ns_solved": false,
+  "global_concavity_closed": false,
+  "global_concavity_proved": false,
+  "global_concavity_proven": false,
+  "global_concavity_status": "global_concavity_not_closed",
+  "global_proof_proved": false,
+  "global_proof_proven": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "local_concavity_status": "local_concavity_supported",
+  "local_concavity_supported": true,
+  "open_blockers": [
+    "local_taylor_concavity_near_symmetry_center",
+    "elliptic_nonlocal_psi1_dependence_on_omega1",
+    "sign_indefinite_kernel_contribution",
+    "boundary_annular_contribution",
+    "persistence_failure",
+    "required_theorem_global_concavity_of_psi1"
+  ],
+  "parent_gate": "AxialMonotonicityOfSwirlProfile",
+  "promotion_decision": "hold_no_clay_promotion",
+  "proof_claimed": false,
+  "required_theorem": "For every possible first positive maximum of v=partial_z u1 in the monitored half-profile, partial_z^2 psi1 must keep the sign needed to make 2 u1 partial_z^2 psi1 nonpositive or otherwise dominated.",
+  "route_decision": "fail_closed_blocker_open",
+  "row_count": 6,
+  "supported_local_rows": [
+    "local_taylor_concavity_near_symmetry_center"
+  ],
+  "variables": {
+    "Ltilde": "partial_r^2 + (3/r) partial_r + partial_z^2",
+    "elliptic_relation": "-Ltilde psi1 = omega1",
+    "omega1": "omega^theta / r",
+    "psi1": "psi^theta / r",
+    "u1": "u^theta / r",
+    "v": "partial_z u1"
+  }
+}

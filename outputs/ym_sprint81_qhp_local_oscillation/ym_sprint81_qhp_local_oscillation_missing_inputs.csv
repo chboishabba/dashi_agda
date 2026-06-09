@@ -1,0 +1,5 @@
+input_id,input_name,needed_for,in_repo_status,available_in_repo,replacement_or_source_needed
+M1,FormalOscillationSeminormForGaugeLinks,defines osc_e on gauge-link dependent observables,MISSING_FORMAL_DEFINITION,False,formal oscillation seminorm over gauge links
+M2,FormalQhpBlockingMapDefinition,"defines Q_hp_{ell,k} as a half-plane/spatial Balaban averaging map",MISSING_FORMAL_DEFINITION,False,formal fine/coarse gauge configuration map
+M3,BalabanCMP98AveragingLocalityImported,imports the CMP 98 averaging locality theorem as a typed lemma,MISSING_IMPORTED_THEOREM,False,primary-source CMP 98 locality lemma specialized to repo carriers
+M4,QhpPerLinkInfluenceConeLMinus2k,specializes locality to osc_e(Q_hp)<=C_local*L^(-2k),MISSING_PROOF_OBJECT,False,per-link influence cone bound for Q_hp

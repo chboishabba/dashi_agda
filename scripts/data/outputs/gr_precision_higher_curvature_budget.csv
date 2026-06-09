@@ -1,0 +1,4 @@
+name,observable,coefficient,bound,scale_name,scale_m,alpha_bound_m2,sqrt_alpha_bound_m,alpha_bound_over_scale2,promotion_status,note
+cassini_ppn_gamma_solar_limb,PPN gamma fractional deviation,alpha1_R2_or_alpha2_Ricci2_proxy,2.3e-05,solar_radius,695700000.0,11131965270000.0,3336459.990768659,2.3e-05,NO_PROMOTION,Cassini-style solar-system PPN gamma benchmark; proxy bound only.
+earth_surface_gravity_fractional,fractional Earth weak-field correction,alpha1_R2_or_alpha2_Ricci2_proxy,1e-09,earth_radius,6371000.0,40589.641,201.46870972932746,1e-09,NO_PROMOTION,Engineering target for better-than-baseline Earth gravity correction budget.
+microscope_wep_eta_proxy,weak-equivalence-principle eta proxy,nonminimal_matter_curvature_proxy,1.3e-14,earth_moon_distance,384400000.0,1920.92368,43.82834334081087,1.3e-14,NO_PROMOTION,MICROSCOPE-style WEP benchmark treated as a separate matter-coupling proxy.

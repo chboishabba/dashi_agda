@@ -1,0 +1,62 @@
+[
+  {
+    "bkm_blowup_route": true,
+    "classification": "formal_identity_lower_bound",
+    "clay_promoted": false,
+    "gradient_tracks_omega": true,
+    "next_action": "use only as the formal target case",
+    "obstruction": "none_inside_formal_lower_bound",
+    "rationale": "If u1 remains comparable to omega and partial_z u1 tracks the vorticity scale, the identity partial_z(u1^2)=2 u1 partial_z u1 gives a quadratic source compatible with a BKM route. This is a target case, not an established unconditional estimate.",
+    "scenario_id": "lower_bound_closes",
+    "source_scales_quadratic": true,
+    "u1_ratio_to_omega": "comparable"
+  },
+  {
+    "bkm_blowup_route": false,
+    "classification": "open_required",
+    "clay_promoted": false,
+    "gradient_tracks_omega": false,
+    "next_action": "prove or obstruct AdvectiveConcentrationVsDiffusionBound",
+    "obstruction": "missing_lower_bound_for_u1_and_partial_z_u1",
+    "rationale": "The source identity is exact, but it does not provide a lower bound unless u1 and partial_z u1 are tied to the concentrating vorticity scale.",
+    "scenario_id": "lower_bound_missing",
+    "source_scales_quadratic": false,
+    "u1_ratio_to_omega": "uncontrolled"
+  },
+  {
+    "bkm_blowup_route": false,
+    "classification": "obstruction",
+    "clay_promoted": false,
+    "gradient_tracks_omega": false,
+    "next_action": "record as obstruction to source dominance",
+    "obstruction": "diffusion_outweighs_advective_source",
+    "rationale": "When diffusion controls the candidate concentration scale, the quadratic formal source is not enough to force a BKM-divergent growth route.",
+    "scenario_id": "diffusion_dominates",
+    "source_scales_quadratic": false,
+    "u1_ratio_to_omega": "subcritical"
+  },
+  {
+    "bkm_blowup_route": true,
+    "classification": "formal_primary_open",
+    "clay_promoted": false,
+    "gradient_tracks_omega": true,
+    "next_action": "prove or obstruct AdvectiveConcentrationVsDiffusionBound",
+    "obstruction": "requires_advective_concentration_vs_diffusion_bound",
+    "rationale": "The concentration scenario is the live formal route: the exact product derivative supplies the desired quadratic source only after advection is shown to beat the diffusive bound.",
+    "scenario_id": "advective_concentration_formal",
+    "source_scales_quadratic": true,
+    "u1_ratio_to_omega": "comparable_assumed"
+  },
+  {
+    "bkm_blowup_route": false,
+    "classification": "obstruction_primary",
+    "clay_promoted": false,
+    "gradient_tracks_omega": false,
+    "next_action": "treat as the decisive obstruction alternative",
+    "obstruction": "u1_or_gradient_collapse_kills_quadratic_source",
+    "rationale": "If u1 or partial_z u1 collapses relative to omega, the exact identity remains true but the source loses the quadratic size needed for the proposed BKM blowup route.",
+    "scenario_id": "source_collapse_obstruction",
+    "source_scales_quadratic": false,
+    "u1_ratio_to_omega": "collapses"
+  }
+]

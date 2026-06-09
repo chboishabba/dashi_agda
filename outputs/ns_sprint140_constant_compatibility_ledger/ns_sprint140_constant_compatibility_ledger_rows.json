@@ -1,0 +1,253 @@
+[
+  {
+    "absent_inputs": [
+      "global kappa_concavity constant",
+      "proof that the margin holds at all primary and secondary crossing points",
+      "nonlocal boundary/annulus sign theorem",
+      "time persistence of the margin through the barrier window"
+    ],
+    "assumption_group": "GlobalConcavityOfPsi1",
+    "assumption_id": "GlobalConcavityOfPsi1",
+    "assumption_name": "GlobalConcavityOfPsi1",
+    "blocked_claim": "The favorable concavity margin must be positive on the same space-time crossing set used by peak exclusion and commutator domination.",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_closed": false,
+    "compatibility_condition": "The favorable concavity margin must be positive on the same space-time crossing set used by peak exclusion and commutator domination.",
+    "compatibility_role": "supply_favorable_source_margin",
+    "conditional_only": true,
+    "constants_available": false,
+    "fail_closed_reason": "The ledger has no global kappa_concavity, no universal crossing set theorem, and no persistence proof.",
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "incompatibility_risk": "A local concavity margin can be irrelevant if the first positive v crossing occurs off-center, outside the radius, or after the margin window expires.",
+    "input_status": "required_absent",
+    "missing_input": [
+      "global kappa_concavity constant",
+      "proof that the margin holds at all primary and secondary crossing points",
+      "nonlocal boundary/annulus sign theorem",
+      "time persistence of the margin through the barrier window"
+    ],
+    "present_inputs": [
+      "local center-sign heuristic recorded by Sprint 138",
+      "named global concavity blocker and route fork"
+    ],
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "required_inputs": [
+      "strict concavity or dominance constant kappa_concavity > 0",
+      "scale/window over which partial_z^2 psi1 has the required sign",
+      "lower bound matching u1 amplitude at every first v crossing",
+      "boundary and annular compatibility for the nonlocal psi1 kernel"
+    ],
+    "row_hash": "fd2867315417e43f0e6aa07b2d6f537d3369d57e1e015282d8013839c181478b",
+    "row_id": "concavity_margin",
+    "source_routes": [
+      "ns_sprint138_global_concavity_blocker",
+      "ns_sprint139_barrier_route_fork_classifier"
+    ]
+  },
+  {
+    "absent_inputs": [
+      "scale-uniform R_excl",
+      "scale-uniform T_excl",
+      "proof no shoulder or secondary maximum forms",
+      "compatibility proof that all first crossings lie inside the concavity margin region"
+    ],
+    "assumption_group": "SecondaryPeakExclusion",
+    "assumption_id": "SecondaryPeakExclusion",
+    "assumption_name": "SecondaryPeakExclusion",
+    "blocked_claim": "The exclusion radius/window must cover exactly the first-crossing locations where concavity and commutator constants are invoked.",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_closed": false,
+    "compatibility_condition": "The exclusion radius/window must cover exactly the first-crossing locations where concavity and commutator constants are invoked.",
+    "compatibility_role": "align_crossing_set_radius_and_time_window",
+    "conditional_only": true,
+    "constants_available": false,
+    "fail_closed_reason": "The ledger has no persistent exclusion radius/window and no zero-count theorem for the coupled axisymmetric system.",
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "incompatibility_risk": "If R_excl or T_excl is narrower than the commutator or concavity domain, the conditional assembly can silently use constants at points not covered by peak exclusion.",
+    "input_status": "required_absent",
+    "missing_input": [
+      "scale-uniform R_excl",
+      "scale-uniform T_excl",
+      "proof no shoulder or secondary maximum forms",
+      "compatibility proof that all first crossings lie inside the concavity margin region"
+    ],
+    "present_inputs": [
+      "single-peak initial shape recorded as conditional input",
+      "secondary peak obstruction row from Sprint 138"
+    ],
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "required_inputs": [
+      "exclusion radius R_excl covering every off-primary positive maximum",
+      "time window T_excl matching the concavity and commutator windows",
+      "zero-count or shape-persistence theorem for v=partial_z u1",
+      "axis, boundary, and annular leakage controls for the excluded region"
+    ],
+    "row_hash": "0ec5e68da008db6236f40d322b3501c2caed25cfcc24a4f0053624fb9dcca340",
+    "row_id": "secondary_peak_exclusion_radius_window",
+    "source_routes": [
+      "ns_sprint138_secondary_peak_exclusion",
+      "ns_sprint139_barrier_route_fork_classifier"
+    ]
+  },
+  {
+    "absent_inputs": [
+      "pointwise favorable sign theorem",
+      "quantitative kappa_comm margin",
+      "log-aware domination inequality",
+      "radial-gradient coupling bound compatible with diffusion and strain"
+    ],
+    "assumption_group": "TransportCommutatorDomination",
+    "assumption_id": "TransportCommutatorDomination",
+    "assumption_name": "TransportCommutatorDomination",
+    "blocked_claim": "The positive commutator source, including any Biot-Savart log loss, must be strictly dominated by the same margin budget available from concavity, diffusion, and strain controls.",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_closed": false,
+    "compatibility_condition": "The positive commutator source, including any Biot-Savart log loss, must be strictly dominated by the same margin budget available from concavity, diffusion, and strain controls.",
+    "compatibility_role": "absorb_positive_radial_commutator_with_log_loss",
+    "conditional_only": true,
+    "constants_available": false,
+    "fail_closed_reason": "The ledger names the domination theorem but records no sign, no margin, no log cancellation, and no radial-gradient bound.",
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "incompatibility_risk": "A logarithmic strain loss can exceed a polynomial or local margin unless the constants include the loss explicitly.",
+    "input_status": "required_absent",
+    "missing_input": [
+      "pointwise favorable sign theorem",
+      "quantitative kappa_comm margin",
+      "log-aware domination inequality",
+      "radial-gradient coupling bound compatible with diffusion and strain"
+    ],
+    "present_inputs": [
+      "commutator term isolated in Sprint 138 and Sprint 139",
+      "pointwise and weighted domination hypotheses named"
+    ],
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "required_inputs": [
+      "strict domination margin kappa_comm > 0 for max(-(partial_z u^r) partial_r u1, 0)",
+      "explicit Biot-Savart log-loss exponent or cancellation theorem",
+      "scale relation between kappa_comm and kappa_concavity",
+      "radial-gradient control for partial_r u1 on the active crossing set"
+    ],
+    "row_hash": "0547b5d582a820a993c38e5fc1a5a384f1bb990eddedff18adf017909bad7352",
+    "row_id": "commutator_domination_margin_log_loss",
+    "source_routes": [
+      "ns_sprint138_transport_commutator_budget",
+      "ns_sprint139_commutator_sign_route",
+      "ns_sprint139_barrier_route_fork_classifier"
+    ]
+  },
+  {
+    "absent_inputs": [
+      "closed diffusion sign budget with constants",
+      "closed strain budget with time integral",
+      "combined residual margin after log losses",
+      "operator boundary leakage estimate for the chosen barrier window"
+    ],
+    "assumption_group": "DiffusionStrainBudget",
+    "assumption_id": "DiffusionStrainBudget",
+    "assumption_name": "DiffusionStrainBudget",
+    "blocked_claim": "After all source, commutator, diffusion, and strain terms are put on the same scale, the residual maximum-principle budget must remain strictly favorable.",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_closed": false,
+    "compatibility_condition": "After all source, commutator, diffusion, and strain terms are put on the same scale, the residual maximum-principle budget must remain strictly favorable.",
+    "compatibility_role": "close_total_maximum_principle_budget",
+    "conditional_only": true,
+    "constants_available": false,
+    "fail_closed_reason": "No combined strict residual budget is available, and no scale-uniform strain/log accounting has been supplied.",
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "incompatibility_risk": "The individual conditional assumptions can be too weak in aggregate if diffusion gives no usable margin or strain/log terms consume the entire concavity budget.",
+    "input_status": "required_absent",
+    "missing_input": [
+      "closed diffusion sign budget with constants",
+      "closed strain budget with time integral",
+      "combined residual margin after log losses",
+      "operator boundary leakage estimate for the chosen barrier window"
+    ],
+    "present_inputs": [
+      "first-positive-maximum geometry recorded by Sprint 139",
+      "diffusion and strain terms identified in the v-barrier equation"
+    ],
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "required_inputs": [
+      "diffusion lower or sign budget at first positive v maximum",
+      "strain coefficient upper budget for terms proportional to v",
+      "time-integrable strain bound with any log loss included",
+      "strict residual margin after concavity, commutator, diffusion, and strain are combined"
+    ],
+    "row_hash": "5f0ea38d0aa5a452ad9f03d0c0edf45cc50602b9cf556c6940bce5c2de2da289",
+    "row_id": "diffusion_strain_budget",
+    "source_routes": [
+      "ns_sprint138_transport_commutator_budget",
+      "ns_sprint139_commutator_sign_route"
+    ]
+  },
+  {
+    "absent_inputs": [
+      "simultaneous satisfiability proof for all constants",
+      "cross-window compatibility proof",
+      "strict combined inequality with numerical or symbolic constants",
+      "full Navier-Stokes Clay-class promotion theorem"
+    ],
+    "assumption_group": "ConditionalRegularityAssembly",
+    "assumption_id": "ConditionalRegularityAssembly",
+    "assumption_name": "ConditionalRegularityAssembly",
+    "blocked_claim": "The assembly can only be stated conditionally: if all named margins, radii, windows, log-loss, diffusion, and strain budgets are supplied on one common crossing set, then the route-level barrier may be attempted.",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_closed": false,
+    "compatibility_condition": "The assembly can only be stated conditionally: if all named margins, radii, windows, log-loss, diffusion, and strain budgets are supplied on one common crossing set, then the route-level barrier may be attempted.",
+    "compatibility_role": "require_all_constants_simultaneously",
+    "conditional_only": true,
+    "constants_available": false,
+    "fail_closed_reason": "At least one required input is absent in every analytic row, and the ledger records no simultaneous constant proof.",
+    "full_clay_ns_solved": false,
+    "global_barrier_closed": false,
+    "incompatibility_risk": "The assumptions may be mutually inconsistent or may apply to different radii, time windows, or crossing sets.",
+    "input_status": "conditional_fail_closed",
+    "missing_input": [
+      "simultaneous satisfiability proof for all constants",
+      "cross-window compatibility proof",
+      "strict combined inequality with numerical or symbolic constants",
+      "full Navier-Stokes Clay-class promotion theorem"
+    ],
+    "present_inputs": [
+      "ranked conditional assembly route from Sprint 139",
+      "named fail-closed blockers for each analytic gate"
+    ],
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "required_inputs": [
+      "kappa_concavity, R_excl, T_excl, kappa_comm, log-loss budget, diffusion budget, and strain budget",
+      "single crossing set shared by all assumptions",
+      "strict inequality showing total favorable margin exceeds all adverse terms",
+      "route-to-global regularity bridge separated from Clay promotion"
+    ],
+    "row_hash": "e7917696a524756b13e4793d0f5bd4b7da3a890bde3e478e9dc913d2f3ebc78d",
+    "row_id": "conditional_assembly_compatibility",
+    "source_routes": [
+      "ns_sprint139_barrier_route_fork_classifier",
+      "ns_sprint139_commutator_sign_route"
+    ]
+  }
+]

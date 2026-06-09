@@ -103,11 +103,12 @@ The Paper 1 origins appendix now has a curated local figure pack:
 
 The plate includes stills or static plots for dashifine ultrametric-tree and
 ultrametric-grid diagnostics, dashitest tree-diffusion rollout and detail-band
-diagnostics, a FRACDASH rank-4 branch-density projection, and a dashiRTX
-adaptive-refinement toy frame. These figures are selected because they show the
+diagnostics, a FRACDASH rank-4 branch-density projection, and an adaptive frame
+from the separate `dashiRTX` physically-based raytracing / MDL sparse
+light-transport prototype. These figures are selected because they show the
 geometry behind traversal, refinement, and projection better than prose alone.
-They remain visual provenance only and inherit the non-promotion boundary
-below.
+They remain visual provenance only, do not make `dashiRTX` part of DASHI Agda
+or the adelic Sobolev bridge, and inherit the non-promotion boundary below.
 
 ## Boundary
 

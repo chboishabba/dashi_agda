@@ -1,0 +1,514 @@
+{
+  "edges": [
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint93ContractionDeltaLowerBoundReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint94UniformBoundForAllAReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint95UniformConnectedSchwingerDecayReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint95WC3UniformInAReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint96ContinuumLimitMassGapReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint97NontrivialSU3ContinuumMeasureReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint98ClayStatementBoundaryCandidateReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint99ExternalAcceptanceTerminalBoundaryReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint101ClayBoundaryReconciliationReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint102ProofObligationIndexReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint101ClayBoundaryReconciliationReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint102ProofObligationIndexReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103ContinuumMassGapObligation7.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint96ContinuumLimitMassGapReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint102ProofObligationIndexReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint93ContractionDeltaLowerBoundReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint94UniformBoundForAllAReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint95WC3UniformInAReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint97NontrivialSU3ContinuumMeasureReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint102ProofObligationIndexReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint103ContinuumMassGapObligation7.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint93ContractionDeltaLowerBoundReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint94UniformBoundForAllAReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint93ContractionDeltaLowerBoundReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint95UniformConnectedSchwingerDecayReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint95WC3UniformInAReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint95WC3UniformInAReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint94UniformBoundForAllAReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint96ContinuumLimitMassGapReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint95UniformConnectedSchwingerDecayReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint97NontrivialSU3ContinuumMeasureReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint96ContinuumLimitMassGapReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint98ClayStatementBoundaryCandidateReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint97NontrivialSU3ContinuumMeasureReceipt.agda"
+    },
+    {
+      "from": "DASHI/Physics/Closure/YMSprint99ExternalAcceptanceTerminalBoundaryReceipt.agda",
+      "kind": "agda-import",
+      "to": "DASHI/Physics/Closure/YMSprint98ClayStatementBoundaryCandidateReceipt.agda"
+    }
+  ],
+  "nodes": [
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint100TerminalStateRollupReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint91WC3NewMathReceipt",
+        "DASHI.Physics.Closure.YMSprint92MasterWC3AdjointCorrectionReceipt",
+        "DASHI.Physics.Closure.YMSprint92MasterWC3Condition",
+        "DASHI.Physics.Closure.YMSprint93ContractionDeltaLowerBoundReceipt",
+        "DASHI.Physics.Closure.YMSprint94UniformBoundForAllAReceipt",
+        "DASHI.Physics.Closure.YMSprint95UniformConnectedSchwingerDecayReceipt",
+        "DASHI.Physics.Closure.YMSprint95WC3UniformInAReceipt",
+        "DASHI.Physics.Closure.YMSprint96ContinuumLimitMassGapReceipt",
+        "DASHI.Physics.Closure.YMSprint97NontrivialSU3ContinuumMeasureReceipt",
+        "DASHI.Physics.Closure.YMSprint98ClayStatementBoundaryCandidateReceipt",
+        "DASHI.Physics.Closure.YMSprint99ExternalAcceptanceTerminalBoundaryReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 100
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint101ClayBoundaryReconciliationReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMClayPromotionBoundary",
+        "DASHI.Physics.Closure.YMSprint100TerminalStateRollupReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 101
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint102ProofObligationIndexReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint101ClayBoundaryReconciliationReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 102
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint102ProofObligationIndexReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 103
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint103ContinuumMassGapObligation7.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint96ContinuumLimitMassGapReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 103
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMBlockedL2KPEntropy",
+        "DASHI.Physics.Closure.YMSprint102ProofObligationIndexReceipt",
+        "DASHI.Physics.Closure.YMSprint91WC3NewMathReceipt",
+        "DASHI.Physics.Closure.YMSprint93ContractionDeltaLowerBoundReceipt",
+        "DASHI.Physics.Closure.YMSprint94UniformBoundForAllAReceipt",
+        "DASHI.Physics.Closure.YMSprint95WC3UniformInAReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 103
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint97NontrivialSU3ContinuumMeasureReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 103
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint102ProofObligationIndexReceipt",
+        "DASHI.Physics.Closure.YMSprint103AuthorityInputs",
+        "DASHI.Physics.Closure.YMSprint103ContinuumMassGapObligation7",
+        "DASHI.Physics.Closure.YMSprint103DobrushinWC3Receipt",
+        "DASHI.Physics.Closure.YMSprint103NontrivialSU3ContinuumMeasureObligation8"
+      ],
+      "kind": "agda-module",
+      "sprint": 103
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.ClaySprintEightyYMAnisotropicAssumptionAProofPlanReceipt",
+        "DASHI.Physics.Closure.YMSprint89ScopedAuthorityTransferSpectralGapReceipt",
+        "DASHI.Physics.Closure.YMSprint90ContinuumMassGapWCBoundaryReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 91
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint91WC3NewMathReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 92
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint89ScopedAuthorityTransferSpectralGapReceipt",
+        "DASHI.Physics.Closure.YMSprint90ContinuumMassGapWCBoundaryReceipt",
+        "DASHI.Physics.Closure.YMSprint91WC3NewMathReceipt",
+        "DASHI.Physics.Closure.YMSprint92MasterWC3AdjointCorrectionReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 92
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint93ContractionDeltaLowerBoundReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint92MasterWC3Condition"
+      ],
+      "kind": "agda-module",
+      "sprint": 93
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint94UniformBoundForAllAReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint93ContractionDeltaLowerBoundReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 94
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint95UniformConnectedSchwingerDecayReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint95WC3UniformInAReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 95
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint95WC3UniformInAReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMBlockedL2KPEntropy",
+        "DASHI.Physics.Closure.YMSprint94UniformBoundForAllAReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 95
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint96ContinuumLimitMassGapReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint95UniformConnectedSchwingerDecayReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 96
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint97NontrivialSU3ContinuumMeasureReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint96ContinuumLimitMassGapReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 97
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint98ClayStatementBoundaryCandidateReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint97NontrivialSU3ContinuumMeasureReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 98
+    },
+    {
+      "evidence": "actual repo file",
+      "id": "DASHI/Physics/Closure/YMSprint99ExternalAcceptanceTerminalBoundaryReceipt.agda",
+      "imports": [
+        "DASHI.Physics.Closure.YMSprint98ClayStatementBoundaryCandidateReceipt"
+      ],
+      "kind": "agda-module",
+      "sprint": 99
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint100_terminal_state_rollup/ym_sprint100_terminal_state_rollup_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT100_ROLLUP_ONLY_NO_PROMOTION",
+      "sprint": "100-terminal-state-rollup"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint101_clay_boundary_reconciliation/ym_sprint101_clay_boundary_reconciliation_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT101_RECONCILES_BOUNDARIES_NO_PROMOTION",
+      "sprint": "101-clay-boundary-reconciliation"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint102_proof_obligation_index/ym_sprint102_proof_obligation_index_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT102_INDEXES_RECEIPTS_VS_REAL_PROOFS_NO_PROMOTION",
+      "sprint": "102-proof-obligation-index"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint103_authority_inputs/ym_sprint103_authority_inputs_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT103_INHABITS_AUTHORITY_INPUTS_1_2_3_ONLY_NO_PROMOTION",
+      "sprint": "103-authority-inputs"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint103_completion/ym_sprint103_completion_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT103_FORMAL_RECEIPTS_COMPLETE_NO_EXTERNAL_ACCEPTANCE_NO_CLAY_PROMOTION",
+      "sprint": "103-completion"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint103_nontrivial_su3_obligation8/ym_sprint103_nontrivial_su3_obligation8_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT103_OBLIGATION8_CLOSES_NONTRIVIAL_SU3_MEASURE_ONLY",
+      "sprint": "103-nontrivial-su3-continuum-measure-obligation8"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint103_user_math_completion/ym_sprint103_user_math_completion_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT103_RECORDS_USER_MATH_FOR_ALL_EIGHT_NO_EXTERNAL_PROMOTION",
+      "sprint": "103-user-math-completion"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint91_wc3_new_math/ym_sprint91_wc3_new_math_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "YM_SPRINT91_WC3_NEW_MATH_OPEN_FAIL_CLOSED",
+      "sprint": null
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint92_master_wc3/ym_sprint92_master_wc3_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "MASTER_WC3_SU3_CONSERVATIVE_CLOSES_ARITHMETICALLY_AT_K11",
+      "sprint": null
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint92_master_wc3_adjoint_correction/ym_sprint92_master_wc3_adjoint_correction_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "sprint": null
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint93_contraction_delta_lower_bound/ym_sprint93_contraction_delta_lower_bound_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT93_CLOSES_SCOPED_BALABAN_INPUTS_AND_CONTRACTION_DELTA_LOWER_BOUND_ONLY",
+      "sprint": 93
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint94_uniform_bound_for_all_a/ym_sprint94_uniform_bound_for_all_a_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT94_CLOSES_UNIFORM_ACTIVITY_BOUND_ONLY",
+      "sprint": 94
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint95_uniform_connected_schwinger_decay/ym_sprint95_uniform_connected_schwinger_decay_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT95_CLOSES_UNIFORM_CONNECTED_SCHWINGER_DECAY_ONLY",
+      "sprint": "95-schwinger"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint95_wc3_uniform_in_a/ym_sprint95_wc3_uniform_in_a_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT95_CLOSES_WC3_UNIFORM_IN_A_ONLY",
+      "sprint": 95
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint96_continuum_limit_mass_gap/ym_sprint96_continuum_limit_mass_gap_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT96_CLOSES_CONTINUUM_LIMIT_MASS_GAP_ONLY",
+      "sprint": "96-continuum-limit-mass-gap"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint97_nontrivial_su3_continuum_measure/ym_sprint97_nontrivial_su3_continuum_measure_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT97_CLOSES_NONTRIVIAL_SU3_MEASURE_ONLY",
+      "sprint": "97-nontrivial-su3-continuum-measure"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint98_clay_statement_boundary_candidate/ym_sprint98_clay_statement_boundary_candidate_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT98_CLOSES_INTERNAL_CLAY_STATEMENT_BOUNDARY_ONLY",
+      "sprint": "98-clay-statement-boundary-candidate"
+    },
+    {
+      "evidence": "actual generated summary file",
+      "id": "outputs/ym_sprint99_external_acceptance_terminal_boundary/ym_sprint99_external_acceptance_terminal_boundary_summary.json",
+      "kind": "audit-summary",
+      "route_decision": "SPRINT99_TERMINAL_FAIL_CLOSED_EXTERNAL_ACCEPTANCE_BOUNDARY",
+      "sprint": "99-external-acceptance-terminal-boundary"
+    }
+  ]
+}

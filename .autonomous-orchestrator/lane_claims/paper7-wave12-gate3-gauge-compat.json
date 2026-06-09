@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave12-gate3-gauge-compat.json",
+  "lane": "paper7-wave12/gate3/missingGaugeCompatibilityOfBianchiLaw",
+  "lane_claim": "STRICT SYMBOL-INHABITATION CONTRACT. Use $autonomous-orchestrator only; do not use Codex built-in subagents. Leaf worker unless SECTION MANAGER. Own exactly the named target. Allowed exits only: (1) Agda source diff + targeted validation passes; (2) Agda source diff + exact Agda stderr naming missing upstream type/symbol; (3) empty diff + named authority-boundary escalation with exact receipt shape. Forbidden: docs-only, audit-only, blocker-map-only, scaffold-only, new postulate, weakened theorem, false promotion. Touch only target module and direct imports. Include exact validation command.\nTARGET: DASHI.Physics.Closure.YangMillsFieldEquationObstruction.missingGaugeCompatibilityOfBianchiLaw. Module: DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda. Attempt to inhabit/advance the gauge-compatibility Bianchi law from existing flat plaquette Stokes/Jacobi witness, selected exterior derivative squared-zero witness, finite SU(3) Jacobi residual, and SFGC transport/gauge compatibility records. If blocked, exact Agda stderr naming missing upstream symbol. Validation: agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda",
+  "orchestrator_id": "paper7-wave12-gate3-gauge-compat",
+  "parent_orchestrator_id": "paper7-wave12-mgr-next-hard-symbols",
+  "status_file": "status.paper7-wave12-gate3-gauge-compat.json",
+  "timestamp": "2026-05-19T17:34:32Z"
+}

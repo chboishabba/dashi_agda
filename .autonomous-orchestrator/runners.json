@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "timeout_seconds": 2400,
+    "heartbeat_seconds": 30,
+    "max_log_lines": 2600,
+    "once": true
+  },
+  "runners": {
+    "paper7-gate12-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate1-gate2",
+      "claim": "Paper 7 Gate 1/2 manager proof-blocker wave: implement S8 lane energy/order compatibility or exact first blocker; may spawn up to six leaf workers"
+    },
+    "paper7-gate3-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate3-yang-mills",
+      "claim": "Paper 7 Gate 3 manager proof-blocker wave: extend finite SU(3) support/Jacobi scaffold while preserving Route A/B separation; may spawn up to six leaf workers"
+    },
+    "paper7-gate4-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate4-factorvec-gr",
+      "claim": "Paper 7 Gate 4 manager proof-blocker wave: attack nondegenerate p2-time FactorVec metric signature and Lorentzian inertia; may spawn up to six leaf workers"
+    },
+    "paper7-gate5-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate5-hilbert-stone",
+      "claim": "Paper 7 Gate 5 manager proof-blocker wave: implement PhysicalTraversalStoneUpgradeData precursor, projection algebra, or quotient inner-product surface; may spawn up to six leaf workers"
+    },
+    "paper7-gate6-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate6-dhr-aqft",
+      "claim": "Paper 7 Gate 6 manager proof-blocker wave: construct concrete DHR sector/lane constructors or nonempty carrier predicates; may spawn up to six leaf workers"
+    },
+    "paper7-gate78-manager": {
+      "parent": "paper7-root",
+      "lane": "paper7-gate7-gate8-composition",
+      "claim": "Paper 7 Gate 7/8 manager proof-blocker wave: implement bounded Higgs ordered-norm/argmin or concrete Yukawa input surface; may spawn up to six leaf workers"
+    }
+  }
+}

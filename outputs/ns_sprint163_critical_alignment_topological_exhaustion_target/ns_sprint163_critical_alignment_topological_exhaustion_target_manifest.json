@@ -1,0 +1,35 @@
+{
+  "contract": "ns_sprint163_critical_alignment_topological_exhaustion_target",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint163_critical_alignment_topological_exhaustion_target/ns_sprint163_critical_alignment_topological_exhaustion_target_manifest.json",
+      "sha256": "559f8aea054c5c6141e9ac805865de7076b8ade645fa53802eda29512741e85a"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint163_critical_alignment_topological_exhaustion_target/ns_sprint163_critical_alignment_topological_exhaustion_target.md",
+      "sha256": "ec1724a8e1025d7d71e29d2d77bacb570bf33d436abebac0187e69efb8380265"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint163_critical_alignment_topological_exhaustion_target/ns_sprint163_critical_alignment_topological_exhaustion_target_rows.csv",
+      "sha256": "df46b433eaeff22ca99ec04b20bd83385e51bdcded7b875bac38f53fe52dd779"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint163_critical_alignment_topological_exhaustion_target/ns_sprint163_critical_alignment_topological_exhaustion_target_rows.json",
+      "sha256": "2c7f98883ff71ef6ad52468ad51d8fa5e59cf1161811adc64964bd484f5090fb"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint163_critical_alignment_topological_exhaustion_target/ns_sprint163_critical_alignment_topological_exhaustion_target_summary.json",
+      "sha256": "919026fbd67f3e3e44e8b6812c990ff27eeaff7c171e6ee8aae051fd2cabd27b"
+    }
+  },
+  "generated_at": "2026-06-08T00:00:00Z",
+  "lane": 3,
+  "manifest_hash": "9138a9d7a99cc2fa78db88bd572bd3b5160a3c2cc9b737ac55b62f6150d00e50",
+  "sprint": 163,
+  "validation_passed": true
+}

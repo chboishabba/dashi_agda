@@ -1,0 +1,22 @@
+{
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint116_crow_obstruction_scaling",
+  "delta_over_b_values": [
+    0.4,
+    0.3,
+    0.2,
+    0.1,
+    0.05
+  ],
+  "exit_code": 0,
+  "formula": "(delta_over_b ** 2) / log(1 / delta_over_b)",
+  "limit_to_zero": true,
+  "match_claim": "reference ratios are supplied comparison values, not asserted exact formula outputs",
+  "obstruction_calculation_complete": true,
+  "option_b_crow_route_obstructed": true,
+  "reference_ratios_strictly_decrease": true,
+  "row_count": 5
+}

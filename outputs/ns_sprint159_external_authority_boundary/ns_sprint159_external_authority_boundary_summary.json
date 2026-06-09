@@ -1,0 +1,32 @@
+{
+  "ExternalAuthorityBoundary": true,
+  "FullClayMechanismExhaustion": false,
+  "GeneralSmoothFiniteEnergyNSRegularity": false,
+  "MechanismExhaustionForFullClayNS": false,
+  "SymmetricHouLuoClosureSupport": true,
+  "SymmetricHouLuoRegularityClassClosure": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint159_external_authority_boundary",
+  "control_card": {
+    "C": "Python stdlib emitter writes boundary rows, JSON, CSV, Markdown, and manifest.",
+    "F": "Full Clay/mechanism exhaustion remains false until an external authority or complete mechanism proof closes it.",
+    "G": "ExternalAuthorityBoundary must be true whenever local artifacts do not exhaust full Clay mechanisms.",
+    "L": "symmetric closure support -> authority boundary -> Clay/mechanism guards remain false.",
+    "O": "Worker 2 owns the external authority boundary emitter.",
+    "P": "Use this artifact as the sprint159 boundary witness for external-authority escalation.",
+    "R": "Record symmetric Hou-Luo closure support while keeping Clay and mechanism exhaustion outside local authority.",
+    "S": "Sprint158 closed the symmetric theorem statement and publication packet scope, but not full Clay."
+  },
+  "decision": "external_authority_boundary_recorded_for_non_clay_symmetric_closure",
+  "external_authority_boundary": true,
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay_ns_solved": false,
+  "lane": 2,
+  "promotion_allowed": false,
+  "row_count": 3,
+  "sprint": 159,
+  "summary_hash": "aca5c5bd2b3c3ad063eeb2d9aa4ab14c602c081d0c7a7d004b1bbed62105bbca",
+  "symmetric_hou_luo_closure_support": true,
+  "validation_passed": true
+}

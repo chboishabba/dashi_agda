@@ -1,0 +1,34 @@
+{
+  "contract": "ns_sprint158_theorem_statement_closure",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_theorem_statement_closure/ns_sprint158_theorem_statement_closure_manifest.json",
+      "sha256": "4c51281a1ac8eea57bb209a2da1863785902344732b20fcd161c8db23cf43dae"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_theorem_statement_closure/ns_sprint158_theorem_statement_closure.md",
+      "sha256": "c427a2745e6bf200ae1cf46eaaf5a324655c839dbb98d27b1d56c32a96027006"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_theorem_statement_closure/ns_sprint158_theorem_statement_closure_rows.csv",
+      "sha256": "14760c5cc223e4f30adbd79d73c9c0447b4d4b6f7fc2733499b36e1ca4c3c1e4"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_theorem_statement_closure/ns_sprint158_theorem_statement_closure_rows.json",
+      "sha256": "edd40280cdcdb44c85a538d5217a72526c3dd9e92007f99af62a1dd920d1b412"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_theorem_statement_closure/ns_sprint158_theorem_statement_closure_summary.json",
+      "sha256": "67f7300f790f46622dc87f58e84e3f64bc87b66263b860e9e0111ae5f131982c"
+    }
+  },
+  "lane": 2,
+  "manifest_hash": "45d2df46dbfb28049e4084cbb5ac9cc8552c215913627c163139c0106f0218e5",
+  "sprint": 158,
+  "validation_passed": true
+}

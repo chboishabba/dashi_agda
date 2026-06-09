@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave8-gate12-manager.json",
+  "lane": "paper7-gate1-gate2-carrier-s8",
+  "lane_claim": "Paper 7 wave8 Manager 1, Gate 1/2 Carrier-to-Physics plus S8. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, a targeted Agda validation result, an exact typed/compiler error naming the missing upstream inhabitant, or a named authority-boundary escalation. No roadmap-only output. Worker lanes: PhysicalCarrierCategory; PrimeLaneRepresentationSemantics; CarrierToPhysicsFunctorLaws; PrimeBumpCovarianceAndDepthNaturality; S8NatEnergyHamiltonian; S8GlobalSpectralBridge / SelfAdjointYangMillsHamiltonianOnCarrierQuotient. First resolve the DASHIState.Carrier / FactorVec adapter shape if still blocking. Promotion bits stay false unless upstream receipts are actually inhabited.",
+  "orchestrator_id": "paper7-wave8-gate12-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.paper7-wave8-gate12-manager.json",
+  "timestamp": "2026-05-19T15:46:53Z"
+}

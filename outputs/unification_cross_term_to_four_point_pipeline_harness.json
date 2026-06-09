@@ -1,0 +1,565 @@
+{
+  "dimension": 4,
+  "direct_cross_term_failure_families": [
+    "bad_cross_term_failure"
+  ],
+  "downstream_counterexample_families": [
+    "bad_l1_squared_downstream",
+    "bad_p3_norm_squared_downstream",
+    "bad_coupled_nonquadratic_downstream"
+  ],
+  "families": [
+    {
+      "cross_term_null_pass": true,
+      "expected": "good: cross-term nullity and four-point/parallelogram both pass",
+      "expected_outcome_observed": true,
+      "failed_checks": [],
+      "four_point_cancel_pass": true,
+      "max_abs_four_point_residual": 5.329070518200751e-15,
+      "max_abs_parallelogram_residual": 5.329070518200751e-15,
+      "max_modulo_null_residual": 6.843874359417885e-16,
+      "max_two_homogeneity_error": 0.0,
+      "mean_abs_four_point_residual": 1.1914297673443208e-15,
+      "mean_abs_parallelogram_residual": 1.1914297673443208e-15,
+      "mean_modulo_null_residual": 2.295446034398369e-16,
+      "mean_two_homogeneity_error": 0.0,
+      "modulo_null_linearity_pass": true,
+      "name": "good_quadratic_pipeline",
+      "parallelogram_pass": true,
+      "two_homogeneous_pass": true,
+      "witness_count": 0,
+      "worst_witnesses": []
+    },
+    {
+      "cross_term_null_pass": true,
+      "expected": "bad downstream: cross-term passes, four-point/parallelogram fail",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "four_point_defect_nonzero",
+        "parallelogram_defect_nonzero"
+      ],
+      "four_point_cancel_pass": false,
+      "max_abs_four_point_residual": 29.51134818224518,
+      "max_abs_parallelogram_residual": 29.51134818224518,
+      "max_modulo_null_residual": 6.843874359417885e-16,
+      "max_two_homogeneity_error": 0.0,
+      "mean_abs_four_point_residual": 5.148570030060123,
+      "mean_abs_parallelogram_residual": 5.148570030060123,
+      "mean_modulo_null_residual": 2.295446034398369e-16,
+      "mean_two_homogeneity_error": 0.0,
+      "modulo_null_linearity_pass": true,
+      "name": "bad_l1_squared_downstream",
+      "parallelogram_pass": false,
+      "two_homogeneous_pass": true,
+      "witness_count": 3,
+      "worst_witnesses": [
+        {
+          "combined_error": 29.51134818224518,
+          "cross_term_mod_null_residual": 5.087681048627601e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            2.220446049250313e-16,
+            0.0,
+            4.440892098500626e-16,
+            -1.1102230246251565e-16
+          ],
+          "four_point_residual": 29.51134818224518,
+          "parallelogram_residual": 29.51134818224518,
+          "quotient_x": [
+            1.1881515311318458,
+            1.0905779891004797,
+            -1.0150780468073004,
+            -0.7584975242206955
+          ],
+          "quotient_y": [
+            -1.0904529908495018,
+            -1.012077337164016,
+            -1.089907847664735,
+            0.7453567337062805
+          ],
+          "sample": 194,
+          "two_homogeneity_error": 0.0
+        },
+        {
+          "combined_error": 25.999734199860246,
+          "cross_term_mod_null_residual": 4.965068306494546e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            0.0,
+            -4.440892098500626e-16,
+            2.220446049250313e-16,
+            0.0
+          ],
+          "four_point_residual": 25.999734199860246,
+          "parallelogram_residual": 25.999734199860246,
+          "quotient_x": [
+            0.7544902065118984,
+            1.1164277712587027,
+            -0.7805702566870067,
+            0.5521602344366239
+          ],
+          "quotient_y": [
+            1.0304340751722354,
+            1.169680807720901,
+            0.9382893219977981,
+            -0.9179562290071261
+          ],
+          "sample": 190,
+          "two_homogeneity_error": 0.0
+        },
+        {
+          "combined_error": 23.47564137348529,
+          "cross_term_mod_null_residual": 3.8459253727671276e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            -2.220446049250313e-16,
+            0.0,
+            -2.220446049250313e-16,
+            -2.220446049250313e-16
+          ],
+          "four_point_residual": 23.47564137348529,
+          "parallelogram_residual": 23.47564137348529,
+          "quotient_x": [
+            -0.5954366344176301,
+            -1.0678361103754253,
+            -0.7914186397952121,
+            -0.8415976906332574
+          ],
+          "quotient_y": [
+            1.1089358608121322,
+            0.972001548680612,
+            1.0032685552518232,
+            -0.9601555343075929
+          ],
+          "sample": 232,
+          "two_homogeneity_error": 0.0
+        }
+      ]
+    },
+    {
+      "cross_term_null_pass": true,
+      "expected": "bad downstream: cross-term passes, four-point/parallelogram fail",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "four_point_defect_nonzero",
+        "parallelogram_defect_nonzero"
+      ],
+      "four_point_cancel_pass": false,
+      "max_abs_four_point_residual": 3.2221299515150124,
+      "max_abs_parallelogram_residual": 3.2221299515150124,
+      "max_modulo_null_residual": 6.843874359417885e-16,
+      "max_two_homogeneity_error": 3.552713678800501e-15,
+      "mean_abs_four_point_residual": 0.620119831587782,
+      "mean_abs_parallelogram_residual": 0.620119831587782,
+      "mean_modulo_null_residual": 2.295446034398369e-16,
+      "mean_two_homogeneity_error": 6.153931531027723e-16,
+      "modulo_null_linearity_pass": true,
+      "name": "bad_p3_norm_squared_downstream",
+      "parallelogram_pass": false,
+      "two_homogeneous_pass": true,
+      "witness_count": 3,
+      "worst_witnesses": [
+        {
+          "combined_error": 3.2221299515150146,
+          "cross_term_mod_null_residual": 5.087681048627601e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            2.220446049250313e-16,
+            0.0,
+            4.440892098500626e-16,
+            -1.1102230246251565e-16
+          ],
+          "four_point_residual": 3.2221299515150124,
+          "parallelogram_residual": 3.2221299515150124,
+          "quotient_x": [
+            1.1881515311318458,
+            1.0905779891004797,
+            -1.0150780468073004,
+            -0.7584975242206955
+          ],
+          "quotient_y": [
+            -1.0904529908495018,
+            -1.012077337164016,
+            -1.089907847664735,
+            0.7453567337062805
+          ],
+          "sample": 194,
+          "two_homogeneity_error": 1.7763568394002505e-15
+        },
+        {
+          "combined_error": 2.9023228004863086,
+          "cross_term_mod_null_residual": 2.2887833992611187e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            5.551115123125783e-17,
+            0.0,
+            -2.220446049250313e-16,
+            0.0
+          ],
+          "four_point_residual": 2.902322800486308,
+          "parallelogram_residual": 2.902322800486308,
+          "quotient_x": [
+            -0.5476819009152121,
+            -0.006051719811933642,
+            0.9833133950463979,
+            1.1326339270730077
+          ],
+          "quotient_y": [
+            0.3489909941836411,
+            0.25782257199507974,
+            1.03218432246731,
+            -1.0959688403475096
+          ],
+          "sample": 0,
+          "two_homogeneity_error": 0.0
+        },
+        {
+          "combined_error": 2.7194901697800753,
+          "cross_term_mod_null_residual": 3.885780586188048e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            2.220446049250313e-16,
+            5.551115123125783e-17,
+            -2.220446049250313e-16,
+            2.220446049250313e-16
+          ],
+          "four_point_residual": 2.719490169780073,
+          "parallelogram_residual": 2.719490169780073,
+          "quotient_x": [
+            1.146827435747236,
+            -0.11176263505065842,
+            -0.8566023707998738,
+            -1.014735837605631
+          ],
+          "quotient_y": [
+            1.0272951063630897,
+            -0.3160264339874588,
+            1.1905013105371454,
+            -0.8439731204656924
+          ],
+          "sample": 174,
+          "two_homogeneity_error": 1.7763568394002505e-15
+        }
+      ]
+    },
+    {
+      "cross_term_null_pass": true,
+      "expected": "bad downstream: cross-term passes, four-point/parallelogram fail",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "energy_not_two_homogeneous",
+        "four_point_defect_nonzero",
+        "parallelogram_defect_nonzero"
+      ],
+      "four_point_cancel_pass": false,
+      "max_abs_four_point_residual": 9.548299668786443,
+      "max_abs_parallelogram_residual": 9.548299668786443,
+      "max_modulo_null_residual": 6.843874359417885e-16,
+      "max_two_homogeneity_error": 14.699483654237113,
+      "mean_abs_four_point_residual": 1.2282251715711838,
+      "mean_abs_parallelogram_residual": 1.2282251715711838,
+      "mean_modulo_null_residual": 2.295446034398369e-16,
+      "mean_two_homogeneity_error": 3.050926608174189,
+      "modulo_null_linearity_pass": true,
+      "name": "bad_coupled_nonquadratic_downstream",
+      "parallelogram_pass": false,
+      "two_homogeneous_pass": false,
+      "witness_count": 3,
+      "worst_witnesses": [
+        {
+          "combined_error": 20.583778280789012,
+          "cross_term_mod_null_residual": 1.5700924586837752e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            -1.1102230246251565e-16,
+            0.0,
+            1.1102230246251565e-16,
+            0.0
+          ],
+          "four_point_residual": 9.446939830705132,
+          "parallelogram_residual": 9.446939830705132,
+          "quotient_x": [
+            -0.41089528760615834,
+            -0.6672315148377802,
+            -0.9825834825508776,
+            -0.9762402411552649
+          ],
+          "quotient_y": [
+            0.7361391039424559,
+            1.0446103853133535,
+            0.6418399134925927,
+            0.8876205180708261
+          ],
+          "sample": 192,
+          "two_homogeneity_error": 11.136838450083879
+        },
+        {
+          "combined_error": 20.51659880704971,
+          "cross_term_mod_null_residual": 3.3306690738754696e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            -2.220446049250313e-16,
+            2.220446049250313e-16,
+            0.0,
+            1.1102230246251565e-16
+          ],
+          "four_point_residual": 9.548299668786443,
+          "parallelogram_residual": 9.548299668786443,
+          "quotient_x": [
+            -1.176230670159491,
+            1.0788598827763363,
+            -0.5031190133993652,
+            1.0052878061111021
+          ],
+          "quotient_y": [
+            -1.178268626739123,
+            0.9190417856602766,
+            -1.1698291656111057,
+            -0.6569069400591439
+          ],
+          "sample": 95,
+          "two_homogeneity_error": 10.968299138263266
+        },
+        {
+          "combined_error": 19.204719196415265,
+          "cross_term_mod_null_residual": 2.498001805406602e-16,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            0.0,
+            -1.1102230246251565e-16,
+            2.220446049250313e-16,
+            2.7755575615628914e-17
+          ],
+          "four_point_residual": 7.545772452196076,
+          "parallelogram_residual": 7.545772452196076,
+          "quotient_x": [
+            0.03709655994491401,
+            -0.8887835753619319,
+            -0.8596984053749057,
+            -1.123823464410209
+          ],
+          "quotient_y": [
+            -1.1940582758777152,
+            -0.6010981032313693,
+            -1.1411764023166155,
+            -0.06837770741503157
+          ],
+          "sample": 149,
+          "two_homogeneity_error": 11.65894674421919
+        }
+      ]
+    },
+    {
+      "cross_term_null_pass": true,
+      "expected": "good modulo null: nonlinear null-only channel still passes quotient quadratic diagnostics",
+      "expected_outcome_observed": true,
+      "failed_checks": [],
+      "four_point_cancel_pass": true,
+      "max_abs_four_point_residual": 5.329070518200751e-15,
+      "max_abs_parallelogram_residual": 5.329070518200751e-15,
+      "max_modulo_null_residual": 6.843874359417885e-16,
+      "max_two_homogeneity_error": 0.0,
+      "mean_abs_four_point_residual": 1.1914297673443208e-15,
+      "mean_abs_parallelogram_residual": 1.1914297673443208e-15,
+      "mean_modulo_null_residual": 2.295446034398369e-16,
+      "mean_two_homogeneity_error": 0.0,
+      "modulo_null_linearity_pass": true,
+      "name": "good_modulo_null_bilinear_pipeline",
+      "parallelogram_pass": true,
+      "two_homogeneous_pass": true,
+      "witness_count": 0,
+      "worst_witnesses": []
+    },
+    {
+      "cross_term_null_pass": false,
+      "expected": "bad U-1a: cross-term already leaks into the quotient",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "cross_term_not_null_modulo_null_class",
+        "energy_not_two_homogeneous",
+        "four_point_defect_nonzero",
+        "parallelogram_defect_nonzero"
+      ],
+      "four_point_cancel_pass": false,
+      "max_abs_four_point_residual": 7.360184650866737,
+      "max_abs_parallelogram_residual": 7.360184650866737,
+      "max_modulo_null_residual": 0.7073428637315741,
+      "max_two_homogeneity_error": 5.943402874737448,
+      "mean_abs_four_point_residual": 0.8746520634861376,
+      "mean_abs_parallelogram_residual": 0.8746520634861376,
+      "mean_modulo_null_residual": 0.22145113384897636,
+      "mean_two_homogeneity_error": 0.8328208212431364,
+      "modulo_null_linearity_pass": false,
+      "name": "bad_cross_term_failure",
+      "parallelogram_pass": false,
+      "two_homogeneous_pass": false,
+      "witness_count": 3,
+      "worst_witnesses": [
+        {
+          "combined_error": 12.337274772516814,
+          "cross_term_mod_null_residual": 0.663366105342047,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            0.5599117374803023,
+            0.3557434974085468,
+            1.1102230246251565e-16,
+            2.220446049250313e-16
+          ],
+          "four_point_residual": 7.360184650866737,
+          "parallelogram_residual": 7.360184650866737,
+          "quotient_x": [
+            -0.9350705223869902,
+            -0.9316117685311717,
+            0.5425606936864775,
+            0.968161474582746
+          ],
+          "quotient_y": [
+            1.1189577460658724,
+            -0.04205365845860909,
+            0.7841602817062252,
+            -0.9062400402189086
+          ],
+          "sample": 88,
+          "two_homogeneity_error": 4.313724016308029
+        },
+        {
+          "combined_error": 11.169529297000711,
+          "cross_term_mod_null_residual": 0.6638866944710223,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            0.4966837650869752,
+            0.4405119528397463,
+            4.440892098500626e-16,
+            -1.1102230246251565e-16
+          ],
+          "four_point_residual": 7.2357153263331195,
+          "parallelogram_residual": 7.2357153263331195,
+          "quotient_x": [
+            1.1881515311318458,
+            1.0905779891004797,
+            -1.0150780468073004,
+            -0.7584975242206955
+          ],
+          "quotient_y": [
+            -1.0904529908495018,
+            -1.012077337164016,
+            -1.089907847664735,
+            0.7453567337062805
+          ],
+          "sample": 194,
+          "two_homogeneity_error": 3.2699272761965688
+        },
+        {
+          "combined_error": 9.030936181954996,
+          "cross_term_mod_null_residual": 0.5495294343314988,
+          "cross_term_null": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "cross_term_quotient": [
+            0.4669234126358892,
+            0.28976736518999535,
+            5.551115123125783e-17,
+            0.0
+          ],
+          "four_point_residual": 6.186255235550682,
+          "parallelogram_residual": 6.186255235550682,
+          "quotient_x": [
+            -0.7793342810067267,
+            -0.4538881982436368,
+            -0.12544156634842718,
+            0.8642058884045511
+          ],
+          "quotient_y": [
+            1.0935704706076013,
+            0.31129930415208085,
+            -0.3060432379205441,
+            -0.8533060964336543
+          ],
+          "sample": 100,
+          "two_homogeneity_error": 2.295151512072815
+        }
+      ]
+    }
+  ],
+  "good_families": [
+    "good_quadratic_pipeline",
+    "good_modulo_null_bilinear_pipeline"
+  ],
+  "ok": true,
+  "pipeline_summary": {
+    "cross_term_nullity_alone_implies_four_point": false,
+    "cross_term_nullity_alone_implies_parallelogram": false,
+    "direct_cross_term_failure_detected": true,
+    "good_modulo_null_pipeline_passes": true,
+    "good_quadratic_pipeline_passes": true,
+    "modulo_null_linearity_is_modeled_by_quotient_residual": true,
+    "multiple_downstream_counterexamples_detected": true,
+    "u1a_cross_term_nullity_is_necessary": true
+  },
+  "promotion": {
+    "clay_promotion": false,
+    "terminal_promotion": false,
+    "unification_promotion": false
+  },
+  "samples": 256,
+  "seed": 20260609,
+  "tolerance": 1e-09
+}

@@ -1,0 +1,32 @@
+{
+  "authority_inputs": [
+    {
+      "authority_input_inhabited": true,
+      "lemma": "BalabanCMP98LocalOscillationBound",
+      "proof_argument_present": true,
+      "scope": "CMP98 local oscillation estimate for Q_hp",
+      "source_present": true
+    },
+    {
+      "authority_input_inhabited": true,
+      "lemma": "BalabanCMP98AveragingKernelIsProbability",
+      "proof_argument_present": true,
+      "scope": "CMP98 Haar-convolution probability kernel giving C_avg <= 1",
+      "source_present": true
+    },
+    {
+      "authority_input_inhabited": true,
+      "lemma": "BalabanCMP116PolymerMassBound",
+      "proof_argument_present": true,
+      "scope": "CMP116 small-field polymer positive mass bound",
+      "source_present": true
+    }
+  ],
+  "clay_yang_mills_promoted": false,
+  "downstream_sprint102_obligations_still_open": true,
+  "empty_data_types_introduced": false,
+  "implemented_authority_input_count": 3,
+  "implemented_only_inputs_1_to_3": true,
+  "route_decision": "SPRINT103_INHABITS_AUTHORITY_INPUTS_1_2_3_ONLY_NO_PROMOTION",
+  "sprint": "103-authority-inputs"
+}

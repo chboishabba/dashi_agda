@@ -1,0 +1,115 @@
+[
+  {
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Closes the concentrated Hou-Luo branch inside the axisymmetric symmetry class, not the full Clay problem.",
+    "closure_condition": "A uniform PDE comparison rules out finite-time BKM blowup for all beta>0 axisymmetric-with-swirl data, including large Re.",
+    "dependencies": [
+      "Sprint130:PureDiffusionU1MaximumPrinciple",
+      "Sprint130:ViscousDominanceNearBlowup",
+      "Sprint131:RigorousSourceUpperBound",
+      "Sprint131:LocalizedViscousLowerComparison",
+      "Sprint131:HouLuoObstructionAssembly",
+      "Sprint132:GapInventoryClassifier"
+    ],
+    "existing_support": [
+      "u1 has an exact maximum principle and no autonomous source",
+      "localized beta>0 comparison gives viscous/source divergence",
+      "Sprint132 isolates large-Re axisymmetric data as an open gate"
+    ],
+    "finite_gate": true,
+    "full_clay_ns_solved": false,
+    "gate_id": "large_re_axisymmetric_transient_control",
+    "gate_name": "large_re_axisymmetric_transient_control",
+    "key_estimate_or_claim": "For beta>0 and nu>0, axisymmetric swirl source growth cannot outrun localized diffusion uniformly over large Reynolds data.",
+    "missing_lemmas": [
+      "NoLogAxisymmetricBiotSavartUniform",
+      "LargeReAxisymmetricTransientControl"
+    ],
+    "proof_objective": "Upgrade the moderate-Re Hou-Luo viscous obstruction to a full PDE estimate that prevents a large-Re transient from reaching BKM divergence before viscosity dominates.",
+    "status": "open",
+    "target": "AxisymmetricNSWithSwirlGlobalRegularity"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Closes the non-concentrating axisymmetric boundary case only.",
+    "closure_condition": "A beta=0 continuation estimate shows the marginal source term cannot force BKM divergence from finite-energy smooth data.",
+    "dependencies": [
+      "Sprint130:RouteForkClassifier",
+      "Sprint131:RigorousSourceUpperBound",
+      "Sprint132:GapInventoryClassifier"
+    ],
+    "existing_support": [
+      "the source remains exactly partial_z(u1^2)=2 u1 partial_z u1",
+      "u1 remains bounded by its initial Linf norm for nu>0",
+      "Sprint132 names beta=0 as a separate open marginal gate"
+    ],
+    "finite_gate": true,
+    "full_clay_ns_solved": false,
+    "gate_id": "marginal_beta_zero_analysis",
+    "gate_name": "marginal_beta_zero_analysis",
+    "key_estimate_or_claim": "Large-scale shear without shrinking delta cannot sustain BKM growth unless a new nonlocal axisymmetric amplification estimate is available.",
+    "missing_lemmas": [
+      "MarginalScalingCaseAnalysis",
+      "LargeScaleShearCannotForceBKM"
+    ],
+    "proof_objective": "Analyze the no-concentration boundary regime where beta=0 and the Sprint130/131 viscous dominance ratio no longer diverges.",
+    "status": "open",
+    "target": "AxisymmetricNSWithSwirlGlobalRegularity"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Provides a genuine subcase theorem for Clay without claiming universal 3D exhaustion.",
+    "closure_condition": "Every axisymmetric-with-swirl blowup candidate is forced into one of the already closed gates G1 or G2.",
+    "dependencies": [
+      "Sprint132:NSPartialRegularityFromObstructionTower",
+      "Sprint132:MechanismExhaustionAudit",
+      "Sprint132:GapInventoryClassifier"
+    ],
+    "existing_support": [
+      "Sprint132 shows full 3D mechanism exhaustion is structurally blocked",
+      "axisymmetric symmetry removes non-axisymmetric WBF and triad lanes",
+      "the target has finite gates rather than open-ended route enumeration"
+    ],
+    "finite_gate": true,
+    "full_clay_ns_solved": false,
+    "gate_id": "axisymmetric_symmetry_class_exhaustion",
+    "gate_name": "axisymmetric_symmetry_class_exhaustion",
+    "key_estimate_or_claim": "Within the axisymmetric-with-swirl class, potential singular sequences admit a finite scaling dichotomy: concentrated beta>0 or marginal beta=0.",
+    "missing_lemmas": [
+      "AxisymmetricScalingDichotomy",
+      "AxisymmetricClassExhaustionTheorem"
+    ],
+    "proof_objective": "Replace full 3D mechanism enumeration with an axisymmetric structure theorem showing every axisymmetric BKM-divergent scenario enters either beta>0 concentration or beta=0 marginal scaling after suitable localization.",
+    "status": "open",
+    "target": "AxisymmetricNSWithSwirlGlobalRegularity"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "clay_relevance": "Would be a major Clay-adjacent subcase, still strictly weaker than full 3D Navier-Stokes regularity.",
+    "closure_condition": "G1, G2, and G3 are closed with compatible hypotheses and no remaining large-data axisymmetric exception.",
+    "dependencies": [
+      "Sprint130:PureDiffusionU1MaximumPrinciple",
+      "Sprint131:HouLuoObstructionAssembly",
+      "Sprint132:NSPartialRegularityFromObstructionTower",
+      "G1:beta_gt_0_large_re_pde_control",
+      "G2:beta_eq_0_marginal_case",
+      "G3:axisymmetric_class_exhaustion"
+    ],
+    "existing_support": [
+      "local smooth continuation is governed by BKM-type criteria",
+      "the axisymmetric swirl PDE has exact u1 and omega1 equations",
+      "Sprint130-132 surfaces provide named support for the assembly map"
+    ],
+    "finite_gate": true,
+    "full_clay_ns_solved": false,
+    "gate_id": "axisymmetric_swirl_global_assembly",
+    "gate_name": "axisymmetric_swirl_global_assembly",
+    "key_estimate_or_claim": "No axisymmetric-with-swirl solution can realize finite-time BKM divergence once the large-Re, marginal, and exhaustion gates are closed.",
+    "missing_lemmas": [
+      "AxisymmetricContinuationAssembly"
+    ],
+    "proof_objective": "Assemble gates G1-G3 with standard local existence and BKM continuation into global regularity for axisymmetric NS with swirl.",
+    "status": "blocked_on_prior_gates",
+    "target": "AxisymmetricNSWithSwirlGlobalRegularity"
+  }
+]

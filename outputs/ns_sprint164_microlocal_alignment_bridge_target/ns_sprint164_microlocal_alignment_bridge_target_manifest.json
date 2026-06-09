@@ -1,0 +1,35 @@
+{
+  "contract": "ns_sprint164_microlocal_alignment_bridge_target",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_microlocal_alignment_bridge_target/ns_sprint164_microlocal_alignment_bridge_target_manifest.json",
+      "sha256": "41b7b9b24af58e04a614d49628b9d8d37e389a5f62aef2bf475f55a7cc1c25e4"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_microlocal_alignment_bridge_target/ns_sprint164_microlocal_alignment_bridge_target.md",
+      "sha256": "a7579de6a9c3f4f2d43362682472b123bfa0e0d46d2ed3cdc6d5951235fb2d9c"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_microlocal_alignment_bridge_target/ns_sprint164_microlocal_alignment_bridge_target_rows.csv",
+      "sha256": "6a73ccb13a653306fa98d4d4f86c5e694de5e10e6ea19eb6e3ba62df9471032d"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_microlocal_alignment_bridge_target/ns_sprint164_microlocal_alignment_bridge_target_rows.json",
+      "sha256": "9f7fcc15cf5a0b42721ee9fcad84878ed483fa96c2dc3c5fe9021e500326f453"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint164_microlocal_alignment_bridge_target/ns_sprint164_microlocal_alignment_bridge_target_summary.json",
+      "sha256": "56fe1bf4b12284d2a03d5d86a155f962bb4cd0582aa0b6a4d72efb18d21d3cc2"
+    }
+  },
+  "generated_at": "2026-06-08T00:00:00Z",
+  "lane": 2,
+  "manifest_hash": "ec9ccd3cf6038bd6fedf64b7a06643b8b3b75fd11b158bf225d0d8aa72af7038",
+  "sprint": 164,
+  "validation_passed": true
+}

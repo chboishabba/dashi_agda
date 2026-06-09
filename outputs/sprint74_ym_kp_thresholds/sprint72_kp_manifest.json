@@ -1,0 +1,12 @@
+{
+  "clay_yang_mills_promoted": false,
+  "contract": "ym_sprint74_kp_threshold_plots",
+  "outputs": {
+    "constants_csv": "sprint72_kp_constants.csv",
+    "eta_threshold_png": "sprint72_eta_threshold.png",
+    "residual_leakage_tolerance_png": "sprint72_residual_leakage_tolerance.png",
+    "summary_json": "sprint72_kp_summary.json"
+  },
+  "promotion_status": "NO_PROMOTION_SPRINT74_KP_THRESHOLD_DIAGNOSTIC",
+  "route_decision": "KP_ARITHMETIC_CLOSED_TRANSFER_MATRIX_COMPATIBILITY_OPEN"
+}

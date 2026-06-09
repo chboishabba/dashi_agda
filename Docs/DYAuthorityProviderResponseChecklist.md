@@ -5,6 +5,8 @@ Status: `provider-answerable checklist; non-promoting`
 Owner: `Maxwell-Faraday / W4-W5 shared PDF lane`
 External request: `AcceptedDYLuminosityConventionAuthority`
 Example packet: `scripts/data/authority_packet.example.json`
+Shape-only adapter schema:
+`scripts/data/authority_packet.accepted_replacement.schema.json`
 
 This checklist turns the external
 `AcceptedDYLuminosityConventionAuthority` request into a one-pass provider
@@ -151,6 +153,62 @@ shape:
 The placeholder values above are a shape illustration, not authority. A real
 adapter packet must replace every empty string, every zero, and the empty list
 with provider-supplied values before it can be consumed.
+
+## Executable Adapter Contract
+
+`scripts/dy_luminosity_from_authority_packet.py` is the narrow bridge from an
+external provider answer to W4/W5 runner inputs. It accepts only `status`
+values `accepted` or `replacement`; schema conformance alone is not authority
+and does not promote W4 or W5.
+
+The canonical packet shape is captured in
+`scripts/data/authority_packet.accepted_replacement.schema.json`. For adapter
+ingestion, the provider packet must carry these nonempty authority fields:
+
+```text
+status
+provider_name
+provider_role
+pdf_set_version
+lhapdf_id
+member_id
+grid_checksum
+scale_convention
+rapidity_window
+mass_bin_rule
+flavour_weight_rule
+integration_method
+source_citation
+attestation_no_manual_overfit
+```
+
+The canonical schema requires an explicit `luminosities` object. The adapter
+also has a top-level fallback for the same aliases when no `luminosities`
+object is present. The accepted input aliases are:
+
+| Runner input | Accepted packet field names |
+|---|---|
+| W5 denominator `L43` | `L43`, `L_M43_Y43`, `L_50_76`, `L_M50_76`, `luminosity_43` |
+| W5 numerator `L45` | `L45`, `L_M45_Y45`, `L_106_170`, `L_M106_170`, `luminosity_45` |
+| W4 per-bin vector | `W4_per_bin`, `W4_per_bin_luminosities`, `W4_luminosity_bins`, `W4_luminosities`, `L_W4_bins`, `z_peak_per_bin_luminosities` |
+
+`L43` and `L45` must be positive finite numbers. The W4 vector must be a
+nonempty list of positive finite numbers, or objects containing one positive
+finite `luminosity`, `L`, or `value` field.
+
+When valid, the adapter emits:
+
+- W4 luminosity CSV with columns `index,luminosity`;
+- W4 authority JSON with `status`, `pdfSet`, `lhapdfId`, `gridChecksum`,
+  `scaleConvention`, `rapidityConvention`, `massBinRule`, `flavourWeights`,
+  `interpolationIntegration`, `source`, and `provenance`;
+- W5 provider packet with `status`,
+  `accepted_dy_luminosity_convention.{pdf_set,lhapdf_id,grid_checksum,factorization_scale,rapidity_window,mass_bin_integration,flavour_weight_rule,source,provenance}`,
+  and `luminosities.{L_M45_Y45,L_M43_Y43}`.
+
+`member_id` is required at intake and is retained in the adapter artifact's
+authority/provenance fields, even though the current W4/W5 runner JSON maps do
+not pass it through as a named runner field.
 
 ## No-Manual-Overfit Attestation
 

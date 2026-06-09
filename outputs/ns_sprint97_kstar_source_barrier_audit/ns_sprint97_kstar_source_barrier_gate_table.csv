@@ -1,0 +1,10 @@
+gate,expected,actual,passed,status
+kStarCollapseSourceBarrierLedgerClosed,true,true,True,PASS
+sameSourceCollapseMechanismAvailable,false,false,True,PASS
+finiteTimeKStarCollapseClosed,false,false,True,PASS
+optionBBlowupConstructionClosed,false,false,True,PASS
+clayNavierStokesPromoted,false,false,True,PASS
+LowModeEnergyConcentrationDynamics,present,present,True,PASS
+ViscousDampingDefeatEstimate,present,present,True,PASS
+LerayCompatibleCollapseTrajectory,present,present,True,PASS
+SingularityExtractionWithoutBKMOrSerrin,present,present,True,PASS

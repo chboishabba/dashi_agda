@@ -1,0 +1,33 @@
+{
+  "cases": [
+    {
+      "final_D": 1.729945490962999e-21,
+      "monotone_nonincreasing": true,
+      "q": 0.3333333333333333,
+      "theta": 0.5
+    },
+    {
+      "final_D": 1.3169032024925605e-22,
+      "monotone_nonincreasing": true,
+      "q": 0.3181818181818181,
+      "theta": 0.5
+    },
+    {
+      "final_D": 2.5033125779261547e-18,
+      "monotone_nonincreasing": true,
+      "q": 0.40298507462686567,
+      "theta": 0.6
+    }
+  ],
+  "contract": "A9 CKN/BKM closure diagnostic",
+  "diagnostic_only": true,
+  "promotion": {
+    "a9_proved": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "summary": {
+    "all_cases_decay_below_tiny_threshold": true,
+    "tiny_threshold": 0.001
+  }
+}

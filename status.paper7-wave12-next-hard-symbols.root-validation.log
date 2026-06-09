@@ -1,0 +1,13 @@
+[2026-05-19T17:41:56Z] root validation log placeholder for paper7-wave12-next-hard-symbols
+No targeted validation has been tee'd into this artifact yet.
+### Wave12 root validation
+2026-05-19T17:41:56Z
+$ agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda
+Checking DASHI.Physics.Closure.YangMillsFieldEquationObstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda).
+   Checking DASHI.Physics.Closure.GRDiscreteBianchiFiniteR (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/GRDiscreteBianchiFiniteR.agda).
+  Checking DASHI.Physics.Closure.GRDiscreteRicciCandidateFromCurvature (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda).
+   Checking DASHI.Physics.Closure.DiscreteBianchiIdentitySurface (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DiscreteBianchiIdentitySurface.agda).
+  Checking DASHI.Physics.Closure.DiscreteStokesBianchiObstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DiscreteStokesBianchiObstruction.agda).
+ Checking DASHI.Physics.Closure.DiscreteBianchiIdentityReceipt (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DiscreteBianchiIdentityReceipt.agda).
+$ agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda
+$ git diff --check

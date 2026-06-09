@@ -1,0 +1,92 @@
+@startuml Paper8UnificationTower
+title Paper 8 tower schema and gate mapping
+
+skinparam backgroundColor #ffffff
+skinparam handwritten false
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam defaultFontName Helvetica
+skinparam defaultTextAlignment center
+skinparam rectangle {
+  BorderColor #2b2f36
+  BackgroundColor #f7f8fa
+  RoundCorner 4
+}
+skinparam ArrowColor #43515f
+
+rectangle "T0\nfinite local control" as T0
+rectangle "T1\ndepth-indexed family" as T1
+rectangle "T2\nlift attempt" as T2
+rectangle "T3\ncontinuum obligation" as T3
+rectangle "T4\nauthority boundary" as T4
+
+T0 --> T1
+T1 --> T2
+T2 --> T3
+T3 --> T4
+
+package "Millennium lanes" {
+  rectangle "YM\nfinite gap and gauge receipts" as YM0
+  rectangle "YM\npro-object / depth family" as YM1
+  rectangle "YM\nHamiltonian colimit lift" as YM2
+  rectangle "YM\nClay mass-gap obligation" as YM3
+  rectangle "YM\nauthority receipts\nBalaban / constructive / Gribov" as YM4
+
+  rectangle "NS\nweak solution, energy,\nvorticity, BKM rungs" as NS0
+  rectangle "NS\nregularity tower" as NS1
+  rectangle "NS\nregularity lift attempt" as NS2
+  rectangle "NS\ncontinuum smoothness obligation" as NS3
+  rectangle "NS\nClay regularity boundary" as NS4
+}
+
+YM0 --> YM1
+YM1 --> YM2
+YM2 --> YM3
+YM3 --> YM4
+NS0 --> NS1
+NS1 --> NS2
+NS2 --> NS3
+NS3 --> NS4
+
+T0 ..> YM0
+T1 ..> YM1
+T2 ..> YM2
+T3 ..> YM3
+T4 ..> YM4
+T0 ..> NS0
+T1 ..> NS1
+T2 ..> NS2
+T3 ..> NS3
+T4 ..> NS4
+
+package "Gate map" {
+  rectangle "Gate 4\nGR / Wald / Friedmann\nno cosmology promotion" as G4
+  rectangle "Gate 5\nP5 prime residual and\nHilbert / Stone / GNS boundary" as G5
+  rectangle "Gate 6\nDHR / DR / Tannaka\nconditional only" as G6
+  rectangle "Gate 7\nYukawa / CKM / Cabibbo\ncarrier diagnostics" as G7
+  rectangle "Gate 8\ncomposition receipts\nno terminal promotion" as G8
+}
+
+G4 --> G8 : GR compatibility input
+G5 --> G8 : physical Hilbert / Hamiltonian input
+G6 --> G8 : sector and fibre-functor input
+G7 --> G8 : matter / CKM diagnostic input
+YM2 --> G8 : YM Hamiltonian frontier
+NS2 --> G8 : tower analogy only
+
+note right of G8
+  CrossGateCompositionTheorems
+  CrossGateHamiltonianCompatibilityReceipt
+  MillenniumTowerSchemaReceipt
+
+  terminalPromotion = false
+  fullUnification = false
+end note
+
+legend right
+  Solid arrows: staged dependency or tower order
+  Dotted arrows: schema instantiation
+  All lanes are fail-closed at continuum or authority promotion
+endlegend
+
+@enduml

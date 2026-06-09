@@ -1,0 +1,37 @@
+{
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint155_model_validity_assembler",
+  "decision": "fail_closed_model_validity_not_promoted",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_manifest.json",
+      "sha256": "bf43693332894816ec3721ce08bfe25e1299af06c0c769b82e6857ec1a63383c"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler.md",
+      "sha256": "d4728871986a0edbf0614207c875793d84e248ed157d4203f3115cc7d415608b"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_rows.csv",
+      "sha256": "b2f0f1c7b2d7d959f24b660c02fbe1e0270783014d6b36c900b787f9e4281d97"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_rows.json",
+      "sha256": "3274991f5ec6727a2d940c24bf5f18167f47a303b12d4ca447a9e505dcc7ec06"
+    },
+    "summary": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_summary.json",
+      "sha256": "273c705e3a69b06ba080ca567c7b9fc4d3dc1137f9aad6a450657b821589849c"
+    }
+  },
+  "full_clay_can_promote": false,
+  "lane": 4,
+  "manifest_hash": "4798ecfe6595ebfbe10fcfc7d193d7569d002865aa524c774a6d677c7a3c9353",
+  "sprint": 155,
+  "validation_passed": true
+}

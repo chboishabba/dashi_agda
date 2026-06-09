@@ -1,0 +1,56 @@
+[
+  {
+    "clay_progress_estimate": "approximately_0_percent",
+    "name": "A priori estimates",
+    "next_calculation": "No route-specific calculation currently changes the sharp energy-enstrophy barrier; use only as a comparison baseline.",
+    "obstruction_or_gap": "The enstrophy estimate dZ/dt <= -nu D + C Z^3 is sharp in the Ladyzhenskaya class, so energy-only improvement requires extra structure outside the standard estimate.",
+    "programme_relevance": "Provides the baseline obstruction against proving Clay by routine enstrophy closure; supports the shift away from pure estimate sharpening.",
+    "status_for_full_clay": "exhausted_in_known_energy_enstrophy_class",
+    "strategy_id": "S1"
+  },
+  {
+    "clay_progress_estimate": "approximately_0_percent_until_large_data_bound",
+    "name": "Critical space contraction",
+    "next_calculation": "Find an energy-derived bound in a Serrin-Ladyzhenskaya class or prove that the programme's structural quantities control a critical norm without smallness.",
+    "obstruction_or_gap": "Fujita-Kato and Koch-Tataru control small critical data, while the Escauriaza-Seregin-Sverak L3 blowup criterion says that a global L3 bound would already close the Clay problem.",
+    "programme_relevance": "Clarifies why Sprint outputs cannot be promoted through a critical-norm route unless they produce an energy-derived large-data Serrin or L3 estimate.",
+    "status_for_full_clay": "circular_for_large_data",
+    "strategy_id": "S2"
+  },
+  {
+    "clay_progress_estimate": "nonzero_only_if_monotonicity_and_bkm_control_close",
+    "name": "Monotone quantity plus comparison",
+    "next_calculation": "Differentiate a vorticity-correlation functional Q[u] with kernel K(x-y)|x-y|^{-alpha}, isolate vortex-stretching, transport, pressure-free cancellations, and viscous terms, then test whether stretching has a coercive negative sign.",
+    "obstruction_or_gap": "A viable Q[u] must be finite for every smooth finite-energy datum, monotone along NS flow, and strong enough to bound BKM-critical vorticity; no such quantity is currently proved.",
+    "programme_relevance": "Directly uses the obstruction tower's sign audits: the WBF flux has no global sign, but a vorticity-correlation integral may exploit alignment geometry in the Constantin-Fefferman sense.",
+    "status_for_full_clay": "most_promising_unexplored_universal_route",
+    "strategy_id": "S3"
+  },
+  {
+    "clay_progress_estimate": "approximately_0_percent_without_candidate_certificate",
+    "name": "Convexity and duality",
+    "next_calculation": "Formulate a concrete dual certificate candidate and check whether its defect is controlled by energy plus viscosity.",
+    "obstruction_or_gap": "There is no known convex dual certificate or relaxation whose large-data free-space NS optimum yields global smoothness.",
+    "programme_relevance": "Currently peripheral to the repo's WBF and AXS outputs; useful only if a dual quantity is connected to recorded algebraic obstructions.",
+    "status_for_full_clay": "conceptual_no_concrete_large_data_route",
+    "strategy_id": "S4"
+  },
+  {
+    "clay_progress_estimate": "positive_for_clay_subcase_zero_for_full_clay_promotion",
+    "name": "Structure theorem",
+    "next_calculation": "Pivot to axisymmetric NS with swirl: close large-Re beta>0 via PDE-level comparison, analyze beta=0 large-scale shear, and prove axisymmetric-class exhaustion using the reduced swirl/vorticity system.",
+    "obstruction_or_gap": "Axisymmetric no-swirl regularity has structure theorems, but axisymmetric with swirl still needs large-Re beta>0 control, the beta=0 marginal case, and an exhaustion theorem inside the symmetry class.",
+    "programme_relevance": "This is the strongest direct use of CLASS AXS work: Sprint 130-132 artifacts already isolate u1 diffusion, viscous dominance candidates, and the named no-log Biot-Savart gap.",
+    "status_for_full_clay": "live_for_axisymmetric_with_swirl_not_full_clay",
+    "strategy_id": "S5"
+  },
+  {
+    "clay_progress_estimate": "approximately_0_percent_until_new_criterion",
+    "name": "Conditional reduction",
+    "next_calculation": "Search for a criterion below Serrin/BKM whose hypothesis is controlled by energy, viscosity, and a programme structural quantity already emitted in Sprint 130-132 surfaces.",
+    "obstruction_or_gap": "Known continuation criteria such as Serrin and BKM are not verified from energy alone; a new criterion must be both strictly weaker to verify and strong enough to continue smooth solutions.",
+    "programme_relevance": "Could absorb WBF/AXS obstructions if they imply a universal regularity criterion, but current outputs remain route-specific.",
+    "status_for_full_clay": "open_no_easier_energy_verifiable_criterion",
+    "strategy_id": "S6"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "artifact_complete": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint151_localized_enstrophy_identity",
+  "control_card": {
+    "C": "The artifact is one stdlib Python emitter that writes rows JSON, rows CSV, summary JSON, Markdown, and a manifest through an atomic directory replacement.",
+    "F": "Missing: rigorous localized identity closure with cutoff terms, compatible annular/boundary constants, nonlocal velocity closure, scaling-coupled width ODE, finite symmetric Hou-Luo BKM, and Clay NS.",
+    "G": "Validation passes only when all eleven rows exist, all requested proof and promotion flags are false, and the Clay guard blocks promotion.",
+    "L": "Rows are fixed by required IDs, hash-stamped with sorted JSON, and validated against exact fail-closed flags.",
+    "O": "Lane 2 owns scripts/ns_sprint151_localized_enstrophy_identity.py and outputs/ns_sprint151_localized_enstrophy_identity/.",
+    "P": "Use this as Sprint 151 accounting for missing localized enstrophy inputs; do not cite it as an Agda theorem, analytic closure, BKM finiteness proof, or Clay solution.",
+    "R": "Emit a deterministic localized-enstrophy identity ledger with rows for definition, omega1 input, cutoff, flux, diffusion, leakage, stretching, Biot-Savart closure, constants, width-ODE extraction, and Clay guard.",
+    "S": "The formal identity shape is ledgered, but cutoff leakage, nonlocal Biot-Savart control, simultaneous constants, and width-ODE validity remain open."
+  },
+  "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+  "files": [
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint151_localized_enstrophy_identity/ns_sprint151_localized_enstrophy_identity_rows.json",
+      "sha256": "02e2afd36c109571180b4051e79425695b7acd5f51154ecf9341ae63a82abac9"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint151_localized_enstrophy_identity/ns_sprint151_localized_enstrophy_identity_rows.csv",
+      "sha256": "0c65023c6e6f21ff72a50657afdc7e21a1044fe208576a700f6376734d305917"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint151_localized_enstrophy_identity/ns_sprint151_localized_enstrophy_identity_summary.json",
+      "sha256": "cc340cb6094c8dd3bba77520ffcc0aa15026209b04986396e21c7238d6c97995"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint151_localized_enstrophy_identity/ns_sprint151_localized_enstrophy_identity.md",
+      "sha256": "bddfeb0889b9bf79bd6853fea861a1e0f954406f7baa75bb5f0f90a463e6d78c"
+    }
+  ],
+  "full_clay_ns_solved": false,
+  "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+  "invariant_valid": true,
+  "lane": 2,
+  "localized_enstrophy_identity_proved": false,
+  "manifest_hash": "07e775bfd849f773e0f01de28aa13a6c32d94f8bd7cfe4fd0444b52cc910a2e3",
+  "model_validity_for_width_ode": false,
+  "promotion_allowed": false,
+  "row_count": 11,
+  "scaling_coupling_consistency": false,
+  "sprint": 151,
+  "symmetric_hou_luo_bkm_finite": false
+}

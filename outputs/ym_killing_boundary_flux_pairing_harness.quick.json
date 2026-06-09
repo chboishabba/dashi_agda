@@ -1,0 +1,63 @@
+{
+  "control": {
+    "C": "scripts/ym_killing_boundary_flux_pairing_harness.py",
+    "F": "Does not prove finite Hodge adjointness, quotient self-adjointness, Hamiltonian domination, OS/Wightman transfer, or continuum mass gap.",
+    "G": "Promotion flags remain false; no YM-1 theorem, no Clay YM, no terminal authority.",
+    "L": "build boundary faces -> pair faces -> check weights/signs/flux -> fail-closed JSON",
+    "O": "Single-file finite YM boundary-pairing diagnostic.",
+    "P": "Use a narrow diagnostic instead of the broader self-adjointness harness when the target is the YM-1 boundary pairing step.",
+    "R": "Isolate opposite-face involution, weight preservation, orientation cancellation, and boundary flux cancellation for YM-1.",
+    "S": "Finite periodic/opposite-face carrier only; no theorem authority."
+  },
+  "not_proved": [
+    "YM-1 finite theorem",
+    "finite Hodge adjointness",
+    "quotient self-adjoint Hamiltonian",
+    "Hamiltonian domination",
+    "OS/Wightman reconstruction",
+    "continuum mass gap",
+    "Clay Yang-Mills"
+  ],
+  "ok": true,
+  "result": {
+    "all_boundary_flux": 0.0,
+    "bottom_top_total_flux": 0.0,
+    "boundary_convention": "periodic_opposite_face_killing_full_degree_pairing",
+    "boundary_flux_cancellation_error": 0.0,
+    "checks": {
+      "boundary_flux_cancellation": true,
+      "opposite_face_involution": true,
+      "orientation_sign_cancellation": true,
+      "weight_preservation": true
+    },
+    "clay_promotion": false,
+    "face_count": 16,
+    "left_right_total_flux": 0.0,
+    "opposite_face_involution_error": 0.0,
+    "orientation_sign_cancellation_error": 0.0,
+    "pair_count": 8,
+    "pair_summaries": [
+      {
+        "axis": "x",
+        "max_flux_pair_error": 0.0,
+        "max_orientation_sum_error": 0.0,
+        "max_weight_error": 0.0,
+        "pair_count": 4,
+        "total_boundary_flux": 0.0
+      },
+      {
+        "axis": "y",
+        "max_flux_pair_error": 0.0,
+        "max_orientation_sum_error": 0.0,
+        "max_weight_error": 0.0,
+        "pair_count": 4,
+        "total_boundary_flux": 0.0
+      }
+    ],
+    "promotion": false,
+    "quick": true,
+    "size": 4,
+    "weight_preservation_error": 0.0,
+    "ym_1_promotion": false
+  }
+}

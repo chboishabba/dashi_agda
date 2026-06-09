@@ -1,0 +1,54 @@
+{
+  "gates": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate_id": "G1",
+      "gate_name": "KStarForkObstruction",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate_id": "G2",
+      "gate_name": "ConditionalCriterionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate_id": "G3",
+      "gate_name": "GeneralDataGateClosed",
+      "passed": true,
+      "status": "FALSE_RECORDED"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate_id": "G4",
+      "gate_name": "BlowupConstructionClosed",
+      "passed": true,
+      "status": "FALSE_RECORDED"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate_id": "G5",
+      "gate_name": "ClayNavierStokesPromoted",
+      "passed": true,
+      "status": "FALSE_RECORDED"
+    }
+  ],
+  "sources": [
+    {
+      "missing_anchors": "none",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint94KStarForkObstructionAndConditionalRegularity; KStarLowerBoundHypothesis; GlobalRegularityUnderKStarLowerBound; GeneralDataKStarLowerBoundObstruction; OptionABlockedGeneralDataRegularity; OptionBOpenBlowupConstruction; OptionCConditionalRegularity; kStarForkObstructionClosed; globalRegularityUnderKStarLowerBoundClosed; optionCConditionalCriterionClosed; generalDataKStarLowerBoundClosed; generalDataClayRegularityClosed; blowupConstructionClosed; clayNavierStokesPromoted",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "NSSprint94 KStar fork obstruction receipt"
+    }
+  ]
+}

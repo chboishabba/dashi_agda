@@ -1,0 +1,35 @@
+{
+  "bkm_route_scenario_count": 2,
+  "candidate_scenarios": [
+    "lower_bound_closes",
+    "lower_bound_missing",
+    "diffusion_dominates",
+    "advective_concentration_formal",
+    "source_collapse_obstruction"
+  ],
+  "classifications": {
+    "advective_concentration_formal": "formal_primary_open",
+    "diffusion_dominates": "obstruction",
+    "lower_bound_closes": "formal_identity_lower_bound",
+    "lower_bound_missing": "open_required",
+    "source_collapse_obstruction": "obstruction_primary"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint129_source_balance_classifier",
+  "exit_code": 1,
+  "exit_reason": "NS is incomplete; AdvectiveConcentrationVsDiffusionBound must be proved or obstructed, and Clay is not promoted",
+  "formal_lower_bound_scenario": "lower_bound_closes",
+  "obstruction_count": 4,
+  "primary_obstruction_scenario": "source_collapse_obstruction",
+  "primary_open_scenario": "advective_concentration_formal",
+  "quadratic_source_scenario_count": 2,
+  "recommended_action": "prove_or_obstruct_AdvectiveConcentrationVsDiffusionBound",
+  "recommended_next_lemma": "AdvectiveConcentrationVsDiffusionBound",
+  "required_classifications_met": true,
+  "row_clay_promoted_any": false,
+  "scenario_count": 5,
+  "source_balance": "partial_z(u1^2)=2 u1 partial_z u1"
+}

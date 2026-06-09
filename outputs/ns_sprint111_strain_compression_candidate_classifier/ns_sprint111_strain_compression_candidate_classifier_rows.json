@@ -1,0 +1,161 @@
+[
+  {
+    "accepted": false,
+    "ansatz": "use smooth axisymmetric vortex-ring data as the strain-compression source",
+    "classification": "Leray-compatible symmetric data without a durable high-frequency contraction mechanism",
+    "compressive_low_mode_strain_locus": true,
+    "concrete_rejection_reason": "The data can be divergence-free and unforced, but symmetry alone does not derive high-frequency energy concentration, eigenframe alignment, or persistent positive strain contraction from a non-circular source.",
+    "divergence_free_leray_compatible_data": true,
+    "eigenframe_alignment": false,
+    "failed_gates": [
+      "high_frequency_energy_concentration",
+      "eigenframe_alignment",
+      "persistent_positive_strain_contraction",
+      "non_circular_source"
+    ],
+    "family": "axisymmetric_vortex_ring_data",
+    "family_id": "AVR",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "compressive_low_mode_strain_locus": true,
+      "divergence_free_leray_compatible_data": true,
+      "eigenframe_alignment": false,
+      "high_frequency_energy_concentration": false,
+      "no_forbidden_dependency": true,
+      "non_circular_source": false,
+      "persistent_positive_strain_contraction": false
+    },
+    "high_frequency_energy_concentration": false,
+    "no_forbidden_dependency": true,
+    "non_circular_source": false,
+    "persistent_positive_strain_contraction": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "place anti-parallel vortex tubes so the interaction region compresses high modes",
+    "classification": "geometric tube interaction with colocation supplied by arrangement",
+    "compressive_low_mode_strain_locus": true,
+    "concrete_rejection_reason": "The pair identifies a compressive interaction region only by arranging the tubes there; it does not close high-frequency concentration or persistent contraction without imposed colocation.",
+    "divergence_free_leray_compatible_data": true,
+    "eigenframe_alignment": false,
+    "failed_gates": [
+      "high_frequency_energy_concentration",
+      "eigenframe_alignment",
+      "persistent_positive_strain_contraction",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "anti_parallel_vortex_tube_pair",
+    "family_id": "APV",
+    "forbidden_dependencies": "imposed_compressive_colocation",
+    "gate_results": {
+      "compressive_low_mode_strain_locus": true,
+      "divergence_free_leray_compatible_data": true,
+      "eigenframe_alignment": false,
+      "high_frequency_energy_concentration": false,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "persistent_positive_strain_contraction": false
+    },
+    "high_frequency_energy_concentration": false,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "persistent_positive_strain_contraction": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "evolve a localized shear layer packet through a low-mode strain field",
+    "classification": "packet model with strain geometry but no closed contraction sign",
+    "compressive_low_mode_strain_locus": true,
+    "concrete_rejection_reason": "The packet can localize energy near a compressive low-mode locus, but the eigenframe alignment and positive contraction sign are selected toward the desired flux behavior rather than derived.",
+    "divergence_free_leray_compatible_data": true,
+    "eigenframe_alignment": false,
+    "failed_gates": [
+      "eigenframe_alignment",
+      "persistent_positive_strain_contraction",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "strained_shear_layer_packet",
+    "family_id": "SSP",
+    "forbidden_dependencies": "desired_flux_sign",
+    "gate_results": {
+      "compressive_low_mode_strain_locus": true,
+      "divergence_free_leray_compatible_data": true,
+      "eigenframe_alignment": false,
+      "high_frequency_energy_concentration": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "persistent_positive_strain_contraction": false
+    },
+    "high_frequency_energy_concentration": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "persistent_positive_strain_contraction": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "promote numerical vortex-stretching episodes as evidence for the source",
+    "classification": "computational observation without analytic non-circular closure",
+    "compressive_low_mode_strain_locus": true,
+    "concrete_rejection_reason": "The observed episodes may show transient alignment, but numerical-only evidence does not prove persistent positive strain contraction in the Leray class and cannot serve as the non-circular Clay source.",
+    "divergence_free_leray_compatible_data": true,
+    "eigenframe_alignment": true,
+    "failed_gates": [
+      "persistent_positive_strain_contraction",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "numerically_observed_vortex_stretching",
+    "family_id": "NOV",
+    "forbidden_dependencies": "numerical_only_evidence",
+    "gate_results": {
+      "compressive_low_mode_strain_locus": true,
+      "divergence_free_leray_compatible_data": true,
+      "eigenframe_alignment": true,
+      "high_frequency_energy_concentration": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "persistent_positive_strain_contraction": false
+    },
+    "high_frequency_energy_concentration": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "persistent_positive_strain_contraction": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "assume concentration, compressive strain, and eigenframe alignment occur together",
+    "classification": "forbidden direct insertion of the target correlation",
+    "compressive_low_mode_strain_locus": true,
+    "concrete_rejection_reason": "The target correlation is built into the ansatz, and the construction does not supply independent divergence-free Leray-compatible data or a non-circular source.",
+    "divergence_free_leray_compatible_data": false,
+    "eigenframe_alignment": true,
+    "failed_gates": [
+      "divergence_free_leray_compatible_data",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "imposed_colocation_ansatz",
+    "family_id": "ICA",
+    "forbidden_dependencies": "imposed_compressive_colocation;imposed_eigenframe_alignment;target_kstar_collapse",
+    "gate_results": {
+      "compressive_low_mode_strain_locus": true,
+      "divergence_free_leray_compatible_data": false,
+      "eigenframe_alignment": true,
+      "high_frequency_energy_concentration": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "persistent_positive_strain_contraction": true
+    },
+    "high_frequency_energy_concentration": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "persistent_positive_strain_contraction": true,
+    "verdict": "reject"
+  }
+]

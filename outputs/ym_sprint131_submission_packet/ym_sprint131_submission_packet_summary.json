@@ -1,0 +1,434 @@
+{
+  "artifact_map": [
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint131ExternalGovernanceBoundary.agda"
+    },
+    {
+      "category": "agda_surface",
+      "path": "DASHI/Physics/Closure/YMSprint131SubmissionPacketManifest.agda"
+    },
+    {
+      "category": "audit_evidence",
+      "path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit.md"
+    },
+    {
+      "category": "audit_evidence",
+      "path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json"
+    },
+    {
+      "category": "audit_evidence",
+      "path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit.md"
+    },
+    {
+      "category": "audit_evidence",
+      "path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json"
+    },
+    {
+      "category": "audit_evidence",
+      "path": "outputs/ym_sprint130_os_fin_audit/ym_sprint130_os_fin_audit.md"
+    },
+    {
+      "category": "audit_evidence",
+      "path": "outputs/ym_sprint130_os_fin_audit/ym_sprint130_os_fin_audit_summary.json"
+    }
+  ],
+  "external_boundary_row": {
+    "boundary": "external_acceptance",
+    "closed": false,
+    "evidence_flags": [
+      {
+        "name": "externalAcceptanceTokenPresent",
+        "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "value": false
+      }
+    ],
+    "promotion": "not_promoted",
+    "status": "absent"
+  },
+  "generated_utc": "2026-06-06T10:17:18+00:00",
+  "internal_gate_rows": [
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "CC1",
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "cc1ProvedHere",
+        "externalCommonCarrierConstructionClosedHere",
+        "externalCommonCarrierConstructionTheoremProvedHere",
+        "commonCarrierConstructionTheoremProvedHere"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "FIN",
+      "kind": "internal",
+      "missing_required_flags": [],
+      "required_flags": [
+        "internalCandidatePacketReady",
+        "internalSubmissionPacketReady"
+      ],
+      "source_audit": "ym_sprint130_os_fin_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "GG1",
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "allCompactSimpleGTheoremProvedHere",
+        "analyticYangMillsTheoremProvedHere"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    },
+    {
+      "closed": false,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "MC1",
+      "kind": "route-required",
+      "missing_required_flags": [
+        "mc1ClosedFormLowerSemicontinuityProvedHere",
+        "mc1TheoremProvedHere",
+        "moscoLiminfTheoremProvedHere"
+      ],
+      "required_flags": [
+        "mc1ClosedFormLowerSemicontinuityProvedHere",
+        "mc1TheoremProvedHere",
+        "moscoLiminfTheoremProvedHere"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "MC1",
+      "kind": "internal",
+      "missing_required_flags": [],
+      "required_flags": [
+        "mc1ClosedFormLowerSemicontinuityProvedHere",
+        "mc1TheoremProvedHere",
+        "moscoLiminfTheoremProvedHere",
+        "strongResolventConvergenceProvedHere",
+        "symanzikOaArtifactBoundProvedHere",
+        "kuwaeShioyaFrameworkAppliedHere"
+      ],
+      "source_audit": "ym_sprint129_mosco_spectral_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "MC2",
+      "kind": "internal",
+      "missing_required_flags": [],
+      "required_flags": [
+        "mc2MoscoRecoveryLimsupProvedHere",
+        "moscoRecoverySequenceConstructedHere"
+      ],
+      "source_audit": "ym_sprint129_mosco_spectral_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "MC3",
+      "kind": "internal",
+      "missing_required_flags": [],
+      "required_flags": [
+        "mc3UniformFormLowerBoundProvedHere",
+        "uniformFormLowerBoundClosedHere"
+      ],
+      "source_audit": "ym_sprint129_mosco_spectral_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+        "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "MC4",
+      "kind": "internal",
+      "missing_required_flags": [],
+      "required_flags": [
+        "mc4NoBottomSpectrumPollutionProvedHere",
+        "noBottomSpectrumPollutionClosedHere",
+        "moscoConvergenceClosedHere"
+      ],
+      "source_audit": "ym_sprint129_mosco_spectral_audit"
+    },
+    {
+      "closed": false,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "OS1",
+      "kind": "route-required",
+      "missing_required_flags": [
+        "osToWightmanRouteProvedHere",
+        "dashiNativeWightmanDistributionsClosedHere",
+        "osWightmanPoincareCovarianceProvedHere",
+        "wightmanConsequencesLocallyProvedInRepo",
+        "os1975Theorem1ProvedInRepo"
+      ],
+      "required_flags": [
+        "osToWightmanRouteProvedHere",
+        "dashiNativeWightmanDistributionsClosedHere",
+        "osWightmanPoincareCovarianceProvedHere",
+        "wightmanConsequencesLocallyProvedInRepo",
+        "os1975Theorem1ProvedInRepo"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    },
+    {
+      "closed": false,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "OS1",
+      "kind": "internal",
+      "missing_required_flags": [
+        "osToWightmanRouteProvedHere",
+        "dashiNativeWightmanDistributionsClosedHere",
+        "osWightmanPoincareCovarianceProvedHere",
+        "wightmanConsequencesLocallyProvedInRepo",
+        "os1975Theorem1ProvedInRepo"
+      ],
+      "required_flags": [
+        "osToWightmanRouteProvedHere",
+        "dashiNativeWightmanDistributionsClosedHere",
+        "osWightmanPoincareCovarianceProvedHere",
+        "wightmanConsequencesLocallyProvedInRepo",
+        "os1975Theorem1ProvedInRepo"
+      ],
+      "source_audit": "ym_sprint129_mosco_spectral_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+        "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "OS1",
+      "kind": "internal",
+      "missing_required_flags": [],
+      "required_flags": [
+        "os1WightmanDistributionsClosedHere",
+        "osToWightmanRouteClosedHere",
+        "wightmanPoincareCovarianceConsumerClosedHere",
+        "wightmanSpectrumConditionConsumerClosedHere",
+        "sc2SpectrumTransportConsumerClosedHere",
+        "os1PoincareSpectrumFeedClosedHere",
+        "os1WightmanConsumerPackageClosedHere"
+      ],
+      "source_audit": "ym_sprint130_os_fin_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "SC1",
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "sc1SelfAdjointnessProvedHere",
+        "sc1LogFunctionalCalculusProvedHere",
+        "sc1DomainStabilityProvedHere",
+        "sc1ClosedHere"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    },
+    {
+      "closed": false,
+      "evidence_paths": [
+        "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json"
+      ],
+      "false_required_flags": [],
+      "gate": "SC2",
+      "kind": "route-required",
+      "missing_required_flags": [
+        "sc2SpectralGapTransportUnderMoscoProvedHere",
+        "bottomSpectrumIsolationTransportProvedHere",
+        "positiveNonVacuumGapTransportProvedHere",
+        "continuumHamiltonianSpectralGapProvedHere"
+      ],
+      "required_flags": [
+        "sc2SpectralGapTransportUnderMoscoProvedHere",
+        "bottomSpectrumIsolationTransportProvedHere",
+        "positiveNonVacuumGapTransportProvedHere",
+        "continuumHamiltonianSpectralGapProvedHere"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+        "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "SC2",
+      "kind": "internal",
+      "missing_required_flags": [],
+      "required_flags": [
+        "sc2SpectralGapTransportUnderMoscoProvedHere",
+        "bottomSpectrumIsolationTransportProvedHere",
+        "positiveNonVacuumGapTransportProvedHere",
+        "continuumHamiltonianSpectralGapProvedHere"
+      ],
+      "source_audit": "ym_sprint129_mosco_spectral_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "SC3",
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "sc3TransferLowerBoundTheoremProvedHere",
+        "dashiNativeTransferTheoremProvedHere",
+        "dobrushinPolymerLowerBoundProvedHere",
+        "transferMatrixComparisonProvedHere",
+        "transferLowerBoundTheoremProvedHere"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "SY1",
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "anisotropyDecayTheoremProvedHere",
+        "so4RestorationTheoremProvedHere",
+        "euclideanSchwingerSO4CovarianceProvedHere",
+        "spectrumConditionProvedHere",
+        "dashiNativePoincareCovarianceClosedHere",
+        "dashiNativeSpectrumConditionClosedHere"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    },
+    {
+      "closed": true,
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda"
+      ],
+      "false_required_flags": [],
+      "gate": "WC1",
+      "kind": "sprint128-required",
+      "missing_required_flags": [],
+      "required_flags": [
+        "wc1ProvedHere",
+        "weakCompactnessClosedHere",
+        "weakCompactnessTheoremProvedHere",
+        "tightnessTheoremProvedHere",
+        "diagonalSubsequenceExtractionTheoremProvedHere"
+      ],
+      "source_audit": "ym_sprint128_closure_audit"
+    }
+  ],
+  "packet_id": "ym_sprint131_submission_packet",
+  "route_decision": "internal_submission_packet_built_external_acceptance_absent_no_clay_promotion",
+  "source_audits": [
+    "ym_sprint128_closure_audit",
+    "ym_sprint129_mosco_spectral_audit",
+    "ym_sprint130_os_fin_audit"
+  ],
+  "validations": {
+    "audit_fail_closed_scans_clean": true,
+    "clay_promotion_true_absent": true,
+    "no_empty_sections": true,
+    "required_evidence_files_present": true,
+    "sprint128_131_surfaces_clean": true
+  }
+}

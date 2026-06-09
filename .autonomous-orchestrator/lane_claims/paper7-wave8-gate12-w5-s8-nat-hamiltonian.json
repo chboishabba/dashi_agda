@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave8-gate12-w5-s8-nat-hamiltonian.json",
+  "lane": "paper7-gate1-gate2-carrier-s8/S8NatEnergyHamiltonian",
+  "lane_claim": "Paper 7 wave8 LEAF WORKER gate12 W5: own exactly `S8NatEnergyHamiltonian`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement Energy = Nat, 3/8/3 Hamiltonian, and coercivity witnesses. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited.",
+  "orchestrator_id": "paper7-wave8-gate12-w5-s8-nat-hamiltonian",
+  "parent_orchestrator_id": "paper7-wave8-gate12-manager",
+  "status_file": "status.paper7-wave8-gate12-w5-s8-nat-hamiltonian.json",
+  "timestamp": "2026-05-19T15:49:21Z"
+}

@@ -1,0 +1,36 @@
+gate_id,gate_name,depends_on,current_status,completion_condition,proved_in_repo,blocks_clay_promotion,route_decision
+G0,NcAbsorptionFloorAuthority,,CITED_ASSUMED_NOT_FORMALLY_DERIVED,primary-source authority formalized or accepted as explicit axiom,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G1,EffectiveActionPolymersSpatialOnlyForA1,G0,OPEN,all residual effective-action polymers have spatial support only,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G2,PolymerDefinedOnBlockedLattice,G1,OPEN,residual KP polymers are defined on the blocked L=2 graph,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G3,KPEntropyAtBlockedScaleL2,"G1,G2",OPEN,blocked L=2 orientation count proves eta=4,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G4,TemporalEntropyQuotientHalvesGeneric4DCount,"G1,G2,G3",OPEN,etaGeneric4D=8 is replaced by etaSpatialTransfer=4,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G5,AnisotropicL2WeightedKPCloses,G4,ARITHMETIC_ONLY_CONDITIONAL,eta=4 made proof-bearing and 4q<1 consumed by KP theorem,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G6,AllDiameterWeightedKP,G5,AUTHORITY_CONDITIONAL,summable all-diameter weighted polymer expansion available on the eta=4 authority lane,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G7,BalabanPackageA1A2A3,"G1,G6",OPEN,Balaban/Eriksson A1-A3 package discharged,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G8,SmallFieldBoundsSurviveAnisotropicBlocking,G7,AUTHORITY_CONDITIONAL,uniform small-field bounds survive spatial-only blocking on explicit provider authority,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G9,BalabanPartitionIdentityCompatibleWithTemporalTransferMatrix,G7,OPEN,Balaban partition identity commutes with temporal trace,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G10,TemporalTransferMatrixCompatibleWithSpatialBlocking,"G8,G9",OPEN,spatial blocking preserves transfer-matrix spectral setup,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G11,TransferSpectralGap,"G6,G8,G10",OPEN,positive transfer spectral gap proved on the lattice,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G12,LatticeMassGapFromAnisotropicKP,G11,AUTHORITY_CONDITIONAL,positive lattice mass gap extracted from anisotropic KP package on explicit transfer spectral-gap provider authority,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G13,UniformLatticeMassGap,G12,OPEN,uniform positive lattice mass gap established,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G14a,PublishedArchitecture26020077,,CITED_ARCHITECTURE,Eriksson 2602.0077 Theorem 1.6 recorded as fixed-volume blocked-observable UV closure conditional on Assumption A,False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14b,IsotropicRGCauchyHypothesesDischarged,G14a,PUBLISHED_DISCHARGED_NOT_REPROVED_IN_REPO,"polymer representation, oscillation decay, lattice animal count, large-field suppression, and Doob influence bound recorded from Balaban/Eriksson",False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14c,SharedAnisotropicInputLayer,"G1,G8,G10,G14a",OPEN,"spatial-only blocking, transfer-face absorption, temporal support non-creation, and Balaban averaging locality assembled",False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14d0,FormalOscillationSeminormForGaugeLinks,G14c,OPEN,gauge-link oscillation seminorm osc_e defined for blocking-map observables,False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14d1,FormalQhpBlockingMapDefinition,G14c,OPEN,"formal half-plane/spatial Balaban averaging map Q_hp_{ell,k}",False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14d2,BalabanCMP98AveragingLocalityImported,"G14d0,G14d1",OPEN,primary CMP 98 averaging locality imported as a typed repo lemma,False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14d3,QhpPerLinkInfluenceConeLMinus2k,"G14d0,G14d1,G14d2",OPEN,Q_hp per-link influence cone gives L^(-2k) oscillation decay,False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14d,BalabanCMP98LocalOscillationBoundForQhp,"G14d0,G14d1,G14d2,G14d3",OPEN,CMP 98 averaging locality specialized to osc_e(Q_hp)<=C_local*L^(-2k),False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14e,LipschitzToSquaredOscillationForQhp,G14d,OPEN,per-link Q_hp locality converted into squared oscillation for F o Q_hp,False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14f,AnisotropicAssumptionA,"G14c,G14d,G14e",OPEN,half-plane/spatial-only blocking map satisfies squared oscillation summability,False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14g,SquaredOscillationSummabilityForHalfPlaneBlocking,G14f,OPEN,sum_e osc_e(F o Q_hp)^2 <= C_Q * Lip(F)^2 over spatial links,False,True,ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED
+G14h,AnisotropicSpatialLinkCountImprovesUVBalance,G14g,ARITHMETIC_ONLY_CONDITIONAL,spatial link count 3*L^(3k) with L^(-4k) decay yields 3*L^(-k),False,True,UV_CLOSURE_AVAILABLE_IF_ANISOTROPIC_ASSUMPTION_A
+G14,ContinuumLimitExists,"G14a,G14b,G14f,G14g",AUTHORITY_CONDITIONAL,fixed/infinite-volume blocked-observable continuum limit exists on explicit thermodynamic-limit provider authority,False,True,UV_CLOSURE_AVAILABLE_IF_ANISOTROPIC_ASSUMPTION_A
+G15,OSAxioms,G14,AUTHORITY_CONDITIONAL,continuum limit satisfies Osterwalder-Schrader axioms on explicit OS provider authority,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G16,Nontrivial4DSU3YangMillsMeasure,G14,OPEN,nontrivial four-dimensional SU(3) Yang-Mills measure constructed,False,True,ANISOTROPIC_KP_ROUTE_BLOCKED
+G17,ContinuumMassGapTransfer,"G13,G14,G15",AUTHORITY_CONDITIONAL,continuum limit transfers positive lattice mass gap on explicit transfer provider authority,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G18,OSWightmanReconstruction,"G15,G17",AUTHORITY_CONDITIONAL,OS axioms reconstruct Wightman QFT on explicit reconstruction provider authority,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G19,WightmanQFT,G18,AUTHORITY_CONDITIONAL,Wightman QFT reconstructed on the OS/Wightman authority lane,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G20,PositiveContinuumMassGap,G17,AUTHORITY_CONDITIONAL,positive continuum mass gap available on continuum transfer authority lane,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G21,MassGapSurvival,"G19,G20",AUTHORITY_CONDITIONAL,mass-gap survival theorem available on explicit survival provider authority,False,True,KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED_CONDITIONAL
+G22,ClayYangMills,"G19,G20,G21",BLOCKED_FAIL_CLOSED_BOUNDARY_DEFINED,"authority-conditional candidate recorded, but promotion requires provider derivations in repo",False,True,ANISOTROPIC_KP_ROUTE_BLOCKED

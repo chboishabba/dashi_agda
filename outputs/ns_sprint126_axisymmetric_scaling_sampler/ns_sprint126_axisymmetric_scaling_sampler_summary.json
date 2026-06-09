@@ -1,0 +1,19 @@
+{
+  "all_compatible_rows_satisfy_constraints": true,
+  "analytic_proof_established": false,
+  "bkm_candidate_constraint": "alpha >= 1",
+  "candidate_family": "Hou-Luo/Hou-Li axisymmetric boundary candidate",
+  "clay": false,
+  "clay_promoted": false,
+  "compatible_count": 2,
+  "compatible_row_count": 2,
+  "complete": true,
+  "contract": "ns_sprint126_axisymmetric_scaling_sampler",
+  "energy_finite_constraint": "beta + gamma >= 2*alpha/3",
+  "example_alpha_1_beta_0_gamma_4_over_3_compatible": true,
+  "example_alpha_1_beta_0_gamma_4_over_3_present": true,
+  "exit_code": 0,
+  "nse_consistency_constraint": "alpha - beta == 1",
+  "row_count": 6,
+  "tolerance": 1e-12
+}

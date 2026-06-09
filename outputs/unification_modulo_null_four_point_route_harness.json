@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "bad_family_exclusion_retained": true,
+  "four_point_route_ok": true,
+  "hc_input_ok": true,
+  "modulo_null_linearity_route_ok": true,
+  "promotion": false
+}

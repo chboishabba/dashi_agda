@@ -1,0 +1,34 @@
+{
+  "contract": "ns_sprint157_continuation_bridge",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_continuation_bridge/ns_sprint157_continuation_bridge_manifest.json",
+      "sha256": "874036e9c3c8c0cbb207c5e52f5c8fdef3d5ea64a4af0a78f4e4755b20b4a49b"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_continuation_bridge/ns_sprint157_continuation_bridge.md",
+      "sha256": "8aad819cf62d38b7a018a8bedf8248b3a15f798dac6a3a0e0eb7448a0a09017b"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_continuation_bridge/ns_sprint157_continuation_bridge_rows.csv",
+      "sha256": "62abef8d9b4b5213482776c75b85b1c96f434cde13209695bfa98d4f8bd38b08"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_continuation_bridge/ns_sprint157_continuation_bridge_rows.json",
+      "sha256": "13eb217d53dc51d48beca81d00be91acf8b2ee47932d490ce816ac4b6951ea4e"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_continuation_bridge/ns_sprint157_continuation_bridge_summary.json",
+      "sha256": "ed6c4e4bf62fbb26ed6f595133efdb3f6c9d5267b82ca5529f6d3661fb000e24"
+    }
+  },
+  "lane": 3,
+  "manifest_hash": "c0882782e4181e8a79e7ef774434909a7635f939d2fb6fbf5b71053f9b8f7e69",
+  "sprint": 157,
+  "validation_passed": true
+}

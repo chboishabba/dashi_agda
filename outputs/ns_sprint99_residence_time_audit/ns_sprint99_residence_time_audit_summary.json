@@ -1,0 +1,182 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint99ResidenceTimeAgainstViscosity.agda",
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "finiteTimeKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "lowModeResidenceTimeLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "residenceTimeAgainstViscosityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint99_residence_time_audit",
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_RESIDENCE_TIME_AGAINST_VISCOSITY",
+  "finite_time_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "forbidden_markers": [
+    "postulate",
+    "TODO",
+    "stub",
+    "skeleton",
+    "admit",
+    "holes"
+  ],
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "lowModeResidenceTimeLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "residenceTimeAgainstViscosityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteTimeKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "LowModeResidenceWindow",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "ViscousDampingDefeatEstimate",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "PersistentLowModeEnergyReservoir",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "TimeIntegratedFluxSurplus",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "LerayCompatibleResidenceTrajectory",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "missing_analytic_object_checks": {
+    "LerayCompatibleResidenceTrajectory": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "LowModeResidenceWindow": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "PersistentLowModeEnergyReservoir": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "TimeIntegratedFluxSurplus": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "ViscousDampingDefeatEstimate": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    }
+  },
+  "missing_analytic_object_count": 5,
+  "missing_analytic_objects": [
+    "LowModeResidenceWindow",
+    "ViscousDampingDefeatEstimate",
+    "PersistentLowModeEnergyReservoir",
+    "TimeIntegratedFluxSurplus",
+    "LerayCompatibleResidenceTrajectory"
+  ],
+  "missing_analytic_objects_recorded": [
+    "LowModeResidenceWindow",
+    "ViscousDampingDefeatEstimate",
+    "PersistentLowModeEnergyReservoir",
+    "TimeIntegratedFluxSurplus",
+    "LerayCompatibleResidenceTrajectory"
+  ],
+  "missing_anchors": [],
+  "promotion_decision": "hold",
+  "required_anchors": [
+    "NSSprint99ResidenceTimeAgainstViscosity",
+    "canonicalNSSprint99ResidenceTimeAgainstViscosity",
+    "requiredResidenceTimeObjects",
+    "ResidenceTimeAgainstViscosity",
+    "LowModeResidenceWindow",
+    "ViscousDampingDefeatEstimate",
+    "PersistentLowModeEnergyReservoir",
+    "TimeIntegratedFluxSurplus",
+    "LerayCompatibleResidenceTrajectory",
+    "MissingResidenceTimeObject",
+    "failClosedResidenceTimeAgainstViscosity",
+    "lowModeResidenceTimeLedgerClosed",
+    "residenceTimeAgainstViscosityClosed",
+    "finiteTimeKStarCollapseClosed",
+    "clayNavierStokesPromoted"
+  ],
+  "residence_time_against_viscosity_closed": false,
+  "route_decision": "FAIL_CLOSED_RESIDENCE_TIME_AGAINST_VISCOSITY",
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint99ResidenceTimeAgainstViscosity.agda",
+      "status": "PASS"
+    }
+  ],
+  "surface": "NSSprint99 Sprint99 residence-time against viscosity fail_closed Clay Navier-Stokes",
+  "unrecorded_missing_analytic_objects": []
+}

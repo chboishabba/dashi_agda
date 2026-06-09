@@ -1,0 +1,226 @@
+{
+  "accepted_families": [],
+  "accepted_source_count": 0,
+  "candidate_family_count": 6,
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "computed_fail_closed_from_rows": true,
+  "contract": "ns_sprint99_viscous_residence_classifier",
+  "fail_closed": true,
+  "fail_closed_reason": "No candidate family satisfies every residence-time and viscous damping gate without a forbidden dependency.",
+  "final_decision": "FAIL_CLOSED_VISCOUS_RESIDENCE",
+  "forbidden_dependencies": [
+    "assumed_bkm_failure",
+    "assumed_serrin_failure",
+    "assumed_singularity",
+    "target_blowup",
+    "desired_conclusion",
+    "external_forcing",
+    "imposed_residence_time",
+    "target_kstar_collapse"
+  ],
+  "option_b_closed": false,
+  "proof_claimed": false,
+  "rejected_families": [
+    "persistent_low_mode_reservoir",
+    "burst_flux_window",
+    "inverse_cascade_residence",
+    "pressure_trapping",
+    "vortex_stretching_residence",
+    "imposed_residence_interval"
+  ],
+  "required_gates": [
+    "positive_residence_window",
+    "time_integrated_flux_surplus",
+    "beats_viscous_damping",
+    "leray_energy_compatible",
+    "non_circular_kstar_collapse_forcing",
+    "no_forbidden_dependency"
+  ],
+  "route_decision": "FAIL_CLOSED_VISCOUS_RESIDENCE",
+  "rows": [
+    {
+      "accepted": false,
+      "ansatz": "store transferred energy in low modes over a positive interval",
+      "beats_viscous_damping": false,
+      "classification": "reservoir without flux surplus closure",
+      "failed_gates": [
+        "time_integrated_flux_surplus",
+        "beats_viscous_damping",
+        "non_circular_kstar_collapse_forcing",
+        "no_forbidden_dependency"
+      ],
+      "family": "persistent_low_mode_reservoir",
+      "family_id": "R1",
+      "forbidden_dependencies": "desired_conclusion",
+      "gate_results": {
+        "beats_viscous_damping": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": false,
+        "non_circular_kstar_collapse_forcing": false,
+        "positive_residence_window": true,
+        "time_integrated_flux_surplus": false
+      },
+      "leray_energy_compatible": true,
+      "no_forbidden_dependency": false,
+      "non_circular_kstar_collapse_forcing": false,
+      "note": "A persistent reservoir names the desired state, but it does not derive the signed time-integrated surplus or an independent viscous defeat.",
+      "positive_residence_window": true,
+      "time_integrated_flux_surplus": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "a short nonlinear burst overwhelms damping before it dissipates",
+      "beats_viscous_damping": false,
+      "classification": "transient burst without residence control",
+      "failed_gates": [
+        "positive_residence_window",
+        "beats_viscous_damping",
+        "non_circular_kstar_collapse_forcing"
+      ],
+      "family": "burst_flux_window",
+      "family_id": "B1",
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "beats_viscous_damping": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": true,
+        "non_circular_kstar_collapse_forcing": false,
+        "positive_residence_window": false,
+        "time_integrated_flux_surplus": true
+      },
+      "leray_energy_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_kstar_collapse_forcing": false,
+      "note": "A burst can supply a formal flux surplus, but the candidate lacks a positive residence window and a closed comparison against viscosity.",
+      "positive_residence_window": false,
+      "time_integrated_flux_surplus": true,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "inverse cascade keeps energy in low modes long enough to collapse K*",
+      "beats_viscous_damping": false,
+      "classification": "cascade residence postulate",
+      "failed_gates": [
+        "time_integrated_flux_surplus",
+        "beats_viscous_damping",
+        "leray_energy_compatible",
+        "non_circular_kstar_collapse_forcing",
+        "no_forbidden_dependency"
+      ],
+      "family": "inverse_cascade_residence",
+      "family_id": "I1",
+      "forbidden_dependencies": "target_kstar_collapse",
+      "gate_results": {
+        "beats_viscous_damping": false,
+        "leray_energy_compatible": false,
+        "no_forbidden_dependency": false,
+        "non_circular_kstar_collapse_forcing": false,
+        "positive_residence_window": true,
+        "time_integrated_flux_surplus": false
+      },
+      "leray_energy_compatible": false,
+      "no_forbidden_dependency": false,
+      "non_circular_kstar_collapse_forcing": false,
+      "note": "The residence interval is tied to the target K* collapse and supplies no non-circular flux surplus or Leray-compatible construction.",
+      "positive_residence_window": true,
+      "time_integrated_flux_surplus": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "pressure nonlocality traps energy in low shells against diffusion",
+      "beats_viscous_damping": false,
+      "classification": "pressure trapping sketch",
+      "failed_gates": [
+        "positive_residence_window",
+        "time_integrated_flux_surplus",
+        "beats_viscous_damping",
+        "non_circular_kstar_collapse_forcing"
+      ],
+      "family": "pressure_trapping",
+      "family_id": "P1",
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "beats_viscous_damping": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": true,
+        "non_circular_kstar_collapse_forcing": false,
+        "positive_residence_window": false,
+        "time_integrated_flux_surplus": false
+      },
+      "leray_energy_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_kstar_collapse_forcing": false,
+      "note": "Pressure nonlocality is compatible with the equations, but this sketch does not yield a signed residence window or damping-defeat inequality.",
+      "positive_residence_window": false,
+      "time_integrated_flux_surplus": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "vortex stretching sustains residence faster than viscosity drains it",
+      "beats_viscous_damping": false,
+      "classification": "stretching residence heuristic",
+      "failed_gates": [
+        "positive_residence_window",
+        "time_integrated_flux_surplus",
+        "beats_viscous_damping",
+        "non_circular_kstar_collapse_forcing",
+        "no_forbidden_dependency"
+      ],
+      "family": "vortex_stretching_residence",
+      "family_id": "V1",
+      "forbidden_dependencies": "target_blowup",
+      "gate_results": {
+        "beats_viscous_damping": false,
+        "leray_energy_compatible": true,
+        "no_forbidden_dependency": false,
+        "non_circular_kstar_collapse_forcing": false,
+        "positive_residence_window": false,
+        "time_integrated_flux_surplus": false
+      },
+      "leray_energy_compatible": true,
+      "no_forbidden_dependency": false,
+      "non_circular_kstar_collapse_forcing": false,
+      "note": "Stretching is a real nonlinear channel, but this family assumes a blowup endpoint and does not close the residence or damping gates.",
+      "positive_residence_window": false,
+      "time_integrated_flux_surplus": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "choose an interval [t0,t1] where residence beats viscous loss",
+      "beats_viscous_damping": true,
+      "classification": "imposed interval",
+      "failed_gates": [
+        "time_integrated_flux_surplus",
+        "leray_energy_compatible",
+        "non_circular_kstar_collapse_forcing",
+        "no_forbidden_dependency"
+      ],
+      "family": "imposed_residence_interval",
+      "family_id": "T1",
+      "forbidden_dependencies": "imposed_residence_time;desired_conclusion",
+      "gate_results": {
+        "beats_viscous_damping": true,
+        "leray_energy_compatible": false,
+        "no_forbidden_dependency": false,
+        "non_circular_kstar_collapse_forcing": false,
+        "positive_residence_window": true,
+        "time_integrated_flux_surplus": false
+      },
+      "leray_energy_compatible": false,
+      "no_forbidden_dependency": false,
+      "non_circular_kstar_collapse_forcing": false,
+      "note": "The interval is imposed rather than derived, so the damping defeat is not an admissible independent mechanism.",
+      "positive_residence_window": true,
+      "time_integrated_flux_surplus": false,
+      "verdict": "reject"
+    }
+  ],
+  "scope": "deterministic classifier for candidate residence-time and viscous damping defeat mechanisms",
+  "sprint99_viscous_residence_closed": false
+}

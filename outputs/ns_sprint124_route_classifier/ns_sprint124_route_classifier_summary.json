@@ -1,0 +1,33 @@
+{
+  "candidate_routes": [
+    "favorable_phase_lag_window_lower_bound",
+    "zero_mean_flux_over_rotation_cycle",
+    "rotating_strain_flux_budget",
+    "vortex_stretching",
+    "non_resonant_triads"
+  ],
+  "classifications": {
+    "favorable_phase_lag_window_lower_bound": "closed",
+    "non_resonant_triads": "partial_open",
+    "rotating_strain_flux_budget": "obstructed_by_zero_mean",
+    "vortex_stretching": "live_primary_next",
+    "zero_mean_flux_over_rotation_cycle": "closed_obstruction"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "closed_route_count": 2,
+  "complete": false,
+  "contract": "ns_sprint124_route_classifier",
+  "exit_code": 1,
+  "exit_reason": "NS Clay is not complete; vortex-stretching bound remains open",
+  "live_route_count": 1,
+  "obstructed_route_count": 2,
+  "open_route_count": 1,
+  "primary_route": "vortex_stretching",
+  "recommended_classification": "live_primary_next",
+  "recommended_next_lemma": "VortexStretchingAmplificationVsDepletionBound",
+  "recommended_route_id": "vortex_stretching",
+  "required_classifications_met": true,
+  "route_count": 5
+}

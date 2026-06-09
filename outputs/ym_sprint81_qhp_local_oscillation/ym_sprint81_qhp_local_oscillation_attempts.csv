@@ -1,0 +1,6 @@
+attempt_id,lemma_name,depends_on,candidate_statement,in_repo_support,proved_in_repo,route_decision
+A1,W1SpatialOnlyBlockingPreservesTemporalLinks,YMSpatialOnlyBlockingTemporalLinks,spatial-only blocking preserves temporal links,RECEIPT_LEVEL_AVAILABLE,True,BALABAN_CMP98_QHP_LOCAL_OSCILLATION_MISSING_FORMAL_LAYER
+A2,Sprint80ConditionalArithmeticShell,ClaySprintEightyYMAnisotropicAssumptionAProofPlanReceipt,3*L^(3k)*C_local^2*L^(-4k)=3*C_local^2*L^(-k),ARITHMETIC_AVAILABLE_CONDITIONAL,True,BALABAN_CMP98_QHP_LOCAL_OSCILLATION_MISSING_FORMAL_LAYER
+A3,BalabanCMP98LocalOscillationBoundForQhp,M1+M2+M3+M4,osc_e(Q_hp)<=C_local*L^(-2k) for spatial links e,BLOCKED_BY_MISSING_FORMAL_LAYER,False,BALABAN_CMP98_QHP_LOCAL_OSCILLATION_MISSING_FORMAL_LAYER
+A4,LipschitzToSquaredOscillationForQhp,BalabanCMP98LocalOscillationBoundForQhp + LipschitzFunction F,sum_spatial_e osc_e(F o Q_hp)^2 <= 3*C_local^2*Lip(F)^2,OPEN_AFTER_A3,False,BALABAN_CMP98_QHP_LOCAL_OSCILLATION_MISSING_FORMAL_LAYER
+A5,AnisotropicAssumptionA,A3+A4,Eriksson 2602.0077 Assumption A for Q_hp,OPEN_FAIL_CLOSED,False,BALABAN_CMP98_QHP_LOCAL_OSCILLATION_MISSING_FORMAL_LAYER

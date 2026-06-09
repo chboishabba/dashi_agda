@@ -1,0 +1,40 @@
+{
+  "all_routes_fail_as_global_exhaustion": true,
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint132_mechanism_exhaustion_audit",
+  "control_card": {
+    "C": "deterministic Python emitter writing rows JSON, summary JSON, and Markdown",
+    "F": "do not infer full Clay Navier-Stokes regularity from this audit",
+    "G": "exit code is 0 with complete audit artifacts and Clay promotion held false",
+    "L": "each row records a structural route gap rather than a missing numeric calculation",
+    "O": "Worker 2 owns only the Sprint132 mechanism-exhaustion audit script and output directory",
+    "P": "route-specific obstruction theorems remain possible while mechanism exhaustion stays open",
+    "R": "encode enumeration, Lyapunov functional, comparison principle, and probabilistic global-exhaustion failures",
+    "S": "the obstruction tower remains route-specific support, not a global classification of all NS dynamics"
+  },
+  "exit_code": 0,
+  "exit_reason": "four global-exhaustion routes are recorded as structurally insufficient to promote the obstruction tower to full Clay Navier-Stokes regularity",
+  "failed_global_exhaustion_routes": [
+    "enumeration",
+    "lyapunov_functional",
+    "comparison_principle",
+    "probabilistic"
+  ],
+  "full_clay_ns_solved": false,
+  "mechanism_exhaustion_closed": false,
+  "missing_calculation": false,
+  "obstruction_tower": "Sprint130/131 Hou-Luo viscous route obstruction tower: U1 maximum principle, source upper bound, localized viscous comparison, and AxisymmetricHouLuoNSViscousDominanceObstruction",
+  "route_count": 4,
+  "route_scope": "obstruction tower to Clay global regularity",
+  "route_specific_obstruction_theorem_possible": true,
+  "routes": [
+    "enumeration",
+    "lyapunov_functional",
+    "comparison_principle",
+    "probabilistic"
+  ],
+  "structural_gap": true
+}

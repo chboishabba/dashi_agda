@@ -1,0 +1,120 @@
+{
+  "balance_model": {
+    "OU_lower_bound": "2*int|grad omega|^2 G - 1/2*int|omega|^2 G >= Omega_G",
+    "bias": "weighted_mean(lambda(c)*(kappa^2-1/2)) / weighted_mean(lambda(c))",
+    "drift": "normalized nonlinear sweeping proxy",
+    "inequality": "nontrivial requires 1 <= 4*bias + drift"
+  },
+  "checks": {
+    "biased_counterexample_can_satisfy_balance": true,
+    "diagnostic_only": true,
+    "drift_dominated_can_satisfy_balance_without_bias": true,
+    "neutral_arcsine_NRS_recovers_NRS_contradiction_proxy": true,
+    "promotion_false": true,
+    "stationary_proxy_kills_positive_balance": true
+  },
+  "conclusion": "Diagnostic only: neutral arcsine/NRS and stationary-proxy regimes fail the nontrivial balance requirement, while deliberately biased or drift-dominated counter-regimes can satisfy it. This supports AbelTriadicDefectMeasureConstruction and NSTypeIBlowupKappaBiasBound as the live PDE gaps, but proves neither.",
+  "harness": "ns_gaussian_selfsimilar_kappa_bias_balance_harness",
+  "ok": true,
+  "promotion": {
+    "clay": false,
+    "finite_diagnostic": true,
+    "pde_gate_closed": false,
+    "reason": "proxy samples only; no Abel measure construction or PDE identity"
+  },
+  "provider": "/home/c/Documents/code/dashi_agda/scripts/ns_s2_biot_savart_eigenbundle.py",
+  "regimes": {
+    "biased_counterexample": {
+      "accepted_samples": 512,
+      "balance_lhs_lower_bound": 1.0,
+      "balance_rhs_4_bias_plus_drift": 1.280280105822914,
+      "contradiction_with_nontrivial": false,
+      "drift": 0.007024976195344193,
+      "kappa_sq_p05": 0.5541355016724663,
+      "kappa_sq_p50": 0.8483231038058211,
+      "kappa_sq_p95": 0.9981528943262156,
+      "mean_kappa_sq": 0.8192732158702212,
+      "mean_lambda": 0.41721813888311393,
+      "nontrivial_balance_satisfied": true,
+      "normalized_bias": 0.31831378240689245,
+      "pass_flags": {
+        "diagnostic_completed": true,
+        "inequality_evaluated": true,
+        "promotion_false": true
+      },
+      "positive_pointwise_bias_fraction": 1.0,
+      "regime": "biased_counterexample",
+      "weighted_bias": 0.13280628387664817
+    },
+    "drift_dominated": {
+      "accepted_samples": 512,
+      "balance_lhs_lower_bound": 1.0,
+      "balance_rhs_4_bias_plus_drift": 1.3942311855493899,
+      "contradiction_with_nontrivial": false,
+      "drift": 1.209981906448395,
+      "kappa_sq_p05": 0.010098866803937956,
+      "kappa_sq_p50": 0.5748281966396269,
+      "kappa_sq_p95": 0.9928023979401477,
+      "mean_kappa_sq": 0.5375775222530308,
+      "mean_lambda": 0.4062448274706378,
+      "nontrivial_balance_satisfied": true,
+      "normalized_bias": 0.04606231977524873,
+      "pass_flags": {
+        "diagnostic_completed": true,
+        "inequality_evaluated": true,
+        "promotion_false": true
+      },
+      "positive_pointwise_bias_fraction": 0.537109375,
+      "regime": "drift_dominated",
+      "weighted_bias": 0.018712579149993268
+    },
+    "neutral_arcsine_NRS": {
+      "accepted_samples": 512,
+      "balance_lhs_lower_bound": 1.0,
+      "balance_rhs_4_bias_plus_drift": -0.01671426440417475,
+      "contradiction_with_nontrivial": true,
+      "drift": 0.0,
+      "kappa_sq_p05": 0.008831315649833943,
+      "kappa_sq_p50": 0.5019074054425032,
+      "kappa_sq_p95": 0.9898400383725054,
+      "mean_kappa_sq": 0.4887621853640469,
+      "mean_lambda": 0.4232837221312427,
+      "nontrivial_balance_satisfied": false,
+      "normalized_bias": -0.004178566101043687,
+      "pass_flags": {
+        "diagnostic_completed": true,
+        "inequality_evaluated": true,
+        "promotion_false": true
+      },
+      "positive_pointwise_bias_fraction": 0.50390625,
+      "regime": "neutral_arcsine_NRS",
+      "weighted_bias": -0.0017687190124212062
+    },
+    "stationary_proxy": {
+      "accepted_samples": 512,
+      "balance_lhs_lower_bound": 1.0,
+      "balance_rhs_4_bias_plus_drift": -0.49904168591730985,
+      "contradiction_with_nontrivial": true,
+      "drift": 0.020609331892089754,
+      "kappa_sq_p05": 0.006776777137773884,
+      "kappa_sq_p50": 0.34479666823879523,
+      "kappa_sq_p95": 0.7520287762716068,
+      "mean_kappa_sq": 0.3671929555129907,
+      "mean_lambda": 0.4143189558737861,
+      "nontrivial_balance_satisfied": false,
+      "normalized_bias": -0.1299127544523499,
+      "pass_flags": {
+        "diagnostic_completed": true,
+        "inequality_evaluated": true,
+        "promotion_false": true
+      },
+      "positive_pointwise_bias_fraction": 0.361328125,
+      "regime": "stationary_proxy",
+      "weighted_bias": -0.053825316779385166
+    }
+  },
+  "samples_per_regime": 512,
+  "scope": "corrected_gaussian_balance_proxy_not_pde_proof",
+  "seed": 20260608,
+  "shells": 8
+}

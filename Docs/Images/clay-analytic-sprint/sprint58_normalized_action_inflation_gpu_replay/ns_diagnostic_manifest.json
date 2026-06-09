@@ -1,0 +1,22 @@
+{
+  "source": "../dashiCFD/outputs/sprint58_normalized_action_inflation_gpu_audit/ns_sprint58_normalized_action_inflation_summary.json",
+  "parameters": {
+    "replay_mode": "sprint58_normalized_action_inflation_from_gpu_summary",
+    "sprint58_normalized_action_inflation_summary_input": "../dashiCFD/outputs/sprint58_normalized_action_inflation_gpu_audit/ns_sprint58_normalized_action_inflation_summary.json"
+  },
+  "diagnostic_mode": "sprint58_normalized_action_inflation_replay_from_gpu_summary",
+  "time_window_count": 72,
+  "packet_inflation_row_count": 29448,
+  "outputs": {
+    "sprint58_normalized_action_inflation_summary": "Docs/Images/clay-analytic-sprint/sprint58_normalized_action_inflation_gpu_replay/ns_sprint58_normalized_action_inflation_summary.json",
+    "normalized_action_inflation_packets_csv": "Docs/Images/clay-analytic-sprint/sprint58_normalized_action_inflation_gpu_replay/ns_normalized_action_inflation_packets.csv",
+    "normalized_action_inflation_by_time_csv": "Docs/Images/clay-analytic-sprint/sprint58_normalized_action_inflation_gpu_replay/ns_normalized_action_inflation_by_time.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint58_normalized_action_inflation_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint58_normalized_action_inflation_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyEightNormalizedActionInflationReceipt",
+  "evidence_boundary": "Sprint 58 replay consumes normalized packet-action inflation artifacts only. It does not recompute truth snapshots, packet masks, material lineage, normalization additivity, denominator inflation theorem, weighted action summability, physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_SPRINT58_NORMALIZED_ACTION_INFLATION_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

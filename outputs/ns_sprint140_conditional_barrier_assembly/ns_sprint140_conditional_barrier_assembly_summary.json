@@ -1,0 +1,83 @@
+{
+  "after_sprint": 139,
+  "artifact_complete": true,
+  "assumptions": [
+    "GlobalConcavityOfPsi1",
+    "SecondaryPeakExclusion",
+    "TransportCommutatorDominationForVBarrier"
+  ],
+  "assumptions_explicit": [
+    "GlobalConcavityOfPsi1",
+    "SecondaryPeakExclusion",
+    "TransportCommutatorDominationForVBarrier"
+  ],
+  "bkm_monitor": "integral_0^T ||omega(t)||_{L_infinity} dt along SymmetricHouLuoMonitoredRoute",
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "conditional_bkm_finite": true,
+  "conditional_consequences": [
+    "ConditionalMonitoredRouteRegularity",
+    "ConditionalBKMFiniteForSymmetricHouLuoRoute"
+  ],
+  "conditional_monitored_route_regular": true,
+  "conditional_not_full_clay": true,
+  "constants_compatible": "required_not_proved_here",
+  "constants_compatible_proved_here": false,
+  "constants_compatible_required": true,
+  "constants_interface": "CompatibleBarrierConstants",
+  "contract": "ns_sprint140_conditional_barrier_assembly",
+  "control_card": {
+    "C": "Deterministic stdlib Python emitter with dataclass rows, stable SHA-256 hashes, invariant validation, JSON, CSV, and Markdown.",
+    "F": "Missing assumptions, hidden proved assumptions, incompatible constant surface, unconditional axial monotonicity, Clay solution, or Clay promotion fails validation.",
+    "G": "Validation passes only when unconditional_global_axial_monotonicity, full_clay_ns_solved, and clay_navier_stokes_promoted are false, while conditional_not_full_clay is true.",
+    "L": "Sprint 139 route ledgers -> explicit assumptions -> compatible constant interface -> conditional route regularity -> conditional BKM.",
+    "O": "Worker 2 owns only scripts/ns_sprint140_conditional_barrier_assembly.py and outputs/ns_sprint140_conditional_barrier_assembly/.",
+    "P": "Use as a conditional interface artifact for downstream formalization, not as an unconditional Navier-Stokes proof.",
+    "R": "Assemble the conditional theorem interface from GlobalConcavityOfPsi1, SecondaryPeakExclusion, TransportCommutatorDominationForVBarrier, and compatible constants.",
+    "S": "The symmetric Hou-Luo monitored route has conditional regularity and conditional finite BKM only if the assumptions and constants hold."
+  },
+  "decision": "conditional_interface_assembled_fail_closed",
+  "exit_code": 0,
+  "full_clay_ns_solved": false,
+  "global_axial_monotonicity_proved": false,
+  "global_axial_monotonicity_proven": false,
+  "global_barrier_closed": false,
+  "global_proof": false,
+  "global_proof_closed": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "proof_claimed": false,
+  "proof_closed": false,
+  "route": "SymmetricHouLuoMonitoredRoute",
+  "route_decision": "assemble_conditional_interface_fail_closed",
+  "row_count": 7,
+  "row_hashes": {
+    "CompatibleBarrierConstants": "927be5552b3d3c1b7ab2dcdc5e9c4ae0f0d7de3e3ddaaf2aac31c0fb5a92430a",
+    "ConditionalBKMFiniteForSymmetricHouLuoRoute": "c06e2667d273144ba5f874891e29bebd23938161f0d6c290f76bf099390a47df",
+    "ConditionalMonitoredRouteRegularity": "966e4d52dea91e16c7d9cce7c7789091819249d3a23750f9b8a6175ff7ee6f0a",
+    "ConditionalNotFullClayGuard": "282f0d021ffd15da5135041da54c9a23346f348231735658b502c66e6a59d80e",
+    "GlobalConcavityOfPsi1": "4dfe337d44bd5df8963774cc33f86b2740806edcdd9b7abcfcaa911b66729877",
+    "SecondaryPeakExclusion": "d6d224a14480bbec18a090c98e3151c527a4183cea3654b3256da26beae4bc2f",
+    "TransportCommutatorDominationForVBarrier": "acbf5abeac81ef36f3aac28b36fec1e7c18ccf91fadf32c6d3f7429ad82aa777"
+  },
+  "rows_hash": "dd64d040f56ae418480e7e8bb82eb589de1a9d51add18b10198ec1bdb8c5af1f",
+  "source_artifacts": {
+    "commutator_sign_route": "outputs/ns_sprint139_commutator_sign_route/ns_sprint139_commutator_sign_route_summary.json",
+    "localized_kernel_sign_sampler": "outputs/ns_sprint139_localized_kernel_sign_sampler/ns_sprint139_localized_kernel_sign_sampler_summary.json",
+    "route_fork_classifier": "outputs/ns_sprint139_barrier_route_fork_classifier/ns_sprint139_barrier_route_fork_classifier_summary.json"
+  },
+  "source_summary_hashes": {
+    "commutator_sign_route": "73c1eae285b50c095877ed41128083bb99eb7726b3c733415f212b6431f9b78c",
+    "localized_kernel_sign_sampler": "5b277b26f0e237011ce2106ccdaaa3ea9b76eed7f1f26b3af0c11a857cf0da45",
+    "route_fork_classifier": "9bdb653546f25be25edc99c7e56c6e30b10259241cde594218a5925764828e14"
+  },
+  "sprint": 140,
+  "summary_payload_hash_without_self": "64debf3976f4f4cfbc063db0d188583249e725b8fbea893f649f786367557b9e",
+  "theorem_interface": "ConditionalSymmetricHouLuoRouteRegularityBKMFinite",
+  "unconditional_global_axial_monotonicity": false,
+  "unconditional_proof": false,
+  "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+}
