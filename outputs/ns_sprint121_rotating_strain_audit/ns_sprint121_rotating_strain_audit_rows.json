@@ -1,0 +1,282 @@
+[
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "sprint121RotatingStrainDecorrelationLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "sprint120AntiCorrelationImported",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "rotatingEigenframeModelRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "phaseLagBudgetRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "antiCorrelationEscapeConditionRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "samplerClassifierRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "nonlinearFeedbackRouteRetained",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "rotatingStrainDecorrelationMechanismClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "nonCircularRotatingPersistenceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "kStarCollapseFromRotatingStrainClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "blowupCriterionBridgeClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "navierStokesClayAssemblyClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:sprint121RotatingStrainDecorrelationLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:sprint120AntiCorrelationImported",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:rotatingEigenframeModelRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:phaseLagBudgetRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:antiCorrelationEscapeConditionRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:samplerClassifierRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:rotatingStrainDecorrelationMechanismClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:nonCircularRotatingPersistenceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:kStarCollapseFromRotatingStrainClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:blowupCriterionBridgeClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:navierStokesClayAssemblyClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:clay",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:RotatingStrainDecorrelationMechanism",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:Sprint121 records the remaining rotating-strain candidate as a",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:rotating strain eigenframe with time-dependent compressive direction",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:phase lag between packet amplification and instantaneous flux eigenframe",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:requires non-circular rotating-strain persistence",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:rotating strain remains open",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:open candidate, not a proof",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:nonlinear feedback remains open",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:clayNavierStokesPromoted remains false",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:closed Navier-Stokes route",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint121RotatingStrainDecorrelationMechanism.agda",
+    "gate": "target_module",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "SPRINT121_ROTATING_STRAIN_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "expected": "SPRINT121_ROTATING_STRAIN_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "gate": "route",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "all present",
+    "expected": "all present",
+    "gate": "required_anchors",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "none",
+    "expected": "none",
+    "gate": "forbidden_markers",
+    "passed": true,
+    "status": "PASS"
+  }
+]

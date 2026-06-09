@@ -1,0 +1,12 @@
+{
+  "category_precedence_contract": "corrected mode: temporal-face transfer-matrix action includes mixed spatial-temporal plaquettes; legacy mode: mixed_coupling wins before temporal_face and spatial_boundary as an old diagnostic bucket",
+  "clay_yang_mills_promoted": false,
+  "diagnostic_mode": "sprint70_boundary_correction_plaquette_audit",
+  "outputs": {
+    "category_summary_csv": "ym_sprint70_boundary_correction_by_category.csv",
+    "plaquette_table_csv": "ym_sprint70_boundary_correction_table.csv",
+    "summary_json": "ym_sprint70_boundary_leakage_summary.json"
+  },
+  "promotion_status": "NO_PROMOTION_SPRINT70_BOUNDARY_CORRECTION_DIAGNOSTIC",
+  "route_decision": "BOUNDARY_CORRECTION_EXCEEDS_2P5_PERCENT"
+}

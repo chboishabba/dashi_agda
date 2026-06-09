@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave9-gate4-levicivita-global.json",
+  "lane": "paper7-hard-primitives/gate4/globalNonFlatLeviCivitaChristoffel",
+  "lane_claim": "Paper 7 wave9 HARD-PRIMITIVE INHABITATION. Use $autonomous-orchestrator reporting conventions only; do not use Codex built-in subagents. You are a leaf worker unless this runner says SECTION MANAGER. No roadmap-only output. No docs-only output. No repeated blocker decomposition. You must attempt implementation before reporting. Valid outcomes only: (1) inhabited theorem/receipt/token that typechecks; (2) material Agda progress on the owned symbol with targeted validation; (3) exact Agda/type error naming the missing upstream inhabitant; (4) named authority-boundary escalation with exact receipt shape. Do not set any promotion bit true unless upstream receipts are inhabited. Do not use full Everything.agda as routine validation; use targeted Agda validation on touched modules. Own global non-flat Levi-Civita/Christoffel-from-metric promotion. Attempt to connect GRNonFlatScalarAlgebraSurface, FactorVecDiscreteMetricTensorSurface, and GRDiscreteBianchiFiniteR into a typed receipt. Validate targeted GR modules; exact failure only if upstream field absent.",
+  "orchestrator_id": "paper7-wave9-gate4-levicivita-global",
+  "parent_orchestrator_id": "paper7-wave9-mgr-gate45",
+  "status_file": "status.paper7-wave9-gate4-levicivita-global.json",
+  "timestamp": "2026-05-19T16:38:10Z"
+}

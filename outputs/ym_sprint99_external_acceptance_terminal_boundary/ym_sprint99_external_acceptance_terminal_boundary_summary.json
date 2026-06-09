@@ -1,0 +1,15 @@
+{
+  "clay_yang_mills_promoted": false,
+  "external_acceptance_token_available": false,
+  "external_acceptance_token_repo_internal": false,
+  "internal_candidate_chain_complete_in_repo": true,
+  "remaining_external_items": [
+    "external peer review",
+    "community acceptance",
+    "Clay acceptance"
+  ],
+  "route_decision": "SPRINT99_TERMINAL_FAIL_CLOSED_EXTERNAL_ACCEPTANCE_BOUNDARY",
+  "sprint": "99-external-acceptance-terminal-boundary",
+  "sprint98_clay_statement_boundary_required": true,
+  "terminal_boundary_statement": "External acceptance is a governance/review artifact, not an Agda proof object available inside the repository"
+}

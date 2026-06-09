@@ -50,28 +50,25 @@ Terminal hard-problem claims are now read through a three-gate formalism. Gate
 unsolved as of `2026-05-18`; Odusanya/`yangmills.dev` is a separate claimed
 proof series under review; and any Zenodo dissolution/recontextualisation
 record is an alternative interpretation/intake artifact, not the same claim.
-Gate 2 is finite-depth DASHI receipt authority: bounded local finite-depth
-mass-gap receipts may promote when their exact typed witnesses are inhabited.
-Gate 3 is continuum/terminal authority: the continuum Clay problem, full
-GRQFT/TOE closure, cosmological constant, `G_DHR = G_SM`, and absolute
-mass-scale closure remain open until their exact authority and bridge receipts
-are inhabited.
+Gate 2 is DASHI receipt authority: ST3 depth-recursion monotonicity is recorded
+only as a local finite-carrier spectral-gap receipt. Gate 3 is continuum/terminal external authority:
+Clay promotion, full GRQFT/TOE closure, cosmological constant, `G_DHR = G_SM`,
+and absolute mass-scale closure remain open until their exact authority and
+bridge receipts are inhabited.
 
-The latest accounting separates pointwise mass-gap evidence from the uniform
-quantifier exchange. A depth-indexed or per-object DASHI receipt can witness a
-positive gap at each named depth, but it does not by itself supply one positive
-lower bound uniform across the refinement/continuum system. The weak terminal
-status may therefore be read only modulo the current minimal closure package.
-The strong terminal theorem and Clay continuum Yang-Mills claim remain false.
+The latest accounting separates DASHI local finite-carrier spectral-gap receipt
+status from external authority. ST3 depth-recursion monotonicity is now recorded
+only as local finite-carrier receipt evidence for DASHI. It is not a Clay promotion: journal, community, and
+Clay review remain pending, and the strong terminal theorem plus Clay continuum
+Yang-Mills claim remain false.
 The four named strong-terminal obligations are B0.1 `Im` reflection/path
 reflection, B0.3 `WeakBG` G-structure/Wellen binding, the
 MassGap -> EnergyPositivity -> Bisognano-Wichmann -> TimeSlice bridge, and
 DR/Doplicher-Roberts reconstruction under the DHR hypotheses. The six-postulate
-minimal closure package additionally records `cStarCompletion` and the
-pointwise-to-uniform mass-gap quantifier exchange as guarded authority
-requirements. The DASHI depth-recursion contraction route is candidate proof
-material only: it may inform the quantifier-exchange attempt, but it is not an
-accepted theorem, not Clay authority, and not terminal promotion.
+minimal closure package additionally records `cStarCompletion` and external
+mass-gap authority as guarded requirements. The DASHI depth-recursion
+contraction route should now be described as internal monotonicity closure, not
+as Clay authority or terminal promotion.
 
 The current proof-landscape intake should be read as four active lineages, not
 as four accepted proofs. Odusanya/Balaban RG is a claimed/preprint external
@@ -84,11 +81,10 @@ and coarse-graining data map to depth/refinement and AQFT region restriction;
 holonomy-defect or curvature observables map to the real operator-norm defect
 surface; and scaling or continuum-limit variables remain Gate 3 data, not
 finite-depth promotion. The dissolution/recontextualisation campaign remains
-an alternative interpretation/intake surface. The DASHI pro-object mass-gap
-route is already inhabited only in the per-depth/pro-object sense: depthwise
-objects and receipts can exist, but a uniform positive lower bound across
-depths and a continuum Yang-Mills theorem remain external analytic or authority
-obligations. Candidate disproof or obstruction intake must stay visible:
+an alternative interpretation/intake surface. The DASHI mass-gap route is now
+internally closed by ST3 depth-recursion monotonicity, while journal,
+community, and Clay acceptance remain external authority obligations. Candidate
+disproof or obstruction intake must stay visible:
 Gribov-copy obstruction, IR slavery, and massless-gluon/scaling objections are
 not answered by citation alone and must be discharged by the relevant typed
 bridge or accepted external theorem before any continuum claim promotes.
@@ -99,15 +95,22 @@ Gribov-ambiguity/Morse-theory claim are encoded as claimed formalism, with the
 DASHI G4 prime-lane independence axiom supplying the intended geometric
 completeness bridge. This narrows the shape of the mass-gap authority gate, but
 it does not change the promotion status: `continuumClayMassGapPromoted` remains
-false until accepted authority or an exact DASHI proof discharges the continuum
-uniform lower-bound obligation.
+false until accepted external authority reviews the internal ST3 receipt.
 
 The DHR and time-slice gates are also deliberately separated. The
 Doplicher-Roberts theorem is now treated as a clean categorical authority once
 the five hypotheses are typed, but it reconstructs `G_DHR`; it does not compute
-the prime-lane `laneDimension` function. That function remains an E8/McKay
-conjectural receipt, and the `p = 7` high-energy `SU(2)_R` bridge is tracked
-separately from the low-energy Standard Model group. The
+the prime-lane `laneDimension` function. The Moonshine tranche now supplies a
+validated Agda receipt surface for a conditional authority-cited
+`laneDimension` bridge: Ogg's theorem selects exactly the 15 supersingular
+primes through the genus-zero property; the no-ghost theorem supplies orbifold
+compatibility; Dong-Li-Mason supplies the Moonshine VOA weight-1 Lie-algebra
+table authority; and the local proof bridge is `DASHIPrimeLaneEquiv`. This is
+not a new theorem accepted by the mathematical or physics community; until the
+bridge is inhabited, it is not an unconditional `G_DHR = G_SM` or Standard
+Model derivation. The `p = 7`
+high-energy `SU(2)_R` bridge is tracked separately from the low-energy Standard
+Model group. The
 Bisognano-Wichmann theorem for nets feeds the time-slice theorem only modulo
 net, vacuum, covariance, and energy-positivity hypotheses; it is not an
 unconditional AQFT promotion.
@@ -122,17 +125,18 @@ reduction of the open empirical inventory, not a strong terminal theorem:
 
 Assuming the six safe postulates are accepted and the weak terminal claim is
 inhabited, the next roadmap tranche is ordered by leverage. First comes the
-`laneDimension` theorem. Its theorem path is now sharper: ST1, Serre-Tate
-deformation equivalence, and ST2, the height-2 Honda formal group for
-supersingular elliptic curves, are classical inputs; ST3 remains the open
-DASHI-specific computation. The formal-group-only calculation must be corrected
-in all downstream prose: the height-2 formal group and its Dieudonne module
-alone give an `SU(2)` compact-real-form shape, not the desired
-`U(1), SU(2), SU(3), SU(2)_R` table. That table requires the additional
-Serre-Tate lowest-weight / Monster-McKay-localised representation computation.
-The Monster/McKay coefficient route is finite and should be treated as a
-computable next task using low-order McKay-Thompson data, but the simple residue
-sketches do not yet constitute a theorem.
+conditional `laneDimension` receipt/bridge package. The formal-group-only
+calculation must be corrected in all downstream prose: the height-2 formal
+group and its Dieudonne module alone give an `SU(2)` compact-real-form shape,
+not the desired
+`U(1), SU(2), SU(3), SU(2)_R` table. The Serre-Tate and conductor/Hecke routes
+have failed to give a clean formula or remain finite computation targets. The
+current Moonshine proof route is conditional: Ogg genus-zero gives the 15
+prime lane set, no-ghost gives orbifold compatibility, Dong-Li-Mason gives the
+weight-1 Lie-algebra table, and `DASHIPrimeLaneEquiv` must identify that
+external table with the DASHI prime-lane dimension function. Under that bridge
+`laneDimension` may be recorded only as a DASHI-local validated receipt claim;
+without it, no unconditional formula is proved.
 
 Second comes matter-prime-lane accounting. After gauge lanes `{2,3,5,7}`, the
 listed remaining supersingular primes are `{11,13,17,19,23,29,31,41,47,59,71}`;
@@ -147,16 +151,18 @@ at `{G_Newton, v_Higgs, f_a, compact universe}`.
 
 Fourth, the terminal flip remains exactly conjunctive:
 `continuumMassGapProved and laneDimensionTheorem and FinalAdapter4Accepted`.
-The mass-gap component still requires accepted continuum uniform-lower-bound
-authority or an exact local proof. The DASHI depth-recursion contraction /
-Banach-fixed-point analysis is candidate proof material for that uniform bound,
-not a Clay-accepted or terminal theorem. Fifth, the paper architecture should be
+The mass-gap component now has DASHI-internal ST3 depth-recursion monotonicity
+closure, but still requires external journal/community/Clay acceptance before
+Clay promotion; the Moonshine lane bridge does not change Clay governance or
+`terminalClaimPromoted = false`. Fifth, the paper architecture should be
 split into seven stages: Paper 1 is submittable now as the typed receipt system
 and honest-frontier architecture; Paper 2 is gated by B0.1-B0.3 geometry;
-Paper 3 by AQFT quotient, time-slice, and DHR category construction; Paper 4 by
-the `laneDimension` / Serre-Tate-DHR theorem; Paper 5 by matter lanes and
-Yukawa textures; Paper 6 by accepted continuum mass-gap proof or exact
-depth-recursion theorem; and Paper 7 by the terminal composition with the final
+Paper 3 by AQFT quotient, time-slice, DHR category construction, and
+Reeh-Schlieder accounting; Paper 4 by the conditional `laneDimension`
+receipt/bridge package, Serre-Tate-DHR bridge, and Pati-Salam refinement;
+Paper 5 by matter lanes and Yukawa textures; Paper 6 by external acceptance of
+the internally receipted
+mass-gap closure; and Paper 7 by the terminal composition with the final
 Adapter4 inventory.
 
 For publishability, this compresses further into an honest three-zone map.
@@ -164,13 +170,30 @@ Paper 1 is the now-publishable receipt/governance and honest-frontier paper.
 Papers 2-3 are an execution sprint after the remaining flag split plus AQFT/DHR
 citation, quotient, and time-slice cleanup: Paper 2 should isolate the B0
 geometry bridge, and Paper 3 should package the AQFT carrier quotient, Cauchy
-evolution/time-slice target, and DHR citation/sector surface. Papers 4-7 are
-not sprint write-ups; they depend on open/new mathematics. In particular,
-`laneDimension`/ST3 is still a genuine Serre-Tate/Monster-McKay computation
-gap, and the mass-gap monotonicity or pointwise-to-uniform lower-bound step is
-still a genuine continuum authority gap. The weak terminal claim remains gated
-by the safe postulates/open receipts, and `terminalClaimPromoted` remains
-false.
+evolution/time-slice target, DHR citation/sector surface, and the
+Reeh-Schlieder closure already supplied by existing receipts and dependencies.
+Papers 4-5 and 7 are not sprint write-ups; Paper 4 is bridge-gated on
+`DASHIPrimeLaneEquiv`/Serre-Tate-DHR/Pati-Salam, while Paper 6 is internally
+receipted but externally Clay-pending. The weak terminal claim remains gated by
+the safe postulates/open receipts, and `terminalClaimPromoted` remains false.
+
+The latest Papers 2-7 obligation map should be maintained as named discharge
+targets rather than a stronger publication claim. Paper 2 carries P2-A and
+P2-B as immediate `DASHIPrimeLaneEquiv` closure items: inhabiting that bridge
+may close those two local obligations, but it does not by itself derive the
+Standard Model, promote terminal closure, or alter Clay governance. Paper 3
+carries M3-A, M3-B, and M3-C for the matter/AQFT-facing package: the map must
+name the carrier or quotient target, the external authority/citation boundary,
+and the Reeh-Schlieder dependency-accounting receipt. Paper 4 carries G4-A and
+G4-B for gauge and lane dimension: the Moonshine bridge is separate from any
+Pati-Salam refinement or low-energy Standard Model comparison. Paper 5 carries
+GR5-A and GR5-B for geometry/stress-energy: B0/GR geometry and Wald
+stress-energy authority stay distinct. Paper 6 carries G6-A and G6-B for
+mass-gap governance: DASHI local finite-carrier ST3 receipt evidence and external
+journal/community/Clay acceptance are separate gates. Paper 7 is
+implementation/governance only, covering terminal composition staging, final
+Adapter4 inventory, and publication controls while keeping
+`terminalClaimPromoted = false` and `continuumClayMassGapPromoted = false`.
 
 ## Professor-Facing Roadmap Wording
 
@@ -326,10 +349,12 @@ QFT, GRQFT receipt, or TOE closure.
 `DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface` and
 `DASHI.Physics.Closure.TerminalOpenProblemStatusSurface` record the updated
 terminal hard-problem status. The official Clay status is still unsolved as of
-`2026-05-18`, so the continuum Yang-Mills mass gap remains open in DASHI.
+`2026-05-18`, so Clay/external Yang-Mills promotion remains open. DASHI now
+records a separate internal ST3 depth-recursion/Banach receipt for the
+continuum mass-gap dependency; this is not Clay authority.
 Odusanya/`yangmills.dev` is tracked as a separate external 2026
 Balaban-RG/machine-verification claimed proof series under review, with no
-Clay acceptance and no DASHI continuum theorem promotion. Any Zenodo
+Clay acceptance. Any Zenodo
 dissolution/recontextualisation record is an alternative intake artifact, not
 a substitute for the Odusanya series, Clay acceptance, or a local proof. The
 Balaban/Odusanya route is broken into typed intake stages: lattice
@@ -427,7 +452,7 @@ from imported external formal infrastructure:
 | B0.1 DASHI-side pro-object semantics | yes | `DASHI.Geometry.ProObjectSemantics` constructs compatible pro-object points, projections, refinement coherence, depthwise agreement/ball laws, and the depth-zero formal-disk relation without proving DCHoTT smoothness or formal-disk equivalence. |
 | AQFT typed net surface | yes | `DASHI.Physics.QFT.AQFTTypedNetSurface` introduces typed region/local-algebra sockets for isotony, causality, time-slice, and descent while keeping concrete C*-algebras, GNS, Born, vacuum, and interacting QFT open. |
 | K-theory / Novikov target surface | yes | `KTheoryNovikovReceiptSurface.agda` records Novikov assembly, K-theory charge classification, six-term bulk-boundary, and B0/AQFT/DHR/K-theory/mass-gap/Lambda dependency targets without promotion. |
-| Terminal open-problem status surface | yes | `TerminalOpenProblemStatusSurface.agda` records the three-gate status and the current four-lineage proof landscape: Odusanya/Balaban RG as claimed/preprint intake, Agawa holonomy non-local RG as separate preprint/intake with only a provisional DASHI variable map, dissolution/recontextualisation as alternative intake, and DASHI pro-object receipts as per-depth only. Clay Yang-Mills remains officially unsolved as of `2026-05-18`; Gribov-copy, IR-slavery, and massless-gluon/scaling objections remain candidate obstruction checks; finite-depth DASHI mass-gap receipts may promote only locally; uniform lower bound, continuum mass gap, Lambda strategies, `G_DHR = G_SM`, Higgs-vev scale, and strong CP/PQ remain open. |
+| Terminal open-problem status surface | yes | `TerminalOpenProblemStatusSurface.agda` records the three-gate status and the current proof landscape: Odusanya/Balaban RG as claimed/preprint intake, Agawa holonomy non-local RG as separate preprint/intake with only a provisional DASHI variable map, dissolution/recontextualisation as alternative finite/discrete-lattice campaign intake, and the DASHI-internal ST3/Banach finite-carrier receipt. Clay Yang-Mills remains officially unsolved as of `2026-05-18`; Gribov-copy, IR-slavery, and massless-gluon/scaling objections remain candidate obstruction checks; DASHI local finite-depth/finite-carrier spectral-gap receipt does not close continuum/Clay authority; Lambda strategies, `G_DHR = G_SM`, Higgs-vev scale, and strong CP/PQ remain open. |
 | DCHoTT imported theorem | no | The shim sees manifold/formal-disk/G-structure surfaces but imports no torsion-free Levi-Civita or B0 theorem. |
 
 So the corrected state is: DASHI already has substantial native bridge targets
@@ -501,7 +526,7 @@ not a from-scratch conceptual design pass.
    `TerminalOpenProblemStatusSurface.agda` should be the single status surface
    for Odusanya/Balaban RG review state, Agawa holonomy non-local RG intake and
    variable mapping, dissolution/recontextualisation intake, DASHI per-depth
-   pro-object mass-gap receipts, candidate disproof/obstruction intake,
+   pro-object and ST3/Banach mass-gap receipts, candidate disproof/obstruction intake,
    cosmological-constant strategy targets, `G_DHR = G_SM`, Born/coupling no-go
    proof strategies, and strong CP/PQ. The next real deliverables are accepted
    authority for any external theorem, local Agda formalization, uniform
@@ -510,14 +535,17 @@ not a from-scratch conceptual design pass.
 
 8. Track the post-weak-terminal tranche plan without promotion.
    The next admissible mathematical implementation sequence is
-   `laneDimension` theorem, matter lane accounting, final Adapter4 hierarchy
-   decision, terminal flip condition, then the seven-paper publication split.
-   The highest-leverage local computation is ST3: the Serre-Tate /
-   Monster-McKay-localised representation calculation that should replace the
-   conjectural `laneDimension` receipt. Keep the formal-group-only `SU(2)`
-   correction visible, keep the eleven-lane matter caveat visible, and keep the
-   depth-recursion contraction argument classified as candidate mass-gap proof
-   material until accepted by exact receipt or external authority.
+   conditional `laneDimension` receipt/bridge package, matter lane accounting,
+   final Adapter4 hierarchy decision, terminal flip condition, then the
+   seven-paper publication split. `laneDimension` now has a validated Agda
+   receipt surface for a conditional Moonshine authority bridge: Ogg
+   genus-zero supplies the 15 primes, no-ghost supplies orbifold compatibility,
+   Dong-Li-Mason supplies the weight-1 Lie-algebra table authority, and
+   `DASHIPrimeLaneEquiv` must identify that table with DASHI lane dimensions.
+   Keep the formal-group-only `SU(2)` correction visible, keep the eleven-lane
+   matter caveat visible, record ST3 depth-recursion monotonicity as
+   a DASHI local finite-carrier spectral-gap receipt, and keep Clay/terminal promotion false
+   until external authority accepts it.
 
 ## Stop Rule
 

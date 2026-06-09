@@ -1,0 +1,35 @@
+{
+  "candidate_sources": [
+    "kinematic_compressive_alignment_condition",
+    "persistent_alignment_existence",
+    "leray_energy_class",
+    "concentration_geometry",
+    "imposed_alignment_assumption",
+    "option_a_global_sign_nonpositivity",
+    "burgers_vortex_concentration"
+  ],
+  "classifications": {
+    "burgers_vortex_concentration": "open_secondary_comparison",
+    "concentration_geometry": "closed_by_sprint117",
+    "imposed_alignment_assumption": "rejected_circular",
+    "kinematic_compressive_alignment_condition": "conditional_sign_closed_not_source",
+    "leray_energy_class": "magnitude_only_no_sign_source",
+    "option_a_global_sign_nonpositivity": "open_alternative",
+    "persistent_alignment_existence": "open_primary_gate"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint118_correlation_source_classifier",
+  "exit_code": 1,
+  "exit_reason": "no Clay-complete source",
+  "non_circular_geometric_correlation_source": "open",
+  "open_gate": "NonCircularGeometricCorrelationSource",
+  "open_source_count": 3,
+  "recommended_classification": "open_primary_gate",
+  "recommended_source": "PersistentAlignmentExistence",
+  "recommended_source_id": "persistent_alignment_existence",
+  "rejected_source_count": 1,
+  "source_count": 7
+}

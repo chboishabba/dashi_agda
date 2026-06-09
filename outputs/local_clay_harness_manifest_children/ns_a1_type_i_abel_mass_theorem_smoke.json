@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "abel_mass": 0.9899780712189499,
+      "lambda_moment": 0.9899780712189499,
+      "m": 1.8,
+      "mass_bounded": true,
+      "moment_matches_mass": true,
+      "radius": 0.25,
+      "shell_count": 8,
+      "total_mass": 4.09224696231171
+    },
+    {
+      "abel_mass": 1.0852772706072489,
+      "lambda_moment": 1.0852772706072489,
+      "m": 2.1,
+      "mass_bounded": true,
+      "moment_matches_mass": true,
+      "radius": 0.5,
+      "shell_count": 10,
+      "total_mass": 4.8316393856861115
+    },
+    {
+      "abel_mass": 0.881516748476299,
+      "lambda_moment": 0.881516748476299,
+      "m": 1.5,
+      "mass_bounded": true,
+      "moment_matches_mass": true,
+      "radius": 0.75,
+      "shell_count": 7,
+      "total_mass": 3.419220497852718
+    }
+  ],
+  "contract": "NS A1 theorem-facing Abel measure route smoke",
+  "diagnostic_only": true,
+  "promotion": {
+    "a1_theorem_proved": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "summary": {
+    "all_lambda_moments_match": true,
+    "all_mass_bounded": true,
+    "max_abel_mass": 1.0852772706072489
+  }
+}

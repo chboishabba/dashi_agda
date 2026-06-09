@@ -1,0 +1,771 @@
+{
+  "clay_promotion_flags": [
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint105CompactSimpleGroupParameterTable.agda",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+      "value": false
+    },
+    {
+      "name": "fullOSToWightmanRouteCompleteForClay",
+      "path": "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint105SymmetryRestorationContinuumLimit.agda",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint106SymmetryAndGroupAuditAdvance.agda",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+      "value": false
+    },
+    {
+      "name": "transferGapLowerBoundPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+      "value": false
+    },
+    {
+      "name": "clayYangMillsPromoted",
+      "path": "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda",
+      "value": false
+    }
+  ],
+  "effective_mass_evidence": [
+    {
+      "flags": {
+        "asymptoticFreedomScaleExternalInputRecorded": true,
+        "circularUseOfDesiredMassGap": false,
+        "nonCircularContinuumMassGapRouteComplete": false,
+        "wc3EffectiveMassPositivityRouteRecorded": true
+      },
+      "line_numbers": [
+        41,
+        42,
+        43,
+        45,
+        46,
+        47,
+        49,
+        50,
+        51,
+        55,
+        71,
+        79,
+        104,
+        106,
+        107,
+        108,
+        110,
+        111,
+        115,
+        244,
+        246,
+        248,
+        294
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "strings": {
+        "effectiveMassFormula": "m_k = -log(18*C_local(a_k))",
+        "effectiveMassPositivityCondition": "18*C_local(a_k) < 1 implies m_k > 0",
+        "polymerWeightBoundFormula": "|rho_k(gamma)| <= exp(-m_k * |gamma|)",
+        "wc3OnlyIndependenceStatement": "The positivity m_k > 0 is read from WC3/Balaban polymer weights and does not use the desired continuum mass gap."
+      }
+    },
+    {
+      "flags": {
+        "continuumMassGapClaimed": false,
+        "effectiveMassUsesDesiredMassGap": false,
+        "wc3LowerBoundSurfaceRecorded": true
+      },
+      "line_numbers": [
+        27,
+        28,
+        73,
+        74,
+        75,
+        77,
+        78,
+        79,
+        81,
+        82,
+        83,
+        140,
+        205,
+        206,
+        207
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+      "strings": {
+        "effectiveMassLowerBoundText": "The WC3 lower bound is m_eff(a_k) >= m_k, where m_k = -log(18*C_local(a_k)) > 0.",
+        "effectiveMassPositivityText": "18*C_local(a_k) < 1 implies m_k > 0",
+        "effectiveMassText": "m_k = -log(18*C_local(a_k))"
+      }
+    },
+    {
+      "flags": {
+        "sprint106EffectiveMassModulePresent": true
+      },
+      "line_numbers": [
+        23,
+        57,
+        73,
+        75,
+        76,
+        89,
+        116,
+        262,
+        266,
+        272,
+        285
+      ],
+      "path": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+      "strings": {
+        "effectiveMassDependencyPath": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "wc3EffectiveMassComponentText": "WC3 effective mass positivity: Sprint105 records m_eff(a)>0 from Balaban/WC3 polymer weights without using the desired mass gap."
+      }
+    }
+  ],
+  "fail_reasons": [],
+  "generated_at_utc": "2026-06-06T03:56:16.241236+00:00",
+  "repo_root": "/home/c/Documents/code/dashi_agda",
+  "route_decision": "theorem still open",
+  "scanned_surfaces": {
+    "sprint105": [
+      "DASHI/Physics/Closure/YMSprint105CompactSimpleGroupParameterTable.agda",
+      "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+      "DASHI/Physics/Closure/YMSprint105SymmetryRestorationContinuumLimit.agda"
+    ],
+    "sprint106": [
+      "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+      "DASHI/Physics/Closure/YMSprint106SymmetryAndGroupAuditAdvance.agda",
+      "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+      "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda"
+    ]
+  },
+  "sprint106_fail_closed_scan": [
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "continuumMassGapClaimed": false,
+        "effectiveMassUsesDesiredMassGap": false,
+        "transferGapComparisonTheoremProved": false,
+        "wc3LowerBoundSurfaceRecorded": true
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "effective_mass_line_numbers": [
+        27,
+        28,
+        73,
+        74,
+        75,
+        77,
+        78,
+        79,
+        81,
+        82,
+        83,
+        140,
+        205,
+        206,
+        207
+      ],
+      "incomplete_surface_token_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+      "sprint": "Sprint106",
+      "string_assignments": {
+        "deltaMinText": "delta_min = 1 - exp(-4)",
+        "desiredGapIndependenceText": "The effective mass lower bound is computed from WC3 polymer/Dobrushin constants and is independent of the desired continuum mass gap.",
+        "effectiveMassLowerBoundText": "The WC3 lower bound is m_eff(a_k) >= m_k, where m_k = -log(18*C_local(a_k)) > 0.",
+        "effectiveMassPositivityText": "18*C_local(a_k) < 1 implies m_k > 0",
+        "effectiveMassText": "m_k = -log(18*C_local(a_k))",
+        "localSmallnessText": "18*C_local(a_k) < 1",
+        "normalisedCText": "C = exp(4)",
+        "notClayProofText": "This receipt records a WC3 effective-mass lower-bound surface only; it does not prove the Clay Yang-Mills mass gap.",
+        "sprint103CText": "Sprint103 records C = 1/(1-delta_min)",
+        "sprint103MText": "m = delta_min/2",
+        "su3AdjointDimensionText": "8",
+        "su3ArithmeticText": "SU(3): adjoint dimension 8; k_G = 11; use k=11 in the WC3 effective-mass lower-bound surface.",
+        "su3GroupText": "SU(3)",
+        "su3KText": "11",
+        "transferGapOpenText": "Downstream/open: prove a DASHI-native transfer-gap comparison from WC3 effective mass to a physical Hamiltonian spectral gap.",
+        "uniformDobrushinToActivityText": "Uniform polymer activity follows from the Sprint103 gauge-covariant Dobrushin comparison constants."
+      },
+      "theorem_line_numbers": [
+        16,
+        24,
+        25,
+        154,
+        158
+      ],
+      "transfer_line_numbers": [
+        16,
+        24,
+        25,
+        89,
+        90,
+        91,
+        151,
+        152,
+        169,
+        170,
+        211,
+        212,
+        213,
+        214,
+        215,
+        226,
+        227
+      ]
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "compactSimpleGroupCompletenessClosedInSprint106": false,
+        "fullCompactSimpleClassificationCoveragePresentInSprint106": false,
+        "poincareSpectrumLaneClosedInSprint106": false,
+        "symmetryRestorationClosedInSprint106": false
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "effective_mass_line_numbers": [],
+      "incomplete_surface_token_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint106SymmetryAndGroupAuditAdvance.agda",
+      "sprint": "Sprint106",
+      "string_assignments": {
+        "h3IdTimeToSo4AuditText": "Sprint106 records the open H3 x id_time -> SO4 restoration lane: the finite-cutoff construction is spatial H3 with untouched time, and a continuum theorem must show restored SO4 covariance as the cutoff is removed.",
+        "missingGroupCoverageText": "Full compact-simple-group completeness is not present: the supplied finite table does not by itself enumerate every classical family and exceptional compact-simple case with uniform parameter proofs.",
+        "noClosureClaimText": "Sprint106 advances the audit records only; it does not close symmetry restoration, Poincare/spectrum, compact-simple completeness, or Clay Yang-Mills promotion.",
+        "poincareSpectrumDependencyText": "Poincare covariance and the spectrum condition remain downstream consumers: they need SO4-restored Euclidean Schwinger data, OS/Wightman reconstruction, and a separate positive-energy spectrum argument.",
+        "suppliedGroupRowsText": "Supplied Sprint105 compact-simple rows are SU(2), SU(3), SU(N), G2, and E8 with their recorded adjoint-dimension and k_G text."
+      },
+      "theorem_line_numbers": [
+        71,
+        122,
+        277,
+        317
+      ],
+      "transfer_line_numbers": []
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "routeDataAssembled": true,
+        "sprint106EffectiveMassModulePresent": true,
+        "sprint106TransferMatrixModulePresent": true,
+        "theoremProved": false,
+        "transferGapLowerBoundPromoted": false
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "effective_mass_line_numbers": [
+        23,
+        57,
+        73,
+        75,
+        76,
+        89,
+        116,
+        262,
+        266,
+        272,
+        285
+      ],
+      "incomplete_surface_token_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+      "sprint": "Sprint106",
+      "string_assignments": {
+        "asymptoticFreedomBoundaryText": "Asymptotic freedom scale boundary: Sprint105 records Gross-Wilczek/Politzer running-coupling scale input as perturbative scale-setting only.",
+        "canonicalAssemblySummary": "Sprint106 assembles WC3 effective mass positivity, asymptotic freedom scale boundary, transfer-matrix gap comparison, finite-vs-continuum uniformity, and target gap(T(a)) >= c * m_eff(a) * a; the route data is assembled but the theorem is not proved.",
+        "canonicalOpenBoundary": "Open boundary: prove the DASHI-native transfer-matrix lower bound with uniform constants before any continuum mass-gap or Clay promotion.",
+        "effectiveMassDependencyPath": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "finalTargetLowerBoundText": "gap(T(a)) >= c * m_eff(a) * a",
+        "finiteContinuumUniformityBoundaryText": "Finite-vs-continuum uniformity boundary: constants c and the lower bound must remain uniform through the a -> 0 continuum passage.",
+        "transferMatrixDependencyPath": "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda",
+        "transferMatrixGapComparisonText": "Transfer-matrix gap comparison: required DASHI-native comparison from WC3 effective mass to gap(T(a)); not proved in this assembly.",
+        "uniformityDependencyPath": "DASHI/Physics/Closure/YMSprint106FiniteContinuumUniformityBoundary.agda",
+        "wc3EffectiveMassComponentText": "WC3 effective mass positivity: Sprint105 records m_eff(a)>0 from Balaban/WC3 polymer weights without using the desired mass gap."
+      },
+      "theorem_line_numbers": [
+        24,
+        25,
+        29,
+        37,
+        38,
+        52,
+        53,
+        65,
+        89,
+        130,
+        178,
+        241,
+        257,
+        297,
+        301,
+        312,
+        314,
+        333,
+        356
+      ],
+      "transfer_line_numbers": [
+        1,
+        16,
+        17,
+        20,
+        23,
+        27,
+        40,
+        41,
+        46,
+        47,
+        63,
+        64,
+        65,
+        73,
+        79,
+        80,
+        81,
+        89,
+        93,
+        108,
+        118,
+        121,
+        122,
+        135,
+        137,
+        144,
+        146,
+        153,
+        154,
+        155,
+        156,
+        157,
+        160,
+        162,
+        164,
+        171,
+        173,
+        184,
+        186,
+        187,
+        193,
+        241,
+        257,
+        264,
+        265,
+        268,
+        274,
+        284,
+        286,
+        289,
+        292,
+        293,
+        303,
+        308,
+        309,
+        310,
+        315,
+        318,
+        319,
+        332,
+        341,
+        346,
+        347,
+        348,
+        349,
+        352,
+        355,
+        360,
+        363,
+        365
+      ]
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "comparisonTargetLocallyProved": false,
+        "dashiNativeComparisonTargetRequired": true,
+        "transferMatrixComparisonReceiptRecorded": true,
+        "uniformContinuumLowerBoundProved": false
+      },
+      "clay_promotion_flag": false,
+      "clay_promotion_true_detected": false,
+      "effective_mass_line_numbers": [
+        57,
+        61
+      ],
+      "incomplete_surface_token_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda",
+      "sprint": "Sprint106",
+      "string_assignments": {
+        "comparisonTargetFormula": "gap(T(a)) >= c * m_eff(a) * a",
+        "comparisonTargetStatement": "The comparison target gap(T(a)) >= c * m_eff(a) * a remains the DASHI-native theorem obligation unless separately proved.",
+        "finiteGapStatement": "The finite-lattice transfer gap is positive at the receipt scope supported by reflection positivity and discrete finite-lattice spectrum.",
+        "nonPromotionBoundaryStatement": "This receipt records finite transfer-matrix support and an open DASHI-native comparison obligation; it does not promote the Clay Yang-Mills mass gap.",
+        "transferMatrixDefinitionStatement": "The finite-lattice transfer matrix is defined by the imported LatticeMassGapFromTransferMatrixReceipt.",
+        "uniformContinuumLowerBoundStatement": "A uniform lower bound that survives the continuum limit is still required and is not proved in this module."
+      },
+      "theorem_line_numbers": [
+        15,
+        34,
+        35,
+        37,
+        38,
+        53,
+        61,
+        106,
+        120,
+        122,
+        210,
+        211,
+        213,
+        222,
+        251,
+        284,
+        291
+      ],
+      "transfer_line_numbers": [
+        1,
+        7,
+        11,
+        14,
+        21,
+        22,
+        24,
+        25,
+        26,
+        27,
+        29,
+        30,
+        32,
+        43,
+        44,
+        45,
+        49,
+        57,
+        61,
+        65,
+        67,
+        68,
+        78,
+        108,
+        136,
+        144,
+        146,
+        148,
+        152,
+        163,
+        165,
+        166,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        197,
+        199,
+        212,
+        213,
+        233,
+        241,
+        242,
+        243,
+        245,
+        250,
+        251,
+        253,
+        254,
+        255,
+        257,
+        258,
+        270,
+        278,
+        279,
+        285,
+        286,
+        292,
+        293
+      ]
+    }
+  ],
+  "status_note": "The audit reads actual Sprint 105 and Sprint 106 Agda text. It does not promote the Clay result unless an explicit proved flag is present.",
+  "theorem_proved_flags": [
+    {
+      "name": "dashiNativeGapTransferTheoremProved",
+      "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "value": false
+    },
+    {
+      "name": "nonCircularContinuumMassGapRouteComplete",
+      "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "value": false
+    },
+    {
+      "name": "os1975Theorem1ProvedInRepo",
+      "path": "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+      "value": false
+    },
+    {
+      "name": "wightmanConsequencesLocallyProvedInRepo",
+      "path": "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+      "value": false
+    },
+    {
+      "name": "fullOSToWightmanRouteCompleteForClay",
+      "path": "DASHI/Physics/Closure/YMSprint105OSToWightmanBridge.agda",
+      "value": false
+    },
+    {
+      "name": "transferGapComparisonTheoremProved",
+      "path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+      "value": false
+    },
+    {
+      "name": "continuumMassGapClaimed",
+      "path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+      "value": false
+    },
+    {
+      "name": "theoremProved",
+      "path": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+      "value": false
+    },
+    {
+      "name": "uniformContinuumLowerBoundProved",
+      "path": "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda",
+      "value": false
+    },
+    {
+      "name": "comparisonTargetLocallyProved",
+      "path": "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda",
+      "value": false
+    }
+  ],
+  "transfer_gap_targets": [
+    {
+      "line_numbers": [
+        17,
+        28,
+        29,
+        69,
+        70,
+        71,
+        73,
+        74,
+        79,
+        150,
+        151,
+        158,
+        162,
+        172,
+        199,
+        200,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        277,
+        294,
+        303,
+        320,
+        321,
+        341
+      ],
+      "name": "gapTransferObligationFormula",
+      "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "value": "gap(T(a)) >= c * m_eff(a) * a"
+    },
+    {
+      "line_numbers": [
+        17,
+        28,
+        29,
+        69,
+        70,
+        71,
+        73,
+        74,
+        79,
+        150,
+        151,
+        158,
+        162,
+        172,
+        199,
+        200,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        277,
+        294,
+        303,
+        320,
+        321,
+        341
+      ],
+      "name": "gapTransferObligationStatus",
+      "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+      "value": "open-required-dashi-native-theorem"
+    },
+    {
+      "line_numbers": [
+        16,
+        24,
+        25,
+        89,
+        90,
+        91,
+        151,
+        152,
+        169,
+        170,
+        211,
+        212,
+        213,
+        214,
+        215,
+        226,
+        227
+      ],
+      "name": "transferGapOpenText",
+      "path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+      "value": "Downstream/open: prove a DASHI-native transfer-gap comparison from WC3 effective mass to a physical Hamiltonian spectral gap."
+    },
+    {
+      "line_numbers": [
+        1,
+        16,
+        17,
+        20,
+        23,
+        27,
+        40,
+        41,
+        46,
+        47,
+        63,
+        64,
+        65,
+        73,
+        79,
+        80,
+        81,
+        89,
+        93,
+        108,
+        118,
+        121,
+        122,
+        135,
+        137,
+        144,
+        146,
+        153,
+        154,
+        155,
+        156,
+        157,
+        160,
+        162,
+        164,
+        171,
+        173,
+        184,
+        186,
+        187,
+        193,
+        241,
+        257,
+        264,
+        265,
+        268,
+        274,
+        284,
+        286,
+        289,
+        292,
+        293,
+        303,
+        308,
+        309,
+        310,
+        315,
+        318,
+        319,
+        332,
+        341,
+        346,
+        347,
+        348,
+        349,
+        352,
+        355,
+        360,
+        363,
+        365
+      ],
+      "name": "transferMatrixGapComparisonText",
+      "path": "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+      "value": "Transfer-matrix gap comparison: required DASHI-native comparison from WC3 effective mass to gap(T(a)); not proved in this assembly."
+    }
+  ],
+  "transfer_matrix_comparison_status": {
+    "explicit_transfer_matrix_surface_paths": [
+      "DASHI/Physics/Closure/YMSprint106TransferGapLowerBoundAssembly.agda",
+      "DASHI/Physics/Closure/YMSprint106TransferMatrixGapComparison.agda"
+    ],
+    "note": "Explicit transfer-matrix comparison wording was detected in scanned surfaces.",
+    "status": "theorem still open",
+    "transfer_theorem_flags": [
+      {
+        "name": "dashiNativeGapTransferTheoremProved",
+        "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+        "value": false
+      },
+      {
+        "name": "nonCircularContinuumMassGapRouteComplete",
+        "path": "DASHI/Physics/Closure/YMSprint105NonCircularMassGapBridge.agda",
+        "value": false
+      },
+      {
+        "name": "transferGapComparisonTheoremProved",
+        "path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "value": false
+      },
+      {
+        "name": "continuumMassGapClaimed",
+        "path": "DASHI/Physics/Closure/YMSprint106EffectiveMassLowerBound.agda",
+        "value": false
+      }
+    ]
+  }
+}

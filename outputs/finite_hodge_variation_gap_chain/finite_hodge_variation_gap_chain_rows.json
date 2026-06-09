@@ -1,0 +1,222 @@
+[
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Finite-depth BT carrier and incidence/coboundary package is named as a target, not fully promoted as a metric complex.",
+    "order": 1,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeStarObligation",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeStarObligation.agda"
+      }
+    ],
+    "stage": "finite_cochain_complex",
+    "statement": "Cochains C^k(K) with coboundary d_k and d_{k+1} d_k = 0.",
+    "status": "supported_target_with_gap"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Weighted primal/dual cells and metric Hodge star construction remain explicit blockers.",
+    "order": 2,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeStarObligation",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeStarObligation.agda"
+      },
+      {
+        "module": "BTFiniteHodgeEffectiveActionTheoremBoundary",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda"
+      }
+    ],
+    "stage": "metric_hodge_star",
+    "statement": "Metric Hodge star *: C^k(K) -> C^{n-k}(K^vee) from weighted primal/dual cells.",
+    "status": "blocked"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "The BT metric ** law is a named obligation and is not promoted.",
+    "order": 3,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeStarObligation",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeStarObligation.agda"
+      }
+    ],
+    "stage": "star_square_sign_law",
+    "statement": "** obeys the finite degree/sign law, e.g. ** alpha = (-1)^{k(n-k)} alpha after the selected convention.",
+    "status": "blocked"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Finite selected lower pairing is calculated, but BT weighted pairing promotion is still false.",
+    "order": 4,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeStarObligation",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeStarObligation.agda"
+      },
+      {
+        "module": "HodgeVariationPairingDepth9",
+        "path": "DASHI/Physics/Closure/HodgeVariationPairingDepth9.agda"
+      },
+      {
+        "module": "YMStrictSelectedHodgeVariationPairing",
+        "path": "DASHI/Physics/Closure/YMStrictSelectedHodgeVariationPairing.agda"
+      },
+      {
+        "module": "YMStrictHodgeVariationBlockerIndex",
+        "path": "DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda"
+      }
+    ],
+    "stage": "weighted_pairing",
+    "statement": "Weighted pairing <alpha,beta> = sum_K alpha wedge * beta, compatible with the finite metric Hodge star.",
+    "status": "partially_supported_with_gap"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Strict selected finite IBP lower law is inhabited, while BT finite IBP promotion remains false.",
+    "order": 5,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeStarObligation",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeStarObligation.agda"
+      },
+      {
+        "module": "HodgeVariationPairingDepth9",
+        "path": "DASHI/Physics/Closure/HodgeVariationPairingDepth9.agda"
+      },
+      {
+        "module": "YMStrictSelectedHodgeVariationPairing",
+        "path": "DASHI/Physics/Closure/YMStrictSelectedHodgeVariationPairing.agda"
+      },
+      {
+        "module": "YMStrictHodgeVariationBlockerIndex",
+        "path": "DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda"
+      }
+    ],
+    "stage": "finite_integration_by_parts",
+    "statement": "Finite IBP: <d alpha,beta> = <alpha,d* beta> plus the selected boundary term.",
+    "status": "partially_supported_with_gap"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Symbolic dF support exists; inhomogeneous d*F=J, source conservation dJ=0, calibration, and empirical authority remain blockers.",
+    "order": 6,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeStarObligation",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeStarObligation.agda"
+      },
+      {
+        "module": "BTFiniteHodgeEffectiveActionTheoremBoundary",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda"
+      }
+    ],
+    "stage": "maxwell_equations",
+    "statement": "Maxwell stack: dF = 0, d*F = J, and dJ = 0 from d^2 = 0 after the sourced equation is identified.",
+    "status": "partially_supported_with_gap"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Finite gauge-field and effective-action targets are named; physical nonzero sourced YM promotion is not supplied.",
+    "order": 7,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeEffectiveActionTheoremBoundary",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda"
+      },
+      {
+        "module": "YMStrictSelectedHodgeVariationPairing",
+        "path": "DASHI/Physics/Closure/YMStrictSelectedHodgeVariationPairing.agda"
+      }
+    ],
+    "stage": "yang_mills_curvature",
+    "statement": "YM curvature F_A = dA + A wedge A on the finite gauge-field carrier.",
+    "status": "supported_target_with_gap"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Selected finite variation/IBP calculation is present, but matter-current authority and real D_A^*F_A=J remain exact blockers.",
+    "order": 8,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeEffectiveActionTheoremBoundary",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda"
+      },
+      {
+        "module": "YMStrictSelectedHodgeVariationPairing",
+        "path": "DASHI/Physics/Closure/YMStrictSelectedHodgeVariationPairing.agda"
+      },
+      {
+        "module": "YMStrictHodgeVariationBlockerIndex",
+        "path": "DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda"
+      }
+    ],
+    "stage": "yang_mills_euler_lagrange",
+    "statement": "Finite YM Euler-Lagrange target d_A * F_A = J from the variation of the finite action.",
+    "status": "partially_supported_with_gap"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Finite effective action sum is named, but a self-adjoint real-carrier YM Hamiltonian is listed as not supplied.",
+    "order": 9,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeEffectiveActionTheoremBoundary",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda"
+      },
+      {
+        "module": "YMStrictHodgeVariationBlockerIndex",
+        "path": "DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda"
+      }
+    ],
+    "stage": "finite_hamiltonian",
+    "statement": "Finite Hamiltonian derived from the gauge-invariant finite action and Hodge pairing.",
+    "status": "blocked"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "No promoted self-adjoint Hamiltonian or finite spectral-gap theorem is supplied by the named Hodge variation supports.",
+    "order": 10,
+    "repo_supports": [
+      {
+        "module": "YMStrictHodgeVariationBlockerIndex",
+        "path": "DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda"
+      }
+    ],
+    "stage": "gauge_invariant_spectral_gap",
+    "statement": "Gauge-invariant non-vacuum spectral gap for the finite Hamiltonian.",
+    "status": "open_gap"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Uniform lower-bound transfer is outside the named Hodge supports and remains unpromoted for this chain.",
+    "order": 11,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeEffectiveActionTheoremBoundary",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda"
+      }
+    ],
+    "stage": "uniform_lower_bound",
+    "statement": "Uniform positive lower bound on finite gauge-invariant spectral gaps across the selected approximation family.",
+    "status": "open_gap"
+  },
+  {
+    "artifact_id": "finite_hodge_variation_gap_chain",
+    "current_gap": "Continuum mass-gap, Clay YM, and terminal promotion remain false in the named boundary receipts.",
+    "order": 12,
+    "repo_supports": [
+      {
+        "module": "BTFiniteHodgeEffectiveActionTheoremBoundary",
+        "path": "DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda"
+      },
+      {
+        "module": "YMStrictHodgeVariationBlockerIndex",
+        "path": "DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda"
+      }
+    ],
+    "stage": "continuum_transfer",
+    "statement": "Continuum transfer of the finite lower bound to the continuum YM Hamiltonian and mass-gap statement.",
+    "status": "open_gap"
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "aggregate": {
+    "all_covariance_positive_definite": true,
+    "baseline_authority_status": "fixture-not-authority",
+    "max_reduced_chi2": 22.06956510273242,
+    "min_reduced_chi2": 2.6493994618998236,
+    "row_count": 4
+  },
+  "authority_provider": "HEPData",
+  "baseline_path": "tests/fixtures/sm_higgs_baseline_fixture.json",
+  "baseline_schema": "dashi-sm-higgs-baseline-fixture-v1",
+  "baseline_sha256": "17af56e2c35e4045174b764aadece5583fc66012cbdee225491495133fabc97e",
+  "baseline_version": "fixture-2026-06-07",
+  "comparison_row_count": 4,
+  "experiment_authority": "ATLAS",
+  "gates": {
+    "accepted_authority_token_present": false,
+    "baseline_authority_accepted": false,
+    "baseline_replay_digest_present": true,
+    "binning_compatibility_checked": true,
+    "covariance_positive_definite_checked": true,
+    "covariant_chi2_comparison_law_present": true,
+    "empirical_validation_promoted": false,
+    "fixture_not_authority": true,
+    "holdout_protocol_accepted": false,
+    "sm_higgs_observable_promoted": false,
+    "sm_relative_baseline_present": true,
+    "standard_model_promoted": false,
+    "upstream_hepdata_adapter_consumed": true
+  },
+  "generated_at_utc": "2026-06-07T00:00:00+00:00",
+  "hepdata_record": "137886",
+  "promotion_decision": "hold",
+  "receipt_kind": "covariant-comparison-summary",
+  "remaining_obligations": [
+    "replace fixture baseline with accepted SM generator or theory table authority",
+    "bind raw HEPData measured vectors and covariance with provider/version/checksum token",
+    "define frozen-prediction or independent holdout protocol",
+    "record external authority acceptance before empirical or SM promotion"
+  ],
+  "schema": "dashi-sm-higgs-covariant-comparison-law-v1",
+  "schema_version": "1.0.0",
+  "summary_digest": "cc6766c40ed72547c4946cb41723b35c5b53b707904716ad0bc6467386f632cd",
+  "upstream_receipt_path": "outputs/sm_higgs_hepdata_receipts/sm_higgs_observed_shape_receipt.json",
+  "upstream_receipt_sha256": "948feebca387b019dd8803ca4241d3582fde60442a2f3c7699df7627b33a9a0c"
+}

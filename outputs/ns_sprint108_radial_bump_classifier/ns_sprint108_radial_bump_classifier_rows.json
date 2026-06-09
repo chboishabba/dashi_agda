@@ -1,0 +1,145 @@
+[
+  {
+    "accepted": false,
+    "annular_difference": false,
+    "ansatz": "use exp(-1/(1-r^2)) inside the unit ball and zero outside",
+    "classification": "standard smooth compact radial bump without annular source derivation",
+    "failed_gates": [
+      "annular_difference",
+      "non_circular_source"
+    ],
+    "family": "standard_exp_cutoff_bump",
+    "family_id": "SEC",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "annular_difference": false,
+      "no_forbidden_dependency": true,
+      "non_circular_source": false,
+      "nonnegative_bump": true,
+      "radial_profile": true,
+      "smooth_compact_support": true
+    },
+    "no_forbidden_dependency": true,
+    "non_circular_source": false,
+    "nonnegative_bump": true,
+    "note": "The classical bump has smooth compact support and positivity, but it is only a local profile; it does not derive the annular difference source.",
+    "radial_profile": true,
+    "smooth_compact_support": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "annular_difference": false,
+    "ansatz": "mollify a sharp radial ball indicator to obtain a smooth cutoff",
+    "classification": "smoothened indicator with support inherited from the imposed ball",
+    "failed_gates": [
+      "annular_difference",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "mollified_ball_indicator",
+    "family_id": "MBI",
+    "forbidden_dependencies": "imposed_profile_support",
+    "gate_results": {
+      "annular_difference": false,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "nonnegative_bump": true,
+      "radial_profile": true,
+      "smooth_compact_support": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "nonnegative_bump": true,
+    "note": "Mollification supplies smoothness only after the support geometry is placed in the input, and the annular difference is not a derived source.",
+    "radial_profile": true,
+    "smooth_compact_support": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "annular_difference": false,
+    "ansatz": "multiply a Gaussian profile by a compact radial cutoff",
+    "classification": "truncated heat profile with compactness from an external cutoff",
+    "failed_gates": [
+      "annular_difference",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "gaussian_truncation_bump",
+    "family_id": "GTB",
+    "forbidden_dependencies": "non_leray_regularization",
+    "gate_results": {
+      "annular_difference": false,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "nonnegative_bump": true,
+      "radial_profile": true,
+      "smooth_compact_support": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "nonnegative_bump": true,
+    "note": "The Gaussian profile is regularizing data, and compact support comes from a truncation rather than a non-circular Leray source.",
+    "radial_profile": true,
+    "smooth_compact_support": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "annular_difference": true,
+    "ansatz": "import a Littlewood-Paley partition bump and reuse its annular algebra",
+    "classification": "partition artifact without independent radial-bump source closure",
+    "failed_gates": [
+      "nonnegative_bump",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "imported_partition_bump",
+    "family_id": "IPB",
+    "forbidden_dependencies": "imposed_partition_identity;desired_conclusion",
+    "gate_results": {
+      "annular_difference": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "nonnegative_bump": false,
+      "radial_profile": true,
+      "smooth_compact_support": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "nonnegative_bump": false,
+    "note": "The imported partition can express annular differences, but its identity and source role are assumed rather than derived for this classifier.",
+    "radial_profile": true,
+    "smooth_compact_support": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "annular_difference": true,
+    "ansatz": "declare the desired radial profile, support, and annular shell directly",
+    "classification": "forbidden imposed profile source",
+    "failed_gates": [
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "imposed_radial_profile",
+    "family_id": "IRP",
+    "forbidden_dependencies": "imposed_profile_support;imposed_partition_identity;target_blowup;desired_conclusion",
+    "gate_results": {
+      "annular_difference": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "nonnegative_bump": true,
+      "radial_profile": true,
+      "smooth_compact_support": true
+    },
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "nonnegative_bump": true,
+    "note": "This candidate passes the formal shape checks only by including the desired profile support and annular identity in the hypotheses.",
+    "radial_profile": true,
+    "smooth_compact_support": true,
+    "verdict": "reject"
+  }
+]

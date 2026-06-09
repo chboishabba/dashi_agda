@@ -1,0 +1,682 @@
+{
+  "claim_boundary": {
+    "asserts_external_authority": false,
+    "asserts_promotion": false,
+    "asserts_theorem_result": false,
+    "contains_lightweight_snippets": true,
+    "contains_pdf_checksums": true,
+    "is_lightweight_context_probe": true
+  },
+  "counts": {
+    "by_topic": {
+      "biology": 0,
+      "chemistry": 1,
+      "clay": 0,
+      "dark-sector": 1,
+      "formalism": 2,
+      "gr": 2,
+      "hodge": 0,
+      "maxwell": 1,
+      "mysticism-boundary": 1,
+      "outreach": 1,
+      "path-c": 1,
+      "physics": 4,
+      "quantum": 2,
+      "string": 0,
+      "voxel": 1,
+      "ym": 0
+    },
+    "page_count_known": 11,
+    "pdfinfo_ok": 11,
+    "pdftotext_ok": 11,
+    "total_known_pages": 574,
+    "total_pdfs": 11,
+    "untagged": 0
+  },
+  "extraction_policy": {
+    "fails_gracefully_when_tools_absent": true,
+    "max_first_nonempty_lines": 8,
+    "timeout_seconds_per_tool_call": 30,
+    "uses_external_pdf_tools_if_available": true
+  },
+  "generated_at": "2026-06-07T00:00:00+00:00",
+  "promotion_flags": {
+    "authority_source_promoted": false,
+    "hodge_lane_promoted": false,
+    "physics_lane_promoted": false,
+    "terminal_unification_promoted": false,
+    "theorem_authority_promoted": false,
+    "ym_clay_promoted": false
+  },
+  "rows": [
+    {
+      "authority_claim": false,
+      "filename": "3D voxel shape mismatch.pdf",
+      "page_count": 16,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:41:04 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "204239 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 16,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 16,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "3D voxel shape mismatch https://chatgpt.com/c/696edf60-9784-8322-95ce-8aac370e28bc",
+          "Share",
+          "naw.py",
+          "Python",
+          "\ue0833D base] Computing s\ue050ice g3 \ue09b 0.550 \ue0811/10\ue082",
+          "\ue0833D base] Computing s\ue050ice g3 \ue09b 0.583 \ue0812/10\ue082",
+          "\ue0833D base] Computing s\ue050ice g3 \ue09b 0.617 \ue0813/10\ue082",
+          "\ue0833D base] Computing s\ue050ice g3 \ue09b 0.650 \ue0814/10\ue082"
+        ],
+        "returncode": 0,
+        "snippet": "3D voxel shape mismatch https://chatgpt.com/c/696edf60-9784-8322-95ce-8aac370e28bc\nShare\nnaw.py\nPython\n\ue0833D base] Computing s\ue050ice g3 \ue09b 0.550 \ue0811/10\ue082\n\ue0833D base] Computing s\ue050ice g3 \ue09b 0.583 \ue0812/10\ue082\n\ue0833D base] Computing s\ue050ice g3 \ue09b 0.617 \ue0813/10\ue082\n\ue0833D base] Computing s\ue050ice g3 \ue09b 0.650 \ue0814/10\ue082",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/3D voxel shape mismatch.pdf",
+      "sha256": "b2c85729b87d12b553e2afbd41690e1deffb96d226455c1c24f6fed6b1972d67",
+      "size_bytes": 204239,
+      "theorem_claim": false,
+      "topic_tags": [
+        "voxel"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "Branch \u00b7 Formalism Bridging GR and MDL - LES.pdf",
+      "page_count": 53,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:40:58 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "449190 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 53,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 53,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "Branch \u00b7 Formalism Bridging GR and MDL - LES https://chatgpt.com/c/696dbd54-8818-8324-b66b-70e7bdf32d2b",
+          "Share",
+          "DASHI Atom.pdf Energy Vacua Forma\ue050is\u2026",
+          "PDF PDF",
+          "Quantum Memory Form\u2026 DASHI_TERNARY MATH\u2026",
+          "PDF PDF",
+          "P\ue050ease consider a\ue050\ue050 in terms of our forma\ue050ism (pdfs as",
+          "reference):"
+        ],
+        "returncode": 0,
+        "snippet": "Branch \u00b7 Formalism Bridging GR and MDL - LES https://chatgpt.com/c/696dbd54-8818-8324-b66b-70e7bdf32d2b\nShare\nDASHI Atom.pdf Energy Vacua Forma\ue050is\u2026\nPDF PDF\nQuantum Memory Form\u2026 DASHI_TERNARY MATH\u2026\nPDF PDF\nP\ue050ease consider a\ue050\ue050 in terms of our forma\ue050ism (pdfs as\nreference):",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Branch \u00b7 Formalism Bridging GR and MDL - LES.pdf",
+      "sha256": "1448dc3399a83ba5461e555fa45311751b804fa870628be1cdc51c4d055255ea",
+      "size_bytes": 449190,
+      "theorem_claim": false,
+      "topic_tags": [
+        "formalism",
+        "gr"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "Branch \u00b7 Formalism Bridging GR and MDL - LES2.pdf",
+      "page_count": 37,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:41:34 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "148569 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 37,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 37,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "Branch \u00b7 Formalism Bridging GR and MDL - LES https://chatgpt.com/c/696dbd54-8818-8324-b66b-70e7bdf32d2b",
+          "Share",
+          "DASHI Atom.pdf Energy Vacua Forma\ue050is\u2026",
+          "PDF PDF",
+          "Quantum Memory Form\u2026 DASHI_TERNARY MATH\u2026",
+          "PDF PDF",
+          "P\ue050ease consider a\ue050\ue050 in terms of our forma\ue050ism (pdfs as",
+          "reference):"
+        ],
+        "returncode": 0,
+        "snippet": "Branch \u00b7 Formalism Bridging GR and MDL - LES https://chatgpt.com/c/696dbd54-8818-8324-b66b-70e7bdf32d2b\nShare\nDASHI Atom.pdf Energy Vacua Forma\ue050is\u2026\nPDF PDF\nQuantum Memory Form\u2026 DASHI_TERNARY MATH\u2026\nPDF PDF\nP\ue050ease consider a\ue050\ue050 in terms of our forma\ue050ism (pdfs as\nreference):",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Branch \u00b7 Formalism Bridging GR and MDL - LES2.pdf",
+      "sha256": "ee8d1e6fdc582937fa7fbcc4964e2da8b2d6bfc1f939530b5c7b4013215f26bb",
+      "size_bytes": 148569,
+      "theorem_claim": false,
+      "topic_tags": [
+        "formalism",
+        "gr"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "Branch \u00b7 Math Mysticism Breakdown.pdf",
+      "page_count": 267,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:40:33 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "829145 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 267,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 267,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "Branch \u00b7 Math Mysticism Breakdown https://chatgpt.com/c/6992b100-c460-839e-89b6-29abbddac25b",
+          "Share",
+          "Someone on te\ue050e sent me these images...",
+          "1 of 267 7/6/26, 22:40",
+          "Branch \u00b7 Math Mysticism Breakdown https://chatgpt.com/c/6992b100-c460-839e-89b6-29abbddac25b",
+          "2 of 267 7/6/26, 22:40",
+          "Branch \u00b7 Math Mysticism Breakdown https://chatgpt.com/c/6992b100-c460-839e-89b6-29abbddac25b",
+          "3 of 267 7/6/26, 22:40"
+        ],
+        "returncode": 0,
+        "snippet": "Branch \u00b7 Math Mysticism Breakdown https://chatgpt.com/c/6992b100-c460-839e-89b6-29abbddac25b\nShare\nSomeone on te\ue050e sent me these images...\n1 of 267 7/6/26, 22:40\nBranch \u00b7 Math Mysticism Breakdown https://chatgpt.com/c/6992b100-c460-839e-89b6-29abbddac25b\n2 of 267 7/6/26, 22:40\nBranch \u00b7 Math Mysticism Breakdown https://chatgpt.com/c/6992b100-c460-839e-89b6-29abbddac25b\n3 of 267 7/6/26, 22:40",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Branch \u00b7 Math Mysticism Breakdown.pdf",
+      "sha256": "a124e3912b6392b25fce62a2de8bf978df47efc74718a1b06795d8a5e53ba8c0",
+      "size_bytes": 829145,
+      "theorem_claim": false,
+      "topic_tags": [
+        "mysticism-boundary"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "DASHI - Dashi on Quantum Computing.pdf",
+      "page_count": 88,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:40:35 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "386170 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 88,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 88,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "DASHI - Dashi on Quantum Computing https://chatgpt.com/g/g-p-69c0bc292b008191b85fede13fde4...",
+          "DASHI Share",
+          "What does Dashi say about",
+          "Skip to main content",
+          "Yahoo Finance",
+          "Yahoo Finance",
+          "Sign in",
+          "Search query"
+        ],
+        "returncode": 0,
+        "snippet": "DASHI - Dashi on Quantum Computing https://chatgpt.com/g/g-p-69c0bc292b008191b85fede13fde4...\nDASHI Share\nWhat does Dashi say about\nSkip to main content\nYahoo Finance\nYahoo Finance\nSign in\nSearch query",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - Dashi on Quantum Computing.pdf",
+      "sha256": "ebd4b56b3dfc10abddf3c7e9a7757029fdad12262c37bbd101a85286d34e246f",
+      "size_bytes": 386170,
+      "theorem_claim": false,
+      "topic_tags": [
+        "quantum"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "DASHI - Physics - Branch \u00b7 Outreach Draft Rewrite.pdf",
+      "page_count": 44,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:40:42 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "268722 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 44,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 44,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "DASHI - Physics - Branch \u00b7 Outreach Draft Rewrite https://chatgpt.com/g/g-p-69a3895b4f208191839167138515...",
+          "DASHI \ue088 Physics Share",
+          "He\ue050p rewrite my outreach draft (see a\ue050\ue050_code54.txt)",
+          "Hi Mum,",
+          "These are the main \ue050inks to my thinking/working on the",
+          "math stuff I was te\ue050\ue050ing you about.",
+          "They're not super we\ue050\ue050 documented...",
+          "I've had the AI try and summarise it be\ue050ow, but they're"
+        ],
+        "returncode": 0,
+        "snippet": "DASHI - Physics - Branch \u00b7 Outreach Draft Rewrite https://chatgpt.com/g/g-p-69a3895b4f208191839167138515...\nDASHI \ue088 Physics Share\nHe\ue050p rewrite my outreach draft (see a\ue050\ue050_code54.txt)\nHi Mum,\nThese are the main \ue050inks to my thinking/working on the\nmath stuff I was te\ue050\ue050ing you about.\nThey're not super we\ue050\ue050 documented...\nI've had the AI try and summarise it be\ue050ow, but they're",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - Physics - Branch \u00b7 Outreach Draft Rewrite.pdf",
+      "sha256": "f502268b1a343e574268d887258a290ea73fee64cfc2b6ca43066d88ab8ce471",
+      "size_bytes": 268722,
+      "theorem_claim": false,
+      "topic_tags": [
+        "outreach",
+        "physics"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "DASHI - Physics - Dark sector physics portals.pdf",
+      "page_count": 22,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:40:49 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "251799 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 22,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 22,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "DASHI - Physics - Dark sector physics portals https://chatgpt.com/g/g-p-69a3895b4f208191839167138515...",
+          "DASHI \ue088 Physics Share",
+          "I think we have a\ue050ready tack\ue050ed this? If not how do we",
+          "hand\ue050e it?",
+          "Transcript",
+          "0\ue09200Thank you to Boot.Dev for supporting PBS.",
+          "0\ue092033 secondsSome peop\ue050e worried that the \ue050arge",
+          "hadron co\ue050\ue050ider wou\ue050d smash partic\ue050es together so"
+        ],
+        "returncode": 0,
+        "snippet": "DASHI - Physics - Dark sector physics portals https://chatgpt.com/g/g-p-69a3895b4f208191839167138515...\nDASHI \ue088 Physics Share\nI think we have a\ue050ready tack\ue050ed this? If not how do we\nhand\ue050e it?\nTranscript\n0\ue09200Thank you to Boot.Dev for supporting PBS.\n0\ue092033 secondsSome peop\ue050e worried that the \ue050arge\nhadron co\ue050\ue050ider wou\ue050d smash partic\ue050es together so",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - Physics - Dark sector physics portals.pdf",
+      "sha256": "e10ec22d012ed8d7cb739dce59b7313a2393283755375ef90e5049d879a5be17",
+      "size_bytes": 251799,
+      "theorem_claim": false,
+      "topic_tags": [
+        "dark-sector",
+        "physics"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "DASHI - Physics - Physics Closure in DASHI.pdf",
+      "page_count": 7,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:40:53 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "31335 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 7,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 7,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "DASHI - Physics - Physics Closure in DASHI https://chatgpt.com/g/g-p-69a3895b4f208191839167138515...",
+          "DASHI \ue088 Physics Share",
+          "1 of 36 7/6/26, 22:40",
+          "DASHI - Physics - Physics Closure in DASHI https://chatgpt.com/g/g-p-69a3895b4f208191839167138515...",
+          "a\ue050\ue050_code39.txt",
+          "Document",
+          "HEre's current state, check the math",
+          "2 of 36 7/6/26, 22:40"
+        ],
+        "returncode": 0,
+        "snippet": "DASHI - Physics - Physics Closure in DASHI https://chatgpt.com/g/g-p-69a3895b4f208191839167138515...\nDASHI \ue088 Physics Share\n1 of 36 7/6/26, 22:40\nDASHI - Physics - Physics Closure in DASHI https://chatgpt.com/g/g-p-69a3895b4f208191839167138515...\na\ue050\ue050_code39.txt\nDocument\nHEre's current state, check the math\n2 of 36 7/6/26, 22:40",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - Physics - Physics Closure in DASHI.pdf",
+      "sha256": "c82b3ccea20c842bb1c9a2cab176da67fd0d9e717765dd5ea73c461f5773bea1",
+      "size_bytes": 31335,
+      "theorem_claim": false,
+      "topic_tags": [
+        "physics"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "DASHI - \u03b7\u2032-Mesic Nucleus Discovery.pdf",
+      "page_count": 10,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:40:37 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "147450 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 10,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 10,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "DASHI - \u03b7\u2032-Mesic Nucleus Discovery https://chatgpt.com/g/g-p-69c0bc292b008191b85fede13fde4...",
+          "DASHI Share",
+          "Home",
+          "Nanotechno\ue050ogy",
+          "Physics",
+          "Astronomy & Space",
+          "Earth",
+          "Chemistry"
+        ],
+        "returncode": 0,
+        "snippet": "DASHI - \u03b7\u2032-Mesic Nucleus Discovery https://chatgpt.com/g/g-p-69c0bc292b008191b85fede13fde4...\nDASHI Share\nHome\nNanotechno\ue050ogy\nPhysics\nAstronomy & Space\nEarth\nChemistry",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - \u03b7\u2032-Mesic Nucleus Discovery.pdf",
+      "sha256": "03ae169a808fd20e168514eae7bef3f28d3cbe367902d8fa6c3ccc3de097db8c",
+      "size_bytes": 147450,
+      "theorem_claim": false,
+      "topic_tags": [
+        "chemistry"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "Path C model update.pdf",
+      "page_count": 28,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:40:46 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "119191 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 28,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 28,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "Path C model update https://chatgpt.com/c/695867e2-b4fc-8322-8a67-75f0371fe73f",
+          "Share",
+          "13tev.py CONTEXT.md",
+          "Python Fi\ue050e",
+          "reusab\ue050e_query.py README.md",
+          "Python Fi\ue050e",
+          "reso\ue050ve_hepdata_recor\u2026",
+          "Python"
+        ],
+        "returncode": 0,
+        "snippet": "Path C model update https://chatgpt.com/c/695867e2-b4fc-8322-8a67-75f0371fe73f\nShare\n13tev.py CONTEXT.md\nPython Fi\ue050e\nreusab\ue050e_query.py README.md\nPython Fi\ue050e\nreso\ue050ve_hepdata_recor\u2026\nPython",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Path C model update.pdf",
+      "sha256": "dbb2d970505888bc023dca4ffbe854a50b68ccb46418c47f50aeb566cff0384e",
+      "size_bytes": 119191,
+      "theorem_claim": false,
+      "topic_tags": [
+        "path-c"
+      ]
+    },
+    {
+      "authority_claim": false,
+      "filename": "Quantum field count.pdf",
+      "page_count": 2,
+      "pdfinfo": {
+        "available": true,
+        "metadata": {
+          "creationdate": "Sun Jun  7 22:41:00 2026 AEST",
+          "creator": "Mozilla Firefox 151.0.2",
+          "custom_metadata": "no",
+          "encrypted": "no",
+          "file_size": "72210 bytes",
+          "form": "none",
+          "javascript": "no",
+          "metadata_stream": "no",
+          "optimized": "no",
+          "page_rot": "0",
+          "page_size": "596 x 842 pts (A4)",
+          "pages": 2,
+          "pdf_version": "1.7",
+          "producer": "cairo 1.18.0 (https://cairographics.org)",
+          "suspects": "no",
+          "tagged": "no",
+          "userproperties": "no"
+        },
+        "pages": 2,
+        "returncode": 0,
+        "status": "ok",
+        "stderr": ""
+      },
+      "pdftotext": {
+        "available": true,
+        "first_nonempty_lines": [
+          "Quantum \ufb01eld count https://chatgpt.com/c/690e6e7a-ccd0-8321-b456-d27dba931120",
+          "Share",
+          "Show more",
+          "Thought for 23s",
+          "Short answer: \u201c17 partic\ue050es\u02ee is a popu\ue050ar, simp\ue050ified species count. In QFT the c\ue050eaner",
+          "thing to count is fie\ue050ds grouped by Lorentz & gauge mu\ue050tip\ue050ets\u2014and that number is",
+          "different.",
+          "Here\u02bcs how the main counting schemes \ue050ine up (a\ue050\ue050 Standard Mode\ue050, pre\u2013BSM, ignoring"
+        ],
+        "returncode": 0,
+        "snippet": "Quantum \ufb01eld count https://chatgpt.com/c/690e6e7a-ccd0-8321-b456-d27dba931120\nShare\nShow more\nThought for 23s\nShort answer: \u201c17 partic\ue050es\u02ee is a popu\ue050ar, simp\ue050ified species count. In QFT the c\ue050eaner\nthing to count is fie\ue050ds grouped by Lorentz & gauge mu\ue050tip\ue050ets\u2014and that number is\ndifferent.\nHere\u02bcs how the main counting schemes \ue050ine up (a\ue050\ue050 Standard Mode\ue050, pre\u2013BSM, ignoring",
+        "status": "ok",
+        "stderr": ""
+      },
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Quantum field count.pdf",
+      "sha256": "e0da6069ed11614a7809a939518797da45ab44d825279db04eaad7469e1c93fb",
+      "size_bytes": 72210,
+      "theorem_claim": false,
+      "topic_tags": [
+        "maxwell",
+        "physics",
+        "quantum"
+      ]
+    }
+  ],
+  "schema": "dashi-downloaded-pdf-context-probe-v1",
+  "schema_version": "1.0.0",
+  "source_dir": "temp-DOWNLOADED/new additions",
+  "tool_status": {
+    "pdfinfo": "/usr/bin/pdfinfo",
+    "pdftotext": "/usr/bin/pdftotext"
+  }
+}

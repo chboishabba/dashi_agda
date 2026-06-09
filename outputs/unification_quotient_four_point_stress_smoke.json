@@ -1,0 +1,1698 @@
+{
+  "aggregate": {
+    "all_expected_outcomes_observed": true,
+    "bad_case_count": 4,
+    "case_count": 5,
+    "good_case_count": 1,
+    "max_bad_combined_error": 41.01895732567036,
+    "max_good_combined_error": 1.4210854715202004e-14,
+    "min_bad_combined_error": 4.698544893976905,
+    "observed_fail_count": 4,
+    "observed_pass_count": 1,
+    "row_count": 1280,
+    "sample_count": 256
+  },
+  "bad_cases": [
+    {
+      "additive": false,
+      "energy_two_homogeneous": false,
+      "expected": "Null/gauge representative shifts leak into the gluing output.",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "representative_shift",
+        "additivity",
+        "scalar_compatibility",
+        "energy_two_homogeneity",
+        "four_point_residual"
+      ],
+      "four_point_residual_zero": false,
+      "kind": "bad",
+      "max_errors": {
+        "additivity": 1.17774876378002,
+        "energy_two_homogeneity": 33.77663159827932,
+        "four_point_residual": 15.660232253463647,
+        "representative_shift": 3.7522859652244525,
+        "scalar_compatibility": 4.296166640515261
+      },
+      "mean_errors": {
+        "additivity": 0.25348683105390696,
+        "energy_two_homogeneity": 3.0239315077642077,
+        "four_point_residual": 1.8154158701886274,
+        "representative_shift": 1.2924100903205056,
+        "scalar_compatibility": 0.741245077172125
+      },
+      "name": "representative_shift_leak",
+      "observed_pass": false,
+      "p95_errors": {
+        "additivity": 0.597567563589785,
+        "energy_two_homogeneity": 15.186896260368366,
+        "four_point_residual": 5.332515689433935,
+        "representative_shift": 2.64397976056934,
+        "scalar_compatibility": 2.351116534451662
+      },
+      "representative_invariant": false,
+      "scalar_compatible": false,
+      "witness_count": 8,
+      "worst_witnesses": [
+        {
+          "additivity_error": 0.7597444332725667,
+          "case": "representative_shift_leak",
+          "combined_error": 33.77663159827932,
+          "energy_two_homogeneity_error": 33.77663159827932,
+          "four_point_residual_error": 3.8191768594063973,
+          "null_shift": [
+            0.8985912590129288,
+            -0.1173294364483557,
+            0.09306900589774303,
+            -0.025275434658494023
+          ],
+          "quotient_x": [
+            0.5043511078595715,
+            -1.0275714966521459,
+            -0.1978444099960266,
+            0.5105094927375846
+          ],
+          "quotient_y": [
+            -1.0928264886028787,
+            1.2290520370999896,
+            0.055582975722631156,
+            0.5395237339844299
+          ],
+          "representative_shift_error": 0.33124140937634067,
+          "sample": 191,
+          "scalar_compatibility_error": 2.7053633435847075
+        },
+        {
+          "additivity_error": 0.21794697960207476,
+          "case": "representative_shift_leak",
+          "combined_error": 29.897272308002414,
+          "energy_two_homogeneity_error": 29.897272308002414,
+          "four_point_residual_error": 3.6618955985856285,
+          "null_shift": [
+            0.36966955842959703,
+            -0.2544695290460497,
+            -1.058543335384846,
+            0.44981028700710857
+          ],
+          "quotient_x": [
+            -0.5482926700832873,
+            -1.3412835447891511,
+            -0.16803197124949243,
+            1.0435765772871526
+          ],
+          "quotient_y": [
+            -0.3283389716243925,
+            1.1542835301736405,
+            1.121152990178389,
+            -0.08265580476762846
+          ],
+          "representative_shift_error": 0.5928612453686535,
+          "sample": 231,
+          "scalar_compatibility_error": 2.2624799686362955
+        },
+        {
+          "additivity_error": 0.12502458174882047,
+          "case": "representative_shift_leak",
+          "combined_error": 27.40035408011491,
+          "energy_two_homogeneity_error": 27.40035408011491,
+          "four_point_residual_error": 1.6655365048513353,
+          "null_shift": [
+            1.184171725325341,
+            0.985312478738716,
+            -0.1710933201864251,
+            -0.6254413642276662
+          ],
+          "quotient_x": [
+            0.1910354663501912,
+            -1.2589885922599455,
+            -1.324355954542971,
+            0.18702733780576963
+          ],
+          "quotient_y": [
+            -0.03383715978723223,
+            -0.8473790845467938,
+            -0.6924786446103913,
+            0.06313102199199849
+          ],
+          "representative_shift_error": 0.6927697147633713,
+          "sample": 183,
+          "scalar_compatibility_error": 2.1060358792332226
+        },
+        {
+          "additivity_error": 0.0027157932878718594,
+          "case": "representative_shift_leak",
+          "combined_error": 26.065802688103304,
+          "energy_two_homogeneity_error": 26.065802688103304,
+          "four_point_residual_error": 1.1324945995305917,
+          "null_shift": [
+            -1.083362315590937,
+            0.19262947573210898,
+            0.2605939624249365,
+            0.05281627426038393
+          ],
+          "quotient_x": [
+            -0.10592694720811635,
+            0.027629403346577375,
+            -0.698256295979237,
+            -1.0780221921866953
+          ],
+          "quotient_y": [
+            -0.23533619233267467,
+            -0.0067921125523680015,
+            -0.4173595554252466,
+            1.1255767978606457
+          ],
+          "representative_shift_error": 0.9236275193022742,
+          "sample": 135,
+          "scalar_compatibility_error": 3.3683379946535705
+        },
+        {
+          "additivity_error": 0.3650507864775585,
+          "case": "representative_shift_leak",
+          "combined_error": 25.18785632267894,
+          "energy_two_homogeneity_error": 25.18785632267894,
+          "four_point_residual_error": 2.660141484303356,
+          "null_shift": [
+            -0.6477177465611779,
+            1.0224534236803062,
+            -0.8807953057158016,
+            -0.4733092232657886
+          ],
+          "quotient_x": [
+            0.39276926081223795,
+            -0.7771486300111835,
+            0.6878984027249353,
+            -0.6975168590298051
+          ],
+          "quotient_y": [
+            -0.7792545955575714,
+            0.7282044666864338,
+            1.0747167324782474,
+            -1.2364231512622075
+          ],
+          "representative_shift_error": 1.3105407522793422,
+          "sample": 207,
+          "scalar_compatibility_error": 2.351116534451662
+        },
+        {
+          "additivity_error": 0.3092334870707655,
+          "case": "representative_shift_leak",
+          "combined_error": 22.69979977034079,
+          "energy_two_homogeneity_error": 22.69979977034079,
+          "four_point_residual_error": 5.332515689433935,
+          "null_shift": [
+            0.20987615105123858,
+            1.1961295880724536,
+            -0.6342357700535148,
+            -0.48503021108400957
+          ],
+          "quotient_x": [
+            -0.9387957553250988,
+            -0.7283845187338868,
+            0.8987234739233769,
+            -0.9984868101091284
+          ],
+          "quotient_y": [
+            -1.2396744689458181,
+            1.3926226375704371,
+            -1.319050861443681,
+            -0.31920324303998093
+          ],
+          "representative_shift_error": 1.4841864164333314,
+          "sample": 119,
+          "scalar_compatibility_error": 2.232678584972717
+        },
+        {
+          "additivity_error": 0.025083368167244435,
+          "case": "representative_shift_leak",
+          "combined_error": 20.193788344863677,
+          "energy_two_homogeneity_error": 20.193788344863677,
+          "four_point_residual_error": 0.7173981486927836,
+          "null_shift": [
+            0.9231003157919881,
+            0.5803634380627223,
+            0.7705692544324976,
+            0.06990703415888544
+          ],
+          "quotient_x": [
+            -0.2326916302128561,
+            -1.1158943243810335,
+            -0.9247046178829051,
+            0.3322711287315907
+          ],
+          "quotient_y": [
+            1.2048211334130912,
+            0.2122008710290728,
+            -1.283735468447405,
+            1.0591402950537403
+          ],
+          "representative_shift_error": 1.8685565817883238,
+          "sample": 71,
+          "scalar_compatibility_error": 1.7989840845059106
+        },
+        {
+          "additivity_error": 0.18350879495752803,
+          "case": "representative_shift_leak",
+          "combined_error": 20.110412813486285,
+          "energy_two_homogeneity_error": 20.110412813486285,
+          "four_point_residual_error": 1.815843338400109,
+          "null_shift": [
+            0.7579925298892582,
+            -1.0591437323550161,
+            -0.8435654145529112,
+            0.3274472764963108
+          ],
+          "quotient_x": [
+            0.7310416018960928,
+            -1.0781215035643705,
+            -0.2809953528311615,
+            1.239207602823026
+          ],
+          "quotient_y": [
+            0.6168282554954598,
+            -0.9506715543627311,
+            -0.8658222936320058,
+            0.8115904131323104
+          ],
+          "representative_shift_error": 1.037946340897986,
+          "sample": 103,
+          "scalar_compatibility_error": 1.888105390260698
+        }
+      ]
+    },
+    {
+      "additive": false,
+      "energy_two_homogeneous": false,
+      "expected": "Quotient-only but nonlinear gluing breaks additivity and scalar compatibility.",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "additivity",
+        "scalar_compatibility",
+        "energy_two_homogeneity",
+        "four_point_residual"
+      ],
+      "four_point_residual_zero": false,
+      "kind": "bad",
+      "max_errors": {
+        "additivity": 1.2230082926791546,
+        "energy_two_homogeneity": 41.01895732567036,
+        "four_point_residual": 14.154469892125018,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 5.455871409202103
+      },
+      "mean_errors": {
+        "additivity": 0.3921015291750602,
+        "energy_two_homogeneity": 3.612146428986465,
+        "four_point_residual": 2.7915420832654685,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 0.8533490159322925
+      },
+      "name": "nonlinear_gluing_quotient",
+      "observed_pass": false,
+      "p95_errors": {
+        "additivity": 0.8030307058487597,
+        "energy_two_homogeneity": 17.458730048997346,
+        "four_point_residual": 9.849169903658563,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 2.5918394077423774
+      },
+      "representative_invariant": true,
+      "scalar_compatible": false,
+      "witness_count": 8,
+      "worst_witnesses": [
+        {
+          "additivity_error": 0.5140220222745117,
+          "case": "nonlinear_gluing_quotient",
+          "combined_error": 41.01895732567036,
+          "energy_two_homogeneity_error": 41.01895732567036,
+          "four_point_residual_error": 4.374113034995375,
+          "null_shift": [
+            -0.4613331867862641,
+            1.1688086281736527,
+            0.1262576138763849,
+            -0.08173855335442681
+          ],
+          "quotient_x": [
+            0.9139106794164795,
+            0.9398371456812264,
+            -1.2082288623821282,
+            -1.300918302596943
+          ],
+          "quotient_y": [
+            0.7316050707885924,
+            -0.8613670767590508,
+            0.9473194135704524,
+            -1.0283435030904093
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 120,
+          "scalar_compatibility_error": 4.26362632895735
+        },
+        {
+          "additivity_error": 0.5372061565039608,
+          "case": "nonlinear_gluing_quotient",
+          "combined_error": 37.52250554173095,
+          "energy_two_homogeneity_error": 37.52250554173095,
+          "four_point_residual_error": 10.583495952779383,
+          "null_shift": [
+            0.19251456264590439,
+            0.09307673639292857,
+            -1.0333537682317389,
+            0.8769173841137377
+          ],
+          "quotient_x": [
+            -0.2001357305527356,
+            -1.0898277827061746,
+            1.394080587441096,
+            -0.8611466605383
+          ],
+          "quotient_y": [
+            -0.44478322277980264,
+            1.2713601505660383,
+            -1.0139475666512123,
+            -0.8251873111999493
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 127,
+          "scalar_compatibility_error": 2.4562789349566456
+        },
+        {
+          "additivity_error": 0.3223241368915666,
+          "case": "nonlinear_gluing_quotient",
+          "combined_error": 33.00760779821709,
+          "energy_two_homogeneity_error": 33.00760779821709,
+          "four_point_residual_error": 1.0026107948922132,
+          "null_shift": [
+            -0.2625744461616678,
+            -1.047762483131689,
+            -1.1948250621806775,
+            -0.39434041713151635
+          ],
+          "quotient_x": [
+            -1.2422172043921285,
+            -0.9377169680827351,
+            -1.1807389886997726,
+            -0.9247375398616019
+          ],
+          "quotient_y": [
+            0.4456350722392297,
+            -0.7912826772995563,
+            0.5128898772721568,
+            -1.03764844285845
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 152,
+          "scalar_compatibility_error": 4.3349572306346476
+        },
+        {
+          "additivity_error": 0.23266787826262325,
+          "case": "nonlinear_gluing_quotient",
+          "combined_error": 32.66756236412867,
+          "energy_two_homogeneity_error": 32.66756236412867,
+          "four_point_residual_error": 0.64117339054655,
+          "null_shift": [
+            -0.8647586778628158,
+            -1.0866504934877301,
+            0.13818751870501944,
+            -0.8260955158422514
+          ],
+          "quotient_x": [
+            -0.9310713702184018,
+            1.1385124613762612,
+            1.2905245545020803,
+            -0.6657727909365991
+          ],
+          "quotient_y": [
+            0.08463881050618194,
+            -0.568486528906565,
+            0.9868945811456382,
+            0.9668576827701778
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 63,
+          "scalar_compatibility_error": 2.8668902864678625
+        },
+        {
+          "additivity_error": 1.1843682745427606,
+          "case": "nonlinear_gluing_quotient",
+          "combined_error": 28.918224984369367,
+          "energy_two_homogeneity_error": 28.918224984369367,
+          "four_point_residual_error": 12.018578663977344,
+          "null_shift": [
+            0.1907610310963388,
+            -0.45586633653199005,
+            -0.9764812291697778,
+            0.636520211753091
+          ],
+          "quotient_x": [
+            1.2898313046136876,
+            -1.1496891256369173,
+            0.11549550571991785,
+            0.22090996095936455
+          ],
+          "quotient_y": [
+            1.3087213193727698,
+            -1.2429937702812655,
+            1.3670731011154835,
+            1.1785300370056002
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 31,
+          "scalar_compatibility_error": 2.412577338775799
+        },
+        {
+          "additivity_error": 0.5577458544533704,
+          "case": "nonlinear_gluing_quotient",
+          "combined_error": 27.399022981226494,
+          "energy_two_homogeneity_error": 27.399022981226494,
+          "four_point_residual_error": 11.85910401891455,
+          "null_shift": [
+            -0.4992328281553001,
+            0.791419184264069,
+            0.5839594830061241,
+            1.151137832737681
+          ],
+          "quotient_x": [
+            -0.04093462805582271,
+            -0.8098219143930742,
+            1.2784625245380674,
+            0.9181018073315985
+          ],
+          "quotient_y": [
+            0.49517006053816726,
+            -0.6036134750042712,
+            -1.3314345119694437,
+            -0.9394481803717474
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 223,
+          "scalar_compatibility_error": 1.961730458474364
+        },
+        {
+          "additivity_error": 0.49734361122578113,
+          "case": "nonlinear_gluing_quotient",
+          "combined_error": 24.494256494896415,
+          "energy_two_homogeneity_error": 24.494256494896415,
+          "four_point_residual_error": 4.9315345434124485,
+          "null_shift": [
+            -0.6015402506274403,
+            0.8411720416180344,
+            0.6444108072271335,
+            -0.16566566883751355
+          ],
+          "quotient_x": [
+            0.7046729717793414,
+            -1.2991692192327695,
+            0.9902694777655241,
+            1.338777122065132
+          ],
+          "quotient_y": [
+            -0.9860470452907195,
+            -1.357718477452828,
+            0.1402712710934766,
+            -0.5806474746234024
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 80,
+          "scalar_compatibility_error": 4.133378396906539
+        },
+        {
+          "additivity_error": 0.3743197214347539,
+          "case": "nonlinear_gluing_quotient",
+          "combined_error": 24.28578067478759,
+          "energy_two_homogeneity_error": 24.28578067478759,
+          "four_point_residual_error": 2.864734388228955,
+          "null_shift": [
+            -0.018049322557536218,
+            0.7467389946003793,
+            -0.43112645944801375,
+            0.48532684549904714
+          ],
+          "quotient_x": [
+            0.5535168937847939,
+            -0.5420507993381447,
+            1.142613571412864,
+            0.8530694009027799
+          ],
+          "quotient_y": [
+            0.7174237815272919,
+            -0.947440276796206,
+            0.09516193932699402,
+            0.1661015098517491
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 215,
+          "scalar_compatibility_error": 1.7556743092154041
+        }
+      ]
+    },
+    {
+      "additive": true,
+      "energy_two_homogeneous": true,
+      "expected": "Representative-invariant linear gluing with a two-homogeneous non-Hilbert p-norm energy fails four-point cancellation.",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "four_point_residual"
+      ],
+      "four_point_residual_zero": false,
+      "kind": "bad",
+      "max_errors": {
+        "additivity": 9.945640348601413e-16,
+        "energy_two_homogeneity": 1.4210854715202004e-14,
+        "four_point_residual": 4.698544893976905,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 1.2560739669470201e-15
+      },
+      "mean_errors": {
+        "additivity": 2.8937543777907864e-16,
+        "energy_two_homogeneity": 1.1356204605156295e-15,
+        "four_point_residual": 1.0188183317338935,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 1.6771862404558795e-16
+      },
+      "name": "p_norm_nonquadratic_near_miss",
+      "observed_pass": false,
+      "p95_errors": {
+        "additivity": 5.551115123125783e-16,
+        "energy_two_homogeneity": 7.105427357601002e-15,
+        "four_point_residual": 3.1682946298376313,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 6.663596519452762e-16
+      },
+      "representative_invariant": true,
+      "scalar_compatible": true,
+      "witness_count": 8,
+      "worst_witnesses": [
+        {
+          "additivity_error": 5.155369359468229e-16,
+          "case": "p_norm_nonquadratic_near_miss",
+          "combined_error": 4.698544893976905,
+          "energy_two_homogeneity_error": 3.552713678800501e-15,
+          "four_point_residual_error": 4.698544893976905,
+          "null_shift": [
+            -0.4613331867862641,
+            1.1688086281736527,
+            0.1262576138763849,
+            -0.08173855335442681
+          ],
+          "quotient_x": [
+            0.9139106794164795,
+            0.9398371456812264,
+            -1.2082288623821282,
+            -1.300918302596943
+          ],
+          "quotient_y": [
+            0.7316050707885924,
+            -0.8613670767590508,
+            0.9473194135704524,
+            -1.0283435030904093
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 120,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 4.644396126208125e-16,
+          "case": "p_norm_nonquadratic_near_miss",
+          "combined_error": 4.6382939338062705,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 4.6382939338062705,
+          "null_shift": [
+            0.46914547261005035,
+            -0.8761447959996149,
+            -0.4126627743106036,
+            0.8185882316772879
+          ],
+          "quotient_x": [
+            0.11935720569361696,
+            -1.184531736078119,
+            -1.365088951358032,
+            -0.6102049938043759
+          ],
+          "quotient_y": [
+            0.04345529566067308,
+            0.9557595517420197,
+            -1.2840962939634049,
+            0.7629442774353592
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 6,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 6.498895573896543e-16,
+          "case": "p_norm_nonquadratic_near_miss",
+          "combined_error": 4.019785659043096,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 4.019785659043096,
+          "null_shift": [
+            0.46754930888773716,
+            0.7147922998132301,
+            0.47624214389505637,
+            1.071392687380196
+          ],
+          "quotient_x": [
+            1.2607784102488173,
+            -0.9774704393318514,
+            0.530583738540626,
+            -0.8782559622898948
+          ],
+          "quotient_y": [
+            -1.1088822021539788,
+            1.1049899654357125,
+            1.1322039155174664,
+            -1.264370935831315
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 163,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 2.482534153247273e-16,
+          "case": "p_norm_nonquadratic_near_miss",
+          "combined_error": 3.7941417004947446,
+          "energy_two_homogeneity_error": 3.552713678800501e-15,
+          "four_point_residual_error": 3.7941417004947446,
+          "null_shift": [
+            -0.7921167339415399,
+            -0.36058317090050596,
+            -1.1825661088595905,
+            1.0013200426463416
+          ],
+          "quotient_x": [
+            0.46075857535101883,
+            0.565834007259121,
+            1.372909331634613,
+            0.6789150647308593
+          ],
+          "quotient_y": [
+            0.559960529914749,
+            0.3144470287963137,
+            -1.3135813052384804,
+            1.158972438076979
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 64,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 8.777083671441753e-17,
+          "case": "p_norm_nonquadratic_near_miss",
+          "combined_error": 3.6961472169301324,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 3.6961472169301324,
+          "null_shift": [
+            1.0169481502710822,
+            0.24214915908117796,
+            0.7833327065589091,
+            0.2815836456907035
+          ],
+          "quotient_x": [
+            -1.291724500039368,
+            1.224813973145281,
+            0.08254652499074866,
+            -1.3469435623425625
+          ],
+          "quotient_y": [
+            1.2609920055069006,
+            -1.155680693523956,
+            1.096679077608031,
+            -0.8238519196928988
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 230,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 4.744904746134193e-16,
+          "case": "p_norm_nonquadratic_near_miss",
+          "combined_error": 3.4479019138476623,
+          "energy_two_homogeneity_error": 1.1102230246251565e-16,
+          "four_point_residual_error": 3.4479019138476623,
+          "null_shift": [
+            -0.5356504289090315,
+            0.9407875346460546,
+            -0.5419666352492231,
+            -0.5140464294819547
+          ],
+          "quotient_x": [
+            -0.06748410433682284,
+            1.2738373229325184,
+            1.0546078373362113,
+            -0.7439054685003583
+          ],
+          "quotient_y": [
+            -0.5831643880542691,
+            1.1320520382248103,
+            -1.0267637107809684,
+            -0.9077938437825879
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 4,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 4.965068306494546e-16,
+          "case": "p_norm_nonquadratic_near_miss",
+          "combined_error": 3.4028538775812454,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 3.4028538775812454,
+          "null_shift": [
+            -1.167143162777996,
+            0.2652823476084858,
+            -0.5225936740296889,
+            0.18304957458137427
+          ],
+          "quotient_x": [
+            0.9269416715591348,
+            1.0846595280757323,
+            -0.8712811691984812,
+            0.674714428186002
+          ],
+          "quotient_y": [
+            0.901847097877281,
+            0.9555599437630429,
+            1.2706308230742671,
+            0.9034542302311368
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 60,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 2.0062885096040707e-16,
+          "case": "p_norm_nonquadratic_near_miss",
+          "combined_error": 3.393772469494552,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 3.393772469494552,
+          "null_shift": [
+            0.19251456264590439,
+            0.09307673639292857,
+            -1.0333537682317389,
+            0.8769173841137377
+          ],
+          "quotient_x": [
+            -0.2001357305527356,
+            -1.0898277827061746,
+            1.394080587441096,
+            -0.8611466605383
+          ],
+          "quotient_y": [
+            -0.44478322277980264,
+            1.2713601505660383,
+            -1.0139475666512123,
+            -0.8251873111999493
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 127,
+          "scalar_compatibility_error": 8.899114524108741e-16
+        }
+      ]
+    },
+    {
+      "additive": false,
+      "energy_two_homogeneous": false,
+      "expected": "An asymmetric quotient cross-term breaks the gluing/parallelogram law.",
+      "expected_outcome_observed": true,
+      "failed_checks": [
+        "additivity",
+        "scalar_compatibility",
+        "energy_two_homogeneity",
+        "four_point_residual"
+      ],
+      "four_point_residual_zero": false,
+      "kind": "bad",
+      "max_errors": {
+        "additivity": 0.7100661128402262,
+        "energy_two_homogeneity": 17.107392880578303,
+        "four_point_residual": 9.516700551272645,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 2.108332779009
+      },
+      "mean_errors": {
+        "additivity": 0.16352213592183604,
+        "energy_two_homogeneity": 0.7766352577008183,
+        "four_point_residual": 0.9394370225337075,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 0.21017970792040916
+      },
+      "name": "asymmetric_cross_term",
+      "observed_pass": false,
+      "p95_errors": {
+        "additivity": 0.41771279660872684,
+        "energy_two_homogeneity": 4.5000160493359616,
+        "four_point_residual": 3.6729469564411534,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 0.9212816849530612
+      },
+      "representative_invariant": true,
+      "scalar_compatible": false,
+      "witness_count": 8,
+      "worst_witnesses": [
+        {
+          "additivity_error": 0.2334401775243451,
+          "case": "asymmetric_cross_term",
+          "combined_error": 17.107392880578303,
+          "energy_two_homogeneity_error": 17.107392880578303,
+          "four_point_residual_error": 0.9548606299298692,
+          "null_shift": [
+            0.10609019592985036,
+            0.5170433933105589,
+            -0.18557182522575522,
+            -0.16174662863414646
+          ],
+          "quotient_x": [
+            1.3405467138526928,
+            -1.2356620288901707,
+            1.3121090811782645,
+            -1.0016699781995249
+          ],
+          "quotient_y": [
+            -0.6365663170270293,
+            0.1886290230019283,
+            -1.1915091023645974,
+            0.07324459452017607
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 88,
+          "scalar_compatibility_error": 2.108332779009
+        },
+        {
+          "additivity_error": 0.7100661128402262,
+          "case": "asymmetric_cross_term",
+          "combined_error": 11.311741325827423,
+          "energy_two_homogeneity_error": 11.311741325827423,
+          "four_point_residual_error": 3.970010399670578,
+          "null_shift": [
+            0.1907610310963388,
+            -0.45586633653199005,
+            -0.9764812291697778,
+            0.636520211753091
+          ],
+          "quotient_x": [
+            1.2898313046136876,
+            -1.1496891256369173,
+            0.11549550571991785,
+            0.22090996095936455
+          ],
+          "quotient_y": [
+            1.3087213193727698,
+            -1.2429937702812655,
+            1.3670731011154835,
+            1.1785300370056002
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 31,
+          "scalar_compatibility_error": 1.6304944723246877
+        },
+        {
+          "additivity_error": 0.21956384151270097,
+          "case": "asymmetric_cross_term",
+          "combined_error": 10.057148697796286,
+          "energy_two_homogeneity_error": 10.057148697796286,
+          "four_point_residual_error": 0.7729135517563588,
+          "null_shift": [
+            0.7170689993695765,
+            0.3748587173222284,
+            1.0867379093826195,
+            -0.8679174481905816
+          ],
+          "quotient_x": [
+            -1.071018056706187,
+            1.3712528788908789,
+            1.1512159334131273,
+            -1.0680754625906377
+          ],
+          "quotient_y": [
+            0.8423806950315278,
+            0.1029257692293224,
+            -0.20758770165816043,
+            -1.2818239182215796
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 48,
+          "scalar_compatibility_error": 1.924530441992032
+        },
+        {
+          "additivity_error": 0.6511786587519532,
+          "case": "asymmetric_cross_term",
+          "combined_error": 9.516700551272645,
+          "energy_two_homogeneity_error": 5.063454382691816,
+          "four_point_residual_error": 9.516700551272645,
+          "null_shift": [
+            1.0169481502710822,
+            0.24214915908117796,
+            0.7833327065589091,
+            0.2815836456907035
+          ],
+          "quotient_x": [
+            -1.291724500039368,
+            1.224813973145281,
+            0.08254652499074866,
+            -1.3469435623425625
+          ],
+          "quotient_y": [
+            1.2609920055069006,
+            -1.155680693523956,
+            1.096679077608031,
+            -0.8238519196928988
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 230,
+          "scalar_compatibility_error": 0.6644913311829748
+        },
+        {
+          "additivity_error": 0.13146075689469058,
+          "case": "asymmetric_cross_term",
+          "combined_error": 7.9892110100614175,
+          "energy_two_homogeneity_error": 7.9892110100614175,
+          "four_point_residual_error": 0.17201056544768,
+          "null_shift": [
+            -0.8647586778628158,
+            -1.0866504934877301,
+            0.13818751870501944,
+            -0.8260955158422514
+          ],
+          "quotient_x": [
+            -0.9310713702184018,
+            1.1385124613762612,
+            1.2905245545020803,
+            -0.6657727909365991
+          ],
+          "quotient_y": [
+            0.08463881050618194,
+            -0.568486528906565,
+            0.9868945811456382,
+            0.9668576827701778
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 63,
+          "scalar_compatibility_error": 1.071299243721954
+        },
+        {
+          "additivity_error": 0.12283428275435607,
+          "case": "asymmetric_cross_term",
+          "combined_error": 7.142570845884208,
+          "energy_two_homogeneity_error": 7.142570845884208,
+          "four_point_residual_error": 0.9662026242745618,
+          "null_shift": [
+            -0.2625744461616678,
+            -1.047762483131689,
+            -1.1948250621806775,
+            -0.39434041713151635
+          ],
+          "quotient_x": [
+            -1.2422172043921285,
+            -0.9377169680827351,
+            -1.1807389886997726,
+            -0.9247375398616019
+          ],
+          "quotient_y": [
+            0.4456350722392297,
+            -0.7912826772995563,
+            0.5128898772721568,
+            -1.03764844285845
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 152,
+          "scalar_compatibility_error": 1.5264400573284391
+        },
+        {
+          "additivity_error": 0.40656790008647226,
+          "case": "asymmetric_cross_term",
+          "combined_error": 6.815392209559743,
+          "energy_two_homogeneity_error": 6.815392209559743,
+          "four_point_residual_error": 4.341111468614086,
+          "null_shift": [
+            -0.16940557484342111,
+            -0.39737000063916306,
+            -1.1172495542811864,
+            -0.8868083073443427
+          ],
+          "quotient_x": [
+            1.0575028712209136,
+            -0.9099314828619692,
+            -0.23230120340857185,
+            -0.6527114000754928
+          ],
+          "quotient_y": [
+            -0.9150060306488532,
+            1.000282381821004,
+            -0.7336979204850506,
+            1.0364649493756035
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 239,
+          "scalar_compatibility_error": 1.058025757645099
+        },
+        {
+          "additivity_error": 0.3684302265843839,
+          "case": "asymmetric_cross_term",
+          "combined_error": 6.781172338842985,
+          "energy_two_homogeneity_error": 6.781172338842985,
+          "four_point_residual_error": 1.5418530942849529,
+          "null_shift": [
+            -0.39993483802088126,
+            0.12286412058226004,
+            -0.9319520118820408,
+            -1.0070668576437147
+          ],
+          "quotient_x": [
+            1.2061963421831932,
+            0.7036047143180726,
+            -0.2397277965276805,
+            -1.025442453572618
+          ],
+          "quotient_y": [
+            -0.639551051130977,
+            -1.0341027784593098,
+            -0.47859807740270544,
+            -0.9463668764261868
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 111,
+          "scalar_compatibility_error": 0.9331527533358496
+        }
+      ]
+    }
+  ],
+  "control": {
+    "C": "scripts/unification_quotient_four_point_stress_harness.py",
+    "F": "Does not prove admissible defect quotient, gluing linearity, four-point cancellation, parallelogram, or terminal unification.",
+    "G": "promotion=false and diagnostic_only=true are invariant; ok only means diagnostic separation succeeded.",
+    "L": "finite representatives -> quotient gluing cases -> residual metrics -> fail-closed JSON receipt",
+    "O": "Lane 6 owner Zeno; unification quotient/four-point stress diagnostic.",
+    "P": "Separate one quadratic admissible proxy from four bad quotient/nonquadratic/asymmetric obstructions.",
+    "R": "Stress representative invariance and four-point residual cancellation under quotient admissibility near-misses.",
+    "S": "Pure stdlib finite diagnostic; no theorem, Agda proof, or promotion authority."
+  },
+  "diagnostic_only": true,
+  "good_cases": [
+    {
+      "additive": true,
+      "energy_two_homogeneous": true,
+      "expected": "Linear quotient gluing ignores null representatives and the induced quadratic energy has zero four-point residual.",
+      "expected_outcome_observed": true,
+      "failed_checks": [],
+      "four_point_residual_zero": true,
+      "kind": "good",
+      "max_errors": {
+        "additivity": 9.945640348601413e-16,
+        "energy_two_homogeneity": 1.4210854715202004e-14,
+        "four_point_residual": 1.0658141036401503e-14,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 1.2560739669470201e-15
+      },
+      "mean_errors": {
+        "additivity": 2.8937543777907864e-16,
+        "energy_two_homogeneity": 9.484600604903193e-16,
+        "four_point_residual": 1.8756697583999227e-15,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 1.6771862404558795e-16
+      },
+      "name": "quadratic_quotient_representative_invariant",
+      "observed_pass": true,
+      "p95_errors": {
+        "additivity": 5.551115123125783e-16,
+        "energy_two_homogeneity": 7.105427357601002e-15,
+        "four_point_residual": 5.329070518200751e-15,
+        "representative_shift": 0.0,
+        "scalar_compatibility": 6.663596519452762e-16
+      },
+      "representative_invariant": true,
+      "scalar_compatible": true,
+      "witness_count": 8,
+      "worst_witnesses": [
+        {
+          "additivity_error": 4.744904746134193e-16,
+          "case": "quadratic_quotient_representative_invariant",
+          "combined_error": 3.552713678800501e-15,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 3.552713678800501e-15,
+          "null_shift": [
+            -0.5356504289090315,
+            0.9407875346460546,
+            -0.5419666352492231,
+            -0.5140464294819547
+          ],
+          "quotient_x": [
+            -0.06748410433682284,
+            1.2738373229325184,
+            1.0546078373362113,
+            -0.7439054685003583
+          ],
+          "quotient_y": [
+            -0.5831643880542691,
+            1.1320520382248103,
+            -1.0267637107809684,
+            -0.9077938437825879
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 4,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 4.644396126208125e-16,
+          "case": "quadratic_quotient_representative_invariant",
+          "combined_error": 3.552713678800501e-15,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 3.552713678800501e-15,
+          "null_shift": [
+            0.46914547261005035,
+            -0.8761447959996149,
+            -0.4126627743106036,
+            0.8185882316772879
+          ],
+          "quotient_x": [
+            0.11935720569361696,
+            -1.184531736078119,
+            -1.365088951358032,
+            -0.6102049938043759
+          ],
+          "quotient_y": [
+            0.04345529566067308,
+            0.9557595517420197,
+            -1.2840962939634049,
+            0.7629442774353592
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 6,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 2.237726045655905e-16,
+          "case": "quadratic_quotient_representative_invariant",
+          "combined_error": 3.552713678800501e-15,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 3.552713678800501e-15,
+          "null_shift": [
+            -0.4509775001010522,
+            1.0144839939715509,
+            0.4585785416693742,
+            -0.1059960062404608
+          ],
+          "quotient_x": [
+            -1.2586926908890588,
+            0.20435551448303402,
+            0.5104080334952799,
+            0.10862663037491904
+          ],
+          "quotient_y": [
+            0.9761253204900662,
+            1.0532489376987746,
+            1.2966211069346465,
+            0.4914007998969345
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 7,
+          "scalar_compatibility_error": 2.482534153247273e-16
+        },
+        {
+          "additivity_error": 0.0,
+          "case": "quadratic_quotient_representative_invariant",
+          "combined_error": 2.6645352591003757e-15,
+          "energy_two_homogeneity_error": 1.7763568394002505e-15,
+          "four_point_residual_error": 2.6645352591003757e-15,
+          "null_shift": [
+            0.9641418955285015,
+            -0.38026025170184374,
+            1.04905921696006,
+            -0.15591243070979455
+          ],
+          "quotient_x": [
+            1.1673509608460817,
+            -0.7698749193234264,
+            -1.3302893149397932,
+            -0.14472039380102752
+          ],
+          "quotient_y": [
+            -0.038440259443974334,
+            -0.8502033457880559,
+            0.6582661278321291,
+            -0.8513612196316866
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 1,
+          "scalar_compatibility_error": 5.438959822042073e-16
+        },
+        {
+          "additivity_error": 1.1102230246251565e-16,
+          "case": "quadratic_quotient_representative_invariant",
+          "combined_error": 2.6645352591003757e-15,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 2.6645352591003757e-15,
+          "null_shift": [
+            1.1160434291220216,
+            -0.7835253301342768,
+            -0.6205767055730855,
+            -0.12916693070829455
+          ],
+          "quotient_x": [
+            -0.9731764120020756,
+            0.4540713881369818,
+            0.31409882033182535,
+            0.6833913529287212
+          ],
+          "quotient_y": [
+            0.1130222625278936,
+            -0.05163503194651953,
+            0.7335040224777858,
+            -0.879628786528548
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 3,
+          "scalar_compatibility_error": 0.0
+        },
+        {
+          "additivity_error": 4.996003610813204e-16,
+          "case": "quadratic_quotient_representative_invariant",
+          "combined_error": 1.7763568394002505e-15,
+          "energy_two_homogeneity_error": 1.7763568394002505e-15,
+          "four_point_residual_error": 1.7763568394002505e-15,
+          "null_shift": [
+            0.7341925166387926,
+            -0.8170035246823211,
+            0.48464694997245417,
+            0.6276924889234481
+          ],
+          "quotient_x": [
+            -0.014317894672378761,
+            0.0383533502243365,
+            -0.7332374496504436,
+            -1.3659497539615821
+          ],
+          "quotient_y": [
+            0.6553918296328325,
+            0.9418256399548706,
+            0.6612502183555549,
+            0.1701515909065734
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 2,
+          "scalar_compatibility_error": 4.577599668110672e-16
+        },
+        {
+          "additivity_error": 1.1102230246251565e-16,
+          "case": "quadratic_quotient_representative_invariant",
+          "combined_error": 1.7763568394002505e-15,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 1.7763568394002505e-15,
+          "null_shift": [
+            -0.7842706091362965,
+            -0.3255822930022789,
+            0.13984798538590004,
+            -0.12544576689191067
+          ],
+          "quotient_x": [
+            -0.5908031033420454,
+            -0.9956063425629873,
+            -1.3656900257045812,
+            1.0461474940369366
+          ],
+          "quotient_y": [
+            -0.6955737981130091,
+            -1.0905499506174527,
+            0.5711102053432229,
+            -1.0996825241907195
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 5,
+          "scalar_compatibility_error": 4.440892098500626e-16
+        },
+        {
+          "additivity_error": 2.220446049250313e-16,
+          "case": "quadratic_quotient_representative_invariant",
+          "combined_error": 8.881784197001252e-16,
+          "energy_two_homogeneity_error": 0.0,
+          "four_point_residual_error": 8.881784197001252e-16,
+          "null_shift": [
+            -0.5749778491254095,
+            0.762361118534663,
+            -0.14545889684232227,
+            -0.5228458655710861
+          ],
+          "quotient_x": [
+            0.16910527360180239,
+            -0.5281453407251369,
+            1.2285976245552486,
+            -0.637829842795573
+          ],
+          "quotient_y": [
+            1.3066180047241684,
+            0.009903828894105349,
+            0.0751679514651582,
+            -0.4462864506820229
+          ],
+          "representative_shift_error": 0.0,
+          "sample": 0,
+          "scalar_compatibility_error": 0.0
+        }
+      ]
+    }
+  ],
+  "ok": true,
+  "parameters": {
+    "ambient_dimension": 8,
+    "bad_floor": 0.01,
+    "dimension": 4,
+    "samples": 256,
+    "seed": 20260608,
+    "tolerance": 1e-06
+  },
+  "promotion": false,
+  "rows": [
+    {
+      "additivity_error": 0.5140220222745117,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 41.01895732567036,
+      "energy_two_homogeneity_error": 41.01895732567036,
+      "four_point_residual_error": 4.374113034995375,
+      "representative_shift_error": 0.0,
+      "sample": 120,
+      "scalar_compatibility_error": 4.26362632895735
+    },
+    {
+      "additivity_error": 0.5372061565039608,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 37.52250554173095,
+      "energy_two_homogeneity_error": 37.52250554173095,
+      "four_point_residual_error": 10.583495952779383,
+      "representative_shift_error": 0.0,
+      "sample": 127,
+      "scalar_compatibility_error": 2.4562789349566456
+    },
+    {
+      "additivity_error": 0.7597444332725667,
+      "case": "representative_shift_leak",
+      "combined_error": 33.77663159827932,
+      "energy_two_homogeneity_error": 33.77663159827932,
+      "four_point_residual_error": 3.8191768594063973,
+      "representative_shift_error": 0.33124140937634067,
+      "sample": 191,
+      "scalar_compatibility_error": 2.7053633435847075
+    },
+    {
+      "additivity_error": 0.3223241368915666,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 33.00760779821709,
+      "energy_two_homogeneity_error": 33.00760779821709,
+      "four_point_residual_error": 1.0026107948922132,
+      "representative_shift_error": 0.0,
+      "sample": 152,
+      "scalar_compatibility_error": 4.3349572306346476
+    },
+    {
+      "additivity_error": 0.23266787826262325,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 32.66756236412867,
+      "energy_two_homogeneity_error": 32.66756236412867,
+      "four_point_residual_error": 0.64117339054655,
+      "representative_shift_error": 0.0,
+      "sample": 63,
+      "scalar_compatibility_error": 2.8668902864678625
+    },
+    {
+      "additivity_error": 0.21794697960207476,
+      "case": "representative_shift_leak",
+      "combined_error": 29.897272308002414,
+      "energy_two_homogeneity_error": 29.897272308002414,
+      "four_point_residual_error": 3.6618955985856285,
+      "representative_shift_error": 0.5928612453686535,
+      "sample": 231,
+      "scalar_compatibility_error": 2.2624799686362955
+    },
+    {
+      "additivity_error": 1.1843682745427606,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 28.918224984369367,
+      "energy_two_homogeneity_error": 28.918224984369367,
+      "four_point_residual_error": 12.018578663977344,
+      "representative_shift_error": 0.0,
+      "sample": 31,
+      "scalar_compatibility_error": 2.412577338775799
+    },
+    {
+      "additivity_error": 0.12502458174882047,
+      "case": "representative_shift_leak",
+      "combined_error": 27.40035408011491,
+      "energy_two_homogeneity_error": 27.40035408011491,
+      "four_point_residual_error": 1.6655365048513353,
+      "representative_shift_error": 0.6927697147633713,
+      "sample": 183,
+      "scalar_compatibility_error": 2.1060358792332226
+    },
+    {
+      "additivity_error": 0.5577458544533704,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 27.399022981226494,
+      "energy_two_homogeneity_error": 27.399022981226494,
+      "four_point_residual_error": 11.85910401891455,
+      "representative_shift_error": 0.0,
+      "sample": 223,
+      "scalar_compatibility_error": 1.961730458474364
+    },
+    {
+      "additivity_error": 0.0027157932878718594,
+      "case": "representative_shift_leak",
+      "combined_error": 26.065802688103304,
+      "energy_two_homogeneity_error": 26.065802688103304,
+      "four_point_residual_error": 1.1324945995305917,
+      "representative_shift_error": 0.9236275193022742,
+      "sample": 135,
+      "scalar_compatibility_error": 3.3683379946535705
+    },
+    {
+      "additivity_error": 0.3650507864775585,
+      "case": "representative_shift_leak",
+      "combined_error": 25.18785632267894,
+      "energy_two_homogeneity_error": 25.18785632267894,
+      "four_point_residual_error": 2.660141484303356,
+      "representative_shift_error": 1.3105407522793422,
+      "sample": 207,
+      "scalar_compatibility_error": 2.351116534451662
+    },
+    {
+      "additivity_error": 0.49734361122578113,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 24.494256494896415,
+      "energy_two_homogeneity_error": 24.494256494896415,
+      "four_point_residual_error": 4.9315345434124485,
+      "representative_shift_error": 0.0,
+      "sample": 80,
+      "scalar_compatibility_error": 4.133378396906539
+    },
+    {
+      "additivity_error": 0.3743197214347539,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 24.28578067478759,
+      "energy_two_homogeneity_error": 24.28578067478759,
+      "four_point_residual_error": 2.864734388228955,
+      "representative_shift_error": 0.0,
+      "sample": 215,
+      "scalar_compatibility_error": 1.7556743092154041
+    },
+    {
+      "additivity_error": 0.791748050882775,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 24.095286273988613,
+      "energy_two_homogeneity_error": 24.095286273988613,
+      "four_point_residual_error": 10.33829374695733,
+      "representative_shift_error": 0.0,
+      "sample": 88,
+      "scalar_compatibility_error": 5.455871409202103
+    },
+    {
+      "additivity_error": 0.5886182108156234,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 22.98528230537518,
+      "energy_two_homogeneity_error": 22.98528230537518,
+      "four_point_residual_error": 9.849169903658563,
+      "representative_shift_error": 0.0,
+      "sample": 119,
+      "scalar_compatibility_error": 2.409281449185167
+    },
+    {
+      "additivity_error": 0.3092334870707655,
+      "case": "representative_shift_leak",
+      "combined_error": 22.69979977034079,
+      "energy_two_homogeneity_error": 22.69979977034079,
+      "four_point_residual_error": 5.332515689433935,
+      "representative_shift_error": 1.4841864164333314,
+      "sample": 119,
+      "scalar_compatibility_error": 2.232678584972717
+    },
+    {
+      "additivity_error": 0.9853858952453995,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 22.136058119818017,
+      "energy_two_homogeneity_error": 22.136058119818017,
+      "four_point_residual_error": 11.683340034091636,
+      "representative_shift_error": 0.0,
+      "sample": 110,
+      "scalar_compatibility_error": 1.656163939915113
+    },
+    {
+      "additivity_error": 0.025083368167244435,
+      "case": "representative_shift_leak",
+      "combined_error": 20.193788344863677,
+      "energy_two_homogeneity_error": 20.193788344863677,
+      "four_point_residual_error": 0.7173981486927836,
+      "representative_shift_error": 1.8685565817883238,
+      "sample": 71,
+      "scalar_compatibility_error": 1.7989840845059106
+    },
+    {
+      "additivity_error": 0.18350879495752803,
+      "case": "representative_shift_leak",
+      "combined_error": 20.110412813486285,
+      "energy_two_homogeneity_error": 20.110412813486285,
+      "four_point_residual_error": 1.815843338400109,
+      "representative_shift_error": 1.037946340897986,
+      "sample": 103,
+      "scalar_compatibility_error": 1.888105390260698
+    },
+    {
+      "additivity_error": 0.6425189357064306,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 18.429882356760142,
+      "energy_two_homogeneity_error": 18.429882356760142,
+      "four_point_residual_error": 4.670269312021761,
+      "representative_shift_error": 0.0,
+      "sample": 200,
+      "scalar_compatibility_error": 2.8097929090067604
+    },
+    {
+      "additivity_error": 0.5962690508619348,
+      "case": "representative_shift_leak",
+      "combined_error": 18.205531706836084,
+      "energy_two_homogeneity_error": 18.205531706836084,
+      "four_point_residual_error": 6.792070538247202,
+      "representative_shift_error": 0.2561857594464074,
+      "sample": 88,
+      "scalar_compatibility_error": 3.3463058779576897
+    },
+    {
+      "additivity_error": 0.17241068676839677,
+      "case": "representative_shift_leak",
+      "combined_error": 17.50078407002296,
+      "energy_two_homogeneity_error": 17.50078407002296,
+      "four_point_residual_error": 3.391539054289714,
+      "representative_shift_error": 0.9576921231094133,
+      "sample": 247,
+      "scalar_compatibility_error": 1.8785829471959627
+    },
+    {
+      "additivity_error": 0.5726993850613372,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 17.458730048997346,
+      "energy_two_homogeneity_error": 17.458730048997346,
+      "four_point_residual_error": 4.349570466103616,
+      "representative_shift_error": 0.0,
+      "sample": 79,
+      "scalar_compatibility_error": 1.4768587953430947
+    },
+    {
+      "additivity_error": 0.2334401775243451,
+      "case": "asymmetric_cross_term",
+      "combined_error": 17.107392880578303,
+      "energy_two_homogeneity_error": 17.107392880578303,
+      "four_point_residual_error": 0.9548606299298692,
+      "representative_shift_error": 0.0,
+      "sample": 88,
+      "scalar_compatibility_error": 2.108332779009
+    },
+    {
+      "additivity_error": 0.6475988704718478,
+      "case": "representative_shift_leak",
+      "combined_error": 16.488280685950592,
+      "energy_two_homogeneity_error": 16.488280685950592,
+      "four_point_residual_error": 5.300297246701646,
+      "representative_shift_error": 0.21161878783628926,
+      "sample": 208,
+      "scalar_compatibility_error": 2.7485520787281694
+    },
+    {
+      "additivity_error": 0.8263556765677101,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 16.4835453438482,
+      "energy_two_homogeneity_error": 16.4835453438482,
+      "four_point_residual_error": 5.999819251554383,
+      "representative_shift_error": 0.0,
+      "sample": 248,
+      "scalar_compatibility_error": 3.089225192440995
+    },
+    {
+      "additivity_error": 0.7965284733600578,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 16.434498277299284,
+      "energy_two_homogeneity_error": 16.434498277299284,
+      "four_point_residual_error": 1.6741961272250245,
+      "representative_shift_error": 0.0,
+      "sample": 103,
+      "scalar_compatibility_error": 2.36663034415206
+    },
+    {
+      "additivity_error": 0.2820566017324112,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 16.022073220295667,
+      "energy_two_homogeneity_error": 16.022073220295667,
+      "four_point_residual_error": 8.67377787437429,
+      "representative_shift_error": 0.0,
+      "sample": 64,
+      "scalar_compatibility_error": 2.3012475441866185
+    },
+    {
+      "additivity_error": 1.17774876378002,
+      "case": "representative_shift_leak",
+      "combined_error": 15.660232253463647,
+      "energy_two_homogeneity_error": 3.8677903903636945,
+      "four_point_residual_error": 15.660232253463647,
+      "representative_shift_error": 1.9691504160234683,
+      "sample": 136,
+      "scalar_compatibility_error": 4.296166640515261
+    },
+    {
+      "additivity_error": 0.3734738572137213,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 15.65934998940449,
+      "energy_two_homogeneity_error": 15.65934998940449,
+      "four_point_residual_error": 1.4383040835335241,
+      "representative_shift_error": 0.0,
+      "sample": 206,
+      "scalar_compatibility_error": 1.2923079226220262
+    },
+    {
+      "additivity_error": 0.48733200777479085,
+      "case": "nonlinear_gluing_quotient",
+      "combined_error": 15.327731597739987,
+      "energy_two_homogeneity_error": 15.327731597739987,
+      "four_point_residual_error": 8.36215512030095,
+      "representative_shift_error": 0.0,
+      "sample": 240,
+      "scalar_compatibility_error": 3.213054051190526
+    },
+    {
+      "additivity_error": 0.027471462959083315,
+      "case": "representative_shift_leak",
+      "combined_error": 15.256552596450184,
+      "energy_two_homogeneity_error": 15.256552596450184,
+      "four_point_residual_error": 0.2547340460610954,
+      "representative_shift_error": 0.8919304046587047,
+      "sample": 215,
+      "scalar_compatibility_error": 2.039772701338823
+    }
+  ],
+  "validation_flags": {
+    "all_bad_cases_fail": true,
+    "all_bad_cases_visible": true,
+    "all_good_cases_pass": true,
+    "asymmetric_cross_term_detected": true,
+    "diagnostic_only_is_true": true,
+    "has_four_bad_cases": true,
+    "has_one_good_case": true,
+    "nonlinear_gluing_detected": true,
+    "p_norm_near_miss_isolated": true,
+    "promotion_is_false": true,
+    "representative_shift_leak_detected": true
+  }
+}

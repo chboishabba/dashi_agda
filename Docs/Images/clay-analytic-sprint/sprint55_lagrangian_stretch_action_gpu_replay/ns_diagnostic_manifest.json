@@ -1,0 +1,24 @@
+{
+  "source": "../dashiCFD/outputs/sprint55_lagrangian_stretch_action_gpu_audit/ns_sprint55_lagrangian_action_summary.json",
+  "parameters": {
+    "replay_mode": "sprint55_lagrangian_action_from_gpu_summary",
+    "sprint55_lagrangian_action_summary_input": "../dashiCFD/outputs/sprint55_lagrangian_stretch_action_gpu_audit/ns_sprint55_lagrangian_action_summary.json"
+  },
+  "diagnostic_mode": "sprint55_lagrangian_action_replay_from_gpu_summary",
+  "lagrangian_action_row_count": 3388,
+  "hysteresis_row_count": 56006,
+  "action_summary_row_count": 56,
+  "outputs": {
+    "sprint55_lagrangian_action_summary": "Docs/Images/clay-analytic-sprint/sprint55_lagrangian_stretch_action_gpu_replay/ns_sprint55_lagrangian_action_summary.json",
+    "lagrangian_stretch_action_csv": "Docs/Images/clay-analytic-sprint/sprint55_lagrangian_stretch_action_gpu_replay/ns_lagrangian_stretch_action.csv",
+    "packet_action_hysteresis_csv": "Docs/Images/clay-analytic-sprint/sprint55_lagrangian_stretch_action_gpu_replay/ns_packet_action_hysteresis.csv",
+    "lagrangian_action_by_shell_csv": "Docs/Images/clay-analytic-sprint/sprint55_lagrangian_stretch_action_gpu_replay/ns_lagrangian_action_by_shell.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint55_lagrangian_stretch_action_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint55_lagrangian_stretch_action_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyFiveLagrangianStretchActionAuditReceipt",
+  "evidence_boundary": "Sprint 55 replay consumes Lagrangian accumulated stretch-action summary artifacts only. It does not recompute truth snapshots, material lineage, packet masks, packet-local stretch action, weighted action summability, physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_SPRINT55_LAGRANGIAN_ACTION_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

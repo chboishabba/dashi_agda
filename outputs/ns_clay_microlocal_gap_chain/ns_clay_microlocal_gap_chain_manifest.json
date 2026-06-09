@@ -1,0 +1,33 @@
+{
+  "contract": "ns_clay_microlocal_gap_chain",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_clay_microlocal_gap_chain/ns_clay_microlocal_gap_chain_manifest.json",
+      "sha256": "2adb17674841ff85da581140324bb48038f41daf93116784e7cb8fa26df85a62"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_clay_microlocal_gap_chain/ns_clay_microlocal_gap_chain.md",
+      "sha256": "caea7ca38affba1b59cb647a676d1722274178000dbcc8e680415f03983fcce1"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_clay_microlocal_gap_chain/ns_clay_microlocal_gap_chain_rows.csv",
+      "sha256": "cb77bdc38964bbaf79552cfa4a664748b3889a140fcbdf9ca71ccccd4c3905a3"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_clay_microlocal_gap_chain/ns_clay_microlocal_gap_chain_rows.json",
+      "sha256": "54a25b60513e7332208825e2f4ec4a6051d6605a69439dcf69c73d60679de415"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_clay_microlocal_gap_chain/ns_clay_microlocal_gap_chain_summary.json",
+      "sha256": "8e75f53372637be842d8cf7d5a06497262dbe4b230ec583feff5a04e44b2f0bd"
+    }
+  },
+  "generated_at": "2026-06-08T00:00:00+10:00",
+  "manifest_hash": "966d8733842eeb1ad33c0d0229c974d95428910662959f7a0d0ae25bd9566fe5",
+  "validation_passed": true
+}

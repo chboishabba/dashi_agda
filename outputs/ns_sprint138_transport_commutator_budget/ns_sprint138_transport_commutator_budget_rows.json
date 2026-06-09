@@ -1,0 +1,172 @@
+[
+  {
+    "budget_effect": "Diffusion is nonpositive; homogeneous v terms are linear in the positive maximum; two nonhomogeneous terms remain: 2 u1 partial_z^2 psi1 and -(partial_z u^r) partial_r u1.",
+    "clay_navier_stokes_promoted": false,
+    "domination_available": false,
+    "domination_required": true,
+    "gate": "TransportCommutatorDominationForVBarrier",
+    "global_barrier_closed": false,
+    "missing_evidence": [],
+    "role_at_first_positive_max": "Defines the exact local budget to be tested at the first positive maximum of v.",
+    "row_id": "barrier_equation_inventory",
+    "status": "encoded",
+    "support": [
+      "Sprint137 axial monotonicity gate",
+      "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+      "At the first interior positive maximum of v, v>0, partial_r v=partial_z v=0, and Ltilde v<=0."
+    ],
+    "term_class": "equation_inventory",
+    "term_or_relation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+  },
+  {
+    "budget_effect": "They can be placed in a Gronwall coefficient if the coefficient partial_z psi1 and partial_z u^z is time integrable along the barrier window.",
+    "clay_navier_stokes_promoted": false,
+    "domination_available": false,
+    "domination_required": true,
+    "gate": "TransportCommutatorDominationForVBarrier",
+    "global_barrier_closed": false,
+    "missing_evidence": [
+      "uniform time-integrable strain coefficient without losing a logarithmic factor"
+    ],
+    "role_at_first_positive_max": "At v>0 these terms are proportional to the maximum value of v, not independent positive forcing.",
+    "row_id": "homogeneous_v_terms_first_positive_max",
+    "status": "linear_growth_not_obstruction_by_itself",
+    "support": [
+      "first positive maximum geometry",
+      "standard parabolic barrier accounting"
+    ],
+    "term_class": "homogeneous_v",
+    "term_or_relation": "2 v partial_z psi1 - (partial_z u^z) v"
+  },
+  {
+    "budget_effect": "A local v barrier needs either a sign rule for -(partial_z u^r) partial_r u1 or a domination inequality against the favorable concavity/source/diffusion margin.",
+    "clay_navier_stokes_promoted": false,
+    "domination_available": false,
+    "domination_required": true,
+    "gate": "TransportCommutatorDominationForVBarrier",
+    "global_barrier_closed": false,
+    "missing_evidence": [
+      "pointwise sign of partial_z u^r times partial_r u1",
+      "scale-uniform upper bound absorbed by negative terms",
+      "structural cancellation with 2 u1 partial_z^2 psi1"
+    ],
+    "role_at_first_positive_max": "This term does not contain v and therefore can inject a positive source at the first crossing even when v is just becoming positive.",
+    "row_id": "nonhomogeneous_radial_commutator",
+    "status": "open_hazard",
+    "support": [
+      "transport commutator from differentiating u^r partial_r u1",
+      "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+    ],
+    "term_class": "nonhomogeneous_commutator",
+    "term_or_relation": "-(partial_z u^r) partial_r u1"
+  },
+  {
+    "budget_effect": "The homogeneous -(partial_z u^z)v can be rewritten as part of a trace-free strain coefficient, but the radial commutator remains a separate nonhomogeneous source.",
+    "clay_navier_stokes_promoted": false,
+    "domination_available": false,
+    "domination_required": true,
+    "gate": "TransportCommutatorDominationForVBarrier",
+    "global_barrier_closed": false,
+    "missing_evidence": [
+      "correlation theorem linking partial_z u^r to partial_r u1",
+      "boundary-compatible one-sided strain sign"
+    ],
+    "role_at_first_positive_max": "Incompressibility relates components of the strain but does not determine the sign of partial_z u^r or its correlation with partial_r u1 at the crossing.",
+    "row_id": "incompressibility_relation_limitations",
+    "status": "insufficient_for_domination",
+    "support": [
+      "axisymmetric divergence-free relation",
+      "trace-free strain accounting"
+    ],
+    "term_class": "constraint_limitation",
+    "term_or_relation": "partial_r u^r + u^r/r + partial_z u^z = 0; partial_z^2 u^z = -partial_z partial_r u^r - partial_z(u^r/r)"
+  },
+  {
+    "budget_effect": "A polynomial viscous or local concavity margin is not enough unless it explicitly absorbs log-amplified strain.",
+    "clay_navier_stokes_promoted": false,
+    "domination_available": false,
+    "domination_required": true,
+    "gate": "TransportCommutatorDominationForVBarrier",
+    "global_barrier_closed": false,
+    "missing_evidence": [
+      "no-log replacement estimate on the active barrier support",
+      "log-aware domination inequality",
+      "localized cancellation removing the coincident-ring loss"
+    ],
+    "role_at_first_positive_max": "The barrier needs strain coefficients to be controlled at the same scale where v first crosses; the log loss can amplify both homogeneous growth and the commutator bound.",
+    "row_id": "log_biot_savart_strain_hazard",
+    "status": "open_log_loss",
+    "support": [
+      "Sprint134: NoLogAxisymmetricBiotSavartUniform false",
+      "standard axisymmetric Biot-Savart kernel singularity"
+    ],
+    "term_class": "strain_hazard",
+    "term_or_relation": "partial_z u^r, partial_z u^z, and partial_z psi1 inherit nonlocal Biot-Savart strain bounds with the restored coincident-ring logarithmic loss."
+  },
+  {
+    "budget_effect": "This would reduce the local barrier back to homogeneous strain plus the already tracked 2 u1 partial_z^2 psi1 term.",
+    "clay_navier_stokes_promoted": false,
+    "domination_available": false,
+    "domination_required": false,
+    "gate": "TransportCommutatorDominationForVBarrier",
+    "global_barrier_closed": false,
+    "missing_evidence": [
+      "global pointwise sign theorem",
+      "secondary-peak compatibility",
+      "nonlocal Biot-Savart sign preservation"
+    ],
+    "role_at_first_positive_max": "If true, the nonhomogeneous radial commutator would not help create the first positive crossing.",
+    "row_id": "domination_hypothesis_pointwise_sign",
+    "status": "hypothesis_not_established",
+    "support": [
+      "candidate monotone radial profile intuition",
+      "local primary-peak geometry only"
+    ],
+    "term_class": "possible_domination_hypothesis",
+    "term_or_relation": "-(partial_z u^r) partial_r u1 <= 0 at every possible first positive maximum of v"
+  },
+  {
+    "budget_effect": "The required estimate must be log-aware, boundary-aware, and valid at any first-crossing location, not only near the primary axial maximum.",
+    "clay_navier_stokes_promoted": false,
+    "domination_available": false,
+    "domination_required": false,
+    "gate": "TransportCommutatorDominationForVBarrier",
+    "global_barrier_closed": false,
+    "missing_evidence": [
+      "explicit margin inequality",
+      "constants uniform through the Hou-Luo scaling window",
+      "axis and boundary exclusion for the crossing set"
+    ],
+    "role_at_first_positive_max": "If a scale-uniform margin existed, a positive commutator burst could be absorbed before it creates a global crossing.",
+    "row_id": "domination_hypothesis_integrated_margin",
+    "status": "hypothesis_not_established",
+    "support": [
+      "possible weighted maximum-principle route",
+      "possible localized Biot-Savart cancellation route"
+    ],
+    "term_class": "possible_domination_hypothesis",
+    "term_or_relation": "|(partial_z u^r) partial_r u1| <= margin from -2 u1 partial_z^2 psi1, -nu Ltilde v, or an integrated barrier weight"
+  },
+  {
+    "budget_effect": "Transport commutator domination remains an explicit open gate for any future Hou-Luo barrier proof.",
+    "clay_navier_stokes_promoted": false,
+    "domination_available": false,
+    "domination_required": true,
+    "gate": "TransportCommutatorDominationForVBarrier",
+    "global_barrier_closed": false,
+    "missing_evidence": [
+      "CommutatorDominationForVBarrier",
+      "global barrier closure",
+      "Clay-level regularity theorem"
+    ],
+    "role_at_first_positive_max": "The ledger permits local barrier bookkeeping but refuses to upgrade it to global axial monotonicity.",
+    "row_id": "current_fail_closed_status",
+    "status": "fail_closed",
+    "support": [
+      "Sprint137 local barrier blockers",
+      "Sprint138 commutator budget rows"
+    ],
+    "term_class": "decision",
+    "term_or_relation": "commutator domination open; local barrier not globally closed; no Clay promotion"
+  }
+]

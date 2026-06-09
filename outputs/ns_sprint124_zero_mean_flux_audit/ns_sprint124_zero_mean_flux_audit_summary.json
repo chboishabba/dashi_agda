@@ -1,0 +1,488 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint124ZeroMeanFluxOverRotationCycle.agda",
+  "assigned_bools": {
+    "blowupCriterionBridgeClosed": "false",
+    "clayNavierStokesPromoted": "false",
+    "favorablePhaseLagWindowLowerBoundClosed": "true",
+    "globalLerayCompatibleRotatingStrainDataClosed": "false",
+    "kStarCollapseFromRotatingStrainClosed": "false",
+    "localDwellWindowOnlyRecorded": "true",
+    "navierStokesClayAssemblyClosed": "false",
+    "rotatingStrainFluxBudgetBeatsKStarClosed": "false",
+    "rotatingStrainRouteClosed": "true",
+    "rotationCycleCancellationRecorded": "true",
+    "sprint123PhaseLockingImported": "true",
+    "sprint124ZeroMeanFluxOverRotationCycleLedgerClosed": "true",
+    "vortexStretchingContinuumControlClosed": "false",
+    "vortexStretchingNextRouteRecorded": "true",
+    "zeroMeanFluxOverRotationCycleRecorded": "true"
+  },
+  "blowup_criterion_bridge_closed": false,
+  "bool_checks": {
+    "blowupCriterionBridgeClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "favorablePhaseLagWindowLowerBoundClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "globalLerayCompatibleRotatingStrainDataClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "kStarCollapseFromRotatingStrainClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "localDwellWindowOnlyRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "navierStokesClayAssemblyClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "rotatingStrainFluxBudgetBeatsKStarClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "rotatingStrainRouteClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "rotationCycleCancellationRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint123PhaseLockingImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint124ZeroMeanFluxOverRotationCycleLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "vortexStretchingContinuumControlClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "vortexStretchingNextRouteRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "zeroMeanFluxOverRotationCycleRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "clayNavierStokesPromoted": false,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint124_zero_mean_flux_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, Sprint123 import, anchors, required strings, exact booleans, forbidden markers, open route, or closed vortex stretching block passage",
+    "G": "Clay Navier-Stokes promotion remains false; process success is reserved for a coherent fail-closed ledger",
+    "L": "required imports, anchors, literals, booleans, keyword consistency, route closure, next-step openness, and forbidden-marker screens must pass",
+    "O": "Worker 2 owns scripts/ns_sprint124_zero_mean_flux_audit.py plus generated outputs/ns_sprint124_zero_mean_flux_audit artifacts",
+    "P": "SPRINT124_ZERO_MEAN_FLUX_ROTATING_ROUTE_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "R": "verify Sprint124 records zero mean flux over a rotation cycle, imports Sprint123, closes the rotating route, and leaves vortex stretching next",
+    "S": "target Agda module is inspected when present; missing target blocks coherence while outputs still emit"
+  },
+  "downstream_closed": false,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "favorable_phase_lag_window_lower_bound_closed": true,
+  "final_decision": "SPRINT124_ZERO_MEAN_FLUX_ROTATING_ROUTE_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "forbidden_hit_count": 0,
+  "forbidden_hits": [],
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint124ZeroMeanFluxOverRotationCycleLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint123PhaseLockingImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "favorablePhaseLagWindowLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "zeroMeanFluxOverRotationCycleRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "rotationCycleCancellationRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "localDwellWindowOnlyRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "rotatingStrainRouteClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "vortexStretchingNextRouteRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "rotatingStrainFluxBudgetBeatsKStarClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "kStarCollapseFromRotatingStrainClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "vortexStretchingContinuumControlClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "globalLerayCompatibleRotatingStrainDataClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint124ZeroMeanFluxOverRotationCycleLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint123PhaseLockingImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:favorablePhaseLagWindowLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:zeroMeanFluxOverRotationCycleRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:rotationCycleCancellationRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:localDwellWindowOnlyRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:rotatingStrainRouteClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:vortexStretchingNextRouteRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:rotatingStrainFluxBudgetBeatsKStarClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:kStarCollapseFromRotatingStrainClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:vortexStretchingContinuumControlClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint124 imports Sprint123 phase-locking estimate",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:ZeroMeanFluxOverRotationCycle",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:signed HH-to-low flux has zero mean over one rotating-strain cycle",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:rotating-strain route closes by zero cycle-mean flux",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:the favorable lower bound is local dwell evidence, not positive cycle-mean flux",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:vortex stretching is next",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:VortexStretchingContinuumControl",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:RotatingStrainFluxBudgetBeatsKStar remains false",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:clayNavierStokesPromoted remains false",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint124ZeroMeanFluxOverRotationCycle.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "sprint123_import",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "rotating_route_closed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "recorded/open",
+      "gate": "vortex_stretching_next",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "global_leray_compatible_rotating_strain_data_closed": false,
+  "keyword_false_flags_coherent": true,
+  "keyword_true_flags_coherent": true,
+  "kstar_collapse_from_rotating_strain_closed": false,
+  "ledger_coherent_fail_closed": true,
+  "local_dwell_window_only_recorded": true,
+  "mechanism_closed": true,
+  "missing_anchors": [],
+  "missing_imports": [],
+  "missing_required_strings": [],
+  "navier_stokes_clay_assembly_closed": false,
+  "next_step": "VORTEX_STRETCHING_NEXT",
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "promotion_ready": false,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint124ZeroMeanFluxOverRotationCycle",
+    "canonicalNSSprint124ZeroMeanFluxOverRotationCycle",
+    "ImportedSprint123PhaseLocking",
+    "canonicalImportedSprint123PhaseLocking",
+    "FavorablePhaseLagWindowLowerBound",
+    "canonicalFavorablePhaseLagWindowLowerBound",
+    "ZeroMeanFluxOverRotationCycle",
+    "canonicalZeroMeanFluxOverRotationCycle",
+    "RotatingStrainRouteClosure",
+    "canonicalRotatingStrainRouteClosure",
+    "VortexStretchingNextRoute",
+    "canonicalVortexStretchingNextRoute",
+    "Sprint124GateStatuses",
+    "canonicalSprint124GateStatuses",
+    "sprint124ReceiptSummary"
+  ],
+  "required_false_flags": true,
+  "required_import_patterns": [
+    "DASHI.Physics.Closure.NSSprint123RotatingFramePhaseLockingEstimate"
+  ],
+  "required_strings": [
+    "Sprint124 imports Sprint123 phase-locking estimate",
+    "ZeroMeanFluxOverRotationCycle",
+    "signed HH-to-low flux has zero mean over one rotating-strain cycle",
+    "rotating-strain route closes by zero cycle-mean flux",
+    "the favorable lower bound is local dwell evidence, not positive cycle-mean flux",
+    "vortex stretching is next",
+    "VortexStretchingContinuumControl",
+    "RotatingStrainFluxBudgetBeatsKStar remains false",
+    "clayNavierStokesPromoted remains false"
+  ],
+  "required_true_flags": true,
+  "rotating_route_closed": true,
+  "rotating_strain_flux_budget_beats_kstar_closed": false,
+  "rotation_cycle_cancellation_recorded": true,
+  "route_decision": "SPRINT124_ZERO_MEAN_FLUX_ROTATING_ROUTE_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "sprint123_phase_locking_imported": true,
+  "sprint124_zero_mean_flux_ledger_closed": true,
+  "target_present": true,
+  "vortex_stretching_continuum_control_closed": false,
+  "vortex_stretching_next_recorded": true,
+  "zero_mean_flux_over_rotation_cycle_recorded": true
+}

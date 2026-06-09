@@ -1,0 +1,13 @@
+interface_id,interface_name,needed_for,status,defined_in_repo,blocks_effective_action_spatial_a1
+I1,BalabanEffectiveAction,carrier for S_k,DEFINED_TYPED_CARRIER,True,False
+I2,Polymer,carrier for gamma,DEFINED_TYPED_CARRIER,True,False
+I3,PolymerIn,membership relation PolymerIn S_k gamma,DEFINED_TYPED_RELATION,True,False
+I4,LinkKindTemporalSpatial,distinguish temporal and spatial support variables,DEFINED_TYPED_CLASSIFICATION,True,False
+I5,TemporalLink,typed predicate for temporal links,DEFINED_TYPED_PREDICATE,True,False
+I6,SpatialLink,typed predicate for spatial links,DEFINED_TYPED_PREDICATE,True,False
+I7,PolymerSupport,support set for residual polymer activities,DEFINED_TYPED_PREDICATE,True,False
+I8,SpatialSupport,predicate proving no temporal-link activity,DEFINED_TYPED_PREDICATE,True,False
+I9,ResidualEffectiveActionTerm,term class after transfer-matrix absorption,DEFINED_TYPED_CARRIER,True,False
+I10,ActivityDependsOnlyOnLinksInsidePolymer,Balaban/Eriksson A1-style activity locality,DEFINED_TYPED_PREDICATE,True,False
+I11,TemporalMeasureFactorizationLambdaOneReconciled,reconciles Sprint 71/73/78 lambda-one receipts,DEFINED_RECONCILIATION_CARRIER,True,False
+I12,DefinedOnBlockedL2SpatialGraph,prevents fallback to fine-lattice eta=6 graph,DEFINED_TYPED_PREDICATE,True,False

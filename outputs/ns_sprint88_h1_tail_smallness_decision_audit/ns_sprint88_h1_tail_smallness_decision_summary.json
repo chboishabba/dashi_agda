@@ -1,0 +1,141 @@
+{
+  "all_required_receipt_anchors_present": true,
+  "clay_navier_stokes_promoted": false,
+  "clay_true_detected": false,
+  "complete": false,
+  "contract": "ns_sprint88_h1_tail_smallness_decision_audit",
+  "danger_shell_absorption_condition_closed": false,
+  "expected_gates": {
+    "ClayNavierStokesPromoted": false,
+    "DangerShellAbsorptionConditionClosed": false,
+    "KStarAdmissibilityAloneInsufficient": true,
+    "LerayEnergyAloneInsufficient": true,
+    "NonCircularDangerShellH1TailSmallnessClosed": false,
+    "Sprint87FactorizationInheritedClosed": true,
+    "TimeIntegratedDissipationPointwiseInsufficient": true
+  },
+  "fail_closed": false,
+  "gate_results": [
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "sprint87FactorizationInheritedClosed",
+      "gate_id": "G1",
+      "gate_name": "Sprint87FactorizationInheritedClosed",
+      "next_required_input": "Sprint 87 factorization is inherited as a prerequisite only",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "kStarAdmissibilityAloneInsufficient",
+      "gate_id": "G2",
+      "gate_name": "KStarAdmissibilityAloneInsufficient",
+      "next_required_input": "K*(t) admissibility alone does not prove H1-tail smallness",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "lerayEnergyAloneInsufficient",
+      "gate_id": "G3",
+      "gate_name": "LerayEnergyAloneInsufficient",
+      "next_required_input": "Leray energy alone is not pointwise H1-tail smallness",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "timeIntegratedDissipationPointwiseInsufficient",
+      "gate_id": "G4",
+      "gate_name": "TimeIntegratedDissipationPointwiseInsufficient",
+      "next_required_input": "time-integrated dissipation is not a pointwise danger-shell bound",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": false,
+      "clay_promotion": false,
+      "expected_value": false,
+      "field_name": "nonCircularDangerShellH1TailSmallnessClosed",
+      "gate_id": "G5",
+      "gate_name": "NonCircularDangerShellH1TailSmallnessClosed",
+      "next_required_input": "prove non-circular H1-tail smallness without continuation input",
+      "passed": true,
+      "status": "OPEN_FAIL_CLOSED"
+    },
+    {
+      "actual_value": false,
+      "clay_promotion": false,
+      "expected_value": false,
+      "field_name": "dangerShellAbsorptionConditionClosed",
+      "gate_id": "G6",
+      "gate_name": "DangerShellAbsorptionConditionClosed",
+      "next_required_input": "derive scalar absorption at the danger shell after tail smallness",
+      "passed": true,
+      "status": "OPEN_FAIL_CLOSED"
+    },
+    {
+      "actual_value": false,
+      "clay_promotion": false,
+      "expected_value": false,
+      "field_name": "clayNavierStokesPromoted",
+      "gate_id": "G7",
+      "gate_name": "ClayNavierStokesPromoted",
+      "next_required_input": "no Clay Navier-Stokes promotion before all blockers close",
+      "passed": true,
+      "status": "FALSE_NO_PROMOTION"
+    }
+  ],
+  "gate_table": "ns_sprint88_h1_tail_smallness_decision_gate_table.csv",
+  "kstar_admissibility_alone_insufficient": true,
+  "leray_energy_alone_insufficient": true,
+  "non_circular_danger_shell_h1_tail_smallness_closed": false,
+  "open_obligations": [
+    "materialize all Sprint 88 receipt anchors if missing",
+    "prove non-circular danger-shell H1-tail smallness from admissible inputs",
+    "derive the danger-shell absorption condition only after non-circular tail smallness",
+    "keep Clay Navier-Stokes promotion false until all analytic blockers close"
+  ],
+  "receipt_path": "DASHI/Physics/Closure/NSSprint88DangerShellH1TailSmallnessDecisionReceipt.agda",
+  "route_decision": "NS_SPRINT88_H1_TAIL_SMALLNESS_DECISION_OPEN",
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint88DangerShellH1TailSmallnessDecisionReceipt.agda",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint88H1TailSmallnessDecisionReceipt; sprint87FactorizationInheritedClosed; kStarAdmissibilityAloneInsufficient; lerayEnergyAloneInsufficient; timeIntegratedDissipationPointwiseInsufficient; nonCircularDangerShellH1TailSmallnessClosed; dangerShellAbsorptionConditionClosed; clayNavierStokesPromoted",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "Sprint88H1TailSmallnessDecisionReceipt"
+    },
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint87DangerShellSupFactorizationReceipt.agda",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint87DangerShellSupFactorizationReceipt",
+      "source_id": "S2",
+      "status": "PASS",
+      "surface_name": "Sprint87DangerShellSupFactorization"
+    },
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint86KStarHHalfTailObstructionReceipt.agda",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint86KStarHHalfTailObstructionReceipt",
+      "source_id": "S3",
+      "status": "PASS",
+      "surface_name": "Sprint86KStarHHalfTailObstruction"
+    }
+  ],
+  "source_table": "ns_sprint88_h1_tail_smallness_decision_source_table.csv",
+  "sprint87_factorization_inherited_closed": true,
+  "time_integrated_dissipation_pointwise_insufficient": true
+}

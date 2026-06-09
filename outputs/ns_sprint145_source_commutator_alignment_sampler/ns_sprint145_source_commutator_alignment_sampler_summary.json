@@ -1,0 +1,149 @@
+{
+  "adverse_reinforcement_row_ids": [
+    "off_peak_reinforcement_positive_source",
+    "annular_grazing_reinforcement",
+    "boundary_image_reinforcement",
+    "tail_commutator_reinforcement"
+  ],
+  "artifact_complete": true,
+  "clay_navier_stokes_promoted": false,
+  "comparison_envelope_available": false,
+  "comparison_envelope_constructed": false,
+  "comparison_envelope_exists": false,
+  "comparison_envelope_proved": false,
+  "contract": "ns_sprint145_source_commutator_alignment_sampler",
+  "control_card": {
+    "C": "Deterministic Python sampler emitting summary JSON, row JSON, CSV, Markdown, and manifest through an atomic staging directory.",
+    "F": "Missing: GlobalSourceCommutatorAlignmentForVBarrier and ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators; no global axial monotonicity or Clay promotion follows.",
+    "G": "Validation passes only if favorable and adverse rows exist while all theorem, envelope, barrier, Clay, and promotion flags remain false.",
+    "L": "Source proxy + radial commutator proxy -> combined residual -> alignment class -> fail-closed envelope obstruction ledger.",
+    "O": "Worker lane 4 owns only scripts/ns_sprint145_source_commutator_alignment_sampler.py and outputs/ns_sprint145_source_commutator_alignment_sampler/.",
+    "P": "Use this as evidence that local cancellation is not a global alignment theorem and does not construct the Sprint 145 envelope.",
+    "R": "Classify favorable cancellation and adverse reinforcement for 2*u1*partial_z^2 psi1 versus -(partial_z u^r)*partial_r u1.",
+    "S": "Local rows can damp, but off-peak, annular, boundary, and tail rows produce or preserve positive residuals."
+  },
+  "decision": "fail_closed_alignment_sampler_no_global_theorem",
+  "extra_row_ids": [],
+  "fail_closed": true,
+  "favorable_cancellation_row_ids": [
+    "local_core_cancellation_support",
+    "local_log_bounded_cancellation_support",
+    "mixed_annular_cancellation_not_uniform"
+  ],
+  "full_clay_ns_solved": false,
+  "global_alignment_theorem_proved": false,
+  "global_axial_monotonicity_proved": false,
+  "global_barrier_closed": false,
+  "global_proof": false,
+  "global_proof_closed": false,
+  "has_adverse_reinforcement": true,
+  "has_favorable_cancellation": true,
+  "has_off_peak_annular_boundary_rows": true,
+  "invariant_checked": true,
+  "invariant_failures": [],
+  "invariant_valid": true,
+  "invariants_passed": true,
+  "lane": 4,
+  "load_bearing_residual": "2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1",
+  "max_positive_residual_proxy": 0.88884,
+  "min_negative_residual_proxy": -0.9696,
+  "missing_comparison_envelope": "ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators",
+  "missing_geometry_classes": [],
+  "missing_required_row_ids": [],
+  "missing_theorem": "GlobalSourceCommutatorAlignmentForVBarrier",
+  "no_comparison_envelope": true,
+  "no_global_alignment_theorem": true,
+  "no_global_proof": true,
+  "no_promotion": true,
+  "observed_geometry_classes": [
+    "annular",
+    "boundary",
+    "local_core",
+    "local_log_bounded",
+    "off_peak",
+    "tail"
+  ],
+  "observed_row_ids": [
+    "local_core_cancellation_support",
+    "local_log_bounded_cancellation_support",
+    "off_peak_reinforcement_positive_source",
+    "annular_grazing_reinforcement",
+    "boundary_image_reinforcement",
+    "mixed_annular_cancellation_not_uniform",
+    "tail_commutator_reinforcement"
+  ],
+  "obstruction_row_ids": [
+    "off_peak_reinforcement_positive_source",
+    "annular_grazing_reinforcement",
+    "boundary_image_reinforcement",
+    "mixed_annular_cancellation_not_uniform",
+    "tail_commutator_reinforcement"
+  ],
+  "off_peak_annular_boundary_row_ids": [
+    "off_peak_reinforcement_positive_source",
+    "annular_grazing_reinforcement",
+    "boundary_image_reinforcement",
+    "mixed_annular_cancellation_not_uniform",
+    "tail_commutator_reinforcement"
+  ],
+  "parent_contract": "ns_sprint144_nonlocal_source_zero_number_failure",
+  "parent_sprint": 144,
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "required_geometry_classes": [
+    "annular",
+    "boundary",
+    "local_core",
+    "local_log_bounded",
+    "off_peak",
+    "tail"
+  ],
+  "required_row_ids": [
+    "annular_grazing_reinforcement",
+    "boundary_image_reinforcement",
+    "local_core_cancellation_support",
+    "local_log_bounded_cancellation_support",
+    "mixed_annular_cancellation_not_uniform",
+    "off_peak_reinforcement_positive_source",
+    "tail_commutator_reinforcement"
+  ],
+  "row_count": 7,
+  "secondary_peak_exclusion_proved": false,
+  "source_commutator_alignment_theorem_proved": false,
+  "sprint": 145,
+  "summary_hash": "c69b456fd3012ff58b613698f8c9752024d9a1b6574cf381923076943c648dfe",
+  "target_gate": "ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators",
+  "target_variable": "v = partial_z u1",
+  "upstream_artifact_state": {
+    "sprint141_log_commutator": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "log_aware_commutator_domination_proved": false,
+      "path": "outputs/ns_sprint141_biot_savart_log_commutator_sampler/ns_sprint141_biot_savart_log_commutator_sampler_summary.json",
+      "sha256": "01b2496debdb90b7c131332da79732d76c4fc1967138bdf22a97f5428e3afd55"
+    },
+    "sprint142_kernel_sign": {
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "global_barrier_closed": false,
+      "global_concavity_proved": false,
+      "path": "outputs/ns_sprint142_kernel_sign_stress_sampler/ns_sprint142_kernel_sign_stress_sampler_summary.json",
+      "sha256": "8e9954df1c4ffd796ab2da71235eb7a7af8340756e26057acac28e74a8747954",
+      "uniform_global_negative_sign_theorem_proved": false
+    },
+    "sprint144_nonlocal_zero_number": {
+      "clay_navier_stokes_promoted": false,
+      "comparison_envelope_available": false,
+      "comparison_envelope_constructed": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "global_barrier_closed": false,
+      "path": "outputs/ns_sprint144_nonlocal_source_zero_number_failure/ns_sprint144_nonlocal_source_zero_number_failure_summary.json",
+      "sha256": "5eba61fb48e2f8efdb4f1818a77f8973d9b3754825faa83e4f8ab1b29e9a0400"
+    }
+  },
+  "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+}

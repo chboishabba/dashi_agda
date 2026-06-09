@@ -160,12 +160,39 @@ Possible downstream themes still remain:
 
 - stronger closure and geometric rigidity results,
 - representation-theoretic explanations of the orbit invariant,
-- Monster/Moonshine-style symmetry as a later structural hypothesis or theorem
-  target.
+- Monster/Moonshine-style symmetry as a conditional theorem bridge target.
 
 Stage C must not be described as proved by the current repo state.
-Any Monster/Moonshine interpretation remains explicitly downstream and
-speculative unless supported by separate theorem-level bridges.
+Any Monster/Moonshine interpretation remains explicitly bridge-gated unless
+supported by separate theorem-level bridges.
+
+Latest terminal-state note:
+
+- ST3 depth-recursion monotonicity is now DASHI-internal mass-gap closure, but
+  Clay promotion and `terminalClaimPromoted` remain false pending external
+  review.
+- Reeh-Schlieder is closed from existing receipts/dependencies, not new math.
+- `laneDimension` has a validated Agda receipt surface for a conditional
+  Moonshine authority bridge: Ogg's genus-zero theorem selects the 15
+  supersingular primes, no-ghost supplies orbifold compatibility,
+  Dong-Li-Mason supplies the weight-1 Lie-algebra table authority, and
+  `DASHIPrimeLaneEquiv` is the required DASHI bridge. This is not a new
+  community-accepted theorem, and no unconditional Standard Model or terminal
+  claim follows.
+- Current tranche order is: conditional `laneDimension` receipt/bridge
+  package; matter lanes/Yukawa; hierarchy treated as the FinalAdapter4
+  decision; conjunctive terminal flip; then paper-architecture split.
+- Latest publication architecture is seven papers: Paper 1 current typed
+  receipt/governance; Paper 2 B0 geometry; Paper 3 AQFT/DHR; Paper 4
+  conditional `laneDimension` bridge work with Serre-Tate-DHR and Pati-Salam;
+  Paper 5 matter/Yukawa; Paper 6 mass gap/Clay acceptance; Paper 7 terminal
+  composition.
+- Latest Papers 2-7 obligation map: Paper 2 P2-A/P2-B are immediate
+  `DASHIPrimeLaneEquiv` closure items; Paper 3 is M3-A/M3-B/M3-C; Paper 4 is
+  G4-A/G4-B; Paper 5 is GR5-A/GR5-B; Paper 6 is G6-A/G6-B; Paper 7 is
+  implementation/governance. This is a discharge ledger, not a terminal
+  promotion; Clay/external mass-gap promotion and `terminalClaimPromoted`
+  remain false.
 
 Archive-backed clarification:
 

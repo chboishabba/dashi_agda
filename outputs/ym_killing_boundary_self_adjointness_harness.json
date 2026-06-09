@@ -1,0 +1,38 @@
+{
+  "adjoint_error": 6.106226635438361e-16,
+  "boundary_convention": "killing_full_degree_opposite_face_involution",
+  "boundary_flux_cancellation_error": 0.0,
+  "checks": {
+    "energy_identity": true,
+    "full_degree_boundary": true,
+    "gauge_constant_null_mode": true,
+    "laplacian_factorization": true,
+    "opposite_face_flux_cancellation": true,
+    "weighted_adjoint_identity": true,
+    "weighted_hamiltonian_symmetry": true
+  },
+  "clay_promotion": false,
+  "depth": 4,
+  "edge_count": 32,
+  "full_degree_error": 0.0,
+  "gauge_constant_energy": 0.0,
+  "laplacian_factorization_error": 8.881784197001252e-16,
+  "not_proved": [
+    "YM-1 finite theorem",
+    "Hamiltonian domination",
+    "OS/Wightman reconstruction",
+    "continuum mass gap",
+    "Clay Yang-Mills"
+  ],
+  "null_mode_residual": 6.661338147750939e-16,
+  "ok": true,
+  "promotion": false,
+  "quotient_constant_preservation_error": 0.0,
+  "sample_energy": 2.1604665,
+  "sample_energy_from_d": 2.1604665,
+  "scope": "finite_matrix_diagnostic_only",
+  "symmetry_error": 2.220446049250313e-16,
+  "vertex_count": 16,
+  "weighted_inner_product": "diagonal_vertex_and_edge_weights",
+  "ym_1_promotion": false
+}

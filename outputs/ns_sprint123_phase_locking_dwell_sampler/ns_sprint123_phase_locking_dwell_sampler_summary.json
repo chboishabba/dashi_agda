@@ -1,0 +1,52 @@
+{
+  "amplitude_weight_formula": "exp(-damping_rate*t)",
+  "clay": false,
+  "complete": true,
+  "contract": "ns_sprint123_phase_locking_dwell_sampler",
+  "damping_rate_values": [
+    0.0,
+    0.05,
+    0.1,
+    0.2
+  ],
+  "drift_rate_values": [
+    0.0,
+    0.125,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "duration_values": [
+    1.0,
+    2.0,
+    4.0,
+    8.0
+  ],
+  "exit_code": 0,
+  "favorable_dwell_rows_count": 1704,
+  "favorable_rule": "cos(2*theta)>0 and sin(2*theta)>0",
+  "favorable_window_lower_bound_closed": false,
+  "initial_phase_values": [
+    0.0,
+    0.09817477042468103,
+    0.19634954084936207,
+    0.39269908169872414,
+    0.7853981633974483
+  ],
+  "max_contiguous_favorable_window_max": 8.0,
+  "max_contiguous_favorable_window_min": 0.0,
+  "nse_derived_phase_locking_established": false,
+  "positive_dwell_time_max": 8.0,
+  "positive_dwell_time_min": 0.0,
+  "rotation_rate_values": [
+    0.25,
+    0.5,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "row_count": 2000,
+  "theta_formula": "theta(t)=theta0+(rotation_rate-drift_rate)*t",
+  "weighted_dwell_max": 8.0,
+  "weighted_dwell_min": 0.0
+}

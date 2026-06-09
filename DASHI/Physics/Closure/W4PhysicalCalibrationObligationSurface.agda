@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.W4PhysicalCalibrationObligationSurface where
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
@@ -137,6 +138,17 @@ record W4PhysicalCalibrationObligationSurface : Setω where
     acceptedDYLuminosityConventionAuthorityFirstMissing :
       DY.W4W5DYLuminosityFirstMissing
 
+    acceptedDYLuminosityCalibrationChecklist :
+      List DY.W4W5DYLuminosityCalibrationChecklistItem
+
+    acceptedDYLuminosityCalibrationChecklistIsCanonical :
+      acceptedDYLuminosityCalibrationChecklist
+      ≡
+      DY.canonicalW4W5DYLuminosityCalibrationChecklist
+
+    acceptedDYLuminosityCalibrationChecklistLabels :
+      List String
+
     receiptQueue :
       List W4PhysicalCalibrationReceiptQueueItem
 
@@ -233,6 +245,13 @@ canonicalW4PhysicalCalibrationObligationSurface =
         ∷ []
     ; acceptedDYLuminosityConventionAuthorityFirstMissing =
         DY.missingAcceptedDYLuminosityConventionAuthority
+    ; acceptedDYLuminosityCalibrationChecklist =
+        DY.canonicalW4W5DYLuminosityCalibrationChecklist
+    ; acceptedDYLuminosityCalibrationChecklistIsCanonical =
+        refl
+    ; acceptedDYLuminosityCalibrationChecklistLabels =
+        DY.W4W5AcceptedDYLuminosityConventionDiagnostic.empiricalCalibrationChecklistLabels
+          DY.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
     ; receiptQueue =
         canonicalW4PhysicalCalibrationReceiptQueue
     ; receiptQueueName =
@@ -261,6 +280,7 @@ canonicalW4PhysicalCalibrationObligationSurface =
         ∷ []
     ; grMatterSourceQueue =
         "First supply AcceptedDYLuminosityConventionAuthority over the shared CT18/MSHT/LHAPDF-compatible parton-luminosity intake"
+        ∷ "That accepted authority must pass unit calibration, PDF/luminosity convention, HEPData bin/covariance, chi2/dof reproducibility, scale-setting boundary, and no-free-fit audit checks"
         ∷ "Then establish W4ZAdequacy from that accepted convention authority"
         ∷ "Then supply Candidate256PhysicalCalibrationExternalReceipt with authority token, physical unit carrier, calibration map, quotient-scale factorization, and dimensional preservation"
         ∷ "Only after that receipt exists, construct matterFieldFromW4 from the calibrated W4 physical unit carrier and Candidate256 quotient-scale map"

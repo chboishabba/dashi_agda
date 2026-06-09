@@ -1,0 +1,529 @@
+[
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "NoLogAxisymmetricBiotSavartUniform is false; strain carries the standard logarithmic loss away from the axis.",
+    "existing_repo_support": [
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:CorrectedSourceGradientLogGronwall",
+      "Sprint134:HouLuoRetractionStatus"
+    ],
+    "failure_consequence": "The log loss remains only an upper-bound hazard and cannot support a blowup proof.",
+    "full_clay_ns_solved": false,
+    "gate_id": "blowup_log_loss_source_lower_bound",
+    "gate_name": "LogLossSourceLowerBound",
+    "missing_evidence": [
+      "lower-bound sign control",
+      "localized kernel positivity or monotone compression estimate",
+      "non-cancellation of log-enhanced source"
+    ],
+    "path": "blowup",
+    "proof_objective": "Turn the corrected logarithmic Biot-Savart loss from a loose upper-growth risk into a PDE lower bound for source growth.",
+    "required_estimate_or_construction": "partial_z(u1^2) produces a positive lower contribution at the vorticity growth site with at least the log-Gronwall strength needed to compete with viscosity.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "omega1 evolves by D_t omega1 = partial_z(u1^2) + nu Ltilde omega1.",
+    "existing_repo_support": [
+      "Sprint128:SourceAlignmentWithVorticityMaximum named gap",
+      "Sprint134:AxisymmetricEquationCorrection"
+    ],
+    "failure_consequence": "Large source away from the vorticity maximum does not force BKM divergence.",
+    "full_clay_ns_solved": false,
+    "gate_id": "blowup_source_vorticity_max_alignment",
+    "gate_name": "SourceVorticityMaxAlignment",
+    "missing_evidence": [
+      "maximum-point tracking lemma",
+      "source-vorticity phase-locking estimate",
+      "control of adverse axial sign changes"
+    ],
+    "path": "blowup",
+    "proof_objective": "Show the positive source maximum and the omega1 maximum remain sufficiently co-located along the candidate singular trajectory.",
+    "required_estimate_or_construction": "At times approaching T*, source lower bounds apply at, or within a controlled parabolic neighborhood of, points where ||omega1||_infty is realized.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Gamma = r utheta = r^2 u1 satisfies the maximum principle; u1 control is recovered only on r in [r0,1].",
+    "existing_repo_support": [
+      "Sprint134:SwirlCirculationMaximumPrinciple",
+      "Sprint134:BoundaryAnnulusU1Bound"
+    ],
+    "failure_consequence": "Gamma may stay bounded while the active u1 source amplitude decays or moves out of the annular conversion region.",
+    "full_clay_ns_solved": false,
+    "gate_id": "blowup_annular_gamma_to_u1_persistence",
+    "gate_name": "AnnularGammaToU1Persistence",
+    "missing_evidence": [
+      "lower persistence, not merely upper boundedness",
+      "annular support confinement",
+      "control of Gamma transport away from the boundary layer"
+    ],
+    "path": "blowup",
+    "proof_objective": "Construct or prove persistence of a boundary-annulus swirl profile whose u1 amplitude does not collapse before the candidate blowup time.",
+    "required_estimate_or_construction": "There exists r0>0 and c>0 such that |u1| >= c on the active annular source region for a time sequence approaching T*.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 retracts the old polynomial viscous dominance comparison because log-Gronwall source factors may be super-polynomial.",
+    "existing_repo_support": [
+      "Sprint131:LocalizedViscousComparison was retracted as an obstruction",
+      "Sprint134:HouLuoRetractionStatus"
+    ],
+    "failure_consequence": "Even strong formal source growth may be erased by localized viscous smoothing.",
+    "full_clay_ns_solved": false,
+    "gate_id": "blowup_viscous_damping_non_dominance",
+    "gate_name": "ViscousDampingNonDominance",
+    "missing_evidence": [
+      "signed viscous/source comparison",
+      "profile curvature control",
+      "localized lower inequality robust under diffusion"
+    ],
+    "path": "blowup",
+    "proof_objective": "Show viscosity does not dominate the corrected source before BKM divergence in the live Hou-Luo geometry.",
+    "required_estimate_or_construction": "Along the candidate profile, positive source production minus nu Ltilde omega1 remains large enough to drive Omega' >= c Omega^{1+epsilon} or an equivalent divergent criterion.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Corrected variables require simultaneous consistency of Gamma transport, u1 source gradients, omega1 growth, and log-loss Biot-Savart strain.",
+    "existing_repo_support": [
+      "Sprint133:AxisymmetricSwirlTarget finite gates",
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit"
+    ],
+    "failure_consequence": "The route may remain a formal amplification story without a PDE-compatible singular scaling.",
+    "full_clay_ns_solved": false,
+    "gate_id": "blowup_self_similar_scaling_closure",
+    "gate_name": "SelfSimilarScalingClosure",
+    "missing_evidence": [
+      "consistent exponent/log-modulation algebra",
+      "profile compactness or stability",
+      "boundary compatibility"
+    ],
+    "path": "blowup",
+    "proof_objective": "Close a finite-dimensional or PDE self-similar scaling system whose exponents and profiles satisfy the corrected equations.",
+    "required_estimate_or_construction": "Find alpha, beta, profile shape, annular location, and log modulation satisfying all source, transport, Biot-Savart, and viscous scaling constraints.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Any blowup proof must start from smooth divergence-free finite-energy axisymmetric-with-swirl data, not just an ODE profile.",
+    "existing_repo_support": [
+      "Sprint133:AxisymmetricNSWithSwirlGlobalRegularity target",
+      "Sprint134:Corrected variable definitions"
+    ],
+    "failure_consequence": "A singular profile without admissible smooth data does not address the Navier-Stokes existence problem.",
+    "full_clay_ns_solved": false,
+    "gate_id": "blowup_smooth_finite_energy_initial_data_construction",
+    "gate_name": "SmoothFiniteEnergyInitialDataConstruction",
+    "missing_evidence": [
+      "compatible divergence-free reconstruction",
+      "finite-energy annular profile realization",
+      "bootstrap-entry proof"
+    ],
+    "path": "blowup",
+    "proof_objective": "Construct initial data that enters the closed Hou-Luo amplification regime while satisfying all regularity, boundary, symmetry, and energy constraints.",
+    "required_estimate_or_construction": "A smooth finite-energy u0 with compatible Gamma, u1, omega1, and psi1 profiles whose evolution remains in the bootstrap class until BKM divergence.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": true,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "The final blowup gate must verify BKM divergence for the actual PDE solution, not merely source growth.",
+    "existing_repo_support": [
+      "Sprint130-134 promotion guards",
+      "BKM criterion used throughout the NS route audits"
+    ],
+    "failure_consequence": "The route may produce strong transient amplification without a Clay-relevant singularity.",
+    "full_clay_ns_solved": false,
+    "gate_id": "blowup_bkm_integral_divergence_verification",
+    "gate_name": "BKMIntegralDivergenceVerification",
+    "missing_evidence": [
+      "sharp lower growth rate for Omega",
+      "continuation-to-singularity argument",
+      "exclusion of norm inflation without BKM divergence"
+    ],
+    "path": "blowup",
+    "proof_objective": "Convert the closed source/scaling/data bootstrap into integral divergence of ||omega(t)||_infty before or at T*.",
+    "required_estimate_or_construction": "integral_0^T ||omega(t)||_infty dt = infinity, with finite T and smooth finite-energy data on [0,T).",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "The corrected log-loss strain estimate is dangerous only if it can be saturated by the PDE geometry.",
+    "existing_repo_support": [
+      "Sprint134:Gamma maximum principle correction",
+      "Sprint134:log singularity audit"
+    ],
+    "failure_consequence": "The regularity path lacks a replacement for the retracted viscous dominance theorem.",
+    "full_clay_ns_solved": false,
+    "gate_id": "regularity_log_loss_source_upper_control",
+    "gate_name": "LogLossSourceUpperControl",
+    "missing_evidence": [
+      "energy-to-source continuation estimate",
+      "non-saturation of logarithmic Biot-Savart bound"
+    ],
+    "path": "regularity_alternative",
+    "proof_objective": "Prove a non-circular upper control showing the log-loss Gronwall hazard cannot be saturated by smooth finite-energy axisymmetric-with-swirl solutions.",
+    "required_estimate_or_construction": "|partial_z(u1^2)| admits an integrable or sub-BKM upper bound from Gamma control, energy, and axisymmetric structure.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Blowup needs source alignment with the omega1 maximum; regularity can follow from robust misalignment.",
+    "existing_repo_support": [
+      "Sprint134:source-vorticity alignment listed as live gap"
+    ],
+    "failure_consequence": "The blowup path's alignment gate remains viable.",
+    "full_clay_ns_solved": false,
+    "gate_id": "regularity_source_vorticity_max_decorrelation",
+    "gate_name": "SourceVorticityMaxDecorrelation",
+    "missing_evidence": [
+      "axisymmetric maximum-principle geometry for omega1",
+      "source sign cancellation estimate"
+    ],
+    "path": "regularity_alternative",
+    "proof_objective": "Show source peaks and vorticity maxima cannot remain aligned strongly enough to force BKM divergence.",
+    "required_estimate_or_construction": "A quantitative decorrelation or sign-oscillation bound for partial_z(u1^2) at high-omega1 points.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Gamma is bounded above, but blowup requires persistent active annular u1 amplitude.",
+    "existing_repo_support": [
+      "Sprint134:BoundaryAnnulusU1Bound"
+    ],
+    "failure_consequence": "Gamma boundedness alone remains compatible with persistent annular forcing.",
+    "full_clay_ns_solved": false,
+    "gate_id": "regularity_annular_gamma_leakage_or_diffusive_decay",
+    "gate_name": "AnnularGammaLeakageOrDiffusiveDecay",
+    "missing_evidence": [
+      "lower-amplitude decay mechanism",
+      "annular transport leakage estimate"
+    ],
+    "path": "regularity_alternative",
+    "proof_objective": "Prove that active annular u1 amplitude either leaks away from the Hou-Luo source region or decays under diffusion/transport.",
+    "required_estimate_or_construction": "A quantitative bound preventing lower persistence of u1 in the same annular region where omega1 concentrates.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "The old polynomial dominance ratio was invalid; a new dominance result must handle log-loss source growth directly.",
+    "existing_repo_support": [
+      "Sprint131 localized comparison surface as historical scaffold",
+      "Sprint134 retraction status identifying the failed assumption"
+    ],
+    "failure_consequence": "Large-Re Hou-Luo transients remain live.",
+    "full_clay_ns_solved": false,
+    "gate_id": "regularity_viscous_damping_eventual_dominance",
+    "gate_name": "ViscousDampingEventualDominance",
+    "missing_evidence": [
+      "log-aware localized parabolic comparison",
+      "large-Re transient exclusion"
+    ],
+    "path": "regularity_alternative",
+    "proof_objective": "Recover an eventual viscous dominance theorem under corrected source-gradient and log Biot-Savart accounting.",
+    "required_estimate_or_construction": "nu Ltilde omega1 controls the positive source at the active scale in every admissible axisymmetric blowup sequence.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "A live blowup route needs a corrected self-similar or log-modulated profile; regularity can close by excluding all such profiles in the axisymmetric class.",
+    "existing_repo_support": [
+      "Sprint133:finite axisymmetric target gates",
+      "Sprint134:corrected equations"
+    ],
+    "failure_consequence": "The scaling route remains an admissible organizing ansatz.",
+    "full_clay_ns_solved": false,
+    "gate_id": "regularity_self_similar_scaling_exclusion",
+    "gate_name": "SelfSimilarScalingExclusion",
+    "missing_evidence": [
+      "profile Liouville theorem",
+      "corrected exponent feasibility audit"
+    ],
+    "path": "regularity_alternative",
+    "proof_objective": "Prove no corrected Hou-Luo scaling profile satisfies the axisymmetric PDE, boundary compatibility, energy, Gamma, and BKM constraints.",
+    "required_estimate_or_construction": "A contradiction among exponent/log-modulation constraints or a compactness theorem ruling out nontrivial ancient profiles.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": true,
+    "corrected_sprint134_dependency": "A regularity conclusion must be non-circular and stated in the corrected variables Gamma, u1, omega1, psi1.",
+    "existing_repo_support": [
+      "Sprint133:axisymmetric-with-swirl global regularity target",
+      "Sprint134:corrected Gamma maximum principle"
+    ],
+    "failure_consequence": "The regularity alternative remains only a list of obstructions rather than a theorem.",
+    "full_clay_ns_solved": false,
+    "gate_id": "regularity_axisymmetric_continuation_criterion",
+    "gate_name": "AxisymmetricContinuationCriterionFromCorrectedVariables",
+    "missing_evidence": [
+      "non-circular continuation norm",
+      "axisymmetric class exhaustion after corrected equations"
+    ],
+    "path": "regularity_alternative",
+    "proof_objective": "Assemble a continuation criterion for axisymmetric NS with swirl that follows from corrected-variable estimates rather than assuming Serrin/BKM control.",
+    "required_estimate_or_construction": "Energy plus Gamma control plus axisymmetric structure imply a finite continuation norm up to arbitrary time.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 corrected equations, false uniform no-log Biot-Savart, and Hou-Luo retraction status.",
+    "existing_repo_support": [
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:HouLuoRetractionStatus",
+      "Sprint135:SourceViscosityPhaseMap"
+    ],
+    "failure_consequence": "The umbrella gate remains an organizing label, not a closed analytic lemma.",
+    "full_clay_ns_solved": false,
+    "gate_id": "corrected_axisymmetric_equations",
+    "gate_name": "corrected_axisymmetric_equations",
+    "missing_evidence": [
+      "concrete PDE estimate",
+      "closed bootstrap or exclusion argument"
+    ],
+    "path": "taxonomy",
+    "proof_objective": "Corrected axisymmetric equations are the baseline gate for every post-retraction Hou-Luo argument.",
+    "required_estimate_or_construction": "Taxonomy row only: refine into one of the concrete blowup or regularity gates before any theorem claim.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 corrected equations, false uniform no-log Biot-Savart, and Hou-Luo retraction status.",
+    "existing_repo_support": [
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:HouLuoRetractionStatus",
+      "Sprint135:SourceViscosityPhaseMap"
+    ],
+    "failure_consequence": "The umbrella gate remains an organizing label, not a closed analytic lemma.",
+    "full_clay_ns_solved": false,
+    "gate_id": "swirl_circulation_maximum_principle",
+    "gate_name": "swirl_circulation_maximum_principle",
+    "missing_evidence": [
+      "concrete PDE estimate",
+      "closed bootstrap or exclusion argument"
+    ],
+    "path": "taxonomy",
+    "proof_objective": "Gamma, not u1, supplies the corrected maximum-principle control.",
+    "required_estimate_or_construction": "Taxonomy row only: refine into one of the concrete blowup or regularity gates before any theorem claim.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 corrected equations, false uniform no-log Biot-Savart, and Hou-Luo retraction status.",
+    "existing_repo_support": [
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:HouLuoRetractionStatus",
+      "Sprint135:SourceViscosityPhaseMap"
+    ],
+    "failure_consequence": "The umbrella gate remains an organizing label, not a closed analytic lemma.",
+    "full_clay_ns_solved": false,
+    "gate_id": "boundary_annulus_u1_bound",
+    "gate_name": "boundary_annulus_u1_bound",
+    "missing_evidence": [
+      "concrete PDE estimate",
+      "closed bootstrap or exclusion argument"
+    ],
+    "path": "taxonomy",
+    "proof_objective": "Gamma control must be converted to u1 only on r >= r0 annuli.",
+    "required_estimate_or_construction": "Taxonomy row only: refine into one of the concrete blowup or regularity gates before any theorem claim.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 corrected equations, false uniform no-log Biot-Savart, and Hou-Luo retraction status.",
+    "existing_repo_support": [
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:HouLuoRetractionStatus",
+      "Sprint135:SourceViscosityPhaseMap"
+    ],
+    "failure_consequence": "The umbrella gate remains an organizing label, not a closed analytic lemma.",
+    "full_clay_ns_solved": false,
+    "gate_id": "log_biot_savart_growth",
+    "gate_name": "log_biot_savart_growth",
+    "missing_evidence": [
+      "concrete PDE estimate",
+      "closed bootstrap or exclusion argument"
+    ],
+    "path": "taxonomy",
+    "proof_objective": "The restored logarithmic Biot-Savart loss is the live source-growth hazard.",
+    "required_estimate_or_construction": "Taxonomy row only: refine into one of the concrete blowup or regularity gates before any theorem claim.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 corrected equations, false uniform no-log Biot-Savart, and Hou-Luo retraction status.",
+    "existing_repo_support": [
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:HouLuoRetractionStatus",
+      "Sprint135:SourceViscosityPhaseMap"
+    ],
+    "failure_consequence": "The umbrella gate remains an organizing label, not a closed analytic lemma.",
+    "full_clay_ns_solved": false,
+    "gate_id": "source_vs_viscosity_model",
+    "gate_name": "source_vs_viscosity_model",
+    "missing_evidence": [
+      "concrete PDE estimate",
+      "closed bootstrap or exclusion argument"
+    ],
+    "path": "taxonomy",
+    "proof_objective": "The source/viscosity phase map separates polynomial and log-Gronwall regimes.",
+    "required_estimate_or_construction": "Taxonomy row only: refine into one of the concrete blowup or regularity gates before any theorem claim.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 corrected equations, false uniform no-log Biot-Savart, and Hou-Luo retraction status.",
+    "existing_repo_support": [
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:HouLuoRetractionStatus",
+      "Sprint135:SourceViscosityPhaseMap"
+    ],
+    "failure_consequence": "The umbrella gate remains an organizing label, not a closed analytic lemma.",
+    "full_clay_ns_solved": false,
+    "gate_id": "large_re_transient_control",
+    "gate_name": "large_re_transient_control",
+    "missing_evidence": [
+      "concrete PDE estimate",
+      "closed bootstrap or exclusion argument"
+    ],
+    "path": "taxonomy",
+    "proof_objective": "Large-Re transient growth remains an open Hou-Luo gate.",
+    "required_estimate_or_construction": "Taxonomy row only: refine into one of the concrete blowup or regularity gates before any theorem claim.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 corrected equations, false uniform no-log Biot-Savart, and Hou-Luo retraction status.",
+    "existing_repo_support": [
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:HouLuoRetractionStatus",
+      "Sprint135:SourceViscosityPhaseMap"
+    ],
+    "failure_consequence": "The umbrella gate remains an organizing label, not a closed analytic lemma.",
+    "full_clay_ns_solved": false,
+    "gate_id": "marginal_beta_zero_case",
+    "gate_name": "marginal_beta_zero_case",
+    "missing_evidence": [
+      "concrete PDE estimate",
+      "closed bootstrap or exclusion argument"
+    ],
+    "path": "taxonomy",
+    "proof_objective": "The beta=0 boundary case remains separate from beta>0 concentration.",
+    "required_estimate_or_construction": "Taxonomy row only: refine into one of the concrete blowup or regularity gates before any theorem claim.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "closes_blowup_path_if_proved": false,
+    "closes_regularity_path_if_proved": false,
+    "corrected_sprint134_dependency": "Sprint134 corrected equations, false uniform no-log Biot-Savart, and Hou-Luo retraction status.",
+    "existing_repo_support": [
+      "Sprint134:AxisymmetricEquationCorrection",
+      "Sprint134:BiotSavartLogSingularityAudit",
+      "Sprint134:HouLuoRetractionStatus",
+      "Sprint135:SourceViscosityPhaseMap"
+    ],
+    "failure_consequence": "The umbrella gate remains an organizing label, not a closed analytic lemma.",
+    "full_clay_ns_solved": false,
+    "gate_id": "bkm_blowup_alignment",
+    "gate_name": "bkm_blowup_alignment",
+    "missing_evidence": [
+      "concrete PDE estimate",
+      "closed bootstrap or exclusion argument"
+    ],
+    "path": "taxonomy",
+    "proof_objective": "A Clay-relevant blowup proof still needs source alignment and BKM divergence.",
+    "required_estimate_or_construction": "Taxonomy row only: refine into one of the concrete blowup or regularity gates before any theorem claim.",
+    "route": "HouLuoAxisymmetricNSRoute",
+    "route_status": "open_live_candidate",
+    "status": "open"
+  }
+]

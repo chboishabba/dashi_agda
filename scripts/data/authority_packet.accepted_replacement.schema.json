@@ -1,0 +1,286 @@
+{
+  "$id": "https://dashi.local/schemas/authority_packet.accepted_replacement.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "description": "Shape-only schema for scripts/dy_luminosity_from_authority_packet.py input packets. Passing this schema does not create or imply accepted DY authority, W4 promotion, or W5 promotion; the status and values must come from an external accepted/replacement provider.",
+  "properties": {
+    "attestation_no_manual_overfit": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "flavour_weight_rule": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "grid_checksum": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "integration_method": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "lhapdf_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "luminosities": {
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "L43"
+              ]
+            },
+            {
+              "required": [
+                "L_M43_Y43"
+              ]
+            },
+            {
+              "required": [
+                "L_50_76"
+              ]
+            },
+            {
+              "required": [
+                "L_M50_76"
+              ]
+            },
+            {
+              "required": [
+                "luminosity_43"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "L45"
+              ]
+            },
+            {
+              "required": [
+                "L_M45_Y45"
+              ]
+            },
+            {
+              "required": [
+                "L_106_170"
+              ]
+            },
+            {
+              "required": [
+                "L_M106_170"
+              ]
+            },
+            {
+              "required": [
+                "luminosity_45"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "W4_per_bin"
+              ]
+            },
+            {
+              "required": [
+                "W4_per_bin_luminosities"
+              ]
+            },
+            {
+              "required": [
+                "W4_luminosity_bins"
+              ]
+            },
+            {
+              "required": [
+                "W4_luminosities"
+              ]
+            },
+            {
+              "required": [
+                "L_W4_bins"
+              ]
+            },
+            {
+              "required": [
+                "z_peak_per_bin_luminosities"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "L43": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "L45": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "L_106_170": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "L_50_76": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "L_M106_170": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "L_M43_Y43": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "L_M45_Y45": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "L_M50_76": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "L_W4_bins": {
+          "$ref": "#/$defs/w4LuminosityVector"
+        },
+        "W4_luminosities": {
+          "$ref": "#/$defs/w4LuminosityVector"
+        },
+        "W4_luminosity_bins": {
+          "$ref": "#/$defs/w4LuminosityVector"
+        },
+        "W4_per_bin": {
+          "$ref": "#/$defs/w4LuminosityVector"
+        },
+        "W4_per_bin_luminosities": {
+          "$ref": "#/$defs/w4LuminosityVector"
+        },
+        "luminosity_43": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "luminosity_45": {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        "z_peak_per_bin_luminosities": {
+          "$ref": "#/$defs/w4LuminosityVector"
+        }
+      },
+      "type": "object"
+    },
+    "mass_bin_rule": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "member_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "pdf_set_version": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "provider_name": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "provider_role": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "rapidity_window": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "scale_convention": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "source_citation": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "accepted",
+        "replacement"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "provider_name",
+    "provider_role",
+    "pdf_set_version",
+    "lhapdf_id",
+    "member_id",
+    "grid_checksum",
+    "scale_convention",
+    "rapidity_window",
+    "mass_bin_rule",
+    "flavour_weight_rule",
+    "integration_method",
+    "source_citation",
+    "attestation_no_manual_overfit",
+    "luminosities"
+  ],
+  "title": "DASHI DY Luminosity Authority Packet Adapter Contract",
+  "type": "object",
+  "$defs": {
+    "positiveFiniteNumber": {
+      "exclusiveMinimum": 0,
+      "type": "number"
+    },
+    "w4LuminosityItem": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/positiveFiniteNumber"
+        },
+        {
+          "additionalProperties": true,
+          "anyOf": [
+            {
+              "required": [
+                "luminosity"
+              ]
+            },
+            {
+              "required": [
+                "L"
+              ]
+            },
+            {
+              "required": [
+                "value"
+              ]
+            }
+          ],
+          "properties": {
+            "L": {
+              "$ref": "#/$defs/positiveFiniteNumber"
+            },
+            "luminosity": {
+              "$ref": "#/$defs/positiveFiniteNumber"
+            },
+            "value": {
+              "$ref": "#/$defs/positiveFiniteNumber"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "w4LuminosityVector": {
+      "items": {
+        "$ref": "#/$defs/w4LuminosityItem"
+      },
+      "minItems": 1,
+      "type": "array"
+    }
+  }
+}

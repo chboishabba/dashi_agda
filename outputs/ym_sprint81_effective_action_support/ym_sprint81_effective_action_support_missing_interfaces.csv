@@ -1,0 +1,13 @@
+interface_id,interface_name,needed_for,in_repo_status,available_in_repo,proof_role
+I1,BalabanEffectiveAction,carrier for Sk and residual effective-action terms,MISSING_FORMAL_DEFINITION,False,domain of EffectiveActionPolymersSpatialOnlyForA1
+I2,Polymer,carrier for gamma,MISSING_FORMAL_DEFINITION,False,quantified residual polymer object
+I3,PolymerIn,predicate gamma in Sk,MISSING_FORMAL_DEFINITION,False,antecedent of spatial-support theorem
+I4,LinkKind,distinguishes temporal and spatial gauge links,MISSING_FORMAL_DEFINITION,False,support classification
+I5,TemporalLink,detects temporal support,MISSING_FORMAL_DEFINITION,False,exclusion target
+I6,SpatialLink,detects spatial support,MISSING_FORMAL_DEFINITION,False,spatial support target
+I7,PolymerSupport,maps polymers to link supports,MISSING_FORMAL_DEFINITION,False,bridge from polymer membership to links used
+I8,SpatialSupport,all links in support are spatial,MISSING_FORMAL_DEFINITION,False,conclusion of EffectiveActionPolymersSpatialOnlyForA1
+I9,ResidualEffectiveActionTerm,separates residual terms from transfer-matrix terms,MISSING_FORMAL_DEFINITION,False,prevents transfer terms from being counted as KP polymers
+I10,ActivityDependsOnlyOnLinksInsidePolymer,formal Balaban/Eriksson A1-style locality for activities,MISSING_FORMAL_DEFINITION,False,turns support exclusion into activity-variable exclusion
+I11,TemporalMeasureFactorizationLambdaOneReconciled,reconciles Sprint 71/73/78 lambda-one receipt surfaces,MISSING_RECONCILIATION,False,clean input to EffectiveActionPolymersSpatialOnlyForA1
+I12,BlockedL2SpatialGraphCarrier,formal blocked L=2 spatial KP graph,MISSING_FORMAL_DEFINITION,False,needed for PolymerDefinedOnBlockedLattice

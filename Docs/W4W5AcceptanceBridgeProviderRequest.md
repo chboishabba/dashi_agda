@@ -39,6 +39,7 @@ Provenance:
 | Public record | `https://www.hepdata.net/record/ins2079374` |
 | CMS public page | `https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/` |
 | CMS submission YAML | `https://cms-results.web.cern.ch/cms-results/public-results/publications/SMP-20-003/SMP-20-003_hepdata/submission.yaml` |
+| Source integrated luminosity | `L_int = 36.3 fb^-1`; do not substitute `137 fb^-1` for CMS-SMP-20-003 / `ins2079374` |
 
 The public CMS/HEPData materials audited locally include measured
 `DSIG/DPHISTAR` tables, ratio tables, covariance matrices, uncertainty
@@ -277,11 +278,10 @@ The current typed consumer request is:
 DASHI.Physics.Closure.W4DiagonalConventionGateConsumer
 ```
 
-It accepts the diagonal extraction as the W4 convention-layer target without
-promoting W4:
+It rejects the diagonal extraction as a W4 efficiency/acceptance model:
 
 ```text
-accepted convention layer:
+rejected convention candidate:
   A_diag[j] = P[j][j]
 ```
 
@@ -296,15 +296,15 @@ Explicit admissibility bounds are now bound from
 | Selected windows | `50-76`, `76-106`, `106-170 GeV` |
 | Diagnostic output SHA-256 | `366fe83fe4dae1d14ccb9ef3bd7a0858fa8baf9998fc8c96250c16bc4a748fdb` |
 
-The accepted convention-layer electron/muon channel-combination law is the
-geometric mean:
+The former geometric-mean channel-combination formula is retained only as a
+diagnostic note:
 
 ```text
 A_geom[j] = sqrt(A_e,j * A_mu,j)
 ```
 
-The accepted convention-layer covariance propagation law is the linearized
-Jacobian rule for corrected observables:
+The former linearized covariance propagation formula is diagnostic only unless
+an external source supplies the missing central model:
 
 ```text
 y_j = sigma_j / A_j
@@ -313,51 +313,50 @@ dy/dsigma = 1/A_j
 dy/dA = -sigma_j/A_j^2
 ```
 
-These are accepted only at the convention layer. The typed request still
-records:
+These are not accepted as W4 inputs. The typed request records:
 
 ```text
-diagonalAsAcceptanceConventionAccepted = true
-diagonalAdmissibilityBoundsAccepted = true
-electronMuonCombinationLawAccepted = true
-covariancePropagationLawAccepted = true
-internalAdequacyComputedPass = true
+diagonalAsAcceptanceConventionAccepted = false
+diagonalAdmissibilityBoundsAccepted = false
+electronMuonCombinationLawAccepted = false
+covariancePropagationLawAccepted = false
+internalAdequacyComputedPass = false
 constructsW4ZAdequacy = false
 constructsW4GateReceipt = false
 ```
 
-The internal adequacy evidence added for this lane is deliberately
-non-promoting:
+The internal adequacy evidence now fails closed:
 
 | Field | Value |
 |---|---:|
 | Mass window | `76-106 GeV` |
-| Channel combination | geometric mean diagonal convention |
-| Combined diagonal efficiency | `0.9566` |
+| Channel combination | none accepted |
+| Combined diagonal efficiency | not accepted; response diagonal is not central efficiency |
 | Adequacy bound | `0.90` |
-| Scaled decimal comparison | `9566 > 9000` |
-| Boolean/string-layer pass | `true` |
+| Scaled decimal comparison | rejected diagnostic only |
+| Boolean/string-layer pass | `false` |
 | Constructs W4ZAdequacy | `false` |
 | Constructs W4 gate receipt | `false` |
 
-The exact remaining local blocker is the missing Agda numeric primitive:
+The exact remaining local blocker is source-side, not an Agda numeric
+primitive:
 
 ```text
-scaled-decimal strict inequality witness for 9566 > 9000
+missing source central efficiency/acceptance model or accepted conversion law
 ```
 
-Until that primitive, a real `W4ZAdequacyReceipt`, and gate authority exist,
-the internal pass is only computed evidence.
+Until that source model, a real `W4ZAdequacyReceipt`, and gate authority
+exist, the diagonal arithmetic is only a rejected diagnostic.
 
 The exact remaining receipt condition is:
 
 ```text
 W4ResponseMatrixAcceptanceReceipt =
   { sourceMatrices : SHA256-bound t68-t77 matrix set
-  ; acceptedCandidate : Diagonal
-  ; channelCombinationLaw : geometric mean electron/muon combination
-  ; covariancePropagationLaw : linearized corrected-ratio Jacobian propagation
-  ; internalAdequacyEvidence : non-promoting computed evidence for 0.9566 > 0.90
+  ; acceptedCandidate : none from Table 2/3 or response matrices
+  ; channelCombinationLaw : missing
+  ; covariancePropagationLaw : missing
+  ; internalAdequacyEvidence : none accepted
   ; provesGateBridge : candidate supplies the W4 A(M, phi*) bridge
   ; w4AdequacyConsumer : consumes the corrected observable and covariance
   }
@@ -372,15 +371,15 @@ DASHI.Physics.Closure.W4ResponseMatrixAcceptanceCandidateReceipt
 ```
 
 It binds the response-matrix diagnostic output checksum, the two candidate
-formulae, and the W4-relevant diagonal mean values. It now accepts the
-diagonal convention layer while remaining fail-closed at the W4 gate:
+formulae, and the W4-relevant diagonal mean values. It now rejects the
+diagonal convention layer and remains fail-closed at the W4 gate:
 
 ```text
-selectedCandidateForGate = diagonalCandidate
-channelCombinationRule   = geometricMeanElectronMuonCombination
+selectedCandidateForGate = noAcceptedCandidate
+channelCombinationRule   = noAcceptedChannelCombinationRule
 constructsW4GateReceipt  = false
-firstMissing             = missingW4ZAdequacyConsumer
-internalAdequacyFirstMissing = missingScaledDecimalStrictGreaterThanPrimitive
+firstMissing             = missingSourceCentralEfficiencyAcceptanceModel
+internalAdequacyFirstMissing = internalAdequacyBlockedBySourceModelGap
 ```
 
 The W4-relevant diagonal mean candidates are:
@@ -391,9 +390,10 @@ The W4-relevant diagonal mean candidates are:
 | `76-106` | `0.9277322222222223` | `0.9857633333333333` |
 | `106-170` | `0.9344861111111111` | `0.9885316666666666` |
 
-These values are accepted as the same-bin retention convention layer. They do
-not become a W4 promotion until a gate consumer accepts the resulting
-corrected observable and covariance:
+These values are recorded only as a checksum-bound same-bin retention
+diagnostic. They are not accepted as a W4 convention layer and cannot become a
+W4 promotion unless an external source or gate consumer supplies and accepts a
+valid corrected observable and covariance:
 
 - W4ZAdequacy consumer over the corrected observable;
 - pass/fail tolerance;

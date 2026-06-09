@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "constant_mode_annihilated": true,
+    "nonnegative_rayleigh": true,
+    "symmetric_matrix": true
+  },
+  "matrix_symmetry_error": 0.0,
+  "null_mode_error": 0.0,
+  "promotion": false,
+  "rayleigh_min": 3.0
+}

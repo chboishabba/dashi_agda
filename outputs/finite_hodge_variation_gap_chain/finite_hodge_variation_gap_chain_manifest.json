@@ -1,0 +1,27 @@
+{
+  "artifact_id": "finite_hodge_variation_gap_chain",
+  "artifacts": [
+    {
+      "path": "outputs/finite_hodge_variation_gap_chain/finite_hodge_variation_gap_chain_rows.json",
+      "sha256": "454770f502d20ee3b8a3ebc6b0e6477293ef7bc64e6ec5f276c39a69aebb0e6f",
+      "size_bytes": 8811
+    },
+    {
+      "path": "outputs/finite_hodge_variation_gap_chain/finite_hodge_variation_gap_chain_summary.json",
+      "sha256": "f0d299cbc9e54b3f82e51d0efbad56a5255f033c735a5c9dae8d573c51162921",
+      "size_bytes": 3127
+    },
+    {
+      "path": "outputs/finite_hodge_variation_gap_chain/finite_hodge_variation_gap_chain_rows.csv",
+      "sha256": "f6775b7ec27f7e6e12bce1110a96d7e8487edd87eea493649e72388c1ad6ce75",
+      "size_bytes": 5760
+    },
+    {
+      "path": "outputs/finite_hodge_variation_gap_chain/finite_hodge_variation_gap_chain.md",
+      "sha256": "289ac9bfa6b074398ef5448782d841eb448fd07fe3ae2dc44ddc7c8ee9859404",
+      "size_bytes": 3371
+    }
+  ],
+  "generated_at": "2026-06-08T00:00:00+10:00",
+  "output_dir": "outputs/finite_hodge_variation_gap_chain"
+}

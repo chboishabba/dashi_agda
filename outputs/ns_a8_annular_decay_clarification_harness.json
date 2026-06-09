@@ -1,0 +1,352 @@
+{
+  "blockers": [
+    "analytic_localization_proof_missing",
+    "ckn_absorption_proof_missing",
+    "iterative_decay_theorem_missing",
+    "a9_closure_still_open",
+    "ns_clay_promotion_forbidden"
+  ],
+  "canonical_witnesses": [
+    "annulus_inner_ball_B_r",
+    "annulus_outer_shell_B_r_minus_B_theta_r",
+    "q_formula_routed",
+    "q_below_one_under_admissibility",
+    "threshold_smallness_routed",
+    "theta_power_iteration_routed",
+    "receipt_not_promotion"
+  ],
+  "clarification": {
+    "annulus_split": "A_{theta,r} = B_r \\\\ B_{theta r}",
+    "blocker_count": 5,
+    "canonical_witness_count": 7,
+    "exact_status": "routed_receipt_not_theorem_promotion",
+    "iterative_decay_route": "D_{theta^k r} -> 0",
+    "promotion_false": false,
+    "q_formula": "q(theta,M) = (theta^2 + C M) / (1 + C M)",
+    "stage_count": 7
+  },
+  "families": [
+    {
+      "alpha": 0.5,
+      "blocker_count": 5,
+      "expected_monotone_decay": true,
+      "final_defect": 1.6397149400821958e-11,
+      "higher_order_c": 0.18,
+      "initial_defect": 5.486968449931414,
+      "max_ratio": 0.7549703546891172,
+      "monotone_nonincreasing": true,
+      "name": "theta_half_canonical",
+      "note": "Canonical theta=1/2 family at the C*M=1/8 boundary.",
+      "observed_matches_expectation": true,
+      "q_less_than_one": true,
+      "q_value": 0.3333333333333333,
+      "sample_path": [
+        {
+          "defect": 5.486968449931414,
+          "ratio_to_previous": 1.0,
+          "scale_factor": 1.0,
+          "step": 0
+        },
+        {
+          "defect": 4.142498516812715,
+          "ratio_to_previous": 0.7549703546891172,
+          "scale_factor": 0.5,
+          "step": 1
+        },
+        {
+          "defect": 2.898463344043405,
+          "ratio_to_previous": 0.6996896516147736,
+          "scale_factor": 0.25,
+          "step": 2
+        },
+        {
+          "defect": 1.8543819656043585,
+          "ratio_to_previous": 0.6397810651686436,
+          "scale_factor": 0.125,
+          "step": 3
+        },
+        {
+          "defect": 1.0726664741021565,
+          "ratio_to_previous": 0.5784495826632814,
+          "scale_factor": 0.0625,
+          "step": 4
+        },
+        {
+          "defect": 0.5575276642866561,
+          "ratio_to_previous": 0.5197586367685426,
+          "scale_factor": 0.03125,
+          "step": 5
+        },
+        {
+          "defect": 0.2607753852405126,
+          "ratio_to_previous": 0.4677353285673613,
+          "scale_factor": 0.015625,
+          "step": 6
+        },
+        {
+          "defect": 0.11089536930718263,
+          "ratio_to_previous": 0.4252524416938511,
+          "scale_factor": 0.0078125,
+          "step": 7
+        }
+      ],
+      "stage_count": 7,
+      "strictly_contracting_each_step": true,
+      "structural_c": 1.0,
+      "tends_to_zero": true,
+      "theta": 0.5,
+      "threshold": 13.717421124828535,
+      "threshold_margin": 8.230452674897121,
+      "type_i_m": 0.125
+    },
+    {
+      "alpha": 0.6,
+      "blocker_count": 5,
+      "expected_monotone_decay": true,
+      "final_defect": 4.926582312702039e-16,
+      "higher_order_c": 0.16,
+      "initial_defect": 7.76789869180462,
+      "max_ratio": 0.7638145341654776,
+      "monotone_nonincreasing": true,
+      "name": "deeper_contraction_small_m",
+      "note": "Lower theta and smaller M increase contraction margin.",
+      "observed_matches_expectation": true,
+      "q_less_than_one": true,
+      "q_value": 0.2164179104477612,
+      "sample_path": [
+        {
+          "defect": 7.76789869180462,
+          "ratio_to_previous": 1.0,
+          "scale_factor": 1.0,
+          "step": 0
+        },
+        {
+          "defect": 5.933233920725368,
+          "ratio_to_previous": 0.7638145341654776,
+          "scale_factor": 0.4,
+          "step": 1
+        },
+        {
+          "defect": 4.047092768713249,
+          "ratio_to_previous": 0.6821057154979777,
+          "scale_factor": 0.16000000000000003,
+          "step": 2
+        },
+        {
+          "defect": 2.3739917635239784,
+          "ratio_to_previous": 0.5865918819248555,
+          "scale_factor": 0.06400000000000002,
+          "step": 3
+        },
+        {
+          "defect": 1.151871355129844,
+          "ratio_to_previous": 0.4852044446102012,
+          "scale_factor": 0.025600000000000005,
+          "step": 4
+        },
+        {
+          "defect": 0.44990195256976123,
+          "ratio_to_previous": 0.39058350619288235,
+          "scale_factor": 0.010240000000000003,
+          "step": 5
+        },
+        {
+          "defect": 0.1419436095408818,
+          "ratio_to_previous": 0.315498985345862,
+          "scale_factor": 0.0040960000000000015,
+          "step": 6
+        },
+        {
+          "defect": 0.0377580481164427,
+          "ratio_to_previous": 0.26600738306269317,
+          "scale_factor": 0.0016384000000000006,
+          "step": 7
+        }
+      ],
+      "stage_count": 7,
+      "strictly_contracting_each_step": true,
+      "structural_c": 0.9,
+      "tends_to_zero": true,
+      "theta": 0.4,
+      "threshold": 14.123452166917488,
+      "threshold_margin": 6.355553475112869,
+      "type_i_m": 0.08
+    },
+    {
+      "alpha": 0.75,
+      "blocker_count": 5,
+      "expected_monotone_decay": true,
+      "final_defect": 2.207165034759752e-11,
+      "higher_order_c": 0.14,
+      "initial_defect": 4.653500571638405,
+      "max_ratio": 0.7929177284203809,
+      "monotone_nonincreasing": true,
+      "name": "moderate_theta_balanced_constants",
+      "note": "Balanced admissible regime with moderate theta and nonlinear correction.",
+      "observed_matches_expectation": true,
+      "q_less_than_one": true,
+      "q_value": 0.3493470149253732,
+      "sample_path": [
+        {
+          "defect": 4.653500571638405,
+          "ratio_to_previous": 1.0,
+          "scale_factor": 1.0,
+          "step": 0
+        },
+        {
+          "defect": 3.6898431024664684,
+          "ratio_to_previous": 0.7929177284203809,
+          "scale_factor": 0.55,
+          "step": 1
+        },
+        {
+          "defect": 2.6643179941580053,
+          "ratio_to_previous": 0.7220680988785261,
+          "scale_factor": 0.30250000000000005,
+          "step": 2
+        },
+        {
+          "defect": 1.7086354744327996,
+          "ratio_to_previous": 0.6413031320507872,
+          "scale_factor": 0.16637500000000005,
+          "step": 3
+        },
+        {
+          "defect": 0.9543972136372453,
+          "ratio_to_previous": 0.558572748791879,
+          "scale_factor": 0.09150625000000003,
+          "step": 4
+        },
+        {
+          "defect": 0.46243493618082926,
+          "ratio_to_previous": 0.48453089507509306,
+          "scale_factor": 0.05032843750000002,
+          "step": 5
+        },
+        {
+          "defect": 0.19785528203222408,
+          "ratio_to_previous": 0.4278553944610606,
+          "scale_factor": 0.027680640625000013,
+          "step": 6
+        },
+        {
+          "defect": 0.07733758988446851,
+          "ratio_to_previous": 0.39087958173324266,
+          "scale_factor": 0.01522435234375001,
+          "step": 7
+        }
+      ],
+      "stage_count": 7,
+      "strictly_contracting_each_step": true,
+      "structural_c": 0.8,
+      "tends_to_zero": true,
+      "theta": 0.55,
+      "threshold": 7.755834286064009,
+      "threshold_margin": 3.102333714425604,
+      "type_i_m": 0.09
+    },
+    {
+      "alpha": 0.5,
+      "blocker_count": 5,
+      "expected_monotone_decay": true,
+      "final_defect": 1.5334709534858827e-06,
+      "higher_order_c": 0.12,
+      "initial_defect": 15.358137219506267,
+      "max_ratio": 0.9160508631115907,
+      "monotone_nonincreasing": true,
+      "name": "near_edge_but_admissible",
+      "note": "Contraction is weaker but still admissible and routed below threshold.",
+      "observed_matches_expectation": true,
+      "q_less_than_one": true,
+      "q_value": 0.44577735124760076,
+      "sample_path": [
+        {
+          "defect": 15.358137219506267,
+          "ratio_to_previous": 1.0,
+          "scale_factor": 1.0,
+          "step": 0
+        },
+        {
+          "defect": 14.068834855714961,
+          "ratio_to_previous": 0.9160508631115907,
+          "scale_factor": 0.65,
+          "step": 1
+        },
+        {
+          "defect": 12.603969446256748,
+          "ratio_to_previous": 0.895878697526742,
+          "scale_factor": 0.42250000000000004,
+          "step": 2
+        },
+        {
+          "defect": 10.98816811848661,
+          "ratio_to_previous": 0.8718021862350662,
+          "scale_factor": 0.274625,
+          "step": 3
+        },
+        {
+          "defect": 9.269159557886374,
+          "ratio_to_previous": 0.8435582217104816,
+          "scale_factor": 0.17850625000000003,
+          "step": 4
+        },
+        {
+          "defect": 7.518408903531,
+          "ratio_to_previous": 0.8111208849710865,
+          "scale_factor": 0.11602906250000002,
+          "step": 5
+        },
+        {
+          "defect": 5.825368156153964,
+          "ratio_to_previous": 0.7748139574342778,
+          "scale_factor": 0.07541889062500001,
+          "step": 6
+        },
+        {
+          "defect": 4.284016197924567,
+          "ratio_to_previous": 0.7354069447780565,
+          "scale_factor": 0.049022278906250015,
+          "step": 7
+        }
+      ],
+      "stage_count": 7,
+      "strictly_contracting_each_step": true,
+      "structural_c": 0.7,
+      "tends_to_zero": true,
+      "theta": 0.65,
+      "threshold": 21.33074613820315,
+      "threshold_margin": 5.972608918696883,
+      "type_i_m": 0.06
+    }
+  ],
+  "formal_model": {
+    "C": "scripts/ns_a8_annular_decay_clarification_harness.py",
+    "F": "The gap is the missing analytic proof that the routed annular recursion holds in the PDE setting.",
+    "G": "Promotion remains false; this surface is not a theorem promotion and cannot certify NS Clay.",
+    "L": "clarification receipt -> theorem route -> A9 closure route -> NS Clay gate",
+    "O": "Single-file deterministic harness for the NS A8 annular-decay clarification route.",
+    "P": "Use deterministic admissible families below the modeled small-data threshold.",
+    "R": "Model admissible parameter families with q<1, monotone defect decay, and threshold summaries.",
+    "S": "Finite recursion receipt only; no analytic localization theorem and no A8 promotion."
+  },
+  "harness": "ns_a8_annular_decay_clarification_harness",
+  "promotion": {
+    "a8_theorem_proved_here": false,
+    "a9_promoted_from_clarification": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "scope": "annular_decay_clarification_receipt_only",
+  "threshold_summary": {
+    "all_monotone_nonincreasing": true,
+    "all_q_less_than_one": true,
+    "all_strictly_contracting_each_step": true,
+    "all_tend_to_zero": true,
+    "canonical_theta_half_q": 0.3333333333333333,
+    "canonical_theta_half_q_leq_one_third": true,
+    "family_count": 4,
+    "maximum_q_value": 0.44577735124760076,
+    "minimum_q_gap": 0.5542226487523992,
+    "minimum_threshold_margin": 3.102333714425604
+  }
+}

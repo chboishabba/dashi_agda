@@ -1,0 +1,47 @@
+[
+  {
+    "classification": "conditional_open_requires_persistence",
+    "clay": false,
+    "complete": false,
+    "next_action": "prove NonCircularRotatingStrainPersistenceBound",
+    "rationale": "The rotating strain phase-lag route remains conditionally open, but it needs a non-circular persistence bound before it can be promoted.",
+    "recommendation_rank": 1,
+    "route_id": "rotating_strain_phase_lag"
+  },
+  {
+    "classification": "obstructed_by_sprint120",
+    "clay": false,
+    "complete": false,
+    "next_action": "retain as a Sprint120 obstruction record",
+    "rationale": "Sprint120 blocks the constant linear strain lane, so it cannot serve as the Sprint121 rotating-route witness.",
+    "recommendation_rank": 5,
+    "route_id": "constant_linear_strain"
+  },
+  {
+    "classification": "open_secondary",
+    "clay": false,
+    "complete": false,
+    "next_action": "keep as a secondary mechanism after the persistence gate",
+    "rationale": "Nonlinear feedback may support the construction later, but it does not replace the missing rotating-strain persistence bound.",
+    "recommendation_rank": 2,
+    "route_id": "nonlinear_feedback"
+  },
+  {
+    "classification": "rejected_circular",
+    "clay": false,
+    "complete": false,
+    "next_action": "exclude from non-circular route accounting",
+    "rationale": "An imposed phase lag assumes the phase separation the route must derive, making the argument circular.",
+    "recommendation_rank": 4,
+    "route_id": "imposed_phase_lag"
+  },
+  {
+    "classification": "empirical_not_proof",
+    "clay": false,
+    "complete": false,
+    "next_action": "use only as empirical guidance, not as a lemma substitute",
+    "rationale": "Numerical rotation evidence can guide tests, but it does not supply the analytic proof obligation.",
+    "recommendation_rank": 3,
+    "route_id": "numerical_rotation_evidence"
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "GeneralSmoothFiniteEnergyNSRegularity": false,
+  "MechanismExhaustionForFullClayNS": false,
+  "SymmetricAxisymmetricWithSwirlGlobalRegularity": true,
+  "SymmetricHouLuoBKMFinite": true,
+  "SymmetricHouLuoRegularityClassClosure": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint158_theorem_statement_closure",
+  "control_card": {
+    "C": "Python stdlib emitter writes theorem rows, JSON, CSV, Markdown, and manifest.",
+    "F": "The unresolved global gap is mechanism exhaustion for full Clay NS.",
+    "G": "No general 3D NS or Clay promotion is permitted from this class statement.",
+    "L": "Sprint157 BKM finite -> theorem statement -> class closure true -> full Clay guard false.",
+    "O": "Worker 2 owns the theorem statement closure emitter.",
+    "P": "Use this as the publication theorem statement boundary for the symmetric class.",
+    "R": "Normalize the exact theorem statement and promote SymmetricHouLuoRegularityClassClosure.",
+    "S": "Sprint157 closes BKM and continuation; only theorem-level class statement remained open."
+  },
+  "covered_assumption_count": 5,
+  "decision": "theorem_statement_class_closure_promoted_for_symmetric_hou_luo",
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay_ns_solved": false,
+  "lane": 2,
+  "promotion_allowed": false,
+  "row_count": 9,
+  "sprint": 158,
+  "summary_hash": "20ee73339a2f2810af1c09909a3e4f09ca674838f7da4268b5af54c763c2aebf",
+  "symmetric_hou_luo_regularity_class_closure": true,
+  "theorem_statement": "For smooth finite-energy axisymmetric Navier-Stokes initial data with swirl, z-reflection symmetry, Sobolev regularity H^s for s >= 3, and bounded Gamma/circulation input, the symmetric Hou-Luo route has finite BKM integral on every finite time interval and therefore admits a unique global smooth solution within that symmetric class.",
+  "validation_passed": true
+}

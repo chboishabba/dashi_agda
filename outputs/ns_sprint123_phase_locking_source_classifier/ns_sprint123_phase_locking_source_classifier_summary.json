@@ -1,0 +1,35 @@
+{
+  "candidate_routes": [
+    "nse_derived_rotating_frame_ode",
+    "imposed_phase_locking",
+    "sampled_dwell_windows",
+    "damping_drift_balance",
+    "global_data_realization",
+    "kstar_budget_bridge"
+  ],
+  "classifications": {
+    "damping_drift_balance": "conditional_bound_missing",
+    "global_data_realization": "open_downstream",
+    "imposed_phase_locking": "rejected_circular",
+    "kstar_budget_bridge": "open_downstream",
+    "nse_derived_rotating_frame_ode": "live_primary_requires_estimate",
+    "sampled_dwell_windows": "empirical_not_proof"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": false,
+  "conditional_route_count": 1,
+  "contract": "ns_sprint123_phase_locking_source_classifier",
+  "empirical_route_count": 1,
+  "exit_code": 1,
+  "exit_reason": "phase-locking source still requires an analytic estimate",
+  "live_route_count": 1,
+  "open_route_count": 2,
+  "primary_route": "nse_derived_rotating_frame_ode",
+  "recommended_classification": "live_primary_requires_estimate",
+  "recommended_next_lemma": "FavorablePhaseLagWindowLowerBound",
+  "recommended_route_id": "nse_derived_rotating_frame_ode",
+  "rejected_route_count": 1,
+  "route_count": 6
+}

@@ -1,0 +1,352 @@
+{
+  "base_classification_counts": {
+    "apparent-gap-collapse": 1,
+    "apparent-nonamenable-gap-preserved": 2,
+    "borderline-or-finite-size-sensitive": 1
+  },
+  "base_harness_command": [
+    "/usr/bin/python",
+    "/home/c/Documents/code/dashi_agda/scripts/ym_bt_tree_spectral_gap_harness.py",
+    "--p",
+    "2,3",
+    "--depths",
+    "2,3,4",
+    "--boundary",
+    "induced,full-degree",
+    "--laplacian",
+    "normalized",
+    "--max-nodes",
+    "700",
+    "--out",
+    "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ym_bt_boundary_depth_regression_base_harness.json"
+  ],
+  "base_harness_stderr_tail": "",
+  "base_harness_stdout_tail": "YM finite BT tree spectral-gap harness\nboundary=induced keeps finite-ball leaf degree 1; boundary=full-degree charges missing exterior edges\nroot-anchored variants use the principal minor deleting the root after the selected boundary convention\n\np depth nodes boundary    laplacian      lambda_min    lambda_first>0  inf_ref      ratio\n-----------------------------------------------------------------------------------------\n2  2     10    induced     normalized     -7.21645e-16         0.183503    0.057191    3.20861\n2  2     10    full-degree normalized        0.254644         0.254644    0.057191    4.45252\n2  3     22    induced     normalized     -5.55146e-16         0.057191    0.057191          1\n2  3     22    full-degree normalized        0.183503         0.183503    0.057191    3.20861\n2  4     46    induced     normalized     -1.05471e-15        0.0221593    0.057191   0.387462\n2  4     46    full-degree normalized        0.146149         0.146149    0.057191    2.55546\n3  2     17    induced     normalized     -9.76789e-17         0.133975    0.133975          1\n3  2     17    full-degree normalized        0.338562         0.338562    0.133975    2.52706\n3  3     53    induced     normalized     -1.00415e-15        0.0317542    0.133975   0.237016\n3  3     53    full-degree normalized         0.26662          0.26662    0.133975    1.99008\n3  4     161   induced     normalized      6.85818e-16       0.00916059    0.133975  0.0683755\n3  4     161   full-degree normalized        0.227772         0.227772    0.133975    1.70011\n\nclassification by convention\np boundary                   laplacian      deepest ratio     class\n----------------------------------------------------------------------------------\n2  full-degree                normalized           2.55546     apparent-nonamenable-gap-preserved\n2  induced                    normalized          0.387462     borderline-or-finite-size-sensitive\n3  full-degree                normalized           1.70011     apparent-nonamenable-gap-preserved\n3  induced                    normalized         0.0683755     apparent-gap-collapse\n\nwrote summary: /home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ym_bt_boundary_depth_regression_base_harness.json\n",
+  "boundary_admissibility_policy": {
+    "accepted_current_gap_carrier_boundaries": [
+      "full-degree"
+    ],
+    "classification_counts": {
+      "admissible-candidate": 1,
+      "inadmissible-current-gap-carrier": 1
+    },
+    "clay_promoted": false,
+    "policy_rows": [
+      {
+        "accepted_as_current_gap_carrier": true,
+        "admissibility": "admissible-candidate",
+        "boundary": "full-degree",
+        "rationale": "Full-degree/killing-style truncation is the current admissible candidate because missing exterior tree edges remain charged.",
+        "required_followups": [
+          "FiniteGaugeQuotientCarrierConstruction",
+          "HamiltonianDominatesDefectPlusHolonomy",
+          "ReflectionPositiveTransferMatrix",
+          "BruhatTitsToOSLatticeTransfer",
+          "ContinuumTransferNoSpectralPollution"
+        ],
+        "theorem_precondition_status": "candidate-satisfied-not-promoted"
+      },
+      {
+        "accepted_as_current_gap_carrier": false,
+        "admissibility": "inadmissible-current-gap-carrier",
+        "boundary": "induced",
+        "rationale": "Induced finite-ball truncation is rejected for the current gap route because finite leaves do not pay for missing exterior edges.",
+        "required_followups": [
+          "Do not use induced finite balls as the theorem carrier for the current YM route.",
+          "Keep induced rows only as negative-control diagnostics."
+        ],
+        "theorem_precondition_status": "violated"
+      }
+    ],
+    "precondition_statement": "Current finite BT/YM route requires a full-degree/killing-style boundary convention before attempting finite gauge quotient or Hamiltonian-domination transfer. This is a theorem precondition, not a mass-gap proof.",
+    "promotion": false,
+    "rejected_current_gap_carrier_boundaries": [
+      "induced"
+    ],
+    "status": "explicit-admissible-candidate-present",
+    "unknown_boundaries": [],
+    "ym_mass_gap_promoted": false
+  },
+  "boundary_comparisons": [
+    {
+      "classification": "boundary-convention-separates-collapse-from-gap",
+      "full_degree_boundary": "full-degree",
+      "full_degree_deepest_ratio": 2.555457478593687,
+      "full_over_induced_ratio": 6.5953718837191495,
+      "induced_boundary": "induced",
+      "induced_deepest_ratio": 0.3874622270962312,
+      "laplacian": "normalized",
+      "p": 2,
+      "rationale": "Induced finite balls decay while full-degree/killing truncations retain a substantial gap."
+    },
+    {
+      "classification": "full-degree-more-stable",
+      "full_degree_boundary": "full-degree",
+      "full_degree_deepest_ratio": 1.7001121686141925,
+      "full_over_induced_ratio": 24.86433285449779,
+      "induced_boundary": "induced",
+      "induced_deepest_ratio": 0.068375539314205,
+      "laplacian": "normalized",
+      "p": 3,
+      "rationale": "Full-degree/killing truncation is stable or gap-preserving relative to induced."
+    }
+  ],
+  "clay_promoted": false,
+  "comparison_classification_counts": {
+    "boundary-convention-separates-collapse-from-gap": 1,
+    "full-degree-more-stable": 1
+  },
+  "control": {
+    "C": "scripts/ym_bt_boundary_depth_regression.py wrapping scripts/ym_bt_tree_spectral_gap_harness.py.",
+    "F": "Does not prove gauge quotient, holonomy action, Hamiltonian domination, OS transfer, or continuum gap.",
+    "G": "promotion=false; clay_promoted=false; ym_mass_gap_promoted=false.",
+    "L": "base harness rows -> depth trends -> induced/full-degree comparison -> fail-closed classification",
+    "O": "YM BT boundary depth-regression diagnostic runner.",
+    "P": "Treat full-degree/killing stability and induced collapse as boundary-convention evidence, not YM proof.",
+    "R": "Run deeper finite regular-tree spectral-gap sweeps and classify depth/boundary stability.",
+    "S": "Numerical finite-tree evidence only; boundary effects remain model-dependent."
+  },
+  "parameters": {
+    "boundary": [
+      "induced",
+      "full-degree"
+    ],
+    "depths": [
+      2,
+      3,
+      4
+    ],
+    "laplacian": [
+      "normalized"
+    ],
+    "max_nodes": 700,
+    "p": [
+      2,
+      3
+    ]
+  },
+  "promotion": false,
+  "regression_classification_counts": {
+    "apparent-gap-collapse": 1,
+    "finite-size-sensitive-collapse-trend": 1,
+    "gap-preserving-with-depth-drift": 2
+  },
+  "regressions": [
+    {
+      "boundary": "full-degree",
+      "boundary_admissibility": "admissible-candidate",
+      "classification": "gap-preserving-with-depth-drift",
+      "deepest_depth": 4,
+      "deepest_gap": 0.1461490623970565,
+      "deepest_ratio_to_reference": 2.555457478593687,
+      "deepest_vertex_count": 46,
+      "depths": [
+        2,
+        3,
+        4
+      ],
+      "gap_first_to_last": 0.5739348191691366,
+      "gaps": [
+        0.2546440075000692,
+        0.18350341907227333,
+        0.1461490623970565
+      ],
+      "laplacian": "normalized",
+      "log_gap_slope_per_depth": -0.27761972228247267,
+      "monotone_gap_decrease": true,
+      "monotone_ratio_decrease": true,
+      "p": 2,
+      "ratio_first_to_last": 0.5739348191691366,
+      "ratio_slope_per_depth": -0.9485323214043739,
+      "rationale": "Full-degree/killing convention keeps a substantial ratio but the trend is still moving.",
+      "ratios": [
+        4.452522121402435,
+        3.2086089156135214,
+        2.555457478593687
+      ],
+      "sample_count": 3,
+      "theorem_precondition_status": "candidate-satisfied-not-promoted"
+    },
+    {
+      "boundary": "induced",
+      "boundary_admissibility": "inadmissible-current-gap-carrier",
+      "classification": "finite-size-sensitive-collapse-trend",
+      "deepest_depth": 4,
+      "deepest_gap": 0.02215933611838164,
+      "deepest_ratio_to_reference": 0.3874622270962312,
+      "deepest_vertex_count": 46,
+      "depths": [
+        2,
+        3,
+        4
+      ],
+      "gap_first_to_last": 0.12075707488400597,
+      "gaps": [
+        0.18350341907227333,
+        0.057190958417936644,
+        0.02215933611838164
+      ],
+      "laplacian": "normalized",
+      "log_gap_slope_per_depth": -1.0569871984969792,
+      "monotone_gap_decrease": true,
+      "monotone_ratio_decrease": true,
+      "p": 2,
+      "ratio_first_to_last": 0.12075707488400597,
+      "ratio_slope_per_depth": -1.410573344258645,
+      "rationale": "Induced convention shows monotone depth decay and a large first-to-last ratio loss.",
+      "ratios": [
+        3.2086089156135214,
+        1.000000000000002,
+        0.3874622270962312
+      ],
+      "sample_count": 3,
+      "theorem_precondition_status": "violated"
+    },
+    {
+      "boundary": "full-degree",
+      "boundary_admissibility": "admissible-candidate",
+      "classification": "gap-preserving-with-depth-drift",
+      "deepest_depth": 4,
+      "deepest_gap": 0.2277718413112489,
+      "deepest_ratio_to_reference": 1.7001121686141925,
+      "deepest_vertex_count": 161,
+      "depths": [
+        2,
+        3,
+        4
+      ],
+      "gap_first_to_last": 0.6727622280079233,
+      "gaps": [
+        0.33856217223385254,
+        0.266619502088786,
+        0.2277718413112489
+      ],
+      "laplacian": "normalized",
+      "log_gap_slope_per_depth": -0.19818165669291543,
+      "monotone_gap_decrease": true,
+      "monotone_ratio_decrease": true,
+      "p": 3,
+      "ratio_first_to_last": 0.6727622280079232,
+      "ratio_slope_per_depth": -0.4134751439905261,
+      "rationale": "Full-degree/killing convention keeps a substantial ratio but the trend is still moving.",
+      "ratios": [
+        2.5270624565952446,
+        1.9900750561681306,
+        1.7001121686141925
+      ],
+      "sample_count": 3,
+      "theorem_precondition_status": "candidate-satisfied-not-promoted"
+    },
+    {
+      "boundary": "induced",
+      "boundary_admissibility": "inadmissible-current-gap-carrier",
+      "classification": "apparent-gap-collapse",
+      "deepest_depth": 4,
+      "deepest_gap": 0.009160585270641858,
+      "deepest_ratio_to_reference": 0.068375539314205,
+      "deepest_vertex_count": 161,
+      "depths": [
+        2,
+        3,
+        4
+      ],
+      "gap_first_to_last": 0.06837553931420526,
+      "gaps": [
+        0.13397459621556088,
+        0.031754163448144114,
+        0.009160585270641858
+      ],
+      "laplacian": "normalized",
+      "log_gap_slope_per_depth": -1.3413700653388014,
+      "monotone_gap_decrease": true,
+      "monotone_ratio_decrease": true,
+      "p": 3,
+      "ratio_first_to_last": 0.06837553931420526,
+      "ratio_slope_per_depth": -0.4658122303428956,
+      "rationale": "Deepest ratio 0.06838 is below collapse threshold 0.1.",
+      "ratios": [
+        0.9999999999999961,
+        0.23701630268064064,
+        0.068375539314205
+      ],
+      "sample_count": 3,
+      "theorem_precondition_status": "violated"
+    }
+  ],
+  "skipped": [],
+  "theorem_precondition_status": {
+    "admissible_gap_preserving_row_count": 2,
+    "admissible_row_count": 2,
+    "blocked_downstream_theorems": [
+      "FiniteGaugeQuotientCarrierConstruction",
+      "HamiltonianDominatesDefectPlusHolonomy",
+      "ReflectionPositiveTransferMatrix",
+      "BruhatTitsToOSLatticeTransfer",
+      "ContinuumTransferNoSpectralPollution",
+      "ClayYangMillsAuthorityTranslation"
+    ],
+    "boundary_admissibility_policy": {
+      "accepted_current_gap_carrier_boundaries": [
+        "full-degree"
+      ],
+      "classification_counts": {
+        "admissible-candidate": 1,
+        "inadmissible-current-gap-carrier": 1
+      },
+      "clay_promoted": false,
+      "policy_rows": [
+        {
+          "accepted_as_current_gap_carrier": true,
+          "admissibility": "admissible-candidate",
+          "boundary": "full-degree",
+          "rationale": "Full-degree/killing-style truncation is the current admissible candidate because missing exterior tree edges remain charged.",
+          "required_followups": [
+            "FiniteGaugeQuotientCarrierConstruction",
+            "HamiltonianDominatesDefectPlusHolonomy",
+            "ReflectionPositiveTransferMatrix",
+            "BruhatTitsToOSLatticeTransfer",
+            "ContinuumTransferNoSpectralPollution"
+          ],
+          "theorem_precondition_status": "candidate-satisfied-not-promoted"
+        },
+        {
+          "accepted_as_current_gap_carrier": false,
+          "admissibility": "inadmissible-current-gap-carrier",
+          "boundary": "induced",
+          "rationale": "Induced finite-ball truncation is rejected for the current gap route because finite leaves do not pay for missing exterior edges.",
+          "required_followups": [
+            "Do not use induced finite balls as the theorem carrier for the current YM route.",
+            "Keep induced rows only as negative-control diagnostics."
+          ],
+          "theorem_precondition_status": "violated"
+        }
+      ],
+      "precondition_statement": "Current finite BT/YM route requires a full-degree/killing-style boundary convention before attempting finite gauge quotient or Hamiltonian-domination transfer. This is a theorem precondition, not a mass-gap proof.",
+      "promotion": false,
+      "rejected_current_gap_carrier_boundaries": [
+        "induced"
+      ],
+      "status": "explicit-admissible-candidate-present",
+      "unknown_boundaries": [],
+      "ym_mass_gap_promoted": false
+    },
+    "clay_promoted": false,
+    "inadmissible_collapse_row_count": 2,
+    "inadmissible_row_count": 2,
+    "promotion": false,
+    "rationale": "Full-degree/killing-style rows retain a candidate gap signal while induced rows are rejected or act as collapse-sensitive negative controls.",
+    "row_status_counts": {
+      "candidate-satisfied-not-promoted": 2,
+      "violated": 2
+    },
+    "status": "candidate-precondition-supported-by-regression",
+    "ym_mass_gap_promoted": false
+  },
+  "thresholds": {
+    "collapsed_ratio_max": 0.1,
+    "flat_slope_max": 0.08,
+    "sensitive_decay_ratio_max": 0.55,
+    "stable_ratio_min": 0.5
+  },
+  "ym_mass_gap_promoted": false
+}

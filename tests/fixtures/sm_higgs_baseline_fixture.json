@@ -1,0 +1,237 @@
+{
+  "schema": "dashi-sm-higgs-baseline-fixture-v1",
+  "baseline_version": "fixture-2026-06-07",
+  "authority_status": "fixture-not-authority",
+  "source_note": "Substantial offline SM-relative fixture for testing the Higgs covariant comparison adapter. Values are deterministic fixture baselines, not ATLAS, HEPData, CERN, PDG, or Standard Model authority payloads.",
+  "observed_receipt_reference": {
+    "path": "outputs/sm_higgs_hepdata_receipts/sm_higgs_observed_shape_receipt.json",
+    "schema": "dashi-sm-higgs-hepdata-receipt-v1",
+    "record": "ins1716707",
+    "record_url": "https://www.hepdata.net/record/ins1716707",
+    "expected_rows": [
+      {
+        "observable": "pT_yy",
+        "transform": "log",
+        "correlation_table": "pT_yy_corr"
+      },
+      {
+        "observable": "yAbs_yy",
+        "transform": "linear",
+        "correlation_table": "yAbs_yy_corr"
+      },
+      {
+        "observable": "N_j_30",
+        "transform": "log",
+        "correlation_table": "N_j_30_corr"
+      },
+      {
+        "observable": "N_j_30",
+        "transform": "ordinal",
+        "correlation_table": "N_j_30_corr"
+      }
+    ]
+  },
+  "normalization_metadata": {
+    "normalization": "shape-normalized-to-unit-sum-per-row",
+    "model_value_semantics": "SM-relative expected bin fractions in the row transform basis",
+    "covariance_semantics": "fixture covariance over shape-normalized bin fractions after the named transform",
+    "covariance_positive_definite_by_construction": true,
+    "unit_policy": "dimensionless fractions unless row units state otherwise",
+    "rounding_policy": "decimal fixture values rounded to 6 significant digits",
+    "binning_policy": "bin edges and labels are absent from the observed receipt; stable fixture-local bin_ids are supplied for adapter tests"
+  },
+  "rows": [
+    {
+      "observable_key": "pT_yy:log",
+      "observable": "pT_yy",
+      "transform": "log",
+      "correlation_table": "pT_yy_corr",
+      "authority_status": "fixture-not-authority",
+      "units": {
+        "x": "GeV",
+        "y": "dimensionless shape fraction",
+        "normalization": "unit-sum"
+      },
+      "bins_available_from_observed_receipt": false,
+      "bin_ids": [
+        "pt_yy_bin_00",
+        "pt_yy_bin_01",
+        "pt_yy_bin_02",
+        "pt_yy_bin_03",
+        "pt_yy_bin_04",
+        "pt_yy_bin_05",
+        "pt_yy_bin_06",
+        "pt_yy_bin_07"
+      ],
+      "labels": [
+        "fixture pT_yy bin 0",
+        "fixture pT_yy bin 1",
+        "fixture pT_yy bin 2",
+        "fixture pT_yy bin 3",
+        "fixture pT_yy bin 4",
+        "fixture pT_yy bin 5",
+        "fixture pT_yy bin 6",
+        "fixture pT_yy bin 7"
+      ],
+      "sm_relative_model_values": [
+        0.305,
+        0.245,
+        0.178,
+        0.117,
+        0.072,
+        0.042,
+        0.025,
+        0.016
+      ],
+      "covariance_matrix": [
+        [0.0025, 0.00042, 0.00028, 0.00018, 0.00011, 0.00007, 0.00004, 0.00002],
+        [0.00042, 0.0021, 0.00035, 0.00022, 0.00013, 0.00008, 0.00005, 0.00003],
+        [0.00028, 0.00035, 0.0018, 0.00029, 0.00017, 0.0001, 0.00006, 0.00003],
+        [0.00018, 0.00022, 0.00029, 0.00145, 0.00022, 0.00013, 0.00007, 0.00004],
+        [0.00011, 0.00013, 0.00017, 0.00022, 0.00115, 0.00017, 0.00009, 0.00005],
+        [0.00007, 0.00008, 0.0001, 0.00013, 0.00017, 0.0009, 0.00013, 0.00007],
+        [0.00004, 0.00005, 0.00006, 0.00007, 0.00009, 0.00013, 0.0007, 0.0001],
+        [0.00002, 0.00003, 0.00003, 0.00004, 0.00005, 0.00007, 0.0001, 0.00055]
+      ],
+      "observed_receipt_live_row": {
+        "status": "ok",
+        "best_model": "B",
+        "mdl_margin_to_second": 5.652399028433706
+      }
+    },
+    {
+      "observable_key": "yAbs_yy:linear",
+      "observable": "yAbs_yy",
+      "transform": "linear",
+      "correlation_table": "yAbs_yy_corr",
+      "authority_status": "fixture-not-authority",
+      "units": {
+        "x": "absolute rapidity",
+        "y": "dimensionless shape fraction",
+        "normalization": "unit-sum"
+      },
+      "bins_available_from_observed_receipt": false,
+      "bin_ids": [
+        "yabs_yy_bin_00",
+        "yabs_yy_bin_01",
+        "yabs_yy_bin_02",
+        "yabs_yy_bin_03",
+        "yabs_yy_bin_04",
+        "yabs_yy_bin_05"
+      ],
+      "labels": [
+        "fixture |y_yy| bin 0",
+        "fixture |y_yy| bin 1",
+        "fixture |y_yy| bin 2",
+        "fixture |y_yy| bin 3",
+        "fixture |y_yy| bin 4",
+        "fixture |y_yy| bin 5"
+      ],
+      "sm_relative_model_values": [
+        0.226,
+        0.214,
+        0.192,
+        0.159,
+        0.121,
+        0.088
+      ],
+      "covariance_matrix": [
+        [0.00155, 0.00024, 0.00019, 0.00014, 0.0001, 0.00006],
+        [0.00024, 0.00148, 0.00023, 0.00018, 0.00012, 0.00008],
+        [0.00019, 0.00023, 0.00136, 0.00022, 0.00016, 0.0001],
+        [0.00014, 0.00018, 0.00022, 0.00122, 0.00019, 0.00012],
+        [0.0001, 0.00012, 0.00016, 0.00019, 0.00102, 0.00016],
+        [0.00006, 0.00008, 0.0001, 0.00012, 0.00016, 0.00086]
+      ],
+      "observed_receipt_live_row": {
+        "status": "ok",
+        "best_model": "C",
+        "mdl_margin_to_second": 5.30033986522119
+      }
+    },
+    {
+      "observable_key": "N_j_30:log",
+      "observable": "N_j_30",
+      "transform": "log",
+      "correlation_table": "N_j_30_corr",
+      "authority_status": "fixture-not-authority",
+      "units": {
+        "x": "jet multiplicity with pT > 30 GeV",
+        "y": "dimensionless shape fraction",
+        "normalization": "unit-sum"
+      },
+      "bins_available_from_observed_receipt": false,
+      "bin_ids": [
+        "n_j_30_bin_0",
+        "n_j_30_bin_1",
+        "n_j_30_bin_2",
+        "n_j_30_bin_ge_3"
+      ],
+      "labels": [
+        "0 jets",
+        "1 jet",
+        "2 jets",
+        ">=3 jets"
+      ],
+      "sm_relative_model_values": [
+        0.512,
+        0.285,
+        0.132,
+        0.071
+      ],
+      "covariance_matrix": [
+        [0.0022, 0.00031, 0.00018, 0.00009],
+        [0.00031, 0.00175, 0.00024, 0.00013],
+        [0.00018, 0.00024, 0.00128, 0.00018],
+        [0.00009, 0.00013, 0.00018, 0.00092]
+      ],
+      "observed_receipt_live_row": {
+        "status": "ok",
+        "best_model": "C",
+        "mdl_margin_to_second": 0.4995747086214193
+      }
+    },
+    {
+      "observable_key": "N_j_30:ordinal",
+      "observable": "N_j_30",
+      "transform": "ordinal",
+      "correlation_table": "N_j_30_corr",
+      "authority_status": "fixture-not-authority",
+      "units": {
+        "x": "jet multiplicity with pT > 30 GeV",
+        "y": "dimensionless shape fraction",
+        "normalization": "unit-sum"
+      },
+      "bins_available_from_observed_receipt": false,
+      "bin_ids": [
+        "n_j_30_bin_0",
+        "n_j_30_bin_1",
+        "n_j_30_bin_2",
+        "n_j_30_bin_ge_3"
+      ],
+      "labels": [
+        "0 jets",
+        "1 jet",
+        "2 jets",
+        ">=3 jets"
+      ],
+      "sm_relative_model_values": [
+        0.502,
+        0.291,
+        0.137,
+        0.07
+      ],
+      "covariance_matrix": [
+        [0.00205, 0.0003, 0.00017, 0.00008],
+        [0.0003, 0.00168, 0.00023, 0.00012],
+        [0.00017, 0.00023, 0.00122, 0.00017],
+        [0.00008, 0.00012, 0.00017, 0.00088]
+      ],
+      "observed_receipt_live_row": {
+        "status": "ok",
+        "best_model": "B",
+        "mdl_margin_to_second": 1.3845380086435237
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "all_checks_ok": true,
+  "clay_promotion_blocked": true,
+  "external_acceptance_blocker_ok": true,
+  "final_assembly_boundary_ok": true,
+  "os_wightman_named_blocker_ok": true,
+  "promotion": false,
+  "reflection_positivity_named_blocker_ok": true
+}

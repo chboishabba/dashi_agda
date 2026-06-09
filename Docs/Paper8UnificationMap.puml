@@ -1,0 +1,72 @@
+@startuml
+title Paper 8 Fail-Closed Unification Map
+
+skinparam backgroundColor #FFFFFF
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName sans-serif
+skinparam rectangle {
+  RoundCorner 8
+  BorderColor #334155
+}
+
+legend right
+  Green: bounded receipt progress
+  Yellow: conditional/frontier
+  Red: hard blocker
+  Gray: forbidden overclaim
+endlegend
+
+package "Current admissible package" {
+  rectangle "Paper 1 package\nconstructive typed receipts\nfail-closed method" as Paper1 #dcfce7
+  rectangle "Paper 8 ledger\nblocker map + receipt index\nclaim governance" as Paper8 #dcfce7
+}
+
+package "Gate receipts" {
+  rectangle "Gate 5 P5'\nvalue/covariance checksum\nborderline candidate\nacceptedResidualCandidate=false" as G5 #fef3c7
+  rectangle "Gate 6 DHR/SM\nfinite p2/p3/p5 rows\nconditionalOnDRAuthority\nunconditional=false" as G6 #fef3c7
+  rectangle "Gate 7 alpha/Yukawa\nsymbolic targets\naccepted-alpha=false\nphysical ratios=false" as G7 #fef3c7
+  rectangle "Temple/Friedmann receipt\ninstability/saddle boundary\nno cosmology promotion" as Temple #fef3c7
+  rectangle "Gate 8 composition\nconsumes receipts fail-closed\nterminal promotion=false" as G8 #fef3c7
+}
+
+package "Hard blockers" {
+  rectangle "External authority\nW2/W3/W4/W5\nphysical calibration" as Auth #fee2e2
+  rectangle "Clay YM/NS\nno accepted Millennium proof" as Clay #fee2e2
+  rectangle "GR non-flat\nno sourced Einstein\nno Schwarzschild\nno continuum GR" as GR #fee2e2
+  rectangle "DHR/SM full match\nno arbitrary DHR category\nno exact G_DHR ~= G_SM" as DHR #fee2e2
+  rectangle "Matter/Yukawa physicalization\nno off-diagonal Yukawa\nno masses/CKM/alpha promotion" as Matter #fee2e2
+  rectangle "P5'/C9 new physics\nno accepted anomaly authority\nno discovery claim" as P5 #fee2e2
+}
+
+package "Forbidden overclaims" {
+  rectangle "No Clay YM/NS" as F1 #e5e7eb
+  rectangle "No dark-energy removal\nNo LCDM falsification" as F2 #e5e7eb
+  rectangle "No full SM reconstruction\nNo full unification" as F3 #e5e7eb
+  rectangle "No accepted new physics" as F4 #e5e7eb
+}
+
+Paper1 --> Paper8 : controls admissible wording
+Paper8 --> G5 : indexes
+Paper8 --> G6 : indexes
+Paper8 --> G7 : indexes
+Paper8 --> Temple : indexes
+G5 --> G8 : conditional input only
+G6 --> G8 : conditional input only
+G7 --> G8 : target input only
+Temple --> GR : does not close
+
+Auth --> G8 : blocks terminal promotion
+Clay --> G8 : blocks Millennium language
+GR --> G8 : blocks GR/GRQFT closure
+DHR --> G6 : blocks unconditional match
+Matter --> G7 : blocks physical ratios
+P5 --> G5 : blocks new-physics claim
+
+G8 --> F3 : terminal promotion remains false
+Clay --> F1
+Temple --> F2
+G5 --> F4
+G7 --> F4
+
+@enduml

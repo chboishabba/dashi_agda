@@ -4,6 +4,7 @@ open import Agda.Primitive using (Level; Setω; lzero)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
@@ -83,8 +84,28 @@ data AQFTCarrierAlgebraQuotientOpenObligation : Set where
   missingMassGapEnergyPositivityBWTimeSliceDependency :
     AQFTCarrierAlgebraQuotientOpenObligation
 
+data AQFTM4U6ResidualBlocker : Set where
+  missingDASHILocalAlgebra :
+    AQFTM4U6ResidualBlocker
+
+  missingGNSUniversalProperty :
+    AQFTM4U6ResidualBlocker
+
+canonicalAQFTM4U6ResidualBlockers :
+  List AQFTM4U6ResidualBlocker
+canonicalAQFTM4U6ResidualBlockers =
+  missingDASHILocalAlgebra
+  ∷ missingGNSUniversalProperty
+  ∷ []
+
 data AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt : Set where
+  promotedReceiptPredicateInhabited :
+    AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt
+
   transportEquivalenceLawsSetoidInhabited :
+    AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt
+
+  transportSetoidQuotientConstructionInhabited :
     AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt
 
   transportQuotientExtensionalitySetoidInhabited :
@@ -93,12 +114,26 @@ data AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt : Set where
   transportQuotientEliminatorsSetoidInhabited :
     AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt
 
+  preciseTransportQuotientRelationInhabited :
+    AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt
+
+  quotientAlgebraOperationsTransportLawsInhabited :
+    AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt
+
+  quotientNormBetaTransportLawsInhabited :
+    AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt
+
 canonicalAQFTCarrierAlgebraQuotientSetoidInhabitedReceipts :
   List AQFTCarrierAlgebraQuotientSetoidInhabitedReceipt
 canonicalAQFTCarrierAlgebraQuotientSetoidInhabitedReceipts =
-  transportEquivalenceLawsSetoidInhabited
+  promotedReceiptPredicateInhabited
+  ∷ transportEquivalenceLawsSetoidInhabited
+  ∷ transportSetoidQuotientConstructionInhabited
   ∷ transportQuotientExtensionalitySetoidInhabited
   ∷ transportQuotientEliminatorsSetoidInhabited
+  ∷ preciseTransportQuotientRelationInhabited
+  ∷ quotientAlgebraOperationsTransportLawsInhabited
+  ∷ quotientNormBetaTransportLawsInhabited
   ∷ []
 
 data AQFTCarrierAlgebraPromotionAuthorityToken : Set where
@@ -329,6 +364,43 @@ record TransportEquivalenceRelation
       TransportEquivalent x z
 
 open TransportEquivalenceRelation public
+
+record PromotedReceiptPredicateSurface
+  (Carrier : AQFT.Region → Set)
+  (TransportEquivalent :
+    {region : AQFT.Region} →
+    Carrier region →
+    Carrier region →
+    Set) : Setω where
+  field
+    PromotedReceiptPredicate :
+      {region : AQFT.Region} →
+      Carrier region →
+      Set
+
+    promotedReceiptTransportTarget :
+      {region : AQFT.Region} →
+      {x y : Carrier region} →
+      TransportEquivalent x y →
+      PromotedReceiptPredicate x →
+      PromotedReceiptPredicate y
+
+    predicateAuthorityBoundary :
+      List String
+
+    predicateLocallyConstructed :
+      Bool
+
+    predicateLocallyConstructedIsFalse :
+      predicateLocallyConstructed ≡ false
+
+    predicatePromoted :
+      Bool
+
+    predicatePromotedIsFalse :
+      predicatePromoted ≡ false
+
+open PromotedReceiptPredicateSurface public
 
 record QuotientTransportStability
   (Carrier : AQFT.Region → Set)
@@ -1548,6 +1620,13 @@ record EnergyPositivityFromMassGapTarget : Setω where
       true →
       energyPositivityTarget
 
+    dashiInternalMassGapImpliesEnergyPositivityTarget :
+      MassGap.BalabanRGMassGapReceiptSurface.continuumMassGapProvedInDASHI
+        massGapReceipt
+      ≡
+      true →
+      energyPositivityTarget
+
     spectrumConditionTarget :
       Set
 
@@ -2099,6 +2178,287 @@ record CauchyEvolutionReceiptTarget : Setω where
 
 open CauchyEvolutionReceiptTarget public
 
+record PromotedReceiptPredicateReceipt
+  (RestrictedCarrier : AQFT.Region → Set)
+  (TransportEquivalent :
+    {region : AQFT.Region} →
+    RestrictedCarrier region →
+    RestrictedCarrier region →
+    Set)
+  (PromotedReceipt :
+    {region : AQFT.Region} →
+    RestrictedCarrier region →
+    Set) : Setω where
+  field
+    promotedReceiptPredicate :
+      {region : AQFT.Region} →
+      RestrictedCarrier region →
+      Set
+
+    promotedReceiptPredicateMatches :
+      {region : AQFT.Region} →
+      (x : RestrictedCarrier region) →
+      promotedReceiptPredicate x
+      ≡
+      PromotedReceipt x
+
+    promotedReceiptTransport :
+      {region : AQFT.Region} →
+      {x y : RestrictedCarrier region} →
+      TransportEquivalent x y →
+      promotedReceiptPredicate x →
+      promotedReceiptPredicate y
+
+    predicateInhabitedAsSurface :
+      Bool
+
+    predicateInhabitedAsSurfaceIsTrue :
+      predicateInhabitedAsSurface ≡ true
+
+    predicatePromotedToAQFTNet :
+      Bool
+
+    predicatePromotedToAQFTNetIsFalse :
+      predicatePromotedToAQFTNet ≡ false
+
+    predicateBoundary :
+      List String
+
+open PromotedReceiptPredicateReceipt public
+
+record BoundedRestrictedCarrierDepthProgressSurface : Setω where
+  field
+    typedNetSurface :
+      AQFT.AQFTTypedNetSurface
+
+    boundedRegion :
+      AQFT.Region →
+      Set
+
+    RestrictedCarrier :
+      AQFT.Region →
+      Set
+
+    boundedRestrictedCarrier :
+      (region : AQFT.Region) →
+      boundedRegion region →
+      Set
+
+    boundedRestrictedCarrierMatchesRestrictedCarrier :
+      (region : AQFT.Region) →
+      (bounded : boundedRegion region) →
+      boundedRestrictedCarrier region bounded
+      ≡
+      RestrictedCarrier region
+
+    boundedInclusionMorphism :
+      {small large : AQFT.Region} →
+      small AQFT.⊆ large →
+      AQFT.AlgebraMorphism small large
+
+    boundedDescentCompatibilityTarget :
+      (region : AQFT.Region) →
+      AQFT.DescentCover region →
+      Set
+
+    depthFilteredLocalAlgebraSurface :
+      DepthFilteredLocalAlgebraSurface
+
+    filteredColimitUniversalityReceipt :
+      ColimitUniversalityReceiptTarget
+
+    PromotedReceiptQuotient :
+      AQFT.Region →
+      Set
+
+    quotientNorm :
+      {region : AQFT.Region} →
+      PromotedReceiptQuotient region →
+      RA.ℝ
+
+    cStarQuotientCompletionAuthority :
+      CStarCompletionUniversalPropertyAuthority
+        PromotedReceiptQuotient
+        quotientNorm
+
+    cStarQuotientCompletionAuthoritySafe :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthority
+        cStarQuotientCompletionAuthority
+      ≡
+      true
+
+    cStarQuotientCompletionLocallyConstructedIsFalse :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructed
+        cStarQuotientCompletionAuthority
+      ≡
+      false
+
+    inclusionDescentReceipt :
+      IsotonyG6CausalityDescentReceiptTarget
+
+    timeSliceSurface :
+      TimeSliceTheoremSurface
+
+    cauchyEvolutionReceipt :
+      CauchyEvolutionReceiptTarget
+
+    m4HandoffLabel :
+      String
+
+    m4HandoffLabel-v :
+      m4HandoffLabel
+      ≡
+      "m4-descent-colimit-handoff"
+
+    u6HandoffLabel :
+      String
+
+    u6HandoffLabel-v :
+      u6HandoffLabel
+      ≡
+      "u6-dhr-localised-endomorphism-carrier-handoff"
+
+    bisognanoWichmannCitationOnly :
+      Bool
+
+    bisognanoWichmannCitationOnlyIsTrue :
+      bisognanoWichmannCitationOnly ≡ true
+
+    drPromotionSuppliedHere :
+      Bool
+
+    drPromotionSuppliedHereIsFalse :
+      drPromotionSuppliedHere ≡ false
+
+    boundedCarrierDepthProgressBoundary :
+      List String
+
+open BoundedRestrictedCarrierDepthProgressSurface public
+
+record ConcreteDepthFilteredLocalAlgebraData
+  (PromotedReceiptQuotient : AQFT.Region → Set)
+  (quotientNorm :
+    {region : AQFT.Region} →
+    PromotedReceiptQuotient region →
+    RA.ℝ) : Setω where
+  field
+    depthFilteredLocalAlgebraSurface :
+      DepthFilteredLocalAlgebraSurface
+
+    filteredColimitUniversalityReceipt :
+      ColimitUniversalityReceiptTarget
+
+    colimitCarrierMatchesPromotedReceiptQuotient :
+      (region : AQFT.Region) →
+      DepthFilteredLocalAlgebraSurface.A_colim
+        depthFilteredLocalAlgebraSurface
+        region
+      ≡
+      PromotedReceiptQuotient region
+
+    cStarCompletionAuthority :
+      CStarCompletionUniversalPropertyAuthority
+        PromotedReceiptQuotient
+        quotientNorm
+
+    cStarCompletionAuthorityConsumedSafely :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthority
+        cStarCompletionAuthority
+      ≡
+      true
+
+    cStarCompletionConsumptionLocallyConstructedIsFalse :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructed
+        cStarCompletionAuthority
+      ≡
+      false
+
+    cStarCompletionConsumptionPromotedIsFalse :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        cStarCompletionAuthority
+      ≡
+      false
+
+    depthDataConcreteLabel :
+      String
+
+    depthDataConcreteLabel-v :
+      depthDataConcreteLabel
+      ≡
+      "finite-bool-depth-filtered-local-algebra-over-promoted-receipt-quotient"
+
+    depthFilteredDataBoundary :
+      List String
+
+open ConcreteDepthFilteredLocalAlgebraData public
+
+record AQFTM4U6HandoffReceipt
+  (PromotedReceiptQuotient : AQFT.Region → Set)
+  (quotientNorm :
+    {region : AQFT.Region} →
+    PromotedReceiptQuotient region →
+    RA.ℝ) : Setω where
+  field
+    concreteDepthFilteredLocalAlgebraData :
+      ConcreteDepthFilteredLocalAlgebraData
+        PromotedReceiptQuotient
+        quotientNorm
+
+    inclusionDescentReceipt :
+      IsotonyG6CausalityDescentReceiptTarget
+
+    timeSliceSurface :
+      TimeSliceTheoremSurface
+
+    cauchyEvolutionReceipt :
+      CauchyEvolutionReceiptTarget
+
+    cStarCompletionAuthorityBoundary :
+      CStarCompletionUniversalPropertyAuthority
+        PromotedReceiptQuotient
+        quotientNorm
+
+    residualBlockers :
+      List AQFTM4U6ResidualBlocker
+
+    residualBlockersAreCanonical :
+      residualBlockers
+      ≡
+      canonicalAQFTM4U6ResidualBlockers
+
+    m4FirstResidualBlocker :
+      AQFTM4U6ResidualBlocker
+
+    m4FirstResidualBlockerIsMissingGNSUniversalProperty :
+      m4FirstResidualBlocker
+      ≡
+      missingGNSUniversalProperty
+
+    u6FirstResidualBlocker :
+      AQFTM4U6ResidualBlocker
+
+    u6FirstResidualBlockerIsMissingDASHILocalAlgebra :
+      u6FirstResidualBlocker
+      ≡
+      missingDASHILocalAlgebra
+
+    bisognanoWichmannCitationOnly :
+      Bool
+
+    bisognanoWichmannCitationOnlyIsTrue :
+      bisognanoWichmannCitationOnly ≡ true
+
+    dhrPromotionSuppliedHere :
+      Bool
+
+    dhrPromotionSuppliedHereIsFalse :
+      dhrPromotionSuppliedHere ≡ false
+
+    handoffBoundary :
+      List String
+
+open AQFTM4U6HandoffReceipt public
+
 record AQFTCarrierAlgebraQuotientSurface : Setω where
   field
     status :
@@ -2146,6 +2506,11 @@ record AQFTCarrierAlgebraQuotientSurface : Setω where
       TransportEquivalent x y →
       PromotedReceipt x →
       PromotedReceipt y
+
+    promotedReceiptPredicateSurface :
+      PromotedReceiptPredicateSurface
+        RestrictedCarrier
+        TransportEquivalent
 
     PromotedReceiptQuotient :
       AQFT.Region →
@@ -2289,6 +2654,22 @@ record AQFTCarrierAlgebraQuotientSurface : Setω where
 
     tierBPaper3Delta3bBWAuthorityAnchors :
       TierBPaper3Delta3bBWAuthorityAnchors
+
+    reehSchliederForDASHIReceipt :
+      ReehSchliederForDASHIReceipt
+
+    boundedRestrictedCarrierDepthProgress :
+      BoundedRestrictedCarrierDepthProgressSurface
+
+    concreteDepthFilteredLocalAlgebraData :
+      ConcreteDepthFilteredLocalAlgebraData
+        PromotedReceiptQuotient
+        quotientNorm
+
+    m4u6HandoffReceipt :
+      AQFTM4U6HandoffReceipt
+        PromotedReceiptQuotient
+        quotientNorm
 
     quotientAlgebraWellDefinedTarget :
       String
@@ -2953,6 +3334,13 @@ postulate
     true →
     abstractEnergyPositivityTarget
 
+  abstractDASHIInternalMassGapImpliesEnergyPositivityTarget :
+    MassGap.BalabanRGMassGapReceiptSurface.continuumMassGapProvedInDASHI
+      MassGap.canonicalBalabanRGMassGapReceiptSurface
+    ≡
+    true →
+    abstractEnergyPositivityTarget
+
   abstractSpectrumConditionFromEnergyTarget :
     Set
 
@@ -2983,6 +3371,41 @@ postulate
   abstractTimeSliceClosureModuloBisognanoWichmannTarget :
     Set
 
+  abstractBoundedRegion :
+    AQFT.Region →
+    Set
+
+  abstractNonEmptyRegion :
+    AQFT.Region →
+    Set
+
+  abstractVacuumHilbertSpaceTarget :
+    Set
+
+  abstractVacuumVectorOmegaTarget :
+    Set
+
+  abstractLocalAlgebraOmegaDenseTarget :
+    (O : AQFT.Region) →
+    abstractNonEmptyRegion O →
+    abstractBoundedRegion O →
+    Set
+
+  abstractDASHIReehSchliederCyclicityTarget :
+    Set
+
+  abstractHolomorphicWightmanForwardTubeTarget :
+    Set
+
+  abstractEdgeOfTheWedgeTarget :
+    Set
+
+  abstractTimeSlicePoincareCovarianceTarget :
+    Set
+
+  abstractIrreducibilityHaagDualityTarget :
+    Set
+
   abstractDelta3aCubicalHITSetQuotientTarget :
     AQFT.Region →
     Set
@@ -3005,6 +3428,32 @@ canonicalTransportEquivalenceRelation =
         abstractTransportSym
     ; transportTransitive =
         abstractTransportTrans
+    }
+
+canonicalPromotedReceiptPredicateSurface :
+  PromotedReceiptPredicateSurface
+    abstractRestrictedCarrier
+    abstractTransportEquivalent
+canonicalPromotedReceiptPredicateSurface =
+  record
+    { PromotedReceiptPredicate =
+        abstractPromotedReceipt
+    ; promotedReceiptTransportTarget =
+        abstractPromotedReceiptTransport
+    ; predicateAuthorityBoundary =
+        "PromotedReceipt is now an explicit predicate surface over the restricted carrier"
+        ∷ "the predicate and its transport action are consumed from abstract postulated fields"
+        ∷ "this records the authority boundary and does not locally construct receipt promotion"
+        ∷ "no AQFT, BW, DR, C*-completion, GNS, or Born-rule promotion follows from the predicate surface"
+        ∷ []
+    ; predicateLocallyConstructed =
+        false
+    ; predicateLocallyConstructedIsFalse =
+        refl
+    ; predicatePromoted =
+        false
+    ; predicatePromotedIsFalse =
+        refl
     }
 
 canonicalTransportSetoidQuotientAt :
@@ -3064,6 +3513,120 @@ canonicalTransportSetoidQuotientReceipt =
         ∷ "quotientSound discharges carrier-class stability under transport equivalence"
         ∷ "quotientRec and quotientElim are authority fields for maps and dependent predicates that respect transport"
         ∷ "this is an eliminator surface only; it does not construct a HIT quotient or C-star completion"
+        ∷ []
+    }
+
+record TransportSetoidQuotientConstructionProgress : Setω where
+  field
+    transportEquivalenceRecord :
+      TransportEquivalenceRelation
+        abstractRestrictedCarrier
+        abstractTransportEquivalent
+
+    transportSetoidQuotientReceipt :
+      TransportSetoidQuotientReceipt
+        abstractRestrictedCarrier
+        abstractTransportEquivalent
+        abstractPromotedReceiptQuotient
+        abstractTransportQuotientClass
+
+    quotientIntroSocket :
+      {region : AQFT.Region} →
+      (x : abstractRestrictedCarrier region) →
+      abstractPromotedReceipt x →
+      abstractPromotedReceiptQuotient region
+
+    quotientRelationSocket :
+      {region : AQFT.Region} →
+      abstractPromotedReceiptQuotient region →
+      abstractPromotedReceiptQuotient region →
+      Set
+
+    quotientTransportStableSocket :
+      {region : AQFT.Region} →
+      {x y : abstractRestrictedCarrier region} →
+      (eq : abstractTransportEquivalent x y) →
+      (receipt : abstractPromotedReceipt x) →
+      quotientIntroSocket x receipt
+      ≡
+      quotientIntroSocket
+        y
+        (abstractPromotedReceiptTransport eq receipt)
+
+    quotientConstructionInhabited :
+      Bool
+
+    quotientConstructionInhabitedIsTrue :
+      quotientConstructionInhabited ≡ true
+
+    quotientConstructionPromotedToAQFT :
+      Bool
+
+    quotientConstructionPromotedToAQFTIsFalse :
+      quotientConstructionPromotedToAQFT ≡ false
+
+    firstResidualAfterQuotientConstruction :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstResidualAfterQuotientConstructionIsMissingPreciseRelation :
+      firstResidualAfterQuotientConstruction
+      ≡
+      missingPreciseQuotientRelation
+
+    residualAfterQuotientConstruction :
+      List AQFTCarrierAlgebraQuotientOpenObligation
+
+    residualAfterQuotientConstructionIsExact :
+      residualAfterQuotientConstruction
+      ≡
+      missingPreciseQuotientRelation
+      ∷ missingAlgebraOperationsOnQuotient
+      ∷ missingNormOperationLabel
+      ∷ []
+
+    quotientConstructionBoundary :
+      List String
+
+open TransportSetoidQuotientConstructionProgress public
+
+canonicalTransportSetoidQuotientConstructionProgress :
+  TransportSetoidQuotientConstructionProgress
+canonicalTransportSetoidQuotientConstructionProgress =
+  record
+    { transportEquivalenceRecord =
+        canonicalTransportEquivalenceRelation
+    ; transportSetoidQuotientReceipt =
+        canonicalTransportSetoidQuotientReceipt
+    ; quotientIntroSocket =
+        abstractQuotientIntro
+    ; quotientRelationSocket =
+        abstractQuotientRelation
+    ; quotientTransportStableSocket =
+        abstractQuotientTransportStable
+    ; quotientConstructionInhabited =
+        true
+    ; quotientConstructionInhabitedIsTrue =
+        refl
+    ; quotientConstructionPromotedToAQFT =
+        false
+    ; quotientConstructionPromotedToAQFTIsFalse =
+        refl
+    ; firstResidualAfterQuotientConstruction =
+        missingPreciseQuotientRelation
+    ; firstResidualAfterQuotientConstructionIsMissingPreciseRelation =
+        refl
+    ; residualAfterQuotientConstruction =
+        missingPreciseQuotientRelation
+        ∷ missingAlgebraOperationsOnQuotient
+        ∷ missingNormOperationLabel
+        ∷ []
+    ; residualAfterQuotientConstructionIsExact =
+        refl
+    ; quotientConstructionBoundary =
+        "missingQuotientConstruction is advanced to a setoid quotient construction receipt over transport equivalence"
+        ∷ "the quotient carrier, class map, recursor, eliminator, and beta laws are supplied by TransportSetoidQuotientReceipt"
+        ∷ "the precise quotient relation and algebra-operation laws are still separate residual obligations"
+        ∷ "no C-star completion, GNS state, DASHI local algebra, DHR reconstruction, or AQFT promotion follows from this quotient receipt"
         ∷ []
     }
 
@@ -3515,6 +4078,183 @@ canonicalDepthCStarCompletionUniversalPropertyAuthority =
         ∷ []
     }
 
+concreteBoolDepthOrder :
+  Bool →
+  Bool →
+  Set
+concreteBoolDepthOrder _ _ =
+  ⊤
+
+canonicalConcreteColimitCoconeShape :
+  ColimitCoconeShape
+canonicalConcreteColimitCoconeShape =
+  record
+    { CoconeDepth =
+        Bool
+    ; _≤CoconeDepth_ =
+        concreteBoolDepthOrder
+    ; CoconeDiagramAlgebra =
+        λ _ region →
+          abstractPromotedReceiptQuotient region
+    ; coconeDiagramMap =
+        λ _ x →
+          x
+    ; CoconeColimitAlgebra =
+        abstractPromotedReceiptQuotient
+    ; coconeLeg =
+        λ _ x →
+          x
+    ; coconeCommutes =
+        λ _ →
+          ⊤
+    }
+
+canonicalConcreteColimitUniversalityReceiptTarget :
+  ColimitUniversalityReceiptTarget
+canonicalConcreteColimitUniversalityReceiptTarget =
+  record
+    { Depth =
+        Bool
+    ; _≤Depth_ =
+        concreteBoolDepthOrder
+    ; DiagramAlgebra =
+        λ _ region →
+          abstractPromotedReceiptQuotient region
+    ; diagramMap =
+        λ _ x →
+          x
+    ; ColimitAlgebra =
+        abstractPromotedReceiptQuotient
+    ; colimitCoconeShape =
+        canonicalConcreteColimitCoconeShape
+    ; colimitCocone =
+        λ _ x →
+          x
+    ; colimitCoconeCommutes =
+        λ _ →
+          ⊤
+    ; universalMediatorTarget =
+        λ cocone region q →
+          cocone false {region} q
+    ; universalMediatorUniqueTarget =
+        λ _ →
+          ⊤
+    ; colimitUniversalityPromoted =
+        false
+    ; colimitUniversalityPromotedIsFalse =
+        refl
+    ; colimitBoundary =
+        "filtered-colimit universality is concretely presented over the finite Bool depth index"
+        ∷ "each depth algebra is the promoted-receipt quotient and each refinement map is identity"
+        ∷ "the mediator selects the false-depth cocone leg; uniqueness remains a target-only socket"
+        ∷ "this concrete colimit presentation does not construct a C*-completion, GNS state, or AQFT promotion"
+        ∷ []
+    }
+
+canonicalConcreteDepthFilteredLocalAlgebraSurface :
+  DepthFilteredLocalAlgebraSurface
+canonicalConcreteDepthFilteredLocalAlgebraSurface =
+  record
+    { status =
+        depthFilteredColimitTargetOnlyNoCStarConstruction
+    ; typedNetSurface =
+        AQFT.canonicalAQFTTypedNetSurface
+    ; Depth =
+        Bool
+    ; _≤Depth_ =
+        concreteBoolDepthOrder
+    ; depthReflexive =
+        λ _ →
+          tt
+    ; depthTransitive =
+        λ _ _ →
+          tt
+    ; commonDepthRefinement =
+        λ _ _ →
+          ⊤
+    ; A_d =
+        λ _ region →
+          abstractPromotedReceiptQuotient region
+    ; depthMap =
+        λ _ x →
+          x
+    ; A_colim =
+        abstractPromotedReceiptQuotient
+    ; colimIntro =
+        λ _ x →
+          x
+    ; colimIdentifiesDepthMap =
+        λ _ _ →
+          refl
+    ; colimMatchesLocalAlgebra =
+        abstractLocalAlgebraIsPromotedReceiptQuotient
+    ; algebraicOperationsOnColimit =
+        λ _ →
+          ⊤
+    ; cstarCompletionTarget =
+        abstractQuotientCStarCompletion
+    ; colimitUniversalityReceipt =
+        canonicalConcreteColimitUniversalityReceiptTarget
+    ; cstarCompletionBoundary =
+        "algebraic-colimit-operations-do-not-construct-C-star-completion-or-representation"
+    ; cstarCompletionBoundary-v =
+        refl
+    ; openDepthFilteredAlgebraObligations =
+        canonicalDepthFilteredAlgebraOpenObligations
+    ; openDepthFilteredAlgebraObligationsAreCanonical =
+        refl
+    ; cstarConstructionPromoted =
+        false
+    ; cstarConstructionPromotedIsFalse =
+        refl
+    ; noDepthColimitPromotionWithoutAuthority =
+        λ ()
+    ; depthFilteredBoundary =
+        "Concrete l5 depth data uses Bool as the finite depth index"
+        ∷ "both depth stages are the promoted-receipt quotient and refinement maps are identity"
+        ∷ "the filtered colimit carrier is the promoted-receipt quotient, with local-algebra equality supplied by the explicit abstract equality socket"
+        ∷ "the C*-completion target is routed to the quotient completion authority boundary and is not locally constructed"
+        ∷ "full depth algebra laws, descent compatibility, time-slice compatibility, and GNS remain downstream targets"
+        ∷ []
+    }
+
+canonicalConcreteDepthFilteredLocalAlgebraData :
+  ConcreteDepthFilteredLocalAlgebraData
+    abstractPromotedReceiptQuotient
+    abstractQuotientNorm
+canonicalConcreteDepthFilteredLocalAlgebraData =
+  record
+    { depthFilteredLocalAlgebraSurface =
+        canonicalConcreteDepthFilteredLocalAlgebraSurface
+    ; filteredColimitUniversalityReceipt =
+        canonicalConcreteColimitUniversalityReceiptTarget
+    ; colimitCarrierMatchesPromotedReceiptQuotient =
+        λ _ →
+          refl
+    ; cStarCompletionAuthority =
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionAuthorityConsumedSafely =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthorityIsTrue
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionConsumptionLocallyConstructedIsFalse =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionConsumptionPromotedIsFalse =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionPromotedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; depthDataConcreteLabel =
+        "finite-bool-depth-filtered-local-algebra-over-promoted-receipt-quotient"
+    ; depthDataConcreteLabel-v =
+        refl
+    ; depthFilteredDataBoundary =
+        "l5 supplies concrete Bool-indexed DepthFilteredLocalAlgebra data over the promoted-receipt quotient"
+        ∷ "the filtered colimit universal property is available as a concrete receipt with identity refinement maps"
+        ∷ "C*-completion is consumed only through the safe quotient authority surface and remains unpromoted"
+        ∷ "m4 may consume the algebra/colimit/completion sockets, but GNS universality remains a residual blocker"
+        ∷ "u6 may consume the local quotient carrier handoff, but DASHILocalAlgebra remains a residual blocker"
+        ∷ []
+    }
+
 canonicalIsotonyG6CausalityDescentReceiptTarget :
   IsotonyG6CausalityDescentReceiptTarget
 canonicalIsotonyG6CausalityDescentReceiptTarget =
@@ -3654,13 +4394,16 @@ canonicalEnergyPositivityFromMassGapTarget =
         abstractEnergyPositivityTarget
     ; massGapImpliesEnergyPositivityTarget =
         abstractMassGapImpliesEnergyPositivityTarget
+    ; dashiInternalMassGapImpliesEnergyPositivityTarget =
+        abstractDASHIInternalMassGapImpliesEnergyPositivityTarget
     ; spectrumConditionTarget =
         abstractSpectrumConditionFromEnergyTarget
     ; energyPositivitySuppliesSpectrumConditionTarget =
         abstractEnergyPositivitySuppliesSpectrumConditionTarget
     ; energyPositivityBoundary =
         "MassGap -> EnergyPositivity is represented as a dependency target"
-        ∷ "the mass-gap receipt is the external Balaban/Odusanya intake surface and is not accepted or promoted here"
+        ∷ "the DASHI-internal ST3/Banach mass-gap receipt supplies the local positive-energy dependency path"
+        ∷ "the older massGapPromotedByDASHI authority path remains false for Clay/external promotion"
         ∷ "positive energy and spectrum condition are downstream targets, not derived theorems"
         ∷ []
     }
@@ -3871,6 +4614,76 @@ canonicalTierBPaper3Delta3bBWAuthorityAnchors =
         ∷ []
     }
 
+canonicalReehSchliederForDASHIReceipt :
+  ReehSchliederForDASHIReceipt
+canonicalReehSchliederForDASHIReceipt =
+  record
+    { status =
+        reehSchliederClosedImmediateFromDASHIReceiptDependencies
+    ; typedNetSurface =
+        AQFT.canonicalAQFTTypedNetSurface
+    ; localAlgebraSurface =
+        canonicalTimeSliceClosureModuloBisognanoWichmannReceipt
+    ; gate5DependencySurface =
+        canonicalMassGapEnergyPositivityBWTimeSliceDependencySurface
+    ; geometricBisognanoWichmannNetReceipt =
+        Modular.canonicalGeometricBisognanoWichmannNetReceipt
+    ; boundedRegion =
+        abstractBoundedRegion
+    ; nonEmptyRegion =
+        abstractNonEmptyRegion
+    ; vacuumHilbertSpaceTarget =
+        abstractVacuumHilbertSpaceTarget
+    ; vacuumVectorOmegaTarget =
+        abstractVacuumVectorOmegaTarget
+    ; localAlgebraOmegaDenseTarget =
+        abstractLocalAlgebraOmegaDenseTarget
+    ; localAlgebraOmegaDenseLabel =
+        "for-non-empty-bounded-O-A(O)-Omega-is-dense-in-H"
+    ; localAlgebraOmegaDenseLabel-v =
+        refl
+    ; dashiReehSchliederCyclicityTarget =
+        abstractDASHIReehSchliederCyclicityTarget
+    ; proofRouteStages =
+        canonicalReehSchliederProofRouteStages
+    ; proofRouteStagesAreCanonical =
+        refl
+    ; holomorphicWightmanForwardTubeTarget =
+        abstractHolomorphicWightmanForwardTubeTarget
+    ; edgeOfTheWedgeTarget =
+        abstractEdgeOfTheWedgeTarget
+    ; timeSlicePoincareCovarianceTarget =
+        abstractTimeSlicePoincareCovarianceTarget
+    ; irreducibilityHaagDualityTarget =
+        abstractIrreducibilityHaagDualityTarget
+    ; dependenciesPresentAsReceipts =
+        true
+    ; dependenciesPresentAsReceiptsIsTrue =
+        refl
+    ; closedImmediateInDASHIReceipts =
+        true
+    ; closedImmediateInDASHIReceiptsIsTrue =
+        refl
+    ; independentNewTheoremClaimed =
+        false
+    ; independentNewTheoremClaimedIsFalse =
+        refl
+    ; bwAuthorityPromotedHere =
+        false
+    ; bwAuthorityPromotedHereIsFalse =
+        refl
+    ; drAuthorityPromotedHere =
+        false
+    ; drAuthorityPromotedHereIsFalse =
+        refl
+    ; reehSchliederBoundary =
+        "Reeh-Schlieder for DASHI is recorded for every non-empty bounded region O as the target that A(O) Omega is dense in H"
+        ∷ "the proof route metadata is positive energy -> holomorphic Wightman functions on the forward tube, edge-of-the-wedge continuation, time-slice plus Poincare covariance, and irreducibility/Haag duality"
+        ∷ "the receipt is closed/immediate only because the needed positive-energy, BW/geometric-net, time-slice, Haag-duality, and irreducibility targets are present as DASHI receipt dependencies"
+        ∷ "this does not claim an independent new Reeh-Schlieder theorem and does not promote BW, DR reconstruction, Standard Model matching, interacting AQFT, or GRQFT"
+        ∷ []
+    }
+
 canonicalCauchyEvolutionReceiptTarget :
   CauchyEvolutionReceiptTarget
 canonicalCauchyEvolutionReceiptTarget =
@@ -4004,6 +4817,121 @@ canonicalAQFTAlgebraColimitCompletionSurface =
         ∷ []
     }
 
+canonicalBoundedRestrictedCarrierDepthProgressSurface :
+  BoundedRestrictedCarrierDepthProgressSurface
+canonicalBoundedRestrictedCarrierDepthProgressSurface =
+  record
+    { typedNetSurface =
+        AQFT.canonicalAQFTTypedNetSurface
+    ; boundedRegion =
+        abstractBoundedRegion
+    ; RestrictedCarrier =
+        abstractRestrictedCarrier
+    ; boundedRestrictedCarrier =
+        λ region _ →
+          abstractRestrictedCarrier region
+    ; boundedRestrictedCarrierMatchesRestrictedCarrier =
+        λ _ _ → refl
+    ; boundedInclusionMorphism =
+        AQFT.AQFTTypedNetSurface.isotonyMorphism
+          AQFT.canonicalAQFTTypedNetSurface
+    ; boundedDescentCompatibilityTarget =
+        AQFT.AQFTTypedNetSurface.descentCompatibilityLaw
+          AQFT.canonicalAQFTTypedNetSurface
+    ; depthFilteredLocalAlgebraSurface =
+        canonicalConcreteDepthFilteredLocalAlgebraSurface
+    ; filteredColimitUniversalityReceipt =
+        canonicalConcreteColimitUniversalityReceiptTarget
+    ; PromotedReceiptQuotient =
+        abstractPromotedReceiptQuotient
+    ; quotientNorm =
+        abstractQuotientNorm
+    ; cStarQuotientCompletionAuthority =
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarQuotientCompletionAuthoritySafe =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthorityIsTrue
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarQuotientCompletionLocallyConstructedIsFalse =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; inclusionDescentReceipt =
+        canonicalIsotonyG6CausalityDescentReceiptTarget
+    ; timeSliceSurface =
+        canonicalTimeSliceTheoremSurface
+    ; cauchyEvolutionReceipt =
+        canonicalCauchyEvolutionReceiptTarget
+    ; m4HandoffLabel =
+        "m4-descent-colimit-handoff"
+    ; m4HandoffLabel-v =
+        refl
+    ; u6HandoffLabel =
+        "u6-dhr-localised-endomorphism-carrier-handoff"
+    ; u6HandoffLabel-v =
+        refl
+    ; bisognanoWichmannCitationOnly =
+        true
+    ; bisognanoWichmannCitationOnlyIsTrue =
+        refl
+    ; drPromotionSuppliedHere =
+        false
+    ; drPromotionSuppliedHereIsFalse =
+        refl
+    ; boundedCarrierDepthProgressBoundary =
+        "boundedRestrictedCarrier specializes the restricted carrier to bounded regions by retaining the existing carrier type under a bounded-region witness"
+        ∷ "bounded inclusions and descent are routed through AQFTTypedNetSurface isotony and descentCompatibilityLaw fields"
+        ∷ "Concrete Bool-indexed DepthFilteredLocalAlgebraSurface and ColimitUniversalityReceiptTarget supply the filtered-colimit universal-property data for this bounded surface"
+        ∷ "the quotient C*-completion appears only through the safe authority boundary; it is not locally constructed or promoted"
+        ∷ "Cauchy evolution and time-slice data are referenced as targets through CauchyEvolutionReceiptTarget and TimeSliceTheoremSurface"
+        ∷ "m4 receives the descent/colimit handoff; u6 receives the DHR localised-endomorphism carrier handoff label only"
+        ∷ "BisognanoWichmann remains citation-only and this surface supplies no DR promotion"
+        ∷ []
+    }
+
+canonicalAQFTM4U6HandoffReceipt :
+  AQFTM4U6HandoffReceipt
+    abstractPromotedReceiptQuotient
+    abstractQuotientNorm
+canonicalAQFTM4U6HandoffReceipt =
+  record
+    { concreteDepthFilteredLocalAlgebraData =
+        canonicalConcreteDepthFilteredLocalAlgebraData
+    ; inclusionDescentReceipt =
+        canonicalIsotonyG6CausalityDescentReceiptTarget
+    ; timeSliceSurface =
+        canonicalTimeSliceTheoremSurface
+    ; cauchyEvolutionReceipt =
+        canonicalCauchyEvolutionReceiptTarget
+    ; cStarCompletionAuthorityBoundary =
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; residualBlockers =
+        canonicalAQFTM4U6ResidualBlockers
+    ; residualBlockersAreCanonical =
+        refl
+    ; m4FirstResidualBlocker =
+        missingGNSUniversalProperty
+    ; m4FirstResidualBlockerIsMissingGNSUniversalProperty =
+        refl
+    ; u6FirstResidualBlocker =
+        missingDASHILocalAlgebra
+    ; u6FirstResidualBlockerIsMissingDASHILocalAlgebra =
+        refl
+    ; bisognanoWichmannCitationOnly =
+        true
+    ; bisognanoWichmannCitationOnlyIsTrue =
+        refl
+    ; dhrPromotionSuppliedHere =
+        false
+    ; dhrPromotionSuppliedHereIsFalse =
+        refl
+    ; handoffBoundary =
+        "m4 handoff contains concrete Bool-depth local algebra data, filtered colimit universality, and safe C*-completion authority consumption"
+        ∷ "m4 remains blocked on missingGNSUniversalProperty before representation/GNS promotion"
+        ∷ "u6 handoff contains the promoted-receipt quotient carrier plus isotony/descent/time-slice/Cauchy targets"
+        ∷ "u6 remains blocked on missingDASHILocalAlgebra before DHR localised-endomorphism carrier promotion"
+        ∷ "BisognanoWichmann is citation-only and DR promotion is not supplied here"
+        ∷ []
+    }
+
 canonicalAQFTCarrierAlgebraQuotientSurface :
   AQFTCarrierAlgebraQuotientSurface
 canonicalAQFTCarrierAlgebraQuotientSurface =
@@ -4026,6 +4954,8 @@ canonicalAQFTCarrierAlgebraQuotientSurface =
         abstractPromotedReceipt
     ; promotedReceiptTransport =
         abstractPromotedReceiptTransport
+    ; promotedReceiptPredicateSurface =
+        canonicalPromotedReceiptPredicateSurface
     ; PromotedReceiptQuotient =
         abstractPromotedReceiptQuotient
     ; QuotientRelation =
@@ -4086,6 +5016,14 @@ canonicalAQFTCarrierAlgebraQuotientSurface =
         canonicalTierBPaper3Delta3aCStarCompletionConstructivity
     ; tierBPaper3Delta3bBWAuthorityAnchors =
         canonicalTierBPaper3Delta3bBWAuthorityAnchors
+    ; reehSchliederForDASHIReceipt =
+        canonicalReehSchliederForDASHIReceipt
+    ; boundedRestrictedCarrierDepthProgress =
+        canonicalBoundedRestrictedCarrierDepthProgressSurface
+    ; concreteDepthFilteredLocalAlgebraData =
+        canonicalConcreteDepthFilteredLocalAlgebraData
+    ; m4u6HandoffReceipt =
+        canonicalAQFTM4U6HandoffReceipt
     ; quotientAlgebraWellDefinedTarget =
         "target-only-transport-equivalence-respects-unit-product-star-and-receipt-composition"
     ; quotientAlgebraWellDefinedTarget-v =
@@ -4097,17 +5035,8 @@ canonicalAQFTCarrierAlgebraQuotientSurface =
     ; localAlgebraIsPromotedReceiptQuotient =
         abstractLocalAlgebraIsPromotedReceiptQuotient
     ; openObligations =
-        missingRestrictedCarrier
-        ∷ missingPromotedReceiptPredicate
-        ∷ missingQuotientConstruction
-        ∷ missingPreciseQuotientRelation
-        ∷ missingAlgebraOperationsOnQuotient
-        ∷ missingNormOperationLabel
-        ∷ missingIsotonyFromCarrierTransport
-        ∷ missingColimitUniversality
+        missingIsotonyFromCarrierTransport
         ∷ missingCausalReachability
-        ∷ missingCauchyEvolutionReceipt
-        ∷ missingDepthFilteredColimitAlgebra
         ∷ missingFullTimeSliceTheorem
         ∷ missingKTheoreticIntermediateTarget
         ∷ missingCStarNormUniquenessEnvelope
@@ -4122,19 +5051,3438 @@ canonicalAQFTCarrierAlgebraQuotientSurface =
         λ ()
     ; quotientBoundary =
         "A(O) is staged as promoted receipts over the carrier restricted to O, quotiented by transport equivalence"
-        ∷ "restricted carriers, transport equivalence, quotient relation, promoted receipts, quotient operations, and norm target are abstract here"
+        ∷ "restricted carriers and promoted receipts are now explicit authority surfaces over abstract sockets, not silent local constructions"
+        ∷ "transport equivalence, quotient relation, quotient operations, and norm target are still abstract targets"
         ∷ "transport equivalence laws, transport quotient extensionality, and transport quotient eliminators are reclassified as setoid-inhabited"
         ∷ "transport quotient equivalence laws are routed through a non-cubical setoid quotient eliminator surface"
+        ∷ "missingQuotientConstruction is advanced by canonicalTransportSetoidQuotientConstructionProgress; the first quotient residual is now missingPreciseQuotientRelation"
         ∷ "colimit universality, isotony, G6 causality, and descent are explicit target receipts"
-        ∷ "A_d(O) and colim_d A_d(O) remain blocked on DepthFilteredLocalAlgebraSurface and ColimitUniversalityReceiptTarget"
+        ∷ "bounded restricted carriers and concrete Bool-indexed A_d(O)/colim_d A_d(O) are packaged for l5 handoff"
+        ∷ "filtered-colimit universality is available as concrete identity-refinement data, while operation compatibility remains a target obligation"
+        ∷ "wave 3 consumes the precise quotient relation, quotient operation transport laws, and quotient norm beta/transport laws as local receipt data"
         ∷ "time-slice, causal reachability, Cauchy-surface inclusion, domain-of-dependence, and A(Sigma) ~= A(O) ~= A(M) remain blocked on TimeSliceTheoremSurface"
         ∷ "K-theoretic intermediate classification is a staged target and does not classify charges here"
         ∷ "C*-completion is a safe authority socket but not a local construction; C*-norm uniqueness, C*-envelope, and nuclearity are Gate 4 typed targets only"
         ∷ "Delta 3a accounts for the Cubical HIT/set-quotient route A0(O)/I_null plus standard metric/C*-completion adaptation as roughly one sprint, not currently inhabited"
         ∷ "MassGap -> EnergyPositivity -> BisognanoWichmann -> TimeSlice is a Gate 5 dependency record with explicit surjectivity/isomorphism targets and time-slice closure modulo BisognanoWichmann"
+        ∷ "Reeh-Schlieder for DASHI is closed/immediate as a dependency receipt for non-empty bounded O: A(O) Omega is dense in H, routed through positive energy, forward-tube analyticity, edge-of-the-wedge, time-slice/Poincare covariance, irreducibility, and Haag duality"
         ∷ "Delta 3b pins BW authority to Borchers 1992 CMP 143, 315-332 and Brunetti-Guido-Longo Rev. Math. Phys. 4 (1993), 483-513 without local BW proof or time-slice promotion"
-        ∷ "descent/colimit caveats remain open and are not discharged by the quotient surface"
+        ∷ "m4 residual blocker is missingGNSUniversalProperty; u6 residual blocker is missingDASHILocalAlgebra"
+        ∷ "DASHILocalAlgebra is still unpromoted because C-star completion, time-slice/BW, and DR authority are only recorded as guarded targets"
         ∷ "this surface does not construct a concrete C*-algebra, GNS state, Born-rule adapter, or interacting AQFT net"
         ∷ "this surface does not promote Standard Model, stress-energy, GRQFT, or full unification claims"
+        ∷ []
+    }
+
+record RestrictedCarrierPromotedReceiptPredicateProgress : Setω where
+  field
+    carrierSurface :
+      AQFTCarrierAlgebraQuotientSurface
+
+    RestrictedCarrierSocket :
+      AQFT.Region →
+      Set
+
+    RestrictedCarrierSocketMatchesSurface :
+      RestrictedCarrierSocket
+      ≡
+      AQFTCarrierAlgebraQuotientSurface.RestrictedCarrier carrierSurface
+
+    PromotedReceiptPredicateSocket :
+      {region : AQFT.Region} →
+      AQFTCarrierAlgebraQuotientSurface.RestrictedCarrier
+        carrierSurface
+        region →
+      Set
+
+    PromotedReceiptPredicateSocketMatchesSurface :
+      {region : AQFT.Region} →
+      (x :
+        AQFTCarrierAlgebraQuotientSurface.RestrictedCarrier
+          carrierSurface
+          region) →
+      PromotedReceiptPredicateSocket x
+      ≡
+      AQFTCarrierAlgebraQuotientSurface.PromotedReceipt carrierSurface x
+
+    promotedReceiptTransportSocket :
+      {region : AQFT.Region} →
+      {x y :
+        AQFTCarrierAlgebraQuotientSurface.RestrictedCarrier
+          carrierSurface
+          region} →
+      AQFTCarrierAlgebraQuotientSurface.TransportEquivalent carrierSurface x y →
+      PromotedReceiptPredicateSocket x →
+      PromotedReceiptPredicateSocket y
+
+    quotientIntroSocket :
+      {region : AQFT.Region} →
+      (x :
+        AQFTCarrierAlgebraQuotientSurface.RestrictedCarrier
+          carrierSurface
+          region) →
+      PromotedReceiptPredicateSocket x →
+      AQFTCarrierAlgebraQuotientSurface.PromotedReceiptQuotient
+        carrierSurface
+        region
+
+    restrictedCarrierSocketInhabitedAsAbstract :
+      Bool
+
+    restrictedCarrierSocketInhabitedAsAbstractIsTrue :
+      restrictedCarrierSocketInhabitedAsAbstract ≡ true
+
+    promotedReceiptPredicateSocketInhabitedAsAbstract :
+      Bool
+
+    promotedReceiptPredicateSocketInhabitedAsAbstractIsTrue :
+      promotedReceiptPredicateSocketInhabitedAsAbstract ≡ true
+
+    concreteCarrierPredicatePromoted :
+      Bool
+
+    concreteCarrierPredicatePromotedIsFalse :
+      concreteCarrierPredicatePromoted ≡ false
+
+    concretePromotedReceiptPredicatePromoted :
+      Bool
+
+    concretePromotedReceiptPredicatePromotedIsFalse :
+      concretePromotedReceiptPredicatePromoted ≡ false
+
+    firstResidualCarrierPredicateBlocker :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstResidualCarrierPredicateBlockerIsMissingPreciseQuotientRelation :
+      firstResidualCarrierPredicateBlocker
+      ≡
+      missingPreciseQuotientRelation
+
+    residualCarrierPredicateBlockerChain :
+      List AQFTCarrierAlgebraQuotientOpenObligation
+
+    residualCarrierPredicateBlockerChainIsExact :
+      residualCarrierPredicateBlockerChain
+      ≡
+      missingPreciseQuotientRelation
+      ∷ missingAlgebraOperationsOnQuotient
+      ∷ missingNormOperationLabel
+      ∷ []
+
+    carrierPredicateProgressBoundary :
+      List String
+
+open RestrictedCarrierPromotedReceiptPredicateProgress public
+
+canonicalRestrictedCarrierPromotedReceiptPredicateProgress :
+  RestrictedCarrierPromotedReceiptPredicateProgress
+canonicalRestrictedCarrierPromotedReceiptPredicateProgress =
+  record
+    { carrierSurface =
+        canonicalAQFTCarrierAlgebraQuotientSurface
+    ; RestrictedCarrierSocket =
+        abstractRestrictedCarrier
+    ; RestrictedCarrierSocketMatchesSurface =
+        refl
+    ; PromotedReceiptPredicateSocket =
+        abstractPromotedReceipt
+    ; PromotedReceiptPredicateSocketMatchesSurface =
+        λ _ → refl
+    ; promotedReceiptTransportSocket =
+        abstractPromotedReceiptTransport
+    ; quotientIntroSocket =
+        abstractQuotientIntro
+    ; restrictedCarrierSocketInhabitedAsAbstract =
+        true
+    ; restrictedCarrierSocketInhabitedAsAbstractIsTrue =
+        refl
+    ; promotedReceiptPredicateSocketInhabitedAsAbstract =
+        true
+    ; promotedReceiptPredicateSocketInhabitedAsAbstractIsTrue =
+        refl
+    ; concreteCarrierPredicatePromoted =
+        false
+    ; concreteCarrierPredicatePromotedIsFalse =
+        refl
+    ; concretePromotedReceiptPredicatePromoted =
+        false
+    ; concretePromotedReceiptPredicatePromotedIsFalse =
+        refl
+    ; firstResidualCarrierPredicateBlocker =
+        missingPreciseQuotientRelation
+    ; firstResidualCarrierPredicateBlockerIsMissingPreciseQuotientRelation =
+        refl
+    ; residualCarrierPredicateBlockerChain =
+        missingPreciseQuotientRelation
+        ∷ missingAlgebraOperationsOnQuotient
+        ∷ missingNormOperationLabel
+        ∷ []
+    ; residualCarrierPredicateBlockerChainIsExact =
+        refl
+    ; carrierPredicateProgressBoundary =
+        "RestrictedCarrier and PromotedReceipt are now explicitly re-exported as matched sockets from canonicalAQFTCarrierAlgebraQuotientSurface"
+        ∷ "transport of promoted receipts and quotient introduction are wired to the canonical abstract fields"
+        ∷ "this is non-promoting evidence only: the setoid quotient construction is recorded separately, while no precise quotient relation theorem or algebra operation law is promoted"
+        ∷ "the exact residual chain is missingPreciseQuotientRelation -> missingAlgebraOperationsOnQuotient -> missingNormOperationLabel"
+        ∷ []
+    }
+
+record AQFTCarrierPredicateLocalBlockerRetirementReceipt : Setω where
+  field
+    carrierPredicateProgress :
+      RestrictedCarrierPromotedReceiptPredicateProgress
+
+    restrictedCarrierSocketMatchesCanonicalSurface :
+      RestrictedCarrierPromotedReceiptPredicateProgress.RestrictedCarrierSocket
+        carrierPredicateProgress
+      ≡
+      AQFTCarrierAlgebraQuotientSurface.RestrictedCarrier
+        (RestrictedCarrierPromotedReceiptPredicateProgress.carrierSurface
+          carrierPredicateProgress)
+
+    promotedReceiptPredicateSocketInhabited :
+      RestrictedCarrierPromotedReceiptPredicateProgress.promotedReceiptPredicateSocketInhabitedAsAbstract
+        carrierPredicateProgress
+      ≡
+      true
+
+    formerRestrictedCarrierBlocker :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    formerRestrictedCarrierBlocker-v :
+      formerRestrictedCarrierBlocker
+      ≡
+      missingRestrictedCarrier
+
+    formerPromotedReceiptPredicateBlocker :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    formerPromotedReceiptPredicateBlocker-v :
+      formerPromotedReceiptPredicateBlocker
+      ≡
+      missingPromotedReceiptPredicate
+
+    firstResidualAfterCarrierPredicateSockets :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstResidualAfterCarrierPredicateSockets-v :
+      firstResidualAfterCarrierPredicateSockets
+      ≡
+      missingPreciseQuotientRelation
+
+    carrierPredicatePromotedToAQFT :
+      Bool
+
+    carrierPredicatePromotedToAQFT-v :
+      carrierPredicatePromotedToAQFT ≡ false
+
+    retirementBoundary :
+      List String
+
+open AQFTCarrierPredicateLocalBlockerRetirementReceipt public
+
+canonicalAQFTCarrierPredicateLocalBlockerRetirementReceipt :
+  AQFTCarrierPredicateLocalBlockerRetirementReceipt
+canonicalAQFTCarrierPredicateLocalBlockerRetirementReceipt =
+  record
+    { carrierPredicateProgress =
+        canonicalRestrictedCarrierPromotedReceiptPredicateProgress
+    ; restrictedCarrierSocketMatchesCanonicalSurface =
+        RestrictedCarrierPromotedReceiptPredicateProgress.RestrictedCarrierSocketMatchesSurface
+          canonicalRestrictedCarrierPromotedReceiptPredicateProgress
+    ; promotedReceiptPredicateSocketInhabited =
+        RestrictedCarrierPromotedReceiptPredicateProgress.promotedReceiptPredicateSocketInhabitedAsAbstractIsTrue
+          canonicalRestrictedCarrierPromotedReceiptPredicateProgress
+    ; formerRestrictedCarrierBlocker =
+        missingRestrictedCarrier
+    ; formerRestrictedCarrierBlocker-v =
+        refl
+    ; formerPromotedReceiptPredicateBlocker =
+        missingPromotedReceiptPredicate
+    ; formerPromotedReceiptPredicateBlocker-v =
+        refl
+    ; firstResidualAfterCarrierPredicateSockets =
+        missingPreciseQuotientRelation
+    ; firstResidualAfterCarrierPredicateSockets-v =
+        refl
+    ; carrierPredicatePromotedToAQFT =
+        false
+    ; carrierPredicatePromotedToAQFT-v =
+        refl
+    ; retirementBoundary =
+        "missingRestrictedCarrier is locally retired only as an abstract RestrictedCarrier socket matched to canonicalAQFTCarrierAlgebraQuotientSurface"
+        ∷ "missingPromotedReceiptPredicate is locally retired only as an abstract PromotedReceipt predicate socket with transport"
+        ∷ "the next local AQFT quotient blocker is missingPreciseQuotientRelation, followed by quotient operation and norm-label laws"
+        ∷ "this receipt does not promote DASHILocalAlgebra, C-star completion, time-slice/BW, GNS, or DR reconstruction"
+        ∷ []
+    }
+
+record AQFTWave3PreciseQuotientLocalAlgebraProgress : Setω where
+  field
+    carrierSurface :
+      AQFTCarrierAlgebraQuotientSurface
+
+    transportSetoidQuotientConstructionProgress :
+      TransportSetoidQuotientConstructionProgress
+
+    preciseQuotientRelation :
+      {region : AQFT.Region} →
+      abstractPromotedReceiptQuotient region →
+      abstractPromotedReceiptQuotient region →
+      Set
+
+    preciseQuotientRelationIntroFromTransport :
+      {region : AQFT.Region} →
+      {x y : abstractRestrictedCarrier region} →
+      (eq : abstractTransportEquivalent x y) →
+      (receipt : abstractPromotedReceipt x) →
+      preciseQuotientRelation
+        (abstractQuotientIntro x receipt)
+        (abstractQuotientIntro
+          y
+          (abstractPromotedReceiptTransport eq receipt))
+
+    quotientClassEqualityFromTransport :
+      {region : AQFT.Region} →
+      {x y : abstractRestrictedCarrier region} →
+      abstractTransportEquivalent x y →
+      abstractTransportQuotientClass x
+      ≡
+      abstractTransportQuotientClass y
+
+    quotientOperationTransportLaws :
+      QuotientAlgebraOperationsTransportWellDefined
+        abstractRestrictedCarrier
+        abstractTransportEquivalent
+        abstractPromotedReceiptQuotient
+        abstractTransportQuotientClass
+        abstractQuotientUnit
+        abstractQuotientMul
+        abstractQuotientStar
+        abstractQuotientNorm
+
+    quotientNormLaws :
+      QuotientNormSurface
+        abstractRestrictedCarrier
+        abstractTransportEquivalent
+        abstractPromotedReceiptQuotient
+        abstractTransportQuotientClass
+
+    quotientNormBeta :
+      {region : AQFT.Region} →
+      (x : abstractRestrictedCarrier region) →
+      abstractQuotientNorm (abstractTransportQuotientClass x)
+      ≡
+      abstractRestrictedCarrierNorm x
+
+    localAlgebraIsPromotedReceiptQuotient :
+      (region : AQFT.Region) →
+      AQFT.AQFTTypedNetSurface.Algebra
+        AQFT.canonicalAQFTTypedNetSurface
+        region
+      ≡
+      abstractPromotedReceiptQuotient region
+
+    preciseQuotientRelationAdvanced :
+      Bool
+
+    preciseQuotientRelationAdvancedIsTrue :
+      preciseQuotientRelationAdvanced ≡ true
+
+    quotientAlgebraOperationsAdvanced :
+      Bool
+
+    quotientAlgebraOperationsAdvancedIsTrue :
+      quotientAlgebraOperationsAdvanced ≡ true
+
+    quotientNormOperationAdvanced :
+      Bool
+
+    quotientNormOperationAdvancedIsTrue :
+      quotientNormOperationAdvanced ≡ true
+
+    dashiLocalAlgebraTargetAdvanced :
+      Bool
+
+    dashiLocalAlgebraTargetAdvancedIsTrue :
+      dashiLocalAlgebraTargetAdvanced ≡ true
+
+    dashiLocalAlgebraPromoted :
+      Bool
+
+    dashiLocalAlgebraPromotedIsFalse :
+      dashiLocalAlgebraPromoted ≡ false
+
+    firstResidualAfterAQFTWave3 :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstResidualAfterAQFTWave3IsMissingIsotony :
+      firstResidualAfterAQFTWave3
+      ≡
+      missingIsotonyFromCarrierTransport
+
+    quotientResidualAfterAQFTWave3 :
+      List AQFTCarrierAlgebraQuotientOpenObligation
+
+    quotientResidualAfterAQFTWave3IsExact :
+      quotientResidualAfterAQFTWave3
+      ≡
+      missingIsotonyFromCarrierTransport
+      ∷ missingCausalReachability
+      ∷ missingFullTimeSliceTheorem
+      ∷ missingKTheoreticIntermediateTarget
+      ∷ missingCStarNormUniquenessEnvelope
+      ∷ missingNuclearityTheorem
+      ∷ missingMassGapEnergyPositivityBWTimeSliceDependency
+      ∷ []
+
+    dashiLocalAlgebraResidualBlocker :
+      AQFTM4U6ResidualBlocker
+
+    dashiLocalAlgebraResidualBlockerIsMissingDASHILocalAlgebra :
+      dashiLocalAlgebraResidualBlocker
+      ≡
+      missingDASHILocalAlgebra
+
+    cstarCompletionHardHalt :
+      String
+
+    cstarCompletionHardHalt-v :
+      cstarCompletionHardHalt
+      ≡
+      "cStarCompletion-authority-only-no-local-C-star-completion"
+
+    bisognanoWichmannHardHalt :
+      String
+
+    bisognanoWichmannHardHalt-v :
+      bisognanoWichmannHardHalt
+      ≡
+      "BisognanoWichmann-citation-only-no-local-time-slice-promotion"
+
+    doplicherRobertsHardHalt :
+      String
+
+    doplicherRobertsHardHalt-v :
+      doplicherRobertsHardHalt
+      ≡
+      "DoplicherRoberts-not-consumed-before-missingDASHILocalAlgebra"
+
+    aqftWave3Boundary :
+      List String
+
+open AQFTWave3PreciseQuotientLocalAlgebraProgress public
+
+canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress :
+  AQFTWave3PreciseQuotientLocalAlgebraProgress
+canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress =
+  record
+    { carrierSurface =
+        canonicalAQFTCarrierAlgebraQuotientSurface
+    ; transportSetoidQuotientConstructionProgress =
+        canonicalTransportSetoidQuotientConstructionProgress
+    ; preciseQuotientRelation =
+        abstractQuotientRelation
+    ; preciseQuotientRelationIntroFromTransport =
+        abstractQuotientRelationIntro
+    ; quotientClassEqualityFromTransport =
+        abstractTransportQuotientClassStable
+    ; quotientOperationTransportLaws =
+        canonicalQuotientAlgebraOperationsTransportWellDefined
+    ; quotientNormLaws =
+        canonicalQuotientNormSurface
+    ; quotientNormBeta =
+        abstractQuotientNormβ
+    ; localAlgebraIsPromotedReceiptQuotient =
+        abstractLocalAlgebraIsPromotedReceiptQuotient
+    ; preciseQuotientRelationAdvanced =
+        true
+    ; preciseQuotientRelationAdvancedIsTrue =
+        refl
+    ; quotientAlgebraOperationsAdvanced =
+        true
+    ; quotientAlgebraOperationsAdvancedIsTrue =
+        refl
+    ; quotientNormOperationAdvanced =
+        true
+    ; quotientNormOperationAdvancedIsTrue =
+        refl
+    ; dashiLocalAlgebraTargetAdvanced =
+        true
+    ; dashiLocalAlgebraTargetAdvancedIsTrue =
+        refl
+    ; dashiLocalAlgebraPromoted =
+        false
+    ; dashiLocalAlgebraPromotedIsFalse =
+        refl
+    ; firstResidualAfterAQFTWave3 =
+        missingIsotonyFromCarrierTransport
+    ; firstResidualAfterAQFTWave3IsMissingIsotony =
+        refl
+    ; quotientResidualAfterAQFTWave3 =
+        missingIsotonyFromCarrierTransport
+        ∷ missingCausalReachability
+        ∷ missingFullTimeSliceTheorem
+        ∷ missingKTheoreticIntermediateTarget
+        ∷ missingCStarNormUniquenessEnvelope
+        ∷ missingNuclearityTheorem
+        ∷ missingMassGapEnergyPositivityBWTimeSliceDependency
+        ∷ []
+    ; quotientResidualAfterAQFTWave3IsExact =
+        refl
+    ; dashiLocalAlgebraResidualBlocker =
+        missingDASHILocalAlgebra
+    ; dashiLocalAlgebraResidualBlockerIsMissingDASHILocalAlgebra =
+        refl
+    ; cstarCompletionHardHalt =
+        "cStarCompletion-authority-only-no-local-C-star-completion"
+    ; cstarCompletionHardHalt-v =
+        refl
+    ; bisognanoWichmannHardHalt =
+        "BisognanoWichmann-citation-only-no-local-time-slice-promotion"
+    ; bisognanoWichmannHardHalt-v =
+        refl
+    ; doplicherRobertsHardHalt =
+        "DoplicherRoberts-not-consumed-before-missingDASHILocalAlgebra"
+    ; doplicherRobertsHardHalt-v =
+        refl
+    ; aqftWave3Boundary =
+        "Wave 3 consumes abstractQuotientRelation as the precise transport quotient relation on promoted receipt classes"
+        ∷ "transport quotient equality, quotient relation intro, product/star/norm well-definedness, and quotient norm beta are wired to existing sockets"
+        ∷ "AQFT local algebra is identified with the promoted-receipt quotient by abstractLocalAlgebraIsPromotedReceiptQuotient"
+        ∷ "missingDASHILocalAlgebra remains unpromoted because C*-completion is authority-only and time-slice/BW/DR data are not locally proved"
+        ∷ []
+    }
+
+record AQFTL5CarrierIsotonyFrontierReceipt : Setω where
+  field
+    carrierSurface :
+      AQFTCarrierAlgebraQuotientSurface
+
+    wave3Progress :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress
+
+    quotientConstructionProgress :
+      TransportSetoidQuotientConstructionProgress
+
+    quotientConstructionInhabited :
+      TransportSetoidQuotientConstructionProgress.quotientConstructionInhabited
+        quotientConstructionProgress
+      ≡
+      true
+
+    preciseQuotientRelationInhabited :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvanced
+        wave3Progress
+      ≡
+      true
+
+    quotientOperationsInhabited :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientAlgebraOperationsAdvanced
+        wave3Progress
+      ≡
+      true
+
+    quotientNormInhabited :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientNormOperationAdvanced
+        wave3Progress
+      ≡
+      true
+
+    typedNetIsotonyReceipt :
+      IsotonyG6CausalityDescentReceiptTarget
+
+    typedNetIsotonyMorphism :
+      {small large : AQFT.Region} →
+      small AQFT.⊆ large →
+      AQFT.AlgebraMorphism small large
+
+    typedNetIsotonyMorphismMatchesReceipt :
+      {small large : AQFT.Region} →
+      (inclusion : small AQFT.⊆ large) →
+      typedNetIsotonyMorphism inclusion
+      ≡
+      IsotonyG6CausalityDescentReceiptTarget.isotonyTarget
+        typedNetIsotonyReceipt
+        inclusion
+
+    localAlgebraQuotientEquality :
+      (region : AQFT.Region) →
+      AQFT.AQFTTypedNetSurface.Algebra
+        AQFT.canonicalAQFTTypedNetSurface
+        region
+      ≡
+      abstractPromotedReceiptQuotient region
+
+    exactMissingCarrierTransportLabel :
+      String
+
+    exactMissingCarrierTransportLabel-v :
+      exactMissingCarrierTransportLabel
+      ≡
+      "missing-carrier-inclusion-transport-respecting-quotient-and-matching-typed-net-isotony"
+
+    firstResidualAfterL5Inspection :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstResidualAfterL5InspectionIsMissingIsotonyFromCarrierTransport :
+      firstResidualAfterL5Inspection
+      ≡
+      missingIsotonyFromCarrierTransport
+
+    residualAfterL5Inspection :
+      List AQFTCarrierAlgebraQuotientOpenObligation
+
+    residualAfterL5InspectionIsExact :
+      residualAfterL5Inspection
+      ≡
+      missingIsotonyFromCarrierTransport
+      ∷ missingCausalReachability
+      ∷ missingFullTimeSliceTheorem
+      ∷ missingKTheoreticIntermediateTarget
+      ∷ missingCStarNormUniquenessEnvelope
+      ∷ missingNuclearityTheorem
+      ∷ missingMassGapEnergyPositivityBWTimeSliceDependency
+      ∷ []
+
+    dashiLocalAlgebraResidualBlocker :
+      AQFTM4U6ResidualBlocker
+
+    dashiLocalAlgebraResidualBlockerIsMissingDASHILocalAlgebra :
+      dashiLocalAlgebraResidualBlocker
+      ≡
+      missingDASHILocalAlgebra
+
+    gnsResidualBlocker :
+      AQFTM4U6ResidualBlocker
+
+    gnsResidualBlockerIsMissingGNSUniversalProperty :
+      gnsResidualBlocker
+      ≡
+      missingGNSUniversalProperty
+
+    dashiLocalAlgebraPromoted :
+      Bool
+
+    dashiLocalAlgebraPromotedIsFalse :
+      dashiLocalAlgebraPromoted ≡ false
+
+    gnsUniversalPropertyPromoted :
+      Bool
+
+    gnsUniversalPropertyPromotedIsFalse :
+      gnsUniversalPropertyPromoted ≡ false
+
+    noCarrierIsotonyPromotionClaim :
+      String
+
+    noCarrierIsotonyPromotionClaim-v :
+      noCarrierIsotonyPromotionClaim
+      ≡
+      "typed-net-isotony-plus-local-algebra-equality-does-not-construct-carrier-transport"
+
+    l5CarrierIsotonyFrontierBoundary :
+      List String
+
+open AQFTL5CarrierIsotonyFrontierReceipt public
+
+canonicalAQFTL5CarrierIsotonyFrontierReceipt :
+  AQFTL5CarrierIsotonyFrontierReceipt
+canonicalAQFTL5CarrierIsotonyFrontierReceipt =
+  record
+    { carrierSurface =
+        canonicalAQFTCarrierAlgebraQuotientSurface
+    ; wave3Progress =
+        canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; quotientConstructionProgress =
+        canonicalTransportSetoidQuotientConstructionProgress
+    ; quotientConstructionInhabited =
+        TransportSetoidQuotientConstructionProgress.quotientConstructionInhabitedIsTrue
+          canonicalTransportSetoidQuotientConstructionProgress
+    ; preciseQuotientRelationInhabited =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; quotientOperationsInhabited =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientAlgebraOperationsAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; quotientNormInhabited =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientNormOperationAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; typedNetIsotonyReceipt =
+        canonicalIsotonyG6CausalityDescentReceiptTarget
+    ; typedNetIsotonyMorphism =
+        IsotonyG6CausalityDescentReceiptTarget.isotonyTarget
+          canonicalIsotonyG6CausalityDescentReceiptTarget
+    ; typedNetIsotonyMorphismMatchesReceipt =
+        λ _ →
+          refl
+    ; localAlgebraQuotientEquality =
+        abstractLocalAlgebraIsPromotedReceiptQuotient
+    ; exactMissingCarrierTransportLabel =
+        "missing-carrier-inclusion-transport-respecting-quotient-and-matching-typed-net-isotony"
+    ; exactMissingCarrierTransportLabel-v =
+        refl
+    ; firstResidualAfterL5Inspection =
+        missingIsotonyFromCarrierTransport
+    ; firstResidualAfterL5InspectionIsMissingIsotonyFromCarrierTransport =
+        refl
+    ; residualAfterL5Inspection =
+        missingIsotonyFromCarrierTransport
+        ∷ missingCausalReachability
+        ∷ missingFullTimeSliceTheorem
+        ∷ missingKTheoreticIntermediateTarget
+        ∷ missingCStarNormUniquenessEnvelope
+        ∷ missingNuclearityTheorem
+        ∷ missingMassGapEnergyPositivityBWTimeSliceDependency
+        ∷ []
+    ; residualAfterL5InspectionIsExact =
+        refl
+    ; dashiLocalAlgebraResidualBlocker =
+        missingDASHILocalAlgebra
+    ; dashiLocalAlgebraResidualBlockerIsMissingDASHILocalAlgebra =
+        refl
+    ; gnsResidualBlocker =
+        missingGNSUniversalProperty
+    ; gnsResidualBlockerIsMissingGNSUniversalProperty =
+        refl
+    ; dashiLocalAlgebraPromoted =
+        false
+    ; dashiLocalAlgebraPromotedIsFalse =
+        refl
+    ; gnsUniversalPropertyPromoted =
+        false
+    ; gnsUniversalPropertyPromotedIsFalse =
+        refl
+    ; noCarrierIsotonyPromotionClaim =
+        "typed-net-isotony-plus-local-algebra-equality-does-not-construct-carrier-transport"
+    ; noCarrierIsotonyPromotionClaim-v =
+        refl
+    ; l5CarrierIsotonyFrontierBoundary =
+        "l5 inspection consumes the setoid quotient construction, precise quotient relation, quotient operation transport laws, and quotient norm beta law"
+        ∷ "typed-net isotony is available from IsotonyG6CausalityDescentReceiptTarget"
+        ∷ "local algebra equality identifies AQFTTypedNetSurface.Algebra with the promoted-receipt quotient"
+        ∷ "the missing datum is a carrier-level inclusion transport that respects transport equivalence and induces the typed-net isotony morphism on quotient classes"
+        ∷ "therefore missingIsotonyFromCarrierTransport remains the exact first residual, while missingQuotientConstruction and missingPreciseQuotientRelation are not l5 frontier blockers"
+        ∷ "missingDASHILocalAlgebra remains blocked by authority-only C-star completion, BW/time-slice targets, and absent DR promotion"
+        ∷ "missingGNSUniversalProperty remains blocked because no GNS state, representation, universal arrow proof, or Born-rule adapter is constructed here"
+        ∷ []
+    }
+
+data AQFTL5FailClosedBlocker : Set where
+  l5MissingCarrierInclusionTransport :
+    AQFTL5FailClosedBlocker
+
+  l5MissingCarrierTransportRespectsQuotient :
+    AQFTL5FailClosedBlocker
+
+  l5MissingCarrierTransportMatchesTypedNetIsotony :
+    AQFTL5FailClosedBlocker
+
+  l5MissingCausalReachabilityConstruction :
+    AQFTL5FailClosedBlocker
+
+  l5MissingTimeSliceTheoremProof :
+    AQFTL5FailClosedBlocker
+
+  l5MissingCauchyEvolutionDeterminationProof :
+    AQFTL5FailClosedBlocker
+
+  l5MissingDescentColimitCompatibilityProof :
+    AQFTL5FailClosedBlocker
+
+  l5CStarCompletionAuthorityOnly :
+    AQFTL5FailClosedBlocker
+
+  l5MissingDASHILocalAlgebraHandoff :
+    AQFTL5FailClosedBlocker
+
+  l5MissingGNSUniversalPropertyHandoff :
+    AQFTL5FailClosedBlocker
+
+  l5BisognanoWichmannCitationOnly :
+    AQFTL5FailClosedBlocker
+
+  l5DoplicherRobertsNotConsumed :
+    AQFTL5FailClosedBlocker
+
+canonicalAQFTL5FailClosedBlockers :
+  List AQFTL5FailClosedBlocker
+canonicalAQFTL5FailClosedBlockers =
+  l5MissingCarrierInclusionTransport
+  ∷ l5MissingCarrierTransportRespectsQuotient
+  ∷ l5MissingCarrierTransportMatchesTypedNetIsotony
+  ∷ l5MissingCausalReachabilityConstruction
+  ∷ l5MissingTimeSliceTheoremProof
+  ∷ l5MissingCauchyEvolutionDeterminationProof
+  ∷ l5MissingDescentColimitCompatibilityProof
+  ∷ l5CStarCompletionAuthorityOnly
+  ∷ l5MissingDASHILocalAlgebraHandoff
+  ∷ l5MissingGNSUniversalPropertyHandoff
+  ∷ l5BisognanoWichmannCitationOnly
+  ∷ l5DoplicherRobertsNotConsumed
+  ∷ []
+
+record AQFTL5FailClosedReceipt : Setω where
+  field
+    restrictedCarrierPredicateReceipt :
+      AQFTCarrierPredicateLocalBlockerRetirementReceipt
+
+    l5CarrierIsotonyFrontierReceipt :
+      AQFTL5CarrierIsotonyFrontierReceipt
+
+    boundedCarrierDepthProgress :
+      BoundedRestrictedCarrierDepthProgressSurface
+
+    concreteDepthFilteredLocalAlgebraData :
+      ConcreteDepthFilteredLocalAlgebraData
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    m4u6HandoffReceipt :
+      AQFTM4U6HandoffReceipt
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    cStarCompletionAuthorityBoundary :
+      CStarCompletionUniversalPropertyAuthority
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    cStarCompletionAuthoritySafe :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthority
+        cStarCompletionAuthorityBoundary
+      ≡
+      true
+
+    cStarCompletionLocallyConstructedIsFalse :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructed
+        cStarCompletionAuthorityBoundary
+      ≡
+      false
+
+    cStarCompletionPromotedIsFalse :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        cStarCompletionAuthorityBoundary
+      ≡
+      false
+
+    inclusionDescentReceipt :
+      IsotonyG6CausalityDescentReceiptTarget
+
+    inclusionDescentPromotedIsFalse :
+      IsotonyG6CausalityDescentReceiptTarget.isotonyCausalityDescentPromoted
+        inclusionDescentReceipt
+      ≡
+      false
+
+    timeSliceSurface :
+      TimeSliceTheoremSurface
+
+    timeSliceOpenObligationsAreCanonical :
+      TimeSliceTheoremSurface.openTimeSliceTheoremObligations
+        timeSliceSurface
+      ≡
+      canonicalTimeSliceTheoremOpenObligations
+
+    timeSlicePromotedIsFalse :
+      TimeSliceTheoremSurface.timeSliceTheoremPromoted timeSliceSurface
+      ≡
+      false
+
+    cauchyEvolutionReceipt :
+      CauchyEvolutionReceiptTarget
+
+    cauchyEvolutionOpenObligationsAreCanonical :
+      CauchyEvolutionReceiptTarget.openCauchyEvolutionObligations
+        cauchyEvolutionReceipt
+      ≡
+      canonicalCauchyEvolutionOpenObligations
+
+    cauchyTimeSlicePromotedIsFalse :
+      CauchyEvolutionReceiptTarget.timeSlicePromoted cauchyEvolutionReceipt
+      ≡
+      false
+
+    quotientConstructionAdvanced :
+      TransportSetoidQuotientConstructionProgress.quotientConstructionInhabited
+        (AQFTL5CarrierIsotonyFrontierReceipt.quotientConstructionProgress
+          l5CarrierIsotonyFrontierReceipt)
+      ≡
+      true
+
+    preciseQuotientRelationAdvanced :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvanced
+        (AQFTL5CarrierIsotonyFrontierReceipt.wave3Progress
+          l5CarrierIsotonyFrontierReceipt)
+      ≡
+      true
+
+    quotientOpenObligationTail :
+      List AQFTCarrierAlgebraQuotientOpenObligation
+
+    quotientOpenObligationTailIsExact :
+      quotientOpenObligationTail
+      ≡
+      missingIsotonyFromCarrierTransport
+      ∷ missingCausalReachability
+      ∷ missingFullTimeSliceTheorem
+      ∷ missingKTheoreticIntermediateTarget
+      ∷ missingCStarNormUniquenessEnvelope
+      ∷ missingNuclearityTheorem
+      ∷ missingMassGapEnergyPositivityBWTimeSliceDependency
+      ∷ []
+
+    m4u6ResidualBlockers :
+      List AQFTM4U6ResidualBlocker
+
+    m4u6ResidualBlockersAreCanonical :
+      m4u6ResidualBlockers
+      ≡
+      canonicalAQFTM4U6ResidualBlockers
+
+    exactL5FailClosedBlockers :
+      List AQFTL5FailClosedBlocker
+
+    exactL5FailClosedBlockersAreCanonical :
+      exactL5FailClosedBlockers
+      ≡
+      canonicalAQFTL5FailClosedBlockers
+
+    fullAQFTNetInhabited :
+      Bool
+
+    fullAQFTNetInhabitedIsFalse :
+      fullAQFTNetInhabited ≡ false
+
+    dashiLocalAlgebraPromoted :
+      Bool
+
+    dashiLocalAlgebraPromotedIsFalse :
+      dashiLocalAlgebraPromoted ≡ false
+
+    gnsUniversalPropertyPromoted :
+      Bool
+
+    gnsUniversalPropertyPromotedIsFalse :
+      gnsUniversalPropertyPromoted ≡ false
+
+    bisognanoWichmannCitationOnly :
+      Bool
+
+    bisognanoWichmannCitationOnlyIsTrue :
+      bisognanoWichmannCitationOnly ≡ true
+
+    doplicherRobertsConsumedHere :
+      Bool
+
+    doplicherRobertsConsumedHereIsFalse :
+      doplicherRobertsConsumedHere ≡ false
+
+    l5FailClosedBoundary :
+      List String
+
+open AQFTL5FailClosedReceipt public
+
+canonicalAQFTL5FailClosedReceipt :
+  AQFTL5FailClosedReceipt
+canonicalAQFTL5FailClosedReceipt =
+  record
+    { restrictedCarrierPredicateReceipt =
+        canonicalAQFTCarrierPredicateLocalBlockerRetirementReceipt
+    ; l5CarrierIsotonyFrontierReceipt =
+        canonicalAQFTL5CarrierIsotonyFrontierReceipt
+    ; boundedCarrierDepthProgress =
+        canonicalBoundedRestrictedCarrierDepthProgressSurface
+    ; concreteDepthFilteredLocalAlgebraData =
+        canonicalConcreteDepthFilteredLocalAlgebraData
+    ; m4u6HandoffReceipt =
+        canonicalAQFTM4U6HandoffReceipt
+    ; cStarCompletionAuthorityBoundary =
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionAuthoritySafe =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthorityIsTrue
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionLocallyConstructedIsFalse =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionPromotedIsFalse =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionPromotedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; inclusionDescentReceipt =
+        canonicalIsotonyG6CausalityDescentReceiptTarget
+    ; inclusionDescentPromotedIsFalse =
+        IsotonyG6CausalityDescentReceiptTarget.isotonyCausalityDescentPromotedIsFalse
+          canonicalIsotonyG6CausalityDescentReceiptTarget
+    ; timeSliceSurface =
+        canonicalTimeSliceTheoremSurface
+    ; timeSliceOpenObligationsAreCanonical =
+        TimeSliceTheoremSurface.openTimeSliceTheoremObligationsAreCanonical
+          canonicalTimeSliceTheoremSurface
+    ; timeSlicePromotedIsFalse =
+        TimeSliceTheoremSurface.timeSliceTheoremPromotedIsFalse
+          canonicalTimeSliceTheoremSurface
+    ; cauchyEvolutionReceipt =
+        canonicalCauchyEvolutionReceiptTarget
+    ; cauchyEvolutionOpenObligationsAreCanonical =
+        CauchyEvolutionReceiptTarget.openCauchyEvolutionObligationsAreCanonical
+          canonicalCauchyEvolutionReceiptTarget
+    ; cauchyTimeSlicePromotedIsFalse =
+        CauchyEvolutionReceiptTarget.timeSlicePromotedIsFalse
+          canonicalCauchyEvolutionReceiptTarget
+    ; quotientConstructionAdvanced =
+        AQFTL5CarrierIsotonyFrontierReceipt.quotientConstructionInhabited
+          canonicalAQFTL5CarrierIsotonyFrontierReceipt
+    ; preciseQuotientRelationAdvanced =
+        AQFTL5CarrierIsotonyFrontierReceipt.preciseQuotientRelationInhabited
+          canonicalAQFTL5CarrierIsotonyFrontierReceipt
+    ; quotientOpenObligationTail =
+        missingIsotonyFromCarrierTransport
+        ∷ missingCausalReachability
+        ∷ missingFullTimeSliceTheorem
+        ∷ missingKTheoreticIntermediateTarget
+        ∷ missingCStarNormUniquenessEnvelope
+        ∷ missingNuclearityTheorem
+        ∷ missingMassGapEnergyPositivityBWTimeSliceDependency
+        ∷ []
+    ; quotientOpenObligationTailIsExact =
+        refl
+    ; m4u6ResidualBlockers =
+        canonicalAQFTM4U6ResidualBlockers
+    ; m4u6ResidualBlockersAreCanonical =
+        refl
+    ; exactL5FailClosedBlockers =
+        canonicalAQFTL5FailClosedBlockers
+    ; exactL5FailClosedBlockersAreCanonical =
+        refl
+    ; fullAQFTNetInhabited =
+        false
+    ; fullAQFTNetInhabitedIsFalse =
+        refl
+    ; dashiLocalAlgebraPromoted =
+        false
+    ; dashiLocalAlgebraPromotedIsFalse =
+        refl
+    ; gnsUniversalPropertyPromoted =
+        false
+    ; gnsUniversalPropertyPromotedIsFalse =
+        refl
+    ; bisognanoWichmannCitationOnly =
+        true
+    ; bisognanoWichmannCitationOnlyIsTrue =
+        refl
+    ; doplicherRobertsConsumedHere =
+        false
+    ; doplicherRobertsConsumedHereIsFalse =
+        refl
+    ; l5FailClosedBoundary =
+        "l5 fail-closed receipt consumes restricted carrier and promoted receipt predicate sockets"
+        ∷ "setoid quotient construction, precise quotient relation, quotient operations, and norm beta are advanced through the Wave3/frontier receipts"
+        ∷ "C-star completion is consumed only through the safe authority boundary and remains locally unconstructed and unpromoted"
+        ∷ "typed-net isotony and descent are available, but no carrier-level inclusion transport is constructed to descend them from the restricted carrier quotient"
+        ∷ "time-slice and Cauchy evolution are consumed as target surfaces with their canonical open obligations intact"
+        ∷ "full AQFT net inhabitation fails closed at missingIsotonyFromCarrierTransport before DASHILocalAlgebra or GNS universality can be promoted"
+        ∷ "BisognanoWichmann remains citation-only and DoplicherRoberts is not consumed here"
+        ∷ []
+    }
+
+record AQFTL5PreciseQuotientRelationToConstructionShapeReceipt : Setω where
+  field
+    quotientConstructionProgress :
+      TransportSetoidQuotientConstructionProgress
+
+    wave3PreciseQuotientProgress :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress
+
+    preciseRelation :
+      {region : AQFT.Region} →
+      abstractPromotedReceiptQuotient region →
+      abstractPromotedReceiptQuotient region →
+      Set
+
+    quotientIntroShape :
+      {region : AQFT.Region} →
+      (x : abstractRestrictedCarrier region) →
+      abstractPromotedReceipt x →
+      abstractPromotedReceiptQuotient region
+
+    relationIntroShape :
+      {region : AQFT.Region} →
+      {x y : abstractRestrictedCarrier region} →
+      (eq : abstractTransportEquivalent x y) →
+      (receipt : abstractPromotedReceipt x) →
+      preciseRelation
+        (quotientIntroShape x receipt)
+        (quotientIntroShape
+          y
+          (abstractPromotedReceiptTransport eq receipt))
+
+    quotientConstructionShapeAvailable :
+      Bool
+
+    quotientConstructionShapeAvailableIsTrue :
+      quotientConstructionShapeAvailable ≡ true
+
+    localDASHIAlgebraPromoted :
+      Bool
+
+    localDASHIAlgebraPromotedIsFalse :
+      localDASHIAlgebraPromoted ≡ false
+
+    firstResidualAfterShape :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstResidualAfterShapeIsMissingIsotony :
+      firstResidualAfterShape
+      ≡
+      missingIsotonyFromCarrierTransport
+
+    retainedM4U6ResidualBlockers :
+      List AQFTM4U6ResidualBlocker
+
+    retainedM4U6ResidualBlockersAreCanonical :
+      retainedM4U6ResidualBlockers
+      ≡
+      canonicalAQFTM4U6ResidualBlockers
+
+    l5ShapeBoundary :
+      List String
+
+open AQFTL5PreciseQuotientRelationToConstructionShapeReceipt public
+
+canonicalAQFTL5PreciseQuotientRelationToConstructionShapeReceipt :
+  AQFTL5PreciseQuotientRelationToConstructionShapeReceipt
+canonicalAQFTL5PreciseQuotientRelationToConstructionShapeReceipt =
+  record
+    { quotientConstructionProgress =
+        canonicalTransportSetoidQuotientConstructionProgress
+    ; wave3PreciseQuotientProgress =
+        canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; preciseRelation =
+        abstractQuotientRelation
+    ; quotientIntroShape =
+        abstractQuotientIntro
+    ; relationIntroShape =
+        abstractQuotientRelationIntro
+    ; quotientConstructionShapeAvailable =
+        true
+    ; quotientConstructionShapeAvailableIsTrue =
+        refl
+    ; localDASHIAlgebraPromoted =
+        false
+    ; localDASHIAlgebraPromotedIsFalse =
+        refl
+    ; firstResidualAfterShape =
+        missingIsotonyFromCarrierTransport
+    ; firstResidualAfterShapeIsMissingIsotony =
+        refl
+    ; retainedM4U6ResidualBlockers =
+        canonicalAQFTM4U6ResidualBlockers
+    ; retainedM4U6ResidualBlockersAreCanonical =
+        refl
+    ; l5ShapeBoundary =
+        "l5 precise quotient relation is explicitly tied to the quotient construction intro shape"
+        ∷ "transport-equivalent representatives yield a precise relation witness through abstractQuotientRelationIntro"
+        ∷ "this advances only quotient shape wiring; carrier-level isotony and DASHI local algebra remain unpromoted"
+        ∷ "m4/u6 residual blockers remain missingDASHILocalAlgebra and missingGNSUniversalProperty"
+        ∷ []
+    }
+
+record AQFTL3FilteredColimitPreservationAttemptSurface : Setω where
+  field
+    depthFilteredSurface :
+      DepthFilteredLocalAlgebraSurface
+
+    colimitUniversality :
+      ColimitUniversalityReceiptTarget
+
+    typedNetIsotonyDescent :
+      IsotonyG6CausalityDescentReceiptTarget
+
+    depthColimitMatchesLocalAlgebra :
+      (region : AQFT.Region) →
+      DepthFilteredLocalAlgebraSurface.A_colim depthFilteredSurface region
+      ≡
+      abstractPromotedReceiptQuotient region
+
+    filteredColimitPreservationTarget :
+      {small large : AQFT.Region} →
+      small AQFT.⊆ large →
+      Set
+
+    filteredColimitShapeThreaded :
+      Bool
+
+    filteredColimitShapeThreadedIsTrue :
+      filteredColimitShapeThreaded ≡ true
+
+    filteredColimitPreservationProved :
+      Bool
+
+    filteredColimitPreservationProvedIsFalse :
+      filteredColimitPreservationProved ≡ false
+
+    firstResidualAfterL3Attempt :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstResidualAfterL3AttemptIsMissingIsotony :
+      firstResidualAfterL3Attempt
+      ≡
+      missingIsotonyFromCarrierTransport
+
+    l3AttemptBoundary :
+      List String
+
+open AQFTL3FilteredColimitPreservationAttemptSurface public
+
+canonicalAQFTL3FilteredColimitPreservationAttemptSurface :
+  AQFTL3FilteredColimitPreservationAttemptSurface
+canonicalAQFTL3FilteredColimitPreservationAttemptSurface =
+  record
+    { depthFilteredSurface =
+        canonicalConcreteDepthFilteredLocalAlgebraSurface
+    ; colimitUniversality =
+        canonicalConcreteColimitUniversalityReceiptTarget
+    ; typedNetIsotonyDescent =
+        canonicalIsotonyG6CausalityDescentReceiptTarget
+    ; depthColimitMatchesLocalAlgebra =
+        λ _ →
+          refl
+    ; filteredColimitPreservationTarget =
+        λ _ →
+          ⊤
+    ; filteredColimitShapeThreaded =
+        true
+    ; filteredColimitShapeThreadedIsTrue =
+        refl
+    ; filteredColimitPreservationProved =
+        false
+    ; filteredColimitPreservationProvedIsFalse =
+        refl
+    ; firstResidualAfterL3Attempt =
+        missingIsotonyFromCarrierTransport
+    ; firstResidualAfterL3AttemptIsMissingIsotony =
+        refl
+    ; l3AttemptBoundary =
+        "l3 filtered-colimit-preservation attempt reuses the repo-native concrete Bool-depth colimit surface"
+        ∷ "the colimit algebra shape is threaded to abstractPromotedReceiptQuotient by definitional equality"
+        ∷ "the preservation theorem is left as a target because no carrier inclusion transport inducing typed-net isotony is constructed"
+        ∷ []
+    }
+
+record AQFTFirstMissingChainReceipt : Setω where
+  field
+    quotientConstructionProgress :
+      TransportSetoidQuotientConstructionProgress
+
+    missingQuotientConstructionAdvanced :
+      TransportSetoidQuotientConstructionProgress.quotientConstructionInhabited
+        quotientConstructionProgress
+      ≡
+      true
+
+    firstResidualAfterQuotientConstruction :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstResidualAfterQuotientConstruction-v :
+      firstResidualAfterQuotientConstruction
+      ≡
+      missingPreciseQuotientRelation
+
+    preciseQuotientProgress :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress
+
+    preciseQuotientRelation :
+      {region : AQFT.Region} →
+      abstractPromotedReceiptQuotient region →
+      abstractPromotedReceiptQuotient region →
+      Set
+
+    preciseQuotientRelationMatchesWave3 :
+      {region : AQFT.Region} →
+      (x y : abstractPromotedReceiptQuotient region) →
+      preciseQuotientRelation x y
+      ≡
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelation
+        preciseQuotientProgress
+        x
+        y
+
+    missingPreciseQuotientRelationAdvanced :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvanced
+        preciseQuotientProgress
+      ≡
+      true
+
+    localAlgebraQuotientEquality :
+      (region : AQFT.Region) →
+      AQFT.AQFTTypedNetSurface.Algebra
+        AQFT.canonicalAQFTTypedNetSurface
+        region
+      ≡
+      abstractPromotedReceiptQuotient region
+
+    missingDASHILocalAlgebraBlocker :
+      AQFTM4U6ResidualBlocker
+
+    missingDASHILocalAlgebraBlocker-v :
+      missingDASHILocalAlgebraBlocker
+      ≡
+      missingDASHILocalAlgebra
+
+    m4u6Handoff :
+      AQFTM4U6HandoffReceipt
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    u6HandoffFirstResidualIsMissingDASHILocalAlgebra :
+      AQFTM4U6HandoffReceipt.u6FirstResidualBlocker m4u6Handoff
+      ≡
+      missingDASHILocalAlgebra
+
+    cStarCompletionAuthority :
+      CStarCompletionUniversalPropertyAuthority
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    cStarCompletionLocallyConstructedIsFalse :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructed
+        cStarCompletionAuthority
+      ≡
+      false
+
+    cStarCompletionPromotedIsFalse :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        cStarCompletionAuthority
+      ≡
+      false
+
+    timeSliceSurface :
+      TimeSliceTheoremSurface
+
+    timeSlicePromotedIsFalse :
+      TimeSliceTheoremSurface.timeSliceTheoremPromoted timeSliceSurface
+      ≡
+      false
+
+    bisognanoWichmannCitationOnly :
+      Bool
+
+    bisognanoWichmannCitationOnlyIsTrue :
+      bisognanoWichmannCitationOnly ≡ true
+
+    terminalPromotionSuppliedHere :
+      Bool
+
+    terminalPromotionSuppliedHereIsFalse :
+      terminalPromotionSuppliedHere ≡ false
+
+    doplicherRobertsPromotionSuppliedHere :
+      Bool
+
+    doplicherRobertsPromotionSuppliedHereIsFalse :
+      doplicherRobertsPromotionSuppliedHere ≡ false
+
+    exactFirstMissingChain :
+      List String
+
+open AQFTFirstMissingChainReceipt public
+
+canonicalAQFTFirstMissingChainReceipt :
+  AQFTFirstMissingChainReceipt
+canonicalAQFTFirstMissingChainReceipt =
+  record
+    { quotientConstructionProgress =
+        canonicalTransportSetoidQuotientConstructionProgress
+    ; missingQuotientConstructionAdvanced =
+        TransportSetoidQuotientConstructionProgress.quotientConstructionInhabitedIsTrue
+          canonicalTransportSetoidQuotientConstructionProgress
+    ; firstResidualAfterQuotientConstruction =
+        missingPreciseQuotientRelation
+    ; firstResidualAfterQuotientConstruction-v =
+        refl
+    ; preciseQuotientProgress =
+        canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; preciseQuotientRelation =
+        abstractQuotientRelation
+    ; preciseQuotientRelationMatchesWave3 =
+        λ _ _ →
+          refl
+    ; missingPreciseQuotientRelationAdvanced =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; localAlgebraQuotientEquality =
+        abstractLocalAlgebraIsPromotedReceiptQuotient
+    ; missingDASHILocalAlgebraBlocker =
+        missingDASHILocalAlgebra
+    ; missingDASHILocalAlgebraBlocker-v =
+        refl
+    ; m4u6Handoff =
+        canonicalAQFTM4U6HandoffReceipt
+    ; u6HandoffFirstResidualIsMissingDASHILocalAlgebra =
+        AQFTM4U6HandoffReceipt.u6FirstResidualBlockerIsMissingDASHILocalAlgebra
+          canonicalAQFTM4U6HandoffReceipt
+    ; cStarCompletionAuthority =
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionLocallyConstructedIsFalse =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionPromotedIsFalse =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionPromotedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; timeSliceSurface =
+        canonicalTimeSliceTheoremSurface
+    ; timeSlicePromotedIsFalse =
+        TimeSliceTheoremSurface.timeSliceTheoremPromotedIsFalse
+          canonicalTimeSliceTheoremSurface
+    ; bisognanoWichmannCitationOnly =
+        true
+    ; bisognanoWichmannCitationOnlyIsTrue =
+        refl
+    ; terminalPromotionSuppliedHere =
+        false
+    ; terminalPromotionSuppliedHereIsFalse =
+        refl
+    ; doplicherRobertsPromotionSuppliedHere =
+        false
+    ; doplicherRobertsPromotionSuppliedHereIsFalse =
+        refl
+    ; exactFirstMissingChain =
+        "missingQuotientConstruction is advanced by the setoid quotient construction receipt"
+        ∷ "missingPreciseQuotientRelation is advanced by abstractQuotientRelation plus its Wave3 transport-intro socket"
+        ∷ "missingDASHILocalAlgebra remains the u6 blocker because C-star completion is authority-only, TimeSliceTheoremSurface is unpromoted, BisognanoWichmann is citation-only, and DoplicherRoberts promotion is absent"
+        ∷ "no terminal promotion or DR promotion is supplied by this chain receipt"
+        ∷ []
+    }
+
+record AQFTNextWavePreciseQuotientLocalAlgebraAttemptReceipt : Setω where
+  field
+    firstMissingChain :
+      AQFTFirstMissingChainReceipt
+
+    preciseQuotientAttempt :
+      AQFTL5PreciseQuotientRelationToConstructionShapeReceipt
+
+    filteredColimitAttempt :
+      AQFTL3FilteredColimitPreservationAttemptSurface
+
+    carrierFunctorLeftAdjointAttempted :
+      Bool
+
+    carrierFunctorLeftAdjointAttemptedIsTrue :
+      carrierFunctorLeftAdjointAttempted ≡ true
+
+    carrierFunctorLeftAdjointConstructed :
+      Bool
+
+    carrierFunctorLeftAdjointConstructedIsFalse :
+      carrierFunctorLeftAdjointConstructed ≡ false
+
+    filteredColimitPreservationPromoted :
+      Bool
+
+    filteredColimitPreservationPromotedIsFalse :
+      filteredColimitPreservationPromoted ≡ false
+
+    preciseQuotientRelationAdvanced :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvanced
+        (AQFTFirstMissingChainReceipt.preciseQuotientProgress firstMissingChain)
+      ≡
+      true
+
+    quotientConstructionAdvanced :
+      TransportSetoidQuotientConstructionProgress.quotientConstructionInhabited
+        (AQFTFirstMissingChainReceipt.quotientConstructionProgress firstMissingChain)
+      ≡
+      true
+
+    carrierLevelIsotonyStillMissing :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    carrierLevelIsotonyStillMissing-v :
+      carrierLevelIsotonyStillMissing
+      ≡
+      missingIsotonyFromCarrierTransport
+
+    dashiLocalAlgebraBlocker :
+      AQFTM4U6ResidualBlocker
+
+    dashiLocalAlgebraBlocker-v :
+      dashiLocalAlgebraBlocker
+      ≡
+      missingDASHILocalAlgebra
+
+    dashiLocalAlgebraPromoted :
+      Bool
+
+    dashiLocalAlgebraPromotedIsFalse :
+      dashiLocalAlgebraPromoted ≡ false
+
+    gnsUniversalPropertyPromoted :
+      Bool
+
+    gnsUniversalPropertyPromotedIsFalse :
+      gnsUniversalPropertyPromoted ≡ false
+
+    nextWaveAQFTBoundary :
+      List String
+
+open AQFTNextWavePreciseQuotientLocalAlgebraAttemptReceipt public
+
+canonicalAQFTNextWavePreciseQuotientLocalAlgebraAttemptReceipt :
+  AQFTNextWavePreciseQuotientLocalAlgebraAttemptReceipt
+canonicalAQFTNextWavePreciseQuotientLocalAlgebraAttemptReceipt =
+  record
+    { firstMissingChain =
+        canonicalAQFTFirstMissingChainReceipt
+    ; preciseQuotientAttempt =
+        canonicalAQFTL5PreciseQuotientRelationToConstructionShapeReceipt
+    ; filteredColimitAttempt =
+        canonicalAQFTL3FilteredColimitPreservationAttemptSurface
+    ; carrierFunctorLeftAdjointAttempted =
+        true
+    ; carrierFunctorLeftAdjointAttemptedIsTrue =
+        refl
+    ; carrierFunctorLeftAdjointConstructed =
+        false
+    ; carrierFunctorLeftAdjointConstructedIsFalse =
+        refl
+    ; filteredColimitPreservationPromoted =
+        false
+    ; filteredColimitPreservationPromotedIsFalse =
+        refl
+    ; preciseQuotientRelationAdvanced =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; quotientConstructionAdvanced =
+        TransportSetoidQuotientConstructionProgress.quotientConstructionInhabitedIsTrue
+          canonicalTransportSetoidQuotientConstructionProgress
+    ; carrierLevelIsotonyStillMissing =
+        missingIsotonyFromCarrierTransport
+    ; carrierLevelIsotonyStillMissing-v =
+        refl
+    ; dashiLocalAlgebraBlocker =
+        missingDASHILocalAlgebra
+    ; dashiLocalAlgebraBlocker-v =
+        refl
+    ; dashiLocalAlgebraPromoted =
+        false
+    ; dashiLocalAlgebraPromotedIsFalse =
+        refl
+    ; gnsUniversalPropertyPromoted =
+        false
+    ; gnsUniversalPropertyPromotedIsFalse =
+        refl
+    ; nextWaveAQFTBoundary =
+        "l5 next-wave attempt consumes the existing transport quotient and precise quotient surfaces"
+        ∷ "l3 next-wave attempt records the carrier-functor left-adjoint route as attempted but not constructed"
+        ∷ "filtered-colimit preservation remains a target surface; no adjunction, local algebra, or GNS universal property is promoted"
+        ∷ "the carrier-level local-net frontier remains missingIsotonyFromCarrierTransport before missingDASHILocalAlgebra can be consumed downstream"
+        ∷ []
+    }
+
+record L5Gate5DASHILocalAlgebraResidualReceipt : Setω where
+  field
+    firstMissingChain :
+      AQFTFirstMissingChainReceipt
+
+    quotientConstructionAdvanced :
+      TransportSetoidQuotientConstructionProgress.quotientConstructionInhabited
+        (AQFTFirstMissingChainReceipt.quotientConstructionProgress
+          firstMissingChain)
+      ≡
+      true
+
+    preciseQuotientRelationAdvanced :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvanced
+        (AQFTFirstMissingChainReceipt.preciseQuotientProgress
+          firstMissingChain)
+      ≡
+      true
+
+    localAlgebraCarrier :
+      AQFT.Region →
+      Set
+
+    localAlgebraCarrierMatchesQuotient :
+      (region : AQFT.Region) →
+      localAlgebraCarrier region
+      ≡
+      abstractPromotedReceiptQuotient region
+
+    typedNetLocalAlgebraMatchesCarrier :
+      (region : AQFT.Region) →
+      AQFT.AQFTTypedNetSurface.Algebra
+        AQFT.canonicalAQFTTypedNetSurface
+        region
+      ≡
+      localAlgebraCarrier region
+
+    firstResidualBlocker :
+      AQFTM4U6ResidualBlocker
+
+    firstResidualBlockerIsMissingDASHILocalAlgebra :
+      firstResidualBlocker
+      ≡
+      missingDASHILocalAlgebra
+
+    cstarCompletionPromoted :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        (AQFTFirstMissingChainReceipt.cStarCompletionAuthority
+          firstMissingChain)
+      ≡
+      false
+
+    timeSlicePromoted :
+      TimeSliceTheoremSurface.timeSliceTheoremPromoted
+        (AQFTFirstMissingChainReceipt.timeSliceSurface firstMissingChain)
+      ≡
+      false
+
+    bisognanoWichmannCitationOnly :
+      AQFTFirstMissingChainReceipt.bisognanoWichmannCitationOnly
+        firstMissingChain
+      ≡
+      true
+
+    doplicherRobertsPromotionSuppliedHere :
+      AQFTFirstMissingChainReceipt.doplicherRobertsPromotionSuppliedHere
+        firstMissingChain
+      ≡
+      false
+
+    dashiLocalAlgebraPromoted :
+      Bool
+
+    dashiLocalAlgebraPromotedIsFalse :
+      dashiLocalAlgebraPromoted ≡ false
+
+    receiptBoundary :
+      List String
+
+open L5Gate5DASHILocalAlgebraResidualReceipt public
+
+canonicalL5Gate5DASHILocalAlgebraResidualReceipt :
+  L5Gate5DASHILocalAlgebraResidualReceipt
+canonicalL5Gate5DASHILocalAlgebraResidualReceipt =
+  record
+    { firstMissingChain =
+        canonicalAQFTFirstMissingChainReceipt
+    ; quotientConstructionAdvanced =
+        AQFTFirstMissingChainReceipt.missingQuotientConstructionAdvanced
+          canonicalAQFTFirstMissingChainReceipt
+    ; preciseQuotientRelationAdvanced =
+        AQFTFirstMissingChainReceipt.missingPreciseQuotientRelationAdvanced
+          canonicalAQFTFirstMissingChainReceipt
+    ; localAlgebraCarrier =
+        abstractPromotedReceiptQuotient
+    ; localAlgebraCarrierMatchesQuotient =
+        λ _ →
+          refl
+    ; typedNetLocalAlgebraMatchesCarrier =
+        AQFTFirstMissingChainReceipt.localAlgebraQuotientEquality
+          canonicalAQFTFirstMissingChainReceipt
+    ; firstResidualBlocker =
+        missingDASHILocalAlgebra
+    ; firstResidualBlockerIsMissingDASHILocalAlgebra =
+        refl
+    ; cstarCompletionPromoted =
+        AQFTFirstMissingChainReceipt.cStarCompletionPromotedIsFalse
+          canonicalAQFTFirstMissingChainReceipt
+    ; timeSlicePromoted =
+        AQFTFirstMissingChainReceipt.timeSlicePromotedIsFalse
+          canonicalAQFTFirstMissingChainReceipt
+    ; bisognanoWichmannCitationOnly =
+        AQFTFirstMissingChainReceipt.bisognanoWichmannCitationOnlyIsTrue
+          canonicalAQFTFirstMissingChainReceipt
+    ; doplicherRobertsPromotionSuppliedHere =
+        AQFTFirstMissingChainReceipt.doplicherRobertsPromotionSuppliedHereIsFalse
+          canonicalAQFTFirstMissingChainReceipt
+    ; dashiLocalAlgebraPromoted =
+        false
+    ; dashiLocalAlgebraPromotedIsFalse =
+        refl
+    ; receiptBoundary =
+        "Gate5 first-missing is now recorded as a DASHI local-algebra residual over abstractPromotedReceiptQuotient"
+        ∷ "the quotient construction and precise quotient relation are consumed as advanced receipts"
+        ∷ "typed-net local algebra equality is only the canonical abstract quotient equality, not a C-star or DR promotion"
+        ∷ "C-star completion, time-slice, Bisognano-Wichmann, and Doplicher-Roberts promotion remain fail-closed"
+        ∷ []
+    }
+
+record Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt : Setω where
+  field
+    gate5LocalAlgebraResidual :
+      L5Gate5DASHILocalAlgebraResidualReceipt
+
+    nextWaveQuotientAttempt :
+      AQFTNextWavePreciseQuotientLocalAlgebraAttemptReceipt
+
+    quotientRelationAdvanced :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvanced
+        (AQFTFirstMissingChainReceipt.preciseQuotientProgress
+          (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+            gate5LocalAlgebraResidual))
+      ≡
+      true
+
+    quotientConstructionAdvanced :
+      TransportSetoidQuotientConstructionProgress.quotientConstructionInhabited
+        (AQFTFirstMissingChainReceipt.quotientConstructionProgress
+          (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+            gate5LocalAlgebraResidual))
+      ≡
+      true
+
+    quotientOperationsAdvanced :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientAlgebraOperationsAdvanced
+        (AQFTFirstMissingChainReceipt.preciseQuotientProgress
+          (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+            gate5LocalAlgebraResidual))
+      ≡
+      true
+
+    quotientNormWellDefinednessReceiptOnly :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientNormOperationAdvanced
+        (AQFTFirstMissingChainReceipt.preciseQuotientProgress
+          (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+            gate5LocalAlgebraResidual))
+      ≡
+      true
+
+    cStarCompletionAuthorityBoundary :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        (AQFTFirstMissingChainReceipt.cStarCompletionAuthority
+          (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+            gate5LocalAlgebraResidual))
+      ≡
+      false
+
+    localNetIsotonyBlocker :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    localNetIsotonyBlocker-v :
+      localNetIsotonyBlocker
+      ≡
+      missingIsotonyFromCarrierTransport
+
+    timeSliceBlocker :
+      TimeSliceTheoremSurface.timeSliceTheoremPromoted
+        (AQFTFirstMissingChainReceipt.timeSliceSurface
+          (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+            gate5LocalAlgebraResidual))
+      ≡
+      false
+
+    firstMiddle6AQFTResidual :
+      AQFTM4U6ResidualBlocker
+
+    firstMiddle6AQFTResidual-v :
+      firstMiddle6AQFTResidual
+      ≡
+      missingDASHILocalAlgebra
+
+    gnsUniversalPropertyResidual :
+      AQFTM4U6ResidualBlocker
+
+    gnsUniversalPropertyResidual-v :
+      gnsUniversalPropertyResidual
+      ≡
+      missingGNSUniversalProperty
+
+    dashiLocalAlgebraPromoted :
+      Bool
+
+    dashiLocalAlgebraPromotedIsFalse :
+      dashiLocalAlgebraPromoted ≡ false
+
+    middle6Boundary :
+      List String
+
+open Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt public
+
+canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt :
+  Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt =
+  record
+    { gate5LocalAlgebraResidual =
+        canonicalL5Gate5DASHILocalAlgebraResidualReceipt
+    ; nextWaveQuotientAttempt =
+        canonicalAQFTNextWavePreciseQuotientLocalAlgebraAttemptReceipt
+    ; quotientRelationAdvanced =
+        AQFTFirstMissingChainReceipt.missingPreciseQuotientRelationAdvanced
+          canonicalAQFTFirstMissingChainReceipt
+    ; quotientConstructionAdvanced =
+        AQFTFirstMissingChainReceipt.missingQuotientConstructionAdvanced
+          canonicalAQFTFirstMissingChainReceipt
+    ; quotientOperationsAdvanced =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientAlgebraOperationsAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; quotientNormWellDefinednessReceiptOnly =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientNormOperationAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; cStarCompletionAuthorityBoundary =
+        AQFTFirstMissingChainReceipt.cStarCompletionPromotedIsFalse
+          canonicalAQFTFirstMissingChainReceipt
+    ; localNetIsotonyBlocker =
+        missingIsotonyFromCarrierTransport
+    ; localNetIsotonyBlocker-v =
+        refl
+    ; timeSliceBlocker =
+        AQFTFirstMissingChainReceipt.timeSlicePromotedIsFalse
+          canonicalAQFTFirstMissingChainReceipt
+    ; firstMiddle6AQFTResidual =
+        missingDASHILocalAlgebra
+    ; firstMiddle6AQFTResidual-v =
+        refl
+    ; gnsUniversalPropertyResidual =
+        missingGNSUniversalProperty
+    ; gnsUniversalPropertyResidual-v =
+        refl
+    ; dashiLocalAlgebraPromoted =
+        false
+    ; dashiLocalAlgebraPromotedIsFalse =
+        refl
+    ; middle6Boundary =
+        "middle6 AQFT records quotient relation, quotient construction, quotient operations, and quotient norm well-definedness as advanced receipt surfaces"
+        ∷ "norm well-definedness here is only the quotient norm transport/beta receipt, not a C-star norm uniqueness or completion theorem"
+        ∷ "C-star completion is consumed only through the existing authority boundary and remains locally unconstructed"
+        ∷ "local-net isotony still blocks at missingIsotonyFromCarrierTransport, and time-slice promotion remains false"
+        ∷ "the first AQFT residual remains missingDASHILocalAlgebra; the downstream GNS residual remains missingGNSUniversalProperty"
+        ∷ []
+    }
+
+record AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt : Setω where
+  field
+    gate5FailClosedReceipt :
+      Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+
+    quotientCarrier :
+      AQFT.Region →
+      Set
+
+    quotientCarrierMatchesPromotedReceiptQuotient :
+      (region : AQFT.Region) →
+      quotientCarrier region
+      ≡
+      abstractPromotedReceiptQuotient region
+
+    quotientRelation :
+      {region : AQFT.Region} →
+      abstractPromotedReceiptQuotient region →
+      abstractPromotedReceiptQuotient region →
+      Set
+
+    quotientRelationMatchesTransportRelation :
+      {region : AQFT.Region} →
+      (x y : abstractPromotedReceiptQuotient region) →
+      quotientRelation x y
+      ≡
+      abstractQuotientRelation x y
+
+    quotientNorm :
+      {region : AQFT.Region} →
+      abstractPromotedReceiptQuotient region →
+      RA.ℝ
+
+    quotientNormMatchesAbstractNorm :
+      {region : AQFT.Region} →
+      (x : abstractPromotedReceiptQuotient region) →
+      quotientNorm x
+      ≡
+      abstractQuotientNorm x
+
+    quotientOperationsAdvanced :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientAlgebraOperationsAdvanced
+        canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+      ≡
+      true
+
+    quotientNormTransportAdvanced :
+      AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientNormOperationAdvanced
+        canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+      ≡
+      true
+
+    spacelikeCommutativityAttempted :
+      Bool
+
+    spacelikeCommutativityAttemptedIsTrue :
+      spacelikeCommutativityAttempted ≡ true
+
+    spacelikeCommutativityProved :
+      Bool
+
+    spacelikeCommutativityProvedIsFalse :
+      spacelikeCommutativityProved ≡ false
+
+    causalPathAbsenceConstructed :
+      Bool
+
+    causalPathAbsenceConstructedIsFalse :
+      causalPathAbsenceConstructed ≡ false
+
+    firstSpacelikeCommutativityBlocker :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstSpacelikeCommutativityBlockerIsCausalReachability :
+      firstSpacelikeCommutativityBlocker
+      ≡
+      missingCausalReachability
+
+    carrierLevelIsotonyStillBlocks :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    carrierLevelIsotonyStillBlocksIsExact :
+      carrierLevelIsotonyStillBlocks
+      ≡
+      missingIsotonyFromCarrierTransport
+
+    missingDASHILocalAlgebraNotConsumed :
+      AQFTM4U6ResidualBlocker
+
+    missingDASHILocalAlgebraNotConsumedIsExact :
+      missingDASHILocalAlgebraNotConsumed
+      ≡
+      missingDASHILocalAlgebra
+
+    dashiLocalAlgebraPromoted :
+      Bool
+
+    dashiLocalAlgebraPromotedIsFalse :
+      dashiLocalAlgebraPromoted ≡ false
+
+    attemptBoundary :
+      List String
+
+open AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt public
+
+canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt :
+  AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt =
+  record
+    { gate5FailClosedReceipt =
+        canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; quotientCarrier =
+        abstractPromotedReceiptQuotient
+    ; quotientCarrierMatchesPromotedReceiptQuotient =
+        λ _ →
+          refl
+    ; quotientRelation =
+        abstractQuotientRelation
+    ; quotientRelationMatchesTransportRelation =
+        λ _ _ →
+          refl
+    ; quotientNorm =
+        abstractQuotientNorm
+    ; quotientNormMatchesAbstractNorm =
+        λ _ →
+          refl
+    ; quotientOperationsAdvanced =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientAlgebraOperationsAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; quotientNormTransportAdvanced =
+        AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientNormOperationAdvancedIsTrue
+          canonicalAQFTWave3PreciseQuotientLocalAlgebraProgress
+    ; spacelikeCommutativityAttempted =
+        true
+    ; spacelikeCommutativityAttemptedIsTrue =
+        refl
+    ; spacelikeCommutativityProved =
+        false
+    ; spacelikeCommutativityProvedIsFalse =
+        refl
+    ; causalPathAbsenceConstructed =
+        false
+    ; causalPathAbsenceConstructedIsFalse =
+        refl
+    ; firstSpacelikeCommutativityBlocker =
+        missingCausalReachability
+    ; firstSpacelikeCommutativityBlockerIsCausalReachability =
+        refl
+    ; carrierLevelIsotonyStillBlocks =
+        missingIsotonyFromCarrierTransport
+    ; carrierLevelIsotonyStillBlocksIsExact =
+        refl
+    ; missingDASHILocalAlgebraNotConsumed =
+        missingDASHILocalAlgebra
+    ; missingDASHILocalAlgebraNotConsumedIsExact =
+        refl
+    ; dashiLocalAlgebraPromoted =
+        false
+    ; dashiLocalAlgebraPromotedIsFalse =
+        refl
+    ; attemptBoundary =
+        "l5 quotient operations are threaded through abstractPromotedReceiptQuotient, abstractQuotientRelation, and abstractQuotientNorm"
+        ∷ "the algebra-operation and quotient-norm transport receipts are advanced, but only as quotient transport surfaces"
+        ∷ "spacelike commutativity is attempted at the local-net level and stops at missingCausalReachability/causal-path absence"
+        ∷ "carrier-level isotony still blocks at missingIsotonyFromCarrierTransport"
+        ∷ "missingDASHILocalAlgebra is not consumed and DASHI local algebra promotion remains false"
+        ∷ []
+    }
+
+data DASHILocalAlgebraClosureMissingConstructor : Set where
+  missingCStarCompletionConstructor :
+    DASHILocalAlgebraClosureMissingConstructor
+
+  missingCompletionCStarAlgebraWitnessConstructor :
+    DASHILocalAlgebraClosureMissingConstructor
+
+  missingLocalOperatorCarrierConstructor :
+    DASHILocalAlgebraClosureMissingConstructor
+
+  missingLocalOperatorMultiplicationConstructor :
+    DASHILocalAlgebraClosureMissingConstructor
+
+  missingLocalOperatorStarConstructor :
+    DASHILocalAlgebraClosureMissingConstructor
+
+  missingSpacelikeCausalBFSPathAbsenceConstructor :
+    DASHILocalAlgebraClosureMissingConstructor
+
+canonicalDASHILocalAlgebraClosureMissingConstructors :
+  List DASHILocalAlgebraClosureMissingConstructor
+canonicalDASHILocalAlgebraClosureMissingConstructors =
+  missingCStarCompletionConstructor
+  ∷ missingCompletionCStarAlgebraWitnessConstructor
+  ∷ missingLocalOperatorCarrierConstructor
+  ∷ missingLocalOperatorMultiplicationConstructor
+  ∷ missingLocalOperatorStarConstructor
+  ∷ missingSpacelikeCausalBFSPathAbsenceConstructor
+  ∷ []
+
+Gate5QuotientConstructionAdvanced :
+  Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt →
+  Set
+Gate5QuotientConstructionAdvanced receipt =
+  TransportSetoidQuotientConstructionProgress.quotientConstructionInhabited
+    (AQFTFirstMissingChainReceipt.quotientConstructionProgress
+      (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+        (Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.gate5LocalAlgebraResidual
+          receipt)))
+  ≡
+  true
+
+Gate5QuotientRelationAdvanced :
+  Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt →
+  Set
+Gate5QuotientRelationAdvanced receipt =
+  AQFTWave3PreciseQuotientLocalAlgebraProgress.preciseQuotientRelationAdvanced
+    (AQFTFirstMissingChainReceipt.preciseQuotientProgress
+      (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+        (Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.gate5LocalAlgebraResidual
+          receipt)))
+  ≡
+  true
+
+Gate5QuotientOperationsAdvanced :
+  Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt →
+  Set
+Gate5QuotientOperationsAdvanced receipt =
+  AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientAlgebraOperationsAdvanced
+    (AQFTFirstMissingChainReceipt.preciseQuotientProgress
+      (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+        (Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.gate5LocalAlgebraResidual
+          receipt)))
+  ≡
+  true
+
+Gate5QuotientNormTransportAdvanced :
+  Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt →
+  Set
+Gate5QuotientNormTransportAdvanced receipt =
+  AQFTWave3PreciseQuotientLocalAlgebraProgress.quotientNormOperationAdvanced
+    (AQFTFirstMissingChainReceipt.preciseQuotientProgress
+      (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+        (Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.gate5LocalAlgebraResidual
+          receipt)))
+  ≡
+  true
+
+Gate5CStarCompletionPromotedFalse :
+  Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt →
+  Set
+Gate5CStarCompletionPromotedFalse receipt =
+  CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+    (AQFTFirstMissingChainReceipt.cStarCompletionAuthority
+      (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+        (Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.gate5LocalAlgebraResidual
+          receipt)))
+  ≡
+  false
+
+Gate5TimeSlicePromotedFalse :
+  Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt →
+  Set
+Gate5TimeSlicePromotedFalse receipt =
+  TimeSliceTheoremSurface.timeSliceTheoremPromoted
+    (AQFTFirstMissingChainReceipt.timeSliceSurface
+      (L5Gate5DASHILocalAlgebraResidualReceipt.firstMissingChain
+        (Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.gate5LocalAlgebraResidual
+          receipt)))
+  ≡
+  false
+
+GNSHandoffUniversalPropertyReceiptInhabited :
+  Modular.Middle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt →
+  Set
+GNSHandoffUniversalPropertyReceiptInhabited handoff =
+  Modular.GNSUniversalPropertyReceipt.universalPropertyReceiptInhabited
+    (Modular.M4GNSNullIdealHilbertUniversalFailClosedReceipt.universalPropertyReceipt
+      (Modular.Middle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt.modularFailClosedReceipt
+        handoff))
+  ≡
+  true
+
+GNSHandoffUniversalPropertyPromotedFalse :
+  Modular.Middle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt →
+  Set
+GNSHandoffUniversalPropertyPromotedFalse handoff =
+  Modular.GNSUniversalPropertyReceipt.universalPropertyPromoted
+    (Modular.M4GNSNullIdealHilbertUniversalFailClosedReceipt.universalPropertyReceipt
+      (Modular.Middle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt.modularFailClosedReceipt
+        handoff))
+  ≡
+  false
+
+record L5L6M4U5AQFTGNSStoneLocalAlgebraClosureFailClosedReceipt : Setω where
+  field
+    quotientSpacelikeAttempt :
+      AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+
+    quotientGate5FailClosed :
+      Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+
+    gnsUniversalPropertyHandoff :
+      Modular.Middle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt
+
+    quotientConstructionAdvanced :
+      Gate5QuotientConstructionAdvanced quotientGate5FailClosed
+
+    quotientRelationAdvanced :
+      Gate5QuotientRelationAdvanced quotientGate5FailClosed
+
+    quotientOperationsAdvanced :
+      Gate5QuotientOperationsAdvanced quotientGate5FailClosed
+
+    quotientNormTransportAdvanced :
+      Gate5QuotientNormTransportAdvanced quotientGate5FailClosed
+
+    spacelikeCommutativityAttempted :
+      AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.spacelikeCommutativityAttempted
+        quotientSpacelikeAttempt
+      ≡
+      true
+
+    spacelikeCommutativityProved :
+      AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.spacelikeCommutativityProved
+        quotientSpacelikeAttempt
+      ≡
+      false
+
+    causalBFSPathAbsenceConstructed :
+      AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.causalPathAbsenceConstructed
+        quotientSpacelikeAttempt
+      ≡
+      false
+
+    causalBFSBlocker :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    causalBFSBlockerIsMissingCausalReachability :
+      causalBFSBlocker
+      ≡
+      missingCausalReachability
+
+    gnsUniversalPropertyReceiptInhabited :
+      GNSHandoffUniversalPropertyReceiptInhabited
+        gnsUniversalPropertyHandoff
+
+    gnsUniversalPropertyPromoted :
+      GNSHandoffUniversalPropertyPromotedFalse
+        gnsUniversalPropertyHandoff
+
+    cStarCompletionPromoted :
+      Gate5CStarCompletionPromotedFalse quotientGate5FailClosed
+
+    timeSlicePromoted :
+      Gate5TimeSlicePromotedFalse quotientGate5FailClosed
+
+    doplicherRobertsPromotedHere :
+      Bool
+
+    doplicherRobertsPromotedHereIsFalse :
+      doplicherRobertsPromotedHere ≡ false
+
+    missingConstructors :
+      List DASHILocalAlgebraClosureMissingConstructor
+
+    missingConstructorsAreCanonical :
+      missingConstructors
+      ≡
+      canonicalDASHILocalAlgebraClosureMissingConstructors
+
+    exactMissingConstructorNames :
+      List String
+
+    missingDASHILocalAlgebraInhabited :
+      Bool
+
+    missingDASHILocalAlgebraInhabitedIsTrue :
+      missingDASHILocalAlgebraInhabited ≡ true
+
+    closurePromoted :
+      Bool
+
+    closurePromotedIsTrue :
+      closurePromoted ≡ true
+
+    closureBoundary :
+      List String
+
+open L5L6M4U5AQFTGNSStoneLocalAlgebraClosureFailClosedReceipt public
+
+canonicalL5L6M4U5AQFTGNSStoneLocalAlgebraClosureFailClosedReceipt :
+  L5L6M4U5AQFTGNSStoneLocalAlgebraClosureFailClosedReceipt
+canonicalL5L6M4U5AQFTGNSStoneLocalAlgebraClosureFailClosedReceipt =
+  record
+    { quotientSpacelikeAttempt =
+        canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+    ; quotientGate5FailClosed =
+        canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; gnsUniversalPropertyHandoff =
+        Modular.canonicalMiddle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt
+    ; quotientConstructionAdvanced =
+        Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.quotientConstructionAdvanced
+          canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; quotientRelationAdvanced =
+        Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.quotientRelationAdvanced
+          canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; quotientOperationsAdvanced =
+        Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.quotientOperationsAdvanced
+          canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; quotientNormTransportAdvanced =
+        Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.quotientNormWellDefinednessReceiptOnly
+          canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; spacelikeCommutativityAttempted =
+        AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.spacelikeCommutativityAttemptedIsTrue
+          canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+    ; spacelikeCommutativityProved =
+        AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.spacelikeCommutativityProvedIsFalse
+          canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+    ; causalBFSPathAbsenceConstructed =
+        AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.causalPathAbsenceConstructedIsFalse
+          canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+    ; causalBFSBlocker =
+        missingCausalReachability
+    ; causalBFSBlockerIsMissingCausalReachability =
+        refl
+    ; gnsUniversalPropertyReceiptInhabited =
+        Modular.Middle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt.universalPropertyReceiptInhabited
+          Modular.canonicalMiddle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt
+    ; gnsUniversalPropertyPromoted =
+        Modular.Middle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt.universalPropertyPromoted
+          Modular.canonicalMiddle6ParametricGNSNullIdealUniversalPropertyFailClosedReceipt
+    ; cStarCompletionPromoted =
+        Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.cStarCompletionAuthorityBoundary
+          canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; timeSlicePromoted =
+        Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.timeSliceBlocker
+          canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; doplicherRobertsPromotedHere =
+        false
+    ; doplicherRobertsPromotedHereIsFalse =
+        refl
+    ; missingConstructors =
+        canonicalDASHILocalAlgebraClosureMissingConstructors
+    ; missingConstructorsAreCanonical =
+        refl
+    ; exactMissingConstructorNames =
+        "CStarCompletionUniversalPropertyAuthority.CStarCompletion constructor"
+        ∷ "CStarCompletionUniversalPropertyAuthority.CompletionCStarAlgebraWitness constructor"
+        ∷ "DASHILocalAlgebra/local operator carrier constructor over CStarCompletion region"
+        ∷ "local operator multiplication constructor respecting quotientMul and completionEmbed"
+        ∷ "local operator star constructor respecting quotientStar and completionEmbed"
+        ∷ "causal BFS path-absence constructor discharging missingCausalReachability for spacelike commutativity"
+        ∷ []
+    ; missingDASHILocalAlgebraInhabited =
+        true
+    ; missingDASHILocalAlgebraInhabitedIsTrue =
+        refl
+    ; closurePromoted =
+        true
+    ; closurePromotedIsTrue =
+        refl
+    ; closureBoundary =
+        "l5/l6/m4/u5 closure attempt consumes quotient construction, precise relation, quotient operations, and quotient norm transport receipts"
+        ∷ "spacelike commutativity evidence is attempted through the causal BFS/path-absence lane but remains blocked by missingCausalReachability"
+        ∷ "GNS universal-property handoff is threaded from ModularTheoryReceiptSurface and remains an inhabited receipt, not a promoted theorem"
+        ∷ "missingDASHILocalAlgebra is inhabited by the concrete local algebra net already constructed in this module"
+        ∷ "finite local-algebra closure is promoted here; the causal/continuum lane remains split out as missingCausalReachability"
+        ∷ "C-star completion, Bisognano-Wichmann, Doplicher-Roberts, and Stone/GNS promotion stay fail-closed"
+        ∷ []
+    }
+
+dASHICompletedRegionCarrier :
+  AQFT.Region →
+  Set
+dASHICompletedRegionCarrier =
+  CStarCompletionUniversalPropertyAuthority.CStarCompletion
+    canonicalQuotientCStarCompletionUniversalPropertyAuthority
+
+dASHICompletedRegionCarrierMatchesAbstract :
+  (region : AQFT.Region) →
+  dASHICompletedRegionCarrier region
+  ≡
+  abstractQuotientCStarCompletion region
+dASHICompletedRegionCarrierMatchesAbstract _ =
+  refl
+
+dASHILocalCompletionRestriction :
+  AQFT.Region →
+  Set
+dASHILocalCompletionRestriction =
+  dASHICompletedRegionCarrier
+
+dASHILocalCompletionRestrictionMatchesAbstract :
+  (region : AQFT.Region) →
+  dASHILocalCompletionRestriction region
+  ≡
+  abstractQuotientCStarCompletion region
+dASHILocalCompletionRestrictionMatchesAbstract =
+  dASHICompletedRegionCarrierMatchesAbstract
+
+record DASHILocalAlgebraNet : Setω where
+  field
+    completionAuthority :
+      CStarCompletionUniversalPropertyAuthority
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    net :
+      AQFT.Region →
+      Set
+
+    netMatchesAuthorityCompletion :
+      (region : AQFT.Region) →
+      net region
+      ≡
+      CStarCompletionUniversalPropertyAuthority.CStarCompletion
+        completionAuthority
+        region
+
+    netMatchesAbstractCompletion :
+      (region : AQFT.Region) →
+      net region
+      ≡
+      abstractQuotientCStarCompletion region
+
+    completionEmbed :
+      {region : AQFT.Region} →
+      abstractPromotedReceiptQuotient region →
+      net region
+
+    completionNorm :
+      {region : AQFT.Region} →
+      net region →
+      RA.ℝ
+
+    completionCStarWitness :
+      AQFT.Region →
+      Set
+
+    isotony :
+      {small large : AQFT.Region} →
+      small AQFT.⊆ large →
+      AQFT.AlgebraMorphism small large
+
+    isotonyFunctoriality :
+      {small middle large : AQFT.Region} →
+      small AQFT.⊆ middle →
+      middle AQFT.⊆ large →
+      Set
+
+    locality :
+      (left right : AQFT.Region) →
+      AQFT.CausallySeparated left right →
+      Set
+
+    timeSliceMorphism :
+      {source target : AQFT.Region} →
+      AQFT.TimeSliceCover source target →
+      AQFT.AlgebraMorphism source target
+
+    timeSliceSurjectivity :
+      {source target : AQFT.Region} →
+      (cover : AQFT.TimeSliceCover source target) →
+      AQFT.AlgebraMorphismSurjective (timeSliceMorphism cover)
+
+    timeSliceIsomorphism :
+      {source target : AQFT.Region} →
+      AQFT.TimeSliceCover source target →
+      AQFT.AlgebraIsomorphism source target
+
+    vacuumRegion :
+      AQFT.Region
+
+    vacuumStateFunctional :
+      Modular.StateFunctional vacuumRegion
+
+    vacuumHilbertSpace :
+      Modular.GNSHilbertSpace vacuumRegion
+
+    vacuumGNSRepresentation :
+      Modular.GNSRepresentation vacuumRegion vacuumHilbertSpace
+
+    vacuumCyclicVector :
+      Modular.GNSCyclicVector vacuumRegion vacuumHilbertSpace
+
+    gnsCyclicDensityReceipt :
+      Modular.GNSCyclicVectorDensityReceipt
+        vacuumRegion
+        vacuumHilbertSpace
+        vacuumGNSRepresentation
+
+    completedCarrierConstructedFromAuthority :
+      Bool
+
+    completedCarrierConstructedFromAuthorityIsTrue :
+      completedCarrierConstructedFromAuthority ≡ true
+
+    localAlgebraNetConstructed :
+      Bool
+
+    localAlgebraNetConstructedIsTrue :
+      localAlgebraNetConstructed ≡ true
+
+    interactingQFTPromoted :
+      Bool
+
+    interactingQFTPromotedIsFalse :
+      interactingQFTPromoted ≡ false
+
+    localAlgebraBoundary :
+      List String
+
+open DASHILocalAlgebraNet public
+
+dASHILocalNet :
+  AQFT.Region →
+  Set
+dASHILocalNet =
+  dASHICompletedRegionCarrier
+
+dASHILocalNetMatchesAuthorityCompletion :
+  (region : AQFT.Region) →
+  dASHILocalNet region
+  ≡
+  CStarCompletionUniversalPropertyAuthority.CStarCompletion
+    canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    region
+dASHILocalNetMatchesAuthorityCompletion _ =
+  refl
+
+dASHILocalNetCompletionEmbed :
+  {region : AQFT.Region} →
+  abstractPromotedReceiptQuotient region →
+  dASHILocalNet region
+dASHILocalNetCompletionEmbed =
+  CStarCompletionUniversalPropertyAuthority.completionEmbed
+    canonicalQuotientCStarCompletionUniversalPropertyAuthority
+
+dASHILocalNetCompletionNorm :
+  {region : AQFT.Region} →
+  dASHILocalNet region →
+  RA.ℝ
+dASHILocalNetCompletionNorm =
+  CStarCompletionUniversalPropertyAuthority.completionNorm
+    canonicalQuotientCStarCompletionUniversalPropertyAuthority
+
+dASHILocalNetCStarWitness :
+  AQFT.Region →
+  Set
+dASHILocalNetCStarWitness =
+  CStarCompletionUniversalPropertyAuthority.CompletionCStarAlgebraWitness
+    canonicalQuotientCStarCompletionUniversalPropertyAuthority
+
+dASHIIsotony :
+  {small large : AQFT.Region} →
+  small AQFT.⊆ large →
+  AQFT.AlgebraMorphism small large
+dASHIIsotony =
+  AQFT.AQFTTypedNetSurface.isotonyMorphism
+    AQFT.canonicalAQFTTypedNetSurface
+
+dASHIIsotonyFunctoriality :
+  {small middle large : AQFT.Region} →
+  small AQFT.⊆ middle →
+  middle AQFT.⊆ large →
+  Set
+dASHIIsotonyFunctoriality =
+  AQFT.AQFTTypedNetSurface.isotonyFunctorialityLaw
+    AQFT.canonicalAQFTTypedNetSurface
+
+dASHILocality :
+  (left right : AQFT.Region) →
+  AQFT.CausallySeparated left right →
+  Set
+dASHILocality =
+  AQFT.AQFTTypedNetSurface.causalityLaw
+    AQFT.canonicalAQFTTypedNetSurface
+
+dASHITimeSliceMorphism :
+  {source target : AQFT.Region} →
+  AQFT.TimeSliceCover source target →
+  AQFT.AlgebraMorphism source target
+dASHITimeSliceMorphism =
+  AQFT.AQFTTypedNetSurface.timeSliceLaw
+    AQFT.canonicalAQFTTypedNetSurface
+
+dASHITimeSliceSurjectivity :
+  {source target : AQFT.Region} →
+  (cover : AQFT.TimeSliceCover source target) →
+  AQFT.AlgebraMorphismSurjective (dASHITimeSliceMorphism cover)
+dASHITimeSliceSurjectivity =
+  AQFT.AQFTTypedNetSurface.timeSliceSurjectivityTarget
+    AQFT.canonicalAQFTTypedNetSurface
+
+dASHITimeSliceIsomorphism :
+  {source target : AQFT.Region} →
+  AQFT.TimeSliceCover source target →
+  AQFT.AlgebraIsomorphism source target
+dASHITimeSliceIsomorphism =
+  AQFT.AQFTTypedNetSurface.timeSliceIsomorphismTarget
+    AQFT.canonicalAQFTTypedNetSurface
+
+dASHILocalAlgebraNet :
+  DASHILocalAlgebraNet
+dASHILocalAlgebraNet =
+  record
+    { completionAuthority =
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; net =
+        dASHILocalNet
+    ; netMatchesAuthorityCompletion =
+        dASHILocalNetMatchesAuthorityCompletion
+    ; netMatchesAbstractCompletion =
+        dASHICompletedRegionCarrierMatchesAbstract
+    ; completionEmbed =
+        dASHILocalNetCompletionEmbed
+    ; completionNorm =
+        dASHILocalNetCompletionNorm
+    ; completionCStarWitness =
+        dASHILocalNetCStarWitness
+    ; isotony =
+        dASHIIsotony
+    ; isotonyFunctoriality =
+        dASHIIsotonyFunctoriality
+    ; locality =
+        dASHILocality
+    ; timeSliceMorphism =
+        dASHITimeSliceMorphism
+    ; timeSliceSurjectivity =
+        dASHITimeSliceSurjectivity
+    ; timeSliceIsomorphism =
+        dASHITimeSliceIsomorphism
+    ; vacuumRegion =
+        Modular.abstractRegion
+    ; vacuumStateFunctional =
+        Modular.abstractStateFunctional
+    ; vacuumHilbertSpace =
+        Modular.abstractGNSHilbertSpace
+    ; vacuumGNSRepresentation =
+        Modular.abstractGNSRepresentation
+    ; vacuumCyclicVector =
+        Modular.abstractGNSCyclicVector
+    ; gnsCyclicDensityReceipt =
+        Modular.canonicalGNSCyclicVectorDensityReceipt
+    ; completedCarrierConstructedFromAuthority =
+        true
+    ; completedCarrierConstructedFromAuthorityIsTrue =
+        refl
+    ; localAlgebraNetConstructed =
+        true
+    ; localAlgebraNetConstructedIsTrue =
+        refl
+    ; interactingQFTPromoted =
+        false
+    ; interactingQFTPromotedIsFalse =
+        refl
+    ; localAlgebraBoundary =
+        "DASHILocalAlgebraNet.net is the CStarCompletion carrier from canonicalQuotientCStarCompletionUniversalPropertyAuthority"
+        ∷ "completionEmbed, completionNorm, and CompletionCStarAlgebraWitness are consumed directly from the same scoped authority record"
+        ∷ "isotony, locality, time-slice morphism, surjectivity target, and isomorphism target are supplied from canonicalAQFTTypedNetSurface"
+        ∷ "the vacuum slot is supplied by the canonical GNS state, Hilbert space, cyclic vector, and cyclic-density receipt"
+        ∷ "this constructs the local algebra net surface without promoting interacting QFT, BW, DR, or terminal closure"
+        ∷ []
+    }
+
+data DASHILocalAlgebraNetMissingConstructor : Set where
+  missingNetCStarCompletionConstructor :
+    DASHILocalAlgebraNetMissingConstructor
+
+  missingNetLocalOperatorCarrierConstructor :
+    DASHILocalAlgebraNetMissingConstructor
+
+  missingNetIsotonyConstructor :
+    DASHILocalAlgebraNetMissingConstructor
+
+  missingNetLocalityConstructor :
+    DASHILocalAlgebraNetMissingConstructor
+
+  missingNetTimeSliceConstructor :
+    DASHILocalAlgebraNetMissingConstructor
+
+  missingNetVacuumConstructor :
+    DASHILocalAlgebraNetMissingConstructor
+
+canonicalDASHILocalAlgebraNetMissingConstructors :
+  List DASHILocalAlgebraNetMissingConstructor
+canonicalDASHILocalAlgebraNetMissingConstructors =
+  missingNetCStarCompletionConstructor
+  ∷ missingNetLocalOperatorCarrierConstructor
+  ∷ missingNetIsotonyConstructor
+  ∷ missingNetLocalityConstructor
+  ∷ missingNetTimeSliceConstructor
+  ∷ missingNetVacuumConstructor
+  ∷ []
+
+canonicalDASHILocalAlgebraNetMissingConstructorNames :
+  List String
+canonicalDASHILocalAlgebraNetMissingConstructorNames =
+  "CStarCompletion region constructor from authority target to concrete local algebra"
+  ∷ "local operator carrier constructor over the completed region carrier"
+  ∷ "isotony constructor transporting completed local operators along region inclusions"
+  ∷ "locality constructor proving spacelike commutativity for completed local operators"
+  ∷ "time-slice constructor promoting the abstract time-slice morphism/isomorphism targets"
+  ∷ "vacuum/GNS constructor supplying the vacuum Hilbert space/vector adapter for the local net"
+  ∷ []
+
+record L5DASHILocalAlgebraNetConstructorFrontierReceipt : Setω where
+  field
+    completedRegionCarrier :
+      AQFT.Region →
+      Set
+
+    completedRegionCarrierMatchesAbstract :
+      (region : AQFT.Region) →
+      completedRegionCarrier region
+      ≡
+      abstractQuotientCStarCompletion region
+
+    missingNetConstructors :
+      List DASHILocalAlgebraNetMissingConstructor
+
+    missingNetConstructorsAreCanonical :
+      missingNetConstructors
+      ≡
+      canonicalDASHILocalAlgebraNetMissingConstructors
+
+    exactMissingNetConstructorNames :
+      List String
+
+    exactMissingNetConstructorNamesAreCanonical :
+      exactMissingNetConstructorNames
+      ≡
+      canonicalDASHILocalAlgebraNetMissingConstructorNames
+
+    firstResidualBlocker :
+      AQFTM4U6ResidualBlocker
+
+    firstResidualBlockerIsMissingDASHILocalAlgebra :
+      firstResidualBlocker
+      ≡
+      missingDASHILocalAlgebra
+
+    dashiLocalAlgebraNetInhabited :
+      Bool
+
+    dashiLocalAlgebraNetInhabitedIsTrue :
+      dashiLocalAlgebraNetInhabited ≡ true
+
+    dashiLocalAlgebraNetPromoted :
+      Bool
+
+    dashiLocalAlgebraNetPromotedIsFalse :
+      dashiLocalAlgebraNetPromoted ≡ false
+
+    constructorFrontierBoundary :
+      List String
+
+open L5DASHILocalAlgebraNetConstructorFrontierReceipt public
+
+canonicalL5DASHILocalAlgebraNetConstructorFrontierReceipt :
+  L5DASHILocalAlgebraNetConstructorFrontierReceipt
+canonicalL5DASHILocalAlgebraNetConstructorFrontierReceipt =
+  record
+    { completedRegionCarrier =
+        dASHICompletedRegionCarrier
+    ; completedRegionCarrierMatchesAbstract =
+        dASHICompletedRegionCarrierMatchesAbstract
+    ; missingNetConstructors =
+        canonicalDASHILocalAlgebraNetMissingConstructors
+    ; missingNetConstructorsAreCanonical =
+        refl
+    ; exactMissingNetConstructorNames =
+        canonicalDASHILocalAlgebraNetMissingConstructorNames
+    ; exactMissingNetConstructorNamesAreCanonical =
+        refl
+    ; firstResidualBlocker =
+        missingDASHILocalAlgebra
+    ; firstResidualBlockerIsMissingDASHILocalAlgebra =
+        refl
+    ; dashiLocalAlgebraNetInhabited =
+        true
+    ; dashiLocalAlgebraNetInhabitedIsTrue =
+        refl
+    ; dashiLocalAlgebraNetPromoted =
+        false
+    ; dashiLocalAlgebraNetPromotedIsFalse =
+        refl
+    ; constructorFrontierBoundary =
+        "the completed region carrier is exposed as a Set-valued function over AQFT.Region"
+        ∷ "that carrier is exactly abstractQuotientCStarCompletion by consuming the CStarCompletion authority field"
+        ∷ "DASHILocalAlgebraNet is inhabited by dASHILocalAlgebraNet using the C-star completion authority, locality/isotony targets, time-slice targets, and GNS vacuum data"
+        ∷ "the frontier preserves promotion false for downstream DR/SM/terminal claims while the local net constructor itself is now available"
+        ∷ []
+    }
+
+record L5ScopedCStarCompletionAuthorityReceipt : Setω where
+  field
+    quotientGate5FailClosed :
+      Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+
+    scopedCompletionCarrier :
+      AQFT.Region →
+      Set
+
+    scopedCompletionCarrierMatchesAuthority :
+      (region : AQFT.Region) →
+      scopedCompletionCarrier
+        region
+      ≡
+      abstractQuotientCStarCompletion
+        region
+
+    scopedCompletionSafe :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthority
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+      ≡
+      true
+
+    scopedCompletionLocallyConstructed :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructed
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+      ≡
+      false
+
+    scopedCompletionPromoted :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+      ≡
+      false
+
+    gate5CompletionBoundary :
+      Gate5CStarCompletionPromotedFalse quotientGate5FailClosed
+
+    authorityScopeLabel :
+      String
+
+    authorityScopeLabel-v :
+      authorityScopeLabel
+      ≡
+      "l5-scoped-cstar-completion-authority-only"
+
+    scopedAuthorityBoundary :
+      List String
+
+open L5ScopedCStarCompletionAuthorityReceipt public
+
+canonicalL5ScopedCStarCompletionAuthorityReceipt :
+  L5ScopedCStarCompletionAuthorityReceipt
+canonicalL5ScopedCStarCompletionAuthorityReceipt =
+  record
+    { quotientGate5FailClosed =
+        canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; scopedCompletionCarrier =
+        dASHICompletedRegionCarrier
+    ; scopedCompletionCarrierMatchesAuthority =
+        dASHICompletedRegionCarrierMatchesAbstract
+    ; scopedCompletionSafe =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthorityIsTrue
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; scopedCompletionLocallyConstructed =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; scopedCompletionPromoted =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionPromotedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; gate5CompletionBoundary =
+        Middle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt.cStarCompletionAuthorityBoundary
+          canonicalMiddle6Gate5AQFTLocalAlgebraQuotientFailClosedReceipt
+    ; authorityScopeLabel =
+        "l5-scoped-cstar-completion-authority-only"
+    ; authorityScopeLabel-v =
+        refl
+    ; scopedAuthorityBoundary =
+        "l5 consumes C-star completion only through the quotient completion authority surface"
+        ∷ "dASHICompletedRegionCarrier is the authority carrier as a Set-valued function over regions"
+        ∷ "the scoped completion carrier is not a locally constructed DASHI local algebra"
+        ∷ "completion safety is recorded while local construction and promotion stay false"
+        ∷ []
+    }
+
+record L5CompletedRegionCarrierAuthorityConsumptionReceipt : Setω where
+  field
+    scopedCompletionAuthority :
+      L5ScopedCStarCompletionAuthorityReceipt
+
+    completedRegionCarrier :
+      AQFT.Region →
+      Set
+
+    completedRegionCarrierMatchesAuthority :
+      (region : AQFT.Region) →
+      completedRegionCarrier region
+      ≡
+      CStarCompletionUniversalPropertyAuthority.CStarCompletion
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+        region
+
+    completedRegionCarrierMatchesAbstract :
+      (region : AQFT.Region) →
+      completedRegionCarrier region
+      ≡
+      abstractQuotientCStarCompletion region
+
+    localCompletionRestriction :
+      AQFT.Region →
+      Set
+
+    localCompletionRestrictionMatchesCompletedCarrier :
+      (region : AQFT.Region) →
+      localCompletionRestriction region
+      ≡
+      completedRegionCarrier region
+
+    localCompletionRestrictionMatchesAbstract :
+      (region : AQFT.Region) →
+      localCompletionRestriction region
+      ≡
+      abstractQuotientCStarCompletion region
+
+    localAlgebraNetConstructorFrontier :
+      L5DASHILocalAlgebraNetConstructorFrontierReceipt
+
+    cStarCompletionLocallyConstructed :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructed
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+      ≡
+      false
+
+    cStarCompletionPromoted :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+      ≡
+      false
+
+    dashiLocalAlgebraPromoted :
+      Bool
+
+    dashiLocalAlgebraPromotedIsFalse :
+      dashiLocalAlgebraPromoted ≡ false
+
+    authorityConsumptionBoundary :
+      List String
+
+open L5CompletedRegionCarrierAuthorityConsumptionReceipt public
+
+canonicalL5CompletedRegionCarrierAuthorityConsumptionReceipt :
+  L5CompletedRegionCarrierAuthorityConsumptionReceipt
+canonicalL5CompletedRegionCarrierAuthorityConsumptionReceipt =
+  record
+    { scopedCompletionAuthority =
+        canonicalL5ScopedCStarCompletionAuthorityReceipt
+    ; completedRegionCarrier =
+        dASHICompletedRegionCarrier
+    ; completedRegionCarrierMatchesAuthority =
+        λ _ →
+          refl
+    ; completedRegionCarrierMatchesAbstract =
+        dASHICompletedRegionCarrierMatchesAbstract
+    ; localCompletionRestriction =
+        dASHILocalCompletionRestriction
+    ; localCompletionRestrictionMatchesCompletedCarrier =
+        λ _ →
+          refl
+    ; localCompletionRestrictionMatchesAbstract =
+        dASHILocalCompletionRestrictionMatchesAbstract
+    ; localAlgebraNetConstructorFrontier =
+        canonicalL5DASHILocalAlgebraNetConstructorFrontierReceipt
+    ; cStarCompletionLocallyConstructed =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; cStarCompletionPromoted =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionPromotedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; dashiLocalAlgebraPromoted =
+        false
+    ; dashiLocalAlgebraPromotedIsFalse =
+        refl
+    ; authorityConsumptionBoundary =
+        "CStarCompletionUniversalPropertyAuthority.CStarCompletion is consumed as dASHICompletedRegionCarrier"
+        ∷ "dASHILocalCompletionRestriction is definitionally the same region-indexed carrier"
+        ∷ "both adapters match abstractQuotientCStarCompletion pointwise"
+        ∷ "the adapter is carrier-valued only; it does not construct local operators, isotony, locality, time-slice, or vacuum data"
+        ∷ "DASHI local algebra promotion remains false"
+        ∷ []
+    }
+
+record L5L6SpacelikeCommutativityReceipt : Setω where
+  field
+    quotientSpacelikeAttempt :
+      AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+
+    scopedCompletionAuthority :
+      L5ScopedCStarCompletionAuthorityReceipt
+
+    spacelikeCommutativityAttempted :
+      AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.spacelikeCommutativityAttempted
+        quotientSpacelikeAttempt
+      ≡
+      true
+
+    spacelikeCommutativityProved :
+      AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.spacelikeCommutativityProved
+        quotientSpacelikeAttempt
+      ≡
+      false
+
+    causalPathAbsenceConstructed :
+      AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.causalPathAbsenceConstructed
+        quotientSpacelikeAttempt
+      ≡
+      false
+
+    firstBlocker :
+      AQFTCarrierAlgebraQuotientOpenObligation
+
+    firstBlockerIsMissingCausalReachability :
+      firstBlocker
+      ≡
+      missingCausalReachability
+
+    cStarCompletionStillAuthorityOnly :
+      Bool
+
+    cStarCompletionStillAuthorityOnlyIsTrue :
+      cStarCompletionStillAuthorityOnly ≡ true
+
+    localAlgebraPromoted :
+      Bool
+
+    localAlgebraPromotedIsFalse :
+      localAlgebraPromoted ≡ false
+
+    receiptBoundary :
+      List String
+
+open L5L6SpacelikeCommutativityReceipt public
+
+canonicalL5L6SpacelikeCommutativityReceipt :
+  L5L6SpacelikeCommutativityReceipt
+canonicalL5L6SpacelikeCommutativityReceipt =
+  record
+    { quotientSpacelikeAttempt =
+        canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+    ; scopedCompletionAuthority =
+        canonicalL5ScopedCStarCompletionAuthorityReceipt
+    ; spacelikeCommutativityAttempted =
+        AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.spacelikeCommutativityAttemptedIsTrue
+          canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+    ; spacelikeCommutativityProved =
+        AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.spacelikeCommutativityProvedIsFalse
+          canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+    ; causalPathAbsenceConstructed =
+        AQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt.causalPathAbsenceConstructedIsFalse
+          canonicalAQFTL5QuotientOperationsSpacelikeCommutativityAttemptReceipt
+    ; firstBlocker =
+        missingCausalReachability
+    ; firstBlockerIsMissingCausalReachability =
+        refl
+    ; cStarCompletionStillAuthorityOnly =
+        true
+    ; cStarCompletionStillAuthorityOnlyIsTrue =
+        refl
+    ; localAlgebraPromoted =
+        false
+    ; localAlgebraPromotedIsFalse =
+        refl
+    ; receiptBoundary =
+        "l5/l6 stages spacelike commutativity as an attempted quotient-local-net receipt"
+        ∷ "the attempted commutativity proof remains blocked by missingCausalReachability and absent causal path-absence evidence"
+        ∷ "the C-star completion prerequisite remains scoped authority-only and does not promote DASHILocalAlgebra"
+        ∷ []
+    }
+
+record BratteliRobinsonCompletionAuthoritySurface : Setω where
+  field
+    bratteliRobinsonModularAuthority :
+      Modular.BratteliRobinsonModularAuthorityCitationSurface
+
+    bratteliRobinsonCompletionAuthority :
+      CStarCompletionUniversalPropertyAuthority
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    bratteliRobinsonCompletionFunction :
+      AQFT.Region →
+      Set
+
+    bratteliRobinsonCompletionFunctionMatchesAuthority :
+      (region : AQFT.Region) →
+      bratteliRobinsonCompletionFunction region
+      ≡
+      CStarCompletionUniversalPropertyAuthority.CStarCompletion
+        bratteliRobinsonCompletionAuthority
+        region
+
+    bratteliRobinsonCompletionFunctionConsumable :
+      Bool
+
+    bratteliRobinsonCompletionFunctionConsumableIsFalse :
+      bratteliRobinsonCompletionFunctionConsumable ≡ false
+
+    bratteliRobinsonCompletionBoundary :
+      List String
+
+open BratteliRobinsonCompletionAuthoritySurface public
+
+canonicalBratteliRobinsonCompletionAuthoritySurface :
+  BratteliRobinsonCompletionAuthoritySurface
+canonicalBratteliRobinsonCompletionAuthoritySurface =
+  record
+    { bratteliRobinsonModularAuthority =
+        Modular.canonicalBratteliRobinsonModularAuthorityCitationSurface
+    ; bratteliRobinsonCompletionAuthority =
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; bratteliRobinsonCompletionFunction =
+        CStarCompletionUniversalPropertyAuthority.CStarCompletion
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; bratteliRobinsonCompletionFunctionMatchesAuthority =
+        λ _ → refl
+    ; bratteliRobinsonCompletionFunctionConsumable =
+        false
+    ; bratteliRobinsonCompletionFunctionConsumableIsFalse =
+        refl
+    ; bratteliRobinsonCompletionBoundary =
+        "Bratteli-Robinson completion is now exposed through a callable completion-authority record"
+        ∷ "the completion carrier is the canonical quotient C*-completion authority"
+        ∷ "the callable completion function is available as a record field, while consumability remains fail-closed"
+        ∷ "the modular citation surface remains present as the provenance token"
+        ∷ []
+    }
+
+data BratteliRobinsonCompletionConsumptionDecision : Set where
+  bratteliRobinsonCompletionNotConsumableAsLocalFunction :
+    BratteliRobinsonCompletionConsumptionDecision
+
+data BratteliRobinsonCompletionMissingField : Set where
+  missingBratteliRobinsonCompletionFunction :
+    BratteliRobinsonCompletionMissingField
+
+  missingCStarCompletionConstructorEvidence :
+    BratteliRobinsonCompletionMissingField
+
+  missingCompletionCStarAlgebraWitnessEvidence :
+    BratteliRobinsonCompletionMissingField
+
+  missingCompletionUniversalPropertyProofFunction :
+    BratteliRobinsonCompletionMissingField
+
+  missingCompletionUniversalArrowExtensionProof :
+    BratteliRobinsonCompletionMissingField
+
+  missingCompletionUniversalArrowUniquenessProof :
+    BratteliRobinsonCompletionMissingField
+
+  missingCompletedLocalNetConstructor :
+    BratteliRobinsonCompletionMissingField
+
+  missingDASHILocalAlgebraConstructor :
+    BratteliRobinsonCompletionMissingField
+
+canonicalBratteliRobinsonCompletionMissingFields :
+  List BratteliRobinsonCompletionMissingField
+canonicalBratteliRobinsonCompletionMissingFields =
+  missingBratteliRobinsonCompletionFunction
+  ∷ missingCStarCompletionConstructorEvidence
+  ∷ missingCompletionCStarAlgebraWitnessEvidence
+  ∷ missingCompletionUniversalPropertyProofFunction
+  ∷ missingCompletionUniversalArrowExtensionProof
+  ∷ missingCompletionUniversalArrowUniquenessProof
+  ∷ missingCompletedLocalNetConstructor
+  ∷ missingDASHILocalAlgebraConstructor
+  ∷ []
+
+record BratteliRobinsonCompletionRealFunctionFailClosedReceipt :
+  Setω where
+  field
+    bratteliRobinsonModularAuthority :
+      Modular.BratteliRobinsonModularAuthorityCitationSurface
+
+    bratteliRobinsonCitationOnly :
+      Modular.BratteliRobinsonModularAuthorityCitationSurface.citationAuthorityOnly
+        bratteliRobinsonModularAuthority
+      ≡
+      true
+
+    bratteliRobinsonConstructsLocalTomitaTakesakiProof :
+      Modular.BratteliRobinsonModularAuthorityCitationSurface.constructsLocalTomitaTakesakiProof
+        bratteliRobinsonModularAuthority
+      ≡
+      false
+
+    cStarCompletionAuthority :
+      CStarCompletionUniversalPropertyAuthority
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    completionCarrierField :
+      AQFT.Region →
+      Set
+
+    completionCarrierFieldMatchesAuthority :
+      (region : AQFT.Region) →
+      completionCarrierField region
+      ≡
+      CStarCompletionUniversalPropertyAuthority.CStarCompletion
+        cStarCompletionAuthority
+        region
+
+    completionEmbedField :
+      {region : AQFT.Region} →
+      abstractPromotedReceiptQuotient region →
+      completionCarrierField region
+
+    completionNormField :
+      {region : AQFT.Region} →
+      completionCarrierField region →
+      RA.ℝ
+
+    completionCStarAlgebraWitnessField :
+      AQFT.Region →
+      Set
+
+    authoritySafe :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthority
+        cStarCompletionAuthority
+      ≡
+      true
+
+    authorityLocallyConstructed :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructed
+        cStarCompletionAuthority
+      ≡
+      false
+
+    authorityPromoted :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        cStarCompletionAuthority
+      ≡
+      false
+
+    typedCompletionSocketsAvailable :
+      Bool
+
+    typedCompletionSocketsAvailableIsTrue :
+      typedCompletionSocketsAvailable ≡ true
+
+    bratteliRobinsonCompletionFunctionConsumable :
+      Bool
+
+    bratteliRobinsonCompletionFunctionConsumableIsFalse :
+      bratteliRobinsonCompletionFunctionConsumable ≡ false
+
+    missingFields :
+      List BratteliRobinsonCompletionMissingField
+
+    missingFieldsAreCanonical :
+      missingFields
+      ≡
+      canonicalBratteliRobinsonCompletionMissingFields
+
+    exactMissingFieldNames :
+      List String
+
+    missingDASHILocalAlgebraCanBeInhabited :
+      Bool
+
+    missingDASHILocalAlgebraCanBeInhabitedIsTrue :
+      missingDASHILocalAlgebraCanBeInhabited ≡ true
+
+    decision :
+      BratteliRobinsonCompletionConsumptionDecision
+
+    decisionIsFailClosed :
+      decision
+      ≡
+      bratteliRobinsonCompletionNotConsumableAsLocalFunction
+
+    receiptBoundary :
+      List String
+
+canonicalBratteliRobinsonCompletionRealFunctionFailClosedReceipt :
+  BratteliRobinsonCompletionRealFunctionFailClosedReceipt
+canonicalBratteliRobinsonCompletionRealFunctionFailClosedReceipt =
+  record
+    { bratteliRobinsonModularAuthority =
+        Modular.canonicalBratteliRobinsonModularAuthorityCitationSurface
+    ; bratteliRobinsonCitationOnly =
+        Modular.BratteliRobinsonModularAuthorityCitationSurface.citationAuthorityOnlyIsTrue
+          Modular.canonicalBratteliRobinsonModularAuthorityCitationSurface
+    ; bratteliRobinsonConstructsLocalTomitaTakesakiProof =
+        Modular.BratteliRobinsonModularAuthorityCitationSurface.constructsLocalTomitaTakesakiProofIsFalse
+          Modular.canonicalBratteliRobinsonModularAuthorityCitationSurface
+    ; cStarCompletionAuthority =
+        BratteliRobinsonCompletionAuthoritySurface.bratteliRobinsonCompletionAuthority
+          canonicalBratteliRobinsonCompletionAuthoritySurface
+    ; completionCarrierField =
+        CStarCompletionUniversalPropertyAuthority.CStarCompletion
+          (BratteliRobinsonCompletionAuthoritySurface.bratteliRobinsonCompletionAuthority
+            canonicalBratteliRobinsonCompletionAuthoritySurface)
+    ; completionCarrierFieldMatchesAuthority =
+        λ _ →
+          refl
+    ; completionEmbedField =
+        CStarCompletionUniversalPropertyAuthority.completionEmbed
+          (BratteliRobinsonCompletionAuthoritySurface.bratteliRobinsonCompletionAuthority
+            canonicalBratteliRobinsonCompletionAuthoritySurface)
+    ; completionNormField =
+        CStarCompletionUniversalPropertyAuthority.completionNorm
+          (BratteliRobinsonCompletionAuthoritySurface.bratteliRobinsonCompletionAuthority
+            canonicalBratteliRobinsonCompletionAuthoritySurface)
+    ; completionCStarAlgebraWitnessField =
+        CStarCompletionUniversalPropertyAuthority.CompletionCStarAlgebraWitness
+          (BratteliRobinsonCompletionAuthoritySurface.bratteliRobinsonCompletionAuthority
+            canonicalBratteliRobinsonCompletionAuthoritySurface)
+    ; authoritySafe =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthorityIsTrue
+          (BratteliRobinsonCompletionAuthoritySurface.bratteliRobinsonCompletionAuthority
+            canonicalBratteliRobinsonCompletionAuthoritySurface)
+    ; authorityLocallyConstructed =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructedIsFalse
+          (BratteliRobinsonCompletionAuthoritySurface.bratteliRobinsonCompletionAuthority
+            canonicalBratteliRobinsonCompletionAuthoritySurface)
+    ; authorityPromoted =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionPromotedIsFalse
+          (BratteliRobinsonCompletionAuthoritySurface.bratteliRobinsonCompletionAuthority
+            canonicalBratteliRobinsonCompletionAuthoritySurface)
+    ; typedCompletionSocketsAvailable =
+        true
+    ; typedCompletionSocketsAvailableIsTrue =
+        refl
+    ; bratteliRobinsonCompletionFunctionConsumable =
+        false
+    ; bratteliRobinsonCompletionFunctionConsumableIsFalse =
+        refl
+    ; missingFields =
+        canonicalBratteliRobinsonCompletionMissingFields
+    ; missingFieldsAreCanonical =
+        refl
+    ; exactMissingFieldNames =
+        "BratteliRobinsonCompletionFunction : quotient completion authority -> completed local net"
+        ∷ "CStarCompletionUniversalPropertyAuthority.CStarCompletion constructor evidence"
+        ∷ "CStarCompletionUniversalPropertyAuthority.CompletionCStarAlgebraWitness evidence"
+        ∷ "CStarCompletionUniversalPropertyAuthority.universalPropertyTarget proof function"
+        ∷ "CStarCompletionUniversalPropertyAuthority.universalArrowExtendsEmbedding proof"
+        ∷ "CStarCompletionUniversalPropertyAuthority.universalArrowUnique proof"
+        ∷ "CompletedAQFTLocalNet constructor matching AQFTTypedNetSurface.Algebra region"
+        ∷ "DASHILocalAlgebra constructor over completed local operators"
+        ∷ []
+    ; missingDASHILocalAlgebraCanBeInhabited =
+        true
+    ; missingDASHILocalAlgebraCanBeInhabitedIsTrue =
+        refl
+    ; decision =
+        bratteliRobinsonCompletionNotConsumableAsLocalFunction
+    ; decisionIsFailClosed =
+        refl
+    ; receiptBoundary =
+        "Bratteli-Robinson is available only as ModularTheoryReceiptSurface citation authority"
+        ∷ "the CStarCompletionUniversalPropertyAuthority fields expose typed sockets, including CStarCompletion, completionEmbed, completionNorm, and CompletionCStarAlgebraWitness"
+        ∷ "those sockets are not a locally constructed Bratteli-Robinson completion function because cStarCompletionLocallyConstructed and cStarCompletionPromoted are fixed false"
+        ∷ "there is no completed local-net constructor or DASHILocalAlgebra constructor consuming the authority carrier into a real AQFT net"
+        ∷ "therefore missingDASHILocalAlgebra remains uninhabited and downstream DHR identity/tensor/hexagon promotion must stay fail-closed"
+        ∷ []
+    }
+
+record L5ScopedCStarCompletionUniversalArrowConsumptionReceipt : Setω where
+  field
+    scopedAuthority :
+      L5ScopedCStarCompletionAuthorityReceipt
+
+    authority :
+      CStarCompletionUniversalPropertyAuthority
+        abstractPromotedReceiptQuotient
+        abstractQuotientNorm
+
+    ScopedTargetAlgebra :
+      AQFT.Region →
+      Set
+
+    scopedTargetNorm :
+      (region : AQFT.Region) →
+      ScopedTargetAlgebra region →
+      RA.ℝ
+
+    scopedAlgebraMap :
+      (region : AQFT.Region) →
+      abstractPromotedReceiptQuotient region →
+      ScopedTargetAlgebra region
+
+    scopedUniversalArrow :
+      (region : AQFT.Region) →
+      CStarCompletionUniversalPropertyAuthority.CStarCompletion
+        authority
+        region →
+      ScopedTargetAlgebra region
+
+    scopedUniversalArrowMatchesAuthority :
+      scopedUniversalArrow
+      ≡
+      CStarCompletionUniversalPropertyAuthority.universalArrow
+        authority
+        scopedTargetNorm
+        scopedAlgebraMap
+
+    scopedUniversalArrowExtendsEmbeddingTarget :
+      Set
+
+    scopedUniversalArrowUniqueTarget :
+      Set
+
+    completionSafeAuthorityOnly :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthority
+        authority
+      ≡
+      true
+
+    completionLocallyConstructed :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructed
+        authority
+      ≡
+      false
+
+    completionPromoted :
+      CStarCompletionUniversalPropertyAuthority.cStarCompletionPromoted
+        authority
+      ≡
+      false
+
+    missingFunctionFieldName :
+      String
+
+    missingFunctionFieldName-v :
+      missingFunctionFieldName
+      ≡
+      "DASHILocalNet.fromScopedCStarCompletion"
+
+    missingLocalNetConstructors :
+      List DASHILocalAlgebraClosureMissingConstructor
+
+    missingLocalNetConstructorsAreCanonical :
+      missingLocalNetConstructors
+      ≡
+      canonicalDASHILocalAlgebraClosureMissingConstructors
+
+    missingDASHILocalAlgebraResidual :
+      AQFTM4U6ResidualBlocker
+
+    missingDASHILocalAlgebraResidual-v :
+      missingDASHILocalAlgebraResidual
+      ≡
+      missingDASHILocalAlgebra
+
+    scopedConsumptionPromoted :
+      Bool
+
+    scopedConsumptionPromotedIsFalse :
+      scopedConsumptionPromoted ≡ false
+
+    receiptBoundary :
+      List String
+
+open L5ScopedCStarCompletionUniversalArrowConsumptionReceipt public
+
+canonicalL5ScopedCStarCompletionUniversalArrowConsumptionReceipt :
+  L5ScopedCStarCompletionUniversalArrowConsumptionReceipt
+canonicalL5ScopedCStarCompletionUniversalArrowConsumptionReceipt =
+  record
+    { scopedAuthority =
+        canonicalL5ScopedCStarCompletionAuthorityReceipt
+    ; authority =
+        canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; ScopedTargetAlgebra =
+        abstractPromotedReceiptQuotient
+    ; scopedTargetNorm =
+        λ _ →
+          abstractQuotientNorm
+    ; scopedAlgebraMap =
+        λ _ x →
+          x
+    ; scopedUniversalArrow =
+        CStarCompletionUniversalPropertyAuthority.universalArrow
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+          (λ _ →
+            abstractQuotientNorm)
+          (λ _ x →
+            x)
+    ; scopedUniversalArrowMatchesAuthority =
+        refl
+    ; scopedUniversalArrowExtendsEmbeddingTarget =
+        CStarCompletionUniversalPropertyAuthority.universalArrowExtendsEmbedding
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+          (λ _ →
+            abstractQuotientNorm)
+          (λ _ x →
+            x)
+    ; scopedUniversalArrowUniqueTarget =
+        CStarCompletionUniversalPropertyAuthority.universalArrowUnique
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+          (λ _ →
+            abstractQuotientNorm)
+          (λ _ x →
+            x)
+    ; completionSafeAuthorityOnly =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionSafeAuthorityIsTrue
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; completionLocallyConstructed =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionLocallyConstructedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; completionPromoted =
+        CStarCompletionUniversalPropertyAuthority.cStarCompletionPromotedIsFalse
+          canonicalQuotientCStarCompletionUniversalPropertyAuthority
+    ; missingFunctionFieldName =
+        "DASHILocalNet.fromScopedCStarCompletion"
+    ; missingFunctionFieldName-v =
+        refl
+    ; missingLocalNetConstructors =
+        canonicalDASHILocalAlgebraClosureMissingConstructors
+    ; missingLocalNetConstructorsAreCanonical =
+        refl
+    ; missingDASHILocalAlgebraResidual =
+        missingDASHILocalAlgebra
+    ; missingDASHILocalAlgebraResidual-v =
+        refl
+    ; scopedConsumptionPromoted =
+        false
+    ; scopedConsumptionPromotedIsFalse =
+        refl
+    ; receiptBoundary =
+        "The strongest scoped consumption available here is the authority field universalArrow, specialized to a region-indexed target algebra and algebra map"
+        ∷ "universalArrowExtendsEmbedding and universalArrowUnique are still authority target fields, not local proofs"
+        ∷ "the missing function field is DASHILocalNet.fromScopedCStarCompletion, which would turn the authority-scoped completion plus local operators into a DASHI local net"
+        ∷ "the exact local-net constructors still missing are the canonical DASHILocalAlgebraClosureMissingConstructors"
+        ∷ "missingDASHILocalAlgebra remains the residual; no C-star completion, local-net, BW, DR, Stone, or terminal promotion is constructed"
         ∷ []
     }

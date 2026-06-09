@@ -1,0 +1,89 @@
+{
+  "gates": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "optionBBlowupFeasibilityLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "optionBFeasibilityLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "optionBBlowupConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "kStarCollapseMechanismClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "compatibilityWithLerayEnergyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "exclusionOfConditionalKStarLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteTimeSingularityExtractionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint94ObstructionInherited",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint94ConditionalKStarInherited",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "sources": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint95OptionBBlowupFeasibilityLedger.agda",
+      "status": "PASS"
+    }
+  ]
+}

@@ -212,6 +212,17 @@ record AcceptedDYLuminosityConventionAuthorityReceipt : Setω where
     requiredPayloadFieldLabels :
       List String
 
+    empiricalCalibrationChecklist :
+      List DY.W4W5DYLuminosityCalibrationChecklistItem
+
+    empiricalCalibrationChecklistIsCanonical :
+      empiricalCalibrationChecklist
+      ≡
+      DY.canonicalW4W5DYLuminosityCalibrationChecklist
+
+    empiricalCalibrationChecklistLabels :
+      List String
+
     ct18ProjectionBindingStatus :
       DY.CT18DASHIProjectionConventionBindingStatus
 
@@ -373,6 +384,13 @@ canonicalAcceptedDYLuminosityConventionAuthorityReceipt =
         ∷ "attestation_no_manual_overfit"
         ∷ "status accepted/rejected/insufficient"
         ∷ []
+    ; empiricalCalibrationChecklist =
+        DY.canonicalW4W5DYLuminosityCalibrationChecklist
+    ; empiricalCalibrationChecklistIsCanonical =
+        refl
+    ; empiricalCalibrationChecklistLabels =
+        DY.W4W5AcceptedDYLuminosityConventionDiagnostic.empiricalCalibrationChecklistLabels
+          DY.canonicalW4W5AcceptedDYLuminosityConventionDiagnostic
     ; ct18ProjectionBindingStatus =
         DY.localCT18GridConventionBoundToProjectionArtifactsCandidateOnly
     ; ct18ProjectionPacketPath =
@@ -395,6 +413,7 @@ canonicalAcceptedDYLuminosityConventionAuthorityReceipt =
         "accepted response: provider accepts the convention and supplies all required fields with provenance"
         ∷ "replacement response: provider rejects the local candidate and supplies a complete replacement convention with the same required fields"
         ∷ "accepted or replacement payloads must supply luminosity values for W5 L43/L45 and the W4 per-bin luminosity vector, or name an accepted provider route that computes them without local tuning"
+        ∷ "accepted or replacement payloads must satisfy the canonical empirical calibration checklist: unit calibration, PDF/luminosity convention, HEPData bin/covariance, chi2/dof reproducibility, scale-setting boundary, and no-free-fit audit"
         ∷ "accepted or replacement payloads must bind efficiency/acceptance, systematic budget, CMS-SMP publication pointer, normalization preservation, and conversion law before W4/W5 runners consume the packet"
         ∷ "accepted or replacement payloads are external inputs only; this canonical receipt does not manufacture them"
         ∷ "downstream W4/W5 receipts may consume an accepted external payload only after separate validation of provenance, checksums, convention fields, and no-manual-overfit attestation"
@@ -443,7 +462,7 @@ canonicalAcceptedDYLuminosityConventionAuthorityReceipt =
     ; attestationNoManualOverfit =
         "missing"
     ; firstMissingStatus =
-        "first missing remains missingAcceptedDYLuminosityConventionAuthority; no external provider answer has supplied luminosity values, efficiency/acceptance model, systematic budget, CMS-SMP publication pointer, normalization preservation law, conversion law, and provenance"
+        "first missing remains missingAcceptedDYLuminosityConventionAuthority; no external provider answer has supplied the empirical calibration checklist, luminosity values, efficiency/acceptance model, systematic budget, CMS-SMP publication pointer, normalization preservation law, conversion law, and provenance"
     ; externalProviderAnswerPresent =
         false
     ; acceptedAuthorityConstructed =

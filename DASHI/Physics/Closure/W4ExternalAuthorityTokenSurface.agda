@@ -19,9 +19,10 @@ import DASHI.Physics.Closure.W4ZAdequacyReceipt as W4Z
 -- needed for W4 Z-window adequacy and downstream physical calibration, while
 -- keeping the local authority token constructorless.  No W4 promotion,
 -- adequacy receipt, or physical calibration receipt is fabricated here.  The
--- internal scaled-decimal strict inequality 9566 > 9000 is discharged in the
--- response-matrix candidate surface, but that witness is not an accepted DY
--- luminosity authority and does not construct W4ZAdequacy.
+-- public Table 2/3 context and response-matrix diagnostics do not provide a
+-- central efficiency/acceptance model.  The older 9566 > 9000 diagonal
+-- arithmetic is retained only as a rejected diagnostic and does not construct
+-- W4ZAdequacy.
 
 data W4ExternalAuthorityToken : Set where
 
@@ -171,8 +172,8 @@ record W4ExternalAuthorityProviderRequest : Setω where
     internalStrictInequalityDischarged :
       Bool
 
-    internalStrictInequalityDischargedIsTrue :
-      internalStrictInequalityDischarged ≡ true
+    internalStrictInequalityDischargedIsFalse :
+      internalStrictInequalityDischarged ≡ false
 
     internalStrictInequalityWitness :
       9000 < 9566
@@ -265,8 +266,8 @@ record W4PublicSourceAuthoritySelfPopulationAttempt : Setω where
     internalStrictInequalityDischarged :
       Bool
 
-    internalStrictInequalityDischargedIsTrue :
-      internalStrictInequalityDischarged ≡ true
+    internalStrictInequalityDischargedIsFalse :
+      internalStrictInequalityDischarged ≡ false
 
     internalStrictInequalityWitness :
       9000 < 9566
@@ -388,7 +389,9 @@ canonicalW4ExternalAuthorityProviderRequest =
         ∷ missingProviderIdentityAndDate
         ∷ []
     ; requestedLuminosityFields =
-        "W4 per-phi-star-bin luminosity vector ell_i for the 76-106 GeV Z window"
+        "source integrated luminosity binding: L_int = 36.3 fb^-1 for CMS-SMP-20-003 / ins2079374"
+        ∷ "do not substitute the full Run-2 137 fb^-1 luminosity for this 2016 CMS-SMP-20-003 package"
+        ∷ "W4 per-phi-star-bin luminosity vector ell_i for the 76-106 GeV Z window"
         ∷ "luminosity definition: PDF set/version, LHAPDF id or equivalent, factorization scale, rapidity/fiducial convention, and bin integration"
         ∷ "normalization preservation law from provider luminosities to the W4 adequacy runner"
         ∷ "covariance/systematic propagation for the accepted per-bin luminosity convention"
@@ -396,8 +399,8 @@ canonicalW4ExternalAuthorityProviderRequest =
     ; diagonalConvention =
         internalPressureDiagonal
     ; diagonalConventionFields =
-        "Use the internal W4 diagonal convention already consumed by the pressure/adequacy surface"
-        ∷ "State whether the provider diagonal is covariance diagonal, inverse-covariance diagonal, or full covariance contraction"
+        "Do not use CMS-SMP-20-003 Table 2/3 or response-matrix diagonals as a central efficiency/acceptance model"
+        ∷ "State whether any provider-supplied diagonal is covariance diagonal, inverse-covariance diagonal, full covariance contraction, or an independent acceptance model"
         ∷ "Bind the conversion from provider diagonal entries to sigma_i in W4ZAdequacyReceipt.canonicalW4ZAdequacyFormula"
         ∷ []
     ; channelCombineConvention =
@@ -429,13 +432,13 @@ canonicalW4ExternalAuthorityProviderRequest =
         ∷ "rejected/insufficient responses must name the exact failed rule or missing field"
         ∷ []
     ; strictInequalityBlocker =
-        "The internal scaled-decimal strict inequality 9566 > 9000 is discharged by W4ResponseMatrixAcceptanceCandidateReceipt.scaledDecimalStrictGreaterThan9566over9000"
-        ∷ "That internal arithmetic witness is non-promoting and does not construct AcceptedDYLuminosityConventionAuthority"
-        ∷ "W4 adequacy remains blocked on the accepted DY luminosity authority, accepted per-bin luminosity vector, and W4ZAdequacy consumer"
+        "The former 9566 > 9000 diagonal-response arithmetic is rejected as W4 adequacy evidence because the source lacks a central efficiency/acceptance model"
+        ∷ "Table 2/3 and response matrices do not construct AcceptedDYLuminosityConventionAuthority"
+        ∷ "W4 adequacy remains blocked on the accepted DY luminosity authority, accepted per-bin luminosity vector, source efficiency/acceptance model or accepted conversion law, and W4ZAdequacy consumer"
         ∷ []
     ; internalStrictInequalityDischarged =
-        true
-    ; internalStrictInequalityDischargedIsTrue =
+        false
+    ; internalStrictInequalityDischargedIsFalse =
         refl
     ; internalStrictInequalityWitness =
         Candidate.scaledDecimalStrictGreaterThan9566over9000
@@ -514,8 +517,8 @@ canonicalW4PublicSourceAuthoritySelfPopulationAttempt =
     ; canSelfPopulateAcceptedDYLuminosityAuthorityIsFalse =
         refl
     ; internalStrictInequalityDischarged =
-        true
-    ; internalStrictInequalityDischargedIsTrue =
+        false
+    ; internalStrictInequalityDischargedIsFalse =
         refl
     ; internalStrictInequalityWitness =
         Candidate.scaledDecimalStrictGreaterThan9566over9000
@@ -533,7 +536,7 @@ canonicalW4PublicSourceAuthoritySelfPopulationAttempt =
         ∷ "Self-population is impossible here because W4ExternalAuthorityToken has no constructor"
         ∷ "Self-population is impossible here because W4ZAdequacyReceipt.AcceptedDYLuminosityConventionAuthority has no constructor"
         ∷ "No token-producing policy hook from public CMS paper/HEPData evidence to those exact result types exists"
-        ∷ "The strict inequality 9566 > 9000 is discharged, but W4ZAdequacy and accepted DY luminosity authority remain uninhabited"
+        ∷ "The former 9566 > 9000 diagonal arithmetic is rejected as source-inadequate; W4ZAdequacy and accepted DY luminosity authority remain uninhabited"
         ∷ []
     }
 

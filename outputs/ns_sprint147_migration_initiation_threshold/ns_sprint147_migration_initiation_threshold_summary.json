@@ -1,0 +1,106 @@
+{
+  "admissibility_formula": "smooth finite-energy admissibility requires finite H1 energy and smooth compact local profiles; it does not imply migration-threshold positivity",
+  "artifact_complete": true,
+  "baseline_formula": "symmetry_plane_diffusion_baseline := nu * |Ltilde v| at z = 0",
+  "blockers": [
+    "MaximumLocationMigrationLemma",
+    "admissibility_does_not_imply_blowup",
+    "blowup_existence_proved_false",
+    "full_clay_ns_solved_false",
+    "large_data_scale_loss",
+    "large_data_source_integral_lower_bound_missing",
+    "log_supercritical_feedback_absorption_missing",
+    "migration_initiation_threshold_proved_false",
+    "off_axis_gain_bound_missing",
+    "uniform_viscous_retention_missing"
+  ],
+  "blowup_existence_proved": false,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint147_migration_initiation_threshold",
+  "control_card": {
+    "C": "Single stdlib Python script writes rows JSON, CSV, summary JSON, Markdown, and manifest through an atomic staging directory.",
+    "F": "Missing: a proved source-integral threshold, off-axis migration exclusion, blowup existence theorem, and Clay promotion eligibility.",
+    "G": "Validation passes only when all seven named rows exist, blockers are explicit, requested flags have the mandated truth values, and the artifact completeness invariant is true.",
+    "L": "Normalize each row against a unit threshold, record threshold margins, and require all proof and promotion flags to remain false while the pure-diffusion baseline flag remains true.",
+    "O": "Lane 2 owns only the Sprint 147 Python emitter and outputs/ns_sprint147_migration_initiation_threshold/ artifacts for the migration-initiation threshold.",
+    "P": "Use the artifact as a threshold evidence packet for the missing MigrationInitiationThresholdForLargeData gate, not as a proof.",
+    "R": "Emit deterministic rows for source integral threshold, symmetry-plane diffusion baseline, off-axis gain, viscosity suppression, log-supercritical feedback, smooth finite-energy admissibility, and the Clay promotion guard.",
+    "S": "The ledger is fail-closed: the symmetry plane remains pure diffusion, but no migration-initiation threshold, blowup existence theorem, or Clay Navier-Stokes solution is proved."
+  },
+  "decision": "fail_closed_migration_initiation_threshold_not_proved",
+  "extra_row_ids": [],
+  "fail_closed": true,
+  "full_clay_ns_solved": false,
+  "invariant_checked": true,
+  "invariant_failures": [],
+  "invariant_valid": true,
+  "invariants_passed": true,
+  "lane": 2,
+  "maximum_location_migration_exclusion": false,
+  "migration_initiation_threshold_proved": false,
+  "migration_threshold_available": false,
+  "migration_threshold_closed": false,
+  "missing_required_row_ids": [],
+  "observed_row_ids": [
+    "source_integral_threshold",
+    "symmetry_plane_diffusion_baseline",
+    "off_axis_gain",
+    "viscosity_suppression",
+    "log_supercritical_feedback",
+    "smooth_finite_energy_admissibility",
+    "clay_promotion_guard"
+  ],
+  "obstruction_row_ids": [
+    "source_integral_threshold",
+    "off_axis_gain",
+    "viscosity_suppression",
+    "log_supercritical_feedback",
+    "smooth_finite_energy_admissibility",
+    "clay_promotion_guard"
+  ],
+  "parent_contract": "ns_sprint146_maximum_location_migration_gate",
+  "parent_gate": "MaximumLocationMigrationLemma",
+  "parent_sprint": 146,
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "pure_diffusion_at_symmetry_plane": true,
+  "required_row_ids": [
+    "clay_promotion_guard",
+    "log_supercritical_feedback",
+    "off_axis_gain",
+    "smooth_finite_energy_admissibility",
+    "source_integral_threshold",
+    "symmetry_plane_diffusion_baseline",
+    "viscosity_suppression"
+  ],
+  "row_count": 7,
+  "sprint": 147,
+  "status_counts": {
+    "ADMISSIBLE_BUT_NOT_PROOF": 1,
+    "LOG_SUPERCRITICAL_FEEDBACK_OPEN": 1,
+    "OFF_AXIS_GAIN_UNCONTROLLED": 1,
+    "PROMOTION_BLOCKED": 1,
+    "PURE_DIFFUSION_BASELINE_AVAILABLE": 1,
+    "THRESHOLD_NOT_REACHED": 1,
+    "VISCOSITY_SUPPRESSION_PRESENT": 1
+  },
+  "summary_hash": "87316b19a76cec459ca6030a0a7e0afd811257c21fce6c1ba2012b6a1346af37",
+  "support_row_ids": [
+    "symmetry_plane_diffusion_baseline",
+    "smooth_finite_energy_admissibility"
+  ],
+  "target_gate": "MigrationInitiationThresholdForLargeData",
+  "threshold_formula": "source_integral_threshold := off_axis_gain * log_supercritical_feedback / max(viscosity_suppression, eps)",
+  "upstream_artifact_state": {
+    "sprint146_maximum_location_migration_gate": {
+      "artifact_complete": true,
+      "clay_navier_stokes_promoted": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "maximum_location_migration_lemma_proved": false,
+      "migration_gate_closed": false,
+      "path": "outputs/ns_sprint146_maximum_location_migration_gate/ns_sprint146_maximum_location_migration_gate_summary.json",
+      "sha256": "cd3e7116d0f890f0af36bfdc4c16d4113bd94d8ae7cb01920cbdb9c6d6aba416"
+    }
+  }
+}

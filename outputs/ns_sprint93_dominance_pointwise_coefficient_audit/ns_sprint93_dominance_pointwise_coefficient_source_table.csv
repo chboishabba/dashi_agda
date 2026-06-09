@@ -1,0 +1,2 @@
+source_id,surface_name,path,present_in_repo,required_anchors,missing_anchors,status
+S1,NSSprint93 dominance pointwise coefficient receipt,DASHI/Physics/Closure/NSSprint93DominancePointwiseCoefficientLedger.agda,True,NSSprint93; Sprint93; DominanceWithPointwiseTailAndIndependentCoefficient; canonical; Sprint92; inherited; Bookkeeping; dangerShellDissipationDominatesInfluxClosed; pointwiseTailFromLocalDissipationClosed; highHighDominanceClosed; independentCoefficientBudgetClosed; clayNavierStokesPromoted,none,PASS

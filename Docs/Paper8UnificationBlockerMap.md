@@ -1,0 +1,258 @@
+# Paper 8 Unification Blocker Map
+
+Status: publication-readiness map; non-promoting.
+
+This document records the current Paper 8 unification blocker posture gate by
+gate. It does not construct a receipt, discharge an authority boundary, or
+promote `terminalClaimPromoted`.
+
+## Phase 1 Target Status
+
+Phase 1 target tracking is active for eight receipt surfaces:
+`RGContractionReceipt`, `UltrametricAubinLionsReceipt`,
+`FinitePrimeLaneDHRSMCompatibilityLedger`,
+`FinitePrimeLaneConjugateDualReceipts`, `ArbitrarySectorClosureReceipt`,
+`G12FromDHRSectorsReceipt`,
+`PenguinDecayCarrierDerivedC9ConstraintTargetReceipt`, and
+`KroneckerLimitAlphaCorrectionReceipt`.  These are blocker/target receipts,
+not promotion receipts.  The active Cabibbo formula is
+`|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)`; the `alpha1*g12` and down-sector formulae
+are legacy diagnostic history.  Tensor fusion, NS Aubin-Lions/smooth
+convergence, and FactorVec RG contraction/fixed point are still open.
+
+## Gate 1: Carrier-To-Physics Functor
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| `CarrierToPhysicsInterpretationFunctor` commits graph-level object/morphism mapping candidates for the core prime lanes; finite p2/p3/p5 DHR/SM compatibility receipts give bounded carrier context. | `Gate1/Gate6.missingExactStandardModelCarrierFunctorMatch`: no physical carrier category, representation-action semantics, functor laws, depth-transition naturality, filtered-colimit preservation, or DHR-sector compatibility proof. | Choose the concrete representation action for each committed prime lane, then inhabit object map, morphism map, identity/composition laws, naturality, filtered-colimit preservation, and exact Gate 6 sector compatibility. |
+
+## Gate 2: S8 Spectral Gap / Yang-Mills Mass-Gap Frontier
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| Bounded Nat S8 witness/compiler surfaces, selected finite-carrier spectral-gap receipts, `CarrierOSPositivityAndWightmanTargetReceipt`, `CarrierFactorVecInjectivityOSPositivityReceipt`, `CarrierRGScaleReceipt`, `RGContractionReceipt`, `RGOperatorNormReceipt`, `FactorVecAverageVsSumReceipt`, `RGOperatorNormFormalProof`, `RGBanachFixedPointReceipt`, `OSPositivityFromRGFixedPoint`, `H0ExplicitMatrixReceipt`, `H0SignConventionReceipt`, `NormalisedH0OSPositivity`, `RGContractionExplicitReceipt`, `WightmanReconstructionCandidateReceipt`, `VacuumSectorReceipt`, `MassiveSubspaceOSPositivity`, `CarrierVEVReceipt`, `CarrierHiggsMassReceipt`, `RGScaleVsCarrierScaleReceipt`, `OSAxiomsContinuumStatus`, `OSPositivityCorrectObjectReceipt`, `ScalarOSTransferMatrixReceipt`, `ClayBothBlockerMapReceipt`, and `ClayBlockerUpdateReceipt` exist.  The newer receipts split the RG route into operator-norm, the parent-sum-versus-normalized-average audit, normalized-average finite contraction, Banach fixed-point, H0 raw-matrix failure, sign-convention repair target, explicit RG formula target, vacuum-sector separation, massive-subspace negative diagnostic, VEV/mass-matrix blocker, Higgs-mass diagnostic, scale-anchoring blocker, scalar-sector-only OS positivity, an explicit scalar transfer matrix, and OS/Wightman axiom status, while keeping Wightman reconstruction, uniform mass-gap construction, Yang-Mills mass-gap promotion, and Clay Yang-Mills promotion false. | The scalar OS sub-blocker is dissolved only for the finite scalar sector, and the alpha1 norm is recorded only for the normalized child-average RG map.  The explicit scalar transfer receipt does not prove full gauge/fermion OS positivity.  The remaining hard YM blockers are continuous `SU3`/gauge identification and continuum RG convergence: no proof that the existing parent-sum RG map has alpha1 norm, no continuum RG convergence/scale anchoring, no full gauge-sector OS/Wightman reconstruction, and no Clay/community acceptance. | Promote only by constructing the continuous `SU3`/gauge identification, consuming the normalized-average RG proof in the full RG surface, applying `RGBanachFixedPointReceipt` at continuum scope, proving continuum RG convergence and scale anchoring, and then supplying the gauge-sector Wightman/Clay authority chain.  Do not describe the scalar OS branch, failed raw H0 branch, massive-subspace block, finite OS receipt, normalized-average contraction, scalar-transfer positivity, Higgs diagnostic, or parent-sum target as Clay Yang-Mills closure. |
+
+## Gate 3: Nonabelian Yang-Mills Field Equation
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| `YangMillsFieldEquationObstruction` and `YangMillsFieldEquationReceipt` package finite carrier/wireup receipts and unsupported-claim flags; selected finite `SU(2)`/`SU(3)` scaffolds and lower identity witnesses exist. | Nonabelian YM primitive pack blocker: missing selected finite gauge-sector Lie algebra carrier completion, coefficient-aware Jacobi where required, non-flat SFGC connection/curvature primitives, field-strength transport action, Hodge star, Killing Ad-invariance, and exact variation/IBP. | Inhabit the primitive nonabelian pack: Lie bracket/Jacobi, covariant derivative, curvature law, Hodge/pairing, Ad-invariance, and variation/IBP, keeping Route A `d^2 = 0` separate from Route B nonabelian dynamics. |
+| Finite current/source target surfaces identify the intended sourced equation boundary. | Finite `D * F = J` blocker: current/source coupling and sourced field-equation theorem are not inhabited even at the selected finite nonabelian surface, and no physical source law is promoted. | After the primitive pack is inhabited, construct the finite sourced equation receipt for `D * F = J`; only then consider any physical/continuum Yang-Mills equation promotion. |
+
+## Gate 4: Non-Flat FactorVec Metric / GR Boundary
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| `FactorVecDiscreteMetricTensorSurface` has supported p2-time inverse-metric, Christoffel, and Riemann witnesses; `ContractedBianchiMatterClosureReceipt`, `WaldGRAuthorityReceipt`, and `FriedmannInstabilitySaddleReceipt` are fail-closed authority/boundary receipts. | Missing valuation Ricci/scalar/Einstein tensor completion, contracted Bianchi proof at the promoted surface, W4 matter/stress-energy interface, sourced Einstein law, carrier identification of `xi = r/t`, continuum existence/smooth-limit authority, and observational cosmology model comparison. | Complete the chosen non-flat metric chain through Ricci, scalar, Einstein tensor, and contracted Bianchi; then attach W4 stress-energy and continuum authority before any sourced GR, Friedmann-cosmology, dark-energy, or LCDM language. |
+
+## Gate 5: Hilbert/Stone And P5' Empirical Target State
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| Finite selected projection/scalar and Stone/GNS bridge surfaces exist. | Hilbert/Stone blocker: no noncollapsed physical phase-space quotient, quotient inner product, completion/topology, reversible traversal group, strong continuity, Stone bundle, self-adjoint generator, or selected physical Hamiltonian equality needed by the YM Clay target. | Inhabit the noncollapsed quotient and Stone data and prove the selected physical generator is the Yang-Mills Hamiltonian where needed. |
+| `PenguinDecayC9C10P5PrimePredictionTargetReceipt` records P5' as a fail-closed C9/C10 angular prediction target with current LHCb route/checksum accounting and residual-law gating.  Current verified artifact hashes include the CMS archive, CMS `Results.yaml`, `ins1486676` record JSON, `ins1486676` Table 3 covariance JSON, and the P5' HEPData table hash tracked in the Gate 5 receipts. | P5' empirical blocker: verified hashes and citation/artifact split do not yet produce accepted new physics.  Remaining blockers are accepted residual-vector authority, accepted CKM source authority, physical Yukawa promotion, accepted C9/C10 Wilson digest, C1/C2 charm-loop authority, freeze/no-posterior-tuning authority, and accepted residual prerequisites; current outcome remains `insufficientAuthority`. | Keep the verified hashes as artifact evidence, then supply the residual-vector, CKM/Yukawa/Wilson/charm-loop, and no-posterior-tuning authorities before any accepted residual classification. |
+
+## Gate 6: DHR Reconstruction
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| Finite p2/p3/p5 DHR carrier receipts, finite local endomorphism/category receipts, finite braiding naturality, five DHR/DR internal axiom receipt kinds, finite CM-character tensor counts `24/8/12`, `FibreFunctorFaithfulnessReceipt`, `FiniteDHRAbelianReconstructionReceipt`, `DHROriginalPaperAuthorityReceipt`, `TannakaKreinFibreFunctorReceipt`, `ConditionalGDHRSMPromotionReceipt`, `ArbitrarySectorClosureReceipt`, `ArbitrarySectorExtensionReceipt`, `BraidingMorphismReceipt`, `ConformalSpinFromCMReceipt`, `DiracSpinSectorReceipt`, `SpinStatisticsConnectionReceipt`, `TensorProductWithSpinReceipt`, `NonAbelianFusionFromSpin`, `GaugeSectorFromSpinCMTensor`, `ColourFromPrimeLaneExtensionReceipt`, `TrialitySymmetryReceipt`, `GluonSectorFromDepth2Receipt`, `U1YFromCMCharacterReceipt`, `SM3FoldSymmetryReceipt`, `NonabelianGapNarrowedReceipt`, `CliffordFromP2LaneReceipt`, `SpinorRepresentationReceipt`, `CliffordCharZeroLiftReceipt`, `AnyonicSectorPhysicsReceipt`, `SU3FromAnyon3FoldReceipt`, `BulkBoundarySU3Receipt`, `SU2kCSSpinStatisticsReceipt`, `SU2Level4CarrierReceipt`, `LevelRankDualityReceipt`, `ConductorLevelCorrespondenceReceipt`, `U1YFromConductorReceipt`, `SMChargeQuantisationReceipt`, `SU2Level4Spin1RepReceipt`, `Spin2FermionInterpretationReceipt`, `KacMoodyLevelReceipt`, `ChargeNormalisationReceipt`, `LeptonSectorGapReceipt`, `FourthLaneHypothesisReceipt`, `SU2LevelMismatchResolutionReceipt`, `FermionicLoopCSShiftReceipt`, `D11D12LeptonLanesReceipt`, `LeptonGenerationMappingReceipt`, `QuarkLeptonCMUnitGroupReceipt`, `ConductorVsDiscriminantReceipt`, `HeegnerOrderingPrincipleReceipt`, `CSLevelFlowFullReceipt`, `SU3ColourFrom3LanesFusionReceipt`, `HyperchargeNormalisationAnomalyReceipt`, `ColourFromNcThreeLanesReceipt`, `SMContentSummaryReceipt`, `QuarkLeptonGeometricSplitReceipt`, `Disc11ExceptionReceipt`, `LeptonYukawaFromLevelOverlapReceipt`, `MuonNeutrinoIsolationReceipt`, `TauLeptonGen3OverlapReceipt`, `LeptonQuarkSeparationFinalReceipt`, `SU2LevelFlowFormalReceipt`, `ColourSU3FromCoprimeLanesReceipt`, `U1YFromZ6ContinuousExtensionReceipt`, `SMGaugeBosonsFromCSBoundaryReceipt`, `EWSBFromCSHiggsReceipt`, and `SMGaugeGroupCandidateReceipt` are inhabited at conditional/frontier scope. | `conditionalOnDRAuthority` is not `G_DHR ~= G_SM`. The finite abelian surface `Z/4 x Z/6 x Z/2` has cardinality 48 and is explicitly not the nonabelian Standard Model gauge group. The finite braiding receipt records only the bosonic symmetric swap. The CM conformal-spin diagnostic gives `h=1,3/4,7/4`, so the prime-lane CM characters are not direct spin-1/2 quark fields. The p2-lane `F4 -> M2(F2)` Clifford surface is recorded, but characteristic 2 has no fermion sign, and the characteristic-zero lift gives an anyonic phase `exp(2*pi*i/3)` rather than a fermionic `-1`; the prime-lane surface is therefore a 2+1D anyonic diagnostic, not a 3+1D quark-field derivation. The conductor and level receipts sharpen the charge/spin lane further: `SU(2)_4` has a convention split (`j=2` is WZW weight `1` but half under the alternate diagnostic), the same `j=2` object is five-dimensional and not an SM weak doublet, the candidate weak level-one reading mismatches the p3 conductor-3 `SU(2)_3` surface, and the CS/fermion-loop receipts record only conditional `k -> k_eff=1` candidates, not a weak-sector proof. p5 conductor 7 maps to `SU(2)_7/SU(7)_2` with no SM role, p3 `Z/6` explains finite charge/hypercharge quantisation but not continuous `U(1)_Y` or exact assignment derivation, `D=-8` is corrected to modular level `8` rather than a conductor-4 p2 conflict, and the lepton/fourth-lane receipts expose unresolved `D=-8/-11/-12`, unit-group-only quark/lepton separation failure, positional Heegner-ordering fourth-generation exclusion gap, conductor-level quark/lepton split diagnostics, D=-11 isolation, D=-12 tau overlap ratios, non-invariant three-lane colour metric, chiral-limit colour candidate, p3 `SU(2)_3 -> SU(2)_1` level-flow candidate, p3 `Z/6 -> U(1)` candidate, CS-boundary gauge-boson/EWSB candidates, and p11 mass-hierarchy blockers. The standard hypercharge anomaly ledger cancels, but is not carrier-derived beyond the `1/6` unit. Continuous `SU3_c`, continuous `U1_Y`, exact hypercharge assignment derivation, lepton-sector construction, quark/lepton separation, no-fourth-generation mechanism, arbitrary-sector DHR closure, continuum DHR net authority, internal compact gauge-group construction, category equivalence to `Rep(G)`, concrete `G_DHR -> G_SM`, exact SM carrier-functor match, and unconditional theorem-in-repo promotion remain open. | Prove or reject a fermion-from-anyon-pair mechanism, derive a 3+1D spin-statistics sector from carrier local algebra semantics, prove its DHR localization/transportability, formalize the `SU3_1` Chern-Simons identification and any bulk-boundary functor before claiming colour, prove or reject the conductor-level CS correspondence and the `SU(2)_3 -> SU(2)_1` fermionic-loop shift, extend finite p3 `Z/6` charge quantisation to continuous `U(1)_Y` with exact assignment derivation and carrier-derived anomaly cancellation, construct or reject lepton lanes from `D=-8,-11,-12`, derive a quark/lepton separation principle beyond conductor-level/positional diagnostics, construct physical lepton Yukawa operators from the overlap ratios, construct a no-fourth-generation mechanism, resolve the p11/fourth-lane hierarchy contradiction, extend finite prime-lane witnesses to arbitrary localized transportable endomorphisms, prove direct-sum/tensor/conjugate/full-fibre-functor closure, prove the DHR hypotheses internally or bind accepted authority with all hypotheses, construct the compact group/equivalence, and prove the exact SM match. |
+
+Sidecar receipt update: `GeometricSplitSummaryReceipt` summarizes the current
+quark levels `3,4,7`, lepton candidates `8,11,12/6`, level-overlap
+exceptions, and `D=-11` isolation. It is an index/summary receipt only; it
+does not solve the Gate 6 matter-representation, lepton-sector, exact SM,
+CKM, Clay, or terminal blockers.
+
+Manager B sidecar update: `Deg23FromT13HeckeReceipt` now records the base
+`deg23=14` as the inert-prime Hecke degree `deg(T_13)=13+1` on the Hilbert
+modular surface for `Q(sqrt(21))`.  `CMCorrectionToT13Receipt`,
+`ThirteenInertInBiquadraticReceipt`, `Deg23CorrectionFrom13CMReceipt`,
+`Deg23ResidualFinalStatusReceipt`, and `P13LaneHypothesisReceipt` separate
+that base integer from the still-open `14 -> 14.302` residual.  The local
+signs are `(-3/13)=+1`, `(-7/13)=-1`, and `(21/13)=-1`; the p13 finite curve
+diagnostic gives `#E_{j=0}(F_13)=12`, not `14`.  These receipts do not promote
+physical `Vcb`, CKM, SM, Clay, or terminal closure.
+
+Manager B Gate 6 update: `SMGaugeGroupFromCS3LanesReceipt`,
+`LevelRankDecouplingReceipt`, and `WBosonMassFromCSReceipt` sharpen the gauge
+frontier.  The three SM gauge factors have candidate carrier origins, but
+`SU(2)` and `SU(3)` still arise from shared level-rank CS data and require a
+3+1D matter-representation decoupling theorem before any direct-product claim.
+The naive WZW W-mass estimate is recorded as `218 GeV` versus `80.37 GeV`,
+with a `172%` error, so RG running and VEV/coupling calibration remain open.
+`LeptonYukawaHierarchyReceipt`, `NoFourthGenerationFromHeegnerExhaustionReceipt`,
+`SMFermionCountReceipt`, `UpDownSplittingFromIsospinReceipt`, and
+`FermionCountVerificationReceipt` record lepton-overlap ratios,
+Heegner-exhaustion/no-fourth-generation candidates, and a count-level
+`48`-Weyl match only when right-handed neutrinos are included.  These are not
+full matter-representation, anomaly, Yukawa, or SM reconstruction theorems.
+
+Clay roadmap sidecar update: `Docs/ClayYMProofRoadmap.md` and
+`ClayYMProofRoadmapReceipt` now decompose the Yang-Mills Clay target into nine
+explicit lemmas: lattice measure, uniform correlator bounds, tightness,
+continuum weak limit, OS axioms, Wightman reconstruction, uniform transfer
+gap, continuum gap survival, and physical mass-gap identification.  The
+current tower is partial only at scalar-sector OS and finite/conditional RG
+scaffolding.  `Docs/ClayNSProofRoadmap.md` and
+`ClayNSProofRoadmapReceipt` separate the Navier-Stokes weak-solution branch
+from the BKM/global-regularity branch.  Both roadmap receipts are
+non-promoting and keep Clay YM, Clay NS, Wightman, smooth NS, continuum YM,
+and terminal claims false.
+
+NS W2 negative/frame restriction update: `WaveletFrameBoundRevisionReceipt`,
+`FrameBoundByOperatorNormReceipt`, `PentadicCrossTermReceipt`,
+`GramMatrix2x3BoundsReceipt`, `GramMatrixSpectrumBoundReceipt`,
+`NegativeFrameBoundRouteReceipt`, and `NSFrameRestrictionReceipt` record that
+the all-scale dyadic/triadic orthogonality shortcut is unavailable after
+nonzero cross-term obstruction.  The full-`L2` pure-Haar frame route is also
+rejected because constants are invisible, so the admissible NS bridge now
+restricts to the zero-mean/vorticity branch: prove a tighter operator-norm or
+Gram-spectrum bound, prove the restricted lower frame inequality, then return
+to velocity through Biot-Savart before using the weak-solution branch.  Until
+then, frame bounds, BKM closure, smooth NS, Clay NS, and terminal promotion
+remain false.
+
+YM L1 finite-lattice status update: `CarrierLatticeYMDefinitionReceipt`,
+`SpacetimeLatticeFromCarrierDepthReceipt`, `WilsonActionOn3PlusOneLatticeReceipt`,
+`ReflectionPositivityForWilsonReceipt`, `LatticeMassGapFromTransferMatrixReceipt`,
+and `YML1StatusReceipt` keep the finite lattice/measure step at finite
+carrier-lattice Wilson-action scope.  The finite transfer-matrix gap is
+recorded, but `YML1StatusReceipt` explicitly leaves L2 uniform plaquette
+correlator bounds, tightness, continuum gauge measure construction, uniform
+continuum gap, Clay YM, and terminal promotion false.
+
+Deg23 CM eigenvalue-zero update: `Deg23HeckeEigenvalueReceipt`,
+`EichlerSelbergAtCMPointReceipt`, `Deg23RawVsCMEigenvalueReceipt`, and
+`Deg23SummaryAndFutureDirectionReceipt` separate raw `T13` degree from the CM
+eigenvalue calculation.  The selected eta product rejects the quoted `a5=-2`
+normalisation, the computed prefix has a zero `q^4` coefficient and `a5=+1`,
+and the local CM eigenvalue correction is `0`.  Thus raw `deg23=14` is a
+different invariant from the CM eigenvalue, and the `14 -> 14.302` residual is
+still unexplained.  No `Vcb`, CKM, SM, Clay, or terminal promotion follows.
+
+Paper/roadmap status update: `ClayRoadmapAssignmentPrep` records the next
+non-promoting assignments as YM L2 uniform plaquette-correlator bounds, NS
+restricted zero-mean frame lower bound, and NS nonlinear-term passage after
+frame bounds.  `PaperStatusAllPapersReceipt` records Paper 6 as diagnostic
+letter ready and Paper 8 as conjecture-paper ready, while Clay YM and Clay NS
+submission readiness remain false.
+
+Phase 2 programme update: `Phase2ProgrammeReceipt` now records the integration
+frontier after the YM/NS/deg23 tranches.  The YM side combines finite
+strong-coupling L2 data with the CS-level gauge-coupling/decoupling diagnostics:
+`SMGaugeGroupFromCS3LanesReceipt`, `LevelRankDecouplingReceipt`, and
+`WBosonMassFromCSReceipt` still leave SU(2)-SU(3) direct-product independence,
+RG/VEV scale matching, exact W mass, exact SM, and `G_DHR ~= G_SM` false.  The
+NS side closes the pure Haar-frame route negatively and now records the
+prime-band LP/Besov/paraproduct weak-solution branch through
+`NSWeakSolutionSummaryReceipt`.  This is a Leray weak-solution receipt chain,
+not uniqueness, smoothness, BKM control, Clay NS, exact SM, or terminal
+promotion.
+
+Manager B YM/NS/deg23 follow-up update: `StrongCouplingExpansionReceipt`,
+`StringTensionCarrierReceipt`, `UniformBoundStrongCouplingReceipt`,
+`BetaCriticalReceipt`, `CarrierRGTrajectoryYMReceipt`, and
+`YML2StatusReceipt` sharpen the Yang-Mills L2 status.  The carrier Wilson
+lattice is deeply strong-coupled at `beta=alpha1`, with a finite-lattice
+area-law/string-tension diagnostic and finite strong-coupling correlator
+decay recorded.  The same receipts explicitly record that fixed `alpha1` is
+not a Wilson continuum RG trajectory, so tightness, continuum YM, physical
+mass-gap identification, Clay YM, and terminal promotion remain false.
+
+The NS W2 restricted route is now closed more sharply by
+`ZeroMeanSubspaceGramReceipt`, `GramOperatorNormComputationReceipt`,
+`HilbertSchmidtBoundGramReceipt`, `NSWaveletRouteClosedReceipt`,
+`NSAlternativeApproachSurveyReceipt`, and
+`NSLittlewoodPaleyCarrierReceipt`.  Restricting to zero-mean/vorticity removes
+the constant-function counterexample but leaves the wavelet Gram entries
+unchanged; the dyadic/triadic cross-scale Hilbert-Schmidt envelope diverges.
+The pure 2/3/5 Haar-frame bridge is therefore replaced by a candidate
+prime-band Littlewood-Paley/Besov/paraproduct route.  No NS weak-solution
+passage, regularity theorem, Clay NS, or terminal claim follows.
+
+The deg23 follow-up receipts
+`Deg23FromFullTraceFormulaReceipt`, `Deg23Candidate14302Receipt`,
+`TwoLoopResummationReceipt`, and `VcbFromTwoLoopDeg23Receipt` preserve the
+raw `T13` degree/eigenvalue separation while recording a two-loop-looking
+near-hit for the effective degree.  The near-hit is diagnostic only:
+physical `Vcb` remains about two percent high and the dominant blocker is
+still Yukawa normalisation, not the base `deg23` integer.
+
+Manager A lane 6 integration sidecar:
+`CarrierScaleFromHeegnerReceipt`, `QCDRunningFromCarrierScaleReceipt`,
+`CarrierGaugeCouplingFromCSLevelReceipt`, `WilsonBetaFromCSLevelReceipt`,
+`YML2CorrectedStatusReceipt`, `YML3TightnessFromKRunningReceipt`,
+`CSLevelFlowFullReceipt`, and `WBosonMassFromCSReceipt` now serve as the
+Paper 8 pointer for the corrected coupling posture.  The CS-level/k-running
+reading is candidate-only: relative scale, one-loop running, inverse-level
+coupling, and Wilson-beta correction are named, but CS levels do not derive a
+Wilson beta trajectory, tightness, or physical gauge coupling.  No physical
+coupling, exact W mass, Clay YM, exact SM, or terminal promotion is available.
+
+The Navier-Stokes Phase 2 branch is likewise fail-closed.  After
+`NSWaveletRouteClosedReceipt`, `NSAlternativeApproachSurveyReceipt`,
+`NSLittlewoodPaleyCarrierReceipt`, `PrimeBandLPDefinitionReceipt`,
+`BernsteinInequalityPrimeBandReceipt`, `ParaproductDecompositionReceipt`,
+`NSCarrierEnergyInequalityReceipt`, `NSCarrierLerayCompactnessReceipt`,
+`NSW3NonlinearPassageReceipt`, `NSW4WeakSolutionReceipt`, and
+`NSWeakSolutionSummaryReceipt` name the prime-band
+Littlewood-Paley/Besov/paraproduct Leray weak-solution branch as inhabited at
+receipt scope.  `NSRegularityGapReceipt`,
+`NSRegularityRoadmapFilledReceipt`, `NavierStokesRegularityTowerReceipt`,
+`ClayNSProofRoadmapReceipt`, and `EllipticBootstrapReceipt` keep the
+regularity gap separate.  `Phase2ProgrammeReceipt` is therefore a programme
+receipt only: LP weak-solution existence is not Clay NS or smooth regularity
+promotion.
+
+Manager B final integration sidecar:
+`YukawaNormalisationStructureReceipt`, `CKMFullMatrixFromCarrierReceipt`,
+`AnomalyCancellationTableReceipt`, `VubFromCarrierReceipt`,
+`CKMDiagnosticSummaryReceipt`, and `PhysicalCKMPromotionStatusReceipt` record
+the end-of-tranche CKM/Yukawa posture.  The lambda/direct-formula and
+full-matrix diagnostics are indexed, anomaly cancellation is conditional on a
+carrier-to-SM-hypercharge match that is not constructed here, and the `Vub`
+candidate records the naive `T5` failure.  The final physical CKM promotion
+flag remains false; no exact CKM, exact SM, DHR/SM, Clay, or terminal
+promotion follows.
+
+Manager B Yang-Mills final sidecar:
+`CSLevelRunningLawReceipt`,
+`YML3TightnessFromDimensionalTransmutationReceipt`,
+`YML4ContinuumLimitReceipt`, `YML5OSAxiomsForGaugeSectorReceipt`,
+`YML6WightmanReconstructionReceipt`,
+`YML7L8MassGapSurvivalReceipt`, and `YMFinalStateReceipt` record the L3-L8
+candidate ladder after the corrected CS-level running-law posture.  L3 has
+partial dimensional-transmutation evidence only, L4-L8 are conditional
+continuum/OS/Wightman/mass-gap-survival targets, and `YMFinalStateReceipt`
+keeps continuum Yang-Mills, uniform mass gap, Clay Yang-Mills, and terminal
+Clay promotion false.
+
+Manager B final protocol sidecar:
+`NSFinalStateReceipt`, `CommitAndTagFinalReceipt`, and `SessionEndReceipt`
+record the final state/protocol boundary.  The Navier-Stokes weak/Leray
+branch is summarized without enstrophy, vorticity, BKM, global regularity, or
+Clay promotion.  The commit/tag receipt is a protocol receipt only: no files
+are staged here, no commit or tag is created, no commit hash is claimed, and
+terminal promotion remains false.  `Docs/Paper6FinalDraftOutline.md` and
+`Docs/Paper8FinalDraftOutline.md` are indexed as final-draft outline sidecars
+only; they do not create new formal authority.
+
+## Gate 7: Yukawa / CKM Arithmetic
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| `YukawaFromCarrier` records canonical diagonal up/down carrier matrices and symbolic up-sector off-diagonal entries `y12 = 1/5`, `y13 = 1/25`, `y23 = 1/5`; `CarrierYukawaRatioTargetReceipt` records alpha readback diagnostics `0.041240` and `0.085720`; `G12FromDHRSectorsReceipt` records legacy diagnostics where the naive finite-field overlap is zero, raw isogeny `sqrt(3)/2` misses, and `vol(X0(4))=2*pi` sector-angle normalization derives the numerical `pi*sqrt(3)` shape; `Deg23HeckeEigenvalueReceipt` records that the selected eta-product gives `a5=+1`, not the quoted `-2`, and does not resolve the 14 -> 14.302 residual; `GoldenRatioNumericsReceipt`, `RogersRamanujanP5Receipt`, `CarrierHiggsMassReceipt`, and `GoldenRatioUnifyingReceipt` record the phi/Y13/Jarlskog/Higgs diagnostics; CKM target receipts keep physical promotion false. | Missing accepted alpha bound, physical coupling scale, charged-lepton carrier, physical fermion mass receipts, running-scale convention, W4 Higgs/VEV calibration, actual DHR sector representations, non-identity intertwiners, physical weak/mass-basis identification, splitting fields, normalized eigenbases, CKM product field closure, and empirical CKM authority.  The active Cabibbo diagnostic is `|V_us| = pi*sqrt(3)*sqrt(m_u/m_c)`, with 0.04% comparison accuracy; the sector-angle step is now inhabited by `U1CMOrbitIntegralReceipt`.  The phi-corrected C1 convention lowers the Jarlskog diagnostic from about `11.26x` PDG to about `0.69x` PDG but undershoots `|Vub|` by about `24.8%`, so it is not a physical CKM match.  The Higgs phi correction is also diagnostic and still uses the PDG VEV input. `cabibboAngleDerived = false` and physical CKM remain false until full CKM diagonalisation and authority binding are inhabited. | Compute the concrete physical Yukawa matrices from FactorVec/DHR data, supply the DHR representations and intertwiners, use the inhabited `U1CMOrbitIntegralReceipt`, factor the characteristic polynomials, choose the splitting fields/eigenbases, prove CKM unitarity/field closure, and attach W4/PDG authority only at the calibrated boundary. |
+
+## Navier-Stokes Millennium Lane
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| `NavierStokesWeakSolutionInterface`, `NavierStokesRegularityTowerReceipt`, `CarrierBKMControlTargetReceipt`, `UltrametricSobolevUniformBoundReceipt`, `CarrierNSSmoothConvergenceReceipt`, `UltrametricAubinLionsReceipt`, `NavierStokesBound3TimeDerivativeReceipt`, `AubinLionsBound3Full`, `UltrametricAubinLionsCompactness`, `NSCarrierContinuumLimitReceipt`, `HaarWaveletEmbeddingReceipt`, `MultiBaseWaveletCompactnessReceipt`, `HaarFrameBoundsReceipt`, `HaarMutualCoherenceReceipt`, `DyadicTriadicScale1InnerProduct`, `WaveletOrthogonalityProofReceipt`, `MutualOrthogonalityGeneralProofReceipt`, `WaveletOrthogonalityGeneralArgumentReceipt`, `NSFrameBoundImplicationReceipt`, `NSWeakSolutionFinalReceipt`, `EllipticBootstrapReceipt`, and `ClayBlockerUpdateReceipt` record the finite weak/Leray interface, finite-depth energy/enstrophy/vorticity/BKM rungs, the BKM closure target, an ultrametric Sobolev uniformity receipt, the constructed weak time-derivative bound, the Aubin-Lions compactness target, the conditional nonlinear-term passage to a distributional limit, the 2/3/5 carrier-to-`L2(R3)` wavelet embedding, the Riesz/frame-bound Archimedean bridge candidate, scale-zero and scale-one dyadic/triadic cancellations, the open all-scale orthogonality proof attempt, the candidate equidistribution/partition route, and the conditional frame-bound implication. | The scale-one `sqrt(6)/6` diagnostic is retired for the stated supported-Haar convention: the recorded computation is `sqrt(6)*(1/9-1/9)=0`.  `WaveletOrthogonalityGeneralArgumentReceipt` records the equidistribution/partition proof strategy as a candidate only.  These finite checks do not prove all-scale 2/3/5 mutual orthogonality.  The remaining hard NS blockers are the multibase Riesz/frame-bound proof from p-adic/ultrametric compactness into the Archimedean continuum, uniform Gram-spectrum control for the 2/3/5 wavelet system, coefficient-to-`L2(R3)` continuity, and the nonlinear term passage.  No unconditional weak continuum NS solution, smooth continuum limit, continuum BKM regularity passage, global smoothness theorem, or Clay/community acceptance is constructed. | Prove the incompatible-partition/all-scale wavelet lemma or a bounded Gram/frame theorem, prove coefficient-to-Archimedean continuity, prove the nonlinear term passage under the resulting convergence, then prove BKM/smooth passage and bind accepted BKM/regularity authority.  Only then consider any Clay Navier-Stokes promotion.  Do not describe the finite wavelet cancellations, candidate equidistribution route, conditional frame-bound implication, weak derivative receipt, ultrametric Sobolev uniformity, compactness target, multibase bridge candidate, conditional weak-solution route, or nonlinear target as Clay NS closure. |
+
+## Gate 8: Composition / Paper 7-8 Unification Receipt
+
+| Current inhabited receipts | Exact blocker | Next admissible promotion action |
+|---|---|---|
+| `Paper8CoreThesisReceipt`, `CommitTagPreparationReceipt`, `ResidualBlockersSummaryReceipt`, `Phase1CommitReceipt`, `Paper8AbstractDraftReceipt`, `NextSessionPriorityReceipt`, `Phase1FinalStateReceipt`, `WorktreeCleanupReceipt`, `SessionEndProtocolReceipt`, and `AggregateAndCommitReceipt` now record the public Paper 8 thesis, diagnostic tag preparation, end-of-phase blocker tiers, Phase 1 commit draft, abstract draft, next-session queue, final-state snapshot, cleanup plan, end protocol, and aggregate/commit boundary. | These are governance receipts only: they do not stage files, do not create a git commit or tag, do not clean the concurrent worktree, and do not promote CKM, SM, Clay YM, Clay NS, or terminal unification. | After aggregate validation, path review, and an intentionally staged clean worktree, create the diagnostic tag if desired.  Treat the blocker summary, aggregate boundary, and next-session receipts as the research queue and release protocol, not as evidence of terminal closure. |
+| Cross-gate consistency and partial-composition surfaces consume current finite DHR/DR, finite Stone/YM, finite GR/W4, Higgs/CKM, and penguin freeze/status receipts while keeping promotion bits false. | No product receipt because Gates 1-7 are not promoted. Exact blockers include Gate1/Gate6 SM functor match, Gate3/Gate4 YM-GR stress-energy compatibility, Gate4 W4 matter/stress-energy interface, Gate5 noncollapsed physical phase space, Gate6 DHR/SM reconstruction, Gate7 Yukawa-DHR compatibility and concrete physical Yukawas, plus external Clay/W4/continuum authority. | Construct `Paper7Receipt = Gate1 x ... x Gate7` only after each gate receipt and authority boundary is inhabited; then prove no cross-gate conflict and only then consider changing `terminalClaimPromoted`. |

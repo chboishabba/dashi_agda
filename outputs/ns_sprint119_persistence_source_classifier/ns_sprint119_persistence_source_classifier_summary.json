@@ -1,0 +1,35 @@
+{
+  "candidate_mechanisms": [
+    "persistent_alignment_existence",
+    "hyperbolic_strain_template",
+    "beltrami_wave_packet_alignment",
+    "local_smooth_continuation",
+    "leray_energy_bounds",
+    "numerical_vortex_alignment",
+    "imposed_alignment_assumption"
+  ],
+  "classifications": {
+    "beltrami_wave_packet_alignment": "open_secondary",
+    "hyperbolic_strain_template": "open_requires_construction",
+    "imposed_alignment_assumption": "rejected_circular",
+    "leray_energy_bounds": "magnitude_only_no_alignment_duration",
+    "local_smooth_continuation": "short_time_conditional_not_global_source",
+    "numerical_vortex_alignment": "empirical_not_proof",
+    "persistent_alignment_existence": "open_primary_gate"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint119_persistence_source_classifier",
+  "exit_code": 1,
+  "exit_reason": "no non-circular persistence source established",
+  "mechanism_count": 7,
+  "non_circular_source_established": false,
+  "open_mechanism_count": 3,
+  "primary_gate": "persistent_alignment_existence",
+  "recommended_classification": "open_primary_gate",
+  "recommended_mechanism_id": "persistent_alignment_existence",
+  "recommended_next_lemma": "PersistentAlignmentExistenceLowerBound",
+  "rejected_mechanism_count": 1
+}

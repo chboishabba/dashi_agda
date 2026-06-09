@@ -1,0 +1,9 @@
+{
+  "all_checks_ok": true,
+  "final_assembly_formula_recorded": true,
+  "final_mass_gap_socket_ok": true,
+  "no_spectral_to_os_socket_ok": true,
+  "os_wightman_socket_ok": true,
+  "promotion": false,
+  "reflection_positivity_boundary_ok": true
+}

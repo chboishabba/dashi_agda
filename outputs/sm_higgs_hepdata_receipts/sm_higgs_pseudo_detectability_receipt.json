@@ -1,0 +1,77 @@
+{
+  "accepted_authority_token_present": false,
+  "authority_provider": "HEPData",
+  "detectability_contract": "selection-rate calibration for controlled pseudo-data injections",
+  "empirical_validation_promoted": false,
+  "experiment_authority": "ATLAS",
+  "full_covariance_surface_present": true,
+  "generated_at_utc": "2026-06-07T00:00:00+00:00",
+  "hepdata_record": "137886",
+  "hepdata_record_url": "https://www.hepdata.net/record/137886",
+  "injection_modes": [
+    "none",
+    "tilt",
+    "curvature",
+    "lines",
+    "dimension",
+    "two_regime",
+    "anisotropy"
+  ],
+  "observable_count": 3,
+  "observables": [
+    {
+      "basis": "log",
+      "correlation_table": "pT_yy_corr",
+      "covariance_required": true,
+      "table": "pT_yy"
+    },
+    {
+      "basis": "linear",
+      "correlation_table": "yAbs_yy_corr",
+      "covariance_required": true,
+      "table": "yAbs_yy"
+    },
+    {
+      "basis": "ordinal",
+      "correlation_table": "N_j_30_corr",
+      "covariance_required": true,
+      "table": "N_j_30"
+    }
+  ],
+  "observed_new_physics_claim": false,
+  "projection_modes": [
+    "raw",
+    "cumulative",
+    "valuation",
+    "angular"
+  ],
+  "receipt_kind": "pseudo-detectability",
+  "schema": "dashi-sm-higgs-hepdata-receipt-v1",
+  "schema_version": "1.0.0",
+  "source_files": [
+    {
+      "path": "/home/c/Documents/code/dashiQ/13tev.py",
+      "role": "observed full-covariance MDL shape-complexity analysis",
+      "sha256": "8a07248e3f24df57710c22c811b5c623a4058a31966203b8e362ded4d76dbb39",
+      "size_bytes": 11609
+    },
+    {
+      "path": "/home/c/Documents/code/dashiQ/pseudo_data_harness.py",
+      "role": "pseudo-data detectability harness using published covariance",
+      "sha256": "7ba553c2060815e2afea7e7031aa7d7c0a6ae212586883f37fbc8e6919483ac8",
+      "size_bytes": 28994
+    },
+    {
+      "path": "/home/c/Documents/code/dashiQ/reusable_query.py",
+      "role": "HEPData query helper",
+      "sha256": "564f7b721bc20e895d0a496b8fa85491ca4bd0a7d2f62bf1094673dfd9e40471",
+      "size_bytes": 7485
+    },
+    {
+      "path": "/home/c/Documents/code/dashiQ/resolve_hepdata_record.py",
+      "role": "HEPData record resolver",
+      "sha256": "da5e952adc502ba157beba80d17da9763a3c136365f7179d70b218726b0195ae",
+      "size_bytes": 2173
+    }
+  ]
+}

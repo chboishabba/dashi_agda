@@ -1,0 +1,55 @@
+{
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint133_universal_strategy_classifier",
+  "control_card": {
+    "C": "Deterministic Python emitter writes CSV rows, JSON rows, JSON summary, and Markdown report.",
+    "F": "Remaining gap is a universal argument or a finite exhaustion inside a symmetry class, not another route-specific receipt.",
+    "G": "Promotion requires universal smooth finite-energy regularity; this artifact explicitly does not claim that.",
+    "L": "Progress lattice: classify strategies -> select tractable Clay-adjacent target -> keep full Clay promotion false.",
+    "O": "Worker 1 owns only the Sprint133 universal strategy classifier script and generated output directory.",
+    "P": "Treat structure theorem for axisymmetric NS with swirl as the next significant finite-scope target; keep monotone quantity as the only plausible universal positive route.",
+    "R": "Encode six universal regularity proof strategies with required row fields and explicit Clay non-promotion flags.",
+    "S": "Full Clay remains unsolved; route-specific Sprint 130-132 work most directly supports the axisymmetric-with-swirl subcase."
+  },
+  "exit_code": 0,
+  "exit_reason": "classified six universal proof strategies and selected the axisymmetric-with-swirl structure-theorem route as the strongest Clay-adjacent continuation without promoting full Clay regularity",
+  "full_clay_ns_solved": false,
+  "highest_alpha_next_calculations": [
+    "AxisymmetricWithSwirlLargeReBetaPositivePDEComparison",
+    "AxisymmetricMarginalBetaZeroShearAnalysis",
+    "AxisymmetricClassExhaustionTheorem",
+    "VorticityCorrelationMonotonicityDerivative",
+    "SerrinEnergyConditionalReductionSearch",
+    "ConvexDualCertificateFeasibilityCheck"
+  ],
+  "required_fields": [
+    "strategy_id",
+    "name",
+    "status_for_full_clay",
+    "obstruction_or_gap",
+    "programme_relevance",
+    "next_calculation",
+    "clay_progress_estimate"
+  ],
+  "row_count": 6,
+  "selected_clay_adjacent_target": "axisymmetric NS with swirl",
+  "selected_next_strategy": "S5",
+  "status_counts": {
+    "circular_for_large_data": 1,
+    "conceptual_no_concrete_large_data_route": 1,
+    "exhausted_in_known_energy_enstrophy_class": 1,
+    "live_for_axisymmetric_with_swirl_not_full_clay": 1,
+    "most_promising_unexplored_universal_route": 1,
+    "open_no_easier_energy_verifiable_criterion": 1
+  },
+  "strategy_ids": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6"
+  ],
+  "universal_candidate_strategy": "S3"
+}

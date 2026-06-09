@@ -1,0 +1,153 @@
+{
+  "gates": [
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "field_name": "localEnstrophyDangerShellReductionRecorded",
+      "gate_id": "G1",
+      "gate_name": "LocalEnstrophyDangerShellReductionRecorded",
+      "next_required_input": "record local enstrophy danger-shell reduction as the selected route",
+      "passed": true,
+      "status": "RECORDED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "field_name": "localEnstrophyDangerShellReductionBookkeepingClosed",
+      "gate_id": "G2",
+      "gate_name": "LocalEnstrophyDangerShellReductionBookkeepingClosed",
+      "next_required_input": "close only reduction bookkeeping",
+      "passed": true,
+      "status": "RECORDED"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "field_name": "localizedEnstrophyFluxIdentityClosed",
+      "gate_id": "G3",
+      "gate_name": "LocalizedEnstrophyFluxIdentityClosed",
+      "next_required_input": "keep localized enstrophy flux identity analytic gate false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_CLOSURE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "field_name": "dangerShellDissipationDominatesInfluxClosed",
+      "gate_id": "G4",
+      "gate_name": "DangerShellDissipationDominatesInfluxClosed",
+      "next_required_input": "keep danger-shell dissipation domination analytic gate false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_CLOSURE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "field_name": "pointwiseTailFromLocalDissipationClosed",
+      "gate_id": "G5",
+      "gate_name": "PointwiseTailFromLocalDissipationClosed",
+      "next_required_input": "keep pointwise extraction from local dissipation false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_CLOSURE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "field_name": "independentCoefficientBudgetClosed",
+      "gate_id": "G6",
+      "gate_name": "IndependentCoefficientBudgetClosed",
+      "next_required_input": "keep independent coefficient budget analytic gate false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_CLOSURE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "field_name": "actualPointwiseH1TailClosureClosed",
+      "gate_id": "G7",
+      "gate_name": "ActualPointwiseH1TailClosureClosed",
+      "next_required_input": "keep actual pointwise H1-tail analytic closure false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_CLOSURE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "field_name": "independentEpsilonCoefficientClosed",
+      "gate_id": "G8",
+      "gate_name": "IndependentEpsilonCoefficientClosed",
+      "next_required_input": "keep epsilon coefficient analytic closure false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_CLOSURE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "field_name": "pointwiseH1TailWithIndependentEpsilonCoefficientClosed",
+      "gate_id": "G9",
+      "gate_name": "PointwiseH1TailWithIndependentEpsilonCoefficientClosed",
+      "next_required_input": "keep Sprint 89 pointwise/epsilon combined analytic closure false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_CLOSURE_OPEN"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "field_name": "noForbiddenDependencyReuseClosed",
+      "gate_id": "G10",
+      "gate_name": "NoForbiddenDependencyReuseClosed",
+      "next_required_input": "close only the dependency-reuse governance gate",
+      "passed": true,
+      "status": "RECORDED"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "field_name": "clayNavierStokesPromoted",
+      "gate_id": "G11",
+      "gate_name": "ClayNavierStokesPromoted",
+      "next_required_input": "keep Clay Navier-Stokes promotion false",
+      "passed": true,
+      "status": "FALSE_NO_PROMOTION"
+    },
+    {
+      "actual_value": 0,
+      "expected_value": 0,
+      "field_name": "forbidden_terms",
+      "gate_id": "G12",
+      "gate_name": "NoForbiddenStubOrHoleLanguage",
+      "next_required_input": "remove postulate/TODO/stub/placeholder/future proof/hole wording",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "sources": [
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint90LocalEnstrophyDangerShellReductionReceipt.agda",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint90LocalEnstrophyDangerShellReductionReceipt; NSSprint90LocalEnstrophyDangerShellReductionReceipt; sprint89PointwiseH1TailGateStillOpen; sprint89LocalEnstrophyMechanismStillOpen; sprint89IndependentCoefficientStillOpen; localEnstrophyDangerShellReductionRecorded; localEnstrophyDangerShellReductionBookkeepingClosed; localizedEnstrophyFluxIdentityClosed; dangerShellDissipationDominatesInfluxClosed; pointwiseTailFromLocalDissipationClosed; actualPointwiseH1TailClosureClosed; independentCoefficientBudgetClosed; independentEpsilonCoefficientClosed; pointwiseH1TailWithIndependentEpsilonCoefficientClosed; clayNavierStokesPromoted; canonicalSprint90Flags",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "Sprint90LocalEnstrophyDangerShellReductionReceipt"
+    },
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint89PointwiseH1TailCandidateMechanismReceipt.agda",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint89PointwiseH1TailCandidateMechanismReceipt",
+      "source_id": "S2",
+      "status": "PASS",
+      "surface_name": "Sprint89PointwiseH1TailCandidateMechanismReceipt"
+    },
+    {
+      "missing_anchors": "none",
+      "path": "scripts/ns_sprint89_circularity_matrix_audit.py",
+      "present_in_repo": true,
+      "required_anchors": "FORBIDDEN_DEPENDENCIES; requires_independent_epsilon_coefficient",
+      "source_id": "S3",
+      "status": "PASS",
+      "surface_name": "Sprint89CircularityMatrixAudit"
+    }
+  ]
+}

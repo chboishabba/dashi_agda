@@ -1,0 +1,72 @@
+[
+  {
+    "classification": "open_primary_gate",
+    "clay": false,
+    "complete": false,
+    "mechanism_id": "persistent_alignment_existence",
+    "next_action": "prove PersistentAlignmentExistenceLowerBound",
+    "non_circular_source": false,
+    "rationale": "This is the primary gate because a lower bound on persistent alignment would supply the missing duration source without assuming the transfer sign.",
+    "recommendation_rank": 1
+  },
+  {
+    "classification": "open_requires_construction",
+    "clay": false,
+    "complete": false,
+    "mechanism_id": "hyperbolic_strain_template",
+    "next_action": "construct an admissible template and persistence estimate",
+    "non_circular_source": false,
+    "rationale": "Hyperbolic strain has the right local shape, but the classifier does not find an unforced Leray-admissible construction with the needed persistence lower bound.",
+    "recommendation_rank": 2
+  },
+  {
+    "classification": "open_secondary",
+    "clay": false,
+    "complete": false,
+    "mechanism_id": "beltrami_wave_packet_alignment",
+    "next_action": "keep as a secondary comparison mechanism",
+    "non_circular_source": false,
+    "rationale": "Beltrami wave packets can model alignment, but they have not been connected to a general non-circular persistence source.",
+    "recommendation_rank": 3
+  },
+  {
+    "classification": "short_time_conditional_not_global_source",
+    "clay": false,
+    "complete": false,
+    "mechanism_id": "local_smooth_continuation",
+    "next_action": "use only for conditional short-time propagation",
+    "non_circular_source": false,
+    "rationale": "Local smooth continuation can propagate a supplied smooth state for short time, but it does not establish a global persistence source from Leray-class data.",
+    "recommendation_rank": 4
+  },
+  {
+    "classification": "magnitude_only_no_alignment_duration",
+    "clay": false,
+    "complete": false,
+    "mechanism_id": "leray_energy_bounds",
+    "next_action": "retain as magnitude bookkeeping",
+    "non_circular_source": false,
+    "rationale": "Leray energy bounds control size and admissibility, but they do not give the alignment direction or the duration lower bound.",
+    "recommendation_rank": 5
+  },
+  {
+    "classification": "empirical_not_proof",
+    "clay": false,
+    "complete": false,
+    "mechanism_id": "numerical_vortex_alignment",
+    "next_action": "treat as heuristic evidence only",
+    "non_circular_source": false,
+    "rationale": "Numerical vortex alignment may guide examples, but empirical evidence is not a proof of a Clay-level persistence source.",
+    "recommendation_rank": 6
+  },
+  {
+    "classification": "rejected_circular",
+    "clay": false,
+    "complete": false,
+    "mechanism_id": "imposed_alignment_assumption",
+    "next_action": "exclude from source accounting",
+    "non_circular_source": false,
+    "rationale": "Imposing alignment inserts the condition that must be derived, so it is circular for the persistence-source route.",
+    "recommendation_rank": 7
+  }
+]

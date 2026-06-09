@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave8-gate4-w3-metric-nondegenerate-signature.json",
+  "lane": "paper7-gate4-factorvec-gr/MetricNondegenerateSignature",
+  "lane_claim": "Paper 7 wave8 LEAF WORKER gate4 W3: own exactly `MetricNondegenerateSignature`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement determinant/rank/nondegeneracy and Lorentzian inertia. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited.",
+  "orchestrator_id": "paper7-wave8-gate4-w3-metric-nondegenerate-signature",
+  "parent_orchestrator_id": "paper7-wave8-gate4-manager",
+  "status_file": "status.paper7-wave8-gate4-w3-metric-nondegenerate-signature.json",
+  "timestamp": "2026-05-19T15:49:22Z"
+}

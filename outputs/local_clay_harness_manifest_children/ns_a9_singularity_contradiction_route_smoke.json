@@ -1,0 +1,35 @@
+{
+  "contract": "NS A9 singularity contradiction route proxy",
+  "diagnostic_only": true,
+  "promotion": {
+    "a9_proved": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "rows": [
+    {
+      "contradiction_triggered": true,
+      "decay_to_zero": true,
+      "elliptic_regularity_available": true,
+      "harmonicity_available": true,
+      "vorticity_vanishes": true
+    },
+    {
+      "contradiction_triggered": true,
+      "decay_to_zero": true,
+      "elliptic_regularity_available": true,
+      "harmonicity_available": true,
+      "vorticity_vanishes": true
+    },
+    {
+      "contradiction_triggered": true,
+      "decay_to_zero": true,
+      "elliptic_regularity_available": true,
+      "harmonicity_available": true,
+      "vorticity_vanishes": true
+    }
+  ],
+  "summary": {
+    "all_rows_reach_proxy_contradiction": true
+  }
+}

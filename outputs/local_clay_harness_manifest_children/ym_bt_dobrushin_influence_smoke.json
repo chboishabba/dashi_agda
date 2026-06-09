@@ -1,0 +1,216 @@
+{
+  "caveat": "Dobrushin row sums below 1 are a nearest-neighbor uniqueness proxy for this scalar compact-spin bound only; they do not prove BT-to-OS transfer, complete analyticity, reflection positivity, or YM mass gap.",
+  "coupling": 1.0,
+  "depth": 2,
+  "graph_summaries": [
+    {
+      "critical_beta": 0.34657359027997264,
+      "degree": 3,
+      "depth": 2,
+      "edge_count": 9,
+      "name": "BT_tree_p2_degree3",
+      "vertex_count": 10
+    },
+    {
+      "critical_beta": 0.25541281188299536,
+      "degree": 4,
+      "depth": 2,
+      "edge_count": 16,
+      "name": "BT_tree_p3_degree4",
+      "vertex_count": 17
+    },
+    {
+      "critical_beta": 0.12565721414045303,
+      "degree": 8,
+      "depth": 2,
+      "edge_count": 64,
+      "name": "BT_tree_p7_degree8",
+      "vertex_count": 65
+    },
+    {
+      "critical_beta": 0.12565721414045303,
+      "degree": 8,
+      "depth": null,
+      "edge_count": null,
+      "name": "hypercubic_4d_degree8",
+      "vertex_count": null
+    }
+  ],
+  "regimes": {
+    "bt_vs_hypercubic": [
+      {
+        "bt_critical_beta": 0.34657359027997264,
+        "bt_degree": 3,
+        "bt_graph": "BT_tree_p2_degree3",
+        "bt_has_larger_proxy_window_than_hypercubic": true,
+        "hypercubic_critical_beta": 0.12565721414045303,
+        "hypercubic_degree": 8
+      },
+      {
+        "bt_critical_beta": 0.25541281188299536,
+        "bt_degree": 4,
+        "bt_graph": "BT_tree_p3_degree4",
+        "bt_has_larger_proxy_window_than_hypercubic": true,
+        "hypercubic_critical_beta": 0.12565721414045303,
+        "hypercubic_degree": 8
+      },
+      {
+        "bt_critical_beta": 0.12565721414045303,
+        "bt_degree": 8,
+        "bt_graph": "BT_tree_p7_degree8",
+        "bt_has_larger_proxy_window_than_hypercubic": false,
+        "hypercubic_critical_beta": 0.12565721414045303,
+        "hypercubic_degree": 8
+      }
+    ],
+    "first_unsafe_beta_by_graph": {
+      "BT_tree_p2_degree3": null,
+      "BT_tree_p3_degree4": null,
+      "BT_tree_p7_degree8": 0.2,
+      "hypercubic_4d_degree8": 0.2
+    },
+    "safe_betas_by_graph": {
+      "BT_tree_p2_degree3": [
+        0.05,
+        0.1,
+        0.2
+      ],
+      "BT_tree_p3_degree4": [
+        0.05,
+        0.1,
+        0.2
+      ],
+      "BT_tree_p7_degree8": [
+        0.05,
+        0.1
+      ],
+      "hypercubic_4d_degree8": [
+        0.05,
+        0.1
+      ]
+    }
+  },
+  "rows": [
+    {
+      "beta": 0.05,
+      "coupling": 1.0,
+      "graph": "BT_tree_p2_degree3",
+      "influence_per_edge": 0.04995837495787998,
+      "margin_to_one": 0.85012487512636,
+      "max_degree": 3,
+      "max_row_sum": 0.14987512487363994,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.1,
+      "coupling": 1.0,
+      "graph": "BT_tree_p2_degree3",
+      "influence_per_edge": 0.09966799462495582,
+      "margin_to_one": 0.7009960161251325,
+      "max_degree": 3,
+      "max_row_sum": 0.2990039838748675,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.2,
+      "coupling": 1.0,
+      "graph": "BT_tree_p2_degree3",
+      "influence_per_edge": 0.197375320224904,
+      "margin_to_one": 0.407874039325288,
+      "max_degree": 3,
+      "max_row_sum": 0.592125960674712,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.05,
+      "coupling": 1.0,
+      "graph": "BT_tree_p3_degree4",
+      "influence_per_edge": 0.04995837495787998,
+      "margin_to_one": 0.8001665001684801,
+      "max_degree": 4,
+      "max_row_sum": 0.1998334998315199,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.1,
+      "coupling": 1.0,
+      "graph": "BT_tree_p3_degree4",
+      "influence_per_edge": 0.09966799462495582,
+      "margin_to_one": 0.6013280215001767,
+      "max_degree": 4,
+      "max_row_sum": 0.3986719784998233,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.2,
+      "coupling": 1.0,
+      "graph": "BT_tree_p3_degree4",
+      "influence_per_edge": 0.197375320224904,
+      "margin_to_one": 0.21049871910038398,
+      "max_degree": 4,
+      "max_row_sum": 0.789501280899616,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.05,
+      "coupling": 1.0,
+      "graph": "BT_tree_p7_degree8",
+      "influence_per_edge": 0.04995837495787998,
+      "margin_to_one": 0.6003330003369602,
+      "max_degree": 8,
+      "max_row_sum": 0.3996669996630398,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.1,
+      "coupling": 1.0,
+      "graph": "BT_tree_p7_degree8",
+      "influence_per_edge": 0.09966799462495582,
+      "margin_to_one": 0.20265604300035345,
+      "max_degree": 8,
+      "max_row_sum": 0.7973439569996466,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.2,
+      "coupling": 1.0,
+      "graph": "BT_tree_p7_degree8",
+      "influence_per_edge": 0.197375320224904,
+      "margin_to_one": -0.579002561799232,
+      "max_degree": 8,
+      "max_row_sum": 1.579002561799232,
+      "plausible_uniqueness_proxy": false
+    },
+    {
+      "beta": 0.05,
+      "coupling": 1.0,
+      "graph": "hypercubic_4d_degree8",
+      "influence_per_edge": 0.04995837495787998,
+      "margin_to_one": 0.6003330003369602,
+      "max_degree": 8,
+      "max_row_sum": 0.3996669996630398,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.1,
+      "coupling": 1.0,
+      "graph": "hypercubic_4d_degree8",
+      "influence_per_edge": 0.09966799462495582,
+      "margin_to_one": 0.20265604300035345,
+      "max_degree": 8,
+      "max_row_sum": 0.7973439569996466,
+      "plausible_uniqueness_proxy": true
+    },
+    {
+      "beta": 0.2,
+      "coupling": 1.0,
+      "graph": "hypercubic_4d_degree8",
+      "influence_per_edge": 0.197375320224904,
+      "margin_to_one": -0.579002561799232,
+      "max_degree": 8,
+      "max_row_sum": 1.579002561799232,
+      "plausible_uniqueness_proxy": false
+    }
+  ],
+  "status": "toy_proxy_only_no_proof_claim"
+}

@@ -1,0 +1,7 @@
+step_id,step_name,input_claim,expression,status,proved_in_repo,blocks_anisotropic_assumption_a,blocks_kp_gate_b1
+S1,SpatialOnlyQhpLinkCount,Q_hp averages spatial links only,"|Lambda^1_{k,sp}| = 3*L^(3k)",RECORDED_INPUT,False,True,True
+S2,BalabanCMP98LocalOscillationBoundForQhp,CMP 98 averaging locality must be specialized to Q_hp,osc_e(Q_hp) <= C_local*L^(-2k),OPEN_THEOREM_OBJECT,False,True,True
+S3,SquaredOscillationProduct,square the per-link bound and sum over spatial links,3*L^(3k)*C_local^2*L^(-4k)=3*C_local^2*L^(-k),ARITHMETIC_CONDITIONAL,False,True,False
+S4,UniformAssumptionAConstant,L>=2 and k>=0,3*C_local^2*L^(-k) <= 3*C_local^2,ARITHMETIC_CONDITIONAL,False,True,False
+S5,AnisotropicAssumptionA,S1+S2+S3+S4 plus Lipschitz test observable control,sum_spatial_e osc_e(F o Q_hp)^2 <= 3*C_local^2*Lip(F)^2,OPEN_FAIL_CLOSED,False,True,False
+S6,EffectiveActionPolymersSpatialOnlyForA1,shared anisotropic input layer also feeds KP support,residual effective-action polymers have spatial blocked support,OPEN_SEPARATE_GATE,False,False,True

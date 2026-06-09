@@ -119,6 +119,12 @@ canonical15WeightedQcoreSupportNormalForm : Nat
 canonical15WeightedQcoreSupportNormalForm =
   weightedQcoreSupportAtCanonical canonical15PressureState
 
+canonicalStatePrimeEquality : Set
+canonicalStatePrimeEquality =
+  canonical15MaxCancellationPressureNormalForm
+  ≡
+  canonical15WeightedQcoreSupportNormalForm
+
 canonical15MaxCancellationPressureNormalFormIsTwo :
   canonical15MaxCancellationPressureNormalForm ≡ 2
 canonical15MaxCancellationPressureNormalFormIsTwo =
@@ -135,11 +141,16 @@ canonical15MaxSupportReflRouteMismatch :
   canonical15WeightedQcoreSupportNormalForm
 canonical15MaxSupportReflRouteMismatch ()
 
+canonicalStatePrimeEqualityObstruction :
+  canonicalStatePrimeEquality → ⊥
+canonicalStatePrimeEqualityObstruction =
+  canonical15MaxSupportReflRouteMismatch
+
 canonicalMaxSupportReflRouteObstruction :
   CanonicalMaxSupportReflRoute →
   ⊥
 canonicalMaxSupportReflRouteObstruction claimedReflRoute =
-  canonical15MaxSupportReflRouteMismatch
+  canonicalStatePrimeEqualityObstruction
     (claimedReflRoute 15)
 
 MaxCancellationPressureWeightedQcoreSupportEquality : Set
@@ -290,6 +301,29 @@ canonical15PressureWitnessObstruction :
 canonical15PressureWitnessObstruction witness =
   W9.canonical15PressureWitnessConcreteMismatch
     (witness (W9.one , W9.three))
+
+record Canonical15PressureWitnessCaseSplitInterface : Setω where
+  field
+    pressureWitnessByCaseSplit :
+      Canonical15PressureWitnessType
+
+canonical15PressureWitnessCaseSplitInterfaceObstruction :
+  Canonical15PressureWitnessCaseSplitInterface → ⊥
+canonical15PressureWitnessCaseSplitInterfaceObstruction interface =
+  canonical15PressureWitnessObstruction
+    (Canonical15PressureWitnessCaseSplitInterface.pressureWitnessByCaseSplit
+      interface)
+
+B4WeightedQcoreBoundAliasBridgeInterface : Set
+B4WeightedQcoreBoundAliasBridgeInterface =
+  (bound : B4RootQuadraticBoundType) →
+  Canonical15PressureWitnessType
+
+b4WeightedQcoreBoundAliasBridgeInterfaceObstruction :
+  B4WeightedQcoreBoundAliasBridgeInterface → ⊥
+b4WeightedQcoreBoundAliasBridgeInterfaceObstruction bridge =
+  canonical15PressureWitnessObstruction
+    (bridge B4SR.quadraticWeight)
 
 cancellationPressureQcoreCompatibilityWitnessObstruction :
   CancellationPressureQcoreCompatibilityWitness → ⊥

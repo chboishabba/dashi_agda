@@ -1,0 +1,94 @@
+{
+  "accepted_candidate_count": 0,
+  "candidate_count": 12,
+  "condition": "C*(K*)^-1/2*H1Tail <= epsilon*nu",
+  "constant_C": "1",
+  "contract": "ns_sprint90_epsilon_budget_solver",
+  "epsilon": "0.1",
+  "evidence_complete_candidate_count": 0,
+  "fail_closed_reason": "No allowed supplied candidate provides both pointwise H1 tail and an epsilon-independent coefficient.",
+  "final_decision": "FAIL_CLOSED",
+  "k_laws": [
+    {
+      "exponent_alpha": "1",
+      "expression": "K* = nu^-1",
+      "law_id": "K1",
+      "name": "nu^-1"
+    },
+    {
+      "exponent_alpha": "4/3",
+      "expression": "K* = nu^-4/3",
+      "law_id": "K2",
+      "name": "nu^-4/3"
+    },
+    {
+      "exponent_alpha": "2",
+      "expression": "K* = nu^-2",
+      "law_id": "K3",
+      "name": "nu^-2"
+    }
+  ],
+  "nu_grid": [
+    "1",
+    "0.1",
+    "0.01",
+    "0.001"
+  ],
+  "required_residual_gate": "PointwiseH1TailWithIndependentEpsilonCoefficient",
+  "route": "fail-closed",
+  "route_decision": "fail-closed",
+  "tail_laws": [
+    {
+      "allowed_candidate": false,
+      "blocker": "Leray energy does not give pointwise danger-shell H1-tail smallness.",
+      "coefficient": "1",
+      "exponent_beta": "0",
+      "expression": "H1Tail <= C_L",
+      "independent_epsilon_coefficient": false,
+      "law_id": "T1",
+      "name": "Leray-only",
+      "pointwise_h1_tail": false,
+      "status": "REJECTED",
+      "supplied": true
+    },
+    {
+      "allowed_candidate": false,
+      "blocker": "Time-integrated dissipation is not a pointwise-in-time H1-tail bound.",
+      "coefficient": "1",
+      "exponent_beta": "1",
+      "expression": "integral H1Tail dt <= C_T * nu",
+      "independent_epsilon_coefficient": false,
+      "law_id": "T2",
+      "name": "time-integrated-only",
+      "pointwise_h1_tail": false,
+      "status": "REJECTED",
+      "supplied": true
+    },
+    {
+      "allowed_candidate": true,
+      "blocker": "Candidate is pointwise but lacks an epsilon-independent coefficient certificate.",
+      "coefficient": "0.5",
+      "exponent_beta": "1",
+      "expression": "H1Tail <= c_LE * nu on danger shell",
+      "independent_epsilon_coefficient": false,
+      "law_id": "T3",
+      "name": "local-enstrophy-candidate",
+      "pointwise_h1_tail": true,
+      "status": "REJECTED",
+      "supplied": true
+    },
+    {
+      "allowed_candidate": false,
+      "blocker": "This is the required law shape, but no supplied receipt/candidate provides it.",
+      "coefficient": "0.01",
+      "exponent_beta": "1",
+      "expression": "H1Tail <= c_ind * nu with c_ind independent of target epsilon",
+      "independent_epsilon_coefficient": true,
+      "law_id": "T4",
+      "name": "required-independent-coefficient-law",
+      "pointwise_h1_tail": true,
+      "status": "NOT_SUPPLIED",
+      "supplied": false
+    }
+  ]
+}

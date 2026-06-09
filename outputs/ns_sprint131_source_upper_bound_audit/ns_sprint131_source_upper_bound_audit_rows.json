@@ -1,0 +1,79 @@
+[
+  {
+    "actual": "ns_sprint131_source_upper_bound_audit",
+    "evidence": "deterministic Sprint131 audit emitting rows JSON, summary JSON, and Markdown",
+    "expected": "ns_sprint131_source_upper_bound_audit",
+    "gate": "Contract",
+    "passed": true
+  },
+  {
+    "actual": "PureDiffusionU1MaximumPrinciple",
+    "evidence": "{\"accepted\": true, \"clay_navier_stokes_promoted\": false, \"complete\": true, \"contract\": \"ns_sprint130_u1_maximum_principle_audit\", \"exit_code\": 0, \"lemma\": \"PureDiffusionU1MaximumPrinciple\", \"linf_bound\": \"||u1(t)||_inf <= ||u1(0)||_inf = M0\", \"source_path\": \"/home/c/Documents/code/dashi_agda/outputs/ns_sprint130_u1_maximum_principle_audit/ns_sprint130_u1_maximum_principle_audit_summary.json\", \"u1_linf_nonincreasing\": true}",
+    "expected": "PureDiffusionU1MaximumPrinciple",
+    "gate": "ReceiptLemma",
+    "passed": true
+  },
+  {
+    "actual": "||u1(t)||_inf <= ||u1(0)||_inf = M0",
+    "evidence": "consumes and records the Sprint130 L-infinity receipt",
+    "expected": "||u1(t)||_inf <= ||u1(0)||_inf = M0",
+    "gate": "U1MaximumPrincipleInput",
+    "passed": true
+  },
+  {
+    "actual": "delta=tau^9/20",
+    "evidence": "beta is fixed deterministically inside the Sprint130 alpha window by default",
+    "expected": "delta=tau^beta",
+    "gate": "ConcentrationScale",
+    "passed": true
+  },
+  {
+    "actual": "partial_z(u1^2)=2 u1 partial_z u1",
+    "evidence": "product rule identity",
+    "expected": "partial_z(u1^2)=2 u1 partial_z u1",
+    "gate": "SourceIdentity",
+    "passed": true
+  },
+  {
+    "actual": "|partial_z u1| <= C_u M0/delta = C_u M0 tau^(-beta)",
+    "evidence": "receipt-level scaling upper bound",
+    "expected": "|partial_z u1| <= C_u M0/delta = C_u M0 tau^(-beta)",
+    "gate": "DerivativeScale",
+    "passed": true
+  },
+  {
+    "actual": "|partial_z(u1^2)| <= C_source M0^2 tau^(-beta)",
+    "evidence": "using |u1|<=M0 and |partial_z u1|<=C_u M0 tau^(-beta), |partial_z(u1^2)|<=2 C_u M0^2 tau^(-beta)",
+    "expected": "|partial_z(u1^2)| <= C_source M0^2 tau^(-beta)",
+    "gate": "RigorousSourceUpperBound",
+    "passed": true
+  },
+  {
+    "actual": "tau^-(9/20)",
+    "evidence": "{\"bounded_by_sprint130_proxy_for_beta_le_one\": true, \"chosen_source_exponent\": 0.45, \"chosen_source_exponent_fraction\": \"9/20\", \"comparison_note\": \"the closed estimate is an upper bound at tau^(-beta), not a tau^-2 lower-source mechanism\", \"dominates_required_quadratic_bkm_source\": false, \"matches_required_quadratic_bkm_source\": false, \"quadratic_source_obstructed\": true, \"required_quadratic_bkm_exponent\": 2.0, \"required_quadratic_bkm_source\": \"tau^-2\", \"sprint130_source_proxy\": \"tau^-1\", \"sprint130_source_proxy_exponent\": 1.0}",
+    "expected": "tau^-2",
+    "gate": "QuadraticBkmComparison",
+    "passed": true
+  },
+  {
+    "actual": "tau^-(9/20)",
+    "evidence": "for the selected beta<=1, tau^(-beta) is no more singular than tau^-1",
+    "expected": "tau^-1",
+    "gate": "Sprint130ProxyComparison",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "evidence": "this audit closes only RigorousSourceUpperBound and does not claim Clay Navier-Stokes",
+    "expected": "false",
+    "gate": "ClayNavierStokesPromotion",
+    "passed": true
+  },
+  {
+    "actual": "0",
+    "evidence": "[]",
+    "expected": "zero hits",
+    "gate": "forbidden marker scan",
+    "passed": true
+  }
+]

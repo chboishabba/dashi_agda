@@ -1,0 +1,7 @@
+{
+  "all_checks_ok": true,
+  "hilbert_norm_square_ok": true,
+  "jordan_von_neumann_setting_ok": true,
+  "promotion": false,
+  "real_part_inner_product_ok": true
+}

@@ -1,0 +1,94 @@
+{
+  "ClayNSExternalBoundary": true,
+  "ContinuumYMMassGapExternalBoundary": true,
+  "FullUnificationExternalBoundary": true,
+  "HodgeMaxwellAfterSMHiggs": true,
+  "SMHiggsObservableBridgePriority": true,
+  "canonical_tier_terms": [
+    "Tier4 Maxwell/Hodge",
+    "TierX Clay"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "clay_yang_mills_promoted": false,
+  "continuumYMMassGapPromoted": false,
+  "continuum_ym_mass_gap_promoted": false,
+  "contract": "ns_sprint160_unification_gap_tier_map",
+  "control_card": {
+    "C": "Python stdlib emitter writes tier rows to JSON, CSV, Markdown, and manifest.",
+    "F": "Full unification, Clay Navier-Stokes, and continuum Yang-Mills mass-gap promotion are external boundaries.",
+    "G": "Validation requires every expected tier once, SM/Higgs priority before Hodge/Maxwell, and all promotion flags false.",
+    "L": "tiered closure map -> priority queue -> promotion guards remain false.",
+    "O": "Worker 4 owns the Sprint160 unification gap tier map emitter.",
+    "P": "Use this artifact to sequence SM/Higgs observable bridge first and Hodge/Maxwell finite bridge second.",
+    "R": "Map finite local closures and external continuum boundaries without promoting full unification, Clay NS, or continuum YM mass gap.",
+    "S": "Scope closures, empirical promotion, finite receipts, chemistry rules, and Maxwell/Hodge bridge work are separated from external Clay/YM boundaries."
+  },
+  "decision": "unification_gap_tier_map_fail_closed",
+  "expected_tiers": [
+    "Tier0",
+    "Tier1",
+    "Tier2",
+    "Tier3",
+    "Tier4",
+    "TierX"
+  ],
+  "expected_tiers_present": true,
+  "external_boundary_valid": true,
+  "fullClayNSPromoted": false,
+  "fullUnificationPromoted": false,
+  "full_clay_ns_promoted": false,
+  "full_unification_promoted": false,
+  "lane": 4,
+  "next_action_priority": [
+    {
+      "next_action": "prioritize SM/Higgs observable bridge and receipt-backed comparison law",
+      "priority": 1,
+      "tier": "Tier1"
+    },
+    {
+      "next_action": "advance Hodge/Maxwell finite geometry bridge after SM/Higgs observable bridge",
+      "priority": 2,
+      "tier": "Tier4"
+    },
+    {
+      "next_action": "maintain fail-closed authority guards while downstream bridges are evaluated",
+      "priority": 3,
+      "tier": "Tier0"
+    },
+    {
+      "next_action": "keep constants and metrology receipts synchronized with observable bridge inputs",
+      "priority": 4,
+      "tier": "Tier2"
+    },
+    {
+      "next_action": "retain finite chemistry rules as support-only until observable and geometry bridges stabilize",
+      "priority": 5,
+      "tier": "Tier3"
+    },
+    {
+      "next_action": "do not promote full unification, Clay NS, or continuum YM mass gap from finite tier artifacts",
+      "priority": 99,
+      "tier": "TierX"
+    }
+  ],
+  "next_action_priority_favors": [
+    "SM/Higgs observable bridge",
+    "Hodge/Maxwell finite geometry bridge"
+  ],
+  "present_tiers": [
+    "Tier0",
+    "Tier1",
+    "Tier2",
+    "Tier3",
+    "Tier4",
+    "TierX"
+  ],
+  "priority_valid": true,
+  "promotion_allowed": false,
+  "row_count": 6,
+  "row_promotion_flags_false": true,
+  "sprint": 160,
+  "summary_hash": "b93ac140f1c111d7c5b929ed8bebe0b2cd738d7b5d485a083d777f73dc96d555",
+  "summary_promotion_flags_false": true,
+  "validation_passed": true
+}

@@ -1,0 +1,26 @@
+{
+  "source": "../dashiCFD/outputs/sprint56_packet_local_stretch_action_gpu_audit/ns_sprint56_packet_local_action_summary.json",
+  "parameters": {
+    "replay_mode": "sprint56_packet_local_action_from_gpu_summary",
+    "sprint56_packet_local_action_summary_input": "../dashiCFD/outputs/sprint56_packet_local_stretch_action_gpu_audit/ns_sprint56_packet_local_action_summary.json"
+  },
+  "diagnostic_mode": "sprint56_packet_local_action_replay_from_gpu_summary",
+  "packet_local_action_row_count": 3388,
+  "packet_local_hysteresis_row_count": 56006,
+  "direction_change_row_count": 3388,
+  "action_summary_row_count": 56,
+  "outputs": {
+    "sprint56_packet_local_action_summary": "Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/ns_sprint56_packet_local_action_summary.json",
+    "packet_local_lagrangian_action_csv": "Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/ns_packet_local_lagrangian_action.csv",
+    "packet_local_action_hysteresis_csv": "Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/ns_packet_local_action_hysteresis.csv",
+    "direction_change_separation_csv": "Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/ns_direction_change_separation.csv",
+    "packet_local_action_by_shell_csv": "Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/ns_packet_local_action_by_shell.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint56_packet_local_stretch_action_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftySixPacketLocalStretchActionAuditReceipt",
+  "evidence_boundary": "Sprint 56 replay consumes packet-local accumulated action summary artifacts only. It does not recompute truth snapshots, reconstructed packet masks, material lineage, weighted action summability, physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_SPRINT56_PACKET_LOCAL_ACTION_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

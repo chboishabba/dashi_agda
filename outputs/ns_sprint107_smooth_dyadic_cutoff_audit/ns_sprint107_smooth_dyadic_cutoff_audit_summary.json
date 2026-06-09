@@ -1,0 +1,364 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint107SmoothDyadicCutoffPartition.agda",
+  "all_subgates_closed": false,
+  "all_subgates_false": true,
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "dyadicShellEnergyDensityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "dyadicSupportAnnulusCoverClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "failClosedSmoothDyadicCutoffPartitionDecomposition": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "finiteKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "highFrequencyConcentrationMeasureClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "littlewoodPaleyShellProjectorClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularCutoffNormalizationClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "partitionOfUnityIdentityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "radialBumpFunctionConstructionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "smoothDyadicCutoffPartitionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "smoothDyadicCutoffPartitionDecompositionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "smoothOverlapMultiplicityBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "timeIntegratedFluxSurplusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "closed_subgate_count": 0,
+  "complete": false,
+  "contract": "ns_sprint107_smooth_dyadic_cutoff_audit",
+  "decomposition_ledger_closed": true,
+  "dyadic_shell_energy_density_closed": false,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_SMOOTH_DYADIC_CUTOFF_PARTITION",
+  "finite_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "smoothDyadicCutoffPartitionDecompositionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "radialBumpFunctionConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "dyadicSupportAnnulusCoverClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "partitionOfUnityIdentityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "smoothOverlapMultiplicityBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularCutoffNormalizationClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "smoothDyadicCutoffPartitionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "littlewoodPaleyShellProjectorClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "dyadicShellEnergyDensityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "highFrequencyConcentrationMeasureClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "signedLowModeFluxLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "timeIntegratedFluxSurplusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "failClosedSmoothDyadicCutoffPartitionDecomposition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "RadialBumpFunctionConstruction",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "DyadicSupportAnnulusCover",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "PartitionOfUnityIdentity",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "SmoothOverlapMultiplicityBound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "NonCircularCutoffNormalization",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "high_frequency_concentration_measure_closed": false,
+  "littlewood_paley_shell_projector_closed": false,
+  "missing_anchors": [],
+  "open_subgate_count": 5,
+  "partition_ledger_closed": true,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint107SmoothDyadicCutoffPartition",
+    "canonicalNSSprint107SmoothDyadicCutoffPartition",
+    "canonicalNSSprint107SmoothDyadicCutoffPartitionReceipt",
+    "canonicalSprint107SmoothDyadicCutoffPartitionFlags",
+    "SmoothDyadicCutoffPartitionDecomposition",
+    "SmoothDyadicCutoffPartitionSplitsIntoFiveSubgates",
+    "Sprint106SmoothDyadicCutoffPartitionAnchor",
+    "canonicalSprint106SmoothDyadicCutoffPartitionAnchor",
+    "SmoothDyadicCutoffSubgateStatus",
+    "SmoothDyadicCutoffPartitionDecompositionStatus",
+    "canonicalSmoothDyadicCutoffPartitionDecompositionStatus",
+    "requiredSmoothDyadicCutoffPartitionSubgates",
+    "RadialBumpFunctionConstruction",
+    "DyadicSupportAnnulusCover",
+    "PartitionOfUnityIdentity",
+    "SmoothOverlapMultiplicityBound",
+    "NonCircularCutoffNormalization",
+    "RadialBumpFunctionConstructionOpen",
+    "DyadicSupportAnnulusCoverOpen",
+    "PartitionOfUnityIdentityOpen",
+    "SmoothOverlapMultiplicityBoundOpen",
+    "NonCircularCutoffNormalizationOpen",
+    "smoothDyadicCutoffPartitionDecompositionLedgerClosed",
+    "radialBumpFunctionConstructionClosed",
+    "dyadicSupportAnnulusCoverClosed",
+    "partitionOfUnityIdentityClosed",
+    "smoothOverlapMultiplicityBoundClosed",
+    "nonCircularCutoffNormalizationClosed",
+    "smoothDyadicCutoffPartitionClosed",
+    "littlewoodPaleyShellProjectorClosed",
+    "dyadicShellEnergyDensityClosed",
+    "highFrequencyConcentrationMeasureClosed",
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "signedLowModeFluxLowerBoundClosed",
+    "timeIntegratedFluxSurplusClosed",
+    "finiteKStarCollapseClosed",
+    "clayNavierStokesPromoted",
+    "failClosedSmoothDyadicCutoffPartitionDecomposition"
+  ],
+  "route_decision": "FAIL_CLOSED_SMOOTH_DYADIC_CUTOFF_PARTITION",
+  "signed_low_mode_flux_lower_bound_closed": false,
+  "smooth_dyadic_cutoff_partition_closed": false,
+  "smooth_dyadic_cutoff_partition_decomposition_ledger_closed": true,
+  "smooth_dyadic_cutoff_partition_ledger_closed": true,
+  "strain_compression_at_high_frequency_concentration_points_closed": false,
+  "subgate_checks": {
+    "DyadicSupportAnnulusCover": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    },
+    "NonCircularCutoffNormalization": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    },
+    "PartitionOfUnityIdentity": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    },
+    "RadialBumpFunctionConstruction": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    },
+    "SmoothOverlapMultiplicityBound": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    }
+  },
+  "subgate_dyadic_support_annulus_cover_open": true,
+  "subgate_non_circular_cutoff_normalization_open": true,
+  "subgate_partition_of_unity_identity_open": true,
+  "subgate_radial_bump_function_construction_open": true,
+  "subgate_smooth_overlap_multiplicity_bound_open": true,
+  "subgates": [
+    "RadialBumpFunctionConstruction",
+    "DyadicSupportAnnulusCover",
+    "PartitionOfUnityIdentity",
+    "SmoothOverlapMultiplicityBound",
+    "NonCircularCutoffNormalization"
+  ],
+  "target_present": true,
+  "time_integrated_flux_surplus_closed": false
+}

@@ -1,0 +1,58 @@
+{
+  "classification_counts": {
+    "closed_exact": 4,
+    "conditionally_closed": 2,
+    "open": 5
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "closed_exact": [
+    "anti-correlation",
+    "Gram matrix",
+    "multi-packet Reynolds stress",
+    "zero-mean rotation cycle"
+  ],
+  "closed_exact_count": 4,
+  "complete": true,
+  "conditionally_closed": [
+    "vortex-stretching log-gap obstruction",
+    "Hou-Luo viscous obstruction beta>0"
+  ],
+  "conditionally_closed_count": 2,
+  "contract": "ns_sprint132_gap_inventory_classifier",
+  "control_card": {
+    "C": "deterministic Python emitter writes rows JSON, summary JSON, and Markdown report",
+    "F": "any claim of full Clay Navier-Stokes promotion is outside this classifier",
+    "G": "exit code is 0 exactly when the inventory is complete and Clay flags remain false",
+    "L": "the only load-bearing missing lemma surfaced for the next move is NoLogAxisymmetricBiotSavartUniform",
+    "O": "Worker 3 owns only the Sprint132 gap inventory classifier script and output directory",
+    "P": "publish WBF no-go tower and axisymmetric moderate-Re regularization without Clay promotion",
+    "R": "encode the complete NS programme gap map with exact, conditional, and open classifications",
+    "S": "four WBF obstructions are closed_exact, two axisymmetric obstructions are conditionally_closed, and five regimes remain open"
+  },
+  "exit_code": 0,
+  "exit_reason": "complete Sprint132 gap inventory emitted; programme contains publishable obstruction packages but full Clay Navier-Stokes remains unsolved",
+  "full_clay_ns_solved": false,
+  "load_bearing_gap_count": 3,
+  "load_bearing_gaps": [
+    "vortex-stretching log-gap obstruction",
+    "Hou-Luo viscous obstruction beta>0",
+    "large-Re axisymmetric"
+  ],
+  "open": [
+    "large-Re axisymmetric",
+    "marginal beta=0",
+    "Euler nu=0",
+    "non-resonant triads",
+    "multi-scale concentration"
+  ],
+  "open_count": 5,
+  "publishable_now": [
+    "WBF no-go tower",
+    "axisymmetric moderate-Re regularization"
+  ],
+  "recommended_next_action": "attempt_NoLogAxisymmetricBiotSavartUniform",
+  "row_count": 11,
+  "single_load_bearing_missing_lemma": "NoLogAxisymmetricBiotSavartUniform"
+}

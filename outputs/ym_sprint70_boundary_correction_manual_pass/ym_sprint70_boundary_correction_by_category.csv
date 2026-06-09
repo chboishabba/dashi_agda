@@ -1,0 +1,6 @@
+category,plaquette_count,base_action_total,correction_action_total
+interior,0,0,0
+top_temporal_face,36,36.0,0.0
+bottom_temporal_face,36,36.0,0.0
+spatial_boundary,36,36.0,0.0
+mixed_coupling,108,108.0,2.16

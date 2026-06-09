@@ -8,6 +8,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 import DASHI.Physics.BianchiEinsteinAssumptions as BEA
 import DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate as DET
+import DASHI.Physics.Closure.FactorVecDiscreteMetricTensorSurface as FVMetric
 import DASHI.Physics.Closure.GRDiscreteBianchiFiniteR as GRB
 open import MonsterOntos using (SSP)
 import Ontology.GodelLattice as GL
@@ -740,6 +741,20 @@ record DiscreteBianchiIdentitySurface : Setω where
     primeDifferenceToRiemannConnectionAdapterReceipt :
       PrimeDifferenceToRiemannConnectionAdapterReceipt
 
+    factorVecDiscreteMetricTensorSurface :
+      FVMetric.FactorVecDiscreteMetricTensorSurface
+
+    factorVecMetricContractedBianchiRoute :
+      FVMetric.FactorVecContractedBianchiRoute
+
+    factorVecMetricFirstContractedBianchiGate :
+      FVMetric.FactorVecContractedBianchiRouteMissingGate
+
+    factorVecMetricFirstContractedBianchiGateIsSignature :
+      factorVecMetricFirstContractedBianchiGate
+      ≡
+      FVMetric.missingNonDegenerateFactorVecMetricSignature
+
     finiteRBianchiSidecarMissing :
       List GRB.GRDiscreteBianchiFiniteRMissingIngredient
 
@@ -791,6 +806,15 @@ canonicalDiscreteBianchiIdentitySurface =
         canonicalPrimeCarrierFiniteDifferenceBianchiSurface
     ; primeDifferenceToRiemannConnectionAdapterReceipt =
         canonicalPrimeDifferenceToRiemannConnectionAdapterReceipt
+    ; factorVecDiscreteMetricTensorSurface =
+        FVMetric.canonicalFactorVecDiscreteMetricTensorSurface
+    ; factorVecMetricContractedBianchiRoute =
+        FVMetric.canonicalFactorVecContractedBianchiRoute
+    ; factorVecMetricFirstContractedBianchiGate =
+        FVMetric.FactorVecContractedBianchiRoute.firstRemainingGate
+          FVMetric.canonicalFactorVecContractedBianchiRoute
+    ; factorVecMetricFirstContractedBianchiGateIsSignature =
+        refl
     ; finiteRBianchiSidecarMissing =
         GRB.canonicalGRDiscreteBianchiFiniteRMissingIngredients
     ; manifoldLikeAssumptionModule =
@@ -812,6 +836,7 @@ canonicalDiscreteBianchiIdentitySurface =
     ; requestBoundary =
         "Prime-carrier finite differences now commute on FactorVec by FVI.primeBumpCommutes"
         ∷ "Antisymmetrized double-difference zero is typed as equality of double prime-bump pullbacks"
+        ∷ "FactorVecDiscreteMetricTensorSurface now supplies a theorem-thin symmetric rational g and flat finite Koszul/Christoffel witness over SSP tangent directions"
         ∷ "DiscreteEinsteinTensorConstructionRequestSurface names Riemann, Ricci, scalar curvature, and Einstein tensor construction fields"
         ∷ "GRDiscreteBianchiFiniteR still records missing finite-r Bianchi, metric contraction, and stress-energy compatibility ingredients"
         ∷ "BianchiEinsteinAssumptions exposes Div G == zeroS as an assumption-level gate, not as a derivation from Riemann antisymmetry"
@@ -821,6 +846,7 @@ canonicalDiscreteBianchiIdentitySurface =
     ; noPromotionBoundary =
         "This module does not inhabit ContractedBianchiPrimitiveBundle"
         ∷ "This module does not inhabit PrimeDifferenceToRiemannConnectionAdapterBundle for any tensor request target"
+        ∷ "This module does not promote the FactorVec flat metric seed to a non-degenerate signature metric"
         ∷ "This module does not construct a non-flat connection from prime finite differences"
         ∷ "This module does not construct a discrete Riemann antisymmetry proof"
         ∷ "This module does not construct a covariant divergence operator"

@@ -1,0 +1,30 @@
+{
+  "GeneralSmoothFiniteEnergyNSRegularity": false,
+  "MechanismExhaustionForFullClayNS": false,
+  "SymmetricAxisymmetricWithSwirlGlobalRegularity": true,
+  "SymmetricHouLuoRegularityClassClosure": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint158_assumption_scope_matrix",
+  "control_card": {
+    "C": "Python emitter writes matrix rows to JSON, CSV, Markdown, and manifest.",
+    "F": "Full Clay requires a mechanism-exhaustion theorem absent from this route.",
+    "G": "Any row marked out_of_scope must keep Clay/general NS flags false.",
+    "L": "covered assumption -> covered conclusion -> documentary packet -> explicit non-claim.",
+    "O": "Worker 3 owns the assumption/scope matrix.",
+    "P": "Use the matrix to prevent theorem-scope drift during publication.",
+    "R": "Separate covered assumptions, conclusions, documentary scope, and explicit non-claims.",
+    "S": "The symmetric theorem is closed; general NS and Clay remain not covered."
+  },
+  "covered_assumption_count": 5,
+  "covered_conclusion_count": 2,
+  "fullClayNSSolved": false,
+  "fullNavierStokesSolutionConstructed": false,
+  "full_clay_ns_solved": false,
+  "lane": 3,
+  "out_of_scope_count": 3,
+  "promotion_allowed": false,
+  "row_count": 11,
+  "sprint": 158,
+  "summary_hash": "eaf78704dc1ede2d3d4fad4f8cb62cd87b25ecc6ab73783588e4a9b4775516a0",
+  "validation_passed": true
+}

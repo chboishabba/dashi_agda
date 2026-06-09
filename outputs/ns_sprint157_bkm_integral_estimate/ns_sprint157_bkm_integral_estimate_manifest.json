@@ -1,0 +1,34 @@
+{
+  "contract": "ns_sprint157_bkm_integral_estimate",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_bkm_integral_estimate/ns_sprint157_bkm_integral_estimate_manifest.json",
+      "sha256": "5bc32ce51fd4e6295991c0910bf455bdca0006a9e9a1f96b197c25935494662a"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_bkm_integral_estimate/ns_sprint157_bkm_integral_estimate.md",
+      "sha256": "d201e155f4de06af5f27fd62c7d2e4388a9c39221136404573d1ec0ceccd42f0"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_bkm_integral_estimate/ns_sprint157_bkm_integral_estimate_rows.csv",
+      "sha256": "a98b81b6e12d55f8025e6aa6b28c903d2de286eeccdd6a7353d38e678f47501d"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_bkm_integral_estimate/ns_sprint157_bkm_integral_estimate_rows.json",
+      "sha256": "20c4b1cfab9ca04ed3faf49449ecf0dca6d897f3ba6df2073f736d9779eb9ace"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_bkm_integral_estimate/ns_sprint157_bkm_integral_estimate_summary.json",
+      "sha256": "931fd9b8f34f42e1428b3151b5ca4b0d97a183c765041710736cc8fe06430a2f"
+    }
+  },
+  "lane": 2,
+  "manifest_hash": "6972932727d35965c9d3ce6dfe2ed289f65dbe9ca14b42d1850641c5c19ac09a",
+  "sprint": 157,
+  "validation_passed": true
+}

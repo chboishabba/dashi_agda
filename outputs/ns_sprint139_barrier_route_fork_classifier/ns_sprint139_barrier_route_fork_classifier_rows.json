@@ -1,0 +1,234 @@
+[
+  {
+    "blocked_claim": "Prove a boundary-compatible nonlocal theorem forcing partial_z^2 psi1 to have the sign or domination margin needed at every possible first positive maximum of v.",
+    "blocker_id": "GlobalConcavityOfPsi1",
+    "blocker_status": "open_not_promotable",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "classification": "open_primary_blocker",
+    "clay_navier_stokes_promoted": false,
+    "closure_condition": "Prove a boundary-compatible nonlocal theorem forcing partial_z^2 psi1 to have the sign or domination margin needed at every possible first positive maximum of v.",
+    "conditional_regularness_needed": true,
+    "evidence_against": [
+      "nonlocal elliptic coupling can reverse the local sign ledger",
+      "local support does not control off-center first crossings"
+    ],
+    "evidence_for": [
+      "local center expansion gives candidate favorable sign",
+      "Sprint 138 isolates the exact missing theorem"
+    ],
+    "fallback_trigger": "Select fallback if global sign/dominance is refuted or cannot be made boundary- and annulus-compatible.",
+    "fork_label": "Fork A",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "missing_input": [
+      "elliptic nonlocal psi1 dependence",
+      "sign-indefinite differentiated kernel contribution",
+      "boundary and annular source contribution",
+      "time persistence of the concavity sign"
+    ],
+    "open_blockers": [
+      "elliptic nonlocal psi1 dependence",
+      "sign-indefinite differentiated kernel contribution",
+      "boundary and annular source contribution",
+      "time persistence of the concavity sign"
+    ],
+    "promotion_allowed": false,
+    "recommendation_rank": 3,
+    "route_action": "keep_open_but_do_not_promote",
+    "route_id": "GlobalConcavityOfPsi1",
+    "route_status": "open_not_promotable",
+    "row_hash": "24327fb7255d7f00f7c61783fb1c0a63b5164aa2d5090ade80d894d9595f74b2",
+    "sprint138_basis": [
+      "ns_sprint138_global_concavity_blocker",
+      "local Taylor concavity supported only near the symmetry center"
+    ]
+  },
+  {
+    "blocked_claim": "Prove no secondary axial peak, shoulder, or positive local maximum of v can form outside the primary barrier region during the relevant time window.",
+    "blocker_id": "SecondaryPeakExclusion",
+    "blocker_status": "open_not_promotable",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "classification": "open_shape_persistence_blocker",
+    "clay_navier_stokes_promoted": false,
+    "closure_condition": "Prove no secondary axial peak, shoulder, or positive local maximum of v can form outside the primary barrier region during the relevant time window.",
+    "conditional_regularness_needed": true,
+    "evidence_against": [
+      "source terms are not scalar heat flow",
+      "radial dependence and nonlocal feedback break 1D zero-count templates"
+    ],
+    "evidence_for": [
+      "initial single-peak hypothesis can start a first-crossing argument",
+      "viscous smoothing helps regularity of the profile"
+    ],
+    "fallback_trigger": "Select fallback if a secondary crossing scenario survives all reasonable localization or zero-count replacements.",
+    "fork_label": "Fork B",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "missing_input": [
+      "nonlinear source can form shoulders",
+      "annular Gamma/u1 constraints do not control v zero count",
+      "coupled axisymmetric Sturmian zero-number principle absent",
+      "secondary off-peak positive-v crossing remains possible"
+    ],
+    "open_blockers": [
+      "nonlinear source can form shoulders",
+      "annular Gamma/u1 constraints do not control v zero count",
+      "coupled axisymmetric Sturmian zero-number principle absent",
+      "secondary off-peak positive-v crossing remains possible"
+    ],
+    "promotion_allowed": false,
+    "recommendation_rank": 4,
+    "route_action": "keep_open_after_higher_priority_routes",
+    "route_id": "SecondaryPeakExclusion",
+    "route_status": "open_not_promotable",
+    "row_hash": "fd3cfc8be1486f124a09ea1fe20ec174022f3aa3dcfeb7eea00b170787fdc0ac",
+    "sprint138_basis": [
+      "ns_sprint138_secondary_peak_exclusion",
+      "single-peak initial shape is recorded but not persistent"
+    ]
+  },
+  {
+    "blocked_claim": "Prove pointwise sign or log-aware integrated domination for -(partial_z u^r) partial_r u1 at every possible first positive maximum of v.",
+    "blocker_id": "TransportCommutatorDomination",
+    "blocker_status": "open_high_priority",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "classification": "open_budget_domination_route",
+    "clay_navier_stokes_promoted": false,
+    "closure_condition": "Prove pointwise sign or log-aware integrated domination for -(partial_z u^r) partial_r u1 at every possible first positive maximum of v.",
+    "conditional_regularness_needed": true,
+    "evidence_against": [
+      "the term can be positive at first crossing",
+      "available divergence-free identities are constraint equations, not domination"
+    ],
+    "evidence_for": [
+      "the commutator term is explicitly isolated",
+      "possible pointwise or integrated domination hypotheses are concrete"
+    ],
+    "fallback_trigger": "Select fallback if log-aware commutator domination cannot be absorbed by any local concavity or weighted barrier margin.",
+    "fork_label": "Fork C",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "missing_input": [
+      "nonhomogeneous radial commutator injects source independent of v",
+      "incompressibility does not fix sign correlation",
+      "log Biot-Savart strain loss remains open",
+      "global barrier closure unavailable"
+    ],
+    "open_blockers": [
+      "nonhomogeneous radial commutator injects source independent of v",
+      "incompressibility does not fix sign correlation",
+      "log Biot-Savart strain loss remains open",
+      "global barrier closure unavailable"
+    ],
+    "promotion_allowed": false,
+    "recommendation_rank": 2,
+    "route_action": "prioritize_as_next_analytic_fork",
+    "route_id": "TransportCommutatorDomination",
+    "route_status": "open_high_priority",
+    "row_hash": "781e4eb1d0a3e8194223acf09b1b5c6aa26b7b28acd89937cd98bdffad033f9f",
+    "sprint138_basis": [
+      "ns_sprint138_transport_commutator_budget",
+      "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+    ]
+  },
+  {
+    "blocked_claim": "Assemble a conditional theorem: if global concavity/dominance, secondary peak exclusion, and commutator domination all hold with compatible constants, then the local v barrier can feed a conditional regularity statement for the monitored route.",
+    "blocker_id": "ConditionalRegularityAssembly",
+    "blocker_status": "conditional_best_next_artifact",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "classification": "conditional_assembly_not_global_proof",
+    "clay_navier_stokes_promoted": false,
+    "closure_condition": "Assemble a conditional theorem: if global concavity/dominance, secondary peak exclusion, and commutator domination all hold with compatible constants, then the local v barrier can feed a conditional regularity statement for the monitored route.",
+    "conditional_regularness_needed": true,
+    "evidence_against": [
+      "all analytic gates remain open",
+      "conditional route regularity is weaker than a full Clay Navier-Stokes solution"
+    ],
+    "evidence_for": [
+      "Sprint 138 separated the three exact missing gates",
+      "conditional assembly can check interface compatibility without claiming proof"
+    ],
+    "fallback_trigger": "Do not use as fallback; use this only to make dependencies and constants explicit while keeping the theorem conditional.",
+    "fork_label": "Fork D",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "missing_input": [
+      "GlobalConcavityOfPsi1",
+      "SecondaryPeakExclusion",
+      "TransportCommutatorDomination",
+      "constant compatibility across all three conditions",
+      "translation from route regularity to full Clay class absent"
+    ],
+    "open_blockers": [
+      "GlobalConcavityOfPsi1",
+      "SecondaryPeakExclusion",
+      "TransportCommutatorDomination",
+      "constant compatibility across all three conditions",
+      "translation from route regularity to full Clay class absent"
+    ],
+    "promotion_allowed": false,
+    "recommendation_rank": 1,
+    "route_action": "rank_first_for_next_deterministic_artifact",
+    "route_id": "ConditionalRegularityAssembly",
+    "route_status": "conditional_best_next_artifact",
+    "row_hash": "e241150e11c7de11eead0f7d1572327591b95ab931ce22410edd1a8c7dc9be2d",
+    "sprint138_basis": [
+      "assemble GlobalConcavityOfPsi1",
+      "assemble SecondaryPeakExclusion",
+      "assemble TransportCommutatorDomination"
+    ]
+  },
+  {
+    "blocked_claim": "Abandon the barrier-promotion route or fall back to a weaker obstruction/result ledger if any required Sprint 138 blocker is refuted, incompatible, or cannot be localized.",
+    "blocker_id": "RouteAbandonFallback",
+    "blocker_status": "fallback_available_not_selected_first",
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "classification": "abandon_or_fallback_if_blockers_harden",
+    "clay_navier_stokes_promoted": false,
+    "closure_condition": "Abandon the barrier-promotion route or fall back to a weaker obstruction/result ledger if any required Sprint 138 blocker is refuted, incompatible, or cannot be localized.",
+    "conditional_regularness_needed": false,
+    "evidence_against": [
+      "fallback is not a regularity proof",
+      "fallback abandons the direct barrier closure attempt"
+    ],
+    "evidence_for": [
+      "fail-closed route accounting avoids accidental Clay promotion",
+      "fallback preserves useful obstruction information"
+    ],
+    "fallback_trigger": "Trigger when one of the three analytic gates is proved false or becomes structurally incompatible with the others.",
+    "fork_label": "Fork E",
+    "full_clay_ns_solved": false,
+    "global_proof_open": true,
+    "missing_input": [
+      "proof route may be overconstrained",
+      "conditional assumptions may not be simultaneously satisfiable",
+      "available evidence may support only obstruction classification"
+    ],
+    "open_blockers": [
+      "proof route may be overconstrained",
+      "conditional assumptions may not be simultaneously satisfiable",
+      "available evidence may support only obstruction classification"
+    ],
+    "promotion_allowed": false,
+    "recommendation_rank": 5,
+    "route_action": "hold_as_route_abandon_decision_point",
+    "route_id": "RouteAbandonFallback",
+    "route_status": "fallback_available_not_selected_first",
+    "row_hash": "0d70c2c20073f4166d5de81afe709ee4bf7f5753b3276360013989f59d8c296c",
+    "sprint138_basis": [
+      "global concavity open",
+      "secondary peak exclusion open",
+      "transport commutator domination open"
+    ]
+  }
+]

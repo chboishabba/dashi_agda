@@ -1,0 +1,246 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint101SignedLowModeFluxLowerBound.agda",
+  "ambiguous_source_candidates": [],
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "failClosedSignedLowModeFluxLowerBound": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "finiteTimeKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "timeIntegratedFluxSurplusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "canonical_agda_path": "DASHI/Physics/Closure/NSSprint101SignedLowModeFluxLowerBound.agda",
+  "clayNavierStokesPromoted": false,
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint101_signed_low_mode_flux_audit",
+  "evidence_audit_passed": true,
+  "failClosedSignedLowModeFluxLowerBound": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_SIGNED_LOW_MODE_FLUX_LOWER_BOUND",
+  "finiteTimeKStarCollapseClosed": false,
+  "finite_time_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "forbidden_markers": [
+    "postulate",
+    "TODO",
+    "stub",
+    "skeleton",
+    "admit",
+    "holes",
+    "hole_assignment",
+    "clay_promotion_true"
+  ],
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "signedLowModeFluxLowerBoundLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "signedLowModeFluxLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "timeIntegratedFluxSurplusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteTimeKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "failClosedSignedLowModeFluxLowerBound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "SignedLowModeFluxLowerBound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "TriadicSignCoherence",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "LowModeProjectionSignControl",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "CancellationDefectBound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "PressureTransportSignAccounting",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "recorded",
+      "gate": "NonCircularFluxSignSource",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "missing_analytic_object_checks": {
+    "CancellationDefectBound": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "LowModeProjectionSignControl": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "NonCircularFluxSignSource": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "PressureTransportSignAccounting": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "SignedLowModeFluxLowerBound": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    },
+    "TriadicSignCoherence": {
+      "actual": "present",
+      "expected": "recorded",
+      "passed": true
+    }
+  },
+  "missing_analytic_object_count": 6,
+  "missing_analytic_objects": [
+    "SignedLowModeFluxLowerBound",
+    "TriadicSignCoherence",
+    "LowModeProjectionSignControl",
+    "CancellationDefectBound",
+    "PressureTransportSignAccounting",
+    "NonCircularFluxSignSource"
+  ],
+  "missing_analytic_objects_recorded": [
+    "SignedLowModeFluxLowerBound",
+    "TriadicSignCoherence",
+    "LowModeProjectionSignControl",
+    "CancellationDefectBound",
+    "PressureTransportSignAccounting",
+    "NonCircularFluxSignSource"
+  ],
+  "missing_anchors": [],
+  "promotion_decision": "hold",
+  "required_anchors": [
+    "NSSprint101SignedLowModeFluxLowerBound",
+    "canonicalNSSprint101SignedLowModeFluxLowerBound",
+    "requiredSignedLowModeFluxLowerBoundObjects",
+    "SignedLowModeFluxLowerBound",
+    "TriadicSignCoherence",
+    "LowModeProjectionSignControl",
+    "CancellationDefectBound",
+    "PressureTransportSignAccounting",
+    "NonCircularFluxSignSource",
+    "MissingSignedLowModeFluxLowerBoundObject",
+    "failClosedSignedLowModeFluxLowerBound",
+    "signedLowModeFluxLowerBoundLedgerClosed",
+    "signedLowModeFluxLowerBoundClosed",
+    "timeIntegratedFluxSurplusClosed",
+    "finiteTimeKStarCollapseClosed",
+    "clayNavierStokesPromoted"
+  ],
+  "route_decision": "FAIL_CLOSED_SIGNED_LOW_MODE_FLUX_LOWER_BOUND",
+  "signedLowModeFluxLowerBoundClosed": false,
+  "signedLowModeFluxLowerBoundLedgerClosed": true,
+  "signed_low_mode_flux_lower_bound_closed": false,
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint101SignedLowModeFluxLowerBound.agda",
+      "status": "PASS"
+    }
+  ],
+  "surface": "NSSprint101 Sprint101 signed low-mode flux lower bound fail_closed Clay Navier-Stokes",
+  "timeIntegratedFluxSurplusClosed": false,
+  "time_integrated_flux_surplus_closed": false,
+  "unrecorded_missing_analytic_objects": []
+}

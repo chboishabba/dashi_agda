@@ -2,7 +2,8 @@ module DASHI.Foundations.RealAnalysisAxioms where
 
 open import Agda.Primitive using (Level; Setω; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (List; _∷_; _++_; [])
 open import Data.Nat.Base using (ℕ; suc) renaming (_+_ to _+ℕ_; _≤_ to _≤ℕ_)
 
 ------------------------------------------------------------------------
@@ -37,6 +38,53 @@ postulate
     ℝ →
     ℝ →
     Set
+
+cong :
+  {A B : Set} →
+  {x y : A} →
+  (f : A → B) →
+  x ≡ y →
+  f x ≡ f y
+cong f refl = refl
+
+trans :
+  {A : Set} →
+  {x y z : A} →
+  x ≡ y →
+  y ≡ z →
+  x ≡ z
+trans refl y≡z = y≡z
+
+mapList :
+  {A B : Set} →
+  (A → B) →
+  List A →
+  List B
+mapList f [] = []
+mapList f (x ∷ xs) = f x ∷ mapList f xs
+
+mapListAppend :
+  {A B : Set} →
+  (f : A → B) →
+  (left right : List A) →
+  mapList f (left ++ right)
+  ≡
+  mapList f left ++ mapList f right
+mapListAppend f [] right = refl
+mapListAppend f (x ∷ left) right =
+  cong
+    (λ mappedTail → f x ∷ mappedTail)
+    (mapListAppend f left right)
+
+listAppendRightIdentity :
+  {A : Set} →
+  (xs : List A) →
+  xs ++ [] ≡ xs
+listAppendRightIdentity [] = refl
+listAppendRightIdentity (x ∷ xs) =
+  cong
+    (λ rest → x ∷ rest)
+    (listAppendRightIdentity xs)
 
 record RealScalarSocket : Set₁ where
   field
@@ -598,6 +646,103 @@ record LocalDiscreteNonabelianStokesProofSurface : Set₁ where
     canonicalBoundaryWordAtDepth :
       (d : ℕ) →
       BoundaryWordAtDepth d (canonicalLoopAtDepth d)
+
+    boundaryWordAppendAtDepth :
+      (d : ℕ) →
+      (loop : LoopAtDepth d) →
+      BoundaryWordAtDepth d loop →
+      BoundaryWordAtDepth d loop →
+      BoundaryWordAtDepth d loop
+
+    BoundaryEdgeLabelAtDepth :
+      (d : ℕ) →
+      LoopAtDepth d →
+      Set
+
+    boundaryWordFromEdgeLabelsAtDepth :
+      (d : ℕ) →
+      (loop : LoopAtDepth d) →
+      List (BoundaryEdgeLabelAtDepth d loop) →
+      BoundaryWordAtDepth d loop
+
+    boundaryWordEdgeLabelsAtDepth :
+      (d : ℕ) →
+      (loop : LoopAtDepth d) →
+      BoundaryWordAtDepth d loop →
+      List (BoundaryEdgeLabelAtDepth d loop)
+
+    boundaryWordEdgeLabelsFromConstructedAtDepth :
+      (d : ℕ) →
+      (loop : LoopAtDepth d) →
+      (labels : List (BoundaryEdgeLabelAtDepth d loop)) →
+      boundaryWordEdgeLabelsAtDepth
+        d
+        loop
+        (boundaryWordFromEdgeLabelsAtDepth d loop labels)
+      ≡
+      labels
+
+    boundaryWordEdgeLabelsAppendAtDepth :
+      (d : ℕ) →
+      (loop : LoopAtDepth d) →
+      (left right : BoundaryWordAtDepth d loop) →
+      boundaryWordEdgeLabelsAtDepth
+        d
+        loop
+        (boundaryWordAppendAtDepth d loop left right)
+      ≡
+      boundaryWordEdgeLabelsAtDepth d loop left
+      ++
+      boundaryWordEdgeLabelsAtDepth d loop right
+
+    boundaryWordFoldAtDepth :
+      (d : ℕ) →
+      (loop : LoopAtDepth d) →
+      (Target : Set) →
+      (BoundaryWordAtDepth d loop → Target → Target) →
+      Target →
+      BoundaryWordAtDepth d loop →
+      Target
+
+    boundaryWordFoldComputesEdgeLabelListAtDepth :
+      (d : ℕ) →
+      (loop : LoopAtDepth d) →
+      (left right : BoundaryWordAtDepth d loop) →
+      boundaryWordFoldAtDepth
+        d
+        loop
+        (List (BoundaryEdgeLabelAtDepth d loop))
+        (λ word accumulatedLabels →
+          boundaryWordEdgeLabelsAtDepth d loop word
+          ++
+          accumulatedLabels)
+        []
+        (boundaryWordAppendAtDepth d loop left right)
+      ≡
+      boundaryWordEdgeLabelsAtDepth d loop left
+      ++
+      boundaryWordEdgeLabelsAtDepth d loop right
+
+    boundaryWordFoldComputesMappedEdgeLabelListAtDepth :
+      (d : ℕ) →
+      (loop : LoopAtDepth d) →
+      (TargetLabel : Set) →
+      (labelMap : BoundaryEdgeLabelAtDepth d loop → TargetLabel) →
+      (left right : BoundaryWordAtDepth d loop) →
+      boundaryWordFoldAtDepth
+        d
+        loop
+        (List TargetLabel)
+        (λ word accumulatedLabels →
+          mapList labelMap (boundaryWordEdgeLabelsAtDepth d loop word)
+          ++
+          accumulatedLabels)
+        []
+        (boundaryWordAppendAtDepth d loop left right)
+      ≡
+      mapList labelMap (boundaryWordEdgeLabelsAtDepth d loop left)
+      ++
+      mapList labelMap (boundaryWordEdgeLabelsAtDepth d loop right)
 
     telescopingBoundData :
       DiscreteTelescopingBoundData

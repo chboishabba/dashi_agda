@@ -1,0 +1,200 @@
+{
+  "accepted_families": [],
+  "accepted_source_count": 0,
+  "candidate_family_count": 5,
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint109_compact_support_classifier",
+  "control_card": {
+    "C": "single deterministic Python ledger emitting summary JSON, rows JSON, CSV, and Markdown",
+    "F": "accepted_source_count is zero because every candidate fails non_circular_source or another required gate",
+    "G": "Clay Navier-Stokes promotion remains false",
+    "L": "acceptance is conjunction of gate_results",
+    "O": "classify candidate compact-support source families",
+    "P": "FAIL_CLOSED_COMPACT_SUPPORT_SOURCE",
+    "R": "all six gates must pass and forbidden dependencies must be absent",
+    "S": "five requested candidates evaluated in fixed order"
+  },
+  "fail_closed": true,
+  "fail_closed_reason": "No candidate supplies the base exponential smooth function, boundary flatness, compact-support definition, smoothness across the boundary, and a non-circular source while avoiding forbidden dependencies.",
+  "final_decision": "FAIL_CLOSED_COMPACT_SUPPORT_SOURCE",
+  "forbidden_dependencies": [
+    "assumed_bkm_failure",
+    "assumed_serrin_failure",
+    "assumed_singularity",
+    "target_blowup",
+    "desired_conclusion",
+    "imposed_boundary_flatness",
+    "imposed_support_radius",
+    "external_forcing",
+    "target_kstar_collapse",
+    "non_leray_regularization"
+  ],
+  "option_b_closed": false,
+  "proof_claimed": false,
+  "rejected_families": [
+    "standard_exp_negative_inverse_bump",
+    "piecewise_polynomial_cutoff",
+    "mollified_indicator_bump",
+    "imported_schwartz_cutoff",
+    "imposed_compact_support_witness"
+  ],
+  "required_gates": [
+    "base_exp_smooth_function",
+    "boundary_flatness",
+    "compact_support_definition",
+    "smoothness_across_boundary",
+    "non_circular_source",
+    "no_forbidden_dependency"
+  ],
+  "route_decision": "FAIL_CLOSED_COMPACT_SUPPORT_SOURCE",
+  "rows": [
+    {
+      "accepted": false,
+      "ansatz": "use exp(-1/(1-r^2)) on r < 1 and zero outside the boundary",
+      "base_exp_smooth_function": true,
+      "boundary_flatness": true,
+      "classification": "classical compact bump without derived Navier-Stokes source role",
+      "compact_support_definition": true,
+      "failed_gates": [
+        "non_circular_source"
+      ],
+      "family": "standard_exp_negative_inverse_bump",
+      "family_id": "SEN",
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "base_exp_smooth_function": true,
+        "boundary_flatness": true,
+        "compact_support_definition": true,
+        "no_forbidden_dependency": true,
+        "non_circular_source": false,
+        "smoothness_across_boundary": true
+      },
+      "no_forbidden_dependency": true,
+      "non_circular_source": false,
+      "note": "The exponential inverse profile supplies the usual smooth compact bump, but it does not derive a non-circular source for the closure argument.",
+      "smoothness_across_boundary": true,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "patch polynomial pieces to equal one inside and vanish outside a chosen radius",
+      "base_exp_smooth_function": false,
+      "boundary_flatness": false,
+      "classification": "finite-order cutoff with boundary flatness not supplied by the construction",
+      "compact_support_definition": true,
+      "failed_gates": [
+        "base_exp_smooth_function",
+        "boundary_flatness",
+        "smoothness_across_boundary",
+        "non_circular_source",
+        "no_forbidden_dependency"
+      ],
+      "family": "piecewise_polynomial_cutoff",
+      "family_id": "PPC",
+      "forbidden_dependencies": "imposed_support_radius",
+      "gate_results": {
+        "base_exp_smooth_function": false,
+        "boundary_flatness": false,
+        "compact_support_definition": true,
+        "no_forbidden_dependency": false,
+        "non_circular_source": false,
+        "smoothness_across_boundary": false
+      },
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "note": "The support interval is selected in advance, and a finite polynomial patch does not provide the required infinite-order flatness across the boundary.",
+      "smoothness_across_boundary": false,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "convolve a ball indicator with a smooth mollifier and use the resulting cutoff",
+      "base_exp_smooth_function": false,
+      "boundary_flatness": false,
+      "classification": "regularized indicator with support and boundary behavior imported from inputs",
+      "compact_support_definition": true,
+      "failed_gates": [
+        "base_exp_smooth_function",
+        "boundary_flatness",
+        "non_circular_source",
+        "no_forbidden_dependency"
+      ],
+      "family": "mollified_indicator_bump",
+      "family_id": "MIB",
+      "forbidden_dependencies": "imposed_support_radius;non_leray_regularization",
+      "gate_results": {
+        "base_exp_smooth_function": false,
+        "boundary_flatness": false,
+        "compact_support_definition": true,
+        "no_forbidden_dependency": false,
+        "non_circular_source": false,
+        "smoothness_across_boundary": true
+      },
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "note": "Mollification gives a smoothened transition, but compact support comes from the selected indicator radius and the operation is a regularization input.",
+      "smoothness_across_boundary": true,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "import a Schwartz cutoff lemma and specialize it to the target compact region",
+      "base_exp_smooth_function": true,
+      "boundary_flatness": true,
+      "classification": "external cutoff package without local boundary-source derivation",
+      "compact_support_definition": true,
+      "failed_gates": [
+        "non_circular_source",
+        "no_forbidden_dependency"
+      ],
+      "family": "imported_schwartz_cutoff",
+      "family_id": "ISC",
+      "forbidden_dependencies": "desired_conclusion",
+      "gate_results": {
+        "base_exp_smooth_function": true,
+        "boundary_flatness": true,
+        "compact_support_definition": true,
+        "no_forbidden_dependency": false,
+        "non_circular_source": false,
+        "smoothness_across_boundary": true
+      },
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "note": "The imported cutoff can meet the analytic shape checks, but its source use is asserted from the target conclusion rather than derived internally.",
+      "smoothness_across_boundary": true,
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "declare the support radius, boundary flatness, and source witness as hypotheses",
+      "base_exp_smooth_function": true,
+      "boundary_flatness": true,
+      "classification": "forbidden compact-support witness by assumption",
+      "compact_support_definition": true,
+      "failed_gates": [
+        "non_circular_source",
+        "no_forbidden_dependency"
+      ],
+      "family": "imposed_compact_support_witness",
+      "family_id": "ICW",
+      "forbidden_dependencies": "imposed_boundary_flatness;imposed_support_radius;target_blowup;desired_conclusion",
+      "gate_results": {
+        "base_exp_smooth_function": true,
+        "boundary_flatness": true,
+        "compact_support_definition": true,
+        "no_forbidden_dependency": false,
+        "non_circular_source": false,
+        "smoothness_across_boundary": true
+      },
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "note": "This candidate has the requested formal labels only because the support radius, boundary flatness, and desired role are placed in the assumptions.",
+      "smoothness_across_boundary": true,
+      "verdict": "reject"
+    }
+  ],
+  "scope": "deterministic classifier for Navier-Stokes compact-support source candidates",
+  "sprint109_compact_support_source_closed": false
+}

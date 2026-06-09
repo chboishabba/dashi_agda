@@ -1,0 +1,25 @@
+{
+  "blowup_gate_count": 7,
+  "blowup_path_closed": false,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint135_hou_luo_blowup_gate_classifier",
+  "corrected_sprint134_assumptions": {
+    "gamma_is_maximum_principle_variable": true,
+    "hou_luo_axisymmetric_ns_route_open_live_candidate": true,
+    "u1_pure_diffusion_retracted": true,
+    "uniform_no_log_biot_savart_false": true
+  },
+  "exit_code": 0,
+  "full_clay_ns_solved": false,
+  "gate_count": 21,
+  "highest_alpha_next_gate": "LogLossSourceLowerBound",
+  "open_gate_count": 21,
+  "regularity_alternative_gate_count": 6,
+  "regularity_alternative_gates_present": true,
+  "regularity_fallback_gate": "LogLossSourceUpperControl",
+  "regularity_path_closed": false,
+  "required_blowup_gates_present": true,
+  "route": "HouLuoAxisymmetricNSRoute",
+  "route_status": "open_live_candidate"
+}

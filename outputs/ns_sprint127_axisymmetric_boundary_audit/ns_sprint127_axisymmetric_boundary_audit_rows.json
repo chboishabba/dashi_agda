@@ -1,0 +1,100 @@
+[
+  {
+    "actual": "present",
+    "check": "target surface present",
+    "evidence": "/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSSprint127AxisymmetricBoundaryVortexStretchingGate.agda",
+    "expected": "DASHI/Physics/Closure/NSSprint127AxisymmetricBoundaryVortexStretchingGate.agda",
+    "passed": true
+  },
+  {
+    "actual": "present",
+    "check": "Sprint126 import",
+    "evidence": "Sprint126",
+    "expected": "import NSSprint126LogGapAuditAndAxisymmetricPivot as Sprint126",
+    "passed": true
+  },
+  {
+    "actual": "all present",
+    "check": "required anchors",
+    "evidence": "[]",
+    "expected": "all present",
+    "passed": true
+  },
+  {
+    "actual": "all present",
+    "check": "required strings",
+    "evidence": "[]",
+    "expected": "all present",
+    "passed": true
+  },
+  {
+    "actual": "true",
+    "check": "boolean:axisymmetricBoundaryVortexStretchingGateRecorded",
+    "evidence": "axisymmetricBoundaryVortexStretchingGateRecorded",
+    "expected": "true",
+    "passed": true
+  },
+  {
+    "actual": "true",
+    "check": "boolean:boundaryVorticityAmplificationLawRecorded",
+    "evidence": "boundaryVorticityAmplificationLawRecorded",
+    "expected": "true",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "check": "boolean:boundaryVorticityAmplificationLawClosed",
+    "evidence": "boundaryVorticityAmplificationLawClosed",
+    "expected": "false",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "check": "boolean:strainAlignmentNearAxisOrBoundary",
+    "evidence": "strainAlignmentNearAxisOrBoundary",
+    "expected": "false",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "check": "boolean:viscousBoundaryLayerDominanceCheck",
+    "evidence": "viscousBoundaryLayerDominanceCheck",
+    "expected": "false",
+    "passed": true
+  },
+  {
+    "actual": "true",
+    "check": "boolean:houLuoScalingCompatibility",
+    "evidence": "houLuoScalingCompatibility",
+    "expected": "true",
+    "passed": true
+  },
+  {
+    "actual": "true",
+    "check": "boolean:energyObstructionAbsent",
+    "evidence": "energyObstructionAbsent",
+    "expected": "true",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "check": "boolean:bkmBridge",
+    "evidence": "bkmBridge",
+    "expected": "false",
+    "passed": true
+  },
+  {
+    "actual": "false",
+    "check": "boolean:clayNavierStokesPromoted",
+    "evidence": "clayNavierStokesPromoted",
+    "expected": "false",
+    "passed": true
+  },
+  {
+    "actual": "0",
+    "check": "forbidden marker scan",
+    "evidence": "[]",
+    "expected": "zero hits",
+    "passed": true
+  }
+]

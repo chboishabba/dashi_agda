@@ -1,0 +1,15 @@
+{
+  "boundary_statement": "Internal Clay statement boundary discharged for the current candidate chain; external acceptance remains unavailable",
+  "clay_statement_boundary_discharged_in_repo": true,
+  "clay_statement_formulation_match_recorded": true,
+  "clay_yang_mills_promoted": false,
+  "continuum_existence_surface_recorded": true,
+  "external_acceptance_token_available": false,
+  "positive_continuum_mass_gap_surface_recorded": true,
+  "remaining_open_lemmas": [
+    "ExternalAcceptanceToken"
+  ],
+  "route_decision": "SPRINT98_CLOSES_INTERNAL_CLAY_STATEMENT_BOUNDARY_ONLY",
+  "sprint": "98-clay-statement-boundary-candidate",
+  "sprint97_nontrivial_su3_measure_required": true
+}

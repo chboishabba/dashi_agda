@@ -1,0 +1,183 @@
+{
+  "all_eight_user_supplied_math_items_formally_receipted": true,
+  "clayYangMillsPromoted": false,
+  "clay_promotion": {
+    "clayYangMillsPromoted": false,
+    "explicit_false_present": true,
+    "false_promotion_modules": [
+      "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda",
+      "DASHI/Physics/Closure/YMSprint103ContinuumMassGapObligation7.agda",
+      "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda",
+      "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+    ],
+    "no_clay_promotion": true,
+    "text_mentions_promotion_flag": true,
+    "true_promotion_modules": []
+  },
+  "expected_math_item_count": 8,
+  "external_acceptance": {
+    "boundary_statement": "External acceptance is a review/governance boundary and is not counted as formal Sprint103 receipt completion.",
+    "distinguished_from_formal_receipt_completion": true,
+    "external_acceptance_token_available_in_repo": false,
+    "external_acceptance_token_explicitly_unavailable": true,
+    "false_acceptance_modules": [
+      "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+      "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda",
+      "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+    ],
+    "self_issuable_by_repo": false,
+    "true_acceptance_modules": []
+  },
+  "formal_receipt_completed_count": 8,
+  "formal_receipt_completion": {
+    "basis": "Exact item anchors must occur in Sprint103 modules that also contain at least one inhabited non-empty Receipt record.",
+    "complete": true
+  },
+  "inhabited_receipt_records_by_module": {
+    "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda": [],
+    "DASHI/Physics/Closure/YMSprint103ContinuumMassGapObligation7.agda": [
+      "YMSprint103ContinuumMassGapObligation7Receipt"
+    ],
+    "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda": [
+      "YMSprint103DobrushinWC3Receipt"
+    ],
+    "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda": [],
+    "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda": [
+      "YMSprint103UserMathCompletionReceipt"
+    ]
+  },
+  "math_items": [
+    {
+      "anchor": "BalabanCMP98LocalOscillationBound",
+      "description": "CMP98 local oscillation bound",
+      "formal_receipt_completed": true,
+      "inhabited_non_empty_receipt_records": [
+        "YMSprint103UserMathCompletionReceipt"
+      ],
+      "item_id": "balaban_cmp98_local_oscillation",
+      "represented_in_sprint103_module": true,
+      "sprint103_modules": [
+        "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda",
+        "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+      ]
+    },
+    {
+      "anchor": "BalabanCMP98AveragingKernelIsProbability",
+      "description": "CMP98 averaging kernel probability",
+      "formal_receipt_completed": true,
+      "inhabited_non_empty_receipt_records": [
+        "YMSprint103UserMathCompletionReceipt"
+      ],
+      "item_id": "balaban_cmp98_kernel_probability",
+      "represented_in_sprint103_module": true,
+      "sprint103_modules": [
+        "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda",
+        "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+      ]
+    },
+    {
+      "anchor": "BalabanCMP116PolymerMassBound",
+      "description": "CMP116 polymer mass bound",
+      "formal_receipt_completed": true,
+      "inhabited_non_empty_receipt_records": [
+        "YMSprint103UserMathCompletionReceipt"
+      ],
+      "item_id": "balaban_cmp116_polymer_mass",
+      "represented_in_sprint103_module": true,
+      "sprint103_modules": [
+        "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda",
+        "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+      ]
+    },
+    {
+      "anchor": "GaugeCovariantDobrushinComparison",
+      "description": "gauge-covariant Dobrushin comparison",
+      "formal_receipt_completed": true,
+      "inhabited_non_empty_receipt_records": [
+        "YMSprint103DobrushinWC3Receipt",
+        "YMSprint103UserMathCompletionReceipt"
+      ],
+      "item_id": "gauge_covariant_dobrushin_comparison",
+      "represented_in_sprint103_module": true,
+      "sprint103_modules": [
+        "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+        "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+      ]
+    },
+    {
+      "anchor": "UniformPolymerActivityFromDobrushin",
+      "description": "uniform polymer activity from Dobrushin",
+      "formal_receipt_completed": true,
+      "inhabited_non_empty_receipt_records": [
+        "YMSprint103DobrushinWC3Receipt",
+        "YMSprint103UserMathCompletionReceipt"
+      ],
+      "item_id": "uniform_polymer_activity_from_dobrushin",
+      "represented_in_sprint103_module": true,
+      "sprint103_modules": [
+        "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+        "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+      ]
+    },
+    {
+      "anchor": "WC3UniformClusterSummability",
+      "description": "WC3 uniform cluster summability",
+      "formal_receipt_completed": true,
+      "inhabited_non_empty_receipt_records": [
+        "YMSprint103DobrushinWC3Receipt",
+        "YMSprint103UserMathCompletionReceipt"
+      ],
+      "item_id": "wc3_uniform_cluster_summability",
+      "represented_in_sprint103_module": true,
+      "sprint103_modules": [
+        "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+        "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+      ]
+    },
+    {
+      "anchor": "ContinuumLimitMassGap",
+      "description": "continuum-limit mass gap",
+      "formal_receipt_completed": true,
+      "inhabited_non_empty_receipt_records": [
+        "YMSprint103ContinuumMassGapObligation7Receipt",
+        "YMSprint103DobrushinWC3Receipt",
+        "YMSprint103UserMathCompletionReceipt"
+      ],
+      "item_id": "continuum_limit_mass_gap",
+      "represented_in_sprint103_module": true,
+      "sprint103_modules": [
+        "DASHI/Physics/Closure/YMSprint103ContinuumMassGapObligation7.agda",
+        "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+        "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+      ]
+    },
+    {
+      "anchor": "Nontrivial4DSU3YangMillsMeasure",
+      "description": "nontrivial 4D SU(3) Yang-Mills measure",
+      "formal_receipt_completed": true,
+      "inhabited_non_empty_receipt_records": [
+        "YMSprint103DobrushinWC3Receipt",
+        "YMSprint103UserMathCompletionReceipt"
+      ],
+      "item_id": "nontrivial_4d_su3_yang_mills_measure",
+      "represented_in_sprint103_module": true,
+      "sprint103_modules": [
+        "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+        "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda",
+        "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+      ]
+    }
+  ],
+  "repo_root": "/home/c/Documents/code/dashi_agda",
+  "route_decision": "SPRINT103_FORMAL_RECEIPTS_COMPLETE_NO_EXTERNAL_ACCEPTANCE_NO_CLAY_PROMOTION",
+  "sprint": "103-completion",
+  "sprint103_module_count": 5,
+  "sprint103_modules": [
+    "DASHI/Physics/Closure/YMSprint103AuthorityInputs.agda",
+    "DASHI/Physics/Closure/YMSprint103ContinuumMassGapObligation7.agda",
+    "DASHI/Physics/Closure/YMSprint103DobrushinWC3Receipt.agda",
+    "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda",
+    "DASHI/Physics/Closure/YMSprint103UserMathCompletionReceipt.agda"
+  ]
+}

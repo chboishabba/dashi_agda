@@ -1,0 +1,62 @@
+{
+  "all_rows_asymptotically_viscous_dominant": true,
+  "all_sampled_beta_positive": true,
+  "all_sampled_nu_positive": true,
+  "alpha_fraction_values": [
+    "21/20",
+    "11/10",
+    "23/20",
+    "6/5",
+    "5/4",
+    "13/10",
+    "27/20",
+    "7/5",
+    "29/20"
+  ],
+  "alpha_max": 1.45,
+  "alpha_min": 1.05,
+  "alpha_step": 0.05,
+  "alpha_values": [
+    1.05,
+    1.1,
+    1.15,
+    1.2,
+    1.25,
+    1.3,
+    1.35,
+    1.4,
+    1.45
+  ],
+  "asymptotic_dominance_count": 108,
+  "beta_rule": "beta=alpha-1",
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint130_viscous_dominance_sampler",
+  "dominance_count": 51,
+  "dominance_rule": "ratio > 1",
+  "exit_code": 0,
+  "exit_reason": "viscous dominance obstruction sampled; Clay Navier-Stokes route remains unpromoted",
+  "feasibility_window": "(1, 3/2)",
+  "feasibility_window_lower": 1.0,
+  "feasibility_window_upper": 1.5,
+  "hou_luo_ns_route_obstructed": true,
+  "non_dominance_count": 57,
+  "nu_values": [
+    "1",
+    "1/10",
+    "1/100"
+  ],
+  "ratio_formula": "nu * tau^(-3*beta)",
+  "row_count": 108,
+  "source_scaling_exponent": "tau^-1",
+  "tau_values": [
+    "1",
+    "1/10",
+    "1/100",
+    "1/1000"
+  ],
+  "viscous_dominance_obstruction": true,
+  "viscous_scaling_exponent": "tau^-(1+3*beta)"
+}

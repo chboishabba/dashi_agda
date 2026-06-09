@@ -1,0 +1,1144 @@
+{
+  "audit_id": "ym_sprint130_os_fin_audit",
+  "clay_promotion_assertion": {
+    "clayYangMillsPromoted_false": true,
+    "no_prior_clay_promotion_true": true,
+    "no_sprint130_clay_promotion_true": true,
+    "sprint130_flags": [
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+        "value": false
+      }
+    ]
+  },
+  "external_acceptance_absent": true,
+  "external_acceptance_assertion": {
+    "absent": true,
+    "flags": [
+      {
+        "name": "externalAcceptanceTokenPresent",
+        "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "value": false
+      }
+    ]
+  },
+  "fail_closed_scan": [
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "expectedSprint130ExternalAcceptanceGateRecorded": true,
+        "externalAcceptanceTokenPresent": false,
+        "internalCandidatePacketReady": true,
+        "internalSubmissionPacketReady": true,
+        "ledgerRecorded": true
+      },
+      "bool_references": {
+        "cc1GateClosed": "S128-CC1.cc1ProvedHere",
+        "expectedSprint130CandidateGatePresent": "S130-OS1.os1WightmanDistributionsClosedHere",
+        "expectedSprint130SubmissionPacketGatePresent": "S130-OS1-Consumers.os1WightmanConsumerPackageClosedHere",
+        "gg1GateClosed": "S128-SY-GG.allCompactSimpleGTheoremProvedHere",
+        "mc1GateClosed": "S129-MC1.mc1ClosedFormLowerSemicontinuityProvedHere",
+        "mcAggregateGateClosed": "S129-MC.moscoConvergenceClosedHere",
+        "os1ConsumerGateClosed": "S130-OS1-Consumers.os1PoincareSpectrumFeedClosedHere",
+        "os1GateClosed": "S130-OS1.osToWightmanRouteClosedHere",
+        "sc1GateClosed": "S128-WC-SC.sc1ClosedHere",
+        "sc2GateClosed": "S129-SC2.spectralGapTransportClosedHere",
+        "sc3GateClosed": "S128-SC3.sc3TransferLowerBoundTheoremProvedHere",
+        "sprint129RouteGateClosed": "S129-Route.sprint129MoscoSpectralRouteClosedHere",
+        "sy1GateClosed": "S128-SY-GG.so4RestorationTheoremProvedHere",
+        "wc1GateClosed": "S128-WC-SC.wc1ProvedHere"
+      },
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "external_acceptance_flags": [
+        {
+          "name": "externalAcceptanceTokenPresent",
+          "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "value": false
+        }
+      ],
+      "gate_evidence_lines": {
+        "FIN": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint130FinalClayAssemblyLedger where"
+          },
+          {
+            "line": 31,
+            "text": "-- Sprint130 final Clay assembly ledger."
+          },
+          {
+            "line": 33,
+            "text": "-- This aggregate records that the repository now has internal candidate"
+          },
+          {
+            "line": 34,
+            "text": "-- and submission-packet readiness rows for the Sprint128/Sprint129 gate"
+          },
+          {
+            "line": 36,
+            "text": "-- Clay acceptance certificate: the external acceptance token is absent and"
+          },
+          {
+            "line": 37,
+            "text": "-- Clay Yang-Mills promotion is fixed false."
+          },
+          {
+            "line": 44,
+            "text": "\"DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda\""
+          },
+          {
+            "line": 48,
+            "text": "\"Sprint130 final Clay assembly aggregate ledger\""
+          },
+          {
+            "line": 51,
+            "text": "assemblyLane = \"Sprint130-final-clay-assembly\""
+          },
+          {
+            "line": 90,
+            "text": "expectedSprint130SubmissionPacketGatePresent : Bool"
+          },
+          {
+            "line": 91,
+            "text": "expectedSprint130SubmissionPacketGatePresent ="
+          },
+          {
+            "line": 97,
+            "text": "internalCandidatePacketReady : Bool"
+          }
+        ],
+        "OS1": [
+          {
+            "line": 25,
+            "text": "import DASHI.Physics.Closure.YMSprint130OSToWightmanDistributionsClosure"
+          },
+          {
+            "line": 26,
+            "text": "as S130-OS1"
+          },
+          {
+            "line": 27,
+            "text": "import DASHI.Physics.Closure.YMSprint130PoincareSpectrumWightmanClosure"
+          },
+          {
+            "line": 28,
+            "text": "as S130-OS1-Consumers"
+          },
+          {
+            "line": 77,
+            "text": "sourceSprint130OS1Path : String"
+          },
+          {
+            "line": 78,
+            "text": "sourceSprint130OS1Path = S130-OS1.modulePath"
+          },
+          {
+            "line": 80,
+            "text": "sourceSprint130OS1ConsumerPath : String"
+          },
+          {
+            "line": 81,
+            "text": "sourceSprint130OS1ConsumerPath = S130-OS1-Consumers.modulePath"
+          },
+          {
+            "line": 88,
+            "text": "S130-OS1.os1WightmanDistributionsClosedHere"
+          },
+          {
+            "line": 92,
+            "text": "S130-OS1-Consumers.os1WightmanConsumerPackageClosedHere"
+          },
+          {
+            "line": 139,
+            "text": "os1GateClosed : Bool"
+          },
+          {
+            "line": 140,
+            "text": "os1GateClosed = S130-OS1.osToWightmanRouteClosedHere"
+          }
+        ]
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+      "record_declarations": [
+        {
+          "line": 273,
+          "name": "AssemblyRow"
+        },
+        {
+          "line": 475,
+          "name": "PacketReadinessFlags"
+        },
+        {
+          "line": 507,
+          "name": "FinalClayAssemblyLedger"
+        }
+      ],
+      "string_assignments": {
+        "assemblyLane": "Sprint130-final-clay-assembly",
+        "ledgerName": "Sprint130 final Clay assembly aggregate ledger",
+        "modulePath": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+      }
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "os1WightmanDistributionsClosedHere": true,
+        "osToWightmanRouteClosedHere": true,
+        "sprint126RouteContextRecorded": true,
+        "sprint128SymmetryConsumed": true,
+        "sprint129SpectralGapTransportConsumed": true
+      },
+      "bool_references": {
+        "continuumMassGapAvailableHere": "SC129.continuumMassGapProvedHere",
+        "dashiNativePoincareCovarianceClosedHere": "SY128.dashiNativePoincareCovarianceClosedHere",
+        "dashiNativeSpectrumConditionClosedHere": "SY128.dashiNativeSpectrumConditionClosedHere",
+        "osAxiomsRouteAuthorityConsumed": "OS126.osAxiomsAuthorityConditionalInput",
+        "osWightmanAuthorityConsumed": "OS126.osWightmanAuthorityConditionalInput",
+        "spectralGapTransportClosedHere": "SC129.spectralGapTransportClosedHere"
+      },
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "external_acceptance_flags": [],
+      "gate_evidence_lines": {
+        "FIN": [
+          {
+            "line": 23,
+            "text": "-- receipts.  It does not promote the Clay Yang-Mills problem."
+          },
+          {
+            "line": 87,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 88,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 134,
+            "text": "clayYangMillsPromotedIsFalse :"
+          },
+          {
+            "line": 135,
+            "text": "clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 136,
+            "text": "clayYangMillsPromotedIsFalse = refl"
+          },
+          {
+            "line": 154,
+            "text": "nonClayBoundaryText : String"
+          },
+          {
+            "line": 155,
+            "text": "nonClayBoundaryText ="
+          },
+          {
+            "line": 156,
+            "text": "\"Clay Yang-Mills promotion remains false: this Sprint130 receipt closes the DASHI OS1 Wightman-distributions ledger, not an external Clay submission.\""
+          },
+          {
+            "line": 167,
+            "text": "non-clay-promotion-row :"
+          },
+          {
+            "line": 179,
+            "text": "clay-promotion-held-false :"
+          },
+          {
+            "line": 188,
+            "text": "\u2237 non-clay-promotion-row"
+          }
+        ],
+        "OS1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint130OSToWightmanDistributionsClosure where"
+          },
+          {
+            "line": 10,
+            "text": "import DASHI.Physics.Closure.YMSprint126OSToWightmanRouteLedger as OS126"
+          },
+          {
+            "line": 15,
+            "text": "-- Sprint130 OS1 Wightman-distributions closure."
+          },
+          {
+            "line": 17,
+            "text": "-- Sprint126 records the OS-to-Wightman route and the OS1 rows as"
+          },
+          {
+            "line": 21,
+            "text": "-- DASHI-native continuum mass-gap status.  This module closes the OS1"
+          },
+          {
+            "line": 22,
+            "text": "-- Wightman-distributions receipt by combining those concrete upstream"
+          },
+          {
+            "line": 30,
+            "text": "\"DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda\""
+          },
+          {
+            "line": 34,
+            "text": "\"Sprint130 OS1 Wightman-distributions closure\""
+          },
+          {
+            "line": 36,
+            "text": "os1LaneName : String"
+          },
+          {
+            "line": 37,
+            "text": "os1LaneName = \"OS1-Wightman-distributions-closure\""
+          },
+          {
+            "line": 40,
+            "text": "sourceSprint126OSRoutePath = OS126.modulePath"
+          },
+          {
+            "line": 59,
+            "text": "OS126.osAxiomsAuthorityConditionalInput"
+          }
+        ]
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+      "record_declarations": [
+        {
+          "line": 190,
+          "name": "ClosureEvidenceRow"
+        },
+        {
+          "line": 212,
+          "name": "UpstreamReceipts"
+        },
+        {
+          "line": 234,
+          "name": "ClosureFlags"
+        },
+        {
+          "line": 262,
+          "name": "EvidenceTable"
+        },
+        {
+          "line": 282,
+          "name": "YMSprint130OSToWightmanDistributionsClosureReceipt"
+        }
+      ],
+      "string_assignments": {
+        "laneName": "Sprint130 OS1 Wightman-distributions closure",
+        "modulePath": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+        "nonClayBoundaryText": "Clay Yang-Mills promotion remains false: this Sprint130 receipt closes the DASHI OS1 Wightman-distributions ledger, not an external Clay submission.",
+        "os1LaneName": "OS1-Wightman-distributions-closure",
+        "routeContextStatement": "Sprint126 supplies the OS1 route context: authority-conditioned OS reconstruction rows, explicit Wightman-distributions row, Poincare covariance row, spectrum-condition row, and fail-closed flags from the earlier blocked state.",
+        "spectralGapStatement": "Sprint129 supplies closed Mosco/strong-resolvent spectral-gap transport, positive non-vacuum continuum gap, and DASHI-native continuum mass-gap availability.",
+        "symmetryStatement": "Sprint128 supplies closed SO4 restoration, OS/Wightman Poincare covariance, and positive-energy spectrum-condition consumer rows.",
+        "wightmanDistributionsStatement": "OS1 is closed here as a concrete Wightman-distributions receipt: the Sprint126 OS reconstruction route is reopened with Sprint128 covariance/spectrum closure and Sprint129 spectral-gap transport."
+      }
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "os1PoincareSpectrumFeedClosedHere": true,
+        "os1WightmanConsumerPackageClosedHere": true,
+        "sc2SpectrumTransportConsumerClosedHere": true,
+        "wightmanPoincareCovarianceConsumerClosedHere": true,
+        "wightmanSpectrumConditionConsumerClosedHere": true
+      },
+      "bool_references": {},
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "external_acceptance_flags": [],
+      "gate_evidence_lines": {
+        "FIN": [
+          {
+            "line": 25,
+            "text": "-- Clay Yang-Mills promotion remains explicitly false."
+          },
+          {
+            "line": 67,
+            "text": "nonClayBoundaryText : String"
+          },
+          {
+            "line": 68,
+            "text": "nonClayBoundaryText ="
+          },
+          {
+            "line": 69,
+            "text": "\"This is an OS1 consumer closure over Sprint128 and Sprint129 receipts; it does not promote Clay Yang-Mills.\""
+          },
+          {
+            "line": 86,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 87,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 109,
+            "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 110,
+            "text": "clayYangMillsPromotedIsFalse = refl"
+          },
+          {
+            "line": 121,
+            "text": "non-clay-boundary-lane :"
+          },
+          {
+            "line": 131,
+            "text": "clay-promotion-held-false :"
+          },
+          {
+            "line": 140,
+            "text": "\u2237 non-clay-boundary-lane"
+          },
+          {
+            "line": 212,
+            "text": "clayPromoted :"
+          }
+        ],
+        "OS1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint130PoincareSpectrumWightmanClosure where"
+          },
+          {
+            "line": 10,
+            "text": "import DASHI.Physics.Closure.YMSprint126OSToWightmanRouteLedger"
+          },
+          {
+            "line": 11,
+            "text": "as OS1-126"
+          },
+          {
+            "line": 18,
+            "text": "-- Sprint130 OS1 consumer closure."
+          },
+          {
+            "line": 20,
+            "text": "-- This module consumes the promoted Sprint128 SY1 Wightman Poincare"
+          },
+          {
+            "line": 22,
+            "text": "-- Sprint129 SC2 spectral-gap transport closure.  It records the OS1-facing"
+          },
+          {
+            "line": 23,
+            "text": "-- Wightman consumer package that the older Sprint126 route ledger lacked."
+          },
+          {
+            "line": 32,
+            "text": "\"DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda\""
+          },
+          {
+            "line": 36,
+            "text": "\"Sprint130 Poincare-spectrum Wightman consumers feeding OS1\""
+          },
+          {
+            "line": 38,
+            "text": "os1ConsumerLaneName : String"
+          },
+          {
+            "line": 39,
+            "text": "os1ConsumerLaneName ="
+          },
+          {
+            "line": 40,
+            "text": "\"OS1-Wightman-Poincare-spectrum-consumer-feed\""
+          }
+        ]
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+      "record_declarations": [
+        {
+          "line": 142,
+          "name": "UpstreamReceipts"
+        },
+        {
+          "line": 166,
+          "name": "ConsumerRow"
+        },
+        {
+          "line": 188,
+          "name": "ClosureFlags"
+        },
+        {
+          "line": 216,
+          "name": "ConsumerTable"
+        },
+        {
+          "line": 236,
+          "name": "YMSprint130PoincareSpectrumWightmanClosureReceipt"
+        }
+      ],
+      "string_assignments": {
+        "ledgerName": "Sprint130 Poincare-spectrum Wightman consumers feeding OS1",
+        "modulePath": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+        "nonClayBoundaryText": "This is an OS1 consumer closure over Sprint128 and Sprint129 receipts; it does not promote Clay Yang-Mills.",
+        "os1ConsumerLaneName": "OS1-Wightman-Poincare-spectrum-consumer-feed",
+        "os1FeedStatement": "Sprint130 feeds OS1 with closed Poincare covariance, closed Wightman spectrum condition, and closed SC2 spectral transport receipts.",
+        "poincareCovarianceConsumerStatement": "Sprint128 SY1 closes the DASHI-native OS/Wightman Poincare covariance consumer from SO4 Schwinger covariance and anisotropy decay.",
+        "spectralGapConsumerStatement": "Sprint129 SC2 closes the continuum Hamiltonian spectral-gap transport row consumed by the OS1 Wightman mass-gap route.",
+        "spectrumConditionConsumerStatement": "Sprint128 SY1 closes the positive-energy spectrum-condition consumer required by Wightman reconstruction."
+      }
+    }
+  ],
+  "fail_reasons": [],
+  "fin_internal_readiness_closed": true,
+  "forbidden_incomplete_marker_assertion": {
+    "closed": true,
+    "hits": []
+  },
+  "gate_status": {
+    "FIN": {
+      "closed": true,
+      "evidence": [
+        {
+          "flags": [
+            {
+              "name": "internalCandidatePacketReady",
+              "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "name": "internalSubmissionPacketReady",
+              "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint130FinalClayAssemblyLedger where"
+            },
+            {
+              "line": 31,
+              "text": "-- Sprint130 final Clay assembly ledger."
+            },
+            {
+              "line": 33,
+              "text": "-- This aggregate records that the repository now has internal candidate"
+            },
+            {
+              "line": 34,
+              "text": "-- and submission-packet readiness rows for the Sprint128/Sprint129 gate"
+            },
+            {
+              "line": 36,
+              "text": "-- Clay acceptance certificate: the external acceptance token is absent and"
+            },
+            {
+              "line": 37,
+              "text": "-- Clay Yang-Mills promotion is fixed false."
+            },
+            {
+              "line": 44,
+              "text": "\"DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda\""
+            },
+            {
+              "line": 48,
+              "text": "\"Sprint130 final Clay assembly aggregate ledger\""
+            },
+            {
+              "line": 51,
+              "text": "assemblyLane = \"Sprint130-final-clay-assembly\""
+            },
+            {
+              "line": 90,
+              "text": "expectedSprint130SubmissionPacketGatePresent : Bool"
+            },
+            {
+              "line": 91,
+              "text": "expectedSprint130SubmissionPacketGatePresent ="
+            },
+            {
+              "line": 97,
+              "text": "internalCandidatePacketReady : Bool"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "records": [
+            {
+              "line": 475,
+              "name": "PacketReadinessFlags"
+            },
+            {
+              "line": 507,
+              "name": "FinalClayAssemblyLedger"
+            }
+          ]
+        },
+        {
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 23,
+              "text": "-- receipts.  It does not promote the Clay Yang-Mills problem."
+            },
+            {
+              "line": 87,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 88,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 134,
+              "text": "clayYangMillsPromotedIsFalse :"
+            },
+            {
+              "line": 135,
+              "text": "clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 136,
+              "text": "clayYangMillsPromotedIsFalse = refl"
+            },
+            {
+              "line": 154,
+              "text": "nonClayBoundaryText : String"
+            },
+            {
+              "line": 155,
+              "text": "nonClayBoundaryText ="
+            },
+            {
+              "line": 156,
+              "text": "\"Clay Yang-Mills promotion remains false: this Sprint130 receipt closes the DASHI OS1 Wightman-distributions ledger, not an external Clay submission.\""
+            },
+            {
+              "line": 167,
+              "text": "non-clay-promotion-row :"
+            },
+            {
+              "line": 179,
+              "text": "clay-promotion-held-false :"
+            },
+            {
+              "line": 188,
+              "text": "\u2237 non-clay-promotion-row"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+          "records": []
+        },
+        {
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 25,
+              "text": "-- Clay Yang-Mills promotion remains explicitly false."
+            },
+            {
+              "line": 67,
+              "text": "nonClayBoundaryText : String"
+            },
+            {
+              "line": 68,
+              "text": "nonClayBoundaryText ="
+            },
+            {
+              "line": 69,
+              "text": "\"This is an OS1 consumer closure over Sprint128 and Sprint129 receipts; it does not promote Clay Yang-Mills.\""
+            },
+            {
+              "line": 86,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 87,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 109,
+              "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 110,
+              "text": "clayYangMillsPromotedIsFalse = refl"
+            },
+            {
+              "line": 121,
+              "text": "non-clay-boundary-lane :"
+            },
+            {
+              "line": 131,
+              "text": "clay-promotion-held-false :"
+            },
+            {
+              "line": 140,
+              "text": "\u2237 non-clay-boundary-lane"
+            },
+            {
+              "line": 212,
+              "text": "clayPromoted :"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+          "records": []
+        }
+      ],
+      "extracted_flags": [
+        {
+          "name": "internalCandidatePacketReady",
+          "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "name": "internalSubmissionPacketReady",
+          "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "required": true,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "missing_required_flags": [],
+      "required_flags": [
+        "internalCandidatePacketReady",
+        "internalSubmissionPacketReady"
+      ]
+    },
+    "OS1": {
+      "closed": true,
+      "evidence": [
+        {
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 25,
+              "text": "import DASHI.Physics.Closure.YMSprint130OSToWightmanDistributionsClosure"
+            },
+            {
+              "line": 26,
+              "text": "as S130-OS1"
+            },
+            {
+              "line": 27,
+              "text": "import DASHI.Physics.Closure.YMSprint130PoincareSpectrumWightmanClosure"
+            },
+            {
+              "line": 28,
+              "text": "as S130-OS1-Consumers"
+            },
+            {
+              "line": 77,
+              "text": "sourceSprint130OS1Path : String"
+            },
+            {
+              "line": 78,
+              "text": "sourceSprint130OS1Path = S130-OS1.modulePath"
+            },
+            {
+              "line": 80,
+              "text": "sourceSprint130OS1ConsumerPath : String"
+            },
+            {
+              "line": 81,
+              "text": "sourceSprint130OS1ConsumerPath = S130-OS1-Consumers.modulePath"
+            },
+            {
+              "line": 88,
+              "text": "S130-OS1.os1WightmanDistributionsClosedHere"
+            },
+            {
+              "line": 92,
+              "text": "S130-OS1-Consumers.os1WightmanConsumerPackageClosedHere"
+            },
+            {
+              "line": 139,
+              "text": "os1GateClosed : Bool"
+            },
+            {
+              "line": 140,
+              "text": "os1GateClosed = S130-OS1.osToWightmanRouteClosedHere"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "records": []
+        },
+        {
+          "flags": [
+            {
+              "name": "os1WightmanDistributionsClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "name": "osToWightmanRouteClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint130OSToWightmanDistributionsClosure where"
+            },
+            {
+              "line": 10,
+              "text": "import DASHI.Physics.Closure.YMSprint126OSToWightmanRouteLedger as OS126"
+            },
+            {
+              "line": 15,
+              "text": "-- Sprint130 OS1 Wightman-distributions closure."
+            },
+            {
+              "line": 17,
+              "text": "-- Sprint126 records the OS-to-Wightman route and the OS1 rows as"
+            },
+            {
+              "line": 21,
+              "text": "-- DASHI-native continuum mass-gap status.  This module closes the OS1"
+            },
+            {
+              "line": 22,
+              "text": "-- Wightman-distributions receipt by combining those concrete upstream"
+            },
+            {
+              "line": 30,
+              "text": "\"DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda\""
+            },
+            {
+              "line": 34,
+              "text": "\"Sprint130 OS1 Wightman-distributions closure\""
+            },
+            {
+              "line": 36,
+              "text": "os1LaneName : String"
+            },
+            {
+              "line": 37,
+              "text": "os1LaneName = \"OS1-Wightman-distributions-closure\""
+            },
+            {
+              "line": 40,
+              "text": "sourceSprint126OSRoutePath = OS126.modulePath"
+            },
+            {
+              "line": 59,
+              "text": "OS126.osAxiomsAuthorityConditionalInput"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+          "records": [
+            {
+              "line": 282,
+              "name": "YMSprint130OSToWightmanDistributionsClosureReceipt"
+            }
+          ]
+        },
+        {
+          "flags": [
+            {
+              "name": "wightmanPoincareCovarianceConsumerClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "name": "wightmanSpectrumConditionConsumerClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "name": "sc2SpectrumTransportConsumerClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "name": "os1PoincareSpectrumFeedClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "name": "os1WightmanConsumerPackageClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint130PoincareSpectrumWightmanClosure where"
+            },
+            {
+              "line": 10,
+              "text": "import DASHI.Physics.Closure.YMSprint126OSToWightmanRouteLedger"
+            },
+            {
+              "line": 11,
+              "text": "as OS1-126"
+            },
+            {
+              "line": 18,
+              "text": "-- Sprint130 OS1 consumer closure."
+            },
+            {
+              "line": 20,
+              "text": "-- This module consumes the promoted Sprint128 SY1 Wightman Poincare"
+            },
+            {
+              "line": 22,
+              "text": "-- Sprint129 SC2 spectral-gap transport closure.  It records the OS1-facing"
+            },
+            {
+              "line": 23,
+              "text": "-- Wightman consumer package that the older Sprint126 route ledger lacked."
+            },
+            {
+              "line": 32,
+              "text": "\"DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda\""
+            },
+            {
+              "line": 36,
+              "text": "\"Sprint130 Poincare-spectrum Wightman consumers feeding OS1\""
+            },
+            {
+              "line": 38,
+              "text": "os1ConsumerLaneName : String"
+            },
+            {
+              "line": 39,
+              "text": "os1ConsumerLaneName ="
+            },
+            {
+              "line": 40,
+              "text": "\"OS1-Wightman-Poincare-spectrum-consumer-feed\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+          "records": [
+            {
+              "line": 236,
+              "name": "YMSprint130PoincareSpectrumWightmanClosureReceipt"
+            }
+          ]
+        }
+      ],
+      "extracted_flags": [
+        {
+          "name": "os1WightmanDistributionsClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "name": "osToWightmanRouteClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "name": "wightmanPoincareCovarianceConsumerClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "name": "wightmanSpectrumConditionConsumerClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "name": "sc2SpectrumTransportConsumerClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "name": "os1PoincareSpectrumFeedClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "name": "os1WightmanConsumerPackageClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+          "required": true,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "missing_required_flags": [],
+      "required_flags": [
+        "os1WightmanDistributionsClosedHere",
+        "osToWightmanRouteClosedHere",
+        "wightmanPoincareCovarianceConsumerClosedHere",
+        "wightmanSpectrumConditionConsumerClosedHere",
+        "sc2SpectrumTransportConsumerClosedHere",
+        "os1PoincareSpectrumFeedClosedHere",
+        "os1WightmanConsumerPackageClosedHere"
+      ]
+    }
+  },
+  "hard_fail_reasons": [],
+  "os1_internal_readiness_closed": true,
+  "prior_summaries": [
+    {
+      "audit_id": "ym_sprint128_closure_audit",
+      "clay_promotion_assertion": {
+        "no_prior_clay_promotion_true": true,
+        "no_sprint128_clay_promotion_true": true,
+        "sprint128_flags": [
+          {
+            "name": "clayYangMillsPromoted",
+            "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+            "value": false
+          },
+          {
+            "name": "clayYangMillsPromoted",
+            "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+            "value": false
+          },
+          {
+            "name": "clayYangMillsPromoted",
+            "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+            "value": false
+          },
+          {
+            "name": "clayYangMillsPromoted",
+            "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+            "value": false
+          }
+        ]
+      },
+      "fail_reason_count": 4,
+      "gate_status": {
+        "CC1": true,
+        "FIN": false,
+        "GG1": true,
+        "MC1": false,
+        "MC2": null,
+        "MC3": null,
+        "MC4": null,
+        "OS1": false,
+        "SC1": true,
+        "SC2": false,
+        "SC3": true,
+        "SY1": true,
+        "WC1": true
+      },
+      "hard_fail_reason_count": 0,
+      "path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+      "present": true,
+      "route_decision": "fail-closed"
+    },
+    {
+      "audit_id": "ym_sprint129_mosco_spectral_audit",
+      "clay_promotion_assertion": {
+        "no_prior_clay_promotion_true": true,
+        "no_sprint129_clay_promotion_true": true,
+        "sprint129_flags": [
+          {
+            "name": "clayYangMillsPromoted",
+            "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+            "value": false
+          },
+          {
+            "name": "clayYangMillsPromoted",
+            "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+            "value": false
+          },
+          {
+            "name": "clayYangMillsPromoted",
+            "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+            "value": false
+          },
+          {
+            "name": "clayYangMillsPromoted",
+            "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+            "value": false
+          }
+        ]
+      },
+      "fail_reason_count": 2,
+      "gate_status": {
+        "CC1": null,
+        "FIN": false,
+        "GG1": null,
+        "MC1": true,
+        "MC2": true,
+        "MC3": true,
+        "MC4": true,
+        "OS1": false,
+        "SC1": null,
+        "SC2": true,
+        "SC3": null,
+        "SY1": null,
+        "WC1": null
+      },
+      "hard_fail_reason_count": 0,
+      "path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json",
+      "present": true,
+      "route_decision": "fail-closed"
+    }
+  ],
+  "route_aggregate": {
+    "clayYangMillsPromoted": false,
+    "clayYangMillsPromoted_false": true,
+    "external_acceptance_absent": true,
+    "fin_internal_readiness_closed": true,
+    "internal_readiness_closed": true,
+    "os1_internal_readiness_closed": true,
+    "required_internal_gates": [
+      "OS1",
+      "FIN"
+    ]
+  },
+  "route_decision": "sprint130 os1 fin internal readiness closed with external acceptance absent",
+  "route_reasons": [],
+  "scanned_surfaces": [
+    "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+    "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+    "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "audit_id": "ns_sprint87_danger_shell_factorization_audit",
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "fail_closed": true,
+  "gates": [
+    {
+      "description": "The Sprint 87 NS danger-shell factorization receipt must exist with canonical factorization and no-promotion anchors.",
+      "evidence": [
+        "DASHI/Physics/Closure/NSSprint87DangerShellFactorizationReceipt.agda missing anchors: canonicalNSSprint87DangerShellFactorizationReceipt, dangerShellFactorization, clayNavierStokesPromoted"
+      ],
+      "gate_id": "G1",
+      "gate_name": "Sprint87FactorizationReceiptPresent",
+      "promotion_status": "fail_closed",
+      "status": "FAIL"
+    },
+    {
+      "description": "The K*(t) target records high-high load bearing status, forbidden circular inputs, and false Clay NS promotion.",
+      "evidence": [
+        "DASHI/Physics/Closure/NSNonCircularKStarDriftBoundTargetReceipt.agda anchors present"
+      ],
+      "gate_id": "G2",
+      "gate_name": "NonCircularKStarTargetAnchored",
+      "promotion_status": "promotion_blocked",
+      "status": "PASS"
+    },
+    {
+      "description": "The danger-shell maximum principle is precisely stated but not proved or promoted.",
+      "evidence": [
+        "DASHI/Physics/Closure/NSDangerShellMaximumPrincipleReceipt.agda anchors present"
+      ],
+      "gate_id": "G3",
+      "gate_name": "DangerShellMaximumPrincipleStillOpen",
+      "promotion_status": "promotion_blocked",
+      "status": "PASS"
+    },
+    {
+      "description": "The conditional route records circularity and leaves non-circular weakening open.",
+      "evidence": [
+        "DASHI/Physics/Closure/NSDangerShellMaxPrincipleConditionalProofReceipt.agda anchors present"
+      ],
+      "gate_id": "G4",
+      "gate_name": "ConditionalProofMarkedCircular",
+      "promotion_status": "promotion_blocked",
+      "status": "PASS"
+    },
+    {
+      "description": "The admissible replacement is the H^{-1/2} nonlinear-defect target with H^{1/2} shortcut forbidden.",
+      "evidence": [
+        "DASHI/Physics/Closure/NSNegativeSobolevDangerShellReceipt.agda anchors present"
+      ],
+      "gate_id": "G5",
+      "gate_name": "HMinusHalfReplacementTargetAnchored",
+      "promotion_status": "promotion_blocked",
+      "status": "PASS"
+    },
+    {
+      "description": "No scanned source may assign clayNavierStokesPromoted = true.",
+      "evidence": [
+        "all scanned clayNavierStokesPromoted assignments are false or absent"
+      ],
+      "gate_id": "G6",
+      "gate_name": "ClayNSPromotionFalse",
+      "promotion_status": "promotion_blocked",
+      "status": "PASS"
+    }
+  ],
+  "missing_required_anchors": [
+    {
+      "missing_anchors": [
+        "canonicalNSSprint87DangerShellFactorizationReceipt",
+        "dangerShellFactorization",
+        "clayNavierStokesPromoted"
+      ],
+      "path": "DASHI/Physics/Closure/NSSprint87DangerShellFactorizationReceipt.agda"
+    }
+  ],
+  "open_obligations": [
+    "materialize the Sprint 87 NS danger-shell factorization receipt with canonical anchors",
+    "prove the non-circular high-high H^{-1/2} nonlinear-defect estimate",
+    "prove K*(t) drift containment and edge influx at the danger shell",
+    "derive theta preservation before any tail-to-continuation or Clay NS promotion"
+  ],
+  "promotion_status": "promotion_blocked",
+  "report_markdown": "ns_sprint87_danger_shell_factorization_audit.md",
+  "route_decision": "fail_closed",
+  "source_surfaces": [
+    {
+      "anchor_lines": {},
+      "anchors_present": false,
+      "clay_navier_stokes_promoted_true": false,
+      "clay_navier_stokes_promoted_values": [],
+      "gate_id": "G1",
+      "missing_anchors": [
+        "canonicalNSSprint87DangerShellFactorizationReceipt",
+        "dangerShellFactorization",
+        "clayNavierStokesPromoted"
+      ],
+      "path": "DASHI/Physics/Closure/NSSprint87DangerShellFactorizationReceipt.agda",
+      "present": false,
+      "required": true,
+      "required_anchors": [
+        "canonicalNSSprint87DangerShellFactorizationReceipt",
+        "dangerShellFactorization",
+        "clayNavierStokesPromoted"
+      ],
+      "status": "FAIL",
+      "surface_id": "S1",
+      "surface_name": "Sprint87DangerShellFactorizationReceipt"
+    },
+    {
+      "anchor_lines": {
+        "canonicalNSNonCircularKStarDriftBoundTargetReceipt": 482,
+        "canonicalNSNonCircularKStarTargetNoClay": 669,
+        "hHalfSerrinBKMAssumed": 428,
+        "highHighParaproductLoadBearing": 404
+      },
+      "anchors_present": true,
+      "clay_navier_stokes_promoted_true": false,
+      "clay_navier_stokes_promoted_values": [
+        false
+      ],
+      "gate_id": "G2",
+      "missing_anchors": [],
+      "path": "DASHI/Physics/Closure/NSNonCircularKStarDriftBoundTargetReceipt.agda",
+      "present": true,
+      "required": true,
+      "required_anchors": [
+        "canonicalNSNonCircularKStarDriftBoundTargetReceipt",
+        "canonicalNSNonCircularKStarTargetNoClay",
+        "highHighParaproductLoadBearing",
+        "hHalfSerrinBKMAssumed"
+      ],
+      "status": "PASS",
+      "surface_id": "S2",
+      "surface_name": "NSNonCircularKStarDriftBoundTargetReceipt"
+    },
+    {
+      "anchor_lines": {
+        "canonicalNSDangerShellMaximumPrincipleReceipt": 224,
+        "clayNavierStokesPromotedIsFalse": 209,
+        "dangerShellMaxPrincipleProved": 194
+      },
+      "anchors_present": true,
+      "clay_navier_stokes_promoted_true": false,
+      "clay_navier_stokes_promoted_values": [
+        false
+      ],
+      "gate_id": "G3",
+      "missing_anchors": [],
+      "path": "DASHI/Physics/Closure/NSDangerShellMaximumPrincipleReceipt.agda",
+      "present": true,
+      "required": true,
+      "required_anchors": [
+        "canonicalNSDangerShellMaximumPrincipleReceipt",
+        "dangerShellMaxPrincipleProved",
+        "clayNavierStokesPromotedIsFalse"
+      ],
+      "status": "PASS",
+      "surface_id": "S3",
+      "surface_name": "NSDangerShellMaximumPrincipleReceipt"
+    },
+    {
+      "anchor_lines": {
+        "canonicalNSDangerShellMaxPrincipleConditionalProofReceipt": 354,
+        "conditionalDangerShellBoundary": 177,
+        "nonCircularWeakeningProved": 312
+      },
+      "anchors_present": true,
+      "clay_navier_stokes_promoted_true": false,
+      "clay_navier_stokes_promoted_values": [
+        false
+      ],
+      "gate_id": "G4",
+      "missing_anchors": [],
+      "path": "DASHI/Physics/Closure/NSDangerShellMaxPrincipleConditionalProofReceipt.agda",
+      "present": true,
+      "required": true,
+      "required_anchors": [
+        "canonicalNSDangerShellMaxPrincipleConditionalProofReceipt",
+        "conditionalDangerShellBoundary",
+        "nonCircularWeakeningProved"
+      ],
+      "status": "PASS",
+      "surface_id": "S4",
+      "surface_name": "NSDangerShellMaxPrincipleConditionalProofReceipt"
+    },
+    {
+      "anchor_lines": {
+        "canonicalNSNegativeSobolevDangerShellReceipt": 276,
+        "hOneHalfVelocityRegularityAssumed": 240,
+        "highHighDefectBoundProvedHere": 228
+      },
+      "anchors_present": true,
+      "clay_navier_stokes_promoted_true": false,
+      "clay_navier_stokes_promoted_values": [
+        false
+      ],
+      "gate_id": "G5",
+      "missing_anchors": [],
+      "path": "DASHI/Physics/Closure/NSNegativeSobolevDangerShellReceipt.agda",
+      "present": true,
+      "required": true,
+      "required_anchors": [
+        "canonicalNSNegativeSobolevDangerShellReceipt",
+        "highHighDefectBoundProvedHere",
+        "hOneHalfVelocityRegularityAssumed"
+      ],
+      "status": "PASS",
+      "surface_id": "S5",
+      "surface_name": "NSNegativeSobolevDangerShellReceipt"
+    }
+  ],
+  "summary_json": "ns_sprint87_danger_shell_factorization_audit_summary.json"
+}

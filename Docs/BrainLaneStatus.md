@@ -143,6 +143,64 @@ Unsafe to say: fMRI validates Kluver classes, connectome structure determines
 processing, or the Brain lane proves perception/cognition/consciousness
 closure.
 
+### Archive Context: Bidirectional Observation Surface
+
+Resolved local Perplexity thread:
+
+- title: `As you can see in the pumls there are many blockers`
+- online thread id: `8daefbbb-e5e4-4c27-92c2-9cf7e9de0aa3`
+- canonical thread id: `9fd02df16462bcb491ed4c155b1a4e73ba0fb173`
+- source: local DB `~/chat_archive.sqlite`; web not used
+
+The archive sharpens the intended brain/perception formalism beyond the current
+non-promoting quotient target. The key additional structure is a bidirectional
+observation architecture over the same latent neuronal orbit:
+
+`sigma_t -> pi_fMRI(sigma_{t:t+Delta}) -> B_t`
+
+and separately:
+
+`sigma_t -> pi_percept(sigma_t) -> report/percept class`.
+
+The important claim boundary is that fMRI is not ground truth and not the
+percept. It is a delayed, spatially pooled, vascular/metabolic quotient. The
+archive proposes using complementary kernels:
+
+`ker pi_fMRI` and `ker pi_percept`
+
+as the reason joint inference can constrain the latent neuronal state better
+than either fMRI or subjective report alone. The earlier local fMRI module has
+observation, inverse, and laminar-readout handles; the dedicated
+bidirectional-observation theorem surface is now separated into its own
+non-promoting module.
+
+The same archive also extends the target from brain-only observation to a
+whole-body coupled resource system: increased blood or energy demand in one
+brain region must be balanced against cardiovascular pumping, losses, and
+system-wide energetic constraints. That whole-body coupling is now named as a
+resource-gating surface, not solved as a physiological model.
+
+Safe archive-aligned wording: the Brain lane should eventually model fMRI,
+perceptual report, and whole-body resource observables as complementary
+quotients of coupled latent dynamics.
+
+This is now localized as a theorem-thin, non-promoting surface in
+`DASHI/Physics/Closure/BidirectionalBrainObservationQuotient.agda`, with focused
+documentation in `Docs/BidirectionalBrainObservationQuotient.md`. The module
+names `sigma_t`, lossy many-to-one quotients `pi_fMRI`, `pi_percept`,
+`pi_behavior`, and `pi_bodyResource`, joint narrowing of observational
+equivalence classes, and whole-body resource constraints over blood, oxygen,
+glucose, thermal load, and cardiovascular work.
+
+The localized boundary remains explicitly non-promoting: fMRI is not percept,
+report is not ground truth, joint narrowing is not latent-state recovery, and
+there is no qualia, cognition, consciousness, or empirical brain closure.
+
+Unsafe wording: fMRI equals percept, subjective report equals ground truth,
+brain dynamics can be isolated from body energy/circulation when making a
+quantitative physiological claim, or current local Agda has already proved the
+bidirectional/whole-body bridge.
+
 ## Developmental Genomic Inverse Bridge
 
 `DASHI/Physics/Closure/DevelopmentalGenomicInverseBridge.agda` records the

@@ -1,0 +1,126 @@
+{
+  "attempts": 128,
+  "clay_promoted": false,
+  "failure_counts": {
+    "first_step_degenerate": 0,
+    "near_resonant_pair": 0,
+    "omega_a_missing": 0,
+    "omega_b_missing": 0,
+    "omega_d_missing": 0,
+    "second_step_degenerate": 0
+  },
+  "first_step_valid": 128,
+  "promotion": false,
+  "residual_quantiles": {
+    "carry_velocity": {
+      "max": 1.1102230246251565e-16,
+      "median": 0.0,
+      "min": 0.0,
+      "p90": 0.0,
+      "p95": 0.0
+    },
+    "combined_max": {
+      "max": 0.9978082936251123,
+      "median": 0.5343682502410417,
+      "min": 0.29297014970826585,
+      "p90": 0.8892041504151267,
+      "p95": 0.9372062431564534
+    },
+    "combined_rms": {
+      "max": 0.6581134823425371,
+      "median": 0.30022119471058856,
+      "min": 0.12052243822196898,
+      "p90": 0.5208362098214885,
+      "p95": 0.575278645988358
+    },
+    "input_admissibility": {
+      "max": 0.4943084874470527,
+      "median": 0.18525706770084038,
+      "min": 3.536928449221488e-05,
+      "p90": 0.4407305092266891,
+      "p95": 0.46456471865215687
+    },
+    "omega_transport": {
+      "max": 0.9978082936251123,
+      "median": 0.28331510120227293,
+      "min": 5.048524148487665e-05,
+      "p90": 0.7978957321989513,
+      "p95": 0.9254460782536005
+    },
+    "second_output_zero_mode": {
+      "max": 0.4760141505850425,
+      "median": 0.011289078083372095,
+      "min": 8.49024779370211e-08,
+      "p90": 0.33101338695926613,
+      "p95": 0.4421541226288066
+    },
+    "strain_plus_transport": {
+      "max": 0.9808897868600833,
+      "median": 0.47937665830223564,
+      "min": 0.29297014970826585,
+      "p90": 0.7887049195036399,
+      "p95": 0.8616212265237508
+    },
+    "velocity_transport": {
+      "max": 0.9957613436052859,
+      "median": 0.1302987221847362,
+      "min": 2.016350826661295e-05,
+      "p90": 0.6477087875496848,
+      "p95": 0.8680429796431064
+    }
+  },
+  "samples": 128,
+  "scope": "finite_leray_vorticity_propagated_polarization_diagnostic_not_pde_proof",
+  "second_step_valid": 128,
+  "seed": 20260608,
+  "survival_fraction_of_second_valid": 0.0,
+  "survivors": 0,
+  "threshold": 0.08,
+  "transport_threshold": 0.08,
+  "width_first_outputs": 0.03750088347103547,
+  "width_second_outputs": 0.029966404084248832,
+  "width_survivor_first_outputs": null,
+  "width_survivor_second_outputs": null,
+  "worst_records": [
+    {
+      "carry_velocity": 0.0,
+      "combined_max": 0.9978082936251123,
+      "combined_rms": 0.49534629311829187,
+      "first_output_c": [
+        -0.49552336,
+        0.83344514,
+        0.24459312
+      ],
+      "input_admissibility": 0.2796795318707578,
+      "omega_transport": 0.9978082936251123,
+      "second_output_e": [
+        -0.83843423,
+        -0.29958752,
+        -0.45527503
+      ],
+      "second_output_zero_mode": 0.0017189208287877733,
+      "strain_plus_transport": 0.6311298182599774,
+      "velocity_transport": 0.006153622998196995
+    },
+    {
+      "carry_velocity": 0.0,
+      "combined_max": 0.9957613436052859,
+      "combined_rms": 0.6268375398652323,
+      "first_output_c": [
+        -0.21128526,
+        -0.33622574,
+        -0.91777491
+      ],
+      "input_admissibility": 0.4355764697233314,
+      "omega_transport": 0.7179728038523135,
+      "second_output_e": [
+        0.22682328,
+        0.30736316,
+        -0.92416399
+      ],
+      "second_output_zero_mode": 0.18101583794126708,
+      "strain_plus_transport": 0.7924850870858098,
+      "velocity_transport": 0.9957613436052859
+    }
+  ]
+}

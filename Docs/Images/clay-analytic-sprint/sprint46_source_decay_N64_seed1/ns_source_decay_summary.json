@@ -1,0 +1,52 @@
+{
+  "source_decay_search_available": true,
+  "source_decay_residue_key": "Rplus_stretchSign",
+  "source_decay_theta_grid": [
+    1.0
+  ],
+  "source_decay_row_count": 728,
+  "rho_threshold": 0.7071067811865475,
+  "rho_rows": 702,
+  "rho_pass_rows": 13,
+  "rho_sup": 1.0723874775236886,
+  "angular_sigma_fit_min": 0.0,
+  "angular_sigma_fit_max": 0.0,
+  "pressure_sigma_fit_min": 0.0,
+  "pressure_sigma_fit_max": 0.03289174867505729,
+  "candidate_budget_inf": -0.0017769118671767253,
+  "candidate_budget_sup": 0.032048340787893315,
+  "source_decay_route_status_counts": {
+    "SOURCE_BUDGET_ROUTE_FALSIFIED_UNDER_CURRENT_DIAGNOSTICS": 56,
+    "POSITIVE_BUT_SUBHALF_DECAY_DIAGNOSTIC": 672
+  },
+  "bt_lane_decay_status": "eta_unavailable_no_BT_lane_observable",
+  "source_budget_route_falsified_under_current_diagnostics": false,
+  "source_decay_search_promotes": false,
+  "source_decay_boundary": "Sprint 46 searches for independent source-decay observables. Raw angular, pressure, and rho diagnostics do not receive budget credit without proof independence; BT eta is unavailable without lane labels.",
+  "source_decay_field_contract": [
+    "step",
+    "time",
+    "K",
+    "theta",
+    "residue_key",
+    "Rplus",
+    "rho_K",
+    "rho_pass",
+    "angular_coherence",
+    "angular_sigma_fit",
+    "angular_candidate_budget",
+    "pressure_survival",
+    "pressure_sigma_fit",
+    "pressure_candidate_budget",
+    "beta_fit",
+    "candidate_budget",
+    "bt_eta_status",
+    "independent_of_Rplus",
+    "independent_of_Q",
+    "used_in_budget",
+    "double_count_warning",
+    "route_status",
+    "promotion_status",
+    "note"
+  ]
+}

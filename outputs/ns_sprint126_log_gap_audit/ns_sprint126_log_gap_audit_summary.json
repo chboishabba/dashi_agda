@@ -1,0 +1,12 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint126LogGapAuditAndAxisymmetricPivot.agda",
+  "audit_id": "ns_sprint126_log_gap_audit",
+  "bool_count": 13,
+  "failed_count": 0,
+  "forbidden_hit_count": 0,
+  "forbidden_hits": [],
+  "passed": true,
+  "passed_count": 8,
+  "row_count": 8,
+  "string_count": 0
+}

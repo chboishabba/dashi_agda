@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3200,
+    "once": true,
+    "timeout_seconds": 3000
+  },
+  "runners": {
+    "paper7-wave6-gate12-manager": {
+      "claim": "Paper 7 wave6 Gate 1/2 implementation-enforcement manager: inhabit the global real-carrier SelfAdjointYangMillsHamiltonianOnCarrierQuotient theorem; bounded Nat progress is not enough; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate1-gate2",
+      "parent": "paper7-root"
+    },
+    "paper7-wave6-gate3-manager": {
+      "claim": "Paper 7 wave6 Gate 3 implementation-enforcement manager: prove all-slot coefficient-aware SU(3) Jacobi closure over the global arithmetic carrier, or advance to the next exact all-slot proof blocker; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate3-yang-mills",
+      "parent": "paper7-root"
+    },
+    "paper7-wave6-gate4-manager": {
+      "claim": "Paper 7 wave6 Gate 4 implementation-enforcement manager: inhabit the valuation stress-energy tensor component-family map or advance to the next exact stress-energy typed blocker; do not promote global GR; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate4-factorvec-gr",
+      "parent": "paper7-root"
+    },
+    "paper7-wave6-gate5-manager": {
+      "claim": "Paper 7 wave6 Gate 5 implementation-enforcement manager: inhabit the first missing theorem field in the nondegenerate projection/scalar lattice or advance to the next exact Hilbert/Stone typed blocker; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate5-hilbert-stone",
+      "parent": "paper7-root"
+    },
+    "paper7-wave6-gate6-manager": {
+      "claim": "Paper 7 wave6 Gate 6 implementation-enforcement manager: supply arbitrary-sector global foreign-lane identity or advance to the next exact DHR identity/classification blocker; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate6-dhr-aqft",
+      "parent": "paper7-root"
+    },
+    "paper7-wave6-gate78-manager": {
+      "claim": "Paper 7 wave6 Gate 7/8 implementation-enforcement manager: construct concrete up-Yukawa entry y12 and advance the up/down matrix and CKM/DHR compatibility route; do not promote terminal composition; audit-only/docs-only reports fail.",
+      "lane": "paper7-gate7-gate8-composition",
+      "parent": "paper7-root"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+[2026-05-19T16:13:59Z] root validation log placeholder for paper7-wave8-workers-retry1
+No targeted validation has been tee'd into this artifact yet.
+[root validation retry1] json integrity
+[root validation retry1] json ok
+[root validation retry1] git diff --check
+[root validation retry1] replay post-retry touched critical Agda modules
+Checking DASHI.Physics.Closure.CarrierToPhysicsInterpretationFunctor (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda:225,3-7
+y != w of type DASHICarrierObject
+when checking that the expression refl has type
+physicalCarrierCompose (physicalCarrierCompose h g)
+(physicalIdentity w)
+≡
+physicalCarrierCompose
+(physicalCarrierCompose (physicalCarrierCompose h g)
+ (physicalIdentity w))
+(physicalIdentity w)
+Checking DASHI.Physics.QFT.DHRTensorDualGroupReconstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda).
+ Checking DASHI.Physics.Closure.CarrierToPhysicsInterpretationFunctor (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda:225,3-7
+y != w of type DASHICarrierObject
+when checking that the expression refl has type
+physicalCarrierCompose (physicalCarrierCompose h g)
+(physicalIdentity w)
+≡
+physicalCarrierCompose
+(physicalCarrierCompose (physicalCarrierCompose h g)
+ (physicalIdentity w))
+(physicalIdentity w)
+[root validation retry1] post-retry replay complete
+[root validation retry1 repair] CarrierToPhysicsInterpretationFunctor
+Checking DASHI.Physics.Closure.CarrierToPhysicsInterpretationFunctor (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda:223,3-7
+y != w of type DASHICarrierObject
+when checking that the expression refl has type
+physicalCarrierCompose h
+(physicalCarrierCompose g (physicalIdentity w))
+≡
+physicalCarrierCompose (physicalCarrierCompose h g)
+(physicalIdentity w)
+[root validation retry1 repair] done
+Checking DASHI.Physics.Closure.CarrierToPhysicsInterpretationFunctor (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda:228,3-7
+h != physicalCarrierCompose h (physicalIdentity x) of type
+PhysicalCarrierMorphism x z
+when checking that the expression refl has type
+physicalCarrierCompose h
+(physicalCarrierCompose (physicalIdentity x) f)
+≡
+physicalCarrierCompose
+(physicalCarrierCompose h (physicalIdentity x)) f
+Checking DASHI.Physics.Closure.CarrierToPhysicsInterpretationFunctor (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda:232,3-7
+y != x of type DASHICarrierObject
+when checking that the expression refl has type
+physicalCarrierCompose h (physicalCarrierCompose g f) ≡
+physicalCarrierCompose (physicalCarrierCompose h g) f
+[root validation retry1 repair] CarrierToPhysicsInterpretationFunctor postulate boundary
+Checking DASHI.Physics.Closure.CarrierToPhysicsInterpretationFunctor (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda:230,16-17
+Setω != Set _a_112
+when checking that the solution PhysicalCarrierCategory of
+metavariable _A_113 has the expected type Set _a_112
+[root validation retry1 repair] carrier functor check passed
+Checking DASHI.Physics.Closure.CarrierToPhysicsInterpretationFunctor (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda).
+[root validation final] critical post-repair Agda modules
+Checking DASHI.Physics.QFT.DHRTensorDualGroupReconstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda:627,7-628,23
+Set !=<
+Hexagon.associatorTargetReceipt (coherenceReceipt fusionProgress)
+(sourceLeft fusionProgress) (sourceRight fusionProgress)
+(targetLeft fusionProgress)
+when checking that the expression
+associatorTargetReceipt fusionProgress has type
+Hexagon.associatorTargetReceipt (coherenceReceipt fusionProgress)
+(sourceLeft fusionProgress) (sourceRight fusionProgress)
+(targetLeft fusionProgress)
+[root validation final] critical post-repair checks passed
+Checking DASHI.Physics.QFT.DHRTensorDualGroupReconstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda:674,9-13
+The projections associatorTargetReceipt and coherenceReceipt do not
+match
+when checking that the expression refl has type
+associatorTargetReceipt
+canonicalDHRIntertwinerTensorFusionAssociatorUnitProgress
+≡
+DHRTensorProductLawTarget
+canonicalDHRIntertwinerTensorFusionAssociatorUnitProgress
+Checking DASHI.Physics.QFT.DHRTensorDualGroupReconstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda).
+[root validation final set-e] critical Agda modules
+[root validation final set-e] passed

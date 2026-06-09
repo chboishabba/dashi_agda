@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "bilinear_cross_term_ok": true,
+  "h10_norm_square_ok": true,
+  "max_error": 1.8e-12,
+  "null_class_trivial_ok": true,
+  "promotion": false
+}

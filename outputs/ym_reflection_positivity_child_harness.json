@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "pairing_compatibility_substep_ok": true,
+  "parent_rp_boundary_ok": true,
+  "promotion": false,
+  "tau_spatial_substep_ok": true,
+  "theta_reflection_substep_ok": true
+}

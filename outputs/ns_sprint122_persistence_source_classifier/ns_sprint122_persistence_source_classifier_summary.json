@@ -1,0 +1,32 @@
+{
+  "candidate_routes": [
+    "rotating_frame_ode",
+    "imposed_phase_lag",
+    "numerical_phase_locking",
+    "nonlinear_feedback",
+    "global_data_realization"
+  ],
+  "classifications": {
+    "global_data_realization": "open_downstream",
+    "imposed_phase_lag": "rejected_circular",
+    "nonlinear_feedback": "open_secondary",
+    "numerical_phase_locking": "empirical_not_proof",
+    "rotating_frame_ode": "conditional_model_not_bound"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": false,
+  "conditional_route_count": 1,
+  "contract": "ns_sprint122_persistence_source_classifier",
+  "empirical_route_count": 1,
+  "exit_code": 1,
+  "exit_reason": "no Clay route closes",
+  "open_route_count": 2,
+  "primary_route": "rotating_frame_ode",
+  "recommended_classification": "conditional_model_not_bound",
+  "recommended_next_lemma": "RotatingFramePhaseLockingEstimate",
+  "recommended_route_id": "rotating_frame_ode",
+  "rejected_route_count": 1,
+  "route_count": 5
+}

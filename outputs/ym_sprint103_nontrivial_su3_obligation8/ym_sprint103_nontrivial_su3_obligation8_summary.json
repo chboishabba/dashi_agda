@@ -1,0 +1,30 @@
+{
+  "agda_file": "DASHI/Physics/Closure/YMSprint103NontrivialSU3ContinuumMeasureObligation8.agda",
+  "audit_passed": true,
+  "clay_statement_boundary_discharged": false,
+  "clay_yang_mills_promoted": false,
+  "continuum_measure_obligation8_closed_in_repo": true,
+  "cubic_self_interaction_recorded": true,
+  "explicit_nonabelian_curvature_recorded": true,
+  "external_acceptance_token_available": false,
+  "no_empty_data_skeletons": true,
+  "no_postulates": true,
+  "non_gaussian_connected_correlation_witness_recorded": true,
+  "obligation_number": 8,
+  "quartic_self_interaction_recorded": true,
+  "required_term_checks": {
+    "F_mu_nu^a": true,
+    "clayYangMillsPromoted = false": true,
+    "connectedCumulantOrder": true,
+    "cubicInteractionTerm": true,
+    "g f^{abc} A_mu^b A_nu^c": true,
+    "kappa_4": true,
+    "nonGaussianConnectedCorrelationPresent": true,
+    "quarticInteractionTerm": true
+  },
+  "route_decision": "SPRINT103_OBLIGATION8_CLOSES_NONTRIVIAL_SU3_MEASURE_ONLY",
+  "scope": "Nontrivial4DSU3YangMillsMeasure only",
+  "sprint": "103-nontrivial-su3-continuum-measure-obligation8",
+  "uses_sprint97_context": true,
+  "worker": "D"
+}

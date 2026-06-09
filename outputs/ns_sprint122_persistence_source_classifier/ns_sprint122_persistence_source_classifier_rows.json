@@ -1,0 +1,47 @@
+[
+  {
+    "classification": "conditional_model_not_bound",
+    "clay": false,
+    "complete": false,
+    "next_action": "prove RotatingFramePhaseLockingEstimate",
+    "rationale": "The rotating-frame ODE gives the leading Sprint122 route, but it remains a conditional model until an analytic phase-locking estimate binds it to the Navier-Stokes evolution.",
+    "recommendation_rank": 1,
+    "route_id": "rotating_frame_ode"
+  },
+  {
+    "classification": "rejected_circular",
+    "clay": false,
+    "complete": false,
+    "next_action": "exclude from route accounting",
+    "rationale": "An imposed phase lag supplies the relation the route is meant to derive, so it cannot close the persistence source.",
+    "recommendation_rank": 5,
+    "route_id": "imposed_phase_lag"
+  },
+  {
+    "classification": "empirical_not_proof",
+    "clay": false,
+    "complete": false,
+    "next_action": "use only as empirical guidance",
+    "rationale": "Numerical phase locking can guide the target estimate, but it does not supply an analytic bound.",
+    "recommendation_rank": 4,
+    "route_id": "numerical_phase_locking"
+  },
+  {
+    "classification": "open_secondary",
+    "clay": false,
+    "complete": false,
+    "next_action": "keep as a secondary route after the primary estimate",
+    "rationale": "Nonlinear feedback may support persistence once the frame estimate is available, but it does not replace that estimate.",
+    "recommendation_rank": 2,
+    "route_id": "nonlinear_feedback"
+  },
+  {
+    "classification": "open_downstream",
+    "clay": false,
+    "complete": false,
+    "next_action": "defer until the conditional route is bounded",
+    "rationale": "Global data realization depends on a verified local source, so it is downstream of the rotating-frame phase-locking estimate.",
+    "recommendation_rank": 3,
+    "route_id": "global_data_realization"
+  }
+]

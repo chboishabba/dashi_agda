@@ -1,0 +1,200 @@
+[
+  {
+    "accepted": false,
+    "ansatz": "align selected low/high/high triads so their transfer has a favorable sign",
+    "cancellation_defect_bound": false,
+    "classification": "phase-selected triadic sign sketch",
+    "failed_gates": [
+      "triadic_sign_coherence",
+      "low_mode_projection_sign_control",
+      "cancellation_defect_bound",
+      "pressure_transport_sign_accounting",
+      "non_circular_flux_sign_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "coherent_triad_alignment",
+    "family_id": "T1",
+    "forbidden_dependencies": "imposed_triad_phase;imposed_flux_sign",
+    "gate_results": {
+      "cancellation_defect_bound": false,
+      "leray_energy_compatible": true,
+      "low_mode_projection_sign_control": false,
+      "no_forbidden_dependency": false,
+      "non_circular_flux_sign_source": false,
+      "pressure_transport_sign_accounting": false,
+      "triadic_sign_coherence": false
+    },
+    "leray_energy_compatible": true,
+    "low_mode_projection_sign_control": false,
+    "no_forbidden_dependency": false,
+    "non_circular_flux_sign_source": false,
+    "note": "A favorable triad orientation is selected rather than derived; the candidate lacks a cancellation-defect bound and does not account for pressure transport in the projected low-mode budget.",
+    "pressure_transport_sign_accounting": false,
+    "triadic_sign_coherence": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "nearest-neighbor shell interactions carry a persistent sign bias into low modes",
+    "cancellation_defect_bound": false,
+    "classification": "shell-local sign-bias heuristic",
+    "failed_gates": [
+      "triadic_sign_coherence",
+      "low_mode_projection_sign_control",
+      "cancellation_defect_bound",
+      "pressure_transport_sign_accounting"
+    ],
+    "family": "shell_local_sign_bias",
+    "family_id": "S1",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "cancellation_defect_bound": false,
+      "leray_energy_compatible": true,
+      "low_mode_projection_sign_control": false,
+      "no_forbidden_dependency": true,
+      "non_circular_flux_sign_source": true,
+      "pressure_transport_sign_accounting": false,
+      "triadic_sign_coherence": false
+    },
+    "leray_energy_compatible": true,
+    "low_mode_projection_sign_control": false,
+    "no_forbidden_dependency": true,
+    "non_circular_flux_sign_source": true,
+    "note": "Shell locality is compatible with the Leray energy ledger, but locality does not determine the sign after summing interacting triads and projected cancellations remain uncontrolled.",
+    "pressure_transport_sign_accounting": false,
+    "triadic_sign_coherence": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "the Leray pressure projection fixes the low-mode transfer orientation",
+    "cancellation_defect_bound": false,
+    "classification": "pressure-projection sign assertion",
+    "failed_gates": [
+      "triadic_sign_coherence",
+      "low_mode_projection_sign_control",
+      "cancellation_defect_bound",
+      "pressure_transport_sign_accounting"
+    ],
+    "family": "pressure_projection_sign",
+    "family_id": "P1",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "cancellation_defect_bound": false,
+      "leray_energy_compatible": true,
+      "low_mode_projection_sign_control": false,
+      "no_forbidden_dependency": true,
+      "non_circular_flux_sign_source": true,
+      "pressure_transport_sign_accounting": false,
+      "triadic_sign_coherence": false
+    },
+    "leray_energy_compatible": true,
+    "low_mode_projection_sign_control": false,
+    "no_forbidden_dependency": true,
+    "non_circular_flux_sign_source": true,
+    "note": "The pressure projection is part of the equations, but it is not a signed source by itself; the candidate does not separate pressure transport from nonlinear transfer or bound the residual cancellation defect.",
+    "pressure_transport_sign_accounting": false,
+    "triadic_sign_coherence": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "helical polarization of modes enforces a favorable transfer sign",
+    "cancellation_defect_bound": false,
+    "classification": "helical sign-alignment mechanism",
+    "failed_gates": [
+      "triadic_sign_coherence",
+      "low_mode_projection_sign_control",
+      "cancellation_defect_bound",
+      "pressure_transport_sign_accounting",
+      "non_circular_flux_sign_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "helical_alignment_sign",
+    "family_id": "H1",
+    "forbidden_dependencies": "imposed_triad_phase;desired_conclusion",
+    "gate_results": {
+      "cancellation_defect_bound": false,
+      "leray_energy_compatible": true,
+      "low_mode_projection_sign_control": false,
+      "no_forbidden_dependency": false,
+      "non_circular_flux_sign_source": false,
+      "pressure_transport_sign_accounting": false,
+      "triadic_sign_coherence": false
+    },
+    "leray_energy_compatible": true,
+    "low_mode_projection_sign_control": false,
+    "no_forbidden_dependency": false,
+    "non_circular_flux_sign_source": false,
+    "note": "Helical decomposition can expose transfer channels, but the persistent alignment is imposed as the desired sign conclusion and is not propagated by a closed Leray-compatible mechanism.",
+    "pressure_transport_sign_accounting": false,
+    "triadic_sign_coherence": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "short nonlinear bursts create intervals with favorable low-mode flux sign",
+    "cancellation_defect_bound": false,
+    "classification": "transient burst sign narrative",
+    "failed_gates": [
+      "triadic_sign_coherence",
+      "low_mode_projection_sign_control",
+      "cancellation_defect_bound",
+      "pressure_transport_sign_accounting",
+      "no_forbidden_dependency"
+    ],
+    "family": "intermittent_burst_sign",
+    "family_id": "B1",
+    "forbidden_dependencies": "imposed_surplus_window",
+    "gate_results": {
+      "cancellation_defect_bound": false,
+      "leray_energy_compatible": true,
+      "low_mode_projection_sign_control": false,
+      "no_forbidden_dependency": false,
+      "non_circular_flux_sign_source": true,
+      "pressure_transport_sign_accounting": false,
+      "triadic_sign_coherence": false
+    },
+    "leray_energy_compatible": true,
+    "low_mode_projection_sign_control": false,
+    "no_forbidden_dependency": false,
+    "non_circular_flux_sign_source": true,
+    "note": "A burst interval can be named, but the signed window is imposed rather than derived and no uniform lower bound survives cancellation across the low-mode projection.",
+    "pressure_transport_sign_accounting": false,
+    "triadic_sign_coherence": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "prescribe the orientation of flux so low modes receive a signed lower bound",
+    "cancellation_defect_bound": false,
+    "classification": "forbidden imposed sign source",
+    "failed_gates": [
+      "cancellation_defect_bound",
+      "pressure_transport_sign_accounting",
+      "leray_energy_compatible",
+      "non_circular_flux_sign_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "imposed_flux_orientation",
+    "family_id": "F1",
+    "forbidden_dependencies": "imposed_flux_sign;external_forcing;desired_conclusion",
+    "gate_results": {
+      "cancellation_defect_bound": false,
+      "leray_energy_compatible": false,
+      "low_mode_projection_sign_control": true,
+      "no_forbidden_dependency": false,
+      "non_circular_flux_sign_source": false,
+      "pressure_transport_sign_accounting": false,
+      "triadic_sign_coherence": true
+    },
+    "leray_energy_compatible": false,
+    "low_mode_projection_sign_control": true,
+    "no_forbidden_dependency": false,
+    "non_circular_flux_sign_source": false,
+    "note": "The candidate directly prescribes the needed sign orientation, so any apparent sign control is circular and outside the unforced Navier-Stokes closure target.",
+    "pressure_transport_sign_accounting": false,
+    "triadic_sign_coherence": true,
+    "verdict": "reject"
+  }
+]

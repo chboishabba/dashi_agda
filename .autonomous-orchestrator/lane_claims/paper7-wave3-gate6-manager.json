@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave3-gate6-manager.json",
+  "lane": "paper7-gate6-dhr-aqft",
+  "lane_claim": "Paper 7 continued Gate 6 manager: implement arbitrary sector classification, sector-specific nonempty carrier predicates, foreign-lane identity, or irreducibility evidence; may spawn up to six leaf workers",
+  "orchestrator_id": "paper7-wave3-gate6-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.paper7-wave3-gate6-manager.json",
+  "timestamp": "2026-05-19T13:04:30Z"
+}

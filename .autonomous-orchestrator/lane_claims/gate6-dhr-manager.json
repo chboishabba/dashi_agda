@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.gate6-dhr-manager.json",
+  "lane": "gate6-dhr-aqft",
+  "lane_claim": "Gate 6 manager: DHR/AQFT sector and hexagon reconstruction; may spawn up to six leaf workers",
+  "orchestrator_id": "gate6-dhr-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.gate6-dhr-manager.json",
+  "timestamp": "2026-05-19T10:59:15Z"
+}

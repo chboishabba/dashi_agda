@@ -1,0 +1,285 @@
+[
+  {
+    "external_governance": {
+      "boundary": "external Clay/CMI governance is not supplied by repository-local Sprint128-131 evidence",
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+      ],
+      "present": false,
+      "state": "absent"
+    },
+    "internal_resolution": {
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+        "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+      ],
+      "status": "resolved"
+    },
+    "mapped_internal_gates": [
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+          "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+        ],
+        "gate": "OS1",
+        "source_sprint": "Sprint130",
+        "state": "closed"
+      }
+    ],
+    "promotion": {
+      "promoted": false,
+      "promotion_true_allowed": false
+    },
+    "red_team_status": "internal_resolved_external_governance_absent",
+    "row_id": "blockedWightmanDistributions",
+    "sprint104_blocker": {
+      "clay_requirement": "Construct Wightman distributions for the four-dimensional theory.",
+      "evidence": "OS/Wightman authority and boundary receipts are present, but no complete distribution-level reconstruction proof is present in Sprint 91-103.",
+      "gap_id": "blockedWightmanDistributions",
+      "reason": "Partial OS material is not a completed Wightman reconstruction.",
+      "required_resolution": "Complete OS-to-Wightman reconstruction for the candidate Schwinger functions."
+    }
+  },
+  {
+    "external_governance": {
+      "boundary": "external Clay/CMI governance is not supplied by repository-local Sprint128-131 evidence",
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+      ],
+      "present": false,
+      "state": "absent"
+    },
+    "internal_resolution": {
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+        "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+      ],
+      "status": "resolved"
+    },
+    "mapped_internal_gates": [
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        ],
+        "gate": "SY1",
+        "source_sprint": "Sprint128",
+        "state": "closed"
+      },
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+          "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+        ],
+        "gate": "OS1",
+        "source_sprint": "Sprint130",
+        "state": "closed"
+      }
+    ],
+    "promotion": {
+      "promoted": false,
+      "promotion_true_allowed": false
+    },
+    "red_team_status": "internal_resolved_external_governance_absent",
+    "row_id": "blockedPoincareCovariance",
+    "sprint104_blocker": {
+      "clay_requirement": "Prove Poincare covariance of the reconstructed Wightman theory.",
+      "evidence": "Euclidean and transfer-boundary receipts exist, but the Minkowski covariance theorem is not closed.",
+      "gap_id": "blockedPoincareCovariance",
+      "reason": "Euclidean-invariance evidence alone does not establish Lorentzian covariance.",
+      "required_resolution": "Derive Poincare covariance after reconstruction and bind it to the candidate field algebra."
+    }
+  },
+  {
+    "external_governance": {
+      "boundary": "external Clay/CMI governance is not supplied by repository-local Sprint128-131 evidence",
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+      ],
+      "present": false,
+      "state": "absent"
+    },
+    "internal_resolution": {
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+        "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+        "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+      ],
+      "status": "resolved"
+    },
+    "mapped_internal_gates": [
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+        ],
+        "gate": "SC2",
+        "source_sprint": "Sprint129",
+        "state": "closed"
+      },
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+          "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+          "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
+        ],
+        "gate": "OS1",
+        "source_sprint": "Sprint130",
+        "state": "closed"
+      }
+    ],
+    "promotion": {
+      "promoted": false,
+      "promotion_true_allowed": false
+    },
+    "red_team_status": "internal_resolved_external_governance_absent",
+    "row_id": "blockedSpectrumCondition",
+    "sprint104_blocker": {
+      "clay_requirement": "Prove the positive-energy spectrum condition.",
+      "evidence": "Transfer-gap and OS boundary material exists, but the Wightman spectrum theorem is not closed.",
+      "gap_id": "blockedSpectrumCondition",
+      "reason": "A transfer-gap receipt is not itself the spectrum condition.",
+      "required_resolution": "Prove the energy-momentum spectrum lies in the closed forward cone and bind the gap to that spectrum."
+    }
+  },
+  {
+    "external_governance": {
+      "boundary": "external Clay/CMI governance is not supplied by repository-local Sprint128-131 evidence",
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+      ],
+      "present": false,
+      "state": "absent"
+    },
+    "internal_resolution": {
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+      ],
+      "status": "resolved"
+    },
+    "mapped_internal_gates": [
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        ],
+        "gate": "GG1",
+        "source_sprint": "Sprint128",
+        "state": "closed"
+      }
+    ],
+    "promotion": {
+      "promoted": false,
+      "promotion_true_allowed": false
+    },
+    "red_team_status": "internal_resolved_external_governance_absent",
+    "row_id": "blockedAllCompactSimpleG",
+    "sprint104_blocker": {
+      "clay_requirement": "Prove the theorem for any compact simple gauge group G.",
+      "evidence": "The current manuscript lane is SU(3)-scoped.",
+      "gap_id": "blockedAllCompactSimpleG",
+      "reason": "The Jaffe-Witten problem is not restricted to SU(3).",
+      "required_resolution": "Generalize group-dependent estimates and nontriviality witnesses to arbitrary compact simple G."
+    }
+  },
+  {
+    "external_governance": {
+      "boundary": "external Clay/CMI governance is not supplied by repository-local Sprint128-131 evidence",
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda"
+      ],
+      "present": false,
+      "state": "absent"
+    },
+    "internal_resolution": {
+      "evidence_paths": [
+        "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+        "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+        "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+      ],
+      "status": "resolved"
+    },
+    "mapped_internal_gates": [
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        ],
+        "gate": "WC1",
+        "source_sprint": "Sprint128",
+        "state": "closed"
+      },
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        ],
+        "gate": "SC1",
+        "source_sprint": "Sprint128",
+        "state": "closed"
+      },
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda"
+        ],
+        "gate": "SC3",
+        "source_sprint": "Sprint128",
+        "state": "closed"
+      },
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+        ],
+        "gate": "MC1",
+        "source_sprint": "Sprint129",
+        "state": "closed"
+      },
+      {
+        "evidence_paths": [
+          "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+        ],
+        "gate": "SC2",
+        "source_sprint": "Sprint129",
+        "state": "closed"
+      }
+    ],
+    "promotion": {
+      "promoted": false,
+      "promotion_true_allowed": false
+    },
+    "red_team_status": "internal_resolved_external_governance_absent",
+    "row_id": "blockedNonCircularMassGapProof",
+    "sprint104_blocker": {
+      "clay_requirement": "Prove the mass gap without assuming the physical mass scale.",
+      "evidence": "Sprint 103 records a continuum bridge using WC3, RG effective mass, transfer comparison, and asymptotic freedom.",
+      "gap_id": "blockedNonCircularMassGapProof",
+      "reason": "Sprint 104 cannot certify that the route avoids circular dependence on the desired gap.",
+      "required_resolution": "Prove WC3-controlled small-field expansion gives m_eff(a) > 0, then use asymptotic freedom for physical scale behavior."
+    }
+  }
+]

@@ -1,0 +1,148 @@
+[
+  {
+    "bkm_finite": false,
+    "bkm_promoted": false,
+    "blocking_reasons": [],
+    "category": "bkm_translation_input",
+    "clay_navier_stokes_promoted": false,
+    "continuation_bridge_promoted": false,
+    "contract": "ns_sprint156_bkm_bridge_readiness",
+    "decision": "ready_for_next_bkm_translation_not_promoted",
+    "encoded_state": "closed",
+    "evidence_sources": [
+      "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_summary.json"
+    ],
+    "full_clay_can_promote": false,
+    "full_clay_mechanism_exhausted": false,
+    "full_clay_ns_solved": false,
+    "lane": 4,
+    "next_bkm_translation_input": true,
+    "normalized_name": "ModelValidityForWidthODE",
+    "program": "BKMBridgeReadinessAssembler",
+    "readiness_closed": true,
+    "row_hash": "d7c390534a73d6a6e976030514b6ce22ef5ac63531cc7623ae4efa06eb7dbaf9",
+    "row_id": "model_validity_for_width_ode_closed",
+    "sprint": 156,
+    "sprint_span": "155-156",
+    "status": "CLOSED"
+  },
+  {
+    "bkm_finite": false,
+    "bkm_promoted": false,
+    "blocking_reasons": [],
+    "category": "bkm_translation_input",
+    "clay_navier_stokes_promoted": false,
+    "continuation_bridge_promoted": false,
+    "contract": "ns_sprint156_bkm_bridge_readiness",
+    "decision": "ready_for_next_bkm_translation_not_promoted",
+    "encoded_state": "available",
+    "evidence_sources": [
+      "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_summary.json",
+      "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_summary.json"
+    ],
+    "full_clay_can_promote": false,
+    "full_clay_mechanism_exhausted": false,
+    "full_clay_ns_solved": false,
+    "lane": 4,
+    "next_bkm_translation_input": true,
+    "normalized_name": "CorrectedOmegaODE",
+    "program": "BKMBridgeReadinessAssembler",
+    "readiness_closed": true,
+    "row_hash": "dc73632a8cf55997f221384620e1bac623e51f81cfaa0b0e0a81f586f8eb64cd",
+    "row_id": "corrected_omega_ode_available",
+    "sprint": 156,
+    "sprint_span": "156",
+    "status": "AVAILABLE"
+  },
+  {
+    "bkm_finite": false,
+    "bkm_promoted": false,
+    "blocking_reasons": [
+      "BKM integral estimate requires a separate promotion receipt"
+    ],
+    "category": "promotion_gate",
+    "clay_navier_stokes_promoted": false,
+    "continuation_bridge_promoted": false,
+    "contract": "ns_sprint156_bkm_bridge_readiness",
+    "decision": "ready_for_next_bkm_translation_not_promoted",
+    "encoded_state": "not_promoted",
+    "evidence_sources": [
+      "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_rows.json"
+    ],
+    "full_clay_can_promote": false,
+    "full_clay_mechanism_exhausted": false,
+    "full_clay_ns_solved": false,
+    "lane": 4,
+    "next_bkm_translation_input": false,
+    "normalized_name": "BKMIntegralEstimate",
+    "program": "BKMBridgeReadinessAssembler",
+    "readiness_closed": false,
+    "row_hash": "f4da242a7a7a3006ab2528536a5574059529a443b5fc82432eb009b3a4fc30f1",
+    "row_id": "bkm_integral_estimate_not_promoted",
+    "sprint": 156,
+    "sprint_span": "156",
+    "status": "NOT_PROMOTED"
+  },
+  {
+    "bkm_finite": false,
+    "bkm_promoted": false,
+    "blocking_reasons": [
+      "Continuation theorem bridge is pending"
+    ],
+    "category": "promotion_gate",
+    "clay_navier_stokes_promoted": false,
+    "continuation_bridge_promoted": false,
+    "contract": "ns_sprint156_bkm_bridge_readiness",
+    "decision": "ready_for_next_bkm_translation_not_promoted",
+    "encoded_state": "pending",
+    "evidence_sources": [
+      "outputs/ns_sprint155_operator_boundary_term_checker/ns_sprint155_operator_boundary_term_checker_summary.json"
+    ],
+    "full_clay_can_promote": false,
+    "full_clay_mechanism_exhausted": false,
+    "full_clay_ns_solved": false,
+    "lane": 4,
+    "next_bkm_translation_input": false,
+    "normalized_name": "ContinuationTheoremBridge",
+    "program": "BKMBridgeReadinessAssembler",
+    "readiness_closed": false,
+    "row_hash": "2e22481a39bf008c0e552968280b25424878cf0853c6d9d1d9e9a4181d81afee",
+    "row_id": "continuation_theorem_bridge_pending",
+    "sprint": 156,
+    "sprint_span": "156",
+    "status": "PENDING"
+  },
+  {
+    "bkm_finite": false,
+    "bkm_promoted": false,
+    "blocking_reasons": [
+      "Full Clay mechanism exhaustion is absent",
+      "full_clay_ns_solved is hard-guarded false"
+    ],
+    "category": "hard_guard",
+    "clay_navier_stokes_promoted": false,
+    "continuation_bridge_promoted": false,
+    "contract": "ns_sprint156_bkm_bridge_readiness",
+    "decision": "ready_for_next_bkm_translation_not_promoted",
+    "encoded_state": "absent",
+    "evidence_sources": [
+      "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_summary.json",
+      "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_rows.json",
+      "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_summary.json",
+      "outputs/ns_sprint155_operator_boundary_term_checker/ns_sprint155_operator_boundary_term_checker_summary.json"
+    ],
+    "full_clay_can_promote": false,
+    "full_clay_mechanism_exhausted": false,
+    "full_clay_ns_solved": false,
+    "lane": 4,
+    "next_bkm_translation_input": false,
+    "normalized_name": "FullClayMechanismExhaustion",
+    "program": "BKMBridgeReadinessAssembler",
+    "readiness_closed": false,
+    "row_hash": "9c645d1ac3a5c797533714a69d1707a95af8f7bf89b5235bdc03261d9397e6a5",
+    "row_id": "full_clay_mechanism_exhaustion_absent",
+    "sprint": 156,
+    "sprint_span": "156",
+    "status": "ABSENT_HARD_GUARD_FALSE"
+  }
+]

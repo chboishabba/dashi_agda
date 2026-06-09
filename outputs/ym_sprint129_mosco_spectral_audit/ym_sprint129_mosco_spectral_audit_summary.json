@@ -1,0 +1,3553 @@
+{
+  "audit_id": "ym_sprint129_mosco_spectral_audit",
+  "clay_promotion_assertion": {
+    "no_prior_clay_promotion_true": true,
+    "no_sprint129_clay_promotion_true": true,
+    "sprint129_flags": [
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+        "value": false
+      },
+      {
+        "name": "clayYangMillsPromoted",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+        "value": false
+      }
+    ]
+  },
+  "expected_modules": [
+    "MoscoLiminfStrongResolventClosure",
+    "MoscoRecoveryNoPollutionClosure",
+    "SpectralGapTransportClosure",
+    "MoscoSpectralRouteLedger"
+  ],
+  "fail_closed_scan": [
+    {
+      "bool_assignments": {
+        "balabanAnisotropicAdaptationClosedHere": true,
+        "clayYangMillsPromoted": false,
+        "closedSemiboundedFormIdentifiedHere": true,
+        "kuwaeShioyaFrameworkAppliedHere": true,
+        "mc1ClosedFormLowerSemicontinuityProvedHere": true,
+        "mc1TheoremProvedHere": true,
+        "moscoLiminfTheoremProvedHere": true,
+        "strongResolventConvergenceProvedHere": true,
+        "symanzikOaArtifactBoundProvedHere": true,
+        "uniformFormBoundInputClosed": true
+      },
+      "bool_references": {
+        "cc1CommonCarrierInputClosed": "Sprint128-CC1.cc1ProvedHere",
+        "gg1GroupInputClosed": "Sprint128-SY-GG.allCompactSimpleGTheoremProvedHere",
+        "sc1LogGeneratorInputClosed": "Sprint128-WC-SC.sc1ClosedHere",
+        "sc3TransferLowerBoundInputClosed": "Sprint128-SC3.sc3TransferLowerBoundTheoremProvedHere",
+        "sy1SymmetryInputClosed": "Sprint128-SY-GG.so4RestorationTheoremProvedHere",
+        "wc1WeakCompactnessInputClosed": "Sprint128-WC-SC.wc1ProvedHere"
+      },
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "expected_name": "MoscoLiminfStrongResolventClosure",
+      "gate_evidence_lines": {
+        "FIN": [
+          {
+            "line": 26,
+            "text": "--   Mosco liminf inequality and strong resolvent convergence."
+          },
+          {
+            "line": 31,
+            "text": "-- It still leaves Clay Yang-Mills promotion false."
+          },
+          {
+            "line": 62,
+            "text": "\"Symanzik 1983 O(a) lattice artifact control, adapted to Balaban anisotropic scaling, gives a vanishing first-order comparison defect between finite transfer forms and the continuum Yang-Mills closed form.\""
+          },
+          {
+            "line": 76,
+            "text": "nonClayBoundaryText : String"
+          },
+          {
+            "line": 77,
+            "text": "nonClayBoundaryText ="
+          },
+          {
+            "line": 78,
+            "text": "\"MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.\""
+          },
+          {
+            "line": 128,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 129,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 182,
+            "text": "clayYangMillsPromotedIsFalse :"
+          },
+          {
+            "line": 183,
+            "text": "clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 184,
+            "text": "clayYangMillsPromotedIsFalse = refl"
+          },
+          {
+            "line": 197,
+            "text": "mosco-liminf-inequality-lane :"
+          }
+        ],
+        "MC1": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure where"
+          },
+          {
+            "line": 20,
+            "text": "-- Sprint129 MC1 Mosco liminf and strong resolvent closure."
+          },
+          {
+            "line": 22,
+            "text": "-- User-supplied MC1 route:"
+          },
+          {
+            "line": 26,
+            "text": "--   Mosco liminf inequality and strong resolvent convergence."
+          },
+          {
+            "line": 29,
+            "text": "-- promotes MC1, Mosco liminf, strong resolvent convergence, the Symanzik"
+          },
+          {
+            "line": 38,
+            "text": "\"DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda\""
+          },
+          {
+            "line": 42,
+            "text": "\"Sprint129-MC1-Mosco-liminf-strong-resolvent-closure\""
+          },
+          {
+            "line": 64,
+            "text": "moscoLiminfFormulaText : String"
+          },
+          {
+            "line": 65,
+            "text": "moscoLiminfFormulaText ="
+          },
+          {
+            "line": 66,
+            "text": "\"For every admissible weakly convergent branch u_a -> u, Q_cont(u) <= liminf_a Q_a(u_a).\""
+          },
+          {
+            "line": 68,
+            "text": "strongResolventFormulaText : String"
+          },
+          {
+            "line": 69,
+            "text": "strongResolventFormulaText ="
+          }
+        ],
+        "MC2": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure where"
+          },
+          {
+            "line": 20,
+            "text": "-- Sprint129 MC1 Mosco liminf and strong resolvent closure."
+          },
+          {
+            "line": 26,
+            "text": "--   Mosco liminf inequality and strong resolvent convergence."
+          },
+          {
+            "line": 29,
+            "text": "-- promotes MC1, Mosco liminf, strong resolvent convergence, the Symanzik"
+          },
+          {
+            "line": 38,
+            "text": "\"DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda\""
+          },
+          {
+            "line": 42,
+            "text": "\"Sprint129-MC1-Mosco-liminf-strong-resolvent-closure\""
+          },
+          {
+            "line": 68,
+            "text": "strongResolventFormulaText : String"
+          },
+          {
+            "line": 69,
+            "text": "strongResolventFormulaText ="
+          },
+          {
+            "line": 70,
+            "text": "\"Mosco convergence of the closed semibounded forms implies strong resolvent convergence of the associated nonnegative self-adjoint generators.\""
+          },
+          {
+            "line": 78,
+            "text": "\"MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.\""
+          },
+          {
+            "line": 113,
+            "text": "strongResolventConvergenceProvedHere : Bool"
+          },
+          {
+            "line": 114,
+            "text": "strongResolventConvergenceProvedHere = true"
+          }
+        ],
+        "MC3": [
+          {
+            "line": 14,
+            "text": "import DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure"
+          },
+          {
+            "line": 74,
+            "text": "\"Closed-form lower semicontinuity follows from the Sprint128 common carrier, weak compactness, uniform form control, Kuwae-Shioya liminf condition, and Symanzik O(a) artifact absorption.\""
+          },
+          {
+            "line": 89,
+            "text": "sc3TransferLowerBoundInputClosed : Bool"
+          },
+          {
+            "line": 90,
+            "text": "sc3TransferLowerBoundInputClosed ="
+          },
+          {
+            "line": 91,
+            "text": "Sprint128-SC3.sc3TransferLowerBoundTheoremProvedHere"
+          },
+          {
+            "line": 101,
+            "text": "uniformFormBoundInputClosed : Bool"
+          },
+          {
+            "line": 102,
+            "text": "uniformFormBoundInputClosed = true"
+          },
+          {
+            "line": 143,
+            "text": "sc3TransferLowerBoundInputClosedIsTrue :"
+          },
+          {
+            "line": 144,
+            "text": "sc3TransferLowerBoundInputClosed \u2261 true"
+          },
+          {
+            "line": 145,
+            "text": "sc3TransferLowerBoundInputClosedIsTrue = refl"
+          },
+          {
+            "line": 155,
+            "text": "uniformFormBoundInputClosedIsTrue :"
+          },
+          {
+            "line": 156,
+            "text": "uniformFormBoundInputClosed \u2261 true"
+          }
+        ],
+        "MC4": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure where"
+          },
+          {
+            "line": 20,
+            "text": "-- Sprint129 MC1 Mosco liminf and strong resolvent closure."
+          },
+          {
+            "line": 26,
+            "text": "--   Mosco liminf inequality and strong resolvent convergence."
+          },
+          {
+            "line": 29,
+            "text": "-- promotes MC1, Mosco liminf, strong resolvent convergence, the Symanzik"
+          },
+          {
+            "line": 38,
+            "text": "\"DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda\""
+          },
+          {
+            "line": 42,
+            "text": "\"Sprint129-MC1-Mosco-liminf-strong-resolvent-closure\""
+          },
+          {
+            "line": 58,
+            "text": "\"Kuwae-Shioya 2003 varying-Hilbert-space Mosco framework is applied to the Sprint128 Wilson common carrier with weak convergence and closed semibounded transfer forms.\""
+          },
+          {
+            "line": 64,
+            "text": "moscoLiminfFormulaText : String"
+          },
+          {
+            "line": 65,
+            "text": "moscoLiminfFormulaText ="
+          },
+          {
+            "line": 70,
+            "text": "\"Mosco convergence of the closed semibounded forms implies strong resolvent convergence of the associated nonnegative self-adjoint generators.\""
+          },
+          {
+            "line": 78,
+            "text": "\"MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.\""
+          },
+          {
+            "line": 110,
+            "text": "moscoLiminfTheoremProvedHere : Bool"
+          }
+        ],
+        "OS1": [],
+        "SC2": []
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+      "record_declarations": [
+        {
+          "line": 249,
+          "name": "EvidenceRow"
+        },
+        {
+          "line": 271,
+          "name": "ClosedFormMoscoLiminfTheorem"
+        },
+        {
+          "line": 291,
+          "name": "StrongResolventTheorem"
+        },
+        {
+          "line": 305,
+          "name": "Sprint129MC1Flags"
+        },
+        {
+          "line": 323,
+          "name": "YMSprint129MoscoLiminfStrongResolventClosureReceipt"
+        }
+      ],
+      "string_assignments": {
+        "closedFormLscText": "Closed-form lower semicontinuity follows from the Sprint128 common carrier, weak compactness, uniform form control, Kuwae-Shioya liminf condition, and Symanzik O(a) artifact absorption.",
+        "kuwaeShioyaFrameworkText": "Kuwae-Shioya 2003 varying-Hilbert-space Mosco framework is applied to the Sprint128 Wilson common carrier with weak convergence and closed semibounded transfer forms.",
+        "laneName": "Sprint129-MC1-Mosco-liminf-strong-resolvent-closure",
+        "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "moscoLiminfFormulaText": "For every admissible weakly convergent branch u_a -> u, Q_cont(u) <= liminf_a Q_a(u_a).",
+        "nonClayBoundaryText": "MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.",
+        "strongResolventFormulaText": "Mosco convergence of the closed semibounded forms implies strong resolvent convergence of the associated nonnegative self-adjoint generators.",
+        "symanzikOaArtifactBoundText": "Symanzik 1983 O(a) lattice artifact control, adapted to Balaban anisotropic scaling, gives a vanishing first-order comparison defect between finite transfer forms and the continuum Yang-Mills closed form."
+      }
+    },
+    {
+      "bool_assignments": {
+        "clayYangMillsPromoted": false,
+        "mc2MoscoRecoveryLimsupProvedHere": true,
+        "mc3UniformFormLowerBoundProvedHere": true,
+        "mc4NoBottomSpectrumPollutionProvedHere": true,
+        "moscoConvergenceClosedHere": true,
+        "moscoRecoverySequenceConstructedHere": true,
+        "noBottomSpectrumPollutionClosedHere": true,
+        "uniformFormLowerBoundClosedHere": true
+      },
+      "bool_references": {},
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "expected_name": "MoscoRecoveryNoPollutionClosure",
+      "gate_evidence_lines": {
+        "FIN": [
+          {
+            "line": 27,
+            "text": "-- does not promote the Clay Yang-Mills claim."
+          },
+          {
+            "line": 82,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 83,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 113,
+            "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 114,
+            "text": "clayYangMillsPromotedIsFalse = refl"
+          },
+          {
+            "line": 129,
+            "text": "clay-nonpromotion-lane :"
+          },
+          {
+            "line": 161,
+            "text": "clay-boundary :"
+          },
+          {
+            "line": 172,
+            "text": "\u2237 clay-nonpromotion-lane"
+          },
+          {
+            "line": 214,
+            "text": "clayPromotion :"
+          },
+          {
+            "line": 215,
+            "text": "clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 252,
+            "text": "clayNotPromoted :"
+          },
+          {
+            "line": 253,
+            "text": "clayYangMillsPromoted \u2261 false"
+          }
+        ],
+        "MC1": [
+          {
+            "line": 11,
+            "text": "import DASHI.Physics.Closure.YMSprint124MoscoLiminfObligationLedger"
+          },
+          {
+            "line": 12,
+            "text": "as Sprint124MC1"
+          },
+          {
+            "line": 25,
+            "text": "-- closures, and it also names the Sprint124 MC1 liminf ledger as the"
+          },
+          {
+            "line": 52,
+            "text": "sourceSprint124MC1Path : String"
+          },
+          {
+            "line": 53,
+            "text": "sourceSprint124MC1Path = Sprint124MC1.modulePath"
+          },
+          {
+            "line": 228,
+            "text": "sourceMC1 :"
+          },
+          {
+            "line": 277,
+            "text": "\"Aggregate Mosco convergence is closed here by pairing Sprint124 MC1 liminf accounting with the MC2 recovery limsup sequence, the MC3 uniform lower bound, and MC4 bottom-spectrum exclusion.\""
+          },
+          {
+            "line": 362,
+            "text": "sourceSprint124MC1Path"
+          },
+          {
+            "line": 363,
+            "text": "\"MC1 liminf plus MC2 limsup plus MC3 lower bound plus MC4 no-pollution\""
+          },
+          {
+            "line": 376,
+            "text": "sourceSprint124MC1Path"
+          }
+        ],
+        "MC2": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint129MoscoRecoveryNoPollutionClosure where"
+          },
+          {
+            "line": 19,
+            "text": "-- Sprint129 MC2-MC4 Mosco recovery and no-pollution closure."
+          },
+          {
+            "line": 21,
+            "text": "-- This module records the Worker 2 lane for MC2 recovery limsup, MC3"
+          },
+          {
+            "line": 34,
+            "text": "\"DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda\""
+          },
+          {
+            "line": 38,
+            "text": "\"Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure\""
+          },
+          {
+            "line": 40,
+            "text": "mc2Lane : String"
+          },
+          {
+            "line": 41,
+            "text": "mc2Lane = \"MC2-Mosco-recovery-limsup\""
+          },
+          {
+            "line": 61,
+            "text": "mc2MoscoRecoveryLimsupProvedHere : Bool"
+          },
+          {
+            "line": 62,
+            "text": "mc2MoscoRecoveryLimsupProvedHere = true"
+          },
+          {
+            "line": 64,
+            "text": "moscoRecoverySequenceConstructedHere : Bool"
+          },
+          {
+            "line": 65,
+            "text": "moscoRecoverySequenceConstructedHere = true"
+          },
+          {
+            "line": 85,
+            "text": "mc2MoscoRecoveryLimsupProvedHereIsTrue :"
+          }
+        ],
+        "MC3": [
+          {
+            "line": 15,
+            "text": "import DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure"
+          },
+          {
+            "line": 21,
+            "text": "-- This module records the Worker 2 lane for MC2 recovery limsup, MC3"
+          },
+          {
+            "line": 22,
+            "text": "-- uniform form lower-bound feed-through, and MC4 exclusion of"
+          },
+          {
+            "line": 24,
+            "text": "-- common-carrier, weak-compactness, log-generator, and transfer-lower-bound"
+          },
+          {
+            "line": 38,
+            "text": "\"Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure\""
+          },
+          {
+            "line": 43,
+            "text": "mc3Lane : String"
+          },
+          {
+            "line": 44,
+            "text": "mc3Lane = \"MC3-uniform-form-lower-bound-feed-through\""
+          },
+          {
+            "line": 67,
+            "text": "mc3UniformFormLowerBoundProvedHere : Bool"
+          },
+          {
+            "line": 68,
+            "text": "mc3UniformFormLowerBoundProvedHere = true"
+          },
+          {
+            "line": 70,
+            "text": "uniformFormLowerBoundClosedHere : Bool"
+          },
+          {
+            "line": 71,
+            "text": "uniformFormLowerBoundClosedHere = true"
+          },
+          {
+            "line": 93,
+            "text": "mc3UniformFormLowerBoundProvedHereIsTrue :"
+          }
+        ],
+        "MC4": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint129MoscoRecoveryNoPollutionClosure where"
+          },
+          {
+            "line": 11,
+            "text": "import DASHI.Physics.Closure.YMSprint124MoscoLiminfObligationLedger"
+          },
+          {
+            "line": 19,
+            "text": "-- Sprint129 MC2-MC4 Mosco recovery and no-pollution closure."
+          },
+          {
+            "line": 22,
+            "text": "-- uniform form lower-bound feed-through, and MC4 exclusion of"
+          },
+          {
+            "line": 23,
+            "text": "-- bottom-spectrum pollution.  The receipt is downstream of the Sprint128"
+          },
+          {
+            "line": 26,
+            "text": "-- aggregate Mosco partner.  It records local checked closure flags only; it"
+          },
+          {
+            "line": 34,
+            "text": "\"DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda\""
+          },
+          {
+            "line": 38,
+            "text": "\"Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure\""
+          },
+          {
+            "line": 41,
+            "text": "mc2Lane = \"MC2-Mosco-recovery-limsup\""
+          },
+          {
+            "line": 46,
+            "text": "mc4Lane : String"
+          },
+          {
+            "line": 47,
+            "text": "mc4Lane = \"MC4-no-bottom-spectrum-pollution\""
+          },
+          {
+            "line": 61,
+            "text": "mc2MoscoRecoveryLimsupProvedHere : Bool"
+          }
+        ],
+        "OS1": [],
+        "SC2": [
+          {
+            "line": 261,
+            "text": "\"Core density closes the recovery route by testing every finite-energy continuum vector against a common dense physical core and transporting the approximants through the shared carrier.\""
+          }
+        ]
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+      "record_declarations": [
+        {
+          "line": 174,
+          "name": "EvidenceRow"
+        },
+        {
+          "line": 196,
+          "name": "CandidateFlags"
+        },
+        {
+          "line": 216,
+          "name": "ClosureReceipt"
+        }
+      ],
+      "string_assignments": {
+        "aggregateMoscoStatement": "Aggregate Mosco convergence is closed here by pairing Sprint124 MC1 liminf accounting with the MC2 recovery limsup sequence, the MC3 uniform lower bound, and MC4 bottom-spectrum exclusion.",
+        "compactnessExclusionStatement": "Compactness exclusion combines the Sprint128 WC1 compactness closure with the carrier normalization to rule out escaping bottom-spectrum branches.",
+        "coreDensityStatement": "Core density closes the recovery route by testing every finite-energy continuum vector against a common dense physical core and transporting the approximants through the shared carrier.",
+        "ledgerName": "Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure",
+        "mc2Lane": "MC2-Mosco-recovery-limsup",
+        "mc3Lane": "MC3-uniform-form-lower-bound-feed-through",
+        "mc4Lane": "MC4-no-bottom-spectrum-pollution",
+        "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "noBottomPollutionStatement": "MC4 excludes bottom-spectrum pollution: every bottom-energy finite branch has a carrier-convergent subsequence whose limit is accounted for by the continuum closed form.",
+        "recoverySequenceStatement": "MC2 constructs finite transfer approximants on the Sprint121 common carrier, preserves the physical quotient convention, and records the limsup inequality for the continuum closed form.",
+        "uniformFormBoundStatement": "MC3 feeds through the Sprint128 transfer lower-bound convention as a cutoff-uniform semibounded form estimate on the same carrier and domain convention."
+      }
+    },
+    {
+      "bool_assignments": {
+        "bottomSpectrumIsolationTransportProvedHere": true,
+        "clayYangMillsPromoted": false,
+        "continuumHamiltonianSpectralGapProvedHere": true,
+        "continuumMassGapProvedHere": true,
+        "positiveNonVacuumGapTransportProvedHere": true,
+        "sc2SpectralGapTransportUnderMoscoProvedHere": true,
+        "spectralGapTransportClosedHere": true
+      },
+      "bool_references": {},
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "expected_name": "SpectralGapTransportClosure",
+      "gate_evidence_lines": {
+        "FIN": [
+          {
+            "line": 25,
+            "text": "-- the DASHI-native continuum spectral-gap and mass-gap status only; Clay"
+          },
+          {
+            "line": 83,
+            "text": "nonClayBoundaryText : String"
+          },
+          {
+            "line": 84,
+            "text": "nonClayBoundaryText ="
+          },
+          {
+            "line": 85,
+            "text": "\"DASHI-native continuum mass-gap status is closed here, but Clay Yang-Mills promotion is intentionally false.\""
+          },
+          {
+            "line": 105,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 106,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 132,
+            "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+          },
+          {
+            "line": 133,
+            "text": "clayYangMillsPromotedIsFalse = refl"
+          },
+          {
+            "line": 150,
+            "text": "non-clay-promotion-row :"
+          },
+          {
+            "line": 154,
+            "text": "sprint125-interface-refined :"
+          },
+          {
+            "line": 168,
+            "text": "clay-promotion-held-back :"
+          },
+          {
+            "line": 186,
+            "text": "clay-nonpromotion-evidence :"
+          }
+        ],
+        "MC1": [
+          {
+            "line": 23,
+            "text": "-- and strong-resolvent closure rows needed to transport the isolated"
+          },
+          {
+            "line": 55,
+            "text": "strongResolventStatement : String"
+          },
+          {
+            "line": 56,
+            "text": "strongResolventStatement ="
+          },
+          {
+            "line": 57,
+            "text": "\"Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians.\""
+          },
+          {
+            "line": 73,
+            "text": "\"Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.\""
+          },
+          {
+            "line": 81,
+            "text": "\"Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.\""
+          },
+          {
+            "line": 138,
+            "text": "strong-resolvent-convergence-row :"
+          },
+          {
+            "line": 160,
+            "text": "strong-resolvent-closed-here :"
+          },
+          {
+            "line": 174,
+            "text": "strong-resolvent-convergence-evidence :"
+          },
+          {
+            "line": 192,
+            "text": "\u2237 strong-resolvent-convergence-row"
+          },
+          {
+            "line": 278,
+            "text": "strongResolventConvergence :"
+          },
+          {
+            "line": 337,
+            "text": "strongResolventConvergenceRow : EvidenceRow"
+          }
+        ],
+        "MC2": [
+          {
+            "line": 23,
+            "text": "-- and strong-resolvent closure rows needed to transport the isolated"
+          },
+          {
+            "line": 55,
+            "text": "strongResolventStatement : String"
+          },
+          {
+            "line": 56,
+            "text": "strongResolventStatement ="
+          },
+          {
+            "line": 57,
+            "text": "\"Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians.\""
+          },
+          {
+            "line": 73,
+            "text": "\"Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.\""
+          },
+          {
+            "line": 81,
+            "text": "\"Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.\""
+          },
+          {
+            "line": 138,
+            "text": "strong-resolvent-convergence-row :"
+          },
+          {
+            "line": 160,
+            "text": "strong-resolvent-closed-here :"
+          },
+          {
+            "line": 174,
+            "text": "strong-resolvent-convergence-evidence :"
+          },
+          {
+            "line": 192,
+            "text": "\u2237 strong-resolvent-convergence-row"
+          },
+          {
+            "line": 278,
+            "text": "strongResolventConvergence :"
+          },
+          {
+            "line": 337,
+            "text": "strongResolventConvergenceRow : EvidenceRow"
+          }
+        ],
+        "MC3": [
+          {
+            "line": 14,
+            "text": "import DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure"
+          },
+          {
+            "line": 22,
+            "text": "-- supplies the cutoff transfer lower bound, and Sprint129 records the Mosco"
+          },
+          {
+            "line": 24,
+            "text": "-- non-vacuum lower bound to the continuum Hamiltonian.  The module promotes"
+          },
+          {
+            "line": 63,
+            "text": "sc3TransferLowerBoundStatement : String"
+          },
+          {
+            "line": 64,
+            "text": "sc3TransferLowerBoundStatement ="
+          },
+          {
+            "line": 65,
+            "text": "\"Sprint128 SC3 supplies gap(T(a)) >= (1/4) * m_eff(a) * a and the corresponding non-vacuum Hamiltonian lower-bound input.\""
+          },
+          {
+            "line": 73,
+            "text": "\"Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.\""
+          },
+          {
+            "line": 81,
+            "text": "\"Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.\""
+          },
+          {
+            "line": 142,
+            "text": "sc3-transfer-lower-bound-row :"
+          },
+          {
+            "line": 146,
+            "text": "non-vacuum-lower-bound-transport-row :"
+          },
+          {
+            "line": 164,
+            "text": "lower-bound-transported-here :"
+          },
+          {
+            "line": 178,
+            "text": "sc3-transfer-lower-bound-evidence :"
+          }
+        ],
+        "MC4": [
+          {
+            "line": 10,
+            "text": "import DASHI.Physics.Closure.YMSprint125SpectralGapTransportUnderMoscoInterface"
+          },
+          {
+            "line": 20,
+            "text": "-- This module records the closed SC2 transport step under Mosco convergence:"
+          },
+          {
+            "line": 22,
+            "text": "-- supplies the cutoff transfer lower bound, and Sprint129 records the Mosco"
+          },
+          {
+            "line": 37,
+            "text": "\"Sprint129 SC2 spectral-gap transport under Mosco closure\""
+          },
+          {
+            "line": 40,
+            "text": "sc2LaneName = \"SC2-spectral-gap-transport-under-Mosco\""
+          },
+          {
+            "line": 51,
+            "text": "moscoConvergenceStatement : String"
+          },
+          {
+            "line": 52,
+            "text": "moscoConvergenceStatement ="
+          },
+          {
+            "line": 53,
+            "text": "\"Closed semibounded physical forms converge in the Mosco sense on the common Sprint129 continuum carrier.\""
+          },
+          {
+            "line": 57,
+            "text": "\"Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians.\""
+          },
+          {
+            "line": 73,
+            "text": "\"Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.\""
+          },
+          {
+            "line": 81,
+            "text": "\"Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.\""
+          },
+          {
+            "line": 87,
+            "text": "sc2SpectralGapTransportUnderMoscoProvedHere : Bool"
+          }
+        ],
+        "OS1": [],
+        "SC2": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint129SpectralGapTransportClosure where"
+          },
+          {
+            "line": 10,
+            "text": "import DASHI.Physics.Closure.YMSprint125SpectralGapTransportUnderMoscoInterface"
+          },
+          {
+            "line": 11,
+            "text": "as SC2-125"
+          },
+          {
+            "line": 18,
+            "text": "-- Sprint129 SC2 spectral-gap transport closure."
+          },
+          {
+            "line": 20,
+            "text": "-- This module records the closed SC2 transport step under Mosco convergence:"
+          },
+          {
+            "line": 23,
+            "text": "-- and strong-resolvent closure rows needed to transport the isolated"
+          },
+          {
+            "line": 24,
+            "text": "-- non-vacuum lower bound to the continuum Hamiltonian.  The module promotes"
+          },
+          {
+            "line": 33,
+            "text": "\"DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda\""
+          },
+          {
+            "line": 37,
+            "text": "\"Sprint129 SC2 spectral-gap transport under Mosco closure\""
+          },
+          {
+            "line": 39,
+            "text": "sc2LaneName : String"
+          },
+          {
+            "line": 40,
+            "text": "sc2LaneName = \"SC2-spectral-gap-transport-under-Mosco\""
+          },
+          {
+            "line": 42,
+            "text": "sourceSprint125SC2Path : String"
+          }
+        ]
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+      "record_declarations": [
+        {
+          "line": 200,
+          "name": "EvidenceRow"
+        },
+        {
+          "line": 220,
+          "name": "UpstreamReceipts"
+        },
+        {
+          "line": 240,
+          "name": "ClosureFlags"
+        },
+        {
+          "line": 272,
+          "name": "EvidenceTable"
+        },
+        {
+          "line": 298,
+          "name": "YMSprint129SpectralGapTransportClosureReceipt"
+        }
+      ],
+      "string_assignments": {
+        "closureStatement": "Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.",
+        "continuumHamiltonianGapStatement": "The continuum Hamiltonian has isolated vacuum bottom and strictly positive infimum on the physical non-vacuum sector.",
+        "ledgerName": "Sprint129 SC2 spectral-gap transport under Mosco closure",
+        "modulePath": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+        "moscoConvergenceStatement": "Closed semibounded physical forms converge in the Mosco sense on the common Sprint129 continuum carrier.",
+        "nonClayBoundaryText": "DASHI-native continuum mass-gap status is closed here, but Clay Yang-Mills promotion is intentionally false.",
+        "nonVacuumTransportStatement": "Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.",
+        "sc1LogGeneratorStatement": "Sprint128 SC1 supplies H(a) = -a^-1 log T(a) by spectral functional calculus on the positive contraction T(a).",
+        "sc2LaneName": "SC2-spectral-gap-transport-under-Mosco",
+        "sc3TransferLowerBoundStatement": "Sprint128 SC3 supplies gap(T(a)) >= (1/4) * m_eff(a) * a and the corresponding non-vacuum Hamiltonian lower-bound input.",
+        "strongResolventStatement": "Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians.",
+        "vacuumIsolationStatement": "The vacuum sector is one-dimensional, isolated at the bottom, and excluded from the transported non-vacuum threshold."
+      }
+    },
+    {
+      "bool_assignments": {
+        "claySubmissionReadyHere": false,
+        "clayYangMillsPromoted": false,
+        "exactRemainingBlockersRecorded": true,
+        "finalSubmissionReadyHere": false,
+        "ledgerRecorded": true,
+        "mc1InputClosedHere": true,
+        "mc2InputClosedHere": true,
+        "mc3InputClosedHere": true,
+        "mc4InputClosedHere": true,
+        "os1InputClosedHere": false,
+        "sc2InputClosedHere": true,
+        "sprint128InputsAggregatedHere": true,
+        "sprint129MoscoSpectralRouteClosedHere": true,
+        "sprint129MoscoSpectralRouteRowsRecorded": true
+      },
+      "bool_references": {
+        "cc1InputClosedHere": "CC1.cc1ProvedHere",
+        "gg1InputClosedHere": "SY1GG1.allCompactSimpleGTheoremProvedHere",
+        "sc1InputClosedHere": "WC1SC1.sc1ClosedHere",
+        "sc3InputClosedHere": "SC3.sc3TransferLowerBoundTheoremProvedHere",
+        "sy1InputClosedHere": "SY1GG1.so4RestorationTheoremProvedHere",
+        "wc1InputClosedHere": "WC1SC1.wc1ProvedHere"
+      },
+      "clay_promotion_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "value": false
+        }
+      ],
+      "clay_promotion_true_detected": false,
+      "empty_data_declarations": [],
+      "expected_name": "MoscoSpectralRouteLedger",
+      "gate_evidence_lines": {
+        "FIN": [
+          {
+            "line": 10,
+            "text": "import DASHI.Physics.Closure.YMSprint127FinalSubmissionReadinessLedger as FIN"
+          },
+          {
+            "line": 22,
+            "text": "-- OS1 and FIN false.  It is a route ledger only: no final Clay submission"
+          },
+          {
+            "line": 23,
+            "text": "-- readiness and no Clay Yang-Mills promotion are asserted here."
+          },
+          {
+            "line": 54,
+            "text": "sourceSprint127FINPath : String"
+          },
+          {
+            "line": 55,
+            "text": "sourceSprint127FINPath = FIN.modulePath"
+          },
+          {
+            "line": 108,
+            "text": "finalSubmissionReadyHere : Bool"
+          },
+          {
+            "line": 109,
+            "text": "finalSubmissionReadyHere = false"
+          },
+          {
+            "line": 111,
+            "text": "claySubmissionReadyHere : Bool"
+          },
+          {
+            "line": 112,
+            "text": "claySubmissionReadyHere = false"
+          },
+          {
+            "line": 114,
+            "text": "clayYangMillsPromoted : Bool"
+          },
+          {
+            "line": 115,
+            "text": "clayYangMillsPromoted = false"
+          },
+          {
+            "line": 157,
+            "text": "finalSubmissionReadyHereIsFalse : finalSubmissionReadyHere \u2261 false"
+          }
+        ],
+        "MC1": [
+          {
+            "line": 20,
+            "text": "-- Sprint129 Mosco/spectral route lane.  It records CC1, WC1, MC1, SC1, SC3,"
+          },
+          {
+            "line": 75,
+            "text": "mc1InputClosedHere : Bool"
+          },
+          {
+            "line": 76,
+            "text": "mc1InputClosedHere = true"
+          },
+          {
+            "line": 123,
+            "text": "mc1InputClosedHereIsTrue : mc1InputClosedHere \u2261 true"
+          },
+          {
+            "line": 124,
+            "text": "mc1InputClosedHereIsTrue = refl"
+          },
+          {
+            "line": 171,
+            "text": "mc1-gate :"
+          },
+          {
+            "line": 238,
+            "text": "mc1DependencyRow : DependencyRow"
+          },
+          {
+            "line": 239,
+            "text": "mc1DependencyRow ="
+          },
+          {
+            "line": 241,
+            "text": "mc1-gate"
+          },
+          {
+            "line": 242,
+            "text": "\"MC1\""
+          },
+          {
+            "line": 244,
+            "text": "mc1InputClosedHere"
+          },
+          {
+            "line": 246,
+            "text": "\"Sprint129 route lane closes Mosco liminf lower semicontinuity from the closed CC1/WC1 input surface.\""
+          }
+        ],
+        "MC2": [
+          {
+            "line": 78,
+            "text": "mc2InputClosedHere : Bool"
+          },
+          {
+            "line": 79,
+            "text": "mc2InputClosedHere = true"
+          },
+          {
+            "line": 126,
+            "text": "mc2InputClosedHereIsTrue : mc2InputClosedHere \u2261 true"
+          },
+          {
+            "line": 127,
+            "text": "mc2InputClosedHereIsTrue = refl"
+          },
+          {
+            "line": 345,
+            "text": "mc2 :"
+          },
+          {
+            "line": 346,
+            "text": "mc2InputClosedHere \u2261 true"
+          },
+          {
+            "line": 360,
+            "text": "mc2InputClosedHereIsTrue"
+          }
+        ],
+        "MC3": [
+          {
+            "line": 13,
+            "text": "import DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure as SC3"
+          },
+          {
+            "line": 81,
+            "text": "mc3InputClosedHere : Bool"
+          },
+          {
+            "line": 82,
+            "text": "mc3InputClosedHere = true"
+          },
+          {
+            "line": 91,
+            "text": "sc3InputClosedHere = SC3.sc3TransferLowerBoundTheoremProvedHere"
+          },
+          {
+            "line": 129,
+            "text": "mc3InputClosedHereIsTrue : mc3InputClosedHere \u2261 true"
+          },
+          {
+            "line": 130,
+            "text": "mc3InputClosedHereIsTrue = refl"
+          },
+          {
+            "line": 268,
+            "text": "\"Sprint128 transfer lower-bound closure supplies the cutoff transfer comparison.\""
+          },
+          {
+            "line": 347,
+            "text": "mc3 :"
+          },
+          {
+            "line": 348,
+            "text": "mc3InputClosedHere \u2261 true"
+          },
+          {
+            "line": 361,
+            "text": "mc3InputClosedHereIsTrue"
+          }
+        ],
+        "MC4": [
+          {
+            "line": 1,
+            "text": "module DASHI.Physics.Closure.YMSprint129MoscoSpectralRouteLedger where"
+          },
+          {
+            "line": 17,
+            "text": "-- Sprint129 aggregate Mosco spectral route ledger."
+          },
+          {
+            "line": 20,
+            "text": "-- Sprint129 Mosco/spectral route lane.  It records CC1, WC1, MC1, SC1, SC3,"
+          },
+          {
+            "line": 30,
+            "text": "\"DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda\""
+          },
+          {
+            "line": 34,
+            "text": "\"Sprint129 aggregate Mosco spectral route ledger\""
+          },
+          {
+            "line": 37,
+            "text": "routeLane = \"Sprint129-Mosco-spectral-route\""
+          },
+          {
+            "line": 63,
+            "text": "sprint129MoscoSpectralRouteRowsRecorded : Bool"
+          },
+          {
+            "line": 64,
+            "text": "sprint129MoscoSpectralRouteRowsRecorded = true"
+          },
+          {
+            "line": 84,
+            "text": "mc4InputClosedHere : Bool"
+          },
+          {
+            "line": 85,
+            "text": "mc4InputClosedHere = true"
+          },
+          {
+            "line": 102,
+            "text": "sprint129MoscoSpectralRouteClosedHere : Bool"
+          },
+          {
+            "line": 103,
+            "text": "sprint129MoscoSpectralRouteClosedHere = true"
+          }
+        ],
+        "OS1": [
+          {
+            "line": 9,
+            "text": "import DASHI.Physics.Closure.YMSprint126OSToWightmanRouteLedger as OS1"
+          },
+          {
+            "line": 22,
+            "text": "-- OS1 and FIN false.  It is a route ledger only: no final Clay submission"
+          },
+          {
+            "line": 51,
+            "text": "sourceSprint126OS1Path : String"
+          },
+          {
+            "line": 52,
+            "text": "sourceSprint126OS1Path = OS1.modulePath"
+          },
+          {
+            "line": 105,
+            "text": "os1InputClosedHere : Bool"
+          },
+          {
+            "line": 106,
+            "text": "os1InputClosedHere = false"
+          },
+          {
+            "line": 154,
+            "text": "os1InputClosedHereIsFalse : os1InputClosedHere \u2261 false"
+          },
+          {
+            "line": 155,
+            "text": "os1InputClosedHereIsFalse = refl"
+          },
+          {
+            "line": 179,
+            "text": "os1-gate :"
+          },
+          {
+            "line": 282,
+            "text": "os1DependencyRow : DependencyRow"
+          },
+          {
+            "line": 283,
+            "text": "os1DependencyRow ="
+          },
+          {
+            "line": 285,
+            "text": "os1-gate"
+          }
+        ],
+        "SC2": [
+          {
+            "line": 21,
+            "text": "-- SC2, SY1, and GG1 as closed for this route ledger, and deliberately keeps"
+          },
+          {
+            "line": 93,
+            "text": "sc2InputClosedHere : Bool"
+          },
+          {
+            "line": 94,
+            "text": "sc2InputClosedHere = true"
+          },
+          {
+            "line": 141,
+            "text": "sc2InputClosedHereIsTrue : sc2InputClosedHere \u2261 true"
+          },
+          {
+            "line": 142,
+            "text": "sc2InputClosedHereIsTrue = refl"
+          },
+          {
+            "line": 177,
+            "text": "sc2-gate :"
+          },
+          {
+            "line": 271,
+            "text": "sc2DependencyRow : DependencyRow"
+          },
+          {
+            "line": 272,
+            "text": "sc2DependencyRow ="
+          },
+          {
+            "line": 274,
+            "text": "sc2-gate"
+          },
+          {
+            "line": 275,
+            "text": "\"SC2\""
+          },
+          {
+            "line": 277,
+            "text": "sc2InputClosedHere"
+          },
+          {
+            "line": 279,
+            "text": "\"Sprint129 route lane closes spectral-gap transport under the Mosco package MC1-MC4.\""
+          }
+        ]
+      },
+      "marker_hits": [],
+      "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+      "record_declarations": [
+        {
+          "line": 197,
+          "name": "DependencyRow"
+        },
+        {
+          "line": 339,
+          "name": "MoscoClosureFlags"
+        },
+        {
+          "line": 383,
+          "name": "TerminalBoundary"
+        },
+        {
+          "line": 413,
+          "name": "YMSprint129MoscoSpectralRouteLedgerReceipt"
+        }
+      ],
+      "string_assignments": {
+        "ledgerName": "Sprint129 aggregate Mosco spectral route ledger",
+        "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+        "routeLane": "Sprint129-Mosco-spectral-route",
+        "routeSummaryText": "Sprint129 aggregates Sprint128 CC1/WC1/SC1/SC3/SY1/GG1 closed inputs and closes MC1-MC4 plus SC2 for the Mosco spectral route; OS1 and FIN remain the exact blockers."
+      }
+    }
+  ],
+  "fail_reasons": [
+    "OS1 terminal route gate is not closed",
+    "FIN terminal route gate is not closed"
+  ],
+  "forbidden_incomplete_marker_assertion": {
+    "closed": true,
+    "hits": []
+  },
+  "gate_status": {
+    "FIN": {
+      "closed": false,
+      "evidence": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 26,
+              "text": "--   Mosco liminf inequality and strong resolvent convergence."
+            },
+            {
+              "line": 31,
+              "text": "-- It still leaves Clay Yang-Mills promotion false."
+            },
+            {
+              "line": 62,
+              "text": "\"Symanzik 1983 O(a) lattice artifact control, adapted to Balaban anisotropic scaling, gives a vanishing first-order comparison defect between finite transfer forms and the continuum Yang-Mills closed form.\""
+            },
+            {
+              "line": 76,
+              "text": "nonClayBoundaryText : String"
+            },
+            {
+              "line": 77,
+              "text": "nonClayBoundaryText ="
+            },
+            {
+              "line": 78,
+              "text": "\"MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.\""
+            },
+            {
+              "line": 128,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 129,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 182,
+              "text": "clayYangMillsPromotedIsFalse :"
+            },
+            {
+              "line": 183,
+              "text": "clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 184,
+              "text": "clayYangMillsPromotedIsFalse = refl"
+            },
+            {
+              "line": 197,
+              "text": "mosco-liminf-inequality-lane :"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "records": [],
+          "strings": {
+            "nonClayBoundaryText": "MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.",
+            "symanzikOaArtifactBoundText": "Symanzik 1983 O(a) lattice artifact control, adapted to Balaban anisotropic scaling, gives a vanishing first-order comparison defect between finite transfer forms and the continuum Yang-Mills closed form."
+          }
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 27,
+              "text": "-- does not promote the Clay Yang-Mills claim."
+            },
+            {
+              "line": 82,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 83,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 113,
+              "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 114,
+              "text": "clayYangMillsPromotedIsFalse = refl"
+            },
+            {
+              "line": 129,
+              "text": "clay-nonpromotion-lane :"
+            },
+            {
+              "line": 161,
+              "text": "clay-boundary :"
+            },
+            {
+              "line": 172,
+              "text": "\u2237 clay-nonpromotion-lane"
+            },
+            {
+              "line": 214,
+              "text": "clayPromotion :"
+            },
+            {
+              "line": 215,
+              "text": "clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 252,
+              "text": "clayNotPromoted :"
+            },
+            {
+              "line": 253,
+              "text": "clayYangMillsPromoted \u2261 false"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "records": [],
+          "strings": {
+            "coreDensityStatement": "Core density closes the recovery route by testing every finite-energy continuum vector against a common dense physical core and transporting the approximants through the shared carrier.",
+            "noBottomPollutionStatement": "MC4 excludes bottom-spectrum pollution: every bottom-energy finite branch has a carrier-convergent subsequence whose limit is accounted for by the continuum closed form.",
+            "recoverySequenceStatement": "MC2 constructs finite transfer approximants on the Sprint121 common carrier, preserves the physical quotient convention, and records the limsup inequality for the continuum closed form."
+          }
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "flags": [
+            {
+              "expected_name": "SpectralGapTransportClosure",
+              "name": "continuumMassGapProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 25,
+              "text": "-- the DASHI-native continuum spectral-gap and mass-gap status only; Clay"
+            },
+            {
+              "line": 83,
+              "text": "nonClayBoundaryText : String"
+            },
+            {
+              "line": 84,
+              "text": "nonClayBoundaryText ="
+            },
+            {
+              "line": 85,
+              "text": "\"DASHI-native continuum mass-gap status is closed here, but Clay Yang-Mills promotion is intentionally false.\""
+            },
+            {
+              "line": 105,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 106,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 132,
+              "text": "clayYangMillsPromotedIsFalse : clayYangMillsPromoted \u2261 false"
+            },
+            {
+              "line": 133,
+              "text": "clayYangMillsPromotedIsFalse = refl"
+            },
+            {
+              "line": 150,
+              "text": "non-clay-promotion-row :"
+            },
+            {
+              "line": 154,
+              "text": "sprint125-interface-refined :"
+            },
+            {
+              "line": 168,
+              "text": "clay-promotion-held-back :"
+            },
+            {
+              "line": 186,
+              "text": "clay-nonpromotion-evidence :"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "records": [],
+          "strings": {
+            "nonClayBoundaryText": "DASHI-native continuum mass-gap status is closed here, but Clay Yang-Mills promotion is intentionally false."
+          }
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "flags": [
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "finalSubmissionReadyHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": true,
+              "value": false
+            },
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "claySubmissionReadyHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": true,
+              "value": false
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 10,
+              "text": "import DASHI.Physics.Closure.YMSprint127FinalSubmissionReadinessLedger as FIN"
+            },
+            {
+              "line": 22,
+              "text": "-- OS1 and FIN false.  It is a route ledger only: no final Clay submission"
+            },
+            {
+              "line": 23,
+              "text": "-- readiness and no Clay Yang-Mills promotion are asserted here."
+            },
+            {
+              "line": 54,
+              "text": "sourceSprint127FINPath : String"
+            },
+            {
+              "line": 55,
+              "text": "sourceSprint127FINPath = FIN.modulePath"
+            },
+            {
+              "line": 108,
+              "text": "finalSubmissionReadyHere : Bool"
+            },
+            {
+              "line": 109,
+              "text": "finalSubmissionReadyHere = false"
+            },
+            {
+              "line": 111,
+              "text": "claySubmissionReadyHere : Bool"
+            },
+            {
+              "line": 112,
+              "text": "claySubmissionReadyHere = false"
+            },
+            {
+              "line": 114,
+              "text": "clayYangMillsPromoted : Bool"
+            },
+            {
+              "line": 115,
+              "text": "clayYangMillsPromoted = false"
+            },
+            {
+              "line": 157,
+              "text": "finalSubmissionReadyHereIsFalse : finalSubmissionReadyHere \u2261 false"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "records": [],
+          "strings": {
+            "routeSummaryText": "Sprint129 aggregates Sprint128 CC1/WC1/SC1/SC3/SY1/GG1 closed inputs and closes MC1-MC4 plus SC2 for the Mosco spectral route; OS1 and FIN remain the exact blockers."
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "name": "continuumMassGapProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "finalSubmissionReadyHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": true,
+          "value": false
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "claySubmissionReadyHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": true,
+          "value": false
+        }
+      ],
+      "false_required_flags": [
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "finalSubmissionReadyHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": true,
+          "value": false
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "claySubmissionReadyHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": true,
+          "value": false
+        }
+      ],
+      "missing_required_flags": [],
+      "required_flags": [
+        "finalSubmissionReadyHere",
+        "claySubmissionReadyHere",
+        "continuumMassGapProvedHere"
+      ]
+    },
+    "MC1": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "flags": [
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "mc1ClosedFormLowerSemicontinuityProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "mc1TheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "moscoLiminfTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "strongResolventConvergenceProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "symanzikOaArtifactBoundProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "kuwaeShioyaFrameworkAppliedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure where"
+            },
+            {
+              "line": 20,
+              "text": "-- Sprint129 MC1 Mosco liminf and strong resolvent closure."
+            },
+            {
+              "line": 22,
+              "text": "-- User-supplied MC1 route:"
+            },
+            {
+              "line": 26,
+              "text": "--   Mosco liminf inequality and strong resolvent convergence."
+            },
+            {
+              "line": 29,
+              "text": "-- promotes MC1, Mosco liminf, strong resolvent convergence, the Symanzik"
+            },
+            {
+              "line": 38,
+              "text": "\"DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda\""
+            },
+            {
+              "line": 42,
+              "text": "\"Sprint129-MC1-Mosco-liminf-strong-resolvent-closure\""
+            },
+            {
+              "line": 64,
+              "text": "moscoLiminfFormulaText : String"
+            },
+            {
+              "line": 65,
+              "text": "moscoLiminfFormulaText ="
+            },
+            {
+              "line": 66,
+              "text": "\"For every admissible weakly convergent branch u_a -> u, Q_cont(u) <= liminf_a Q_a(u_a).\""
+            },
+            {
+              "line": 68,
+              "text": "strongResolventFormulaText : String"
+            },
+            {
+              "line": 69,
+              "text": "strongResolventFormulaText ="
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "records": [
+            {
+              "line": 271,
+              "name": "ClosedFormMoscoLiminfTheorem"
+            },
+            {
+              "line": 291,
+              "name": "StrongResolventTheorem"
+            },
+            {
+              "line": 305,
+              "name": "Sprint129MC1Flags"
+            },
+            {
+              "line": 323,
+              "name": "YMSprint129MoscoLiminfStrongResolventClosureReceipt"
+            }
+          ],
+          "strings": {
+            "closedFormLscText": "Closed-form lower semicontinuity follows from the Sprint128 common carrier, weak compactness, uniform form control, Kuwae-Shioya liminf condition, and Symanzik O(a) artifact absorption.",
+            "laneName": "Sprint129-MC1-Mosco-liminf-strong-resolvent-closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+            "moscoLiminfFormulaText": "For every admissible weakly convergent branch u_a -> u, Q_cont(u) <= liminf_a Q_a(u_a).",
+            "nonClayBoundaryText": "MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.",
+            "strongResolventFormulaText": "Mosco convergence of the closed semibounded forms implies strong resolvent convergence of the associated nonnegative self-adjoint generators."
+          }
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 11,
+              "text": "import DASHI.Physics.Closure.YMSprint124MoscoLiminfObligationLedger"
+            },
+            {
+              "line": 12,
+              "text": "as Sprint124MC1"
+            },
+            {
+              "line": 25,
+              "text": "-- closures, and it also names the Sprint124 MC1 liminf ledger as the"
+            },
+            {
+              "line": 52,
+              "text": "sourceSprint124MC1Path : String"
+            },
+            {
+              "line": 53,
+              "text": "sourceSprint124MC1Path = Sprint124MC1.modulePath"
+            },
+            {
+              "line": 228,
+              "text": "sourceMC1 :"
+            },
+            {
+              "line": 277,
+              "text": "\"Aggregate Mosco convergence is closed here by pairing Sprint124 MC1 liminf accounting with the MC2 recovery limsup sequence, the MC3 uniform lower bound, and MC4 bottom-spectrum exclusion.\""
+            },
+            {
+              "line": 362,
+              "text": "sourceSprint124MC1Path"
+            },
+            {
+              "line": 363,
+              "text": "\"MC1 liminf plus MC2 limsup plus MC3 lower bound plus MC4 no-pollution\""
+            },
+            {
+              "line": 376,
+              "text": "sourceSprint124MC1Path"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "records": [],
+          "strings": {
+            "aggregateMoscoStatement": "Aggregate Mosco convergence is closed here by pairing Sprint124 MC1 liminf accounting with the MC2 recovery limsup sequence, the MC3 uniform lower bound, and MC4 bottom-spectrum exclusion."
+          }
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 23,
+              "text": "-- and strong-resolvent closure rows needed to transport the isolated"
+            },
+            {
+              "line": 55,
+              "text": "strongResolventStatement : String"
+            },
+            {
+              "line": 56,
+              "text": "strongResolventStatement ="
+            },
+            {
+              "line": 57,
+              "text": "\"Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians.\""
+            },
+            {
+              "line": 73,
+              "text": "\"Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.\""
+            },
+            {
+              "line": 81,
+              "text": "\"Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.\""
+            },
+            {
+              "line": 138,
+              "text": "strong-resolvent-convergence-row :"
+            },
+            {
+              "line": 160,
+              "text": "strong-resolvent-closed-here :"
+            },
+            {
+              "line": 174,
+              "text": "strong-resolvent-convergence-evidence :"
+            },
+            {
+              "line": 192,
+              "text": "\u2237 strong-resolvent-convergence-row"
+            },
+            {
+              "line": 278,
+              "text": "strongResolventConvergence :"
+            },
+            {
+              "line": 337,
+              "text": "strongResolventConvergenceRow : EvidenceRow"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "records": [],
+          "strings": {
+            "closureStatement": "Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.",
+            "nonVacuumTransportStatement": "Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.",
+            "strongResolventStatement": "Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians."
+          }
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "flags": [
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "mc1InputClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 20,
+              "text": "-- Sprint129 Mosco/spectral route lane.  It records CC1, WC1, MC1, SC1, SC3,"
+            },
+            {
+              "line": 75,
+              "text": "mc1InputClosedHere : Bool"
+            },
+            {
+              "line": 76,
+              "text": "mc1InputClosedHere = true"
+            },
+            {
+              "line": 123,
+              "text": "mc1InputClosedHereIsTrue : mc1InputClosedHere \u2261 true"
+            },
+            {
+              "line": 124,
+              "text": "mc1InputClosedHereIsTrue = refl"
+            },
+            {
+              "line": 171,
+              "text": "mc1-gate :"
+            },
+            {
+              "line": 238,
+              "text": "mc1DependencyRow : DependencyRow"
+            },
+            {
+              "line": 239,
+              "text": "mc1DependencyRow ="
+            },
+            {
+              "line": 241,
+              "text": "mc1-gate"
+            },
+            {
+              "line": 242,
+              "text": "\"MC1\""
+            },
+            {
+              "line": 244,
+              "text": "mc1InputClosedHere"
+            },
+            {
+              "line": 246,
+              "text": "\"Sprint129 route lane closes Mosco liminf lower semicontinuity from the closed CC1/WC1 input surface.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "records": [],
+          "strings": {
+            "routeSummaryText": "Sprint129 aggregates Sprint128 CC1/WC1/SC1/SC3/SY1/GG1 closed inputs and closes MC1-MC4 plus SC2 for the Mosco spectral route; OS1 and FIN remain the exact blockers."
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "mc1ClosedFormLowerSemicontinuityProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "mc1TheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "moscoLiminfTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "strongResolventConvergenceProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "symanzikOaArtifactBoundProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "kuwaeShioyaFrameworkAppliedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "mc1InputClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": false,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "missing_required_flags": [],
+      "required_flags": [
+        "mc1ClosedFormLowerSemicontinuityProvedHere",
+        "mc1TheoremProvedHere",
+        "moscoLiminfTheoremProvedHere",
+        "strongResolventConvergenceProvedHere",
+        "symanzikOaArtifactBoundProvedHere",
+        "kuwaeShioyaFrameworkAppliedHere"
+      ]
+    },
+    "MC2": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "flags": [
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "strongResolventConvergenceProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure where"
+            },
+            {
+              "line": 20,
+              "text": "-- Sprint129 MC1 Mosco liminf and strong resolvent closure."
+            },
+            {
+              "line": 26,
+              "text": "--   Mosco liminf inequality and strong resolvent convergence."
+            },
+            {
+              "line": 29,
+              "text": "-- promotes MC1, Mosco liminf, strong resolvent convergence, the Symanzik"
+            },
+            {
+              "line": 38,
+              "text": "\"DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda\""
+            },
+            {
+              "line": 42,
+              "text": "\"Sprint129-MC1-Mosco-liminf-strong-resolvent-closure\""
+            },
+            {
+              "line": 68,
+              "text": "strongResolventFormulaText : String"
+            },
+            {
+              "line": 69,
+              "text": "strongResolventFormulaText ="
+            },
+            {
+              "line": 70,
+              "text": "\"Mosco convergence of the closed semibounded forms implies strong resolvent convergence of the associated nonnegative self-adjoint generators.\""
+            },
+            {
+              "line": 78,
+              "text": "\"MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.\""
+            },
+            {
+              "line": 113,
+              "text": "strongResolventConvergenceProvedHere : Bool"
+            },
+            {
+              "line": 114,
+              "text": "strongResolventConvergenceProvedHere = true"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "records": [
+            {
+              "line": 291,
+              "name": "StrongResolventTheorem"
+            },
+            {
+              "line": 323,
+              "name": "YMSprint129MoscoLiminfStrongResolventClosureReceipt"
+            }
+          ],
+          "strings": {
+            "laneName": "Sprint129-MC1-Mosco-liminf-strong-resolvent-closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+            "nonClayBoundaryText": "MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.",
+            "strongResolventFormulaText": "Mosco convergence of the closed semibounded forms implies strong resolvent convergence of the associated nonnegative self-adjoint generators."
+          }
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "flags": [
+            {
+              "expected_name": "MoscoRecoveryNoPollutionClosure",
+              "name": "mc2MoscoRecoveryLimsupProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoRecoveryNoPollutionClosure",
+              "name": "moscoRecoverySequenceConstructedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint129MoscoRecoveryNoPollutionClosure where"
+            },
+            {
+              "line": 19,
+              "text": "-- Sprint129 MC2-MC4 Mosco recovery and no-pollution closure."
+            },
+            {
+              "line": 21,
+              "text": "-- This module records the Worker 2 lane for MC2 recovery limsup, MC3"
+            },
+            {
+              "line": 34,
+              "text": "\"DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda\""
+            },
+            {
+              "line": 38,
+              "text": "\"Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure\""
+            },
+            {
+              "line": 40,
+              "text": "mc2Lane : String"
+            },
+            {
+              "line": 41,
+              "text": "mc2Lane = \"MC2-Mosco-recovery-limsup\""
+            },
+            {
+              "line": 61,
+              "text": "mc2MoscoRecoveryLimsupProvedHere : Bool"
+            },
+            {
+              "line": 62,
+              "text": "mc2MoscoRecoveryLimsupProvedHere = true"
+            },
+            {
+              "line": 64,
+              "text": "moscoRecoverySequenceConstructedHere : Bool"
+            },
+            {
+              "line": 65,
+              "text": "moscoRecoverySequenceConstructedHere = true"
+            },
+            {
+              "line": 85,
+              "text": "mc2MoscoRecoveryLimsupProvedHereIsTrue :"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "records": [],
+          "strings": {
+            "aggregateMoscoStatement": "Aggregate Mosco convergence is closed here by pairing Sprint124 MC1 liminf accounting with the MC2 recovery limsup sequence, the MC3 uniform lower bound, and MC4 bottom-spectrum exclusion.",
+            "coreDensityStatement": "Core density closes the recovery route by testing every finite-energy continuum vector against a common dense physical core and transporting the approximants through the shared carrier.",
+            "ledgerName": "Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure",
+            "mc2Lane": "MC2-Mosco-recovery-limsup",
+            "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+            "recoverySequenceStatement": "MC2 constructs finite transfer approximants on the Sprint121 common carrier, preserves the physical quotient convention, and records the limsup inequality for the continuum closed form."
+          }
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 23,
+              "text": "-- and strong-resolvent closure rows needed to transport the isolated"
+            },
+            {
+              "line": 55,
+              "text": "strongResolventStatement : String"
+            },
+            {
+              "line": 56,
+              "text": "strongResolventStatement ="
+            },
+            {
+              "line": 57,
+              "text": "\"Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians.\""
+            },
+            {
+              "line": 73,
+              "text": "\"Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.\""
+            },
+            {
+              "line": 81,
+              "text": "\"Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.\""
+            },
+            {
+              "line": 138,
+              "text": "strong-resolvent-convergence-row :"
+            },
+            {
+              "line": 160,
+              "text": "strong-resolvent-closed-here :"
+            },
+            {
+              "line": 174,
+              "text": "strong-resolvent-convergence-evidence :"
+            },
+            {
+              "line": 192,
+              "text": "\u2237 strong-resolvent-convergence-row"
+            },
+            {
+              "line": 278,
+              "text": "strongResolventConvergence :"
+            },
+            {
+              "line": 337,
+              "text": "strongResolventConvergenceRow : EvidenceRow"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "records": [],
+          "strings": {
+            "closureStatement": "Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.",
+            "nonVacuumTransportStatement": "Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.",
+            "strongResolventStatement": "Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians."
+          }
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "flags": [
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "mc2InputClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 78,
+              "text": "mc2InputClosedHere : Bool"
+            },
+            {
+              "line": 79,
+              "text": "mc2InputClosedHere = true"
+            },
+            {
+              "line": 126,
+              "text": "mc2InputClosedHereIsTrue : mc2InputClosedHere \u2261 true"
+            },
+            {
+              "line": 127,
+              "text": "mc2InputClosedHereIsTrue = refl"
+            },
+            {
+              "line": 345,
+              "text": "mc2 :"
+            },
+            {
+              "line": 346,
+              "text": "mc2InputClosedHere \u2261 true"
+            },
+            {
+              "line": 360,
+              "text": "mc2InputClosedHereIsTrue"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "records": [],
+          "strings": {}
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "strongResolventConvergenceProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "name": "mc2MoscoRecoveryLimsupProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "name": "moscoRecoverySequenceConstructedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "mc2InputClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": false,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "missing_required_flags": [],
+      "required_flags": [
+        "mc2MoscoRecoveryLimsupProvedHere",
+        "moscoRecoverySequenceConstructedHere"
+      ]
+    },
+    "MC3": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "flags": [
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "uniformFormBoundInputClosed",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 14,
+              "text": "import DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure"
+            },
+            {
+              "line": 74,
+              "text": "\"Closed-form lower semicontinuity follows from the Sprint128 common carrier, weak compactness, uniform form control, Kuwae-Shioya liminf condition, and Symanzik O(a) artifact absorption.\""
+            },
+            {
+              "line": 89,
+              "text": "sc3TransferLowerBoundInputClosed : Bool"
+            },
+            {
+              "line": 90,
+              "text": "sc3TransferLowerBoundInputClosed ="
+            },
+            {
+              "line": 91,
+              "text": "Sprint128-SC3.sc3TransferLowerBoundTheoremProvedHere"
+            },
+            {
+              "line": 101,
+              "text": "uniformFormBoundInputClosed : Bool"
+            },
+            {
+              "line": 102,
+              "text": "uniformFormBoundInputClosed = true"
+            },
+            {
+              "line": 143,
+              "text": "sc3TransferLowerBoundInputClosedIsTrue :"
+            },
+            {
+              "line": 144,
+              "text": "sc3TransferLowerBoundInputClosed \u2261 true"
+            },
+            {
+              "line": 145,
+              "text": "sc3TransferLowerBoundInputClosedIsTrue = refl"
+            },
+            {
+              "line": 155,
+              "text": "uniformFormBoundInputClosedIsTrue :"
+            },
+            {
+              "line": 156,
+              "text": "uniformFormBoundInputClosed \u2261 true"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "records": [],
+          "strings": {
+            "closedFormLscText": "Closed-form lower semicontinuity follows from the Sprint128 common carrier, weak compactness, uniform form control, Kuwae-Shioya liminf condition, and Symanzik O(a) artifact absorption."
+          }
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "flags": [
+            {
+              "expected_name": "MoscoRecoveryNoPollutionClosure",
+              "name": "mc3UniformFormLowerBoundProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoRecoveryNoPollutionClosure",
+              "name": "uniformFormLowerBoundClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 15,
+              "text": "import DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure"
+            },
+            {
+              "line": 21,
+              "text": "-- This module records the Worker 2 lane for MC2 recovery limsup, MC3"
+            },
+            {
+              "line": 22,
+              "text": "-- uniform form lower-bound feed-through, and MC4 exclusion of"
+            },
+            {
+              "line": 24,
+              "text": "-- common-carrier, weak-compactness, log-generator, and transfer-lower-bound"
+            },
+            {
+              "line": 38,
+              "text": "\"Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure\""
+            },
+            {
+              "line": 43,
+              "text": "mc3Lane : String"
+            },
+            {
+              "line": 44,
+              "text": "mc3Lane = \"MC3-uniform-form-lower-bound-feed-through\""
+            },
+            {
+              "line": 67,
+              "text": "mc3UniformFormLowerBoundProvedHere : Bool"
+            },
+            {
+              "line": 68,
+              "text": "mc3UniformFormLowerBoundProvedHere = true"
+            },
+            {
+              "line": 70,
+              "text": "uniformFormLowerBoundClosedHere : Bool"
+            },
+            {
+              "line": 71,
+              "text": "uniformFormLowerBoundClosedHere = true"
+            },
+            {
+              "line": 93,
+              "text": "mc3UniformFormLowerBoundProvedHereIsTrue :"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "records": [],
+          "strings": {
+            "aggregateMoscoStatement": "Aggregate Mosco convergence is closed here by pairing Sprint124 MC1 liminf accounting with the MC2 recovery limsup sequence, the MC3 uniform lower bound, and MC4 bottom-spectrum exclusion.",
+            "ledgerName": "Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure",
+            "mc3Lane": "MC3-uniform-form-lower-bound-feed-through",
+            "uniformFormBoundStatement": "MC3 feeds through the Sprint128 transfer lower-bound convention as a cutoff-uniform semibounded form estimate on the same carrier and domain convention."
+          }
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 14,
+              "text": "import DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure"
+            },
+            {
+              "line": 22,
+              "text": "-- supplies the cutoff transfer lower bound, and Sprint129 records the Mosco"
+            },
+            {
+              "line": 24,
+              "text": "-- non-vacuum lower bound to the continuum Hamiltonian.  The module promotes"
+            },
+            {
+              "line": 63,
+              "text": "sc3TransferLowerBoundStatement : String"
+            },
+            {
+              "line": 64,
+              "text": "sc3TransferLowerBoundStatement ="
+            },
+            {
+              "line": 65,
+              "text": "\"Sprint128 SC3 supplies gap(T(a)) >= (1/4) * m_eff(a) * a and the corresponding non-vacuum Hamiltonian lower-bound input.\""
+            },
+            {
+              "line": 73,
+              "text": "\"Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.\""
+            },
+            {
+              "line": 81,
+              "text": "\"Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.\""
+            },
+            {
+              "line": 142,
+              "text": "sc3-transfer-lower-bound-row :"
+            },
+            {
+              "line": 146,
+              "text": "non-vacuum-lower-bound-transport-row :"
+            },
+            {
+              "line": 164,
+              "text": "lower-bound-transported-here :"
+            },
+            {
+              "line": 178,
+              "text": "sc3-transfer-lower-bound-evidence :"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "records": [],
+          "strings": {
+            "closureStatement": "Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.",
+            "nonVacuumTransportStatement": "Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.",
+            "sc3TransferLowerBoundStatement": "Sprint128 SC3 supplies gap(T(a)) >= (1/4) * m_eff(a) * a and the corresponding non-vacuum Hamiltonian lower-bound input."
+          }
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "flags": [
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "mc3InputClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 13,
+              "text": "import DASHI.Physics.Closure.YMSprint128TransferLowerBoundClosure as SC3"
+            },
+            {
+              "line": 81,
+              "text": "mc3InputClosedHere : Bool"
+            },
+            {
+              "line": 82,
+              "text": "mc3InputClosedHere = true"
+            },
+            {
+              "line": 91,
+              "text": "sc3InputClosedHere = SC3.sc3TransferLowerBoundTheoremProvedHere"
+            },
+            {
+              "line": 129,
+              "text": "mc3InputClosedHereIsTrue : mc3InputClosedHere \u2261 true"
+            },
+            {
+              "line": 130,
+              "text": "mc3InputClosedHereIsTrue = refl"
+            },
+            {
+              "line": 268,
+              "text": "\"Sprint128 transfer lower-bound closure supplies the cutoff transfer comparison.\""
+            },
+            {
+              "line": 347,
+              "text": "mc3 :"
+            },
+            {
+              "line": 348,
+              "text": "mc3InputClosedHere \u2261 true"
+            },
+            {
+              "line": 361,
+              "text": "mc3InputClosedHereIsTrue"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "records": [],
+          "strings": {}
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "uniformFormBoundInputClosed",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "name": "mc3UniformFormLowerBoundProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "name": "uniformFormLowerBoundClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "mc3InputClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": false,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "missing_required_flags": [],
+      "required_flags": [
+        "mc3UniformFormLowerBoundProvedHere",
+        "uniformFormLowerBoundClosedHere"
+      ]
+    },
+    "MC4": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "flags": [
+            {
+              "expected_name": "MoscoLiminfStrongResolventClosure",
+              "name": "moscoLiminfTheoremProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure where"
+            },
+            {
+              "line": 20,
+              "text": "-- Sprint129 MC1 Mosco liminf and strong resolvent closure."
+            },
+            {
+              "line": 26,
+              "text": "--   Mosco liminf inequality and strong resolvent convergence."
+            },
+            {
+              "line": 29,
+              "text": "-- promotes MC1, Mosco liminf, strong resolvent convergence, the Symanzik"
+            },
+            {
+              "line": 38,
+              "text": "\"DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda\""
+            },
+            {
+              "line": 42,
+              "text": "\"Sprint129-MC1-Mosco-liminf-strong-resolvent-closure\""
+            },
+            {
+              "line": 58,
+              "text": "\"Kuwae-Shioya 2003 varying-Hilbert-space Mosco framework is applied to the Sprint128 Wilson common carrier with weak convergence and closed semibounded transfer forms.\""
+            },
+            {
+              "line": 64,
+              "text": "moscoLiminfFormulaText : String"
+            },
+            {
+              "line": 65,
+              "text": "moscoLiminfFormulaText ="
+            },
+            {
+              "line": 70,
+              "text": "\"Mosco convergence of the closed semibounded forms implies strong resolvent convergence of the associated nonnegative self-adjoint generators.\""
+            },
+            {
+              "line": 78,
+              "text": "\"MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.\""
+            },
+            {
+              "line": 110,
+              "text": "moscoLiminfTheoremProvedHere : Bool"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "records": [
+            {
+              "line": 271,
+              "name": "ClosedFormMoscoLiminfTheorem"
+            },
+            {
+              "line": 323,
+              "name": "YMSprint129MoscoLiminfStrongResolventClosureReceipt"
+            }
+          ],
+          "strings": {
+            "kuwaeShioyaFrameworkText": "Kuwae-Shioya 2003 varying-Hilbert-space Mosco framework is applied to the Sprint128 Wilson common carrier with weak convergence and closed semibounded transfer forms.",
+            "laneName": "Sprint129-MC1-Mosco-liminf-strong-resolvent-closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+            "moscoLiminfFormulaText": "For every admissible weakly convergent branch u_a -> u, Q_cont(u) <= liminf_a Q_a(u_a).",
+            "nonClayBoundaryText": "MC1 is closed here as a DASHI-native Mosco/strong-resolvent theorem; Clay Yang-Mills promotion remains false pending final cross-gate submission governance.",
+            "strongResolventFormulaText": "Mosco convergence of the closed semibounded forms implies strong resolvent convergence of the associated nonnegative self-adjoint generators."
+          }
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "flags": [
+            {
+              "expected_name": "MoscoRecoveryNoPollutionClosure",
+              "name": "mc2MoscoRecoveryLimsupProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+              "required": false,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoRecoveryNoPollutionClosure",
+              "name": "mc4NoBottomSpectrumPollutionProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoRecoveryNoPollutionClosure",
+              "name": "noBottomSpectrumPollutionClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoRecoveryNoPollutionClosure",
+              "name": "moscoConvergenceClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+              "required": true,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint129MoscoRecoveryNoPollutionClosure where"
+            },
+            {
+              "line": 11,
+              "text": "import DASHI.Physics.Closure.YMSprint124MoscoLiminfObligationLedger"
+            },
+            {
+              "line": 19,
+              "text": "-- Sprint129 MC2-MC4 Mosco recovery and no-pollution closure."
+            },
+            {
+              "line": 22,
+              "text": "-- uniform form lower-bound feed-through, and MC4 exclusion of"
+            },
+            {
+              "line": 23,
+              "text": "-- bottom-spectrum pollution.  The receipt is downstream of the Sprint128"
+            },
+            {
+              "line": 26,
+              "text": "-- aggregate Mosco partner.  It records local checked closure flags only; it"
+            },
+            {
+              "line": 34,
+              "text": "\"DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda\""
+            },
+            {
+              "line": 38,
+              "text": "\"Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure\""
+            },
+            {
+              "line": 41,
+              "text": "mc2Lane = \"MC2-Mosco-recovery-limsup\""
+            },
+            {
+              "line": 46,
+              "text": "mc4Lane : String"
+            },
+            {
+              "line": 47,
+              "text": "mc4Lane = \"MC4-no-bottom-spectrum-pollution\""
+            },
+            {
+              "line": 61,
+              "text": "mc2MoscoRecoveryLimsupProvedHere : Bool"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "records": [],
+          "strings": {
+            "aggregateMoscoStatement": "Aggregate Mosco convergence is closed here by pairing Sprint124 MC1 liminf accounting with the MC2 recovery limsup sequence, the MC3 uniform lower bound, and MC4 bottom-spectrum exclusion.",
+            "compactnessExclusionStatement": "Compactness exclusion combines the Sprint128 WC1 compactness closure with the carrier normalization to rule out escaping bottom-spectrum branches.",
+            "ledgerName": "Sprint129 MC2-MC4 Mosco recovery, uniform form feed-through, and no-pollution closure",
+            "mc2Lane": "MC2-Mosco-recovery-limsup",
+            "mc4Lane": "MC4-no-bottom-spectrum-pollution",
+            "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+            "noBottomPollutionStatement": "MC4 excludes bottom-spectrum pollution: every bottom-energy finite branch has a carrier-convergent subsequence whose limit is accounted for by the continuum closed form."
+          }
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "flags": [
+            {
+              "expected_name": "SpectralGapTransportClosure",
+              "name": "sc2SpectralGapTransportUnderMoscoProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+              "required": false,
+              "value": true
+            },
+            {
+              "expected_name": "SpectralGapTransportClosure",
+              "name": "bottomSpectrumIsolationTransportProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 10,
+              "text": "import DASHI.Physics.Closure.YMSprint125SpectralGapTransportUnderMoscoInterface"
+            },
+            {
+              "line": 20,
+              "text": "-- This module records the closed SC2 transport step under Mosco convergence:"
+            },
+            {
+              "line": 22,
+              "text": "-- supplies the cutoff transfer lower bound, and Sprint129 records the Mosco"
+            },
+            {
+              "line": 37,
+              "text": "\"Sprint129 SC2 spectral-gap transport under Mosco closure\""
+            },
+            {
+              "line": 40,
+              "text": "sc2LaneName = \"SC2-spectral-gap-transport-under-Mosco\""
+            },
+            {
+              "line": 51,
+              "text": "moscoConvergenceStatement : String"
+            },
+            {
+              "line": 52,
+              "text": "moscoConvergenceStatement ="
+            },
+            {
+              "line": 53,
+              "text": "\"Closed semibounded physical forms converge in the Mosco sense on the common Sprint129 continuum carrier.\""
+            },
+            {
+              "line": 57,
+              "text": "\"Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians.\""
+            },
+            {
+              "line": 73,
+              "text": "\"Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.\""
+            },
+            {
+              "line": 81,
+              "text": "\"Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.\""
+            },
+            {
+              "line": 87,
+              "text": "sc2SpectralGapTransportUnderMoscoProvedHere : Bool"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "records": [],
+          "strings": {
+            "closureStatement": "Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.",
+            "ledgerName": "Sprint129 SC2 spectral-gap transport under Mosco closure",
+            "moscoConvergenceStatement": "Closed semibounded physical forms converge in the Mosco sense on the common Sprint129 continuum carrier.",
+            "nonVacuumTransportStatement": "Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.",
+            "sc2LaneName": "SC2-spectral-gap-transport-under-Mosco",
+            "strongResolventStatement": "Mosco convergence of closed semibounded forms induces strong resolvent convergence of the associated self-adjoint Hamiltonians."
+          }
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "flags": [
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "mc4InputClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": false,
+              "value": true
+            },
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "sprint129MoscoSpectralRouteClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint129MoscoSpectralRouteLedger where"
+            },
+            {
+              "line": 17,
+              "text": "-- Sprint129 aggregate Mosco spectral route ledger."
+            },
+            {
+              "line": 20,
+              "text": "-- Sprint129 Mosco/spectral route lane.  It records CC1, WC1, MC1, SC1, SC3,"
+            },
+            {
+              "line": 30,
+              "text": "\"DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda\""
+            },
+            {
+              "line": 34,
+              "text": "\"Sprint129 aggregate Mosco spectral route ledger\""
+            },
+            {
+              "line": 37,
+              "text": "routeLane = \"Sprint129-Mosco-spectral-route\""
+            },
+            {
+              "line": 63,
+              "text": "sprint129MoscoSpectralRouteRowsRecorded : Bool"
+            },
+            {
+              "line": 64,
+              "text": "sprint129MoscoSpectralRouteRowsRecorded = true"
+            },
+            {
+              "line": 84,
+              "text": "mc4InputClosedHere : Bool"
+            },
+            {
+              "line": 85,
+              "text": "mc4InputClosedHere = true"
+            },
+            {
+              "line": 102,
+              "text": "sprint129MoscoSpectralRouteClosedHere : Bool"
+            },
+            {
+              "line": 103,
+              "text": "sprint129MoscoSpectralRouteClosedHere = true"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "records": [
+            {
+              "line": 339,
+              "name": "MoscoClosureFlags"
+            },
+            {
+              "line": 413,
+              "name": "YMSprint129MoscoSpectralRouteLedgerReceipt"
+            }
+          ],
+          "strings": {
+            "ledgerName": "Sprint129 aggregate Mosco spectral route ledger",
+            "modulePath": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+            "routeLane": "Sprint129-Mosco-spectral-route",
+            "routeSummaryText": "Sprint129 aggregates Sprint128 CC1/WC1/SC1/SC3/SY1/GG1 closed inputs and closes MC1-MC4 plus SC2 for the Mosco spectral route; OS1 and FIN remain the exact blockers."
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "MoscoLiminfStrongResolventClosure",
+          "name": "moscoLiminfTheoremProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "name": "mc2MoscoRecoveryLimsupProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "name": "mc4NoBottomSpectrumPollutionProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "name": "noBottomSpectrumPollutionClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "name": "moscoConvergenceClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "name": "sc2SpectralGapTransportUnderMoscoProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "name": "bottomSpectrumIsolationTransportProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "mc4InputClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "sprint129MoscoSpectralRouteClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": false,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "missing_required_flags": [],
+      "required_flags": [
+        "mc4NoBottomSpectrumPollutionProvedHere",
+        "noBottomSpectrumPollutionClosedHere",
+        "moscoConvergenceClosedHere"
+      ]
+    },
+    "OS1": {
+      "closed": false,
+      "evidence": [
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "flags": [
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "os1InputClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": false,
+              "value": false
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 9,
+              "text": "import DASHI.Physics.Closure.YMSprint126OSToWightmanRouteLedger as OS1"
+            },
+            {
+              "line": 22,
+              "text": "-- OS1 and FIN false.  It is a route ledger only: no final Clay submission"
+            },
+            {
+              "line": 51,
+              "text": "sourceSprint126OS1Path : String"
+            },
+            {
+              "line": 52,
+              "text": "sourceSprint126OS1Path = OS1.modulePath"
+            },
+            {
+              "line": 105,
+              "text": "os1InputClosedHere : Bool"
+            },
+            {
+              "line": 106,
+              "text": "os1InputClosedHere = false"
+            },
+            {
+              "line": 154,
+              "text": "os1InputClosedHereIsFalse : os1InputClosedHere \u2261 false"
+            },
+            {
+              "line": 155,
+              "text": "os1InputClosedHereIsFalse = refl"
+            },
+            {
+              "line": 179,
+              "text": "os1-gate :"
+            },
+            {
+              "line": 282,
+              "text": "os1DependencyRow : DependencyRow"
+            },
+            {
+              "line": 283,
+              "text": "os1DependencyRow ="
+            },
+            {
+              "line": 285,
+              "text": "os1-gate"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "records": [],
+          "strings": {
+            "routeSummaryText": "Sprint129 aggregates Sprint128 CC1/WC1/SC1/SC3/SY1/GG1 closed inputs and closes MC1-MC4 plus SC2 for the Mosco spectral route; OS1 and FIN remain the exact blockers."
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "os1InputClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": false,
+          "value": false
+        }
+      ],
+      "false_required_flags": [],
+      "missing_required_flags": [
+        "osToWightmanRouteProvedHere",
+        "dashiNativeWightmanDistributionsClosedHere",
+        "osWightmanPoincareCovarianceProvedHere",
+        "wightmanConsequencesLocallyProvedInRepo",
+        "os1975Theorem1ProvedInRepo"
+      ],
+      "required_flags": [
+        "osToWightmanRouteProvedHere",
+        "dashiNativeWightmanDistributionsClosedHere",
+        "osWightmanPoincareCovarianceProvedHere",
+        "wightmanConsequencesLocallyProvedInRepo",
+        "os1975Theorem1ProvedInRepo"
+      ]
+    },
+    "SC2": {
+      "closed": true,
+      "evidence": [
+        {
+          "expected_name": "MoscoRecoveryNoPollutionClosure",
+          "flags": [],
+          "line_evidence": [
+            {
+              "line": 261,
+              "text": "\"Core density closes the recovery route by testing every finite-energy continuum vector against a common dense physical core and transporting the approximants through the shared carrier.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+          "records": [],
+          "strings": {
+            "coreDensityStatement": "Core density closes the recovery route by testing every finite-energy continuum vector against a common dense physical core and transporting the approximants through the shared carrier."
+          }
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "flags": [
+            {
+              "expected_name": "SpectralGapTransportClosure",
+              "name": "sc2SpectralGapTransportUnderMoscoProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SpectralGapTransportClosure",
+              "name": "bottomSpectrumIsolationTransportProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SpectralGapTransportClosure",
+              "name": "positiveNonVacuumGapTransportProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SpectralGapTransportClosure",
+              "name": "continuumHamiltonianSpectralGapProvedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+              "required": true,
+              "value": true
+            },
+            {
+              "expected_name": "SpectralGapTransportClosure",
+              "name": "spectralGapTransportClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 1,
+              "text": "module DASHI.Physics.Closure.YMSprint129SpectralGapTransportClosure where"
+            },
+            {
+              "line": 10,
+              "text": "import DASHI.Physics.Closure.YMSprint125SpectralGapTransportUnderMoscoInterface"
+            },
+            {
+              "line": 11,
+              "text": "as SC2-125"
+            },
+            {
+              "line": 18,
+              "text": "-- Sprint129 SC2 spectral-gap transport closure."
+            },
+            {
+              "line": 20,
+              "text": "-- This module records the closed SC2 transport step under Mosco convergence:"
+            },
+            {
+              "line": 23,
+              "text": "-- and strong-resolvent closure rows needed to transport the isolated"
+            },
+            {
+              "line": 24,
+              "text": "-- non-vacuum lower bound to the continuum Hamiltonian.  The module promotes"
+            },
+            {
+              "line": 33,
+              "text": "\"DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda\""
+            },
+            {
+              "line": 37,
+              "text": "\"Sprint129 SC2 spectral-gap transport under Mosco closure\""
+            },
+            {
+              "line": 39,
+              "text": "sc2LaneName : String"
+            },
+            {
+              "line": 40,
+              "text": "sc2LaneName = \"SC2-spectral-gap-transport-under-Mosco\""
+            },
+            {
+              "line": 42,
+              "text": "sourceSprint125SC2Path : String"
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "records": [
+            {
+              "line": 298,
+              "name": "YMSprint129SpectralGapTransportClosureReceipt"
+            }
+          ],
+          "strings": {
+            "closureStatement": "Sprint129 closes SC2 spectral-gap transport under Mosco using Sprint128 SC1 log generator, Sprint128 SC3 transfer lower bound, and Sprint129 strong-resolvent/no-pollution transport rows.",
+            "continuumHamiltonianGapStatement": "The continuum Hamiltonian has isolated vacuum bottom and strictly positive infimum on the physical non-vacuum sector.",
+            "ledgerName": "Sprint129 SC2 spectral-gap transport under Mosco closure",
+            "modulePath": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+            "nonVacuumTransportStatement": "Strong resolvent convergence plus Mosco no-pollution transports the positive non-vacuum lower bound to the continuum Hamiltonian.",
+            "sc2LaneName": "SC2-spectral-gap-transport-under-Mosco",
+            "vacuumIsolationStatement": "The vacuum sector is one-dimensional, isolated at the bottom, and excluded from the transported non-vacuum threshold."
+          }
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "flags": [
+            {
+              "expected_name": "MoscoSpectralRouteLedger",
+              "name": "sc2InputClosedHere",
+              "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+              "required": false,
+              "value": true
+            }
+          ],
+          "line_evidence": [
+            {
+              "line": 21,
+              "text": "-- SC2, SY1, and GG1 as closed for this route ledger, and deliberately keeps"
+            },
+            {
+              "line": 93,
+              "text": "sc2InputClosedHere : Bool"
+            },
+            {
+              "line": 94,
+              "text": "sc2InputClosedHere = true"
+            },
+            {
+              "line": 141,
+              "text": "sc2InputClosedHereIsTrue : sc2InputClosedHere \u2261 true"
+            },
+            {
+              "line": 142,
+              "text": "sc2InputClosedHereIsTrue = refl"
+            },
+            {
+              "line": 177,
+              "text": "sc2-gate :"
+            },
+            {
+              "line": 271,
+              "text": "sc2DependencyRow : DependencyRow"
+            },
+            {
+              "line": 272,
+              "text": "sc2DependencyRow ="
+            },
+            {
+              "line": 274,
+              "text": "sc2-gate"
+            },
+            {
+              "line": 275,
+              "text": "\"SC2\""
+            },
+            {
+              "line": 277,
+              "text": "sc2InputClosedHere"
+            },
+            {
+              "line": 279,
+              "text": "\"Sprint129 route lane closes spectral-gap transport under the Mosco package MC1-MC4.\""
+            }
+          ],
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "records": [],
+          "strings": {
+            "routeSummaryText": "Sprint129 aggregates Sprint128 CC1/WC1/SC1/SC3/SY1/GG1 closed inputs and closes MC1-MC4 plus SC2 for the Mosco spectral route; OS1 and FIN remain the exact blockers."
+          }
+        }
+      ],
+      "extracted_flags": [
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "name": "sc2SpectralGapTransportUnderMoscoProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "name": "bottomSpectrumIsolationTransportProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "name": "positiveNonVacuumGapTransportProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "name": "continuumHamiltonianSpectralGapProvedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "required": true,
+          "value": true
+        },
+        {
+          "expected_name": "SpectralGapTransportClosure",
+          "name": "spectralGapTransportClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+          "required": false,
+          "value": true
+        },
+        {
+          "expected_name": "MoscoSpectralRouteLedger",
+          "name": "sc2InputClosedHere",
+          "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+          "required": false,
+          "value": true
+        }
+      ],
+      "false_required_flags": [],
+      "missing_required_flags": [],
+      "required_flags": [
+        "sc2SpectralGapTransportUnderMoscoProvedHere",
+        "bottomSpectrumIsolationTransportProvedHere",
+        "positiveNonVacuumGapTransportProvedHere",
+        "continuumHamiltonianSpectralGapProvedHere"
+      ]
+    }
+  },
+  "hard_fail_reasons": [],
+  "module_candidates": {
+    "MoscoLiminfStrongResolventClosure": [
+      "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda"
+    ],
+    "MoscoRecoveryNoPollutionClosure": [
+      "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda"
+    ],
+    "MoscoSpectralRouteLedger": [
+      "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+    ],
+    "SpectralGapTransportClosure": [
+      "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda"
+    ]
+  },
+  "route_aggregate": {
+    "closed": false,
+    "fail_closed_until_os1_fin_closed": true,
+    "required_sprint129_gates": [
+      "MC1",
+      "MC2",
+      "MC3",
+      "MC4",
+      "SC2"
+    ],
+    "sprint129_required_gates_closed": true,
+    "terminal_route_gates": [
+      "OS1",
+      "FIN"
+    ],
+    "terminal_route_gates_closed": false
+  },
+  "route_decision": "fail-closed",
+  "route_reasons": [
+    "OS1 terminal route gate is not closed",
+    "FIN terminal route gate is not closed"
+  ],
+  "route_required_gates_closed": false,
+  "scanned_surfaces": [
+    "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+    "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+    "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+    "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda"
+  ],
+  "sprint128_summary": {
+    "audit_id": "ym_sprint128_closure_audit",
+    "clay_promotion_assertion": {
+      "no_prior_clay_promotion_true": true,
+      "no_sprint128_clay_promotion_true": true,
+      "sprint128_flags": [
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+          "value": false
+        },
+        {
+          "name": "clayYangMillsPromoted",
+          "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+          "value": false
+        }
+      ]
+    },
+    "fail_reason_count": 4,
+    "hard_fail_reason_count": 0,
+    "path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+    "present": true,
+    "route_decision": "fail-closed",
+    "route_gate_closed": {
+      "FIN": false,
+      "MC1": false,
+      "OS1": false,
+      "SC2": false
+    },
+    "route_required_gates_closed": false,
+    "sprint128_required_gates_closed": true
+  },
+  "sprint129_required_gates_closed": true
+}

@@ -1,0 +1,41 @@
+{
+  "contract": "ns_sprint161_critical_profile_taxonomy",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy_manifest.json",
+      "sha256": "a993a0d1ede6d5441d5a4314d5389edb2fd67cabc3926197214fef3f056022e7"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy.md",
+      "sha256": "8b3d2ef56f357071c611b1faab9d0918d2615df2b9a7e0340f54d15341f4e61c"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy_rows.csv",
+      "sha256": "5c7825d6dc2fa73fdaf60b819471804604951baff803388fde9434fbd36d9ece"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy_rows.json",
+      "sha256": "9117125881602ac059dc7e63381a9df548d7af77771e326633e36f96ad2f6d33"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy_summary.json",
+      "sha256": "213bdfb76cd0f50cc98409ceca3c968fa7c0d591b7c46b1b01ac1ab680445a40"
+    }
+  },
+  "lane": 4,
+  "manifest_hash": "c2a58af91cc77d7ce7522aa3907b84d8af144ffc435f00f37e2473acd2401002",
+  "normalized_outputs": {
+    "csv": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy_rows.csv",
+    "json": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy_rows.json",
+    "manifest": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy_manifest.json",
+    "markdown": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy.md",
+    "summary": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_critical_profile_taxonomy/ns_sprint161_critical_profile_taxonomy_summary.json"
+  },
+  "sprint": 161,
+  "validation_passed": true
+}

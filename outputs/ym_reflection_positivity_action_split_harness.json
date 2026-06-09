@@ -1,0 +1,7 @@
+{
+  "action_invariance_error": 0.0,
+  "all_checks_ok": true,
+  "positive_negative_swap_ok": true,
+  "promotion": false,
+  "zero_sector_fixed_ok": true
+}

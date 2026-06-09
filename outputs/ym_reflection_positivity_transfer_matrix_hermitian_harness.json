@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "boundary_condition_preserved_ok": true,
+  "boundary_phase_free_ok": true,
+  "max_error": 0.0,
+  "promotion": false,
+  "transfer_matrix_hermitian_ok": true
+}

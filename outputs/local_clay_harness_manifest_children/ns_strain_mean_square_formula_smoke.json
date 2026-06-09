@@ -1,0 +1,39 @@
+{
+  "clay_promotion": false,
+  "exact_constants": {
+    "mean_lambda_squared": 0.18333333333333332,
+    "mean_lambda_squared_fraction": "11/60",
+    "rms_lambda": 0.4281744192888376
+  },
+  "formula": "E_S2[lambda^2] = 11/60",
+  "harness": "ns_strain_mean_square_formula_harness",
+  "monte_carlo": {
+    "absolute_error": 0.01030767449920958,
+    "max_lambda_sq": 0.2499999977041546,
+    "min_lambda_sq": 0.0026433699495458426,
+    "samples": 256,
+    "seed": 20260608,
+    "target": 0.18333333333333332,
+    "value": 0.1936410078325429
+  },
+  "notes": [
+    "midpoint quadrature uses sin(theta) surface weight",
+    "Monte Carlo samples z uniformly in [-1,1] and phi uniformly in [0,2pi)",
+    "finite angular symbol check only; not a PDE proof"
+  ],
+  "promotion_false": true,
+  "quadrature": {
+    "absolute_error": 0.00017966109790765183,
+    "max_lambda_sq": 0.24998178067002066,
+    "min_lambda_sq": 0.0053104447121607645,
+    "phi_bins": 48,
+    "target": 0.18333333333333332,
+    "theta_bins": 24,
+    "value": 0.18351299443124097,
+    "weight_sum": 12.575346823696865
+  },
+  "script": "scripts/ns_strain_mean_square_formula_harness.py",
+  "target": 0.18333333333333332,
+  "theorem_label": "NS-F5",
+  "theorem_name": "NSBiotSavartStrainMeanSquareExactFormula"
+}

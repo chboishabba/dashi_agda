@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave8-gate3-manager.json",
+  "lane": "paper7-gate3-yang-mills",
+  "lane_claim": "Paper 7 wave8 Manager 2, Gate 3 Non-Abelian Yang-Mills. YOU ARE A SECTION MANAGER. Use $autonomous-orchestrator methods only; do not use Codex built-in subagents. You may launch up to six leaf workers, and workers may not spawn descendants. Implementation-enforcement mode: every worker owns exactly one Agda symbol family and must return code, targeted Agda validation, exact typed/compiler blocker, or authority escalation. No roadmap-only output. Worker lanes: SU2LieAlgebra; SU3StructureConstants; SU3JacobiAllSlots including allSlotCoefficientAwareResidualArithmeticField; LieValuedFormsAndCurvature; BianchiAndHodge; YMActionIBPSource. First diagnostic: inspect SFGC shift edge / directed-edge schema before plaquette work. Route A/B separation must remain explicit.",
+  "orchestrator_id": "paper7-wave8-gate3-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.paper7-wave8-gate3-manager.json",
+  "timestamp": "2026-05-19T15:46:53Z"
+}

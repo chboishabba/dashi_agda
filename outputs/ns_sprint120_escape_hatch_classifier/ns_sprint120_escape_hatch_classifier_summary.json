@@ -1,0 +1,31 @@
+{
+  "candidate_routes": [
+    "constant_linear_strain_route",
+    "rotating_strain",
+    "nonlinear_feedback",
+    "vorticity_coupling",
+    "imposed_positive_flux"
+  ],
+  "classifications": {
+    "constant_linear_strain_route": "obstructed_closed",
+    "imposed_positive_flux": "rejected_circular",
+    "nonlinear_feedback": "self_interacting_packet_open",
+    "rotating_strain": "remaining_open_requires_new_mechanism",
+    "vorticity_coupling": "open_secondary"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "closed_route_count": 1,
+  "complete": false,
+  "contract": "ns_sprint120_escape_hatch_classifier",
+  "exit_code": 1,
+  "exit_reason": "post-anti-correlation escape hatch remains incomplete",
+  "open_route_count": 3,
+  "primary_open_route": "rotating_strain",
+  "recommended_classification": "remaining_open_requires_new_mechanism",
+  "recommended_next_lemma": "RotatingStrainDecorrelationMechanism",
+  "recommended_route_id": "rotating_strain",
+  "rejected_route_count": 1,
+  "route_count": 5
+}

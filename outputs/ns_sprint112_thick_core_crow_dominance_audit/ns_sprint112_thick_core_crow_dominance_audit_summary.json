@@ -1,0 +1,189 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint112ThickCoreCrowDominanceRegime.agda",
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "downstreamNSPromotion": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "downstreamNavierStokesClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "downstreamPromotion": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "navierStokesPromotion": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "thickCoreCrowDominanceRegimeClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint112_thick_core_crow_dominance_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, anchors, required strings, exact booleans, or forbidden-marker hits block audit passage",
+    "G": "Downstream Navier-Stokes and Clay promotion remain false",
+    "L": "all required anchors, literals, and booleans must match before the audit exits successfully",
+    "O": "Worker 2 owns the Sprint112 thick-core Crow dominance audit script only",
+    "P": "THICK_CORE_CROW_DOMINANCE_REGIME_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+    "R": "verify thickCoreCrowDominanceRegimeClosed true, downstream and promotion flags false, Crow/elliptic rate strings, delta/b >= 1/2, and forbidden-marker absence",
+    "S": "target Agda module is inspected when present; missing target fails closed"
+  },
+  "downstream_flags_false": true,
+  "evidence_audit_passed": true,
+  "fail_closed": false,
+  "final_decision": "THICK_CORE_CROW_DOMINANCE_REGIME_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "thickCoreCrowDominanceRegimeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "downstreamNavierStokesClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "downstreamNSPromotion",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "downstreamPromotion",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "navierStokesPromotion",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Crow",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:elliptic",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:rate",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:rates",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:delta/b >= 1/2",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint112ThickCoreCrowDominanceRegime.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "THICK_CORE_CROW_DOMINANCE_REGIME_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+      "expected": "THICK_CORE_CROW_DOMINANCE_REGIME_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "missing_anchors": [],
+  "missing_required_strings": [],
+  "promotion_decision": "hold",
+  "promotion_flags_false": true,
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint112ThickCoreCrowDominance",
+    "NSSprint112ThickCoreCrowDominanceRegime",
+    "canonicalNSSprint112ThickCoreCrowDominance",
+    "canonicalNSSprint112ThickCoreCrowDominanceRegime",
+    "nsSprint112ThickCoreCrowDominanceReceipt",
+    "nsSprint112ThickCoreCrowDominanceRegimeReceipt",
+    "canonicalSprint112ThickCoreCrowDominanceFlags",
+    "canonicalThickCoreCrowDominanceFlags",
+    "thickCoreCrowDominanceRegimeClosed"
+  ],
+  "required_strings": [
+    "Crow",
+    "elliptic",
+    "rate",
+    "rates",
+    "delta/b >= 1/2"
+  ],
+  "route_decision": "THICK_CORE_CROW_DOMINANCE_REGIME_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+  "target_present": true,
+  "thick_core_crow_dominance_regime_closed": true
+}

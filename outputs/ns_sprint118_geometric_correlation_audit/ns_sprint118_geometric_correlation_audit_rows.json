@@ -1,0 +1,282 @@
+[
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "sprint118NonCircularGeometricCorrelationLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "sprint117VolumeSuppressionImported",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "hhtolSignFormulaRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "kinematicCompressiveAlignmentConditionRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "pointwiseSignUnderAlignmentRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "concentrationRouteClosureImported",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "nonCircularGeometricCorrelationSourceStillOpen",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "nonCircularGeometricCorrelationSourceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "persistentAlignmentExistenceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "kStarCollapseFromCorrelationSourceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "blowupCriterionBridgeClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "navierStokesClayAssemblyClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:sprint118NonCircularGeometricCorrelationLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:sprint117VolumeSuppressionImported",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:hhtolSignFormulaRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:kinematicCompressiveAlignmentConditionRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:pointwiseSignUnderAlignmentRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:concentrationRouteClosureImported",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:nonCircularGeometricCorrelationSourceStillOpen",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:nonCircularGeometricCorrelationSourceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:persistentAlignmentExistenceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:kStarCollapseFromCorrelationSourceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:blowupCriterionBridgeClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:navierStokesClayAssemblyClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:Sprint118 imports DASHI.Physics.Closure.NSSprint117GeneralVolumeSuppression as Sprint117.",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:Pi_HH_to_L = - integral (u_H tensor u_H) : e(u_L)",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:if u_H aligns with a compressive eigenvector of e(u_L), then Pi_HH_to_L is positive",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:Sprint118 records only the conditional pointwise sign calculation under compressive alignment.",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:NonCircularGeometricCorrelationSource remains open",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:The sign calculation is conditional and does not supply persistent non-circular correlation.",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:PersistentAlignmentExistence remains open",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:Sprint118 records conditional sign alignment without closing non-circular correlation, KStar collapse, the blowup bridge, or Clay promotion.",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:clayNavierStokesPromoted remains false.",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "missing",
+    "expected": "present",
+    "gate": "required_string:Sprint118 records Pi_HH_to_L sign positivity under KinematicCompressiveAlignmentCondition; NonCircularGeometricCorrelationSource remains open; clayNavierStokesPromoted remains false.",
+    "passed": false,
+    "status": "FAIL_CLOSED_MISSING_REQUIRED_STRING"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint118NonCircularGeometricCorrelation.agda",
+    "gate": "target_module",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "SPRINT118_NON_CIRCULAR_GEOMETRIC_CORRELATION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "expected": "SPRINT118_NON_CIRCULAR_GEOMETRIC_CORRELATION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "gate": "route",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "all present",
+    "expected": "all present",
+    "gate": "required_anchors",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "none",
+    "expected": "none",
+    "gate": "forbidden_markers",
+    "passed": true,
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,163 @@
+[
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "sprint114ThinCoreCorrectionLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "sprint112ThickCoreConditionCorrected",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "thinCoreCrowDominanceRegimeClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "ellipticBackreactionBoundClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "reconnectionWindowLowerBoundClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "viscousDecayWindowClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "nonlinearDeformationControlClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "positiveFluxAccumulationWindowClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "finiteTimeFluxSurplusFromCrowDominance",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "finiteKStarCollapseClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:sprint114ThinCoreCorrectionLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:thinCoreCrowDominanceRegimeClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:ellipticBackreactionBoundClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:thin-core",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:Crow reconnection",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:elliptic",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:ReconnectionWindowLowerBound / finite flux surplus",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint114ThinCoreCrowReconnectionWindow.agda",
+    "gate": "target_module",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "THIN_CORE_RECONNECTION_LEDGER_CLOSED_FAIL_CLOSED_NO_CLAY_PROMOTION",
+    "expected": "THIN_CORE_RECONNECTION_LEDGER_CLOSED_FAIL_CLOSED_NO_CLAY_PROMOTION",
+    "gate": "route",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "all present",
+    "expected": "all present",
+    "gate": "required_anchors",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "none",
+    "expected": "none",
+    "gate": "forbidden_markers",
+    "passed": true,
+    "status": "PASS"
+  }
+]

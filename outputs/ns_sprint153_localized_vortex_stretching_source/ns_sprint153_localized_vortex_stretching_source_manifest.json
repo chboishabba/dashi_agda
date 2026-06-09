@@ -1,0 +1,54 @@
+{
+  "artifact_complete": true,
+  "clay_navier_stokes_promoted": false,
+  "constants_uniform_for_large_data": false,
+  "contract": "ns_sprint153_localized_vortex_stretching_source",
+  "control_card": {
+    "C": "A stdlib Python emitter writes a JSON ledger, CSV ledger, summary JSON, Markdown report, and manifest through an atomic directory replacement.",
+    "F": "No theorem is proved: sign-definiteness, cutoff support, uniform constants, dimensional theorem status, localized identity closure, finite BKM, and Clay NS remain open.",
+    "G": "Validation requires all eight rows, the exact bound strings, canonical constant 2, delta exponent 2, positive evidence rows, and every theorem or Clay flag false.",
+    "L": "Rows cover source input, core ball, cutoff support, sign, constants, dimensional scaling, and theorem flags; promotion is lower than any analytic theorem and is explicitly blocked.",
+    "O": "Worker 2 owns scripts/ns_sprint153_localized_vortex_stretching_source.py and outputs/ns_sprint153_localized_vortex_stretching_source/.",
+    "P": "Use the artifact as deterministic evidence for the symbolic bound shape only; it must be followed by rigorous cutoff, sign, uniform-constant, localized-identity, and model-validity theorems.",
+    "R": "Normalize the localized omega1 vortex-stretching core source as evidence for the bound shape core_source <= C*u1*v*Omega*delta^2, including the canonical 2*u1*v*Omega*delta^2 bookkeeping row.",
+    "S": "The model source term 2*u1*partial_z u1 is localized on a delta-core; using |partial_z u1| <= v*Omega and a normalized core-ball area factor gives the evidence shape 2*u1*v*Omega*delta^2."
+  },
+  "cutoff_support_theorem_proved": false,
+  "decision": "core_source_bound_shape_recorded_as_evidence_fail_closed",
+  "dimensional_scaling_theorem_proved": false,
+  "files": [
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint153_localized_vortex_stretching_source/ns_sprint153_localized_vortex_stretching_source_ledger.json",
+      "sha256": "c1e5b4c103050be1d0adf934937e5000539d71cc566c0a21e7b0a8d9b40200f3"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint153_localized_vortex_stretching_source/ns_sprint153_localized_vortex_stretching_source_ledger.csv",
+      "sha256": "a606d96729f33c410775cf9fa2c9ba09234c6c0c15e985b6945d2935d132ac21"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint153_localized_vortex_stretching_source/ns_sprint153_localized_vortex_stretching_source_summary.json",
+      "sha256": "8e7314242bd38b80176ef69f0e32a39ceb0378381fa826da6e8de4151578d098"
+    },
+    {
+      "exists": true,
+      "path": "outputs/ns_sprint153_localized_vortex_stretching_source/ns_sprint153_localized_vortex_stretching_source.md",
+      "sha256": "9a83f5dc8cc0181f5744750188797d133f0071f5fb216138c1bef2b194f15cfa"
+    }
+  ],
+  "full_clay_ns_solved": false,
+  "gate": "LocalizedCoreVortexStretchingSourceForOmega1",
+  "invariant_valid": true,
+  "lane": 2,
+  "localized_core_source_bound_proved": false,
+  "localized_enstrophy_identity_proved": false,
+  "manifest_hash": "7eaa90d9a9f2f11b4c48030a029c49c88f833b908820c783201ed602ecb6f3a1",
+  "model_validity_for_width_ode": false,
+  "omega1_equation_global_theorem_proved": false,
+  "row_count": 8,
+  "sign_definiteness_theorem_proved": false,
+  "sprint": 153,
+  "symmetric_hou_luo_bkm_finite": false
+}

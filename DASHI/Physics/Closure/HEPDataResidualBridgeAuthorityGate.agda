@@ -187,6 +187,14 @@ record HEPDataResidualBridgeAuthorityGate : Setω where
       ≡
       canonicalHEPDataResidualBridgeGateRequiredPayloadFields
 
+    empiricalCalibrationChecklist :
+      List Provider.HEPDataResidualEmpiricalCalibrationChecklistItem
+
+    empiricalCalibrationChecklistIsCanonical :
+      empiricalCalibrationChecklist
+      ≡
+      Provider.canonicalHEPDataResidualEmpiricalCalibrationChecklist
+
     boundaries :
       List HEPDataResidualBridgeAuthorityGateBoundary
 
@@ -271,6 +279,10 @@ canonicalHEPDataResidualBridgeAuthorityGate =
         canonicalHEPDataResidualBridgeGateRequiredPayloadFields
     ; requiredPayloadFieldsAreCanonical =
         refl
+    ; empiricalCalibrationChecklist =
+        Provider.canonicalHEPDataResidualEmpiricalCalibrationChecklist
+    ; empiricalCalibrationChecklistIsCanonical =
+        refl
     ; boundaries =
         canonicalHEPDataResidualBridgeAuthorityGateBoundaries
     ; boundariesAreCanonical =
@@ -300,6 +312,7 @@ canonicalHEPDataResidualBridgeAuthorityGate =
     ; gateInstructions =
         "Accept only a full residual receipt chain or the first missing typed residual receipt diagnostic"
         ∷ "Require selected residual observable, baseline/invariance model, residual definition, covariance/calibration, theorem-side projection, defect projection, comparison law, accepted authority route, and non-collapse witness"
+        ∷ "For W4/W5 Drell-Yan use, covariance/calibration includes unit calibration, PDF/luminosity convention, HEPData bin/covariance, chi2/dof reproducibility, scale-setting boundary, no-free-fit audit, and no-posterior-tuning freeze audit"
         ∷ "Reject raw saturated values, local artifact paths, unchecksumed selections, missing authority routes, and answers without a non-collapse witness"
         ∷ "Treat the residual bridge as a receipt filter only; do not transport local data into theorem authority"
         ∷ "Do not construct an accepted authority token or promote W3/W4/W5/W8"

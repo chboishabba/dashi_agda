@@ -13,6 +13,19 @@ script surfaces. It contains both authoritative theorem modules and many
 supporting documents that record current status, planning, experiments, or
 empirical packaging.
 
+For the repo-level simulator orientation, read `Docs/SimulatorRoadmap.md`.
+It is the entrypoint for interpreting DASHI as a receipt-gated simulator
+scaffold: objects inherit parent lane structure, speak the unified carrier
+grammar, and only become quantitative through explicit receipts and
+fail-closed promotion guards.
+The first executable simulator slice is the bounded stellar-composition proxy
+diagnostic in `scripts/run_stellar_composition_proxy_diagnostic.py`, guarded by
+`DASHI.Unified.StellarCompositionProxyReceipt`; it does not promote stellar
+evolution or solar-instability claims.
+The repo-wide route joining plan is `Docs/UnifiedRoutesLanePlan.md`; it extends
+the same carrier -> observable -> receipt -> guard pattern across physics,
+empirical, biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
+
 Use claim-level language carefully:
 
 - `canonical` means authoritative for current repo claims.
@@ -40,6 +53,9 @@ Use claim-level language carefully:
 Read these as authoritative or near-authoritative:
 
 - `README.md` for current repo-facing orientation and diagram pointers.
+- `Docs/SimulatorRoadmap.md` for the simulator scaffold, first quantitative
+  slice, and cross-scale matter prediction boundary.
+- `Docs/UnifiedRoutesLanePlan.md` for the route/lane unification plan.
 - `architecture.md` for the canonical theorem route and diagram entrypoints.
 - `Docs/CanonicalProofSpine.md` for the single proof spine to cite in docs and
   imports.
@@ -177,12 +193,14 @@ Module-to-doc relation:
 ## Recommended Reading Order For Engineers
 
 1. `README.md`
-2. `architecture.md`
-3. `Docs/CanonicalProofSpine.md`
-4. `Docs/AgdaValidationTargets.md`
-5. the canonical spine modules themselves, in order
-6. `Docs/ClosureContractStatus.md` for the current seam boundary
-7. only then read lane-specific docs in `Docs/` that match the subsystem you
+2. `Docs/SimulatorRoadmap.md`
+3. `Docs/UnifiedMathLanguageSpine.md`
+4. `architecture.md`
+5. `Docs/CanonicalProofSpine.md`
+6. `Docs/AgdaValidationTargets.md`
+7. the canonical spine modules themselves, in order
+8. `Docs/ClosureContractStatus.md` for the current seam boundary
+9. only then read lane-specific docs in `Docs/` that match the subsystem you
    are touching
 
 If you are editing code rather than auditing it:

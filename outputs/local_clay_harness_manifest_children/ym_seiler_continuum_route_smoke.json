@@ -1,0 +1,114 @@
+{
+  "blockers": [
+    "proxy rows are deterministic diagnostics only, not theorem carriers",
+    "depth-limit no-spectral-pollution proof is absent",
+    "flat 4D Euclidean continuum construction is absent",
+    "OS/Wightman reconstruction is absent"
+  ],
+  "gap_cases": [
+    {
+      "c2_constant": 0.8,
+      "casimir_minimum": 0.25,
+      "continuum_proxy_lower_bound": 0.29500000000000004,
+      "depth": 2,
+      "finite_gap_lower_bound": 0.61,
+      "holonomy_floor": 0.19,
+      "monotone_vs_previous": true,
+      "positive_after_budget": true,
+      "truncation_error_budget": 0.18
+    },
+    {
+      "c2_constant": 0.8,
+      "casimir_minimum": 0.25,
+      "continuum_proxy_lower_bound": 0.28250000000000003,
+      "depth": 3,
+      "finite_gap_lower_bound": 0.555,
+      "holonomy_floor": 0.165,
+      "monotone_vs_previous": true,
+      "positive_after_budget": true,
+      "truncation_error_budget": 0.105
+    },
+    {
+      "c2_constant": 0.8,
+      "casimir_minimum": 0.25,
+      "continuum_proxy_lower_bound": 0.271,
+      "depth": 4,
+      "finite_gap_lower_bound": 0.512,
+      "holonomy_floor": 0.142,
+      "monotone_vs_previous": true,
+      "positive_after_budget": true,
+      "truncation_error_budget": 0.072
+    },
+    {
+      "c2_constant": 0.8,
+      "casimir_minimum": 0.25,
+      "continuum_proxy_lower_bound": 0.263,
+      "depth": 5,
+      "finite_gap_lower_bound": 0.483,
+      "holonomy_floor": 0.126,
+      "monotone_vs_previous": true,
+      "positive_after_budget": true,
+      "truncation_error_budget": 0.051
+    },
+    {
+      "c2_constant": 0.8,
+      "casimir_minimum": 0.25,
+      "continuum_proxy_lower_bound": 0.257,
+      "depth": 6,
+      "finite_gap_lower_bound": 0.462,
+      "holonomy_floor": 0.114,
+      "monotone_vs_previous": true,
+      "positive_after_budget": true,
+      "truncation_error_budget": 0.039
+    }
+  ],
+  "metrics": {
+    "all_gap_rows_positive_after_budget": true,
+    "case_count": 5,
+    "continuum_proxy_floor": 0.257,
+    "monotone_proxy_profile": true,
+    "no_spectral_pollution_proxy_passes": false,
+    "spectral_pollution_failure_count": 1
+  },
+  "pollution_cases": [
+    {
+      "continuum_proxy_lower_bound": 0.257,
+      "explanation": "The sequence is treated as converging to the vacuum, so it is not a pollution witness.",
+      "holonomy_energy": 0.0,
+      "name": "vacuum_convergent_sequence",
+      "near_vacuum_without_vacuum_convergence": false,
+      "orthogonal_energy": 0.0,
+      "sequence_mass_escape": 0.0,
+      "spectral_pollution_detected": false
+    },
+    {
+      "continuum_proxy_lower_bound": 0.257,
+      "explanation": "A positive holonomy barrier and positive orthogonal energy keep the sequence above the proxy floor.",
+      "holonomy_energy": 0.118,
+      "name": "holonomy_barrier_sequence",
+      "near_vacuum_without_vacuum_convergence": false,
+      "orthogonal_energy": 0.231,
+      "sequence_mass_escape": 0.014,
+      "spectral_pollution_detected": false
+    },
+    {
+      "continuum_proxy_lower_bound": 0.257,
+      "explanation": "This synthetic row is flagged as a failure mode because the nonvacuum sequence falls below the proxy barrier.",
+      "holonomy_energy": 0.009,
+      "name": "would_be_pollution_sequence",
+      "near_vacuum_without_vacuum_convergence": true,
+      "orthogonal_energy": 0.041,
+      "sequence_mass_escape": 0.031,
+      "spectral_pollution_detected": true
+    }
+  ],
+  "route": "finite gap lower bounds + spectral-pollution barrier proxy -> non-promoting continuum diagnostic",
+  "status": "fail_closed_boundary_proxy",
+  "theorem_flags": {
+    "continuum_mass_gap_promoted": false,
+    "no_spectral_pollution_proved_here": false,
+    "os_wightman_reconstruction_proved_here": false,
+    "promotion": false,
+    "seiler_1982_compatibility_proved_here": false
+  }
+}

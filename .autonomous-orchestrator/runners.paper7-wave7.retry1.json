@@ -1,0 +1,35 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3200,
+    "once": true,
+    "timeout_seconds": 3000
+  },
+  "rejected_only": true,
+  "retry_budget": 1,
+  "runners": {
+    "paper7-wave7-gate3-manager-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave7-gate3-manager`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Inhabit allSlotCoefficientAwareResidualArithmeticField for all-slot coefficient-aware SU(3) Jacobi closure.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate3-yang-mills",
+      "parent": "paper7-root"
+    },
+    "paper7-wave7-gate4-manager-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave7-gate4-manager`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: After discharging the supported-unit stress-energy tensor symmetry law, the next exact blockers are tensor finite-support and carrier-embedding compatibility.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate4-factorvec-gr",
+      "parent": "paper7-root"
+    },
+    "paper7-wave7-gate5-manager-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave7-gate5-manager`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Promote quotientInnerProductWellDefinedness from selected finite progress to a global physical witness and then inhabit acceptedHilbertCompletionField.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate5-hilbert-stone",
+      "parent": "paper7-root"
+    },
+    "paper7-wave7-gate6-manager-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave7-gate6-manager`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Construct an arbitrary-sector carrier predicate before arbitrary-sector global foreign-lane identity; current classifier is a structural constant-maxwell candidate only.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate6-dhr-aqft",
+      "parent": "paper7-root"
+    }
+  },
+  "source_runner_file": ".autonomous-orchestrator/runners.paper7-wave7.json",
+  "source_wave_id": "paper7-wave7",
+  "strict_implementation": true
+}

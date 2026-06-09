@@ -1,0 +1,213 @@
+{
+  "all_required_receipt_anchors_present": true,
+  "audit_anchor_aliases": [
+    "canonicalNSSprint89PointwiseH1TailMechanismReceipt",
+    "sprint88H1TailDecisionInheritedClosed",
+    "pointwiseH1TailMechanismClosed",
+    "dangerShellTailSmallnessClosed",
+    "dangerShellAbsorptionConditionClosed",
+    "clayNavierStokesPromoted"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "clay_true_detected": false,
+  "coefficient_independence_classified": true,
+  "complete": false,
+  "contract": "ns_sprint89_pointwise_h1_tail_mechanism_audit",
+  "danger_shell_absorption_condition_closed": false,
+  "danger_shell_tail_smallness_closed": false,
+  "expected_gates": {
+    "ClayNavierStokesPromoted": false,
+    "CoefficientIndependenceClassified": true,
+    "IndependentEpsilonCoefficientClosed": false,
+    "LocalEnstrophyDangerShellDissipationClosed": false,
+    "LocalEnstrophyDangerShellDissipationMechanismClassified": true,
+    "NoSelfUseOfAbsorptionClassified": true,
+    "NoSelfUseOfAbsorptionClosed": true,
+    "PointwiseH1TailWithIndependentEpsilonCoefficientClosed": false,
+    "TimeIntegratedToPointwiseConversionClassified": true,
+    "TimeIntegratedToPointwiseConversionClosed": false
+  },
+  "fail_closed": true,
+  "forbidden_term_count": 0,
+  "forbidden_terms_detected": [],
+  "gate_results": [
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "localEnstrophyDangerShellDissipationMechanismClassified",
+      "gate_id": "G1",
+      "gate_name": "LocalEnstrophyDangerShellDissipationMechanismClassified",
+      "next_required_input": "local enstrophy danger-shell dissipation mechanism is classified",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "timeIntegratedToPointwiseConversionClassified",
+      "gate_id": "G2",
+      "gate_name": "TimeIntegratedToPointwiseConversionClassified",
+      "next_required_input": "time-integrated to pointwise conversion mechanism is classified",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "coefficientIndependenceClassified",
+      "gate_id": "G3",
+      "gate_name": "CoefficientIndependenceClassified",
+      "next_required_input": "coefficient independence mechanism is classified",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "noSelfUseOfAbsorptionClassified",
+      "gate_id": "G4",
+      "gate_name": "NoSelfUseOfAbsorptionClassified",
+      "next_required_input": "no self-use of absorption is classified as a governance constraint",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": false,
+      "clay_promotion": false,
+      "expected_value": false,
+      "field_name": "localEnstrophyDangerShellDissipationClosed",
+      "gate_id": "G5",
+      "gate_name": "LocalEnstrophyDangerShellDissipationClosed",
+      "next_required_input": "derive local enstrophy danger-shell dissipation before closing the mechanism",
+      "passed": true,
+      "status": "OPEN_FAIL_CLOSED"
+    },
+    {
+      "actual_value": false,
+      "clay_promotion": false,
+      "expected_value": false,
+      "field_name": "timeIntegratedToPointwiseConversionClosed",
+      "gate_id": "G6",
+      "gate_name": "TimeIntegratedToPointwiseConversionClosed",
+      "next_required_input": "derive non-circular time localization before closing the mechanism",
+      "passed": true,
+      "status": "OPEN_FAIL_CLOSED"
+    },
+    {
+      "actual_value": false,
+      "clay_promotion": false,
+      "expected_value": false,
+      "field_name": "independentEpsilonCoefficientClosed",
+      "gate_id": "G7",
+      "gate_name": "IndependentEpsilonCoefficientClosed",
+      "next_required_input": "derive an epsilon<1 coefficient independent of the target absorption inequality",
+      "passed": true,
+      "status": "OPEN_FAIL_CLOSED"
+    },
+    {
+      "actual_value": true,
+      "clay_promotion": false,
+      "expected_value": true,
+      "field_name": "noSelfUseOfAbsorptionClosed",
+      "gate_id": "G8",
+      "gate_name": "NoSelfUseOfAbsorptionClosed",
+      "next_required_input": "enforce that absorption is not used to prove its own coefficient",
+      "passed": true,
+      "status": "CLOSED_RECORDED"
+    },
+    {
+      "actual_value": false,
+      "clay_promotion": false,
+      "expected_value": false,
+      "field_name": "pointwiseH1TailWithIndependentEpsilonCoefficientClosed",
+      "gate_id": "G9",
+      "gate_name": "PointwiseH1TailWithIndependentEpsilonCoefficientClosed",
+      "next_required_input": "close both the pointwise H1 tail and independent epsilon coefficient",
+      "passed": true,
+      "status": "OPEN_FAIL_CLOSED"
+    },
+    {
+      "actual_value": false,
+      "clay_promotion": false,
+      "expected_value": false,
+      "field_name": "clayNavierStokesPromoted",
+      "gate_id": "G10",
+      "gate_name": "ClayNavierStokesPromoted",
+      "next_required_input": "keep Clay Navier-Stokes promotion false",
+      "passed": true,
+      "status": "FALSE_NO_PROMOTION"
+    },
+    {
+      "actual_value": 0,
+      "clay_promotion": false,
+      "expected_value": 0,
+      "field_name": "forbidden_terms",
+      "gate_id": "G11",
+      "gate_name": "NoPostulateTodoStubFutureProofLanguage",
+      "next_required_input": "remove postulate/TODO/stub/future proof language from Sprint89",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "gate_table": "ns_sprint89_pointwise_h1_tail_mechanism_gate_table.csv",
+  "independent_epsilon_coefficient_closed": false,
+  "local_enstrophy_danger_shell_dissipation_closed": false,
+  "local_enstrophy_danger_shell_dissipation_mechanism_classified": true,
+  "no_self_use_of_absorption_classified": true,
+  "no_self_use_of_absorption_closed": true,
+  "open_obligations": [
+    "materialize the Sprint 89 NS pointwise H1-tail candidate mechanism receipt if missing",
+    "record the Sprint 88 H1-tail decision boundary",
+    "derive local enstrophy danger-shell dissipation non-circularly",
+    "derive time-integrated to pointwise localization non-circularly",
+    "derive an independent epsilon<1 coefficient",
+    "keep pointwiseH1TailWithIndependentEpsilonCoefficientClosed false until both inputs close",
+    "keep clayNavierStokesPromoted false"
+  ],
+  "pointwise_h1_tail_mechanism_closed": false,
+  "pointwise_h1_tail_with_independent_epsilon_coefficient_closed": false,
+  "pointwise_h1_tail_with_independent_epsilon_true_detected": false,
+  "receipt_path": "DASHI/Physics/Closure/NSSprint89PointwiseH1TailCandidateMechanismReceipt.agda",
+  "report": "ns_sprint89_pointwise_h1_tail_mechanism_report.md",
+  "route_decision": "fail_closed",
+  "source_results": [
+    {
+      "audit_anchor_aliases": "canonicalNSSprint89PointwiseH1TailMechanismReceipt; sprint88H1TailDecisionInheritedClosed; pointwiseH1TailMechanismClosed; dangerShellTailSmallnessClosed; dangerShellAbsorptionConditionClosed; clayNavierStokesPromoted",
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint89PointwiseH1TailCandidateMechanismReceipt.agda",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint89PointwiseH1TailCandidateMechanismReceipt; canonicalNSSprint89H1TailCandidateMechanismReceipt; NSSprint89PointwiseH1TailCandidateMechanismReceipt; PointwiseH1TailWithIndependentEpsilonCoefficient; canonicalCandidateSubMechanisms; canonicalCandidateMechanismClassifications; canonicalFailClosedBoundaries; localEnstrophyDangerShellDissipationMechanismClassified; timeIntegratedToPointwiseConversionClassified; coefficientIndependenceClassified; noSelfUseOfAbsorptionClassified; localEnstrophyDangerShellDissipationClosed; timeIntegratedToPointwiseConversionClosed; independentEpsilonCoefficientClosed; noSelfUseOfAbsorptionClosed; pointwiseH1TailWithIndependentEpsilonCoefficientClosed; sprint88DangerShellAbsorptionStillOpen; clayNavierStokesPromoted",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "Sprint89PointwiseH1TailCandidateMechanismReceipt"
+    },
+    {
+      "audit_anchor_aliases": "none",
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint88DangerShellH1TailSmallnessDecisionReceipt.agda",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint88H1TailSmallnessDecisionReceipt",
+      "source_id": "S2",
+      "status": "PASS",
+      "surface_name": "Sprint88H1TailSmallnessDecisionReceipt"
+    },
+    {
+      "audit_anchor_aliases": "none",
+      "missing_anchors": "none",
+      "path": "scripts/ns_sprint88_tail_source_classifier.py",
+      "present_in_repo": true,
+      "required_anchors": "PointwiseH1TailWithIndependentEpsilonCoefficient",
+      "source_id": "S3",
+      "status": "PASS",
+      "surface_name": "Sprint88TailSourceClassifier"
+    }
+  ],
+  "source_table": "ns_sprint89_pointwise_h1_tail_mechanism_source_table.csv",
+  "sprint88_h1_tail_decision_inherited_closed": true,
+  "time_integrated_to_pointwise_conversion_classified": true,
+  "time_integrated_to_pointwise_conversion_closed": false
+}

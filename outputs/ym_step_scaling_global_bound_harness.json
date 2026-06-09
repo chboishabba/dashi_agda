@@ -1,0 +1,10 @@
+{
+  "b1": 0.04643887583607148,
+  "exp_bound": 2248844418.945223,
+  "global_bound_holds": true,
+  "n": 128,
+  "promotion": false,
+  "ratio_bound": 562211104.7363057,
+  "relative_drift": -6.1e-05,
+  "running_g0_sq": 0.16823189320038678
+}

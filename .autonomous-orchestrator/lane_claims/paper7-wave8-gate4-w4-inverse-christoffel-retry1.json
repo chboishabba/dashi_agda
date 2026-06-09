@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave8-gate4-w4-inverse-christoffel-retry1.json",
+  "lane": "paper7-gate4-factorvec-gr/InverseChristoffel",
+  "lane_claim": "Retry for rejected manager lane `paper7-wave8-gate4-w4-inverse-christoffel`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Local InverseChristoffel lane implemented and validated; global non-flat Levi-Civita/Christoffel-from-metric promotion remains upstream and the next metric primitive queue head is Riemann.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+  "orchestrator_id": "paper7-wave8-gate4-w4-inverse-christoffel-retry1",
+  "parent_orchestrator_id": "paper7-wave8-gate4-manager",
+  "status_file": "status.paper7-wave8-gate4-w4-inverse-christoffel-retry1.json",
+  "timestamp": "2026-05-19T16:05:58Z"
+}

@@ -1,0 +1,134 @@
+{
+  "after_sprint": 139,
+  "all_rows_have_absent_inputs": true,
+  "artifact_complete": true,
+  "assembly_remains_conditional": true,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "compatibility_inputs_absent": {
+    "commutator_domination_margin_log_loss": [
+      "pointwise favorable sign theorem",
+      "quantitative kappa_comm margin",
+      "log-aware domination inequality",
+      "radial-gradient coupling bound compatible with diffusion and strain"
+    ],
+    "concavity_margin": [
+      "global kappa_concavity constant",
+      "proof that the margin holds at all primary and secondary crossing points",
+      "nonlocal boundary/annulus sign theorem",
+      "time persistence of the margin through the barrier window"
+    ],
+    "conditional_assembly_compatibility": [
+      "simultaneous satisfiability proof for all constants",
+      "cross-window compatibility proof",
+      "strict combined inequality with numerical or symbolic constants",
+      "full Navier-Stokes Clay-class promotion theorem"
+    ],
+    "diffusion_strain_budget": [
+      "closed diffusion sign budget with constants",
+      "closed strain budget with time integral",
+      "combined residual margin after log losses",
+      "operator boundary leakage estimate for the chosen barrier window"
+    ],
+    "secondary_peak_exclusion_radius_window": [
+      "scale-uniform R_excl",
+      "scale-uniform T_excl",
+      "proof no shoulder or secondary maximum forms",
+      "compatibility proof that all first crossings lie inside the concavity margin region"
+    ]
+  },
+  "compatibility_inputs_required": {
+    "commutator_domination_margin_log_loss": [
+      "strict domination margin kappa_comm > 0 for max(-(partial_z u^r) partial_r u1, 0)",
+      "explicit Biot-Savart log-loss exponent or cancellation theorem",
+      "scale relation between kappa_comm and kappa_concavity",
+      "radial-gradient control for partial_r u1 on the active crossing set"
+    ],
+    "concavity_margin": [
+      "strict concavity or dominance constant kappa_concavity > 0",
+      "scale/window over which partial_z^2 psi1 has the required sign",
+      "lower bound matching u1 amplitude at every first v crossing",
+      "boundary and annular compatibility for the nonlocal psi1 kernel"
+    ],
+    "conditional_assembly_compatibility": [
+      "kappa_concavity, R_excl, T_excl, kappa_comm, log-loss budget, diffusion budget, and strain budget",
+      "single crossing set shared by all assumptions",
+      "strict inequality showing total favorable margin exceeds all adverse terms",
+      "route-to-global regularity bridge separated from Clay promotion"
+    ],
+    "diffusion_strain_budget": [
+      "diffusion lower or sign budget at first positive v maximum",
+      "strain coefficient upper budget for terms proportional to v",
+      "time-integrable strain bound with any log loss included",
+      "strict residual margin after concavity, commutator, diffusion, and strain are combined"
+    ],
+    "secondary_peak_exclusion_radius_window": [
+      "exclusion radius R_excl covering every off-primary positive maximum",
+      "time window T_excl matching the concavity and commutator windows",
+      "zero-count or shape-persistence theorem for v=partial_z u1",
+      "axis, boundary, and annular leakage controls for the excluded region"
+    ]
+  },
+  "conditional_assembly_only": true,
+  "constant_compatibility_closed": false,
+  "constants_available": false,
+  "contract": "ns_sprint140_constant_compatibility_ledger",
+  "control_card": {
+    "C": "Stdlib Python emitter with dataclass rows, stable SHA-256 hashes, validation, JSON, CSV, and Markdown outputs.",
+    "F": "Missing rows, absent-input omissions, hidden constant closure, global barrier closure, proof closure, or promotion fails validation.",
+    "G": "Validation passes only when constants are unavailable, compatibility/proof/global barrier closure are false, and Clay promotion is false.",
+    "L": "Sprint 138/139 blockers -> constant requirements -> absent inputs -> conditional assembly only -> no promotion.",
+    "O": "Worker 3 owns only scripts/ns_sprint140_constant_compatibility_ledger.py and outputs/ns_sprint140_constant_compatibility_ledger/.",
+    "P": "Use this ledger to state the assumptions needed for a future conditional route assembly, not as a regularity proof.",
+    "R": "Emit a deterministic ledger for constant compatibility across concavity margin, secondary peak exclusion radius/window, commutator domination margin/log loss, and diffusion/strain budget.",
+    "S": "Every analytic compatibility input is required but absent; the assembly remains conditional and fail-closed."
+  },
+  "exit_code": 0,
+  "fail_closed": true,
+  "full_clay_ns_solved": false,
+  "global_barrier_closed": false,
+  "global_proof": false,
+  "global_proof_closed": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "parent_route": "ConditionalRegularityAssembly",
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "proof_claimed": false,
+  "proof_closed": false,
+  "required_row_ids": [
+    "commutator_domination_margin_log_loss",
+    "concavity_margin",
+    "conditional_assembly_compatibility",
+    "diffusion_strain_budget",
+    "secondary_peak_exclusion_radius_window"
+  ],
+  "route_decision": "constant_compatibility_conditional_fail_closed",
+  "row_count": 5,
+  "row_hashes": {
+    "commutator_domination_margin_log_loss": "0547b5d582a820a993c38e5fc1a5a384f1bb990eddedff18adf017909bad7352",
+    "concavity_margin": "fd2867315417e43f0e6aa07b2d6f537d3369d57e1e015282d8013839c181478b",
+    "conditional_assembly_compatibility": "e7917696a524756b13e4793d0f5bd4b7da3a890bde3e478e9dc913d2f3ebc78d",
+    "diffusion_strain_budget": "5f0ea38d0aa5a452ad9f03d0c0edf45cc50602b9cf556c6940bce5c2de2da289",
+    "secondary_peak_exclusion_radius_window": "0ec5e68da008db6236f40d322b3501c2caed25cfcc24a4f0053624fb9dcca340"
+  },
+  "rows_hash": "3d7ed4ef8aedbe29050cd4d361ff8b5016f35afeb507a053d9c7e920af077911",
+  "source_artifacts": {
+    "sprint138_global_concavity": "outputs/ns_sprint138_global_concavity_blocker/ns_sprint138_global_concavity_blocker_summary.json",
+    "sprint138_secondary_peak": "outputs/ns_sprint138_secondary_peak_exclusion/ns_sprint138_secondary_peak_exclusion_summary.json",
+    "sprint138_transport_commutator": "outputs/ns_sprint138_transport_commutator_budget/ns_sprint138_transport_commutator_budget_summary.json",
+    "sprint139_commutator_sign": "outputs/ns_sprint139_commutator_sign_route/ns_sprint139_commutator_sign_route_summary.json",
+    "sprint139_route_fork": "outputs/ns_sprint139_barrier_route_fork_classifier/ns_sprint139_barrier_route_fork_classifier_summary.json"
+  },
+  "source_summary_hashes": {
+    "sprint138_global_concavity": "53c1ce698f08ddb7616562232587624de1fb1b6c5241439bb504c23a3067f230",
+    "sprint138_secondary_peak": "6768c7bf5223a5099336116bfa3e77119cd63962731421e3419b730c00eba1b9",
+    "sprint138_transport_commutator": "de558ab39204768885c8a4ce06835a8ead544d0b06395dce397d3075b1bb957c",
+    "sprint139_commutator_sign": "73c1eae285b50c095877ed41128083bb99eb7726b3c733415f212b6431f9b78c",
+    "sprint139_route_fork": "9bdb653546f25be25edc99c7e56c6e30b10259241cde594218a5925764828e14"
+  },
+  "sprint": 140,
+  "summary_payload_hash_without_self": "69c4cb41235fdd683973baf22456258cbf4f0b49961a5b7a906b29023f92f39f",
+  "unconditional_proof": false
+}

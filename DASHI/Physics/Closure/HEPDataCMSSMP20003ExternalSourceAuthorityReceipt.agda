@@ -38,6 +38,8 @@ data CMSSMP20003SourceAuthorityField : Set where
     CMSSMP20003SourceAuthorityField
   rejectedWrongPaperDOIPointer :
     CMSSMP20003SourceAuthorityField
+  integratedLuminosityPointer :
+    CMSSMP20003SourceAuthorityField
   primaryPhistarTablePointer :
     CMSSMP20003SourceAuthorityField
   primaryPhistarCovariancePointer :
@@ -61,6 +63,7 @@ canonicalCMSSMP20003SourceAuthorityFields =
   ∷ epjcPublicationPointer
   ∷ canonicalPaperDOIPointer
   ∷ rejectedWrongPaperDOIPointer
+  ∷ integratedLuminosityPointer
   ∷ primaryPhistarTablePointer
   ∷ primaryPhistarCovariancePointer
   ∷ electronResponseMatrixPointer
@@ -181,6 +184,7 @@ canonicalCMSSMP20003ExternalSourceAuthorityReceipt =
         ∷ "HEPData submission DOI = 10.17182/hepdata.115656.v1"
         ∷ "analysis = CMS-SMP-20-003 / CERN-EP-2022-053"
         ∷ "arXiv = 2205.04897 [hep-ex]"
+        ∷ "source luminosity binding: L_int = 36.3 fb^-1 for CMS-SMP-20-003 / ins2079374; do not substitute 137 fb^-1"
         ∷ []
     ; publicationIdentity =
         "experiment = CMS at LHC"
@@ -188,6 +192,7 @@ canonicalCMSSMP20003ExternalSourceAuthorityReceipt =
         ∷ "canonical paper DOI = 10.1140/epjc/s10052-023-11631-7"
         ∷ "rejected wrong paper DOI pointer = 10.1140/epjc/s10052-023-11680-y"
         ∷ "HEPData collection DOI = 10.17182/hepdata.115656.v1"
+        ∷ "integrated luminosity = 36.3 fb^-1"
         ∷ []
     ; primaryDataAndCovariancePointers =
         "primary observable table = phistar mass 50-76"

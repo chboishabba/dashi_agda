@@ -1,0 +1,34 @@
+{
+  "contract": "ns_sprint158_assumption_scope_matrix",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_assumption_scope_matrix/ns_sprint158_assumption_scope_matrix_manifest.json",
+      "sha256": "0750d73d461de7cfe3e2dd1e1fd62cf635f40faba67a45001159e9f4cc0de941"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_assumption_scope_matrix/ns_sprint158_assumption_scope_matrix.md",
+      "sha256": "dc5525beea3a586e08918d063f5d66169f5c6cd23bc1dadcee1127b4bf019069"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_assumption_scope_matrix/ns_sprint158_assumption_scope_matrix_rows.csv",
+      "sha256": "7bd9348b0e43a0e404ab647c6bf5095e12741b294c3ebc53aa1663eeb3e6f1e7"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_assumption_scope_matrix/ns_sprint158_assumption_scope_matrix_rows.json",
+      "sha256": "afe98070a371f04afa0a48eaa88764151e81adfa9ff20b9f545cdfb3f2d76bfc"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint158_assumption_scope_matrix/ns_sprint158_assumption_scope_matrix_summary.json",
+      "sha256": "3eabb9016f457e8cec597c058a13baa132a59cd908b6c5e685c070c0d2f4039b"
+    }
+  },
+  "lane": 3,
+  "manifest_hash": "e4f1fdb60e4d7cbb10c8bd870d5e77e79b811e2eee2aa540daf1df735e7525f2",
+  "sprint": 158,
+  "validation_passed": true
+}

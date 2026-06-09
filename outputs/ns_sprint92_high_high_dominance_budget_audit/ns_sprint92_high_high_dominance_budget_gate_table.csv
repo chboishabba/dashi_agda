@@ -1,0 +1,8 @@
+gate_id,gate_name,passed,status,next_required_input
+G1,ExistingSummariesPresent,True,PASS,all referenced sprint audit summaries are present
+G2,AllowedNonCircularSource,True,PASS,enumerate at least one allowed source with no forbidden dependency
+G3,AllowedTargetDominanceClosure,False,FAIL_CLOSED,close HighHighDominanceAtDangerShell or DangerShellDissipationDominatesInflux
+G4,PointwiseH1TailForTargetClosure,False,FAIL_CLOSED,supply pointwise H1 tail for the target dominance source
+G5,IndependentCoefficientForTargetClosure,False,FAIL_CLOSED,supply coefficient independent of absorption and forbidden continuation inputs
+G6,SameSourceEvidenceRule,False,FAIL_CLOSED,"one allowed non-circular source must supply closure, pointwise H1 tail, and coefficient"
+G7,ForbiddenDependencyRejection,True,PASS,"reject target absorption, BKM, Serrin, H1 continuation, theta preservation, desired conclusion, epsilon_from_absorption"

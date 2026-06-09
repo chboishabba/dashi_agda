@@ -1,0 +1,18 @@
+{
+  "source": "synthetic_3d_smoke",
+  "meta": {
+    "source": "synthetic 3D smoke trace",
+    "dt": 1.0,
+    "nu0": 0.01
+  },
+  "row_count": 12,
+  "bridge_budget_row_count": 12,
+  "outputs": {
+    "table": "Docs/Images/clay-analytic-sprint/sprint40_bridge_budget/synthetic_3d_smoke/ns_diagnostic_table.csv",
+    "bridge_budget_table": "Docs/Images/clay-analytic-sprint/sprint40_bridge_budget/synthetic_3d_smoke/ns_bridge_budget_table.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint40_bridge_budget/synthetic_3d_smoke/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint40_bridge_budget/synthetic_3d_smoke/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFortyTwoNSDiagnosticHarnessReceipt",
+  "evidence_boundary": "diagnostic harness only; no Navier-Stokes theorem or Clay promotion"
+}

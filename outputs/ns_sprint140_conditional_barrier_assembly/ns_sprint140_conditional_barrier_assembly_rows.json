@@ -1,0 +1,260 @@
+[
+  {
+    "assumption_id": "GlobalConcavityOfPsi1",
+    "assumption_name": "GlobalConcavityOfPsi1",
+    "assumption_proved_here": false,
+    "assumption_required": true,
+    "bkm_finite_conditional": false,
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_inputs_absent": true,
+    "conditional_not_full_clay": true,
+    "conditional_route_regular": false,
+    "consequence": "The source term 2 u1 partial_z^2 psi1 contributes a favorable or dominated term in the conditional barrier ledger.",
+    "constant_requirements": [
+      "concavity_margin kappa_psi > 0",
+      "valid on the complete monitored crossing set",
+      "boundary and annular source compatibility"
+    ],
+    "constants_compatible_proved_here": false,
+    "constants_compatible_required": true,
+    "dependency_ids": [],
+    "full_clay_ns_solved": false,
+    "layer": "assumption",
+    "missing_input": [
+      "compatible constants required but absent/not proved here",
+      "analytic assumption input remains external to this emitter"
+    ],
+    "role": "barrier_source_sign",
+    "row_hash": "4dfe337d44bd5df8963774cc33f86b2740806edcdd9b7abcfcaa911b66729877",
+    "row_id": "GlobalConcavityOfPsi1",
+    "statement": "Assume partial_z^2 psi1 supplies the global sign or dominance margin needed by the v-barrier at every admissible first positive maximum on the symmetric Hou-Luo monitored route.",
+    "status": "assumed_not_proved",
+    "unconditional_global_axial_monotonicity": false
+  },
+  {
+    "assumption_id": "SecondaryPeakExclusion",
+    "assumption_name": "SecondaryPeakExclusion",
+    "assumption_proved_here": false,
+    "assumption_required": true,
+    "bkm_finite_conditional": false,
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_inputs_absent": true,
+    "conditional_not_full_clay": true,
+    "conditional_route_regular": false,
+    "consequence": "The maximum-principle contradiction only needs to be checked on the primary symmetric Hou-Luo barrier route.",
+    "constant_requirements": [
+      "single monitored crossing region remains exhaustive",
+      "shape persistence time window covers the route interval",
+      "axis and boundary crossing exclusions share the same scale"
+    ],
+    "constants_compatible_proved_here": false,
+    "constants_compatible_required": true,
+    "dependency_ids": [],
+    "full_clay_ns_solved": false,
+    "layer": "assumption",
+    "missing_input": [
+      "compatible constants required but absent/not proved here",
+      "analytic assumption input remains external to this emitter"
+    ],
+    "role": "crossing_set_control",
+    "row_hash": "d6d224a14480bbec18a090c98e3151c527a4183cea3654b3256da26beae4bc2f",
+    "row_id": "SecondaryPeakExclusion",
+    "statement": "Assume no secondary axial peak, shoulder, or off-route positive local maximum of v forms outside the primary barrier region during the monitored time interval.",
+    "status": "assumed_not_proved",
+    "unconditional_global_axial_monotonicity": false
+  },
+  {
+    "assumption_id": "TransportCommutatorDominationForVBarrier",
+    "assumption_name": "TransportCommutatorDominationForVBarrier",
+    "assumption_proved_here": false,
+    "assumption_required": true,
+    "bkm_finite_conditional": false,
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_inputs_absent": true,
+    "conditional_not_full_clay": true,
+    "conditional_route_regular": false,
+    "consequence": "The nonhomogeneous radial commutator cannot create the first positive v crossing under the conditional ledger.",
+    "constant_requirements": [
+      "commutator_margin kappa_comm > 0",
+      "log-aware strain factor absorbed by the route budget",
+      "radial-gradient coupling controlled on the crossing set"
+    ],
+    "constants_compatible_proved_here": false,
+    "constants_compatible_required": true,
+    "dependency_ids": [],
+    "full_clay_ns_solved": false,
+    "layer": "assumption",
+    "missing_input": [
+      "compatible constants required but absent/not proved here",
+      "analytic assumption input remains external to this emitter"
+    ],
+    "role": "transport_commutator_budget",
+    "row_hash": "acbf5abeac81ef36f3aac28b36fec1e7c18ccf91fadf32c6d3f7429ad82aa777",
+    "row_id": "TransportCommutatorDominationForVBarrier",
+    "statement": "Assume the positive part of -(partial_z u^r) partial_r u1 is dominated by the available v-barrier margin at every admissible first positive maximum, with any Biot-Savart logarithmic loss included in the constants.",
+    "status": "assumed_not_proved",
+    "unconditional_global_axial_monotonicity": false
+  },
+  {
+    "assumption_id": "CompatibleBarrierConstants",
+    "assumption_name": "CompatibleBarrierConstants",
+    "assumption_proved_here": false,
+    "assumption_required": true,
+    "bkm_finite_conditional": false,
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_inputs_absent": true,
+    "conditional_not_full_clay": true,
+    "conditional_route_regular": false,
+    "consequence": "The three assumptions can be composed into a single conditional theorem interface only when their constants are jointly satisfiable.",
+    "constant_requirements": [
+      "kappa_psi - kappa_comm - kappa_shape_loss > 0",
+      "localization radius and time window shared by all assumptions",
+      "BKM monitor constant finite under the same route parameters",
+      "no assumption uses constants outside the symmetric route class"
+    ],
+    "constants_compatible_proved_here": false,
+    "constants_compatible_required": true,
+    "dependency_ids": [
+      "GlobalConcavityOfPsi1",
+      "SecondaryPeakExclusion",
+      "TransportCommutatorDominationForVBarrier"
+    ],
+    "full_clay_ns_solved": false,
+    "layer": "interface",
+    "missing_input": [
+      "compatible constants required but absent/not proved here",
+      "analytic assumption input remains external to this emitter"
+    ],
+    "role": "constant_budget",
+    "row_hash": "927be5552b3d3c1b7ab2dcdc5e9c4ae0f0d7de3e3ddaaf2aac31c0fb5a92430a",
+    "row_id": "CompatibleBarrierConstants",
+    "statement": "Require one compatible constant ledger linking concavity, secondary-peak exclusion, commutator domination, viscosity, route localization, and BKM monitor bounds.",
+    "status": "required_interface_check_not_proved",
+    "unconditional_global_axial_monotonicity": false
+  },
+  {
+    "assumption_id": "ConditionalMonitoredRouteRegularity",
+    "assumption_name": "ConditionalMonitoredRouteRegularity",
+    "assumption_proved_here": false,
+    "assumption_required": false,
+    "bkm_finite_conditional": false,
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_inputs_absent": true,
+    "conditional_not_full_clay": true,
+    "conditional_route_regular": true,
+    "consequence": "Conditional monitored-route regularity is available as an interface theorem, not as an unconditional global theorem.",
+    "constant_requirements": [
+      "strict positive residual barrier margin",
+      "route-local parabolic regularity constants finite",
+      "maximum-principle boundary leakage excluded by assumptions"
+    ],
+    "constants_compatible_proved_here": false,
+    "constants_compatible_required": true,
+    "dependency_ids": [
+      "GlobalConcavityOfPsi1",
+      "SecondaryPeakExclusion",
+      "TransportCommutatorDominationForVBarrier",
+      "CompatibleBarrierConstants"
+    ],
+    "full_clay_ns_solved": false,
+    "layer": "conditional_consequence",
+    "missing_input": [
+      "compatible constants required but absent/not proved here",
+      "analytic assumption input remains external to this emitter"
+    ],
+    "role": "route_regularness",
+    "row_hash": "966e4d52dea91e16c7d9cce7c7789091819249d3a23750f9b8a6175ff7ee6f0a",
+    "row_id": "ConditionalMonitoredRouteRegularity",
+    "statement": "If the three analytic assumptions and the compatible constant ledger hold, then v cannot achieve a first positive crossing on the symmetric Hou-Luo monitored route, so the monitored barrier regularity statement holds conditionally.",
+    "status": "conditional_if_assumptions",
+    "unconditional_global_axial_monotonicity": false
+  },
+  {
+    "assumption_id": "ConditionalBKMFiniteForSymmetricHouLuoRoute",
+    "assumption_name": "ConditionalBKMFiniteForSymmetricHouLuoRoute",
+    "assumption_proved_here": false,
+    "assumption_required": false,
+    "bkm_finite_conditional": true,
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_inputs_absent": true,
+    "conditional_not_full_clay": true,
+    "conditional_route_regular": true,
+    "consequence": "BKM finite is emitted only as a conditional monitored-route consequence and does not solve the full Clay problem.",
+    "constant_requirements": [
+      "finite monitored vorticity envelope M_omega(T)",
+      "BKM integral bound T * M_omega(T) or sharper route envelope",
+      "monitor applies only to the symmetric Hou-Luo route interval"
+    ],
+    "constants_compatible_proved_here": false,
+    "constants_compatible_required": true,
+    "dependency_ids": [
+      "ConditionalMonitoredRouteRegularity",
+      "CompatibleBarrierConstants"
+    ],
+    "full_clay_ns_solved": false,
+    "layer": "conditional_consequence",
+    "missing_input": [
+      "compatible constants required but absent/not proved here",
+      "analytic assumption input remains external to this emitter"
+    ],
+    "role": "bkm_monitor",
+    "row_hash": "c06e2667d273144ba5f874891e29bebd23938161f0d6c290f76bf099390a47df",
+    "row_id": "ConditionalBKMFiniteForSymmetricHouLuoRoute",
+    "statement": "Under the same conditional route regularity hypotheses, the symmetric Hou-Luo monitored-route Beale-Kato-Majda integral is finite on the monitored interval.",
+    "status": "conditional_if_assumptions",
+    "unconditional_global_axial_monotonicity": false
+  },
+  {
+    "assumption_id": "ConditionalNotFullClayGuard",
+    "assumption_name": "ConditionalNotFullClayGuard",
+    "assumption_proved_here": false,
+    "assumption_required": false,
+    "bkm_finite_conditional": true,
+    "claim_closed": false,
+    "claim_proved": false,
+    "claim_proven": false,
+    "clay_navier_stokes_promoted": false,
+    "compatibility_inputs_absent": true,
+    "conditional_not_full_clay": true,
+    "conditional_route_regular": true,
+    "consequence": "Downstream consumers can import the conditional interface without interpreting it as a Clay-level theorem.",
+    "constant_requirements": [
+      "all assumptions remain explicit in exported theorem surface",
+      "no row may set unconditional_global_axial_monotonicity true",
+      "no row may set full_clay_ns_solved or clay_navier_stokes_promoted true"
+    ],
+    "constants_compatible_proved_here": false,
+    "constants_compatible_required": false,
+    "dependency_ids": [
+      "ConditionalMonitoredRouteRegularity",
+      "ConditionalBKMFiniteForSymmetricHouLuoRoute"
+    ],
+    "full_clay_ns_solved": false,
+    "layer": "guard",
+    "missing_input": [],
+    "role": "promotion_blocker",
+    "row_hash": "282f0d021ffd15da5135041da54c9a23346f348231735658b502c66e6a59d80e",
+    "row_id": "ConditionalNotFullClayGuard",
+    "statement": "The assembled theorem is conditional and route-local. It is not unconditional global axial monotonicity and is not a full Clay Navier-Stokes solution or promotion.",
+    "status": "fail_closed_guard",
+    "unconditional_global_axial_monotonicity": false
+  }
+]

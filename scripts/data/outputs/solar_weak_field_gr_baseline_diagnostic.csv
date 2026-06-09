@@ -1,0 +1,8 @@
+test_name,quantity,value,unit,formula,context,promotion_status,carrier_internal,external_gr_baseline,calibration_required
+mercury_perihelion_advance,advance_per_orbit,5.018653553912432e-07,rad/orbit,6*pi*GM_sun/(a*(1-e^2)*c^2),"Mercury osculating a=0.38709893 AU, e=0.20563069",NO_PROMOTION,false,true,true
+mercury_perihelion_advance,advance_per_century,42.980473061736205,arcsec/Julian_century,advance_per_orbit*rad_to_arcsec*century/orbital_period,GR excess perihelion advance scale for Mercury,NO_PROMOTION,false,true,true
+solar_light_deflection_limb,deflection_angle,1.7511903257975012,arcsec,4*GM_sun/(c^2*R_sun),grazing ray at one solar radius impact parameter,NO_PROMOTION,false,true,true
+solar_shapiro_delay_scale,solar_gravitational_time_unit,4.92549094830932,microsecond,GM_sun/c^3,solar mass time scale,NO_PROMOTION,false,true,true
+solar_shapiro_delay_scale,grazing_one_way_delay,110.1221025605506,microsecond,(2*GM_sun/c^3)*ln(4*r_earth*r_receiver/b^2),"superior-conjunction scale with r_earth=1 AU, r_receiver=0.387099 AU, b=R_sun",NO_PROMOTION,false,true,true
+solar_gravitational_redshift_scale,redshift_z,2.1225025704332356e-06,dimensionless,Delta_nu/nu ~= GM_sun/(R_sun*c^2),solar photosphere to infinity weak-field scale,NO_PROMOTION,false,true,true
+solar_gravitational_redshift_scale,velocity_equivalent,636.3102627014978,m/s,c*z,velocity-equivalent solar gravitational redshift scale,NO_PROMOTION,false,true,true

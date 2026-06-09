@@ -1,0 +1,22 @@
+{
+  "blocked_l2_kp_arithmetic_closes": true,
+  "blocked_lattice_eta": 4,
+  "blocked_lattice_eta_q": 0.9271275790105094,
+  "contract": "ym_sprint79_effective_action_support_audit",
+  "effective_action_polymers_spatial_only_for_a1": false,
+  "fail_condition_kp_graph_fine_lattice_eta6": true,
+  "fail_condition_temporal_support_unproved_or_present": true,
+  "fine_lattice_eta": 6,
+  "fine_lattice_eta_blocks_kp": true,
+  "fine_lattice_eta_q": 1.390691368515764,
+  "generic_4d_eta": 8,
+  "generic_4d_eta_q": 1.8542551580210187,
+  "kp_entropy_at_blocked_scale_l2": false,
+  "kp_graph_entropy_table": "ym_sprint79_kp_graph_entropy_table.csv",
+  "pass_condition_met": false,
+  "polymer_defined_on_blocked_lattice": false,
+  "q_current": 0.23178189475262734,
+  "route_decision": "ANISOTROPIC_KP_ROUTE_BLOCKED",
+  "support_table": "ym_sprint79_effective_action_support_table.csv",
+  "temporal_entropy_quotient_halves_generic_4d_count": false
+}

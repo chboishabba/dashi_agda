@@ -1,0 +1,55 @@
+{
+  "all_rows_obstruct_route": true,
+  "analyzed_route_classes": [
+    "WBF-L",
+    "WBF-S",
+    "WBF-MP",
+    "WBF-R",
+    "WBF-V",
+    "AXS"
+  ],
+  "class_scope": [
+    "CLASS_WBF",
+    "CLASS_AXS"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "conditional_requirements": {
+    "AXS": "NoLogAxisymmetricBiotSavartUniform",
+    "WBF-V": "omega in H1"
+  },
+  "conditional_routes": [
+    "WBF-V",
+    "AXS"
+  ],
+  "conditional_row_count": 2,
+  "contract": "ns_sprint132_partial_obstruction_theorem",
+  "control_card": {
+    "C": "Deterministic Python emitter writes rows JSON, summary JSON, and Markdown report.",
+    "F": "Full Clay Navier-Stokes regularity remains false and unpromoted.",
+    "G": "No row produces a finite-time BKM blowup mechanism within the analyzed routes.",
+    "L": "The obstruction tower ranges only over analyzed CLASS_WBF union CLASS_AXS route classes.",
+    "O": "Worker 1 owns only the Sprint132 partial obstruction theorem script and generated output directory.",
+    "P": "Conclude NSPartialRegularityFromObstructionTower as a route-specific obstruction theorem.",
+    "R": "Emit six route rows for WBF-L, WBF-S, WBF-MP, WBF-R, WBF-V, and AXS.",
+    "S": "Four WBF rows are exact; WBF-V and AXS are conditional on their stated hypotheses."
+  },
+  "exact_routes": [
+    "WBF-L",
+    "WBF-S",
+    "WBF-MP",
+    "WBF-R"
+  ],
+  "exact_row_count": 4,
+  "exit_code": 0,
+  "exit_reason": "recorded route-specific obstruction theorem for analyzed CLASS_WBF and CLASS_AXS mechanisms without promoting global Clay regularity",
+  "full_clay_ns_solved": false,
+  "global_regularity_claim": false,
+  "global_regulariy_claim": false,
+  "mechanism_scope": "CLASS_WBF union CLASS_AXS",
+  "no_bkm_blowup_mechanism_in_analyzed_routes": true,
+  "route_specific_obstruction": true,
+  "row_count": 6,
+  "theorem": "NSPartialRegularityFromObstructionTower",
+  "theorem_statement": "No mechanism in CLASS_WBF union CLASS_AXS can produce finite-time BKM blowup within the analyzed route classes; this is route-specific and is not a global Clay Navier-Stokes regularity claim."
+}

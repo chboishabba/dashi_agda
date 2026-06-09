@@ -1,0 +1,46 @@
+{
+  "axisymmetric_swirl_equation_corrected": true,
+  "boundary_annulus_conversion": "r in [r0, 1], r0 > 0, ||Gamma(t)||_inf <= M0 => ||u1(t)||_inf <= M0 / r0^2",
+  "boundary_annulus_u1_bound": true,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint134_axisymmetric_equation_correction",
+  "corrected_lemmas": [
+    "StandardAxisymmetricSwirlVariables",
+    "AxisymmetricSwirlEquationCorrection.U1EquationHasStretchingSource",
+    "AxisymmetricSwirlEquationCorrection.Omega1EquationHasQuadraticSource"
+  ],
+  "corrected_omega1_equation": "D_t omega1 = partial_z(u1^2) + nu Ltilde omega1",
+  "corrected_u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+  "downstream_required_updates": [
+    "replace all u1 pure-diffusion references with Gamma maximum principle",
+    "localize u1 amplitude bounds to annuli r >= r0 > 0",
+    "rerun Hou-Luo source estimates using partial_z(u1^2)=2 u1 partial_z u1"
+  ],
+  "exit_code": 0,
+  "full_clay_ns_solved": false,
+  "gamma_equation": "(partial_t + u^r partial_r + u^z partial_z) Gamma = nu (Delta - 2/r partial_r) Gamma",
+  "gamma_maximum_principle_replacement": true,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "old_u1_pure_diffusion_retracted": true,
+  "omega1_equation_has_quadratic_source": true,
+  "pure_diffusion_u1_maximum_principle_superseded": true,
+  "replacement_gates": [
+    "SwirlCirculationMaximumPrinciple",
+    "BoundaryAnnulusU1Bound"
+  ],
+  "retracted_or_superseded": [
+    "PureDiffusionU1MaximumPrinciple"
+  ],
+  "row_count": 6,
+  "u1_equation_has_stretching_source": true,
+  "variables": {
+    "Dt": "partial_t + u^r partial_r + u^z partial_z",
+    "Gamma": "r * u^theta = r^2 * u1",
+    "Ltilde": "partial_r^2 + (3/r) partial_r + partial_z^2",
+    "omega1": "omega^theta / r",
+    "psi1": "psi^theta / r",
+    "u1": "u^theta / r"
+  }
+}

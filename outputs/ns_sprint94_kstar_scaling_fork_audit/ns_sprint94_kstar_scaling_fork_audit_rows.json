@@ -1,0 +1,51 @@
+{
+  "gates": [
+    {
+      "clay_general_data_effect": "requires lower bound not supplied by Leray class",
+      "formula": "K*(t) >= C/(epsilon*nu)",
+      "gate": "high-high absorption",
+      "status": "calculated"
+    },
+    {
+      "clay_general_data_effect": "cannot prove the required lower bound for all data",
+      "formula": "upper control only",
+      "gate": "Leray-only control",
+      "status": "insufficient"
+    },
+    {
+      "clay_general_data_effect": "recovers known small-data regime rather than Clay all-data closure",
+      "formula": "||u0||_L2^2 <= C^3*nu^4/epsilon",
+      "gate": "combined inequalities",
+      "status": "small-data reduction"
+    },
+    {
+      "clay_general_data_effect": "conditional regularity only",
+      "formula": "assume K*(t) >= C/(epsilon*nu)",
+      "gate": "conditional criterion",
+      "status": "ready"
+    }
+  ],
+  "sources": [
+    {
+      "note": "supplies the high-high estimate but leaves absorption conditional",
+      "source": "Sprint87 high-high factorization",
+      "supplies_conditional_route": true,
+      "supplies_general_data_route": false,
+      "supplies_kstar_lower_bound": false
+    },
+    {
+      "note": "records zero accepted sources for general-data dominance plus pointwise tail plus coefficient",
+      "source": "Sprint88-93 same-source search",
+      "supplies_conditional_route": false,
+      "supplies_general_data_route": false,
+      "supplies_kstar_lower_bound": false
+    },
+    {
+      "note": "sufficient as an explicit conditional assumption",
+      "source": "KStarLowerBoundHypothesis",
+      "supplies_conditional_route": true,
+      "supplies_general_data_route": false,
+      "supplies_kstar_lower_bound": true
+    }
+  ]
+}

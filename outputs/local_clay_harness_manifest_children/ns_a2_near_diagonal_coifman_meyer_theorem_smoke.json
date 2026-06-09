@@ -1,0 +1,41 @@
+{
+  "cases": [
+    {
+      "j": 3,
+      "k": 4,
+      "lhs_proxy": 7.76,
+      "near_diagonal": true,
+      "passes": true,
+      "rhs_proxy": 8.32
+    },
+    {
+      "j": 5,
+      "k": 5,
+      "lhs_proxy": 31.04,
+      "near_diagonal": true,
+      "passes": true,
+      "rhs_proxy": 33.28
+    },
+    {
+      "j": 2,
+      "k": 7,
+      "lhs_proxy": 3.88,
+      "near_diagonal": false,
+      "passes": false,
+      "rhs_proxy": 2.8
+    }
+  ],
+  "contract": "NS A2 theorem-facing near-diagonal Coifman-Meyer smoke",
+  "diagnostic_only": true,
+  "promotion": {
+    "a2_theorem_proved": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "summary": {
+    "delta_r_proxy": 0.125,
+    "near_diagonal_cases_pass": true,
+    "near_diagonal_share_proxy": 0.888,
+    "off_diagonal_case_fails": true
+  }
+}

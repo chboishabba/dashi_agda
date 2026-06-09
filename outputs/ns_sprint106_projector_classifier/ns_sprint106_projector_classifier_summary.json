@@ -1,0 +1,200 @@
+{
+  "accepted_families": [],
+  "accepted_source_count": 0,
+  "candidate_family_count": 5,
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint106_projector_classifier",
+  "control_card": {
+    "C": "single deterministic Python ledger emitting JSON and Markdown",
+    "F": "accepted_source_count is zero because every candidate fails non_circular_construction or a prerequisite gate",
+    "G": "Clay Navier-Stokes promotion remains false",
+    "L": "acceptance is conjunction of gate_results",
+    "O": "classify candidate projector source families",
+    "P": "FAIL_CLOSED_PROJECTOR_SOURCE",
+    "R": "all six gates must pass and forbidden dependencies must be absent",
+    "S": "five requested candidates evaluated in fixed order"
+  },
+  "fail_closed": true,
+  "fail_closed_reason": "No candidate supplies a dyadic partition, bounded multiplier package, Leray compatibility, divergence-free commutation, and non-circular construction while avoiding forbidden dependencies.",
+  "final_decision": "FAIL_CLOSED_PROJECTOR_SOURCE",
+  "forbidden_dependencies": [
+    "assumed_bkm_failure",
+    "assumed_serrin_failure",
+    "assumed_singularity",
+    "target_blowup",
+    "desired_conclusion",
+    "imposed_active_shell",
+    "imposed_frequency_support",
+    "non_leray_regularization",
+    "external_forcing",
+    "target_kstar_collapse"
+  ],
+  "option_b_closed": false,
+  "proof_claimed": false,
+  "rejected_families": [
+    "smooth_dyadic_cutoff",
+    "sharp_frequency_annulus",
+    "heat_semigroup_projector",
+    "leray_lp_composed_projector",
+    "imposed_active_shell_projector"
+  ],
+  "required_gates": [
+    "dyadic_partition",
+    "multiplier_boundedness",
+    "leray_compatibility",
+    "divergence_free_commutation",
+    "non_circular_construction",
+    "no_forbidden_dependency"
+  ],
+  "route_decision": "FAIL_CLOSED_PROJECTOR_SOURCE",
+  "rows": [
+    {
+      "accepted": false,
+      "ansatz": "build Littlewood-Paley projectors from a smooth dyadic partition of unity",
+      "classification": "standard dyadic projector without independent active-shell source",
+      "divergence_free_commutation": true,
+      "dyadic_partition": true,
+      "failed_gates": [
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "smooth_dyadic_cutoff",
+      "family_id": "SDC",
+      "forbidden_dependencies": "desired_conclusion",
+      "gate_results": {
+        "divergence_free_commutation": true,
+        "dyadic_partition": true,
+        "leray_compatibility": true,
+        "multiplier_boundedness": true,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_compatibility": true,
+      "multiplier_boundedness": true,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "Smooth dyadic cutoffs are valid Leray-compatible multipliers, but they do not construct the active source without importing the target conclusion.",
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "project sharply onto a fixed Fourier annulus",
+      "classification": "annular localization with endpoint multiplier obstruction",
+      "divergence_free_commutation": true,
+      "dyadic_partition": true,
+      "failed_gates": [
+        "multiplier_boundedness",
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "sharp_frequency_annulus",
+      "family_id": "SFA",
+      "forbidden_dependencies": "imposed_frequency_support",
+      "gate_results": {
+        "divergence_free_commutation": true,
+        "dyadic_partition": true,
+        "leray_compatibility": true,
+        "multiplier_boundedness": false,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_compatibility": true,
+      "multiplier_boundedness": false,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "The annulus names a frequency band, but sharp localization lacks the required bounded multiplier package and imposes the frequency support.",
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "use heat-flow differences to form scale projectors",
+      "classification": "Leray-compatible smoothing without exact dyadic partition closure",
+      "divergence_free_commutation": true,
+      "dyadic_partition": false,
+      "failed_gates": [
+        "dyadic_partition",
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "heat_semigroup_projector",
+      "family_id": "HSP",
+      "forbidden_dependencies": "non_leray_regularization",
+      "gate_results": {
+        "divergence_free_commutation": true,
+        "dyadic_partition": false,
+        "leray_compatibility": true,
+        "multiplier_boundedness": true,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_compatibility": true,
+      "multiplier_boundedness": true,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "Heat semigroup localization is bounded and divergence-free compatible, but the smoothing route is a regularization surrogate rather than a non-circular projector source.",
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "compose the Leray projection with smooth Littlewood-Paley cutoffs",
+      "classification": "commuting projector algebra without source mechanism",
+      "divergence_free_commutation": true,
+      "dyadic_partition": true,
+      "failed_gates": [
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "leray_lp_composed_projector",
+      "family_id": "LLP",
+      "forbidden_dependencies": "target_kstar_collapse",
+      "gate_results": {
+        "divergence_free_commutation": true,
+        "dyadic_partition": true,
+        "leray_compatibility": true,
+        "multiplier_boundedness": true,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_compatibility": true,
+      "multiplier_boundedness": true,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "The Leray and Littlewood-Paley multipliers commute formally, but the construction becomes useful only after the target shell collapse is supplied.",
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "select the active shell first and define the projector around it",
+      "classification": "forbidden imposed active-shell source",
+      "divergence_free_commutation": false,
+      "dyadic_partition": true,
+      "failed_gates": [
+        "leray_compatibility",
+        "divergence_free_commutation",
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "imposed_active_shell_projector",
+      "family_id": "IAS",
+      "forbidden_dependencies": "imposed_active_shell;imposed_frequency_support;target_blowup;desired_conclusion",
+      "gate_results": {
+        "divergence_free_commutation": false,
+        "dyadic_partition": true,
+        "leray_compatibility": false,
+        "multiplier_boundedness": true,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_compatibility": false,
+      "multiplier_boundedness": true,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "The active shell and supporting frequencies are built into the input, so the candidate is circular and outside the unforced Leray projector source lane.",
+      "verdict": "reject"
+    }
+  ],
+  "scope": "deterministic classifier for Navier-Stokes projector-source candidates",
+  "sprint106_projector_source_closed": false
+}

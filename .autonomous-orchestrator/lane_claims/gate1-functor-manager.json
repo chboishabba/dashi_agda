@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.gate1-functor-manager.json",
+  "lane": "gate1-carrier-physics-functor",
+  "lane_claim": "Gate 1 manager: carrier-to-physics functor semantics/covariance; may spawn up to six leaf workers",
+  "orchestrator_id": "gate1-functor-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.gate1-functor-manager.json",
+  "timestamp": "2026-05-19T10:59:15Z"
+}

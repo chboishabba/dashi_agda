@@ -1,0 +1,39 @@
+{
+  "claim_closed": false,
+  "claim_proved": false,
+  "claim_proven": false,
+  "clay_navier_stokes_promoted": false,
+  "commutator": "-(partial_z u^r) partial_r u1",
+  "commutator_sign_indefinite": true,
+  "contract": "ns_sprint141_radial_gradient_coupling_ledger",
+  "decision": "fail_closed_missing_radial_gradient_coupling",
+  "extra_row_ids": [],
+  "global_proof": false,
+  "global_proof_validated_absent": true,
+  "lane": 4,
+  "missing_required_row_ids": [],
+  "missing_theorem": "RadialGradientCouplingAtFirstAxialPositiveCrossing",
+  "observed_row_ids": [
+    "axial_crossing_geometry",
+    "radial_slope_freedom",
+    "gamma_max_principle_insufficiency",
+    "boundary_annulus_hazard",
+    "missing_radial_gradient_coupling_theorem"
+  ],
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_validated_absent": true,
+  "radial_gradient_control_absent": true,
+  "required_row_ids": [
+    "axial_crossing_geometry",
+    "boundary_annulus_hazard",
+    "gamma_max_principle_insufficiency",
+    "missing_radial_gradient_coupling_theorem",
+    "radial_slope_freedom"
+  ],
+  "row_count": 5,
+  "sprint": 141,
+  "summary_hash": "049f08b55226dd732ba5a61419075560d4bb41469e1385c88cc46e87fa5651de",
+  "target_variable": "v = partial_z u1",
+  "validation_errors": [],
+  "validation_passed": true
+}

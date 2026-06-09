@@ -1,0 +1,25 @@
+{
+  "balaban_cmp116_polymer_mass_bound_scoped_authority_accepted": true,
+  "balaban_cmp98_kernel_probability_scoped_authority_accepted": true,
+  "c_local_limit_as_a_to_zero": 0.0,
+  "clay_yang_mills_promoted": false,
+  "continuum_limit_mass_gap_derived_in_repo": false,
+  "contraction_delta_lower_bound_closed_in_repo": true,
+  "delta_min_formula": "1 - exp(-4)",
+  "delta_min_numeric": 0.9816843611112658,
+  "old_contraction_delta_a_independent_framing_retired": true,
+  "remaining_open_lemmas": [
+    "UniformBoundForAllA",
+    "WC3UniformInA",
+    "UniformConnectedSchwingerDecay",
+    "ContinuumLimitMassGap",
+    "Nontrivial4DSU3YangMillsMeasure",
+    "ClayStatementBoundaryDischarged",
+    "ExternalAcceptanceToken"
+  ],
+  "route_decision": "SPRINT93_CLOSES_SCOPED_BALABAN_INPUTS_AND_CONTRACTION_DELTA_LOWER_BOUND_ONLY",
+  "sprint": 93,
+  "uniform_bound_for_all_a_derived_in_repo": false,
+  "uniform_connected_schwinger_decay_derived_in_repo": false,
+  "wc3_uniform_in_a_derived_in_repo": false
+}

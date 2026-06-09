@@ -1,0 +1,201 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint96KStarCollapseMechanismConstraints.agda",
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "kStarCollapseConstraintLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "kStarCollapseMechanismClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "lowModeEnergyConcentrationMechanism": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "optionBFiniteTimeKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "scalingCompatibleSelfSimilarity": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "singularityExtractionWithoutCriterionFailure": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "viscousDampingOvercomeMechanism": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint96_kstar_collapse_constraints_audit",
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_KSTAR_COLLAPSE_CONSTRAINTS",
+  "forbidden_hits": [],
+  "forbidden_term_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "kStarCollapseConstraintLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "kStarCollapseMechanismClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "optionBFiniteTimeKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "lowModeEnergyConcentrationMechanism",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "viscousDampingOvercomeMechanism",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "scalingCompatibleSelfSimilarity",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "singularityExtractionWithoutCriterionFailure",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "finite-time K-star collapse mechanism",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "compatibility with Leray energy",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "exclusion of conditional K-star lower bound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "finite-time singularity extraction",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "kstar_collapse_mechanism_closed": false,
+  "kstar_collapse_mechanism_constraints_closed": true,
+  "missing_anchors": [],
+  "missing_required_residuals": [],
+  "promotion_decision": "hold",
+  "required_anchors": [
+    "NSSprint96KStarCollapseMechanismConstraints",
+    "canonicalNSSprint96KStarCollapseMechanismConstraints",
+    "KStarCollapseMechanismConstraints",
+    "KStarCollapseMechanismResiduals",
+    "kStarCollapseMechanismClosed",
+    "clayNavierStokesPromoted",
+    "failClosedKStarCollapseConstraints",
+    "FAIL_CLOSED_KSTAR_COLLAPSE_CONSTRAINTS"
+  ],
+  "required_residual_count": 4,
+  "required_residuals": [
+    "finite-time K-star collapse mechanism",
+    "compatibility with Leray energy",
+    "exclusion of conditional K-star lower bound",
+    "finite-time singularity extraction"
+  ],
+  "required_residuals_present": [
+    "finite-time K-star collapse mechanism",
+    "compatibility with Leray energy",
+    "exclusion of conditional K-star lower bound",
+    "finite-time singularity extraction"
+  ],
+  "required_residuals_present_count": 4,
+  "residual_checks": {
+    "compatibility with Leray energy": {
+      "actual": "present",
+      "expected": true,
+      "passed": true
+    },
+    "exclusion of conditional K-star lower bound": {
+      "actual": "present",
+      "expected": true,
+      "passed": true
+    },
+    "finite-time K-star collapse mechanism": {
+      "actual": "present",
+      "expected": true,
+      "passed": true
+    },
+    "finite-time singularity extraction": {
+      "actual": "present",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "route_decision": "FAIL_CLOSED_KSTAR_COLLAPSE_CONSTRAINTS",
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint96KStarCollapseMechanismConstraints.agda",
+      "status": "PASS"
+    }
+  ],
+  "sprint96_kstar_collapse_mechanism_constraints_closed": true,
+  "surface": "NSSprint96 Sprint96 KStar collapse constraints fail_closed Clay Navier-Stokes"
+}

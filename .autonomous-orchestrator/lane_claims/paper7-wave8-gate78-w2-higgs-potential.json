@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave8-gate78-w2-higgs-potential.json",
+  "lane": "paper7-gate7-gate8-composition/HiggsPotential",
+  "lane_claim": "Paper 7 wave8 LEAF WORKER gate78 W2: own exactly `HiggsPotential`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement norm/order, completed square, and nonzero VEV structure; absolute scale may escalate to Authority.W4. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited.",
+  "orchestrator_id": "paper7-wave8-gate78-w2-higgs-potential",
+  "parent_orchestrator_id": "paper7-wave8-gate78-manager",
+  "status_file": "status.paper7-wave8-gate78-w2-higgs-potential.json",
+  "timestamp": "2026-05-19T15:49:23Z"
+}

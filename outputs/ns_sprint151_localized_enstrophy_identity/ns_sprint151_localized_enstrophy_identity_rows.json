@@ -1,0 +1,434 @@
+[
+  {
+    "adverse_or_unclosed": false,
+    "available_input": [
+      "standard enstrophy density",
+      "smooth compact cutoff template"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Differentiate E_phi with a smooth moving cutoff phi_R and account for transport, diffusion, stretching, and cutoff terms.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "E_phi(t) = 1/2 int phi_R(x,t) |omega(x,t)|^2 dx",
+    "lane": 2,
+    "ledger_role": "definition",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "closed localized identity theorem in the target geometry"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "LocalizedEnstrophyDefinition",
+    "obstruction": [
+      "definition alone supplies no estimate"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "996b15a43858a08fd7e2ab0913b4025d9149ae31aa93134754760bf629620461",
+    "row_id": "localized_enstrophy_definition",
+    "scaling_coupling_consistency": false,
+    "sign_role": "neutral_definition",
+    "sprint": 151,
+    "status": "DEFINED_NOT_PROVED",
+    "supports_identity": true,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": false,
+    "available_input": [
+      "axisymmetric omega1/u1 equation form"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "D_t omega1 = nu L_omega1 omega1 + 2 u1 partial_z u1",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "omega1 = omega^theta / r axisymmetric vorticity variable",
+    "lane": 2,
+    "ledger_role": "equation_input",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "verified compatibility with every localized cutoff regime"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "Omega1EquationInput",
+    "obstruction": [
+      "equation input is conditional on the axisymmetric-with-swirl reduction",
+      "does not close the localized cutoff balance by itself"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "55aaf41f500fd1a6e802302149a735ef1a36166e110bd91ff267384f41b879c7",
+    "row_id": "omega1_equation_input",
+    "scaling_coupling_consistency": false,
+    "sign_role": "source_equation_input",
+    "sprint": 151,
+    "status": "INPUT_RECORDED_CONDITIONAL",
+    "supports_identity": true,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "smooth radial/annular cutoff calculus"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Control |partial_t phi_R|, |nabla phi_R|, and |Delta phi_R| by one active width and motion law.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "1/2 int (partial_t phi_R) |omega|^2 dx",
+    "lane": 2,
+    "ledger_role": "cutoff_commutator",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "cutoff motion theorem compatible with width ODE extraction"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "CutoffDerivative",
+    "obstruction": [
+      "moving cutoff speed is not tied to a proved model width law",
+      "cutoff derivative can leak enstrophy through the annulus"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "36294cd7af1418e7563d8cb32132b5d5e72f018a0f6849af529ae2b4b581f2ce",
+    "row_id": "cutoff_derivative",
+    "scaling_coupling_consistency": false,
+    "sign_role": "adverse_unless_absorbed",
+    "sprint": 151,
+    "status": "COMMUTATOR_OPEN",
+    "supports_identity": true,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "divergence-free velocity transport form"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Convert local transport into boundary/annular flux with controlled sign or size.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "-1/2 int |omega|^2 u dot nabla phi_R dx",
+    "lane": 2,
+    "ledger_role": "transport_flux",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "uniform inward/outward flux domination estimate"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "TransportFlux",
+    "obstruction": [
+      "flux sign is not fixed on moving annular boundaries",
+      "velocity is nonlocal and can import exterior enstrophy into the active region"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "397de48ebf77b22c2727de6fea143e4270726662c7cbd5c465550315b5c8f84f",
+    "row_id": "transport_flux",
+    "scaling_coupling_consistency": false,
+    "sign_role": "adverse_boundary_flux",
+    "sprint": 151,
+    "status": "FLUX_UNCLOSED",
+    "supports_identity": true,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "viscous enstrophy integration by parts",
+      "Young inequality"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Retain coercive dissipation after absorbing nabla phi_R and Delta phi_R localization errors.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "-nu int phi_R |nabla omega|^2 dx plus cutoff diffusion errors",
+    "lane": 2,
+    "ledger_role": "diffusion",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "single coercivity budget surviving cutoff and boundary errors"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "DiffusionCoerciveTerm",
+    "obstruction": [
+      "coercive term loses mass through cutoff-gradient errors",
+      "axis/boundary integration terms need a compatible regularity ledger"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "019fec06bd369cf4ab91aa2be4626d02abe6fa0bb9f388949f508c86d90535b2",
+    "row_id": "diffusion_coercive_term",
+    "scaling_coupling_consistency": false,
+    "sign_role": "favorable_with_cutoff_error",
+    "sprint": 151,
+    "status": "COERCIVE_PARTIAL_NOT_CLOSED",
+    "supports_identity": true,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "previous boundary/annular ledgers identify leakage channels"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Bound all shell leakage by absorbable lower-order terms with constants shared by diffusion, flux, and stretching estimates.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "annular shell terms from nabla phi_R, Delta phi_R, and moving support",
+    "lane": 2,
+    "ledger_role": "leakage",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "boundary/annular leakage theorem with positive residual slack"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "BoundaryAnnularLeakage",
+    "obstruction": [
+      "annular shell can contain source mass outside the local core",
+      "boundary constants are not synchronized with nonlocal closure constants"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "bf4ac1af4a299d19ef1f645d4f8bfef3a810a876bf8e9223af8a03c3ca732476",
+    "row_id": "boundary_annular_leakage",
+    "scaling_coupling_consistency": false,
+    "sign_role": "adverse_leakage",
+    "sprint": 151,
+    "status": "LEAKAGE_OPEN",
+    "supports_identity": false,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "formal vorticity stretching term",
+      "Hou-Luo source-route target"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Dominate localized vortex stretching by a signed source margin or an integrable width-dependent load.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "int phi_R omega dot (nabla u) omega dx",
+    "lane": 2,
+    "ledger_role": "stretching_source",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "rigorous localized stretching bound in the active Hou-Luo geometry"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "VortexStretchingSource",
+    "obstruction": [
+      "stretching term has no global sign",
+      "source lower/upper balance is not coupled to the localized enstrophy width"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "92b71f7c785c07b38e2dbf2546368e19e5ac4f07293ed0aa74a2851a16d5e570",
+    "row_id": "vortex_stretching_source",
+    "scaling_coupling_consistency": false,
+    "sign_role": "main_adverse_source",
+    "sprint": 151,
+    "status": "SOURCE_UNCLOSED",
+    "supports_identity": true,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "axisymmetric Biot-Savart kernel route",
+      "prior log-loss ledgers"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Close velocity, strain, and cutoff-flux loads using a nonlocal kernel estimate on the same active scale.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "u and nabla u reconstructed from omega through Biot-Savart",
+    "lane": 2,
+    "ledger_role": "nonlocal_velocity_closure",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "uniform Biot-Savart closure compatible with cutoff and constants"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "BiotSavartNonlocalClosure",
+    "obstruction": [
+      "near-coincident and off-axis kernel pieces can create log losses",
+      "nonlocal exterior vorticity is not excluded by the localized identity"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "4ff272c51db50b142f95c759efccfa0134c0ea2ac68bda5c1f7e2f47ac0f836e",
+    "row_id": "biot_savart_nonlocal_closure",
+    "scaling_coupling_consistency": false,
+    "sign_role": "nonlocal_adverse_or_margin_erasing",
+    "sprint": 151,
+    "status": "NONLOCAL_CLOSURE_MISSING",
+    "supports_identity": false,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "separate ledgers for several route hazards"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Prove a positive residual after all adverse terms are charged against the same scale/time/boundary constants.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "one constant ledger for cutoff, flux, diffusion, leakage, source, and kernel terms",
+    "lane": 2,
+    "ledger_role": "constant_budget",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "simultaneous constants compatibility theorem"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "ConstantsCompatibility",
+    "obstruction": [
+      "separate estimates do not share a single residual inequality",
+      "no proof that favorable diffusion/source margins dominate all leakage and nonlocal loads"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "3576356aaecc5895abedac32bf822b0f291467fff9e337b18ae50cbf1e265ca1",
+    "row_id": "constants_compatibility",
+    "scaling_coupling_consistency": false,
+    "sign_role": "promotion_gate",
+    "sprint": 151,
+    "status": "CONSTANTS_INCOMPATIBLE_OR_UNPROVED",
+    "supports_identity": false,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "formal concentration-width route target"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Extract a deterministic width ODE with validated scaling coupling from the localized enstrophy inequality.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "derive dW/dt or dE_phi/dt comparison model from the localized balance",
+    "lane": 2,
+    "ledger_role": "width_ode_extraction",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "proved model-validity theorem for the width ODE"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "ModelWidthODEExtraction",
+    "obstruction": [
+      "localized identity is not closed",
+      "scaling coupling consistency is not proved",
+      "nonlocal terms are not reduced to width-only coefficients"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "ad8b31203f9b891579dd6b07d665808aa8b3afcf8673c52751030c0267e03bb6",
+    "row_id": "model_width_ode_extraction",
+    "scaling_coupling_consistency": false,
+    "sign_role": "model_validity_gate",
+    "sprint": 151,
+    "status": "WIDTH_ODE_NOT_VALIDATED",
+    "supports_identity": false,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  },
+  {
+    "adverse_or_unclosed": true,
+    "available_input": [
+      "Sprint 151 requested fail-closed flags"
+    ],
+    "claim_closed": false,
+    "clay_navier_stokes_promoted": false,
+    "contract": "ns_sprint151_localized_enstrophy_identity",
+    "decision": "localized_enstrophy_identity_not_proved_fail_closed",
+    "fail_closed": true,
+    "formula_or_target": "Block promotion unless localized identity, width ODE validity, scaling consistency, finite BKM, and full Clay conditions are proved.",
+    "full_clay_ns_solved": false,
+    "gate": "LocalizedEnstrophyIdentityForModelWidthODE",
+    "identity_component": "fail-closed Navier-Stokes/Clay promotion guard",
+    "lane": 2,
+    "ledger_role": "promotion_guard",
+    "localized_enstrophy_identity_proved": false,
+    "missing_input": [
+      "full Clay Navier-Stokes solution"
+    ],
+    "model_validity_for_width_ode": false,
+    "normalized_name": "ClayGuard",
+    "obstruction": [
+      "all requested promotion flags remain false"
+    ],
+    "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+    "promotion_allowed": false,
+    "proof_closed": false,
+    "row_hash": "70ab3727028cbebd1bb6e11454dca8afdffe602e8db2d07ad3891c14991ce101",
+    "row_id": "clay_guard",
+    "scaling_coupling_consistency": false,
+    "sign_role": "guard",
+    "sprint": 151,
+    "status": "FAIL_CLOSED_NOT_PROMOTED",
+    "supports_identity": false,
+    "symmetric_hou_luo_bkm_finite": false,
+    "width_ode_ready": false
+  }
+]

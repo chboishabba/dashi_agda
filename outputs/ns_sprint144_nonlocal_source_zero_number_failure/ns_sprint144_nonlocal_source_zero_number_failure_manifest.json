@@ -1,0 +1,21 @@
+{
+  "artifact_complete": true,
+  "contract": "ns_sprint144_nonlocal_source_zero_number_failure",
+  "files": {
+    "manifest": "outputs/ns_sprint144_nonlocal_source_zero_number_failure/ns_sprint144_nonlocal_source_zero_number_failure_manifest.json",
+    "markdown": "outputs/ns_sprint144_nonlocal_source_zero_number_failure/ns_sprint144_nonlocal_source_zero_number_failure.md",
+    "rows_csv": "outputs/ns_sprint144_nonlocal_source_zero_number_failure/ns_sprint144_nonlocal_source_zero_number_failure_rows.csv",
+    "rows_json": "outputs/ns_sprint144_nonlocal_source_zero_number_failure/ns_sprint144_nonlocal_source_zero_number_failure_rows.json",
+    "summary": "outputs/ns_sprint144_nonlocal_source_zero_number_failure/ns_sprint144_nonlocal_source_zero_number_failure_summary.json"
+  },
+  "invariants_passed": true,
+  "lane": 4,
+  "sha256": {
+    "manifest": "26ee5bf43de1c8640f70cce28b4002ecfec6e6222e7318aa3f8c9d5c28f0ecde",
+    "markdown": "2cdfce3f3936cf24bdb719450a32c0f0b93a89d9e03fe891919bdc489dd401a4",
+    "rows_csv": "5f35c099e33395511cea165dd7d2136ecbb19246ce2f7128e895e0b701051130",
+    "rows_json": "7b91efddfb9d2d784f3ffd07eff8240e2af5475bf8c65e2a97eec16a95b5bd5e",
+    "summary": "5eba61fb48e2f8efdb4f1818a77f8973d9b3754825faa83e4f8ab1b29e9a0400"
+  },
+  "sprint": 144
+}

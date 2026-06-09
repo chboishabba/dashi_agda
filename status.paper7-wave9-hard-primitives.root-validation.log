@@ -1,0 +1,61 @@
+# wave9 root validation 2026-05-19T16:48:11Z
+## agda DASHI/Physics/Closure/NaturalP2ConvergencePromotionObligation.agda
+## agda DASHI/Physics/Closure/W3AcceptedEvidenceAuthorityTokenGovernanceObstruction.agda
+## agda DASHI/Physics/Closure/W9CancellationPressureQcoreCompatibilityReceipt.agda
+## agda DASHI/Physics/Closure/G3PoincareGalileiCarrierChain.agda
+## agda DASHI/Physics/Closure/CarrierToPhysicsInterpretationFunctor.agda
+## agda DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda
+Checking DASHI.Physics.Closure.YangMillsFieldEquationObstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda).
+  Checking DASHI.Physics.Closure.GRDiscreteRicciCandidateFromCurvature (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda).
+   Checking DASHI.Physics.Closure.DiscreteBianchiIdentitySurface (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DiscreteBianchiIdentitySurface.agda).
+  Checking DASHI.Physics.Closure.DiscreteStokesBianchiObstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DiscreteStokesBianchiObstruction.agda).
+ Checking DASHI.Physics.Closure.DiscreteBianchiIdentityReceipt (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DiscreteBianchiIdentityReceipt.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda:7737,7-72
+Not in scope:
+  canonicalYMSFGCFieldStrengthTransportActionVariationAbsenceLedger
+  at /home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda:7737,7-72
+    (did you mean
+       'YMSFGCFieldStrengthTransportActionVariationAbsenceLedger'?)
+when scope checking
+canonicalYMSFGCFieldStrengthTransportActionVariationAbsenceLedger
+## agda DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda
+## agda DASHI/Physics/Closure/GRDiscreteBianchiFiniteR.agda
+## agda DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda
+Checking DASHI.Physics.Closure.GRQFTTerminalCompositionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda).
+  Checking DASHI.Physics.Closure.YangMillsFieldEquationObstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda:7737,7-72
+Not in scope:
+  canonicalYMSFGCFieldStrengthTransportActionVariationAbsenceLedger
+  at /home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda:7737,7-72
+    (did you mean
+       'YMSFGCFieldStrengthTransportActionVariationAbsenceLedger'?)
+when scope checking
+canonicalYMSFGCFieldStrengthTransportActionVariationAbsenceLedger
+## agda DASHI/Physics/Closure/SchrodingerSelfAdjointEvolutionReceipt.agda
+## agda DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda
+Checking DASHI.Physics.QFT.DHRTensorDualGroupReconstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda).
+## agda DASHI/Physics/QFT/DHRHexagonObligation.agda
+## agda DASHI/Physics/Closure/CKMEntryField.agda
+## agda DASHI/Physics/Closure/CKMCarrierMixingReceipt.agda
+## git diff --check
+e/YangMillsFieldEquationObstruction.agda
+Checking DASHI.Physics.Closure.YangMillsFieldEquationObstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda:2470,3-7
+YMSFGCLocalFiniteSU3CoefficientAwareJacobiSlot.coefficientAwareResidual
+(localFiniteSU3CoefficientAwareJacobiSlot x y z)
+!= su3CoeffZero of type YMSFGCLocalFiniteSU3QuarterCoefficient
+when checking that the expression refl has type
+YMSFGCLocalFiniteSU3CoefficientAwareJacobiSlot.coefficientAwareResidual
+(localFiniteSU3CoefficientAwareJacobiSlot x y z)
+≡ su3CoeffZero
+Checking DASHI.Physics.Closure.YangMillsFieldEquationObstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda).
+# wave9 root validation continuation 2026-05-19T16:51:46Z
+## agda DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda
+Checking DASHI.Physics.Closure.GRQFTTerminalCompositionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/GRQFTTerminalCompositionBoundary.agda).
+ Checking DASHI.Physics.Closure.YangMillsFieldEquationReceipt (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YangMillsFieldEquationReceipt.agda).
+## agda DASHI/Physics/Closure/SchrodingerSelfAdjointEvolutionReceipt.agda
+## agda DASHI/Physics/QFT/DHRTensorDualGroupReconstruction.agda
+## agda DASHI/Physics/QFT/DHRHexagonObligation.agda
+## agda DASHI/Physics/Closure/CKMEntryField.agda
+## agda DASHI/Physics/Closure/CKMCarrierMixingReceipt.agda
+## git diff --check

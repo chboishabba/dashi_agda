@@ -1,0 +1,29 @@
+{
+  "contract": "ns_sprint147_migration_initiation_threshold",
+  "files": [
+    {
+      "bytes": 5014,
+      "path": "outputs/.ns_sprint147_migration_initiation_threshold.4ezs922n/ns_sprint147_migration_initiation_threshold_summary.json",
+      "sha256": "2c6d4ab48fe04b74bd60b50647dd156a37c6ab6c2e6cc22f785b5d4da6d4df53"
+    },
+    {
+      "bytes": 13997,
+      "path": "outputs/.ns_sprint147_migration_initiation_threshold.4ezs922n/ns_sprint147_migration_initiation_threshold_rows.json",
+      "sha256": "c714840e600ae25f0faa7b267280d0484b12285926be4741f46964fb93e0ddc7"
+    },
+    {
+      "bytes": 7966,
+      "path": "outputs/.ns_sprint147_migration_initiation_threshold.4ezs922n/ns_sprint147_migration_initiation_threshold_rows.csv",
+      "sha256": "55f0f9a384db6fd458dad036cc2354ea6f8ba2c7184e4774ef39d9e40fab24f7"
+    },
+    {
+      "bytes": 3948,
+      "path": "outputs/.ns_sprint147_migration_initiation_threshold.4ezs922n/ns_sprint147_migration_initiation_threshold.md",
+      "sha256": "1fb3a891e302cc3b319bcc9659271865e969269672dcc44d7111d8ba8dc8ca7f"
+    }
+  ],
+  "lane": 2,
+  "manifest_hash": "a68af984e82068c1b80491034e4106e8fc8a266b100238ab70a2883ed3cf1177",
+  "out_dir": "outputs/ns_sprint147_migration_initiation_threshold",
+  "sprint": 147
+}

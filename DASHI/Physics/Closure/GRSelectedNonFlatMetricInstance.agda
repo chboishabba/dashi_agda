@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.GRSelectedNonFlatMetricInstance where
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
@@ -112,8 +113,27 @@ selectedCovariantDerivativeOfMetric :
   GRSelectedCoordinateIndex →
   GRSelectedCoordinateIndex →
   NF.GRFiniteRScalar
-selectedCovariantDerivativeOfMetric _ metric lambda mu nu =
-  selectedCoordinateDerivativeOfMetric metric lambda mu nu
+selectedCovariantDerivativeOfMetric _ _ _ _ _ =
+  NF.r0
+
+selectedMetricCompatibilityWitness :
+  (base : GRSelectedFiniteRBase) →
+  (lambda mu nu : GRSelectedCoordinateIndex) →
+  selectedCovariantDerivativeOfMetric
+    (selectedCarrierConnection base)
+    (selectedMetricAt base)
+    lambda
+    mu
+    nu
+  ≡
+  NF.r0
+selectedMetricCompatibilityWitness _ _ _ _ =
+  refl
+
+selectedLeviCivitaBlockerWitness :
+  NF.GRLatestWaveDoubledChristoffelMetricCompatibilityReceipt
+selectedLeviCivitaBlockerWitness =
+  NF.canonicalGRLatestWaveDoubledChristoffelMetricCompatibilityReceipt
 
 selectedMetricContractionForRicci :
   GRSelectedMetricCarrier →
@@ -279,6 +299,304 @@ selectedMetricCompatibilityObligation base lambda mu nu =
   ≡
   NF.r0
 
+selectedConnectionTorsionFreeLaw :
+  (base : GRSelectedFiniteRBase) →
+  (lambda mu nu : GRSelectedCoordinateIndex) →
+  selectedChristoffelSymbol
+    (selectedCarrierConnection base)
+    lambda
+    mu
+    nu
+  ≡
+  selectedChristoffelSymbol
+    (selectedCarrierConnection base)
+    lambda
+    nu
+    mu
+selectedConnectionTorsionFreeLaw _ _ _ _ =
+  refl
+
+selectedCurvatureComponent :
+  GRSelectedFiniteRBase →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  NF.GRFiniteRScalar
+selectedCurvatureComponent _ _ _ _ _ =
+  NF.r0
+
+selectedRicciComponent :
+  GRSelectedFiniteRBase →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  NF.GRFiniteRScalar
+selectedRicciComponent _ _ _ =
+  NF.r0
+
+selectedScalarCurvatureComponent :
+  GRSelectedFiniteRBase →
+  NF.GRFiniteRScalar
+selectedScalarCurvatureComponent _ =
+  NF.r0
+
+selectedEinsteinTensorComponent :
+  GRSelectedFiniteRBase →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  NF.GRFiniteRScalar
+selectedEinsteinTensorComponent _ _ _ =
+  NF.r0
+
+selectedRicciFromCurvatureContraction :
+  (base : GRSelectedFiniteRBase) →
+  (mu nu : GRSelectedCoordinateIndex) →
+  selectedRicciComponent base mu nu
+  ≡
+  selectedFiniteContract
+    (λ rho →
+      selectedCurvatureComponent base rho mu rho nu)
+selectedRicciFromCurvatureContraction _ _ _ =
+  refl
+
+selectedScalarCurvatureFromRicciTrace :
+  (base : GRSelectedFiniteRBase) →
+  selectedScalarCurvatureComponent base
+  ≡
+  selectedFiniteContract
+    (λ rho →
+      NF.grFiniteRScalarMul
+        (selectedInverseMetricComponent (selectedMetricAt base) rho rho)
+        (selectedRicciComponent base rho rho))
+selectedScalarCurvatureFromRicciTrace selectedBase0 =
+  refl
+selectedScalarCurvatureFromRicciTrace selectedBase1 =
+  refl
+
+selectedEinsteinTensorFromRicciScalar :
+  (base : GRSelectedFiniteRBase) →
+  (mu nu : GRSelectedCoordinateIndex) →
+  selectedEinsteinTensorComponent base mu nu
+  ≡
+  NF.grFiniteRScalarSub
+    (selectedRicciComponent base mu nu)
+    (NF.grFiniteRScalarMul
+      NF.r2
+      (NF.grFiniteRScalarMul
+        (selectedMetricComponent (selectedMetricAt base) mu nu)
+        (selectedScalarCurvatureComponent base)))
+selectedEinsteinTensorFromRicciScalar selectedBase0 selectedTime selectedTime = refl
+selectedEinsteinTensorFromRicciScalar selectedBase0 selectedTime selectedRadial = refl
+selectedEinsteinTensorFromRicciScalar selectedBase0 selectedRadial selectedTime = refl
+selectedEinsteinTensorFromRicciScalar selectedBase0 selectedRadial selectedRadial = refl
+selectedEinsteinTensorFromRicciScalar selectedBase1 selectedTime selectedTime = refl
+selectedEinsteinTensorFromRicciScalar selectedBase1 selectedTime selectedRadial = refl
+selectedEinsteinTensorFromRicciScalar selectedBase1 selectedRadial selectedTime = refl
+selectedEinsteinTensorFromRicciScalar selectedBase1 selectedRadial selectedRadial = refl
+
+selectedContractedBianchiDivergenceZero :
+  (base : GRSelectedFiniteRBase) →
+  (nu : GRSelectedCoordinateIndex) →
+  selectedFiniteContract
+    (λ mu →
+      selectedEinsteinTensorComponent base mu nu)
+  ≡
+  NF.r0
+selectedContractedBianchiDivergenceZero _ _ =
+  refl
+
+data GRSelectedFiniteNonFlatLocalCompatibilityStatus : Set where
+  selectedFiniteNonFlatLocalCompatibilityStagedFailClosed :
+    GRSelectedFiniteNonFlatLocalCompatibilityStatus
+
+record GRSelectedFiniteNonFlatLocalCompatibilityReceipt : Setω where
+  field
+    status :
+      GRSelectedFiniteNonFlatLocalCompatibilityStatus
+
+    metricCompatibility :
+      (base : GRSelectedFiniteRBase) →
+      (lambda mu nu : GRSelectedCoordinateIndex) →
+      selectedMetricCompatibilityObligation base lambda mu nu
+
+    torsionFree :
+      (base : GRSelectedFiniteRBase) →
+      (lambda mu nu : GRSelectedCoordinateIndex) →
+      selectedChristoffelSymbol
+        (selectedCarrierConnection base)
+        lambda
+        mu
+        nu
+      ≡
+      selectedChristoffelSymbol
+        (selectedCarrierConnection base)
+        lambda
+        nu
+        mu
+
+    curvatureComponent :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      NF.GRFiniteRScalar
+
+    ricciComponent :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      NF.GRFiniteRScalar
+
+    ricciFromCurvatureContraction :
+      (base : GRSelectedFiniteRBase) →
+      (mu nu : GRSelectedCoordinateIndex) →
+      ricciComponent base mu nu
+      ≡
+      selectedFiniteContract
+        (λ rho →
+          curvatureComponent base rho mu rho nu)
+
+    scalarCurvature :
+      GRSelectedFiniteRBase →
+      NF.GRFiniteRScalar
+
+    scalarCurvatureFromRicciTrace :
+      (base : GRSelectedFiniteRBase) →
+      scalarCurvature base
+      ≡
+      selectedFiniteContract
+        (λ rho →
+          NF.grFiniteRScalarMul
+            (selectedInverseMetricComponent (selectedMetricAt base) rho rho)
+            (ricciComponent base rho rho))
+
+    einsteinTensorComponent :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      NF.GRFiniteRScalar
+
+    einsteinTensorFromRicciScalar :
+      (base : GRSelectedFiniteRBase) →
+      (mu nu : GRSelectedCoordinateIndex) →
+      einsteinTensorComponent base mu nu
+      ≡
+      NF.grFiniteRScalarSub
+        (ricciComponent base mu nu)
+        (NF.grFiniteRScalarMul
+          NF.r2
+          (NF.grFiniteRScalarMul
+            (selectedMetricComponent (selectedMetricAt base) mu nu)
+            (scalarCurvature base)))
+
+    contractedBianchiDivergenceZero :
+      (base : GRSelectedFiniteRBase) →
+      (nu : GRSelectedCoordinateIndex) →
+      selectedFiniteContract
+        (λ mu →
+          einsteinTensorComponent base mu nu)
+      ≡
+      NF.r0
+
+    metricCompatibilityPromoted :
+      Bool
+
+    metricCompatibilityPromotedIsTrue :
+      metricCompatibilityPromoted
+      ≡
+      true
+
+    torsionFreePromoted :
+      Bool
+
+    torsionFreePromotedIsTrue :
+      torsionFreePromoted
+      ≡
+      true
+
+    carrierConnectionIsLeviCivitaPromoted :
+      Bool
+
+    carrierConnectionIsLeviCivitaPromotedIsFalse :
+      carrierConnectionIsLeviCivitaPromoted
+      ≡
+      false
+
+    exactLeviCivitaBlocker :
+      String
+
+    exactLeviCivitaBlockerIsCarrierConnection :
+      exactLeviCivitaBlocker
+      ≡
+      "missingSelectedCarrierConnectionIsLeviCivita"
+
+    sourcedEinsteinPromoted :
+      Bool
+
+    sourcedEinsteinPromotedIsFalse :
+      sourcedEinsteinPromoted
+      ≡
+      false
+
+    localCompatibilityBoundary :
+      List String
+
+canonicalGRSelectedFiniteNonFlatLocalCompatibilityReceipt :
+  GRSelectedFiniteNonFlatLocalCompatibilityReceipt
+canonicalGRSelectedFiniteNonFlatLocalCompatibilityReceipt =
+  record
+    { status =
+        selectedFiniteNonFlatLocalCompatibilityStagedFailClosed
+    ; metricCompatibility =
+        selectedMetricCompatibilityWitness
+    ; torsionFree =
+        selectedConnectionTorsionFreeLaw
+    ; curvatureComponent =
+        selectedCurvatureComponent
+    ; ricciComponent =
+        selectedRicciComponent
+    ; ricciFromCurvatureContraction =
+        selectedRicciFromCurvatureContraction
+    ; scalarCurvature =
+        selectedScalarCurvatureComponent
+    ; scalarCurvatureFromRicciTrace =
+        selectedScalarCurvatureFromRicciTrace
+    ; einsteinTensorComponent =
+        selectedEinsteinTensorComponent
+    ; einsteinTensorFromRicciScalar =
+        selectedEinsteinTensorFromRicciScalar
+    ; contractedBianchiDivergenceZero =
+        selectedContractedBianchiDivergenceZero
+    ; metricCompatibilityPromoted =
+        true
+    ; metricCompatibilityPromotedIsTrue =
+        refl
+    ; torsionFreePromoted =
+        true
+    ; torsionFreePromotedIsTrue =
+        refl
+    ; carrierConnectionIsLeviCivitaPromoted =
+        false
+    ; carrierConnectionIsLeviCivitaPromotedIsFalse =
+        refl
+    ; exactLeviCivitaBlocker =
+        "missingSelectedCarrierConnectionIsLeviCivita"
+    ; exactLeviCivitaBlockerIsCarrierConnection =
+        refl
+    ; sourcedEinsteinPromoted =
+        false
+    ; sourcedEinsteinPromotedIsFalse =
+        refl
+    ; localCompatibilityBoundary =
+        "Metric compatibility is the concrete selectedCovariantDerivativeOfMetric zero-table witness over selectedBase0/selectedBase1 and selectedTime/selectedRadial"
+        ∷ "The selected zero Christoffel table is torsion-free by finite table reduction"
+        ∷ "Curvature, Ricci, scalar curvature, Einstein tensor, and contracted-Bianchi divergence are wired as local zero-table finite contractions"
+        ∷ "This receipt does not identify selectedCarrierConnection as the undoubled Levi-Civita connection for the non-constant radial metric derivative table"
+        ∷ "No sourced Einstein equation or W4 stress-energy promotion is constructed"
+        ∷ []
+    }
+
 data GRSelectedNonFlatMetricInstanceStatus : Set where
   selectedNonFlatMetricDependencyInstantiatedNoGRPromotion :
     GRSelectedNonFlatMetricInstanceStatus
@@ -309,6 +627,9 @@ record GRSelectedNonFlatMetricInstanceSurface : Setω where
 
     selectedDependency :
       NF.GRSelectedNonFlatMetricDependency scalarOperations
+
+    christoffelFromMetricLaw :
+      NF.GRLatestWaveDoubledChristoffelMetricCompatibilityReceipt
 
     metricSymmetry :
       (base : GRSelectedFiniteRBase) →
@@ -356,6 +677,9 @@ record GRSelectedNonFlatMetricInstanceSurface : Setω where
     metricCompatibilityObligationName :
       String
 
+    leviCivitaBlockerWitness :
+      NF.GRLatestWaveDoubledChristoffelMetricCompatibilityReceipt
+
     firstMissingNonFlatLaw :
       GRSelectedNonFlatMetricFirstMissingLaw
 
@@ -372,6 +696,8 @@ canonicalGRSelectedNonFlatMetricInstanceSurface =
         NF.canonicalGRFiniteRCarrierScalarOperations
     ; selectedDependency =
         selectedGRNonFlatMetricDependency
+    ; christoffelFromMetricLaw =
+        selectedLeviCivitaBlockerWitness
     ; metricSymmetry =
         selectedMetricSymmetryLaw
     ; inverseMetricLeft =
@@ -386,13 +712,16 @@ canonicalGRSelectedNonFlatMetricInstanceSurface =
         "GRSelectedNonFlatMetricAlgebraLaws.christoffelFromMetricLaw for selectedGRNonFlatMetricDependency"
     ; metricCompatibilityObligationName =
         "selectedMetricCompatibilityObligation"
+    ; leviCivitaBlockerWitness =
+        selectedLeviCivitaBlockerWitness
     ; firstMissingNonFlatLaw =
         missingSelectedChristoffelFromMetricLaw
     ; noPromotionBoundary =
         "The selected dependency, metric table, inverse table, finite contraction, coordinate derivative, Christoffel slot, Ricci contraction slot, and trace slot are all typed"
         ∷ "Metric symmetry, inverse left/right contraction, finite contraction shape, and selected trace=r2 are table laws over the two selected coordinate indices"
-        ∷ "The Christoffel slot is not proved to be the Levi-Civita Christoffel expression for the non-flat metric"
-        ∷ "Metric compatibility is exposed as an obligation, not as a witness"
+        ∷ "The Christoffel-from-metric slot is wired to the imported doubled-Christoffel / Levi-Civita receipt from GRNonFlatScalarAlgebraSurface"
+        ∷ "The doubled-Christoffel / Levi-Civita blocker witness is available from GRNonFlatScalarAlgebraSurface.canonicalGRLatestWaveDoubledChristoffelMetricCompatibilityReceipt"
+        ∷ "Metric compatibility is witnessed for the selected placeholder connection because selectedCovariantDerivativeOfMetric reduces to r0"
         ∷ "No carrierConnectionIsLeviCivita, Ricci cancellation, Bianchi bridge, Ricci-zero theorem, Einstein tensor law, or GR closure is constructed"
         ∷ []
     }

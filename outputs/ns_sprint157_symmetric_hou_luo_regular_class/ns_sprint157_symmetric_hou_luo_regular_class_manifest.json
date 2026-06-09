@@ -1,0 +1,34 @@
+{
+  "contract": "ns_sprint157_symmetric_hou_luo_regular_class",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_symmetric_hou_luo_regular_class/ns_sprint157_symmetric_hou_luo_regular_class_manifest.json",
+      "sha256": "5b6ccf03ba53a590cb9c10e8da119ab55f0714f7c1bff4b7d1984250ecf27889"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_symmetric_hou_luo_regular_class/ns_sprint157_symmetric_hou_luo_regular_class.md",
+      "sha256": "198669abf9633005ef37ab9c22dc7d56248fae38a6c3831ab71421179786f540"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_symmetric_hou_luo_regular_class/ns_sprint157_symmetric_hou_luo_regular_class_rows.csv",
+      "sha256": "81b0773d83da100a65c1e1eea6dd87c8721db70e15a152b9ade1f18792588a9c"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_symmetric_hou_luo_regular_class/ns_sprint157_symmetric_hou_luo_regular_class_rows.json",
+      "sha256": "f3f778de2682344ff7a9a5ad708c5c10fc74c281d4a8c5910a89833a8b94a35a"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint157_symmetric_hou_luo_regular_class/ns_sprint157_symmetric_hou_luo_regular_class_summary.json",
+      "sha256": "39fc7a720c3a1b4fea22fa4af35fba7bcc31df620b6cfdbccfb77d5a85916cd6"
+    }
+  },
+  "lane": 4,
+  "manifest_hash": "c50a5b6197e053634c4a2f77f254c4653acf2f9c6758915b2dd6371d2aaf6814",
+  "sprint": 157,
+  "validation_passed": true
+}

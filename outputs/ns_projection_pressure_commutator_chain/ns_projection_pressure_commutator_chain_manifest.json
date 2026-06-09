@@ -1,0 +1,35 @@
+{
+  "contract": "ns_projection_pressure_commutator_chain",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_projection_pressure_commutator_chain/ns_projection_pressure_commutator_chain_manifest.json",
+      "sha256": "fbaf24c6ff8f823b3df76f81e8ccdd20410e93d3290ae7eefc1e01c6d475ce78"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_projection_pressure_commutator_chain/ns_projection_pressure_commutator_chain.md",
+      "sha256": "98938fe51ea45edf0e0ab8000681cb083da67cfd24bc4c11ee20f652c3082ead"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_projection_pressure_commutator_chain/ns_projection_pressure_commutator_chain_rows.csv",
+      "sha256": "211f470b9d406ec2324a5099294cb6ab32389e76c3af0004d5357b9ee3819056"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_projection_pressure_commutator_chain/ns_projection_pressure_commutator_chain_rows.json",
+      "sha256": "bbc2c644aea16d8ebc6186e17ea06421dc65179b3a2cfb2ca8909012bc5ea1bf"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_projection_pressure_commutator_chain/ns_projection_pressure_commutator_chain_summary.json",
+      "sha256": "e20b2ca5872a96ee74d03f7469e99984be0bd36e8ffccab496badb72ce3f29da"
+    }
+  },
+  "generated_at": "2026-06-08T00:00:00+10:00",
+  "manifest_hash": "43e87a7255163dac7657c2d1f4afd9d31fbb48a4994d948faaba92cc59ff5311",
+  "sprint": 166,
+  "validation_passed": true,
+  "worker": 3
+}

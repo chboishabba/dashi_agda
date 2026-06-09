@@ -1,0 +1,79 @@
+{
+  "C_values": [
+    0.25,
+    1.0
+  ],
+  "Omega_values": [
+    1.2,
+    2.0,
+    6.0,
+    20.0
+  ],
+  "T_values": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "Umax_values": [
+    0.5,
+    1.0,
+    2.5
+  ],
+  "all_double_exp_bounds_finite": true,
+  "all_equilibrium_signs_match": true,
+  "all_growth_inequalities_hold": true,
+  "bkm_finite": false,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint156_width_ode_equilibrium_scan",
+  "control_card": {
+    "C": "A deterministic Python stdlib emitter writes rows JSON, rows CSV, summary JSON, Markdown, and manifest through an atomic directory swap.",
+    "F": "No full localized Navier-Stokes derivation, no BKM integrability theorem, and no Clay Navier-Stokes solution are claimed.",
+    "G": "Validation requires positive parameters, equilibrium sign consistency, growth inequality compliance, finite double-exponential bounds, and hard false BKM/Clay promotion flags.",
+    "L": "The finite-T double-exponential bound supports scalar model validity only; BKM and full Navier-Stokes theorem obligations remain separate.",
+    "O": "Worker 3 owns scripts/ns_sprint156_width_ode_equilibrium_scan.py and outputs/ns_sprint156_width_ode_equilibrium_scan/.",
+    "P": "Use these rows as reduced-model validity evidence and invariant checks, with no promotion beyond model-validity support.",
+    "R": "Scan the corrected scalar width ODE equilibrium, compatible Omega growth inequality, and finite-T double-exponential control.",
+    "S": "The corrected equilibrium delta_eq=sqrt(nu/(Umax*logOmega)) is algebraically supported for positive nu, Umax, and logOmega."
+  },
+  "delta_factors": [
+    0.5,
+    0.9,
+    1.0,
+    1.25,
+    2.0
+  ],
+  "double_exponential_formula": "Omega(t) <= exp(log(Omega0)*exp(C*Umax*T))",
+  "equilibrium_formula": "delta_eq = sqrt(nu/(Umax*logOmega))",
+  "evidence_only": true,
+  "full_clay_ns_solved": false,
+  "growth_factors": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "lane": 3,
+  "model_name": "CorrectedWidthODEModelValiditySupport",
+  "model_validity_support": true,
+  "no_promotion_beyond_model_validity_support": true,
+  "nu_values": [
+    0.0025,
+    0.01,
+    0.04
+  ],
+  "omega_growth_formula": "Omega_dot <= C*Umax*Omega*logOmega",
+  "program": "CorrectedWidthODEEquilibriumScalarScan",
+  "promotion_allowed": false,
+  "row_count": 4320,
+  "sign_counts": {
+    "negative": 1728,
+    "positive": 1728,
+    "zero": 864
+  },
+  "sprint": 156,
+  "summary_hash": "82ad860c1e7100a3d5d44cdb4d8f30dec53c164140733e99cae908cdd230b94e",
+  "theorem_flags_fail_closed": true,
+  "validation_errors": [],
+  "validation_passed": true,
+  "width_ode_formula": "delta_dot = -Umax*logOmega*delta + nu/delta"
+}

@@ -1,0 +1,283 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint113CrowPersistenceUnderNSEvolution.agda",
+  "analytic_flags_false": true,
+  "bool_checks": {
+    "FiniteTimeFluxSurplusFromCrowDominance": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "crowGrowthPersistenceUnderNSEvolutionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "crowPersistenceUnderNSEvolutionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "ellipticBackreactionBound": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "ellipticModeLeakageControlClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "initialCrowDominanceImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "nonlinearDeformationControlClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "persistenceTimescaleLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "positiveFluxAccumulationWindowClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "viscousDecayWindowClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "category_flag_checks": {
+    "analytic": {
+      "analyticRegularityUnderNSEvolutionClosed": true
+    },
+    "clay": {
+      "clayNavierStokesPromoted": true
+    },
+    "downstream": {
+      "downstreamRegularityGatesClosed": true
+    }
+  },
+  "clay_flags_false": true,
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint113_crow_persistence_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, anchors, required strings, exact booleans, or forbidden-marker hits block audit passage",
+    "G": "Analytic closure, downstream Navier-Stokes, and Clay promotion remain false",
+    "L": "all required anchors, literals, and exact booleans must match before the audit exits successfully",
+    "O": "Worker 2 owns the Sprint113 Crow persistence audit script only",
+    "P": "CROW_PERSISTENCE_UNDER_NSE_LEDGER_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+    "R": "verify the Sprint113 Agda ledger imports initial Crow dominance, closes only the honest persistence ledger, keeps analytic/downstream/Clay flags false, includes required persistence strings, and has no forbidden markers",
+    "S": "target Agda module is inspected when present; missing target fails closed"
+  },
+  "crow_persistence_under_nse_evolution_ledger_closed": true,
+  "downstream_flags_false": true,
+  "evidence_audit_passed": true,
+  "fail_closed": false,
+  "final_decision": "CROW_PERSISTENCE_UNDER_NSE_LEDGER_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "crowPersistenceUnderNSEvolutionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "initialCrowDominanceImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "crowGrowthPersistenceUnderNSEvolutionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonlinearDeformationControlClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "viscousDecayWindowClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "ellipticModeLeakageControlClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "persistenceTimescaleLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "positiveFluxAccumulationWindowClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "ellipticBackreactionBound",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "FiniteTimeFluxSurplusFromCrowDominance",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "analytic_flag:analyticRegularityUnderNSEvolutionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "downstream_flag:downstreamRegularityGatesClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clay_flag:clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:T_persist >= c / gamma_Crow",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:initial linear Crow dominance",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:NSE persistence",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint113CrowPersistenceUnderNSEvolution.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "CROW_PERSISTENCE_UNDER_NSE_LEDGER_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+      "expected": "CROW_PERSISTENCE_UNDER_NSE_LEDGER_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "initial_crow_dominance_imported": true,
+  "missing_anchors": [],
+  "missing_required_strings": [],
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint113CrowPersistenceUnderNSEvolution",
+    "canonicalNSSprint113CrowPersistenceUnderNSEvolution",
+    "nsSprint113CrowPersistenceUnderNSEvolutionReceipt",
+    "canonicalNSSprint113CrowPersistenceUnderNSEvolutionReceipt",
+    "canonicalCrowPersistenceUnderNSEvolutionReceipt",
+    "canonicalCrowPersistenceUnderNSEvolutionFlags",
+    "ImportedSprint112Anchor",
+    "canonicalImportedSprint112Anchor",
+    "PersistenceTimescaleStatement",
+    "canonicalPersistenceTimescaleStatement",
+    "PersistenceSubgateStatuses",
+    "canonicalPersistenceSubgateStatuses",
+    "crowPersistenceUnderNSEvolutionLedgerClosed",
+    "initialCrowDominanceImported"
+  ],
+  "required_strings": [
+    "T_persist >= c / gamma_Crow",
+    "initial linear Crow dominance",
+    "NSE persistence"
+  ],
+  "route_decision": "CROW_PERSISTENCE_UNDER_NSE_LEDGER_CLOSED_FAIL_CLOSED_NO_PROMOTION",
+  "target_present": true
+}

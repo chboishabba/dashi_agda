@@ -1,0 +1,123 @@
+{
+  "artifact_complete": true,
+  "blockers": [
+    "ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators",
+    "MaximumLocationMigrationLemma",
+    "off_center_first_maximum_exclusion_missing",
+    "positive_source_sign_not_absorbed",
+    "regularity_budget_does_not_supply_source_sign",
+    "tie_breaking_for_symmetric_twin_peaks_missing"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "comparison_envelope_available": false,
+  "comparison_envelope_proved": false,
+  "contract": "ns_sprint146_maximum_location_migration_gate",
+  "control_card": {
+    "C": "Single stdlib Python sampler writes summary JSON, rows JSON, CSV, Markdown, and manifest through an atomic staging directory.",
+    "F": "Missing: MaximumLocationMigrationLemma; downstream comparison envelope, global barrier closure, and Clay promotion remain unavailable.",
+    "G": "Validation passes only when all four named rows exist, source sign logic covers positive and negative branches, blockers are explicit, and all theorem/promotion flags remain false.",
+    "L": "Compute source sign from 2*u1*partial_z^2 psi1, combine source-gradient and radial-drift proxies, classify migration status, then fail closed.",
+    "O": "Lane 4 owns only Python sprint script/test surfaces and generated outputs/ns_sprint146_maximum_location_migration_gate/ artifacts for the Sprint 146 migration gate.",
+    "P": "Use the rows as a deterministic evidence packet for the missing MaximumLocationMigrationLemma rather than as a proof artifact.",
+    "R": "Emit deterministic rows for pinned_center, symmetric_twin_peak_migration, positive_feedback_candidate, and regularity_partial_recovery_branch.",
+    "S": "The migration gate remains open: local pinned damping exists, but off-center migration, positive feedback, and partial regularity rows block closure."
+  },
+  "decision": "fail_closed_maximum_location_migration_gate_open",
+  "extra_row_ids": [],
+  "fail_closed": true,
+  "full_clay_ns_solved": false,
+  "global_barrier_closed": false,
+  "global_proof": false,
+  "global_proof_closed": false,
+  "has_blockers": true,
+  "has_migration_velocity": true,
+  "has_negative_source_sign": true,
+  "has_pinned_center_row": true,
+  "has_positive_feedback_candidate_row": true,
+  "has_positive_source_sign": true,
+  "has_regularity_partial_recovery_branch_row": true,
+  "has_symmetric_twin_peak_migration_row": true,
+  "invariant_checked": true,
+  "invariant_failures": [],
+  "invariant_valid": true,
+  "invariants_passed": true,
+  "lane": 4,
+  "maximum_location_migration_lemma_proved": false,
+  "migration_gate_closed": false,
+  "migration_proxy_formula": "x_max_dot_proxy = -partial_space_source_proxy / max(-partial_space2_v_proxy, eps)",
+  "migration_row_ids": [
+    "symmetric_twin_peak_migration",
+    "positive_feedback_candidate",
+    "regularity_partial_recovery_branch"
+  ],
+  "missing_comparison_envelope": "ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators",
+  "missing_lemma": "MaximumLocationMigrationLemma",
+  "missing_required_row_ids": [],
+  "negative_source_row_ids": [
+    "pinned_center",
+    "symmetric_twin_peak_migration"
+  ],
+  "no_global_proof": true,
+  "no_promotion": true,
+  "observed_row_ids": [
+    "pinned_center",
+    "symmetric_twin_peak_migration",
+    "positive_feedback_candidate",
+    "regularity_partial_recovery_branch"
+  ],
+  "obstruction_row_ids": [
+    "symmetric_twin_peak_migration",
+    "positive_feedback_candidate",
+    "regularity_partial_recovery_branch"
+  ],
+  "parent_contract": "ns_sprint145_comparison_envelope_inequality",
+  "parent_sprint": 145,
+  "positive_source_row_ids": [
+    "positive_feedback_candidate",
+    "regularity_partial_recovery_branch"
+  ],
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "required_row_ids": [
+    "pinned_center",
+    "positive_feedback_candidate",
+    "regularity_partial_recovery_branch",
+    "symmetric_twin_peak_migration"
+  ],
+  "row_count": 4,
+  "source_sign_formula": "source_sign = sign(2*u1*partial_z^2 psi1)",
+  "sprint": 146,
+  "status_counts": {
+    "BLOCKED_BY_MAXIMUM_LOCATION_MIGRATION": 1,
+    "BLOCKED_BY_POSITIVE_SOURCE_FEEDBACK": 1,
+    "PARTIAL_RECOVERY_BLOCKED": 1,
+    "SUPPORT_LOCAL_ONLY": 1
+  },
+  "summary_hash": "8d7e738a0712928a6567391a9cab958c8bf66805abc5de729e90ce759a6175c3",
+  "target_gate": "MaximumLocationMigrationLemma",
+  "target_variable": "v = partial_z u1",
+  "upstream_artifact_state": {
+    "sprint145_comparison_envelope_inequality": {
+      "clay_navier_stokes_promoted": false,
+      "comparison_envelope_available": false,
+      "comparison_envelope_proved": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "global_barrier_closed": false,
+      "path": "outputs/ns_sprint145_comparison_envelope_inequality/ns_sprint145_comparison_envelope_inequality_summary.json",
+      "sha256": "c49b3d81073ebd04c9f3b945fbe5229590f79e46bcac9c1e1b8a0bf7c4d761ba"
+    },
+    "sprint145_source_commutator_alignment_sampler": {
+      "clay_navier_stokes_promoted": false,
+      "comparison_envelope_available": false,
+      "comparison_envelope_proved": false,
+      "exists": true,
+      "full_clay_ns_solved": false,
+      "global_alignment_theorem_proved": false,
+      "global_barrier_closed": false,
+      "path": "outputs/ns_sprint145_source_commutator_alignment_sampler/ns_sprint145_source_commutator_alignment_sampler_summary.json",
+      "sha256": "2a87f3651cced3b86eae634b8bb0f24374144baabcfba293bc9f410bcfbca9ae"
+    }
+  },
+  "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+}

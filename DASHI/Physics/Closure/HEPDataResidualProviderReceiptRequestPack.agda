@@ -49,6 +49,34 @@ data HEPDataResidualProviderRequiredReceipt : Set where
   acceptedAuthorityRouteReceipt :
     HEPDataResidualProviderRequiredReceipt
 
+data HEPDataResidualEmpiricalCalibrationChecklistItem : Set where
+  residualRequiresUnitCalibration :
+    HEPDataResidualEmpiricalCalibrationChecklistItem
+  residualRequiresPDFLuminosityConvention :
+    HEPDataResidualEmpiricalCalibrationChecklistItem
+  residualRequiresHEPDataBinCovariance :
+    HEPDataResidualEmpiricalCalibrationChecklistItem
+  residualRequiresChi2DofReproducibility :
+    HEPDataResidualEmpiricalCalibrationChecklistItem
+  residualRequiresScaleSettingBoundary :
+    HEPDataResidualEmpiricalCalibrationChecklistItem
+  residualRequiresNoFreeFitAudit :
+    HEPDataResidualEmpiricalCalibrationChecklistItem
+  residualRequiresNoPosteriorTuningFreezeAudit :
+    HEPDataResidualEmpiricalCalibrationChecklistItem
+
+canonicalHEPDataResidualEmpiricalCalibrationChecklist :
+  List HEPDataResidualEmpiricalCalibrationChecklistItem
+canonicalHEPDataResidualEmpiricalCalibrationChecklist =
+  residualRequiresUnitCalibration
+  ∷ residualRequiresPDFLuminosityConvention
+  ∷ residualRequiresHEPDataBinCovariance
+  ∷ residualRequiresChi2DofReproducibility
+  ∷ residualRequiresScaleSettingBoundary
+  ∷ residualRequiresNoFreeFitAudit
+  ∷ residualRequiresNoPosteriorTuningFreezeAudit
+  ∷ []
+
 canonicalHEPDataResidualProviderRequiredReceipts :
   List HEPDataResidualProviderRequiredReceipt
 canonicalHEPDataResidualProviderRequiredReceipts =
@@ -156,6 +184,17 @@ record HEPDataResidualProviderPayloadRequest : Setω where
     exactRequiredPayloadFields :
       List String
 
+    empiricalCalibrationChecklist :
+      List HEPDataResidualEmpiricalCalibrationChecklistItem
+
+    empiricalCalibrationChecklistIsCanonical :
+      empiricalCalibrationChecklist
+      ≡
+      canonicalHEPDataResidualEmpiricalCalibrationChecklist
+
+    empiricalCalibrationChecklistLabels :
+      List String
+
     firstMissingReceiptPolicy :
       HEPDataResidualProviderReceiptPolicy
 
@@ -207,11 +246,28 @@ canonicalHEPDataResidualProviderPayloadRequest =
         ∷ "baselineOrInvarianceModel : named fit, null model, symmetry, invariance, or defect-free reference used before residualization"
         ∷ "residualDefinition : observed-minus-baseline, normalized pull, covariance-whitened residual, anomaly score, or declared defect-profile law"
         ∷ "nonCollapseWitnessReceipt : two selected observations or bins with distinct residual profiles and preserved defect discriminator"
-        ∷ "calibrationCovarianceReceipt : unit calibration, covariance source, rank/conditioning behavior, whitening/regularization, and dropped-uncertainty prohibition"
+        ∷ "calibrationCovarianceReceipt : unit calibration, PDF/luminosity convention where applicable, HEPData bin/covariance source, rank/conditioning behavior, whitening/regularization, and dropped-uncertainty prohibition"
+        ∷ "chi2DofReproducibilityPacket : exact runner/input/covariance/tolerance/dof packet for reproducing chi2/dof before any adequacy claim"
+        ∷ "scaleSettingBoundaryReceipt : proof that dimensionless residual or shape comparison is not being promoted as physical unit calibration"
+        ∷ "noFreeFitAudit : declaration of tuned scalars, fixed parameters, priors, and prohibited post-hoc fit choices"
+        ∷ "noPosteriorTuningFreezeAudit : pre-residual freeze tuple proving observable, dataset checksum, covariance, baseline, comparison law, runner, and tolerances were fixed before residual inspection"
         ∷ "theoremSideProjectionReceipt : MeasurementSurface projection receipt satisfying the theorem-side delta/coarse_head and metric propagation requirements"
         ∷ "defectProjectionReceipt : residual-to-DASHI defect profile contract preserving nonconstant discriminator, severity mapping, covariance propagation, and comparison target"
         ∷ "residualComparisonLawReceipt : comparison law over residual/deviation profiles matching the schema comparisonLawTarget"
         ∷ "acceptedAuthorityRouteReceipt : HEPData-to-ITIR adapter receipt plus accepted dataset authority token and route"
+        ∷ []
+    ; empiricalCalibrationChecklist =
+        canonicalHEPDataResidualEmpiricalCalibrationChecklist
+    ; empiricalCalibrationChecklistIsCanonical =
+        refl
+    ; empiricalCalibrationChecklistLabels =
+        "unit calibration receipt"
+        ∷ "PDF/luminosity convention receipt where the residual comparison consumes Drell-Yan luminosity or PDF-backed normalization"
+        ∷ "HEPData bin/covariance receipt"
+        ∷ "chi2/dof reproducibility packet"
+        ∷ "scale-setting boundary proof"
+        ∷ "no-free-fit audit"
+        ∷ "no-posterior-tuning freeze audit"
         ∷ []
     ; firstMissingReceiptPolicy =
         canonicalHEPDataResidualProviderReceiptPolicy
@@ -222,7 +278,7 @@ canonicalHEPDataResidualProviderPayloadRequest =
     ; providerInstructions =
         "Supply the full residual-specific provider receipt chain; do not answer with raw saturated values or local artifact paths"
         ∷ "Return the first missing typed receipt according to canonicalHEPDataResidualProviderFirstMissingPolicy when the full chain cannot be supplied"
-        ∷ "Residual class, selected observable, checksum-bound selection, baseline, residual definition, non-collapse witness, calibration/covariance, projection, defect projection, comparison, and authority route must be mutually bound"
+        ∷ "Residual class, selected observable, checksum-bound selection, baseline, residual definition, non-collapse witness, calibration/covariance/no-posterior-tuning checklist, projection, defect projection, comparison, and authority route must be mutually bound"
         ∷ "No provider response may promote W3/W4/W5/W8 unless later external promotion receipts are independently supplied"
         ∷ []
     ; nonPromotionBoundary =

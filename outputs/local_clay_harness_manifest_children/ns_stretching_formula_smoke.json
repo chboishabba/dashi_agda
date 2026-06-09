@@ -1,0 +1,149 @@
+{
+  "accepted_samples": 256,
+  "attempts": 256,
+  "clay_promotion": false,
+  "degenerate_attempts": 0,
+  "exact_constants": {
+    "compressive_region": "|kappa| < 1/sqrt(2)",
+    "stretching_region": "|kappa| > 1/sqrt(2)",
+    "zero_crossing_abs_kappa": 0.7071067811865475
+  },
+  "exact_formula": "Omega_c dot S(c) Omega_c = lambda(c)*(2*kappa^2-1)",
+  "harness": "ns_stretching_formula_harness",
+  "max_abs_error": 5.828670879282072e-16,
+  "max_abs_kappa": 0.9999414348535186,
+  "max_orthogonality_error": 1.7208456881689926e-15,
+  "mean_formula": -0.010651144608865284,
+  "mean_lambda": 0.41505592502619876,
+  "mean_lambda_sq": 0.18379757285632972,
+  "mean_stretching": -0.010651144608865334,
+  "negative_fraction": 0.52734375,
+  "positive_fraction": 0.47265625,
+  "promotion": {
+    "clay_promotion": false,
+    "finite_formula_checked": true,
+    "pde_promotion": false
+  },
+  "promotion_false": true,
+  "provider": "/home/c/Documents/code/dashi_agda/scripts/ns_s2_biot_savart_eigenbundle.py",
+  "requested_samples": 256,
+  "scope": "finite_symbol_diagnostic_not_pde_proof",
+  "script": "scripts/ns_stretching_formula_harness.py",
+  "seed": 20260608,
+  "sign_bins": [
+    {
+      "count": 24,
+      "high": 0.1,
+      "low": 0.0,
+      "max_stretching": -0.07628215576259456,
+      "mean_stretching": -0.40672073438232403,
+      "min_stretching": -0.4995333097623074,
+      "negative_fraction": 1.0,
+      "positive_fraction": 0.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 17,
+      "high": 0.2,
+      "low": 0.1,
+      "max_stretching": -0.05054774543749301,
+      "mean_stretching": -0.35011679178115584,
+      "min_stretching": -0.48627249087157626,
+      "negative_fraction": 1.0,
+      "positive_fraction": 0.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 14,
+      "high": 0.3,
+      "low": 0.2,
+      "max_stretching": -0.17779948570349854,
+      "mean_stretching": -0.3686880293790498,
+      "min_stretching": -0.4433495539523986,
+      "negative_fraction": 1.0,
+      "positive_fraction": 0.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 19,
+      "high": 0.4,
+      "low": 0.3,
+      "max_stretching": -0.09440497523543404,
+      "mean_stretching": -0.3265854283069224,
+      "min_stretching": -0.39754941436884633,
+      "negative_fraction": 1.0,
+      "positive_fraction": 0.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 14,
+      "high": 0.5,
+      "low": 0.4,
+      "max_stretching": -0.15365665550322777,
+      "mean_stretching": -0.24391893467150846,
+      "min_stretching": -0.32039988134199415,
+      "negative_fraction": 1.0,
+      "positive_fraction": 0.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 19,
+      "high": 0.6,
+      "low": 0.5,
+      "max_stretching": -0.06607468665840609,
+      "mean_stretching": -0.17189147937655544,
+      "min_stretching": -0.2412118072943649,
+      "negative_fraction": 1.0,
+      "positive_fraction": 0.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 28,
+      "high": 0.7071067811865475,
+      "low": 0.6,
+      "max_stretching": -0.001741204380865849,
+      "mean_stretching": -0.06038456661033935,
+      "min_stretching": -0.1374924357612808,
+      "negative_fraction": 1.0,
+      "positive_fraction": 0.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 24,
+      "high": 0.8,
+      "low": 0.7071067811865475,
+      "max_stretching": 0.10082500760255543,
+      "mean_stretching": 0.043832792857946175,
+      "min_stretching": 0.006495701919690563,
+      "negative_fraction": 0.0,
+      "positive_fraction": 1.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 16,
+      "high": 0.9,
+      "low": 0.8,
+      "max_stretching": 0.30837166787136,
+      "mean_stretching": 0.18210546019595159,
+      "min_stretching": 0.07920367638220513,
+      "negative_fraction": 0.0,
+      "positive_fraction": 1.0,
+      "zero_fraction": 0.0
+    },
+    {
+      "count": 81,
+      "high": 1.000000000001,
+      "low": 0.9,
+      "max_stretching": 0.49370530303731186,
+      "mean_stretching": 0.3550523738474488,
+      "min_stretching": 0.04264306311063847,
+      "negative_fraction": 0.0,
+      "positive_fraction": 1.0,
+      "zero_fraction": 0.0
+    }
+  ],
+  "theorem_label": "NS-F2",
+  "theorem_name": "NSCoherentStretchingExactFormula",
+  "threshold_prediction": "stretching changes sign at |kappa| = 1/sqrt(2)",
+  "zero_fraction": 0.0
+}

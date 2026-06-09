@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "flux_terms_cancel": true,
+    "full_degree_boundary": true,
+    "gauge_domain_preserved": true,
+    "opposite_face_is_involution": true,
+    "orientations_cancel": true,
+    "quotient_symmetry_visible": true,
+    "weights_preserved": true
+  },
+  "clay_promotion": false,
+  "depth": 3,
+  "face_pairs": 6,
+  "flux_cancellation_error": 0.0,
+  "full_degree_error": 0.0,
+  "gauge_descent_error": 0.0,
+  "opposite_face_involution_error": 0,
+  "orientation_cancellation_error": 0.0,
+  "promotion": false,
+  "q_form_symmetry_error": 0.0,
+  "quotient_symmetry_error": 0.0,
+  "weight_preservation_error": 0.0,
+  "ym1_promotion": false
+}

@@ -1,0 +1,6 @@
+observable,formula,value,unit,reference_value,carrier_internal,external_gr_baseline,calibration_required,promotion_status,boundary
+mercury_perihelion_advance,6*pi*G*M_sun/(a*(1-e^2)*c^2) per orbit,42.98197549746712,arcsec/century,about 42.98 arcsec/century,False,True,True,NO_PROMOTION,standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction
+solar_limb_light_deflection,4*G*M_sun/(c^2*R_sun),1.7512432813682448,arcsec,about 1.750 arcsec,False,True,True,NO_PROMOTION,standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction
+solar_shapiro_one_way_scale,2*G*M_sun/c^3,9.851279787922078,microseconds,about 9.85 microseconds before logarithmic path factor,False,True,True,NO_PROMOTION,standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction
+solar_surface_gravitational_redshift,G*M_sun/(R_sun*c^2),2.122566754396204e-06,dimensionless,about 2.12e-6,False,True,True,NO_PROMOTION,standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction
+solar_surface_redshift_velocity_equivalent,c*G*M_sun/(R_sun*c^2),636.3295045695203,m/s,about 636 m/s,False,True,True,NO_PROMOTION,standard weak-field GR baseline; not a carrier-derived DASHI gravity prediction

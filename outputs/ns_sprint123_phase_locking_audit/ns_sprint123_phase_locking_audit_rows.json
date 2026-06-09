@@ -1,0 +1,317 @@
+[
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "sprint123RotatingFramePhaseLockingLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "sprint122PersistenceImported",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "rotatingFramePhaseLockingEstimateRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "nseDerivedPhaseODERequirementRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "dampingDriftBalanceRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "favorableWindowLowerBoundRequirementRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "classifierSamplerRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "imposedLockingRejected",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "rotatingFramePhaseLockingEstimateClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "favorablePhaseLagWindowLowerBoundClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "rotatingStrainFluxBudgetBeatsKStarClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "kStarCollapseFromRotatingStrainClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "blowupCriterionBridgeClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "globalLerayCompatibleRotatingStrainDataClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "navierStokesClayAssemblyClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:sprint123RotatingFramePhaseLockingLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:sprint122PersistenceImported",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:rotatingFramePhaseLockingEstimateRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:nseDerivedPhaseODERequirementRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:dampingDriftBalanceRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:favorableWindowLowerBoundRequirementRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "keyword_true:classifierSamplerRecorded",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:rotatingFramePhaseLockingEstimateClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:favorablePhaseLagWindowLowerBoundClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:rotatingStrainFluxBudgetBeatsKStarClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:kStarCollapseFromRotatingStrainClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:blowupCriterionBridgeClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:globalLerayCompatibleRotatingStrainDataClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:navierStokesClayAssemblyClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "keyword_false:clay",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:Sprint123 imports Sprint122 persistence obstruction",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:RotatingFramePhaseLockingEstimate",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:phase locking must follow from NSE-derived frame dynamics",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:imposed phase locking is circular",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:requires favorable phase-lag window lower bound",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:damping drift and strain rotation must leave positive dwell time",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:RotatingStrainFluxBudgetBeatsKStar remains open",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:complete=false",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "present",
+    "gate": "required_string:clayNavierStokesPromoted remains false",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "present",
+    "expected": "DASHI/Physics/Closure/NSSprint123RotatingFramePhaseLockingEstimate.agda",
+    "gate": "target_module",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "SPRINT123_ROTATING_FRAME_PHASE_LOCKING_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "expected": "SPRINT123_ROTATING_FRAME_PHASE_LOCKING_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "gate": "route",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "all present",
+    "expected": "all present",
+    "gate": "required_anchors",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "none",
+    "expected": "none",
+    "gate": "screened_terms",
+    "passed": true,
+    "status": "PASS"
+  }
+]

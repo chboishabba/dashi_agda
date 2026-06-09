@@ -29,19 +29,23 @@ scaledDecimalStrictGT9566over9000 =
 data W4DiagonalConventionGateConsumerStatus : Set where
   diagonalCandidateSelectedButConsumerMissing :
     W4DiagonalConventionGateConsumerStatus
-  diagonalConventionAcceptedAwaitingW4ZAdequacy :
+  diagonalConventionQuarantinedAwaitingExternalAcceptance :
+    W4DiagonalConventionGateConsumerStatus
+  diagonalCandidateRejectedNoCentralEfficiencyAcceptanceModel :
     W4DiagonalConventionGateConsumerStatus
 
 data W4DiagonalConventionGateConsumerFirstMissing : Set where
-  missingAcceptedDiagonalConventionGateConsumer :
+  missingExternalDiagonalConventionGateConsumer :
     W4DiagonalConventionGateConsumerFirstMissing
   missingW4ZAdequacyConsumer :
     W4DiagonalConventionGateConsumerFirstMissing
+  missingSourceCentralEfficiencyAcceptanceModel :
+    W4DiagonalConventionGateConsumerFirstMissing
 
 data W4DiagonalConventionRequiredField : Set where
-  acceptedDiagonalAsAcceptanceConvention :
+  providerDiagonalAsAcceptanceConvention :
     W4DiagonalConventionRequiredField
-  acceptedDiagonalAdmissibilityBounds :
+  providerDiagonalAdmissibilityBounds :
     W4DiagonalConventionRequiredField
   acceptedElectronMuonChannelCombinationLaw :
     W4DiagonalConventionRequiredField
@@ -55,8 +59,8 @@ data W4DiagonalConventionRequiredField : Set where
 canonicalW4DiagonalConventionRequiredFields :
   List W4DiagonalConventionRequiredField
 canonicalW4DiagonalConventionRequiredFields =
-  acceptedDiagonalAsAcceptanceConvention
-  ∷ acceptedDiagonalAdmissibilityBounds
+  providerDiagonalAsAcceptanceConvention
+  ∷ providerDiagonalAdmissibilityBounds
   ∷ acceptedElectronMuonChannelCombinationLaw
   ∷ acceptedCovariancePropagationLaw
   ∷ acceptedW4ZAdequacyConsumer
@@ -70,7 +74,7 @@ data W4DiagonalConventionChannelCombinationCandidate : Set where
     W4DiagonalConventionChannelCombinationCandidate
   blueElectronMuonCombinationRequested :
     W4DiagonalConventionChannelCombinationCandidate
-  geometricMeanChannelCombinationAccepted :
+  geometricMeanChannelCombinationQuarantined :
     W4DiagonalConventionChannelCombinationCandidate
 
 data W4DiagonalConventionCovariancePropagationCandidate : Set where
@@ -84,13 +88,15 @@ data W4DiagonalConventionCovariancePropagationCandidate : Set where
 data W4DiagonalConventionAdmissibilityStatus : Set where
   diagonalBoundsComputedAndAdmissibleButNotAccepted :
     W4DiagonalConventionAdmissibilityStatus
-  diagonalBoundsComputedAndAccepted :
+  diagonalBoundsComputedAndQuarantined :
     W4DiagonalConventionAdmissibilityStatus
 
 data W4DiagonalConventionAuthorityStatus : Set where
-  conventionAcceptedW4ZAdequacyPending :
+  conventionQuarantinedW4ZAdequacyPending :
     W4DiagonalConventionAuthorityStatus
   internalAdequacyEvidenceComputedW4GatePending :
+    W4DiagonalConventionAuthorityStatus
+  sourceCentralEfficiencyAcceptanceModelMissing :
     W4DiagonalConventionAuthorityStatus
 
 record W4DiagonalConventionGateConsumerRequest : Set where
@@ -226,8 +232,8 @@ record W4DiagonalConventionGateConsumerRequest : Set where
     internalAdequacyComputedPass :
       Bool
 
-    internalAdequacyComputedPassIsTrue :
-      internalAdequacyComputedPass ≡ true
+    internalAdequacyComputedPassIsFalse :
+      internalAdequacyComputedPass ≡ false
 
     acceptedConsumerReceiptShape :
       List String
@@ -242,26 +248,26 @@ record W4DiagonalConventionGateConsumerRequest : Set where
     diagonalAsAcceptanceConventionAccepted :
       Bool
 
-    diagonalAsAcceptanceConventionAcceptedIsTrue :
-      diagonalAsAcceptanceConventionAccepted ≡ true
+    diagonalAsAcceptanceConventionAcceptedIsFalse :
+      diagonalAsAcceptanceConventionAccepted ≡ false
 
     diagonalAdmissibilityBoundsAccepted :
       Bool
 
-    diagonalAdmissibilityBoundsAcceptedIsTrue :
-      diagonalAdmissibilityBoundsAccepted ≡ true
+    diagonalAdmissibilityBoundsAcceptedIsFalse :
+      diagonalAdmissibilityBoundsAccepted ≡ false
 
     electronMuonCombinationLawAccepted :
       Bool
 
-    electronMuonCombinationLawAcceptedIsTrue :
-      electronMuonCombinationLawAccepted ≡ true
+    electronMuonCombinationLawAcceptedIsFalse :
+      electronMuonCombinationLawAccepted ≡ false
 
     covariancePropagationLawAccepted :
       Bool
 
-    covariancePropagationLawAcceptedIsTrue :
-      covariancePropagationLawAccepted ≡ true
+    covariancePropagationLawAcceptedIsFalse :
+      covariancePropagationLawAccepted ≡ false
 
     constructsW4ZAdequacy :
       Bool
@@ -289,9 +295,9 @@ canonicalW4DiagonalConventionGateConsumerRequest :
 canonicalW4DiagonalConventionGateConsumerRequest =
   record
     { status =
-        diagonalConventionAcceptedAwaitingW4ZAdequacy
+        diagonalCandidateRejectedNoCentralEfficiencyAcceptanceModel
     ; firstMissing =
-        missingW4ZAdequacyConsumer
+        missingSourceCentralEfficiencyAcceptanceModel
     ; candidateReceipt =
         Candidate.canonicalW4ResponseMatrixAcceptanceCandidateReceipt
     ; diagnosticOutputSHA256 =
@@ -303,13 +309,13 @@ canonicalW4DiagonalConventionGateConsumerRequest =
     ; selectedCandidateIsDiagonal =
         refl
     ; authorityStatus =
-        internalAdequacyEvidenceComputedW4GatePending
+        sourceCentralEfficiencyAcceptanceModelMissing
     ; diagonalConventionFormula =
-        "Accepted convention layer: A_diag[j] = P[j][j], same-bin diagonal of the CMS phi-star response matrix"
+        "Rejected convention candidate: A_diag[j] = P[j][j] is same-bin response retention, not a source central efficiency/acceptance model"
     ; diagonalAdmissibilityStatus =
-        diagonalBoundsComputedAndAccepted
+        diagonalBoundsComputedAndAdmissibleButNotAccepted
     ; diagonalAdmissibilityBoundText =
-        "W4-selected diagonal entries are checksum-bound and satisfy 0 <= A_diag[j] <= 1; global selected min=0.8279, max=1.0, mean=0.9569463888888888"
+        "W4-selected diagonal entries are checksum-bound and satisfy 0 <= A_diag[j] <= 1, but this bound does not identify central efficiency/acceptance"
     ; selectedW4DiagonalGlobalMin =
         Candidate.W4ResponseMatrixAcceptanceCandidateReceipt.selectedW4DiagonalGlobalMin
           Candidate.canonicalW4ResponseMatrixAcceptanceCandidateReceipt
@@ -340,24 +346,24 @@ canonicalW4DiagonalConventionGateConsumerRequest =
     ; muonDiagonalMean106to170 =
         "0.9885316666666666"
     ; channelCombinationCandidate =
-        geometricMeanChannelCombinationAccepted
+        channelSeparatedDiagnosticOnly
     ; channelCombinationFormula =
         "A_geom[j] = sqrt(A_e,j * A_mu,j)"
     ; channelCombinationLawText =
-        "Accepted convention-layer law: combine electron and muon diagonal candidates by geometric mean. This avoids claiming an inverse-covariance channel authority before W4ZAdequacy consumes the convention."
+        "Diagnostic-only formula: no electron/muon channel combination is accepted because the source does not provide central efficiency/acceptance."
     ; channelCombinationInputs =
         "electron diagonal vector A_e[j]"
         ∷ "muon diagonal vector A_mu[j]"
         ∷ "positivity/admissibility bound 0 <= A_e[j], A_mu[j] <= 1 from the SHA-bound diagonal diagnostic"
         ∷ []
     ; channelCombinationOutputContract =
-        "accepted convention-layer A_geom[j]; W4ZAdequacy must still consume it with a pass/fail tolerance"
+        "no accepted output; provider must supply a real central efficiency/acceptance model or accepted conversion law"
     ; covariancePropagationCandidate =
-        linearizedDiagonalRatioCovarianceRequested
+        noAcceptedCovariancePropagationLaw
     ; covariancePropagationFormula =
         "V_y = J V_x J^T, with y_j = sigma_j / A_j and J carrying dy/dsigma = 1/A_j and dy/dA = -sigma_j/A_j^2"
     ; covariancePropagationLawText =
-        "Accepted convention-layer law: propagate measurement and diagonal-response uncertainty through the corrected ratio with a linearized Jacobian. A W4ZAdequacy consumer must still bind the concrete covariance inputs and tolerance."
+        "No accepted covariance law: propagating sigma/A is not source-valid without a central efficiency/acceptance model."
     ; covariancePropagationInputs =
         "published phi-star covariance for the measured ratio or source spectrum"
         ∷ "response-matrix diagonal uncertainty or accepted proxy"
@@ -365,19 +371,19 @@ canonicalW4DiagonalConventionGateConsumerRequest =
         ∷ "bin-width and normalization convention"
         ∷ []
     ; covariancePropagationOutputContract =
-        "accepted covariance for the W4 corrected observable, including whether response-matrix uncertainty is treated as statistical, systematic, or fixed convention"
+        "no accepted corrected covariance output"
     ; internalAdequacyEvidenceReceipt =
         Candidate.canonicalW4ZInternalAdequacyEvidenceReceipt
     ; internalAdequacyMassWindow =
         "76-106 GeV"
     ; internalAdequacyCombinedEfficiency =
-        "0.9566"
+        "not accepted: response diagonal is not central efficiency"
     ; internalAdequacyBound =
         "0.90"
     ; internalAdequacyComputationText =
-        "Internal non-promoting adequacy evidence: 76-106 GeV geometric-mean diagonal combined efficiency 0.9566 clears bound 0.90, with an Agda Nat witness for scaled-decimal strict inequality 9566 > 9000"
+        "Fail-closed: the former 0.9566 diagonal arithmetic is not W4 adequacy evidence because Table 2/3 and response matrices do not provide a central efficiency/acceptance model"
     ; internalAdequacyFirstMissing =
-        Candidate.internalAdequacyArithmeticDischargedW4ZAdequacyPending
+        Candidate.internalAdequacyBlockedBySourceModelGap
     ; externalAuthorityFirstMissingBeforeHookRequest =
         W4Authority.w4AuthorityFirstMissingBeforePolicyHookRequest
     ; externalAuthorityFirstMissingAfterHookRequest =
@@ -387,15 +393,15 @@ canonicalW4DiagonalConventionGateConsumerRequest =
     ; internalAdequacyStrictGreaterThanWitness =
         scaledDecimalStrictGT9566over9000
     ; internalAdequacyComputedPass =
-        true
-    ; internalAdequacyComputedPassIsTrue =
+        false
+    ; internalAdequacyComputedPassIsFalse =
         refl
     ; acceptedConsumerReceiptShape =
-        "acceptedCandidate : diagonalCandidate"
-        ∷ "diagonalAdmissibility : all W4-selected A_diag[j] in [0,1], SHA-bound"
-        ∷ "channelCombinationLaw : geometric mean A_geom[j] = sqrt(A_e,j * A_mu,j)"
-        ∷ "covariancePropagationLaw : Jacobian V_y = J V_x J^T"
-        ∷ "internalAdequacyEvidence : non-promoting computed evidence with Agda Nat witness for 0.9566 > 0.90"
+        "acceptedCandidate : none from public Table 2/3 or response matrices"
+        ∷ "diagonalAdmissibility : diagnostic only; all W4-selected A_diag[j] in [0,1], SHA-bound"
+        ∷ "channelCombinationLaw : missing"
+        ∷ "covariancePropagationLaw : missing"
+        ∷ "internalAdequacyEvidence : none accepted"
         ∷ "w4AdequacyConsumer : consumes corrected observable and covariance"
         ∷ "promotionBoundary : states whether W4ZAdequacy and W4 gate receipt are constructed"
         ∷ []
@@ -404,20 +410,20 @@ canonicalW4DiagonalConventionGateConsumerRequest =
     ; requiredAcceptedConsumerFieldsAreCanonical =
         refl
     ; diagonalAsAcceptanceConventionAccepted =
-        true
-    ; diagonalAsAcceptanceConventionAcceptedIsTrue =
+        false
+    ; diagonalAsAcceptanceConventionAcceptedIsFalse =
         refl
     ; diagonalAdmissibilityBoundsAccepted =
-        true
-    ; diagonalAdmissibilityBoundsAcceptedIsTrue =
+        false
+    ; diagonalAdmissibilityBoundsAcceptedIsFalse =
         refl
     ; electronMuonCombinationLawAccepted =
-        true
-    ; electronMuonCombinationLawAcceptedIsTrue =
+        false
+    ; electronMuonCombinationLawAcceptedIsFalse =
         refl
     ; covariancePropagationLawAccepted =
-        true
-    ; covariancePropagationLawAcceptedIsTrue =
+        false
+    ; covariancePropagationLawAcceptedIsFalse =
         refl
     ; constructsW4ZAdequacy =
         false
@@ -432,13 +438,13 @@ canonicalW4DiagonalConventionGateConsumerRequest =
     ; constructsW4GateReceiptIsFalse =
         refl
     ; notes =
-        "The diagonal convention layer is accepted internally for the W4 consumer target"
-        ∷ "The local response-matrix arithmetic and diagnostic checksum are bound"
-        ∷ "Explicit diagonal admissibility bounds are accepted for the W4-selected windows"
-        ∷ "The accepted channel-combination law is the geometric mean, not the previous BLUE request"
-        ∷ "The accepted covariance law is linearized Jacobian propagation through sigma/A"
-        ∷ "A non-promoting internal adequacy evidence receipt records 0.9566 > 0.90 at the string/scaled-decimal layer with a typed Nat witness"
-        ∷ "The diagonal-consumer local blocker is a W4ZAdequacy consumer for the corrected observable and covariance"
+        "The diagonal response-matrix arithmetic remains checksum-bound diagnostic context only"
+        ∷ "Table 2/3 do not bind a central efficiency/acceptance model"
+        ∷ "The diagonal convention is not accepted as W4 A(M,phi*)"
+        ∷ "No electron/muon channel-combination law is accepted"
+        ∷ "No covariance propagation law through sigma/A is accepted"
+        ∷ "No internal adequacy pass is accepted from 0.9566 > 0.90"
+        ∷ "The local blocker is the missing source central efficiency/acceptance model or accepted conversion law"
         ∷ "The external authority blocker is unchanged before/after public-source policy-hook request: missingAcceptedDYLuminosityConventionAuthority"
         ∷ "No W4ZAdequacy, accepted DY convention authority, or W4 gate receipt is constructed"
         ∷ []

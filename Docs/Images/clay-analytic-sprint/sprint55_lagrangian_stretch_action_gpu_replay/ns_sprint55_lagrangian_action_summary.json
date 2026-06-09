@@ -1,0 +1,159 @@
+{
+  "contract": "ns_sprint55_lagrangian_action_artifact",
+  "diagnostic_mode": "sprint55_lagrangian_accumulated_stretch_action",
+  "input_table_row_count": 56006,
+  "lagrangian_action_row_count": 3388,
+  "hysteresis_row_count": 56006,
+  "action_summary_row_count": 56,
+  "material_lineage_count": 3388,
+  "direct_stretch_available_lineage_count": 3388,
+  "action_threshold": 0.05,
+  "action_small_majority": 0.9,
+  "sigma_threshold": 0.5,
+  "positive_action_total": 2.0969732092659914,
+  "weighted_positive_action_total": 49930035.59395337,
+  "action_small_fraction": 0.9985242030696576,
+  "dangerous_lineage_count": 5,
+  "sigma_action_fit": -0.5102412568825301,
+  "does_lagrangian_action_gate_close": true,
+  "does_lagrangian_action_summability_gate_close": false,
+  "lagrangian_action_gate_proved": false,
+  "weighted_action_summability_proved": false,
+  "packet_local_stretch_action_available": false,
+  "packet_local_stretch_action_proved": false,
+  "color_string_proxy_demoted": true,
+  "physical_bridge_proved": false,
+  "stretch_absorption_proved": false,
+  "no_finite_time_blowup_proved": false,
+  "clay_promotion": false,
+  "navier_stokes_promotion": false,
+  "clay_navier_stokes_promoted": false,
+  "promotion_status": "NO_PROMOTION_SPRINT55_LAGRANGIAN_ACTION_DIAGNOSTIC",
+  "route_decision": "LAGRANGIAN_STRETCH_ACTION_SMALL_DIAGNOSTIC",
+  "action_boundary": "Sprint 55 v1 accumulates shell/time normalized omega dot S omega along Sprint 49 material parent packet lineages. Ternary colors are derived after integration. Packet-local support masks are unavailable, so this is not theorem-grade packet-local stretch action.",
+  "direct_stretch_status": "shell_time_normalized_stretch_available_packet_mask_join_unavailable",
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyFiveLagrangianStretchActionAuditReceipt",
+  "inputs": [
+    "outputs/sprint49_material_parent_N32_seed0_gpu",
+    "outputs/sprint49_material_parent_N32_seed1_gpu",
+    "outputs/sprint49_material_parent_N32_seed2_gpu",
+    "outputs/sprint49_material_parent_N32_seed3_gpu",
+    "outputs/sprint49_material_parent_N64_seed0_gpu",
+    "outputs/sprint49_material_parent_N64_seed1_gpu"
+  ],
+  "input_manifest_summaries": [
+    {
+      "input_dir": "outputs/sprint49_material_parent_N32_seed0_gpu",
+      "summary_contract": "ns_material_parent_artifact",
+      "summary_row_count": 336,
+      "table_row_count": 5724,
+      "material_parent_route_status": "ADJACENT_PACKET_THEOREM_INSUFFICIENT",
+      "source_truth": "outputs/truth3d/ns3d_N32_seed0_gpu.npz"
+    },
+    {
+      "input_dir": "outputs/sprint49_material_parent_N32_seed1_gpu",
+      "summary_contract": "ns_material_parent_artifact",
+      "summary_row_count": 336,
+      "table_row_count": 5674,
+      "material_parent_route_status": "ADJACENT_PACKET_THEOREM_INSUFFICIENT",
+      "source_truth": "outputs/truth3d/ns3d_N32_seed1_gpu.npz"
+    },
+    {
+      "input_dir": "outputs/sprint49_material_parent_N32_seed2_gpu",
+      "summary_contract": "ns_material_parent_artifact",
+      "summary_row_count": 336,
+      "table_row_count": 5710,
+      "material_parent_route_status": "ADJACENT_PACKET_THEOREM_INSUFFICIENT",
+      "source_truth": "outputs/truth3d/ns3d_N32_seed2_gpu.npz"
+    },
+    {
+      "input_dir": "outputs/sprint49_material_parent_N32_seed3_gpu",
+      "summary_contract": "ns_material_parent_artifact",
+      "summary_row_count": 336,
+      "table_row_count": 5765,
+      "material_parent_route_status": "ADJACENT_PACKET_THEOREM_INSUFFICIENT",
+      "source_truth": "outputs/truth3d/ns3d_N32_seed3_gpu.npz"
+    },
+    {
+      "input_dir": "outputs/sprint49_material_parent_N64_seed0_gpu",
+      "summary_contract": "ns_material_parent_artifact",
+      "summary_row_count": 672,
+      "table_row_count": 16460,
+      "material_parent_route_status": "ADJACENT_PACKET_THEOREM_INSUFFICIENT",
+      "source_truth": "outputs/truth3d/ns3d_N64_seed0_gpu.npz"
+    },
+    {
+      "input_dir": "outputs/sprint49_material_parent_N64_seed1_gpu",
+      "summary_contract": "ns_material_parent_artifact",
+      "summary_row_count": 672,
+      "table_row_count": 16673,
+      "material_parent_route_status": "ADJACENT_PACKET_THEOREM_INSUFFICIENT",
+      "source_truth": "outputs/truth3d/ns3d_N64_seed1_gpu.npz"
+    }
+  ],
+  "truth_metadata": [
+    {
+      "run": "sprint49_material_parent_N32_seed0_gpu",
+      "input_dir": "outputs/sprint49_material_parent_N32_seed0_gpu",
+      "source_truth": "outputs/truth3d/ns3d_N32_seed0_gpu.npz",
+      "truth_path": "outputs/truth3d/ns3d_N32_seed0_gpu.npz",
+      "N": 32,
+      "save_every": 10,
+      "dt": 0.001,
+      "snapshots": 13
+    },
+    {
+      "run": "sprint49_material_parent_N32_seed1_gpu",
+      "input_dir": "outputs/sprint49_material_parent_N32_seed1_gpu",
+      "source_truth": "outputs/truth3d/ns3d_N32_seed1_gpu.npz",
+      "truth_path": "outputs/truth3d/ns3d_N32_seed1_gpu.npz",
+      "N": 32,
+      "save_every": 10,
+      "dt": 0.001,
+      "snapshots": 13
+    },
+    {
+      "run": "sprint49_material_parent_N32_seed2_gpu",
+      "input_dir": "outputs/sprint49_material_parent_N32_seed2_gpu",
+      "source_truth": "outputs/truth3d/ns3d_N32_seed2_gpu.npz",
+      "truth_path": "outputs/truth3d/ns3d_N32_seed2_gpu.npz",
+      "N": 32,
+      "save_every": 10,
+      "dt": 0.001,
+      "snapshots": 13
+    },
+    {
+      "run": "sprint49_material_parent_N32_seed3_gpu",
+      "input_dir": "outputs/sprint49_material_parent_N32_seed3_gpu",
+      "source_truth": "outputs/truth3d/ns3d_N32_seed3_gpu.npz",
+      "truth_path": "outputs/truth3d/ns3d_N32_seed3_gpu.npz",
+      "N": 32,
+      "save_every": 10,
+      "dt": 0.001,
+      "snapshots": 13
+    },
+    {
+      "run": "sprint49_material_parent_N64_seed0_gpu",
+      "input_dir": "outputs/sprint49_material_parent_N64_seed0_gpu",
+      "source_truth": "outputs/truth3d/ns3d_N64_seed0_gpu.npz",
+      "truth_path": "outputs/truth3d/ns3d_N64_seed0_gpu.npz",
+      "N": 64,
+      "save_every": 10,
+      "dt": 0.001,
+      "snapshots": 13
+    },
+    {
+      "run": "sprint49_material_parent_N64_seed1_gpu",
+      "input_dir": "outputs/sprint49_material_parent_N64_seed1_gpu",
+      "source_truth": "outputs/truth3d/ns3d_N64_seed1_gpu.npz",
+      "truth_path": "outputs/truth3d/ns3d_N64_seed1_gpu.npz",
+      "N": 64,
+      "save_every": 10,
+      "dt": 0.001,
+      "snapshots": 13
+    }
+  ],
+  "ns_lagrangian_stretch_action_path": "outputs/sprint55_lagrangian_stretch_action_gpu_audit/ns_lagrangian_stretch_action.csv",
+  "ns_packet_action_hysteresis_path": "outputs/sprint55_lagrangian_stretch_action_gpu_audit/ns_packet_action_hysteresis.csv",
+  "ns_lagrangian_action_by_shell_path": "outputs/sprint55_lagrangian_stretch_action_gpu_audit/ns_lagrangian_action_by_shell.csv"
+}

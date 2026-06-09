@@ -1,0 +1,25 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3000,
+    "once": true,
+    "timeout_seconds": 3600
+  },
+  "runners": {
+    "paper7-wave11-mgr-next-hard-symbols": {
+      "parent": null,
+      "lane": "paper7-wave11/next-hard-symbol-manager",
+      "claim": "Paper 7 wave11 SECTION MANAGER. Enforce strict symbol-inhabitation contract for two leaf workers. Do not accept docs-only/audit/blocker-map/scaffold outputs. W2 token is parked as named authority boundary from wave10; do not relitigate it. Supervise Gate3 missingPlaquetteStokesOrJacobiLaw and Gate4 missingValuationStressEnergyCovariantDivergenceLaw."
+    },
+    "paper7-wave11-gate3-stokes-jacobi": {
+      "parent": "paper7-wave11-mgr-next-hard-symbols",
+      "lane": "paper7-wave11/gate3/missingPlaquetteStokesOrJacobiLaw",
+      "claim": "STRICT SYMBOL-INHABITATION CONTRACT. Use $autonomous-orchestrator only; do not use Codex built-in subagents. You are a leaf worker unless this runner says SECTION MANAGER. Your only job is the named target symbol. Allowed exits only: (1) Agda source diff + targeted agda validation passes for the target file; (2) Agda source diff + exact Agda stderr showing the missing upstream type/symbol; (3) empty diff + one-line named authority-boundary escalation with exact receipt shape. Forbidden exits, automatic lane failure and no useful retry: no Agda diff unless authority boundary, new postulate, weakened theorem type, promotion flag set without inhabited upstream receipts, audit/summary/next-steps/blocker-map/candidate/scaffold/decomposition/doc-only update. Do not create a new obligation surface for this symbol. Do not rename the symbol to something weaker. Touch only the target module and direct imports needed for compilation. Include the exact validation command you ran.\nTARGET: DASHI.Physics.Closure.YangMillsFieldEquationObstruction.missingPlaquetteStokesOrJacobiLaw / firstRemainingBianchiPrimitive after flat covariant-extension discharge. Module file: DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda. Attempt to inhabit the plaquette Stokes/Jacobi law using existing selected exterior derivative squared-zero witness, finite SU(3) Jacobi residual, and SFGC plaquette/Stokes surfaces. If blocked, produce exact Agda stderr naming the first missing upstream symbol. Validation command: agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YangMillsFieldEquationObstruction.agda"
+    },
+    "paper7-wave11-gate4-stress-divergence": {
+      "parent": "paper7-wave11-mgr-next-hard-symbols",
+      "lane": "paper7-wave11/gate4/missingValuationStressEnergyCovariantDivergenceLaw",
+      "claim": "STRICT SYMBOL-INHABITATION CONTRACT. Use $autonomous-orchestrator only; do not use Codex built-in subagents. You are a leaf worker unless this runner says SECTION MANAGER. Your only job is the named target symbol. Allowed exits only: (1) Agda source diff + targeted agda validation passes for the target file; (2) Agda source diff + exact Agda stderr showing the missing upstream type/symbol; (3) empty diff + one-line named authority-boundary escalation with exact receipt shape. Forbidden exits, automatic lane failure and no useful retry: no Agda diff unless authority boundary, new postulate, weakened theorem type, promotion flag set without inhabited upstream receipts, audit/summary/next-steps/blocker-map/candidate/scaffold/decomposition/doc-only update. Do not create a new obligation surface for this symbol. Do not rename the symbol to something weaker. Touch only the target module and direct imports needed for compilation. Include the exact validation command you ran.\nTARGET: DASHI.Physics.Closure.FactorVecDiscreteMetricTensorSurface.missingValuationStressEnergyCovariantDivergenceLaw / next stress-energy compatibility primitive after local Einstein-source coupling. Module file: DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda; GRDiscreteBianchiFiniteR may be touched only if direct import use requires. Attempt to prove covariant-divergence compatibility for the local zero/unit stress-energy tensor using the contracted Bianchi zero divergence surface already present. If blocked, produce exact Agda stderr naming the missing covariant derivative/divergence/matter interface symbol. Validation command: agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda"
+    }
+  }
+}

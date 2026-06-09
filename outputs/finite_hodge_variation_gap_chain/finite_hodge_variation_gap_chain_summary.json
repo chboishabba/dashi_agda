@@ -1,0 +1,53 @@
+{
+  "artifact_id": "finite_hodge_variation_gap_chain",
+  "chain_row_count": 12,
+  "current_terminal_gap": "Finite Hodge targets and selected finite variation calculations are indexed, but metric Hodge star promotion, physical sourced equations, self-adjoint Hamiltonian, gauge-invariant spectral gap, uniform lower bound, and continuum transfer remain open.",
+  "generated_at": "2026-06-08T00:00:00+10:00",
+  "promotion_claims": {
+    "clay_yang_mills_promoted": false,
+    "continuum_mass_gap_promoted": false,
+    "maxwell_promoted": false,
+    "terminal_promotion": false,
+    "yang_mills_promoted": false
+  },
+  "statuses": [
+    "blocked",
+    "open_gap",
+    "partially_supported_with_gap",
+    "supported_target_with_gap"
+  ],
+  "support_module_count": 5,
+  "support_modules": [
+    {
+      "module": "BTFiniteHodgeStarObligation",
+      "path": "DASHI/Physics/Closure/BTFiniteHodgeStarObligation.agda",
+      "sha256": "8d92a403c4c0eb3fbc55491833d45a0cfad50d9117d1ea2738fff242cecd03ef",
+      "support": "Records the finite BT Hodge target, 11 canonical rows, exact blockers, finite exterior derivative availability, and false promotion flags for metric Hodge star, pairing, IBP, d*F=J, dJ=0, Maxwell, YM, and terminal promotion."
+    },
+    {
+      "module": "BTFiniteHodgeEffectiveActionTheoremBoundary",
+      "path": "DASHI/Physics/Closure/BTFiniteHodgeEffectiveActionTheoremBoundary.agda",
+      "sha256": "dbb106a8f6ecd3762fd5fed17a4d1d0167b81e79b1ea447ef216e884c7a9d30e",
+      "support": "Names the finite-depth BT complex, finite gauge field, finite Hodge star, finite effective action sum, Euler-Lagrange D_A^*F_A=J target, and current-conservation target while preserving exact matter/source and real sourced-equation blockers."
+    },
+    {
+      "module": "HodgeVariationPairingDepth9",
+      "path": "DASHI/Physics/Closure/HodgeVariationPairingDepth9.agda",
+      "sha256": "ba9a0912d05d66c93e04aa31aa78da60567ca25c63af8abe65706a6dc343f331",
+      "support": "Packages the depth-9 connection, selected lower Hodge variation candidate, zero finite IBP law, selected lower D*F=J law, and the exact missingVariationPairingForSelectedHodgeStar blocker."
+    },
+    {
+      "module": "YMStrictSelectedHodgeVariationPairing",
+      "path": "DASHI/Physics/Closure/YMStrictSelectedHodgeVariationPairing.agda",
+      "sha256": "3dfca0994fdd0ac430e0247cdeefa738b7dc454ae45fee4f8124cc1337d2664c",
+      "support": "Calculates the strict selected finite Hodge variation pairing, selected D*F equals selected current, and discrete IBP split over user-supplied finite variation/action carriers without physical YM promotion."
+    },
+    {
+      "module": "YMStrictHodgeVariationBlockerIndex",
+      "path": "DASHI/Promotion/YMStrictHodgeVariationBlockerIndex.agda",
+      "sha256": "0cb319906958c627488af779ac03d6778970eb367018609021c0b6fa9c9c452a",
+      "support": "Indexes the strict selected finite pairing calculation, inhabited pure zero-current D*F=J, finite IBP lower law, exact strict variation blocker, exact physical source blocker, and false strict YM promotion."
+    }
+  ],
+  "terminal_promotion": false
+}

@@ -1,0 +1,105 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint94KStarForkObstructionAndConditionalRegularity.agda",
+  "blowup_construction_closed": false,
+  "bool_checks": {
+    "blowupConstructionClosed": {
+      "expected": false,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "expected": false,
+      "passed": true
+    },
+    "generalDataClayRegularityClosed": {
+      "expected": false,
+      "passed": true
+    },
+    "generalDataKStarLowerBoundClosed": {
+      "expected": false,
+      "passed": true
+    },
+    "globalRegularityUnderKStarLowerBoundClosed": {
+      "expected": true,
+      "passed": true
+    },
+    "kStarForkObstructionClosed": {
+      "expected": true,
+      "passed": true
+    },
+    "optionCConditionalCriterionClosed": {
+      "expected": true,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "clay_true_detected": false,
+  "complete": false,
+  "conditional_criterion_closed": true,
+  "contract": "ns_sprint94_kstar_fork_obstruction_audit",
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED",
+  "forbidden_hits": [],
+  "forbidden_term_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate_id": "G1",
+      "gate_name": "KStarForkObstruction",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate_id": "G2",
+      "gate_name": "ConditionalCriterionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate_id": "G3",
+      "gate_name": "GeneralDataGateClosed",
+      "passed": true,
+      "status": "FALSE_RECORDED"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate_id": "G4",
+      "gate_name": "BlowupConstructionClosed",
+      "passed": true,
+      "status": "FALSE_RECORDED"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate_id": "G5",
+      "gate_name": "ClayNavierStokesPromoted",
+      "passed": true,
+      "status": "FALSE_RECORDED"
+    }
+  ],
+  "general_data_clay_regularity_closed": false,
+  "general_data_gate_closed": false,
+  "general_data_kstar_lower_bound_closed": false,
+  "kstar_fork_obstruction_closed": true,
+  "missing_anchors": [],
+  "obstruction_closed_true": true,
+  "option_c_conditional_criterion_closed": true,
+  "promotion_decision": "hold",
+  "required_residual_gate": "general-data K*(t) lower bound or blowup construction",
+  "route_decision": "FAIL_CLOSED",
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present_in_repo": true,
+      "required_anchors": "canonicalNSSprint94KStarForkObstructionAndConditionalRegularity; KStarLowerBoundHypothesis; GlobalRegularityUnderKStarLowerBound; GeneralDataKStarLowerBoundObstruction; OptionABlockedGeneralDataRegularity; OptionBOpenBlowupConstruction; OptionCConditionalRegularity; kStarForkObstructionClosed; globalRegularityUnderKStarLowerBoundClosed; optionCConditionalCriterionClosed; generalDataKStarLowerBoundClosed; generalDataClayRegularityClosed; blowupConstructionClosed; clayNavierStokesPromoted",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "NSSprint94 KStar fork obstruction receipt"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "highFrequencyConcentrationMeasureDecompositionLedgerClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "dyadicShellEnergyDensityClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "concentrationThresholdSelectionClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "concentrationLocusMeasurabilityClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "scaleLocalizedTightnessClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "nonCircularConcentrationMeasureSourceClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "highFrequencyConcentrationMeasureClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "signedLowModeFluxLowerBoundClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "timeIntegratedFluxSurplusClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "finiteKStarCollapseClosed",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "false",
+    "expected": "false",
+    "gate": "clayNavierStokesPromoted",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "true",
+    "expected": "true",
+    "gate": "failClosedHighFrequencyConcentrationMeasureDecomposition",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded and false",
+    "expected": "recorded and false",
+    "gate": "DyadicShellEnergyDensity",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded and false",
+    "expected": "recorded and false",
+    "gate": "ConcentrationThresholdSelection",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded and false",
+    "expected": "recorded and false",
+    "gate": "ConcentrationLocusMeasurability",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded and false",
+    "expected": "recorded and false",
+    "gate": "ScaleLocalizedTightness",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "recorded and false",
+    "expected": "recorded and false",
+    "gate": "NonCircularConcentrationMeasureSource",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "all present",
+    "expected": "all present",
+    "gate": "required_anchors",
+    "passed": true,
+    "status": "PASS"
+  },
+  {
+    "actual": "none",
+    "expected": "none",
+    "gate": "forbidden_markers",
+    "passed": true,
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "artifact_complete": true,
+  "contract": "ns_sprint145_envelope_constant_budget",
+  "decision": "fail_closed_no_simultaneous_envelope_constants",
+  "files": {
+    "report": {
+      "path": "outputs/ns_sprint145_envelope_constant_budget/ns_sprint145_envelope_constant_budget.md",
+      "sha256": "c042d20c0834118ca63619c87bccf05d4dd8bdfb3b04099b303199de6bc18070"
+    },
+    "rows_csv": {
+      "path": "outputs/ns_sprint145_envelope_constant_budget/ns_sprint145_envelope_constant_budget_rows.csv",
+      "sha256": "a28f78114b25a9bde338db6d210f1bad7c793515325f8b06e399192a17472981"
+    },
+    "rows_json": {
+      "path": "outputs/ns_sprint145_envelope_constant_budget/ns_sprint145_envelope_constant_budget_rows.json",
+      "sha256": "3502fc8ad25974d8b84e9660283487cecf43febd2dc5d6d34067c4015a6a36c1"
+    },
+    "summary": {
+      "path": "outputs/ns_sprint145_envelope_constant_budget/ns_sprint145_envelope_constant_budget_summary.json",
+      "sha256": "364dcad7738475f4559a3b43225e50aa23a5d83c87e9eef8edeeb50b33a6bf92"
+    }
+  },
+  "invariants_passed": true,
+  "lane": 3,
+  "manifest_hash_without_self": "bb9569f436f60ca9160f2542cec28ace55f3dce09d30f5473a3dd298e752c393",
+  "sprint": 145,
+  "target_gate": "ComparisonEnvelopeForNonlocalPsi1AndRadialCommutators"
+}

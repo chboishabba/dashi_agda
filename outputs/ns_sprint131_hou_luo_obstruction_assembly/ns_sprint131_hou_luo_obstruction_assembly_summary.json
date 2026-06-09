@@ -1,0 +1,280 @@
+{
+  "assembled_lemmas": [
+    "CandidateScalingHypothesisFormalization",
+    "RigorousSourceUpperBound",
+    "LocalizedViscousLowerComparison",
+    "AxisBoundaryRegularityConditions",
+    "AxisymmetricHouLuoNSViscousDominanceObstruction"
+  ],
+  "axis_boundary_conditions_recorded": true,
+  "axisymmetric_hou_luo_ns_viscous_dominance_obstruction": true,
+  "candidate_scaling_formalized": true,
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint131_hou_luo_obstruction_assembly",
+  "control_card": {
+    "C": "deterministic Python emitter consuming and recording Sprint130 output summaries when present",
+    "F": "any broader Euler-to-NS or Clay promotion is explicitly outside this assembly",
+    "G": "exit code is 0 with Clay promotion and full Clay solution flags held false",
+    "L": "missing same-round Sprint131 sibling outputs are classified as expected_current_round, not fatal",
+    "O": "Worker 3 owns only the Sprint131 Hou-Luo obstruction assembly script and output directory",
+    "P": "conclude AxisymmetricHouLuoNSViscousDominanceObstruction for the Hou-Luo viscous NS route only",
+    "R": "assemble the planned Sprint131 lemma names into the Hou-Luo viscous NS obstruction theorem",
+    "S": "candidate scaling, source upper bound, viscous lower comparison, and axis boundary conditions are all recorded"
+  },
+  "dependencies": {
+    "sprint130": [
+      {
+        "classification": "present",
+        "dependency_path": "outputs/ns_sprint130_route_fork_classifier",
+        "summary_paths": [
+          "outputs/ns_sprint130_route_fork_classifier/ns_sprint130_route_fork_classifier_summary.json"
+        ]
+      },
+      {
+        "classification": "present",
+        "dependency_path": "outputs/ns_sprint130_u1_maximum_principle_audit",
+        "summary_paths": [
+          "outputs/ns_sprint130_u1_maximum_principle_audit/ns_sprint130_u1_maximum_principle_audit_summary.json"
+        ]
+      },
+      {
+        "classification": "present",
+        "dependency_path": "outputs/ns_sprint130_viscous_dominance_sampler",
+        "summary_paths": [
+          "outputs/ns_sprint130_viscous_dominance_sampler/ns_sprint130_viscous_dominance_sampler_summary.json"
+        ]
+      }
+    ],
+    "sprint130_summary_payloads": {
+      "outputs/ns_sprint130_route_fork_classifier/ns_sprint130_route_fork_classifier_summary.json": {
+        "candidate_forks": [
+          "MarginalScalingCaseAnalysis",
+          "EulerBlowupIsolation",
+          "RegularityConclusion"
+        ],
+        "classifications": {
+          "EulerBlowupIsolation": "open_with_two_gap_lemmas",
+          "MarginalScalingCaseAnalysis": "open_unclear",
+          "RegularityConclusion": "defensible_partial_obstruction_result"
+        },
+        "clay": false,
+        "clay_navier_stokes_promoted": false,
+        "clay_promoted": false,
+        "complete": false,
+        "contract": "ns_sprint130_route_fork_classifier",
+        "euler_gap_lemma_count": 2,
+        "euler_gap_lemmas": [
+          "NoLogAxisymmetricBiotSavartUniform",
+          "SourceAlignmentWithVorticityMaximum"
+        ],
+        "euler_open_fork_count": 1,
+        "euler_route_open_not_ns": true,
+        "exit_code": 1,
+        "exit_reason": "Full Clay Navier-Stokes remains unsolved; only the Hou-Luo NS route is recorded as obstructed, and the Euler route remains separate/open",
+        "fork_count": 3,
+        "hou_luo_ns_obstruction": "ViscousDominanceNearBlowup",
+        "hou_luo_ns_route_obstructed": true,
+        "ns_obstructed_fork_count": 1,
+        "open_fork_count": 2,
+        "partial_obstruction_result_count": 1,
+        "recommended_classification": "defensible_partial_obstruction_result",
+        "recommended_fork_id": "RegularityConclusion",
+        "recommended_next_fork": "RegularityConclusion",
+        "required_classifications_met": true
+      },
+      "outputs/ns_sprint130_u1_maximum_principle_audit/ns_sprint130_u1_maximum_principle_audit_summary.json": {
+        "audit_id": "ns_sprint130_u1_maximum_principle_audit",
+        "clay_navier_stokes_promoted": false,
+        "complete": true,
+        "control_card": {
+          "C": "deterministic Python audit emitting rows JSON, summary JSON, and Markdown",
+          "F": "any hidden source, hidden regularity, failed sign check, marker hit, or Clay promotion fails closed",
+          "G": "exit code is 0 exactly when all rows pass and Clay remains unpromoted",
+          "L": "the ledger has no open gates when the obstruction lemma closes",
+          "O": "Worker 1 owns only the Sprint130 U1 maximum-principle audit script and matching output directory",
+          "P": "use this closed lemma only as support for the viscous-dominance obstruction",
+          "R": "prove the receipt-level PureDiffusionU1MaximumPrinciple while keeping Clay promotion false",
+          "S": "operator, measure, IBP sign, maximum principle, and L-infinity bound all close"
+        },
+        "deterministic": true,
+        "divergence_form_parabolic_maximum_principle": true,
+        "exit_code": 0,
+        "expanded_operator": "partial_r^2 + (3/r) partial_r + partial_z^2",
+        "fail_closed": true,
+        "failed_count": 0,
+        "forbidden_hit_count": 0,
+        "forbidden_hits": [],
+        "integration_by_parts": {
+          "boundary_terms": "zero by the receipt classical solution and stated decay/axis conditions",
+          "identity": "int f L_tilde f r^3 dr dz = - int ((partial_r f)^2 + (partial_z f)^2) r^3 dr dz",
+          "passed": true,
+          "sign": "negative_semidefinite",
+          "weighted_measure": "r^3 dr dz"
+        },
+        "linf_bound": "||u1(t)||_inf <= ||u1(0)||_inf = M0",
+        "maximum_principle": {
+          "bound": "||u1(t)||_inf <= ||u1(0)||_inf = M0",
+          "equation": "D_t u1 = partial_t u1 + u^r partial_r u1 + u^z partial_z u1 = nu L_tilde u1",
+          "operator_divergence_form": "(1/r^3) partial_r(r^3 partial_r) + partial_z^2",
+          "passed": true,
+          "principle": "divergence-form parabolic maximum principle",
+          "source_term": "0",
+          "transport_term": "material derivative drift",
+          "viscosity_condition": "nu > 0"
+        },
+        "negative_semidefinite_ibp": true,
+        "no_hidden_regularity": true,
+        "no_hidden_source": true,
+        "obstruction_lemma": "PureDiffusionU1MaximumPrinciple",
+        "open_gates": [],
+        "operator": "(1/r^3) partial_r(r^3 partial_r) + partial_z^2",
+        "passed": true,
+        "passed_count": 11,
+        "pde_facts": {
+          "boundary_terms": "zero by the receipt classical solution and stated decay/axis conditions",
+          "clay_navier_stokes_promoted": false,
+          "equation": "D_t u1 = partial_t u1 + u^r partial_r u1 + u^z partial_z u1 = nu L_tilde u1",
+          "expanded_operator": "partial_r^2 + (3/r) partial_r + partial_z^2",
+          "initial_linf": "M0 = ||u1(0)||_inf",
+          "lemma": "PureDiffusionU1MaximumPrinciple",
+          "linf_bound": "||u1(t)||_inf <= ||u1(0)||_inf = M0",
+          "operator": "(1/r^3) partial_r(r^3 partial_r) + partial_z^2",
+          "operator_name": "L_tilde",
+          "regularity_scope": "uses only the receipt classical solution level needed to justify pointwise maximum principle and integration by parts",
+          "source_term": "0",
+          "transport_term": "material derivative drift",
+          "unknown": "u1 = u^theta / r",
+          "viscosity_condition": "nu > 0",
+          "weighted_measure": "r^3 dr dz"
+        },
+        "promotion_decision": "hold_clay",
+        "proof_claimed": true,
+        "pure_diffusion_u1_maximum_principle": true,
+        "row_count": 11,
+        "supports_viscous_dominance_obstruction": true,
+        "u1_linf_nonincreasing": true,
+        "weighted_measure": "r^3 dr dz"
+      },
+      "outputs/ns_sprint130_viscous_dominance_sampler/ns_sprint130_viscous_dominance_sampler_summary.json": {
+        "all_rows_asymptotically_viscous_dominant": true,
+        "all_sampled_beta_positive": true,
+        "all_sampled_nu_positive": true,
+        "alpha_fraction_values": [
+          "21/20",
+          "11/10",
+          "23/20",
+          "6/5",
+          "5/4",
+          "13/10",
+          "27/20",
+          "7/5",
+          "29/20"
+        ],
+        "alpha_max": 1.45,
+        "alpha_min": 1.05,
+        "alpha_step": 0.05,
+        "alpha_values": [
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45
+        ],
+        "asymptotic_dominance_count": 108,
+        "beta_rule": "beta=alpha-1",
+        "clay": false,
+        "clay_navier_stokes_promoted": false,
+        "clay_promoted": false,
+        "complete": true,
+        "contract": "ns_sprint130_viscous_dominance_sampler",
+        "dominance_count": 51,
+        "dominance_rule": "ratio > 1",
+        "exit_code": 0,
+        "exit_reason": "viscous dominance obstruction sampled; Clay Navier-Stokes route remains unpromoted",
+        "feasibility_window": "(1, 3/2)",
+        "feasibility_window_lower": 1.0,
+        "feasibility_window_upper": 1.5,
+        "hou_luo_ns_route_obstructed": true,
+        "non_dominance_count": 57,
+        "nu_values": [
+          "1",
+          "1/10",
+          "1/100"
+        ],
+        "ratio_formula": "nu * tau^(-3*beta)",
+        "row_count": 108,
+        "source_scaling_exponent": "tau^-1",
+        "tau_values": [
+          "1",
+          "1/10",
+          "1/100",
+          "1/1000"
+        ],
+        "viscous_dominance_obstruction": true,
+        "viscous_scaling_exponent": "tau^-(1+3*beta)"
+      }
+    },
+    "sprint131": [
+      {
+        "classification": "expected_current_round",
+        "dependency_path": "outputs/ns_sprint131_candidate_scaling_hypothesis_formalization",
+        "summary_paths": []
+      },
+      {
+        "classification": "present",
+        "dependency_path": "outputs/ns_sprint131_source_upper_bound_audit",
+        "summary_paths": [
+          "outputs/ns_sprint131_source_upper_bound_audit/ns_sprint131_source_upper_bound_audit_summary.json"
+        ]
+      },
+      {
+        "classification": "present",
+        "dependency_path": "outputs/ns_sprint131_localized_viscous_comparison_audit",
+        "summary_paths": [
+          "outputs/ns_sprint131_localized_viscous_comparison_audit/ns_sprint131_localized_viscous_comparison_audit_summary.json"
+        ]
+      },
+      {
+        "classification": "expected_current_round",
+        "dependency_path": "outputs/ns_sprint131_axis_boundary_regularity_conditions",
+        "summary_paths": []
+      }
+    ]
+  },
+  "euler_route_promoted_to_ns": false,
+  "exit_code": 0,
+  "exit_reason": "assembled the Hou-Luo viscous Navier-Stokes route obstruction only; full Clay Navier-Stokes remains unpromoted",
+  "expected_current_round_paths": [
+    "outputs/ns_sprint131_candidate_scaling_hypothesis_formalization",
+    "outputs/ns_sprint131_axis_boundary_regularity_conditions"
+  ],
+  "full_clay_ns_solved": false,
+  "hou_luo_ns_obstruction_theorem": true,
+  "hou_luo_ns_route_only": true,
+  "localized_viscous_lower_comparison": true,
+  "missing_sibling_sprint131_classification": "expected_current_round",
+  "planned_sprint131_lemma_names": [
+    "CandidateScalingHypothesisFormalization",
+    "RigorousSourceUpperBound",
+    "LocalizedViscousLowerComparison",
+    "AxisBoundaryRegularityConditions",
+    "AxisymmetricHouLuoNSViscousDominanceObstruction"
+  ],
+  "rigorous_source_upper_bound": true,
+  "route_scope": "Hou-Luo viscous Navier-Stokes route",
+  "row_count": 5,
+  "sprint130_flags": {
+    "all_seen_sprint130_hold_clay": true,
+    "route_fork_records_hou_luo": true,
+    "sampler_records_viscous_dominance": true,
+    "u1_audit_supports_obstruction": true
+  },
+  "supporting_lemma_count": 4
+}

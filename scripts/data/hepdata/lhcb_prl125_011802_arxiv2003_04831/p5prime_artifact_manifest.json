@@ -1,0 +1,76 @@
+{
+  "target": {
+    "paper": "LHCb-PAPER-2020-002",
+    "arxiv": "2003.04831",
+    "paper_doi": "10.1103/PhysRevLett.125.011802",
+    "cds_record": "2712641",
+    "inspire_record": "1784890"
+  },
+  "hepdata_result": {
+    "requested_expected_doi_family": "10.17182/hepdata.89409",
+    "status": "not_found_for_target_paper",
+    "notes": [
+      "DOI lookup for 10.17182/hepdata.89409 returned DOI Not Found during browser verification.",
+      "HEPData search for 89409 resolves to a CMS child datatable in publication 10.17182/hepdata.87255, table DOI 10.17182/hepdata.87255.v1/t4, not to the LHCb arXiv:2003.04831 paper.",
+      "Exact HEPData searches for the LHCb title/arXiv and collaboration did not return a target record during browser verification."
+    ]
+  },
+  "saved_artifacts": [
+    {
+      "path": "scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/inspire-1784890.json",
+      "sha256": "56eb4147751caad3d5c92b1f94b350300f9be64e3d41d8c1993109ff1bf74f83",
+      "description": "INSPIRE API metadata for the target paper."
+    },
+    {
+      "path": "scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/cds2712641-record.json",
+      "sha256": "8bd5425dc2c172052bf3b02ddabe9e7006f2fc5f6902940570ac8782c75aaabe",
+      "description": "CDS JSON metadata for the target paper."
+    },
+    {
+      "path": "scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/LHCb-PAPER-2020-002-supplementary.zip",
+      "sha256": "660f5b474b996f5194e55b97dab5585391fb87c8db0557409bf9c2c7a745a60d",
+      "description": "CDS supplementary material ZIP."
+    },
+    {
+      "path": "scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/extracted/Fig3e-supp.C",
+      "sha256": "f2c57fc9f3cdee6624fc562eee275f5308d2e94f43062e9a8a654f7f91afd6fe",
+      "description": "ROOT macro for Figure 3e, the P5prime plot. Contains direct P5prime graph points and asymmetric plot errors."
+    },
+    {
+      "path": "scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/extracted/measurements.yml",
+      "sha256": "2be66f68d88c76b40ae0a04f277b8d3dbbfe1643c8da77dc65a9d661abd6dd7e",
+      "description": "YAML fit input from flavio.zip. Contains underlying FL/S_i/AFB values with stat, syst, and correlation matrices."
+    }
+  ],
+  "p5prime_combined_points_from_fig3e": [
+    {
+      "q2_bin": [4.0, 6.0],
+      "x": 5.0,
+      "value": -0.438938,
+      "yerr_low": 0.116376,
+      "yerr_high": 0.116376
+    },
+    {
+      "q2_bin": [6.0, 8.0],
+      "x": 7.0,
+      "value": -0.582577,
+      "yerr_low": 0.09460991,
+      "yerr_high": 0.09460991
+    }
+  ],
+  "uncertainty_status": {
+    "fig3e_p5prime_direct": {
+      "stat_present": false,
+      "syst_present": false,
+      "covariance_present": false,
+      "notes": "The direct P5prime ROOT macro has graph y-errors only; it does not label or separate statistical and systematic components and does not include a covariance matrix."
+    },
+    "measurements_yml_underlying_s_observables": {
+      "stat_present": true,
+      "syst_present": true,
+      "correlation_present": true,
+      "covariance_present": "derivable",
+      "notes": "The YAML stores fitted FL/S_i/AFB values as central +stat -stat +/- syst and includes per-bin correlation matrices. It does not store a direct P5prime covariance matrix."
+    }
+  }
+}

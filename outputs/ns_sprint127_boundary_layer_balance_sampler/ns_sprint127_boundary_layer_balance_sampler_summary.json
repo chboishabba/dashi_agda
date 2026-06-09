@@ -1,0 +1,17 @@
+{
+  "all_rows_mark_proof_established_false": true,
+  "balance_compatible_count": 2,
+  "bkm_candidate_constraint": "alpha >= 1",
+  "clay": false,
+  "complete": true,
+  "contract": "ns_sprint127_boundary_layer_balance_sampler",
+  "energy_bounded_constraint": "beta + gamma >= 2*alpha/3",
+  "exit_code": 0,
+  "hou_luo_compatible_scaling_balance_compatible": true,
+  "hou_luo_compatible_scaling_present": true,
+  "omega_over_r0_indicator_definition": "alpha + beta - (r0 - 1)",
+  "proof_established": false,
+  "row_count": 6,
+  "stretching_beats_viscosity_constraint": "omega_over_r0_indicator > viscous_indicator",
+  "viscous_indicator_definition": "nu + 2*beta"
+}

@@ -1,0 +1,4 @@
+source,supplies_kstar_lower_bound,supplies_general_data_route,supplies_conditional_route,note
+Sprint87 high-high factorization,False,False,True,supplies the high-high estimate but leaves absorption conditional
+Sprint88-93 same-source search,False,False,False,records zero accepted sources for general-data dominance plus pointwise tail plus coefficient
+KStarLowerBoundHypothesis,True,False,True,sufficient as an explicit conditional assumption

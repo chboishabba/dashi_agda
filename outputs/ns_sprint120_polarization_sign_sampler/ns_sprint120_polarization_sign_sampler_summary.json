@@ -1,0 +1,40 @@
+{
+  "amplification_proxy_formula": "-q",
+  "angle_labels": [
+    "0",
+    "pi/8",
+    "pi/4",
+    "3pi/8",
+    "pi/2",
+    "5pi/8",
+    "3pi/4",
+    "7pi/8",
+    "pi"
+  ],
+  "anticorrelation_all_rows": true,
+  "anticorrelation_product_formula": "flux_proxy * amplification_proxy = -q^2",
+  "c_value": 1.0,
+  "clay": false,
+  "complete": true,
+  "constant_linear_strain_route_obstructed": true,
+  "contract": "ns_sprint120_polarization_sign_sampler",
+  "exit_code": 0,
+  "flux_proxy_formula": "q",
+  "k_formula": "(cos theta, sin theta)",
+  "linear_strain_algebra_corrected": true,
+  "n_formula": "(-sin theta, cos theta)",
+  "positive_flux_row_count": 4,
+  "positive_flux_rows_have_negative_amplification": true,
+  "q_formula": "n.e.n = -C*sin(theta)^2 + C*cos(theta)^2",
+  "row_count": 9,
+  "strain_matrix": [
+    [
+      -1.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ]
+}

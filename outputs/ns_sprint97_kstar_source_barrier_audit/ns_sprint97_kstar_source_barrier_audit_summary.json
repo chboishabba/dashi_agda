@@ -1,0 +1,176 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint97KStarCollapseSourceBarrier.agda",
+  "analytic_object_checks": {
+    "LerayCompatibleCollapseTrajectory": {
+      "actual": "present",
+      "expected": true,
+      "passed": true
+    },
+    "LowModeEnergyConcentrationDynamics": {
+      "actual": "present",
+      "expected": true,
+      "passed": true
+    },
+    "SingularityExtractionWithoutBKMOrSerrin": {
+      "actual": "present",
+      "expected": true,
+      "passed": true
+    },
+    "ViscousDampingDefeatEstimate": {
+      "actual": "present",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "bool_checks": {
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "finiteTimeKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "kStarCollapseSourceBarrierLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "optionBBlowupConstructionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "sameSourceCollapseMechanismAvailable": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint97_kstar_source_barrier_audit",
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_KSTAR_SOURCE_BARRIER",
+  "forbidden_hits": [],
+  "forbidden_term_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "kStarCollapseSourceBarrierLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "sameSourceCollapseMechanismAvailable",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteTimeKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "optionBBlowupConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "LowModeEnergyConcentrationDynamics",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "ViscousDampingDefeatEstimate",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "LerayCompatibleCollapseTrajectory",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "SingularityExtractionWithoutBKMOrSerrin",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "missing_anchors": [],
+  "missing_required_analytic_objects": [],
+  "natural_checks": {},
+  "promotion_decision": "hold",
+  "required_analytic_object_count": 4,
+  "required_analytic_objects": [
+    "LowModeEnergyConcentrationDynamics",
+    "ViscousDampingDefeatEstimate",
+    "LerayCompatibleCollapseTrajectory",
+    "SingularityExtractionWithoutBKMOrSerrin"
+  ],
+  "required_analytic_objects_present": [
+    "LowModeEnergyConcentrationDynamics",
+    "ViscousDampingDefeatEstimate",
+    "LerayCompatibleCollapseTrajectory",
+    "SingularityExtractionWithoutBKMOrSerrin"
+  ],
+  "required_analytic_objects_present_count": 4,
+  "required_anchors": [
+    "NSSprint97KStarCollapseSourceBarrier",
+    "canonicalNSSprint97KStarCollapseSourceBarrier",
+    "KStarCollapseSourceBarrierResiduals",
+    "KStarSourceBarrier",
+    "failClosedKStarSourceBarrier",
+    "CollapseSourceBarrier",
+    "canonicalCollapseSourceBarrier",
+    "SameSourceCollapseMechanism",
+    "canonicalSameSourceCollapseMechanism",
+    "RequiredAnalyticObject",
+    "requiredAnalyticObjects",
+    "CandidateRejectionLedgerEntry",
+    "candidateFamilyRejectionLedger",
+    "kStarCollapseSourceBarrierLedgerClosed",
+    "sameSourceCollapseMechanismAvailable",
+    "finiteTimeKStarCollapseClosed",
+    "optionBBlowupConstructionClosed",
+    "clayNavierStokesPromoted"
+  ],
+  "route_decision": "FAIL_CLOSED_KSTAR_SOURCE_BARRIER",
+  "same_source_collapse_mechanism_available": false,
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "present": true,
+      "source": "DASHI/Physics/Closure/NSSprint97KStarCollapseSourceBarrier.agda",
+      "status": "PASS"
+    }
+  ],
+  "surface": "NSSprint97 Sprint97 KStar collapse source barrier fail_closed Clay Navier-Stokes"
+}

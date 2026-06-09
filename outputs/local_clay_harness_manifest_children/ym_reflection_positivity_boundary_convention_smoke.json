@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "boundary_pairing_compatible_ok": true,
+  "promotion": false,
+  "reflection_positivity_route_ok": true,
+  "tau_spatial_only_ok": true,
+  "theta_time_reflection_ok": true
+}

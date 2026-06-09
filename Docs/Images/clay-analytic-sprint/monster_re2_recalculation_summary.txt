@@ -1,0 +1,26 @@
+Monster re-2 recalculation summary
+c1=196884, c2=21493760, c2/c1=109.169663, sqrt(c2/c1)=10.448429
+irrep1=196883, irrep2=21296876, irrep2/irrep1=108.170213, sqrt=10.400491
+
+Interpretation: if Monster q^2 / second irrep growth is treated as an entropy/activity multiplier C0, YM beta thresholds move upward and Gate3 sigma thresholds move downward.
+This is a stress model: raw Monster multiplicity should not be blindly consumed as physical KP entropy without quotienting.
+
+YM thresholds:
+               C0_model         C0  beta_convergence  beta_absorption  beta_strong_r_0_25  gap_beta6_to_absorption  r_at_beta6  KP_inf_at_beta6
+          baseline_C0_1   1.000000         10.107067        12.971311           15.835556                 6.971311    2.701778              inf
+         log_c2_over_c1   4.692903         16.495709        19.359953           22.224198                13.359953   12.679184              inf
+sqrt_irrep2_over_irrep1  10.400491         19.784145        22.648390           25.512634                16.648390   28.099820              inf
+        sqrt_c2_over_c1  10.448429         19.803148        22.667392           25.531637                16.667392   28.229337              inf
+     irrep2_over_irrep1 108.170213         29.461224        32.325468           35.189713                26.325468  292.251923              inf
+             c2_over_c1 109.169663         29.499229        32.363473           35.227718                26.363473  294.952217              inf
+
+Gate3 p=3 thresholds:
+               C0_model         C0  prime  sigma_crit
+          baseline_C0_1   1.000000      3    0.505208
+         log_c2_over_c1   4.692903      3    0.337460
+sqrt_irrep2_over_irrep1  10.400491      3    0.296102
+        sqrt_c2_over_c1  10.448429      3    0.295905
+     irrep2_over_irrep1 108.170213      3    0.228435
+             c2_over_c1 109.169663      3    0.228254
+
+NS: low shell k=2 dominance remains a representation/low-mode warning, not the tail Clay seam.

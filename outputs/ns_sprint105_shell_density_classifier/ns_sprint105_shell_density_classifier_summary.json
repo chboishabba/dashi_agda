@@ -1,0 +1,200 @@
+{
+  "accepted_families": [],
+  "accepted_source_count": 0,
+  "candidate_family_count": 5,
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint105_shell_density_classifier",
+  "control_card": {
+    "C": "single deterministic Python ledger emitting JSON and Markdown",
+    "F": "accepted_source_count is zero because every candidate fails non_circular_construction or a prerequisite gate",
+    "G": "Clay Navier-Stokes promotion remains false",
+    "L": "acceptance is conjunction of gate_results",
+    "O": "classify candidate shell-density source families",
+    "P": "FAIL_CLOSED_SHELL_DENSITY_SOURCE",
+    "R": "all six gates must pass and forbidden dependencies must be absent",
+    "S": "five requested candidates evaluated in fixed order"
+  },
+  "fail_closed": true,
+  "fail_closed_reason": "No candidate derives a shell-local density, Leray integrability, localization bound, and non-circular construction while avoiding forbidden dependencies.",
+  "final_decision": "FAIL_CLOSED_SHELL_DENSITY_SOURCE",
+  "forbidden_dependencies": [
+    "assumed_bkm_failure",
+    "assumed_serrin_failure",
+    "assumed_singularity",
+    "target_blowup",
+    "desired_conclusion",
+    "external_forcing",
+    "imposed_density_locus",
+    "imposed_shell_energy",
+    "target_kstar_collapse"
+  ],
+  "option_b_closed": false,
+  "proof_claimed": false,
+  "rejected_families": [
+    "lp_projector_density",
+    "mollified_local_energy_density",
+    "dyadic_square_function_density",
+    "weak_leray_density_extraction",
+    "imposed_shell_density"
+  ],
+  "required_gates": [
+    "lp_projector",
+    "local_density_definition",
+    "leray_integrability",
+    "localization_bound",
+    "non_circular_construction",
+    "no_forbidden_dependency"
+  ],
+  "route_decision": "FAIL_CLOSED_SHELL_DENSITY_SOURCE",
+  "rows": [
+    {
+      "accepted": false,
+      "ansatz": "define shell density from Littlewood-Paley projected velocity energy",
+      "classification": "projector identity without independent density source",
+      "failed_gates": [
+        "localization_bound",
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "lp_projector_density",
+      "family_id": "LP1",
+      "forbidden_dependencies": "desired_conclusion",
+      "gate_results": {
+        "leray_integrability": true,
+        "local_density_definition": true,
+        "localization_bound": false,
+        "lp_projector": true,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_integrability": true,
+      "local_density_definition": true,
+      "localization_bound": false,
+      "lp_projector": true,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "The Littlewood-Paley projector supplies a formal shell energy density, but the needed localized lower-bound mechanism is not derived independently.",
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "mollify the local energy inequality to obtain a scale-local density",
+      "classification": "local energy density without shell localization closure",
+      "failed_gates": [
+        "lp_projector",
+        "localization_bound",
+        "non_circular_construction"
+      ],
+      "family": "mollified_local_energy_density",
+      "family_id": "M1",
+      "forbidden_dependencies": "none",
+      "gate_results": {
+        "leray_integrability": true,
+        "local_density_definition": true,
+        "localization_bound": false,
+        "lp_projector": false,
+        "no_forbidden_dependency": true,
+        "non_circular_construction": false
+      },
+      "leray_integrability": true,
+      "local_density_definition": true,
+      "localization_bound": false,
+      "lp_projector": false,
+      "no_forbidden_dependency": true,
+      "non_circular_construction": false,
+      "note": "Mollification is Leray-compatible and defines a local density, but it does not isolate a dyadic shell source or close the localization bound.",
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "use a dyadic square function as a shell-density candidate",
+      "classification": "square-function control without pointwise shell source",
+      "failed_gates": [
+        "localization_bound",
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "dyadic_square_function_density",
+      "family_id": "D1",
+      "forbidden_dependencies": "target_kstar_collapse",
+      "gate_results": {
+        "leray_integrability": true,
+        "local_density_definition": true,
+        "localization_bound": false,
+        "lp_projector": true,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_integrability": true,
+      "local_density_definition": true,
+      "localization_bound": false,
+      "lp_projector": true,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "Square functions organize dyadic energy, but converting that ledger into the target localized shell source relies on the collapse endpoint.",
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "extract shell density from weak compactness of Leray approximants",
+      "classification": "compactness extraction without constructive localization",
+      "failed_gates": [
+        "local_density_definition",
+        "localization_bound",
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "weak_leray_density_extraction",
+      "family_id": "W1",
+      "forbidden_dependencies": "assumed_singularity",
+      "gate_results": {
+        "leray_integrability": true,
+        "local_density_definition": false,
+        "localization_bound": false,
+        "lp_projector": true,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_integrability": true,
+      "local_density_definition": false,
+      "localization_bound": false,
+      "lp_projector": true,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "Weak compactness can pass to subsequential energy distributions, but it does not construct a local shell density source without assuming a singular endpoint.",
+      "verdict": "reject"
+    },
+    {
+      "accepted": false,
+      "ansatz": "select the shell-density locus and shell energy directly",
+      "classification": "forbidden imposed shell-density source",
+      "failed_gates": [
+        "leray_integrability",
+        "non_circular_construction",
+        "no_forbidden_dependency"
+      ],
+      "family": "imposed_shell_density",
+      "family_id": "I1",
+      "forbidden_dependencies": "imposed_density_locus;imposed_shell_energy;desired_conclusion",
+      "gate_results": {
+        "leray_integrability": false,
+        "local_density_definition": true,
+        "localization_bound": true,
+        "lp_projector": true,
+        "no_forbidden_dependency": false,
+        "non_circular_construction": false
+      },
+      "leray_integrability": false,
+      "local_density_definition": true,
+      "localization_bound": true,
+      "lp_projector": true,
+      "no_forbidden_dependency": false,
+      "non_circular_construction": false,
+      "note": "The candidate builds the needed density locus and shell energy into the construction, so any apparent bound is circular.",
+      "verdict": "reject"
+    }
+  ],
+  "scope": "deterministic classifier for Navier-Stokes shell-density source candidates",
+  "sprint105_shell_density_source_closed": false
+}

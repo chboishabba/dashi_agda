@@ -1,0 +1,43 @@
+{
+  "contract": "ns_sprint151_width_ode_extraction",
+  "files": [
+    {
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction.md",
+      "sha256": "3c496a91a5d8212f694803a9c072f48118a1a256aec5328d676d6c274ef00185"
+    },
+    {
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_derivation_ledger.csv",
+      "sha256": "295dd03da9f779d2c8239aeeff964fce3a93964148d691dec36e72ad4fa42b02"
+    },
+    {
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_derivation_ledger.json",
+      "sha256": "f885a512b4a347bc4384bbfbb272f3232ea9453ca610359dfa2648a49ce6e131"
+    },
+    {
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_scan_rows.csv",
+      "sha256": "910305cf12f55bcbe293a6fb76879ddf5faaaa53787102abcaeb06f55887cd5d"
+    },
+    {
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_scan_rows.json",
+      "sha256": "ead0b9ffc2df16755815e7269a042d49f4092d3a1f94658f40386dfaad8928b0"
+    },
+    {
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_subcritical_projection.csv",
+      "sha256": "8e2006f2e77a29b15c24219c52785d08c07f8ccfae8503050cb153419ee98648"
+    },
+    {
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_subcritical_projection.json",
+      "sha256": "9e25335dc783cef0ed6110b523e5bf4fe9f3976ec4a4bec6a6bd92e10e105360"
+    },
+    {
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_summary.json",
+      "sha256": "90c02f26fcc06dc9744136d1ceb7e39bd71127349f2bf600fce1e9960618e9a0"
+    }
+  ],
+  "lane": 4,
+  "manifest_hash": "350250abc34ba04f756bb15441245425a349aaa0fcf26773d4edc944112ec110",
+  "model_name": "WidthODEFromLocalizedEnstrophyTerms",
+  "output_dir": "outputs/ns_sprint151_width_ode_extraction",
+  "program": "LocalizedEnstrophyWidthODEEvidenceProgram",
+  "sprint": 151
+}

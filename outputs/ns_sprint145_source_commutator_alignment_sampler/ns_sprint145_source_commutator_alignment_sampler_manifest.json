@@ -1,0 +1,35 @@
+{
+  "contract": "ns_sprint145_source_commutator_alignment_sampler",
+  "files": [
+    {
+      "bytes": 6466,
+      "path": "outputs/.ns_sprint145_source_commutator_alignment_sampler.4j2tfdtp/ns_sprint145_source_commutator_alignment_sampler_summary.json",
+      "sha256": "2a87f3651cced3b86eae634b8bb0f24374144baabcfba293bc9f410bcfbca9ae"
+    },
+    {
+      "bytes": 18676,
+      "path": "outputs/.ns_sprint145_source_commutator_alignment_sampler.4j2tfdtp/ns_sprint145_source_commutator_alignment_sampler_rows.json",
+      "sha256": "1da2587e3d5bab54e0319e3253603e5ff626d29a20d597b0a1efc039162f645f"
+    },
+    {
+      "bytes": 9195,
+      "path": "outputs/.ns_sprint145_source_commutator_alignment_sampler.4j2tfdtp/ns_sprint145_source_commutator_alignment_sampler_rows.csv",
+      "sha256": "a61d9c1b0bd91a482d905110fe9d7360f9e4760a5501fc0aadcc63cf84264bec"
+    },
+    {
+      "bytes": 2586,
+      "path": "outputs/.ns_sprint145_source_commutator_alignment_sampler.4j2tfdtp/ns_sprint145_source_commutator_alignment_sampler.md",
+      "sha256": "e7cf17548a69c288b70c0ed023bdf88abe79a9e0bab7768fa80a7b54102de45f"
+    }
+  ],
+  "lane": 4,
+  "manifest_hash": "3c9cc8774c9ac23d1e3e15c0e55cfbb22e842c3de9ea4ad834e3ed2dc5c50aca",
+  "manifest_hash_inputs": [
+    "outputs/.ns_sprint145_source_commutator_alignment_sampler.4j2tfdtp/ns_sprint145_source_commutator_alignment_sampler_summary.json",
+    "outputs/.ns_sprint145_source_commutator_alignment_sampler.4j2tfdtp/ns_sprint145_source_commutator_alignment_sampler_rows.json",
+    "outputs/.ns_sprint145_source_commutator_alignment_sampler.4j2tfdtp/ns_sprint145_source_commutator_alignment_sampler_rows.csv",
+    "outputs/.ns_sprint145_source_commutator_alignment_sampler.4j2tfdtp/ns_sprint145_source_commutator_alignment_sampler.md"
+  ],
+  "out_dir": "outputs/ns_sprint145_source_commutator_alignment_sampler",
+  "sprint": 145
+}

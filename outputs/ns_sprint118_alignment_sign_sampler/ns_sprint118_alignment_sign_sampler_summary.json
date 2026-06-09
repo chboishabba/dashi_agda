@@ -1,0 +1,32 @@
+{
+  "clay": false,
+  "clay_promoted": false,
+  "complete": true,
+  "compressive_aligned_positive_flux_rule": "lambda < 0 and cos2 > 0",
+  "contract": "ns_sprint118_alignment_sign_sampler",
+  "contraction_formula": "lambda * cos2",
+  "cos2_values": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "exit_code": 0,
+  "extensive_positive_flux_rule": false,
+  "kinematic_condition_recorded": true,
+  "lambda_values": [
+    -2,
+    -1,
+    0,
+    1,
+    2
+  ],
+  "non_circular_geometric_correlation_source_closed": false,
+  "nonpositive_flux_row_count": 17,
+  "persistent_alignment_existence_closed": false,
+  "pi_hh_to_l_sign_formula": "sign(-contraction)",
+  "pointwise_sign_under_alignment_recorded": true,
+  "positive_flux_row_count": 8,
+  "row_count": 25
+}

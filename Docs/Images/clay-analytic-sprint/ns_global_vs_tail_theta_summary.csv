@@ -1,0 +1,6 @@
+trace,nu,K_kolmogorov,K_diss,theta_global,danger_shell_global,margin_global,max_k_available,theta_tail,danger_shell_tail,margin_tail,tail_has_data
+kolmogorov,0.01,31.623,32,2.06051779,2,-1.06051779,64,0.3188379,32.0,0.6811621,True
+smooth,0.01,31.623,32,8.2826297,2,-7.282629699999999,64,0.00399397,32.0,0.99600603,True
+near_critical,0.01,31.623,32,2.57831615,2,-1.57831615,64,2.01585515,32.0,-1.0158551500000002,True
+inviscid,0.001,177.828,178,15.64046319,2,-14.64046319,64,,,,False
+rough,0.01,31.623,32,3.51000629,2,-2.51000629,64,2.76304232,32.0,-1.7630423199999998,True

@@ -1,0 +1,201 @@
+[
+  {
+    "clay_navier_stokes_promoted": false,
+    "commutator_effect": "The radial commutator is nonhomogeneous in v and can inject positive forcing at the crossing unless a pointwise sign or a quantitative dominance margin is supplied.",
+    "domination_hypothesis": "Either -(partial_z u^r) partial_r u1 <= 0 at every admissible first crossing, or its positive part is absorbed by a log-aware barrier margin.",
+    "favorable_if_true": false,
+    "gate": "PointwiseSignDominanceRouteForRadialCommutator",
+    "hazards": [
+      "nonhomogeneous source",
+      "secondary crossing locations",
+      "coincident-ring strain logarithm"
+    ],
+    "local_condition": "At a first interior positive maximum of v=partial_z u1, v>0, partial_r v=partial_z v=0, and Ltilde v<=0.",
+    "proof_closed": false,
+    "required_evidence": [
+      "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v",
+      "first-crossing maximum-principle geometry",
+      "admissible crossing set away from unhandled boundary defects"
+    ],
+    "route_class": "equation_inventory",
+    "row_id": "route_inventory",
+    "sign_known": false,
+    "status": "encoded_open_gate",
+    "theorem_available": false,
+    "theorem_required": "PointwiseRadialCommutatorSignOrDominanceForVBarrier"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "commutator_effect": "Under this conditional sign, the radial commutator cannot create the first positive v crossing.",
+    "domination_hypothesis": "pointwise favorable sign at all possible crossings",
+    "favorable_if_true": true,
+    "gate": "PointwiseSignDominanceRouteForRadialCommutator",
+    "hazards": [
+      "known only as a hypothetical branch",
+      "no Biot-Savart sign preservation theorem recorded"
+    ],
+    "local_condition": "Assume sign(partial_z u^r) agrees with sign(partial_r u1) so that -(partial_z u^r) partial_r u1 <= 0 at the crossing.",
+    "proof_closed": false,
+    "required_evidence": [
+      "global pointwise sign theorem for partial_z u^r partial_r u1",
+      "compatibility with secondary peaks and off-axis crossings",
+      "persistence through the Hou-Luo scaling window"
+    ],
+    "route_class": "sign_known",
+    "row_id": "sign_known_favorable_case",
+    "sign_known": true,
+    "status": "conditional_route_only",
+    "theorem_available": false,
+    "theorem_required": "PointwiseRadialCommutatorSignOrDominanceForVBarrier"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "commutator_effect": "The positive part max(-(partial_z u^r) partial_r u1, 0) remains an uncontrolled source in the pointwise barrier inequality.",
+    "domination_hypothesis": "positive part must be bounded by a favorable local or weighted margin before the first crossing",
+    "favorable_if_true": false,
+    "gate": "PointwiseSignDominanceRouteForRadialCommutator",
+    "hazards": [
+      "sign reversal",
+      "off-peak shoulder formation",
+      "nonlocal strain coupling"
+    ],
+    "local_condition": "No theorem fixes the correlation between partial_z u^r and partial_r u1 at an arbitrary first positive maximum of v.",
+    "proof_closed": false,
+    "required_evidence": [
+      "correlation estimate for partial_z u^r and partial_r u1",
+      "uniform treatment of primary and secondary maxima",
+      "boundary and axis compatibility"
+    ],
+    "route_class": "sign_unknown",
+    "row_id": "sign_unknown_crossing_case",
+    "sign_known": false,
+    "status": "live_obstruction",
+    "theorem_available": false,
+    "theorem_required": "PointwiseRadialCommutatorSignOrDominanceForVBarrier"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "commutator_effect": "A strict pointwise margin would absorb positive commutator bursts before v crosses above zero.",
+    "domination_hypothesis": "max(-(partial_z u^r) partial_r u1, 0) <= [-nu Ltilde v - 2 u1 partial_z^2 psi1 - admissible strain*v]_+",
+    "favorable_if_true": true,
+    "gate": "PointwiseSignDominanceRouteForRadialCommutator",
+    "hazards": [
+      "diffusion has the wrong sign at a positive maximum after moving terms",
+      "partial_z^2 psi1 is nonlocal and sign-indefinite",
+      "strain coefficients may carry logarithmic loss"
+    ],
+    "local_condition": "At every first positive maximum, max(-(partial_z u^r) partial_r u1, 0) <= M_point, where M_point is supplied by favorable concavity, diffusion, or source sign.",
+    "proof_closed": false,
+    "required_evidence": [
+      "explicit nonnegative margin with constants",
+      "scale-uniform estimates in the active barrier window",
+      "proof that the margin is available at every crossing point"
+    ],
+    "route_class": "domination_hypothesis",
+    "row_id": "domination_hypothesis_pointwise_margin",
+    "sign_known": false,
+    "status": "hypothesis_required_not_proved",
+    "theorem_available": false,
+    "theorem_required": "PointwiseRadialCommutatorSignOrDominanceForVBarrier"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "commutator_effect": "A successful weight could trade pointwise sign for a quantitative dominance inequality over the crossing set.",
+    "domination_hypothesis": "w max(-(partial_z u^r) partial_r u1, 0) is dominated by the full weighted maximum-principle budget without hidden positive remainders",
+    "favorable_if_true": true,
+    "gate": "PointwiseSignDominanceRouteForRadialCommutator",
+    "hazards": [
+      "weight derivatives create new commutators",
+      "radial boundary and axis terms may leak",
+      "secondary maxima may move outside the designed weight window"
+    ],
+    "local_condition": "Use a weighted barrier B=w(r,z,t)v and require the positive commutator source to be absorbed by weight-generated drift, diffusion, and source margins.",
+    "proof_closed": false,
+    "required_evidence": [
+      "constructive weight with controlled derivatives",
+      "no boundary leakage from the weighted operator",
+      "log-aware constants for Biot-Savart strain terms"
+    ],
+    "route_class": "domination_hypothesis",
+    "row_id": "domination_hypothesis_weighted_barrier",
+    "sign_known": false,
+    "status": "hypothesis_required_not_proved",
+    "theorem_available": false,
+    "theorem_required": "PointwiseRadialCommutatorSignOrDominanceForVBarrier"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "commutator_effect": "Even if partial_r u1 is locally bounded, a log-amplified partial_z u^r estimate can exceed a polynomial pointwise margin.",
+    "domination_hypothesis": "any dominance theorem must absorb or cancel the Biot-Savart log factor on the active crossing scale",
+    "favorable_if_true": false,
+    "gate": "PointwiseSignDominanceRouteForRadialCommutator",
+    "hazards": [
+      "restored Biot-Savart logarithm",
+      "strain coefficient time-integrability gap",
+      "nonlocal sign is not preserved by the kernel"
+    ],
+    "local_condition": "partial_z u^r is recovered nonlocally from the axisymmetric Biot-Savart law and may inherit the coincident-ring logarithmic strain loss.",
+    "proof_closed": false,
+    "required_evidence": [
+      "localized no-log replacement estimate, or",
+      "log-aware commutator dominance inequality, or",
+      "structural cancellation of the coincident-ring contribution"
+    ],
+    "route_class": "biot_savart_log_hazard",
+    "row_id": "biot_savart_log_hazard",
+    "sign_known": false,
+    "status": "open_hazard",
+    "theorem_available": false,
+    "theorem_required": "PointwiseRadialCommutatorSignOrDominanceForVBarrier"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "commutator_effect": "Radial steepening of u1 can amplify the commutator independently of the axial monotonicity variable v.",
+    "domination_hypothesis": "partial_r u1 must be controlled by the same barrier ledger or by an independent radial monotonicity/regularity theorem",
+    "favorable_if_true": false,
+    "gate": "PointwiseSignDominanceRouteForRadialCommutator",
+    "hazards": [
+      "radial gradient can peak where v is just crossing",
+      "radial and axial monotonicity are not interchangeable",
+      "incompressibility does not determine partial_r u1"
+    ],
+    "local_condition": "The factor partial_r u1 is not fixed by the axial condition v=partial_z u1 at the first positive maximum.",
+    "proof_closed": false,
+    "required_evidence": [
+      "radial-gradient bound at first axial crossing",
+      "coupled equation control for partial_r u1",
+      "compatibility with viscosity, axis behavior, and boundary data"
+    ],
+    "route_class": "radial_gradient_coupling",
+    "row_id": "radial_gradient_coupling",
+    "sign_known": false,
+    "status": "coupling_open",
+    "theorem_available": false,
+    "theorem_required": "PointwiseRadialCommutatorSignOrDominanceForVBarrier"
+  },
+  {
+    "clay_navier_stokes_promoted": false,
+    "commutator_effect": "Until that theorem is supplied, the pointwise sign route does not close the v-barrier.",
+    "domination_hypothesis": "the required theorem is named but unavailable; no proof closure is emitted",
+    "favorable_if_true": false,
+    "gate": "PointwiseSignDominanceRouteForRadialCommutator",
+    "hazards": [
+      "accidental proof promotion",
+      "Clay-level overclaim",
+      "omitted sign-unknown crossing case"
+    ],
+    "local_condition": "PointwiseRadialCommutatorSignOrDominanceForVBarrier must prove either favorable sign or quantitative dominance for -(partial_z u^r) partial_r u1 on every admissible first-crossing configuration.",
+    "proof_closed": false,
+    "required_evidence": [
+      "complete pointwise sign theorem, or",
+      "complete log-aware dominance theorem,",
+      "formal integration into the global axial monotonicity barrier"
+    ],
+    "route_class": "required_theorem",
+    "row_id": "fail_closed_required_theorem",
+    "sign_known": false,
+    "status": "fail_closed",
+    "theorem_available": false,
+    "theorem_required": "PointwiseRadialCommutatorSignOrDominanceForVBarrier"
+  }
+]

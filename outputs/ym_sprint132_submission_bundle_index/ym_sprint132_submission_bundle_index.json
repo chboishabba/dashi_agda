@@ -1,0 +1,188 @@
+{
+  "categories": {
+    "sprint128_agda_modules": [
+      {
+        "category": "sprint128_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint128CompactnessAndLogGeneratorClosure.agda",
+        "sha256": "a4c7f08f981a679ec1390970071928799ce549da214278c7ba7558e08c5c6cc3",
+        "size_bytes": 12219
+      },
+      {
+        "category": "sprint128_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda",
+        "sha256": "8e7f6366eaebd5208c6d2dc2c0935df6d00ecd92e5151303912e70201358f9f8",
+        "size_bytes": 16431
+      },
+      {
+        "category": "sprint128_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint128TransferLowerBoundClosure.agda",
+        "sha256": "c4c09c07398b25b4fb9c1ed135b77f95b114618c97dbdab44a986d79c6b2d950",
+        "size_bytes": 13120
+      },
+      {
+        "category": "sprint128_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda",
+        "sha256": "9664f74e533595ba806cd2fc3edd1e10dbb62b472c053d0d06f47ed49a758c02",
+        "size_bytes": 14379
+      }
+    ],
+    "sprint128_artifacts": [
+      {
+        "category": "sprint128_artifacts",
+        "path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit.md",
+        "sha256": "3c52b72ff6aea8655d675344dec97c97098a7681901576b604c1e4ec2db366fe",
+        "size_bytes": 10216
+      },
+      {
+        "category": "sprint128_artifacts",
+        "path": "outputs/ym_sprint128_closure_audit/ym_sprint128_closure_audit_summary.json",
+        "sha256": "2539296ed26a9daf71b6548872ba6c703e3a611779911cddb8a1d01e0b76eedf",
+        "size_bytes": 105563
+      }
+    ],
+    "sprint129_agda_modules": [
+      {
+        "category": "sprint129_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda",
+        "sha256": "e2e2bc9172efa27c242b65962dd0fb6961928f93cbf2acca1c459b13ef2a2a86",
+        "size_bytes": 16074
+      },
+      {
+        "category": "sprint129_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda",
+        "sha256": "70a80e594faa9727f1a785caa54756830e0f3920811ccbcb99386209f3a529ee",
+        "size_bytes": 11587
+      },
+      {
+        "category": "sprint129_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda",
+        "sha256": "dcc646e24ff96815a71f080b87ba01dd38d9bb1eb26040cfd8305a9c904b201e",
+        "size_bytes": 11702
+      },
+      {
+        "category": "sprint129_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint129SpectralGapTransportClosure.agda",
+        "sha256": "d7676d46b80a4d240b5974d822d4dbf3f067cb4114d4d08c3bf22bbba6adb6e1",
+        "size_bytes": 15009
+      }
+    ],
+    "sprint129_artifacts": [
+      {
+        "category": "sprint129_artifacts",
+        "path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit.md",
+        "sha256": "3548812f93b54ec5a0399fe29041bc4bc29865fc5c96a0a7fcf345e4c8595407",
+        "size_bytes": 9779
+      },
+      {
+        "category": "sprint129_artifacts",
+        "path": "outputs/ym_sprint129_mosco_spectral_audit/ym_sprint129_mosco_spectral_audit_summary.json",
+        "sha256": "bb7520c3898fd106705126eb7afa5465813426a1391910a7b9275e13641bd91e",
+        "size_bytes": 129826
+      }
+    ],
+    "sprint130_agda_modules": [
+      {
+        "category": "sprint130_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda",
+        "sha256": "b1651ae77a7c1ece5cfdafca3d40b951d21353e3285e6dcf7429a7f117df0c98",
+        "size_bytes": 15740
+      },
+      {
+        "category": "sprint130_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda",
+        "sha256": "2eb37ff1b28b185b6838dc0013affe54a77270fb1fa00529c98a990dbf4d30d1",
+        "size_bytes": 13868
+      },
+      {
+        "category": "sprint130_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda",
+        "sha256": "02c76d21135e804d0edd742ea40f0cfc555c755b6d135f2cec4389c10cb39878",
+        "size_bytes": 12936
+      }
+    ],
+    "sprint130_artifacts": [
+      {
+        "category": "sprint130_artifacts",
+        "path": "outputs/ym_sprint130_os_fin_audit/ym_sprint130_os_fin_audit.md",
+        "sha256": "c148c298700c26f728150b2ea8ba3927eab769ac2470bbaaeb4d34ad4f8e63f3",
+        "size_bytes": 3751
+      },
+      {
+        "category": "sprint130_artifacts",
+        "path": "outputs/ym_sprint130_os_fin_audit/ym_sprint130_os_fin_audit_summary.json",
+        "sha256": "7b9edfb8e4598507c8dd0637d6230bf2c3471f8152992bc455561f7342f2616a",
+        "size_bytes": 38095
+      }
+    ],
+    "sprint131_agda_modules": [
+      {
+        "category": "sprint131_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint131ExternalGovernanceBoundary.agda",
+        "sha256": "c1736e2f27f5844b702c07eee73cd91adbd1bdb2260fabecd97ba4cb2d4aa3f1",
+        "size_bytes": 11426
+      },
+      {
+        "category": "sprint131_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint131SubmissionPacketManifest.agda",
+        "sha256": "4f72de9bf9d563f9ebdedc06b8add7a8e7b34fd693ecea5850f4bf0fff04d602",
+        "size_bytes": 17502
+      }
+    ],
+    "sprint131_artifacts": [
+      {
+        "category": "sprint131_artifacts",
+        "path": "outputs/ym_sprint131_final_claim_audit/ym_sprint131_final_claim_audit.md",
+        "sha256": "946eda4f5b44e231791aecff50b596fdb60941a8824fa010488d2701ba8137f2",
+        "size_bytes": 6264
+      },
+      {
+        "category": "sprint131_artifacts",
+        "path": "outputs/ym_sprint131_final_claim_audit/ym_sprint131_final_claim_audit_summary.json",
+        "sha256": "c47fffba5f71841fbe0bc8b68f0872deeb57b07a1372b9c7633ac3cbe7925a59",
+        "size_bytes": 12188
+      },
+      {
+        "category": "sprint131_artifacts",
+        "path": "outputs/ym_sprint131_submission_packet/ym_sprint131_submission_packet.md",
+        "sha256": "70cdba6c27e7f6423354186771c14d5d7d068495c3b2e04390390ab7973bb2aa",
+        "size_bytes": 5290
+      },
+      {
+        "category": "sprint131_artifacts",
+        "path": "outputs/ym_sprint131_submission_packet/ym_sprint131_submission_packet_summary.json",
+        "sha256": "733fda5c97eb4b29b9956a5e0054231cd1da8ed86b8fc9ff55e82ed981e0fc6f",
+        "size_bytes": 14556
+      }
+    ],
+    "sprint132_agda_modules": [
+      {
+        "category": "sprint132_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint132RedTeamObjectionResolutionLedger.agda",
+        "sha256": "3c3731b1dccc15f6b6f56e491ac6e6436f04684f5a44e27708b2ca410051ce6d",
+        "size_bytes": 12171
+      },
+      {
+        "category": "sprint132_agda_modules",
+        "path": "DASHI/Physics/Closure/YMSprint132ReproducibilityBoundaryLedger.agda",
+        "sha256": "1377efa9fd4cc98ce3e8b358d59147f19b596c8b7bc4e116edf43d97410eec84",
+        "size_bytes": 18277
+      }
+    ]
+  },
+  "clayYangMillsPromoted": false,
+  "counts": {
+    "bytes": 547969,
+    "categories": 9,
+    "files": 25
+  },
+  "fail_closed": true,
+  "generated_at_utc": "2026-06-06T10:27:39+00:00",
+  "name": "ym_sprint132_submission_bundle_index",
+  "validation": {
+    "clayYangMillsPromoted_true_rejected": true,
+    "empty_categories_rejected": true,
+    "empty_files_rejected": true,
+    "missing_files_rejected": true,
+    "sprint132_incomplete_markers_rejected": true
+  }
+}

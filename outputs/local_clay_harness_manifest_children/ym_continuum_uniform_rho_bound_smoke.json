@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "casimir_shift_budget": 0.35,
+      "continuum_sup_proxy": 1.304929658551372,
+      "finite": true,
+      "p": 2,
+      "rho_sup_tree": 0.954929658551372
+    },
+    {
+      "casimir_shift_budget": 0.35,
+      "continuum_sup_proxy": 1.6232395447351626,
+      "finite": true,
+      "p": 3,
+      "rho_sup_tree": 1.2732395447351628
+    },
+    {
+      "casimir_shift_budget": 0.35,
+      "continuum_sup_proxy": 2.259859317102744,
+      "finite": true,
+      "p": 5,
+      "rho_sup_tree": 1.909859317102744
+    },
+    {
+      "casimir_shift_budget": 0.35,
+      "continuum_sup_proxy": 2.8964790894703256,
+      "finite": true,
+      "p": 7,
+      "rho_sup_tree": 2.5464790894703255
+    }
+  ],
+  "contract": "YM continuum uniform rho bound smoke",
+  "diagnostic_only": true,
+  "promotion": {
+    "rho_bound_proved": false,
+    "terminal_promoted": false,
+    "ym_clay_promoted": false
+  },
+  "summary": {
+    "all_finite": true,
+    "max_continuum_sup_proxy": 2.8964790894703256,
+    "mckay_sup_formula": "(p+1)/pi"
+  }
+}

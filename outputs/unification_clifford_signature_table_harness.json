@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "cl13_dirac_ok": true,
+  "cl31_majorana_ok": true,
+  "cl40_euclidean_ok": true,
+  "promotion": false,
+  "row_count": 3
+}

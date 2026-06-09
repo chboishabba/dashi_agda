@@ -1,0 +1,13 @@
+gate,expected,actual,passed,status
+kStarCollapseConstraintLedgerClosed,true,true,True,PASS
+kStarCollapseMechanismClosed,false,false,True,PASS
+optionBFiniteTimeKStarCollapseClosed,false,false,True,PASS
+lowModeEnergyConcentrationMechanism,false,false,True,PASS
+viscousDampingOvercomeMechanism,false,false,True,PASS
+scalingCompatibleSelfSimilarity,false,false,True,PASS
+singularityExtractionWithoutCriterionFailure,false,false,True,PASS
+clayNavierStokesPromoted,false,false,True,PASS
+finite-time K-star collapse mechanism,present,present,True,PASS
+compatibility with Leray energy,present,present,True,PASS
+exclusion of conditional K-star lower bound,present,present,True,PASS
+finite-time singularity extraction,present,present,True,PASS

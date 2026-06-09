@@ -1,0 +1,7 @@
+row_id,label,alpha,beta,gamma,alpha_fraction,beta_fraction,gamma_fraction,nse_consistency_residual,nse_consistent,energy_lhs,energy_rhs,energy_margin,energy_finite,bkm_candidate,compatible,classification,reason
+r000,hou_luo_hou_li_boundary_example,1.0,0.0,1.3333333333333333,1,0,4/3,0.0,True,1.3333333333333333,0.6666666666666666,0.6666666666666666,True,True,True,compatible_boundary_candidate,"passes NSE scaling, finite-energy, and BKM candidate checks"
+r001,subcritical_time_amplitude,0.75,-0.25,1.5,3/4,-1/4,3/2,0.0,True,1.25,0.5,0.75,True,False,False,incompatible_scaling_row,BKM candidate threshold alpha >= 1
+r002,energy_defect_candidate,1.5,0.5,0.25,3/2,1/2,1/4,0.0,True,0.75,1.0,-0.25,False,True,False,incompatible_scaling_row,finite-energy inequality beta + gamma >= 2*alpha/3
+r003,bkm_subcritical_consistent,0.8,-0.2,2.0,4/5,-1/5,2,0.0,True,1.8,0.5333333333333333,1.2666666666666666,True,False,False,incompatible_scaling_row,BKM candidate threshold alpha >= 1
+r004,nse_inconsistent_reference,1.0,0.2,1.3333333333333333,1,1/5,4/3,-0.2,False,1.5333333333333334,0.6666666666666666,0.8666666666666667,True,True,False,incompatible_scaling_row,NSE consistency alpha - beta == 1
+r005,critical_energy_margin,1.5,0.5,1.0,3/2,1/2,1,0.0,True,1.5,1.0,0.5,True,True,True,compatible_boundary_candidate,"passes NSE scaling, finite-energy, and BKM candidate checks"

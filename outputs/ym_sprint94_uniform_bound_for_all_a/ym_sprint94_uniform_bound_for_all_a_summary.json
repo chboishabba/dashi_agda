@@ -1,0 +1,25 @@
+{
+  "activity_bound": "|zeta_a(X)| <= C * exp(-m * diam_phys(a,X)) for all a < a0",
+  "clay_yang_mills_promoted": false,
+  "continuum_limit_mass_gap_derived_in_repo": false,
+  "contraction_delta_lower_bound_required": true,
+  "delta_min_formula": "1 - exp(-4)",
+  "delta_min_numeric": 0.9816843611112658,
+  "remaining_open_lemmas": [
+    "WC3UniformInA",
+    "UniformConnectedSchwingerDecay",
+    "ContinuumLimitMassGap",
+    "Nontrivial4DSU3YangMillsMeasure",
+    "ClayStatementBoundaryDischarged",
+    "ExternalAcceptanceToken"
+  ],
+  "route_decision": "SPRINT94_CLOSES_UNIFORM_ACTIVITY_BOUND_ONLY",
+  "sprint": 94,
+  "uniform_bound_for_all_a_closed_in_repo": true,
+  "uniform_c_formula": "1/(1-delta_min)",
+  "uniform_c_numeric": 54.59815003314412,
+  "uniform_connected_schwinger_decay_derived_in_repo": false,
+  "uniform_m_formula": "delta_min/2",
+  "uniform_m_numeric": 0.4908421805556329,
+  "wc3_uniform_in_a_derived_in_repo": false
+}

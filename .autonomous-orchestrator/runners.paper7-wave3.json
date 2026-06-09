@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 2600,
+    "once": true,
+    "timeout_seconds": 2400
+  },
+  "runners": {
+    "paper7-wave3-gate12-manager": {
+      "claim": "Paper 7 continued Gate 1/2 manager: inhabit S8PressureBelow15ToYangMillsSpectralGapTheorem over the real Yang-Mills Hamiltonian carrier or name the first missing carrier theorem; may spawn up to six leaf workers",
+      "lane": "paper7-gate1-gate2",
+      "parent": "paper7-root"
+    },
+    "paper7-wave3-gate3-manager": {
+      "claim": "Paper 7 continued Gate 3 manager: implement finite 512-entry SU(3) Jacobi carrier, then SFGC fibre representation / Killing / D_A / Hodge-current wiring; may spawn up to six leaf workers",
+      "lane": "paper7-gate3-yang-mills",
+      "parent": "paper7-root"
+    },
+    "paper7-wave3-gate4-manager": {
+      "claim": "Paper 7 continued Gate 4 manager: prove determinant/rank nondegeneracy or full Sylvester/Lorentzian inertia from checked rational nonzero weights; may spawn up to six leaf workers",
+      "lane": "paper7-gate4-factorvec-gr",
+      "parent": "paper7-root"
+    },
+    "paper7-wave3-gate5-manager": {
+      "claim": "Paper 7 continued Gate 5 manager: construct Hilbert completion/topology, physical traversal group, strong continuity, StoneBundle, or self-adjoint colimit generator data; may spawn up to six leaf workers",
+      "lane": "paper7-gate5-hilbert-stone",
+      "parent": "paper7-root"
+    },
+    "paper7-wave3-gate6-manager": {
+      "claim": "Paper 7 continued Gate 6 manager: implement arbitrary sector classification, sector-specific nonempty carrier predicates, foreign-lane identity, or irreducibility evidence; may spawn up to six leaf workers",
+      "lane": "paper7-gate6-dhr-aqft",
+      "parent": "paper7-root"
+    },
+    "paper7-wave3-gate78-manager": {
+      "claim": "Paper 7 continued Gate 7/8 manager: inhabit missingCompletedSquareLiftToCarrierPotential, then continue to concrete Yukawa/CKM blockers and only later Gate 8 composition; may spawn up to six leaf workers",
+      "lane": "paper7-gate7-gate8-composition",
+      "parent": "paper7-root"
+    }
+  }
+}

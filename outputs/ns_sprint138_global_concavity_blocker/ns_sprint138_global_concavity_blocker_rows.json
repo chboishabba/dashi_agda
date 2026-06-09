@@ -1,0 +1,137 @@
+[
+  {
+    "blocker": "GlobalConcavityOfPsi1",
+    "blocker_open": true,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_concavity_closed": false,
+    "ledger_role": "local_center_expansion",
+    "local_concavity_supported": true,
+    "missing_evidence": [
+      "uniform radius of validity",
+      "control of crossings outside the local Taylor patch"
+    ],
+    "obstruction_mechanism": "This controls only a local patch and does not rule out off-center first positive crossings of v.",
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "row_id": "local_taylor_concavity_near_symmetry_center",
+    "statement": "At the z-reflection symmetry center, a local Taylor expansion can support partial_z^2 psi1<=0 in a small neighborhood of the primary axial maximum, provided the center is a genuine concave stream-profile peak.",
+    "status": "supported_local",
+    "support": [
+      "z-reflection symmetry",
+      "primary axial maximum geometry",
+      "local Taylor concavity near z=0"
+    ]
+  },
+  {
+    "blocker": "GlobalConcavityOfPsi1",
+    "blocker_open": true,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_concavity_closed": false,
+    "ledger_role": "elliptic_nonlocality",
+    "local_concavity_supported": false,
+    "missing_evidence": [
+      "global elliptic comparison theorem for partial_z^2 psi1",
+      "monotone-preserving Biot-Savart representation in the full domain"
+    ],
+    "obstruction_mechanism": "A local peak calculation for omega1 or psi1 cannot by itself force global concavity of psi1.",
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "row_id": "elliptic_nonlocal_psi1_dependence_on_omega1",
+    "statement": "The stream variable psi1 is determined by the elliptic relation -Ltilde psi1 = omega1, so partial_z^2 psi1 depends nonlocally on the full omega1 distribution rather than only on the local sign structure near the symmetry center.",
+    "status": "open_blocker",
+    "support": [
+      "-Ltilde psi1 = omega1",
+      "Sprint134 corrected axisymmetric elliptic coupling"
+    ]
+  },
+  {
+    "blocker": "GlobalConcavityOfPsi1",
+    "blocker_open": true,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_concavity_closed": false,
+    "ledger_role": "kernel_sign",
+    "local_concavity_supported": false,
+    "missing_evidence": [
+      "signed kernel dominance estimate",
+      "cancellation bound strong enough for every first-crossing site"
+    ],
+    "obstruction_mechanism": "The maximum-principle source term 2 u1 partial_z^2 psi1 can become positive at an admissible crossing if the nonlocal kernel contribution has the wrong sign.",
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "row_id": "sign_indefinite_kernel_contribution",
+    "statement": "The differentiated elliptic kernel contributing to partial_z^2 psi1 is sign-indefinite across source locations, so favorable near-center mass can be offset by remote or asymmetric omega1 contributions.",
+    "status": "open_blocker",
+    "support": [
+      "second z-derivatives of Green-kernel representations change sign",
+      "nonlocal omega1-to-psi1 coupling"
+    ]
+  },
+  {
+    "blocker": "GlobalConcavityOfPsi1",
+    "blocker_open": true,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_concavity_closed": false,
+    "ledger_role": "boundary_and_annulus",
+    "local_concavity_supported": false,
+    "missing_evidence": [
+      "boundary-compatible global barrier for psi1 concavity",
+      "annular contribution exclusion or domination estimate"
+    ],
+    "obstruction_mechanism": "A first positive maximum of v can occur in an annular or near-boundary region where the local center concavity ledger has no sign authority.",
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "row_id": "boundary_annular_contribution",
+    "statement": "Boundary layers, annular mass away from the axis, and outer domain contributions can alter partial_z^2 psi1 at an interior point even when the symmetry-center profile remains locally concave.",
+    "status": "open_blocker",
+    "support": [
+      "elliptic boundary sensitivity",
+      "annular source distributions in axisymmetric coordinates"
+    ]
+  },
+  {
+    "blocker": "GlobalConcavityOfPsi1",
+    "blocker_open": true,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_concavity_closed": false,
+    "ledger_role": "time_persistence",
+    "local_concavity_supported": false,
+    "missing_evidence": [
+      "transport-stable concavity invariant",
+      "a priori estimate preventing concavity loss before crossing"
+    ],
+    "obstruction_mechanism": "The barrier argument needs sign control at the first crossing time, not merely at initial time or at the symmetry center.",
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "row_id": "persistence_failure",
+    "statement": "Even if the initial profile has a favorable concavity patch, the current route has no persistence theorem showing that partial_z^2 psi1 keeps the required sign over the time window needed for axial monotonicity.",
+    "status": "open_blocker",
+    "support": [
+      "Sprint137 first-positive-crossing ledger",
+      "time-dependent nonlocal elliptic solve"
+    ]
+  },
+  {
+    "blocker": "GlobalConcavityOfPsi1",
+    "blocker_open": true,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_ns_solved": false,
+    "global_concavity_closed": false,
+    "ledger_role": "closure_requirement",
+    "local_concavity_supported": false,
+    "missing_evidence": [
+      "GlobalConcavityOfPsi1",
+      "signed nonlocal elliptic estimate",
+      "boundary and annular contribution control",
+      "time persistence of the concavity sign"
+    ],
+    "obstruction_mechanism": "Without this theorem, AxialMonotonicityOfSwirlProfile cannot be closed from the local symmetry-center calculation.",
+    "parent_gate": "AxialMonotonicityOfSwirlProfile",
+    "row_id": "required_theorem_global_concavity_of_psi1",
+    "statement": "For every possible first positive maximum of v=partial_z u1 in the monitored half-profile, partial_z^2 psi1 must keep the sign needed to make 2 u1 partial_z^2 psi1 nonpositive or otherwise dominated.",
+    "status": "required_theorem_missing",
+    "support": [
+      "local concavity support only",
+      "maximum-principle source sign requirement from Sprint137"
+    ]
+  }
+]

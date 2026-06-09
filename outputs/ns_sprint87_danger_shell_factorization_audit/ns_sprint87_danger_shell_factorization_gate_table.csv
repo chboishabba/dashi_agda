@@ -1,0 +1,6 @@
+gate_id,gate_name,status,field_name,actual_value,expected_value,proved_in_repo,clay_promotion,next_required_input
+G1,DyadicSupFactorization,CLOSED_RECORDED,dyadicSupFactorizationClosed,True,True,True,False,dyadic supremum pullout is recorded
+G2,ShellSupControlledByH1TailFactorization,CLOSED_RECORDED,shellSupControlledByH1TailClosed,True,True,True,False,weighted shell supremum is controlled by the H1 tail surface
+G3,HighHighHminusHalfFactorization,CLOSED_RECORDED,highHighHminusHalfBoundClosed,True,True,True,False,Hminus-half high-high bound is reduced to the scalar absorption factor
+G4,DangerShellAbsorptionCondition,OPEN_FAIL_CLOSED,dangerShellAbsorptionConditionClosed,False,False,False,False,derive scalar absorption inequality uniformly in the NS route
+G5,ClayNavierStokesPromoted,FALSE_NO_PROMOTION,clayNavierStokesPromoted,False,False,False,False,theta/BKM continuation and Clay promotion remain blocked

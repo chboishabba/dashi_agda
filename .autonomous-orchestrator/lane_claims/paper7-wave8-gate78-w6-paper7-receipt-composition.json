@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave8-gate78-w6-paper7-receipt-composition.json",
+  "lane": "paper7-gate7-gate8-composition/Paper7ReceiptComposition",
+  "lane_claim": "Paper 7 wave8 LEAF WORKER gate78 W6: own exactly `Paper7ReceiptComposition`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement Gate 1-7 receipt records, consistency checks, and blocked final product receipt. terminalClaimPromoted must remain false unless all upstream receipts/authority boundaries are inhabited. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited.",
+  "orchestrator_id": "paper7-wave8-gate78-w6-paper7-receipt-composition",
+  "parent_orchestrator_id": "paper7-wave8-gate78-manager",
+  "status_file": "status.paper7-wave8-gate78-w6-paper7-receipt-composition.json",
+  "timestamp": "2026-05-19T15:49:24Z"
+}

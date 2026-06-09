@@ -1,0 +1,1730 @@
+{
+  "aggregate_metrics": {
+    "bad_row_count": 32,
+    "bad_rows_failed": 32,
+    "classification_accuracy": 1.0,
+    "good_row_count": 16,
+    "good_rows_passed": 16,
+    "max_bad_gauge_null_leakage": 0.109,
+    "max_bad_symmetry_defect": 0.21000000000000002,
+    "max_good_gauge_null_leakage": 0.0,
+    "max_good_symmetry_defect": 0.0,
+    "min_bad_spectral_margin": 0.0,
+    "min_good_spectral_margin": 0.9567817387135332,
+    "row_count": 48
+  },
+  "bad_regimes": [
+    {
+      "classification_matches_expectation": true,
+      "expected_pass": false,
+      "kind": "bad",
+      "max_full_symmetry_defect": 0.21000000000000002,
+      "max_gauge_null_leakage": 0.0,
+      "max_projector_symmetry_defect": 0.0,
+      "min_spectral_margin": 0.0,
+      "name": "asymmetric_boundary_form",
+      "row_count": 8,
+      "rows_failing": 8,
+      "rows_passing": 0
+    },
+    {
+      "classification_matches_expectation": true,
+      "expected_pass": false,
+      "kind": "bad",
+      "max_full_symmetry_defect": 0.0,
+      "max_gauge_null_leakage": 0.109,
+      "max_projector_symmetry_defect": 0.0,
+      "min_spectral_margin": 1.0473046857138855,
+      "name": "gauge_null_leaking_boundary",
+      "row_count": 8,
+      "rows_failing": 8,
+      "rows_passing": 0
+    },
+    {
+      "classification_matches_expectation": true,
+      "expected_pass": false,
+      "kind": "bad",
+      "max_full_symmetry_defect": 0.0,
+      "max_gauge_null_leakage": 0.0,
+      "max_projector_symmetry_defect": 0.0,
+      "min_spectral_margin": 0.019995070469398604,
+      "name": "induced_ball_spectral_collapse_boundary",
+      "row_count": 8,
+      "rows_failing": 8,
+      "rows_passing": 0
+    },
+    {
+      "classification_matches_expectation": true,
+      "expected_pass": false,
+      "kind": "bad",
+      "max_full_symmetry_defect": 0.0,
+      "max_gauge_null_leakage": 0.0,
+      "max_projector_symmetry_defect": 0.115,
+      "min_spectral_margin": 1.097304685713885,
+      "name": "nonorthogonal_gauge_projection_boundary",
+      "row_count": 8,
+      "rows_failing": 8,
+      "rows_passing": 0
+    }
+  ],
+  "claim_scope": "finite Killing-boundary self-adjointness diagnostic proxy only",
+  "diagnostic_only": true,
+  "good_regimes": [
+    {
+      "classification_matches_expectation": true,
+      "expected_pass": true,
+      "kind": "good",
+      "max_full_symmetry_defect": 0.0,
+      "max_gauge_null_leakage": 0.0,
+      "max_projector_symmetry_defect": 0.0,
+      "min_spectral_margin": 1.244318439443653,
+      "name": "killing_full_degree_boundary",
+      "row_count": 8,
+      "rows_failing": 0,
+      "rows_passing": 8
+    },
+    {
+      "classification_matches_expectation": true,
+      "expected_pass": true,
+      "kind": "good",
+      "max_full_symmetry_defect": 0.0,
+      "max_gauge_null_leakage": 0.0,
+      "max_projector_symmetry_defect": 0.0,
+      "min_spectral_margin": 0.9567817387135332,
+      "name": "killing_holonomy_buffered_boundary",
+      "row_count": 8,
+      "rows_failing": 0,
+      "rows_passing": 8
+    }
+  ],
+  "notes": [
+    "Good profiles are symmetric, quotient-stable, orthogonally projected, and gapped.",
+    "Bad profiles isolate asymmetry, gauge-null leakage, projection, and spectral-collapse failures.",
+    "This receipt is not a YM Hamiltonian domination or continuum mass-gap proof."
+  ],
+  "ok": true,
+  "parameters": {
+    "dimension": 6,
+    "leakage_floor": 1e-09,
+    "quotient_dimension": 4,
+    "spectral_margin_floor": 0.18,
+    "sweeps": 8,
+    "tolerance": 1e-09
+  },
+  "promotion": false,
+  "rows": [
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 0,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        1.244318439443653,
+        1.5488173424644534,
+        1.8578343061784757,
+        2.2090299119134156
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_full_degree_boundary",
+      "spectral_diameter": 0.9647114724697625,
+      "spectral_margin": 1.244318439443653
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 0,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.9567817387135332,
+        1.2637817068041384,
+        1.5738885112664078,
+        1.9055480432159249
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_holonomy_buffered_boundary",
+      "spectral_diameter": 0.9487663045023916,
+      "spectral_margin": 0.9567817387135332
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": false,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": false,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": false,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_block_symmetric",
+        "quotient_spectrum_real",
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.14,
+      "gauge_null_leakage": 0.0,
+      "index": 0,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [],
+      "quotient_symmetry_defect": 0.14,
+      "regime": "asymmetric_boundary_form",
+      "spectral_diameter": 0.0,
+      "spectral_margin": 0.0
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": false,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "gauge_null_leakage_absent"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.067,
+      "index": 0,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.067,
+      "quotient_eigenvalues": [
+        1.0473046857138855,
+        1.3548208502891064,
+        1.6650580326699096,
+        1.9928164313270997
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "gauge_null_leaking_boundary",
+      "spectral_diameter": 0.9455117456132143,
+      "spectral_margin": 1.0473046857138855
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 0,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.019995070469398604,
+        0.3299912313479716,
+        0.6399943338841108,
+        0.9500193642985193
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "induced_ball_spectral_collapse_boundary",
+      "spectral_diameter": 0.9300242938291207,
+      "spectral_margin": 0.019995070469398604
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": false,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "projector_orthogonal",
+        "quotient_domain_stable"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 0,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.08,
+      "quotient_commutator_defect": 0.104,
+      "quotient_eigenvalues": [
+        1.097304685713885,
+        1.4048208502891055,
+        1.7150580326699099,
+        2.0428164313271
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "nonorthogonal_gauge_projection_boundary",
+      "spectral_diameter": 0.9455117456132149,
+      "spectral_margin": 1.097304685713885
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 1,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        1.2478898680150818,
+        1.552388771035882,
+        1.861405734749905,
+        2.2126013404848455
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_full_degree_boundary",
+      "spectral_diameter": 0.9647114724697636,
+      "spectral_margin": 1.2478898680150818
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 1,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.9603531672849618,
+        1.2673531353755672,
+        1.5774599398378364,
+        1.9091194717873528
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_holonomy_buffered_boundary",
+      "spectral_diameter": 0.948766304502391,
+      "spectral_margin": 0.9603531672849618
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": false,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": false,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": false,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_block_symmetric",
+        "quotient_spectrum_real",
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.15000000000000002,
+      "gauge_null_leakage": 0.0,
+      "index": 1,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [],
+      "quotient_symmetry_defect": 0.15000000000000002,
+      "regime": "asymmetric_boundary_form",
+      "spectral_diameter": 0.0,
+      "spectral_margin": 0.0
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": false,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "gauge_null_leakage_absent"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.073,
+      "index": 1,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.073,
+      "quotient_eigenvalues": [
+        1.050876114285314,
+        1.3583922788605345,
+        1.668629461241338,
+        1.996387859898528
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "gauge_null_leaking_boundary",
+      "spectral_diameter": 0.945511745613214,
+      "spectral_margin": 1.050876114285314
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 1,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.024316499040827184,
+        0.3343126599194001,
+        0.6443157624555396,
+        0.9543407928699477
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "induced_ball_spectral_collapse_boundary",
+      "spectral_diameter": 0.9300242938291204,
+      "spectral_margin": 0.024316499040827184
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": false,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "projector_orthogonal",
+        "quotient_domain_stable"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 1,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.085,
+      "quotient_commutator_defect": 0.11037857142857142,
+      "quotient_eigenvalues": [
+        1.100876114285314,
+        1.408392278860534,
+        1.7186294612413389,
+        2.0463878598985286
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "nonorthogonal_gauge_projection_boundary",
+      "spectral_diameter": 0.9455117456132145,
+      "spectral_margin": 1.100876114285314
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 2,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        1.2514612965865102,
+        1.5559601996073102,
+        1.8649771633213328,
+        2.2161727690562727
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_full_degree_boundary",
+      "spectral_diameter": 0.9647114724697625,
+      "spectral_margin": 1.2514612965865102
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 2,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.9639245958563902,
+        1.270924563946996,
+        1.5810313684092647,
+        1.9126909003587818
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_holonomy_buffered_boundary",
+      "spectral_diameter": 0.9487663045023915,
+      "spectral_margin": 0.9639245958563902
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": false,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": false,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": false,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_block_symmetric",
+        "quotient_spectrum_real",
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.16,
+      "gauge_null_leakage": 0.0,
+      "index": 2,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [],
+      "quotient_symmetry_defect": 0.16,
+      "regime": "asymmetric_boundary_form",
+      "spectral_diameter": 0.0,
+      "spectral_margin": 0.0
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": false,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "gauge_null_leakage_absent"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.079,
+      "index": 2,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.079,
+      "quotient_eigenvalues": [
+        1.0544475428567426,
+        1.3619637074319633,
+        1.6722008898127667,
+        1.9999592884699569
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "gauge_null_leaking_boundary",
+      "spectral_diameter": 0.9455117456132143,
+      "spectral_margin": 1.0544475428567426
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 2,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.02863792761225575,
+        0.33863408849082877,
+        0.648637191026968,
+        0.9586622214413762
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "induced_ball_spectral_collapse_boundary",
+      "spectral_diameter": 0.9300242938291206,
+      "spectral_margin": 0.02863792761225575
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": false,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "projector_orthogonal",
+        "quotient_domain_stable"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 2,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.09,
+      "quotient_commutator_defect": 0.11674285714285715,
+      "quotient_eigenvalues": [
+        1.1044475428567426,
+        1.4119637074319629,
+        1.722200889812767,
+        2.049959288469957
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "nonorthogonal_gauge_projection_boundary",
+      "spectral_diameter": 0.9455117456132145,
+      "spectral_margin": 1.1044475428567426
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 3,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        1.2550327251579387,
+        1.559531628178739,
+        1.8685485918927618,
+        2.2197441976277013
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_full_degree_boundary",
+      "spectral_diameter": 0.9647114724697625,
+      "spectral_margin": 1.2550327251579387
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 3,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.9674960244278188,
+        1.2744959925184243,
+        1.5846027969806935,
+        1.91626232893021
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_holonomy_buffered_boundary",
+      "spectral_diameter": 0.9487663045023913,
+      "spectral_margin": 0.9674960244278188
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": false,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": false,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": false,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_block_symmetric",
+        "quotient_spectrum_real",
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.17,
+      "gauge_null_leakage": 0.0,
+      "index": 3,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [],
+      "quotient_symmetry_defect": 0.17,
+      "regime": "asymmetric_boundary_form",
+      "spectral_diameter": 0.0,
+      "spectral_margin": 0.0
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": false,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "gauge_null_leakage_absent"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.085,
+      "index": 3,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.085,
+      "quotient_eigenvalues": [
+        1.058018971428171,
+        1.365535136003391,
+        1.6757723183841955,
+        2.0035307170413854
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "gauge_null_leaking_boundary",
+      "spectral_diameter": 0.9455117456132145,
+      "spectral_margin": 1.058018971428171
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 3,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.03295935618368431,
+        0.3429555170622573,
+        0.6529586195983965,
+        0.9629836500128048
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "induced_ball_spectral_collapse_boundary",
+      "spectral_diameter": 0.9300242938291206,
+      "spectral_margin": 0.03295935618368431
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": false,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "projector_orthogonal",
+        "quotient_domain_stable"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 3,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.095,
+      "quotient_commutator_defect": 0.1230928571428571,
+      "quotient_eigenvalues": [
+        1.1080189714281712,
+        1.4155351360033916,
+        1.7257723183841958,
+        2.0535307170413857
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "nonorthogonal_gauge_projection_boundary",
+      "spectral_diameter": 0.9455117456132145,
+      "spectral_margin": 1.1080189714281712
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 4,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        1.2586041537293677,
+        1.5631030567501676,
+        1.8721200204641901,
+        2.22331562619913
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_full_degree_boundary",
+      "spectral_diameter": 0.9647114724697621,
+      "spectral_margin": 1.2586041537293677
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 4,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.9710674529992476,
+        1.2780674210898524,
+        1.588174225552122,
+        1.9198337575016384
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_holonomy_buffered_boundary",
+      "spectral_diameter": 0.9487663045023909,
+      "spectral_margin": 0.9710674529992476
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": false,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": false,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": false,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_block_symmetric",
+        "quotient_spectrum_real",
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.18000000000000002,
+      "gauge_null_leakage": 0.0,
+      "index": 4,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [],
+      "quotient_symmetry_defect": 0.18000000000000002,
+      "regime": "asymmetric_boundary_form",
+      "spectral_diameter": 0.0,
+      "spectral_margin": 0.0
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": false,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "gauge_null_leakage_absent"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.091,
+      "index": 4,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.091,
+      "quotient_eigenvalues": [
+        1.0615903999995993,
+        1.3691065645748202,
+        1.6793437469556236,
+        2.0071021456128135
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "gauge_null_leaking_boundary",
+      "spectral_diameter": 0.9455117456132143,
+      "spectral_margin": 1.0615903999995993
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 4,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.03728078475511288,
+        0.34727694563368594,
+        0.6572800481698252,
+        0.9673050785842335
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "induced_ball_spectral_collapse_boundary",
+      "spectral_diameter": 0.9300242938291207,
+      "spectral_margin": 0.03728078475511288
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": false,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "projector_orthogonal",
+        "quotient_domain_stable"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 4,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.1,
+      "quotient_commutator_defect": 0.12942857142857142,
+      "quotient_eigenvalues": [
+        1.1115903999995997,
+        1.4191065645748207,
+        1.7293437469556243,
+        2.057102145612814
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "nonorthogonal_gauge_projection_boundary",
+      "spectral_diameter": 0.945511745613214,
+      "spectral_margin": 1.1115903999995997
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 5,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        1.2621755823007959,
+        1.5666744853215961,
+        1.8756914490356182,
+        2.2268870547705593
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_full_degree_boundary",
+      "spectral_diameter": 0.9647114724697634,
+      "spectral_margin": 1.2621755823007959
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 5,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.9746388815706761,
+        1.2816388496612812,
+        1.5917456541235504,
+        1.9234051860730672
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_holonomy_buffered_boundary",
+      "spectral_diameter": 0.9487663045023911,
+      "spectral_margin": 0.9746388815706761
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": false,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": false,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": false,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_block_symmetric",
+        "quotient_spectrum_real",
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.19,
+      "gauge_null_leakage": 0.0,
+      "index": 5,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [],
+      "quotient_symmetry_defect": 0.19,
+      "regime": "asymmetric_boundary_form",
+      "spectral_diameter": 0.0,
+      "spectral_margin": 0.0
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": false,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "gauge_null_leakage_absent"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.09699999999999999,
+      "index": 5,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.09699999999999999,
+      "quotient_eigenvalues": [
+        1.0651618285710283,
+        1.3726779931462483,
+        1.6829151755270522,
+        2.0106735741842425
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "gauge_null_leaking_boundary",
+      "spectral_diameter": 0.9455117456132143,
+      "spectral_margin": 1.0651618285710283
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 5,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.041602213326541466,
+        0.3515983742051145,
+        0.661601476741254,
+        0.971626507155662
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "induced_ball_spectral_collapse_boundary",
+      "spectral_diameter": 0.9300242938291206,
+      "spectral_margin": 0.041602213326541466
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": false,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "projector_orthogonal",
+        "quotient_domain_stable"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 5,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.10500000000000001,
+      "quotient_commutator_defect": 0.13574999999999998,
+      "quotient_eigenvalues": [
+        1.1151618285710285,
+        1.4226779931462488,
+        1.7329151755270529,
+        2.0606735741842424
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "nonorthogonal_gauge_projection_boundary",
+      "spectral_diameter": 0.9455117456132138,
+      "spectral_margin": 1.1151618285710285
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 6,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        1.2657470108722246,
+        1.570245913893024,
+        1.8792628776070475,
+        2.230458483341987
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_full_degree_boundary",
+      "spectral_diameter": 0.9647114724697623,
+      "spectral_margin": 1.2657470108722246
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 6,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.9782103101421047,
+        1.28521027823271,
+        1.5953170826949792,
+        1.926976614644496
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_holonomy_buffered_boundary",
+      "spectral_diameter": 0.9487663045023913,
+      "spectral_margin": 0.9782103101421047
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": false,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": false,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": false,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_block_symmetric",
+        "quotient_spectrum_real",
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.2,
+      "gauge_null_leakage": 0.0,
+      "index": 6,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [],
+      "quotient_symmetry_defect": 0.2,
+      "regime": "asymmetric_boundary_form",
+      "spectral_diameter": 0.0,
+      "spectral_margin": 0.0
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": false,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "gauge_null_leakage_absent"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.103,
+      "index": 6,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.103,
+      "quotient_eigenvalues": [
+        1.0687332571424568,
+        1.3762494217176775,
+        1.6864866040984807,
+        2.0142450027556706
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "gauge_null_leaking_boundary",
+      "spectral_diameter": 0.9455117456132138,
+      "spectral_margin": 1.0687332571424568
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 6,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.04592364189797003,
+        0.35591980277654306,
+        0.6659229053126823,
+        0.9759479357270906
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "induced_ball_spectral_collapse_boundary",
+      "spectral_diameter": 0.9300242938291206,
+      "spectral_margin": 0.04592364189797003
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": false,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "projector_orthogonal",
+        "quotient_domain_stable"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 6,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.11,
+      "quotient_commutator_defect": 0.14205714285714285,
+      "quotient_eigenvalues": [
+        1.1187332571424569,
+        1.4262494217176775,
+        1.7364866040984814,
+        2.0642450027556722
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "nonorthogonal_gauge_projection_boundary",
+      "spectral_diameter": 0.9455117456132154,
+      "spectral_margin": 1.1187332571424569
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 7,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        1.2693184394436532,
+        1.5738173424644537,
+        1.882834306178476,
+        2.2340299119134155
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_full_degree_boundary",
+      "spectral_diameter": 0.9647114724697623,
+      "spectral_margin": 1.2693184394436532
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": true,
+      "failure_reasons": [],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 7,
+      "kind": "good",
+      "passed_proxy_checks": true,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.9817817387135332,
+        1.288781706804138,
+        1.598888511266408,
+        1.9305480432159243
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "killing_holonomy_buffered_boundary",
+      "spectral_diameter": 0.9487663045023911,
+      "spectral_margin": 0.9817817387135332
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": false,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": false,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": false,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_block_symmetric",
+        "quotient_spectrum_real",
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.21000000000000002,
+      "gauge_null_leakage": 0.0,
+      "index": 7,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [],
+      "quotient_symmetry_defect": 0.21000000000000002,
+      "regime": "asymmetric_boundary_form",
+      "spectral_diameter": 0.0,
+      "spectral_margin": 0.0
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": false,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "gauge_null_leakage_absent"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.109,
+      "index": 7,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.109,
+      "quotient_eigenvalues": [
+        1.0723046857138852,
+        1.3798208502891058,
+        1.6900580326699097,
+        2.017816431327099
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "gauge_null_leaking_boundary",
+      "spectral_diameter": 0.945511745613214,
+      "spectral_margin": 1.0723046857138852
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": true,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": true,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": false
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "spectral_margin_positive"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 7,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.0,
+      "quotient_commutator_defect": 0.0,
+      "quotient_eigenvalues": [
+        0.050245070469398606,
+        0.36024123134797165,
+        0.670244333884111,
+        0.9802693642985193
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "induced_ball_spectral_collapse_boundary",
+      "spectral_diameter": 0.9300242938291207,
+      "spectral_margin": 0.050245070469398606
+    },
+    {
+      "checks": {
+        "finite_form_symmetric": true,
+        "gauge_null_leakage_absent": true,
+        "projector_idempotent": true,
+        "projector_orthogonal": false,
+        "quotient_block_symmetric": true,
+        "quotient_domain_stable": false,
+        "quotient_spectrum_real": true,
+        "spectral_margin_positive": true
+      },
+      "expected_pass": false,
+      "failure_reasons": [
+        "projector_orthogonal",
+        "quotient_domain_stable"
+      ],
+      "full_symmetry_defect": 0.0,
+      "gauge_null_leakage": 0.0,
+      "index": 7,
+      "kind": "bad",
+      "passed_proxy_checks": false,
+      "projector_idempotence_defect": 0.0,
+      "projector_symmetry_defect": 0.115,
+      "quotient_commutator_defect": 0.14834999999999998,
+      "quotient_eigenvalues": [
+        1.1223046857138852,
+        1.4298208502891059,
+        1.74005803266991,
+        2.0678164313270995
+      ],
+      "quotient_symmetry_defect": 0.0,
+      "regime": "nonorthogonal_gauge_projection_boundary",
+      "spectral_diameter": 0.9455117456132143,
+      "spectral_margin": 1.1223046857138852
+    }
+  ],
+  "validation_flags": {
+    "all_bad_regimes_fail": true,
+    "all_good_regimes_pass": true,
+    "asymmetric_profile_present": true,
+    "classification_matches_expectation": true,
+    "deterministic": true,
+    "diagnostic_only": true,
+    "gauge_leakage_profile_present": true,
+    "nonorthogonal_projection_profile_present": true,
+    "promotion_blocked": true,
+    "spectral_collapse_profile_present": true,
+    "stdlib_only": true
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "accepted_samples": 12000,
+  "active_constraints": {
+    "LRT_and_stationary_proxy": [
+      "sampled_great_circle_hitting_proxy",
+      "greedy_high_bias_coverage_replacement",
+      "one_step_true_leray_direction_transport_proxy",
+      "resampled_interacting_mode"
+    ],
+    "LRT_constrained": [
+      "sampled_great_circle_hitting_proxy",
+      "greedy_high_bias_coverage_replacement"
+    ],
+    "stationary_proxy": [
+      "one_step_true_leray_direction_transport_proxy",
+      "resampled_interacting_mode"
+    ],
+    "unconstrained": []
+  },
+  "baseline_all_mean_bias": -0.000609557330890978,
+  "bias_definition": "lambda_weight*(kappa^2-1/2)",
+  "conclusion": "NSTypeIBlowupKappaBiasBound remains open: this finite S2 proxy can select positive kappa-bias under top-tail/LRT proxies, while the one-step stationarity proxy may reduce or erase it. No Type-I self-similar PDE measure, Abel triadic defect construction, or residual depletion theorem is proved.",
+  "coverage_normals": 192,
+  "coverage_score": 0.9983093682268799,
+  "harness": "ns_kappa_bias_variational_harness",
+  "kappa_definition": "dot(normalize(P_c b), omega_hat(c))",
+  "lambda_weight_definition": "sqrt(m11^2+m12^2) from ns_s2_biot_savart_eigenbundle.angular_eigenbundle",
+  "lrt_and_stationary_proxy_coverage_score": 0.9983920879692378,
+  "lrt_and_stationary_proxy_mean_bias": -0.025449723525345455,
+  "lrt_proxy_mean_bias": 0.2407495053615816,
+  "max_bias_LRT_and_stationary_proxy": -0.025449723525345455,
+  "max_bias_LRT_constrained": 0.2407495053615816,
+  "max_bias_stationary_proxy": -0.03522081297975654,
+  "max_bias_unconstrained": 0.2407495053615816,
+  "max_great_circle_gaps": {
+    "lrt_and_stationary_proxy": 0.009828883719967069,
+    "lrt_proxy": 0.011061447841748576,
+    "stationary_proxy": 0.00924416979235071,
+    "unconstrained": 0.011061447841748576
+  },
+  "promotion": {
+    "clay": false,
+    "pde_gate_closed": false,
+    "reason": "finite proxy only; Type-I/self-similar kappa-bias bound remains open"
+  },
+  "provider": "/home/c/Documents/code/dashi_agda/scripts/ns_s2_biot_savart_eigenbundle.py",
+  "quantiles": {
+    "bias": {
+      "count": 12000,
+      "max": 0.24997343594374644,
+      "mean": -0.000609557330890978,
+      "median": -0.0025458663633974566,
+      "min": -0.2499858546782136,
+      "p05": -0.23264821758860046,
+      "p95": 0.23103527519862588
+    },
+    "kappa_abs": {
+      "count": 12000,
+      "max": 0.9999999936656723,
+      "mean": 0.6362306506484032,
+      "median": 0.7015037392389649,
+      "min": 0.00017977007311203996,
+      "p05": 0.07942751770602444,
+      "p95": 0.996908755741561
+    },
+    "kappa_sq": {
+      "count": 12000,
+      "max": 0.9999999873313445,
+      "mean": 0.49934137558407754,
+      "median": 0.4921074973109607,
+      "min": 3.2317279186708194e-08,
+      "p05": 0.006308730568940825,
+      "p95": 0.9938270672741873
+    },
+    "lambda_weight": {
+      "count": 12000,
+      "max": 0.4999999999170742,
+      "mean": 0.4156229322508011,
+      "median": 0.4602557183223901,
+      "min": 0.003093206218472512,
+      "p05": 0.18349787239435414,
+      "p95": 0.49987070515095194
+    }
+  },
+  "requested_samples": 12000,
+  "scope": "finite_s2_variational_proxy_not_pde_proof",
+  "seed": 20260608,
+  "selected_counts": {
+    "lrt_and_stationary_proxy": 600,
+    "lrt_proxy": 600,
+    "stationary_proxy": 600,
+    "unconstrained": 600
+  },
+  "stationary_proxy_coverage_score": 0.9982957847916428,
+  "stationary_proxy_mean_bias": -0.03522081297975654,
+  "summaries": {
+    "all": {
+      "coverage_score": 0.9999240333594588,
+      "max_great_circle_gap": 0.0005112942857488437,
+      "mean_bias": -0.000609557330890978,
+      "mean_kappa_sq": 0.49934137558407754,
+      "mean_lambda": 0.4156229322508011,
+      "selected_count": 12000
+    },
+    "lrt_and_stationary_proxy": {
+      "coverage_score": 0.9983920879692378,
+      "max_great_circle_gap": 0.009828883719967069,
+      "mean_bias": -0.025449723525345455,
+      "mean_kappa_sq": 0.44821475729989185,
+      "mean_lambda": 0.4216695320581215,
+      "selected_count": 600
+    },
+    "lrt_proxy": {
+      "coverage_score": 0.9983093682268799,
+      "max_great_circle_gap": 0.011061447841748576,
+      "mean_bias": 0.2407495053615816,
+      "mean_kappa_sq": 0.9893813163500204,
+      "mean_lambda": 0.49200776993499534,
+      "selected_count": 600
+    },
+    "stationary_proxy": {
+      "coverage_score": 0.9982957847916428,
+      "max_great_circle_gap": 0.00924416979235071,
+      "mean_bias": -0.03522081297975654,
+      "mean_kappa_sq": 0.43149093777825687,
+      "mean_lambda": 0.4194822404699219,
+      "selected_count": 600
+    },
+    "unconstrained": {
+      "coverage_score": 0.9983093682268799,
+      "max_great_circle_gap": 0.011061447841748576,
+      "mean_bias": 0.2407495053615816,
+      "mean_kappa_sq": 0.9893813163500204,
+      "mean_lambda": 0.49200776993499534,
+      "selected_count": 600
+    }
+  },
+  "target_selected_count": 600,
+  "top_fraction": 0.05,
+  "unconstrained_coverage_score": 0.9983093682268799,
+  "unconstrained_max_mean_bias": 0.2407495053615816
+}

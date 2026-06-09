@@ -1,0 +1,114 @@
+{
+  "artifact_schema": "dashi-solar-weak-field-gr-baseline-diagnostic-v1",
+  "calibration_required": true,
+  "carrier_internal": false,
+  "constants": {
+    "astronomical_unit_m": 149597870700.0,
+    "julian_century_days": 36525.0,
+    "mercury_eccentricity": 0.20563069,
+    "mercury_semimajor_axis_au": 0.38709893,
+    "shapiro_receiver_orbit_radius_au": 0.38709893,
+    "solar_GM_m3_per_s2": 1.32712440018e+20,
+    "solar_radius_m": 695700000.0,
+    "speed_of_light_m_per_s": 299792458.0
+  },
+  "decision": {
+    "promotes_gravity_lane": false,
+    "reason": "Values are GR textbook weak-field baselines used as external calibration targets; no carrier-internal prediction is supplied."
+  },
+  "external_gr_baseline": true,
+  "promotion_status": "NO_PROMOTION",
+  "records": [
+    {
+      "calibration_required": true,
+      "carrier_internal": false,
+      "context": "Mercury osculating a=0.38709893 AU, e=0.20563069",
+      "external_gr_baseline": true,
+      "formula": "6*pi*GM_sun/(a*(1-e^2)*c^2)",
+      "promotion_status": "NO_PROMOTION",
+      "quantity": "advance_per_orbit",
+      "test_name": "mercury_perihelion_advance",
+      "unit": "rad/orbit",
+      "value": 5.018653553912432e-07
+    },
+    {
+      "calibration_required": true,
+      "carrier_internal": false,
+      "context": "GR excess perihelion advance scale for Mercury",
+      "external_gr_baseline": true,
+      "formula": "advance_per_orbit*rad_to_arcsec*century/orbital_period",
+      "promotion_status": "NO_PROMOTION",
+      "quantity": "advance_per_century",
+      "test_name": "mercury_perihelion_advance",
+      "unit": "arcsec/Julian_century",
+      "value": 42.980473061736205
+    },
+    {
+      "calibration_required": true,
+      "carrier_internal": false,
+      "context": "grazing ray at one solar radius impact parameter",
+      "external_gr_baseline": true,
+      "formula": "4*GM_sun/(c^2*R_sun)",
+      "promotion_status": "NO_PROMOTION",
+      "quantity": "deflection_angle",
+      "test_name": "solar_light_deflection_limb",
+      "unit": "arcsec",
+      "value": 1.7511903257975012
+    },
+    {
+      "calibration_required": true,
+      "carrier_internal": false,
+      "context": "solar mass time scale",
+      "external_gr_baseline": true,
+      "formula": "GM_sun/c^3",
+      "promotion_status": "NO_PROMOTION",
+      "quantity": "solar_gravitational_time_unit",
+      "test_name": "solar_shapiro_delay_scale",
+      "unit": "microsecond",
+      "value": 4.92549094830932
+    },
+    {
+      "calibration_required": true,
+      "carrier_internal": false,
+      "context": "superior-conjunction scale with r_earth=1 AU, r_receiver=0.387099 AU, b=R_sun",
+      "external_gr_baseline": true,
+      "formula": "(2*GM_sun/c^3)*ln(4*r_earth*r_receiver/b^2)",
+      "promotion_status": "NO_PROMOTION",
+      "quantity": "grazing_one_way_delay",
+      "test_name": "solar_shapiro_delay_scale",
+      "unit": "microsecond",
+      "value": 110.1221025605506
+    },
+    {
+      "calibration_required": true,
+      "carrier_internal": false,
+      "context": "solar photosphere to infinity weak-field scale",
+      "external_gr_baseline": true,
+      "formula": "Delta_nu/nu ~= GM_sun/(R_sun*c^2)",
+      "promotion_status": "NO_PROMOTION",
+      "quantity": "redshift_z",
+      "test_name": "solar_gravitational_redshift_scale",
+      "unit": "dimensionless",
+      "value": 2.1225025704332356e-06
+    },
+    {
+      "calibration_required": true,
+      "carrier_internal": false,
+      "context": "velocity-equivalent solar gravitational redshift scale",
+      "external_gr_baseline": true,
+      "formula": "c*z",
+      "promotion_status": "NO_PROMOTION",
+      "quantity": "velocity_equivalent",
+      "test_name": "solar_gravitational_redshift_scale",
+      "unit": "m/s",
+      "value": 636.3102627014978
+    }
+  ],
+  "scope": [
+    "Mercury perihelion advance",
+    "solar light deflection at limb",
+    "solar Shapiro delay scale",
+    "solar gravitational redshift scale"
+  ],
+  "status": "external_gr_baseline_non_promoting"
+}

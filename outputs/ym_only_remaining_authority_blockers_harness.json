@@ -1,0 +1,7 @@
+{
+  "all_checks_ok": true,
+  "authority_only_gap_ok": true,
+  "blocker_count": 5,
+  "clay_promotion_blocked": true,
+  "promotion": false
+}

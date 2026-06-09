@@ -33,6 +33,31 @@ data W4W5DYLuminosityAuthorityReadiness : Set where
   acceptedAuthorityReceiptMissing :
     W4W5DYLuminosityAuthorityReadiness
 
+data W4W5DYLuminosityCalibrationChecklistItem : Set where
+  requiredUnitCalibrationReceipt :
+    W4W5DYLuminosityCalibrationChecklistItem
+  requiredPDFLuminosityConventionReceipt :
+    W4W5DYLuminosityCalibrationChecklistItem
+  requiredHEPDataBinCovarianceReceipt :
+    W4W5DYLuminosityCalibrationChecklistItem
+  requiredChi2DofReproducibilityPacket :
+    W4W5DYLuminosityCalibrationChecklistItem
+  requiredScaleSettingBoundaryProof :
+    W4W5DYLuminosityCalibrationChecklistItem
+  requiredNoFreeFitAudit :
+    W4W5DYLuminosityCalibrationChecklistItem
+
+canonicalW4W5DYLuminosityCalibrationChecklist :
+  List W4W5DYLuminosityCalibrationChecklistItem
+canonicalW4W5DYLuminosityCalibrationChecklist =
+  requiredUnitCalibrationReceipt
+  ∷ requiredPDFLuminosityConventionReceipt
+  ∷ requiredHEPDataBinCovarianceReceipt
+  ∷ requiredChi2DofReproducibilityPacket
+  ∷ requiredScaleSettingBoundaryProof
+  ∷ requiredNoFreeFitAudit
+  ∷ []
+
 data CT18DASHIProjectionConventionBindingStatus : Set where
   localCT18GridConventionBoundToProjectionArtifactsCandidateOnly :
     CT18DASHIProjectionConventionBindingStatus
@@ -163,6 +188,20 @@ record W4W5AcceptedDYLuminosityConventionDiagnostic : Set where
       List String
 
     requiredAuthorityFields :
+      List String
+
+    empiricalCalibrationChecklist :
+      List W4W5DYLuminosityCalibrationChecklistItem
+
+    empiricalCalibrationChecklistIsCanonical :
+      empiricalCalibrationChecklist
+      ≡
+      canonicalW4W5DYLuminosityCalibrationChecklist
+
+    empiricalCalibrationChecklistLabels :
+      List String
+
+    empiricalCalibrationChecklistDisposition :
       List String
 
     acceptedAuthorityReceiptSurface :
@@ -314,6 +353,23 @@ canonicalW4W5AcceptedDYLuminosityConventionDiagnostic =
         ∷ "source DOI authority for the PDF/convention source"
         ∷ "external authority/provenance receipt naming provider, command/API, inputs, checksums, and timestamp"
         ∷ []
+    ; empiricalCalibrationChecklist =
+        canonicalW4W5DYLuminosityCalibrationChecklist
+    ; empiricalCalibrationChecklistIsCanonical =
+        refl
+    ; empiricalCalibrationChecklistLabels =
+        "unit calibration receipt: units, normalization, luminosity, fiducial convention, and dimensional conversion are externally bound"
+        ∷ "PDF/luminosity convention receipt: PDF family/member, grid checksums, factorization scale, mass-window integration, flavour weights, and luminosity values are accepted"
+        ∷ "HEPData bin/covariance receipt: record/table/bin identity, covariance table, covariance treatment, dropped-uncertainty policy, and checksum-bound artifacts are accepted"
+        ∷ "chi2/dof reproducibility packet: runner, exact inputs, covariance/regularization, fit degrees of freedom, tolerance, and reproduced chi2/dof are supplied"
+        ∷ "scale-setting boundary proof: the receipt distinguishes dimensionless shape adequacy from physical unit scale setting and names the allowed downstream consumer"
+        ∷ "no-free-fit audit: every tuned scalar, prior, fixed parameter, and forbidden post-hoc adjustment is declared before W4/W5 consumption"
+        ∷ []
+    ; empiricalCalibrationChecklistDisposition =
+        "No checklist item is currently inhabited by the local CT18 projection packet"
+        ∷ "The checklist is an accepted-payload filter, not a promotion receipt"
+        ∷ "W4 and W5 remain false until all checklist items are supplied and downstream W4/W5 gates validate them"
+        ∷ []
     ; acceptedAuthorityReceiptSurface =
         "missingAcceptedDYLuminosityConventionAuthority requires accepted PDF set"
         ∷ "missingAcceptedDYLuminosityConventionAuthority requires accepted LHAPDF id"
@@ -326,6 +382,9 @@ canonicalW4W5AcceptedDYLuminosityConventionDiagnostic =
         ∷ "missingAcceptedDYLuminosityConventionAuthority requires accepted efficiency/acceptance model"
         ∷ "missingAcceptedDYLuminosityConventionAuthority requires accepted systematic budget"
         ∷ "missingAcceptedDYLuminosityConventionAuthority requires accepted CMS-SMP publication pointer and bin mapping"
+        ∷ "missingAcceptedDYLuminosityConventionAuthority requires accepted unit calibration and HEPData bin/covariance receipts"
+        ∷ "missingAcceptedDYLuminosityConventionAuthority requires chi2/dof reproducibility over the accepted covariance treatment"
+        ∷ "missingAcceptedDYLuminosityConventionAuthority requires a scale-setting boundary proof and no-free-fit audit"
         ∷ "missingAcceptedDYLuminosityConventionAuthority requires accepted normalization-preservation law"
         ∷ "missingAcceptedDYLuminosityConventionAuthority requires accepted conversion law for W4/W5 runners"
         ∷ "missingAcceptedDYLuminosityConventionAuthority requires accepted source DOI"

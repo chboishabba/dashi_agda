@@ -1,0 +1,4250 @@
+{
+  "checks": {
+    "all_bounded_profiles_pass": true,
+    "all_profile_local_checks_pass": true,
+    "bad_profile_included": true,
+    "bad_profile_violates_boundedness": true,
+    "promotion_false": true
+  },
+  "clay_promoted": false,
+  "control": {
+    "C": "scripts/ns_bounded_abel_mass_proxy_harness.py",
+    "F": "Does not prove A1 bounded mass for CKN-scale rescalings or any Clay claim.",
+    "G": "promotion=false regardless of diagnostic outcome.",
+    "L": "shell envelope -> proxy mass atoms -> Abel/log windows -> fail-closed classification",
+    "O": "Local NS A1 bounded Abel-mass proxy diagnostic.",
+    "P": "Bounded Type-I profiles must pass; deliberate bad profile must visibly fail.",
+    "R": "Simulate Type-I-like shell energies and detect Abel/log-window boundedness.",
+    "S": "Synthetic shell model only; no PDE Abel measure is constructed."
+  },
+  "diagnostic_only": true,
+  "harness": "ns_bounded_abel_mass_proxy",
+  "interpretation": {
+    "bad_profile_meaning": "The supercritical profile violates the envelope and the Abel/log-window mass bound, so the diagnostic is fail-closed rather than permissive.",
+    "bounded_mass_proxy_meaning": "For profiles satisfying ||P_j U||_2 <= M 2^(-j/2), 2^j||P_j U||_2^2 and its normalized Abel/log-window averages stay <= M^2.",
+    "non_claims": "No CKN-scale PDE defect measure, stationarity theorem, compensated leakage identity, NS Clay result, YM result, or unification promotion is proved."
+  },
+  "parameters": {
+    "abel_rho": 0.78,
+    "bad_growth": 0.18,
+    "shells": 64,
+    "type_i_bound": 1.0,
+    "window": 8
+  },
+  "profiles": [
+    {
+      "allowed_atom_mass_bound": 1.0,
+      "allowed_window_mass_bound": 1.0,
+      "bounded_by_abel_windows": true,
+      "bounded_by_envelope": true,
+      "checks": {
+        "bad_profile_violation_visible": true,
+        "expected_bounded_classification": true,
+        "finite_nonnegative_shell_masses": true,
+        "promotion_false": true,
+        "window_rows_present": true
+      },
+      "classification": "bounded_type_i_proxy",
+      "description": "Saturates the model envelope ||P_j U||_2 = M 2^(-j/2).",
+      "expected_bounded": true,
+      "max_abel_window_mass": 1.0000000000000002,
+      "max_arithmetic_window_mass": 1.0,
+      "max_envelope_ratio": 1.0,
+      "max_proxy_mass_atom": 1.0000000000000002,
+      "mean_abel_window_mass": 1.0000000000000002,
+      "name": "critical_type_i_envelope",
+      "shell_rows": [
+        {
+          "depth": 0,
+          "envelope_l2": 1.0,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1,
+          "shell_l2_energy": 1.0
+        },
+        {
+          "depth": 1,
+          "envelope_l2": 0.7071067811865476,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2,
+          "shell_l2_energy": 0.7071067811865476
+        },
+        {
+          "depth": 2,
+          "envelope_l2": 0.5,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4,
+          "shell_l2_energy": 0.5
+        },
+        {
+          "depth": 3,
+          "envelope_l2": 0.3535533905932738,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 8,
+          "shell_l2_energy": 0.3535533905932738
+        },
+        {
+          "depth": 4,
+          "envelope_l2": 0.25,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 16,
+          "shell_l2_energy": 0.25
+        },
+        {
+          "depth": 5,
+          "envelope_l2": 0.1767766952966369,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 32,
+          "shell_l2_energy": 0.1767766952966369
+        },
+        {
+          "depth": 6,
+          "envelope_l2": 0.125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 64,
+          "shell_l2_energy": 0.125
+        },
+        {
+          "depth": 7,
+          "envelope_l2": 0.08838834764831845,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 128,
+          "shell_l2_energy": 0.08838834764831845
+        },
+        {
+          "depth": 8,
+          "envelope_l2": 0.0625,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 256,
+          "shell_l2_energy": 0.0625
+        },
+        {
+          "depth": 9,
+          "envelope_l2": 0.04419417382415922,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 512,
+          "shell_l2_energy": 0.04419417382415922
+        },
+        {
+          "depth": 10,
+          "envelope_l2": 0.03125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1024,
+          "shell_l2_energy": 0.03125
+        },
+        {
+          "depth": 11,
+          "envelope_l2": 0.02209708691207961,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2048,
+          "shell_l2_energy": 0.02209708691207961
+        },
+        {
+          "depth": 12,
+          "envelope_l2": 0.015625,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4096,
+          "shell_l2_energy": 0.015625
+        },
+        {
+          "depth": 13,
+          "envelope_l2": 0.011048543456039806,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 8192,
+          "shell_l2_energy": 0.011048543456039806
+        },
+        {
+          "depth": 14,
+          "envelope_l2": 0.0078125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 16384,
+          "shell_l2_energy": 0.0078125
+        },
+        {
+          "depth": 15,
+          "envelope_l2": 0.005524271728019903,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 32768,
+          "shell_l2_energy": 0.005524271728019903
+        },
+        {
+          "depth": 16,
+          "envelope_l2": 0.00390625,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 65536,
+          "shell_l2_energy": 0.00390625
+        },
+        {
+          "depth": 17,
+          "envelope_l2": 0.0027621358640099515,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 131072,
+          "shell_l2_energy": 0.0027621358640099515
+        },
+        {
+          "depth": 18,
+          "envelope_l2": 0.001953125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 262144,
+          "shell_l2_energy": 0.001953125
+        },
+        {
+          "depth": 19,
+          "envelope_l2": 0.0013810679320049757,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 524288,
+          "shell_l2_energy": 0.0013810679320049757
+        },
+        {
+          "depth": 20,
+          "envelope_l2": 0.0009765625,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1048576,
+          "shell_l2_energy": 0.0009765625
+        },
+        {
+          "depth": 21,
+          "envelope_l2": 0.0006905339660024879,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2097152,
+          "shell_l2_energy": 0.0006905339660024879
+        },
+        {
+          "depth": 22,
+          "envelope_l2": 0.00048828125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4194304,
+          "shell_l2_energy": 0.00048828125
+        },
+        {
+          "depth": 23,
+          "envelope_l2": 0.00034526698300124393,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 8388608,
+          "shell_l2_energy": 0.00034526698300124393
+        },
+        {
+          "depth": 24,
+          "envelope_l2": 0.000244140625,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 16777216,
+          "shell_l2_energy": 0.000244140625
+        },
+        {
+          "depth": 25,
+          "envelope_l2": 0.00017263349150062197,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 33554432,
+          "shell_l2_energy": 0.00017263349150062197
+        },
+        {
+          "depth": 26,
+          "envelope_l2": 0.0001220703125,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 67108864,
+          "shell_l2_energy": 0.0001220703125
+        },
+        {
+          "depth": 27,
+          "envelope_l2": 8.631674575031098e-05,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 134217728,
+          "shell_l2_energy": 8.631674575031098e-05
+        },
+        {
+          "depth": 28,
+          "envelope_l2": 6.103515625e-05,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 268435456,
+          "shell_l2_energy": 6.103515625e-05
+        },
+        {
+          "depth": 29,
+          "envelope_l2": 4.315837287515549e-05,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 536870912,
+          "shell_l2_energy": 4.315837287515549e-05
+        },
+        {
+          "depth": 30,
+          "envelope_l2": 3.0517578125e-05,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1073741824,
+          "shell_l2_energy": 3.0517578125e-05
+        },
+        {
+          "depth": 31,
+          "envelope_l2": 2.1579186437577746e-05,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2147483648,
+          "shell_l2_energy": 2.1579186437577746e-05
+        },
+        {
+          "depth": 32,
+          "envelope_l2": 1.52587890625e-05,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4294967296,
+          "shell_l2_energy": 1.52587890625e-05
+        },
+        {
+          "depth": 33,
+          "envelope_l2": 1.0789593218788873e-05,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 8589934592,
+          "shell_l2_energy": 1.0789593218788873e-05
+        },
+        {
+          "depth": 34,
+          "envelope_l2": 7.62939453125e-06,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 17179869184,
+          "shell_l2_energy": 7.62939453125e-06
+        },
+        {
+          "depth": 35,
+          "envelope_l2": 5.3947966093944364e-06,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 34359738368,
+          "shell_l2_energy": 5.3947966093944364e-06
+        },
+        {
+          "depth": 36,
+          "envelope_l2": 3.814697265625e-06,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 68719476736,
+          "shell_l2_energy": 3.814697265625e-06
+        },
+        {
+          "depth": 37,
+          "envelope_l2": 2.6973983046972182e-06,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 137438953472,
+          "shell_l2_energy": 2.6973983046972182e-06
+        },
+        {
+          "depth": 38,
+          "envelope_l2": 1.9073486328125e-06,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 274877906944,
+          "shell_l2_energy": 1.9073486328125e-06
+        },
+        {
+          "depth": 39,
+          "envelope_l2": 1.3486991523486091e-06,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 549755813888,
+          "shell_l2_energy": 1.3486991523486091e-06
+        },
+        {
+          "depth": 40,
+          "envelope_l2": 9.5367431640625e-07,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1099511627776,
+          "shell_l2_energy": 9.5367431640625e-07
+        },
+        {
+          "depth": 41,
+          "envelope_l2": 6.743495761743046e-07,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2199023255552,
+          "shell_l2_energy": 6.743495761743046e-07
+        },
+        {
+          "depth": 42,
+          "envelope_l2": 4.76837158203125e-07,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4398046511104,
+          "shell_l2_energy": 4.76837158203125e-07
+        },
+        {
+          "depth": 43,
+          "envelope_l2": 3.371747880871523e-07,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 8796093022208,
+          "shell_l2_energy": 3.371747880871523e-07
+        },
+        {
+          "depth": 44,
+          "envelope_l2": 2.384185791015625e-07,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 17592186044416,
+          "shell_l2_energy": 2.384185791015625e-07
+        },
+        {
+          "depth": 45,
+          "envelope_l2": 1.6858739404357614e-07,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 35184372088832,
+          "shell_l2_energy": 1.6858739404357614e-07
+        },
+        {
+          "depth": 46,
+          "envelope_l2": 1.1920928955078125e-07,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 70368744177664,
+          "shell_l2_energy": 1.1920928955078125e-07
+        },
+        {
+          "depth": 47,
+          "envelope_l2": 8.429369702178807e-08,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 140737488355328,
+          "shell_l2_energy": 8.429369702178807e-08
+        },
+        {
+          "depth": 48,
+          "envelope_l2": 5.960464477539063e-08,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 281474976710656,
+          "shell_l2_energy": 5.960464477539063e-08
+        },
+        {
+          "depth": 49,
+          "envelope_l2": 4.2146848510894035e-08,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 562949953421312,
+          "shell_l2_energy": 4.2146848510894035e-08
+        },
+        {
+          "depth": 50,
+          "envelope_l2": 2.9802322387695312e-08,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1125899906842624,
+          "shell_l2_energy": 2.9802322387695312e-08
+        },
+        {
+          "depth": 51,
+          "envelope_l2": 2.1073424255447017e-08,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2251799813685248,
+          "shell_l2_energy": 2.1073424255447017e-08
+        },
+        {
+          "depth": 52,
+          "envelope_l2": 1.4901161193847656e-08,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4503599627370496,
+          "shell_l2_energy": 1.4901161193847656e-08
+        },
+        {
+          "depth": 53,
+          "envelope_l2": 1.0536712127723509e-08,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 9007199254740992,
+          "shell_l2_energy": 1.0536712127723509e-08
+        },
+        {
+          "depth": 54,
+          "envelope_l2": 7.450580596923828e-09,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 18014398509481984,
+          "shell_l2_energy": 7.450580596923828e-09
+        },
+        {
+          "depth": 55,
+          "envelope_l2": 5.268356063861754e-09,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 36028797018963968,
+          "shell_l2_energy": 5.268356063861754e-09
+        },
+        {
+          "depth": 56,
+          "envelope_l2": 3.725290298461914e-09,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 72057594037927936,
+          "shell_l2_energy": 3.725290298461914e-09
+        },
+        {
+          "depth": 57,
+          "envelope_l2": 2.634178031930877e-09,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 144115188075855872,
+          "shell_l2_energy": 2.634178031930877e-09
+        },
+        {
+          "depth": 58,
+          "envelope_l2": 1.862645149230957e-09,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 288230376151711744,
+          "shell_l2_energy": 1.862645149230957e-09
+        },
+        {
+          "depth": 59,
+          "envelope_l2": 1.3170890159654386e-09,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 576460752303423488,
+          "shell_l2_energy": 1.3170890159654386e-09
+        },
+        {
+          "depth": 60,
+          "envelope_l2": 9.313225746154785e-10,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1152921504606846976,
+          "shell_l2_energy": 9.313225746154785e-10
+        },
+        {
+          "depth": 61,
+          "envelope_l2": 6.585445079827193e-10,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 2305843009213693952,
+          "shell_l2_energy": 6.585445079827193e-10
+        },
+        {
+          "depth": 62,
+          "envelope_l2": 4.656612873077393e-10,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 4611686018427387904,
+          "shell_l2_energy": 4.656612873077393e-10
+        },
+        {
+          "depth": 63,
+          "envelope_l2": 3.2927225399135965e-10,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0000000000000002,
+          "shell": 9223372036854775808,
+          "shell_l2_energy": 3.2927225399135965e-10
+        }
+      ],
+      "window_rows": [
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 4,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 0,
+          "stop_depth": 7,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 5,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 1,
+          "stop_depth": 8,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 6,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 2,
+          "stop_depth": 9,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 7,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 3,
+          "stop_depth": 10,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 8,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 4,
+          "stop_depth": 11,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 9,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 5,
+          "stop_depth": 12,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 10,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 6,
+          "stop_depth": 13,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 11,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 7,
+          "stop_depth": 14,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 12,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 8,
+          "stop_depth": 15,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 13,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 9,
+          "stop_depth": 16,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 14,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 10,
+          "stop_depth": 17,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 15,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 11,
+          "stop_depth": 18,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 16,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 12,
+          "stop_depth": 19,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 17,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 13,
+          "stop_depth": 20,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 18,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 14,
+          "stop_depth": 21,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 19,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 15,
+          "stop_depth": 22,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 20,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 16,
+          "stop_depth": 23,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 21,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 17,
+          "stop_depth": 24,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 22,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 18,
+          "stop_depth": 25,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 23,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 19,
+          "stop_depth": 26,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 24,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 20,
+          "stop_depth": 27,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 25,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 21,
+          "stop_depth": 28,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 26,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 22,
+          "stop_depth": 29,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 27,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 23,
+          "stop_depth": 30,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 28,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 24,
+          "stop_depth": 31,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 29,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 25,
+          "stop_depth": 32,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 30,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 26,
+          "stop_depth": 33,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 31,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 27,
+          "stop_depth": 34,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 32,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 28,
+          "stop_depth": 35,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 33,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 29,
+          "stop_depth": 36,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 34,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 30,
+          "stop_depth": 37,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 35,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 31,
+          "stop_depth": 38,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 36,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 32,
+          "stop_depth": 39,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 37,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 33,
+          "stop_depth": 40,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 38,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 34,
+          "stop_depth": 41,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 39,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 35,
+          "stop_depth": 42,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 40,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 36,
+          "stop_depth": 43,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 41,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 37,
+          "stop_depth": 44,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 42,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 38,
+          "stop_depth": 45,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 43,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 39,
+          "stop_depth": 46,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 44,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 40,
+          "stop_depth": 47,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 45,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 41,
+          "stop_depth": 48,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 46,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 42,
+          "stop_depth": 49,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 47,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 43,
+          "stop_depth": 50,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 48,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 44,
+          "stop_depth": 51,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 49,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 45,
+          "stop_depth": 52,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 50,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 46,
+          "stop_depth": 53,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 51,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 47,
+          "stop_depth": 54,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 52,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 48,
+          "stop_depth": 55,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 53,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 49,
+          "stop_depth": 56,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 54,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 50,
+          "stop_depth": 57,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 55,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 51,
+          "stop_depth": 58,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 56,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 52,
+          "stop_depth": 59,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 57,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 53,
+          "stop_depth": 60,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 58,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 54,
+          "stop_depth": 61,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 59,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 55,
+          "stop_depth": 62,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1.0000000000000002,
+          "arithmetic_window_mass": 1.0,
+          "center_depth": 60,
+          "max_atom_mass": 1.0000000000000002,
+          "start_depth": 56,
+          "stop_depth": 63,
+          "window_width": 8
+        }
+      ]
+    },
+    {
+      "allowed_atom_mass_bound": 1.0,
+      "allowed_window_mass_bound": 1.0,
+      "bounded_by_abel_windows": true,
+      "bounded_by_envelope": true,
+      "checks": {
+        "bad_profile_violation_visible": true,
+        "expected_bounded_classification": true,
+        "finite_nonnegative_shell_masses": true,
+        "promotion_false": true,
+        "window_rows_present": true
+      },
+      "classification": "bounded_type_i_proxy",
+      "description": "Strictly bounded Type-I-like profile with mild logarithmic depletion.",
+      "expected_bounded": true,
+      "max_abel_window_mass": 0.21690011535213272,
+      "max_arithmetic_window_mass": 0.22862103174603174,
+      "max_envelope_ratio": 0.7071067811865475,
+      "max_proxy_mass_atom": 0.4999999999999999,
+      "mean_abel_window_mass": 0.04587221752148119,
+      "name": "log_depleted_type_i",
+      "shell_rows": [
+        {
+          "depth": 0,
+          "envelope_l2": 1.0,
+          "envelope_ratio": 0.7071067811865475,
+          "proxy_mass_atom": 0.4999999999999999,
+          "shell": 1,
+          "shell_l2_energy": 0.7071067811865475
+        },
+        {
+          "depth": 1,
+          "envelope_l2": 0.7071067811865476,
+          "envelope_ratio": 0.5773502691896258,
+          "proxy_mass_atom": 0.3333333333333334,
+          "shell": 2,
+          "shell_l2_energy": 0.4082482904638631
+        },
+        {
+          "depth": 2,
+          "envelope_l2": 0.5,
+          "envelope_ratio": 0.5,
+          "proxy_mass_atom": 0.25,
+          "shell": 4,
+          "shell_l2_energy": 0.25
+        },
+        {
+          "depth": 3,
+          "envelope_l2": 0.3535533905932738,
+          "envelope_ratio": 0.4472135954999579,
+          "proxy_mass_atom": 0.2,
+          "shell": 8,
+          "shell_l2_energy": 0.15811388300841897
+        },
+        {
+          "depth": 4,
+          "envelope_l2": 0.25,
+          "envelope_ratio": 0.4082482904638631,
+          "proxy_mass_atom": 0.1666666666666667,
+          "shell": 16,
+          "shell_l2_energy": 0.10206207261596577
+        },
+        {
+          "depth": 5,
+          "envelope_l2": 0.1767766952966369,
+          "envelope_ratio": 0.3779644730092272,
+          "proxy_mass_atom": 0.14285714285714288,
+          "shell": 32,
+          "shell_l2_energy": 0.0668153104781061
+        },
+        {
+          "depth": 6,
+          "envelope_l2": 0.125,
+          "envelope_ratio": 0.35355339059327373,
+          "proxy_mass_atom": 0.12499999999999997,
+          "shell": 64,
+          "shell_l2_energy": 0.044194173824159216
+        },
+        {
+          "depth": 7,
+          "envelope_l2": 0.08838834764831845,
+          "envelope_ratio": 0.3333333333333333,
+          "proxy_mass_atom": 0.1111111111111111,
+          "shell": 128,
+          "shell_l2_energy": 0.02946278254943948
+        },
+        {
+          "depth": 8,
+          "envelope_l2": 0.0625,
+          "envelope_ratio": 0.31622776601683794,
+          "proxy_mass_atom": 0.1,
+          "shell": 256,
+          "shell_l2_energy": 0.01976423537605237
+        },
+        {
+          "depth": 9,
+          "envelope_l2": 0.04419417382415922,
+          "envelope_ratio": 0.30151134457776363,
+          "proxy_mass_atom": 0.09090909090909091,
+          "shell": 512,
+          "shell_l2_energy": 0.013325044772225653
+        },
+        {
+          "depth": 10,
+          "envelope_l2": 0.03125,
+          "envelope_ratio": 0.2886751345948129,
+          "proxy_mass_atom": 0.08333333333333336,
+          "shell": 1024,
+          "shell_l2_energy": 0.009021097956087904
+        },
+        {
+          "depth": 11,
+          "envelope_l2": 0.02209708691207961,
+          "envelope_ratio": 0.2773500981126146,
+          "proxy_mass_atom": 0.07692307692307693,
+          "shell": 2048,
+          "shell_l2_energy": 0.006128629223068251
+        },
+        {
+          "depth": 12,
+          "envelope_l2": 0.015625,
+          "envelope_ratio": 0.2672612419124244,
+          "proxy_mass_atom": 0.07142857142857144,
+          "shell": 4096,
+          "shell_l2_energy": 0.004175956904881631
+        },
+        {
+          "depth": 13,
+          "envelope_l2": 0.011048543456039806,
+          "envelope_ratio": 0.2581988897471611,
+          "proxy_mass_atom": 0.06666666666666665,
+          "shell": 8192,
+          "shell_l2_energy": 0.00285272165367274
+        },
+        {
+          "depth": 14,
+          "envelope_l2": 0.0078125,
+          "envelope_ratio": 0.25,
+          "proxy_mass_atom": 0.0625,
+          "shell": 16384,
+          "shell_l2_energy": 0.001953125
+        },
+        {
+          "depth": 15,
+          "envelope_l2": 0.005524271728019903,
+          "envelope_ratio": 0.24253562503633297,
+          "proxy_mass_atom": 0.05882352941176471,
+          "shell": 32768,
+          "shell_l2_energy": 0.0013398326964258504
+        },
+        {
+          "depth": 16,
+          "envelope_l2": 0.00390625,
+          "envelope_ratio": 0.23570226039551587,
+          "proxy_mass_atom": 0.055555555555555566,
+          "shell": 65536,
+          "shell_l2_energy": 0.0009207119546699839
+        },
+        {
+          "depth": 17,
+          "envelope_l2": 0.0027621358640099515,
+          "envelope_ratio": 0.22941573387056174,
+          "proxy_mass_atom": 0.052631578947368425,
+          "shell": 131072,
+          "shell_l2_energy": 0.0006336774262920412
+        },
+        {
+          "depth": 18,
+          "envelope_l2": 0.001953125,
+          "envelope_ratio": 0.22360679774997896,
+          "proxy_mass_atom": 0.049999999999999996,
+          "shell": 262144,
+          "shell_l2_energy": 0.00043673202685542766
+        },
+        {
+          "depth": 19,
+          "envelope_l2": 0.0013810679320049757,
+          "envelope_ratio": 0.2182178902359924,
+          "proxy_mass_atom": 0.04761904761904764,
+          "shell": 524288,
+          "shell_l2_energy": 0.0003013737303947108
+        },
+        {
+          "depth": 20,
+          "envelope_l2": 0.0009765625,
+          "envelope_ratio": 0.21320071635561041,
+          "proxy_mass_atom": 0.04545454545454545,
+          "shell": 1048576,
+          "shell_l2_energy": 0.0002082038245660258
+        },
+        {
+          "depth": 21,
+          "envelope_l2": 0.0006905339660024879,
+          "envelope_ratio": 0.20851441405707477,
+          "proxy_mass_atom": 0.043478260869565216,
+          "shell": 2097152,
+          "shell_l2_energy": 0.00014398628530751673
+        },
+        {
+          "depth": 22,
+          "envelope_l2": 0.00048828125,
+          "envelope_ratio": 0.20412414523193154,
+          "proxy_mass_atom": 0.04166666666666668,
+          "shell": 4194304,
+          "shell_l2_energy": 9.966999278902907e-05
+        },
+        {
+          "depth": 23,
+          "envelope_l2": 0.00034526698300124393,
+          "envelope_ratio": 0.2,
+          "proxy_mass_atom": 0.040000000000000015,
+          "shell": 8388608,
+          "shell_l2_energy": 6.90533966002488e-05
+        },
+        {
+          "depth": 24,
+          "envelope_l2": 0.000244140625,
+          "envelope_ratio": 0.19611613513818404,
+          "proxy_mass_atom": 0.038461538461538464,
+          "shell": 16777216,
+          "shell_l2_energy": 4.7879915805220714e-05
+        },
+        {
+          "depth": 25,
+          "envelope_l2": 0.00017263349150062197,
+          "envelope_ratio": 0.19245008972987526,
+          "proxy_mass_atom": 0.03703703703703705,
+          "shell": 33554432,
+          "shell_l2_energy": 3.322333092967636e-05
+        },
+        {
+          "depth": 26,
+          "envelope_l2": 0.0001220703125,
+          "envelope_ratio": 0.1889822365046136,
+          "proxy_mass_atom": 0.035714285714285705,
+          "shell": 67108864,
+          "shell_l2_energy": 2.306912066706709e-05
+        },
+        {
+          "depth": 27,
+          "envelope_l2": 8.631674575031098e-05,
+          "envelope_ratio": 0.18569533817705186,
+          "proxy_mass_atom": 0.03448275862068966,
+          "shell": 134217728,
+          "shell_l2_energy": 1.6028617292446603e-05
+        },
+        {
+          "depth": 28,
+          "envelope_l2": 6.103515625e-05,
+          "envelope_ratio": 0.18257418583505536,
+          "proxy_mass_atom": 0.033333333333333326,
+          "shell": 268435456,
+          "shell_l2_energy": 1.114344395965914e-05
+        },
+        {
+          "depth": 29,
+          "envelope_l2": 4.315837287515549e-05,
+          "envelope_ratio": 0.1796053020267749,
+          "proxy_mass_atom": 0.03225806451612903,
+          "shell": 536870912,
+          "shell_l2_energy": 7.751472595226471e-06
+        },
+        {
+          "depth": 30,
+          "envelope_l2": 3.0517578125e-05,
+          "envelope_ratio": 0.17677669529663687,
+          "proxy_mass_atom": 0.031249999999999993,
+          "shell": 1073741824,
+          "shell_l2_energy": 5.394796609394436e-06
+        },
+        {
+          "depth": 31,
+          "envelope_l2": 2.1579186437577746e-05,
+          "envelope_ratio": 0.17407765595569785,
+          "proxy_mass_atom": 0.03030303030303031,
+          "shell": 2147483648,
+          "shell_l2_energy": 3.75645419248452e-06
+        },
+        {
+          "depth": 32,
+          "envelope_l2": 1.52587890625e-05,
+          "envelope_ratio": 0.17149858514250882,
+          "proxy_mass_atom": 0.029411764705882346,
+          "shell": 4294967296,
+          "shell_l2_energy": 2.6168607352067386e-06
+        },
+        {
+          "depth": 33,
+          "envelope_l2": 1.0789593218788873e-05,
+          "envelope_ratio": 0.1690308509457033,
+          "proxy_mass_atom": 0.02857142857142857,
+          "shell": 8589934592,
+          "shell_l2_energy": 1.823774123129873e-06
+        },
+        {
+          "depth": 34,
+          "envelope_l2": 7.62939453125e-06,
+          "envelope_ratio": 0.16666666666666666,
+          "proxy_mass_atom": 0.027777777777777776,
+          "shell": 17179869184,
+          "shell_l2_energy": 1.2715657552083333e-06
+        },
+        {
+          "depth": 35,
+          "envelope_l2": 5.3947966093944364e-06,
+          "envelope_ratio": 0.1643989873053573,
+          "proxy_mass_atom": 0.02702702702702703,
+          "shell": 34359738368,
+          "shell_l2_energy": 8.868990993028205e-07
+        },
+        {
+          "depth": 36,
+          "envelope_l2": 3.814697265625e-06,
+          "envelope_ratio": 0.16222142113076254,
+          "proxy_mass_atom": 0.026315789473684213,
+          "shell": 68719476736,
+          "shell_l2_energy": 6.188256116133215e-07
+        },
+        {
+          "depth": 37,
+          "envelope_l2": 2.6973983046972182e-06,
+          "envelope_ratio": 0.16012815380508713,
+          "proxy_mass_atom": 0.02564102564102564,
+          "shell": 137438953472,
+          "shell_l2_energy": 4.319294106081374e-07
+        },
+        {
+          "depth": 38,
+          "envelope_l2": 1.9073486328125e-06,
+          "envelope_ratio": 0.15811388300841897,
+          "proxy_mass_atom": 0.025,
+          "shell": 274877906944,
+          "shell_l2_energy": 3.015782985847835e-07
+        },
+        {
+          "depth": 39,
+          "envelope_l2": 1.3486991523486091e-06,
+          "envelope_ratio": 0.15617376188860607,
+          "proxy_mass_atom": 0.024390243902439032,
+          "shell": 549755813888,
+          "shell_l2_energy": 2.1063142027825653e-07
+        },
+        {
+          "depth": 40,
+          "envelope_l2": 9.5367431640625e-07,
+          "envelope_ratio": 0.1543033499620919,
+          "proxy_mass_atom": 0.02380952380952381,
+          "shell": 1099511627776,
+          "shell_l2_energy": 1.4715514179429237e-07
+        },
+        {
+          "depth": 41,
+          "envelope_l2": 6.743495761743046e-07,
+          "envelope_ratio": 0.15249857033260467,
+          "proxy_mass_atom": 0.023255813953488375,
+          "shell": 2199023255552,
+          "shell_l2_energy": 1.0283734627097933e-07
+        },
+        {
+          "depth": 42,
+          "envelope_l2": 4.76837158203125e-07,
+          "envelope_ratio": 0.15075567228888181,
+          "proxy_mass_atom": 0.022727272727272728,
+          "shell": 4398046511104,
+          "shell_l2_energy": 7.1885906357232e-08
+        },
+        {
+          "depth": 43,
+          "envelope_l2": 3.371747880871523e-07,
+          "envelope_ratio": 0.14907119849998599,
+          "proxy_mass_atom": 0.022222222222222227,
+          "shell": 8796093022208,
+          "shell_l2_energy": 5.026304976413059e-08
+        },
+        {
+          "depth": 44,
+          "envelope_l2": 2.384185791015625e-07,
+          "envelope_ratio": 0.14744195615489714,
+          "proxy_mass_atom": 0.021739130434782608,
+          "shell": 17592186044416,
+          "shell_l2_energy": 3.515290168640545e-08
+        },
+        {
+          "depth": 45,
+          "envelope_l2": 1.6858739404357614e-07,
+          "envelope_ratio": 0.14586499149789456,
+          "proxy_mass_atom": 0.021276595744680854,
+          "shell": 35184372088832,
+          "shell_l2_energy": 2.4590998798818433e-08
+        },
+        {
+          "depth": 46,
+          "envelope_l2": 1.1920928955078125e-07,
+          "envelope_ratio": 0.14433756729740646,
+          "proxy_mass_atom": 0.02083333333333334,
+          "shell": 70368744177664,
+          "shell_l2_energy": 1.72063788530119e-08
+        },
+        {
+          "depth": 47,
+          "envelope_l2": 8.429369702178807e-08,
+          "envelope_ratio": 0.14285714285714285,
+          "proxy_mass_atom": 0.020408163265306124,
+          "shell": 140737488355328,
+          "shell_l2_energy": 1.2041956717398296e-08
+        },
+        {
+          "depth": 48,
+          "envelope_l2": 5.960464477539063e-08,
+          "envelope_ratio": 0.1414213562373095,
+          "proxy_mass_atom": 0.02,
+          "shell": 281474976710656,
+          "shell_l2_energy": 8.429369702178806e-09
+        },
+        {
+          "depth": 49,
+          "envelope_l2": 4.2146848510894035e-08,
+          "envelope_ratio": 0.14002800840280097,
+          "proxy_mass_atom": 0.0196078431372549,
+          "shell": 562949953421312,
+          "shell_l2_energy": 5.901739257435049e-09
+        },
+        {
+          "depth": 50,
+          "envelope_l2": 2.9802322387695312e-08,
+          "envelope_ratio": 0.1386750490563073,
+          "proxy_mass_atom": 0.019230769230769232,
+          "shell": 1125899906842624,
+          "shell_l2_energy": 4.132838519105532e-09
+        },
+        {
+          "depth": 51,
+          "envelope_l2": 2.1073424255447017e-08,
+          "envelope_ratio": 0.13736056394868904,
+          "proxy_mass_atom": 0.01886792452830189,
+          "shell": 2251799813685248,
+          "shell_l2_energy": 2.8946574400581845e-09
+        },
+        {
+          "depth": 52,
+          "envelope_l2": 1.4901161193847656e-08,
+          "envelope_ratio": 0.13608276348795434,
+          "proxy_mass_atom": 0.018518518518518517,
+          "shell": 4503599627370496,
+          "shell_l2_energy": 2.027791194438254e-09
+        },
+        {
+          "depth": 53,
+          "envelope_l2": 1.0536712127723509e-08,
+          "envelope_ratio": 0.13483997249264842,
+          "proxy_mass_atom": 0.018181818181818184,
+          "shell": 9007199254740992,
+          "shell_l2_energy": 1.4207699734651929e-09
+        },
+        {
+          "depth": 54,
+          "envelope_l2": 7.450580596923828e-09,
+          "envelope_ratio": 0.1336306209562122,
+          "proxy_mass_atom": 0.01785714285714286,
+          "shell": 18014398509481984,
+          "shell_l2_energy": 9.956257116512373e-10
+        },
+        {
+          "depth": 55,
+          "envelope_l2": 5.268356063861754e-09,
+          "envelope_ratio": 0.13245323570650439,
+          "proxy_mass_atom": 0.017543859649122813,
+          "shell": 36028797018963968,
+          "shell_l2_energy": 6.978108075124727e-10
+        },
+        {
+          "depth": 56,
+          "envelope_l2": 3.725290298461914e-09,
+          "envelope_ratio": 0.13130643285972254,
+          "proxy_mass_atom": 0.017241379310344824,
+          "shell": 72057594037927936,
+          "shell_l2_energy": 4.891545804579651e-10
+        },
+        {
+          "depth": 57,
+          "envelope_l2": 2.634178031930877e-09,
+          "envelope_ratio": 0.13018891098082389,
+          "proxy_mass_atom": 0.016949152542372888,
+          "shell": 144115188075855872,
+          "shell_l2_energy": 3.4294076930669084e-10
+        },
+        {
+          "depth": 58,
+          "envelope_l2": 1.862645149230957e-09,
+          "envelope_ratio": 0.12909944487358055,
+          "proxy_mass_atom": 0.016666666666666663,
+          "shell": 288230376151711744,
+          "shell_l2_energy": 2.4046645476218415e-10
+        },
+        {
+          "depth": 59,
+          "envelope_l2": 1.3170890159654386e-09,
+          "envelope_ratio": 0.12803687993289598,
+          "proxy_mass_atom": 0.016393442622950824,
+          "shell": 576460752303423488,
+          "shell_l2_energy": 1.6863596819810298e-10
+        },
+        {
+          "depth": 60,
+          "envelope_l2": 9.313225746154785e-10,
+          "envelope_ratio": 0.1270001270001905,
+          "proxy_mass_atom": 0.016129032258064516,
+          "shell": 1152921504606846976,
+          "shell_l2_energy": 1.1827808525431017e-10
+        },
+        {
+          "depth": 61,
+          "envelope_l2": 6.585445079827193e-10,
+          "envelope_ratio": 0.1259881576697424,
+          "proxy_mass_atom": 0.015873015873015872,
+          "shell": 2305843009213693952,
+          "shell_l2_energy": 8.296880930426977e-11
+        },
+        {
+          "depth": 62,
+          "envelope_l2": 4.656612873077393e-10,
+          "envelope_ratio": 0.125,
+          "proxy_mass_atom": 0.015625,
+          "shell": 4611686018427387904,
+          "shell_l2_energy": 5.820766091346741e-11
+        },
+        {
+          "depth": 63,
+          "envelope_l2": 3.2927225399135965e-10,
+          "envelope_ratio": 0.12403473458920847,
+          "proxy_mass_atom": 0.015384615384615387,
+          "shell": 9223372036854775808,
+          "shell_l2_energy": 4.084119663140873e-11
+        }
+      ],
+      "window_rows": [
+        {
+          "abel_weighted_mass": 0.21690011535213272,
+          "arithmetic_window_mass": 0.22862103174603174,
+          "center_depth": 4,
+          "max_atom_mass": 0.4999999999999999,
+          "start_depth": 0,
+          "stop_depth": 7,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.17261257078774106,
+          "arithmetic_window_mass": 0.17862103174603178,
+          "center_depth": 5,
+          "max_atom_mass": 0.3333333333333334,
+          "start_depth": 1,
+          "stop_depth": 8,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.14474970248067387,
+          "arithmetic_window_mass": 0.14831800144300145,
+          "center_depth": 6,
+          "max_atom_mass": 0.25,
+          "start_depth": 2,
+          "stop_depth": 9,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.12516891192181592,
+          "arithmetic_window_mass": 0.12748466810966813,
+          "center_depth": 7,
+          "max_atom_mass": 0.2,
+          "start_depth": 3,
+          "stop_depth": 10,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.11050316032795657,
+          "arithmetic_window_mass": 0.11210005272505273,
+          "center_depth": 8,
+          "max_atom_mass": 0.1666666666666667,
+          "start_depth": 4,
+          "stop_depth": 11,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.0990438316572321,
+          "arithmetic_window_mass": 0.10019529082029083,
+          "center_depth": 9,
+          "max_atom_mass": 0.14285714285714288,
+          "start_depth": 5,
+          "stop_depth": 12,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.08981208331462895,
+          "arithmetic_window_mass": 0.0906714812964813,
+          "center_depth": 10,
+          "max_atom_mass": 0.12499999999999997,
+          "start_depth": 6,
+          "stop_depth": 13,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.08219964688192238,
+          "arithmetic_window_mass": 0.0828589812964813,
+          "center_depth": 11,
+          "max_atom_mass": 0.1111111111111111,
+          "start_depth": 7,
+          "stop_depth": 14,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.07580563048038372,
+          "arithmetic_window_mass": 0.076323033584063,
+          "center_depth": 12,
+          "max_atom_mass": 0.1,
+          "start_depth": 8,
+          "stop_depth": 15,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.0703537055980063,
+          "arithmetic_window_mass": 0.07076747802850744,
+          "center_depth": 13,
+          "max_atom_mass": 0.09090909090909091,
+          "start_depth": 9,
+          "stop_depth": 16,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.0656465295916174,
+          "arithmetic_window_mass": 0.06598278903329213,
+          "center_depth": 14,
+          "max_atom_mass": 0.08333333333333336,
+          "start_depth": 10,
+          "stop_depth": 17,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.06153904400664417,
+          "arithmetic_window_mass": 0.06181612236662547,
+          "center_depth": 15,
+          "max_atom_mass": 0.07692307692307693,
+          "start_depth": 11,
+          "stop_depth": 18,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.05792203331745579,
+          "arithmetic_window_mass": 0.0581531187036218,
+          "center_depth": 16,
+          "max_atom_mass": 0.07142857142857144,
+          "start_depth": 12,
+          "stop_depth": 19,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.05471158117042733,
+          "arithmetic_window_mass": 0.054906365456868556,
+          "center_depth": 17,
+          "max_atom_mass": 0.06666666666666665,
+          "start_depth": 13,
+          "stop_depth": 20,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.051842075211948356,
+          "arithmetic_window_mass": 0.05200781473223087,
+          "center_depth": 18,
+          "max_atom_mass": 0.0625,
+          "start_depth": 14,
+          "stop_depth": 21,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.04926143052607863,
+          "arithmetic_window_mass": 0.04940364806556421,
+          "center_depth": 19,
+          "max_atom_mass": 0.05882352941176471,
+          "start_depth": 15,
+          "stop_depth": 22,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.04692774611370238,
+          "arithmetic_window_mass": 0.04705070688909362,
+          "center_depth": 20,
+          "max_atom_mass": 0.055555555555555566,
+          "start_depth": 16,
+          "stop_depth": 23,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.044806913374656546,
+          "arithmetic_window_mass": 0.04491395475234149,
+          "center_depth": 21,
+          "max_atom_mass": 0.052631578947368425,
+          "start_depth": 17,
+          "stop_depth": 24,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.04287087271498194,
+          "arithmetic_window_mass": 0.042964637013550064,
+          "center_depth": 22,
+          "max_atom_mass": 0.049999999999999996,
+          "start_depth": 18,
+          "stop_depth": 25,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.04109632102333646,
+          "arithmetic_window_mass": 0.04117892272783578,
+          "center_depth": 23,
+          "max_atom_mass": 0.04761904761904764,
+          "start_depth": 19,
+          "stop_depth": 26,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.03946373886386381,
+          "arithmetic_window_mass": 0.03953688660304103,
+          "center_depth": 24,
+          "max_atom_mass": 0.04545454545454545,
+          "start_depth": 20,
+          "stop_depth": 27,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.037956648304393485,
+          "arithmetic_window_mass": 0.038021735087889516,
+          "center_depth": 25,
+          "max_atom_mass": 0.043478260869565216,
+          "start_depth": 21,
+          "stop_depth": 28,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.036561039707916645,
+          "arithmetic_window_mass": 0.03661921054370999,
+          "center_depth": 26,
+          "max_atom_mass": 0.04166666666666668,
+          "start_depth": 22,
+          "stop_depth": 29,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.035264924049630796,
+          "arithmetic_window_mass": 0.03531712721037666,
+          "center_depth": 27,
+          "max_atom_mass": 0.040000000000000015,
+          "start_depth": 23,
+          "stop_depth": 30,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.03405797968380948,
+          "arithmetic_window_mass": 0.034105005998255444,
+          "center_depth": 28,
+          "max_atom_mass": 0.038461538461538464,
+          "start_depth": 24,
+          "stop_depth": 31,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.03293127101034898,
+          "arithmetic_window_mass": 0.03297378427879843,
+          "center_depth": 29,
+          "max_atom_mass": 0.03703703703703705,
+          "start_depth": 25,
+          "stop_depth": 32,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.03187702246319417,
+          "arithmetic_window_mass": 0.03191558322059737,
+          "center_depth": 30,
+          "max_atom_mass": 0.035714285714285705,
+          "start_depth": 26,
+          "stop_depth": 33,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.030888435486871913,
+          "arithmetic_window_mass": 0.030923519728533876,
+          "center_depth": 31,
+          "max_atom_mass": 0.03448275862068966,
+          "start_depth": 27,
+          "stop_depth": 34,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.029959539223146175,
+          "arithmetic_window_mass": 0.02999155327932605,
+          "center_depth": 32,
+          "max_atom_mass": 0.033333333333333326,
+          "start_depth": 28,
+          "stop_depth": 35,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.029085067856911034,
+          "arithmetic_window_mass": 0.02911436029686991,
+          "center_depth": 33,
+          "max_atom_mass": 0.03225806451612903,
+          "start_depth": 29,
+          "stop_depth": 36,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.02826035921193034,
+          "arithmetic_window_mass": 0.028287230437481985,
+          "center_depth": 34,
+          "max_atom_mass": 0.031249999999999993,
+          "start_depth": 30,
+          "stop_depth": 37,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.027481270409600866,
+          "arithmetic_window_mass": 0.027505980437481987,
+          "center_depth": 35,
+          "max_atom_mass": 0.03030303030303031,
+          "start_depth": 31,
+          "stop_depth": 38,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.026744107323373074,
+          "arithmetic_window_mass": 0.026766882137408077,
+          "center_depth": 36,
+          "max_atom_mass": 0.029411764705882346,
+          "start_depth": 32,
+          "stop_depth": 39,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.026045565259270948,
+          "arithmetic_window_mass": 0.026066602025363258,
+          "center_depth": 37,
+          "max_atom_mass": 0.02857142857142857,
+          "start_depth": 33,
+          "stop_depth": 40,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.025382678827066456,
+          "arithmetic_window_mass": 0.025402150198120733,
+          "center_depth": 38,
+          "max_atom_mass": 0.027777777777777776,
+          "start_depth": 34,
+          "stop_depth": 41,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.024752779378760432,
+          "arithmetic_window_mass": 0.024770837066807605,
+          "center_depth": 39,
+          "max_atom_mass": 0.02702702702702703,
+          "start_depth": 35,
+          "stop_depth": 42,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.024153458711370694,
+          "arithmetic_window_mass": 0.024170236466207005,
+          "center_depth": 40,
+          "max_atom_mass": 0.026315789473684213,
+          "start_depth": 36,
+          "stop_depth": 43,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.023582537981823363,
+          "arithmetic_window_mass": 0.023598154086344303,
+          "center_depth": 41,
+          "max_atom_mass": 0.02564102564102564,
+          "start_depth": 37,
+          "stop_depth": 44,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.02303804097940141,
+          "arithmetic_window_mass": 0.023052600349301205,
+          "center_depth": 42,
+          "max_atom_mass": 0.025,
+          "start_depth": 38,
+          "stop_depth": 45,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.022518171057970007,
+          "arithmetic_window_mass": 0.02253176701596787,
+          "center_depth": 43,
+          "max_atom_mass": 0.024390243902439032,
+          "start_depth": 39,
+          "stop_depth": 46,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.02202129115527708,
+          "arithmetic_window_mass": 0.022034006936326258,
+          "center_depth": 44,
+          "max_atom_mass": 0.02380952380952381,
+          "start_depth": 40,
+          "stop_depth": 47,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.02154590642699172,
+          "arithmetic_window_mass": 0.02155781646013578,
+          "center_depth": 45,
+          "max_atom_mass": 0.023255813953488375,
+          "start_depth": 41,
+          "stop_depth": 48,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.0210906491041112,
+          "arithmetic_window_mass": 0.021101820108106597,
+          "center_depth": 46,
+          "max_atom_mass": 0.022727272727272728,
+          "start_depth": 42,
+          "stop_depth": 49,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.020654265248023395,
+          "arithmetic_window_mass": 0.02066475717104366,
+          "center_depth": 47,
+          "max_atom_mass": 0.022222222222222227,
+          "start_depth": 43,
+          "stop_depth": 50,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.02023560313101136,
+          "arithmetic_window_mass": 0.020245469959303618,
+          "center_depth": 48,
+          "max_atom_mass": 0.021739130434782608,
+          "start_depth": 44,
+          "stop_depth": 51,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.019833603013784784,
+          "arithmetic_window_mass": 0.019842893469770608,
+          "center_depth": 49,
+          "max_atom_mass": 0.021276595744680854,
+          "start_depth": 45,
+          "stop_depth": 52,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.01944728812763831,
+          "arithmetic_window_mass": 0.019456046274412775,
+          "center_depth": 50,
+          "max_atom_mass": 0.02083333333333334,
+          "start_depth": 46,
+          "stop_depth": 53,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.019075756698577723,
+          "arithmetic_window_mass": 0.019084022464888963,
+          "center_depth": 51,
+          "max_atom_mass": 0.020408163265306124,
+          "start_depth": 47,
+          "stop_depth": 54,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.018718174875415432,
+          "arithmetic_window_mass": 0.01872598451286605,
+          "center_depth": 52,
+          "max_atom_mass": 0.02,
+          "start_depth": 48,
+          "stop_depth": 55,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.018373770444363592,
+          "arithmetic_window_mass": 0.01838115692665915,
+          "center_depth": 53,
+          "max_atom_mass": 0.0196078431372549,
+          "start_depth": 49,
+          "stop_depth": 56,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.018041827229803728,
+          "arithmetic_window_mass": 0.018048820602298902,
+          "center_depth": 54,
+          "max_atom_mass": 0.019230769230769232,
+          "start_depth": 50,
+          "stop_depth": 57,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.01772168009529218,
+          "arithmetic_window_mass": 0.01772830778178608,
+          "center_depth": 55,
+          "max_atom_mass": 0.01886792452830189,
+          "start_depth": 51,
+          "stop_depth": 58,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.017412710470960508,
+          "arithmetic_window_mass": 0.0174189975436172,
+          "center_depth": 56,
+          "max_atom_mass": 0.018518518518518517,
+          "start_depth": 52,
+          "stop_depth": 59,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.017114342343684023,
+          "arithmetic_window_mass": 0.017120311761060446,
+          "center_depth": 57,
+          "max_atom_mass": 0.018181818181818184,
+          "start_depth": 53,
+          "stop_depth": 60,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.01682603865504158,
+          "arithmetic_window_mass": 0.016831711472460157,
+          "center_depth": 58,
+          "max_atom_mass": 0.01785714285714286,
+          "start_depth": 54,
+          "stop_depth": 61,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.016547298059437575,
+          "arithmetic_window_mass": 0.0165526936153173,
+          "center_depth": 59,
+          "max_atom_mass": 0.017543859649122813,
+          "start_depth": 55,
+          "stop_depth": 62,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.016277652001016808,
+          "arithmetic_window_mass": 0.016282788082253873,
+          "center_depth": 60,
+          "max_atom_mass": 0.017241379310344824,
+          "start_depth": 56,
+          "stop_depth": 63,
+          "window_width": 8
+        }
+      ]
+    },
+    {
+      "allowed_atom_mass_bound": 1.0,
+      "allowed_window_mass_bound": 1.0,
+      "bounded_by_abel_windows": true,
+      "bounded_by_envelope": true,
+      "checks": {
+        "bad_profile_violation_visible": true,
+        "expected_bounded_classification": true,
+        "finite_nonnegative_shell_masses": true,
+        "promotion_false": true,
+        "window_rows_present": true
+      },
+      "classification": "bounded_type_i_proxy",
+      "description": "Bounded envelope with deterministic low-amplitude shell oscillation.",
+      "expected_bounded": true,
+      "max_abel_window_mass": 0.7002285303983555,
+      "max_arithmetic_window_mass": 0.7116817407118442,
+      "max_envelope_ratio": 0.9563386683229473,
+      "max_proxy_mass_atom": 0.9145836485297083,
+      "mean_abel_window_mass": 0.682156944224295,
+      "name": "oscillatory_bounded_type_i",
+      "shell_rows": [
+        {
+          "depth": 0,
+          "envelope_l2": 1.0,
+          "envelope_ratio": 0.82,
+          "proxy_mass_atom": 0.6723999999999999,
+          "shell": 1,
+          "shell_l2_energy": 0.82
+        },
+        {
+          "depth": 1,
+          "envelope_l2": 0.7071067811865476,
+          "envelope_ratio": 0.9296657673478477,
+          "proxy_mass_atom": 0.8642784389784625,
+          "shell": 2,
+          "shell_l2_energy": 0.6573729683286583
+        },
+        {
+          "depth": 2,
+          "envelope_l2": 0.5,
+          "envelope_ratio": 0.9563386683229473,
+          "proxy_mass_atom": 0.9145836485297083,
+          "shell": 4,
+          "shell_l2_energy": 0.47816933416147367
+        },
+        {
+          "depth": 3,
+          "envelope_l2": 0.3535533905932738,
+          "envelope_ratio": 0.8798331832327362,
+          "proxy_mass_atom": 0.7741064303174495,
+          "shell": 8,
+          "shell_l2_energy": 0.311068005088407
+        },
+        {
+          "depth": 4,
+          "envelope_l2": 0.25,
+          "envelope_ratio": 0.7580471379387206,
+          "proxy_mass_atom": 0.5746354633370857,
+          "shell": 16,
+          "shell_l2_energy": 0.18951178448468015
+        },
+        {
+          "depth": 5,
+          "envelope_l2": 0.1767766952966369,
+          "envelope_ratio": 0.6831457835268864,
+          "proxy_mass_atom": 0.4666881615505636,
+          "shell": 32,
+          "shell_l2_energy": 0.12076425401771466
+        },
+        {
+          "depth": 6,
+          "envelope_l2": 0.125,
+          "envelope_ratio": 0.7118129717421617,
+          "proxy_mass_atom": 0.5066777067404076,
+          "shell": 64,
+          "shell_l2_energy": 0.08897662146777022
+        },
+        {
+          "depth": 7,
+          "envelope_l2": 0.08838834764831845,
+          "envelope_ratio": 0.8223539460678089,
+          "proxy_mass_atom": 0.6762660126132967,
+          "shell": 128,
+          "shell_l2_energy": 0.072686506475008
+        },
+        {
+          "depth": 8,
+          "envelope_l2": 0.0625,
+          "envelope_ratio": 0.9311135009388813,
+          "proxy_mass_atom": 0.8669723516306602,
+          "shell": 256,
+          "shell_l2_energy": 0.058194593808680084
+        },
+        {
+          "depth": 9,
+          "envelope_l2": 0.04419417382415922,
+          "envelope_ratio": 0.955784573518312,
+          "proxy_mass_atom": 0.9135241509755818,
+          "shell": 512,
+          "shell_l2_energy": 0.04224010958051817
+        },
+        {
+          "depth": 10,
+          "envelope_l2": 0.03125,
+          "envelope_ratio": 0.8776965879338459,
+          "proxy_mass_atom": 0.7703513004707152,
+          "shell": 1024,
+          "shell_l2_energy": 0.027428018372932683
+        },
+        {
+          "depth": 11,
+          "envelope_l2": 0.02209708691207961,
+          "envelope_ratio": 0.755944974871455,
+          "proxy_mass_atom": 0.5714528050334048,
+          "shell": 2048,
+          "shell_l2_energy": 0.01670418181048438
+        },
+        {
+          "depth": 12,
+          "envelope_l2": 0.015625,
+          "envelope_ratio": 0.6826689277906911,
+          "proxy_mass_atom": 0.4660368649708918,
+          "shell": 4096,
+          "shell_l2_energy": 0.010666701996729549
+        },
+        {
+          "depth": 13,
+          "envelope_l2": 0.011048543456039806,
+          "envelope_ratio": 0.7133222982513354,
+          "proxy_mass_atom": 0.5088287011825672,
+          "shell": 8192,
+          "shell_l2_energy": 0.007881172410392066
+        },
+        {
+          "depth": 14,
+          "envelope_l2": 0.0078125,
+          "envelope_ratio": 0.8247072266109591,
+          "proxy_mass_atom": 0.6801420096243398,
+          "shell": 16384,
+          "shell_l2_energy": 0.006443025207898118
+        },
+        {
+          "depth": 15,
+          "envelope_l2": 0.005524271728019903,
+          "envelope_ratio": 0.9325298197172269,
+          "proxy_mass_atom": 0.8696118646618439,
+          "shell": 32768,
+          "shell_l2_energy": 0.005151548118599374
+        },
+        {
+          "depth": 16,
+          "envelope_l2": 0.00390625,
+          "envelope_ratio": 0.9551920887168988,
+          "proxy_mass_atom": 0.9123919263473518,
+          "shell": 65536,
+          "shell_l2_energy": 0.0037312190965503858
+        },
+        {
+          "depth": 17,
+          "envelope_l2": 0.0027621358640099515,
+          "envelope_ratio": 0.8755436802382857,
+          "proxy_mass_atom": 0.7665767360052016,
+          "shell": 131072,
+          "shell_l2_energy": 0.00241837059969343
+        },
+        {
+          "depth": 18,
+          "envelope_l2": 0.001953125,
+          "envelope_ratio": 0.7538609219042147,
+          "proxy_mass_atom": 0.5683062895742725,
+          "shell": 262144,
+          "shell_l2_energy": 0.0014723846130941694
+        },
+        {
+          "depth": 19,
+          "envelope_l2": 0.0013810679320049757,
+          "envelope_ratio": 0.6822308992885698,
+          "proxy_mass_atom": 0.4654389999440908,
+          "shell": 524288,
+          "shell_l2_energy": 0.00094220721723036
+        },
+        {
+          "depth": 20,
+          "envelope_l2": 0.0009765625,
+          "envelope_ratio": 0.7148617854519653,
+          "proxy_mass_atom": 0.5110273722995717,
+          "shell": 1048576,
+          "shell_l2_energy": 0.0006981072123554349
+        },
+        {
+          "depth": 21,
+          "envelope_l2": 0.0006905339660024879,
+          "envelope_ratio": 0.827059176292954,
+          "proxy_mass_atom": 0.6840268810903797,
+          "shell": 2097152,
+          "shell_l2_energy": 0.0005711124531243243
+        },
+        {
+          "depth": 22,
+          "envelope_l2": 0.00048828125,
+          "envelope_ratio": 0.9339143232509948,
+          "proxy_mass_atom": 0.8721959631733636,
+          "shell": 4194304,
+          "shell_l2_energy": 0.0004560128531498998
+        },
+        {
+          "depth": 23,
+          "envelope_l2": 0.00034526698300124393,
+          "envelope_ratio": 0.9545613814302962,
+          "proxy_mass_atom": 0.9111874309181157,
+          "shell": 8388608,
+          "shell_l2_energy": 0.00032957852825593804
+        },
+        {
+          "depth": 24,
+          "envelope_l2": 0.000244140625,
+          "envelope_ratio": 0.8733750688316916,
+          "proxy_mass_atom": 0.7627840108567621,
+          "shell": 16777216,
+          "shell_l2_energy": 0.0002132263351639872
+        },
+        {
+          "depth": 25,
+          "envelope_l2": 0.00017263349150062197,
+          "envelope_ratio": 0.7517955682555286,
+          "proxy_mass_atom": 0.5651965764486534,
+          "shell": 33554432,
+          "shell_l2_energy": 0.00012978509384264607
+        },
+        {
+          "depth": 26,
+          "envelope_l2": 0.0001220703125,
+          "envelope_ratio": 0.681831821863109,
+          "proxy_mass_atom": 0.4648946333051664,
+          "shell": 67108864,
+          "shell_l2_energy": 8.323142356727405e-05
+        },
+        {
+          "depth": 27,
+          "envelope_l2": 8.631674575031098e-05,
+          "envelope_ratio": 0.7164309980890948,
+          "proxy_mass_atom": 0.5132733750229366,
+          "shell": 134217728,
+          "shell_l2_energy": 6.183999230969793e-05
+        },
+        {
+          "depth": 28,
+          "envelope_l2": 6.103515625e-05,
+          "envelope_ratio": 0.8294091301535664,
+          "proxy_mass_atom": 0.6879195051820957,
+          "shell": 268435456,
+          "shell_l2_energy": 5.0623115854099514e-05
+        },
+        {
+          "depth": 29,
+          "envelope_l2": 4.315837287515549e-05,
+          "envelope_ratio": 0.9352666201033314,
+          "proxy_mass_atom": 0.8747236506795094,
+          "shell": 536870912,
+          "shell_l2_energy": 4.0364585528105976e-05
+        },
+        {
+          "depth": 30,
+          "envelope_l2": 3.0517578125e-05,
+          "envelope_ratio": 0.9538926299766304,
+          "proxy_mass_atom": 0.9099111495237326,
+          "shell": 1073741824,
+          "shell_l2_energy": 2.9110492858173535e-05
+        },
+        {
+          "depth": 31,
+          "envelope_l2": 2.1579186437577746e-05,
+          "envelope_ratio": 0.8711913668395664,
+          "proxy_mass_atom": 0.7589743976557921,
+          "shell": 2147483648,
+          "shell_l2_energy": 1.879960092783919e-05
+        },
+        {
+          "depth": 32,
+          "envelope_l2": 1.52587890625e-05,
+          "envelope_ratio": 0.7497494978571195,
+          "proxy_mass_atom": 0.5621243095370029,
+          "shell": 4294967296,
+          "shell_l2_energy": 1.1440269437517083e-05
+        },
+        {
+          "depth": 33,
+          "envelope_l2": 1.0789593218788873e-05,
+          "envelope_ratio": 0.681471808344365,
+          "proxy_mass_atom": 0.46440382556813903,
+          "shell": 8589934592,
+          "shell_l2_energy": 7.352803602108151e-06
+        },
+        {
+          "depth": 34,
+          "envelope_l2": 7.62939453125e-06,
+          "envelope_ratio": 0.7180294925035768,
+          "proxy_mass_atom": 0.5155663521049441,
+          "shell": 17179869184,
+          "shell_l2_energy": 5.478130283383002e-06
+        },
+        {
+          "depth": 35,
+          "envelope_l2": 5.3947966093944364e-06,
+          "envelope_ratio": 0.8317564237968446,
+          "proxy_mass_atom": 0.6918187485273161,
+          "shell": 34359738368,
+          "shell_l2_energy": 4.4871567349412586e-06
+        },
+        {
+          "depth": 36,
+          "envelope_l2": 3.814697265625e-06,
+          "envelope_ratio": 0.9365863279430892,
+          "proxy_mass_atom": 0.8771939496899197,
+          "shell": 68719476736,
+          "shell_l2_energy": 3.5727933042262617e-06
+        },
+        {
+          "depth": 37,
+          "envelope_l2": 2.6973983046972182e-06,
+          "envelope_ratio": 0.9531860234301492,
+          "proxy_mass_atom": 0.9085635952625812,
+          "shell": 137438953472,
+          "shell_l2_energy": 2.5711223636615676e-06
+        },
+        {
+          "depth": 38,
+          "envelope_l2": 1.9073486328125e-06,
+          "envelope_ratio": 0.8689931916539326,
+          "proxy_mass_atom": 0.7551491671408885,
+          "shell": 274877906944,
+          "shell_l2_energy": 1.6574729760244992e-06
+        },
+        {
+          "depth": 39,
+          "envelope_l2": 1.3486991523486091e-06,
+          "envelope_ratio": 0.7477232891888101,
+          "proxy_mass_atom": 0.5590901171953332,
+          "shell": 549755813888,
+          "shell_l2_energy": 1.0084537663202623e-06
+        },
+        {
+          "depth": 40,
+          "envelope_l2": 9.5367431640625e-07,
+          "envelope_ratio": 0.6811509605179638,
+          "proxy_mass_atom": 0.4639666310145446,
+          "shell": 1099511627776,
+          "shell_l2_energy": 6.495961766414297e-07
+        },
+        {
+          "depth": 41,
+          "envelope_l2": 6.743495761743046e-07,
+          "envelope_ratio": 0.7196568167575079,
+          "proxy_mass_atom": 0.5179059339055495,
+          "shell": 2199023255552,
+          "shell_l2_energy": 4.853002693713747e-07
+        },
+        {
+          "depth": 42,
+          "envelope_l2": 4.76837158203125e-07,
+          "envelope_ratio": 0.834100393578951,
+          "proxy_mass_atom": 0.6957234665685611,
+          "shell": 4398046511104,
+          "shell_l2_energy": 3.977300613302951e-07
+        },
+        {
+          "depth": 43,
+          "envelope_l2": 3.371747880871523e-07,
+          "envelope_ratio": 0.9378730736529226,
+          "proxy_mass_atom": 0.8796059022831805,
+          "shell": 8796093022208,
+          "shell_l2_energy": 3.1622715486157033e-07
+        },
+        {
+          "depth": 44,
+          "envelope_l2": 2.384185791015625e-07,
+          "envelope_ratio": 0.9524417615677672,
+          "proxy_mass_atom": 0.9071453091783115,
+          "shell": 17592186044416,
+          "shell_l2_energy": 2.2707981146997623e-07
+        },
+        {
+          "depth": 45,
+          "envelope_l2": 1.6858739404357614e-07,
+          "envelope_ratio": 0.8667811647587789,
+          "proxy_mass_atom": 0.7513095875805854,
+          "shell": 35184372088832,
+          "shell_l2_energy": 1.4612837777273814e-07
+        },
+        {
+          "depth": 46,
+          "envelope_l2": 1.1920928955078125e-07,
+          "envelope_ratio": 0.7457175151149714,
+          "proxy_mass_atom": 0.5560946123492476,
+          "shell": 70368744177664,
+          "shell_l2_energy": 8.889645518242972e-08
+        },
+        {
+          "depth": 47,
+          "envelope_l2": 8.429369702178807e-08,
+          "envelope_ratio": 0.6808693690963235,
+          "proxy_mass_atom": 0.46358309777362555,
+          "shell": 140737488355328,
+          "shell_l2_energy": 5.739299631002148e-08
+        },
+        {
+          "depth": 48,
+          "envelope_l2": 5.960464477539063e-08,
+          "envelope_ratio": 0.7213125107620052,
+          "proxy_mass_atom": 0.5202917381817879,
+          "shell": 281474976710656,
+          "shell_l2_energy": 4.299357597601445e-08
+        },
+        {
+          "depth": 49,
+          "envelope_l2": 4.2146848510894035e-08,
+          "envelope_ratio": 0.8364403767957933,
+          "proxy_mass_atom": 0.6996325039342888,
+          "shell": 562949953421312,
+          "shell_l2_energy": 3.5253325849207426e-08
+        },
+        {
+          "depth": 50,
+          "envelope_l2": 2.9802322387695312e-08,
+          "envelope_ratio": 0.9391264934347765,
+          "proxy_mass_atom": 0.8819585706710993,
+          "shell": 1125899906842624,
+          "shell_l2_energy": 2.7988150520169035e-08
+        },
+        {
+          "depth": 51,
+          "envelope_l2": 2.1073424255447017e-08,
+          "envelope_ratio": 0.9516600548125808,
+          "proxy_mass_atom": 0.9056568599258843,
+          "shell": 2251799813685248,
+          "shell_l2_energy": 2.0054736082027476e-08
+        },
+        {
+          "depth": 52,
+          "envelope_l2": 1.4901161193847656e-08,
+          "envelope_ratio": 0.8645559115543474,
+          "proxy_mass_atom": 0.7474569242035686,
+          "shell": 4503599627370496,
+          "shell_l2_energy": 1.2882886999165228e-08
+        },
+        {
+          "depth": 53,
+          "envelope_l2": 1.0536712127723509e-08,
+          "envelope_ratio": 0.7437327427225564,
+          "proxy_mass_atom": 0.5531383925976163,
+          "shell": 9007199254740992,
+          "shell_l2_energy": 7.836497810029828e-09
+        },
+        {
+          "depth": 54,
+          "envelope_l2": 7.450580596923828e-09,
+          "envelope_ratio": 0.6806271136930078,
+          "proxy_mass_atom": 0.4632532678940745,
+          "shell": 18014398509481984,
+          "shell_l2_energy": 5.071067167021392e-09
+        },
+        {
+          "depth": 55,
+          "envelope_l2": 5.268356063861754e-09,
+          "envelope_ratio": 0.7229961064072825,
+          "proxy_mass_atom": 0.5227233698800906,
+          "shell": 36028797018963968,
+          "shell_l2_energy": 3.809000921339245e-09
+        },
+        {
+          "depth": 56,
+          "envelope_l2": 3.725290298461914e-09,
+          "envelope_ratio": 0.8387757118703919,
+          "proxy_mass_atom": 0.7035446948236826,
+          "shell": 72057594037927936,
+          "shell_l2_energy": 3.1246830220162567e-09
+        },
+        {
+          "depth": 57,
+          "envelope_l2": 2.634178031930877e-09,
+          "envelope_ratio": 0.9403462329127449,
+          "proxy_mass_atom": 0.8842510377531904,
+          "shell": 144115188075855872,
+          "shell_l2_energy": 2.4770393891477086e-09
+        },
+        {
+          "depth": 58,
+          "envelope_l2": 1.862645149230957e-09,
+          "envelope_ratio": 0.950841124174378,
+          "proxy_mass_atom": 0.9040988434211951,
+          "shell": 288230376151711744,
+          "shell_l2_energy": 1.7710796076327153e-09
+        },
+        {
+          "depth": 59,
+          "envelope_l2": 1.3170890159654386e-09,
+          "envelope_ratio": 0.8623180611803217,
+          "proxy_mass_atom": 0.7435924386377892,
+          "shell": 576460752303423488,
+          "shell_l2_energy": 1.1357496466492148e-09
+        },
+        {
+          "depth": 60,
+          "envelope_l2": 9.313225746154785e-10,
+          "envelope_ratio": 0.7417695331607737,
+          "proxy_mass_atom": 0.5502220403255521,
+          "shell": 1152921504606846976,
+          "shell_l2_energy": 6.908267113946133e-10
+        },
+        {
+          "depth": 61,
+          "envelope_l2": 6.585445079827193e-10,
+          "envelope_ratio": 0.6804242628002166,
+          "proxy_mass_atom": 0.4629771774072184,
+          "shell": 2305843009213693952,
+          "shell_l2_energy": 4.4808966136527317e-10
+        },
+        {
+          "depth": 62,
+          "envelope_l2": 4.656612873077393e-10,
+          "envelope_ratio": 0.7247071276950028,
+          "proxy_mass_atom": 0.5252004209319411,
+          "shell": 4611686018427387904,
+          "shell_l2_energy": 3.3746805400354917e-10
+        },
+        {
+          "depth": 63,
+          "envelope_l2": 3.2927225399135965e-10,
+          "envelope_ratio": 0.8411057385399237,
+          "proxy_mass_atom": 0.7074588634047905,
+          "shell": 9223372036854775808,
+          "shell_l2_energy": 2.7695278237410786e-10
+        }
+      ],
+      "window_rows": [
+        {
+          "abel_weighted_mass": 0.6811563341247379,
+          "arithmetic_window_mass": 0.6812044827583718,
+          "center_depth": 4,
+          "max_atom_mass": 0.9145836485297083,
+          "start_depth": 0,
+          "stop_depth": 7,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6688510165062709,
+          "arithmetic_window_mass": 0.7055260267122042,
+          "center_depth": 5,
+          "max_atom_mass": 0.9145836485297083,
+          "start_depth": 1,
+          "stop_depth": 8,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6662762007432074,
+          "arithmetic_window_mass": 0.7116817407118442,
+          "center_depth": 6,
+          "max_atom_mass": 0.9145836485297083,
+          "start_depth": 2,
+          "stop_depth": 9,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6743949486480861,
+          "arithmetic_window_mass": 0.6936526972044701,
+          "center_depth": 7,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 3,
+          "stop_depth": 10,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6894088866819855,
+          "arithmetic_window_mass": 0.6683209940439645,
+          "center_depth": 8,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 4,
+          "stop_depth": 11,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6998753623813407,
+          "arithmetic_window_mass": 0.6547461692481902,
+          "center_depth": 9,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 5,
+          "stop_depth": 12,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6955643582671228,
+          "arithmetic_window_mass": 0.6600137367021907,
+          "center_depth": 10,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 6,
+          "stop_depth": 13,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6808680687351468,
+          "arithmetic_window_mass": 0.6816967745626822,
+          "center_depth": 11,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 7,
+          "stop_depth": 14,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.668704203984714,
+          "arithmetic_window_mass": 0.7058650060687506,
+          "center_depth": 12,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 8,
+          "stop_depth": 15,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6663323795821414,
+          "arithmetic_window_mass": 0.7115424529083371,
+          "center_depth": 13,
+          "max_atom_mass": 0.9135241509755818,
+          "start_depth": 9,
+          "stop_depth": 16,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6746358527942858,
+          "arithmetic_window_mass": 0.6931740260370395,
+          "center_depth": 14,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 10,
+          "stop_depth": 17,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6896907521428299,
+          "arithmetic_window_mass": 0.6679183996749842,
+          "center_depth": 15,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 11,
+          "stop_depth": 18,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6999431138949996,
+          "arithmetic_window_mass": 0.65466667403882,
+          "center_depth": 16,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 12,
+          "stop_depth": 19,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6953471536129934,
+          "arithmetic_window_mass": 0.6602904874549049,
+          "center_depth": 17,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 13,
+          "stop_depth": 20,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6805809415038353,
+          "arithmetic_window_mass": 0.6821902599433814,
+          "center_depth": 18,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 14,
+          "stop_depth": 21,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6685609966139943,
+          "arithmetic_window_mass": 0.7061970041370095,
+          "center_depth": 19,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 15,
+          "stop_depth": 22,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6663923786866446,
+          "arithmetic_window_mass": 0.7113939499190435,
+          "center_depth": 20,
+          "max_atom_mass": 0.9123919263473518,
+          "start_depth": 16,
+          "stop_depth": 23,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6748794086163467,
+          "arithmetic_window_mass": 0.6926929604827197,
+          "center_depth": 21,
+          "max_atom_mass": 0.9111874309181157,
+          "start_depth": 17,
+          "stop_depth": 24,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6899709325587173,
+          "arithmetic_window_mass": 0.6675204405381512,
+          "center_depth": 22,
+          "max_atom_mass": 0.9111874309181157,
+          "start_depth": 18,
+          "stop_depth": 25,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.7000051391979977,
+          "arithmetic_window_mass": 0.6545939835045129,
+          "center_depth": 23,
+          "max_atom_mass": 0.9111874309181157,
+          "start_depth": 19,
+          "stop_depth": 26,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6951261216188207,
+          "arithmetic_window_mass": 0.6605732803893687,
+          "center_depth": 24,
+          "max_atom_mass": 0.9111874309181157,
+          "start_depth": 20,
+          "stop_depth": 27,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6802950318860708,
+          "arithmetic_window_mass": 0.6826847969996841,
+          "center_depth": 25,
+          "max_atom_mass": 0.9111874309181157,
+          "start_depth": 21,
+          "stop_depth": 28,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6684214103583404,
+          "arithmetic_window_mass": 0.7065218931983254,
+          "center_depth": 26,
+          "max_atom_mass": 0.9111874309181157,
+          "start_depth": 22,
+          "stop_depth": 29,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6664561939607432,
+          "arithmetic_window_mass": 0.7112362914921215,
+          "center_depth": 27,
+          "max_atom_mass": 0.9111874309181157,
+          "start_depth": 23,
+          "stop_depth": 30,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6751255659317951,
+          "arithmetic_window_mass": 0.692209662334331,
+          "center_depth": 28,
+          "max_atom_mass": 0.9099111495237326,
+          "start_depth": 24,
+          "stop_depth": 31,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6902493273605215,
+          "arithmetic_window_mass": 0.6671271996693612,
+          "center_depth": 29,
+          "max_atom_mass": 0.9099111495237326,
+          "start_depth": 25,
+          "stop_depth": 32,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.700061411780272,
+          "arithmetic_window_mass": 0.6545281058092969,
+          "center_depth": 30,
+          "max_atom_mass": 0.9099111495237326,
+          "start_depth": 26,
+          "stop_depth": 33,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6949013502086023,
+          "arithmetic_window_mass": 0.660862070659269,
+          "center_depth": 31,
+          "max_atom_mass": 0.9099111495237326,
+          "start_depth": 27,
+          "stop_depth": 34,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6800104181335952,
+          "arithmetic_window_mass": 0.6831802423473164,
+          "center_depth": 32,
+          "max_atom_mass": 0.9099111495237326,
+          "start_depth": 28,
+          "stop_depth": 35,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6682854604239414,
+          "arithmetic_window_mass": 0.7068395479107945,
+          "center_depth": 33,
+          "max_atom_mass": 0.9099111495237326,
+          "start_depth": 29,
+          "stop_depth": 36,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.666523820968046,
+          "arithmetic_window_mass": 0.7110695409836785,
+          "center_depth": 34,
+          "max_atom_mass": 0.9099111495237326,
+          "start_depth": 30,
+          "stop_depth": 37,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6753742732213127,
+          "arithmetic_window_mass": 0.691724293185823,
+          "center_depth": 35,
+          "max_atom_mass": 0.9085635952625812,
+          "start_depth": 31,
+          "stop_depth": 38,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6905258360186901,
+          "arithmetic_window_mass": 0.6667387581282656,
+          "center_depth": 36,
+          "max_atom_mass": 0.9085635952625812,
+          "start_depth": 32,
+          "stop_depth": 39,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.7001119075709643,
+          "arithmetic_window_mass": 0.6544690483129583,
+          "center_depth": 37,
+          "max_atom_mass": 0.9085635952625812,
+          "start_depth": 33,
+          "stop_depth": 40,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6946729284595213,
+          "arithmetic_window_mass": 0.6611568118551346,
+          "center_depth": 38,
+          "max_atom_mass": 0.9085635952625812,
+          "start_depth": 34,
+          "stop_depth": 41,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.679727177275421,
+          "arithmetic_window_mass": 0.6836764511630867,
+          "center_depth": 39,
+          "max_atom_mass": 0.9085635952625812,
+          "start_depth": 35,
+          "stop_depth": 42,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6681531612820797,
+          "arithmetic_window_mass": 0.7071498453825698,
+          "center_depth": 40,
+          "max_atom_mass": 0.9085635952625812,
+          "start_depth": 36,
+          "stop_depth": 43,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6665952549176113,
+          "arithmetic_window_mass": 0.7108937653186188,
+          "center_depth": 41,
+          "max_atom_mass": 0.9085635952625812,
+          "start_depth": 37,
+          "stop_depth": 44,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6756254776228604,
+          "arithmetic_window_mass": 0.6912370143583693,
+          "center_depth": 42,
+          "max_atom_mass": 0.9071453091783115,
+          "start_depth": 38,
+          "stop_depth": 45,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6908003580963408,
+          "arithmetic_window_mass": 0.6663551950094142,
+          "center_depth": 43,
+          "max_atom_mass": 0.9071453091783115,
+          "start_depth": 39,
+          "stop_depth": 46,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.7001566049544541,
+          "arithmetic_window_mass": 0.6544168175817007,
+          "center_depth": 44,
+          "max_atom_mass": 0.9071453091783115,
+          "start_depth": 40,
+          "stop_depth": 47,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6944409465478931,
+          "arithmetic_window_mass": 0.6614574559776061,
+          "center_depth": 45,
+          "max_atom_mass": 0.9071453091783115,
+          "start_depth": 41,
+          "stop_depth": 48,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6794453850999421,
+          "arithmetic_window_mass": 0.6841732772311986,
+          "center_depth": 46,
+          "max_atom_mass": 0.9071453091783115,
+          "start_depth": 42,
+          "stop_depth": 49,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6680245266921397,
+          "arithmetic_window_mass": 0.7074526652440158,
+          "center_depth": 47,
+          "max_atom_mass": 0.9071453091783115,
+          "start_depth": 43,
+          "stop_depth": 50,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6666704906490977,
+          "arithmetic_window_mass": 0.7107090349493538,
+          "center_depth": 48,
+          "max_atom_mass": 0.9071453091783115,
+          "start_depth": 44,
+          "stop_depth": 51,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6758791249268843,
+          "arithmetic_window_mass": 0.6907479868275109,
+          "center_depth": 49,
+          "max_atom_mass": 0.9056568599258843,
+          "start_depth": 45,
+          "stop_depth": 52,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6910727933028289,
+          "arithmetic_window_mass": 0.6659765874546398,
+          "center_depth": 50,
+          "max_atom_mass": 0.9056568599258843,
+          "start_depth": 46,
+          "stop_depth": 53,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.7001954847847677,
+          "arithmetic_window_mass": 0.6543714193977431,
+          "center_depth": 51,
+          "max_atom_mass": 0.9056568599258843,
+          "start_depth": 47,
+          "stop_depth": 54,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6942054956947248,
+          "arithmetic_window_mass": 0.6617639534110513,
+          "center_depth": 52,
+          "max_atom_mass": 0.9056568599258843,
+          "start_depth": 48,
+          "stop_depth": 55,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6791651161383582,
+          "arithmetic_window_mass": 0.6846705729912881,
+          "center_depth": 53,
+          "max_atom_mass": 0.9056568599258843,
+          "start_depth": 49,
+          "stop_depth": 56,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6678995697244566,
+          "arithmetic_window_mass": 0.7077478897186509,
+          "center_depth": 54,
+          "max_atom_mass": 0.9056568599258843,
+          "start_depth": 50,
+          "stop_depth": 57,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6667495226172205,
+          "arithmetic_window_mass": 0.7105154238124128,
+          "center_depth": 55,
+          "max_atom_mass": 0.9056568599258843,
+          "start_depth": 51,
+          "stop_depth": 58,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6761351595726329,
+          "arithmetic_window_mass": 0.690257371151401,
+          "center_depth": 56,
+          "max_atom_mass": 0.9040988434211951,
+          "start_depth": 52,
+          "stop_depth": 59,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6913430415477482,
+          "arithmetic_window_mass": 0.6656030106666488,
+          "center_depth": 57,
+          "max_atom_mass": 0.9040988434211951,
+          "start_depth": 53,
+          "stop_depth": 60,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.7002285303983555,
+          "arithmetic_window_mass": 0.6543328587678491,
+          "center_depth": 58,
+          "max_atom_mass": 0.9040988434211951,
+          "start_depth": 54,
+          "stop_depth": 61,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.693966668110942,
+          "arithmetic_window_mass": 0.6620762528975824,
+          "center_depth": 59,
+          "max_atom_mass": 0.9040988434211951,
+          "start_depth": 55,
+          "stop_depth": 62,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 0.6788864436494179,
+          "arithmetic_window_mass": 0.6851681895881699,
+          "center_depth": 60,
+          "max_atom_mass": 0.9040988434211951,
+          "start_depth": 56,
+          "stop_depth": 63,
+          "window_width": 8
+        }
+      ]
+    },
+    {
+      "allowed_atom_mass_bound": 1.0,
+      "allowed_window_mass_bound": 1.0,
+      "bounded_by_abel_windows": false,
+      "bounded_by_envelope": false,
+      "checks": {
+        "bad_profile_violation_visible": true,
+        "expected_bounded_classification": true,
+        "finite_nonnegative_shell_masses": true,
+        "promotion_false": true,
+        "window_rows_present": true
+      },
+      "classification": "bad_unbounded_counterprofile",
+      "description": "Deliberately bad profile: envelope ratio grows exponentially with depth.",
+      "expected_bounded": false,
+      "max_abel_window_mass": 3176428.3093091333,
+      "max_arithmetic_window_mass": 3286962.9492186597,
+      "max_envelope_ratio": 2592.269504451133,
+      "max_proxy_mass_atom": 6719861.183707323,
+      "mean_abel_window_mass": 252345.27729456767,
+      "name": "bad_supercritical_growth",
+      "shell_rows": [
+        {
+          "depth": 0,
+          "envelope_l2": 1.0,
+          "envelope_ratio": 1.0,
+          "proxy_mass_atom": 1.0,
+          "shell": 1,
+          "shell_l2_energy": 1.0
+        },
+        {
+          "depth": 1,
+          "envelope_l2": 0.7071067811865476,
+          "envelope_ratio": 1.1328838852957985,
+          "proxy_mass_atom": 1.2834258975629043,
+          "shell": 2,
+          "shell_l2_energy": 0.8010698775896221
+        },
+        {
+          "depth": 2,
+          "envelope_l2": 0.5,
+          "envelope_ratio": 1.2834258975629043,
+          "proxy_mass_atom": 1.6471820345351464,
+          "shell": 4,
+          "shell_l2_energy": 0.6417129487814521
+        },
+        {
+          "depth": 3,
+          "envelope_l2": 0.3535533905932738,
+          "envelope_ratio": 1.4539725173203106,
+          "proxy_mass_atom": 2.114036081122761,
+          "shell": 8,
+          "shell_l2_energy": 0.5140569133280333
+        },
+        {
+          "depth": 4,
+          "envelope_l2": 0.25,
+          "envelope_ratio": 1.6471820345351462,
+          "proxy_mass_atom": 2.7132086548953436,
+          "shell": 16,
+          "shell_l2_energy": 0.41179550863378656
+        },
+        {
+          "depth": 5,
+          "envelope_l2": 0.1767766952966369,
+          "envelope_ratio": 1.8660659830736148,
+          "proxy_mass_atom": 3.4822022531844974,
+          "shell": 32,
+          "shell_l2_energy": 0.3298769776932236
+        },
+        {
+          "depth": 6,
+          "envelope_l2": 0.125,
+          "envelope_ratio": 2.114036081122761,
+          "proxy_mass_atom": 4.469148552288881,
+          "shell": 64,
+          "shell_l2_energy": 0.2642545101403451
+        },
+        {
+          "depth": 7,
+          "envelope_l2": 0.08838834764831845,
+          "envelope_ratio": 2.394957409237857,
+          "proxy_mass_atom": 5.735820992063309,
+          "shell": 128,
+          "shell_l2_energy": 0.2116863280906318
+        },
+        {
+          "depth": 8,
+          "envelope_l2": 0.0625,
+          "envelope_ratio": 2.7132086548953436,
+          "proxy_mass_atom": 7.361501204999,
+          "shell": 256,
+          "shell_l2_energy": 0.16957554093095897
+        },
+        {
+          "depth": 9,
+          "envelope_l2": 0.04419417382415922,
+          "envelope_ratio": 3.0737503625760243,
+          "proxy_mass_atom": 9.44794129143624,
+          "shell": 512,
+          "shell_l2_energy": 0.13584185781575725
+        },
+        {
+          "depth": 10,
+          "envelope_l2": 0.03125,
+          "envelope_ratio": 3.482202253184496,
+          "proxy_mass_atom": 12.12573253208318,
+          "shell": 1024,
+          "shell_l2_energy": 0.1088188204120155
+        },
+        {
+          "depth": 11,
+          "envelope_l2": 0.02209708691207961,
+          "envelope_ratio": 3.944930817973437,
+          "proxy_mass_atom": 15.562479158596572,
+          "shell": 2048,
+          "shell_l2_energy": 0.08717147914690035
+        },
+        {
+          "depth": 12,
+          "envelope_l2": 0.015625,
+          "envelope_ratio": 4.46914855228888,
+          "proxy_mass_atom": 19.973288782425794,
+          "shell": 4096,
+          "shell_l2_energy": 0.06983044612951375
+        },
+        {
+          "depth": 13,
+          "envelope_l2": 0.011048543456039806,
+          "envelope_ratio": 5.063026375881119,
+          "proxy_mass_atom": 25.6342360828679,
+          "shell": 8192,
+          "shell_l2_energy": 0.05593906693299827
+        },
+        {
+          "depth": 14,
+          "envelope_l2": 0.0078125,
+          "envelope_ratio": 5.735820992063309,
+          "proxy_mass_atom": 32.89964245299412,
+          "shell": 16384,
+          "shell_l2_energy": 0.0448111015004946
+        },
+        {
+          "depth": 15,
+          "envelope_l2": 0.005524271728019903,
+          "envelope_ratio": 6.498019170849883,
+          "proxy_mass_atom": 42.22425314473261,
+          "shell": 32768,
+          "shell_l2_energy": 0.03589682359365734
+        },
+        {
+          "depth": 16,
+          "envelope_l2": 0.00390625,
+          "envelope_ratio": 7.3615012049990005,
+          "proxy_mass_atom": 54.19169999120174,
+          "shell": 65536,
+          "shell_l2_energy": 0.028755864082027346
+        },
+        {
+          "depth": 17,
+          "envelope_l2": 0.0027621358640099515,
+          "envelope_ratio": 8.339726086728971,
+          "proxy_mass_atom": 69.55103120166774,
+          "shell": 131072,
+          "shell_l2_energy": 0.02303545652017346
+        },
+        {
+          "depth": 18,
+          "envelope_l2": 0.001953125,
+          "envelope_ratio": 9.447941291436242,
+          "proxy_mass_atom": 89.26359464642593,
+          "shell": 262144,
+          "shell_l2_energy": 0.01845301033483641
+        },
+        {
+          "depth": 19,
+          "envelope_l2": 0.0013810679320049757,
+          "envelope_ratio": 10.703420438288896,
+          "proxy_mass_atom": 114.56320907878049,
+          "shell": 524288,
+          "shell_l2_energy": 0.014782150730087438
+        },
+        {
+          "depth": 20,
+          "envelope_l2": 0.0009765625,
+          "envelope_ratio": 12.125732532083182,
+          "proxy_mass_atom": 147.0333894396204,
+          "shell": 1048576,
+          "shell_l2_energy": 0.011841535675862483
+        },
+        {
+          "depth": 21,
+          "envelope_l2": 0.0006905339660024879,
+          "envelope_ratio": 13.737046983004058,
+          "proxy_mass_atom": 188.70645981326092,
+          "shell": 2097152,
+          "shell_l2_energy": 0.009485897534336303
+        },
+        {
+          "depth": 22,
+          "envelope_l2": 0.00048828125,
+          "envelope_ratio": 15.562479158596568,
+          "proxy_mass_atom": 242.19075756175255,
+          "shell": 4194304,
+          "shell_l2_energy": 0.007598866776658481
+        },
+        {
+          "depth": 23,
+          "envelope_l2": 0.00034526698300124393,
+          "envelope_ratio": 17.630481854025767,
+          "proxy_mass_atom": 310.83389040513185,
+          "shell": 8388608,
+          "shell_l2_energy": 0.006087223278597654
+        },
+        {
+          "depth": 24,
+          "envelope_l2": 0.000244140625,
+          "envelope_ratio": 19.973288782425794,
+          "proxy_mass_atom": 398.93226478617606,
+          "shell": 16777216,
+          "shell_l2_energy": 0.004876291206646922
+        },
+        {
+          "depth": 25,
+          "envelope_l2": 0.00017263349150062197,
+          "envelope_ratio": 22.627416997969522,
+          "proxy_mass_atom": 512.0000000000002,
+          "shell": 33554432,
+          "shell_l2_energy": 0.003906250000000001
+        },
+        {
+          "depth": 26,
+          "envelope_l2": 0.0001220703125,
+          "envelope_ratio": 25.6342360828679,
+          "proxy_mass_atom": 657.1140595522066,
+          "shell": 67108864,
+          "shell_l2_energy": 0.0031291792093344605
+        },
+        {
+          "depth": 27,
+          "envelope_l2": 8.631674575031098e-05,
+          "envelope_ratio": 29.040612970149137,
+          "proxy_mass_atom": 843.3572016819944,
+          "shell": 134217728,
+          "shell_l2_energy": 0.0025066912061775465
+        },
+        {
+          "depth": 28,
+          "envelope_l2": 6.103515625e-05,
+          "envelope_ratio": 32.89964245299413,
+          "proxy_mass_atom": 1082.3864735348536,
+          "shell": 268435456,
+          "shell_l2_energy": 0.00200803481768763
+        },
+        {
+          "depth": 29,
+          "envelope_l2": 4.315837287515549e-05,
+          "envelope_ratio": 37.27147476699058,
+          "proxy_mass_atom": 1389.1628313064157,
+          "shell": 536870912,
+          "shell_l2_energy": 0.0016085762056007285
+        },
+        {
+          "depth": 30,
+          "envelope_l2": 3.0517578125e-05,
+          "envelope_ratio": 42.2242531447326,
+          "proxy_mass_atom": 1782.8875536304608,
+          "shell": 1073741824,
+          "shell_l2_energy": 0.001288581944114154
+        },
+        {
+          "depth": 31,
+          "envelope_l2": 2.1579186437577746e-05,
+          "envelope_ratio": 47.83517595631803,
+          "proxy_mass_atom": 2288.204058771907,
+          "shell": 2147483648,
+          "shell_l2_energy": 0.0010322441802357231
+        },
+        {
+          "depth": 32,
+          "envelope_l2": 1.52587890625e-05,
+          "envelope_ratio": 54.19169999120173,
+          "proxy_mass_atom": 2936.7403479364134,
+          "shell": 4294967296,
+          "shell_l2_energy": 0.0008268997191040303
+        },
+        {
+          "depth": 33,
+          "envelope_l2": 1.0789593218788873e-05,
+          "envelope_ratio": 61.3929036368169,
+          "proxy_mass_atom": 3769.0886169594855,
+          "shell": 8589934592,
+          "shell_l2_energy": 0.0006624044567615583
+        },
+        {
+          "depth": 34,
+          "envelope_l2": 7.62939453125e-06,
+          "envelope_ratio": 69.55103120166773,
+          "proxy_mass_atom": 4837.345941215358,
+          "shell": 17179869184,
+          "shell_l2_energy": 0.0005306322570928019
+        },
+        {
+          "depth": 35,
+          "envelope_l2": 5.3947966093944364e-06,
+          "envelope_ratio": 78.79324245407463,
+          "proxy_mass_atom": 6208.375056426588,
+          "shell": 34359738368,
+          "shell_l2_energy": 0.00042507351723443555
+        },
+        {
+          "depth": 36,
+          "envelope_l2": 3.814697265625e-06,
+          "envelope_ratio": 89.26359464642591,
+          "proxy_mass_atom": 7967.989329201438,
+          "shell": 68719476736,
+          "shell_l2_energy": 0.0003405135904175793
+        },
+        {
+          "depth": 37,
+          "envelope_l2": 2.6973983046972182e-06,
+          "envelope_ratio": 101.12528791851229,
+          "proxy_mass_atom": 10226.32385660201,
+          "shell": 137438953472,
+          "shell_l2_energy": 0.00027277518019341315
+        },
+        {
+          "depth": 38,
+          "envelope_l2": 1.9073486328125e-06,
+          "envelope_ratio": 114.56320907878046,
+          "proxy_mass_atom": 13124.728874428365,
+          "shell": 274877906944,
+          "shell_l2_energy": 0.0002185119802070245
+        },
+        {
+          "depth": 39,
+          "envelope_l2": 1.3486991523486091e-06,
+          "envelope_ratio": 129.7868134131237,
+          "proxy_mass_atom": 16844.616935932987,
+          "shell": 549755813888,
+          "shell_l2_energy": 0.00017504336523630702
+        },
+        {
+          "depth": 40,
+          "envelope_l2": 9.5367431640625e-07,
+          "envelope_ratio": 147.0333894396204,
+          "proxy_mass_atom": 21618.817610103077,
+          "shell": 1099511627776,
+          "shell_l2_energy": 0.00014022196716272393
+        },
+        {
+          "depth": 41,
+          "envelope_l2": 6.743495761743046e-07,
+          "envelope_ratio": 166.57175749656747,
+          "proxy_mass_atom": 27746.150395495282,
+          "shell": 2199023255552,
+          "shell_l2_energy": 0.0001123275940704193
+        },
+        {
+          "depth": 42,
+          "envelope_l2": 4.76837158203125e-07,
+          "envelope_ratio": 188.7064598132609,
+          "proxy_mass_atom": 35610.12797525385,
+          "shell": 4398046511104,
+          "shell_l2_energy": 8.998225203192753e-05
+        },
+        {
+          "depth": 43,
+          "envelope_l2": 3.371747880871523e-07,
+          "envelope_ratio": 213.78250737366247,
+          "proxy_mass_atom": 45702.96045897006,
+          "shell": 8796093022208,
+          "shell_l2_energy": 7.208207162045472e-05
+        },
+        {
+          "depth": 44,
+          "envelope_l2": 2.384185791015625e-07,
+          "envelope_ratio": 242.19075756175255,
+          "proxy_mass_atom": 58656.363048335596,
+          "shell": 17592186044416,
+          "shell_l2_energy": 5.7742776289404046e-05
+        },
+        {
+          "depth": 45,
+          "envelope_l2": 1.6858739404357614e-07,
+          "envelope_ratio": 274.374006409291,
+          "proxy_mass_atom": 75281.09539308565,
+          "shell": 35184372088832,
+          "shell_l2_energy": 4.625599873383782e-05
+        },
+        {
+          "depth": 46,
+          "envelope_l2": 1.1920928955078125e-07,
+          "envelope_ratio": 310.83389040513185,
+          "proxy_mass_atom": 96617.70742438952,
+          "shell": 70368744177664,
+          "shell_l2_energy": 3.705428724350117e-05
+        },
+        {
+          "depth": 47,
+          "envelope_l2": 8.429369702178807e-08,
+          "envelope_ratio": 352.13870544377414,
+          "proxy_mass_atom": 124001.66787161714,
+          "shell": 140737488355328,
+          "shell_l2_energy": 2.968307334632217e-05
+        },
+        {
+          "depth": 48,
+          "envelope_l2": 5.960464477539063e-08,
+          "envelope_ratio": 398.93226478617606,
+          "proxy_mass_atom": 159146.95188742768,
+          "shell": 281474976710656,
+          "shell_l2_energy": 2.37782159320221e-05
+        },
+        {
+          "depth": 49,
+          "envelope_l2": 4.2146848510894035e-08,
+          "envelope_ratio": 451.9439341008154,
+          "proxy_mass_atom": 204253.3195705222,
+          "shell": 562949953421312,
+          "shell_l2_energy": 1.9048012525964544e-05
+        },
+        {
+          "depth": 50,
+          "envelope_l2": 2.9802322387695312e-08,
+          "envelope_ratio": 512.0,
+          "proxy_mass_atom": 262144.0,
+          "shell": 1125899906842624,
+          "shell_l2_energy": 1.52587890625e-05
+        },
+        {
+          "depth": 51,
+          "envelope_l2": 2.1073424255447017e-08,
+          "envelope_ratio": 580.0365492714487,
+          "proxy_mass_atom": 336442.3984907298,
+          "shell": 2251799813685248,
+          "shell_l2_energy": 1.2223356286462736e-05
+        },
+        {
+          "depth": 52,
+          "envelope_l2": 1.4901161193847656e-08,
+          "envelope_ratio": 657.1140595522066,
+          "proxy_mass_atom": 431798.88726118096,
+          "shell": 4503599627370496,
+          "shell_l2_energy": 9.79176252413104e-06
+        },
+        {
+          "depth": 53,
+          "envelope_l2": 1.0536712127723509e-08,
+          "envelope_ratio": 744.4339288679986,
+          "proxy_mass_atom": 554181.8744498446,
+          "shell": 9007199254740992,
+          "shell_l2_energy": 7.843886006592301e-06
+        },
+        {
+          "depth": 54,
+          "envelope_l2": 7.450580596923828e-09,
+          "envelope_ratio": 843.3572016819942,
+          "proxy_mass_atom": 711251.3696288838,
+          "shell": 18014398509481984,
+          "shell_l2_energy": 6.2835008031278415e-06
+        },
+        {
+          "depth": 55,
+          "envelope_l2": 5.268356063861754e-09,
+          "envelope_ratio": 955.425783333691,
+          "proxy_mass_atom": 912838.4274587972,
+          "shell": 36028797018963968,
+          "shell_l2_energy": 5.033523219195918e-06
+        },
+        {
+          "depth": 56,
+          "envelope_l2": 3.725290298461914e-09,
+          "envelope_ratio": 1082.3864735348536,
+          "proxy_mass_atom": 1171560.4780912164,
+          "shell": 72057594037927936,
+          "shell_l2_energy": 4.0322038290457935e-06
+        },
+        {
+          "depth": 57,
+          "envelope_l2": 2.634178031930877e-09,
+          "envelope_ratio": 1226.2181935297829,
+          "proxy_mass_atom": 1503611.0581434441,
+          "shell": 144115188075855872,
+          "shell_l2_energy": 3.230077027750119e-06
+        },
+        {
+          "depth": 58,
+          "envelope_l2": 1.862645149230957e-09,
+          "envelope_ratio": 1389.1628313064155,
+          "proxy_mass_atom": 1929773.3718832566,
+          "shell": 288230376151711744,
+          "shell_l2_energy": 2.587517409224837e-06
+        },
+        {
+          "depth": 59,
+          "envelope_l2": 1.3170890159654386e-09,
+          "envelope_ratio": 1573.7601856389238,
+          "proxy_mass_atom": 2476721.12190226,
+          "shell": 576460752303423488,
+          "shell_l2_energy": 2.072782254268756e-06
+        },
+        {
+          "depth": 60,
+          "envelope_l2": 9.313225746154785e-10,
+          "envelope_ratio": 1782.8875536304608,
+          "proxy_mass_atom": 3178688.0288904095,
+          "shell": 1152921504606846976,
+          "shell_l2_energy": 1.6604434266970128e-06
+        },
+        {
+          "depth": 61,
+          "envelope_l2": 6.585445079827193e-10,
+          "envelope_ratio": 2019.8045788024,
+          "proxy_mass_atom": 4079610.536551141,
+          "shell": 2305843009213693952,
+          "shell_l2_energy": 1.33013121256867e-06
+        },
+        {
+          "depth": 62,
+          "envelope_l2": 4.656612873077393e-10,
+          "envelope_ratio": 2288.2040587719066,
+          "proxy_mass_atom": 5235877.814580227,
+          "shell": 4611686018427387904,
+          "shell_l2_energy": 1.0655280476305199e-06
+        },
+        {
+          "depth": 63,
+          "envelope_l2": 3.2927225399135965e-10,
+          "envelope_ratio": 2592.269504451133,
+          "proxy_mass_atom": 6719861.183707323,
+          "shell": 9223372036854775808,
+          "shell_l2_energy": 8.535624226836894e-07
+        }
+      ],
+      "window_rows": [
+        {
+          "abel_weighted_mass": 2.7112798431749607,
+          "arithmetic_window_mass": 2.8056280582066053,
+          "center_depth": 4,
+          "max_atom_mass": 5.735820992063309,
+          "start_depth": 0,
+          "stop_depth": 7,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 3.479726766271034,
+          "arithmetic_window_mass": 3.6008157088314805,
+          "center_depth": 5,
+          "max_atom_mass": 7.361501204999,
+          "start_depth": 1,
+          "stop_depth": 8,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 4.465971448275064,
+          "arithmetic_window_mass": 4.621380133065648,
+          "center_depth": 6,
+          "max_atom_mass": 9.44794129143624,
+          "start_depth": 2,
+          "stop_depth": 9,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 5.731743414492726,
+          "arithmetic_window_mass": 5.931198945259151,
+          "center_depth": 7,
+          "max_atom_mass": 12.12573253208318,
+          "start_depth": 3,
+          "stop_depth": 10,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 7.356267936345593,
+          "arithmetic_window_mass": 7.612254329943378,
+          "center_depth": 8,
+          "max_atom_mass": 15.562479158596572,
+          "start_depth": 4,
+          "stop_depth": 11,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 9.441224778917556,
+          "arithmetic_window_mass": 9.769764345884685,
+          "center_depth": 9,
+          "max_atom_mass": 19.973288782425794,
+          "start_depth": 5,
+          "stop_depth": 12,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 12.117112385975396,
+          "arithmetic_window_mass": 12.53876857459511,
+          "center_depth": 10,
+          "max_atom_mass": 25.6342360828679,
+          "start_depth": 6,
+          "stop_depth": 13,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 15.551415839841056,
+          "arithmetic_window_mass": 16.092580312183266,
+          "center_depth": 11,
+          "max_atom_mass": 32.89964245299412,
+          "start_depth": 7,
+          "stop_depth": 14,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 19.95908983262197,
+          "arithmetic_window_mass": 20.65363433126693,
+          "center_depth": 12,
+          "max_atom_mass": 42.22425314473261,
+          "start_depth": 8,
+          "stop_depth": 15,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 25.61601278297149,
+          "arithmetic_window_mass": 26.507409179542268,
+          "center_depth": 13,
+          "max_atom_mass": 54.19169999120174,
+          "start_depth": 9,
+          "stop_depth": 16,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 32.87625419796802,
+          "arithmetic_window_mass": 34.020295418321204,
+          "center_depth": 14,
+          "max_atom_mass": 69.55103120166774,
+          "start_depth": 10,
+          "stop_depth": 17,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 42.19423605253329,
+          "arithmetic_window_mass": 43.662528182614054,
+          "center_depth": 15,
+          "max_atom_mass": 89.26359464642593,
+          "start_depth": 11,
+          "stop_depth": 18,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 54.153175277703596,
+          "arithmetic_window_mass": 56.03761942263704,
+          "center_depth": 16,
+          "max_atom_mass": 114.56320907878049,
+          "start_depth": 12,
+          "stop_depth": 19,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 69.50158758666801,
+          "arithmetic_window_mass": 71.92013200478637,
+          "center_depth": 17,
+          "max_atom_mass": 147.0333894396204,
+          "start_depth": 13,
+          "stop_depth": 20,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 89.20013743046619,
+          "arithmetic_window_mass": 92.3041599710855,
+          "center_depth": 18,
+          "max_atom_mass": 188.70645981326092,
+          "start_depth": 14,
+          "stop_depth": 21,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 114.48176644443048,
+          "arithmetic_window_mass": 118.4655493596803,
+          "center_depth": 19,
+          "max_atom_mass": 242.19075756175255,
+          "start_depth": 15,
+          "stop_depth": 22,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 146.92886385352995,
+          "arithmetic_window_mass": 152.0417540172302,
+          "center_depth": 20,
+          "max_atom_mass": 310.83389040513185,
+          "start_depth": 16,
+          "stop_depth": 23,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 188.57230896911443,
+          "arithmetic_window_mass": 195.134324616602,
+          "center_depth": 21,
+          "max_atom_mass": 398.93226478617606,
+          "start_depth": 17,
+          "stop_depth": 24,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 242.018584894195,
+          "arithmetic_window_mass": 250.44044571639355,
+          "center_depth": 22,
+          "max_atom_mass": 512.0000000000002,
+          "start_depth": 18,
+          "stop_depth": 25,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 310.6129195447361,
+          "arithmetic_window_mass": 321.42175382961614,
+          "center_depth": 23,
+          "max_atom_mass": 657.1140595522066,
+          "start_depth": 19,
+          "stop_depth": 26,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 398.64866506133706,
+          "arithmetic_window_mass": 412.5210029050179,
+          "center_depth": 24,
+          "max_atom_mass": 843.3572016819944,
+          "start_depth": 20,
+          "stop_depth": 27,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 511.63602076860013,
+          "arithmetic_window_mass": 529.4401384169221,
+          "center_depth": 25,
+          "max_atom_mass": 1082.3864735348536,
+          "start_depth": 21,
+          "stop_depth": 28,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 656.6469191804533,
+          "arithmetic_window_mass": 679.4971848535664,
+          "center_depth": 26,
+          "max_atom_mass": 1389.1628313064157,
+          "start_depth": 22,
+          "stop_depth": 29,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 842.7576616310889,
+          "arithmetic_window_mass": 872.0842843621549,
+          "center_depth": 27,
+          "max_atom_mass": 1782.8875536304608,
+          "start_depth": 23,
+          "stop_depth": 30,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1081.6170083068948,
+          "arithmetic_window_mass": 1119.2555554080018,
+          "center_depth": 28,
+          "max_atom_mass": 2288.204058771907,
+          "start_depth": 24,
+          "stop_depth": 31,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1388.1752797055794,
+          "arithmetic_window_mass": 1436.4815658017815,
+          "center_depth": 29,
+          "max_atom_mass": 2936.7403479364134,
+          "start_depth": 25,
+          "stop_depth": 32,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1781.6201043307688,
+          "arithmetic_window_mass": 1843.617642921717,
+          "center_depth": 30,
+          "max_atom_mass": 3769.0886169594855,
+          "start_depth": 26,
+          "stop_depth": 33,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 2286.5773815168322,
+          "arithmetic_window_mass": 2366.146628129611,
+          "center_depth": 31,
+          "max_atom_mass": 4837.345941215358,
+          "start_depth": 27,
+          "stop_depth": 34,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 2934.652628220276,
+          "arithmetic_window_mass": 3036.7738599726854,
+          "center_depth": 32,
+          "max_atom_mass": 6208.375056426588,
+          "start_depth": 28,
+          "stop_depth": 35,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 3766.4091834089427,
+          "arithmetic_window_mass": 3897.4742169310084,
+          "center_depth": 33,
+          "max_atom_mass": 7967.989329201438,
+          "start_depth": 29,
+          "stop_depth": 36,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 4833.907086805788,
+          "arithmetic_window_mass": 5002.119345092958,
+          "center_depth": 34,
+          "max_atom_mass": 10226.32385660201,
+          "start_depth": 30,
+          "stop_depth": 37,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 6203.961541619402,
+          "arithmetic_window_mass": 6419.849510192696,
+          "center_depth": 35,
+          "max_atom_mass": 13124.728874428365,
+          "start_depth": 31,
+          "stop_depth": 38,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 7962.32490999862,
+          "arithmetic_window_mass": 8239.40111983783,
+          "center_depth": 36,
+          "max_atom_mass": 16844.616935932987,
+          "start_depth": 32,
+          "stop_depth": 39,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 10219.053994302447,
+          "arithmetic_window_mass": 10574.660777608664,
+          "center_depth": 37,
+          "max_atom_mass": 21618.817610103077,
+          "start_depth": 33,
+          "stop_depth": 40,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 13115.3985448814,
+          "arithmetic_window_mass": 13571.793499925638,
+          "center_depth": 38,
+          "max_atom_mass": 27746.150395495282,
+          "start_depth": 34,
+          "stop_depth": 41,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 16832.642149359617,
+          "arithmetic_window_mass": 17418.39125418045,
+          "center_depth": 39,
+          "max_atom_mass": 35610.12797525385,
+          "start_depth": 35,
+          "stop_depth": 42,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 21603.448858897038,
+          "arithmetic_window_mass": 22355.214429498385,
+          "center_depth": 40,
+          "max_atom_mass": 45702.96045897006,
+          "start_depth": 36,
+          "stop_depth": 43,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 27726.42574218423,
+          "arithmetic_window_mass": 28691.26114439015,
+          "center_depth": 41,
+          "max_atom_mass": 58656.363048335596,
+          "start_depth": 37,
+          "stop_depth": 44,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 35584.812844374006,
+          "arithmetic_window_mass": 36823.107586450606,
+          "center_depth": 42,
+          "max_atom_mass": 75281.09539308565,
+          "start_depth": 38,
+          "stop_depth": 45,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 45670.470364398665,
+          "arithmetic_window_mass": 47259.72990519575,
+          "center_depth": 43,
+          "max_atom_mass": 96617.70742438952,
+          "start_depth": 39,
+          "stop_depth": 46,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 58614.66441954837,
+          "arithmetic_window_mass": 60654.361272156275,
+          "center_depth": 44,
+          "max_atom_mass": 124001.66787161714,
+          "start_depth": 40,
+          "stop_depth": 47,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 75227.5782930073,
+          "arithmetic_window_mass": 77845.37805682185,
+          "center_depth": 45,
+          "max_atom_mass": 159146.95188742768,
+          "start_depth": 41,
+          "stop_depth": 48,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 96549.02219218656,
+          "arithmetic_window_mass": 99908.77420370022,
+          "center_depth": 46,
+          "max_atom_mass": 204253.3195705222,
+          "start_depth": 42,
+          "stop_depth": 49,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 123913.5154658278,
+          "arithmetic_window_mass": 128225.50820679349,
+          "center_depth": 47,
+          "max_atom_mass": 262144.0,
+          "start_depth": 43,
+          "stop_depth": 50,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 159033.81480690488,
+          "arithmetic_window_mass": 164567.93796076346,
+          "center_depth": 48,
+          "max_atom_mass": 336442.3984907298,
+          "start_depth": 44,
+          "stop_depth": 51,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 204108.11651140457,
+          "arithmetic_window_mass": 211210.75348736913,
+          "center_depth": 49,
+          "max_atom_mass": 431798.88726118096,
+          "start_depth": 45,
+          "stop_depth": 52,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 261957.6426335232,
+          "arithmetic_window_mass": 271073.350869464,
+          "center_depth": 50,
+          "max_atom_mass": 554181.8744498446,
+          "start_depth": 46,
+          "stop_depth": 53,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 336203.2226203919,
+          "arithmetic_window_mass": 347902.55864502577,
+          "center_depth": 51,
+          "max_atom_mass": 711251.3696288838,
+          "start_depth": 47,
+          "stop_depth": 54,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 431491.9227551174,
+          "arithmetic_window_mass": 446507.1535934233,
+          "center_depth": 52,
+          "max_atom_mass": 912838.4274587972,
+          "start_depth": 48,
+          "stop_depth": 55,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 553787.9082531299,
+          "arithmetic_window_mass": 573058.8443688969,
+          "center_depth": 53,
+          "max_atom_mass": 1171560.4780912164,
+          "start_depth": 49,
+          "stop_depth": 56,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 710745.7432092567,
+          "arithmetic_window_mass": 735478.5616905121,
+          "center_depth": 54,
+          "max_atom_mass": 1503611.0581434441,
+          "start_depth": 50,
+          "stop_depth": 57,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 912189.4934173536,
+          "arithmetic_window_mass": 943932.2331759192,
+          "center_depth": 55,
+          "max_atom_mass": 1929773.3718832566,
+          "start_depth": 51,
+          "stop_depth": 58,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1170727.6193366179,
+          "arithmetic_window_mass": 1211467.0736023604,
+          "center_depth": 56,
+          "max_atom_mass": 2476721.12190226,
+          "start_depth": 52,
+          "stop_depth": 59,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1502542.1456487805,
+          "arithmetic_window_mass": 1554828.216306014,
+          "center_depth": 57,
+          "max_atom_mass": 3178688.0288904095,
+          "start_depth": 53,
+          "stop_depth": 60,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 1928401.5019053784,
+          "arithmetic_window_mass": 1995506.799068676,
+          "center_depth": 58,
+          "max_atom_mass": 4079610.536551141,
+          "start_depth": 54,
+          "stop_depth": 61,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 2474960.428444563,
+          "arithmetic_window_mass": 2561085.104687594,
+          "center_depth": 59,
+          "max_atom_mass": 5235877.814580227,
+          "start_depth": 55,
+          "stop_depth": 62,
+          "window_width": 8
+        },
+        {
+          "abel_weighted_mass": 3176428.3093091333,
+          "arithmetic_window_mass": 3286962.9492186597,
+          "center_depth": 60,
+          "max_atom_mass": 6719861.183707323,
+          "start_depth": 56,
+          "stop_depth": 63,
+          "window_width": 8
+        }
+      ]
+    }
+  ],
+  "promotion": false,
+  "summary": {
+    "allowed_window_mass_bound": 1.0,
+    "bad_profiles": 1,
+    "bounded_profiles": 3,
+    "max_bad_abel_window_mass": 3176428.3093091333,
+    "max_bounded_abel_window_mass": 1.0000000000000002,
+    "ok": true,
+    "profiles": 4
+  }
+}

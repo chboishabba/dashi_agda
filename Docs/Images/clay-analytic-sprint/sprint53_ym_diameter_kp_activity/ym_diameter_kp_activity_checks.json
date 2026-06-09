@@ -1,0 +1,23 @@
+{
+  "pass": false,
+  "finite_prefix_rows_passing": 2,
+  "literal_branch_rows_passing": 0,
+  "unit_plaquette_literal_branch_rows_passing": 0,
+  "unit_plaquette_suppressive_branch_rows_passing": 5,
+  "contour_branch_rows_passing": 2,
+  "best_contour_branch_d1": 0.23178189475262734,
+  "carrier_beta": 16.7,
+  "carrier_contour_branch_d1": 0.23178189475262734,
+  "carrier_literal_branch_d1": 7.859417174466245,
+  "carrier_unit_plaquette_literal_branch_d1": 7.999999552933488,
+  "carrier_unit_plaquette_suppressive_branch_d1": 4.470665114014614e-07,
+  "corrected_beta_threshold_same_prime_p": 10.107066731633527,
+  "bt_branch_beta_threshold": 10.658849345784446,
+  "all_diameter_certified": false,
+  "balaban_rg_transfer_certified": false,
+  "proof_gate_pass": false,
+  "continuum_yang_mills_promoted": false,
+  "clay_yang_mills_promoted": false,
+  "promotion_status": "NO_PROMOTION_DIAGNOSTIC_ONLY",
+  "boundary": "Sprint 53 computes diameter-1/2 literal Wilson-defect activity and the contour/action KP envelope. It is finite-prefix evidence only; all-diameter KP, Balaban transfer, continuum YM, mass gap, and Clay promotion remain unproved."
+}

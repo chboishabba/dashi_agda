@@ -1,0 +1,65 @@
+[
+  {
+    "actual": "encoded",
+    "evidence": "{\"biot_savart_kernel\": \"axisymmetric 5D Poisson kernel for psi1 with no logarithmic loss recorded\", \"no_log_axisymmetric_biot_savart\": true, \"omega1_equation\": \"partial_t omega1 + u^r partial_r omega1 + u^z partial_z omega1 = nu (partial_r^2 + (3/r) partial_r + partial_z^2) omega1 + partial_z(u1^2)\", \"omega1_source\": \"partial_z(u1^2)\", \"omega1_source_term\": \"partial_z(u1^2) = 2 u1 partial_z u1\", \"pure_diffusion_u1\": true, \"stream_equation\": \"-(partial_r^2 + (3/r) partial_r + partial_z^2) psi1 = omega1\", \"transport_velocity\": {\"u_r\": \"-r partial_z psi1\", \"u_z\": \"2 psi1 + r partial_r psi1\"}, \"u1_equation\": \"partial_t u1 + u^r partial_r u1 + u^z partial_z u1 = nu (partial_r^2 + (3/r) partial_r + partial_z^2) u1\", \"u1_source\": \"0\", \"variables\": {\"omega1\": \"omega^theta / r\", \"psi1\": \"psi^theta / r\", \"u1\": \"u^theta / r\"}}",
+    "expected": "u1/omega1/psi1 equations and velocity reconstruction encoded",
+    "gate": "ExactAxisymmetricSwirlPDEFacts",
+    "passed": true
+  },
+  {
+    "actual": "true",
+    "evidence": "u1 source term is 0",
+    "expected": "true for exact swirl PDE",
+    "gate": "PureDiffusionOfU1Claim",
+    "passed": true
+  },
+  {
+    "actual": "partial_z(u1^2)",
+    "evidence": "partial_t omega1 + u^r partial_r omega1 + u^z partial_z omega1 = nu (partial_r^2 + (3/r) partial_r + partial_z^2) omega1 + partial_z(u1^2)",
+    "expected": "partial_z(u1^2)",
+    "gate": "Omega1SourceTerm",
+    "passed": true
+  },
+  {
+    "actual": "axisymmetric 5D Poisson kernel for psi1 with no logarithmic loss recorded",
+    "evidence": "-(partial_r^2 + (3/r) partial_r + partial_z^2) psi1 = omega1",
+    "expected": "no logarithmic loss recorded",
+    "gate": "NoLogAxisymmetricBiotSavart",
+    "passed": true
+  },
+  {
+    "actual": "alpha=4/3, beta=1/3",
+    "evidence": "{\"alpha\": \"4/3\", \"alpha_float\": 1.3333333333333333, \"alpha_window\": \"1 < alpha < 3/2\", \"alpha_window_passed\": true, \"beta\": \"1/3\", \"beta_float\": 0.3333333333333333, \"beta_relation\": \"beta = alpha - 1\", \"beta_relation_passed\": true, \"beta_window\": \"0 < beta < 1/2\", \"beta_window_passed\": true, \"passed\": true}",
+    "expected": "alpha in (1,3/2), beta=alpha-1 in (0,1/2)",
+    "gate": "ViscousFeasibilityWindow",
+    "passed": true
+  },
+  {
+    "actual": "unresolved",
+    "evidence": "the audit records exactly one open mathematical requirement",
+    "expected": "||u1||_inf >= c ||omega1||_inf",
+    "gate": "SingleRemainingOpenQuestion",
+    "passed": true
+  },
+  {
+    "actual": "open",
+    "evidence": "no deterministic lower bound from omega1 concentration to u1 amplitude is encoded",
+    "expected": "closed proof of ||u1||_inf >= c ||omega1||_inf",
+    "gate": "AdvectiveConcentrationVsDiffusionBound",
+    "passed": false
+  },
+  {
+    "actual": "false",
+    "evidence": "Sprint 129 remains fail-closed while AdvectiveConcentrationVsDiffusionBound is open",
+    "expected": "false",
+    "gate": "ClayNavierStokesPromotion",
+    "passed": true
+  },
+  {
+    "actual": "0",
+    "evidence": "[]",
+    "expected": "zero hits",
+    "gate": "forbidden marker scan",
+    "passed": true
+  }
+]

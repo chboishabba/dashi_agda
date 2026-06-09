@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "cauchy_schwarz_bound_ok": true,
+  "discriminant_nonpositive_ok": true,
+  "null_orthogonality_ok": true,
+  "promotion": false,
+  "quadratic_nonnegative_ok": true
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "delta_over_b": 0.4,
+    "formula": "(delta_over_b ** 2) / log(1 / delta_over_b)",
+    "obstruction_ratio": 0.17461706686996667,
+    "obstruction_ratio_normalized_to_delta_0_40": 1.0,
+    "reference_flux_budget_over_e0": 0.175,
+    "reference_normalized_to_delta_0_40": 1.0
+  },
+  {
+    "delta_over_b": 0.3,
+    "formula": "(delta_over_b ** 2) / log(1 / delta_over_b)",
+    "obstruction_ratio": 0.07475251905742836,
+    "obstruction_ratio_normalized_to_delta_0_40": 0.42809400247854834,
+    "reference_flux_budget_over_e0": 0.075,
+    "reference_normalized_to_delta_0_40": 0.4285714285714286
+  },
+  {
+    "delta_over_b": 0.2,
+    "formula": "(delta_over_b ** 2) / log(1 / delta_over_b)",
+    "obstruction_ratio": 0.024853397382384478,
+    "obstruction_ratio_normalized_to_delta_0_40": 0.14233086048165172,
+    "reference_flux_budget_over_e0": 0.025,
+    "reference_normalized_to_delta_0_40": 0.14285714285714288
+  },
+  {
+    "delta_over_b": 0.1,
+    "formula": "(delta_over_b ** 2) / log(1 / delta_over_b)",
+    "obstruction_ratio": 0.0043429448190325185,
+    "obstruction_ratio_normalized_to_delta_0_40": 0.024871250542002347,
+    "reference_flux_budget_over_e0": 0.004,
+    "reference_normalized_to_delta_0_40": 0.02285714285714286
+  },
+  {
+    "delta_over_b": 0.05,
+    "formula": "(delta_over_b ** 2) / log(1 / delta_over_b)",
+    "obstruction_ratio": 0.0008345205017383353,
+    "obstruction_ratio_normalized_to_delta_0_40": 0.004779146258136288,
+    "reference_flux_budget_over_e0": 0.0008,
+    "reference_normalized_to_delta_0_40": 0.004571428571428572
+  }
+]

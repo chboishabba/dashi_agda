@@ -1,0 +1,6 @@
+gate_id,gate_name,expected,actual,passed,status
+G1,KStarForkObstruction,true,true,True,PASS
+G2,ConditionalCriterionClosed,true,true,True,PASS
+G3,GeneralDataGateClosed,false,false,True,FALSE_RECORDED
+G4,BlowupConstructionClosed,false,false,True,FALSE_RECORDED
+G5,ClayNavierStokesPromoted,false,false,True,FALSE_RECORDED

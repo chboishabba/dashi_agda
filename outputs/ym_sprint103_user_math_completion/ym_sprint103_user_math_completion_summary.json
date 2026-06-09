@@ -1,0 +1,62 @@
+{
+  "clay_yang_mills_promoted": false,
+  "exp_minus_4": 0.01831563888873418,
+  "external_acceptance_token_available": false,
+  "inhabited_receipts_for_all_eight": true,
+  "item_count": 8,
+  "items": [
+    {
+      "category": "authority-proof-argument",
+      "inhabited_receipt_recorded": true,
+      "lemma": "BalabanCMP98LocalOscillationBound",
+      "user_supplied_math": true
+    },
+    {
+      "category": "authority-proof-argument",
+      "inhabited_receipt_recorded": true,
+      "lemma": "BalabanCMP98AveragingKernelIsProbability",
+      "user_supplied_math": true
+    },
+    {
+      "category": "authority-proof-argument",
+      "inhabited_receipt_recorded": true,
+      "lemma": "BalabanCMP116PolymerMassBound",
+      "user_supplied_math": true
+    },
+    {
+      "category": "constructive-proof-argument",
+      "inhabited_receipt_recorded": true,
+      "lemma": "GaugeCovariantDobrushinComparison",
+      "user_supplied_math": true
+    },
+    {
+      "category": "constructive-proof-argument",
+      "inhabited_receipt_recorded": true,
+      "lemma": "UniformPolymerActivityFromDobrushin",
+      "user_supplied_math": true
+    },
+    {
+      "category": "constructive-proof-argument",
+      "inhabited_receipt_recorded": true,
+      "lemma": "WC3UniformClusterSummability",
+      "user_supplied_math": true
+    },
+    {
+      "category": "continuum-proof-argument",
+      "inhabited_receipt_recorded": true,
+      "lemma": "ContinuumLimitMassGap",
+      "user_supplied_math": true
+    },
+    {
+      "category": "continuum-proof-argument",
+      "inhabited_receipt_recorded": true,
+      "lemma": "Nontrivial4DSU3YangMillsMeasure",
+      "user_supplied_math": true
+    }
+  ],
+  "route_decision": "SPRINT103_RECORDS_USER_MATH_FOR_ALL_EIGHT_NO_EXTERNAL_PROMOTION",
+  "sprint": "103-user-math-completion",
+  "su3_k11_passes": true,
+  "su3_k11_row": 0.0098876953125,
+  "user_supplied_math_for_all_eight": true
+}

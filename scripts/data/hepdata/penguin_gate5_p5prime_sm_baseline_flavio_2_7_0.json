@@ -1,0 +1,57 @@
+{
+  "artifact": "penguin_gate5_p5prime_sm_baseline_flavio_2_7_0",
+  "status": "authority_manifest_with_fail_closed_p5prime_runtime_baseline",
+  "separate_from": "penguin_gate5_sm_baseline_flavio_2_7_0.json for BR(Bs->mumu)",
+  "observable": "<P5p>(B0->K*mumu)",
+  "process": "B0 -> K*0 mu+ mu-",
+  "q2_bins_gev2": [
+    {
+      "bin": "[4,6]",
+      "sm_prediction": -0.7583138786902011,
+      "theory_uncertainty_one_sigma": 0.07524646089051247,
+      "prediction_call": "flavio.sm_prediction('<P5p>(B0->K*mumu)', 4, 6)",
+      "uncertainty_call": "flavio.sm_uncertainty('<P5p>(B0->K*mumu)', 4, 6)"
+    },
+    {
+      "bin": "[6,8]",
+      "sm_prediction": -0.8342430145843444,
+      "theory_uncertainty_one_sigma": 0.06092804199708315,
+      "prediction_call": "flavio.sm_prediction('<P5p>(B0->K*mumu)', 6, 8)",
+      "uncertainty_call": "flavio.sm_uncertainty('<P5p>(B0->K*mumu)', 6, 8)"
+    }
+  ],
+  "sm_baseline_authority": {
+    "mode": "flavio_2_7_0_bundled_data_authority_for_p5prime",
+    "flavio_version": "2.7.0",
+    "flavio_wheel_sha256": "3d5aaeb5a9df7c479949e4641ccbd2dc662cb010aabf9dda5f725a8a80813b4f",
+    "flavio_sdist_sha256": "08c9c9608ae2ee76d4097b5836e7ca2479f59f9478d0fdddb2cf01b7da4e796e",
+    "wilson_version": "2.5.2",
+    "wilson_wheel_sha256": "959e3dbd6bfefb43b3769fe07e2d8e59c153abe6796851fb91c4d18b7981799a",
+    "runtime_python": "/home/c/Documents/code/dashi_agda/.venv/bin/python"
+  },
+  "wilson_coefficients": {
+    "authority_label": "C9_SM/C10_SM b -> s mu+ mu- Wilson authority",
+    "c9_key": "C9_bsll",
+    "c10_key": "C10_bsll",
+    "accepted_authority_token_constructed_here": false
+  },
+  "form_factor_source": {
+    "label": "Bharucha-Straub-Zwicky B -> V l+l- LCSR form factors",
+    "doi": "10.1007/JHEP08(2016)098",
+    "arxiv": "1503.05534"
+  },
+  "charming_penguin_estimate": {
+    "label": "flavio bvll QCDF/nonlocal-charm interpolation",
+    "implementation_file": "flavio/physics/bdecays/bvll/qcdf_interpolate.py",
+    "implementation_sha256": "df2748de08a59a55f6584bf128b65c3a8ce62dcfa0baffc81b1e4c94997304f6",
+    "runtime_warning": "The QCDF corrections should not be trusted for q2 above 6 GeV^2",
+    "accepted_as_complete_authority": false
+  },
+  "fail_closed_flags": [
+    "noAcceptedC9C10AuthorityToken",
+    "noIndependentEOSCrossCheckBound",
+    "qcdfAboveSixGeVSquaredWarning",
+    "noAcceptedP5PrimeResidualVector",
+    "noAcceptedP5PrimeCovarianceMatrix"
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "aggregate": {
+    "case_count": 3,
+    "labels": {
+      "chaotic_or_broad_pattern": 1,
+      "stable_pattern": 1,
+      "unstable_splitting_pattern": 1
+    },
+    "mean_metrics": {
+      "chaotic_invariant_concentration_top10": 0.12500000000000003,
+      "chaotic_leakage_proxy_stationary_mean": 0.6654999999999999,
+      "chaotic_transition_entropy_normalized": 0.9525988071237104,
+      "stable_invariant_concentration_top10": 0.263326970403449,
+      "stable_leakage_proxy_stationary_mean": 0.19374681821160664,
+      "stable_transition_entropy_normalized": 0.25622997566351235
+    },
+    "separation_checks": {
+      "stable_lower_entropy_than_chaos": true,
+      "stable_lower_leakage_than_chaos": true,
+      "stable_more_concentrated_than_chaos": true,
+      "unstable_present": true
+    },
+    "separation_score": 1.0
+  },
+  "cases": [
+    {
+      "classification": "stable_transfer_concentrated_low_leakage",
+      "clay_promotion": false,
+      "metrics": {
+        "calibration_score": 0.3907237556301879,
+        "invariant_concentration_top10": 0.263326970403449,
+        "invariant_entropy_normalized": 0.9514098967483098,
+        "invariant_top1_mass": 0.18539434374152533,
+        "leakage_proxy_stationary_mean": 0.19374681821160664,
+        "mean_zero_mode_contraction": 0.8168307372626948,
+        "second_eigenvalue_modulus_proxy": 0.9686821831317216,
+        "spectral_gap_proxy": 0.03131781686827839,
+        "stationary_iterations": 468,
+        "stationary_l1_delta": 9.812983758905602e-13,
+        "trajectory_sampled_leakage_mean": 0.22301048526388878,
+        "trajectory_sampled_transition_surprise_mean": 0.8483513768197934,
+        "trajectory_visit_entropy_normalized": 0.8344654337009957,
+        "trajectory_visited_states": 19,
+        "transition_entropy_normalized": 0.25622997566351235
+      },
+      "model": {
+        "coherent_centers": [
+          0
+        ],
+        "existing_harness_reason": "gray_scott_triadic_defect_harness.py imports numpy at module import; this lane requires a pure-stdlib 10s-safe calibration path",
+        "existing_numpy_harness_used": false,
+        "kind": "synthetic_gray_scott_transfer_operator",
+        "metastable_centers": [
+          0
+        ],
+        "states": 24,
+        "stdlib_only": true
+      },
+      "ok": true,
+      "preset": "spots",
+      "promotion": false,
+      "regime_label": "stable_pattern"
+    },
+    {
+      "classification": "metastable_or_splitting_transfer",
+      "clay_promotion": false,
+      "metrics": {
+        "calibration_score": 0.3181258413562037,
+        "invariant_concentration_top10": 0.34037953227431045,
+        "invariant_entropy_normalized": 0.9342390129672252,
+        "invariant_top1_mass": 0.15238750071376822,
+        "leakage_proxy_stationary_mean": 0.39660744607426834,
+        "mean_zero_mode_contraction": 0.5133513670427203,
+        "second_eigenvalue_modulus_proxy": 0.856450912352,
+        "spectral_gap_proxy": 0.143549087648,
+        "stationary_iterations": 85,
+        "stationary_l1_delta": 7.736693230508962e-13,
+        "trajectory_sampled_leakage_mean": 0.39287202373632263,
+        "trajectory_sampled_transition_surprise_mean": 2.1386988784744028,
+        "trajectory_visit_entropy_normalized": 0.9279628209989572,
+        "trajectory_visited_states": 24,
+        "transition_entropy_normalized": 0.6054900721713792
+      },
+      "model": {
+        "coherent_centers": [
+          0,
+          12
+        ],
+        "existing_harness_reason": "gray_scott_triadic_defect_harness.py imports numpy at module import; this lane requires a pure-stdlib 10s-safe calibration path",
+        "existing_numpy_harness_used": false,
+        "kind": "synthetic_gray_scott_transfer_operator",
+        "metastable_centers": [
+          0,
+          12
+        ],
+        "states": 24,
+        "stdlib_only": true
+      },
+      "ok": true,
+      "preset": "mitosis",
+      "promotion": false,
+      "regime_label": "unstable_splitting_pattern"
+    },
+    {
+      "classification": "chaotic_transfer_diffuse_high_leakage",
+      "clay_promotion": false,
+      "metrics": {
+        "calibration_score": 0.22397679099423454,
+        "invariant_concentration_top10": 0.12500000000000003,
+        "invariant_entropy_normalized": 0.9999999999999999,
+        "invariant_top1_mass": 0.04166666666666668,
+        "leakage_proxy_stationary_mean": 0.6654999999999999,
+        "mean_zero_mode_contraction": 0.15398052669370235,
+        "second_eigenvalue_modulus_proxy": 0.2588120902591397,
+        "spectral_gap_proxy": 0.7411879097408602,
+        "stationary_iterations": 1,
+        "stationary_l1_delta": 1.3877787807814457e-16,
+        "trajectory_sampled_leakage_mean": 0.6615493764871886,
+        "trajectory_sampled_transition_surprise_mean": 3.0396724155421775,
+        "trajectory_visit_entropy_normalized": 0.9912939142445133,
+        "trajectory_visited_states": 24,
+        "transition_entropy_normalized": 0.9525988071237104
+      },
+      "model": {
+        "coherent_centers": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "existing_harness_reason": "gray_scott_triadic_defect_harness.py imports numpy at module import; this lane requires a pure-stdlib 10s-safe calibration path",
+        "existing_numpy_harness_used": false,
+        "kind": "synthetic_gray_scott_transfer_operator",
+        "metastable_centers": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "states": 24,
+        "stdlib_only": true
+      },
+      "ok": true,
+      "preset": "chaos",
+      "promotion": false,
+      "regime_label": "chaotic_or_broad_pattern"
+    }
+  ],
+  "clay_promotion": false,
+  "harness": "gray_scott_transfer_operator_calibration",
+  "inputs": {
+    "iterations": 800,
+    "presets": [
+      "spots",
+      "mitosis",
+      "chaos"
+    ],
+    "samples": 24,
+    "seed": 20260608,
+    "states": 24,
+    "trajectory_steps": 400
+  },
+  "interpretation": {
+    "claim": "transfer metrics should separate synthetic stable, unstable, and chaotic Gray-Scott-like regimes before being trusted as a measurement layer",
+    "clay_relevance": "none_direct",
+    "scope": "P1 calibration only"
+  },
+  "ok": true,
+  "promotion": false,
+  "quick": true
+}

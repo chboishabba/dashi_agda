@@ -1,0 +1,190 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3000,
+    "once": true,
+    "timeout_seconds": 3600
+  },
+  "runners": {
+    "paper7-wave8-gate12-w1-physical-carrier-category": {
+      "parent": "paper7-wave8-gate12-manager",
+      "lane": "paper7-gate1-gate2-carrier-s8/PhysicalCarrierCategory",
+      "claim": "Paper 7 wave8 LEAF WORKER gate12 W1: own exactly `PhysicalCarrierCategory`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement objects, morphisms, identities, and composition for the physical carrier category. Return code + targeted Agda validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate12-w2-prime-lane-rep-semantics": {
+      "parent": "paper7-wave8-gate12-manager",
+      "lane": "paper7-gate1-gate2-carrier-s8/PrimeLaneRepresentationSemantics",
+      "claim": "Paper 7 wave8 LEAF WORKER gate12 W2: own exactly `PrimeLaneRepresentationSemantics`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Commit p2/p3/p5/p7 representation actions and encode the Agda semantics. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate12-w3-carrier-functor-laws": {
+      "parent": "paper7-wave8-gate12-manager",
+      "lane": "paper7-gate1-gate2-carrier-s8/CarrierToPhysicsFunctorLaws",
+      "claim": "Paper 7 wave8 LEAF WORKER gate12 W3: own exactly `CarrierToPhysicsFunctorLaws`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement object map, morphism map, identity law, and composition law. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate12-w4-bump-covariance-depth": {
+      "parent": "paper7-wave8-gate12-manager",
+      "lane": "paper7-gate1-gate2-carrier-s8/PrimeBumpCovarianceAndDepthNaturality",
+      "claim": "Paper 7 wave8 LEAF WORKER gate12 W4: own exactly `PrimeBumpCovarianceAndDepthNaturality`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement prime-bump covariance and depth transition naturality. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate12-w5-s8-nat-hamiltonian": {
+      "parent": "paper7-wave8-gate12-manager",
+      "lane": "paper7-gate1-gate2-carrier-s8/S8NatEnergyHamiltonian",
+      "claim": "Paper 7 wave8 LEAF WORKER gate12 W5: own exactly `S8NatEnergyHamiltonian`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement Energy = Nat, 3/8/3 Hamiltonian, and coercivity witnesses. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate12-w6-s8-global-spectral": {
+      "parent": "paper7-wave8-gate12-manager",
+      "lane": "paper7-gate1-gate2-carrier-s8/S8GlobalSpectralBridge",
+      "claim": "Paper 7 wave8 LEAF WORKER gate12 W6: own exactly `S8GlobalSpectralBridge`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement non-vacuum witness, lower bound, or SelfAdjointYangMillsHamiltonianOnCarrierQuotient progress. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate3-w1-su2-lie-algebra": {
+      "parent": "paper7-wave8-gate3-manager",
+      "lane": "paper7-gate3-yang-mills/SU2LieAlgebra",
+      "claim": "Paper 7 wave8 LEAF WORKER gate3 W1: own exactly `SU2LieAlgebra`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement SU(2) basis, bracket, bilinearity, antisymmetry, and 27-entry Jacobi. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate3-w2-su3-structure-constants": {
+      "parent": "paper7-wave8-gate3-manager",
+      "lane": "paper7-gate3-yang-mills/SU3StructureConstants",
+      "claim": "Paper 7 wave8 LEAF WORKER gate3 W2: own exactly `SU3StructureConstants`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement SU(3) Gell-Mann basis, coefficient table, and bracket laws. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate3-w3-su3-jacobi-all-slots": {
+      "parent": "paper7-wave8-gate3-manager",
+      "lane": "paper7-gate3-yang-mills/SU3JacobiAllSlots",
+      "claim": "Paper 7 wave8 LEAF WORKER gate3 W3: own exactly `SU3JacobiAllSlots`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement 512-entry coefficient-aware Jacobi, especially allSlotCoefficientAwareResidualArithmeticField. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate3-w4-lie-forms-curvature": {
+      "parent": "paper7-wave8-gate3-manager",
+      "lane": "paper7-gate3-yang-mills/LieValuedFormsAndCurvature",
+      "claim": "Paper 7 wave8 LEAF WORKER gate3 W4: own exactly `LieValuedFormsAndCurvature`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement Lie-algebra-valued forms, D_A, F_A, and D_A^2(s) = [F_A,s]. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate3-w5-bianchi-hodge": {
+      "parent": "paper7-wave8-gate3-manager",
+      "lane": "paper7-gate3-yang-mills/BianchiAndHodge",
+      "claim": "Paper 7 wave8 LEAF WORKER gate3 W5: own exactly `BianchiAndHodge`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement Route A Bianchi and discrete Hodge star. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate3-w6-ym-action-ibp-source": {
+      "parent": "paper7-wave8-gate3-manager",
+      "lane": "paper7-gate3-yang-mills/YMActionIBPSource",
+      "claim": "Paper 7 wave8 LEAF WORKER gate3 W6: own exactly `YMActionIBPSource`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement Killing invariance, action variation, IBP, sourced equation, and Route A/B separation. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate4-w1-gr-carrier-scalars": {
+      "parent": "paper7-wave8-gate4-manager",
+      "lane": "paper7-gate4-factorvec-gr/GRCarrierScalarOperations",
+      "claim": "Paper 7 wave8 LEAF WORKER gate4 W1: own exactly `GRCarrierScalarOperations`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement CarrierScalar operations, sumFin4, half, discretePartial, or exact upstream blocker. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate4-w2-time-prime-metric": {
+      "parent": "paper7-wave8-gate4-manager",
+      "lane": "paper7-gate4-factorvec-gr/TimePrimeMetric",
+      "claim": "Paper 7 wave8 LEAF WORKER gate4 W2: own exactly `TimePrimeMetric`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement p2 time valuation metric, symmetry, and nonzero weights. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate4-w3-metric-nondegenerate-signature": {
+      "parent": "paper7-wave8-gate4-manager",
+      "lane": "paper7-gate4-factorvec-gr/MetricNondegenerateSignature",
+      "claim": "Paper 7 wave8 LEAF WORKER gate4 W3: own exactly `MetricNondegenerateSignature`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement determinant/rank/nondegeneracy and Lorentzian inertia. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate4-w4-inverse-christoffel": {
+      "parent": "paper7-wave8-gate4-manager",
+      "lane": "paper7-gate4-factorvec-gr/InverseChristoffel",
+      "claim": "Paper 7 wave8 LEAF WORKER gate4 W4: own exactly `InverseChristoffel`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement inverse metric and Christoffel symbols. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate4-w5-riemann-ricci-einstein": {
+      "parent": "paper7-wave8-gate4-manager",
+      "lane": "paper7-gate4-factorvec-gr/RiemannRicciEinstein",
+      "claim": "Paper 7 wave8 LEAF WORKER gate4 W5: own exactly `RiemannRicciEinstein`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement Riemann, Ricci, scalar curvature, and Einstein tensor. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate4-w6-stress-energy-compat": {
+      "parent": "paper7-wave8-gate4-manager",
+      "lane": "paper7-gate4-factorvec-gr/StressEnergyCompatibility",
+      "claim": "Paper 7 wave8 LEAF WORKER gate4 W6: own exactly `StressEnergyCompatibility`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement finite support, carrier embedding, YM/matter interface, and discrete Einstein receipt surface. Return code + targeted validation, exact typed error, or Authority.ContinuumGR escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate5-w1-fixed-depth-hilbert": {
+      "parent": "paper7-wave8-gate5-manager",
+      "lane": "paper7-gate5-hilbert-stone/FixedDepthHilbertSpaces",
+      "claim": "Paper 7 wave8 LEAF WORKER gate5 W1: own exactly `FixedDepthHilbertSpaces`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement H_d, inner products, and finite-support carrier. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate5-w2-depth-embeddings": {
+      "parent": "paper7-wave8-gate5-manager",
+      "lane": "paper7-gate5-hilbert-stone/DepthEmbeddings",
+      "claim": "Paper 7 wave8 LEAF WORKER gate5 W2: own exactly `DepthEmbeddings`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement iota_d, zero extension, and isometry. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate5-w3-traversal-unitary": {
+      "parent": "paper7-wave8-gate5-manager",
+      "lane": "paper7-gate5-hilbert-stone/TraversalUnitary",
+      "claim": "Paper 7 wave8 LEAF WORKER gate5 W3: own exactly `TraversalUnitary`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement U_d, unitarity, and block-diagonal Hamiltonian condition. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate5-w4-traversal-compatibility": {
+      "parent": "paper7-wave8-gate5-manager",
+      "lane": "paper7-gate5-hilbert-stone/TraversalCompatibility",
+      "claim": "Paper 7 wave8 LEAF WORKER gate5 W4: own exactly `TraversalCompatibility`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement U_{d+1} o iota_d = iota_d o U_d. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate5-w5-filtered-colimit-hilbert": {
+      "parent": "paper7-wave8-gate5-manager",
+      "lane": "paper7-gate5-hilbert-stone/FilteredColimitHilbert",
+      "claim": "Paper 7 wave8 LEAF WORKER gate5 W5: own exactly `FilteredColimitHilbert`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement quotientInnerProductWellDefinedness / colimit carrier / dense domain progress. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate5-w6-stone-generator": {
+      "parent": "paper7-wave8-gate5-manager",
+      "lane": "paper7-gate5-hilbert-stone/StoneGenerator",
+      "claim": "Paper 7 wave8 LEAF WORKER gate5 W6: own exactly `StoneGenerator`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement discrete generator, self-adjointness, and domain stability. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate6-w1-concrete-sector-constructors": {
+      "parent": "paper7-wave8-gate6-manager",
+      "lane": "paper7-gate6-dhr-aqft/ConcreteSectorConstructors",
+      "claim": "Paper 7 wave8 LEAF WORKER gate6 W1: own exactly `ConcreteSectorConstructors`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement sector data, lane semantics, and nonempty witnesses. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate6-w2-localized-endomorphisms": {
+      "parent": "paper7-wave8-gate6-manager",
+      "lane": "paper7-gate6-dhr-aqft/LocalizedEndomorphisms",
+      "claim": "Paper 7 wave8 LEAF WORKER gate6 W2: own exactly `LocalizedEndomorphisms`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement foreign-lane identity, DHR selection, and localized endomorphisms. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate6-w3-intertwiners-tensor-fusion": {
+      "parent": "paper7-wave8-gate6-manager",
+      "lane": "paper7-gate6-dhr-aqft/IntertwinersTensorFusion",
+      "claim": "Paper 7 wave8 LEAF WORKER gate6 W3: own exactly `IntertwinersTensorFusion`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement intertwiners, tensor product, associativity, and unit laws. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate6-w4-duals-frobenius": {
+      "parent": "paper7-wave8-gate6-manager",
+      "lane": "paper7-gate6-dhr-aqft/DualsAndFrobenius",
+      "claim": "Paper 7 wave8 LEAF WORKER gate6 W4: own exactly `DualsAndFrobenius`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement conjugates, evaluation/coevaluation, and Frobenius reciprocity. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate6-w5-braiding-hexagon": {
+      "parent": "paper7-wave8-gate6-manager",
+      "lane": "paper7-gate6-dhr-aqft/BraidingHexagon",
+      "claim": "Paper 7 wave8 LEAF WORKER gate6 W5: own exactly `BraidingHexagon`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement statistics operator, naturality, and left/right hexagon. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate6-w6-dr-reconstruction-boundary": {
+      "parent": "paper7-wave8-gate6-manager",
+      "lane": "paper7-gate6-dhr-aqft/DRReconstructionBoundary",
+      "claim": "Paper 7 wave8 LEAF WORKER gate6 W6: own exactly `DRReconstructionBoundary`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement fusion rules, Gate 1 compatibility, and exact DR/Tannaka authority boundary. Return code + targeted validation, exact typed error, or Authority.DHR escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate78-w1-matter-representations": {
+      "parent": "paper7-wave8-gate78-manager",
+      "lane": "paper7-gate7-gate8-composition/MatterRepresentations",
+      "claim": "Paper 7 wave8 LEAF WORKER gate78 W1: own exactly `MatterRepresentations`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement quark/lepton generations, Higgs representation, and gauge quantum numbers. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate78-w2-higgs-potential": {
+      "parent": "paper7-wave8-gate78-manager",
+      "lane": "paper7-gate7-gate8-composition/HiggsPotential",
+      "claim": "Paper 7 wave8 LEAF WORKER gate78 W2: own exactly `HiggsPotential`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement norm/order, completed square, and nonzero VEV structure; absolute scale may escalate to Authority.W4. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate78-w3-yukawa-matrices": {
+      "parent": "paper7-wave8-gate78-manager",
+      "lane": "paper7-gate7-gate8-composition/YukawaMatrices",
+      "claim": "Paper 7 wave8 LEAF WORKER gate78 W3: own exactly `YukawaMatrices`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement concrete up/down 3x3 matrices from FactorVec/DHR data, starting from current y21 if still current. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate78-w4-yukawa-spectral-field": {
+      "parent": "paper7-wave8-gate78-manager",
+      "lane": "paper7-gate7-gate8-composition/YukawaSpectralField",
+      "claim": "Paper 7 wave8 LEAF WORKER gate78 W4: own exactly `YukawaSpectralField`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement characteristic polynomials, splitting fields, and eigenbases. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate78-w5-ckm-closure": {
+      "parent": "paper7-wave8-gate78-manager",
+      "lane": "paper7-gate7-gate8-composition/CKMClosure",
+      "claim": "Paper 7 wave8 LEAF WORKER gate78 W5: own exactly `CKMClosure`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement V_CKM field membership, unitarity, weak/mass compatibility, and Yukawa-DHR intertwining. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    },
+    "paper7-wave8-gate78-w6-paper7-receipt-composition": {
+      "parent": "paper7-wave8-gate78-manager",
+      "lane": "paper7-gate7-gate8-composition/Paper7ReceiptComposition",
+      "claim": "Paper 7 wave8 LEAF WORKER gate78 W6: own exactly `Paper7ReceiptComposition`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement Gate 1-7 receipt records, consistency checks, and blocked final product receipt. terminalClaimPromoted must remain false unless all upstream receipts/authority boundaries are inhabited. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited."
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "absorption_scaling_laws_recorded": [
+    "nu^-1",
+    "nu^-4/3",
+    "nu^-2"
+  ],
+  "all_required_source_surfaces_present": true,
+  "clay_navier_stokes_promoted": false,
+  "clay_promotion_recorded_false": true,
+  "complete": false,
+  "contract": "ns_sprint87_absorption_scaling_audit",
+  "gate_table": "ns_sprint87_absorption_scaling_gate_table.csv",
+  "nu_four_thirds_inverse_absorption_law_recorded": true,
+  "nu_inverse_absorption_law_recorded": true,
+  "nu_squared_inverse_absorption_law_recorded": true,
+  "open_obligations": [
+    "prove DangerShellH1TailSmallness without using H1/Serrin/BKM continuation",
+    "check coefficient smallness at the critical exponent",
+    "exclude deriving the H1 tail law from the same absorption inequality"
+  ],
+  "required_scalar_condition": "(K*)^-1/2 * H1Tail <= epsilon * nu",
+  "required_scalar_condition_name": "RequiredScalarAbsorptionCondition",
+  "required_scalar_condition_named": true,
+  "route_decision": "NS_SPRINT87_ABSORPTION_SCALING_OPEN",
+  "scaling_rule": "For K*(nu)=nu^-a and H1Tail<=C*nu^b, absorption requires b+a/2>1, or b+a/2=1 with an independent C<=epsilon coefficient.",
+  "source_table": "ns_sprint87_absorption_scaling_source_surface_table.csv",
+  "unconditional_absorption_closed": false
+}

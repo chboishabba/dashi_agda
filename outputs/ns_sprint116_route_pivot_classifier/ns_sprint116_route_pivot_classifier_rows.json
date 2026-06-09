@@ -1,0 +1,46 @@
+[
+  {
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_lemma": "NoUnforcedCrowFluxCollapse",
+    "rationale": "The post-Crow path is blocked by the missing unforced nonlinear reconnection-window lower bound and k-star collapse threshold.",
+    "recommendation_rank": 3,
+    "reuses_in_repo": "Sprint113-115 Crow persistence, thin-core reconnection window, and flux-budget classifiers",
+    "route_id": "thin_core_crow_option_b",
+    "status": "obstructed"
+  },
+  {
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_lemma": "SwirlingVelocityStrainSign",
+    "rationale": "This route avoids the Crow reconnection obstruction and has a concrete next lemma with high leverage for post-pivot progress.",
+    "recommendation_rank": 1,
+    "reuses_in_repo": "axisymmetric Navier-Stokes structure, swirl sign bookkeeping, and strain/vorticity closure surfaces",
+    "route_id": "axisymmetric_with_swirl_option_a",
+    "status": "open_high_value"
+  },
+  {
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_lemma": "BurgersVortexConcentrationBarrier",
+    "rationale": "The route remains admissible but has a weaker direct bridge from model concentration to an unforced Clay-level Navier-Stokes claim.",
+    "recommendation_rank": 2,
+    "reuses_in_repo": "vortex concentration heuristics and local strain amplification interfaces",
+    "route_id": "burgers_vortex_concentration_option_b",
+    "status": "open_long_shot"
+  },
+  {
+    "clay": false,
+    "clay_promoted": false,
+    "complete": false,
+    "next_lemma": "GeneralDataKStarRegularityBlockerDischarge",
+    "rationale": "The known Sprint87-94 blockers still prevent promotion of the general-data k-star regular route.",
+    "recommendation_rank": 4,
+    "reuses_in_repo": "general-data k-star regularity attempts and Sprint87-94 blocker records",
+    "route_id": "general_data_kstar_regular_option_a",
+    "status": "blocked_by_sprints87_94"
+  }
+]

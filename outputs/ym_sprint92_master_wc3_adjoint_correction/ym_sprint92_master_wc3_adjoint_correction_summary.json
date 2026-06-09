@@ -1,0 +1,121 @@
+{
+  "all_gates_pass": true,
+  "cases": {
+    "su2_k9": {
+      "c_local": "1/(2*512) = 0.0009765625",
+      "row_sum": "18*C = 0.017578125",
+      "status": "passes"
+    },
+    "su3_k10": {
+      "c_local": "2.25/(2*1024) = 0.0010986328125",
+      "row_sum": "18*C = 0.019775390625",
+      "status": "fails"
+    },
+    "su3_k11": {
+      "c_local": "2.25/(2*2048) = 0.00054931640625",
+      "row_sum": "18*C = 0.0098876953125",
+      "status": "passes_arithmetically"
+    },
+    "su3_k9": {
+      "c_local": "2.25/(2*512) = 0.002197265625",
+      "row_sum": "18*C = 0.03955078125",
+      "status": "fails"
+    }
+  },
+  "clay_yang_mills_promoted": false,
+  "exp_minus_4_enclosure": {
+    "lower": "0.018315638",
+    "upper": "0.018315639"
+  },
+  "gates": [
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G1",
+      "gate_name": "ReceiptSurface",
+      "required_anchor": "canonicalYMSprint92MasterWC3AdjointCorrectionReceipt",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "RECEIPT_EXPECTED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G2",
+      "gate_name": "SU2K9Passes",
+      "required_anchor": "su2K9IntegerInequalityCheck",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "SU2_K9_PASS_EXPECTED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G3",
+      "gate_name": "SU3K9Fails",
+      "required_anchor": "su3K9IntegerFailureCheck",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "SU3_K9_FAIL_EXPECTED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G4",
+      "gate_name": "SU3K10Fails",
+      "required_anchor": "su3K10IntegerFailureCheck",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "SU3_K10_FAIL_EXPECTED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G5",
+      "gate_name": "SU3K11Passes",
+      "required_anchor": "su3K11IntegerInequalityCheck",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "SU3_K11_PASS_EXPECTED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G6",
+      "gate_name": "QhpWitnessUnexported",
+      "required_anchor": "balabanQhpLocalConstantBoundWitnessImpossibleHere",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "ANALYTIC_WITNESS_OPEN_EXPECTED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G7",
+      "gate_name": "PolymerMassWitnessUnexported",
+      "required_anchor": "balabanCMP116PolymerMassBoundWitnessImpossibleHere",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "ANALYTIC_WITNESS_OPEN_EXPECTED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G8",
+      "gate_name": "WC3StillFalse",
+      "required_anchor": "wc3UniformClusterSummabilitySU3DerivedInRepo = false",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "WC3_FALSE_EXPECTED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "gate_id": "G9",
+      "gate_name": "ClayStillFalse",
+      "required_anchor": "clayYangMillsPromoted = false",
+      "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN",
+      "status": "CLAY_FALSE_EXPECTED"
+    }
+  ],
+  "receipt_path": "DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda",
+  "remaining_open_lemmas": [
+    "BalabanQhpLocalConstantBound",
+    "BalabanCMP116PolymerMassBound",
+    "AdjointRepresentationSharperBound-or-BlockingDepthK11PhysicalValidation",
+    "WeakCouplingWindowSU3"
+  ],
+  "route_decision": "YM_SPRINT92_ADJOINT_CORRECTION_NUMERIC_BOUNDARY_OPEN"
+}

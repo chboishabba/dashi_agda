@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "domination_socket_recorded": true,
+  "leakage_budget_ok": true,
+  "promotion": false,
+  "rho_budget_ok": true,
+  "selfadjoint_input_ok": true
+}

@@ -1,0 +1,9 @@
+gate_id,gate_name,field_name,exported,actual_value,expected_value,passed,status,next_required_input
+G1,FixedDangerTimeFrozenKBookkeepingClosed,fixedDangerTimeFrozenKBookkeepingClosed,True,True,True,True,TRUE_BOOKKEEPING_RECORDED,fixed danger-time frozen-K bookkeeping is recorded as true
+G2,MovingKStarBoundaryTheoremClosed,movingInTimeKStarLocalizationBoundaryClosed,True,False,False,True,FALSE_BOUNDARY_OPEN,prove K*(t) moving localization boundary
+G3,HighHighDominanceClosed,highHighDominanceClosed,True,False,False,True,FALSE_BOUNDARY_OPEN,supply explicit high-high/dominance theorem
+G4,DominanceGateClosed,dangerShellDissipationDominatesInfluxClosed,True,False,False,True,FALSE_BOUNDARY_OPEN,supply danger-shell dissipation dominance
+G5,PointwiseTailClosed,pointwiseTailFromLocalDissipationClosed,True,False,False,True,FALSE_BOUNDARY_OPEN,supply pointwise tail extraction
+G6,IndependentCoefficientClosed,independentCoefficientBudgetClosed,True,False,False,True,FALSE_BOUNDARY_OPEN,supply independent coefficient budget
+G7,ClayNavierStokesPromoted,clayNavierStokesPromoted,True,False,False,True,FALSE_NO_CLAY_PROMOTION,keep Clay Navier-Stokes promotion false
+G8,NoForbiddenStubOrHoleLanguage,forbidden_terms,True,0,0,True,PASS,remove postulate/TODO/stub/placeholder/future proof/hole wording

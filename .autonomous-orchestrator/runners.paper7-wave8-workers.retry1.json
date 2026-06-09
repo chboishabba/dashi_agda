@@ -1,0 +1,65 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3000,
+    "once": true,
+    "timeout_seconds": 3600
+  },
+  "rejected_only": true,
+  "retry_budget": 1,
+  "runners": {
+    "paper7-wave8-gate12-w1-physical-carrier-category-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate12-w1-physical-carrier-category`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: - No escalation needed under the provided allocation rules; ambiguity collapsed after narrow file localization and bounded implementation/validation completed.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate1-gate2-carrier-s8/PhysicalCarrierCategory",
+      "parent": "paper7-wave8-gate12-manager"
+    },
+    "paper7-wave8-gate3-w3-su3-jacobi-all-slots-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate3-w3-su3-jacobi-all-slots`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: allSlotCoefficientAwareResidualZeroWitnessField is now the first missing coefficient-aware residual field for SU3JacobiAllSlots.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate3-yang-mills/SU3JacobiAllSlots",
+      "parent": "paper7-wave8-gate3-manager"
+    },
+    "paper7-wave8-gate3-w4-lie-forms-curvature-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate3-w4-lie-forms-curvature`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Non-promoting boundary remains: no SFGC field-strength fibre representation into the concrete finite Lie carrier, and no non-flat Hodge/current/action supplies.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate3-yang-mills/LieValuedFormsAndCurvature",
+      "parent": "paper7-wave8-gate3-manager"
+    },
+    "paper7-wave8-gate4-w3-metric-nondegenerate-signature-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate4-w3-metric-nondegenerate-signature`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Lane-owned nondegenerate/signature witness is implemented and validated; downstream next metric primitive remains missingValuationInverseMetricComputation (owned by InverseChristoffel lane).\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate4-factorvec-gr/MetricNondegenerateSignature",
+      "parent": "paper7-wave8-gate4-manager"
+    },
+    "paper7-wave8-gate4-w4-inverse-christoffel-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate4-w4-inverse-christoffel`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Local InverseChristoffel lane implemented and validated; global non-flat Levi-Civita/Christoffel-from-metric promotion remains upstream and the next metric primitive queue head is Riemann.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate4-factorvec-gr/InverseChristoffel",
+      "parent": "paper7-wave8-gate4-manager"
+    },
+    "paper7-wave8-gate5-w3-traversal-unitary-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate5-w3-traversal-unitary`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: TraversalUnitary is now finite-only in DASHI.Quantum.Stone; noncollapsed physical traversal-unitary and physical Hamiltonian inhabitants remain unsupplied upstream.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate5-hilbert-stone/TraversalUnitary",
+      "parent": "paper7-wave8-gate5-manager"
+    },
+    "paper7-wave8-gate6-w2-localized-endomorphisms-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate6-w2-localized-endomorphisms`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Exact residual blocker: no repo-native arbitrary-sector global foreign-lane identity witness; only request-level and supplied-interface conditional constructors are available.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate6-dhr-aqft/LocalizedEndomorphisms",
+      "parent": "paper7-wave8-gate6-manager"
+    },
+    "paper7-wave8-gate6-w3-intertwiners-tensor-fusion-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate6-w3-intertwiners-tensor-fusion`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: blockedByMissingTensorProductLaw -> blockedByMissingTensorMorphismFunctoriality -> blockedByMissingUnitAssociatorCoherence\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate6-dhr-aqft/IntertwinersTensorFusion",
+      "parent": "paper7-wave8-gate6-manager"
+    },
+    "paper7-wave8-gate78-w1-matter-representations-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate78-w1-matter-representations`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: Matter representations now include concrete Higgs/quark/lepton generation-aware primitives, but generation-3 prime-lane completion (missing/right-neutrino ambiguity), exact Yukawa matrices, CKM/PMNS numerics, neutrino masses, and Adapter-4 Higgs/fermion absolute scales remain open.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate7-gate8-composition/MatterRepresentations",
+      "parent": "paper7-wave8-gate78-manager"
+    },
+    "paper7-wave8-gate78-w3-yukawa-matrices-retry1": {
+      "claim": "Retry for rejected manager lane `paper7-wave8-gate78-w3-yukawa-matrices`.\nPrior rejection reasons: no changed files, typed failure, or authority boundary.\nCurrent named blocker: After staged y22 progress, the next exact concrete up-type entry blocker is y23; full up/down concrete matrices and FactorVec/DHR compatibility receipts remain open.\nPrevious changed files: none structurally reported\nSTRICT IMPLEMENTATION RETRY.\n\nYour prior lane report was rejected. You must now return exactly one of:\n1. inhabited theorem/receipt;\n2. material code progress with targeted validation;\n3. typed implementation failure with exact compiler/type error and missing upstream symbol;\n4. authority-boundary escalation with the exact authority theorem/receipt.\n\nDo not return another blocker map, audit-only report, docs-only report, or \"next blocker is clearer\" result.",
+      "lane": "paper7-gate7-gate8-composition/YukawaMatrices",
+      "parent": "paper7-wave8-gate78-manager"
+    }
+  },
+  "source_runner_file": ".autonomous-orchestrator/runners.paper7-wave8-workers.json",
+  "source_wave_id": "paper7-wave8-workers",
+  "strict_implementation": true
+}

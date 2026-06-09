@@ -1,6 +1,6 @@
 # Paper 1 Draft Skeleton: Constructive Physics-Unification Package
 
-Date: `2026-05-15`
+Date: `2026-05-29`
 Owner: `Worker Paper1DraftSkeleton`
 Status: `docs-only manuscript skeleton; fail-closed; non-promoting`
 
@@ -9,6 +9,146 @@ program. It is not a completed-unification manuscript and it does not promote
 uninhabited authority-token, empirical, continuum, GRQFT, limited SM+GR, or
 full-closure claims. Every positive claim below must cite the exact theorem or
 receipt surface named here.
+
+## 2026-05-29 Current Five-Section Structure
+
+Paper 1 should now be organized as a concise constructive-foundations paper,
+with five main sections and appendices for validation and blocker detail. The
+central contribution claim is fail-closed:
+
+> Paper 1 contributes a formally machine-verified, fail-closed
+> staged-derivation framework for physics unification, with the fail-closed
+> promotion discipline as the primary innovation.
+
+The paper must not claim completed unification, terminal physics closure,
+Standard Model derivation, Clay Yang-Mills mass gap, sourced non-flat GR,
+Schwarzschild recovery, continuum recovery, GRQFT, accepted collider
+validation, physical calibration, or exact physical CKM/P5' prediction.
+
+### 1. Projection-Defect Architecture
+
+State the core architecture: physical targets enter as projections, residuals,
+defects, receipts, and blockers rather than as prose claims. Explain how the
+typed surfaces separate formal construction from target intent, authority
+requests, diagnostics, and unproved promotion.
+
+Current positive scope:
+
+- G2 direction-indexed SFGC schema adoption for current core-facing consumers.
+- G6 tracked cross-lane commuting and above-threshold coordinate independence
+  on the official tracked route.
+- G3 constructive finite-support selected-operator subtraction support.
+- E8/LILA integer and local semantic boundary status, without upstream
+  completion.
+- Cross-domain variational/projection-defect grammar as a non-promoting target
+  language.
+
+### 2. Prime-Lane Carrier Functor
+
+Describe the prime-lane carrier functor as the finite typed substrate on which
+the current internal receipts are staged. Keep this section bounded to carrier
+construction, finite-lane transport, and exact fail-closed interfaces.
+
+### 3. DHR Sector Category Subcondition Discharge
+
+Present Gate 6 as a staged sector-category ledger: finite p2/p3/p5 carrier
+receipts, local tensor/braiding progress, inhabited naturality where present,
+and explicit remaining blockers for hexagon/statistics/DR authority unless the
+corresponding Agda surfaces are inhabited in the integration pass cited by the
+paper.
+
+### 4. Empirical Contact Pipeline With Pre-Registered P5' Candidate
+
+Present Gate 5 as an empirical-contact pipeline, not a new-physics claim:
+artifact binding, checksum discipline, SM-baseline authority, residual
+comparison law, and pre-registered P5' anomaly-candidate classification. The
+paper may report a candidate only through the exact canonical receipt that
+binds the value/covariance artifact and classifies the residual; it must keep
+provider acceptance and physical explanation separate.
+
+### 5. Explicit Blocker Map For Full Unification
+
+Close with the typed blocker map for full unification: every missing
+constructor, authority token, field law, continuum bridge, empirical packet,
+and calibration surface remains a non-promoting blocker. This section is where
+Paper 1 makes its strongest methodological claim: the blocker ledger is an
+auditable result, not an editorial caveat.
+
+## Method And Validation Detail
+
+Define the fail-closed method used throughout the paper:
+
+- canonical constructors, theorem terms, and receipt fields are the only
+  promotion surfaces;
+- local shadows, postulates, public-source self-issuance, request templates,
+  diagnostics, and external citations do not promote claims;
+- blockers are first-class outputs, not editorial caveats.
+
+Use `Docs/CurrentGateStatus.md`, `Docs/LimitedSMGRPaperReadinessMatrix.md`,
+and `Docs/PaperDraftWorkingFolder/ClaimLedger.md` as the paper-facing control
+ledgers.
+
+### Constructive Internal Results
+
+Present the current bounded internal results as the body of the paper:
+
+- G2 schema extension: direction-indexed SFGC adoption is complete for current
+  core consumers, with no Maxwell or full field-equation promotion.
+- G6 tracked theorem: the official tracked route has cross-lane commuting and
+  above-threshold coordinate independence; the old full `LaneOperator`
+  interface remains blocked.
+- G3 finite-support route: constructive selected-operator subtraction support
+  is present; global Schrodinger, arbitrary-operator support, norm symmetry,
+  ultrametric, product, and bracket laws remain blocked.
+- E8/LILA boundary: integer/local semantic structure may be reported only with
+  the upstream empty/blocked receipt boundary.
+- Carrier/projection grammar: scalarization, MDL/projection-defect, and
+  cross-domain variational surfaces may be used as formal grammar and future
+  target structure, not as domain closures.
+
+### Physics Boundary Ledger
+
+Separate every attractive physics phrase from the actual repo status. This
+section should be explicit and short: the repository currently contains many
+typed target, obstruction, and receipt surfaces, but Paper 1 does not promote
+them to physical closure.
+
+Required non-promotion boundaries:
+
+- Gate 3/Yang-Mills: nonabelian field-equation targets remain blocked by
+  selected Hodge/current/variation and source-coupling obligations.
+- Gate 4/GR: finite and adapter surfaces do not supply non-flat Levi-Civita,
+  sourced Einstein, Schwarzschild, continuum, or GRQFT closure.
+- Gate 5/Penguin/P5': current receipts may report only the exact canonical
+  artifact binding and residual classification present in the repo. A
+  pre-registered P5' candidate is not provider acceptance, new physics, or a
+  carrier-derived C9 derivation.
+- Gate 6/DHR-SM: finite p2/p3/p5 carrier receipts and braiding progress are
+  bounded; actual DHR localised endomorphism algebras, hexagon/coherence, DR
+  compact-group reconstruction, exact SM matching, and `G_DHR ~= G_SM` remain
+  false.
+- Gate 7/CKM/Yukawa: carrier identity diagonalizers and product closure may be
+  stated honestly where inhabited, but physical non-diagonal Yukawa
+  eigenbases, exact physical CKM prediction, and Jarlskog/delta derivation
+  remain blocked.
+
+### Discussion, Validation, and Next Work
+
+Close by explaining what the paper establishes and what it deliberately does
+not establish. The paper establishes an auditable formal-methods architecture
+for constructive physics claims and a current bounded inventory of inhabited
+internal surfaces. It does not establish empirical adequacy, physical
+calibration, full Standard Model recovery, GR recovery, or terminal
+unification.
+
+Validation appendix policy:
+
+- cite targeted Agda commands only for modules actually named in the paper;
+- include `git diff --check` for the docs package;
+- report any timeout or first upstream type error as validation state, not as
+  prose evidence;
+- avoid claiming whole-repo validation unless `DASHI/Everything.agda` is
+  actually rechecked in the same integration pass.
 
 ## Title Placeholder
 

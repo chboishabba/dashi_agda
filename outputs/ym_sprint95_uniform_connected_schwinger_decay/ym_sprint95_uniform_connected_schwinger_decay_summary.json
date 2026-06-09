@@ -1,0 +1,16 @@
+{
+  "clay_yang_mills_promoted": false,
+  "connected_mayer_expansion_used": true,
+  "continuum_limit_mass_gap_derived_in_repo": false,
+  "decay_statement": "|S_n^T(x_1,...,x_n;a)| <= C_n * exp(-m * tree_dist(x_1,...,x_n)) uniformly for a < a0",
+  "remaining_open_lemmas": [
+    "ContinuumLimitMassGap",
+    "Nontrivial4DSU3YangMillsMeasure",
+    "ClayStatementBoundaryDischarged",
+    "ExternalAcceptanceToken"
+  ],
+  "route_decision": "SPRINT95_CLOSES_UNIFORM_CONNECTED_SCHWINGER_DECAY_ONLY",
+  "sprint": "95-schwinger",
+  "uniform_connected_schwinger_decay_closed_in_repo": true,
+  "wc3_uniform_in_a_required": true
+}

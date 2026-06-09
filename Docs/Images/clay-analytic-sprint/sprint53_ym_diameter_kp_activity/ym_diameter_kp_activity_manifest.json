@@ -1,0 +1,24 @@
+{
+  "script": "ym_diameter_kp_activity_estimator.py",
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyThreeYMDiameterOneKPReceipt",
+  "outputs": {
+    "table": "Docs/Images/clay-analytic-sprint/sprint53_ym_diameter_kp_activity/ym_diameter_kp_activity_table.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint53_ym_diameter_kp_activity/ym_diameter_kp_activity_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint53_ym_diameter_kp_activity/ym_diameter_kp_activity_manifest.json"
+  },
+  "defaults": {
+    "betas": [
+      6.0,
+      7.69,
+      10.13,
+      13.64,
+      16.7
+    ],
+    "p": 7,
+    "bt_branching_factor": 8,
+    "c_min": 0.242,
+    "entropy_a": 0.5,
+    "balaban_carrier_beta": 16.7
+  },
+  "promotion_status": "NO_PROMOTION_DIAGNOSTIC_ONLY"
+}

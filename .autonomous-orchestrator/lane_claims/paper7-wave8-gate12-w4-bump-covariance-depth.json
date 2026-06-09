@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave8-gate12-w4-bump-covariance-depth.json",
+  "lane": "paper7-gate1-gate2-carrier-s8/PrimeBumpCovarianceAndDepthNaturality",
+  "lane_claim": "Paper 7 wave8 LEAF WORKER gate12 W4: own exactly `PrimeBumpCovarianceAndDepthNaturality`. You are a leaf worker and must not spawn descendants. Use $autonomous-orchestrator status/reporting conventions, but do not use Codex built-in subagents. Implement prime-bump covariance and depth transition naturality. Return code + targeted validation, exact typed error, or authority escalation. No roadmap-only output, no docs-only output, no repeated blocker decomposition. Touch only the files needed for this symbol family. Do not set promotion bits true unless upstream receipts are inhabited.",
+  "orchestrator_id": "paper7-wave8-gate12-w4-bump-covariance-depth",
+  "parent_orchestrator_id": "paper7-wave8-gate12-manager",
+  "status_file": "status.paper7-wave8-gate12-w4-bump-covariance-depth.json",
+  "timestamp": "2026-05-19T15:49:21Z"
+}

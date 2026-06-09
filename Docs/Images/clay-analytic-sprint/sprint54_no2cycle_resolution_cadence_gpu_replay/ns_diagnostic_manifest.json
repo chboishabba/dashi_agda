@@ -1,0 +1,22 @@
+{
+  "source": "../dashiCFD/outputs/sprint54_no2cycle_resolution_cadence_gpu_audit/ns_sprint54_cycle_amplitude_summary.json",
+  "parameters": {
+    "replay_mode": "sprint54_cycle_amplitude_from_gpu_summary",
+    "sprint54_cycle_amplitude_summary_input": "../dashiCFD/outputs/sprint54_no2cycle_resolution_cadence_gpu_audit/ns_sprint54_cycle_amplitude_summary.json"
+  },
+  "diagnostic_mode": "sprint54_cycle_amplitude_replay_from_gpu_summary",
+  "cycle_amplitude_row_count": 12600,
+  "cadence_comparison_row_count": 6,
+  "outputs": {
+    "sprint54_cycle_amplitude_summary": "Docs/Images/clay-analytic-sprint/sprint54_no2cycle_resolution_cadence_gpu_replay/ns_sprint54_cycle_amplitude_summary.json",
+    "stretch_cycle_physical_amplitude_csv": "Docs/Images/clay-analytic-sprint/sprint54_no2cycle_resolution_cadence_gpu_replay/ns_stretch_cycle_physical_amplitude.csv",
+    "no2cycle_cadence_comparison_csv": "Docs/Images/clay-analytic-sprint/sprint54_no2cycle_resolution_cadence_gpu_replay/ns_no2cycle_cadence_comparison.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint54_no2cycle_resolution_cadence_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint54_no2cycle_resolution_cadence_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyFourNo2CycleResolutionCadenceAuditReceipt",
+  "evidence_boundary": "Sprint 54 replay consumes no-2-cycle resolution/cadence summary artifacts only. It does not recompute truth snapshots, packet material lineage, theorem-grade packet-local stretch amplitudes, weighted amplitude summability, physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_SPRINT54_CYCLE_AMPLITUDE_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

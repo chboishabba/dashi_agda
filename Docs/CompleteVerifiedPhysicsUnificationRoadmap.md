@@ -8,6 +8,133 @@ publishable claim of:
 It does not assert that the target claim is true today. It defines the finite
 promotion path that would make the claim defensible.
 
+Roadmap maintenance state for the current wave: complete. This marks the
+status-review tranche as finished, not the physics-unification target itself.
+
+Post-CM-correction priority is now tracked in
+`Docs/PostCMCorrectionClayPriority.md`.  The crucial correction is that the
+`Q(sqrt(-7))` SSP split is `5 split + 9 inert + 1 ramified`, while `7+7+1`
+remains atom grammar only.  Gate 3 now focuses on the inert-prime
+phase-completeness lower bound `A_inert(9) > 0`.
+
+The correction is also routed through
+`DASHI.Physics.Closure.HeckeCarrierVsCMSplittingReceipt` and
+`DASHI.Physics.Closure.P71HeckeMirrorSignLaneReceipt`.  These receipts record
+the public boundary directly: CM arithmetic uses the `5+9+1`
+split/inert/ramified table; DASHI Hecke atom grammar uses `7+7+1`; `p71` is
+split in `Q(sqrt(-7))` and is special in DASHI only as the terminal SSP
+sign/carry/reaction-orientation lane.  The forbidden readings are `7+7+1` as
+the CM partition, `p71` as inert observer prime, and `p71` as a literal time
+theorem.
+
+## Publication-Scope Definition: Papers 0-4
+
+The finished and publishable "full unification" package for the current
+publication programme means the ordered Paper 0-4 bundle recorded by
+`DASHI.Physics.Closure.FullUnificationPublicationRoadmapReceipt`.  Older
+G1-G7 lane gates remain useful as long-range theorem/validation gates, but they
+are not a license to claim full unification unless the Paper 0-4 bundle below is
+also coherent, receipt-backed, and fail-closed at every forbidden claim.
+
+| Paper | Publishable scope | Required Agda alignment | Still forbidden |
+|---|---|---|---|
+| Paper 0 | Shared fail-closed margin grammar: dynamics bound, ratio/signed equivalence with `A > 0`, strict absorption rule, terminology index, CM/Hecke partition fence, non-promoting NS/YM/Gate 3 instantiations, and non-promotion grammar. | `StrictMarginImpliesAbsorptionReceipt`, `FullUnificationPublicationRoadmapReceipt`, `KeyTermCorrespondenceIndexReceipt`, `HeckeCarrierVsCMSplittingReceipt`, `P71HeckeMirrorSignLaneReceipt`, `Paper0SharedMarginGrammarConsolidationReceipt` | Treating the grammar, key-term correspondences, CM/Hecke fence, p71 sign lane, or lane instantiation table as an NS theorem, YM theorem, Gate 3 theorem, Clay result, time theorem, or terminal result. |
+| Paper 1 | NS theta/EV5 programme: fixed-`K` tail flux bookkeeping, computable theta diagnostics, one-way continuation targets, and NS-to-EV5 forward-simulation obligations. | `NSTailFluxAbsorptionMarginReceipt`, `EV5ThetaMarginUpgradeReceipt`, `ClayNSProofRoadmapReceipt` | Claiming theta preservation, actual-flow tail decay, BKM/Serrin closure, unconditional NS regularity, arbitrary-data regularity, or Clay Navier-Stokes. |
+| Paper 2 | Gate 3 cutoff-frame/density/Mosco programme: finite cutoff frame bounds `A_N > 0` on finite `H_N`, corrected CM `5+9+1` frame decomposition, separate Hecke atom `7+7+1` grammar, plus the required continuum density, Mosco recovery, no-spectral-pollution, scale-graph barrier instantiation, and mass-shell bridge targets. | `Gate3NormDictionaryReceipt`, `Gate3AdelicSobolevNormBindingReceipt`, `SSP15CMFieldSplittingCorrectionReceipt`, `SSP7Plus7Plus1AtomGrammarReceipt`, `HeckeCarrierVsCMSplittingReceipt`, `Gate3MoscoRecoveryPreciseReceipt`, `Gate3NoSpectralPollutionReceipt`, `Gate3ScaleGraphBarrierInstantiationReceipt`, `SpectralConvergenceGate3Receipt`, `FullUnificationPublicationRoadmapReceipt` | Treating a finite dictionary or finite frame bound as continuum density, conflating CM `5+9+1` with Hecke `7+7+1`, treating `p71` as inert/time, norm-resolvent convergence, physical spectral identification, Gate 3 barrier proof, or Gate 3 promotion. |
+| Paper 3 | YM rho/KP/Balaban programme: same-prime reduction, BT path counting, convergence threshold, strict absorption threshold, actual polymer activity gap, Balaban RG hard-open bridge, and rho `< 1` non-promotion. | `YMSamePrimeOverlapReductionReceipt`, `YMBTPathCountingKPThresholdReceipt`, `YMKPAbsorptionMarginThresholdReceipt`, `YMActualPolymerActivityDefinitionReceipt`, `YMBalabanRGScaleTransferFrontierReceipt`, `YMPaper3RoadmapReceipt`, `Paper3YMDependencyGraphReceipt`, `ClayYMProofRoadmapReceipt` | Claiming toy rho as actual activity, convergence as strict absorption, perturbative beta estimates as Balaban RG, carrier gaps as continuum gaps, continuum YM, mass gap, or Clay Yang-Mills. |
+| Paper 4 | Full DASHI unification programme: compose Papers 0-3 only after their joining lemmas are coherent, then state the strongest supported unification claim with explicit limitations. The finishing theorem shape is now the universal scale-graph barrier target: projection faithfulness, node margin dynamics, edge conservation/absorbable leakage, and danger-node absorber dominance. | `FullUnificationPublicationRoadmapReceipt`, `UniversalScaleGraphBarrierTargetReceipt`, `ScaleGraphBarrierTargetReceipt`, `DangerScaleEdgeConservationReceipt`, and the Paper 0-3 receipts they list | Claiming full unification, terminal closure, Clay closure, exact Standard Model/GRQFT closure, empirical adequacy beyond accepted receipts, or treating the scale-graph barrier target as a proved maximum principle. |
+
+Promotion gates for this publication package remain the canonical gates named by
+`canonicalPublicationPromotionGates`: diagnostic is not theorem; toy ratio is
+not analytic margin; finite frame is not continuum density; observed margin is
+not proved margin; carrier gap is not continuum gap.
+
+The current publishable boundary is therefore Paper 0 as shared grammar plus
+downstream Papers 1-4 as roadmap/obligation papers.  Full unification becomes
+publishable only when Papers 1-3 have their analytic inhabitants and Paper 4
+composes them without violating the forbidden-claim table above.
+
+For the narrower "what gets us to Clay" dependency board, see
+`Docs/ClayPrizeLemmaRoadmap.md`.  That note records the prize-facing priority:
+actual `p=7` Yang-Mills polymer activity and Balaban/RG transfer first, Gate 3
+continuum transfer second, Navier-Stokes danger-shell maximum principle third,
+and Paper 0 publication in parallel.  It is a lemma roadmap, not a solved
+Clay claim.
+
+## Finish Shape: Universal Scale-Graph Barrier
+
+`DASHI.Physics.Closure.UniversalScaleGraphBarrierTargetReceipt` is the checked
+top-level receipt for the final theorem shape discussed in the YM/NS/
+unification lane.  It consumes the more detailed
+`ScaleGraphBarrierTargetReceipt` and `DangerScaleEdgeConservationReceipt`.
+All three are target receipts, not analytic proofs.  Their purpose is to
+prevent the final step from drifting back into metaphor or unsupported
+promotion.
+
+The target theorem says: for a physical evolution projected onto a scale graph,
+with residual `R_v`, production `P_v`, absorption `A_v`, and ratio
+`q_v = P_v / A_v`, the worst scale cannot cross `q = 1` when all of the
+following are supplied:
+
+- the physical-to-scale projection is faithful;
+- each node satisfies the strict-margin dynamics bound from
+  `StrictMarginImpliesAbsorptionReceipt`;
+- transfer across graph edges is conservative or its leakage is absorbable;
+- every possible danger node has absorber dominance over incoming transfer;
+- the initial worst ratio is strictly below `1`.
+
+The Agda receipt links this target to the existing domain surfaces:
+
+| Domain | Scale graph reading | Existing receipt links | Still open |
+|---|---|---|---|
+| NS | nodes are shell cutoffs; `q` is theta; the worst node is `danger_shell` | `NSTailFluxAbsorptionMarginReceipt`, `NSTailFluxIdentityAnalyticTargetReceipt`, `DashiCFDThetaRuntimeDiagnosticReceipt` | fixed-`K` LP identity inhabitant, theta preservation / maximum principle, one-way continuation binding |
+| YM | nodes are polymer/RG scales; `q` is rho; the bottleneck is the retained same-prime `p = 7` sector | `YMKPActivityRatioMarginReceipt`, `YMPaper3RoadmapReceipt`, `YMActualPolymerActivityDefinitionReceipt`, `YMBalabanRGScaleTransferFrontierReceipt` | actual Wilson polymer activity, strict rho margin, nonperturbative Balaban contraction |
+| Gate 3 | nodes are cutoff / atom-frame levels; `q` is projection defect over recovery strength; finite-frame decomposition uses corrected CM `5+9+1` while Hecke atom grammar remains separate `7+7+1` | `Gate3NormDictionaryReceipt`, `Gate3AdelicSobolevNormBindingReceipt`, `SSP15CMFieldSplittingCorrectionReceipt`, `SSP7Plus7Plus1AtomGrammarReceipt`, `HeckeCarrierVsCMSplittingReceipt`, `Gate3MoscoRecoveryPreciseReceipt`, `Gate3NoSpectralPollutionReceipt`, `Gate3ScaleGraphBarrierInstantiationReceipt`, `AtomExtendedCarrierFrameReceipt` | phase-aware density over 9 inert CM primes, uniform continuum lower bound, PAWOTG transfer, Mosco recovery, no spectral pollution, mass-shell bridge |
+| Edge accounting | ensures activity cannot enter a danger node from nowhere | `DangerScaleEdgeConservationReceipt` | adjacent-shell transfer law, YM block-spin recurrence, Gate 3 refinement-defect accounting |
+| Barrier target | states the worst-scale comparison principle once edge accounting is available | `ScaleGraphBarrierTargetReceipt` | comparison principle, NS danger inequality, YM contraction, Gate 3 Mosco defect control |
+| Paper 4 | joins the three readings as a programme-level theorem target | `KeyTermCorrespondenceIndexReceipt`, `PublishableFullUnificationStackReceipt`, `UniversalScaleGraphBarrierTargetReceipt` | the barrier theorem itself and all domain instantiations |
+
+The receipt keeps `barrierTheoremProvedHere = false`,
+`nsThetaPreservationProved = false`, `ymRhoContractionProved = false`,
+`gate3TransferProved = false`, and `clayPromotionMade = false`.
+
+### Agda Citation Map For The Finish Shape
+
+Paper 0 and Paper 4 should cite the following checked surfaces directly.  The
+right column names the machine-checked witness or live false-promotion field
+that prevents accidental theorem promotion.
+
+| Agda module | Use in paper prose | Canonical witness / guard |
+|---|---|---|
+| `DASHI.Physics.Closure.StrictMarginImpliesAbsorptionReceipt` | L0 strict-margin grammar: residual rate, production/absorption ratio, signed margin, fail-closed non-promotion | `canonicalStrictMarginImpliesAbsorptionReceipt`; `clayPromotion = false` |
+| `DASHI.Physics.Closure.KeyTermCorrespondenceIndexReceipt` | Paper 0 terminology and promotion discipline | `canonicalKeyTermCorrespondenceIndexReceipt`; `scaleGraphBarrierTerm`; `canonicalIndexNoClayPromotion` |
+| `DASHI.Physics.Closure.HeckeCarrierVsCMSplittingReceipt` | separates CM arithmetic `5+9+1` from DASHI/Hecke atom grammar `7+7+1`; rejects `p71` inert claim | `canonicalHeckeCarrierVsCMSplittingReceipt`; `canonicalHeckeCMNotSamePartition`; `canonicalHeckeCMP71NotInertRejected`; `canonicalHeckeCMNoClayPromotion` |
+| `DASHI.Physics.Closure.P71HeckeMirrorSignLaneReceipt` | records `p71` as terminal SSP sign/carry/reaction-orientation lane, with Hecke mirror pair, BT capacity, and moonshine-boundary transparency | `canonicalP71HeckeMirrorSignLaneReceipt`; `canonicalP71IsSplitNotInert`; `canonicalP71IsSignLane`; `canonicalP71NoTimeTheorem`; `canonicalP71NoClayPromotion` |
+| `DASHI.Physics.Closure.DangerScaleEdgeConservationReceipt` | Edge-accounting obligation: no hidden production at a danger node | `canonicalDangerScaleEdgeConservationReceipt`; `canonicalDangerScaleEdgeConservationNoProof`; `canonicalDangerScaleEdgeConservationNoClay` |
+| `DASHI.Physics.Closure.ScaleGraphBarrierTargetReceipt` | Worst-scale comparison-principle target once edge accounting is available | `canonicalScaleGraphBarrierTargetReceipt`; `canonicalScaleGraphBarrierNotProved`; `canonicalScaleGraphBarrierNoClay` |
+| `DASHI.Physics.Closure.UniversalScaleGraphBarrierTargetReceipt` | Top-level finish theorem target joining NS, YM, Gate 3, and Paper 4 | `canonicalUniversalScaleGraphBarrierTargetReceipt`; `canonicalBarrierTargetNotProved`; `canonicalBarrierNoClayPromotion` |
+| `DASHI.Physics.Closure.Paper0SharedMarginGrammarConsolidationReceipt` | Paper 0 spine: L0 grammar plus non-promoting NS/YM/Gate 3 instantiations and promotion fence | `canonicalPaper0SharedMarginGrammarConsolidationReceipt`; `canonicalPaper0NoNSRegularity`; `canonicalPaper0NoYMMassGap`; `canonicalPaper0NoGate3Closure`; `canonicalPaper0NoClayPromotion` |
+| `DASHI.Physics.Closure.NSTailFluxAbsorptionMarginReceipt` | NS theta margin and fixed-cutoff bookkeeping surface | `canonicalNSTailFluxAbsorptionMarginReceipt`; no Clay NS promotion |
+| `DASHI.Physics.Closure.NSTailFluxIdentityAnalyticTargetReceipt` | NS1 fixed-`K` Littlewood-Paley identity target | `canonicalNSTailFluxIdentityAnalyticTargetReceipt`; `lpIdentityProvedHere = false` |
+| `DASHI.Physics.Closure.DashiCFDThetaRuntimeDiagnosticReceipt` | Runtime theta and danger-shell diagnostic, evidence only | `canonicalDashiCFDThetaRuntimeDiagnosticReceipt`; `clayNavierStokesPromoted = false` |
+| `DASHI.Physics.Closure.YMKPActivityRatioMarginReceipt` | YM rho seam gauge and KP activity-ratio margin surface | `canonicalYMKPActivityRatioMarginReceipt`; `toyRhoProfilePromotedAsProof = false`; `clayYangMillsPromoted = false` |
+| `DASHI.Physics.Closure.Gate3NormDictionaryReceipt` / `Gate3NormDictionary` | Gate 3 norm dictionary and carrier-continuum transfer obligation | `canonicalGate3NormDictionaryReceipt`; analytic proof / Clay promotion remain false |
+| `DASHI.Physics.Closure.Gate3AdelicSobolevNormBindingReceipt` | finite-cutoff carrier norm binding: upper bound recorded, lower bound conditional on phase completeness over 9 inert CM primes, uniform continuum bound open | `canonicalGate3AdelicSobolevNormBindingReceipt`; `canonicalFiniteCutoffUpperBoundProved`; `canonicalPhaseCompletenessInertPrimeCount`; `canonicalFrameDecompositionReading`; `canonicalUniformContinuumBoundOpen`; `canonicalNoClayPromotion` |
+| `DASHI.Physics.Closure.Gate3MoscoRecoveryPreciseReceipt` | precise Mosco recovery interface: condition II trivial on the abstract surface, condition I blocked on density/PAWOTG | `canonicalGate3MoscoRecoveryPreciseReceipt`; `gate3MoscoConditionIITrivial`; `gate3MoscoPAWOTGTransferOpen`; `gate3MoscoGate3ClosureFalse` |
+| `DASHI.Physics.Closure.Gate3NoSpectralPollutionReceipt` | operator-level no-spectral-pollution boundary, conditional on phase/twist completeness plus Mosco | `canonicalGate3NoSpectralPollutionReceipt`; `gate3NoSpectralPollutionIsConditional`; `gate3NoSpectralPollutionNotUnconditional`; `gate3NoSpectralPollutionNoClayPromotion` |
+| `DASHI.Physics.Closure.Gate3ScaleGraphBarrierInstantiationReceipt` | Gate 3 specialization of the scale-graph barrier: cutoff nodes, projection defect, frame/Mosco recovery | `canonicalGate3ScaleGraphBarrierInstantiationReceipt`; `canonicalGate3BarrierInstantiated`; `canonicalGate3BarrierNotProved`; `canonicalGate3NotClosed` |
+| `DASHI.Physics.Closure.AtomExtendedCarrierFrameReceipt` | finite atom-frame / cutoff evidence surface | `canonicalAtomExtendedCarrierFrameReceipt`; `gate3NormComparisonProved = false` |
+| `DASHI.Physics.Closure.PublishableFullUnificationStackReceipt` | top-level publication-readiness boundary for Papers 0-4 | `canonicalPublishableFullUnificationStackReceipt`; `canonicalPublishableStackNoClosureClaim`; `canonicalPublishableStackNoClay` |
+
+When writing the paper bundle, the citation order should be:
+
+1. `StrictMarginImpliesAbsorptionReceipt` for the proved grammar.
+2. `KeyTermCorrespondenceIndexReceipt` for vocabulary and forbidden uses.
+3. `DangerScaleEdgeConservationReceipt` for the load-bearing edge hypothesis.
+4. `ScaleGraphBarrierTargetReceipt` for the comparison-principle target.
+5. `UniversalScaleGraphBarrierTargetReceipt` for the final joined theorem
+   shape and Paper 4 boundary.
+
 ## Current State
 
 Current status is recorded in `Docs/PhysicsLaneMaturityMatrix.md`:

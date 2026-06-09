@@ -1,0 +1,54 @@
+{
+  "artifact_complete": true,
+  "clay_navier_stokes_promoted": false,
+  "conditional": true,
+  "contract": "ns_sprint137_axial_monotonicity_gate",
+  "control_card": {
+    "C": "Deterministic Python emitter with rows JSON, rows CSV, summary JSON, Markdown report, validate(), and main().",
+    "F": "Any missing required row, missing 2u1 partial_z^2 psi1 term, closed global proof, or Clay promotion fails validation.",
+    "G": "Validation passes only if blockers remain open, global proof is not closed, and Clay promotion is false.",
+    "L": "Local barrier rows are supported; global concavity and secondary-peak rows remain open blockers.",
+    "O": "Worker owns only the Sprint137 axial monotonicity gate emitter and its output directory surface.",
+    "P": "Keep the route conditional/fail-closed and use it only as a gate inventory for later Hou-Luo analysis.",
+    "R": "Model AxialMonotonicityOfSwirlProfile for v=partial_z u1 without turning local barrier support into a global theorem.",
+    "S": "Symmetry, initial sign, first-crossing, differentiated source, local concavity, and diffusion sign are explicit ledger states."
+  },
+  "exit_code": 0,
+  "fail_closed": true,
+  "first_positive_crossing_criterion": "At the first time when v becomes positive in the monitored half-profile, the interior positive maximum has v>0, partial_r v=partial_z v=0, and Ltilde v<=0.",
+  "full_clay_ns_solved": false,
+  "gate": "AxialMonotonicityOfSwirlProfile",
+  "gate_status": "open_blocked_gap",
+  "global_concavity_closed": false,
+  "global_proof_closed": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "local_barrier_supported": true,
+  "open_blockers": [
+    "global_concavity_blocker",
+    "secondary_peak_blocker"
+  ],
+  "promotion_decision": "hold_no_clay_promotion",
+  "proof_claimed": false,
+  "route_decision": "conditional_fail_closed",
+  "row_count": 8,
+  "secondary_peak_excluded": false,
+  "supported_local_rows": [
+    "symmetry_inheritance",
+    "v_initial_sign",
+    "first_positive_crossing_criterion",
+    "source_derivative_term",
+    "local_concavity_support",
+    "diffusion_at_positive_max_sign"
+  ],
+  "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+  "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v",
+  "variables": {
+    "Dt": "partial_t + u^r partial_r + u^z partial_z",
+    "Ltilde": "partial_r^2 + (3/r) partial_r + partial_z^2",
+    "omega1": "omega^theta / r",
+    "psi1": "psi^theta / r",
+    "u1": "u^theta / r",
+    "v": "partial_z u1"
+  }
+}

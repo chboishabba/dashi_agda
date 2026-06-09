@@ -1,0 +1,16 @@
+{
+  "artifact": "penguin_gate5_wilson_authority_manifest",
+  "status": "downloaded_wheel_hash_recorded_and_installed_in_repo_venv",
+  "download_command": ".venv/bin/pip download wilson --no-deps -d /tmp/dashi_wilson_authority",
+  "local_venv": "/home/c/Documents/code/dashi_agda/.venv",
+  "package": "wilson",
+  "version": "2.5.2",
+  "wheel_filename": "wilson-2.5.2-py3-none-any.whl",
+  "wheel_path": "/tmp/dashi_wilson_authority/wilson-2.5.2-py3-none-any.whl",
+  "wheel_sha256": "959e3dbd6bfefb43b3769fe07e2d8e59c153abe6796851fb91c4d18b7981799a",
+  "install_command": ".venv/bin/pip install 'flavio==2.7.0' wilson",
+  "installed_into_local_venv": true,
+  "installed_location": "/home/c/Documents/code/dashi_agda/.venv/lib/python3.14/site-packages",
+  "pip_show_snapshot_sha256": "12aeeb4f6f08c71008249e974d43f87e13bbae47091a63af29dc0b0f4e0de116",
+  "note": "pip resolved and installed wilson 2.5.2 into the repo-local venv; wheel hash is retained as the package authority artifact"
+}

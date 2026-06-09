@@ -1,0 +1,101 @@
+{
+  "ModelValidityForWidthODE": true,
+  "SymmetricHouLuoBKMFinite": false,
+  "clay_navier_stokes_promoted": false,
+  "component_closed": {
+    "CorrectedEquilibriumDeltaNew": true,
+    "DriftDiffusionBalance": true,
+    "LocalizedEnstrophyInequality": true,
+    "WidthObservableDefinition": true
+  },
+  "contract": "ns_sprint156_width_model_validity",
+  "control_card": {
+    "C": "One deterministic Python stdlib emitter writes rows JSON, rows CSV, summary JSON, Markdown, and manifest through an atomic output swap.",
+    "F": "Remaining blockers are the symmetric Hou-Luo BKM translation and the separate full Clay Navier-Stokes mechanism-exhaustion theorem.",
+    "G": "Validation requires all support rows closed, the exact corrected equilibrium delta_new = sqrt(nu/(Umax*logOmega)), model validity true, and SymmetricHouLuoBKMFinite/full_clay_ns_solved/clay_navier_stokes_promoted false.",
+    "L": "closed support package -> localized enstrophy inequality -> width observable -> drift-diffusion balance -> corrected equilibrium -> ModelValidityForWidthODE -> BKM/Clay hard guards.",
+    "O": "Worker 2 owns scripts/ns_sprint156_width_model_validity.py and outputs/ns_sprint156_width_model_validity/.",
+    "P": "Use this as the model-validity receipt for the reduced width ODE. It is not a BKM finite-integral theorem and not a Clay Navier-Stokes proof.",
+    "R": "Turn the Sprint155 closed support package into a model-validity ledger with support rows, localized enstrophy inequality, width observable, drift-diffusion balance, corrected equilibrium, and fail-closed BKM/Clay guards.",
+    "S": "Sprint155 model-validity assembler records all five route support obligations closed. Sprint156 uses those closed supports to certify ModelValidityForWidthODE for the reduced width ledger only."
+  },
+  "corrected_equilibrium_formula": "delta_new = sqrt(nu/(Umax*logOmega))",
+  "corrected_equilibrium_row_closed": true,
+  "decision": "model_validity_for_width_ode_closed_bkm_and_clay_guarded_false",
+  "delta_new": "sqrt(nu/(Umax*logOmega))",
+  "drift_diffusion_balance_formula": "nu/delta^2 = Umax*logOmega",
+  "drift_diffusion_balance_row_closed": true,
+  "full_clay_ns_solved": false,
+  "lane": 2,
+  "localized_enstrophy_inequality_row_closed": true,
+  "localized_inequality_formula": "d/dt E_delta <= -nu*D_delta + Umax*logOmega*delta^2*D_delta + lower_order_support",
+  "model_validity_for_width_ode": true,
+  "model_validity_true": true,
+  "observed_row_ids": [
+    "corrected_equilibrium_delta_new",
+    "drift_diffusion_balance",
+    "full_clay_guard",
+    "localized_enstrophy_inequality",
+    "model_validity_for_width_ode",
+    "support_annular_leakage",
+    "support_biot_savart_nonlocal_closure",
+    "support_localized_enstrophy_identity",
+    "support_simultaneous_constants",
+    "support_source_bound",
+    "symmetric_hou_luo_bkm_guard",
+    "width_observable_definition"
+  ],
+  "program": "HouLuoWidthModelValidityLedger",
+  "promotion_allowed": false,
+  "required_row_ids": [
+    "corrected_equilibrium_delta_new",
+    "drift_diffusion_balance",
+    "full_clay_guard",
+    "localized_enstrophy_inequality",
+    "model_validity_for_width_ode",
+    "support_annular_leakage",
+    "support_biot_savart_nonlocal_closure",
+    "support_localized_enstrophy_identity",
+    "support_simultaneous_constants",
+    "support_source_bound",
+    "symmetric_hou_luo_bkm_guard",
+    "width_observable_definition"
+  ],
+  "row_count": 12,
+  "source_presence": {
+    "s151_width_ode_extraction_summary": {
+      "exists": true,
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_summary.json",
+      "sha256": "90c02f26fcc06dc9744136d1ceb7e39bd71127349f2bf600fce1e9960618e9a0"
+    },
+    "s155_localized_enstrophy_ibp_identity_summary": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_summary.json",
+      "sha256": "b8bea99fa28c3e92e8959d8982fb4fb10f8831cbdf5de464e1ba4713328b6694"
+    },
+    "s155_model_validity_assembler_rows": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_rows.json",
+      "sha256": "3274991f5ec6727a2d940c24bf5f18167f47a303b12d4ca447a9e505dcc7ec06"
+    },
+    "s155_model_validity_assembler_summary": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_model_validity_assembler/ns_sprint155_model_validity_assembler_summary.json",
+      "sha256": "273c705e3a69b06ba080ca567c7b9fc4d3dc1137f9aad6a450657b821589849c"
+    }
+  },
+  "sprint": 156,
+  "summary_hash": "53b0580f6a17e6558469e39ff609076a13d86e1031c4e959d9ef86f395f1dc60",
+  "support_closed": {
+    "AnnularLeakage": true,
+    "BiotSavartNonlocalClosure": true,
+    "LocalizedEnstrophyIdentity": true,
+    "SimultaneousConstants": true,
+    "SourceBound": true
+  },
+  "symmetric_hou_luo_bkm_finite": false,
+  "validation_errors": [],
+  "validation_passed": true,
+  "width_observable_definition_row_closed": true,
+  "width_observable_formula": "delta(t)^2 = E_delta(t)/D_delta(t)"
+}

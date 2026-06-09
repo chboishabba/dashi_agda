@@ -1,0 +1,47 @@
+{
+  "axs_beta_eq_0_still_open": true,
+  "axs_beta_gt_0_large_re_still_needs_transient_pde_control": true,
+  "axs_beta_gt_0_moderate_re_promotes_to_unconditional_if_true": true,
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_progress_estimate_percent": 0,
+  "clay_promoted": false,
+  "closed_by_no_log_alone": [
+    "AXS beta>0 moderate-Re"
+  ],
+  "closed_by_no_log_alone_count": 1,
+  "complete": true,
+  "contract": "ns_sprint133_no_log_biot_savart_scope",
+  "control_card": {
+    "C": "deterministic Python emitter writes JSON and CSV scope artifacts",
+    "F": "remaining deficit is transient PDE control plus marginal analysis plus universal regularity/exhaustion",
+    "G": "exit code 0 requires complete artifacts and no full-Clay promotion",
+    "L": "subcase conditional -> subcase unconditional is strictly below global NS promotion",
+    "O": "Worker 3 owns only scripts/ns_sprint133_no_log_biot_savart_scope.py and outputs/ns_sprint133_no_log_biot_savart_scope/",
+    "P": "record zero Clay progress estimate and retain all Clay flags false",
+    "R": "distinguish the exact proof scope of NoLogAxisymmetricBiotSavartUniform",
+    "S": "one AXS moderate-Re subcase promotes if the lemma is true; marginal, large-Re, WBF-V, outside-class, and full Clay surfaces remain open"
+  },
+  "exit_code": 0,
+  "exit_reason": "complete Sprint133 no-log Biot-Savart scope emitted; lemma would promote only the AXS beta>0 moderate-Re subcase and does not change full Clay status",
+  "full_clay_ns_solved": false,
+  "full_clay_unchanged": true,
+  "lemma_under_scope": "NoLogAxisymmetricBiotSavartUniform",
+  "mechanisms_outside_axs_wbf_untouched": true,
+  "necessary_but_not_sufficient": [
+    "AXS beta>0 large-Re"
+  ],
+  "row_count": 6,
+  "still_open_after_no_log": [
+    "AXS beta=0 marginal",
+    "AXS beta>0 large-Re",
+    "WBF-V vortex-stretching",
+    "mechanisms outside AXS/WBF",
+    "full Clay Navier-Stokes"
+  ],
+  "still_open_after_no_log_count": 5,
+  "untouched_by_no_log": [
+    "mechanisms outside AXS/WBF"
+  ],
+  "wbf_v_not_automatically_closed": true
+}

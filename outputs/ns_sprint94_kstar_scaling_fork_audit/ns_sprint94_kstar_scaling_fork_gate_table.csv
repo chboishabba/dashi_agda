@@ -1,0 +1,5 @@
+gate,formula,status,clay_general_data_effect
+high-high absorption,K*(t) >= C/(epsilon*nu),calculated,requires lower bound not supplied by Leray class
+Leray-only control,upper control only,insufficient,cannot prove the required lower bound for all data
+combined inequalities,||u0||_L2^2 <= C^3*nu^4/epsilon,small-data reduction,recovers known small-data regime rather than Clay all-data closure
+conditional criterion,assume K*(t) >= C/(epsilon*nu),ready,conditional regularity only

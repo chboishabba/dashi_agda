@@ -1,0 +1,91 @@
+{
+  "blocked_promotions": [
+    "ModelValidityForWidthODE",
+    "SymmetricHouLuoBKMFinite",
+    "FullClayNavierStokes"
+  ],
+  "closed_status": {
+    "AnnularLeakage": true,
+    "BiotSavartNonlocalClosure": true,
+    "LocalizedEnstrophyIdentity": true,
+    "SimultaneousConstants": true,
+    "SourceBound": true
+  },
+  "contract": "ns_sprint155_model_validity_assembler",
+  "control_card": {
+    "C": "A deterministic Python stdlib script reads local summary/row JSON and writes rows JSON, rows CSV, summary JSON, Markdown, and manifest files.",
+    "F": "Open blockers remain: downstream model-validity promotion, symmetric Hou-Luo BKM translation, and the structurally separate full Clay NS mechanism-exhaustion theorem.",
+    "G": "ModelValidityForWidthODE can promote only if all five named upstream obligations are closed and width_ode_extracted_from_ns is true. BKM requires model validity plus explicit BKM flags. Full Clay is hard guarded false in this assembler.",
+    "L": "Scale-delta support rows may close from Sprint 154/155 receipts. Downstream model/BKM/Clay promotion remains separate and fail-closed.",
+    "O": "Worker 4 owns scripts/ns_sprint155_model_validity_assembler.py and outputs/ns_sprint155_model_validity_assembler/.",
+    "P": "Use this as a normalized model-validity readiness ledger, not as an Agda proof, analytic theorem, BKM proof, or Clay solution.",
+    "R": "Assemble Sprint 151-155 obligation states for localized identity, Biot-Savart closure, simultaneous constants, annular leakage, source bound, model validity, BKM finiteness, and full Clay promotion.",
+    "S": "Sprint 151 and 153 artifacts are present as history. The supplied Sprint 154 premise closes Biot-Savart/nonlocal and simultaneous constants as route support. Sprint 155 records the localized IBP identity at scale delta."
+  },
+  "decision": "fail_closed_model_validity_not_promoted",
+  "fail_closed": true,
+  "full_clay_hard_guard": true,
+  "lane": 4,
+  "open_obligations": [],
+  "program": "HouLuoModelValidityObligationAssembler",
+  "promotion_allowed": false,
+  "promotion_status": {
+    "ModelValidityForWidthODE": false,
+    "SymmetricHouLuoBKMFinite": false,
+    "clay_navier_stokes_promoted": false,
+    "full_clay_can_promote": false,
+    "full_clay_ns_solved": false
+  },
+  "row_count": 8,
+  "source_presence": {
+    "s151_cutoff": {
+      "exists": true,
+      "path": "outputs/ns_sprint151_cutoff_error_budget/ns_sprint151_cutoff_error_budget_summary.json",
+      "sha256": "201618b1f8b18d771070c416611e09e6d0879ae745ae48599f9064c8e021c07e"
+    },
+    "s151_identity": {
+      "exists": true,
+      "path": "outputs/ns_sprint151_localized_enstrophy_identity/ns_sprint151_localized_enstrophy_identity_summary.json",
+      "sha256": "cc340cb6094c8dd3bba77520ffcc0aa15026209b04986396e21c7238d6c97995"
+    },
+    "s151_identity_rows": {
+      "exists": true,
+      "path": "outputs/ns_sprint151_localized_enstrophy_identity/ns_sprint151_localized_enstrophy_identity_rows.json",
+      "sha256": "02e2afd36c109571180b4051e79425695b7acd5f51154ecf9341ae63a82abac9"
+    },
+    "s151_width_ode": {
+      "exists": true,
+      "path": "outputs/ns_sprint151_width_ode_extraction/ns_sprint151_width_ode_extraction_summary.json",
+      "sha256": "90c02f26fcc06dc9744136d1ceb7e39bd71127349f2bf600fce1e9960618e9a0"
+    },
+    "s153_balance": {
+      "exists": true,
+      "path": "outputs/ns_sprint153_source_dissipation_balance/ns_sprint153_source_dissipation_balance_summary.json",
+      "sha256": "a89d63ad7377780a0a9ec677752e5aa4257e69bffeb6ca150b214dd2e7c1e247"
+    },
+    "s153_constant_scan": {
+      "exists": true,
+      "path": "outputs/ns_sprint153_core_source_constant_scan/ns_sprint153_core_source_constant_scan_summary.json",
+      "sha256": "d8f3f36eca70f144ecf90c5fd3d47a5e2b0ee071439979a05fa24e4832191f24"
+    },
+    "s153_source": {
+      "exists": true,
+      "path": "outputs/ns_sprint153_localized_vortex_stretching_source/ns_sprint153_localized_vortex_stretching_source_summary.json",
+      "sha256": "8e7314242bd38b80176ef69f0e32a39ceb0378381fa826da6e8de4151578d098"
+    },
+    "s155_identity": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_summary.json",
+      "sha256": "b8bea99fa28c3e92e8959d8982fb4fb10f8831cbdf5de464e1ba4713328b6694"
+    },
+    "s155_operator": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_operator_boundary_term_checker/ns_sprint155_operator_boundary_term_checker_summary.json",
+      "sha256": "e4687135a1b954b58fc9f4bff7bd09b3d272334eed1a8d0c5725f7478dbcd29b"
+    }
+  },
+  "sprint": 155,
+  "summary_hash": "d1e924a0fd07bc3ba433d6e754bd7c36c8e775387137a33872abd2d7be6ffc38",
+  "validation_errors": [],
+  "validation_passed": true
+}

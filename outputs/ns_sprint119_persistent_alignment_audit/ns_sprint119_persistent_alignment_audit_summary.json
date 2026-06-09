@@ -1,0 +1,469 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint119PersistentAlignmentExistence.agda",
+  "alignment_strength_condition_recorded": true,
+  "assigned_bools": {
+    "alignmentStrengthConditionRecorded": "true",
+    "blowupCriterionBridgeClosed": "false",
+    "candidateMechanismClassifierRecorded": "true",
+    "clayNavierStokesPromoted": "false",
+    "imposedAlignmentCircularityRejected": "true",
+    "kStarCollapseFromCorrelationSourceClosed": "false",
+    "navierStokesClayAssemblyClosed": "false",
+    "nonCircularGeometricCorrelationSourceClosed": "false",
+    "nonCircularPersistenceSourceSearched": "true",
+    "persistenceWindowConditionRecorded": "true",
+    "persistentAlignmentExistenceClosed": "false",
+    "pointwiseAlignmentSignImported": "true",
+    "sprint118GeometricCorrelationImported": "true",
+    "sprint119PersistentAlignmentLedgerClosed": "true"
+  },
+  "blowup_criterion_bridge_closed": false,
+  "bool_checks": {
+    "alignmentStrengthConditionRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "blowupCriterionBridgeClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "candidateMechanismClassifierRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "imposedAlignmentCircularityRejected": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "kStarCollapseFromCorrelationSourceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "navierStokesClayAssemblyClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularGeometricCorrelationSourceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularPersistenceSourceSearched": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "persistenceWindowConditionRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "persistentAlignmentExistenceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "pointwiseAlignmentSignImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint118GeometricCorrelationImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint119PersistentAlignmentLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "candidate_mechanism_classifier_recorded": true,
+  "clay_navier_stokes_promoted": false,
+  "complete": false,
+  "contract": "ns_sprint119_persistent_alignment_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, anchors, required strings, exact booleans, or marker hits block audit passage",
+    "G": "Navier-Stokes Clay promotion remains false; this audit succeeds only for a coherent fail-closed persistent-alignment ledger",
+    "L": "all required anchors, literals, exact booleans, and keyword-consistency gates must match before coherent passage",
+    "O": "Worker 2 owns only the Sprint119 persistent-alignment audit script",
+    "P": "SPRINT119_PERSISTENT_ALIGNMENT_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "R": "verify Sprint119 imports Sprint118 sign/correlation evidence, records persistence-window and strength conditions, rejects imposed alignment circularity, records the classifier, and keeps downstream theorem and promotion flags false",
+    "S": "target Agda module is inspected when present; missing target blocks the evidence ledger but still emits outputs"
+  },
+  "downstream_flags_false": true,
+  "evidence_audit_passed": false,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_AUDIT_BLOCKED",
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint119PersistentAlignmentLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint118GeometricCorrelationImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "pointwiseAlignmentSignImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "persistenceWindowConditionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "alignmentStrengthConditionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "nonCircularPersistenceSourceSearched",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "imposedAlignmentCircularityRejected",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "candidateMechanismClassifierRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "persistentAlignmentExistenceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularGeometricCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "kStarCollapseFromCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint119PersistentAlignmentLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint118GeometricCorrelationImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:pointwiseAlignmentSignImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:persistenceWindowConditionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:alignmentStrengthConditionRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:nonCircularPersistenceSourceSearched",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:imposedAlignmentCircularityRejected",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:candidateMechanismClassifierRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:persistentAlignmentExistenceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:nonCircularGeometricCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:kStarCollapseFromCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint119 imports DASHI.Physics.Closure.NSSprint118NonCircularGeometricCorrelation as Sprint118.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint119 records the persistence window and strength requirements without proving them.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:alignment integral = integral_0^T compressive_alignment_strength(t) dt",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:requires non-circular lower bound on alignment duration and strength",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:imposed alignment assumption is circular",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:no non-circular persistence source is established",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:The Sprint118 pointwise sign is not a non-circular persistence source.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Candidate mechanisms are classified only as missing or circular, not as closure evidence.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint119 closes only the persistence-analysis ledger, while every analytic and Clay promotion gate remains false.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:clayNavierStokesPromoted remains false",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "missing",
+      "expected": "present",
+      "gate": "required_string:Sprint119 records PersistentAlignmentExistence as an obstruction/status receipt: alignment integral = integral_0^T compressive_alignment_strength(t) dt; requires non-circular lower bound on alignment duration and strength; imposed alignment assumption is circular; no non-circular persistence source is established; clayNavierStokesPromoted remains false.",
+      "passed": false,
+      "status": "FAIL_CLOSED_MISSING_REQUIRED_STRING"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint119PersistentAlignmentExistence.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "SPRINT119_PERSISTENT_ALIGNMENT_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+      "expected": "SPRINT119_PERSISTENT_ALIGNMENT_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "imposed_alignment_circularity_rejected": true,
+  "keyword_false_flags_coherent": true,
+  "keyword_true_flags_coherent": true,
+  "kstar_collapse_from_correlation_source_closed": false,
+  "ledger_coherent_fail_closed": false,
+  "missing_anchors": [],
+  "missing_required_strings": [
+    "Sprint119 records PersistentAlignmentExistence as an obstruction/status receipt: alignment integral = integral_0^T compressive_alignment_strength(t) dt; requires non-circular lower bound on alignment duration and strength; imposed alignment assumption is circular; no non-circular persistence source is established; clayNavierStokesPromoted remains false."
+  ],
+  "navier_stokes_clay_assembly_closed": false,
+  "non_circular_geometric_correlation_source_closed": false,
+  "non_circular_persistence_source_searched": true,
+  "persistence_window_condition_recorded": true,
+  "persistent_alignment_existence_closed": false,
+  "pointwise_alignment_sign_imported": true,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint119PersistentAlignmentExistence",
+    "canonicalNSSprint119PersistentAlignmentExistence",
+    "nsSprint119PersistentAlignmentExistenceReceipt",
+    "canonicalNSSprint119PersistentAlignmentExistenceReceipt",
+    "ImportedSprint118GeometricCorrelation",
+    "canonicalImportedSprint118GeometricCorrelation",
+    "PersistentAlignmentWindowReceipt",
+    "canonicalPersistentAlignmentWindowReceipt",
+    "PersistentAlignmentObstructionStatus",
+    "canonicalPersistentAlignmentObstructionStatus",
+    "CandidateMechanismClassifier",
+    "canonicalCandidateMechanismClassifier",
+    "Sprint119GateStatuses",
+    "canonicalSprint119GateStatuses",
+    "canonicalSprint119PersistentAlignmentExistenceFlags"
+  ],
+  "required_strings": [
+    "Sprint119 imports DASHI.Physics.Closure.NSSprint118NonCircularGeometricCorrelation as Sprint118.",
+    "Sprint119 records the persistence window and strength requirements without proving them.",
+    "alignment integral = integral_0^T compressive_alignment_strength(t) dt",
+    "requires non-circular lower bound on alignment duration and strength",
+    "imposed alignment assumption is circular",
+    "no non-circular persistence source is established",
+    "The Sprint118 pointwise sign is not a non-circular persistence source.",
+    "Candidate mechanisms are classified only as missing or circular, not as closure evidence.",
+    "Sprint119 closes only the persistence-analysis ledger, while every analytic and Clay promotion gate remains false.",
+    "clayNavierStokesPromoted remains false",
+    "Sprint119 records PersistentAlignmentExistence as an obstruction/status receipt: alignment integral = integral_0^T compressive_alignment_strength(t) dt; requires non-circular lower bound on alignment duration and strength; imposed alignment assumption is circular; no non-circular persistence source is established; clayNavierStokesPromoted remains false."
+  ],
+  "required_true_flags": true,
+  "route_decision": "SPRINT119_PERSISTENT_ALIGNMENT_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "sprint118_geometric_correlation_imported": true,
+  "sprint119_persistent_alignment_ledger_closed": true,
+  "target_present": true
+}

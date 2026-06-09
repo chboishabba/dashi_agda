@@ -1,0 +1,118 @@
+{
+  "cases": [
+    {
+      "checks": {
+        "finite_discrete_spectrum_proxy": true,
+        "finite_form_symmetric": true,
+        "orthogonal_projector": true,
+        "quotient_domain_stable": true,
+        "quotient_matrix_symmetric": true
+      },
+      "description": "Symmetric block-preserving finite Hamiltonian proxy; expected to descend to the quotient.",
+      "dimension": 6,
+      "eigenvalue_count": 4,
+      "eigenvalues": [
+        2.360287799015369,
+        2.724757766500316,
+        3.095563999801113,
+        3.519390434683205
+      ],
+      "expected_pass": true,
+      "failure_reasons": [],
+      "max_symmetry_error": 0.0,
+      "min_positive_gap": 0.364469967484947,
+      "name": "symmetric_quotient_stable",
+      "passed_proxy_checks": true,
+      "projector_idempotence_error": 0.0,
+      "projector_symmetry_error": 0.0,
+      "quotient_commutator_error": 0.0,
+      "quotient_dimension": 4,
+      "quotient_matrix_symmetry_error": 0.0,
+      "spectral_diameter": 1.159102635667836
+    },
+    {
+      "checks": {
+        "finite_discrete_spectrum_proxy": false,
+        "finite_form_symmetric": false,
+        "orthogonal_projector": true,
+        "quotient_domain_stable": true,
+        "quotient_matrix_symmetric": false
+      },
+      "description": "Domain-stable matrix with an asymmetric quotient block; expected to fail finite-form self-adjointness.",
+      "dimension": 6,
+      "eigenvalue_count": 0,
+      "eigenvalues": [],
+      "expected_pass": false,
+      "failure_reasons": [
+        "finite_form_symmetric",
+        "quotient_matrix_symmetric",
+        "finite_discrete_spectrum_proxy"
+      ],
+      "max_symmetry_error": 0.65,
+      "min_positive_gap": null,
+      "name": "bad_nonsymmetric",
+      "passed_proxy_checks": false,
+      "projector_idempotence_error": 0.0,
+      "projector_symmetry_error": 0.0,
+      "quotient_commutator_error": 0.0,
+      "quotient_dimension": 4,
+      "quotient_matrix_symmetry_error": 0.65,
+      "spectral_diameter": 0.0
+    },
+    {
+      "checks": {
+        "finite_discrete_spectrum_proxy": false,
+        "finite_form_symmetric": true,
+        "orthogonal_projector": true,
+        "quotient_domain_stable": false,
+        "quotient_matrix_symmetric": true
+      },
+      "description": "Symmetric full matrix with off-block coupling; expected to fail quotient/domain stability because [H,P] is nonzero.",
+      "dimension": 6,
+      "eigenvalue_count": 4,
+      "eigenvalues": [
+        2.360287799015369,
+        2.724757766500316,
+        3.095563999801113,
+        3.519390434683205
+      ],
+      "expected_pass": false,
+      "failure_reasons": [
+        "quotient_domain_stable",
+        "finite_discrete_spectrum_proxy"
+      ],
+      "max_symmetry_error": 0.0,
+      "min_positive_gap": 0.364469967484947,
+      "name": "bad_domain_unstable",
+      "passed_proxy_checks": false,
+      "projector_idempotence_error": 0.0,
+      "projector_symmetry_error": 0.0,
+      "quotient_commutator_error": 0.31,
+      "quotient_dimension": 4,
+      "quotient_matrix_symmetry_error": 0.0,
+      "spectral_diameter": 1.159102635667836
+    }
+  ],
+  "checks": {
+    "bad_cases_fail_visibly": true,
+    "domain_unstable_case_detected": true,
+    "expected_behavior_ok": true,
+    "good_symmetric_case_passes": true,
+    "nonsymmetric_case_detected": true,
+    "promotion_false": true
+  },
+  "claim_scope": "finite diagnostic proxy only",
+  "dimension": 6,
+  "harness": "ym_finite_selfadjoint_hamiltonian_proxy",
+  "jacobi_sweeps": 80,
+  "notes": [
+    "Jacobi eigenvalues are computed only for symmetric quotient blocks.",
+    "Finite spectrum here means a finite-dimensional matrix spectrum proxy.",
+    "This does not prove gauge quotient construction or YM Hamiltonian domination."
+  ],
+  "ok": true,
+  "promotion": false,
+  "quotient_dimension": 4,
+  "tolerance": 1e-09,
+  "version": 1
+}

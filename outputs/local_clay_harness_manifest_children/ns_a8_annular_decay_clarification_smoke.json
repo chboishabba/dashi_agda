@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "alpha": 0.5,
+      "c_times_m": 0.125,
+      "final_defect": 7.372129945658039e-14,
+      "higher_c": 0.04,
+      "monotone_decay": true,
+      "q": 0.3333333333333333,
+      "q_lt_one": true,
+      "theta": 0.5
+    },
+    {
+      "alpha": 0.5,
+      "c_times_m": 0.1,
+      "final_defect": 5.106273942591041e-13,
+      "higher_c": 0.03,
+      "monotone_decay": true,
+      "q": 0.36590909090909096,
+      "q_lt_one": true,
+      "theta": 0.55
+    },
+    {
+      "alpha": 0.5,
+      "c_times_m": 0.08,
+      "final_defect": 4.4622137379994575e-12,
+      "higher_c": 0.03,
+      "monotone_decay": true,
+      "q": 0.4074074074074074,
+      "q_lt_one": true,
+      "theta": 0.6
+    }
+  ],
+  "contract": "NS A8 annular decay clarification proxy",
+  "diagnostic_only": true,
+  "promotion": {
+    "a8_proved": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "summary": {
+    "all_final_defects_small": true,
+    "all_monotone_decay": true,
+    "all_q_lt_one": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "ModelValidityForWidthODE": true,
+  "SymmetricHouLuoBKMFinite": false,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint156_width_model_validity",
+  "decision": "model_validity_for_width_ode_closed_bkm_and_clay_guarded_false",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_width_model_validity/ns_sprint156_width_model_validity_manifest.json",
+      "sha256": "1bd85a01c0c95c76497da90bb86ca2f3b68f4b87035c344be4edbaa4f15c343d"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_width_model_validity/ns_sprint156_width_model_validity.md",
+      "sha256": "09c41f31382bd094bd554f183fd43326c16bd10cd9c5ce3eec52e08c5c4667a9"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_width_model_validity/ns_sprint156_width_model_validity_rows.csv",
+      "sha256": "c0f399ab233863bc12b7c4f343f6c0f8ad241c163289c706b584ec33dde78242"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_width_model_validity/ns_sprint156_width_model_validity_rows.json",
+      "sha256": "8694d83b18676c3a499d293b9dc22d288900cf2accbdb5e27258cafd9900dc9c"
+    },
+    "summary": {
+      "exists": true,
+      "path": "outputs/ns_sprint156_width_model_validity/ns_sprint156_width_model_validity_summary.json",
+      "sha256": "c3c248fcf9bcf477954d3d77aaa9cee695b0f2a370f9f40f04d95e9f5d5cc31d"
+    }
+  },
+  "full_clay_ns_solved": false,
+  "lane": 2,
+  "manifest_hash": "e641ea975cbfca8bc423a2b96009c2ba0c74737ae284bf5a046e1a0edeea2f1f",
+  "sprint": 156,
+  "validation_passed": true
+}

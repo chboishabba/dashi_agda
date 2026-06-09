@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave2-gate6-manager.json",
+  "lane": "paper7-gate6-dhr-aqft",
+  "lane_claim": "Paper 7 wave2 Gate 6 manager: inhabit DHR primitive sector constructors, arbitrary sector-to-lane predicates, or sector-specific nonempty carrier predicates; may spawn up to six leaf workers",
+  "orchestrator_id": "paper7-wave2-gate6-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.paper7-wave2-gate6-manager.json",
+  "timestamp": "2026-05-19T12:15:18Z"
+}

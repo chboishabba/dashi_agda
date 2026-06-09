@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "continuum_bridge_ready": true,
+  "domination_socket_ok": true,
+  "positive_holonomy_route_ok": true,
+  "promotion": false,
+  "spectral_margin_socket_ok": true
+}

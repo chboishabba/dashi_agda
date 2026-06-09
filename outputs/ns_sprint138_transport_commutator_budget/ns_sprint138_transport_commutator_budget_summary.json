@@ -1,0 +1,59 @@
+{
+  "artifact_complete": true,
+  "clay_navier_stokes_promoted": false,
+  "commutator_decision": "commutator_domination_open",
+  "commutator_domination_closed": false,
+  "commutator_domination_proved": false,
+  "commutator_domination_proven": false,
+  "contract": "ns_sprint138_transport_commutator_budget",
+  "control_card": {
+    "C": "Emit deterministic JSON, CSV, and Markdown artifacts with validate() and main().",
+    "F": "Missing required rows, missing commutator terms, accidental domination closure, global proof closure, or Clay promotion fails validation.",
+    "G": "Validation succeeds only when commutator domination, global barrier closure, and Clay promotion all remain false.",
+    "L": "The local first-positive-maximum ledger is recorded, but commutator domination is open and the local barrier is not globally closed.",
+    "O": "Create only the Sprint138 transport commutator emitter and its output directory surface.",
+    "P": "Use the artifact as a gate inventory for future Hou-Luo barrier work, not as a regularity proof.",
+    "R": "Analyze the v=partial_z u1 barrier equation after Sprint137 with transport commutator terms made explicit.",
+    "S": "Rows encode homogeneous v terms, the nonhomogeneous radial commutator, incompressibility limits, log strain hazard, possible domination hypotheses, and fail-closed status."
+  },
+  "exit_code": 0,
+  "fail_closed": true,
+  "first_positive_maximum": "At the first interior positive maximum of v, v>0, partial_r v=partial_z v=0, and Ltilde v<=0.",
+  "full_clay_ns_solved": false,
+  "gate": "TransportCommutatorDominationForVBarrier",
+  "global_barrier_closed": false,
+  "homogeneous_v_terms_classified": true,
+  "incompressibility_closes_commutator": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "local_barrier_globally_closed": false,
+  "log_biot_savart_strain_hazard_open": true,
+  "nonhomogeneous_radial_commutator_classified": true,
+  "open_hazards": [
+    "barrier_equation_inventory",
+    "homogeneous_v_terms_first_positive_max",
+    "nonhomogeneous_radial_commutator",
+    "incompressibility_relation_limitations",
+    "log_biot_savart_strain_hazard",
+    "current_fail_closed_status"
+  ],
+  "possible_domination_hypotheses": [
+    "domination_hypothesis_pointwise_sign",
+    "domination_hypothesis_integrated_margin"
+  ],
+  "promotion_decision": "hold_no_clay_promotion",
+  "proof_claimed": false,
+  "route_decision": "fail_closed_no_global_barrier",
+  "row_count": 8,
+  "transport_commutator_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v",
+  "u1_equation": "D_t u1 = 2 u1 partial_z psi1 + nu Ltilde u1",
+  "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v",
+  "variables": {
+    "Dt": "partial_t + u^r partial_r + u^z partial_z",
+    "Ltilde": "partial_r^2 + (3/r) partial_r + partial_z^2",
+    "omega1": "omega^theta / r",
+    "psi1": "psi^theta / r",
+    "u1": "u^theta / r",
+    "v": "partial_z u1"
+  }
+}

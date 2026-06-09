@@ -1,0 +1,278 @@
+{
+  "coarse_gate_definition": [
+    "q_nonnegative",
+    "q_zero",
+    "q_neg_symmetric",
+    "q_nat_square_homogeneous",
+    "shrink_monotonicity",
+    "hierarchy_consistency"
+  ],
+  "coarse_gate_false_accept_count": 6,
+  "coarse_gate_false_accepts": [
+    {
+      "classification": "near_miss_two_homogeneous_counterexample",
+      "expected": "fails four-point: norm-like hierarchy checks do not force Hilbert structure",
+      "failed_hypotheses": [
+        "four_point_parallelogram"
+      ],
+      "hierarchy_c_needed_999": 2.0000000000000018,
+      "max_abs_four_point": 45.67553560908853,
+      "name": "l1_like_squared",
+      "p95_abs_four_point": 16.88818078364475,
+      "strengthened_search_failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ]
+    },
+    {
+      "classification": "near_miss_two_homogeneous_counterexample",
+      "expected": "fails four-point: p != 2 is not parallelogram/Hilbert",
+      "failed_hypotheses": [
+        "four_point_parallelogram"
+      ],
+      "hierarchy_c_needed_999": 1.9795206681774782,
+      "max_abs_four_point": 6.904483289933973,
+      "name": "p_norm_squared_p3",
+      "p95_abs_four_point": 2.4474183796291893,
+      "strengthened_search_failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ]
+    },
+    {
+      "classification": "near_miss_two_homogeneous_counterexample",
+      "expected": "fails four-point: max norm squared is two-homogeneous but non-Hilbert",
+      "failed_hypotheses": [
+        "four_point_parallelogram"
+      ],
+      "hierarchy_c_needed_999": 2.000000000000001,
+      "max_abs_four_point": 11.688905762043445,
+      "name": "max_norm_squared",
+      "p95_abs_four_point": 5.1738991738026865,
+      "strengthened_search_failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ]
+    },
+    {
+      "classification": "near_miss_two_homogeneous_counterexample",
+      "expected": "fails four-point: random polyhedral norm squared is a seeded near-miss",
+      "failed_hypotheses": [
+        "four_point_parallelogram"
+      ],
+      "hierarchy_c_needed_999": 2.0000000000000004,
+      "max_abs_four_point": 6.694648658835906,
+      "name": "random_polyhedral_norm_squared",
+      "p95_abs_four_point": 3.712792807322619,
+      "strengthened_search_failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ]
+    },
+    {
+      "classification": "near_miss_two_homogeneous_counterexample",
+      "expected": "fails four-point despite two-homogeneity and nonnegative coupling",
+      "failed_hypotheses": [
+        "four_point_parallelogram"
+      ],
+      "hierarchy_c_needed_999": 1.9485566239628125,
+      "max_abs_four_point": 14.20269359505781,
+      "name": "coupled_l1_l2_two_homogeneous",
+      "p95_abs_four_point": 7.157649179133003,
+      "strengthened_search_failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ]
+    },
+    {
+      "classification": "near_miss_two_homogeneous_counterexample",
+      "expected": "fails four-point: quadratic plus non-Hilbert two-homogeneous terms",
+      "failed_hypotheses": [
+        "four_point_parallelogram"
+      ],
+      "hierarchy_c_needed_999": 1.946800138047708,
+      "max_abs_four_point": 7.19963454005671,
+      "name": "mixed_two_homogeneous",
+      "p95_abs_four_point": 3.7046347864130666,
+      "strengthened_search_failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ]
+    }
+  ],
+  "coarse_gate_is_insufficient": true,
+  "coarse_gate_rejects_before_four_point": [
+    {
+      "coarse_gate_failures": [
+        "q_nat_square_homogeneous",
+        "hierarchy_consistency"
+      ],
+      "expected": "fails scaling and four-point: coupling can break quadraticity directly",
+      "failed_hypotheses": [
+        "q_nat_square_homogeneous",
+        "hierarchy_consistency",
+        "four_point_parallelogram"
+      ],
+      "name": "coupled_nonquadratic_quartic"
+    }
+  ],
+  "conclusion": "Sampled homogeneity/monotonicity/subadditivity-like checks false-accept non-Hilbert two-homogeneous candidates. The live proof obligation is a gluing-residual statement strong enough to force the four-point/parallelogram cancellation, not another coarse hierarchy bound.",
+  "diagnostic": "gluing_residual_forces_four_point_cancellation",
+  "dim": 4,
+  "hierarchy_c": 2.0,
+  "live_target": "GluingResidualForcesFourPointCancellation",
+  "promotion": false,
+  "quadratic_controls_retained": [
+    {
+      "hierarchy_c_needed_999": 1.9229538005945563,
+      "max_abs_four_point": 1.0658141036401503e-14,
+      "name": "quadratic_l2_squared"
+    },
+    {
+      "hierarchy_c_needed_999": 1.9331650116419306,
+      "max_abs_four_point": 1.4210854715202004e-14,
+      "name": "coupled_quadratic_spd"
+    },
+    {
+      "hierarchy_c_needed_999": 1.9926849115264016,
+      "max_abs_four_point": 5.684341886080802e-14,
+      "name": "random_spd_quadratic"
+    }
+  ],
+  "residual_risk": "Numerical harness only. It supplies deterministic counterexample diagnostics for candidate hypotheses and does not prove the Agda boundary.",
+  "samples": 512,
+  "seed": 20260608,
+  "strengthened_hypothesis_rejections": [
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "name": "l1_like_squared",
+      "strongest_signal": "polarization_additivity"
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "name": "p_norm_squared_p3",
+      "strongest_signal": "polarization_additivity"
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "name": "max_norm_squared",
+      "strongest_signal": "polarization_additivity"
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "name": "random_polyhedral_norm_squared",
+      "strongest_signal": "polarization_additivity"
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "name": "coupled_l1_l2_two_homogeneous",
+      "strongest_signal": "polarization_additivity"
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "name": "mixed_two_homogeneous",
+      "strongest_signal": "polarization_additivity"
+    },
+    {
+      "classification": "rejected_by_bilinearity_hypothesis",
+      "failed_hypotheses": [
+        "parallelogram",
+        "midpoint_additivity",
+        "second_difference_bilinearity",
+        "second_difference_translation",
+        "clarkson_hilbert_residual",
+        "polarization_diagonal",
+        "polarization_cauchy",
+        "polarization_additivity",
+        "jensen_quadraticity"
+      ],
+      "name": "coupled_nonquadratic_quartic",
+      "strongest_signal": "polarization_additivity"
+    }
+  ],
+  "terminal_unification_promoted": false
+}

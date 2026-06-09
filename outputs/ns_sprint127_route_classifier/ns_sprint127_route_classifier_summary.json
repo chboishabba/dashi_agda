@@ -1,0 +1,37 @@
+{
+  "candidate_routes": [
+    "axisymmetric_boundary_vortex_stretching_gate",
+    "boundary_vorticity_amplification_law",
+    "strain_alignment_near_axis_or_boundary",
+    "viscous_boundary_layer_dominance_check",
+    "hou_luo_scaling_compatibility",
+    "nonresonant_pressure_triads",
+    "clay_navier_stokes"
+  ],
+  "classifications": {
+    "axisymmetric_boundary_vortex_stretching_gate": "live_primary_open",
+    "boundary_vorticity_amplification_law": "open_required",
+    "clay_navier_stokes": "not_promoted",
+    "hou_luo_scaling_compatibility": "recorded_compatible",
+    "nonresonant_pressure_triads": "secondary_open",
+    "strain_alignment_near_axis_or_boundary": "open_required",
+    "viscous_boundary_layer_dominance_check": "open_required"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "compatible_route_count": 1,
+  "complete": false,
+  "contract": "ns_sprint127_route_classifier",
+  "exit_code": 1,
+  "exit_reason": "NS is incomplete; BoundaryVorticityAmplificationLaw remains open_required",
+  "live_route_count": 1,
+  "open_route_count": 5,
+  "primary_route": "axisymmetric_boundary_vortex_stretching_gate",
+  "recommended_classification": "open_required",
+  "recommended_next_lemma": "BoundaryVorticityAmplificationLaw",
+  "recommended_route_id": "boundary_vorticity_amplification_law",
+  "required_classifications_met": true,
+  "required_open_route_count": 3,
+  "route_count": 7
+}

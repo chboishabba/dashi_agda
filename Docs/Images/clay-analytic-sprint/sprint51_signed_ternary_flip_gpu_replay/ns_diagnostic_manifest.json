@@ -1,0 +1,26 @@
+{
+  "source": "../dashiCFD/outputs/sprint51_signed_ternary_flip_gpu_audit/ns_signed_ternary_flip_summary.json",
+  "parameters": {
+    "replay_mode": "sprint51_signed_ternary_flip_from_gpu_summary",
+    "signed_ternary_flip_summary_input": "../dashiCFD/outputs/sprint51_signed_ternary_flip_gpu_audit/ns_signed_ternary_flip_summary.json"
+  },
+  "diagnostic_mode": "sprint51_signed_ternary_flip_replay_from_gpu_summary",
+  "signed_ternary_flip_balance_row_count": 451,
+  "signed_ternary_flip_bt_decay_row_count": 9,
+  "signed_ternary_flip_net_lyapunov_row_count": 583,
+  "signed_ternary_flip_no2cycle_row_count": 11211,
+  "outputs": {
+    "signed_ternary_flip_summary": "Docs/Images/clay-analytic-sprint/sprint51_signed_ternary_flip_gpu_replay/ns_signed_ternary_flip_summary.json",
+    "cross_shell_flip_balance_csv": "Docs/Images/clay-analytic-sprint/sprint51_signed_ternary_flip_gpu_replay/ns_cross_shell_flip_balance.csv",
+    "net_ternary_lyapunov_csv": "Docs/Images/clay-analytic-sprint/sprint51_signed_ternary_flip_gpu_replay/ns_net_ternary_lyapunov.csv",
+    "bt_signed_flip_decay_csv": "Docs/Images/clay-analytic-sprint/sprint51_signed_ternary_flip_gpu_replay/ns_bt_signed_flip_decay.csv",
+    "no2cycle_diagnostic_csv": "Docs/Images/clay-analytic-sprint/sprint51_signed_ternary_flip_gpu_replay/ns_no2cycle_diagnostic.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint51_signed_ternary_flip_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint51_signed_ternary_flip_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftyOneSignedTernaryFlipAuditReceipt",
+  "evidence_boundary": "Sprint 51 replay consumes dashiCFD signed ternary flip summaries only. It records involution-aware balance, BT proxy signed decay, net residue Lyapunov diagnostics, and no-2-cycle diagnostics. It does not prove theorem-grade BT distance, signed source summability, net-residue Lyapunov closure, physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_SIGNED_TERNARY_FLIP_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

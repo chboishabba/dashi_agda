@@ -1,0 +1,37 @@
+{
+  "contract": "ns_sprint161_defect_monotonicity_gap",
+  "decision": "fail_closed_general_3d_defect_monotonicity_gap",
+  "fail_closed": true,
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_defect_monotonicity_gap/ns_sprint161_defect_monotonicity_gap_manifest.json",
+      "sha256": "5aa1fd264831307c3bdaa586b0059f6e2700eea16eda94ae3b1e6908e7c7615b"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_defect_monotonicity_gap/ns_sprint161_defect_monotonicity_gap.md",
+      "sha256": "54796ce2374051ca7ecf41cf6b332996a5947dc5a99df0be59b7d7959a635049"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_defect_monotonicity_gap/ns_sprint161_defect_monotonicity_gap_rows.csv",
+      "sha256": "2b29b23aa8fdad01cd01f92a16ddc661b7577e14a6bb6b4e3be0b94504733361"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_defect_monotonicity_gap/ns_sprint161_defect_monotonicity_gap_rows.json",
+      "sha256": "fdcdd4d0b5c394070624f6a98d9e00440cb24d6d8ddb50dbc2ea2b742e38f1dc"
+    },
+    "summary": {
+      "exists": true,
+      "path": "/home/c/Documents/code/dashi_agda/outputs/ns_sprint161_defect_monotonicity_gap/ns_sprint161_defect_monotonicity_gap_summary.json",
+      "sha256": "67699b03acd4edd3c35f8ae1978bdfb6f8b840c8565b77256bf3213a470128f5"
+    }
+  },
+  "lane": 3,
+  "manifest_hash": "6338dfccba5e601b42b946f566645be23eeefb26fcf3283483f1be4478320160",
+  "program": "DefectMonotonicityGapLedger",
+  "sprint": 161,
+  "validation_passed": true
+}

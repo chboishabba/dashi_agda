@@ -1,0 +1,146 @@
+{
+  "all_required_receipt_anchors_present": true,
+  "anchor_phrases": [
+    "frozen danger-time",
+    "moving K boundary",
+    "pointwise H1 tail",
+    "independent coefficient",
+    "Clay"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "closed_frozen_danger_time_bookkeeping_true": true,
+  "closed_frozen_k_bookkeeping_true": true,
+  "complete": false,
+  "contract": "ns_sprint92_moving_kstar_boundary_audit",
+  "dominance_gate_closed": false,
+  "edge_influx_bound_closed": false,
+  "fail_closed": false,
+  "false_gate_failures": [],
+  "final_decision": "BOUNDARY_AUDIT_PASS",
+  "forbidden_term_count": 0,
+  "forbidden_terms_detected": [],
+  "gate_results": [
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "exported": true,
+      "field_name": "fixedDangerTimeFrozenKBookkeepingClosed",
+      "gate_id": "G1",
+      "gate_name": "FixedDangerTimeFrozenKBookkeepingClosed",
+      "next_required_input": "fixed danger-time frozen-K bookkeeping is recorded as true",
+      "passed": true,
+      "status": "TRUE_BOOKKEEPING_RECORDED"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "movingInTimeKStarLocalizationBoundaryClosed",
+      "gate_id": "G2",
+      "gate_name": "MovingKStarBoundaryTheoremClosed",
+      "next_required_input": "prove K*(t) moving localization boundary",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "highHighDominanceClosed",
+      "gate_id": "G3",
+      "gate_name": "HighHighDominanceClosed",
+      "next_required_input": "supply explicit high-high/dominance theorem",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "dangerShellDissipationDominatesInfluxClosed",
+      "gate_id": "G4",
+      "gate_name": "DominanceGateClosed",
+      "next_required_input": "supply danger-shell dissipation dominance",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "pointwiseTailFromLocalDissipationClosed",
+      "gate_id": "G5",
+      "gate_name": "PointwiseTailClosed",
+      "next_required_input": "supply pointwise tail extraction",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "independentCoefficientBudgetClosed",
+      "gate_id": "G6",
+      "gate_name": "IndependentCoefficientClosed",
+      "next_required_input": "supply independent coefficient budget",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "clayNavierStokesPromoted",
+      "gate_id": "G7",
+      "gate_name": "ClayNavierStokesPromoted",
+      "next_required_input": "keep Clay Navier-Stokes promotion false",
+      "passed": true,
+      "status": "FALSE_NO_CLAY_PROMOTION"
+    },
+    {
+      "actual_value": 0,
+      "expected_value": 0,
+      "exported": true,
+      "field_name": "forbidden_terms",
+      "gate_id": "G8",
+      "gate_name": "NoForbiddenStubOrHoleLanguage",
+      "next_required_input": "remove postulate/TODO/stub/placeholder/future proof/hole wording",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "gate_table": "ns_sprint92_moving_kstar_boundary_gate_table.csv",
+  "high_high_dominance_closed": false,
+  "independent_coefficient_closed": false,
+  "moving_boundary_theorem_closed": false,
+  "moving_k_boundary_closed": false,
+  "moving_k_boundary_phrase": "moving K boundary remains open",
+  "non_circular_high_high_control_closed": false,
+  "open_obligations": [
+    "prove the moving K*(t) localization boundary theorem",
+    "prove non-circular high-high/dominance control",
+    "prove edge influx and theta preservation at the danger shell",
+    "supply pointwise tail extraction with an independent coefficient budget",
+    "keep Clay Navier-Stokes promotion false until all analytic gates close"
+  ],
+  "pointwise_independent_coefficient_closed": false,
+  "pointwise_tail_closed": false,
+  "receipt_path": "DASHI/Physics/Closure/NSSprint92MovingKStarLocalizationBoundary.agda",
+  "report": "ns_sprint92_moving_kstar_boundary_audit.md",
+  "route_decision": "open",
+  "rows_json": "ns_sprint92_moving_kstar_boundary_audit_rows.json",
+  "source_results": [
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint92MovingKStarLocalizationBoundary.agda",
+      "present_in_repo": true,
+      "required_anchors": "NSSprint92MovingKStarLocalizationBoundary; canonicalNSSprint92MovingKStarLocalizationBoundary; fixedDangerTimeFrozenKBookkeepingClosed; fixedDangerTimeFrozenKBookkeepingClosedIsTrue; movingInTimeKStarLocalizationBoundaryClosed; movingInTimeKStarLocalizationBoundaryClosedIsFalse; dangerShellDissipationDominatesInfluxClosed; dangerShellDissipationDominatesInfluxClosedIsFalse; pointwiseTailFromLocalDissipationClosed; pointwiseTailFromLocalDissipationClosedIsFalse; highHighDominanceClosed; highHighDominanceClosedIsFalse; independentCoefficientBudgetClosed; independentCoefficientBudgetClosedIsFalse; Sprint92FrozenKJustification; Sprint92MovingBoundary; canonicalSprint92OpenGates; canonicalSprint92Flags; clayNavierStokesPromoted; clayNavierStokesPromotedIsFalse",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "NSSprint92MovingKStarLocalizationBoundary"
+    }
+  ],
+  "source_table": "ns_sprint92_moving_kstar_boundary_source_table.csv",
+  "theta_preservation_closed": false,
+  "true_gate_failures": []
+}

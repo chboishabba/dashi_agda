@@ -1,0 +1,34 @@
+{
+  "dimension": 2,
+  "families": [
+    {
+      "expected_cross_term_null": true,
+      "max_null_cross_term": 0.0,
+      "max_quotient_cross_term": 2.220446049250313e-16,
+      "name": "linear_quotient",
+      "observed_cross_term_null": true,
+      "quotient_transport_error": 2.220446049250313e-16
+    },
+    {
+      "expected_cross_term_null": true,
+      "max_null_cross_term": 0.2327343795111282,
+      "max_quotient_cross_term": 1.6653345369377348e-16,
+      "name": "quotient_plus_null_residual",
+      "observed_cross_term_null": true,
+      "quotient_transport_error": 1.6653345369377348e-16
+    },
+    {
+      "expected_cross_term_null": false,
+      "max_null_cross_term": 0.0,
+      "max_quotient_cross_term": 0.23527192032667987,
+      "name": "nonlinear_quotient",
+      "observed_cross_term_null": false,
+      "quotient_transport_error": 0.23527192032667987
+    }
+  ],
+  "four_point_promotion": false,
+  "promotion": false,
+  "samples": 24,
+  "seed": 166,
+  "terminal_promotion": false
+}

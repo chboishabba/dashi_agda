@@ -1,0 +1,215 @@
+{
+  "cascade_closed_zero_mode_output_width_proved": false,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sign_antisymmetry_depth_sweep",
+  "depth_stats": [
+    {
+      "accepted_triads": 384,
+      "attempted_triads": 384,
+      "depth": 1,
+      "max_leakage": 0.9999311649564212,
+      "max_omega_c_dot_c_abs": 1.6653345369377348e-16,
+      "max_output_divergence_abs": 2.220446049250313e-16,
+      "max_relative_sign_identity_abs": 1.9888564688809056e-16,
+      "max_sign_identity_abs": 8.881784197001252e-16,
+      "mean_sign_identity_abs": 1.3317616685363612e-16,
+      "median_leakage": 0.252452093233691,
+      "min_leakage": 4.3007686360881695e-07,
+      "output_width": 0.05144765546702171,
+      "output_width_witness": [
+        -0.36455876869419906,
+        0.5185473341575669,
+        0.7734375
+      ],
+      "p95_leakage": 0.9783499720480004,
+      "survivor_fraction_of_accepted": 0.2708333333333333,
+      "survivors": 104
+    },
+    {
+      "accepted_triads": 208,
+      "attempted_triads": 208,
+      "depth": 2,
+      "max_leakage": 0.9999972114357413,
+      "max_omega_c_dot_c_abs": 1.249000902703301e-16,
+      "max_output_divergence_abs": 1.6653345369377348e-16,
+      "max_relative_sign_identity_abs": 1.913724618575658e-16,
+      "max_sign_identity_abs": 8.881784197001252e-16,
+      "mean_sign_identity_abs": 1.6676697416169344e-16,
+      "median_leakage": 0.3186871711062498,
+      "min_leakage": 1.0811503195294344e-06,
+      "output_width": 0.08774040839059222,
+      "output_width_witness": [
+        0.12303929920658482,
+        -0.6407663737232958,
+        -0.7578125
+      ],
+      "p95_leakage": 0.9916309230468462,
+      "survivor_fraction_of_accepted": 0.25961538461538464,
+      "survivors": 54
+    },
+    {
+      "accepted_triads": 108,
+      "attempted_triads": 108,
+      "depth": 3,
+      "max_leakage": 0.9951293585813552,
+      "max_omega_c_dot_c_abs": 9.71445146547012e-17,
+      "max_output_divergence_abs": 1.1102230246251565e-16,
+      "max_relative_sign_identity_abs": 1.3065716931604966e-16,
+      "max_sign_identity_abs": 8.881784197001252e-16,
+      "mean_sign_identity_abs": 1.9279523964953347e-16,
+      "median_leakage": 0.21909451627214885,
+      "min_leakage": 2.30076367872232e-05,
+      "output_width": 0.2326721562398986,
+      "output_width_witness": [
+        -0.15870686824290586,
+        0.14538849186327957,
+        0.9765625
+      ],
+      "p95_leakage": 0.9759134324281095,
+      "survivor_fraction_of_accepted": 0.25,
+      "survivors": 27
+    },
+    {
+      "accepted_triads": 54,
+      "attempted_triads": 54,
+      "depth": 4,
+      "max_leakage": 0.9996538367413901,
+      "max_omega_c_dot_c_abs": 1.1102230246251565e-16,
+      "max_output_divergence_abs": 1.6653345369377348e-16,
+      "max_relative_sign_identity_abs": 1.299727080801736e-16,
+      "max_sign_identity_abs": 8.881784197001252e-16,
+      "mean_sign_identity_abs": 1.8503717077085943e-16,
+      "median_leakage": 0.2092262569600713,
+      "min_leakage": 7.5467223556444735e-06,
+      "output_width": 0.2598269433366297,
+      "output_width_witness": [
+        0.1699455367535249,
+        -0.7554249495358928,
+        0.6328125
+      ],
+      "p95_leakage": 0.966387818258366,
+      "survivor_fraction_of_accepted": 0.3333333333333333,
+      "survivors": 18
+    }
+  ],
+  "interpretation": "The sign identity is finite algebra from c=a+b and omega_c tangent to c. Survivor counts/widths are thresholded diagnostics for the selected coherence channel, not a proof of cascade closure.",
+  "parameters": {
+    "coherence_channel": "propagated_velocity_mean",
+    "continuations": 2,
+    "depth": 4,
+    "max_paths_per_depth": 1200,
+    "near_resonance_threshold": 1e-08,
+    "normals": 128,
+    "rho_max": 4.0,
+    "rho_min": 0.25,
+    "samples": 384,
+    "symmetrized": true,
+    "zero_mode_threshold": 0.05
+  },
+  "pde_residual_sign_proved": false,
+  "promotion": false,
+  "sample_survivors": [
+    {
+      "depth": 1,
+      "leakage_fraction": 0.028111484620954436,
+      "output_direction": [
+        -0.8080425477537254,
+        0.48986677720769634,
+        -0.32725797409354823
+      ],
+      "sign_identity_abs": 4.440892098500626e-16
+    },
+    {
+      "depth": 1,
+      "leakage_fraction": 0.015332369714822013,
+      "output_direction": [
+        0.5962920473321931,
+        -0.12371944623153663,
+        0.7931767097643143
+      ],
+      "sign_identity_abs": 2.220446049250313e-16
+    },
+    {
+      "depth": 1,
+      "leakage_fraction": 0.021790299634890663,
+      "output_direction": [
+        0.1966808513712962,
+        0.5986927996890906,
+        0.7764557774299194
+      ],
+      "sign_identity_abs": 0.0
+    },
+    {
+      "depth": 1,
+      "leakage_fraction": 0.004581370446779227,
+      "output_direction": [
+        -0.9191440272317868,
+        -0.39374352956319697,
+        -0.011844413503767873
+      ],
+      "sign_identity_abs": 2.220446049250313e-16
+    },
+    {
+      "depth": 1,
+      "leakage_fraction": 2.5696148860302983e-05,
+      "output_direction": [
+        0.9085414843098807,
+        0.16626618787807124,
+        0.3832856976936298
+      ],
+      "sign_identity_abs": 3.3306690738754696e-16
+    },
+    {
+      "depth": 1,
+      "leakage_fraction": 0.046835495733939095,
+      "output_direction": [
+        0.08505992736649554,
+        0.8247159273435707,
+        0.5591139847493004
+      ],
+      "sign_identity_abs": 2.220446049250313e-16
+    },
+    {
+      "depth": 1,
+      "leakage_fraction": 0.00039340564026872404,
+      "output_direction": [
+        0.17080577355278184,
+        -0.9076607741795851,
+        0.38337619479664087
+      ],
+      "sign_identity_abs": 1.1102230246251565e-16
+    },
+    {
+      "depth": 1,
+      "leakage_fraction": 0.0018151491496597291,
+      "output_direction": [
+        0.688830567301271,
+        0.11159284505620307,
+        0.7162817088853182
+      ],
+      "sign_identity_abs": 4.440892098500626e-16
+    }
+  ],
+  "scope": "finite_exact_leray_vorticity_depth_sweep_diagnostic_only_not_pde_proof",
+  "seed": 20260608,
+  "summary": {
+    "depths_completed": 4,
+    "final_depth_output_width": 0.2598269433366297,
+    "final_depth_survivors": 18,
+    "max_relative_sign_antisymmetry_identity_abs": 1.9888564688809056e-16,
+    "max_sign_antisymmetry_identity_abs": 8.881784197001252e-16,
+    "output_width_by_depth": [
+      0.05144765546702171,
+      0.08774040839059222,
+      0.2326721562398986,
+      0.2598269433366297
+    ],
+    "sign_identity_pass_roundoff_1e-10": true,
+    "survivor_counts_by_depth": [
+      104,
+      54,
+      27,
+      18
+    ]
+  }
+}

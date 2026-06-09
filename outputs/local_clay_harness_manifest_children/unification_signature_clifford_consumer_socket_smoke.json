@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "clifford_rows_ok": true,
+  "jvn_socket_ok": true,
+  "promotion": false,
+  "signature_rows_ok": true,
+  "terminal_block_ok": true
+}

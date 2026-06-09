@@ -1,0 +1,90 @@
+{
+  "artifact_complete": true,
+  "artifact_hashes": {
+    "markdown": "e325aa6f7a50c1a2ded41d395cc2bca402fe3bd33197164962d7e96847738cb1",
+    "rows_csv": "68232b30919096bf00d1972d10197854f1dd2745ced4bd301cf5b1066c26ce0f",
+    "rows_json": "2985634b32955da2933fa0ce43ff3c7a030fea0173e447fefb2d9ea3eaa7326a",
+    "summary_json": "c54193b71f2f53f9005d506c3a940519a034840bfc81db48ccdce9dd7e828b93"
+  },
+  "artifacts": {
+    "markdown": "outputs/ns_sprint143_secondary_peak_exclusion_ledger/ns_sprint143_secondary_peak_exclusion_ledger.md",
+    "rows_csv": "outputs/ns_sprint143_secondary_peak_exclusion_ledger/ns_sprint143_secondary_peak_exclusion_ledger_rows.csv",
+    "rows_json": "outputs/ns_sprint143_secondary_peak_exclusion_ledger/ns_sprint143_secondary_peak_exclusion_ledger_rows.json",
+    "summary_json": "outputs/ns_sprint143_secondary_peak_exclusion_ledger/ns_sprint143_secondary_peak_exclusion_ledger_summary.json"
+  },
+  "blocker": "SecondaryPeakExclusion",
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "contract": "ns_sprint143_secondary_peak_exclusion_ledger",
+  "control_card": {
+    "C": "Stdlib Python deterministic emitter with dataclass rows, stable SHA-256 hashes, validation, JSON, CSV, and Markdown.",
+    "F": "Any missing required row, claimed theorem closure, hidden global barrier closure, missing constants closure, or promotion fails validation.",
+    "G": "Validation passes only when secondary-peak exclusion, global barrier, global proof, Clay solution, and promotion flags are false.",
+    "L": "Sprint 138 secondary-peak blocker plus Sprint 140/142 ledgers imply a normalized theorem obligation, not a proof.",
+    "O": "Worker lane 2 owns only scripts/ns_sprint143_secondary_peak_exclusion_ledger.py and outputs/ns_sprint143_secondary_peak_exclusion_ledger/.",
+    "P": "Use the artifact as a fail-closed ledger for future theorem work; do not use it as a global barrier certificate.",
+    "R": "Normalize the theorem still needed: no secondary axial peak, shoulder, or off-route positive local maximum of v on the monitored interval.",
+    "S": "Initial peak and symmetry support exist only locally; smoothing, nonlinear source terms, boundary/annular migration, missing zero-number theory, and missing constants keep the blocker open."
+  },
+  "decision": "fail_closed_secondary_peak_exclusion_ledger_open",
+  "exit_code": 0,
+  "fail_closed": true,
+  "full_clay_ns_solved": false,
+  "global_barrier_closed": false,
+  "global_proof": false,
+  "global_proof_closed": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "lane": 2,
+  "monitored_interval": "barrier-monitoring interval shared by the axial monotonicity route",
+  "monitored_variable": "v = partial_z u1",
+  "normalized_theorem_needed": "No secondary axial peak, shoulder, or off-route positive local maximum of v=partial_z u1 forms on the monitored interval.",
+  "open_row_ids": [
+    "boundary_annular_migration",
+    "initial_single_peak_support",
+    "missing_constants",
+    "missing_coupled_zero_number_theorem",
+    "nonlinear_source_shoulder",
+    "parabolic_smoothing_insufficiency",
+    "symmetry_support"
+  ],
+  "parent_gate": "AxialMonotonicityOfSwirlProfile",
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "required_row_ids": [
+    "boundary_annular_migration",
+    "initial_single_peak_support",
+    "missing_constants",
+    "missing_coupled_zero_number_theorem",
+    "nonlinear_source_shoulder",
+    "parabolic_smoothing_insufficiency",
+    "symmetry_support"
+  ],
+  "row_count": 7,
+  "row_hashes": {
+    "boundary_annular_migration": "f438d8cbc98c04afe8db132123bfe018a071e8c743d8d72eafed5d2427cf8310",
+    "initial_single_peak_support": "b8288cf128373fa7c03d8bf19b1b870fd05a4f2944e40d817d5c807fedc09374",
+    "missing_constants": "0cd5c554a8109ab52a6fcd9568c2e9c5fee438514de238b499e04f34369dcf5d",
+    "missing_coupled_zero_number_theorem": "102ba2175cf2cb9320c0b94c1636a365fc833c0fd0f246637d1f7a06c8c1d90b",
+    "nonlinear_source_shoulder": "7c38d002732029fef6394004dce805fd986d1067e99ff3b1a3fa46dd7acc2920",
+    "parabolic_smoothing_insufficiency": "3eb9af003e2c21138205a624ef23903b7b01bc1091f181498170aace077f234c",
+    "symmetry_support": "a18f6c8cd9b9c63534b866f5e241e42d027e308a0a8fe5b1e4a8eecbdd35fc20"
+  },
+  "rows_hash": "654e54ba5c031d8da20639d2f305b9c5f7c13527c1379da16d358afd3f4a3d1d",
+  "secondary_peak_exclusion_closed": false,
+  "secondary_peak_exclusion_proved": false,
+  "source_artifacts": {
+    "sprint138_secondary_peak": "outputs/ns_sprint138_secondary_peak_exclusion/ns_sprint138_secondary_peak_exclusion_summary.json",
+    "sprint140_constant_compatibility": "outputs/ns_sprint140_constant_compatibility_ledger/ns_sprint140_constant_compatibility_ledger_summary.json",
+    "sprint142_boundary_annulus_concavity": "outputs/ns_sprint142_boundary_annulus_concavity_ledger/ns_sprint142_boundary_annulus_concavity_ledger_summary.json"
+  },
+  "source_summary_hashes": {
+    "sprint138_secondary_peak": "6768c7bf5223a5099336116bfa3e77119cd63962731421e3419b730c00eba1b9",
+    "sprint140_constant_compatibility": "6c83a2d8fccdb4719c6ce191e2bbefc8988b1125b99a28a262773d846d262206",
+    "sprint142_boundary_annulus_concavity": "854441f932791e464dfa88ffef41dd86dafe205f11fdff3c158e1a8d1db0f134"
+  },
+  "sprint": 143,
+  "summary_payload_hash_without_self": "be556831916314f1cc4fd535507dec6a24e9e85fa15421ca56a9382936f51cc9",
+  "v_barrier_equation": "D_t v = nu Ltilde v + 2 v partial_z psi1 + 2 u1 partial_z^2 psi1 - (partial_z u^r) partial_r u1 - (partial_z u^z) v"
+}

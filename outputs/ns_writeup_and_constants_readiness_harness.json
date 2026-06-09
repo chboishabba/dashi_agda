@@ -1,0 +1,13 @@
+{
+  "all_checks_ok": true,
+  "blocker_count": 5,
+  "clause_count": 6,
+  "constants_ready": true,
+  "constants_remaining_count": 1,
+  "ns_local_proof_content_complete": true,
+  "pde_translation_remaining_count": 1,
+  "pde_translation_remaining_only": true,
+  "promotion": false,
+  "writeup_remaining_count": 2,
+  "writeup_remaining_only": true
+}

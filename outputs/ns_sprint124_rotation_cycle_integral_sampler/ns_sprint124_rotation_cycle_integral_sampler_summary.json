@@ -1,0 +1,32 @@
+{
+  "clay": false,
+  "complete": true,
+  "contract": "ns_sprint124_rotation_cycle_integral_sampler",
+  "exit_code": 0,
+  "favorable_dwell_fraction_formula": "measure{s in [0,(Omega-C)*T]: cos(2s)>0}/((Omega-C)*T)",
+  "favorable_dwell_fraction_max": 1.0,
+  "favorable_dwell_fraction_min": 0.5714285714285714,
+  "favorable_formula": "cos(2*theta_rel)>0",
+  "flux_integral_closed_form": "integral_0^(pi/Omega) cos(2*Omega*t) dt = 0",
+  "flux_integrand_formula": "F(t)=cos(2*Omega*t)",
+  "half_cycle_symmetry": "F(t+T/2)=-F(t)",
+  "max_abs_flux_mean_numeric": 0.0,
+  "max_half_cycle_symmetry_residual": 0.0,
+  "omega_over_c_all_greater_than_one": true,
+  "omega_over_c_values": [
+    1.05,
+    1.125,
+    1.25,
+    1.5,
+    2.0,
+    3.0,
+    5.0,
+    8.0
+  ],
+  "relative_phase_formula": "theta_rel(t)=(Omega-C)*t",
+  "rotating_strain_blowup_route_closed": true,
+  "rotation_cycle_formula": "T=pi/Omega",
+  "row_count": 8,
+  "subintervals": 8192,
+  "zero_mean_flux_established": true
+}

@@ -1,0 +1,100 @@
+{
+  "C_log_grid": [
+    1.0
+  ],
+  "M0_grid": [
+    1.0
+  ],
+  "actual_pde_source_phase_unresolved": true,
+  "alpha_grid": [
+    1.25
+  ],
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint135_hou_luo_source_viscosity_phase",
+  "control_card": {
+    "C": "stdlib asymptotic sampler, JSON/CSV/Markdown output surfaces",
+    "F": "Missing analytic lower/upper bound for the actual PDE source with sign, alignment, localization, and feedback.",
+    "G": "full_clay_ns_solved=false; clay_navier_stokes_promoted=false",
+    "L": "Sprint134 corrections -> source candidates -> log-ratio samples -> phase classification -> no Clay promotion",
+    "O": "Worker 1 owns scripts/ns_sprint135_hou_luo_source_viscosity_phase.py and outputs/ns_sprint135_hou_luo_source_viscosity_phase/.",
+    "P": "Use this artifact as the Sprint 135 phase map before any future blowup or regularity claim.",
+    "R": "Encode corrected Hou-Luo source-vs-viscosity asymptotic regimes after Sprint 134.",
+    "S": "Polynomial source scales lose to viscosity, but the corrected log-Gronwall source scale can beat polynomial viscous damping; the true PDE source remains unresolved."
+  },
+  "exit_code": 0,
+  "exit_reason": "corrected source-vs-viscosity phase table emitted; polynomial obstruction is retracted as a PDE conclusion, log-Gronwall source phases can beat polynomial viscosity, and the actual Hou-Luo PDE route remains open/live",
+  "expected_phase_limits_by_model": {
+    "actual_pde_source_with_alignment_and_sign": [
+      "unresolved"
+    ],
+    "corrected_log_gronwall_source": [
+      "source_over_viscosity_tends_to_infinity"
+    ],
+    "formal_bkm_quadratic_source": [
+      "source_over_viscosity_tends_to_infinity"
+    ],
+    "polylog_gradient_loss": [
+      "source_over_viscosity_tends_to_0"
+    ],
+    "polynomial_gamma_annulus_gradient": [
+      "source_over_viscosity_tends_to_0"
+    ]
+  },
+  "formal_bkm_quadratic_source_beats_viscosity_as_comparator": true,
+  "full_clay_ns_solved": false,
+  "hou_luo_route_status": "open_live_candidate",
+  "log_gronwall_source_can_beat_viscosity": true,
+  "log_gronwall_tail_log_ratios_all_positive": true,
+  "nu_grid": [
+    1.0
+  ],
+  "phase_quantity": "source_scale / (nu * Omega / delta^2)",
+  "polynomial_model_source_over_viscosity_tends_to_0": true,
+  "polynomial_obstruction_model_retracted": true,
+  "polynomial_tail_log_ratios_all_negative": true,
+  "row_count": 15,
+  "scaling_window": "1 < alpha < 3/2, beta = alpha - 1, beta > 0",
+  "source_model_count": 5,
+  "source_models": [
+    "actual_pde_source_with_alignment_and_sign",
+    "corrected_log_gronwall_source",
+    "formal_bkm_quadratic_source",
+    "polylog_gradient_loss",
+    "polynomial_gamma_annulus_gradient"
+  ],
+  "sprint134_inputs": [
+    "ns_sprint134_axisymmetric_equation_correction",
+    "u1_has_stretching_source_not_pure_diffusion",
+    "Gamma_swirl_circulation_is_maximum_principle_variable",
+    "ns_sprint134_biot_savart_log_singularity_audit",
+    "NoLogAxisymmetricBiotSavartUniform_false_away_from_axis",
+    "ns_sprint134_hou_luo_retraction_status",
+    "AxisymmetricHouLuoNSViscousDominanceObstruction_retracted"
+  ],
+  "sprint134_inputs_acknowledged": true,
+  "tau_grid": [
+    0.1,
+    0.001,
+    1e-10
+  ],
+  "trends_by_model": {
+    "actual_pde_source_with_alignment_and_sign": [
+      "unresolved_no_scalar_trend"
+    ],
+    "corrected_log_gronwall_source": [
+      "increasing_as_tau_to_0"
+    ],
+    "formal_bkm_quadratic_source": [
+      "increasing_as_tau_to_0"
+    ],
+    "polylog_gradient_loss": [
+      "decreasing_as_tau_to_0"
+    ],
+    "polynomial_gamma_annulus_gradient": [
+      "decreasing_as_tau_to_0"
+    ]
+  }
+}

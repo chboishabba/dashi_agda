@@ -1,0 +1,5 @@
+authority_id,authority_name,source,statement,accepted_as_authority,proved_in_repo,scope,route_decision
+A1,BalabanCMP98AveragingLocality,"Balaban CMP 98, Averaging operations for lattice gauge theories",locality/smoothing of Balaban averaging maps,True,False,external_authority_for_Qhp_locality,ANISOTROPIC_ASSUMPTION_A_AUTHORITY_ASSEMBLED_NO_CLAY_PROMOTION
+A2,BalabanCMP98LocalOscillationBoundForQhp,Balaban CMP 98 specialized to half-plane/spatial Q_hp,osc_e(Q_hp)<=C_local*L^(-2k),True,False,authority_input_not_internal_derivation,ANISOTROPIC_ASSUMPTION_A_AUTHORITY_ASSEMBLED_NO_CLAY_PROMOTION
+A3,W1SpatialOnlyBlockingPreservesTemporalLinks,YMSpatialOnlyBlockingTemporalLinks receipt,spatial-only blocking preserves temporal links,True,True,receipt_level_in_repo_support,ANISOTROPIC_ASSUMPTION_A_AUTHORITY_ASSEMBLED_NO_CLAY_PROMOTION
+A4,SpatialOnlyLinkCount3L3k,Sprint 80/81 arithmetic audit,|Lambda^1_sp(k)|=3*L^(3k),True,True,in_repo_arithmetic,ANISOTROPIC_ASSUMPTION_A_AUTHORITY_ASSEMBLED_NO_CLAY_PROMOTION

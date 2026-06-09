@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.gate3-ym-manager.json",
+  "lane": "gate3-su2-jacobi",
+  "lane_claim": "Gate 3 manager: implement bounded SU2 Jacobi/YM test slice; may spawn one descendant worker",
+  "orchestrator_id": "gate3-ym-manager",
+  "parent_orchestrator_id": "paper7-root",
+  "status_file": "status.gate3-ym-manager.json",
+  "timestamp": "2026-05-19T10:52:16Z"
+}

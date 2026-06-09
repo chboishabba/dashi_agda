@@ -1,0 +1,17 @@
+{
+  "artifact_complete": true,
+  "contract": "ns_sprint143_zero_number_obstruction",
+  "files": {
+    "markdown": "outputs/ns_sprint143_zero_number_obstruction/ns_sprint143_zero_number_obstruction.md",
+    "rows_csv": "outputs/ns_sprint143_zero_number_obstruction/ns_sprint143_zero_number_obstruction_rows.csv",
+    "rows_json": "outputs/ns_sprint143_zero_number_obstruction/ns_sprint143_zero_number_obstruction_rows.json",
+    "summary": "outputs/ns_sprint143_zero_number_obstruction/ns_sprint143_zero_number_obstruction_summary.json"
+  },
+  "invariants_passed": true,
+  "sha256": {
+    "markdown": "0b8bb58f54e1623a6fce0009abe3c8560407b02fc67f4f911b073ab8e77fdb61",
+    "rows_csv": "6b58db5e4131efd7d20782cf4483c75b68185001219124b73c51d900d6e23f4f",
+    "rows_json": "3e2e7e275e80a4ab112df98cc4adcc6e7fada40b401fe3a84be0276560621ff6",
+    "summary": "62490f08f8d5afc94d9bd93092a73bcd994af518c47bf67aa36cd7bdb1935b31"
+  }
+}

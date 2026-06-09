@@ -1,0 +1,72 @@
+{
+  "adverse_row_ids": [
+    "small_offcenter_shoulder",
+    "boundary_layer_crossing",
+    "annular_crossing",
+    "delayed_crossing"
+  ],
+  "artifact_complete": true,
+  "artifact_hashes": {
+    "markdown": "7ceac19f37347cd069fe8bb54a6f0e9fad308a8a06f7028456580a89cceeb652",
+    "rows_csv": "237378436345cb71f802a765b7e4fafc0fd415fddca932b97f411ff5d9248eb6",
+    "rows_json": "686c4d9db02982aea5060c7274b7505893eaedc0b4f05c2290079f30fd5b0269",
+    "summary_json": "c5f12bd99e1f6b24ad5ebd9e56a5d52074d25d905416a37aef710e67ebe0b93f"
+  },
+  "artifacts": {
+    "markdown": "outputs/ns_sprint143_offcenter_crossing_scenarios/ns_sprint143_offcenter_crossing_scenarios.md",
+    "rows_csv": "outputs/ns_sprint143_offcenter_crossing_scenarios/ns_sprint143_offcenter_crossing_scenarios_rows.csv",
+    "rows_json": "outputs/ns_sprint143_offcenter_crossing_scenarios/ns_sprint143_offcenter_crossing_scenarios_rows.json",
+    "summary_json": "outputs/ns_sprint143_offcenter_crossing_scenarios/ns_sprint143_offcenter_crossing_scenarios_summary.json"
+  },
+  "blocker_id": "OffCenterFirstCrossingExclusion",
+  "centered_row_ids": [
+    "centered_monotone_branch"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "conclusion": "centered_monotone_branch_supported_but_offcenter_boundary_annular_delayed_crossings_remain_admissible_without_new_theorem",
+  "constants_available": false,
+  "constants_required": true,
+  "contract": "ns_sprint143_offcenter_crossing_scenarios",
+  "control_card": {
+    "C": "Pure Python stdlib; deterministic fixed toy rows; JSON, CSV, Markdown; no docs, tests, or Agda edits.",
+    "F": "Missing required rows, absent centered/adverse classes, any proof claim, missing constants closure, barrier closure, or Clay promotion fails closed.",
+    "G": "Require has_centered_support=true, has_adverse_scenarios=true, all proof/promotion flags false, artifact_complete=true, and invariants_passed=true.",
+    "L": "toy profile parameters -> v crossing geometry -> source sign hazard -> theorem requirement -> fail-closed summary flags.",
+    "O": "Sprint 143 lane 3 emits only the off-center crossing scenario classifier script and its generated output artifacts.",
+    "P": "Do not promote: no secondary-peak exclusion, no global barrier closure, and no Clay Navier-Stokes solution.",
+    "R": "Classify toy v=partial_z u1 crossing geometries: centered monotone support plus off-center, boundary-layer, annular, and delayed admissible scenarios.",
+    "S": "Centered monotone branch is supported locally, but all adverse scenario classes remain admissible unless a theorem is supplied."
+  },
+  "decision": "fail_closed_offcenter_crossings_admissible_no_promotion",
+  "full_clay_ns_solved": false,
+  "global_barrier_closed": false,
+  "has_adverse_scenarios": true,
+  "has_centered_support": true,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "lane": 3,
+  "missing_constants": true,
+  "parent_samplers": [
+    "ns_sprint139_localized_kernel_sign_sampler",
+    "ns_sprint142_kernel_sign_stress_sampler",
+    "ns_sprint142_boundary_annulus_concavity_ledger"
+  ],
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "proof_status": "no proof/promotion",
+  "required_row_ids": [
+    "annular_crossing",
+    "boundary_layer_crossing",
+    "centered_monotone_branch",
+    "delayed_crossing",
+    "small_offcenter_shoulder"
+  ],
+  "route_decision": "fail_closed_offcenter_crossings_admissible_no_promotion",
+  "row_count": 5,
+  "secondary_peak_exclusion_proved": false,
+  "sprint": 143,
+  "target_variable": "v=partial_z u1",
+  "theorem_required": "OffCenterBoundaryAnnularDelayedCrossingExclusion",
+  "theorem_supplied": false
+}

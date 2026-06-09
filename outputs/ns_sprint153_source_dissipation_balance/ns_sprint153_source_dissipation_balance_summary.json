@@ -1,0 +1,87 @@
+{
+  "absorbed_rows": [
+    "half_coercive_viscous_dissipation_reserve",
+    "young_split_core_gradient_absorbed",
+    "young_split_leakage_gradient_absorbed"
+  ],
+  "all_required_rows_closed": false,
+  "bkm_guard_closed": false,
+  "claim_closed": false,
+  "claim_proved": false,
+  "claim_proven": false,
+  "classification_counts": {
+    "absorbed": 3,
+    "open": 3,
+    "residual": 4
+  },
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint153_source_dissipation_balance",
+  "control_card": {
+    "C": "A single stdlib Python script writes rows JSON, rows CSV, summary JSON, Markdown, and manifest through an atomic output-directory swap.",
+    "F": "Missing evidence: theorem-level control of Young amplitude remainders, Sprint152 leakage residual closure, simultaneous constants, and the standard BKM/Clay translation.",
+    "G": "Promotion is permitted only when every required row is present and every row classification is absorbed/closed; otherwise constants, model validity, BKM, and Clay booleans must remain false.",
+    "L": "Rows -> closed classifications -> simultaneous constants -> model validity -> BKM guard -> Clay guard.",
+    "O": "Worker 4 owns only the Sprint153 source/dissipation balance emitter and outputs/ns_sprint153_source_dissipation_balance/ artifacts.",
+    "P": "Use this ledger to isolate which Young remainders and leakage residuals must close before the route can promote any downstream theorem flag.",
+    "R": "Emit JSON/CSV/manifest rows comparing localized vortex-stretching core source to half-coercive viscous dissipation and the Sprint152 bounded leakage residual, with Young-split accounting and fail-closed flags.",
+    "S": "The deterministic sample absorbs gradient pieces but leaves amplitude and leakage residuals open; there is no Sprint152 source artifact in this checkout, so the residual is recorded as an interface obligation."
+  },
+  "decision": "fail_closed_source_dissipation_balance_has_residual_and_open_rows",
+  "fail_closed": true,
+  "half_coercive_viscous_dissipation_reserve": "48",
+  "lane": 4,
+  "ledger": "LocalizedSourceHalfCoerciveDissipationLeakageBalance",
+  "localized_vortex_stretching_core_source": "42",
+  "missing_required_row_ids": [],
+  "model_validity_closed": false,
+  "observed_row_ids": [
+    "localized_vortex_stretching_core_source",
+    "half_coercive_viscous_dissipation_reserve",
+    "sprint152_bounded_leakage_residual",
+    "young_split_core_gradient_absorbed",
+    "young_split_core_amplitude_residual",
+    "young_split_leakage_gradient_absorbed",
+    "young_split_leakage_amplitude_residual",
+    "source_vs_half_dissipation_plus_leakage",
+    "simultaneous_constants_compatibility",
+    "model_validity_bkm_clay_guard"
+  ],
+  "open_or_residual_rows": [
+    "localized_vortex_stretching_core_source",
+    "sprint152_bounded_leakage_residual",
+    "young_split_core_amplitude_residual",
+    "young_split_leakage_amplitude_residual",
+    "source_vs_half_dissipation_plus_leakage",
+    "simultaneous_constants_compatibility",
+    "model_validity_bkm_clay_guard"
+  ],
+  "parent_gate": "Sprint153SourceDissipationBalance",
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "required_row_ids": [
+    "half_coercive_viscous_dissipation_reserve",
+    "localized_vortex_stretching_core_source",
+    "model_validity_bkm_clay_guard",
+    "simultaneous_constants_compatibility",
+    "source_vs_half_dissipation_plus_leakage",
+    "sprint152_bounded_leakage_residual",
+    "young_split_core_amplitude_residual",
+    "young_split_core_gradient_absorbed",
+    "young_split_leakage_amplitude_residual",
+    "young_split_leakage_gradient_absorbed"
+  ],
+  "row_count": 10,
+  "simultaneous_constants_valid": false,
+  "sprint": 153,
+  "sprint152_bounded_leakage_residual": "17",
+  "summary_hash": "0ea7207c71dafe1ca970305a6b002281c8391a80df352e6b38c70c360ce82467",
+  "total_net_margin": "-59",
+  "validation_errors": [],
+  "validation_passed": true,
+  "young_split_rows": [
+    "young_split_core_gradient_absorbed",
+    "young_split_core_amplitude_residual",
+    "young_split_leakage_gradient_absorbed",
+    "young_split_leakage_amplitude_residual"
+  ]
+}

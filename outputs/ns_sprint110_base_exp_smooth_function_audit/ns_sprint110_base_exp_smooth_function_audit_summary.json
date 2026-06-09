@@ -1,0 +1,479 @@
+{
+  "accepted_source_count": 0,
+  "accepted_sources": [],
+  "agda_path": "DASHI/Physics/Closure/NSSprint110BaseExpSmoothFunction.agda",
+  "all_subgates_closed": false,
+  "all_subgates_false": true,
+  "base_exp_smooth_function_closed": false,
+  "base_exp_smooth_function_decomposition_ledger_closed": true,
+  "base_exp_smooth_function_ledger_closed": true,
+  "bool_checks": {
+    "baseExpSmoothFunctionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "baseExpSmoothFunctionDecompositionLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "boundaryFlatnessAtUnitRadiusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "compactSupportCutoffDefinitionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "derivativeHierarchyPolynomialOverPowerClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "dyadicShellEnergyDensityClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "expNegativeInverseSeedDefinitionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "failClosedBaseExpSmoothFunctionDecomposition": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "finiteKStarCollapseClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "highFrequencyConcentrationMeasureClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "littlewoodPaleyShellProjectorClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularBaseExpSourceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonCircularCompactSupportSourceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "positiveInteriorNonzeroWitnessClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "radialBumpFunctionConstructionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "signedLowModeFluxLowerBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "smoothCompactSupportWitnessClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "smoothDyadicCutoffPartitionClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "smoothnessAcrossSupportBoundaryClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "smoothnessOnPositiveRadiusDomainClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "timeIntegratedFluxSurplusClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    }
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "closed_subgate_count": 0,
+  "complete": false,
+  "contract": "ns_sprint110_base_exp_smooth_function_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing anchors, boolean mismatches, absent Sprint109 anchor, or forbidden markers keep the route closed",
+    "G": "accepted_source_count is fixed at zero and no Navier-Stokes promotion is allowed",
+    "L": "evidence audit passes only when all anchors, expected booleans, and open subgate records are present",
+    "O": "audit the Sprint110 base exp smooth function boundary",
+    "P": "FAIL_CLOSED_BASE_EXP_SMOOTH_FUNCTION",
+    "R": "route remains fail-closed with five named base-exp subgates open and Clay promotion false",
+    "S": "Agda witness is checked for Sprint109 anchoring, booleans, subgates, and forbidden markers"
+  },
+  "decomposition_ledger_closed": true,
+  "dyadic_shell_energy_density_closed": false,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "FAIL_CLOSED_BASE_EXP_SMOOTH_FUNCTION",
+  "finite_kstar_collapse_closed": false,
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "baseExpSmoothFunctionDecompositionLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "expNegativeInverseSeedDefinitionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "smoothnessOnPositiveRadiusDomainClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "derivativeHierarchyPolynomialOverPowerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "positiveInteriorNonzeroWitnessClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularBaseExpSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "baseExpSmoothFunctionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "boundaryFlatnessAtUnitRadiusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "compactSupportCutoffDefinitionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "smoothnessAcrossSupportBoundaryClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "nonCircularCompactSupportSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "smoothCompactSupportWitnessClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "radialBumpFunctionConstructionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "smoothDyadicCutoffPartitionClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "littlewoodPaleyShellProjectorClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "dyadicShellEnergyDensityClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "highFrequencyConcentrationMeasureClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "signedLowModeFluxLowerBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "timeIntegratedFluxSurplusClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "finiteKStarCollapseClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "failClosedBaseExpSmoothFunctionDecomposition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "ExpNegativeInverseSeedDefinition",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "SmoothnessOnPositiveRadiusDomain",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "DerivativeHierarchyPolynomialOverPower",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "PositiveInteriorNonzeroWitness",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "recorded, open constructor, and false",
+      "expected": "name, open constructor, and false closure flag",
+      "gate": "NonCircularBaseExpSource",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint109SmoothCompactSupportWitness.agda",
+      "gate": "sprint109_anchor_file",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "high_frequency_concentration_measure_closed": false,
+  "littlewood_paley_shell_projector_closed": false,
+  "missing_anchors": [],
+  "open_subgate_count": 5,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "radial_bump_function_construction_closed": false,
+  "required_anchors": [
+    "NSSprint110BaseExpSmoothFunction",
+    "canonicalNSSprint110BaseExpSmoothFunction",
+    "canonicalNSSprint110BaseExpSmoothFunctionReceipt",
+    "canonicalSprint110BaseExpSmoothFunctionFlags",
+    "BaseExpSmoothFunctionDecomposition",
+    "BaseExpSmoothFunctionSplitsIntoFiveSubgates",
+    "Sprint109BaseExpSmoothFunctionAnchor",
+    "canonicalSprint109BaseExpSmoothFunctionAnchor",
+    "NSSprint109SmoothCompactSupportWitness",
+    "canonicalNSSprint109SmoothCompactSupportWitness",
+    "BaseExpSmoothFunctionSubgateStatus",
+    "BaseExpSmoothFunctionDecompositionStatus",
+    "canonicalBaseExpSmoothFunctionDecompositionStatus",
+    "requiredBaseExpSmoothFunctionSubgates",
+    "ExpNegativeInverseSeedDefinition",
+    "SmoothnessOnPositiveRadiusDomain",
+    "DerivativeHierarchyPolynomialOverPower",
+    "PositiveInteriorNonzeroWitness",
+    "NonCircularBaseExpSource",
+    "ExpNegativeInverseSeedDefinitionOpen",
+    "SmoothnessOnPositiveRadiusDomainOpen",
+    "DerivativeHierarchyPolynomialOverPowerOpen",
+    "PositiveInteriorNonzeroWitnessOpen",
+    "NonCircularBaseExpSourceOpen",
+    "baseExpSmoothFunctionDecompositionLedgerClosed",
+    "expNegativeInverseSeedDefinitionClosed",
+    "smoothnessOnPositiveRadiusDomainClosed",
+    "derivativeHierarchyPolynomialOverPowerClosed",
+    "positiveInteriorNonzeroWitnessClosed",
+    "nonCircularBaseExpSourceClosed",
+    "baseExpSmoothFunctionClosed",
+    "boundaryFlatnessAtUnitRadiusClosed",
+    "compactSupportCutoffDefinitionClosed",
+    "smoothnessAcrossSupportBoundaryClosed",
+    "nonCircularCompactSupportSourceClosed",
+    "smoothCompactSupportWitnessClosed",
+    "radialBumpFunctionConstructionClosed",
+    "smoothDyadicCutoffPartitionClosed",
+    "littlewoodPaleyShellProjectorClosed",
+    "dyadicShellEnergyDensityClosed",
+    "highFrequencyConcentrationMeasureClosed",
+    "strainCompressionAtHighFrequencyConcentrationPointsClosed",
+    "signedLowModeFluxLowerBoundClosed",
+    "timeIntegratedFluxSurplusClosed",
+    "finiteKStarCollapseClosed",
+    "clayNavierStokesPromoted",
+    "failClosedBaseExpSmoothFunctionDecomposition"
+  ],
+  "route_decision": "FAIL_CLOSED_BASE_EXP_SMOOTH_FUNCTION",
+  "signed_low_mode_flux_lower_bound_closed": false,
+  "smooth_compact_support_witness_closed": false,
+  "smooth_dyadic_cutoff_partition_closed": false,
+  "sprint109_anchor": "NSSprint109SmoothCompactSupportWitness",
+  "sprint109_anchor_file_present": true,
+  "strain_compression_at_high_frequency_concentration_points_closed": false,
+  "subgate_checks": {
+    "DerivativeHierarchyPolynomialOverPower": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    },
+    "ExpNegativeInverseSeedDefinition": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    },
+    "NonCircularBaseExpSource": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    },
+    "PositiveInteriorNonzeroWitness": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    },
+    "SmoothnessOnPositiveRadiusDomain": {
+      "closed_false": true,
+      "closed_true": false,
+      "open_constructor_recorded": true,
+      "recorded": true
+    }
+  },
+  "subgate_derivative_hierarchy_polynomial_over_power_open": true,
+  "subgate_exp_negative_inverse_seed_definition_open": true,
+  "subgate_non_circular_base_exp_source_open": true,
+  "subgate_positive_interior_nonzero_witness_open": true,
+  "subgate_smoothness_on_positive_radius_domain_open": true,
+  "subgates": [
+    "ExpNegativeInverseSeedDefinition",
+    "SmoothnessOnPositiveRadiusDomain",
+    "DerivativeHierarchyPolynomialOverPower",
+    "PositiveInteriorNonzeroWitness",
+    "NonCircularBaseExpSource"
+  ],
+  "target_present": true,
+  "time_integrated_flux_surplus_closed": false
+}

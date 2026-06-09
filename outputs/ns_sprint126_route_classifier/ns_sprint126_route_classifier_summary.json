@@ -1,0 +1,35 @@
+{
+  "candidate_routes": [
+    "sprint125_log_gap_unconditional",
+    "vortex_stretching_log_gap_conditional",
+    "wavepacket_mode_coupling_no_go_tower",
+    "axisymmetric_boundary_vortex_stretching_gate",
+    "hou_luo_scaling_window",
+    "clay_navier_stokes"
+  ],
+  "classifications": {
+    "axisymmetric_boundary_vortex_stretching_gate": "live_primary_next",
+    "clay_navier_stokes": "not_promoted",
+    "hou_luo_scaling_window": "compatible",
+    "sprint125_log_gap_unconditional": "corrected_open",
+    "vortex_stretching_log_gap_conditional": "conditional_closed",
+    "wavepacket_mode_coupling_no_go_tower": "partial_regularity_publishable"
+  },
+  "clay": false,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "closed_route_count": 1,
+  "compatible_route_count": 1,
+  "complete": false,
+  "contract": "ns_sprint126_route_classifier",
+  "exit_code": 1,
+  "exit_reason": "NS is incomplete; axisymmetric boundary gate remains live",
+  "live_route_count": 1,
+  "open_route_count": 1,
+  "primary_route": "axisymmetric_boundary_vortex_stretching_gate",
+  "recommended_classification": "live_primary_next",
+  "recommended_next_lemma": "AxisymmetricBoundaryVortexStretchingGate",
+  "recommended_route_id": "axisymmetric_boundary_vortex_stretching_gate",
+  "required_classifications_met": true,
+  "route_count": 6
+}

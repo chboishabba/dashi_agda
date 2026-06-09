@@ -1,0 +1,34 @@
+{
+  "alignment_integral_formula": "alignment integral = integral_0^T compressive_alignment_strength(t) dt",
+  "alignment_integral_model": "strength * duration",
+  "alignment_strength_values": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "clay": false,
+  "clay_budget_met_count": 1,
+  "clay_promoted": false,
+  "clay_support_threshold": 2.0,
+  "complete": true,
+  "contract": "ns_sprint119_alignment_persistence_budget",
+  "duration_values": [
+    0.1,
+    0.25,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "exit_code": 0,
+  "kstar_budget_met_count": 4,
+  "kstar_support_threshold": 1.0,
+  "max_alignment_integral": 2.0,
+  "max_alignment_strength": 1.0,
+  "max_duration": 2.0,
+  "min_alignment_integral": 0.010000000000000002,
+  "non_circular_source_established": false,
+  "persistent_alignment_existence_closed": false,
+  "row_count": 25
+}

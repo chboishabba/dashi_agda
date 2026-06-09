@@ -165,13 +165,13 @@ canonicalChenPairingClusterTargets =
   ∷ []
 
 data DHRGaugeComputationBoundary : Set where
-  missingLaneDimensionDeepComputation :
+  laneDimensionDLMEquivConsumedNoGaugePromotion :
     DHRGaugeComputationBoundary
 
 canonicalDHRGaugeComputationBoundaries :
   List DHRGaugeComputationBoundary
 canonicalDHRGaugeComputationBoundaries =
-  missingLaneDimensionDeepComputation
+  laneDimensionDLMEquivConsumedNoGaugePromotion
   ∷ []
 
 data PrimeLaneDeepComputationBlocker : Set where
@@ -179,19 +179,93 @@ data PrimeLaneDeepComputationBlocker : Set where
     PrimeLaneDeepComputationBlocker
 
 data LaneDimensionConjectureStatus : Set where
-  laneDimensionConjecturalOpen :
+  laneDimensionHistoricalConjectureStatus :
     LaneDimensionConjectureStatus
 
-postulate
-  primeLaneDHREndos :
-    Moonshine.MonsterPrimeLane →
-    DHR.LocalisedEndomorphism →
-    Set
+  laneDimensionInternallyPromotedNoGaugePromotion :
+    LaneDimensionConjectureStatus
 
-  laneDimension :
-    Moonshine.MonsterPrimeLane →
-    Nat →
-    Set
+  laneDimensionComputedInternallyByDLMDASHIPrimeLaneEquiv :
+    LaneDimensionConjectureStatus
+
+data PrimeLaneDHREndomorphismTarget
+  (p : Moonshine.MonsterPrimeLane)
+  (ρ : DHR.LocalisedEndomorphism) :
+  Set where
+
+primeLaneDHREndos :
+  Moonshine.MonsterPrimeLane →
+  DHR.LocalisedEndomorphism →
+  Set
+primeLaneDHREndos =
+  PrimeLaneDHREndomorphismTarget
+
+laneDimension :
+  Moonshine.MonsterPrimeLane →
+  Nat →
+  Set
+laneDimension p n =
+  Moonshine.monsterPrimeLaneConjecturalDHRDimension p ≡ n
+
+data PrimeLaneGaugeAssignmentMissingField : Set where
+  missingPrimeLaneDHREndomorphismTargetField :
+    PrimeLaneGaugeAssignmentMissingField
+
+record PrimeLaneDHREndomorphismTargetFailClosedReceipt : Setω where
+  field
+    missingField :
+      PrimeLaneGaugeAssignmentMissingField
+
+    missingFieldIsCanonical :
+      missingField ≡ missingPrimeLaneDHREndomorphismTargetField
+
+    targetPredicate :
+      Moonshine.MonsterPrimeLane →
+      DHR.LocalisedEndomorphism →
+      Set
+
+    targetPredicateRecorded :
+      Bool
+
+    targetPredicateRecordedIsTrue :
+      targetPredicateRecorded ≡ true
+
+    constructsPrimeLaneDHREndomorphism :
+      Bool
+
+    constructsPrimeLaneDHREndomorphismIsFalse :
+      constructsPrimeLaneDHREndomorphism ≡ false
+
+    boundary :
+      List String
+
+open PrimeLaneDHREndomorphismTargetFailClosedReceipt public
+
+canonicalPrimeLaneDHREndomorphismTargetFailClosedReceipt :
+  PrimeLaneDHREndomorphismTargetFailClosedReceipt
+canonicalPrimeLaneDHREndomorphismTargetFailClosedReceipt =
+  record
+    { missingField =
+        missingPrimeLaneDHREndomorphismTargetField
+    ; missingFieldIsCanonical =
+        refl
+    ; targetPredicate =
+        primeLaneDHREndos
+    ; targetPredicateRecorded =
+        true
+    ; targetPredicateRecordedIsTrue =
+        refl
+    ; constructsPrimeLaneDHREndomorphism =
+        false
+    ; constructsPrimeLaneDHREndomorphismIsFalse =
+        refl
+    ; boundary =
+        "PrimeLaneLaneDimensionBlockerReceipt.primeLaneDHREndomorphismTarget is a closed target predicate, not a constructed DHR endomorphism"
+        ∷ "The exact missing field is primeLaneDHREndos : MonsterPrimeLane -> DHR.LocalisedEndomorphism -> Set with constructors or an authority-backed lane localisation theorem"
+        ∷ "laneDimension is concrete only as equality to the finite conjectural DHR dimension table"
+        ∷ "No prime-lane DHR endomorphism, DHR gauge group, or Standard Model gauge match is promoted here"
+        ∷ []
+    }
 
 record _×_ (A B : Set) : Set where
   constructor _,_
@@ -676,10 +750,10 @@ record E8McKayPrimeLaneTableReceipt : Setω where
     lowEnergyDHRDimensionKeptSeparateIsTrue :
       lowEnergyDHRDimensionKeptSeparate ≡ true
 
-    p7LowEnergyDHRRemains0 :
+    p7DHRDimensionIs2 :
       Moonshine.monsterPrimeLaneConjecturalDHRDimension Moonshine.p7
       ≡
-      0
+      2
 
     tableIsConjectural :
       Bool
@@ -763,7 +837,7 @@ canonicalE8McKayPrimeLaneTableReceipt =
         true
     ; lowEnergyDHRDimensionKeptSeparateIsTrue =
         refl
-    ; p7LowEnergyDHRRemains0 =
+    ; p7DHRDimensionIs2 =
         refl
     ; tableIsConjectural =
         true
@@ -781,7 +855,7 @@ canonicalE8McKayPrimeLaneTableReceipt =
         "DASHI-specific supersingular-prime bridge table: p2 U1Y dim1, p3 SU2L dim2, p5 SU3c dim3, p7 SU2R-broken dim2"
         ∷ "p>=11 lanes are matter/trivial-gauge lanes in the high-energy E8/McKay bridge"
         ∷ "the specific prime-to-gauge-factor assignment is new framing, not a first-principles theorem from heterotic string theory or moonshine"
-        ∷ "low-energy DHR laneDimension is kept separate and still has p>=7 -> 0"
+        ∷ "DLM laneDimension data is authority-backed and conditional, kept separate from the high-energy gauge bridge; p7 records SU2R dimension 2, with p>=11 gauge-trivial"
         ∷ []
     }
 
@@ -828,8 +902,8 @@ record E8McKayLaneDimensionReceipt : Setω where
     p7HighEnergyBridgeDim2 :
       highEnergyLaneDimensionTarget Moonshine.p7 ≡ 2
 
-    p7LowEnergyDHRDim0 :
-      dhrLowEnergyLaneDimensionTarget Moonshine.p7 ≡ 0
+    p7LowEnergyDHRDim2 :
+      dhrLowEnergyLaneDimensionTarget Moonshine.p7 ≡ 2
 
     bridgeIsConjectural :
       Bool
@@ -882,7 +956,7 @@ canonicalE8McKayLaneDimensionReceipt =
         refl
     ; p7HighEnergyBridgeDim2 =
         refl
-    ; p7LowEnergyDHRDim0 =
+    ; p7LowEnergyDHRDim2 =
         refl
     ; bridgeIsConjectural =
         true
@@ -902,7 +976,7 @@ canonicalE8McKayLaneDimensionReceipt =
         "laneDimensionReceipt records a DASHI-specific bridge from E8MckayCorrespondence x SMinE8Embedding to the laneDimension target"
         ∷ "the provable external route is heterotic E8xE8 / Narain compactification with Wilson lines yielding U1Y x SU2L x SU3c, with Pati-Salam SU2R as the high-energy p7 extension"
         ∷ "the target is not computed here and does not promote G_DHR = G_SM"
-        ∷ "p7 is high-energy SU2R-broken with dimension 2 while the low-energy DHR conjecture keeps p7 dimension 0"
+        ∷ "p7 is the SU2R lane with dimension 2; low-energy Standard Model matching still requires the separate SU2R breaking receipt"
         ∷ []
     }
 
@@ -922,7 +996,10 @@ data FormalGroupAutomorphismCorrectionPoint : Set where
   weilPairingGivesSymplecticAutomorphisms :
     FormalGroupAutomorphismCorrectionPoint
 
-  height2FormalGroupAloneGivesUniformSU2 :
+  height2FormalGroupAloneGivesUniformSL2SU2 :
+    FormalGroupAutomorphismCorrectionPoint
+
+  doesNotProduceOneTwoThreeTwoTable :
     FormalGroupAutomorphismCorrectionPoint
 
   u1su2su3RequiresExtraRepresentationOrDeformationData :
@@ -933,7 +1010,8 @@ canonicalFormalGroupAutomorphismCorrectionPoints :
 canonicalFormalGroupAutomorphismCorrectionPoints =
   height2DieudonneModuleRank2
   ∷ weilPairingGivesSymplecticAutomorphisms
-  ∷ height2FormalGroupAloneGivesUniformSU2
+  ∷ height2FormalGroupAloneGivesUniformSL2SU2
+  ∷ doesNotProduceOneTwoThreeTwoTable
   ∷ u1su2su3RequiresExtraRepresentationOrDeformationData
   ∷ []
 
@@ -954,7 +1032,13 @@ record FormalGroupAutomorphismCorrectionReceipt : Setω where
     formalGroupAloneCompactRealForm-v :
       formalGroupAloneCompactRealForm
       ≡
-      "height-2-formal-group-alone-gives-SU2-uniformly"
+      "height-2-formal-group-Dieudonne-Weil-pairing-gives-SL2-SU2-shape-uniformly"
+
+    doesNotComputeOneTwoThreeTwoTable :
+      Bool
+
+    doesNotComputeOneTwoThreeTwoTableIsTrue :
+      doesNotComputeOneTwoThreeTwoTable ≡ true
 
     varyingLaneDimensionsRequireExtraData :
       Bool
@@ -988,8 +1072,12 @@ canonicalFormalGroupAutomorphismCorrectionReceipt =
     ; correctionPointsAreCanonical =
         refl
     ; formalGroupAloneCompactRealForm =
-        "height-2-formal-group-alone-gives-SU2-uniformly"
+        "height-2-formal-group-Dieudonne-Weil-pairing-gives-SL2-SU2-shape-uniformly"
     ; formalGroupAloneCompactRealForm-v =
+        refl
+    ; doesNotComputeOneTwoThreeTwoTable =
+        true
+    ; doesNotComputeOneTwoThreeTwoTableIsTrue =
         refl
     ; varyingLaneDimensionsRequireExtraData =
         true
@@ -1004,7 +1092,8 @@ canonicalFormalGroupAutomorphismCorrectionReceipt =
     ; promotesLaneDimensionIsFalse =
         refl
     ; boundary =
-        "correction: the height-2 formal group and its Dieudonne module alone give the same SU2-shaped compact real form at every prime"
+        "correction: the height-2 formal group, Dieudonne module, and Weil pairing give a uniform SL2/SU2-shaped automorphism form"
+        ∷ "this uniform shape alone does not compute the lane-dimension table {1,2,3,2}"
         ∷ "U1, SU2, and SU3 lane variation must come from representation, deformation, or Monster/McKay data beyond the height-2 formal group alone"
         ∷ "this receipt prevents treating the Dieudonne-only calculation as a laneDimension proof"
         ∷ []
@@ -1017,7 +1106,7 @@ data SerreTateLaneDimensionSubtheorem : Set where
   st2HondaHeight2FormalGroup :
     SerreTateLaneDimensionSubtheorem
 
-  st3LowestWeight4DCompatibleRepresentationComputation :
+  st3HeteroticNarainE8OrNewMonsterIdentityGate :
     SerreTateLaneDimensionSubtheorem
 
 canonicalSerreTateLaneDimensionSubtheorems :
@@ -1025,7 +1114,7 @@ canonicalSerreTateLaneDimensionSubtheorems :
 canonicalSerreTateLaneDimensionSubtheorems =
   st1SerreTateDeformationEquivalence
   ∷ st2HondaHeight2FormalGroup
-  ∷ st3LowestWeight4DCompatibleRepresentationComputation
+  ∷ st3HeteroticNarainE8OrNewMonsterIdentityGate
   ∷ []
 
 record PatiSalamLaneTableTheoremTarget : Setω where
@@ -1152,7 +1241,9 @@ canonicalPatiSalamLaneTableTheoremTarget =
     ; boundary =
         "Pati-Salam lane table theorem target: p2 U1 dim1, p3 SU2L dim2, p5 SU3c dim3, p7 SU2R dim2 broken at seesaw"
         ∷ "p>=11 lanes are gauge-trivial or matter-sector lanes in this high-energy target"
-        ∷ "this is a theorem target, not a proved laneDimension theorem"
+        ∷ "the external theorem route is heterotic E8xE8 / Narain compactification with Wilson-line breaking and a Pati-Salam SU2R extension"
+        ∷ "the p2,p3,p5,p7 prime labelling is a DASHI bridge table, not a first-principles theorem"
+        ∷ "this is a theorem target, not a proved DHR laneDimension theorem"
         ∷ []
     }
 
@@ -1243,14 +1334,355 @@ canonicalSerreTateLaneDimensionTheoremTarget =
     ; boundary =
         "Serre-Tate target: ST1 deformation of the curve reduces to the p-divisible group, ST2 gives the Honda height-2 formal group"
         ∷ "honest ST3 conclusion: supersingular elliptic-curve arithmetic alone does not produce the required p-dependent laneDimension"
-        ∷ "Dieudonne, Hodge-Tate, conductor, and Frobenius invariants are uniform or insufficient for 1,2,3,2 with p>=11 trivial/matter lanes"
-        ∷ "ST3 remains open: only Monster module / McKay-Thompson finite computation or heterotic E8 compactification are still plausible sources here"
-        ∷ "the target table is Pati-Salam at high energy and does not promote the low-energy DHR laneDimension"
+        ∷ "Dieudonne, Serre-Tate, conductor, Hecke eigenvalue, Frobenius, and modular-curve automorphism routes do not cleanly derive 1,2,3,2"
+        ∷ "direct Monster coefficient extraction does not cleanly derive 1,2,3,2; the successful Moonshine route is instead Ogg plus no-ghost plus Dong-Li-Mason orbifold weight-1 data"
+        ∷ "heterotic E8xE8 / Narain compactification remains bridge metadata, while DLM supplies authority-backed conditional laneDimension data"
+        ∷ "the target table is Pati-Salam at high energy and is kept separate from the DLM laneDimension theorem surface"
+        ∷ []
+    }
+
+data SymmetricTensorPowerCandidate : Set where
+  sym0TrivialLine :
+    SymmetricTensorPowerCandidate
+
+  sym1StandardDoublet :
+    SymmetricTensorPowerCandidate
+
+  sym2AdjointTriplet :
+    SymmetricTensorPowerCandidate
+
+canonicalSymmetricTensorPowerCandidates :
+  List SymmetricTensorPowerCandidate
+canonicalSymmetricTensorPowerCandidates =
+  sym0TrivialLine
+  ∷ sym1StandardDoublet
+  ∷ sym2AdjointTriplet
+  ∷ []
+
+record SymmetricTensorPowerRepresentationMechanismTarget : Setω where
+  field
+    status :
+      PrimeLaneGaugeAssignmentStatus
+
+    candidates :
+      List SymmetricTensorPowerCandidate
+
+    candidatesAreCanonical :
+      candidates ≡ canonicalSymmetricTensorPowerCandidates
+
+    sym0Dimension :
+      Nat
+
+    sym0DimensionIs1 :
+      sym0Dimension ≡ 1
+
+    sym1Dimension :
+      Nat
+
+    sym1DimensionIs2 :
+      sym1Dimension ≡ 2
+
+    sym2Dimension :
+      Nat
+
+    sym2DimensionIs3 :
+      sym2Dimension ≡ 3
+
+    candidateRepresentationMechanism :
+      Bool
+
+    candidateRepresentationMechanismIsTrue :
+      candidateRepresentationMechanism ≡ true
+
+    primeAssignmentProof :
+      Bool
+
+    primeAssignmentProofIsFalse :
+      primeAssignmentProof ≡ false
+
+    promotesLaneDimension :
+      Bool
+
+    promotesLaneDimensionIsFalse :
+      promotesLaneDimension ≡ false
+
+    boundary :
+      List String
+
+canonicalSymmetricTensorPowerRepresentationMechanismTarget :
+  SymmetricTensorPowerRepresentationMechanismTarget
+canonicalSymmetricTensorPowerRepresentationMechanismTarget =
+  record
+    { status =
+        targetSurfaceOnlyNoGaugePromotion
+    ; candidates =
+        canonicalSymmetricTensorPowerCandidates
+    ; candidatesAreCanonical =
+        refl
+    ; sym0Dimension =
+        1
+    ; sym0DimensionIs1 =
+        refl
+    ; sym1Dimension =
+        2
+    ; sym1DimensionIs2 =
+        refl
+    ; sym2Dimension =
+        3
+    ; sym2DimensionIs3 =
+        refl
+    ; candidateRepresentationMechanism =
+        true
+    ; candidateRepresentationMechanismIsTrue =
+        refl
+    ; primeAssignmentProof =
+        false
+    ; primeAssignmentProofIsFalse =
+        refl
+    ; promotesLaneDimension =
+        false
+    ; promotesLaneDimensionIsFalse =
+        refl
+    ; boundary =
+        "candidate representation mechanism: Sym^0, Sym^1, and Sym^2 of an SL2/SU2-shaped carrier have dimensions 1, 2, and 3"
+        ∷ "this may explain how 1/2/3-sized representation slots could be packaged once a prime-to-representation assignment is supplied"
+        ∷ "it does not prove that primes p2,p3,p5,p7 select Sym^0, Sym^1, Sym^2, Sym^1"
+        ∷ "it is not a DHR laneDimension theorem and does not promote prime assignment"
+        ∷ []
+    }
+
+data FailedLaneDimensionFormulaAttempt : Set where
+  conductorDiscriminantSketchNonInteger :
+    FailedLaneDimensionFormulaAttempt
+
+  conductorDiscriminantSketchNoCanonicalConductor :
+    FailedLaneDimensionFormulaAttempt
+
+  serreTateOnePlusDimVpMinus1ModPAtP3Mismatch :
+    FailedLaneDimensionFormulaAttempt
+
+canonicalFailedLaneDimensionFormulaAttempts :
+  List FailedLaneDimensionFormulaAttempt
+canonicalFailedLaneDimensionFormulaAttempts =
+  conductorDiscriminantSketchNonInteger
+  ∷ conductorDiscriminantSketchNoCanonicalConductor
+  ∷ serreTateOnePlusDimVpMinus1ModPAtP3Mismatch
+  ∷ []
+
+record FailedLaneDimensionFormulaAttemptReceipt : Setω where
+  field
+    status :
+      PrimeLaneGaugeAssignmentStatus
+
+    attempts :
+      List FailedLaneDimensionFormulaAttempt
+
+    attemptsAreCanonical :
+      attempts ≡ canonicalFailedLaneDimensionFormulaAttempts
+
+    conductorDiscriminantSketchFailed :
+      Bool
+
+    conductorDiscriminantSketchFailedIsTrue :
+      conductorDiscriminantSketchFailed ≡ true
+
+    nonIntegerConductorDimensionObserved :
+      Bool
+
+    nonIntegerConductorDimensionObservedIsTrue :
+      nonIntegerConductorDimensionObserved ≡ true
+
+    discriminantConductorBridgeFailed :
+      Bool
+
+    discriminantConductorBridgeFailedIsTrue :
+      discriminantConductorBridgeFailed ≡ true
+
+    p3SerreTateFormulaValue :
+      Nat
+
+    p3SerreTateFormulaValueIs1 :
+      p3SerreTateFormulaValue ≡ 1
+
+    p3RequiredLaneDimension :
+      Nat
+
+    p3RequiredLaneDimensionIs2 :
+      p3RequiredLaneDimension ≡ 2
+
+    p3SerreTateFormulaMatchesTarget :
+      Bool
+
+    p3SerreTateFormulaMatchesTargetIsFalse :
+      p3SerreTateFormulaMatchesTarget ≡ false
+
+    formulaPromoted :
+      Bool
+
+    formulaPromotedIsFalse :
+      formulaPromoted ≡ false
+
+    boundary :
+      List String
+
+canonicalFailedLaneDimensionFormulaAttemptReceipt :
+  FailedLaneDimensionFormulaAttemptReceipt
+canonicalFailedLaneDimensionFormulaAttemptReceipt =
+  record
+    { status =
+        targetSurfaceOnlyNoGaugePromotion
+    ; attempts =
+        canonicalFailedLaneDimensionFormulaAttempts
+    ; attemptsAreCanonical =
+        refl
+    ; conductorDiscriminantSketchFailed =
+        true
+    ; conductorDiscriminantSketchFailedIsTrue =
+        refl
+    ; nonIntegerConductorDimensionObserved =
+        true
+    ; nonIntegerConductorDimensionObservedIsTrue =
+        refl
+    ; discriminantConductorBridgeFailed =
+        true
+    ; discriminantConductorBridgeFailedIsTrue =
+        refl
+    ; p3SerreTateFormulaValue =
+        1
+    ; p3SerreTateFormulaValueIs1 =
+        refl
+    ; p3RequiredLaneDimension =
+        2
+    ; p3RequiredLaneDimensionIs2 =
+        refl
+    ; p3SerreTateFormulaMatchesTarget =
+        false
+    ; p3SerreTateFormulaMatchesTargetIsFalse =
+        refl
+    ; formulaPromoted =
+        false
+    ; formulaPromotedIsFalse =
+        refl
+    ; boundary =
+        "failed conductor/discriminant sketch: the attempted conductor-normalized dimension is non-integer or lacks a canonical discriminant-to-conductor bridge"
+        ∷ "failed conductor sketch: no integral formula from the local conductor data cleanly yields {1,2,3,2}"
+        ∷ "failed Serre-Tate residue sketch: the formula 1 + dim V_{p-1} mod p gives value 1 at p=3 under the attempted parsing, but the required p3 lane dimension is 2"
+        ∷ "these formula attempts are recorded as failures only and are not promoted"
+        ∷ []
+    }
+
+data FiniteMcKayThompsonRecipeStep : Set where
+  extractA1FromTpA :
+    FiniteMcKayThompsonRecipeStep
+
+  reduceA1ModuloPSquaredMinus1 :
+    FiniteMcKayThompsonRecipeStep
+
+  identifyLowestWeightFaithfulRepresentation :
+    FiniteMcKayThompsonRecipeStep
+
+  finiteComputationStillOpen :
+    FiniteMcKayThompsonRecipeStep
+
+canonicalFiniteMcKayThompsonRecipeSteps :
+  List FiniteMcKayThompsonRecipeStep
+canonicalFiniteMcKayThompsonRecipeSteps =
+  extractA1FromTpA
+  ∷ reduceA1ModuloPSquaredMinus1
+  ∷ identifyLowestWeightFaithfulRepresentation
+  ∷ finiteComputationStillOpen
+  ∷ []
+
+record FiniteMcKayThompsonRecipeTarget : Setω where
+  field
+    status :
+      PrimeLaneGaugeAssignmentStatus
+
+    steps :
+      List FiniteMcKayThompsonRecipeStep
+
+    stepsAreCanonical :
+      steps ≡ canonicalFiniteMcKayThompsonRecipeSteps
+
+    seriesName :
+      String
+
+    seriesName-v :
+      seriesName ≡ "T_pA"
+
+    coefficientName :
+      String
+
+    coefficientName-v :
+      coefficientName ≡ "a_1"
+
+    modulusShape :
+      String
+
+    modulusShape-v :
+      modulusShape ≡ "p^2-1"
+
+    finiteComputationOpen :
+      Bool
+
+    finiteComputationOpenIsTrue :
+      finiteComputationOpen ≡ true
+
+    theoremProvedHere :
+      Bool
+
+    theoremProvedHereIsFalse :
+      theoremProvedHere ≡ false
+
+    boundary :
+      List String
+
+canonicalFiniteMcKayThompsonRecipeTarget :
+  FiniteMcKayThompsonRecipeTarget
+canonicalFiniteMcKayThompsonRecipeTarget =
+  record
+    { status =
+        targetSurfaceOnlyNoGaugePromotion
+    ; steps =
+        canonicalFiniteMcKayThompsonRecipeSteps
+    ; stepsAreCanonical =
+        refl
+    ; seriesName =
+        "T_pA"
+    ; seriesName-v =
+        refl
+    ; coefficientName =
+        "a_1"
+    ; coefficientName-v =
+        refl
+    ; modulusShape =
+        "p^2-1"
+    ; modulusShape-v =
+        refl
+    ; finiteComputationOpen =
+        true
+    ; finiteComputationOpenIsTrue =
+        refl
+    ; theoremProvedHere =
+        false
+    ; theoremProvedHereIsFalse =
+        refl
+    ; boundary =
+        "finite McKay-Thompson recipe target: extract a_1 from T_{pA}"
+        ∷ "reduce the extracted coefficient modulo p^2 - 1"
+        ∷ "identify a lowest-weight faithful representation from the reduced residue"
+        ∷ "the finite computation is open and is not a laneDimension theorem"
         ∷ []
     }
 
 data MonsterMcKayComputationAttempt : Set where
+  monsterCoefficientRouteNotClean :
+    MonsterMcKayComputationAttempt
+
   dieudonneOnlyAttemptAllSU2 :
+    MonsterMcKayComputationAttempt
+
+  serreTateArithmeticRouteNotClean :
     MonsterMcKayComputationAttempt
 
   hodgeTateWeightsUniformInsufficient :
@@ -1259,13 +1691,19 @@ data MonsterMcKayComputationAttempt : Set where
   conductorAttemptAllDimension2 :
     MonsterMcKayComputationAttempt
 
+  heckeEigenvalueRouteNotClean :
+    MonsterMcKayComputationAttempt
+
   frobeniusInvariantUniformOrInsufficient :
+    MonsterMcKayComputationAttempt
+
+  modularCurveAutomorphismRouteNotClean :
     MonsterMcKayComputationAttempt
 
   vNaturalResidueFormulaMismatch :
     MonsterMcKayComputationAttempt
 
-  mckayThompsonLowCoefficientRecipeFiniteOpen :
+  newMonsterIdentityCandidateOpen :
     MonsterMcKayComputationAttempt
 
   heteroticE8CompactificationCandidateOpen :
@@ -1274,12 +1712,16 @@ data MonsterMcKayComputationAttempt : Set where
 canonicalMonsterMcKayComputationAttempts :
   List MonsterMcKayComputationAttempt
 canonicalMonsterMcKayComputationAttempts =
-  dieudonneOnlyAttemptAllSU2
+  monsterCoefficientRouteNotClean
+  ∷ dieudonneOnlyAttemptAllSU2
+  ∷ serreTateArithmeticRouteNotClean
   ∷ hodgeTateWeightsUniformInsufficient
   ∷ conductorAttemptAllDimension2
+  ∷ heckeEigenvalueRouteNotClean
   ∷ frobeniusInvariantUniformOrInsufficient
+  ∷ modularCurveAutomorphismRouteNotClean
   ∷ vNaturalResidueFormulaMismatch
-  ∷ mckayThompsonLowCoefficientRecipeFiniteOpen
+  ∷ newMonsterIdentityCandidateOpen
   ∷ heteroticE8CompactificationCandidateOpen
   ∷ []
 
@@ -1294,6 +1736,21 @@ record MonsterMcKayLaneDimensionComputationAttemptReceipt : Setω where
     attemptsAreCanonical :
       attempts ≡ canonicalMonsterMcKayComputationAttempts
 
+    symmetricTensorPowerMechanism :
+      SymmetricTensorPowerRepresentationMechanismTarget
+
+    failedFormulaAttempts :
+      FailedLaneDimensionFormulaAttemptReceipt
+
+    finiteMcKayThompsonRecipe :
+      FiniteMcKayThompsonRecipeTarget
+
+    monsterCoefficientRouteRejected :
+      Bool
+
+    monsterCoefficientRouteRejectedIsTrue :
+      monsterCoefficientRouteRejected ≡ true
+
     dieudonneOnlyFormulaRejected :
       Bool
 
@@ -1306,11 +1763,23 @@ record MonsterMcKayLaneDimensionComputationAttemptReceipt : Setω where
     hodgeTateWeightsInsufficientIsTrue :
       hodgeTateWeightsInsufficient ≡ true
 
+    serreTateArithmeticRouteRejected :
+      Bool
+
+    serreTateArithmeticRouteRejectedIsTrue :
+      serreTateArithmeticRouteRejected ≡ true
+
     conductorFormulaRejected :
       Bool
 
     conductorFormulaRejectedIsTrue :
       conductorFormulaRejected ≡ true
+
+    heckeEigenvalueRouteRejected :
+      Bool
+
+    heckeEigenvalueRouteRejectedIsTrue :
+      heckeEigenvalueRouteRejected ≡ true
 
     frobeniusInvariantInsufficient :
       Bool
@@ -1318,17 +1787,23 @@ record MonsterMcKayLaneDimensionComputationAttemptReceipt : Setω where
     frobeniusInvariantInsufficientIsTrue :
       frobeniusInvariantInsufficient ≡ true
 
+    modularCurveAutomorphismRouteRejected :
+      Bool
+
+    modularCurveAutomorphismRouteRejectedIsTrue :
+      modularCurveAutomorphismRouteRejected ≡ true
+
     vNaturalResidueFormulaRejected :
       Bool
 
     vNaturalResidueFormulaRejectedIsTrue :
       vNaturalResidueFormulaRejected ≡ true
 
-    mckayThompsonLowCoefficientRecipeFinite :
+    newMonsterIdentityCandidate :
       Bool
 
-    mckayThompsonLowCoefficientRecipeFiniteIsTrue :
-      mckayThompsonLowCoefficientRecipeFinite ≡ true
+    newMonsterIdentityCandidateIsTrue :
+      newMonsterIdentityCandidate ≡ true
 
     heteroticE8CompactificationCandidate :
       Bool
@@ -1355,6 +1830,16 @@ canonicalMonsterMcKayLaneDimensionComputationAttemptReceipt =
         canonicalMonsterMcKayComputationAttempts
     ; attemptsAreCanonical =
         refl
+    ; symmetricTensorPowerMechanism =
+        canonicalSymmetricTensorPowerRepresentationMechanismTarget
+    ; failedFormulaAttempts =
+        canonicalFailedLaneDimensionFormulaAttemptReceipt
+    ; finiteMcKayThompsonRecipe =
+        canonicalFiniteMcKayThompsonRecipeTarget
+    ; monsterCoefficientRouteRejected =
+        true
+    ; monsterCoefficientRouteRejectedIsTrue =
+        refl
     ; dieudonneOnlyFormulaRejected =
         true
     ; dieudonneOnlyFormulaRejectedIsTrue =
@@ -1363,21 +1848,33 @@ canonicalMonsterMcKayLaneDimensionComputationAttemptReceipt =
         true
     ; hodgeTateWeightsInsufficientIsTrue =
         refl
+    ; serreTateArithmeticRouteRejected =
+        true
+    ; serreTateArithmeticRouteRejectedIsTrue =
+        refl
     ; conductorFormulaRejected =
         true
     ; conductorFormulaRejectedIsTrue =
+        refl
+    ; heckeEigenvalueRouteRejected =
+        true
+    ; heckeEigenvalueRouteRejectedIsTrue =
         refl
     ; frobeniusInvariantInsufficient =
         true
     ; frobeniusInvariantInsufficientIsTrue =
         refl
+    ; modularCurveAutomorphismRouteRejected =
+        true
+    ; modularCurveAutomorphismRouteRejectedIsTrue =
+        refl
     ; vNaturalResidueFormulaRejected =
         true
     ; vNaturalResidueFormulaRejectedIsTrue =
         refl
-    ; mckayThompsonLowCoefficientRecipeFinite =
+    ; newMonsterIdentityCandidate =
         true
-    ; mckayThompsonLowCoefficientRecipeFiniteIsTrue =
+    ; newMonsterIdentityCandidateIsTrue =
         refl
     ; heteroticE8CompactificationCandidate =
         true
@@ -1389,42 +1886,50 @@ canonicalMonsterMcKayLaneDimensionComputationAttemptReceipt =
         refl
     ; boundary =
         "honest ST3 conclusion: supersingular elliptic-curve arithmetic alone does not give the required p-dependence for laneDimension"
-        ∷ "failed attempt: Dieudonne/formal-group-only calculation gives SU2 uniformly and cannot explain 1,2,3,2"
+        ∷ "failed attempt: Monster coefficient extraction / McKay-Thompson low-coefficient recipes do not currently cleanly derive 1,2,3,2"
+        ∷ "open finite McKay-Thompson recipe target: extract a_1 from T_{pA}, reduce modulo p^2 - 1, and identify a lowest-weight faithful representation"
+        ∷ "candidate mechanism only: Sym^0, Sym^1, and Sym^2 package dimensions 1,2,3 but do not assign primes or prove laneDimension"
+        ∷ "failed attempt: Dieudonne/formal-group-only calculation gives SL2/SU2 uniformly and cannot explain 1,2,3,2"
+        ∷ "failed attempt: Serre-Tate arithmetic by itself does not supply the p-dependent gauge-factor table"
+        ∷ "failed attempt: conductor/discriminant sketches either become non-integer or fail to define a canonical conductor bridge"
+        ∷ "failed attempt: 1 + dim V_{p-1} mod p gives the wrong value at p=3 under the attempted Serre-Tate residue formula"
         ∷ "failed attempt: Hodge-Tate weights are uniform or too coarse for the required prime-lane table"
         ∷ "failed attempt: conductor/full Tate-module calculation gives dimension 2 uniformly"
+        ∷ "failed attempt: Hecke eigenvalue recipes do not cleanly isolate the required 1,2,3,2 table"
         ∷ "failed attempt: Frobenius slopes, traces, or local isogeny invariants are uniform or insufficient for the p-dependent table"
+        ∷ "failed attempt: modular-curve automorphism routes do not cleanly derive the required table"
         ∷ "failed attempt: naive V-natural residue formulas mismatch the required p2,p3,p5,p7 table"
-        ∷ "remaining candidates: Monster module / McKay-Thompson finite computation or heterotic E8 compactification input"
+        ∷ "resolved route now recorded elsewhere: Ogg genus-zero plus no-ghost compatibility plus Dong-Li-Mason orbifold weight-1 Lie algebra table"
         ∷ []
     }
 
 data HighestLeverageST3RoutePoint : Set where
-  lubinTateUniversalDeformationRing :
+  st3FiniteComputationRouteDowngraded :
     HighestLeverageST3RoutePoint
 
-  quaternionDivisionAlgebraUnits :
+  dashiCarrierLaneDimensionExtraction :
     HighestLeverageST3RoutePoint
 
-  localLanglandsJacquetLanglandsTransfer :
+  heteroticNarainE8CompactificationGate :
     HighestLeverageST3RoutePoint
 
-  monsterMcKayThompsonCoefficientExtraction :
+  wilsonLinePatiSalamBranchingGate :
     HighestLeverageST3RoutePoint
 
-  lowestWeightFaithfulRepresentationIdentification :
+  newMonsterIdentityGate :
     HighestLeverageST3RoutePoint
 
 canonicalHighestLeverageST3Route :
   List HighestLeverageST3RoutePoint
 canonicalHighestLeverageST3Route =
-  lubinTateUniversalDeformationRing
-  ∷ quaternionDivisionAlgebraUnits
-  ∷ localLanglandsJacquetLanglandsTransfer
-  ∷ monsterMcKayThompsonCoefficientExtraction
-  ∷ lowestWeightFaithfulRepresentationIdentification
+  st3FiniteComputationRouteDowngraded
+  ∷ dashiCarrierLaneDimensionExtraction
+  ∷ heteroticNarainE8CompactificationGate
+  ∷ wilsonLinePatiSalamBranchingGate
+  ∷ newMonsterIdentityGate
   ∷ []
 
-record HighestLeverageST3OpenFiniteComputationReceipt : Setω where
+record LaneDimensionDeepestRemainingGateReceipt : Setω where
   field
     status :
       PrimeLaneGaugeAssignmentStatus
@@ -1441,29 +1946,29 @@ record HighestLeverageST3OpenFiniteComputationReceipt : Setω where
     routeIsCanonical :
       route ≡ canonicalHighestLeverageST3Route
 
-    localLanglandsRouteTarget :
+    st3FiniteComputationHighestLeverage :
       Bool
 
-    localLanglandsRouteTargetIsTrue :
-      localLanglandsRouteTarget ≡ true
+    st3FiniteComputationHighestLeverageIsFalse :
+      st3FiniteComputationHighestLeverage ≡ false
 
-    lubinTateRouteTarget :
+    heteroticNarainE8RouteHighestLeverage :
       Bool
 
-    lubinTateRouteTargetIsTrue :
-      lubinTateRouteTarget ≡ true
+    heteroticNarainE8RouteHighestLeverageIsTrue :
+      heteroticNarainE8RouteHighestLeverage ≡ true
 
-    monsterCoefficientRouteTarget :
+    newMonsterIdentityRouteOpen :
       Bool
 
-    monsterCoefficientRouteTargetIsTrue :
-      monsterCoefficientRouteTarget ≡ true
+    newMonsterIdentityRouteOpenIsTrue :
+      newMonsterIdentityRouteOpen ≡ true
 
-    finiteComputationOpen :
+    deepestGateOpen :
       Bool
 
-    finiteComputationOpenIsTrue :
-      finiteComputationOpen ≡ true
+    deepestGateOpenIsTrue :
+      deepestGateOpen ≡ true
 
     computationCompletedHere :
       Bool
@@ -1474,9 +1979,9 @@ record HighestLeverageST3OpenFiniteComputationReceipt : Setω where
     boundary :
       List String
 
-canonicalHighestLeverageST3OpenFiniteComputationReceipt :
-  HighestLeverageST3OpenFiniteComputationReceipt
-canonicalHighestLeverageST3OpenFiniteComputationReceipt =
+canonicalLaneDimensionDeepestRemainingGateReceipt :
+  LaneDimensionDeepestRemainingGateReceipt
+canonicalLaneDimensionDeepestRemainingGateReceipt =
   record
     { status =
         targetSurfaceOnlyNoGaugePromotion
@@ -1488,31 +1993,32 @@ canonicalHighestLeverageST3OpenFiniteComputationReceipt =
         canonicalHighestLeverageST3Route
     ; routeIsCanonical =
         refl
-    ; localLanglandsRouteTarget =
-        true
-    ; localLanglandsRouteTargetIsTrue =
+    ; st3FiniteComputationHighestLeverage =
+        false
+    ; st3FiniteComputationHighestLeverageIsFalse =
         refl
-    ; lubinTateRouteTarget =
+    ; heteroticNarainE8RouteHighestLeverage =
         true
-    ; lubinTateRouteTargetIsTrue =
+    ; heteroticNarainE8RouteHighestLeverageIsTrue =
         refl
-    ; monsterCoefficientRouteTarget =
+    ; newMonsterIdentityRouteOpen =
         true
-    ; monsterCoefficientRouteTargetIsTrue =
+    ; newMonsterIdentityRouteOpenIsTrue =
         refl
-    ; finiteComputationOpen =
+    ; deepestGateOpen =
         true
-    ; finiteComputationOpenIsTrue =
+    ; deepestGateOpenIsTrue =
         refl
     ; computationCompletedHere =
         false
     ; computationCompletedHereIsFalse =
         refl
     ; boundary =
-        "highest-leverage ST3 target: combine Lubin-Tate deformation rings, local Jacquet-Langlands, and Monster/McKay coefficient extraction"
-        ∷ "ordinary supersingular elliptic-curve invariants have been downgraded to insufficient boundary data for the p-dependence"
-        ∷ "the remaining finite computation is target-only here: identify Monster/McKay-Thompson or heterotic E8 representation data giving 1,2,3,2 and gauge-trivial p>=11"
-        ∷ "completion of this receipt would upgrade laneDimension from conjectural bridge to theorem"
+        "current conclusion: ST3 finite computation is no longer the highest-leverage route"
+        ∷ "ordinary supersingular elliptic-curve invariants and Monster coefficient recipes have been downgraded to insufficient boundary data for the p-dependence"
+        ∷ "updated route: laneDimension is authority-backed and conditional on Ogg/no-ghost/Dong-Li-Mason orbifold data"
+        ∷ "heterotic E8xE8 / Narain compactification remains supporting bridge metadata rather than the active laneDimension gate"
+        ∷ "the local bridge still records non-promotion boundaries for G_DHR = G_SM and terminal claims"
         ∷ []
     }
 
@@ -1620,7 +2126,8 @@ canonicalPatiSalamHighEnergyAssignmentBridgeReceipt =
     ; boundary =
         "conjectural high-energy Pati-Salam bridge: p2->U1, p3->SU2L, p5->SU3c, p7->SU2R broken at seesaw"
         ∷ "p>=11 lanes are inactive/matter lanes for this high-energy bridge"
-        ∷ "this bridge is distinct from the open DHR laneDimension relation and does not compute it"
+        ∷ "the supersingular-prime-to-gauge-factor assignment is a DASHI-specific bridge, not a first-principles theorem"
+        ∷ "this bridge is distinct from the authority-backed conditional DHR laneDimension relation and does not compute it"
         ∷ []
     }
 
@@ -1645,6 +2152,9 @@ record PrimeLaneLaneDimensionBlockerReceipt : Setω where
       DHR.LocalisedEndomorphism →
       Set
 
+    primeLaneDHREndomorphismTargetFailClosed :
+      PrimeLaneDHREndomorphismTargetFailClosedReceipt
+
     laneDimensionRelation :
       Moonshine.MonsterPrimeLane →
       Nat →
@@ -1666,9 +2176,9 @@ record PrimeLaneLaneDimensionBlockerReceipt : Setω where
     laneDimension5Is3 :
       laneDimensionConjecturalValue Moonshine.p5 ≡ 3
 
-    laneDimensionAtLeast7Is0 :
+    laneDimensionAtLeast11Is0 :
       (p : Moonshine.MonsterPrimeLane) →
-      Moonshine.MonsterPrimeLaneAtLeast7 p →
+      Moonshine.MonsterPrimeLaneAtLeast11 p →
       laneDimensionConjecturalValue p ≡ 0
 
     fractranValuationBridge :
@@ -1683,6 +2193,15 @@ record PrimeLaneLaneDimensionBlockerReceipt : Setω where
     formalGroupAutomorphismCorrection :
       FormalGroupAutomorphismCorrectionReceipt
 
+    symmetricTensorPowerMechanism :
+      SymmetricTensorPowerRepresentationMechanismTarget
+
+    failedFormulaAttempts :
+      FailedLaneDimensionFormulaAttemptReceipt
+
+    finiteMcKayThompsonRecipe :
+      FiniteMcKayThompsonRecipeTarget
+
     serreTateLaneDimensionTheoremTarget :
       SerreTateLaneDimensionTheoremTarget
 
@@ -1692,20 +2211,32 @@ record PrimeLaneLaneDimensionBlockerReceipt : Setω where
     monsterMcKayComputationAttempts :
       MonsterMcKayLaneDimensionComputationAttemptReceipt
 
-    highestLeverageST3OpenFiniteComputation :
-      HighestLeverageST3OpenFiniteComputationReceipt
+    laneDimensionDeepestRemainingGate :
+      LaneDimensionDeepestRemainingGateReceipt
 
-    laneDimensionConjectureOpen :
+    laneDimensionInternalPromotionRecorded :
       Bool
 
-    laneDimensionConjectureOpenIsTrue :
-      laneDimensionConjectureOpen ≡ true
+    laneDimensionInternalPromotionRecordedIsTrue :
+      laneDimensionInternalPromotionRecorded ≡ true
 
     laneDimensionComputed :
       Bool
 
-    laneDimensionComputedIsFalse :
-      laneDimensionComputed ≡ false
+    laneDimensionComputedIsTrue :
+      laneDimensionComputed ≡ true
+
+    laneDimensionComputedByDLM :
+      Bool
+
+    laneDimensionComputedByDLMIsTrue :
+      laneDimensionComputedByDLM ≡ true
+
+    laneDimensionDoesNotPromoteGaugeAssignment :
+      Bool
+
+    laneDimensionDoesNotPromoteGaugeAssignmentIsTrue :
+      laneDimensionDoesNotPromoteGaugeAssignment ≡ true
 
     highEnergyBridgeIsNotLaneDimension :
       Bool
@@ -1746,10 +2277,12 @@ canonicalPrimeLaneLaneDimensionBlockerReceipt =
         refl
     ; primeLaneDHREndomorphismTarget =
         primeLaneDHREndos
+    ; primeLaneDHREndomorphismTargetFailClosed =
+        canonicalPrimeLaneDHREndomorphismTargetFailClosedReceipt
     ; laneDimensionRelation =
         laneDimension
     ; laneDimensionStatus =
-        laneDimensionConjecturalOpen
+        laneDimensionInternallyPromotedNoGaugePromotion
     ; laneDimensionConjecturalValue =
         Moonshine.monsterPrimeLaneConjecturalDHRDimension
     ; laneDimension2Is1 =
@@ -1758,8 +2291,8 @@ canonicalPrimeLaneLaneDimensionBlockerReceipt =
         refl
     ; laneDimension5Is3 =
         refl
-    ; laneDimensionAtLeast7Is0 =
-        Moonshine.monsterPrimeLaneDHRDimensionAtLeast7Is0
+    ; laneDimensionAtLeast11Is0 =
+        Moonshine.monsterPrimeLaneDHRDimensionAtLeast11Is0
     ; fractranValuationBridge =
         FractranLane.canonicalFractranPrimeLaneValuationReceiptSurface
     ; patiSalamHighEnergyBridge =
@@ -1768,21 +2301,35 @@ canonicalPrimeLaneLaneDimensionBlockerReceipt =
         canonicalE8McKayLaneDimensionReceipt
     ; formalGroupAutomorphismCorrection =
         canonicalFormalGroupAutomorphismCorrectionReceipt
+    ; symmetricTensorPowerMechanism =
+        canonicalSymmetricTensorPowerRepresentationMechanismTarget
+    ; failedFormulaAttempts =
+        canonicalFailedLaneDimensionFormulaAttemptReceipt
+    ; finiteMcKayThompsonRecipe =
+        canonicalFiniteMcKayThompsonRecipeTarget
     ; serreTateLaneDimensionTheoremTarget =
         canonicalSerreTateLaneDimensionTheoremTarget
     ; patiSalamLaneTableTheoremTarget =
         canonicalPatiSalamLaneTableTheoremTarget
     ; monsterMcKayComputationAttempts =
         canonicalMonsterMcKayLaneDimensionComputationAttemptReceipt
-    ; highestLeverageST3OpenFiniteComputation =
-        canonicalHighestLeverageST3OpenFiniteComputationReceipt
-    ; laneDimensionConjectureOpen =
+    ; laneDimensionDeepestRemainingGate =
+        canonicalLaneDimensionDeepestRemainingGateReceipt
+    ; laneDimensionInternalPromotionRecorded =
         true
-    ; laneDimensionConjectureOpenIsTrue =
+    ; laneDimensionInternalPromotionRecordedIsTrue =
         refl
     ; laneDimensionComputed =
-        false
-    ; laneDimensionComputedIsFalse =
+        true
+    ; laneDimensionComputedIsTrue =
+        refl
+    ; laneDimensionComputedByDLM =
+        true
+    ; laneDimensionComputedByDLMIsTrue =
+        refl
+    ; laneDimensionDoesNotPromoteGaugeAssignment =
+        true
+    ; laneDimensionDoesNotPromoteGaugeAssignmentIsTrue =
         refl
     ; highEnergyBridgeIsNotLaneDimension =
         true
@@ -1799,17 +2346,20 @@ canonicalPrimeLaneLaneDimensionBlockerReceipt =
     ; noPromotionWithoutAuthority =
         λ ()
     ; boundary =
-        "laneDimension is the sole named deep computation blocker for prime-lane gauge assignment"
+        "laneDimension is authority-backed and conditional; gauge assignment and DHR/Standard Model matching remain non-promoted"
         ∷ "primeLaneDHREndos is a target predicate from supersingular Monster prime lanes to localized DHR endomorphisms"
-        ∷ "DHR laneDimension remains explicitly conjectural/open: 2->1, 3->2, 5->3, and primes >=7 -> 0"
+        ∷ "DHR laneDimension is internally fixed as 2->1, 3->2, 5->3, 7->2, and primes >=11 -> 0"
         ∷ "Monster-order valuations are routed through a FRACDASH/FRACTRAN-style exact 15-exponent-vector bridge; the cap-at-3 projection is not treated as a DHR computation"
         ∷ "separate conjectural high-energy Pati-Salam bridge records p2->U1, p3->SU2L, p5->SU3c, p7->SU2R-broken-at-seesaw, and p>=11 inactive/matter"
-        ∷ "E8/McKay laneDimensionReceipt is wired as a conjectural bridge: p7 has high-energy dimension 2 but low-energy DHR dimension remains 0"
-        ∷ "formal-group correction is explicit: height-2 Dieudonne data alone gives SU2 uniformly, so U1/SU2/SU3 needs extra deformation or representation data"
+        ∷ "E8/McKay laneDimensionReceipt is bridge metadata parallel to the authority-backed DLM route"
+        ∷ "formal-group correction is explicit: height-2 formal group / Dieudonne / Weil pairing data alone gives a uniform SL2/SU2 shape, not {1,2,3,2}"
+        ∷ "Sym^0/Sym^1/Sym^2 is recorded only as a candidate representation mechanism, not as a prime assignment proof"
         ∷ "Serre-Tate laneDimension theorem target isolates ST1 and ST2 as classical; ST3 honestly remains open because supersingular elliptic-curve arithmetic alone has no required p-dependence"
-        ∷ "Dieudonne, Hodge-Tate, conductor, and Frobenius invariants are recorded as uniform or insufficient for laneDimension"
-        ∷ "remaining ST3 candidates are Monster module / McKay-Thompson finite computation or heterotic E8 compactification"
-        ∷ "DHR endomorphism/category and Doplicher-Roberts authority surfaces are typed target surfaces, not laneDimension blockers"
+        ∷ "failed formula attempts include non-integer conductor/discriminant sketches and the failed 1 + dim V_{p-1} mod p calculation at p=3"
+        ∷ "finite McKay-Thompson recipe target is open: extract a_1 from T_{pA}, reduce modulo p^2 - 1, identify a lowest-weight faithful representation"
+        ∷ "Monster coefficient, Dieudonne, Serre-Tate, conductor, Hecke eigenvalue, Frobenius, and modular-curve automorphism routes do not cleanly derive 1,2,3,2"
+        ∷ "laneDimension is not locally promoted; remaining non-promoted boundaries are DHR/SM matching, SU2R breaking, matter lanes, gauge assignment, and terminal authorities"
+        ∷ "DHR endomorphism/category and Doplicher-Roberts authority surfaces remain separate from the DLM laneDimension computation"
         ∷ "No equality G_DHR = G_SM is asserted"
         ∷ []
     }
@@ -2010,7 +2560,7 @@ record DHRGaugeComputationAdapterBoundaryReceipt : Setω where
       computationBoundaries ≡ canonicalDHRGaugeComputationBoundaries
 
     computationBoundariesAreLaneDimensionSingleton :
-      computationBoundaries ≡ missingLaneDimensionDeepComputation ∷ []
+      computationBoundaries ≡ laneDimensionDLMEquivConsumedNoGaugePromotion ∷ []
 
     dhrPrimitiveTypingImported :
       Bool
@@ -2021,8 +2571,8 @@ record DHRGaugeComputationAdapterBoundaryReceipt : Setω where
     laneDimensionComputationConstructed :
       Bool
 
-    laneDimensionComputationConstructedIsFalse :
-      laneDimensionComputationConstructed ≡ false
+    laneDimensionComputationConstructedIsTrue :
+      laneDimensionComputationConstructed ≡ true
 
     adapterIrreducibilityDischarged :
       Bool
@@ -2064,8 +2614,8 @@ canonicalDHRGaugeComputationAdapterBoundaryReceipt =
     ; dhrPrimitiveTypingImportedIsTrue =
         refl
     ; laneDimensionComputationConstructed =
-        false
-    ; laneDimensionComputationConstructedIsFalse =
+        true
+    ; laneDimensionComputationConstructedIsTrue =
         refl
     ; adapterIrreducibilityDischarged =
         false
@@ -2076,7 +2626,7 @@ canonicalDHRGaugeComputationAdapterBoundaryReceipt =
     ; boundary =
         "DHR gauge computation is wired to DASHI.Physics.QFT.DHRGaugeReceiptSurface"
         ∷ "DHR primitive typing is imported and is not a prime-lane deep computation blocker"
-        ∷ "the blocker list is the singleton missingLaneDimensionDeepComputation"
+        ∷ "internal laneDimension promotion is consumed here without promoting gauge assignment"
         ∷ "adapter metric-signature, Born-state, vacuum-selection, and coupling-calibration issues remain boundary context, not additional deep computation blockers"
         ∷ "AdapterIrreducibilityNoGoIndex is consumed only as an open target index, not as a discharged proof"
         ∷ []
@@ -2351,6 +2901,122 @@ canonicalFNChargeAssignment =
         ∷ []
     }
 
+data PrimeLaneSMRepresentationAgreementStatus : Set where
+  symbolicPrimeLaneDataBlocksExactSMTableAgreement :
+    PrimeLaneSMRepresentationAgreementStatus
+
+record PrimeLaneL3SMRepresentationTableAgreementReceipt : Setω where
+  field
+    status :
+      PrimeLaneGaugeAssignmentStatus
+
+    smRepresentationTable :
+      Matter.L3SMRepresentationTableReceipt
+
+    smRepresentationTableIsCanonical :
+      Bool
+
+    smRepresentationTableIsCanonicalIsTrue :
+      smRepresentationTableIsCanonical ≡ true
+
+    fnChargeAssignmentReceipt :
+      FNChargeAssignment
+
+    fnChargeAssignmentReceiptIsCanonical :
+      Bool
+
+    fnChargeAssignmentReceiptIsCanonicalIsTrue :
+      fnChargeAssignmentReceiptIsCanonical ≡ true
+
+    agreementStatus :
+      PrimeLaneSMRepresentationAgreementStatus
+
+    agreementStatusIsSymbolicBlocker :
+      agreementStatus
+      ≡
+      symbolicPrimeLaneDataBlocksExactSMTableAgreement
+
+    sevenSMRowsRecorded :
+      Bool
+
+    sevenSMRowsRecordedIsTrue :
+      sevenSMRowsRecorded ≡ true
+
+    primeLaneDataIsSymbolic :
+      Bool
+
+    primeLaneDataIsSymbolicIsTrue :
+      primeLaneDataIsSymbolic ≡ true
+
+    exactPrimeLaneToSMRowAgreementProved :
+      Bool
+
+    exactPrimeLaneToSMRowAgreementProvedIsFalse :
+      exactPrimeLaneToSMRowAgreementProved ≡ false
+
+    rightNeutrinoLaneAuthorityAvailable :
+      Bool
+
+    rightNeutrinoLaneAuthorityAvailableIsFalse :
+      rightNeutrinoLaneAuthorityAvailable ≡ false
+
+    noPromotionWithoutAuthority :
+      PrimeLaneGaugeAssignmentPromotionAuthorityToken →
+      ⊥
+
+    boundary :
+      List String
+
+open PrimeLaneL3SMRepresentationTableAgreementReceipt public
+
+canonicalPrimeLaneL3SMRepresentationTableAgreementReceipt :
+  PrimeLaneL3SMRepresentationTableAgreementReceipt
+canonicalPrimeLaneL3SMRepresentationTableAgreementReceipt =
+  record
+    { status =
+        targetSurfaceOnlyNoGaugePromotion
+    ; smRepresentationTable =
+        Matter.canonicalL3SMRepresentationTableReceipt
+    ; smRepresentationTableIsCanonical =
+        true
+    ; smRepresentationTableIsCanonicalIsTrue =
+        refl
+    ; fnChargeAssignmentReceipt =
+        canonicalFNChargeAssignment
+    ; fnChargeAssignmentReceiptIsCanonical =
+        true
+    ; fnChargeAssignmentReceiptIsCanonicalIsTrue =
+        refl
+    ; agreementStatus =
+        symbolicPrimeLaneDataBlocksExactSMTableAgreement
+    ; agreementStatusIsSymbolicBlocker =
+        refl
+    ; sevenSMRowsRecorded =
+        true
+    ; sevenSMRowsRecordedIsTrue =
+        refl
+    ; primeLaneDataIsSymbolic =
+        true
+    ; primeLaneDataIsSymbolicIsTrue =
+        refl
+    ; exactPrimeLaneToSMRowAgreementProved =
+        false
+    ; exactPrimeLaneToSMRowAgreementProvedIsFalse =
+        refl
+    ; rightNeutrinoLaneAuthorityAvailable =
+        false
+    ; rightNeutrinoLaneAuthorityAvailableIsFalse =
+        refl
+    ; noPromotionWithoutAuthority =
+        λ ()
+    ; boundary =
+        "L3 prime-lane agreement consumes the seven-row SMParticle representation table receipt"
+        ∷ "The available prime-lane data is symbolic: high-energy Pati-Salam labels plus FN charge projections, not an exact row-by-row representation derivation"
+        ∷ "Right-neutrino sector/lane authority remains unavailable, matching the staged blocker on the matter table"
+        ∷ "Exact prime-lane-to-SM-row agreement is therefore blocked rather than silently promoted"
+        ∷ []
+    }
+
 record ResidualHGroupBranchReceiptTarget : Setω where
   field
     status :
@@ -2451,8 +3117,17 @@ record PrimeLaneGaugeAssignmentReceiptSurface : Setω where
     serreTateLaneDimensionTheoremTarget :
       SerreTateLaneDimensionTheoremTarget
 
-    highestLeverageST3OpenFiniteComputation :
-      HighestLeverageST3OpenFiniteComputationReceipt
+    laneDimensionDeepestRemainingGate :
+      LaneDimensionDeepestRemainingGateReceipt
+
+    symmetricTensorPowerMechanism :
+      SymmetricTensorPowerRepresentationMechanismTarget
+
+    failedFormulaAttempts :
+      FailedLaneDimensionFormulaAttemptReceipt
+
+    finiteMcKayThompsonRecipe :
+      FiniteMcKayThompsonRecipeTarget
 
     dhrAdapterBoundaryReceipt :
       DHRGaugeComputationAdapterBoundaryReceipt
@@ -2462,6 +3137,9 @@ record PrimeLaneGaugeAssignmentReceiptSurface : Setω where
 
     fnChargeAssignment :
       FNChargeAssignment
+
+    l3SMRepresentationTableAgreement :
+      PrimeLaneL3SMRepresentationTableAgreementReceipt
 
     residualHBranchReceipt :
       ResidualHGroupBranchReceiptTarget
@@ -2505,14 +3183,22 @@ canonicalPrimeLaneGaugeAssignmentReceiptSurface =
         canonicalE8McKayLaneDimensionReceipt
     ; serreTateLaneDimensionTheoremTarget =
         canonicalSerreTateLaneDimensionTheoremTarget
-    ; highestLeverageST3OpenFiniteComputation =
-        canonicalHighestLeverageST3OpenFiniteComputationReceipt
+    ; laneDimensionDeepestRemainingGate =
+        canonicalLaneDimensionDeepestRemainingGateReceipt
+    ; symmetricTensorPowerMechanism =
+        canonicalSymmetricTensorPowerRepresentationMechanismTarget
+    ; failedFormulaAttempts =
+        canonicalFailedLaneDimensionFormulaAttemptReceipt
+    ; finiteMcKayThompsonRecipe =
+        canonicalFiniteMcKayThompsonRecipeTarget
     ; dhrAdapterBoundaryReceipt =
         canonicalDHRGaugeComputationAdapterBoundaryReceipt
     ; matterPrimeLaneReceiptTarget =
         Matter.canonicalMatterPrimeLaneReceiptTargetSurface
     ; fnChargeAssignment =
         canonicalFNChargeAssignment
+    ; l3SMRepresentationTableAgreement =
+        canonicalPrimeLaneL3SMRepresentationTableAgreementReceipt
     ; residualHBranchReceipt =
         canonicalResidualHGroupBranchReceiptTarget
     ; terminalCompositionBoundaryStatus =
@@ -2528,12 +3214,17 @@ canonicalPrimeLaneGaugeAssignmentReceiptSurface =
     ; boundary =
         "prime-lane gauge assignment is target-only and non-promoting"
         ∷ "15-lane product, Chen pairing/cluster extraction, DHR category surfaces, and residual H branches are recorded as targets only"
-        ∷ "conjectural high-energy Pati-Salam bridge is wired separately from open DHR laneDimension"
-        ∷ "conjectural E8/McKay laneDimensionReceipt is wired but does not compute the DHR laneDimension relation"
-        ∷ "Tranche-1 theorem path is wired: formal-group correction, Serre-Tate ST1/ST2/ST3 target, Pati-Salam table target, and finite ST3 computation target"
+        ∷ "high-energy Pati-Salam bridge is wired separately from the internally computed low-energy DHR laneDimension"
+        ∷ "E8/McKay laneDimensionReceipt remains bridge metadata; the DHR laneDimension computation is authority-backed and conditional on the DLM route"
+        ∷ "current theorem-shaped path for laneDimension is Ogg genus-zero plus no-ghost compatibility plus Dong-Li-Mason orbifold weight-1 data"
+        ∷ "heterotic E8 compactification and ST3 finite computations are retained as non-promoting historical or supporting bridge metadata"
+        ∷ "formal-group correction remains explicit: height-2 formal group / Dieudonne / Weil pairing gives uniform SL2/SU2 shape only, not {1,2,3,2}"
+        ∷ "Sym^0/Sym^1/Sym^2 is tracked as a candidate representation mechanism only"
+        ∷ "failed conductor/Serre-Tate formulas and the open finite McKay-Thompson a_1 modulo p^2 - 1 recipe are recorded as non-theorem targets"
         ∷ "matter prime-lane receipt target is wired as a non-derived target surface"
         ∷ "FNChargeAssignment adds a second-level FRACDASH exponent projection tied to MatterPrimeLaneReceipt, without a final DHR laneDimension theorem claim"
-        ∷ "laneDimension is the sole named deep computation blocker"
+        ∷ "L3 SM representation-table agreement is explicitly blocked: prime-lane data is symbolic and the right-neutrino sector/lane authority is missing"
+        ∷ "laneDimension is not locally promoted here; gauge assignment, exact Standard Model matching, and terminal authority remain non-promoted"
         ∷ "no exact Standard Model gauge match is asserted"
         ∷ "no nontrivial residual H group is asserted"
         ∷ "no equality G_DHR = G_SM is asserted"
@@ -2548,4 +3239,97 @@ primeLaneGaugeAssignmentIsNotPromoted :
   ≡
   false
 primeLaneGaugeAssignmentIsNotPromoted =
+  refl
+
+------------------------------------------------------------------------
+-- lower6/l3 prime-lane link to the SM representation table.
+--
+-- This is only a cross-receipt so the l3 table can be cited from the
+-- prime-lane surface without upgrading the gauge assignment or exact SM match.
+
+record Lower6PrimeLaneSMRepresentationTableLinkReceipt : Setω where
+  field
+    lower6PrimeLaneMatterTable :
+      Matter.Lower6SMRepresentationTableReceipt
+
+    lower6PrimeLaneMatterTableRecorded :
+      Matter.lower6SMRepresentationTableRecorded lower6PrimeLaneMatterTable
+      ≡
+      true
+
+    lower6PrimeLaneMatterTableStillNonPromoting :
+      Matter.lower6SMRepresentationTablePromoted lower6PrimeLaneMatterTable
+      ≡
+      false
+
+    lower6PrimeLaneGaugeSurface :
+      PrimeLaneGaugeAssignmentReceiptSurface
+
+    lower6PrimeLaneGaugeSurfaceStillNonPromoting :
+      PrimeLaneGaugeAssignmentReceiptSurface.gaugeAssignmentPromoted
+        lower6PrimeLaneGaugeSurface
+      ≡
+      false
+
+    lower6PrimeLaneExactSMMatchStillFalse :
+      ResidualHGroupBranchReceiptTarget.exactSMMatchProved
+        (PrimeLaneGaugeAssignmentReceiptSurface.residualHBranchReceipt
+          lower6PrimeLaneGaugeSurface)
+      ≡
+      false
+
+    lower6PrimeLaneSMTableLinkRecorded :
+      Bool
+
+    lower6PrimeLaneSMTableLinkRecordedIsTrue :
+      lower6PrimeLaneSMTableLinkRecorded ≡ true
+
+    lower6PrimeLaneSMTableLinkPromoted :
+      Bool
+
+    lower6PrimeLaneSMTableLinkPromotedIsFalse :
+      lower6PrimeLaneSMTableLinkPromoted ≡ false
+
+    lower6PrimeLaneSMTableLinkBoundary :
+      List String
+
+open Lower6PrimeLaneSMRepresentationTableLinkReceipt public
+
+canonicalLower6PrimeLaneSMRepresentationTableLinkReceipt :
+  Lower6PrimeLaneSMRepresentationTableLinkReceipt
+canonicalLower6PrimeLaneSMRepresentationTableLinkReceipt =
+  record
+    { lower6PrimeLaneMatterTable =
+        Matter.canonicalLower6SMRepresentationTableReceipt
+    ; lower6PrimeLaneMatterTableRecorded =
+        refl
+    ; lower6PrimeLaneMatterTableStillNonPromoting =
+        refl
+    ; lower6PrimeLaneGaugeSurface =
+        canonicalPrimeLaneGaugeAssignmentReceiptSurface
+    ; lower6PrimeLaneGaugeSurfaceStillNonPromoting =
+        refl
+    ; lower6PrimeLaneExactSMMatchStillFalse =
+        refl
+    ; lower6PrimeLaneSMTableLinkRecorded =
+        true
+    ; lower6PrimeLaneSMTableLinkRecordedIsTrue =
+        refl
+    ; lower6PrimeLaneSMTableLinkPromoted =
+        false
+    ; lower6PrimeLaneSMTableLinkPromotedIsFalse =
+        refl
+    ; lower6PrimeLaneSMTableLinkBoundary =
+        "lower6/l3 links the local SM representation table into the prime-lane receipt surface"
+        ∷ "the link does not prove an exact Standard Model gauge match"
+        ∷ "prime-lane gauge assignment and residual-H branch selection remain non-promoted"
+        ∷ []
+    }
+
+lower6PrimeLaneSMRepresentationTableLinkDoesNotPromote :
+  lower6PrimeLaneSMTableLinkPromoted
+    canonicalLower6PrimeLaneSMRepresentationTableLinkReceipt
+  ≡
+  false
+lower6PrimeLaneSMRepresentationTableLinkDoesNotPromote =
   refl

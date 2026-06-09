@@ -1,0 +1,9 @@
+{
+  "heartbeat_file": "heartbeat.paper7-wave12-gate4-matter-interface.json",
+  "lane": "paper7-wave12/gate4/missingValuationMatterReceiptInterface",
+  "lane_claim": "STRICT SYMBOL-INHABITATION CONTRACT. Use $autonomous-orchestrator only; do not use Codex built-in subagents. Leaf worker unless SECTION MANAGER. Own exactly the named target. Allowed exits only: (1) Agda source diff + targeted validation passes; (2) Agda source diff + exact Agda stderr naming missing upstream type/symbol; (3) empty diff + named authority-boundary escalation with exact receipt shape. Forbidden: docs-only, audit-only, blocker-map-only, scaffold-only, new postulate, weakened theorem, false promotion. Touch only target module and direct imports. Include exact validation command.\nTARGET: DASHI.Physics.Closure.FactorVecDiscreteMetricTensorSurface.missingValuationMatterReceiptInterface / W4MatterStressEnergyInterfaceReceipt boundary. Module: DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda; W4MatterStressEnergyInterfaceReceipt may be touched only if directly necessary. Attempt to connect the local unit stress-energy progress to an inhabited matter receipt interface. If the interface is external/authority-only, return exact authority boundary and receipt shape. Validation: agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/FactorVecDiscreteMetricTensorSurface.agda",
+  "orchestrator_id": "paper7-wave12-gate4-matter-interface",
+  "parent_orchestrator_id": "paper7-wave12-mgr-next-hard-symbols",
+  "status_file": "status.paper7-wave12-gate4-matter-interface.json",
+  "timestamp": "2026-05-19T17:34:32Z"
+}

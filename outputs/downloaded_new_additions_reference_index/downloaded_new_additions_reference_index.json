@@ -1,0 +1,548 @@
+{
+  "claim_boundary": {
+    "asserts_external_authority": false,
+    "asserts_promotion": false,
+    "asserts_theorem_result": false,
+    "contains_content_checksums": true,
+    "is_reference_inventory": true
+  },
+  "counts": {
+    "by_class": {
+      "code": 2,
+      "data": 10,
+      "html": 1,
+      "image": 12,
+      "pdf": 11
+    },
+    "by_suffix": {
+      ".agda": 1,
+      ".csv": 7,
+      ".html": 1,
+      ".json": 3,
+      ".pdf": 11,
+      ".png": 11,
+      ".py": 1,
+      ".webp": 1
+    },
+    "by_topic": {
+      "constants": 6,
+      "dark-sector": 1,
+      "eta-mesic": 3,
+      "hodge": 0,
+      "path-c": 1,
+      "quantum": 2,
+      "string": 0,
+      "voxel": 1,
+      "ym": 18
+    },
+    "total_files": 36,
+    "untagged": 8
+  },
+  "generated_at": "2026-06-07T00:00:00+00:00",
+  "promotion_flags": {
+    "authority_source_promoted": false,
+    "biology_lane_promoted": false,
+    "chemistry_lane_promoted": false,
+    "physics_lane_promoted": false,
+    "terminal_unification_promoted": false,
+    "theorem_authority_promoted": false,
+    "ym_clay_promoted": false
+  },
+  "rows": [
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "3D voxel shape mismatch.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/3D voxel shape mismatch.pdf",
+      "sha256": "b2c85729b87d12b553e2afbd41690e1deffb96d226455c1c24f6fed6b1972d67",
+      "size_bytes": 204239,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": [
+        "voxel"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "41558_2025_2398_Fig1_HTML.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/41558_2025_2398_Fig1_HTML.png",
+      "sha256": "de067b41502c9568cfb353fcbc5e745e09bfaa34f57543cfcdce47af66b9920e",
+      "size_bytes": 103552,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": []
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "Branch \u00b7 Formalism Bridging GR and MDL - LES.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Branch \u00b7 Formalism Bridging GR and MDL - LES.pdf",
+      "sha256": "1448dc3399a83ba5461e555fa45311751b804fa870628be1cdc51c4d055255ea",
+      "size_bytes": 449190,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": []
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "Branch \u00b7 Formalism Bridging GR and MDL - LES2.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Branch \u00b7 Formalism Bridging GR and MDL - LES2.pdf",
+      "sha256": "ee8d1e6fdc582937fa7fbcc4964e2da8b2d6bfc1f939530b5c7b4013215f26bb",
+      "size_bytes": 148569,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": []
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "Branch \u00b7 Math Mysticism Breakdown.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Branch \u00b7 Math Mysticism Breakdown.pdf",
+      "sha256": "a124e3912b6392b25fce62a2de8bf978df47efc74718a1b06795d8a5e53ba8c0",
+      "size_bytes": 829145,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": []
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "DASHI - Dashi on Quantum Computing.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - Dashi on Quantum Computing.pdf",
+      "sha256": "ebd4b56b3dfc10abddf3c7e9a7757029fdad12262c37bbd101a85286d34e246f",
+      "size_bytes": 386170,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": [
+        "quantum"
+      ]
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "DASHI - Physics - Branch \u00b7 Outreach Draft Rewrite.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - Physics - Branch \u00b7 Outreach Draft Rewrite.pdf",
+      "sha256": "f502268b1a343e574268d887258a290ea73fee64cfc2b6ca43066d88ab8ce471",
+      "size_bytes": 268722,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": [
+        "constants"
+      ]
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "DASHI - Physics - Dark sector physics portals.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - Physics - Dark sector physics portals.pdf",
+      "sha256": "e10ec22d012ed8d7cb739dce59b7313a2393283755375ef90e5049d879a5be17",
+      "size_bytes": 251799,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": [
+        "constants",
+        "dark-sector"
+      ]
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "DASHI - Physics - Physics Closure in DASHI.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - Physics - Physics Closure in DASHI.pdf",
+      "sha256": "c82b3ccea20c842bb1c9a2cab176da67fd0d9e717765dd5ea73c461f5773bea1",
+      "size_bytes": 31335,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": [
+        "constants"
+      ]
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "DASHI - \u03b7\u2032-Mesic Nucleus Discovery.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/DASHI - \u03b7\u2032-Mesic Nucleus Discovery.pdf",
+      "sha256": "03ae169a808fd20e168514eae7bef3f28d3cbe367902d8fa6c3ccc3de097db8c",
+      "size_bytes": 147450,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": [
+        "constants",
+        "eta-mesic"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "Merrell-Thermometer-wBuffer.webp",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Merrell-Thermometer-wBuffer.webp",
+      "sha256": "d4b6e3f131a33da3b03c2e06434c32c1337e03cfd9f6b93cbf9c2ed4c2ae9861",
+      "size_bytes": 46140,
+      "suffix": ".webp",
+      "theorem_claim": false,
+      "topic_tags": []
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "Path C model update.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Path C model update.pdf",
+      "sha256": "dbb2d970505888bc023dca4ffbe854a50b68ccb46418c47f50aeb566cff0384e",
+      "size_bytes": 119191,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": [
+        "path-c"
+      ]
+    },
+    {
+      "artifact_class": "pdf",
+      "authority_claim": false,
+      "filename": "Quantum field count.pdf",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/Quantum field count.pdf",
+      "sha256": "e0da6069ed11614a7809a939518797da45ab44d825279db04eaad7469e1c93fb",
+      "size_bytes": 72210,
+      "suffix": ".pdf",
+      "theorem_claim": false,
+      "topic_tags": [
+        "quantum"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "sprint69_constants_table.csv",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/sprint69_constants_table.csv",
+      "sha256": "d037c4896a95ee1ab5def78eeaf9929f4a72dfda8b05b9ac960e17def473bad9",
+      "size_bytes": 794,
+      "suffix": ".csv",
+      "theorem_claim": false,
+      "topic_tags": [
+        "constants"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "sprint73_eriksson_suppression.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/sprint73_eriksson_suppression.png",
+      "sha256": "e6f59891e9dd1f601690c2b11ff3a4f930a97860c5617782a49e6520b2c45c78",
+      "size_bytes": 231919,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": [
+        "constants"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "sprint73_kp_threshold.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/sprint73_kp_threshold.png",
+      "sha256": "921c2a41c456309f6e539642e30cf637db5716493da6b3171194657c2201495b",
+      "size_bytes": 257249,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": []
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "sprint73_lemma_stack.csv",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/sprint73_lemma_stack.csv",
+      "sha256": "e7ceb114a8ccef5e043930e9a41e466a531dd2ce77fb6545dfb61455386f337f",
+      "size_bytes": 1087,
+      "suffix": ".csv",
+      "theorem_claim": false,
+      "topic_tags": []
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "sprint73_proof_ladder.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/sprint73_proof_ladder.png",
+      "sha256": "11d5a4fc40c9ec109f5bcf9882c021a8f693b9416aa6aca59acab990a154bce9",
+      "size_bytes": 141374,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": []
+    },
+    {
+      "artifact_class": "html",
+      "authority_claim": false,
+      "filename": "sprint80-clay-ym-proof-plan.html",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/sprint80-clay-ym-proof-plan.html",
+      "sha256": "925f5c98cca21c121fc0ec9fad95d5bca426de78f02a9de3b01b1c7b7374ec3e",
+      "size_bytes": 48786,
+      "suffix": ".html",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "ym_67c_route_b.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_67c_route_b.png",
+      "sha256": "0985266f90beb40f7710341236ff8a7fc27d45f1d6cfb1da195305138a95c0d0",
+      "size_bytes": 270938,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "ym_67c_two_routes.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_67c_two_routes.png",
+      "sha256": "1a2e899d8ba516ceea7d6237912e4efb6f0dcf953ee9b8b12b38287c76cca0d0",
+      "size_bytes": 314907,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "ym_slab_geometry.csv",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_slab_geometry.csv",
+      "sha256": "ffb2f01a5c762fe63c07f4e102af3a1d012a1a89f5f34451bfa026463dd98330",
+      "size_bytes": 392,
+      "suffix": ".csv",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "ym_spatial_slab_entropy_count.csv",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_spatial_slab_entropy_count.csv",
+      "sha256": "fffe3a3f079aa1875850c0948aee7337ad65ec64ca1e422174f1a9c6ece92f84",
+      "size_bytes": 477,
+      "suffix": ".csv",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "ym_sprint67c_obstruction.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint67c_obstruction.png",
+      "sha256": "aca71e7a1151ab511872d9e9eb3c2b6da18bb3021cb63f605ec275b65b428fea",
+      "size_bytes": 313142,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "ym_sprint70_leakage_paths.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint70_leakage_paths.png",
+      "sha256": "3830524077e28a7d4150f1fdfb2111df6e7f787fde79d627d04e53640162d7c4",
+      "size_bytes": 316786,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "ym_sprint70_leakage_scenarios.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint70_leakage_scenarios.png",
+      "sha256": "3d04312fdb13239daf896103507ee7915e5097224ca3b66d4e9e1ef9af068f8f",
+      "size_bytes": 152386,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "ym_sprint82_assumption_a_oscillation.csv",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint82_assumption_a_oscillation.csv",
+      "sha256": "c29f0aa263aae67db7fa99b5798f14589ec7b8a5fd44123231ecd7781b88d4b6",
+      "size_bytes": 567,
+      "suffix": ".csv",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "ym_sprint82_eta_kp_threshold.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint82_eta_kp_threshold.png",
+      "sha256": "a6f145d2ca71a8946a0e576fb692d340d12793c7e3e5cada440d8f83c75f1bfe",
+      "size_bytes": 25703,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym",
+        "eta-mesic"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "ym_sprint82_eta_thresholds.csv",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint82_eta_thresholds.csv",
+      "sha256": "86d90410a8746c448f1ae162e0ad941f9444523091c40c9048a2774b2034e3bb",
+      "size_bytes": 254,
+      "suffix": ".csv",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym",
+        "eta-mesic"
+      ]
+    },
+    {
+      "artifact_class": "image",
+      "authority_claim": false,
+      "filename": "ym_sprint82_qhp_oscillation_decay.png",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint82_qhp_oscillation_decay.png",
+      "sha256": "55c56ce6949f64e1e259c2ed37286678273ff259a2501ab4f9c7931bc5400109",
+      "size_bytes": 52590,
+      "suffix": ".png",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "ym_sprint82_summary.json",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint82_summary.json",
+      "sha256": "0690ac4cc6551c4773b811a578fe5d92ea611327d51c5fd7a19aa5b52b7c10fe",
+      "size_bytes": 768,
+      "suffix": ".json",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "code",
+      "authority_claim": false,
+      "filename": "ym_sprint93_master_wc3_calcs.py",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint93_master_wc3_calcs.py",
+      "sha256": "4f785f9976ba10f18b2cc1b866e63b6ec7531fdd35a9aedb4b41a11f7f2be808",
+      "size_bytes": 1084,
+      "suffix": ".py",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "ym_sprint93_rows.json",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint93_rows.json",
+      "sha256": "199ffed1cabb92bdff125fc2e429ab82a41cf4bcd198f0d306bbc02efa38b77f",
+      "size_bytes": 2767,
+      "suffix": ".json",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "ym_sprint93_summary.json",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint93_summary.json",
+      "sha256": "57354c08c3f7b566088cf64929dd71a3f848c57bb6a2b43c0400a4c7a4d7dbca",
+      "size_bytes": 397,
+      "suffix": ".json",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "data",
+      "authority_claim": false,
+      "filename": "ym_temporal_support_noncreation_table.csv",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/ym_temporal_support_noncreation_table.csv",
+      "sha256": "2c531a56fc37b9113b851b67cbb8cb54a668b228246b6c43731c406d7e986b9b",
+      "size_bytes": 608,
+      "suffix": ".csv",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    },
+    {
+      "artifact_class": "code",
+      "authority_claim": false,
+      "filename": "YMSprint93ContinuumGapAttempt.agda",
+      "promotion_claim": false,
+      "relative_path": "temp-DOWNLOADED/new additions/YMSprint93ContinuumGapAttempt.agda",
+      "sha256": "4aa9c2544cc4be4aa9bff6431e026e805fe316a3ec438e75fd302255d780d6d1",
+      "size_bytes": 6735,
+      "suffix": ".agda",
+      "theorem_claim": false,
+      "topic_tags": [
+        "ym"
+      ]
+    }
+  ],
+  "schema": "dashi-downloaded-new-additions-reference-index-v1",
+  "schema_version": "1.0.0",
+  "source_dir": "temp-DOWNLOADED/new additions"
+}

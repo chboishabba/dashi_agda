@@ -1,0 +1,73 @@
+{
+  "angular_steps": 721,
+  "artifact_complete": true,
+  "blocker": "GlobalConcavityOfPsi1",
+  "blocker_open": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint139_localized_kernel_sign_sampler",
+  "control_card": {
+    "C": "Deterministic stdlib Python, fixed S^3 Simpson quadrature, dataclass rows, JSON, CSV, Markdown, and fail-closed validation.",
+    "F": "Missing required rows, no positive obstruction, any global concavity proof claim, or any Clay promotion fails closed.",
+    "G": "Validation requires at least one local support row, at least one positive nonlocal obstruction, no global proof, no full Clay NS solved flag, and no promotion.",
+    "L": "Ltilde-as-5d-radial Green kernel -> second-z derivative -> localized S^3 average -> sign classification -> route decision.",
+    "O": "Worker 3 owns only scripts/ns_sprint139_localized_kernel_sign_sampler.py and outputs/ns_sprint139_localized_kernel_sign_sampler/.",
+    "P": "Keep GlobalConcavityOfPsi1 open; use the sampler only as a ledger of support and obstructions.",
+    "R": "Sample localized axisymmetric kernel signs relevant to GlobalConcavityOfPsi1 without proving global concavity.",
+    "S": "Same-z local radial patches support concavity, while nearby axial offsets and nonlocal annular/boundary/tail sources can produce unfavorable signs."
+  },
+  "decision": "fail_closed_kernel_sign_indefinite_no_promotion",
+  "epsilon2": 1e-08,
+  "exit_code": 0,
+  "fail_closed": true,
+  "full_clay_ns_solved": false,
+  "global_concavity_closed": false,
+  "global_concavity_proof_scope": "not_proved_sampling_only",
+  "global_concavity_proved": false,
+  "global_concavity_proven": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "kernel_model": "5d_radial_green_second_z_derivative_axisymmetric_S3_average",
+  "local_concavity_supported": true,
+  "local_support_rows": [
+    "local_radial_patch_same_z_support",
+    "local_broadened_radial_patch_support"
+  ],
+  "nonlocal_or_boundary_rows": [
+    "nonlocal_annular_same_z_support_not_global",
+    "nonlocal_annular_axial_offset_wrong_sign",
+    "boundary_layer_near_wall_wrong_sign",
+    "outer_axial_tail_wrong_sign"
+  ],
+  "nonlocal_positive_obstruction_rows": [
+    "nonlocal_annular_axial_offset_wrong_sign",
+    "boundary_layer_near_wall_wrong_sign",
+    "outer_axial_tail_wrong_sign"
+  ],
+  "parent_gate": "AxialMonotonicityOfSwirlProfile",
+  "positive_obstruction_rows": [
+    "local_axial_offset_same_radius_wrong_sign",
+    "nonlocal_annular_axial_offset_wrong_sign",
+    "boundary_layer_near_wall_wrong_sign",
+    "outer_axial_tail_wrong_sign"
+  ],
+  "promotion_decision": "hold_no_clay_promotion",
+  "route_decision": "fail_closed_kernel_sign_indefinite_no_promotion",
+  "row_count": 7,
+  "sign_indefinite_obstruction_rows": [
+    "local_axial_offset_same_radius_wrong_sign",
+    "nonlocal_annular_same_z_support_not_global",
+    "nonlocal_annular_axial_offset_wrong_sign",
+    "boundary_layer_near_wall_wrong_sign",
+    "outer_axial_tail_wrong_sign"
+  ],
+  "sign_tolerance": 1e-09,
+  "variables": {
+    "Ltilde": "partial_r^2 + (3/r) partial_r + partial_z^2",
+    "elliptic_relation": "-Ltilde psi1 = omega1",
+    "omega1": "omega^theta / r",
+    "psi1": "psi^theta / r",
+    "sampled_kernel": "partial_z^2 |(y,z)-(y_prime,z_prime)|^-3, S^3-angular averaged",
+    "u1": "u^theta / r",
+    "v": "partial_z u1"
+  }
+}

@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>NIST Chemistry WebBook</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<link rel="stylesheet" type="text/css"
+ href="./style/webbook.css"
+ title="Default Chemistry WebBook style"
+ media="screen, print" />
+
+<link rel="icon"
+ sizes="64x64 48x48 32x32 16x16"
+ href="../favicon.ico"
+ type="image/x-icon" />
+
+<link rel="apple-touch-icon"
+ sizes="76x76"
+ href="./img/touch-icon-76x76.png"
+ type="image/png" />
+<link rel="apple-touch-icon"
+ sizes="120x120"
+ href="./img/touch-icon-120x120.png"
+ type="image/png" />
+<link rel="apple-touch-icon"
+ sizes="152x152"
+ href="./img/touch-icon-152x152.png"
+ type="image/png" />
+<link rel="apple-touch-icon"
+ sizes="180x180"
+ href="./img/touch-icon-180x180.png"
+ type="image/png" />
+<link rel="apple-touch-icon"
+ sizes="192x192"
+ href="./img/touch-icon-192x192.png"
+ type="image/png" />
+
+<link rel="manifest"
+ href="../manifest.webmanifest"
+ type="application/manifest+json" />
+
+
+<link rel="help"
+ href="./#Documentation"
+ title="Documentation" />
+<link rel="search"
+ href="./#Search"
+ title="Search options" />
+<link rel="author"
+ href="./#Top"
+ title="Credits" />
+<link rel="license"
+ href="./#Notes"
+ title="Notes" />
+
+<link rel="home"
+ href="./"
+ title="Main site page" />
+
+
+<meta name="keywords"
+ content="chemical data, thermochemical data, thermodynamic data, enthalpy, entropy, heat capacity, heat of formation, chemical structure, ionization potential, thermochemistry, boiling point, vapor pressure, IR spectrum, mass spectrum, UV/Vis spectrum, retention index, InChI, InChIKey, NIST" />
+
+<!-- Dublin Core metadata -->
+<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
+
+<meta name="DCTERMS.title"
+ content="NIST Chemistry WebBook" />
+<meta name="DCTERMS.description"
+ content="NIST site provides chemical and physical property data for over 40,000 compounds." />
+<meta name="DCTERMS.creator"
+ content="NIST Office of Data and Informatics" />
+<meta name="DCTERMS.publisher"
+ content="National Institute of Standards and Technology" />
+<link rel="DCTERMS.identifier"
+      href="https://doi.org/10.18434/T4D303" />
+
+<!-- Open Graph metadata -->
+<meta name="og:title"
+  content="NIST Chemistry WebBook" />
+<meta name="og:type"
+  content="website" />
+<meta name="og:image"
+  content="./img/touch-icon-180x180.png" />
+<meta name="og:image:alt"
+ content="image of Erlenmeyer flask" />
+
+<!-- Schema.org metadata -->
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org/",
+  "@type" : "Dataset",
+  "@id" : "https://doi.org/10.18434/T4D303",
+  "url" : "https://doi.org/10.18434/T4D303",
+  "identifier" : "doi:10.18434/T4D303",
+  "name" : "NIST Chemistry WebBook - SRD 69",
+  "datePublished" : "1997-08-19",
+  "dateModified" : "2023-10-09",
+  "license" : "https://www.nist.gov/open/copyright-fair-use-and-licensing-statements-srd-data-software-and-technical-series-publications#SRD",
+  "description" : "The NIST Chemistry WebBook provides users with easy access to chemical and physical property data for chemical species through the internet. The data provided in the site are from collections maintained by the NIST Standard Reference Data Program and outside contributors. Data in the WebBook system are organized by chemical species. The WebBook system allows users to search for chemical species by various means. Once the desired species has been identified, the system will display data for the species.  Data include thermochemical properties of species and reactions, thermophysical properties of species, and optical, electronic and mass spectra.",
+  "keywords" : [
+    "IR spectrum",
+    "InChI",
+    "InChIKey",
+    "UV Vis spectrum",
+    "boiling point",
+    "chemical data",
+    "chemical structure",
+    "enthalpy",
+    "entropy",
+    "heat capacity",
+    "heat of formation",
+    "ionization potential",
+    "mass spectrum",
+    "gas chromatography",
+    "retention index",
+    "thermochemical data",
+    "thermochemistry",
+    "thermodynamic data",
+    "vapor pressure",
+    "reaction thermochemistry",
+    "electronic and vibrational spectra",
+    "constants of diatomic molecules",
+    "ion energetics",
+    "appearance energy",
+    "electron affinity",
+    "proton affinity",
+    "gas basicity",
+    "thermophysical fluid property data",
+    "thermal conductivity",
+    "sound speed" ],
+  "publisher" : {
+    "@type" : "Organization",
+    "@id" : "https://ror.org/05xpvk416",
+    "name" : "National Institute of Standards and Technology",
+    "url" : "https://www.nist.gov",
+    "sameAs" : "https://doi.org/10.13039/100000161"
+  },
+  "editor" : [
+    {
+      "@type" : "Person",
+      "@id": "https://orcid.org/0000-0003-3204-3454",
+      "name": "Peter J. Linstrom",
+      "givenName" : "Peter J.",
+      "familyName" : "Linstrom",
+      "url" : "https://www.nist.gov/people/peter-linstrom"
+    },
+    {
+      "@type" : "Person",
+      "name" : "W. Gary Mallard",
+      "givenName" : "W. Gary",
+      "familyName" : "Mallard"
+    } ],
+  "contributor" : [
+    {
+      "@type" : "Organization",
+      "name" : "Mass Spectrometry Data Center",
+      "url" : "https://chemdata.nist.gov",
+      "member" :
+      {
+        "@type" : "Person",
+        "name" : "William E. Wallace",
+        "givenName" : "William E.",
+        "familyName" : "Wallace",
+        "url" : "https://www.nist.gov/people/william-e-wallace"
+      },
+      "memberOf" :
+      {
+        "@type" : "Organization",
+        "@id" : "https://ror.org/05xpvk416",
+        "name" : "National Institute of Standards and Technology",
+        "url" : "https://www.nist.gov",
+        "sameAs" : "https://doi.org/10.13039/100000161"
+      }
+    },
+    {
+      "@type" : "Organization",
+      "name" : "Thermodynamics Research Center",
+      "url" : "https://trc.nist.gov",
+      "member" :
+      {
+        "@type" : "Person",
+        "@id" : "https://orcid.org/0000-0003-1153-983X",
+        "name" : "Chris Muzny",
+        "givenName" : "Chris",
+        "familyName" : "Muzny",
+        "url" : "https://www.nist.gov/people/chris-muzny"
+      },
+      "memberOf" :
+      {
+        "@type" : "Organization",
+        "@id" : "https://ror.org/05xpvk416",
+        "name" : "National Institute of Standards and Technology",
+        "url" : "https://www.nist.gov",
+        "sameAs" : "https://doi.org/10.13039/100000161"
+      }
+    },
+    {
+      "@type" : "Organization",
+      "name" : "Glushko Thermocenter",
+      "url" : "http://ihed.ras.ru/~thermo/gtc.htm",
+      "memberOf" :
+      {
+        "@type" : "Organization",
+        "name" : "Russian Academy of Science",
+        "url" : "http://www.ras.ru"
+      }
+    },
+    {
+      "@type" : "Person",
+      "name" : "Sharon G. Lias",
+      "givenName" : "Sharon G.",
+      "familyName" : "Lias"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Hussein Y. Afeefy",
+      "givenName" : "Hussein Y.",
+      "familyName" : "Afeefy"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Joel F. Liebman",
+      "givenName" : "Joel F.",
+      "familyName" : "Liebman"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Stephen E. Stein",
+      "givenName" : "Stephen E.",
+      "familyName" : "Stein",
+      "url" : "https://www.nist.gov/people/stephen-e-stein"
+    },
+    {
+      "@type" : "Person",
+      "@id" : "https://orcid.org/0000-0002-3428-6540",
+      "name" : "Donald R. Burgess, Jr.",
+      "givenName" : "Donald R.",
+      "familyName" : "Burgess, Jr.",
+      "url" : "https://www.nist.gov/people/donald-r-burgess-jr"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Eugene S. Domalski",
+      "givenName" : "Eugene S.",
+      "familyName" : "Domalski"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Elizabeth D. Hearing",
+      "givenName" : "Elizabeth D.",
+      "familyName" : "Hearing"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Henry M. Rosenstock",
+      "givenName" : "Henry M.",
+      "familyName" : "Rosenstock"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Keith Draxl",
+      "givenName" : "Keith",
+      "familyName" : "Draxl"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Bruce W. Steiner",
+      "givenName" : "Bruce W.",
+      "familyName" : "Steiner"
+    },
+    {
+      "@type" : "Person",
+      "name" : "John T. Herron",
+      "givenName" : "John T.",
+      "familyName" : "Herron"
+    },
+    {
+      "@type" : "Person",
+      "name" : "John L. Holmes",
+      "givenName" : "John L.",
+      "familyName" : "Holmes"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Rhoda D. Levin",
+      "givenName" : "Rhoda D.",
+      "familyName" : "Levin"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Sherif A. Kafafi",
+      "givenName" : "Sherif A.",
+      "familyName" : "Kafafi"
+    },
+    {
+      "@type" : "Person",
+      "name" : "John E. Bartmess",
+      "givenName" : "John E.",
+      "familyName" : "Bartmess"
+    },
+    {
+      "@type" : "Person",
+      "@id" : "https://orcid.org/0000-0002-2525-7721",
+      "name" : "Michael N. Mautner",
+      "givenName" : "Michael N.",
+      "familyName" : "Mautner"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Edward P. Hunter",
+      "givenName" : "Edward P.",
+      "familyName" : "Hunter"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Robert C. Dunbar",
+      "givenName" : "Robert C.",
+      "familyName" : "Dunbar"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Marilyn E. Jacox",
+      "givenName" : "Marilyn E.",
+      "familyName" : "Jacox"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Takehiko Shimanouchi",
+      "givenName" : "Takehiko",
+      "familyName" : "Shimanouchi"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Klaus P. Huber",
+      "givenName" : "Klaus P.",
+      "familyName" : "Huber"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Gerhard H. Herzberg",
+      "givenName" : "Gerhard H.",
+      "familyName" : "Herzberg"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Jean W. Gallagher",
+      "givenName" : "Jean W.",
+      "familyName" : "Gallagher"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Russell D. Johnson, III",
+      "givenName" : "Russell D.",
+      "familyName" : "Johnson, III"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Jos\u00e9 A. Martinho Sim\u00f5es",
+      "givenName" : "Jos\u00e9 A.",
+      "familyName" : "Martinho Sim\u00f5es",
+      "url" : "https://ciencias.ulisboa.pt/en/perfil/jamsimoes"
+    },
+    {
+      "@type" : "Person",
+      "@id" : "https://orcid.org/0000-0002-8385-1665",
+      "name" : "James S. Chickos",
+      "givenName" : "James S.",
+      "familyName" : "Chickos"
+    },
+    {
+      "@type" : "Person",
+      "name" : "William E. Acree, Jr.",
+      "givenName" : "William E.",
+      "familyName" : "Acree, Jr."
+    },
+    {
+      "@type" : "Organization",
+      "name" : "Students of Chem 202 (Introduction to the Literature of Chemistry)",
+      "memberOf" :
+      {
+        "@type" : "Organization",
+        "@id" : "https://ror.org/037cnag11",
+        "name" : "University of Missouri \u2013 St. Louis",
+        "url" : "https://www.umsl.edu/"
+      }
+    },
+    {
+      "@type" : "Person",
+      "name" : "Robert L. Brown",
+      "givenName" : "Robert L.",
+      "familyName" : "Brown"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Rolf Sander",
+      "givenName" : "Rolf",
+      "familyName" : "Sander"
+    },
+    {
+      "@type" : "Person",
+      "@id" : "https://orcid.org/0000-0002-0974-0203",
+      "name" : "Eric W. Lemmon",
+      "givenName" : "Eric W.",
+      "familyName" : "Lemmon"
+    },
+    {
+      "@type" : "Person",
+      "@id" : "https://orcid.org/0000-0003-1091-9080",
+      "name" : "Ian H. Bell",
+      "givenName" : "Ian H.",
+      "familyName" : "Bell"
+    },
+    {
+      "@type" : "Person",
+      "@ID" : "https://orcid.org/0000-0002-7976-741X",
+      "name" : "Marcia L. Huber",
+      "givenName" : "Marcia L.",
+      "familyName" : "Huber"
+    },
+    {
+      "@type" : "Person",
+      "@id" : "https://orcid.org/0000-0002-1082-309X",
+      "name" : "Mark O. McLinden",
+      "givenName" : "Mark O.",
+      "familyName" : "McLinden"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Victor Talrose",
+      "givenName" : "Victor",
+      "familyName" : "Talrose"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Eugeny B. Stern",
+      "givenName" : "Eugeny B.",
+      "familyName" : "Stern"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Antonina A. Goncharova",
+      "givenName" : "Antonina A.",
+      "familyName" : "Goncharova"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Natalia A. Messineva",
+      "givenName" : "Natalia A.",
+      "familyName" : "Messineva"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Natalia V. Trusova",
+      "givenName" : "Natalia V.",
+      "familyName" : "Trusova"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Margarita V. Efimkina",
+      "givenName" : "Margarita V.",
+      "familyName" : "Efimkina"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Alexander N. Yermakov",
+      "givenName" : "Alexander N.",
+      "familyName" : "Yermakov"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Alexy A. Usov",
+      "givenName" : "Alexy A.",
+      "familyName" : "Usov"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Alexander A. Leskin",
+      "givenName" : "Alexander A.",
+      "familyName" : "Leskin"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Pamela M. Chu",
+      "givenName" : "Pamela M.",
+      "familyName" : "Chu"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Franklin R. Guenther",
+      "givenName" : "Franklin R.",
+      "familyName" : "Guenther"
+    },
+    {
+      "@type" : "Person",
+      "name" : "George C. Rhoderick",
+      "givenName" : "George C.",
+      "familyName" : "Rhoderick"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Walter J. Lafferty",
+      "givenName" : "Walter J.",
+      "familyName" : "Lafferty"
+    },
+    {
+      "@type" : "Organization",
+      "name" : "Coblentz Society, Inc.",
+      "url" : "http://www.coblentz.org/"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Tanya L. Myers",
+      "givenName" : "Tanya L.",
+      "familyName" : "Myers"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Russell G. Tonkyn",
+      "givenName" : "Russell G.",
+      "familyName" : "Tonkyn"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Ashley M. Oeck",
+      "givenName" : "Ashley M.",
+      "familyName" : "Oeck"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Tyler O. Danby",
+      "givenName" : "Tyler O.",
+      "familyName" : "Danby"
+    },
+    {
+      "@type" : "Person",
+      "name" : "John S. Loring",
+      "givenName" : "John S.",
+      "familyName" : "Loring"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Matthew S. Taubman",
+      "givenName" : "Matthew S.",
+      "familyName" : "Taubman"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Stephen W. Sharpe",
+      "givenName" : "Stephen W.",
+      "familyName" : "Sharpe"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Jerome C. Birnbaum",
+      "givenName" : "Jerome C.",
+      "familyName" : "Birnbaum"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Timothy J. Johnson",
+      "givenName" : "Timothy J.",
+      "familyName" : "Johnson"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Yin-Fong Su",
+      "givenName" : "Yin-Fong",
+      "familyName" : "Su"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Molly Rose K. Kelly-Gorham",
+      "givenName" : "Molly Rose K.",
+      "familyName" : "Kelly-Gorham"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Edwin J. Heilweil",
+      "givenName" : "Edwin J.",
+      "familyName" : "Heilweil"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Matthew B. Campbell",
+      "givenName" : "Matthew B.",
+      "familyName" : "Campbell"
+    },
+    {
+      "@type" : "Person",
+      "@id" : "https://orcid.org/0000-0001-7515-6761",
+      "name" : "Karl K. Irikura",
+      "givenName" : "Karl K.",
+      "familyName" : "Irikura"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Thomas C. Allison",
+      "givenName" : "Thomas C.",
+      "familyName" : "Allison"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Katherine C. Hafner",
+      "givenName" : "Katherine C.",
+      "familyName" : "Hafner"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Stuart C. Ness",
+      "givenName" : "Stuart C.",
+      "familyName" : "Ness"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Daniel X. Du",
+      "givenName" : "Daniel X.",
+      "familyName" : "Du"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Jeffrey W. Qiu",
+      "givenName" : "Jeffrey W.",
+      "familyName" : "Qiu"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Alexander H. Yang",
+      "givenName" : "Alexander H.",
+      "familyName" : "Yang"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Helen M. Park",
+      "givenName" : "Helen M.",
+      "familyName" : "Park"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Mariya S. Shevchuk",
+      "givenName" : "Mariya S.",
+      "familyName" : "Shevchuk"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Michael Y. Liou",
+      "givenName" : "Michael Y.",
+      "familyName" : "Liou"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Niranjan B. Ravi",
+      "givenName" : "Niranjan B.",
+      "familyName" : "Ravi"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Sonia F. Dermer",
+      "givenName" : "Sonia F.",
+      "familyName" : "Dermer"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Ethan N. Ho",
+      "givenName" : "Ethan N.",
+      "familyName" : "Ho"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Emily W. Jin",
+      "givenName" : "Emily W.",
+      "familyName" : "Jin"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Sejal N. Aggarwal",
+      "givenName" : "Sejal N.",
+      "familyName" : "Aggarwal"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Sarah N. Pan",
+      "givenName" : "Sarah N.",
+      "familyName" : "Pan"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Daniel S. Graham",
+      "givenName" : "Daniel S.",
+      "familyName" : "Graham"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Sarah E. Wollman",
+      "givenName" : "Sarah E.",
+      "familyName" : "Wollman"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Yvonne Niyonzima",
+      "givenName" : "Yvonne",
+      "familyName" : "Niyonzima"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Avi M. Newman",
+      "givenName" : "Avi M.",
+      "familyName" : "Newman"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Ashley M. Zhang",
+      "givenName" : "Ashley M.",
+      "familyName" : "Zhang"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Ann Marie Martin",
+      "givenName" : "Ann Marie",
+      "familyName" : "Martin"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Nimit Patel",
+      "givenName" : "Nimit",
+      "familyName" : "Patel"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Abbie Tran",
+      "givenName" : "Abbie",
+      "familyName" : "Tran"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Joseph Tseytlin",
+      "givenName" : "Joseph",
+      "familyName" : "Tseytlin"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Nathan S. Kau",
+      "givenName" : "Nathan S.",
+      "familyName" : "Kau"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Pamela J. Christian",
+      "givenName" : "Pamela J.",
+      "familyName" : "Christian"
+    },
+    {
+      "@type" : "Person",
+      "name" : "Diane H. Frizzell",
+      "givenName" : "Diane H.",
+      "familyName" : "Frizzell"
+    },
+    {
+      "@type" : "Person",
+      "@id" : "https://orcid.org/0000-0002-6776-1467",
+      "name" : "Janiel J. Reed",
+      "givenName" : "Janiel J.",
+      "familyName" : "Reed"
+    } ]
+}
+
+</script>
+
+<!-- GSA Digital Analytics Program -->
+<script async="async" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&amp;subagency=webbook&amp;yt=false&amp;exts=mol,sdf,jdx,ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c"></script>
+<!-- End of GSA Digital Analytics Program -->
+<!-- NIST Google Analtyics -->
+<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-PS24JGCKSZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PS24JGCKSZ',
+       {'cookie_domain': 'webbook.nist.gov',
+        'cookie_flags': 'SameSite=None;Secure'});
+</script>
+<!-- End of NIST Google Analytics -->
+
+<script type="text/javascript" src="../packages/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../packages/nist/nist-exit-script.js"></script>
+
+<!-- svg4everybody.js by Jon Neal enables external SVG on older
+     browsers. See https://github.com/jonathantneal/svg4everybody
+     for more information. -->
+<script src="../packages/svg4everybody/svg4everybody.js"></script>
+<script>svg4everybody();</script>
+<!-- End of svg4everybody.js section. -->
+
+<script type="text/javascript" src="../packages/menu/menu.js"></script>
+
+
+
+<script type="text/javascript" src="../packages/local/resist-frames.js"></script>
+<script type="text/javascript" src="../packages/local/toggle-div.js?hide=Hide&amp;show=Show"></script>
+</head>
+<body>
+<p id="skip-link"><a class="element-invisible element-focusable" href="#main">
+Jump to content</a>
+</p>
+
+<header>
+<div class="webbook_header_bar"  role="presentation"
+  aria-label="Site label for NIST Chemistry WebBook">
+<span class="logo">
+  <a target="_blank" rel="noopener noreferrer" href="https://www.nist.gov/"
+     title="Link to NIST home page">National Institute of Standards and
+    Technology</a>
+</span>
+<h1><span class="no-handheld">NIST</span> Chemistry
+  WebBook<span class="no-handheld">, SRD 69</span></h1>
+</div>
+
+<div class="no-print" role="navigation" aria-label="Main menu">
+  <ul class="webbook_nav">
+    <li>
+      <a href="./"
+         title="Main page of this site">
+        <span class="sr-only">Home</span>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             class="webbook_icon_big" role="img"
+             aria-hidden="true">
+          <use xlink:href=".//img/icons.svg#home-icon"></use>
+      </svg></a>
+    </li>
+    <li>
+      <a class="menu_below" href="#">Search</a>
+      <ul>
+        <li>
+          <a href="./name-ser/"
+             title="Search for species by chemical name">
+            Name</a>
+        </li>
+        <li>
+          <a href="./form-ser/"
+             title="Search for species by chemical formula">
+            Formula</a>
+        </li>
+        <li>
+          <a href="./inchi-ser/"
+             title="Search for species by InChI or InChIKey">
+            IUPAC identifier</a>
+        </li>
+        <li>
+          <a href="./cas-ser/"
+             title="Search for species by CAS number">
+            CAS number</a>
+        </li>
+        <li>
+          <a href="./#Search"
+             title="More serach options on the main page of this site">
+            More options</a>
+        </li>
+      </ul>
+    </li>
+    <li class="no-handheld">
+      <a class="menu_below" href="#">NIST Data</a>
+      <ul>
+        <li>
+          <a href="https://www.nist.gov/srd/"
+             title="Standard Reference Data page">SRD Program
+          </a>
+        </li>
+        <li>
+          <a href="https://data.nist.gov/sdp/"
+             title="NIST data discovery site">Science Data Portal
+          </a>
+        </li>
+        <li>
+          <a href="https://www.nist.gov/mml/mdd"
+             title="Material Data Division page">Material Data
+            Division
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a class="menu_below" href="#">About</a>
+      <ul>
+        <li>
+          <a href="./faq/"
+             title="Frequently asked questions page">
+          FAQ</a>
+        </li>
+        <li>
+          <a href="./#CreditsControl"
+             title="Credits on the main page of the site">
+            Credits</a>
+        </li>
+        <li>
+          <a href="./#Documentation"
+             title="More documentation on the main page of the site">
+            More documentation</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+</header>
+
+
+<main id="main">
+
+
+
+<h1 class="no-handheld">NIST Chemistry WebBook</h1>
+
+<h2>NIST <span class="no-handheld">Standard Reference Database</span>
+  <span class="only-handheld">SRD</span> Number 69</h2>
+
+<p aria-hidden="true" class="no-handheld" style="font-size: smaller;">
+<span style="margin-right: 14em;">Last update to data:
+<a href="#Changes"
+ title="information about recent changes to this site">2025</a>
+</span>
+<span style="white-space: nowrap;">
+DOI:
+<span title="This URL links back to this page via the DOI resolver">
+https://doi.org/10.18434/T4D303</span>
+</span>
+</p>
+
+<p id="Top" style="font-size: smaller;">
+View: <a href="#Search">Search Options</a>,
+<a href="#Models">Models and Tools</a>,
+<a href="#SpData">Special Data Collections</a>,
+<a href="#Documentation">Documentation</a>,
+<a href="#Changes"
+ title="information about recent changes to this site">Changes</a>,
+<a href="#Notes">Notes</a>
+</p>
+
+<h3 id="CreditsControl">Credits</h3>
+
+<div id="Credits" class="toggled">
+<dl>
+<dt>Neutral Thermochemical data</dt>
+<dd>compiled by <em>Hussein Y. Afeefy</em>, <em>Joel F. Liebman</em>,
+  <em>Stephen E. Stein</em>, <em>Donald R. Burgess, Jr.</em></dd>
+<dt>Entropy and Heat Capacity of Organic Compounds</dt>
+<dd>compiled by Glushko Thermocenter, Moscow</dd>
+<dt>Condensed Phase Heat Capacity data</dt>
+<dd>compiled by <em>Eugene S. Domalski</em>, <em>Elizabeth D. Hearing</em></dd>
+<dt>Ionization Energetics (IE, AE) data</dt>
+<dd>compiled by <em>Sharon G. Lias</em>, <em>Henry M. Rosenstock</em>,
+  <em>Keith Draxl</em>, <em>Bruce W. Steiner</em>, <em>John T. Herron</em>,
+  <em>John L. Holmes</em>, <em>Rhoda D. Levin</em>, <em>Joel F. Liebman</em>,
+  <em>Sherif A. Kafafi</em></dd>
+<dt>Ionization Energy data</dt>
+<dd>evaluated by <em>Sharon G. Lias</em></dd>
+<dt>Negative Ion Energetics data</dt>
+<dd>compiled by <em>John E. Bartmess</em></dd>
+<dt>Thermochemistry of Cluster Ion data</dt>
+<dd>compiled by <em>Michael N. Mautner</em> and <em>Sharon G. Lias</em></dd>
+<dt>Metal Ion Clustering Data</dt>
+<dd>compiled by <em>Robert C. Dunbar</em></dd>
+<dt>Proton Affinity data</dt>
+<dd>compiled and evaluated by <em>Edward P. Hunter</em>,
+  <em>Sharon G. Lias</em></dd>
+<dt>Vibrational and Electronic Energy Level data</dt>
+<dd>compiled by <em>Marilyn E. Jacox</em></dd>
+<dt>Vibrational Frequency data</dt>
+<dd>compiled by <em>Takehiko Shimanouchi</em></dd>
+<dt>Constants of Diatomic Molecules</dt>
+<dd>compiled by <em>Klaus P. Huber</em>, <em>Gerhard H. Herzberg</em>
+  (data prepared by <em>Jean W. Gallagher</em>,
+  <em>Russell D. Johnson, III</em>)</dd>
+<dt>Organometallic Thermochemical data</dt>
+<dd>compiled by <em>Jos&eacute; A. Martinho Sim&otilde;es</em></dd>
+<dt>Heat of Sublimation data</dt>
+<dd>compiled by <em>James S. Chickos</em></dd>
+<dt>Heat of Fusion data</dt>
+<dd>compiled by <em>James S. Chickos</em>, <em>William E. Acree, Jr.</em>,
+  <em>Joel F. Liebman</em>, <em>Students of Chem 202 (Introduction to the
+    Literature of Chemistry), University of Missouri &ndash; St. Louis</em></dd>
+<dt>Boiling Point data</dt>
+<dd>compiled by <em>Robert L. Brown</em>, <em>Stephen E. Stein</em></dd>
+<dt>Henry's Law Constants</dt>
+<dd>compiled by <em>Rolf Sander</em></dd>
+<dt>Thermophysical Properties of Fluid Systems</dt>
+<dd><em>Eric W. Lemmon</em>, <em>Ian H. Bell</em>,
+  <em>Marcia L. Huber</em>, <em>Mark O. McLinden</em></dd>
+<dt>UV/Visible Spectra</dt>
+<dd>compiled by <em>Victor Talrose</em>, <em>Eugeny B. Stern</em>,
+  <em>Antonina A. Goncharova</em>, <em>Natalia A. Messineva</em>,
+  <em>Natalia V. Trusova</em>, <em>Margarita V. Efimkina</em>,
+  <em>Alexander N. Yermakov</em>, <em>Alexy A. Usov</em>,
+  <em>Axlexander A. Leskin</em></dd>
+<dt>Thermodynamics Source Database</dt>
+<dd>compiled by Thermodynamics Research Center, NIST Boulder Laboratories,
+  <em>Chris Muzny</em> director</dd>
+<dt>Names, 2-D Structures, Retention Indexes, Mass and IR Spectra data</dt>
+<dd>compiled by NIST Mass Spectrometry Data Center,
+  <em>William E. Wallace</em> director</dd>
+<dt>Quantitative Infrared Database</dt>
+<dd><em>Pamela M. Chu</em>, <em>Franklin R. Guenther</em>,
+  <em>George C. Rhoderick</em>, <em>Walter J. Lafferty</em></dd>
+<dt>Evaluated Infrared Reference Spectra</dt>
+<dd><em>Coblentz Society, Inc.</em></dd>
+<dt>IARPA / PNNL Liquid Phase IR Spectra</dt>
+<dd><em>Tanya L. Myers</em>, <em>Russell G. Tonkyn</em>,
+  <em>Ashley M. Oeck</em>, <em>Tyler O. Danby</em>,
+  <em>John S. Loring</em>, <em>Matthew S. Taubman</em>,
+  <em>Stephen W. Sharpe</em>, <em>Jerome C. Birnbaum</em>,
+  <em>Timothy J. Johnson</em></dd>
+<dt>IARPA / PNNL Solid Phase IR Spectra</dt>
+<dd><em>Timothy J. Johnson</em>, <em>Tanya L. Myers</em>,
+  <em>Yin-Fong Su</em>, <em>Russell G. Tonkyn</em>,
+  <em>Molly Rose K. Kelly-Gorham</em>, <em>Tyler O. Danby</em></dd>
+<dt>THz Spectral Database</dt>
+<dd><em>Edwin J. Heilweil</em>, <em>Matthew B. Campbell</em></dd>
+<dt>3-D Structures</dt>
+<dd>created by <em>Karl K. Irikura</em>, <em>Thomas C. Allison</em>,
+<em>Katherine C. Hafner</em>, <em>Stuart C. Ness</em>, <em>Daniel X. Du</em>,
+<em>Jeffrey W. Qiu</em>, <em>Alexander H. Yang</em>, <em>Helen M. Park</em>,
+<em>J.K. Skerritt</em>, <em>Mariya S. Shevchuk</em>,
+<em>Michael Y. Liou</em>, <em>Niranjan B. Ravi</em>, <em>Sonia F. Dermer</em>,
+<em>Ethan N. Ho</em>, <em>Emily W. Jin</em>, <em>Sejal N. Aggarwal</em>,
+<em>Sarah N. Pan</em>, <em>Daniel S. Graham</em>, <em>Sarah E. Wollman</em>,
+<em>Yvonne Niyonzima</em>, <em>Avi M. Newman</em>, <em>Ashley M. Zhang</em>,
+<em>Ann Marie Martin</em>, <em>Nimit Patel</em>, <em>Abbie Tran</em>,
+<em>Joseph Tseytlin</em>, <em>Nathan S. Kau</em>, <em>Joel F. Liebman</em></dd>
+<dt>Miscellaneous data entry and editing</dt>
+<dd><em>Pamela J. Christian</em>, <em>Diane H. Frizzell</em>, <em>Janiel J. Reed</em></dd>
+</dl>
+
+<p>
+General Editor <em>Peter J. Linstrom</em><br />
+Editor Emeritus <em>W. Gary Mallard</em>
+</p>
+</div>
+
+<p>
+NIST reserves the right to charge for access to this database in the future.
+</p>
+
+<hr />
+
+<h3 id="Search">Search Options
+<a href="#Top" title="Jump to top of page">
+<span class="sr-only">Jump to top of page</span>
+<svg xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ class="webbook_icon_text" role="img" aria-hidden="true">
+<use xlink:href=".//img/icons.svg#up-circle-icon"></use>
+</svg></a>
+</h3>
+
+<table class="search_options" aria-label="List of searches available">
+<thead>
+<tr>
+<th scope="col">General Searches</th>
+<th scope="col">Physical Property Based Searches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<ul class="spaced">
+<li><a href="form-ser/">Formula</a></li>
+<li><a href="name-ser/">Name</a></li>
+<li><a href="inchi-ser/">IUPAC identifier</a></li>
+<li><a href="cas-ser/">CAS registry number</a></li>
+<li><a href="reac-ser/">Reaction</a></li>
+<li><a href="author/">Author</a></li>
+<li><a href="str-ser/">Structure</a></li>
+</ul>
+</td>
+<td>
+<ul class="spaced">
+<li><a href="ion-ser/">Ion energetics properties</a></li>
+<li><a href="es-ser/">Vibrational and electronic energies</a></li>
+<li><a href="mw-ser/">Molecular weight</a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="Models">Models and Tools
+<a href="#Top" title="Jump to top of page">
+<span class="sr-only">Jump to top of page</span>
+<svg xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ class="webbook_icon_text" role="img" aria-hidden="true">
+<use xlink:href=".//img/icons.svg#up-circle-icon"></use>
+</svg></a>
+</h3>
+
+<ul class="spaced">
+<li><a href="fluid/">Thermophysical Properties of Fluid Systems</a>:
+High accuracy data for a select group of fluids.</li>
+<li><a href="grp-add/">Group Additivity Based Estimates</a>:
+Estimates of gas phase thermodynamic properties based
+on a submitted structure.</li>
+<li><a href="../cgi/formula/">Formula Browser</a>: Locates chemical
+species by building up a chemical formula in Hill order.</li>
+</ul>
+
+<hr />
+
+<h3 id="SpData">Special Data Collections
+<a href="#Top" title="Jump to top of page">
+<span class="sr-only">Jump to top of page</span>
+<svg xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ class="webbook_icon_text" role="img" aria-hidden="true">
+<use xlink:href=".//img/icons.svg#up-circle-icon"></use>
+</svg></a>
+</h3>
+
+<ul class="spaced">
+<li><a href="special/spray-combust/">Benchmark Spray Combustion Database</a>:
+A collection of spray combustion data from experiments conducted
+at NIST.</li>
+<li><a href="special/ngp/">Droplet Laden Flow Data</a>:
+Results from experiments involving flow over cylinders.</li>
+</ul>
+
+<hr />
+
+<h3 id="Documentation">Documentation
+<a href="#Top" title="Jump to top of page">
+<span class="sr-only">Jump to top of page</span>
+<svg xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ class="webbook_icon_text" role="img" aria-hidden="true">
+<use xlink:href=".//img/icons.svg#up-circle-icon"></use>
+</svg></a>
+</h3>
+
+<ul class="spaced">
+<li><a href="faq/">Frequently asked questions</a></li>
+<li><a href="history/">Version history</a></li>
+<li><a href="guide/">A Guide to the NIST Chemistry WebBook</a>: A
+guide to this site and the data available from it.</li>
+<li><a href="ion/">Gas-Phase Ion Thermochemistry</a>: An
+in-depth explanation of gas phase ion data available
+from this site.</li>
+<li><a href="thermo/">NIST Organic Thermochemistry Archive</a>:
+A description of the primary source of thermochemical data
+for this site.</li>
+<li><a href="om/">Organometallic Thermochemistry Database</a>:
+A description of the organometallic thermochemistry database
+included in this site.</li>
+<li><a href="polyatom/">Vibrational and Electronic Energy
+Levels of Polyatomic Transient Molecules</a>:
+A description of vibrational and electronic energy level data for
+molecules with three or more atoms.</li>
+<li><a href="3d-structs/">Computed 3-D Structures</a>: A description
+of the manner in which the 3 dimensional structures on this site
+were generated.</li>
+<li><a href="coblentz/">Evaluated Infrared Spectra</a>: A description
+of one of the collections of IR spectra available on this site.</li>
+<li><a href="silmarils-liquids-n-k/">IARPA / PNNL Liquid Phase IR
+Spectra</a>: A description of liquid phase quantitative infrared spectra
+measured at PNNL.</li>
+<li><a href="silmarils-solids-hrf-drf/">IARPA / PNNL Solid Phase IR
+Spectra</a>: A description of solid phase quantitative infrared spectra
+measured at PNNL.</li>
+<li><a href="quant-ir/">Quantitative Infrared Database</a>: A description
+of the NIST Quantitative Infrared Database.</li>
+<li><a href="thz-ir/">THz Spectral Database</a>: A description of THz infrared
+spectra measured by NIST.</li>
+<li><a href="uv-vis/">UV/Vis Database User's Guide</a>: A description of the
+UV/Vis spectra available from this site.</li>
+<li><a href="gc-ri/" >Gas Chromatographic Retention Data</a>: A
+description of the retention index data available from this site.</li>
+<li><a href="../cgi/cbook.cgi?Contrib=">Citation Guide</a>: A Guide to the
+proper citation of data from this site.</li>
+</ul>
+
+
+<hr />
+
+
+<h3 id="Changes">Recent changes to this site
+<a href="#Top" title="Jump to top of page">
+<span class="sr-only">Jump to top of page</span>
+<svg xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ class="webbook_icon_text" role="img" aria-hidden="true">
+<use xlink:href=".//img/icons.svg#up-circle-icon"></use>
+</svg></a>
+</h3>
+
+<p>
+  Last update to the site:  March, 2025.
+</p>
+
+<p>Recent changes:</p>
+<ul class="spaced">
+  <li>Updated chemical identifiers.</li>
+  <li>Changed colors for plots to be more accessible.</li>
+  <li>Updated anion thermochemistry data.</li>
+</ul>
+
+
+<hr />
+
+<h3 id="Notes">Notes
+<a href="#Top" title="Jump to top of page">
+<span class="sr-only">Jump to top of page</span>
+<svg xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ class="webbook_icon_text" role="img" aria-hidden="true">
+<use xlink:href=".//img/icons.svg#up-circle-icon"></use>
+</svg></a>
+</h3>
+
+<p>
+This site provides thermochemical, thermophysical, and ion energetics
+data compiled by NIST under the Standard Reference Data Program.
+</p>
+
+<p lang="en">
+The National Institute of Standards and Technology (NIST) uses its best
+efforts to deliver a high quality copy of the Database and to verify
+that the data contained therein have been selected on the basis of sound
+scientific judgment. However, NIST makes no warranties to that effect,
+and NIST shall not be liable for any damage that may result from errors
+or omissions in the Database.
+</p>
+
+
+<p>
+NIST is an agency of the
+<a href="https://www.commerce.gov/"
+ title="Department of Commerce Web Site">U.S. Department of Commerce</a>.
+</p>
+
+<p>
+The NIST Chemistry WebBook was developed in part with funds from the
+Systems Integration for Manufacturing Applications (SIMA) program at NIST.
+</p>
+
+<p lang="en">
+<a href="/cdn-cgi/l/email-protection#4c282d382d0c22253f38622b233a" title="Link to the NIST SRD customer support email address.">Customer support</a>
+for NIST Standard Reference Data products.
+</p>
+
+
+
+
+<hr />
+<p id="copyright" lang="en">&copy; <em>2026 by the U.S. Secretary of Commerce
+on behalf of the United States of America. All rights reserved.</em>
+</p>
+
+<p lang="en">
+Copyright for NIST Standard Reference Data is governed by
+the <a href="https://www.nist.gov/srd/public-law"
+ title="Link to page with information on the Standard Reference Data Act">
+Standard Reference Data Act</a>.
+</p>
+
+
+
+</main>
+
+<footer id="footer">
+
+<div class="row">
+  <ul class="list-center-inline">
+    <li><a href="https://www.nist.gov/privacy-policy"
+           title="NIST site privacy statement"
+           target="_blank" rel="noopener noreferrer">Site Privacy</a>
+    </li>
+    <li><a href="https://www.nist.gov/oism/accessibility"
+           title="NIST accessibilty statement"
+           target="_blank" rel="noopener noreferrer">Accessibility</a>
+    </li>
+    <li><a href="https://www.nist.gov/privacy"
+           title="information on the NIST privacy program"
+           target="_blank" rel="noopener noreferrer">Privacy Program</a>
+    </li>
+    <li><a href="https://www.nist.gov/oism/copyrights"
+           title="statement on copyright for NIST authored material"
+           target="_blank" rel="noopener noreferrer">Copyrights</a>
+
+      <span class="emphasis">(Note: This site is covered by copyright.)</span>
+
+    </li>
+    <li><a href="https://www.commerce.gov/vulnerability-disclosure-policy"
+           title="US Department of Commerce vulnerability disclosure policy"
+           target="_blank" rel="noopener noreferrer">Vulnerability Disclosure</a>
+    </li>
+    <li><a href="https://www.nist.gov/no-fear-act-policy"
+           title="NIST No Fear Act policy"
+           target="_blank" rel="noopener noreferrer">No Fear Act Policy</a>
+    </li>
+    <li><a href="https://www.nist.gov/office-director/freedom-information-act"
+           title="NIST Freedom of Information Act policy"
+           target="_blank" rel="noopener noreferrer">FOIA</a>
+    </li>
+    <li><a href="https://www.nist.gov/environmental-policy-statement"
+           title="NIST environmental policy statement"
+           target="_blank" rel="noopener noreferrer">Environmental Policy</a>
+    </li>
+    <li><a href="https://www.nist.gov/summary-report-scientific-integrity"
+           title="NIST summary report on scientific integrity"
+           target="_blank" rel="noopener noreferrer">Scientific Integrity</a>
+    </li>
+    <li><a href="https://www.nist.gov/nist-information-quality-standards"
+           title="NIST information quality guidelines and standards"
+           target="_blank" rel="noopener noreferrer">Information Quality Standards</a>
+    </li>
+    <li><a href="https://www.commerce.gov/"
+           title="US Department of Commerce web site"
+           target="_blank" rel="noopener noreferrer">Commerce.gov</a>
+    </li>
+    <li><a href="https://www.science.gov/"
+           title="access to scientific research results from U.S. federal agencies"
+           target="_blank" rel="noopener noreferrer">Science.gov</a>
+    </li>
+    <li><a href="https://www.usa.gov/"
+           title="official guide to USA government information and services"
+           target="_blank" rel="noopener noreferrer">USA.gov</a>
+    </li>
+    <li><a href="https://vote.gov/"
+           title="information on registering to vote or updating registration"
+           target="_blank" rel="noopener noreferrer">Vote.gov</a>
+    </li>
+  </ul>
+</div>
+
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fea884f3dbd475c',t:'MTc3OTI3MTYyNg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+

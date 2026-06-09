@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "constant_mode_removed": true,
+    "descended_form_symmetric": true,
+    "projection_idempotent": true,
+    "representative_independence_visible": true
+  },
+  "constant_mode_residual": 0.0,
+  "descended_symmetry_error": 0.0,
+  "projection_idempotence_error": 0.0,
+  "promotion": false,
+  "quotient_representative_error": 0.0
+}

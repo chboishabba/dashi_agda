@@ -1,0 +1,40 @@
+{
+  "defaults": {
+    "heartbeat_seconds": 30,
+    "max_log_lines": 3200,
+    "once": true,
+    "timeout_seconds": 3000
+  },
+  "runners": {
+    "paper7-wave7-gate12-manager": {
+      "claim": "Paper 7 wave7 Gate 1/2 implementation-enforcement manager: stop refining the S8 queue unless strictly necessary; attempt the actual global real-carrier SelfAdjointYangMillsHamiltonianOnCarrierQuotient inhabitant, especially s8NonVacuumSectorPredicateField and the remaining carrier-theorem fields. Audit-only/docs-only reports fail.",
+      "lane": "paper7-gate1-gate2",
+      "parent": "paper7-root"
+    },
+    "paper7-wave7-gate3-manager": {
+      "claim": "Paper 7 wave7 Gate 3 implementation-enforcement manager: inhabit nonRepresentativeSlotCoefficientTermSupplyField for all-slot coefficient-aware SU(3) Jacobi closure, then advance to all-slot residual arithmetic or zero-residual proof. Audit-only/docs-only reports fail.",
+      "lane": "paper7-gate3-yang-mills",
+      "parent": "paper7-root"
+    },
+    "paper7-wave7-gate4-manager": {
+      "claim": "Paper 7 wave7 Gate 4 implementation-enforcement manager: inhabit stress-energy tensor symmetry after the supported unit p2-time component-family map, then finite-support/carrier-embedding blockers. Do not promote global GR. Audit-only/docs-only reports fail.",
+      "lane": "paper7-gate4-factorvec-gr",
+      "parent": "paper7-root"
+    },
+    "paper7-wave7-gate5-manager": {
+      "claim": "Paper 7 wave7 Gate 5 implementation-enforcement manager: inhabit global physical quotient inner-product well-definedness after selected finite projection/scalar progress, then completion/Stone blockers. Audit-only/docs-only reports fail.",
+      "lane": "paper7-gate5-hilbert-stone",
+      "parent": "paper7-root"
+    },
+    "paper7-wave7-gate6-manager": {
+      "claim": "Paper 7 wave7 Gate 6 implementation-enforcement manager: construct arbitrary-sector lane classifier first, then arbitrary carrier predicates and arbitrary-sector global foreign-lane identity. DR/Tannaka promotion remains false. Audit-only/docs-only reports fail.",
+      "lane": "paper7-gate6-dhr-aqft",
+      "parent": "paper7-root"
+    },
+    "paper7-wave7-gate78-manager": {
+      "claim": "Paper 7 wave7 Gate 7/8 implementation-enforcement manager: construct concrete up-Yukawa entry y13 and continue matrix completion; do not promote CKM, W4, or terminal composition. Audit-only/docs-only reports fail.",
+      "lane": "paper7-gate7-gate8-composition",
+      "parent": "paper7-root"
+    }
+  }
+}

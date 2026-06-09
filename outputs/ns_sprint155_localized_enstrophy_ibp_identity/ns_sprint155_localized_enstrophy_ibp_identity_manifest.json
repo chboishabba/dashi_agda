@@ -1,0 +1,47 @@
+{
+  "all_route_assembly_rows_closed": false,
+  "artifact_complete": true,
+  "clay_navier_stokes_promoted": false,
+  "contract": "ns_sprint155_localized_enstrophy_ibp_identity",
+  "decision": "identity_at_scale_delta_proved_route_assembly_fail_closed",
+  "files": {
+    "manifest": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_manifest.json",
+      "sha256": "2163291269f83013f55509d71986fafc3f5654c2894b35b134d147647b64a1a4"
+    },
+    "markdown": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity.md",
+      "sha256": "7025c2336c79565b72535d2182d354c71a443ed9f97667d0322a9fae5941938b"
+    },
+    "rows_csv": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_rows.csv",
+      "sha256": "08303708ab32125de57833321e32ad83512e2e576505151864a950bf46d950c8"
+    },
+    "rows_json": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_rows.json",
+      "sha256": "b705ee553d274207f46cf8f37087679f5c27e2c38f91eb55fcd6f95102e3c348"
+    },
+    "summary": {
+      "exists": true,
+      "path": "outputs/ns_sprint155_localized_enstrophy_ibp_identity/ns_sprint155_localized_enstrophy_ibp_identity_summary.json",
+      "sha256": "b8bea99fa28c3e92e8959d8982fb4fb10f8831cbdf5de464e1ba4713328b6694"
+    }
+  },
+  "full_clay_ns_solved": false,
+  "gate": "ExplicitLocalizedEnstrophyIBPTermLedger",
+  "invariant_valid": true,
+  "lane": 2,
+  "ledger": "LocalizedOmega1EnstrophyIBPIdentityAtScaleDelta",
+  "localized_enstrophy_identity_at_scale_delta_proved": true,
+  "manifest_hash": "dff50f408d7c6ce6e8716a5c0101abaffa0d47693d45a8688d6c407098794d3b",
+  "model_validity_for_width_ode": false,
+  "program": "HouLuoAxisymmetricOmega1LocalizedEnstrophyProgram",
+  "promotion_allowed": false,
+  "row_count": 11,
+  "sprint": 155,
+  "symmetric_hou_luo_bkm_finite": false
+}

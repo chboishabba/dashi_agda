@@ -1,0 +1,56 @@
+[
+  {
+    "classification": "corrected_open",
+    "clay": false,
+    "complete": false,
+    "next_action": "retain the corrected logarithmic gap as open",
+    "rationale": "The Sprint125 unconditional logarithmic gap is corrected, but the correction does not close the Navier-Stokes route.",
+    "recommendation_rank": 4,
+    "route_id": "sprint125_log_gap_unconditional"
+  },
+  {
+    "classification": "conditional_closed",
+    "clay": false,
+    "complete": true,
+    "next_action": "use only under its stated conditional hypotheses",
+    "rationale": "The vortex-stretching logarithmic gap closes inside the conditional regime, without unconditional promotion.",
+    "recommendation_rank": 3,
+    "route_id": "vortex_stretching_log_gap_conditional"
+  },
+  {
+    "classification": "partial_regularity_publishable",
+    "clay": false,
+    "complete": false,
+    "next_action": "publish as partial regularity context",
+    "rationale": "The wavepacket mode-coupling no-go tower is useful as a partial regularity result, not as a complete route.",
+    "recommendation_rank": 2,
+    "route_id": "wavepacket_mode_coupling_no_go_tower"
+  },
+  {
+    "classification": "live_primary_next",
+    "clay": false,
+    "complete": false,
+    "next_action": "prove AxisymmetricBoundaryVortexStretchingGate",
+    "rationale": "The axisymmetric boundary vortex-stretching gate is the live primary next route after the conditional log-gap closure.",
+    "recommendation_rank": 1,
+    "route_id": "axisymmetric_boundary_vortex_stretching_gate"
+  },
+  {
+    "classification": "compatible",
+    "clay": false,
+    "complete": false,
+    "next_action": "keep as compatible scaling evidence",
+    "rationale": "The Hou-Luo scaling window is compatible with the live gate, but does not independently promote the Clay claim.",
+    "recommendation_rank": 5,
+    "route_id": "hou_luo_scaling_window"
+  },
+  {
+    "classification": "not_promoted",
+    "clay": false,
+    "complete": false,
+    "next_action": "do not promote until the live gate is closed",
+    "rationale": "The Clay Navier-Stokes state remains not promoted because the axisymmetric boundary gate is still live.",
+    "recommendation_rank": 6,
+    "route_id": "clay_navier_stokes"
+  }
+]

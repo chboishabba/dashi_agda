@@ -1,0 +1,1430 @@
+{
+  "artifact_count": 12,
+  "artifacts": [
+    {
+      "exists": true,
+      "keys": [
+        "anisotropic_assumption_a_bound",
+        "anisotropic_over_isotropic_at_k9",
+        "anisotropic_percent_of_isotropic_at_k9",
+        "eta4_q",
+        "eta6_q",
+        "eta8_q",
+        "eta_threshold",
+        "next_authority_lane_gate",
+        "next_unconditional_gate",
+        "q",
+        "q_reduction_needed_for_eta6",
+        "q_reduction_needed_for_eta8",
+        "q_threshold_eta4",
+        "q_threshold_eta6",
+        "q_threshold_eta8"
+      ],
+      "kind": "json",
+      "name": "ym_sprint82_summary.json",
+      "payload": {
+        "anisotropic_assumption_a_bound": "3*C_local^2*2^-k <= 3*C_local^2",
+        "anisotropic_over_isotropic_at_k9": 0.00146484375,
+        "anisotropic_percent_of_isotropic_at_k9": 0.146484375,
+        "eta4_q": 0.9271275790105094,
+        "eta6_q": 1.390691368515764,
+        "eta8_q": 1.8542551580210187,
+        "eta_threshold": 4.31440083388422,
+        "next_authority_lane_gate": "PolymerDefinedOnBlockedLattice -> KPEntropyAtBlockedScaleL2 already authority-conditional",
+        "next_unconditional_gate": "TemporalTermAbsorbedNotResidualEvidence / residual-support proof",
+        "q": 0.23178189475262734,
+        "q_reduction_needed_for_eta6": 0.28093319435263,
+        "q_reduction_needed_for_eta8": 0.46069989576447246,
+        "q_threshold_eta4": 0.25,
+        "q_threshold_eta6": 0.16666666666666666,
+        "q_threshold_eta8": 0.125
+      },
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint82_summary.json",
+      "sha256": "0690ac4cc6551c4773b811a578fe5d92ea611327d51c5fd7a19aa5b52b7c10fe",
+      "size_bytes": 768,
+      "top_level_type": "dict"
+    },
+    {
+      "columns": [
+        "eta",
+        "eta_q",
+        "passes_kp",
+        "margin_to_1",
+        "required_q_reduction_fraction_if_blocked"
+      ],
+      "exists": true,
+      "kind": "csv",
+      "name": "ym_sprint82_eta_thresholds.csv",
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint82_eta_thresholds.csv",
+      "row_count": 3,
+      "rows": [
+        {
+          "eta": 4,
+          "eta_q": 0.9271275790105094,
+          "margin_to_1": 0.07287242098949065,
+          "passes_kp": true,
+          "required_q_reduction_fraction_if_blocked": 0
+        },
+        {
+          "eta": 6,
+          "eta_q": 1.390691368515764,
+          "margin_to_1": -0.390691368515764,
+          "passes_kp": false,
+          "required_q_reduction_fraction_if_blocked": 0.28093319435263
+        },
+        {
+          "eta": 8,
+          "eta_q": 1.8542551580210187,
+          "margin_to_1": -0.8542551580210187,
+          "passes_kp": false,
+          "required_q_reduction_fraction_if_blocked": 0.46069989576447246
+        }
+      ],
+      "sha256": "86d90410a8746c448f1ae162e0ad941f9444523091c40c9048a2774b2034e3bb",
+      "size_bytes": 254
+    },
+    {
+      "columns": [
+        "k",
+        "anisotropic_sigma2_over_C2",
+        "isotropic_sigma2_over_C2",
+        "anisotropic_vs_isotropic_ratio",
+        "anisotropic_percent_of_isotropic"
+      ],
+      "exists": true,
+      "kind": "csv",
+      "name": "ym_sprint82_assumption_a_oscillation.csv",
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint82_assumption_a_oscillation.csv",
+      "row_count": 13,
+      "rows": [
+        {
+          "anisotropic_percent_of_isotropic": 75.0,
+          "anisotropic_sigma2_over_C2": 3,
+          "anisotropic_vs_isotropic_ratio": 0.75,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 0
+        },
+        {
+          "anisotropic_percent_of_isotropic": 37.5,
+          "anisotropic_sigma2_over_C2": 1.5,
+          "anisotropic_vs_isotropic_ratio": 0.375,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 1
+        },
+        {
+          "anisotropic_percent_of_isotropic": 18.75,
+          "anisotropic_sigma2_over_C2": 0.75,
+          "anisotropic_vs_isotropic_ratio": 0.1875,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 2
+        },
+        {
+          "anisotropic_percent_of_isotropic": 9.375,
+          "anisotropic_sigma2_over_C2": 0.375,
+          "anisotropic_vs_isotropic_ratio": 0.09375,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 3
+        },
+        {
+          "anisotropic_percent_of_isotropic": 4.6875,
+          "anisotropic_sigma2_over_C2": 0.1875,
+          "anisotropic_vs_isotropic_ratio": 0.046875,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 4
+        },
+        {
+          "anisotropic_percent_of_isotropic": 2.34375,
+          "anisotropic_sigma2_over_C2": 0.09375,
+          "anisotropic_vs_isotropic_ratio": 0.0234375,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 5
+        },
+        {
+          "anisotropic_percent_of_isotropic": 1.171875,
+          "anisotropic_sigma2_over_C2": 0.046875,
+          "anisotropic_vs_isotropic_ratio": 0.01171875,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 6
+        },
+        {
+          "anisotropic_percent_of_isotropic": 0.5859375,
+          "anisotropic_sigma2_over_C2": 0.0234375,
+          "anisotropic_vs_isotropic_ratio": 0.005859375,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 7
+        },
+        {
+          "anisotropic_percent_of_isotropic": 0.29296875,
+          "anisotropic_sigma2_over_C2": 0.01171875,
+          "anisotropic_vs_isotropic_ratio": 0.0029296875,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 8
+        },
+        {
+          "anisotropic_percent_of_isotropic": 0.146484375,
+          "anisotropic_sigma2_over_C2": 0.005859375,
+          "anisotropic_vs_isotropic_ratio": 0.00146484375,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 9
+        },
+        {
+          "anisotropic_percent_of_isotropic": 0.0732421875,
+          "anisotropic_sigma2_over_C2": 0.0029296875,
+          "anisotropic_vs_isotropic_ratio": 0.000732421875,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 10
+        },
+        {
+          "anisotropic_percent_of_isotropic": 0.03662109375,
+          "anisotropic_sigma2_over_C2": 0.00146484375,
+          "anisotropic_vs_isotropic_ratio": 0.0003662109375,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 11
+        },
+        {
+          "anisotropic_percent_of_isotropic": 0.018310546875,
+          "anisotropic_sigma2_over_C2": 0.000732421875,
+          "anisotropic_vs_isotropic_ratio": 0.00018310546875,
+          "isotropic_sigma2_over_C2": 4,
+          "k": 12
+        }
+      ],
+      "sha256": "c29f0aa263aae67db7fa99b5798f14589ec7b8a5fd44123231ecd7781b88d4b6",
+      "size_bytes": 567
+    },
+    {
+      "exists": true,
+      "keys": [
+        "eta4_q",
+        "eta6_q",
+        "eta8_q",
+        "exp_minus_4",
+        "q",
+        "route_decision",
+        "su2_first_safe_k",
+        "su3_first_safe_k",
+        "su3_k11_delta",
+        "su3_k11_m0",
+        "su3_k11_row"
+      ],
+      "kind": "json",
+      "name": "ym_sprint93_summary.json",
+      "payload": {
+        "eta4_q": 0.9271275790105094,
+        "eta6_q": 1.390691368515764,
+        "eta8_q": 1.8542551580210187,
+        "exp_minus_4": 0.01831563888873418,
+        "q": 0.23178189475262734,
+        "route_decision": "MASTER_WC3_SU3_CONSERVATIVE_CLOSES_AT_K11_CONDITIONALLY",
+        "su2_first_safe_k": 9,
+        "su3_first_safe_k": 11,
+        "su3_k11_delta": 0.9901123046875,
+        "su3_k11_m0": 4.61646419260685,
+        "su3_k11_row": 0.0098876953125
+      },
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint93_summary.json",
+      "sha256": "57354c08c3f7b566088cf64929dd71a3f848c57bb6a2b43c0400a4c7a4d7dbca",
+      "size_bytes": 397,
+      "top_level_type": "dict"
+    },
+    {
+      "exists": true,
+      "kind": "json",
+      "name": "ym_sprint93_rows.json",
+      "payload": [
+        {
+          "A": 1.0,
+          "delta": 0.96484375,
+          "group": "SU2",
+          "k": 8,
+          "m0": 3.347952867143343,
+          "margin_m0_minus_4": -0.6520471328566568,
+          "passes_row_lt_exp_minus_4": false,
+          "row": 0.03515625
+        },
+        {
+          "A": 1.0,
+          "delta": 0.982421875,
+          "group": "SU2",
+          "k": 9,
+          "m0": 4.041100047703289,
+          "margin_m0_minus_4": 0.04110004770328857,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.017578125
+        },
+        {
+          "A": 1.0,
+          "delta": 0.9912109375,
+          "group": "SU2",
+          "k": 10,
+          "m0": 4.734247228263234,
+          "margin_m0_minus_4": 0.734247228263234,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.0087890625
+        },
+        {
+          "A": 1.0,
+          "delta": 0.99560546875,
+          "group": "SU2",
+          "k": 11,
+          "m0": 5.427394408823179,
+          "margin_m0_minus_4": 1.4273944088231794,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.00439453125
+        },
+        {
+          "A": 1.0,
+          "delta": 0.997802734375,
+          "group": "SU2",
+          "k": 12,
+          "m0": 6.120541589383125,
+          "margin_m0_minus_4": 2.1205415893831248,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.002197265625
+        },
+        {
+          "A": 1.0,
+          "delta": 0.9989013671875,
+          "group": "SU2",
+          "k": 13,
+          "m0": 6.813688769943069,
+          "margin_m0_minus_4": 2.8136887699430693,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.0010986328125
+        },
+        {
+          "A": 2.25,
+          "delta": 0.9208984375,
+          "group": "SU3_conservative",
+          "k": 8,
+          "m0": 2.5370226509270144,
+          "margin_m0_minus_4": -1.4629773490729856,
+          "passes_row_lt_exp_minus_4": false,
+          "row": 0.0791015625
+        },
+        {
+          "A": 2.25,
+          "delta": 0.96044921875,
+          "group": "SU3_conservative",
+          "k": 9,
+          "m0": 3.23016983148696,
+          "margin_m0_minus_4": -0.7698301685130402,
+          "passes_row_lt_exp_minus_4": false,
+          "row": 0.03955078125
+        },
+        {
+          "A": 2.25,
+          "delta": 0.980224609375,
+          "group": "SU3_conservative",
+          "k": 10,
+          "m0": 3.9233170120469048,
+          "margin_m0_minus_4": -0.07668298795309525,
+          "passes_row_lt_exp_minus_4": false,
+          "row": 0.019775390625
+        },
+        {
+          "A": 2.25,
+          "delta": 0.9901123046875,
+          "group": "SU3_conservative",
+          "k": 11,
+          "m0": 4.61646419260685,
+          "margin_m0_minus_4": 0.6164641926068501,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.0098876953125
+        },
+        {
+          "A": 2.25,
+          "delta": 0.99505615234375,
+          "group": "SU3_conservative",
+          "k": 12,
+          "m0": 5.3096113731667955,
+          "margin_m0_minus_4": 1.3096113731667955,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.00494384765625
+        },
+        {
+          "A": 2.25,
+          "delta": 0.997528076171875,
+          "group": "SU3_conservative",
+          "k": 13,
+          "m0": 6.002758553726741,
+          "margin_m0_minus_4": 2.002758553726741,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.002471923828125
+        }
+      ],
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint93_rows.json",
+      "row_count": 12,
+      "sample": [
+        {
+          "A": 1.0,
+          "delta": 0.96484375,
+          "group": "SU2",
+          "k": 8,
+          "m0": 3.347952867143343,
+          "margin_m0_minus_4": -0.6520471328566568,
+          "passes_row_lt_exp_minus_4": false,
+          "row": 0.03515625
+        },
+        {
+          "A": 1.0,
+          "delta": 0.982421875,
+          "group": "SU2",
+          "k": 9,
+          "m0": 4.041100047703289,
+          "margin_m0_minus_4": 0.04110004770328857,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.017578125
+        },
+        {
+          "A": 1.0,
+          "delta": 0.9912109375,
+          "group": "SU2",
+          "k": 10,
+          "m0": 4.734247228263234,
+          "margin_m0_minus_4": 0.734247228263234,
+          "passes_row_lt_exp_minus_4": true,
+          "row": 0.0087890625
+        }
+      ],
+      "sha256": "199ffed1cabb92bdff125fc2e429ab82a41cf4bcd198f0d306bbc02efa38b77f",
+      "size_bytes": 2767,
+      "top_level_type": "list"
+    },
+    {
+      "defined_constants": {
+        "q": 0.23178189475262734
+      },
+      "exists": true,
+      "kind": "python",
+      "mentions": {
+        "SU3_conservative": true,
+        "k11": true,
+        "row_lt_exp_minus_4": true
+      },
+      "name": "ym_sprint93_master_wc3_calcs.py",
+      "relative_path": "temp-DOWNLOADED/new additions/ym_sprint93_master_wc3_calcs.py",
+      "sha256": "4f785f9976ba10f18b2cc1b866e63b6ec7531fdd35a9aedb4b41a11f7f2be808",
+      "size_bytes": 1084
+    },
+    {
+      "columns": [
+        "constant",
+        "value",
+        "role"
+      ],
+      "exists": true,
+      "kind": "csv",
+      "name": "sprint69_constants_table.csv",
+      "relative_path": "temp-DOWNLOADED/new additions/sprint69_constants_table.csv",
+      "row_count": 14,
+      "rows": [
+        {
+          "constant": "q",
+          "role": "polymer activity bound",
+          "value": 0.23178189475262734
+        },
+        {
+          "constant": "eta_generic",
+          "role": "isotropic 4D entropy",
+          "value": 8
+        },
+        {
+          "constant": "eta_generic_q",
+          "role": "BLOCKED (>1)",
+          "value": 1.8542551580210187
+        },
+        {
+          "constant": "eta_spatial",
+          "role": "anisotropic 3D spatial entropy",
+          "value": 4
+        },
+        {
+          "constant": "eta_spatial_q",
+          "role": "KP closes (<1)",
+          "value": 0.9271275790105094
+        },
+        {
+          "constant": "margin_absolute",
+          "role": "1 - eta_spatial_q",
+          "value": 0.07287242098949065
+        },
+        {
+          "constant": "margin_relative_pct",
+          "role": "% slack before KP re-blocks",
+          "value": 7.860020847105511
+        },
+        {
+          "constant": "threshold_eta",
+          "role": "max eta before KP fails",
+          "value": 4.31440083388422
+        },
+        {
+          "constant": "delta_before_reblock",
+          "role": "how much eta_eff can drift",
+          "value": 0.31440083388422035
+        },
+        {
+          "constant": "max_leakage_factor",
+          "role": "max multiplicative leakage allowed",
+          "value": 1.078600208471055
+        },
+        {
+          "constant": "extra_budget_pct",
+          "role": "% extra activity tolerable",
+          "value": 7.860020847105509
+        },
+        {
+          "constant": "per_face_budget_pct",
+          "role": "% per face (n=3 faces)",
+          "value": 2.5542115281578237
+        },
+        {
+          "constant": "q_max_at_eta4",
+          "role": "max q before eta=4 fails",
+          "value": 0.25
+        },
+        {
+          "constant": "q_headroom",
+          "role": "q slack to eta=4 ceiling",
+          "value": 0.018218105247372662
+        }
+      ],
+      "sha256": "d037c4896a95ee1ab5def78eeaf9929f4a72dfda8b05b9ac960e17def473bad9",
+      "size_bytes": 794
+    },
+    {
+      "columns": [
+        "Lemma",
+        "Status",
+        "In-repo input",
+        "Key value",
+        "Closes?"
+      ],
+      "exists": true,
+      "kind": "csv",
+      "name": "sprint73_lemma_stack.csv",
+      "relative_path": "temp-DOWNLOADED/new additions/sprint73_lemma_stack.csv",
+      "row_count": 14,
+      "rows": [
+        {
+          "Closes?": "N/A (blocker)",
+          "In-repo input": "q value",
+          "Key value": "8q=1.854255>1",
+          "Lemma": "Generic 4D entropy fails",
+          "Status": "Closed arithmetic"
+        },
+        {
+          "Closes?": "Yes",
+          "In-repo input": "q value",
+          "Key value": "4q=0.927128<1",
+          "Lemma": "Spatial entropy closes",
+          "Status": "Closed arithmetic"
+        },
+        {
+          "Closes?": "Yes",
+          "In-repo input": "Sprint71+72 bookkeeping",
+          "Key value": "\u039b=1 exactly",
+          "Lemma": "MixedPlaquettes=FaceAction",
+          "Status": "Closed Sprint72"
+        },
+        {
+          "Closes?": "Yes (robustness)",
+          "In-repo input": "Sprint72 audit",
+          "Key value": "KP=0.9949<1",
+          "Lemma": "10% Residual fallback",
+          "Status": "Packageable"
+        },
+        {
+          "Closes?": "From Sprint68",
+          "In-repo input": "Sprint68 r_K<L",
+          "Key value": "r_K=1 < L=2",
+          "Lemma": "LinkVariableDisjointness",
+          "Status": "Packageable"
+        },
+        {
+          "Closes?": "Follows",
+          "In-repo input": "Above + Fubini",
+          "Key value": "\u039b=1 exact",
+          "Lemma": "TemporalMeasureFactor \u039b=1",
+          "Status": "Packageable"
+        },
+        {
+          "Closes?": "This sprint",
+          "In-repo input": "Spatial-only RG + Sprint68",
+          "Key value": "\u03b7=4 justified",
+          "Lemma": "BalabanTransferCompatibility",
+          "Status": "KEY GATE (open)"
+        },
+        {
+          "Closes?": "Post sprint73",
+          "In-repo input": "\u03b7_4D=8 \u2192 \u03b7_sp=4",
+          "Key value": "Factor 2 from L=2",
+          "Lemma": "TemporalQuotientEntropyHalving",
+          "Status": "Follows from above"
+        },
+        {
+          "Closes?": "Post sprint73",
+          "In-repo input": "Above",
+          "Key value": "\u2014",
+          "Lemma": "AllDiameterWeightedKP",
+          "Status": "Open"
+        },
+        {
+          "Closes?": "Post sprint73",
+          "In-repo input": "Eriksson Paper IV",
+          "Key value": "C_uni exists",
+          "Lemma": "SmallFieldBoundsSurviveAniso",
+          "Status": "Open"
+        },
+        {
+          "Closes?": "Post sprint73",
+          "In-repo input": "KP convergence",
+          "Key value": "\u2014",
+          "Lemma": "LatticeMassGapFromAnisotropicKP",
+          "Status": "Open"
+        },
+        {
+          "Closes?": "Post sprint73",
+          "In-repo input": "OS axioms",
+          "Key value": "\u2014",
+          "Lemma": "ContinuumMassGapTransfer",
+          "Status": "Open"
+        },
+        {
+          "Closes?": "Post sprint73",
+          "In-repo input": "Osterwalder-Schrader",
+          "Key value": "\u2014",
+          "Lemma": "OSWightmanReconstruction",
+          "Status": "Open"
+        },
+        {
+          "Closes?": "Final target",
+          "In-repo input": "All above",
+          "Key value": "\u2014",
+          "Lemma": "Clay YM",
+          "Status": "Open"
+        }
+      ],
+      "sha256": "e7ceb114a8ccef5e043930e9a41e466a531dd2ce77fb6545dfb61455386f337f",
+      "size_bytes": 1087
+    },
+    {
+      "columns": [
+        "L",
+        "d",
+        "iso_vol (L^d)",
+        "slab_vol (L^(d-1))",
+        "face_area (L^(d-2))",
+        "n_spatial_faces",
+        "temp_face_plaq (L^(d-1))",
+        "n_temp_faces",
+        "slab_bdry_plaq",
+        "iso_bdry_plaq",
+        "eta_iso",
+        "eta_aniso",
+        "eta_ratio",
+        "eta_aniso * q",
+        "KP_closes"
+      ],
+      "exists": true,
+      "kind": "csv",
+      "name": "ym_slab_geometry.csv",
+      "relative_path": "temp-DOWNLOADED/new additions/ym_slab_geometry.csv",
+      "row_count": 4,
+      "rows": [
+        {
+          "KP_closes": true,
+          "L": 2,
+          "d": 3,
+          "eta_aniso": 4,
+          "eta_aniso * q": 0.927128,
+          "eta_iso": 8,
+          "eta_ratio": 0.5,
+          "face_area (L^(d-2))": 2,
+          "iso_bdry_plaq": 24,
+          "iso_vol (L^d)": 8,
+          "n_spatial_faces": 4,
+          "n_temp_faces": 0,
+          "slab_bdry_plaq": 8,
+          "slab_vol (L^(d-1))": 4,
+          "temp_face_plaq (L^(d-1))": 4
+        },
+        {
+          "KP_closes": false,
+          "L": 2,
+          "d": 4,
+          "eta_aniso": 8,
+          "eta_aniso * q": 1.854255,
+          "eta_iso": 16,
+          "eta_ratio": 0.5,
+          "face_area (L^(d-2))": 4,
+          "iso_bdry_plaq": 64,
+          "iso_vol (L^d)": 16,
+          "n_spatial_faces": 6,
+          "n_temp_faces": 2,
+          "slab_bdry_plaq": 40,
+          "slab_vol (L^(d-1))": 8,
+          "temp_face_plaq (L^(d-1))": 8
+        },
+        {
+          "KP_closes": false,
+          "L": 3,
+          "d": 3,
+          "eta_aniso": 9,
+          "eta_aniso * q": 2.086037,
+          "eta_iso": 27,
+          "eta_ratio": 0.3333,
+          "face_area (L^(d-2))": 3,
+          "iso_bdry_plaq": 54,
+          "iso_vol (L^d)": 27,
+          "n_spatial_faces": 4,
+          "n_temp_faces": 0,
+          "slab_bdry_plaq": 12,
+          "slab_vol (L^(d-1))": 9,
+          "temp_face_plaq (L^(d-1))": 9
+        },
+        {
+          "KP_closes": false,
+          "L": 3,
+          "d": 4,
+          "eta_aniso": 27,
+          "eta_aniso * q": 6.258111,
+          "eta_iso": 81,
+          "eta_ratio": 0.3333,
+          "face_area (L^(d-2))": 9,
+          "iso_bdry_plaq": 216,
+          "iso_vol (L^d)": 81,
+          "n_spatial_faces": 6,
+          "n_temp_faces": 2,
+          "slab_bdry_plaq": 108,
+          "slab_vol (L^(d-1))": 27,
+          "temp_face_plaq (L^(d-1))": 27
+        }
+      ],
+      "sha256": "ffb2f01a5c762fe63c07f4e102af3a1d012a1a89f5f34451bfa026463dd98330",
+      "size_bytes": 392
+    },
+    {
+      "columns": [
+        "L",
+        "d",
+        "eta_aniso (L^(d-1))",
+        "eta_aniso_q",
+        "threshold_eta",
+        "KP_closes",
+        "margin",
+        "margin_sign",
+        "route_decision"
+      ],
+      "exists": true,
+      "kind": "csv",
+      "name": "ym_spatial_slab_entropy_count.csv",
+      "relative_path": "temp-DOWNLOADED/new additions/ym_spatial_slab_entropy_count.csv",
+      "row_count": 4,
+      "rows": [
+        {
+          "KP_closes": true,
+          "L": 2,
+          "d": 3,
+          "eta_aniso (L^(d-1))": 4,
+          "eta_aniso_q": 0.92712758,
+          "margin": 0.07287242,
+          "margin_sign": "positive (safe)",
+          "route_decision": "ENTROPY_FACTOR_BELOW_431_CONFIRMED",
+          "threshold_eta": 4.31440083
+        },
+        {
+          "KP_closes": false,
+          "L": 2,
+          "d": 4,
+          "eta_aniso (L^(d-1))": 8,
+          "eta_aniso_q": 1.85425516,
+          "margin": 0.85425516,
+          "margin_sign": "negative (blocked)",
+          "route_decision": "ANISOTROPIC_PARTITION_BLOCKED",
+          "threshold_eta": 4.31440083
+        },
+        {
+          "KP_closes": false,
+          "L": 3,
+          "d": 3,
+          "eta_aniso (L^(d-1))": 9,
+          "eta_aniso_q": 2.08603705,
+          "margin": 1.08603705,
+          "margin_sign": "negative (blocked)",
+          "route_decision": "ANISOTROPIC_PARTITION_BLOCKED",
+          "threshold_eta": 4.31440083
+        },
+        {
+          "KP_closes": false,
+          "L": 3,
+          "d": 4,
+          "eta_aniso (L^(d-1))": 27,
+          "eta_aniso_q": 6.25811116,
+          "margin": 5.25811116,
+          "margin_sign": "negative (blocked)",
+          "route_decision": "ANISOTROPIC_PARTITION_BLOCKED",
+          "threshold_eta": 4.31440083
+        }
+      ],
+      "sha256": "fffe3a3f079aa1875850c0948aee7337ad65ec64ca1e422174f1a9c6ece92f84",
+      "size_bytes": 477
+    },
+    {
+      "columns": [
+        "L",
+        "d",
+        "slab_sites (L^(d-1))",
+        "iso_sites (L^d)",
+        "spatial_face_plaq (L^(d-2))",
+        "temporal_face_plaq (L^(d-1))",
+        "kernel_range_r_K",
+        "max_temporal_diameter",
+        "touches_both_temporal_faces",
+        "temporal_noncreation_holds",
+        "eta_iso",
+        "eta_aniso",
+        "eta_aniso_q",
+        "KP_closes",
+        "route_decision"
+      ],
+      "exists": true,
+      "kind": "csv",
+      "name": "ym_temporal_support_noncreation_table.csv",
+      "relative_path": "temp-DOWNLOADED/new additions/ym_temporal_support_noncreation_table.csv",
+      "row_count": 4,
+      "rows": [
+        {
+          "KP_closes": true,
+          "L": 2,
+          "d": 3,
+          "eta_aniso": 4,
+          "eta_aniso_q": 0.92712758,
+          "eta_iso": 8,
+          "iso_sites (L^d)": 8,
+          "kernel_range_r_K": 1,
+          "max_temporal_diameter": 1,
+          "route_decision": "TEMPORAL_SUPPORT_NONCREATION_CONFIRMED",
+          "slab_sites (L^(d-1))": 4,
+          "spatial_face_plaq (L^(d-2))": 2,
+          "temporal_face_plaq (L^(d-1))": 4,
+          "temporal_noncreation_holds": true,
+          "touches_both_temporal_faces": false
+        },
+        {
+          "KP_closes": false,
+          "L": 2,
+          "d": 4,
+          "eta_aniso": 8,
+          "eta_aniso_q": 1.85425516,
+          "eta_iso": 16,
+          "iso_sites (L^d)": 16,
+          "kernel_range_r_K": 1,
+          "max_temporal_diameter": 1,
+          "route_decision": "TEMPORAL_SUPPORT_NONCREATION_CONFIRMED",
+          "slab_sites (L^(d-1))": 8,
+          "spatial_face_plaq (L^(d-2))": 4,
+          "temporal_face_plaq (L^(d-1))": 8,
+          "temporal_noncreation_holds": true,
+          "touches_both_temporal_faces": false
+        },
+        {
+          "KP_closes": false,
+          "L": 3,
+          "d": 3,
+          "eta_aniso": 9,
+          "eta_aniso_q": 2.08603705,
+          "eta_iso": 27,
+          "iso_sites (L^d)": 27,
+          "kernel_range_r_K": 1,
+          "max_temporal_diameter": 1,
+          "route_decision": "TEMPORAL_SUPPORT_NONCREATION_CONFIRMED",
+          "slab_sites (L^(d-1))": 9,
+          "spatial_face_plaq (L^(d-2))": 3,
+          "temporal_face_plaq (L^(d-1))": 9,
+          "temporal_noncreation_holds": true,
+          "touches_both_temporal_faces": false
+        },
+        {
+          "KP_closes": false,
+          "L": 3,
+          "d": 4,
+          "eta_aniso": 27,
+          "eta_aniso_q": 6.25811116,
+          "eta_iso": 81,
+          "iso_sites (L^d)": 81,
+          "kernel_range_r_K": 1,
+          "max_temporal_diameter": 1,
+          "route_decision": "TEMPORAL_SUPPORT_NONCREATION_CONFIRMED",
+          "slab_sites (L^(d-1))": 27,
+          "spatial_face_plaq (L^(d-2))": 9,
+          "temporal_face_plaq (L^(d-1))": 27,
+          "temporal_noncreation_holds": true,
+          "touches_both_temporal_faces": false
+        }
+      ],
+      "sha256": "2c531a56fc37b9113b851b67cbb8cb54a668b228246b6c43731c406d7e986b9b",
+      "size_bytes": 608
+    },
+    {
+      "exists": true,
+      "kind": "agda",
+      "name": "YMSprint93ContinuumGapAttempt.agda",
+      "relative_path": "temp-DOWNLOADED/new additions/YMSprint93ContinuumGapAttempt.agda",
+      "sha256": "4aa9c2544cc4be4aa9bff6431e026e805fe316a3ec438e75fd302255d780d6d1",
+      "size_bytes": 6735,
+      "surface": {
+        "downloaded_context_only": true,
+        "function_count": 6,
+        "functions": [
+          "gaugeCovariantDobrushinFromMaster",
+          "uniformActivityFromDobrushin",
+          "wc3FromUniformActivity",
+          "uniformDecayFromWC3",
+          "continuumGapFromUniformDecay",
+          "clayYangMillsPromoted"
+        ],
+        "hard_wall_terms_present": {
+          "ClayYangMillsCandidate": true,
+          "ContinuumLimitMassGap": true,
+          "OSWightmanReconstruction": true,
+          "noSpectralPollutionUnderContinuumLimit": true,
+          "positiveContinuumMassGap": true
+        },
+        "promotion_claim_present": false,
+        "record_count": 14,
+        "records": [
+          "Positive",
+          "StrictLessThanOne",
+          "NonZero",
+          "MasterWC3ConditionSU3AtK11",
+          "GaugeCovariantDobrushinComparison",
+          "UniformPolymerActivityFromDobrushin",
+          "WC3UniformClusterSummability",
+          "UniformConnectedSchwingerDecay",
+          "TightGaugeFieldContinuumLimit",
+          "OSWightmanReconstruction",
+          "ContinuumLimitMassGap",
+          "Nontrivial4DSU3YangMillsMeasure",
+          "ClayYangMillsCandidate",
+          "Sprint93OpenObligations"
+        ]
+      }
+    }
+  ],
+  "generated_at": "2026-06-07T00:00:00+00:00",
+  "input_dir": "temp-DOWNLOADED/new additions",
+  "key_gates": {
+    "agda_continuum_gap_surface": {
+      "downloaded_context_only": true,
+      "function_count": 6,
+      "functions": [
+        "gaugeCovariantDobrushinFromMaster",
+        "uniformActivityFromDobrushin",
+        "wc3FromUniformActivity",
+        "uniformDecayFromWC3",
+        "continuumGapFromUniformDecay",
+        "clayYangMillsPromoted"
+      ],
+      "hard_wall_terms_present": {
+        "ClayYangMillsCandidate": true,
+        "ContinuumLimitMassGap": true,
+        "OSWightmanReconstruction": true,
+        "noSpectralPollutionUnderContinuumLimit": true,
+        "positiveContinuumMassGap": true
+      },
+      "promotion_claim_present": false,
+      "record_count": 14,
+      "records": [
+        "Positive",
+        "StrictLessThanOne",
+        "NonZero",
+        "MasterWC3ConditionSU3AtK11",
+        "GaugeCovariantDobrushinComparison",
+        "UniformPolymerActivityFromDobrushin",
+        "WC3UniformClusterSummability",
+        "UniformConnectedSchwingerDecay",
+        "TightGaugeFieldContinuumLimit",
+        "OSWightmanReconstruction",
+        "ContinuumLimitMassGap",
+        "Nontrivial4DSU3YangMillsMeasure",
+        "ClayYangMillsCandidate",
+        "Sprint93OpenObligations"
+      ]
+    },
+    "blocked_slab_rows": [
+      {
+        "KP_closes": false,
+        "L": 2,
+        "d": 4,
+        "eta_aniso": 8,
+        "eta_aniso * q": 1.854255,
+        "eta_iso": 16,
+        "eta_ratio": 0.5,
+        "face_area (L^(d-2))": 4,
+        "iso_bdry_plaq": 64,
+        "iso_vol (L^d)": 16,
+        "n_spatial_faces": 6,
+        "n_temp_faces": 2,
+        "slab_bdry_plaq": 40,
+        "slab_vol (L^(d-1))": 8,
+        "temp_face_plaq (L^(d-1))": 8
+      },
+      {
+        "KP_closes": false,
+        "L": 3,
+        "d": 3,
+        "eta_aniso": 9,
+        "eta_aniso * q": 2.086037,
+        "eta_iso": 27,
+        "eta_ratio": 0.3333,
+        "face_area (L^(d-2))": 3,
+        "iso_bdry_plaq": 54,
+        "iso_vol (L^d)": 27,
+        "n_spatial_faces": 4,
+        "n_temp_faces": 0,
+        "slab_bdry_plaq": 12,
+        "slab_vol (L^(d-1))": 9,
+        "temp_face_plaq (L^(d-1))": 9
+      },
+      {
+        "KP_closes": false,
+        "L": 3,
+        "d": 4,
+        "eta_aniso": 27,
+        "eta_aniso * q": 6.258111,
+        "eta_iso": 81,
+        "eta_ratio": 0.3333,
+        "face_area (L^(d-2))": 9,
+        "iso_bdry_plaq": 216,
+        "iso_vol (L^d)": 81,
+        "n_spatial_faces": 6,
+        "n_temp_faces": 2,
+        "slab_bdry_plaq": 108,
+        "slab_vol (L^(d-1))": 27,
+        "temp_face_plaq (L^(d-1))": 27
+      }
+    ],
+    "clay_yang_mills_promoted": false,
+    "closed_or_packageable_lemmas": [
+      {
+        "Closes?": "N/A (blocker)",
+        "In-repo input": "q value",
+        "Key value": "8q=1.854255>1",
+        "Lemma": "Generic 4D entropy fails",
+        "Status": "Closed arithmetic"
+      },
+      {
+        "Closes?": "Yes",
+        "In-repo input": "q value",
+        "Key value": "4q=0.927128<1",
+        "Lemma": "Spatial entropy closes",
+        "Status": "Closed arithmetic"
+      },
+      {
+        "Closes?": "Yes",
+        "In-repo input": "Sprint71+72 bookkeeping",
+        "Key value": "\u039b=1 exactly",
+        "Lemma": "MixedPlaquettes=FaceAction",
+        "Status": "Closed Sprint72"
+      },
+      {
+        "Closes?": "Yes (robustness)",
+        "In-repo input": "Sprint72 audit",
+        "Key value": "KP=0.9949<1",
+        "Lemma": "10% Residual fallback",
+        "Status": "Packageable"
+      },
+      {
+        "Closes?": "From Sprint68",
+        "In-repo input": "Sprint68 r_K<L",
+        "Key value": "r_K=1 < L=2",
+        "Lemma": "LinkVariableDisjointness",
+        "Status": "Packageable"
+      },
+      {
+        "Closes?": "Follows",
+        "In-repo input": "Above + Fubini",
+        "Key value": "\u039b=1 exact",
+        "Lemma": "TemporalMeasureFactor \u039b=1",
+        "Status": "Packageable"
+      }
+    ],
+    "constants_table": {
+      "delta_before_reblock": {
+        "constant": "delta_before_reblock",
+        "role": "how much eta_eff can drift",
+        "value": 0.31440083388422035
+      },
+      "eta_generic": {
+        "constant": "eta_generic",
+        "role": "isotropic 4D entropy",
+        "value": 8
+      },
+      "eta_generic_q": {
+        "constant": "eta_generic_q",
+        "role": "BLOCKED (>1)",
+        "value": 1.8542551580210187
+      },
+      "eta_spatial": {
+        "constant": "eta_spatial",
+        "role": "anisotropic 3D spatial entropy",
+        "value": 4
+      },
+      "eta_spatial_q": {
+        "constant": "eta_spatial_q",
+        "role": "KP closes (<1)",
+        "value": 0.9271275790105094
+      },
+      "extra_budget_pct": {
+        "constant": "extra_budget_pct",
+        "role": "% extra activity tolerable",
+        "value": 7.860020847105509
+      },
+      "margin_absolute": {
+        "constant": "margin_absolute",
+        "role": "1 - eta_spatial_q",
+        "value": 0.07287242098949065
+      },
+      "margin_relative_pct": {
+        "constant": "margin_relative_pct",
+        "role": "% slack before KP re-blocks",
+        "value": 7.860020847105511
+      },
+      "max_leakage_factor": {
+        "constant": "max_leakage_factor",
+        "role": "max multiplicative leakage allowed",
+        "value": 1.078600208471055
+      },
+      "per_face_budget_pct": {
+        "constant": "per_face_budget_pct",
+        "role": "% per face (n=3 faces)",
+        "value": 2.5542115281578237
+      },
+      "q": {
+        "constant": "q",
+        "role": "polymer activity bound",
+        "value": 0.23178189475262734
+      },
+      "q_headroom": {
+        "constant": "q_headroom",
+        "role": "q slack to eta=4 ceiling",
+        "value": 0.018218105247372662
+      },
+      "q_max_at_eta4": {
+        "constant": "q_max_at_eta4",
+        "role": "max q before eta=4 fails",
+        "value": 0.25
+      },
+      "threshold_eta": {
+        "constant": "threshold_eta",
+        "role": "max eta before KP fails",
+        "value": 4.31440083388422
+      }
+    },
+    "continuum_mass_gap_promoted": false,
+    "downloaded_context_only": true,
+    "eta4_q": 0.9271275790105094,
+    "eta6_q": 1.390691368515764,
+    "eta8_q": 1.8542551580210187,
+    "eta_threshold": 4.31440083388422,
+    "eta_threshold_rows": [
+      {
+        "eta": 4,
+        "eta_q": 0.9271275790105094,
+        "margin_to_1": 0.07287242098949065,
+        "passes_kp": true,
+        "required_q_reduction_fraction_if_blocked": 0
+      },
+      {
+        "eta": 6,
+        "eta_q": 1.390691368515764,
+        "margin_to_1": -0.390691368515764,
+        "passes_kp": false,
+        "required_q_reduction_fraction_if_blocked": 0.28093319435263
+      },
+      {
+        "eta": 8,
+        "eta_q": 1.8542551580210187,
+        "margin_to_1": -0.8542551580210187,
+        "passes_kp": false,
+        "required_q_reduction_fraction_if_blocked": 0.46069989576447246
+      }
+    ],
+    "exp_minus_4": 0.01831563888873418,
+    "hodge_field_equations_promoted": false,
+    "kp_closing_slab_rows": [
+      {
+        "KP_closes": true,
+        "L": 2,
+        "d": 3,
+        "eta_aniso": 4,
+        "eta_aniso * q": 0.927128,
+        "eta_iso": 8,
+        "eta_ratio": 0.5,
+        "face_area (L^(d-2))": 2,
+        "iso_bdry_plaq": 24,
+        "iso_vol (L^d)": 8,
+        "n_spatial_faces": 4,
+        "n_temp_faces": 0,
+        "slab_bdry_plaq": 8,
+        "slab_vol (L^(d-1))": 4,
+        "temp_face_plaq (L^(d-1))": 4
+      }
+    ],
+    "next_authority_lane_gate": "PolymerDefinedOnBlockedLattice -> KPEntropyAtBlockedScaleL2 already authority-conditional",
+    "next_unconditional_gate": "TemporalTermAbsorbedNotResidualEvidence / residual-support proof",
+    "open_or_key_gate_lemmas": [
+      {
+        "Closes?": "This sprint",
+        "In-repo input": "Spatial-only RG + Sprint68",
+        "Key value": "\u03b7=4 justified",
+        "Lemma": "BalabanTransferCompatibility",
+        "Status": "KEY GATE (open)"
+      },
+      {
+        "Closes?": "Post sprint73",
+        "In-repo input": "\u03b7_4D=8 \u2192 \u03b7_sp=4",
+        "Key value": "Factor 2 from L=2",
+        "Lemma": "TemporalQuotientEntropyHalving",
+        "Status": "Follows from above"
+      },
+      {
+        "Closes?": "Post sprint73",
+        "In-repo input": "Above",
+        "Key value": "\u2014",
+        "Lemma": "AllDiameterWeightedKP",
+        "Status": "Open"
+      },
+      {
+        "Closes?": "Post sprint73",
+        "In-repo input": "Eriksson Paper IV",
+        "Key value": "C_uni exists",
+        "Lemma": "SmallFieldBoundsSurviveAniso",
+        "Status": "Open"
+      },
+      {
+        "Closes?": "Post sprint73",
+        "In-repo input": "KP convergence",
+        "Key value": "\u2014",
+        "Lemma": "LatticeMassGapFromAnisotropicKP",
+        "Status": "Open"
+      },
+      {
+        "Closes?": "Post sprint73",
+        "In-repo input": "OS axioms",
+        "Key value": "\u2014",
+        "Lemma": "ContinuumMassGapTransfer",
+        "Status": "Open"
+      },
+      {
+        "Closes?": "Post sprint73",
+        "In-repo input": "Osterwalder-Schrader",
+        "Key value": "\u2014",
+        "Lemma": "OSWightmanReconstruction",
+        "Status": "Open"
+      },
+      {
+        "Closes?": "Final target",
+        "In-repo input": "All above",
+        "Key value": "\u2014",
+        "Lemma": "Clay YM",
+        "Status": "Open"
+      }
+    ],
+    "q": 0.23178189475262734,
+    "q_threshold_eta4": 0.25,
+    "route_decision": "MASTER_WC3_SU3_CONSERVATIVE_CLOSES_AT_K11_CONDITIONALLY",
+    "safe_rows": [
+      {
+        "A": 1.0,
+        "delta": 0.982421875,
+        "group": "SU2",
+        "k": 9,
+        "m0": 4.041100047703289,
+        "margin_m0_minus_4": 0.04110004770328857,
+        "passes_row_lt_exp_minus_4": true,
+        "row": 0.017578125
+      },
+      {
+        "A": 1.0,
+        "delta": 0.9912109375,
+        "group": "SU2",
+        "k": 10,
+        "m0": 4.734247228263234,
+        "margin_m0_minus_4": 0.734247228263234,
+        "passes_row_lt_exp_minus_4": true,
+        "row": 0.0087890625
+      },
+      {
+        "A": 1.0,
+        "delta": 0.99560546875,
+        "group": "SU2",
+        "k": 11,
+        "m0": 5.427394408823179,
+        "margin_m0_minus_4": 1.4273944088231794,
+        "passes_row_lt_exp_minus_4": true,
+        "row": 0.00439453125
+      },
+      {
+        "A": 1.0,
+        "delta": 0.997802734375,
+        "group": "SU2",
+        "k": 12,
+        "m0": 6.120541589383125,
+        "margin_m0_minus_4": 2.1205415893831248,
+        "passes_row_lt_exp_minus_4": true,
+        "row": 0.002197265625
+      },
+      {
+        "A": 1.0,
+        "delta": 0.9989013671875,
+        "group": "SU2",
+        "k": 13,
+        "m0": 6.813688769943069,
+        "margin_m0_minus_4": 2.8136887699430693,
+        "passes_row_lt_exp_minus_4": true,
+        "row": 0.0010986328125
+      },
+      {
+        "A": 2.25,
+        "delta": 0.9901123046875,
+        "group": "SU3_conservative",
+        "k": 11,
+        "m0": 4.61646419260685,
+        "margin_m0_minus_4": 0.6164641926068501,
+        "passes_row_lt_exp_minus_4": true,
+        "row": 0.0098876953125
+      },
+      {
+        "A": 2.25,
+        "delta": 0.99505615234375,
+        "group": "SU3_conservative",
+        "k": 12,
+        "m0": 5.3096113731667955,
+        "margin_m0_minus_4": 1.3096113731667955,
+        "passes_row_lt_exp_minus_4": true,
+        "row": 0.00494384765625
+      },
+      {
+        "A": 2.25,
+        "delta": 0.997528076171875,
+        "group": "SU3_conservative",
+        "k": 13,
+        "m0": 6.002758553726741,
+        "margin_m0_minus_4": 2.002758553726741,
+        "passes_row_lt_exp_minus_4": true,
+        "row": 0.002471923828125
+      }
+    ],
+    "spatial_entropy_safe_rows": [
+      {
+        "KP_closes": true,
+        "L": 2,
+        "d": 3,
+        "eta_aniso (L^(d-1))": 4,
+        "eta_aniso_q": 0.92712758,
+        "margin": 0.07287242,
+        "margin_sign": "positive (safe)",
+        "route_decision": "ENTROPY_FACTOR_BELOW_431_CONFIRMED",
+        "threshold_eta": 4.31440083
+      }
+    ],
+    "su2_first_safe_k": 9,
+    "su3_first_safe_k": 11,
+    "su3_k11_delta": 0.9901123046875,
+    "su3_k11_m0": 4.61646419260685,
+    "su3_k11_row": 0.0098876953125,
+    "su3_k11_row_detail": {
+      "A": 2.25,
+      "delta": 0.9901123046875,
+      "group": "SU3_conservative",
+      "k": 11,
+      "m0": 4.61646419260685,
+      "margin_m0_minus_4": 0.6164641926068501,
+      "passes_row_lt_exp_minus_4": true,
+      "row": 0.0098876953125
+    },
+    "temporal_noncreation_rows": [
+      {
+        "KP_closes": true,
+        "L": 2,
+        "d": 3,
+        "eta_aniso": 4,
+        "eta_aniso_q": 0.92712758,
+        "eta_iso": 8,
+        "iso_sites (L^d)": 8,
+        "kernel_range_r_K": 1,
+        "max_temporal_diameter": 1,
+        "route_decision": "TEMPORAL_SUPPORT_NONCREATION_CONFIRMED",
+        "slab_sites (L^(d-1))": 4,
+        "spatial_face_plaq (L^(d-2))": 2,
+        "temporal_face_plaq (L^(d-1))": 4,
+        "temporal_noncreation_holds": true,
+        "touches_both_temporal_faces": false
+      },
+      {
+        "KP_closes": false,
+        "L": 2,
+        "d": 4,
+        "eta_aniso": 8,
+        "eta_aniso_q": 1.85425516,
+        "eta_iso": 16,
+        "iso_sites (L^d)": 16,
+        "kernel_range_r_K": 1,
+        "max_temporal_diameter": 1,
+        "route_decision": "TEMPORAL_SUPPORT_NONCREATION_CONFIRMED",
+        "slab_sites (L^(d-1))": 8,
+        "spatial_face_plaq (L^(d-2))": 4,
+        "temporal_face_plaq (L^(d-1))": 8,
+        "temporal_noncreation_holds": true,
+        "touches_both_temporal_faces": false
+      },
+      {
+        "KP_closes": false,
+        "L": 3,
+        "d": 3,
+        "eta_aniso": 9,
+        "eta_aniso_q": 2.08603705,
+        "eta_iso": 27,
+        "iso_sites (L^d)": 27,
+        "kernel_range_r_K": 1,
+        "max_temporal_diameter": 1,
+        "route_decision": "TEMPORAL_SUPPORT_NONCREATION_CONFIRMED",
+        "slab_sites (L^(d-1))": 9,
+        "spatial_face_plaq (L^(d-2))": 3,
+        "temporal_face_plaq (L^(d-1))": 9,
+        "temporal_noncreation_holds": true,
+        "touches_both_temporal_faces": false
+      },
+      {
+        "KP_closes": false,
+        "L": 3,
+        "d": 4,
+        "eta_aniso": 27,
+        "eta_aniso_q": 6.25811116,
+        "eta_iso": 81,
+        "iso_sites (L^d)": 81,
+        "kernel_range_r_K": 1,
+        "max_temporal_diameter": 1,
+        "route_decision": "TEMPORAL_SUPPORT_NONCREATION_CONFIRMED",
+        "slab_sites (L^(d-1))": 27,
+        "spatial_face_plaq (L^(d-2))": 9,
+        "temporal_face_plaq (L^(d-1))": 27,
+        "temporal_noncreation_holds": true,
+        "touches_both_temporal_faces": false
+      }
+    ]
+  },
+  "missing_artifacts": [],
+  "output_claim": "downloaded-context-only; no Clay/YM/Hodge promotion",
+  "promotion": {
+    "clay_yang_mills_promoted": false,
+    "continuum_mass_gap_promoted": false,
+    "maxwell_hodge_promoted": false,
+    "standard_model_promoted": false
+  },
+  "schema": "dashi-downloaded-ym-hodge-artifact-summary-v1",
+  "version": "1.0.0"
+}

@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "cross_term_quotient_zero": true,
+    "modulo_null_additivity": true,
+    "quotient_transport": true
+  },
+  "four_point_input_error": 0.0,
+  "modulo_null_additivity_error": 0.0,
+  "promotion": false,
+  "quotient_transport_error": 0.0
+}

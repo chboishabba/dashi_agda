@@ -258,6 +258,66 @@ canonicalNaturalP2ConvergencePromotionAuthorityTokenNoExactPolicyHookPresent :
 canonicalNaturalP2ConvergencePromotionAuthorityTokenNoExactPolicyHookPresent =
   refl
 
+------------------------------------------------------------------------
+-- Authority-boundary escalation surface.
+--
+-- This gives an explicit, typed escalation payload for the exact W2
+-- authority-token boundary while the definition site remains constructorless.
+
+data NaturalP2ConvergencePromotionAuthorityBoundaryEscalationTag : Set where
+  escalateNaturalP2ConvergencePromotionAuthorityTokenDefinitionSite :
+    NaturalP2ConvergencePromotionAuthorityBoundaryEscalationTag
+
+record NaturalP2ConvergencePromotionAuthorityBoundaryEscalation : Setω where
+  field
+    escalationTag :
+      NaturalP2ConvergencePromotionAuthorityBoundaryEscalationTag
+
+    blockedDefinitionModule :
+      String
+
+    blockedDefinitionForm :
+      String
+
+    blockedDefinitionLine :
+      Nat
+
+    requiredReceiptShape :
+      List String
+
+    noShadowTokenBoundary :
+      List String
+
+canonicalNaturalP2ConvergencePromotionAuthorityBoundaryEscalation :
+  NaturalP2ConvergencePromotionAuthorityBoundaryEscalation
+canonicalNaturalP2ConvergencePromotionAuthorityBoundaryEscalation =
+  record
+    { escalationTag =
+        escalateNaturalP2ConvergencePromotionAuthorityTokenDefinitionSite
+    ; blockedDefinitionModule =
+        "DASHI.Physics.Closure.NaturalP2ConvergencePromotionObligation"
+    ; blockedDefinitionForm =
+        "data NaturalP2ConvergencePromotionAuthorityToken : Set where"
+    ; blockedDefinitionLine =
+        29
+    ; requiredReceiptShape =
+        "tokenName : NaturalP2ConvergencePromotionAuthorityToken"
+        ∷ "laneScope : W2 natural-p2-convergence"
+        ∷ "evidenceClass : refl-proved-internal"
+        ∷ "policyDocument : Docs/DASHIGovernanceSelfIssuancePolicy.md"
+        ∷ "exactW2EvidencePacket : normalizeAdd sum-invariance + local uniform-rate diagnostic + W2 audit"
+        ∷ "auditConditions : named bounded scope plus exact typed consumer"
+        ∷ "revocationConditions : checksum/commit mismatch, failed replay, or scope overreach"
+        ∷ "noOverreachClauses : no W3/W4/W5/W8/W9/unification promotion"
+        ∷ "issuedAuthorityToken : NaturalP2ConvergencePromotionAuthorityToken"
+        ∷ []
+    ; noShadowTokenBoundary =
+        "Do not add a local shadow record in place of NaturalP2ConvergencePromotionAuthorityToken"
+        ∷ "Do not claim promotion authority from prose-only governance statements"
+        ∷ "Implement a constructor or a non-postulated exact token-producing hook at this definition site"
+        ∷ []
+    }
+
 naturalP2ConvergencePromotionReceiptImpossible :
   NaturalP2ConvergencePromotionReceipt → ⊥
 naturalP2ConvergencePromotionReceiptImpossible receipt =

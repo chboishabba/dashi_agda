@@ -1,0 +1,7 @@
+gate_id,gate_name,depends_on,status,proved_in_repo,authority_dependent,blocks_fixed_volume_uv_closure,blocks_clay_promotion,next_gate
+G1,BalabanCMP98LocalOscillationBoundForQhp,"A1,A2",ACCEPTED_AS_AUTHORITY_NOT_PROVED_IN_REPO,False,True,False,False,LipschitzToSquaredOscillationForQhp
+G2,LipschitzToSquaredOscillationForQhp,"G1,A3,A4",ARITHMETIC_DERIVED_CONDITIONAL_ON_AUTHORITY,True,True,False,False,AnisotropicAssumptionA
+G3,AnisotropicAssumptionA,G2,ASSEMBLED_CONDITIONAL_ON_AUTHORITY,True,True,False,False,FixedFiniteVolumeBlockedObservableContinuumLimit
+G4,FixedFiniteVolumeBlockedObservableContinuumLimit,G3 + Eriksson26020077Theorem16Conditional,UV_GATE_READY_CONDITIONAL,False,True,False,False,EffectiveActionPolymersSpatialOnlyForA1
+G5,EffectiveActionPolymersSpatialOnlyForA1,separate KP support lane,OPEN_SEPARATE_KP_GATE,False,False,False,True,PolymerDefinedOnBlockedLattice
+G6,ClayYangMillsPromoted,mass gap + OS/Wightman + continuum transfer,FALSE_NO_PROMOTION,False,False,False,True,

@@ -1,8 +1,25 @@
 {
   "artifact_schema": "dashi-w4w5-pdf-lhapdf-intake-preflight-v1",
   "candidate_ct18_equivalent_table_run": {
-    "path": null,
-    "present": false
+    "accepted_dy_luminosity_convention_status": "candidate_local_ct18nlo_convention_not_accepted",
+    "accepted_dy_luminosity_first_missing": "missingAcceptedDYLuminosityConventionAuthority",
+    "archive_sha256": "c9127231e77e97cbec79cb5839203ab00f8db77237a061b61f9420f2b7b9c213",
+    "grid_sha256": "375db856d2f8c7087a626c92ebf228d3f080e5de83175519778ffaf6e72e5410",
+    "info_sha256": "be60232d8e6c49982c82f5fa990fd5b0fd1050719944f31602bf27cdb16548b0",
+    "member": 0,
+    "path": "scripts/data/pdf/ct18_dashi_pdf_packet.json",
+    "pdf_set": "CT18NLO",
+    "present": true,
+    "set_index": 14400,
+    "sha256": "7b4e5e815c3e65619cd9591734eb00e7c80be0402c6d06c3c8d33d1c8da6609f",
+    "w4_candidate_bin_count": 13,
+    "w5_fixed_x_abs_gap": 0.17021949971580164,
+    "w5_fixed_x_ratio": 1.0506681065158017,
+    "w5_t45_over_t43_abs_gap": 0.5455735283993104,
+    "w5_t45_over_t43_ratio": 0.3348750784006896,
+    "w5_t45_over_z_abs_gap": 0.12904420812148265,
+    "w5_t45_over_z_ratio": 0.7514043986785174,
+    "w5_target": 0.8804486068
   },
   "date": "2026-05-13",
   "environment": {
@@ -18,15 +35,15 @@
         "path": "/usr/bin/lhapdf-config"
       }
     },
-    "python_executable": "/usr/bin/python3",
+    "python_executable": "/home/c/Documents/code/dashi_agda/.venv/bin/python",
     "python_modules": {
       "lhapdf": {
-        "found": true,
+        "found": false,
         "module": "lhapdf",
-        "origin": "/usr/lib/python3.14/site-packages/lhapdf/__init__.py"
+        "origin": null
       }
     },
-    "python_version": "3.14.4 (main, Apr 11 2026, 09:31:02) [GCC 15.2.1 20260209]"
+    "python_version": "3.14.4 (main, May  3 2026, 17:15:29) [GCC 16.1.1 20260430]"
   },
   "lhapdf_backed_candidate_run": {
     "present": false,

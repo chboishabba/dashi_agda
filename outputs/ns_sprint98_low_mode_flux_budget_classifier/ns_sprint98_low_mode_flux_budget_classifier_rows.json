@@ -1,0 +1,186 @@
+[
+  {
+    "accepted": false,
+    "ansatz": "inject energy directly into |k| <= K_low",
+    "classification": "forced low-mode reservoir",
+    "coherent_inverse_cascade": false,
+    "failed_gates": [
+      "leray_energy_budget_compatible",
+      "coherent_inverse_cascade",
+      "non_circular_kstar_forcing",
+      "no_forbidden_dependency"
+    ],
+    "family": "direct_low_mode_forcing",
+    "family_id": "F1",
+    "forbidden_dependencies": "external_forcing",
+    "gate_results": {
+      "coherent_inverse_cascade": false,
+      "leray_energy_budget_compatible": false,
+      "no_forbidden_dependency": false,
+      "non_circular_kstar_forcing": false,
+      "quantitative_low_mode_flux_lower_bound": true,
+      "residence_time_against_viscosity": true
+    },
+    "leray_energy_budget_compatible": false,
+    "no_forbidden_dependency": false,
+    "non_circular_kstar_forcing": false,
+    "note": "Direct injection can name a low-mode flux, but it is not an unforced Leray Navier-Stokes mechanism and uses forbidden external forcing.",
+    "quantitative_low_mode_flux_lower_bound": true,
+    "residence_time_against_viscosity": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "postulate persistent transfer from high shells to low shells",
+    "classification": "imposed inverse-cascade narrative",
+    "coherent_inverse_cascade": false,
+    "failed_gates": [
+      "quantitative_low_mode_flux_lower_bound",
+      "residence_time_against_viscosity",
+      "leray_energy_budget_compatible",
+      "coherent_inverse_cascade",
+      "non_circular_kstar_forcing",
+      "no_forbidden_dependency"
+    ],
+    "family": "inverse_cascade_ansatz",
+    "family_id": "I1",
+    "forbidden_dependencies": "imposed_inverse_cascade;target_kstar_collapse",
+    "gate_results": {
+      "coherent_inverse_cascade": false,
+      "leray_energy_budget_compatible": false,
+      "no_forbidden_dependency": false,
+      "non_circular_kstar_forcing": false,
+      "quantitative_low_mode_flux_lower_bound": false,
+      "residence_time_against_viscosity": false
+    },
+    "leray_energy_budget_compatible": false,
+    "no_forbidden_dependency": false,
+    "non_circular_kstar_forcing": false,
+    "note": "A cascade direction asserted as an ansatz supplies no quantitative lower bound, residence estimate, or non-circular K* forcing.",
+    "quantitative_low_mode_flux_lower_bound": false,
+    "residence_time_against_viscosity": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "nearest-neighbor shell flux moves energy across adjacent bands",
+    "classification": "local shell transfer channel",
+    "coherent_inverse_cascade": false,
+    "failed_gates": [
+      "quantitative_low_mode_flux_lower_bound",
+      "residence_time_against_viscosity",
+      "coherent_inverse_cascade",
+      "non_circular_kstar_forcing"
+    ],
+    "family": "shell_local_transfer",
+    "family_id": "S1",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "coherent_inverse_cascade": false,
+      "leray_energy_budget_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_kstar_forcing": false,
+      "quantitative_low_mode_flux_lower_bound": false,
+      "residence_time_against_viscosity": false
+    },
+    "leray_energy_budget_compatible": true,
+    "no_forbidden_dependency": true,
+    "non_circular_kstar_forcing": false,
+    "note": "Local transfer is energy-budget compatible, but it does not force a sustained inverse cascade or produce a low-mode flux lower bound.",
+    "quantitative_low_mode_flux_lower_bound": false,
+    "residence_time_against_viscosity": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "pressure couples separated scales and redirects energy to low modes",
+    "classification": "nonlocal coupling sketch",
+    "coherent_inverse_cascade": false,
+    "failed_gates": [
+      "quantitative_low_mode_flux_lower_bound",
+      "residence_time_against_viscosity",
+      "coherent_inverse_cascade",
+      "non_circular_kstar_forcing"
+    ],
+    "family": "pressure_nonlocal_transfer",
+    "family_id": "P1",
+    "forbidden_dependencies": "none",
+    "gate_results": {
+      "coherent_inverse_cascade": false,
+      "leray_energy_budget_compatible": true,
+      "no_forbidden_dependency": true,
+      "non_circular_kstar_forcing": false,
+      "quantitative_low_mode_flux_lower_bound": false,
+      "residence_time_against_viscosity": false
+    },
+    "leray_energy_budget_compatible": true,
+    "no_forbidden_dependency": true,
+    "non_circular_kstar_forcing": false,
+    "note": "Pressure nonlocality can be compatible with the equations, but the candidate lacks a signed quantitative flux lower bound and residence time.",
+    "quantitative_low_mode_flux_lower_bound": false,
+    "residence_time_against_viscosity": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "stretching intensifies vorticity and concentrates energy into low modes",
+    "classification": "stretching-to-concentration heuristic",
+    "coherent_inverse_cascade": false,
+    "failed_gates": [
+      "quantitative_low_mode_flux_lower_bound",
+      "residence_time_against_viscosity",
+      "coherent_inverse_cascade",
+      "non_circular_kstar_forcing",
+      "no_forbidden_dependency"
+    ],
+    "family": "vortex_stretching_concentration",
+    "family_id": "V1",
+    "forbidden_dependencies": "target_blowup",
+    "gate_results": {
+      "coherent_inverse_cascade": false,
+      "leray_energy_budget_compatible": true,
+      "no_forbidden_dependency": false,
+      "non_circular_kstar_forcing": false,
+      "quantitative_low_mode_flux_lower_bound": false,
+      "residence_time_against_viscosity": false
+    },
+    "leray_energy_budget_compatible": true,
+    "no_forbidden_dependency": false,
+    "non_circular_kstar_forcing": false,
+    "note": "Stretching is a valid nonlinear channel, but this family does not close the low-mode flux budget and relies on a target blowup endpoint.",
+    "quantitative_low_mode_flux_lower_bound": false,
+    "residence_time_against_viscosity": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "dE_low/dt = Phi_to_low(t) - 2 nu ||grad u_low||_2^2",
+    "classification": "formal low-mode ODE",
+    "coherent_inverse_cascade": false,
+    "failed_gates": [
+      "quantitative_low_mode_flux_lower_bound",
+      "residence_time_against_viscosity",
+      "coherent_inverse_cascade",
+      "non_circular_kstar_forcing",
+      "no_forbidden_dependency"
+    ],
+    "family": "energy_transfer_ode",
+    "family_id": "E1",
+    "forbidden_dependencies": "desired_conclusion",
+    "gate_results": {
+      "coherent_inverse_cascade": false,
+      "leray_energy_budget_compatible": true,
+      "no_forbidden_dependency": false,
+      "non_circular_kstar_forcing": false,
+      "quantitative_low_mode_flux_lower_bound": false,
+      "residence_time_against_viscosity": false
+    },
+    "leray_energy_budget_compatible": true,
+    "no_forbidden_dependency": false,
+    "non_circular_kstar_forcing": false,
+    "note": "The ODE names the budget terms but leaves the required lower bound and anti-viscous residence estimate as assumptions.",
+    "quantitative_low_mode_flux_lower_bound": false,
+    "residence_time_against_viscosity": false,
+    "verdict": "reject"
+  }
+]

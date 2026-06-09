@@ -1,0 +1,160 @@
+[
+  {
+    "accepted": false,
+    "ansatz": "threshold dyadic shell energy density to define high-frequency concentration",
+    "classification": "density threshold without closed scale-local tightness",
+    "dyadic_energy_density": true,
+    "failed_gates": [
+      "threshold_selection",
+      "scale_local_tightness",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "shell_energy_density_threshold",
+    "family_id": "D1",
+    "forbidden_dependencies": "imposed_high_frequency_threshold",
+    "gate_results": {
+      "dyadic_energy_density": true,
+      "leray_compatible": true,
+      "locus_measurability": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "scale_local_tightness": false,
+      "threshold_selection": false
+    },
+    "leray_compatible": true,
+    "locus_measurability": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "The dyadic density is available, but the threshold needed to isolate concentration is not selected from a non-circular Leray budget.",
+    "scale_local_tightness": false,
+    "threshold_selection": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "use a Hardy-Littlewood or dyadic maximal function to choose the concentration locus",
+    "classification": "measurable locus without source mechanism",
+    "dyadic_energy_density": true,
+    "failed_gates": [
+      "scale_local_tightness",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "maximal_function_locus",
+    "family_id": "M1",
+    "forbidden_dependencies": "maximal_locus_as_source",
+    "gate_results": {
+      "dyadic_energy_density": true,
+      "leray_compatible": true,
+      "locus_measurability": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "scale_local_tightness": false,
+      "threshold_selection": true
+    },
+    "leray_compatible": true,
+    "locus_measurability": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "A maximal-function superlevel set is measurable, but it repackages concentration instead of deriving a scale-local source for it.",
+    "scale_local_tightness": false,
+    "threshold_selection": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "extract a defect measure from weak limits of high-frequency energy densities",
+    "classification": "compactness defect without constructive concentration source",
+    "dyadic_energy_density": true,
+    "failed_gates": [
+      "threshold_selection",
+      "scale_local_tightness",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "defect_measure_extraction",
+    "family_id": "E1",
+    "forbidden_dependencies": "imposed_defect_measure",
+    "gate_results": {
+      "dyadic_energy_density": true,
+      "leray_compatible": true,
+      "locus_measurability": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "scale_local_tightness": false,
+      "threshold_selection": false
+    },
+    "leray_compatible": true,
+    "locus_measurability": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "Weak compactness can name a defect, but it does not provide a non-circular threshold or tight scale-local production mechanism.",
+    "scale_local_tightness": false,
+    "threshold_selection": false,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "assume an intermittency profile that concentrates high-frequency energy on sparse sets",
+    "classification": "profile ansatz with imposed intermittency",
+    "dyadic_energy_density": true,
+    "failed_gates": [
+      "scale_local_tightness",
+      "leray_compatible",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "intermittency_profile_measure",
+    "family_id": "I1",
+    "forbidden_dependencies": "imposed_intermittency_profile;desired_conclusion",
+    "gate_results": {
+      "dyadic_energy_density": true,
+      "leray_compatible": false,
+      "locus_measurability": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "scale_local_tightness": false,
+      "threshold_selection": true
+    },
+    "leray_compatible": false,
+    "locus_measurability": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "The intermittency profile supplies the desired concentration geometry as an ansatz rather than deriving it inside the unforced Leray class.",
+    "scale_local_tightness": false,
+    "threshold_selection": true,
+    "verdict": "reject"
+  },
+  {
+    "accepted": false,
+    "ansatz": "select the concentration locus directly and measure high-frequency energy there",
+    "classification": "forbidden imposed concentration",
+    "dyadic_energy_density": true,
+    "failed_gates": [
+      "leray_compatible",
+      "non_circular_source",
+      "no_forbidden_dependency"
+    ],
+    "family": "imposed_concentration_locus",
+    "family_id": "C1",
+    "forbidden_dependencies": "imposed_concentration_locus;imposed_concentration_measure;desired_conclusion",
+    "gate_results": {
+      "dyadic_energy_density": true,
+      "leray_compatible": false,
+      "locus_measurability": true,
+      "no_forbidden_dependency": false,
+      "non_circular_source": false,
+      "scale_local_tightness": true,
+      "threshold_selection": true
+    },
+    "leray_compatible": false,
+    "locus_measurability": true,
+    "no_forbidden_dependency": false,
+    "non_circular_source": false,
+    "note": "This candidate passes formal measurement checks only by building the concentration locus into the input data.",
+    "scale_local_tightness": true,
+    "threshold_selection": true,
+    "verdict": "reject"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "contract": "ns_sprint141_radial_gradient_coupling_ledger",
+  "files": {
+    "markdown": "outputs/ns_sprint141_radial_gradient_coupling_ledger/ns_sprint141_radial_gradient_coupling_ledger.md",
+    "rows_csv": "outputs/ns_sprint141_radial_gradient_coupling_ledger/ns_sprint141_radial_gradient_coupling_ledger_rows.csv",
+    "rows_json": "outputs/ns_sprint141_radial_gradient_coupling_ledger/ns_sprint141_radial_gradient_coupling_ledger_rows.json",
+    "summary": "outputs/ns_sprint141_radial_gradient_coupling_ledger/ns_sprint141_radial_gradient_coupling_ledger_summary.json"
+  },
+  "sha256": {
+    "markdown": "163f0fbcbf99b02339c84774aef04487fe37457a8b48d50cd045fc4536744646",
+    "rows_csv": "7017abd3786c1d135e802027d4e55f5e7c203b7758c747c87086c30fdda20a1d",
+    "rows_json": "d22a12fd143d9c3f5ade42b840704cde7f5bb784faeba8e52cac2fcfa812991a",
+    "summary": "2edca5f6fd0d22f6996518407d8da8d2169dd27f0c58246b025c83afab9151ec"
+  },
+  "validation_passed": true
+}

@@ -1,0 +1,19 @@
+{
+  "source": "Docs/Images/clay-analytic-sprint/sprint47_packet_lineage_N32_seed0/ns_packet_transition_summary.csv",
+  "meta": {
+    "replay_mode": "sprint48_replenishment_from_packet_transition_summary",
+    "packet_summary_input": "Docs/Images/clay-analytic-sprint/sprint47_packet_lineage_N32_seed0/ns_packet_transition_summary.csv"
+  },
+  "row_count": 0,
+  "packet_transition_summary_row_count": 567,
+  "replenishment_decomposition_row_count": 567,
+  "outputs": {
+    "packet_transition_summary_csv": "Docs/Images/clay-analytic-sprint/sprint48_replenishment_N32_seed0/ns_packet_transition_summary.csv",
+    "replenishment_decomposition": "Docs/Images/clay-analytic-sprint/sprint48_replenishment_N32_seed0/ns_replenishment_decomposition.csv",
+    "replenishment_summary": "Docs/Images/clay-analytic-sprint/sprint48_replenishment_N32_seed0/ns_replenishment_summary.json",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint48_replenishment_N32_seed0/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint48_replenishment_N32_seed0/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFortyEightReplenishmentDecompositionReceipt",
+  "evidence_boundary": "replay diagnostic only; no Navier-Stokes theorem or Clay promotion"
+}

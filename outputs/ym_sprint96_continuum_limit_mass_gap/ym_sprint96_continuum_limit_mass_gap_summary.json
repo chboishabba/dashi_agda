@@ -1,0 +1,19 @@
+{
+  "clay_statement_boundary_discharged": false,
+  "clay_yang_mills_promoted": false,
+  "continuum_limit_mass_gap_closed_in_repo": true,
+  "continuum_mass_gap_statement": "lim_{a->0} gap(T(a))*block_size(a) = m_phys > 0",
+  "external_acceptance_token_available": false,
+  "nontrivial_4d_su3_yang_mills_measure_derived_in_repo": false,
+  "remaining_open_lemmas": [
+    "Nontrivial4DSU3YangMillsMeasure",
+    "ClayStatementBoundaryDischarged",
+    "ExternalAcceptanceToken"
+  ],
+  "rg_generated_mass_term_scoped_authority": true,
+  "rg_invariant_physical_scale_recorded": true,
+  "route_decision": "SPRINT96_CLOSES_CONTINUUM_LIMIT_MASS_GAP_ONLY",
+  "sprint": "96-continuum-limit-mass-gap",
+  "transfer_gap_tracks_effective_mass_recorded": true,
+  "uniform_connected_schwinger_decay_required": true
+}

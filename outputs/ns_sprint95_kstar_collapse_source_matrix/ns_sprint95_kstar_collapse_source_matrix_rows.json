@@ -1,0 +1,62 @@
+[
+  {
+    "accepted": false,
+    "excludes_conditional_kstar_lower_bound": false,
+    "extracts_singularity": false,
+    "forbidden_dependencies": "none",
+    "forbidden_dependency_count": 0,
+    "note": "Supports conditional absorption estimates only; supplies no finite-time K* collapse mechanism.",
+    "source": "Sprint87 high-high factorization",
+    "source_id": "S87",
+    "supplies_finite_time_kstar_collapse": false,
+    "supplies_smooth_finite_energy_compatibility": false
+  },
+  {
+    "accepted": false,
+    "excludes_conditional_kstar_lower_bound": false,
+    "extracts_singularity": false,
+    "forbidden_dependencies": "none",
+    "forbidden_dependency_count": 0,
+    "note": "Records local-enstrophy reduction surfaces but no collapse trajectory.",
+    "source": "Sprint90 local enstrophy route",
+    "source_id": "S90",
+    "supplies_finite_time_kstar_collapse": false,
+    "supplies_smooth_finite_energy_compatibility": false
+  },
+  {
+    "accepted": false,
+    "excludes_conditional_kstar_lower_bound": false,
+    "extracts_singularity": false,
+    "forbidden_dependencies": "none",
+    "forbidden_dependency_count": 0,
+    "note": "Records Option B as open and Option C as conditional.",
+    "source": "Sprint94 K-star fork",
+    "source_id": "S94",
+    "supplies_finite_time_kstar_collapse": false,
+    "supplies_smooth_finite_energy_compatibility": false
+  },
+  {
+    "accepted": false,
+    "excludes_conditional_kstar_lower_bound": false,
+    "extracts_singularity": false,
+    "forbidden_dependencies": "none",
+    "forbidden_dependency_count": 0,
+    "note": "Names the candidate direction but lacks smooth finite-energy compatibility and singularity extraction.",
+    "source": "low-frequency cascade hypothesis",
+    "source_id": "HYP1",
+    "supplies_finite_time_kstar_collapse": true,
+    "supplies_smooth_finite_energy_compatibility": false
+  },
+  {
+    "accepted": false,
+    "excludes_conditional_kstar_lower_bound": true,
+    "extracts_singularity": false,
+    "forbidden_dependencies": "negated_conditional_criterion_without_mechanism",
+    "forbidden_dependency_count": 1,
+    "note": "Negating the conditional criterion is not a mechanism and cannot be accepted.",
+    "source": "conditional K* lower-bound negation",
+    "source_id": "HYP2",
+    "supplies_finite_time_kstar_collapse": false,
+    "supplies_smooth_finite_energy_compatibility": false
+  }
+]

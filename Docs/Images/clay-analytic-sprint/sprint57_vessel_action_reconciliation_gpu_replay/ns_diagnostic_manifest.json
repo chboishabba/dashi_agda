@@ -1,0 +1,22 @@
+{
+  "source": "../dashiCFD/outputs/sprint57_vessel_action_reconciliation_gpu_audit/ns_sprint57_vessel_action_reconciliation_summary.json",
+  "parameters": {
+    "replay_mode": "sprint57_vessel_action_from_gpu_summary",
+    "sprint57_vessel_action_summary_input": "../dashiCFD/outputs/sprint57_vessel_action_reconciliation_gpu_audit/ns_sprint57_vessel_action_reconciliation_summary.json"
+  },
+  "diagnostic_mode": "sprint57_vessel_action_replay_from_gpu_summary",
+  "time_window_count": 72,
+  "assignment_scheme": "euclidean_K_cell_packet_union",
+  "outputs": {
+    "sprint57_vessel_action_summary": "Docs/Images/clay-analytic-sprint/sprint57_vessel_action_reconciliation_gpu_replay/ns_sprint57_vessel_action_reconciliation_summary.json",
+    "vessel_action_reconciliation_by_time_csv": "Docs/Images/clay-analytic-sprint/sprint57_vessel_action_reconciliation_gpu_replay/ns_vessel_action_reconciliation_by_time.csv",
+    "vessel_action_reconciliation_summary_csv": "Docs/Images/clay-analytic-sprint/sprint57_vessel_action_reconciliation_gpu_replay/ns_vessel_action_reconciliation_summary.csv",
+    "checks": "Docs/Images/clay-analytic-sprint/sprint57_vessel_action_reconciliation_gpu_replay/ns_diagnostic_checks.json",
+    "manifest": "Docs/Images/clay-analytic-sprint/sprint57_vessel_action_reconciliation_gpu_replay/ns_diagnostic_manifest.json"
+  },
+  "receipt_alignment": "DASHI.Physics.Closure.ClaySprintFiftySevenVesselActionReconciliationReceipt",
+  "evidence_boundary": "Sprint 57 replay consumes vessel/action reconciliation summary artifacts only. It does not recompute truth snapshots, packet masks, material lineage, BT reassignment, weighted action summability, physical bridge, stretch absorption, no finite-time blowup, or Clay regularity.",
+  "promotion_status": "NO_PROMOTION_SPRINT57_VESSEL_ACTION_REPLAY_DIAGNOSTIC",
+  "clay_promotion": false,
+  "navier_stokes_promotion": false
+}

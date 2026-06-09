@@ -1,0 +1,6 @@
+module Ontology.ClinicalDiagnostics where
+
+open import Ontology.ClinicalDiagnostics.ClinicalDiagnosticsCore public
+open import Ontology.ClinicalDiagnostics.DifferentialDiagnosis public
+open import Ontology.ClinicalDiagnostics.TransportAndUncertainty public
+open import Ontology.ClinicalDiagnostics.BridgeFromExistingReceipts public

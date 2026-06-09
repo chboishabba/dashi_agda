@@ -1,0 +1,8 @@
+{
+  "all_children_ok": true,
+  "flux_cancellation_ok": true,
+  "opposite_face_ok": true,
+  "promotion": false,
+  "quotient_descent_ok": true,
+  "quotient_symmetry_ok": true
+}

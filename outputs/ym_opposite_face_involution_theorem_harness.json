@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "axis_preserved": true,
+    "orientation_cancels": true,
+    "roundtrip_involution": true,
+    "weights_match": true
+  },
+  "depth": 3,
+  "max_axis_preservation_error": 0,
+  "max_orientation_cancel_error": 0.0,
+  "max_roundtrip_error": 0,
+  "max_weight_error": 0.0,
+  "promotion": false
+}

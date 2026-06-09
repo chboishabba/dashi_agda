@@ -1,0 +1,528 @@
+{
+  "agda_path": "DASHI/Physics/Closure/NSSprint120GeneralLinearStrainAntiCorrelation.agda",
+  "assigned_bools": {
+    "antiCorrelationTheoremRecorded": "true",
+    "blowupCriterionBridgeClosed": "false",
+    "clayNavierStokesPromoted": "false",
+    "correctedFluxFormulaRecorded": "true",
+    "globalLerayDataConstructed": "false",
+    "hyperbolicBackReactionBoundClosed": "false",
+    "hyperbolicTemplateRouteObstructed": "true",
+    "kStarCollapseFromCorrelationSourceClosed": "false",
+    "navierStokesClayAssemblyClosed": "false",
+    "nonlinearFeedbackEscapeHatchRecorded": "true",
+    "polarizationConstraintRecorded": "true",
+    "pressureCorrectionBoundClosed": "false",
+    "rotatingStrainEscapeHatchRecorded": "true",
+    "sprint119PersistentAlignmentImported": "true",
+    "sprint120GeneralLinearStrainAntiCorrelationLedgerClosed": "true",
+    "strainAmplificationFormulaRecorded": "true"
+  },
+  "blowup_criterion_bridge_closed": false,
+  "bool_checks": {
+    "antiCorrelationTheoremRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "blowupCriterionBridgeClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "clayNavierStokesPromoted": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "correctedFluxFormulaRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "globalLerayDataConstructed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "hyperbolicBackReactionBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "hyperbolicTemplateRouteObstructed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "kStarCollapseFromCorrelationSourceClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "navierStokesClayAssemblyClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "nonlinearFeedbackEscapeHatchRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "polarizationConstraintRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "pressureCorrectionBoundClosed": {
+      "actual": "false",
+      "expected": false,
+      "passed": true
+    },
+    "rotatingStrainEscapeHatchRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint119PersistentAlignmentImported": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "sprint120GeneralLinearStrainAntiCorrelationLedgerClosed": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    },
+    "strainAmplificationFormulaRecorded": {
+      "actual": "true",
+      "expected": true,
+      "passed": true
+    }
+  },
+  "clay_navier_stokes_promoted": false,
+  "complete": true,
+  "contract": "ns_sprint120_linear_strain_anticorrelation_audit",
+  "control_card": {
+    "C": "single deterministic Python audit emitting summary JSON, rows JSON, and Markdown",
+    "F": "missing target, anchors, required strings, exact booleans, or marker hits block audit passage",
+    "G": "Navier-Stokes Clay promotion remains false; the audit succeeds only for a coherent fail-closed receipt",
+    "L": "all required anchors, literals, exact booleans, keyword-consistency gates, and forbidden-marker checks must pass before coherence",
+    "O": "Worker 2 owns only scripts/ns_sprint120_linear_strain_anticorrelation_audit.py",
+    "P": "SPRINT120_GENERAL_LINEAR_STRAIN_ANTICORRELATION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+    "R": "verify the Sprint120 general linear-strain anti-correlation receipt closes only a fail-closed ledger: ledger true, theorem recorded true, hyperbolic route obstructed true, downstream and Clay gates false",
+    "S": "target Agda module is inspected when present; missing target blocks coherence but still emits outputs"
+  },
+  "corrected_flux_formula_recorded": true,
+  "downstream_flags_false": true,
+  "evidence_audit_passed": true,
+  "fail_closed": true,
+  "final_decision": "SPRINT120_GENERAL_LINEAR_STRAIN_ANTICORRELATION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "forbidden_hits": [],
+  "forbidden_marker_count": 0,
+  "gate_results": [
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint120GeneralLinearStrainAntiCorrelationLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "sprint119PersistentAlignmentImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "polarizationConstraintRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "correctedFluxFormulaRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "strainAmplificationFormulaRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "antiCorrelationTheoremRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "hyperbolicTemplateRouteObstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "rotatingStrainEscapeHatchRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "nonlinearFeedbackEscapeHatchRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "hyperbolicBackReactionBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "pressureCorrectionBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "globalLerayDataConstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "kStarCollapseFromCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint120GeneralLinearStrainAntiCorrelationLedgerClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:sprint119PersistentAlignmentImported",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:polarizationConstraintRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:correctedFluxFormulaRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:strainAmplificationFormulaRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:antiCorrelationTheoremRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:hyperbolicTemplateRouteObstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:rotatingStrainEscapeHatchRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "true",
+      "expected": "true",
+      "gate": "keyword_true:nonlinearFeedbackEscapeHatchRecorded",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:hyperbolicBackReactionBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:pressureCorrectionBoundClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:globalLerayDataConstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:kStarCollapseFromCorrelationSourceClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:blowupCriterionBridgeClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:navierStokesClayAssemblyClosed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "false",
+      "expected": "false",
+      "gate": "keyword_false:clayNavierStokesPromoted",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:Sprint120 imports DASHI.Physics.Closure.NSSprint119PersistentAlignmentExistence as Sprint119.",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:GeneralLinearStrainAntiCorrelation",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:linear divergence-free strain",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:polarization vector n is perpendicular to wavevector k",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:sign(Pi_HH_to_L) = - sign(strain amplification)",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:positive HH-to-low flux depletes the packet amplitude",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:pressure/polarization reverses the earlier hyperbolic sign",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:strain amplification is the linear packet amplitude growth rate",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:linear divergence-free strain with incompressible wavepacket polarization",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:constant linear strain route is obstructed",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:rotating strain and nonlinear feedback remain open",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:clayNavierStokesPromoted remains false",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "present",
+      "gate": "required_string:GeneralLinearStrainAntiCorrelation records sign(Pi_HH_to_L) = - sign(strain amplification).",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "present",
+      "expected": "DASHI/Physics/Closure/NSSprint120GeneralLinearStrainAntiCorrelation.agda",
+      "gate": "target_module",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "SPRINT120_GENERAL_LINEAR_STRAIN_ANTICORRELATION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+      "expected": "SPRINT120_GENERAL_LINEAR_STRAIN_ANTICORRELATION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+      "gate": "route",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "all present",
+      "expected": "all present",
+      "gate": "required_anchors",
+      "passed": true,
+      "status": "PASS"
+    },
+    {
+      "actual": "none",
+      "expected": "none",
+      "gate": "forbidden_markers",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "general_linear_strain_anticorrelation_theorem_recorded": true,
+  "global_leray_data_constructed": false,
+  "hyperbolic_back_reaction_bound_closed": false,
+  "hyperbolic_route_obstructed": true,
+  "keyword_false_flags_coherent": true,
+  "keyword_true_flags_coherent": true,
+  "kstar_collapse_from_correlation_source_closed": false,
+  "ledger_coherent_fail_closed": true,
+  "missing_anchors": [],
+  "missing_required_strings": [],
+  "navier_stokes_clay_assembly_closed": false,
+  "nonlinear_feedback_escape_hatch_recorded": true,
+  "polarization_constraint_recorded": true,
+  "pressure_correction_bound_closed": false,
+  "promotion_decision": "hold",
+  "promotion_hold": true,
+  "proof_claimed": false,
+  "required_anchors": [
+    "NSSprint120GeneralLinearStrainAntiCorrelation",
+    "canonicalNSSprint120GeneralLinearStrainAntiCorrelation",
+    "nsSprint120GeneralLinearStrainAntiCorrelationReceipt",
+    "ImportedSprint119PersistentAlignment",
+    "canonicalImportedSprint119PersistentAlignment",
+    "GeneralLinearStrainPolarizationConstraint",
+    "canonicalGeneralLinearStrainPolarizationConstraint",
+    "CorrectedPressurePolarizationFormula",
+    "canonicalCorrectedPressurePolarizationFormula",
+    "StrainAmplificationFormula",
+    "canonicalStrainAmplificationFormula",
+    "GeneralLinearStrainAntiCorrelationTheorem",
+    "canonicalGeneralLinearStrainAntiCorrelationTheorem",
+    "Sprint120RouteStatus",
+    "canonicalSprint120RouteStatus",
+    "Sprint120GateStatuses",
+    "canonicalSprint120GateStatuses",
+    "sprint120AllRequiredStatuses"
+  ],
+  "required_strings": [
+    "Sprint120 imports DASHI.Physics.Closure.NSSprint119PersistentAlignmentExistence as Sprint119.",
+    "GeneralLinearStrainAntiCorrelation",
+    "linear divergence-free strain",
+    "polarization vector n is perpendicular to wavevector k",
+    "sign(Pi_HH_to_L) = - sign(strain amplification)",
+    "positive HH-to-low flux depletes the packet amplitude",
+    "pressure/polarization reverses the earlier hyperbolic sign",
+    "strain amplification is the linear packet amplitude growth rate",
+    "linear divergence-free strain with incompressible wavepacket polarization",
+    "constant linear strain route is obstructed",
+    "rotating strain and nonlinear feedback remain open",
+    "clayNavierStokesPromoted remains false",
+    "GeneralLinearStrainAntiCorrelation records sign(Pi_HH_to_L) = - sign(strain amplification)."
+  ],
+  "required_true_flags": true,
+  "rotating_strain_escape_hatch_recorded": true,
+  "route_decision": "SPRINT120_GENERAL_LINEAR_STRAIN_ANTICORRELATION_LEDGER_CLOSED_FAIL_CLOSED_PROMOTION_HELD",
+  "sprint119_persistent_alignment_imported": true,
+  "sprint120_general_linear_strain_anticorrelation_ledger_closed": true,
+  "strain_amplification_formula_recorded": true,
+  "target_present": true
+}

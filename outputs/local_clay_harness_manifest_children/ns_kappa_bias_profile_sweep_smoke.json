@@ -1,0 +1,209 @@
+{
+  "harness": "ns_kappa_bias_profile_sweep",
+  "interpretation": "Finite profile sensitivity only: positive top-tail/LRT bias is easy to select, but the one-step stationarity proxy is the relevant falsification signal.  Type-I/self-similar kappa-bias remains open.",
+  "profile_count": 5,
+  "profiles": [
+    {
+      "accepted_samples": 900,
+      "baseline_all_mean_bias": -0.0009010355360992824,
+      "coverage_normals": 64,
+      "coverage_score": 0.9228598351152116,
+      "lrt_and_stationary_proxy_mean_bias": -0.03801409126812689,
+      "lrt_candidate_multiplier": 4.0,
+      "lrt_proxy_mean_bias": 0.2458877392533067,
+      "name": "tight_tail_low_coverage",
+      "neutral_baseline_drift_abs": 0.0009010355360992824,
+      "promotion": {
+        "clay": false,
+        "pde_gate_closed": false,
+        "reason": "finite proxy only; Type-I/self-similar kappa-bias bound remains open"
+      },
+      "samples": 900,
+      "seed": 20260608,
+      "selected_counts": {
+        "lrt_and_stationary_proxy": 18,
+        "lrt_proxy": 18,
+        "stationary_proxy": 18,
+        "unconstrained": 18
+      },
+      "stationarity_erases_unconstrained_bias": true,
+      "stationary_proxy_mean_bias": 0.012221232558901871,
+      "top_fraction": 0.02,
+      "unconstrained_mean_bias": 0.2460968373110781,
+      "worst_stationary_proxy_mean_bias": 0.012221232558901871
+    },
+    {
+      "accepted_samples": 900,
+      "baseline_all_mean_bias": -0.009674010423136776,
+      "coverage_normals": 96,
+      "coverage_score": 0.9795535358608801,
+      "lrt_and_stationary_proxy_mean_bias": 0.006759942397082298,
+      "lrt_candidate_multiplier": 8.0,
+      "lrt_proxy_mean_bias": 0.23742139841616866,
+      "name": "standard_tail",
+      "neutral_baseline_drift_abs": 0.009674010423136776,
+      "promotion": {
+        "clay": false,
+        "pde_gate_closed": false,
+        "reason": "finite proxy only; Type-I/self-similar kappa-bias bound remains open"
+      },
+      "samples": 900,
+      "seed": 20268527,
+      "selected_counts": {
+        "lrt_and_stationary_proxy": 45,
+        "lrt_proxy": 45,
+        "stationary_proxy": 45,
+        "unconstrained": 45
+      },
+      "stationarity_erases_unconstrained_bias": true,
+      "stationary_proxy_mean_bias": -0.029588005697134732,
+      "top_fraction": 0.05,
+      "unconstrained_mean_bias": 0.24043306893992297,
+      "worst_stationary_proxy_mean_bias": 0.006759942397082298
+    },
+    {
+      "accepted_samples": 900,
+      "baseline_all_mean_bias": 0.002138557885714336,
+      "coverage_normals": 96,
+      "coverage_score": 0.9871436035984247,
+      "lrt_and_stationary_proxy_mean_bias": -0.006252014474988529,
+      "lrt_candidate_multiplier": 6.0,
+      "lrt_proxy_mean_bias": 0.2271723013399069,
+      "name": "broad_tail",
+      "neutral_baseline_drift_abs": 0.002138557885714336,
+      "promotion": {
+        "clay": false,
+        "pde_gate_closed": false,
+        "reason": "finite proxy only; Type-I/self-similar kappa-bias bound remains open"
+      },
+      "samples": 900,
+      "seed": 20276446,
+      "selected_counts": {
+        "lrt_and_stationary_proxy": 90,
+        "lrt_proxy": 90,
+        "stationary_proxy": 90,
+        "unconstrained": 90
+      },
+      "stationarity_erases_unconstrained_bias": true,
+      "stationary_proxy_mean_bias": 0.003952070534295534,
+      "top_fraction": 0.1,
+      "unconstrained_mean_bias": 0.22858284538966403,
+      "worst_stationary_proxy_mean_bias": 0.003952070534295534
+    },
+    {
+      "accepted_samples": 900,
+      "baseline_all_mean_bias": -0.003269033164294536,
+      "coverage_normals": 160,
+      "coverage_score": 0.9743171372398096,
+      "lrt_and_stationary_proxy_mean_bias": -0.0592132656445762,
+      "lrt_candidate_multiplier": 10.0,
+      "lrt_proxy_mean_bias": 0.23857792561251306,
+      "name": "coverage_heavy",
+      "neutral_baseline_drift_abs": 0.003269033164294536,
+      "promotion": {
+        "clay": false,
+        "pde_gate_closed": false,
+        "reason": "finite proxy only; Type-I/self-similar kappa-bias bound remains open"
+      },
+      "samples": 900,
+      "seed": 20284365,
+      "selected_counts": {
+        "lrt_and_stationary_proxy": 45,
+        "lrt_proxy": 45,
+        "stationary_proxy": 45,
+        "unconstrained": 45
+      },
+      "stationarity_erases_unconstrained_bias": true,
+      "stationary_proxy_mean_bias": 0.019387884669228014,
+      "top_fraction": 0.05,
+      "unconstrained_mean_bias": 0.24078325022272004,
+      "worst_stationary_proxy_mean_bias": 0.019387884669228014
+    },
+    {
+      "accepted_samples": 900,
+      "baseline_all_mean_bias": -0.001288671083353989,
+      "coverage_normals": 96,
+      "coverage_score": 0.994436018092476,
+      "lrt_and_stationary_proxy_mean_bias": -0.03287860604116523,
+      "lrt_candidate_multiplier": 4.0,
+      "lrt_proxy_mean_bias": 0.20745475346102005,
+      "name": "very_broad_tail",
+      "neutral_baseline_drift_abs": 0.001288671083353989,
+      "promotion": {
+        "clay": false,
+        "pde_gate_closed": false,
+        "reason": "finite proxy only; Type-I/self-similar kappa-bias bound remains open"
+      },
+      "samples": 900,
+      "seed": 20292284,
+      "selected_counts": {
+        "lrt_and_stationary_proxy": 180,
+        "lrt_proxy": 180,
+        "stationary_proxy": 180,
+        "unconstrained": 180
+      },
+      "stationarity_erases_unconstrained_bias": true,
+      "stationary_proxy_mean_bias": -0.01864011736527145,
+      "top_fraction": 0.2,
+      "unconstrained_mean_bias": 0.2082506885206935,
+      "worst_stationary_proxy_mean_bias": -0.01864011736527145
+    }
+  ],
+  "promotion": {
+    "clay": false,
+    "pde_gate_closed": false,
+    "reason": "profile sweep wraps finite proxy harness only"
+  },
+  "quick": true,
+  "scope": "finite_s2_profile_sensitivity_not_pde_proof",
+  "seed": 20260608,
+  "summary": {
+    "baseline_drift_quantiles": {
+      "count": 5,
+      "max": 0.009674010423136776,
+      "mean": 0.003454261618519784,
+      "median": 0.002138557885714336,
+      "min": 0.0009010355360992824
+    },
+    "max_neutral_baseline_drift_abs": 0.009674010423136776,
+    "neutral_baseline_drift_alert": false,
+    "positive_stationary_profile_count": 4,
+    "stationary_proxy_quantiles": {
+      "count": 5,
+      "max": 0.019387884669228014,
+      "mean": 0.004736202558847253,
+      "median": 0.006759942397082298,
+      "min": -0.01864011736527145
+    },
+    "worst_positive_stationary_proxy": {
+      "accepted_samples": 900,
+      "baseline_all_mean_bias": -0.003269033164294536,
+      "coverage_normals": 160,
+      "coverage_score": 0.9743171372398096,
+      "lrt_and_stationary_proxy_mean_bias": -0.0592132656445762,
+      "lrt_candidate_multiplier": 10.0,
+      "lrt_proxy_mean_bias": 0.23857792561251306,
+      "name": "coverage_heavy",
+      "neutral_baseline_drift_abs": 0.003269033164294536,
+      "promotion": {
+        "clay": false,
+        "pde_gate_closed": false,
+        "reason": "finite proxy only; Type-I/self-similar kappa-bias bound remains open"
+      },
+      "samples": 900,
+      "seed": 20284365,
+      "selected_counts": {
+        "lrt_and_stationary_proxy": 45,
+        "lrt_proxy": 45,
+        "stationary_proxy": 45,
+        "unconstrained": 45
+      },
+      "stationarity_erases_unconstrained_bias": true,
+      "stationary_proxy_mean_bias": 0.019387884669228014,
+      "top_fraction": 0.05,
+      "unconstrained_mean_bias": 0.24078325022272004,
+      "worst_stationary_proxy_mean_bias": 0.019387884669228014
+    }
+  },
+  "wrapped_harness": "/home/c/Documents/code/dashi_agda/scripts/ns_kappa_bias_variational_harness.py"
+}

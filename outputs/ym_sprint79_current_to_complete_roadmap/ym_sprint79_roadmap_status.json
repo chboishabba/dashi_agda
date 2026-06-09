@@ -1,0 +1,40 @@
+{
+  "complete": false,
+  "complete_condition": "all residual rows spatial_support_only=true, blocked_lattice_polymer=true, kp_entropy_used=4",
+  "current_blocker": "Authority route has AnisotropicAssumptionA conditional on CMP98; typed support interface, spatial-only assembly bridge, and Sprint 82 residual-support core/provider layers are defined and Balaban provider instances are available as authority assumptions; authority-conditional path has eta=4/all-diameter KP/small-field survival/lattice mass gap/thermodynamic limit/OS axioms/Wightman reconstruction/continuum transfer/mass-gap survival and has a fail-closed Clay promotion boundary; provider constructors are implemented; sector-tagged action terms derive transfer/residual disjointness, strong Gate-B carriers assemble spatial support directly, and the direct strong Gate-B to KP path closes eta=4. The next blockers are downstream constructive-QFT gates",
+  "current_route_state": "STRONG_GATE_B_TO_KP_CLOSED_NEXT_BLOCKER_SMALL_FIELD_SURVIVAL",
+  "current_uv_authority_route_state": "ANISOTROPIC_ASSUMPTION_A_AUTHORITY_CONDITIONAL",
+  "current_uv_blocker": "Q_hp half-plane/spatial-only Balaban blocking lacks formal osc_e, Q_hp, CMP98 locality, and per-link influence-cone objects",
+  "current_uv_route_state": "ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED",
+  "next_required_lemma": "SmallFieldBoundsSurviveAnisotropicBlocking",
+  "next_required_lemma_authority_conditional": "DeriveProviderInstancesInRepo",
+  "next_required_lemmas": [
+    "SmallFieldBoundsSurviveAnisotropicBlocking",
+    "LatticeMassGapFromAnisotropicKP",
+    "ThermodynamicLimit",
+    "OsterwalderSchraderAxioms",
+    "OSWightmanReconstruction",
+    "ContinuumMassGapTransfer",
+    "MassGapSurvival"
+  ],
+  "next_required_lemmas_authority_conditional": [
+    "DeriveProviderInstancesInRepo"
+  ],
+  "next_required_uv_lemmas": [
+    "SpatialOnlyBlockingMapQhp",
+    "TemporalLinksExcludedFromBlocking",
+    "BalabanAveragingMapLipschitzCMP98",
+    "FormalOscillationSeminormForGaugeLinks",
+    "FormalQhpBlockingMapDefinition",
+    "BalabanCMP98AveragingLocalityImported",
+    "QhpPerLinkInfluenceConeLMinus2k",
+    "BalabanCMP98LocalOscillationBoundForQhp",
+    "LipschitzToSquaredOscillationForQhp",
+    "AnisotropicSquaredOscillationSummability",
+    "AnisotropicAssumptionA"
+  ],
+  "sprint": 79,
+  "target_route_state": "KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED",
+  "uv_complete": false,
+  "uv_complete_condition": "squared-oscillation summability bound proved for Q_hp over spatial links only"
+}

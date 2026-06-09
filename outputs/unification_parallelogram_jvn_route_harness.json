@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "bad_family_exclusion_retained": true,
+  "four_point_route_ok": true,
+  "jordan_von_neumann_socket_ok": true,
+  "parallelogram_socket_ok": true,
+  "promotion": false
+}

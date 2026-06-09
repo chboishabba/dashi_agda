@@ -1,0 +1,52 @@
+{
+  "contract": "YM hyperbolic/Shimura to Euclidean universality smoke",
+  "diagnostic_only": true,
+  "promotion": {
+    "terminal_promoted": false,
+    "universality_proved": false,
+    "ym_clay_promoted": false
+  },
+  "rows": [
+    {
+      "beta": 0.25,
+      "depth": 2,
+      "euclidean_gap_lower_bound": 0.4122222222222222,
+      "gamma_d": 0.44,
+      "p": 3,
+      "perturbation": 0.027777777777777776,
+      "positive": true
+    },
+    {
+      "beta": 0.25,
+      "depth": 3,
+      "euclidean_gap_lower_bound": 0.40074074074074073,
+      "gamma_d": 0.41,
+      "p": 3,
+      "perturbation": 0.009259259259259259,
+      "positive": true
+    },
+    {
+      "beta": 0.25,
+      "depth": 4,
+      "euclidean_gap_lower_bound": 0.3919135802469136,
+      "gamma_d": 0.395,
+      "p": 3,
+      "perturbation": 0.0030864197530864196,
+      "positive": true
+    },
+    {
+      "beta": 0.25,
+      "depth": 5,
+      "euclidean_gap_lower_bound": 0.38697119341563785,
+      "gamma_d": 0.388,
+      "p": 3,
+      "perturbation": 0.00102880658436214,
+      "positive": true
+    }
+  ],
+  "summary": {
+    "all_gap_rows_positive": true,
+    "formula": "gap(H_L^Eucl) >= gamma_d - C*beta*p^(-d)",
+    "min_euclidean_gap_lower_bound": 0.38697119341563785
+  }
+}

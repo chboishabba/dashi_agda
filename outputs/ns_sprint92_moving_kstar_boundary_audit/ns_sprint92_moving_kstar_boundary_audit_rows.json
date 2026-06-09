@@ -1,0 +1,103 @@
+{
+  "gates": [
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "exported": true,
+      "field_name": "fixedDangerTimeFrozenKBookkeepingClosed",
+      "gate_id": "G1",
+      "gate_name": "FixedDangerTimeFrozenKBookkeepingClosed",
+      "next_required_input": "fixed danger-time frozen-K bookkeeping is recorded as true",
+      "passed": true,
+      "status": "TRUE_BOOKKEEPING_RECORDED"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "movingInTimeKStarLocalizationBoundaryClosed",
+      "gate_id": "G2",
+      "gate_name": "MovingKStarBoundaryTheoremClosed",
+      "next_required_input": "prove K*(t) moving localization boundary",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "highHighDominanceClosed",
+      "gate_id": "G3",
+      "gate_name": "HighHighDominanceClosed",
+      "next_required_input": "supply explicit high-high/dominance theorem",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "dangerShellDissipationDominatesInfluxClosed",
+      "gate_id": "G4",
+      "gate_name": "DominanceGateClosed",
+      "next_required_input": "supply danger-shell dissipation dominance",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "pointwiseTailFromLocalDissipationClosed",
+      "gate_id": "G5",
+      "gate_name": "PointwiseTailClosed",
+      "next_required_input": "supply pointwise tail extraction",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "independentCoefficientBudgetClosed",
+      "gate_id": "G6",
+      "gate_name": "IndependentCoefficientClosed",
+      "next_required_input": "supply independent coefficient budget",
+      "passed": true,
+      "status": "FALSE_BOUNDARY_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "clayNavierStokesPromoted",
+      "gate_id": "G7",
+      "gate_name": "ClayNavierStokesPromoted",
+      "next_required_input": "keep Clay Navier-Stokes promotion false",
+      "passed": true,
+      "status": "FALSE_NO_CLAY_PROMOTION"
+    },
+    {
+      "actual_value": 0,
+      "expected_value": 0,
+      "exported": true,
+      "field_name": "forbidden_terms",
+      "gate_id": "G8",
+      "gate_name": "NoForbiddenStubOrHoleLanguage",
+      "next_required_input": "remove postulate/TODO/stub/placeholder/future proof/hole wording",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "sources": [
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint92MovingKStarLocalizationBoundary.agda",
+      "present_in_repo": true,
+      "required_anchors": "NSSprint92MovingKStarLocalizationBoundary; canonicalNSSprint92MovingKStarLocalizationBoundary; fixedDangerTimeFrozenKBookkeepingClosed; fixedDangerTimeFrozenKBookkeepingClosedIsTrue; movingInTimeKStarLocalizationBoundaryClosed; movingInTimeKStarLocalizationBoundaryClosedIsFalse; dangerShellDissipationDominatesInfluxClosed; dangerShellDissipationDominatesInfluxClosedIsFalse; pointwiseTailFromLocalDissipationClosed; pointwiseTailFromLocalDissipationClosedIsFalse; highHighDominanceClosed; highHighDominanceClosedIsFalse; independentCoefficientBudgetClosed; independentCoefficientBudgetClosedIsFalse; Sprint92FrozenKJustification; Sprint92MovingBoundary; canonicalSprint92OpenGates; canonicalSprint92Flags; clayNavierStokesPromoted; clayNavierStokesPromotedIsFalse",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "NSSprint92MovingKStarLocalizationBoundary"
+    }
+  ]
+}

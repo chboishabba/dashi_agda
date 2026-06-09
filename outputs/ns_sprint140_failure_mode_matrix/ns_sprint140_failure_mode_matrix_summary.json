@@ -1,0 +1,86 @@
+{
+  "after_sprint": 139,
+  "artifact_complete": true,
+  "assumptions": [
+    "GlobalConcavityOrKernelDominance",
+    "SecondaryPeakExclusion",
+    "TransportCommutatorDomination"
+  ],
+  "boundary_annular_kernel_sign_open": true,
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "commutator_log_loss_open": true,
+  "conditional_barrier_assembly_closed": false,
+  "constants_incompatible_open": true,
+  "contract": "ns_sprint140_failure_mode_matrix",
+  "control_card": {
+    "C": "Deterministic stdlib Python emitter with dataclass rows, stable SHA-256 hashes, JSON, CSV, Markdown, and fail-closed validation.",
+    "F": "Missing required failure rows, route-decision mismatch, monitored-route closure, global proof claim, full Clay NS claim, or Clay promotion fails validation.",
+    "G": "Validation succeeds only if route_decision is fail_closed_failure_modes_open, every failure row is open, and proof/promotion flags remain false.",
+    "L": "Sprint 139 route inventory -> Sprint 140 failure matrix -> open blocker rows -> no monitored-route closure -> no Clay promotion.",
+    "O": "Worker 4 owns only scripts/ns_sprint140_failure_mode_matrix.py and outputs/ns_sprint140_failure_mode_matrix/.",
+    "P": "Use the matrix as a guardrail for conditional assembly work, not as a regularity theorem.",
+    "R": "Inventory conditional-barrier failure modes: any one of the three assumptions false, incompatible constants, off-center crossing, boundary/annular kernel sign, commutator log loss, and absent monitored-route to full Clay translation.",
+    "S": "All requested failure modes are present and open; the conditional assembly, global proof, and Clay promotion remain closed only in the negative sense: no proof is emitted."
+  },
+  "decision": "fail_closed_failure_modes_open",
+  "exit_code": 0,
+  "fail_closed": true,
+  "failure_mode_count": 8,
+  "full_clay_ns_solved": false,
+  "global_barrier_closed": false,
+  "global_proof": false,
+  "global_proof_closed": false,
+  "global_proof_open": true,
+  "global_proof_proved": false,
+  "global_proof_proven": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "monitored_route_closed": false,
+  "monitored_route_to_full_clay_translation_absent": true,
+  "off_center_crossing_open": true,
+  "open_failure_modes": [
+    "assumption_false_global_concavity_or_kernel_dominance",
+    "assumption_false_secondary_peak_exclusion",
+    "assumption_false_transport_commutator_domination",
+    "constants_incompatible_across_assumptions",
+    "off_center_first_positive_crossing",
+    "boundary_or_annular_kernel_sign",
+    "commutator_biot_savart_log_loss",
+    "monitored_route_to_full_clay_translation_absent"
+  ],
+  "parent_route": "ConditionalRegularityAssembly",
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "route_decision": "fail_closed_failure_modes_open",
+  "row_count": 8,
+  "row_hashes": {
+    "assumption_false_global_concavity_or_kernel_dominance": "b8f86af623b8bdecc095eef1922a4f00ca744080fffe688ac9bc2754d6f3e979",
+    "assumption_false_secondary_peak_exclusion": "fb866b0049b9fc22de341dd434398875ef41deb1c2cc8c4bf76bcf14cd9c54d8",
+    "assumption_false_transport_commutator_domination": "bc884aa20bd276bcab28801093afb4015c4aedb6adc4bbc5dacbed91ebf0d4a6",
+    "boundary_or_annular_kernel_sign": "5328c747500a215815d4e4e97f98569b43b8c7ba9b1ad0687ab9682a2713966c",
+    "commutator_biot_savart_log_loss": "8839e2edccafede9de58f09c452c43e3bc24064600e82e5601da92b01ad063c9",
+    "constants_incompatible_across_assumptions": "b5e767541f85111b9693eca9d960c7d8371386a7a1955aff8e5826cdef14b7fb",
+    "monitored_route_to_full_clay_translation_absent": "7a5aeb76fc69042155312fc63373a322f1c42d9edf58d32447986325e6d2d8b3",
+    "off_center_first_positive_crossing": "ec9e2d445335f00bb4f443343aa5998ddd9e1adc1ef53214e81aa0329883d254"
+  },
+  "rows_hash": "668aa47750b9c63f6f295f1f5555a943afc78509974efe3b118ad99e6019846b",
+  "single_assumption_false_rows": [
+    "assumption_false_global_concavity_or_kernel_dominance",
+    "assumption_false_secondary_peak_exclusion",
+    "assumption_false_transport_commutator_domination"
+  ],
+  "source_artifacts": {
+    "commutator_sign_route": "outputs/ns_sprint139_commutator_sign_route/ns_sprint139_commutator_sign_route_summary.json",
+    "kernel_sign_sampler": "outputs/ns_sprint139_localized_kernel_sign_sampler/ns_sprint139_localized_kernel_sign_sampler_summary.json",
+    "route_fork_classifier": "outputs/ns_sprint139_barrier_route_fork_classifier/ns_sprint139_barrier_route_fork_classifier_summary.json"
+  },
+  "source_summary_hashes": {
+    "commutator_sign_route": "73c1eae285b50c095877ed41128083bb99eb7726b3c733415f212b6431f9b78c",
+    "kernel_sign_sampler": "5b277b26f0e237011ce2106ccdaaa3ea9b76eed7f1f26b3af0c11a857cf0da45",
+    "route_fork_classifier": "9bdb653546f25be25edc99c7e56c6e30b10259241cde594218a5925764828e14"
+  },
+  "sprint": 140,
+  "summary_payload_hash_without_self": "6d1aced97ce12e307e7d117b72a6affeb776f8e49d4069dda65576ab6cace2e6"
+}

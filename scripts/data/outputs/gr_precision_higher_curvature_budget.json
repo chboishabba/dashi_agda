@@ -1,0 +1,47 @@
+{
+  "carrier_coefficients_derived": false,
+  "gravity_prediction_promoted": false,
+  "model": "fractional_correction ~= |alpha| / L^2",
+  "rows": [
+    {
+      "alpha_bound_m2": 11131965270000.0,
+      "alpha_bound_over_scale2": 2.3e-05,
+      "bound": 2.3e-05,
+      "coefficient": "alpha1_R2_or_alpha2_Ricci2_proxy",
+      "name": "cassini_ppn_gamma_solar_limb",
+      "note": "Cassini-style solar-system PPN gamma benchmark; proxy bound only.",
+      "observable": "PPN gamma fractional deviation",
+      "promotion_status": "NO_PROMOTION",
+      "scale_m": 695700000.0,
+      "scale_name": "solar_radius",
+      "sqrt_alpha_bound_m": 3336459.990768659
+    },
+    {
+      "alpha_bound_m2": 40589.641,
+      "alpha_bound_over_scale2": 1e-09,
+      "bound": 1e-09,
+      "coefficient": "alpha1_R2_or_alpha2_Ricci2_proxy",
+      "name": "earth_surface_gravity_fractional",
+      "note": "Engineering target for better-than-baseline Earth gravity correction budget.",
+      "observable": "fractional Earth weak-field correction",
+      "promotion_status": "NO_PROMOTION",
+      "scale_m": 6371000.0,
+      "scale_name": "earth_radius",
+      "sqrt_alpha_bound_m": 201.46870972932746
+    },
+    {
+      "alpha_bound_m2": 1920.92368,
+      "alpha_bound_over_scale2": 1.3e-14,
+      "bound": 1.3e-14,
+      "coefficient": "nonminimal_matter_curvature_proxy",
+      "name": "microscope_wep_eta_proxy",
+      "note": "MICROSCOPE-style WEP benchmark treated as a separate matter-coupling proxy.",
+      "observable": "weak-equivalence-principle eta proxy",
+      "promotion_status": "NO_PROMOTION",
+      "scale_m": 384400000.0,
+      "scale_name": "earth_moon_distance",
+      "sqrt_alpha_bound_m": 43.82834334081087
+    }
+  ],
+  "status": "diagnostic_external_benchmark_budget_no_promotion"
+}

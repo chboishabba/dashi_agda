@@ -1,0 +1,136 @@
+{
+  "gates": [
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "exported": true,
+      "field_name": "localizedEnstrophyFluxIdentityClosed",
+      "gate_id": "G1",
+      "gate_name": "LocalizedEnstrophyFluxIdentityClosed",
+      "next_required_input": "localized enstrophy flux identity bookkeeping is closed",
+      "passed": true,
+      "status": "TRUE_BOOKKEEPING_RECORDED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "exported": true,
+      "field_name": "fullIdentityFixedK",
+      "gate_id": "G2",
+      "gate_name": "FullIdentityFixedK",
+      "next_required_input": "fixed-K identity import proof field is exported as true",
+      "passed": true,
+      "status": "TRUE_BOOKKEEPING_RECORDED"
+    },
+    {
+      "actual_value": true,
+      "expected_value": true,
+      "exported": true,
+      "field_name": "localizedFluxIdentityClosedHere",
+      "gate_id": "G3",
+      "gate_name": "LocalizedFluxIdentityClosedHere",
+      "next_required_input": "coefficient ledger records localized flux identity closure as true",
+      "passed": true,
+      "status": "TRUE_BOOKKEEPING_RECORDED"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "clayNavierStokesPromoted",
+      "gate_id": "G4",
+      "gate_name": "ClayNavierStokesPromoted",
+      "next_required_input": "keep Clay Navier-Stokes promotion false",
+      "passed": true,
+      "status": "FALSE_NO_PROMOTION"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "dangerShellDissipationDominatesInfluxClosed",
+      "gate_id": "G5",
+      "gate_name": "DominanceGateClosed",
+      "next_required_input": "keep dominance gate false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "pointwiseTailFromLocalDissipationClosed",
+      "gate_id": "G6",
+      "gate_name": "PointwiseTailFromLocalDissipationClosed",
+      "next_required_input": "keep pointwise extraction gate false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "not_exported_or_false",
+      "exported": false,
+      "field_name": "pointwiseH1TailWithIndependentEpsilonCoefficientClosed",
+      "gate_id": "G7",
+      "gate_name": "PointwiseH1TailWithIndependentEpsilonCoefficientClosed",
+      "next_required_input": "keep pointwise/independent coefficient gate false",
+      "passed": true,
+      "status": "NOT_EXPORTED"
+    },
+    {
+      "actual_value": false,
+      "expected_value": false,
+      "exported": true,
+      "field_name": "independentCoefficientBudgetClosed",
+      "gate_id": "G8",
+      "gate_name": "IndependentCoefficientBudgetClosed",
+      "next_required_input": "keep independent coefficient budget gate false",
+      "passed": true,
+      "status": "FALSE_ANALYTIC_GATE_OPEN"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "not_exported_or_false",
+      "exported": false,
+      "field_name": "independentEpsilonCoefficientClosed",
+      "gate_id": "G9",
+      "gate_name": "IndependentEpsilonCoefficientClosed",
+      "next_required_input": "keep independent epsilon coefficient gate false",
+      "passed": true,
+      "status": "NOT_EXPORTED"
+    },
+    {
+      "actual_value": false,
+      "expected_value": "not_exported_or_false",
+      "exported": false,
+      "field_name": "localizedFluxIdentityClosed",
+      "gate_id": "G10",
+      "gate_name": "LocalizedFluxIdentityAliasClosed",
+      "next_required_input": "keep unexported localized flux identity alias false if introduced",
+      "passed": true,
+      "status": "NOT_EXPORTED"
+    },
+    {
+      "actual_value": 0,
+      "expected_value": 0,
+      "exported": true,
+      "field_name": "forbidden_terms",
+      "gate_id": "G11",
+      "gate_name": "NoForbiddenStubOrHoleLanguage",
+      "next_required_input": "remove postulate/TODO/stub/placeholder/future proof/hole wording",
+      "passed": true,
+      "status": "PASS"
+    }
+  ],
+  "sources": [
+    {
+      "missing_anchors": "none",
+      "path": "DASHI/Physics/Closure/NSSprint91LocalizedFluxIdentityAndCoefficientBudget.agda",
+      "present_in_repo": true,
+      "required_anchors": "NSSprint91LocalizedFluxIdentityAndCoefficientBudget; canonicalNSSprint91LocalizedFluxIdentityAndCoefficientBudget; LocalizedFluxIdentityImportedFromFixedKLP; canonicalLocalizedFluxIdentityImportedFromFixedKLP; Sprint91ClosedBookkeeping; canonicalSprint91ClosedBookkeeping; fullFixedKLPIdentityImported; localizedFluxIdentityBookedAtFixedK; localizedEnstrophyFluxIdentityClosed; localizedEnstrophyFluxIdentityClosedIsTrue; dangerShellDissipationDominatesInfluxClosed; dangerShellDissipationDominatesInfluxClosedIsFalse; pointwiseTailFromLocalDissipationClosed; pointwiseTailFromLocalDissipationClosedIsFalse; independentCoefficientBudgetClosed; independentCoefficientBudgetClosedIsFalse; clayNavierStokesPromoted; clayNavierStokesPromotedIsFalse; canonicalSprint91Flags",
+      "source_id": "S1",
+      "status": "PASS",
+      "surface_name": "Sprint91LocalizedFluxIdentityAndCoefficientBudget"
+    }
+  ]
+}

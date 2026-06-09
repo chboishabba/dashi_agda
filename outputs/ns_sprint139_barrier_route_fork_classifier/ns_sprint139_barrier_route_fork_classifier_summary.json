@@ -1,0 +1,89 @@
+{
+  "after_sprint": 138,
+  "artifact_complete": true,
+  "axial_monotonicity_gate_closed": false,
+  "candidate_routes": [
+    "ConditionalRegularityAssembly",
+    "TransportCommutatorDomination",
+    "GlobalConcavityOfPsi1",
+    "SecondaryPeakExclusion",
+    "RouteAbandonFallback"
+  ],
+  "classifications": {
+    "ConditionalRegularityAssembly": "conditional_assembly_not_global_proof",
+    "GlobalConcavityOfPsi1": "open_primary_blocker",
+    "RouteAbandonFallback": "abandon_or_fallback_if_blockers_harden",
+    "SecondaryPeakExclusion": "open_shape_persistence_blocker",
+    "TransportCommutatorDomination": "open_budget_domination_route"
+  },
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "conditional_regularness_assembly_ranked_first": true,
+  "conditional_regularness_is_full_proof": false,
+  "contract": "ns_sprint139_barrier_route_fork_classifier",
+  "control_card": {
+    "C": "Deterministic stdlib Python emitter with dataclass rows, stable SHA-256 hashes, validation, JSON, CSV, and Markdown.",
+    "F": "Missing route rows, accidental global closure, full Clay NS claim, Clay promotion, or missing fallback fails validation.",
+    "G": "Validation passes only if every row keeps global_proof_open true and full Clay/Clay promotion/promotion_allowed false.",
+    "L": "Sprint 138 blockers -> ranked route forks -> conditional assembly surface -> fallback if blockers harden or conflict.",
+    "O": "Worker 2 owns only scripts/ns_sprint139_barrier_route_fork_classifier.py and outputs/ns_sprint139_barrier_route_fork_classifier/.",
+    "P": "Use this classifier to guide Sprint 139 route selection while explicitly keeping the global proof open.",
+    "R": "Rank/fork the post-Sprint 138 routes: GlobalConcavityOfPsi1, SecondaryPeakExclusion, TransportCommutatorDomination, conditional regularity assembly, and route-abandon/fallback.",
+    "S": "Conditional assembly is ranked first as the next artifact, transport commutator domination second as the next analytic fork, all global proof and Clay promotion flags remain false."
+  },
+  "decision": "fail_closed_ranked_forks",
+  "exit_code": 0,
+  "fallback_route_available": true,
+  "fallback_route_id": "RouteAbandonFallback",
+  "full_clay_ns_solved": false,
+  "global_barrier_closed": false,
+  "global_proof_open": true,
+  "global_proof_proved": false,
+  "global_proof_proven": false,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "open_routes": [
+    "GlobalConcavityOfPsi1",
+    "SecondaryPeakExclusion",
+    "TransportCommutatorDomination",
+    "ConditionalRegularityAssembly",
+    "RouteAbandonFallback"
+  ],
+  "parent_gate": "AxialMonotonicityOfSwirlProfile",
+  "program": "HouLuoAxisymmetricWithSwirlBarrierProgram",
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "ranked_route_ids": [
+    "ConditionalRegularityAssembly",
+    "TransportCommutatorDomination",
+    "GlobalConcavityOfPsi1",
+    "SecondaryPeakExclusion",
+    "RouteAbandonFallback"
+  ],
+  "recommended_next_action": "rank_first_for_next_deterministic_artifact",
+  "recommended_next_route": "ConditionalRegularityAssembly",
+  "route_count": 5,
+  "route_decision": "rank_routes_fail_closed",
+  "row_count": 5,
+  "row_hashes": {
+    "ConditionalRegularityAssembly": "e241150e11c7de11eead0f7d1572327591b95ab931ce22410edd1a8c7dc9be2d",
+    "GlobalConcavityOfPsi1": "24327fb7255d7f00f7c61783fb1c0a63b5164aa2d5090ade80d894d9595f74b2",
+    "RouteAbandonFallback": "0d70c2c20073f4166d5de81afe709ee4bf7f5753b3276360013989f59d8c296c",
+    "SecondaryPeakExclusion": "fd3cfc8be1486f124a09ea1fe20ec174022f3aa3dcfeb7eea00b170787fdc0ac",
+    "TransportCommutatorDomination": "781e4eb1d0a3e8194223acf09b1b5c6aa26b7b28acd89937cd98bdffad033f9f"
+  },
+  "rows_hash": "6bc117e0614d9965093ec4f037515c397c1a266da925d8006a62ee97935fde3b",
+  "second_priority_route": "TransportCommutatorDomination",
+  "source_artifacts": {
+    "global_concavity": "outputs/ns_sprint138_global_concavity_blocker/ns_sprint138_global_concavity_blocker_summary.json",
+    "secondary_peak": "outputs/ns_sprint138_secondary_peak_exclusion/ns_sprint138_secondary_peak_exclusion_summary.json",
+    "transport_commutator": "outputs/ns_sprint138_transport_commutator_budget/ns_sprint138_transport_commutator_budget_summary.json"
+  },
+  "source_summary_hashes": {
+    "global_concavity": "53c1ce698f08ddb7616562232587624de1fb1b6c5241439bb504c23a3067f230",
+    "secondary_peak": "6768c7bf5223a5099336116bfa3e77119cd63962731421e3419b730c00eba1b9",
+    "transport_commutator": "de558ab39204768885c8a4ce06835a8ead544d0b06395dce397d3075b1bb957c"
+  },
+  "sprint": 139,
+  "summary_payload_hash_without_self": "c198aa0d05df4a5275546f70b72fa2f3444abb18f127eb6ae96155f4a59d41c1"
+}

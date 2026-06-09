@@ -1,0 +1,42 @@
+{
+  "cases": [
+    {
+      "abel_average": 0.9795773786919455,
+      "abel_rho": 0.82,
+      "bounded_by_type_i_constant": true,
+      "shell_decay": 0.72,
+      "shell_mass_total": 5.964297340944384,
+      "type_i_constant": 1.8,
+      "window": 8
+    },
+    {
+      "abel_average": 1.1004687503758446,
+      "abel_rho": 0.79,
+      "bounded_by_type_i_constant": true,
+      "shell_decay": 0.68,
+      "shell_mass_total": 6.729667806114193,
+      "type_i_constant": 2.2,
+      "window": 10
+    },
+    {
+      "abel_average": 0.8744615030338057,
+      "abel_rho": 0.85,
+      "bounded_by_type_i_constant": true,
+      "shell_decay": 0.75,
+      "shell_mass_total": 5.1990966796875,
+      "type_i_constant": 1.5,
+      "window": 7
+    }
+  ],
+  "contract": "NS A1 Type-I/Lorentz to Abel mass route proxy",
+  "diagnostic_only": true,
+  "promotion": {
+    "a1_proved": false,
+    "ns_clay_promoted": false,
+    "terminal_promoted": false
+  },
+  "summary": {
+    "all_cases_bounded_by_type_i_constant": true,
+    "max_abel_average": 1.1004687503758446
+  }
+}

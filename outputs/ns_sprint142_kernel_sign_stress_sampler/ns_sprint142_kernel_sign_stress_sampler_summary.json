@@ -1,0 +1,92 @@
+{
+  "adverse_row_ids": [
+    "adverse_axial_offset_same_radius",
+    "adverse_annular_source_axial_offset",
+    "adverse_boundary_image_reflection",
+    "adverse_far_tail_axial_column"
+  ],
+  "angular_steps": 721,
+  "artifact_complete": true,
+  "blocker_id": "GlobalNegativeKernelSignForPartialZ2Psi1",
+  "blocker_open": true,
+  "clay_navier_stokes_promoted": false,
+  "conclusion": "no_uniform_global_negative_sign_theorem",
+  "constants_absent": true,
+  "contract": "ns_sprint142_kernel_sign_stress_sampler",
+  "control_card": {
+    "C": "Pure Python stdlib, deterministic S^3 Simpson quadrature, JSON summary, JSON rows, CSV, Markdown, fail-closed validation.",
+    "F": "Missing required rows/classes, absent favorable/adverse rows, any global proof claim, or any promotion fails closed.",
+    "G": "Validation requires has_favorable_rows=true, has_adverse_rows=true, global_concavity_proved=false, uniform theorem false, and no Clay promotion.",
+    "L": "5d radial Green kernel -> partial_z^2 derivative -> angular average -> radial measure weighting -> sign stress ledger.",
+    "O": "Sprint 142 lane 3 writes only scripts/ns_sprint142_kernel_sign_stress_sampler.py and outputs/ns_sprint142_kernel_sign_stress_sampler/.",
+    "P": "Conclude no uniform global negative sign theorem; retain only localized support evidence.",
+    "R": "Stress sample partial_z^2 psi1 kernel signs with favorable same-z rows plus axial, annular, boundary-image, and far-tail adverse rows.",
+    "S": "Local same-z radial rows are favorable, but adverse/nonlocal geometries keep the global sign theorem open."
+  },
+  "decision": "fail_closed_no_uniform_global_negative_sign_theorem",
+  "epsilon2": 1e-08,
+  "exit_code": 0,
+  "fail_closed": true,
+  "favorable_row_ids": [
+    "favorable_local_same_z_inner_radial_patch",
+    "favorable_local_same_z_outer_radial_patch"
+  ],
+  "full_clay_ns_solved": false,
+  "global_barrier_closed": false,
+  "global_concavity_closed": false,
+  "global_concavity_proof_scope": "not_proved_sampling_only",
+  "global_concavity_proved": false,
+  "global_concavity_proven": false,
+  "has_adverse_rows": true,
+  "has_favorable_rows": true,
+  "invariant_failures": [],
+  "invariants_passed": true,
+  "kernel_model": "5d_radial_green_partial_z2_axisymmetric_S3_average",
+  "lane": 3,
+  "negative_adverse_row_ids": [
+    "adverse_boundary_image_reflection"
+  ],
+  "obstruction_row_ids": [
+    "adverse_axial_offset_same_radius",
+    "adverse_annular_source_axial_offset",
+    "adverse_boundary_image_reflection",
+    "adverse_far_tail_axial_column"
+  ],
+  "parent_ledger": "ns_sprint139_localized_kernel_sign_sampler",
+  "positive_adverse_row_ids": [
+    "adverse_axial_offset_same_radius",
+    "adverse_annular_source_axial_offset",
+    "adverse_far_tail_axial_column"
+  ],
+  "promotion_allowed": false,
+  "promotion_decision": "hold_no_clay_promotion",
+  "required_adverse_classes": [
+    "adverse_annular_source",
+    "adverse_axial_offset",
+    "adverse_boundary_image",
+    "adverse_far_tail"
+  ],
+  "required_constants_available": false,
+  "required_row_ids": [
+    "adverse_annular_source_axial_offset",
+    "adverse_axial_offset_same_radius",
+    "adverse_boundary_image_reflection",
+    "adverse_far_tail_axial_column",
+    "favorable_local_same_z_inner_radial_patch",
+    "favorable_local_same_z_outer_radial_patch"
+  ],
+  "required_theorem": "GlobalSignedKernelDominanceWithSprint140CompatibleConstants",
+  "route_decision": "fail_closed_no_uniform_global_negative_sign_theorem",
+  "row_count": 6,
+  "sign_tolerance": 1e-09,
+  "simultaneous_theorem_absent": true,
+  "sprint": 142,
+  "uniform_global_negative_sign_theorem_proved": false,
+  "variables": {
+    "Ltilde": "partial_r^2 + (3/r) partial_r + partial_z^2",
+    "elliptic_relation": "-Ltilde psi1 = omega1",
+    "omega1": "omega^theta / r",
+    "psi1": "psi^theta / r",
+    "sampled_kernel": "partial_z^2 |(y,z)-(y_prime,z_prime)|^-3 averaged over S^3 angle"
+  }
+}
