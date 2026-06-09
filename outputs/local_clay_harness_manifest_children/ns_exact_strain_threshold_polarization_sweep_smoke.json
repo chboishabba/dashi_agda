@@ -14,7 +14,7 @@
         "frame_model": "exact-strain",
         "frame_source": "external:ns_exact_strain_eigenbundle.py"
       },
-      "elapsed_seconds": 0.06714026699773967,
+      "elapsed_seconds": 0.06918166601099074,
       "metrics": {
         "both_family_hits": 0,
         "depth2_continuation_hits": 96,
@@ -45,7 +45,7 @@
         "frame_model": "exact-strain",
         "frame_source": "external:ns_exact_strain_eigenbundle.py"
       },
-      "elapsed_seconds": 0.07041634700726718,
+      "elapsed_seconds": 0.0710095000686124,
       "metrics": {
         "both_family_hits": 0,
         "depth2_continuation_hits": 96,
@@ -150,7 +150,7 @@
     "cases_requested": 2,
     "current_family_i_ii_formulation_permissive": true,
     "diagnostic_conclusion": "current Family-I/II exact-strain formulation is permissive under at least one sweep case; strengthen propagated polarization/coherence",
-    "elapsed_seconds": 0.13769262295681983,
+    "elapsed_seconds": 0.14033848606050014,
     "mean_depth2_survival_fraction": 1.0,
     "mean_output_width": 0.052465619620051765,
     "mean_zero_hit_fraction": 1.0,

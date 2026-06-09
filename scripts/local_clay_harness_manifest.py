@@ -238,6 +238,12 @@ def build_specs() -> list[HarnessSpec]:
     ns_biot_savart_shell_localization_proxy_out = (
         CHILD_OUT_DIR / "ns_biot_savart_shell_localization_proxy_smoke.json"
     )
+    ns_lrt_fourier_output_coupling_proxy_out = (
+        CHILD_OUT_DIR / "ns_lrt_fourier_output_coupling_proxy_smoke.json"
+    )
+    ns_bony_paraproduct_a6_repair_proxy_out = (
+        CHILD_OUT_DIR / "ns_bony_paraproduct_a6_repair_proxy_smoke.json"
+    )
     ns_pointwise_to_abel_proxy_out = (
         CHILD_OUT_DIR / "ns_pointwise_to_abel_averaging_proxy_smoke.json"
     )
@@ -707,6 +713,50 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional A6.2 Biot-Savart shell-localization proxy for same-shell multiplier ownership and off-shell tail decay",
                 "diagnostic only; no Calderon-Zygmund shell-localization theorem, A6 theorem, or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_lrt_fourier_output_coupling_proxy",
+            path=script("ns_lrt_fourier_output_coupling_proxy_harness.py"),
+            args=(
+                "--frames",
+                "14",
+                "--sweeps",
+                "8",
+                "--json-output",
+                str(ns_lrt_fourier_output_coupling_proxy_out),
+                "--json",
+            ),
+            expected_json_path=ns_lrt_fourier_output_coupling_proxy_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_lrt_fourier_output_coupling_proxy_harness.py").exists()
+            else "NS LRT Fourier-output coupling proxy harness not found",
+            notes=(
+                "optional A4 LRT physical-to-Fourier output-support coupling proxy for Whitney/frame/localization components",
+                "diagnostic only; no LRT coupling theorem, output-support theorem, A6 theorem, or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_bony_paraproduct_a6_repair_proxy",
+            path=script("ns_bony_paraproduct_a6_repair_proxy_harness.py"),
+            args=(
+                "--levels",
+                "12",
+                "--sweeps",
+                "8",
+                "--json-output",
+                str(ns_bony_paraproduct_a6_repair_proxy_out),
+                "--json",
+            ),
+            expected_json_path=ns_bony_paraproduct_a6_repair_proxy_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_bony_paraproduct_a6_repair_proxy_harness.py").exists()
+            else "NS Bony paraproduct A6 repair proxy harness not found",
+            notes=(
+                "optional corrected A6.2 Bony paraproduct repair proxy separating naive O(1) off-shell failure from corrected routing",
+                "diagnostic only; no paraproduct theorem, A6 theorem, residual depletion, or Clay promotion",
             ),
         ),
         HarnessSpec(

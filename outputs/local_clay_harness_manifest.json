@@ -33,7 +33,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.109233,
+      "duration_seconds": 0.108484,
       "name": "ns_triadic_output_width_proxy",
       "notes": [
         "synthetic tangent-frame proxy; diagnostic only"
@@ -78,7 +78,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.06919,
+      "duration_seconds": 0.111246,
       "name": "ns_triadic_output_width_exact_if_present",
       "notes": [
         "runs only when exact local strain/eigenbundle provider exists"
@@ -127,7 +127,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.073336,
+      "duration_seconds": 0.077614,
       "name": "ns_propagated_polarization_coherence",
       "notes": [
         "repaired finite NS propagated-polarization coherence smoke"
@@ -158,7 +158,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_exact_leakage_coherence_audit_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.063916,
+      "duration_seconds": 0.060399,
       "name": "ns_exact_leakage_coherence_audit",
       "notes": [
         "exact finite Leray leakage/coherence split audit"
@@ -242,7 +242,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_exact_strain_threshold_polarization_sweep_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.203323,
+      "duration_seconds": 0.211322,
       "name": "ns_exact_strain_threshold_polarization_sweep",
       "notes": [
         "exact-strain threshold/polarization sweep smoke"
@@ -300,7 +300,7 @@
           "cases_requested": 2,
           "current_family_i_ii_formulation_permissive": true,
           "diagnostic_conclusion": "current Family-I/II exact-strain formulation is permissive under at least one sweep case; strengthen propagated polarization/coherence",
-          "elapsed_seconds": 0.13769262295681983,
+          "elapsed_seconds": 0.14033848606050014,
           "mean_depth2_survival_fraction": 1.0,
           "mean_output_width": 0.052465619620051765
         }
@@ -310,7 +310,7 @@
       "skip_reason": null,
       "skipped": false,
       "stderr_tail": "",
-      "stdout_tail": ",\n        \"depth2_survival_fraction\": 1.0,\n        \"estimated_output_width\": 0.052465619620051765,\n        \"family_i_hits\": 96,\n        \"family_ii_hits\": 0,\n        \"median_single_residual\": 1.7833762448388222e-16,\n        \"min_single_residual\": 0.0,\n        \"p95_single_residual\": 9.438198554942758e-16,\n        \"triads_accepted\": 96,\n        \"zero_hit_fraction\": 1.0,\n        \"zero_hits\": 96\n      },\n      \"status\": \"ok\"\n    },\n    {\n      \"case\": {\n        \"polarization\": \"seeded\",\n        \"samples\": 96,\n        \"seed\": 20260608,\n        \"tolerance\": 0.05\n      },\n      \"classification\": \"very_permissive_family_i_ii\",\n      \"degeneracy\": {\n        \"anti_parallel_rejects\": 0,\n        \"exact_degenerate_outputs\": 0,\n        \"frame_model\": \"exact-strain\",\n        \"frame_source\": \"external:ns_exact_strain_eigenbundle.py\"\n      },\n      \"elapsed_seconds\": 0.07041634700726718,\n      \"metrics\": {\n        \"both_family_hits\": 0,\n        \"depth2_continuation_hits\": 96,\n        \"depth2_survival_fraction\": 1.0,\n        \"estimated_output_width\": 0.052465619620051765,\n        \"family_i_hits\": 96,\n        \"family_ii_hits\": 0,\n        \"median_single_residual\": 2.1400564707311122e-16,\n        \"min_single_residual\": 0.0,\n        \"p95_single_residual\": 9.364040533824686e-16,\n        \"triads_accepted\": 96,\n        \"zero_hit_fraction\": 1.0,\n        \"zero_hits\": 96\n      },\n      \"status\": \"ok\"\n    }\n  ],\n  \"clay_promoted\": false,\n  \"family_i_ii_current_formulation_promoted\": false,\n  \"groups\": {\n    \"by_polarization\": {\n      \"canonical\": {\n        \"cases\": 1,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 1\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 1\n      },\n      \"seeded\": {\n        \"cases\": 1,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 1\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 1\n      }\n    },\n    \"by_samples\": {\n      \"96\": {\n        \"cases\": 2,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 2\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 2\n      }\n    },\n    \"by_tolerance\": {\n      \"0.05\": {\n        \"cases\": 2,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 2\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 2\n      }\n    }\n  },\n  \"parameters\": {\n    \"axis\": [\n      0.0,\n      0.0,\n      1.0\n    ],\n    \"bins\": 48,\n    \"child_script\": \"/home/c/Documents/code/dashi_agda/scripts/ns_triadic_output_width_harness.py\",\n    \"depth2_trials_per_hit\": 1,\n    \"normals\": 48,\n    \"polarizations\": [\n      \"canonical\",\n      \"seeded\"\n    ],\n    \"sample_counts\": [\n      96\n    ],\n    \"seeds\": [\n      20260608\n    ],\n    \"timeout_seconds\": 20.0,\n    \"tolerances\": [\n      0.05\n    ]\n  },\n  \"promotion\": false,\n  \"scope\": \"local_exact_strain_threshold_polarization_sweep_diagnostic_only\",\n  \"summary\": {\n    \"cases_failed\": 0,\n    \"cases_ok\": 2,\n    \"cases_requested\": 2,\n    \"current_family_i_ii_formulation_permissive\": true,\n    \"diagnostic_conclusion\": \"current Family-I/II exact-strain formulation is permissive under at least one sweep case; strengthen propagated polarization/coherence\",\n    \"elapsed_seconds\": 0.13769262295681983,\n    \"mean_depth2_survival_fraction\": 1.0,\n    \"mean_output_width\": 0.052465619620051765,\n    \"mean_zero_hit_fraction\": 1.0,\n    \"permissive_or_moderate_cases\": 2,\n    \"very_permissive_cases\": 2\n  }\n}\n"
+      "stdout_tail": "6,\n        \"depth2_survival_fraction\": 1.0,\n        \"estimated_output_width\": 0.052465619620051765,\n        \"family_i_hits\": 96,\n        \"family_ii_hits\": 0,\n        \"median_single_residual\": 1.7833762448388222e-16,\n        \"min_single_residual\": 0.0,\n        \"p95_single_residual\": 9.438198554942758e-16,\n        \"triads_accepted\": 96,\n        \"zero_hit_fraction\": 1.0,\n        \"zero_hits\": 96\n      },\n      \"status\": \"ok\"\n    },\n    {\n      \"case\": {\n        \"polarization\": \"seeded\",\n        \"samples\": 96,\n        \"seed\": 20260608,\n        \"tolerance\": 0.05\n      },\n      \"classification\": \"very_permissive_family_i_ii\",\n      \"degeneracy\": {\n        \"anti_parallel_rejects\": 0,\n        \"exact_degenerate_outputs\": 0,\n        \"frame_model\": \"exact-strain\",\n        \"frame_source\": \"external:ns_exact_strain_eigenbundle.py\"\n      },\n      \"elapsed_seconds\": 0.0710095000686124,\n      \"metrics\": {\n        \"both_family_hits\": 0,\n        \"depth2_continuation_hits\": 96,\n        \"depth2_survival_fraction\": 1.0,\n        \"estimated_output_width\": 0.052465619620051765,\n        \"family_i_hits\": 96,\n        \"family_ii_hits\": 0,\n        \"median_single_residual\": 2.1400564707311122e-16,\n        \"min_single_residual\": 0.0,\n        \"p95_single_residual\": 9.364040533824686e-16,\n        \"triads_accepted\": 96,\n        \"zero_hit_fraction\": 1.0,\n        \"zero_hits\": 96\n      },\n      \"status\": \"ok\"\n    }\n  ],\n  \"clay_promoted\": false,\n  \"family_i_ii_current_formulation_promoted\": false,\n  \"groups\": {\n    \"by_polarization\": {\n      \"canonical\": {\n        \"cases\": 1,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 1\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 1\n      },\n      \"seeded\": {\n        \"cases\": 1,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 1\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 1\n      }\n    },\n    \"by_samples\": {\n      \"96\": {\n        \"cases\": 2,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 2\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 2\n      }\n    },\n    \"by_tolerance\": {\n      \"0.05\": {\n        \"cases\": 2,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 2\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 2\n      }\n    }\n  },\n  \"parameters\": {\n    \"axis\": [\n      0.0,\n      0.0,\n      1.0\n    ],\n    \"bins\": 48,\n    \"child_script\": \"/home/c/Documents/code/dashi_agda/scripts/ns_triadic_output_width_harness.py\",\n    \"depth2_trials_per_hit\": 1,\n    \"normals\": 48,\n    \"polarizations\": [\n      \"canonical\",\n      \"seeded\"\n    ],\n    \"sample_counts\": [\n      96\n    ],\n    \"seeds\": [\n      20260608\n    ],\n    \"timeout_seconds\": 20.0,\n    \"tolerances\": [\n      0.05\n    ]\n  },\n  \"promotion\": false,\n  \"scope\": \"local_exact_strain_threshold_polarization_sweep_diagnostic_only\",\n  \"summary\": {\n    \"cases_failed\": 0,\n    \"cases_ok\": 2,\n    \"cases_requested\": 2,\n    \"current_family_i_ii_formulation_permissive\": true,\n    \"diagnostic_conclusion\": \"current Family-I/II exact-strain formulation is permissive under at least one sweep case; strengthen propagated polarization/coherence\",\n    \"elapsed_seconds\": 0.14033848606050014,\n    \"mean_depth2_survival_fraction\": 1.0,\n    \"mean_output_width\": 0.052465619620051765,\n    \"mean_zero_hit_fraction\": 1.0,\n    \"permissive_or_moderate_cases\": 2,\n    \"very_permissive_cases\": 2\n  }\n}\n"
     },
     {
       "command": [
@@ -336,7 +336,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_sign_antisymmetry_depth_sweep_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.081246,
+      "duration_seconds": 0.088241,
       "name": "ns_sign_antisymmetry_depth_sweep",
       "notes": [
         "exact sign antisymmetry plus depth-k propagated survivor smoke"
@@ -447,7 +447,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_propagated_coherence_jacobian_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.215226,
+      "duration_seconds": 0.287483,
       "name": "ns_propagated_coherence_jacobian",
       "notes": [
         "finite-difference propagated coherence Jacobian smoke"
@@ -568,7 +568,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.077183,
+      "duration_seconds": 0.066062,
       "name": "ns_signed_leakage_obstruction",
       "notes": [
         "classical skew-symmetry passes but triad-level leakage sign fails"
@@ -636,7 +636,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.088965,
+      "duration_seconds": 0.085874,
       "name": "ns_s2_cascade_width",
       "notes": [
         "S2 Biot-Savart/eigenbundle cascade-width smoke; stdout JSON captured"
@@ -690,7 +690,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_leray_rank_one_symbol_audit_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.23891,
+      "duration_seconds": 0.259885,
       "name": "ns_leray_rank_one_symbol_audit",
       "notes": [
         "finite rank-one Leray triadic classification audit"
@@ -719,7 +719,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.064179,
+      "duration_seconds": 0.069676,
       "name": "ns_kappa_arcsine_law",
       "notes": [
         "finite S2 kappa arcsine-law smoke; stdout JSON captured"
@@ -752,7 +752,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.059766,
+      "duration_seconds": 0.057697,
       "name": "ns_stretching_formula",
       "notes": [
         "finite S2 stretching identity smoke; stdout JSON captured"
@@ -788,7 +788,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.05339,
+      "duration_seconds": 0.053076,
       "name": "ns_strain_mean_square_formula",
       "notes": [
         "finite S2 mean-square strain formula smoke; stdout JSON captured"
@@ -822,7 +822,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.073823,
+      "duration_seconds": 0.076336,
       "name": "ns_kappa_bias_variational",
       "notes": [
         "finite kappa-bias variational proxy smoke; stdout JSON captured"
@@ -863,7 +863,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.07979,
+      "duration_seconds": 0.081341,
       "name": "ns_typeI_selfsimilar_kappa_bias",
       "notes": [
         "optional Gaussian/Type-I self-similar kappa-bias balance proxy smoke",
@@ -899,7 +899,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.085502,
+      "duration_seconds": 0.07985,
       "name": "ns_gaussian_selfsimilar_kappa_bias_balance",
       "notes": [
         "optional corrected Gaussian balance smoke for 1 <= 4*bias + drift",
@@ -979,7 +979,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.057532,
+      "duration_seconds": 0.05641,
       "name": "ns_transfer_operator_bias_neutrality",
       "notes": [
         "optional NS-F7 finite transfer-operator bias-neutrality smoke",
@@ -1016,7 +1016,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.062611,
+      "duration_seconds": 0.064872,
       "name": "ns_abel_triadic_stationarity_proxy",
       "notes": [
         "optional Abel triadic stationarity proxy smoke",
@@ -1048,7 +1048,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.050893,
+      "duration_seconds": 0.050229,
       "name": "ns_stationarity_rate_proxy",
       "notes": [
         "optional stationarity-rate proxy smoke with log(1/r)^(-1/2) theta and bad nondecaying control",
@@ -1087,7 +1087,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.056687,
+      "duration_seconds": 0.053374,
       "name": "ns_bounded_abel_mass_proxy",
       "notes": [
         "optional A1 bounded Abel/log-window mass proxy smoke with deliberate bad profile",
@@ -1144,7 +1144,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.36349,
+      "duration_seconds": 0.357807,
       "name": "ns_biot_savart_shell_localization_proxy",
       "notes": [
         "optional A6.2 Biot-Savart shell-localization proxy for same-shell multiplier ownership and off-shell tail decay",
@@ -1400,6 +1400,429 @@
     {
       "command": [
         "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_lrt_fourier_output_coupling_proxy_harness.py",
+        "--frames",
+        "14",
+        "--sweeps",
+        "8",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_lrt_fourier_output_coupling_proxy_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.072431,
+      "name": "ns_lrt_fourier_output_coupling_proxy",
+      "notes": [
+        "optional A4 LRT physical-to-Fourier output-support coupling proxy for Whitney/frame/localization components",
+        "diagnostic only; no LRT coupling theorem, output-support theorem, A6 theorem, or Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_lrt_fourier_output_coupling_proxy_smoke.json",
+      "parsed_json_summary": {
+        "control": {
+          "C": "scripts/ns_lrt_fourier_output_coupling_proxy_harness.py",
+          "F": "Still missing the real Whitney/isotropy estimate linking physical vorticity richness to Fourier triadic output support.",
+          "G": "promotion=false always; diagnostics cannot certify NS A4 or Clay progress.",
+          "L": "sweep regimes -> frame rows -> component margins -> good/bad separation -> fail-closed JSON.",
+          "O": "Worker B NS A4 LRT physical-to-Fourier output coupling proxy lane.",
+          "P": "Good profiles pass all component floors; bad profiles expose exactly the requested obstruction families.",
+          "R": "Separate physical angular richness from Fourier output richness and Whitney/frame transfer.",
+          "S": "Synthetic great-circle-frame table only; no LRT coupling theorem is established."
+        },
+        "diagnostic_only": true,
+        "harness": "ns_lrt_fourier_output_coupling_proxy",
+        "interpretation": {
+          "rejects": "Physical richness alone is insufficient: the collapsed-output, missing-Whitney, frame-incoherent, and nonstationary profiles all fail.",
+          "residual_gap": "A real A4 proof still needs a localized Whitney/isotropy coupling estimate between physical-space vorticity directions and Fourier triadic output directions.",
+          "supports": "Synthetic A4 profiles can distinguish physical LRT angular richness from actual Fourier output spread and Whitney/frame transfer compatibility."
+        },
+        "ok": true,
+        "parameters": {
+          "coherence_floor": 0.58,
+          "collapse_ceiling": 0.34,
+          "frames": 14,
+          "overlap_floor": 0.55,
+          "richness_floor": 0.62,
+          "spread_floor": 0.56,
+          "stationarity_floor": 0.57,
+          "sweeps": 8
+        },
+        "promotion": false,
+        "regimes": [
+          {
+            "angular_resolution": 0.05088039946704745,
+            "localization_radius": 0.12375310646325043,
+            "name": "sweep_00",
+            "stable_range": true,
+            "stationarity_tolerance": 0.033,
+            "sweep": 0,
+            "whitney_thickness": 0.09195004165278026
+          },
+          {
+            "angular_resolution": 0.048868959283440004,
+            "localization_radius": 0.1274740448762794,
+            "name": "sweep_01",
+            "stable_range": true,
+            "stationarity_tolerance": 0.03371428571428572,
+            "sweep": 1,
+            "whitney_thickness": 0.09108965749674885
+          },
+          {
+            "angular_resolution": 0.0451847487544948,
+            "localization_radius": 0.12962458120141918,
+            "name": "sweep_02",
+            "stable_range": true,
+            "stationarity_tolerance": 0.03442857142857143,
+            "sweep": 2,
+            "whitney_thickness": 0.08773519986072457
+          },
+          {
+            "angular_resolution": 0.04142066086959503,
+            "localization_radius": 0.1298482460764086,
+            "name": "sweep_03",
+            "stable_range": true,
+            "stationarity_tolerance": 0.03514285714285714,
+            "sweep": 3,
+            "whitney_thickness": 0.08280708448454802
+          },
+          {
+            "angular_resolution": 0.03920412412561215,
+            "localization_radius": 0.12810796517963974,
+            "name": "sweep_04",
+            "stable_range": true,
+            "stationarity_tolerance": 0.03585714285714286,
+            "sweep": 4,
+            "whitney_thickness": 0.077657516538817
+          },
+          {
+            "angular_resolution": 0.039493472964202345,
+            "localization_radius": 0.124692204608697,
+            "name": "sweep_05",
+            "stable_range": true,
+            "stationarity_tolerance": 0.036571428571428574,
+            "sweep": 5,
+            "whitney_thickness": 0.07369946464764777
+          },
+          {
+            "angular_resolution": 0.042163605485554145,
+            "localization_radius": 0.12016715521473079,
+            "name": "sweep_06",
+            "stable_range": true,
+            "stationarity_tolerance": 0.03728571428571429,
+            "sweep": 6,
+            "whitney_thickness": 0.07201896227904855
+          },
+          {
+            "angular_resolution": 0.04606007208898115,
+            "localization_radius": 0.1152828817387134,
+            "name": "sweep_07",
+            "stable_range": true,
+            "stationarity_tolerance": 0.038,
+            "sweep": 7,
+            "whitney_thickness": 0.07307711551892931
+          }
+        ],
+        "rows_count": 784,
+        "rows_head": [
+          {
+            "collapse": 0.180748,
+            "failures": [],
+            "frame": 0,
+            "frame_coherence": 0.761867,
+            "lrt": 0.730427,
+            "margin": 0.110427,
+            "passed": true,
+            "profile": "good_balanced_lrt_fourier_coupling"
+          },
+          {
+            "collapse": 0.223573,
+            "failures": [],
+            "frame": 1,
+            "frame_coherence": 0.765154,
+            "lrt": 0.741667,
+            "margin": 0.116427,
+            "passed": true,
+            "profile": "good_balanced_lrt_fourier_coupling"
+          },
+          {
+            "collapse": 0.230577,
+            "failures": [],
+            "frame": 2,
+            "frame_coherence": 0.759777,
+            "lrt": 0.746607,
+            "margin": 0.109423,
+            "passed": true,
+            "profile": "good_balanced_lrt_fourier_coupling"
+          },
+          {
+            "collapse": 0.19473,
+            "failures": [],
+            "frame": 3,
+            "frame_coherence": 0.748334,
+            "lrt": 0.742859,
+            "margin": 0.10431,
+            "passed": true,
+            "profile": "good_balanced_lrt_fourier_coupling"
+          },
+          {
+            "collapse": 0.204315,
+            "failures": [],
+            "frame": 4,
+            "frame_coherence": 0.736355,
+            "lrt": 0.732234,
+            "margin": 0.105218,
+            "passed": true,
+            "profile": "good_balanced_lrt_fourier_coupling"
+          },
+          {
+            "collapse": 0.254701,
+            "failures": [],
+            "frame": 5,
+            "frame_coherence": 0.72963,
+            "lrt": 0.719868,
+            "margin": 0.085299,
+            "passed": true,
+            "profile": "good_balanced_lrt_fourier_coupling"
+          },
+          {
+            "collapse": 0.250576,
+            "failures": [],
+            "frame": 6,
+            "frame_coherence": 0.731409,
+            "lrt": 0.711736,
+            "margin": 0.081228,
+            "passed": true,
+            "profile": "good_balanced_lrt_fourier_coupling"
+          },
+          {
+            "collapse": 0.197582,
+            "failures": [],
+            "frame": 7,
+            "frame_coherence": 0.740831,
+            "lrt": 0.711769,
+            "margin": 0.066657,
+            "passed": true,
+            "profile": "good_balanced_lrt_fourier_coupling"
+          }
+        ],
+        "summary": {
+          "ok": true
+        }
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": "    \"frame\": 6,\n      \"frame_coherence\": 0.74217,\n      \"lrt\": 0.746587,\n      \"margin\": -0.389669,\n      \"passed\": false,\n      \"profile\": \"bad_nonstationary_window\",\n      \"regime\": \"sweep_07\",\n      \"spread\": 0.702615,\n      \"stationarity\": 0.180331,\n      \"whitney\": 0.649816\n    },\n    {\n      \"collapse\": 0.212064,\n      \"failures\": [\n        \"stationarity_window_below_floor\"\n      ],\n      \"frame\": 7,\n      \"frame_coherence\": 0.733909,\n      \"lrt\": 0.748197,\n      \"margin\": -0.357658,\n      \"passed\": false,\n      \"profile\": \"bad_nonstationary_window\",\n      \"regime\": \"sweep_07\",\n      \"spread\": 0.682531,\n      \"stationarity\": 0.212342,\n      \"whitney\": 0.660531\n    },\n    {\n      \"collapse\": 0.272116,\n      \"failures\": [\n        \"stationarity_window_below_floor\"\n      ],\n      \"frame\": 8,\n      \"frame_coherence\": 0.721518,\n      \"lrt\": 0.741329,\n      \"margin\": -0.318814,\n      \"passed\": false,\n      \"profile\": \"bad_nonstationary_window\",\n      \"regime\": \"sweep_07\",\n      \"spread\": 0.678963,\n      \"stationarity\": 0.251186,\n      \"whitney\": 0.634422\n    },\n    {\n      \"collapse\": 0.297051,\n      \"failures\": [\n        \"stationarity_window_below_floor\"\n      ],\n      \"frame\": 9,\n      \"frame_coherence\": 0.710985,\n      \"lrt\": 0.729302,\n      \"margin\": -0.284304,\n      \"passed\": false,\n      \"profile\": \"bad_nonstationary_window\",\n      \"regime\": \"sweep_07\",\n      \"spread\": 0.695893,\n      \"stationarity\": 0.285696,\n      \"whitney\": 0.621308\n    },\n    {\n      \"collapse\": 0.271174,\n      \"failures\": [\n        \"stationarity_window_below_floor\"\n      ],\n      \"frame\": 10,\n      \"frame_coherence\": 0.7074,\n      \"lrt\": 0.717929,\n      \"margin\": -0.264131,\n      \"passed\": false,\n      \"profile\": \"bad_nonstationary_window\",\n      \"regime\": \"sweep_07\",\n      \"spread\": 0.731472,\n      \"stationarity\": 0.305869,\n      \"whitney\": 0.622566\n    },\n    {\n      \"collapse\": 0.277949,\n      \"failures\": [\n        \"stationarity_window_below_floor\"\n      ],\n      \"frame\": 11,\n      \"frame_coherence\": 0.712495,\n      \"lrt\": 0.712706,\n      \"margin\": -0.263622,\n      \"passed\": false,\n      \"profile\": \"bad_nonstationary_window\",\n      \"regime\": \"sweep_07\",\n      \"spread\": 0.777654,\n      \"stationarity\": 0.306378,\n      \"whitney\": 0.634833\n    },\n    {\n      \"collapse\": 0.314103,\n      \"failures\": [\n        \"stationarity_window_below_floor\"\n      ],\n      \"frame\": 12,\n      \"frame_coherence\": 0.723809,\n      \"lrt\": 0.716157,\n      \"margin\": -0.281728,\n      \"passed\": false,\n      \"profile\": \"bad_nonstationary_window\",\n      \"regime\": \"sweep_07\",\n      \"spread\": 0.822275,\n      \"stationarity\": 0.288272,\n      \"whitney\": 0.652181\n    },\n    {\n      \"collapse\": 0.291203,\n      \"failures\": [\n        \"stationarity_window_below_floor\"\n      ],\n      \"frame\": 13,\n      \"frame_coherence\": 0.735874,\n      \"lrt\": 0.726615,\n      \"margin\": -0.311789,\n      \"passed\": false,\n      \"profile\": \"bad_nonstationary_window\",\n      \"regime\": \"sweep_07\",\n      \"spread\": 0.852919,\n      \"stationarity\": 0.258211,\n      \"whitney\": 0.66898\n    }\n  ],\n  \"script\": \"scripts/ns_lrt_fourier_output_coupling_proxy_harness.py\",\n  \"summary\": {\n    \"bad_profile_count\": 4,\n    \"bad_rows_passing\": 0,\n    \"good_profile_count\": 3,\n    \"good_rows_passing\": 336,\n    \"max_bad_collapse_penalty\": 0.7185120776372752,\n    \"max_bad_coupling_margin\": -0.2726215970078523,\n    \"min_good_coupling_margin\": 0.013594993911110187,\n    \"min_good_fourier_spread\": 0.6915625091201852,\n    \"ok\": true,\n    \"profile_count\": 7,\n    \"row_count\": 784,\n    \"stable_sweep_count\": 8\n  },\n  \"validation_flags\": {\n    \"bad_profiles_fail_all_rows\": true,\n    \"diagnostic_only\": true,\n    \"expected_profile_outcomes_observed\": true,\n    \"frame_incoherence_blocker_visible\": true,\n    \"good_profiles_pass_all_rows\": true,\n    \"nonstationary_blocker_visible\": true,\n    \"physical_rich_fourier_collapse_visible\": true,\n    \"promotion_false\": true,\n    \"stable_regimes_present\": true,\n    \"whitney_overlap_blocker_visible\": true\n  }\n}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_bony_paraproduct_a6_repair_proxy_harness.py",
+        "--levels",
+        "12",
+        "--sweeps",
+        "8",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_bony_paraproduct_a6_repair_proxy_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.069612,
+      "name": "ns_bony_paraproduct_a6_repair_proxy",
+      "notes": [
+        "optional corrected A6.2 Bony paraproduct repair proxy separating naive O(1) off-shell failure from corrected routing",
+        "diagnostic only; no paraproduct theorem, A6 theorem, residual depletion, or Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_bony_paraproduct_a6_repair_proxy_smoke.json",
+      "parsed_json_summary": {
+        "aggregate": {
+          "bad_row_count": 160,
+          "bad_rows_failed": 160,
+          "classification_accuracy": 1.0,
+          "good_row_count": 120,
+          "good_rows_passed": 120,
+          "max_good_aggregate_error": 0.03823541320131002,
+          "max_good_high_frequency_tail_error": 0.014335638073716668,
+          "max_good_paraproduct_exactness_error": 0.0
+        },
+        "diagnostic_only": true,
+        "ok": true,
+        "parameters": {
+          "exactness_tolerance": 1e-12,
+          "levels": 12,
+          "max_resonant_count": 5,
+          "sweeps": 8
+        },
+        "promotion": false,
+        "regimes": [
+          {
+            "aggregate_constant": 0.4424958354161707,
+            "corrected_tolerance": 0.049920266311364966,
+            "high_tail_gain": 0.9099999999999999,
+            "naive_tail_floor": 0.2503193637199041,
+            "name": "sweep_00",
+            "stable_range": true,
+            "sweep": 0
+          },
+          {
+            "aggregate_constant": 0.45629584427553843,
+            "corrected_tolerance": 0.04898069760937948,
+            "high_tail_gain": 0.9025408740534944,
+            "naive_tail_floor": 0.25753043429529243,
+            "name": "sweep_01",
+            "stable_range": true,
+            "sweep": 1
+          },
+          {
+            "aggregate_constant": 0.4642178775029566,
+            "corrected_tolerance": 0.04722326763351316,
+            "high_tail_gain": 0.8813999086558851,
+            "naive_tail_floor": 0.2620241119900917,
+            "name": "sweep_02",
+            "stable_range": true,
+            "sweep": 2
+          },
+          {
+            "aggregate_constant": 0.4634044263079077,
+            "corrected_tolerance": 0.04513019031727454,
+            "high_tail_gain": 0.8500813954412052,
+            "naive_tail_floor": 0.26282588247481087,
+            "name": "sweep_03",
+            "stable_range": true,
+            "sweep": 3
+          },
+          {
+            "aggregate_constant": 0.4541489057612176,
+            "corrected_tolerance": 0.04327577647797139,
+            "high_tail_gain": 0.8137766396211343,
+            "naive_tail_floor": 0.25976187105718473,
+            "name": "sweep_04",
+            "stable_range": true,
+            "sweep": 4
+          },
+          {
+            "aggregate_constant": 0.4397898188158213,
+            "corrected_tolerance": 0.04216885104978764,
+            "high_tail_gain": 0.7785034577760959,
+            "naive_tail_floor": 0.2534965497432179,
+            "name": "sweep_05",
+            "stable_range": true,
+            "sweep": 5
+          },
+          {
+            "aggregate_constant": 0.4255065450567814,
+            "corrected_tolerance": 0.04211313871715175,
+            "high_tail_gain": 0.7501086744820036,
+            "naive_tail_floor": 0.24538863756306972,
+            "name": "sweep_06",
+            "stable_range": true,
+            "sweep": 6
+          },
+          {
+            "aggregate_constant": 0.416451117952295,
+            "corrected_tolerance": 0.04312392615630928,
+            "high_tail_gain": 0.7332989622902881,
+            "naive_tail_floor": 0.23719644411045107,
+            "name": "sweep_07",
+            "stable_range": true,
+            "sweep": 7
+          }
+        ],
+        "rows_count": 280,
+        "rows_head": [
+          {
+            "aggregate_bound": 0.049166203935130076,
+            "aggregate_error": 0.03697153480104319,
+            "effective_n": 9,
+            "expected_pass": true,
+            "failure_reasons": [],
+            "family": "good_bony_repair",
+            "high_frequency_tail_error": 0.014335638073716668,
+            "level": 8
+          },
+          {
+            "aggregate_bound": 0.04424958354161707,
+            "aggregate_error": 0.03264653216959951,
+            "effective_n": 10,
+            "expected_pass": true,
+            "failure_reasons": [],
+            "family": "good_bony_repair",
+            "high_frequency_tail_error": 0.012611605193338857,
+            "level": 9
+          },
+          {
+            "aggregate_bound": 0.04022689412874279,
+            "aggregate_error": 0.02924904162553177,
+            "effective_n": 11,
+            "expected_pass": true,
+            "failure_reasons": [],
+            "family": "good_bony_repair",
+            "high_frequency_tail_error": 0.011276214661974744,
+            "level": 10
+          },
+          {
+            "aggregate_bound": 0.03687465295134756,
+            "aggregate_error": 0.026498713196223506,
+            "effective_n": 12,
+            "expected_pass": true,
+            "failure_reasons": [],
+            "family": "good_bony_repair",
+            "high_frequency_tail_error": 0.010216558003794585,
+            "level": 11
+          },
+          {
+            "aggregate_bound": 0.03403814118585929,
+            "aggregate_error": 0.024202917685747186,
+            "effective_n": 13,
+            "expected_pass": true,
+            "failure_reasons": [],
+            "family": "good_bony_repair",
+            "high_frequency_tail_error": 0.009351403672181607,
+            "level": 12
+          },
+          {
+            "aggregate_bound": 0.049166203935130076,
+            "aggregate_error": 0.03630058197523899,
+            "effective_n": 9,
+            "expected_pass": true,
+            "failure_reasons": [],
+            "family": "good_bony_repair",
+            "high_frequency_tail_error": 0.01077371546918144,
+            "level": 8
+          },
+          {
+            "aggregate_bound": 0.04424958354161707,
+            "aggregate_error": 0.0321518329760485,
+            "effective_n": 10,
+            "expected_pass": true,
+            "failure_reasons": [],
+            "family": "good_bony_repair",
+            "high_frequency_tail_error": 0.00934911208906593,
+            "level": 9
+          },
+          {
+            "aggregate_bound": 0.04022689412874279,
+            "aggregate_error": 0.028885370928708298,
+            "effective_n": 11,
+            "expected_pass": true,
+            "failure_reasons": [],
+            "family": "good_bony_repair",
+            "high_frequency_tail_error": 0.008256239559037428,
+            "level": 10
+          }
+        ]
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": "{\n  \"aggregate\": {\n    \"bad_row_count\": 160,\n    \"bad_rows_failed\": 160,\n    \"classification_accuracy\": 1.0,\n    \"good_row_count\": 120,\n    \"good_rows_passed\": 120,\n    \"max_good_aggregate_error\": 0.03823541320131002,\n    \"max_good_high_frequency_tail_error\": 0.014335638073716668,\n    \"max_good_paraproduct_exactness_error\": 0.0,\n    \"max_good_resonant_shell_count\": 5,\n    \"min_bad_aggregate_error\": 0.021619647875812876,\n    \"min_good_aggregate_bound\": 0.03203470138094577,\n    \"min_naive_same_shell_offshell_error\": 0.24327802543335728,\n    \"row_count\": 280\n  },\n  \"diagnostic_only\": true,\n  \"ok\": true,\n  \"output\": \"/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_bony_paraproduct_a6_repair_proxy_smoke.json\",\n  \"promotion\": false,\n  \"validation_flags\": {\n    \"aggregate_o1_over_n_for_good_profiles\": true,\n    \"all_bad_profiles_fail\": true,\n    \"all_good_profiles_pass\": true,\n    \"bad_high_tail_profile_present\": true,\n    \"bad_naive_unrepaired_profile_present\": true,\n    \"bad_paraproduct_profile_present\": true,\n    \"bad_resonant_profile_present\": true,\n    \"bony_paraproduct_exact_for_good_profiles\": true,\n    \"classification_matches_expectation\": true,\n    \"deterministic\": true,\n    \"diagnostic_only\": true,\n    \"high_frequency_decay_for_good_profiles\": true,\n    \"naive_same_shell_tail_o1_visible\": true,\n    \"promotion_blocked\": true,\n    \"resonant_count_finite_for_good_profiles\": true,\n    \"stdlib_only\": true\n  }\n}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
         "/home/c/Documents/code/dashi_agda/scripts/ns_pointwise_to_abel_averaging_proxy_harness.py",
         "--shells",
         "18",
@@ -1420,7 +1843,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.060612,
+      "duration_seconds": 0.059738,
       "name": "ns_pointwise_to_abel_averaging_proxy",
       "notes": [
         "optional A6 pointwise-to-Abel averaging proxy smoke with deliberate correlated bad profile",
@@ -1478,7 +1901,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.05501,
+      "duration_seconds": 0.053521,
       "name": "ns_localization_pressure_commutator_proxy",
       "notes": [
         "optional A6 localization/pressure commutator proxy with deliberate bad tail and cutoff cases",
@@ -1536,7 +1959,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.23257,
+      "duration_seconds": 0.206406,
       "name": "ns_pressure_tail_absorption_proxy",
       "notes": [
         "optional A6 pressure-tail absorption proxy with bad harmonic-tail, annular-plateau, and gradient profiles",
@@ -1577,7 +2000,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.103912,
+      "duration_seconds": 0.100379,
       "name": "ns_cutoff_riesz_commutator_kernel_proxy",
       "notes": [
         "optional A6 cutoff/Riesz commutator kernel proxy with cancellation, annulus separation, and bad rough/no-cancellation/touching-core cases",
@@ -1704,7 +2127,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.055964,
+      "duration_seconds": 0.05483,
       "name": "ns_harmonic_pressure_tail_decay_proxy",
       "notes": [
         "optional A6 harmonic pressure-tail proxy with mean-subtraction, annular separation, and moment-cancellation controls",
@@ -1752,7 +2175,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.058271,
+      "duration_seconds": 0.059084,
       "name": "ns_pressure_localization_subbudget_proxy",
       "notes": [
         "optional A6 pressure-localization sub-budget proxy aggregating cutoff/Riesz, local CZ, harmonic tail, pressure tail, annular cutoff, epsilon absorption, and Abel recentering",
@@ -1798,7 +2221,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.101104,
+      "duration_seconds": 0.104821,
       "name": "ns_pressure_subbudget_component_sensitivity",
       "notes": [
         "optional A6 pressure-localization component-sensitivity sweep across seven sub-budgets",
@@ -2083,7 +2506,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.069393,
+      "duration_seconds": 0.071384,
       "name": "ns_a6_error_budget_proxy",
       "notes": [
         "optional A6 aggregate error-budget proxy with seven component budgets",
@@ -2266,7 +2689,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.062709,
+      "duration_seconds": 0.061217,
       "name": "ns_cascade_depth2_proxy",
       "notes": [
         "depth-2 cascade closure smoke probe"
@@ -2319,7 +2742,7 @@
         "48"
       ],
       "discovered": true,
-      "duration_seconds": 0.130076,
+      "duration_seconds": 0.116731,
       "name": "ns_leakage_square_toy",
       "notes": [
         "finite triadic Leray bookkeeping; no PDE sign proof"
@@ -2390,7 +2813,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.110789,
+      "duration_seconds": 0.108988,
       "name": "ym_bt_tree_spectral_gap",
       "notes": [
         "finite tree boundary-convention smoke"
@@ -2463,7 +2886,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ym_bt_boundary_depth_regression_base_harness.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.182734,
+      "duration_seconds": 0.189575,
       "name": "ym_bt_boundary_depth_regression",
       "notes": [
         "YM BT boundary-depth regression smoke"
@@ -2511,7 +2934,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ym_bt_dobrushin_influence_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.050848,
+      "duration_seconds": 0.051776,
       "name": "ym_bt_dobrushin_influence",
       "notes": [
         "toy influence proxy only"
@@ -2677,7 +3100,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.052159,
+      "duration_seconds": 0.05407,
       "name": "ym_finite_selfadjoint_hamiltonian_proxy",
       "notes": [
         "finite self-adjoint Hamiltonian proxy with bad nonsymmetric and domain-unstable cases",
@@ -2776,7 +3199,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.055674,
+      "duration_seconds": 0.051893,
       "name": "ym_hamiltonian_domination_proxy",
       "notes": [
         "finite quotient-matrix proxy for H >= c1 Delta + c2 Hol - E",
@@ -2891,7 +3314,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.063515,
+      "duration_seconds": 0.062659,
       "name": "ym_domination_spectral_margin_proxy",
       "notes": [
         "finite spectral-margin proxy for YM domination error budget with weak kinetic, missing holonomy, and pollution bad cases",
@@ -2935,7 +3358,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.058449,
+      "duration_seconds": 0.056973,
       "name": "ym_spectral_margin_boundary_sensitivity",
       "notes": [
         "optional finite spectral-margin boundary-sensitivity sweep for kinetic, holonomy, error, and pollution budgets",
@@ -3144,7 +3567,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.068608,
+      "duration_seconds": 0.068066,
       "name": "ym_killing_boundary_self_adjointness_proxy",
       "notes": [
         "optional finite YM Killing/full-degree boundary domain proxy for symmetry defect, gauge-null leakage, and spectral margin",
@@ -3351,7 +3774,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/defect_four_point_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.242819,
+      "duration_seconds": 0.243937,
       "name": "defect_four_point",
       "notes": [
         "unification four-point residual smoke"
@@ -3442,7 +3865,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/defect_hierarchy_hypothesis_search_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 1.372951,
+      "duration_seconds": 1.428444,
       "name": "defect_hierarchy_hypothesis_search",
       "notes": [
         "unification hierarchy hypothesis separator smoke"
@@ -3479,7 +3902,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.075997,
+      "duration_seconds": 0.074538,
       "name": "gluing_operator_linearity_proxy",
       "notes": [
         "unification quotient-linearity proxy with nonlinear counterexample",
@@ -3552,7 +3975,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.089162,
+      "duration_seconds": 0.085232,
       "name": "unification_gluing_quotient_admissibility_proxy",
       "notes": [
         "unification quotient-admissibility proxy with representative-leak, nonlinear, and norm-like counterexamples",
@@ -3618,7 +4041,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.130774,
+      "duration_seconds": 0.12718,
       "name": "unification_quotient_four_point_stress",
       "notes": [
         "unification four-point residual stress harness with representative-shift, nonlinear, p-norm, and asymmetric-cross-term bad cases",
@@ -3772,7 +4195,7 @@
         "20260608"
       ],
       "discovered": true,
-      "duration_seconds": 0.168433,
+      "duration_seconds": 0.184377,
       "name": "gray_scott_triadic_defect_optional",
       "notes": [
         "optional Gray-Scott triadic diagnostic smoke"
@@ -3821,9 +4244,9 @@
   ],
   "summary": {
     "all_executed_smokes_passed": true,
-    "executed": 45,
+    "executed": 47,
     "failures": [],
-    "harnesses_total": 45,
+    "harnesses_total": 47,
     "skipped": 0
   },
   "timeout_seconds_per_harness": 25

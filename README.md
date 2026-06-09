@@ -179,6 +179,54 @@ Type-I / `L^{3,infty}` -> LP shell mass -> Abel finite-variation target,
 tight shell estimate, and
 `DASHI.Physics.Closure.NSLeiRenTianOutputSupportTransferBoundary` for the A4
 physical-to-Fourier output-support coupling target.  The local diagnostic
+`DASHI.Physics.Closure.NSLeiRenTianFourierOutputCouplingBoundary` now sharpens
+that A4 target into the explicit Whitney/frame coupling contract: physical
+angular measure, localized frame packets, Fourier output pushforward,
+Whitney-overlap inequality, no-angular-collapse transfer, and scale/window
+compatibility.  The paired
+`scripts/ns_lrt_fourier_output_coupling_proxy_harness.py` is manifest-routed
+as a diagnostic split only; it does not prove A4 or Clay NS.
+The A4 contract is now split into checked child receipts:
+`DASHI.Physics.Closure.NSPhysicalAngularMeasureConstructionBoundary`,
+`DASHI.Physics.Closure.NSLocalizedWhitneyFramePacketEstimateBoundary`,
+`DASHI.Physics.Closure.NSFourierOutputPushforwardBoundary`, and
+`DASHI.Physics.Closure.NSWhitneyCouplingInequalityBoundary`.  These name the
+remaining physical angular measure, Whitney packet, Fourier pushforward, and
+Whitney coupling/Sard-Fubini obligations; they do not prove the coupling
+theorem, A4, A6, NS Clay, or terminal promotion.
+The Sard/Fubini residual is now further split by
+`DASHI.Physics.Closure.NSAntipodalTubeNullMassBoundary`,
+`DASHI.Physics.Closure.NSSardRegularValueSlicingBoundary`,
+`DASHI.Physics.Closure.NSWhitneyFubiniDisintegrationBoundary`, and
+`DASHI.Physics.Closure.NSPhiJacobianLowerBoundBoundary`, covering antipodal
+tube discard, regular-value slicing, Whitney/Fubini packet disintegration,
+and off-antipodal Jacobian control.  These are proof contracts only.
+`DASHI.Physics.Closure.NSA4SardFubiniCompositeBoundary` now reconnects those
+four child receipts to the A4 Whitney coupling consumer.  The next local A4
+transfer blockers are recorded by
+`DASHI.Physics.Closure.NSOutputGreatCircleStripSlicingBoundary`,
+`DASHI.Physics.Closure.NSBonyLipschitzAngularPushforwardBoundary`, and
+`DASHI.Physics.Closure.NSLowVorticityExceptionalMassRoutingBoundary`.
+The direct A4 transfer composition is now also checked through
+`DASHI.Physics.Closure.NSOutputStripPreimageMeasureEstimateBoundary`,
+`DASHI.Physics.Closure.NSA4ExceptionalMassCompositeBoundary`, and
+`DASHI.Physics.Closure.NSA4NoAngularCollapseTransferCompositeBoundary`.
+These normalize the output great-circle strip preimage estimate, the
+log-window exceptional-mass budget, and the physical-measure to output
+no-angular-collapse consumer.  They still do not prove the analytic
+coarea/Jacobian/Fubini estimates, A4, A6, NS Clay, or terminal promotion.
+`DASHI.Physics.Closure.NSA4CoareaStripPreimageCalculationBoundary`,
+`DASHI.Physics.Closure.NSA4GradientFormulaLocalChartBoundary`,
+`DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary`,
+`DASHI.Physics.Closure.NSA4UniformErrorBudgetCompositeBoundary`,
+`DASHI.Physics.Closure.NSA4ResidualPositiveAfterErrorsBoundary`, and
+`DASHI.Physics.Closure.NSA4ToA6TransferLadderBoundary` now isolate the exact
+coarea scalar calculation, local-chart gradient formula, uniform-in-normal
+constants, the `c eta` minus exceptional-error budget, residual positivity
+for `r < r0(eta,R,M)`, and the A4 -> A5 -> A6 -> A7 dependency ladder.
+These make the next analytic calculation explicit without promoting A4, A6,
+residual depletion, or Clay NS.
+The local diagnostic
 `scripts/ns_bounded_abel_mass_proxy_harness.py` separates bounded proxy
 profiles from a deliberately bad mass-growth profile, while
 `scripts/ns_stationarity_rate_proxy_harness.py` simulates log-rate
@@ -250,11 +298,19 @@ The paired `scripts/ns_biot_savart_shell_localization_proxy_harness.py` and
 separate same-shell/Abel-localized good profiles from separated-tail and
 nonlocal-plateau bad profiles.  They are diagnostic only; the CZ estimate,
 A6, residual depletion, and NS Clay remain unproved.
+`DASHI.Physics.Closure.NSBonyParaproductA6RepairBoundary` records the repaired
+A6.2 route after the naive whole-strain same-shell localization target fails:
+low-frequency Bony paraproduct ownership, finite near-diagonal resonant
+shells, high-frequency subleading tail, and corrected Abel-window error
+routing.  The paired `scripts/ns_bony_paraproduct_a6_repair_proxy_harness.py`
+is manifest-routed and diagnostic only; no paraproduct theorem, A6 theorem, or
+residual depletion is promoted.
 `DASHI.Physics.Closure.NSA6TheoremLadderBoundary` records the child-estimate
 to CKN/BKM ladder.  All of these are proxy or boundary surfaces and keep
-promotion false.  The next NS analytic proof to calculate is now A6.2: the
-Biot-Savart shell-localization estimate feeding the triadic compensated
-leakage identity / pointwise-to-Abel averaging theorem.
+promotion false.  The next NS analytic proof to calculate is now the A4
+Whitney/frame physical-to-Fourier output-support coupling, while the corrected
+A6.2 Bony split is the current route for the localization side of the triadic
+compensated leakage identity / pointwise-to-Abel averaging theorem.
 
 Current YM and unification first-rung hardening:
 `DASHI.Physics.Closure.YMFiniteGaugeQuotientHamiltonianPreconditionBoundary`
@@ -303,6 +359,36 @@ finite self-adjointness.  The paired
 finite diagnostic split for symmetry defect, gauge-null leakage,
 nonorthogonal projection, induced collapse, and spectral margin.  This does
 not prove Hamiltonian domination, OS transfer, continuum mass gap, or YM Clay.
+`DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessProxyHarnessResult`
+binds that diagnostic into Agda while keeping YM-1, domination, OS/continuum
+transfer, no spectral pollution, and YM Clay false.
+`DASHI.Physics.Closure.YMKillingBoundaryFluxCancellationBoundary` now records
+the YM-1 child obligation for finite BT Killing/full-degree boundary flux
+cancellation, opposing face pairing, gauge-domain preservation, induced-ball
+collapse exclusion, and self-adjointness routing.  It does not prove YM-1.
+`DASHI.Physics.Closure.YMKillingBoundaryOppositeFaceInvolutionBoundary` splits
+out the finite BT opposite-face involution, Killing weight preservation,
+orientation cancellation, and gauge compatibility prerequisites behind that
+flux-cancellation route.
+`DASHI.Physics.Closure.YMKillingBoundaryWeightPreservationBoundary` isolates
+the full-degree/Killing weight equality target under the opposite-face
+involution before the flux-cancellation proof can close.
+`DASHI.Physics.Closure.YMKillingBoundaryOrientationCancellationBoundary` and
+`DASHI.Physics.Closure.YMKillingBoundaryGaugeDomainPreservationBoundary` now
+split the remaining YM-1 finite-boundary domain route into orientation-normal
+flux cancellation and gauge-domain/quotient preservation.  Finite
+self-adjointness, Hamiltonian domination, OS/continuum transfer, YM Clay, and
+terminal promotion remain false.
+`DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessCompositeBoundary`
+now composes those YM-1 child routes into the finite self-adjointness
+boundary, and
+`DASHI.Physics.Closure.YMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary`
+records the finite gauge-quotient Hamiltonian self-adjointness target.
+`DASHI.Physics.Closure.YMBochnerWeitzenbockHamiltonianDominationBoundary`
+records the YM-5 Bochner-Weitzenbock domination route over that composite.
+`DASHI.Physics.Closure.YMUniformPositiveHolonomyActionBoundary` records the
+uniform positive holonomy/Wilson-action lower-bound obligation.  These remain
+fail-closed theorem contracts.
 `DASHI.Physics.Closure.GluingOperatorLinearityOnDefectQuotientBoundary`
 records the U-1a quotient-linearity blocker before four-point cancellation.
 The diagnostic `scripts/gluing_operator_linearity_proxy_harness.py` checks a
@@ -324,6 +410,31 @@ cross-terms against a quadratic quotient good case.
 isolates the next U-1a sub-obligation: the cross-term
 `G(s1+s2)-G(s1)-G(s2)` must lie in the null class of the admissible defect
 quotient before gluing linearity can feed four-point cancellation.
+`DASHI.Physics.Closure.UnificationCrossTermToFourPointCompositeBoundary` now
+composes that sub-obligation into the quotient-linearity -> four-point
+cancellation -> parallelogram -> quadratic-emergence dependency chain without
+promoting any theorem.
+`DASHI.Physics.Closure.UnificationGluingCrossTermLinearityLiftBoundary` now
+records the lift from cross-term-null vocabulary toward modulo-null quotient
+linearity and the downstream four-point cancellation dependency; true
+linearity, four-point cancellation, parallelogram, and quadratic emergence
+remain open.
+`DASHI.Physics.Closure.UnificationNullClassStabilityBoundary` records the
+null-class operation and gluing-stability prerequisites needed to transport
+cross-term nullity into modulo-null quotient linearity.
+`DASHI.Physics.Closure.UnificationNullToQuotientEqualityTransportBoundary`
+records the next transport surface from null cross-term evidence to quotient
+equality and modulo-null gluing linearity.
+`DASHI.Physics.Closure.UnificationGluingModuloNullLinearityCompositeBoundary`
+now composes null-class stability, null-to-quotient transport, and
+cross-term-linearity lift into a single modulo-null gluing-linearity route.
+`DASHI.Physics.Closure.UnificationCrossTermNullityTheoremBoundary` now
+records the actual U-1a theorem target that
+`G(s1+s2)-G(s1)-G(s2)` lies in the admissible null class.
+`DASHI.Physics.Closure.UnificationFourPointCancellationFromCrossTermNullityBoundary`
+records the downstream route from that nullity target to four-point
+cancellation through additive test functionals and quotient representative
+invariance.
 These are fail-closed boundary/diagnostic receipts; YM Clay, terminal
 unification, and all promotion flags remain false.
 

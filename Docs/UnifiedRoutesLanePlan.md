@@ -174,6 +174,54 @@ records the A2 tight dyadic shell estimate and rejects the naive `L4 x L4`
 Bernstein shortcut as insufficient; and
 `NSLeiRenTianOutputSupportTransferBoundary` records the A4 physical
 vorticity-direction to Fourier triadic output-direction support transfer.
+`NSLeiRenTianFourierOutputCouplingBoundary` now refines A4 into the exact
+Whitney/frame coupling contract: physical angular measure, localized frame
+packet, Fourier output pushforward, Whitney coupling inequality,
+no-angular-collapse transfer, and scale/window compatibility.  The paired
+`scripts/ns_lrt_fourier_output_coupling_proxy_harness.py` is manifest-routed
+as a diagnostic only.
+The A4 contract now has checked child receipts:
+`NSPhysicalAngularMeasureConstructionBoundary`,
+`NSLocalizedWhitneyFramePacketEstimateBoundary`,
+`NSFourierOutputPushforwardBoundary`, and
+`NSWhitneyCouplingInequalityBoundary`.  They normalize physical angular
+measure construction, Whitney packet localization, the
+`Phi(theta1,theta2)=normalize(theta1+theta2)` Fourier pushforward, and the
+Whitney-overlap/no-collapse inequality.  The remaining Sard/Fubini coupling
+proof, A4 theorem, A6 leakage transfer, NS Clay, and terminal promotion remain
+false.
+The Sard/Fubini residual now has four checked child receipts:
+`NSAntipodalTubeNullMassBoundary`, `NSSardRegularValueSlicingBoundary`,
+`NSWhitneyFubiniDisintegrationBoundary`, and
+`NSPhiJacobianLowerBoundBoundary`.  They normalize antipodal-tube discard,
+regular-value slicing, Whitney-packet Fubini disintegration, and
+off-antipodal Jacobian lower-bound obligations without proving A4.
+`NSA4SardFubiniCompositeBoundary` now composes those child receipts back into
+the Whitney coupling consumer and A4 output-support route.  The next local
+A4 transfer blockers are `NSOutputGreatCircleStripSlicingBoundary`,
+`NSBonyLipschitzAngularPushforwardBoundary`, and
+`NSLowVorticityExceptionalMassRoutingBoundary`, covering output strip
+slicing, Bony/Lipschitz angular pushforward stability, and low-vorticity /
+null-output exceptional mass routing.
+`NSOutputStripPreimageMeasureEstimateBoundary`,
+`NSA4ExceptionalMassCompositeBoundary`, and
+`NSA4NoAngularCollapseTransferCompositeBoundary` now compose those local
+blockers into the direct A4 output-support route: output strip preimage
+measure, exceptional-mass log-window budget, and physical-measure to output
+no-angular-collapse transfer.  They are still fail-closed theorem contracts;
+the analytic estimates, A4 theorem, A6 transfer, NS Clay, and terminal
+promotion remain false.
+`NSA4CoareaStripPreimageCalculationBoundary` now isolates the scalar coarea
+calculation for `f_n(theta1,theta2)=<normalize(theta1+theta2),n>`;
+`NSA4GradientFormulaLocalChartBoundary` records the local-chart derivative
+and rank/noncritical obligation; `NSA4UniformInNormalConstantsBoundary`
+records the compactness/Whitney overlap route to a uniform `c_A4`;
+`NSA4UniformErrorBudgetCompositeBoundary` records the `c eta` lower bound
+minus log-window, antipodal, low-vorticity/null-output, and Bony perturbation
+losses; `NSA4ResidualPositiveAfterErrorsBoundary` records the
+`r < r0(eta,R,M)` positivity target; and `NSA4ToA6TransferLadderBoundary`
+records the A4 -> A5 -> A6 -> A7 dependency ladder.  These are the current
+NS analytic calculation surfaces, not theorem promotions.
 `NSQuantitativeStationarityRateProxyHarnessResult` binds
 `scripts/ns_stationarity_rate_proxy_harness.py` to a checked proxy receipt,
 and `scripts/ns_bounded_abel_mass_proxy_harness.py` supplies the matching A1
@@ -228,9 +276,16 @@ compatibility.  The paired diagnostic
 `scripts/ns_biot_savart_shell_localization_proxy_harness.py` and
 `NSBiotSavartShellLocalizationProxyHarnessResult` separate same-shell /
 Abel-localized good profiles from separated-tail and nonlocal-plateau bad
-profiles.  The next NS proof to calculate is A6.2; the estimate, A6,
-residual depletion, local monotonicity, CKN/BKM closure, and Clay NS remain
-unproved.
+profiles.  `NSBonyParaproductA6RepairBoundary` records the corrected A6.2
+route after the naive whole-strain same-shell localization failure:
+low-frequency Bony paraproduct ownership, finite near-diagonal resonant
+shells, high-frequency subleading tail, and corrected Abel-window error
+routing.  `scripts/ns_bony_paraproduct_a6_repair_proxy_harness.py` is
+manifest-routed as a diagnostic split between naive O(1) off-shell failures
+and corrected Bony profiles.  The next NS proof to calculate is now A4
+Whitney/frame physical-to-Fourier coupling; the corrected A6.2 Bony estimates,
+A6, residual depletion, local monotonicity, CKN/BKM closure, and Clay NS
+remain unproved.
 
 The current Yang-Mills route has two live calculations:
 `HamiltonianDominatesDefectPlusHolonomy`, recorded by
@@ -284,7 +339,34 @@ matrix, and finite self-adjointness.  The paired
 only and checks symmetry defect, gauge-null leakage, induced collapse,
 nonorthogonal projection, and spectral margin.  Hamiltonian domination,
 OS/continuum transfer, no spectral pollution, YM Clay, and terminal promotion
-remain unproved.
+remain unproved.  `YMKillingBoundarySelfAdjointnessProxyHarnessResult` now
+binds that diagnostic as an Agda receipt without promoting YM-1.
+`YMKillingBoundaryFluxCancellationBoundary` records the YM-1 child obligation
+for finite BT Killing/full-degree boundary flux cancellation, opposing face
+pairing, gauge-domain preservation, induced-ball collapse exclusion, and
+self-adjointness routing.  The flux-cancellation theorem, YM-1, Hamiltonian
+domination, and OS/continuum transfer remain open.
+`YMKillingBoundaryOppositeFaceInvolutionBoundary` now records the finite BT
+opposite-face involution, Killing weight preservation, orientation-sign
+cancellation, and gauge-compatibility prerequisites that must be discharged
+before the flux-cancellation child can feed finite self-adjointness.
+`YMKillingBoundaryWeightPreservationBoundary` splits out the
+full-degree/Killing weight equality target under the opposite-face involution
+before orientation-sign cancellation and finite flux cancellation can close.
+`YMKillingBoundaryOrientationCancellationBoundary` and
+`YMKillingBoundaryGaugeDomainPreservationBoundary` now isolate the remaining
+YM-1 finite-boundary domain blockers: normal-orientation cancellation and
+gauge-domain/quotient preservation.  YM-1, Hamiltonian domination,
+OS/continuum transfer, YM Clay, and terminal promotion remain open.
+`YMKillingBoundarySelfAdjointnessCompositeBoundary` now composes the YM-1
+child routes into one finite self-adjointness boundary, while
+`YMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary` records the
+finite gauge-quotient self-adjoint Hamiltonian target.
+`YMBochnerWeitzenbockHamiltonianDominationBoundary` records the YM-5
+Hamiltonian domination route over finite Hodge defect, the YM-1 composite,
+holonomy, and error-budget support.  `YMUniformPositiveHolonomyActionBoundary`
+records the non-vacuum holonomy/Wilson-action lower-bound obligation.  These
+remain fail-closed.
 
 The current unification route is the sheafified four-point path:
 local defect sections plus gluing residual control must prove
@@ -323,6 +405,32 @@ signature/Clifford chain with all theorem and promotion flags false.
 sub-obligation: the cross-term `G(s1+s2)-G(s1)-G(s2)` must lie in the null
 class of the admissible defect quotient before gluing linearity can feed
 four-point cancellation.
+`UnificationCrossTermToFourPointCompositeBoundary` now composes that
+cross-term-null target into the quotient-linearity, four-point cancellation,
+parallelogram, quadratic-emergence, and signature/Clifford dependency chain
+with all theorem and promotion flags held false.
+`UnificationGluingCrossTermLinearityLiftBoundary` records the next lift from
+cross-term-null vocabulary toward modulo-null quotient linearity and the
+downstream four-point cancellation dependency.  Representative invariance,
+null stability, cross-term nullity, true linearity, four-point cancellation,
+parallelogram, quadratic emergence, and terminal promotion remain open.
+`UnificationNullClassStabilityBoundary` records the operation and
+gluing-stability prerequisites for the admissible null class, including
+representative invariance, addition/scalar closure, `G`-stability, and
+null-to-quotient equality transport.
+`UnificationNullToQuotientEqualityTransportBoundary` records the transport
+from null cross-term evidence to quotient equality and modulo-null gluing
+linearity before the four-point functional can consume the U-1a result.
+`UnificationGluingModuloNullLinearityCompositeBoundary` now composes
+null-class stability, null-to-quotient equality transport, and the
+cross-term-linearity lift into the current U-1a modulo-null gluing-linearity
+route.
+`UnificationCrossTermNullityTheoremBoundary` now names the actual U-1a target:
+the gluing cross-term `G(s1+s2)-G(s1)-G(s2)` must lie in the null class before
+modulo-null linearity can feed the four-point law.
+`UnificationFourPointCancellationFromCrossTermNullityBoundary` records the
+downstream four-point-cancellation route from cross-term nullity through
+additive test functionals, representative invariance, and polarization.
 Quadratic emergence, signature/Clifford consumers, terminal unification, and
 Clay promotion remain blocked until that four-point law is actually proved.
 

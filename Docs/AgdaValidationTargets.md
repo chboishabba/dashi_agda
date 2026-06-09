@@ -33,8 +33,31 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/NSQuantitativeStationarityRateProxyHarnessResult.agda`
 - `DASHI/Physics/Closure/NSTriadicShellBernsteinHolderBoundary.agda`
 - `DASHI/Physics/Closure/NSLeiRenTianOutputSupportTransferBoundary.agda`
+- `DASHI/Physics/Closure/NSLeiRenTianFourierOutputCouplingBoundary.agda`
+- `DASHI/Physics/Closure/NSPhysicalAngularMeasureConstructionBoundary.agda`
+- `DASHI/Physics/Closure/NSLocalizedWhitneyFramePacketEstimateBoundary.agda`
+- `DASHI/Physics/Closure/NSFourierOutputPushforwardBoundary.agda`
+- `DASHI/Physics/Closure/NSWhitneyCouplingInequalityBoundary.agda`
+- `DASHI/Physics/Closure/NSAntipodalTubeNullMassBoundary.agda`
+- `DASHI/Physics/Closure/NSSardRegularValueSlicingBoundary.agda`
+- `DASHI/Physics/Closure/NSWhitneyFubiniDisintegrationBoundary.agda`
+- `DASHI/Physics/Closure/NSPhiJacobianLowerBoundBoundary.agda`
+- `DASHI/Physics/Closure/NSA4SardFubiniCompositeBoundary.agda`
+- `DASHI/Physics/Closure/NSOutputGreatCircleStripSlicingBoundary.agda`
+- `DASHI/Physics/Closure/NSOutputStripPreimageMeasureEstimateBoundary.agda`
+- `DASHI/Physics/Closure/NSA4ExceptionalMassCompositeBoundary.agda`
+- `DASHI/Physics/Closure/NSA4NoAngularCollapseTransferCompositeBoundary.agda`
+- `DASHI/Physics/Closure/NSA4CoareaStripPreimageCalculationBoundary.agda`
+- `DASHI/Physics/Closure/NSA4GradientFormulaLocalChartBoundary.agda`
+- `DASHI/Physics/Closure/NSA4UniformInNormalConstantsBoundary.agda`
+- `DASHI/Physics/Closure/NSA4UniformErrorBudgetCompositeBoundary.agda`
+- `DASHI/Physics/Closure/NSA4ResidualPositiveAfterErrorsBoundary.agda`
+- `DASHI/Physics/Closure/NSA4ToA6TransferLadderBoundary.agda`
+- `DASHI/Physics/Closure/NSBonyLipschitzAngularPushforwardBoundary.agda`
+- `DASHI/Physics/Closure/NSLowVorticityExceptionalMassRoutingBoundary.agda`
 - `DASHI/Physics/Closure/NSBiotSavartShellLocalizationBoundary.agda`
 - `DASHI/Physics/Closure/NSBiotSavartShellLocalizationProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSBonyParaproductA6RepairBoundary.agda`
 - `DASHI/Physics/Closure/NSPointwiseToAbelAveragingBoundary.agda`
 - `DASHI/Physics/Closure/NSDiagonalStretchingToAbelMeanBoundary.agda`
 - `DASHI/Physics/Closure/NSOffDiagonalShellAbsorptionBoundary.agda`
@@ -75,6 +98,16 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/YMSpectralMarginErrorBudgetCompositeBoundary.agda`
 - `DASHI/Physics/Closure/YMSpectralMarginBoundarySensitivityProxyHarnessResult.agda`
 - `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessDomainContract.agda`
+- `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryFluxCancellationBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryOppositeFaceInvolutionBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryWeightPreservationBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryOrientationCancellationBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryGaugeDomainPreservationBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessCompositeBoundary.agda`
+- `DASHI/Physics/Closure/YMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary.agda`
+- `DASHI/Physics/Closure/YMBochnerWeitzenbockHamiltonianDominationBoundary.agda`
+- `DASHI/Physics/Closure/YMUniformPositiveHolonomyActionBoundary.agda`
 - `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
 - `DASHI/Physics/Closure/YMWeightedBTAdjointKappaCalculation.agda`
 - `DASHI/Physics/Closure/DefectFourPointParallelogramLawBoundary.agda`
@@ -87,6 +120,13 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/UnificationGluingQuotientAdmissibilityProxyHarnessResult.agda`
 - `DASHI/Physics/Closure/UnificationQuotientFourPointStressProxyHarnessResult.agda`
 - `DASHI/Physics/Closure/UnificationFourPointStressCompositeBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCrossTermToFourPointCompositeBoundary.agda`
+- `DASHI/Physics/Closure/UnificationGluingCrossTermLinearityLiftBoundary.agda`
+- `DASHI/Physics/Closure/UnificationNullClassStabilityBoundary.agda`
+- `DASHI/Physics/Closure/UnificationNullToQuotientEqualityTransportBoundary.agda`
+- `DASHI/Physics/Closure/UnificationGluingModuloNullLinearityCompositeBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda`
+- `DASHI/Physics/Closure/UnificationFourPointCancellationFromCrossTermNullityBoundary.agda`
 
 Current frontier receipts:
 
@@ -154,6 +194,35 @@ Current frontier receipts:
   records the A4 physical-vorticity-direction to Fourier-output-direction
   support coupling target.  Whitney/frame/localization and no-angular-
   collapse transfer remain unproved.
+- `DASHI/Physics/Closure/NSLeiRenTianFourierOutputCouplingBoundary.agda`
+  sharpens A4 into the explicit physical angular measure -> localized
+  Whitney/frame packet -> Fourier output pushforward -> no-collapse support
+  lift contract.  The paired LRT Fourier-output coupling harness is
+  diagnostic only.
+- `DASHI/Physics/Closure/NSPhysicalAngularMeasureConstructionBoundary.agda`,
+  `DASHI/Physics/Closure/NSLocalizedWhitneyFramePacketEstimateBoundary.agda`,
+  `DASHI/Physics/Closure/NSFourierOutputPushforwardBoundary.agda`, and
+  `DASHI/Physics/Closure/NSWhitneyCouplingInequalityBoundary.agda` split A4
+  into checked child receipts.  They normalize the physical angular measure,
+  localized Whitney/frame packet, `Phi(theta1,theta2)` Fourier pushforward,
+  and Whitney-overlap/no-collapse coupling obligations.  Sard/Fubini
+  coupling, A4, A6, NS Clay, and terminal promotion remain unproved.
+- `DASHI/Physics/Closure/NSAntipodalTubeNullMassBoundary.agda`,
+  `DASHI/Physics/Closure/NSSardRegularValueSlicingBoundary.agda`,
+  `DASHI/Physics/Closure/NSWhitneyFubiniDisintegrationBoundary.agda`, and
+  `DASHI/Physics/Closure/NSPhiJacobianLowerBoundBoundary.agda` further split
+  the A4 Sard/Fubini residual into antipodal-tube discard, regular-value
+  slicing, Whitney-packet disintegration, and off-antipodal Jacobian lower
+  bound obligations.  These are checked receipts only; the analytic coupling
+  theorem remains open.
+- `DASHI/Physics/Closure/NSA4SardFubiniCompositeBoundary.agda` composes the
+  four Sard/Fubini child receipts back into the Whitney coupling consumer and
+  A4 output-support transfer.  `NSOutputGreatCircleStripSlicingBoundary.agda`,
+  `NSBonyLipschitzAngularPushforwardBoundary.agda`, and
+  `NSLowVorticityExceptionalMassRoutingBoundary.agda` record the next local
+  transfer blockers: output strip slicing, Bony/Lipschitz angular stability,
+  and low-vorticity/null-output exceptional routing.  The A4 theorem remains
+  open.
 - `DASHI/Physics/Closure/NSBiotSavartShellLocalizationBoundary.agda` records
   the A6.2 theorem contract for same-shell Biot-Savart strain multiplier
   ownership, off-shell leakage decay, Calderon-Zygmund kernel control,
@@ -161,6 +230,10 @@ Current frontier receipts:
   `NSBiotSavartShellLocalizationProxyHarnessResult.agda` binds the paired
   finite diagnostic harness.  These do not prove the CZ localization
   estimate, A6, residual depletion, or Clay NS.
+- `DASHI/Physics/Closure/NSBonyParaproductA6RepairBoundary.agda` records the
+  corrected A6.2 paraproduct route after naive whole-strain same-shell
+  localization failure.  It keeps the Bony, resonant, high-frequency, A6,
+  residual-depletion, and Clay flags fail-closed.
 - `DASHI/Physics/Closure/NSPointwiseToAbelAveragingBoundary.agda` records the
   A6 hard subtheorem: replace localized pointwise `omega . S omega` by the
   Abel/shell mean `int lambda(c)(2 kappa^2 - 1) dmu_r` with diagonal,
@@ -286,6 +359,25 @@ Current frontier receipts:
   descent, symmetric finite matrix, and finite self-adjointness.  It does not
   prove Hamiltonian domination, OS transfer, continuum no-pollution, YM Clay,
   or terminal promotion.
+- `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessProxyHarnessResult.agda`
+  binds the Killing/full-degree boundary diagnostic to Agda while keeping
+  YM-1, Hamiltonian domination, OS/continuum transfer, no spectral pollution,
+  YM Clay, and terminal promotion false.
+- `DASHI/Physics/Closure/YMKillingBoundaryFluxCancellationBoundary.agda`
+  records the YM-1 child obligation for full-degree/Killing boundary flux
+  cancellation across finite BT faces, opposing flux pairing,
+  gauge-domain preservation, induced-ball collapse exclusion, and
+  self-adjointness routing.  The flux-cancellation theorem and YM-1 remain
+  open.
+- `DASHI/Physics/Closure/YMKillingBoundaryOppositeFaceInvolutionBoundary.agda`
+  records the next YM-1 sub-obligation: construct the opposite-face
+  involution, prove full-degree/Killing weight preservation, orientation-sign
+  cancellation, and gauge compatibility before flux cancellation can feed
+  finite self-adjointness.
+- `DASHI/Physics/Closure/YMKillingBoundaryWeightPreservationBoundary.agda`
+  isolates the full-degree/Killing weight equality target under the
+  opposite-face involution, keeping orientation-sign cancellation and gauge
+  compatibility separate from the weight formula itself.
 - `DASHI/Physics/Closure/GluingResidualForcesFourPointCancellationBoundary.agda`
   records the unification gluing-residual target.  It does not prove the
   four-point law or quadratic emergence.
@@ -317,6 +409,27 @@ Current frontier receipts:
   `G(s1+s2)-G(s1)-G(s2)` lies in the null class of the admissible defect
   quotient.  Four-point cancellation, parallelogram, quadratic emergence,
   signature/Clifford consumers, and terminal promotion remain blocked.
+- `DASHI/Physics/Closure/UnificationCrossTermToFourPointCompositeBoundary.agda`
+  composes cross-term-null through quotient linearity, four-point
+  cancellation, parallelogram, quadratic emergence, and signature/Clifford
+  consumers without promoting the unification theorem.
+- `DASHI/Physics/Closure/UnificationGluingCrossTermLinearityLiftBoundary.agda`
+  records the U-1a lift from cross-term-null vocabulary to modulo-null
+  quotient linearity and the downstream four-point cancellation dependency.
+  Representative invariance, null stability, cross-term nullity, true
+  linearity, parallelogram, quadratic emergence, and terminal promotion remain
+  open.
+- `DASHI/Physics/Closure/UnificationNullClassStabilityBoundary.agda` records
+  the null-class operation and gluing-stability prerequisites needed before
+  cross-term nullity can be transported into modulo-null quotient linearity.
+  Null representative relation, operation stability, `G`-stability, quotient
+  equality transport, four-point cancellation, and terminal promotion remain
+  open.
+- `DASHI/Physics/Closure/UnificationNullToQuotientEqualityTransportBoundary.agda`
+  records the transport from null cross-term evidence to quotient equality
+  and modulo-null linearity.  Representative invariance, congruence under
+  `G`, transport into four-point functionals, and terminal promotion remain
+  open.
 - `DASHI/Physics/Closure/UnificationQuotientFourPointStressProxyHarnessResult.agda`
   records the four-point stress diagnostic for representative-shift,
   nonlinear-gluing, p-norm, and asymmetric-cross-term near misses.
