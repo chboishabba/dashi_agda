@@ -1,0 +1,38 @@
+{
+  "contract": "Unification HC kills four-point defect smoke",
+  "diagnostic_only": true,
+  "families": [
+    {
+      "family": "quadratic_hilbert",
+      "four_point_error": 0.0,
+      "hc_error": 0.0,
+      "passes": true,
+      "representative_independent": true
+    },
+    {
+      "family": "coupled_quadratic",
+      "four_point_error": 0.0,
+      "hc_error": 2.84e-14,
+      "passes": true,
+      "representative_independent": true
+    },
+    {
+      "family": "nonlinear_bad",
+      "four_point_error": 0.37,
+      "hc_error": 0.12,
+      "passes": false,
+      "representative_independent": false
+    }
+  ],
+  "promotion": {
+    "hc_four_point_theorem_proved": false,
+    "terminal_promoted": false,
+    "unification_promoted": false
+  },
+  "summary": {
+    "bad_family_detected": true,
+    "good_families_pass": true,
+    "max_good_four_point_error": 0.0,
+    "max_good_hc_error": 2.84e-14
+  }
+}

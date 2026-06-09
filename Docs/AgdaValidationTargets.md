@@ -28,9 +28,13 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/NSAbelTriadicDefectMeasureConstructionBoundary.agda`
 - `DASHI/Physics/Closure/NSAbelTriadicStationarityConstructionBoundary.agda`
 - `DASHI/Physics/Closure/NSAbelTriadicStationarityProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSA1TypeILorentzToAbelMassRouteBoundary.agda`
+- `DASHI/Physics/Closure/NSA1TypeILorentzToAbelMassRouteTheoremBoundary.agda`
 - `DASHI/Physics/Closure/NSBoundedAbelMassEstimateBoundary.agda`
 - `DASHI/Physics/Closure/NSQuantitativeStationarityRateBoundary.agda`
 - `DASHI/Physics/Closure/NSQuantitativeStationarityRateProxyHarnessResult.agda`
+- `DASHI/Physics/Closure/NSA2NearDiagonalCoifmanMeyerRouteBoundary.agda`
+- `DASHI/Physics/Closure/NSA2NearDiagonalCoifmanMeyerTheoremBoundary.agda`
 - `DASHI/Physics/Closure/NSTriadicShellBernsteinHolderBoundary.agda`
 - `DASHI/Physics/Closure/NSLeiRenTianOutputSupportTransferBoundary.agda`
 - `DASHI/Physics/Closure/NSLeiRenTianFourierOutputCouplingBoundary.agda`
@@ -82,6 +86,11 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda`
 - `DASHI/Physics/Closure/NSA6TheoremLadderBoundary.agda`
 - `DASHI/Physics/Closure/NSA7ResidualDepletionGronwallBoundary.agda`
+- `DASHI/Physics/Closure/NSA8AnnularDecayClarificationBoundary.agda`
+- `DASHI/Physics/Closure/NSA8FullLocalDefectMonotonicityBoundary.agda`
+- `DASHI/Physics/Closure/NSA8A9MonotonicityClosureTheoremLadderBoundary.agda`
+- `DASHI/Physics/Closure/NSA9SingularityContradictionRouteBoundary.agda`
+- `DASHI/Physics/Closure/NSA9CKNBKMClosureBoundary.agda`
 - `DASHI/Physics/Closure/NSTriadicCompensatedLeakageIdentityBoundary.agda`
 - `DASHI/Physics/Closure/NSExactStrainEigenbundleHarnessBoundary.agda`
 - `DASHI/Physics/Closure/NSS2BiotSavartEigenbundleCascadeDiagnosticBoundary.agda`
@@ -110,11 +119,54 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/YMKillingBoundaryOppositeFaceInvolutionBoundary.agda`
 - `DASHI/Physics/Closure/YMKillingBoundaryWeightPreservationBoundary.agda`
 - `DASHI/Physics/Closure/YMKillingBoundaryOrientationCancellationBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryOrientationSignCancellationBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryGreenIdentityBoundary.agda`
 - `DASHI/Physics/Closure/YMKillingBoundaryGaugeDomainPreservationBoundary.agda`
 - `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessCompositeBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessTheoremBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessTheoremLadderBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundarySpectralGapExplicitBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryOppositeFaceInvolutionLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryFluxCancellationLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryGaugeQuotientDescentLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryQuotientSymmetryLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryChildProofCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMKillingBoundaryTheoremConsumerCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMSelfAdjointToDominationPreconditionCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMDominationToHolonomyPositivePartCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMHolonomyPositivePartToSpectralMarginCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMSpectralMarginToContinuumTransferCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumTransferToNoSpectralPollutionSocketCompositeLightweightBoundary.agda`
 - `DASHI/Physics/Closure/YMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary.agda`
 - `DASHI/Physics/Closure/YMFiniteGaugeQuotientCarrierConstructionBoundary.agda`
 - `DASHI/Physics/Closure/YMBochnerWeitzenbockHamiltonianDominationBoundary.agda`
+- `DASHI/Physics/Closure/YMSeiler1982GapCompatibilityBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumUniformRhoBoundBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumUniformLeakageBoundBoundary.agda`
+- `DASHI/Physics/Closure/YMHyperbolicShimuraToEuclideanUniversalityBoundary.agda`
+- `DASHI/Physics/Closure/YMStepScalingGlobalBoundBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumBridgeCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivitySpatialTauBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityThetaBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityBoundaryPairingCompatibilityBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivitySpatialTauThetaCommutativityBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityActionSplitBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityTransferMatrixHermitianBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityOSAxiomBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityChildCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityFullTheoremAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityBoundaryConventionBoundary.agda`
+- `DASHI/Physics/Closure/YMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMOSWightmanToContinuumMassGapSocketCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumMassGapFinalAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumMassGapToClayAuthorityBlockerCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMOnlyRemainingAuthorityBlockersBoundary.agda`
+- `DASHI/Physics/Closure/YMStandardLanguageWriteupReadinessBoundary.agda`
+- `DASHI/Physics/Closure/YMStandardLanguagePaperAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/YMPaperSubmissionPacketBoundary.agda`
+- `DASHI/Physics/Closure/YMExternalAcceptanceBoundary.agda`
+- `DASHI/Physics/Closure/YMFinalAuthorityPackagingCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMBTToFourDimensionalContinuumRouteBoundary.agda`
 - `DASHI/Physics/Closure/YMUniformPositiveHolonomyActionBoundary.agda`
 - `DASHI/Physics/Closure/YMHolonomyActionToDominationCompositeBoundary.agda`
 - `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
@@ -135,8 +187,37 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/UnificationNullToQuotientEqualityTransportBoundary.agda`
 - `DASHI/Physics/Closure/UnificationGluingModuloNullLinearityCompositeBoundary.agda`
 - `DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCrossTermNullityLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationNullClassStabilityLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationNullTransportModuloNullConsumerLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCrossTermChildCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationHCToModuloNullLinearityCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationHCToFourPointInputCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationModuloNullLinearityRouteCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationFourPointCancellationRouteCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationFourPointToParallelogramSocketCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationParallelogramToJordanVonNeumannSocketCompositeLightweightBoundary.agda`
 - `DASHI/Physics/Closure/UnificationFourPointCancellationFromCrossTermNullityBoundary.agda`
 - `DASHI/Physics/Closure/UnificationModuloNullLinearityFromCrossTermNullityBoundary.agda`
+- `DASHI/Physics/Closure/UnificationScaleInvariantCrossTermHypothesisBoundary.agda`
+- `DASHI/Physics/Closure/UnificationHierarchyConsistencyKillsFourPointDefectBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCrossTermNullityDiscriminantBoundary.agda`
+- `DASHI/Physics/Closure/UnificationNullClassSubspaceCompleteBoundary.agda`
+- `DASHI/Physics/Closure/UnificationParallelogramFromBilinearBoundary.agda`
+- `DASHI/Physics/Closure/UnificationU1aHJustificationNSLaneBoundary.agda`
+- `DASHI/Physics/Closure/UnificationU1aHJustificationYMLaneBoundary.agda`
+- `DASHI/Physics/Closure/UnificationU1aHJustificationGlobalBoundary.agda`
+- `DASHI/Physics/Closure/UnificationU1aHPerLaneCompositeBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCliffordSignatureTableBoundary.agda`
+- `DASHI/Physics/Closure/UnificationSignatureCliffordConsumerSocketBoundary.agda`
+- `DASHI/Physics/Closure/UnificationLaneJustificationAuthorityBoundary.agda`
+- `DASHI/Physics/Closure/UnificationConsumerAuthorityAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/UnificationAuthorityReviewPacketBoundary.agda`
+- `DASHI/Physics/Closure/UnificationJordanVonNeumannAdapterBoundary.agda`
+- `DASHI/Physics/Closure/NSWriteupAndConstantsReadinessBoundary.agda`
+- `DASHI/Physics/Closure/NSStandardPDEWriteupAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/NSPaperSubmissionPacketBoundary.agda`
 
 Current frontier receipts:
 
@@ -269,6 +350,20 @@ Current frontier receipts:
   `Z = D_r^(-α)`, the linearized inequality, the smallness threshold
   `(β/C)^(1/α)`, monotone depletion below threshold, and the blowup
   contradiction. It keeps A7/A8/A9/Clay false.
+- `DASHI/Physics/Closure/NSA8FullLocalDefectMonotonicityBoundary.agda` is the
+  lightweight 15s-safe A8 receipt. It records annular localization control,
+  the CKN annulus split, the recursion
+  `D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha)` with
+  `q = (theta^2 + C M)/(1 + C M) < 1`, and the iterative
+  `D_{theta^k r} -> 0` consequence. It keeps A8/A9/Clay false.
+- `DASHI/Physics/Closure/NSA9CKNBKMClosureBoundary.agda` is the lightweight
+  15s-safe A9 receipt. It records the closure handoff from iterated A8 decay
+  to local vorticity vanishing, local harmonicity of velocity, elliptic
+  regularity, and the standard CKN/BKM contradiction. It keeps A9/Clay false.
+- `DASHI/Physics/Closure/NSA8A9MonotonicityClosureTheoremLadderBoundary.agda`
+  is the lightweight ladder receipt tying the intended A8 -> A9 ->
+  contradiction -> no-Type-I-blowup chain into one fail-closed surface.  It
+  does not promote A8, A9, contradiction, NS Clay, or terminal authority.
 - The A6 split now has three child boundary receipts:
   `NSDiagonalStretchingToAbelMeanBoundary.agda` for diagonal shell
   identification, `NSOffDiagonalShellAbsorptionBoundary.agda` for LP /
@@ -408,6 +503,13 @@ Current frontier receipts:
   isolates the full-degree/Killing weight equality target under the
   opposite-face involution, keeping orientation-sign cancellation and gauge
   compatibility separate from the weight formula itself.
+- `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessTheoremBoundary.agda`
+  is the lightweight 15s-safe YM-1 receipt.  It records the theorem content
+  only: full-degree/Killing boundary convention, opposite-face involution,
+  weight/orientation/flux control, gauge-domain preservation, quotient
+  descent, symmetric finite Hamiltonian, and finite self-adjointness on the
+  quotient.  It keeps domination, OS transfer, YM Clay, and terminal
+  promotion false.
 - `DASHI/Physics/Closure/GluingResidualForcesFourPointCancellationBoundary.agda`
   records the unification gluing-residual target.  It does not prove the
   four-point law or quadratic emergence.
@@ -439,6 +541,12 @@ Current frontier receipts:
   `G(s1+s2)-G(s1)-G(s2)` lies in the null class of the admissible defect
   quotient.  Four-point cancellation, parallelogram, quadratic emergence,
   signature/Clifford consumers, and terminal promotion remain blocked.
+- `DASHI/Physics/Closure/UnificationCrossTermNullityLightweightBoundary.agda`
+  is the lightweight 15s-safe U-1a receipt.  It records the theorem content
+  only: admissible defect quotient, gluing operator `G`, actual cross-term,
+  null-class target, representative invariance, null transport, and the
+  modulo-null linearity consumer.  It keeps four-point cancellation,
+  parallelogram, quadratic emergence, and terminal promotion false.
 - `DASHI/Physics/Closure/UnificationCrossTermToFourPointCompositeBoundary.agda`
   composes cross-term-null through quotient linearity, four-point
   cancellation, parallelogram, quadratic emergence, and signature/Clifford

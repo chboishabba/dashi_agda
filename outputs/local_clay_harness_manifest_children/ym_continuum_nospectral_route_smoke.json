@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "continuum_transfer_route_ok": true,
+  "no_spectral_pollution_socket_ok": true,
+  "os_wightman_socket_recorded": true,
+  "promotion": false,
+  "spectral_margin_route_ok": true
+}

@@ -7,6 +7,153 @@ repo.  It does not promote any lane.  It defines how every route should move
 from existing carrier language to executable receipts, then to blocked or
 promoted Agda guards.
 
+Current lightweight composite additions:
+- `YMStandardLanguageWriteupReadinessBoundary` now records that the remaining
+  YM gap is standard-language gauge/QFT writeup, authority packaging, and
+  external review rather than missing local route structure. It remains
+  fail-closed: YM Clay and terminal promotion stay false.
+- `YMStandardLanguagePaperAssemblyBoundary` now records the next YM layer
+  above that readiness ledger: gauge-language theorem assembly, OS/Wightman
+  citation packaging, continuum mass-gap statement packaging, and final
+  review blockers. It remains fail-closed: YM Clay and terminal promotion
+  stay false.
+- `YMPaperSubmissionPacketBoundary` now records the next YM layer above the
+  paper-assembly ledger: submission narrative packet, citation packet,
+  theorem/claim scope packet, and reviewer-facing authority blockers. It
+  remains fail-closed: YM Clay and terminal promotion stay false.
+- `NSWriteupAndConstantsReadinessBoundary` now records that the remaining NS
+  gap is theorem-grade writeup, constant extraction, standard PDE translation,
+  and external review rather than missing local A1-A9 route structure. It
+  remains fail-closed: NS Clay and terminal promotion stay false.
+- `NSStandardPDEWriteupAssemblyBoundary` now records the next NS layer above
+  that readiness ledger: suitable weak solution language, pressure
+  reconstruction, local enstrophy criterion, constant-compatibility writeup,
+  and external review blockers. It remains fail-closed: NS Clay and terminal
+  promotion stay false.
+- `NSPaperSubmissionPacketBoundary` now records the next NS layer above the
+  PDE-writeup assembly ledger: PDE-language narrative packet, constants
+  appendix packet, solution-class/criterion packet, and reviewer-facing
+  authority blockers. It remains fail-closed: NS Clay and terminal promotion
+  stay false.
+- `UnificationLaneJustificationAuthorityBoundary` now records that the
+  remaining unification gap is lane-specific justification authority,
+  representative/quotient legitimacy in-lane, final signature/Clifford
+  authority, and review packaging. It remains fail-closed: unification and
+  terminal promotion stay false.
+- `UnificationConsumerAuthorityAssemblyBoundary` now records the next
+  unification layer above that authority ledger: lane-justification
+  carry-through, representative/quotient legitimacy packaging,
+  signature/Clifford consumer packaging, and final review blockers. It
+  remains fail-closed: unification and terminal promotion stay false.
+- `UnificationAuthorityReviewPacketBoundary` now records the next
+  unification layer above the consumer-authority assembly ledger:
+  lane-summary packet, legitimacy summary packet, signature/Clifford consumer
+  summary packet, and reviewer-facing authority blockers. It remains
+  fail-closed: unification and terminal promotion stay false.
+- `YMReflectionPositivitySpatialTauThetaCommutativityBoundary`,
+  `YMReflectionPositivityActionSplitBoundary`,
+  `YMReflectionPositivityTransferMatrixHermitianBoundary`, and
+  `YMReflectionPositivityOSAxiomBoundary` now record the exact four-step
+  reflection-positivity argument provided by the current continuum write-up:
+  tau/theta commutativity, the `S_+ + S_0 + S_-` action split, theta-Hermitian
+  transfer-matrix compatibility with the opposite-face boundary convention,
+  and the final `|F|^2` OS-axiom structure. They remain fail-closed:
+  reflection-positivity theorem authority, OS/Wightman authority, YM Clay,
+  and terminal promotion stay false.
+- `YMReflectionPositivityFullTheoremAssemblyBoundary` now recomposes those
+  four exact RP substeps into one theorem-facing assembly surface feeding the
+  existing RP parent boundary, while `YMOnlyRemainingAuthorityBlockersBoundary`
+  records the current claim that the remaining YM gap is authority-side:
+  RP theorem authority, OS/Wightman authority, external acceptance, and final
+  packaging. Both remain fail-closed.
+- `UnificationU1aHJustificationNSLaneBoundary`,
+  `UnificationU1aHJustificationYMLaneBoundary`, and
+  `UnificationU1aHJustificationGlobalBoundary` now record the exact per-lane
+  `U-1a-H` justification surfaces for the NS `H^1_0` energy, the YM vacuum
+  linearization / cubic-remainder route, and the global Hilbert/Jordan-von
+  Neumann route. `UnificationCliffordSignatureTableBoundary` records the
+  current `Cl(1,3)`, `Cl(4,0)`, and `Cl(3,1)` consumer table. These remain
+  fail-closed: signature, Clifford, unification promotion, and terminal
+  promotion stay false.
+- `UnificationU1aHPerLaneCompositeBoundary` now recomposes the three per-lane
+  `U-1a-H` justifications into one assembly surface that feeds the existing
+  discriminant/HC/JvN route, while
+  `UnificationSignatureCliffordConsumerSocketBoundary` records the first
+  bounded consumer layer above the JvN socket and the Clifford/signature
+  lookup table. Both remain fail-closed.
+- `YMKillingBoundaryOrientationSignCancellationBoundary`,
+  `YMKillingBoundaryGreenIdentityBoundary`, and
+  `YMKillingBoundarySpectralGapExplicitBoundary` record the exact YM-1
+  orientation-sign, discrete Green identity, and explicit finite-gap
+  substeps now provided by the current finite argument, while keeping
+  self-adjointness theorem authority, domination, OS/Wightman, YM Clay, and
+  terminal promotion false.
+- `YMStepScalingGlobalBoundBoundary` records the running-coupling-safe
+  step-scaling product bound needed by the YM continuum bridge, while keeping
+  reflection positivity, final continuum mass-gap assembly, YM Clay, and
+  terminal promotion false.
+- `YMReflectionPositivityBoundaryConventionBoundary`,
+  `YMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary`,
+  `YMOSWightmanToContinuumMassGapSocketCompositeLightweightBoundary`, and
+  `YMContinuumMassGapFinalAssemblyBoundary` extend the bounded YM route
+  across the last honest continuum blockers: boundary-pairing compatibility
+  with Euclidean time reflection, no-spectral-pollution to OS/Wightman
+  socketing, OS/Wightman to final assembly socketing, and the explicit
+  `Delta_phys = gamma_infty * Lambda_YM * C_G` assembly surface. They remain
+  fail-closed: reflection positivity, final continuum authority, YM Clay, and
+  terminal promotion stay false.
+- `YMReflectionPositivitySpatialTauBoundary`,
+  `YMReflectionPositivityThetaBoundary`, and
+  `YMReflectionPositivityBoundaryPairingCompatibilityBoundary` now split the
+  reflection-positivity blocker into explicit spatial-`tau`, time-reflection
+  `theta`, and boundary-pairing compatibility child surfaces.
+- `YMReflectionPositivityChildCompositeLightweightBoundary` recomposes those
+  three RP child surfaces into one bounded consumer feeding the parent
+  reflection-positivity boundary while keeping OS/Wightman and Clay promotion
+  false.
+- `YMContinuumMassGapToClayAuthorityBlockerCompositeLightweightBoundary`
+  records the final fail-closed consumer from continuum mass-gap assembly into
+  the remaining Clay-authority blockers: reflection positivity, OS/Wightman,
+  external acceptance, and final authority packaging.
+- `YMExternalAcceptanceBoundary` and
+  `YMFinalAuthorityPackagingCompositeLightweightBoundary` now make the last
+  non-math blockers explicit: external review/acceptance and final authority
+  packaging above the assembly surface.
+- `UnificationCrossTermNullityDiscriminantBoundary`,
+  `UnificationNullClassSubspaceCompleteBoundary`, and
+  `UnificationParallelogramFromBilinearBoundary` record the exact
+  discriminant/Cauchy-Schwarz/null-class/parallelogram substeps now supplied
+  for U-1a while keeping quotient linearity, Jordan-von Neumann theorem
+  authority, signature, Clifford, and terminal promotion false.
+- `YMSelfAdjointToDominationPreconditionCompositeLightweightBoundary` records
+  the 15s-safe bridge from finite self-adjoint quotient input into the
+  domination precondition socket with rho/leakage budgets in scope.
+- `YMDominationToHolonomyPositivePartCompositeLightweightBoundary` and
+  `YMHolonomyPositivePartToSpectralMarginCompositeLightweightBoundary` extend
+  that bridge through positive holonomy action into a bounded spectral-margin
+  socket while keeping domination, finite gap, and Clay promotion false.
+- `YMSpectralMarginToContinuumTransferCompositeLightweightBoundary` and
+  `YMContinuumTransferToNoSpectralPollutionSocketCompositeLightweightBoundary`
+  extend the same YM route through bounded continuum-transfer and
+  no-spectral-pollution sockets while keeping OS/Wightman and continuum
+  mass-gap authority blocked.
+- `YMContinuumBridgeCompositeLightweightBoundary` records the 15s-safe
+  rho + leakage + BT->Euclidean universality composite immediately before the
+  RG / OS-Wightman continuum blockers.
+- `UnificationHCToModuloNullLinearityCompositeLightweightBoundary` and
+  `UnificationHCToFourPointInputCompositeLightweightBoundary` provide a 15s-safe
+  HC-driven replacement path above the older heavy modulo-null consumer
+  composite in rapid sprint loops.
+- `UnificationModuloNullLinearityRouteCompositeLightweightBoundary` and
+  `UnificationFourPointCancellationRouteCompositeLightweightBoundary` extend
+  the HC-driven path through representative-independence and quotient
+  linearity into a bounded four-point cancellation socket while keeping
+  parallelogram, Jordan-von Neumann, and terminal promotion false.
+- `UnificationFourPointToParallelogramSocketCompositeLightweightBoundary` and
+  `UnificationParallelogramToJordanVonNeumannSocketCompositeLightweightBoundary`
+  extend that path into bounded parallelogram and Jordan-von-Neumann sockets
+  while keeping signature, Clifford, and terminal promotion false.
+
 ## Core Pattern
 
 Every route should be readable as the same six-stage pipeline:
@@ -242,6 +389,14 @@ Bony/stationarity-defect control, and the fixed-point
 `scripts/ns_stationarity_rate_proxy_harness.py` to a checked proxy receipt,
 and `scripts/ns_bounded_abel_mass_proxy_harness.py` supplies the matching A1
 bounded-mass diagnostic.  The hard A6 split is now isolated by
+`NSA1TypeILorentzToAbelMassRouteBoundary`, which records the same
+Type-I/Lorentz -> shell-mass -> Abel-average -> bounded-mass ladder as a
+standalone fail-closed write-up surface with all proof and promotion flags
+false.  The A2 clarification is now also split explicitly:
+`NSA2NearDiagonalCoifmanMeyerRouteBoundary` records the intended repair via
+near-diagonal Leray shell geometry plus the Coifman-Meyer multiplier route to
+the tight `2^min(j,k)` bound, without promoting A2.
+The hard A6 split is now isolated by
 `NSPointwiseToAbelAveragingBoundary`, which records the diagonal,
 off-diagonal, localization, pressure, and Abel LLN/mixing obligations needed
 to replace pointwise stretching by the Abel/shell mean.  The child split is:
@@ -250,6 +405,30 @@ identification, `NSOffDiagonalShellAbsorptionBoundary` for non-diagonal
 LP/Coifman-Meyer/epsilon-gradient absorption, and
 `NSAbelShellMixingLLNBoundary` for Abel-window decorrelation and the
 `O(N_eff^-1/2)` error target.  The fourth child,
+The theorem-facing normalization layer now matches that route explicitly:
+`NSA1TypeILorentzToAbelMassRouteTheoremBoundary` records the Type-I ->
+ESS -> shell decomposition -> Abel measure -> bounded mass / lambda-moment
+claims as a lightweight fail-closed theorem surface, while
+`NSA2NearDiagonalCoifmanMeyerTheoremBoundary` records the near-diagonal
+Coifman-Meyer shell bound, `delta_r = O(|log r|^-1/2)`, and the common
+`epsilon_0` compatibility table.  These remain theorem-content surfaces only;
+A1, A2, A5 transfer, and Clay NS stay false.
+
+On the YM side, the continuum bridge now has explicit theorem-facing sockets:
+`YMContinuumUniformRhoBoundBoundary` records the McKay weak-limit density plus
+uniform `L^\infty` rho budget, `YMContinuumUniformLeakageBoundBoundary`
+records the exponential leakage decay `L_d <= C_G p^{-d}`, and
+`YMHyperbolicShimuraToEuclideanUniversalityBoundary` records the BT bulk
+plaquette matching plus Weyl gap-transfer budget
+`gap(H_L^Eucl) >= gamma_d - C beta p^{-d}`.  All three remain fail-closed and
+do not discharge the RG / OS-Wightman continuum gap blockers.
+
+On the unification side,
+`UnificationHierarchyConsistencyKillsFourPointDefectBoundary` now records the
+corrected theorem-facing route from `H1 + U-1a-H` through the
+`lambda = ±1` specialization to four-point defect cancellation, with null-class
+stability and representative-independence tracked explicitly.  This does not
+promote four-point cancellation, parallelogram, or quadratic emergence.
 `NSLocalizationPressureCommutatorBoundary`, records localization, Leray
 pressure reconstruction, pressure commutators, cutoff/boundary annuli, and
 pressure-tail absorption.  `NSPointwiseToAbelCompositeA6Boundary` now ties the
@@ -306,9 +485,27 @@ dissipation, and the assembled inequality
 `∂t D_r + (ε0/4)c_lambda D_r <= C D_r^(1+α)`.  `NSA7ResidualDepletionGronwallBoundary`
 is the lightweight A7 receipt recording the Gronwall substitution,
 smallness threshold `(β/C)^(1/α)`, monotone depletion below threshold, and
-the contradiction with persistent blowup.  These receipts harden the
-A4->A5->A6->A7 dependency chain, but A5/A6/A7 themselves, local monotonicity,
-CKN/BKM closure, and Clay NS remain unproved.
+the contradiction with persistent blowup. `NSA8FullLocalDefectMonotonicityBoundary`
+is the lightweight, 15s-safe A8 receipt recording annular localization
+control, the CKN annulus split, the recursion
+`D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha)` with
+`q = (theta^2 + C M)/(1 + C M) < 1`, and the iterative
+`D_{theta^k r} -> 0` consequence. `NSA9CKNBKMClosureBoundary` is the
+lightweight A9 receipt recording the closure handoff from iterated A8 decay
+to local vorticity vanishing, local harmonicity of velocity, elliptic
+regularity, and the standard CKN/BKM contradiction.
+`NSA8AnnularDecayClarificationBoundary` is the matching write-up
+normalization surface for the A8 recursion itself: annulus split, exact
+`q(theta,M)` contraction factor, and iterative defect decay are recorded
+explicitly, but A8 remains unproved. `NSA9SingularityContradictionRouteBoundary`
+is the same style of normalization for the A9 contradiction ladder: A8 decay
+-> vorticity vanishing -> harmonic/Biot-Savart route -> elliptic regularity
+-> contradiction, with all promotion flags still false.
+`NSA8A9MonotonicityClosureTheoremLadderBoundary` now records the combined
+fail-closed A8 -> A9 -> contradiction -> no-Type-I-blowup ladder in one
+lightweight receipt.  These receipts harden the
+A4->A5->A6->A7->A8->A9 dependency chain, but A5/A6/A7/A8/A9 themselves,
+contradiction, and Clay NS remain unproved.
 
 The current Yang-Mills route has two live calculations:
 `HamiltonianDominatesDefectPlusHolonomy`, recorded by
@@ -381,6 +578,29 @@ before orientation-sign cancellation and finite flux cancellation can close.
 YM-1 finite-boundary domain blockers: normal-orientation cancellation and
 gauge-domain/quotient preservation.  YM-1, Hamiltonian domination,
 OS/continuum transfer, YM Clay, and terminal promotion remain open.
+`YMKillingBoundarySelfAdjointnessTheoremBoundary` is now the lightweight,
+15s-safe YM-1 receipt recording the theorem content only: full-degree/Killing
+boundary convention, opposite-face involution, weight/orientation/flux
+cancellation, gauge-domain preservation, quotient descent, symmetric finite
+Hamiltonian, and finite self-adjointness on the quotient.  It is fail-closed
+and keeps domination, OS transfer, YM Clay, and terminal promotion false.
+`YMKillingBoundarySelfAdjointnessTheoremLadderBoundary` records the matching
+YM-1 -> quotient Hamiltonian -> domination -> spectral margin ->
+OS/Wightman -> continuum authority ladder in a 15s-safe fail-closed surface.
+The next YM-1 child receipts are now also split into lightweight, 15s-safe
+proof-content surfaces:
+`YMKillingBoundaryOppositeFaceInvolutionLightweightBoundary`,
+`YMKillingBoundaryFluxCancellationLightweightBoundary`,
+`YMKillingBoundaryGaugeQuotientDescentLightweightBoundary`, and
+`YMKillingBoundaryQuotientSymmetryLightweightBoundary`.  They isolate the
+opposite-face map, paired boundary flux cancellation, gauge-quotient descent,
+and quotient symmetry/self-adjointness content needed for actual YM-1 child
+proof work.  They are fail-closed and do not promote YM-1, Hamiltonian
+domination, OS transfer, YM Clay, or terminal authority.
+`YMKillingBoundaryChildProofCompositeLightweightBoundary` and
+`YMKillingBoundaryTheoremConsumerCompositeLightweightBoundary` now join those
+four children back into a lightweight composite and a theorem/ladder consumer
+surface.  They do not promote YM-1 or any downstream Clay claim.
 `YMKillingBoundarySelfAdjointnessCompositeBoundary` now composes the YM-1
 child routes into one finite self-adjointness boundary, while
 `YMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary` records the
@@ -396,6 +616,14 @@ records the non-vacuum holonomy/Wilson-action lower-bound obligation.
 `YMHolonomyActionToDominationCompositeBoundary` records the holonomy-action
 to domination handoff and spectral-margin/no-pollution preconditions.  These
 remain fail-closed.
+`YMSeiler1982GapCompatibilityBoundary` now records the remaining Seiler-1982
+compatibility write-up: reflection positivity plus cluster expansion imply a
+uniform lower bound `gamma_infty >= c2 * Casimir_min(G) > 0`, but the local
+surface remains fail-closed and does not by itself prove mass-gap survival.
+`YMBTToFourDimensionalContinuumRouteBoundary` records the BT -> flat 4D
+Euclidean transfer route, no-spectral-pollution guard, Wightman
+reconstruction gate, and interacting `SU(3)` guard, again without promoting
+any continuum YM claim.
 
 The current unification route is the sheafified four-point path:
 local defect sections plus gluing residual control must prove
@@ -457,12 +685,43 @@ route.
 `UnificationCrossTermNullityTheoremBoundary` now names the actual U-1a target:
 the gluing cross-term `G(s1+s2)-G(s1)-G(s2)` must lie in the null class before
 modulo-null linearity can feed the four-point law.
+`UnificationCrossTermNullityLightweightBoundary` is now the lightweight,
+15s-safe U-1a receipt recording the theorem content only: admissible defect
+quotient, gluing operator `G`, actual cross-term, null-class target,
+representative invariance, null transport, and the modulo-null linearity
+consumer.  It keeps four-point cancellation, parallelogram, quadratic
+emergence, and terminal promotion false.
+The next U-1a child/consumer receipts are now also split into lightweight,
+15s-safe proof-content surfaces:
+`UnificationNullClassStabilityLightweightBoundary` and
+`UnificationNullTransportModuloNullConsumerLightweightBoundary`.  They isolate
+null-class closure/representative invariance and the quotient-transport /
+modulo-null consumer route into four-point inputs.  They remain fail-closed
+and do not promote U-1a, four-point cancellation, parallelogram, quadratic
+emergence, or terminal authority.
+`UnificationCrossTermChildCompositeLightweightBoundary` and
+`UnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary` now
+join those child surfaces back into a lightweight composite and consumer
+surface aimed at modulo-null linearity / four-point input routing.  They
+remain fail-closed.
+The new finite smoke `scripts/unification_cross_term_nullity_theorem_harness.py`
+tests exactly that theorem-content split: quotient-linear families pass the
+cross-term-null target, null-residual families pass modulo null, and
+nonlinear quotient families fail as intended.  It is diagnostic only.
 `UnificationFourPointCancellationFromCrossTermNullityBoundary` records the
 downstream four-point-cancellation route from cross-term nullity through
 additive test functionals, representative invariance, and polarization.
 `UnificationModuloNullLinearityFromCrossTermNullityBoundary` records the
 composite ladder from the same cross-term nullity theorem target through
 modulo-null linearity to that four-point consumer.
+`UnificationScaleInvariantCrossTermHypothesisBoundary` records the corrected
+precondition U-1a-H: two-homogeneity alone is insufficient, and the needed
+replacement is the scale-invariant cross-term decomposition
+`G(s1+s2)-G(s1)-G(s2)=2 B(s1,s2)` with symmetric bilinear `B`.
+`UnificationJordanVonNeumannAdapterBoundary` records the standard
+Jordan-von Neumann downstream consumer: from four-point/parallelogram data to
+polarization, bilinear form, quadratic carrier, and the Clifford/spinor
+consumers, with all theorem and promotion guards still false.
 Quadratic emergence, signature/Clifford consumers, terminal unification, and
 Clay promotion remain blocked until that four-point law is actually proved.
 

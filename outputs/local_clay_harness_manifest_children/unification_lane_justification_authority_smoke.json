@@ -1,0 +1,10 @@
+{
+  "all_checks_ok": true,
+  "authority_rows_ok": true,
+  "blocker_count": 7,
+  "blocker_rows_ok": true,
+  "clause_count": 6,
+  "lane_justification_authority_remaining": true,
+  "promotion": false,
+  "work_package_count": 4
+}

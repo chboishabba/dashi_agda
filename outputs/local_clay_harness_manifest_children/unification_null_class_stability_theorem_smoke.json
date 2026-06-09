@@ -1,0 +1,11 @@
+{
+  "additive_closure_error": 2.7755575615628914e-17,
+  "checks": {
+    "additive_closure": true,
+    "negation_closure": true,
+    "representative_invariance_visible": true
+  },
+  "negation_closure_error": 0.0,
+  "promotion": false,
+  "representative_invariance_error": 0.0
+}

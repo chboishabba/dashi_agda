@@ -1,0 +1,8 @@
+{
+  "casimir_min_quarter": 0.134,
+  "gamma_d": 0.268,
+  "lambda_min": 0.0,
+  "lower_bound_holds": true,
+  "promotion": false,
+  "symmetry_error": 0.0
+}

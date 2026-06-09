@@ -1,0 +1,7 @@
+{
+  "all_checks_ok": true,
+  "os_route_blocked_until_rp_ok": true,
+  "parent_boundary_fed_ok": true,
+  "promotion": false,
+  "substeps_present_ok": true
+}

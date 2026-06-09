@@ -6808,6 +6808,22 @@ Cleanup state:
   `coarsePhase (T² (strobeEmbed h)) = rotateTri (coarsePhase (strobeEmbed h))`.
   This is the intended “effective coarse dynamics” layer without claiming raw-cycle contraction.
 - Lane follow-up (2026-03-29): `CLOCKPhaseInstance` now packages that effective layer as
+
+## 2026-06-09 (Base369 commuting forms refresh)
+
+- Context source (db after live UUID pull): online UUID `6a27ce1a-0a64-83ec-921d-67db5434c5b8`, title `Mathematical Commuting Forms`, canonical ID `f9511f366e278216be754ed0539d277abe8ad32f`. Pull succeeded with `74` fetched messages and `69` inserted into `~/chat_archive.sqlite`.
+- Main repo-safe split pulled from the thread:
+  `9 refines 3 by resolution`, `6 doubles 3 by polarity`, balanced ternary remains the semantic spine for `TriTruth`, and only the mod-3 coarse maps are canonical one-step rotation-equivariant quotients.
+- Formal correction adopted from the thread:
+  `e6` is not the old `hex-0, hex-2, hex-4` / `spin 2` proposal. The landed section is the corrected CRT-style map
+  `tri-low -> hex-0`, `tri-mid -> hex-4`, `tri-high -> hex-2`,
+  with both `q6 ∘ e6 = id` and `spin 4 rotateHex ∘ e6 = e6 ∘ rotateTri`.
+- Formal boundary adopted from the thread:
+  `e9` stays `tri-low -> non-0`, `tri-mid -> non-3`, `tri-high -> non-6` with `spin 3`, but it is explicitly not a section of the mod-3 quotient. The landed statement is `q9 (e9 t) = tri-low` for every `t`; this is a scale-shift lift, not a splitting.
+- Implementation landed in `DASHI/Physics/Base369PhaseBridge.agda`:
+  `coarseHexMod3` / `q6`, `coarseNonaryMod3` / `q9`, `coarseNonaryBlock`, the corrected `e6`, the explicit `e9`, quotient/lift xor homomorphisms, and law tables for the commuting quotient and lift surfaces.
+- Obstruction recorded explicitly:
+  `coarseNonaryBlock` is a valid block/chunk coarse reading but not the canonical cyclic quotient; the module includes a concrete non-equivariance witness at `non-0` under one-step `rotateNonary`.
   `EffectiveClockClosure`, with an invariant, step² preservation, a lag-defect Lyapunov condition,
   and coarse triadic phase evolution on the stroboscopic sector.
 - Second-rung CLOCK lane result: `CLOCKPhaseInstance` now also carries a concrete cone/admissibility layer,

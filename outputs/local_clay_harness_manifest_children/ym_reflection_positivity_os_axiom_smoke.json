@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "modulus_squared_structure_ok": true,
+  "os_axiom_ok": true,
+  "positive_weight_ok": true,
+  "promotion": false,
+  "theta_change_of_variables_ok": true
+}

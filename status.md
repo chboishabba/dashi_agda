@@ -1,3 +1,415 @@
+# 2026-06-09 submission-packet and review-packet round
+
+- Added three new 15s-safe packet boundaries:
+  `DASHI.Physics.Closure.YMPaperSubmissionPacketBoundary`,
+  `DASHI.Physics.Closure.NSPaperSubmissionPacketBoundary`, and
+  `DASHI.Physics.Closure.UnificationAuthorityReviewPacketBoundary`.
+  These sit one layer above the current paper/consumer-assembly ledgers and
+  record the remaining work as submission/review packet packaging rather than
+  missing local theorem structure. YM Clay, NS Clay, unification, and
+  terminal promotion remain false.
+- Added three deterministic manifest-routed packet harnesses:
+  `scripts/ym_paper_submission_packet_harness.py`,
+  `scripts/ns_paper_submission_packet_harness.py`, and
+  `scripts/unification_authority_review_packet_harness.py`.
+  These are packet-only diagnostics; they do not prove theorems or promote
+  any Clay/unification lane.
+
+# 2026-06-09 paper-assembly and consumer-authority assembly round
+
+- Added three new 15s-safe assembly boundaries:
+  `DASHI.Physics.Closure.YMStandardLanguagePaperAssemblyBoundary`,
+  `DASHI.Physics.Closure.NSStandardPDEWriteupAssemblyBoundary`, and
+  `DASHI.Physics.Closure.UnificationConsumerAuthorityAssemblyBoundary`.
+  These sit one layer above the new readiness ledgers and record the current
+  remaining work as paper assembly and consumer-authority packaging rather
+  than missing local theorem structure. YM Clay, NS Clay, unification, and
+  terminal promotion remain false.
+- Added three deterministic manifest-routed assembly harnesses:
+  `scripts/ym_standard_language_paper_assembly_harness.py`,
+  `scripts/ns_standard_pde_writeup_assembly_harness.py`, and
+  `scripts/unification_consumer_authority_assembly_harness.py`.
+  These are assembly-only diagnostics; they do not prove theorems or promote
+  any Clay/unification lane.
+
+# 2026-06-09 writeup-readiness and authority-readiness consolidation round
+
+- Added three new 15s-safe readiness/authority boundaries:
+  `DASHI.Physics.Closure.YMStandardLanguageWriteupReadinessBoundary`,
+  `DASHI.Physics.Closure.NSWriteupAndConstantsReadinessBoundary`, and
+  `DASHI.Physics.Closure.UnificationLaneJustificationAuthorityBoundary`.
+  These record that the current remaining gaps are now writeup, standard
+  language translation, constant extraction, authority packaging, and review,
+  not missing local route structure. YM Clay, NS Clay, unification, and
+  terminal promotion remain false.
+- Added three deterministic manifest-routed readiness harnesses:
+  `scripts/ym_standard_language_writeup_readiness_harness.py`,
+  `scripts/ns_writeup_and_constants_readiness_harness.py`, and
+  `scripts/unification_lane_justification_authority_harness.py`.
+  These are ledger-only diagnostics; they do not prove theorems or promote
+  any Clay/unification lane.
+
+# 2026-06-09 YM RP theorem assembly and U-1a-H per-lane consolidation round
+
+- Added two new 15s-safe YM theorem-facing assembly/ledger surfaces:
+  `DASHI.Physics.Closure.YMReflectionPositivityFullTheoremAssemblyBoundary`
+  and `DASHI.Physics.Closure.YMOnlyRemainingAuthorityBlockersBoundary`.
+  These recompose the exact RP.1-RP.4 substeps into one theorem-facing
+  assembly surface and make explicit that the current remaining YM gap is
+  authority-side: RP theorem authority, OS/Wightman authority, external
+  acceptance, and final packaging. YM Clay and terminal promotion remain
+  false.
+- Added two new 15s-safe unification assembly/consumer surfaces:
+  `DASHI.Physics.Closure.UnificationU1aHPerLaneCompositeBoundary` and
+  `DASHI.Physics.Closure.UnificationSignatureCliffordConsumerSocketBoundary`.
+  These recompose the three per-lane U-1a-H justifications into one assembly
+  surface feeding the existing discriminant/HC/JvN route and add the first
+  bounded consumer layer above the JvN socket for signature/Clifford rows.
+  Unification and terminal promotion remain false.
+- Added four deterministic manifest-routed smokes:
+  `scripts/ym_reflection_positivity_full_theorem_assembly_harness.py`,
+  `scripts/ym_only_remaining_authority_blockers_harness.py`,
+  `scripts/unification_u1ah_per_lane_composite_harness.py`, and
+  `scripts/unification_signature_clifford_consumer_socket_harness.py`.
+  These are finite diagnostics only; they do not prove theorems or promote
+  any Clay/unification lane.
+
+# 2026-06-09 exact YM reflection-positivity substeps and U-1a-H per-lane justification surfaces
+
+- Added four new 15s-safe YM reflection-positivity theorem-facing substep
+  surfaces:
+  `DASHI.Physics.Closure.YMReflectionPositivitySpatialTauThetaCommutativityBoundary`,
+  `DASHI.Physics.Closure.YMReflectionPositivityActionSplitBoundary`,
+  `DASHI.Physics.Closure.YMReflectionPositivityTransferMatrixHermitianBoundary`,
+  and `DASHI.Physics.Closure.YMReflectionPositivityOSAxiomBoundary`.
+  These record the exact four-step RP route now provided by the current
+  continuum argument: tau/theta commutativity, the `S_+ + S_0 + S_-` action
+  split, theta-Hermitian transfer-matrix compatibility with the opposite-face
+  boundary convention, and the final `|F|^2` OS-axiom structure.  Reflection
+  positivity theorem authority, OS/Wightman authority, YM Clay, and terminal
+  promotion remain false.
+- Added four new 15s-safe unification theorem-facing surfaces:
+  `DASHI.Physics.Closure.UnificationU1aHJustificationNSLaneBoundary`,
+  `DASHI.Physics.Closure.UnificationU1aHJustificationYMLaneBoundary`,
+  `DASHI.Physics.Closure.UnificationU1aHJustificationGlobalBoundary`, and
+  `DASHI.Physics.Closure.UnificationCliffordSignatureTableBoundary`.
+  These record the exact `U-1a-H` lane justifications for the NS `H^1_0`
+  energy, the YM vacuum linearization / cubic-remainder route, the global
+  Hilbert/Jordan-von Neumann route, and the current
+  `Cl(1,3) / Cl(4,0) / Cl(3,1)` consumer table.  Signature, Clifford,
+  unification promotion, and terminal promotion remain false.
+- Added eight deterministic manifest-routed smokes:
+  `scripts/ym_reflection_positivity_spatial_tau_theta_commutativity_harness.py`,
+  `scripts/ym_reflection_positivity_action_split_harness.py`,
+  `scripts/ym_reflection_positivity_transfer_matrix_hermitian_harness.py`,
+  `scripts/ym_reflection_positivity_os_axiom_harness.py`,
+  `scripts/unification_u1ah_ns_lane_harness.py`,
+  `scripts/unification_u1ah_ym_lane_harness.py`,
+  `scripts/unification_u1ah_global_lane_harness.py`, and
+  `scripts/unification_clifford_signature_table_harness.py`.
+  These are finite diagnostics only; they do not prove theorems or promote
+  Clay/unification lanes.
+
+# 2026-06-09 explicit YM-1/YM step-scaling and U-1a substep theorem surfaces
+
+- Added three new 15s-safe YM theorem-facing substep surfaces:
+  `DASHI.Physics.Closure.YMKillingBoundaryOrientationSignCancellationBoundary`,
+  `DASHI.Physics.Closure.YMKillingBoundaryGreenIdentityBoundary`, and
+  `DASHI.Physics.Closure.YMKillingBoundarySpectralGapExplicitBoundary`.
+  These isolate the exact paired orientation-sign cancellation mechanism,
+  the discrete Green-identity/hydge-adjointness handoff, and the explicit
+  finite spectral-gap lower bound `gamma_d >= Casimir_min(G)/4`, while
+  keeping self-adjointness authority, domination, OS/Wightman transfer,
+  YM Clay, and terminal promotion false.
+- Added one new 15s-safe YM continuum theorem-facing surface:
+  `DASHI.Physics.Closure.YMStepScalingGlobalBoundBoundary`.
+  It records the running-coupling-safe global step-scaling product bound
+  `sigma^(n)(u) <= u * exp(C_sigma')` and the `n * g0^2 -> 1 / b1`
+  compensation route, while keeping reflection positivity, final continuum
+  mass-gap assembly, YM Clay, and terminal promotion false.
+- Added three new 15s-safe unification theorem-facing substep surfaces:
+  `DASHI.Physics.Closure.UnificationCrossTermNullityDiscriminantBoundary`,
+  `DASHI.Physics.Closure.UnificationNullClassSubspaceCompleteBoundary`, and
+  `DASHI.Physics.Closure.UnificationParallelogramFromBilinearBoundary`.
+  These isolate the discriminant/Cauchy-Schwarz/null-orthogonality step,
+  null-class subspace closure and representative independence, and the exact
+  bilinear/parallelogram route into the existing Jordan-von-Neumann socket.
+  Quotient-linearity authority, signature, Clifford, unification promotion,
+  and terminal promotion remain false.
+- Added six deterministic manifest-routed smokes:
+  `scripts/ym_orientation_sign_cancellation_harness.py`,
+  `scripts/ym_spectral_gap_explicit_constant_harness.py`,
+  `scripts/ym_step_scaling_global_bound_harness.py`,
+  `scripts/unification_discriminant_cross_term_harness.py`,
+  `scripts/unification_null_class_subspace_harness.py`, and
+  `scripts/unification_parallelogram_from_bilinear_harness.py`.
+  These are diagnostic only; they do not prove theorems or promote any lane.
+
+# 2026-06-09 YM continuum/no-spectral route consumers and unification parallelogram/JvN consumers
+
+- Added two new 15s-safe YM route consumers:
+  `DASHI.Physics.Closure.YMSpectralMarginToContinuumTransferCompositeLightweightBoundary`
+  and
+  `DASHI.Physics.Closure.YMContinuumTransferToNoSpectralPollutionSocketCompositeLightweightBoundary`.
+  These extend the lightweight YM route from spectral-margin sockets through
+  bounded continuum transfer into a no-spectral-pollution socket while keeping
+  no-spectral-pollution, OS/Wightman, continuum mass gap, YM Clay, and
+  terminal promotion false.
+- Added two new 15s-safe unification route consumers:
+  `DASHI.Physics.Closure.UnificationFourPointToParallelogramSocketCompositeLightweightBoundary`
+  and
+  `DASHI.Physics.Closure.UnificationParallelogramToJordanVonNeumannSocketCompositeLightweightBoundary`.
+  These extend the lightweight unification route from four-point cancellation
+  sockets into bounded parallelogram and Jordan-von-Neumann sockets while
+  keeping quadratic emergence, signature, Clifford, and terminal promotion
+  false.
+- Added matching deterministic composite diagnostics:
+  `scripts/ym_continuum_nospectral_route_harness.py` and
+  `scripts/unification_parallelogram_jvn_route_harness.py`.
+  These are manifest-routed smokes only; they do not prove theorems or
+  promote any Clay/unification lane.
+- Integrated the new surfaces into `DASHI/Everything.agda`,
+  `Docs/AgdaValidationTargets.md`, `Docs/UnifiedRoutesLanePlan.md`, and the
+  local harness manifest. This remains a fail-closed theorem-content round
+  only.
+
+# 2026-06-09 YM domination/spectral-margin route composites and unification route composites
+
+- Added two new 15s-safe YM theorem-facing composites:
+  `DASHI.Physics.Closure.YMDominationToHolonomyPositivePartCompositeLightweightBoundary`
+  and
+  `DASHI.Physics.Closure.YMHolonomyPositivePartToSpectralMarginCompositeLightweightBoundary`.
+  These extend the lightweight YM route from self-adjoint quotient inputs
+  through positive holonomy action into a bounded spectral-margin socket while
+  keeping domination, finite gap, continuum transfer, YM Clay, and terminal
+  promotion false.
+- Added two new 15s-safe unification route composites:
+  `DASHI.Physics.Closure.UnificationModuloNullLinearityRouteCompositeLightweightBoundary`
+  and
+  `DASHI.Physics.Closure.UnificationFourPointCancellationRouteCompositeLightweightBoundary`.
+  These extend the HC-driven replacement path through representative
+  independence and modulo-null linearity into a bounded four-point
+  cancellation socket while keeping four-point/parallelogram/Jordan-von
+  Neumann/terminal promotion false.
+- Added matching deterministic composite diagnostics:
+  `scripts/ym_domination_spectral_margin_route_harness.py` and
+  `scripts/unification_modulo_null_four_point_route_harness.py`.
+  These are manifest-routed smokes only; they do not prove theorems or
+  promote any Clay/unification lane.
+- Integrated the new surfaces into `DASHI/Everything.agda`,
+  `Docs/AgdaValidationTargets.md`, `Docs/UnifiedRoutesLanePlan.md`, and the
+  local harness manifest.  This remains a fail-closed theorem-content round
+  only.
+
+# 2026-06-09 A1/A2 theorem receipts, YM continuum bounds, and HC->four-point theorem surface
+
+- Added theorem-facing NS normalization surfaces
+  `DASHI.Physics.Closure.NSA1TypeILorentzToAbelMassRouteTheoremBoundary` and
+  `DASHI.Physics.Closure.NSA2NearDiagonalCoifmanMeyerTheoremBoundary`.
+  They record the A1 Type-I -> ESS -> shell -> Abel measure route and the A2
+  near-diagonal Coifman-Meyer / `delta_r = O(|log r|^-1/2)` route as bounded,
+  15s-safe, fail-closed theorem-content surfaces only.  A1, A2, A5 transfer,
+  NS Clay, and terminal promotion remain false.
+- Added theorem-facing YM continuum surfaces
+  `DASHI.Physics.Closure.YMContinuumUniformRhoBoundBoundary`,
+  `DASHI.Physics.Closure.YMContinuumUniformLeakageBoundBoundary`, and
+  `DASHI.Physics.Closure.YMHyperbolicShimuraToEuclideanUniversalityBoundary`.
+  These record the McKay `rho` budget, the exponential leakage bound
+  `L_d <= C_G p^{-d}`, and the BT -> Euclidean Weyl gap-transfer budget while
+  keeping RG transfer, OS/Wightman reconstruction, YM Clay, and terminal
+  promotion false.
+- Added theorem-facing unification surface
+  `DASHI.Physics.Closure.UnificationHierarchyConsistencyKillsFourPointDefectBoundary`.
+  It records the corrected `H1 + U-1a-H` -> `lambda = ±1` -> four-point
+  cancellation route, with null-class stability and representative-independence
+  tracked explicitly.  Four-point cancellation, parallelogram, quadratic
+  emergence, unification promotion, and terminal promotion remain false.
+- Added six deterministic manifest-routed smokes:
+  `scripts/ns_a1_type_i_abel_mass_theorem_harness.py`,
+  `scripts/ns_a2_near_diagonal_coifman_meyer_theorem_harness.py`,
+  `scripts/ym_continuum_uniform_rho_bound_harness.py`,
+  `scripts/ym_continuum_uniform_leakage_bound_harness.py`,
+  `scripts/ym_hyperbolic_shimura_to_euclidean_universality_harness.py`, and
+  `scripts/unification_hierarchy_consistency_kills_four_point_defect_harness.py`.
+  These are finite diagnostics only; they do not prove theorems or promote any
+  Clay lane.
+- Integrated the new surfaces into `DASHI/Everything.agda`,
+  `Docs/AgdaValidationTargets.md`, `Docs/UnifiedRoutesLanePlan.md`, and the
+  local harness manifest.  This remains a fail-closed theorem-content round
+  only.
+
+# 2026-06-09 YM-1 child receipts and U-1a consumers
+
+- Added two lightweight YM composites:
+  `DASHI.Physics.Closure.YMKillingBoundaryChildProofCompositeLightweightBoundary`
+  and
+  `DASHI.Physics.Closure.YMKillingBoundaryTheoremConsumerCompositeLightweightBoundary`.
+  These join the four YM-1 child receipts back into a bounded composite and a
+  theorem/ladder consumer surface while keeping all promotion flags false.
+- Added two lightweight unification composites:
+  `DASHI.Physics.Closure.UnificationCrossTermChildCompositeLightweightBoundary`
+  and
+  `DASHI.Physics.Closure.UnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary`.
+  These join null-class stability and null-transport/modulo-null routing back
+  into a bounded U-1a consumer layer while keeping four-point/parallelogram/
+  terminal promotion false.
+- Added matching deterministic composite diagnostics:
+  `scripts/ym_killing_boundary_child_composite_harness.py` and
+  `scripts/unification_cross_term_child_composite_harness.py`.
+  These are manifest-routed smokes only.
+
+- Added four new 15s-safe YM-1 child-proof surfaces:
+  `DASHI.Physics.Closure.YMKillingBoundaryOppositeFaceInvolutionLightweightBoundary`,
+  `DASHI.Physics.Closure.YMKillingBoundaryFluxCancellationLightweightBoundary`,
+  `DASHI.Physics.Closure.YMKillingBoundaryGaugeQuotientDescentLightweightBoundary`,
+  and `DASHI.Physics.Closure.YMKillingBoundaryQuotientSymmetryLightweightBoundary`.
+  These split the current YM-1 theorem content into actual child-proof lanes:
+  opposite-face involution, paired boundary flux cancellation, gauge-quotient
+  descent, and quotient symmetry/self-adjointness shape.  All remain
+  fail-closed; YM-1, domination, OS transfer, YM Clay, and terminal
+  promotion stay false.
+- Added matching deterministic YM child diagnostics:
+  `scripts/ym_opposite_face_involution_theorem_harness.py`,
+  `scripts/ym_flux_cancellation_theorem_harness.py`,
+  `scripts/ym_gauge_quotient_descent_theorem_harness.py`, and
+  `scripts/ym_quotient_symmetry_theorem_harness.py`.
+  These are manifest-routed finite smokes only.
+- Added two new 15s-safe U-1a child/consumer surfaces:
+  `DASHI.Physics.Closure.UnificationNullClassStabilityLightweightBoundary`
+  and
+  `DASHI.Physics.Closure.UnificationNullTransportModuloNullConsumerLightweightBoundary`.
+  They isolate null-class closure under representative changes and the
+  quotient-transport/modulo-null consumer route into four-point inputs.
+  Four-point cancellation, parallelogram, quadratic emergence, and terminal
+  promotion remain false.
+- Added matching deterministic unification diagnostics:
+  `scripts/unification_null_class_stability_theorem_harness.py` and
+  `scripts/unification_null_transport_modulo_null_consumer_harness.py`.
+  These are manifest-routed finite smokes only.
+- Integrated the new surfaces into `DASHI/Everything.agda`,
+  `Docs/AgdaValidationTargets.md`, `Docs/UnifiedRoutesLanePlan.md`, and the
+  local harness manifest.  This is still a fail-closed theorem-content round
+  only; no Clay or terminal promotion changed.
+
+# 2026-06-09 YM-1 and U-1a lightweight receipt + diagnostic hardening
+
+- Added `DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessTheoremBoundary`.
+  It is a standalone, 15s-safe, fail-closed YM-1 receipt recording the
+  theorem content only: full-degree/Killing boundary convention,
+  opposite-face involution, weight/orientation/flux cancellation,
+  gauge-domain preservation, quotient descent, symmetric finite Hamiltonian,
+  and finite self-adjointness on the quotient.  Hamiltonian domination, OS
+  transfer, YM Clay, and terminal promotion remain false.
+- Added `DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessTheoremLadderBoundary`.
+  It records the lightweight fail-closed dependency ladder from YM-1 into
+  quotient Hamiltonian, domination, spectral margin, OS/Wightman transfer,
+  and continuum mass-gap authority.  No theorem or Clay promotion follows.
+- Added new local YM diagnostics:
+  `scripts/ym_killing_boundary_flux_pairing_harness.py`,
+  `scripts/ym_gauge_quotient_domain_harness.py`, and
+  `scripts/ym_killing_boundary_theorem_harness.py`.
+  These are manifest-routed finite smokes only; they do not prove YM-1 or
+  promote Clay.
+- Added `DASHI.Physics.Closure.UnificationCrossTermNullityLightweightBoundary`.
+  It is a standalone, 15s-safe, fail-closed U-1a receipt recording the
+  theorem content only: admissible defect quotient, gluing operator `G`,
+  actual cross-term, null-class target, representative invariance, null
+  transport, and the modulo-null linearity consumer.  Four-point
+  cancellation, parallelogram, quadratic emergence, and terminal promotion
+  remain false.
+- Added new local unification diagnostics:
+  `scripts/unification_modulo_null_linearity_harness.py`,
+  `scripts/unification_cross_term_to_four_point_pipeline_harness.py`, and
+  `scripts/unification_cross_term_nullity_theorem_harness.py`.
+  These are manifest-routed finite smokes only; they do not prove U-1a or
+  promote unification.
+
+# 2026-06-09 six-lane NS/YM/U write-up normalization round
+
+- Added four new fail-closed NS write-up normalization surfaces:
+  `DASHI.Physics.Closure.NSA1TypeILorentzToAbelMassRouteBoundary`,
+  `DASHI.Physics.Closure.NSA2NearDiagonalCoifmanMeyerRouteBoundary`,
+  `DASHI.Physics.Closure.NSA8AnnularDecayClarificationBoundary`, and
+  `DASHI.Physics.Closure.NSA9SingularityContradictionRouteBoundary`.
+  Together they encode the remaining A1/A2/A8/A9 write-up ladder as explicit
+  route receipts: Type-I/Lorentz -> shell-mass -> Abel averaging, the
+  near-diagonal Coifman-Meyer A2 repair, the exact A8 contraction factor
+  `q(theta,M)`, and the A9 contradiction route through vorticity vanishing,
+  harmonicity, elliptic regularity, and BKM/CKN contradiction.  All theorem
+  and promotion flags remain false.
+- Added matching deterministic local diagnostics:
+  `scripts/ns_a1_type_i_abel_mass_route_harness.py`,
+  `scripts/ns_a2_near_diagonal_coifman_meyer_harness.py`,
+  `scripts/ns_a8_annular_decay_clarification_harness.py`, and
+  `scripts/ns_a9_singularity_contradiction_route_harness.py`.
+  These are finite manifest-routed smokes only; they do not prove A1/A2/A8/A9
+  or promote Clay.
+- Added the remaining YM write-up normalization surfaces
+  `DASHI.Physics.Closure.YMSeiler1982GapCompatibilityBoundary` and
+  `DASHI.Physics.Closure.YMBTToFourDimensionalContinuumRouteBoundary`, plus
+  the deterministic proxy
+  `scripts/ym_seiler_continuum_route_harness.py`.  They record the Seiler
+  1982 uniform-gap compatibility and the BT -> flat 4D continuum route while
+  keeping continuum mass-gap, OS/Wightman reconstruction, YM Clay, and
+  terminal promotion false.
+- Added the corrected unification write-up normalization surfaces
+  `DASHI.Physics.Closure.UnificationScaleInvariantCrossTermHypothesisBoundary`
+  and `DASHI.Physics.Closure.UnificationJordanVonNeumannAdapterBoundary`,
+  plus `scripts/unification_scale_invariant_cross_term_harness.py`.  These
+  record Hypothesis U-1a-H and the downstream Jordan-von Neumann consumer
+  route while keeping four-point cancellation, quadratic emergence, and
+  terminal promotion false.
+- Integrated the new modules into `DASHI/Everything.agda`,
+  `Docs/AgdaValidationTargets.md`, and `Docs/UnifiedRoutesLanePlan.md`.
+  This is still a fail-closed write-up/diagnostic round only; no NS, YM,
+  Clay, or terminal promotion changed.
+
+# 2026-06-09 A8/A9 receipt hardening and closure diagnostics
+
+- Added `DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary`.
+  It is a standalone, 15s-safe, fail-closed A8 receipt recording annular
+  localization control, the CKN annulus split, the recursion
+  `D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha)` with
+  `q = (theta^2 + C M)/(1 + C M) < 1`, and the iterative consequence
+  `D_{theta^k r} -> 0`.  A8, A9, NS Clay, and terminal promotion remain
+  false.
+- Added `DASHI.Physics.Closure.NSA9CKNBKMClosureBoundary`.
+  It is a standalone, 15s-safe, fail-closed A9 receipt recording the
+  closure handoff from A8 iteration to local vorticity vanishing,
+  Biot-Savart harmonicity, elliptic regularity, and the standard CKN/BKM
+  contradiction.  A9, NS Clay, and terminal promotion remain false.
+- Added new local diagnostics:
+  `scripts/ns_a8_full_local_defect_monotonicity_harness.py` and
+  `scripts/ns_a9_ckn_bkm_closure_harness.py`.
+  These are manifest-routed finite smokes only; they do not prove A8/A9 or
+  promote Clay.
+
+# 2026-06-09 A8/A9 receipt and closure-pipeline hardening
+
+- Added `DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary`.
+  It is now a standalone, 15s-safe, fail-closed A8 receipt recording annular
+  localization control, the CKN annulus split, the recursion
+  `D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha)` with
+  `q = (theta^2 + C M)/(1 + C M) < 1`, and the iterative
+  `D_{theta^k r} -> 0` consequence.  A8, A9, NS Clay, and terminal promotion
+  remain false.
+- Added `DASHI.Physics.Closure.NSA9CKNBKMClosureBoundary`.
+  It is now a standalone, 15s-safe, fail-closed A9 receipt recording the
+  closure handoff from iterated A8 decay to local vorticity vanishing, local
+  harmonicity of velocity, elliptic regularity, and the standard CKN/BKM
+  contradiction.  A9, NS Clay, and terminal promotion remain false.
+- Added `DASHI.Physics.Closure.NSA8A9MonotonicityClosureTheoremLadderBoundary`.
+  It records the combined fail-closed A8 -> A9 -> contradiction ->
+  no-Type-I-blowup ladder as a lightweight dependency surface.  No theorem or
+  Clay promotion follows from it.
+- Added new local diagnostics:
+  `scripts/ns_a8_full_local_defect_monotonicity_harness.py`,
+  `scripts/ns_a8_scale_monotonicity_harness.py`,
+  `scripts/ns_a9_ckn_bkm_closure_harness.py`, and
+  `scripts/ns_a8_a9_closure_pipeline_harness.py`.
+  These are manifest-routed finite smokes only; they do not prove A8/A9 or
+  promote Clay.
+
 # 2026-06-09 A5/A6/A7 receipt hardening and diagnostic harness integration
 
 - Added `DASHI.Physics.Closure.NSA5KappaBiasVanishingFromA4StationarityBoundary`.
@@ -8650,3 +9062,78 @@ unless a line explicitly says it describes the live monitor surface.
   `NavierStokesClayAssembly`, and `clayNavierStokesPromoted` false/open.
   The classifier recommends `BoundaryVorticityAmplificationLaw` as the next
   analytic theorem.
+# 2026-06-09 YM domination-precondition composites and HC lightweight consumer path
+
+- Added lightweight YM composites
+  `DASHI.Physics.Closure.YMSelfAdjointToDominationPreconditionCompositeLightweightBoundary`
+  and `DASHI.Physics.Closure.YMContinuumBridgeCompositeLightweightBoundary`.
+  These record the finite self-adjoint quotient -> domination socket and the
+  rho + leakage + BT->Euclidean continuum bridge while keeping domination,
+  spectral margin, RG transfer, YM Clay, and terminal promotion false.
+- Added lightweight unification composites
+  `DASHI.Physics.Closure.UnificationHCToModuloNullLinearityCompositeLightweightBoundary`
+  and `DASHI.Physics.Closure.UnificationHCToFourPointInputCompositeLightweightBoundary`.
+  These provide a 15s-safe HC-driven consumer path above the older heavy
+  modulo-null consumer composite.  Four-point, parallelogram, Jordan-von
+  Neumann, unification promotion, and terminal promotion remain false.
+- Added matching deterministic composite diagnostics:
+  `scripts/ym_selfadjoint_to_domination_precondition_harness.py` and
+  `scripts/unification_hc_composite_harness.py`.
+  These are manifest-routed finite smokes only.
+- Integrated the new composites into `DASHI/Everything.agda`,
+  `Docs/AgdaValidationTargets.md`, and the local harness manifest.  This
+  remains a fail-closed theorem-content round.
+# 2026-06-09 YM reflection-positivity and final continuum mass-gap route surfaces
+
+- Added four new 15s-safe YM continuum theorem-facing surfaces:
+  `DASHI.Physics.Closure.YMReflectionPositivityBoundaryConventionBoundary`,
+  `DASHI.Physics.Closure.YMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary`,
+  `DASHI.Physics.Closure.YMOSWightmanToContinuumMassGapSocketCompositeLightweightBoundary`,
+  and `DASHI.Physics.Closure.YMContinuumMassGapFinalAssemblyBoundary`.
+  These isolate the final honest YM continuum blockers now named in the
+  current route: boundary-convention compatibility with Euclidean time
+  reflection, the no-spectral-pollution -> OS/Wightman socket, the
+  OS/Wightman -> final mass-gap socket, and the explicit
+  `Delta_phys = gamma_infty * Lambda_YM * C_G` final assembly surface.
+  Reflection positivity, OS/Wightman theorem authority, final continuum
+  mass-gap authority, YM Clay, and terminal promotion remain false.
+- Added two deterministic manifest-routed smokes:
+  `scripts/ym_reflection_positivity_boundary_convention_harness.py` and
+  `scripts/ym_os_wightman_massgap_route_harness.py`.
+  These are diagnostic only; they do not prove theorems or promote any lane.
+# 2026-06-09 YM reflection-positivity child split and final Clay-authority blocker
+
+- Added three new 15s-safe YM reflection-positivity child surfaces:
+  `DASHI.Physics.Closure.YMReflectionPositivitySpatialTauBoundary`,
+  `DASHI.Physics.Closure.YMReflectionPositivityThetaBoundary`, and
+  `DASHI.Physics.Closure.YMReflectionPositivityBoundaryPairingCompatibilityBoundary`.
+  These split the remaining reflection-positivity blocker into explicit
+  spatial-`tau`, Euclidean time-reflection `theta`, and boundary-pairing
+  compatibility substeps while keeping reflection-positivity authority,
+  OS/Wightman authority, YM Clay, and terminal promotion false.
+- Added one new 15s-safe YM continuum authority consumer:
+  `DASHI.Physics.Closure.YMContinuumMassGapToClayAuthorityBlockerCompositeLightweightBoundary`.
+  It records the final fail-closed consumer from explicit continuum mass-gap
+  assembly into the remaining Clay-authority blockers: reflection positivity,
+  OS/Wightman, external acceptance, and final authority packaging.
+- Added two deterministic manifest-routed smokes:
+  `scripts/ym_reflection_positivity_child_harness.py` and
+  `scripts/ym_final_assembly_clay_blocker_harness.py`.
+  These are diagnostic only; they do not prove theorems or promote any lane.
+# 2026-06-09 YM RP consolidation and final authority packaging surfaces
+
+- Added one new 15s-safe YM RP consolidation surface:
+  `DASHI.Physics.Closure.YMReflectionPositivityChildCompositeLightweightBoundary`.
+  It recomposes the three RP child substeps back into one bounded consumer
+  feeding the parent RP boundary while keeping OS/Wightman, YM Clay, and
+  terminal promotion false.
+- Added two new 15s-safe YM authority surfaces:
+  `DASHI.Physics.Closure.YMExternalAcceptanceBoundary` and
+  `DASHI.Physics.Closure.YMFinalAuthorityPackagingCompositeLightweightBoundary`.
+  These make the remaining non-math blockers explicit above final assembly:
+  external review/acceptance and final authority packaging. Final continuum
+  authority, YM Clay, and terminal promotion remain false.
+- Added two deterministic manifest-routed smokes:
+  `scripts/ym_reflection_positivity_consolidation_harness.py` and
+  `scripts/ym_final_authority_packaging_harness.py`.
+  These are diagnostic only; they do not prove theorems or promote any lane.

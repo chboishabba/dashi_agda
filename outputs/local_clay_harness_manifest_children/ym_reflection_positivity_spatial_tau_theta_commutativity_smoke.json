@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "domain_preservation_ok": true,
+  "edge_family_count": 4,
+  "max_error": 0.0,
+  "promotion": false,
+  "tau_theta_commute_ok": true
+}

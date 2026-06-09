@@ -1,0 +1,8 @@
+{
+  "all_checks_ok": true,
+  "downstream_routes_fed_ok": true,
+  "global_lane_ok": true,
+  "ns_lane_ok": true,
+  "promotion": false,
+  "ym_lane_ok": true
+}

@@ -1,0 +1,8 @@
+{
+  "addition_closure_ok": true,
+  "all_checks_ok": true,
+  "null_orthogonality_ok": true,
+  "promotion": false,
+  "representative_independence_ok": true,
+  "scalar_closure_ok": true
+}
