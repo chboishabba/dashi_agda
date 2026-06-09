@@ -218,12 +218,17 @@ coarea/Jacobian/Fubini estimates, A4, A6, NS Clay, or terminal promotion.
 `DASHI.Physics.Closure.NSA4CoareaStripPreimageCalculationBoundary`,
 `DASHI.Physics.Closure.NSA4GradientFormulaLocalChartBoundary`,
 `DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary`,
+`DASHI.Physics.Closure.NSA4DerivativeJacobianLowerBoundCompositeBoundary`,
+`DASHI.Physics.Closure.NSA4EtaStripCoareaSlabEstimateBoundary`,
 `DASHI.Physics.Closure.NSA4UniformErrorBudgetCompositeBoundary`,
 `DASHI.Physics.Closure.NSA4ResidualPositiveAfterErrorsBoundary`, and
-`DASHI.Physics.Closure.NSA4ToA6TransferLadderBoundary` now isolate the exact
-coarea scalar calculation, local-chart gradient formula, uniform-in-normal
-constants, the `c eta` minus exceptional-error budget, residual positivity
-for `r < r0(eta,R,M)`, and the A4 -> A5 -> A6 -> A7 dependency ladder.
+`DASHI.Physics.Closure.NSA4ToA6TransferLadderBoundary`, plus
+`DASHI.Physics.Closure.NSA4ResidualPositiveTheoremLadderBoundary`, now
+isolate the exact coarea scalar calculation, local-chart gradient formula,
+derivative/Jacobian lower-bound composite, eta-strip coarea slab estimate,
+uniform-in-normal constants, the `c eta` minus exceptional-error budget,
+residual positivity for `r < r0(eta,R,M)`, and the A4 -> A5 -> A6 -> A7
+dependency ladder.
 These make the next analytic calculation explicit without promoting A4, A6,
 residual depletion, or Clay NS.
 The local diagnostic
@@ -384,11 +389,17 @@ now composes those YM-1 child routes into the finite self-adjointness
 boundary, and
 `DASHI.Physics.Closure.YMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary`
 records the finite gauge-quotient Hamiltonian self-adjointness target.
+`DASHI.Physics.Closure.YMFiniteGaugeQuotientCarrierConstructionBoundary`
+records the finite gauge action/orbit carrier, invariant quotient pairing,
+Killing-domain descent, and Hamiltonian equivariance preconditions before
+that self-adjoint quotient target can promote.
 `DASHI.Physics.Closure.YMBochnerWeitzenbockHamiltonianDominationBoundary`
 records the YM-5 Bochner-Weitzenbock domination route over that composite.
 `DASHI.Physics.Closure.YMUniformPositiveHolonomyActionBoundary` records the
-uniform positive holonomy/Wilson-action lower-bound obligation.  These remain
-fail-closed theorem contracts.
+uniform positive holonomy/Wilson-action lower-bound obligation, while
+`DASHI.Physics.Closure.YMHolonomyActionToDominationCompositeBoundary` records
+the holonomy-to-domination handoff and spectral-margin preconditions.  These
+remain fail-closed theorem contracts.
 `DASHI.Physics.Closure.GluingOperatorLinearityOnDefectQuotientBoundary`
 records the U-1a quotient-linearity blocker before four-point cancellation.
 The diagnostic `scripts/gluing_operator_linearity_proxy_harness.py` checks a
@@ -435,6 +446,9 @@ records the actual U-1a theorem target that
 records the downstream route from that nullity target to four-point
 cancellation through additive test functionals and quotient representative
 invariance.
+`DASHI.Physics.Closure.UnificationModuloNullLinearityFromCrossTermNullityBoundary`
+now records the composite ladder from cross-term nullity through modulo-null
+linearity to the same four-point cancellation consumer.
 These are fail-closed boundary/diagnostic receipts; YM Clay, terminal
 unification, and all promotion flags remain false.
 

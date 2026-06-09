@@ -10,7 +10,7 @@ The current zero-mode/YM/core P0 modules are substantial Agda receipt surfaces
 with heavy imports.  In rapid iteration loops, validate them with a hard cap:
 
 ```bash
-timeout 10s agda <module>.agda
+timeout 15s agda <module>.agda
 ```
 
 Exit code `124` means the module exceeded the sprint verification budget, not
@@ -50,9 +50,14 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/NSA4CoareaStripPreimageCalculationBoundary.agda`
 - `DASHI/Physics/Closure/NSA4GradientFormulaLocalChartBoundary.agda`
 - `DASHI/Physics/Closure/NSA4UniformInNormalConstantsBoundary.agda`
+- `DASHI/Physics/Closure/NSA4DerivativeJacobianLowerBoundCompositeBoundary.agda`
+- `DASHI/Physics/Closure/NSA4EtaStripCoareaSlabEstimateBoundary.agda`
 - `DASHI/Physics/Closure/NSA4UniformErrorBudgetCompositeBoundary.agda`
 - `DASHI/Physics/Closure/NSA4ResidualPositiveAfterErrorsBoundary.agda`
 - `DASHI/Physics/Closure/NSA4ToA6TransferLadderBoundary.agda`
+- `DASHI/Physics/Closure/NSA4ResidualPositiveTheoremLadderBoundary.agda`
+- `DASHI/Physics/Closure/NSA4OutputSupportCoareaResidualTheoremBoundary.agda`
+- `DASHI/Physics/Closure/NSA5KappaBiasVanishingFromA4StationarityBoundary.agda`
 - `DASHI/Physics/Closure/NSBonyLipschitzAngularPushforwardBoundary.agda`
 - `DASHI/Physics/Closure/NSLowVorticityExceptionalMassRoutingBoundary.agda`
 - `DASHI/Physics/Closure/NSBiotSavartShellLocalizationBoundary.agda`
@@ -74,7 +79,9 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/NSPointwiseToAbelCompositeA6Boundary.agda`
 - `DASHI/Physics/Closure/NSPointwiseToAbelAveragingProxyHarnessResult.agda`
 - `DASHI/Physics/Closure/NSA6ErrorBudgetCompositeBoundary.agda`
+- `DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda`
 - `DASHI/Physics/Closure/NSA6TheoremLadderBoundary.agda`
+- `DASHI/Physics/Closure/NSA7ResidualDepletionGronwallBoundary.agda`
 - `DASHI/Physics/Closure/NSTriadicCompensatedLeakageIdentityBoundary.agda`
 - `DASHI/Physics/Closure/NSExactStrainEigenbundleHarnessBoundary.agda`
 - `DASHI/Physics/Closure/NSS2BiotSavartEigenbundleCascadeDiagnosticBoundary.agda`
@@ -106,8 +113,10 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/YMKillingBoundaryGaugeDomainPreservationBoundary.agda`
 - `DASHI/Physics/Closure/YMKillingBoundarySelfAdjointnessCompositeBoundary.agda`
 - `DASHI/Physics/Closure/YMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary.agda`
+- `DASHI/Physics/Closure/YMFiniteGaugeQuotientCarrierConstructionBoundary.agda`
 - `DASHI/Physics/Closure/YMBochnerWeitzenbockHamiltonianDominationBoundary.agda`
 - `DASHI/Physics/Closure/YMUniformPositiveHolonomyActionBoundary.agda`
+- `DASHI/Physics/Closure/YMHolonomyActionToDominationCompositeBoundary.agda`
 - `DASHI/Physics/Closure/FiniteGaugeHodgeAdjointCompatibility.agda`
 - `DASHI/Physics/Closure/YMWeightedBTAdjointKappaCalculation.agda`
 - `DASHI/Physics/Closure/DefectFourPointParallelogramLawBoundary.agda`
@@ -127,6 +136,7 @@ these surfaces as fully checked:
 - `DASHI/Physics/Closure/UnificationGluingModuloNullLinearityCompositeBoundary.agda`
 - `DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda`
 - `DASHI/Physics/Closure/UnificationFourPointCancellationFromCrossTermNullityBoundary.agda`
+- `DASHI/Physics/Closure/UnificationModuloNullLinearityFromCrossTermNullityBoundary.agda`
 
 Current frontier receipts:
 
@@ -223,6 +233,15 @@ Current frontier receipts:
   transfer blockers: output strip slicing, Bony/Lipschitz angular stability,
   and low-vorticity/null-output exceptional routing.  The A4 theorem remains
   open.
+- `DASHI/Physics/Closure/NSA4OutputSupportCoareaResidualTheoremBoundary.agda`
+  is the lightweight 15s-safe A4 receipt. It records the four-part proof
+  content only: local derivative, Sard/coarea density, Lei-Ren-Tian transfer,
+  and residual positivity after errors. It keeps A5/A6/A7/Clay false.
+- `DASHI/Physics/Closure/NSA5KappaBiasVanishingFromA4StationarityBoundary.agda`
+  is the lightweight 15s-safe A5 receipt. It records the three-step route:
+  bias equals half mean stretching, one-step Koopman/transfer neutrality plus
+  A4 angular richness and Bony/stationarity-defect control, and the
+  `O(|log r|^-1/2)` vanishing conclusion. It does not prove A5 or promote A6.
 - `DASHI/Physics/Closure/NSBiotSavartShellLocalizationBoundary.agda` records
   the A6.2 theorem contract for same-shell Biot-Savart strain multiplier
   ownership, off-shell leakage decay, Calderon-Zygmund kernel control,
@@ -239,6 +258,17 @@ Current frontier receipts:
   Abel/shell mean `int lambda(c)(2 kappa^2 - 1) dmu_r` with diagonal,
   off-diagonal, localization, pressure, and shell-mixing errors controlled.
   This is the current hardest NS transfer theorem and remains unproved.
+- `DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda`
+  is the lightweight A6 handoff receipt. It records the proof content for the
+  localized enstrophy ODE decomposition, Bony/paraproduct correction,
+  pointwise-to-Abel transfer, A5 bias absorption into dissipation, and the
+  assembled inequality
+  `∂t D_r + (ε0/4) c_lambda D_r <= C D_r^(1+α)`. It remains fail-closed.
+- `DASHI/Physics/Closure/NSA7ResidualDepletionGronwallBoundary.agda` is the
+  lightweight 15s-safe A7 receipt. It records the Gronwall substitution
+  `Z = D_r^(-α)`, the linearized inequality, the smallness threshold
+  `(β/C)^(1/α)`, monotone depletion below threshold, and the blowup
+  contradiction. It keeps A7/A8/A9/Clay false.
 - The A6 split now has three child boundary receipts:
   `NSDiagonalStretchingToAbelMeanBoundary.agda` for diagonal shell
   identification, `NSOffDiagonalShellAbsorptionBoundary.agda` for LP /

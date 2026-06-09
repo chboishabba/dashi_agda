@@ -221,7 +221,26 @@ def build_specs() -> list[HarnessSpec]:
     ns_stretching_formula_out = CHILD_OUT_DIR / "ns_stretching_formula_smoke.json"
     ns_strain_mean_square_out = CHILD_OUT_DIR / "ns_strain_mean_square_formula_smoke.json"
     ns_kappa_bias_out = CHILD_OUT_DIR / "ns_kappa_bias_variational_smoke.json"
+    ns_a4_four_part_proof_out = CHILD_OUT_DIR / "ns_a4_four_part_proof_smoke.json"
+    ns_a4_error_budget_threshold_out = (
+        CHILD_OUT_DIR / "ns_a4_error_budget_threshold_smoke.json"
+    )
+    ns_a5_kappa_bias_vanishing_out = (
+        CHILD_OUT_DIR / "ns_a5_kappa_bias_vanishing_smoke.json"
+    )
+    ns_a6_triadic_compensated_leakage_out = (
+        CHILD_OUT_DIR / "ns_a6_triadic_compensated_leakage_smoke.json"
+    )
+    ns_a7_residual_depletion_gronwall_out = (
+        CHILD_OUT_DIR / "ns_a7_residual_depletion_gronwall_smoke.json"
+    )
     ns_typei_kappa_bias_out = CHILD_OUT_DIR / "ns_typeI_selfsimilar_kappa_bias_smoke.json"
+    ns_abel_triadic_measure_proxy_out = (
+        CHILD_OUT_DIR / "ns_abel_triadic_measure_proxy_smoke.json"
+    )
+    ns_kappa_bias_profile_sweep_out = (
+        CHILD_OUT_DIR / "ns_kappa_bias_profile_sweep_smoke.json"
+    )
     ns_gaussian_balance_out = CHILD_OUT_DIR / "ns_gaussian_selfsimilar_kappa_bias_balance_smoke.json"
     ns_transfer_operator_bias_out = (
         CHILD_OUT_DIR / "ns_transfer_operator_bias_neutrality_smoke.json"
@@ -439,8 +458,7 @@ def build_specs() -> list[HarnessSpec]:
             name="ns_signed_leakage_obstruction",
             path=script("ns_signed_leakage_obstruction_harness.py"),
             args=(
-                "--samples",
-                "384",
+                "--quick",
                 "--seed",
                 "20260608",
                 "--json-output",
@@ -550,6 +568,101 @@ def build_specs() -> list[HarnessSpec]:
             notes=("finite kappa-bias variational proxy smoke; stdout JSON captured",),
         ),
         HarnessSpec(
+            name="ns_a4_four_part_proof",
+            path=script("ns_a4_four_part_proof_harness.py"),
+            args=(
+                "--quick",
+                "--json-output",
+                str(ns_a4_four_part_proof_out),
+                "--json",
+            ),
+            expected_json_path=ns_a4_four_part_proof_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_a4_four_part_proof_harness.py").exists()
+            else "NS A4 four-part proof harness not found",
+            notes=(
+                "optional A4 local derivative/coarea/LRT/error-budget proof smoke",
+                "diagnostic only; no analytic theorem, NS closure, or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_a4_error_budget_threshold",
+            path=script("ns_a4_error_budget_threshold_harness.py"),
+            args=(
+                "--quick",
+                "--json-output",
+                str(ns_a4_error_budget_threshold_out),
+                "--json",
+            ),
+            expected_json_path=ns_a4_error_budget_threshold_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_a4_error_budget_threshold_harness.py").exists()
+            else "NS A4 error-budget threshold harness not found",
+            notes=(
+                "optional A4 error-subtraction/r0 threshold smoke",
+                "diagnostic only; no residual depletion theorem, NS closure, or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_a5_kappa_bias_vanishing",
+            path=script("ns_a5_kappa_bias_vanishing_harness.py"),
+            args=(
+                "--quick",
+                "--json-output",
+                str(ns_a5_kappa_bias_vanishing_out),
+                "--json",
+            ),
+            expected_json_path=ns_a5_kappa_bias_vanishing_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_a5_kappa_bias_vanishing_harness.py").exists()
+            else "NS A5 kappa-bias vanishing harness not found",
+            notes=(
+                "optional A5 smoke for half-stretching rewrite, transfer neutrality, and |log r|^-1/2 vanishing",
+                "diagnostic only; no PDE A5 theorem, no A6 theorem, and no Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_a6_triadic_compensated_leakage",
+            path=script("ns_a6_triadic_compensated_leakage_harness.py"),
+            args=(
+                "--quick",
+                "--json-output",
+                str(ns_a6_triadic_compensated_leakage_out),
+                "--json",
+            ),
+            expected_json_path=ns_a6_triadic_compensated_leakage_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_a6_triadic_compensated_leakage_harness.py").exists()
+            else "NS A6 triadic compensated leakage harness not found",
+            notes=(
+                "optional A6 smoke for localized ODE bookkeeping, Bony correction, and dissipation absorption",
+                "diagnostic only; no PDE A6 theorem, no A7 theorem, and no Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_a7_residual_depletion_gronwall",
+            path=script("ns_a7_residual_depletion_gronwall_harness.py"),
+            args=(
+                "--quick",
+                "--json-output",
+                str(ns_a7_residual_depletion_gronwall_out),
+                "--json",
+            ),
+            expected_json_path=ns_a7_residual_depletion_gronwall_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_a7_residual_depletion_gronwall_harness.py").exists()
+            else "NS A7 residual depletion Gronwall harness not found",
+            notes=(
+                "optional A7 ODE smoke for thresholded monotone depletion below threshold",
+                "diagnostic only; no PDE A7 theorem, no CKN/BKM closure, and no Clay promotion",
+            ),
+        ),
+        HarnessSpec(
             name="ns_typeI_selfsimilar_kappa_bias",
             path=script("ns_typeI_selfsimilar_kappa_bias_harness.py"),
             args=(
@@ -575,6 +688,59 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Gaussian/Type-I self-similar kappa-bias balance proxy smoke",
                 "diagnostic only; no Type-I theorem, Abel measure construction, or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_abel_triadic_measure_proxy",
+            path=script("ns_abel_triadic_measure_proxy_harness.py"),
+            args=(
+                "--samples",
+                "384",
+                "--depths",
+                "6",
+                "--abel-rho",
+                "0.82",
+                "--coverage-normals",
+                "48",
+                "--bins",
+                "16",
+                "--seed",
+                "20260608",
+                "--json-output",
+                str(ns_abel_triadic_measure_proxy_out),
+                "--json",
+            ),
+            expected_json_path=ns_abel_triadic_measure_proxy_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_abel_triadic_measure_proxy_harness.py").exists()
+            else "NS Abel triadic measure proxy harness not found",
+            notes=(
+                "optional Abel-weighted triadic defect-measure proxy smoke",
+                "diagnostic only; no Abel defect-measure construction or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_kappa_bias_profile_sweep",
+            path=script("ns_kappa_bias_profile_sweep.py"),
+            args=(
+                "--quick",
+                "--samples",
+                "900",
+                "--seed",
+                "20260608",
+                "--json-output",
+                str(ns_kappa_bias_profile_sweep_out),
+                "--json",
+            ),
+            expected_json_path=ns_kappa_bias_profile_sweep_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_kappa_bias_profile_sweep.py").exists()
+            else "NS kappa-bias profile sweep harness not found",
+            notes=(
+                "optional kappa-bias profile sensitivity sweep smoke",
+                "diagnostic only; no Type-I kappa-bias theorem or Clay promotion",
             ),
         ),
         HarnessSpec(

@@ -1,3 +1,55 @@
+# 2026-06-09 A5/A6/A7 receipt hardening and diagnostic harness integration
+
+- Added `DASHI.Physics.Closure.NSA5KappaBiasVanishingFromA4StationarityBoundary`.
+  It is now a standalone, 15s-safe, fail-closed A5 receipt recording the
+  three-step proof content: bias as half mean stretching via the exact finite
+  stretching law, one-step Koopman/transfer neutrality with A4 angular
+  richness plus Bony/stationarity-defect control, and the fixed-point
+  `O(|log r|^-1/2)` vanishing conclusion.  A5, A6, A7, CKN/BKM, NS Clay, and
+  terminal promotion remain false.
+- Updated `DASHI.Physics.Closure.NSA6A4BiasToLeakageClosureCompositeBoundary`.
+  It now records the claimed A6 handoff explicitly: localized enstrophy ODE
+  decomposition, Bony/paraproduct `O(N^-1)` replacement, pointwise-to-Abel
+  shell-mean transfer, A5 bias absorption into dissipation, and the assembled
+  inequality `∂t D_r + (ε0/4)c_lambda D_r <= C D_r^(1+α)`.  The surface
+  remains a fail-closed receipt and not a theorem promotion.
+- Added `DASHI.Physics.Closure.NSA7ResidualDepletionGronwallBoundary`.
+  It is a standalone, 15s-safe, fail-closed A7 receipt recording the
+  substitution `Z = D_r^(-α)`, the linearized inequality, the threshold
+  `(β/C)^(1/α)`, monotone depletion below threshold, and the contradiction
+  with persistent blowup.  A7, A8, A9, NS Clay, and terminal promotion remain
+  false.
+- Added new local diagnostics:
+  `scripts/ns_a5_kappa_bias_vanishing_harness.py`,
+  `scripts/ns_a6_triadic_compensated_leakage_harness.py`, and
+  `scripts/ns_a7_residual_depletion_gronwall_harness.py`.
+  These are manifest-routed finite smokes only; they do not prove A5/A6/A7 or
+  promote Clay.
+
+# 2026-06-09 A4 derivative/slab theorem ladder, YM quotient carrier, and U modulo-null composite
+
+- Added
+  `DASHI.Physics.Closure.NSA4DerivativeJacobianLowerBoundCompositeBoundary`,
+  `DASHI.Physics.Closure.NSA4EtaStripCoareaSlabEstimateBoundary`, and
+  `DASHI.Physics.Closure.NSA4ResidualPositiveTheoremLadderBoundary`.
+  These compose the local A4 derivative/Jacobian lower-bound route,
+  eta-strip coarea slab estimate, and residual-positive handoff into
+  no-collapse, A5, A6, and CKN/BKM consumers.  A4, A5, A6, CKN/BKM, NS Clay,
+  and terminal promotion remain false.
+- Added
+  `DASHI.Physics.Closure.YMFiniteGaugeQuotientCarrierConstructionBoundary`
+  and `DASHI.Physics.Closure.YMHolonomyActionToDominationCompositeBoundary`.
+  They record finite gauge action/orbit carrier construction, quotient
+  pairing/domain descent, Hamiltonian equivariance, and the holonomy-action
+  to domination/spectral-margin handoff.  Gauge quotient construction,
+  domination, OS transfer, YM Clay, and terminal promotion remain blocked.
+- Added
+  `DASHI.Physics.Closure.UnificationModuloNullLinearityFromCrossTermNullityBoundary`
+  for the composite route from cross-term nullity through modulo-null
+  linearity to four-point cancellation.  Cross-term nullity, four-point
+  cancellation, parallelogram, quadratic emergence, and terminal promotion
+  remain open.
+
 # 2026-06-09 A4 gradient/constants/positivity and YM/U downstream blockers
 
 - Added `DASHI.Physics.Closure.NSA4GradientFormulaLocalChartBoundary`,

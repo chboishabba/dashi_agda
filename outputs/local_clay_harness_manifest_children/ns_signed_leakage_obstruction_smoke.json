@@ -4,57 +4,57 @@
   "conclusion": "Classical last-slot skew-symmetry is visible for a fixed divergence-free test vector, but leakage-weighted triad contributions take both signs.  A pointwise triad-level signed leakage bound fails; only a global cancellation or square-function mechanism could remain.",
   "contract": "ns_signed_leakage_obstruction_harness",
   "metrics": {
-    "best_one_sided_fraction": 0.5104166666666666,
+    "best_one_sided_fraction": 0.501,
     "lambda_summary": {
-      "max": 0.9999849804631107,
-      "mean": 0.3669357350326639,
-      "median": 0.22098507114377933,
+      "max": 0.9999956251899769,
+      "mean": 0.37711566616207864,
+      "median": 0.2573315890198746,
       "min": 1.5108233084902706e-06,
-      "p95": 0.9841286478069469
+      "p95": 0.9834444313196402
     },
-    "negative_fraction": 0.4895833333333333,
-    "positive_fraction": 0.5104166666666666,
+    "negative_fraction": 0.501,
+    "positive_fraction": 0.499,
     "signed_T_summary": {
-      "max": 1.1018409436613492,
-      "mean": -0.0013267052391131746,
-      "median": 0.012160508533146208,
+      "max": 1.1680666183436506,
+      "mean": -0.0010290860007305237,
+      "median": -0.00176408409687662,
       "min": -1.2512719106013794,
-      "p95": 0.7515468082884608
+      "p95": 0.7964079586250958
     },
-    "skew_symmetry_error": 2.220446049250313e-16,
-    "skew_symmetry_error_max": 2.220446049250313e-16,
-    "skew_symmetry_error_mean": 3.363003144915324e-17,
-    "triad_level_signed_fraction": 0.4895833333333333,
-    "weighted_lambda_T_mean": 0.006107088080999843,
+    "skew_symmetry_error": 2.7755575615628914e-16,
+    "skew_symmetry_error_max": 2.7755575615628914e-16,
+    "skew_symmetry_error_mean": 3.2324112191148975e-17,
+    "triad_level_signed_fraction": 0.501,
+    "weighted_lambda_T_mean": 0.003392403391182469,
     "weighted_lambda_T_summary": {
       "max": 0.5217268038596748,
-      "mean": 0.006107088080999843,
-      "median": 7.825616365437102e-05,
-      "min": -0.3859760777605107,
-      "p95": 0.2949840311673706
+      "mean": 0.003392403391182469,
+      "median": -6.943924763744953e-09,
+      "min": -0.42247354014360644,
+      "p95": 0.2566794719946216
     },
-    "weighted_mean": 0.006107088080999843,
+    "weighted_mean": 0.003392403391182469,
     "zero_fraction": 0.0
   },
   "parameters": {
     "near_resonance_threshold": 1e-08,
     "rho_max": 1.6,
     "rho_min": 0.6,
-    "samples_effective": 384,
-    "samples_requested": 384,
+    "samples_effective": 1000,
+    "samples_requested": 5000,
     "sign_tolerance": 1e-12
   },
   "pointwise_sign_obstruction": {
-    "negative_count": 188,
-    "negative_fraction": 0.4895833333333333,
+    "negative_count": 501,
+    "negative_fraction": 0.501,
     "pointwise_nonnegative_bound_fails": true,
     "pointwise_nonpositive_bound_fails": true,
-    "positive_count": 196,
-    "positive_fraction": 0.5104166666666666,
-    "skew_error_max": 2.220446049250313e-16,
-    "skew_error_mean": 3.363003144915324e-17,
+    "positive_count": 499,
+    "positive_fraction": 0.499,
+    "skew_error_max": 2.7755575615628914e-16,
+    "skew_error_mean": 3.2324112191148975e-17,
     "takes_both_signs": true,
-    "weighted_mean": 0.006107088080999843,
+    "weighted_mean": 0.003392403391182469,
     "zero_count": 0,
     "zero_fraction": 0.0
   },
@@ -66,11 +66,11 @@
     "terminal_promotion": false,
     "triadic_compensated_leakage_identity_proved": false
   },
-  "quick": false,
+  "quick": true,
   "rows": {
     "channel_degenerate": 0,
     "degenerate": 0,
-    "usable": 384
+    "usable": 1000
   },
   "scope": "finite_exact_leray_symbol_diagnostic_only_not_pde_proof",
   "seed": 20260608,

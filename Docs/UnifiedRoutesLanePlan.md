@@ -216,12 +216,28 @@ calculation for `f_n(theta1,theta2)=<normalize(theta1+theta2),n>`;
 `NSA4GradientFormulaLocalChartBoundary` records the local-chart derivative
 and rank/noncritical obligation; `NSA4UniformInNormalConstantsBoundary`
 records the compactness/Whitney overlap route to a uniform `c_A4`;
+`NSA4DerivativeJacobianLowerBoundCompositeBoundary` composes the local
+derivative, Phi-Jacobian lower-bound, and coarea-strip calculation route;
+`NSA4EtaStripCoareaSlabEstimateBoundary` records the eta-strip slab estimate
+through regular Sard slices and exceptional-mass subtraction;
 `NSA4UniformErrorBudgetCompositeBoundary` records the `c eta` lower bound
 minus log-window, antipodal, low-vorticity/null-output, and Bony perturbation
 losses; `NSA4ResidualPositiveAfterErrorsBoundary` records the
 `r < r0(eta,R,M)` positivity target; and `NSA4ToA6TransferLadderBoundary`
-records the A4 -> A5 -> A6 -> A7 dependency ladder.  These are the current
-NS analytic calculation surfaces, not theorem promotions.
+records the A4 -> A5 -> A6 -> A7 dependency ladder.
+`NSA4ResidualPositiveTheoremLadderBoundary` records the residual-positive
+handoff into no-collapse, A5, A6, and CKN/BKM consumers.  These are the
+current NS analytic calculation surfaces, not theorem promotions.
+`NSA4OutputSupportCoareaResidualTheoremBoundary` is now the lightweight,
+15s-safe A4 receipt that records the full four-part proof content only:
+local derivative, Sard/coarea density, Lei-Ren-Tian transfer, and residual
+positivity after error subtraction.  It keeps A5/A6/A7/Clay false.
+`NSA5KappaBiasVanishingFromA4StationarityBoundary` is now the matching
+lightweight, 15s-safe A5 receipt.  It records the three-step proof content:
+bias as half mean stretching via the exact finite stretching law, one-step
+Koopman/transfer neutrality with A4 angular richness plus
+Bony/stationarity-defect control, and the fixed-point
+`O(|log r|^-1/2)` vanishing conclusion.  It is still a fail-closed receipt.
 `NSQuantitativeStationarityRateProxyHarnessResult` binds
 `scripts/ns_stationarity_rate_proxy_harness.py` to a checked proxy receipt,
 and `scripts/ns_bounded_abel_mass_proxy_harness.py` supplies the matching A1
@@ -282,10 +298,17 @@ low-frequency Bony paraproduct ownership, finite near-diagonal resonant
 shells, high-frequency subleading tail, and corrected Abel-window error
 routing.  `scripts/ns_bony_paraproduct_a6_repair_proxy_harness.py` is
 manifest-routed as a diagnostic split between naive O(1) off-shell failures
-and corrected Bony profiles.  The next NS proof to calculate is now A4
-Whitney/frame physical-to-Fourier coupling; the corrected A6.2 Bony estimates,
-A6, residual depletion, local monotonicity, CKN/BKM closure, and Clay NS
-remain unproved.
+and corrected Bony profiles.  `NSA6A4BiasToLeakageClosureCompositeBoundary`
+is now the lightweight A6 handoff receipt recording the proof content for the
+localized enstrophy ODE decomposition, Bony/paraproduct `O(N^-1)`
+replacement, pointwise-to-Abel shell-mean transfer, A5 bias absorption into
+dissipation, and the assembled inequality
+`∂t D_r + (ε0/4)c_lambda D_r <= C D_r^(1+α)`.  `NSA7ResidualDepletionGronwallBoundary`
+is the lightweight A7 receipt recording the Gronwall substitution,
+smallness threshold `(β/C)^(1/α)`, monotone depletion below threshold, and
+the contradiction with persistent blowup.  These receipts harden the
+A4->A5->A6->A7 dependency chain, but A5/A6/A7 themselves, local monotonicity,
+CKN/BKM closure, and Clay NS remain unproved.
 
 The current Yang-Mills route has two live calculations:
 `HamiltonianDominatesDefectPlusHolonomy`, recorded by
@@ -362,10 +385,16 @@ OS/continuum transfer, YM Clay, and terminal promotion remain open.
 child routes into one finite self-adjointness boundary, while
 `YMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary` records the
 finite gauge-quotient self-adjoint Hamiltonian target.
+`YMFiniteGaugeQuotientCarrierConstructionBoundary` records the finite gauge
+action/orbit carrier, invariant quotient measure, positive quotient pairing,
+Killing-domain descent, Hamiltonian equivariance, and finite-carrier handoff
+preconditions.
 `YMBochnerWeitzenbockHamiltonianDominationBoundary` records the YM-5
 Hamiltonian domination route over finite Hodge defect, the YM-1 composite,
 holonomy, and error-budget support.  `YMUniformPositiveHolonomyActionBoundary`
-records the non-vacuum holonomy/Wilson-action lower-bound obligation.  These
+records the non-vacuum holonomy/Wilson-action lower-bound obligation.
+`YMHolonomyActionToDominationCompositeBoundary` records the holonomy-action
+to domination handoff and spectral-margin/no-pollution preconditions.  These
 remain fail-closed.
 
 The current unification route is the sheafified four-point path:
@@ -431,6 +460,9 @@ modulo-null linearity can feed the four-point law.
 `UnificationFourPointCancellationFromCrossTermNullityBoundary` records the
 downstream four-point-cancellation route from cross-term nullity through
 additive test functionals, representative invariance, and polarization.
+`UnificationModuloNullLinearityFromCrossTermNullityBoundary` records the
+composite ladder from the same cross-term nullity theorem target through
+modulo-null linearity to that four-point consumer.
 Quadratic emergence, signature/Clifford consumers, terminal unification, and
 Clay promotion remain blocked until that four-point law is actually proved.
 

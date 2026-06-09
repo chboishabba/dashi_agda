@@ -1,0 +1,71 @@
+{
+  "abel_defect_measure_constructed": false,
+  "abel_rho": 0.82,
+  "accepted_pushforward_states": 2304,
+  "accepted_states": 2304,
+  "angular_coverage": {
+    "coverage_score": 0.9982979616354735,
+    "max_great_circle_gap": 0.001702038364526537,
+    "mean_great_circle_gap": 0.00041086951330416844,
+    "normals": 48,
+    "output_count": 2304
+  },
+  "arcsine_reference": {
+    "coherent_fraction_01": 0.06376856085851985,
+    "mean_kappa_fourth": 0.375,
+    "mean_kappa_sq": 0.5,
+    "negative_stretching_fraction_threshold": 0.5
+  },
+  "clay_promotion": false,
+  "depths": 6,
+  "finite_measure_proxy": true,
+  "ok": true,
+  "pde_promotion": false,
+  "pushforward": {
+    "coherent_fraction_01": 0.06146219317076077,
+    "coherent_fraction_sqrt_half": 0.495404296786786,
+    "count": 2304,
+    "mean_abs_kappa": 0.64071773862935,
+    "mean_bias": 0.0025350666625366222,
+    "mean_kappa": -0.05079107217090798,
+    "mean_kappa_fourth": 0.3812652446801828,
+    "mean_kappa_sq": 0.5053979412429284,
+    "mean_lambda": 0.4154707030239808,
+    "mean_lambda_sq": 0.1835188804272726,
+    "mean_stretching": 0.0050701333250732445,
+    "total_weight": 219.1543793020109
+  },
+  "pushforward_angular_coverage": {
+    "coverage_score": 0.998894945188148,
+    "max_great_circle_gap": 0.0011050548118519687,
+    "mean_great_circle_gap": 0.00035829952223655404,
+    "normals": 48,
+    "output_count": 2304
+  },
+  "samples": 384,
+  "seed": 20260608,
+  "source": {
+    "coherent_fraction_01": 0.06428373541027765,
+    "coherent_fraction_sqrt_half": 0.5092327300660084,
+    "count": 2304,
+    "mean_abs_kappa": 0.6340970461817668,
+    "mean_bias": -0.0003226380540343821,
+    "mean_kappa": -0.04528236199163598,
+    "mean_kappa_fourth": 0.3739989782338991,
+    "mean_kappa_sq": 0.4978278983388735,
+    "mean_lambda": 0.41812113348800667,
+    "mean_lambda_sq": 0.18523408630104404,
+    "mean_stretching": -0.0006452761080687642,
+    "total_weight": 267.26143817318405
+  },
+  "stationarity_residual": {
+    "bin_l1_residual": 0.04402376230342665,
+    "moment_l1_residual": 0.018793587517793753,
+    "pushed_mean_bias": 0.0025350666625366222,
+    "pushed_mean_kappa_sq": 0.5053979412429284,
+    "pushed_mean_lambda": 0.4154707030239808,
+    "source_mean_bias": -0.0003226380540343821,
+    "source_mean_kappa_sq": 0.4978278983388735,
+    "source_mean_lambda": 0.41812113348800667
+  }
+}

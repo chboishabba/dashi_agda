@@ -33,7 +33,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.108484,
+      "duration_seconds": 0.073998,
       "name": "ns_triadic_output_width_proxy",
       "notes": [
         "synthetic tangent-frame proxy; diagnostic only"
@@ -78,7 +78,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.111246,
+      "duration_seconds": 0.077982,
       "name": "ns_triadic_output_width_exact_if_present",
       "notes": [
         "runs only when exact local strain/eigenbundle provider exists"
@@ -127,7 +127,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.077614,
+      "duration_seconds": 0.081253,
       "name": "ns_propagated_polarization_coherence",
       "notes": [
         "repaired finite NS propagated-polarization coherence smoke"
@@ -158,7 +158,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_exact_leakage_coherence_audit_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.060399,
+      "duration_seconds": 0.098826,
       "name": "ns_exact_leakage_coherence_audit",
       "notes": [
         "exact finite Leray leakage/coherence split audit"
@@ -242,7 +242,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_exact_strain_threshold_polarization_sweep_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.211322,
+      "duration_seconds": 0.211621,
       "name": "ns_exact_strain_threshold_polarization_sweep",
       "notes": [
         "exact-strain threshold/polarization sweep smoke"
@@ -300,7 +300,7 @@
           "cases_requested": 2,
           "current_family_i_ii_formulation_permissive": true,
           "diagnostic_conclusion": "current Family-I/II exact-strain formulation is permissive under at least one sweep case; strengthen propagated polarization/coherence",
-          "elapsed_seconds": 0.14033848606050014,
+          "elapsed_seconds": 0.1400974220596254,
           "mean_depth2_survival_fraction": 1.0,
           "mean_output_width": 0.052465619620051765
         }
@@ -310,7 +310,7 @@
       "skip_reason": null,
       "skipped": false,
       "stderr_tail": "",
-      "stdout_tail": "6,\n        \"depth2_survival_fraction\": 1.0,\n        \"estimated_output_width\": 0.052465619620051765,\n        \"family_i_hits\": 96,\n        \"family_ii_hits\": 0,\n        \"median_single_residual\": 1.7833762448388222e-16,\n        \"min_single_residual\": 0.0,\n        \"p95_single_residual\": 9.438198554942758e-16,\n        \"triads_accepted\": 96,\n        \"zero_hit_fraction\": 1.0,\n        \"zero_hits\": 96\n      },\n      \"status\": \"ok\"\n    },\n    {\n      \"case\": {\n        \"polarization\": \"seeded\",\n        \"samples\": 96,\n        \"seed\": 20260608,\n        \"tolerance\": 0.05\n      },\n      \"classification\": \"very_permissive_family_i_ii\",\n      \"degeneracy\": {\n        \"anti_parallel_rejects\": 0,\n        \"exact_degenerate_outputs\": 0,\n        \"frame_model\": \"exact-strain\",\n        \"frame_source\": \"external:ns_exact_strain_eigenbundle.py\"\n      },\n      \"elapsed_seconds\": 0.0710095000686124,\n      \"metrics\": {\n        \"both_family_hits\": 0,\n        \"depth2_continuation_hits\": 96,\n        \"depth2_survival_fraction\": 1.0,\n        \"estimated_output_width\": 0.052465619620051765,\n        \"family_i_hits\": 96,\n        \"family_ii_hits\": 0,\n        \"median_single_residual\": 2.1400564707311122e-16,\n        \"min_single_residual\": 0.0,\n        \"p95_single_residual\": 9.364040533824686e-16,\n        \"triads_accepted\": 96,\n        \"zero_hit_fraction\": 1.0,\n        \"zero_hits\": 96\n      },\n      \"status\": \"ok\"\n    }\n  ],\n  \"clay_promoted\": false,\n  \"family_i_ii_current_formulation_promoted\": false,\n  \"groups\": {\n    \"by_polarization\": {\n      \"canonical\": {\n        \"cases\": 1,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 1\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 1\n      },\n      \"seeded\": {\n        \"cases\": 1,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 1\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 1\n      }\n    },\n    \"by_samples\": {\n      \"96\": {\n        \"cases\": 2,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 2\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 2\n      }\n    },\n    \"by_tolerance\": {\n      \"0.05\": {\n        \"cases\": 2,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 2\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 2\n      }\n    }\n  },\n  \"parameters\": {\n    \"axis\": [\n      0.0,\n      0.0,\n      1.0\n    ],\n    \"bins\": 48,\n    \"child_script\": \"/home/c/Documents/code/dashi_agda/scripts/ns_triadic_output_width_harness.py\",\n    \"depth2_trials_per_hit\": 1,\n    \"normals\": 48,\n    \"polarizations\": [\n      \"canonical\",\n      \"seeded\"\n    ],\n    \"sample_counts\": [\n      96\n    ],\n    \"seeds\": [\n      20260608\n    ],\n    \"timeout_seconds\": 20.0,\n    \"tolerances\": [\n      0.05\n    ]\n  },\n  \"promotion\": false,\n  \"scope\": \"local_exact_strain_threshold_polarization_sweep_diagnostic_only\",\n  \"summary\": {\n    \"cases_failed\": 0,\n    \"cases_ok\": 2,\n    \"cases_requested\": 2,\n    \"current_family_i_ii_formulation_permissive\": true,\n    \"diagnostic_conclusion\": \"current Family-I/II exact-strain formulation is permissive under at least one sweep case; strengthen propagated polarization/coherence\",\n    \"elapsed_seconds\": 0.14033848606050014,\n    \"mean_depth2_survival_fraction\": 1.0,\n    \"mean_output_width\": 0.052465619620051765,\n    \"mean_zero_hit_fraction\": 1.0,\n    \"permissive_or_moderate_cases\": 2,\n    \"very_permissive_cases\": 2\n  }\n}\n"
+      "stdout_tail": "6,\n        \"depth2_survival_fraction\": 1.0,\n        \"estimated_output_width\": 0.052465619620051765,\n        \"family_i_hits\": 96,\n        \"family_ii_hits\": 0,\n        \"median_single_residual\": 1.7833762448388222e-16,\n        \"min_single_residual\": 0.0,\n        \"p95_single_residual\": 9.438198554942758e-16,\n        \"triads_accepted\": 96,\n        \"zero_hit_fraction\": 1.0,\n        \"zero_hits\": 96\n      },\n      \"status\": \"ok\"\n    },\n    {\n      \"case\": {\n        \"polarization\": \"seeded\",\n        \"samples\": 96,\n        \"seed\": 20260608,\n        \"tolerance\": 0.05\n      },\n      \"classification\": \"very_permissive_family_i_ii\",\n      \"degeneracy\": {\n        \"anti_parallel_rejects\": 0,\n        \"exact_degenerate_outputs\": 0,\n        \"frame_model\": \"exact-strain\",\n        \"frame_source\": \"external:ns_exact_strain_eigenbundle.py\"\n      },\n      \"elapsed_seconds\": 0.06869030499365181,\n      \"metrics\": {\n        \"both_family_hits\": 0,\n        \"depth2_continuation_hits\": 96,\n        \"depth2_survival_fraction\": 1.0,\n        \"estimated_output_width\": 0.052465619620051765,\n        \"family_i_hits\": 96,\n        \"family_ii_hits\": 0,\n        \"median_single_residual\": 2.1400564707311122e-16,\n        \"min_single_residual\": 0.0,\n        \"p95_single_residual\": 9.364040533824686e-16,\n        \"triads_accepted\": 96,\n        \"zero_hit_fraction\": 1.0,\n        \"zero_hits\": 96\n      },\n      \"status\": \"ok\"\n    }\n  ],\n  \"clay_promoted\": false,\n  \"family_i_ii_current_formulation_promoted\": false,\n  \"groups\": {\n    \"by_polarization\": {\n      \"canonical\": {\n        \"cases\": 1,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 1\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 1\n      },\n      \"seeded\": {\n        \"cases\": 1,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 1\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 1\n      }\n    },\n    \"by_samples\": {\n      \"96\": {\n        \"cases\": 2,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 2\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 2\n      }\n    },\n    \"by_tolerance\": {\n      \"0.05\": {\n        \"cases\": 2,\n        \"classifications\": {\n          \"very_permissive_family_i_ii\": 2\n        },\n        \"mean_depth2_survival_fraction\": 1.0,\n        \"mean_output_width\": 0.052465619620051765,\n        \"mean_zero_hit_fraction\": 1.0,\n        \"median_zero_hit_fraction\": 1.0,\n        \"ok_cases\": 2\n      }\n    }\n  },\n  \"parameters\": {\n    \"axis\": [\n      0.0,\n      0.0,\n      1.0\n    ],\n    \"bins\": 48,\n    \"child_script\": \"/home/c/Documents/code/dashi_agda/scripts/ns_triadic_output_width_harness.py\",\n    \"depth2_trials_per_hit\": 1,\n    \"normals\": 48,\n    \"polarizations\": [\n      \"canonical\",\n      \"seeded\"\n    ],\n    \"sample_counts\": [\n      96\n    ],\n    \"seeds\": [\n      20260608\n    ],\n    \"timeout_seconds\": 20.0,\n    \"tolerances\": [\n      0.05\n    ]\n  },\n  \"promotion\": false,\n  \"scope\": \"local_exact_strain_threshold_polarization_sweep_diagnostic_only\",\n  \"summary\": {\n    \"cases_failed\": 0,\n    \"cases_ok\": 2,\n    \"cases_requested\": 2,\n    \"current_family_i_ii_formulation_permissive\": true,\n    \"diagnostic_conclusion\": \"current Family-I/II exact-strain formulation is permissive under at least one sweep case; strengthen propagated polarization/coherence\",\n    \"elapsed_seconds\": 0.1400974220596254,\n    \"mean_depth2_survival_fraction\": 1.0,\n    \"mean_output_width\": 0.052465619620051765,\n    \"mean_zero_hit_fraction\": 1.0,\n    \"permissive_or_moderate_cases\": 2,\n    \"very_permissive_cases\": 2\n  }\n}\n"
     },
     {
       "command": [
@@ -336,7 +336,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_sign_antisymmetry_depth_sweep_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.088241,
+      "duration_seconds": 0.084445,
       "name": "ns_sign_antisymmetry_depth_sweep",
       "notes": [
         "exact sign antisymmetry plus depth-k propagated survivor smoke"
@@ -447,7 +447,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_propagated_coherence_jacobian_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.287483,
+      "duration_seconds": 0.225259,
       "name": "ns_propagated_coherence_jacobian",
       "notes": [
         "finite-difference propagated coherence Jacobian smoke"
@@ -559,8 +559,7 @@
       "command": [
         "/usr/bin/python",
         "/home/c/Documents/code/dashi_agda/scripts/ns_signed_leakage_obstruction_harness.py",
-        "--samples",
-        "384",
+        "--quick",
         "--seed",
         "20260608",
         "--json-output",
@@ -568,7 +567,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.066062,
+      "duration_seconds": 0.085085,
       "name": "ns_signed_leakage_obstruction",
       "notes": [
         "classical skew-symmetry passes but triad-level leakage sign fails"
@@ -577,37 +576,37 @@
       "parsed_json_summary": {
         "contract": "ns_signed_leakage_obstruction_harness",
         "metrics": {
-          "best_one_sided_fraction": 0.5104166666666666,
+          "best_one_sided_fraction": 0.501,
           "lambda_summary": {
-            "max": 0.9999849804631107,
-            "mean": 0.3669357350326639,
-            "median": 0.22098507114377933,
+            "max": 0.9999956251899769,
+            "mean": 0.37711566616207864,
+            "median": 0.2573315890198746,
             "min": 1.5108233084902706e-06,
-            "p95": 0.9841286478069469
+            "p95": 0.9834444313196402
           },
-          "negative_fraction": 0.4895833333333333,
-          "positive_fraction": 0.5104166666666666,
+          "negative_fraction": 0.501,
+          "positive_fraction": 0.499,
           "signed_T_summary": {
-            "max": 1.1018409436613492,
-            "mean": -0.0013267052391131746,
-            "median": 0.012160508533146208,
+            "max": 1.1680666183436506,
+            "mean": -0.0010290860007305237,
+            "median": -0.00176408409687662,
             "min": -1.2512719106013794,
-            "p95": 0.7515468082884608
+            "p95": 0.7964079586250958
           },
-          "skew_symmetry_error": 2.220446049250313e-16,
-          "skew_symmetry_error_max": 2.220446049250313e-16,
-          "skew_symmetry_error_mean": 3.363003144915324e-17
+          "skew_symmetry_error": 2.7755575615628914e-16,
+          "skew_symmetry_error_max": 2.7755575615628914e-16,
+          "skew_symmetry_error_mean": 3.2324112191148975e-17
         },
         "parameters": {
           "near_resonance_threshold": 1e-08,
           "rho_max": 1.6,
           "rho_min": 0.6,
-          "samples_effective": 384,
-          "samples_requested": 384,
+          "samples_effective": 1000,
+          "samples_requested": 5000,
           "sign_tolerance": 1e-12
         },
         "promotion": false,
-        "quick": false,
+        "quick": true,
         "scope": "finite_exact_leray_symbol_diagnostic_only_not_pde_proof"
       },
       "promotion": false,
@@ -615,7 +614,7 @@
       "skip_reason": null,
       "skipped": false,
       "stderr_tail": "",
-      "stdout_tail": "{\n  \"classical_skew_symmetry_fixed_test_vector_passes\": true,\n  \"clay_navier_stokes_promoted\": false,\n  \"conclusion\": \"Classical last-slot skew-symmetry is visible for a fixed divergence-free test vector, but leakage-weighted triad contributions take both signs.  A pointwise triad-level signed leakage bound fails; only a global cancellation or square-function mechanism could remain.\",\n  \"contract\": \"ns_signed_leakage_obstruction_harness\",\n  \"metrics\": {\n    \"best_one_sided_fraction\": 0.5104166666666666,\n    \"lambda_summary\": {\n      \"max\": 0.9999849804631107,\n      \"mean\": 0.3669357350326639,\n      \"median\": 0.22098507114377933,\n      \"min\": 1.5108233084902706e-06,\n      \"p95\": 0.9841286478069469\n    },\n    \"negative_fraction\": 0.4895833333333333,\n    \"positive_fraction\": 0.5104166666666666,\n    \"signed_T_summary\": {\n      \"max\": 1.1018409436613492,\n      \"mean\": -0.0013267052391131746,\n      \"median\": 0.012160508533146208,\n      \"min\": -1.2512719106013794,\n      \"p95\": 0.7515468082884608\n    },\n    \"skew_symmetry_error\": 2.220446049250313e-16,\n    \"skew_symmetry_error_max\": 2.220446049250313e-16,\n    \"skew_symmetry_error_mean\": 3.363003144915324e-17,\n    \"triad_level_signed_fraction\": 0.4895833333333333,\n    \"weighted_lambda_T_mean\": 0.006107088080999843,\n    \"weighted_lambda_T_summary\": {\n      \"max\": 0.5217268038596748,\n      \"mean\": 0.006107088080999843,\n      \"median\": 7.825616365437102e-05,\n      \"min\": -0.3859760777605107,\n      \"p95\": 0.2949840311673706\n    },\n    \"weighted_mean\": 0.006107088080999843,\n    \"zero_fraction\": 0.0\n  },\n  \"parameters\": {\n    \"near_resonance_threshold\": 1e-08,\n    \"rho_max\": 1.6,\n    \"rho_min\": 0.6,\n    \"samples_effective\": 384,\n    \"samples_requested\": 384,\n    \"sign_tolerance\": 1e-12\n  },\n  \"pointwise_sign_obstruction\": {\n    \"negative_count\": 188,\n    \"negative_fraction\": 0.4895833333333333,\n    \"pointwise_nonnegative_bound_fails\": true,\n    \"pointwise_nonpositive_bound_fails\": true,\n    \"positive_count\": 196,\n    \"positive_fraction\": 0.5104166666666666,\n    \"skew_error_max\": 2.220446049250313e-16,\n    \"skew_error_mean\": 3.363003144915324e-17,\n    \"takes_both_signs\": true,\n    \"weighted_mean\": 0.006107088080999843,\n    \"zero_count\": 0,\n    \"zero_fraction\": 0.0\n  },\n  \"promotion\": false,\n  \"promotion_flags\": {\n    \"clay_navier_stokes_promotion\": false,\n    \"finite_symbol_diagnostic\": true,\n    \"pde_promotion\": false,\n    \"terminal_promotion\": false,\n    \"triadic_compensated_leakage_identity_proved\": false\n  },\n  \"quick\": false,\n  \"rows\": {\n    \"channel_degenerate\": 0,\n    \"degenerate\": 0,\n    \"usable\": 384\n  },\n  \"scope\": \"finite_exact_leray_symbol_diagnostic_only_not_pde_proof\",\n  \"seed\": 20260608,\n  \"triad_level_pointwise_signed_bound_fails\": true,\n  \"triadic_compensated_leakage_identity_proved\": false\n}\n"
+      "stdout_tail": "{\n  \"classical_skew_symmetry_fixed_test_vector_passes\": true,\n  \"clay_navier_stokes_promoted\": false,\n  \"conclusion\": \"Classical last-slot skew-symmetry is visible for a fixed divergence-free test vector, but leakage-weighted triad contributions take both signs.  A pointwise triad-level signed leakage bound fails; only a global cancellation or square-function mechanism could remain.\",\n  \"contract\": \"ns_signed_leakage_obstruction_harness\",\n  \"metrics\": {\n    \"best_one_sided_fraction\": 0.501,\n    \"lambda_summary\": {\n      \"max\": 0.9999956251899769,\n      \"mean\": 0.37711566616207864,\n      \"median\": 0.2573315890198746,\n      \"min\": 1.5108233084902706e-06,\n      \"p95\": 0.9834444313196402\n    },\n    \"negative_fraction\": 0.501,\n    \"positive_fraction\": 0.499,\n    \"signed_T_summary\": {\n      \"max\": 1.1680666183436506,\n      \"mean\": -0.0010290860007305237,\n      \"median\": -0.00176408409687662,\n      \"min\": -1.2512719106013794,\n      \"p95\": 0.7964079586250958\n    },\n    \"skew_symmetry_error\": 2.7755575615628914e-16,\n    \"skew_symmetry_error_max\": 2.7755575615628914e-16,\n    \"skew_symmetry_error_mean\": 3.2324112191148975e-17,\n    \"triad_level_signed_fraction\": 0.501,\n    \"weighted_lambda_T_mean\": 0.003392403391182469,\n    \"weighted_lambda_T_summary\": {\n      \"max\": 0.5217268038596748,\n      \"mean\": 0.003392403391182469,\n      \"median\": -6.943924763744953e-09,\n      \"min\": -0.42247354014360644,\n      \"p95\": 0.2566794719946216\n    },\n    \"weighted_mean\": 0.003392403391182469,\n    \"zero_fraction\": 0.0\n  },\n  \"parameters\": {\n    \"near_resonance_threshold\": 1e-08,\n    \"rho_max\": 1.6,\n    \"rho_min\": 0.6,\n    \"samples_effective\": 1000,\n    \"samples_requested\": 5000,\n    \"sign_tolerance\": 1e-12\n  },\n  \"pointwise_sign_obstruction\": {\n    \"negative_count\": 501,\n    \"negative_fraction\": 0.501,\n    \"pointwise_nonnegative_bound_fails\": true,\n    \"pointwise_nonpositive_bound_fails\": true,\n    \"positive_count\": 499,\n    \"positive_fraction\": 0.499,\n    \"skew_error_max\": 2.7755575615628914e-16,\n    \"skew_error_mean\": 3.2324112191148975e-17,\n    \"takes_both_signs\": true,\n    \"weighted_mean\": 0.003392403391182469,\n    \"zero_count\": 0,\n    \"zero_fraction\": 0.0\n  },\n  \"promotion\": false,\n  \"promotion_flags\": {\n    \"clay_navier_stokes_promotion\": false,\n    \"finite_symbol_diagnostic\": true,\n    \"pde_promotion\": false,\n    \"terminal_promotion\": false,\n    \"triadic_compensated_leakage_identity_proved\": false\n  },\n  \"quick\": true,\n  \"rows\": {\n    \"channel_degenerate\": 0,\n    \"degenerate\": 0,\n    \"usable\": 1000\n  },\n  \"scope\": \"finite_exact_leray_symbol_diagnostic_only_not_pde_proof\",\n  \"seed\": 20260608,\n  \"triad_level_pointwise_signed_bound_fails\": true,\n  \"triadic_compensated_leakage_identity_proved\": false\n}\n"
     },
     {
       "command": [
@@ -636,7 +635,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.085874,
+      "duration_seconds": 0.084178,
       "name": "ns_s2_cascade_width",
       "notes": [
         "S2 Biot-Savart/eigenbundle cascade-width smoke; stdout JSON captured"
@@ -690,7 +689,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_leray_rank_one_symbol_audit_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.259885,
+      "duration_seconds": 0.255355,
       "name": "ns_leray_rank_one_symbol_audit",
       "notes": [
         "finite rank-one Leray triadic classification audit"
@@ -719,7 +718,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.069676,
+      "duration_seconds": 0.06946,
       "name": "ns_kappa_arcsine_law",
       "notes": [
         "finite S2 kappa arcsine-law smoke; stdout JSON captured"
@@ -752,7 +751,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.057697,
+      "duration_seconds": 0.056993,
       "name": "ns_stretching_formula",
       "notes": [
         "finite S2 stretching identity smoke; stdout JSON captured"
@@ -788,7 +787,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.053076,
+      "duration_seconds": 0.057385,
       "name": "ns_strain_mean_square_formula",
       "notes": [
         "finite S2 mean-square strain formula smoke; stdout JSON captured"
@@ -822,7 +821,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.076336,
+      "duration_seconds": 0.077675,
       "name": "ns_kappa_bias_variational",
       "notes": [
         "finite kappa-bias variational proxy smoke; stdout JSON captured"
@@ -847,6 +846,448 @@
     {
       "command": [
         "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_a4_four_part_proof_harness.py",
+        "--quick",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a4_four_part_proof_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.092257,
+      "name": "ns_a4_four_part_proof",
+      "notes": [
+        "optional A4 local derivative/coarea/LRT/error-budget proof smoke",
+        "diagnostic only; no analytic theorem, NS closure, or Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a4_four_part_proof_smoke.json",
+      "parsed_json_summary": {
+        "harness": "ns_a4_four_part_proof_harness",
+        "promotion": {
+          "a4_proved": false,
+          "clay_ns": false,
+          "terminal": false
+        },
+        "scope": "finite_a4_diagnostic_not_pde_proof"
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": "{\"coarea_proxy\": {\"density_proxy\": 0.5175, \"eta\": 0.1, \"slab_hits\": 207, \"valid_pairs\": 2000}, \"error_subtraction\": {\"N\": 1000000000, \"lower\": 0.012808448437500002, \"modeled_errors\": 9.48693298050514e-05, \"residual_margin\": 0.01271357910769495, \"residual_positive\": true}, \"gradient\": {\"formula\": \"1/(sqrt(2)*cos(gamma/2))\", \"max_abs_error\": 3.0765434644308698e-09, \"mean_abs_error\": 4.633791400587839e-11, \"samples\": 2000}, \"harness\": \"ns_a4_four_part_proof_harness\", \"lrt_proxy\": {\"c_a4_proxy\": 0.128084484375, \"c_lrt_proxy\": 0.4975, \"negative_hemisphere_fraction\": 0.5025, \"positive_hemisphere_fraction\": 0.4975}, \"promotion\": {\"a4_proved\": false, \"clay_ns\": false, \"terminal\": false}, \"scope\": \"finite_a4_diagnostic_not_pde_proof\"}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_a4_error_budget_threshold_harness.py",
+        "--quick",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a4_error_budget_threshold_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.049064,
+      "name": "ns_a4_error_budget_threshold",
+      "notes": [
+        "optional A4 error-subtraction/r0 threshold smoke",
+        "diagnostic only; no residual depletion theorem, NS closure, or Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a4_error_budget_threshold_smoke.json",
+      "parsed_json_summary": {
+        "harness": "ns_a4_error_budget_threshold_harness",
+        "promotion": {
+          "a4_proved": false,
+          "clay_ns": false,
+          "terminal": false
+        },
+        "rows_count": 27,
+        "rows_head": [
+          {
+            "antipodal_error": 0.01,
+            "big_c": 1.0,
+            "bony_error": 0.0001,
+            "c_a4": 0.05,
+            "delta": 0.1,
+            "epsilon": 0.1,
+            "eta": 0.02,
+            "low_vorticity_error": 0.01
+          },
+          {
+            "antipodal_error": 0.0031622776601683794,
+            "big_c": 1.0,
+            "bony_error": 1e-05,
+            "c_a4": 0.05,
+            "delta": 0.05623413251903491,
+            "epsilon": 0.05623413251903491,
+            "eta": 0.02,
+            "low_vorticity_error": 0.0031622776601683794
+          },
+          {
+            "antipodal_error": 0.001,
+            "big_c": 1.0,
+            "bony_error": 1e-06,
+            "c_a4": 0.05,
+            "delta": 0.03162277660168379,
+            "epsilon": 0.03162277660168379,
+            "eta": 0.02,
+            "low_vorticity_error": 0.001
+          },
+          {
+            "antipodal_error": 0.01,
+            "big_c": 1.0,
+            "bony_error": 0.0001,
+            "c_a4": 0.1,
+            "delta": 0.1,
+            "epsilon": 0.1,
+            "eta": 0.02,
+            "low_vorticity_error": 0.01
+          },
+          {
+            "antipodal_error": 0.0031622776601683794,
+            "big_c": 1.0,
+            "bony_error": 1e-05,
+            "c_a4": 0.1,
+            "delta": 0.05623413251903491,
+            "epsilon": 0.05623413251903491,
+            "eta": 0.02,
+            "low_vorticity_error": 0.0031622776601683794
+          },
+          {
+            "antipodal_error": 0.001,
+            "big_c": 1.0,
+            "bony_error": 1e-06,
+            "c_a4": 0.1,
+            "delta": 0.03162277660168379,
+            "epsilon": 0.03162277660168379,
+            "eta": 0.02,
+            "low_vorticity_error": 0.001
+          },
+          {
+            "antipodal_error": 0.01,
+            "big_c": 1.0,
+            "bony_error": 0.0001,
+            "c_a4": 0.25,
+            "delta": 0.1,
+            "epsilon": 0.1,
+            "eta": 0.02,
+            "low_vorticity_error": 0.01
+          },
+          {
+            "antipodal_error": 0.0031622776601683794,
+            "big_c": 1.0,
+            "bony_error": 1e-05,
+            "c_a4": 0.25,
+            "delta": 0.05623413251903491,
+            "epsilon": 0.05623413251903491,
+            "eta": 0.02,
+            "low_vorticity_error": 0.0031622776601683794
+          }
+        ],
+        "scope": "finite_error_budget_diagnostic_not_pde_proof",
+        "summary": {
+          "all_pairs_eventually_pass_in_grid": false,
+          "best_margin": 0.021999,
+          "first_pass_by_pair": {
+            "eta=0.02,c_A4=0.05": null,
+            "eta=0.02,c_A4=0.1": null,
+            "eta=0.02,c_A4=0.25": 1000000,
+            "eta=0.05,c_A4=0.05": null,
+            "eta=0.05,c_A4=0.1": 1000000,
+            "eta=0.05,c_A4=0.25": 100000,
+            "eta=0.1,c_A4=0.05": 1000000,
+            "eta=0.1,c_A4=0.1": 100000
+          },
+          "passing_count": 9,
+          "row_count": 27,
+          "worst_margin": -0.029099999999999997
+        }
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": "0168379, \"eta\": 0.05, \"low_vorticity_error\": 0.001, \"lower_bound\": 0.0125, \"n\": 1000000, \"null_output_error\": 0.001, \"r0\": 0.0, \"residual_margin\": 0.009499, \"residual_positive\": true, \"total_error\": 0.003001}, {\"antipodal_error\": 0.01, \"big_c\": 1.0, \"bony_error\": 0.0001, \"c_a4\": 0.05, \"delta\": 0.1, \"epsilon\": 0.1, \"eta\": 0.1, \"low_vorticity_error\": 0.01, \"lower_bound\": 0.005000000000000001, \"n\": 10000, \"null_output_error\": 0.01, \"r0\": 0.0, \"residual_margin\": -0.025099999999999997, \"residual_positive\": false, \"total_error\": 0.0301}, {\"antipodal_error\": 0.0031622776601683794, \"big_c\": 1.0, \"bony_error\": 1e-05, \"c_a4\": 0.05, \"delta\": 0.05623413251903491, \"epsilon\": 0.05623413251903491, \"eta\": 0.1, \"low_vorticity_error\": 0.0031622776601683794, \"lower_bound\": 0.005000000000000001, \"n\": 100000, \"null_output_error\": 0.0031622776601683794, \"r0\": 0.0, \"residual_margin\": -0.004496832980505136, \"residual_positive\": false, \"total_error\": 0.009496832980505137}, {\"antipodal_error\": 0.001, \"big_c\": 1.0, \"bony_error\": 1e-06, \"c_a4\": 0.05, \"delta\": 0.03162277660168379, \"epsilon\": 0.03162277660168379, \"eta\": 0.1, \"low_vorticity_error\": 0.001, \"lower_bound\": 0.005000000000000001, \"n\": 1000000, \"null_output_error\": 0.001, \"r0\": 0.0, \"residual_margin\": 0.0019990000000000008, \"residual_positive\": true, \"total_error\": 0.003001}, {\"antipodal_error\": 0.01, \"big_c\": 1.0, \"bony_error\": 0.0001, \"c_a4\": 0.1, \"delta\": 0.1, \"epsilon\": 0.1, \"eta\": 0.1, \"low_vorticity_error\": 0.01, \"lower_bound\": 0.010000000000000002, \"n\": 10000, \"null_output_error\": 0.01, \"r0\": 0.0, \"residual_margin\": -0.020099999999999996, \"residual_positive\": false, \"total_error\": 0.0301}, {\"antipodal_error\": 0.0031622776601683794, \"big_c\": 1.0, \"bony_error\": 1e-05, \"c_a4\": 0.1, \"delta\": 0.05623413251903491, \"epsilon\": 0.05623413251903491, \"eta\": 0.1, \"low_vorticity_error\": 0.0031622776601683794, \"lower_bound\": 0.010000000000000002, \"n\": 100000, \"null_output_error\": 0.0031622776601683794, \"r0\": 0.0, \"residual_margin\": 0.0005031670194948646, \"residual_positive\": true, \"total_error\": 0.009496832980505137}, {\"antipodal_error\": 0.001, \"big_c\": 1.0, \"bony_error\": 1e-06, \"c_a4\": 0.1, \"delta\": 0.03162277660168379, \"epsilon\": 0.03162277660168379, \"eta\": 0.1, \"low_vorticity_error\": 0.001, \"lower_bound\": 0.010000000000000002, \"n\": 1000000, \"null_output_error\": 0.001, \"r0\": 0.0, \"residual_margin\": 0.006999000000000002, \"residual_positive\": true, \"total_error\": 0.003001}, {\"antipodal_error\": 0.01, \"big_c\": 1.0, \"bony_error\": 0.0001, \"c_a4\": 0.25, \"delta\": 0.1, \"epsilon\": 0.1, \"eta\": 0.1, \"low_vorticity_error\": 0.01, \"lower_bound\": 0.025, \"n\": 10000, \"null_output_error\": 0.01, \"r0\": 0.0, \"residual_margin\": -0.005099999999999997, \"residual_positive\": false, \"total_error\": 0.0301}, {\"antipodal_error\": 0.0031622776601683794, \"big_c\": 1.0, \"bony_error\": 1e-05, \"c_a4\": 0.25, \"delta\": 0.05623413251903491, \"epsilon\": 0.05623413251903491, \"eta\": 0.1, \"low_vorticity_error\": 0.0031622776601683794, \"lower_bound\": 0.025, \"n\": 100000, \"null_output_error\": 0.0031622776601683794, \"r0\": 0.0, \"residual_margin\": 0.015503167019494864, \"residual_positive\": true, \"total_error\": 0.009496832980505137}, {\"antipodal_error\": 0.001, \"big_c\": 1.0, \"bony_error\": 1e-06, \"c_a4\": 0.25, \"delta\": 0.03162277660168379, \"epsilon\": 0.03162277660168379, \"eta\": 0.1, \"low_vorticity_error\": 0.001, \"lower_bound\": 0.025, \"n\": 1000000, \"null_output_error\": 0.001, \"r0\": 0.0, \"residual_margin\": 0.021999, \"residual_positive\": true, \"total_error\": 0.003001}], \"scope\": \"finite_error_budget_diagnostic_not_pde_proof\", \"summary\": {\"all_pairs_eventually_pass_in_grid\": false, \"best_margin\": 0.021999, \"first_pass_by_pair\": {\"eta=0.02,c_A4=0.05\": null, \"eta=0.02,c_A4=0.1\": null, \"eta=0.02,c_A4=0.25\": 1000000, \"eta=0.05,c_A4=0.05\": null, \"eta=0.05,c_A4=0.1\": 1000000, \"eta=0.05,c_A4=0.25\": 100000, \"eta=0.1,c_A4=0.05\": 1000000, \"eta=0.1,c_A4=0.1\": 100000, \"eta=0.1,c_A4=0.25\": 100000}, \"passing_count\": 9, \"row_count\": 27, \"worst_margin\": -0.029099999999999997}}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_a5_kappa_bias_vanishing_harness.py",
+        "--quick",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a5_kappa_bias_vanishing_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.228705,
+      "name": "ns_a5_kappa_bias_vanishing",
+      "notes": [
+        "optional A5 smoke for half-stretching rewrite, transfer neutrality, and |log r|^-1/2 vanishing",
+        "diagnostic only; no PDE A5 theorem, no A6 theorem, and no Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a5_kappa_bias_vanishing_smoke.json",
+      "parsed_json_summary": {
+        "ok": true,
+        "promotion": {
+          "a5_proved": false,
+          "a6_proved": false,
+          "a7_proved": false,
+          "clay_ns": false,
+          "terminal": false
+        },
+        "scope": "finite_stationarity_and_log_rate_diagnostic_not_pde_proof"
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": "p_a5_2_transfer_neutrality\":{\"base_mean_bias\":0.0034142393132378375,\"bony_correction\":0.000125,\"defective_bound\":0.02411616913559524,\"defective_cov_lambda_kappa_sq\":-0.0004321507683408664,\"defective_push_mean_bias\":0.02891056503779899,\"defective_stationarity_defect_tv\":0.057124999999999995,\"koopman_neutrality_gap\":0.0021294790952745067,\"neutral_bound\":0.011149388443052518,\"neutral_push_mean_bias\":0.005543718408512344,\"neutral_stationarity_defect_tv\":0.02625,\"observable_sup_bound\":0.4199767025924769,\"pass_flags\":{\"defective_bias_controlled_by_tv_plus_bony\":true,\"lambda_kappa_sq_covariance_small\":true,\"neutral_push_bias_small\":true,\"promotion_false\":true},\"samples\":8000,\"transfer_beta\":0.18},\"step_a5_3_log_rate_vanishing\":{\"beta_constant\":0.18,\"fit\":{\"empirical_max_abs_fit_error\":0.008980957390332249,\"empirical_scaled_abs_bias_max\":0.10028172514524357,\"empirical_scaled_abs_bias_min\":0.006654637353578054,\"empirical_slope\":0.030715528333733123,\"model\":\"abs_bias ~= slope / sqrt(log(1/r))\",\"theoretical_max_abs_fit_error\":2.7497220226100835e-05,\"theoretical_scaled_abs_bias_max\":0.030361297842029546,\"theoretical_scaled_abs_bias_min\":0.03020355435200123,\"theoretical_slope\":0.030266044677032512},\"pass_flags\":{\"empirical_bias_generally_decreases\":true,\"log_rate_fit_reasonable\":true,\"promotion_false\":true,\"scaled_bias_bounded\":true},\"rows\":[{\"abs_bias\":0.011149539687256918,\"bony_correction\":0.125,\"log_inv_r\":8.0,\"mean_bias\":0.011149539687256918,\"mean_kappa_sq\":0.5173703740295408,\"mean_lambda\":0.6713013643402488,\"scaled_abs_bias\":0.03153566047987162,\"stationarity_defect_tv\":0.026499999999999996,\"theoretical_abs_bias\":0.01068033930625735,\"theoretical_scaled_abs_bias\":0.030208561395311195,\"transfer_beta\":0.06363961030678927,\"x_rate\":0.35355339059327373},{\"abs_bias\":0.0025977674904176964,\"bony_correction\":0.08333333333333333,\"log_inv_r\":12.0,\"mean_bias\":0.0025977674904176964,\"mean_kappa_sq\":0.5037420998346127,\"mean_lambda\":0.6746955076006566,\"scaled_abs_bias\":0.008998930559308293,\"stationarity_defect_tv\":0.03000000000000002,\"theoretical_abs_bias\":0.008764551741021082,\"theoretical_scaled_abs_bias\":0.030361297842029546,\"transfer_beta\":0.051961524227066326,\"x_rate\":0.2886751345948129},{\"abs_bias\":0.010279086582360453,\"bony_correction\":0.05555555555555555,\"log_inv_r\":18.0,\"mean_bias\":0.010279086582360453,\"mean_kappa_sq\":0.5160967246199376,\"mean_lambda\":0.6711900967111385,\"scaled_abs_bias\":0.04361047096074437,\"stationarity_defect_tv\":0.024000000000000007,\"theoretical_abs_bias\":0.007119046032745511,\"theoretical_scaled_abs_bias\":0.03020355435200123,\"transfer_beta\":0.042426406871192854,\"x_rate\":0.23570226039551587},{\"abs_bias\":0.008160620164562435,\"bony_correction\":0.037037037037037035,\"log_inv_r\":27.0,\"mean_bias\":0.008160620164562435,\"mean_kappa_sq\":0.5113265271697814,\"mean_lambda\":0.6732317850612487,\"scaled_abs_bias\":0.04240382623887969,\"stationarity_defect_tv\":0.028375,\"theoretical_abs_bias\":0.0058303582849818635,\"theoretical_scaled_abs_bias\":0.030295430327756195,\"transfer_beta\":0.034641016151377546,\"x_rate\":0.19245008972987526},{\"abs_bias\":0.001052190551987095,\"bony_correction\":0.025,\"log_inv_r\":40.0,\"mean_bias\":-0.001052190551987095,\"mean_kappa_sq\":0.4976292319972898,\"mean_lambda\":0.6736555820639832,\"scaled_abs_bias\":0.006654637353578054,\"stationarity_defect_tv\":0.027250000000000007,\"theoretical_abs_bias\":0.004793143495069487,\"theoretical_scaled_abs_bias\":0.03031450119287925,\"transfer_beta\":0.028460498941515415,\"x_rate\":0.15811388300841897},{\"abs_bias\":0.012946315047215929,\"bony_correction\":0.016666666666666666,\"log_inv_r\":60.0,\"mean_bias\":0.012946315047215929,\"mean_kappa_sq\":0.5200063695739459,\"mean_lambda\":0.6731381850793813,\"scaled_abs_bias\":0.10028172514524357,\"stationarity_defect_tv\":0.031374999999999986,\"theoretical_abs_bias\":0.003910579470763093,\"theoretical_scaled_abs_bias\":0.03029121832857215,\"transfer_beta\":0.023237900077244498,\"x_rate\":0.12909944487358055}],\"samples_per_scale\":8000},\"theorem_label\":\"NSA5KappaBiasVanishingDiagnostic\"}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_a6_triadic_compensated_leakage_harness.py",
+        "--quick",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a6_triadic_compensated_leakage_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.072177,
+      "name": "ns_a6_triadic_compensated_leakage",
+      "notes": [
+        "optional A6 smoke for localized ODE bookkeeping, Bony correction, and dissipation absorption",
+        "diagnostic only; no PDE A6 theorem, no A7 theorem, and no Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a6_triadic_compensated_leakage_smoke.json",
+      "parsed_json_summary": {
+        "harness": "ns_a6_triadic_compensated_leakage_harness",
+        "promotion": {
+          "a6_proved": false,
+          "navier_stokes_clay": false,
+          "terminal": false
+        },
+        "rows_count": 864,
+        "rows_head": [
+          {
+            "abel_transfer_error": 0.0018,
+            "absorption_margin": -0.004743715840927936,
+            "alpha": 0.125,
+            "assembled_lhs_minus_rhs": -5.9296448011599196e-05,
+            "bony_correction": 5.500000000000001e-05,
+            "c_lambda": 0.026225683181441303,
+            "c_lrt": 0.35,
+            "d_r": 0.0125
+          },
+          {
+            "abel_transfer_error": 0.0018,
+            "absorption_margin": -0.004743715840927936,
+            "alpha": 0.125,
+            "assembled_lhs_minus_rhs": -5.9296448011599196e-05,
+            "bony_correction": 5.500000000000001e-05,
+            "c_lambda": 0.026225683181441303,
+            "c_lrt": 0.35,
+            "d_r": 0.0125
+          },
+          {
+            "abel_transfer_error": 0.0018,
+            "absorption_margin": -0.004743715840927936,
+            "alpha": 0.25,
+            "assembled_lhs_minus_rhs": -5.9296448011599196e-05,
+            "bony_correction": 5.500000000000001e-05,
+            "c_lambda": 0.026225683181441303,
+            "c_lrt": 0.35,
+            "d_r": 0.0125
+          },
+          {
+            "abel_transfer_error": 0.0018,
+            "absorption_margin": -0.004743715840927936,
+            "alpha": 0.25,
+            "assembled_lhs_minus_rhs": -5.9296448011599196e-05,
+            "bony_correction": 5.500000000000001e-05,
+            "c_lambda": 0.026225683181441303,
+            "c_lrt": 0.35,
+            "d_r": 0.0125
+          },
+          {
+            "abel_transfer_error": 0.0018,
+            "absorption_margin": -0.0037602527216238865,
+            "alpha": 0.125,
+            "assembled_lhs_minus_rhs": -4.700315902029858e-05,
+            "bony_correction": 5.500000000000001e-05,
+            "c_lambda": 0.026225683181441303,
+            "c_lrt": 0.35,
+            "d_r": 0.0125
+          },
+          {
+            "abel_transfer_error": 0.0018,
+            "absorption_margin": -0.0037602527216238865,
+            "alpha": 0.125,
+            "assembled_lhs_minus_rhs": -4.700315902029858e-05,
+            "bony_correction": 5.500000000000001e-05,
+            "c_lambda": 0.026225683181441303,
+            "c_lrt": 0.35,
+            "d_r": 0.0125
+          },
+          {
+            "abel_transfer_error": 0.0018,
+            "absorption_margin": -0.0037602527216238865,
+            "alpha": 0.25,
+            "assembled_lhs_minus_rhs": -4.700315902029858e-05,
+            "bony_correction": 5.500000000000001e-05,
+            "c_lambda": 0.026225683181441303,
+            "c_lrt": 0.35,
+            "d_r": 0.0125
+          },
+          {
+            "abel_transfer_error": 0.0018,
+            "absorption_margin": -0.0037602527216238865,
+            "alpha": 0.25,
+            "assembled_lhs_minus_rhs": -4.700315902029858e-05,
+            "bony_correction": 5.500000000000001e-05,
+            "c_lambda": 0.026225683181441303,
+            "c_lrt": 0.35,
+            "d_r": 0.0125
+          }
+        ],
+        "scope": "finite_a6_diagnostic_not_pde_proof",
+        "summary": {
+          "best_absorption_margin": 0.004154583291682824,
+          "fail_count": 384,
+          "min_success_n_by_profile": {
+            "balanced": 100000,
+            "favorable": 10000,
+            "stressed": 100000
+          },
+          "pass_count": 480,
+          "pass_fraction": 0.5555555555555556,
+          "profile_summary": {
+            "balanced": {
+              "best_absorption_margin": 0.0040073896868606145,
+              "fail_count": 120,
+              "mean_absorption_margin": -0.0001739996927867379,
+              "mean_modeled_dt_upper": 0.019825810344326397,
+              "pass_count": 168,
+              "row_count": 288,
+              "worst_absorption_margin": -0.004743715840927936
+            },
+            "favorable": {
+              "best_absorption_margin": 0.004154583291682824,
+              "fail_count": 96,
+              "mean_absorption_margin": 0.0006817897624227312,
+              "mean_modeled_dt_upper": 0.019800849818549453,
+              "pass_count": 192,
+              "row_count": 288,
+              "worst_absorption_margin": -0.0029287158409279346
+            },
+            "stressed": {
+              "best_absorption_margin": 0.003822407710971661,
+              "fail_count": 168,
+              "mean_absorption_margin": -0.0013966600501600429,
+              "mean_modeled_dt_upper": 0.01986147127141645,
+              "pass_count": 120,
+              "row_count": 288,
+              "worst_absorption_margin": -0.007363715840927935
+            }
+          },
+          "row_count": 864,
+          "worst_absorption_margin": -0.007363715840927935
+        }
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": " \"epsilon0\": 0.35, \"eta\": 0.1, \"inequality_holds\": true, \"linear_target\": 0.004683157710971661, \"localization_error\": 0.00017999999999999998, \"modeled_dt_upper\": 0.03422190687402635, \"n\": 1000000, \"nonlinear_c\": 1.0, \"nonlinear_rhs\": 0.034382801096681605, \"profile\": \"stressed\", \"raw_bias_density\": 0.001284523257866513, \"stationarity_defect\": 0.00042, \"total_correction\": 0.0014652732578665129, \"transferred_bias_density\": 0.0006045232578665129}, {\"abel_transfer_error\": 0.00026000000000000003, \"absorption_margin\": 0.0032178844531051483, \"alpha\": 0.125, \"assembled_lhs_minus_rhs\": 0.00016089422265525743, \"bony_correction\": 7.5e-07, \"c_lambda\": 0.0535218024111047, \"c_lrt\": 0.5, \"d_r\": 0.05, \"epsilon0\": 0.35, \"eta\": 0.1, \"inequality_holds\": true, \"linear_target\": 0.004683157710971661, \"localization_error\": 0.00017999999999999998, \"modeled_dt_upper\": 0.051413307422367154, \"n\": 1000000, \"nonlinear_c\": 1.5, \"nonlinear_rhs\": 0.05157420164502241, \"profile\": \"stressed\", \"raw_bias_density\": 0.001284523257866513, \"stationarity_defect\": 0.00042, \"total_correction\": 0.0014652732578665129, \"transferred_bias_density\": 0.0006045232578665129}, {\"abel_transfer_error\": 0.00026000000000000003, \"absorption_margin\": 0.0032178844531051483, \"alpha\": 0.25, \"assembled_lhs_minus_rhs\": 0.00016089422265525743, \"bony_correction\": 7.5e-07, \"c_lambda\": 0.0535218024111047, \"c_lrt\": 0.5, \"d_r\": 0.05, \"epsilon0\": 0.35, \"eta\": 0.1, \"inequality_holds\": true, \"linear_target\": 0.004683157710971661, \"localization_error\": 0.00017999999999999998, \"modeled_dt_upper\": 0.02348264600242414, \"n\": 1000000, \"nonlinear_c\": 1.0, \"nonlinear_rhs\": 0.023643540225079397, \"profile\": \"stressed\", \"raw_bias_density\": 0.001284523257866513, \"stationarity_defect\": 0.00042, \"total_correction\": 0.0014652732578665129, \"transferred_bias_density\": 0.0006045232578665129}, {\"abel_transfer_error\": 0.00026000000000000003, \"absorption_margin\": 0.0032178844531051483, \"alpha\": 0.25, \"assembled_lhs_minus_rhs\": 0.00016089422265525743, \"bony_correction\": 7.5e-07, \"c_lambda\": 0.0535218024111047, \"c_lrt\": 0.5, \"d_r\": 0.05, \"epsilon0\": 0.35, \"eta\": 0.1, \"inequality_holds\": true, \"linear_target\": 0.004683157710971661, \"localization_error\": 0.00017999999999999998, \"modeled_dt_upper\": 0.03530441611496384, \"n\": 1000000, \"nonlinear_c\": 1.5, \"nonlinear_rhs\": 0.0354653103376191, \"profile\": \"stressed\", \"raw_bias_density\": 0.001284523257866513, \"stationarity_defect\": 0.00042, \"total_correction\": 0.0014652732578665129, \"transferred_bias_density\": 0.0006045232578665129}], \"scope\": \"finite_a6_diagnostic_not_pde_proof\", \"summary\": {\"best_absorption_margin\": 0.004154583291682824, \"fail_count\": 384, \"min_success_n_by_profile\": {\"balanced\": 100000, \"favorable\": 10000, \"stressed\": 100000}, \"pass_count\": 480, \"pass_fraction\": 0.5555555555555556, \"profile_summary\": {\"balanced\": {\"best_absorption_margin\": 0.0040073896868606145, \"fail_count\": 120, \"mean_absorption_margin\": -0.0001739996927867379, \"mean_modeled_dt_upper\": 0.019825810344326397, \"pass_count\": 168, \"row_count\": 288, \"worst_absorption_margin\": -0.004743715840927936}, \"favorable\": {\"best_absorption_margin\": 0.004154583291682824, \"fail_count\": 96, \"mean_absorption_margin\": 0.0006817897624227312, \"mean_modeled_dt_upper\": 0.019800849818549453, \"pass_count\": 192, \"row_count\": 288, \"worst_absorption_margin\": -0.0029287158409279346}, \"stressed\": {\"best_absorption_margin\": 0.003822407710971661, \"fail_count\": 168, \"mean_absorption_margin\": -0.0013966600501600429, \"mean_modeled_dt_upper\": 0.01986147127141645, \"pass_count\": 120, \"row_count\": 288, \"worst_absorption_margin\": -0.007363715840927935}}, \"row_count\": 864, \"worst_absorption_margin\": -0.007363715840927935}, \"sweep\": {\"alpha_values\": [0.125, 0.25], \"big_c\": 1.0, \"c_lrt_values\": [0.35, 0.5], \"d_r_values\": [0.0125, 0.025, 0.05], \"epsilon0_values\": [0.2, 0.35], \"eta_values\": [0.05, 0.1], \"n_values\": [10000, 100000, 1000000], \"nonlinear_c_values\": [1.0, 1.5], \"profiles\": [\"balanced\", \"favorable\", \"stressed\"], \"quick\": true}}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_a7_residual_depletion_gronwall_harness.py",
+        "--quick",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a7_residual_depletion_gronwall_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.049997,
+      "name": "ns_a7_residual_depletion_gronwall",
+      "notes": [
+        "optional A7 ODE smoke for thresholded monotone depletion below threshold",
+        "diagnostic only; no PDE A7 theorem, no CKN/BKM closure, and no Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_a7_residual_depletion_gronwall_smoke.json",
+      "parsed_json_summary": {
+        "cases": [
+          {
+            "crossed_down_below_threshold": false,
+            "crossed_up_above_threshold": false,
+            "depletes_toward_zero": true,
+            "dt": 0.02,
+            "fails_to_deplete": false,
+            "final_ratio_to_threshold": 0.0003795212531264074,
+            "final_rhs": -2.381617176040143e-05,
+            "final_value": 6.0723400500225196e-05
+          },
+          {
+            "crossed_down_below_threshold": false,
+            "crossed_up_above_threshold": false,
+            "depletes_toward_zero": true,
+            "dt": 0.02,
+            "fails_to_deplete": false,
+            "final_ratio_to_threshold": 0.05787820977346728,
+            "final_rhs": -0.0028130517384729508,
+            "final_value": 0.009260513563754767
+          },
+          {
+            "crossed_down_below_threshold": false,
+            "crossed_up_above_threshold": false,
+            "depletes_toward_zero": false,
+            "dt": 0.02,
+            "fails_to_deplete": true,
+            "final_ratio_to_threshold": 7.31678387883546,
+            "final_rhs": 0.7983865859263655,
+            "final_value": 1.1706854206136739
+          },
+          {
+            "crossed_down_below_threshold": false,
+            "crossed_up_above_threshold": false,
+            "depletes_toward_zero": false,
+            "dt": 0.02,
+            "fails_to_deplete": true,
+            "final_ratio_to_threshold": 7.267791707341164,
+            "final_rhs": 0.7888213275749336,
+            "final_value": 1.1628466731745866
+          }
+        ],
+        "harness": "ns_a7_residual_depletion_gronwall_harness",
+        "promotion": {
+          "a7_proved": false,
+          "clay_ns": false,
+          "terminal": false
+        },
+        "scope": "finite_ode_diagnostic_not_ns_clay_proof",
+        "summary": {
+          "above_threshold_rhs_positive": true,
+          "bad_cases_fail_to_deplete": true,
+          "below_threshold_rhs_negative": true,
+          "formula": "(beta/C)^(1/alpha)",
+          "good_cases_monotone_deplete": true,
+          "threshold": 0.16000000000000003
+        }
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": " \"t\": 14.0}, {\"D\": 0.05968368876483549, \"rhs\": -0.00929260390935439, \"t\": 16.0}, {\"D\": 0.04204472231339323, \"rhs\": -0.008196698602514678, \"t\": 18.0}, {\"D\": 0.02735737992960225, \"rhs\": -0.006418023143196919, \"t\": 20.0}, {\"D\": 0.016479211121641028, \"rhs\": -0.004476225380888788, \"t\": 22.0}, {\"D\": 0.009260513563754767, \"rhs\": -0.0028130517384729508, \"t\": 24.0}], \"step_count\": 1200, \"time_horizon\": 24.0}, {\"crossed_down_below_threshold\": false, \"crossed_up_above_threshold\": false, \"depletes_toward_zero\": false, \"dt\": 0.02, \"fails_to_deplete\": true, \"final_ratio_to_threshold\": 7.31678387883546, \"final_rhs\": 0.7983865859263655, \"final_value\": 1.1706854206136739, \"hit_cap\": true, \"initial_data\": 0.16800000000000004, \"initial_ratio_to_threshold\": 1.05, \"initial_rhs\": 0.0016595091472484946, \"max_value\": 1.1706854206136739, \"min_value\": 0.16800000000000004, \"monotone_decreasing\": false, \"monotone_increasing\": true, \"name\": \"bad_near_threshold\", \"samples\": [{\"D\": 0.16800000000000004, \"rhs\": 0.0016595091472484946, \"t\": 0.0}, {\"D\": 0.17062404967355257, \"rhs\": 0.002229483154831083, \"t\": 1.36}, {\"D\": 0.17416269470772397, \"rhs\": 0.003017898502953281, \"t\": 2.72}, {\"D\": 0.1789770404854814, \"rhs\": 0.004126634539754065, \"t\": 4.08}, {\"D\": 0.1856053024909355, \"rhs\": 0.005720232658941754, \"t\": 5.44}, {\"D\": 0.19487933099531352, \"rhs\": 0.008078019430665828, \"t\": 6.8}, {\"D\": 0.2081458234692994, \"rhs\": 0.01170404206469454, \"t\": 8.16}, {\"D\": 0.227718940597041, \"rhs\": 0.01757968761718122, \"t\": 9.52}, {\"D\": 0.25789747811154645, \"rhs\": 0.027810651548222015, \"t\": 10.88}, {\"D\": 0.30754776726787364, \"rhs\": 0.047537625768980435, \"t\": 12.24}, {\"D\": 0.39785852956376067, \"rhs\": 0.0918099452845379, \"t\": 13.6}, {\"D\": 0.5921781119199424, \"rhs\": 0.21882822834445795, \"t\": 14.96}, {\"D\": 1.1706854206136739, \"rhs\": 0.7983865859263655, \"t\": 16.32}], \"step_count\": 816, \"time_horizon\": 16.32}, {\"crossed_down_below_threshold\": false, \"crossed_up_above_threshold\": false, \"depletes_toward_zero\": false, \"dt\": 0.02, \"fails_to_deplete\": true, \"final_ratio_to_threshold\": 7.267791707341164, \"final_rhs\": 0.7888213275749336, \"final_value\": 1.1628466731745866, \"hit_cap\": true, \"initial_data\": 0.24000000000000005, \"initial_ratio_to_threshold\": 1.5, \"initial_rhs\": 0.02157550765359255, \"max_value\": 1.1628466731745866, \"min_value\": 0.24000000000000005, \"monotone_decreasing\": false, \"monotone_increasing\": true, \"name\": \"bad_far_above_threshold\", \"samples\": [{\"D\": 0.24000000000000005, \"rhs\": 0.02157550765359255, \"t\": 0.0}, {\"D\": 0.25176089936139495, \"rhs\": 0.025618637628525787, \"t\": 0.5}, {\"D\": 0.26579318089644094, \"rhs\": 0.030712757370108312, \"t\": 1.0}, {\"D\": 0.2827106300166981, \"rhs\": 0.03723451597987583, \"t\": 1.5}, {\"D\": 0.30335670000592285, \"rhs\": 0.04573959767672778, \"t\": 2.0}, {\"D\": 0.32891890199730817, \"rhs\": 0.05707220463807322, \"t\": 2.5}, {\"D\": 0.36111682404293066, \"rhs\": 0.07255919117882775, \"t\": 3.0}, {\"D\": 0.4025240455151477, \"rhs\": 0.09437088789099929, \"t\": 3.5}, {\"D\": 0.45714648576593625, \"rhs\": 0.12623007038283812, \"t\": 4.0}, {\"D\": 0.5315231919463148, \"rhs\": 0.17490109258973946, \"t\": 4.5}, {\"D\": 0.6369746327320706, \"rhs\": 0.2535839999689588, \"t\": 5.0}, {\"D\": 0.7946189918413897, \"rhs\": 0.39048692954616415, \"t\": 5.5}, {\"D\": 1.0479202887047019, \"rhs\": 0.6535666934400226, \"t\": 6.0}, {\"D\": 1.1628466731745866, \"rhs\": 0.7888213275749336, \"t\": 6.16}], \"step_count\": 308, \"time_horizon\": 6.16}], \"harness\": \"ns_a7_residual_depletion_gronwall_harness\", \"ode\": {\"C\": 1.0, \"alpha\": 0.5, \"beta\": 0.4, \"dt\": 0.02, \"equation\": \"D' = -beta*D + C*D^(1+alpha)\", \"steps\": 1200}, \"promotion\": {\"a7_proved\": false, \"clay_ns\": false, \"terminal\": false}, \"scope\": \"finite_ode_diagnostic_not_ns_clay_proof\", \"summary\": {\"above_threshold_rhs_positive\": true, \"bad_cases_fail_to_deplete\": true, \"below_threshold_rhs_negative\": true, \"formula\": \"(beta/C)^(1/alpha)\", \"good_cases_monotone_deplete\": true, \"threshold\": 0.16000000000000003}, \"threshold\": {\"formula\": \"(beta/C)^(1/alpha)\", \"value\": 0.16000000000000003}}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
         "/home/c/Documents/code/dashi_agda/scripts/ns_typeI_selfsimilar_kappa_bias_harness.py",
         "--samples",
         "512",
@@ -863,7 +1304,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.081341,
+      "duration_seconds": 0.073818,
       "name": "ns_typeI_selfsimilar_kappa_bias",
       "notes": [
         "optional Gaussian/Type-I self-similar kappa-bias balance proxy smoke",
@@ -887,6 +1328,111 @@
     {
       "command": [
         "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_abel_triadic_measure_proxy_harness.py",
+        "--samples",
+        "384",
+        "--depths",
+        "6",
+        "--abel-rho",
+        "0.82",
+        "--coverage-normals",
+        "48",
+        "--bins",
+        "16",
+        "--seed",
+        "20260608",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_abel_triadic_measure_proxy_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.142654,
+      "name": "ns_abel_triadic_measure_proxy",
+      "notes": [
+        "optional Abel-weighted triadic defect-measure proxy smoke",
+        "diagnostic only; no Abel defect-measure construction or Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_abel_triadic_measure_proxy_smoke.json",
+      "parsed_json_summary": {
+        "clay_promotion": false,
+        "depths": 6,
+        "ok": true
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": "{\"abel_defect_measure_constructed\": false, \"abel_rho\": 0.82, \"accepted_pushforward_states\": 2304, \"accepted_states\": 2304, \"angular_coverage\": {\"coverage_score\": 0.9982979616354735, \"max_great_circle_gap\": 0.001702038364526537, \"mean_great_circle_gap\": 0.00041086951330416844, \"normals\": 48, \"output_count\": 2304}, \"arcsine_reference\": {\"coherent_fraction_01\": 0.06376856085851985, \"mean_kappa_fourth\": 0.375, \"mean_kappa_sq\": 0.5, \"negative_stretching_fraction_threshold\": 0.5}, \"clay_promotion\": false, \"depths\": 6, \"finite_measure_proxy\": true, \"ok\": true, \"pde_promotion\": false, \"pushforward\": {\"coherent_fraction_01\": 0.06146219317076077, \"coherent_fraction_sqrt_half\": 0.495404296786786, \"count\": 2304, \"mean_abs_kappa\": 0.64071773862935, \"mean_bias\": 0.0025350666625366222, \"mean_kappa\": -0.05079107217090798, \"mean_kappa_fourth\": 0.3812652446801828, \"mean_kappa_sq\": 0.5053979412429284, \"mean_lambda\": 0.4154707030239808, \"mean_lambda_sq\": 0.1835188804272726, \"mean_stretching\": 0.0050701333250732445, \"total_weight\": 219.1543793020109}, \"pushforward_angular_coverage\": {\"coverage_score\": 0.998894945188148, \"max_great_circle_gap\": 0.0011050548118519687, \"mean_great_circle_gap\": 0.00035829952223655404, \"normals\": 48, \"output_count\": 2304}, \"samples\": 384, \"seed\": 20260608, \"source\": {\"coherent_fraction_01\": 0.06428373541027765, \"coherent_fraction_sqrt_half\": 0.5092327300660084, \"count\": 2304, \"mean_abs_kappa\": 0.6340970461817668, \"mean_bias\": -0.0003226380540343821, \"mean_kappa\": -0.04528236199163598, \"mean_kappa_fourth\": 0.3739989782338991, \"mean_kappa_sq\": 0.4978278983388735, \"mean_lambda\": 0.41812113348800667, \"mean_lambda_sq\": 0.18523408630104404, \"mean_stretching\": -0.0006452761080687642, \"total_weight\": 267.26143817318405}, \"stationarity_residual\": {\"bin_l1_residual\": 0.04402376230342665, \"moment_l1_residual\": 0.018793587517793753, \"pushed_mean_bias\": 0.0025350666625366222, \"pushed_mean_kappa_sq\": 0.5053979412429284, \"pushed_mean_lambda\": 0.4154707030239808, \"source_mean_bias\": -0.0003226380540343821, \"source_mean_kappa_sq\": 0.4978278983388735, \"source_mean_lambda\": 0.41812113348800667}}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
+        "/home/c/Documents/code/dashi_agda/scripts/ns_kappa_bias_profile_sweep.py",
+        "--quick",
+        "--samples",
+        "900",
+        "--seed",
+        "20260608",
+        "--json-output",
+        "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_kappa_bias_profile_sweep_smoke.json",
+        "--json"
+      ],
+      "discovered": true,
+      "duration_seconds": 0.230548,
+      "name": "ns_kappa_bias_profile_sweep",
+      "notes": [
+        "optional kappa-bias profile sensitivity sweep smoke",
+        "diagnostic only; no Type-I kappa-bias theorem or Clay promotion"
+      ],
+      "parsed_json_source": "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ns_kappa_bias_profile_sweep_smoke.json",
+      "parsed_json_summary": {
+        "harness": "ns_kappa_bias_profile_sweep",
+        "interpretation": "Finite profile sensitivity only: positive top-tail/LRT bias is easy to select, but the one-step stationarity proxy is the relevant falsification signal.  Type-I/self-similar kappa-bias remains open.",
+        "promotion": {
+          "clay": false,
+          "pde_gate_closed": false,
+          "reason": "profile sweep wraps finite proxy harness only"
+        },
+        "quick": true,
+        "scope": "finite_s2_profile_sensitivity_not_pde_proof",
+        "summary": {
+          "baseline_drift_quantiles": {
+            "count": 5,
+            "max": 0.009674010423136776,
+            "mean": 0.003454261618519784,
+            "median": 0.002138557885714336,
+            "min": 0.0009010355360992824
+          },
+          "max_neutral_baseline_drift_abs": 0.009674010423136776,
+          "neutral_baseline_drift_alert": false,
+          "positive_stationary_profile_count": 4,
+          "stationary_proxy_quantiles": {
+            "count": 5,
+            "max": 0.019387884669228014,
+            "mean": 0.004736202558847253,
+            "median": 0.006759942397082298,
+            "min": -0.01864011736527145
+          },
+          "worst_positive_stationary_proxy": {
+            "promotion": {
+              "clay": false,
+              "pde_gate_closed": false,
+              "reason": "finite proxy only; Type-I/self-similar kappa-bias bound remains open"
+            }
+          }
+        }
+      },
+      "promotion": false,
+      "return_code": 0,
+      "skip_reason": null,
+      "skipped": false,
+      "stderr_tail": "",
+      "stdout_tail": "d_tail\", \"neutral_baseline_drift_abs\": 0.002138557885714336, \"promotion\": {\"clay\": false, \"pde_gate_closed\": false, \"reason\": \"finite proxy only; Type-I/self-similar kappa-bias bound remains open\"}, \"samples\": 900, \"seed\": 20276446, \"selected_counts\": {\"lrt_and_stationary_proxy\": 90, \"lrt_proxy\": 90, \"stationary_proxy\": 90, \"unconstrained\": 90}, \"stationarity_erases_unconstrained_bias\": true, \"stationary_proxy_mean_bias\": 0.003952070534295534, \"top_fraction\": 0.1, \"unconstrained_mean_bias\": 0.22858284538966403, \"worst_stationary_proxy_mean_bias\": 0.003952070534295534}, {\"accepted_samples\": 900, \"baseline_all_mean_bias\": -0.003269033164294536, \"coverage_normals\": 160, \"coverage_score\": 0.9743171372398096, \"lrt_and_stationary_proxy_mean_bias\": -0.0592132656445762, \"lrt_candidate_multiplier\": 10.0, \"lrt_proxy_mean_bias\": 0.23857792561251306, \"name\": \"coverage_heavy\", \"neutral_baseline_drift_abs\": 0.003269033164294536, \"promotion\": {\"clay\": false, \"pde_gate_closed\": false, \"reason\": \"finite proxy only; Type-I/self-similar kappa-bias bound remains open\"}, \"samples\": 900, \"seed\": 20284365, \"selected_counts\": {\"lrt_and_stationary_proxy\": 45, \"lrt_proxy\": 45, \"stationary_proxy\": 45, \"unconstrained\": 45}, \"stationarity_erases_unconstrained_bias\": true, \"stationary_proxy_mean_bias\": 0.019387884669228014, \"top_fraction\": 0.05, \"unconstrained_mean_bias\": 0.24078325022272004, \"worst_stationary_proxy_mean_bias\": 0.019387884669228014}, {\"accepted_samples\": 900, \"baseline_all_mean_bias\": -0.001288671083353989, \"coverage_normals\": 96, \"coverage_score\": 0.994436018092476, \"lrt_and_stationary_proxy_mean_bias\": -0.03287860604116523, \"lrt_candidate_multiplier\": 4.0, \"lrt_proxy_mean_bias\": 0.20745475346102005, \"name\": \"very_broad_tail\", \"neutral_baseline_drift_abs\": 0.001288671083353989, \"promotion\": {\"clay\": false, \"pde_gate_closed\": false, \"reason\": \"finite proxy only; Type-I/self-similar kappa-bias bound remains open\"}, \"samples\": 900, \"seed\": 20292284, \"selected_counts\": {\"lrt_and_stationary_proxy\": 180, \"lrt_proxy\": 180, \"stationary_proxy\": 180, \"unconstrained\": 180}, \"stationarity_erases_unconstrained_bias\": true, \"stationary_proxy_mean_bias\": -0.01864011736527145, \"top_fraction\": 0.2, \"unconstrained_mean_bias\": 0.2082506885206935, \"worst_stationary_proxy_mean_bias\": -0.01864011736527145}], \"promotion\": {\"clay\": false, \"pde_gate_closed\": false, \"reason\": \"profile sweep wraps finite proxy harness only\"}, \"quick\": true, \"scope\": \"finite_s2_profile_sensitivity_not_pde_proof\", \"seed\": 20260608, \"summary\": {\"baseline_drift_quantiles\": {\"count\": 5, \"max\": 0.009674010423136776, \"mean\": 0.003454261618519784, \"median\": 0.002138557885714336, \"min\": 0.0009010355360992824}, \"max_neutral_baseline_drift_abs\": 0.009674010423136776, \"neutral_baseline_drift_alert\": false, \"positive_stationary_profile_count\": 4, \"stationary_proxy_quantiles\": {\"count\": 5, \"max\": 0.019387884669228014, \"mean\": 0.004736202558847253, \"median\": 0.006759942397082298, \"min\": -0.01864011736527145}, \"worst_positive_stationary_proxy\": {\"accepted_samples\": 900, \"baseline_all_mean_bias\": -0.003269033164294536, \"coverage_normals\": 160, \"coverage_score\": 0.9743171372398096, \"lrt_and_stationary_proxy_mean_bias\": -0.0592132656445762, \"lrt_candidate_multiplier\": 10.0, \"lrt_proxy_mean_bias\": 0.23857792561251306, \"name\": \"coverage_heavy\", \"neutral_baseline_drift_abs\": 0.003269033164294536, \"promotion\": {\"clay\": false, \"pde_gate_closed\": false, \"reason\": \"finite proxy only; Type-I/self-similar kappa-bias bound remains open\"}, \"samples\": 900, \"seed\": 20284365, \"selected_counts\": {\"lrt_and_stationary_proxy\": 45, \"lrt_proxy\": 45, \"stationary_proxy\": 45, \"unconstrained\": 45}, \"stationarity_erases_unconstrained_bias\": true, \"stationary_proxy_mean_bias\": 0.019387884669228014, \"top_fraction\": 0.05, \"unconstrained_mean_bias\": 0.24078325022272004, \"worst_stationary_proxy_mean_bias\": 0.019387884669228014}}, \"wrapped_harness\": \"/home/c/Documents/code/dashi_agda/scripts/ns_kappa_bias_variational_harness.py\"}\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python",
         "/home/c/Documents/code/dashi_agda/scripts/ns_gaussian_selfsimilar_kappa_bias_balance_harness.py",
         "--samples",
         "512",
@@ -899,7 +1445,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.07985,
+      "duration_seconds": 0.075721,
       "name": "ns_gaussian_selfsimilar_kappa_bias_balance",
       "notes": [
         "optional corrected Gaussian balance smoke for 1 <= 4*bias + drift",
@@ -979,7 +1525,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.05641,
+      "duration_seconds": 0.052267,
       "name": "ns_transfer_operator_bias_neutrality",
       "notes": [
         "optional NS-F7 finite transfer-operator bias-neutrality smoke",
@@ -1016,7 +1562,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.064872,
+      "duration_seconds": 0.059669,
       "name": "ns_abel_triadic_stationarity_proxy",
       "notes": [
         "optional Abel triadic stationarity proxy smoke",
@@ -1048,7 +1594,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.050229,
+      "duration_seconds": 0.049388,
       "name": "ns_stationarity_rate_proxy",
       "notes": [
         "optional stationarity-rate proxy smoke with log(1/r)^(-1/2) theta and bad nondecaying control",
@@ -1087,7 +1633,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.053374,
+      "duration_seconds": 0.052097,
       "name": "ns_bounded_abel_mass_proxy",
       "notes": [
         "optional A1 bounded Abel/log-window mass proxy smoke with deliberate bad profile",
@@ -1144,7 +1690,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.357807,
+      "duration_seconds": 0.350066,
       "name": "ns_biot_savart_shell_localization_proxy",
       "notes": [
         "optional A6.2 Biot-Savart shell-localization proxy for same-shell multiplier ownership and off-shell tail decay",
@@ -1410,7 +1956,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.072431,
+      "duration_seconds": 0.075705,
       "name": "ns_lrt_fourier_output_coupling_proxy",
       "notes": [
         "optional A4 LRT physical-to-Fourier output-support coupling proxy for Whitney/frame/localization components",
@@ -1628,7 +2174,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.069612,
+      "duration_seconds": 0.074194,
       "name": "ns_bony_paraproduct_a6_repair_proxy",
       "notes": [
         "optional corrected A6.2 Bony paraproduct repair proxy separating naive O(1) off-shell failure from corrected routing",
@@ -1843,7 +2389,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.059738,
+      "duration_seconds": 0.059985,
       "name": "ns_pointwise_to_abel_averaging_proxy",
       "notes": [
         "optional A6 pointwise-to-Abel averaging proxy smoke with deliberate correlated bad profile",
@@ -1901,7 +2447,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.053521,
+      "duration_seconds": 0.052495,
       "name": "ns_localization_pressure_commutator_proxy",
       "notes": [
         "optional A6 localization/pressure commutator proxy with deliberate bad tail and cutoff cases",
@@ -1959,7 +2505,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.206406,
+      "duration_seconds": 0.20085,
       "name": "ns_pressure_tail_absorption_proxy",
       "notes": [
         "optional A6 pressure-tail absorption proxy with bad harmonic-tail, annular-plateau, and gradient profiles",
@@ -2000,7 +2546,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.100379,
+      "duration_seconds": 0.106475,
       "name": "ns_cutoff_riesz_commutator_kernel_proxy",
       "notes": [
         "optional A6 cutoff/Riesz commutator kernel proxy with cancellation, annulus separation, and bad rough/no-cancellation/touching-core cases",
@@ -2127,7 +2673,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.05483,
+      "duration_seconds": 0.05653,
       "name": "ns_harmonic_pressure_tail_decay_proxy",
       "notes": [
         "optional A6 harmonic pressure-tail proxy with mean-subtraction, annular separation, and moment-cancellation controls",
@@ -2175,7 +2721,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.059084,
+      "duration_seconds": 0.054628,
       "name": "ns_pressure_localization_subbudget_proxy",
       "notes": [
         "optional A6 pressure-localization sub-budget proxy aggregating cutoff/Riesz, local CZ, harmonic tail, pressure tail, annular cutoff, epsilon absorption, and Abel recentering",
@@ -2221,7 +2767,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.104821,
+      "duration_seconds": 0.096266,
       "name": "ns_pressure_subbudget_component_sensitivity",
       "notes": [
         "optional A6 pressure-localization component-sensitivity sweep across seven sub-budgets",
@@ -2506,7 +3052,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.071384,
+      "duration_seconds": 0.06586,
       "name": "ns_a6_error_budget_proxy",
       "notes": [
         "optional A6 aggregate error-budget proxy with seven component budgets",
@@ -2689,7 +3235,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.061217,
+      "duration_seconds": 0.061123,
       "name": "ns_cascade_depth2_proxy",
       "notes": [
         "depth-2 cascade closure smoke probe"
@@ -2742,7 +3288,7 @@
         "48"
       ],
       "discovered": true,
-      "duration_seconds": 0.116731,
+      "duration_seconds": 0.126656,
       "name": "ns_leakage_square_toy",
       "notes": [
         "finite triadic Leray bookkeeping; no PDE sign proof"
@@ -2813,7 +3359,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.108988,
+      "duration_seconds": 0.105457,
       "name": "ym_bt_tree_spectral_gap",
       "notes": [
         "finite tree boundary-convention smoke"
@@ -2886,7 +3432,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ym_bt_boundary_depth_regression_base_harness.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.189575,
+      "duration_seconds": 0.165185,
       "name": "ym_bt_boundary_depth_regression",
       "notes": [
         "YM BT boundary-depth regression smoke"
@@ -2934,7 +3480,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/ym_bt_dobrushin_influence_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.051776,
+      "duration_seconds": 0.050845,
       "name": "ym_bt_dobrushin_influence",
       "notes": [
         "toy influence proxy only"
@@ -3100,7 +3646,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.05407,
+      "duration_seconds": 0.051826,
       "name": "ym_finite_selfadjoint_hamiltonian_proxy",
       "notes": [
         "finite self-adjoint Hamiltonian proxy with bad nonsymmetric and domain-unstable cases",
@@ -3199,7 +3745,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.051893,
+      "duration_seconds": 0.05207,
       "name": "ym_hamiltonian_domination_proxy",
       "notes": [
         "finite quotient-matrix proxy for H >= c1 Delta + c2 Hol - E",
@@ -3314,7 +3860,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.062659,
+      "duration_seconds": 0.057447,
       "name": "ym_domination_spectral_margin_proxy",
       "notes": [
         "finite spectral-margin proxy for YM domination error budget with weak kinetic, missing holonomy, and pollution bad cases",
@@ -3358,7 +3904,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.056973,
+      "duration_seconds": 0.052905,
       "name": "ym_spectral_margin_boundary_sensitivity",
       "notes": [
         "optional finite spectral-margin boundary-sensitivity sweep for kinetic, holonomy, error, and pollution budgets",
@@ -3567,7 +4113,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.068066,
+      "duration_seconds": 0.059674,
       "name": "ym_killing_boundary_self_adjointness_proxy",
       "notes": [
         "optional finite YM Killing/full-degree boundary domain proxy for symmetry defect, gauge-null leakage, and spectral margin",
@@ -3774,7 +4320,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/defect_four_point_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 0.243937,
+      "duration_seconds": 0.21736,
       "name": "defect_four_point",
       "notes": [
         "unification four-point residual smoke"
@@ -3865,7 +4411,7 @@
         "/home/c/Documents/code/dashi_agda/outputs/local_clay_harness_manifest_children/defect_hierarchy_hypothesis_search_smoke.json"
       ],
       "discovered": true,
-      "duration_seconds": 1.428444,
+      "duration_seconds": 1.259054,
       "name": "defect_hierarchy_hypothesis_search",
       "notes": [
         "unification hierarchy hypothesis separator smoke"
@@ -3902,7 +4448,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.074538,
+      "duration_seconds": 0.062717,
       "name": "gluing_operator_linearity_proxy",
       "notes": [
         "unification quotient-linearity proxy with nonlinear counterexample",
@@ -3975,7 +4521,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.085232,
+      "duration_seconds": 0.079753,
       "name": "unification_gluing_quotient_admissibility_proxy",
       "notes": [
         "unification quotient-admissibility proxy with representative-leak, nonlinear, and norm-like counterexamples",
@@ -4041,7 +4587,7 @@
         "--json"
       ],
       "discovered": true,
-      "duration_seconds": 0.12718,
+      "duration_seconds": 0.118722,
       "name": "unification_quotient_four_point_stress",
       "notes": [
         "unification four-point residual stress harness with representative-shift, nonlinear, p-norm, and asymmetric-cross-term bad cases",
@@ -4195,7 +4741,7 @@
         "20260608"
       ],
       "discovered": true,
-      "duration_seconds": 0.184377,
+      "duration_seconds": 0.137579,
       "name": "gray_scott_triadic_defect_optional",
       "notes": [
         "optional Gray-Scott triadic diagnostic smoke"
@@ -4244,10 +4790,10 @@
   ],
   "summary": {
     "all_executed_smokes_passed": true,
-    "executed": 47,
+    "executed": 54,
     "failures": [],
-    "harnesses_total": 47,
+    "harnesses_total": 54,
     "skipped": 0
   },
-  "timeout_seconds_per_harness": 25
+  "timeout_seconds_per_harness": 15
 }
