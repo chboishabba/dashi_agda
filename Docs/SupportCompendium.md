@@ -57,7 +57,8 @@ can justify operator setup, self-adjointness language, and semigroup
 comparison, but they do not by themselves promote a physical continuum Hilbert
 space. Paper 3 should consume this as setup for Hamiltonian language, and
 Paper 8 should consume it as part of the closure grammar's proof-boundary
-discipline.
+discipline. Paper 3 now makes this consumption explicit in its Section 2
+operator-setup paragraph.
 
 ## 3. DHR reconstruction support
 

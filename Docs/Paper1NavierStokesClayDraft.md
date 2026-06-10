@@ -1,6 +1,7 @@
 # Paper 1 Draft: Navier-Stokes Blowup Reduction Through Tail Flux Control
 
 Date: `2026-06-09`
+Version: `draft 1`
 Status: live analytic manuscript draft; Clay-facing; non-promoting
 
 ## 1. Introduction and main theorem
@@ -25,6 +26,11 @@ defined whenever `D_{>K}(t) > 0`. The paper therefore treats blowup exclusion
 as a tail-flux domination problem rather than as a constructive-unification
 problem.
 
+The seam variable `theta(K,t)` remains the compact way to name where the ESS
+localization strategy has to win: the argument must identify a shell window in
+which the tail flux is genuinely near-critical and then show that the support
+geometry and depletion mechanism still force dissipation to dominate there.
+
 The main theorem stated here is a reduction theorem, not a Clay claim.
 
 > **Theorem 1.1 (analytic blowup reduction).** Let `u` be a smooth Leray-Hopf
@@ -45,6 +51,11 @@ canonical reduction pipeline:
 3. force enough stationarity and support control near the danger shell;
 4. reduce leakage to a compatible smallness budget;
 5. convert depletion plus monotonicity into a continuation contradiction.
+
+For the abstract closure grammar governing how this reduction fits into the
+larger corpus, see Paper 8, *Closure Grammar, Jordan-von Neumann Recovery, and
+Controlled Consumers*. Paper 1 does not rely on Paper 8 for its analytic proof
+steps, but it does inherit the same claim-boundary discipline.
 
 The historical theta or danger-shell diagnostics remain relevant as obstruction
 guidance, but they appear here only as appendix-level context for why the tail
@@ -83,6 +94,11 @@ dangerous shell geometry; `A4-A6` trap the defect near sufficiently rich
 supports; `A7-A8` turn that geometry into depletion and monotonicity; `A9`
 feeds the resulting gain into the continuation criterion.
 
+The numbering gap is deliberate: an earlier `A3` shell-selection sublemma was
+retired after its content was absorbed into the present `A2` near-diagonal
+stationarity package, so the live ladder now runs `A1`, `A2`, `A4`, ..., `A9`
+without claiming an independent `A3`.
+
 ## 3. A1-A2: ESS, shells, Abel defect measure, near-diagonal stationarity
 
 The first stage is an ESS reduction: replace a diffuse blowup scenario by one
@@ -112,6 +128,15 @@ are perturbative once the shell window is fixed. The point is not yet a closed
 estimate. The point is a reduction of the entire nonlinear obstruction to a
 small class of near-diagonal defect interactions.
 
+> **Proposition 3.1 (output of `A1-A2`).** After passing to the ESS subsequence
+> and fixing the danger shell `K_*`, the blowup obstruction is reduced to a
+> bounded-width shell window carrying an Abel defect measure whose surviving
+> interactions are near-diagonal and stationary in the sense required for the
+> support-geometry argument of Sections 4-6.
+
+In sum, `A1-A2` yield a controlled shell window and defect measure from which
+Sections 4-6 will extract support geometry.
+
 ## 4. A4-A6: support geometry, richness, leakage reduction
 
 The next stage replaces shell bookkeeping alone by physical-space support
@@ -130,7 +155,7 @@ the danger region. The intended conclusion is that after fixing radii
 replace the raw flux term by an effective interior flux plus an error that is
 strictly smaller than the dissipation reserve carried forward to `A7-A8`.
 
-**Remark 4.1 (constants compatibility, first pass).**
+> **Proposition 4.1 (constants compatibility, first pass).**
 Choose radii and thresholds so that
 
 ```text
@@ -145,6 +170,10 @@ slack before depletion is used. The exact numeric values are not canonical, but
 the inequalities are jointly satisfiable because the support radii are ordered
 strictly and the smallness parameters are nested rather than competing at the
 same scale.
+
+In sum, `A4-A6` convert near-diagonal defect control into a leakage-aware
+support geometry with explicit room left for the later depletion and closure
+steps.
 
 ## 5. A7-A8: depletion and scale monotonicity
 
@@ -162,7 +191,7 @@ essential feature is monotone improvement from the `A4-A7` input scales toward
 the final continuation scale. This prevents the argument from winning at one
 radius only to lose the gain after rescaling.
 
-**Remark 5.1 (constants compatibility, full ladder).**
+> **Proposition 5.1 (constants compatibility, full ladder).**
 Sections 4-6 use the same ordered radii
 
 ```text
@@ -194,6 +223,9 @@ so the radii and smallness constraints are jointly satisfiable with explicit
 slack. This is the constants-compatibility point the draft must carry in prose:
 the later closure assumptions do not overconsume the gains created earlier.
 
+In sum, `A7-A8` preserve a positive quantitative reserve rather than a
+qualitative hope, so the continuation step can consume a real budget.
+
 ## 6. A9: CKN/BKM closure and contradiction
 
 Assertion `A9` converts the retained reserve into a continuation theorem. Once
@@ -209,6 +241,9 @@ high-high obstruction. This draft therefore presents Paper 1 as an analytic
 reduction manuscript with a sharp frontier, not as a proof of global
 regularity.
 
+In sum, `A9` closes the reduction theorem by converting the retained reserve
+into the CKN/BKM contradiction promised in Theorem 1.1.
+
 ## Appendix A. Historical obstruction context
 
 The older theta and danger-shell diagnostics remain useful as historical
@@ -221,4 +256,4 @@ closure rather than a tail-only numerical threshold.
 
 | Proved in this paper | Assumed externally with citation | Explicitly left open |
 | --- | --- | --- |
-| Blowup can be reduced to assertions `A1-A9` in the shell/support framework; the constants ladder is internally compatible at the prose level. | Leray-Hopf existence theory, Littlewood-Paley technology, CKN epsilon regularity, and the BKM continuation criterion. | Any unconditional proof of `A1-A9`; any global smoothness theorem for 3D Navier-Stokes; any claim that the Clay problem is solved. |
+| The reduction theorem `A1-A9` is organized as a single analytic route; Proposition 3.1 reduces the obstruction to a near-diagonal Abel-defect shell window; Proposition 4.1 proves first-pass compatibility of the support radii and leakage thresholds; Proposition 5.1 proves the full constants ladder is jointly satisfiable with explicit slack; the support-geometry and richness stage is identified as the load-bearing bridge from shell data to continuation closure. | Leray-Hopf existence theory (`LerayHopf`), Coifman-Meyer paraproduct technology (`CoifmanMeyer`), Caffarelli-Kohn-Nirenberg epsilon regularity (`CKN`), and the Beale-Kato-Majda continuation criterion (`BKM`). | Any unconditional proof of the assertions `A1-A9`; any theorem that the ESS shell package is already discharged in full generality; any global smoothness theorem for 3D Navier-Stokes; any claim that the Clay problem is solved. |
