@@ -14,6 +14,10 @@ Status: first-round shared citation surface
 | `Seiler1982` | E. Seiler, 1982 | Use for continuum gauge-theory or mass-gap authority boundaries; do not write as if finite transfer makes the conclusion automatic. | Paper 3 |
 | `JordanVonNeumann1935` | P. Jordan and J. von Neumann, 1935 | Use for the parallelogram-law or inner-product recovery step on `V/null`. | Paper 8 |
 | `CoifmanMeyer` | Coifman-Meyer paraproduct theory | Use for bilinear or paraproduct control near the shell-diagonal defect decomposition. | Paper 1 |
+| `LerayHopf` | Leray-Hopf weak-solution and existence theory | Use for the foundational existence and energy-inequality surface assumed in Paper 1. | Paper 1 |
+| `BKM` | Beale-Kato-Majda continuation criterion | Use for the continuation/contradiction step at `A9` in Paper 1. | Paper 1 |
+| `CKN` | Caffarelli-Kohn-Nirenberg epsilon-regularity theory | Use for the local regularity closure invoked at `A9` in Paper 1. | Paper 1 |
+| `Balaban1988` | T. Balaban, 1988 constructive lattice gauge theory context | Use for Balaban-style domination, polymer, and continuum-stress background in Paper 3; do not treat it as a proof that the present transfer theorem is discharged. | Paper 3 |
 
 ## Usage rules
 

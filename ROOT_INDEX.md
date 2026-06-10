@@ -9,6 +9,7 @@ without treating every root file as equally authoritative.
 
 - `README.md`: repo orientation and current high-level status.
 - `architecture.md`: canonical architecture and diagram entrypoint.
+- `Docs/LiveSurfaceIndex.md`: shortest live corpus and support router.
 - `Docs/RepoGuide.md`: detailed repository guide.
 - `Docs/PhysicsGuide.md`: physics-facing guide.
 - `Docs/AgdaValidationTargets.md`: focused validation policy.
@@ -20,11 +21,15 @@ without treating every root file as equally authoritative.
 
 The current publishable programme is organized as:
 
-- Paper 0: shared margin grammar.
-- Paper 1: NS theta / EV5 seam programme.
-- Paper 2: Gate 3 cutoff-frame, density, Mosco, and no-pollution bridge.
-- Paper 3: YM rho / KP / Balaban programme.
-- Paper 4: full DASHI unification composition.
+- Paper 1: `Docs/Paper1NavierStokesClayDraft.md`
+- Paper 3: `Docs/Paper3YangMillsClayDraft.md`
+- Paper 8: `Docs/Paper8UnificationDraft.md`
+- shared support: `Docs/SupportCompendium.md`,
+  `Docs/PaperCommonCitationLedger.md`, and
+  `Docs/PaperCommonNotationGlossary.md`
+
+Legacy papers and section drafts remain provenance or source-feeding surfaces.
+They are not equal-priority live manuscripts.
 
 The cleanup must preserve the fail-closed publication boundary: no cleanup move
 promotes Clay, continuum YM, NS regularity, Gate 3, or exact Standard Model
@@ -37,6 +42,7 @@ claims.
 - Main current pressure point: `DASHI/Physics/Closure/`.
 - Canonical theorem-spine map: `Docs/CanonicalProofSpine.md`.
 - Current cleanup roadmap: `Docs/RepoStructureCleanupRoadmap.md`.
+- Live paper corpus router: `Docs/LiveSurfaceIndex.md`.
 
 ## Generated And Archive Policy
 
@@ -58,6 +64,13 @@ Planned archive buckets:
 
 Generated future equivalents should be ignored or untracked only after the
 historical copy/index step is complete.
+
+Search-noise reduction:
+
+- the repo-local `.rgignore` excludes submodules, build outputs, archives,
+  working folders, and large authority/evidence surfaces from default `rg`
+  searches
+- use `rg -uu` when you intentionally want the full repo
 
 ## Submodule And External Boundaries
 

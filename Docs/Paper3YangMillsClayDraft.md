@@ -1,6 +1,7 @@
 # Paper 3 Draft: Yang-Mills Mass-Gap Reduction from Finite Carrier to Continuum Transfer
 
 Date: `2026-06-09`
+Version: `draft 1`
 Status: live analytic manuscript draft; Clay-facing; non-promoting
 
 ## 1. Introduction and main theorem
@@ -36,14 +37,23 @@ This is the honest current target. The draft can state a finite-to-continuum
 assembly route sharply; it cannot claim that the route has already been fully
 discharged.
 
+For the abstract closure grammar that places this reduction inside the wider
+corpus, see Paper 8, *Closure Grammar, Jordan-von Neumann Recovery, and
+Controlled Consumers*. The present paper remains the analytic home of the
+Yang-Mills reduction narrative.
+
 ## 2. Finite nonabelian carrier and operator setup
 
-The finite starting point is a selected family of nonabelian carriers equipped
-with curvature, Wilson-action bookkeeping, and a transfer or Hamiltonian
-operator at each depth. The older finite geometry draft supplies the structural
-language: Lie brackets, curvature witnesses, and selected finite non-flat
-surfaces. In the present manuscript these are used only to justify the
-existence and domain of the operator family `H_N`.
+The finite starting point is a selected family of nonabelian carriers for a
+compact simple Lie group `G`, equipped with curvature, Wilson-action
+bookkeeping, and a transfer or Hamiltonian operator at each depth. The older
+finite geometry draft supplies the structural language: Lie brackets,
+curvature witnesses, and selected finite non-flat surfaces. In the present
+manuscript these are used only to justify the existence and domain of the
+operator family `H_N`.
+
+The Hilbert-space operator language used here is developed in detail in the
+support compendium, Section 2, following Paper 4.
 
 What matters analytically is that each `H_N` acts on a finite carrier Hilbert
 space or transfer-matrix space with a distinguished vacuum sector and an
@@ -74,6 +84,14 @@ provides a concrete nonzero margin at each fixed `beta`. This matters because
 it pins down where the analytic burden sits. The missing step is not "show some
 finite carrier has a gap." The missing step is "preserve a physical nonzero
 mass scale while `a(beta) -> 0` and `beta -> infinity`."
+
+For `SU(2)` this inequality is the standard first-excited-to-vacuum transfer
+ratio coming from the character-expansion weights `I_n(beta)`: the vacuum
+sector carries weight `I_0(beta)`, the first nontrivial sector carries weight
+`I_1(beta)`, and taking `-log` of the ratio yields the quoted fixed-lattice gap
+bound. In this manuscript it is used as an explicit finite-carrier estimate,
+not as a continuum theorem. See `Balaban1988` for the background constructive
+stress-test context.
 
 ## 4. Hamiltonian domination and uniform finite spectral margin
 
@@ -112,11 +130,33 @@ therefore needs two ingredients:
 2. a no-spectral-pollution statement showing that the limiting positive-energy
    spectrum still stays above a strictly positive threshold.
 
-The current draft should state this as a separate theorem interface rather than
-burying it inside motivational prose. The fixed-lattice character bound weakens
-as `beta` grows, so it cannot by itself produce a continuum mass gap. The
-finite uniform margin must be paired with a scaling argument that converts
-lattice units into a physical positive mass.
+Here "Mosco convergence" means the finite quadratic-form sequence attached to
+`H_N` converges to a limiting closed quadratic form in the two standard senses:
+every weakly convergent sequence has a lower-semicontinuity liminf bound, and
+every point in the limiting form domain admits a recovery sequence whose
+energies converge from above. This is the right notion because it couples
+operator convergence to the variational data that determine the spectral
+threshold.
+
+The no-spectral-pollution statement needed here is equally specific: if
+`gamma_d >= m_* > 0` denotes the finite-depth spectral margin on the
+vacuum-orthogonal sector, and if the Mosco limit produces a continuum operator
+`H_infinity`, then no new positive-energy spectrum may appear in `(0,m_*/2)`.
+Equivalently, the limiting gap `gamma_infinity` must satisfy
+`gamma_infinity >= m_*/2 > 0` once the transfer hypotheses are met.
+
+> **Theorem 5.1 (continuum-transfer interface).** Assume the quadratic forms
+> of the finite Hamiltonians `H_N` converge in the Mosco sense to a limiting
+> closed form and assume a no-spectral-pollution principle for the associated
+> vacuum-orthogonal spectra. Then a uniform finite spectral margin `gamma_d >=
+> m_*>0` passes to a positive limiting margin `gamma_infinity > 0`, so the
+> finite self-adjointness and domination results of Sections 3-4 remain
+> analytically relevant in the scaling limit.
+
+The fixed-lattice character bound weakens as `beta` grows, so it cannot by
+itself produce a continuum mass gap. The finite uniform margin must be paired
+with a scaling argument that converts lattice units into a physical positive
+mass.
 
 ## 6. Reflection positivity and OS/Wightman reconstruction
 
@@ -126,6 +166,17 @@ bridge the transfer result to the Osterwalder-Schrader reconstruction theorem:
 the Euclidean Schwinger functions or transfer data must satisfy the positivity,
 symmetry, and regularity hypotheses needed to reconstruct a Hilbert space, a
 vacuum vector, and a positive self-adjoint Hamiltonian.
+
+The current paper uses the following explicit sub-steps:
+
+1. `RP.1`: define the positive-time algebra together with the spatial
+   involution `tau` and Euclidean time reflection `theta`;
+2. `RP.2`: prove positivity of the reflected pairing
+   `<F, theta F> >= 0` on the positive-time algebra;
+3. `RP.3`: verify the symmetry and regularity hypotheses needed to pass from
+   the Euclidean data to OS reconstruction;
+4. `RP.4`: reconstruct the Hilbert space, vacuum vector `Omega`, and positive
+   Hamiltonian from the reflection-positive Euclidean theory.
 
 This section must not pretend that BT-to-Euclidean transfer automatically gives
 Seiler's continuum conclusion for free. The current manuscript therefore keeps
@@ -139,6 +190,24 @@ constructed limiting objects and the hypotheses of the continuum gauge-theory
 theorem being cited; it is not automatic from finite transfer alone.
 
 ## 7. Final mass-gap assembly and claim boundary
+
+> **Theorem 7.1 (conditional mass-gap assembly).** Under the hypotheses
+> `H1-H5` supplied by Sections 3-6,
+>
+> 1. each finite carrier Hamiltonian `H_N` is self-adjoint with finite gap
+>    `m_N > 0`;
+> 2. domination upgrades these finite gaps to a uniform margin `gamma_d >= m_*`
+>    on the vacuum-orthogonal sector;
+> 3. the depth-to-continuum transfer theorem preserves a strictly positive
+>    limiting margin `gamma_infinity > 0`;
+> 4. reflection positivity and the Osterwalder-Schrader hypotheses reconstruct a
+>    relativistic Hilbert-space theory with vacuum vector `Omega` and positive
+>    Hamiltonian;
+> 5. the reconstructed positive Hamiltonian margin yields a continuum mass gap.
+>
+> Therefore the Clay-facing difficulty is concentrated in the transfer and
+> reconstruction interfaces, not in the existence of isolated finite-carrier
+> margins.
 
 Combining Sections 3-6 yields the manuscript's final assembly:
 
@@ -158,4 +227,4 @@ or that the Clay Yang-Mills problem is solved.
 
 | Proved in this paper | Assumed externally with citation | Explicitly left open |
 | --- | --- | --- |
-| The finite-to-continuum mass-gap route is canonically organized as self-adjointness -> domination -> uniform finite margin -> continuum transfer -> RP -> OS/Wightman -> assembly. | Osterwalder-Schrader reconstruction, standard Wightman consequences, and the continuum gauge-theory authority represented by Seiler and related sources. | The actual depth-to-continuum transfer theorem, a proved continuum interacting Yang-Mills construction with all hypotheses verified, and any claim that the Clay mass-gap problem is solved. |
+| Section 3 identifies the finite self-adjointness and explicit fixed-lattice gap surface; Section 4 isolates the uniform finite spectral-margin target conditional on domination; Theorem 5.1 states the Mosco/no-spectral-pollution transfer interface in theorem form; Section 6 records the RP.1-RP.4 reconstruction bridge and the Seiler-compatibility boundary; Theorem 7.1 packages the five-step conditional mass-gap assembly. | Osterwalder-Schrader reconstruction (`OS1973`, `OS1975`), continuum gauge-theory authority boundaries (`Seiler1982`), asymptotic-freedom background (`GrossWilczek1973`, `Politzer1973`), and Balaban-style constructive stress-test context (`Balaban1988`). | The actual Mosco convergence proof, the no-spectral-pollution theorem for the selected lattice family, a proved interacting continuum Yang-Mills construction with all OS hypotheses verified, and any claim that the Clay mass-gap problem is solved. |

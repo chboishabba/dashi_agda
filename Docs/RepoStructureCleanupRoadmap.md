@@ -18,6 +18,16 @@ now live in the same surfaces:
 - external authority packets
 - submodules and sibling-repo evidence
 
+Measured pressure as of `2026-06-10`:
+
+- `Docs/` top-level files: `372`
+- `DASHI/Physics/Closure` `.agda` files: `2139`
+- `DASHI/Physics/Closure` files with `Receipt` in the name: `882`
+
+That means the current problem is not just "too many files." It is that the
+same directories are simultaneously serving as live entrypoints, historical
+provenance stores, scratch pads, and executable governance surfaces.
+
 The largest pressure point is `DASHI/Physics/Closure`: it is mostly flat and
 contains more than a thousand direct Agda files, including hundreds of
 receipt-like modules. `DASHI/Everything.agda` imports the whole surface, so any
@@ -54,6 +64,12 @@ The intended state is:
 - `DASHI/Physics/Closure` split into navigable topic lanes
 - compatibility shims or aggregate modules before any high-risk Agda moves
 - generated artifacts untracked or archived with provenance
+
+Immediate reader-facing rule:
+
+- a new external reader should be able to find the live corpus from
+  `ROOT_INDEX.md` and `Docs/LiveSurfaceIndex.md` without browsing all of
+  `Docs/`
 
 ## Four-Pass Structure
 
@@ -236,15 +252,39 @@ Goal: make `Docs/` navigable by purpose.
 
 Proposed buckets:
 
-- `Docs/papers/`
+- `Docs/papers/live/`
+- `Docs/papers/source/`
+- `Docs/papers/legacy/`
 - `Docs/roadmaps/`
 - `Docs/authority/`
 - `Docs/diagrams/`
 - `Docs/domain-notes/`
 - `Docs/archive/YYYY-MM/`
 
+Intended membership:
+
+- `Docs/papers/live/`: the current flagship manuscript corpus only
+  - `Paper1NavierStokesClayDraft.md`
+  - `Paper3YangMillsClayDraft.md`
+  - `Paper8UnificationDraft.md`
+  - `SupportCompendium.md`
+  - `PaperCommonCitationLedger.md`
+  - `PaperCommonNotationGlossary.md`
+- `Docs/papers/source/`: skeletons, section drafts, clay targets, and working
+  prose inputs
+  - `NSPaper1ClayTarget.md`
+  - `YMPaper3ClayTarget.md`
+  - `Paper1DraftSkeleton.md`
+  - `Paper3YangMillsGeometryDraft.md`
+  - `Paper8Section*.md`
+  - `PaperDraftWorkingFolder/`
+- `Docs/papers/legacy/`: old manuscript lanes that now act as provenance or
+  source reservoirs rather than live top-priority papers
+  - `Paper0*`, `Paper2*`, `Paper4*`, `Paper5*`, `Paper6*`, `Paper7*`
+
 Keep these live at `Docs/` root unless a later decision says otherwise:
 
+- `Docs/LiveSurfaceIndex.md`
 - `Docs/RepoGuide.md`
 - `Docs/PhysicsGuide.md`
 - `Docs/AgdaValidationTargets.md`
@@ -265,6 +305,7 @@ Checkpoint:
 
 - `Docs/` root contains entrypoints, not every historical note
 - every moved doc has either an index entry or a redirect/pointer
+- live paper files are visibly separated from prep and provenance files
 
 Validation:
 
@@ -331,6 +372,13 @@ DASHI/Physics/Closure/Authority.agda
 Each grouping module imports the relevant existing flat receipt modules. This
 gives most of the practical benefit of nesting while avoiding path-sensitive
 Agda moves.
+
+Operational note:
+
+- this is the right first move for `DASHI/Physics/Closure`
+- there are too many receipt-like modules to justify a big-bang folder move
+- lane aggregate modules plus better doc routers will buy most of the context
+  win before any semantic path migration
 
 Actions:
 
@@ -482,7 +530,9 @@ A cleanup batch is promotable only if:
       commands.
 - [x] Create `.planning/repo-cleanup-move-plan.tsv`.
 - [x] Create `.planning/agda-import-map.tsv`.
-- [ ] Add or refresh `ROOT_INDEX.md`.
+- [x] Add or refresh `ROOT_INDEX.md`.
+- [x] Add `Docs/LiveSurfaceIndex.md`.
+- [x] Add repo-local default search-noise reduction through `.rgignore`.
 - [ ] Classify tracked generated-looking files into `archive`,
       `untrack-future-generated`, or `keep tracked`.
 - [ ] Decide the archive location convention:
@@ -492,6 +542,9 @@ A cleanup batch is promotable only if:
       `Docs/archive/todo/YYYY-MM/`.
 - [ ] Compact `status.md` and `TODO.md` only after copying old blocks to an
       archive.
+- [ ] Move the six-file live paper corpus into an explicit live-paper bucket or
+      preserve them at `Docs/` root with the same grouping made obvious by
+      `Docs/LiveSurfaceIndex.md`.
 - [ ] Add `DASHI/Physics/Closure/Margin.agda`,
       `DASHI/Physics/Closure/NS.agda`,
       `DASHI/Physics/Closure/YM.agda`,

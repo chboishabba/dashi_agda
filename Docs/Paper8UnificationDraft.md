@@ -1,6 +1,7 @@
 # Paper 8 Draft: Closure Grammar, Jordan-von Neumann Recovery, and Controlled Consumers
 
 Date: `2026-06-09`
+Version: `draft 1`
 Status: live closure-architecture manuscript; non-promoting
 
 ## Abstract
@@ -93,11 +94,13 @@ The paper's core theorem is a grammar theorem.
 > space on `V/null`; its completion is the unique admissible base for any
 > Hilbert, C*-algebraic, or operator consumer attached to that lane.
 
-The theorem is not meant as a deep analytic uniqueness theorem. Its force is
-governance: later consumers are licensed only after the quotient and JvN steps
-have been passed. This prevents the repository from acting as if a consumer can
-be attached directly to raw bilinear data when null directions or incomplete
-norm structure are still present.
+Theorem 2.1 is a structural theorem about the canonical form of Hilbert-space
+construction: it establishes uniqueness of the inner-product structure on
+`V/null` under the stated hypotheses. Its force is therefore both mathematical
+and governance-facing: later consumers are licensed only after the quotient and
+JvN steps have been passed. This prevents the repository from acting as if a
+consumer can be attached directly to raw bilinear data when null directions or
+incomplete norm structure are still present.
 
 The auxiliary statement `U-1a-H` records why the theorem is lane-compatible.
 Each lane need not prove a brand-new closure grammar. Each lane needs only to
@@ -109,20 +112,30 @@ The purpose of `U-1a-H` is to stop Paper 8 from restating the full proofs of
 every lane. It records that different lanes contribute different kinds of input
 to the same closure machine.
 
-- The Yang-Mills lane contributes bounded operator and positivity data that can
-  only be used downstream after the relevant quotient and completion steps are
-  fixed.
-- The Navier-Stokes lane contributes bounded instantiations of the grammar in
-  which shellwise or energy-style quadratic forms can be organized without
-  claiming that Paper 8 proves the NS analytic closure.
-- The GR and support lanes contribute examples of authority-bounded consumers:
-  geometry, operator, or source interfaces that remain controlled by explicit
-  claim boundaries.
+> **Proposition 3.1 (NS-lane compatibility).** The Navier-Stokes lane supplies
+> a bounded quadratic-form consumer based on the `H^1`-norm-squared energy
+> surface, and the current repository-level discrepancy is recorded at the
+> bounded error scale `1.8 x 10^-12`. Accordingly, Paper 8 may treat the NS
+> lane as a controlled instantiation of `U-1a-H` without claiming that Paper 8
+> proves the analytic `A1-A9` closure of Paper 1.
 
-This section is intentionally high level. The analytic details belong in Papers
-1 and 3, while the mined support material lives in the compendium. Paper 8 only
-needs to show that the same closure grammar can host multiple bounded
-instantiations without confusing their theorem scope.
+> **Proposition 3.2 (YM-lane compatibility).** The Yang-Mills lane supplies a
+> bounded quadratic consumer at linearization through the curvature norm
+> `||dA||^2`, together with the operator and positivity surfaces summarized in
+> Paper 3. Accordingly, Paper 8 may treat the YM lane as a controlled
+> instantiation of `U-1a-H` without claiming that Paper 8 proves the continuum
+> transfer or OS/Wightman steps.
+
+> **Proposition 3.3 (global compatibility discipline).** The GR and support
+> lanes furnish authority-bounded consumer examples rather than independent
+> closure grammars. Their role is to show that the same quotient -> JvN ->
+> completion discipline governs geometric, operator, and sector-style consumers
+> across the corpus.
+
+The analytic details belong in Papers 1 and 3, while the mined support
+material lives in the compendium. Paper 8 needs only to show that the same
+closure grammar can host multiple bounded instantiations without confusing
+their theorem scope.
 
 ## 4. Jordan-von Neumann recovery
 
@@ -168,7 +181,10 @@ Yang-Mills and Navier-Stokes appear here only as bounded instantiations of the
 closure grammar. Paper 8 does not reprove the self-adjointness, domination,
 continuum transfer, or BKM-closure narratives. It merely records that those
 analytic lanes also need legitimate quotient, inner-product, and completion
-surfaces before their consumers can be read honestly.
+surfaces before their consumers can be read honestly; for the actual analytic
+arguments, see Paper 1, *Navier-Stokes Blowup Reduction Through Tail Flux
+Control*, and Paper 3, *Yang-Mills Mass-Gap Reduction from Finite Carrier to
+Continuum Transfer*.
 
 ### 5.3 DHR placement
 
@@ -213,9 +229,9 @@ reading as if algebraic closure alone produces observational confirmation.
 
 | Surface | Positive role in this paper | Blocker that remains |
 | --- | --- | --- |
-| `ClosurePipeline` | canonical quotient -> JvN -> completion -> consumer grammar | does not itself prove any Clay analytic theorem |
+| `ClosurePipeline` | canonical quotient -> JvN -> completion -> consumer grammar | structural theorem only; no analytic Clay theorem follows from grammar alone |
 | `U-1a` | closure grammar theorem on `V/null` | each lane still needs its own hypothesis verification |
-| `U-1a-H` | per-lane justification surface | not a substitute for Paper 1 or Paper 3 proofs |
+| `U-1a-H` | per-lane justification surface | lane compatibility is bounded and does not substitute for Paper 1 or Paper 3 proofs |
 | JvN recovery | canonical inner-product recovery step | requires the actual parallelogram-law and null-space hypotheses |
 | DHR consumer route | legitimate post-completion illustration | not a proof of full DHR reconstruction or `G_DHR ~= G_SM` |
 | empirical consumers | controlled downstream interfaces | no authority, calibration, or acceptance theorem follows automatically |
@@ -260,4 +276,4 @@ venue that would expect the paper itself to solve a Millennium problem.
 
 | Proved in this paper | Assumed externally with citation | Explicitly left open |
 | --- | --- | --- |
-| The canonical closure grammar `ClosurePipeline`, the role of `U-1a` and `U-1a-H`, and the need for JvN recovery on `V/null` before completion and consumers. | Jordan-von Neumann inner-product recovery, standard completion facts, and any external DHR or GR authority cited by downstream illustrations. | Any analytic YM or NS proof narrative, full DHR reconstruction, empirical validation, or terminal unification theorem. |
+| Theorem 2.1 identifies the canonical closure grammar on `V/null`; Propositions 3.1-3.3 state the NS-lane, YM-lane, and global compatibility surfaces for `U-1a-H`; Section 5.3 fixes the permitted DHR bridge as `JvN -> C* completion -> Hilbert bimodules`; the blocker table and non-claims section freeze the architecture-level scope boundary. | Jordan-von Neumann inner-product recovery (`JordanVonNeumann1935`), standard completion facts, and any external DHR or GR authority cited by downstream illustrations. | Any analytic YM or NS proof narrative, full DHR reconstruction, empirical validation, exact `G_DHR ~= G_SM`, or terminal unification theorem. |

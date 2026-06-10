@@ -1,0 +1,30 @@
+# Mirrors `.rgignore` for tools that honor `.ignore` instead.
+
+# External or vendored trees
+DCHoTT-Agda/
+cubical/
+monster/
+Monster-LILA/
+
+# Build and generated outputs
+MAlonzo/
+_build/
+build/
+artifacts/
+.pytest_cache/
+.pytest_tmp/
+.playwright-mcp/
+temp-DOWNLOADED/
+
+# Large tracked evidence/runtime shards that are not day-to-day source entrypoints
+da51_shards/
+
+# Historical or low-signal doc surfaces
+Docs/ExternalAuthorityReceipts/
+Docs/PaperDraftWorkingFolder/
+Docs/worker-packets/
+Docs/archive/
+
+# Orchestrator history and log archives
+.autonomous-orchestrator/log_archive/
+logs/
