@@ -25,15 +25,18 @@ import DASHI.Physics.Closure.YMSprint118TransferCalculusReadinessAggregator
 ------------------------------------------------------------------------
 -- Sprint119 transfer-calculus all-obligations reducer.
 --
--- This module normalizes the six transfer-calculus gates into one typed
--- reducer surface: uniform form lower bound, log-generator functional
--- calculus, spectral transport, Sprint108 transfer assembly, Sprint109
--- critical lower-bound assembly, and Sprint117 readiness reduction.
+-- This reducer keeps the transfer-calculus package separate from the stronger
+-- continuum-transfer chain.  Uniform form bounds, logarithmic functional
+-- calculus, spectral transport, and finite transfer assemblies feed a Mosco /
+-- readiness package, but they do not by themselves guarantee survival of the
+-- continuum gap.  The stronger obligations are named explicitly:
 --
--- It records the package, row normalization, source paths, required
--- resolutions, upstream flags, canonical receipts, and final receipt.  It
--- remains fail-closed: no transfer lower-bound theorem, continuum mass gap,
--- or Clay Yang-Mills promotion is made here.
+--   H3a : trace / norm-resolvent control on the vacuum-orthogonal sector.
+--   H3b : vacuum-projection continuity for the limiting vacuum.
+--   NSP : no-spectral-pollution, downstream of H3a + H3b.
+--
+-- The surface remains fail-closed: no transfer theorem, continuum mass gap,
+-- or Clay Yang-Mills promotion is proved here.
 
 sprintNumber : Nat
 sprintNumber = 119
@@ -94,6 +97,15 @@ sprint118AggregatorClosedHere : Bool
 sprint118AggregatorClosedHere =
   Aggregator118.allTransferCalculusObligationsClosedHere
 
+h3aTraceNormResolventClosedHere : Bool
+h3aTraceNormResolventClosedHere = false
+
+h3bVacuumProjectionContinuityClosedHere : Bool
+h3bVacuumProjectionContinuityClosedHere = false
+
+noSpectralPollutionClosedHere : Bool
+noSpectralPollutionClosedHere = false
+
 sprint108UniformFormSourcePath : String
 sprint108UniformFormSourcePath =
   "DASHI/Physics/Closure/YMSprint108UniformFormLowerBound.agda"
@@ -124,31 +136,57 @@ sprint118AggregatorSourcePath =
 
 uniformFormResolutionText : String
 uniformFormResolutionText =
-  "Resolve uniform form lower-bound gate by inhabiting Sprint108 uniform coercivity, constant independence, normalization window, and closed lower-bound theorem."
+  "Resolve the uniform form lower-bound gate by inhabiting uniform coercivity, constant independence, normalization windows, and the closed lower-bound theorem."
 
 logGeneratorResolutionText : String
 logGeneratorResolutionText =
-  "Resolve log-generator functional-calculus gate by inhabiting Sprint108 common-core logarithmic generator calculus, spectral mapping, positivity, and theorem closure."
+  "Resolve the log-generator gate by inhabiting the common-core logarithmic functional calculus, spectral mapping, positivity, and closure of the generator package."
 
 spectralTransportResolutionText : String
 spectralTransportResolutionText =
-  "Resolve spectral transport gate by inhabiting Sprint108 threshold transport, isolated bottom sector survival, no-collapse transport, and transport theorem closure."
+  "Resolve spectral transport by controlling threshold transport, isolated bottom-sector survival, no-collapse transport, and the finite spectral margin."
 
 transferAssemblyResolutionText : String
 transferAssemblyResolutionText =
-  "Resolve transfer assembly gate by closing the Sprint108 assembled transfer lower-bound theorem after its analytic gates are inhabited."
+  "Resolve transfer assembly by closing the finite transfer lower-bound theorem once the analytic form, calculus, and spectral transport gates are inhabited."
 
 criticalAssemblyResolutionText : String
 criticalAssemblyResolutionText =
-  "Resolve critical lower-bound assembly gate by closing the Sprint109 critical path and transfer lower-bound theorem without promoting downstream results prematurely."
+  "Resolve the critical lower-bound assembly without promoting downstream continuum claims; this is still finite-level readiness data."
 
 sprint117ReducerResolutionText : String
 sprint117ReducerResolutionText =
-  "Resolve Sprint117 readiness reducer gate by discharging every required common-carrier, compactness, lower-semicontinuity, recovery, weak-compactness, uniform-form, log-generator, and spectral-transport obligation."
+  "Resolve the Sprint117 readiness reducer by discharging common-carrier, compactness, lower-semicontinuity, recovery, weak-compactness, uniform-form, log-generator, and spectral-transport obligations."
+
+h3aTraceNormResolventResolutionText : String
+h3aTraceNormResolventResolutionText =
+  "Resolve H3a by proving trace / norm-resolvent control of the vacuum-orthogonal transfer matrices; Mosco liminf and readiness data are not enough to preserve the gap."
+
+h3bVacuumProjectionContinuityResolutionText : String
+h3bVacuumProjectionContinuityResolutionText =
+  "Resolve H3b by proving vacuum-projection continuity for the limiting OS vacuum, downstream of H3a and RP.4."
+
+noSpectralPollutionResolutionText : String
+noSpectralPollutionResolutionText =
+  "Resolve no-spectral-pollution only after H3a and H3b, using the stronger transfer control to exclude spurious continuum spectrum below the finite margin."
 
 finalBoundaryResolutionText : String
 finalBoundaryResolutionText =
-  "Final boundary remains fail-closed: Sprint119 records normalized transfer-calculus obligations only; transfer readiness, theorem proof, continuum mass gap, and Clay promotion remain false."
+  "Final boundary remains fail-closed: transfer-calculus and readiness rows are normalized, but H3a trace / norm-resolvent control, H3b vacuum-projection continuity, downstream no-spectral-pollution, transfer theorem closure, continuum mass gap, and Clay promotion remain false."
+
+data ObligationTier : Set where
+  finite-transfer-tier :
+    ObligationTier
+  readiness-tier :
+    ObligationTier
+  h3a-tier :
+    ObligationTier
+  h3b-tier :
+    ObligationTier
+  no-spectral-pollution-tier :
+    ObligationTier
+  final-boundary-tier :
+    ObligationTier
 
 data NormalizedTransferCalculusGate : Set where
   uniform-form-lower-bound-gate :
@@ -163,21 +201,25 @@ data NormalizedTransferCalculusGate : Set where
     NormalizedTransferCalculusGate
   sprint117-readiness-reducer-gate :
     NormalizedTransferCalculusGate
+  h3a-trace-norm-resolvent-gate :
+    NormalizedTransferCalculusGate
+  h3b-vacuum-projection-continuity-gate :
+    NormalizedTransferCalculusGate
+  downstream-no-spectral-pollution-gate :
+    NormalizedTransferCalculusGate
   final-fail-closed-boundary-gate :
     NormalizedTransferCalculusGate
 
 data NormalizedRowStatus : Set where
-  canonical-receipt-imported :
+  finite-package-open :
     NormalizedRowStatus
-  upstream-flag-recorded :
+  readiness-package-open :
     NormalizedRowStatus
-  source-path-recorded :
+  stronger-h3a-open :
     NormalizedRowStatus
-  required-resolution-recorded :
+  stronger-h3b-open :
     NormalizedRowStatus
-  normalized-row-assembled :
-    NormalizedRowStatus
-  external-resolution-required :
+  downstream-after-h3a-h3b :
     NormalizedRowStatus
   final-nonpromotion-boundary :
     NormalizedRowStatus
@@ -233,12 +275,26 @@ record UpstreamClosureFlags : Set where
       Bool
     sprint118AllObligationsClosedIsFalse :
       sprint118AllObligationsClosed ≡ false
+    h3aClosed :
+      Bool
+    h3aClosedIsFalse :
+      h3aClosed ≡ false
+    h3bClosed :
+      Bool
+    h3bClosedIsFalse :
+      h3bClosed ≡ false
+    noSpectralPollutionClosed :
+      Bool
+    noSpectralPollutionClosedIsFalse :
+      noSpectralPollutionClosed ≡ false
 
 record NormalizedObligationRow : Set where
   constructor mkNormalizedObligationRow
   field
     gate :
       NormalizedTransferCalculusGate
+    tier :
+      ObligationTier
     status :
       NormalizedRowStatus
     sourcePath :
@@ -289,6 +345,18 @@ record FinalReducerBoundary : Set where
   field
     boundaryResolution :
       String
+    h3aClosedHereFlag :
+      Bool
+    h3aClosedHereIsFalse :
+      h3aClosedHereFlag ≡ false
+    h3bClosedHereFlag :
+      Bool
+    h3bClosedHereIsFalse :
+      h3bClosedHereFlag ≡ false
+    noSpectralPollutionClosedHereFlag :
+      Bool
+    noSpectralPollutionClosedHereIsFalse :
+      noSpectralPollutionClosedHereFlag ≡ false
     allTransferCalculusObligationsClosedHereFlag :
       Bool
     allTransferCalculusObligationsClosedHereIsFalse :
@@ -357,6 +425,18 @@ record YMSprint119TransferCalculusAllObligationsReducerReceipt : Setω where
       Bool
     continuumMassGapProvedHereIsFalse :
       continuumMassGapProvedHereFlag ≡ false
+    h3aTraceNormResolventClosedHereFlag :
+      Bool
+    h3aTraceNormResolventClosedHereIsFalse :
+      h3aTraceNormResolventClosedHereFlag ≡ false
+    h3bVacuumProjectionContinuityClosedHereFlag :
+      Bool
+    h3bVacuumProjectionContinuityClosedHereIsFalse :
+      h3bVacuumProjectionContinuityClosedHereFlag ≡ false
+    noSpectralPollutionClosedHereFlag :
+      Bool
+    noSpectralPollutionClosedHereIsFalse :
+      noSpectralPollutionClosedHereFlag ≡ false
     clayYangMillsPromotedHere :
       Bool
     clayYangMillsPromotedHereIsFalse :
@@ -393,12 +473,19 @@ canonicalUpstreamClosureFlags =
     refl
     sprint118AggregatorClosedHere
     refl
+    h3aTraceNormResolventClosedHere
+    refl
+    h3bVacuumProjectionContinuityClosedHere
+    refl
+    noSpectralPollutionClosedHere
+    refl
 
 uniformFormNormalizedRow : NormalizedObligationRow
 uniformFormNormalizedRow =
   mkNormalizedObligationRow
     uniform-form-lower-bound-gate
-    external-resolution-required
+    finite-transfer-tier
+    finite-package-open
     sprint108UniformFormSourcePath
     uniformFormResolutionText
     true
@@ -411,7 +498,8 @@ logGeneratorNormalizedRow : NormalizedObligationRow
 logGeneratorNormalizedRow =
   mkNormalizedObligationRow
     log-generator-functional-calculus-gate
-    external-resolution-required
+    finite-transfer-tier
+    finite-package-open
     sprint108LogGeneratorSourcePath
     logGeneratorResolutionText
     true
@@ -424,7 +512,8 @@ spectralTransportNormalizedRow : NormalizedObligationRow
 spectralTransportNormalizedRow =
   mkNormalizedObligationRow
     spectral-transport-gate
-    external-resolution-required
+    finite-transfer-tier
+    finite-package-open
     sprint108SpectralTransportSourcePath
     spectralTransportResolutionText
     true
@@ -437,7 +526,8 @@ transferAssemblyNormalizedRow : NormalizedObligationRow
 transferAssemblyNormalizedRow =
   mkNormalizedObligationRow
     transfer-assembly-gate
-    external-resolution-required
+    finite-transfer-tier
+    finite-package-open
     sprint108TransferAssemblySourcePath
     transferAssemblyResolutionText
     true
@@ -450,7 +540,8 @@ criticalAssemblyNormalizedRow : NormalizedObligationRow
 criticalAssemblyNormalizedRow =
   mkNormalizedObligationRow
     critical-lower-bound-assembly-gate
-    external-resolution-required
+    finite-transfer-tier
+    finite-package-open
     sprint109CriticalAssemblySourcePath
     criticalAssemblyResolutionText
     true
@@ -463,7 +554,8 @@ sprint117ReducerNormalizedRow : NormalizedObligationRow
 sprint117ReducerNormalizedRow =
   mkNormalizedObligationRow
     sprint117-readiness-reducer-gate
-    required-resolution-recorded
+    readiness-tier
+    readiness-package-open
     sprint117ReducerSourcePath
     sprint117ReducerResolutionText
     true
@@ -472,10 +564,53 @@ sprint117ReducerNormalizedRow =
     refl
     true
 
+h3aTraceNormResolventRow : NormalizedObligationRow
+h3aTraceNormResolventRow =
+  mkNormalizedObligationRow
+    h3a-trace-norm-resolvent-gate
+    h3a-tier
+    stronger-h3a-open
+    sprint118AggregatorSourcePath
+    h3aTraceNormResolventResolutionText
+    true
+    true
+    h3aTraceNormResolventClosedHere
+    refl
+    true
+
+h3bVacuumProjectionContinuityRow : NormalizedObligationRow
+h3bVacuumProjectionContinuityRow =
+  mkNormalizedObligationRow
+    h3b-vacuum-projection-continuity-gate
+    h3b-tier
+    stronger-h3b-open
+    modulePath
+    h3bVacuumProjectionContinuityResolutionText
+    true
+    true
+    h3bVacuumProjectionContinuityClosedHere
+    refl
+    true
+
+noSpectralPollutionRow : NormalizedObligationRow
+noSpectralPollutionRow =
+  mkNormalizedObligationRow
+    downstream-no-spectral-pollution-gate
+    no-spectral-pollution-tier
+    downstream-after-h3a-h3b
+    modulePath
+    noSpectralPollutionResolutionText
+    true
+    true
+    noSpectralPollutionClosedHere
+    refl
+    true
+
 finalBoundaryNormalizedRow : NormalizedObligationRow
 finalBoundaryNormalizedRow =
   mkNormalizedObligationRow
     final-fail-closed-boundary-gate
+    final-boundary-tier
     final-nonpromotion-boundary
     modulePath
     finalBoundaryResolutionText
@@ -493,17 +628,23 @@ canonicalNormalizedRows =
   ∷ transferAssemblyNormalizedRow
   ∷ criticalAssemblyNormalizedRow
   ∷ sprint117ReducerNormalizedRow
+  ∷ h3aTraceNormResolventRow
+  ∷ h3bVacuumProjectionContinuityRow
+  ∷ noSpectralPollutionRow
   ∷ finalBoundaryNormalizedRow
   ∷ []
 
 canonicalRowStatuses : List NormalizedRowStatus
 canonicalRowStatuses =
-  canonical-receipt-imported
-  ∷ upstream-flag-recorded
-  ∷ source-path-recorded
-  ∷ required-resolution-recorded
-  ∷ normalized-row-assembled
-  ∷ external-resolution-required
+  finite-package-open
+  ∷ finite-package-open
+  ∷ finite-package-open
+  ∷ finite-package-open
+  ∷ finite-package-open
+  ∷ readiness-package-open
+  ∷ stronger-h3a-open
+  ∷ stronger-h3b-open
+  ∷ downstream-after-h3a-h3b
   ∷ final-nonpromotion-boundary
   ∷ []
 
@@ -527,6 +668,9 @@ canonicalRequiredResolutions =
   ∷ transferAssemblyResolutionText
   ∷ criticalAssemblyResolutionText
   ∷ sprint117ReducerResolutionText
+  ∷ h3aTraceNormResolventResolutionText
+  ∷ h3bVacuumProjectionContinuityResolutionText
+  ∷ noSpectralPollutionResolutionText
   ∷ finalBoundaryResolutionText
   ∷ []
 
@@ -537,7 +681,7 @@ canonicalReducerPackageAssembly =
     canonicalRequiredResolutions
     canonicalUpstreamClosureFlags
     canonicalNormalizedRows
-    7
+    10
     transferCalculusAllObligationsReducerRecorded
     transferCalculusPackageAssembledHere
     transferCalculusRowsNormalizedHere
@@ -550,6 +694,12 @@ canonicalFinalReducerBoundary : FinalReducerBoundary
 canonicalFinalReducerBoundary =
   mkFinalReducerBoundary
     finalBoundaryResolutionText
+    h3aTraceNormResolventClosedHere
+    refl
+    h3bVacuumProjectionContinuityClosedHere
+    refl
+    noSpectralPollutionClosedHere
+    refl
     allTransferCalculusObligationsClosedHere
     refl
     transferLowerBoundReadyHere
@@ -570,6 +720,9 @@ canonicalEvidenceLedger =
   ∷ transferAssemblyResolutionText
   ∷ criticalAssemblyResolutionText
   ∷ sprint117ReducerResolutionText
+  ∷ h3aTraceNormResolventResolutionText
+  ∷ h3bVacuumProjectionContinuityResolutionText
+  ∷ noSpectralPollutionResolutionText
   ∷ finalBoundaryResolutionText
   ∷ []
 
@@ -597,6 +750,12 @@ canonicalYMSprint119TransferCalculusAllObligationsReducerReceipt =
     transferLowerBoundTheoremProvedHere
     refl
     continuumMassGapProvedHere
+    refl
+    h3aTraceNormResolventClosedHere
+    refl
+    h3bVacuumProjectionContinuityClosedHere
+    refl
+    noSpectralPollutionClosedHere
     refl
     clayYangMillsPromoted
     refl
@@ -631,42 +790,22 @@ canonicalReceiptContinuumMassGapProvedHereIsFalse :
 canonicalReceiptContinuumMassGapProvedHereIsFalse =
   refl
 
+canonicalReceiptH3aTraceNormResolventClosedHereIsFalse :
+  h3aTraceNormResolventClosedHereFlag canonicalReceipt ≡ false
+canonicalReceiptH3aTraceNormResolventClosedHereIsFalse =
+  refl
+
+canonicalReceiptH3bVacuumProjectionContinuityClosedHereIsFalse :
+  h3bVacuumProjectionContinuityClosedHereFlag canonicalReceipt ≡ false
+canonicalReceiptH3bVacuumProjectionContinuityClosedHereIsFalse =
+  refl
+
+canonicalReceiptNoSpectralPollutionClosedHereIsFalse :
+  noSpectralPollutionClosedHereFlag canonicalReceipt ≡ false
+canonicalReceiptNoSpectralPollutionClosedHereIsFalse =
+  refl
+
 canonicalReceiptClayYangMillsPromotedIsFalse :
   clayYangMillsPromotedHere canonicalReceipt ≡ false
 canonicalReceiptClayYangMillsPromotedIsFalse =
-  refl
-
-canonicalReceiptSprint118AllObligationsClosedHereIsFalse :
-  sprint118AggregatorClosedHere ≡ false
-canonicalReceiptSprint118AllObligationsClosedHereIsFalse =
-  refl
-
-canonicalReceiptUniformFormLowerBoundClosedHereIsFalse :
-  uniformFormLowerBoundClosedHere ≡ false
-canonicalReceiptUniformFormLowerBoundClosedHereIsFalse =
-  refl
-
-canonicalReceiptLogGeneratorCalculusClosedHereIsFalse :
-  logGeneratorCalculusClosedHere ≡ false
-canonicalReceiptLogGeneratorCalculusClosedHereIsFalse =
-  refl
-
-canonicalReceiptSpectralTransportClosedHereIsFalse :
-  spectralTransportClosedHere ≡ false
-canonicalReceiptSpectralTransportClosedHereIsFalse =
-  refl
-
-canonicalReceiptTransferAssemblyClosedHereIsFalse :
-  transferAssemblyClosedHere ≡ false
-canonicalReceiptTransferAssemblyClosedHereIsFalse =
-  refl
-
-canonicalReceiptCriticalLowerBoundAssemblyClosedHereIsFalse :
-  criticalLowerBoundAssemblyClosedHere ≡ false
-canonicalReceiptCriticalLowerBoundAssemblyClosedHereIsFalse =
-  refl
-
-canonicalReceiptSprint117ReadinessReducerClosedHereIsFalse :
-  sprint117ReadinessReducerClosedHere ≡ false
-canonicalReceiptSprint117ReadinessReducerClosedHereIsFalse =
   refl

@@ -1,0 +1,7 @@
+== DASHI/Physics/Closure/YMContinuumMassGapFinalAssemblyBoundary.agda ==
+command: timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YMContinuumMassGapFinalAssemblyBoundary.agda
+started: 2026-06-11T11:19:19+10:00
+
+
+exit_code: 0
+finished: 2026-06-11T11:19:19+10:00

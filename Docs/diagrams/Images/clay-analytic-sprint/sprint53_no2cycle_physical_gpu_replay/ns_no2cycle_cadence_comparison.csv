@@ -1,0 +1,7 @@
+run,dt,save_every,no2cycle_proxy_failure_count,physical_large_cycle_count,physical_small_cycle_fraction,weighted_physical_cycle_amplitude_total,sigma_physical_cycle_fit,does_physical_cycle_gate_close
+sprint49_material_parent_N32_seed0_gpu,0.001,1,643,332,0.48367029548989116,1390952903505.0381,-1.1215088689186317,false
+sprint49_material_parent_N32_seed1_gpu,0.001,1,694,378,0.45533141210374639,1406645465587.5125,-1.1215088689186317,false
+sprint49_material_parent_N32_seed2_gpu,0.001,1,656,363,0.44664634146341464,1266174592382.3928,-1.1215088689186317,false
+sprint49_material_parent_N32_seed3_gpu,0.001,1,732,413,0.43579234972677594,1107266244271.8179,-1.1215088689186317,false
+sprint49_material_parent_N64_seed0_gpu,0.001,1,2876,2007,0.3021557719054242,3.1356734131045149e+21,-1.1215088689186317,false
+sprint49_material_parent_N64_seed1_gpu,0.001,1,2651,1934,0.27046397585816673,2.9665485740596417e+21,-1.1215088689186317,false

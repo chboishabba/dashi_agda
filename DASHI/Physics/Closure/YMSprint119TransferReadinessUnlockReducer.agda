@@ -22,10 +22,12 @@ import DASHI.Physics.Closure.YMSprint118CommonCarrierConstructionReadiness
 -- Sprint119 transfer-readiness unlock reducer.
 --
 -- This module reduces the Sprint118 transfer-readiness surface to the exact
--- unlock inputs required before a transfer lower-bound route may be reopened.
--- It imports only canonical Sprint118 receipts and records Sprint119 sibling
--- work as String evidence paths.  The reducer, package, and rows are recorded
--- here, while transfer readiness, transfer theorem, continuum mass gap, and
+-- unlock inputs required before the finite transfer lower-bound route may be
+-- reopened. The reopened route is still only upstream of the corrected
+-- continuum-transfer chain: H3a and H3b remain explicit downstream
+-- requirements before no-spectral-pollution and final mass-gap assembly can be
+-- promoted. The reducer, package, and rows are recorded here, while transfer
+-- readiness, transfer theorem, no-spectral-pollution, continuum mass gap, and
 -- Clay Yang-Mills promotion remain fail-closed.
 
 sprintNumber : Nat
@@ -96,9 +98,25 @@ sprint119TransferCalculusPath : String
 sprint119TransferCalculusPath =
   "DASHI/Physics/Closure/YMSprint119TransferCalculusObligationUnlock.agda"
 
+sprint119CorrectedTransferBoundaryPath : String
+sprint119CorrectedTransferBoundaryPath =
+  "DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda"
+
+downstreamH3aStillOpen : Bool
+downstreamH3aStillOpen = false
+
+downstreamH3bStillOpen : Bool
+downstreamH3bStillOpen = false
+
+downstreamNoSpectralPollutionStillOpen : Bool
+downstreamNoSpectralPollutionStillOpen = false
+
+downstreamContinuumMassGapStillOpen : Bool
+downstreamContinuumMassGapStillOpen = false
+
 unlockReducerStatementText : String
 unlockReducerStatementText =
-  "Sprint119 transfer lower-bound readiness is unlocked only by common-carrier feed-through closure, external common-carrier construction closure, weak compactness closure, all Mosco compactness obligations closed, and all transfer-calculus obligations closed."
+  "Sprint119 transfer lower-bound readiness is unlocked only by common-carrier feed-through closure, external common-carrier construction closure, weak compactness closure, all Mosco compactness obligations closed, and all transfer-calculus obligations closed. This readiness reopening is finite-stage only and does not by itself close the corrected continuum-transfer chain."
 
 upstreamBoundaryText : String
 upstreamBoundaryText =
@@ -106,7 +124,7 @@ upstreamBoundaryText =
 
 governanceBoundaryText : String
 governanceBoundaryText =
-  "Governance boundary: this reducer records the readiness unlock conditions only and does not prove a transfer lower-bound theorem, continuum mass gap, or Clay Yang-Mills promotion."
+  "Governance boundary: this reducer records the finite transfer-readiness unlock conditions only. It does not prove H3a transfer convergence, H3b vacuum-projection continuity, no-spectral-pollution, a transfer lower-bound theorem, continuum mass gap, or Clay Yang-Mills promotion."
 
 canonicalReceiptText : String
 canonicalReceiptText =
@@ -114,7 +132,7 @@ canonicalReceiptText =
 
 finalReceiptText : String
 finalReceiptText =
-  "Final Sprint119 receipt: transferLowerBoundReadyHere=false until all five required unlock inputs are supplied by external closing modules and promoted through governance."
+  "Final Sprint119 receipt: transferLowerBoundReadyHere=false until all five required unlock inputs are supplied by external closing modules. Even after that finite readiness gate reopens, H3a and H3b remain mandatory before no-spectral-pollution and final assembly can be promoted."
 
 data UnlockInput : Set where
   common-carrier-feed-through :
@@ -149,6 +167,16 @@ data UnlockStatus : Set where
     UnlockStatus
   final-receipt-recorded :
     UnlockStatus
+
+data DownstreamPromotionInput : Set where
+  h3a-transfer-convergence :
+    DownstreamPromotionInput
+  h3b-vacuum-projection-continuity :
+    DownstreamPromotionInput
+  no-spectral-pollution-from-h3a-and-h3b :
+    DownstreamPromotionInput
+  final-mass-gap-assembly :
+    DownstreamPromotionInput
 
 record UpstreamSprint118Receipts : Setω where
   constructor mkUpstreamSprint118Receipts
@@ -264,6 +292,66 @@ record TransferReadinessRequirement : Set where
     status :
       UnlockStatus
 
+record DownstreamPromotionRow : Set where
+  constructor mkDownstreamPromotionRow
+  field
+    input :
+      DownstreamPromotionInput
+    upstreamSourcePath :
+      String
+    upstreamClosedFlag :
+      Bool
+    upstreamClosedFlagIsFalse :
+      upstreamClosedFlag ≡ false
+    requiredForNoSpectralPollutionOrAssembly :
+      Bool
+    requiredForNoSpectralPollutionOrAssemblyIsTrue :
+      requiredForNoSpectralPollutionOrAssembly ≡ true
+    rowRecorded :
+      Bool
+    rowRecordedIsTrue :
+      rowRecorded ≡ true
+    status :
+      UnlockStatus
+    evidenceText :
+      String
+
+record DownstreamPromotionRequirement : Set where
+  constructor mkDownstreamPromotionRequirement
+  field
+    h3aTransferConvergenceClosed :
+      Bool
+    h3aTransferConvergenceClosedIsFalse :
+      h3aTransferConvergenceClosed ≡ false
+    h3bVacuumProjectionContinuityClosed :
+      Bool
+    h3bVacuumProjectionContinuityClosedIsFalse :
+      h3bVacuumProjectionContinuityClosed ≡ false
+    noSpectralPollutionFromH3aAndH3bClosed :
+      Bool
+    noSpectralPollutionFromH3aAndH3bClosedIsFalse :
+      noSpectralPollutionFromH3aAndH3bClosed ≡ false
+    transferLowerBoundReady :
+      Bool
+    transferLowerBoundReadyIsFalse :
+      transferLowerBoundReady ≡ false
+    transferLowerBoundTheoremProved :
+      Bool
+    transferLowerBoundTheoremProvedIsFalse :
+      transferLowerBoundTheoremProved ≡ false
+    continuumMassGapProved :
+      Bool
+    continuumMassGapProvedIsFalse :
+      continuumMassGapProved ≡ false
+    clayYangMillsPromotedHere :
+      Bool
+    clayYangMillsPromotedHereIsFalse :
+      clayYangMillsPromotedHere ≡ false
+    requirementStatement :
+      String
+    status :
+      UnlockStatus
+
 record GovernanceBoundary : Set where
   constructor mkGovernanceBoundary
   field
@@ -297,9 +385,15 @@ record UnlockPackage : Setω where
       UpstreamUnlockFlags
     requirement :
       TransferReadinessRequirement
-    rows :
+    readinessRows :
       List UnlockRow
-    rowCount :
+    readinessRowCount :
+      Nat
+    downstreamPromotionRequirement :
+      DownstreamPromotionRequirement
+    downstreamPromotionRows :
+      List DownstreamPromotionRow
+    downstreamPromotionRowCount :
       Nat
     reducerRecordedHere :
       Bool
@@ -422,6 +516,8 @@ open UpstreamSprint118Receipts public
 open UpstreamUnlockFlags public
 open UnlockRow public
 open TransferReadinessRequirement public
+open DownstreamPromotionRow public
+open DownstreamPromotionRequirement public
 open GovernanceBoundary public
 open UnlockPackage public
 open CanonicalReceipt public
@@ -534,6 +630,62 @@ transferCalculusRow =
     external-discharge-required
     "All transfer-calculus obligations must be closed before readiness can unlock; the Sprint118 aggregate flag remains false."
 
+h3aTransferConvergenceRow : DownstreamPromotionRow
+h3aTransferConvergenceRow =
+  mkDownstreamPromotionRow
+    h3a-transfer-convergence
+    sprint119CorrectedTransferBoundaryPath
+    downstreamH3aStillOpen
+    refl
+    true
+    refl
+    true
+    refl
+    theorem-boundary-fail-closed
+    "H3a remains an explicit downstream obligation: transfer-matrix or norm-resolvent convergence on the vacuum-orthogonal sector must be proved before no-spectral-pollution or final continuum assembly can be promoted."
+
+h3bVacuumProjectionContinuityRow : DownstreamPromotionRow
+h3bVacuumProjectionContinuityRow =
+  mkDownstreamPromotionRow
+    h3b-vacuum-projection-continuity
+    sprint119CorrectedTransferBoundaryPath
+    downstreamH3bStillOpen
+    refl
+    true
+    refl
+    true
+    refl
+    theorem-boundary-fail-closed
+    "H3b remains an explicit downstream obligation: OS-compatible vacuum-projection continuity must be proved before no-spectral-pollution or final continuum assembly can be promoted."
+
+noSpectralPollutionFromH3aAndH3bRow : DownstreamPromotionRow
+noSpectralPollutionFromH3aAndH3bRow =
+  mkDownstreamPromotionRow
+    no-spectral-pollution-from-h3a-and-h3b
+    sprint119CorrectedTransferBoundaryPath
+    downstreamNoSpectralPollutionStillOpen
+    refl
+    true
+    refl
+    true
+    refl
+    theorem-boundary-fail-closed
+    "No-spectral-pollution is downstream of H3a and H3b together. It is not reopened by weak compactness, Mosco closure, or finite transfer-calculus readiness alone."
+
+finalMassGapAssemblyRow : DownstreamPromotionRow
+finalMassGapAssemblyRow =
+  mkDownstreamPromotionRow
+    final-mass-gap-assembly
+    sprint119CorrectedTransferBoundaryPath
+    downstreamContinuumMassGapStillOpen
+    refl
+    true
+    refl
+    true
+    refl
+    theorem-boundary-fail-closed
+    "Final continuum mass-gap assembly stays fail-closed until the finite transfer lower bound is paired with H3a, H3b, and no-spectral-pollution."
+
 governanceBoundaryRow : UnlockRow
 governanceBoundaryRow =
   mkUnlockRow
@@ -559,6 +711,14 @@ canonicalUnlockRows =
   ∷ governanceBoundaryRow
   ∷ []
 
+canonicalDownstreamPromotionRows : List DownstreamPromotionRow
+canonicalDownstreamPromotionRows =
+  h3aTransferConvergenceRow
+  ∷ h3bVacuumProjectionContinuityRow
+  ∷ noSpectralPollutionFromH3aAndH3bRow
+  ∷ finalMassGapAssemblyRow
+  ∷ []
+
 canonicalTransferReadinessRequirement : TransferReadinessRequirement
 canonicalTransferReadinessRequirement =
   mkTransferReadinessRequirement
@@ -576,6 +736,26 @@ canonicalTransferReadinessRequirement =
     refl
     unlockReducerStatementText
     readiness-fail-closed
+
+canonicalDownstreamPromotionRequirement : DownstreamPromotionRequirement
+canonicalDownstreamPromotionRequirement =
+  mkDownstreamPromotionRequirement
+    downstreamH3aStillOpen
+    refl
+    downstreamH3bStillOpen
+    refl
+    downstreamNoSpectralPollutionStillOpen
+    refl
+    transferLowerBoundReadyHere
+    refl
+    transferLowerBoundTheoremProvedHere
+    refl
+    continuumMassGapProvedHere
+    refl
+    clayYangMillsPromoted
+    refl
+    "Downstream promotion boundary: even after the finite transfer-readiness gate is reopened, H3a and H3b remain mandatory before no-spectral-pollution and final continuum mass-gap assembly can be promoted."
+    theorem-boundary-fail-closed
 
 canonicalGovernanceBoundary : GovernanceBoundary
 canonicalGovernanceBoundary =
@@ -603,6 +783,7 @@ canonicalSourcePaths =
   ∷ sprint119WeakCompactnessPath
   ∷ sprint119MoscoCompactnessPath
   ∷ sprint119TransferCalculusPath
+  ∷ sprint119CorrectedTransferBoundaryPath
   ∷ []
 
 canonicalEvidenceLedger : List String
@@ -617,6 +798,8 @@ canonicalEvidenceLedger =
   ∷ Mosco118.nonPromotionBoundaryText
   ∷ Calculus118.failClosedBoundaryText
   ∷ Carrier118.finalReceiptText
+  ∷ DownstreamPromotionRequirement.requirementStatement
+       canonicalDownstreamPromotionRequirement
   ∷ []
 
 canonicalUnlockPackage : UnlockPackage
@@ -627,6 +810,9 @@ canonicalUnlockPackage =
     canonicalTransferReadinessRequirement
     canonicalUnlockRows
     6
+    canonicalDownstreamPromotionRequirement
+    canonicalDownstreamPromotionRows
+    4
     reducerRecorded
     refl
     unlockPackageAssembledHere

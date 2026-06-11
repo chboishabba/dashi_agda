@@ -19,44 +19,124 @@ finalAssemblyFormulaText : String
 finalAssemblyFormulaText =
   "Delta_phys = gamma_infty * Lambda_YM * C_G > 0"
 
+finalAssemblyStatementText : String
+finalAssemblyStatementText =
+  "Final assembly statement: finite self-adjointness, domination, uniform finite spectral margin, and the OS/Wightman consumer chain suffice to close the continuum mass-gap assembly conditionally once H3a and H3b deliver no spectral pollution."
+
+remainingFrontierText : String
+remainingFrontierText =
+  "Remaining frontier: the unresolved analytic burden is upstream H3a, namely trace-norm / transfer convergence on the vacuum-orthogonal sector with the required Balaban large-field / small-field control. The old phrase continuum construction is too coarse and is not the governing blocker here."
+
+nonClaimSummaryText : String
+nonClaimSummaryText =
+  "Non-claim summary: this boundary does not itself prove H3a, H3b, no spectral pollution, or a final Clay Yang-Mills theorem. It records that, after no spectral pollution is supplied, no additional downstream continuum mass-gap obstruction remains in the OS/Wightman-to-final-assembly segment."
+
+data YMFinalAssemblyStage : Set where
+  finiteSelfAdjointGapStage : YMFinalAssemblyStage
+  dominationUniformMarginStage : YMFinalAssemblyStage
+  h3aTraceNormTransferConvergenceStage : YMFinalAssemblyStage
+  h3bVacuumProjectionContinuityStage : YMFinalAssemblyStage
+  noSpectralPollutionStage : YMFinalAssemblyStage
+  osWightmanReconstructionConsumerStage : YMFinalAssemblyStage
+  positiveEnergyMassGapTransportStage : YMFinalAssemblyStage
+  finalContinuumMassGapAssemblyStage : YMFinalAssemblyStage
+  clayPromotionGovernanceStage : YMFinalAssemblyStage
+
+canonicalYMFinalAssemblyStages : List YMFinalAssemblyStage
+canonicalYMFinalAssemblyStages =
+  finiteSelfAdjointGapStage
+  ∷ dominationUniformMarginStage
+  ∷ h3aTraceNormTransferConvergenceStage
+  ∷ h3bVacuumProjectionContinuityStage
+  ∷ noSpectralPollutionStage
+  ∷ osWightmanReconstructionConsumerStage
+  ∷ positiveEnergyMassGapTransportStage
+  ∷ finalContinuumMassGapAssemblyStage
+  ∷ clayPromotionGovernanceStage
+  ∷ []
+
+ymFinalAssemblyStageCount : Nat
+ymFinalAssemblyStageCount = listLength canonicalYMFinalAssemblyStages
+
+ymFinalAssemblyStageCountIs9 : ymFinalAssemblyStageCount ≡ 9
+ymFinalAssemblyStageCountIs9 = refl
+
 data YMFinalAssemblyClause : Set where
   finiteGapLimitInputRecorded : YMFinalAssemblyClause
-  rgInvariantScaleInputRecorded : YMFinalAssemblyClause
-  stepScalingGlobalBoundConsumed : YMFinalAssemblyClause
-  btToEuclideanTransferInputRecorded : YMFinalAssemblyClause
-  osWightmanSocketInputRecorded : YMFinalAssemblyClause
+  dominationUniformMarginInputRecorded : YMFinalAssemblyClause
+  h3aNamedAsVacuumOrthogonalTransferConvergence : YMFinalAssemblyClause
+  h3bNamedAsVacuumProjectionContinuity : YMFinalAssemblyClause
+  noSpectralPollutionUnlocksContinuumNonVacuumFloor : YMFinalAssemblyClause
+  osWightmanConsumerChainClosesConditionally : YMFinalAssemblyClause
+  finalMassGapAssemblyNoLongerCarriesIndependentFrontier : YMFinalAssemblyClause
+  remainingFrontierIsUpstreamH3aNotGenericContinuumConstruction :
+    YMFinalAssemblyClause
   finalMassGapFormulaRecorded : YMFinalAssemblyClause
-  reflectionPositivityBoundaryStillNamed : YMFinalAssemblyClause
+  clayPromotionStillGovernedUntilUpstreamClosure : YMFinalAssemblyClause
 
 canonicalYMFinalAssemblyClauses : List YMFinalAssemblyClause
 canonicalYMFinalAssemblyClauses =
   finiteGapLimitInputRecorded
-  ∷ rgInvariantScaleInputRecorded
-  ∷ stepScalingGlobalBoundConsumed
-  ∷ btToEuclideanTransferInputRecorded
-  ∷ osWightmanSocketInputRecorded
+  ∷ dominationUniformMarginInputRecorded
+  ∷ h3aNamedAsVacuumOrthogonalTransferConvergence
+  ∷ h3bNamedAsVacuumProjectionContinuity
+  ∷ noSpectralPollutionUnlocksContinuumNonVacuumFloor
+  ∷ osWightmanConsumerChainClosesConditionally
+  ∷ finalMassGapAssemblyNoLongerCarriesIndependentFrontier
+  ∷ remainingFrontierIsUpstreamH3aNotGenericContinuumConstruction
   ∷ finalMassGapFormulaRecorded
-  ∷ reflectionPositivityBoundaryStillNamed
+  ∷ clayPromotionStillGovernedUntilUpstreamClosure
   ∷ []
 
 ymFinalAssemblyClauseCount : Nat
 ymFinalAssemblyClauseCount = listLength canonicalYMFinalAssemblyClauses
 
-ymFinalAssemblyClauseCountIs7 : ymFinalAssemblyClauseCount ≡ 7
-ymFinalAssemblyClauseCountIs7 = refl
+ymFinalAssemblyClauseCountIs10 : ymFinalAssemblyClauseCount ≡ 10
+ymFinalAssemblyClauseCountIs10 = refl
+
+data YMFinalAssemblyOpenObligation : Set where
+  upstreamH3aTraceNormTransferConvergence :
+    YMFinalAssemblyOpenObligation
+  upstreamH3aBalabanLargeFieldSmallFieldControl :
+    YMFinalAssemblyOpenObligation
+  upstreamH3bVacuumProjectionContinuity :
+    YMFinalAssemblyOpenObligation
+  downstreamClayPromotionGovernance :
+    YMFinalAssemblyOpenObligation
+
+canonicalYMFinalAssemblyOpenObligations :
+  List YMFinalAssemblyOpenObligation
+canonicalYMFinalAssemblyOpenObligations =
+  upstreamH3aTraceNormTransferConvergence
+  ∷ upstreamH3aBalabanLargeFieldSmallFieldControl
+  ∷ upstreamH3bVacuumProjectionContinuity
+  ∷ downstreamClayPromotionGovernance
+  ∷ []
+
+ymFinalAssemblyOpenObligationCount : Nat
+ymFinalAssemblyOpenObligationCount =
+  listLength canonicalYMFinalAssemblyOpenObligations
+
+ymFinalAssemblyOpenObligationCountIs4 :
+  ymFinalAssemblyOpenObligationCount ≡ 4
+ymFinalAssemblyOpenObligationCountIs4 = refl
 
 data YMFinalAssemblyBlocker : Set where
-  blocker-reflectionPositivityBoundaryStillOpen : YMFinalAssemblyBlocker
-  blocker-osWightmanAuthorityStillOpen : YMFinalAssemblyBlocker
-  blocker-finalContinuumAssemblyProofStillOpen : YMFinalAssemblyBlocker
-  blocker-ymClayPromotionForbidden : YMFinalAssemblyBlocker
+  blocker-upstreamH3aTraceNormTransferConvergenceStillOpen :
+    YMFinalAssemblyBlocker
+  blocker-upstreamBalabanLargeFieldSmallFieldControlStillOpen :
+    YMFinalAssemblyBlocker
+  blocker-h3bVacuumProjectionContinuityStillNeedsH3aPlusRP4 :
+    YMFinalAssemblyBlocker
+  blocker-ymClayPromotionForbiddenUntilUpstreamClosure :
+    YMFinalAssemblyBlocker
 
 canonicalYMFinalAssemblyBlockers : List YMFinalAssemblyBlocker
 canonicalYMFinalAssemblyBlockers =
-  blocker-reflectionPositivityBoundaryStillOpen
-  ∷ blocker-osWightmanAuthorityStillOpen
-  ∷ blocker-finalContinuumAssemblyProofStillOpen
-  ∷ blocker-ymClayPromotionForbidden
+  blocker-upstreamH3aTraceNormTransferConvergenceStillOpen
+  ∷ blocker-upstreamBalabanLargeFieldSmallFieldControlStillOpen
+  ∷ blocker-h3bVacuumProjectionContinuityStillNeedsH3aPlusRP4
+  ∷ blocker-ymClayPromotionForbiddenUntilUpstreamClosure
   ∷ []
 
 YMContinuumMassGapFinalAssemblyRecorded : Bool
@@ -67,11 +147,23 @@ YMContinuumMassGapFinalAssemblyProved = false
 
 record YMContinuumMassGapFinalAssemblyBoundary : Set where
   field
+    stages : List YMFinalAssemblyStage
+    stagesCanonical : stages ≡ canonicalYMFinalAssemblyStages
     clauses : List YMFinalAssemblyClause
     clausesCanonical : clauses ≡ canonicalYMFinalAssemblyClauses
+    openObligations : List YMFinalAssemblyOpenObligation
+    openObligationsCanonical :
+      openObligations ≡ canonicalYMFinalAssemblyOpenObligations
     blockers : List YMFinalAssemblyBlocker
     blockersCanonical : blockers ≡ canonicalYMFinalAssemblyBlockers
-    clauseCountIs7 : ymFinalAssemblyClauseCount ≡ 7
+    stageCountIs9 : ymFinalAssemblyStageCount ≡ 9
+    clauseCountIs10 : ymFinalAssemblyClauseCount ≡ 10
+    openObligationCountIs4 :
+      ymFinalAssemblyOpenObligationCount ≡ 4
+    finalAssemblyFormula : String
+    finalAssemblyBoundary : String
+    remainingFrontierBoundary : String
+    nonClaimSummary : String
     theoremStillFalse :
       YMContinuumMassGapFinalAssemblyProved ≡ false
 
@@ -79,11 +171,21 @@ canonicalYMContinuumMassGapFinalAssemblyBoundary :
   YMContinuumMassGapFinalAssemblyBoundary
 canonicalYMContinuumMassGapFinalAssemblyBoundary =
   record
-    { clauses = canonicalYMFinalAssemblyClauses
+    { stages = canonicalYMFinalAssemblyStages
+    ; stagesCanonical = refl
+    ; clauses = canonicalYMFinalAssemblyClauses
     ; clausesCanonical = refl
+    ; openObligations = canonicalYMFinalAssemblyOpenObligations
+    ; openObligationsCanonical = refl
     ; blockers = canonicalYMFinalAssemblyBlockers
     ; blockersCanonical = refl
-    ; clauseCountIs7 = refl
+    ; stageCountIs9 = refl
+    ; clauseCountIs10 = refl
+    ; openObligationCountIs4 = refl
+    ; finalAssemblyFormula = finalAssemblyFormulaText
+    ; finalAssemblyBoundary = finalAssemblyStatementText
+    ; remainingFrontierBoundary = remainingFrontierText
+    ; nonClaimSummary = nonClaimSummaryText
     ; theoremStillFalse = refl
     }
 

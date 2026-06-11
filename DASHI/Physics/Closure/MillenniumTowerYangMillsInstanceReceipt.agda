@@ -17,8 +17,9 @@ import DASHI.Physics.Closure.ClayMillenniumClosureTargetReceipt as ClayTarget
 -- Yang-Mills instance of the shared tower schema.
 --
 -- The finite local carrier gap and finite field-equation receipts inhabit
--- T0/T1/T2.  The continuum Yang-Mills construction, OS/reflection-positive
--- lift, and Clay mass-gap acceptance remain explicit T3/T4 blockers.
+-- T0/T1/T2.  The corrected continuum-transfer boundary is tighter: the
+-- finite carrier gap is real, while H3a/H3b, OS vacuum identity, and
+-- no-spectral-pollution transport remain explicit T3/T4 blockers.
 
 record MillenniumTowerYangMillsInstanceReceipt : Setω where
   field
@@ -54,6 +55,33 @@ record MillenniumTowerYangMillsInstanceReceipt : Setω where
 
     clayCompositionObligation :
       ClayGap.ContinuumClayMassGapReceiptObligation
+
+    continuumTransferIntake :
+      Balaban.ContinuumTransferNoSpectralPollutionIntake
+
+    continuumTransferH3aPrimaryOpenIsTrue :
+      Balaban.ContinuumTransferNoSpectralPollutionIntake.h3aPrimaryOpenObligation
+        continuumTransferIntake
+      ≡
+      true
+
+    continuumTransferH3bSecondaryOpenIsTrue :
+      Balaban.ContinuumTransferNoSpectralPollutionIntake.h3bSecondaryOpenObligation
+        continuumTransferIntake
+      ≡
+      true
+
+    moscoConvergenceAloneInsufficientIsTrue :
+      Balaban.ContinuumTransferNoSpectralPollutionIntake.moscoConvergenceAloneIsInsufficient
+        continuumTransferIntake
+      ≡
+      true
+
+    noSpectralPollutionDischargedHereIsFalse :
+      Balaban.ContinuumTransferNoSpectralPollutionIntake.noSpectralPollutionDischargedHere
+        continuumTransferIntake
+      ≡
+      false
 
     carrierOSWightmanClosureTarget :
       ClayTarget.CarrierOSPositivityAndWightmanTargetReceipt
@@ -153,6 +181,16 @@ canonicalMillenniumTowerYangMillsInstanceReceipt =
         refl
     ; clayCompositionObligation =
         ClayGap.canonicalContinuumClayMassGapReceiptObligation
+    ; continuumTransferIntake =
+        Balaban.canonicalContinuumTransferNoSpectralPollutionIntake
+    ; continuumTransferH3aPrimaryOpenIsTrue =
+        refl
+    ; continuumTransferH3bSecondaryOpenIsTrue =
+        refl
+    ; moscoConvergenceAloneInsufficientIsTrue =
+        refl
+    ; noSpectralPollutionDischargedHereIsFalse =
+        refl
     ; carrierOSWightmanClosureTarget =
         ClayTarget.canonicalCarrierOSPositivityAndWightmanTargetReceipt
     ; carrierOSPositivityConstructedFalse =
@@ -202,11 +240,13 @@ canonicalMillenniumTowerYangMillsInstanceReceipt =
         refl
     ; instanceBoundary =
         "T0 finiteControl: Balaban-style local finite carrier spectral-gap surface is inhabited"
-        ∷ "T1 depthFamily: depth-indexed finite carrier Yang-Mills receipts are consumed through the existing mass-gap and field-equation surfaces"
+        ∷ "T1 depthFamily: depth-indexed finite carrier Yang-Mills receipts are consumed through the existing mass-gap and field-equation surfaces, and the positive finite carrier gap remains a real receipt surface"
         ∷ "T2 liftAttempt: finite zero-current D star F = J lane is recorded without strict real or continuum promotion"
         ∷ "The named YangMillsMassGapBoundaryReceipt and YangMillsFieldEquationReceipt are selected as the YM instance surfaces"
-        ∷ "CarrierOSPositivityAndWightmanTargetReceipt records OS positivity, a uniform gap, and Wightman reconstruction as open hard targets"
-        ∷ "T3 continuumObligation: continuum Yang-Mills construction and OS/reflection-positive lift remain open"
+        ∷ "T3 continuumTransfer: the hard open interface is H3a trace-norm or norm-resolvent transfer-matrix convergence on the vacuum-orthogonal sector, not a generic continuum-construction phrase"
+        ∷ "T3 vacuumIdentity: RP.4 OS reconstruction is the route that identifies the limiting vacuum and supports H3b vacuum-projection continuity"
+        ∷ "T3 noSpectralPollution: exclusion of spectrum below the finite margin depends on H3a and H3b together and is not discharged by Mosco convergence alone"
+        ∷ "CarrierOSPositivityAndWightmanTargetReceipt still records OS positivity, a uniform gap, and Wightman reconstruction as open hard targets"
         ∷ "T4 authorityBoundary: Clay Yang-Mills mass-gap acceptance remains false"
         ∷ []
     }

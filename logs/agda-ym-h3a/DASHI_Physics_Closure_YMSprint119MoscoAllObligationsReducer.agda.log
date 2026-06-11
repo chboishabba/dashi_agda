@@ -1,0 +1,21 @@
+== DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda ==
+command: timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda
+started: 2026-06-11T11:18:11+10:00
+
+Checking DASHI.Physics.Closure.YMSprint119MoscoAllObligationsReducer (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda:446,5-49
+Not in scope:
+  Mosco108.transferLowerBoundTheoremProvedHere
+  at /home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda:446,5-49
+    (did you mean
+       'FinalMoscoReducerReceipt.transferLowerBoundTheoremProvedFinal' or
+       'FinalMoscoReducerReceipt.transferLowerBoundTheoremProvedFinalIsFalse' or
+       'Recovery110.TheoremAndPromotionBoundary.transferLowerBoundTheoremProved' or
+       'Recovery110.transferLowerBoundTheoremProvedHere' or
+       'Sprint118.transferLowerBoundReadyHere' or
+       'transferLowerBoundReadyHere' or
+       'transferLowerBoundTheoremProvedHere'?)
+when scope checking Mosco108.transferLowerBoundTheoremProvedHere
+
+exit_code: 42
+finished: 2026-06-11T11:18:33+10:00

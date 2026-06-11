@@ -6,6 +6,9 @@ This roadmap records the cleanup plan for reducing repo navigation and
 validation drag without losing provenance, breaking Agda imports, or crossing
 external/JMD/submodule ownership boundaries.
 
+The governing policy for future passes is now `Docs/ProofFirstRepoPolicy.md`.
+This roadmap should be read as an execution plan for that proof-first rule.
+
 ## Current Observations
 
 The repo has become hard to navigate because several different artifact classes
@@ -58,6 +61,7 @@ repos.
 The intended state is:
 
 - small root with only live entrypoints and build/config surfaces
+- proof-bearing files dominate the visible layer
 - compact live `status.md` and `TODO.md`
 - historical plans and logs behind archive indexes
 - docs grouped by purpose instead of mixed at `Docs/` root
@@ -70,6 +74,8 @@ Immediate reader-facing rule:
 - a new external reader should be able to find the live corpus from
   `ROOT_INDEX.md` and `Docs/LiveSurfaceIndex.md` without browsing all of
   `Docs/`
+- a new external reader should mostly see proof surfaces, not receipts or
+  governance debris
 
 ## Four-Pass Structure
 
@@ -270,7 +276,7 @@ Intended membership:
   - `SupportCompendium.md`
   - `PaperCommonCitationLedger.md`
   - `PaperCommonNotationGlossary.md`
-- `Docs/papers/source/`: skeletons, section drafts, clay targets, and working
+- `Docs/papers/drafts/`: skeletons, section drafts, clay targets, and working
   prose inputs
   - `NSPaper1ClayTarget.md`
   - `YMPaper3ClayTarget.md`
@@ -285,13 +291,8 @@ Intended membership:
 Keep these live at `Docs/` root unless a later decision says otherwise:
 
 - `Docs/LiveSurfaceIndex.md`
-- `Docs/RepoGuide.md`
-- `Docs/PhysicsGuide.md`
-- `Docs/AgdaValidationTargets.md`
-- `Docs/CurrentGateStatus.md`
-- `Docs/CrossPaperReceiptIndex.md`
-- `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`
-- `Docs/DASHIGovernanceSelfIssuancePolicy.md`
+- `Docs/ProofFirstRepoPolicy.md`
+- `Docs/RepoStructureCleanupRoadmap.md`
 - diagram entrypoint docs that are actively referenced from `architecture.md`
 
 Actions:
@@ -386,7 +387,7 @@ Actions:
 - keep original flat receipt modules in place
 - update `DASHI/Everything.agda` gradually only where low risk
 - document focused grouped validation targets in
-  `Docs/AgdaValidationTargets.md`
+  `Docs/support/reference/AgdaValidationTargets.md`
 
 Checkpoint:
 
@@ -492,7 +493,7 @@ Actions:
 
 - add or promote domain aggregate modules for daily checks
 - keep `DASHI/Everything.agda` as the batch aggregate
-- document focused validation targets in `Docs/AgdaValidationTargets.md`
+- document focused validation targets in `Docs/support/reference/AgdaValidationTargets.md`
 - avoid making `Everything.agda` the first file a reader or worker opens
 
 Checkpoint:

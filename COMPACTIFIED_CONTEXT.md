@@ -2,6 +2,20 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-11 YM H3a/H3b manuscript and boundary integration:
+  `Docs/papers/live/Paper3YangMillsClayDraft.md` now treats the continuum step
+  as the exact `H3a`/`H3b` chain rather than a generic Mosco compactness
+  narrative. `H3a` is the Balaban-supplied trace / norm-resolvent transfer
+  theorem on the vacuum-orthogonal sector; `H3b` is vacuum-projection
+  continuity against the RP.4 vacuum; no spectral pollution is downstream of
+  `H3a + H3b`; the final mass-gap assembly then closes from the cited Balaban
+  multiscale inputs plus OS reconstruction. The current propagation targets
+  are recorded in `Docs/support/reference/AgdaValidationTargets.md` under the
+  twelve exact `YMSprint109`, `YMSprint119`, `YMBruhatTitsToOSLatticeTransfer`,
+  `BalabanRGMassGapReceiptSurface`, `YMSpectralMarginToContinuumTransfer`,
+  `YMContinuumTransferToNoSpectralPollution`, `YMNoSpectralPollutionToOSWightman`,
+  and `YMContinuumMassGapFinalAssembly` surfaces.
+
 - 2026-06-06 Sprint 120 certificate audit:
   `YMSprint120ExternalCommonCarrierConstructionCertificate`,
   `YMSprint120WeakCompactnessCertificateInterface`,
@@ -353,7 +367,8 @@
   arithmetically with `18*C = 0.0098876953125`.  The analytic witnesses
   `BalabanQhpLocalConstantBound`, `BalabanCMP116PolymerMassBound`,
   `AdjointRepresentationSharperBound-or-BlockingDepthK11PhysicalValidation`,
-  and `WeakCouplingWindowSU3` remain uninhabited.  WC3, no spectral pollution,
+  and `WeakCouplingWindowSU3` remain uninhabited.  WC3, the corrected
+  no-spectral-pollution interface with explicit H3a/H3b obligations,
   and Clay/YM promotion remain false/open.
   `YMSprint92MasterWC3Condition` now exposes the conditional theorem route
   from `MasterWC3ConditionSU3AtK11` to
@@ -385,7 +400,9 @@
   `YMSprint90ContinuumMassGapWCBoundaryReceipt` records the exact conditional
   interface from `WC3UniformClusterSummability`, tight continuum limit,
   reflection positivity, and OS reconstruction to no spectral pollution and a
-  positive continuum mass gap.  It keeps WC3, unconditional continuum
+  positive continuum mass gap, but now under the corrected warning that RP.4
+  vacuum identity plus the stronger H3a/H3b transport/projection interface are
+  still the hard open obligations. It keeps WC3, unconditional continuum
   no-pollution/gap survival, YM quotient Hamiltonian closability/descent,
   nontrivial SU3 continuum measure, SU(N)>2 extension, external acceptance, and
   Clay/YM promotion false/open.  The combined audit still reports the next YM gate as

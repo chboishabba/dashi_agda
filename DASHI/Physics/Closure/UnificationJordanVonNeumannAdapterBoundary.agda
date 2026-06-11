@@ -6,12 +6,13 @@ module DASHI.Physics.Closure.UnificationJordanVonNeumannAdapterBoundary where
 --   -> four-point cancellation / parallelogram data
 --   -> polarization
 --   -> bilinear form
---   -> quadratic/Hilbert consumer
+--   -> null-space linearity / quotient-first discipline
+--   -> quadratic/Hilbert consumer on V/null
 --   -> Clifford / spinor consumers.
 --
 -- This file records the route and sockets only.  It does not prove
 -- parallelogram, bilinearity, positivity, Clifford relations, spinor
--- realization, or promotion.
+-- realization, null-space linearity, quotient descent, or promotion.
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -132,7 +133,28 @@ record JordanVonNeumannAdapterTarget
 
     quadraticConsumerTextIsCanonical :
       quadraticConsumerText
-      ≡ "polarization feeds quadratic/Hilbert consumers"
+      ≡ "polarization feeds quadratic/Hilbert consumers on V/null"
+
+    nullSpaceLinearityText :
+      String
+
+    nullSpaceLinearityTextIsCanonical :
+      nullSpaceLinearityText
+      ≡ "null-space linearity and quotient-first discipline gate quadratic/Hilbert consumers"
+
+    quotientConsumerText :
+      String
+
+    quotientConsumerTextIsCanonical :
+      quotientConsumerText
+      ≡ "quadratic/Hilbert consumers attach on V/null, not raw V"
+
+    nonlinearYMQuotientText :
+      String
+
+    nonlinearYMQuotientTextIsCanonical :
+      nonlinearYMQuotientText
+      ≡ "nonlinear YM consumers use the gauge-equivalence quotient domain"
 
     cliffordConsumerText :
       String
@@ -237,6 +259,8 @@ data JordanVonNeumannAdapterStage : Set where
     JordanVonNeumannAdapterStage
   exposeBilinearization :
     JordanVonNeumannAdapterStage
+  exposeNullSpaceQuotientDiscipline :
+    JordanVonNeumannAdapterStage
   exposeQuadraticConsumer :
     JordanVonNeumannAdapterStage
   exposeCliffordConsumer :
@@ -254,6 +278,7 @@ canonicalJordanVonNeumannAdapterStages =
   ∷ exposeParallelogramConsumer
   ∷ exposePolarization
   ∷ exposeBilinearization
+  ∷ exposeNullSpaceQuotientDiscipline
   ∷ exposeQuadraticConsumer
   ∷ exposeCliffordConsumer
   ∷ exposeSpinorConsumer
@@ -264,9 +289,9 @@ jordanVonNeumannAdapterStageCount : Nat
 jordanVonNeumannAdapterStageCount =
   listLength canonicalJordanVonNeumannAdapterStages
 
-jordanVonNeumannAdapterStageCountIs9 :
-  jordanVonNeumannAdapterStageCount ≡ 9
-jordanVonNeumannAdapterStageCountIs9 =
+jordanVonNeumannAdapterStageCountIs10 :
+  jordanVonNeumannAdapterStageCount ≡ 10
+jordanVonNeumannAdapterStageCountIs10 =
   refl
 
 data JordanVonNeumannAdapterBlocker : Set where
@@ -276,7 +301,11 @@ data JordanVonNeumannAdapterBlocker : Set where
     JordanVonNeumannAdapterBlocker
   blocker-bilinearization-unproved :
     JordanVonNeumannAdapterBlocker
-  blocker-positive-definite-hilbert-consumer-unproved :
+  blocker-null-space-linearity-unproved :
+    JordanVonNeumannAdapterBlocker
+  blocker-quotient-first-discipline-unproved :
+    JordanVonNeumannAdapterBlocker
+  blocker-positive-definite-quotient-hilbert-consumer-unproved :
     JordanVonNeumannAdapterBlocker
   blocker-clifford-consumer-unproved :
     JordanVonNeumannAdapterBlocker
@@ -291,7 +320,9 @@ canonicalJordanVonNeumannAdapterBlockers =
   blocker-four-point-cancellation-unproved
   ∷ blocker-parallelogram-unproved
   ∷ blocker-bilinearization-unproved
-  ∷ blocker-positive-definite-hilbert-consumer-unproved
+  ∷ blocker-null-space-linearity-unproved
+  ∷ blocker-quotient-first-discipline-unproved
+  ∷ blocker-positive-definite-quotient-hilbert-consumer-unproved
   ∷ blocker-clifford-consumer-unproved
   ∷ blocker-spinor-consumer-unproved
   ∷ blocker-terminal-promotion-forbidden
@@ -301,9 +332,9 @@ jordanVonNeumannAdapterBlockerCount : Nat
 jordanVonNeumannAdapterBlockerCount =
   listLength canonicalJordanVonNeumannAdapterBlockers
 
-jordanVonNeumannAdapterBlockerCountIs7 :
-  jordanVonNeumannAdapterBlockerCount ≡ 7
-jordanVonNeumannAdapterBlockerCountIs7 =
+jordanVonNeumannAdapterBlockerCountIs9 :
+  jordanVonNeumannAdapterBlockerCount ≡ 9
+jordanVonNeumannAdapterBlockerCountIs9 =
   refl
 
 ------------------------------------------------------------------------
@@ -311,11 +342,11 @@ jordanVonNeumannAdapterBlockerCountIs7 =
 
 jordanVonNeumannRouteText : String
 jordanVonNeumannRouteText =
-  "parallelogram -> polarization -> bilinear form -> quadratic/clifford/spinor consumers"
+  "parallelogram -> polarization -> bilinear form -> null-space linearity/quotient-first discipline -> quadratic/Hilbert consumers on V/null -> Clifford/spinor consumers"
 
 jordanVonNeumannRouteTextIsCanonical :
   jordanVonNeumannRouteText
-  ≡ "parallelogram -> polarization -> bilinear form -> quadratic/clifford/spinor consumers"
+  ≡ "parallelogram -> polarization -> bilinear form -> null-space linearity/quotient-first discipline -> quadratic/Hilbert consumers on V/null -> Clifford/spinor consumers"
 jordanVonNeumannRouteTextIsCanonical =
   refl
 
@@ -327,6 +358,36 @@ jordanVonNeumannPolarizationTextIsCanonical :
   jordanVonNeumannPolarizationText
   ≡ "<x,y>=(Q(x+y)-Q(x-y))/4"
 jordanVonNeumannPolarizationTextIsCanonical =
+  refl
+
+jordanVonNeumannDischargeGateText : String
+jordanVonNeumannDischargeGateText =
+  "JvN recovery discharges only when both the parallelogram-law and null-space/quotient hypotheses are available"
+
+jordanVonNeumannDischargeGateTextIsCanonical :
+  jordanVonNeumannDischargeGateText
+  ≡ "JvN recovery discharges only when both the parallelogram-law and null-space/quotient hypotheses are available"
+jordanVonNeumannDischargeGateTextIsCanonical =
+  refl
+
+jordanVonNeumannQuotientConsumerText : String
+jordanVonNeumannQuotientConsumerText =
+  "quadratic/Hilbert consumers attach on V/null, not raw V"
+
+jordanVonNeumannQuotientConsumerTextIsCanonical :
+  jordanVonNeumannQuotientConsumerText
+  ≡ "quadratic/Hilbert consumers attach on V/null, not raw V"
+jordanVonNeumannQuotientConsumerTextIsCanonical =
+  refl
+
+jordanVonNeumannNonlinearYMQuotientText : String
+jordanVonNeumannNonlinearYMQuotientText =
+  "nonlinear YM consumers use the gauge-equivalence quotient domain"
+
+jordanVonNeumannNonlinearYMQuotientTextIsCanonical :
+  jordanVonNeumannNonlinearYMQuotientText
+  ≡ "nonlinear YM consumers use the gauge-equivalence quotient domain"
+jordanVonNeumannNonlinearYMQuotientTextIsCanonical =
   refl
 
 ------------------------------------------------------------------------
@@ -359,6 +420,24 @@ polarizationRecordedIsTrue :
 polarizationRecordedIsTrue =
   refl
 
+nullSpaceLinearityRecorded : Bool
+nullSpaceLinearityRecorded =
+  true
+
+nullSpaceLinearityRecordedIsTrue :
+  nullSpaceLinearityRecorded ≡ true
+nullSpaceLinearityRecordedIsTrue =
+  refl
+
+quotientFirstDisciplineRecorded : Bool
+quotientFirstDisciplineRecorded =
+  true
+
+quotientFirstDisciplineRecordedIsTrue :
+  quotientFirstDisciplineRecorded ≡ true
+quotientFirstDisciplineRecordedIsTrue =
+  refl
+
 fourPointCancellationProved : Bool
 fourPointCancellationProved =
   false
@@ -384,6 +463,24 @@ jordanVonNeumannBilinearizationProved =
 jordanVonNeumannBilinearizationProvedIsFalse :
   jordanVonNeumannBilinearizationProved ≡ false
 jordanVonNeumannBilinearizationProvedIsFalse =
+  refl
+
+nullSpaceLinearityProved : Bool
+nullSpaceLinearityProved =
+  false
+
+nullSpaceLinearityProvedIsFalse :
+  nullSpaceLinearityProved ≡ false
+nullSpaceLinearityProvedIsFalse =
+  refl
+
+quotientFirstDisciplineProved : Bool
+quotientFirstDisciplineProved =
+  false
+
+quotientFirstDisciplineProvedIsFalse :
+  quotientFirstDisciplineProved ≡ false
+quotientFirstDisciplineProvedIsFalse =
   refl
 
 quadraticConsumerProved : Bool
@@ -458,6 +555,12 @@ record UnificationJordanVonNeumannAdapterBoundary : Set where
     polarizationImported :
       Bool
 
+    nullSpaceLinearityImported :
+      Bool
+
+    quotientFirstDisciplineImported :
+      Bool
+
     fourPointCancellationDerived :
       Bool
 
@@ -465,6 +568,12 @@ record UnificationJordanVonNeumannAdapterBoundary : Set where
       Bool
 
     bilinearizationDerived :
+      Bool
+
+    nullSpaceLinearityDerived :
+      Bool
+
+    quotientFirstDisciplineDerived :
       Bool
 
     quadraticConsumerDerived :
@@ -495,12 +604,20 @@ canonicalUnificationJordanVonNeumannAdapterBoundary =
         parallelogramConsumerRecorded
     ; polarizationImported =
         polarizationRecorded
+    ; nullSpaceLinearityImported =
+        nullSpaceLinearityRecorded
+    ; quotientFirstDisciplineImported =
+        quotientFirstDisciplineRecorded
     ; fourPointCancellationDerived =
         fourPointCancellationProved
     ; parallelogramDerived =
         parallelogramLawProved
     ; bilinearizationDerived =
         jordanVonNeumannBilinearizationProved
+    ; nullSpaceLinearityDerived =
+        nullSpaceLinearityProved
+    ; quotientFirstDisciplineDerived =
+        quotientFirstDisciplineProved
     ; quadraticConsumerDerived =
         quadraticConsumerProved
     ; cliffordConsumerDerived =
@@ -512,12 +629,12 @@ canonicalUnificationJordanVonNeumannAdapterBoundary =
     }
 
 canonicalJordanVonNeumannStageCount :
-  stageCount canonicalUnificationJordanVonNeumannAdapterBoundary ≡ 9
+  stageCount canonicalUnificationJordanVonNeumannAdapterBoundary ≡ 10
 canonicalJordanVonNeumannStageCount =
   refl
 
 canonicalJordanVonNeumannBlockerCount :
-  blockerCount canonicalUnificationJordanVonNeumannAdapterBoundary ≡ 7
+  blockerCount canonicalUnificationJordanVonNeumannAdapterBoundary ≡ 9
 canonicalJordanVonNeumannBlockerCount =
   refl
 
@@ -542,6 +659,20 @@ canonicalJordanVonNeumannPolarizationImported :
 canonicalJordanVonNeumannPolarizationImported =
   refl
 
+canonicalJordanVonNeumannNullSpaceLinearityImported :
+  nullSpaceLinearityImported
+    canonicalUnificationJordanVonNeumannAdapterBoundary
+  ≡ true
+canonicalJordanVonNeumannNullSpaceLinearityImported =
+  refl
+
+canonicalJordanVonNeumannQuotientFirstDisciplineImported :
+  quotientFirstDisciplineImported
+    canonicalUnificationJordanVonNeumannAdapterBoundary
+  ≡ true
+canonicalJordanVonNeumannQuotientFirstDisciplineImported =
+  refl
+
 canonicalJordanVonNeumannFourPointStillOpen :
   fourPointCancellationDerived
     canonicalUnificationJordanVonNeumannAdapterBoundary
@@ -561,6 +692,20 @@ canonicalJordanVonNeumannBilinearizationStillOpen :
     canonicalUnificationJordanVonNeumannAdapterBoundary
   ≡ false
 canonicalJordanVonNeumannBilinearizationStillOpen =
+  refl
+
+canonicalJordanVonNeumannNullSpaceLinearityStillOpen :
+  nullSpaceLinearityDerived
+    canonicalUnificationJordanVonNeumannAdapterBoundary
+  ≡ false
+canonicalJordanVonNeumannNullSpaceLinearityStillOpen =
+  refl
+
+canonicalJordanVonNeumannQuotientFirstDisciplineStillOpen :
+  quotientFirstDisciplineDerived
+    canonicalUnificationJordanVonNeumannAdapterBoundary
+  ≡ false
+canonicalJordanVonNeumannQuotientFirstDisciplineStillOpen =
   refl
 
 canonicalJordanVonNeumannQuadraticStillOpen :

@@ -2,15 +2,19 @@ module DASHI.Physics.Closure.YMBruhatTitsToOSLatticeTransferBoundary where
 
 -- Bruhat-Tits to OS/Wightman lattice-transfer boundary.
 --
--- This receipt records the current honest Yang-Mills continuum-transfer
--- frontier:
+-- This boundary records the corrected Yang-Mills continuum-transfer theorem
+-- chain and keeps the frontier fail-closed:
 --
 --   finite BT/building gauge model
 --   -> Wilson/lattice action comparison
 --   -> reflection positivity
 --   -> Dobrushin-Shlosman / exponential-clustering hypotheses
 --   -> observable-class inclusion
---   -> no spectral pollution through the depth/continuum limit
+--   -> H3a transfer-matrix / norm-resolvent convergence on the
+--      vacuum-orthogonal sector
+--   -> RP.4 supplying the limiting OS vacuum target needed to formulate H3b
+--   -> H3b vacuum-projection continuity against that limiting vacuum target
+--   -> no-spectral-pollution theorem socket depending on H3a + H3b
 --   -> OS/Wightman reconstruction candidate authority.
 --
 -- Recent external OS/mass-gap preprints are recorded here as authority
@@ -77,7 +81,16 @@ data YMBruhatTitsToOSLatticeTransferStage : Set where
   observableClassInclusionStage :
     YMBruhatTitsToOSLatticeTransferStage
 
-  noSpectralPollutionDepthContinuumStage :
+  h3aVacuumOrthogonalTransferConvergenceStage :
+    YMBruhatTitsToOSLatticeTransferStage
+
+  rP4SuppliesLimitingVacuumTargetForH3bStage :
+    YMBruhatTitsToOSLatticeTransferStage
+
+  h3bVacuumProjectionContinuityAgainstLimitingVacuumStage :
+    YMBruhatTitsToOSLatticeTransferStage
+
+  noSpectralPollutionTheoremSocketFromH3aAndH3bStage :
     YMBruhatTitsToOSLatticeTransferStage
 
   externalOSMassGapAuthorityCandidateStage :
@@ -97,7 +110,10 @@ canonicalYMBruhatTitsToOSLatticeTransferStages =
   ∷ reflectionPositiveTransferMatrixStage
   ∷ dobrushinShlosmanClusterHypothesesStage
   ∷ observableClassInclusionStage
-  ∷ noSpectralPollutionDepthContinuumStage
+  ∷ h3aVacuumOrthogonalTransferConvergenceStage
+  ∷ rP4SuppliesLimitingVacuumTargetForH3bStage
+  ∷ h3bVacuumProjectionContinuityAgainstLimitingVacuumStage
+  ∷ noSpectralPollutionTheoremSocketFromH3aAndH3bStage
   ∷ externalOSMassGapAuthorityCandidateStage
   ∷ clayPromotionGovernanceStage
   ∷ []
@@ -154,10 +170,19 @@ data BruhatTitsToOSRequiredHypothesis : Set where
   gaugeInvariantObservableCompleteness :
     BruhatTitsToOSRequiredHypothesis
 
-  noSpectralPollutionDepthLimit :
+  h3aVacuumOrthogonalTransferMatrixConvergence :
     BruhatTitsToOSRequiredHypothesis
 
-  noSpectralPollutionContinuumLimit :
+  h3aNormResolventConvergenceOnVacuumOrthogonalSector :
+    BruhatTitsToOSRequiredHypothesis
+
+  rP4SuppliesLimitingVacuumTargetForH3b :
+    BruhatTitsToOSRequiredHypothesis
+
+  h3bVacuumProjectionContinuity :
+    BruhatTitsToOSRequiredHypothesis
+
+  noSpectralPollutionDependsOnH3aAndH3b :
     BruhatTitsToOSRequiredHypothesis
 
   externalAuthorityAcceptanceToken :
@@ -176,8 +201,11 @@ canonicalBruhatTitsToOSRequiredHypotheses =
   ∷ wightmanReconstructionCompatibility
   ∷ observableClassInclusion
   ∷ gaugeInvariantObservableCompleteness
-  ∷ noSpectralPollutionDepthLimit
-  ∷ noSpectralPollutionContinuumLimit
+  ∷ h3aVacuumOrthogonalTransferMatrixConvergence
+  ∷ h3aNormResolventConvergenceOnVacuumOrthogonalSector
+  ∷ rP4SuppliesLimitingVacuumTargetForH3b
+  ∷ h3bVacuumProjectionContinuity
+  ∷ noSpectralPollutionDependsOnH3aAndH3b
   ∷ externalAuthorityAcceptanceToken
   ∷ []
 
@@ -200,10 +228,19 @@ data BruhatTitsToOSLatticeTransferBlocker : Set where
   missingGaugeInvariantObservableCompleteness :
     BruhatTitsToOSLatticeTransferBlocker
 
-  missingNoSpectralPollutionDepthLimit :
+  missingH3aVacuumOrthogonalTransferMatrixConvergence :
     BruhatTitsToOSLatticeTransferBlocker
 
-  missingNoSpectralPollutionContinuumLimit :
+  missingH3aNormResolventConvergence :
+    BruhatTitsToOSLatticeTransferBlocker
+
+  missingRP4LimitingVacuumTargetForH3b :
+    BruhatTitsToOSLatticeTransferBlocker
+
+  missingH3bVacuumProjectionContinuity :
+    BruhatTitsToOSLatticeTransferBlocker
+
+  missingNoSpectralPollutionFromH3aAndH3b :
     BruhatTitsToOSLatticeTransferBlocker
 
   externalCandidatesNotAcceptedAuthority :
@@ -221,8 +258,11 @@ canonicalBruhatTitsToOSLatticeTransferBlockers =
   ∷ missingDobrusinShlosmanOrClusterHypotheses
   ∷ missingObservableClassInclusion
   ∷ missingGaugeInvariantObservableCompleteness
-  ∷ missingNoSpectralPollutionDepthLimit
-  ∷ missingNoSpectralPollutionContinuumLimit
+  ∷ missingH3aVacuumOrthogonalTransferMatrixConvergence
+  ∷ missingH3aNormResolventConvergence
+  ∷ missingRP4LimitingVacuumTargetForH3b
+  ∷ missingH3bVacuumProjectionContinuity
+  ∷ missingNoSpectralPollutionFromH3aAndH3b
   ∷ externalCandidatesNotAcceptedAuthority
   ∷ missingClayYangMillsAuthorityToken
   ∷ []
@@ -258,7 +298,16 @@ data BruhatTitsToOSLatticeTransferRow : Set where
   observableClassInclusionRequiredRow :
     BruhatTitsToOSLatticeTransferRow
 
-  noSpectralPollutionRequiredRow :
+  h3aVacuumOrthogonalTransferRequiredRow :
+    BruhatTitsToOSLatticeTransferRow
+
+  rP4SuppliesLimitingVacuumTargetForH3bRow :
+    BruhatTitsToOSLatticeTransferRow
+
+  h3bVacuumProjectionContinuityAgainstLimitingVacuumRow :
+    BruhatTitsToOSLatticeTransferRow
+
+  noSpectralPollutionTheoremSocketDependsOnH3aAndH3bRow :
     BruhatTitsToOSLatticeTransferRow
 
   oSWightmanTransferStillOpenRow :
@@ -283,7 +332,10 @@ canonicalBruhatTitsToOSLatticeTransferRows =
   ∷ reflectionPositivityRequiredRow
   ∷ dSClusterHypothesesRequiredRow
   ∷ observableClassInclusionRequiredRow
-  ∷ noSpectralPollutionRequiredRow
+  ∷ h3aVacuumOrthogonalTransferRequiredRow
+  ∷ rP4SuppliesLimitingVacuumTargetForH3bRow
+  ∷ h3bVacuumProjectionContinuityAgainstLimitingVacuumRow
+  ∷ noSpectralPollutionTheoremSocketDependsOnH3aAndH3bRow
   ∷ oSWightmanTransferStillOpenRow
   ∷ continuumMassGapTransferStillOpenRow
   ∷ clayYangMillsPromotionHeldFalseRow
@@ -309,7 +361,7 @@ data ObservableClassInclusionTarget : Set where
     ObservableClassInclusionTarget
 
 data NoSpectralPollutionTarget : Set where
-  noBottomSpectrumPollutionAcrossDepthAndContinuumLimitTarget :
+  noBottomSpectrumPollutionFromH3aAndH3bTarget :
     NoSpectralPollutionTarget
 
 data BruhatTitsToOSLatticeTransferTarget : Set where
@@ -344,7 +396,7 @@ canonicalObservableClassInclusionTarget =
 canonicalNoSpectralPollutionTarget :
   NoSpectralPollutionTarget
 canonicalNoSpectralPollutionTarget =
-  noBottomSpectrumPollutionAcrossDepthAndContinuumLimitTarget
+  noBottomSpectrumPollutionFromH3aAndH3bTarget
 
 canonicalBruhatTitsToOSLatticeTransferTarget :
   BruhatTitsToOSLatticeTransferTarget
@@ -395,12 +447,24 @@ gaugeInvariantObservableCompletenessProved : Bool
 gaugeInvariantObservableCompletenessProved =
   false
 
-noSpectralPollutionDepthLimitProved : Bool
-noSpectralPollutionDepthLimitProved =
+h3aVacuumOrthogonalTransferMatrixConvergenceProved : Bool
+h3aVacuumOrthogonalTransferMatrixConvergenceProved =
   false
 
-noSpectralPollutionContinuumLimitProved : Bool
-noSpectralPollutionContinuumLimitProved =
+h3aNormResolventConvergenceProved : Bool
+h3aNormResolventConvergenceProved =
+  false
+
+rP4LimitingVacuumTargetForH3bProved : Bool
+rP4LimitingVacuumTargetForH3bProved =
+  false
+
+h3bVacuumProjectionContinuityProved : Bool
+h3bVacuumProjectionContinuityProved =
+  false
+
+noSpectralPollutionFromH3aAndH3bProved : Bool
+noSpectralPollutionFromH3aAndH3bProved =
   false
 
 bruhatTitsToOSLatticeTransferProved : Bool
@@ -468,14 +532,29 @@ gaugeInvariantObservableCompletenessProvedIsFalse :
 gaugeInvariantObservableCompletenessProvedIsFalse =
   refl
 
-noSpectralPollutionDepthLimitProvedIsFalse :
-  noSpectralPollutionDepthLimitProved ≡ false
-noSpectralPollutionDepthLimitProvedIsFalse =
+h3aVacuumOrthogonalTransferMatrixConvergenceProvedIsFalse :
+  h3aVacuumOrthogonalTransferMatrixConvergenceProved ≡ false
+h3aVacuumOrthogonalTransferMatrixConvergenceProvedIsFalse =
   refl
 
-noSpectralPollutionContinuumLimitProvedIsFalse :
-  noSpectralPollutionContinuumLimitProved ≡ false
-noSpectralPollutionContinuumLimitProvedIsFalse =
+h3aNormResolventConvergenceProvedIsFalse :
+  h3aNormResolventConvergenceProved ≡ false
+h3aNormResolventConvergenceProvedIsFalse =
+  refl
+
+rP4LimitingVacuumTargetForH3bProvedIsFalse :
+  rP4LimitingVacuumTargetForH3bProved ≡ false
+rP4LimitingVacuumTargetForH3bProvedIsFalse =
+  refl
+
+h3bVacuumProjectionContinuityProvedIsFalse :
+  h3bVacuumProjectionContinuityProved ≡ false
+h3bVacuumProjectionContinuityProvedIsFalse =
+  refl
+
+noSpectralPollutionFromH3aAndH3bProvedIsFalse :
+  noSpectralPollutionFromH3aAndH3bProved ≡ false
+noSpectralPollutionFromH3aAndH3bProvedIsFalse =
   refl
 
 bruhatTitsToOSLatticeTransferProvedIsFalse :
@@ -554,7 +633,10 @@ canonicalBruhatTitsToOSLatticeTransferFindings =
   ∷ "Reflection positivity must be proved on the BT/gauge quotient carrier."
   ∷ "Dobrushin-Shlosman or clustering hypotheses must be verified for BT geometry."
   ∷ "The external observable class must contain DASHI gauge-invariant observables."
-  ∷ "No spectral pollution is required across depth and continuum limits."
+  ∷ "H3a transfer-matrix or norm-resolvent convergence on the vacuum-orthogonal sector remains the load-bearing continuum obligation."
+  ∷ "RP.4 must supply the limiting OS vacuum target before H3b vacuum-projection continuity can be formulated honestly."
+  ∷ "H3b is secondary to H3a and tracks vacuum-projection continuity against the RP.4 limiting vacuum target."
+  ∷ "No spectral pollution is recorded only as a theorem socket from H3a plus H3b, not as a generic depth/continuum transport fact."
   ∷ "clayYangMillsPromoted remains false."
   ∷ []
 
@@ -680,11 +762,20 @@ record YMBruhatTitsToOSLatticeTransferBoundary : Setω where
     gaugeInvariantObservableCompletenessStillMissing :
       gaugeInvariantObservableCompletenessProved ≡ false
 
-    noSpectralPollutionDepthStillMissing :
-      noSpectralPollutionDepthLimitProved ≡ false
+    h3aVacuumOrthogonalTransferMatrixConvergenceStillMissing :
+      h3aVacuumOrthogonalTransferMatrixConvergenceProved ≡ false
 
-    noSpectralPollutionContinuumStillMissing :
-      noSpectralPollutionContinuumLimitProved ≡ false
+    h3aNormResolventConvergenceStillMissing :
+      h3aNormResolventConvergenceProved ≡ false
+
+    rP4LimitingVacuumTargetForH3bStillMissing :
+      rP4LimitingVacuumTargetForH3bProved ≡ false
+
+    h3bVacuumProjectionContinuityStillMissing :
+      h3bVacuumProjectionContinuityProved ≡ false
+
+    noSpectralPollutionFromH3aAndH3bStillMissing :
+      noSpectralPollutionFromH3aAndH3bProved ≡ false
 
     transferTheoremStillMissing :
       bruhatTitsToOSLatticeTransferProved ≡ false
@@ -805,9 +896,15 @@ canonicalYMBruhatTitsToOSLatticeTransferBoundary =
         refl
     ; gaugeInvariantObservableCompletenessStillMissing =
         refl
-    ; noSpectralPollutionDepthStillMissing =
+    ; h3aVacuumOrthogonalTransferMatrixConvergenceStillMissing =
         refl
-    ; noSpectralPollutionContinuumStillMissing =
+    ; h3aNormResolventConvergenceStillMissing =
+        refl
+    ; rP4LimitingVacuumTargetForH3bStillMissing =
+      refl
+    ; h3bVacuumProjectionContinuityStillMissing =
+        refl
+    ; noSpectralPollutionFromH3aAndH3bStillMissing =
         refl
     ; transferTheoremStillMissing =
         refl
@@ -864,7 +961,7 @@ canonicalYMBruhatTitsToOSLatticeTransferBoundaryKeepsOSFalse =
   refl
 
 canonicalYMBruhatTitsToOSLatticeTransferBoundaryKeepsNoPollutionFalse :
-  noSpectralPollutionContinuumStillMissing
+  noSpectralPollutionFromH3aAndH3bStillMissing
     canonicalYMBruhatTitsToOSLatticeTransferBoundary
   ≡
   refl
@@ -888,16 +985,16 @@ canonicalYMBruhatTitsToOSLatticeTransferBoundaryKeepsTerminalFalse =
   refl
 
 canonicalYMBruhatTitsToOSLatticeTransferStageCount :
-  listCount canonicalYMBruhatTitsToOSLatticeTransferStages ≡ 11
+  listCount canonicalYMBruhatTitsToOSLatticeTransferStages ≡ 14
 canonicalYMBruhatTitsToOSLatticeTransferStageCount =
   refl
 
 canonicalBruhatTitsToOSRequiredHypothesisCount :
-  listCount canonicalBruhatTitsToOSRequiredHypotheses ≡ 13
+  listCount canonicalBruhatTitsToOSRequiredHypotheses ≡ 16
 canonicalBruhatTitsToOSRequiredHypothesisCount =
   refl
 
 canonicalBruhatTitsToOSLatticeTransferBlockerCount :
-  listCount canonicalBruhatTitsToOSLatticeTransferBlockers ≡ 10
+  listCount canonicalBruhatTitsToOSLatticeTransferBlockers ≡ 13
 canonicalBruhatTitsToOSLatticeTransferBlockerCount =
   refl

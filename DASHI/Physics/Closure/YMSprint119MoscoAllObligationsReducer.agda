@@ -25,11 +25,18 @@ import DASHI.Physics.Closure.YMSprint110RecoveryCoreDensityEnergyLimsup
 ------------------------------------------------------------------------
 -- Sprint119 Mosco all-obligations reducer.
 --
--- This module normalizes the five Mosco aggregate gates from Sprint118 into
--- one final fail-closed reducer receipt.  It records source paths, required
--- resolutions, upstream flags, row statuses, canonical receipts, and final
--- theorem boundaries.  It does not import Sprint119 sibling modules and it
--- does not promote Clay Yang-Mills.
+-- This reducer now separates the genuine Mosco package from the stronger
+-- continuum-transfer obligations.  The five Mosco gates only certify form
+-- compactness, liminf control, and recovery data.  They do not by themselves
+-- force survival of a positive spectral margin.  Gap survival is recorded as
+-- downstream H3a/H3b work:
+--
+--   H3a : trace / norm-resolvent control on the vacuum-orthogonal transfer
+--         sector, strong enough to exclude spectral pollution.
+--   H3b : vacuum-projection continuity, downstream of H3a plus RP.4.
+--
+-- No-spectral-pollution is therefore downstream of both H3a and H3b rather
+-- than a direct consequence of Mosco compactness.
 
 sprintNumber : Nat
 sprintNumber = 119
@@ -66,10 +73,6 @@ recovery110SourcePath : String
 recovery110SourcePath =
   "DASHI/Physics/Closure/YMSprint110RecoveryCoreDensityEnergyLimsup.agda"
 
-sprint119SiblingReducerPathOnly : String
-sprint119SiblingReducerPathOnly =
-  "DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.sibling-path-only"
-
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
 
@@ -91,14 +94,17 @@ closedFormLowerSemicontinuityClosedHere = false
 recoveryLimsupClosedHere : Bool
 recoveryLimsupClosedHere = false
 
-noBottomSpectrumPollutionClosedHere : Bool
-noBottomSpectrumPollutionClosedHere = false
+moscoPackageClosedHere : Bool
+moscoPackageClosedHere = false
 
-noCollapseAtZeroClosedHere : Bool
-noCollapseAtZeroClosedHere = false
+h3aTraceNormResolventClosedHere : Bool
+h3aTraceNormResolventClosedHere = false
 
-allMoscoCompactnessObligationsClosedHere : Bool
-allMoscoCompactnessObligationsClosedHere = false
+h3bVacuumProjectionContinuityClosedHere : Bool
+h3bVacuumProjectionContinuityClosedHere = false
+
+noSpectralPollutionClosedHere : Bool
+noSpectralPollutionClosedHere = false
 
 transferLowerBoundReadyHere : Bool
 transferLowerBoundReadyHere = false
@@ -114,53 +120,79 @@ clayYangMillsPromotedHere = false
 
 reducerStatementText : String
 reducerStatementText =
-  "Sprint119 reduces the Sprint118 Mosco compactness readiness package to five normalized aggregate gates while preserving the fail-closed theorem boundary."
+  "Sprint119 records the Mosco package as upstream compactness-and-form data only. Mosco yields common-domain control, liminf, recovery, and form-level convergence, but not positive-gap survival. H3a trace / norm-resolvent control and H3b vacuum-projection continuity are named separately, and no-spectral-pollution is downstream of those stronger obligations."
 
 weakCompactnessResolutionText : String
 weakCompactnessResolutionText =
-  "Resolve weak compactness by proving extraction of weakly convergent subsequences for normalized bounded-energy finite transfer-form sequences in one physical carrier."
+  "Resolve weak compactness by extracting weakly convergent subsequences for bounded-energy finite transfer-form sequences on one physical carrier."
 
 closedFormLowerSemicontinuityResolutionText : String
 closedFormLowerSemicontinuityResolutionText =
-  "Resolve closed-form lower semicontinuity by identifying the common closed semibounded form domain and proving the Mosco liminf inequality on weak bounded-energy limits."
+  "Resolve the Mosco liminf side by identifying the common closed semibounded form domain and proving lower semicontinuity on weak bounded-energy limits."
 
 recoveryLimsupResolutionText : String
 recoveryLimsupResolutionText =
-  "Resolve recovery limsup by proving dense finite physical core recovery, compatible interpolation and sampling maps, strong norm recovery, and energy limsup."
+  "Resolve the Mosco recovery side by producing dense finite physical cores, compatible interpolation / sampling maps, strong norm recovery, and energy limsup."
 
-noBottomSpectrumPollutionResolutionText : String
-noBottomSpectrumPollutionResolutionText =
-  "Resolve no-bottom-spectrum pollution by proving tight low-energy compact extraction and exclusion of spurious non-vacuum branches below the continuum bottom threshold."
+moscoPackageResolutionText : String
+moscoPackageResolutionText =
+  "Assemble the Mosco package only after weak compactness, liminf, and recovery all close, together with the fail-closed recognition that this package gives form compactness and liminf control rather than continuum gap survival."
 
-noCollapseAtZeroResolutionText : String
-noCollapseAtZeroResolutionText =
-  "Resolve no-collapse-at-zero by proving a uniform positive lower bound for non-vacuum finite eigenbranches in the continuum passage."
+h3aTraceNormResolventResolutionText : String
+h3aTraceNormResolventResolutionText =
+  "Resolve H3a by proving trace / norm-resolvent control of the vacuum-orthogonal transfer sector. This is the load-bearing no-spectral-pollution obligation and is stronger than Mosco convergence alone."
+
+h3bVacuumProjectionContinuityResolutionText : String
+h3bVacuumProjectionContinuityResolutionText =
+  "Resolve H3b by proving vacuum-projection continuity for the OS-compatible limiting vacuum, downstream of H3a plus the RP.4 reconstruction input."
+
+noSpectralPollutionResolutionText : String
+noSpectralPollutionResolutionText =
+  "Resolve no-spectral-pollution only after H3a and H3b: use strong transfer control and vacuum-sector continuity to rule out spurious continuum eigenbranches below the finite lower threshold."
 
 finalBoundaryText : String
 finalBoundaryText =
-  "The reducer is recorded and packaged, but weak compactness, all Mosco compactness obligations, transfer readiness, transfer theorem, continuum mass gap, and Clay Yang-Mills promotion remain false."
+  "The reducer now distinguishes Mosco compactness obligations from the stronger continuum-transfer obligations. Weak compactness, liminf, recovery, aggregate Mosco closure, H3a trace / norm-resolvent control, H3b vacuum-projection continuity, no-spectral-pollution, transfer readiness, transfer theorem, continuum mass gap, and Clay Yang-Mills promotion all remain false here."
 
-data MoscoGate : Set where
-  weak-compactness :
-    MoscoGate
-  closed-form-lower-semicontinuity :
-    MoscoGate
-  recovery-limsup :
-    MoscoGate
-  no-bottom-spectrum-pollution :
-    MoscoGate
-  no-collapse-at-zero :
-    MoscoGate
+data ObligationStage : Set where
+  mosco-upstream-stage :
+    ObligationStage
+  h3a-transfer-stage :
+    ObligationStage
+  h3b-vacuum-stage :
+    ObligationStage
+  no-spectral-pollution-stage :
+    ObligationStage
+  final-boundary-stage :
+    ObligationStage
 
 data ReducerRowStatus : Set where
-  normalized-from-sprint118 :
+  imported-upstream-open :
     ReducerRowStatus
-  upstream-open-required :
+  mosco-package-only :
     ReducerRowStatus
-  required-resolution-recorded :
+  stronger-transfer-open :
     ReducerRowStatus
-  final-fail-closed :
+  downstream-open-after-h3a-h3b :
     ReducerRowStatus
+  fail-closed-summary :
+    ReducerRowStatus
+
+data NormalizedMoscoObligation : Set where
+  weak-compactness :
+    NormalizedMoscoObligation
+  closed-form-lower-semicontinuity :
+    NormalizedMoscoObligation
+  recovery-limsup :
+    NormalizedMoscoObligation
+  aggregate-mosco-package :
+    NormalizedMoscoObligation
+  h3a-trace-norm-resolvent-control :
+    NormalizedMoscoObligation
+  h3b-vacuum-projection-continuity :
+    NormalizedMoscoObligation
+  downstream-no-spectral-pollution :
+    NormalizedMoscoObligation
 
 record ImportedCanonicalReceipts : Setω where
   constructor mkImportedCanonicalReceipts
@@ -193,14 +225,14 @@ record ImportedCanonicalReceipts : Setω where
       Bool
     sprint118TransferReadyFlagIsFalse :
       sprint118TransferReadyFlag ≡ false
-    clayFlagsRemainFalse :
-      Bool
 
-record MoscoGateRow : Set where
-  constructor mkMoscoGateRow
+record MoscoObligationRow : Set where
+  constructor mkMoscoObligationRow
   field
-    gate :
-      MoscoGate
+    obligation :
+      NormalizedMoscoObligation
+    stage :
+      ObligationStage
     sourcePath :
       String
     requiredResolution :
@@ -209,32 +241,32 @@ record MoscoGateRow : Set where
       Bool
     upstreamFlagIsFalse :
       upstreamFlag ≡ false
-    sprint118AggregateFlag :
-      Bool
-    sprint118AggregateFlagIsFalse :
-      sprint118AggregateFlag ≡ false
     closedHere :
       Bool
     closedHereIsFalse :
       closedHere ≡ false
-    status :
+    rowStatus :
       ReducerRowStatus
 
-record NormalizedMoscoGateTable : Set where
-  constructor mkNormalizedMoscoGateTable
+record NormalizedMoscoObligationTable : Set where
+  constructor mkNormalizedMoscoObligationTable
   field
     weakCompactnessRow :
-      MoscoGateRow
+      MoscoObligationRow
     closedFormLowerSemicontinuityRow :
-      MoscoGateRow
+      MoscoObligationRow
     recoveryLimsupRow :
-      MoscoGateRow
-    noBottomSpectrumPollutionRow :
-      MoscoGateRow
-    noCollapseAtZeroRow :
-      MoscoGateRow
+      MoscoObligationRow
+    moscoPackageRow :
+      MoscoObligationRow
+    h3aTraceNormResolventRow :
+      MoscoObligationRow
+    h3bVacuumProjectionContinuityRow :
+      MoscoObligationRow
+    noSpectralPollutionRow :
+      MoscoObligationRow
     rows :
-      List MoscoGateRow
+      List MoscoObligationRow
     rowCount :
       Nat
     rowsRecordedInTable :
@@ -251,14 +283,22 @@ record FinalMoscoReducerReceipt : Set where
       Bool
     rowsRecordedFinal :
       Bool
-    weakCompactnessClosedFinal :
+    moscoPackageClosedFinal :
       Bool
-    weakCompactnessClosedFinalIsFalse :
-      weakCompactnessClosedFinal ≡ false
-    allMoscoCompactnessObligationsClosedFinal :
+    moscoPackageClosedFinalIsFalse :
+      moscoPackageClosedFinal ≡ false
+    h3aTraceNormResolventClosedFinal :
       Bool
-    allMoscoCompactnessObligationsClosedFinalIsFalse :
-      allMoscoCompactnessObligationsClosedFinal ≡ false
+    h3aTraceNormResolventClosedFinalIsFalse :
+      h3aTraceNormResolventClosedFinal ≡ false
+    h3bVacuumProjectionContinuityClosedFinal :
+      Bool
+    h3bVacuumProjectionContinuityClosedFinalIsFalse :
+      h3bVacuumProjectionContinuityClosedFinal ≡ false
+    noSpectralPollutionClosedFinal :
+      Bool
+    noSpectralPollutionClosedFinalIsFalse :
+      noSpectralPollutionClosedFinal ≡ false
     transferLowerBoundReadyFinal :
       Bool
     transferLowerBoundReadyFinalIsFalse :
@@ -287,16 +327,14 @@ record YMSprint119MoscoAllObligationsReducerReceipt : Setω where
       String
     importedCanonicalReceipts :
       ImportedCanonicalReceipts
-    normalizedGateTable :
-      NormalizedMoscoGateTable
+    normalizedObligationTable :
+      NormalizedMoscoObligationTable
     finalReceipt :
       FinalMoscoReducerReceipt
     sourcePaths :
       List String
     requiredResolutions :
       List String
-    upstreamFlags :
-      List Bool
     rowStatuses :
       List ReducerRowStatus
     canonicalReceiptRecorded :
@@ -305,10 +343,22 @@ record YMSprint119MoscoAllObligationsReducerReceipt : Setω where
       Bool
     rowsRecordedReceipt :
       Bool
-    allMoscoCompactnessObligationsClosedHereFlag :
+    moscoPackageClosedHereFlag :
       Bool
-    allMoscoCompactnessObligationsClosedHereIsFalse :
-      allMoscoCompactnessObligationsClosedHereFlag ≡ false
+    moscoPackageClosedHereIsFalse :
+      moscoPackageClosedHereFlag ≡ false
+    h3aTraceNormResolventClosedHereFlag :
+      Bool
+    h3aTraceNormResolventClosedHereIsFalse :
+      h3aTraceNormResolventClosedHereFlag ≡ false
+    h3bVacuumProjectionContinuityClosedHereFlag :
+      Bool
+    h3bVacuumProjectionContinuityClosedHereIsFalse :
+      h3bVacuumProjectionContinuityClosedHereFlag ≡ false
+    noSpectralPollutionClosedHereFlag :
+      Bool
+    noSpectralPollutionClosedHereIsFalse :
+      noSpectralPollutionClosedHereFlag ≡ false
     clayYangMillsPromotedHereFlag :
       Bool
     clayYangMillsPromotedHereIsFalse :
@@ -333,97 +383,121 @@ canonicalImportedCanonicalReceipts =
     refl
     Sprint118.transferLowerBoundReadyHere
     refl
-    true
 
-weakCompactnessRow : MoscoGateRow
+weakCompactnessRow : MoscoObligationRow
 weakCompactnessRow =
-  mkMoscoGateRow
+  mkMoscoObligationRow
     weak-compactness
+    mosco-upstream-stage
     weak110SourcePath
     weakCompactnessResolutionText
     Weak110.weakSubsequenceExtractionProvedHere
     refl
-    Sprint118.weakCompactnessClosedHere
-    refl
     weakCompactnessClosedHere
     refl
-    upstream-open-required
+    imported-upstream-open
 
-closedFormLowerSemicontinuityRow : MoscoGateRow
+closedFormLowerSemicontinuityRow : MoscoObligationRow
 closedFormLowerSemicontinuityRow =
-  mkMoscoGateRow
+  mkMoscoObligationRow
     closed-form-lower-semicontinuity
+    mosco-upstream-stage
     closed110SourcePath
     closedFormLowerSemicontinuityResolutionText
     Closed110.closedFormCriterionClosedHere
     refl
-    Sprint118.closedFormLowerSemicontinuityClosedHere
-    refl
     closedFormLowerSemicontinuityClosedHere
     refl
-    upstream-open-required
+    imported-upstream-open
 
-recoveryLimsupRow : MoscoGateRow
+recoveryLimsupRow : MoscoObligationRow
 recoveryLimsupRow =
-  mkMoscoGateRow
+  mkMoscoObligationRow
     recovery-limsup
+    mosco-upstream-stage
     recovery110SourcePath
     recoveryLimsupResolutionText
     Recovery110.moscoRecoverySideClosedHere
     refl
-    Sprint118.recoveryLimsupClosedHere
-    refl
     recoveryLimsupClosedHere
     refl
-    upstream-open-required
+    imported-upstream-open
 
-noBottomSpectrumPollutionRow : MoscoGateRow
-noBottomSpectrumPollutionRow =
-  mkMoscoGateRow
-    no-bottom-spectrum-pollution
+moscoPackageRow : MoscoObligationRow
+moscoPackageRow =
+  mkMoscoObligationRow
+    aggregate-mosco-package
+    mosco-upstream-stage
+    sprint118SourcePath
+    moscoPackageResolutionText
+    Sprint118.allMoscoCompactnessObligationsClosedHere
+    refl
+    moscoPackageClosedHere
+    refl
+    mosco-package-only
+
+h3aTraceNormResolventRow : MoscoObligationRow
+h3aTraceNormResolventRow =
+  mkMoscoObligationRow
+    h3a-trace-norm-resolvent-control
+    h3a-transfer-stage
+    mosco108SourcePath
+    h3aTraceNormResolventResolutionText
+    Mosco108.canonicalReceiptTargetTheoremProvedHere
+    refl
+    h3aTraceNormResolventClosedHere
+    refl
+    stronger-transfer-open
+
+h3bVacuumProjectionContinuityRow : MoscoObligationRow
+h3bVacuumProjectionContinuityRow =
+  mkMoscoObligationRow
+    h3b-vacuum-projection-continuity
+    h3b-vacuum-stage
     compact109SourcePath
-    noBottomSpectrumPollutionResolutionText
+    h3bVacuumProjectionContinuityResolutionText
     Compact109.noBottomSpectrumPollutionCompactnessTheoremProved
     refl
-    Sprint118.noBottomSpectrumPollutionClosedHere
+    h3bVacuumProjectionContinuityClosedHere
     refl
-    noBottomSpectrumPollutionClosedHere
-    refl
-    upstream-open-required
+    stronger-transfer-open
 
-noCollapseAtZeroRow : MoscoGateRow
-noCollapseAtZeroRow =
-  mkMoscoGateRow
-    no-collapse-at-zero
+noSpectralPollutionRow : MoscoObligationRow
+noSpectralPollutionRow =
+  mkMoscoObligationRow
+    downstream-no-spectral-pollution
+    no-spectral-pollution-stage
     collapse110SourcePath
-    noCollapseAtZeroResolutionText
+    noSpectralPollutionResolutionText
     Collapse110.noCollapseAtZeroClosed
     refl
-    Sprint118.noCollapseAtZeroClosedHere
+    noSpectralPollutionClosedHere
     refl
-    noCollapseAtZeroClosedHere
-    refl
-    upstream-open-required
+    downstream-open-after-h3a-h3b
 
-canonicalRows : List MoscoGateRow
+canonicalRows : List MoscoObligationRow
 canonicalRows =
   weakCompactnessRow
   ∷ closedFormLowerSemicontinuityRow
   ∷ recoveryLimsupRow
-  ∷ noBottomSpectrumPollutionRow
-  ∷ noCollapseAtZeroRow
+  ∷ moscoPackageRow
+  ∷ h3aTraceNormResolventRow
+  ∷ h3bVacuumProjectionContinuityRow
+  ∷ noSpectralPollutionRow
   ∷ []
 
-canonicalNormalizedMoscoGateTable : NormalizedMoscoGateTable
-canonicalNormalizedMoscoGateTable =
-  mkNormalizedMoscoGateTable
+canonicalNormalizedMoscoObligationTable : NormalizedMoscoObligationTable
+canonicalNormalizedMoscoObligationTable =
+  mkNormalizedMoscoObligationTable
     weakCompactnessRow
     closedFormLowerSemicontinuityRow
     recoveryLimsupRow
-    noBottomSpectrumPollutionRow
-    noCollapseAtZeroRow
+    moscoPackageRow
+    h3aTraceNormResolventRow
+    h3bVacuumProjectionContinuityRow
+    noSpectralPollutionRow
     canonicalRows
-    5
+    7
     rowsRecordedHere
     packageAssembledHere
 
@@ -433,9 +507,13 @@ canonicalFinalMoscoReducerReceipt =
     reducerRecordedHere
     packageAssembledHere
     rowsRecordedHere
-    weakCompactnessClosedHere
+    moscoPackageClosedHere
     refl
-    allMoscoCompactnessObligationsClosedHere
+    h3aTraceNormResolventClosedHere
+    refl
+    h3bVacuumProjectionContinuityClosedHere
+    refl
+    noSpectralPollutionClosedHere
     refl
     transferLowerBoundReadyHere
     refl
@@ -457,7 +535,6 @@ canonicalSourcePaths =
   ∷ weak110SourcePath
   ∷ closed110SourcePath
   ∷ recovery110SourcePath
-  ∷ sprint119SiblingReducerPathOnly
   ∷ []
 
 canonicalRequiredResolutions : List String
@@ -465,26 +542,22 @@ canonicalRequiredResolutions =
   weakCompactnessResolutionText
   ∷ closedFormLowerSemicontinuityResolutionText
   ∷ recoveryLimsupResolutionText
-  ∷ noBottomSpectrumPollutionResolutionText
-  ∷ noCollapseAtZeroResolutionText
-  ∷ []
-
-canonicalUpstreamFlags : List Bool
-canonicalUpstreamFlags =
-  Weak110.weakSubsequenceExtractionProvedHere
-  ∷ Closed110.closedFormCriterionClosedHere
-  ∷ Recovery110.moscoRecoverySideClosedHere
-  ∷ Compact109.noBottomSpectrumPollutionCompactnessTheoremProved
-  ∷ Collapse110.noCollapseAtZeroClosed
+  ∷ moscoPackageResolutionText
+  ∷ h3aTraceNormResolventResolutionText
+  ∷ h3bVacuumProjectionContinuityResolutionText
+  ∷ noSpectralPollutionResolutionText
   ∷ []
 
 canonicalRowStatuses : List ReducerRowStatus
 canonicalRowStatuses =
-  upstream-open-required
-  ∷ upstream-open-required
-  ∷ upstream-open-required
-  ∷ upstream-open-required
-  ∷ upstream-open-required
+  imported-upstream-open
+  ∷ imported-upstream-open
+  ∷ imported-upstream-open
+  ∷ mosco-package-only
+  ∷ stronger-transfer-open
+  ∷ stronger-transfer-open
+  ∷ downstream-open-after-h3a-h3b
+  ∷ fail-closed-summary
   ∷ []
 
 canonicalYMSprint119MoscoAllObligationsReducerReceipt :
@@ -494,99 +567,56 @@ canonicalYMSprint119MoscoAllObligationsReducerReceipt =
     sprintNumber
     modulePath
     canonicalImportedCanonicalReceipts
-    canonicalNormalizedMoscoGateTable
+    canonicalNormalizedMoscoObligationTable
     canonicalFinalMoscoReducerReceipt
     canonicalSourcePaths
     canonicalRequiredResolutions
-    canonicalUpstreamFlags
     canonicalRowStatuses
     reducerRecordedHere
     packageAssembledHere
     rowsRecordedHere
-    allMoscoCompactnessObligationsClosedHere
+    moscoPackageClosedHere
+    refl
+    h3aTraceNormResolventClosedHere
+    refl
+    h3bVacuumProjectionContinuityClosedHere
+    refl
+    noSpectralPollutionClosedHere
     refl
     clayYangMillsPromotedHere
     refl
 
-canonicalReceipt : YMSprint119MoscoAllObligationsReducerReceipt
+canonicalReceipt :
+  YMSprint119MoscoAllObligationsReducerReceipt
 canonicalReceipt =
   canonicalYMSprint119MoscoAllObligationsReducerReceipt
 
-finalReceiptValue : FinalMoscoReducerReceipt
-finalReceiptValue =
-  finalReceipt canonicalReceipt
+finalReceiptAlias :
+  YMSprint119MoscoAllObligationsReducerReceipt
+finalReceiptAlias =
+  canonicalReceipt
 
-canonicalReceiptRecordedHere :
-  canonicalReceiptRecorded canonicalReceipt ≡ true
-canonicalReceiptRecordedHere =
+canonicalReceiptMoscoPackageClosedHereIsFalse :
+  moscoPackageClosedHereFlag canonicalReceipt ≡ false
+canonicalReceiptMoscoPackageClosedHereIsFalse =
   refl
 
-canonicalPackageAssembledHere :
-  packageAssembledReceipt canonicalReceipt ≡ true
-canonicalPackageAssembledHere =
+canonicalReceiptH3aTraceNormResolventClosedHereIsFalse :
+  h3aTraceNormResolventClosedHereFlag canonicalReceipt ≡ false
+canonicalReceiptH3aTraceNormResolventClosedHereIsFalse =
   refl
 
-canonicalRowsRecordedHere :
-  rowsRecordedReceipt canonicalReceipt ≡ true
-canonicalRowsRecordedHere =
+canonicalReceiptH3bVacuumProjectionContinuityClosedHereIsFalse :
+  h3bVacuumProjectionContinuityClosedHereFlag canonicalReceipt ≡ false
+canonicalReceiptH3bVacuumProjectionContinuityClosedHereIsFalse =
   refl
 
-canonicalWeakCompactnessClosedHereIsFalse :
-  weakCompactnessClosedHere ≡ false
-canonicalWeakCompactnessClosedHereIsFalse =
+canonicalReceiptNoSpectralPollutionClosedHereIsFalse :
+  noSpectralPollutionClosedHereFlag canonicalReceipt ≡ false
+canonicalReceiptNoSpectralPollutionClosedHereIsFalse =
   refl
 
-canonicalAllMoscoCompactnessObligationsClosedHereIsFalse :
-  allMoscoCompactnessObligationsClosedHereFlag canonicalReceipt ≡ false
-canonicalAllMoscoCompactnessObligationsClosedHereIsFalse =
-  refl
-
-canonicalTransferLowerBoundReadyHereIsFalse :
-  transferLowerBoundReadyHere ≡ false
-canonicalTransferLowerBoundReadyHereIsFalse =
-  refl
-
-canonicalTransferLowerBoundTheoremProvedHereIsFalse :
-  transferLowerBoundTheoremProvedHere ≡ false
-canonicalTransferLowerBoundTheoremProvedHereIsFalse =
-  refl
-
-canonicalContinuumMassGapProvedHereIsFalse :
-  continuumMassGapProvedHere ≡ false
-canonicalContinuumMassGapProvedHereIsFalse =
-  refl
-
-canonicalClayYangMillsPromotedHereIsFalse :
+canonicalReceiptClayYangMillsPromotedHereIsFalse :
   clayYangMillsPromotedHereFlag canonicalReceipt ≡ false
-canonicalClayYangMillsPromotedHereIsFalse =
-  refl
-
-sprint118AllMoscoCompactnessObligationsClosedHereIsFalse :
-  Sprint118.allMoscoCompactnessObligationsClosedHere ≡ false
-sprint118AllMoscoCompactnessObligationsClosedHereIsFalse =
-  refl
-
-upstreamWeakCompactnessClosedIsFalse :
-  Weak110.weakSubsequenceExtractionProvedHere ≡ false
-upstreamWeakCompactnessClosedIsFalse =
-  refl
-
-upstreamClosedFormLowerSemicontinuityClosedIsFalse :
-  Closed110.closedFormCriterionClosedHere ≡ false
-upstreamClosedFormLowerSemicontinuityClosedIsFalse =
-  refl
-
-upstreamRecoveryLimsupClosedIsFalse :
-  Recovery110.moscoRecoverySideClosedHere ≡ false
-upstreamRecoveryLimsupClosedIsFalse =
-  refl
-
-upstreamNoBottomSpectrumPollutionClosedIsFalse :
-  Compact109.noBottomSpectrumPollutionCompactnessTheoremProved ≡ false
-upstreamNoBottomSpectrumPollutionClosedIsFalse =
-  refl
-
-upstreamNoCollapseAtZeroClosedIsFalse :
-  Collapse110.noCollapseAtZeroClosed ≡ false
-upstreamNoCollapseAtZeroClosedIsFalse =
+canonicalReceiptClayYangMillsPromotedHereIsFalse =
   refl
