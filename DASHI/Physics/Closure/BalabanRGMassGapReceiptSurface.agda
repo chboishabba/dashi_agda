@@ -58,6 +58,9 @@ data YangMillsMassGapClaimStage : Set where
   osterwalderSchraderReconstruction :
     YangMillsMassGapClaimStage
 
+  continuumTransferNoSpectralPollutionInterface :
+    YangMillsMassGapClaimStage
+
   compactSimpleGroupExtension :
     YangMillsMassGapClaimStage
 
@@ -70,6 +73,7 @@ canonicalYangMillsMassGapClaimStages =
   latticeTransferMatrixGap
   ∷ balabanMultiscaleRGInduction
   ∷ osterwalderSchraderReconstruction
+  ∷ continuumTransferNoSpectralPollutionInterface
   ∷ compactSimpleGroupExtension
   ∷ machineVerificationIntake
   ∷ []
@@ -93,6 +97,15 @@ data BalabanRGMassGapOpenObligation : Set where
   missingOSReconstructionAuthority :
     BalabanRGMassGapOpenObligation
 
+  missingNormResolventTransferMatrixConvergenceH3a :
+    BalabanRGMassGapOpenObligation
+
+  missingVacuumProjectionContinuityH3b :
+    BalabanRGMassGapOpenObligation
+
+  missingNoSpectralPollutionUpgradeBeyondMosco :
+    BalabanRGMassGapOpenObligation
+
   missingCompactSimpleGroupCoverageAuthority :
     BalabanRGMassGapOpenObligation
 
@@ -105,8 +118,89 @@ canonicalBalabanRGMassGapOpenObligations =
   ∷ missingLocalKernelImport
   ∷ missingDASHIWilsonPlaquetteBinding
   ∷ missingOSReconstructionAuthority
+  ∷ missingNormResolventTransferMatrixConvergenceH3a
+  ∷ missingVacuumProjectionContinuityH3b
+  ∷ missingNoSpectralPollutionUpgradeBeyondMosco
   ∷ missingCompactSimpleGroupCoverageAuthority
   ∷ []
+
+data BalabanContinuumTransferDependency : Set where
+  h3aPrincipalBalabanIntake :
+    BalabanContinuumTransferDependency
+
+  h3bDownstreamVacuumProjectionContinuity :
+    BalabanContinuumTransferDependency
+
+  noSpectralPollutionRequiresH3aAndH3b :
+    BalabanContinuumTransferDependency
+
+canonicalBalabanContinuumTransferDependencies :
+  List BalabanContinuumTransferDependency
+canonicalBalabanContinuumTransferDependencies =
+  h3aPrincipalBalabanIntake
+  ∷ h3bDownstreamVacuumProjectionContinuity
+  ∷ noSpectralPollutionRequiresH3aAndH3b
+  ∷ []
+
+record BalabanContinuumTransferFrontierReceipt : Setω where
+  field
+    dependencies :
+      List BalabanContinuumTransferDependency
+
+    dependenciesAreCanonical :
+      dependencies
+      ≡
+      canonicalBalabanContinuumTransferDependencies
+
+    h3aIsPrincipalBalabanIntake :
+      Bool
+
+    h3aIsPrincipalBalabanIntakeIsTrue :
+      h3aIsPrincipalBalabanIntake ≡ true
+
+    h3bIsSecondaryDownstream :
+      Bool
+
+    h3bIsSecondaryDownstreamIsTrue :
+      h3bIsSecondaryDownstream ≡ true
+
+    noSpectralPollutionNeedsBothH3aAndH3b :
+      Bool
+
+    noSpectralPollutionNeedsBothH3aAndH3bIsTrue :
+      noSpectralPollutionNeedsBothH3aAndH3b ≡ true
+
+    frontierBoundary :
+      List String
+
+open BalabanContinuumTransferFrontierReceipt public
+
+canonicalBalabanContinuumTransferFrontierReceipt :
+  BalabanContinuumTransferFrontierReceipt
+canonicalBalabanContinuumTransferFrontierReceipt =
+  record
+    { dependencies =
+        canonicalBalabanContinuumTransferDependencies
+    ; dependenciesAreCanonical =
+        refl
+    ; h3aIsPrincipalBalabanIntake =
+        true
+    ; h3aIsPrincipalBalabanIntakeIsTrue =
+        refl
+    ; h3bIsSecondaryDownstream =
+        true
+    ; h3bIsSecondaryDownstreamIsTrue =
+        refl
+    ; noSpectralPollutionNeedsBothH3aAndH3b =
+        true
+    ; noSpectralPollutionNeedsBothH3aAndH3bIsTrue =
+        refl
+    ; frontierBoundary =
+        "H3a is the principal Clay-facing Balaban intake: trace-norm or norm-resolvent transfer-matrix convergence on the vacuum-orthogonal sector"
+        ∷ "H3b is secondary and downstream: vacuum-projection continuity is not an independent front-line intake once H3a and RP.4 are available"
+        ∷ "no-spectral-pollution is fail-closed and waits for both H3a and H3b; Mosco liminf control alone does not promote it"
+        ∷ []
+    }
 
 data BalabanRGMassGapPromotionAuthorityToken : Set where
 
@@ -494,6 +588,9 @@ record MassGapDepthIndexedVsContinuumStatus : Setω where
     quantifierExchangeReceipt :
       MassGapQuantifierExchangeReceipt
 
+    continuumTransferFrontier :
+      BalabanContinuumTransferFrontierReceipt
+
     continuumPromoted :
       Bool
 
@@ -519,6 +616,8 @@ canonicalMassGapDepthIndexedVsContinuumStatus =
         refl
     ; quantifierExchangeReceipt =
         canonicalMassGapQuantifierExchangeReceipt
+    ; continuumTransferFrontier =
+        canonicalBalabanContinuumTransferFrontierReceipt
     ; continuumPromoted =
         false
     ; continuumPromotedIsFalse =
@@ -527,6 +626,8 @@ canonicalMassGapDepthIndexedVsContinuumStatus =
         "finite-depth lattice mass-gap receipts are inhabited at every Nat-indexed lattice depth"
         ∷ "the pro-object receipt records the whole depth-indexed family but does not supply a continuum limit theorem"
         ∷ "pointwise forall d positivity is recorded separately from uniform exists epsilon control"
+        ∷ "the corrected continuum-transfer boundary makes H3a the principal Balaban intake and treats H3b as downstream vacuum-projection continuity"
+        ∷ "no-spectral-pollution below the finite-depth margin is fail-closed on both H3a and H3b and is not supplied by Mosco convergence alone"
         ∷ "Clay official status remains unsolved in this surface"
         ∷ "continuum promotion waits for an external Balaban master bound and accepted Odusanya authority"
         ∷ []
@@ -651,6 +752,7 @@ canonicalVerifiedMassGapAuthorityStatusReceipt =
         "Cambridge/Open Engage Agawa items are recorded only as working preprint claims under review"
         ∷ "Zenodo dissolution is recorded only as an alternative campaign-style finite/discrete-lattice claim"
         ∷ "local finite-depth finite-carrier spectral-gap receipts do not supply continuum or Clay authority"
+        ∷ "continuum transfer remains open with H3a as the principal Balaban intake, H3b downstream, and no-spectral-pollution waiting on both"
         ∷ "no terminal, continuum, Clay, journal, or community promotion is constructed here"
         ∷ []
     }
@@ -2941,6 +3043,124 @@ canonicalOsterwalderSchraderReconstructionIntake =
         refl
     }
 
+record ContinuumTransferNoSpectralPollutionIntake : Setω where
+  field
+    stage :
+      YangMillsMassGapClaimStage
+
+    stageIsContinuumTransfer :
+      stage ≡ continuumTransferNoSpectralPollutionInterface
+
+    finiteDepthGapInputShape :
+      String
+
+    finiteDepthGapInputShape-v :
+      finiteDepthGapInputShape
+      ≡
+      "spec-H_N-subset-zero-union-m-star-infinity-with-uniform-finite-depth-gap-on-vacuum-complement"
+
+    normResolventTransferMatrixObligation :
+      String
+
+    normResolventTransferMatrixObligation-v :
+      normResolventTransferMatrixObligation
+      ≡
+      "H3a-trace-norm-or-norm-resolvent-convergence-of-finite-transfer-matrices-on-vacuum-orthogonal-sector"
+
+    vacuumProjectionContinuityObligation :
+      String
+
+    vacuumProjectionContinuityObligation-v :
+      vacuumProjectionContinuityObligation
+      ≡
+      "H3b-OS-vacuum-compatibility-and-vacuum-projection-continuity-P_N-Omega-to-P_infty-Omega"
+
+    noSpectralPollutionRequirement :
+      String
+
+    noSpectralPollutionRequirement-v :
+      noSpectralPollutionRequirement
+      ≡
+      "no-spectral-pollution-below-m-star-requires-H3a-and-H3b-and-does-not-follow-from-Mosco-alone"
+
+    moscoConvergenceAloneIsInsufficient :
+      Bool
+
+    moscoConvergenceAloneIsInsufficientIsTrue :
+      moscoConvergenceAloneIsInsufficient ≡ true
+
+    h3aPrimaryOpenObligation :
+      Bool
+
+    h3aPrimaryOpenObligationIsTrue :
+      h3aPrimaryOpenObligation ≡ true
+
+    h3bSecondaryOpenObligation :
+      Bool
+
+    h3bSecondaryOpenObligationIsTrue :
+      h3bSecondaryOpenObligation ≡ true
+
+    noSpectralPollutionDischargedHere :
+      Bool
+
+    noSpectralPollutionDischargedHereIsFalse :
+      noSpectralPollutionDischargedHere ≡ false
+
+    continuumTransferBoundary :
+      List String
+
+open ContinuumTransferNoSpectralPollutionIntake public
+
+canonicalContinuumTransferNoSpectralPollutionIntake :
+  ContinuumTransferNoSpectralPollutionIntake
+canonicalContinuumTransferNoSpectralPollutionIntake =
+  record
+    { stage =
+        continuumTransferNoSpectralPollutionInterface
+    ; stageIsContinuumTransfer =
+        refl
+    ; finiteDepthGapInputShape =
+        "spec-H_N-subset-zero-union-m-star-infinity-with-uniform-finite-depth-gap-on-vacuum-complement"
+    ; finiteDepthGapInputShape-v =
+        refl
+    ; normResolventTransferMatrixObligation =
+        "H3a-trace-norm-or-norm-resolvent-convergence-of-finite-transfer-matrices-on-vacuum-orthogonal-sector"
+    ; normResolventTransferMatrixObligation-v =
+        refl
+    ; vacuumProjectionContinuityObligation =
+        "H3b-OS-vacuum-compatibility-and-vacuum-projection-continuity-P_N-Omega-to-P_infty-Omega"
+    ; vacuumProjectionContinuityObligation-v =
+        refl
+    ; noSpectralPollutionRequirement =
+        "no-spectral-pollution-below-m-star-requires-H3a-and-H3b-and-does-not-follow-from-Mosco-alone"
+    ; noSpectralPollutionRequirement-v =
+        refl
+    ; moscoConvergenceAloneIsInsufficient =
+        true
+    ; moscoConvergenceAloneIsInsufficientIsTrue =
+        refl
+    ; h3aPrimaryOpenObligation =
+        true
+    ; h3aPrimaryOpenObligationIsTrue =
+        refl
+    ; h3bSecondaryOpenObligation =
+        true
+    ; h3bSecondaryOpenObligationIsTrue =
+        refl
+    ; noSpectralPollutionDischargedHere =
+        false
+    ; noSpectralPollutionDischargedHereIsFalse =
+        refl
+    ; continuumTransferBoundary =
+        "The finite-depth/local finite-carrier lattice gap is recorded as input data for the continuum-transfer interface"
+        ∷ "H3a is the primary open obligation: trace-norm or norm-resolvent convergence of the transfer matrices on the vacuum-orthogonal sector"
+        ∷ "H3b is the secondary open obligation: OS-vacuum compatibility and continuity of the vacuum projection"
+        ∷ "No-spectral-pollution below the finite-depth margin depends on H3a and H3b together and is not discharged by Mosco convergence alone"
+        ∷ "This interface keeps continuum and Clay promotion false until the continuum-transfer obligations are actually proved"
+        ∷ []
+    }
+
 record BalabanRGMassGapReceiptSurface : Setω where
   field
     status :
@@ -2960,6 +3180,9 @@ record BalabanRGMassGapReceiptSurface : Setω where
 
     osReconstruction :
       OsterwalderSchraderReconstructionIntake
+
+    continuumTransferInterface :
+      ContinuumTransferNoSpectralPollutionIntake
 
     depthIndexedVsContinuumStatus :
       MassGapDepthIndexedVsContinuumStatus
@@ -3107,6 +3330,8 @@ canonicalBalabanRGMassGapReceiptSurface =
         canonicalBalabanMasterInductionIntake
     ; osReconstruction =
         canonicalOsterwalderSchraderReconstructionIntake
+    ; continuumTransferInterface =
+        canonicalContinuumTransferNoSpectralPollutionIntake
     ; depthIndexedVsContinuumStatus =
         canonicalMassGapDepthIndexedVsContinuumStatus
     ; quantifierExchangeReceipt =
@@ -3191,6 +3416,10 @@ canonicalBalabanRGMassGapReceiptSurface =
         "Finite-depth lattice mass-gap receipts are inhabited at every Nat-indexed lattice depth"
         ∷ "The depth-indexed pro-object receipt is promoted only as a finite-depth/pro-object surface"
         ∷ "The historical quantifier-exchange receipt remains recorded as an open intake surface for older Balaban/Odusanya authority paths"
+        ∷ "The corrected continuum-transfer interface is explicit: finite lattice gap positive, continuum transfer still open"
+        ∷ "H3a norm-resolvent/transfer-matrix convergence on the vacuum-orthogonal sector is the primary open analytic obligation"
+        ∷ "H3b OS-vacuum compatibility and vacuum-projection continuity is a secondary open obligation"
+        ∷ "No-spectral-pollution is not obtained from Mosco convergence alone; it remains contingent on the continuum-transfer obligations"
         ∷ "UniformBalaban and AgawaIRFixedPoint are alternative continuum authority receipts and remain non-Clay-promoting without an authority token"
         ∷ "Cambridge/Open Engage Agawa items are working/preprint claims under review, not accepted authority"
         ∷ "Zenodo dissolution is an alternative/campaign-style finite/discrete-lattice claim, not continuum Clay authority"

@@ -10,7 +10,7 @@ For a new serious reader, the important split is:
 - `speculative`: roadmap or intuition surfaces that are not current repo claims
 
 For the current "DASHI as simulator" orientation, start with
-`Docs/SimulatorRoadmap.md`. It explains the checked unified facade, the
+`Docs/roadmaps/SimulatorRoadmap.md`. It explains the checked unified facade, the
 cross-scale matter ladder, and the first recommended quantitative slice:
 composition vector -> bounded matter/force proxy carrier -> stability observable ->
 receipt -> fail-closed Agda guard. This is a simulator scaffold and roadmap,
@@ -20,7 +20,7 @@ The first executable slice is now present as
 `scripts/run_stellar_composition_proxy_diagnostic.py` with the Agda guard
 `DASHI.Unified.StellarCompositionProxyReceipt`; it remains proxy-only and
 non-promoting.
-The broader route/lane joining plan is `Docs/UnifiedRoutesLanePlan.md`, which
+The broader route/lane joining plan is `Docs/support/reference/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
 
@@ -602,7 +602,11 @@ transfer gates.
 `YMBruhatTitsToOSLatticeTransferBoundary` records external 2026
 OS/mass-gap preprints as candidate authorities only; DASHI still has to prove
 BT-to-Wilson action comparison, reflection positivity, clustering/DS
-hypotheses, observable-class inclusion, and no spectral pollution.  Level-zero/cuspidal and
+hypotheses, observable-class inclusion, the primary H3a transfer-matrix /
+norm-resolvent convergence obligation on the vacuum-orthogonal sector, the
+secondary H3b vacuum-projection continuity obligation against the
+OS-reconstructed vacuum, and no spectral pollution as a consequence of those
+stronger interfaces rather than of Mosco compactness alone.  Level-zero/cuspidal and
 BT-building cohomology inputs are external-boundary rows only; YM
 sheaf-rigidity, holonomy-action, self-adjoint quotient, OS, and continuum
 transfer proofs remain open.  The core unification spine likewise remains
@@ -1118,7 +1122,9 @@ Current YM boundary: Sprint 89 closes the lattice mass-gap provider in the
 scoped-authority receipt sense. Sprint 90 records the continuum survival
 interface
 `WC3UniformClusterSummability -> NoSpectralPollutionUnderContinuumLimit ->
-PositiveContinuumMassGap` as conditional only. WC3, SU(3) continuum
+PositiveContinuumMassGap` as conditional only, with the corrected warning that
+the hard open interface still includes H3a transport-matrix / norm-resolvent
+control and H3b vacuum-projection continuity against the RP.4 vacuum. WC3, SU(3) continuum
 nontriviality, SU(N)>2 extension, external acceptance, and
 `clayYangMillsPromoted` remain open or false. Sprint 91 records the first
 new-math WC3 architecture: the Cauchy-Schwarz conversion from the Sprint 80
@@ -1466,8 +1472,8 @@ promotion is claimed.
 
 Use one of these reader tracks first:
 
-- Repo track: `Docs/RepoGuide.md`
-- Physics/unification track: `Docs/PhysicsGuide.md`
+- Repo track: `Docs/support/reference/RepoGuide.md`
+- Physics/unification track: `Docs/support/reference/PhysicsGuide.md`
 - Physics lane maturity matrix: `Docs/PhysicsLaneMaturityMatrix.md`
 - SeaMeInIt interop track:
   `Docs/SeaMeInItROMKernelFormalism.md`,
@@ -2630,7 +2636,7 @@ Sprint 5 worker assignment:
 W1/W2 to Gate3, W3/W4 to YM, W5 to NS, and W6 to governance; it records
 ownership only.
 - Complete verified physics unification roadmap:
-  `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`
+  `Docs/roadmaps/CompleteVerifiedPhysicsUnificationRoadmap.md`
   - `G4` / `W-GR` is tracked by the existing `W5` GR/QFT consumer lane on the
     worker coordination board; this is ownership wiring only, not theorem
     closure.
@@ -3052,7 +3058,7 @@ Archive-backed status update:
 
 The historical closure checklist is complete and now serves as provenance. The
 active blocker queue is coordinated through `Docs/WorkerCoordinationBoard.md`
-and `TODO.md`, with validation policy in `Docs/AgdaValidationTargets.md` and
+and `TODO.md`, with validation policy in `Docs/support/reference/AgdaValidationTargets.md` and
 promotion governance in `Docs/OriginTraceabilityLedger.md`.
 
 Current worker lanes:
@@ -3518,14 +3524,14 @@ depends on that surface.
 - Repo reader metasystem: `Docs/RepoMetasystem.puml` and `Docs/RepoMetasystem.svg`
 - Public Paper 1 narrative flow: `Docs/PublicPaperNarrativeFlow.puml` and
   `Docs/PublicPaperNarrativeFlow.svg`
-- Paper 1 manuscript source: `Docs/PaperDraftWorkingFolder/Paper1_Manuscript.md`
+- Paper 1 manuscript source: `Docs/papers/drafts/PaperDraftWorkingFolder/Paper1_Manuscript.md`
   and `.tex`; full Agda constructor names belong in the reproducibility
   receipt index, while the body should use human-readable receipt labels. The
   manuscript glossary records that G2/G3/G6 are DASHI-native lane labels, not
   standard-object equivalence claims unless explicitly inhabited.
 - Worker coordination map: `Docs/WorkerCoordinationMap.puml` and
   `Docs/WorkerCoordinationMap.svg`
-- Canonical theorem spine: `Docs/CanonicalProofSpine.puml` and `Docs/CanonicalProofSpine.svg`
+- Canonical theorem spine: `Docs/diagrams/CanonicalProofSpine.puml` and `Docs/diagrams/CanonicalProofSpine.svg`
 - Physics/unification boundary map: `Docs/PhysicsUnificationMap.puml` and `Docs/PhysicsUnificationMap.svg`
 - Physical reality roadmap: `Docs/PhysicsRealityRoadmap.puml` and `Docs/PhysicsRealityRoadmap.svg`
 - Status-board convention:
@@ -3533,8 +3539,12 @@ depends on that surface.
   yellow = bridge or advanced-but-blocked,
   blue = packaging/interface,
   red/pink = empirical non-claim or open gate.
-- Observable/signature round: `Docs/ObservableSignatureGaugeEntryRound.puml` and `Docs/ObservableSignatureGaugeEntryRound.svg`
-- Training dynamics bridge: `Docs/TRAINING_DYNAMICS.puml` and `Docs/TRAINING_DYNAMICS.svg`
+- Observable/signature round: `Docs/diagrams/ObservableSignatureGaugeEntryRound.puml` and `Docs/diagrams/ObservableSignatureGaugeEntryRound.svg`
+- Training dynamics bridge: `Docs/diagrams/TRAINING_DYNAMICS.puml` and `Docs/diagrams/TRAINING_DYNAMICS.svg`
+- Agda dependency graphs:
+  `Docs/diagrams/NSPaper1ClayTargetReceipt.svg`,
+  `Docs/diagrams/YMPaper3ClayTargetReceipt.svg`,
+  `Docs/diagrams/UnifiedPhysicsTheorem.svg`
 - Versioned PlantUML sources: `Docs/*.puml`
 - Versioned rendered previews: `Docs/*.svg` and `Docs/*.png`
 - Re-render command: `./scripts/render_docs_diagrams.sh`
@@ -3630,11 +3640,11 @@ depends on that surface.
   singleton surface, and
   `Ontology.Hecke.CurrentSaturatedContractiveCountLayer2Invariant`
   gives the same specialization on the current saturated branch.
-- Closure contract status now lives in `Docs/ClosureContractStatus.md`:
+- Closure contract status now lives in `Docs/support/reference/ClosureContractStatus.md`:
   the strong layer carries discharged nondegeneracy, but the current
   signature -> Clifford -> spin/Dirac -> full-closure chain still factors only
   through the normalized-quadratic boundary.
-- Routine Agda target policy now lives in `Docs/AgdaValidationTargets.md`:
+- Routine Agda target policy now lives in `Docs/support/reference/AgdaValidationTargets.md`:
   use focused canonical bridge modules in normal edit loops, treat
   `PhysicsClosureValidationSummary.agda` as heavy/avoid-by-default, and treat
   `Everything.agda` as an occasional bounded checkpoint rather than a routine
@@ -4445,11 +4455,11 @@ Scope boundary:
 Paper 1 origins figure pack:
 
 - manifest:
-  `Docs/PaperDraftWorkingFolder/FigureCandidateManifest.md`;
+  `Docs/papers/drafts/PaperDraftWorkingFolder/FigureCandidateManifest.md`;
 - stable repo copies:
   `Docs/Images/paper1-origin-figures/`;
 - LaTeX-facing figures:
-  `Docs/PaperDraftWorkingFolder/figures/paper1-origin-figures/` now contains
+  `Docs/papers/drafts/PaperDraftWorkingFolder/figures/paper1-origin-figures/` now contains
   three larger origin figure groups for ultrametric refinement, tree-diffusion
   rollout, and branch-density/adaptive-refinement intuition. The old composite
   plate remains archived but is no longer the preferred manuscript figure.
@@ -5096,7 +5106,7 @@ For the current milestone order, see `Docs/PhysicsClosurePriorities.md`.
 For the current orbit-shell / Lorentz-signature framing, see
 `Docs/OrbitShellProfilesAndLorentzSignature.md`.
 For the authoritative Stage C theorem chain and module labels, see
-`Docs/ClosurePipeline.md`.
+`Docs/support/reference/ClosurePipeline.md`.
 
 ## Typecheck Performance Policy (Current)
 

@@ -1,0 +1,25 @@
+== DASHI/Physics/Closure/YMSprint119WeakCompactnessObligationReducer.agda ==
+command: timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YMSprint119WeakCompactnessObligationReducer.agda
+started: 2026-06-11T11:19:43+10:00
+
+Checking DASHI.Physics.Closure.YMSprint119WeakCompactnessObligationReducer (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint119WeakCompactnessObligationReducer.agda).
+ Checking DASHI.Physics.Closure.YMBruhatTitsToOSLatticeTransferBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint120WeakCompactnessCertificateInterface.agda:10,8-73
+cyclic module dependency:
+  DASHI.Physics.Closure.YMSprint119WeakCompactnessObligationReducer
+  DASHI.Physics.Closure.YMBruhatTitsToOSLatticeTransferBoundary
+  DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary
+  DASHI.Physics.Closure.YMHamiltonianDominatesFiniteHodgeDefectBoundary
+  DASHI.Physics.Closure.BTFiniteMetricGaugeCompatibilityKappaBoundary
+  DASHI.Physics.Closure.BTFiniteBuildingYMGapTransferBoundary
+  DASHI.Physics.Closure.YMSprint129SpectralGapTransportClosure
+  DASHI.Physics.Closure.YMSprint125SpectralGapTransportUnderMoscoInterface
+  DASHI.Physics.Closure.YMSprint124MoscoLiminfObligationLedger
+  DASHI.Physics.Closure.YMSprint123UniformFormLowerBoundInterface
+  DASHI.Physics.Closure.YMSprint120WeakCompactnessCertificateInterface
+  DASHI.Physics.Closure.YMSprint119WeakCompactnessObligationReducer
+when scope checking the declaration
+  import DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary as Rigidity
+
+exit_code: 42
+finished: 2026-06-11T11:20:06+10:00

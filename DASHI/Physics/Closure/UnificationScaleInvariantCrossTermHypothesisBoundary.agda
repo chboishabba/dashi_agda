@@ -119,6 +119,8 @@ data U1aHClause : Set where
     U1aHClause
   symmetricBilinearWitnessRecorded :
     U1aHClause
+  nonlinearYMGaugeQuotientDomainRecorded :
+    U1aHClause
   fourPointConsumerRecorded :
     U1aHClause
   parallelogramConsumerRecorded :
@@ -137,6 +139,7 @@ canonicalU1aHClauses =
   correctedCounterexampleRecorded
   ∷ crossTermDecompositionRecorded
   ∷ symmetricBilinearWitnessRecorded
+  ∷ nonlinearYMGaugeQuotientDomainRecorded
   ∷ fourPointConsumerRecorded
   ∷ parallelogramConsumerRecorded
   ∷ jordanVonNeumannConsumerRecorded
@@ -149,8 +152,8 @@ u1aHClauseCount : Nat
 u1aHClauseCount =
   listLength canonicalU1aHClauses
 
-u1aHClauseCountIs9 : u1aHClauseCount ≡ 9
-u1aHClauseCountIs9 =
+u1aHClauseCountIs10 : u1aHClauseCount ≡ 10
+u1aHClauseCountIs10 =
   refl
 
 data U1aHStage : Set where
@@ -159,6 +162,8 @@ data U1aHStage : Set where
   exposeCrossTermDecomposition :
     U1aHStage
   exposeSymmetricBilinearWitness :
+    U1aHStage
+  requireNonlinearYMGaugeQuotientDomain :
     U1aHStage
   handoffToFourPoint :
     U1aHStage
@@ -180,6 +185,7 @@ canonicalU1aHStages =
   rejectTwoHomogeneityAlone
   ∷ exposeCrossTermDecomposition
   ∷ exposeSymmetricBilinearWitness
+  ∷ requireNonlinearYMGaugeQuotientDomain
   ∷ handoffToFourPoint
   ∷ handoffToParallelogram
   ∷ handoffToJordanVonNeumann
@@ -193,8 +199,8 @@ u1aHStageCount : Nat
 u1aHStageCount =
   listLength canonicalU1aHStages
 
-u1aHStageCountIs10 : u1aHStageCount ≡ 10
-u1aHStageCountIs10 =
+u1aHStageCountIs11 : u1aHStageCount ≡ 11
+u1aHStageCountIs11 =
   refl
 
 data U1aHBlocker : Set where
@@ -205,6 +211,8 @@ data U1aHBlocker : Set where
   blocker-bilinearity-unproved :
     U1aHBlocker
   blocker-symmetry-unproved :
+    U1aHBlocker
+  blocker-nonlinear-ym-gauge-quotient-domain-unproved :
     U1aHBlocker
   blocker-four-point-unproved :
     U1aHBlocker
@@ -225,6 +233,7 @@ canonicalU1aHBlockers =
   ∷ blocker-cross-term-decomposition-unproved
   ∷ blocker-bilinearity-unproved
   ∷ blocker-symmetry-unproved
+  ∷ blocker-nonlinear-ym-gauge-quotient-domain-unproved
   ∷ blocker-four-point-unproved
   ∷ blocker-parallelogram-unproved
   ∷ blocker-jordan-von-neumann-unproved
@@ -237,8 +246,8 @@ u1aHBlockerCount : Nat
 u1aHBlockerCount =
   listLength canonicalU1aHBlockers
 
-u1aHBlockerCountIs10 : u1aHBlockerCount ≡ 10
-u1aHBlockerCountIs10 =
+u1aHBlockerCountIs11 : u1aHBlockerCount ≡ 11
+u1aHBlockerCountIs11 =
   refl
 
 ------------------------------------------------------------------------
@@ -262,6 +271,36 @@ scaleInvariantCrossTermTextIsCanonical :
   scaleInvariantCrossTermText
   ≡ "G(s1+s2)-G(s1)-G(s2)=2B(s1,s2)"
 scaleInvariantCrossTermTextIsCanonical =
+  refl
+
+ymLinearizedCurvatureBoundedConsumerText : String
+ymLinearizedCurvatureBoundedConsumerText =
+  "At the linearized YM level, the curvature norm is admissible only as a bounded quadratic/JvN consumer surface."
+
+ymLinearizedCurvatureBoundedConsumerTextIsCanonical :
+  ymLinearizedCurvatureBoundedConsumerText
+  ≡ "At the linearized YM level, the curvature norm is admissible only as a bounded quadratic/JvN consumer surface."
+ymLinearizedCurvatureBoundedConsumerTextIsCanonical =
+  refl
+
+ymNonlinearGaugeQuotientBlockerText : String
+ymNonlinearGaugeQuotientBlockerText =
+  "At the nonlinear YM level, the curvature norm is not the relevant bilinear/quadratic datum on raw connections; one must first pass to gauge-equivalence classes / quotient semantics."
+
+ymNonlinearGaugeQuotientBlockerTextIsCanonical :
+  ymNonlinearGaugeQuotientBlockerText
+  ≡ "At the nonlinear YM level, the curvature norm is not the relevant bilinear/quadratic datum on raw connections; one must first pass to gauge-equivalence classes / quotient semantics."
+ymNonlinearGaugeQuotientBlockerTextIsCanonical =
+  refl
+
+ymPureGaugeNullDirectionsBlockerText : String
+ymPureGaugeNullDirectionsBlockerText =
+  "Pure-gauge/null directions must be quotiented before the Jordan-von Neumann pipeline is applied at the nonlinear YM level."
+
+ymPureGaugeNullDirectionsBlockerTextIsCanonical :
+  ymPureGaugeNullDirectionsBlockerText
+  ≡ "Pure-gauge/null directions must be quotiented before the Jordan-von Neumann pipeline is applied at the nonlinear YM level."
+ymPureGaugeNullDirectionsBlockerTextIsCanonical =
   refl
 
 ------------------------------------------------------------------------
@@ -301,6 +340,15 @@ symmetricBilinearityProved =
 symmetricBilinearityProvedIsFalse :
   symmetricBilinearityProved ≡ false
 symmetricBilinearityProvedIsFalse =
+  refl
+
+nonlinearYMGaugeQuotientDomainResolved : Bool
+nonlinearYMGaugeQuotientDomainResolved =
+  false
+
+nonlinearYMGaugeQuotientDomainResolvedIsFalse :
+  nonlinearYMGaugeQuotientDomainResolved ≡ false
+nonlinearYMGaugeQuotientDomainResolvedIsFalse =
   refl
 
 fourPointCancellationProved : Bool
@@ -391,6 +439,9 @@ record UnificationScaleInvariantCrossTermHypothesisBoundary : Set where
     bilinearityDerived :
       Bool
 
+    nonlinearYMGaugeQuotientDomainDerived :
+      Bool
+
     fourPointDerived :
       Bool
 
@@ -432,6 +483,8 @@ canonicalUnificationScaleInvariantCrossTermHypothesisBoundary =
         scaleInvariantCrossTermDecompositionProved
     ; bilinearityDerived =
         symmetricBilinearityProved
+    ; nonlinearYMGaugeQuotientDomainDerived =
+        nonlinearYMGaugeQuotientDomainResolved
     ; fourPointDerived =
         fourPointCancellationProved
     ; parallelogramDerived =
@@ -474,6 +527,13 @@ canonicalSymmetricBilinearityStillOpen :
     canonicalUnificationScaleInvariantCrossTermHypothesisBoundary
   ≡ false
 canonicalSymmetricBilinearityStillOpen =
+  refl
+
+canonicalNonlinearYMGaugeQuotientDomainStillOpen :
+  nonlinearYMGaugeQuotientDomainDerived
+    canonicalUnificationScaleInvariantCrossTermHypothesisBoundary
+  ≡ false
+canonicalNonlinearYMGaugeQuotientDomainStillOpen =
   refl
 
 canonicalU1aHFourPointStillOpen :

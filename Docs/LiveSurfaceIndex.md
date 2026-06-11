@@ -10,37 +10,43 @@ support, and which files are historical or prep surfaces.
 
 - `README.md`: top-level repo orientation.
 - `ROOT_INDEX.md`: root router for live surfaces and cleanup policy.
-- `Docs/RepoGuide.md`: human guide to repo structure and reading order.
-- `Docs/AgdaValidationTargets.md`: focused validation policy.
 - `architecture.md`: architecture and diagram entrypoint.
+- `Docs/ProofFirstRepoPolicy.md`: proof-first visibility rule for what should
+  remain on the default human path.
 
 ## Live Paper Corpus
 
 These are the only active manuscript homes in the current paper corpus:
 
-- `Docs/Paper1NavierStokesClayDraft.md`
-- `Docs/Paper3YangMillsClayDraft.md`
-- `Docs/Paper8UnificationDraft.md`
+- `Docs/papers/live/Paper1NavierStokesClayDraft.md`
+- `Docs/papers/live/Paper3YangMillsClayDraft.md`
+- `Docs/papers/live/Paper8UnificationDraft.md`
 
 These are the shared live support surfaces for that corpus:
 
-- `Docs/SupportCompendium.md`
-- `Docs/PaperCommonCitationLedger.md`
-- `Docs/PaperCommonNotationGlossary.md`
+- `Docs/support/live/SupportCompendium.md`
+- `Docs/support/live/PaperCommonCitationLedger.md`
+- `Docs/support/live/PaperCommonNotationGlossary.md`
 
 Historical or source-feeding paper material is still useful, but it is not a
 coequal live manuscript unless it is one of the six files above.
+
+Under the proof-first repo policy, draft, receipt, and archive surfaces should
+move off the default reading path unless a live proof surface directly consumes
+them.
 
 ## Live Support And Governance Docs
 
 Use these as current support routers rather than browsing all of `Docs/`:
 
+- `Docs/support/README.md`
 - `Docs/RepoStructureCleanupRoadmap.md`
-- `Docs/CurrentGateStatus.md`
-- `Docs/ClosurePipeline.md`
-- `Docs/CrossPaperReceiptIndex.md`
-- `Docs/CanonicalProofSpine.md`
-- `Docs/CompleteVerifiedPhysicsUnificationRoadmap.md`
+- `Docs/support/reference/RepoGuide.md`
+- `Docs/support/reference/AgdaValidationTargets.md`
+- `Docs/support/reference/CurrentGateStatus.md`
+- `Docs/support/reference/ClosurePipeline.md`
+- `Docs/support/reference/CanonicalProofSpine.md`
+- `Docs/roadmaps/CompleteVerifiedPhysicsUnificationRoadmap.md`
 
 ## What Is Not A Live Entry Surface
 
@@ -49,9 +55,9 @@ default first files for a new reader:
 
 - section drafts and skeletons such as `Paper6Section*.md`, `Paper8Section*.md`,
   and `Paper*Skeleton*.md`
-- working folders such as `Docs/PaperDraftWorkingFolder/`
-- authority packets under `Docs/ExternalAuthorityReceipts/`
-- worker packets under `Docs/worker-packets/`
+- working folders such as `Docs/papers/drafts/PaperDraftWorkingFolder/`
+- authority packets under `Docs/archive/authority/ExternalAuthorityReceipts/`
+- worker packets under `Docs/archive/worker-packets/`
 - historical planning under `.planning/`
 - generated outputs, caches, and archives
 
@@ -67,6 +73,7 @@ Default search should usually ignore:
 
 - submodules
 - generated outputs
+- legacy paper lanes
 - archived docs
 - external authority packets
 - working folders

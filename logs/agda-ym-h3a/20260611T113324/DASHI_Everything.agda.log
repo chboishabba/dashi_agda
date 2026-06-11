@@ -1,0 +1,13 @@
+== DASHI/Everything.agda ==
+command: timeout 600s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda
+started: 2026-06-11T11:33:24+10:00
+
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+ Checking DASHI.Physics.Closure.NSA6A4BiasToLeakageClosureCompositeBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda:557,3-7
+9 != 8 of type Nat
+when checking that the expression refl has type
+a4A5A6HandoffGuardCount ≡ 8
+
+exit_code: 42
+finished: 2026-06-11T11:33:57+10:00

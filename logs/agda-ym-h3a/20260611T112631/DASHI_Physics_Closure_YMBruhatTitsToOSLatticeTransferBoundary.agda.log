@@ -1,0 +1,7 @@
+== DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda ==
+command: timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda
+started: 2026-06-11T11:27:57+10:00
+
+
+exit_code: 0
+finished: 2026-06-11T11:28:21+10:00

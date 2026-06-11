@@ -10,9 +10,10 @@ without treating every root file as equally authoritative.
 - `README.md`: repo orientation and current high-level status.
 - `architecture.md`: canonical architecture and diagram entrypoint.
 - `Docs/LiveSurfaceIndex.md`: shortest live corpus and support router.
-- `Docs/RepoGuide.md`: detailed repository guide.
-- `Docs/PhysicsGuide.md`: physics-facing guide.
-- `Docs/AgdaValidationTargets.md`: focused validation policy.
+- `Docs/ProofFirstRepoPolicy.md`: proof-first visibility and archive policy.
+- `Docs/support/reference/RepoGuide.md`: detailed repository guide.
+- `Docs/support/reference/PhysicsGuide.md`: physics-facing guide.
+- `Docs/support/reference/AgdaValidationTargets.md`: focused validation policy.
 - `status.md`: current live state.
 - `TODO.md`: current live blockers.
 - `CHANGELOG.md`: release and claim-state history.
@@ -21,12 +22,12 @@ without treating every root file as equally authoritative.
 
 The current publishable programme is organized as:
 
-- Paper 1: `Docs/Paper1NavierStokesClayDraft.md`
-- Paper 3: `Docs/Paper3YangMillsClayDraft.md`
-- Paper 8: `Docs/Paper8UnificationDraft.md`
-- shared support: `Docs/SupportCompendium.md`,
-  `Docs/PaperCommonCitationLedger.md`, and
-  `Docs/PaperCommonNotationGlossary.md`
+- Paper 1: `Docs/papers/live/Paper1NavierStokesClayDraft.md`
+- Paper 3: `Docs/papers/live/Paper3YangMillsClayDraft.md`
+- Paper 8: `Docs/papers/live/Paper8UnificationDraft.md`
+- shared support: `Docs/support/live/SupportCompendium.md`,
+  `Docs/support/live/PaperCommonCitationLedger.md`, and
+  `Docs/support/live/PaperCommonNotationGlossary.md`
 
 Legacy papers and section drafts remain provenance or source-feeding surfaces.
 They are not equal-priority live manuscripts.
@@ -40,9 +41,10 @@ claims.
 - Aggregate check: `DASHI/Everything.agda`.
 - Primary formal tree: `DASHI/`.
 - Main current pressure point: `DASHI/Physics/Closure/`.
-- Canonical theorem-spine map: `Docs/CanonicalProofSpine.md`.
+- Canonical theorem-spine map: `Docs/support/reference/CanonicalProofSpine.md`.
 - Current cleanup roadmap: `Docs/RepoStructureCleanupRoadmap.md`.
 - Live paper corpus router: `Docs/LiveSurfaceIndex.md`.
+- Proof-first organization policy: `Docs/ProofFirstRepoPolicy.md`.
 
 ## Generated And Archive Policy
 
@@ -89,7 +91,7 @@ not permission to mutate sibling repos.
 ## Validation Commands
 
 Focused checks should use the lane-specific targets in
-`Docs/AgdaValidationTargets.md`.
+`Docs/support/reference/AgdaValidationTargets.md`.
 
 Final aggregate check:
 

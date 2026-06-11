@@ -26,8 +26,8 @@ record UnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary : Se
     moduloNullRouteReferenceRecordedIsTrue :
       moduloNullRouteReferenceRecorded ≡ true
     childStillFalse :
-      Child.canonicalUnificationCrossTermChildCompositeLightweightBoundary
-        .UnificationCrossTermChildCompositeLightweightBoundary.crossTermStillFalse ≡ refl
+      Child.UnificationCrossTermChildCompositeLightweightBoundary.crossTermStillFalse
+        Child.canonicalUnificationCrossTermChildCompositeLightweightBoundary ≡ refl
     consumerStillFalse :
       Consumer.NullTransportModuloNullConsumerProvedLightweight ≡ false
     terminalStillFalse :
@@ -50,4 +50,3 @@ canonicalUnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary =
     ; consumerStillFalse = refl
     ; terminalStillFalse = refl
     }
-

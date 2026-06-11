@@ -1,0 +1,8 @@
+== DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda ==
+command: timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda
+started: 2026-06-11T11:18:33+10:00
+
+Checking DASHI.Physics.Closure.YMSprint119TransferCalculusAllObligationsReducer (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda).
+
+exit_code: 0
+finished: 2026-06-11T11:18:55+10:00

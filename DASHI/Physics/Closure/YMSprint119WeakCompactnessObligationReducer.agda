@@ -20,10 +20,12 @@ import DASHI.Physics.Closure.YMSprint110CommonCarrierHilbertIdentification
 -- Sprint119 weak-compactness obligation reducer.
 --
 -- This module reduces the still-open weak compactness lane to the exact
--- inputs that must be supplied before the Sprint118 Mosco compactness package
--- can close.  It is fully inhabited and fail-closed: the reducer rows and
--- assembly receipts are true, while weak compactness, transfer lower bound,
--- continuum mass gap, and Clay Yang-Mills promotion remain false.
+-- inputs that must be supplied before the Sprint118 Mosco/form package can
+-- close its compactness half. Weak compactness is treated only as a Mosco
+-- liminf input: it does not by itself close the corrected continuum-transfer
+-- chain, does not imply H3a or H3b, and does not imply no-spectral-pollution.
+-- The reducer rows and assembly receipts are true, while every theorem and
+-- promotion gate remains false.
 
 sprintNumber : Nat
 sprintNumber = 119
@@ -75,9 +77,22 @@ carrier110SourcePath : String
 carrier110SourcePath =
   "DASHI/Physics/Closure/YMSprint110CommonCarrierHilbertIdentification.agda"
 
+correctedTransferBoundarySourcePath : String
+correctedTransferBoundarySourcePath =
+  "DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda"
+
+boundaryDownstreamH3aStillOpen : Bool
+boundaryDownstreamH3aStillOpen = false
+
+boundaryDownstreamH3bStillOpen : Bool
+boundaryDownstreamH3bStillOpen = false
+
+boundaryDownstreamNoSpectralPollutionStillOpen : Bool
+boundaryDownstreamNoSpectralPollutionStillOpen = false
+
 reducerStatementText : String
 reducerStatementText =
-  "Sprint119 reduces weak compactness to six exact inputs: bounded-energy tightness, common carrier Hilbert identification, subsequence extraction, gauge quotient sector compatibility, no escape to the null sector, and feed-through into Mosco liminf."
+  "Sprint119 reduces weak compactness to six exact inputs for the compactness half of Mosco/form convergence: bounded-energy tightness, common carrier Hilbert identification, subsequence extraction, gauge quotient sector compatibility, no escape to the null sector, and feed-through into Mosco liminf."
 
 boundedEnergyTightnessText : String
 boundedEnergyTightnessText =
@@ -101,11 +116,23 @@ noEscapeToNullSectorText =
 
 moscoLiminfFeedThroughText : String
 moscoLiminfFeedThroughText =
-  "Mosco liminf feed-through input: the extracted weak limit must be a valid continuum form-domain candidate for the closed-form lower semicontinuity lane."
+  "Mosco liminf feed-through input: the extracted weak limit must be a valid continuum form-domain candidate for the closed-form lower semicontinuity lane. This is only the compactness half of Mosco/form convergence and does not by itself imply H3a transfer convergence, H3b vacuum-projection continuity, or no-spectral-pollution."
+
+downstreamH3aBoundaryText : String
+downstreamH3aBoundaryText =
+  "Downstream H3a boundary: after weak compactness and the rest of the Mosco package, the corrected continuum-transfer route still requires transfer-matrix or norm-resolvent convergence on the vacuum-orthogonal sector."
+
+downstreamH3bBoundaryText : String
+downstreamH3bBoundaryText =
+  "Downstream H3b boundary: after weak compactness and the rest of the Mosco package, the corrected continuum-transfer route still requires RP.4-compatible vacuum-projection continuity for the limiting vacuum."
+
+downstreamNoSpectralPollutionBoundaryText : String
+downstreamNoSpectralPollutionBoundaryText =
+  "Downstream no-spectral-pollution boundary: weak compactness feeds Mosco liminf only; exclusion of spurious low spectrum is recorded only after H3a and H3b, not from compactness alone."
 
 nonPromotionBoundaryText : String
 nonPromotionBoundaryText =
-  "Sprint119 assembles the weak-compactness reducer only; weak compactness, all Mosco compactness obligations, transfer lower-bound readiness, transfer lower-bound theorem, continuum mass gap, and Clay Yang-Mills promotion remain false."
+  "Sprint119 assembles the weak-compactness reducer only. Weak compactness is upstream evidence for Mosco liminf and form convergence only; it does not by itself close the corrected continuum-transfer step. H3a transfer convergence, H3b vacuum-projection continuity, no-spectral-pollution, transfer lower-bound readiness, transfer lower-bound theorem, continuum mass gap, and Clay Yang-Mills promotion remain false."
 
 data WeakCompactnessInput : Set where
   bounded-energy-tightness :
@@ -252,6 +279,20 @@ record MoscoFeedThroughBoundary : Set where
       Bool
     weak110MoscoLiminfFedIsFalse :
       weak110MoscoLiminfFed ≡ false
+    correctedTransferBoundaryPath :
+      String
+    downstreamH3aStillOpen :
+      Bool
+    downstreamH3aStillOpenIsFalse :
+      downstreamH3aStillOpen ≡ false
+    downstreamH3bStillOpen :
+      Bool
+    downstreamH3bStillOpenIsFalse :
+      downstreamH3bStillOpen ≡ false
+    downstreamNoSpectralPollutionStillOpen :
+      Bool
+    downstreamNoSpectralPollutionStillOpenIsFalse :
+      downstreamNoSpectralPollutionStillOpen ≡ false
     transferLowerBoundReady :
       Bool
     transferLowerBoundReadyIsFalse :
@@ -474,6 +515,13 @@ canonicalMoscoFeedThroughBoundary =
     refl
     Weak110.moscoLiminfFedHere
     refl
+    correctedTransferBoundarySourcePath
+    boundaryDownstreamH3aStillOpen
+    refl
+    boundaryDownstreamH3bStillOpen
+    refl
+    boundaryDownstreamNoSpectralPollutionStillOpen
+    refl
     transferLowerBoundReadyHere
     refl
 
@@ -501,6 +549,7 @@ canonicalSourcePaths =
   ∷ weak110SourcePath
   ∷ compact109SourcePath
   ∷ carrier110SourcePath
+  ∷ correctedTransferBoundarySourcePath
   ∷ []
 
 canonicalEvidenceLedger : List String
@@ -512,6 +561,9 @@ canonicalEvidenceLedger =
   ∷ gaugeQuotientSectorCompatibilityText
   ∷ noEscapeToNullSectorText
   ∷ moscoLiminfFeedThroughText
+  ∷ downstreamH3aBoundaryText
+  ∷ downstreamH3bBoundaryText
+  ∷ downstreamNoSpectralPollutionBoundaryText
   ∷ nonPromotionBoundaryText
   ∷ []
 
@@ -542,9 +594,9 @@ canonicalReceipt :
 canonicalReceipt =
   canonicalYMSprint119WeakCompactnessObligationReducerReceipt
 
-finalReceipt :
+finalReceiptAlias :
   YMSprint119WeakCompactnessObligationReducerReceipt
-finalReceipt =
+finalReceiptAlias =
   canonicalReceipt
 
 canonicalReceiptReducerInhabitedHereIsTrue :

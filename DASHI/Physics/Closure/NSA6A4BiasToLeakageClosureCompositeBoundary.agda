@@ -209,9 +209,9 @@ a4BiasToLeakageClosureRungCount : Nat
 a4BiasToLeakageClosureRungCount =
   listLength canonicalA4BiasToLeakageClosureRungs
 
-a4BiasToLeakageClosureRungCountIs10 :
-  a4BiasToLeakageClosureRungCount ≡ 10
-a4BiasToLeakageClosureRungCountIs10 =
+a4BiasToLeakageClosureRungCountIs11 :
+  a4BiasToLeakageClosureRungCount ≡ 11
+a4BiasToLeakageClosureRungCountIs11 =
   refl
 
 ------------------------------------------------------------------------
@@ -505,9 +505,9 @@ a4BiasToLeakageClosureRowCount : Nat
 a4BiasToLeakageClosureRowCount =
   listLength canonicalA4BiasToLeakageClosureRows
 
-a4BiasToLeakageClosureRowCountIs10 :
-  a4BiasToLeakageClosureRowCount ≡ 10
-a4BiasToLeakageClosureRowCountIs10 =
+a4BiasToLeakageClosureRowCountIs11 :
+  a4BiasToLeakageClosureRowCount ≡ 11
+a4BiasToLeakageClosureRowCountIs11 =
   refl
 
 ------------------------------------------------------------------------
@@ -551,9 +551,9 @@ a4A5A6HandoffGuardCount : Nat
 a4A5A6HandoffGuardCount =
   listLength canonicalA4A5A6HandoffGuards
 
-a4A5A6HandoffGuardCountIs8 :
-  a4A5A6HandoffGuardCount ≡ 8
-a4A5A6HandoffGuardCountIs8 =
+a4A5A6HandoffGuardCountIs9 :
+  a4A5A6HandoffGuardCount ≡ 9
+a4A5A6HandoffGuardCountIs9 =
   refl
 
 ------------------------------------------------------------------------

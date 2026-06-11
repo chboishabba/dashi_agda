@@ -20,12 +20,18 @@ import DASHI.Physics.Closure.YMSprint89ScopedAuthorityTransferSpectralGapReceipt
 -- What closes here is only the conditional implication:
 --
 --   WC3 + tightness + reflection positivity + OS reconstruction
+--     + H3a transport/norm-resolvent interface
+--     + H3b vacuum-projection continuity
 --     -> uniform continuum clustering
 --     -> no spectral pollution at zero
 --     -> positive continuum mass gap.
 --
--- WC3 itself is not derived in repo.  The YM quotient Hamiltonian closability
--- and descent obligations are not derived.  Clay/YM promotion remains false.
+-- WC3 itself is not derived in repo.  RP.4/OS reconstruction is the route that
+-- supplies the limiting vacuum identity, but clustering, Mosco-style
+-- compactness, or reflection positivity alone do not close no-spectral-
+-- pollution without the stronger transport/projection-continuity interface.
+-- The YM quotient Hamiltonian closability and descent obligations are not
+-- derived.  Clay/YM promotion remains false.
 
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
@@ -114,7 +120,13 @@ canonicalWCContinuumInputs =
 data Sprint90OpenWall : Set where
   WC3UniformClusterSummabilityWall :
     Sprint90OpenWall
+  H3aTransferNormResolventInterfaceWall :
+    Sprint90OpenWall
+  H3bVacuumProjectionContinuityWall :
+    Sprint90OpenWall
   NoSpectralPollutionUnderContinuumLimitWall :
+    Sprint90OpenWall
+  MoscoOrClusteringAloneInsufficientForNoPollutionWall :
     Sprint90OpenWall
   LatticeGapSurvivesContinuumScalingWall :
     Sprint90OpenWall
@@ -134,7 +146,10 @@ data Sprint90OpenWall : Set where
 canonicalSprint90OpenWalls : List Sprint90OpenWall
 canonicalSprint90OpenWalls =
   WC3UniformClusterSummabilityWall
+  ∷ H3aTransferNormResolventInterfaceWall
+  ∷ H3bVacuumProjectionContinuityWall
   ∷ NoSpectralPollutionUnderContinuumLimitWall
+  ∷ MoscoOrClusteringAloneInsufficientForNoPollutionWall
   ∷ LatticeGapSurvivesContinuumScalingWall
   ∷ YMQuotientFormClosableWall
   ∷ GaugeQuotientDescentWall
@@ -236,11 +251,11 @@ continuumMassGapFromWC package =
 
 wcBoundarySource : String
 wcBoundarySource =
-  "Kirk-style WC1-WC3 continuum scaling package: continuum mass-gap survival is conditional on uniform cluster summability and OS reconstruction hypotheses."
+  "Kirk-style WC1-WC3 continuum scaling package: continuum mass-gap survival is conditional on uniform cluster summability, RP.4/OS reconstruction of the limiting vacuum, H3a transfer or norm-resolvent transport on the vacuum-orthogonal sector, and H3b vacuum-projection continuity."
 
 noSpectralPollutionBoundary : String
 noSpectralPollutionBoundary =
-  "Uniform exponential clustering in the scaling window plus reflection positivity rules out spectral mass accumulating at zero; without WC3 this is not an unconditional DASHI theorem."
+  "No-spectral-pollution at zero is not a generic consequence of clustering, Mosco-style compactness, or reflection positivity alone. RP.4/OS reconstruction supplies the limiting vacuum identity, but the route still requires H3a transport or norm-resolvent control on the vacuum-orthogonal sector together with H3b vacuum-projection continuity; without those stronger interfaces and WC3 this is not an unconditional DASHI theorem."
 
 hamiltonianBoundary : String
 hamiltonianBoundary =
@@ -320,10 +335,10 @@ record Sprint90ContinuumMassGapWCBoundary : Set₁ where
 
     wcSource :
       wcBoundarySource ≡
-      "Kirk-style WC1-WC3 continuum scaling package: continuum mass-gap survival is conditional on uniform cluster summability and OS reconstruction hypotheses."
+      "Kirk-style WC1-WC3 continuum scaling package: continuum mass-gap survival is conditional on uniform cluster summability, RP.4/OS reconstruction of the limiting vacuum, H3a transfer or norm-resolvent transport on the vacuum-orthogonal sector, and H3b vacuum-projection continuity."
     noPollutionBoundary :
       noSpectralPollutionBoundary ≡
-      "Uniform exponential clustering in the scaling window plus reflection positivity rules out spectral mass accumulating at zero; without WC3 this is not an unconditional DASHI theorem."
+      "No-spectral-pollution at zero is not a generic consequence of clustering, Mosco-style compactness, or reflection positivity alone. RP.4/OS reconstruction supplies the limiting vacuum identity, but the route still requires H3a transport or norm-resolvent control on the vacuum-orthogonal sector together with H3b vacuum-projection continuity; without those stronger interfaces and WC3 this is not an unconditional DASHI theorem."
     hamiltonianShapeBoundary :
       hamiltonianBoundary ≡
       "A positive closable quadratic form yields a positive self-adjoint operator, but YM quotient form closability and gauge-quotient descent remain open."
