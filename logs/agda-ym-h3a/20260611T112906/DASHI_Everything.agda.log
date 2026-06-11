@@ -1,0 +1,97 @@
+== DASHI/Everything.agda ==
+command: timeout 600s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda
+started: 2026-06-11T11:29:06+10:00
+
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+    Checking DASHI.Physics.Closure.YMAdmissibleBTBoundaryConventionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMAdmissibleBTBoundaryConventionBoundary.agda).
+     Checking DASHI.Physics.Closure.YMMatterCurrentConservationAuthorityBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMMatterCurrentConservationAuthorityBoundary.agda).
+    Checking DASHI.Promotion.UnificationCriticalPathReceipt (/home/c/Documents/code/dashi_agda/DASHI/Promotion/UnificationCriticalPathReceipt.agda).
+   Checking DASHI.Physics.Closure.UnificationNextAnalyticCalculationIndex (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/UnificationNextAnalyticCalculationIndex.agda).
+  Checking DASHI.Physics.Closure.FiniteDepthBoundaryObservablePromotionPipeline (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/FiniteDepthBoundaryObservablePromotionPipeline.agda).
+  Checking DASHI.Physics.Closure.YMCompletionBoundaryTightening (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMCompletionBoundaryTightening.agda).
+    Checking DASHI.Physics.Closure.YMSprint129MoscoRecoveryNoPollutionClosure (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint129MoscoRecoveryNoPollutionClosure.agda).
+      Checking DASHI.Physics.Closure.YMSprint126SymmetryRestorationCitationInterface (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint126SymmetryRestorationCitationInterface.agda).
+     Checking DASHI.Physics.Closure.YMSprint128SymmetryAndGroupClosure (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint128SymmetryAndGroupClosure.agda).
+     Checking DASHI.Physics.Closure.YMSprint126OSToWightmanRouteLedger (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint126OSToWightmanRouteLedger.agda).
+    Checking DASHI.Physics.Closure.YMSprint130OSToWightmanDistributionsClosure (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda).
+      Checking DASHI.Physics.Closure.YMSprint127HardTheoremDependencyCutset (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint127HardTheoremDependencyCutset.agda).
+     Checking DASHI.Physics.Closure.YMSprint128WilsonCarrierConstruction (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint128WilsonCarrierConstruction.agda).
+     Checking DASHI.Physics.Closure.YMSprint127FinalSubmissionReadinessLedger (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint127FinalSubmissionReadinessLedger.agda).
+    Checking DASHI.Physics.Closure.YMSprint129MoscoSpectralRouteLedger (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint129MoscoSpectralRouteLedger.agda).
+    Checking DASHI.Physics.Closure.YMSprint130PoincareSpectrumWightmanClosure (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda).
+    Checking DASHI.Physics.Closure.YMSprint129MoscoLiminfStrongResolventClosure (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint129MoscoLiminfStrongResolventClosure.agda).
+    Checking DASHI.Physics.Closure.YMSprint130FinalClayAssemblyLedger (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint130FinalClayAssemblyLedger.agda).
+   Checking DASHI.Physics.Closure.YMSprint131SubmissionPacketManifest (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint131SubmissionPacketManifest.agda).
+    Checking DASHI.Physics.Closure.YMSprint131ExternalGovernanceBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint131ExternalGovernanceBoundary.agda).
+    Checking DASHI.Physics.Closure.YMSprint132ReproducibilityBoundaryLedger (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint132ReproducibilityBoundaryLedger.agda).
+    Checking DASHI.Physics.Closure.YMSprint132RedTeamObjectionResolutionLedger (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint132RedTeamObjectionResolutionLedger.agda).
+   Checking DASHI.Physics.Closure.YMSprint133ExternalReviewDocketBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint133ExternalReviewDocketBoundary.agda).
+   Checking DASHI.Physics.Closure.YMSprint133SubmissionReadinessIndex (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMSprint133SubmissionReadinessIndex.agda).
+  Checking DASHI.Physics.Closure.YMExternalAcceptancePacketNormalization (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/YMExternalAcceptancePacketNormalization.agda).
+  Checking DASHI.Promotion.StandardModelUniquenessCountermodelBoundary (/home/c/Documents/code/dashi_agda/DASHI/Promotion/StandardModelUniquenessCountermodelBoundary.agda).
+ Checking DASHI.Promotion.ObligationIndex (/home/c/Documents/code/dashi_agda/DASHI/Promotion/ObligationIndex.agda).
+ Checking DASHI.Physics.Closure.CompatibilityLeakageCoercivityTrichotomy (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/CompatibilityLeakageCoercivityTrichotomy.agda).
+  Checking DASHI.Physics.Closure.DefectHierarchyParallelogramGeneralizationBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DefectHierarchyParallelogramGeneralizationBoundary.agda).
+ Checking DASHI.Physics.Closure.DefectFourPointParallelogramLawBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DefectFourPointParallelogramLawBoundary.agda).
+  Checking DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/ProjectionNonlocalityDefectLaplacianZeroModeSheaf.agda).
+ Checking DASHI.Physics.Closure.DefectSheafGluingFourPointParallelogramBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/DefectSheafGluingFourPointParallelogramBoundary.agda).
+ Checking DASHI.Physics.Closure.GluingResidualForcesFourPointCancellationBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/GluingResidualForcesFourPointCancellationBoundary.agda).
+ Checking DASHI.Physics.Closure.GluingOperatorLinearityOnDefectQuotientBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/GluingOperatorLinearityOnDefectQuotientBoundary.agda).
+ Checking DASHI.Physics.Closure.GluingOperatorLinearityProxyHarnessResult (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/GluingOperatorLinearityProxyHarnessResult.agda).
+   Checking DASHI.Physics.Closure.NSSigmaNonRadialCommutatorLowerBoundTarget (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSSigmaNonRadialCommutatorLowerBoundTarget.agda).
+   Checking DASHI.Physics.Closure.NSNonRadialityQuantificationAverage (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSNonRadialityQuantificationAverage.agda).
+   Checking DASHI.Physics.Closure.NSMicrolocalDefectMassConstructionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSMicrolocalDefectMassConstructionBoundary.agda).
+   Checking DASHI.Physics.Closure.NSTransverseSigmaNeighborhoodGeometry (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSTransverseSigmaNeighborhoodGeometry.agda).
+  Checking DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSZeroModeSetClassificationBoundary.agda).
+ Checking DASHI.Physics.Closure.NSLeiRenTianRadialZeroModeAuthorityBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSLeiRenTianRadialZeroModeAuthorityBoundary.agda).
+ Checking DASHI.Physics.Closure.NSLeiRenTianGreatCircleCriterionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSLeiRenTianGreatCircleCriterionBoundary.agda).
+    Checking DASHI.Physics.Closure.NSTriadicLeakageSquareFunctionCoercivityBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSTriadicLeakageSquareFunctionCoercivityBoundary.agda).
+   Checking DASHI.Physics.Closure.NSAbelTriadicDefectMeasureConstructionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSAbelTriadicDefectMeasureConstructionBoundary.agda).
+  Checking DASHI.Physics.Closure.NSAbelTriadicStationarityConstructionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSAbelTriadicStationarityConstructionBoundary.agda).
+ Checking DASHI.Physics.Closure.NSLeiRenTianOutputSupportTransferBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSLeiRenTianOutputSupportTransferBoundary.agda).
+ Checking DASHI.Physics.Closure.NSLeiRenTianFourierOutputCouplingBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSLeiRenTianFourierOutputCouplingBoundary.agda).
+ Checking DASHI.Physics.Closure.NSPhysicalAngularMeasureConstructionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSPhysicalAngularMeasureConstructionBoundary.agda).
+ Checking DASHI.Physics.Closure.NSLocalizedWhitneyFramePacketEstimateBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSLocalizedWhitneyFramePacketEstimateBoundary.agda).
+ Checking DASHI.Physics.Closure.NSFourierOutputPushforwardBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSFourierOutputPushforwardBoundary.agda).
+ Checking DASHI.Physics.Closure.NSWhitneyCouplingInequalityBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSWhitneyCouplingInequalityBoundary.agda).
+ Checking DASHI.Physics.Closure.NSAntipodalTubeNullMassBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSAntipodalTubeNullMassBoundary.agda).
+ Checking DASHI.Physics.Closure.NSSardRegularValueSlicingBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSSardRegularValueSlicingBoundary.agda).
+ Checking DASHI.Physics.Closure.NSWhitneyFubiniDisintegrationBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSWhitneyFubiniDisintegrationBoundary.agda).
+ Checking DASHI.Physics.Closure.NSPhiJacobianLowerBoundBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSPhiJacobianLowerBoundBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4SardFubiniCompositeBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4SardFubiniCompositeBoundary.agda).
+ Checking DASHI.Physics.Closure.NSOutputGreatCircleStripSlicingBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSOutputGreatCircleStripSlicingBoundary.agda).
+ Checking DASHI.Physics.Closure.NSOutputStripPreimageMeasureEstimateBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSOutputStripPreimageMeasureEstimateBoundary.agda).
+       Checking DASHI.Physics.Closure.NSTriadicCompensatedLeakageIdentityBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSTriadicCompensatedLeakageIdentityBoundary.agda).
+      Checking DASHI.Physics.Closure.NSTypeIBlowupKappaBiasBoundBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSTypeIBlowupKappaBiasBoundBoundary.agda).
+     Checking DASHI.Physics.Closure.NSPointwiseToAbelAveragingBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSPointwiseToAbelAveragingBoundary.agda).
+     Checking DASHI.Physics.Closure.NSOffDiagonalShellAbsorptionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSOffDiagonalShellAbsorptionBoundary.agda).
+     Checking DASHI.Physics.Closure.NSDiagonalStretchingToAbelMeanBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSDiagonalStretchingToAbelMeanBoundary.agda).
+    Checking DASHI.Physics.Closure.NSBiotSavartShellLocalizationBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSBiotSavartShellLocalizationBoundary.agda).
+     Checking DASHI.Physics.Closure.NSLocalizationPressureCommutatorBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSLocalizationPressureCommutatorBoundary.agda).
+     Checking DASHI.Physics.Closure.NSAbelShellMixingLLNBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSAbelShellMixingLLNBoundary.agda).
+    Checking DASHI.Physics.Closure.NSPointwiseToAbelCompositeA6Boundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSPointwiseToAbelCompositeA6Boundary.agda).
+    Checking DASHI.Physics.Closure.NSA6ErrorBudgetCompositeBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA6ErrorBudgetCompositeBoundary.agda).
+   Checking DASHI.Physics.Closure.NSBonyParaproductA6RepairBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSBonyParaproductA6RepairBoundary.agda).
+  Checking DASHI.Physics.Closure.NSBonyLipschitzAngularPushforwardBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSBonyLipschitzAngularPushforwardBoundary.agda).
+  Checking DASHI.Physics.Closure.NSLowVorticityExceptionalMassRoutingBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSLowVorticityExceptionalMassRoutingBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4ExceptionalMassCompositeBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4ExceptionalMassCompositeBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4NoAngularCollapseTransferCompositeBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4NoAngularCollapseTransferCompositeBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4CoareaStripPreimageCalculationBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4CoareaStripPreimageCalculationBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4GradientFormulaLocalChartBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4GradientFormulaLocalChartBoundary.agda).
+  Checking DASHI.Physics.Closure.NSA4UniformErrorBudgetCompositeBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4UniformErrorBudgetCompositeBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4UniformInNormalConstantsBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4DerivativeJacobianLowerBoundCompositeBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4DerivativeJacobianLowerBoundCompositeBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4EtaStripCoareaSlabEstimateBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4EtaStripCoareaSlabEstimateBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4ResidualPositiveAfterErrorsBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4ResidualPositiveAfterErrorsBoundary.agda).
+  Checking DASHI.Physics.Closure.NSA6TheoremLadderBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA6TheoremLadderBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4ToA6TransferLadderBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4ToA6TransferLadderBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA4ResidualPositiveTheoremLadderBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA4ResidualPositiveTheoremLadderBoundary.agda).
+ Checking DASHI.Physics.Closure.NSGreatCircleZeroModeTrapExclusionBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSGreatCircleZeroModeTrapExclusionBoundary.agda).
+ Checking DASHI.Physics.Closure.NSA6A4BiasToLeakageClosureCompositeBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda:215,3-7
+11 != 10 of type Nat
+when checking that the expression refl has type
+a4BiasToLeakageClosureRungCount ≡ 10
+
+exit_code: 42
+finished: 2026-06-11T11:31:10+10:00

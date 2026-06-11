@@ -21,7 +21,9 @@ da51_shards/
 
 # Historical or low-signal doc surfaces
 Docs/ExternalAuthorityReceipts/
+Docs/papers/legacy/
 Docs/PaperDraftWorkingFolder/
+Docs/papers/drafts/PaperDraftWorkingFolder/
 Docs/worker-packets/
 Docs/archive/
 

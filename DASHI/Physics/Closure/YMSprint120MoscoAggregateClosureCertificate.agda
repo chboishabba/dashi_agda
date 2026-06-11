@@ -113,6 +113,15 @@ continuumMassGapProvedHere = false
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
 
+all119MoscoAggregateStillOpen : Bool
+all119MoscoAggregateStillOpen = false
+
+all119NoBottomSpectrumPollutionStillOpen : Bool
+all119NoBottomSpectrumPollutionStillOpen = false
+
+all119NoCollapseAtZeroStillOpen : Bool
+all119NoCollapseAtZeroStillOpen = false
+
 aggregateStatementText : String
 aggregateStatementText =
   "Sprint120 records the Mosco aggregate closure certificate surface for weak compactness, closed-form LSC, recovery limsup, no-bottom-spectrum pollution, and no-collapse-at-zero while preserving the Sprint119 fail-closed boundary."
@@ -340,7 +349,7 @@ canonicalImportedAggregateSources =
     Recovery110.canonicalReceipt
     Compact109.canonicalReceipt
     Collapse110.canonicalReceipt
-    All119.allMoscoCompactnessObligationsClosedHere
+    All119.moscoPackageClosedHere
     refl
     Weak119.weakCompactnessClosedHere
     refl
@@ -409,7 +418,7 @@ noBottomSpectrumPollutionRow =
     compact109SourcePath
     Compact109.noBottomSpectrumPollutionCompactnessTheoremProved
     refl
-    All119.noBottomSpectrumPollutionClosedHere
+    all119NoBottomSpectrumPollutionStillOpen
     refl
     Ready118.noBottomSpectrumPollutionClosedHere
     refl
@@ -427,7 +436,7 @@ noCollapseAtZeroRow =
     collapse110SourcePath
     Collapse110.noCollapseAtZeroClosed
     refl
-    All119.noCollapseAtZeroClosedHere
+    all119NoCollapseAtZeroStillOpen
     refl
     Ready118.noCollapseAtZeroClosedHere
     refl
@@ -587,7 +596,7 @@ canonicalClayYangMillsPromotedHereIsFalse =
   refl
 
 upstreamSprint119AllMoscoCompactnessObligationsClosedIsFalse :
-  All119.allMoscoCompactnessObligationsClosedHere ≡ false
+  All119.moscoPackageClosedHere ≡ false
 upstreamSprint119AllMoscoCompactnessObligationsClosedIsFalse =
   refl
 

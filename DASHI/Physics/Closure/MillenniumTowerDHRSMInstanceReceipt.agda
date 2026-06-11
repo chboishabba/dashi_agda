@@ -77,6 +77,33 @@ record MillenniumTowerDHRSMInstanceReceipt : Setω where
     drCompactGaugeGroupConstructedHereIsFalse :
       drCompactGaugeGroupConstructedHere ≡ false
 
+    postCompletionConsumerRouteRecorded :
+      Bool
+
+    postCompletionConsumerRouteRecordedIsTrue :
+      postCompletionConsumerRouteRecorded ≡ true
+
+    consumerRouteShape :
+      List String
+
+    consumerRouteIsGaugeReconstructionTheorem :
+      Bool
+
+    consumerRouteIsGaugeReconstructionTheoremIsFalse :
+      consumerRouteIsGaugeReconstructionTheorem ≡ false
+
+    consumerRouteConstructsFullDHRReconstruction :
+      Bool
+
+    consumerRouteConstructsFullDHRReconstructionIsFalse :
+      consumerRouteConstructsFullDHRReconstruction ≡ false
+
+    consumerRouteIdentifiesGDHRWithGSM :
+      Bool
+
+    consumerRouteIdentifiesGDHRWithGSMIsFalse :
+      consumerRouteIdentifiesGDHRWithGSM ≡ false
+
     instanceBoundary :
       List String
 
@@ -136,12 +163,35 @@ canonicalMillenniumTowerDHRSMInstanceReceipt =
     ; drCompactGaugeGroupConstructedHereIsFalse =
         TensorDR.DHRDoplicherRobertsReconstructionAuthorityReceipt.compactGaugeGroupConstructedHereIsFalse
           TensorDR.canonicalDHRDoplicherRobertsReconstructionAuthorityReceipt
+    ; postCompletionConsumerRouteRecorded =
+        true
+    ; postCompletionConsumerRouteRecordedIsTrue =
+        refl
+    ; consumerRouteShape =
+        "JvN polarization/Hilbert consumer"
+        ∷ "C* completion consumer"
+        ∷ "DHR sectors as Hilbert bimodules consumer"
+        ∷ []
+    ; consumerRouteIsGaugeReconstructionTheorem =
+        false
+    ; consumerRouteIsGaugeReconstructionTheoremIsFalse =
+        refl
+    ; consumerRouteConstructsFullDHRReconstruction =
+        false
+    ; consumerRouteConstructsFullDHRReconstructionIsFalse =
+        refl
+    ; consumerRouteIdentifiesGDHRWithGSM =
+        false
+    ; consumerRouteIdentifiesGDHRWithGSMIsFalse =
+        refl
     ; instanceBoundary =
         "T0 finiteControl: finite p2/p3/p5 DHR localised-endomorphism, star, conjugate, braiding, hexagon, and statistics receipts are inhabited"
         ∷ "T1 depthFamily: the finite prime-lane carrier ledger supplies the depth-indexed sector witnesses"
-        ∷ "T2 liftAttempt: DHR original-paper, Doplicher-Roberts reconstruction, and Tannaka authority receipts are consumed to record conditionalOnDRAuthority"
-        ∷ "T3 continuumObligation: arbitrary localized endomorphism symmetric-monoidal structure remains external"
-        ∷ "T4 authorityBoundary: compact G_DHR construction and unconditional G_DHR ~= G_SM promotion remain false"
+        ∷ "T2 consumerShape: the post-completion consumer route is recorded explicitly as JvN -> C* completion -> DHR sectors as Hilbert bimodules"
+        ∷ "T3 controlledConsumerBoundary: DHR original-paper, Doplicher-Roberts reconstruction, and Tannaka authority receipts are consumed only to record a controlled consumer route and conditionalOnDRAuthority"
+        ∷ "T4 reconstructionBoundary: this file does not prove full DHR reconstruction, does not internally construct the compact gauge group, and does not apply the DR theorem in-repo"
+        ∷ "T5 continuumObligation: arbitrary localized endomorphism symmetric-monoidal structure and full category-level reconstruction remain external"
+        ∷ "T6 authorityBoundary: compact G_DHR construction, unconditional G_DHR ~= G_SM promotion, and any internal compact-group or gauge-reconstruction theorem remain false"
         ∷ []
     }
 

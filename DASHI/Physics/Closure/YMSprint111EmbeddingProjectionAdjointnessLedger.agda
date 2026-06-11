@@ -19,7 +19,8 @@ import DASHI.Physics.Closure.YMSprint110BottomSectorThresholdNoCollapse
 --   embedding/projection inner-product adjointness,
 --   left and right approximate inverse laws,
 --   physical-sector projection stability,
---   vacuum/bottom-sector projection stability,
+--   vacuum/bottom-sector projection continuity toward the isolated
+--   continuum vacuum/bottom sector,
 --   exact source-path blockers for the still-open analytic work.
 --
 -- It is a status/evidence module only.  The criteria are inhabited, but no
@@ -92,7 +93,7 @@ physicalProjectionStabilityText =
 
 vacuumProjectionStabilityText : String
 vacuumProjectionStabilityText =
-  "Vacuum projection stability criterion: E_a and P_a must preserve the isolated vacuum/bottom projection and the non-vacuum complement strongly enough to support threshold/no-collapse passage."
+  "Vacuum projection stability criterion: E_a and P_a must transport finite vacuum projections continuously toward the isolated continuum vacuum/bottom projection Pi_0, while stabilizing the non-vacuum complement strongly enough to identify the limiting bottom sector. This is the H3b-style vacuum-projection continuity interface required downstream for no-spectral-pollution, not merely a generic sector-stability nicety."
 
 sourcePathBlockerText : String
 sourcePathBlockerText =
@@ -116,11 +117,11 @@ physicalProjectionStabilityBlockerText =
 
 vacuumProjectionStabilityBlockerText : String
 vacuumProjectionStabilityBlockerText =
-  "Exact blocker: no proof that finite vacuum projections converge to, or are stable under, the isolated continuum bottom-sector projection is present in Sprint110."
+  "Exact blocker: no proof is present that finite vacuum projections converge continuously to the isolated continuum vacuum/bottom projection, or that the non-vacuum complement remains uniformly stable relative to that bottom sector. Accordingly, the H3b-style vacuum-projection continuity interface needed downstream for no-spectral-pollution remains unproved in Sprint110/Sprint111."
 
 nonPromotionBoundaryText : String
 nonPromotionBoundaryText =
-  "Sprint111 records embedding/projection adjointness and stability evidence only; it does not close Mosco carrier identification, bottom-sector no-collapse, continuum spectral gap, or Clay Yang-Mills."
+  "Sprint111 records embedding/projection adjointness and stability evidence only; it does not discharge the H3b-style vacuum-projection continuity interface, close Mosco carrier identification, prove no-spectral-pollution, close the continuum spectral gap, or promote any Clay Yang-Mills claim."
 
 data EmbeddingProjectionLane : Set where
   inner-product-adjointness-lane :

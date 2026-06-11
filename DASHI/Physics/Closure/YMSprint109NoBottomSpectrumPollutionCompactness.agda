@@ -17,12 +17,21 @@ import DASHI.Physics.Closure.YMSprint108UniformFormLowerBound
 -- Sprint 109 no-bottom-spectrum-pollution compactness ledger.
 --
 -- This module narrows the Sprint108 continuum-passage boundary to the
--- compactness/tightness ingredient that excludes spurious bottom eigenbranches.
+-- compactness/tightness ingredient that may feed no-spectral-pollution, but
+-- does not by itself prove it.  The corrected split is explicit:
+--
+--   * Mosco/compactness/tightness are necessary support inputs.
+--   * H3a is the hard transfer-matrix / norm-resolvent convergence theorem on
+--     the vacuum-orthogonal sector.
+--   * H3b is RP.4 / OS vacuum-projection continuity for the limiting vacuum.
+--   * No-spectral-pollution depends on H3a + H3b, not on Mosco alone.
+--
 -- It records the exact relation between tight finite low-energy branches,
--- compact extraction in the physical carrier, isolation of the bottom sector,
--- and the still-open no-collapse-at-zero theorem.  It is concrete and checked:
--- the theorem and Clay promotion flags are explicitly false, with equality
--- witnesses, while the next analytic requirements are first-class values.
+-- compact extraction in the physical carrier, vacuum-sector isolation, the
+-- open H3a/H3b interfaces, and the still-open no-collapse-at-zero theorem.
+-- It is concrete and checked: the theorem and Clay promotion flags are
+-- explicitly false, with equality witnesses, while the next analytic
+-- requirements are first-class values.
 
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
@@ -44,6 +53,18 @@ spuriousBottomEigenbranchesExcludedHere = false
 
 isolatedBottomSectorIdentifiedHere : Bool
 isolatedBottomSectorIdentifiedHere = false
+
+bottomSectorProjectionConvergenceProvedHere : Bool
+bottomSectorProjectionConvergenceProvedHere = false
+
+rp4LimitingVacuumIdentityAvailableHere : Bool
+rp4LimitingVacuumIdentityAvailableHere = false
+
+h3aTransferMatrixConvergenceProvedHere : Bool
+h3aTransferMatrixConvergenceProvedHere = false
+
+h3bVacuumProjectionContinuityProvedHere : Bool
+h3bVacuumProjectionContinuityProvedHere = false
 
 noCollapseAtZeroProvedHere : Bool
 noCollapseAtZeroProvedHere = false
@@ -71,7 +92,7 @@ noCollapseAtZeroClosedStatus = false
 
 targetNoPollutionText : String
 targetNoPollutionText =
-  "Every finite low-energy non-vacuum eigenbranch that is tight has a compactly convergent physical subsequence whose limit cannot lie below the isolated continuum bottom sector."
+  "Every finite low-energy non-vacuum eigenbranch that is tight may feed a no-spectral-pollution argument only after H3a supplies vacuum-orthogonal transfer-matrix / norm-resolvent convergence and H3b supplies RP.4 / OS vacuum-projection continuity for the limiting vacuum."
 
 tightnessText : String
 tightnessText =
@@ -79,15 +100,15 @@ tightnessText =
 
 compactnessText : String
 compactnessText =
-  "Compactness requirement: tight bounded-energy branches must admit strongly convergent subsequences in the physical carrier after the finite-to-continuum identification."
+  "Compactness requirement: tight bounded-energy branches must admit strongly convergent subsequences in the physical carrier after the finite-to-continuum identification; compactness and Mosco liminf are necessary support only and do not determine the vacuum sector or exclude spectral pollution by themselves."
 
 spuriousBranchExclusionText : String
 spuriousBranchExclusionText =
-  "Spurious bottom eigenbranch exclusion: an eigenvalue branch not converging to the physical vacuum sector may not accumulate below the first continuum threshold."
+  "Spurious bottom eigenbranch exclusion: an eigenvalue branch not converging to the physical vacuum sector may not accumulate below the first continuum threshold only after H3a fixes the vacuum-orthogonal transfer limit and H3b fixes the RP.4 / OS vacuum projection being excluded."
 
 isolatedBottomSectorRelationText : String
 isolatedBottomSectorRelationText =
-  "The isolated bottom sector supplies the separated vacuum projection; compactness only becomes a no-pollution statement after that sector and the first excited threshold are identified."
+  "The isolated bottom sector supplies the separated vacuum projection; compactness only becomes part of a no-pollution theorem after H3b identifies convergence of finite vacuum projections to the RP.4 / OS limiting vacuum and after the first excited threshold is identified on the same carrier."
 
 noCollapseAtZeroStatusText : String
 noCollapseAtZeroStatusText =
@@ -99,11 +120,11 @@ finiteSupportLimitationText =
 
 nextAnalyticRequirementsText : String
 nextAnalyticRequirementsText =
-  "Next requirements: prove tail tightness, compact physical carrier extraction, bottom-sector projection convergence, threshold identification, and a uniform non-vacuum lower bound excluding zero collapse."
+  "Next requirements: prove tail tightness and compact carrier extraction as support inputs, then prove H3a vacuum-orthogonal transfer-matrix / norm-resolvent convergence, prove H3b RP.4 / OS vacuum-projection continuity, identify the first excited threshold, and exclude zero collapse by a uniform non-vacuum lower bound."
 
 nonPromotionBoundaryText : String
 nonPromotionBoundaryText =
-  "Sprint109 records compactness obligations only; it does not promote Clay Yang-Mills or close the continuum Hamiltonian mass-gap theorem."
+  "Sprint109 records compactness obligations only; it does not prove H3a, does not prove H3b, does not prove no-spectral-pollution, does not promote Clay Yang-Mills, and does not close the continuum Hamiltonian mass-gap theorem."
 
 sprint108MoscoPath : String
 sprint108MoscoPath =
@@ -122,6 +143,10 @@ data CompactnessLane : Set where
     CompactnessLane
   compact-physical-extraction :
     CompactnessLane
+  h3a-vacuum-orthogonal-transfer :
+    CompactnessLane
+  h3b-vacuum-projection-continuity :
+    CompactnessLane
   spurious-bottom-branch-exclusion :
     CompactnessLane
   isolated-bottom-sector-relation :
@@ -139,6 +164,10 @@ data CompactnessStatus : Set where
   required-tightness-not-proved :
     CompactnessStatus
   required-compactness-not-proved :
+    CompactnessStatus
+  h3a-required-not-proved :
+    CompactnessStatus
+  h3b-required-not-proved :
     CompactnessStatus
   required-branch-exclusion-not-proved :
     CompactnessStatus
@@ -246,6 +275,10 @@ record IsolatedBottomSectorRelationStatus : Set where
       Bool
     vacuumProjectionSeparationRequired :
       Bool
+    bottomSectorProjectionConvergenceRequired :
+      Bool
+    limitingVacuumIdentityRequired :
+      Bool
     firstThresholdTransportRequired :
       Bool
     compactnessAloneEnough :
@@ -320,9 +353,19 @@ record NoPollutionCompactnessTheoremBoundary : Set where
       Bool
     isolatedBottomSectorIdentified :
       Bool
+    h3aTransferMatrixConvergenceProved :
+      Bool
+    h3bVacuumProjectionContinuityProved :
+      Bool
+    bottomSectorProjectionConvergenceProved :
+      Bool
+    limitingVacuumIdentityAvailable :
+      Bool
     noCollapseAtZeroProved :
       Bool
     finiteSupportEnough :
+      Bool
+    moscoCompactnessNecessaryButInsufficient :
       Bool
     theoremProvedHere :
       Bool
@@ -432,6 +475,8 @@ canonicalIsolatedBottomSectorRelationStatus =
     Spectral108.isolatedBottomSectorRecorded
     true
     true
+    true
+    true
     compactnessEnoughWithoutBottomIsolation
     isolatedBottomSectorIdentifiedHere
     bottom-sector-relation-recorded
@@ -479,14 +524,41 @@ compactCarrierExtractionRequirement =
     false
     required-compactness-not-proved
 
+h3aVacuumOrthogonalTransferRequirement : NextAnalyticRequirement
+h3aVacuumOrthogonalTransferRequirement =
+  mkNextAnalyticRequirement
+    h3a-vacuum-orthogonal-transfer
+    "Prove H3a: transfer-matrix / norm-resolvent convergence on T_N restricted to the vacuum-orthogonal sector; Mosco liminf and compactness do not supply this upgrade."
+    true
+    false
+    h3a-required-not-proved
+
+h3bVacuumProjectionContinuityRequirement : NextAnalyticRequirement
+h3bVacuumProjectionContinuityRequirement =
+  mkNextAnalyticRequirement
+    h3b-vacuum-projection-continuity
+    "Prove H3b: RP.4 / OS vacuum-projection continuity for the limiting vacuum; compactness alone does not identify or transport the correct vacuum projector."
+    true
+    false
+    h3b-required-not-proved
+
 bottomProjectionConvergenceRequirement : NextAnalyticRequirement
 bottomProjectionConvergenceRequirement =
   mkNextAnalyticRequirement
-    next-analytic-requirements
-    "Identify convergence of the finite vacuum projection to the isolated continuum bottom-sector projection."
+    h3b-vacuum-projection-continuity
+    "Identify convergence of the finite vacuum projection to the isolated continuum bottom-sector projection as a concrete H3b sub-obligation on the RP.4 / OS vacuum sector."
     true
     false
-    bottom-sector-relation-recorded
+    h3b-required-not-proved
+
+limitingVacuumIdentityRequirement : NextAnalyticRequirement
+limitingVacuumIdentityRequirement =
+  mkNextAnalyticRequirement
+    h3b-vacuum-projection-continuity
+    "Identify the isolated limiting vacuum itself, in RP.4 / OS form, so compactly convergent low-energy branches can be tested against the correct vacuum sector."
+    true
+    false
+    h3b-required-not-proved
 
 thresholdIdentificationRequirement : NextAnalyticRequirement
 thresholdIdentificationRequirement =
@@ -511,7 +583,10 @@ canonicalNextAnalyticRequirements :
 canonicalNextAnalyticRequirements =
   tailTightnessRequirement
   ∷ compactCarrierExtractionRequirement
+  ∷ h3aVacuumOrthogonalTransferRequirement
+  ∷ h3bVacuumProjectionContinuityRequirement
   ∷ bottomProjectionConvergenceRequirement
+  ∷ limitingVacuumIdentityRequirement
   ∷ thresholdIdentificationRequirement
   ∷ zeroCollapseExclusionRequirement
   ∷ []
@@ -525,8 +600,13 @@ canonicalTheoremBoundary =
     compactEmbeddingProvedHere
     spuriousBottomEigenbranchesExcludedHere
     isolatedBottomSectorIdentifiedHere
+    h3aTransferMatrixConvergenceProvedHere
+    h3bVacuumProjectionContinuityProvedHere
+    bottomSectorProjectionConvergenceProvedHere
+    rp4LimitingVacuumIdentityAvailableHere
     noCollapseAtZeroProvedHere
     finiteSupportEnoughForCompactness
+    true
     noBottomSpectrumPollutionCompactnessTheoremProved
     clayYangMillsPromoted
     theorem-open

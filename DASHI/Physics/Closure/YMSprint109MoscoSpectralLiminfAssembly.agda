@@ -28,9 +28,19 @@ import DASHI.Physics.Closure.YMSprint108UniformFormLowerBound
 --
 --   lower semicontinuity of closed forms
 --     + recovery/core density
---     + no bottom-spectrum pollution
+--     + a fail-closed no-bottom-pollution support lane
 --     -> spectral liminf for the physical bottom and first threshold
 --     -> transfer of the finite uniform gap to the continuum gap target.
+--
+-- This assembly is deliberately weaker than the corrected H3a/H3b
+-- no-spectral-pollution theorem.  Mosco liminf plus compactness is a
+-- necessary support route toward the continuum interface, but it is
+-- insufficient for no-spectral-pollution.  The corrected split is explicit:
+--
+--   * H3a is transfer-matrix / norm-resolvent convergence on T_N restricted
+--     to the vacuum-orthogonal sector.
+--   * H3b is RP.4 / OS vacuum-projection continuity for the limiting vacuum.
+--   * No-spectral-pollution depends on H3a + H3b, not on Mosco alone.
 --
 -- The receipt is fail-closed.  It records the route and the exact open
 -- theorem flags, but it does not promote Clay Yang-Mills and does not claim
@@ -50,6 +60,18 @@ continuumGapTransportTheoremProvedHere = false
 
 clayContinuumMassGapPromotedHere : Bool
 clayContinuumMassGapPromotedHere = false
+
+normResolventTransferTheoremClosedHere : Bool
+normResolventTransferTheoremClosedHere = false
+
+vacuumProjectionContinuityClosedHere : Bool
+vacuumProjectionContinuityClosedHere = false
+
+noSpectralPollutionFromH3aH3bClosedHere : Bool
+noSpectralPollutionFromH3aH3bClosedHere = false
+
+moscoNecessaryButInsufficientRecorded : Bool
+moscoNecessaryButInsufficientRecorded = true
 
 lowerSemicontinuityClosedHere : Bool
 lowerSemicontinuityClosedHere =
@@ -115,13 +137,21 @@ intendedGapTransportModuleName : String
 intendedGapTransportModuleName =
   "DASHI.Physics.Closure.YMSprint109GapTransport"
 
+intendedH3aModuleName : String
+intendedH3aModuleName =
+  "DASHI.Physics.Closure.YMSprint109VacuumOrthogonalTransferNormResolvent"
+
+intendedH3bModuleName : String
+intendedH3bModuleName =
+  "DASHI.Physics.Closure.YMSprint109RP4OSVacuumProjectionContinuity"
+
 targetFormulaText : String
 targetFormulaText =
   "gap(T(a)) >= c_transfer * m_eff(a) * a transports to a positive continuum physical Hamiltonian gap"
 
 assemblyStatementText : String
 assemblyStatementText =
-  "Sprint109 assembles Mosco lower semicontinuity, recovery, and no-bottom-pollution statuses into a spectral-liminf and gap-transport route."
+  "Sprint109 assembles Mosco lower semicontinuity, recovery, and no-bottom-pollution support statuses into a spectral-liminf and gap-transport route, but this route is strictly weaker than the corrected H3a/H3b no-spectral-pollution theorem."
 
 lowerSemicontinuityStepText : String
 lowerSemicontinuityStepText =
@@ -133,19 +163,31 @@ recoveryStepText =
 
 noBottomPollutionStepText : String
 noBottomPollutionStepText =
-  "No-bottom-pollution excludes spurious nonphysical finite spectral branches below the limiting physical Hamiltonian bottom."
+  "No-bottom-pollution is a support lane only: it excludes a narrow class of spurious nonphysical finite spectral branches, but it does not replace H3a vacuum-orthogonal transfer convergence or H3b vacuum-projection continuity."
 
 spectralLiminfStepText : String
 spectralLiminfStepText =
-  "The Mosco liminf plus no-pollution package gives a spectral liminf boundary for bottom and first-threshold values."
+  "The Mosco liminf plus no-bottom-pollution support package gives a spectral liminf boundary for bottom and first-threshold values, but this boundary is necessary only and is not H3a norm-resolvent / transfer-matrix convergence."
 
 gapTransportStepText : String
 gapTransportStepText =
-  "Spectral liminf and the Sprint108 uniform form ledger are the route to transport the finite transfer lower bound to the continuum gap target."
+  "Spectral liminf and the Sprint108 uniform form ledger are the route to transport the finite transfer lower bound to the continuum gap target, without closing H3a, without closing H3b, and therefore without closing no-spectral-pollution on the vacuum-orthogonal sector."
+
+h3aOutsideAssemblyText : String
+h3aOutsideAssemblyText =
+  "Outside this file: H3a is the transfer-matrix / norm-resolvent convergence theorem on T_N restricted to the vacuum-orthogonal sector; Mosco liminf, compactness, and no-bottom-pollution support do not prove it."
+
+h3bOutsideAssemblyText : String
+h3bOutsideAssemblyText =
+  "Outside this file: H3b is RP.4 / OS vacuum-projection continuity for the limiting vacuum; this assembly does not close that compatibility step."
+
+noSpectralPollutionBoundaryText : String
+noSpectralPollutionBoundaryText =
+  "Corrected boundary: no-spectral-pollution depends on H3a + H3b. Mosco liminf is necessary support, but insufficient on its own."
 
 failClosedBoundaryText : String
 failClosedBoundaryText =
-  "All theorem and Clay-promotion flags remain false until the analytic Sprint109 subpackage receipts are inhabited."
+  "All theorem and Clay-promotion flags remain false. This assembly records a Mosco spectral-liminf route only; it does not certify H3a transfer-matrix / norm-resolvent convergence, does not certify H3b RP.4 / OS vacuum-projection continuity, and therefore does not close the corrected no-spectral-pollution theorem."
 
 data AssemblyLane : Set where
   lower-semicontinuity-lane :
@@ -157,6 +199,10 @@ data AssemblyLane : Set where
   spectral-liminf-lane :
     AssemblyLane
   gap-transport-lane :
+    AssemblyLane
+  h3a-vacuum-orthogonal-transfer-lane :
+    AssemblyLane
+  h3b-vacuum-projection-continuity-lane :
     AssemblyLane
 
 data AssemblyStatus : Set where
@@ -259,6 +305,30 @@ record SpectralGapTransportRoute : Set where
     status :
       AssemblyStatus
 
+record CorrectedNoSpectralPollutionBoundary : Set where
+  constructor mkCorrectedNoSpectralPollutionBoundary
+  field
+    h3aModuleName :
+      String
+    h3bModuleName :
+      String
+    h3aStatement :
+      String
+    h3bStatement :
+      String
+    noSpectralPollutionBoundary :
+      String
+    moscoNecessaryButInsufficient :
+      Bool
+    h3aClosedHere :
+      Bool
+    h3bClosedHere :
+      Bool
+    noSpectralPollutionClosedHere :
+      Bool
+    status :
+      AssemblyStatus
+
 record FailClosedTheoremFlags : Set where
   constructor mkFailClosedTheoremFlags
   field
@@ -278,6 +348,24 @@ record FailClosedTheoremFlags : Set where
       Bool
     clayYangMillsPromotedHereIsFalse :
       clayYangMillsPromotedHere ≡ false
+    normResolventTransferTheoremClosed :
+      Bool
+    normResolventTransferTheoremClosedIsFalse :
+      normResolventTransferTheoremClosed ≡ false
+    vacuumProjectionContinuityClosed :
+      Bool
+    vacuumProjectionContinuityClosedIsFalse :
+      vacuumProjectionContinuityClosed ≡ false
+    noSpectralPollutionFromH3aH3bClosed :
+      Bool
+    noSpectralPollutionFromH3aH3bClosedIsFalse :
+      noSpectralPollutionFromH3aH3bClosed ≡ false
+    h3aBoundaryStatement :
+      String
+    h3bBoundaryStatement :
+      String
+    noSpectralPollutionBoundaryStatement :
+      String
     boundaryStatement :
       String
     status :
@@ -294,6 +382,8 @@ record AssemblyRouteStatus : Set where
       MoscoToSpectralLiminfRoute
     spectralGapTransport :
       SpectralGapTransportRoute
+    correctedNoSpectralPollutionBoundary :
+      CorrectedNoSpectralPollutionBoundary
     failClosedFlags :
       FailClosedTheoremFlags
     routeLedger :
@@ -396,6 +486,21 @@ canonicalGapTransportSubpackage =
     continuumGapTransportTheoremProvedHere
     required-open
 
+canonicalCorrectedNoSpectralPollutionBoundary :
+  CorrectedNoSpectralPollutionBoundary
+canonicalCorrectedNoSpectralPollutionBoundary =
+  mkCorrectedNoSpectralPollutionBoundary
+    intendedH3aModuleName
+    intendedH3bModuleName
+    h3aOutsideAssemblyText
+    h3bOutsideAssemblyText
+    noSpectralPollutionBoundaryText
+    moscoNecessaryButInsufficientRecorded
+    normResolventTransferTheoremClosedHere
+    vacuumProjectionContinuityClosedHere
+    noSpectralPollutionFromH3aH3bClosedHere
+    theorem-fail-closed
+
 canonicalMoscoToSpectralLiminfRoute : MoscoToSpectralLiminfRoute
 canonicalMoscoToSpectralLiminfRoute =
   mkMoscoToSpectralLiminfRoute
@@ -434,6 +539,15 @@ canonicalFailClosedTheoremFlags =
     refl
     clayYangMillsPromoted
     refl
+    normResolventTransferTheoremClosedHere
+    refl
+    vacuumProjectionContinuityClosedHere
+    refl
+    noSpectralPollutionFromH3aH3bClosedHere
+    refl
+    h3aOutsideAssemblyText
+    h3bOutsideAssemblyText
+    noSpectralPollutionBoundaryText
     failClosedBoundaryText
     theorem-fail-closed
 
@@ -444,6 +558,7 @@ canonicalAssemblyRouteStatus =
     assemblyStatementText
     canonicalMoscoToSpectralLiminfRoute
     canonicalSpectralGapTransportRoute
+    canonicalCorrectedNoSpectralPollutionBoundary
     canonicalFailClosedTheoremFlags
     (assemblyStatementText
       ∷ lowerSemicontinuityStepText
@@ -451,6 +566,9 @@ canonicalAssemblyRouteStatus =
       ∷ noBottomPollutionStepText
       ∷ spectralLiminfStepText
       ∷ gapTransportStepText
+      ∷ h3aOutsideAssemblyText
+      ∷ h3bOutsideAssemblyText
+      ∷ noSpectralPollutionBoundaryText
       ∷ failClosedBoundaryText
       ∷ [])
     assemblyReceiptRecorded
