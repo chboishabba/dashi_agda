@@ -11,6 +11,7 @@ import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as Roadmap
 import DASHI.Physics.Closure.YML1StatusReceipt as L1
 import DASHI.Physics.Closure.YML2CorrectedStatusReceipt as L2C
 import DASHI.Physics.Closure.YML2StatusReceipt as L2
+import DASHI.Physics.Closure.YML3TightnessBoundedCandidateReceipt as L3B
 import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt as L3
 
 ------------------------------------------------------------------------
@@ -143,7 +144,7 @@ ymFinalStatePromotionImpossibleHere ()
 
 ymFinalStateStatement : String
 ymFinalStateStatement =
-  "YM final state: NS and unification are tracked elsewhere as candidate-complete packages pending promotion evidence, while YM remains the live external-content frontier. L1 is inhabited at finite lattice scope, L2 is partial strong coupling, L3 records the partial dimensional-transmutation/CS k-running audit, L4-L8 remain conditional, and the live external intake is the Balaban-side H3a continuum cluster with downstream H3b/no-spectral-pollution, thermodynamic-limit, OS/reflection-positivity, BRST gauge-fixed OS3, ghost graded-sign, Gribov, operator-convergence, uniform-mass-gap, and uniqueness gates still open."
+  "YM final state: NS and unification are tracked elsewhere as candidate-complete packages pending promotion evidence, while YM remains the live external-content frontier. L1 is inhabited at finite lattice scope, L2 is partial strong coupling, L3 now exposes a bounded candidate/tightness receipt over the blocked k-running audit, and L4-L8 remain conditional; the live external intake is still the Balaban-side H3a continuum cluster with downstream H3b/no-spectral-pollution, thermodynamic-limit, OS/reflection-positivity, BRST gauge-fixed OS3, ghost graded-sign, Gribov, operator-convergence, uniform-mass-gap, and uniqueness gates still open."
 
 record YMFinalStateReceipt : Setω where
   field
@@ -194,6 +195,21 @@ record YMFinalStateReceipt : Setω where
 
     l3ClayFalse :
       L3.clayYangMillsPromoted l3Receipt ≡ false
+
+    l3BoundedCandidateReceipt :
+      L3B.YML3TightnessBoundedCandidateReceipt
+
+    l3BoundedCandidateRecorded :
+      Bool
+
+    l3BoundedCandidateRecordedIsTrue :
+      l3BoundedCandidateRecorded ≡ true
+
+    l3BoundedCandidateKeepsTightnessFalse :
+      L3B.fullTightnessConstructed l3BoundedCandidateReceipt ≡ false
+
+    l3BoundedCandidateKeepsClayFalse :
+      L3B.clayYangMillsPromoted l3BoundedCandidateReceipt ≡ false
 
     layers :
       List YMFinalStateLayer
@@ -362,6 +378,16 @@ canonicalYMFinalStateReceipt =
         refl
     ; l3ClayFalse =
         refl
+    ; l3BoundedCandidateReceipt =
+        L3B.canonicalYML3TightnessBoundedCandidateReceipt
+    ; l3BoundedCandidateRecorded =
+        true
+    ; l3BoundedCandidateRecordedIsTrue =
+        refl
+    ; l3BoundedCandidateKeepsTightnessFalse =
+        refl
+    ; l3BoundedCandidateKeepsClayFalse =
+        refl
     ; layers =
         canonicalYMFinalStateLayers
     ; layersAreCanonical =
@@ -454,6 +480,7 @@ canonicalYMFinalStateReceipt =
         ∷ "L3 is partial as a dimensional-transmutation/CS k-running audit; full tightness itself is not constructed"
         ∷ "L4-L8 remain conditional chain entries, not unconditional continuum or mass-gap proofs"
         ∷ "The leading external intake is the Balaban-side H3a continuum cluster, followed by H3b vacuum-projection continuity and no-spectral-pollution"
+        ∷ "L3 also now carries a bounded candidate/tightness receipt over the blocked k-running route, but full tightness remains false"
         ∷ "Thermodynamic-limit, gauge-sector OS continuum, reflection positivity, infinite-volume limit, and operator convergence are not proved"
         ∷ "OS3 is separated into finite ungauge-fixed Wilson positivity, BRST gauge-fixed obstruction, ghost graded-sign boundary, and carrier-only Gribov representative boundary"
         ∷ "Gauge-sector OS continuum, uniqueness, Clay Yang-Mills, and terminal Clay promotion remain false"

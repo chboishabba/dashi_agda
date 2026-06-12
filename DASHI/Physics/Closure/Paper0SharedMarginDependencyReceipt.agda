@@ -51,6 +51,9 @@ data Paper0ClaimBoundary : Set where
   noLaneSpecificAnalyticInhabitant :
     Paper0ClaimBoundary
 
+  candidateLaneSpecificAnalyticsOnly :
+    Paper0ClaimBoundary
+
   noNSRegularity :
     Paper0ClaimBoundary
 
@@ -68,11 +71,21 @@ canonicalPaper0ClaimBoundaries :
 canonicalPaper0ClaimBoundaries =
   sharedGrammarOnly
   ∷ noLaneSpecificAnalyticInhabitant
+  ∷ candidateLaneSpecificAnalyticsOnly
   ∷ noNSRegularity
   ∷ noGate3ContinuumLift
   ∷ noYMMassGap
   ∷ noClayOrTerminalPromotion
   ∷ []
+
+data Paper0AnalyticsScope : Set where
+  paper0LaneSpecificAnalyticsCandidateScopeOnly :
+    Paper0AnalyticsScope
+
+canonicalPaper0AnalyticsScope :
+  Paper0AnalyticsScope
+canonicalPaper0AnalyticsScope =
+  paper0LaneSpecificAnalyticsCandidateScopeOnly
 
 data Paper0DependencyPromotion : Set where
 
@@ -156,6 +169,12 @@ record Paper0SharedMarginDependencyReceipt : Setω where
     claimBoundariesAreCanonical :
       claimBoundaries ≡ canonicalPaper0ClaimBoundaries
 
+    analyticsScope :
+      Paper0AnalyticsScope
+
+    analyticsScopeIsCanonical :
+      analyticsScope ≡ canonicalPaper0AnalyticsScope
+
     sharedGrammarOnlyClaim :
       Bool
 
@@ -167,6 +186,12 @@ record Paper0SharedMarginDependencyReceipt : Setω where
 
     laneSpecificAnalyticsProvidedIsFalse :
       laneSpecificAnalyticsProvided ≡ false
+
+    paper0LaneSpecificAnalyticsCandidateProvided :
+      Bool
+
+    paper0LaneSpecificAnalyticsCandidateProvidedIsTrue :
+      paper0LaneSpecificAnalyticsCandidateProvided ≡ true
 
     nsRegularityPromoted :
       Bool
@@ -251,6 +276,10 @@ canonicalPaper0SharedMarginDependencyReceipt =
         canonicalPaper0ClaimBoundaries
     ; claimBoundariesAreCanonical =
         refl
+    ; analyticsScope =
+        canonicalPaper0AnalyticsScope
+    ; analyticsScopeIsCanonical =
+        refl
     ; sharedGrammarOnlyClaim =
         true
     ; sharedGrammarOnlyClaimIsTrue =
@@ -258,6 +287,10 @@ canonicalPaper0SharedMarginDependencyReceipt =
     ; laneSpecificAnalyticsProvided =
         false
     ; laneSpecificAnalyticsProvidedIsFalse =
+        refl
+    ; paper0LaneSpecificAnalyticsCandidateProvided =
+        true
+    ; paper0LaneSpecificAnalyticsCandidateProvidedIsTrue =
         refl
     ; nsRegularityPromoted =
         false
@@ -291,6 +324,7 @@ canonicalPaper0SharedMarginDependencyReceipt =
         "Paper 0 depends on StrictMarginImpliesAbsorptionReceipt and the publication roadmap"
         ∷ "L0.1-L0.4 are explicit publication stages"
         ∷ "Paper 0 is shared grammar only; downstream analytic inhabitants remain open"
+        ∷ "Paper 0 carries a bounded candidate-only lane-specific analytics scope, but not a promoted analytic claim"
         ∷ "No NS, Gate 3, YM, Clay, or terminal promotion follows"
         ∷ []
     }
@@ -307,4 +341,12 @@ paper0DependencyPromotionFlagsEmpty :
   ≡
   []
 paper0DependencyPromotionFlagsEmpty =
+  refl
+
+paper0LaneSpecificAnalyticsCandidateProvidedWitnessIsTrue :
+  paper0LaneSpecificAnalyticsCandidateProvided
+    canonicalPaper0SharedMarginDependencyReceipt
+  ≡
+  true
+paper0LaneSpecificAnalyticsCandidateProvidedWitnessIsTrue =
   refl
