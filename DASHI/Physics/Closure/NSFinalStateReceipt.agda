@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt as Current
+import DASHI.Physics.Closure.NSCandidateCompleteEnstrophyBKMPassageReceipt as Passage
 import DASHI.Physics.Closure.NSLittlewoodPaleyCarrierReceipt as LP
 import DASHI.Physics.Closure.NSRegularityGapReceipt as Gap
 import DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt as Roadmap
@@ -91,7 +92,7 @@ nsFinalStatePromotionImpossibleHere ()
 
 nsFinalStateStatement : String
 nsFinalStateStatement =
-  "NS final state: Leray W1-W5 and the candidate-complete self-contained A1-A9 package are explicit at receipt scope, the classical theorem intake is explicit, and the remaining issue is exact acceptance/promotion of the consumed norms/constants package into continuum enstrophy, BKM regularity, global smoothness, and Clay closure; all promotion flags remain false."
+  "NS final state: Leray W1-W5 and the candidate-complete self-contained A1-A9 package are explicit at receipt scope, the classical theorem intake is explicit, and a bounded candidate-complete enstrophy/vorticity/BKM/global-regularity passage surface is recorded separately; the remaining issue is exact acceptance/promotion of the consumed norms/constants package into continuum enstrophy, BKM regularity, global smoothness, and Clay closure; all promotion flags remain false."
 
 record NSFinalStateReceipt : Setω where
   field
@@ -172,6 +173,21 @@ record NSFinalStateReceipt : Setω where
 
     criticalBesovControlNotConstructed :
       Phase2.criticalBesovControlConstructed phase2Receipt ≡ false
+
+    candidateCompleteEnstrophyBKMPassageReceipt :
+      Passage.NSCandidateCompleteEnstrophyBKMPassageReceipt
+
+    candidateCompletePassageRecorded :
+      Bool
+
+    candidateCompletePassageRecordedIsTrue :
+      candidateCompletePassageRecorded ≡ true
+
+    candidateCompletePassagePromoted :
+      Bool
+
+    candidateCompletePassagePromotedIsFalse :
+      candidateCompletePassagePromoted ≡ false
 
     closedItems :
       List NSFinalStateClosedItem
@@ -312,6 +328,16 @@ canonicalNSFinalStateReceipt =
         Phase2.canonicalPhase2ProgrammeReceipt
     ; criticalBesovControlNotConstructed =
         refl
+    ; candidateCompleteEnstrophyBKMPassageReceipt =
+        Passage.canonicalNSCandidateCompleteEnstrophyBKMPassageReceipt
+    ; candidateCompletePassageRecorded =
+        true
+    ; candidateCompletePassageRecordedIsTrue =
+        refl
+    ; candidateCompletePassagePromoted =
+        false
+    ; candidateCompletePassagePromotedIsFalse =
+        refl
     ; closedItems =
         canonicalNSFinalStateClosedItems
     ; closedItemsAreCanonical =
@@ -368,6 +394,7 @@ canonicalNSFinalStateReceipt =
         "W1-W5 record the Leray weak-solution chain, and the self-contained candidate A1-A9 package is explicit at receipt scope"
         ∷ "The classical theorem intake is explicit; these receipts are no longer blocked on theorem-shape grammar"
         ∷ "The 2/3/5 Haar-frame route and the critical-Besov large-data route are consumed fail-closed as package evidence and do not by themselves promote Clay NS"
+        ∷ "A bounded candidate-complete enstrophy/vorticity/BKM/global-regularity passage receipt is surfaced separately and remains non-promoting"
         ∷ "The remaining issue is exact acceptance/promotion of the consumed norms/constants package into continuum enstrophy, L-infinity vorticity control, continuum BKM, and global smooth regularity"
         ∷ "Clay Navier-Stokes and terminal promotion remain false"
         ∷ []

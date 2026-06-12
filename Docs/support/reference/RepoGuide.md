@@ -183,6 +183,18 @@ Diagram policy:
 - regenerate previews with `./scripts/render_docs_diagrams.sh`
 - use `architecture.md` as the canonical textual entrypoint for diagrams
 
+Clay sprint artifact policy:
+
+- `Docs/diagrams/Images/clay-analytic-sprint/` contains generated diagnostics
+  and replay evidence, not hand-maintained source
+- keep compact summaries/manifests/checks in git when they are used as stable
+  receipts
+- do not commit oversized row-level dumps such as
+  `ns_packet_transition_table.csv`; regenerate them from the NS diagnostic
+  harness when needed
+- Sprint 48 replenishment replay can be rebuilt from the tracked Sprint 47
+  `ns_packet_transition_summary.csv` inputs via `scripts/ns_diagnostic_harness.py`
+
 Module-to-doc relation:
 
 - `architecture.md` and `Docs/support/reference/CanonicalProofSpine.md` map the main closure path

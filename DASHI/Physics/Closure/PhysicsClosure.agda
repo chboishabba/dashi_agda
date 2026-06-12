@@ -13,6 +13,8 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import DASHI.Physics.Constraints.Closure
 open import MDL.Core.Core as OldMDL
 open import DASHI.MDL.MDLDescentTradeoff as MDL using (MDLParts)
+import DASHI.Physics.Closure.Candidate256PhysicalCalibrationExternalReceipt
+import DASHI.Physics.Closure.PromotionProbeCutsetReceipt
 open import DASHI.Physics.Closure.MDLTradeoffShiftInstance as MSI
 open import DASHI.Physics.RealTernaryCarrier as RTC
 open import DASHI.Physics.Closure.OrthogonalityZLift

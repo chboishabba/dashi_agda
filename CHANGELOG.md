@@ -6,6 +6,21 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Candidate-receipt and honest-probe refactor for `2026-06-12`: adds
+  `DASHI.Physics.Closure.NSCandidateCompleteEnstrophyBKMPassageReceipt` and
+  `DASHI.Physics.Closure.YML3TightnessBoundedCandidateReceipt`, threads those
+  bounded candidate surfaces into
+  `DASHI.Physics.Closure.NSFinalStateReceipt` and
+  `DASHI.Physics.Closure.YMFinalStateReceipt`, extends
+  `DASHI.Physics.Closure.Paper0SharedMarginDependencyReceipt` with a
+  candidate-only lane-specific analytics witness, and surfaces
+  `DASHI.Physics.Closure.PromotionProbeCutsetReceipt` through
+  `DASHI.Physics.Closure.PhysicsClosure`. The round also rewrites
+  `DASHI.Physics.Probes.AllProbes` and the four probe lane modules so the
+  aggregate compiles against fail-closed cutset contracts instead of impossible
+  promotion witnesses. Clay/terminal/full-unification promotions remain
+  false/open.
+
 - Finite projection/nonlocality spectral tranche for `2026-06-08`: adds
   `DASHI.Physics.Closure.NSDefectLaplacianRankOneSpectrum`,
   `DASHI.Physics.Closure.NSMonodromyIntegralBoundFinite`,
