@@ -1,0 +1,5 @@
+PASS	DASHI/Everything.agda	/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Everything.agda.log
+FAIL	DASHI/Physics/Probes/NSPromotionProbe.agda	/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Physics_Probes_NSPromotionProbe.agda.log
+FAIL	DASHI/Physics/Probes/YMPromotionProbe.agda	/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Physics_Probes_YMPromotionProbe.agda.log
+FAIL	DASHI/Physics/Probes/UnificationPromotionProbe.agda	/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Physics_Probes_UnificationPromotionProbe.agda.log
+FAIL	DASHI/Physics/Probes/CurrentProofProfilePromotionProbe.agda	/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Physics_Probes_CurrentProofProfilePromotionProbe.agda.log

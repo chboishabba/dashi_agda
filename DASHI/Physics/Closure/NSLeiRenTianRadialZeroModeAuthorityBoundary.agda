@@ -193,6 +193,37 @@ radialZeroModeAuthoritySupportRowCountIs7 :
 radialZeroModeAuthoritySupportRowCountIs7 =
   refl
 
+data RadialZeroModeAuthorityClause : Set where
+  clauseExternalGreatCircleHittingFeedsRadialRoute :
+    RadialZeroModeAuthorityClause
+  clauseRadialZeroModeExclusionNeedsConcreteAvoidanceGeometry :
+    RadialZeroModeAuthorityClause
+  clauseDirectionSupportTransferCannotCollapseToAuthoritySlogan :
+    RadialZeroModeAuthorityClause
+  clauseResidualClosureRemainsDownstream :
+    RadialZeroModeAuthorityClause
+  clauseFailClosedPromotionPosture :
+    RadialZeroModeAuthorityClause
+
+canonicalRadialZeroModeAuthorityClauses :
+  List RadialZeroModeAuthorityClause
+canonicalRadialZeroModeAuthorityClauses =
+  clauseExternalGreatCircleHittingFeedsRadialRoute
+  ∷ clauseRadialZeroModeExclusionNeedsConcreteAvoidanceGeometry
+  ∷ clauseDirectionSupportTransferCannotCollapseToAuthoritySlogan
+  ∷ clauseResidualClosureRemainsDownstream
+  ∷ clauseFailClosedPromotionPosture
+  ∷ []
+
+radialZeroModeAuthorityClauseCount : Nat
+radialZeroModeAuthorityClauseCount =
+  listLength canonicalRadialZeroModeAuthorityClauses
+
+radialZeroModeAuthorityClauseCountIs5 :
+  radialZeroModeAuthorityClauseCount ≡ 5
+radialZeroModeAuthorityClauseCountIs5 =
+  refl
+
 data RadialZeroModeAuthorityBlocker : Set where
   zeroModeSetClassificationBoundaryNotSufficient :
     RadialZeroModeAuthorityBlocker
@@ -658,37 +689,41 @@ canonicalNSLeiRenTianRadialZeroModeFailClosedReceipt =
 ------------------------------------------------------------------------
 -- ORCSLPGF.
 
+radialZeroModeAuthorityTheoremLadderSummary : String
+radialZeroModeAuthorityTheoremLadderSummary =
+  "The radial LRT ladder is: external great-circle-hitting intake, radial zero-mode route requires a concrete great-circle-avoidance geometry witness, direction-support transfer must stay non-degenerate, residual closure remains downstream, and promotion stays fail-closed."
+
 organizationString : String
 organizationString =
-  "O: NSLeiRenTianRadialZeroModeAuthorityBoundary is worker lane 1's external-authority boundary for radial NS zero modes."
+  "O: Own the self-contained LRT radial-zero-mode lane only, rewriting the radial boundary as an explicit theorem ladder rather than a bare authority hook."
 
 requirementString : String
 requirementString =
-  "R: Record Lei-Ren-Tian arXiv:2501.08976 Corollary 1.5 as great-circle vorticity-direction authority support for radial zero-mode exclusion."
+  "R: Record Lei-Ren-Tian arXiv:2501.08976 Corollary 1.5 as the entry point of a radial theorem ladder: great-circle hitting is necessary at singularity, radial exclusion needs a concrete avoidance geometry, and the support-transfer route must remain non-degenerate before any exclusion claim can be consumed."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: The module exports source metadata, zero-mode carriers, radial exclusion boundary target, support/status/blocker rows, fail-closed gates, booleans, and equality receipts."
+  "C: The module exports source metadata, zero-mode carriers, an explicit five-clause radial ladder, radial exclusion boundary target, support/status/blocker rows, fail-closed gates, booleans, theorem-ladder summary, and equality receipts."
 
 stateString : String
 stateString =
-  "S: Rank-one zero-mode algebra, zero-mode classification, Sprint163 topology vocabulary, Sigma target, and microlocal defect-mass boundary are consumed; internal proof and microlocal measure construction remain open."
+  "S: Rank-one zero-mode algebra, zero-mode classification, Sprint163 topology vocabulary, Sigma target, and microlocal defect-mass boundary are consumed; the route still lacks a concrete radial great-circle-avoidance witness and a non-collapsing transfer from radial support geometry to the LRT direction set."
 
 latticeString : String
 latticeString =
-  "L: defect Laplacian zero modes -> radial zero-mode support scenario -> Lei-Ren-Tian great-circle obstruction authority -> radial case boundary -> residual/Clay blockers."
+  "L: defect Laplacian zero modes -> radial support scenario -> concrete great-circle-avoidance geometry -> non-degenerate direction-set support transfer -> Lei-Ren-Tian obstruction boundary -> residual/Clay blockers."
 
 proposalString : String
 proposalString =
-  "P: Promote only an authority-backed theorem boundary for the radial zero-mode case; keep internal theorem completion and Clay promotion false."
+  "P: Keep the radial packet as a reviewer-readable theorem ladder only; do not upgrade it beyond a boundary until the radial geometry witness, non-degenerate support transfer, and residual closure are all supplied."
 
 governanceString : String
 governanceString =
-  "G: External authority is recorded as metadata and boundary support; internal formalization, microlocal defect mass, NSCriticalResidual, Clay NS, and terminal promotion are false."
+  "G: External authority is recorded as metadata and boundary support, but the route is fail-closed against slogan-level promotion: internal formalization, non-degenerate support transfer, microlocal defect mass, NSCriticalResidual, Clay NS, and terminal promotion remain false."
 
 gapString : String
 gapString =
-  "F: Missing evidence is internal formalization of Lei-Ren-Tian, proof that the radial zero-mode set misses a great circle in the active bundle, transfer from microlocal support to vorticity direction set I, and closure of all non-radial/tangential/wedge cases."
+  "F: Missing evidence is internal formalization of Lei-Ren-Tian, proof that the radial zero-mode set misses a great circle in the active bundle, a non-collapsing transfer from microlocal/radial support to the vorticity direction set I, and closure of all non-radial, tangential, and wedge cases."
 
 record NSLeiRenTianRadialZeroModeAuthorityORCSLPGF : Set where
   constructor nsLeiRenTianRadialZeroModeAuthorityORCSLPGF
@@ -844,6 +879,21 @@ record NSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt : Setω where
     supportRowCountProof :
       supportRowCount ≡ 7
 
+    theoremClauses :
+      List RadialZeroModeAuthorityClause
+    theoremClausesAreCanonical :
+      theoremClauses ≡ canonicalRadialZeroModeAuthorityClauses
+    theoremClauseCount :
+      Nat
+    theoremClauseCountIsCanonical :
+      theoremClauseCount ≡ radialZeroModeAuthorityClauseCount
+    theoremClauseCountProof :
+      theoremClauseCount ≡ 5
+    theoremLadderSummary :
+      String
+    theoremLadderSummaryIsCanonical :
+      theoremLadderSummary ≡ radialZeroModeAuthorityTheoremLadderSummary
+
     blockerRows :
       List RadialZeroModeAuthorityBlocker
     blockerRowsAreCanonical :
@@ -940,6 +990,13 @@ canonicalNSLeiRenTianRadialZeroModeAuthorityBoundaryReceipt =
     radialZeroModeAuthoritySupportRowCount
     refl
     radialZeroModeAuthoritySupportRowCountIs7
+    canonicalRadialZeroModeAuthorityClauses
+    refl
+    radialZeroModeAuthorityClauseCount
+    refl
+    radialZeroModeAuthorityClauseCountIs5
+    radialZeroModeAuthorityTheoremLadderSummary
+    refl
     canonicalRadialZeroModeAuthorityBlockers
     refl
     radialZeroModeAuthorityBlockerCount

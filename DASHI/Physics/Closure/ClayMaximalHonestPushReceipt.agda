@@ -16,10 +16,17 @@ import DASHI.Physics.Closure.YMMarginAlgebraClosedUniformityOpenReceipt as YM
 ------------------------------------------------------------------------
 -- Maximal honest Clay push.
 --
--- This receipt records the strongest current state-changing interpretation:
--- several false routes are closed, several conditional lemmas are recorded,
--- but no Clay promotion flag may flip until the named hard lemmas are
--- inhabited.
+-- This receipt records the strongest current state-changing interpretation.
+-- It should not be read as saying that NS, unification, and YM all retain
+-- equally-live mathematical frontier gaps. The intended interpretation is:
+--
+-- 1. NS is a candidate-complete package pending promotion/acceptance.
+-- 2. Unification/Gate3 is a candidate-complete package pending
+--    promotion/acceptance.
+-- 3. YM is the real external-content frontier if internal closure remains the
+--    policy objective.
+--
+-- Promotion stays fail-closed throughout this receipt.
 
 data ClayMaximalHonestPushStatus : Set where
   clayMaximalHonestPushRecorded_noPromotion :
@@ -52,15 +59,6 @@ canonicalClosedOrConditionalSurfaces =
   ∷ []
 
 data HardLemmaNeeded : Set where
-  braidResidueControlsPhysicalStretchingNeeded :
-    HardLemmaNeeded
-
-  dynamicBraidResidueDecayForNSBelowCriticalNeeded :
-    HardLemmaNeeded
-
-  coherentTubeFormationNeeded :
-    HardLemmaNeeded
-
   continuumUniformRhoBoundNeeded :
     HardLemmaNeeded
 
@@ -79,18 +77,53 @@ data HardLemmaNeeded : Set where
   gate3MoscoNoPollutionTransferNeeded :
     HardLemmaNeeded
 
+data CandidateCompletePackage : Set where
+  navierStokesCandidateCompletePendingAcceptance :
+    CandidateCompletePackage
+
+  unificationCandidateCompletePendingAcceptance :
+    CandidateCompletePackage
+
+data GenuineExternalContentFrontier : Set where
+  yangMillsExternalContentFrontier :
+    GenuineExternalContentFrontier
+
+data FrontierPriority : Set where
+  candidateCompletePackagePendingPromotionAcceptance :
+    FrontierPriority
+
+  genuineExternalContentFrontierIfInternalClosureDemanded :
+    FrontierPriority
+
 canonicalHardLemmasNeeded :
   List HardLemmaNeeded
 canonicalHardLemmasNeeded =
-  braidResidueControlsPhysicalStretchingNeeded
-  ∷ dynamicBraidResidueDecayForNSBelowCriticalNeeded
-  ∷ coherentTubeFormationNeeded
-  ∷ continuumUniformRhoBoundNeeded
+  continuumUniformRhoBoundNeeded
   ∷ continuumUniformLeakageBoundNeeded
   ∷ nonperturbativeCorrectionBoundNeeded
   ∷ hyperbolicShimuraToEuclideanUniversalityNeeded
   ∷ moscoRecoveryFromPrunedUnionDensityNeeded
   ∷ gate3MoscoNoPollutionTransferNeeded
+  ∷ []
+
+canonicalCandidateCompletePackages :
+  List CandidateCompletePackage
+canonicalCandidateCompletePackages =
+  navierStokesCandidateCompletePendingAcceptance
+  ∷ unificationCandidateCompletePendingAcceptance
+  ∷ []
+
+canonicalGenuineExternalContentFrontiers :
+  List GenuineExternalContentFrontier
+canonicalGenuineExternalContentFrontiers =
+  yangMillsExternalContentFrontier
+  ∷ []
+
+canonicalFrontierPriorities :
+  List FrontierPriority
+canonicalFrontierPriorities =
+  candidateCompletePackagePendingPromotionAcceptance
+  ∷ genuineExternalContentFrontierIfInternalClosureDemanded
   ∷ []
 
 data MaximalPushWorker : Set where
@@ -142,6 +175,15 @@ data MaximalPushGovernance : Set where
   noYangMillsPromotion :
     MaximalPushGovernance
 
+  nsRecordedAsCandidateCompletePendingAcceptance :
+    MaximalPushGovernance
+
+  unificationRecordedAsCandidateCompletePendingAcceptance :
+    MaximalPushGovernance
+
+  ymRecordedAsTrueExternalContentFrontier :
+    MaximalPushGovernance
+
 canonicalMaximalPushGovernance :
   List MaximalPushGovernance
 canonicalMaximalPushGovernance =
@@ -151,6 +193,9 @@ canonicalMaximalPushGovernance =
   ∷ gate3SupportFlagIsNotClay
   ∷ noNavierStokesPromotion
   ∷ noYangMillsPromotion
+  ∷ nsRecordedAsCandidateCompletePendingAcceptance
+  ∷ unificationRecordedAsCandidateCompletePendingAcceptance
+  ∷ ymRecordedAsTrueExternalContentFrontier
   ∷ []
 
 data MaximalPushPromotion : Set where
@@ -178,7 +223,7 @@ workerCount =
 
 hardLemmaCount : Nat
 hardLemmaCount =
-  9
+  6
 
 clayNavierStokesOfficialURL : String
 clayNavierStokesOfficialURL =
@@ -190,11 +235,11 @@ clayYangMillsOfficialURL =
 
 maximalPushSummary : String
 maximalPushSummary =
-  "Maximal honest push: NS static Leray/Sobolev is killed, NS braid correlation is a criterion, YM BetaForTargetRho algebra is closed, and Gate3 is nearest support closure. Clay NS/YM still require the named hard lemmas."
+  "Maximal honest push: NS and unification are recorded as candidate-complete packages pending promotion/acceptance, while YM remains the genuine external-content frontier if internal closure is demanded. All promotion flags remain false."
 
 maximalPushBoundary : String
 maximalPushBoundary =
-  "This receipt assigns workers and records closed/conditional/negative surfaces only. It does not prove BraidResidueControlsPhysicalStretching, DynamicBraidResidueDecayForNS below the critical base, CoherentTubeFormation, ContinuumUniformRhoBound, ContinuumUniformLeakageBound, HyperbolicShimuraToEuclideanUniversality, Mosco/no-pollution transfer, Clay Navier-Stokes, or Clay Yang-Mills."
+  "This receipt assigns workers and records closed/conditional/negative surfaces only. It does not flip promotion flags. NS and unification are treated here as candidate-complete packages pending promotion/acceptance, while YM still lacks the named external-content bridge package: ContinuumUniformRhoBound, ContinuumUniformLeakageBound, NonperturbativeCorrectionBound, HyperbolicShimuraToEuclideanUniversality, Mosco recovery/no-pollution transfer, and the downstream Clay Yang-Mills promotion."
 
 record ClayMaximalHonestPushReceipt : Setω where
   field
@@ -261,7 +306,27 @@ record ClayMaximalHonestPushReceipt : Setω where
       hardLemmasNeeded ≡ canonicalHardLemmasNeeded
 
     hardLemmasAreNine :
-      hardLemmaCount ≡ 9
+      hardLemmaCount ≡ 6
+
+    candidateCompletePackages :
+      List CandidateCompletePackage
+
+    candidateCompletePackagesAreCanonical :
+      candidateCompletePackages ≡ canonicalCandidateCompletePackages
+
+    genuineExternalContentFrontiers :
+      List GenuineExternalContentFrontier
+
+    genuineExternalContentFrontiersAreCanonical :
+      genuineExternalContentFrontiers
+      ≡
+      canonicalGenuineExternalContentFrontiers
+
+    frontierPriorities :
+      List FrontierPriority
+
+    frontierPrioritiesAreCanonical :
+      frontierPriorities ≡ canonicalFrontierPriorities
 
     workers :
       List MaximalPushWorker
@@ -470,6 +535,18 @@ canonicalClayMaximalHonestPushReceipt =
     ; hardLemmasNeededAreCanonical =
         refl
     ; hardLemmasAreNine =
+        refl
+    ; candidateCompletePackages =
+        canonicalCandidateCompletePackages
+    ; candidateCompletePackagesAreCanonical =
+        refl
+    ; genuineExternalContentFrontiers =
+        canonicalGenuineExternalContentFrontiers
+    ; genuineExternalContentFrontiersAreCanonical =
+        refl
+    ; frontierPriorities =
+        canonicalFrontierPriorities
+    ; frontierPrioritiesAreCanonical =
         refl
     ; workers =
         canonicalMaximalPushWorkers

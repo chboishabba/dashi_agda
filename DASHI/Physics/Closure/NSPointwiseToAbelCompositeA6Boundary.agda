@@ -30,6 +30,22 @@ import DASHI.Physics.Closure.NSPointwiseToAbelAveragingBoundary
 -- prove A6, residual monotonicity, residual depletion, NS Clay, or any
 -- terminal promotion.
 
+sharpenedA1PackageReference : String
+sharpenedA1PackageReference =
+  "DASHI.Physics.Closure.NSA1TypeILorentzToAbelMassRouteTheoremBoundary"
+
+sharpenedA3PackageReference : String
+sharpenedA3PackageReference =
+  "DASHI.Physics.Closure.NSQuantitativeStationarityRateBoundary"
+
+sharpenedA4PackageReference : String
+sharpenedA4PackageReference =
+  "DASHI.Physics.Closure.NSA4ResidualPositiveTheoremLadderBoundary"
+
+sharpenedA5ConsumerReference : String
+sharpenedA5ConsumerReference =
+  "DASHI.Physics.Closure.NSA5KappaBiasVanishingFromA4StationarityBoundary"
+
 data List (A : Set) : Set where
   [] :
     List A
@@ -101,6 +117,10 @@ localizationChildOpen =
 
 localizationChildImported : Bool
 localizationChildImported =
+  true
+
+sharpenedA1A3A4PackageConsumedRecorded : Bool
+sharpenedA1A3A4PackageConsumedRecorded =
   true
 
 compositeTheoremProved : Bool
@@ -298,9 +318,130 @@ compositeA6DependencyEdgeCountIs10 :
 compositeA6DependencyEdgeCountIs10 =
   refl
 
+data A6EnstrophyLeakageRouteClause : Set where
+  a61-localized-enstrophy-ode-starting-from-partial-t-dr-plus-lambda-r-dr :
+    A6EnstrophyLeakageRouteClause
+  a62-transport-term-cancelled-up-to-localization-commutator :
+    A6EnstrophyLeakageRouteClause
+  a63-stretching-split-into-diagonal-offdiagonal-shells :
+    A6EnstrophyLeakageRouteClause
+  a64-pressure-and-cutoff-errors-routed-to-localization-child :
+    A6EnstrophyLeakageRouteClause
+  a65-bony-paraproduct-replacement-with-order-ninv-correction :
+    A6EnstrophyLeakageRouteClause
+  a66-pointwise-to-abel-shell-mean-transfer :
+    A6EnstrophyLeakageRouteClause
+  a67-a5-bias-vanishing-absorbed-into-epsilon-budget :
+    A6EnstrophyLeakageRouteClause
+  a68-assembled-inequality-partial-t-dr-plus-quarter-epsilon-c-lambda-dr :
+    A6EnstrophyLeakageRouteClause
+
+canonicalA6EnstrophyLeakageRouteClauses :
+  List A6EnstrophyLeakageRouteClause
+canonicalA6EnstrophyLeakageRouteClauses =
+  a61-localized-enstrophy-ode-starting-from-partial-t-dr-plus-lambda-r-dr
+  ∷ a62-transport-term-cancelled-up-to-localization-commutator
+  ∷ a63-stretching-split-into-diagonal-offdiagonal-shells
+  ∷ a64-pressure-and-cutoff-errors-routed-to-localization-child
+  ∷ a65-bony-paraproduct-replacement-with-order-ninv-correction
+  ∷ a66-pointwise-to-abel-shell-mean-transfer
+  ∷ a67-a5-bias-vanishing-absorbed-into-epsilon-budget
+  ∷ a68-assembled-inequality-partial-t-dr-plus-quarter-epsilon-c-lambda-dr
+  ∷ []
+
+a6EnstrophyLeakageRouteClauseCount : Nat
+a6EnstrophyLeakageRouteClauseCount =
+  listLength canonicalA6EnstrophyLeakageRouteClauses
+
+a6EnstrophyLeakageRouteClauseCountIs8 :
+  a6EnstrophyLeakageRouteClauseCount ≡ 8
+a6EnstrophyLeakageRouteClauseCountIs8 =
+  refl
+
+data A6TransportCommutatorStretchingClause : Set where
+  transportPartIsConvertedToCutoffCommutator :
+    A6TransportCommutatorStretchingClause
+  localizationCommutatorFeedsPressureSubBudget :
+    A6TransportCommutatorStretchingClause
+  diagonalStretchingFeedsAbelMeanMainTerm :
+    A6TransportCommutatorStretchingClause
+  offDiagonalStretchingFeedsShellAbsorption :
+    A6TransportCommutatorStretchingClause
+  shellMixingLlnConvertsFiniteWindowToAbelAverage :
+    A6TransportCommutatorStretchingClause
+
+canonicalA6TransportCommutatorStretchingClauses :
+  List A6TransportCommutatorStretchingClause
+canonicalA6TransportCommutatorStretchingClauses =
+  transportPartIsConvertedToCutoffCommutator
+  ∷ localizationCommutatorFeedsPressureSubBudget
+  ∷ diagonalStretchingFeedsAbelMeanMainTerm
+  ∷ offDiagonalStretchingFeedsShellAbsorption
+  ∷ shellMixingLlnConvertsFiniteWindowToAbelAverage
+  ∷ []
+
+a6TransportCommutatorStretchingClauseCount : Nat
+a6TransportCommutatorStretchingClauseCount =
+  listLength canonicalA6TransportCommutatorStretchingClauses
+
+a6TransportCommutatorStretchingClauseCountIs5 :
+  a6TransportCommutatorStretchingClauseCount ≡ 5
+a6TransportCommutatorStretchingClauseCountIs5 =
+  refl
+
+data A6EffectiveBudgetLine : Set where
+  budget-main-damping-quarter-epsilon0-c-lambda :
+    A6EffectiveBudgetLine
+  budget-diagonal-abel-main-term :
+    A6EffectiveBudgetLine
+  budget-offdiagonal-shell-absorption :
+    A6EffectiveBudgetLine
+  budget-localization-pressure-commutator :
+    A6EffectiveBudgetLine
+  budget-bony-ninv-remainder :
+    A6EffectiveBudgetLine
+  budget-a5-bias-vanishing-gain :
+    A6EffectiveBudgetLine
+
+canonicalA6EffectiveBudgetLines :
+  List A6EffectiveBudgetLine
+canonicalA6EffectiveBudgetLines =
+  budget-main-damping-quarter-epsilon0-c-lambda
+  ∷ budget-diagonal-abel-main-term
+  ∷ budget-offdiagonal-shell-absorption
+  ∷ budget-localization-pressure-commutator
+  ∷ budget-bony-ninv-remainder
+  ∷ budget-a5-bias-vanishing-gain
+  ∷ []
+
+a6EffectiveBudgetLineCount : Nat
+a6EffectiveBudgetLineCount =
+  listLength canonicalA6EffectiveBudgetLines
+
+a6EffectiveBudgetLineCountIs6 :
+  a6EffectiveBudgetLineCount ≡ 6
+a6EffectiveBudgetLineCountIs6 =
+  refl
+
+a6EnstrophyLeakageRouteTheoremText : String
+a6EnstrophyLeakageRouteTheoremText =
+  "A6 candidate theorem grammar: start from the localized enstrophy identity for D_r, split transport, stretching, pressure, and cutoff pieces, route transport into a localization commutator, split stretching into diagonal and off-diagonal shell interactions, replace the pointwise main term by the Abel shell mean using the diagonal/off-diagonal/LLN children, absorb A5 bias and O(N^-1) Bony remainder into the effective epsilon budget, and record the assembled inequality ∂t D_r + (ε0/4)c_lambda D_r <= C_eff D_r^(1+alpha)."
+
+a6AssembledInequalityShape : String
+a6AssembledInequalityShape =
+  "Exact A6 inequality shape: ∂t D_r + ((ε0 / 4) c_lambda) D_r <= C_eff D_r^(1+alpha), where C_eff is the fail-closed aggregate of diagonal Abel main-term normalization, off-diagonal shell absorption leakage, localization/pressure commutator cost, and O(N^-1) paraproduct remainder."
+
+a6TransportCommutatorStretchingSummary : String
+a6TransportCommutatorStretchingSummary =
+  "Decomposition grammar: transport is cancelled except for cutoff/localization commutators; stretching is split into diagonal shell interactions, off-diagonal shell leakage, and Abel shell-mixing transfer; pressure and cutoff terms are delegated to the localization child before final A6 assembly."
+
+a6EffectiveBudgetSummary : String
+a6EffectiveBudgetSummary =
+  "Effective constants/budgets: retain a quarter of ε0*c_lambda as damping, book the diagonal Abel term as the main source coefficient, require off-diagonal and localization/pressure costs to be absorbable, and keep the Bony O(N^-1) remainder plus A5 bias contribution strictly inside the residual source constant C_eff."
+
 dependencyDAGSummary : String
 dependencyDAGSummary =
-  "A6 parent fans out to diagonal, offdiag, LLN, and expected localization children; all four children must feed the A6 composite theorem before residual monotonicity or NS Clay can be considered."
+  "A6 consumes the sharpened A1/A3/A4 package through the recorded A5 consumer, then the A6 parent fans out to diagonal, offdiag, LLN, and localization children; all four children must feed the exact transport/commutator/stretching route and assembled inequality before any residual monotonicity, A7 depletion, or NS Clay claim can be considered."
 
 ------------------------------------------------------------------------
 -- Remaining blockers and fail-closed summary.
@@ -341,13 +482,29 @@ compositeA6BlockerCountIs7 :
 compositeA6BlockerCountIs7 =
   refl
 
+compositeA6BlockerName : CompositeA6Blocker → String
+compositeA6BlockerName localizationPressureCommutatorChildMissing =
+  "missingNSLocalizationPressureCommutatorTheoremInput"
+compositeA6BlockerName diagonalChildIsBoundaryNotTheorem =
+  "missingNSDiagonalStretchingToAbelMeanTheorem"
+compositeA6BlockerName offDiagonalChildIsBoundaryNotTheorem =
+  "missingNSOffDiagonalShellAbsorptionTheorem"
+compositeA6BlockerName llnChildIsBoundaryNotTheorem =
+  "missingNSAbelShellMixingLLNTheorem"
+compositeA6BlockerName pointwiseToAbelA6TheoremStillFalse =
+  "missingA6PointwiseToAbelCompositeTheorem"
+compositeA6BlockerName residualMonotonicityStillFalse =
+  "missingA7ResidualDepletionOrMonotonicityPromotion"
+compositeA6BlockerName nsClayPromotionStillFalse =
+  "missingNSClayAuthorityAfterA6A9"
+
 remainingBlockersSummary : String
 remainingBlockersSummary =
-  "Remaining blockers: import or type NSLocalizationPressureCommutatorBoundary, upgrade diagonal/offdiag/LLN child boundaries to theorem inputs, assemble A6 pointwise-to-Abel theorem, then prove residual monotonicity. NS Clay remains false."
+  "Remaining blockers: upgrade localization, diagonal, off-diagonal, and LLN children to theorem inputs; assemble the exact A6 transport/commutator/stretching route through ∂t D_r + (ε0/4)c_lambda D_r <= C_eff D_r^(1+alpha); then prove A7 residual depletion. NS Clay remains false."
 
 orcsLpgfSummary : String
 orcsLpgfSummary =
-  "O Lane 3 Curie composite A6 receipt; R tie parent A6 to typed diagonal/offdiag/LLN children and named localization child; C stdlib-only fail-closed Agda module; S localization child open, theorem promotions false; L dependency DAG records child-to-A6-to-residual-to-Clay order; P add/import localization receipt then theorem-level A6 assembly; G no Everything/docs/manifest edits and no Clay promotion; F composite theorem/A6/residual monotonicity/NS Clay remain false."
+  "O downstream A6 consumer surface; R record exact A6 inequality shape, transport/commutator/stretching decomposition, and effective budgets while consuming the sharpened A1/A3/A4 package through A5; C fail-closed Agda composite; S all theorem promotions remain false; L A1/A3/A4 -> A5 -> exact A6 assembly -> A7 -> A8/A9 order is explicit; P promote child theorems before assembling the A6 inequality; G no Clay promotion; F A6 theorem, A7 depletion, and downstream closure remain false."
 
 ------------------------------------------------------------------------
 -- Canonical composite receipt.
@@ -368,9 +525,27 @@ record NSPointwiseToAbelCompositeA6Boundary : Set where
       List CompositeA6Blocker
     blockerCountProof :
       compositeA6BlockerCount ≡ 7
+    theoremClauses :
+      List A6EnstrophyLeakageRouteClause
+    theoremClauseCountProof :
+      a6EnstrophyLeakageRouteClauseCount ≡ 8
+    decompositionClauses :
+      List A6TransportCommutatorStretchingClause
+    decompositionClauseCountProof :
+      a6TransportCommutatorStretchingClauseCount ≡ 5
+    budgetLines :
+      List A6EffectiveBudgetLine
+    budgetLineCountProof :
+      a6EffectiveBudgetLineCount ≡ 6
     localizationChildName :
       String
     localizationChildSummary :
+      String
+    assembledInequalityShape :
+      String
+    decompositionSummary :
+      String
+    effectiveBudgetSummary :
       String
     dependencyDAG :
       String
@@ -421,10 +596,28 @@ canonicalNSPointwiseToAbelCompositeA6Boundary =
         canonicalCompositeA6Blockers
     ; blockerCountProof =
         refl
+    ; theoremClauses =
+        canonicalA6EnstrophyLeakageRouteClauses
+    ; theoremClauseCountProof =
+        refl
+    ; decompositionClauses =
+        canonicalA6TransportCommutatorStretchingClauses
+    ; decompositionClauseCountProof =
+        refl
+    ; budgetLines =
+        canonicalA6EffectiveBudgetLines
+    ; budgetLineCountProof =
+        refl
     ; localizationChildName =
         localizationChildBoundaryReference
     ; localizationChildSummary =
         localizationChildExpectedSummary
+    ; assembledInequalityShape =
+        a6AssembledInequalityShape
+    ; decompositionSummary =
+        a6TransportCommutatorStretchingSummary
+    ; effectiveBudgetSummary =
+        a6EffectiveBudgetSummary
     ; dependencyDAG =
         dependencyDAGSummary
     ; remainingBlockers =

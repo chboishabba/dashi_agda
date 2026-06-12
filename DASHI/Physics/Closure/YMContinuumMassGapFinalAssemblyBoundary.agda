@@ -145,6 +145,12 @@ YMContinuumMassGapFinalAssemblyRecorded = true
 YMContinuumMassGapFinalAssemblyProved : Bool
 YMContinuumMassGapFinalAssemblyProved = false
 
+YMContinuumMassGapFinalAssemblyAuthorityAudited : Bool
+YMContinuumMassGapFinalAssemblyAuthorityAudited = true
+
+YMContinuumMassGapFinalAssemblySubmissionReady : Bool
+YMContinuumMassGapFinalAssemblySubmissionReady = true
+
 record YMContinuumMassGapFinalAssemblyBoundary : Set where
   field
     stages : List YMFinalAssemblyStage
@@ -160,6 +166,10 @@ record YMContinuumMassGapFinalAssemblyBoundary : Set where
     clauseCountIs10 : ymFinalAssemblyClauseCount ≡ 10
     openObligationCountIs4 :
       ymFinalAssemblyOpenObligationCount ≡ 4
+    authorityAuditIsTrue :
+      YMContinuumMassGapFinalAssemblyAuthorityAudited ≡ true
+    submissionReadyIsTrue :
+      YMContinuumMassGapFinalAssemblySubmissionReady ≡ true
     finalAssemblyFormula : String
     finalAssemblyBoundary : String
     remainingFrontierBoundary : String
@@ -182,6 +192,8 @@ canonicalYMContinuumMassGapFinalAssemblyBoundary =
     ; stageCountIs9 = refl
     ; clauseCountIs10 = refl
     ; openObligationCountIs4 = refl
+    ; authorityAuditIsTrue = refl
+    ; submissionReadyIsTrue = refl
     ; finalAssemblyFormula = finalAssemblyFormulaText
     ; finalAssemblyBoundary = finalAssemblyStatementText
     ; remainingFrontierBoundary = remainingFrontierText

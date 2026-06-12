@@ -1,0 +1,38 @@
+{
+  "aggregate_green_and_probe_red": true,
+  "everything_status": "PASS",
+  "everything_target": "DASHI/Everything.agda",
+  "ns_probe_status": "FAIL",
+  "probe_failures_expected": true,
+  "profile_probe_status": "FAIL",
+  "summaries": [
+    {
+      "log_file": "/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Everything.agda.log",
+      "status": "PASS",
+      "target": "DASHI/Everything.agda"
+    },
+    {
+      "log_file": "/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Physics_Probes_NSPromotionProbe.agda.log",
+      "status": "FAIL",
+      "target": "DASHI/Physics/Probes/NSPromotionProbe.agda"
+    },
+    {
+      "log_file": "/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Physics_Probes_YMPromotionProbe.agda.log",
+      "status": "FAIL",
+      "target": "DASHI/Physics/Probes/YMPromotionProbe.agda"
+    },
+    {
+      "log_file": "/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Physics_Probes_UnificationPromotionProbe.agda.log",
+      "status": "FAIL",
+      "target": "DASHI/Physics/Probes/UnificationPromotionProbe.agda"
+    },
+    {
+      "log_file": "/home/c/Documents/code/dashi_agda/logs/agda-promotion-probe-cutset/20260612T154319/DASHI_Physics_Probes_CurrentProofProfilePromotionProbe.agda.log",
+      "status": "FAIL",
+      "target": "DASHI/Physics/Probes/CurrentProofProfilePromotionProbe.agda"
+    }
+  ],
+  "target_count": 5,
+  "unification_probe_status": "FAIL",
+  "ym_probe_status": "FAIL"
+}

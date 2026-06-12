@@ -1,74 +1,139 @@
 # Navier-Stokes Analytic State
 
-Status: fixed-cutoff LP identity and conditional danger-shell route recorded; Clay-level steps remain open.
+Status: Paper 1 is now an honest reduction manuscript; the live Clay frontier
+is the coupled `A1/A3` bootstrap plus the quantitative `A4`
+Lei-Ren-Tian-to-Fourier transfer.
 
 ## What Landed
 
-1. Full fixed-K LP identity
-   - Receipt: `NSTailFluxLPIdentityFullDerivationReceipt`
-   - Result: the fixed cutoff tail identity is recorded with pressure term zero, viscous term negative, and nonlinear term isolated as flux.
-   - Boundary: it does not prove `theta < 1`.
+1. Reduction-manuscript reset
+   - Surface: `Docs/papers/live/Paper1NavierStokesClayDraft.md`
+   - Result: Paper 1 is now explicitly a conditional blowup-reduction paper
+     organized around `A1-A9`, with the constants ladder promoted to
+     theorem-sized propositions and the main analytic burden localized.
+   - Boundary: this is not a Clay proof and does not pretend that `A1-A9` are
+     already discharged.
 
-2. Adjacent-shell leakage bound
-   - Receipt: `NSAdjacentShellLeakageBoundReceipt`
-   - Result: adjacent leakage is recorded as conditionally absorbable by an epsilon fraction of dissipation.
-   - Diagnostic update: the LH/paraproduct ratio stays below `theta=1`; HH, not adjacent LH leakage, is the computed barrier-crossing term.
-   - Boundary: the estimate depends on the K-star drift/scale hypothesis and does not preserve theta by itself.
+2. A1/A3 split frontier
+   - Receipts: `NSAbelTriadicStationarityConstructionBoundary`,
+     `NSBoundedAbelMassEstimateBoundary`,
+     `NSQuantitativeStationarityRateBoundary`
+   - Result: the repo now names the live coupled wall honestly: construct the
+     Abel-weighted triadic defect measure with quantitative compactness and
+     prove enough approximate `T_NS`-stationarity to close the bootstrap.
+  - Boundary: the repo now carries an exact candidate theorem package for
+    `A1.1-A3.4`, including explicit candidate constants and rates, but the
+    closure remains fail-closed until those calculations are accepted in the
+    exact normed setting consumed downstream by `A6-A8`. In particular, the
+    current candidate `epsilon = 1/6` Seregin/ESS intake and
+    `delta_r = O(r^(1/12))` stationarity rate are recorded as concrete theorem
+    targets rather than promoted local theorems.
+   - Exact live lemma ladder:
+     `A1.1` bounded Abel-weighted defect mass,
+     `A1.2` weak-* tightness / precompactness,
+     `A1.3` quantitative shell-tail control,
+     `A3.1` energy ODE for `W_r = U_r - U_infinity`,
+     `A3.2` imported Seregin/ESS epsilon-rate intake,
+     `A3.3` `delta_r -> 0` quantitative stationarity,
+     `A3.4` multiscale Abel-summation closure with no hidden exponent loss.
+  - Verification posture: the candidate theorem package is now:
+    bounded Abel-weighted defect mass with explicit constant,
+    weak-* tightness with explicit tail radius,
+    quantitative shell-tail control,
+    localized energy ODE for `W_r`,
+    imported ESS/Seregin rate with `epsilon = 1/6`,
+    stationarity-defect rate `delta_r = O(r^(1/12))`,
+    and multiscale Abel-summation closure with finite geometric constants.
+    These are recorded as the exact inputs Paper 1 would consume if promoted;
+    they are not yet treated as locally discharged theorems.
 
-3. Conditional danger-shell maximum principle
-   - Receipt: `NSDangerShellMaxPrincipleConditionalProofReceipt`
-   - Result: under H1 controlled K-star drift, H2 mild regularity or weak domination, and H3 positive dissipation, theta at the danger shell stays below 1.
-   - Boundary: H1/H2 contain the missing control.  The computed HH term crosses/exceeds the barrier in small-`nu`, large-shell regimes.  The non-circular replacement target is an `H^{-1/2}` nonlinear-defect estimate; importing `H^{1/2}` velocity control directly would be circular as a Clay proof.
+3. A4 transfer ladder
+   - Receipts: `NSLeiRenTianOutputSupportTransferBoundary`,
+     `NSWhitneyCouplingInequalityBoundary`,
+     `NSPhiJacobianLowerBoundBoundary`, and the A4 child/composite surfaces
+   - Result: the physical-angular-richness -> Fourier-output-richness theorem
+     is now decomposed into its Jacobian/coarea/Whitney obligations.
+  - Boundary: the repo now carries an exact candidate A4 theorem package:
+    direction-map regularity, Jacobian lower bound, coarea propagation,
+    strip-hitting richness, and a rescaling-uniform lower bound. The
+    governance posture remains fail-closed until that package is accepted as a
+    usable theorem in the precise output-support form consumed by `A5-A6`.
+   - Exact live lemma ladder:
+     `A4.1` direction-map regularity,
+     `A4.2` Jacobian lower-bound / nondegeneracy route,
+     `A4.3` coarea propagation,
+     `A4.4` strip-hitting / pushforward richness,
+     `A4.5` uniformity across the Type-I rescaling family.
 
-4. Conditional theta-to-BKM/Serrin bridge
-   - Receipt: `NSThetaTailToBKMBridgeReceipt`
-   - Result: theta control plus a uniform K-star bound is routed toward BKM/Serrin continuation.
-   - Boundary: the BKM criterion is not discharged unconditionally.
+4. Downstream route organization
+   - Receipts: `NSA5KappaBiasVanishingFromA4StationarityBoundary`,
+     `NSPointwiseToAbelCompositeA6Boundary`,
+     `NSA7ResidualDepletionGronwallBoundary`,
+     `NSA8A9MonotonicityClosureTheoremLadderBoundary`
+   - Result: once `A1/A3` and `A4` are available, the later A5-A9 stages are
+     organized as downstream consumers rather than free-floating blockers.
+   - Boundary: these stages are not yet promoted independently of the earlier
+     fronts, but the repo now records an exact candidate downstream theorem
+     package rather than generic placeholders.
+   - Exact candidate downstream package:
+     `A5` kappa-bias vanishing from asymptotic stationarity plus A4 richness,
+     `A6` pointwise-to-Abel / leakage inequality with explicit transport,
+     commutator, and stretching budgets,
+     `A7` Gronwall depletion threshold,
+     `A8` scale-monotonicity recursion,
+     `A9` CKN/BKM contradiction.
+   - Verification posture: this package is recorded so the referee-facing
+   route is exact once `A1/A3` and `A4` are accepted. It does not upgrade
+   the current governance state; every theorem and Clay flag remains
+   fail-closed until the upstream fronts are promoted.
 
-5. Paper 1 comparison-theorem target
-   - Receipt: `NSPaper1ClayTargetReceipt`
-   - Result: the achievable Paper 1 target is conditional `Theta < 1` control of `H^{11/8}` by interpolation.
-   - Boundary: this comparison theorem is open/conditional and is not a Clay proof.
+5. Classical-theorem intake is now sharply packetized
+   - Receipts: the CKN / ESS / LRT packet surfaces, the standard PDE writeup
+     assembly surface, and the reviewer-facing NS packet surfaces.
+   - Result: the repo now treats the classical PDE intake as exact theorem
+     grammar rather than generic external fog. CKN local-energy and
+     epsilon-regularity, ESS backward-uniqueness / Carleman, and the
+     Lei-Ren-Tian angular-richness ladder are each named as concrete theorem
+     packets feeding `A1/A3`, `A4`, and the downstream `A5-A9` route.
+   - Boundary: this sharpens the self-contained packet story only. It does not
+     by itself promote the NS candidate package to a proved Clay theorem.
 
 ## Diagnostic
 
-Script: `../dashiCFD/scripts/ns_theta_full_sweep.py`
+The older theta/danger-shell diagnostics are still useful as obstruction
+guidance, but they are no longer the main manuscript grammar. Their honest role
+is to explain why the near-diagonal high-high interaction is the right seam to
+localize before one asks for Abel-defect compactness, quantitative
+stationarity, and the later support-geometry transfer. They remain diagnostic
+evidence only.
 
-Output: `../dashiCFD/outputs/ns_theta_full_sweep.csv`
+## Remaining NS Burden
 
-The default synthetic sweep covers five regimes and reports all rows with `NO_PROMOTION`. In the default run, `K_star_le_K_nu` held for all rows. That is diagnostic support for the seam locator, not a theorem about drift.
+The remaining NS burden is now governance-shaped rather than theorem-shape
+shaped.
 
-The new diagnostic content is a component split:
+1. Accept or reject the candidate self-contained `A1.1-A3.4` package in the
+   exact norms consumed by the downstream Abel/leakage route.
+2. Accept or reject the candidate self-contained `A4.1-A4.5` package with a
+   uniform Type-I-rescaling constant in the exact output-support form used by
+   `A5-A6`.
+3. If those two packages are accepted, the already recorded `A5-A9` ladder is
+   available as the downstream consumer path into kappa-bias vanishing,
+   pointwise-to-Abel averaging, depletion, monotonicity, and the final
+   CKN/BKM contradiction.
 
-- LH ratio stays below the `theta=1` barrier.
-- HH term crosses/exceeds the barrier in dangerous small-`nu`, large-shell regimes.
-
-This sharpens the blocker: the hard analytic term is HH.  The revised route is
-to control the nonlinear defect in `H^{-1/2}` and then use dual pairing against
-the tail in `H^{1/2}`.  Using `H^{1/2}` velocity regularity as an input would be
-circular for a Clay proof.
-
-Second-pass tail restriction:
-
-- Generated file:
-  `Docs/Images/clay-analytic-sprint/ns_theta_tail_restricted.csv`.
-- `Theta_global` is low-shell dominated at `k=2` in the sampled traces.
-- The tail theorem should use
-  `Theta_tail = sup_{k >= K_diss(nu)} theta(k)`.
-- Sampled `Theta_tail` passes for `smooth` and `kolmogorov`, fails for
-  `near_critical` and `rough`, and is unavailable for the sampled `inviscid`
-  row because `K_diss = 178` exceeds `k <= 64`.
-
-## Remaining NS Lemmas
-
-1. Non-circular K-star drift control: prove `K*(t)` stays in the dissipation range from initial finite-energy/smooth data alone.
-2. Non-circular weak domination: replace the mild-regularity hypothesis in the danger-shell max principle with a direct flux/dissipation domination estimate.
-3. Tail-to-vorticity closure: discharge the BKM/Serrin bridge without assuming the regularity it is meant to prove.
-4. HH replacement estimate: prove `||P_{>K*}(u.grad u)||_{H^{-1/2}} <= epsilon*nu*||P_{>K*}u||_{H^{3/2}}` without importing `H^{1/2}` velocity regularity, Serrin, BKM, or stronger regularity.
-5. Comparison theorem: prove the conditional interpolation target `Theta < 1 -> H^{11/8}` without promoting it to Clay.
+In other words, the repo no longer lacks theorem grammar for the NS Clay lane.
+It now carries an explicit candidate self-contained packet
+`CKN + ESS + LRT + A1/A3 + A4 + A5-A9`. What remains fail-closed is the
+promotion decision: whether those candidate calculations and constants are
+accepted as the exact theorem inputs consumed by Paper 1.
 
 ## Publication Posture
 
-Publishable claim: theta is a computable seam variable, the fixed-K LP identity plus diagnostics isolate HH as the exact analytic obstruction, and Paper 1 can target a conditional comparison theorem where `Theta < 1` controls `H^{11/8}` by interpolation.
+Publishable claim: Paper 1 is an honest reduction manuscript with a sharp
+frontier. The repo now carries an explicit classical PDE packet
+`CKN + ESS + LRT + A1/A3 + A4 + A5-A9` in reviewer-readable form, while the
+live new mathematics remains concentrated in the coupled `A1/A3` bootstrap and
+the `A4` uniform output-support transfer.
 
 Forbidden claim: unconditional regularity or Clay promotion.

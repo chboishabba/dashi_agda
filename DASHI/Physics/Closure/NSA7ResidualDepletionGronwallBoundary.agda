@@ -9,7 +9,8 @@ open import Agda.Builtin.String using (String)
 -- NS A7 residual depletion / Gronwall boundary.
 --
 -- This is a lightweight, fail-closed receipt for the A7 step only.
--- It records the intended depletion route:
+-- It records the intended depletion route consuming the exact A6 assembled
+-- inequality surface:
 --
 --   ∂t D_r + β D_r <= C D_r^(1+α)
 --     -> Z = D_r^(-α)
@@ -42,19 +43,41 @@ listLength (_ ∷ xs) =
 
 data ⊥ : Set where
 
+a6ClosureBoundaryReference : String
+a6ClosureBoundaryReference =
+  "DASHI.Physics.Closure.NSA6A4BiasToLeakageClosureCompositeBoundary"
+
+a8BoundaryReference : String
+a8BoundaryReference =
+  "DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary"
+
+a9BoundaryReference : String
+a9BoundaryReference =
+  "DASHI.Physics.Closure.NSA9CKNBKMClosureBoundary"
+
+a6ClosureConsumedRecorded : Bool
+a6ClosureConsumedRecorded =
+  true
+
 ------------------------------------------------------------------------
 -- A7 proof clauses.
 
 data A7GronwallClause : Set where
-  differentialInequalityInput :
+  importedA6DifferentialInequalityInput :
     A7GronwallClause
-  positiveParametersAlphaBetaC :
+  positiveParametersAlphaBetaCEffective :
+    A7GronwallClause
+  smallnessThresholdDrLessThanBetaOverCEffToOneOverAlpha :
+    A7GronwallClause
+  thresholdMakesNonlinearSourceStrictlySubcritical :
     A7GronwallClause
   substitutionZEqualsDrToMinusAlpha :
     A7GronwallClause
   transformedLinearDifferentialInequality :
     A7GronwallClause
-  thresholdBetaOverCToOneOverAlpha :
+  gronwallComparisonForZPrimeWithPositiveSlope :
+    A7GronwallClause
+  forwardInvariantSubthresholdRegion :
     A7GronwallClause
   subthresholdInitialDataImpliesMonotoneDecay :
     A7GronwallClause
@@ -66,11 +89,14 @@ data A7GronwallClause : Set where
 canonicalA7GronwallClauses :
   List A7GronwallClause
 canonicalA7GronwallClauses =
-  differentialInequalityInput
-  ∷ positiveParametersAlphaBetaC
+  importedA6DifferentialInequalityInput
+  ∷ positiveParametersAlphaBetaCEffective
+  ∷ smallnessThresholdDrLessThanBetaOverCEffToOneOverAlpha
+  ∷ thresholdMakesNonlinearSourceStrictlySubcritical
   ∷ substitutionZEqualsDrToMinusAlpha
   ∷ transformedLinearDifferentialInequality
-  ∷ thresholdBetaOverCToOneOverAlpha
+  ∷ gronwallComparisonForZPrimeWithPositiveSlope
+  ∷ forwardInvariantSubthresholdRegion
   ∷ subthresholdInitialDataImpliesMonotoneDecay
   ∷ decayConvergesToZero
   ∷ zeroResidualContradictsPersistentBlowup
@@ -80,9 +106,9 @@ a7GronwallClauseCount : Nat
 a7GronwallClauseCount =
   listLength canonicalA7GronwallClauses
 
-a7GronwallClauseCountIs8 :
-  a7GronwallClauseCount ≡ 8
-a7GronwallClauseCountIs8 =
+a7GronwallClauseCountIs11 :
+  a7GronwallClauseCount ≡ 11
+a7GronwallClauseCountIs11 =
   refl
 
 data A7GronwallTransformationStep : Set where
@@ -121,6 +147,8 @@ data A7ThresholdConsequence : Set where
     A7ThresholdConsequence
   thresholdDominatesNonlinearSourceTerm :
     A7ThresholdConsequence
+  thresholdCanBeRestatedAsCEffDrPowerAlphaLessThanBeta :
+    A7ThresholdConsequence
   thresholdForcesNegativeDrDerivative :
     A7ThresholdConsequence
   thresholdIsCompatibleWithDepletionContradictionStrategy :
@@ -131,6 +159,7 @@ canonicalA7ThresholdConsequences :
 canonicalA7ThresholdConsequences =
   thresholdDefinesForwardInvariantSmallDataRegion
   ∷ thresholdDominatesNonlinearSourceTerm
+  ∷ thresholdCanBeRestatedAsCEffDrPowerAlphaLessThanBeta
   ∷ thresholdForcesNegativeDrDerivative
   ∷ thresholdIsCompatibleWithDepletionContradictionStrategy
   ∷ []
@@ -139,10 +168,52 @@ a7ThresholdConsequenceCount : Nat
 a7ThresholdConsequenceCount =
   listLength canonicalA7ThresholdConsequences
 
-a7ThresholdConsequenceCountIs4 :
-  a7ThresholdConsequenceCount ≡ 4
-a7ThresholdConsequenceCountIs4 =
+a7ThresholdConsequenceCountIs5 :
+  a7ThresholdConsequenceCount ≡ 5
+a7ThresholdConsequenceCountIs5 =
   refl
+
+data A7ThresholdClause : Set where
+  thresholdUsesTheImportedA6ConstantCEff :
+    A7ThresholdClause
+  thresholdEqualsBetaOverCEffToOneOverAlpha :
+    A7ThresholdClause
+  thresholdRequiresAlphaPositiveAndBetaPositive :
+    A7ThresholdClause
+  thresholdProducesStrictDerivativeGap :
+    A7ThresholdClause
+  thresholdRegionIsForwardInvariantUnderComparison :
+    A7ThresholdClause
+
+canonicalA7ThresholdClauses : List A7ThresholdClause
+canonicalA7ThresholdClauses =
+  thresholdUsesTheImportedA6ConstantCEff
+  ∷ thresholdEqualsBetaOverCEffToOneOverAlpha
+  ∷ thresholdRequiresAlphaPositiveAndBetaPositive
+  ∷ thresholdProducesStrictDerivativeGap
+  ∷ thresholdRegionIsForwardInvariantUnderComparison
+  ∷ []
+
+a7ThresholdClauseCount : Nat
+a7ThresholdClauseCount =
+  listLength canonicalA7ThresholdClauses
+
+a7ThresholdClauseCountIs5 :
+  a7ThresholdClauseCount ≡ 5
+a7ThresholdClauseCountIs5 =
+  refl
+
+a7GronwallThresholdTheoremText : String
+a7GronwallThresholdTheoremText =
+  "A7 candidate theorem grammar: import the A6 inequality ∂t D_r + β D_r <= C_eff D_r^(1+alpha) with α,β,C_eff > 0, impose the threshold D_r < (β / C_eff)^(1 / alpha) so that C_eff D_r^alpha < β, rewrite with Z = D_r^(-alpha), derive Z' >= alpha*beta*Z - alpha*C_eff, and conclude forward-invariant monotone decay D_r -> 0, contradicting persistent blowup."
+
+a7ThresholdSummary : String
+a7ThresholdSummary =
+  "Exact threshold grammar: if 0 < D_r < (β / C_eff)^(1 / alpha), then C_eff D_r^(1+alpha) < β D_r, hence ∂t D_r < 0 and the subthreshold region is comparison-stable forward in time."
+
+a7GronwallComparisonSummary : String
+a7GronwallComparisonSummary =
+  "Gronwall comparison grammar: after Z = D_r^(-alpha), the transformed inequality is Z' >= alpha*beta*Z - alpha*C_eff; linear comparison yields exponential lower growth for Z once above the equilibrium C_eff / beta, forcing D_r to decrease and eventually vanish."
 
 ------------------------------------------------------------------------
 -- Downstream blockers and fail-closed promotion state.
@@ -177,6 +248,18 @@ downstreamA7BlockerCountIs5 :
   downstreamA7BlockerCount ≡ 5
 downstreamA7BlockerCountIs5 =
   refl
+
+downstreamA7BlockerName : DownstreamA7Blocker → String
+downstreamA7BlockerName blocker-a7-gronwall-depletion-theorem-unproved =
+  "missingA7ResidualDepletionGronwallTheorem"
+downstreamA7BlockerName blocker-a8-full-local-defect-monotonicity-unproved =
+  "missingA8FullLocalDefectMonotonicityTheorem"
+downstreamA7BlockerName blocker-a9-ckn-bkm-closure-unproved =
+  "missingA9CKNBKMClosureTheorem"
+downstreamA7BlockerName blocker-ns-clay-authority-unproved =
+  "missingNSClayAuthorityAfterA7A9"
+downstreamA7BlockerName blocker-terminal-promotion-forbidden =
+  "missingTerminalPromotionAuthorityAfterA7A9"
 
 A7ResidualDepletionGronwallProved : Bool
 A7ResidualDepletionGronwallProved =
@@ -240,16 +323,28 @@ record NSA7ResidualDepletionGronwallBoundary : Set where
       List A7ThresholdConsequence
     thresholdConsequencesAreCanonical :
       thresholdConsequences ≡ canonicalA7ThresholdConsequences
+    thresholdClauses :
+      List A7ThresholdClause
+    thresholdClausesAreCanonical :
+      thresholdClauses ≡ canonicalA7ThresholdClauses
     downstreamBlockers :
       List DownstreamA7Blocker
     downstreamBlockersAreCanonical :
       downstreamBlockers ≡ canonicalDownstreamA7Blockers
-    clauseCountIs8 :
-      a7GronwallClauseCount ≡ 8
+    clauseCountIs11 :
+      a7GronwallClauseCount ≡ 11
     transformationStepCountIs5 :
       a7GronwallTransformationStepCount ≡ 5
-    thresholdConsequenceCountIs4 :
-      a7ThresholdConsequenceCount ≡ 4
+    thresholdConsequenceCountIs5 :
+      a7ThresholdConsequenceCount ≡ 5
+    thresholdClauseCountIs5 :
+      a7ThresholdClauseCount ≡ 5
+    theoremText :
+      String
+    thresholdSummary :
+      String
+    gronwallComparisonSummary :
+      String
     blockerCountIs5 :
       downstreamA7BlockerCount ≡ 5
     a7StillFalse :
@@ -279,16 +374,28 @@ canonicalNSA7ResidualDepletionGronwallBoundary =
         canonicalA7ThresholdConsequences
     ; thresholdConsequencesAreCanonical =
         refl
+    ; thresholdClauses =
+        canonicalA7ThresholdClauses
+    ; thresholdClausesAreCanonical =
+        refl
     ; downstreamBlockers =
         canonicalDownstreamA7Blockers
     ; downstreamBlockersAreCanonical =
         refl
-    ; clauseCountIs8 =
+    ; clauseCountIs11 =
         refl
     ; transformationStepCountIs5 =
         refl
-    ; thresholdConsequenceCountIs4 =
+    ; thresholdConsequenceCountIs5 =
         refl
+    ; thresholdClauseCountIs5 =
+        refl
+    ; theoremText =
+        a7GronwallThresholdTheoremText
+    ; thresholdSummary =
+        a7ThresholdSummary
+    ; gronwallComparisonSummary =
+        a7GronwallComparisonSummary
     ; blockerCountIs5 =
         refl
     ; a7StillFalse =

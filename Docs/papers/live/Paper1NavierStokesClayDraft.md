@@ -53,6 +53,52 @@ canonical reduction pipeline:
 4. reduce leakage to a compatible smallness budget;
 5. convert depletion plus monotonicity into a continuation contradiction.
 
+The current Clay-blocking frontier is also sharp. The coupled `A1/A3` problem
+is the live mathematical wall: one must construct the Abel-weighted triadic
+defect measure with quantitative compactness and simultaneously prove a
+quantitative near-stationarity rate strong enough to close the bootstrap. The
+next independent hard theorem is `A4`, the quantitative Lei-Ren-Tian transfer
+from physical angular richness to Fourier output-support richness with a
+uniform constant across the Type-I rescaling family. Assertions `A5-A9` are
+then downstream of those two fronts rather than separate mystery steps.
+
+The manuscript should also be read with one further caution. There are now
+several plausible candidate closure routes for `A1/A3` and `A4` inside the
+repo notes, including Seregin-rate, coarea, and multiscale Abel-summation
+packages. Those routes are useful because they isolate where the proof burden
+would have to land, but they are not promoted here as finished theorem inputs
+unless the imported quantitative exponents and uniform constants have already
+been justified in the exact form this paper consumes.
+
+In particular, the current repo state now carries a concrete candidate package
+for `A1.1-A3.4` with explicit constants and rates, including a candidate
+ESS/Seregin intake `epsilon = 1/6`, a resulting candidate stationarity rate
+`delta_r = O(r^(1/12))`, and explicit multiscale Abel-summation constants.
+Those calculations are valuable because they tell the referee exactly what
+would have to be accepted for the manuscript to close. They are not silently
+promoted here to theorem status.
+
+Accordingly, the remaining burden in this manuscript should not be described as
+missing theorem-shape grammar. The theorem package is explicit. What remains is
+the fail-closed promotion question: whether the candidate `CKN + ESS + LRT +
+A1/A3 + A4 + A5-A9` packet is accepted in the exact normed and constant-level
+form consumed by the reduction.
+
+At theorem resolution, the live `A1/A3` checklist is:
+`A1.1` bounded Abel-weighted defect mass,
+`A1.2` weak-* compactness,
+`A1.3` shell-tail control,
+`A3.1` an energy ODE for `W_r = U_r - U_infinity`,
+`A3.2` a quantitative Seregin/ESS rate intake,
+`A3.3` a rate `delta_r -> 0`,
+and `A3.4` a multiscale Abel-summation closure with no hidden exponent loss.
+The live `A4` checklist is:
+direction-map regularity,
+Jacobian lower bound,
+coarea propagation,
+strip-hitting richness,
+and a uniform constant across the Type-I rescaling family.
+
 For the abstract closure grammar governing how this reduction fits into the
 larger corpus, see Paper 8, *Closure Grammar, Jordan-von Neumann Recovery, and
 Controlled Consumers*. Paper 1 does not rely on Paper 8 for its analytic proof
@@ -138,6 +184,24 @@ small class of near-diagonal defect interactions.
 In sum, `A1-A2` yield a controlled shell window and defect measure from which
 Sections 4-6 will extract support geometry.
 
+What is not claimed here is that the ESS package already closes. The unresolved
+mathematics is the quantitative part of the `A1/A3` package: enough compactness
+to produce a true Abel defect object and enough stationarity to make its
+near-diagonal component usable in the later support argument.
+
+More precisely, the remaining burden is not just "some fixed-point argument."
+The manuscript needs a quantitative rate package whose natural norm is stable
+under the Abel-weighted multiscale summation used later in `A6-A8`. Candidate
+Gronwall or dyadic-improvement maps are informative only if they really close
+on that normed space and really consume the imported `CKN` / `Type-I` /
+Seregin exponents without hidden losses.
+
+In particular, the current candidate imported verification task is not merely
+"some epsilon-regularity." It is an exact Seregin/ESS-style rate in the norm
+used by the Abel bootstrap. Until that intake is fixed in the required form,
+the manuscript treats even attractive candidate rates as diagnostic guidance
+rather than promoted theorem inputs.
+
 ## 4. A4-A6: support geometry, richness, leakage reduction
 
 The next stage replaces shell bookkeeping alone by physical-space support
@@ -175,6 +239,33 @@ same scale.
 In sum, `A4-A6` convert near-diagonal defect control into a leakage-aware
 support geometry with explicit room left for the later depletion and closure
 steps.
+
+The theorem-sized obstruction in this section is the quantitative `A4`
+transfer itself. The manuscript needs a uniform physical-to-Fourier output
+richness constant across the Type-I rescaling family; without that, the
+constants ladder of Propositions 4.1 and 5.1 has no honest geometric source.
+
+The current candidate route runs through direction-map regularity, coarea, and
+Whitney/Jacobian control. What remains mathematically live is the passage from
+those local ingredients to a uniform lower bound that survives the full
+Type-I rescaling family in the exact output-support form needed by `A5-A6`.
+
+The sharpened candidate package is likewise explicit: a direction-map
+regularity bound, a Jacobian lower bound, a coarea lower bound, strip-hitting
+richness, and a uniform constant across the rescaling family. This paper uses
+that package only as a named target until the constants are accepted in the
+exact theorem form required downstream.
+
+The downstream route is now equally explicit at theorem grammar level. The
+current repo records a candidate `A5-A9` package with the following shape:
+`A5` kappa-bias vanishing from asymptotic stationarity and A4 richness,
+`A6` pointwise-to-Abel / leakage transfer with explicit transport and
+commutator budgets,
+`A7` a Gronwall depletion threshold,
+`A8` a scale-monotonicity recursion,
+and `A9` the CKN/BKM contradiction.
+This sharpens the manuscript’s dependency story. It does not change the live
+frontier: the paper still treats `A1/A3` and `A4` as the actual theorem walls.
 
 ## 5. A7-A8: depletion and scale monotonicity
 
@@ -257,4 +348,4 @@ closure rather than a tail-only numerical threshold.
 
 | Proved in this paper | Assumed externally with citation | Explicitly left open |
 | --- | --- | --- |
-| The reduction theorem `A1-A9` is organized as a single analytic route; Proposition 3.1 reduces the obstruction to a near-diagonal Abel-defect shell window; Proposition 4.1 proves first-pass compatibility of the support radii and leakage thresholds; Proposition 5.1 proves the full constants ladder is jointly satisfiable with explicit slack; the support-geometry and richness stage is identified as the load-bearing bridge from shell data to continuation closure. | Leray-Hopf existence theory (`LerayHopf`), Coifman-Meyer paraproduct technology (`CoifmanMeyer`), Caffarelli-Kohn-Nirenberg epsilon regularity (`CKN`), and the Beale-Kato-Majda continuation criterion (`BKM`). | Any unconditional proof of the assertions `A1-A9`; any theorem that the ESS shell package is already discharged in full generality; any global smoothness theorem for 3D Navier-Stokes; any claim that the Clay problem is solved. |
+| The reduction theorem `A1-A9` is organized as a single analytic route; Proposition 3.1 reduces the obstruction to a near-diagonal Abel-defect shell window; Proposition 4.1 proves first-pass compatibility of the support radii and leakage thresholds; Proposition 5.1 proves the full constants ladder is jointly satisfiable with explicit slack; the support-geometry and richness stage is identified as the load-bearing bridge from shell data to continuation closure. | Leray-Hopf existence theory (`LerayHopf`), Coifman-Meyer paraproduct technology (`CoifmanMeyer`), Caffarelli-Kohn-Nirenberg epsilon regularity (`CKN`), and the Beale-Kato-Majda continuation criterion (`BKM`). | Quantitative Abel-defect-measure construction and the coupled `A1/A3` stationarity bootstrap; the uniform `A4` Lei-Ren-Tian output-support transfer constant across Type-I rescalings; any unconditional proof of the assertions `A1-A9`; any global smoothness theorem for 3D Navier-Stokes; any claim that the Clay problem is solved. |

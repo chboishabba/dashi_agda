@@ -28,7 +28,10 @@ import DASHI.Interop.UnifiedMathLanguageAssertedProofs as UnifiedProofs
 -- current effective status after the authority modules have advanced the
 -- finite, lattice, small-field, support, thermodynamic, OS/Wightman,
 -- continuum-transfer, and survival lanes, while the Clay promotion boundary
--- remains fail-closed.
+-- remains fail-closed.  In the sharpened cross-lane posture, this makes YM
+-- the remaining genuine internal-proof frontier if repo-internal proof is
+-- insisted upon; NS and unification are already handled elsewhere as
+-- candidate-complete packages pending promotion evidence/acceptance.
 
 data AdvancedYMCompletionLane : Set where
   finiteGateBSupportInterfaceAdvanced :
@@ -244,6 +247,22 @@ record YMCompletionBoundaryStatus : Setω where
         Hyperfabric.canonicalPNFHyperfabric369Surface
         object
       ≡ false
+    ymIsRemainingInternalProofFrontier :
+      Bool
+    ymIsRemainingInternalProofFrontierIsTrue :
+      ymIsRemainingInternalProofFrontier ≡ true
+    nsCandidateCompletePackageRecorded :
+      Bool
+    nsCandidateCompletePackageRecordedIsTrue :
+      nsCandidateCompletePackageRecorded ≡ true
+    unificationCandidateCompletePackageRecorded :
+      Bool
+    unificationCandidateCompletePackageRecordedIsTrue :
+      unificationCandidateCompletePackageRecorded ≡ true
+    broadSharedFrontierClaimRejected :
+      Bool
+    broadSharedFrontierClaimRejectedIsTrue :
+      broadSharedFrontierClaimRejected ≡ true
     noPromotionPossibleHere :
       YMCompletionPromotion → ⊥
 
@@ -328,10 +347,26 @@ ymCompletionBoundaryStatus =
     ; hyperfabricExternalPromotionStillFalse =
         Hyperfabric.PNFHyperfabric369Surface.externalTheoremPromotionIsFalse
           Hyperfabric.canonicalPNFHyperfabric369Surface
+    ; ymIsRemainingInternalProofFrontier =
+        true
+    ; ymIsRemainingInternalProofFrontierIsTrue =
+        refl
+    ; nsCandidateCompletePackageRecorded =
+        true
+    ; nsCandidateCompletePackageRecordedIsTrue =
+        refl
+    ; unificationCandidateCompletePackageRecorded =
+        true
+    ; unificationCandidateCompletePackageRecordedIsTrue =
+        refl
+    ; broadSharedFrontierClaimRejected =
+        true
+    ; broadSharedFrontierClaimRejectedIsTrue =
+        refl
     ; noPromotionPossibleHere =
         ymCompletionPromotionImpossibleHere
     }
 
 ymCompletionBoundaryPlainReading : String
 ymCompletionBoundaryPlainReading =
-  "YM is effectively complete only as an authority-conditional candidate chain: finite/support, small-field, lattice, thermodynamic, OS, Wightman, continuum-transfer, and survival lanes are recorded advanced; all Clay promotion gates, including external acceptance, remain fail-closed."
+  "YM remains the only genuine internal-proof frontier in the sharpened closure posture: finite/support, small-field, lattice, thermodynamic, OS, Wightman, continuum-transfer, and survival lanes are recorded advanced as an authority-conditional candidate chain, while NS and unification are treated elsewhere as candidate-complete packages pending promotion evidence/acceptance; all Clay promotion gates, including external acceptance, remain fail-closed."

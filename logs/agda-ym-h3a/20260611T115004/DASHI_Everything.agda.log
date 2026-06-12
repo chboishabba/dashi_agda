@@ -1,0 +1,17 @@
+== DASHI/Everything.agda ==
+command: timeout 600s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda
+started: 2026-06-11T11:50:04+10:00
+
+Checking DASHI.Everything (/home/c/Documents/code/dashi_agda/DASHI/Everything.agda).
+ Checking DASHI.Physics.Closure.UnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary (/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/UnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/UnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary.agda:34,7-45
+Not in scope:
+  ModuloNull.terminalUnificationPromoted
+  at /home/c/Documents/code/dashi_agda/DASHI/Physics/Closure/UnificationCrossTermToModuloNullConsumerCompositeLightweightBoundary.agda:34,7-45
+    (did you mean
+       'ModuloNull.UnificationModuloNullLinearityFromCrossTermNullityBoundary.terminalUnificationPromotion' or
+       'ModuloNull.terminalUnificationPromotion'?)
+when scope checking ModuloNull.terminalUnificationPromoted
+
+exit_code: 42
+finished: 2026-06-11T11:50:37+10:00

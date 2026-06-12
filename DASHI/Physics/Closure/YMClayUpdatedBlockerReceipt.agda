@@ -7,21 +7,20 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
-import DASHI.Physics.Closure.ShimuraTowerContinuumLimitReceipt as STContinuum
-import DASHI.Physics.Closure.ShimuraTowerSpatialLatticeReceipt as STSpatial
 import DASHI.Physics.Closure.YML5OSAxiomsForGaugeSectorReceipt as B5
 import DASHI.Physics.Closure.YML7L8MassGapSurvivalReceipt as L7L8
 
 ------------------------------------------------------------------------
 -- Updated Clay Yang-Mills blocker map.
 --
--- The earlier three-site spatial-refinement blocker is discharged by the
--- Shimura tower receipts.  The remaining Clay blocker is now the
--- hyperbolic-to-flat flat-limit universality class, with the proof distance
--- represented by the p-adic/Drinfeld flat-limit route.
+-- This receipt now treats the live burden as a single intake problem:
+-- importing the needed external Yang-Mills content through the
+-- Balaban-centered H3a cluster. Reflection positivity, OS, Wightman, and
+-- transfer are listed only as downstream consumers. No theorem promotion is
+-- made here.
 
 data YMClayUpdatedBlockerStatus : Set where
-  shimuraTowerRefinementSolvedFlatLimitUniversalityOpen :
+  balabanCenteredH3aClusterOnlyLiveBurden :
     YMClayUpdatedBlockerStatus
 
 data YMClayUpdatedBlocker : Set where
@@ -29,41 +28,37 @@ data YMClayUpdatedBlocker : Set where
     YMClayUpdatedBlocker
 
 data YMClayDistance : Set where
-  pAdicFlatLimitProof :
+  externalContentYMIntakeProofDistance :
     YMClayDistance
 
 data YMClayUpdatedBlockerMapEntry : Set where
-  spatialRefinementSolvedByShimuraTower :
+  balabanCenteredH3aClusterCarriesLiveBurden :
     YMClayUpdatedBlockerMapEntry
 
-  continuumGeometryHyperbolicNotEuclidean :
+  externalContentYMIntakeRemainsOpen :
     YMClayUpdatedBlockerMapEntry
 
-  flatLimitCandidateViaPAdicDrinfeld :
+  reflectionPositivityConsumesExternalIntake :
     YMClayUpdatedBlockerMapEntry
 
-  flatLimitUniversalityClassOpen :
+  osAxiomsConsumeExternalIntake :
     YMClayUpdatedBlockerMapEntry
 
-  tightnessConditionalOnFlatLimit :
+  wightmanConsumesExternalIntake :
     YMClayUpdatedBlockerMapEntry
 
-  osAxiomsConditionalOnFlatLimit :
-    YMClayUpdatedBlockerMapEntry
-
-  massGapConditionalOnFlatLimit :
+  transferConsumesExternalIntake :
     YMClayUpdatedBlockerMapEntry
 
 canonicalYMClayUpdatedBlockerMap :
   List YMClayUpdatedBlockerMapEntry
 canonicalYMClayUpdatedBlockerMap =
-  spatialRefinementSolvedByShimuraTower
-  ∷ continuumGeometryHyperbolicNotEuclidean
-  ∷ flatLimitCandidateViaPAdicDrinfeld
-  ∷ flatLimitUniversalityClassOpen
-  ∷ tightnessConditionalOnFlatLimit
-  ∷ osAxiomsConditionalOnFlatLimit
-  ∷ massGapConditionalOnFlatLimit
+  balabanCenteredH3aClusterCarriesLiveBurden
+  ∷ externalContentYMIntakeRemainsOpen
+  ∷ reflectionPositivityConsumesExternalIntake
+  ∷ osAxiomsConsumeExternalIntake
+  ∷ wightmanConsumesExternalIntake
+  ∷ transferConsumesExternalIntake
   ∷ []
 
 data YMClayUpdatedPromotion : Set where
@@ -81,48 +76,16 @@ ymClayBlocker =
 ymClayDistance :
   YMClayDistance
 ymClayDistance =
-  pAdicFlatLimitProof
+  externalContentYMIntakeProofDistance
 
 ymClayUpdatedBlockerStatement : String
 ymClayUpdatedBlockerStatement =
-  "Updated Clay YM blocker: Shimura tower inhabits the spatial refinement; continuum geometry is hyperbolic, not Euclidean; the flat limit is a p-adic/Drinfeld candidate; the universality class of that flat limit remains open, so tightness, OS axioms, and mass gap are conditional on the flat limit."
+  "Updated Clay YM blocker: the sharp live burden is the Balaban-centered H3a external-content Yang-Mills intake; reflection positivity, Osterwalder-Schrader, Wightman, and transfer are downstream consumers of that intake; Clay Yang-Mills and terminal promotion remain false."
 
 record YMClayUpdatedBlockerReceipt : Setω where
   field
     status :
       YMClayUpdatedBlockerStatus
-
-    shimuraTowerSpatialReceipt :
-      STSpatial.ShimuraTowerSpatialLatticeReceipt
-
-    shimuraTowerSpatialRefinementInhabited :
-      STSpatial.spatialLatticeRefinable shimuraTowerSpatialReceipt
-      ≡
-      true
-
-    shimuraTowerSpatialRefinementPromotesNoClay :
-      STSpatial.clayYangMillsPromoted shimuraTowerSpatialReceipt
-      ≡
-      false
-
-    shimuraTowerContinuumReceipt :
-      STContinuum.ShimuraTowerContinuumLimitReceipt
-
-    shimuraTowerContinuumCandidate :
-      STContinuum.ymCarrierNativeContinuumLimitDefined
-        shimuraTowerContinuumReceipt
-      ≡
-      STContinuum.candidate
-
-    shimuraTowerSpacingGoesToZero :
-      STContinuum.spacingGoesTo0 shimuraTowerContinuumReceipt
-      ≡
-      true
-
-    shimuraTowerUniversalityNotPromoted :
-      STContinuum.universalityClassPromoted shimuraTowerContinuumReceipt
-      ≡
-      false
 
     osReceipt :
       B5.YML5OSAxiomsForGaugeSectorReceipt
@@ -199,6 +162,42 @@ record YMClayUpdatedBlockerReceipt : Setω where
     massGapIsConditionalOnFlatLimitIsTrue :
       massGapIsConditionalOnFlatLimit ≡ true
 
+    balabanCenteredH3aClusterNamed :
+      Bool
+
+    balabanCenteredH3aClusterNamedIsTrue :
+      balabanCenteredH3aClusterNamed ≡ true
+
+    externalContentYMIntakeOpen :
+      Bool
+
+    externalContentYMIntakeOpenIsTrue :
+      externalContentYMIntakeOpen ≡ true
+
+    reflectionPositivityConsumerRecorded :
+      Bool
+
+    reflectionPositivityConsumerRecordedIsTrue :
+      reflectionPositivityConsumerRecorded ≡ true
+
+    osterwalderSchraderConsumerRecorded :
+      Bool
+
+    osterwalderSchraderConsumerRecordedIsTrue :
+      osterwalderSchraderConsumerRecorded ≡ true
+
+    wightmanConsumerRecorded :
+      Bool
+
+    wightmanConsumerRecordedIsTrue :
+      wightmanConsumerRecorded ≡ true
+
+    transferConsumerRecorded :
+      Bool
+
+    transferConsumerRecordedIsTrue :
+      transferConsumerRecorded ≡ true
+
     blocker :
       YMClayUpdatedBlocker
 
@@ -209,7 +208,7 @@ record YMClayUpdatedBlockerReceipt : Setω where
       YMClayDistance
 
     distanceIsCanonical :
-      distance ≡ pAdicFlatLimitProof
+      distance ≡ externalContentYMIntakeProofDistance
 
     blockerMap :
       List YMClayUpdatedBlockerMapEntry
@@ -251,21 +250,7 @@ canonicalYMClayUpdatedBlockerReceipt :
 canonicalYMClayUpdatedBlockerReceipt =
   record
     { status =
-        shimuraTowerRefinementSolvedFlatLimitUniversalityOpen
-    ; shimuraTowerSpatialReceipt =
-        STSpatial.canonicalShimuraTowerSpatialLatticeReceipt
-    ; shimuraTowerSpatialRefinementInhabited =
-        refl
-    ; shimuraTowerSpatialRefinementPromotesNoClay =
-        refl
-    ; shimuraTowerContinuumReceipt =
-        STContinuum.canonicalShimuraTowerContinuumLimitReceipt
-    ; shimuraTowerContinuumCandidate =
-        refl
-    ; shimuraTowerSpacingGoesToZero =
-        refl
-    ; shimuraTowerUniversalityNotPromoted =
-        refl
+        balabanCenteredH3aClusterOnlyLiveBurden
     ; osReceipt =
         B5.canonicalYML5OSAxiomsForGaugeSectorReceipt
     ; osAxiomsConditionallyEstablished =
@@ -310,6 +295,30 @@ canonicalYMClayUpdatedBlockerReceipt =
         true
     ; massGapIsConditionalOnFlatLimitIsTrue =
         refl
+    ; balabanCenteredH3aClusterNamed =
+        true
+    ; balabanCenteredH3aClusterNamedIsTrue =
+        refl
+    ; externalContentYMIntakeOpen =
+        true
+    ; externalContentYMIntakeOpenIsTrue =
+        refl
+    ; reflectionPositivityConsumerRecorded =
+        true
+    ; reflectionPositivityConsumerRecordedIsTrue =
+        refl
+    ; osterwalderSchraderConsumerRecorded =
+        true
+    ; osterwalderSchraderConsumerRecordedIsTrue =
+        refl
+    ; wightmanConsumerRecorded =
+        true
+    ; wightmanConsumerRecordedIsTrue =
+        refl
+    ; transferConsumerRecorded =
+        true
+    ; transferConsumerRecordedIsTrue =
+        refl
     ; blocker =
         ymClayBlocker
     ; blockerIsCanonical =
@@ -339,13 +348,13 @@ canonicalYMClayUpdatedBlockerReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "Shimura tower spatial refinement is solved/inhabited at the receipt level"
-        ∷ "The continuum geometry carried forward is hyperbolic Shimura geometry, not Euclidean flat geometry"
-        ∷ "The flat limit is recorded only as a p-adic/Drinfeld candidate route"
-        ∷ "The live blocker is hyperbolicToFlatLimitUniversalityClass"
-        ∷ "The proof distance is pAdicFlatLimitProof"
-        ∷ "Tightness, OS axioms, and mass gap are conditional on the flat-limit universality class"
-        ∷ "Clay Yang-Mills and terminal Clay promotion remain false"
+        "The Balaban-centered H3a cluster is named as the sole live intake site."
+        ∷ "The sharp remaining burden is the external-content Yang-Mills intake."
+        ∷ "Reflection positivity is downstream of the open intake."
+        ∷ "Osterwalder-Schrader is downstream of the open intake."
+        ∷ "Wightman is downstream of the open intake."
+        ∷ "Transfer is downstream of the open intake."
+        ∷ "Clay Yang-Mills and terminal Clay promotion remain false."
         ∷ []
     }
 
@@ -359,7 +368,7 @@ ymClayUpdatedBlockerIsFlatLimitUniversality =
 ymClayUpdatedDistanceIsPAdicFlatLimitProof :
   distance canonicalYMClayUpdatedBlockerReceipt
   ≡
-  pAdicFlatLimitProof
+  externalContentYMIntakeProofDistance
 ymClayUpdatedDistanceIsPAdicFlatLimitProof =
   refl
 

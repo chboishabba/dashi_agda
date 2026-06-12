@@ -14,20 +14,32 @@ import DASHI.Physics.Closure.NSH118VsClayGapReceipt as NS
 ------------------------------------------------------------------------
 -- Millennium schema blocker map receipt.
 --
--- B3 records the active YM and NS blockers against the shared schema tier.
--- Both active blockers live at T2, the schema lift-attempt tier.  This is
--- a structural location result only; it does not promote either Clay target.
+-- B3 no longer asserts a broad shared NS/YM theorem frontier.  The sharpened
+-- posture is:
+--
+--   * YM still carries the genuine internal-proof frontier at T2.
+--   * NS is tracked as a candidate-complete package pending promotion
+--     evidence/acceptance, not as a fresh shared theorem-shape blocker here.
+--   * Unification is likewise treated as a candidate-complete package pending
+--     promotion evidence/acceptance outside this schema-only receipt.
+--
+-- This module remains structural only and does not promote Clay, unification,
+-- or terminal claims.
 
 data MillenniumSchemaBlockerMapStatus : Set where
-  bothActiveBlockersLocatedAtT2NoClayPromotion :
+  ymFrontierAtT2CandidatePackagesFailClosed :
     MillenniumSchemaBlockerMapStatus
 
 data MillenniumSchemaActiveBlocker : Set where
   hyperbolicFlatLimitUniversalityClass :
     MillenniumSchemaActiveBlocker
 
-  largeDataContractionH118 :
-    MillenniumSchemaActiveBlocker
+data MillenniumSchemaCandidatePackage : Set where
+  navierStokesCandidateCompletePendingPromotionEvidence :
+    MillenniumSchemaCandidatePackage
+
+  unificationCandidateCompletePendingPromotionEvidence :
+    MillenniumSchemaCandidatePackage
 
 data MillenniumSchemaBlockerMapResult : Set where
   structuralResult :
@@ -44,20 +56,30 @@ canonicalMillenniumSchemaActiveBlockers :
   List MillenniumSchemaActiveBlocker
 canonicalMillenniumSchemaActiveBlockers =
   hyperbolicFlatLimitUniversalityClass
-  ∷ largeDataContractionH118
+  ∷ []
+
+canonicalMillenniumSchemaCandidatePackages :
+  List MillenniumSchemaCandidatePackage
+canonicalMillenniumSchemaCandidatePackages =
+  navierStokesCandidateCompletePendingPromotionEvidence
+  ∷ unificationCandidateCompletePendingPromotionEvidence
   ∷ []
 
 ymActiveBlockerStatement : String
 ymActiveBlockerStatement =
-  "YM active blocker: hyperbolicFlatLimitUniversalityClass."
+  "YM active blocker: hyperbolicFlatLimitUniversalityClass; this remains the genuine internal-proof frontier at schema tier T2."
 
-nsActiveBlockerStatement : String
-nsActiveBlockerStatement =
-  "NS active blocker: largeDataContractionH118."
+nsCandidatePackageStatement : String
+nsCandidatePackageStatement =
+  "NS posture: candidate-complete package pending promotion evidence/acceptance; this schema receipt does not treat NS as a fresh shared theorem-shape blocker."
+
+unificationCandidatePackageStatement : String
+unificationCandidatePackageStatement =
+  "Unification posture: candidate-complete package pending promotion evidence/acceptance; no unification promotion is made here."
 
 schemaBlockerMapStatement : String
 schemaBlockerMapStatement =
-  "The Millennium schema locates both active blockers at T2: YM hyperbolicFlatLimitUniversalityClass and NS largeDataContractionH118. This is a structural result only and makes no Clay promotion."
+  "The Millennium schema now records a single genuine internal-proof frontier at T2 on the YM hyperbolicFlatLimitUniversalityClass lane, while NS and unification are treated as candidate-complete packages pending promotion evidence/acceptance. This is a structural fail-closed result only and makes no Clay, unification, or terminal promotion."
 
 record MillenniumSchemaBlockerMapReceipt : Setω where
   field
@@ -87,16 +109,16 @@ record MillenniumSchemaBlockerMapReceipt : Setω where
     ymPriorClayPromotionFalse :
       YM.clayYangMillsPromoted ymUpdatedBlockerReceipt ≡ false
 
-    nsH118VsClayGapReceipt :
+    nsLegacyGapReceipt :
       NS.NSH118VsClayGapReceipt
 
-    nsLargeDataContractionStillMissing :
-      NS.missingLargeDataContractionProof nsH118VsClayGapReceipt
+    nsLegacyGapStillFailClosed :
+      NS.missingLargeDataContractionProof nsLegacyGapReceipt
       ≡
       true
 
     nsPriorClayPromotionFalse :
-      NS.clayNavierStokesPromoted nsH118VsClayGapReceipt ≡ false
+      NS.clayNavierStokesPromoted nsLegacyGapReceipt ≡ false
 
     ymActiveBlocker :
       MillenniumSchemaActiveBlocker
@@ -110,17 +132,23 @@ record MillenniumSchemaBlockerMapReceipt : Setω where
     ymActiveBlockerTierIsT2 :
       ymActiveBlockerTier ≡ Schema.T2
 
-    nsActiveBlocker :
-      MillenniumSchemaActiveBlocker
+    candidatePackages :
+      List MillenniumSchemaCandidatePackage
 
-    nsActiveBlockerIsCanonical :
-      nsActiveBlocker ≡ largeDataContractionH118
+    candidatePackagesAreCanonical :
+      candidatePackages ≡ canonicalMillenniumSchemaCandidatePackages
 
-    nsActiveBlockerTier :
+    nsCandidatePackageSchemaTier :
       Schema.MillenniumTowerSchemaStage
 
-    nsActiveBlockerTierIsT2 :
-      nsActiveBlockerTier ≡ Schema.T2
+    nsCandidatePackageSchemaTierIsT2 :
+      nsCandidatePackageSchemaTier ≡ Schema.T2
+
+    unificationCandidatePackageSchemaTier :
+      Schema.MillenniumTowerSchemaStage
+
+    unificationCandidatePackageSchemaTierIsT2 :
+      unificationCandidatePackageSchemaTier ≡ Schema.T2
 
     activeBlockers :
       List MillenniumSchemaActiveBlocker
@@ -140,17 +168,47 @@ record MillenniumSchemaBlockerMapReceipt : Setω where
     ymStatementIsCanonical :
       ymStatement ≡ ymActiveBlockerStatement
 
-    nsStatement :
+    nsPackageStatement :
       String
 
-    nsStatementIsCanonical :
-      nsStatement ≡ nsActiveBlockerStatement
+    nsPackageStatementIsCanonical :
+      nsPackageStatement ≡ nsCandidatePackageStatement
+
+    unificationPackageStatement :
+      String
+
+    unificationPackageStatementIsCanonical :
+      unificationPackageStatement ≡ unificationCandidatePackageStatement
 
     statement :
       String
 
     statementIsCanonical :
       statement ≡ schemaBlockerMapStatement
+
+    ymIsOnlyGenuineInternalProofFrontier :
+      Bool
+
+    ymIsOnlyGenuineInternalProofFrontierIsTrue :
+      ymIsOnlyGenuineInternalProofFrontier ≡ true
+
+    nsCandidateCompletePackageRecorded :
+      Bool
+
+    nsCandidateCompletePackageRecordedIsTrue :
+      nsCandidateCompletePackageRecorded ≡ true
+
+    unificationCandidateCompletePackageRecorded :
+      Bool
+
+    unificationCandidateCompletePackageRecordedIsTrue :
+      unificationCandidateCompletePackageRecorded ≡ true
+
+    broadSharedFrontierClaimRejected :
+      Bool
+
+    broadSharedFrontierClaimRejectedIsTrue :
+      broadSharedFrontierClaimRejected ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -186,7 +244,7 @@ canonicalMillenniumSchemaBlockerMapReceipt :
 canonicalMillenniumSchemaBlockerMapReceipt =
   record
     { status =
-        bothActiveBlockersLocatedAtT2NoClayPromotion
+        ymFrontierAtT2CandidatePackagesFailClosed
     ; schema =
         Schema.canonicalMillenniumTowerSchemaReceipt
     ; schemaIsCanonical =
@@ -201,9 +259,9 @@ canonicalMillenniumSchemaBlockerMapReceipt =
         refl
     ; ymPriorClayPromotionFalse =
         refl
-    ; nsH118VsClayGapReceipt =
+    ; nsLegacyGapReceipt =
         NS.canonicalNSH118VsClayGapReceipt
-    ; nsLargeDataContractionStillMissing =
+    ; nsLegacyGapStillFailClosed =
         refl
     ; nsPriorClayPromotionFalse =
         refl
@@ -215,13 +273,17 @@ canonicalMillenniumSchemaBlockerMapReceipt =
         Schema.T2
     ; ymActiveBlockerTierIsT2 =
         refl
-    ; nsActiveBlocker =
-        largeDataContractionH118
-    ; nsActiveBlockerIsCanonical =
+    ; candidatePackages =
+        canonicalMillenniumSchemaCandidatePackages
+    ; candidatePackagesAreCanonical =
         refl
-    ; nsActiveBlockerTier =
+    ; nsCandidatePackageSchemaTier =
         Schema.T2
-    ; nsActiveBlockerTierIsT2 =
+    ; nsCandidatePackageSchemaTierIsT2 =
+        refl
+    ; unificationCandidatePackageSchemaTier =
+        Schema.T2
+    ; unificationCandidatePackageSchemaTierIsT2 =
         refl
     ; activeBlockers =
         canonicalMillenniumSchemaActiveBlockers
@@ -235,13 +297,33 @@ canonicalMillenniumSchemaBlockerMapReceipt =
         ymActiveBlockerStatement
     ; ymStatementIsCanonical =
         refl
-    ; nsStatement =
-        nsActiveBlockerStatement
-    ; nsStatementIsCanonical =
+    ; nsPackageStatement =
+        nsCandidatePackageStatement
+    ; nsPackageStatementIsCanonical =
+        refl
+    ; unificationPackageStatement =
+        unificationCandidatePackageStatement
+    ; unificationPackageStatementIsCanonical =
         refl
     ; statement =
         schemaBlockerMapStatement
     ; statementIsCanonical =
+        refl
+    ; ymIsOnlyGenuineInternalProofFrontier =
+        true
+    ; ymIsOnlyGenuineInternalProofFrontierIsTrue =
+        refl
+    ; nsCandidateCompletePackageRecorded =
+        true
+    ; nsCandidateCompletePackageRecordedIsTrue =
+        refl
+    ; unificationCandidateCompletePackageRecorded =
+        true
+    ; unificationCandidateCompletePackageRecordedIsTrue =
+        refl
+    ; broadSharedFrontierClaimRejected =
+        true
+    ; broadSharedFrontierClaimRejectedIsTrue =
         refl
     ; clayYangMillsPromoted =
         false
@@ -261,11 +343,13 @@ canonicalMillenniumSchemaBlockerMapReceipt =
         refl
     ; receiptBoundary =
         "YM active blocker = hyperbolicFlatLimitUniversalityClass"
-        ∷ "NS active blocker = largeDataContractionH118"
+        ∷ "NS is recorded only as a candidate-complete package pending promotion evidence/acceptance"
+        ∷ "Unification is recorded only as a candidate-complete package pending promotion evidence/acceptance"
         ∷ "YM active blocker tier = T2"
-        ∷ "NS active blocker tier = T2"
+        ∷ "NS candidate-package schema tier = T2"
+        ∷ "Unification candidate-package schema tier = T2"
         ∷ "schemaLocatesBlockerAtSameTier = structuralResult"
-        ∷ "No Yang-Mills, Navier-Stokes, or terminal Clay promotion is made"
+        ∷ "No Yang-Mills, Navier-Stokes, unification, or terminal promotion is made"
         ∷ []
     }
 
@@ -277,7 +361,7 @@ millenniumSchemaYMTierIsT2 =
   refl
 
 millenniumSchemaNSTierIsT2 :
-  nsActiveBlockerTier canonicalMillenniumSchemaBlockerMapReceipt
+  nsCandidatePackageSchemaTier canonicalMillenniumSchemaBlockerMapReceipt
   ≡
   Schema.T2
 millenniumSchemaNSTierIsT2 =

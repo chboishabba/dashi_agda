@@ -31,10 +31,12 @@ import DASHI.Physics.Closure.NSWhitneyFubiniDisintegrationBoundary
 --
 -- The intended analytic theorem is a uniform strip slicing estimate for
 -- c-hat = normalize(theta1 + theta2), away from the antipodal and rank-drop
--- exceptional sets.  This module records the proof contract only.  It does
--- not construct a strip atlas, does not estimate preimage measures, does
--- not prove uniform constants, does not discharge the no-collapse consumer,
--- does not complete A4, and does not promote Navier-Stokes Clay.
+-- exceptional sets, with constants stable across bounded-overlap Whitney caps
+-- and Type-I rescalings.  This module records the proof contract only.  It
+-- does not construct a strip atlas, does not estimate preimage measures, does
+-- not prove the coarea/Jacobian-fed uniform constants, does not discharge the
+-- no-collapse consumer, does not complete A4, and does not promote
+-- Navier-Stokes Clay.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -202,6 +204,25 @@ data NoCollapseConsumerCarrier : Set where
     Whitney.NoAngularCollapseFromWhitneyCarrier →
     NoCollapseConsumerCarrier
 
+data PushforwardDensityAttemptCarrier : Set where
+  stripPreimageLowerBoundFeedsA4-4CandidatePushforwardDensity :
+    StripPreimageMeasureEstimateCarrier →
+    WhitneyLowerBoundTransferCarrier →
+    PushforwardDensityAttemptCarrier
+
+data StripHittingConsequenceCarrier : Set where
+  everyGreatCircleStripGetsA4-4CandidatePositiveHitFromPushforwardDensity :
+    PushforwardDensityAttemptCarrier →
+    NoCollapseConsumerCarrier →
+    StripHittingConsequenceCarrier
+
+data UniformStripHittingGapCarrier : Set where
+  stripHittingConstantA4-5StillDependsOnA4-2A4-3A4-5OpenSteps :
+    StripHittingConsequenceCarrier →
+    PhiJacobian.OutputStripWidthRelationCarrier →
+    StripExceptionalSetRoutingCarrier →
+    UniformStripHittingGapCarrier
+
 data OutputGreatCircleStripSlicingTarget : Set where
   greatCircleStripsSliceThroughPhiWhitneyPacketsWithLowerBound :
     GreatCircleCarrier →
@@ -278,6 +299,28 @@ canonicalNoCollapseConsumerCarrier =
     OutputSupport.canonicalNoAngularCollapseAssumption
     Whitney.canonicalNoAngularCollapseFromWhitneyCarrier
 
+canonicalPushforwardDensityAttemptCarrier :
+  PushforwardDensityAttemptCarrier
+canonicalPushforwardDensityAttemptCarrier =
+  stripPreimageLowerBoundFeedsA4-4CandidatePushforwardDensity
+    canonicalStripPreimageMeasureEstimateCarrier
+    canonicalWhitneyLowerBoundTransferCarrier
+
+canonicalStripHittingConsequenceCarrier :
+  StripHittingConsequenceCarrier
+canonicalStripHittingConsequenceCarrier =
+  everyGreatCircleStripGetsA4-4CandidatePositiveHitFromPushforwardDensity
+    canonicalPushforwardDensityAttemptCarrier
+    canonicalNoCollapseConsumerCarrier
+
+canonicalUniformStripHittingGapCarrier :
+  UniformStripHittingGapCarrier
+canonicalUniformStripHittingGapCarrier =
+  stripHittingConstantA4-5StillDependsOnA4-2A4-3A4-5OpenSteps
+    canonicalStripHittingConsequenceCarrier
+    PhiJacobian.canonicalOutputStripWidthRelationCarrier
+    canonicalStripExceptionalSetRoutingCarrier
+
 canonicalOutputGreatCircleStripSlicingTarget :
   OutputGreatCircleStripSlicingTarget
 canonicalOutputGreatCircleStripSlicingTarget =
@@ -308,6 +351,14 @@ data OutputGreatCircleStripSlicingObligation : Set where
     OutputGreatCircleStripSlicingObligation
   proveUniformConstantsAcrossBoundedOverlapWhitneyCover :
     OutputGreatCircleStripSlicingObligation
+  proveA4-3CoareaPropagationToOutputStripSlices :
+    OutputGreatCircleStripSlicingObligation
+  stateA4-4PushforwardDensityAttemptFromStripPreimageLowerBound :
+    OutputGreatCircleStripSlicingObligation
+  stateA4-4StripHittingRichnessConsequenceAndGap :
+    OutputGreatCircleStripSlicingObligation
+  proveA4-5TypeIRescalingFamilyUniformityForStripLowerBound :
+    OutputGreatCircleStripSlicingObligation
   routeAntipodalCriticalPacketBoundaryAndLowVorticityExceptions :
     OutputGreatCircleStripSlicingObligation
   transferPositiveWhitneyLowerBoundToOutputStripLowerBound :
@@ -326,6 +377,10 @@ canonicalOutputGreatCircleStripSlicingObligations =
   ∷ provePreimageMeasureEstimateAwayFromAntipodalAndRankDropSets
   ∷ sliceWhitneyCapsByPulledBackOutputStrip
   ∷ proveUniformConstantsAcrossBoundedOverlapWhitneyCover
+  ∷ proveA4-3CoareaPropagationToOutputStripSlices
+  ∷ stateA4-4PushforwardDensityAttemptFromStripPreimageLowerBound
+  ∷ stateA4-4StripHittingRichnessConsequenceAndGap
+  ∷ proveA4-5TypeIRescalingFamilyUniformityForStripLowerBound
   ∷ routeAntipodalCriticalPacketBoundaryAndLowVorticityExceptions
   ∷ transferPositiveWhitneyLowerBoundToOutputStripLowerBound
   ∷ consumeNoAngularCollapseForEveryGreatCircle
@@ -336,9 +391,9 @@ outputGreatCircleStripSlicingObligationCount : Nat
 outputGreatCircleStripSlicingObligationCount =
   listLength canonicalOutputGreatCircleStripSlicingObligations
 
-outputGreatCircleStripSlicingObligationCountIs10 :
-  outputGreatCircleStripSlicingObligationCount ≡ 10
-outputGreatCircleStripSlicingObligationCountIs10 =
+outputGreatCircleStripSlicingObligationCountIs14 :
+  outputGreatCircleStripSlicingObligationCount ≡ 14
+outputGreatCircleStripSlicingObligationCountIs14 =
   refl
 
 data OutputGreatCircleStripSlicingBlocker : Set where
@@ -346,7 +401,15 @@ data OutputGreatCircleStripSlicingBlocker : Set where
     OutputGreatCircleStripSlicingBlocker
   missingPreimageMeasureEstimate :
     OutputGreatCircleStripSlicingBlocker
-  missingUniformStripConstants :
+  missingA4-3WhitneyCapUniformStripConstants :
+    OutputGreatCircleStripSlicingBlocker
+  missingA4-3PhiJacobianCoareaFeedThrough :
+    OutputGreatCircleStripSlicingBlocker
+  missingA4-4PushforwardDensityFeedThrough :
+    OutputGreatCircleStripSlicingBlocker
+  missingA4-4ExactStripHittingRichnessConstant :
+    OutputGreatCircleStripSlicingBlocker
+  missingA4-5TypeIRescalingFamilyUniformStripConstant :
     OutputGreatCircleStripSlicingBlocker
   missingNoCollapseConsumerProof :
     OutputGreatCircleStripSlicingBlocker
@@ -366,7 +429,11 @@ canonicalOutputGreatCircleStripSlicingBlockers :
 canonicalOutputGreatCircleStripSlicingBlockers =
   missingStripAtlas
   ∷ missingPreimageMeasureEstimate
-  ∷ missingUniformStripConstants
+  ∷ missingA4-3WhitneyCapUniformStripConstants
+  ∷ missingA4-3PhiJacobianCoareaFeedThrough
+  ∷ missingA4-4PushforwardDensityFeedThrough
+  ∷ missingA4-4ExactStripHittingRichnessConstant
+  ∷ missingA4-5TypeIRescalingFamilyUniformStripConstant
   ∷ missingNoCollapseConsumerProof
   ∷ missingExceptionalSetRoutingProof
   ∷ missingWhitneyCapSliceSummabilityProof
@@ -379,9 +446,9 @@ outputGreatCircleStripSlicingBlockerCount : Nat
 outputGreatCircleStripSlicingBlockerCount =
   listLength canonicalOutputGreatCircleStripSlicingBlockers
 
-outputGreatCircleStripSlicingBlockerCountIs9 :
-  outputGreatCircleStripSlicingBlockerCount ≡ 9
-outputGreatCircleStripSlicingBlockerCountIs9 =
+outputGreatCircleStripSlicingBlockerCountIs13 :
+  outputGreatCircleStripSlicingBlockerCount ≡ 13
+outputGreatCircleStripSlicingBlockerCountIs13 =
   refl
 
 data OutputGreatCircleStripSlicingStatusRow : Set where
@@ -394,6 +461,14 @@ data OutputGreatCircleStripSlicingStatusRow : Set where
   PhiPreimageSliceRecordedStatus :
     OutputGreatCircleStripSlicingStatusRow
   WhitneyCapSlicingRecordedStatus :
+    OutputGreatCircleStripSlicingStatusRow
+  PhiJacobianCoareaFeedThroughRecordedStatus :
+    OutputGreatCircleStripSlicingStatusRow
+  pushforwardDensityAttemptRecordedStatus :
+    OutputGreatCircleStripSlicingStatusRow
+  stripHittingConsequenceGapRecordedStatus :
+    OutputGreatCircleStripSlicingStatusRow
+  typeIRescalingUniformityTargetRecordedStatus :
     OutputGreatCircleStripSlicingStatusRow
   lowerBoundTransferRecordedStatus :
     OutputGreatCircleStripSlicingStatusRow
@@ -414,6 +489,10 @@ canonicalOutputGreatCircleStripSlicingStatusRows =
   ∷ outputStripWidthRecordedStatus
   ∷ PhiPreimageSliceRecordedStatus
   ∷ WhitneyCapSlicingRecordedStatus
+  ∷ PhiJacobianCoareaFeedThroughRecordedStatus
+  ∷ pushforwardDensityAttemptRecordedStatus
+  ∷ stripHittingConsequenceGapRecordedStatus
+  ∷ typeIRescalingUniformityTargetRecordedStatus
   ∷ lowerBoundTransferRecordedStatus
   ∷ exceptionalSetRoutingRecordedStatus
   ∷ noCollapseConsumerRecordedStatus
@@ -425,9 +504,9 @@ outputGreatCircleStripSlicingStatusRowCount : Nat
 outputGreatCircleStripSlicingStatusRowCount =
   listLength canonicalOutputGreatCircleStripSlicingStatusRows
 
-outputGreatCircleStripSlicingStatusRowCountIs10 :
-  outputGreatCircleStripSlicingStatusRowCount ≡ 10
-outputGreatCircleStripSlicingStatusRowCountIs10 =
+outputGreatCircleStripSlicingStatusRowCountIs14 :
+  outputGreatCircleStripSlicingStatusRowCount ≡ 14
+outputGreatCircleStripSlicingStatusRowCountIs14 =
   refl
 
 ------------------------------------------------------------------------
@@ -650,23 +729,23 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: Record strip carriers, Phi preimage slicing, Whitney cap slicing, lower-bound transfer, and exceptional-set routing while proving nothing."
+  "R: Record the exact A4 strip-slicing subladder: A4.3 coarea propagation into strip slices, A4.4 strip-hitting / pushforward richness, and A4.5 uniformity across the Type-I rescaling family, while proving nothing."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: NSOutputGreatCircleStripSlicingBoundary imports Sard slicing, Phi-Jacobian, Whitney/Fubini, Whitney coupling, and output-support surfaces."
+  "C: NSOutputGreatCircleStripSlicingBoundary imports Sard slicing, Phi-Jacobian, Whitney/Fubini, Whitney coupling, and output-support surfaces to expose the strip-slicing subladder that transports Jacobian/coarea lower bounds into A4."
 
 stateString : String
 stateString =
-  "S: Boundary is checked only; strip atlas, preimage measure estimate, uniform constants, no-collapse consumer, A4, and Clay promotion are absent."
+  "S: Boundary is checked only; strip atlas, preimage measure estimate, the A4.3 Phi-Jacobian/coarea feed-through, the A4.4 strip-hitting richness step, the A4.5 Type-I-rescaling-family-uniform strip constant, no-collapse consumer, A4, and Clay promotion are absent."
 
 latticeString : String
 latticeString =
-  "L: great-circle strip -> output width -> Phi preimage -> Whitney cap slice -> strip lower-bound transfer -> no-collapse consumer."
+  "L: great-circle strip -> output width -> Phi preimage -> Whitney cap slice -> A4.3 Jacobian/coarea propagation -> A4.4 strip-hitting / pushforward richness -> A4.5 Type-I-rescaling-family uniformity -> lower-bound transfer -> no-collapse consumer."
 
 proposalString : String
 proposalString =
-  "P: Promote the parent A4 step only after strip slicing and exceptional-set routing are proved with uniform constants."
+  "P: Promote the parent A4 step only after A4.3 strip-slicing coarea propagation, A4.4 strip-hitting richness, exceptional-set routing, and the A4.5 Type-I-rescaling-family-uniform strip lower bound are proved together."
 
 governanceString : String
 governanceString =
@@ -674,7 +753,7 @@ governanceString =
 
 gapString : String
 gapString =
-  "F: Missing strip atlas, preimage-measure estimate, uniform strip constants, no-collapse consumer proof, and Sard/Fubini feed-through."
+  "F: Missing strip atlas, preimage-measure estimate, A4.3 Whitney-cap-uniform strip constants, A4.3 Phi-Jacobian/coarea feed-through, A4.4 strip-hitting richness constant, A4.5 Type-I-rescaling-family-uniform strip constant, no-collapse consumer proof, and Sard/Fubini feed-through."
 
 ------------------------------------------------------------------------
 -- Canonical receipt.
@@ -700,6 +779,12 @@ record NSOutputGreatCircleStripSlicingBoundary : Set where
       StripExceptionalSetRoutingCarrier
     noCollapseConsumer :
       NoCollapseConsumerCarrier
+    pushforwardDensityAttempt :
+      PushforwardDensityAttemptCarrier
+    stripHittingConsequence :
+      StripHittingConsequenceCarrier
+    uniformStripHittingGap :
+      UniformStripHittingGapCarrier
     target :
       OutputGreatCircleStripSlicingTarget
     obligations :
@@ -740,6 +825,9 @@ canonicalNSOutputGreatCircleStripSlicingBoundary =
     canonicalWhitneyLowerBoundTransferCarrier
     canonicalStripExceptionalSetRoutingCarrier
     canonicalNoCollapseConsumerCarrier
+    canonicalPushforwardDensityAttemptCarrier
+    canonicalStripHittingConsequenceCarrier
+    canonicalUniformStripHittingGapCarrier
     canonicalOutputGreatCircleStripSlicingTarget
     canonicalOutputGreatCircleStripSlicingObligations
     canonicalOutputGreatCircleStripSlicingBlockers

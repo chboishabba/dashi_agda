@@ -18,13 +18,41 @@ import DASHI.Physics.Closure.NavierStokesRegularityTowerReceipt as NSTower
 -- This module records the precise hard mathematical targets needed before
 -- the DASHI tower architecture could close the Clay Yang-Mills mass-gap or
 -- Navier-Stokes regularity problems.  It is deliberately non-promoting:
--- finite-depth control is consumed as current evidence, while OS positivity,
--- uniform continuum bounds, Wightman reconstruction, and carrier BKM control
--- remain explicit open targets.
+-- finite-depth control is consumed as current evidence, while the current YM
+-- lane stays the only live Thing 1 missing-content front via Balaban and the
+-- current NS lane stays a Thing 2 style self-contained candidate-complete
+-- theorem grammar; OS positivity, uniform continuum bounds, Wightman
+-- reconstruction, and carrier BKM control remain explicit open Clay-facing
+-- targets.
 
 data ClayClosureTargetStatus : Set where
   hardMathematicalTargetsRecordedNoClayPromotion :
     ClayClosureTargetStatus
+
+data ClayTargetFrontierKind : Set where
+  genuineMissingContentFrontier :
+    ClayTargetFrontierKind
+
+  candidateCompletePendingPromotionEvidence :
+    ClayTargetFrontierKind
+
+  candidateCompletePackageWithLiveUnificationWalls :
+    ClayTargetFrontierKind
+
+yangMillsFrontierKindLabel :
+  String
+yangMillsFrontierKindLabel =
+  "YM is the genuine missing-content frontier for any internal Clay closure route"
+
+navierStokesFrontierKindLabel :
+  String
+navierStokesFrontierKindLabel =
+  "NS is candidate-complete pending promotion evidence; Clay-facing carrier/BKM targets remain fail-closed"
+
+unificationFrontierKindLabel :
+  String
+unificationFrontierKindLabel =
+  "Cross-package unification is candidate-complete at package level, with live UCT.1-UCT.4 walls still externalized"
 
 data YangMillsClosureRequirement : Set where
   carrierUltrametricUVRegulator :
@@ -165,6 +193,18 @@ record CarrierOSPositivityAndWightmanTargetReceipt : Setω where
     clayYangMillsClosedIsFalse :
       clayYangMillsClosed ≡ false
 
+    frontierKind :
+      ClayTargetFrontierKind
+
+    frontierKindIsMissingContent :
+      frontierKind ≡ genuineMissingContentFrontier
+
+    frontierLabel :
+      String
+
+    frontierLabelIsCanonical :
+      frontierLabel ≡ yangMillsFrontierKindLabel
+
     targetBoundary :
       List String
 
@@ -228,13 +268,22 @@ canonicalCarrierOSPositivityAndWightmanTargetReceipt =
         false
     ; clayYangMillsClosedIsFalse =
         refl
+    ; frontierKind =
+        genuineMissingContentFrontier
+    ; frontierKindIsMissingContent =
+        refl
+    ; frontierLabel =
+        yangMillsFrontierKindLabel
+    ; frontierLabelIsCanonical =
+        refl
     ; targetBoundary =
         "The finite carrier is recorded as the proposed ultrametric UV regulator"
         ∷ "The OS positivity inequality on the positive half-carrier is the first hard target"
         ∷ "The candidate finite-depth lower-bound shape Delta_d >= c * alpha_1^d is recorded only as a target"
         ∷ "A depth-independent positive lower bound is not constructed"
         ∷ "The interacting continuum Yang-Mills theory and Wightman axioms W0-W5 are not constructed"
-        ∷ "Clay Yang-Mills closure remains false"
+        ∷ "NS and package-level unification posture do not discharge this lane; current YM closure remains the real missing-content frontier if internal closure is wanted"
+        ∷ "Current YM publication posture remains Thing 1 style and externally Balaban-centered; Clay Yang-Mills closure remains false"
         ∷ []
     }
 
@@ -371,6 +420,18 @@ record CarrierBKMControlTargetReceipt : Setω where
     clayNavierStokesClosedIsFalse :
       clayNavierStokesClosed ≡ false
 
+    frontierKind :
+      ClayTargetFrontierKind
+
+    frontierKindIsCandidateComplete :
+      frontierKind ≡ candidateCompletePendingPromotionEvidence
+
+    frontierLabel :
+      String
+
+    frontierLabelIsCanonical :
+      frontierLabel ≡ navierStokesFrontierKindLabel
+
     targetBoundary :
       List String
 
@@ -438,9 +499,18 @@ canonicalCarrierBKMControlTargetReceipt =
         false
     ; clayNavierStokesClosedIsFalse =
         refl
+    ; frontierKind =
+        candidateCompletePendingPromotionEvidence
+    ; frontierKindIsCandidateComplete =
+        refl
+    ; frontierLabel =
+        navierStokesFrontierKindLabel
+    ; frontierLabelIsCanonical =
+        refl
     ; targetBoundary =
         "Finite-depth energy, enstrophy, vorticity, and BKM rungs are consumed from the existing NS tower"
-        ∷ "The hard target is a uniform-in-depth BKM vorticity Linfinity bound on every finite time interval"
+        ∷ "The current NS publication posture is Thing 2 style self-contained candidate-complete theorem grammar pending promotion evidence"
+        ∷ "The separate Clay-facing hard target is a uniform-in-depth BKM vorticity Linfinity bound on every finite time interval"
         ∷ "Uniform enstrophy control through the continuum passage is not constructed"
         ∷ "The continuum BKM regularity passage and Clay Navier-Stokes closure remain false"
         ∷ []
@@ -481,6 +551,18 @@ record ClayMillenniumClosureTargetReceipt : Setω where
     clayNavierStokesClosedIsFalse :
       clayNavierStokesClosed ≡ false
 
+    unificationFrontierKind :
+      ClayTargetFrontierKind
+
+    unificationFrontierKindIsCandidateComplete :
+      unificationFrontierKind ≡ candidateCompletePackageWithLiveUnificationWalls
+
+    unificationFrontierLabel :
+      String
+
+    unificationFrontierLabelIsCanonical :
+      unificationFrontierLabel ≡ unificationFrontierKindLabel
+
     closingNotes :
       List String
 
@@ -512,10 +594,19 @@ canonicalClayMillenniumClosureTargetReceipt =
         false
     ; clayNavierStokesClosedIsFalse =
         refl
+    ; unificationFrontierKind =
+        candidateCompletePackageWithLiveUnificationWalls
+    ; unificationFrontierKindIsCandidateComplete =
+        refl
+    ; unificationFrontierLabel =
+        unificationFrontierKindLabel
+    ; unificationFrontierLabelIsCanonical =
+        refl
     ; closingNotes =
-        "Closing Clay Yang-Mills requires OS positivity, a uniform mass gap, interacting continuum construction, and Wightman reconstruction"
-        ∷ "Closing Clay Navier-Stokes requires uniform carrier BKM/enstrophy control and the continuum regularity passage"
-        ∷ "The receipt makes the hard mathematical targets precise; it does not inhabit them"
+        "Closing Clay Yang-Mills still routes through the Thing 1 style externally Balaban-centered bridge and then requires OS positivity, a uniform mass gap, interacting continuum construction, and Wightman reconstruction"
+        ∷ "Closing Clay Navier-Stokes is separate from the current Thing 2 style self-contained candidate-complete NS theorem grammar and still requires uniform carrier BKM/enstrophy control plus the continuum regularity passage"
+        ∷ "Cross-package unification is treated as candidate-complete at package level only; live UCT.1-UCT.4 walls remain outside this receipt and are not blurred into solved content"
+        ∷ "The receipt preserves fail-closed Clay targets: it records the package split, but it does not inhabit any missing theorem or promote any terminal status"
         ∷ []
     }
 

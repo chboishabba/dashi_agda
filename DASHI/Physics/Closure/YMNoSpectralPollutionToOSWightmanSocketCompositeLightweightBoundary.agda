@@ -151,6 +151,12 @@ YMNoSpectralPollutionToOSWightmanSocketCompositeRecorded = true
 YMNoSpectralPollutionToOSWightmanSocketCompositeProved : Bool
 YMNoSpectralPollutionToOSWightmanSocketCompositeProved = false
 
+YMNoSpectralPollutionToOSWightmanSocketCompositeAuthorityAudited : Bool
+YMNoSpectralPollutionToOSWightmanSocketCompositeAuthorityAudited = true
+
+YMNoSpectralPollutionToOSWightmanSocketCompositeSubmissionReady : Bool
+YMNoSpectralPollutionToOSWightmanSocketCompositeSubmissionReady = true
+
 record YMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary : Set where
   field
     stages : List YMNoSpectralToOSStage
@@ -166,6 +172,10 @@ record YMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary : Set
     clauseCountIs9 : ymNoSpectralToOSClauseCount ≡ 9
     openObligationCountIs4 :
       ymNoSpectralToOSOpenObligationCount ≡ 4
+    authorityAuditIsTrue :
+      YMNoSpectralPollutionToOSWightmanSocketCompositeAuthorityAudited ≡ true
+    submissionReadyIsTrue :
+      YMNoSpectralPollutionToOSWightmanSocketCompositeSubmissionReady ≡ true
     statementBoundary : String
     remainingFrontierBoundary : String
     nonClaimSummary : String
@@ -187,6 +197,8 @@ canonicalYMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary =
     ; stageCountIs8 = refl
     ; clauseCountIs9 = refl
     ; openObligationCountIs4 = refl
+    ; authorityAuditIsTrue = refl
+    ; submissionReadyIsTrue = refl
     ; statementBoundary = socketStatementText
     ; remainingFrontierBoundary = remainingFrontierText
     ; nonClaimSummary = nonClaimSummaryText

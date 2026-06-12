@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.NSAbelTriadicDefectMeasureConstructionBoundary as Abel
+import DASHI.Physics.Closure.NSBoundedAbelMassEstimateBoundary as BoundedMass
 import DASHI.Physics.Closure.NSLeiRenTianGreatCircleCriterionBoundary as LRT
 import DASHI.Physics.Closure.NSTriadicAngularDefectSheafLeakageBoundary as Sheaf
 import DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol as Symbol
@@ -14,16 +15,21 @@ import DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol as Symbol
 ------------------------------------------------------------------------
 -- First NS analytic rung: Abel triadic stationarity construction boundary.
 --
--- This receipt records the A1-A4 theorem targets needed before the Abel
--- triadic measure route can be used as an analytic stationarity input:
+-- This boundary records the exact coupled A1/A3 bootstrap theorem wall needed
+-- before the Abel triadic measure route can be handed downstream to A4:
 --
---   A1 bounded mass
---   A2 triadic observable recording
---   A3 approximate T_NS stationarity with delta_r -> 0
---   A4 Lei-Ren-Tian output-support transfer
+--   A1.1 bounded Abel-weighted defect-measure mass
+--   A1.2 weak-* compactness on the bounded Abel branch
+--   A1.3 shell-tail control on the selected weak-* branch
+--   A3.1 Seregin epsilon-rate intake
+--   A3.2 energy ODE on Abel windows
+--   A3.3 delta_r -> 0 stationarity defect limit
+--   A3.4 multiscale Abel-summation closure
+--   A4 downstream output-support transfer handoff (separate consumer)
 --
--- It is a boundary module only.  No stationarity theorem, residual
--- non-positivity theorem, Clay Navier-Stokes theorem, or promotion flag is
+-- It is a boundary module only.  No bounded-mass/compactness theorem, no
+-- coupled A1/A3 bootstrap theorem, no A4 transfer theorem, no residual
+-- consumer theorem, no Clay Navier-Stokes theorem, and no promotion flag is
 -- introduced.
 
 listLength : {A : Set} → List A → Nat
@@ -106,25 +112,37 @@ canonicalA4LRTOutputSupportTransfer =
 ------------------------------------------------------------------------
 -- Rung obligations and blockers.
 
-data NSAnalyticRungObligation : Set where
-  A1BoundedMassObligation :
-    NSAnalyticRungObligation
-  A2TriadicObservableRecordingObligation :
-    NSAnalyticRungObligation
-  A3ApproximateTNSStationarityDeltaRToZeroObligation :
-    NSAnalyticRungObligation
-  A4LRTOutputSupportTransferObligation :
-    NSAnalyticRungObligation
+data CoupledA1A3BootstrapObligation : Set where
+  A11BoundedAbelMassObligation :
+    CoupledA1A3BootstrapObligation
+  A12WeakStarCompactnessObligation :
+    CoupledA1A3BootstrapObligation
+  A13ShellTailControlObligation :
+    CoupledA1A3BootstrapObligation
+  A31SereginEpsilonRateIntakeObligation :
+    CoupledA1A3BootstrapObligation
+  A32EnergyODEOnAbelWindowsObligation :
+    CoupledA1A3BootstrapObligation
+  A33DeltaRToZeroObligation :
+    CoupledA1A3BootstrapObligation
+  A34MultiscaleAbelSummationClosureObligation :
+    CoupledA1A3BootstrapObligation
+  A4DownstreamOutputSupportTransferHandoffObligation :
+    CoupledA1A3BootstrapObligation
   keepClayPromotionBooleansFalseObligation :
-    NSAnalyticRungObligation
+    CoupledA1A3BootstrapObligation
 
 canonicalNSAnalyticRungObligations :
-  List NSAnalyticRungObligation
+  List CoupledA1A3BootstrapObligation
 canonicalNSAnalyticRungObligations =
-  A1BoundedMassObligation
-  ∷ A2TriadicObservableRecordingObligation
-  ∷ A3ApproximateTNSStationarityDeltaRToZeroObligation
-  ∷ A4LRTOutputSupportTransferObligation
+  A11BoundedAbelMassObligation
+  ∷ A12WeakStarCompactnessObligation
+  ∷ A13ShellTailControlObligation
+  ∷ A31SereginEpsilonRateIntakeObligation
+  ∷ A32EnergyODEOnAbelWindowsObligation
+  ∷ A33DeltaRToZeroObligation
+  ∷ A34MultiscaleAbelSummationClosureObligation
+  ∷ A4DownstreamOutputSupportTransferHandoffObligation
   ∷ keepClayPromotionBooleansFalseObligation
   ∷ []
 
@@ -132,33 +150,81 @@ nsAnalyticRungObligationCount : Nat
 nsAnalyticRungObligationCount =
   listLength canonicalNSAnalyticRungObligations
 
-nsAnalyticRungObligationCountIs5 :
-  nsAnalyticRungObligationCount ≡ 5
-nsAnalyticRungObligationCountIs5 =
+nsAnalyticRungObligationCountIs9 :
+  nsAnalyticRungObligationCount ≡ 9
+nsAnalyticRungObligationCountIs9 =
   refl
 
-data NSAnalyticRungBlocker : Set where
-  missingA1UniformBoundedMassEstimate :
-    NSAnalyticRungBlocker
-  missingA2ObservableSigmaAlgebraAndContinuity :
-    NSAnalyticRungBlocker
-  missingA3TNSStationarityDefectLimitDeltaRToZero :
-    NSAnalyticRungBlocker
-  missingA4LeiRenTianOutputSupportTransfer :
-    NSAnalyticRungBlocker
-  missingResidualNonPositiveConsumer :
-    NSAnalyticRungBlocker
+data CandidateCoupledA1A3BootstrapStep : Set where
+  boundedAbelMassStep :
+    CandidateCoupledA1A3BootstrapStep
+  weakStarCompactnessStep :
+    CandidateCoupledA1A3BootstrapStep
+  shellTailControlStep :
+    CandidateCoupledA1A3BootstrapStep
+  sereginEpsilonRateIntakeStep :
+    CandidateCoupledA1A3BootstrapStep
+  energyODEStep :
+    CandidateCoupledA1A3BootstrapStep
+  deltaRToZeroStep :
+    CandidateCoupledA1A3BootstrapStep
+  multiscaleAbelSummationClosureStep :
+    CandidateCoupledA1A3BootstrapStep
+
+canonicalCandidateA1A3BootstrapSteps :
+  List CandidateCoupledA1A3BootstrapStep
+canonicalCandidateA1A3BootstrapSteps =
+  boundedAbelMassStep
+  ∷ weakStarCompactnessStep
+  ∷ shellTailControlStep
+  ∷ sereginEpsilonRateIntakeStep
+  ∷ energyODEStep
+  ∷ deltaRToZeroStep
+  ∷ multiscaleAbelSummationClosureStep
+  ∷ []
+
+candidateA1A3BootstrapStepCount : Nat
+candidateA1A3BootstrapStepCount =
+  listLength canonicalCandidateA1A3BootstrapSteps
+
+candidateA1A3BootstrapStepCountIs7 :
+  candidateA1A3BootstrapStepCount ≡ 7
+candidateA1A3BootstrapStepCountIs7 = refl
+
+data CoupledA1A3BootstrapBlocker : Set where
+  blockerA11BoundedAbelMass :
+    CoupledA1A3BootstrapBlocker
+  blockerA12WeakStarCompactness :
+    CoupledA1A3BootstrapBlocker
+  blockerA13ShellTailControl :
+    CoupledA1A3BootstrapBlocker
+  blockerA31SereginEpsilonRateIntake :
+    CoupledA1A3BootstrapBlocker
+  blockerA32EnergyODEOnAbelWindows :
+    CoupledA1A3BootstrapBlocker
+  blockerA33DeltaRToZero :
+    CoupledA1A3BootstrapBlocker
+  blockerA34MultiscaleAbelSummationClosure :
+    CoupledA1A3BootstrapBlocker
+  blockerA4DownstreamOutputSupportTransfer :
+    CoupledA1A3BootstrapBlocker
+  blockerResidualConsumerDownstream :
+    CoupledA1A3BootstrapBlocker
   clayNavierStokesPromotionClosed :
-    NSAnalyticRungBlocker
+    CoupledA1A3BootstrapBlocker
 
 canonicalNSAnalyticRungBlockers :
-  List NSAnalyticRungBlocker
+  List CoupledA1A3BootstrapBlocker
 canonicalNSAnalyticRungBlockers =
-  missingA1UniformBoundedMassEstimate
-  ∷ missingA2ObservableSigmaAlgebraAndContinuity
-  ∷ missingA3TNSStationarityDefectLimitDeltaRToZero
-  ∷ missingA4LeiRenTianOutputSupportTransfer
-  ∷ missingResidualNonPositiveConsumer
+  blockerA11BoundedAbelMass
+  ∷ blockerA12WeakStarCompactness
+  ∷ blockerA13ShellTailControl
+  ∷ blockerA31SereginEpsilonRateIntake
+  ∷ blockerA32EnergyODEOnAbelWindows
+  ∷ blockerA33DeltaRToZero
+  ∷ blockerA34MultiscaleAbelSummationClosure
+  ∷ blockerA4DownstreamOutputSupportTransfer
+  ∷ blockerResidualConsumerDownstream
   ∷ clayNavierStokesPromotionClosed
   ∷ []
 
@@ -166,9 +232,140 @@ nsAnalyticRungBlockerCount : Nat
 nsAnalyticRungBlockerCount =
   listLength canonicalNSAnalyticRungBlockers
 
-nsAnalyticRungBlockerCountIs6 :
-  nsAnalyticRungBlockerCount ≡ 6
-nsAnalyticRungBlockerCountIs6 =
+nsAnalyticRungBlockerCountIs10 :
+  nsAnalyticRungBlockerCount ≡ 10
+nsAnalyticRungBlockerCountIs10 =
+  refl
+
+a31EnergyODETargetLabel : String
+a31EnergyODETargetLabel =
+  "A3.1 energy ODE"
+
+a31EnergyODEContractText : String
+a31EnergyODEContractText =
+  "A3.1 energy-ODE clause: define the Abel-window profile difference W_r = U_r - U_infty and route the candidate windowed energy inequality against the imported A1 defect mass, with the closed estimate still blocked."
+
+a31EnergyODEPrimaryBlockerName : String
+a31EnergyODEPrimaryBlockerName =
+  "blockerA32EnergyODEOnAbelWindows"
+
+a32SereginESSIntakeTargetLabel : String
+a32SereginESSIntakeTargetLabel =
+  "A3.2 ESS/Seregin intake"
+
+a32SereginESSIntakeContractText : String
+a32SereginESSIntakeContractText =
+  "A3.2 ESS/Seregin intake clause: record the Seregin/ESS compactness and epsilon-regularity intake as the imported candidate rate source epsilon = 1/6, with the actual quantitative extraction still blocked."
+
+a32SereginESSIntakePrimaryBlockerName : String
+a32SereginESSIntakePrimaryBlockerName =
+  "blockerA31SereginEpsilonRateIntake"
+
+a33StationarityDefectRateTargetLabel : String
+a33StationarityDefectRateTargetLabel =
+  "A3.3 stationarity-defect rate"
+
+a33StationarityDefectRateContractText : String
+a33StationarityDefectRateContractText =
+  "A3.3 stationarity-defect rate clause: record the candidate stationarity-defect package delta_r = O(r^(1/12)) as the intended quantitative bridge to delta_r -> 0, while the actual derivation and limit remain blocked."
+
+a33StationarityDefectRatePrimaryBlockerName : String
+a33StationarityDefectRatePrimaryBlockerName =
+  "blockerA33DeltaRToZero"
+
+a34MultiscaleAbelSummationTargetLabel : String
+a34MultiscaleAbelSummationTargetLabel =
+  "A3.4 multiscale Abel-summation"
+
+a34MultiscaleAbelSummationContractText : String
+a34MultiscaleAbelSummationContractText =
+  "A3.4 multiscale Abel-summation clause: keep the multiscale Abel-summation / fixed-point closure explicit before any A4 handoff, with no theorem promotion until the contraction route is discharged."
+
+a34MultiscaleAbelSummationPrimaryBlockerName : String
+a34MultiscaleAbelSummationPrimaryBlockerName =
+  "blockerA34MultiscaleAbelSummationClosure"
+
+record CoupledA3TargetRow : Set where
+  field
+    obligation :
+      CoupledA1A3BootstrapObligation
+    label :
+      String
+    contractText :
+      String
+    primaryBlocker :
+      CoupledA1A3BootstrapBlocker
+    primaryBlockerName :
+      String
+    provedHere :
+      Bool
+    provedHereIsFalse :
+      provedHere ≡ false
+
+open CoupledA3TargetRow public
+
+mkCoupledA3TargetRow :
+  CoupledA1A3BootstrapObligation →
+  String →
+  String →
+  CoupledA1A3BootstrapBlocker →
+  String →
+  CoupledA3TargetRow
+mkCoupledA3TargetRow obligation label contractText primaryBlocker
+  primaryBlockerName =
+  record
+    { obligation =
+        obligation
+    ; label =
+        label
+    ; contractText =
+        contractText
+    ; primaryBlocker =
+        primaryBlocker
+    ; primaryBlockerName =
+        primaryBlockerName
+    ; provedHere =
+        false
+    ; provedHereIsFalse =
+        refl
+    }
+
+canonicalCoupledA3TargetRows :
+  List CoupledA3TargetRow
+canonicalCoupledA3TargetRows =
+  mkCoupledA3TargetRow
+    A32EnergyODEOnAbelWindowsObligation
+    a31EnergyODETargetLabel
+    a31EnergyODEContractText
+    blockerA32EnergyODEOnAbelWindows
+    a31EnergyODEPrimaryBlockerName
+  ∷ mkCoupledA3TargetRow
+    A31SereginEpsilonRateIntakeObligation
+    a32SereginESSIntakeTargetLabel
+    a32SereginESSIntakeContractText
+    blockerA31SereginEpsilonRateIntake
+    a32SereginESSIntakePrimaryBlockerName
+  ∷ mkCoupledA3TargetRow
+    A33DeltaRToZeroObligation
+    a33StationarityDefectRateTargetLabel
+    a33StationarityDefectRateContractText
+    blockerA33DeltaRToZero
+    a33StationarityDefectRatePrimaryBlockerName
+  ∷ mkCoupledA3TargetRow
+    A34MultiscaleAbelSummationClosureObligation
+    a34MultiscaleAbelSummationTargetLabel
+    a34MultiscaleAbelSummationContractText
+    blockerA34MultiscaleAbelSummationClosure
+    a34MultiscaleAbelSummationPrimaryBlockerName
+  ∷ []
+
+coupledA3TargetRowCount : Nat
+coupledA3TargetRowCount =
+  listLength canonicalCoupledA3TargetRows
+
+coupledA3TargetRowCountIs4 :
+  coupledA3TargetRowCount ≡ 4
+coupledA3TargetRowCountIs4 =
   refl
 
 ------------------------------------------------------------------------
@@ -258,6 +455,14 @@ lrtBoundaryAnchor : Bool
 lrtBoundaryAnchor =
   LRT.NSLeiRenTianGreatCircleCriterionBoundaryRecorded
 
+boundedMassBoundaryAnchor : Bool
+boundedMassBoundaryAnchor =
+  BoundedMass.NSBoundedAbelMassEstimateBoundaryRecorded
+
+boundedMassProofStillFalseAnchor : Bool
+boundedMassProofStillFalseAnchor =
+  BoundedMass.BoundedAbelMassEstimateProved
+
 recordsNSAbelTriadicStationarityBoundary :
   NSAbelTriadicStationarityConstructionBoundaryRecorded ≡ true
 recordsNSAbelTriadicStationarityBoundary =
@@ -323,35 +528,35 @@ keepsTerminalPromotionFalse =
 
 organizationString : String
 organizationString =
-  "O: First NS analytic rung records A1 bounded mass, A2 triadic observable, A3 approximate T_NS stationarity with delta_r -> 0, and A4 LRT output-support transfer."
+  "O: Worker lane NS-A1A3-synthesis owns the coupled A1/A3 boundary receipt: A1.1 bounded Abel mass -> A1.2 weak-* compactness -> A1.3 shell-tail control -> A3.1 Seregin intake -> A3.2 energy ODE -> A3.3 delta_r -> 0 -> A3.4 multiscale Abel-summation closure, then separate downstream A4 handoff."
 
 requirementString : String
 requirementString =
-  "R: Type the stationarity-construction boundary while keeping every Clay, theorem, residual, and terminal promotion boolean false."
+  "R: Record the exact coupled bootstrap theorem wall and its downstream A4 consumer handoff while keeping every theorem, Clay, residual, and promotion boolean false."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: NSAbelTriadicStationarityConstructionBoundary imports the Abel defect-measure, LRT, sheaf, and true Leray symbol boundaries and exposes canonical A1-A4 carriers."
+  "C: NSAbelTriadicStationarityConstructionBoundary is the single theorem-wall file for the coupled A1/A3 synthesis boundary, exposing canonical carriers, coupled obligations, candidate steps, blocker names, and the separate A4 handoff marker."
 
 stateString : String
 stateString =
-  "S: The rung is recorded only; bounded mass, observable continuity, T_NS stationarity, delta_r convergence, LRT support transfer, and residual depletion remain unproved."
+  "S: The boundary is recorded only; bounded Abel mass, weak-* compactness, shell-tail control, Seregin intake, the Abel-window energy ODE, delta_r convergence, multiscale Abel-summation closure, and the downstream A4 transfer all remain unproved."
 
 latticeString : String
 latticeString =
-  "L: Abel triadic measure boundary -> A1 mass/A2 observable/A3 stationarity/A4 LRT support -> future residual non-positive consumer."
+  "L: broad first-rung receipt -> exact coupled bootstrap theorem wall -> separate A4 consumer handoff."
 
 proposalString : String
 proposalString =
-  "P: Use this module as the first analytic-rung receipt and require explicit analytic estimates before any downstream promotion."
+  "P: Use this theorem wall to pin the open coupled route on the exact sequence bounded Abel mass + weak-* compactness + shell-tail control + Seregin intake + energy ODE + delta_r -> 0 + multiscale Abel-summation closure, with A4 transfer recorded as the next separate handoff."
 
 governanceString : String
 governanceString =
-  "G: Recorded flags are true only for boundary bookkeeping; proof, Clay, and promotion flags fail closed."
+  "G: Only this boundary file records the coupled contract; bookkeeping flags may be true, but theorem, residual, Clay, and promotion booleans remain fail-closed."
 
 gapString : String
 gapString =
-  "F: Missing estimates are uniform mass, observable tightness/continuity, quantitative T_NS stationarity defect decay, output-support transfer, and residual sign closure."
+  "F: The one coherent remaining theorem wall is the coupled A1/A3 bootstrap itself: bounded Abel mass, weak-* compactness, shell-tail control, Seregin epsilon-rate intake, the Abel-window energy ODE, delta_r -> 0, and multiscale Abel-summation closure; A4 transfer is downstream but separate."
 
 ------------------------------------------------------------------------
 -- Canonical receipt.
@@ -380,13 +585,19 @@ record NSAbelTriadicStationarityConstructionBoundary : Set where
     a4LRTOutputSupportTransferIsCanonical :
       a4LRTOutputSupportTransfer ≡ canonicalA4LRTOutputSupportTransfer
     obligations :
-      List NSAnalyticRungObligation
+      List CoupledA1A3BootstrapObligation
     obligationsAreCanonical :
       obligations ≡ canonicalNSAnalyticRungObligations
     blockers :
-      List NSAnalyticRungBlocker
+      List CoupledA1A3BootstrapBlocker
     blockersAreCanonical :
       blockers ≡ canonicalNSAnalyticRungBlockers
+    a3TargetRows :
+      List CoupledA3TargetRow
+    a3TargetRowsAreCanonical :
+      a3TargetRows ≡ canonicalCoupledA3TargetRows
+    a3TargetRowCountIsFour :
+      coupledA3TargetRowCount ≡ 4
     O : String
     OIsCanonical : O ≡ organizationString
     R : String
@@ -451,6 +662,9 @@ canonicalNSAbelTriadicStationarityConstructionBoundary =
     canonicalNSAnalyticRungObligations
     refl
     canonicalNSAnalyticRungBlockers
+    refl
+    canonicalCoupledA3TargetRows
+    refl
     refl
     organizationString
     refl

@@ -15,6 +15,16 @@ import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt as L3
 
 ------------------------------------------------------------------------
 -- Yang-Mills final-state receipt.
+--
+-- Repo posture alignment:
+--   * NS and unification are governed elsewhere as candidate-complete
+--     theorem packages pending promotion evidence.
+--   * YM remains the live external-content frontier.
+--   * The live frontier is now stated sharply: finite lattice closures are
+--     internal, while the remaining external intake is centered on the
+--     Balaban-side H3a cluster and its downstream H3b/no-spectral-pollution
+--     dependencies.
+--   * Every promotion flag here stays fail-closed.
 
 data YMFinalStateStatus : Set where
   l1InhabitedL2L3PartialL4L8ConditionalNoClay :
@@ -59,16 +69,16 @@ canonicalYMFinalStateLayers =
   ∷ []
 
 data YMFinalStateOpenBlocker : Set where
-  continuumBetaRunningOpen :
+  balabanH3aContinuumIntakeOpen :
     YMFinalStateOpenBlocker
 
-  cutoffMeasureTightnessOpen :
+  balabanH3bVacuumProjectionContinuityOpen :
     YMFinalStateOpenBlocker
 
-  fullCutoffMeasureTightnessOpen :
+  noSpectralPollutionFromH3aH3bOpen :
     YMFinalStateOpenBlocker
 
-  continuumYangMillsOpen :
+  thermodynamicLimitFromBalabanClusterOpen :
     YMFinalStateOpenBlocker
 
   gaugeSectorOSContinuumOpen :
@@ -107,10 +117,10 @@ data YMFinalStateOpenBlocker : Set where
 canonicalYMFinalStateOpenBlockers :
   List YMFinalStateOpenBlocker
 canonicalYMFinalStateOpenBlockers =
-  continuumBetaRunningOpen
-  ∷ cutoffMeasureTightnessOpen
-  ∷ fullCutoffMeasureTightnessOpen
-  ∷ continuumYangMillsOpen
+  balabanH3aContinuumIntakeOpen
+  ∷ balabanH3bVacuumProjectionContinuityOpen
+  ∷ noSpectralPollutionFromH3aH3bOpen
+  ∷ thermodynamicLimitFromBalabanClusterOpen
   ∷ gaugeSectorOSContinuumOpen
   ∷ continuumReflectionPositivityOpen
   ∷ brstGaugeFixedReflectionPositivityObstructionOpen
@@ -133,7 +143,7 @@ ymFinalStatePromotionImpossibleHere ()
 
 ymFinalStateStatement : String
 ymFinalStateStatement =
-  "YM final state: finite carrier spectral gaps are evidence only.  L1 is inhabited at finite lattice scope, L2 is partial strong coupling, L3 is partial dimensional-transmutation/CS k-running, L4-L8 are conditional, and Clay YM still lacks continuum construction, continuum OS/reflection positivity, BRST gauge-fixed positive-Hilbert OS3 control, ghost time-reflection graded-sign control, continuum Gribov-copy resolution, infinite-volume limit, operator convergence, uniform mass gap, and uniqueness."
+  "YM final state: NS and unification are tracked elsewhere as candidate-complete packages pending promotion evidence, while YM remains the live external-content frontier. L1 is inhabited at finite lattice scope, L2 is partial strong coupling, L3 records the partial dimensional-transmutation/CS k-running audit, L4-L8 remain conditional, and the live external intake is the Balaban-side H3a continuum cluster with downstream H3b/no-spectral-pollution, thermodynamic-limit, OS/reflection-positivity, BRST gauge-fixed OS3, ghost graded-sign, Gribov, operator-convergence, uniform-mass-gap, and uniqueness gates still open."
 
 record YMFinalStateReceipt : Setω where
   field
@@ -439,10 +449,12 @@ canonicalYMFinalStateReceipt =
     ; receiptBoundary =
         "L1 records the finite carrier-lattice Yang-Mills measure as inhabited"
         ∷ "L2 records only finite strong-coupling partial diagnostics"
-        ∷ "Finite carrier spectral gaps are evidence only, not Clay Yang-Mills"
+        ∷ "NS and unification are candidate-complete elsewhere pending promotion evidence; this receipt keeps YM as the live frontier"
+        ∷ "Finite carrier spectral gaps stay finite-lattice evidence only, not continuum or Clay Yang-Mills"
         ∷ "L3 is partial as a dimensional-transmutation/CS k-running audit; full tightness itself is not constructed"
-        ∷ "L4-L8 are conditional chain entries, not unconditional continuum or mass-gap proofs"
-        ∷ "Continuum construction, OS axioms/reflection positivity, infinite-volume limit, and operator convergence are not proved"
+        ∷ "L4-L8 remain conditional chain entries, not unconditional continuum or mass-gap proofs"
+        ∷ "The leading external intake is the Balaban-side H3a continuum cluster, followed by H3b vacuum-projection continuity and no-spectral-pollution"
+        ∷ "Thermodynamic-limit, gauge-sector OS continuum, reflection positivity, infinite-volume limit, and operator convergence are not proved"
         ∷ "OS3 is separated into finite ungauge-fixed Wilson positivity, BRST gauge-fixed obstruction, ghost graded-sign boundary, and carrier-only Gribov representative boundary"
         ∷ "Gauge-sector OS continuum, uniqueness, Clay Yang-Mills, and terminal Clay promotion remain false"
         ∷ []

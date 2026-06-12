@@ -14,9 +14,17 @@ data NSRegularityGapStatus : Set where
     NSRegularityGapStatus
 
 data NSRegularityGapItem : Set where
-  finiteDepthEnergyEstimate :
+  explicitCandidatePacketRecorded :
     NSRegularityGapItem
-  finiteDepthEnstrophyControl :
+  cknEssLrtSpineRecorded :
+    NSRegularityGapItem
+  a1A3A4A5A9BridgeRecorded :
+    NSRegularityGapItem
+  theoremShapeGrammarGapClosed :
+    NSRegularityGapItem
+  missingPromotionEvidence :
+    NSRegularityGapItem
+  missingRefereeGradeAcceptance :
     NSRegularityGapItem
   finiteDepthVorticityEquation :
     NSRegularityGapItem
@@ -28,8 +36,12 @@ data NSRegularityGapItem : Set where
 canonicalNSRegularityGapItems :
   List NSRegularityGapItem
 canonicalNSRegularityGapItems =
-  finiteDepthEnergyEstimate
-  ∷ finiteDepthEnstrophyControl
+  explicitCandidatePacketRecorded
+  ∷ cknEssLrtSpineRecorded
+  ∷ a1A3A4A5A9BridgeRecorded
+  ∷ theoremShapeGrammarGapClosed
+  ∷ missingPromotionEvidence
+  ∷ missingRefereeGradeAcceptance
   ∷ finiteDepthVorticityEquation
   ∷ missingUniformBKMControl
   ∷ missingContinuumSmoothRegularity
@@ -37,7 +49,7 @@ canonicalNSRegularityGapItems =
 
 nsRegularityGapStatement : String
 nsRegularityGapStatement =
-  "Finite-depth NS energy, enstrophy, vorticity, and BKM rungs are recorded, but uniform vorticity control, continuum BKM passage, global smooth regularity, and Clay closure remain open."
+  "The explicit candidate self-contained NS packet around CKN, ESS, LRT, A1/A3, A4, and A5-A9 is recorded, so theorem-shape grammar is not the live gap. The remaining fail-closed burden is promotion evidence, referee-grade acceptance, finite-depth-to-continuum vorticity/BKM closure, global smooth regularity, and Clay closure."
 
 record NSRegularityGapReceipt : Setω where
   field
@@ -73,6 +85,30 @@ record NSRegularityGapReceipt : Setω where
 
     gapItemsAreCanonical :
       gapItems ≡ canonicalNSRegularityGapItems
+
+    candidateSelfContainedPacketRecorded :
+      Bool
+
+    candidateSelfContainedPacketRecordedIsTrue :
+      candidateSelfContainedPacketRecorded ≡ true
+
+    theoremShapeGrammarGapClosedFlag :
+      Bool
+
+    theoremShapeGrammarGapClosedFlagIsTrue :
+      theoremShapeGrammarGapClosedFlag ≡ true
+
+    promotionEvidenceOutstanding :
+      Bool
+
+    promotionEvidenceOutstandingIsTrue :
+      promotionEvidenceOutstanding ≡ true
+
+    refereeGradeAcceptanceOutstanding :
+      Bool
+
+    refereeGradeAcceptanceOutstandingIsTrue :
+      refereeGradeAcceptanceOutstanding ≡ true
 
     energyRungRecorded :
       Bool
@@ -149,6 +185,22 @@ canonicalNSRegularityGapReceipt =
         canonicalNSRegularityGapItems
     ; gapItemsAreCanonical =
         refl
+    ; candidateSelfContainedPacketRecorded =
+        true
+    ; candidateSelfContainedPacketRecordedIsTrue =
+        refl
+    ; theoremShapeGrammarGapClosedFlag =
+        true
+    ; theoremShapeGrammarGapClosedFlagIsTrue =
+        refl
+    ; promotionEvidenceOutstanding =
+        true
+    ; promotionEvidenceOutstandingIsTrue =
+        refl
+    ; refereeGradeAcceptanceOutstanding =
+        true
+    ; refereeGradeAcceptanceOutstandingIsTrue =
+        refl
     ; energyRungRecorded =
         true
     ; energyRungRecordedIsTrue =
@@ -182,9 +234,10 @@ canonicalNSRegularityGapReceipt =
     ; statementIsCanonical =
         refl
     ; receiptBoundary =
-        "Finite-depth rungs are recorded by the tower at every Nat depth"
-        ∷ "Uniform vorticity Linfinity control is not constructed"
-        ∷ "Continuum BKM passage and global smooth regularity remain false"
+        "The candidate self-contained packet is recorded around CKN, ESS, LRT, A1/A3, A4, and A5-A9"
+        ∷ "Theorem-shape grammar is treated as present rather than as the live NS gap"
+        ∷ "Promotion evidence and referee-grade acceptance remain outstanding"
+        ∷ "Uniform vorticity Linfinity control, continuum BKM passage, and global smooth regularity remain false"
         ∷ "Clay Navier-Stokes promotion remains false"
         ∷ []
     }

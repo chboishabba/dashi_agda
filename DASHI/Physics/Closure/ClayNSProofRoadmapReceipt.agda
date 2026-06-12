@@ -16,8 +16,11 @@ import DASHI.Physics.Closure.WaveletFrameBoundRevisionReceipt as FrameRev
 ------------------------------------------------------------------------
 -- Navier-Stokes Clay roadmap receipt.
 --
--- This receipt records that the human-readable proof roadmap exists and
--- separates the weak-solution branch from the BKM/global-regularity branch.
+-- This receipt records the sharpened NS packet posture.  The weak-solution
+-- and BKM/global-regularity branches remain separated, and the repo now
+-- treats `A1.1-A3.4`, `A4.1-A4.5`, and downstream `A5-A9` as exact
+-- candidate theorem packages pending promotion acceptance in the precise
+-- downstream norms.  No Clay-facing promotion occurs here.
 
 data NSRoadmapLemma : Set where
   lerayEnergyInequality :
@@ -70,7 +73,7 @@ nsRoadmapDocPath =
 
 nsRoadmapStatement : String
 nsRoadmapStatement =
-  "Clay NS roadmap separates the conditional Leray weak-solution branch from the BKM/global-regularity branch; current carrier progress is conditional and frame-bound blocked."
+  "Clay NS roadmap separates the conditional Leray weak-solution branch from the BKM/global-regularity branch; the repo records candidate-complete A1/A3, A4, and downstream A5-A9 packets pending promotion acceptance, with all Clay-facing flags still false."
 
 record ClayNSProofRoadmapReceipt : Setω where
   field
@@ -255,9 +258,11 @@ canonicalClayNSProofRoadmapReceipt =
         refl
     ; receiptBoundary =
         "The roadmap is a dependency graph, not a proof"
-        ∷ "The weak-solution branch is conditional on frame and nonlinear-passage lemmas"
-        ∷ "The BKM/enstrophy branch is separate and remains uninhabited"
-        ∷ "Clay Navier-Stokes and terminal promotion remain false"
+        ∷ "The weak-solution branch stays conditional on frame and nonlinear-passage lemmas"
+        ∷ "A1.1-A3.4 is recorded as an exact candidate package pending promotion acceptance"
+        ∷ "A4.1-A4.5 is recorded as an exact candidate package pending promotion acceptance"
+        ∷ "A5-A9 is recorded as an exact downstream consumer package pending upstream acceptance"
+        ∷ "The BKM/enstrophy branch remains uninhabited and Clay/terminal promotion remain false"
         ∷ []
     }
 

@@ -54,6 +54,8 @@ data A9ClosureClause : Set where
     A9ClosureClause
   localDefectSequenceConvergesToZeroAtSingularScale :
     A9ClosureClause
+  pressureAndLocalEnergyPacketHandsOffToA9Closure :
+    A9ClosureClause
   vanishingLocalEnstrophyForcesLocalVorticityZero :
     A9ClosureClause
   biotSavartTurnsZeroVorticityIntoLocalHarmonicVelocity :
@@ -68,6 +70,7 @@ canonicalA9ClosureClauses :
 canonicalA9ClosureClauses =
   iterateA8ScaleRecursionToSmallerScales
   ∷ localDefectSequenceConvergesToZeroAtSingularScale
+  ∷ pressureAndLocalEnergyPacketHandsOffToA9Closure
   ∷ vanishingLocalEnstrophyForcesLocalVorticityZero
   ∷ biotSavartTurnsZeroVorticityIntoLocalHarmonicVelocity
   ∷ ellipticRegularityRestoresSmoothness
@@ -78,9 +81,9 @@ a9ClosureClauseCount : Nat
 a9ClosureClauseCount =
   listLength canonicalA9ClosureClauses
 
-a9ClosureClauseCountIs6 :
-  a9ClosureClauseCount ≡ 6
-a9ClosureClauseCountIs6 =
+a9ClosureClauseCountIs7 :
+  a9ClosureClauseCount ≡ 7
+a9ClosureClauseCountIs7 =
   refl
 
 data A9ClassicalInput : Set where
@@ -112,6 +115,8 @@ a9ClassicalInputCountIs4 =
   refl
 
 data DownstreamA9Blocker : Set where
+  blocker-pressure-local-energy-to-a9-handoff-unproved :
+    DownstreamA9Blocker
   blocker-a9-closure-theorem-unproved :
     DownstreamA9Blocker
   blocker-ns-clay-authority-unproved :
@@ -122,7 +127,8 @@ data DownstreamA9Blocker : Set where
 canonicalDownstreamA9Blockers :
   List DownstreamA9Blocker
 canonicalDownstreamA9Blockers =
-  blocker-a9-closure-theorem-unproved
+  blocker-pressure-local-energy-to-a9-handoff-unproved
+  ∷ blocker-a9-closure-theorem-unproved
   ∷ blocker-ns-clay-authority-unproved
   ∷ blocker-terminal-promotion-forbidden
   ∷ []
@@ -131,9 +137,9 @@ downstreamA9BlockerCount : Nat
 downstreamA9BlockerCount =
   listLength canonicalDownstreamA9Blockers
 
-downstreamA9BlockerCountIs3 :
-  downstreamA9BlockerCount ≡ 3
-downstreamA9BlockerCountIs3 =
+downstreamA9BlockerCountIs4 :
+  downstreamA9BlockerCount ≡ 4
+downstreamA9BlockerCountIs4 =
   refl
 
 A9CKNBKMClosureProved : Bool
@@ -177,12 +183,12 @@ record NSA9CKNBKMClosureBoundary : Set where
       List DownstreamA9Blocker
     downstreamBlockersAreCanonical :
       downstreamBlockers ≡ canonicalDownstreamA9Blockers
-    closureClauseCountIs6 :
-      a9ClosureClauseCount ≡ 6
+    closureClauseCountIs7 :
+      a9ClosureClauseCount ≡ 7
     classicalInputCountIs4 :
       a9ClassicalInputCount ≡ 4
-    blockerCountIs3 :
-      downstreamA9BlockerCount ≡ 3
+    blockerCountIs4 :
+      downstreamA9BlockerCount ≡ 4
     a9StillFalse :
       A9CKNBKMClosureProved ≡ false
     nsClayStillFalse :
@@ -206,11 +212,11 @@ canonicalNSA9CKNBKMClosureBoundary =
         canonicalDownstreamA9Blockers
     ; downstreamBlockersAreCanonical =
         refl
-    ; closureClauseCountIs6 =
+    ; closureClauseCountIs7 =
         refl
     ; classicalInputCountIs4 =
         refl
-    ; blockerCountIs3 =
+    ; blockerCountIs4 =
         refl
     ; a9StillFalse =
         refl

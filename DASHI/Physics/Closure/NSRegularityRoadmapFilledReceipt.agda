@@ -16,9 +16,17 @@ data NSRegularityRoadmapFilledStatus : Set where
 data NSRegularityRoadmapMilestone : Set where
   weakSolutionBranchSeparated :
     NSRegularityRoadmapMilestone
-  finiteEnergyAndEnstrophyRungsFilled :
+  explicitCandidatePacketRecorded :
     NSRegularityRoadmapMilestone
-  finiteVorticityRungsFilled :
+  cknEssLrtSpineRecorded :
+    NSRegularityRoadmapMilestone
+  a1A3A4A5A9BridgeRecorded :
+    NSRegularityRoadmapMilestone
+  theoremShapeGrammarGapClosed :
+    NSRegularityRoadmapMilestone
+  promotionEvidenceStillOpen :
+    NSRegularityRoadmapMilestone
+  refereeGradeAcceptanceStillOpen :
     NSRegularityRoadmapMilestone
   bkmUniformControlStillOpen :
     NSRegularityRoadmapMilestone
@@ -29,15 +37,19 @@ canonicalNSRegularityRoadmapMilestones :
   List NSRegularityRoadmapMilestone
 canonicalNSRegularityRoadmapMilestones =
   weakSolutionBranchSeparated
-  ∷ finiteEnergyAndEnstrophyRungsFilled
-  ∷ finiteVorticityRungsFilled
+  ∷ explicitCandidatePacketRecorded
+  ∷ cknEssLrtSpineRecorded
+  ∷ a1A3A4A5A9BridgeRecorded
+  ∷ theoremShapeGrammarGapClosed
+  ∷ promotionEvidenceStillOpen
+  ∷ refereeGradeAcceptanceStillOpen
   ∷ bkmUniformControlStillOpen
   ∷ clayRegularityStillOpen
   ∷ []
 
 nsRegularityRoadmapFilledStatement : String
 nsRegularityRoadmapFilledStatement =
-  "The NS roadmap is filled through finite-depth weak, energy, enstrophy, vorticity, and BKM rungs; the global smooth regularity and Clay branches remain open."
+  "The NS roadmap now records an explicit candidate self-contained packet around CKN, ESS, LRT, A1/A3, A4, and A5-A9, so theorem-shape grammar is not the live gap. The remaining burden is promotion evidence, referee-grade acceptance, unresolved uniform vorticity/continuum regularity closure, and still-false Clay/global promotion."
 
 record NSRegularityRoadmapFilledReceipt : Setω where
   field
@@ -85,6 +97,30 @@ record NSRegularityRoadmapFilledReceipt : Setω where
 
     roadmapFilledIsTrue :
       roadmapFilled ≡ true
+
+    candidateSelfContainedPacketRecorded :
+      Bool
+
+    candidateSelfContainedPacketRecordedIsTrue :
+      candidateSelfContainedPacketRecorded ≡ true
+
+    theoremShapeGrammarGapClosedFlag :
+      Bool
+
+    theoremShapeGrammarGapClosedFlagIsTrue :
+      theoremShapeGrammarGapClosedFlag ≡ true
+
+    promotionEvidenceOutstanding :
+      Bool
+
+    promotionEvidenceOutstandingIsTrue :
+      promotionEvidenceOutstanding ≡ true
+
+    refereeGradeAcceptanceOutstanding :
+      Bool
+
+    refereeGradeAcceptanceOutstandingIsTrue :
+      refereeGradeAcceptanceOutstanding ≡ true
 
     n1LocalSmoothnessCitationAuthorityRecorded :
       Bool
@@ -183,6 +219,22 @@ canonicalNSRegularityRoadmapFilledReceipt =
         true
     ; roadmapFilledIsTrue =
         refl
+    ; candidateSelfContainedPacketRecorded =
+        true
+    ; candidateSelfContainedPacketRecordedIsTrue =
+        refl
+    ; theoremShapeGrammarGapClosedFlag =
+        true
+    ; theoremShapeGrammarGapClosedFlagIsTrue =
+        refl
+    ; promotionEvidenceOutstanding =
+        true
+    ; promotionEvidenceOutstandingIsTrue =
+        refl
+    ; refereeGradeAcceptanceOutstanding =
+        true
+    ; refereeGradeAcceptanceOutstandingIsTrue =
+        refl
     ; n1LocalSmoothnessCitationAuthorityRecorded =
         true
     ; n1LocalSmoothnessCitationAuthorityRecordedIsTrue =
@@ -224,10 +276,10 @@ canonicalNSRegularityRoadmapFilledReceipt =
     ; statementIsCanonical =
         refl
     ; receiptBoundary =
-        "The roadmap is filled as a dependency ledger, not as a regularity proof"
-        ∷ "N1 local smoothness and N3 BKM are citation authorities; N2 uniform enstrophy and N4 vorticity Linfinity remain open"
-        ∷ "Critical Besov/vorticity control is the next named target"
-        ∷ "The weak-solution branch is true while BKM/vorticity closure remains false"
+        "The roadmap records an explicit candidate self-contained packet around CKN, ESS, LRT, A1/A3, A4, and A5-A9"
+        ∷ "Theorem-shape grammar is treated as available rather than as the remaining NS blocker"
+        ∷ "Promotion evidence and referee-grade acceptance remain outstanding"
+        ∷ "N2 uniform enstrophy, N4 vorticity Linfinity, and continuum closure remain open"
         ∷ "Global smooth regularity and Clay promotion remain false"
         ∷ []
     }

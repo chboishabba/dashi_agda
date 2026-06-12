@@ -7,6 +7,39 @@ three-dimensional incompressible Navier-Stokes global regularity problem would
 have to prove. It is not a proof, and it does not promote any Clay,
 smooth-solution, or terminal claim.
 
+Current corpus correction: the live Clay-facing manuscript is now
+`Docs/papers/live/Paper1NavierStokesClayDraft.md`, and it concentrates the
+honest new mathematics much more sharply than the older theta/EV5 language.
+The coupled `A1/A3` Abel-defect/quantitative-stationarity bootstrap is the
+live wall, and the next independent hard theorem is the `A4`
+Lei-Ren-Tian-to-Fourier output-support transfer with a uniform constant across
+Type-I rescalings. Read the roadmap below as a broader dependency ledger, not
+as a fresher statement than the live paper.
+
+Current packaging correction: the repo now carries exact candidate theorem
+grammar for `A1.1-A3.4`, `A4.1-A4.5`, and the downstream `A5-A9` consumer
+ladder in the proof-facing Agda boundaries. That sharpens the dependency graph
+but does not promote any of those theorems. In particular, candidate
+`epsilon = 1/6`, candidate `delta_r = O(r^(1/12))`, and candidate coarea /
+Jacobian / strip-hitting constants remain recorded inputs rather than accepted
+local proofs.
+
+Current governance correction: the live NS burden is no longer missing
+theorem-shape grammar. The repo now carries an explicit candidate
+self-contained packet `CKN + ESS + LRT + A1/A3 + A4 + A5-A9`. What remains
+fail-closed is theorem acceptance and promotion in the exact consumed norms and
+constants, not placeholder structure.
+
+Downstream correction: the `A5-A9` lane is now no longer a generic "later PDE
+closure" bucket. The candidate theorem grammar is explicit:
+`A5` kappa-bias vanishing from stationarity plus output-support richness,
+`A6` leakage reduction and pointwise-to-Abel transfer,
+`A7` Gronwall depletion,
+`A8` scale-monotonicity recursion,
+`A9` CKN/BKM contradiction.
+This is a governance/documentation gain only; those theorems remain
+unpromoted until the earlier `A1/A3` and `A4` fronts are accepted.
+
 Latest NS-to-EV5 boundary: DASHI may support a conditional NS regularity
 theorem only if NS modes project into FRACTRAN-admissible EV5 with forward
 simulation. This boundary is fail-closed. The exact open obligations are

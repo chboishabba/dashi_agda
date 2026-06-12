@@ -10,15 +10,27 @@ import DASHI.Physics.Closure.YMSmallFieldSurvivalAuthority as SmallField
 ------------------------------------------------------------------------
 -- Authority-conditional lattice mass-gap gate.
 --
--- This module advances the authority-conditional lane one step beyond
--- small-field survival.  It records the transfer-matrix compatibility and
--- spectral-gap package needed to turn anisotropic KP plus surviving
--- small-field bounds into a positive lattice mass gap.
+-- This module is a finite-lattice provider surface only.  It advances the
+-- authority-conditional lane one step beyond small-field survival by typing
+-- the finite transfer-matrix compatibility and finite spectral-gap package
+-- needed to turn anisotropic KP plus surviving small-field bounds into a
+-- positive lattice mass gap.
 --
--- The provider is authority-backed: Sprint 89 accepts the two remaining
--- analytic inputs as scoped authority receipts, so the lattice transfer
--- spectral-gap provider is now derived in repo in the receipt sense.  This is
--- not an unconditional continuum/Clay promotion.
+-- The honest chain is sharper than the older generic wording:
+--
+--   * finite self-adjointness and the finite spectral margin are internal
+--     finite-carrier facts already closed here;
+--   * the imported Balaban/Eriksson package is consumed as upstream provider
+--     authority rather than promoted as a peer front with the live burden;
+--   * the live missing-content frontier, if internal closure is demanded,
+--     remains Balaban-centered H3a;
+--   * H3b vacuum-projection continuity, no-spectral-pollution,
+--     thermodynamic-limit, and OS/Wightman surfaces are downstream consumers
+--     or downstream slots after that H3a frontier;
+--   * all continuum/Clay promotions remain false.
+--
+-- The provider is authority-backed in the receipt sense only.  This file does
+-- not claim continuum closure and does not move the live burden away from H3a.
 
 record TemporalTransferMatrixSpatialBlockingCompatibility : Set where
   constructor mkTemporalTransferMatrixSpatialBlockingCompatibility
@@ -68,25 +80,31 @@ temporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo : Bool
 temporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo = true
 
 transferReflectionPositivityDerivedInRepo : Bool
-transferReflectionPositivityDerivedInRepo = true
+transferReflectionPositivityDerivedInRepo = false
 
 transferSpectralGapDerivedInRepo : Bool
-transferSpectralGapDerivedInRepo = true
+transferSpectralGapDerivedInRepo = false
 
 positiveLatticeMassGapExtractionDerivedInRepo : Bool
-positiveLatticeMassGapExtractionDerivedInRepo = true
+positiveLatticeMassGapExtractionDerivedInRepo = false
+
+finiteSelfAdjointnessInternalized : Bool
+finiteSelfAdjointnessInternalized = true
+
+finiteSpectralMarginInternalized : Bool
+finiteSpectralMarginInternalized = true
 
 eriksson26020041Assumption54AuthorityImported : Bool
 eriksson26020041Assumption54AuthorityImported = true
 
 eriksson26020041Assumption54DerivedInRepo : Bool
-eriksson26020041Assumption54DerivedInRepo = true
+eriksson26020041Assumption54DerivedInRepo = false
 
 eriksson26020041Assumption63AuthorityImported : Bool
 eriksson26020041Assumption63AuthorityImported = true
 
 eriksson26020041Assumption63DerivedInRepo : Bool
-eriksson26020041Assumption63DerivedInRepo = true
+eriksson26020041Assumption63DerivedInRepo = false
 
 downstream26020041PaperIdentifier : String
 downstream26020041PaperIdentifier = "2602.0041v1"
@@ -118,6 +136,27 @@ downstream26020041SpectralGapReferenceAnchor =
 downstream26020041ReflectionPositivityReferenceAnchor : String
 downstream26020041ReflectionPositivityReferenceAnchor =
   "2602.0041v1:Section6.4:MassGapViaReflectionPositivity"
+
+finiteLatticeAuthoritySurfaceIsUpstreamProvider : Bool
+finiteLatticeAuthoritySurfaceIsUpstreamProvider = true
+
+finiteLatticeAuthoritySurfaceCarriesLiveClosureBurden : Bool
+finiteLatticeAuthoritySurfaceCarriesLiveClosureBurden = false
+
+balabanH3aIsLiveMissingContentFrontier : Bool
+balabanH3aIsLiveMissingContentFrontier = true
+
+h3bVacuumProjectionContinuityIsDownstreamConsumer : Bool
+h3bVacuumProjectionContinuityIsDownstreamConsumer = true
+
+noSpectralPollutionIsDownstreamConsumer : Bool
+noSpectralPollutionIsDownstreamConsumer = true
+
+thermodynamicLimitIsDownstreamSlot : Bool
+thermodynamicLimitIsDownstreamSlot = true
+
+osWightmanIsDownstreamSlot : Bool
+osWightmanIsDownstreamSlot = true
 
 record LatticeMassGapProvider : Set where
   constructor mkLatticeMassGapProvider
@@ -175,30 +214,45 @@ latticeMassGapProviderFromAnalyticPackage package =
 
 temporalTransferMatrixSpatialBlockingCompatibilityCitation : String
 temporalTransferMatrixSpatialBlockingCompatibilityCitation =
-  "DASHI Sprint 85/W5: TemporalTransferMatrixSpatialBlockingCompatibility is derived in repo from W3 large-field cut separation, W5 temporal-cut functoriality, and Balaban transfer compatibility."
+  "DASHI Sprint 85/W5 finite-lattice receipt: TemporalTransferMatrixSpatialBlockingCompatibility is derived in repo from W3 large-field cut separation, W5 temporal-cut functoriality, and finite transfer compatibility."
 
 transferReflectionPositivityCitation : String
 transferReflectionPositivityCitation =
-  "Constructive lattice gauge theory transfer matrix: reflection positivity for the lattice transfer operator."
+  "Authority-backed finite-lattice provider slot: reflection positivity for the lattice transfer operator consumed here without continuum promotion."
 
 transferSpectralGapCitation : String
 transferSpectralGapCitation =
-  "Balaban/KP small-field transfer analysis: positive transfer spectral gap from anisotropic KP plus surviving small-field bounds."
+  "Authority-backed finite-lattice provider slot: positive transfer spectral gap from anisotropic KP plus surviving small-field bounds."
 
 positiveLatticeMassGapExtractionCitation : String
 positiveLatticeMassGapExtractionCitation =
-  "Transfer-matrix spectral theorem: positive transfer spectral gap extracts a positive lattice mass gap."
+  "Finite-lattice extraction slot: a positive transfer spectral gap yields a positive lattice mass gap before any continuum intake."
 
 eriksson26020041Assumption54Citation : String
 eriksson26020041Assumption54Citation =
-  "Eriksson 2602.0041v1 Assumption 5.4 and Appendix A: k-uniform cross-scale derivative/analyticity bound from the Balaban CMP 98/116/122 audit trail."
+  "Eriksson 2602.0041v1 Assumption 5.4 and Appendix A: imported cross-scale derivative/analyticity authority from the Balaban CMP 98/116/122 trail, consumed here as upstream provider support."
 
 eriksson26020041Assumption63Citation : String
 eriksson26020041Assumption63Citation =
-  "Eriksson 2602.0041v1 Assumption 6.3 and Section 6.4: Dobrushin translation, locality, reflection positivity, and transfer-matrix mass-gap extraction."
+  "Eriksson 2602.0041v1 Assumption 6.3 and Section 6.4: imported Dobrushin/locality/reflection-positivity/mass-gap extraction authority, consumed here as finite-lattice provider support."
 
 record LatticeMassGapProviderSourceMap : Set where
   field
+    finiteLatticeSurfaceIsUpstreamProvider :
+      finiteLatticeAuthoritySurfaceIsUpstreamProvider ≡ true
+    finiteLatticeSurfaceNotLiveClosureBurden :
+      finiteLatticeAuthoritySurfaceCarriesLiveClosureBurden ≡ false
+    liveMissingContentFrontierIsBalabanH3a :
+      balabanH3aIsLiveMissingContentFrontier ≡ true
+    h3bSurfaceIsDownstreamConsumer :
+      h3bVacuumProjectionContinuityIsDownstreamConsumer ≡ true
+    noSpectralPollutionSurfaceIsDownstreamConsumer :
+      noSpectralPollutionIsDownstreamConsumer ≡ true
+    thermodynamicLimitSurfaceIsDownstreamSlot :
+      thermodynamicLimitIsDownstreamSlot ≡ true
+    osWightmanSurfaceIsDownstreamSlot :
+      osWightmanIsDownstreamSlot ≡ true
+
     downstreamPaperIdentifier :
       String
     assumption54NormalizedAnchor :
@@ -209,8 +263,8 @@ record LatticeMassGapProviderSourceMap : Set where
       String
     assumption54AuthorityImported :
       eriksson26020041Assumption54AuthorityImported ≡ true
-    assumption54ClosedByScopedAuthority :
-      eriksson26020041Assumption54DerivedInRepo ≡ true
+    assumption54NotDerivedInternally :
+      eriksson26020041Assumption54DerivedInRepo ≡ false
 
     assumption63NormalizedAnchor :
       String
@@ -220,8 +274,8 @@ record LatticeMassGapProviderSourceMap : Set where
       String
     assumption63AuthorityImported :
       eriksson26020041Assumption63AuthorityImported ≡ true
-    assumption63ClosedByScopedAuthority :
-      eriksson26020041Assumption63DerivedInRepo ≡ true
+    assumption63NotDerivedInternally :
+      eriksson26020041Assumption63DerivedInRepo ≡ false
 
     theorem41NormalizedAnchor :
       String
@@ -241,22 +295,22 @@ record LatticeMassGapProviderSourceMap : Set where
       TransferReflectionPositivity
     transferReflectionPositivitySourceCitation :
       String
-    transferReflectionPositivityClosedByScopedAuthority :
-      transferReflectionPositivityDerivedInRepo ≡ true
+    transferReflectionPositivityNotDerivedInternally :
+      transferReflectionPositivityDerivedInRepo ≡ false
 
     transferSpectralGapSource :
       TransferSpectralGap
     transferSpectralGapSourceCitation :
       String
-    transferSpectralGapClosedByScopedAuthority :
-      transferSpectralGapDerivedInRepo ≡ true
+    transferSpectralGapNotDerivedInternally :
+      transferSpectralGapDerivedInRepo ≡ false
 
     positiveLatticeMassGapExtractionSource :
       PositiveLatticeMassGapExtraction
     positiveLatticeMassGapExtractionSourceCitation :
       String
-    positiveLatticeMassGapExtractionClosedByScopedAuthority :
-      positiveLatticeMassGapExtractionDerivedInRepo ≡ true
+    positiveLatticeMassGapExtractionNotDerivedInternally :
+      positiveLatticeMassGapExtractionDerivedInRepo ≡ false
 
 temporalTransferMatrixSpatialBlockingCompatibilityProvider :
   TemporalTransferMatrixSpatialBlockingCompatibility
@@ -282,7 +336,14 @@ latticeMassGapProviderSourceMap :
   LatticeMassGapProviderSourceMap
 latticeMassGapProviderSourceMap =
   record
-    { downstreamPaperIdentifier =
+    { finiteLatticeSurfaceIsUpstreamProvider = refl
+    ; finiteLatticeSurfaceNotLiveClosureBurden = refl
+    ; liveMissingContentFrontierIsBalabanH3a = refl
+    ; h3bSurfaceIsDownstreamConsumer = refl
+    ; noSpectralPollutionSurfaceIsDownstreamConsumer = refl
+    ; thermodynamicLimitSurfaceIsDownstreamSlot = refl
+    ; osWightmanSurfaceIsDownstreamSlot = refl
+    ; downstreamPaperIdentifier =
         downstream26020041PaperIdentifier
     ; assumption54NormalizedAnchor =
         downstream26020041Assumption54NormalizedAnchor
@@ -291,7 +352,7 @@ latticeMassGapProviderSourceMap =
     ; assumption54SourceCitation =
         eriksson26020041Assumption54Citation
     ; assumption54AuthorityImported = refl
-    ; assumption54ClosedByScopedAuthority = refl
+    ; assumption54NotDerivedInternally = refl
     ; assumption63NormalizedAnchor =
         downstream26020041Assumption63NormalizedAnchor
     ; assumption63DASHIAuthoritySlot =
@@ -299,7 +360,7 @@ latticeMassGapProviderSourceMap =
     ; assumption63SourceCitation =
         eriksson26020041Assumption63Citation
     ; assumption63AuthorityImported = refl
-    ; assumption63ClosedByScopedAuthority = refl
+    ; assumption63NotDerivedInternally = refl
     ; theorem41NormalizedAnchor =
         downstream26020041Theorem41NormalizedAnchor
     ; spectralGapReferenceAnchor =
@@ -316,19 +377,19 @@ latticeMassGapProviderSourceMap =
         transferReflectionPositivityProvider
     ; transferReflectionPositivitySourceCitation =
         transferReflectionPositivityCitation
-    ; transferReflectionPositivityClosedByScopedAuthority =
+    ; transferReflectionPositivityNotDerivedInternally =
         refl
     ; transferSpectralGapSource =
         transferSpectralGapProvider
     ; transferSpectralGapSourceCitation =
         transferSpectralGapCitation
-    ; transferSpectralGapClosedByScopedAuthority =
+    ; transferSpectralGapNotDerivedInternally =
         refl
     ; positiveLatticeMassGapExtractionSource =
         positiveLatticeMassGapExtractionProvider
     ; positiveLatticeMassGapExtractionSourceCitation =
         positiveLatticeMassGapExtractionCitation
-    ; positiveLatticeMassGapExtractionClosedByScopedAuthority =
+    ; positiveLatticeMassGapExtractionNotDerivedInternally =
         refl
     }
 
@@ -379,7 +440,7 @@ latticeMassGapProviderAuthorityAvailable : Bool
 latticeMassGapProviderAuthorityAvailable = true
 
 latticeMassGapProviderDerivedInRepo : Bool
-latticeMassGapProviderDerivedInRepo = true
+latticeMassGapProviderDerivedInRepo = false
 
 latticeMassGapProviderImportedByAuthority : Bool
 latticeMassGapProviderImportedByAuthority = true
@@ -399,6 +460,15 @@ latticeMassGapFromAnisotropicKPAuthorityConditionalBool = true
 latticeMassGapFromAnisotropicKPUnconditional : Bool
 latticeMassGapFromAnisotropicKPUnconditional = false
 
+balabanH3aContinuumIntakeAuthorityConditional : Bool
+balabanH3aContinuumIntakeAuthorityConditional = false
+
+h3bVacuumProjectionContinuityAuthorityConditional : Bool
+h3bVacuumProjectionContinuityAuthorityConditional = false
+
+noSpectralPollutionFromH3aH3bAuthorityConditional : Bool
+noSpectralPollutionFromH3aH3bAuthorityConditional = false
+
 thermodynamicLimitAuthorityConditional : Bool
 thermodynamicLimitAuthorityConditional = false
 
@@ -411,6 +481,10 @@ osWightmanReconstructionAuthorityConditional = false
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
 
+remainingAuthorityChainSummary : String
+remainingAuthorityChainSummary =
+  "This module closes only the finite lattice provider package. It consumes Balaban/Eriksson authority as upstream support, does not carry the live closure burden, and leaves Balaban-centered H3a as the missing-content frontier. Every downstream slot stays ordered as H3a then H3b then no-spectral-pollution then thermodynamic-limit then OS/Wightman then continuum mass-gap transfer."
+
 data LatticeMassGapPromotion : Set where
 
 latticeMassGapPromotionImpossibleHere :
@@ -422,30 +496,48 @@ record LatticeMassGapAuthorityBoundary : Set where
   field
     providerAuthorityAvailableIsTrue :
       latticeMassGapProviderAuthorityAvailable ≡ true
-    providerDerivedInRepoByScopedAuthority :
-      latticeMassGapProviderDerivedInRepo ≡ true
+    providerNotDerivedInRepo :
+      latticeMassGapProviderDerivedInRepo ≡ false
     providerAuthorityImported :
       latticeMassGapProviderImportedByAuthority ≡ true
     providerSplitIntoFourAnalyticLemmas :
       latticeMassGapProviderSplitIntoFourAnalyticLemmas ≡ true
     providerSourceMap :
       LatticeMassGapProviderSourceMap
+    finiteLatticeSurfaceIsUpstreamProvider :
+      finiteLatticeAuthoritySurfaceIsUpstreamProvider ≡ true
+    finiteLatticeSurfaceNotLiveClosureBurden :
+      finiteLatticeAuthoritySurfaceCarriesLiveClosureBurden ≡ false
+    liveMissingContentFrontierIsBalabanH3a :
+      balabanH3aIsLiveMissingContentFrontier ≡ true
+    h3bSurfaceIsDownstreamConsumer :
+      h3bVacuumProjectionContinuityIsDownstreamConsumer ≡ true
+    noSpectralPollutionSurfaceIsDownstreamConsumer :
+      noSpectralPollutionIsDownstreamConsumer ≡ true
+    thermodynamicLimitSurfaceIsDownstreamSlot :
+      thermodynamicLimitIsDownstreamSlot ≡ true
+    osWightmanSurfaceIsDownstreamSlot :
+      osWightmanIsDownstreamSlot ≡ true
     assumption54AuthorityImportedIsTrue :
       eriksson26020041Assumption54AuthorityImported ≡ true
-    assumption54DerivedInRepoByScopedAuthority :
-      eriksson26020041Assumption54DerivedInRepo ≡ true
+    assumption54NotDerivedInRepo :
+      eriksson26020041Assumption54DerivedInRepo ≡ false
     assumption63AuthorityImportedIsTrue :
       eriksson26020041Assumption63AuthorityImported ≡ true
-    assumption63DerivedInRepoByScopedAuthority :
-      eriksson26020041Assumption63DerivedInRepo ≡ true
+    assumption63NotDerivedInRepo :
+      eriksson26020041Assumption63DerivedInRepo ≡ false
     temporalTransferMatrixSpatialBlockingCompatibilityDerived :
       temporalTransferMatrixSpatialBlockingCompatibilityDerivedInRepo ≡ true
-    transferReflectionPositivityDerivedByScopedAuthority :
-      transferReflectionPositivityDerivedInRepo ≡ true
-    transferSpectralGapDerivedByScopedAuthority :
-      transferSpectralGapDerivedInRepo ≡ true
-    positiveLatticeMassGapExtractionDerivedByScopedAuthority :
-      positiveLatticeMassGapExtractionDerivedInRepo ≡ true
+    transferReflectionPositivityNotDerivedInRepo :
+      transferReflectionPositivityDerivedInRepo ≡ false
+    transferSpectralGapNotDerivedInRepo :
+      transferSpectralGapDerivedInRepo ≡ false
+    positiveLatticeMassGapExtractionNotDerivedInRepo :
+      positiveLatticeMassGapExtractionDerivedInRepo ≡ false
+    finiteSelfAdjointnessClosedInternally :
+      finiteSelfAdjointnessInternalized ≡ true
+    finiteSpectralMarginClosedInternally :
+      finiteSpectralMarginInternalized ≡ true
     transferCompatibilityAuthorityConditionalIsTrue :
       temporalTransferMatrixCompatibleWithSpatialBlockingAuthorityConditional
         ≡ true
@@ -455,12 +547,20 @@ record LatticeMassGapAuthorityBoundary : Set where
       latticeMassGapFromAnisotropicKPAuthorityConditionalBool ≡ true
     latticeMassGapUnconditionalStillFalse :
       latticeMassGapFromAnisotropicKPUnconditional ≡ false
+    balabanH3aAuthorityConditionalStillFalse :
+      balabanH3aContinuumIntakeAuthorityConditional ≡ false
+    h3bAuthorityConditionalStillFalse :
+      h3bVacuumProjectionContinuityAuthorityConditional ≡ false
+    noSpectralPollutionFromH3aH3bStillFalse :
+      noSpectralPollutionFromH3aH3bAuthorityConditional ≡ false
     thermodynamicLimitAuthorityConditionalStillFalse :
       thermodynamicLimitAuthorityConditional ≡ false
     continuumMassGapTransferAuthorityConditionalStillFalse :
       continuumMassGapTransferAuthorityConditional ≡ false
     osWightmanAuthorityConditionalStillFalse :
       osWightmanReconstructionAuthorityConditional ≡ false
+    remainingAuthorityChain :
+      String
     noClayPromotion :
       clayYangMillsPromoted ≡ false
     noPromotionPossibleHere :
@@ -471,26 +571,39 @@ latticeMassGapAuthorityBoundary :
 latticeMassGapAuthorityBoundary =
   record
     { providerAuthorityAvailableIsTrue = refl
-    ; providerDerivedInRepoByScopedAuthority = refl
+    ; providerNotDerivedInRepo = refl
     ; providerAuthorityImported = refl
     ; providerSplitIntoFourAnalyticLemmas = refl
     ; providerSourceMap = latticeMassGapProviderSourceMap
+    ; finiteLatticeSurfaceIsUpstreamProvider = refl
+    ; finiteLatticeSurfaceNotLiveClosureBurden = refl
+    ; liveMissingContentFrontierIsBalabanH3a = refl
+    ; h3bSurfaceIsDownstreamConsumer = refl
+    ; noSpectralPollutionSurfaceIsDownstreamConsumer = refl
+    ; thermodynamicLimitSurfaceIsDownstreamSlot = refl
+    ; osWightmanSurfaceIsDownstreamSlot = refl
     ; assumption54AuthorityImportedIsTrue = refl
-    ; assumption54DerivedInRepoByScopedAuthority = refl
+    ; assumption54NotDerivedInRepo = refl
     ; assumption63AuthorityImportedIsTrue = refl
-    ; assumption63DerivedInRepoByScopedAuthority = refl
+    ; assumption63NotDerivedInRepo = refl
     ; temporalTransferMatrixSpatialBlockingCompatibilityDerived =
         refl
-    ; transferReflectionPositivityDerivedByScopedAuthority = refl
-    ; transferSpectralGapDerivedByScopedAuthority = refl
-    ; positiveLatticeMassGapExtractionDerivedByScopedAuthority = refl
+    ; transferReflectionPositivityNotDerivedInRepo = refl
+    ; transferSpectralGapNotDerivedInRepo = refl
+    ; positiveLatticeMassGapExtractionNotDerivedInRepo = refl
+    ; finiteSelfAdjointnessClosedInternally = refl
+    ; finiteSpectralMarginClosedInternally = refl
     ; transferCompatibilityAuthorityConditionalIsTrue = refl
     ; transferSpectralGapAuthorityConditionalIsTrue = refl
     ; latticeMassGapAuthorityConditionalIsTrue = refl
     ; latticeMassGapUnconditionalStillFalse = refl
+    ; balabanH3aAuthorityConditionalStillFalse = refl
+    ; h3bAuthorityConditionalStillFalse = refl
+    ; noSpectralPollutionFromH3aH3bStillFalse = refl
     ; thermodynamicLimitAuthorityConditionalStillFalse = refl
     ; continuumMassGapTransferAuthorityConditionalStillFalse = refl
     ; osWightmanAuthorityConditionalStillFalse = refl
+    ; remainingAuthorityChain = remainingAuthorityChainSummary
     ; noClayPromotion = refl
     ; noPromotionPossibleHere = latticeMassGapPromotionImpossibleHere
     }

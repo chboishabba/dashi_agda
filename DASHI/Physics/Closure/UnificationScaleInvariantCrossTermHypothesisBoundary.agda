@@ -1,13 +1,19 @@
 module DASHI.Physics.Closure.UnificationScaleInvariantCrossTermHypothesisBoundary where
 
--- Fail-closed boundary for the corrected U-1a-H premise:
+-- Fail-closed boundary for the corrected U-1a-H premise upstream of the live
+-- unification wall:
 --
 --   G(s1+s2) - G(s1) - G(s2) = 2 B(s1,s2)
 --
 -- with B an explicit symmetric bilinear form.  This module records that
 -- precondition so downstream four-point, parallelogram, Jordan-von Neumann,
 -- quadratic, Clifford, and spinor consumers cannot silently rely on
--- 2-homogeneity alone.
+-- 2-homogeneity alone. The live theorem route remains
+--
+--   approximate compatibility
+--   -> residual PDE / Carleman intake
+--   -> cross-term nullity
+--   -> modulo-null / JvN downstream.
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -255,21 +261,21 @@ u1aHBlockerCountIs11 =
 
 correctiveStatement : String
 correctiveStatement =
-  "2-homogeneity alone does not imply cross-term nullity or quadraticity"
+  "2-homogeneity alone does not imply the residual PDE / Carleman intake, cross-term nullity, or quadraticity"
 
 correctiveStatementIsCanonical :
   correctiveStatement
-  ≡ "2-homogeneity alone does not imply cross-term nullity or quadraticity"
+  ≡ "2-homogeneity alone does not imply the residual PDE / Carleman intake, cross-term nullity, or quadraticity"
 correctiveStatementIsCanonical =
   refl
 
 scaleInvariantCrossTermText : String
 scaleInvariantCrossTermText =
-  "G(s1+s2)-G(s1)-G(s2)=2B(s1,s2)"
+  "G(s1+s2)-G(s1)-G(s2)=2B(s1,s2) with symmetric bilinear B is only the self-contained upstream decomposition socket for the open UCT.4 cross-term nullity theorem"
 
 scaleInvariantCrossTermTextIsCanonical :
   scaleInvariantCrossTermText
-  ≡ "G(s1+s2)-G(s1)-G(s2)=2B(s1,s2)"
+  ≡ "G(s1+s2)-G(s1)-G(s2)=2B(s1,s2) with symmetric bilinear B is only the self-contained upstream decomposition socket for the open UCT.4 cross-term nullity theorem"
 scaleInvariantCrossTermTextIsCanonical =
   refl
 
@@ -301,6 +307,26 @@ ymPureGaugeNullDirectionsBlockerTextIsCanonical :
   ymPureGaugeNullDirectionsBlockerText
   ≡ "Pure-gauge/null directions must be quotiented before the Jordan-von Neumann pipeline is applied at the nonlinear YM level."
 ymPureGaugeNullDirectionsBlockerTextIsCanonical =
+  refl
+
+liveCrossTermFrontierText : String
+liveCrossTermFrontierText =
+  "Live frontier: U-1a-H only records the bilinear cross-term socket; the exact remaining wall is UCT.1 residual PDE -> UCT.2 elliptic/parabolic class -> UCT.3 Carleman intake on the route to UCT.4 cross-term nullity into the null class."
+
+liveCrossTermFrontierTextIsCanonical :
+  liveCrossTermFrontierText
+  ≡ "Live frontier: U-1a-H only records the bilinear cross-term socket; the exact remaining wall is UCT.1 residual PDE -> UCT.2 elliptic/parabolic class -> UCT.3 Carleman intake on the route to UCT.4 cross-term nullity into the null class."
+liveCrossTermFrontierTextIsCanonical =
+  refl
+
+uct4ToUct8ConsumerChainText : String
+uct4ToUct8ConsumerChainText =
+  "explicit downstream chain: UCT.4 cross-term nullity -> UCT.5 modulo-null consumer -> UCT.6 four-point consumer -> UCT.7 parallelogram consumer -> UCT.8 Jordan-von Neumann consumer"
+
+uct4ToUct8ConsumerChainTextIsCanonical :
+  uct4ToUct8ConsumerChainText
+  ≡ "explicit downstream chain: UCT.4 cross-term nullity -> UCT.5 modulo-null consumer -> UCT.6 four-point consumer -> UCT.7 parallelogram consumer -> UCT.8 Jordan-von Neumann consumer"
+uct4ToUct8ConsumerChainTextIsCanonical =
   refl
 
 ------------------------------------------------------------------------
@@ -427,6 +453,15 @@ record UnificationScaleInvariantCrossTermHypothesisBoundary : Set where
     blockerCount :
       Nat
 
+    correctiveSocketText :
+      String
+
+    liveFrontierText :
+      String
+
+    downstreamConsumerChainText :
+      String
+
     hypothesisRecorded :
       Bool
 
@@ -475,6 +510,12 @@ canonicalUnificationScaleInvariantCrossTermHypothesisBoundary =
         u1aHStageCount
     ; blockerCount =
         u1aHBlockerCount
+    ; correctiveSocketText =
+        scaleInvariantCrossTermText
+    ; liveFrontierText =
+        liveCrossTermFrontierText
+    ; downstreamConsumerChainText =
+        uct4ToUct8ConsumerChainText
     ; hypothesisRecorded =
         scaleInvariantCrossTermHypothesisRecorded
     ; twoHomogeneityRejected =
@@ -583,4 +624,25 @@ canonicalU1aHPromotionFalse :
     canonicalUnificationScaleInvariantCrossTermHypothesisBoundary
   ≡ false
 canonicalU1aHPromotionFalse =
+  refl
+
+canonicalU1aHSocketText :
+  correctiveSocketText
+    canonicalUnificationScaleInvariantCrossTermHypothesisBoundary
+  ≡ scaleInvariantCrossTermText
+canonicalU1aHSocketText =
+  refl
+
+canonicalU1aHLiveFrontierText :
+  liveFrontierText
+    canonicalUnificationScaleInvariantCrossTermHypothesisBoundary
+  ≡ liveCrossTermFrontierText
+canonicalU1aHLiveFrontierText =
+  refl
+
+canonicalU1aHDownstreamConsumerChainText :
+  downstreamConsumerChainText
+    canonicalUnificationScaleInvariantCrossTermHypothesisBoundary
+  ≡ uct4ToUct8ConsumerChainText
+canonicalU1aHDownstreamConsumerChainText =
   refl

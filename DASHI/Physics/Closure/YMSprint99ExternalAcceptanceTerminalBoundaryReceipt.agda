@@ -10,9 +10,14 @@ import DASHI.Physics.Closure.YMSprint98ClayStatementBoundaryCandidateReceipt as 
 ------------------------------------------------------------------------
 -- Sprint 99 external-acceptance terminal boundary.
 --
--- Sprint 98 supplied the internal Clay statement boundary candidate.  This
--- final receipt records that the remaining ExternalAcceptanceToken is not a
--- mathematical theorem object and cannot be self-issued by the repo.
+-- This is the historical external-acceptance routing packet for the end of
+-- the older receipt chain.  Sprint 98 supplied the internal Clay statement
+-- boundary candidate; Sprint 99 records that the remaining
+-- ExternalAcceptanceToken is not a mathematical theorem object and cannot be
+-- self-issued by the repo.  In the now-sharper YM posture, the live
+-- external-content burden is explicitly the Balaban H3a.3/H3a.4/H3a.5
+-- cluster.  This file therefore preserves older external-acceptance routing
+-- inside that chain rather than claiming the current frontier.
 --
 -- Therefore:
 --   internal candidate chain complete in the receipt layer;
@@ -67,11 +72,11 @@ record ExternalAcceptanceTerminalBoundary : Set₁ where
 
 sprint99Route : String
 sprint99Route =
-  "ClayStatementBoundaryDischarged + no repo-internal ExternalAcceptanceToken -> terminal fail-closed Clay promotion boundary."
+  "Historical Sprint 99 routing packet: ClayStatementBoundaryDischarged + Balaban H3a.3/H3a.4/H3a.5 remain the live external-content burden + no repo-internal ExternalAcceptanceToken -> terminal fail-closed Clay promotion boundary."
 
 sprint99Remaining : String
 sprint99Remaining =
-  "Remaining after Sprint 99: external peer review/community/Clay acceptance outside the repo."
+  "Historical Sprint 99 remaining frontier statement: Balaban H3a.3/H3a.4/H3a.5 remain the live external-content burden; RP/OS and Wightman are cited downstream consumers; peer review, community uptake, and Clay acceptance stay outside the repo."
 
 canonicalExternalAcceptanceTerminalBoundary :
   ExternalAcceptanceTerminalBoundary
@@ -100,10 +105,10 @@ record YMSprint99ExternalAcceptanceTerminalBoundaryReceipt : Set₁ where
       externalAcceptanceTokenRepoInternal ≡ false
     route :
       sprint99Route ≡
-      "ClayStatementBoundaryDischarged + no repo-internal ExternalAcceptanceToken -> terminal fail-closed Clay promotion boundary."
+      "Historical Sprint 99 routing packet: ClayStatementBoundaryDischarged + Balaban H3a.3/H3a.4/H3a.5 remain the live external-content burden + no repo-internal ExternalAcceptanceToken -> terminal fail-closed Clay promotion boundary."
     remaining :
       sprint99Remaining ≡
-      "Remaining after Sprint 99: external peer review/community/Clay acceptance outside the repo."
+      "Historical Sprint 99 remaining frontier statement: Balaban H3a.3/H3a.4/H3a.5 remain the live external-content burden; RP/OS and Wightman are cited downstream consumers; peer review, community uptake, and Clay acceptance stay outside the repo."
     noClayPromotion :
       clayYangMillsPromoted ≡ false
 

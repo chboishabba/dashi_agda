@@ -36,10 +36,12 @@ import DASHI.Physics.Closure.NSWhitneyCouplingInequalityBoundary
 --     -> degenerate-triad absorption into lower-order budget.
 --
 -- This module is intentionally fail-closed.  It records the exact
--- proof-contract structure needed by NSWhitneyCouplingInequalityBoundary.
--- It does not compute the chart derivative, does not prove quantitative
--- constants, does not discharge degenerate-triad absorption, does not prove
--- A4, and does not promote Navier-Stokes Clay.
+-- proof-contract structure needed by NSWhitneyCouplingInequalityBoundary and
+-- the A4 uniform-in-rescaling transfer lane.  It does not compute the chart
+-- derivative, does not prove quantitative constants, does not prove the
+-- coarea/Jacobian lower bound uniform across Type-I rescalings, does not
+-- discharge degenerate-triad absorption, does not prove A4, and does not
+-- promote Navier-Stokes Clay.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -137,19 +139,19 @@ data OffAntipodalSeparationParameter : Set where
     OffAntipodalSeparationParameter
 
 data PhiDerivativeFormulaCarrier : Set where
-  dPhiEqualsProjectedDerivativeOverNormalizeSumNorm :
+  directionMapRegularityA4-1UsesProjectedDerivativeOverNormalizeSumNorm :
     Pushforward.FourierOutputPhiMap →
     OffAntipodalSeparationParameter →
     PhiDerivativeFormulaCarrier
 
 data PhiChartRankCarrier : Set where
-  rankTwoOnRegularWhitneyChartRectangles :
+  jacobianNondegeneracyA4-2HasRankTwoOnRegularWhitneyChartRectangles :
     PhiDerivativeFormulaCarrier →
     WhitneyPackets.WhitneyAngularCapCover →
     PhiChartRankCarrier
 
 data PhiJacobianLowerBoundCarrier : Set where
-  jacobianBoundedBelowBySeparationAndCapScale :
+  quantitativeJacobianLowerBoundA4-2IsBoundedBelowBySeparationAndCapScale :
     PhiChartRankCarrier →
     OffAntipodalSeparationParameter →
     WhitneyPackets.FrameVariationControl →
@@ -191,6 +193,25 @@ data PhiJacobianLowerBoundTarget : Set where
     OutputStripWidthRelationCarrier →
     PhiJacobianLowerBoundTarget
 
+data PhiRegularityToCoareaAttemptCarrier : Set where
+  coareaPropagationA4-3StartsFromA4-1RegularityAndA4-2JacobianRoute :
+    PhiDerivativeFormulaCarrier →
+    PhiChartRankCarrier →
+    PhiJacobianLowerBoundCarrier →
+    PhiRegularityToCoareaAttemptCarrier
+
+data PhiJacobianCoareaGapCarrier : Set where
+  coareaPropagationA4-3StillNeedsA4-2QuantitativeLowerBoundProof :
+    PhiRegularityToCoareaAttemptCarrier →
+    WhitneyCapUniformConstantCarrier →
+    PhiJacobianCoareaGapCarrier
+
+data TypeIUniformityGapCarrier : Set where
+  uniformityA4-5AcrossTypeIRescalingFamilyStillDependsOnA4-2AndDegenerateBudgetSteps :
+    PhiJacobianCoareaGapCarrier →
+    DegenerateTriadBudgetAbsorptionCarrier →
+    TypeIUniformityGapCarrier
+
 canonicalOffAntipodalSeparationParameter :
   OffAntipodalSeparationParameter
 canonicalOffAntipodalSeparationParameter =
@@ -201,21 +222,21 @@ canonicalOffAntipodalSeparationParameter =
 canonicalPhiDerivativeFormulaCarrier :
   PhiDerivativeFormulaCarrier
 canonicalPhiDerivativeFormulaCarrier =
-  dPhiEqualsProjectedDerivativeOverNormalizeSumNorm
+  directionMapRegularityA4-1UsesProjectedDerivativeOverNormalizeSumNorm
     Pushforward.canonicalFourierOutputPhiMap
     canonicalOffAntipodalSeparationParameter
 
 canonicalPhiChartRankCarrier :
   PhiChartRankCarrier
 canonicalPhiChartRankCarrier =
-  rankTwoOnRegularWhitneyChartRectangles
+  jacobianNondegeneracyA4-2HasRankTwoOnRegularWhitneyChartRectangles
     canonicalPhiDerivativeFormulaCarrier
     WhitneyPackets.canonicalWhitneyAngularCapCover
 
 canonicalPhiJacobianLowerBoundCarrier :
   PhiJacobianLowerBoundCarrier
 canonicalPhiJacobianLowerBoundCarrier =
-  jacobianBoundedBelowBySeparationAndCapScale
+  quantitativeJacobianLowerBoundA4-2IsBoundedBelowBySeparationAndCapScale
     canonicalPhiChartRankCarrier
     canonicalOffAntipodalSeparationParameter
     WhitneyPackets.canonicalFrameVariationControl
@@ -261,6 +282,28 @@ canonicalPhiJacobianLowerBoundTarget =
     canonicalWhitneyCapUniformConstantCarrier
     canonicalOutputStripWidthRelationCarrier
 
+canonicalPhiRegularityToCoareaAttemptCarrier :
+  PhiRegularityToCoareaAttemptCarrier
+canonicalPhiRegularityToCoareaAttemptCarrier =
+  coareaPropagationA4-3StartsFromA4-1RegularityAndA4-2JacobianRoute
+    canonicalPhiDerivativeFormulaCarrier
+    canonicalPhiChartRankCarrier
+    canonicalPhiJacobianLowerBoundCarrier
+
+canonicalPhiJacobianCoareaGapCarrier :
+  PhiJacobianCoareaGapCarrier
+canonicalPhiJacobianCoareaGapCarrier =
+  coareaPropagationA4-3StillNeedsA4-2QuantitativeLowerBoundProof
+    canonicalPhiRegularityToCoareaAttemptCarrier
+    canonicalWhitneyCapUniformConstantCarrier
+
+canonicalTypeIUniformityGapCarrier :
+  TypeIUniformityGapCarrier
+canonicalTypeIUniformityGapCarrier =
+  uniformityA4-5AcrossTypeIRescalingFamilyStillDependsOnA4-2AndDegenerateBudgetSteps
+    canonicalPhiJacobianCoareaGapCarrier
+    canonicalDegenerateTriadBudgetAbsorptionCarrier
+
 ------------------------------------------------------------------------
 -- Exact proof obligations and blockers.
 
@@ -274,6 +317,10 @@ data PhiJacobianObligation : Set where
   proveQuantitativeJacobianLowerBound :
     PhiJacobianObligation
   makeConstantsUniformAcrossWhitneyCapCover :
+    PhiJacobianObligation
+  propagateJacobianLowerBoundIntoCoareaStripMeasure :
+    PhiJacobianObligation
+  keepJacobianConstantUniformAcrossTypeIRescalings :
     PhiJacobianObligation
   relateCapInputScaleToOutputStripWidth :
     PhiJacobianObligation
@@ -292,6 +339,8 @@ canonicalPhiJacobianObligations =
   ∷ proveRankTwoAwayFromAntipodalAndRankDropLoci
   ∷ proveQuantitativeJacobianLowerBound
   ∷ makeConstantsUniformAcrossWhitneyCapCover
+  ∷ propagateJacobianLowerBoundIntoCoareaStripMeasure
+  ∷ keepJacobianConstantUniformAcrossTypeIRescalings
   ∷ relateCapInputScaleToOutputStripWidth
   ∷ excludeDegenerateTriadsFromSardFubiniSlice
   ∷ absorbDegenerateTriadsIntoLowerOrderA4Budget
@@ -302,17 +351,21 @@ phiJacobianObligationCount : Nat
 phiJacobianObligationCount =
   listLength canonicalPhiJacobianObligations
 
-phiJacobianObligationCountIs9 :
-  phiJacobianObligationCount ≡ 9
-phiJacobianObligationCountIs9 =
+phiJacobianObligationCountIs11 :
+  phiJacobianObligationCount ≡ 11
+phiJacobianObligationCountIs11 =
   refl
 
 data PhiJacobianBlocker : Set where
-  missingChartDerivativeComputation :
+  missingA4-1DirectionMapRegularityChartDerivativeComputation :
     PhiJacobianBlocker
-  missingQuantitativeLowerBound :
+  missingA4-2QuantitativeJacobianLowerBound :
     PhiJacobianBlocker
-  missingCapUniformConstants :
+  missingA4-2WhitneyCapUniformConstants :
+    PhiJacobianBlocker
+  missingA4-3CoareaPropagationFromJacobianLowerBound :
+    PhiJacobianBlocker
+  missingA4-5TypeIRescalingFamilyUniformJacobianConstant :
     PhiJacobianBlocker
   missingDegenerateTriadAbsorptionIntoLowerOrderBudget :
     PhiJacobianBlocker
@@ -326,9 +379,11 @@ data PhiJacobianBlocker : Set where
 canonicalPhiJacobianBlockers :
   List PhiJacobianBlocker
 canonicalPhiJacobianBlockers =
-  missingChartDerivativeComputation
-  ∷ missingQuantitativeLowerBound
-  ∷ missingCapUniformConstants
+  missingA4-1DirectionMapRegularityChartDerivativeComputation
+  ∷ missingA4-2QuantitativeJacobianLowerBound
+  ∷ missingA4-2WhitneyCapUniformConstants
+  ∷ missingA4-3CoareaPropagationFromJacobianLowerBound
+  ∷ missingA4-5TypeIRescalingFamilyUniformJacobianConstant
   ∷ missingDegenerateTriadAbsorptionIntoLowerOrderBudget
   ∷ missingSardFubiniIntegration
   ∷ missingA4Promotion
@@ -339,9 +394,9 @@ phiJacobianBlockerCount : Nat
 phiJacobianBlockerCount =
   listLength canonicalPhiJacobianBlockers
 
-phiJacobianBlockerCountIs7 :
-  phiJacobianBlockerCount ≡ 7
-phiJacobianBlockerCountIs7 =
+phiJacobianBlockerCountIs9 :
+  phiJacobianBlockerCount ≡ 9
+phiJacobianBlockerCountIs9 =
   refl
 
 data PhiJacobianStatusRow : Set where
@@ -352,6 +407,14 @@ data PhiJacobianStatusRow : Set where
   offAntipodalSeparationRecordedStatus :
     PhiJacobianStatusRow
   rankLowerBoundTargetRecordedStatus :
+    PhiJacobianStatusRow
+  derivativeToCoareaAttemptRecordedStatus :
+    PhiJacobianStatusRow
+  explicitCoareaGapRecordedStatus :
+    PhiJacobianStatusRow
+  coareaTransferFromJacobianRecordedStatus :
+    PhiJacobianStatusRow
+  typeIRescalingUniformityTargetRecordedStatus :
     PhiJacobianStatusRow
   degenerateTriadExclusionRecordedStatus :
     PhiJacobianStatusRow
@@ -369,6 +432,10 @@ canonicalPhiJacobianStatusRows =
   ∷ derivativeFormulaCarrierRecordedStatus
   ∷ offAntipodalSeparationRecordedStatus
   ∷ rankLowerBoundTargetRecordedStatus
+  ∷ derivativeToCoareaAttemptRecordedStatus
+  ∷ explicitCoareaGapRecordedStatus
+  ∷ coareaTransferFromJacobianRecordedStatus
+  ∷ typeIRescalingUniformityTargetRecordedStatus
   ∷ degenerateTriadExclusionRecordedStatus
   ∷ WhitneyCapAndOutputStripRelationRecordedStatus
   ∷ blockersRecordedStatus
@@ -379,9 +446,9 @@ phiJacobianStatusRowCount : Nat
 phiJacobianStatusRowCount =
   listLength canonicalPhiJacobianStatusRows
 
-phiJacobianStatusRowCountIs8 :
-  phiJacobianStatusRowCount ≡ 8
-phiJacobianStatusRowCountIs8 =
+phiJacobianStatusRowCountIs12 :
+  phiJacobianStatusRowCount ≡ 12
+phiJacobianStatusRowCountIs12 =
   refl
 
 ------------------------------------------------------------------------
@@ -571,6 +638,12 @@ record NSPhiJacobianLowerBoundBoundary : Set where
       WhitneyCapUniformConstantCarrier
     outputStripRelation :
       OutputStripWidthRelationCarrier
+    regularityToCoareaAttempt :
+      PhiRegularityToCoareaAttemptCarrier
+    explicitCoareaGap :
+      PhiJacobianCoareaGapCarrier
+    explicitTypeIUniformityGap :
+      TypeIUniformityGapCarrier
     target :
       PhiJacobianLowerBoundTarget
     obligations :
@@ -628,6 +701,12 @@ canonicalNSPhiJacobianLowerBoundBoundary =
         canonicalWhitneyCapUniformConstantCarrier
     ; outputStripRelation =
         canonicalOutputStripWidthRelationCarrier
+    ; regularityToCoareaAttempt =
+        canonicalPhiRegularityToCoareaAttemptCarrier
+    ; explicitCoareaGap =
+        canonicalPhiJacobianCoareaGapCarrier
+    ; explicitTypeIUniformityGap =
+        canonicalTypeIUniformityGapCarrier
     ; target =
         canonicalPhiJacobianLowerBoundTarget
     ; obligations =
@@ -665,4 +744,3 @@ canonicalNSPhiJacobianLowerBoundBoundary =
     ; terminalStillFalse =
         refl
     }
-

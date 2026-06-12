@@ -20,17 +20,23 @@ import DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol as Symbol
 --
 --   AbelTriadicDefectMeasureConstruction
 --
--- The target is a Littlewood-Paley / Abel-averaged interaction measure on
--- the true Leray resonant triadic phase space.  It must be normalized
--- against the critical dissipation D_r, must transfer Lei-Ren-Tian output
--- great-circle hitting from high-vorticity directions to pi_out(supp mu),
--- must control off-diagonal dyadic interactions, and must feed the
--- triadic leakage square-function coercivity theorem.
+-- The target is an Abel-weighted Littlewood-Paley interaction measure on
+-- the true Leray resonant triadic phase space with:
+--
+--   bounded total variation uniformly in r,
+--   weak-* compactness along r -> 0,
+--   normalization against the critical dissipation D_r,
+--   quantitative off-diagonal control,
+--   Lei-Ren-Tian output-support transfer from high-vorticity directions to
+--   pi_out(supp mu),
+--   and enough structure to feed the A1/A3 bootstrap and the triadic
+--   leakage square-function coercivity theorem.
 --
 -- This is a fail-closed boundary receipt only.  It does not construct the
--- measure, prove output support transfer, prove off-diagonal error
--- summability, prove normalization/tightness, prove residual depletion, or
--- promote Clay Navier-Stokes.
+-- measure, prove bounded mass or weak-* compactness, prove output support
+-- transfer, prove off-diagonal error summability, prove normalization or the
+-- quantitative control needed by the A1/A3 bootstrap, prove residual
+-- depletion, or promote Clay Navier-Stokes.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -144,7 +150,21 @@ data AbelTriadicMeasureConstructionObligation : Set where
     AbelTriadicMeasureConstructionObligation
   proveUniformFiniteVariationBound :
     AbelTriadicMeasureConstructionObligation
+  recordA11BoundedAbelWeightedDefectMassContract :
+    AbelTriadicMeasureConstructionObligation
+  routeBoundedAbelMassIntoWeakStarCompactness :
+    AbelTriadicMeasureConstructionObligation
+  recordA12WeakStarTightnessContract :
+    AbelTriadicMeasureConstructionObligation
   extractWeakStarTriadicMeasure :
+    AbelTriadicMeasureConstructionObligation
+  recordA13QuantitativeShellTailContract :
+    AbelTriadicMeasureConstructionObligation
+  prepareSereginEpsilonRateIntake :
+    AbelTriadicMeasureConstructionObligation
+  prepareStationarityRateMapOnAbelWindows :
+    AbelTriadicMeasureConstructionObligation
+  quantifyCompactnessStrongEnoughForA1A3Bootstrap :
     AbelTriadicMeasureConstructionObligation
   normalizeMeasureAgainstCriticalDissipationDr :
     AbelTriadicMeasureConstructionObligation
@@ -165,7 +185,14 @@ canonicalAbelTriadicMeasureConstructionObligations =
   ∷ buildTrueLerayDyadicTriadicBlocks
   ∷ applyAbelScaleAveragingWeights
   ∷ proveUniformFiniteVariationBound
+  ∷ recordA11BoundedAbelWeightedDefectMassContract
+  ∷ routeBoundedAbelMassIntoWeakStarCompactness
+  ∷ recordA12WeakStarTightnessContract
   ∷ extractWeakStarTriadicMeasure
+  ∷ recordA13QuantitativeShellTailContract
+  ∷ prepareSereginEpsilonRateIntake
+  ∷ prepareStationarityRateMapOnAbelWindows
+  ∷ quantifyCompactnessStrongEnoughForA1A3Bootstrap
   ∷ normalizeMeasureAgainstCriticalDissipationDr
   ∷ proveOffDiagonalInteractionErrorSmall
   ∷ transferLeiRenTianOutputSupportCondition
@@ -177,10 +204,104 @@ abelTriadicMeasureConstructionObligationCount : Nat
 abelTriadicMeasureConstructionObligationCount =
   listLength canonicalAbelTriadicMeasureConstructionObligations
 
-abelTriadicMeasureConstructionObligationCountIs11 :
-  abelTriadicMeasureConstructionObligationCount ≡ 11
-abelTriadicMeasureConstructionObligationCountIs11 =
+abelTriadicMeasureConstructionObligationCountIs18 :
+  abelTriadicMeasureConstructionObligationCount ≡ 18
+abelTriadicMeasureConstructionObligationCountIs18 =
   refl
+
+data AbelTriadicA1MeasureSocketClause : Set where
+  a11BoundedAbelMassSocket :
+    String → AbelTriadicA1MeasureSocketClause
+  a11BoundedMassConstantSocket :
+    String → AbelTriadicA1MeasureSocketClause
+  a12WeakStarTightnessSocket :
+    String → AbelTriadicA1MeasureSocketClause
+  a12TightnessModulusSocket :
+    String → AbelTriadicA1MeasureSocketClause
+  a13QuantitativeShellTailSocket :
+    String → AbelTriadicA1MeasureSocketClause
+  a13ShellTailRateSocket :
+    String → AbelTriadicA1MeasureSocketClause
+  shellTailFeedsWeakStarTightnessSocket :
+    AbelTriadicA1MeasureSocketClause
+  shellTailFeedsA1A3BootstrapSocket :
+    AbelTriadicA1MeasureSocketClause
+
+a11BoundedAbelMassSocketText : String
+a11BoundedAbelMassSocketText =
+  "A1.1 socket: the Abel-weighted defect measures mu_r must satisfy sup_r ||mu_r||_TV <= C_A1(R,M)."
+
+a11BoundedMassConstantSocketText : String
+a11BoundedMassConstantSocketText =
+  "A1.1 constant socket: C_A1(R,M) is uniform in the shrinking scale r."
+
+a12WeakStarTightnessSocketText : String
+a12WeakStarTightnessSocketText =
+  "A1.2 socket: {mu_r}_r must be weak-* precompact in finite Radon measures once uniform tightness is recorded."
+
+a12TightnessModulusSocketText : String
+a12TightnessModulusSocketText =
+  "A1.2 modulus socket: Tight_A1(epsilon;R,M) chooses a reciprocal shell cutoff K with tail mass <= epsilon uniformly in r."
+
+a13QuantitativeShellTailSocketText : String
+a13QuantitativeShellTailSocketText =
+  "A1.3 socket: shell-tail mass outside the reciprocal Abel window is <= Tail_A1(K;R,M)."
+
+a13ShellTailRateSocketText : String
+a13ShellTailRateSocketText =
+  "A1.3 rate socket: Tail_A1(K;R,M) -> 0 as K -> infinity uniformly in r."
+
+canonicalAbelTriadicA1MeasureSocketClauses :
+  List AbelTriadicA1MeasureSocketClause
+canonicalAbelTriadicA1MeasureSocketClauses =
+  a11BoundedAbelMassSocket a11BoundedAbelMassSocketText
+  ∷ a11BoundedMassConstantSocket a11BoundedMassConstantSocketText
+  ∷ a12WeakStarTightnessSocket a12WeakStarTightnessSocketText
+  ∷ a12TightnessModulusSocket a12TightnessModulusSocketText
+  ∷ a13QuantitativeShellTailSocket a13QuantitativeShellTailSocketText
+  ∷ a13ShellTailRateSocket a13ShellTailRateSocketText
+  ∷ shellTailFeedsWeakStarTightnessSocket
+  ∷ shellTailFeedsA1A3BootstrapSocket
+  ∷ []
+
+abelTriadicA1MeasureSocketClauseCount : Nat
+abelTriadicA1MeasureSocketClauseCount =
+  listLength canonicalAbelTriadicA1MeasureSocketClauses
+
+abelTriadicA1MeasureSocketClauseCountIs8 :
+  abelTriadicA1MeasureSocketClauseCount ≡ 8
+abelTriadicA1MeasureSocketClauseCountIs8 =
+  refl
+
+data CandidateA1A3BootstrapHandoff : Set where
+  typeIOrCKNToBoundedAbelMassHandoff :
+    CandidateA1A3BootstrapHandoff
+  boundedAbelMassToWeakStarCompactnessHandoff :
+    CandidateA1A3BootstrapHandoff
+  weakStarCompactnessToSereginEpsilonRateHandoff :
+    CandidateA1A3BootstrapHandoff
+  sereginEpsilonRateToStationarityMapHandoff :
+    CandidateA1A3BootstrapHandoff
+  stationarityMapToMultiscaleAbelSummationIssueHandoff :
+    CandidateA1A3BootstrapHandoff
+
+canonicalCandidateA1A3BootstrapHandoffs :
+  List CandidateA1A3BootstrapHandoff
+canonicalCandidateA1A3BootstrapHandoffs =
+  typeIOrCKNToBoundedAbelMassHandoff
+  ∷ boundedAbelMassToWeakStarCompactnessHandoff
+  ∷ weakStarCompactnessToSereginEpsilonRateHandoff
+  ∷ sereginEpsilonRateToStationarityMapHandoff
+  ∷ stationarityMapToMultiscaleAbelSummationIssueHandoff
+  ∷ []
+
+candidateA1A3BootstrapHandoffCount : Nat
+candidateA1A3BootstrapHandoffCount =
+  listLength canonicalCandidateA1A3BootstrapHandoffs
+
+candidateA1A3BootstrapHandoffCountIs5 :
+  candidateA1A3BootstrapHandoffCount ≡ 5
+candidateA1A3BootstrapHandoffCountIs5 = refl
 
 data NormalizationAgainstDrBoundary : Set where
   totalVariationControlledByCriticalDissipation :
@@ -397,9 +518,19 @@ defectMeasureToLeakageBoundaryCountIs3 =
 data AbelTriadicDefectMeasureBlocker : Set where
   missingResidualPositiveBlowupProfileSelection :
     AbelTriadicDefectMeasureBlocker
-  missingLPAbelTightnessAndFiniteVariation :
+  missingLPAbelBoundedMassAndFiniteVariation :
+    AbelTriadicDefectMeasureBlocker
+  missingA11ConcreteBoundedAbelMassGrammar :
     AbelTriadicDefectMeasureBlocker
   missingWeakStarTriadicMeasureExtraction :
+    AbelTriadicDefectMeasureBlocker
+  missingA12ConcreteWeakStarTightnessGrammar :
+    AbelTriadicDefectMeasureBlocker
+  missingQuantitativeCompactnessForA1A3Bootstrap :
+    AbelTriadicDefectMeasureBlocker
+  missingA13ConcreteQuantitativeShellTailGrammar :
+    AbelTriadicDefectMeasureBlocker
+  missingA1ConstantAndRateNamesOnMeasureSocket :
     AbelTriadicDefectMeasureBlocker
   missingNormalizationAgainstCriticalDissipation :
     AbelTriadicDefectMeasureBlocker
@@ -415,6 +546,10 @@ data AbelTriadicDefectMeasureBlocker : Set where
     AbelTriadicDefectMeasureBlocker
   missingTriadicLeakageSquareFunctionCoercivity :
     AbelTriadicDefectMeasureBlocker
+  missingExactAbelWindowExponentForClosure :
+    AbelTriadicDefectMeasureBlocker
+  missingMultiscaleAbelSummationClosure :
+    AbelTriadicDefectMeasureBlocker
   missingCriticalResidualNonPositive :
     AbelTriadicDefectMeasureBlocker
   clayNavierStokesPromotionClosed :
@@ -424,8 +559,13 @@ canonicalAbelTriadicDefectMeasureBlockers :
   List AbelTriadicDefectMeasureBlocker
 canonicalAbelTriadicDefectMeasureBlockers =
   missingResidualPositiveBlowupProfileSelection
-  ∷ missingLPAbelTightnessAndFiniteVariation
+  ∷ missingLPAbelBoundedMassAndFiniteVariation
+  ∷ missingA11ConcreteBoundedAbelMassGrammar
   ∷ missingWeakStarTriadicMeasureExtraction
+  ∷ missingA12ConcreteWeakStarTightnessGrammar
+  ∷ missingQuantitativeCompactnessForA1A3Bootstrap
+  ∷ missingA13ConcreteQuantitativeShellTailGrammar
+  ∷ missingA1ConstantAndRateNamesOnMeasureSocket
   ∷ missingNormalizationAgainstCriticalDissipation
   ∷ missingOffDiagonalInteractionErrorEstimate
   ∷ missingPressureNonlocalityRemainderControl
@@ -433,6 +573,8 @@ canonicalAbelTriadicDefectMeasureBlockers =
   ∷ missingPositiveOutputWidthConsumer
   ∷ missingPlancherelTriadicToSquareFunction
   ∷ missingTriadicLeakageSquareFunctionCoercivity
+  ∷ missingExactAbelWindowExponentForClosure
+  ∷ missingMultiscaleAbelSummationClosure
   ∷ missingCriticalResidualNonPositive
   ∷ clayNavierStokesPromotionClosed
   ∷ []
@@ -441,9 +583,9 @@ abelTriadicDefectMeasureBlockerCount : Nat
 abelTriadicDefectMeasureBlockerCount =
   listLength canonicalAbelTriadicDefectMeasureBlockers
 
-abelTriadicDefectMeasureBlockerCountIs12 :
-  abelTriadicDefectMeasureBlockerCount ≡ 12
-abelTriadicDefectMeasureBlockerCountIs12 =
+abelTriadicDefectMeasureBlockerCountIs19 :
+  abelTriadicDefectMeasureBlockerCount ≡ 19
+abelTriadicDefectMeasureBlockerCountIs19 =
   refl
 
 data AbelTriadicDefectMeasureSupportRow : Set where
@@ -494,6 +636,8 @@ data AbelTriadicDefectMeasureStatusRow : Set where
     AbelTriadicDefectMeasureStatusRow
   normalizationAgainstDrObligationTypedStatus :
     AbelTriadicDefectMeasureStatusRow
+  compactnessFeedsA1A3BootstrapTypedStatus :
+    AbelTriadicDefectMeasureStatusRow
   relationToLeiRenTianTypedStatus :
     AbelTriadicDefectMeasureStatusRow
   relationToSquareFunctionCoercivityTypedStatus :
@@ -517,6 +661,7 @@ canonicalAbelTriadicDefectMeasureStatusRows =
   ∷ outputSupportTransferObligationTypedStatus
   ∷ offDiagonalErrorObligationTypedStatus
   ∷ normalizationAgainstDrObligationTypedStatus
+  ∷ compactnessFeedsA1A3BootstrapTypedStatus
   ∷ relationToLeiRenTianTypedStatus
   ∷ relationToSquareFunctionCoercivityTypedStatus
   ∷ measureConstructedFalseStatus
@@ -531,7 +676,7 @@ abelTriadicDefectMeasureStatusRowCount =
   listLength canonicalAbelTriadicDefectMeasureStatusRows
 
 abelTriadicDefectMeasureStatusRowCountIs12 :
-  abelTriadicDefectMeasureStatusRowCount ≡ 12
+  abelTriadicDefectMeasureStatusRowCount ≡ 13
 abelTriadicDefectMeasureStatusRowCountIs12 =
   refl
 
@@ -569,6 +714,10 @@ record NSAbelTriadicDefectMeasureConstructionBoundary : Set where
       List AbelTriadicMeasureConstructionObligation
     constructionObligationsAreCanonical :
       constructionObligations ≡ canonicalAbelTriadicMeasureConstructionObligations
+    a1MeasureSocketClauses :
+      List AbelTriadicA1MeasureSocketClause
+    a1MeasureSocketClausesAreCanonical :
+      a1MeasureSocketClauses ≡ canonicalAbelTriadicA1MeasureSocketClauses
     normalizationBoundaries :
       List NormalizationAgainstDrBoundary
     normalizationBoundariesAreCanonical :
@@ -649,6 +798,8 @@ canonicalNSAbelTriadicDefectMeasureConstructionBoundary =
     canonicalAbelTriadicDefectMeasure
     refl
     canonicalAbelTriadicMeasureConstructionObligations
+    refl
+    canonicalAbelTriadicA1MeasureSocketClauses
     refl
     canonicalNormalizationBoundaries
     refl
@@ -935,7 +1086,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: Record the LP/Abel triadic measure obligation, output support transfer, off-diagonal interaction error, D_r normalization, and Lei-Ren-Tian relation without proving them."
+  "R: Record the Abel-weighted defect-measure contract: bounded mass, weak-* compactness, D_r normalization, quantitative off-diagonal control, Lei-Ren-Tian output-support transfer, and the feed into the A1/A3 bootstrap, without proving them."
 
 codeArtifactString : String
 codeArtifactString =
@@ -943,15 +1094,15 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: True Leray symbol, triadic sheaf, LRT boundary, microlocal boundary, and square-function boundary are linked; construction, transfer, normalization, off-diagonal control, Plancherel, residual depletion, and Clay promotion remain false."
+  "S: True Leray symbol, triadic sheaf, LRT boundary, microlocal boundary, and square-function boundary are linked; bounded mass, weak-* extraction, quantitative compactness for A1/A3, normalization, transfer, off-diagonal control, Plancherel, residual depletion, and Clay promotion remain false."
 
 latticeString : String
 latticeString =
-  "L: residual cascade -> LP shells -> Abel weighted true-Leray triadic blocks -> weak-star triadic measure -> D_r normalization and off-diagonal control -> LRT output support -> leakage mass -> square-function coercivity blocker."
+  "L: residual cascade -> LP shells -> Abel weighted true-Leray triadic blocks -> bounded-mass weak-* compactness of mu_r -> D_r normalization and off-diagonal control -> A1/A3 bootstrap feed -> LRT output support -> leakage mass -> square-function coercivity blocker."
 
 proposalString : String
 proposalString =
-  "P: Promote only the typed obligation surface and imported fail-closed anchors; route downstream proof work to output support transfer, off-diagonal estimates, and Plancherel-to-square-function coercivity."
+  "P: Promote only the typed obligation surface and imported fail-closed anchors; route downstream proof work first to bounded mass plus weak-* compactness with quantitative A1/A3 control, then to output support transfer, off-diagonal estimates, and Plancherel-to-square-function coercivity."
 
 governanceString : String
 governanceString =
@@ -959,7 +1110,7 @@ governanceString =
 
 gapString : String
 gapString =
-  "F: Missing evidence is LP/Abel tightness, weak-star extraction, D_r-normalized nonzero mass, off-diagonal interaction decay, LRT direction-set to pi_out support transfer, and Plancherel identification with the leakage square function."
+  "F: Missing evidence is the Abel-weighted bounded-mass estimate, weak-* extraction with quantitative control strong enough for the A1/A3 bootstrap, D_r-normalized nonzero mass, off-diagonal interaction decay, LRT direction-set to pi_out support transfer, and Plancherel identification with the leakage square function."
 
 record AbelTriadicDefectMeasureORCSLPGF : Set where
   constructor abelTriadicDefectMeasureORCSLPGF

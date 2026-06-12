@@ -9,14 +9,19 @@ open import Agda.Builtin.String using (String)
 -- Lightweight fail-closed boundary for the remaining unification
 -- consumer-authority assembly.
 --
--- This module records only the final consumer-facing assembly work:
+-- Candidate theorem grammar for UCT.1-UCT.8 is already present. This
+-- module records only the downstream consumer-facing assembly work that
+-- sits after the still-live UCT.1-UCT.4 wall:
 --
---   U-CA1 lane-justification carry-through
---   U-CA2 representative / quotient legitimacy packaging
---   U-CA3 signature / Clifford consumer packaging
---   U-CA4 final review and authority blockers
+--   UCT.5 modulo-null consumer carry-through
+--   UCT.6 four-point consumer carry-through
+--   UCT.7 parallelogram consumer carry-through
+--   UCT.8 Jordan-von Neumann / quotient / signature / Clifford packaging
+--   final review / promotion blockers
 --
--- It proves no terminal unification authority, no final signature theorem,
+-- The remaining burden is acceptance and promotion of the candidate
+-- package, not missing theorem-shape grammar. This boundary therefore
+-- proves no terminal unification authority, no final signature theorem,
 -- no final Clifford theorem, and no promotion to any terminal surface.
 
 data List (A : Set) : Set where
@@ -171,6 +176,39 @@ unificationConsumerAuthorityWorkPackageCountIs4 =
   refl
 
 ------------------------------------------------------------------------
+-- Reviewer-facing packet receipts.
+
+consumerAuthorityWallText : String
+consumerAuthorityWallText =
+  "Candidate theorem grammar for UCT.1-UCT.8 is already structured; the live mathematics wall remains exactly UCT.1 residual PDE -> UCT.2 elliptic/parabolic class -> UCT.3 Carleman intake -> UCT.4 cross-term nullity."
+
+consumerAuthorityWallTextIsCanonical :
+  consumerAuthorityWallText
+  ≡ "Candidate theorem grammar for UCT.1-UCT.8 is already structured; the live mathematics wall remains exactly UCT.1 residual PDE -> UCT.2 elliptic/parabolic class -> UCT.3 Carleman intake -> UCT.4 cross-term nullity."
+consumerAuthorityWallTextIsCanonical =
+  refl
+
+consumerAuthorityDownstreamChainText : String
+consumerAuthorityDownstreamChainText =
+  "Downstream consumer assembly is already structured and fail-closed: UCT.5 modulo-null -> UCT.6 four-point -> UCT.7 parallelogram -> UCT.8 Jordan-von Neumann -> quotient/signature/Clifford consumers, all pending the UCT.1-UCT.4 wall."
+
+consumerAuthorityDownstreamChainTextIsCanonical :
+  consumerAuthorityDownstreamChainText
+  ≡ "Downstream consumer assembly is already structured and fail-closed: UCT.5 modulo-null -> UCT.6 four-point -> UCT.7 parallelogram -> UCT.8 Jordan-von Neumann -> quotient/signature/Clifford consumers, all pending the UCT.1-UCT.4 wall."
+consumerAuthorityDownstreamChainTextIsCanonical =
+  refl
+
+consumerAuthorityPromotionBurdenText : String
+consumerAuthorityPromotionBurdenText =
+  "Remaining burden is reviewer acceptance and promotion of the candidate package, not missing UCT theorem-shape grammar; all assembly proofs and promotion flags therefore stay false."
+
+consumerAuthorityPromotionBurdenTextIsCanonical :
+  consumerAuthorityPromotionBurdenText
+  ≡ "Remaining burden is reviewer acceptance and promotion of the candidate package, not missing UCT theorem-shape grammar; all assembly proofs and promotion flags therefore stay false."
+consumerAuthorityPromotionBurdenTextIsCanonical =
+  refl
+
+------------------------------------------------------------------------
 -- Recorded statuses: assembly receipt present, authority still open.
 
 UnificationConsumerAuthorityAssemblyBoundaryRecorded : Bool
@@ -244,6 +282,18 @@ record UnificationConsumerAuthorityAssemblyBoundary : Set where
       List UnificationConsumerAuthorityWorkPackage
     workPackagesAreCanonical :
       workPackages ≡ canonicalUnificationConsumerAuthorityWorkPackages
+    wallText :
+      String
+    wallTextIsCanonical :
+      wallText ≡ consumerAuthorityWallText
+    downstreamChainText :
+      String
+    downstreamChainTextIsCanonical :
+      downstreamChainText ≡ consumerAuthorityDownstreamChainText
+    promotionBurdenText :
+      String
+    promotionBurdenTextIsCanonical :
+      promotionBurdenText ≡ consumerAuthorityPromotionBurdenText
     clauseCountIs7 :
       unificationConsumerAuthorityClauseCount ≡ 7
     blockerCountIs7 :
@@ -278,6 +328,18 @@ canonicalUnificationConsumerAuthorityAssemblyBoundary =
     ; workPackages =
         canonicalUnificationConsumerAuthorityWorkPackages
     ; workPackagesAreCanonical =
+        refl
+    ; wallText =
+        consumerAuthorityWallText
+    ; wallTextIsCanonical =
+        refl
+    ; downstreamChainText =
+        consumerAuthorityDownstreamChainText
+    ; downstreamChainTextIsCanonical =
+        refl
+    ; promotionBurdenText =
+        consumerAuthorityPromotionBurdenText
+    ; promotionBurdenTextIsCanonical =
         refl
     ; clauseCountIs7 =
         refl
